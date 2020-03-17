@@ -70,14 +70,32 @@ function ModelPage({location, locationName}) {
   const baselineModelData = useFetch(`/${location}.0.json`);
   const distancingModelData = useFetch(`/${location}.1.json`);
   const wuhanModelData = useFetch(`/${location}.2.json`);
+  const flatten2wkModelData = useFetch(`/${location}.3.json`);
+  const flatten1moModelData = useFetch(`/${location}.4.json`);
+  const contain1wkModelData = useFetch(`/${location}.5.json`);
+  const contain2wkModelData = useFetch(`/${location}.6.json`);
 
-  if (!(baselineModelData && distancingModelData && wuhanModelData)) {
+  if (
+    !(
+      baselineModelData &&
+      distancingModelData &&
+      wuhanModelData &&
+      flatten2wkModelData &&
+      flatten1moModelData &&
+      contain1wkModelData &&
+      contain2wkModelData
+    )
+  ) {
     return <div>Loading...</div>;
   }
 
   let baseline = new Model(baselineModelData);
   let distancing = new Model(distancingModelData);
   let wuhan = new Model(wuhanModelData);
+  let flatten2wk = new Model(flatten2wkModelData);
+  let flatten1mo = new Model(flatten1moModelData);
+  let contain1wk = new Model(contain1wkModelData);
+  let contain2wk = new Model(contain2wkModelData);
 
   let place = locationName;
   let baselineTwoWeeks = [
@@ -138,7 +156,7 @@ function ModelPage({location, locationName}) {
 
   let scenarios = duration => ([
     {
-      label: "Action",
+      label: "No Action",
       fill: false,
       borderColor: "red",
       data: baseline.getColumn("hospitalizations", duration)
@@ -159,13 +177,64 @@ function ModelPage({location, locationName}) {
   let scenariosShortTerm = scenarios(30);
   let scenariosLongTerm = scenarios(180);
 
+
+  let flattenScenarios = [
+    {
+      label: "Distancing Today for 2 months (R0 = 1.3",
+      fill: false,
+      borderColor: "green",
+      data: distancing.getColumn("hospitalizations", 180)
+    },
+    {
+      label: "Distancing in 2 weeks for 2 months (R0 = 1.3",
+      fill: false,
+      borderColor: "yellow",
+      data: flatten2wk.getColumn("hospitalizations", 180)
+    },
+    {
+      label: "Distancing in 1 month for 2 months (R0 = 1.3",
+      fill: false,
+      borderColor: "red",
+      data: flatten1mo.getColumn("hospitalizations", 180)
+    }
+  ];
+  let containScenarios = [
+    {
+      label: "Full Containment for 1 month (Wuhan-style; R0 = 0.4)",
+      fill: false,
+      borderColor: "green",
+      data: wuhan.getColumn("hospitalizations", 180)
+    },
+    {
+      label: "Full Containment for 1 month after 1wk (Wuhan-style; R0 = 0.4)",
+      fill: false,
+      borderColor: "yellow",
+      data: contain1wk.getColumn("hospitalizations", 180)
+    },
+    {
+      label: "Full Containment for 1 month after 2wk(Wuhan-style; R0 = 0.4)",
+      fill: false,
+      borderColor: "red",
+      data: contain2wk.getColumn("hospitalizations", 180)
+    }
+  ];
+
+
+
   return (
     <>
       <h3>
         <Link to="/">Back to map</Link>
       </h3>
 
-      <div style={{ backgroundColor: "#fafafa", padding: 20, marginTop: 20 }}>
+      <div
+        style={{
+          backgroundColor: "#fafafa",
+          padding: 20,
+          marginTop: 20,
+          display: "none"
+        }}
+      >
         <h1>Likely hospitalizations in {place}: now to June</h1>
         <div class="graphs-container">
           <div class="small-graph">
@@ -183,15 +252,24 @@ function ModelPage({location, locationName}) {
 
         <h3 style={{ margin: 50 }}>
           Up to {baseline.maxInfected.toLocaleString()} infected, and{" "}
-          <span class="stark">{baseline.cumulativeDead.toLocaleString()} dead</span>. <br />{" "}
-          Hospitalizations will exceed available beds around{" "}
+          <span class="stark">
+            {baseline.cumulativeDead.toLocaleString()} dead
+          </span>
+          . <br /> Hospitalizations will exceed available beds around{" "}
           {baseline.dateOverwhelmed
             ? baseline.dateOverwhelmed.toDateString()
             : "never"}
           .
         </h3>
       </div>
-      <div style={{ backgroundColor: "#fafafa", padding: 20, marginTop: 20 }}>
+      <div
+        style={{
+          backgroundColor: "#fafafa",
+          padding: 20,
+          marginTop: 20,
+          display: "none"
+        }}
+      >
         <h1>Immediate action is critical</h1>
 
         <div class="graphs-container">
@@ -215,17 +293,18 @@ function ModelPage({location, locationName}) {
         </h3>
       </div>
       <div style={{ backgroundColor: "#fafafa", padding: 20, marginTop: 20 }}>
-        <h1>Coronavirus: Act Now</h1>
-        <h2>Political Leaders, Public Health Officials: The only thing that matters right now is the speed of your response</h2>
-        <h3 style={{color:"red"}}>This model is intended to help make fast decisions, not predict the future</h3>
+        <h3 style={{ color: "red" }}>
+          This model is intended to help make fast decisions, not predict the
+          future
+        </h3>
 
         <div class="graphs-container">
-          <div class="small-graph">
+          <div class="small-graph" style={{ display: "none" }}>
             <h4> Immediate Action, Next 30 days </h4>
             <LineGraph data={{ datasets: scenariosShortTerm }} maxY={10000} />
           </div>
 
-          <div class="small-graph">
+          <div class="">
             <h4> Immediate Action, Next 6 months </h4>
             <LineGraph data={{ datasets: scenariosLongTerm }} />
           </div>
@@ -233,63 +312,55 @@ function ModelPage({location, locationName}) {
           <div class="clear" />
         </div>
 
-        <table
-          style={{
-            width: "100%",
-            margin: "auto",
-            marginTop: 50,
-            border: "1px solid #ccc",
-            padding: 20,
-            textAlign: "left"
-          }}
-        >
-          <thead>
-            <tr>
-              <th>Scenario</th>
-              <th>
-                Cumulative
-                <br /> Infected
-              </th>
-              <th>
-                Hospitals
-                <br /> Overloaded
-              </th>
-              <th>Deaths</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Do Action, Current Trends Continue</td>
-              <td>{baseline.maxInfected.toLocaleString()}</td>
-              <td>
-                {baseline.dateOverwhelmed
-                  ? baseline.dateOverwhelmed.toDateString()
-                  : "never"}
-              </td>
-              <td>{baseline.cumulativeDead.toLocaleString()}</td>
-            </tr>
-            <tr>
-              <td>Strict Social Distancing, Today</td>
-              <td>{distancing.maxInfected.toLocaleString()}</td>
-              <td>
-                {distancing.dateOverwhelmed
-                  ? distancing.dateOverwhelmed.toDateString()
-                  : "never"}
-              </td>
-              <td>{distancing.cumulativeDead.toLocaleString()}</td>
-            </tr>
-            <tr>
-              <td>Full Containment, Wuhan-Style, Today</td>
-              <td>{wuhan.maxInfected.toLocaleString()}</td>
-              <td>
-                {wuhan.dateOverwhelmed
-                  ? wuhan.dateOverwhelmed.toDateString()
-                  : "Never"}
-              </td>
-              <td>{wuhan.cumulativeDead.toLocaleString()}</td>
-            </tr>
-          </tbody>
-        </table>
+        <OutcomesTable
+          models={[baseline, distancing, wuhan]}
+          labels={[
+            "No Action, Current Trends Continue",
+            "Strict Social Distancing, Today",
+            "Full Containment, Wuhan-Style, Today"
+          ]}
+        />
+      </div>
+      <div
+        style={{
+          backgroundColor: "#fafafa",
+          padding: 20,
+          marginTop: 20
+        }}
+      >
+        <h1>...</h1>
+
+        <div class="graphs-container">
+          <div class="small-graph">
+            <h4> Flatten scenarios </h4>
+            <LineGraph data={{ datasets: flattenScenarios }} />
+          </div>
+
+          <div class="small-graph">
+            <h4> Contain scenarios </h4>
+            <LineGraph data={{ datasets: containScenarios }} />
+          </div>
+
+          <div class="clear" />
+        </div>
+
+        <OutcomesTable
+          models={[wuhan, contain1wk, contain2wk]}
+          labels={[
+            "No Action, Current Trends Continue",
+            "Strict Social Distancing, Today",
+            "Full Containment, Wuhan-Style, Today"
+          ]}
+        />
+
+        <OutcomesTable
+          models={[distancing, flatten2wk, flatten1mo]}
+          labels={[
+            "No Action, Current Trends Continue",
+            "Strict Social Distancing, Today",
+            "Full Containment, Wuhan-Style, Today"
+          ]}
+        />
       </div>
     </>
   );
@@ -338,4 +409,53 @@ function LineGraph({data, maxY}) {
     />
   );
 }
+
+
+function OutcomesTable({models, labels}) {
+  return (
+    <table
+      style={{
+        width: "100%",
+        margin: "auto",
+        marginTop: 50,
+        border: "1px solid #ccc",
+        padding: 20,
+        textAlign: "left"
+      }}
+    >
+      <thead>
+        <tr>
+          <th>Scenario</th>
+          <th>
+            Cumulative
+            <br /> Infected
+          </th>
+          <th>
+            Hospitals
+            <br /> Overloaded
+          </th>
+          <th>Deaths</th>
+        </tr>
+      </thead>
+      <tbody>
+        <OutcomesRow model={models[0]} label={labels[0]} />
+        <OutcomesRow model={models[1]} label={labels[1]} />
+        <OutcomesRow model={models[2]} label={labels[2]} />
+      </tbody>
+    </table>
+  );
+};
+function OutcomesRow({model, label}) {
+  return (
+    <tr>
+      <td>{label}</td>
+      <td>{model.maxInfected.toLocaleString()}</td>
+      <td>
+        {model.dateOverwhelmed ? model.dateOverwhelmed.toDateString() : "never"}
+      </td>
+      <td>{model.cumulativeDead.toLocaleString()}</td>
+    </tr>
+  );
+}
+
 export default ModelPage;

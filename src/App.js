@@ -18,7 +18,7 @@ export default function App() {
             <ModelPage location="us-ca" locationName="California" />
           </Route>
           <Route path="/ak">
-            <ModelPage location="us-ak" locationName="Alaska" />
+            <ModelPage location="alaska" locationName="Alaska" />
           </Route>
           <Route path="/">
             <HomePage />
