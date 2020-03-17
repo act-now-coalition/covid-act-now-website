@@ -7,9 +7,33 @@
   pointer-events: none;
 }
 
+.graphs-container {
+}
+.small-graph
+{
+  float:left;
+  width: 50%;
+}
+
+.clear {
+  clear:both;
+}
+
+th, td {
+  padding: 10px;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+
+  .small-graph
+  {
+    float: unset;
+    width: 100%;
   }
 }
 
@@ -35,4 +59,12 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+path {
+  pointer-events: all;
+}
+path:hover {
+  opacity: 0.50;
+  cursor: pointer;
 }
