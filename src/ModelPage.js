@@ -168,11 +168,18 @@ function ModelPage({location, locationName}) {
       data: distancing.getColumn("hospitalizations", duration)
     },
     {
-      label: "Wuhan level containment for 1 month (; R0 = 0.4)",
+      label: "Wuhan level containment for 1 month (R0 = 0.4)",
       fill: false,
       borderColor: "green",
       data: wuhan.getColumn("hospitalizations", duration)
+    },
+    {
+      label: "Hospital Beds",
+      fill: false,
+      borderColor: "blue",
+      data: distancing.getColumn("beds", duration)
     }
+
   ];
   let scenariosShortTerm = scenarios(30);
   let scenariosLongTerm = scenarios(180);
@@ -180,19 +187,19 @@ function ModelPage({location, locationName}) {
 
   let flattenScenarios = [
     {
-      label: "Distancing Today for 2 months (R0 = 1.3",
+      label: "Distancing Today for 2 months (R0 = 1.3)",
       fill: false,
       borderColor: "green",
       data: distancing.getColumn("hospitalizations", 180)
     },
     {
-      label: "Distancing in 2 weeks for 2 months (R0 = 1.3",
+      label: "Distancing in 2 weeks for 2 months (R0 = 1.3)",
       fill: false,
       borderColor: "yellow",
       data: flatten2wk.getColumn("hospitalizations", 180)
     },
     {
-      label: "Distancing in 1 month for 2 months (R0 = 1.3",
+      label: "Distancing in 1 month for 2 months (R0 = 1.3)",
       fill: false,
       borderColor: "red",
       data: flatten1mo.getColumn("hospitalizations", 180)
