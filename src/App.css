@@ -37,6 +37,11 @@ th, td {
   }
 }
 
+.stark {
+  background-color: black;
+  color: white;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

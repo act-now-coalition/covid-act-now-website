@@ -18,9 +18,15 @@ function Map () {
   /* optional customization of filling per state and calling custom callbacks per state */
   let statesCustomConfig = () => {
     return {
-      "CA": {
+      CA: {
         fill: "rgba(1,1,1,0.7)",
-        clickHandler: (event) => { setRedirectTarget('/ca') }
+        clickHandler: event => {
+          setRedirectTarget("/ca");
+        }
+      },
+      AK: {
+        fill: "rgba(1,1,1,0.7)",
+        clickHandler: (event) => { setRedirectTarget('/ak') }
       },
     };
   };

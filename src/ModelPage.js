@@ -1,6 +1,6 @@
 import React from 'react';
 import { Line, Chart } from "react-chartjs-2";
-
+import { Link } from 'react-router-dom';
 import './App.css';
 
 import { useState, useEffect } from "react";
@@ -66,10 +66,10 @@ class Model {
   }
 }
 
-function ModelPage() {
-  const baselineModelData = useFetch("/us-ca-bay_area.0.json");
-  const distancingModelData = useFetch("/us-ca-bay_area.1.json");
-  const wuhanModelData = useFetch("/us-ca-bay_area.2.json");
+function ModelPage({location, locationName}) {
+  const baselineModelData = useFetch(`/${location}.0.json`);
+  const distancingModelData = useFetch(`/${location}.1.json`);
+  const wuhanModelData = useFetch(`/${location}.2.json`);
 
   if (!(baselineModelData && distancingModelData && wuhanModelData)) {
     return <div>Loading...</div>;
@@ -79,7 +79,7 @@ function ModelPage() {
   let distancing = new Model(distancingModelData);
   let wuhan = new Model(wuhanModelData);
 
-  let place = "Bay Area"; // TODO
+  let place = locationName;
   let baselineTwoWeeks = [
     {
       label: "Hospitalizations",
@@ -160,7 +160,11 @@ function ModelPage() {
   let scenariosLongTerm = scenarios(180);
 
   return (
-    <div className="App" style={{ maxWidth: 900, margin: "auto" }}>
+    <>
+      <h3>
+        <Link to="/">Back to map</Link>
+      </h3>
+
       <div style={{ backgroundColor: "#fafafa", padding: 20, marginTop: 20 }}>
         <h1>Likely hospitalizations in {place}: now to June</h1>
         <div class="graphs-container">
@@ -179,7 +183,7 @@ function ModelPage() {
 
         <h3 style={{ margin: 50 }}>
           Up to {baseline.maxInfected.toLocaleString()} infected, and{" "}
-          {baseline.cumulativeDead.toLocaleString()} dead. <br />{" "}
+          <span class="stark">{baseline.cumulativeDead.toLocaleString()} dead</span>. <br />{" "}
           Hospitalizations will exceed available beds around{" "}
           {baseline.dateOverwhelmed
             ? baseline.dateOverwhelmed.toDateString()
@@ -285,7 +289,7 @@ function ModelPage() {
           </tbody>
         </table>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -301,7 +305,7 @@ function LineGraph({data, maxY}) {
           intersect: false
         },
         tooltips: {
-          mode: "nearest"
+          mode: "index"
         },
         maintainAspectRatio: false,
         scales: {
@@ -309,7 +313,10 @@ function LineGraph({data, maxY}) {
             {
               type: "linear",
               ticks: {
-                max: maxY
+                max: maxY,
+                callback: function(value, index, values) {
+                  return value.toLocaleString();
+                }
               }
             }
           ],
@@ -319,7 +326,8 @@ function LineGraph({data, maxY}) {
               time: {
                 displayFormats: {
                   quarter: "MMM YYYY"
-                }
+                },
+                tooltipFormat: "MMMM DD"
               }
             }
           ]
