@@ -104,7 +104,7 @@ function downloadModel(auth, location, model) {
   sheets.spreadsheets.values.get(
     {
       spreadsheetId: "1YEj4Vr6lG1jQ1R3LG6frijJYNynKcgTjzo2n0FsBwZA",
-      range: `${models[model]}!C17:U91`
+      range: `${models[model]}!C18:U92`
     },
     (err, res) => {
       if (err) return console.log("The API returned an error: " + err);

@@ -154,7 +154,7 @@ function ModelPage({location, locationName}) {
     baseline.getColumnAt("hospitalizations", 30) -
     distancing.getColumnAt("hospitalizations", 30);
 
-  let scenarios = duration => ([
+  let scenarios = duration => [
     {
       label: "No Action",
       fill: false,
@@ -162,18 +162,18 @@ function ModelPage({location, locationName}) {
       data: baseline.getColumn("hospitalizations", duration)
     },
     {
-      label: "Distancing Today for 2 months (R0 = 1.3",
+      label: "Distancing Today for 2 months (R0 = 1.3)",
       fill: false,
       borderColor: "yellow",
       data: distancing.getColumn("hospitalizations", duration)
     },
     {
-      label: "Full Containment for 1 month (Wuhan-style; R0 = 0.4)",
+      label: "Wuhan level containment for 1 month (; R0 = 0.4)",
       fill: false,
       borderColor: "green",
       data: wuhan.getColumn("hospitalizations", duration)
     }
-  ]);
+  ];
   let scenariosShortTerm = scenarios(30);
   let scenariosLongTerm = scenarios(180);
 
@@ -200,19 +200,21 @@ function ModelPage({location, locationName}) {
   ];
   let containScenarios = [
     {
-      label: "Full Containment for 1 month (Wuhan-style; R0 = 0.4)",
+      label: "Wuhan Level Containment for 1 month (R0 = 0.4)",
       fill: false,
       borderColor: "green",
       data: wuhan.getColumn("hospitalizations", 180)
     },
     {
-      label: "Full Containment for 1 month after 1wk (Wuhan-style; R0 = 0.4)",
+      label:
+        "Wuhan Level Containment for 1 month after 1wk (R0 = 0.4)",
       fill: false,
       borderColor: "yellow",
       data: contain1wk.getColumn("hospitalizations", 180)
     },
     {
-      label: "Full Containment for 1 month after 2wk(Wuhan-style; R0 = 0.4)",
+      label:
+        "Wuhan Level Containment for 1 month after 2wk(R0 = 0.4)",
       fill: false,
       borderColor: "red",
       data: contain2wk.getColumn("hospitalizations", 180)
@@ -262,41 +264,9 @@ function ModelPage({location, locationName}) {
           .
         </h3>
       </div>
-      <div
-        style={{
-          backgroundColor: "#fafafa",
-          padding: 20,
-          marginTop: 20,
-          display: "none"
-        }}
-      >
-        <h1>Immediate action is critical</h1>
 
-        <div class="graphs-container">
-          <div class="small-graph">
-            <h4> Next two weeks </h4>
-            <LineGraph data={{ datasets: distancingDelayShortTerm }} />
-          </div>
-
-          <div class="small-graph">
-            <h4> Next 30 days </h4>
-            <LineGraph data={{ datasets: distancingDelayLongTerm }} />
-          </div>
-
-          <div class="clear" />
-        </div>
-
-        <h3 style={{ margin: 50 }}>
-          {distancingDelayDelta.toLocaleString()} less hospitalizations in 1
-          months. <br />
-          Containment likely possible until XXX.
-        </h3>
-      </div>
       <div style={{ backgroundColor: "#fafafa", padding: 20, marginTop: 20 }}>
-        <h3 style={{ color: "red" }}>
-          This model is intended to help make fast decisions, not predict the
-          future
-        </h3>
+        <h1>Impact of actions you can take</h1>
 
         <div class="graphs-container">
           <div class="small-graph" style={{ display: "none" }}>
@@ -305,32 +275,30 @@ function ModelPage({location, locationName}) {
           </div>
 
           <div class="">
-            <h4> Impact of Various Immediate Policy Actions, Next 6 months </h4>
+            <h4> Hospitalizations over time</h4>
             <LineGraph data={{ datasets: scenariosLongTerm }} />
           </div>
 
           <div class="clear" />
         </div>
 
+        <h2>Outcomes</h2>
         <OutcomesTable
           models={[baseline, distancing, wuhan]}
-          labels={[
-            "Do Nothing",
-            "Social Distancing",
-            "Full Containment, Wuhan-Style"
-          ]}
+          labels={["Do Nothing", "Social Distancing (2 months)", "Wuhan Level Containment (1 months)"]}
         />
       </div>
       <div
         style={{
           backgroundColor: "#fafafa",
           padding: 20,
-          marginTop: 20
+          marginTop: 20,
+          marginBottom: 100
         }}
       >
-        <h1>...</h1>
+        <h1>Why you must respond fast</h1>
 
-        <div class="graphs-container">
+        <div class="graphs-container" style={{ display: "none" }}>
           <div class="small-graph">
             <h4> Flatten scenarios </h4>
             <LineGraph data={{ datasets: flattenScenarios }} />
@@ -344,28 +312,28 @@ function ModelPage({location, locationName}) {
           <div class="clear" />
         </div>
 
+        <h4>Wuhan Level Containment (1 month)</h4>
         <OutcomesTable
           models={[wuhan, contain1wk, contain2wk]}
-          labels={[
-            "Full Containment, Wuhan-Style, Today",
-            "Full Containment, Wuhan-Style, 1 Week From Today",
-            "Full Containment, Wuhan-Style, 2 Weeks From Today"
-          ]}
+          labels={["Act now", "Act in 1 week", "Act in 2 weeks"]}
         />
 
-        <OutcomesTable
-          models={[distancing, flatten2wk, flatten1mo]}
-          labels={[
-            "Social Distancing, Today",
-            "Social Distancing, 2 Weeks From Today",
-            "Social Distancing, 1 Month From Today"
-          ]}
-        />
+        <h4>Social Distancing (2 months)</h4>
+        <p> [coming soon]</p>
+      </div>
+      <div style={{ backgroundColor: "#fafafa", padding: 20, marginTop: 20 }}>
+        <h1>FAQ</h1>
+        <h3>Why does almost everyone get COVID-19?</h3>
+        <p> Because given the.. </p>
       </div>
     </>
   );
 }
-
+/*
+<OutcomesTable
+          models={[distancing, flatten2wk, flatten1mo]}
+          labels={["Act now", "Act in 2 weeks", "Act in 4 weeks"]}
+        />*/
 
 function LineGraph({data, maxY}) {
   return (
@@ -417,7 +385,6 @@ function OutcomesTable({models, labels}) {
       style={{
         width: "100%",
         margin: "auto",
-        marginTop: 50,
         border: "1px solid #ccc",
         padding: 20,
         textAlign: "left"
