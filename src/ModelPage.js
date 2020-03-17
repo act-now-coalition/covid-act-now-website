@@ -165,7 +165,14 @@ function ModelPage({location, locationName}) {
         <Link to="/">Back to map</Link>
       </h3>
 
-      <div style={{ backgroundColor: "#fafafa", padding: 20, marginTop: 20 }}>
+      <div
+        style={{
+          backgroundColor: "#fafafa",
+          padding: 20,
+          marginTop: 20,
+          display: "none"
+        }}
+      >
         <h1>Likely hospitalizations in {place}: now to June</h1>
         <div class="graphs-container">
           <div class="small-graph">
@@ -183,15 +190,24 @@ function ModelPage({location, locationName}) {
 
         <h3 style={{ margin: 50 }}>
           Up to {baseline.maxInfected.toLocaleString()} infected, and{" "}
-          <span class="stark">{baseline.cumulativeDead.toLocaleString()} dead</span>. <br />{" "}
-          Hospitalizations will exceed available beds around{" "}
+          <span class="stark">
+            {baseline.cumulativeDead.toLocaleString()} dead
+          </span>
+          . <br /> Hospitalizations will exceed available beds around{" "}
           {baseline.dateOverwhelmed
             ? baseline.dateOverwhelmed.toDateString()
             : "never"}
           .
         </h3>
       </div>
-      <div style={{ backgroundColor: "#fafafa", padding: 20, marginTop: 20 }}>
+      <div
+        style={{
+          backgroundColor: "#fafafa",
+          padding: 20,
+          marginTop: 20,
+          display: "none"
+        }}
+      >
         <h1>Immediate action is critical</h1>
 
         <div class="graphs-container">
