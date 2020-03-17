@@ -114,13 +114,13 @@ function ModelPage({location, locationName}) {
 
   let distancingDelay = duration => [
     {
-      label: "No distancing",
+      label: "No Distancing",
       fill: false,
       borderColor: "red",
       data: baseline.getColumn("hospitalizations", duration)
     },
     {
-      label: "Distancing today",
+      label: "Distancing Today",
       fill: false,
       borderColor: "blue",
       data: distancing.getColumn("hospitalizations", duration)
@@ -144,13 +144,13 @@ function ModelPage({location, locationName}) {
       data: baseline.getColumn("hospitalizations", duration)
     },
     {
-      label: "Distancing today (1 month)",
+      label: "Distancing Today for 2 months (R0 = 1.3",
       fill: false,
       borderColor: "yellow",
       data: distancing.getColumn("hospitalizations", duration)
     },
     {
-      label: "Wuhan",
+      label: "Full Containment for 1 month (Wuhan-style; R0 = 0.3)",
       fill: false,
       borderColor: "green",
       data: wuhan.getColumn("hospitalizations", duration)
@@ -165,14 +165,7 @@ function ModelPage({location, locationName}) {
         <Link to="/">Back to map</Link>
       </h3>
 
-      <div
-        style={{
-          backgroundColor: "#fafafa",
-          padding: 20,
-          marginTop: 20,
-          display: "none"
-        }}
-      >
+      <div style={{ backgroundColor: "#fafafa", padding: 20, marginTop: 20 }}>
         <h1>Likely hospitalizations in {place}: now to June</h1>
         <div class="graphs-container">
           <div class="small-graph">
@@ -190,24 +183,15 @@ function ModelPage({location, locationName}) {
 
         <h3 style={{ margin: 50 }}>
           Up to {baseline.maxInfected.toLocaleString()} infected, and{" "}
-          <span class="stark">
-            {baseline.cumulativeDead.toLocaleString()} dead
-          </span>
-          . <br /> Hospitalizations will exceed available beds around{" "}
+          <span class="stark">{baseline.cumulativeDead.toLocaleString()} dead</span>. <br />{" "}
+          Hospitalizations will exceed available beds around{" "}
           {baseline.dateOverwhelmed
             ? baseline.dateOverwhelmed.toDateString()
             : "never"}
           .
         </h3>
       </div>
-      <div
-        style={{
-          backgroundColor: "#fafafa",
-          padding: 20,
-          marginTop: 20,
-          display: "none"
-        }}
-      >
+      <div style={{ backgroundColor: "#fafafa", padding: 20, marginTop: 20 }}>
         <h1>Immediate action is critical</h1>
 
         <div class="graphs-container">
@@ -231,7 +215,9 @@ function ModelPage({location, locationName}) {
         </h3>
       </div>
       <div style={{ backgroundColor: "#fafafa", padding: 20, marginTop: 20 }}>
-        <h1>3 scenarios if you act this week</h1>
+        <h1>Coronavirus: Act Now</h1>
+        <h2>Political Leaders, Public Health Officials: The only thing that matters right now is the speed of your response</h2>
+        <h2 style={{color:"red"}}>This model is intended to help make fast decisions, not predict the future</h2>
 
         <div class="graphs-container">
           <div class="small-graph">
