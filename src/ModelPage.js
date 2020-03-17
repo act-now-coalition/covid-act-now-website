@@ -305,7 +305,7 @@ function ModelPage({location, locationName}) {
           </div>
 
           <div class="">
-            <h4> Immediate Action, Next 6 months </h4>
+            <h4> Impact of Various Immediate Policy Actions, Next 6 months </h4>
             <LineGraph data={{ datasets: scenariosLongTerm }} />
           </div>
 
@@ -315,9 +315,9 @@ function ModelPage({location, locationName}) {
         <OutcomesTable
           models={[baseline, distancing, wuhan]}
           labels={[
-            "No Action, Current Trends Continue",
-            "Strict Social Distancing, Today",
-            "Full Containment, Wuhan-Style, Today"
+            "Do Nothing",
+            "Social Distancing",
+            "Full Containment, Wuhan-Style"
           ]}
         />
       </div>
@@ -347,18 +347,18 @@ function ModelPage({location, locationName}) {
         <OutcomesTable
           models={[wuhan, contain1wk, contain2wk]}
           labels={[
-            "No Action, Current Trends Continue",
-            "Strict Social Distancing, Today",
-            "Full Containment, Wuhan-Style, Today"
+            "Full Containment, Wuhan-Style, Today",
+            "Full Containment, Wuhan-Style, 1 Week From Today",
+            "Full Containment, Wuhan-Style, 2 Weeks From Today"
           ]}
         />
 
         <OutcomesTable
           models={[distancing, flatten2wk, flatten1mo]}
           labels={[
-            "No Action, Current Trends Continue",
-            "Strict Social Distancing, Today",
-            "Full Containment, Wuhan-Style, Today"
+            "Social Distancing, Today",
+            "Social Distancing, 2 Weeks From Today",
+            "Social Distancing, 1 Month From Today"
           ]}
         />
       </div>
