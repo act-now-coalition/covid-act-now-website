@@ -114,7 +114,7 @@ function ModelPage({location, locationName}) {
 
   let distancingDelay = duration => [
     {
-      label: "No Distancing",
+      label: "No Action",
       fill: false,
       borderColor: "red",
       data: baseline.getColumn("hospitalizations", duration)
@@ -138,7 +138,7 @@ function ModelPage({location, locationName}) {
 
   let scenarios = duration => ([
     {
-      label: "No distancing",
+      label: "Action",
       fill: false,
       borderColor: "red",
       data: baseline.getColumn("hospitalizations", duration)
@@ -150,7 +150,7 @@ function ModelPage({location, locationName}) {
       data: distancing.getColumn("hospitalizations", duration)
     },
     {
-      label: "Full Containment for 1 month (Wuhan-style; R0 = 0.3)",
+      label: "Full Containment for 1 month (Wuhan-style; R0 = 0.4)",
       fill: false,
       borderColor: "green",
       data: wuhan.getColumn("hospitalizations", duration)
@@ -215,18 +215,16 @@ function ModelPage({location, locationName}) {
         </h3>
       </div>
       <div style={{ backgroundColor: "#fafafa", padding: 20, marginTop: 20 }}>
-        <h1>Coronavirus: Act Now</h1>
-        <h2>Political Leaders, Public Health Officials: The only thing that matters right now is the speed of your response</h2>
-        <h2 style={{color:"red"}}>This model is intended to help make fast decisions, not predict the future</h2>
+       <h3 style={{color:"red"}}>This model is intended to help make fast decisions, not predict the future</h3>
 
         <div class="graphs-container">
           <div class="small-graph">
-            <h4> Next 30 days </h4>
+            <h4> Immediate Action, Next 30 days </h4>
             <LineGraph data={{ datasets: scenariosShortTerm }} maxY={10000} />
           </div>
 
           <div class="small-graph">
-            <h4> Next 6 months </h4>
+            <h4> Immediate Action, Next 6 months </h4>
             <LineGraph data={{ datasets: scenariosLongTerm }} />
           </div>
 
@@ -259,7 +257,7 @@ function ModelPage({location, locationName}) {
           </thead>
           <tbody>
             <tr>
-              <td>Do nothing</td>
+              <td>Do Action, Current Trends Continue</td>
               <td>{baseline.maxInfected.toLocaleString()}</td>
               <td>
                 {baseline.dateOverwhelmed
@@ -269,7 +267,7 @@ function ModelPage({location, locationName}) {
               <td>{baseline.cumulativeDead.toLocaleString()}</td>
             </tr>
             <tr>
-              <td>Distancing Today</td>
+              <td>Strict Social Distancing, Today</td>
               <td>{distancing.maxInfected.toLocaleString()}</td>
               <td>
                 {distancing.dateOverwhelmed
@@ -279,7 +277,7 @@ function ModelPage({location, locationName}) {
               <td>{distancing.cumulativeDead.toLocaleString()}</td>
             </tr>
             <tr>
-              <td>"Wuhan" Today</td>
+              <td>Full Containment, Wuhan-Style, Today</td>
               <td>{wuhan.maxInfected.toLocaleString()}</td>
               <td>
                 {wuhan.dateOverwhelmed
