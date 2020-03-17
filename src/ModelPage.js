@@ -215,7 +215,9 @@ function ModelPage({location, locationName}) {
         </h3>
       </div>
       <div style={{ backgroundColor: "#fafafa", padding: 20, marginTop: 20 }}>
-       <h3 style={{color:"red"}}>This model is intended to help make fast decisions, not predict the future</h3>
+        <h1>Coronavirus: Act Now</h1>
+        <h2>Political Leaders, Public Health Officials: The only thing that matters right now is the speed of your response</h2>
+        <h3 style={{color:"red"}}>This model is intended to help make fast decisions, not predict the future</h3>
 
         <div class="graphs-container">
           <div class="small-graph">
