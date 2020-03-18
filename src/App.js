@@ -8,7 +8,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <div className="App" style={{ maxWidth: 900, margin: "auto" }}>
-        <h1>Coronavirus Act Now</h1>
+        <h1>Coronavirus: Why You Must Act Now</h1>
         <h3>
           Political Leaders, Public Health Officials: The only thing that
           matters right now is the speed of your response

@@ -90,6 +90,17 @@ class Model {
   }
 }
 
+function LastDatesToAct({model}) {
+  const days = 1000 * 60 * 60 * 24;
+  let earlyDate = new Date(model.dateOverwhelmed.getTime() - 21 * days);
+  let lateDate = new Date(model.dateOverwhelmed.getTime() - 14 * days);
+  return (
+    <>
+      {earlyDate.toDateString()} to {lateDate.toDateString()}
+    </>
+  );
+}
+
 function ModelPage({location, locationName}) {
   let modelDatas = useModelDatas(location);
 
@@ -181,24 +192,39 @@ function ModelPage({location, locationName}) {
 
       <div style={{ backgroundColor: "#fafafa", padding: 20, marginTop: 20 }}>
         <h2>Impact of actions you can take</h2>
-
         <div class="graphs-container">
           <div class="">
             <h4> Hospitalizations over time</h4>
             <LineGraph
               data={{ datasets: scenariosLongTerm }}
               annotations={{
-                "Hospitals Overloaded": {on: baseline.dateOverwhelmed, yOffset: 50, xOffset: 30},
-                "End Wuhan Level Containment ": {on: new Date("April 17 2020"), xOffset: -50, yOffset:30},
-                "End Social Distancing": {on:new Date("May 17 2020"), xOffset: 30, yOffset: 10},
+                "Hospitals Overloaded": {
+                  on: baseline.dateOverwhelmed,
+                  yOffset: 50,
+                  xOffset: 30
+                },
+                "End Wuhan Level Containment ": {
+                  on: new Date("April 17 2020"),
+                  xOffset: -50,
+                  yOffset: 30
+                },
+                "End Social Distancing": {
+                  on: new Date("May 17 2020"),
+                  xOffset: 30,
+                  yOffset: 10
+                }
               }}
             />
           </div>
 
           <div class="clear" />
         </div>
-
         <h2>Outcomes</h2>
+        <div style={{padding:20}}>
+          <b> Estimated last day to act to ease/delay hospital overload:</b>{' '}
+          <LastDatesToAct model={distancing.now} />
+        </div>
+
         <OutcomesTable
           models={[baseline, distancing.now, contain.now]}
           labels={[
@@ -207,7 +233,6 @@ function ModelPage({location, locationName}) {
             "1 Month of Wuhan Level Containment, Then Stop"
           ]}
         />
-
         <p style={{ lineHeight: "1.5em" }}>
           Assuming a 1-2 months containment window, for many regions the model
           does not show containment is possible. Delaying impact, however, is
@@ -222,44 +247,60 @@ function ModelPage({location, locationName}) {
           marginBottom: 100
         }}
       >
-        <h2>Why you must act now</h2>
-
+        <h2>Timing scenarios for interventions</h2>
         <div class="graphs-container" style={{ display: "none" }}>
           <div class="small-graph">
             <h4> Distancing scenarios </h4>
             <LineGraph data={{ datasets: flattenScenarios }} />
           </div>
-
           <div class="small-graph">
             <h4> Containment scenarios </h4>
             <LineGraph data={{ datasets: containScenarios }} />
           </div>
-
           <div class="clear" />
         </div>
-
         <h4>1 Month of Wuhan Level Containment, Then Stop</h4>
-        <OutcomesTable
-          models={[contain.now, contain.oneWeek, contain.twoWeek]}
-          labels={["Act now", "Act in 1 week", "Act in 2 weeks"]}
-        />
+        {contain.now.cumulativeDead < baseline.cumulativeDead / 2 ? (
+          <OutcomesTable
+            models={[contain.now, contain.oneWeek, contain.twoWeek]}
+            labels={["Act now", "Act in 1 week", "Act in 2 weeks"]}
+          />
+        ) : (
+          <>
+            Containment with 1 months of Wuhan Level Containment measures is not
+            possible
+          </>
+        )}
 
         <h4>2 Months of Social Distancing, Then Stop</h4>
         <p> [coming soon]</p>
       </div>
-      <div style={{ backgroundColor: "#fafafa", padding: 20, marginTop: 20, textAlign: 'left'}}>
+      <div
+        style={{
+          backgroundColor: "#fafafa",
+          padding: 20,
+          marginTop: 20,
+          textAlign: "left"
+        }}
+      >
         <h1>FAQ</h1>
 
         <h3>What are are the current limitations of the model?</h3>
         <ul>
           <li> No adjustment for population density</li>
-          <li> No adjustment for inbound infection cases from outside of region </li>
+          <li>
+            {" "}
+            No adjustment for inbound infection cases from outside of region{" "}
+          </li>
           <li> Not node based analysis </li>
         </ul>
 
         <h3>How could the data change?</h3>
-        <p> Only a small fraction of the world has been infected. It’s a new disease. Variables will change.</p>
-
+        <p>
+          {" "}
+          Only a small fraction of the world has been infected. It’s a new
+          disease. Variables will change.
+        </p>
       </div>
     </>
   );
@@ -270,6 +311,9 @@ function ModelPage({location, locationName}) {
           models={[distancing, flatten2wk, flatten1mo]}
           labels={["Act now", "Act in 2 weeks", "Act in 4 weeks"]}
         />*/
+function formatNumber(num) {
+  return (Math.round(num/1000) * 1000).toLocaleString();
+}
 
 function LineGraph({data, maxY, annotations}) {
 
@@ -320,7 +364,7 @@ function LineGraph({data, maxY, annotations}) {
               ticks: {
                 max: maxY,
                 callback: function(value, index, values) {
-                  return value.toLocaleString();
+                  return formatNumber(value);
                 }
               }
             }
@@ -343,9 +387,9 @@ function LineGraph({data, maxY, annotations}) {
 }
 
 
-function OutcomesTable({models, labels}) {
+function OutcomesTable({models, labels, timeHorizon}) {
   return (
-    <div style={{overflow: 'scroll'}}>
+    <div style={{ overflow: "scroll" }}>
       <table
         style={{
           width: "100%",
@@ -370,9 +414,21 @@ function OutcomesTable({models, labels}) {
           </tr>
         </thead>
         <tbody>
-          <OutcomesRow model={models[0]} label={labels[0]} />
-          <OutcomesRow model={models[1]} label={labels[1]} />
-          <OutcomesRow model={models[2]} label={labels[2]} />
+          <OutcomesRow
+            model={models[0]}
+            label={labels[0]}
+            timeHorizon={timeHorizon}
+          />
+          <OutcomesRow
+            model={models[1]}
+            label={labels[1]}
+            timeHorizon={timeHorizon}
+          />
+          <OutcomesRow
+            model={models[2]}
+            label={labels[2]}
+            timeHorizon={timeHorizon}
+          />
         </tbody>
       </table>
     </div>
@@ -382,11 +438,11 @@ function OutcomesRow({model, label}) {
   return (
     <tr>
       <td>{label}</td>
-      <td>{model.maxInfected.toLocaleString()}</td>
+      <td>{formatNumber(model.maxInfected)}</td>
       <td>
         {model.dateOverwhelmed ? model.dateOverwhelmed.toDateString() : "never"}
       </td>
-      <td>{model.cumulativeDead.toLocaleString()}</td>
+      <td>{formatNumber(model.cumulativeDead)}</td>
     </tr>
   );
 }
