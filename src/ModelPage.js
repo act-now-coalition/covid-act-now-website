@@ -1,23 +1,38 @@
 import React from 'react';
-import { Line, Chart } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import { Link } from 'react-router-dom';
 import './App.css';
-
+import "chartjs-plugin-annotation";
 import { useState, useEffect } from "react";
 
-const useFetch = url => {
-  const [data, setData] = useState(null);
+
+async function fetchAll(urls) {
+  try {
+    var data = await Promise.all(
+      urls.map(url => fetch(url).then(response => response.json()))
+    );
+
+    return data;
+  } catch (error) {
+    console.log(error);
+
+    throw error;
+  }
+}
+
+const useModelDatas = location => {
+  const [modelDatas, setModelDatas] = useState(null);
 
   async function fetchData() {
-    const response = await fetch(url);
-    const json = await response.json();
-    setData(json);
+    let urls = Array.from({length: 7}, (x,i) => `/${location}.${i}.json`);
+    let loadedModelDatas = await fetchAll(urls);
+    setModelDatas(loadedModelDatas);
   }
 
   useEffect(() => {
     fetchData();
-  }, [url]);
-  return data;
+  }, [location]);
+  return modelDatas;
 };
 
 const COLUMNS = {
@@ -64,170 +79,96 @@ class Model {
     let idx = Math.ceil(days / 4);
     return this[columnName][idx];
   }
+
+  getDataset(label, columnName, duration, color) {
+    return {
+      label,
+      fill: false,
+      borderColor: color,
+      data: this.getColumn(columnName, duration)
+    };
+  }
 }
 
 function ModelPage({location, locationName}) {
-  const baselineModelData = useFetch(`/${location}.0.json`);
-  const distancingModelData = useFetch(`/${location}.1.json`);
-  const wuhanModelData = useFetch(`/${location}.2.json`);
-  const flatten2wkModelData = useFetch(`/${location}.3.json`);
-  const flatten1moModelData = useFetch(`/${location}.4.json`);
-  const contain1wkModelData = useFetch(`/${location}.5.json`);
-  const contain2wkModelData = useFetch(`/${location}.6.json`);
+  let modelDatas = useModelDatas(location);
 
-  if (
-    !(
-      baselineModelData &&
-      distancingModelData &&
-      wuhanModelData &&
-      flatten2wkModelData &&
-      flatten1moModelData &&
-      contain1wkModelData &&
-      contain2wkModelData
-    )
-  ) {
+  if (!modelDatas) {
     return <div>Loading...</div>;
   }
 
-  let baseline = new Model(baselineModelData);
-  let distancing = new Model(distancingModelData);
-  let wuhan = new Model(wuhanModelData);
-  let flatten2wk = new Model(flatten2wkModelData);
-  let flatten1mo = new Model(flatten1moModelData);
-  let contain1wk = new Model(contain1wkModelData);
-  let contain2wk = new Model(contain2wkModelData);
+  let baseline = new Model(modelDatas[0]);
+  let distancing = {
+    now: new Model(modelDatas[1]),
+    twoWeek: new Model(modelDatas[3]),
+    fourWeek: new Model(modelDatas[4]),
+  };
+  let contain = {
+    now: new Model(modelDatas[2]),
+    oneWeek: new Model(modelDatas[5]),
+    twoWeek: new Model(modelDatas[6]),
+  };
 
   let place = locationName;
-  let baselineTwoWeeks = [
-    {
-      label: "Hospitalizations",
-      fill: false,
-      borderColor: "red",
-      data: baseline.getColumn("hospitalizations", 30)
-    },
-  ];
-  let baselineThreeMonths = [
-    {
-      label: "Hospitalizations",
-      fill: false,
-      borderColor: "red",
-      data: baseline.getColumn("hospitalizations", 90)
-    },
-    {
-      label: "Deaths",
-      fill: false,
-      borderColor: "black",
-      data: baseline.getColumn("cumulativeDeaths", 90)
-    },
-
-    {
-      label: "Total Hospital Beds",
-      fill: false,
-      borderColor: "blue",
-      data: baseline.getColumn("beds", 90)
-    }
-  ];
-      console.log(baselineTwoWeeks);
-
 
   let distancingDelay = duration => [
-    {
-      label: "No Action",
-      fill: false,
-      borderColor: "red",
-      data: baseline.getColumn("hospitalizations", duration)
-    },
-    {
-      label: "Distancing Today",
-      fill: false,
-      borderColor: "blue",
-      data: distancing.getColumn("hospitalizations", duration)
-    }
-  ];
+    baseline.getDataset("No Action", "hospitalizations", duration, "red"),
+    baseline.getDataset(
+      "Distancing Today",
+      "hospitalizations",
+      duration,
+      "blue"
+    )];
   let distancingDelayShortTerm = distancingDelay(15);
   distancingDelayShortTerm[0].borderDash = [20, 30];
 
-  let distancingDelayLongTerm = distancingDelay(30);
-
-
-  let distancingDelayDelta =
-    baseline.getColumnAt("hospitalizations", 30) -
-    distancing.getColumnAt("hospitalizations", 30);
-
   let scenarios = duration => [
-    {
-      label: "No Action",
-      fill: false,
-      borderColor: "red",
-      data: baseline.getColumn("hospitalizations", duration)
-    },
-    {
-      label: "Distancing Today for 2 months (R0 = 1.3)",
-      fill: false,
-      borderColor: "yellow",
-      data: distancing.getColumn("hospitalizations", duration)
-    },
-    {
-      label: "Wuhan level containment for 1 month (R0 = 0.4)",
-      fill: false,
-      borderColor: "green",
-      data: wuhan.getColumn("hospitalizations", duration)
-    },
-    {
-      label: "Hospital Beds",
-      fill: false,
-      borderColor: "blue",
-      data: distancing.getColumn("beds", duration)
-    }
-
+    baseline.getDataset("No Action", "hospitalizations", duration, "red"),
+    distancing.now.getDataset(
+      "Distancing Today for 2 months (R0 = 1.3)",
+      "hospitalizations",
+      duration,
+      "blue"
+    ),
+    contain.now.getDataset(
+      "Wuhan level containment for 1 month (R0 = 0.4)",
+      "hospitalizations",
+      duration,
+      "green"
+    ),
+    baseline.getDataset("Hospital Beds", "beds", duration, "black")
   ];
-  let scenariosShortTerm = scenarios(30);
-  let scenariosLongTerm = scenarios(180);
-
+  let scenariosLongTerm = scenarios(80);
+/**/
 
   let flattenScenarios = [
-    {
-      label: "Distancing Today for 2 months (R0 = 1.3)",
-      fill: false,
-      borderColor: "green",
-      data: distancing.getColumn("hospitalizations", 180)
-    },
-    {
-      label: "Distancing in 2 weeks for 2 months (R0 = 1.3)",
-      fill: false,
-      borderColor: "yellow",
-      data: flatten2wk.getColumn("hospitalizations", 180)
-    },
-    {
-      label: "Distancing in 1 month for 2 months (R0 = 1.3)",
-      fill: false,
-      borderColor: "red",
-      data: flatten1mo.getColumn("hospitalizations", 180)
-    }
+    distancing.now.getDataset(
+      "Distancing Today for 2 months (R0 = 1.3)",
+      "hospitalizations",
+      180,
+      "green"
+    ),
+    distancing.twoWeek.getDataset(
+      "Distancing in 2 weeks for 2 months (R0 = 1.3)",
+      "hospitalizations",
+      180,
+      "yellow"
+    ),
+    distancing.fourWeek.getDataset(
+      "Distancing in 4 weeks for 2 months (R0 = 1.3)",
+      "hospitalizations",
+      180,
+      "red"
+    ),
   ];
   let containScenarios = [
-    {
-      label: "Wuhan Level Containment for 1 month (R0 = 0.4)",
-      fill: false,
-      borderColor: "green",
-      data: wuhan.getColumn("hospitalizations", 180)
-    },
-    {
-      label:
-        "Wuhan Level Containment for 1 month after 1wk (R0 = 0.4)",
-      fill: false,
-      borderColor: "yellow",
-      data: contain1wk.getColumn("hospitalizations", 180)
-    },
-    {
-      label:
-        "Wuhan Level Containment for 1 month after 2wk(R0 = 0.4)",
-      fill: false,
-      borderColor: "red",
-      data: contain2wk.getColumn("hospitalizations", 180)
-    }
+    contain.now.getDataset("Wuhan Level Containment for 1 month (R0 = 0.4)",
+      "hospitalizations", 180, "green"),
+    contain.oneWeek.getDataset("Wuhan Level Containment for 1 month after 1wk (R0 = 0.4)",
+      "hospitalizations", 180, "yellow"),
+    contain.twoWeek.getDataset("Wuhan Level Containment for 1 month after 2wk(R0 = 0.4)",
+      "hospitalizations", 180, "red"),
   ];
-
 
 
   return (
@@ -236,51 +177,12 @@ function ModelPage({location, locationName}) {
         <Link to="/">Back to map</Link>
       </h3>
 
-      <div
-        style={{
-          backgroundColor: "#fafafa",
-          padding: 20,
-          marginTop: 20,
-          display: "none"
-        }}
-      >
-        <h1>Likely hospitalizations in {place}: now to June</h1>
-        <div class="graphs-container">
-          <div class="small-graph">
-            <h4> Next 2 weeks </h4>
-            <LineGraph data={{ datasets: baselineTwoWeeks }} />
-          </div>
-
-          <div class="small-graph">
-            <h4> Next 3 months </h4>
-            <LineGraph data={{ datasets: baselineThreeMonths }} />
-          </div>
-
-          <div class="clear" />
-        </div>
-
-        <h3 style={{ margin: 50 }}>
-          Up to {baseline.maxInfected.toLocaleString()} infected, and{" "}
-          <span class="stark">
-            {baseline.cumulativeDead.toLocaleString()} dead
-          </span>
-          . <br /> Hospitalizations will exceed available beds around{" "}
-          {baseline.dateOverwhelmed
-            ? baseline.dateOverwhelmed.toDateString()
-            : "never"}
-          .
-        </h3>
-      </div>
+      <h2>Likely hospitalizations in {place}</h2>
 
       <div style={{ backgroundColor: "#fafafa", padding: 20, marginTop: 20 }}>
-        <h1>Impact of actions you can take</h1>
+        <h2>Impact of actions you can take</h2>
 
         <div class="graphs-container">
-          <div class="small-graph" style={{ display: "none" }}>
-            <h4> Immediate Action, Next 30 days </h4>
-            <LineGraph data={{ datasets: scenariosShortTerm }} maxY={10000} />
-          </div>
-
           <div class="">
             <h4> Hospitalizations over time</h4>
             <LineGraph data={{ datasets: scenariosLongTerm }} />
@@ -291,8 +193,12 @@ function ModelPage({location, locationName}) {
 
         <h2>Outcomes</h2>
         <OutcomesTable
-          models={[baseline, distancing, wuhan]}
-          labels={["Do Nothing", "Social Distancing (2 months)", "Wuhan Level Containment (1 months)"]}
+          models={[baseline, distancing.now, contain.now]}
+          labels={[
+            "Do Nothing",
+            "Social Distancing (2 months)",
+            "Wuhan Level Containment (1 months)"
+          ]}
         />
       </div>
       <div
@@ -303,7 +209,7 @@ function ModelPage({location, locationName}) {
           marginBottom: 100
         }}
       >
-        <h1>Why you must respond fast</h1>
+        <h2>Why you must respond fast</h2>
 
         <div class="graphs-container" style={{ display: "none" }}>
           <div class="small-graph">
@@ -321,7 +227,7 @@ function ModelPage({location, locationName}) {
 
         <h4>Wuhan Level Containment (1 month)</h4>
         <OutcomesTable
-          models={[wuhan, contain1wk, contain2wk]}
+          models={[contain.now, contain.oneWeek, contain.twoWeek]}
           labels={["Act now", "Act in 1 week", "Act in 2 weeks"]}
         />
 
@@ -342,13 +248,32 @@ function ModelPage({location, locationName}) {
           labels={["Act now", "Act in 2 weeks", "Act in 4 weeks"]}
         />*/
 
+// hospital overload
+// end of social distancing
+// end of containment
 function LineGraph({data, maxY}) {
   return (
     <Line
       data={data}
       width={500}
-      height={250}
+      height={600}
       options={{
+        annotation: {
+          drawTime: 'afterDatasetsDraw',
+          annotations: [{
+              type: 'line',
+              mode: 'vertical',
+              scaleID: 'x-axis-0',
+              value: new Date('March 19 2020'),
+              borderColor: 'green',
+              borderWidth: 1,
+              label: {
+                  enabled: true,
+                  position: "top",
+                  content: "hello"
+              }
+          }]
+        },
         hover: {
           intersect: false
         },

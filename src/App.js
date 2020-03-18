@@ -19,10 +19,19 @@ export default function App() {
         </h3>
         <Switch>
           <Route path="/ca">
-            <ModelPage location="us-ca" locationName="California" />
+            <ModelPage location="ca" locationName="California" />
           </Route>
           <Route path="/ak">
-            <ModelPage location="alaska" locationName="Alaska" />
+            <ModelPage location="ak" locationName="Alaska" />
+          </Route>
+          <Route path="/fl">
+            <ModelPage location="fl" locationName="Florida" />
+          </Route>
+          <Route path="/co">
+            <ModelPage location="co" locationName="Colorado" />
+          </Route>
+          <Route path="/wa">
+            <ModelPage location="wa" locationName="Washington" />
           </Route>
           <Route path="/">
             <HomePage />

@@ -26,7 +26,25 @@ function Map () {
       },
       AK: {
         fill: "rgba(1,1,1,0.7)",
-        clickHandler: (event) => { setRedirectTarget('/ak') }
+        clickHandler: event => {
+          setRedirectTarget("/ak");
+        }
+      },
+      FL: {
+        fill: "rgba(1,1,1,0.7)",
+        clickHandler: event => {
+          setRedirectTarget("/fl");
+        }
+      },
+      CO: {
+        fill: "rgba(1,1,1,0.7)",
+        clickHandler: event => {
+          setRedirectTarget("/co");
+        }
+      },
+      WA: {
+        fill: "rgba(1,1,1,0.7)",
+        clickHandler: (event) => { setRedirectTarget('/wa') }
       },
     };
   };

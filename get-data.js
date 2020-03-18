@@ -13,7 +13,7 @@ const TOKEN_PATH = 'token.json';
 fs.readFile('credentials.json', (err, content) => {
   if (err) return console.log('Error loading client secret file:', err);
   // Authorize a client with credentials, then call the Google Sheets API.
-  let place = 'alaska';
+  let place = 'ca';
   authorize(JSON.parse(content), auth => downloadModel(auth, place, 0 /*baseline*/));
   authorize(JSON.parse(content), auth =>
     downloadModel(auth, place, 1 /**/)
@@ -104,7 +104,7 @@ function downloadModel(auth, location, model) {
   sheets.spreadsheets.values.get(
     {
       spreadsheetId: "1YEj4Vr6lG1jQ1R3LG6frijJYNynKcgTjzo2n0FsBwZA",
-      range: `${models[model]}!C18:U92`
+      range: `${models[model]}!C19:U92`
     },
     (err, res) => {
       if (err) return console.log("The API returned an error: " + err);
