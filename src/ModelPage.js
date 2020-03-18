@@ -222,7 +222,7 @@ function ModelPage({location, locationName}) {
         <h2>Outcomes</h2>
         <div style={{padding:20}}>
           <b> Estimated last day to act to ease/delay hospital overload:</b>{' '}
-          <LastDatesToAct model={distancing.now} />
+          <LastDatesToAct model={baseline} />
         </div>
 
         <OutcomesTable
