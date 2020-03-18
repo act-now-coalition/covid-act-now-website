@@ -123,7 +123,7 @@ function ModelPage({location, locationName}) {
   let place = locationName;
 
   let distancingDelay = duration => [
-    baseline.getDataset("No Action", "hospitalizations", duration, "red"),
+    baseline.getDataset("No Action (R0 = 2.6)", "hospitalizations", duration, "red"),
     baseline.getDataset(
       "Distancing Today",
       "hospitalizations",
@@ -134,7 +134,7 @@ function ModelPage({location, locationName}) {
   distancingDelayShortTerm[0].borderDash = [20, 30];
 
   let scenarios = duration => [
-    baseline.getDataset("No Action", "hospitalizations", duration, "red"),
+    baseline.getDataset("No Action (R0 = 2.6)", "hospitalizations", duration, "red"),
     distancing.now.getDataset(
       "Distancing Today for 2 months (R0 = 1.4)",
       "hospitalizations",
@@ -219,7 +219,7 @@ function ModelPage({location, locationName}) {
 
           <div class="clear" />
         </div>
-        <h2>Outcomes</h2>
+        <h2><br />Outcomes</h2>
         <div style={{padding:20}}>
           <b> Estimated last day to act to ease/delay hospital overload:</b>{' '}
           <LastDatesToAct model={baseline} />
@@ -229,14 +229,22 @@ function ModelPage({location, locationName}) {
           models={[baseline, distancing.now, contain.now]}
           labels={[
             "Do Nothing",
-            "2 Months of Social Distancing, Then Stop",
-            "1 Month of Wuhan Level Containment, Then Stop"
+            "2 Months of Social Distancing, Starting Today*",
+            "1 Month of Wuhan Level Containment, Starting Today**"
           ]}
         />
-        <p style={{ lineHeight: "1.5em" }}>
-          Assuming a 1-2 months containment window, for many regions the model
-          does not show containment is possible. Delaying impact, however, is
-          possible and buys us time to improve interventions and treatments.
+        <p style={{ lineHeight: "1em" }}>
+           *Delaying impact through social distancing buys us 
+            time to prepare hospitals and improve interventions and treatments. Unless social
+            distancing is implemented for 9 to 15 months, a second spike in disease may occur
+            after social distancing is stopped.
+          **Assuming that a full containment policy (such as implemented in
+            Wuhan) is infeasible to  implement in the USA for any longer than 1 month, 
+            for many regions the model predicts containment is no longer possible. Even
+            if containment is acheived, strict travel restrictions and selective quarantine
+            would need to remain
+            in place for many months thereafter to prevent reintroduction of the disease. <br />
+         
         </p>
       </div>
       <div
