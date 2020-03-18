@@ -125,7 +125,7 @@ function ModelPage({location, locationName}) {
   let scenarios = duration => [
     baseline.getDataset("No Action", "hospitalizations", duration, "red"),
     distancing.now.getDataset(
-      "Distancing Today for 2 months (R0 = 1.3)",
+      "Distancing Today for 2 months (R0 = 1.4)",
       "hospitalizations",
       duration,
       "blue"
@@ -143,19 +143,19 @@ function ModelPage({location, locationName}) {
 
   let flattenScenarios = [
     distancing.now.getDataset(
-      "Distancing Today for 2 months (R0 = 1.3)",
+      "Distancing Today for 2 months (R0 = 1.4)",
       "hospitalizations",
       180,
       "green"
     ),
     distancing.twoWeek.getDataset(
-      "Distancing in 2 weeks for 2 months (R0 = 1.3)",
+      "Distancing in 2 weeks for 2 months (R0 = 1.4)",
       "hospitalizations",
       180,
       "yellow"
     ),
     distancing.fourWeek.getDataset(
-      "Distancing in 4 weeks for 2 months (R0 = 1.3)",
+      "Distancing in 4 weeks for 2 months (R0 = 1.4)",
       "hospitalizations",
       180,
       "red"
@@ -196,8 +196,8 @@ function ModelPage({location, locationName}) {
           models={[baseline, distancing.now, contain.now]}
           labels={[
             "Do Nothing",
-            "Social Distancing (2 months)",
-            "Wuhan Level Containment (1 months)"
+            "2 Months of Social Distancing",
+            "1 Month of Wuhan Level Containment"
           ]}
         />
       </div>
@@ -209,29 +209,29 @@ function ModelPage({location, locationName}) {
           marginBottom: 100
         }}
       >
-        <h2>Why you must respond fast</h2>
+        <h2>Why you must act now</h2>
 
         <div class="graphs-container" style={{ display: "none" }}>
           <div class="small-graph">
-            <h4> Flatten scenarios </h4>
+            <h4> Distancing scenarios </h4>
             <LineGraph data={{ datasets: flattenScenarios }} />
           </div>
 
           <div class="small-graph">
-            <h4> Contain scenarios </h4>
+            <h4> Containment scenarios </h4>
             <LineGraph data={{ datasets: containScenarios }} />
           </div>
 
           <div class="clear" />
         </div>
 
-        <h4>Wuhan Level Containment (1 month)</h4>
+        <h4>1 Month of Wuhan Level Containment</h4>
         <OutcomesTable
           models={[contain.now, contain.oneWeek, contain.twoWeek]}
           labels={["Act now", "Act in 1 week", "Act in 2 weeks"]}
         />
 
-        <h4>Social Distancing (2 months)</h4>
+        <h4>2 Months of Social Distancing</h4>
         <p> [coming soon]</p>
       </div>
       <div style={{ backgroundColor: "#fafafa", padding: 20, marginTop: 20 }}>
@@ -326,14 +326,14 @@ function OutcomesTable({models, labels}) {
         <tr>
           <th>Scenario</th>
           <th>
-            Cumulative
+            Estimated Cumulative
             <br /> Infected
           </th>
           <th>
-            Hospitals
+            Estimated Date Hospitals
             <br /> Overloaded
           </th>
-          <th>Deaths</th>
+          <th>Estimated Deaths</th>
         </tr>
       </thead>
       <tbody>
