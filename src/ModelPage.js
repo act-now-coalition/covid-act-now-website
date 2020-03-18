@@ -257,7 +257,7 @@ function ModelPage({location, locationName}) {
           <li> Not node based analysis </li>
         </ul>
 
-        <h3>How could the date change?</h3>
+        <h3>How could the data change?</h3>
         <p> Only a small fraction of the world has been infected. It’s a new disease. Variables will change.</p>
 
       </div>
@@ -281,14 +281,17 @@ function LineGraph({data, maxY, annotations}) {
       mode: "vertical",
       scaleID: "x-axis-0",
       value: annotations[label].on,
-      borderColor: "green",
+      borderColor: "gray",
       borderWidth: 1,
       label: {
+        backgroundColor: "rgba(0,0,0,0.1)",
+        fontStyle: "normal",
+        fontColor: "black",
         enabled: true,
         position: "top",
         content: label,
         xAdjust: annotations[label].xOffset || 0,
-        yAdjust:annotations[label].yOffset || 0,
+        yAdjust: annotations[label].yOffset || 0
       }
     });
   }
