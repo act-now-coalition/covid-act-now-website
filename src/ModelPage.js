@@ -3,103 +3,8 @@ import { Line } from "react-chartjs-2";
 import { Link } from 'react-router-dom';
 import './App.css';
 import "chartjs-plugin-annotation";
-import { useState, useEffect } from "react";
+import {useModelDatas, Model} from './model';
 
-
-async function fetchAll(urls) {
-  try {
-    var data = await Promise.all(
-      urls.map(url => fetch(url).then(response => response.json()))
-    );
-
-    return data;
-  } catch (error) {
-    console.log(error);
-
-    throw error;
-  }
-}
-
-const useModelDatas = location => {
-  const [modelDatas, setModelDatas] = useState(null);
-
-  async function fetchData() {
-    let urls = Array.from({length: 7}, (x,i) => `/${location}.${i}.json`);
-    let loadedModelDatas = await fetchAll(urls);
-    setModelDatas(loadedModelDatas);
-  }
-
-  useEffect(() => {
-    fetchData();
-  }, [location]);
-  return modelDatas;
-};
-
-const COLUMNS = {
-  hospitalizations: 8,
-  beds: 11,
-  cumulativeDeaths: 10,
-  cumulativeInfected: 9,
-  date: 0
-};
-class Model {
-  constructor(data) {
-    let _parseInt = number => parseInt(number.replace(/,/g, "") || 0);
-
-    this.dates = data.map(row => new Date(row[COLUMNS.date]));
-    this.hospitalizations = data.map(row =>
-      _parseInt(row[COLUMNS.hospitalizations])
-    );
-    this.beds = data.map(row => _parseInt(row[COLUMNS.beds]));
-    this.cumulativeDeaths = data.map(row =>
-      _parseInt(row[COLUMNS.cumulativeDeaths])
-    );
-    this.cumulativeInfected = data.map(row =>
-      _parseInt(row[COLUMNS.cumulativeInfected])
-    );
-
-    this.maxInfected = this.cumulativeInfected[
-      this.cumulativeInfected.length - 1
-    ];
-    this.cumulativeDead = this.cumulativeDeaths[
-      this.cumulativeDeaths.length - 1
-    ];
-    this.dateOverwhelmed = this.dates.find(
-      (num, idx) => this.hospitalizations[idx] > this.beds[idx]
-    );
-  }
-
-  getColumn(columnName, days) {
-    return this.dates
-      .slice(0, Math.ceil(days / 4))
-      .map((date, idx) => ({ x: date, y: this[columnName][idx] }));
-  }
-
-  getColumnAt(columnName, days) {
-    let idx = Math.ceil(days / 4);
-    return this[columnName][idx];
-  }
-
-  getDataset(label, columnName, duration, color) {
-    return {
-      label,
-      fill: false,
-      borderColor: color,
-      data: this.getColumn(columnName, duration)
-    };
-  }
-}
-
-function LastDatesToAct({model}) {
-  const days = 1000 * 60 * 60 * 24;
-  let earlyDate = new Date(model.dateOverwhelmed.getTime() - 21 * days);
-  let lateDate = new Date(model.dateOverwhelmed.getTime() - 14 * days);
-  return (
-    <>
-      {earlyDate.toDateString()} to {lateDate.toDateString()}
-    </>
-  );
-}
 
 function ModelPage({location, locationName}) {
   let modelDatas = useModelDatas(location);
@@ -108,6 +13,7 @@ function ModelPage({location, locationName}) {
     return <div>Loading...</div>;
   }
 
+  // Initialize models
   let baseline = new Model(modelDatas[0]);
   let distancing = {
     now: new Model(modelDatas[1]),
@@ -120,57 +26,24 @@ function ModelPage({location, locationName}) {
     twoWeek: new Model(modelDatas[6]),
   };
 
-  let place = locationName;
-
-  let distancingDelay = duration => [
+  // Prep datasets for graphs
+  let scenarioComparisonOverTime = duration => [
     baseline.getDataset("No Action (R0 = 2.6)", "hospitalizations", duration, "red"),
-    baseline.getDataset(
-      "Distancing Today",
-      "hospitalizations",
-      duration,
-      "blue"
-    )];
-  let distancingDelayShortTerm = distancingDelay(15);
-  distancingDelayShortTerm[0].borderDash = [20, 30];
-
-  let scenarios = duration => [
-    baseline.getDataset("No Action (R0 = 2.6)", "hospitalizations", duration, "red"),
-    distancing.now.getDataset(
-      "Distancing Today for 2 months (R0 = 1.4)",
-      "hospitalizations",
-      duration,
-      "blue"
-    ),
-    contain.now.getDataset(
-      "Wuhan level containment for 1 month (R0 = 0.4)",
-      "hospitalizations",
-      duration,
-      "green"
-    ),
+    distancing.now.getDataset("Distancing Today for 2 months (R0 = 1.4)",
+      "hospitalizations", duration,"blue"),
+    contain.now.getDataset("Wuhan level containment for 1 month (R0 = 0.4)",
+      "hospitalizations", duration, "green"),
     baseline.getDataset("Hospital Beds", "beds", duration, "black")
   ];
-  let scenariosLongTerm = scenarios(80);
-/**/
+  let scenarioComparison = scenarioComparisonOverTime(80);
 
-  let flattenScenarios = [
-    distancing.now.getDataset(
-      "Distancing Today for 2 months (R0 = 1.4)",
-      "hospitalizations",
-      180,
-      "green"
-    ),
-    distancing.twoWeek.getDataset(
-      "Distancing in 2 weeks for 2 months (R0 = 1.4)",
-      "hospitalizations",
-      180,
-      "yellow"
-    ),
-    distancing.fourWeek.getDataset(
-      "Distancing in 4 weeks for 2 months (R0 = 1.4)",
-      "hospitalizations",
-      180,
-      "red"
-    ),
+  /*let distancingScenarios = [
+    distancing.now.getDataset("Distancing Today for 2 months (R0 = 1.4)",
+      "hospitalizations", 180, "green"),
+    distancing.twoWeek.getDataset("Distancing in 2 weeks for 2 months (R0 = 1.4)",
+      "hospitalizations", 180, "yellow"),
+    distancing.fourWeek.getDataset("Distancing in 4 weeks for 2 months (R0 = 1.4)",
+      "hospitalizations", 180, "red"),
   ];
   let containScenarios = [
     contain.now.getDataset("Wuhan Level Containment for 1 month (R0 = 0.4)",
@@ -179,7 +52,7 @@ function ModelPage({location, locationName}) {
       "hospitalizations", 180, "yellow"),
     contain.twoWeek.getDataset("Wuhan Level Containment for 1 month after 2wk(R0 = 0.4)",
       "hospitalizations", 180, "red"),
-  ];
+  ];*/
 
 
   return (
@@ -188,65 +61,89 @@ function ModelPage({location, locationName}) {
         <Link to="/">Back to map</Link>
       </h3>
 
-      <h1>{place}</h1>
+      <h1>{locationName}</h1>
 
-      <div style={{ backgroundColor: "#fafafa", padding: 20, marginTop: 20 }}>
-        <h2>Impact of actions you can take</h2>
+      <Panel title="Impact of actions you can take">
         <div class="graphs-container">
-          <div class="">
-            <h4> Hospitalizations over time</h4>
-            <LineGraph
-              data={{ datasets: scenariosLongTerm }}
-              annotations={{
-                "Hospitals Overloaded": {
-                  on: baseline.dateOverwhelmed,
-                  yOffset: 50,
-                  xOffset: 30
-                },
-                "End Wuhan Level Containment ": {
-                  on: new Date("April 17 2020"),
-                  xOffset: -50,
-                  yOffset: 30
-                },
-                "End Social Distancing": {
-                  on: new Date("May 17 2020"),
-                  xOffset: 30,
-                  yOffset: 10
-                }
-              }}
-            />
-          </div>
-
-          <div class="clear" />
+          <LineGraph
+            title="Hospitalizations over time"
+            data={{ datasets: scenarioComparison }}
+            annotations={{
+              "Hospitals Overloaded": {
+                on: baseline.dateOverwhelmed,
+                yOffset: 50,
+                xOffset: 30
+              },
+              "End Wuhan Level Containment ": {
+                on: new Date("April 17 2020"),
+                xOffset: -50,
+                yOffset: 30
+              },
+              "End Social Distancing": {
+                on: new Date("May 17 2020"),
+                xOffset: 30,
+                yOffset: 10
+              }
+            }}
+          />
         </div>
-        <h2><br />Outcomes</h2>
-        <div style={{padding:20}}>
-          <b> Estimated last day to act to ease/delay hospital overload:</b>{' '}
+
+        <div
+          style={{
+            padding: 20,
+            border: "1px solid red",
+            marginBottom: 20,
+            marginTop: 40,
+            backgroundColor: "white"
+          }}
+        >
+          Estimated last day to act to ease/delay hospital overload:{" "}
           <LastDatesToAct model={baseline} />
         </div>
 
         <OutcomesTable
+          title="Outcomes within 2 months"
           models={[baseline, distancing.now, contain.now]}
           labels={[
             "Do Nothing",
             "2 Months of Social Distancing, Starting Today*",
             "1 Month of Wuhan Level Containment, Starting Today**"
           ]}
+          timeHorizon={70}
         />
-        <p style={{ lineHeight: "1em" }}>
-           *Delaying impact through social distancing buys us 
-            time to prepare hospitals and improve interventions and treatments. Unless social
-            distancing is implemented for 9 to 15 months, a second spike in disease may occur
-            after social distancing is stopped.
-          **Assuming that a full containment policy (such as implemented in
-            Wuhan) is infeasible to  implement in the USA for any longer than 1 month, 
-            for many regions the model predicts containment is no longer possible. Even
-            if containment is acheived, strict travel restrictions and selective quarantine
-            would need to remain
-            in place for many months thereafter to prevent reintroduction of the disease. <br />
-         
-        </p>
-      </div>
+        <OutcomesTable
+          title="Outcomes within 6 months"
+          subtitle="Delaying impact through social distancing buys us time to prepare
+            hospitals and improve interventions and treatments. Unless social
+            distancing is implemented for 9 to 15 months, a second spike in
+            disease may occur after social distancing is stopped"
+          models={[baseline, distancing.now, contain.now]}
+          labels={[
+            "Do Nothing",
+            "2 Months of Social Distancing, Starting Today*",
+            "1 Month of Wuhan Level Containment, Starting Today**"
+          ]}
+          timeHorizon={190}
+        />
+
+        <ul style={{ textAlign: "left", lineHeight: "2em" }}>
+          <li style={{ listStyleType: "none", marginBottom: 10 }}>
+            * Delaying impact through social distancing buys us time to prepare
+            hospitals and improve interventions and treatments. Unless social
+            distancing is implemented for 9 to 15 months, a second spike in
+            disease may occur after social distancing is stopped.
+          </li>
+          <li style={{ listStyleType: "none" }}>
+            ** Assuming that a full containment policy (such as implemented in
+            Wuhan) is infeasible to implement in the USA for any longer than 1
+            month, for many regions the model predicts containment is no longer
+            possible. Even if containment is acheived, strict travel
+            restrictions and selective quarantine would need to remain in place
+            for many months thereafter to prevent reintroduction of the disease.
+          </li>
+        </ul>
+      </Panel>
+
       <div
         style={{
           backgroundColor: "#fafafa",
@@ -256,17 +153,6 @@ function ModelPage({location, locationName}) {
         }}
       >
         <h2>Timing scenarios for interventions</h2>
-        <div class="graphs-container" style={{ display: "none" }}>
-          <div class="small-graph">
-            <h4> Distancing scenarios </h4>
-            <LineGraph data={{ datasets: flattenScenarios }} />
-          </div>
-          <div class="small-graph">
-            <h4> Containment scenarios </h4>
-            <LineGraph data={{ datasets: containScenarios }} />
-          </div>
-          <div class="clear" />
-        </div>
         <h4>1 Month of Wuhan Level Containment, Then Stop</h4>
         {contain.now.cumulativeDead < baseline.cumulativeDead / 2 ? (
           <OutcomesTable
@@ -314,6 +200,18 @@ function ModelPage({location, locationName}) {
   );
 }
 
+function Panel ({children, title}) {
+  return (
+    <div style={{
+          backgroundColor: "#fafafa",
+          padding: 20,
+          marginTop: 20,
+          marginBottom: 100}}>
+      <h2>{title}</h2>
+      {children}
+    </div>);
+}
+
 /*
 <OutcomesTable
           models={[distancing, flatten2wk, flatten1mo]}
@@ -323,8 +221,16 @@ function formatNumber(num) {
   return (Math.round(num/1000) * 1000).toLocaleString();
 }
 
-function LineGraph({data, maxY, annotations}) {
+function formatBucketedNumber(num, total) {
+  let percent = num / total;
+  if (percent < .7) {
+    return Math.round(percent*100) + "%";
+  } else {
+    return ">70%";
+  }
+}
 
+function LineGraph({data, maxY, annotations, title}) {
   let annotationConfigs = [];
   annotations = annotations || {};
   for (let label in annotations) {
@@ -349,74 +255,77 @@ function LineGraph({data, maxY, annotations}) {
   }
 
   return (
-    <Line
-      data={data}
-      width={500}
-      height={600}
-      options={{
-        annotation: {
-          drawTime: "afterDatasetsDraw",
-          annotations: annotationConfigs
-        },
-        hover: {
-          intersect: false
-        },
-        tooltips: {
-          mode: "index"
-        },
-        maintainAspectRatio: false,
-        scales: {
-          yAxes: [
-            {
-              type: "linear",
-              ticks: {
-                max: maxY,
-                callback: function(value, index, values) {
-                  return formatNumber(value);
+    <>
+      <h3> {title}</h3>
+      <Line
+        data={data}
+        width={500}
+        height={400}
+        options={{
+          annotation: {
+            drawTime: "afterDatasetsDraw",
+            annotations: annotationConfigs
+          },
+          hover: {
+            intersect: false
+          },
+          tooltips: {
+            mode: "index"
+          },
+          maintainAspectRatio: false,
+          scales: {
+            yAxes: [
+              {
+                type: "linear",
+                ticks: {
+                  max: maxY,
+                  callback: function(value, index, values) {
+                    return formatNumber(value);
+                  }
                 }
               }
-            }
-          ],
-          xAxes: [
-            {
-              type: "time",
-              time: {
-                displayFormats: {
-                  quarter: "MMM YYYY"
-                },
-                tooltipFormat: "MMMM DD"
+            ],
+            xAxes: [
+              {
+                type: "time",
+                time: {
+                  displayFormats: {
+                    quarter: "MMM YYYY"
+                  },
+                  tooltipFormat: "MMMM DD"
+                }
               }
-            }
-          ]
-        }
-      }}
-    />
+            ]
+          }
+        }}
+      />
+    </>
   );
 }
 
 
-function OutcomesTable({models, labels, timeHorizon}) {
+function OutcomesTable({models, labels, timeHorizon, title}) {
   return (
     <div style={{ overflow: "scroll" }}>
+      <h3>{title}</h3>
       <table
         style={{
           width: "100%",
           margin: "auto",
           border: "1px solid #ccc",
           padding: 20,
-          textAlign: "left"
+          textAlign: "left",
+          tableLayout: "fixed"
         }}
       >
         <thead>
           <tr>
             <th>Scenario</th>
             <th>
-              Estimated Cumulative
-              <br /> Infected
+              Estimated Cumulative Infected
             </th>
             <th>
-              Estimated Date Hospitals
-              <br /> Overloaded
+              Estimated Date Hospitals Overloaded
             </th>
             <th>Estimated Deaths</th>
           </tr>
@@ -442,17 +351,57 @@ function OutcomesTable({models, labels, timeHorizon}) {
     </div>
   );
 };
-function OutcomesRow({model, label}) {
+function OutcomesRow({model, label, timeHorizon}) {
   return (
     <tr>
       <td>{label}</td>
-      <td>{formatNumber(model.maxInfected)}</td>
       <td>
-        {model.dateOverwhelmed ? model.dateOverwhelmed.toDateString() : "never"}
+        {formatBucketedNumber(
+          timeHorizon
+            ? model.cumulativeInfectedAfter(timeHorizon)
+            : model.cumulativeInfected
+        , model.totalPopulation)}
       </td>
-      <td>{formatNumber(model.cumulativeDead)}</td>
+      {timeHorizon ?
+        <td>
+          {model.dateOverwhelmed < model.dateAfter(timeHorizon)
+            ? model.dateOverwhelmed.toDateString()
+            : (model.dateOverwhelmed ? "outside time bound" : "never")}
+        </td>
+        :
+      <td>
+        {model.dateOverwhelmed
+          ? model.dateOverwhelmed.toDateString()
+          : "never"}
+      </td>}
+
+      <td>
+        {formatNumber(
+          timeHorizon
+            ? model.cumulativeDeadAfter(timeHorizon)
+            : model.cumulativeDead
+        )}
+      </td>
     </tr>
   );
 }
 
 export default ModelPage;
+
+function LastDatesToAct({ model }) {
+  function formatDate(date) {
+    const month = new Intl.DateTimeFormat('en', { month: 'short' }).format(date);
+    const day = new Intl.DateTimeFormat('en', { day: 'numeric' }).format(date);
+    return `${month} ${day}`;
+  }
+
+  const days = 1000 * 60 * 60 * 24;
+  let earlyDate = new Date(model.dateOverwhelmed.getTime() - 21 * days);
+  let lateDate = new Date(model.dateOverwhelmed.getTime() - 14 * days);
+
+  return (
+    <b>
+      {formatDate(earlyDate)} to {formatDate(lateDate)}
+    </b>
+  );
+}
