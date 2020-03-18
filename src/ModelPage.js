@@ -177,7 +177,7 @@ function ModelPage({location, locationName}) {
         <Link to="/">Back to map</Link>
       </h3>
 
-      <h2>Likely hospitalizations in {place}</h2>
+      <h1>{place}</h1>
 
       <div style={{ backgroundColor: "#fafafa", padding: 20, marginTop: 20 }}>
         <h2>Impact of actions you can take</h2>
@@ -185,7 +185,14 @@ function ModelPage({location, locationName}) {
         <div class="graphs-container">
           <div class="">
             <h4> Hospitalizations over time</h4>
-            <LineGraph data={{ datasets: scenariosLongTerm }} />
+            <LineGraph
+              data={{ datasets: scenariosLongTerm }}
+              annotations={{
+                "Hospitals Overloaded": {on: baseline.dateOverwhelmed, yOffset: 50, xOffset: 30},
+                "End Wuhan Level Containment ": {on: new Date("April 17 2020"), xOffset: -50, yOffset:30},
+                "End Social Distancing": {on:new Date("May 17 2020"), xOffset: 30, yOffset: 10},
+              }}
+            />
           </div>
 
           <div class="clear" />
@@ -196,10 +203,16 @@ function ModelPage({location, locationName}) {
           models={[baseline, distancing.now, contain.now]}
           labels={[
             "Do Nothing",
-            "2 Months of Social Distancing",
-            "1 Month of Wuhan Level Containment"
+            "2 Months of Social Distancing, Then Stop",
+            "1 Month of Wuhan Level Containment, Then Stop"
           ]}
         />
+
+        <p style={{ lineHeight: "1.5em" }}>
+          Assuming a 1-2 months containment window, for many regions the model
+          does not show containment is possible. Delaying impact, however, is
+          possible and buys us time to improve interventions and treatments.
+        </p>
       </div>
       <div
         style={{
@@ -225,33 +238,61 @@ function ModelPage({location, locationName}) {
           <div class="clear" />
         </div>
 
-        <h4>1 Month of Wuhan Level Containment</h4>
+        <h4>1 Month of Wuhan Level Containment, Then Stop</h4>
         <OutcomesTable
           models={[contain.now, contain.oneWeek, contain.twoWeek]}
           labels={["Act now", "Act in 1 week", "Act in 2 weeks"]}
         />
 
-        <h4>2 Months of Social Distancing</h4>
+        <h4>2 Months of Social Distancing, Then Stop</h4>
         <p> [coming soon]</p>
       </div>
-      <div style={{ backgroundColor: "#fafafa", padding: 20, marginTop: 20 }}>
+      <div style={{ backgroundColor: "#fafafa", padding: 20, marginTop: 20, textAlign: 'left'}}>
         <h1>FAQ</h1>
-        <h3>Why does almost everyone get COVID-19?</h3>
-        <p> Because given the.. </p>
+
+        <h3>What are are the current limitations of the model?</h3>
+        <ul>
+          <li> No adjustment for population density</li>
+          <li> No adjustment for inbound infection cases from outside of region </li>
+          <li> Not node based analysis </li>
+        </ul>
+
+        <h3>How could the date change?</h3>
+        <p> Only a small fraction of the world has been infected. It’s a new disease. Variables will change.</p>
+
       </div>
     </>
   );
 }
+
 /*
 <OutcomesTable
           models={[distancing, flatten2wk, flatten1mo]}
           labels={["Act now", "Act in 2 weeks", "Act in 4 weeks"]}
         />*/
 
-// hospital overload
-// end of social distancing
-// end of containment
-function LineGraph({data, maxY}) {
+function LineGraph({data, maxY, annotations}) {
+
+  let annotationConfigs = [];
+  annotations = annotations || {};
+  for (let label in annotations) {
+    annotationConfigs.push({
+      type: "line",
+      mode: "vertical",
+      scaleID: "x-axis-0",
+      value: annotations[label].on,
+      borderColor: "green",
+      borderWidth: 1,
+      label: {
+        enabled: true,
+        position: "top",
+        content: label,
+        xAdjust: annotations[label].xOffset || 0,
+        yAdjust:annotations[label].yOffset || 0,
+      }
+    });
+  }
+
   return (
     <Line
       data={data}
@@ -259,20 +300,8 @@ function LineGraph({data, maxY}) {
       height={600}
       options={{
         annotation: {
-          drawTime: 'afterDatasetsDraw',
-          annotations: [{
-              type: 'line',
-              mode: 'vertical',
-              scaleID: 'x-axis-0',
-              value: new Date('March 19 2020'),
-              borderColor: 'green',
-              borderWidth: 1,
-              label: {
-                  enabled: true,
-                  position: "top",
-                  content: "hello"
-              }
-          }]
+          drawTime: "afterDatasetsDraw",
+          annotations: annotationConfigs
         },
         hover: {
           intersect: false
@@ -313,35 +342,37 @@ function LineGraph({data, maxY}) {
 
 function OutcomesTable({models, labels}) {
   return (
-    <table
-      style={{
-        width: "100%",
-        margin: "auto",
-        border: "1px solid #ccc",
-        padding: 20,
-        textAlign: "left"
-      }}
-    >
-      <thead>
-        <tr>
-          <th>Scenario</th>
-          <th>
-            Estimated Cumulative
-            <br /> Infected
-          </th>
-          <th>
-            Estimated Date Hospitals
-            <br /> Overloaded
-          </th>
-          <th>Estimated Deaths</th>
-        </tr>
-      </thead>
-      <tbody>
-        <OutcomesRow model={models[0]} label={labels[0]} />
-        <OutcomesRow model={models[1]} label={labels[1]} />
-        <OutcomesRow model={models[2]} label={labels[2]} />
-      </tbody>
-    </table>
+    <div style={{overflow: 'scroll'}}>
+      <table
+        style={{
+          width: "100%",
+          margin: "auto",
+          border: "1px solid #ccc",
+          padding: 20,
+          textAlign: "left"
+        }}
+      >
+        <thead>
+          <tr>
+            <th>Scenario</th>
+            <th>
+              Estimated Cumulative
+              <br /> Infected
+            </th>
+            <th>
+              Estimated Date Hospitals
+              <br /> Overloaded
+            </th>
+            <th>Estimated Deaths</th>
+          </tr>
+        </thead>
+        <tbody>
+          <OutcomesRow model={models[0]} label={labels[0]} />
+          <OutcomesRow model={models[1]} label={labels[1]} />
+          <OutcomesRow model={models[2]} label={labels[2]} />
+        </tbody>
+      </table>
+    </div>
   );
 };
 function OutcomesRow({model, label}) {
