@@ -10,7 +10,7 @@
 
 # production
 /build
-/bin/creds.sh
+creds.sh
 credentials.json
 
 # misc
