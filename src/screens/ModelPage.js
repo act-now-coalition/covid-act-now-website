@@ -131,7 +131,7 @@ function ModelPage({ location, locationName }) {
               distancing.now,
               contain.now,
             ]}
-            colors={['red', 'orange', 'green', 'blue']}
+            colors={['red', 'orange', 'blue', 'green']}
             asterisk={['', '*', '*', '**']}
             timeHorizon={100}
           />
