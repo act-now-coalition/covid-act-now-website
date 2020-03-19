@@ -127,10 +127,11 @@ function ModelPage({ location, locationName }) {
             title="Predicted Outcomes after 3 months"
             models={[
               baseline,
-              distancing.now,
               distancingPoorEnforcement.now,
+              distancing.now,
               contain.now,
             ]}
+            colors={['red', 'orange', 'green', 'blue']}
             asterisk={['', '*', '*', '**']}
             timeHorizon={100}
           />
@@ -275,7 +276,7 @@ function LineGraph({ data, maxY, annotations, title }) {
   );
 }
 
-function OutcomesTable({ models, asterisk, timeHorizon, title }) {
+function OutcomesTable({ models, asterisk, timeHorizon, title, colors }) {
   return (
     <div style={{ overflow: 'scroll' }}>
       <h3>{title}</h3>
@@ -304,6 +305,7 @@ function OutcomesTable({ models, asterisk, timeHorizon, title }) {
               key={idx}
               model={model}
               label={`${model.label}${asterisk[idx]}`}
+              color={colors[idx]}
               timeHorizon={timeHorizon}
             />
           ))}
@@ -312,10 +314,10 @@ function OutcomesTable({ models, asterisk, timeHorizon, title }) {
     </div>
   );
 }
-function OutcomesRow({ model, label, timeHorizon }) {
+function OutcomesRow({ model, label, timeHorizon, color }) {
   return (
     <tr>
-      <td>{label}</td>
+      <td style={{fontWeight: 'bold', color}}>{label}</td>
       <td>
         {formatBucketedNumber(
           timeHorizon
