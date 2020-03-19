@@ -276,6 +276,7 @@ function LineGraph({ data, maxY, annotations, title }) {
             xAxes: [
               {
                 type: 'time',
+                distribution: 'series',
                 time: {
                   displayFormats: {
                     quarter: 'MMM YYYY',
