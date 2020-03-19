@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import _AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
-import { useHistory } from 'react-router-dom';
-
+import { useHistory, Link } from 'react-router-dom';
 import Logo from 'assets/images/logo';
 import { Wrapper, Left, StyledTabs, StyledTab } from './AppBar.style';
 
@@ -21,8 +20,8 @@ const AppBar = () => {
     <_AppBar position="sticky">
       <Wrapper>
         <Left>
-          <Logo />
-          <Typography variant="button" component="p">
+          <Logo onClick={() => goTo('/')} />
+          <Typography variant="button" component={Link} to="/" style={{textDecoration: 'none', color: 'black'}}>
             covid act now
           </Typography>
         </Left>

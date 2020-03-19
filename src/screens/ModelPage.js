@@ -111,7 +111,7 @@ function ModelPage({ location, locationName }) {
         <div
           style={{
             padding: 20,
-            border: '1px solid red',
+            border: '2px solid red',
             marginBottom: 20,
             marginTop: 40,
             backgroundColor: 'white',
@@ -171,9 +171,6 @@ function Panel({ children, title }) {
   return (
     <div
       style={{
-        backgroundColor: '#fafafa',
-        padding: 20,
-        marginTop: 20,
         marginBottom: 100,
       }}
     >
@@ -276,6 +273,7 @@ function OutcomesTable({ models, labels, timeHorizon, title }) {
       <h3>{title}</h3>
       <table
         style={{
+          minWidth: 500,
           width: '100%',
           margin: 'auto',
           border: '1px solid #ccc',

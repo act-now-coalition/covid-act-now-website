@@ -5,7 +5,7 @@ import { Wrapper, Content } from './Footer.style';
 
 const Footer = ({ children }) => {
   return (
-    <Wrapper>
+    <Wrapper style={{ backgroundColor: "#F2F2F2" }}>
       <Content>
         <Typography variant="h5" component="h5">
           FAQ
