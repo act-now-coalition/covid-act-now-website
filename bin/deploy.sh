@@ -15,3 +15,4 @@ fi
 yarn build
 source creds.sh
 aws s3 sync --size-only --acl public-read  build/ s3://covid-actnow/
+echo Done deploying
