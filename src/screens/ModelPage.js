@@ -180,33 +180,6 @@ function ModelPage({ location, locationName }) {
         <h4>2 Months of Social Distancing, Then Stop</h4>
         <p> [coming soon]</p>
       </div>
-      <div
-        style={{
-          backgroundColor: '#fafafa',
-          padding: 20,
-          marginTop: 20,
-          textAlign: 'left',
-        }}
-      >
-        <h1>FAQ</h1>
-
-        <h3>What are are the current limitations of the model?</h3>
-        <ul>
-          <li> No adjustment for population density</li>
-          <li>
-            {' '}
-            No adjustment for inbound infection cases from outside of region{' '}
-          </li>
-          <li> Not node based analysis </li>
-        </ul>
-
-        <h3>How could the data change?</h3>
-        <p>
-          {' '}
-          Only a small fraction of the world has been infected. It’s a new
-          disease. Variables will change.
-        </p>
-      </div>
     </>
   );
 }

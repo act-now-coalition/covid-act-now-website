@@ -7,8 +7,9 @@ import ModelPage from 'screens/ModelPage';
 import HomePage from 'screens/HomePage';
 // import ComingSoon from 'screens/ComingSoon/ComingSoon';
 import AppBar from 'components/AppBar/AppBar';
-import theme from 'assets/theme';
 import Header from 'components/Header/Header';
+import Footer from 'components/Footer/Footer';
+import theme from 'assets/theme';
 
 export default function App() {
   return (
@@ -44,6 +45,7 @@ export default function App() {
               </Route>
             </Switch>
           </div>
+          <Footer />
         </BrowserRouter>
       </StylesProvider>
     </ThemeProvider>
