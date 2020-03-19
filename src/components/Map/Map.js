@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import USAMap from 'react-usa-map';
-import { Redirect } from 'react-router-dom';
+import React, { Component, useState } from 'react';
+import './../../App.css'; /* optional for styling like the :hover pseudo-class */
+import USAMap from "react-usa-map";
+import { Redirect } from "react-router-dom";
 
-import 'App.css'; /* optional for styling like the :hover pseudo-class */
-
-function Map() {
+function Map () {
   let [redirectTarget, setRedirectTarget] = useState();
 
   if (redirectTarget) {
@@ -12,49 +11,79 @@ function Map() {
   }
 
   /* mandatory */
-  let mapHandler = event => {
-    alert('No model yet');
+  let mapHandler = (event) => {
+    alert("No model yet");
   };
 
   /* optional customization of filling per state and calling custom callbacks per state */
   let statesCustomConfig = () => {
     return {
       CA: {
-        fill: 'rgba(1,1,1,0.7)',
+        fill: "rgba(1,1,1,0.7)",
         clickHandler: event => {
-          setRedirectTarget('/ca');
-        },
+          setRedirectTarget("/ca");
+        }
       },
       AK: {
-        fill: 'rgba(1,1,1,0.7)',
+        fill: "rgba(1,1,1,0.7)",
         clickHandler: event => {
-          setRedirectTarget('/ak');
-        },
+          setRedirectTarget("/ak");
+        }
       },
       FL: {
-        fill: 'rgba(1,1,1,0.7)',
+        fill: "rgba(1,1,1,0.7)",
         clickHandler: event => {
-          setRedirectTarget('/fl');
-        },
+          setRedirectTarget("/fl");
+        }
       },
       CO: {
-        fill: 'rgba(1,1,1,0.7)',
+        fill: "rgba(1,1,1,0.7)",
         clickHandler: event => {
-          setRedirectTarget('/co');
-        },
+          setRedirectTarget("/co");
+        }
       },
-      WA: {
-        fill: 'rgba(1,1,1,0.7)',
+      MO: {
+        fill: "rgba(1,1,1,0.7)",
         clickHandler: event => {
-          setRedirectTarget('/wa');
-        },
+          setRedirectTarget("/mo");
+        }
       },
+      NM: {
+        fill: "rgba(1,1,1,0.7)",
+        clickHandler: event => {
+          setRedirectTarget("/nm");
+        }
+      },
+      NV: {
+        fill: "rgba(1,1,1,0.7)",
+        clickHandler: event => {
+          setRedirectTarget("/nv");
+        }
+      },
+      NY: {
+        fill: "rgba(1,1,1,0.7)",
+        clickHandler: event => {
+          setRedirectTarget("/ny");
+        }
+      },
+      OR: {
+        fill: "rgba(1,1,1,0.7)",
+        clickHandler: event => {
+          setRedirectTarget("/or");
+        }
+      },
+      TX: {
+        fill: "rgba(1,1,1,0.7)",
+        clickHandler: event => {
+          setRedirectTarget("/tx");
+        }
+      }
     };
   };
 
   return (
     <div className="App">
-      <USAMap width="100%" customize={statesCustomConfig()} />
+      <USAMap width="100%" customize={statesCustomConfig()}   />
     </div>
   );
 }

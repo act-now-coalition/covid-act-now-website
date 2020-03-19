@@ -40,6 +40,24 @@ export default function App() {
               <Route path="/wa">
                 <ModelPage location="wa" locationName="Washington" />
               </Route>
+              <Route path="/mo">
+                <ModelPage location="mo" locationName="Montana" />
+              </Route>
+              <Route path="/nm">
+                <ModelPage location="nm" locationName="New Mexico" />
+              </Route>
+              <Route path="/ny">
+                <ModelPage location="ny" locationName="New York" />
+              </Route>
+              <Route path="/or">
+                <ModelPage location="or" locationName="Oregon" />
+              </Route>
+              <Route path="/tx">
+                <ModelPage location="tx" locationName="Texas" />
+              </Route>
+              <Route path="/nv">
+                <ModelPage location="nv" locationName="Nevada" />
+              </Route>
               <Route path="/">
                 <HomePage />
               </Route>

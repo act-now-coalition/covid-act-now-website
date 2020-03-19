@@ -19,6 +19,9 @@ function ModelPage({ location, locationName }) {
     twoWeek: new Model(modelDatas[3]),
     fourWeek: new Model(modelDatas[4]),
   };
+  let distancingPoorEnforcement = {
+    now: new Model(modelDatas[7])
+  };
   let contain = {
     now: new Model(modelDatas[2]),
     oneWeek: new Model(modelDatas[5]),
@@ -28,26 +31,32 @@ function ModelPage({ location, locationName }) {
   // Prep datasets for graphs
   let scenarioComparisonOverTime = duration => [
     baseline.getDataset(
-      'No Action (R0 = 2.6)',
-      'hospitalizations',
+      "No Action (R0 = 2.6)",
+      "hospitalizations",
       duration,
-      'red',
+      "red"
     ),
     distancing.now.getDataset(
-      'Distancing Today for 2 months (R0 = 1.4)',
-      'hospitalizations',
+      "Distancing Today for 2 Months, Strong Enforcement (R0 = 1.2)",
+      "hospitalizations",
       duration,
-      'blue',
+      "blue"
+    ),
+    distancingPoorEnforcement.now.getDataset(
+      "Distancing Today for 2 Months, Loose Enforcement (R0 = 1.6)",
+      "hospitalizations",
+      duration,
+      "orange"
     ),
     contain.now.getDataset(
-      'Wuhan level containment for 1 month (R0 = 0.4)',
-      'hospitalizations',
+      "Wuhan level containment for 1 month (R0 = 0.4)",
+      "hospitalizations",
       duration,
-      'green',
+      "green"
     ),
-    baseline.getDataset('Hospital Beds', 'beds', duration, 'black'),
+    baseline.getDataset("Hospital Beds", "beds", duration, "black")
   ];
-  let scenarioComparison = scenarioComparisonOverTime(80);
+  let scenarioComparison = scenarioComparisonOverTime(73);
 
   /*let distancingScenarios = [
     distancing.now.getDataset("Distancing Today for 2 months (R0 = 1.4)",
@@ -114,11 +123,12 @@ function ModelPage({ location, locationName }) {
 
         <OutcomesTable
           title="Outcomes within 2 months"
-          models={[baseline, distancing.now, contain.now]}
+          models={[baseline, distancing.now, distancingPoorEnforcement.now, contain.now]}
           labels={[
-            'Do Nothing',
-            '2 Months of Social Distancing, Starting Today*',
-            '1 Month of Wuhan Level Containment, Starting Today**',
+            "Do Nothing",
+            "2 Months of Social Distancing, Strong Enforcement, Starting Today*",
+            "2 Months of Social Distancing, Loose Enforcement, Starting Today*",
+            "1 Month of Wuhan Level Containment, Starting Today**"
           ]}
           timeHorizon={70}
         />
@@ -128,11 +138,12 @@ function ModelPage({ location, locationName }) {
             hospitals and improve interventions and treatments. Unless social
             distancing is implemented for 9 to 15 months, a second spike in
             disease may occur after social distancing is stopped"
-          models={[baseline, distancing.now, contain.now]}
+          models={[baseline, distancing.now, distancingPoorEnforcement.now, contain.now]}
           labels={[
-            'Do Nothing',
-            '2 Months of Social Distancing, Starting Today*',
-            '1 Month of Wuhan Level Containment, Starting Today**',
+            "Do Nothing",
+            "2 Months of Social Distancing, Strong Enforcement, Starting Today*",
+            "2 Months of Social Distancing, Loose Enforcement, Starting Today*",
+            "1 Month of Wuhan Level Containment, Starting Today**"
           ]}
           timeHorizon={190}
         />
@@ -144,42 +155,14 @@ function ModelPage({ location, locationName }) {
             distancing is implemented for 9 to 15 months, a second spike in
             disease may occur after social distancing is stopped.
           </li>
-          <li style={{ listStyleType: 'none' }}>
-            ** Assuming that a full containment policy (such as implemented in
-            Wuhan) is infeasible to implement in the USA for any longer than 1
-            month, for many regions the model predicts containment is no longer
-            possible. Even if containment is acheived, strict travel
-            restrictions and selective quarantine would need to remain in place
-            for many months thereafter to prevent reintroduction of the disease.
+          <li style={{ listStyleType: "none" }}>
+            ** Our models show that it would take approximately six weeks of
+            Wuhan Level Containment in order to fully contain. However, it is
+            unclear at this time how you could manage newly introduced
+            infections.
           </li>
         </ul>
       </Panel>
-
-      <div
-        style={{
-          backgroundColor: '#fafafa',
-          padding: 20,
-          marginTop: 20,
-          marginBottom: 100,
-        }}
-      >
-        <h2>Timing scenarios for interventions</h2>
-        <h4>1 Month of Wuhan Level Containment, Then Stop</h4>
-        {contain.now.cumulativeDead < baseline.cumulativeDead / 2 ? (
-          <OutcomesTable
-            models={[contain.now, contain.oneWeek, contain.twoWeek]}
-            labels={['Act now', 'Act in 1 week', 'Act in 2 weeks']}
-          />
-        ) : (
-          <>
-            Containment with 1 months of Wuhan Level Containment measures is not
-            possible
-          </>
-        )}
-
-        <h4>2 Months of Social Distancing, Then Stop</h4>
-        <p> [coming soon]</p>
-      </div>
     </>
   );
 }
@@ -200,11 +183,6 @@ function Panel({ children, title }) {
   );
 }
 
-/*
-<OutcomesTable
-          models={[distancing, flatten2wk, flatten1mo]}
-          labels={["Act now", "Act in 2 weeks", "Act in 4 weeks"]}
-        />*/
 function formatNumber(num) {
   return (Math.round(num / 1000) * 1000).toLocaleString();
 }
@@ -315,21 +293,13 @@ function OutcomesTable({ models, labels, timeHorizon, title }) {
           </tr>
         </thead>
         <tbody>
-          <OutcomesRow
-            model={models[0]}
-            label={labels[0]}
-            timeHorizon={timeHorizon}
-          />
-          <OutcomesRow
-            model={models[1]}
-            label={labels[1]}
-            timeHorizon={timeHorizon}
-          />
-          <OutcomesRow
-            model={models[2]}
-            label={labels[2]}
-            timeHorizon={timeHorizon}
-          />
+          { models.map((model, idx) =>
+            <OutcomesRow
+              model={model}
+              label={labels[idx]}
+              timeHorizon={timeHorizon}
+            />)
+          }
         </tbody>
       </table>
     </div>

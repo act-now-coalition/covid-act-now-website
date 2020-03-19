@@ -10,6 +10,8 @@
 
 # production
 /build
+/bin/creds.sh
+credentials.json
 
 # misc
 .DS_Store
