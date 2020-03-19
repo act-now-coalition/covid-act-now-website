@@ -26,7 +26,7 @@ export default function App() {
             {STATES.map((s, idx) => (
               <Route path={`/${s}`}>
                 <ModelPage
-                  location={`/${s.toLowerCase()}`}
+                  location={`/${s}`}
                   locationName={STATE_NAMES[idx]}
                 />
               </Route>
