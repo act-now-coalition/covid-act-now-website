@@ -7,6 +7,7 @@ import palette from 'assets/theme/palette';
 export const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  height: 64px;
   padding: 0 40px;
   * {
     font-size: 16px;

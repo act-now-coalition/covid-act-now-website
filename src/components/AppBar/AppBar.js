@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import _AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import { useHistory } from 'react-router-dom';
-import Header from 'components/Header/Header';
 
 import Logo from 'assets/images/logo';
 import { Wrapper, Left, StyledTabs, StyledTab } from './AppBar.style';
@@ -24,10 +23,10 @@ const AppBar = () => {
         <Left>
           <Logo />
           <Typography variant="button" component="p">
-            covid bay area
+            covid act now
           </Typography>
         </Left>
-        <StyledTabs value={panelIdx} onChange={handleChange}>
+        {/* <StyledTabs value={panelIdx} onChange={handleChange}>
           <StyledTab label="FAQ" disableRipple onClick={() => goTo('/faq')} />
           <StyledTab
             label="About"
@@ -40,9 +39,8 @@ const AppBar = () => {
             disableRipple
             onClick={() => goTo('/donate')}
           />
-        </StyledTabs>
+        </StyledTabs> */}
       </Wrapper>
-      <Header />
     </_AppBar>
   );
 };

@@ -15,7 +15,7 @@ export default {
   secondary: {
     contrastText: white,
     dark: colors.red[900],
-    main: colors.red.A700,
+    main: '#E80000',
     light: colors.red[600],
   },
   success: {

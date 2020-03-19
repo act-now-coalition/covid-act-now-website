@@ -5,9 +5,10 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import ModelPage from 'screens/ModelPage';
 import HomePage from 'screens/HomePage';
-import ComingSoon from 'screens/ComingSoon';
+// import ComingSoon from 'screens/ComingSoon/ComingSoon';
 import AppBar from 'components/AppBar/AppBar';
 import theme from 'assets/theme';
+import Header from 'components/Header/Header';
 
 export default function App() {
   return (
@@ -16,11 +17,13 @@ export default function App() {
         <CssBaseline />
         <BrowserRouter>
           <AppBar />
+          <Header />
+
           <div className="App" style={{ maxWidth: 900, margin: 'auto' }}>
             <Switch>
-              <Route path="/faq" component={ComingSoon} />
-              <Route path="/about" component={ComingSoon} />
-              <Route path="/donate" component={ComingSoon} />
+              {/* <Route path="/faq" component={ComingSoon} /> */}
+              {/* <Route path="/about" component={ComingSoon} /> */}
+              {/* <Route path="/donate" component={ComingSoon} /> */}
               <Route path="/ca">
                 <ModelPage location="ca" locationName="California" />
               </Route>
