@@ -78,13 +78,19 @@ export class Model {
     let overwhelmedIdx = this.dates.findIndex(
       (num, idx) => this.hospitalizations[idx] > this.beds[idx],
     );
-    let overwhelmedBy =
-      this.hospitalizations[overwhelmedIdx] - this.beds[overwhelmedIdx];
-    let dayDelta =
-      Math.floor(overwhelmedBy / (0.25 * this.hospitalizations[overwhelmedIdx]));
-    this.dateOverwhelmed = new Date(
-      this.dates[overwhelmedIdx].getTime() - dayDelta * DAYS,
-    );
+    if (overwhelmedIdx == -1) {
+      this.dateOverwhelmed = null;
+    } else {
+      let overwhelmedBy =
+        this.hospitalizations[overwhelmedIdx] - this.beds[overwhelmedIdx];
+      let dayDelta = Math.floor(
+        overwhelmedBy / (0.25 * this.hospitalizations[overwhelmedIdx]),
+      );
+      this.dateOverwhelmed = new Date(
+        this.dates[overwhelmedIdx].getTime() - dayDelta * DAYS,
+      );
+
+    }
 
     this.totalPopulation = _parseInt(data[0][COLUMNS.totalPopulation]);
   }

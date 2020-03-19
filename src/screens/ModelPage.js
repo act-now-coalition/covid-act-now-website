@@ -14,13 +14,17 @@ function ModelPage({ location, locationName }) {
   }
 
   // Initialize models
-  let baseline = new Model(modelDatas[0], {intervention: 'No Action', r0: 2.6});
+  let baseline = new Model(modelDatas[0], {
+    intervention: 'No Action, Current Trends Continue',
+    r0: 2.6,
+  });
   let distancing = {
-    now: new Model( modelDatas[1], {
-        intervention: 'Social Distancing, Strict Enforcement',
-        durationDays: 60,
-        r0: 1.2
-      }),
+    now: new Model(modelDatas[1], {
+      intervention:
+        'NorCal “Shelter-in-place”',
+      durationDays: 90,
+      r0: 1.2,
+    }),
     /*twoWeek: new Model( modelDatas[2], {
         intervention: 'Social Distancing, Strict Enforcement',
         durationDays: 60,
@@ -35,18 +39,18 @@ function ModelPage({ location, locationName }) {
       }),*/
   };
   let distancingPoorEnforcement = {
-     now: new Model( modelDatas[7], {
-        intervention: 'Social Distancing, Loose Enforcement',
-        durationDays: 60,
-        r0: 1.6
-      }),
+    now: new Model(modelDatas[7], {
+      intervention: 'TX/FL Distancing/Delay',
+      durationDays: 90,
+      r0: 1.6,
+    }),
   };
   let contain = {
-    now: new Model( modelDatas[4], {
-        intervention: 'Wuhan Level Containment',
-        durationDays: 30,
-        r0: 0.4
-      }),
+    now: new Model(modelDatas[2], {
+      intervention: 'Wuhan-style Lockdown',
+      durationDays: 60,
+      r0: 0.4,
+    }),
     /*oneWeek: new Model( modelDatas[5], {
         intervention: 'Wuhan Level Containment',
         durationDays: 30,
@@ -59,7 +63,7 @@ function ModelPage({ location, locationName }) {
         r0: 0.4,
         delayDays: 7
       }),*/
-    };
+  };
 
   // Prep datasets for graphs
   // short label: 'Distancing Today for 2 Months', 'Wuhan Level Containment for 1 Month'
@@ -70,13 +74,12 @@ function ModelPage({ location, locationName }) {
     contain.now.getDataset("hospitalizations", duration, "green"),
     baseline.getDataset("beds", duration, "black", "Hospital Beds")
   ];
-  let scenarioComparison = scenarioComparisonOverTime(60);
+  let scenarioComparison = scenarioComparisonOverTime(100);
 
   return (
     <>
       <Header locationName={locationName} />
       <div className="App" style={{ maxWidth: 900, margin: 'auto' }}>
-
         <Panel title="Impact of actions you can take">
           <div className="graphs-container">
             <LineGraph
@@ -111,12 +114,17 @@ function ModelPage({ location, locationName }) {
               backgroundColor: 'white',
             }}
           >
-            Estimated last day to act to ease/delay hospital overload:{' '}
-            <LastDatesToAct model={baseline} />
+            <h2>
+              <span style={{ fontWeight: 'normal' }}>
+                Point of no-return for intervention to prevent hospital
+                overload:
+              </span>{' '}
+              <LastDatesToAct model={baseline} />
+            </h2>
           </div>
 
           <OutcomesTable
-            title="Outcomes within 2 months"
+            title="Predicted Outcomes after 3 months"
             models={[
               baseline,
               distancing.now,
@@ -124,36 +132,32 @@ function ModelPage({ location, locationName }) {
               contain.now,
             ]}
             asterisk={['', '*', '*', '**']}
-            timeHorizon={70}
-          />
-          <OutcomesTable
-            title="Outcomes within 6 months"
-            subtitle="Delaying impact through social distancing buys us time to prepare
-              hospitals and improve interventions and treatments. Unless social
-              distancing is implemented for 9 to 15 months, a second spike in
-              disease may occur after social distancing is stopped"
-            models={[
-              baseline,
-              distancing.now,
-              distancingPoorEnforcement.now,
-              contain.now,
-            ]}
-            asterisk={['', '*', '*', '**']}
-            timeHorizon={190}
+            timeHorizon={100}
           />
 
           <ul style={{ textAlign: 'left', lineHeight: '2em' }}>
             <li style={{ listStyleType: 'none', marginBottom: 10 }}>
-              * Delaying impact through social distancing buys us time to
-              prepare hospitals and improve interventions and treatments. Unless
-              social distancing is implemented for 9 to 15 months, a second
-              spike in disease may occur after social distancing is stopped.
+              *{' '}
+              <b>
+                A second spike in disease may occur after social distancing is
+                stopped.
+              </b>{' '}
+              Interventions are important because they buy time to create surge
+              capacity in hospitals and develop therapeutic drugs that may have
+              potential to lower hospitalization and fatality rates from
+              COVID-19.{' '}
+              <a href="https://docs.google.com/document/d/1ETeXAfYOvArfLvlxExE0_xrO5M4ITC0_Am38CRusCko/edit#heading=h.vyhw42b7pgoj">
+                See full scenario definitions here.
+              </a>
             </li>
             <li style={{ listStyleType: 'none' }}>
-              ** Our models show that it would take approximately six weeks of
-              Wuhan Level Containment in order to fully contain. However, it is
+              ** Our models show that it would take at least 2 months of
+              Wuhan-style Lockdown to achieve full containment. However, it is
               unclear at this time how you could manage newly introduced
-              infections.
+              infections.{' '}
+              <a href="https://docs.google.com/document/d/1ETeXAfYOvArfLvlxExE0_xrO5M4ITC0_Am38CRusCko/edit#heading=h.vyhw42b7pgoj">
+                See full scenario definitions here.
+              </a>
             </li>
           </ul>
         </Panel>
@@ -176,12 +180,21 @@ function Panel({ children, title }) {
 }
 
 function formatNumber(num) {
-  return (Math.round(num / 1000) * 1000).toLocaleString();
+  if (num > 1000) {
+    return (Math.round(num / 1000) * 1000).toLocaleString();
+  } else if (num > 0) {
+    return "<1000";
+  } else {
+    return 0;
+  }
+
 }
 
 function formatBucketedNumber(num, total) {
   let percent = num / total;
-  if (percent < 0.7) {
+  if (percent < 0.01) {
+    return '<1%';
+  } else if (percent < 0.7) {
     return Math.round(percent * 100) + '%';
   } else {
     return '>70%';
@@ -313,7 +326,8 @@ function OutcomesRow({ model, label, timeHorizon }) {
       </td>
       {timeHorizon ? (
         <td>
-          {model.dateOverwhelmed < model.dateAfter(timeHorizon)
+          {model.dateOverwhelmed && (model.dateOverwhelmed <
+          model.dateAfter(timeHorizon))
             ? model.dateOverwhelmed.toDateString()
             : model.dateOverwhelmed
             ? 'outside time bound'

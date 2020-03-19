@@ -98,7 +98,7 @@ function downloadModel(auth, location, model) {
     (err, res) => {
       if (err) return console.log("The API returned an error: " + err);
       const rows = res.data.values;
-      fs.writeFile(`public/${location}.${model}.json`, JSON.stringify(rows), err => {
+      fs.writeFile(`public/data/${location}.${model}.json`, JSON.stringify(rows), err => {
         if (err) return console.error(err);
       });
     }
