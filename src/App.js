@@ -7,7 +7,6 @@ import ModelPage from 'screens/ModelPage';
 import HomePage from 'screens/HomePage';
 // import ComingSoon from 'screens/ComingSoon/ComingSoon';
 import AppBar from 'components/AppBar/AppBar';
-import Header from 'components/Header/Header';
 import Footer from 'components/Footer/Footer';
 import theme from 'assets/theme';
 
@@ -18,9 +17,6 @@ export default function App() {
         <CssBaseline />
         <BrowserRouter>
           <AppBar />
-          <Header />
-
-          <div className="App" style={{ maxWidth: 900, margin: 'auto' }}>
             <Switch>
               {/* <Route path="/faq" component={ComingSoon} /> */}
               {/* <Route path="/about" component={ComingSoon} /> */}
@@ -62,7 +58,6 @@ export default function App() {
                 <HomePage />
               </Route>
             </Switch>
-          </div>
           <Footer />
         </BrowserRouter>
       </StylesProvider>

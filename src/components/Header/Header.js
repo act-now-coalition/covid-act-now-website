@@ -3,13 +3,13 @@ import Typography from '@material-ui/core/Typography';
 
 import { Wrapper, Content, BlackBar, RedBar } from './Header.style';
 
-const Header = ({ children }) => {
+const Header = ({ children, locationName }) => {
   return (
     <Wrapper>
       <BlackBar>
         <Content>
           <Typography align="center" variant="h2" component="h2">
-            Why you must act now
+            Why you must act now{locationName? `: ${locationName}` : ''}
           </Typography>
           <Typography align="center" variant="subtitle1" component="p">
             Public leaders & health officials:

@@ -41,112 +41,120 @@ const COLUMNS = {
 const DAYS = 1000 * 60 * 60 * 24;
 
 export class Model {
-         constructor(data, parameters) {
-           this.intervention = parameters.intervention;
-           this.r0 = parameters.r0;
-           this.durationDays = parameters.durationDays || null /* permanent */;
-           this.delayDays = parameters.delayDays || 0;
+  constructor(data, parameters) {
+    this.intervention = parameters.intervention;
+    this.r0 = parameters.r0;
+    this.durationDays = parameters.durationDays || null /* permanent */;
+    this.delayDays = parameters.delayDays || 0;
 
-           let _parseInt = number => parseInt(number.replace(/,/g, '') || 0);
+    let _parseInt = number => parseInt(number.replace(/,/g, '') || 0);
 
-           this.dates = data.map(row => new Date(row[COLUMNS.date]));
-           this.dayZero = this.dates[0];
-           this.daysSinceDayZero = Math.floor(
-             (new Date().getTime() - this.dayZero.getTime()) / DAYS,
-           );
-           console.log(this.daysSinceDayZero);
+    this.dates = data.map(row => new Date(row[COLUMNS.date]));
+    this.dayZero = this.dates[0];
+    this.daysSinceDayZero = Math.floor(
+      (new Date().getTime() - this.dayZero.getTime()) / DAYS,
+    );
 
-           this.hospitalizations = data.map(row =>
-             _parseInt(row[COLUMNS.hospitalizations]),
-           );
-           this.beds = data.map(row => _parseInt(row[COLUMNS.beds]));
-           this.cumulativeDeaths = data.map(row =>
-             _parseInt(row[COLUMNS.cumulativeDeaths]),
-           );
-           this.cumulativeInfected = data.map(row =>
-             _parseInt(row[COLUMNS.cumulativeInfected]),
-           );
+    this.hospitalizations = data.map(row =>
+      _parseInt(row[COLUMNS.hospitalizations]),
+    );
+    this.beds = data.map(row => _parseInt(row[COLUMNS.beds]));
+    this.cumulativeDeaths = data.map(row =>
+      _parseInt(row[COLUMNS.cumulativeDeaths]),
+    );
+    this.cumulativeInfected = data.map(row =>
+      _parseInt(row[COLUMNS.cumulativeInfected]),
+    );
 
-           this.maxInfected = this.cumulativeInfected[
-             this.cumulativeInfected.length - 1
-           ];
-           this.cumulativeDead = this.cumulativeDeaths[
-             this.cumulativeDeaths.length - 1
-           ];
-           let overWhelmedAfter = this.dates.find(
-             (num, idx) => this.hospitalizations[idx] > this.beds[idx],
-           );
-           this.dateOverwhelmed = new Date(overWhelmedAfter.getTime() - 2*DAYS);
-           this.totalPopulation = _parseInt(data[0][COLUMNS.totalPopulation]);
-         }
+    this.maxInfected = this.cumulativeInfected[
+      this.cumulativeInfected.length - 1
+    ];
+    this.cumulativeDead = this.cumulativeDeaths[
+      this.cumulativeDeaths.length - 1
+    ];
 
-         get durationLabelMonths() {
-           if (this.durationDays) {
-             let months = Math.round(this.durationDays / 30);
-             return `${months} Month${months > 1 ? 's' : ''}`;
-           } else {
-             return ''; // permanent intervetion
-           }
-         }
+    // approximate the date when the hospitals will be overwhelmed
+    // assume r0~=2 => 25% daily case growth
+    let overwhelmedIdx = this.dates.findIndex(
+      (num, idx) => this.hospitalizations[idx] > this.beds[idx],
+    );
+    let overwhelmedBy =
+      this.hospitalizations[overwhelmedIdx] - this.beds[overwhelmedIdx];
+    let dayDelta =
+      Math.floor(overwhelmedBy / (0.25 * this.hospitalizations[overwhelmedIdx]));
+    this.dateOverwhelmed = new Date(
+      this.dates[overwhelmedIdx].getTime() - dayDelta * DAYS,
+    );
 
-         get delayLabelWeeks() {
-           if (this.delayDays) {
-             let weeks = Math.round(this.delayDays / 7);
-             return `Starting In ${weeks} Month${weeks > 1 ? 's' : ''}`;
-           } else {
-             return 'Starting Today';
-           }
-         }
+    this.totalPopulation = _parseInt(data[0][COLUMNS.totalPopulation]);
+  }
 
-         get label() {
-           let parts = [];
-           if (this.durationDays) {
-             parts.push(`${this.durationLabelMonths} of `);
-           }
-           parts.push(this.intervention);
-           if (this.delayDays) {
-             parts.push(`, ${this.delayLabelWeeks}`);
-           }
+  get durationLabelMonths() {
+    if (this.durationDays) {
+      let months = Math.round(this.durationDays / 30);
+      return `${months} Month${months > 1 ? 's' : ''}`;
+    } else {
+      return ''; // permanent intervetion
+    }
+  }
 
-           return parts.join('');
-         }
+  get delayLabelWeeks() {
+    if (this.delayDays) {
+      let weeks = Math.round(this.delayDays / 7);
+      return `Starting In ${weeks} Month${weeks > 1 ? 's' : ''}`;
+    } else {
+      return 'Starting Today';
+    }
+  }
 
-         get labelWithR0() {
-           return `${this.label} (R0=${this.r0})`;
-         }
+  get label() {
+    let parts = [];
+    if (this.durationDays) {
+      parts.push(`${this.durationLabelMonths} of `);
+    }
+    parts.push(this.intervention);
+    if (this.delayDays) {
+      parts.push(`, ${this.delayLabelWeeks}`);
+    }
 
-         get interventionEnd() {
-          return new Date(this.dayZero.getTime() + (this.daysSinceDayZero + this.durationDays) * DAYS);
-         }
+    return parts.join('');
+  }
 
-         idxForDay = day => Math.ceil(day / 4);
+  get labelWithR0() {
+    return `${this.label} (R0=${this.r0})`;
+  }
 
-         cumulativeInfectedAfter(days) {
-           return this.cumulativeInfected[this.idxForDay(days)];
-         }
-         cumulativeDeadAfter(days) {
-           return this.cumulativeDeaths[this.idxForDay(days)];
-         }
-         dateAfter(days) {
-           return this.dates[this.idxForDay(days)];
-         }
-         getColumn(columnName, days) {
-           return this.dates
-             .slice(0, Math.ceil(days / 4) + 1) //fixme!!!
-             .map((date, idx) => ({ x: date, y: this[columnName][idx] }));
-         }
+  get interventionEnd() {
+  return new Date(this.dayZero.getTime() + (this.daysSinceDayZero + this.durationDays) * DAYS);
+  }
 
-         getColumnAt(columnName, days) {
-           return this[columnName][this.idxForDay(days)];
-         }
+  idxForDay = day => Math.ceil(day / 4);
 
-         getDataset(columnName, duration, color, customLabel) {
-           console.log(duration + this.daysSinceDayZero);;
-           return {
-             label: customLabel ? customLabel : this.labelWithR0,
-             fill: false,
-             borderColor: color,
-             data: this.getColumn(columnName, duration + this.daysSinceDayZero),
-           };
-         }
-       }
+  cumulativeInfectedAfter(days) {
+    return this.cumulativeInfected[this.idxForDay(days)];
+  }
+  cumulativeDeadAfter(days) {
+    return this.cumulativeDeaths[this.idxForDay(days)];
+  }
+  dateAfter(days) {
+    return this.dates[this.idxForDay(days)];
+  }
+  getColumn(columnName, days) {
+    return this.dates
+      .slice(0, Math.ceil(days / 4) + 1) //fixme!!!
+      .map((date, idx) => ({ x: date, y: this[columnName][idx] }));
+  }
+
+  getColumnAt(columnName, days) {
+    return this[columnName][this.idxForDay(days)];
+  }
+
+  getDataset(columnName, duration, color, customLabel) {
+    return {
+      label: customLabel ? customLabel : this.labelWithR0,
+      fill: false,
+      borderColor: color,
+      data: this.getColumn(columnName, duration + this.daysSinceDayZero),
+    };
+  }
+}

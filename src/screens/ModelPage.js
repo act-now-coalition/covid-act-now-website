@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Line } from 'react-chartjs-2';
 import 'chartjs-plugin-annotation';
+import Header from 'components/Header/Header';
 
 import { useModelDatas, Model } from 'utils/model';
 
@@ -71,85 +72,92 @@ function ModelPage({ location, locationName }) {
   ];
   let scenarioComparison = scenarioComparisonOverTime(60);
 
-  console.log(scenarioComparison);
   return (
     <>
-      <h3>
-        <Link to="/">Back to map</Link>
-      </h3>
+      <Header locationName={locationName} />
+      <div className="App" style={{ maxWidth: 900, margin: 'auto' }}>
 
-      <h1>{locationName}</h1>
+        <Panel title="Impact of actions you can take">
+          <div className="graphs-container">
+            <LineGraph
+              title="Hospitalizations over time"
+              data={{ datasets: scenarioComparison }}
+              annotations={{
+                'Hospitals Overloaded': {
+                  on: baseline.dateOverwhelmed,
+                  yOffset: 50,
+                  xOffset: 30,
+                },
+                /* 'End Wuhan Level Containment ': {
+                  on: contain.now.interventionEnd,
+                  xOffset: -50,
+                  yOffset: 30,
+                },
+                'End Social Distancing': {
+                  on: distancing.now.interventionEnd,
+                  xOffset: 30,
+                  yOffset: 10,
+                },*/
+              }}
+            />
+          </div>
 
-      <Panel title="Impact of actions you can take">
-        <div class="graphs-container">
-          <LineGraph
-            title="Hospitalizations over time"
-            data={{ datasets: scenarioComparison }}
-            annotations={{
-              'Hospitals Overloaded': {
-                on: baseline.dateOverwhelmed,
-                yOffset: 50,
-                xOffset: 30,
-              },
-/*              'End Wuhan Level Containment ': {
-                on: contain.now.interventionEnd,
-                xOffset: -50,
-                yOffset: 30,
-              },
-              'End Social Distancing': {
-                on: distancing.now.interventionEnd,
-                xOffset: 30,
-                yOffset: 10,
-              },*/
+          <div
+            style={{
+              padding: 20,
+              border: '2px solid red',
+              marginBottom: 20,
+              marginTop: 40,
+              backgroundColor: 'white',
             }}
+          >
+            Estimated last day to act to ease/delay hospital overload:{' '}
+            <LastDatesToAct model={baseline} />
+          </div>
+
+          <OutcomesTable
+            title="Outcomes within 2 months"
+            models={[
+              baseline,
+              distancing.now,
+              distancingPoorEnforcement.now,
+              contain.now,
+            ]}
+            asterisk={['', '*', '*', '**']}
+            timeHorizon={70}
           />
-        </div>
+          <OutcomesTable
+            title="Outcomes within 6 months"
+            subtitle="Delaying impact through social distancing buys us time to prepare
+              hospitals and improve interventions and treatments. Unless social
+              distancing is implemented for 9 to 15 months, a second spike in
+              disease may occur after social distancing is stopped"
+            models={[
+              baseline,
+              distancing.now,
+              distancingPoorEnforcement.now,
+              contain.now,
+            ]}
+            asterisk={['', '*', '*', '**']}
+            timeHorizon={190}
+          />
 
-        <div
-          style={{
-            padding: 20,
-            border: '2px solid red',
-            marginBottom: 20,
-            marginTop: 40,
-            backgroundColor: 'white',
-          }}
-        >
-          Estimated last day to act to ease/delay hospital overload:{' '}
-          <LastDatesToAct model={baseline} />
-        </div>
-
-        <OutcomesTable
-          title="Outcomes within 2 months"
-          models={[baseline, distancing.now, distancingPoorEnforcement.now, contain.now]}
-          asterisk={['','*','*', '**']}
-          timeHorizon={70}
-        />
-        <OutcomesTable
-          title="Outcomes within 6 months"
-          subtitle="Delaying impact through social distancing buys us time to prepare
-            hospitals and improve interventions and treatments. Unless social
-            distancing is implemented for 9 to 15 months, a second spike in
-            disease may occur after social distancing is stopped"
-          models={[baseline, distancing.now, distancingPoorEnforcement.now, contain.now]}
-          asterisk={['','*','*', '**']}
-          timeHorizon={190}
-        />
-
-        <ul style={{ textAlign: 'left', lineHeight: '2em' }}>
-          <li style={{ listStyleType: 'none', marginBottom: 10 }}>
-            * Delaying impact through social distancing buys us time to prepare
-            hospitals and improve interventions and treatments. Unless social
-            distancing is implemented for 9 to 15 months, a second spike in
-            disease may occur after social distancing is stopped.
-          </li>
-          <li style={{ listStyleType: "none" }}>
-            ** Our models show that it would take approximately six weeks of
-            Wuhan Level Containment in order to fully contain. However, it is
-            unclear at this time how you could manage newly introduced
-            infections.
-          </li>
-        </ul>
-      </Panel>
+          <ul style={{ textAlign: 'left', lineHeight: '2em' }}>
+            <li style={{ listStyleType: 'none', marginBottom: 10 }}>
+              * Delaying impact through social distancing buys us time to
+              prepare hospitals and improve interventions and treatments. Unless
+              social distancing is implemented for 9 to 15 months, a second
+              spike in disease may occur after social distancing is stopped.
+            </li>
+            <li style={{ listStyleType: 'none' }}>
+              ** Our models show that it would take approximately six weeks of
+              Wuhan Level Containment in order to fully contain. However, it is
+              unclear at this time how you could manage newly introduced
+              infections.
+            </li>
+          </ul>
+        </Panel>
+      </div>
     </>
   );
 }
@@ -280,6 +288,7 @@ function OutcomesTable({ models, asterisk, timeHorizon, title }) {
         <tbody>
           {models.map((model, idx) => (
             <OutcomesRow
+              key={idx}
               model={model}
               label={`${model.label}${asterisk[idx]}`}
               timeHorizon={timeHorizon}

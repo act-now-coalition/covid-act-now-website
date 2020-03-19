@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import _AppBar from '@material-ui/core/AppBar';
+import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import { useHistory, Link } from 'react-router-dom';
 import Logo from 'assets/images/logo';
 import { Wrapper, Left, StyledTabs, StyledTab } from './AppBar.style';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-const AppBar = () => {
+const _AppBar = () => {
   const history = useHistory();
 
   const [panelIdx, setPanelIdx] = useState(2);
@@ -17,11 +18,23 @@ const AppBar = () => {
   const goTo = route => history.push(route);
 
   return (
-    <_AppBar position="sticky">
+    <AppBar position="sticky">
       <Wrapper>
         <Left>
-          <Logo onClick={() => goTo('/')} />
-          <Typography variant="button" component={Link} to="/" style={{textDecoration: 'none', color: 'black'}}>
+          <Switch>
+            <Route path="/" exact>
+              <Logo onClick={() => goTo('/')} />
+            </Route>
+            <Route>
+              <Link to="/">Back to map</Link>
+            </Route>
+          </Switch>
+          <Typography
+            variant="button"
+            component={Link}
+            to="/"
+            style={{ textDecoration: 'none', color: 'black' }}
+          >
             covid act now
           </Typography>
         </Left>
@@ -40,8 +53,8 @@ const AppBar = () => {
           />
         </StyledTabs> */}
       </Wrapper>
-    </_AppBar>
+    </AppBar>
   );
 };
 
-export default AppBar;
+export default _AppBar;
