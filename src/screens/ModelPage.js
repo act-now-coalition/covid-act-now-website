@@ -48,7 +48,7 @@ function ModelPage({ location, locationName }) {
   let contain = {
     now: new Model(modelDatas[2], {
       intervention: 'Wuhan-style Lockdown',
-      durationDays: 60,
+      durationDays: 90,
       r0: 0.4,
     }),
     /*oneWeek: new Model( modelDatas[5], {
@@ -80,7 +80,7 @@ function ModelPage({ location, locationName }) {
     <>
       <Header locationName={locationName} />
       <div className="App" style={{ maxWidth: 900, margin: 'auto' }}>
-        <Panel title="Impact of actions you can take">
+        <Panel>
           <div className="graphs-container">
             <LineGraph
               title="Hospitalizations over time"
@@ -124,7 +124,7 @@ function ModelPage({ location, locationName }) {
           </div>
 
           <OutcomesTable
-            title="Predicted Outcomes after 3 months"
+            title="Predicted Outcomes after 3 Months"
             models={[
               baseline,
               distancingPoorEnforcement.now,
@@ -162,6 +162,11 @@ function ModelPage({ location, locationName }) {
             </li>
           </ul>
         </Panel>
+        <h3 style={{ textAlign: 'center', paddingTop:20, paddingBottom:20, border: '1px solid #ccc'  }}>
+          <a href="https://forms.gle/Dn2cjNMJxKyrwY4J9">Sign up</a> to stay up
+          to date on our tool as we improve it's data-set, models, and
+          capabilities.
+        </h3>
       </div>
     </>
   );
@@ -171,10 +176,8 @@ function Panel({ children, title }) {
   return (
     <div
       style={{
-        marginBottom: 100,
       }}
     >
-      <h2>{title}</h2>
       {children}
     </div>
   );
