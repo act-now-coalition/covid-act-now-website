@@ -9,6 +9,8 @@ import HomePage from 'screens/HomePage';
 import AppBar from 'components/AppBar/AppBar';
 import Footer from 'components/Footer/Footer';
 import theme from 'assets/theme';
+const STATES = ["AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"];
+const STATE_NAMES = ["Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
 
 export default function App() {
   return (
@@ -17,47 +19,22 @@ export default function App() {
         <CssBaseline />
         <BrowserRouter>
           <AppBar />
-            <Switch>
-              {/* <Route path="/faq" component={ComingSoon} /> */}
-              {/* <Route path="/about" component={ComingSoon} /> */}
-              {/* <Route path="/donate" component={ComingSoon} /> */}
-              <Route path="/ca">
-                <ModelPage location="ca" locationName="California" />
+          <Switch>
+            {/* <Route path="/faq" component={ComingSoon} /> */}
+            {/* <Route path="/about" component={ComingSoon} /> */}
+            {/* <Route path="/donate" component={ComingSoon} /> */}
+            {STATES.map((s, idx) => (
+              <Route path={`/${s}`}>
+                <ModelPage
+                  location={`/${s.toLowerCase()}`}
+                  locationName={STATE_NAMES[idx]}
+                />
               </Route>
-              <Route path="/ak">
-                <ModelPage location="ak" locationName="Alaska" />
-              </Route>
-              <Route path="/fl">
-                <ModelPage location="fl" locationName="Florida" />
-              </Route>
-              <Route path="/co">
-                <ModelPage location="co" locationName="Colorado" />
-              </Route>
-              <Route path="/wa">
-                <ModelPage location="wa" locationName="Washington" />
-              </Route>
-              <Route path="/mo">
-                <ModelPage location="mo" locationName="Montana" />
-              </Route>
-              <Route path="/nm">
-                <ModelPage location="nm" locationName="New Mexico" />
-              </Route>
-              <Route path="/ny">
-                <ModelPage location="ny" locationName="New York" />
-              </Route>
-              <Route path="/or">
-                <ModelPage location="or" locationName="Oregon" />
-              </Route>
-              <Route path="/tx">
-                <ModelPage location="tx" locationName="Texas" />
-              </Route>
-              <Route path="/nv">
-                <ModelPage location="nv" locationName="Nevada" />
-              </Route>
-              <Route path="/">
-                <HomePage />
-              </Route>
-            </Switch>
+            ))}
+            <Route path="/">
+              <HomePage />
+            </Route>
+          </Switch>
           <Footer />
         </BrowserRouter>
       </StylesProvider>
