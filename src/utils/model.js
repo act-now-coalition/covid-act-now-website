@@ -38,20 +38,33 @@ const COLUMNS = {
   date: 0
 };
 
+const DAYS = 1000 * 60 * 60 * 24;
+
 export class Model {
-         constructor(data) {
-           let _parseInt = number => parseInt(number.replace(/,/g, "") || 0);
+         constructor(data, parameters) {
+           this.intervention = parameters.intervention;
+           this.r0 = parameters.r0;
+           this.durationDays = parameters.durationDays || null /* permanent */;
+           this.delayDays = parameters.delayDays || 0;
+
+           let _parseInt = number => parseInt(number.replace(/,/g, '') || 0);
 
            this.dates = data.map(row => new Date(row[COLUMNS.date]));
+           this.dayZero = this.dates[0];
+           this.daysSinceDayZero = Math.floor(
+             (new Date().getTime() - this.dayZero.getTime()) / DAYS,
+           );
+           console.log(this.daysSinceDayZero);
+
            this.hospitalizations = data.map(row =>
-             _parseInt(row[COLUMNS.hospitalizations])
+             _parseInt(row[COLUMNS.hospitalizations]),
            );
            this.beds = data.map(row => _parseInt(row[COLUMNS.beds]));
            this.cumulativeDeaths = data.map(row =>
-             _parseInt(row[COLUMNS.cumulativeDeaths])
+             _parseInt(row[COLUMNS.cumulativeDeaths]),
            );
            this.cumulativeInfected = data.map(row =>
-             _parseInt(row[COLUMNS.cumulativeInfected])
+             _parseInt(row[COLUMNS.cumulativeInfected]),
            );
 
            this.maxInfected = this.cumulativeInfected[
@@ -60,10 +73,50 @@ export class Model {
            this.cumulativeDead = this.cumulativeDeaths[
              this.cumulativeDeaths.length - 1
            ];
-           this.dateOverwhelmed = this.dates.find(
-             (num, idx) => this.hospitalizations[idx] > this.beds[idx]
+           let overWhelmedAfter = this.dates.find(
+             (num, idx) => this.hospitalizations[idx] > this.beds[idx],
            );
+           this.dateOverwhelmed = new Date(overWhelmedAfter.getTime() - 2*DAYS);
            this.totalPopulation = _parseInt(data[0][COLUMNS.totalPopulation]);
+         }
+
+         get durationLabelMonths() {
+           if (this.durationDays) {
+             let months = Math.round(this.durationDays / 30);
+             return `${months} Month${months > 1 ? 's' : ''}`;
+           } else {
+             return ''; // permanent intervetion
+           }
+         }
+
+         get delayLabelWeeks() {
+           if (this.delayDays) {
+             let weeks = Math.round(this.delayDays / 7);
+             return `Starting In ${weeks} Month${weeks > 1 ? 's' : ''}`;
+           } else {
+             return 'Starting Today';
+           }
+         }
+
+         get label() {
+           let parts = [];
+           if (this.durationDays) {
+             parts.push(`${this.durationLabelMonths} of `);
+           }
+           parts.push(this.intervention);
+           if (this.delayDays) {
+             parts.push(`, ${this.delayLabelWeeks}`);
+           }
+
+           return parts.join('');
+         }
+
+         get labelWithR0() {
+           return `${this.label} (R0=${this.r0})`;
+         }
+
+         get interventionEnd() {
+          return new Date(this.dayZero.getTime() + (this.daysSinceDayZero + this.durationDays) * DAYS);
          }
 
          idxForDay = day => Math.ceil(day / 4);
@@ -79,7 +132,7 @@ export class Model {
          }
          getColumn(columnName, days) {
            return this.dates
-             .slice(0, Math.ceil(days / 4))
+             .slice(0, Math.ceil(days / 4) + 1) //fixme!!!
              .map((date, idx) => ({ x: date, y: this[columnName][idx] }));
          }
 
@@ -87,12 +140,13 @@ export class Model {
            return this[columnName][this.idxForDay(days)];
          }
 
-         getDataset(label, columnName, duration, color) {
+         getDataset(columnName, duration, color, customLabel) {
+           console.log(duration + this.daysSinceDayZero);;
            return {
-             label,
+             label: customLabel ? customLabel : this.labelWithR0,
              fill: false,
              borderColor: color,
-             data: this.getColumn(columnName, duration)
+             data: this.getColumn(columnName, duration + this.daysSinceDayZero),
            };
          }
        }

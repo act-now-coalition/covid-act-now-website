@@ -13,68 +13,65 @@ function ModelPage({ location, locationName }) {
   }
 
   // Initialize models
-  let baseline = new Model(modelDatas[0]);
+  let baseline = new Model(modelDatas[0], {intervention: 'No Action', r0: 2.6});
   let distancing = {
-    now: new Model(modelDatas[1]),
-    twoWeek: new Model(modelDatas[3]),
-    fourWeek: new Model(modelDatas[4]),
+    now: new Model( modelDatas[1], {
+        intervention: 'Social Distancing, Strict Enforcement',
+        durationDays: 60,
+        r0: 1.2
+      }),
+    /*twoWeek: new Model( modelDatas[2], {
+        intervention: 'Social Distancing, Strict Enforcement',
+        durationDays: 60,
+        r0: 1.2,
+        delayDays: 14
+      }),
+    fourWeek: new Model( modelDatas[3], {
+        intervention: 'Social Distancing, Strict Enforcement',
+        durationDays: 60,
+        r0: 1.2,
+        delayDays: 7
+      }),*/
   };
   let distancingPoorEnforcement = {
-    now: new Model(modelDatas[7])
+     now: new Model( modelDatas[7], {
+        intervention: 'Social Distancing, Loose Enforcement',
+        durationDays: 60,
+        r0: 1.6
+      }),
   };
   let contain = {
-    now: new Model(modelDatas[2]),
-    oneWeek: new Model(modelDatas[5]),
-    twoWeek: new Model(modelDatas[6]),
-  };
+    now: new Model( modelDatas[4], {
+        intervention: 'Wuhan Level Containment',
+        durationDays: 30,
+        r0: 0.4
+      }),
+    /*oneWeek: new Model( modelDatas[5], {
+        intervention: 'Wuhan Level Containment',
+        durationDays: 30,
+        r0: 0.4,
+        delayDays: 7
+      }),
+    twoWeek: new Model( modelDatas[6], {
+        intervention: 'Wuhan Level Containment',
+        durationDays: 30,
+        r0: 0.4,
+        delayDays: 7
+      }),*/
+    };
 
   // Prep datasets for graphs
+  // short label: 'Distancing Today for 2 Months', 'Wuhan Level Containment for 1 Month'
   let scenarioComparisonOverTime = duration => [
-    baseline.getDataset(
-      "No Action (R0 = 2.6)",
-      "hospitalizations",
-      duration,
-      "red"
-    ),
-    distancing.now.getDataset(
-      "Distancing Today for 2 Months, Strong Enforcement (R0 = 1.2)",
-      "hospitalizations",
-      duration,
-      "blue"
-    ),
-    distancingPoorEnforcement.now.getDataset(
-      "Distancing Today for 2 Months, Loose Enforcement (R0 = 1.6)",
-      "hospitalizations",
-      duration,
-      "orange"
-    ),
-    contain.now.getDataset(
-      "Wuhan level containment for 1 month (R0 = 0.4)",
-      "hospitalizations",
-      duration,
-      "green"
-    ),
-    baseline.getDataset("Hospital Beds", "beds", duration, "black")
+    baseline.getDataset("hospitalizations", duration, "red"),
+    distancing.now.getDataset("hospitalizations", duration, "blue"),
+    distancingPoorEnforcement.now.getDataset("hospitalizations", duration, "orange"),
+    contain.now.getDataset("hospitalizations", duration, "green"),
+    baseline.getDataset("beds", duration, "black", "Hospital Beds")
   ];
-  let scenarioComparison = scenarioComparisonOverTime(73);
+  let scenarioComparison = scenarioComparisonOverTime(60);
 
-  /*let distancingScenarios = [
-    distancing.now.getDataset("Distancing Today for 2 months (R0 = 1.4)",
-      "hospitalizations", 180, "green"),
-    distancing.twoWeek.getDataset("Distancing in 2 weeks for 2 months (R0 = 1.4)",
-      "hospitalizations", 180, "yellow"),
-    distancing.fourWeek.getDataset("Distancing in 4 weeks for 2 months (R0 = 1.4)",
-      "hospitalizations", 180, "red"),
-  ];
-  let containScenarios = [
-    contain.now.getDataset("Wuhan Level Containment for 1 month (R0 = 0.4)",
-      "hospitalizations", 180, "green"),
-    contain.oneWeek.getDataset("Wuhan Level Containment for 1 month after 1wk (R0 = 0.4)",
-      "hospitalizations", 180, "yellow"),
-    contain.twoWeek.getDataset("Wuhan Level Containment for 1 month after 2wk(R0 = 0.4)",
-      "hospitalizations", 180, "red"),
-  ];*/
-
+  console.log(scenarioComparison);
   return (
     <>
       <h3>
@@ -94,16 +91,16 @@ function ModelPage({ location, locationName }) {
                 yOffset: 50,
                 xOffset: 30,
               },
-              'End Wuhan Level Containment ': {
-                on: new Date('April 17 2020'),
+/*              'End Wuhan Level Containment ': {
+                on: contain.now.interventionEnd,
                 xOffset: -50,
                 yOffset: 30,
               },
               'End Social Distancing': {
-                on: new Date('May 17 2020'),
+                on: distancing.now.interventionEnd,
                 xOffset: 30,
                 yOffset: 10,
-              },
+              },*/
             }}
           />
         </div>
@@ -124,12 +121,7 @@ function ModelPage({ location, locationName }) {
         <OutcomesTable
           title="Outcomes within 2 months"
           models={[baseline, distancing.now, distancingPoorEnforcement.now, contain.now]}
-          labels={[
-            "Do Nothing",
-            "2 Months of Social Distancing, Strong Enforcement, Starting Today*",
-            "2 Months of Social Distancing, Loose Enforcement, Starting Today*",
-            "1 Month of Wuhan Level Containment, Starting Today**"
-          ]}
+          asterisk={['','*','*', '**']}
           timeHorizon={70}
         />
         <OutcomesTable
@@ -139,12 +131,7 @@ function ModelPage({ location, locationName }) {
             distancing is implemented for 9 to 15 months, a second spike in
             disease may occur after social distancing is stopped"
           models={[baseline, distancing.now, distancingPoorEnforcement.now, contain.now]}
-          labels={[
-            "Do Nothing",
-            "2 Months of Social Distancing, Strong Enforcement, Starting Today*",
-            "2 Months of Social Distancing, Loose Enforcement, Starting Today*",
-            "1 Month of Wuhan Level Containment, Starting Today**"
-          ]}
+          asterisk={['','*','*', '**']}
           timeHorizon={190}
         />
 
@@ -267,7 +254,7 @@ function LineGraph({ data, maxY, annotations, title }) {
   );
 }
 
-function OutcomesTable({ models, labels, timeHorizon, title }) {
+function OutcomesTable({ models, asterisk, timeHorizon, title }) {
   return (
     <div style={{ overflow: 'scroll' }}>
       <h3>{title}</h3>
@@ -291,13 +278,13 @@ function OutcomesTable({ models, labels, timeHorizon, title }) {
           </tr>
         </thead>
         <tbody>
-          { models.map((model, idx) =>
+          {models.map((model, idx) => (
             <OutcomesRow
               model={model}
-              label={labels[idx]}
+              label={`${model.label}${asterisk[idx]}`}
               timeHorizon={timeHorizon}
-            />)
-          }
+            />
+          ))}
         </tbody>
       </table>
     </div>
