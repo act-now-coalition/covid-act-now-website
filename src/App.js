@@ -17,15 +17,6 @@ export default function App() {
         <BrowserRouter>
           <AppBar />
           <div className="App" style={{ maxWidth: 900, margin: 'auto' }}>
-            <h1>Coronavirus: Why You Must Act Now</h1>
-            <h3>
-              Political Leaders, Public Health Officials: The only thing that
-              matters right now is the speed of your response
-            </h3>
-            <h3 style={{ color: 'red' }}>
-              This model is intended to help make fast decisions, not predict
-              the future
-            </h3>
             <Switch>
               <Route path="/faq" component={ComingSoon} />
               <Route path="/about" component={ComingSoon} />

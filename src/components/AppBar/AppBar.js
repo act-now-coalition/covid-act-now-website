@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import _AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import { useHistory } from 'react-router-dom';
+import Header from 'components/Header/Header';
 
 import Logo from 'assets/images/logo';
 import { Wrapper, Left, StyledTabs, StyledTab } from './AppBar.style';
@@ -18,7 +19,7 @@ const AppBar = () => {
   const goTo = route => history.push(route);
 
   return (
-    <_AppBar position="static">
+    <_AppBar position="sticky">
       <Wrapper>
         <Left>
           <Logo />
@@ -41,6 +42,7 @@ const AppBar = () => {
           />
         </StyledTabs>
       </Wrapper>
+      <Header />
     </_AppBar>
   );
 };
