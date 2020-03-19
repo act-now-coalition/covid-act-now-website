@@ -83,7 +83,7 @@ function Map () {
 
   return (
     <div className="App">
-      <USAMap width="100%" customize={statesCustomConfig()}   />
+      <USAMap width="100%" height="auto" customize={statesCustomConfig()}   />
     </div>
   );
 }
