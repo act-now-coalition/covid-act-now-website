@@ -3,8 +3,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import ModelPage from './ModelPage';
-import HomePage from './HomePage';
+import ModelPage from 'screens/ModelPage';
+import HomePage from 'screens/HomePage';
 import theme from 'assets/theme';
 
 export default function App() {

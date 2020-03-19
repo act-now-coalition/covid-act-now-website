@@ -1,12 +1,11 @@
 import React from 'react';
-import { Line } from "react-chartjs-2";
 import { Link } from 'react-router-dom';
-import './App.css';
-import "chartjs-plugin-annotation";
-import {useModelDatas, Model} from './model';
+import { Line } from 'react-chartjs-2';
+import 'chartjs-plugin-annotation';
 
+import { useModelDatas, Model } from 'utils/model';
 
-function ModelPage({location, locationName}) {
+function ModelPage({ location, locationName }) {
   let modelDatas = useModelDatas(location);
 
   if (!modelDatas) {
@@ -28,12 +27,25 @@ function ModelPage({location, locationName}) {
 
   // Prep datasets for graphs
   let scenarioComparisonOverTime = duration => [
-    baseline.getDataset("No Action (R0 = 2.6)", "hospitalizations", duration, "red"),
-    distancing.now.getDataset("Distancing Today for 2 months (R0 = 1.4)",
-      "hospitalizations", duration,"blue"),
-    contain.now.getDataset("Wuhan level containment for 1 month (R0 = 0.4)",
-      "hospitalizations", duration, "green"),
-    baseline.getDataset("Hospital Beds", "beds", duration, "black")
+    baseline.getDataset(
+      'No Action (R0 = 2.6)',
+      'hospitalizations',
+      duration,
+      'red',
+    ),
+    distancing.now.getDataset(
+      'Distancing Today for 2 months (R0 = 1.4)',
+      'hospitalizations',
+      duration,
+      'blue',
+    ),
+    contain.now.getDataset(
+      'Wuhan level containment for 1 month (R0 = 0.4)',
+      'hospitalizations',
+      duration,
+      'green',
+    ),
+    baseline.getDataset('Hospital Beds', 'beds', duration, 'black'),
   ];
   let scenarioComparison = scenarioComparisonOverTime(80);
 
@@ -54,7 +66,6 @@ function ModelPage({location, locationName}) {
       "hospitalizations", 180, "red"),
   ];*/
 
-
   return (
     <>
       <h3>
@@ -69,21 +80,21 @@ function ModelPage({location, locationName}) {
             title="Hospitalizations over time"
             data={{ datasets: scenarioComparison }}
             annotations={{
-              "Hospitals Overloaded": {
+              'Hospitals Overloaded': {
                 on: baseline.dateOverwhelmed,
                 yOffset: 50,
-                xOffset: 30
-              },
-              "End Wuhan Level Containment ": {
-                on: new Date("April 17 2020"),
-                xOffset: -50,
-                yOffset: 30
-              },
-              "End Social Distancing": {
-                on: new Date("May 17 2020"),
                 xOffset: 30,
-                yOffset: 10
-              }
+              },
+              'End Wuhan Level Containment ': {
+                on: new Date('April 17 2020'),
+                xOffset: -50,
+                yOffset: 30,
+              },
+              'End Social Distancing': {
+                on: new Date('May 17 2020'),
+                xOffset: 30,
+                yOffset: 10,
+              },
             }}
           />
         </div>
@@ -91,13 +102,13 @@ function ModelPage({location, locationName}) {
         <div
           style={{
             padding: 20,
-            border: "1px solid red",
+            border: '1px solid red',
             marginBottom: 20,
             marginTop: 40,
-            backgroundColor: "white"
+            backgroundColor: 'white',
           }}
         >
-          Estimated last day to act to ease/delay hospital overload:{" "}
+          Estimated last day to act to ease/delay hospital overload:{' '}
           <LastDatesToAct model={baseline} />
         </div>
 
@@ -105,9 +116,9 @@ function ModelPage({location, locationName}) {
           title="Outcomes within 2 months"
           models={[baseline, distancing.now, contain.now]}
           labels={[
-            "Do Nothing",
-            "2 Months of Social Distancing, Starting Today*",
-            "1 Month of Wuhan Level Containment, Starting Today**"
+            'Do Nothing',
+            '2 Months of Social Distancing, Starting Today*',
+            '1 Month of Wuhan Level Containment, Starting Today**',
           ]}
           timeHorizon={70}
         />
@@ -119,21 +130,21 @@ function ModelPage({location, locationName}) {
             disease may occur after social distancing is stopped"
           models={[baseline, distancing.now, contain.now]}
           labels={[
-            "Do Nothing",
-            "2 Months of Social Distancing, Starting Today*",
-            "1 Month of Wuhan Level Containment, Starting Today**"
+            'Do Nothing',
+            '2 Months of Social Distancing, Starting Today*',
+            '1 Month of Wuhan Level Containment, Starting Today**',
           ]}
           timeHorizon={190}
         />
 
-        <ul style={{ textAlign: "left", lineHeight: "2em" }}>
-          <li style={{ listStyleType: "none", marginBottom: 10 }}>
+        <ul style={{ textAlign: 'left', lineHeight: '2em' }}>
+          <li style={{ listStyleType: 'none', marginBottom: 10 }}>
             * Delaying impact through social distancing buys us time to prepare
             hospitals and improve interventions and treatments. Unless social
             distancing is implemented for 9 to 15 months, a second spike in
             disease may occur after social distancing is stopped.
           </li>
-          <li style={{ listStyleType: "none" }}>
+          <li style={{ listStyleType: 'none' }}>
             ** Assuming that a full containment policy (such as implemented in
             Wuhan) is infeasible to implement in the USA for any longer than 1
             month, for many regions the model predicts containment is no longer
@@ -146,10 +157,10 @@ function ModelPage({location, locationName}) {
 
       <div
         style={{
-          backgroundColor: "#fafafa",
+          backgroundColor: '#fafafa',
           padding: 20,
           marginTop: 20,
-          marginBottom: 100
+          marginBottom: 100,
         }}
       >
         <h2>Timing scenarios for interventions</h2>
@@ -157,7 +168,7 @@ function ModelPage({location, locationName}) {
         {contain.now.cumulativeDead < baseline.cumulativeDead / 2 ? (
           <OutcomesTable
             models={[contain.now, contain.oneWeek, contain.twoWeek]}
-            labels={["Act now", "Act in 1 week", "Act in 2 weeks"]}
+            labels={['Act now', 'Act in 1 week', 'Act in 2 weeks']}
           />
         ) : (
           <>
@@ -171,10 +182,10 @@ function ModelPage({location, locationName}) {
       </div>
       <div
         style={{
-          backgroundColor: "#fafafa",
+          backgroundColor: '#fafafa',
           padding: 20,
           marginTop: 20,
-          textAlign: "left"
+          textAlign: 'left',
         }}
       >
         <h1>FAQ</h1>
@@ -183,15 +194,15 @@ function ModelPage({location, locationName}) {
         <ul>
           <li> No adjustment for population density</li>
           <li>
-            {" "}
-            No adjustment for inbound infection cases from outside of region{" "}
+            {' '}
+            No adjustment for inbound infection cases from outside of region{' '}
           </li>
           <li> Not node based analysis </li>
         </ul>
 
         <h3>How could the data change?</h3>
         <p>
-          {" "}
+          {' '}
           Only a small fraction of the world has been infected. It’s a new
           disease. Variables will change.
         </p>
@@ -200,16 +211,20 @@ function ModelPage({location, locationName}) {
   );
 }
 
-function Panel ({children, title}) {
+function Panel({ children, title }) {
   return (
-    <div style={{
-          backgroundColor: "#fafafa",
-          padding: 20,
-          marginTop: 20,
-          marginBottom: 100}}>
+    <div
+      style={{
+        backgroundColor: '#fafafa',
+        padding: 20,
+        marginTop: 20,
+        marginBottom: 100,
+      }}
+    >
       <h2>{title}</h2>
       {children}
-    </div>);
+    </div>
+  );
 }
 
 /*
@@ -218,39 +233,39 @@ function Panel ({children, title}) {
           labels={["Act now", "Act in 2 weeks", "Act in 4 weeks"]}
         />*/
 function formatNumber(num) {
-  return (Math.round(num/1000) * 1000).toLocaleString();
+  return (Math.round(num / 1000) * 1000).toLocaleString();
 }
 
 function formatBucketedNumber(num, total) {
   let percent = num / total;
-  if (percent < .7) {
-    return Math.round(percent*100) + "%";
+  if (percent < 0.7) {
+    return Math.round(percent * 100) + '%';
   } else {
-    return ">70%";
+    return '>70%';
   }
 }
 
-function LineGraph({data, maxY, annotations, title}) {
+function LineGraph({ data, maxY, annotations, title }) {
   let annotationConfigs = [];
   annotations = annotations || {};
   for (let label in annotations) {
     annotationConfigs.push({
-      type: "line",
-      mode: "vertical",
-      scaleID: "x-axis-0",
+      type: 'line',
+      mode: 'vertical',
+      scaleID: 'x-axis-0',
       value: annotations[label].on,
-      borderColor: "gray",
+      borderColor: 'gray',
       borderWidth: 1,
       label: {
-        backgroundColor: "rgba(0,0,0,0.1)",
-        fontStyle: "normal",
-        fontColor: "black",
+        backgroundColor: 'rgba(0,0,0,0.1)',
+        fontStyle: 'normal',
+        fontColor: 'black',
         enabled: true,
-        position: "top",
+        position: 'top',
         content: label,
         xAdjust: annotations[label].xOffset || 0,
-        yAdjust: annotations[label].yOffset || 0
-      }
+        yAdjust: annotations[label].yOffset || 0,
+      },
     });
   }
 
@@ -263,70 +278,65 @@ function LineGraph({data, maxY, annotations, title}) {
         height={400}
         options={{
           annotation: {
-            drawTime: "afterDatasetsDraw",
-            annotations: annotationConfigs
+            drawTime: 'afterDatasetsDraw',
+            annotations: annotationConfigs,
           },
           hover: {
-            intersect: false
+            intersect: false,
           },
           tooltips: {
-            mode: "index"
+            mode: 'index',
           },
           maintainAspectRatio: false,
           scales: {
             yAxes: [
               {
-                type: "linear",
+                type: 'linear',
                 ticks: {
                   max: maxY,
                   callback: function(value, index, values) {
                     return formatNumber(value);
-                  }
-                }
-              }
+                  },
+                },
+              },
             ],
             xAxes: [
               {
-                type: "time",
+                type: 'time',
                 time: {
                   displayFormats: {
-                    quarter: "MMM YYYY"
+                    quarter: 'MMM YYYY',
                   },
-                  tooltipFormat: "MMMM DD"
-                }
-              }
-            ]
-          }
+                  tooltipFormat: 'MMMM DD',
+                },
+              },
+            ],
+          },
         }}
       />
     </>
   );
 }
 
-
-function OutcomesTable({models, labels, timeHorizon, title}) {
+function OutcomesTable({ models, labels, timeHorizon, title }) {
   return (
-    <div style={{ overflow: "scroll" }}>
+    <div style={{ overflow: 'scroll' }}>
       <h3>{title}</h3>
       <table
         style={{
-          width: "100%",
-          margin: "auto",
-          border: "1px solid #ccc",
+          width: '100%',
+          margin: 'auto',
+          border: '1px solid #ccc',
           padding: 20,
-          textAlign: "left",
-          tableLayout: "fixed"
+          textAlign: 'left',
+          tableLayout: 'fixed',
         }}
       >
         <thead>
           <tr>
             <th>Scenario</th>
-            <th>
-              Estimated Cumulative Infected
-            </th>
-            <th>
-              Estimated Date Hospitals Overloaded
-            </th>
+            <th>Estimated Cumulative Infected</th>
+            <th>Estimated Date Hospitals Overloaded</th>
             <th>Estimated Deaths</th>
           </tr>
         </thead>
@@ -350,8 +360,8 @@ function OutcomesTable({models, labels, timeHorizon, title}) {
       </table>
     </div>
   );
-};
-function OutcomesRow({model, label, timeHorizon}) {
+}
+function OutcomesRow({ model, label, timeHorizon }) {
   return (
     <tr>
       <td>{label}</td>
@@ -359,27 +369,31 @@ function OutcomesRow({model, label, timeHorizon}) {
         {formatBucketedNumber(
           timeHorizon
             ? model.cumulativeInfectedAfter(timeHorizon)
-            : model.cumulativeInfected
-        , model.totalPopulation)}
+            : model.cumulativeInfected,
+          model.totalPopulation,
+        )}
       </td>
-      {timeHorizon ?
+      {timeHorizon ? (
         <td>
           {model.dateOverwhelmed < model.dateAfter(timeHorizon)
             ? model.dateOverwhelmed.toDateString()
-            : (model.dateOverwhelmed ? "outside time bound" : "never")}
+            : model.dateOverwhelmed
+            ? 'outside time bound'
+            : 'never'}
         </td>
-        :
-      <td>
-        {model.dateOverwhelmed
-          ? model.dateOverwhelmed.toDateString()
-          : "never"}
-      </td>}
+      ) : (
+        <td>
+          {model.dateOverwhelmed
+            ? model.dateOverwhelmed.toDateString()
+            : 'never'}
+        </td>
+      )}
 
       <td>
         {formatNumber(
           timeHorizon
             ? model.cumulativeDeadAfter(timeHorizon)
-            : model.cumulativeDead
+            : model.cumulativeDead,
         )}
       </td>
     </tr>
@@ -390,7 +404,9 @@ export default ModelPage;
 
 function LastDatesToAct({ model }) {
   function formatDate(date) {
-    const month = new Intl.DateTimeFormat('en', { month: 'short' }).format(date);
+    const month = new Intl.DateTimeFormat('en', { month: 'short' }).format(
+      date,
+    );
     const day = new Intl.DateTimeFormat('en', { day: 'numeric' }).format(date);
     return `${month} ${day}`;
   }
