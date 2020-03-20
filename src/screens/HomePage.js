@@ -1,6 +1,7 @@
 import React from 'react';
-import Header from 'components/Header/Header';
 
+import Footer from 'components/Footer/Footer';
+import Header from 'components/Header/Header';
 import Map from 'components/Map/Map';
 
 export default function HomePage() {
@@ -13,6 +14,7 @@ export default function HomePage() {
           <Map />
         </div>
       </main>
+      <Footer />
     </>
   );
 }
