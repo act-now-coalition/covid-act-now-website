@@ -16,7 +16,7 @@ function ModelPage({ location, locationName }) {
   // Initialize models
   let baseline = new Model(modelDatas[0], {
     intervention: 'No Action, Current Trends Continue',
-    r0: 2.6,
+    r0: 2.4,
   });
   let distancing = {
     now: new Model(modelDatas[1], {
@@ -42,14 +42,14 @@ function ModelPage({ location, locationName }) {
     now: new Model(modelDatas[7], {
       intervention: 'TX/FL Distancing/Delay',
       durationDays: 90,
-      r0: 1.6,
+      r0: 1.7,
     }),
   };
   let contain = {
     now: new Model(modelDatas[2], {
       intervention: 'Wuhan-style Lockdown',
       durationDays: 90,
-      r0: 0.4,
+      r0: 0.3,
     }),
     /*oneWeek: new Model( modelDatas[5], {
         intervention: 'Wuhan Level Containment',
