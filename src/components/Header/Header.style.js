@@ -32,7 +32,9 @@ export const BlackBar = styled.div`
 export const RedBar = styled.div`
   background-color: ${palette.secondary.main};
   margin: 0;
-  height: 32px;
+  min-height: 32px;
+  padding: 5px;
+  height: auto;
   display: flex;
   align-items: center;
 `;
