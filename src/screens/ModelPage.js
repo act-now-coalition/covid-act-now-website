@@ -369,8 +369,8 @@ function LastDatesToAct({ model }) {
   }
 
   const days = 1000 * 60 * 60 * 24;
-  let earlyDate = new Date(model.dateOverwhelmed.getTime() - 21 * days);
-  let lateDate = new Date(model.dateOverwhelmed.getTime() - 14 * days);
+  let earlyDate = new Date(model.dateOverwhelmed.getTime() - 14 * days);
+  let lateDate = new Date(model.dateOverwhelmed.getTime() - 7 * days);
 
   return (
     <b>
