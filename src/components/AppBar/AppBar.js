@@ -5,7 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 
 import Logo from 'assets/images/logo';
-import { Wrapper, Left, StyledTabs, StyledTab } from './AppBar.style';
+import { Wrapper, Left, StyledTabs, StyledTab, MobileMenuTitle, MenuTitle } from './AppBar.style';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 const _AppBar = () => {
@@ -29,14 +29,16 @@ const _AppBar = () => {
           ) : (
             <Logo onClick={() => goTo('/')} />
           )}
-          <Typography
-            variant="button"
-            component={Link}
-            to="/"
-            style={{ textDecoration: 'none', color: 'black' }}
-          >
-            covid act now
-          </Typography>
+          <MenuTitle>
+            <Typography
+              variant="button"
+              component={Link}
+              to="/"
+              style={{ textDecoration: 'none', color: 'black' }}
+            >
+              COVID ACT NOW
+            </Typography>
+          </MenuTitle>
         </Left>
         <StyledTabs value={panelIdx} onChange={handleChange}>
           <StyledTab label="Data" disableRipple onClick={() => goTo('/')} />
@@ -53,6 +55,16 @@ const _AppBar = () => {
           /> */}
         </StyledTabs>
       </Wrapper>
+      <MobileMenuTitle>
+        <Typography
+          variant="button"
+          component={Link}
+          to="/"
+          style={{ textDecoration: 'none', color: 'black' }}
+        >
+          COVID ACT NOW
+        </Typography>
+      </MobileMenuTitle>
     </AppBar>
   );
 };
