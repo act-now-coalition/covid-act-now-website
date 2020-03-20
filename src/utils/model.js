@@ -127,11 +127,11 @@ export class Model {
   }
 
   get labelWithR0() {
-    return `${this.label} (R0=${this.r0})`;
+    return `${this.label}`;
   }
 
   get interventionEnd() {
-  return new Date(this.dayZero.getTime() + (this.daysSinceDayZero + this.durationDays) * DAYS);
+    return new Date(this.dayZero.getTime() + (this.daysSinceDayZero + this.durationDays) * DAYS);
   }
 
   idxForDay = day => Math.ceil(day / 4);
