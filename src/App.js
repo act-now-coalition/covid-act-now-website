@@ -9,7 +9,6 @@ import HomePage from 'screens/HomePage';
 import FAQ from 'screens/FAQ/FAQ';
 import AppBar from 'components/AppBar/AppBar';
 import theme from 'assets/theme';
-import { STATES } from 'utils/constants';
 
 export default function App() {
   return (

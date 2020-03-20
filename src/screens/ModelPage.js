@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Line } from 'react-chartjs-2';
 import 'chartjs-plugin-annotation';
 
@@ -16,7 +16,7 @@ function ModelPage() {
   let modelDatas = useModelDatas(location);
 
   if (!modelDatas) {
-    return <div>Loading...</div>;
+    return <Header locationName={locationName} />;
   }
 
   // Initialize models
@@ -112,6 +112,7 @@ function ModelPage() {
                 },*/
               }}
             />
+          <div style={{textAlign: 'right', paddingRight: 2, fontSize:10}}>Last updated on March 19th</div>
           </div>
 
           <div
@@ -261,6 +262,10 @@ function LineGraph({ data, maxY, annotations, title }) {
             yAxes: [
               {
                 type: 'linear',
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Hospitalizations',
+                },
                 ticks: {
                   max: maxY,
                   callback: function(value, index, values) {
