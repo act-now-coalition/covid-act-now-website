@@ -34,16 +34,23 @@ const Footer = ({ children }) => {
         </Typography>
 
         <Typography variant="body2" component="p" style={{ color: '#222' }}>
-          <blockquote>
+          <h2 style={{border: '1px solid #ccc', padding: 20}}>
             "While no projection is perfect, we endorse this tool and model as a
             valid and important way to frame the decisions political leaders
             must make NOW."
-          </blockquote>
-          <p style={{ fontWeight: 800, color: '#222' }}>
+          </h2>
+
+          <Typography variant="h6" component="h6">
             Nirav Shah, MD, MPH, Senior Scholar, Stanford University Clinical
             Excellence Research Center; Former Commissioner, New York State
             Department of Health
-          </p>
+          </Typography>
+
+          <Typography variant="h6" component="h6">
+            Vincent Mor, Florence Pirce Grant University Professor, Professor of
+            Health Services, Policy and Practice, Brown University{' '}
+          </Typography>
+
           <blockquote>
             "This model offers a great tool for state policy staff who's job it
             is to advise the Governor and the Director of Health regarding what
@@ -56,22 +63,18 @@ const Footer = ({ children }) => {
             demonstrate the impact of such policies on the curve of infections,
             hospitalizations and deaths in a very sophisticated manner."
           </blockquote>
-          <p style={{ fontWeight: 800, color: '#222' }}>
-            Vincent Mor, Florence Pirce Grant University Professor, Professor of
-            Health Services, Policy and Practice, Brown University{' '}
-          </p>
 
-          <p style={{ fontWeight: 800, color: '#222' }}>
+          <Typography variant="h6" component="h6">
             Valerie Nurr'araaluk Davidson, former Alaska Commissioner of Health
             and Social Services, Founder's Council member, United States of Care{' '}
-          </p>
+          </Typography>
 
-          <p style={{ fontWeight: 800, color: '#222' }}>
+          <Typography variant="h6" component="h6">
             Tomas Pueyo, author of{' '}
             <a href="https://medium.com/@tomaspueyo/coronavirus-act-today-or-people-will-die-f4d3d9cd99ca">
               Coronavirus: Why You Must Act Now
             </a>
-          </p>
+          </Typography>
 
           <p style={{ color: '#222' }}>
             More are forthcoming. Please email us if you wish to add your name
