@@ -164,7 +164,7 @@ function ModelPage({ location, locationName }) {
         </Panel>
         <h3 style={{ textAlign: 'center', paddingTop:20, paddingBottom:20, border: '1px solid #ccc'  }}>
           <a href="https://forms.gle/Dn2cjNMJxKyrwY4J9">Sign up</a> to stay up
-          to date on our tool as we improve it's data-set, models, and
+          to date on our tool as we improve its data-set, models, and
           capabilities.
         </h3>
       </div>
