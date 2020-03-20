@@ -19,11 +19,19 @@ export const BlackBar = styled.div`
   padding: 48px;
   margin: 0;
   h2 {
-    margin-bottom: 24px;
+    margin-bottom: 18px;
     font-weight: 500;
-    font-size: 48px;
+    font-size: 32px;
     line-height: 56px;
   }
+
+  @media(min-width: 600px) {
+    h2 {
+      margin-bottom: 24px;
+      font-size: 48px;
+    }
+  }
+
   p {
     line-height: 24px;
   }
