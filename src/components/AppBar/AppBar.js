@@ -6,7 +6,6 @@ import Typography from '@material-ui/core/Typography';
 
 import Logo from 'assets/images/logo';
 import { Wrapper, Left, StyledTabs, StyledTab } from './AppBar.style';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 const _AppBar = () => {
   const history = useHistory();
@@ -46,11 +45,6 @@ const _AppBar = () => {
             disableRipple
             onClick={() => goTo('/endorsements')}
           />
-          {/* <StyledTab
-            label="Donate"
-            disableRipple
-            onClick={() => goTo('/donate')}
-          /> */}
         </StyledTabs>
       </Wrapper>
     </AppBar>

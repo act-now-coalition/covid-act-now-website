@@ -50,3 +50,46 @@ export const STATES = {
   WI: 'Wisconsin',
   WY: 'Wyoming',
 };
+
+export const ENDORSERS = [
+  {
+    name: 'Tomas Pueyo, MSc, MBA',
+    avatarUrl:
+      'https://miro.medium.com/fit/c/256/256/1*SlSL0behknIASOhFR3Q-Lg.png',
+    profileUrl: 'https://medium.com/@tomaspueyo',
+    credentials: [
+      "Author of 'Coronavirus: Why You Must Act Now",
+      'VP of Growth at Course Hero',
+    ],
+  },
+  {
+    name: 'Nirav Shah, MD, MPH',
+    avatarUrl:
+      'https://profiles.stanford.edu/proxy/api/cap/profiles/187079/resources/profilephoto/350x350.1543259925959.jpg',
+    profileUrl: 'https://profiles.stanford.edu/nirav-shah',
+    credentials: [
+      'Senior Scholar, Stanford University Clinical Excellence Research Center',
+      'Former Commissioner, New York State Department of Health',
+    ],
+  },
+  {
+    name: "Valerie Nurr'araaluk Davidson",
+    avatarUrl:
+      'https://www.adn.com/resizer/VlyvgKHU8O82tj_aHOxTLrAkM3Y=/1200x0/s3.amazonaws.com/arc-wordpress-client-uploads/adn/wp-content/uploads/2018/10/05095726/Valerie-Davidson-A.jpg',
+    profileUrl: 'https://en.wikipedia.org/wiki/Valerie_Davidson',
+    credentials: [
+      '13th Lieutenant Governor of Alaska',
+      'Former Commissioner of the Alaska Department of Health and Social Services',
+      "Founder's Council member, United States of Care",
+    ],
+  },
+  {
+    name: 'Vincent Mor, PhD',
+    avatarUrl: 'https://vivo.brown.edu/profile-images/124/18/vmor.jpg',
+    profileUrl: 'https://vivo.brown.edu/display/vmor',
+    credentials: [
+      'Florence Pirce Grant University Professor',
+      'Professor of Health Services, Policy and Practice, Brown University',
+    ],
+  },
+];
