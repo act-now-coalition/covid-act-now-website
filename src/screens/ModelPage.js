@@ -1,12 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Line } from 'react-chartjs-2';
 import 'chartjs-plugin-annotation';
 import Header from 'components/Header/Header';
+import { STATES } from 'utils/constants';
 
 import { useModelDatas, Model } from 'utils/model';
 
-function ModelPage({ location, locationName }) {
+function ModelPage() {
+  const { id: location } = useParams();
+  const locationName = STATES[location];
+
   let modelDatas = useModelDatas(location);
 
   if (!modelDatas) {
@@ -20,8 +24,7 @@ function ModelPage({ location, locationName }) {
   });
   let distancing = {
     now: new Model(modelDatas[1], {
-      intervention:
-        'NorCal “Shelter-in-place”',
+      intervention: 'NorCal “Shelter-in-place”',
       durationDays: 90,
       r0: 1.2,
     }),
@@ -68,11 +71,15 @@ function ModelPage({ location, locationName }) {
   // Prep datasets for graphs
   // short label: 'Distancing Today for 2 Months', 'Wuhan Level Containment for 1 Month'
   let scenarioComparisonOverTime = duration => [
-    baseline.getDataset("hospitalizations", duration, "red"),
-    distancing.now.getDataset("hospitalizations", duration, "blue"),
-    distancingPoorEnforcement.now.getDataset("hospitalizations", duration, "orange"),
-    contain.now.getDataset("hospitalizations", duration, "green"),
-    baseline.getDataset("beds", duration, "black", "Hospital Beds")
+    baseline.getDataset('hospitalizations', duration, 'red'),
+    distancing.now.getDataset('hospitalizations', duration, 'blue'),
+    distancingPoorEnforcement.now.getDataset(
+      'hospitalizations',
+      duration,
+      'orange',
+    ),
+    contain.now.getDataset('hospitalizations', duration, 'green'),
+    baseline.getDataset('beds', duration, 'black', 'Hospital Beds'),
   ];
   let scenarioComparison = scenarioComparisonOverTime(100);
 
@@ -162,7 +169,14 @@ function ModelPage({ location, locationName }) {
             </li>
           </ul>
         </Panel>
-        <h3 style={{ textAlign: 'center', paddingTop:20, paddingBottom:20, border: '1px solid #ccc'  }}>
+        <h3
+          style={{
+            textAlign: 'center',
+            paddingTop: 20,
+            paddingBottom: 20,
+            border: '1px solid #ccc',
+          }}
+        >
           <a href="https://forms.gle/Dn2cjNMJxKyrwY4J9">Sign up</a> to stay up
           to date on our tool as we improve it's data-set, models, and
           capabilities.
@@ -173,25 +187,17 @@ function ModelPage({ location, locationName }) {
 }
 
 function Panel({ children, title }) {
-  return (
-    <div
-      style={{
-      }}
-    >
-      {children}
-    </div>
-  );
+  return <div style={{}}>{children}</div>;
 }
 
 function formatNumber(num) {
   if (num > 1000) {
     return (Math.round(num / 1000) * 1000).toLocaleString();
   } else if (num > 0) {
-    return "<1000";
+    return '<1000';
   } else {
     return 0;
   }
-
 }
 
 function formatBucketedNumber(num, total) {
@@ -320,7 +326,7 @@ function OutcomesTable({ models, asterisk, timeHorizon, title, colors }) {
 function OutcomesRow({ model, label, timeHorizon, color }) {
   return (
     <tr>
-      <td style={{fontWeight: 'bold', color}}>{label}</td>
+      <td style={{ fontWeight: 'bold', color }}>{label}</td>
       <td>
         {formatBucketedNumber(
           timeHorizon
@@ -331,8 +337,8 @@ function OutcomesRow({ model, label, timeHorizon, color }) {
       </td>
       {timeHorizon ? (
         <td>
-          {model.dateOverwhelmed && (model.dateOverwhelmed <
-          model.dateAfter(timeHorizon))
+          {model.dateOverwhelmed &&
+          model.dateOverwhelmed < model.dateAfter(timeHorizon)
             ? model.dateOverwhelmed.toDateString()
             : model.dateOverwhelmed
             ? 'outside time bound'
