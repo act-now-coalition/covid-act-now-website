@@ -34,25 +34,25 @@ const Footer = ({ children }) => {
         </Typography>
 
         <Typography variant="body2" component="p" style={{ color: '#222' }}>
-          <h2 style={{border: '1px solid #ccc', padding: 20}}>
+          <h2 style={{ border: '1px solid #ccc', padding: 20 }}>
             "While no projection is perfect, we endorse this tool and model as a
             valid and important way to frame the decisions political leaders
-            must make NOW."
+            must make now."
           </h2>
 
-          <Typography variant="h6" component="h6">
+          <p style={{ color: '#222' }}>
             Nirav Shah, MD, MPH, Senior Scholar, Stanford University Clinical
             Excellence Research Center; Former Commissioner, New York State
             Department of Health
-          </Typography>
+          </p>
 
-          <Typography variant="h6" component="h6">
+          <p style={{ color: '#222' }}>
             Vincent Mor, Florence Pirce Grant University Professor, Professor of
             Health Services, Policy and Practice, Brown University{' '}
-          </Typography>
+          </p>
 
-          <blockquote>
-            "This model offers a great tool for state policy staff who's job it
+          <blockquote style={{ fontStyle: 'italic' }}>
+            This model offers a great tool for state policy staff who's job it
             is to advise the Governor and the Director of Health regarding what
             kinds of policies should be instituted to encourage social
             distancing to minimize contagion with corona virus. Staff need to be
@@ -61,20 +61,25 @@ const Footer = ({ children }) => {
             to a select number or encourage non-essential workers to
             telecommute. This web site offers state specific estimates that
             demonstrate the impact of such policies on the curve of infections,
-            hospitalizations and deaths in a very sophisticated manner."
+            hospitalizations and deaths in a very sophisticated manner.
           </blockquote>
 
-          <Typography variant="h6" component="h6">
+          <p style={{ color: '#222' }}>
             Valerie Nurr'araaluk Davidson, former Alaska Commissioner of Health
             and Social Services, Founder's Council member, United States of Care{' '}
-          </Typography>
+          </p>
 
-          <Typography variant="h6" component="h6">
+          <p style={{ color: '#222' }}>
             Tomas Pueyo, author of{' '}
             <a href="https://medium.com/@tomaspueyo/coronavirus-act-today-or-people-will-die-f4d3d9cd99ca">
               Coronavirus: Why You Must Act Now
             </a>
-          </Typography>
+          </p>
+
+          <p style={{ color: '#222' }}>
+            Ben Goldman-Israelow, Infectious Disease Fellow, Yale School of
+            Medicine
+          </p>
 
           <p style={{ color: '#222' }}>
             More are forthcoming. Please email us if you wish to add your name

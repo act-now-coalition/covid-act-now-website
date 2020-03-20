@@ -26,7 +26,7 @@ function ModelPage() {
   });
   let distancing = {
     now: new Model(modelDatas[1], {
-      intervention: 'NorCal “Shelter-in-place”',
+      intervention: 'California-style "shelter-in-place"',
       durationDays: 90,
       r0: 1.2,
     }),
@@ -45,7 +45,7 @@ function ModelPage() {
   };
   let distancingPoorEnforcement = {
     now: new Model(modelDatas[7], {
-      intervention: 'TX/FL Distancing/Delay',
+      intervention: 'Texas-style delay/social distancing',
       durationDays: 90,
       r0: 1.7,
     }),
