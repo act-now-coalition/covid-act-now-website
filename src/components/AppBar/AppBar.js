@@ -8,6 +8,23 @@ import Logo from 'assets/images/logo';
 import { Wrapper, Left, StyledTabs, StyledTab, MobileMenuTitle, MenuTitle } from './AppBar.style';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+import {
+  EmailShareButton,
+  FacebookShareButton,
+  InstapaperShareButton,
+  LinkedinShareButton,
+  PinterestShareButton,
+  PocketShareButton,
+  RedditShareButton,
+  TelegramShareButton,
+  TwitterShareButton,
+  TwitterIcon,
+  ViberShareButton,
+  WhatsappShareButton,
+} from "react-share";
+
+
+
 const _AppBar = () => {
   const history = useHistory();
   const { pathname } = useLocation();
@@ -40,6 +57,9 @@ const _AppBar = () => {
             </Typography>
           </MenuTitle>
         </Left>
+        <TwitterShareButton url="https://covidactnow.org" >
+          <TwitterIcon size={32} round={true} /> Tweet this
+      </TwitterShareButton>
         <StyledTabs value={panelIdx} onChange={handleChange}>
           <StyledTab label="Data" disableRipple onClick={() => goTo('/')} />
           <StyledTab label="FAQ" disableRipple onClick={() => goTo('/faq')} />
