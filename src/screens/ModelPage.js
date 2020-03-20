@@ -16,6 +16,8 @@ function ModelPage() {
   const locationName = STATES[location];
 
   let locationNameForDataLoad = location;
+  console.log(location);
+
   if (lowercaseStates.indexOf(location) > -1) {
     locationNameForDataLoad = location.toLowerCase();
   }
