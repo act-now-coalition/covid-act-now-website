@@ -1,11 +1,10 @@
 import React, { Component, useState } from 'react';
-import './../../App.css'; /* optional for styling like the :hover pseudo-class */
-import USAMap from "react-usa-map";
-import { Redirect } from "react-router-dom";
+import 'App.css'; /* optional for styling like the :hover pseudo-class */
+import USAMap from 'react-usa-map';
+import { Redirect } from 'react-router-dom';
+import { STATES } from 'utils/constants';
 
-const STATES = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"];
-
-function Map () {
+function Map() {
   let [redirectTarget, setRedirectTarget] = useState();
 
   if (redirectTarget) {
@@ -13,27 +12,26 @@ function Map () {
   }
 
   /* mandatory */
-  let mapHandler = (event) => {
-    alert("No model yet");
+  let mapHandler = event => {
+    alert('No model yet');
   };
 
-  /* optional customization of filling per state and calling custom callbacks per state */
-  let statesCustomConfig = () => {
-    let config = {};
-    for (var i=0; i<STATES.length; i++) {
-      let state = STATES[i];
-      config[state] = {
-          fill: "rgba(1,1,1,0.7)",
+  const statesCustomConfig = () =>
+    Object.keys(STATES).reduce((config, currState) => {
+      return {
+        ...config,
+        [currState]: {
+          fill: 'rgba(1,1,1,0.7)',
           clickHandler: event => {
-            setRedirectTarget(`/${state}`);
-          }};
-    }
-    return config;
-  };
+            setRedirectTarget(`/state/${currState}`);
+          },
+        },
+      };
+    }, {});
 
   return (
     <div className="App">
-      <USAMap width="100%" height="auto" customize={statesCustomConfig()}   />
+      <USAMap width="100%" height="auto" customize={statesCustomConfig()} />
     </div>
   );
 }

@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
+import { useHistory, useLocation, Link } from 'react-router-dom';
+import { ArrowBack } from '@material-ui/icons';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
-import { useHistory, Link } from 'react-router-dom';
+
 import Logo from 'assets/images/logo';
 import { Wrapper, Left, StyledTabs, StyledTab } from './AppBar.style';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 const _AppBar = () => {
   const history = useHistory();
-
-  const [panelIdx, setPanelIdx] = useState(2);
+  const { pathname } = useLocation();
+  const panels = ['/', '/faq'];
+  const [panelIdx, setPanelIdx] = useState(panels.indexOf(pathname) || 0);
 
   const handleChange = (_, value) => {
     setPanelIdx(value);
@@ -21,14 +24,11 @@ const _AppBar = () => {
     <AppBar position="sticky">
       <Wrapper>
         <Left>
-          <Switch>
-            <Route path="/" exact>
-              <Logo onClick={() => goTo('/')} />
-            </Route>
-            <Route>
-              <Link to="/">Back to map</Link>
-            </Route>
-          </Switch>
+          {pathname.includes('state') ? (
+            <ArrowBack onClick={() => goTo('/')} />
+          ) : (
+            <Logo onClick={() => goTo('/')} />
+          )}
           <Typography
             variant="button"
             component={Link}
@@ -38,20 +38,20 @@ const _AppBar = () => {
             covid act now
           </Typography>
         </Left>
-        {/* <StyledTabs value={panelIdx} onChange={handleChange}>
+        <StyledTabs value={panelIdx} onChange={handleChange}>
+          <StyledTab label="Data" disableRipple onClick={() => goTo('/')} />
           <StyledTab label="FAQ" disableRipple onClick={() => goTo('/faq')} />
-          <StyledTab
-            label="About"
+          {/* <StyledTab
+            label="Endorsements"
             disableRipple
-            onClick={() => goTo('/about')}
-          />
-          <StyledTab label="Data" disableRipple onClick={() => goTo('/data')} />
-          <StyledTab
+            onClick={() => goTo('/endorsements')}
+          /> */}
+          {/* <StyledTab
             label="Donate"
             disableRipple
             onClick={() => goTo('/donate')}
-          />
-        </StyledTabs> */}
+          /> */}
+        </StyledTabs>
       </Wrapper>
     </AppBar>
   );
