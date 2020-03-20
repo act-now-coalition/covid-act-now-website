@@ -11,7 +11,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 const _AppBar = () => {
   const history = useHistory();
   const { pathname } = useLocation();
-  const panels = ['/', '/faq'];
+  const panels = ['/', '/faq', '/endorsements'];
   const [panelIdx, setPanelIdx] = useState(panels.indexOf(pathname) || 0);
 
   const handleChange = (_, value) => {
@@ -41,11 +41,11 @@ const _AppBar = () => {
         <StyledTabs value={panelIdx} onChange={handleChange}>
           <StyledTab label="Data" disableRipple onClick={() => goTo('/')} />
           <StyledTab label="FAQ" disableRipple onClick={() => goTo('/faq')} />
-          {/* <StyledTab
+          <StyledTab
             label="Endorsements"
             disableRipple
             onClick={() => goTo('/endorsements')}
-          /> */}
+          />
           {/* <StyledTab
             label="Donate"
             disableRipple

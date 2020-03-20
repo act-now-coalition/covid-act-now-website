@@ -7,6 +7,7 @@ import ModelPage from 'screens/ModelPage';
 import HomePage from 'screens/HomePage';
 // import ComingSoon from 'screens/ComingSoon/ComingSoon';
 import FAQ from 'screens/FAQ/FAQ';
+import Endorsements from 'screens/Endorsements/Endorsements';
 import AppBar from 'components/AppBar/AppBar';
 import theme from 'assets/theme';
 import { STATES } from 'utils/constants';
@@ -22,7 +23,7 @@ export default function App() {
             <Route exact path="/" component={HomePage} />
             <Route path="/state/:id" component={ModelPage} />
             <Route path="/faq" component={FAQ} />
-            {/* <Route path="/endorsements" component={ComingSoon} /> */}
+            <Route path="/endorsements" component={Endorsements} />
             {/* <Route path="/about" component={ComingSoon} /> */}
             {/* <Route path="/donate" component={ComingSoon} /> */}
             <Route path="/*">

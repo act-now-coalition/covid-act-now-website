@@ -1,7 +1,4 @@
 import styled from 'styled-components';
-import { colors } from '@material-ui/core';
-
-import palette from 'assets/theme/palette';
 
 export const Wrapper = styled.div`
   background-color: white;
