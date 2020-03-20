@@ -5,7 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 
 import Logo from 'assets/images/logo';
-import { Wrapper, Left, StyledTabs, StyledTab, MobileMenuTitle, MenuTitle } from './AppBar.style';
+import { Wrapper, Left, Right, StyledTabs, StyledTab, MobileMenuTitle, MenuTitle } from './AppBar.style';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import {
@@ -57,9 +57,9 @@ const _AppBar = () => {
             </Typography>
           </MenuTitle>
         </Left>
-        <TwitterShareButton url="https://covidactnow.org" >
-          <TwitterIcon size={32} round={true} /> Tweet this
-      </TwitterShareButton>
+        <TwitterShareButton url="https://covidactnow.org" ><span>Share This!</span>
+            <TwitterIcon size={32} round={true} />
+          </TwitterShareButton>
         <StyledTabs value={panelIdx} onChange={handleChange}>
           <StyledTab label="Data" disableRipple onClick={() => goTo('/')} />
           <StyledTab label="FAQ" disableRipple onClick={() => goTo('/faq')} />

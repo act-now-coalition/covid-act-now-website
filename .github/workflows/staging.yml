@@ -4,6 +4,7 @@ on:
   push:
     branches:
     - develop
+    - feature/sharethis
 
 jobs:
   build-deploy:
