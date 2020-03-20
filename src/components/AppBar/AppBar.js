@@ -5,7 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 
 import Logo from 'assets/images/logo';
-import { Wrapper, Left, Right, StyledTabs, StyledTab, MobileMenuTitle, MenuTitle } from './AppBar.style';
+import { Wrapper, Left, StyledTabs, StyledTab, MobileMenuTitle, MenuTitle } from './AppBar.style';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import {
@@ -57,7 +57,8 @@ const _AppBar = () => {
             </Typography>
           </MenuTitle>
         </Left>
-        <TwitterShareButton url="https://covidactnow.org" ><span>Share This!</span>
+        <TwitterShareButton url="https://covidactnow.org" style={{ alignItems: 'center', display: 'flex' }}
+><span>Share This! </span>
             <TwitterIcon size={32} round={true} />
           </TwitterShareButton>
         <StyledTabs value={panelIdx} onChange={handleChange}>
