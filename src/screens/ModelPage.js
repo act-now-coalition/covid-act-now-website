@@ -9,11 +9,17 @@ import { STATES } from 'utils/constants';
 
 import { useModelDatas, Model } from 'utils/model';
 
+
+let lowercaseStates = ['AK', 'CA', 'CO', 'FL', 'MO', 'NM', 'NV', 'NY', 'OR', 'TX'];
 function ModelPage() {
   const { id: location } = useParams();
   const locationName = STATES[location];
 
-  let modelDatas = useModelDatas(location);
+  let locationNameForDataLoad = location;
+  if (lowercaseStates.indexOf(location) > -1) {
+    locationNameForDataLoad = location.toLowerCase();
+  }
+  let modelDatas = useModelDatas(locationNameForDataLoad);
 
   if (!modelDatas) {
     return <Header locationName={locationName} />;
