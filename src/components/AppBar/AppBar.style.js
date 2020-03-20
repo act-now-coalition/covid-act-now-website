@@ -22,6 +22,11 @@ export const Left = styled.div`
     font-weight: 900;
     margin-right: 16px;
   }
+  svg {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+  }
 `;
 
 export const StyledTabs = styled(Tabs)`
