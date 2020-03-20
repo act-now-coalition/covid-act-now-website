@@ -59,6 +59,7 @@ export const ENDORSERS = [
     profileUrl: 'https://medium.com/@tomaspueyo',
     credentials: [
       "Author of 'Coronavirus: Why You Must Act Now",
+      "Author of 'Coronavirus: The Hammer and the Dance",
       'VP of Growth at Course Hero',
     ],
   },
