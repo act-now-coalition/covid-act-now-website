@@ -10,7 +10,7 @@ import { STATES } from 'utils/constants';
 import { useModelDatas, Model } from 'utils/model';
 
 
-let lowercaseStates = ['AK', 'CA', 'CO', 'FL', 'MO', 'NM', 'NV', 'NY', 'OR', 'TX'];
+let lowercaseStates = ['AK', 'CA', 'CO', 'FL', 'MO', 'NM', 'NV', 'NY', 'OR', 'TX', 'WA'];
 function ModelPage() {
   const { id: location } = useParams();
   const locationName = STATES[location];
