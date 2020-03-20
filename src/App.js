@@ -10,8 +10,8 @@ import AppBar from 'components/AppBar/AppBar';
 import Footer from 'components/Footer/Footer';
 import theme from 'assets/theme';
 const STATES = [
-  'AK',
   'AL',
+  'AK',
   'AZ',
   'AR',
   'CA',
@@ -62,6 +62,7 @@ const STATES = [
   'WY',
 ];
 const STATE_NAMES = [
+  'Alabama',
   'Alaska',
   'Arizona',
   'Arkansas',
