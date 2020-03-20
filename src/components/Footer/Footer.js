@@ -46,7 +46,7 @@ const Footer = ({ children }) => {
               Department of Health
             </li>
             <li>
-              “This model offers a great tool for state policy staff who's job it
+              “This model offers a great tool for state policy staff whose job it
               is to advise the Governor and the Director of Health regarding what kinds of
               policies should be instituted to encourage social distancing to minimize contagion
               with corona virus. Staff need to be prepared to defend with comparative data their
