@@ -89,7 +89,7 @@ function ModelPage() {
       'orange',
     ),
     contain.now.getDataset('hospitalizations', duration, 'green'),
-    baseline.getDataset('beds', duration, 'black', 'Hospital Beds'),
+    baseline.getDataset('beds', duration, 'black', 'Available Hospital Beds'),
   ];
   let scenarioComparison = scenarioComparisonOverTime(100);
 
