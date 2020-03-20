@@ -52,24 +52,10 @@ export const StyledTab = styled(Tab)`
     font-size: 16px;
   }
 `;
-  
+
 
 export const MenuTitle = styled.div`
-  display: none;
-  @media(min-width: 600px) {
-    display: inline-block;
-  }
-`;
-
-export const MobileMenuTitle = styled.div`
-  padding: 10px 20px;
-  p {
-    font-size: 16px;
-    font-weight: bold;
-  }
-  @media(min-width: 600px) {
-    display: none;
-  }
+  display: inline-block;
 `;
 
 export const Content = styled.div``;

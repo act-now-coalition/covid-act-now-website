@@ -55,16 +55,6 @@ const _AppBar = () => {
           /> */}
         </StyledTabs>
       </Wrapper>
-      <MobileMenuTitle>
-        <Typography
-          variant="button"
-          component={Link}
-          to="/"
-          style={{ textDecoration: 'none', color: 'black' }}
-        >
-          COVID ACT NOW
-        </Typography>
-      </MobileMenuTitle>
     </AppBar>
   );
 };
