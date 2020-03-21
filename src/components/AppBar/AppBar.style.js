@@ -30,12 +30,15 @@ export const Left = styled.div`
   }
 `;
 
-export const StyledTabs = styled(Tabs)`
+export const StyledDesktopMenu = styled(Tabs)`
   display: none;
 
   @media(min-width: 600px) {
      display: inline-block;
   }
+`;
+
+export const StyledTabs = styled(Tabs)`
 `;
 
 export const StyledTab = styled(Tab)`
