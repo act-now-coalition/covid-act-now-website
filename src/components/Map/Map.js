@@ -2,7 +2,7 @@ import React, { Component, useState } from 'react';
 import '../../App.css'; /* optional for styling like the :hover pseudo-class */
 import USAMap from 'react-usa-map';
 import { Redirect } from 'react-router-dom';
-import { STATES } from 'utils/constants';
+import { STATES } from 'enums';
 
 function Map() {
   let [redirectTarget, setRedirectTarget] = useState();

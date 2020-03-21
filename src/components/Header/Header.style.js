@@ -16,32 +16,14 @@ export const Content = styled.div`
 
 export const BlackBar = styled.div`
   background-color: ${colors.grey[900]};
-  padding: 48px;
+  padding: 4rem 2rem;
   margin: 0;
-  h2 {
-    margin-bottom: 18px;
-    font-weight: 500;
-    font-size: 32px;
-    line-height: 56px;
-  }
-
-  @media(min-width: 600px) {
-    h2 {
-      margin-bottom: 24px;
-      font-size: 48px;
-    }
-  }
-
-  p {
-    line-height: 24px;
-  }
 `;
 
 export const RedBar = styled.div`
   background-color: ${palette.secondary.main};
   margin: 0;
-  min-height: 32px;
-  padding: 5px;
+  padding: 0.8rem;
   height: auto;
   display: flex;
   align-items: center;

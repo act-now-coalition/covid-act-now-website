@@ -5,10 +5,31 @@ import 'chartjs-plugin-annotation';
 
 import Footer from 'components/Footer/Footer';
 import Header from 'components/Header/Header';
-import { STATES } from 'utils/constants';
+import Callout from 'components/Callout/Callout';
+import { Wrapper, Content } from './ModelPage.style';
+import { STATES } from 'enums';
 
 import { useModelDatas, Model } from 'utils/model';
 
+const LastDatesToAct = ({ model }) => {
+  function formatDate(date) {
+    const month = new Intl.DateTimeFormat('en', { month: 'short' }).format(
+      date,
+    );
+    const day = new Intl.DateTimeFormat('en', { day: 'numeric' }).format(date);
+    return `${month} ${day}`;
+  }
+
+  const days = 1000 * 60 * 60 * 24;
+  let earlyDate = new Date(model.dateOverwhelmed.getTime() - 14 * days);
+  let lateDate = new Date(model.dateOverwhelmed.getTime() - 9 * days);
+
+  return (
+    <b>
+      {formatDate(earlyDate)} to {formatDate(lateDate)}
+    </b>
+  );
+}
 
 let lowercaseStates = ['AK', 'CA', 'CO', 'FL', 'MO', 'NM', 'NV', 'NY', 'OR', 'TX', 'WA'];
 function ModelPage() {
@@ -94,9 +115,9 @@ function ModelPage() {
   let scenarioComparison = scenarioComparisonOverTime(100);
 
   return (
-    <>
+    <Wrapper>
       <Header locationName={locationName} />
-      <div className="App" style={{ maxWidth: 900, margin: 'auto' }}>
+      <Content>
         <Panel>
           <div className="graphs-container">
             <LineGraph
@@ -123,23 +144,13 @@ function ModelPage() {
           <div style={{textAlign: 'right', paddingRight: 2, fontSize:10}}>Last updated on March 19th</div>
           </div>
 
-          <div
-            style={{
-              padding: 20,
-              border: '2px solid red',
-              marginBottom: 20,
-              marginTop: 40,
-              backgroundColor: 'white',
-            }}
-          >
-            <h2>
-              <span style={{ fontWeight: 'normal' }}>
-                Point of no-return for intervention to prevent hospital
-                overload:
-              </span>{' '}
-              <LastDatesToAct model={baseline} />
-            </h2>
-          </div>
+          <Callout backgroundColor="rgba(255, 0, 0, 0.0784)" borderColor="red">
+            <div style={{ fontWeight: 'normal', marginBottom: '1.2rem' }}>
+              Point of no-return for intervention to prevent hospital
+              overload:
+            </div>
+            <LastDatesToAct model={baseline} />
+          </Callout>
 
           <OutcomesTable
             title="Predicted Outcomes after 3 Months"
@@ -180,21 +191,12 @@ function ModelPage() {
             </li>
           </ul>
         </Panel>
-        <h3
-          style={{
-            textAlign: 'center',
-            paddingTop: 20,
-            paddingBottom: 20,
-            border: '1px solid #ccc',
-          }}
-        >
-          <a href="https://forms.gle/Dn2cjNMJxKyrwY4J9">Sign up</a> to stay up
-          to date on our tool as we improve its data-set, models, and
-          capabilities.
-        </h3>
-      </div>
+        <Callout backgroundColor="rgba(0, 234, 0, 0.19)">
+          <a href="https://forms.gle/Dn2cjNMJxKyrwY4J9">Sign up</a> to stay up to date on our tool as we improve its data-set, models, and capabilities.
+        </Callout>
+      </Content>
       <Footer />
-    </>
+    </Wrapper>
   );
 }
 
@@ -381,22 +383,3 @@ function OutcomesRow({ model, label, timeHorizon, color }) {
 
 export default ModelPage;
 
-function LastDatesToAct({ model }) {
-  function formatDate(date) {
-    const month = new Intl.DateTimeFormat('en', { month: 'short' }).format(
-      date,
-    );
-    const day = new Intl.DateTimeFormat('en', { day: 'numeric' }).format(date);
-    return `${month} ${day}`;
-  }
-
-  const days = 1000 * 60 * 60 * 24;
-  let earlyDate = new Date(model.dateOverwhelmed.getTime() - 14 * days);
-  let lateDate = new Date(model.dateOverwhelmed.getTime() - 9 * days);
-
-  return (
-    <b>
-      {formatDate(earlyDate)} to {formatDate(lateDate)}
-    </b>
-  );
-}

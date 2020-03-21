@@ -5,7 +5,7 @@ import GridListTile from '@material-ui/core/GridListTile';
 import Grid from '@material-ui/core/Grid';
 
 import EndorsementCard from 'components/EndorsementCard/EndorsementCard';
-import { ENDORSERS } from 'utils/constants';
+import { ENDORSERS } from 'enums';
 import {
   Wrapper,
   Content,
