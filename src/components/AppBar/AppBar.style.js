@@ -7,6 +7,7 @@ import palette from 'assets/theme/palette';
 export const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   height: 64px;
   padding: 0 20px;
 
@@ -31,8 +32,11 @@ export const Left = styled.div`
 `;
 
 export const StyledTabs = styled(Tabs)`
-  /* background-color: blue; */
-  /* max-width: 300px; */
+  display: none;
+
+  @media(min-width: 600px) {
+     display: inline-block;
+  }
 `;
 
 export const StyledTab = styled(Tab)`
@@ -56,6 +60,76 @@ export const StyledTab = styled(Tab)`
 
 export const MenuTitle = styled.div`
   display: inline-block;
+`;
+
+export const StyledBurger = styled.button`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 2rem;
+  height: 2rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 10;
+
+  &:focus {
+    outline: none;
+  }
+
+  div {
+    width: 2rem;
+    height: 0.25rem;
+    background: ${({ open }) => open ? '#0D0C1D' : '#000000'};
+    border-radius: 10px;
+    position: relative;
+    transform-origin: 1px;
+
+    :first-child {
+      transform: ${({ open }) => open ? 'rotate(45deg)' : 'rotate(0)'};
+    }
+
+    :nth-child(2) {
+      opacity: ${({ open }) => open ? '0' : '1'};
+      transform: ${({ open }) => open ? 'translateX(20px)' : 'translateX(0)'};
+    }
+
+    :nth-child(3) {
+      transform: ${({ open }) => open ? 'rotate(-45deg)' : 'rotate(0)'};
+    }
+  }
+`;
+
+export const StyledMobileMenu = styled.nav`
+  display: inherit;
+  @media(min-width: 600px) {
+    display: none;
+  }
+`;
+
+export const StyledMenu = styled.nav`
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-top: 1px solid #e3e3e3;
+  transform: ${({ open }) => open ? 'translateY(64px)' : 'translateY(-100%)'};
+  height: 100vh;
+  text-align: left;
+  padding: 2rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  a {
+    cursor: pointer;
+    font-size: 2rem;
+    padding: 1rem 0;
+    font-weight: bold;
+    color: #0D0C1D;
+    text-decoration: none;
+  }
 `;
 
 export const Content = styled.div``;
