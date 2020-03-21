@@ -53,6 +53,7 @@ export const STATES = {
 
 export const ENDORSERS = [
   {
+    size: 4,
     name: 'Tomas Pueyo, MSc, MBA',
     avatarUrl:
       'https://miro.medium.com/fit/c/256/256/1*SlSL0behknIASOhFR3Q-Lg.png',
@@ -64,6 +65,7 @@ export const ENDORSERS = [
     ],
   },
   {
+    size: 4,
     name: 'Nirav Shah, MD, MPH',
     avatarUrl:
       'https://profiles.stanford.edu/proxy/api/cap/profiles/187079/resources/profilephoto/350x350.1543259925959.jpg',
@@ -74,6 +76,7 @@ export const ENDORSERS = [
     ],
   },
   {
+    size: 4,
     name: "Valerie Nurr'araaluk Davidson",
     avatarUrl:
       'https://www.adn.com/resizer/VlyvgKHU8O82tj_aHOxTLrAkM3Y=/1200x0/s3.amazonaws.com/arc-wordpress-client-uploads/adn/wp-content/uploads/2018/10/05095726/Valerie-Davidson-A.jpg',
@@ -85,6 +88,7 @@ export const ENDORSERS = [
     ],
   },
   {
+    size: 12,
     name: 'Vincent Mor, PhD',
     avatarUrl: 'https://vivo.brown.edu/profile-images/124/18/vmor.jpg',
     profileUrl: 'https://vivo.brown.edu/display/vmor',
@@ -94,6 +98,5 @@ export const ENDORSERS = [
     ],
     quote:
       "This model offers a great tool for state policy staff who's job it is to advise the Governor and the Director of Health regarding what kinds of policies should be instituted to encourage social distancing to minimize contagion with corona virus. Staff need to be prepared to defend with comparative data their recommendations regarding whether to close schools, close bars, restrict gatherings to a select number or encourage non-essential workers to telecommute. This web site offers state specific estimates that  demonstrate the impact of such policies on the curve of infections, hospitalizations and deaths in a very sophisticated manner.",
-    cols: 3,
   },
 ];

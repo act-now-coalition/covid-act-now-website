@@ -13,9 +13,12 @@ export const Wrapper = styled(CardContent)`
 export const Profile = styled(Card)`
   padding: 12px 12px 0;
   box-shadow: none;
-  margin: 12px 0 0 0;
-  height: 284px;
-  width: 256px;
+  margin: 0;
+  width: 100%;
+
+  @media (min-width: 600px) {
+    min-height: 305px;
+  }
 `;
 
 export const ProfileHeader = styled(CardHeader)`
@@ -34,8 +37,12 @@ export const Left = styled.div`
 export const Quote = styled.div`
   background-color: white;
   max-width: 650px;
-  margin: 12px 12px 0 0;
+  margin: 0;
   border-radius: 0 10px 0 0;
   color: #546e7a;
-  padding: 24px 24px 24px 0;
+  padding: 24px;
+
+  @media (min-width: 600px) {
+    min-height: 305px;
+  }
 `;
