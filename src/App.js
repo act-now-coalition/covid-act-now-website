@@ -10,7 +10,6 @@ import FAQ from 'screens/FAQ/FAQ';
 import Endorsements from 'screens/Endorsements/Endorsements';
 import AppBar from 'components/AppBar/AppBar';
 import theme from 'assets/theme';
-import { STATES } from 'utils/constants';
 
 export default function App() {
   return (

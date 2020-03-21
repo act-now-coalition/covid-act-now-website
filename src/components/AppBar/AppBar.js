@@ -5,7 +5,29 @@ import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 
 import Logo from 'assets/images/logo';
-import { Wrapper, Left, StyledTabs, StyledTab } from './AppBar.style';
+import {
+  Wrapper,
+  Left,
+  StyledTabs,
+  StyledTab,
+  MobileMenuTitle,
+  MenuTitle,
+} from './AppBar.style';
+
+import {
+  EmailShareButton,
+  FacebookShareButton,
+  InstapaperShareButton,
+  LinkedinShareButton,
+  PinterestShareButton,
+  PocketShareButton,
+  RedditShareButton,
+  TelegramShareButton,
+  TwitterShareButton,
+  TwitterIcon,
+  ViberShareButton,
+  WhatsappShareButton,
+} from 'react-share';
 
 const _AppBar = () => {
   const history = useHistory();
@@ -28,15 +50,24 @@ const _AppBar = () => {
           ) : (
             <Logo onClick={() => goTo('/')} />
           )}
-          <Typography
-            variant="button"
-            component={Link}
-            to="/"
-            style={{ textDecoration: 'none', color: 'black' }}
-          >
-            covid act now
-          </Typography>
+          <MenuTitle>
+            <Typography
+              variant="button"
+              component={Link}
+              to="/"
+              style={{ textDecoration: 'none', color: 'black' }}
+            >
+              COVID ACT NOW
+            </Typography>
+          </MenuTitle>
         </Left>
+        <TwitterShareButton
+          url="https://covidactnow.org"
+          style={{ alignItems: 'center', display: 'flex' }}
+        >
+          <span>Share This! </span>
+          <TwitterIcon size={32} round={true} />
+        </TwitterShareButton>
         <StyledTabs value={panelIdx} onChange={handleChange}>
           <StyledTab label="Data" disableRipple onClick={() => goTo('/')} />
           <StyledTab label="FAQ" disableRipple onClick={() => goTo('/faq')} />

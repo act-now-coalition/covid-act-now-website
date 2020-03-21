@@ -92,5 +92,8 @@ export const ENDORSERS = [
       'Florence Pirce Grant University Professor',
       'Professor of Health Services, Policy and Practice, Brown University',
     ],
+    quote:
+      "This model offers a great tool for state policy staff who's job it is to advise the Governor and the Director of Health regarding what kinds of policies should be instituted to encourage social distancing to minimize contagion with corona virus. Staff need to be prepared to defend with comparative data their recommendations regarding whether to close schools, close bars, restrict gatherings to a select number or encourage non-essential workers to telecommute. This web site offers state specific estimates that  demonstrate the impact of such policies on the curve of infections, hospitalizations and deaths in a very sophisticated manner.",
+    cols: 3,
   },
 ];

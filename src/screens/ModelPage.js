@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Line } from 'react-chartjs-2';
 import 'chartjs-plugin-annotation';
 
@@ -9,24 +9,32 @@ import { STATES } from 'utils/constants';
 
 import { useModelDatas, Model } from 'utils/model';
 
+
+let lowercaseStates = ['AK', 'CA', 'CO', 'FL', 'MO', 'NM', 'NV', 'NY', 'OR', 'TX', 'WA'];
 function ModelPage() {
   const { id: location } = useParams();
   const locationName = STATES[location];
 
-  let modelDatas = useModelDatas(location);
+  let locationNameForDataLoad = location;
+  console.log(location);
+
+  if (lowercaseStates.indexOf(location) > -1) {
+    locationNameForDataLoad = location.toLowerCase();
+  }
+  let modelDatas = useModelDatas(locationNameForDataLoad);
 
   if (!modelDatas) {
-    return <div>Loading...</div>;
+    return <Header locationName={locationName} />;
   }
 
   // Initialize models
   let baseline = new Model(modelDatas[0], {
     intervention: 'No Action, Current Trends Continue',
-    r0: 2.6,
+    r0: 2.4,
   });
   let distancing = {
     now: new Model(modelDatas[1], {
-      intervention: 'NorCal “Shelter-in-place”',
+      intervention: 'California-style "shelter-in-place"',
       durationDays: 90,
       r0: 1.2,
     }),
@@ -45,16 +53,16 @@ function ModelPage() {
   };
   let distancingPoorEnforcement = {
     now: new Model(modelDatas[7], {
-      intervention: 'TX/FL Distancing/Delay',
+      intervention: 'Texas-style delay/social distancing',
       durationDays: 90,
-      r0: 1.6,
+      r0: 1.7,
     }),
   };
   let contain = {
     now: new Model(modelDatas[2], {
       intervention: 'Wuhan-style Lockdown',
       durationDays: 90,
-      r0: 0.4,
+      r0: 0.3,
     }),
     /*oneWeek: new Model( modelDatas[5], {
         intervention: 'Wuhan Level Containment',
@@ -81,7 +89,7 @@ function ModelPage() {
       'orange',
     ),
     contain.now.getDataset('hospitalizations', duration, 'green'),
-    baseline.getDataset('beds', duration, 'black', 'Hospital Beds'),
+    baseline.getDataset('beds', duration, 'black', 'Available Hospital Beds'),
   ];
   let scenarioComparison = scenarioComparisonOverTime(100);
 
@@ -112,6 +120,7 @@ function ModelPage() {
                 },*/
               }}
             />
+          <div style={{textAlign: 'right', paddingRight: 2, fontSize:10}}>Last updated on March 19th</div>
           </div>
 
           <div
@@ -180,7 +189,7 @@ function ModelPage() {
           }}
         >
           <a href="https://forms.gle/Dn2cjNMJxKyrwY4J9">Sign up</a> to stay up
-          to date on our tool as we improve it's data-set, models, and
+          to date on our tool as we improve its data-set, models, and
           capabilities.
         </h3>
       </div>
@@ -261,6 +270,10 @@ function LineGraph({ data, maxY, annotations, title }) {
             yAxes: [
               {
                 type: 'linear',
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Hospitalizations',
+                },
                 ticks: {
                   max: maxY,
                   callback: function(value, index, values) {
@@ -378,8 +391,8 @@ function LastDatesToAct({ model }) {
   }
 
   const days = 1000 * 60 * 60 * 24;
-  let earlyDate = new Date(model.dateOverwhelmed.getTime() - 21 * days);
-  let lateDate = new Date(model.dateOverwhelmed.getTime() - 14 * days);
+  let earlyDate = new Date(model.dateOverwhelmed.getTime() - 14 * days);
+  let lateDate = new Date(model.dateOverwhelmed.getTime() - 9 * days);
 
   return (
     <b>

@@ -27,29 +27,10 @@ const Endorsements = () => {
         </Quote>
         <EndorsersWrapper cellHeight={284} cols={3}>
           {ENDORSERS.map(e => (
-            <GridListTile key={e.name} cols={1}>
+            <GridListTile key={e.name} cols={e.cols || 1}>
               <EndorsementCard {...e} />
             </GridListTile>
           ))}
-          <GridListTile key="quote" cols={2}>
-            <MorsEndorsement variant="body2" component="p">
-              “This model offers a great tool for state policy staff who's job
-              it is to advise the Governor and the Director of Health regarding
-              what kinds of policies should be instituted to encourage social
-              distancing to minimize contagion with corona virus. Staff need to
-              be prepared to defend with comparative data their recommendations
-              regarding whether to close schools, close bars, restrict
-              gatherings to a select number or encourage non-essential workers
-              to telecommute. This web site offers state specific estimates that
-              demonstrate the impact of such policies on the curve of
-              infections, hospitalizations and deaths in a very sophisticated
-              manner.“
-              <br />
-              <Typography variant="body2" component="span">
-                - Dr. Vincent Mor
-              </Typography>
-            </MorsEndorsement>
-          </GridListTile>
         </EndorsersWrapper>
       </Content>
     </Wrapper>
