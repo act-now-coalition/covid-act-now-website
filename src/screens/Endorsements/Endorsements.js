@@ -1,0 +1,41 @@
+import React from 'react';
+import Typography from '@material-ui/core/Typography';
+import QuoteIcon from '@material-ui/icons/FormatQuoteRounded';
+import GridListTile from '@material-ui/core/GridListTile';
+import Grid from '@material-ui/core/Grid';
+
+import EndorsementCard from 'components/EndorsementCard/EndorsementCard';
+import { ENDORSERS } from 'utils/constants';
+import {
+  Wrapper,
+  Content,
+  Quote,
+  EndorsersWrapper,
+  MorsEndorsement,
+} from './Endorsements.style';
+
+const Endorsements = () => {
+  return (
+    <Wrapper>
+      <Content>
+        <Quote>
+          <QuoteIcon />
+          <Typography variant="h4" component="p">
+            While no projection is perfect, we endorse this tool and model as a
+            valid and important way to frame the decisions political leaders
+            must make NOW.
+          </Typography>
+        </Quote>
+        <EndorsersWrapper container alignItems={'stretch'} spacing={0} wrap={'wrap'}>
+          {ENDORSERS.map(e => (
+            <Grid item xs={12} sm={e.size}>
+              <EndorsementCard {...e} />
+            </Grid>
+          ))}
+        </EndorsersWrapper>
+      </Content>
+    </Wrapper>
+  );
+};
+
+export default Endorsements;
