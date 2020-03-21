@@ -76,7 +76,7 @@ const _AppBar = () => {
             <TwitterIcon size={32} round={true} />
           </TwitterShareButton>
           <StyledTabs value={panelIdx} onChange={handleChange}>
-            <StyledTab label="Data" disableRipple onClick={() => goTo('/')} />
+            <StyledTab label="Map" disableRipple onClick={() => goTo('/')} />
             <StyledTab label="FAQ" disableRipple onClick={() => goTo('/faq')} />
             <StyledTab
               label="Endorsements"

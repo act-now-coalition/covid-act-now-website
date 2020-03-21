@@ -12,7 +12,7 @@ const MobileMenu = ({ open, goTo }) => {
         </a>
       */}
       <a onClick={() => goTo('/')}>
-        Data
+        Map
       </a>
       <a onClick={() => goTo('/faq')}>
         FAQ
