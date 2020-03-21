@@ -54,18 +54,6 @@ export const STATES = {
 export const ENDORSERS = [
   {
     size: 4,
-    name: 'Tomas Pueyo, MSc, MBA',
-    avatarUrl:
-      'https://miro.medium.com/fit/c/256/256/1*SlSL0behknIASOhFR3Q-Lg.png',
-    profileUrl: 'https://medium.com/@tomaspueyo',
-    credentials: [
-      "Author of 'Coronavirus: Why You Must Act Now",
-      "Author of 'Coronavirus: The Hammer and the Dance",
-      'VP of Growth at Course Hero',
-    ],
-  },
-  {
-    size: 4,
     name: 'Nirav Shah, MD, MPH',
     avatarUrl:
       'https://profiles.stanford.edu/proxy/api/cap/profiles/187079/resources/profilephoto/350x350.1543259925959.jpg',
@@ -88,7 +76,19 @@ export const ENDORSERS = [
     ],
   },
   {
-    size: 12,
+    size: 4,
+    name: 'Tomas Pueyo, MSc, MBA',
+    avatarUrl:
+      'https://miro.medium.com/fit/c/256/256/1*SlSL0behknIASOhFR3Q-Lg.png',
+    profileUrl: 'https://medium.com/@tomaspueyo',
+    credentials: [
+      "Author of 'Coronavirus: Why You Must Act Now",
+      "Author of 'Coronavirus: The Hammer and the Dance",
+      'VP of Growth at Course Hero',
+    ],
+  },
+  {
+    size: 8,
     name: 'Vincent Mor, PhD',
     avatarUrl: 'https://vivo.brown.edu/profile-images/124/18/vmor.jpg',
     profileUrl: 'https://vivo.brown.edu/display/vmor',
@@ -98,5 +98,14 @@ export const ENDORSERS = [
     ],
     quote:
       "This model offers a great tool for state policy staff who's job it is to advise the Governor and the Director of Health regarding what kinds of policies should be instituted to encourage social distancing to minimize contagion with corona virus. Staff need to be prepared to defend with comparative data their recommendations regarding whether to close schools, close bars, restrict gatherings to a select number or encourage non-essential workers to telecommute. This web site offers state specific estimates that  demonstrate the impact of such policies on the curve of infections, hospitalizations and deaths in a very sophisticated manner.",
+  },
+  {
+    size: 4,
+    name: 'Ben Goldman-Israelow',
+    avatarUrl: 'https://ysm-res.cloudinary.com/image/upload/v1/yms/prod/c2a0ae84-4c03-4577-a54e-6268e000c68d',
+    profileUrl: 'https://medicine.yale.edu/profile/benjamin_goldman-israelow/',
+    credentials: [
+      'Infectious Disease Fellow, Yale School of Medicine',
+    ],
   },
 ];

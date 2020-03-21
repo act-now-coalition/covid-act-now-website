@@ -7,7 +7,6 @@ import palette from 'assets/theme/palette';
 export const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
   height: 64px;
   padding: 0 20px;
 
@@ -63,6 +62,9 @@ export const MenuTitle = styled.div`
 `;
 
 export const StyledBurger = styled.button`
+  position: relative;
+  top: 15px;
+  margin-left: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;

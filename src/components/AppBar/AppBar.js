@@ -68,14 +68,12 @@ const _AppBar = () => {
             </Typography>
           </MenuTitle>
         </Left>
-        <TwitterShareButton
-          url="https://covidactnow.org"
-          style={{ alignItems: 'center', display: 'flex' }}
-        >
-          <span>Share This! </span>
-          <TwitterIcon size={32} round={true} />
-        </TwitterShareButton>
         <StyledTabs value={panelIdx} onChange={handleChange}>
+          <TwitterShareButton
+            url="https://covidactnow.org"
+            style={{ alignItems: 'center', display: 'flex' }}>
+            <TwitterIcon size={32} round={true} />
+          </TwitterShareButton>
           <StyledTab label="Data" disableRipple onClick={() => goTo('/')} />
           <StyledTab label="FAQ" disableRipple onClick={() => goTo('/faq')} />
           <StyledTab
@@ -85,6 +83,11 @@ const _AppBar = () => {
           />
         </StyledTabs>
         <StyledMobileMenu>
+            <TwitterShareButton
+              url="https://covidactnow.org"
+              style={{ alignItems: 'center', display: 'flex' }}>
+              <TwitterIcon size={32} round={true} />
+            </TwitterShareButton>
            <Burger open={open} setOpen={setOpen} />
            <MobileMenu open={open} setOpen={setOpen} goTo={goTo} />
         </StyledMobileMenu>
