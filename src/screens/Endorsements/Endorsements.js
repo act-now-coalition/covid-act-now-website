@@ -2,6 +2,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import QuoteIcon from '@material-ui/icons/FormatQuoteRounded';
 import GridListTile from '@material-ui/core/GridListTile';
+import Grid from '@material-ui/core/Grid';
 
 import EndorsementCard from 'components/EndorsementCard/EndorsementCard';
 import { ENDORSERS } from 'utils/constants';
@@ -25,11 +26,11 @@ const Endorsements = () => {
             must make NOW.
           </Typography>
         </Quote>
-        <EndorsersWrapper cellHeight={284} cols={3}>
+        <EndorsersWrapper container alignItems={'stretch'} spacing={0} wrap={'wrap'}>
           {ENDORSERS.map(e => (
-            <GridListTile key={e.name} cols={e.cols || 1}>
+            <Grid item xs={12} sm={e.size}>
               <EndorsementCard {...e} />
-            </GridListTile>
+            </Grid>
           ))}
         </EndorsersWrapper>
       </Content>
