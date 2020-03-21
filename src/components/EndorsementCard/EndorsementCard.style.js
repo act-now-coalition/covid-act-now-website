@@ -42,6 +42,10 @@ export const Quote = styled.div`
   color: #546e7a;
   padding: 24px;
 
+  p {
+    font-size: 13px
+  }
+
   @media (min-width: 600px) {
     min-height: 305px;
   }
