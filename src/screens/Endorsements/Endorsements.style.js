@@ -4,8 +4,7 @@ import Typography from '@material-ui/core/Typography';
 
 export const Wrapper = styled.div`
   background-color: #f2f2f2;
-  padding: 0;
-  padding: 24px;
+  padding: 1rem;
   min-height: calc(100vh - 64px);
 `;
 

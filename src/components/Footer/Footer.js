@@ -33,13 +33,13 @@ const Footer = ({ children }) => {
           Endorsements
         </Typography>
 
-        <Typography variant="body2" component="p" style={{ color: '#222' }}>
-          <h2 style={{ border: '1px solid #ccc', padding: 20 }}>
+        <Typography variant="h4" component="h2" style={{ border: '1px solid #ccc', borderRadius: '3px', padding: 20, marginBottom: '2rem' }}>
             "While no projection is perfect, we endorse this tool and model as a
             valid and important way to frame the decisions political leaders
             must make now."
-          </h2>
+        </Typography>
 
+        <Typography variant="body2" component="p" style={{ color: '#222' }}>
           <p style={{ color: '#222' }}>
             Nirav Shah, MD, MPH, Senior Scholar, Stanford University Clinical
             Excellence Research Center; Former Commissioner, New York State
