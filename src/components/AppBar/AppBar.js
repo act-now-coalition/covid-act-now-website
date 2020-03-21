@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState }               from 'react';
 import { useHistory, useLocation, Link } from 'react-router-dom';
-import { ArrowBack } from '@material-ui/icons';
-import AppBar from '@material-ui/core/AppBar';
-import Typography from '@material-ui/core/Typography';
+import { ArrowBack }                     from '@material-ui/icons';
+import AppBar                            from '@material-ui/core/AppBar';
+import Typography                        from '@material-ui/core/Typography';
 
-import Logo from 'assets/images/logo';
+import Logo                              from 'assets/images/logo';
+import MobileMenu from'./MobileMenu';
+import Burger from'./Burger';
 import {
   Wrapper,
   Left,
@@ -12,8 +14,8 @@ import {
   StyledTab,
   MobileMenuTitle,
   MenuTitle,
+  StyledMobileMenu,
 } from './AppBar.style';
-
 import {
   EmailShareButton,
   FacebookShareButton,
@@ -27,19 +29,24 @@ import {
   TwitterIcon,
   ViberShareButton,
   WhatsappShareButton,
-} from 'react-share';
+} from "react-share";
 
 const _AppBar = () => {
   const history = useHistory();
   const { pathname } = useLocation();
   const panels = ['/', '/faq', '/endorsements'];
   const [panelIdx, setPanelIdx] = useState(panels.indexOf(pathname) || 0);
+  const [open, setOpen] = useState(false);
 
   const handleChange = (_, value) => {
     setPanelIdx(value);
   };
 
-  const goTo = route => history.push(route);
+  const goTo = route => {
+    setOpen(false);
+
+    history.push(route)
+  };
 
   return (
     <AppBar position="sticky">
@@ -54,7 +61,7 @@ const _AppBar = () => {
             <Typography
               variant="button"
               component={Link}
-              to="/"
+              onClick={() => goTo('/')}
               style={{ textDecoration: 'none', color: 'black' }}
             >
               COVID ACT NOW
@@ -77,6 +84,10 @@ const _AppBar = () => {
             onClick={() => goTo('/endorsements')}
           />
         </StyledTabs>
+        <StyledMobileMenu>
+           <Burger open={open} setOpen={setOpen} />
+           <MobileMenu open={open} setOpen={setOpen} goTo={goTo} />
+        </StyledMobileMenu>
       </Wrapper>
     </AppBar>
   );
