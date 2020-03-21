@@ -7,6 +7,7 @@ import overrides from './overrides';
 const theme = createMuiTheme({
   palette,
   overrides,
+  typography,
   zIndex: {
     appBar: 1200,
     drawer: 1100,

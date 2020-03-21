@@ -1,47 +1,41 @@
 import palette from './palette';
 
 export default {
-  h1: {
-    color: palette.text.primary,
-    fontWeight: 500,
-    fontSize: '35px',
-    letterSpacing: '-0.24px',
-    lineHeight: '40px'
+  p: {
+    lineHeight: '1',
   },
   h2: {
-    color: palette.text.primary,
-    fontWeight: 500,
-    fontSize: '29px',
-    letterSpacing: '-0.24px',
-    lineHeight: '32px'
+    fontSize: '1.8rem',
+    fontWeight: '500',
+    lineHeight: '2.2rem',
+    margin: '0 0 2rem',
+    '@media (min-width:600px)': {
+      fontSize: '2.8rem',
+    },
   },
   h3: {
-    color: palette.text.primary,
-    fontWeight: 500,
-    fontSize: '24px',
-    letterSpacing: '-0.06px',
-    lineHeight: '28px'
+    fontSize: '1.8rem',
+    fontWeight: '500',
+    margin: '2rem 0 1rem',
+    '@media (min-width:600px)': {
+      fontSize: '2.2rem',
+    },
   },
   h4: {
-    color: palette.text.primary,
-    fontWeight: 500,
-    fontSize: '20px',
-    letterSpacing: '-0.06px',
-    lineHeight: '24px'
+    fontSize: '1.4rem',
+    fontWeight: '500',
+    '@media (min-width:600px)': {
+      fontSize: '1.5rem',
+    },
   },
   h5: {
-    color: palette.text.primary,
-    fontWeight: 500,
-    fontSize: '16px',
-    letterSpacing: '-0.05px',
-    lineHeight: '20px'
-  },
-  h6: {
-    color: palette.text.primary,
-    fontWeight: 500,
-    fontSize: '14px',
-    letterSpacing: '-0.05px',
-    lineHeight: '20px'
+    fontWeight: '500',
+    fontSize: '1.2rem',
+    margin: '1.4rem 0',
+    '@media (min-width:600px)': {
+      margin: '1.8rem 0 1.2rem',
+      fontSize: '1.4rem',
+    },
   },
   subtitle1: {
     color: palette.text.primary,
@@ -58,15 +52,21 @@ export default {
   },
   body1: {
     color: palette.text.primary,
-    fontSize: '14px',
+    fontSize: '0.9rem',
     letterSpacing: '-0.05px',
     lineHeight: '21px'
   },
   body2: {
     color: palette.text.secondary,
-    fontSize: '12px',
+    fontSize: '0.9rem',
+    '@media (min-width:600px)': {
+      fontSize: '1rem',
+    },
     letterSpacing: '-0.04px',
-    lineHeight: '18px'
+    lineHeight: '1.4rem'
+  },
+  whiteText: {
+    color: palette.white,
   },
   button: {
     color: palette.text.primary,

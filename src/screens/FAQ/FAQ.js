@@ -119,7 +119,7 @@ const FAQ = ({ children }) => {
           </ul>
           <br />
           If you have time to give us feedback or access to this expertise, have
-          questions, or otherwise want ot get involved, please get in touch -{' '}
+          questions, or otherwise want to get involved, please get in touch -{' '}
           <Link
             underline="hover"
             color="textPrimary"

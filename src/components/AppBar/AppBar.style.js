@@ -130,7 +130,7 @@ export const StyledMenu = styled.nav`
   a {
     cursor: pointer;
     font-size: 2rem;
-    padding: 1rem 0;
+    padding: 1.5rem 0;
     font-weight: bold;
     color: #0D0C1D;
     text-decoration: none;
