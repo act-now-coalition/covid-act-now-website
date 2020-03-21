@@ -167,7 +167,7 @@ const Footer = ({ children }) => {
           </ul>
           <br />
           If you have time to give us feedback or access to this expertise, have
-          questions, or otherwise want ot get involved, please get in touch with
+          questions, or otherwise want to get involved, please get in touch with
           us via email:
           <a href="mailto:jonathan@covidactnow.org">
             jonathan(at)covidactnow.org
