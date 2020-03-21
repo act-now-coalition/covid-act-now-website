@@ -10,6 +10,7 @@ import Burger from'./Burger';
 import {
   Wrapper,
   Left,
+  StyledDesktopMenu,
   StyledTabs,
   StyledTab,
   MobileMenuTitle,
@@ -68,20 +69,22 @@ const _AppBar = () => {
             </Typography>
           </MenuTitle>
         </Left>
-        <StyledTabs value={panelIdx} onChange={handleChange}>
+        <StyledDesktopMenu>
           <TwitterShareButton
             url="https://covidactnow.org"
             style={{ alignItems: 'center', display: 'flex' }}>
             <TwitterIcon size={32} round={true} />
           </TwitterShareButton>
-          <StyledTab label="Data" disableRipple onClick={() => goTo('/')} />
-          <StyledTab label="FAQ" disableRipple onClick={() => goTo('/faq')} />
-          <StyledTab
-            label="Endorsements"
-            disableRipple
-            onClick={() => goTo('/endorsements')}
-          />
-        </StyledTabs>
+          <StyledTabs value={panelIdx} onChange={handleChange}>
+            <StyledTab label="Data" disableRipple onClick={() => goTo('/')} />
+            <StyledTab label="FAQ" disableRipple onClick={() => goTo('/faq')} />
+            <StyledTab
+              label="Endorsements"
+              disableRipple
+              onClick={() => goTo('/endorsements')}
+            />
+          </StyledTabs>
+        </StyledDesktopMenu>
         <StyledMobileMenu>
             <TwitterShareButton
               url="https://covidactnow.org"
