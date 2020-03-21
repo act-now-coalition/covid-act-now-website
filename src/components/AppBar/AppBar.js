@@ -5,8 +5,14 @@ import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 
 import Logo from 'assets/images/logo';
-import { Wrapper, Left, StyledTabs, StyledTab, MobileMenuTitle, MenuTitle } from './AppBar.style';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import {
+  Wrapper,
+  Left,
+  StyledTabs,
+  StyledTab,
+  MobileMenuTitle,
+  MenuTitle,
+} from './AppBar.style';
 
 import {
   EmailShareButton,
@@ -21,14 +27,12 @@ import {
   TwitterIcon,
   ViberShareButton,
   WhatsappShareButton,
-} from "react-share";
-
-
+} from 'react-share';
 
 const _AppBar = () => {
   const history = useHistory();
   const { pathname } = useLocation();
-  const panels = ['/', '/faq'];
+  const panels = ['/', '/faq', '/endorsements'];
   const [panelIdx, setPanelIdx] = useState(panels.indexOf(pathname) || 0);
 
   const handleChange = (_, value) => {
@@ -57,23 +61,21 @@ const _AppBar = () => {
             </Typography>
           </MenuTitle>
         </Left>
-        <TwitterShareButton url="https://covidactnow.org" style={{ alignItems: 'center', display: 'flex' }}
-><span>Share This! </span>
-            <TwitterIcon size={32} round={true} />
-          </TwitterShareButton>
+        <TwitterShareButton
+          url="https://covidactnow.org"
+          style={{ alignItems: 'center', display: 'flex' }}
+        >
+          <span>Share This! </span>
+          <TwitterIcon size={32} round={true} />
+        </TwitterShareButton>
         <StyledTabs value={panelIdx} onChange={handleChange}>
           <StyledTab label="Data" disableRipple onClick={() => goTo('/')} />
           <StyledTab label="FAQ" disableRipple onClick={() => goTo('/faq')} />
-          {/* <StyledTab
+          <StyledTab
             label="Endorsements"
             disableRipple
             onClick={() => goTo('/endorsements')}
-          /> */}
-          {/* <StyledTab
-            label="Donate"
-            disableRipple
-            onClick={() => goTo('/donate')}
-          /> */}
+          />
         </StyledTabs>
       </Wrapper>
     </AppBar>
