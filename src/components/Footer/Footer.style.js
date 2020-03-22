@@ -1,17 +1,71 @@
 import styled from 'styled-components';
-import { colors } from '@material-ui/core';
 
-import palette from 'assets/theme/palette';
+export const StyledFooter = styled.div`
+  padding: 1rem;
+  background: white;
 
-export const Wrapper = styled.div`
-  padding: 1rem 2rem 2rem;
-
-  '@media (min-width:600px)': {
-    padding: '3rem',
-  },
+  @media (min-width: 600px) {
+    padding: 2rem;
+  }
 `;
 
-export const Content = styled.div`
-  max-width: 900px;
-  margin: auto;
+export const StyledFooterBody = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`;
+
+export const StyledFooterBodyLinks = styled.div`
+  flex: 0 0 100%;
+  text-align: center;
+  padding: 2rem 0;
+
+  @media (min-width: 600px) {
+    flex: 0 0 40%;
+    padding: 3rem 0;
+  }
+
+  span {
+    cursor: pointer;
+    margin: 0 1rem;
+  }
+`;
+
+export const StyledFooterBodyCallout = styled.div`
+  flex: 0 0 100%;
+  text-align: center;
+  padding: 1rem 0 2rem;
+
+  @media (min-width: 600px) {
+    flex: 0 0 40%;
+    padding: 3rem;
+  }
+`;
+
+export const StyledFooterCaption = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const StyledFooterHeader = styled.div`
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  svg {
+    width: 65px;
+    height: 65px;
+  }
+
+  @media(min-width: 600px) {
+    padding: 0 4rem;
+  }
+
+  div {
+    width: 35%;
+    height: 1px;
+    background: black;
+  }
 `;
