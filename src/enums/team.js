@@ -31,7 +31,7 @@ export default [
   },
   {
     name: "Ali Berlin Johnson",
-    title: "Stealth Founding Designer",
+    title: "ex-Firebase Designer",
     link: "https://www.linkedin.com/in/berlinjohnson/",
   },
   {
@@ -86,7 +86,7 @@ export default [
   },
   {
     name: "James Tamplin",
-    title: "Charm Labs Board Member",
+    title: "ex-Firebase CEO",
     link: "https://www.linkedin.com/in/jamest/",
   }
 ];
