@@ -19,6 +19,7 @@ import {
 } from './AppBar.style';
 import {
   EmailShareButton,
+  FacebookIcon,
   FacebookShareButton,
   InstapaperShareButton,
   LinkedinShareButton,
@@ -67,8 +68,15 @@ const _AppBar = () => {
           </MenuTitle>
         </Left>
         <StyledDesktopMenu>
+          <FacebookShareButton
+            url={shareURL}
+            quote={shareTitle}
+            style={{ alignItems: 'center', display: 'flex', paddingRight: 28 }}>
+            <FacebookIcon size={32} round={true} />
+          </FacebookShareButton>
           <TwitterShareButton
-            url="https://covidactnow.org"
+            url={shareURL}
+            title={shareTitle}
             style={{ alignItems: 'center', display: 'flex' }}>
             <TwitterIcon size={32} round={true} />
           </TwitterShareButton>
@@ -81,7 +89,8 @@ const _AppBar = () => {
         </StyledDesktopMenu>
         <StyledMobileMenu>
             <TwitterShareButton
-              url="https://covidactnow.org"
+              url={shareURL}
+              title={shareTitle}
               style={{ alignItems: 'center', display: 'flex' }}>
               <TwitterIcon size={32} round={true} />
             </TwitterShareButton>
