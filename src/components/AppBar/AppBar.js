@@ -47,6 +47,9 @@ const _AppBar = () => {
     history.push(route)
   };
 
+  const shareURL = "https://covidactnow.org"
+  const shareTitle = "See a forecast for how long each US state has until COVID-19 overwhelms hospitals and how interventions could flatten the curve:"
+
   return (
     <AppBar position="sticky">
       <Wrapper>

@@ -12,3 +12,14 @@ export const Content = styled.div`
     padding: 0;
   }
 `;
+
+export const ShareSpacer = styled.div`
+	padding-right: 32px;
+`;
+
+export const ShareContainer = styled.div`
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+`;
