@@ -36,26 +36,26 @@ const About = ({ children }) => {
           Who built this tool?
         </Typography>
         <Typography variant="p" component="p">
-          CoVidActNow was founded by <a href="https://www.linkedin.com/in/maxhenderson/">Max Henderson</a>, <a href="https://en.wikipedia.org/wiki/Jonathan_Kreiss-Tomkins">Rep Jonathan Kreiss-Tomkins</a>, <a href="https://twitter.com/igorkofman">Igor Kofman</a>, and <a href="https://www.linkedin.com/in/zacharyrosen/">Zack Rosen</a>, with medical and policy guidance from <a href="">Nirav R. Shah</a> (MD, MPH, senior scholar, Stanford University Clinical Excellence Research Center).
+          CoVidActNow was founded by <a href="https://www.linkedin.com/in/maxhenderson/">Max Henderson</a>, <a href="https://en.wikipedia.org/wiki/Jonathan_Kreiss-Tomkins">Rep Jonathan Kreiss-Tomkins</a>, <a href="https://twitter.com/igorkofman">Igor Kofman</a>, and <a href="https://www.linkedin.com/in/zacharyrosen/">Zack Rosen</a>, with medical and policy guidance from <a href="https://profiles.stanford.edu/nirav-shah">Nirav R. Shah</a> (MD, MPH, senior scholar, Stanford University Clinical Excellence Research Center).
         </Typography>
         <Typography variant="p" component="p">
           We have since grown into a large distributed team:
         </Typography>
         <ul>
           {TEAM.map(teammate => { return <li>
-              <a href={teammate.link} target="_blank">{teammate.name}</a> {" "}{teammate.title}
+              <a href={teammate.link} target="_blank" rel="noopener noreferrer">{teammate.name}</a> {" "}{teammate.title}
             </li>})
           }
         </ul>
 
         <Typography variant="p" component="p">
-          Our work has been <a href="https://covidactnow.org/endorsements" target="_blank">validated and endorsed</a> by a number of experts in epidemiology, public health, and medicine.
+          Our work has been <a href="https://covidactnow.org/endorsements" target="_blank" rel="noopener noreferrer">validated and endorsed</a> by a number of experts in epidemiology, public health, and medicine.
         </Typography>
         <Typography variant="p" component="p">
-          <a href="https://docs.google.com/spreadsheets/u/3/d/1YEj4Vr6lG1jQ1R3LG6frijJYNynKcgTjzo2n0FsBwZA/htmlview#gid=1579455912" target="_blank">Our model is public.</a>
+          <a href="https://docs.google.com/spreadsheets/u/3/d/1YEj4Vr6lG1jQ1R3LG6frijJYNynKcgTjzo2n0FsBwZA/htmlview#gid=1579455912" target="_blank" rel="noopener noreferrer">Our model is public.</a>
         </Typography>
         <Typography variant="p" component="p">
-          <a href="https://docs.google.com/document/u/3/d/1ETeXAfYOvArfLvlxExE0_xrO5M4ITC0_Am38CRusCko/preview?sle=true" target="_blank">So are our assumptions and definitions.</a>
+          <a href="https://docs.google.com/document/u/3/d/1ETeXAfYOvArfLvlxExE0_xrO5M4ITC0_Am38CRusCko/preview?sle=true" target="_blank" rel="noopener noreferrer">So are our assumptions and definitions.</a>
         </Typography>
 
         <Typography variant="h5" component="h5">
@@ -63,7 +63,7 @@ const About = ({ children }) => {
         </Typography>
 
         <Typography variant="p" component="p">
-         We built covidactnow.org to <a href="https://medium.com/@tomaspueyo/coronavirus-act-today-or-people-will-die-f4d3d9cd99ca" target="_blank">solve an urgent problem:</a> If we try to fight COVID in the present we will lose (e.g., Italy). We can only beat COVID by understanding what it will do to us in the near future.
+         We built covidactnow.org to <a href="https://medium.com/@tomaspueyo/coronavirus-act-today-or-people-will-die-f4d3d9cd99ca" target="_blank" rel="noopener noreferrer">solve an urgent problem:</a> If we try to fight COVID in the present we will lose (e.g., Italy). We can only beat COVID by understanding what it will do to us in the near future.
         </Typography>
 
         <Typography variant="p" component="p">
@@ -103,7 +103,7 @@ const About = ({ children }) => {
           <li>Product Manager</li>
         </ul>
         <Typography variant="p" component="p">
-          <a href="mailto:jonathan@covidactnow.org" target="_blank">Email us</a> to share feedback or access to expertise, questions, or if you otherwise want to help.
+          <a href="mailto:jonathan@covidactnow.org" target="_blank" rel="noopener noreferrer">Email us</a> to share feedback or access to expertise, questions, or if you otherwise want to help.
         </Typography>
       </Content>
     </Wrapper>
