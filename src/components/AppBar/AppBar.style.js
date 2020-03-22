@@ -48,7 +48,7 @@ export const StyledTab = styled(Tab)`
   font-size: 15px;
   padding: 0;
 
-  &.Mui-selected {
+  &[aria-selected="true"] {
     color: ${palette.secondary.main};
   }
 
