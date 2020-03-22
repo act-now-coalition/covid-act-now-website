@@ -1,7 +1,7 @@
 export default [
   {
     name: "Max Henderson",
-    title: "ex-Firebase/Google General Manager",
+    title: "ex-Firebase/Google Executive",
     link: "https://www.linkedin.com/in/maxhenderson/",
   },
   {
@@ -11,22 +11,22 @@ export default [
   },
   {
     name: "Igor Kofman",
-    title: "ex-Dropbox Paper CTO",
+    title: "ex-CTO, Dropbox Paper",
     link: "https://twitter.com/igorkofman",
   },
   {
     name: "Nirav R. Shah",
-    title: "MD, MPH, Senior Scholar, Stanford University Clinical Excellence Research Center",
+    title: "MD, MPH, senior scholar, Stanford University Clinical Excellence Research Center",
     link: "https://profiles.stanford.edu/nirav-shah",
   },
   {
     name: "Zack Rosen",
-    title: "Pantheon CEO",
+    title: "CEO, Pantheon",
     link: "https://www.linkedin.com/in/zacharyrosen/",
   },
   {
     name: "James Tamplin",
-    title: "ex-Firebase CEO",
+    title: "Founder/CEO, Firebase",
     link: "https://www.linkedin.com/in/jamest/",
   },
   {
@@ -36,57 +36,57 @@ export default [
   },
   {
     name: "Zack Rosen",
-    title: "Stitch Labs Engineering Team Lead",
+    title: "Engineering Lead, Stitch Labs",
     link: "https://www.linkedin.com/in/zack-rosen-a03abb3a/",
   },
   {
     name: "David Strauss",
-    title: "Pantheon CTO",
+    title: "CTO, Pantheon",
     link: "https://twitter.com/davidstrauss?lang=en",
   },
   {
     name: "Ali Berlin Johnson",
-    title: "ex-Firebase Designer",
+    title: "Ex Lead Designer, Firebase",
     link: "https://www.linkedin.com/in/berlinjohnson/",
   },
   {
     name: "Misha Chellam",
-    title: "Council on Society and Technology ED",
+    title: "Council on Society & Technology",
     link: "https://www.linkedin.com/in/mishachellam/",
   },
   {
     name: "Jacob Redding",
-    title: "Accenture Senior Principal",
+    title: "Sr Principal, Accenture",
     link: "https://www.linkedin.com/in/jacobredding/",
   },
   {
     name: "Joseph Ensminger",
-    title: "Growth and Marketing",
+    title: "Founder, J.E. Consulting",
     link: "https://www.linkedin.com/in/josephensminger/",
   },
   {
     name: "Simon Frid",
-    title: "Software Engineer",
+    title: "Ex Engineering Lead, Gigster",
     link: "https://twitter.com/fridiculou5",
   },
   {
     name: "Virsaviya Efraim",
-    title: "Almanac Software Engineer",
+    title: "Software Engineer, Almanac",
     link: "https://www.linkedin.com/in/virsaviyaefraim/",
   },
   {
     name: "Andrew Krackov",
-    title: "Hillcrest Advisory",
+    title: "President, Hillcrest Advisory",
     link: "https://www.linkedin.com/in/andykrackov/",
   },
   {
     name: "Adnan Pirzada",
-    title: "Lattice Software Engineer",
+    title: "Software Engineer, Lattice",
     link: "https://www.linkedin.com/in/adpirz/",
   },
   {
     name: "Rachel RoseFigura",
-    title: "Uber Software Engineer",
+    title: "Software Engineer, Uber",
     link: "https://www.linkedin.com/in/rachelrosefigura/",
   },
 ];
