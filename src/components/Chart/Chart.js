@@ -13,14 +13,14 @@ const Chart = ({ state, subtitle, data, dateOverwhelmed }) => {
     type: 'area',
     data: data[0].data,
   };
-  const txStyle = {
-    name: "3 Months of 'Social Distancing'",
+  const socialDistancing = {
+    name: "3 Months of Social distancing",
     color: '#FFA726',
     type: 'area',
     data: data[2].data,
   };
-  const caStyle = {
-    name: "3 Months of 'Shelter in Place'",
+  const shelterInPlace = {
+    name: "3 Months of Shelter-in-place",
     color: '#29B6F6',
     type: 'area',
     data: data[1].data,
@@ -31,7 +31,7 @@ const Chart = ({ state, subtitle, data, dateOverwhelmed }) => {
     type: 'area',
     data: data[3].data,
   };
-  const beds = {
+  const availableBeds = {
     name: 'Available Hospital Beds',
     color: 'black',
     type: 'line',
@@ -107,12 +107,19 @@ const Chart = ({ state, subtitle, data, dateOverwhelmed }) => {
         },
       },
     },
-    series: [noAction, txStyle, caStyle, wuhanStyle, beds],
+    series: [
+      noAction,
+      socialDistancing,
+      shelterInPlace,
+      wuhanStyle,
+      availableBeds,
+    ],
   });
 
   return (
     <Wrapper>
       <HighchartsReact highcharts={Highcharts} options={options} />
+      <span>Last Updated: March 19th</span>
     </Wrapper>
   );
 };

@@ -80,12 +80,12 @@ function ModelPage() {
 
   // Initialize models
   let baseline = new Model(modelDatas[0], {
-    intervention: 'No Action, Current Trends Continue',
+    intervention: 'No Action',
     r0: 2.4,
   });
   let distancing = {
     now: new Model(modelDatas[1], {
-      intervention: 'California-style "shelter-in-place"',
+      intervention: 'Shelter-in-place',
       durationDays: 90,
       r0: 1.2,
     }),
@@ -104,7 +104,7 @@ function ModelPage() {
   };
   let distancingPoorEnforcement = {
     now: new Model(modelDatas[7], {
-      intervention: 'Texas-style delay/social distancing',
+      intervention: 'Social distancing',
       durationDays: 90,
       r0: 1.7,
     }),
