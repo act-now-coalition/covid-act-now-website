@@ -131,6 +131,13 @@ const _AppBar = () => {
           </StyledTabs>
         </StyledDesktopMenu>
         <StyledMobileMenu>
+          <FacebookShareButton
+            url={shareURL}
+            title={shareTitle}
+            style={{ alignItems: 'center', display: 'flex', paddingRight: 8 }}
+          >
+            <FacebookIcon size={32} round={true} />
+          </FacebookShareButton>
           <TwitterShareButton
             url={shareURL}
             title={shareTitle}
