@@ -10,14 +10,19 @@ import {
   FacebookIcon,
   TwitterIcon,
   LinkedinIcon,
-} from "react-share";
+} from 'react-share';
 
 import Footer from 'components/Footer/Footer';
 import Header from 'components/Header/Header';
 import Chart from 'components/Chart/Chart';
 import Callout from 'components/Callout/Callout';
 import Newsletter from 'components/Newsletter/Newsletter';
-import { Wrapper, Content, ShareContainer, ShareSpacer } from './ModelPage.style';
+import {
+  Wrapper,
+  Content,
+  ShareContainer,
+  ShareSpacer,
+} from './ModelPage.style';
 import { STATES } from 'enums';
 
 import { useModelDatas, Model } from 'utils/model';
@@ -66,9 +71,9 @@ function ModelPage() {
     locationNameForDataLoad = location.toLowerCase();
   }
   let modelDatas = useModelDatas(locationNameForDataLoad);
-  const shareURL = "https://covidactnow.org";
-  const shareQuote = `This is when ${locationName}'s hospital system will be overloaded by COVID-19:`;
-  const hashtag = "#COVIDActNow"
+  const shareURL = 'https://covidactnow.org';
+  const shareQuote = `This is the point of no return for intervention to prevent ${locationName}'s hospital system from being overloaded by Coronavirus: `;
+  const hashtag = '#COVIDActNow';
 
   if (!modelDatas) {
     return <Header locationName={locationName} />;
@@ -161,25 +166,33 @@ function ModelPage() {
 
           <Callout borderColor="black">
             <ShareContainer>
+              <div
+                style={{ paddingRight: 28, fontWeight: 'bold' }}
+              >{`Share ${locationName}'s COVID-19 trends:`}</div>
 
-              <div style={{paddingRight: 28, fontWeight: "bold"}}>{`Share ${locationName}'s COVID-19 trends:`}</div>
-
-              <FacebookShareButton url={shareURL} quote={shareQuote} hashtag={hashtag}>
+              <FacebookShareButton
+                url={shareURL}
+                quote={shareQuote}
+                hashtag={hashtag}
+              >
                 <FacebookIcon size={40} round={false} borderRadius={5} />
               </FacebookShareButton>
 
               <ShareSpacer />
 
-              <TwitterShareButton url={shareURL} title={shareQuote} >
+              <TwitterShareButton url={shareURL} title={shareQuote}>
                 <TwitterIcon size={40} round={false} borderRadius={5} />
               </TwitterShareButton>
 
               <ShareSpacer />
 
-              <LinkedinShareButton url={shareURL} title={shareQuote} hashtags={[hashtag]}>
+              <LinkedinShareButton
+                url={shareURL}
+                title={shareQuote}
+                hashtags={[hashtag]}
+              >
                 <LinkedinIcon size={40} round={false} borderRadius={5} />
               </LinkedinShareButton>
-
             </ShareContainer>
           </Callout>
 
@@ -222,7 +235,7 @@ function ModelPage() {
             </li>
           </ul>
         </Panel>
-        <div style={{marginTop: '3rem'}}>
+        <div style={{ marginTop: '3rem' }}>
           <Newsletter />
         </div>
       </Content>
