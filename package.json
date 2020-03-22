@@ -25,6 +25,7 @@
     "react-scripts": "3.4.0",
     "react-share": "^4.1.0",
     "react-usa-map": "^1.4.0",
+    "sharp": "^0.25.2",
     "styled-components": "^5.0.1"
   },
   "scripts": {
