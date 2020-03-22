@@ -35,7 +35,7 @@ import {
 const _AppBar = () => {
   const history = useHistory();
   const { pathname } = useLocation();
-  const panels = ['/', '/faq', '/endorsements'];
+  const panels = ['/', '/faq', '/about', '/endorsements'];
   const [panelIdx, setPanelIdx] = useState(panels.indexOf(pathname) || 0);
   const [open, setOpen] = useState(false);
 
@@ -78,6 +78,7 @@ const _AppBar = () => {
           <StyledTabs value={panelIdx} onChange={handleChange}>
             <StyledTab label="Map" disableRipple onClick={() => goTo('/')} />
             <StyledTab label="FAQ" disableRipple onClick={() => goTo('/faq')} />
+            <StyledTab label="About" disableRipple onClick={() => goTo('/about')} />
             <StyledTab
               label="Endorsements"
               disableRipple
