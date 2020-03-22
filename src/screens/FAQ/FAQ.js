@@ -11,7 +11,7 @@ const FAQ = ({ children }) => {
     <Wrapper style={{ backgroundColor: '#F2F2F2' }}>
       <Content>
         <Typography variant="h3" component="h1">
-          FAQ
+          Model
         </Typography>
 
         <Typography variant="h5" component="h5">
