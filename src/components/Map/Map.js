@@ -30,7 +30,7 @@ function Map() {
     }, {});
 
   return (
-    <div className="App">
+    <div className="Map">
       <USAMap width="100%" height="auto" customize={statesCustomConfig()} />
     </div>
   );
