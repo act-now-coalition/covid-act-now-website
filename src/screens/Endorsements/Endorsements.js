@@ -11,7 +11,6 @@ import {
   Content,
   Quote,
   EndorsersWrapper,
-  MorsEndorsement,
 } from './Endorsements.style';
 
 const Endorsements = () => {
@@ -27,8 +26,8 @@ const Endorsements = () => {
           </Typography>
         </Quote>
         <EndorsersWrapper container alignItems={'stretch'} spacing={0} wrap={'wrap'}>
-          {ENDORSERS.map(e => (
-            <Grid item xs={12} sm={e.size}>
+          {ENDORSERS.map((e, index) => (
+            <Grid item key={index} xs={12} sm={e.size}>
               <EndorsementCard {...e} />
             </Grid>
           ))}
