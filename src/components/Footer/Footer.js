@@ -169,7 +169,7 @@ const Footer = ({ children }) => {
           <div style={{marginTop: '1.5rem', marginBottom: '1.5rem' }}>
             <Newsletter />
           </div>
-          If you have time to give us feedback or access to this expertise, have questions, or otherwise want to get involved, please get in touch with us via email: <a href="mailto:jonathan@covidactnow.org">jonathan(at)covidactnow.org</a>
+          If you have time to give us feedback or access to this expertise, have questions, or otherwise want to get involved, <a href="mailto:jonathan@covidactnow.org">please email us</a>
         </Typography>
       </Content>
     </Wrapper>

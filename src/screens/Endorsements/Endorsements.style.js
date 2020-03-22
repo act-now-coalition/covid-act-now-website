@@ -18,7 +18,7 @@ export const Content = styled.div`
   }
 
   @media (min-width: 600px) {
-    width: 900px;
+    width: 1000px;
   }
 `;
 
@@ -55,16 +55,4 @@ export const Quote = styled.div`
 `;
 
 export const EndorsersWrapper = styled(Grid)`
-  @media (min-width: 600px) {
-    width: 900px;
-  }
-`;
-
-export const MorsEndorsement = styled(Typography)`
-  height: 284px;
-  background-color: white;
-  border-radius: 4px;
-  margin: 12px 12px 0 0;
-  padding: 28px;
-  color: #546e7a;
 `;
