@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../../App.css'; /* optional for styling like the :hover pseudo-class */
 import USAMap from 'react-usa-map';
 import { Redirect } from 'react-router-dom';
-import { STATES } from 'enums';
+import { STATES, STATE_TO_INTERVENTION, INTERVENTION_COLOR_MAP } from 'enums';
 
 function Map() {
   let [redirectTarget, setRedirectTarget] = useState();
@@ -16,7 +16,7 @@ function Map() {
       return {
         ...config,
         [currState]: {
-          fill: 'rgba(1,1,1,0.7)',
+          fill: INTERVENTION_COLOR_MAP[STATE_TO_INTERVENTION[currState]],
           clickHandler: event => {
             setRedirectTarget(`/state/${currState}`);
           },
