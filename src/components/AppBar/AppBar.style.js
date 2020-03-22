@@ -48,6 +48,10 @@ export const StyledTab = styled(Tab)`
   font-size: 15px;
   padding: 0;
 
+  &.Mui-selected {
+    color: ${palette.secondary.main};
+  }
+
   &:focus {
     color: ${palette.secondary.main};
     /* border-bottom: 4px solid ${palette.secondary.main}; */
