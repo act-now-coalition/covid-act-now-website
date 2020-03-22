@@ -5,6 +5,7 @@ import 'chartjs-plugin-annotation';
 
 import Footer from 'components/Footer/Footer';
 import Header from 'components/Header/Header';
+import Chart from 'components/Chart/Chart';
 import Callout from 'components/Callout/Callout';
 import Newsletter from 'components/Newsletter/Newsletter';
 import { Wrapper, Content } from './ModelPage.style';
@@ -30,15 +31,26 @@ const LastDatesToAct = ({ model }) => {
       {formatDate(earlyDate)} to {formatDate(lateDate)}
     </b>
   );
-}
+};
 
-let lowercaseStates = ['AK', 'CA', 'CO', 'FL', 'MO', 'NM', 'NV', 'NY', 'OR', 'TX', 'WA'];
+let lowercaseStates = [
+  'AK',
+  'CA',
+  'CO',
+  'FL',
+  'MO',
+  'NM',
+  'NV',
+  'NY',
+  'OR',
+  'TX',
+  'WA',
+];
 function ModelPage() {
   const { id: location } = useParams();
   const locationName = STATES[location];
 
   let locationNameForDataLoad = location;
-  console.log(location);
 
   if (lowercaseStates.indexOf(location) > -1) {
     locationNameForDataLoad = location.toLowerCase();
@@ -120,35 +132,16 @@ function ModelPage() {
       <Header locationName={locationName} />
       <Content>
         <Panel>
-          <div className="graphs-container">
-            <LineGraph
-              title="Hospitalizations over time"
-              data={{ datasets: scenarioComparison }}
-              annotations={{
-                'Hospitals Overloaded': {
-                  on: baseline.dateOverwhelmed,
-                  yOffset: 50,
-                  xOffset: 30,
-                },
-                /* 'End Wuhan Level Containment ': {
-                  on: contain.now.interventionEnd,
-                  xOffset: -50,
-                  yOffset: 30,
-                },
-                'End Social Distancing': {
-                  on: distancing.now.interventionEnd,
-                  xOffset: 30,
-                  yOffset: 10,
-                },*/
-              }}
-            />
-          <div style={{textAlign: 'right', paddingRight: 2, fontSize:10}}>Last updated on March 19th</div>
-          </div>
+          <Chart
+            state={locationName}
+            subtitle="Hospitalizations over time"
+            data={scenarioComparison}
+            dateOverwhelmed={baseline.dateOverwhelmed}
+          />
 
           <Callout backgroundColor="rgba(255, 0, 0, 0.0784)" borderColor="red">
             <div style={{ fontWeight: 'normal', marginBottom: '1.2rem' }}>
-              Point of no-return for intervention to prevent hospital
-              overload:
+              Point of no-return for intervention to prevent hospital overload:
             </div>
             <LastDatesToAct model={baseline} />
           </Callout>
@@ -383,4 +376,3 @@ function OutcomesRow({ model, label, timeHorizon, color }) {
 }
 
 export default ModelPage;
-
