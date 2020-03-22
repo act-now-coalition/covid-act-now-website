@@ -28,10 +28,10 @@ export const ProfileHeader = styled(CardHeader)`
 export const Credential = styled(Typography)`
   margin: 0 0 12px !important;
   padding: 0;
+  font-size: 0.9rem;
 `;
 
 export const Left = styled.div`
-  /* width: 256px; */
 `;
 
 export const Quote = styled.div`

@@ -54,5 +54,26 @@ export default [
       'Infectious Disease Fellow, Yale School of Medicine',
     ],
   },
-
+  {
+    size: 4,
+    name: 'Leo Nissola, MD',
+    avatarUrl: 'https://www.parkerici.org/wp-content/uploads/2019/07/Leo_N_Final_Web.jpg',
+    profileUrl: 'https://www.linkedin.com/in/nissolamd/',
+    credentials: [
+      'Published book author in immunology and Scientist at the Parker Institute for Cancer Immunotherapy',
+      'Previous fellow at the Medical Oncology Genitourinary Department at MD Anderson Cancer Center in Houston'
+    ],
+  },
+  {
+    size: 4,
+    name: 'Joe Nation, Ph.D.',
+    avatarUrl: 'https://siepr.stanford.edu/sites/default/files/styles/large-profile/public/people/3912-siepr.stanford.edu-20.jpeg?itok=lmV-hvRQ',
+    profileUrl: 'https://www.linkedin.com/in/joe-nation-1045536/',
+    credentials: [
+      'Professor of the Practice of Stanford University Public Policy Program',
+      'Kennedy-Grossman Fellow in Human Biology',
+      'Former California State Assemblyman',
+      'Marin/Sonoma counties (6th AD)',
+    ],
+  },
 ];

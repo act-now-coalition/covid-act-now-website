@@ -11,7 +11,6 @@ import {
   Content,
   Quote,
   EndorsersWrapper,
-  MorsEndorsement,
 } from './Endorsements.style';
 
 const Endorsements = () => {
