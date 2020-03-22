@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Line } from 'react-chartjs-2';
 import 'chartjs-plugin-annotation';
+
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  LinkedinShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  LinkedinIcon,
+} from "react-share";
 
 import Footer from 'components/Footer/Footer';
 import Header from 'components/Header/Header';
 import Chart from 'components/Chart/Chart';
 import Callout from 'components/Callout/Callout';
 import Newsletter from 'components/Newsletter/Newsletter';
-import { Wrapper, Content } from './ModelPage.style';
+import { Wrapper, Content, ShareContainer, ShareSpacer } from './ModelPage.style';
 import { STATES } from 'enums';
 
 import { useModelDatas, Model } from 'utils/model';
@@ -46,6 +55,7 @@ let lowercaseStates = [
   'TX',
   'WA',
 ];
+
 function ModelPage() {
   const { id: location } = useParams();
   const locationName = STATES[location];
@@ -56,6 +66,9 @@ function ModelPage() {
     locationNameForDataLoad = location.toLowerCase();
   }
   let modelDatas = useModelDatas(locationNameForDataLoad);
+  const shareURL = "https://covidactnow.org";
+  const shareQuote = `This is when ${locationName}'s hospital system will be overloaded by COVID-19:`;
+  const hashtag = "#COVIDActNow"
 
   if (!modelDatas) {
     return <Header locationName={locationName} />;
@@ -147,13 +160,27 @@ function ModelPage() {
           </Callout>
 
           <Callout borderColor="black">
-            {/*<div style={{  }}>
-              Share Alaska's COVID trends:
-            </div>*/}
-            <div class="fb-share-button" data-href="https://covidactnow.org" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcovidactnow.org%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
-            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-            <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
-            <script type="IN/Share" data-url="https://www.linkedin.com"></script>
+            <ShareContainer>
+
+              <div style={{paddingRight: 28, fontWeight: "bold"}}>{`Share ${locationName}'s COVID-19 trends:`}</div>
+
+              <FacebookShareButton url={shareURL} quote={shareQuote} hashtag={hashtag}>
+                <FacebookIcon size={40} round={false} borderRadius={5} />
+              </FacebookShareButton>
+
+              <ShareSpacer />
+
+              <TwitterShareButton url={shareURL} title={shareQuote} >
+                <TwitterIcon size={40} round={false} borderRadius={5} />
+              </TwitterShareButton>
+
+              <ShareSpacer />
+
+              <LinkedinShareButton url={shareURL} title={shareQuote} hashtags={[hashtag]}>
+                <LinkedinIcon size={40} round={false} borderRadius={5} />
+              </LinkedinShareButton>
+
+            </ShareContainer>
           </Callout>
 
           <OutcomesTable
