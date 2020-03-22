@@ -59,8 +59,8 @@ const _AppBar = () => {
     window.scrollTo(0, 0);
   };
 
-  const shareURL = 'https://covidactnow.org';
-
+  const shareURL = `https://covidactnow.org${match ? match.url : '' }`;
+  const hashtag = 'COVIDActNow';
   const stateShareTitle = `This is the point of no return for intervention to prevent ${locationName}'s hospital system from being overloaded by Coronavirus: `;
   const defaultShareTitle =
     'See a forecast for how long each US state has until COVID-19 overwhelms hospitals and how interventions could flatten the curve:';
@@ -98,6 +98,7 @@ const _AppBar = () => {
           <TwitterShareButton
             url={shareURL}
             title={shareTitle}
+            hashtags={[hashtag]}
             style={{ alignItems: 'center', display: 'flex' }}
           >
             <TwitterIcon size={32} round={true} />
@@ -133,6 +134,7 @@ const _AppBar = () => {
           <TwitterShareButton
             url={shareURL}
             title={shareTitle}
+            hashtags={[hashtag]}
             style={{ alignItems: 'center', display: 'flex' }}
           >
             <TwitterIcon size={32} round={true} />

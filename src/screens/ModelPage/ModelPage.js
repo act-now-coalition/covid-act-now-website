@@ -70,9 +70,9 @@ function ModelPage() {
     locationNameForDataLoad = location.toLowerCase();
   }
   let modelDatas = useModelDatas(locationNameForDataLoad);
-  const shareURL = 'https://covidactnow.org';
+  const shareURL = `https://covidactnow.org/state/${location}`;
   const shareQuote = `This is the point of no return for intervention to prevent ${locationName}'s hospital system from being overloaded by Coronavirus: `;
-  const hashtag = '#COVIDActNow';
+  const hashtag = 'COVIDActNow';
 
   if (!modelDatas) {
     return <Header locationName={locationName} />;
@@ -171,15 +171,16 @@ function ModelPage() {
 
               <FacebookShareButton
                 url={shareURL}
-                quote={shareQuote}
-                hashtag={hashtag}
-              >
+                quote={shareQuote}>
                 <FacebookIcon size={40} round={false} borderRadius={5} />
               </FacebookShareButton>
 
               <ShareSpacer />
 
-              <TwitterShareButton url={shareURL} title={shareQuote}>
+                <TwitterShareButton 
+                  url={shareURL} 
+                  title={shareQuote}
+                  hashtags={[hashtag]}>
                 <TwitterIcon size={40} round={false} borderRadius={5} />
               </TwitterShareButton>
 
