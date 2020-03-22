@@ -61,7 +61,7 @@ const Chart = ({ state, subtitle, data, dateOverwhelmed }) => {
         if (this.series.userOptions.type === 'line') {
           return `<b>${beds}</b> expected beds <br/> available on <b>${date}</b>`;
         }
-        return `<b>${beds}</b> hospitilizations <br/> expected by <b>${date}</b>`;
+        return `<b>${beds}</b> hospitalizations <br/> expected by <b>${date}</b>`;
       },
     },
     xAxis: {
