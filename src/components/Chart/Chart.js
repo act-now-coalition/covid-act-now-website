@@ -6,7 +6,7 @@ import moment from 'moment';
 
 import { Wrapper } from './Chart.style';
 
-const Chart = ({ state, subtitle, data }) => {
+const Chart = ({ state, subtitle, data, dateOverwhelmed }) => {
   const noAction = {
     name: 'No Action',
     color: '#ef5350',
@@ -14,25 +14,25 @@ const Chart = ({ state, subtitle, data }) => {
     data: data[0].data,
   };
   const txStyle = {
-    name: 'Social Distancing',
+    name: "3 Months of 'Social Distancing'",
     color: '#FFA726',
     type: 'area',
     data: data[2].data,
   };
   const caStyle = {
-    name: 'Shelter in Place',
+    name: "3 Months of 'Shelter in Place'",
     color: '#29B6F6',
     type: 'area',
     data: data[1].data,
   };
   const wuhanStyle = {
-    name: 'Full Lockdown',
+    name: '3 Months of Wuhan-style Lockdown',
     color: '#9CCC65',
     type: 'area',
     data: data[3].data,
   };
   const beds = {
-    name: 'Hospital Bed Availability',
+    name: 'Available Hospital Beds',
     color: 'black',
     type: 'line',
     data: data[4].data,
@@ -41,6 +41,7 @@ const Chart = ({ state, subtitle, data }) => {
   const [options, setOptions] = useState({
     chart: {
       styledMode: true,
+      height: '600',
     },
     title: {
       text: state,
@@ -66,13 +67,33 @@ const Chart = ({ state, subtitle, data }) => {
     xAxis: {
       type: 'datetime',
       step: 7,
-      crosshair: true,
       labels: {
         rotation: -45,
         formatter: function() {
           return dateFormat('%b %e', this.value);
         },
       },
+      plotLines: [
+        {
+          value: dateOverwhelmed,
+          label: {
+            rotation: 0,
+            text: 'Hospitals Overloaded <br/> (assuming no action)',
+            x: -130,
+            y: 40,
+          },
+        },
+        {
+          value: Date.now(),
+          className: 'today',
+          label: {
+            rotation: 0,
+            text: 'Today',
+            x: -40,
+            y: 20,
+          },
+        },
+      ],
     },
     plotOptions: {
       series: {
