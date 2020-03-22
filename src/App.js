@@ -4,12 +4,13 @@ import { ThemeProvider, StylesProvider } from '@material-ui/core/styles';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
 import ModelPage from 'screens/ModelPage/ModelPage';
-import HomePage from 'screens/HomePage';
+import HomePage from 'screens/HomePage/HomePage';
 // import ComingSoon from 'screens/ComingSoon/ComingSoon';
 import FAQ from 'screens/FAQ/FAQ';
 import Endorsements from 'screens/Endorsements/Endorsements';
 import About from 'screens/About/About'
 import AppBar from 'components/AppBar/AppBar';
+import Footer from 'components/Footer/Footer';
 import theme from 'assets/theme';
 
 export default function App() {
@@ -30,6 +31,7 @@ export default function App() {
               <Redirect to="/" />
             </Route>
           </Switch>
+          <Footer />
         </BrowserRouter>
       </StylesProvider>
     </ThemeProvider>

@@ -12,7 +12,6 @@ import {
   LinkedinIcon,
 } from 'react-share';
 
-import Footer from 'components/Footer/Footer';
 import Header from 'components/Header/Header';
 import Chart from 'components/Chart/Chart';
 import Callout from 'components/Callout/Callout';
@@ -239,7 +238,6 @@ function ModelPage() {
           <Newsletter />
         </div>
       </Content>
-      <Footer />
     </Wrapper>
   );
 }
