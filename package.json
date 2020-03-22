@@ -13,6 +13,8 @@
     "chartjs-plugin-crosshair": "^1.1.4",
     "csv-parse": "^4.8.8",
     "googleapis": "^39.2.0",
+    "highcharts": "^8.0.4",
+    "highcharts-react-official": "^3.0.0",
     "history": "^4.10.1",
     "momentjs": "^2.0.0",
     "react": "^16.13.0",
