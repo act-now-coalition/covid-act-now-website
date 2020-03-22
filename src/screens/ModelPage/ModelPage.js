@@ -146,6 +146,16 @@ function ModelPage() {
             <LastDatesToAct model={baseline} />
           </Callout>
 
+          <Callout borderColor="black">
+            {/*<div style={{  }}>
+              Share Alaska's COVID trends:
+            </div>*/}
+            <div class="fb-share-button" data-href="https://covidactnow.org" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcovidactnow.org%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+            <script type="IN/Share" data-url="https://www.linkedin.com"></script>
+          </Callout>
+
           <OutcomesTable
             title="Predicted Outcomes after 3 Months"
             models={[
