@@ -36,7 +36,7 @@ import { STATES } from 'enums';
 const _AppBar = () => {
   const history = useHistory();
   const { pathname } = useLocation();
-  const panels = ['/', '/faq', '/about', '/endorsements'];
+  const panels = ['/', '/about', '/model', '/endorsements'];
   const [panelIdx, setPanelIdx] = useState(
     String(panels.indexOf(pathname)) || '0',
   );
@@ -55,6 +55,8 @@ const _AppBar = () => {
     setPanelIdx(String(panels.indexOf(route)));
 
     history.push(route);
+
+    window.scrollTo(0, 0);
   };
 
   const shareURL = 'https://covidactnow.org';
@@ -108,16 +110,16 @@ const _AppBar = () => {
               onClick={() => goTo('/')}
             />
             <StyledTab
-              label="FAQ"
+              label="About"
               value="1"
               disableRipple
-              onClick={() => goTo('/faq')}
+              onClick={() => goTo('/about')}
             />
             <StyledTab
-              label="About"
+              label="Model"
               value="2"
               disableRipple
-              onClick={() => goTo('/about')}
+              onClick={() => goTo('/model')}
             />
             <StyledTab
               label="Endorsements"
