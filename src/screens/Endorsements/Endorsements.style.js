@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 
 export const Wrapper = styled.div`
   background-color: #f2f2f2;

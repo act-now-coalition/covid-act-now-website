@@ -4,9 +4,8 @@ import Typography   from '@material-ui/core/Typography';
 import Header from 'components/Header/Header';
 import Map from 'components/Map/Map';
 import Endorsements from 'screens/Endorsements/Endorsements';
-import Newsletter   from 'components/Newsletter/Newsletter';
 
-import { 
+import {
   Wrapper,
   Content,
 } from './HomePage.style';

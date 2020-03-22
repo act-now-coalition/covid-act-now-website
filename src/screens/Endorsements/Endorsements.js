@@ -1,7 +1,6 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import QuoteIcon from '@material-ui/icons/FormatQuoteRounded';
-import GridListTile from '@material-ui/core/GridListTile';
 import Grid from '@material-ui/core/Grid';
 
 import EndorsementCard from 'components/EndorsementCard/EndorsementCard';
