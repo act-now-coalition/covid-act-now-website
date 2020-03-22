@@ -38,7 +38,10 @@ const About = ({ children }) => {
           Who built this tool?
         </Typography>
         <Typography variant="p" component="p">
-          Here is a non-exhaustive list of contributors:
+          CoVidActNow was founded by <a href="https://www.linkedin.com/in/maxhenderson/">Max Henderson</a>, <a href="https://en.wikipedia.org/wiki/Jonathan_Kreiss-Tomkins">Rep Jonathan Kreiss-Tomkins</a>, <a href="https://twitter.com/igorkofman">Igor Kofman</a>, and <a href="https://www.linkedin.com/in/zacharyrosen/">Zack Rosen</a>, with medical and policy guidance from <a href="">Nirav R. Shah</a> (MD, MPH, senior scholar, Stanford University Clinical Excellence Research Center).
+        </Typography>
+        <Typography variant="p" component="p">
+          We have since grown into a large distributed team:
         </Typography>
         <ul>
           {TEAM.map(teammate => { return <li>
