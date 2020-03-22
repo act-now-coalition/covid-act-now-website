@@ -5,6 +5,7 @@ import 'chartjs-plugin-annotation';
 
 import Footer from 'components/Footer/Footer';
 import Header from 'components/Header/Header';
+import Chart from 'components/Chart/Chart';
 import Callout from 'components/Callout/Callout';
 import { Wrapper, Content } from './ModelPage.style';
 import { STATES } from 'enums';
@@ -29,15 +30,26 @@ const LastDatesToAct = ({ model }) => {
       {formatDate(earlyDate)} to {formatDate(lateDate)}
     </b>
   );
-}
+};
 
-let lowercaseStates = ['AK', 'CA', 'CO', 'FL', 'MO', 'NM', 'NV', 'NY', 'OR', 'TX', 'WA'];
+let lowercaseStates = [
+  'AK',
+  'CA',
+  'CO',
+  'FL',
+  'MO',
+  'NM',
+  'NV',
+  'NY',
+  'OR',
+  'TX',
+  'WA',
+];
 function ModelPage() {
   const { id: location } = useParams();
   const locationName = STATES[location];
 
   let locationNameForDataLoad = location;
-  console.log(location);
 
   if (lowercaseStates.indexOf(location) > -1) {
     locationNameForDataLoad = location.toLowerCase();
@@ -119,6 +131,15 @@ function ModelPage() {
       <Header locationName={locationName} />
       <Content>
         <Panel>
+          <Chart
+            state={locationName}
+            subtitle="Hospitalizations over time"
+            data={scenarioComparison}
+          />
+          <br />
+          <br />
+          <br />
+          <br />
           <div className="graphs-container">
             <LineGraph
               title="Hospitalizations over time"
@@ -141,13 +162,14 @@ function ModelPage() {
                 },*/
               }}
             />
-          <div style={{textAlign: 'right', paddingRight: 2, fontSize:10}}>Last updated on March 19th</div>
+            <div style={{ textAlign: 'right', paddingRight: 2, fontSize: 10 }}>
+              Last updated on March 19th
+            </div>
           </div>
 
           <Callout backgroundColor="rgba(255, 0, 0, 0.0784)" borderColor="red">
             <div style={{ fontWeight: 'normal', marginBottom: '1.2rem' }}>
-              Point of no-return for intervention to prevent hospital
-              overload:
+              Point of no-return for intervention to prevent hospital overload:
             </div>
             <LastDatesToAct model={baseline} />
           </Callout>
@@ -192,7 +214,9 @@ function ModelPage() {
           </ul>
         </Panel>
         <Callout backgroundColor="rgba(0, 234, 0, 0.19)">
-          <a href="https://forms.gle/Dn2cjNMJxKyrwY4J9">Sign up</a> to stay up to date on our tool as we improve its data-set, models, and capabilities.
+          <a href="https://forms.gle/Dn2cjNMJxKyrwY4J9">Sign up</a> to stay up
+          to date on our tool as we improve its data-set, models, and
+          capabilities.
         </Callout>
       </Content>
       <Footer />
@@ -382,4 +406,3 @@ function OutcomesRow({ model, label, timeHorizon, color }) {
 }
 
 export default ModelPage;
-
