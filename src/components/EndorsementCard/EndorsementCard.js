@@ -34,8 +34,8 @@ const EndorsementCard = ({
             <Divider variant="middle" />
             <Left>
               <CardContent>
-                {credentials.map(c => (
-                  <Credential variant="body2" color="textSecondary" component="p">
+                {credentials.map((c, index) => (
+                  <Credential key={index} variant="body2" color="textSecondary" component="p">
                     {c}
                   </Credential>
                 ))}
