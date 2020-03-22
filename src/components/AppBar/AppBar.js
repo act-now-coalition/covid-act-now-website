@@ -12,24 +12,14 @@ import {
   StyledDesktopMenu,
   StyledTabs,
   StyledTab,
-  MobileMenuTitle,
   MenuTitle,
   StyledMobileMenu,
 } from './AppBar.style';
 import {
-  EmailShareButton,
   FacebookIcon,
   FacebookShareButton,
-  InstapaperShareButton,
-  LinkedinShareButton,
-  PinterestShareButton,
-  PocketShareButton,
-  RedditShareButton,
-  TelegramShareButton,
   TwitterShareButton,
   TwitterIcon,
-  ViberShareButton,
-  WhatsappShareButton,
 } from 'react-share';
 import { STATES } from 'enums';
 

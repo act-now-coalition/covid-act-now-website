@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import '../../App.css'; /* optional for styling like the :hover pseudo-class */
 import USAMap from 'react-usa-map';
 import { Redirect } from 'react-router-dom';
@@ -10,11 +10,6 @@ function Map() {
   if (redirectTarget) {
     return <Redirect push to={redirectTarget} />;
   }
-
-  /* mandatory */
-  let mapHandler = event => {
-    alert('No model yet');
-  };
 
   const statesCustomConfig = () =>
     Object.keys(STATES).reduce((config, currState) => {

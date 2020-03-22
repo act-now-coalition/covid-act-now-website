@@ -3,15 +3,12 @@ import Logo  from 'assets/images/logo';
 
 import { useHistory } from 'react-router-dom';
 
-import { 
-  Wrapper,
-  Content,
+import {
   StyledFooter,
   StyledFooterHeader,
   StyledFooterBody,
   StyledFooterBodyLinks,
   StyledFooterBodyCallout,
-  StyledFooterCaption,
 } from './Footer.style';
 
 const Footer = ({ children }) => {
