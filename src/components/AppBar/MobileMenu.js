@@ -9,11 +9,11 @@ const MobileMenu = ({ open, goTo }) => {
       <a onClick={() => goTo('/')}>
         Map
       </a>
-      <a onClick={() => goTo('/faq')}>
-        FAQ
-      </a>
       <a onClick={() => goTo('/about')}>
         About
+      </a>
+      <a onClick={() => goTo('/model')}>
+        Model
       </a>
       <a onClick={() => goTo('/endorsements')}>
         Endorsements
