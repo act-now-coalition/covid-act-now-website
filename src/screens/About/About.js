@@ -34,7 +34,7 @@ const About = ({ children }) => {
             What is my menu of interventions, and how will they address the spread of Coronavirus?
           </li>
         </ul>
-        <Typography variant="h3" component="h1">
+        <Typography variant="h5" component="h5">
           Who built this tool?
         </Typography>
         <Typography variant="p" component="p">
@@ -60,7 +60,7 @@ const About = ({ children }) => {
           <a href="https://docs.google.com/document/u/3/d/1ETeXAfYOvArfLvlxExE0_xrO5M4ITC0_Am38CRusCko/preview?sle=true" target="_blank">So are our assumptions and definitions.</a>
         </Typography>
 
-        <Typography variant="h3" component="h1">
+        <Typography variant="h5" component="h5">
           Why did we build it?
         </Typography>
 
@@ -72,7 +72,7 @@ const About = ({ children }) => {
          Coronavirus response leaders need the tools to do this — we are building them the tools.
         </Typography>
 
-        <Typography variant="h3" component="h1">
+        <Typography variant="h5" component="h5">
           Can I contribute?
         </Typography>
         <Typography variant="p" component="p">
