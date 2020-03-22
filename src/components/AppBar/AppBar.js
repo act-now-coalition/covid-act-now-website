@@ -36,15 +36,12 @@ const _AppBar = () => {
   const history = useHistory();
   const { pathname } = useLocation();
   const panels = ['/', '/faq', '/about', '/endorsements'];
-  const [panelIdx, setPanelIdx] = useState(panels.indexOf(pathname) || 0);
+  const [panelIdx, setPanelIdx] = useState(String(panels.indexOf(pathname)) || '0');
   const [open, setOpen] = useState(false);
-
-  const handleChange = (_, value) => {
-    setPanelIdx(value);
-  };
 
   const goTo = route => {
     setOpen(false);
+    setPanelIdx(String(panels.indexOf(route)));
 
     history.push(route)
   };
@@ -75,15 +72,11 @@ const _AppBar = () => {
             style={{ alignItems: 'center', display: 'flex' }}>
             <TwitterIcon size={32} round={true} />
           </TwitterShareButton>
-          <StyledTabs value={panelIdx} onChange={handleChange}>
-            <StyledTab label="Map" disableRipple onClick={() => goTo('/')} />
-            <StyledTab label="FAQ" disableRipple onClick={() => goTo('/faq')} />
-            <StyledTab label="About" disableRipple onClick={() => goTo('/about')} />
-            <StyledTab
-              label="Endorsements"
-              disableRipple
-              onClick={() => goTo('/endorsements')}
-            />
+          <StyledTabs value={panelIdx}>
+            <StyledTab label="Map" value="0" disableRipple onClick={() => goTo('/')} />
+            <StyledTab label="FAQ" value="1" disableRipple onClick={() => goTo('/faq')} />
+            <StyledTab label="About" value="2" disableRipple onClick={() => goTo('/about')} />
+            <StyledTab label="Endorsements" value="3" disableRipple onClick={() => goTo('/endorsements')} />
           </StyledTabs>
         </StyledDesktopMenu>
         <StyledMobileMenu>

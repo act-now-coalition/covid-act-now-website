@@ -16,41 +16,33 @@ const About = ({ children }) => {
         <Typography variant="body1" component="p">
           To improve the capabilities and accuracy of our tool, we are
           requesting the help of:
-          <ul>
-            <li>
-              Epidemiologists with expertise in modeling virus propagation{' '}
-            </li>
-            <li>UI/UX Designers</li>
-            <li>
-              Engineers:{' '}
-              <Link
-                underline="hover"
-                color="textPrimary"
-                href="https://github.com/covid-projections/covid-projections"
-              >
-                JavaScript (React),
-              </Link>{' '}
-              <Link
-                underline="hover"
-                color="textPrimary"
-                href="https://github.com/covid-projections/covid-data-model"
-              >
-                Python
-              </Link>
-            </li>
-            <li>Data scientists</li>
-          </ul>
-          <br />
-          If you have time to give us feedback or access to this expertise, have
-          questions, or otherwise want to get involved, please get in touch -{' '}
-          <Link
-            underline="hover"
-            color="textPrimary"
-            href="mailto:jonathan@covidactnow.org"
-          >
-            jonathan@covidactnow.org
-          </Link>
         </Typography>
+        <ul>
+          <li>
+            Epidemiologists with expertise in modeling virus propagation{' '}
+          </li>
+          <li>UI/UX Designers</li>
+          <li>
+            Engineers:{' '}
+            <Link
+              underline="hover"
+              color="textPrimary"
+              href="https://github.com/covid-projections/covid-projections"
+            >
+              JavaScript (React),
+            </Link>{' '}
+            <Link
+              underline="hover"
+              color="textPrimary"
+              href="https://github.com/covid-projections/covid-data-model"
+            >
+              Python
+            </Link>
+          </li>
+          <li>Data scientists</li>
+        </ul>
+        <br />
+        If you have time to give us feedback or access to this expertise, have questions, or otherwise want to get involved, <a href="mailto:jonathan@covidactnow.org">please email us</a>
       </Content>
     </Wrapper>
   );
