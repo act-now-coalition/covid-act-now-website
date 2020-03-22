@@ -1,0 +1,11 @@
+FROM cypress/base
+
+# USER root
+ENV PATH /node_modules/.bin:$PATH
+
+# Bundle app source
+COPY . .
+
+RUN npm install cypress@4.2.0
+#RUN npm install wait-on
+RUN cypress verify
