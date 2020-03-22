@@ -79,8 +79,8 @@ const Chart = ({ state, subtitle, data, dateOverwhelmed }) => {
           label: {
             rotation: 0,
             text: 'Hospitals Overloaded <br/> (assuming no action)',
-            x: -130,
-            y: 40,
+            x: 10,
+            y: 20,
           },
         },
         {
