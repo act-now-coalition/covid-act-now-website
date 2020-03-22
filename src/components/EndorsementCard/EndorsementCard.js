@@ -28,7 +28,7 @@ const EndorsementCard = ({
           <Profile>
             <ProfileHeader
               onClick={() => window.open(profileUrl, '_blank')}
-              avatar={<Avatar aria-label={name} src={avatarUrl} />}
+              avatar={<Avatar aria-label={name} src={window.location.origin + avatarUrl} />}
               title={name}
             />
             <Divider variant="middle" />

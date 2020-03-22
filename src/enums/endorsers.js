@@ -2,7 +2,7 @@ export default [
   {
     size: 4,
     name: 'Nirav Shah, MD, MPH',
-    avatarUrl: 'https://profiles.stanford.edu/proxy/api/cap/profiles/187079/resources/profilephoto/350x350.1543259925959.jpg',
+    avatarUrl: '/images/endorsers/nirav_shah__resized-100-100.jpg',
     profileUrl: 'https://profiles.stanford.edu/nirav-shah',
     credentials: [
       'Senior Scholar, Stanford University Clinical Excellence Research Center',
@@ -12,8 +12,7 @@ export default [
   {
     size: 4,
     name: 'Valerie Nurr\'araaluk Davidson',
-    avatarUrl:
-    'https://www.adn.com/resizer/VlyvgKHU8O82tj_aHOxTLrAkM3Y=/1200x0/s3.amazonaws.com/arc-wordpress-client-uploads/adn/wp-content/uploads/2018/10/05095726/Valerie-Davidson-A.jpg',
+    avatarUrl: '/images/endorsers/Valerie-Davidson-A__resized-100-100.jpg',
     profileUrl: 'https://en.wikipedia.org/wiki/Valerie_Davidson',
     credentials: [
       '13th Lieutenant Governor of Alaska',
@@ -24,8 +23,7 @@ export default [
   {
     size: 4,
     name: 'Tomas Pueyo, MSc, MBA',
-    avatarUrl:
-    'https://miro.medium.com/fit/c/256/256/1*SlSL0behknIASOhFR3Q-Lg.png',
+    avatarUrl: '/images/endorsers/tomas_pueyo__resized-100-100.png',
     profileUrl: 'https://medium.com/@tomaspueyo',
     credentials: [
       'Author of \'Coronavirus: Why You Must Act Now\'',
@@ -36,7 +34,7 @@ export default [
   {
     size: 8,
     name: 'Vincent Mor, PhD',
-    avatarUrl: 'https://vivo.brown.edu/profile-images/124/18/vmor.jpg',
+    avatarUrl: '/images/endorsers/vincent_mor__resized-100-100.jpg',
     profileUrl: 'https://vivo.brown.edu/display/vmor',
     credentials: [
       'Florence Pirce Grant University Professor',
@@ -48,7 +46,7 @@ export default [
   {
     size: 4,
     name: 'Ben Goldman-Israelow',
-    avatarUrl: 'https://ysm-res.cloudinary.com/image/upload/v1/yms/prod/c2a0ae84-4c03-4577-a54e-6268e000c68d',
+    avatarUrl: '/images/endorsers/ben_goldman_israelow__resized-100-100.jpeg',
     profileUrl: 'https://medicine.yale.edu/profile/benjamin_goldman-israelow/',
     credentials: [
       'Infectious Disease Fellow, Yale School of Medicine',
@@ -57,7 +55,7 @@ export default [
   {
     size: 4,
     name: 'Leo Nissola, MD',
-    avatarUrl: 'https://www.parkerici.org/wp-content/uploads/2019/07/Leo_N_Final_Web.jpg',
+    avatarUrl: '/images/endorsers/Leo_Nissola__resized-100-100.jpg',
     profileUrl: 'https://www.linkedin.com/in/nissolamd/',
     credentials: [
       'Published book author in immunology and Scientist at the Parker Institute for Cancer Immunotherapy',
@@ -67,7 +65,7 @@ export default [
   {
     size: 4,
     name: 'Joe Nation, Ph.D.',
-    avatarUrl: 'https://siepr.stanford.edu/sites/default/files/styles/large-profile/public/people/3912-siepr.stanford.edu-20.jpeg?itok=lmV-hvRQ',
+    avatarUrl: '/images/endorsers/joe_nation__resized-100-100.jpeg',
     profileUrl: 'https://www.linkedin.com/in/joe-nation-1045536/',
     credentials: [
       'Professor of the Practice of Stanford University Public Policy Program',
