@@ -132,18 +132,19 @@ function ModelPage() {
       <Header locationName={locationName} />
       <Content>
         <Panel>
-          <Callout backgroundColor="rgba(255, 0, 0, 0.0784)" borderColor="red">
-            <div style={{ fontWeight: 'normal', marginBottom: '1.2rem' }}>
-              Point of no-return for intervention to prevent hospital overload:
-            </div>
-            <LastDatesToAct model={baseline} />
-          </Callout>
           <Chart
             state={locationName}
             subtitle="Hospitalizations over time"
             data={scenarioComparison}
             dateOverwhelmed={baseline.dateOverwhelmed}
           />
+
+          <Callout backgroundColor="rgba(255, 0, 0, 0.0784)" borderColor="red">
+            <div style={{ fontWeight: 'normal', marginBottom: '1.2rem' }}>
+              Point of no-return for intervention to prevent hospital overload:
+            </div>
+            <LastDatesToAct model={baseline} />
+          </Callout>
 
           <OutcomesTable
             title="Predicted Outcomes after 3 Months"
