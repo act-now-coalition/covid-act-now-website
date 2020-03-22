@@ -211,9 +211,9 @@ class Model {
 
   estimatedCumulativeInfectedAfter(days = 100) {
     const infectedAfter = this.cumulativeInfectedAfter(days);
-    const infectedTotal = this.cumulativeInfected;
+    const popTotal = this.totalPopulation;
 
-    const percent = infectedAfter / infectedTotal;
+    const percent = infectedAfter / popTotal;
     if (percent < 0.01) {
       return '<1%';
     } else if (percent < 0.7) {
