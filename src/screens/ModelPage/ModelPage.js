@@ -131,48 +131,18 @@ function ModelPage() {
       <Header locationName={locationName} />
       <Content>
         <Panel>
-          <Chart
-            state={locationName}
-            subtitle="Hospitalizations over time"
-            data={scenarioComparison}
-          />
-          <br />
-          <br />
-          <br />
-          <br />
-          <div className="graphs-container">
-            <LineGraph
-              title="Hospitalizations over time"
-              data={{ datasets: scenarioComparison }}
-              annotations={{
-                'Hospitals Overloaded': {
-                  on: baseline.dateOverwhelmed,
-                  yOffset: 50,
-                  xOffset: 30,
-                },
-                /* 'End Wuhan Level Containment ': {
-                  on: contain.now.interventionEnd,
-                  xOffset: -50,
-                  yOffset: 30,
-                },
-                'End Social Distancing': {
-                  on: distancing.now.interventionEnd,
-                  xOffset: 30,
-                  yOffset: 10,
-                },*/
-              }}
-            />
-            <div style={{ textAlign: 'right', paddingRight: 2, fontSize: 10 }}>
-              Last updated on March 19th
-            </div>
-          </div>
-
           <Callout backgroundColor="rgba(255, 0, 0, 0.0784)" borderColor="red">
             <div style={{ fontWeight: 'normal', marginBottom: '1.2rem' }}>
               Point of no-return for intervention to prevent hospital overload:
             </div>
             <LastDatesToAct model={baseline} />
           </Callout>
+          <Chart
+            state={locationName}
+            subtitle="Hospitalizations over time"
+            data={scenarioComparison}
+            dateOverwhelmed={baseline.dateOverwhelmed}
+          />
 
           <OutcomesTable
             title="Predicted Outcomes after 3 Months"
