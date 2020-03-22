@@ -15,7 +15,7 @@ const About = ({ children }) => {
           About
         </Typography>
         <Typography variant="body1" component="p">
-          CovidActNow.org was created by a team of data scientists, engineers, and designers in partnership with epidemiologists, public health officials, and political leaders to help understand how the COVID-19 pandemic will affect
+          <a href="CovidActNow.org" target="_blank">CovidActNow.org</a> was created by a team of data scientists, engineers, and designers in partnership with epidemiologists, public health officials, and political leaders to help understand how the COVID-19 pandemic will affect their region.
         </Typography>
         <Typography variant="body1" component="p">
           This tool is built to enable political leaders to quickly make decisions in their Coronavirus response informed by best available data and modeling.
