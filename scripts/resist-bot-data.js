@@ -225,20 +225,26 @@ class Model {
 
   estimatedDateHospitalsOverloadedAfter(timeHorizon = 100) {
     // Do we want parity with FE formatting?
-    // return this.dateOverwhelmed &&
-    //   this.dateOverwhelmed < this.dateAfter(timeHorizon)
-    //   ? this.dateOverwhelmed.toDateString()
-    //   : this.dateOverwhelmed
-    //   ? 'outside time bound'
-    //   : 'never';
-    return this.dateOverwhelmed ? this.dateOverwhelmed.toISOString() : 'never';
+    return this.dateOverwhelmed &&
+      this.dateOverwhelmed < this.dateAfter(timeHorizon)
+      ? this.dateOverwhelmed
+      : this.dateOverwhelmed
+      ? 'outside time bound'
+      : 'never';
   }
 
   cumulativeInfectedAfter(days) {
     return this.cumulativeInfected[this.idxForDay(days)];
   }
   cumulativeDeadAfter(days = 100) {
-    return this.cumulativeDeaths[this.idxForDay(days)];
+    const num = this.cumulativeDeaths[this.idxForDay(days)];
+    if (num > 1000) {
+      return (Math.round(num / 1000) * 1000).toLocaleString();
+    } else if (num > 0) {
+      return '<1000';
+    } else {
+      return '0';
+    }
   }
   dateAfter(days) {
     return this.dates[this.idxForDay(days)];
