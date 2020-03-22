@@ -6,6 +6,7 @@ import 'chartjs-plugin-annotation';
 import Footer from 'components/Footer/Footer';
 import Header from 'components/Header/Header';
 import Callout from 'components/Callout/Callout';
+import Newsletter from 'components/Newsletter/Newsletter';
 import { Wrapper, Content } from './ModelPage.style';
 import { STATES } from 'enums';
 
@@ -191,9 +192,9 @@ function ModelPage() {
             </li>
           </ul>
         </Panel>
-        <Callout backgroundColor="rgba(0, 234, 0, 0.19)">
-          <a href="https://forms.gle/Dn2cjNMJxKyrwY4J9">Sign up</a> to stay up to date on our tool as we improve its data-set, models, and capabilities.
-        </Callout>
+        <div style={{marginTop: '3rem'}}>
+          <Newsletter />
+        </div>
       </Content>
       <Footer />
     </Wrapper>
