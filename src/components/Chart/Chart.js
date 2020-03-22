@@ -38,7 +38,7 @@ const Chart = ({ state, subtitle, data, dateOverwhelmed }) => {
     data: data[4].data,
   };
 
-  const [options, setOptions] = useState({
+  const [options] = useState({
     chart: {
       styledMode: true,
       height: '600',

@@ -18,7 +18,6 @@
     "history": "^4.10.1",
     "momentjs": "^2.0.0",
     "react": "^16.13.0",
-    "react-chartjs-2": "^2.9.0",
     "react-dom": "^16.13.0",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",

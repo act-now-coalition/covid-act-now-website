@@ -1,6 +1,5 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { Line } from 'react-chartjs-2';
 import 'chartjs-plugin-annotation';
 
 import {
@@ -177,8 +176,8 @@ function ModelPage() {
 
               <ShareSpacer />
 
-                <TwitterShareButton 
-                  url={shareURL} 
+                <TwitterShareButton
+                  url={shareURL}
                   title={shareQuote}
                   hashtags={[hashtag]}>
                 <TwitterIcon size={40} round={false} borderRadius={5} />
@@ -266,84 +265,6 @@ function formatBucketedNumber(num, total) {
   } else {
     return '>70%';
   }
-}
-
-function LineGraph({ data, maxY, annotations, title }) {
-  let annotationConfigs = [];
-  annotations = annotations || {};
-  for (let label in annotations) {
-    annotationConfigs.push({
-      type: 'line',
-      mode: 'vertical',
-      scaleID: 'x-axis-0',
-      value: annotations[label].on,
-      borderColor: 'gray',
-      borderWidth: 1,
-      label: {
-        backgroundColor: 'rgba(0,0,0,0.1)',
-        fontStyle: 'normal',
-        fontColor: 'black',
-        enabled: true,
-        position: 'top',
-        content: label,
-        xAdjust: annotations[label].xOffset || 0,
-        yAdjust: annotations[label].yOffset || 0,
-      },
-    });
-  }
-
-  return (
-    <>
-      <h3> {title}</h3>
-      <Line
-        data={data}
-        width={500}
-        height={400}
-        options={{
-          annotation: {
-            drawTime: 'afterDatasetsDraw',
-            annotations: annotationConfigs,
-          },
-          hover: {
-            intersect: false,
-          },
-          tooltips: {
-            mode: 'index',
-          },
-          maintainAspectRatio: false,
-          scales: {
-            yAxes: [
-              {
-                type: 'linear',
-                scaleLabel: {
-                  display: true,
-                  labelString: 'Hospitalizations',
-                },
-                ticks: {
-                  max: maxY,
-                  callback: function(value, index, values) {
-                    return formatNumber(value);
-                  },
-                },
-              },
-            ],
-            xAxes: [
-              {
-                type: 'time',
-                distribution: 'series',
-                time: {
-                  displayFormats: {
-                    quarter: 'MMM YYYY',
-                  },
-                  tooltipFormat: 'MMMM DD',
-                },
-              },
-            ],
-          },
-        }}
-      />
-    </>
-  );
 }
 
 function OutcomesTable({ models, asterisk, timeHorizon, title, colors }) {

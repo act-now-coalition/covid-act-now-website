@@ -1,8 +1,6 @@
 import React from 'react';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
-import { Email } from '@material-ui/icons';
 
 import { Wrapper, Content } from './FAQ.style';
 
