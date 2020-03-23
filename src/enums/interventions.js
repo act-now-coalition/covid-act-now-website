@@ -1,6 +1,6 @@
-const NO_ACTION = 'No Action';
-const SOCIAL_DISTANCING = 'Delay/Distancing';
-const SHELTER_IN_PLACE = '"Shelter in place"';
+const NO_ACTION = 'Limited Action';
+const SOCIAL_DISTANCING = 'Social Distancing';
+const SHELTER_IN_PLACE = 'Shelter in Place';
 const LOCKDOWN = 'Lockdown';
 
 export const INTERVENTIONS = {
@@ -18,11 +18,12 @@ export const INTERVENTION_EFFICACY_ORDER_ASC = [
 ];
 
 export const INTERVENTION_DESCRIPTIONS = {
-  [NO_ACTION]: 'Current historical trends continue.',
+  [NO_ACTION]:
+    'Public advocacy around “social distancing” and enhanced hygiene. Minimal mandated restrictions.',
   [SOCIAL_DISTANCING]:
-    'Voluntary “shelter-in-place” for high-risk groups, ban on events over 50 people, public advocacy around “social distancing” and enhanced hygiene, possible school closures, restricted travel, and passive monitoring. Roll-out of population-wide testing and quarantine, so that quarantines can be relaxed for those who are not infected.',
+    'Voluntary “shelter-in-place” for high-risk groups, schools and bars / restaurants closed.',
   [SHELTER_IN_PLACE]:
-    'Voluntary/VolunTold “shelter-in-place” community-wide home quarantine (especially firm for high-risk groups), shutdown of non-essential businesses, close schools, ban on events over 10 people, passive monitoring, public advocacy around social distancing and enhanced hygiene. Possibly closed borders or restricted travel. Public aid relief bill. Roll-out of free population-wide testing and quarantine, so that quarantines can be relaxed for those who are not infected.',
+    'Legal order for citizens to employ “shelter-in-place” home quarantine (especially firm for high-risk groups), shutdown of non-essential businesses, ban on all group events.',
 };
 
 export const INTERVENTION_COLOR_MAP = {
@@ -40,18 +41,18 @@ export const STATE_TO_INTERVENTION = {
   AR: SOCIAL_DISTANCING,
   CA: SHELTER_IN_PLACE,
   CO: SOCIAL_DISTANCING,
-  CT: SOCIAL_DISTANCING,
-  DE: SOCIAL_DISTANCING,
-  FL: NO_ACTION,
+  CT: SHELTER_IN_PLACE,
+  DE: SHELTER_IN_PLACE,
+  FL: SOCIAL_DISTANCING,
   GA: NO_ACTION,
   HI: SOCIAL_DISTANCING,
   ID: NO_ACTION,
   IL: SHELTER_IN_PLACE,
-  IN: SOCIAL_DISTANCING,
+  IN: SHELTER_IN_PLACE,
   IA: SOCIAL_DISTANCING,
   KS: NO_ACTION,
   KY: SOCIAL_DISTANCING,
-  LA: SOCIAL_DISTANCING,
+  LA: SHELTER_IN_PLACE,
   ME: SOCIAL_DISTANCING,
   MD: SOCIAL_DISTANCING,
   MA: SOCIAL_DISTANCING,
@@ -61,17 +62,17 @@ export const STATE_TO_INTERVENTION = {
   MO: NO_ACTION,
   MT: SOCIAL_DISTANCING,
   NE: NO_ACTION,
-  NV: SOCIAL_DISTANCING,
+  NV: SHELTER_IN_PLACE,
   NH: SOCIAL_DISTANCING,
   NJ: SHELTER_IN_PLACE,
-  NM: SOCIAL_DISTANCING,
+  NM: SHELTER_IN_PLACE,
   NY: SHELTER_IN_PLACE,
   NC: SOCIAL_DISTANCING,
   ND: SOCIAL_DISTANCING,
-  OH: SOCIAL_DISTANCING,
+  OH: SHELTER_IN_PLACE,
   OK: NO_ACTION,
   OR: SOCIAL_DISTANCING,
-  PA: SOCIAL_DISTANCING,
+  PA: SHELTER_IN_PLACE,
   RI: SOCIAL_DISTANCING,
   SC: NO_ACTION,
   SD: NO_ACTION,
@@ -82,6 +83,6 @@ export const STATE_TO_INTERVENTION = {
   VA: NO_ACTION,
   WA: SOCIAL_DISTANCING,
   WV: SOCIAL_DISTANCING,
-  WI: SOCIAL_DISTANCING,
+  WI: SHELTER_IN_PLACE,
   WY: SOCIAL_DISTANCING,
 };
