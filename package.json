@@ -13,7 +13,7 @@
     "highcharts": "^8.0.4",
     "highcharts-react-official": "^3.0.0",
     "history": "^4.10.1",
-    "momentjs": "^2.0.0",
+    "moment": "^2.24.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-router": "^5.1.2",
