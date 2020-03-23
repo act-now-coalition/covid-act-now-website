@@ -41,7 +41,8 @@ const _AppBar = () => {
   });
   const locationName = match && match.params ? STATES[match.params.id] : '';
 
-  const goTo = route => {
+  const goTo = route => e => {
+    e.preventDefault();
     setOpen(false);
     setPanelIdx(String(panels.indexOf(route)));
 
@@ -63,15 +64,15 @@ const _AppBar = () => {
       <Wrapper>
         <Left>
           {pathname.includes('state') ? (
-            <ArrowBack onClick={() => goTo('/')} />
+            <ArrowBack onClick={goTo('/')} />
           ) : (
-            <Logo onClick={() => goTo('/')} />
+            <Logo onClick={goTo('/')} />
           )}
           <MenuTitle>
             <Typography
               variant="button"
               component={Link}
-              onClick={() => goTo('/')}
+              onClick={goTo('/')}
               style={{ textDecoration: 'none', color: 'black' }}
             >
               COVID ACT NOW
@@ -99,25 +100,25 @@ const _AppBar = () => {
               label="Map"
               value="0"
               disableRipple
-              onClick={() => goTo('/')}
+              onClick={goTo('/')}
             />
             <StyledTab
               label="About"
               value="1"
               disableRipple
-              onClick={() => goTo('/about')}
+              onClick={goTo('/about')}
             />
             <StyledTab
               label="Model"
               value="2"
               disableRipple
-              onClick={() => goTo('/model')}
+              onClick={goTo('/model')}
             />
             <StyledTab
               label="Endorsements"
               value="3"
               disableRipple
-              onClick={() => goTo('/endorsements')}
+              onClick={goTo('/endorsements')}
             />
           </StyledTabs>
         </StyledDesktopMenu>
