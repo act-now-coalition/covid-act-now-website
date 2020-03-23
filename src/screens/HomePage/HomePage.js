@@ -19,6 +19,9 @@ export default function HomePage() {
         <div className="App" style={{ maxWidth: 900, margin: 'auto' }}>
           <p>Click the map to see projections for your state.</p>
           <Map />
+          <div style={{ marginTop: '3rem', marginBottom: '-1rem', padding: '2rem' }}>
+            <Newsletter />
+          </div>
         </div>
       </main>
       <Wrapper style={{ backgroundColor: '#F2F2F2' }}>
@@ -50,9 +53,6 @@ export default function HomePage() {
           </Typography>
           <div style={{margin: '-2rem'}}>
             <Endorsements />
-          </div>
-          <div style={{ marginTop: '3rem' }}>
-            <Newsletter />
           </div>
         </Content>
       </Wrapper>
