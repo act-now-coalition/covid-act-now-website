@@ -1,21 +1,29 @@
 import styled from 'styled-components';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs   from '@material-ui/core/Tabs';
+import Tab    from '@material-ui/core/Tab';
 
 import palette from 'assets/theme/palette';
+import { mobileBreakpoint } from 'assets/theme/sizes';
 
-export const Wrapper = styled.div`
+
+export const Wrapper = styled.div `
   display: flex;
   justify-content: space-between;
   height: 64px;
   padding: 0 20px;
 
-  @media(min-width: 600px) {
-    padding: 0 40px;
+  @media(min-width: ${mobileBreakpoint}) {
+    padding: 0 20px;
   }
 `;
 
-export const Left = styled.div`
+export const StyledAppBar = styled(AppBar)`
+  box-shadow: none;
+  border-bottom: 1px solid #e3e3e3;
+`;
+
+export const Left = styled.div `
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -30,18 +38,21 @@ export const Left = styled.div`
   }
 `;
 
-export const StyledDesktopMenu = styled(Tabs)`
+export const StyledDesktopMenu = styled(Tabs)
+`
   display: none;
 
-  @media(min-width: 600px) {
+  @media(min-width: ${mobileBreakpoint}) {
      display: inline-block;
   }
 `;
 
-export const StyledTabs = styled(Tabs)`
+export const StyledTabs = styled(Tabs)
+`
 `;
 
-export const StyledTab = styled(Tab)`
+export const StyledTab = styled(Tab)
+`
   min-width: 36px;
   height: 64px;
   margin-left: 15px;
@@ -57,18 +68,18 @@ export const StyledTab = styled(Tab)`
     /* border-bottom: 4px solid ${palette.secondary.main}; */
   }
 
-  @media(min-width: 600px) {
+  @media(min-width: ${mobileBreakpoint}) {
     margin-left: 28px;
     font-size: 16px;
   }
 `;
 
 
-export const MenuTitle = styled.div`
+export const MenuTitle = styled.div `
   display: inline-block;
 `;
 
-export const StyledBurger = styled.button`
+export const StyledBurger = styled.button `
   position: relative;
   top: 15px;
   margin-left: 20px;
@@ -110,14 +121,14 @@ export const StyledBurger = styled.button`
   }
 `;
 
-export const StyledMobileMenu = styled.nav`
+export const StyledMobileMenu = styled.nav `
   display: inherit;
-  @media(min-width: 600px) {
+  @media(min-width: ${mobileBreakpoint}) {
     display: none;
   }
 `;
 
-export const StyledMenu = styled.nav`
+export const StyledMenu = styled.nav `
   display: flex;
   flex-direction: column;
   background: white;
@@ -125,7 +136,7 @@ export const StyledMenu = styled.nav`
   transform: ${({ open }) => open ? 'translateY(64px)' : 'translateY(-100%)'};
   height: 100vh;
   text-align: left;
-  padding: 2rem;
+  padding: 1rem 2rem 0;
   position: absolute;
   top: 0;
   left: 0;
@@ -135,10 +146,9 @@ export const StyledMenu = styled.nav`
     cursor: pointer;
     font-size: 2rem;
     padding: 1.5rem 0;
-    font-weight: bold;
     color: #0D0C1D;
     text-decoration: none;
   }
 `;
 
-export const Content = styled.div``;
+export const Content = styled.div ``;
