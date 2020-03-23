@@ -27,7 +27,15 @@ export const StyledFooterBodyLinks = styled.div`
 
   span {
     cursor: pointer;
-    margin: 0 1rem;
+    margin: 0 0.6rem;
+  }
+
+  @media (min-width: 600px) {
+    flex: 0 0 40%;
+    padding: 3rem 0;
+    span {
+      margin: 0 1rem;
+    }
   }
 `;
 

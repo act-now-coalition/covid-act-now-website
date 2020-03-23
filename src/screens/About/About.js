@@ -7,7 +7,7 @@ import { Wrapper, Content } from './About.style';
 
 const About = ({ children }) => {
   return (
-    <Wrapper style={{ backgroundColor: '#F2F2F2' }}>
+    <Wrapper>
       <Content>
         <Typography variant="h3" component="h1">
           About

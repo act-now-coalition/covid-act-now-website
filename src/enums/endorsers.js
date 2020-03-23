@@ -74,4 +74,15 @@ export default [
       'Marin/Sonoma counties (6th AD)',
     ],
   },
+  {
+    size: 4,
+    name: 'Dr. Vincent DeGennaro, Jr, MD, MPH',
+    avatarUrl: '/images/endorsers/dr_vincent__resized-100-100.jpg',
+    profileUrl: 'https://www.linkedin.com/in/joe-nation-1045536/',
+    credentials: [
+      '"This tool shows clearly that we must act quickly in order to stop COVID, and governments are not acting fast enough"',
+      'Medical Director of Haiti Air Ambulance',
+      'Founder, Innovating Health International',
+    ],
+  },
 ];

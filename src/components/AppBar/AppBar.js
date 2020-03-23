@@ -1,7 +1,6 @@
 import React, { useState }                          from 'react';
 import { useHistory, useLocation, matchPath, Link } from 'react-router-dom';
 import { ArrowBack }                                from '@material-ui/icons';
-import AppBar                                       from '@material-ui/core/AppBar';
 import Typography                                   from '@material-ui/core/Typography';
 import Logo                                         from 'assets/images/logo';
 import MobileMenu                                   from './MobileMenu';
@@ -9,12 +8,14 @@ import Burger                                       from './Burger';
 import {
   Wrapper,
   Left,
+  StyledAppBar,
   StyledDesktopMenu,
   StyledTabs,
   StyledTab,
   MenuTitle,
   StyledMobileMenu,
 } from './AppBar.style';
+
 import {
   FacebookIcon,
   FacebookShareButton,
@@ -58,7 +59,7 @@ const _AppBar = () => {
   const shareTitle = locationName ? stateShareTitle : defaultShareTitle;
 
   return (
-    <AppBar position="sticky">
+    <StyledAppBar position="sticky">
       <Wrapper>
         <Left>
           {pathname.includes('state') ? (
@@ -140,7 +141,7 @@ const _AppBar = () => {
           <MobileMenu open={open} setOpen={setOpen} goTo={goTo} />
         </StyledMobileMenu>
       </Wrapper>
-    </AppBar>
+    </StyledAppBar>
   );
 };
 
