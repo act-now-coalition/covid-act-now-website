@@ -12,9 +12,6 @@ const FAQ = ({ children }) => {
           Model
         </Typography>
 
-        <Typography variant="h5" component="h5">
-          What are the assumptions of the model?
-        </Typography>
         <Typography variant="body1" component="p">
           The model is public, and{' '}
           <Link
