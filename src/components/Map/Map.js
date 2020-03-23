@@ -21,6 +21,8 @@ function Map() {
 
   const legendConfig = {};
 
+  //comment
+
   const statesCustomConfig = Object.keys(STATES).reduce((config, currState) => {
     const intervention = STATE_TO_INTERVENTION[currState];
     const interventionColor = INTERVENTION_COLOR_MAP[intervention];
