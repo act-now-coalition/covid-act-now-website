@@ -14,7 +14,6 @@ export default function HomePage() {
       <Header />
       <main style={{ textAlign: 'center', paddingBottom: 50 }}>
         <div className="App" style={{ maxWidth: 900, margin: 'auto' }}>
-          <p>Click the map to see projections for your state.</p>
           <Map />
           <div
             style={{

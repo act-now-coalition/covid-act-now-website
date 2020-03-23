@@ -66,6 +66,7 @@ tr {
 
 .Map path {
   pointer-events: all;
+  transition: fill 0.8s ease-out;
 }
 
 .Map path:hover {
