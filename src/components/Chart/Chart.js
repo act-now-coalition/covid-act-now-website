@@ -3,27 +3,30 @@ import Highcharts, { dateFormat } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import 'highcharts/css/highcharts.css';
 import moment from 'moment';
+import { INTERVENTIONS } from 'enums';
 
 import { Wrapper } from './Chart.style';
 
+const formatIntervention = intervention => `3 months of ${intervention}`;
+
 const Chart = ({ state, subtitle, data, dateOverwhelmed }) => {
   const noAction = {
-    name: 'No Action',
+    name: INTERVENTIONS.NO_ACTION,
     type: 'area',
     data: data[0].data,
   };
   const socialDistancing = {
-    name: '3 Months of Social distancing',
+    name: formatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
     type: 'area',
     data: data[2].data,
   };
   const shelterInPlace = {
-    name: '3 Months of Shelter-in-place',
+    name: formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
     type: 'area',
     data: data[1].data,
   };
   const wuhanStyle = {
-    name: '3 Months of Wuhan-style Lockdown',
+    name: formatIntervention(INTERVENTIONS.LOCKDOWN),
     type: 'area',
     data: data[3].data,
   };
