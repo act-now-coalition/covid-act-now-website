@@ -66,7 +66,7 @@ export default [
   },
   {
     name: "Simon Frid",
-    title: "Ex Engineering Lead, Gigster",
+    title: "Founder, Fridiculous Ventures",
     link: "https://www.linkedin.com/in/simonfrid/",
   },
   {
