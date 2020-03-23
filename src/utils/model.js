@@ -17,13 +17,13 @@ async function fetchAll(urls) {
 export function useModelDatas(location) {
   const [modelDatas, setModelDatas] = useState(null);
 
-  async function fetchData() {
-    let urls = Array.from({ length: 8 }, (x, i) => `/data/${location}.${i}.json`);
-    let loadedModelDatas = await fetchAll(urls);
-    setModelDatas(loadedModelDatas);
-  }
 
   useEffect(() => {
+    async function fetchData() {
+      let urls = Array.from({ length: 8 }, (x, i) => `/data/${location}.${i}.json`);
+      let loadedModelDatas = await fetchAll(urls);
+      setModelDatas(loadedModelDatas);
+    }
     fetchData();
   }, [location]);
   return modelDatas;
@@ -78,7 +78,7 @@ export class Model {
     let overwhelmedIdx = this.dates.findIndex(
       (num, idx) => this.hospitalizations[idx] > this.beds[idx],
     );
-    if (overwhelmedIdx == -1) {
+    if (overwhelmedIdx === -1) {
       this.dateOverwhelmed = null;
     } else {
       let overwhelmedBy =
