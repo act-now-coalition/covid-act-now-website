@@ -16,6 +16,17 @@ export const CallToActionButton = styled.button`
     box-shadow: 0 4px 12px rgba(0,0,0,0.19), 0 3px 3px rgba(0,0,0,0.23);
   }
 
+  @keyframes opacityPulse {
+    0%   { opacity: 1; }
+    50%  { opacity: 0.6; }
+    100% { opacity: 1; }
+  }
+
+  h6.pulse {
+    animation: opacityPulse 1.5s linear;
+    animation-iteration-count: infinite; 
+  }
+
   @media (max-width: 600px) {
     padding: 0.5rem 2rem;
   	margin-bottom: 0.25rem;
