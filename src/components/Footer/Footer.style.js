@@ -6,7 +6,7 @@ export const StyledFooter = styled.div`
   padding: 1rem;
   background: white;
 
-  @media (min-width: 600px) {
+  @media (min-width: ${mobileBreakpoint}) {
     padding: 2rem;
   }
 `;
@@ -22,7 +22,7 @@ export const StyledFooterBodyLinks = styled.div`
   text-align: center;
   padding: 2rem 0;
 
-  @media (min-width: 600px) {
+  @media (min-width: ${mobileBreakpoint}) {
     flex: 0 0 40%;
     padding: 3rem 0;
   }
@@ -38,7 +38,7 @@ export const StyledFooterBodyCallout = styled.div`
   text-align: center;
   padding: 1rem 0 2rem;
 
-  @media (min-width: 600px) {
+  @media (min-width: ${mobileBreakpoint}) {
     flex: 0 0 40%;
     padding: 3rem;
   }
@@ -61,7 +61,7 @@ export const StyledFooterHeader = styled.div`
     height: 65px;
   }
 
-  @media(min-width: 600px) {
+  @media(min-width: ${mobileBreakpoint}) {
     padding: 0 4rem;
   }
 
