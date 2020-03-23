@@ -1,7 +1,6 @@
 import React, { useState }                          from 'react';
 import { useHistory, useLocation, matchPath, Link } from 'react-router-dom';
 import { ArrowBack }                                from '@material-ui/icons';
-import AppBar                                       from '@material-ui/core/AppBar';
 import Typography                                   from '@material-ui/core/Typography';
 import Logo                                         from 'assets/images/logo';
 import MobileMenu                                   from './MobileMenu';
@@ -9,6 +8,7 @@ import Burger                                       from './Burger';
 import {
   Wrapper,
   Left,
+  StyledAppBar,
   StyledDesktopMenu,
   StyledTabs,
   StyledTab,
@@ -59,7 +59,7 @@ const _AppBar = () => {
   const shareTitle = locationName ? stateShareTitle : defaultShareTitle;
 
   return (
-    <AppBar position="sticky">
+    <StyledAppBar position="sticky">
       <Wrapper>
         <Left>
           {pathname.includes('state') ? (
@@ -82,7 +82,7 @@ const _AppBar = () => {
           <FacebookShareButton
             url={shareURL}
             quote={shareTitle}
-            style={{ alignItems: 'center', display: 'flex', paddingRight: 8 }}
+            style={{ alignItems: 'center', display: 'flex', paddingRight: 28 }}
           >
             <FacebookIcon size={32} round={true} />
           </FacebookShareButton>
@@ -90,7 +90,7 @@ const _AppBar = () => {
             url={shareURL}
             title={shareTitle}
             hashtags={[hashtag]}
-            style={{ alignItems: 'center', display: 'flex', paddingRight: 12 }}
+            style={{ alignItems: 'center', display: 'flex' }}
           >
             <TwitterIcon size={32} round={true} />
           </TwitterShareButton>
@@ -141,7 +141,7 @@ const _AppBar = () => {
           <MobileMenu open={open} setOpen={setOpen} goTo={goTo} />
         </StyledMobileMenu>
       </Wrapper>
-    </AppBar>
+    </StyledAppBar>
   );
 };
 

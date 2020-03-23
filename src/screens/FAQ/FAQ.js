@@ -6,7 +6,7 @@ import { Wrapper, Content } from './FAQ.style';
 
 const FAQ = ({ children }) => {
   return (
-    <Wrapper style={{ backgroundColor: '#F2F2F2' }}>
+    <Wrapper>
       <Content>
         <Typography variant="h3" component="h1">
           Model
