@@ -80,4 +80,13 @@ export default [
       'Founder, Innovating Health International',
     ],
   },
+  {
+    size: 4,
+    name: 'Robert David Siegel, M.D., PhD',
+    avatarUrl: '/images/endorsers/robert_siegel__resized-100-100.jpeg',
+    profileUrl: 'https://med.stanford.edu/profiles/robert-siegel',
+    credentials: [
+      'Professor (Teaching) Department of Microbiology and Immunology, Woods Institute for the Environment, Program in Human Biology, and Center for African Studies at Stanford University',
+    ],
+  },
 ];
