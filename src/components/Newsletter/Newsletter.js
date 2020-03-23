@@ -4,7 +4,7 @@ import { StyledNewsletter } from './Newsletter.style';
 const Newsletter = () => {
   return (
     <StyledNewsletter>
-      <iframe title="newletter signup" class="mj-w-res-iframe" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://app.mailjet.com/widget/iframe/1dtU/pXf" width="100%"></iframe>
+      <iframe class="mj-w-res-iframe" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://app.mailjet.com/widget/iframe/1dtU/pZV" width="100%"></iframe>
     </StyledNewsletter>
   );
 };
