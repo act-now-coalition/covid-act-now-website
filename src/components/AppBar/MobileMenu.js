@@ -18,6 +18,9 @@ const MobileMenu = ({ open, goTo }) => {
       <a onClick={goTo('/endorsements')} href="/endorsements">
         Endorsements
       </a>
+      <a onClick={goTo('/contact')} href="/contact">
+        Contact
+      </a>
     </StyledMenu>
   )
 }

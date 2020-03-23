@@ -26,6 +26,5 @@ yarn-error.log*
 
 # ides
 .idea
-
-# vscode
+.tern-port
 .vscode/

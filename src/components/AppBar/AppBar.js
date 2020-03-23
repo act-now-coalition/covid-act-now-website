@@ -27,7 +27,7 @@ import { STATES } from 'enums';
 const _AppBar = () => {
   const history = useHistory();
   const { pathname } = useLocation();
-  const panels = ['/', '/about', '/model', '/endorsements'];
+  const panels = ['/', '/about', '/model', '/endorsements', '/contact'];
   const [panelIdx, setPanelIdx] = useState(
     String(panels.indexOf(pathname)) || '0',
   );
@@ -119,6 +119,12 @@ const _AppBar = () => {
               value="3"
               disableRipple
               onClick={goTo('/endorsements')}
+            />
+            <StyledTab
+              label="Contact"
+              value="4"
+              disableRipple
+              onClick={goTo('/contact')}
             />
           </StyledTabs>
         </StyledDesktopMenu>
