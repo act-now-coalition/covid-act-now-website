@@ -168,18 +168,17 @@ function ModelPage() {
                 style={{ paddingRight: 28, fontWeight: 'bold' }}
               >{`Share ${locationName}'s COVID-19 trends:`}</div>
 
-              <FacebookShareButton
-                url={shareURL}
-                quote={shareQuote}>
+              <FacebookShareButton url={shareURL} quote={shareQuote}>
                 <FacebookIcon size={40} round={false} borderRadius={5} />
               </FacebookShareButton>
 
               <ShareSpacer />
 
-                <TwitterShareButton
-                  url={shareURL}
-                  title={shareQuote}
-                  hashtags={[hashtag]}>
+              <TwitterShareButton
+                url={shareURL}
+                title={shareQuote}
+                hashtags={[hashtag]}
+              >
                 <TwitterIcon size={40} round={false} borderRadius={5} />
               </TwitterShareButton>
 

@@ -27,10 +27,10 @@ export const INTERVENTION_DESCRIPTIONS = {
 };
 
 export const INTERVENTION_COLOR_MAP = {
-  [NO_ACTION]: 'rgb(255, 51, 72)',
-  [SOCIAL_DISTANCING]: 'rgb(255, 144, 0)',
-  [SHELTER_IN_PLACE]: 'rgb(49, 187, 232)',
-  [LOCKDOWN]: 'rgb(49, 232, 188)', // ?
+  [NO_ACTION]: 'rgb(255, 51, 72)', // red
+  [SOCIAL_DISTANCING]: 'rgb(255, 144, 0)', // orange
+  [SHELTER_IN_PLACE]: 'rgb(30, 224, 175)', // green
+  [LOCKDOWN]: 'rgb(223, 31, 210)', // purple
 };
 
 // TODO: This should be temporary to hardcode these

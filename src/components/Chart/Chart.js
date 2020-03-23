@@ -9,25 +9,21 @@ import { Wrapper } from './Chart.style';
 const Chart = ({ state, subtitle, data, dateOverwhelmed }) => {
   const noAction = {
     name: 'No Action',
-    color: '#ef5350',
     type: 'area',
     data: data[0].data,
   };
   const socialDistancing = {
-    name: "3 Months of Social distancing",
-    color: '#FFA726',
+    name: '3 Months of Social distancing',
     type: 'area',
     data: data[2].data,
   };
   const shelterInPlace = {
-    name: "3 Months of Shelter-in-place",
-    color: '#29B6F6',
+    name: '3 Months of Shelter-in-place',
     type: 'area',
     data: data[1].data,
   };
   const wuhanStyle = {
     name: '3 Months of Wuhan-style Lockdown',
-    color: '#9CCC65',
     type: 'area',
     data: data[3].data,
   };
