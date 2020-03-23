@@ -54,9 +54,6 @@ export default function HomePage() {
           <div style={{margin: '-2rem'}}>
             <Endorsements />
           </div>
-          <div style={{ marginTop: '3rem' }}>
-            <Newsletter />
-          </div>
         </Content>
       </Wrapper>
     </>
