@@ -1,39 +1,47 @@
 import palette from './palette';
+import sizes from './sizes';
+
+const headerFamily = '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif'
+const {mobileBreakpoint} = sizes;
 
 export default {
   p: {
     lineHeight: '1',
   },
   h2: {
-    fontSize: '1.8rem',
+    fontFamily: headerFamily,
+    fontSize: '2.1rem',
     fontWeight: '500',
     lineHeight: '2.2rem',
-    margin: '0 0 2rem',
-    '@media (min-width:600px)': {
+    margin: '0 0 1rem',
+    [`@media (min-width:${mobileBreakpoint})`]: {
       fontSize: '2.8rem',
     },
   },
   h3: {
     fontSize: '1.8rem',
     fontWeight: '500',
-    margin: '2rem 0 1rem',
-    '@media (min-width:600px)': {
+    margin: '1rem 0 0',
+    fontFamily: headerFamily,
+    [`@media (min-width:${mobileBreakpoint})`]: {
       fontSize: '2.2rem',
     },
   },
   h4: {
+    fontFamily: headerFamily,
     fontSize: '1.4rem',
     fontWeight: '500',
-    '@media (min-width:600px)': {
+    [`@media (min-width:${mobileBreakpoint})`]: {
       fontSize: '1.5rem',
     },
   },
   h5: {
+    fontFamily: headerFamily,
     fontWeight: '500',
     fontSize: '1.2rem',
     margin: '1.4rem 0',
-    '@media (min-width:600px)': {
-      margin: '1.8rem 0 1.2rem',
+    [`@media (min-width:${mobileBreakpoint})`]: {
+      margin: '1.8rem 0 0.2rem',
       fontSize: '1.4rem',
     },
   },
@@ -52,14 +60,15 @@ export default {
   },
   body1: {
     color: palette.text.primary,
-    fontSize: '0.9rem',
+    fontSize: '1rem',
     letterSpacing: '-0.05px',
-    lineHeight: '21px'
+    lineHeight: '21px',
+    fontWeight: 500
   },
   body2: {
     color: palette.text.secondary,
     fontSize: '0.9rem',
-    '@media (min-width:600px)': {
+    [`@media (min-width:${mobileBreakpoint})`]: {
       fontSize: '1rem',
     },
     letterSpacing: '-0.04px',

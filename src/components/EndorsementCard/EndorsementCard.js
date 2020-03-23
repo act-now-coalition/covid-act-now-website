@@ -24,7 +24,7 @@ const EndorsementCard = ({
   return (
     <Wrapper>
       <Grid container>
-        <Grid item xs={12} sm={quote ? 4 : 12}>
+        <Grid item xs={12} sm={12}>
           <Profile>
             <ProfileHeader
               onClick={() => window.open(profileUrl, '_blank')}
@@ -39,19 +39,18 @@ const EndorsementCard = ({
                     {c}
                   </Credential>
                 ))}
+
+                                    {quote && (
+              <Quote><Typography variant="body1" component="p">
+                {quote}
+              </Typography></Quote>
+        )}
               </CardContent>
             </Left>
+
           </Profile>
         </Grid>
-        {quote && (
-          <Grid item xs={12} sm={8}>
-            <Quote>
-              <Typography variant="body1" component="p">
-                {quote}
-              </Typography>
-            </Quote>
-          </Grid>
-        )}
+
       </Grid>
     </Wrapper>
   );

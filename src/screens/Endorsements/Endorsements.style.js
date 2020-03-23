@@ -3,28 +3,21 @@ import Grid from '@material-ui/core/Grid';
 
 export const Wrapper = styled.div`
   background-color: #f2f2f2;
-  padding: 1rem;
   min-height: calc(100vh - 64px);
 `;
 
 export const Content = styled.div`
   margin: auto;
 
-  h1,
-  h5,
-  p {
-    margin-bottom: 24px;
-  }
-
   @media (min-width: 600px) {
-    width: 1000px;
+    max-width: 1000px;
   }
 `;
 
 export const Quote = styled.div`
   background-color: white;
   border-radius: 4px;
-  margin: 24px 12px;
+  margin: 24px 0 24px 0;
   padding: 24px;
   display: flex;
   svg {

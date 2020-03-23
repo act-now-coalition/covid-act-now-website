@@ -10,9 +10,4 @@ export const Wrapper = styled.div`
 export const Content = styled.div`
   max-width: 900px;
   margin: auto;
-  h1,
-  h5,
-  p {
-    margin-bottom: 24px;
-  }
 `;

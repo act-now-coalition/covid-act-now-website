@@ -22,7 +22,7 @@ export default function HomePage() {
       </main>
       <Wrapper style={{ backgroundColor: '#F2F2F2' }}>
         <Content>
-          <Typography variant="h3" component="h3" style={{ marginBottom: 20 }}>
+          <Typography variant="h3" component="h3">
             How to use this tool
           </Typography>
           <Typography variant="body2" component="p" style={{ color: '#222', marginBottom: '3rem' }}>
@@ -44,10 +44,10 @@ export default function HomePage() {
             </ol>
           </Typography>
 
-          <Typography variant="h3" component="h3" style={{ marginBottom: 20 }}>
+          <Typography variant="h3" component="h3">
             Endorsements
           </Typography>
-          <div style={{margin: '-2rem'}}>
+          <div>
             <Endorsements />
           </div>
         </Content>

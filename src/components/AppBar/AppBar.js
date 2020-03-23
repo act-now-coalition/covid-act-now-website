@@ -15,6 +15,7 @@ import {
   MenuTitle,
   StyledMobileMenu,
 } from './AppBar.style';
+
 import {
   FacebookIcon,
   FacebookShareButton,
@@ -81,7 +82,7 @@ const _AppBar = () => {
           <FacebookShareButton
             url={shareURL}
             quote={shareTitle}
-            style={{ alignItems: 'center', display: 'flex', paddingRight: 28 }}
+            style={{ alignItems: 'center', display: 'flex', paddingRight: 8 }}
           >
             <FacebookIcon size={32} round={true} />
           </FacebookShareButton>
@@ -89,7 +90,7 @@ const _AppBar = () => {
             url={shareURL}
             title={shareTitle}
             hashtags={[hashtag]}
-            style={{ alignItems: 'center', display: 'flex' }}
+            style={{ alignItems: 'center', display: 'flex', paddingRight: 12 }}
           >
             <TwitterIcon size={32} round={true} />
           </TwitterShareButton>
