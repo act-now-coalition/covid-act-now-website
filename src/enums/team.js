@@ -67,7 +67,7 @@ export default [
   {
     name: "Simon Frid",
     title: "Ex Engineering Lead, Gigster",
-    link: "https://twitter.com/fridiculou5",
+    link: "https://www.linkedin.com/in/simonfrid/",
   },
   {
     name: "Virsaviya Efraim",
