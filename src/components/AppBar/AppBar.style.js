@@ -3,9 +3,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
 import palette from 'assets/theme/palette';
-import sizes from 'assets/theme/sizes';
+import { mobileBreakpoint } from 'assets/theme/sizes';
 
-const { mobileBreakpoint } = sizes;
 
 export const Wrapper = styled.div `
   display: flex;

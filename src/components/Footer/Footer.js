@@ -30,12 +30,10 @@ const Footer = ({ children }) => {
         </StyledFooterHeader>
         <StyledFooterBody>
           <StyledFooterBodyLinks>
-            <div>
-              <span onClick={() => goTo('/')}>MAP</span>
-              <span onClick={() => goTo('/about')}>ABOUT</span>
-              <span onClick={() => goTo('/model')}>MODEL</span>
-              <span onClick={() => goTo('/endorsements')}>ENDORSEMENTS</span>
-            </div>
+            <span onClick={() => goTo('/')}>MAP</span>
+            <span onClick={() => goTo('/about')}>ABOUT</span>
+            <span onClick={() => goTo('/model')}>MODEL</span>
+            <span onClick={() => goTo('/endorsements')}>ENDORSEMENTS</span>
           </StyledFooterBodyLinks>
           <StyledFooterBodyCallout>
             If you have time to give us feedback or access to this expertise, have questions, or otherwise want to get involved, <a href="mailto:jonathan@covidactnow.org">please email us</a>

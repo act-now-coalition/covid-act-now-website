@@ -40,11 +40,13 @@ const EndorsementCard = ({
                   </Credential>
                 ))}
 
-                                    {quote && (
-              <Quote><Typography variant="body1" component="p">
-                {quote}
-              </Typography></Quote>
-        )}
+                {quote && (
+                  <Quote>
+                    <Typography variant="body1" component="p">
+                      {quote}
+                    </Typography>
+                  </Quote>
+                )}
               </CardContent>
             </Left>
 

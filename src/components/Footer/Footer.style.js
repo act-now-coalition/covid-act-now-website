@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { mobileBreakpoint } from 'assets/theme/sizes';
+
 export const StyledFooter = styled.div`
   padding: 1rem;
   background: white;

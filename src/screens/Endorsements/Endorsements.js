@@ -26,7 +26,7 @@ const Endorsements = () => {
         </Quote>
         <EndorsersWrapper container alignItems={'stretch'} spacing={0} wrap={'wrap'}>
           {ENDORSERS.map((e, index) => (
-            <Grid item key={index} xs={12} sm={e.size}>
+            <Grid item key={index} xs={12} sm={6} md={e.size}>
               <EndorsementCard {...e} />
             </Grid>
           ))}

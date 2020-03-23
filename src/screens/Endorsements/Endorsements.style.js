@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
 
+import { materialSMBreakpoint } from 'assets/theme/sizes';
+
 export const Wrapper = styled.div`
   background-color: #f2f2f2;
   min-height: calc(100vh - 64px);
@@ -9,7 +11,7 @@ export const Wrapper = styled.div`
 export const Content = styled.div`
   margin: auto;
 
-  @media (min-width: 600px) {
+  @media (min-width: ${materialSMBreakpoint}) {
     max-width: 1000px;
   }
 `;
@@ -31,7 +33,7 @@ export const Quote = styled.div`
       content: '|';
       color: red;
     }
-    @media (min-width: 600px) {
+    @media (min-width: ${materialSMBreakpoint}) {
       width: 48px;
       height: 48px;
     }
@@ -40,7 +42,7 @@ export const Quote = styled.div`
     margin: 0;
     font-size: 10%;
     font-size: 20px;
-    @media (min-width: 600px) {
+    @media (min-width: ${materialSMBreakpoint}) {
       font-size: 30px;
     }
   }

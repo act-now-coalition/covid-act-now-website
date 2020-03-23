@@ -1,8 +1,7 @@
 import palette from './palette';
-import sizes from './sizes';
+import { mobileBreakpoint } from './sizes';
 
 const headerFamily = '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif'
-const {mobileBreakpoint} = sizes;
 
 export default {
   p: {
@@ -21,7 +20,7 @@ export default {
   h3: {
     fontSize: '1.8rem',
     fontWeight: '500',
-    margin: '1rem 0 0',
+    margin: '1rem 0 0.2rem',
     fontFamily: headerFamily,
     [`@media (min-width:${mobileBreakpoint})`]: {
       fontSize: '2.2rem',
@@ -39,7 +38,7 @@ export default {
     fontFamily: headerFamily,
     fontWeight: '500',
     fontSize: '1.2rem',
-    margin: '1.4rem 0',
+    margin: '1.4rem 0 0.2rem',
     [`@media (min-width:${mobileBreakpoint})`]: {
       margin: '1.8rem 0 0.2rem',
       fontSize: '1.4rem',
