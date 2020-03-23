@@ -15,7 +15,6 @@ export default [
     avatarUrl: '/images/endorsers/Valerie-Davidson-A__resized-100-100.jpg',
     profileUrl: 'https://en.wikipedia.org/wiki/Valerie_Davidson',
     credentials: [
-      '13th Lieutenant Governor of Alaska',
       'Former Commissioner of the Alaska Department of Health and Social Services',
       'Founder\'s Council member, United States of Care',
     ],
@@ -26,9 +25,8 @@ export default [
     avatarUrl: '/images/endorsers/tomas_pueyo__resized-100-100.png',
     profileUrl: 'https://medium.com/@tomaspueyo',
     credentials: [
-      'Author of \'Coronavirus: Why You Must Act Now\'',
-      'Author of \'Coronavirus: The Hammer and the Dance\'',
-      'VP of Growth at Course Hero',
+      'Author of "Coronavirus: Why You Must Act Now"',
+      'Author of "Coronavirus: The Hammer and the Dance"',
     ],
   },
   {
@@ -45,7 +43,7 @@ export default [
   },
   {
     size: 4,
-    name: 'Ben Goldman-Israelow',
+    name: 'Ben Goldman-Israelow, MD, PhD',
     avatarUrl: '/images/endorsers/ben_goldman_israelow__resized-100-100.jpeg',
     profileUrl: 'https://medicine.yale.edu/profile/benjamin_goldman-israelow/',
     credentials: [
@@ -58,20 +56,17 @@ export default [
     avatarUrl: '/images/endorsers/Leo_Nissola__resized-100-100.jpg',
     profileUrl: 'https://www.linkedin.com/in/nissolamd/',
     credentials: [
-      'Published book author in immunology and Scientist at the Parker Institute for Cancer Immunotherapy',
-      'Previous fellow at the Medical Oncology Genitourinary Department at MD Anderson Cancer Center in Houston'
+      'Published immunology scholar and scientist at Parker Institute for Cancer Immunothera',
     ],
   },
   {
     size: 4,
-    name: 'Joe Nation, Ph.D.',
+    name: 'Joe Nation, PhD',
     avatarUrl: '/images/endorsers/joe_nation__resized-100-100.jpeg',
     profileUrl: 'https://www.linkedin.com/in/joe-nation-1045536/',
     credentials: [
       'Professor of the Practice of Stanford University Public Policy Program',
       'Kennedy-Grossman Fellow in Human Biology',
-      'Former California State Assemblyman',
-      'Marin/Sonoma counties (6th AD)',
     ],
   },
   {
