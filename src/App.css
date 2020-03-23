@@ -19,19 +19,17 @@ th, td {
   padding: 10px;
   width: 25%;
 }
-
 tr {
   border-bottom: 1px solid #ccc;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 600px) {
   .small-graph
   {
     float: unset;
     width: 100%;
   }
 }
-
 
 .analysis-group {
   background-color: "#fafafa";
