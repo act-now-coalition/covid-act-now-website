@@ -27,9 +27,9 @@ export const INTERVENTION_DESCRIPTIONS = {
 };
 
 export const INTERVENTION_COLOR_MAP = {
-  [NO_ACTION]: 'rgb(30, 224, 175)', // green
-  [SOCIAL_DISTANCING]: 'rgb(255, 144, 0)', // orange
-  [SHELTER_IN_PLACE]: 'rgb(255, 51, 72)', // red
+  [NO_ACTION]: 'rgba(132, 193, 246, 1)', // light blue
+  [SOCIAL_DISTANCING]: 'rgba(32, 126, 207, 1)', // mid blue
+  [SHELTER_IN_PLACE]: 'rgba(22, 67, 106, 1)', // dark blue
   [LOCKDOWN]: 'rgb(223, 31, 210)', // purple
 };
 

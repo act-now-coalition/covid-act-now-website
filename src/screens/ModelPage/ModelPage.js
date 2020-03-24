@@ -25,9 +25,9 @@ import { useModelDatas, Model } from 'utils/model';
 
 const LAST_DATES_CALLOUT_COLORS = {
   // Array is [fill color, border color]
-  [INTERVENTIONS.NO_ACTION]: ['rgba(0, 255, 0, 0.0784)', 'green'],
-  [INTERVENTIONS.SOCIAL_DISTANCING]: ['rgba(255, 255, 0, 0.0784)', 'yellow'],
-  [INTERVENTIONS.SHELTER_IN_PLACE]: ['rgba(255, 0, 0, 0.0784)', 'red'],
+  [INTERVENTIONS.NO_ACTION]: ['rgba(132, 193, 246, 1)', 'ice'],
+  [INTERVENTIONS.SOCIAL_DISTANCING]: ['rgba(32, 126, 207, 1)', 'blue'],
+  [INTERVENTIONS.SHELTER_IN_PLACE]: ['rgba(22, 67, 106, 1)', 'navy'],
 };
 
 const DAYS = 1000 * 60 * 60 * 24;
