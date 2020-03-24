@@ -48,11 +48,8 @@ const CallToAction = ({ model, intervention }) => {
         return INTERVENTIONS.SHELTER_IN_PLACE;
       case INTERVENTIONS.SOCIAL_DISTANCING:
         return INTERVENTIONS.SHELTER_IN_PLACE;
-      case INTERVENTIONS.SHELTER_IN_PLACE:
-        // TODO: Are we okay recommending lockdown?
-        return INTERVENTIONS.LOCKDOWN;
       default:
-        return 'Stricter intervention';
+        return 'stricter intervention';
     }
   }
 
@@ -63,7 +60,7 @@ const CallToAction = ({ model, intervention }) => {
   ) {
     actionText = `${intervention} projected to successfully delay hospital overload by greater than 3 months.`;
   } else {
-    actionText = `To prevent hospital overload, you must implement ${suggestedIntervention()} by:`;
+    actionText = `To prevent hospital overload, ${suggestedIntervention()} must be implemented by:`;
     const earlyDate = new Date(model.dateOverwhelmed.getTime() - 14 * DAYS);
     const lateDate = new Date(model.dateOverwhelmed.getTime() - 9 * DAYS);
     actionDateRange = (
