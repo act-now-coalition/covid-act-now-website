@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import CountyMap from 'components/CountyMap/CountyMap';
 
 import {
   FacebookShareButton,
@@ -147,6 +148,7 @@ function ModelPage() {
       <Header locationName={locationName} />
       <Content>
         <Panel>
+          <CountyMap />
           <Chart
             state={locationName}
             subtitle="Hospitalizations over time"
