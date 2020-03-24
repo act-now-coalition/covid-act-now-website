@@ -40,6 +40,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "cy.open": "cypress open",
+    "cy.run": "cypress run",
+    "e2e": "start-server-and-test start http://localhost:3000 cy.open",
+    "e2e.ci": "cross-env BROWSER=none start-server-and-test start http://localhost:3000 cy.run",
     "eject": "react-scripts eject",
     "lint": "eslint src || printf '\\n\\e[31mRun lint-fix to fix\\e[0m\\n\\n'",
     "lint-fix": "eslint --fix src",
@@ -64,9 +68,12 @@
     ]
   },
   "devDependencies": {
+    "cross-env": "^7.0.2",
+    "cypress": "^4.2.0",
     "eslint": "6.8.0",
     "eslint-config-prettier": "6.10.1",
     "eslint-plugin-prettier": "3.1.2",
-    "prettier": "2.0.2"
+    "prettier": "2.0.2",
+    "start-server-and-test": "^1.10.11"
   }
 }
