@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 async function fetchAll(urls) {
   try {
     var data = await Promise.all(
-      urls.map(url => fetch(url).then(response => response.json()))
+      urls.map(url => fetch(url).then(response => response.json())),
     );
 
     return data;
@@ -17,10 +17,12 @@ async function fetchAll(urls) {
 export function useModelDatas(location) {
   const [modelDatas, setModelDatas] = useState(null);
 
-
   useEffect(() => {
     async function fetchData() {
-      let urls = Array.from({ length: 8 }, (x, i) => `/data/${location}.${i}.json`);
+      let urls = Array.from(
+        { length: 8 },
+        (x, i) => `/data/${location}.${i}.json`,
+      );
       let loadedModelDatas = await fetchAll(urls);
       setModelDatas(loadedModelDatas);
     }
@@ -35,7 +37,7 @@ const COLUMNS = {
   cumulativeDeaths: 10,
   cumulativeInfected: 9,
   totalPopulation: 16,
-  date: 0
+  date: 0,
 };
 
 const DAYS = 1000 * 60 * 60 * 24;
@@ -89,7 +91,6 @@ export class Model {
       this.dateOverwhelmed = new Date(
         this.dates[overwhelmedIdx].getTime() - dayDelta * DAYS,
       );
-
     }
 
     this.totalPopulation = _parseInt(data[0][COLUMNS.totalPopulation]);
@@ -131,7 +132,10 @@ export class Model {
   }
 
   get interventionEnd() {
-    return new Date(this.dayZero.getTime() + (this.daysSinceDayZero + this.durationDays) * DAYS);
+    return new Date(
+      this.dayZero.getTime() +
+        (this.daysSinceDayZero + this.durationDays) * DAYS,
+    );
   }
 
   idxForDay = day => Math.ceil(day / 4);
