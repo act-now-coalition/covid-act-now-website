@@ -23,7 +23,7 @@ export const INTERVENTION_DESCRIPTIONS = {
   [SOCIAL_DISTANCING]:
     'Voluntary “shelter-in-place” for high-risk groups, schools and bars / restaurants closed.',
   [SHELTER_IN_PLACE]:
-    'Legal order for citizens to employ “shelter-in-place” home quarantine (especially firm for high-risk groups), shutdown of non-essential businesses, ban on all group events.',
+    'Legal order or strong recommendation for citizens to employ “shelter-in-place” home quarantine (especially firm for high-risk groups), shutdown of non-essential businesses, ban on all group events.',
 };
 
 export const INTERVENTION_COLOR_MAP = {

@@ -20,9 +20,15 @@ import {
   ShareContainer,
   ShareSpacer,
 } from './ModelPage.style';
-import { STATES } from 'enums';
-
+import { STATES, STATE_TO_INTERVENTION, INTERVENTIONS } from 'enums';
 import { useModelDatas, Model } from 'utils/model';
+
+const LAST_DATES_CALLOUT_COLORS = {
+  // Array is [fill color, border color]
+  [INTERVENTIONS.NO_ACTION]: ['rgba(255, 0, 0, 0.0784)', 'red'],
+  [INTERVENTIONS.SOCIAL_DISTANCING]: ['rgba(255, 255, 0, 0.0784)', 'yellow'],
+  [INTERVENTIONS.SHELTER_IN_PLACE]: ['rgba(0, 255, 0, 0.0784)', 'green'],
+};
 
 const LastDatesToAct = ({ model }) => {
   function formatDate(date) {
@@ -61,6 +67,7 @@ let lowercaseStates = [
 function ModelPage() {
   const { id: location } = useParams();
   const locationName = STATES[location];
+  const intervention = STATE_TO_INTERVENTION[location];
 
   let locationNameForDataLoad = location;
 
@@ -73,7 +80,7 @@ function ModelPage() {
   const hashtag = 'COVIDActNow';
 
   if (!modelDatas) {
-    return <Header locationName={locationName} />;
+    return <Header locationName={locationName} intervention={intervention} />;
   }
 
   // Initialize models
@@ -142,9 +149,13 @@ function ModelPage() {
   ];
   let scenarioComparison = scenarioComparisonOverTime(100);
 
+  const [calloutFillColor, calloutStrokeColor] = LAST_DATES_CALLOUT_COLORS[
+    intervention
+  ];
+
   return (
     <Wrapper>
-      <Header locationName={locationName} />
+      <Header locationName={locationName} intervention={intervention} />
       <Content>
         <Panel>
           <Chart
@@ -154,7 +165,10 @@ function ModelPage() {
             dateOverwhelmed={baseline.dateOverwhelmed}
           />
 
-          <Callout backgroundColor="rgba(255, 0, 0, 0.0784)" borderColor="red">
+          <Callout
+            borderColor={calloutStrokeColor}
+            backgroundColor={calloutFillColor}
+          >
             <div style={{ fontWeight: 'normal', marginBottom: '1.2rem' }}>
               Point of no-return for intervention to prevent hospital overload:
             </div>
