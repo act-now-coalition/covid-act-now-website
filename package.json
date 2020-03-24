@@ -13,7 +13,6 @@
     "highcharts": "^8.0.4",
     "highcharts-react-official": "^3.0.0",
     "history": "^4.10.1",
-    "husky": "^4.2.3",
     "lint-staged": "^10.0.9",
     "moment": "^2.24.0",
     "react": "^16.13.0",
