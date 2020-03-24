@@ -39,7 +39,7 @@ const Footer = ({ children }) => {
             </div>
           </StyledFooterBodyLinks>
           <StyledFooterBodyCallout>
-            Press contact: <a href="press@covidactnow.org">press@covidactnow.org</a><br/><a href="https://forms.gle/JTCcqrGb5yzoD6hg6">Contribute</a> to this tool
+            Press contact: <a href="mailto:press@covidactnow.org">press@covidactnow.org</a><br/><a href="https://forms.gle/JTCcqrGb5yzoD6hg6">Contribute</a> to this tool
           </StyledFooterBodyCallout>
         </StyledFooterBody>
       </StyledFooter>

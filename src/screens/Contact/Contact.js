@@ -21,21 +21,21 @@ const Contact = ({ children }) => {
         <StyledContactLink variant="body1" component="p">
           <strong>Medical Organizations:</strong>
             <div>
-              <a href="medical@covidactnow.org">medical@covidactnow.org</a>
+              <a href="mailto:medical@covidactnow.org">medical@covidactnow.org</a>
             </div>
         </StyledContactLink>
 
         <StyledContactLink variant="body1" component="p">
           <strong>Government Agencies:</strong>
             <div>
-              <a href="gov@covidactnow.org">gov@covidactnow.org</a>
+              <a href="mailto:gov@covidactnow.org">gov@covidactnow.org</a>
             </div>
         </StyledContactLink>
 
         <StyledContactLink variant="body1" component="p">
           <strong>Press:</strong>
           <div>
-            <a href="press@covidactnow.org">press@covidactnow.org</a>
+            <a href="mailto:press@covidactnow.org">press@covidactnow.org</a>
           </div>
           <div>
             Our presskit is available <a href="https://docs.google.com/document/d/1kdzXjVXsfVZN2Ltt66yy2TTlZMPKO96ixSMDCGksdf0/edit">here</a>
@@ -45,7 +45,7 @@ const Contact = ({ children }) => {
         <StyledContactLink variant="body1" component="p">
           <strong>All other Inquiries:</strong>
           <div>
-            <a href="info@covidactnow.org">info@covidactnow.org</a>
+            <a href="mailto:info@covidactnow.org">info@covidactnow.org</a>
           </div>
         </StyledContactLink>
 
