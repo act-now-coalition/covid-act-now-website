@@ -79,6 +79,7 @@ export default {
     Latitude: 21.0943,
     Longitude: -157.4983,
     rotate: [150, 0],
+    scale: 3000,
   },
   ID: {
     'Province/State': 'Idaho',

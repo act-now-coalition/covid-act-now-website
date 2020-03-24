@@ -11,10 +11,6 @@ import { csv } from 'd3-fetch';
 import ReactTooltip from 'react-tooltip';
 import STATE_CENTERS from '../../enums/us_state_centers';
 
-// const geoUrl = 'https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json';
-// const geoUrl =
-// 'https://github.com/deldersveld/topojson/blob/master/countries/us-states/CA-06-california-counties.json';
-
 const CountyMap = () => {
   const [data, setData] = useState([]);
   const { id: location } = useParams();
@@ -33,16 +29,6 @@ const CountyMap = () => {
     });
   }, []);
 
-  const rounded = num => {
-    if (num > 1000000000) {
-      return Math.round(num / 100000000) / 10 + 'Bn';
-    } else if (num > 1000000) {
-      return Math.round(num / 100000) / 10 + 'M';
-    } else {
-      return Math.round(num / 100) / 10 + 'K';
-    }
-  };
-
   const colorScale = scaleQuantile()
     .domain(data.map(d => d.unemployment_rate))
     .range([
@@ -57,13 +43,14 @@ const CountyMap = () => {
       '#782618',
     ]);
 
-  const [content, setContent] = useState('asdf');
+  const [content, setContent] = useState('');
   return (
     <div>
       {data && (
         <ComposableMap
           projection="geoAlbers"
           data-tip=""
+          style={{ border: '1px solid black' }}
           projectionConfig={{
             rotate: state.rotate ? state.rotate : null,
             scale: state.scale ? state.scale : 2000,
@@ -84,7 +71,9 @@ const CountyMap = () => {
                       fill={cur ? colorScale(cur.unemployment_rate) : '#EEE'}
                       onMouseEnter={() => {
                         const { NAME } = geo.properties;
-                        setContent(`${NAME} — ${cur.unemployment_rate}`);
+                        setContent(
+                          `${NAME} — ${cur ? cur.unemployment_rate : 'n/a'}`,
+                        );
                       }}
                       onMouseLeave={() => {
                         setContent('');
