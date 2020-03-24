@@ -20,11 +20,19 @@ import {
   ShareContainer,
   ShareSpacer,
 } from './ModelPage.style';
-import { STATES } from 'enums';
-
+import { STATES, STATE_TO_INTERVENTION, INTERVENTIONS } from 'enums';
 import { useModelDatas, Model } from 'utils/model';
 
-const LastDatesToAct = ({ model }) => {
+const LAST_DATES_CALLOUT_COLORS = {
+  // Array is [fill color, border color]
+  [INTERVENTIONS.NO_ACTION]: ['rgba(255, 0, 0, 0.0784)', 'red'],
+  [INTERVENTIONS.SOCIAL_DISTANCING]: ['rgba(255, 255, 0, 0.0784)', 'yellow'],
+  [INTERVENTIONS.SHELTER_IN_PLACE]: ['rgba(0, 255, 0, 0.0784)', 'green'],
+};
+
+const ONE_HUNDRED_DAYS = 8.64e9;
+
+const LastDatesToAct = ({ model, outOfBoundsDate }) => {
   function formatDate(date) {
     const month = new Intl.DateTimeFormat('en', { month: 'short' }).format(
       date,
@@ -32,6 +40,12 @@ const LastDatesToAct = ({ model }) => {
     const day = new Intl.DateTimeFormat('en', { day: 'numeric' }).format(date);
     return `${month} ${day}`;
   }
+
+  if (
+    !model.dateOverwhelmed ||
+    model.dateOverwhelmed - new Date() > ONE_HUNDRED_DAYS
+  )
+    return <b>Outside time bound</b>;
 
   const days = 1000 * 60 * 60 * 24;
   let earlyDate = new Date(model.dateOverwhelmed.getTime() - 14 * days);
@@ -61,6 +75,7 @@ let lowercaseStates = [
 function ModelPage() {
   const { id: location } = useParams();
   const locationName = STATES[location];
+  const intervention = STATE_TO_INTERVENTION[location];
 
   let locationNameForDataLoad = location;
 
@@ -73,7 +88,7 @@ function ModelPage() {
   const hashtag = 'COVIDActNow';
 
   if (!modelDatas) {
-    return <Header locationName={locationName} />;
+    return <Header locationName={locationName} intervention={intervention} />;
   }
 
   // Initialize models
@@ -127,6 +142,12 @@ function ModelPage() {
       }),*/
   };
 
+  const interventionToModel = {
+    [INTERVENTIONS.NO_ACTION]: baseline,
+    [INTERVENTIONS.SOCIAL_DISTANCING]: distancingPoorEnforcement.now,
+    [INTERVENTIONS.SHELTER_IN_PLACE]: distancing.now,
+  };
+
   // Prep datasets for graphs
   // short label: 'Distancing Today for 2 Months', 'Wuhan Level Containment for 1 Month'
   let scenarioComparisonOverTime = duration => [
@@ -142,9 +163,13 @@ function ModelPage() {
   ];
   let scenarioComparison = scenarioComparisonOverTime(100);
 
+  const [calloutFillColor, calloutStrokeColor] = LAST_DATES_CALLOUT_COLORS[
+    intervention
+  ];
+
   return (
     <Wrapper>
-      <Header locationName={locationName} />
+      <Header locationName={locationName} intervention={intervention} />
       <Content>
         <Panel>
           <Chart
@@ -154,11 +179,14 @@ function ModelPage() {
             dateOverwhelmed={baseline.dateOverwhelmed}
           />
 
-          <Callout backgroundColor="rgba(255, 0, 0, 0.0784)" borderColor="red">
+          <Callout
+            borderColor={calloutStrokeColor}
+            backgroundColor={calloutFillColor}
+          >
             <div style={{ fontWeight: 'normal', marginBottom: '1.2rem' }}>
               Point of no-return for intervention to prevent hospital overload:
             </div>
-            <LastDatesToAct model={baseline} />
+            <LastDatesToAct model={interventionToModel[intervention]} />
           </Callout>
 
           <Callout borderColor="black">
