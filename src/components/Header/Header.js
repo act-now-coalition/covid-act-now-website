@@ -1,35 +1,83 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
+import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import Grid from '@material-ui/core/Grid';
 import Status from 'components/Status/Status';
+import { colors } from '@material-ui/core';
 
-import { Wrapper, Content, BlackBar, RedBar } from './Header.style';
+import { Wrapper, HeaderSubCopy, BlackBar, RedBar } from './Header.style';
 
+const SUBHEADING_1_COPY_PART_1 = '';
+const SUBHEADING_1_COPY_PART_2 = '';
+const SUBHEADING_2_COPY =
+  'This model is intended to help make fast decisions, not predict the future';
 const Header = ({ children, locationName, intervention }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   return (
-    <Wrapper>
-      <BlackBar>
-        <Content>
-          <Typography align="center" variant="h2" component="h2">
+    <BlackBar>
+      <Grid
+        container
+        direction="row"
+        style={{ color: colors.grey[60] }}
+        alignItems="center"
+        justify="center"
+      >
+        <Grid item sm="12" md="5" alignItems="flex-start" justify="center">
+          <Typography
+            align={isMobile ? 'center' : 'left'}
+            variant="body"
+            component="h3"
+          >
             Why you must act now{locationName ? `: ${locationName}` : ''}
           </Typography>
-          {locationName && <Status intervention={intervention} />}
-          <Typography align="center" variant="colorInherit" component="p">
-            Public leaders &amp; health officials:
-          </Typography>
-          <Typography align="center" variant="colorInherit" component="p">
-            The only thing that matters right now is the speed of your response
-          </Typography>
-        </Content>
-      </BlackBar>
-      <RedBar>
-        <Content>
-          <Typography align="center" variant="colorInherit" component="p">
-            This model is intended to help make fast decisions, not predict the
-            future
-          </Typography>
-        </Content>
-      </RedBar>
-    </Wrapper>
+        </Grid>
+        <Grid item sm="12" md="7">
+          {isMobile ? (
+            <>
+              <HeaderSubCopy
+                mt="10px"
+                align="center"
+                color="inherit"
+                component="p"
+                variant="subtitle2"
+              >
+                Public leaders &amp; health officials:
+              </HeaderSubCopy>
+              <HeaderSubCopy
+                align="center"
+                color="inherit"
+                component="p"
+                variant="subtitle2"
+              >
+                The only thing that matters right now is the speed of your
+                response.
+              </HeaderSubCopy>
+            </>
+          ) : (
+            <HeaderSubCopy
+              align={isMobile ? 'center' : 'right'}
+              color="inherit"
+              component="p"
+              variant="subtitle2"
+            >
+              Public leaders &amp; health officials: The only thing that matters
+              right now is the speed of your response.
+            </HeaderSubCopy>
+          )}
+
+          <HeaderSubCopy
+            align={isMobile ? 'center' : 'right'}
+            style={{ color: colors.grey[500] }}
+            component="p"
+            variant="subtitle2"
+          >
+            {SUBHEADING_2_COPY}
+          </HeaderSubCopy>
+        </Grid>
+      </Grid>
+    </BlackBar>
   );
 };
 
