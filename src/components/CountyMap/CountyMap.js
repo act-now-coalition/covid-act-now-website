@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import {
   ComposableMap,
   Geographies,
@@ -8,22 +9,27 @@ import {
 import { scaleQuantile } from 'd3-scale';
 import { csv } from 'd3-fetch';
 import ReactTooltip from 'react-tooltip';
-import ca from './ca.json';
+import STATE_CENTERS from '../../enums/us_state_centers';
 
-const geoUrl = 'https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json';
+// const geoUrl = 'https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json';
 // const geoUrl =
 // 'https://github.com/deldersveld/topojson/blob/master/countries/us-states/CA-06-california-counties.json';
 
 const CountyMap = () => {
   const [data, setData] = useState([]);
+  const { id: location } = useParams();
+  const state = STATE_CENTERS[location];
+  const counties = require(`./data/${location}.json`);
 
   useEffect(() => {
     // https://www.bls.gov/lau/
     const path = `./sampleData.csv`;
-    console.log(path);
     csv('/countyConfigData/sampleData.csv').then(counties => {
       setData(counties);
-      console.log(counties);
+    });
+
+    csv('/countyConfigData/sampleData.csv').then(counties => {
+      setData(counties);
     });
   }, []);
 
@@ -52,14 +58,22 @@ const CountyMap = () => {
     ]);
 
   const [content, setContent] = useState('asdf');
-  console.log(content);
-  console.log('data', data);
   return (
     <div>
       {data && (
-        <ComposableMap projection="geoAlbers">
-          <ZoomableGroup zoom={2} center={[-122, 37.7]} disablePanning={false}>
-            <Geographies geography={ca}>
+        <ComposableMap
+          projection="geoAlbers"
+          data-tip=""
+          projectionConfig={{
+            rotate: [108, 0],
+            scale: 2000,
+          }}
+        >
+          <ZoomableGroup
+            center={[state.Longitude, state.Latitude]}
+            disablePanning={false}
+          >
+            <Geographies geography={counties}>
               {({ geographies }) =>
                 geographies.map(geo => {
                   // console.log(geo);
