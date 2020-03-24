@@ -1,18 +1,21 @@
-const fs    = require('fs');
-const util  = require('util');
-const path  = require('path');
+const fs = require('fs');
+const util = require('util');
+const path = require('path');
 const sharp = require('sharp');
 
 // Resize images to constant width / height
 // removing resized images: find public/images/endorsers -regex ".*resized.*" -delete
-(async() => {
+(async () => {
   const width = 100;
   const height = 100;
-  const imageFolder = 'endorsers'
+  const imageFolder = 'endorsers';
 
   try {
     const readdirAsync = util.promisify(fs.readdir);
-    const directoryPath = path.join(__dirname, `../public/images/${imageFolder}`);
+    const directoryPath = path.join(
+      __dirname,
+      `../public/images/${imageFolder}`,
+    );
 
     const files = await readdirAsync(directoryPath);
 

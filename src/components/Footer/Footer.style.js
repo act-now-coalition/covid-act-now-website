@@ -31,7 +31,6 @@ export const StyledFooterBodyLinks = styled.div`
     margin: 0 0 1.5rem;
   }
 
-
   @media (min-width: 600px) {
     flex: 0 0 40%;
     padding: 3rem 0;
@@ -70,7 +69,7 @@ export const StyledFooterHeader = styled.div`
     height: 65px;
   }
 
-  @media(min-width: 600px) {
+  @media (min-width: 600px) {
     padding: 0 4rem;
   }
 

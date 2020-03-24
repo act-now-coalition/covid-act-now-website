@@ -24,7 +24,12 @@ const Endorsements = () => {
             must make now.
           </Typography>
         </Quote>
-        <EndorsersWrapper container alignItems={'stretch'} spacing={0} wrap={'wrap'}>
+        <EndorsersWrapper
+          container
+          alignItems={'stretch'}
+          spacing={0}
+          wrap={'wrap'}
+        >
           {ENDORSERS.map((e, index) => (
             <Grid item key={index} xs={12} sm={e.size}>
               <EndorsementCard {...e} />

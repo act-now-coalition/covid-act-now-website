@@ -9,7 +9,7 @@ const Header = ({ children, locationName }) => {
       <BlackBar>
         <Content>
           <Typography align="center" variant="h2" component="h2">
-            Why you must act now{locationName? `: ${locationName}` : ''}
+            Why you must act now{locationName ? `: ${locationName}` : ''}
           </Typography>
           <Typography align="center" variant="colorInherit" component="p">
             Public leaders &amp; health officials:
