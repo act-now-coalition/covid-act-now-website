@@ -19,30 +19,16 @@ const Contact = ({ children }) => {
         </StyledContactLink>
 
         <StyledContactLink variant="body1" component="p">
-          <strong>Public Health Departments:</strong>
-            <div>
-              <a href="publichealth@covidactnow.org">publichealth@covidactnow.org</a>
-            </div>
-        </StyledContactLink>
-
-        <StyledContactLink variant="body1" component="p">
-          <strong>Medical Device &amp; Service Organizations:</strong>
+          <strong>Medical Organizations:</strong>
             <div>
               <a href="medical@covidactnow.org">medical@covidactnow.org</a>
             </div>
         </StyledContactLink>
 
         <StyledContactLink variant="body1" component="p">
-          <strong>Other Government Agencies:</strong>
+          <strong>Government Agencies:</strong>
             <div>
               <a href="gov@covidactnow.org">gov@covidactnow.org</a>
-            </div>
-        </StyledContactLink>
-
-        <StyledContactLink variant="body1" component="p">
-          <strong>Press:</strong>
-            <div>
-              <a href="press@covidactnow.org">press@covidactnow.org</a>
             </div>
         </StyledContactLink>
 
