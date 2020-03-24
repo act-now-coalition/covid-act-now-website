@@ -5,6 +5,7 @@ const Newsletter = () => {
   return (
     <StyledNewsletter>
       <iframe
+        title="newsletter"
         class="mj-w-res-iframe"
         frameborder="0"
         scrolling="no"

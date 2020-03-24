@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import palette from 'assets/theme/palette';
-
 export const Wrapper = styled.div`
   margin: 0;
   padding: 0;
