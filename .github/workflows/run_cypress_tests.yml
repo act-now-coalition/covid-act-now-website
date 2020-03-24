@@ -7,4 +7,4 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
       - name: Cypress run
-        uses: cypress-io/github-action@v1
+        uses: cypress-io/github-action@master
