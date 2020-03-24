@@ -71,13 +71,11 @@ const CountyMap = () => {
         >
           <ZoomableGroup
             center={[state.Longitude, state.Latitude]}
-            disablePanning={false}
+            disablePanning={true}
           >
             <Geographies geography={counties}>
               {({ geographies }) =>
                 geographies.map(geo => {
-                  // console.log(geo);
-                  // const cur = data.find(s => s.id === geo.id);
                   const cur = data.find(s => s.id === geo.properties.GEOID);
                   return (
                     <Geography
@@ -86,7 +84,6 @@ const CountyMap = () => {
                       fill={cur ? colorScale(cur.unemployment_rate) : '#EEE'}
                       onMouseEnter={() => {
                         const { NAME } = geo.properties;
-                        console.log(geo);
                         setContent(`${NAME} — ${cur.unemployment_rate}`);
                       }}
                       onMouseLeave={() => {
