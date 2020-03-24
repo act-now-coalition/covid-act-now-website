@@ -8,10 +8,6 @@ import { colors } from '@material-ui/core';
 
 import { Wrapper, HeaderSubCopy, BlackBar, RedBar } from './Header.style';
 
-const SUBHEADING_1_COPY_PART_1 = '';
-const SUBHEADING_1_COPY_PART_2 = '';
-const SUBHEADING_2_COPY =
-  'This model is intended to help make fast decisions, not predict the future';
 const Header = ({ children, locationName, intervention }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -51,7 +47,8 @@ const Header = ({ children, locationName, intervention }) => {
             component="p"
             variant="subtitle2"
           >
-            {SUBHEADING_2_COPY}
+            This model is intended to help make fast decisions, not predict the
+            future
           </HeaderSubCopy>
         </Grid>
       </Grid>
