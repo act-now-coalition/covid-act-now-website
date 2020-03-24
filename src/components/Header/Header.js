@@ -34,38 +34,16 @@ const Header = ({ children, locationName, intervention }) => {
           </Typography>
         </Grid>
         <Grid item sm="12" md="7">
-          {isMobile ? (
-            <>
-              <HeaderSubCopy
-                mt="10px"
-                align="center"
-                color="inherit"
-                component="p"
-                variant="subtitle2"
-              >
-                Public leaders &amp; health officials:
-              </HeaderSubCopy>
-              <HeaderSubCopy
-                align="center"
-                color="inherit"
-                component="p"
-                variant="subtitle2"
-              >
-                The only thing that matters right now is the speed of your
-                response.
-              </HeaderSubCopy>
-            </>
-          ) : (
-            <HeaderSubCopy
-              align={isMobile ? 'center' : 'right'}
-              color="inherit"
-              component="p"
-              variant="subtitle2"
-            >
-              Public leaders &amp; health officials: The only thing that matters
-              right now is the speed of your response.
-            </HeaderSubCopy>
-          )}
+          <HeaderSubCopy
+            mt="10px"
+            align={isMobile ? 'center' : 'right'}
+            color="inherit"
+            component="p"
+            variant="subtitle2"
+          >
+            {isMobile ? 'Officials' : 'Public leaders & health officials'}: The
+            only thing that matters right now is the speed of your response.
+          </HeaderSubCopy>
 
           <HeaderSubCopy
             align={isMobile ? 'center' : 'right'}
