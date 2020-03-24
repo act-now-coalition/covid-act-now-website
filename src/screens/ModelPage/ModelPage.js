@@ -30,7 +30,9 @@ const LAST_DATES_CALLOUT_COLORS = {
   [INTERVENTIONS.SHELTER_IN_PLACE]: ['rgba(0, 255, 0, 0.0784)', 'green'],
 };
 
-const LastDatesToAct = ({ model }) => {
+const ONE_HUNDRED_DAYS = 8.64e9;
+
+const LastDatesToAct = ({ model, outOfBoundsDate }) => {
   function formatDate(date) {
     const month = new Intl.DateTimeFormat('en', { month: 'short' }).format(
       date,
@@ -38,6 +40,12 @@ const LastDatesToAct = ({ model }) => {
     const day = new Intl.DateTimeFormat('en', { day: 'numeric' }).format(date);
     return `${month} ${day}`;
   }
+
+  if (
+    !model.dateOverwhelmed ||
+    model.dateOverwhelmed - new Date() > ONE_HUNDRED_DAYS
+  )
+    return <b>Outside time bound</b>;
 
   const days = 1000 * 60 * 60 * 24;
   let earlyDate = new Date(model.dateOverwhelmed.getTime() - 14 * days);
@@ -134,6 +142,12 @@ function ModelPage() {
       }),*/
   };
 
+  const interventionToModel = {
+    [INTERVENTIONS.NO_ACTION]: baseline,
+    [INTERVENTIONS.SOCIAL_DISTANCING]: distancingPoorEnforcement.now,
+    [INTERVENTIONS.SHELTER_IN_PLACE]: distancing.now,
+  };
+
   // Prep datasets for graphs
   // short label: 'Distancing Today for 2 Months', 'Wuhan Level Containment for 1 Month'
   let scenarioComparisonOverTime = duration => [
@@ -172,7 +186,7 @@ function ModelPage() {
             <div style={{ fontWeight: 'normal', marginBottom: '1.2rem' }}>
               Point of no-return for intervention to prevent hospital overload:
             </div>
-            <LastDatesToAct model={baseline} />
+            <LastDatesToAct model={interventionToModel[intervention]} />
           </Callout>
 
           <Callout borderColor="black">
