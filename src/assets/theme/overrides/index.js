@@ -9,5 +9,5 @@ export default {
   MuiIconButton,
   MuiPaper,
   MuiTableCell,
-  MuiTableHead
+  MuiTableHead,
 };
