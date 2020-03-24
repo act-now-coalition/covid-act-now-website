@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
-`;
+export const Wrapper = styled.div``;
 
 export const Content = styled.div`
   text-align: center;
@@ -14,12 +13,12 @@ export const Content = styled.div`
 `;
 
 export const ShareSpacer = styled.div`
-	padding-right: 32px;
+  padding-right: 32px;
 `;
 
 export const ShareContainer = styled.div`
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 `;

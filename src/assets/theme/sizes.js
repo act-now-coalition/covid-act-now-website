@@ -3,5 +3,5 @@ export const materialSMBreakpoint = '600px';
 
 export default {
   mobileBreakpoint,
-  materialSMBreakpoint
+  materialSMBreakpoint,
 };

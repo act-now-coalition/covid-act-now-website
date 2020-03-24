@@ -53,5 +53,4 @@ export const Quote = styled.div`
   }
 `;
 
-export const EndorsersWrapper = styled(Grid)`
-`;
+export const EndorsersWrapper = styled(Grid)``;
