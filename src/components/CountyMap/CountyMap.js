@@ -58,7 +58,7 @@ const CountyMap = () => {
     <div>
       {data && (
         <ComposableMap projection="geoAlbers">
-          <ZoomableGroup center={[-2, -1]}>
+          <ZoomableGroup zoom={2} center={[-122, 37.7]} disablePanning={false}>
             <Geographies geography={ca}>
               {({ geographies }) =>
                 geographies.map(geo => {
@@ -71,9 +71,9 @@ const CountyMap = () => {
                       geography={geo}
                       fill={cur ? colorScale(cur.unemployment_rate) : '#EEE'}
                       onMouseEnter={() => {
-                        const { name } = geo.properties;
+                        const { NAME } = geo.properties;
                         console.log(geo);
-                        setContent(`${name} — ${cur.unemployment_rate}`);
+                        setContent(`${NAME} — ${cur.unemployment_rate}`);
                       }}
                       onMouseLeave={() => {
                         setContent('');
