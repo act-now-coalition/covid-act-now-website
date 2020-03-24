@@ -34,9 +34,6 @@
     "prettier": "prettier --check '**/*.{css,scss,js}' || printf '\\n\\e[31mRun prettier-fix to fix\\e[0m\\n\\n'",
     "prettier-fix": "prettier --write '**/*.{css,scss,js}'"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
