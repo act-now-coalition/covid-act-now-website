@@ -119,30 +119,54 @@ function ModelPage() {
   }
 
   // Initialize models
-  let baseline = new Model(modelDatas.baseline, {
+  let baseline = new Model(modelDatas[0], {
     intervention: 'No Action',
     r0: 2.4,
   });
   let distancing = {
-    now: new Model(modelDatas.strictDistancingNow, {
+    now: new Model(modelDatas[1], {
       intervention: 'Shelter-in-place',
       durationDays: 90,
       r0: 1.2,
     }),
+    /*twoWeek: new Model( modelDatas[2], {
+        intervention: 'Social Distancing, Strict Enforcement',
+        durationDays: 60,
+        r0: 1.2,
+        delayDays: 14
+      }),
+    fourWeek: new Model( modelDatas[3], {
+        intervention: 'Social Distancing, Strict Enforcement',
+        durationDays: 60,
+        r0: 1.2,
+        delayDays: 7
+      }),*/
   };
   let distancingPoorEnforcement = {
-    now: new Model(modelDatas.weakDistancingNow, {
+    now: new Model(modelDatas[7], {
       intervention: 'Social distancing',
       durationDays: 90,
       r0: 1.7,
     }),
   };
   let contain = {
-    now: new Model(modelDatas.containNow, {
+    now: new Model(modelDatas[2], {
       intervention: 'Wuhan-style Lockdown',
       durationDays: 90,
       r0: 0.3,
     }),
+    /*oneWeek: new Model( modelDatas[5], {
+        intervention: 'Wuhan Level Containment',
+        durationDays: 30,
+        r0: 0.4,
+        delayDays: 7
+      }),
+    twoWeek: new Model( modelDatas[6], {
+        intervention: 'Wuhan Level Containment',
+        durationDays: 30,
+        r0: 0.4,
+        delayDays: 7
+      }),*/
   };
 
   const interventionToModel = {
