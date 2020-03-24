@@ -11,18 +11,45 @@ export const Wrapper = styled.div`
   color: ${colors.grey[50]};
 `;
 
-export const HeaderSubCopy = styled(Typography)`
-  font-size: 0.75em;
+export const HeaderTitle = styled(Typography)`
+  color: white;
+  font-size: 2em;
   font-weight: 700;
-  line-height: 1.5em;
-  margin-top: ${props => props.mt};
+  line-height: 2rem;
+`;
+
+export const HeaderRule = styled(Typography)`
+  width: 100px;
+  height: 1px;
+  background: #FFFFFF;
+  opacity: 0.4;
+  margin: 2.25rem 0 2rem;
+`;
+
+export const HeaderSubCopy = styled(Typography)`
+  font-size: 1rem;
+  font-weight: 600;
+
+  @media(min-width: 1280px) {
+    text-align: right;
+    font-size: 1rem;
+  }
 `;
 
 export const BlackBar = styled(Box)`
-  background-color: ${colors.grey[900]};
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.7);
   color: ${colors.grey[50]};
-  padding: 1rem 1rem;
+  padding: 2rem 1rem;
   margin: 0;
+
+  @media(min-width: 1280px) {
+    align-items: center;
+    padding: 1.5rem 1rem;
+    flex-direction: row;
+  }
 `;
 
 export const RedBar = styled.div`

@@ -3,7 +3,9 @@ import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
-export const LegendContainer = styled(Grid)``;
+export const LegendContainer = styled(Grid)`
+  padding: 1rem;
+`;
 
 export const LegendItemHeader = styled(Box)`
   width: 100%;
