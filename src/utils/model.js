@@ -14,17 +14,30 @@ async function fetchAll(urls) {
   }
 }
 
+export const ModelIds = {
+  baseline: 0,
+  strictDistancingNow: 1,
+  weakDistancingNow: 7,
+  containNow: 2,
+};
+
 export function useModelDatas(location) {
   const [modelDatas, setModelDatas] = useState(null);
-
   useEffect(() => {
     async function fetchData() {
-      let urls = Array.from(
-        { length: 8 },
-        (x, i) => `/data/${location}.${i}.json`,
-      );
+      let urls = [
+        ModelIds.baseline,
+        ModelIds.strictDistancingNow,
+        ModelIds.weakDistancingNow,
+        ModelIds.containNow,
+      ].map(i => `/data/${location}.${i}.json`);
       let loadedModelDatas = await fetchAll(urls);
-      setModelDatas(loadedModelDatas);
+      setModelDatas({
+        baseline: loadedModelDatas[0],
+        strictDistancingNow: loadedModelDatas[1],
+        weakDistancingNow: loadedModelDatas[2],
+        containNow: loadedModelDatas[3],
+      });
     }
     fetchData();
   }, [location]);
@@ -49,7 +62,13 @@ export class Model {
     this.durationDays = parameters.durationDays || null /* permanent */;
     this.delayDays = parameters.delayDays || 0;
 
-    let _parseInt = number => parseInt(number.replace(/,/g, '') || 0);
+    let _parseInt = number => {
+      // remove , in strings
+      if (typeof number == 'string') {
+        number = number.replace(/,/g, '');
+      }
+      return number ? parseInt(number) : 0;
+    };
 
     this.dates = data.map(row => new Date(row[COLUMNS.date]));
     this.dayZero = this.dates[0];

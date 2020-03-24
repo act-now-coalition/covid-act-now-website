@@ -54,7 +54,7 @@ const Chart = ({ state, subtitle, data, dateOverwhelmed }) => {
       },
     },
     tooltip: {
-      formatter: function() {
+      formatter: function () {
         const date = moment(this.x).format('MMMM D');
         const beds = this.y.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         if (this.series.userOptions.type === 'line') {
@@ -68,7 +68,7 @@ const Chart = ({ state, subtitle, data, dateOverwhelmed }) => {
       step: 7,
       labels: {
         rotation: -45,
-        formatter: function() {
+        formatter: function () {
           return dateFormat('%b %e', this.value);
         },
       },

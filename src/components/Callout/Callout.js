@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  StyledCallout,
-} from './Callout.style';
+import { StyledCallout } from './Callout.style';
 
 const Callout = ({
   children,
@@ -9,13 +7,15 @@ const Callout = ({
   borderColor = '#e3e3e3',
 }) => {
   return (
-    <StyledCallout style={{
-      backgroundColor: backgroundColor,
-      borderColor: borderColor
-    }}>
+    <StyledCallout
+      style={{
+        backgroundColor: backgroundColor,
+        borderColor: borderColor,
+      }}
+    >
       {children}
     </StyledCallout>
-  )
-}
+  );
+};
 
 export default Callout;
