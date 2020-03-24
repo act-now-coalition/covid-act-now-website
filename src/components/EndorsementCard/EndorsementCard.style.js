@@ -31,8 +31,7 @@ export const Credential = styled(Typography)`
   font-size: 0.9rem;
 `;
 
-export const Left = styled.div`
-`;
+export const Left = styled.div``;
 
 export const Quote = styled.div`
   background-color: white;
@@ -43,7 +42,7 @@ export const Quote = styled.div`
   padding: 24px;
 
   p {
-    font-size: 13px
+    font-size: 13px;
   }
 
   @media (min-width: 600px) {

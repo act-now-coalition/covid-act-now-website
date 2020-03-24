@@ -1,6 +1,6 @@
 const fs = require('fs');
 const readline = require('readline');
-const { google } = require("googleapis");
+const { google } = require('googleapis');
 
 let MODELS = [
   'MAIN MODEL - Current Trends',
@@ -39,9 +39,12 @@ fs.readFile('credentials.json', (err, content) => {
  * @param {function} callback The callback to call with the authorized client.
  */
 function authorize(credentials, callback) {
-  const {client_secret, client_id, redirect_uris} = credentials.installed;
+  const { client_secret, client_id, redirect_uris } = credentials.installed;
   const oAuth2Client = new google.auth.OAuth2(
-      client_id, client_secret, redirect_uris[0]);
+    client_id,
+    client_secret,
+    redirect_uris[0],
+  );
 
   // Check if we have previously stored a token.
   fs.readFile(TOKEN_PATH, (err, token) => {
@@ -67,13 +70,17 @@ function getNewToken(oAuth2Client, callback) {
     input: process.stdin,
     output: process.stdout,
   });
-  rl.question('Enter the code from that page here: ', (code) => {
+  rl.question('Enter the code from that page here: ', code => {
     rl.close();
     oAuth2Client.getToken(code, (err, token) => {
-      if (err) return console.error('Error while trying to retrieve access token', err);
+      if (err)
+        return console.error(
+          'Error while trying to retrieve access token',
+          err,
+        );
       oAuth2Client.setCredentials(token);
       // Store the token to disk for later program executions
-      fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
+      fs.writeFile(TOKEN_PATH, JSON.stringify(token), err => {
         if (err) return console.error(err);
         console.log('Token stored to', TOKEN_PATH);
       });
@@ -89,18 +96,22 @@ function getNewToken(oAuth2Client, callback) {
  */
 
 function downloadModel(auth, location, model) {
-  const sheets = google.sheets({version: 'v4', auth});
+  const sheets = google.sheets({ version: 'v4', auth });
   sheets.spreadsheets.values.get(
     {
-      spreadsheetId: "1YEj4Vr6lG1jQ1R3LG6frijJYNynKcgTjzo2n0FsBwZA",
-      range: `${MODELS[model]}!C19:U92`
+      spreadsheetId: '1YEj4Vr6lG1jQ1R3LG6frijJYNynKcgTjzo2n0FsBwZA',
+      range: `${MODELS[model]}!C19:U92`,
     },
     (err, res) => {
-      if (err) return console.log("The API returned an error: " + err);
+      if (err) return console.log('The API returned an error: ' + err);
       const rows = res.data.values;
-      fs.writeFile(`public/data/${location}.${model}.json`, JSON.stringify(rows), err => {
-        if (err) return console.error(err);
-      });
-    }
+      fs.writeFile(
+        `public/data/${location}.${model}.json`,
+        JSON.stringify(rows),
+        err => {
+          if (err) return console.error(err);
+        },
+      );
+    },
   );
 }

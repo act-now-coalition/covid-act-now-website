@@ -12,7 +12,10 @@ const FAQ = ({ children }) => {
         </Typography>
 
         <Typography variant="body1" component="p">
-          The model is public, and <a href="https://bit.ly/391uB80">can be viewed here</a>. Reference materials, including assumptions, logic, and definitions <a href="https://bit.ly/394SJ9I">are available here</a>.
+          The model is public, and{' '}
+          <a href="https://bit.ly/391uB80">can be viewed here</a>. Reference
+          materials, including assumptions, logic, and definitions{' '}
+          <a href="https://bit.ly/394SJ9I">are available here</a>.
         </Typography>
         <Typography variant="h5" component="h5">
           What are the current limitations of the model?

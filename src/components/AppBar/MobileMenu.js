@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  StyledMenu,
-} from './AppBar.style';
+import { StyledMenu } from './AppBar.style';
 
 const MobileMenu = ({ open, goTo }) => {
   return (
@@ -22,7 +20,7 @@ const MobileMenu = ({ open, goTo }) => {
         Contact
       </a>
     </StyledMenu>
-  )
-}
+  );
+};
 
 export default MobileMenu;

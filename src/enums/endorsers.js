@@ -11,12 +11,12 @@ export default [
   },
   {
     size: 4,
-    name: 'Valerie Nurr\'araaluk Davidson',
+    name: "Valerie Nurr'araaluk Davidson",
     avatarUrl: '/images/endorsers/Valerie-Davidson-A__resized-100-100.jpg',
     profileUrl: 'https://en.wikipedia.org/wiki/Valerie_Davidson',
     credentials: [
       'Former Commissioner of the Alaska Department of Health and Social Services',
-      'Founder\'s Council member, United States of Care',
+      "Founder's Council member, United States of Care",
     ],
   },
   {
@@ -39,16 +39,14 @@ export default [
       'Professor of Health Services, Policy and Practice, Brown University',
     ],
     quote:
-    'This model offers a great tool for state policy staff who\'s job it is to advise the Governor and the Director of Health regarding what kinds of policies should be instituted to encourage social distancing to minimize contagion with corona virus. Staff need to be prepared to defend with comparative data their recommendations regarding whether to close schools, close bars, restrict gatherings to a select number or encourage non-essential workers to telecommute. This web site offers state specific estimates that  demonstrate the impact of such policies on the curve of infections, hospitalizations and deaths in a very sophisticated manner.',
+      "This model offers a great tool for state policy staff who's job it is to advise the Governor and the Director of Health regarding what kinds of policies should be instituted to encourage social distancing to minimize contagion with corona virus. Staff need to be prepared to defend with comparative data their recommendations regarding whether to close schools, close bars, restrict gatherings to a select number or encourage non-essential workers to telecommute. This web site offers state specific estimates that  demonstrate the impact of such policies on the curve of infections, hospitalizations and deaths in a very sophisticated manner.",
   },
   {
     size: 4,
     name: 'Ben Goldman-Israelow, MD, PhD',
     avatarUrl: '/images/endorsers/ben_goldman_israelow__resized-100-100.jpeg',
     profileUrl: 'https://medicine.yale.edu/profile/benjamin_goldman-israelow/',
-    credentials: [
-      'Infectious Disease Fellow, Yale School of Medicine',
-    ],
+    credentials: ['Infectious Disease Fellow, Yale School of Medicine'],
   },
   {
     size: 4,

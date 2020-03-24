@@ -1,11 +1,7 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 
-import { 
-  Wrapper,
-  Content,
-  StyledContactLink,
-} from './Contact.style';
+import { Wrapper, Content, StyledContactLink } from './Contact.style';
 
 const Contact = ({ children }) => {
   return (
@@ -20,16 +16,16 @@ const Contact = ({ children }) => {
 
         <StyledContactLink variant="body1" component="p">
           <strong>Medical Organizations:</strong>
-            <div>
-              <a href="mailto:medical@covidactnow.org">medical@covidactnow.org</a>
-            </div>
+          <div>
+            <a href="mailto:medical@covidactnow.org">medical@covidactnow.org</a>
+          </div>
         </StyledContactLink>
 
         <StyledContactLink variant="body1" component="p">
           <strong>Government Agencies:</strong>
-            <div>
-              <a href="mailto:gov@covidactnow.org">gov@covidactnow.org</a>
-            </div>
+          <div>
+            <a href="mailto:gov@covidactnow.org">gov@covidactnow.org</a>
+          </div>
         </StyledContactLink>
 
         <StyledContactLink variant="body1" component="p">
@@ -38,7 +34,10 @@ const Contact = ({ children }) => {
             <a href="mailto:press@covidactnow.org">press@covidactnow.org</a>
           </div>
           <div>
-            Our presskit is available <a href="https://docs.google.com/document/d/1kdzXjVXsfVZN2Ltt66yy2TTlZMPKO96ixSMDCGksdf0/edit">here</a>
+            Our presskit is available{' '}
+            <a href="https://docs.google.com/document/d/1kdzXjVXsfVZN2Ltt66yy2TTlZMPKO96ixSMDCGksdf0/edit">
+              here
+            </a>
           </div>
         </StyledContactLink>
 
