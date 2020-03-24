@@ -1,10 +1,10 @@
-import React, { useState }                          from 'react';
+import React, { useState } from 'react';
 import { useHistory, useLocation, matchPath, Link } from 'react-router-dom';
-import { ArrowBack }                                from '@material-ui/icons';
-import Typography                                   from '@material-ui/core/Typography';
-import Logo                                         from 'assets/images/logo';
-import MobileMenu                                   from './MobileMenu';
-import Burger                                       from './Burger';
+import { ArrowBack } from '@material-ui/icons';
+import Typography from '@material-ui/core/Typography';
+import Logo from 'assets/images/logo';
+import MobileMenu from './MobileMenu';
+import Burger from './Burger';
 import {
   Wrapper,
   Left,
@@ -51,7 +51,7 @@ const _AppBar = () => {
     window.scrollTo(0, 0);
   };
 
-  const shareURL = `https://covidactnow.org${match ? match.url : '' }`;
+  const shareURL = `https://covidactnow.org${match ? match.url : ''}`;
   const hashtag = 'COVIDActNow';
   const stateShareTitle = `This is the point of no return for intervention to prevent ${locationName}'s hospital system from being overloaded by Coronavirus: `;
   const defaultShareTitle =
