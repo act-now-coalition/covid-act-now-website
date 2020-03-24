@@ -46,7 +46,7 @@ const LastDatesToAct = ({ model, outOfBoundsDate }) => {
     !model.dateOverwhelmed ||
     model.dateOverwhelmed - new Date() > ONE_HUNDRED_DAYS
   )
-    return <b>Outside time bound</b>;
+    return <b>Greater than 3 months</b>;
 
   let earlyDate = new Date(model.dateOverwhelmed.getTime() - 14 * DAYS);
   let lateDate = new Date(model.dateOverwhelmed.getTime() - 9 * DAYS);
