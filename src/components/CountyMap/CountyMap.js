@@ -65,8 +65,8 @@ const CountyMap = () => {
           projection="geoAlbers"
           data-tip=""
           projectionConfig={{
-            rotate: [108, 0],
-            scale: 2000,
+            rotate: state.rotate ? state.rotate : null,
+            scale: state.scale ? state.scale : 2000,
           }}
         >
           <ZoomableGroup

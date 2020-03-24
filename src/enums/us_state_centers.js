@@ -10,6 +10,8 @@ export default {
     StateCode: 'AK',
     Latitude: 61.3707,
     Longitude: -152.4044,
+    rotate: [150, -10],
+    scale: 1500,
   },
   AZ: {
     'Province/State': 'Arizona',
@@ -76,6 +78,7 @@ export default {
     StateCode: 'HI',
     Latitude: 21.0943,
     Longitude: -157.4983,
+    rotate: [150, 0],
   },
   ID: {
     'Province/State': 'Idaho',
