@@ -30,7 +30,8 @@ const LAST_DATES_CALLOUT_COLORS = {
   [INTERVENTIONS.SHELTER_IN_PLACE]: ['rgba(0, 255, 0, 0.0784)', 'green'],
 };
 
-const ONE_HUNDRED_DAYS = 8.64e9;
+const DAYS = 1000 * 60 * 60 * 24;
+const ONE_HUNDRED_DAYS = 100 * DAYS;
 
 const LastDatesToAct = ({ model, outOfBoundsDate }) => {
   function formatDate(date) {
@@ -47,9 +48,8 @@ const LastDatesToAct = ({ model, outOfBoundsDate }) => {
   )
     return <b>Outside time bound</b>;
 
-  const days = 1000 * 60 * 60 * 24;
-  let earlyDate = new Date(model.dateOverwhelmed.getTime() - 14 * days);
-  let lateDate = new Date(model.dateOverwhelmed.getTime() - 9 * days);
+  let earlyDate = new Date(model.dateOverwhelmed.getTime() - 14 * DAYS);
+  let lateDate = new Date(model.dateOverwhelmed.getTime() - 9 * DAYS);
 
   return (
     <b>
