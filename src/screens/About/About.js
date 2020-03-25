@@ -168,7 +168,7 @@ const About = ({ children }) => {
         </Typography>
         <Typography variant="body1" component="p">
           <a
-            href="mailto:jonathan@covidactnow.org"
+            href="mailto:info@covidactnow.org"
             target="_blank"
             rel="noopener noreferrer"
           >
