@@ -43,7 +43,7 @@ const Header = ({ children, locationName, intervention }) => {
 
           <HeaderSubCopy
             align={isMobile ? 'center' : 'right'}
-            style={{ color: colors.grey[500] }}
+            style={{ color: colors.grey[60] }}
             component="p"
             variant="subtitle2"
           >
