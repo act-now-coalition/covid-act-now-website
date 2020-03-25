@@ -43,12 +43,12 @@ const Header = ({ children, locationName, intervention }) => {
 
           <HeaderSubCopy
             align={isMobile ? 'center' : 'right'}
-            style={{ color: colors.grey[60] }}
+            color="inherit"
             component="p"
             variant="subtitle2"
           >
             This model is intended to help make fast decisions, not predict the
-            future
+            future.
           </HeaderSubCopy>
         </Grid>
       </Grid>
