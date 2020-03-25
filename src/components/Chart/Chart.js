@@ -118,7 +118,7 @@ const Chart = ({ state, subtitle, data, dateOverwhelmed }) => {
   return (
     <Wrapper>
       <HighchartsReact highcharts={Highcharts} options={options} />
-      <span>Last Updated: March 19th</span>
+      <span>Last Updated: March 23rd</span>
     </Wrapper>
   );
 };
