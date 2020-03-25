@@ -33,7 +33,7 @@ const LAST_DATES_CALLOUT_COLORS = {
 const DAYS = 1000 * 60 * 60 * 24;
 const ONE_HUNDRED_DAYS = 100 * DAYS;
 
-const LastDatesToAct = ({ model, outOfBoundsDate }) => {
+const CallToAction = ({ model, intervention }) => {
   function formatDate(date) {
     const month = new Intl.DateTimeFormat('en', { month: 'short' }).format(
       date,
@@ -42,19 +42,46 @@ const LastDatesToAct = ({ model, outOfBoundsDate }) => {
     return `${month} ${day}`;
   }
 
+  function suggestedIntervention() {
+    switch (intervention) {
+      case INTERVENTIONS.NO_ACTION:
+        return INTERVENTIONS.SHELTER_IN_PLACE;
+      case INTERVENTIONS.SOCIAL_DISTANCING:
+        return INTERVENTIONS.SHELTER_IN_PLACE;
+      default:
+        return 'stricter intervention';
+    }
+  }
+
+  let actionText, actionDateRange;
   if (
     !model.dateOverwhelmed ||
     model.dateOverwhelmed - new Date() > ONE_HUNDRED_DAYS
-  )
-    return <b>Greater than 3 months</b>;
+  ) {
+    actionText = `${intervention} projected to successfully delay hospital overload by greater than 3 months.`;
+  } else {
+    actionText = `To prevent hospital overload, ${suggestedIntervention()} must be implemented by:`;
+    const earlyDate = new Date(model.dateOverwhelmed.getTime() - 14 * DAYS);
+    const lateDate = new Date(model.dateOverwhelmed.getTime() - 9 * DAYS);
+    actionDateRange = (
+      <div style={{ fontWeight: 'bold', marginTop: '1.2rem' }}>
+        {formatDate(earlyDate)} to {formatDate(lateDate)}
+      </div>
+    );
+  }
 
-  let earlyDate = new Date(model.dateOverwhelmed.getTime() - 14 * DAYS);
-  let lateDate = new Date(model.dateOverwhelmed.getTime() - 9 * DAYS);
+  const [calloutFillColor, calloutStrokeColor] = LAST_DATES_CALLOUT_COLORS[
+    intervention
+  ];
 
   return (
-    <b>
-      {formatDate(earlyDate)} to {formatDate(lateDate)}
-    </b>
+    <Callout
+      borderColor={calloutStrokeColor}
+      backgroundColor={calloutFillColor}
+    >
+      <div style={{ fontWeight: 'normal' }}>{actionText}</div>
+      {actionDateRange}
+    </Callout>
   );
 };
 
@@ -92,54 +119,30 @@ function ModelPage() {
   }
 
   // Initialize models
-  let baseline = new Model(modelDatas[0], {
+  let baseline = new Model(modelDatas.baseline, {
     intervention: 'No Action',
     r0: 2.4,
   });
   let distancing = {
-    now: new Model(modelDatas[1], {
+    now: new Model(modelDatas.strictDistancingNow, {
       intervention: 'Shelter-in-place',
       durationDays: 90,
       r0: 1.2,
     }),
-    /*twoWeek: new Model( modelDatas[2], {
-        intervention: 'Social Distancing, Strict Enforcement',
-        durationDays: 60,
-        r0: 1.2,
-        delayDays: 14
-      }),
-    fourWeek: new Model( modelDatas[3], {
-        intervention: 'Social Distancing, Strict Enforcement',
-        durationDays: 60,
-        r0: 1.2,
-        delayDays: 7
-      }),*/
   };
   let distancingPoorEnforcement = {
-    now: new Model(modelDatas[7], {
+    now: new Model(modelDatas.weakDistancingNow, {
       intervention: 'Social distancing',
       durationDays: 90,
       r0: 1.7,
     }),
   };
   let contain = {
-    now: new Model(modelDatas[2], {
+    now: new Model(modelDatas.containNow, {
       intervention: 'Wuhan-style Lockdown',
       durationDays: 90,
       r0: 0.3,
     }),
-    /*oneWeek: new Model( modelDatas[5], {
-        intervention: 'Wuhan Level Containment',
-        durationDays: 30,
-        r0: 0.4,
-        delayDays: 7
-      }),
-    twoWeek: new Model( modelDatas[6], {
-        intervention: 'Wuhan Level Containment',
-        durationDays: 30,
-        r0: 0.4,
-        delayDays: 7
-      }),*/
   };
 
   const interventionToModel = {
@@ -163,10 +166,6 @@ function ModelPage() {
   ];
   let scenarioComparison = scenarioComparisonOverTime(100);
 
-  const [calloutFillColor, calloutStrokeColor] = LAST_DATES_CALLOUT_COLORS[
-    intervention
-  ];
-
   return (
     <Wrapper>
       <Header locationName={locationName} intervention={intervention} />
@@ -179,15 +178,10 @@ function ModelPage() {
             dateOverwhelmed={baseline.dateOverwhelmed}
           />
 
-          <Callout
-            borderColor={calloutStrokeColor}
-            backgroundColor={calloutFillColor}
-          >
-            <div style={{ fontWeight: 'normal', marginBottom: '1.2rem' }}>
-              Point of no-return for intervention to prevent hospital overload:
-            </div>
-            <LastDatesToAct model={interventionToModel[intervention]} />
-          </Callout>
+          <CallToAction
+            model={interventionToModel[intervention]}
+            intervention={intervention}
+          />
 
           <Callout borderColor="black">
             <ShareContainer>
