@@ -12,7 +12,7 @@ export default function HomePage() {
   return (
     <>
       <Header />
-      <main style={{ textAlign: 'center', paddingTop: 20, paddingBottom: 50 }}>
+      <main style={{ textAlign: 'center', paddingBottom: 50 }}>
         <div className="App" style={{ maxWidth: 900, margin: 'auto' }}>
           <Map />
           <div

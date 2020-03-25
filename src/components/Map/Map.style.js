@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
-export const CallToAction = styled.div`
-  display: none;
-
+export const LocatingText = styled.div`
   @keyframes opacityPulse {
     0% {
       opacity: 1;
@@ -15,20 +13,28 @@ export const CallToAction = styled.div`
     }
   }
 
-  div.pulse {
-    animation: opacityPulse 1.5s linear;
-    animation-iteration-count: infinite;
-  }
+  animation: opacityPulse 1.5s linear;
+  animation-iteration-count: infinite;
+`;
+
+export const MapInstruction = styled.div`
+  padding: 1rem 0.5rem;
 
   @media (max-width: 600px) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    transition: all 0.2s;
+    display: none;
+  }
+`;
 
-    div {
-      padding-right: 4px;
+export const MapInstructionMobile = styled.div`
+  display: none;
+  padding: 1rem 0.5rem;
+
+  @media (max-width: 600px) {
+    display: block;
+
+    span.stateLink {
+      color: blue;
+      cursor: pointer;
     }
   }
 `;

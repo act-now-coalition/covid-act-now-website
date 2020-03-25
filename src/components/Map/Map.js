@@ -3,7 +3,6 @@ import '../../App.css'; /* optional for styling like the :hover pseudo-class */
 import USAMap from 'react-usa-map';
 import { Redirect } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
-import { LocationOn } from '@material-ui/icons';
 import {
   STATES,
   STATE_TO_INTERVENTION,
@@ -12,7 +11,11 @@ import {
   INTERVENTION_EFFICACY_ORDER_ASC,
 } from 'enums';
 import { Legend, LegendItem } from './Legend';
-import { CallToAction } from './Map.style';
+import {
+  LocatingText,
+  MapInstruction,
+  MapInstructionMobile,
+} from './Map.style';
 
 const ROULETTE_LOADING_INTERVAL = 200;
 
@@ -149,16 +152,32 @@ function Map() {
     });
   }
 
+  function mobileMapInstruction() {
+    const tapInstruction = `${
+      seeMyStateButtonHidden ? 'Tap' : ' or tap'
+    } the map to see projections`;
+    return [
+      !seeMyStateButtonHidden && (
+        <span className="stateLink" onClick={seeMyStateButtonHandler}>
+          See your state
+        </span>
+      ),
+      <span> {tapInstruction} </span>,
+    ];
+  }
+
   return (
     <div className="Map">
-      {!seeMyStateButtonHidden && (
-        <CallToAction disabled={isLocating} onClick={seeMyStateButtonHandler}>
-          <div className={isLocating ? 'pulse' : ''}>
-            {isLocating ? 'Locating...' : 'see my state'}
-          </div>
-          {!isLocating && <LocationOn fontSize="inherit" />}
-        </CallToAction>
-      )}
+      <MapInstruction>
+        Click the map to see projections for your state
+      </MapInstruction>
+      <MapInstructionMobile>
+        {isLocating ? (
+          <LocatingText>Locating...</LocatingText>
+        ) : (
+          mobileMapInstruction()
+        )}
+      </MapInstructionMobile>
       <Grid container spacing={2}>
         <Grid item xs="12" md="8">
           <USAMap width="100%" height="auto" customize={statesCustomConfig} />
