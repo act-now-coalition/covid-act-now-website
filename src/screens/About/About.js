@@ -159,11 +159,23 @@ const About = ({ children }) => {
               </Link>
             </li>
             <li>Communications Leaders</li>
-              <ul>  
-                 <li><a href="https://docs.google.com/document/d/17wx0L0cuV5mJHmyx7Lw6RHg5XGxBALzY671AWAysyXo/edit?ts=5e7a3d2f">Marketing Lead</a></li>
-                 <li><a href="https://docs.google.com/document/d/1MfGXLoqNuLcmnQiqBeNWNjLL-QWBHrDebCpOgkx6soI/edit?ts=5e7926dd">PR Lead</a></li>
-                 <li><a href="https://docs.google.com/document/d/1SHSx8C8j11UNpxyLVYGgnv106ho2cHg41f5AStgVPkU/edit?ts=5e792bd0">Community Manager / Social Media Lead</a></li>
-              </ul>
+            <ul>
+              <li>
+                <a href="https://docs.google.com/document/d/17wx0L0cuV5mJHmyx7Lw6RHg5XGxBALzY671AWAysyXo/edit?ts=5e7a3d2f">
+                  Marketing Lead
+                </a>
+              </li>
+              <li>
+                <a href="https://docs.google.com/document/d/1MfGXLoqNuLcmnQiqBeNWNjLL-QWBHrDebCpOgkx6soI/edit?ts=5e7926dd">
+                  PR Lead
+                </a>
+              </li>
+              <li>
+                <a href="https://docs.google.com/document/d/1SHSx8C8j11UNpxyLVYGgnv106ho2cHg41f5AStgVPkU/edit?ts=5e792bd0">
+                  Community Manager / Social Media Lead
+                </a>
+              </li>
+            </ul>
           </ul>
         </Typography>
         <Typography variant="body1" component="p">

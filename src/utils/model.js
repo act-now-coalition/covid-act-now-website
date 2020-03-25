@@ -62,13 +62,13 @@ export class Model {
     this.durationDays = parameters.durationDays || null /* permanent */;
     this.delayDays = parameters.delayDays || 0;
 
-    let _parseInt = (number) => {
+    let _parseInt = number => {
       // remove , in strings
-      if (typeof(number) == 'string') {
-        number = number.replace(/,/g, '')
+      if (typeof number == 'string') {
+        number = number.replace(/,/g, '');
       }
       return number ? parseInt(number) : 0;
-    }
+    };
 
     this.dates = data.map(row => new Date(row[COLUMNS.date]));
     this.dayZero = this.dates[0];
