@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 async function fetchAll(urls) {
   try {
     var data = await Promise.all(
-      urls.map(url => fetch(url).then(response => response.json()))
+      urls.map(url => fetch(url).then(response => response.json())),
     );
 
     return data;
@@ -14,16 +14,31 @@ async function fetchAll(urls) {
   }
 }
 
+export const ModelIds = {
+  baseline: 0,
+  strictDistancingNow: 1,
+  weakDistancingNow: 7,
+  containNow: 2,
+};
+
 export function useModelDatas(location) {
   const [modelDatas, setModelDatas] = useState(null);
-
-  async function fetchData() {
-    let urls = Array.from({ length: 8 }, (x, i) => `/data/${location}.${i}.json`);
-    let loadedModelDatas = await fetchAll(urls);
-    setModelDatas(loadedModelDatas);
-  }
-
   useEffect(() => {
+    async function fetchData() {
+      let urls = [
+        ModelIds.baseline,
+        ModelIds.strictDistancingNow,
+        ModelIds.weakDistancingNow,
+        ModelIds.containNow,
+      ].map(i => `/data/${location}.${i}.json`);
+      let loadedModelDatas = await fetchAll(urls);
+      setModelDatas({
+        baseline: loadedModelDatas[0],
+        strictDistancingNow: loadedModelDatas[1],
+        weakDistancingNow: loadedModelDatas[2],
+        containNow: loadedModelDatas[3],
+      });
+    }
     fetchData();
   }, [location]);
   return modelDatas;
@@ -35,7 +50,7 @@ const COLUMNS = {
   cumulativeDeaths: 10,
   cumulativeInfected: 9,
   totalPopulation: 16,
-  date: 0
+  date: 0,
 };
 
 const DAYS = 1000 * 60 * 60 * 24;
@@ -47,7 +62,13 @@ export class Model {
     this.durationDays = parameters.durationDays || null /* permanent */;
     this.delayDays = parameters.delayDays || 0;
 
-    let _parseInt = number => parseInt(number.replace(/,/g, '') || 0);
+    let _parseInt = (number) => {
+      // remove , in strings
+      if (typeof(number) == 'string') {
+        number = number.replace(/,/g, '')
+      }
+      return number ? parseInt(number) : 0;
+    }
 
     this.dates = data.map(row => new Date(row[COLUMNS.date]));
     this.dayZero = this.dates[0];
@@ -78,7 +99,7 @@ export class Model {
     let overwhelmedIdx = this.dates.findIndex(
       (num, idx) => this.hospitalizations[idx] > this.beds[idx],
     );
-    if (overwhelmedIdx == -1) {
+    if (overwhelmedIdx === -1) {
       this.dateOverwhelmed = null;
     } else {
       let overwhelmedBy =
@@ -89,7 +110,6 @@ export class Model {
       this.dateOverwhelmed = new Date(
         this.dates[overwhelmedIdx].getTime() - dayDelta * DAYS,
       );
-
     }
 
     this.totalPopulation = _parseInt(data[0][COLUMNS.totalPopulation]);
@@ -131,7 +151,10 @@ export class Model {
   }
 
   get interventionEnd() {
-    return new Date(this.dayZero.getTime() + (this.daysSinceDayZero + this.durationDays) * DAYS);
+    return new Date(
+      this.dayZero.getTime() +
+        (this.daysSinceDayZero + this.durationDays) * DAYS,
+    );
   }
 
   idxForDay = day => Math.ceil(day / 4);

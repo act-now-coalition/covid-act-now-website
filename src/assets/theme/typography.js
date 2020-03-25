@@ -48,14 +48,14 @@ export default {
     color: palette.text.primary,
     fontSize: '16px',
     letterSpacing: '-0.05px',
-    lineHeight: '25px'
+    lineHeight: '25px',
   },
   subtitle2: {
     color: palette.text.secondary,
     fontWeight: 400,
     fontSize: '14px',
     letterSpacing: '-0.05px',
-    lineHeight: '21px'
+    lineHeight: '21px',
   },
   body1: {
     color: palette.text.primary,
@@ -71,20 +71,20 @@ export default {
       fontSize: '1rem',
     },
     letterSpacing: '-0.04px',
-    lineHeight: '1.4rem'
+    lineHeight: '1.4rem',
   },
   whiteText: {
     color: palette.white,
   },
   button: {
     color: palette.text.primary,
-    fontSize: '14px'
+    fontSize: '14px',
   },
   caption: {
     color: palette.text.secondary,
     fontSize: '11px',
     letterSpacing: '0.33px',
-    lineHeight: '13px'
+    lineHeight: '13px',
   },
   overline: {
     color: palette.text.secondary,
@@ -92,6 +92,6 @@ export default {
     fontWeight: 500,
     letterSpacing: '0.33px',
     lineHeight: '13px',
-    textTransform: 'uppercase'
-  }
+    textTransform: 'uppercase',
+  },
 };

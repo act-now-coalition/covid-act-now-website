@@ -20,7 +20,7 @@ export const StyledFooterBody = styled.div`
 export const StyledFooterBodyLinks = styled.div`
   flex: 0 0 100%;
   text-align: center;
-  padding: 2rem 0;
+  padding: 2rem 0 1rem;
 
   @media (min-width: ${mobileBreakpoint}) {
     flex: 0 0 40%;
@@ -29,7 +29,17 @@ export const StyledFooterBodyLinks = styled.div`
 
   span {
     cursor: pointer;
-    margin: 0 1rem;
+    display: block;
+    margin: 0 0 1.5rem;
+  }
+
+  @media (min-width: 600px) {
+    flex: 0 0 40%;
+    padding: 3rem 0;
+    span {
+      display: inline-block;
+      margin: 0 1rem;
+    }
   }
 `;
 

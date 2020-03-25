@@ -4,8 +4,7 @@ import { mobileBreakpoint } from 'assets/theme/sizes';
 
 export const Wrapper = styled.div `
   background-color: white;
-  padding: 0;
-  padding: 16px;
+  padding: 1rem 2rem;
   min-height: calc(100vh - 64px);
 
   @media (min-width: ${mobileBreakpoint}) {

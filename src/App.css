@@ -1,21 +1,20 @@
 .graphs-container {
-
 }
-.small-graph
-{
-  float:left;
+.small-graph {
+  float: left;
   width: 50%;
 }
 
 .clear {
-  clear:both;
+  clear: both;
 }
 
 h4 {
   margin-top: 50px;
 }
 
-th, td {
+th,
+td {
   padding: 10px;
   width: 25%;
 }
@@ -34,7 +33,7 @@ tr {
 
 
 .analysis-group {
-  background-color: "#fafafa";
+  background-color: '#fafafa';
   padding: 20;
   margin-top: 20;
 }
@@ -73,6 +72,6 @@ tr {
 }
 
 .Map path:hover {
-  opacity: 0.50;
+  opacity: 0.5;
   cursor: pointer;
 }

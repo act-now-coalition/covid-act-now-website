@@ -7,8 +7,9 @@ import ModelPage from 'screens/ModelPage/ModelPage';
 import HomePage from 'screens/HomePage/HomePage';
 // import ComingSoon from 'screens/ComingSoon/ComingSoon';
 import FAQ from 'screens/FAQ/FAQ';
+import Contact from 'screens/Contact/Contact';
 import Endorsements from 'screens/Endorsements/Endorsements';
-import About from 'screens/About/About'
+import About from 'screens/About/About';
 import AppBar from 'components/AppBar/AppBar';
 import Footer from 'components/Footer/Footer';
 import theme from 'assets/theme';
@@ -26,6 +27,7 @@ export default function App() {
             <Route path="/model" component={FAQ} />
             <Route path="/endorsements" component={Endorsements} />
             <Route path="/about" component={About} />
+            <Route path="/contact" component={Contact} />
             {/* <Route path="/donate" component={ComingSoon} /> */}
             <Route path="/*">
               <Redirect to="/" />

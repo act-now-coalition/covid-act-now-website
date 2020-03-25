@@ -8,15 +8,13 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-    "chart.js": "^2.9.3",
-    "chartjs-plugin-annotation": "^0.5.7",
-    "chartjs-plugin-crosshair": "^1.1.4",
     "csv-parse": "^4.8.8",
     "googleapis": "^39.2.0",
     "highcharts": "^8.0.4",
     "highcharts-react-official": "^3.0.0",
     "history": "^4.10.1",
-    "momentjs": "^2.0.0",
+    "lint-staged": "^10.0.9",
+    "moment": "^2.24.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-router": "^5.1.2",
@@ -31,10 +29,16 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src || printf '\\n\\e[31mRun lint-fix to fix\\e[0m\\n\\n'",
+    "lint-fix": "eslint --fix src",
+    "prettier": "prettier --check '**/*.{css,scss,js}' || printf '\\n\\e[31mRun prettier-fix to fix\\e[0m\\n\\n'",
+    "prettier-fix": "prettier --write '**/*.{css,scss,js}'"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "lint-staged": {
+    "src/**/*.{css,scss,js}": [
+      "eslint --fix src"
+    ]
   },
   "browserslist": {
     "production": [
@@ -49,6 +53,9 @@
     ]
   },
   "devDependencies": {
-    "prettier": "1.19.1"
+    "eslint": "6.8.0",
+    "eslint-config-prettier": "6.10.1",
+    "eslint-plugin-prettier": "3.1.2",
+    "prettier": "2.0.2"
   }
 }

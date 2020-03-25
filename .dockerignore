@@ -1,0 +1,15 @@
+node_modules
+*.bundle.*
+lib/
+node_modules/
+*.egg-info/
+.npm/
+.ipynb_checkpoints/
+.ipython
+.jupyter
+.local
+*.ipynb
+.cache
+.bash_history
+.yarnrc
+cypress/videos

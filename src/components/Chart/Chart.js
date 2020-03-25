@@ -3,31 +3,30 @@ import Highcharts, { dateFormat } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import 'highcharts/css/highcharts.css';
 import moment from 'moment';
+import { INTERVENTIONS } from 'enums';
 
 import { Wrapper } from './Chart.style';
 
+const formatIntervention = intervention => `3 months of ${intervention}`;
+
 const Chart = ({ state, subtitle, data, dateOverwhelmed }) => {
   const noAction = {
-    name: 'No Action',
-    color: '#ef5350',
+    name: INTERVENTIONS.NO_ACTION,
     type: 'area',
     data: data[0].data,
   };
   const socialDistancing = {
-    name: "3 Months of Social distancing",
-    color: '#FFA726',
+    name: formatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
     type: 'area',
     data: data[2].data,
   };
   const shelterInPlace = {
-    name: "3 Months of Shelter-in-place",
-    color: '#29B6F6',
+    name: formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
     type: 'area',
     data: data[1].data,
   };
   const wuhanStyle = {
-    name: '3 Months of Wuhan-style Lockdown',
-    color: '#9CCC65',
+    name: formatIntervention(INTERVENTIONS.LOCKDOWN),
     type: 'area',
     data: data[3].data,
   };
@@ -55,7 +54,7 @@ const Chart = ({ state, subtitle, data, dateOverwhelmed }) => {
       },
     },
     tooltip: {
-      formatter: function() {
+      formatter: function () {
         const date = moment(this.x).format('MMMM D');
         const beds = this.y.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         if (this.series.userOptions.type === 'line') {
@@ -69,7 +68,7 @@ const Chart = ({ state, subtitle, data, dateOverwhelmed }) => {
       step: 7,
       labels: {
         rotation: -45,
-        formatter: function() {
+        formatter: function () {
           return dateFormat('%b %e', this.value);
         },
       },

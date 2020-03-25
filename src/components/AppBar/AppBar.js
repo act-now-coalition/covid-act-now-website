@@ -1,14 +1,14 @@
-import React, { useState }                          from 'react';
+import React, { useState } from 'react';
 import { useHistory, useLocation, matchPath, Link } from 'react-router-dom';
-import { ArrowBack }                                from '@material-ui/icons';
-import AppBar                                       from '@material-ui/core/AppBar';
-import Typography                                   from '@material-ui/core/Typography';
-import Logo                                         from 'assets/images/logo';
-import MobileMenu                                   from './MobileMenu';
-import Burger                                       from './Burger';
+import { ArrowBack } from '@material-ui/icons';
+import Typography from '@material-ui/core/Typography';
+import Logo from 'assets/images/logo';
+import MobileMenu from './MobileMenu';
+import Burger from './Burger';
 import {
   Wrapper,
   Left,
+  StyledAppBar,
   StyledDesktopMenu,
   StyledTabs,
   StyledTab,
@@ -27,7 +27,7 @@ import { STATES } from 'enums';
 const _AppBar = () => {
   const history = useHistory();
   const { pathname } = useLocation();
-  const panels = ['/', '/about', '/model', '/endorsements'];
+  const panels = ['/', '/about', '/model', '/endorsements', '/contact'];
   const [panelIdx, setPanelIdx] = useState(
     String(panels.indexOf(pathname)) || '0',
   );
@@ -41,7 +41,8 @@ const _AppBar = () => {
   });
   const locationName = match && match.params ? STATES[match.params.id] : '';
 
-  const goTo = route => {
+  const goTo = route => e => {
+    e.preventDefault();
     setOpen(false);
     setPanelIdx(String(panels.indexOf(route)));
 
@@ -50,7 +51,7 @@ const _AppBar = () => {
     window.scrollTo(0, 0);
   };
 
-  const shareURL = `https://covidactnow.org${match ? match.url : '' }`;
+  const shareURL = `https://covidactnow.org${match ? match.url : ''}`;
   const hashtag = 'COVIDActNow';
   const stateShareTitle = `This is the point of no return for intervention to prevent ${locationName}'s hospital system from being overloaded by Coronavirus: `;
   const defaultShareTitle =
@@ -59,19 +60,19 @@ const _AppBar = () => {
   const shareTitle = locationName ? stateShareTitle : defaultShareTitle;
 
   return (
-    <AppBar position="sticky">
+    <StyledAppBar position="sticky">
       <Wrapper>
         <Left>
           {pathname.includes('state') ? (
-            <ArrowBack onClick={() => goTo('/')} />
+            <ArrowBack onClick={goTo('/')} />
           ) : (
-            <Logo onClick={() => goTo('/')} />
+            <Logo onClick={goTo('/')} />
           )}
           <MenuTitle>
             <Typography
               variant="button"
               component={Link}
-              onClick={() => goTo('/')}
+              onClick={goTo('/')}
               style={{ textDecoration: 'none', color: 'black' }}
             >
               COVID ACT NOW
@@ -99,25 +100,31 @@ const _AppBar = () => {
               label="Map"
               value="0"
               disableRipple
-              onClick={() => goTo('/')}
+              onClick={goTo('/')}
             />
             <StyledTab
               label="About"
               value="1"
               disableRipple
-              onClick={() => goTo('/about')}
+              onClick={goTo('/about')}
             />
             <StyledTab
               label="Model"
               value="2"
               disableRipple
-              onClick={() => goTo('/model')}
+              onClick={goTo('/model')}
             />
             <StyledTab
               label="Endorsements"
               value="3"
               disableRipple
-              onClick={() => goTo('/endorsements')}
+              onClick={goTo('/endorsements')}
+            />
+            <StyledTab
+              label="Contact"
+              value="4"
+              disableRipple
+              onClick={goTo('/contact')}
             />
           </StyledTabs>
         </StyledDesktopMenu>
@@ -141,7 +148,7 @@ const _AppBar = () => {
           <MobileMenu open={open} setOpen={setOpen} goTo={goTo} />
         </StyledMobileMenu>
       </Wrapper>
-    </AppBar>
+    </StyledAppBar>
   );
 };
 

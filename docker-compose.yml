@@ -1,0 +1,19 @@
+version: '3'
+services:
+  covidactnow:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    #ommand: cypress run and wait-on ${CYPRESS_BASE_URL}
+    command: bash -c "sleep 30 && cypress run"
+    environment:
+      CYPRESS_BASE_URL: "http://covidactnow:3000"
+    depends_on:
+      - covidactnow

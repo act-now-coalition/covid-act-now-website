@@ -1,5 +1,5 @@
 import React from 'react';
-import Logo  from 'assets/images/logo';
+import Logo from 'assets/images/logo';
 
 import { useHistory } from 'react-router-dom';
 
@@ -30,13 +30,20 @@ const Footer = ({ children }) => {
         </StyledFooterHeader>
         <StyledFooterBody>
           <StyledFooterBodyLinks>
-            <span onClick={() => goTo('/')}>MAP</span>
-            <span onClick={() => goTo('/about')}>ABOUT</span>
-            <span onClick={() => goTo('/model')}>MODEL</span>
-            <span onClick={() => goTo('/endorsements')}>ENDORSEMENTS</span>
+            <div>
+              <span onClick={() => goTo('/')}>MAP</span>
+              <span onClick={() => goTo('/about')}>ABOUT</span>
+              <span onClick={() => goTo('/model')}>MODEL</span>
+              <span onClick={() => goTo('/endorsements')}>ENDORSEMENTS</span>
+              <span onClick={() => goTo('/endorsements')}>CONTACT</span>
+            </div>
           </StyledFooterBodyLinks>
           <StyledFooterBodyCallout>
-            If you have time to give us feedback or access to this expertise, have questions, or otherwise want to get involved, <a href="mailto:jonathan@covidactnow.org">please email us</a>
+            Press contact:{' '}
+            <a href="mailto:press@covidactnow.org">press@covidactnow.org</a>
+            <br />
+            <a href="https://forms.gle/JTCcqrGb5yzoD6hg6">Contribute</a> to this
+            tool
           </StyledFooterBodyCallout>
         </StyledFooterBody>
       </StyledFooter>

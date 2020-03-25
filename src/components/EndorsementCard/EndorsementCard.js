@@ -28,14 +28,24 @@ const EndorsementCard = ({
           <Profile>
             <ProfileHeader
               onClick={() => window.open(profileUrl, '_blank')}
-              avatar={<Avatar aria-label={name} src={window.location.origin + avatarUrl} />}
+              avatar={
+                <Avatar
+                  aria-label={name}
+                  src={window.location.origin + avatarUrl}
+                />
+              }
               title={name}
             />
             <Divider variant="middle" />
             <Left>
               <CardContent>
                 {credentials.map((c, index) => (
-                  <Credential key={index} variant="body2" color="textSecondary" component="p">
+                  <Credential
+                    key={index}
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
                     {c}
                   </Credential>
                 ))}

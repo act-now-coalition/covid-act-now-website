@@ -49,8 +49,7 @@ export const Credential = styled(Typography)
   line-height: 1.2rem;
 `;
 
-export const Left = styled.div `
-`;
+export const Left = styled.div``;
 
 export const Quote = styled.div `
   background-color: white;
@@ -60,7 +59,7 @@ export const Quote = styled.div `
   color: #546e7a;
 
   p {
-    font-size: 13px
+    font-size: 13px;
   }
 
   &::before, &::after {
