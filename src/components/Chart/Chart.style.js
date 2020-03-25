@@ -50,14 +50,23 @@ export const Wrapper = styled.div`
     stroke: #ff3348;
     stroke-width: 3px;
   }
+  .highcharts-series-0-line {
+    stroke: ${noActionColor};
+  }
+  .highcharts-series-1-line {
+    stroke: ${socialDistancingColor};
+  }
+  .highcharts-series-2-line {
+    stroke: ${shelterInPlaceColor};
+  }
+  .hightcharts-series-3-line {
+    stroke: ${lockdownColor}
+  }
   .today {
     stroke: #d8d8d8;
     stroke-width: 1px;
   }
   .highcharts-plot-line-label {
     fill: #666666;
-    &:first-of-type {
-      fill: #ff3348;
-    }
   }
 `;
