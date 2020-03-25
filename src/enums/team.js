@@ -1,34 +1,46 @@
 export default [
   {
     name: 'Max Henderson',
-    title: 'ex-Firebase/Google Executive',
+    title: 'ex-Firebase/Google Data Science & Product Leader',
     link: 'https://www.linkedin.com/in/maxhenderson/',
-  },
-  {
-    name: 'Representative Jonathan Kreiss-Tomkins',
-    title: 'Alaska Legislature',
-    link: 'https://en.wikipedia.org/wiki/Jonathan_Kreiss-Tomkins',
   },
   {
     name: 'Igor Kofman',
     title: 'ex-CTO, Dropbox Paper',
     link: 'https://twitter.com/igorkofman',
   },
-  {
-    name: 'Nirav R. Shah',
+   {
+    name: 'Representative Jonathan Kreiss-Tomkins',
+    title: 'Alaska Legislator',
+    link: 'https://en.wikipedia.org/wiki/Jonathan_Kreiss-Tomkins',
+  },
+   {
+    name: 'Professor Rebecca Katz, Ph.D., MPH',
     title:
-      'MD, MPH, senior scholar, Stanford University Clinical Excellence Research Center',
+      'Director of the Center for Global Health Science and Security, Georgetown University',
+    link: 'https://www.linkedin.com/in/rebecca-katz-43a04a5/',
+  },
+  {
+    name: 'Nirav R. Shah, MD, MPH',
+    title:
+      'Senior Scholar, Stanford University Clinical Excellence Research Center',
     link: 'https://profiles.stanford.edu/nirav-shah',
+  },
+  {
+    name: 'Ellie Graeden, Ph.D.',
+    title:
+      'CEO of Talus Analytics; Fmr Epidemiological modeling faculty, Georgetown University',
+    link: 'https://www.linkedin.com/in/egraeden/',
+  },
+   {
+    name: 'James Tamplin',
+    title: 'Founder/CEO, Firebase',
+    link: 'https://www.linkedin.com/in/jamest/',
   },
   {
     name: 'Zack Rosen',
     title: 'CEO, Pantheon',
     link: 'https://www.linkedin.com/in/zacharyrosen/',
-  },
-  {
-    name: 'James Tamplin',
-    title: 'Founder/CEO, Firebase',
-    link: 'https://www.linkedin.com/in/jamest/',
   },
   {
     name: 'Stephen Fiskell',
