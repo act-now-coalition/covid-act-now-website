@@ -73,7 +73,6 @@ export function useModelDatas(_location, county = null) {
       fetchData(county);
     }
   }, [location, county, modelDatas]);
-  console.log(modelDatas);
   return modelDatas;
 }
 

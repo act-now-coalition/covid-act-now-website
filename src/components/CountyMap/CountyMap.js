@@ -18,11 +18,6 @@ const CountyMap = () => {
   const counties = require(`./data/${location}.json`);
 
   useEffect(() => {
-    // https://www.bls.gov/lau/
-    csv('/countyConfigData/sampleData.csv').then(counties => {
-      setData(counties);
-    });
-
     csv('/countyConfigData/sampleData.csv').then(counties => {
       setData(counties);
     });
