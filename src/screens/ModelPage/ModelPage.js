@@ -15,21 +15,19 @@ function ModelPage() {
   const { id: location } = useParams();
   const [countyView, setCountyView] = useState(false);
   const [county, setCounty] = useState(null);
-  const [modelDatas, setModelDatas] = useState(null);
-  const [interventions, setInterventions] = useState(null);
+  // const [modelDatas, setModelDatas] = useState(null);
+  // const [interventions, setInterventions] = useState(null);
+  let modelDatas = null;
+  let interventions = null;
   const modelDatasMap = useModelDatas(location, county);
 
   const locationName = STATES[location];
   const intervention = STATE_TO_INTERVENTION[location];
   const showModel = !countyView || (countyView && county);
 
-  useEffect(() => {
-    const datasForView = countyView
-      ? modelDatasMap.county
-      : modelDatasMap.state;
-    setModelDatas(datasForView);
-    setInterventions(buildInterventionMap(datasForView));
-  }, [modelDatasMap, countyView]);
+  const datasForView = countyView ? modelDatasMap.county : modelDatasMap.state;
+  modelDatas = datasForView;
+  interventions = buildInterventionMap(datasForView);
 
   // No model data
   if ((!countyView && !modelDatas) || (countyView && county && !modelDatas)) {
