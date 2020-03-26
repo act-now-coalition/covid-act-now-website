@@ -1,6 +1,10 @@
 import InterventionJSON from '../assets/data/interventions.json'
 
+<<<<<<< HEAD
 const LIMITED_ACTION = 'Limited Action';
+=======
+const NO_ACTION = 'Limited Action';
+>>>>>>> upstream/master
 const SOCIAL_DISTANCING = 'Social Distancing';
 const SHELTER_IN_PLACE = 'Shelter in Place';
 const LOCKDOWN = 'Lockdown';
