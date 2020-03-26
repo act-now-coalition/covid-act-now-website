@@ -4,7 +4,7 @@ import Callout from 'components/Callout/Callout';
 
 const LAST_DATES_CALLOUT_COLORS = {
   // Array is [fill color, border color]
-  [INTERVENTIONS.NO_ACTION]: ['rgba(255, 0, 0, 0.0784)', 'red'],
+  [INTERVENTIONS.LIMITED_ACTION]: ['rgba(255, 0, 0, 0.0784)', 'red'],
   [INTERVENTIONS.SOCIAL_DISTANCING]: ['rgba(255, 255, 0, 0.0784)', 'yellow'],
   [INTERVENTIONS.SHELTER_IN_PLACE]: ['rgba(0, 255, 0, 0.0784)', 'green'],
 };
@@ -14,7 +14,7 @@ const ONE_HUNDRED_DAYS = 100 * DAYS;
 
 const CallToAction = ({ interventions, currentIntervention }) => {
   const interventionToModel = {
-    [INTERVENTIONS.NO_ACTION]: interventions.baseline,
+    [INTERVENTIONS.LIMITED_ACTION]: interventions.baseline,
     [INTERVENTIONS.SOCIAL_DISTANCING]:
       interventions.distancingPoorEnforcement.now,
     [INTERVENTIONS.SHELTER_IN_PLACE]: interventions.distancing.now,
@@ -56,7 +56,7 @@ const CallToAction = ({ interventions, currentIntervention }) => {
 
 const suggestedIntervention = intervention => {
   switch (intervention) {
-    case INTERVENTIONS.NO_ACTION:
+    case INTERVENTIONS.LIMITED_ACTION:
       return INTERVENTIONS.SHELTER_IN_PLACE;
     case INTERVENTIONS.SOCIAL_DISTANCING:
       return INTERVENTIONS.SHELTER_IN_PLACE;

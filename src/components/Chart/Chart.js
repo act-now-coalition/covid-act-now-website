@@ -33,7 +33,7 @@ const Chart = ({ state, county, subtitle, interventions, dateOverwhelmed }) => {
   const data = scenarioComparisonOverTime(100);
 
   const noAction = {
-    name: INTERVENTIONS.NO_ACTION,
+    name: INTERVENTIONS.LIMITED_ACTION,
     type: 'area',
     data: data[0].data,
   };
