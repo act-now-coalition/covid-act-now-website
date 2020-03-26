@@ -9,9 +9,31 @@ import { Wrapper } from './Chart.style';
 
 const formatIntervention = intervention => `3 months of ${intervention}`;
 
-const Chart = ({ state, subtitle, data, dateOverwhelmed }) => {
+const Chart = ({ state, county, subtitle, interventions, dateOverwhelmed }) => {
+  const scenarioComparisonOverTime = duration => [
+    interventions.baseline.getDataset('hospitalizations', duration, 'red'),
+    interventions.distancing.now.getDataset(
+      'hospitalizations',
+      duration,
+      'blue',
+    ),
+    interventions.distancingPoorEnforcement.now.getDataset(
+      'hospitalizations',
+      duration,
+      'orange',
+    ),
+    interventions.contain.now.getDataset('hospitalizations', duration, 'green'),
+    interventions.baseline.getDataset(
+      'beds',
+      duration,
+      'black',
+      'Available Hospital Beds',
+    ),
+  ];
+  const data = scenarioComparisonOverTime(100);
+
   const noAction = {
-    name: INTERVENTIONS.NO_ACTION,
+    name: INTERVENTIONS.LIMITED_ACTION,
     type: 'area',
     data: data[0].data,
   };
@@ -43,7 +65,7 @@ const Chart = ({ state, subtitle, data, dateOverwhelmed }) => {
       height: '600',
     },
     title: {
-      text: state,
+      text: county ? `${county.county}, ${state}` : state,
     },
     subtitle: {
       text: subtitle,

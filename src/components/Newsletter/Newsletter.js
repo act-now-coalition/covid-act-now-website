@@ -6,11 +6,11 @@ const Newsletter = () => {
     <StyledNewsletter>
       <iframe
         title="newsletter"
-        class="mj-w-res-iframe"
+        className="mj-w-res-iframe"
         frameborder="0"
         scrolling="no"
-        marginheight="0"
-        marginwidth="0"
+        marginHeight="0"
+        marginWidth="0"
         src="https://app.mailjet.com/widget/iframe/1dtU/pZV"
         width="100%"
       ></iframe>

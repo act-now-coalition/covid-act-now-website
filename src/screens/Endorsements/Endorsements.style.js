@@ -21,12 +21,18 @@ export const Content = styled.div`
   }
 `;
 
-export const Quote = styled.div`
+export const QuoteContainer = styled.div`
   background-color: white;
   border-radius: 4px;
   margin: 24px 12px;
-  padding: 24px;
   display: flex;
+  flex-direction: column;
+  padding: 24px;
+`;
+
+export const Quote = styled.div`
+  display: flex;
+  flex-direction: row;
   svg {
     width: 28px;
     height: 28px;
@@ -50,6 +56,16 @@ export const Quote = styled.div`
     @media (min-width: 600px) {
       font-size: 30px;
     }
+  }
+`;
+
+export const EndorseLink = styled.a`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  div {
+    margin-right: 4px;
   }
 `;
 

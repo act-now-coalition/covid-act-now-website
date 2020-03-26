@@ -21,26 +21,61 @@ export const ModelIds = {
   containNow: 2,
 };
 
-export function useModelDatas(location) {
-  const [modelDatas, setModelDatas] = useState(null);
+export function useModelDatas(_location, county = null) {
+  //Some state data files are lowercase, unsure why, but we need to handle it here.
+  let lowercaseStates = [
+    'AK',
+    'CA',
+    'CO',
+    'FL',
+    'MO',
+    'NM',
+    'NV',
+    'NY',
+    'OR',
+    'TX',
+    'WA',
+  ];
+
+  let location = _location;
+
+  if (lowercaseStates.indexOf(location) > -1) {
+    location = _location.toLowerCase();
+  }
+
+  const [modelDatas, setModelDatas] = useState({ state: null, county: null });
   useEffect(() => {
-    async function fetchData() {
+    async function fetchData(county = null) {
       let urls = [
         ModelIds.baseline,
         ModelIds.strictDistancingNow,
         ModelIds.weakDistancingNow,
         ModelIds.containNow,
-      ].map(i => `/data/${location}.${i}.json`);
+      ].map(i => {
+        const stateUrl = `/data/${location}.${i}.json`;
+        const countyUrl = `/data/${location}.${i}.json`; // TODO: update when we know filenames
+        return county ? countyUrl : stateUrl;
+      });
       let loadedModelDatas = await fetchAll(urls);
-      setModelDatas({
-        baseline: loadedModelDatas[0],
-        strictDistancingNow: loadedModelDatas[1],
-        weakDistancingNow: loadedModelDatas[2],
-        containNow: loadedModelDatas[3],
+      const key = county ? 'county' : 'state';
+      setModelDatas(m => {
+        return {
+          ...m,
+          [key]: {
+            baseline: loadedModelDatas[0],
+            strictDistancingNow: loadedModelDatas[1],
+            weakDistancingNow: loadedModelDatas[2],
+            containNow: loadedModelDatas[3],
+          },
+        };
       });
     }
     fetchData();
-  }, [location]);
+    if (county) {
+      fetchData(county);
+    }
+  }, [location, county]);
+
   return modelDatas;
 }
 
@@ -62,13 +97,13 @@ export class Model {
     this.durationDays = parameters.durationDays || null /* permanent */;
     this.delayDays = parameters.delayDays || 0;
 
-    let _parseInt = (number) => {
+    let _parseInt = number => {
       // remove , in strings
-      if (typeof(number) == 'string') {
-        number = number.replace(/,/g, '')
+      if (typeof number == 'string') {
+        number = number.replace(/,/g, '');
       }
       return number ? parseInt(number) : 0;
-    }
+    };
 
     this.dates = data.map(row => new Date(row[COLUMNS.date]));
     this.dayZero = this.dates[0];
