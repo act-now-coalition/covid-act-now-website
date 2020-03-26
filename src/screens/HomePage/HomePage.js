@@ -50,7 +50,7 @@ export default function HomePage() {
                   <span>Or</span>
                 <div></div>
               </MapTitleDivider>
-              <p>Select your state below to see detailed proejctions</p>
+              <p>Select your state below to see detailed projections</p>
             </MapTitle>
             <Map />
             <div
