@@ -30,7 +30,7 @@ const Header = ({ children, locationName, intervention }) => {
           component="p"
           variant="subtitle2"
         >
-          Public leaders &amp; health officials the only thing that matters right now is the speed of your response.
+          Public leaders &amp; health officials: The only thing that matters right now is the speed of your response.
         </HeaderSubCopy>
 
         <HeaderSubCopy

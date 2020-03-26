@@ -47,7 +47,7 @@ export const BlackBar = styled(Box)`
 
   @media(min-width: 1280px) {
     align-items: center;
-    padding: 1.5rem 1rem;
+    padding: 1.5rem 2rem;
     flex-direction: row;
   }
 `;
