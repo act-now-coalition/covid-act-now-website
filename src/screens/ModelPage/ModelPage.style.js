@@ -12,6 +12,10 @@ export const Content = styled.div`
   }
 `;
 
+export const LoadingScreen = styled.div`
+  min-height: 90vh;
+`;
+
 export const ShareSpacer = styled.div`
   padding-right: 32px;
 `;

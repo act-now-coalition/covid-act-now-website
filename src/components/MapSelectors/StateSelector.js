@@ -4,15 +4,16 @@ import Select, { components } from 'react-select';
 import CustomStyles from './CustomStyles';
 import BaseValueContainer from './BaseValueContainer';
 import ShortNumber from 'utils/ShortNumber';
-import StateSvg from 'components/StateSvg/StateSvg';
+import StateCircleSvg from 'components/StateSvg/StateCircleSvg';
 import US_STATE_DATASET from './datasets/us_states_dataset_01_02_2020';
 
-import { STATE_TO_INTERVENTION, INTERVENTION_COLOR_MAP } from 'enums';
+import { STATE_TO_INTERVENTION } from 'enums';
 
 import {
   // StyledDot,
   StyledState,
   StyledResultsMenuOption,
+  StyledResultsMenuSubText,
   StyledNoOptionsMessage,
 } from './MapSelectors.style';
 
@@ -32,24 +33,27 @@ const NoOptionsMessage = props => {
 
 const Option = ({ children, ...props }) => {
   const intervention = STATE_TO_INTERVENTION[children.state_code];
-  const interventionColor = INTERVENTION_COLOR_MAP[intervention];
 
   return (
     <components.Option {...props}>
       <StyledResultsMenuOption hasData={true}>
         <div style={{ marginLeft: '0', marginRight: '.75rem' }}>
-          <StyledState color={interventionColor}>
-            <StateSvg state={children.state_code} />
+          <StyledState>
+            <StateCircleSvg
+              ratio={0.8}
+              intervention={intervention}
+              state={children.state_code}
+            />
           </StyledState>
         </div>
         <div>
-          <div>
-            <strong>{children.state}</strong>
-          </div>
-          <span>
-            {intervention && <span>{intervention} - </span>}{' '}
-            {ShortNumber(children.population)} residents
-          </span>
+          <div>{children.state}</div>
+          <StyledResultsMenuSubText>
+            <span>
+              {intervention && <span>{intervention} • </span>}{' '}
+              {ShortNumber(children.population)} residents
+            </span>
+          </StyledResultsMenuSubText>
         </div>
       </StyledResultsMenuOption>
     </components.Option>
