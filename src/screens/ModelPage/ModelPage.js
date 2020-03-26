@@ -11,7 +11,7 @@ import { Wrapper, Content } from './ModelPage.style';
 import { STATES, STATE_TO_INTERVENTION, INTERVENTION_COLOR_MAP, INTERVENTIONS } from 'enums';
 import { useModelDatas, Model } from 'utils/model';
 
-const limitedActionColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.NO_ACTION];
+const limitedActionColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.LIMITED_ACTION];
 const socialDistancingColor =
   INTERVENTION_COLOR_MAP[INTERVENTIONS.SOCIAL_DISTANCING];
 const shelterInPlaceColor =
@@ -143,7 +143,7 @@ const buildInterventionMap = modelDatas => {
 
   // Initialize models
   interventions.baseline = new Model(modelDatas.baseline, {
-    intervention: INTERVENTIONS.NO_ACTION,
+    intervention: INTERVENTIONS.LIMITED_ACTION,
     r0: 2.4,
   });
   interventions.distancing = {
