@@ -9,12 +9,12 @@ export default [
     title: 'ex-CTO, Dropbox Paper',
     link: 'https://twitter.com/igorkofman',
   },
-   {
+  {
     name: 'Representative Jonathan Kreiss-Tomkins',
     title: 'Alaska Legislator',
     link: 'https://en.wikipedia.org/wiki/Jonathan_Kreiss-Tomkins',
   },
-   {
+  {
     name: 'Professor Rebecca Katz, Ph.D., MPH',
     title:
       'Director of the Center for Global Health Science and Security, Georgetown University',
@@ -32,7 +32,7 @@ export default [
       'CEO of Talus Analytics; Fmr Epidemiological modeling faculty, Georgetown University',
     link: 'https://www.linkedin.com/in/egraeden/',
   },
-   {
+  {
     name: 'James Tamplin',
     title: 'Founder/CEO, Firebase',
     link: 'https://www.linkedin.com/in/jamest/',
