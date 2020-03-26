@@ -135,9 +135,9 @@ const About = ({ children }) => {
         <Typography variant="h5" component="h5">
           Collaborator Projects
         </Typography>
-        
+
         <Typography variant="body1" component="p">
-          CoVidActNow endorses Private Kit: Safe Paths, a project developed by MIT, 
+          CoVidActNow endorses Private Kit: Safe Paths, a project developed by MIT,
           the Mayo Clinic, the World Health Organization, and others.
         </Typography>
 
@@ -151,7 +151,7 @@ const About = ({ children }) => {
           >
             https://safepaths.mit.edu
           </a>{' '}
-          Read the white paper 
+          Read the white paper
           <li><a href="https://arxiv.org/pdf/2003.08567.pdf">Apps Gone Rogue: Maintaining Personal Privacy in an Epidemic</a></li>
         </Typography>
 
@@ -170,6 +170,7 @@ const About = ({ children }) => {
             rel="noopener noreferrer"
           >
             Apple Store
+          </a>
         </Typography>
 
         <Typography variant="h5" component="h5">
