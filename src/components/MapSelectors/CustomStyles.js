@@ -24,6 +24,12 @@ export default {
     ...styles,
     marginLeft: '27px',
   }),
+  input: (styles) => ({
+    ...styles,
+    '& input': {
+      fontSize: '16px !important',
+    },
+  }),
   singleValue: (styles) => ({
     ...styles,
     marginLeft: '26px',
