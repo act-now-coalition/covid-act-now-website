@@ -72,7 +72,7 @@ export function useModelDatas(_location, county = null) {
     if (county) {
       fetchData(county);
     }
-  }, [location, county, modelDatas]);
+  }, [location, county]);
   return modelDatas;
 }
 
