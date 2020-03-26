@@ -160,7 +160,7 @@ const About = ({ children }) => {
             </li>
             <li><a href="https://docs.google.com/document/d/1KXCAVMFw540dosk1PToIrHY1WOETwFIHaSZY6BuFLGA/edit">General Counsel</a></li>
             <li>Communications Leaders</li>
-              <ul>  
+              <ul>
                  <li><a href="https://docs.google.com/document/d/1do_XQ0twIpjiNzmD2-TydO8h9CnorE1TiNEHe1suH0Q/edit">Growth Lead</a></li>
                  <li><a href="https://docs.google.com/document/d/1SHSx8C8j11UNpxyLVYGgnv106ho2cHg41f5AStgVPkU/edit?ts=5e792bd0">Community Manager / Social Media Lead</a></li>
               </ul>
