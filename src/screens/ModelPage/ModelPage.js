@@ -20,8 +20,15 @@ import {
   ShareContainer,
   ShareSpacer,
 } from './ModelPage.style';
-import { STATES, STATE_TO_INTERVENTION, INTERVENTIONS } from 'enums';
+import { STATES, STATE_TO_INTERVENTION, INTERVENTIONS, INTERVENTION_COLOR_MAP } from 'enums';
 import { useModelDatas, Model } from 'utils/model';
+
+const noActionColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.NO_ACTION];
+const socialDistancingColor =
+  INTERVENTION_COLOR_MAP[INTERVENTIONS.SOCIAL_DISTANCING];
+const shelterInPlaceColor =
+  INTERVENTION_COLOR_MAP[INTERVENTIONS.SHELTER_IN_PLACE];
+const lockdownColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.LOCKDOWN];
 
 const LAST_DATES_CALLOUT_COLORS = {
   // Array is [fill color, border color]
@@ -120,26 +127,26 @@ function ModelPage() {
 
   // Initialize models
   let baseline = new Model(modelDatas.baseline, {
-    intervention: 'No Action',
+    intervention: INTERVENTIONS.NO_ACTION,
     r0: 2.4,
   });
   let distancing = {
     now: new Model(modelDatas.strictDistancingNow, {
-      intervention: 'Shelter-in-place',
+      intervention: INTERVENTIONS.SHELTER_IN_PLACE,
       durationDays: 90,
       r0: 1.2,
     }),
   };
   let distancingPoorEnforcement = {
     now: new Model(modelDatas.weakDistancingNow, {
-      intervention: 'Social distancing',
+      intervention: INTERVENTIONS.SOCIAL_DISTANCING,
       durationDays: 90,
       r0: 1.7,
     }),
   };
   let contain = {
     now: new Model(modelDatas.containNow, {
-      intervention: 'Wuhan-style Lockdown',
+      intervention: INTERVENTIONS.LOCKDOWN,
       durationDays: 90,
       r0: 0.3,
     }),
@@ -223,7 +230,7 @@ function ModelPage() {
               distancing.now,
               contain.now,
             ]}
-            colors={['red', 'orange', 'blue', 'green']}
+            colors={[noActionColor, socialDistancingColor, shelterInPlaceColor, lockdownColor]}
             asterisk={['', '*', '*', '**']}
             timeHorizon={100}
           />
