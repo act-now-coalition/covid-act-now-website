@@ -58,14 +58,16 @@ export function useModelDatas(_location, county = null) {
       });
       let loadedModelDatas = await fetchAll(urls);
       const key = county ? 'county' : 'state';
-      setModelDatas({
-        ...modelDatas,
-        [key]: {
-          baseline: loadedModelDatas[0],
-          strictDistancingNow: loadedModelDatas[1],
-          weakDistancingNow: loadedModelDatas[2],
-          containNow: loadedModelDatas[3],
-        },
+      setModelDatas(m => {
+        return {
+          ...m,
+          [key]: {
+            baseline: loadedModelDatas[0],
+            strictDistancingNow: loadedModelDatas[1],
+            weakDistancingNow: loadedModelDatas[2],
+            containNow: loadedModelDatas[3],
+          },
+        };
       });
     }
     fetchData();
@@ -73,6 +75,7 @@ export function useModelDatas(_location, county = null) {
       fetchData(county);
     }
   }, [location, county]);
+
   return modelDatas;
 }
 

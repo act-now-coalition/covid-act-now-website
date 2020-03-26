@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 // import CountyMap from 'components/CountyMap/CountyMap';
 import Outcomes from './Outcomes/Outcomes';
@@ -8,7 +8,12 @@ import Header from 'components/Header/Header';
 import Chart from 'components/Chart/Chart';
 import Newsletter from 'components/Newsletter/Newsletter';
 import { Wrapper, Content } from './ModelPage.style';
-import { STATES, STATE_TO_INTERVENTION, INTERVENTION_COLOR_MAP, INTERVENTIONS } from 'enums';
+import {
+  STATES,
+  STATE_TO_INTERVENTION,
+  INTERVENTION_COLOR_MAP,
+  INTERVENTIONS,
+} from 'enums';
 import { useModelDatas, Model } from 'utils/model';
 
 const limitedActionColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.LIMITED_ACTION];
@@ -17,7 +22,6 @@ const socialDistancingColor =
 const shelterInPlaceColor =
   INTERVENTION_COLOR_MAP[INTERVENTIONS.SHELTER_IN_PLACE];
 const lockdownColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.LOCKDOWN];
-
 
 function ModelPage() {
   const { id: location } = useParams();
@@ -89,7 +93,12 @@ function ModelPage() {
                 interventions.distancing.now,
                 interventions.contain.now,
               ]}
-              colors={[limitedActionColor, socialDistancingColor, shelterInPlaceColor, lockdownColor]}
+              colors={[
+                limitedActionColor,
+                socialDistancingColor,
+                shelterInPlaceColor,
+                lockdownColor,
+              ]}
               asterisk={['', '*', '*', '**']}
               timeHorizon={100}
             />
