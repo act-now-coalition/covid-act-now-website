@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { INTERVENTIONS, INTERVENTION_COLOR_MAP } from 'enums';
 
-const noActionColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.NO_ACTION];
+const noActionColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.LIMITED_ACTION];
 const socialDistancingColor =
   INTERVENTION_COLOR_MAP[INTERVENTIONS.SOCIAL_DISTANCING];
 const shelterInPlaceColor =

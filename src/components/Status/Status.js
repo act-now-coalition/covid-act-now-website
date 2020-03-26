@@ -5,7 +5,7 @@ import { INTERVENTIONS, INTERVENTION_COLOR_MAP } from 'enums';
 import { StatusWrapper } from './Status.style';
 
 const textColor = intervention =>
-  intervention === INTERVENTIONS.NO_ACTION ? 'white' : 'black';
+  intervention === INTERVENTIONS.LIMITED_ACTION ? 'white' : 'black';
 
 export default function ({ intervention }) {
   return (
