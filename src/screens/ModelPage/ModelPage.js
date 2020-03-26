@@ -75,7 +75,6 @@ function ModelPage() {
               county={county}
               subtitle="Hospitalizations over time"
               interventions={interventions}
-              dateOverwhelmed={interventions.baseline.dateOverwhelmed}
             />
 
             <CallToAction

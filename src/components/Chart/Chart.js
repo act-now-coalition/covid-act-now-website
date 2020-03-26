@@ -37,67 +37,90 @@ const Chart = ({ state, county, subtitle, interventions }) => {
     type: 'area',
     data: data[0].data,
   };
-  if (data[0].dateOverwhelmed !== null) {
-    extraLines.push({
-      value: data[0].dateOverwhelmed,
-      className: 'highcharts-series-0-line',
-      label: {
-        text: 'Hospitals Overloaded',
-        x: 10,
-        y: 20,
-      }
-    })
-  }
   const socialDistancing = {
     name: formatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
     type: 'area',
     data: data[2].data,
   };
-  if (data[2].dateOverwhelmed !== null) {
-    extraLines.push({
-      value: data[2].dateOverwhelmed,
-      className: 'highcharts-series-1-line',
-      label: {
-        text: 'Hospitals Overloaded',
-        x: 10,
-        y: 20,
-      }
-    })
-  }
   const shelterInPlace = {
     name: formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
     type: 'area',
     data: data[1].data,
   };
-  if (data[1].dateOverwhelmed !== null) {
-    extraLines.push({
-      value: data[1].dateOverwhelmed,
-      className: 'highcharts-series-2-line',
-      label: {
-        rotation: 0,
-        text: 'Hospitals Overloaded <br/> (shelter in place)',
-        x: 10,
-        y: 20,
-      }
-    })
-  }
   const wuhanStyle = {
     name: formatIntervention(INTERVENTIONS.LOCKDOWN),
     type: 'area',
     data: data[3].data,
   };
-  if (data[3].dateOverwhelmed !== null) {
-    extraLines.push({
-      value: data[3].dateOverwhelmed,
-      className: 'highcharts-series-3-line',
+  const nowLine = {
+    value: Date.now(),
+    className: 'today',
+    label: {
+      rotation: 0,
+      text: 'Today',
+      x: -40,
+      y: 20,
+    },
+  };
+  const seriesList = [
+    noAction,
+    socialDistancing,
+    shelterInPlace,
+    wuhanStyle,
+  ]
+  const overwhelmedDates = {
+    [INTERVENTIONS.NO_ACTION]: data[0].dateOverwhelmed,
+    [formatIntervention(INTERVENTIONS.SOCIAL_DISTANCING)]: data[2].dateOverwhelmed,
+    [formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE)]: data[1].dateOverwhelmed,
+    [formatIntervention(INTERVENTIONS.LOCKDOWN)]: data[3].dateOverwhelmed
+  };
+  const chartRef = React.createRef();
+
+  const seriesLines = seriesList.map((series, i) => {
+    const date = overwhelmedDates[series.name];
+    if (date !== null) {
+      return {
+        value: overwhelmedDates[series.name],
+        id: series.name,
+        className: `highcharts-series-${i}-line`,
+        label: {
+          text: 'Hospitals Overloaded',
+          x: 10,
+          y: 20,
+        }
+      }
+    } else {
+      return null;
+    }
+  }).filter(v => v !== null);
+
+  const onHide = (e) => {
+    const targetName = e.target.userOptions.name;
+    const chart = chartRef.current.chart;
+    const xAxis = chart.axes[0];
+    xAxis.removePlotLine(targetName);
+  };
+  const onShow = (e) => {
+    const targetName = e.target.userOptions.name;
+    const chart = chartRef.current.chart;
+    const xAxis = chart.axes[0];
+    const i = seriesList.findIndex(s => s.name === targetName);
+    xAxis.addPlotLine({
+      value: overwhelmedDates[targetName],
+      id: targetName,
+      className: `highcharts-series-${i}-line`,
       label: {
-        rotation: 0,
-        text: 'Hospitals Overloaded <br/> (lockdown)',
+        text: 'Hospitals Overloaded',
         x: 10,
         y: 20,
       }
-    })
-  }
+    });
+  };
+
+  const plotLines = [
+    ...seriesLines,
+    nowLine
+  ];
   const availableBeds = {
     name: 'Available Hospital Beds',
     color: 'black',
@@ -140,25 +163,17 @@ const Chart = ({ state, county, subtitle, interventions }) => {
           return dateFormat('%b %e', this.value);
         },
       },
-      plotLines: [
-        ...extraLines,
-        {
-          value: Date.now(),
-          className: 'today',
-          label: {
-            rotation: 0,
-            text: 'Today',
-            x: -40,
-            y: 20,
-          },
-        },
-      ],
+      plotLines,
     },
     plotOptions: {
       series: {
         marker: {
           enabled: false,
         },
+        events: {
+          hide: onHide,
+          show: onShow,
+        }
       },
       area: {
         marker: {
@@ -167,17 +182,14 @@ const Chart = ({ state, county, subtitle, interventions }) => {
       },
     },
     series: [
-      noAction,
-      socialDistancing,
-      shelterInPlace,
-      wuhanStyle,
+      ...seriesList,
       availableBeds,
     ],
   });
 
   return (
     <Wrapper>
-      <HighchartsReact highcharts={Highcharts} options={options} />
+      <HighchartsReact highcharts={Highcharts} options={options} ref={chartRef} />
       <span>Last Updated: March 23rd</span>
     </Wrapper>
   );
