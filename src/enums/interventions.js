@@ -1,3 +1,5 @@
+import InterventionJSON from '../assets/data/interventions.json'
+
 const NO_ACTION = 'Limited Action';
 const SOCIAL_DISTANCING = 'Social Distancing';
 const SHELTER_IN_PLACE = 'Shelter in Place';
@@ -33,56 +35,18 @@ export const INTERVENTION_COLOR_MAP = {
   [LOCKDOWN]: 'rgb(223, 31, 210)', // purple
 };
 
-// TODO: This should be temporary to hardcode these
-export const STATE_TO_INTERVENTION = {
-  AK: SOCIAL_DISTANCING,
-  AL: NO_ACTION,
-  AZ: SOCIAL_DISTANCING,
-  AR: SOCIAL_DISTANCING,
-  CA: SHELTER_IN_PLACE,
-  CO: SOCIAL_DISTANCING,
-  CT: SHELTER_IN_PLACE,
-  DE: SHELTER_IN_PLACE,
-  FL: SOCIAL_DISTANCING,
-  GA: SOCIAL_DISTANCING,
-  HI: SHELTER_IN_PLACE,
-  ID: NO_ACTION,
-  IL: SHELTER_IN_PLACE,
-  IN: SHELTER_IN_PLACE,
-  IA: SOCIAL_DISTANCING,
-  KS: NO_ACTION,
-  KY: SOCIAL_DISTANCING,
-  LA: SHELTER_IN_PLACE,
-  ME: SOCIAL_DISTANCING,
-  MD: SOCIAL_DISTANCING,
-  MA: SHELTER_IN_PLACE,
-  MI: SHELTER_IN_PLACE,
-  MN: SOCIAL_DISTANCING,
-  MS: NO_ACTION,
-  MO: NO_ACTION,
-  MT: SOCIAL_DISTANCING,
-  NE: NO_ACTION,
-  NV: SOCIAL_DISTANCING,
-  NH: SOCIAL_DISTANCING,
-  NJ: SHELTER_IN_PLACE,
-  NM: SHELTER_IN_PLACE,
-  NY: SHELTER_IN_PLACE,
-  NC: SOCIAL_DISTANCING,
-  ND: SOCIAL_DISTANCING,
-  OH: SHELTER_IN_PLACE,
-  OK: NO_ACTION,
-  OR: SHELTER_IN_PLACE,
-  PA: SHELTER_IN_PLACE,
-  RI: SOCIAL_DISTANCING,
-  SC: SOCIAL_DISTANCING,
-  SD: NO_ACTION,
-  TN: NO_ACTION,
-  TX: SOCIAL_DISTANCING,
-  UT: SOCIAL_DISTANCING,
-  VT: SOCIAL_DISTANCING,
-  VA: SOCIAL_DISTANCING,
-  WA: SHELTER_IN_PLACE,
-  WV: SHELTER_IN_PLACE,
-  WI: SHELTER_IN_PLACE,
-  WY: SOCIAL_DISTANCING,
-};
+export const STATE_TO_INTERVENTION = stateInterventions();
+
+function stateInterventions() {
+  const INTERVENTION_JSON_MAPPING = {
+    'limited_action': NO_ACTION,
+    'social_distancing': SOCIAL_DISTANCING,
+    'shelter_in_place': SHELTER_IN_PLACE
+  };
+
+  const interventions = { };
+  for(const state in InterventionJSON) {
+    interventions[state] = INTERVENTION_JSON_MAPPING[InterventionJSON[state]];
+  }
+  return interventions;
+}
