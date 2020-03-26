@@ -165,7 +165,7 @@ const About = ({ children }) => {
             Google Play
           </a>{' '} or {' '}
           <a
-            href="https://apps.apple.com/us/app/private-kit-prototype/id150190373"
+            href="https://apps.apple.com/us/app/private-kit/id1501903733"
             target="_blank"
             rel="noopener noreferrer"
           >
