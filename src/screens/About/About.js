@@ -137,12 +137,12 @@ const About = ({ children }) => {
         </Typography>
         
         <Typography variant="body1" component="p">
-          We’re proud to partner with Private Kit: Safe Paths, a collaboration with MIT, 
+          CoVidActNow endorses Private Kit: Safe Paths, a project developed by MIT, 
           the Mayo Clinic, the World Health Organization, and others.
         </Typography>
 
         <Typography variant="body1" component="p">
-          Private Kit is a mobile app for contact tracing that protects indivdual privacy.
+          Private Kit is a mobile app for contact tracing that protects indivdual privacy. Contact tracing is a technology that notifies individuals if they have come in contact with someone who then later tests positive for CoVid-19.
           Learn more at{' '}
           <a
             href="https://safepaths.mit.edu"
