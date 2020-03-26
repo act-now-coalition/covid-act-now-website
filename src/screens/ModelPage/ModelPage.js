@@ -8,8 +8,16 @@ import Header from 'components/Header/Header';
 import Chart from 'components/Chart/Chart';
 import Newsletter from 'components/Newsletter/Newsletter';
 import { Wrapper, Content } from './ModelPage.style';
-import { STATES, STATE_TO_INTERVENTION } from 'enums';
+import { STATES, STATE_TO_INTERVENTION, INTERVENTION_COLOR_MAP, INTERVENTIONS } from 'enums';
 import { useModelDatas, Model } from 'utils/model';
+
+const limitedActionColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.NO_ACTION];
+const socialDistancingColor =
+  INTERVENTION_COLOR_MAP[INTERVENTIONS.SOCIAL_DISTANCING];
+const shelterInPlaceColor =
+  INTERVENTION_COLOR_MAP[INTERVENTIONS.SHELTER_IN_PLACE];
+const lockdownColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.LOCKDOWN];
+
 
 function ModelPage() {
   const { id: location } = useParams();
@@ -81,7 +89,7 @@ function ModelPage() {
                 interventions.distancing.now,
                 interventions.contain.now,
               ]}
-              colors={['red', 'orange', 'blue', 'green']}
+              colors={[limitedActionColor, socialDistancingColor, shelterInPlaceColor, lockdownColor]}
               asterisk={['', '*', '*', '**']}
               timeHorizon={100}
             />
@@ -135,26 +143,26 @@ const buildInterventionMap = modelDatas => {
 
   // Initialize models
   interventions.baseline = new Model(modelDatas.baseline, {
-    intervention: 'No Action',
+    intervention: INTERVENTIONS.NO_ACTION,
     r0: 2.4,
   });
   interventions.distancing = {
     now: new Model(modelDatas.strictDistancingNow, {
-      intervention: 'Shelter-in-place',
+      intervention: INTERVENTIONS.SHELTER_IN_PLACE,
       durationDays: 90,
       r0: 1.2,
     }),
   };
   interventions.distancingPoorEnforcement = {
     now: new Model(modelDatas.weakDistancingNow, {
-      intervention: 'Social distancing',
+      intervention: INTERVENTIONS.SOCIAL_DISTANCING,
       durationDays: 90,
       r0: 1.7,
     }),
   };
   interventions.contain = {
     now: new Model(modelDatas.containNow, {
-      intervention: 'Wuhan-style Lockdown',
+      intervention: INTERVENTIONS.LOCKDOWN,
       durationDays: 90,
       r0: 0.3,
     }),
