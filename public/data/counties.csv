@@ -1,4 +1,4 @@
-,Province/State,Country/Region,Last Update,Latitude,Longitude,Confirmed,Recovered,Deaths,Active,County,State/County FIPS Code,Combined Key,Incident Rate,People Tested,Shape
+OBJECTID,Province/State,Country/Region,Last Update,Latitude,Longitude,Confirmed,Recovered,Deaths,Active,County,State/County FIPS Code,Combined Key,Incident Rate,People Tested,Shape
 0,South Carolina,US,3/25/2020 23:33,34.22333378,-82.46170658,3,0,0,0,Abbeville,45001.0,"Abbeville, South Carolina, US",<Null>,<Null>,Point
 1,Louisiana,US,3/25/2020 23:33,30.2950649,-92.41419698,2,0,0,0,Acadia,22001.0,"Acadia, Louisiana, US",<Null>,<Null>,Point
 2,Virginia,US,3/25/2020 23:33,37.76707161,-75.63234615,2,0,0,0,Accomack,51001.0,"Accomack, Virginia, US",<Null>,<Null>,Point
