@@ -38,7 +38,7 @@ const Header = ({ children, locationName, intervention }) => {
           component="p"
           variant="subtitle2"
         >
-          This model is intended to help make fast decisions, not predict the future.
+            <i>This model is intended to help make fast decisions, not predict the future.</i>
         </HeaderSubCopy>
       </div>
     </BlackBar>
