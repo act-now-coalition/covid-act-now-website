@@ -7,7 +7,7 @@ const Newsletter = () => {
       <iframe
         title="newsletter"
         className="mj-w-res-iframe"
-        frameborder="0"
+        frameBorder="0"
         scrolling="no"
         marginHeight="0"
         marginWidth="0"
