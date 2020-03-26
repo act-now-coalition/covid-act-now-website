@@ -3,252 +3,452 @@
     {
       "state_code": "AK",
       "state": "Alaska",
+<<<<<<< HEAD
       "population": 731545
+=======
+      "population": 711315
+>>>>>>> master
     },
     {
       "state_code": "AL",
       "state": "Alabama",
+<<<<<<< HEAD
       "population": 4903185	
+=======
+      "population": 3202001
+>>>>>>> master
     },
     {
       "state_code": "AR",
       "state": "Arkansas",
+<<<<<<< HEAD
       "population": 3017825
+=======
+      "population": 2055206
+>>>>>>> master
     },
     {
       "state_code": "AZ",
       "state": "Arizona",
+<<<<<<< HEAD
       "population": 7278717
+=======
+      "population": 6623299
+>>>>>>> master
     },
     {
       "state_code": "CA",
       "state": "California",
+<<<<<<< HEAD
       "population": 39512223
+=======
+      "population": 37446295
+>>>>>>> master
     },
     {
       "state_code": "CO",
       "state": "Colorado",
+<<<<<<< HEAD
       "population": 5758736
+=======
+      "population": 4877866
+>>>>>>> master
     },
     {
       "state_code": "CT",
       "state": "Connecticut",
+<<<<<<< HEAD
       "population": 3565287
+=======
+      "population": 5763148
+>>>>>>> master
     },
     {
       "state_code": "DE",
       "state": "Delaware",
+<<<<<<< HEAD
       "population": 973764
+=======
+      "population": 412899
+>>>>>>> master
     },
     {
       "state_code": "FL",
       "state": "Florida",
+<<<<<<< HEAD
       "population": 21477737
+=======
+      "population": 15995801
+>>>>>>> master
     },
     {
       "state_code": "GA",
       "state": "Georgia",
+<<<<<<< HEAD
       "population": 10617423
+=======
+      "population": 5136300
+>>>>>>> master
     },
     {
       "state_code": "HI",
       "state": "Hawaii",
+<<<<<<< HEAD
       "population": 1415872
+=======
+      "population": 1368786
+>>>>>>> master
     },
     {
       "state_code": "IA",
       "state": "Iowa",
+<<<<<<< HEAD
       "population": 3155070
+=======
+      "population": 2540193
+>>>>>>> master
     },
     {
       "state_code": "ID",
       "state": "Idaho",
+<<<<<<< HEAD
       "population": 1787147
+=======
+      "population": 1252508
+>>>>>>> master
     },
     {
       "state_code": "IL",
       "state": "Illinois",
+<<<<<<< HEAD
       "population": 12671821
+=======
+      "population": 20836246
+>>>>>>> master
     },
     {
       "state_code": "IN",
       "state": "Indiana",
+<<<<<<< HEAD
       "population": 6732219
+=======
+      "population": 4632158
+>>>>>>> master
     },
     {
       "state_code": "KS",
       "state": "Kansas",
+<<<<<<< HEAD
       "population": 2913314
+=======
+      "population": 3212203
+>>>>>>> master
     },
     {
       "state_code": "KY",
       "state": "Kentucky",
+<<<<<<< HEAD
       "population": 4467673
+=======
+      "population": 2766210
+>>>>>>> master
     },
     {
       "state_code": "LA",
       "state": "Louisiana",
+<<<<<<< HEAD
       "population": 4648794	
+=======
+      "population": 3044278
+>>>>>>> master
     },
     {
       "state_code": "MA",
       "state": "Massachusetts",
+<<<<<<< HEAD
       "population": 6949503
+=======
+      "population": 8050440
+>>>>>>> master
     },
     {
       "state_code": "MD",
       "state": "Maryland",
+<<<<<<< HEAD
       "population": 6045680
+=======
+      "population": 4944072
+>>>>>>> master
     },
     {
       "state_code": "ME",
       "state": "Maine",
+<<<<<<< HEAD
       "population": 1344212
+=======
+      "population": 1572773
+>>>>>>> master
     },
     {
       "state_code": "MI",
       "state": "Michigan",
+<<<<<<< HEAD
       "population": 9986857
+=======
+      "population": 10705182
+>>>>>>> master
     },
     {
       "state_code": "MN",
       "state": "Minnesota",
+<<<<<<< HEAD
       "population": 5639632
+=======
+      "population": 5594030
+>>>>>>> master
     },
     {
       "state_code": "MO",
       "state": "Missouri",
+<<<<<<< HEAD
       "population": 6137428
+=======
+      "population": 4584787
+>>>>>>> master
     },
     {
       "state_code": "MS",
       "state": "Mississippi",
+<<<<<<< HEAD
       "population": 2976149
+=======
+      "population": 1637602
+>>>>>>> master
     },
     {
       "state_code": "MT",
       "state": "Montana",
+<<<<<<< HEAD
       "population": 1068778
+=======
+      "population": 732247
+>>>>>>> master
     },
     {
       "state_code": "NC",
       "state": "North Carolina",
+<<<<<<< HEAD
       "population": 10488084
+=======
+      "population": 6249448
+>>>>>>> master
     },
     {
       "state_code": "ND",
       "state": "North Dakota",
+<<<<<<< HEAD
       "population": 762062
+=======
+      "population": 724872
+>>>>>>> master
     },
     {
       "state_code": "NE",
       "state": "Nebraska",
+<<<<<<< HEAD
       "population": 1934408
+=======
+      "population": 1636494
+>>>>>>> master
     },
     {
       "state_code": "NH",
       "state": "New Hampshire",
+<<<<<<< HEAD
       "population": 1359711
+=======
+      "population": 1571070
+>>>>>>> master
     },
     {
       "state_code": "NJ",
       "state": "New Jersey",
+<<<<<<< HEAD
       "population": 8882190
+=======
+      "population": 10027143
+>>>>>>> master
     },
     {
       "state_code": "NM",
       "state": "New Mexico",
+<<<<<<< HEAD
       "population": 2096829
+=======
+      "population": 1743136
+>>>>>>> master
     },
     {
       "state_code": "NV",
       "state": "Nevada",
+<<<<<<< HEAD
       "population": 3080156
+=======
+      "population": 2827139
+>>>>>>> master
     },
     {
       "state_code": "NY",
       "state": "New York",
+<<<<<<< HEAD
       "population": 19453561
+=======
+      "population": 33399624
+>>>>>>> master
     },
     {
       "state_code": "OH",
       "state": "Ohio",
+<<<<<<< HEAD
       "population": 11689100
+=======
+      "population": 13997066
+>>>>>>> master
     },
     {
       "state_code": "OK",
       "state": "Oklahoma",
+<<<<<<< HEAD
       "population": 3956971
+=======
+      "population": 3094899
+>>>>>>> master
     },
     {
       "state_code": "OR",
       "state": "Oregon",
+<<<<<<< HEAD
       "population": 4217737
+=======
+      "population": 3326331
+>>>>>>> master
     },
     {
       "state_code": "PA",
       "state": "Pennsylvania",
+<<<<<<< HEAD
       "population": 12801989
+=======
+      "population": 14284767
+>>>>>>> master
     },
     {
       "state_code": "RI",
       "state": "Rhode Island",
+<<<<<<< HEAD
       "population": 1059361
+=======
+      "population": 1162739
+>>>>>>> master
     },
     {
       "state_code": "SC",
       "state": "South Carolina",
+<<<<<<< HEAD
       "population": 5148714
+=======
+      "population": 2370807
+>>>>>>> master
     },
     {
       "state_code": "SD",
       "state": "South Dakota",
+<<<<<<< HEAD
       "population": 884659
+=======
+      "population": 810241
+>>>>>>> master
     },
     {
       "state_code": "TN",
       "state": "Tennessee",
+<<<<<<< HEAD
       "population": 6833174
+=======
+      "population": 4261420
+>>>>>>> master
     },
     {
       "state_code": "TX",
       "state": "Texas",
+<<<<<<< HEAD
       "population": 28995881
+=======
+      "population": 22349064
+>>>>>>> master
     },
     {
       "state_code": "UT",
       "state": "Utah",
+<<<<<<< HEAD
       "population": 3205958
+=======
+      "population": 3024925
+>>>>>>> master
     },
     {
       "state_code": "VA",
       "state": "Virginia",
+<<<<<<< HEAD
       "population": 8535519
+=======
+      "population": 5759240
+>>>>>>> master
     },
     {
       "state_code": "VT",
       "state": "Vermont",
+<<<<<<< HEAD
       "population": 623989
+=======
+      "population": 752749
+>>>>>>> master
     },
     {
       "state_code": "WA",
       "state": "Washington",
+<<<<<<< HEAD
       "population": 7614893
+=======
+      "population": 6194459
+>>>>>>> master
     },
     {
       "state_code": "WI",
       "state": "Wisconsin",
+<<<<<<< HEAD
       "population": 5822434
+=======
+      "population": 5922865
+>>>>>>> master
     },
     {
       "state_code": "WV",
       "state": "West Virginia",
+<<<<<<< HEAD
       "population": 1792065
+=======
+      "population": 775090
+>>>>>>> master
     },
     {
       "state_code": "WY",
       "state": "Wyoming",
+<<<<<<< HEAD
       "population": 578759
+=======
+      "population": 449040
+>>>>>>> master
     }
   ],
   "state_county_map_dataset": {
