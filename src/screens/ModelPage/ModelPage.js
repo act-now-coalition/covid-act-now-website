@@ -3,9 +3,8 @@ import { useParams } from 'react-router-dom';
 // import CountyMap from 'components/CountyMap/CountyMap';
 import Outcomes from './Outcomes/Outcomes';
 import ShareModelBlock from './ShareModelBlock/ShareModelBlock';
-import CallToAction from './CallToAction/CallToAction';
-import Header from 'components/Header/Header';
-import ModelChart from 'components/Charts/ModelChart';
+import StateHeader from 'components/StateHeader/StateHeader';
+import Chart from 'components/Chart/Chart';
 import Newsletter from 'components/Newsletter/Newsletter';
 import { Wrapper, Content } from './ModelPage.style';
 import {
@@ -13,7 +12,7 @@ import {
   STATE_TO_INTERVENTION,
   INTERVENTION_COLOR_MAP,
   INTERVENTIONS,
-} from "enums";
+} from 'enums';
 import { useModelDatas, Model } from 'utils/model';
 
 const limitedActionColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.LIMITED_ACTION];
@@ -44,46 +43,53 @@ function ModelPage() {
 
   // No model data
   if ((!countyView && !modelDatas) || (countyView && county && !modelDatas)) {
-    return <Header locationName={locationName} intervention={intervention} />;
+    return <div></div>;
   }
 
   return (
     <Wrapper>
-      <Header locationName={locationName} intervention={intervention} />
-      {false && (
-        <Panel>
-          <input
-            type="checkbox"
-            checked={countyView}
-            value={countyView}
-            onClick={() => setCountyView(!countyView)}
-          />{' '}
-          Show County View
-          {countyView && (
-            <input
-              type="text"
-              value={county}
-              onChange={e => setCounty({ county: e.target.value })}
-            />
-          )}
-        </Panel>
-      )}
       {showModel && interventions && (
-        <Panel>
-          <ModelChart
-            state={locationName}
-            county={county}
-            subtitle="Hospitalizations over time"
-            interventions={interventions}
-            currentIntervention={intervention}
-          />
+        <StateHeader
+          location={location}
+          locationName={locationName}
+          intervention={intervention}
+          interventions={interventions}
+        />
+      )
+      }
+        {false && (
+          <Panel>
+            <input
+              type="checkbox"
+              checked={countyView}
+              value={countyView}
+              onClick={() => setCountyView(!countyView)}
+            />{' '}
+            Show County View
+            {countyView && (
+              <input
+                type="text"
+                value={county}
+                onChange={e => setCounty({ county: e.target.value })}
+              />
+            )}
+          </Panel>
+        )}
+        {showModel && interventions && (
+          <Panel>
+            <ChartHeader>
+              <h2>Projected hospitalizations</h2>
+              <span>Last updated March 23rd</span>
+            </ChartHeader>
+            <Chart
+              state={locationName}
+              county={county}
+              subtitle="Hospitalizations over time"
+              interventions={interventions}
+              currentIntervention={intervention}
+            />
 
           <Content>
-            <CallToAction
-              currentIntervention={intervention}
-              interventions={interventions}
-            />
-
             <ShareModelBlock location={location} />
 
             <Outcomes

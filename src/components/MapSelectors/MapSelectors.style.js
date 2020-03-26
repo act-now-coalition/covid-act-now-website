@@ -18,6 +18,7 @@ export const StyledNoResultsMenuOption = styled.div`
 export const StyledResultsMenuOption = styled.div`
   display: flex;
   text-align: left;
+  align-items: center;
   opacity: ${props => props.hasData ? '1' : '0.4'};
 
   strong {
@@ -34,18 +35,11 @@ export const StyledDot = styled.div`
   top: 5px;
 `;
 
+export const StyledResultsMenuSubText = styled.div`
+  color: rgba(0, 0, 0, 0.7);
+`;
+
 export const StyledState = styled.div`
   position: relative;
   top: 3px;
-  svg {
-    width: 40px;
-    height: 40px;
-    svg {
-      opacity: 1;
-    },
-    path {
-      opacity: 1;
-      fill: ${props => props.color ? props.color: 'rgba(0, 0, 0, 0.12)'};
-    }
-  }
 `;
