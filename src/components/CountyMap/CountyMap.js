@@ -15,7 +15,7 @@ const CountyMap = () => {
   const [data, setData] = useState([]);
   const { id: location } = useParams();
   const state = STATE_CENTERS[location];
-  const counties = require(`./data/${location}.json`);
+  const counties = require(`./countyTopoJson/${location}.json`);
 
   useEffect(() => {
     csv('/countyConfigData/sampleData.csv').then(counties => {
