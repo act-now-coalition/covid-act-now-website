@@ -140,12 +140,6 @@ export const Wrapper = styled.div`
     color: rgba(255, 255, 255, 1);
     background: rgba(0, 0, 0, 0.7);
 
-    &:first-of-type {
-      /* background: rgba(255, 51, 72, 1); */
-      border-top-right-radius: 32px;
-      border-bottom-right-radius: 32px;
-    }
-
     &.custom-plot-label-${snakeCase(INTERVENTIONS.LIMITED_ACTION)} {
       background: ${noActionColor};
     }
