@@ -7,7 +7,7 @@ import CallToAction from './CallToAction/CallToAction';
 import Header from 'components/Header/Header';
 import Chart from 'components/Chart/Chart';
 import Newsletter from 'components/Newsletter/Newsletter';
-import { Wrapper, Content } from './ModelPage.style';
+import { Wrapper, Content, StyledLoader } from './ModelPage.style';
 import {
   STATES,
   STATE_TO_INTERVENTION,
@@ -27,8 +27,6 @@ function ModelPage() {
   const { id: location } = useParams();
   const [countyView, setCountyView] = useState(false);
   const [county, setCounty] = useState(null);
-  // const [modelDatas, setModelDatas] = useState(null);
-  // const [interventions, setInterventions] = useState(null);
   let modelDatas = null;
   let interventions = null;
   const modelDatasMap = useModelDatas(location, county);
@@ -43,7 +41,12 @@ function ModelPage() {
 
   // No model data
   if ((!countyView && !modelDatas) || (countyView && county && !modelDatas)) {
-    return <Header locationName={locationName} intervention={intervention} />;
+    return (
+      <Wrapper>
+        <Header locationName={locationName} intervention={intervention} />
+        <StyledLoader type="Oval" color="#4c4c4c" height={100} width={100} />
+      </Wrapper>
+    );
   }
 
   return (

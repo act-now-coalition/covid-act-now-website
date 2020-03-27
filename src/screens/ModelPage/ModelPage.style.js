@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Loader from 'react-loader-spinner';
 
 export const Wrapper = styled.div``;
 
@@ -21,4 +22,11 @@ export const ShareContainer = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+`;
+
+export const StyledLoader = styled(Loader)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
 `;
