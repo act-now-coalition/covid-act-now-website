@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 // import CountyMap from 'components/CountyMap/CountyMap';
 import Outcomes from './Outcomes/Outcomes';
+import CallToAction from './CallToAction/CallToAction';
 import ShareModelBlock from './ShareModelBlock/ShareModelBlock';
 import StateHeader from 'components/StateHeader/StateHeader';
 import ModelChart from 'components/Charts/ModelChart';
@@ -86,7 +87,10 @@ function ModelPage() {
           />
 
           <Content>
-            <ShareModelBlock location={location} />
+            <CallToAction
+              interventions={interventions}
+              currentIntervention={intervention}
+            />
 
             <Outcomes
               title="Predicted Outcomes after 3 Months"
@@ -134,6 +138,8 @@ function ModelPage() {
                 </a>
               </li>
             </ul>
+
+            <ShareModelBlock location={location} />
           </Content>
         </Panel>
       )}
