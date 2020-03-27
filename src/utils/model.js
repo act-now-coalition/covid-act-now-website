@@ -47,7 +47,10 @@ async function fetchData(setModelDatas, location, county = null) {
     ModelIds.weakDistancingNow,
     ModelIds.containNow,
   ].map(i => {
-    const fipsCode = county && county.fips ? county.fips : '12345';
+    let fipsCode = county && county.fips ? county.fips : '12345';
+    if (county && county.county === 'King County') {
+      fipsCode = '53033';
+    }
     const stateUrl = `/data/${location}.${i}.json`;
     const countyUrl = `/data/${fipsCode}.${i}.json`;
     return county ? countyUrl : stateUrl;

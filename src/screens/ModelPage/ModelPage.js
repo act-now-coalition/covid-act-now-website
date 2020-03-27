@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Redirect, useParams } from 'react-router-dom';
+import { Redirect, useParams, useHistory } from 'react-router-dom';
 // import CountyMap from 'components/CountyMap/CountyMap';
 import Outcomes from './Outcomes/Outcomes';
 import CallToAction from './CallToAction/CallToAction';
@@ -43,6 +43,7 @@ function ModelPage() {
   const [countyView, setCountyView] = useState(false);
   const [selectedCounty, setSelectedCounty] = useState(null);
   const [redirectTarget, setRedirectTarget] = useState();
+  const history = useHistory();
 
   let modelDatas = null;
   let interventions = null;
@@ -53,9 +54,6 @@ function ModelPage() {
   const countyName = selectedCounty ? selectedCounty.county : null;
 
   const intervention = STATE_TO_INTERVENTION[location];
-  const showModel =
-    !countyView ||
-    (countyView && selectedCounty && modelDatas && !modelDatas.error);
 
   const datasForView = countyView
     ? modelDatasMap.countyDatas
@@ -63,29 +61,29 @@ function ModelPage() {
 
   modelDatas = datasForView;
 
+  let showModel = !countyView || (countyView && selectedCounty && modelDatas);
+
+  if (modelDatas && modelDatas.error === true) {
+    showModel = false;
+  }
+
   interventions = null;
   if (modelDatas && !modelDatas.error) {
     interventions = buildInterventionMap(datasForView);
   }
 
   if (redirectTarget) {
+    const goToLocation = redirectTarget;
     setRedirectTarget(null);
-    return <Redirect push to={redirectTarget} />;
+    history.push(goToLocation);
   }
-
-  const HeaderWithProps = (
-    <Header
-      locationName={locationName}
-      countyName={countyName}
-      intervention={intervention}
-    />
-  );
 
   // No model data
   if (
     (!countyView && !modelDatas) ||
     (countyView && selectedCounty && !modelDatas)
   ) {
+<<<<<<< bc2259ef93a9bbd52d3022a50d8a49d1d46f5755
 <<<<<<< cd21ed7c0ade7583868e8840cce748dbfdc17405
     return <LoadingScreen></LoadingScreen>;
     // return (
@@ -97,6 +95,8 @@ function ModelPage() {
     // );
 =======
     console.log('here');
+=======
+>>>>>>> Change history for county
     return (
       <Header
         locationName={locationName}
