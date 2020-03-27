@@ -199,7 +199,6 @@ const About = ({ children }) => {
                 Python
               </Link>
             </li>
-            <li><a href="https://docs.google.com/document/d/1KXCAVMFw540dosk1PToIrHY1WOETwFIHaSZY6BuFLGA/edit">General Counsel</a></li>
             <li>Communications Leaders</li>
               <ul>
                  <li><a href="https://docs.google.com/document/d/1do_XQ0twIpjiNzmD2-TydO8h9CnorE1TiNEHe1suH0Q/edit">Growth Lead</a></li>
