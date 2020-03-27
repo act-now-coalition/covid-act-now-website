@@ -60,7 +60,6 @@ function ModelPage() {
     (!countyView && !modelDatas) ||
     (countyView && selectedCounty && !modelDatas)
   ) {
-<<<<<<< cc0437317aca2d343c13a4a271f366bea8985594
     return <LoadingScreen></LoadingScreen>;
     // return (
     //   <Header
@@ -69,20 +68,10 @@ function ModelPage() {
     //     intervention={intervention}
     //   />
     // );
-=======
-    return (
-      <Header
-        locationName={locationName}
-        countyName={countyName}
-        intervention={intervention}
-      />
-    );
->>>>>>> Add county name to header, get react select working
   }
 
   return (
     <Wrapper>
-<<<<<<< cc0437317aca2d343c13a4a271f366bea8985594
       {showModel && interventions && (
         <StateHeader
           location={location}
@@ -91,13 +80,6 @@ function ModelPage() {
           interventions={interventions}
         />
       )}
-=======
-      <Header
-        locationName={locationName}
-        countyName={countyName}
-        intervention={intervention}
-      />
->>>>>>> Add county name to header, get react select working
       <Content>
         <CountySelectorWrapper>
           <ModelViewToggle>
@@ -127,25 +109,15 @@ function ModelPage() {
           )}
         </CountySelectorWrapper>
         {showModel && interventions && (
-<<<<<<< cc0437317aca2d343c13a4a271f366bea8985594
           <Panel>
             <ModelChart
-=======
-          <>
-            <Chart
->>>>>>> Add county name to header, get react select working
               state={locationName}
               county={selectedCounty}
               subtitle="Hospitalizations over time"
               interventions={interventions}
               currentIntervention={intervention}
-<<<<<<< cc0437317aca2d343c13a4a271f366bea8985594
-            />
-
-=======
               dateOverwhelmed={interventions.baseline.dateOverwhelmed}
             />
->>>>>>> Add county name to header, get react select working
 
           <Content>
             <CallToAction
