@@ -9,15 +9,24 @@ import {
   BlackBar,
 } from './Header.style';
 
-const Header = ({ children, locationName, intervention }) => {
+const Header = ({
+  children,
+  locationName,
+  countyName = null,
+  intervention,
+}) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  let whoShouldAct = countyName
+    ? `${countyName}, ${locationName}`
+    : locationName;
 
   return (
     <BlackBar>
       <div>
         <HeaderTitle>
-          Why you must act now{locationName ? `: ${locationName}` : ''}
+          Why you must act now {locationName ? `: ${whoShouldAct}` : ''}
         </HeaderTitle>
         {isMobile && <HeaderRule />}
       </div>

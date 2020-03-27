@@ -44,6 +44,8 @@ function ModelPage() {
   console.log('modelDatasMap', modelDatasMap, selectedCounty);
 
   const locationName = STATES[location];
+  const countyName = selectedCounty ? selectedCounty.county : null;
+
   const intervention = STATE_TO_INTERVENTION[location];
   const showModel = !countyView || (countyView && selectedCounty);
 
@@ -58,12 +60,23 @@ function ModelPage() {
     (!countyView && !modelDatas) ||
     (countyView && selectedCounty && !modelDatas)
   ) {
+<<<<<<< 6dae958a8d93a2835d0f01a083ab98143f20cfe8
     return <LoadingScreen></LoadingScreen>;
     // return <Header locationName={locationName} intervention={intervention} />;
+=======
+    return (
+      <Header
+        locationName={locationName}
+        countyName={countyName}
+        intervention={intervention}
+      />
+    );
+>>>>>>> Add county name to header, get react select working
   }
 
   return (
     <Wrapper>
+<<<<<<< 6dae958a8d93a2835d0f01a083ab98143f20cfe8
       {showModel && interventions && (
         <StateHeader
           location={location}
@@ -115,6 +128,55 @@ function ModelPage() {
             interventions={interventions}
             currentIntervention={intervention}
           />
+=======
+{showModel && interventions && (
+  <StateHeader
+    location={location}
+    locationName={locationName}
+    intervention={intervention}
+    interventions={interventions}
+  />
+)}
+
+      <Content>
+        <CountySelectorWrapper>
+          <ModelViewToggle>
+            <ModelViewOption
+              selected={!countyView}
+              onClick={() => {
+                setCountyView(false);
+                setSelectedCounty(null);
+              }}
+            >
+              State View
+            </ModelViewOption>
+            <ModelViewOption
+              selected={countyView}
+              onClick={() => setCountyView(true)}
+            >
+              County View
+            </ModelViewOption>
+          </ModelViewToggle>
+          {countyView && (
+            <CountySelector
+              state={location}
+              selectedCounty={selectedCounty}
+              handleChange={option => setSelectedCounty(option)}
+              autoFocus
+            />
+          )}
+        </CountySelectorWrapper>
+        {showModel && interventions && (
+          <>
+            <Chart
+              state={locationName}
+              county={selectedCounty}
+              subtitle="Hospitalizations over time"
+              interventions={interventions}
+              currentIntervention={intervention}
+              dateOverwhelmed={interventions.baseline.dateOverwhelmed}
+            />
+>>>>>>> Add county name to header, get react select working
 
           <Content>
             <CallToAction
