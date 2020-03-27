@@ -13,7 +13,8 @@ import {
   STATE_TO_INTERVENTION,
   INTERVENTION_COLOR_MAP,
   INTERVENTIONS,
-} from 'enums';
+  SHELTER_IN_PLACE_WORST_CASE_COLOR,
+} from "enums";
 import { useModelDatas, Model } from 'utils/model';
 
 const limitedActionColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.LIMITED_ACTION];
@@ -22,6 +23,7 @@ const socialDistancingColor =
 const shelterInPlaceColor =
   INTERVENTION_COLOR_MAP[INTERVENTIONS.SHELTER_IN_PLACE];
 const lockdownColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.LOCKDOWN];
+const shelterInPlaceWorseCaseColor = SHELTER_IN_PLACE_WORST_CASE_COLOR;
 
 function ModelPage() {
   const { id: location } = useParams();
@@ -51,7 +53,7 @@ function ModelPage() {
       <Header locationName={locationName} intervention={intervention} />
       <Content>
         {false && (
-          <Panel>
+          <>
             <input
               type="checkbox"
               checked={countyView}
@@ -66,15 +68,16 @@ function ModelPage() {
                 onChange={e => setCounty({ county: e.target.value })}
               />
             )}
-          </Panel>
+          </>
         )}
         {showModel && interventions && (
-          <Panel>
+          <>
             <Chart
               state={locationName}
               county={county}
               subtitle="Hospitalizations over time"
               interventions={interventions}
+              currentIntervention={intervention}
               dateOverwhelmed={interventions.baseline.dateOverwhelmed}
             />
 
@@ -95,12 +98,15 @@ function ModelPage() {
               ]}
               colors={[
                 limitedActionColor,
-                socialDistancingColor,
+                intervention === INTERVENTIONS.SHELTER_IN_PLACE
+                  ? shelterInPlaceWorseCaseColor
+                  : socialDistancingColor,
                 shelterInPlaceColor,
                 lockdownColor,
               ]}
               asterisk={['', '*', '*', '**']}
               timeHorizon={100}
+              currentIntervention={intervention}
             />
 
             <ul style={{ textAlign: 'left', lineHeight: '2em' }}>
@@ -128,7 +134,7 @@ function ModelPage() {
                 </a>
               </li>
             </ul>
-          </Panel>
+          </>
         )}
         <div style={{ marginTop: '3rem' }}>
           <Newsletter />
@@ -178,10 +184,6 @@ const buildInterventionMap = modelDatas => {
   };
 
   return interventions;
-};
-
-const Panel = ({ children, title }) => {
-  return <div style={{}}>{children}</div>;
 };
 
 export default ModelPage;

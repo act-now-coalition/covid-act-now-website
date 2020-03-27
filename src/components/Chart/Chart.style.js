@@ -1,5 +1,9 @@
-import styled from 'styled-components';
-import { INTERVENTIONS, INTERVENTION_COLOR_MAP } from 'enums';
+import styled from "styled-components";
+import {
+  INTERVENTIONS,
+  INTERVENTION_COLOR_MAP,
+  SHELTER_IN_PLACE_WORST_CASE_COLOR,
+} from "enums";
 
 const noActionColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.LIMITED_ACTION];
 const socialDistancingColor =
@@ -7,6 +11,7 @@ const socialDistancingColor =
 const shelterInPlaceColor =
   INTERVENTION_COLOR_MAP[INTERVENTIONS.SHELTER_IN_PLACE];
 const lockdownColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.LOCKDOWN];
+const shelterInPlaceWorstCaseColor = SHELTER_IN_PLACE_WORST_CASE_COLOR;
 
 export const Wrapper = styled.div`
   .highcharts-tooltip-box {
@@ -27,8 +32,14 @@ export const Wrapper = styled.div`
   }
   /* Social distancing */
   .highcharts-series-1 {
-    fill: ${socialDistancingColor};
-    stroke: ${socialDistancingColor};
+    fill: ${props =>
+      props.inShelterInPlace
+        ? shelterInPlaceWorstCaseColor
+        : socialDistancingColor};
+    stroke: ${props =>
+      props.inShelterInPlace
+        ? shelterInPlaceWorstCaseColor
+        : socialDistancingColor};
     fill-opacity: 0.8;
   }
   /* Shelter in place */

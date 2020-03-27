@@ -1,6 +1,13 @@
 import React from 'react';
-
-const Outcomes = ({ models, asterisk, timeHorizon, title, colors }) => {
+import { INTERVENTIONS } from 'enums';
+const Outcomes = ({
+  models,
+  asterisk,
+  timeHorizon,
+  title,
+  colors,
+  currentIntervention,
+}) => {
   return (
     <div style={{ overflow: 'scroll' }}>
       <h3>{title}</h3>
@@ -24,15 +31,26 @@ const Outcomes = ({ models, asterisk, timeHorizon, title, colors }) => {
           </tr>
         </thead>
         <tbody>
-          {models.map((model, idx) => (
-            <OutcomesRow
-              key={idx}
-              model={model}
-              label={`${model.label}${asterisk[idx]}`}
-              color={colors[idx]}
-              timeHorizon={timeHorizon}
-            />
-          ))}
+          {models.map((model, idx) => {
+            let rowLabel = model.label;
+            if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE) {
+              if (rowLabel === '3 Months of Social Distancing') {
+                rowLabel = '3 Months of Shelter in Place (worst case)';
+              } else if (rowLabel === '3 Months of Shelter in Place') {
+                rowLabel = '3 Months of Shelter in Place (best case)';
+              }
+            }
+
+            return (
+              <OutcomesRow
+                key={idx}
+                model={model}
+                label={`${rowLabel}${asterisk[idx]}`}
+                color={colors[idx]}
+                timeHorizon={timeHorizon}
+              />
+            );
+          })}
         </tbody>
       </table>
     </div>

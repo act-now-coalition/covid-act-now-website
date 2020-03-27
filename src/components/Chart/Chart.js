@@ -7,9 +7,17 @@ import { INTERVENTIONS } from 'enums';
 
 import { Wrapper } from './Chart.style';
 
-const formatIntervention = intervention => `3 months of ${intervention}`;
+const formatIntervention = (intervention, optCase) =>
+  `3 months of ${intervention}${optCase || ''}`;
 
-const Chart = ({ state, county, subtitle, interventions, dateOverwhelmed }) => {
+const Chart = ({
+  state,
+  county,
+  subtitle,
+  interventions,
+  dateOverwhelmed,
+  currentIntervention,
+}) => {
   const scenarioComparisonOverTime = duration => [
     interventions.baseline.getDataset('hospitalizations', duration, 'red'),
     interventions.distancing.now.getDataset(
@@ -38,12 +46,17 @@ const Chart = ({ state, county, subtitle, interventions, dateOverwhelmed }) => {
     data: data[0].data,
   };
   const socialDistancing = {
-    name: formatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
+    name: currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+        ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (worse case)')
+        : formatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
     type: 'area',
     data: data[2].data,
   };
   const shelterInPlace = {
-    name: formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
+    name:
+      currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+        ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (best case)')
+        : formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
     type: 'area',
     data: data[1].data,
   };
@@ -138,7 +151,9 @@ const Chart = ({ state, county, subtitle, interventions, dateOverwhelmed }) => {
   });
 
   return (
-    <Wrapper>
+    <Wrapper
+      inShelterInPlace={currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE}
+    >
       <HighchartsReact highcharts={Highcharts} options={options} />
       <span>Last Updated: March 23rd</span>
     </Wrapper>

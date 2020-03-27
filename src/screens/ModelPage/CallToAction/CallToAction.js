@@ -23,7 +23,9 @@ const CallToAction = ({ interventions, currentIntervention }) => {
   const model = interventionToModel[currentIntervention];
 
   let actionText, actionDateRange;
-  if (
+  if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE) {
+    actionText = `${currentIntervention} is projected to reduce hospital overload over the next 3 months`;
+  } else if (
     !model.dateOverwhelmed ||
     model.dateOverwhelmed - new Date() > ONE_HUNDRED_DAYS
   ) {
@@ -33,7 +35,7 @@ const CallToAction = ({ interventions, currentIntervention }) => {
     const earlyDate = new Date(model.dateOverwhelmed.getTime() - 14 * DAYS);
     const lateDate = new Date(model.dateOverwhelmed.getTime() - 9 * DAYS);
     actionDateRange = (
-      <div style={{ fontWeight: 'bold', marginTop: '1.2rem' }}>
+      <div style={{ fontWeight: "bold", marginTop: "1.2rem" }}>
         {formatDate(earlyDate)} to {formatDate(lateDate)}
       </div>
     );

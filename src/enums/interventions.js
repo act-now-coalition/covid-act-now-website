@@ -34,18 +34,19 @@ export const INTERVENTION_COLOR_MAP = {
   [SHELTER_IN_PLACE]: 'rgb(30, 224, 175)', // green
   [LOCKDOWN]: 'rgb(223, 31, 210)', // purple
 };
+export const SHELTER_IN_PLACE_WORST_CASE_COLOR = 'rgb(18, 146, 116)'; // dark green
 
 export const STATE_TO_INTERVENTION = stateInterventions();
 
 function stateInterventions() {
   const INTERVENTION_JSON_MAPPING = {
-    'limited_action': LIMITED_ACTION,
-    'social_distancing': SOCIAL_DISTANCING,
-    'shelter_in_place': SHELTER_IN_PLACE
+    limited_action: LIMITED_ACTION,
+    social_distancing: SOCIAL_DISTANCING,
+    shelter_in_place: SHELTER_IN_PLACE,
   };
 
-  const interventions = { };
-  for(const state in InterventionJSON) {
+  const interventions = {};
+  for (const state in InterventionJSON) {
     interventions[state] = INTERVENTION_JSON_MAPPING[InterventionJSON[state]];
   }
   return interventions;
