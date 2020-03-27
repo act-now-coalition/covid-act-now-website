@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory, useLocation, matchPath, Link } from 'react-router-dom';
+import { useHistory, useLocation, matchPath } from 'react-router-dom';
 import { ArrowBack } from '@material-ui/icons';
 import Typography from '@material-ui/core/Typography';
 import Logo from 'assets/images/logo';
@@ -28,9 +28,23 @@ const _AppBar = () => {
   const history = useHistory();
   const { pathname } = useLocation();
   const panels = ['/', '/about', '/model', '/endorsements', '/contact'];
-  const [panelIdx, setPanelIdx] = useState(
-    String(panels.indexOf(pathname)) || '0',
-  );
+
+  const getDefaultPanelId = () => {
+    const defaultPanelIndex = Number(panels.indexOf(pathname));
+
+    if(!defaultPanelIndex) {
+      return 0;
+    }
+
+    // We are on the state page, don't highlight a tab
+    if(defaultPanelIndex === -1) {
+      return false;
+    }
+
+    return defaultPanelIndex;
+  }
+
+  const [panelIdx, setPanelIdx] = useState(getDefaultPanelId());
   const [open, setOpen] = useState(false);
 
   const locationPath = useLocation();
@@ -44,7 +58,7 @@ const _AppBar = () => {
   const goTo = route => e => {
     e.preventDefault();
     setOpen(false);
-    setPanelIdx(String(panels.indexOf(route)));
+    setPanelIdx(panels.indexOf(route));
 
     history.push(route);
 
@@ -71,21 +85,20 @@ const _AppBar = () => {
           <MenuTitle>
             <Typography
               variant="button"
-              component={Link}
               onClick={goTo('/')}
-              style={{ textDecoration: 'none', color: 'black' }}
+              style={{ textDecoration: 'none', color: 'black', cursor: 'pointer' }}
             >
               COVID ACT NOW
             </Typography>
           </MenuTitle>
         </Left>
-        <StyledDesktopMenu>
+        <StyledDesktopMenu value={false}>
           <FacebookShareButton
             url={shareURL}
             quote={shareTitle}
             style={{ alignItems: 'center', display: 'flex', paddingRight: 28 }}
           >
-            <FacebookIcon size={32} round={true} />
+            <FacebookIcon size={32} round={true}/>
           </FacebookShareButton>
           <TwitterShareButton
             url={shareURL}
@@ -98,31 +111,31 @@ const _AppBar = () => {
           <StyledTabs value={panelIdx}>
             <StyledTab
               label="Map"
-              value="0"
+              value={0}
               disableRipple
               onClick={goTo('/')}
             />
             <StyledTab
               label="About"
-              value="1"
+              value={1}
               disableRipple
               onClick={goTo('/about')}
             />
             <StyledTab
               label="Model"
-              value="2"
+              value={2}
               disableRipple
               onClick={goTo('/model')}
             />
             <StyledTab
               label="Endorsements"
-              value="3"
+              value={3}
               disableRipple
               onClick={goTo('/endorsements')}
             />
             <StyledTab
               label="Contact"
-              value="4"
+              value={4}
               disableRipple
               onClick={goTo('/contact')}
             />

@@ -43,15 +43,16 @@ function Map() {
   return (
     <div className="Map">
       <Grid container spacing={2}>
-        <Grid item xs="12">
+        <Grid item xs={12}>
           <USAMap width="100%" height="auto" customize={statesCustomConfig} />
         </Grid>
-        <Grid item xs="12">
+        <Grid item xs={12}>
           <Legend>
             {INTERVENTION_EFFICACY_ORDER_ASC.filter(
               intervention => legendConfig[intervention],
             ).map(intervention => (
               <LegendItem
+                key={`legend-${intervention}`}
                 title={intervention}
                 color={INTERVENTION_COLOR_MAP[intervention]}
                 description={INTERVENTION_DESCRIPTIONS[intervention]}
