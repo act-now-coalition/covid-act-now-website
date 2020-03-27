@@ -73,20 +73,24 @@ const Chart = ({ state, county, subtitle, interventions }) => {
   };
   const chartRef = React.createRef();
 
+  const seriesLine = (name, index) => {
+    return {
+      value: overwhelmedDates[name],
+      id: name,
+      className: `highcharts-series-${index}-line`,
+      label: {
+        text: 'Hospitals Overloaded',
+        x: 10,
+        y: 20,
+      },
+    };
+  };
+
   const seriesLines = seriesList
     .map((series, i) => {
       const date = overwhelmedDates[series.name];
       if (date !== null) {
-        return {
-          value: overwhelmedDates[series.name],
-          id: series.name,
-          className: `highcharts-series-${i}-line`,
-          label: {
-            text: 'Hospitals Overloaded',
-            x: 10,
-            y: 20,
-          },
-        };
+        return seriesLine(series.name, i);
       } else {
         return null;
       }
@@ -104,16 +108,7 @@ const Chart = ({ state, county, subtitle, interventions }) => {
     const chart = chartRef.current.chart;
     const xAxis = chart.axes[0];
     const i = seriesList.findIndex(s => s.name === targetName);
-    xAxis.addPlotLine({
-      value: overwhelmedDates[targetName],
-      id: targetName,
-      className: `highcharts-series-${i}-line`,
-      label: {
-        text: 'Hospitals Overloaded',
-        x: 10,
-        y: 20,
-      },
-    });
+    xAxis.addPlotLine(seriesLine(targetName, i));
   };
 
   const plotLines = [...seriesLines, nowLine];

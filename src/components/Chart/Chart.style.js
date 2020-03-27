@@ -60,7 +60,7 @@ export const Wrapper = styled.div`
     stroke: ${shelterInPlaceColor};
   }
   .hightcharts-series-3-line {
-    stroke: ${lockdownColor}
+    stroke: ${lockdownColor};
   }
   .today {
     stroke: #d8d8d8;
