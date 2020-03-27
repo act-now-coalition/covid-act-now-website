@@ -1,9 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import {
   INTERVENTIONS,
   INTERVENTION_COLOR_MAP,
   SHELTER_IN_PLACE_WORST_CASE_COLOR,
-} from "enums";
+} from 'enums';
+import { snakeCase } from 'lodash';
 
 const noActionColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.LIMITED_ACTION];
 const socialDistancingColor =
