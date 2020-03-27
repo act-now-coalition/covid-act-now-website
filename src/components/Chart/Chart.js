@@ -62,45 +62,44 @@ const Chart = ({ state, county, subtitle, interventions }) => {
       y: 20,
     },
   };
-  const seriesList = [
-    noAction,
-    socialDistancing,
-    shelterInPlace,
-    wuhanStyle,
-  ]
+  const seriesList = [noAction, socialDistancing, shelterInPlace, wuhanStyle];
   const overwhelmedDates = {
-    [INTERVENTIONS.NO_ACTION]: data[0].dateOverwhelmed,
-    [formatIntervention(INTERVENTIONS.SOCIAL_DISTANCING)]: data[2].dateOverwhelmed,
-    [formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE)]: data[1].dateOverwhelmed,
-    [formatIntervention(INTERVENTIONS.LOCKDOWN)]: data[3].dateOverwhelmed
+    [INTERVENTIONS.LIMITED_ACTION]: data[0].dateOverwhelmed,
+    [formatIntervention(INTERVENTIONS.SOCIAL_DISTANCING)]: data[2]
+      .dateOverwhelmed,
+    [formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE)]: data[1]
+      .dateOverwhelmed,
+    [formatIntervention(INTERVENTIONS.LOCKDOWN)]: data[3].dateOverwhelmed,
   };
   const chartRef = React.createRef();
 
-  const seriesLines = seriesList.map((series, i) => {
-    const date = overwhelmedDates[series.name];
-    if (date !== null) {
-      return {
-        value: overwhelmedDates[series.name],
-        id: series.name,
-        className: `highcharts-series-${i}-line`,
-        label: {
-          text: 'Hospitals Overloaded',
-          x: 10,
-          y: 20,
-        }
+  const seriesLines = seriesList
+    .map((series, i) => {
+      const date = overwhelmedDates[series.name];
+      if (date !== null) {
+        return {
+          value: overwhelmedDates[series.name],
+          id: series.name,
+          className: `highcharts-series-${i}-line`,
+          label: {
+            text: 'Hospitals Overloaded',
+            x: 10,
+            y: 20,
+          },
+        };
+      } else {
+        return null;
       }
-    } else {
-      return null;
-    }
-  }).filter(v => v !== null);
+    })
+    .filter(v => v !== null);
 
-  const onHide = (e) => {
+  const onHide = e => {
     const targetName = e.target.userOptions.name;
     const chart = chartRef.current.chart;
     const xAxis = chart.axes[0];
     xAxis.removePlotLine(targetName);
   };
-  const onShow = (e) => {
+  const onShow = e => {
     const targetName = e.target.userOptions.name;
     const chart = chartRef.current.chart;
     const xAxis = chart.axes[0];
@@ -113,14 +112,11 @@ const Chart = ({ state, county, subtitle, interventions }) => {
         text: 'Hospitals Overloaded',
         x: 10,
         y: 20,
-      }
+      },
     });
   };
 
-  const plotLines = [
-    ...seriesLines,
-    nowLine
-  ];
+  const plotLines = [...seriesLines, nowLine];
   const availableBeds = {
     name: 'Available Hospital Beds',
     color: 'black',
@@ -173,7 +169,7 @@ const Chart = ({ state, county, subtitle, interventions }) => {
         events: {
           hide: onHide,
           show: onShow,
-        }
+        },
       },
       area: {
         marker: {
@@ -181,15 +177,16 @@ const Chart = ({ state, county, subtitle, interventions }) => {
         },
       },
     },
-    series: [
-      ...seriesList,
-      availableBeds,
-    ],
+    series: [...seriesList, availableBeds],
   });
 
   return (
     <Wrapper>
-      <HighchartsReact highcharts={Highcharts} options={options} ref={chartRef} />
+      <HighchartsReact
+        highcharts={Highcharts}
+        options={options}
+        ref={chartRef}
+      />
       <span>Last Updated: March 23rd</span>
     </Wrapper>
   );

@@ -219,7 +219,7 @@ export class Model {
       fill: false,
       borderColor: color,
       data: this.getColumn(columnName, duration + this.daysSinceDayZero),
-      dateOverwhelmed: this.dateOverwhelmed
+      dateOverwhelmed: this.dateOverwhelmed,
     };
   }
 }
