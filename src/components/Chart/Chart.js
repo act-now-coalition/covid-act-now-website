@@ -47,7 +47,7 @@ const Chart = ({
   };
   const socialDistancing = {
     name: currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
-        ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (worse case)')
+        ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (worst case)')
         : formatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
     type: 'area',
     data: data[2].data,
