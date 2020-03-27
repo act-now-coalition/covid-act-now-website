@@ -87,4 +87,13 @@ export default [
       'Professor (Teaching) Department of Microbiology and Immunology, Woods Institute for the Environment, Program in Human Biology, and Center for African Studies at Stanford University',
     ],
   },
+  {
+    size: 4,
+    name: 'Rebecca Katz, PhD, MPH',
+    avatarUrl: '/images/endorsers/rebecca_katz__resized-100-100.jpg',
+    profileUrl: 'https://ghss.georgetown.edu/people/katz/',
+    credentials: [
+      'Professor and Director of the Center for Global Health Science and Security at Georgetown University Medical Center',
+    ],
+  },
 ];
