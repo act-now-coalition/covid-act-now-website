@@ -35,7 +35,7 @@ const Footer = ({ children }) => {
               <span onClick={() => goTo('/about')}>ABOUT</span>
               <span onClick={() => goTo('/model')}>MODEL</span>
               <span onClick={() => goTo('/endorsements')}>ENDORSEMENTS</span>
-              <span onClick={() => goTo('/endorsements')}>CONTACT</span>
+              <span onClick={() => goTo('/contact')}>CONTACT</span>
             </div>
           </StyledFooterBodyLinks>
           <StyledFooterBodyCallout>
