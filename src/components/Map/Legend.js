@@ -21,7 +21,7 @@ export function Legend(props) {
 export function LegendItem(props) {
   const { title, color, description } = props;
   return (
-    <Grid item xs="12" md="4">
+    <Grid item xs={12} md={4}>
       <LegendItemContainer>
         <LegendItemHeader>
           <ColorBox color={color} />
