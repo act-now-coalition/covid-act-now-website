@@ -60,23 +60,18 @@ function ModelPage() {
     (!countyView && !modelDatas) ||
     (countyView && selectedCounty && !modelDatas)
   ) {
-<<<<<<< 6dae958a8d93a2835d0f01a083ab98143f20cfe8
     return <LoadingScreen></LoadingScreen>;
-    // return <Header locationName={locationName} intervention={intervention} />;
-=======
-    return (
-      <Header
-        locationName={locationName}
-        countyName={countyName}
-        intervention={intervention}
-      />
-    );
->>>>>>> Add county name to header, get react select working
+    // return (
+    //   <Header
+    //     locationName={locationName}
+    //     countyName={countyName}
+    //     intervention={intervention}
+    //   />
+    // );
   }
 
   return (
     <Wrapper>
-<<<<<<< 6dae958a8d93a2835d0f01a083ab98143f20cfe8
       {showModel && interventions && (
         <StateHeader
           location={location}
@@ -85,59 +80,6 @@ function ModelPage() {
           interventions={interventions}
         />
       )}
-      <Content>
-        {
-          <CountySelectorWrapper>
-            <ModelViewToggle>
-              <ModelViewOption
-                selected={!countyView}
-                onClick={() => {
-                  setCountyView(false);
-                  setSelectedCounty(null);
-                }}
-              >
-                State View
-              </ModelViewOption>
-              <ModelViewOption
-                selected={countyView}
-                onClick={() => setCountyView(true)}
-              >
-                County View
-              </ModelViewOption>
-            </ModelViewToggle>
-            {countyView && (
-              <CountySelector
-                state={location}
-                selectedCounty={selectedCounty}
-                setSelectedCounty={setSelectedCounty}
-                handleChange={selected =>
-                  setSelectedCounty({ county: selected.county })
-                }
-              />
-            )}
-          </CountySelectorWrapper>
-        }
-      </Content>
-      )}
-      {showModel && interventions && (
-        <Panel>
-          <ModelChart
-            state={locationName}
-            county={selectedCounty}
-            subtitle="Hospitalizations over time"
-            interventions={interventions}
-            currentIntervention={intervention}
-          />
-=======
-{showModel && interventions && (
-  <StateHeader
-    location={location}
-    locationName={locationName}
-    intervention={intervention}
-    interventions={interventions}
-  />
-)}
-
       <Content>
         <CountySelectorWrapper>
           <ModelViewToggle>
@@ -167,16 +109,15 @@ function ModelPage() {
           )}
         </CountySelectorWrapper>
         {showModel && interventions && (
-          <>
-            <Chart
+          <Panel>
+            <ModelChart
               state={locationName}
               county={selectedCounty}
               subtitle="Hospitalizations over time"
               interventions={interventions}
               currentIntervention={intervention}
-              dateOverwhelmed={interventions.baseline.dateOverwhelmed}
             />
->>>>>>> Add county name to header, get react select working
+
 
           <Content>
             <CallToAction
