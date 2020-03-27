@@ -3,7 +3,8 @@ import Highcharts, { dateFormat } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import 'highcharts/css/highcharts.css';
 import moment from 'moment';
-import { INTERVENTIONS } from 'enums';
+import { INTERVENTION_COLOR_MAP, INTERVENTIONS } from 'enums';
+import { snakeCase } from 'lodash';
 
 import { Wrapper } from './Chart.style';
 
@@ -15,9 +16,16 @@ const Chart = ({
   county,
   subtitle,
   interventions,
-  dateOverwhelmed,
   currentIntervention,
 }) => {
+  const interventionToModel = {
+    [INTERVENTIONS.LIMITED_ACTION]: interventions.baseline,
+    [INTERVENTIONS.SOCIAL_DISTANCING]:
+      interventions.distancingPoorEnforcement.now,
+    [INTERVENTIONS.SHELTER_IN_PLACE]: interventions.distancing.now,
+  };
+
+  const model = interventionToModel[currentIntervention];
   const scenarioComparisonOverTime = duration => [
     interventions.baseline.getDataset('hospitalizations', duration, 'red'),
     interventions.distancing.now.getDataset(
@@ -112,21 +120,30 @@ const Chart = ({
       },
       plotLines: [
         {
-          value: dateOverwhelmed,
+          value: model.dateOverwhelmed,
+          className: snakeCase(currentIntervention),
+          zIndex: 10,
           label: {
+            formatter: function () {
+              return `<div class="custom-plot-label custom-plot-label-${snakeCase(
+                currentIntervention,
+              )}">Hospitals Overloaded</div>`;
+            },
             rotation: 0,
-            text: 'Hospitals Overloaded <br/> (assuming no action)',
             useHTML: true,
             x: 1,
-            y: 13,
+            y: 12,
           },
         },
         {
           value: Date.now(),
           className: 'today',
+          zIndex: 10,
           label: {
+            formatter: function () {
+              return `<div class="custom-plot-label">Today</div>`;
+            },
             rotation: 0,
-            text: 'Today',
             useHTML: true,
             x: 1,
             y: 96,

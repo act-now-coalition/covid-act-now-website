@@ -112,13 +112,24 @@ export const Wrapper = styled.div`
     stroke: #ff3348;
     stroke-width: 3px;
   }
+  .${snakeCase(INTERVENTIONS.LIMITED_ACTION)} {
+    stroke: ${noActionColor};
+  }
+  .${snakeCase(INTERVENTIONS.SOCIAL_DISTANCING)} {
+    stroke: ${socialDistancingColor};
+  }
+  .${snakeCase(INTERVENTIONS.SHELTER_IN_PLACE)} {
+    stroke: ${shelterInPlaceColor};
+  }
+  .${snakeCase(INTERVENTIONS.LOCKDOWN)} {
+    stroke: ${lockdownColor};
+  }
   .today {
     stroke: rgba(0, 0, 0, 0.7);
     stroke-width: 3px;
   }
-  .highcharts-plot-line-label {
+  .custom-plot-label {
     padding: 8px 16px 8px 12px;
-    /* border: 2px solid rgba(255, 255, 255, 0.32); */
     border-top-right-radius: 16px;
     border-bottom-right-radius: 16px;
 
@@ -130,9 +141,25 @@ export const Wrapper = styled.div`
     background: rgba(0, 0, 0, 0.7);
 
     &:first-of-type {
-      background: rgba(255, 51, 72, 1);
+      /* background: rgba(255, 51, 72, 1); */
       border-top-right-radius: 32px;
       border-bottom-right-radius: 32px;
+    }
+
+    &.custom-plot-label-${snakeCase(INTERVENTIONS.LIMITED_ACTION)} {
+      background: ${noActionColor};
+    }
+
+    &.custom-plot-label-${snakeCase(INTERVENTIONS.SOCIAL_DISTANCING)} {
+      background: ${socialDistancingColor};
+    }
+
+    &.custom-plot-label-${snakeCase(INTERVENTIONS.SHELTER_IN_PLACE)} {
+      background: ${shelterInPlaceColor};
+    }
+
+    &.custom-plot-label-${snakeCase(INTERVENTIONS.LOCKDOWN)} {
+      background: ${lockdownColor};
     }
   }
 `;

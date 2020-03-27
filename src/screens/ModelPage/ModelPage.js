@@ -80,8 +80,7 @@ function ModelPage() {
             county={county}
             subtitle="Hospitalizations over time"
             interventions={interventions}
-			currentIntervention={intervention}
-            dateOverwhelmed={interventions.baseline.dateOverwhelmed}
+            currentIntervention={intervention}
           />
 
           <Content>
