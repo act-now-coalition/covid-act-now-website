@@ -13,7 +13,6 @@ import {
   STATE_TO_INTERVENTION,
   INTERVENTION_COLOR_MAP,
   INTERVENTIONS,
-  SHELTER_IN_PLACE_WORST_CASE_COLOR,
 } from "enums";
 import { useModelDatas, Model } from 'utils/model';
 
@@ -23,7 +22,7 @@ const socialDistancingColor =
 const shelterInPlaceColor =
   INTERVENTION_COLOR_MAP[INTERVENTIONS.SHELTER_IN_PLACE];
 const lockdownColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.LOCKDOWN];
-const shelterInPlaceWorseCaseColor = SHELTER_IN_PLACE_WORST_CASE_COLOR;
+const shelterInPlaceWorseCaseColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE];
 
 function ModelPage() {
   const { id: location } = useParams();

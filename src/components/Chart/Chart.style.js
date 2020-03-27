@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import {
   INTERVENTIONS,
   INTERVENTION_COLOR_MAP,
-  SHELTER_IN_PLACE_WORST_CASE_COLOR,
 } from 'enums';
 import { snakeCase } from 'lodash';
 
@@ -11,8 +10,9 @@ const socialDistancingColor =
   INTERVENTION_COLOR_MAP[INTERVENTIONS.SOCIAL_DISTANCING];
 const shelterInPlaceColor =
   INTERVENTION_COLOR_MAP[INTERVENTIONS.SHELTER_IN_PLACE];
+const shelterInPlaceWorstCaseColor =
+  INTERVENTION_COLOR_MAP[INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE];
 const lockdownColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.LOCKDOWN];
-const shelterInPlaceWorstCaseColor = SHELTER_IN_PLACE_WORST_CASE_COLOR;
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -122,6 +122,9 @@ export const Wrapper = styled.div`
   .${snakeCase(INTERVENTIONS.SHELTER_IN_PLACE)} {
     stroke: ${shelterInPlaceColor};
   }
+  .${snakeCase(INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE)} {
+    stroke: ${shelterInPlaceWorstCaseColor};
+  }
   .${snakeCase(INTERVENTIONS.LOCKDOWN)} {
     stroke: ${lockdownColor};
   }
@@ -147,6 +150,10 @@ export const Wrapper = styled.div`
 
     &.custom-plot-label-${snakeCase(INTERVENTIONS.SOCIAL_DISTANCING)} {
       background: ${socialDistancingColor};
+    }
+
+    &.custom-plot-label-${snakeCase(INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE)} {
+      background: ${shelterInPlaceWorstCaseColor};
     }
 
     &.custom-plot-label-${snakeCase(INTERVENTIONS.SHELTER_IN_PLACE)} {

@@ -3,7 +3,7 @@ import Highcharts, { dateFormat } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import 'highcharts/css/highcharts.css';
 import moment from 'moment';
-import { INTERVENTION_COLOR_MAP, INTERVENTIONS } from 'enums';
+import { INTERVENTIONS } from 'enums';
 import { snakeCase } from 'lodash';
 
 import { Wrapper } from './Chart.style';
@@ -25,7 +25,30 @@ const Chart = ({
     [INTERVENTIONS.SHELTER_IN_PLACE]: interventions.distancing.now,
   };
 
-  const model = interventionToModel[currentIntervention];
+  let model = interventionToModel[currentIntervention];
+
+  if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE) {
+    model = interventionToModel[INTERVENTIONS.SOCIAL_DISTANCING];
+  }
+
+  const hospitalsOverloadedPlotLineText = (currentIntervention) => {
+    let plotLineText;
+    switch (currentIntervention) {
+      case INTERVENTIONS.SHELTER_IN_PLACE:
+        plotLineText = '(assuming shelter in place - worst case)';
+        break;
+      case INTERVENTIONS.LIMITED_ACTION:
+        plotLineText = '(assuming limited action)';
+        break;
+      case INTERVENTIONS.SOCIAL_DISTANCING:
+        plotLineText = '(assuming social distancing)';
+        break;
+      default:
+    }
+
+    return plotLineText;
+  };
+
   const scenarioComparisonOverTime = duration => [
     interventions.baseline.getDataset('hospitalizations', duration, 'red'),
     interventions.distancing.now.getDataset(
@@ -121,13 +144,13 @@ const Chart = ({
       plotLines: [
         {
           value: model.dateOverwhelmed,
-          className: snakeCase(currentIntervention),
+          className: snakeCase(currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE ? INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE : currentIntervention),
           zIndex: 10,
           label: {
             formatter: function () {
               return `<div class="custom-plot-label custom-plot-label-${snakeCase(
-                currentIntervention,
-              )}">Hospitals Overloaded</div>`;
+                currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE ? INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE : currentIntervention ,
+              )}">Hospitals Overloaded<div>${hospitalsOverloadedPlotLineText(currentIntervention)}</div></div>`;
             },
             rotation: 0,
             useHTML: true,
@@ -159,7 +182,7 @@ const Chart = ({
         useHTML: true,
         x: 48,
         formatter: function () {
-          return this.value == 0
+          return this.value === 0
             ? ''
             : this.axis.defaultLabelFormatter.call(this);
         },

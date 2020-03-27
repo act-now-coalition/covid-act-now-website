@@ -4,12 +4,14 @@ const LIMITED_ACTION = 'Limited Action';
 const SOCIAL_DISTANCING = 'Social Distancing';
 const SHELTER_IN_PLACE = 'Shelter in Place';
 const LOCKDOWN = 'Lockdown';
+const SHELTER_IN_PLACE_WORST_CASE = 'Shelter in Place Worst Case';
 
 export const INTERVENTIONS = {
   LIMITED_ACTION,
   SOCIAL_DISTANCING,
   SHELTER_IN_PLACE,
   LOCKDOWN,
+  SHELTER_IN_PLACE_WORST_CASE,
 };
 
 export const INTERVENTION_EFFICACY_ORDER_ASC = [
@@ -32,9 +34,9 @@ export const INTERVENTION_COLOR_MAP = {
   [LIMITED_ACTION]: 'rgb(255, 51, 72)', // red
   [SOCIAL_DISTANCING]: 'rgb(255, 144, 0)', // orange
   [SHELTER_IN_PLACE]: 'rgb(30, 224, 175)', // green
+  [SHELTER_IN_PLACE_WORST_CASE]: 'rgb(18, 146, 116)', // green
   [LOCKDOWN]: 'rgb(223, 31, 210)', // purple
 };
-export const SHELTER_IN_PLACE_WORST_CASE_COLOR = 'rgb(18, 146, 116)'; // dark green
 
 export const STATE_TO_INTERVENTION = stateInterventions();
 
