@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 // import CountyMap from 'components/CountyMap/CountyMap';
 import Outcomes from './Outcomes/Outcomes';
 import CallToAction from './CallToAction/CallToAction';
@@ -14,7 +14,11 @@ import {
   ModelViewOption,
   ModelViewToggle,
   CountySelectorWrapper,
+<<<<<<< cd21ed7c0ade7583868e8840cce748dbfdc17405
   LoadingScreen,
+=======
+  NoData,
+>>>>>>> Add routing for county permalink, add empty state for no data counties
 } from './ModelPage.style';
 import {
   STATES,
@@ -35,9 +39,11 @@ const shelterInPlaceWorseCaseColor =
   INTERVENTION_COLOR_MAP[INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE];
 
 function ModelPage() {
-  const { id: location } = useParams();
+  const { id: location, countyId: countyId } = useParams();
   const [countyView, setCountyView] = useState(false);
   const [selectedCounty, setSelectedCounty] = useState(null);
+  const [redirectTarget, setRedirectTarget] = useState();
+
   let modelDatas = null;
   let interventions = null;
   const modelDatasMap = useModelDatas(location, selectedCounty);
@@ -47,19 +53,40 @@ function ModelPage() {
   const countyName = selectedCounty ? selectedCounty.county : null;
 
   const intervention = STATE_TO_INTERVENTION[location];
-  const showModel = !countyView || (countyView && selectedCounty);
+  const showModel =
+    !countyView ||
+    (countyView && selectedCounty && modelDatas && !modelDatas.error);
 
   const datasForView = countyView
     ? modelDatasMap.countyDatas
     : modelDatasMap.stateDatas;
+
   modelDatas = datasForView;
-  interventions = buildInterventionMap(datasForView);
+
+  interventions = null;
+  if (modelDatas && !modelDatas.error) {
+    interventions = buildInterventionMap(datasForView);
+  }
+
+  if (redirectTarget) {
+    setRedirectTarget(null);
+    return <Redirect push to={redirectTarget} />;
+  }
+
+  const HeaderWithProps = (
+    <Header
+      locationName={locationName}
+      countyName={countyName}
+      intervention={intervention}
+    />
+  );
 
   // No model data
   if (
     (!countyView && !modelDatas) ||
     (countyView && selectedCounty && !modelDatas)
   ) {
+<<<<<<< cd21ed7c0ade7583868e8840cce748dbfdc17405
     return <LoadingScreen></LoadingScreen>;
     // return (
     //   <Header
@@ -68,6 +95,16 @@ function ModelPage() {
     //     intervention={intervention}
     //   />
     // );
+=======
+    console.log('here');
+    return (
+      <Header
+        locationName={locationName}
+        countyName={countyName}
+        intervention={intervention}
+      />
+    );
+>>>>>>> Add routing for county permalink, add empty state for no data counties
   }
 
   return (
@@ -81,6 +118,7 @@ function ModelPage() {
         />
       )}
       <Content>
+<<<<<<< cd21ed7c0ade7583868e8840cce748dbfdc17405
         <CountySelectorWrapper>
           <ModelViewToggle>
             <ModelViewOption
@@ -118,6 +156,63 @@ function ModelPage() {
               currentIntervention={intervention}
               dateOverwhelmed={interventions.baseline.dateOverwhelmed}
             />
+=======
+        <Panel>
+          <CountySelectorWrapper>
+            <ModelViewToggle>
+              <ModelViewOption
+                selected={!countyView}
+                onClick={() => {
+                  setRedirectTarget(`/state/${location}`);
+                  setCountyView(false);
+                  setSelectedCounty(null);
+                }}
+              >
+                State View
+              </ModelViewOption>
+              <ModelViewOption
+                selected={countyView}
+                onClick={() => {
+                  setCountyView(true);
+                }}
+              >
+                County View
+              </ModelViewOption>
+            </ModelViewToggle>
+            {countyView && (
+              <CountySelector
+                state={location}
+                selectedCounty={selectedCounty}
+                handleChange={option => {
+                  setRedirectTarget(
+                    `/state/${location}/county/${option.county}`,
+                  );
+                  setSelectedCounty(option);
+                }}
+                autoFocus
+              />
+            )}
+          </CountySelectorWrapper>
+        </Panel>
+      </Content>
+      {countyName && modelDatas && modelDatas.error && (
+        <Content>
+          <NoData>
+            No data available for {countyName}, {locationName}
+          </NoData>
+        </Content>
+      )}
+      {showModel && interventions && (
+        <Panel>
+          <Chart
+            state={locationName}
+            county={selectedCounty}
+            subtitle="Hospitalizations over time"
+            interventions={interventions}
+            currentIntervention={intervention}
+            dateOverwhelmed={interventions.baseline.dateOverwhelmed}
+          />
+>>>>>>> Add routing for county permalink, add empty state for no data counties
 
           <Content>
             <CallToAction

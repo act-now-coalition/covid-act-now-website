@@ -25,6 +25,7 @@ export default function App() {
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route path="/state/:id" component={ModelPage} />
+            <Route path="/state/:id/county/:countyId" component={ModelPage} />
             <Route path="/model" component={FAQ} />
             <Route path="/endorsements" component={Endorsements} />
             <Route path="/about" component={About} />

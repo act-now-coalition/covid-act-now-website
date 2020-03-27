@@ -36,13 +36,14 @@ export const ModelViewToggle = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 100%; /* todo */
+  width: 100%;
   border: 1px solid black;
   box-sizing: border-box;
   border-radius: 4px;
   overflow: hidden;
   margin: auto;
   margin-bottom: 2rem;
+  margin-top: 2rem;
 `;
 
 export const ModelViewOption = styled.div`
@@ -52,4 +53,15 @@ export const ModelViewOption = styled.div`
   font-weight: ${props => (props.selected ? 'bold' : 'normal')};
   width: 100%;
   cursor: pointer;
+`;
+
+export const NoData = styled.div`
+  padding: 16px;
+  height: 25vh;
+  font-weight: bold;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: red;
 `;
