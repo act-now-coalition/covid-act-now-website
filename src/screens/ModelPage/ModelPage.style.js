@@ -26,3 +26,30 @@ export const ShareContainer = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+export const CountySelectorWrapper = styled.div`
+  margin-bottom: 2rem;
+`;
+
+export const ModelViewToggle = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%; /* todo */
+  border: 1px solid black;
+  box-sizing: border-box;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: auto;
+  margin-bottom: 2rem;
+`;
+
+export const ModelViewOption = styled.div`
+  padding: 16px;
+  background: ${props => (props.selected ? 'black' : 'white')};
+  color: ${props => (props.selected ? 'white' : 'black')};
+  font-weight: ${props => (props.selected ? 'bold' : 'normal')};
+  width: 100%;
+  cursor: pointer;
+`;

@@ -7,12 +7,21 @@ import ShareModelBlock from './ShareModelBlock/ShareModelBlock';
 import StateHeader from 'components/StateHeader/StateHeader';
 import ModelChart from 'components/Charts/ModelChart';
 import Newsletter from 'components/Newsletter/Newsletter';
-import { Wrapper, Content, LoadingScreen } from './ModelPage.style';
+import CountySelector from 'components/MapSelectors/CountySelector';
+import {
+  Wrapper,
+  Content,
+  ModelViewOption,
+  ModelViewToggle,
+  CountySelectorWrapper,
+  LoadingScreen,
+} from './ModelPage.style';
 import {
   STATES,
   STATE_TO_INTERVENTION,
   INTERVENTION_COLOR_MAP,
   INTERVENTIONS,
+  SHELTER_IN_PLACE_WORST_CASE_COLOR,
 } from 'enums';
 import { useModelDatas, Model } from 'utils/model';
 
@@ -28,24 +37,29 @@ const shelterInPlaceWorseCaseColor =
 function ModelPage() {
   const { id: location } = useParams();
   const [countyView, setCountyView] = useState(false);
-  const [county, setCounty] = useState(null);
-  // const [modelDatas, setModelDatas] = useState(null);
-  // const [interventions, setInterventions] = useState(null);
+  const [selectedCounty, setSelectedCounty] = useState(null);
   let modelDatas = null;
   let interventions = null;
-  const modelDatasMap = useModelDatas(location, county);
+  const modelDatasMap = useModelDatas(location, selectedCounty);
+  console.log('modelDatasMap', modelDatasMap, selectedCounty);
 
   const locationName = STATES[location];
   const intervention = STATE_TO_INTERVENTION[location];
-  const showModel = !countyView || (countyView && county);
+  const showModel = !countyView || (countyView && selectedCounty);
 
-  const datasForView = countyView ? modelDatasMap.county : modelDatasMap.state;
+  const datasForView = countyView
+    ? modelDatasMap.countyDatas
+    : modelDatasMap.stateDatas;
   modelDatas = datasForView;
   interventions = buildInterventionMap(datasForView);
 
   // No model data
-  if ((!countyView && !modelDatas) || (countyView && county && !modelDatas)) {
+  if (
+    (!countyView && !modelDatas) ||
+    (countyView && selectedCounty && !modelDatas)
+  ) {
     return <LoadingScreen></LoadingScreen>;
+    // return <Header locationName={locationName} intervention={intervention} />;
   }
 
   return (
@@ -58,29 +72,45 @@ function ModelPage() {
           interventions={interventions}
         />
       )}
-      {false && (
-        <Panel>
-          <input
-            type="checkbox"
-            checked={countyView}
-            value={countyView}
-            onClick={() => setCountyView(!countyView)}
-          />{' '}
-          Show County View
-          {countyView && (
-            <input
-              type="text"
-              value={county}
-              onChange={e => setCounty({ county: e.target.value })}
-            />
-          )}
-        </Panel>
+      <Content>
+        {
+          <CountySelectorWrapper>
+            <ModelViewToggle>
+              <ModelViewOption
+                selected={!countyView}
+                onClick={() => {
+                  setCountyView(false);
+                  setSelectedCounty(null);
+                }}
+              >
+                State View
+              </ModelViewOption>
+              <ModelViewOption
+                selected={countyView}
+                onClick={() => setCountyView(true)}
+              >
+                County View
+              </ModelViewOption>
+            </ModelViewToggle>
+            {countyView && (
+              <CountySelector
+                state={location}
+                selectedCounty={selectedCounty}
+                setSelectedCounty={setSelectedCounty}
+                handleChange={selected =>
+                  setSelectedCounty({ county: selected.county })
+                }
+              />
+            )}
+          </CountySelectorWrapper>
+        }
+      </Content>
       )}
       {showModel && interventions && (
         <Panel>
           <ModelChart
             state={locationName}
-            county={county}
+            county={selectedCounty}
             subtitle="Hospitalizations over time"
             interventions={interventions}
             currentIntervention={intervention}

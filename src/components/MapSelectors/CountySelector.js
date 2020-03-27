@@ -74,6 +74,7 @@ const CountySelector = ({
       county: 'Wayne County',
     },
   ],
+  selectedCounty,
 }) => {
   const [selectedOption, setSelectedOption] = useState(null);
   const options =
@@ -98,7 +99,6 @@ const CountySelector = ({
 
   const handleSelectChange = option => {
     console.log('change', option);
-    setSelectedOption(option);
 
     if (!option) {
       return;
@@ -111,8 +111,9 @@ const CountySelector = ({
     if (!selectedOption) {
       return false;
     }
+    console.log('selected');
 
-    return isEqual(option, selectedOption);
+    return isEqual(option, selectedCounty);
   };
 
   const handleCustomFilter = (option, searchInput) => {

@@ -21,6 +21,41 @@ export const ModelIds = {
   containNow: 2,
 };
 
+const initialData = {
+  location: null,
+  county: null,
+  stateDatas: null,
+  countyDatas: null,
+};
+
+async function fetchData(setModelDatas, location, county = null) {
+  let urls = [
+    ModelIds.baseline,
+    ModelIds.strictDistancingNow,
+    ModelIds.weakDistancingNow,
+    ModelIds.containNow,
+  ].map(i => {
+    const stateUrl = `/data/${location}.${i}.json`;
+    const countyUrl = `/data/53033.${i}.json`; // TODO: update when we know filenames
+    return county ? countyUrl : stateUrl;
+  });
+  let loadedModelDatas = await fetchAll(urls);
+  const key = county ? 'countyDatas' : 'stateDatas';
+  setModelDatas(m => {
+    return {
+      ...m,
+      location,
+      county,
+      [key]: {
+        baseline: loadedModelDatas[0],
+        strictDistancingNow: loadedModelDatas[1],
+        weakDistancingNow: loadedModelDatas[2],
+        containNow: loadedModelDatas[3],
+      },
+    };
+  });
+}
+
 export function useModelDatas(_location, county = null) {
   //Some state data files are lowercase, unsure why, but we need to handle it here.
   let lowercaseStates = [
@@ -43,38 +78,14 @@ export function useModelDatas(_location, county = null) {
     location = _location.toLowerCase();
   }
 
-  const [modelDatas, setModelDatas] = useState({ state: null, county: null });
+  const [modelDatas, setModelDatas] = useState(initialData);
   useEffect(() => {
-    async function fetchData(county = null) {
-      let urls = [
-        ModelIds.baseline,
-        ModelIds.strictDistancingNow,
-        ModelIds.weakDistancingNow,
-        ModelIds.containNow,
-      ].map(i => {
-        const stateUrl = `/data/${location}.${i}.json`;
-        const countyUrl = `/data/${location}.${i}.json`; // TODO: update when we know filenames
-        return county ? countyUrl : stateUrl;
-      });
-      let loadedModelDatas = await fetchAll(urls);
-      const key = county ? 'county' : 'state';
-      setModelDatas(m => {
-        return {
-          ...m,
-          [key]: {
-            baseline: loadedModelDatas[0],
-            strictDistancingNow: loadedModelDatas[1],
-            weakDistancingNow: loadedModelDatas[2],
-            containNow: loadedModelDatas[3],
-          },
-        };
-      });
-    }
-    fetchData();
-    if (county) {
-      fetchData(county);
-    }
-  }, [location, county]);
+    fetchData(setModelDatas, location);
+  }, [location]);
+
+  useEffect(() => {
+    fetchData(setModelDatas, location, county);
+  }, [county]);
 
   return modelDatas;
 }
