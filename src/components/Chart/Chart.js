@@ -98,7 +98,7 @@ const Chart = ({
     chart: {
       styledMode: true,
       height: '600',
-      spacing: [32, 0, 32, 0],
+      spacing: [8, 0, 32, 0],
     },
     title: {
       // text: county ? `${county.county}, ${state}` : state,

@@ -14,7 +14,7 @@ export const Content = styled.div`
 
 export const ChartHeader = styled.div`
   max-width: 900px;
-  padding: 32px 32px 0 32px;
+  padding: 16px 32px 0 32px;
   margin: auto;
 
   @media (min-width: 600px) {
