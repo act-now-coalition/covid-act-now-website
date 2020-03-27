@@ -7,7 +7,7 @@ import CallToAction from './CallToAction/CallToAction';
 import Header from 'components/Header/Header';
 import Chart from 'components/Chart/Chart';
 import Newsletter from 'components/Newsletter/Newsletter';
-import { Wrapper, Content } from './ModelPage.style';
+import { Wrapper, Content, ChartHeader } from './ModelPage.style';
 import {
   STATES,
   STATE_TO_INTERVENTION,
@@ -51,36 +51,40 @@ function ModelPage() {
   return (
     <Wrapper>
       <Header locationName={locationName} intervention={intervention} />
-      <Content>
-        {false && (
-          <>
+      {false && (
+        <Panel>
+          <input
+            type="checkbox"
+            checked={countyView}
+            value={countyView}
+            onClick={() => setCountyView(!countyView)}
+          />{' '}
+          Show County View
+          {countyView && (
             <input
-              type="checkbox"
-              checked={countyView}
-              value={countyView}
-              onClick={() => setCountyView(!countyView)}
-            />{' '}
-            Show County View
-            {countyView && (
-              <input
-                type="text"
-                value={county}
-                onChange={e => setCounty({ county: e.target.value })}
-              />
-            )}
-          </>
-        )}
-        {showModel && interventions && (
-          <>
-            <Chart
-              state={locationName}
-              county={county}
-              subtitle="Hospitalizations over time"
-              interventions={interventions}
-              currentIntervention={intervention}
-              dateOverwhelmed={interventions.baseline.dateOverwhelmed}
+              type="text"
+              value={county}
+              onChange={e => setCounty({ county: e.target.value })}
             />
+          )}
+        </Panel>
+      )}
+      {showModel && interventions && (
+        <Panel>
+          <ChartHeader>
+            <h2>Projected hospitalizations</h2>
+            <span>Last updated March 23rd</span>
+          </ChartHeader>
+          <Chart
+            state={locationName}
+            county={county}
+            subtitle="Hospitalizations over time"
+            interventions={interventions}
+			currentIntervention={intervention}
+            dateOverwhelmed={interventions.baseline.dateOverwhelmed}
+          />
 
+          <Content>
             <CallToAction
               currentIntervention={intervention}
               interventions={interventions}
@@ -134,8 +138,10 @@ function ModelPage() {
                 </a>
               </li>
             </ul>
-          </>
-        )}
+          </Content>
+        </Panel>
+      )}
+      <Content>
         <div style={{ marginTop: '3rem' }}>
           <Newsletter />
         </div>
@@ -184,6 +190,10 @@ const buildInterventionMap = modelDatas => {
   };
 
   return interventions;
+};
+
+const Panel = ({ children, title }) => {
+  return <div style={{}}>{children}</div>;
 };
 
 export default ModelPage;

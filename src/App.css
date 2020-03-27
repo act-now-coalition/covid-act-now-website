@@ -9,8 +9,21 @@
   clear: both;
 }
 
+h2 {
+  font-size: 20px;
+  line-height: 28px;
+  font-style: normal;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
 h4 {
   margin-top: 50px;
+}
+
+p {
+  font-size: 16px;
+  line-height: 24px;
 }
 
 th,
@@ -77,4 +90,3 @@ input[type='text'],
 textarea {
   font-size: 16px;
 }
-

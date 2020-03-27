@@ -14,13 +14,58 @@ const lockdownColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.LOCKDOWN];
 const shelterInPlaceWorstCaseColor = SHELTER_IN_PLACE_WORST_CASE_COLOR;
 
 export const Wrapper = styled.div`
-  .highcharts-tooltip-box {
+  width: 100%;
+  padding-top: 32px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+  .highcharts-axis-labels {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 'Medium';
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.5);
+
+    span {
+      padding: 8px 8px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 16px;
+    }
+  }
+
+  /* Don't show a label for 0
+     because it overlaps with the x-axis */
+  .highcharts-yaxis-labels span:first-child {
+    display: none;
+  }
+
+  /* .highcharts-tooltip-box {
     fill: black;
     fill-opacity: 0.6;
+  } */
+  g.highcharts-tooltip {
+    display: none;
   }
-  .highcharts-tooltip text {
+  .highcharts-tooltip {
+    background: none;
+    padding: 0;
+    border: none;
+  }
+  .highcharts-tooltip > span {
+    background: rgba(0, 0, 0, 0.7);
+    color: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+    padding: 16px;
+  }
+  /* .highcharts-tooltip text {
     fill: white;
     text-shadow: 0 0 3px black;
+  } */
+  .highcharts-legend {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.7);
   }
   /* these are styled according to the
      order passed into the series array */
@@ -55,20 +100,39 @@ export const Wrapper = styled.div`
     fill-opacity: 0.8;
   }
   .highcharts-series-4 {
-    stroke: black;
+    stroke: rgba(0, 0, 0, 0.7);
+    stroke-width: 1px;
+    stroke-dasharray: 8, 8;
+  }
+  .highcharts-color-4 {
+    fill: rgba(0, 0, 0, 0.7);
+    stroke: rgba(0, 0, 0, 0.7);
   }
   .highcharts-plot-line {
     stroke: #ff3348;
     stroke-width: 3px;
   }
   .today {
-    stroke: #d8d8d8;
-    stroke-width: 1px;
+    stroke: rgba(0, 0, 0, 0.7);
+    stroke-width: 3px;
   }
   .highcharts-plot-line-label {
-    fill: #666666;
+    padding: 8px 16px 8px 12px;
+    /* border: 2px solid rgba(255, 255, 255, 0.32); */
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 13px;
+
+    color: rgba(255, 255, 255, 1);
+    background: rgba(0, 0, 0, 0.7);
+
     &:first-of-type {
-      fill: #ff3348;
+      background: rgba(255, 51, 72, 1);
+      border-top-right-radius: 32px;
+      border-bottom-right-radius: 32px;
     }
   }
 `;
