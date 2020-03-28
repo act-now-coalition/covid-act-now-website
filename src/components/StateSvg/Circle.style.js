@@ -29,3 +29,11 @@ export const StateWrapper = styled.div`
     }
   }
 `;
+
+export const ActionWrapper = styled.div`
+  position: absolute;
+  height: 24px;
+  width: 24px;
+  right: 0;
+  bottom: 0;
+`;
