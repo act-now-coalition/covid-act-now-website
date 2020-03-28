@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Highcharts, { dateFormat } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import 'highcharts/css/highcharts.css';
 import moment from 'moment';
 import { INTERVENTIONS } from 'enums';
 import { snakeCase } from 'lodash';
+import { useWindowSize } from '../../utils/useWindowSize';
 
 import { Wrapper } from './Chart.style';
 
@@ -31,7 +32,7 @@ const Chart = ({
     model = interventionToModel[INTERVENTIONS.SOCIAL_DISTANCING];
   }
 
-  const hospitalsOverloadedPlotLineText = (currentIntervention) => {
+  const hospitalsOverloadedPlotLineText = currentIntervention => {
     let plotLineText;
     switch (currentIntervention) {
       case INTERVENTIONS.SHELTER_IN_PLACE:
@@ -80,7 +81,8 @@ const Chart = ({
     },
   };
   const socialDistancing = {
-    name: currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+    name:
+      currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (worst case)')
         : formatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
     type: 'areaspline',
@@ -117,7 +119,26 @@ const Chart = ({
     },
   };
 
-  const [options] = useState({
+  const windowSize = useWindowSize();
+  const maxMapWidth = 900;
+  const mapPadding = () => {
+    if (windowSize.width > maxMapWidth) {
+      const paddingSize = (windowSize.width - maxMapWidth) / 2;
+      return paddingSize / maxMapWidth;
+    } else {
+      return 0;
+    }
+  };
+
+  const yAxisPadding = () => {
+    if (windowSize.width > maxMapWidth) {
+      return (windowSize.width - maxMapWidth) / 2;
+    } else {
+      return 48;
+    }
+  };
+
+  const chartOptions = {
     chart: {
       styledMode: true,
       height: '600',
@@ -134,6 +155,8 @@ const Chart = ({
     xAxis: {
       type: 'datetime',
       step: 7,
+      minPadding: mapPadding(),
+      maxPadding: mapPadding(),
       labels: {
         useHTML: true,
         rotation: 0,
@@ -144,13 +167,21 @@ const Chart = ({
       plotLines: [
         {
           value: model.dateOverwhelmed,
-          className: snakeCase(currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE ? INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE : currentIntervention),
+          className: snakeCase(
+            currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+              ? INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE
+              : currentIntervention,
+          ),
           zIndex: 10,
           label: {
             formatter: function () {
               return `<div class="custom-plot-label custom-plot-label-${snakeCase(
-                currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE ? INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE : currentIntervention ,
-              )}">Hospitals Overloaded<div>${hospitalsOverloadedPlotLineText(currentIntervention)}</div></div>`;
+                currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+                  ? INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE
+                  : currentIntervention,
+              )}">Hospitals Overloaded<div>${hospitalsOverloadedPlotLineText(
+                currentIntervention,
+              )}</div></div>`;
             },
             rotation: 0,
             useHTML: true,
@@ -180,7 +211,7 @@ const Chart = ({
       },
       labels: {
         useHTML: true,
-        x: 48,
+        x: yAxisPadding(),
         formatter: function () {
           return this.value === 0
             ? ''
@@ -231,7 +262,12 @@ const Chart = ({
       wuhanStyle,
       availableBeds,
     ],
-  });
+  };
+
+  const [options, setOptions] = useState(chartOptions);
+  useEffect(() => {
+    setOptions(chartOptions);
+  }, [windowSize]);
 
   return (
     <Wrapper
