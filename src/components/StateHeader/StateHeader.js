@@ -42,9 +42,37 @@ const Stateheader = ({ location, locationName, intervention, interventions }) =>
     switch (intervention) {
       case INTERVENTIONS.LIMITED_ACTION:
       case INTERVENTIONS.SOCIAL_DISTANCING:
-        return <HeaderSubCopy>To prevent hospital overload, our projections indicate that shelter in place must be implemented <HeaderHighlight color={INTERVENTION_COLOR_MAP[intervention]}>within the next {earlyDateDays} - {lateDateDays} days</HeaderHighlight>.</HeaderSubCopy>;
+        if (earlyDateDays <= 0) {
+          return (
+            <HeaderSubCopy>
+              To limit hospital overload, our projections indicate shelter in
+              place must be implemented{' '}
+              <HeaderHighlight color={INTERVENTION_COLOR_MAP[intervention]}>
+                immediately
+              </HeaderHighlight>
+              .
+            </HeaderSubCopy>
+          );
+        } else {
+          return (
+            <HeaderSubCopy>
+              To prevent hospital overload, our projections indicate that
+              shelter in place must be implemented{' '}
+              <HeaderHighlight color={INTERVENTION_COLOR_MAP[intervention]}>
+                within the next {earlyDateDays}-{lateDateDays} days
+              </HeaderHighlight>
+              .
+            </HeaderSubCopy>
+          );
+        }
       case INTERVENTIONS.SHELTER_IN_PLACE:
-        return <HeaderSubCopy>Avoiding hospital overload depends largely on population density and public cooperation. We'll have projections on how well shelter in place is working as data becomes available.</HeaderSubCopy>;
+        return (
+          <HeaderSubCopy>
+            Avoiding hospital overload depends largely on population density and
+            public cooperation. We'll have projections on how well shelter in
+            place is working as data becomes available.
+          </HeaderSubCopy>
+        );
       default:
     }
   };
