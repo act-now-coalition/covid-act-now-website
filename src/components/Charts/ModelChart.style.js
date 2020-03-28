@@ -13,8 +13,21 @@ const lockdownColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.LOCKDOWN];
 
 export const ChartContainer = styled.section`
   width: 100%;
-  padding-top: 32px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+`;
+
+export const ChartHeader = styled.div`
+  max-width: 900px;
+  padding: 16px 32px 32px;
+  margin: auto;
+
+  @media (min-width: 600px) {
+    text-align: center;
+  }
+
+  span {
+    color: rgba(0, 0, 0, 0.7);
+  }
 `;
 
 export const Wrapper = styled.div`
