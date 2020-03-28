@@ -326,6 +326,10 @@ Object.keys(STATES).forEach(state => {
     overloadedHospitals: distancingPoorEnforcement.now.estimatedDateHospitalsOverloadedAfter(),
     estimatedDeaths: distancingPoorEnforcement.now.cumulativeDeadAfter(),
   };
+  const [
+    socialDistancingNoReturnRangeStart,
+    socialDistancingNoReturnRangeEnd,
+  ] = distancingPoorEnforcement.now.lastDatesToAct();
 
   const shelterInPlace = {
     cumulativeAffected: distancing.now.estimatedCumulativeInfectedAfter(),
@@ -348,6 +352,8 @@ Object.keys(STATES).forEach(state => {
       socialDistancing,
       noReturnRangeEnd,
       noReturnRangeStart,
+      socialDistancingNoReturnRangeEnd,
+      socialDistancingNoReturnRangeStart,
     }),
   );
 });
