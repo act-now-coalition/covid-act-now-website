@@ -72,7 +72,7 @@ function ModelPage() {
         <Panel>
           <ChartHeader>
             <h2>Projected hospitalizations</h2>
-            <span>Last updated March 23rd</span>
+            <span>Last updated March 23rd. <span title="Currently we aggregate data over 4 day intervals to smooth out inconsistencies in the source data. We’re working on improving this now.">This model updates every 4 days. Why?</span></span>
           </ChartHeader>
           <Chart
             state={locationName}
