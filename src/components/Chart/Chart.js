@@ -6,7 +6,7 @@ import moment from 'moment';
 import { INTERVENTIONS } from 'enums';
 import { snakeCase } from 'lodash';
 
-import { Wrapper } from './Chart.style';
+import { ChartContainer, Wrapper } from './Chart.style';
 
 const formatIntervention = (intervention, optCase) =>
   `3 months of ${intervention}${optCase || ''}`;
@@ -31,17 +31,17 @@ const Chart = ({
     model = interventionToModel[INTERVENTIONS.SOCIAL_DISTANCING];
   }
 
-  const hospitalsOverloadedPlotLineText = (currentIntervention) => {
+  const hospitalsOverloadedPlotLineText = currentIntervention => {
     let plotLineText;
     switch (currentIntervention) {
       case INTERVENTIONS.SHELTER_IN_PLACE:
-        plotLineText = '(assuming shelter in place - worst case)';
+        plotLineText = '<span>Shelter in place<br />Worst case scenario</span>';
         break;
       case INTERVENTIONS.LIMITED_ACTION:
-        plotLineText = '(assuming limited action)';
+        plotLineText = 'Assuming limited action';
         break;
       case INTERVENTIONS.SOCIAL_DISTANCING:
-        plotLineText = '(assuming social distancing)';
+        plotLineText = 'Assuming social distancing';
         break;
       default:
     }
@@ -144,13 +144,21 @@ const Chart = ({
       plotLines: [
         {
           value: model.dateOverwhelmed,
-          className: snakeCase(currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE ? INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE : currentIntervention),
+          className: snakeCase(
+            currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+              ? INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE
+              : currentIntervention,
+          ),
           zIndex: 10,
           label: {
             formatter: function () {
               return `<div class="custom-plot-label custom-plot-label-${snakeCase(
-                currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE ? INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE : currentIntervention ,
-              )}">Hospitals Overloaded<div>${hospitalsOverloadedPlotLineText(currentIntervention)}</div></div>`;
+                currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+                  ? INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE
+                  : currentIntervention,
+              )}">Hospitals Overloaded<br /><span>${hospitalsOverloadedPlotLineText(
+                currentIntervention,
+              )}</span></div>`;
             },
             rotation: 0,
             useHTML: true,
@@ -234,11 +242,15 @@ const Chart = ({
   });
 
   return (
-    <Wrapper
-      inShelterInPlace={currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE}
-    >
-      <HighchartsReact highcharts={Highcharts} options={options} />
-    </Wrapper>
+    <ChartContainer>
+      <Wrapper
+        inShelterInPlace={
+          currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+        }
+      >
+        <HighchartsReact highcharts={Highcharts} options={options} />
+      </Wrapper>
+    </ChartContainer>
   );
 };
 
