@@ -1,5 +1,5 @@
-import { find, each, sortBy, some, isEqual } from 'lodash';
 import React, { useState } from 'react';
+import { find, each, sortBy, some } from 'lodash';
 import Select, { components } from 'react-select';
 import BaseValueContainer from './BaseValueContainer';
 import CustomStyles from './CustomStyles';

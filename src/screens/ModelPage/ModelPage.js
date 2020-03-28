@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Redirect, useParams, useHistory } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 // import CountyMap from 'components/CountyMap/CountyMap';
 import Outcomes from './Outcomes/Outcomes';
 import CallToAction from './CallToAction/CallToAction';
@@ -14,11 +14,8 @@ import {
   ModelViewOption,
   ModelViewToggle,
   CountySelectorWrapper,
-<<<<<<< cd21ed7c0ade7583868e8840cce748dbfdc17405
   LoadingScreen,
-=======
   NoData,
->>>>>>> Add routing for county permalink, add empty state for no data counties
 } from './ModelPage.style';
 import {
   STATES,
@@ -43,7 +40,6 @@ function ModelPage() {
   const [countyView, setCountyView] = useState(false);
   const [selectedCounty, setSelectedCounty] = useState(null);
   const [redirectTarget, setRedirectTarget] = useState();
-  const history = useHistory();
 
   let modelDatas = null;
   let interventions = null;
@@ -54,6 +50,9 @@ function ModelPage() {
   const countyName = selectedCounty ? selectedCounty.county : null;
 
   const intervention = STATE_TO_INTERVENTION[location];
+  const showModel =
+    !countyView ||
+    (countyView && selectedCounty && modelDatas && !modelDatas.error);
 
   const datasForView = countyView
     ? modelDatasMap.countyDatas
@@ -61,30 +60,29 @@ function ModelPage() {
 
   modelDatas = datasForView;
 
-  let showModel = !countyView || (countyView && selectedCounty && modelDatas);
-
-  if (modelDatas && modelDatas.error === true) {
-    showModel = false;
-  }
-
   interventions = null;
   if (modelDatas && !modelDatas.error) {
     interventions = buildInterventionMap(datasForView);
   }
 
   if (redirectTarget) {
-    const goToLocation = redirectTarget;
     setRedirectTarget(null);
-    history.push(goToLocation);
+    return <Redirect push to={redirectTarget} />;
   }
+
+  // const HeaderWithProps = (
+  //   <Header
+  //     locationName={locationName}
+  //     countyName={countyName}
+  //     intervention={intervention}
+  //   />
+  // );
 
   // No model data
   if (
     (!countyView && !modelDatas) ||
     (countyView && selectedCounty && !modelDatas)
   ) {
-<<<<<<< bc2259ef93a9bbd52d3022a50d8a49d1d46f5755
-<<<<<<< cd21ed7c0ade7583868e8840cce748dbfdc17405
     return <LoadingScreen></LoadingScreen>;
     // return (
     //   <Header
@@ -93,18 +91,6 @@ function ModelPage() {
     //     intervention={intervention}
     //   />
     // );
-=======
-    console.log('here');
-=======
->>>>>>> Change history for county
-    return (
-      <Header
-        locationName={locationName}
-        countyName={countyName}
-        intervention={intervention}
-      />
-    );
->>>>>>> Add routing for county permalink, add empty state for no data counties
   }
 
   return (
@@ -118,45 +104,6 @@ function ModelPage() {
         />
       )}
       <Content>
-<<<<<<< cd21ed7c0ade7583868e8840cce748dbfdc17405
-        <CountySelectorWrapper>
-          <ModelViewToggle>
-            <ModelViewOption
-              selected={!countyView}
-              onClick={() => {
-                setCountyView(false);
-                setSelectedCounty(null);
-              }}
-            >
-              State View
-            </ModelViewOption>
-            <ModelViewOption
-              selected={countyView}
-              onClick={() => setCountyView(true)}
-            >
-              County View
-            </ModelViewOption>
-          </ModelViewToggle>
-          {countyView && (
-            <CountySelector
-              state={location}
-              selectedCounty={selectedCounty}
-              handleChange={option => setSelectedCounty(option)}
-              autoFocus
-            />
-          )}
-        </CountySelectorWrapper>
-        {showModel && interventions && (
-          <Panel>
-            <ModelChart
-              state={locationName}
-              county={selectedCounty}
-              subtitle="Hospitalizations over time"
-              interventions={interventions}
-              currentIntervention={intervention}
-              dateOverwhelmed={interventions.baseline.dateOverwhelmed}
-            />
-=======
         <Panel>
           <CountySelectorWrapper>
             <ModelViewToggle>
@@ -204,7 +151,7 @@ function ModelPage() {
       )}
       {showModel && interventions && (
         <Panel>
-          <Chart
+          <ModelChart
             state={locationName}
             county={selectedCounty}
             subtitle="Hospitalizations over time"
@@ -212,8 +159,6 @@ function ModelPage() {
             currentIntervention={intervention}
             dateOverwhelmed={interventions.baseline.dateOverwhelmed}
           />
->>>>>>> Add routing for county permalink, add empty state for no data counties
-
           <Content>
             <CallToAction
               interventions={interventions}

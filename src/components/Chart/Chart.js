@@ -18,6 +18,40 @@ const Chart = ({
   dateOverwhelmed,
   currentIntervention,
 }) => {
+<<<<<<< daf01240aee65dbb85f00274b289a8969ba8d2a6
+=======
+  const interventionToModel = {
+    [INTERVENTIONS.LIMITED_ACTION]: interventions.baseline,
+    [INTERVENTIONS.SOCIAL_DISTANCING]:
+      interventions.distancingPoorEnforcement.now,
+    [INTERVENTIONS.SHELTER_IN_PLACE]: interventions.distancing.now,
+  };
+
+  let model = interventionToModel[currentIntervention];
+
+  if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE) {
+    model = interventionToModel[INTERVENTIONS.SOCIAL_DISTANCING];
+  }
+
+  const hospitalsOverloadedPlotLineText = currentIntervention => {
+    let plotLineText;
+    switch (currentIntervention) {
+      case INTERVENTIONS.SHELTER_IN_PLACE:
+        plotLineText = '(assuming shelter in place - worst case)';
+        break;
+      case INTERVENTIONS.LIMITED_ACTION:
+        plotLineText = '(assuming limited action)';
+        break;
+      case INTERVENTIONS.SOCIAL_DISTANCING:
+        plotLineText = '(assuming social distancing)';
+        break;
+      default:
+    }
+
+    return plotLineText;
+  };
+
+>>>>>>> Handle county permalinks
   const scenarioComparisonOverTime = duration => [
     interventions.baseline.getDataset('hospitalizations', duration, 'red'),
     interventions.distancing.now.getDataset(
@@ -110,8 +144,28 @@ const Chart = ({
       },
       plotLines: [
         {
+<<<<<<< daf01240aee65dbb85f00274b289a8969ba8d2a6
           value: dateOverwhelmed,
           label: {
+=======
+          value: model.dateOverwhelmed,
+          className: snakeCase(
+            currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+              ? INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE
+              : currentIntervention,
+          ),
+          zIndex: 10,
+          label: {
+            formatter: function () {
+              return `<div class="custom-plot-label custom-plot-label-${snakeCase(
+                currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+                  ? INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE
+                  : currentIntervention,
+              )}">Hospitals Overloaded<div>${hospitalsOverloadedPlotLineText(
+                currentIntervention,
+              )}</div></div>`;
+            },
+>>>>>>> Handle county permalinks
             rotation: 0,
             text: 'Hospitals Overloaded <br/> (assuming no action)',
             x: 10,
