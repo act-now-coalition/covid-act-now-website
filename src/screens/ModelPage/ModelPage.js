@@ -7,6 +7,7 @@ import CallToAction from './CallToAction/CallToAction';
 import Header from 'components/Header/Header';
 import Chart from 'components/Chart/Chart';
 import Newsletter from 'components/Newsletter/Newsletter';
+import LightTooltip from 'components/LightTooltip/LightTooltip';
 import { Wrapper, Content, ChartHeader } from './ModelPage.style';
 import {
   STATES,
@@ -72,7 +73,7 @@ function ModelPage() {
         <Panel>
           <ChartHeader>
             <h2>Projected hospitalizations</h2>
-            <span>Last updated March 23rd. <span title="Currently we aggregate data over 4 day intervals to smooth out inconsistencies in the source data. We’re working on improving this now.">This model updates every 4 days. Why?</span></span>
+            <span>Last updated March 23rd. This model updates every 4 days. <LightTooltip title="Currently we aggregate data over 4 day intervals to smooth out inconsistencies in the source data. We’re working on improving this now." placement="bottom"><span>Why?</span></LightTooltip></span>
           </ChartHeader>
           <Chart
             state={locationName}
