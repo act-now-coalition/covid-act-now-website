@@ -81,26 +81,22 @@ const Stateheader = ({ location, locationName, intervention, interventions }) =>
     <StyledStateHeaderWrapper>
       <StyledStateHeaderInner>
         <StyledStateImageWrapper>
-          <StateCircleSvg 
+          <StateCircleSvg
             actionBackgroundFill={'#F2F2F2'}
-            state={location} 
-            intervention={intervention} 
+            state={location}
+            intervention={intervention}
             hasAction={true}
           />
         </StyledStateImageWrapper>
         <div>
-          <HeaderTitle>
-            {buildInterventionTitle()}
-          </HeaderTitle>
-            {buildPredection()}
+          <HeaderTitle>{buildInterventionTitle()}</HeaderTitle>
+          {buildPredection()}
           <HeaderRule />
         </div>
         <div>
-          <HeaderDisclaimer
-            color="inherit"
-            component="p"
-            variant="subtitle2">
-              These projection are intended to help make fast decisions, not predict the future.
+          <HeaderDisclaimer color="inherit" component="p" variant="subtitle2">
+            These projections are intended to help make fast decisions, not
+            predict the future.
           </HeaderDisclaimer>
         </div>
       </StyledStateHeaderInner>
