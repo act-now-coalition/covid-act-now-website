@@ -5,10 +5,24 @@ export const Wrapper = styled.div``;
 export const Content = styled.div`
   text-align: center;
   max-width: 900px;
-  padding: 1rem;
+  padding: 32px;
   margin: auto;
-  '@media (min-width:600px)': {
+  @media (min-width: 600px) {
     padding: 0;
+  }
+`;
+
+export const ChartHeader = styled.div`
+  max-width: 900px;
+  padding: 16px 32px 0 32px;
+  margin: auto;
+
+  @media (min-width: 600px) {
+    text-align: center;
+  }
+
+  span {
+    color: rgba(0, 0, 0, 0.7);
   }
 `;
 

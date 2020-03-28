@@ -7,13 +7,13 @@ import CallToAction from './CallToAction/CallToAction';
 import Header from 'components/Header/Header';
 import Chart from 'components/Chart/Chart';
 import Newsletter from 'components/Newsletter/Newsletter';
-import { Wrapper, Content } from './ModelPage.style';
+import LightTooltip from 'components/LightTooltip/LightTooltip';
+import { Wrapper, Content, ChartHeader } from './ModelPage.style';
 import {
   STATES,
   STATE_TO_INTERVENTION,
   INTERVENTION_COLOR_MAP,
   INTERVENTIONS,
-  SHELTER_IN_PLACE_WORST_CASE_COLOR,
 } from "enums";
 import { useModelDatas, Model } from 'utils/model';
 
@@ -23,7 +23,7 @@ const socialDistancingColor =
 const shelterInPlaceColor =
   INTERVENTION_COLOR_MAP[INTERVENTIONS.SHELTER_IN_PLACE];
 const lockdownColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.LOCKDOWN];
-const shelterInPlaceWorseCaseColor = SHELTER_IN_PLACE_WORST_CASE_COLOR;
+const shelterInPlaceWorseCaseColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE];
 
 function ModelPage() {
   const { id: location } = useParams();
@@ -51,36 +51,48 @@ function ModelPage() {
   return (
     <Wrapper>
       <Header locationName={locationName} intervention={intervention} />
-      <Content>
-        {false && (
-          <>
+      {false && (
+        <Panel>
+          <input
+            type="checkbox"
+            checked={countyView}
+            value={countyView}
+            onClick={() => setCountyView(!countyView)}
+          />{' '}
+          Show County View
+          {countyView && (
             <input
-              type="checkbox"
-              checked={countyView}
-              value={countyView}
-              onClick={() => setCountyView(!countyView)}
-            />{' '}
-            Show County View
-            {countyView && (
-              <input
-                type="text"
-                value={county}
-                onChange={e => setCounty({ county: e.target.value })}
-              />
-            )}
-          </>
-        )}
-        {showModel && interventions && (
-          <>
-            <Chart
-              state={locationName}
-              county={county}
-              subtitle="Hospitalizations over time"
-              interventions={interventions}
-              currentIntervention={intervention}
-              dateOverwhelmed={interventions.baseline.dateOverwhelmed}
+              type="text"
+              value={county}
+              onChange={e => setCounty({ county: e.target.value })}
             />
+          )}
+        </Panel>
+      )}
+      {showModel && interventions && (
+        <Panel>
+          <ChartHeader>
+            <h2>Projected hospitalizations</h2>
+            <span>
+              <LightTooltip
+                title="Currently we aggregate data over 4 day intervals to smooth out inconsistencies in the source data. We’re working on improving this now."
+                placement="bottom"
+              >
+                <span>
+                  Last updated March 27th. This model updates every 4 days.
+                </span>
+              </LightTooltip>
+            </span>
+          </ChartHeader>
+          <Chart
+            state={locationName}
+            county={county}
+            subtitle="Hospitalizations over time"
+            interventions={interventions}
+            currentIntervention={intervention}
+          />
 
+          <Content>
             <CallToAction
               currentIntervention={intervention}
               interventions={interventions}
@@ -134,8 +146,10 @@ function ModelPage() {
                 </a>
               </li>
             </ul>
-          </>
-        )}
+          </Content>
+        </Panel>
+      )}
+      <Content>
         <div style={{ marginTop: '3rem' }}>
           <Newsletter />
         </div>
@@ -184,6 +198,10 @@ const buildInterventionMap = modelDatas => {
   };
 
   return interventions;
+};
+
+const Panel = ({ children, title }) => {
+  return <div style={{}}>{children}</div>;
 };
 
 export default ModelPage;
