@@ -7,10 +7,16 @@ export const CircleWrapper = styled.div`
 
 export const StateWrapper = styled.div`
   position: absolute;
-  width: ${props => (props.ratio === 1 ? 1 : props.ratio * .9) * 38}px;
-  height: ${props => (props.ratio === 1 ? 1 : props.ratio * .9) * 38}px;
-  left: calc(${props => (props.size - (props.ratio === 1 ? 1 : props.ratio * .9) * 38)}px / 2);
-  top: calc(${props => (props.size - (props.ratio === 1 ? 1 : props.ratio * .9) * 38)}px / 2);
+  width: ${props => (props.ratio === 1 ? 1 : props.ratio * 0.9) * 38}px;
+  height: ${props => (props.ratio === 1 ? 1 : props.ratio * 0.9) * 38}px;
+  left: calc(
+    ${props => props.size - (props.ratio === 1 ? 1 : props.ratio * 0.9) * 38}px /
+      2
+  );
+  top: calc(
+    ${props => props.size - (props.ratio === 1 ? 1 : props.ratio * 0.9) * 38}px /
+      2
+  );
 
   svg {
     width: 100%;

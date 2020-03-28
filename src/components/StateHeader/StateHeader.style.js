@@ -8,43 +8,32 @@ export const HeaderHighlight = styled.span`
 `;
 
 export const HeaderTitle = styled(Typography)`
-  margin-top: 1.7rem;
-  font-size: 1.7rem;
-  line-height: 2.2rem;
-
-  @media(min-width: 600px) {
-    margin-top: 1rem;
-    font-size: 2rem;
-    line-height: 2.7rem;
-  }
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  line-height: 1.75rem;
 `;
 
 export const HeaderRule = styled(Typography)`
-  width: 80px;
+  width: 64px;
   height: 1px;
-  background: rgba(0, 0, 0, 0.4);
-  opacity: 0.4;
-  margin: 1.25rem 0;
+  background: rgba(0, 0, 0, 0.12);
+  margin: 1rem 0;
 
-  @media(min-width: 1280px) {
-    width: 100px;
-    margin: 1.5rem auto;
+  @media (min-width: 600px) {
+    margin: 2rem auto;
   }
 `;
 
 export const HeaderSubCopy = styled(Typography)`
-  margin-top: 1rem;
-  font-size: 1.1rem;
-  line-height: 1.6rem;
-
-  @media(min-width: 600px) {
-    font-size: 1.2rem;
-    line-height: 1.5rem;
-  }
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: rgba(0, 0, 0, 0.7);
 `;
 export const HeaderDisclaimer = styled(Typography)`
-  font-size: 1rem;
-  line-height: 1.6rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: rgba(0, 0, 0, 0.7);
 
   a {
     color: red;
@@ -55,14 +44,13 @@ export const StyledStateHeaderWrapper = styled(Box)`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background-color: #F2F2F2;
+  background-color: #f2f2f2;
   padding: 2rem;
   margin: 0;
 
-  @media(min-width: 1280px) {
+  @media (min-width: 600px) {
     text-align: center;
     align-items: center;
-    padding: 1.5rem 2rem;
     flex-direction: row;
   }
 `;
@@ -70,16 +58,15 @@ export const StyledStateHeaderWrapper = styled(Box)`
 export const StyledStateHeaderInner = styled.div`
   max-width: 600px;
 
-  @media(min-width: 1280px) {
+  @media (min-width: 600px) {
     max-width: 600px;
     margin: 0 auto;
   }
 `;
 
 export const StyledStateImageWrapper = styled.div`
-  @media(min-width: 1280px) {
+  @media (min-width: 600px) {
     display: flex;
     justify-content: center;
   }
 `;
-
