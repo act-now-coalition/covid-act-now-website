@@ -1,5 +1,8 @@
 import styled from 'styled-components';
-import { INTERVENTIONS, INTERVENTION_COLOR_MAP } from 'enums';
+import {
+  INTERVENTIONS,
+  INTERVENTION_COLOR_MAP,
+} from 'enums';
 import { snakeCase } from 'lodash';
 
 const noActionColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.LIMITED_ACTION];
@@ -15,7 +18,6 @@ export const Wrapper = styled.div`
   width: 100%;
   padding-top: 32px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-  margin: auto;
 
   .highcharts-axis-labels {
     font-family: 'Roboto', sans-serif;
@@ -150,9 +152,7 @@ export const Wrapper = styled.div`
       background: ${socialDistancingColor};
     }
 
-    &.custom-plot-label-${snakeCase(
-        INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE,
-      )} {
+    &.custom-plot-label-${snakeCase(INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE)} {
       background: ${shelterInPlaceWorstCaseColor};
     }
 
