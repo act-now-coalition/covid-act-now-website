@@ -72,7 +72,7 @@ function ModelPage() {
       {showModel && interventions && (
         <Panel>
           <ChartHeader>
-            <h2>Projected hospitalizations</h2>
+            <h2>Projected hospitalizations: {locationName}</h2>
             <span>
               <LightTooltip
                 title="Currently we aggregate data over 4 day intervals to smooth out inconsistencies in the source data. We’re working on improving this now."
