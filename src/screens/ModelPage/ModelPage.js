@@ -74,13 +74,12 @@ function ModelPage() {
           <ChartHeader>
             <h2>Projected hospitalizations</h2>
             <span>
-              {' '}
               <LightTooltip
                 title="Currently we aggregate data over 4 day intervals to smooth out inconsistencies in the source data. We’re working on improving this now."
                 placement="bottom"
               >
                 <span>
-                  Last updated March 23rd. This model updates every 4 days.
+                  Last updated March 27th. This model updates every 4 days.
                 </span>
               </LightTooltip>
             </span>
