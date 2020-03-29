@@ -29,3 +29,6 @@ yarn-error.log*
 .tern-port
 .vscode/
 /cypress/videos/
+
+# you should use yarn; not npm
+package-lock.json
