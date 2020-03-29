@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
+<<<<<<< 9d004625243d69d10b608c4317a6fe814897a9f9
 import { Redirect, useParams } from 'react-router-dom';
 // import CountyMap from 'components/CountyMap/CountyMap';
+=======
+import { useParams, useHistory } from 'react-router-dom';
+import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020';
+import CountyMap from 'components/CountyMap/CountyMap';
+>>>>>>> Add topo json, add county picker
 import Outcomes from './Outcomes/Outcomes';
 import CallToAction from './CallToAction/CallToAction';
 import ShareModelBlock from './ShareModelBlock/ShareModelBlock';
@@ -36,9 +42,23 @@ const shelterInPlaceWorseCaseColor =
   INTERVENTION_COLOR_MAP[INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE];
 
 function ModelPage() {
+<<<<<<< 9d004625243d69d10b608c4317a6fe814897a9f9
   const { id: location, countyId: countyId } = useParams();
   const [countyView, setCountyView] = useState(false);
   const [selectedCounty, setSelectedCounty] = useState(null);
+=======
+  const { id: location, countyId } = useParams();
+  // const [countyView, setCountyView] = useState(countyId ? true : false);
+  const [countyView, setCountyView] = useState(true);
+  let countyOption = null;
+  if (countyId) {
+    countyOption = _.find(
+      US_STATE_DATASET.state_county_map_dataset[location].county_dataset,
+      ['county_url_name', countyId],
+    );
+  }
+  const [selectedCounty, setSelectedCounty] = useState(countyOption);
+>>>>>>> Add topo json, add county picker
   const [redirectTarget, setRedirectTarget] = useState();
 
   let modelDatas = null;
@@ -127,6 +147,7 @@ function ModelPage() {
               </ModelViewOption>
             </ModelViewToggle>
             {countyView && (
+<<<<<<< 9d004625243d69d10b608c4317a6fe814897a9f9
               <CountySelector
                 state={location}
                 selectedCounty={selectedCounty}
@@ -138,6 +159,32 @@ function ModelPage() {
                 }}
                 autoFocus
               />
+=======
+              <div>
+                <CountySelector
+                  state={location}
+                  selectedCounty={selectedCounty}
+                  handleChange={option => {
+                    setRedirectTarget(
+                      `/state/${location}/county/${option.county_url_name}`,
+                    );
+                    setSelectedCounty(option);
+                  }}
+                  autoFocus
+                />
+                <CountyMap
+                  selectedCounty={selectedCounty}
+                  setSelectedCounty={fullFips => {
+                    const county = _.find(
+                      US_STATE_DATASET.state_county_map_dataset[location]
+                        .county_dataset,
+                      ['full_fips_code', fullFips],
+                    );
+                    setSelectedCounty(county);
+                  }}
+                />
+              </div>
+>>>>>>> Add topo json, add county picker
             )}
           </CountySelectorWrapper>
         </Panel>
