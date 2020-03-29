@@ -3,18 +3,23 @@ import moment from 'moment';
 import StateCircleSvg from 'components/StateSvg/StateCircleSvg';
 import { INTERVENTIONS, INTERVENTION_COLOR_MAP } from 'enums';
 
-import { 
-  HeaderHighlight, 
-  HeaderSubCopy, 
+import {
+  HeaderHighlight,
+  HeaderSubCopy,
   HeaderDisclaimer,
-  HeaderRule, 
-  HeaderTitle, 
+  HeaderRule,
+  HeaderTitle,
   StyledStateImageWrapper,
   StyledStateHeaderWrapper,
   StyledStateHeaderInner,
 } from './StateHeader.style';
 
-const Stateheader = ({ location, locationName, intervention, interventions }) => {
+const Stateheader = ({
+  location,
+  locationName,
+  intervention,
+  interventions,
+}) => {
   const interventionToModel = {
     [INTERVENTIONS.LIMITED_ACTION]: interventions.baseline,
     [INTERVENTIONS.SOCIAL_DISTANCING]:
@@ -24,16 +29,28 @@ const Stateheader = ({ location, locationName, intervention, interventions }) =>
 
   const model = interventionToModel[intervention];
 
-  const earlyDateDays = moment(model.dateOverwhelmed).subtract(14, 'days').diff(moment(), 'days');
-  const lateDateDays = moment(model.dateOverwhelmed).subtract(9, 'days').diff(moment(), 'days');
+  const earlyDateDays = moment(model.dateOverwhelmed)
+    .subtract(14, 'days')
+    .diff(moment(), 'days');
+  const lateDateDays = moment(model.dateOverwhelmed)
+    .subtract(9, 'days')
+    .diff(moment(), 'days');
 
   const buildInterventionTitle = () => {
     switch (intervention) {
       case INTERVENTIONS.LIMITED_ACTION:
       case INTERVENTIONS.SOCIAL_DISTANCING:
-        return <span>Intervention is needed in <strong>{locationName}</strong></span>;
+        return (
+          <span>
+            Intervention is needed in <strong>{locationName}</strong>
+          </span>
+        );
       case INTERVENTIONS.SHELTER_IN_PLACE:
-        return <span>Maintain shelter in place in <strong>{locationName}.</strong></span>;
+        return (
+          <span>
+            Maintain shelter in place in <strong>{locationName}.</strong>
+          </span>
+        );
       default:
     }
   };
@@ -69,8 +86,9 @@ const Stateheader = ({ location, locationName, intervention, interventions }) =>
         return (
           <HeaderSubCopy>
             Avoiding hospital overload depends largely on population density and
-            public cooperation. We'll have projections on how well shelter in
-            place is working as data becomes available.
+            public cooperation. Best and worst case scenarios are shown below,
+            and we’ll have projections on how things are actually going as soon
+            as data becomes available.
           </HeaderSubCopy>
         );
       default:
