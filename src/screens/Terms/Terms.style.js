@@ -14,7 +14,3 @@ export const Content = styled.div`
     margin-bottom: 24px;
   }
 `;
-
-export const StyledContactLink = styled(Typography)`
-  margin: 0 0 1.5rem;
-`;
