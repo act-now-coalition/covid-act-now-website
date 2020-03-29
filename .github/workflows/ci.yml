@@ -27,6 +27,6 @@ jobs:
             ${{ runner.os }}-
     
       - run: npm install
-      # - run: npm run lint
+      - run: npm run lint
       - run: npm run e2e.ci
  
