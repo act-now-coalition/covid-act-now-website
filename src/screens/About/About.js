@@ -1,6 +1,6 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import Link from "@material-ui/core/Link";
+import Link from '@material-ui/core/Link';
 import { TEAM } from './../../enums';
 
 import { Wrapper, Content } from './About.style';
@@ -137,13 +137,15 @@ const About = ({ children }) => {
         </Typography>
 
         <Typography variant="body1" component="p">
-          CoVidActNow endorses Private Kit: Safe Paths, a project developed by MIT,
-          the Mayo Clinic, the World Health Organization, and others.
+          CoVidActNow endorses Private Kit: Safe Paths, a project developed by
+          MIT, the Mayo Clinic, the World Health Organization, and others.
         </Typography>
 
         <Typography variant="body1" component="p">
-          Private Kit is a mobile app for contact tracing that protects indivdual privacy. Contact tracing is a technology that notifies individuals if they have come in contact with someone who then later tests positive for CoVid-19.
-          Learn more at{' '}
+          Private Kit is a mobile app for contact tracing that protects
+          indivdual privacy. Contact tracing is a technology that notifies
+          individuals if they have come in contact with someone who then later
+          tests positive for CoVid-19. Learn more at{' '}
           <a
             href="https://safepaths.mit.edu"
             target="_blank"
@@ -152,18 +154,23 @@ const About = ({ children }) => {
             https://safepaths.mit.edu
           </a>{' '}
           Read the white paper
-          <li><a href="https://arxiv.org/pdf/2003.08567.pdf">Apps Gone Rogue: Maintaining Personal Privacy in an Epidemic</a></li>
+          <li>
+            <a href="https://arxiv.org/pdf/2003.08567.pdf">
+              Apps Gone Rogue: Maintaining Personal Privacy in an Epidemic
+            </a>
+          </li>
         </Typography>
 
         <Typography variant="body1" component="p">
-          Download the app on {' '}
+          Download the app on{' '}
           <a
             href="https://play.google.com/store/apps/details?id=edu.mit.privatekit"
             target="_blank"
             rel="noopener noreferrer"
           >
             Google Play
-          </a>{' '} or {' '}
+          </a>{' '}
+          or{' '}
           <a
             href="https://apps.apple.com/us/app/private-kit/id1501903733"
             target="_blank"
@@ -200,10 +207,18 @@ const About = ({ children }) => {
               </Link>
             </li>
             <li>Communications Leaders</li>
-              <ul>
-                 <li><a href="https://docs.google.com/document/d/1do_XQ0twIpjiNzmD2-TydO8h9CnorE1TiNEHe1suH0Q/edit">Growth Lead</a></li>
-                 <li><a href="https://docs.google.com/document/d/1SHSx8C8j11UNpxyLVYGgnv106ho2cHg41f5AStgVPkU/edit?ts=5e792bd0">Community Manager / Social Media Lead</a></li>
-              </ul>
+            <ul>
+              <li>
+                <a href="https://docs.google.com/document/d/1do_XQ0twIpjiNzmD2-TydO8h9CnorE1TiNEHe1suH0Q/edit">
+                  Growth Lead
+                </a>
+              </li>
+              <li>
+                <a href="https://docs.google.com/document/d/1SHSx8C8j11UNpxyLVYGgnv106ho2cHg41f5AStgVPkU/edit?ts=5e792bd0">
+                  Community Manager / Social Media Lead
+                </a>
+              </li>
+            </ul>
           </ul>
         </Typography>
         <Typography variant="body1" component="p">

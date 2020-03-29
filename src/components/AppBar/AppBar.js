@@ -32,17 +32,17 @@ const _AppBar = () => {
   const getDefaultPanelId = () => {
     const defaultPanelIndex = Number(panels.indexOf(pathname));
 
-    if(!defaultPanelIndex) {
+    if (!defaultPanelIndex) {
       return 0;
     }
 
     // We are on the state page, don't highlight a tab
-    if(defaultPanelIndex === -1) {
+    if (defaultPanelIndex === -1) {
       return false;
     }
 
     return defaultPanelIndex;
-  }
+  };
 
   const [panelIdx, setPanelIdx] = useState(getDefaultPanelId());
   const [open, setOpen] = useState(false);
@@ -86,7 +86,11 @@ const _AppBar = () => {
             <Typography
               variant="button"
               onClick={goTo('/')}
-              style={{ textDecoration: 'none', color: 'black', cursor: 'pointer' }}
+              style={{
+                textDecoration: 'none',
+                color: 'black',
+                cursor: 'pointer',
+              }}
             >
               COVID ACT NOW
             </Typography>
@@ -98,7 +102,7 @@ const _AppBar = () => {
             quote={shareTitle}
             style={{ alignItems: 'center', display: 'flex', paddingRight: 28 }}
           >
-            <FacebookIcon size={32} round={true}/>
+            <FacebookIcon size={32} round={true} />
           </FacebookShareButton>
           <TwitterShareButton
             url={shareURL}

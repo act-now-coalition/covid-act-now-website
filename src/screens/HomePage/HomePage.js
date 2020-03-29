@@ -7,11 +7,9 @@ import Map from 'components/Map/Map';
 import Endorsements from 'screens/Endorsements/Endorsements';
 import Newsletter from 'components/Newsletter/Newsletter';
 
-import { 
-  StateSelector,
-} from 'components/MapSelectors/MapSelectors';
+import { StateSelector } from 'components/MapSelectors/MapSelectors';
 
-import { 
+import {
   Wrapper,
   Content,
   StateSelectorInner,
@@ -23,7 +21,7 @@ import {
 export default function HomePage() {
   const history = useHistory();
 
-  const handleStateSelectChange = (option) => {
+  const handleStateSelectChange = option => {
     const route = `/state/${option.state_code}`;
 
     history.push(route);
@@ -38,16 +36,14 @@ export default function HomePage() {
         <div className="App">
           <StateSelectorWrapper>
             <StateSelectorInner>
-              <StateSelector 
-                handleChange={handleStateSelectChange}
-              />
+              <StateSelector handleChange={handleStateSelectChange} />
             </StateSelectorInner>
           </StateSelectorWrapper>
           <Content>
             <MapTitle>
               <MapTitleDivider>
                 <div></div>
-                  <span>Or</span>
+                <span>Or</span>
                 <div></div>
               </MapTitleDivider>
               <p>Select your state below to see detailed projections</p>

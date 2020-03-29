@@ -6,9 +6,7 @@ const ValueContainer = ({ children, ...props }) => {
   return (
     components.ValueContainer && (
       <components.ValueContainer {...props}>
-        {!!children && (
-          <SearchIcon />
-        )}
+        {!!children && <SearchIcon />}
         {children}
       </components.ValueContainer>
     )
