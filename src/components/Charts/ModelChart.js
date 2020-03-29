@@ -202,7 +202,7 @@ const ModelChart = ({
       formatter: function () {
         const date = moment(this.x).format('MMMM D');
         const beds = this.y.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        if (this.series.userOptions.type === 'line') {
+        if (this.series.userOptions.name === availableBeds.name) {
           return `<b>${beds}</b> expected beds <br/> available on <b>${date}</b>`;
         }
         return `<b>${beds}</b> hospitalizations <br/> expected by <b>${date}</b>`;
