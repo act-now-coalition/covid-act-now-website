@@ -18,6 +18,7 @@ export const StyledNoResultsMenuOption = styled.div`
 export const StyledResultsMenuOption = styled.div`
   display: flex;
   text-align: left;
+  align-items: center;
   opacity: ${props => (props.hasData ? '1' : '0.4')};
 
   strong {
@@ -33,6 +34,10 @@ export const StyledDot = styled.div`
     props.color ? props.color : 'rgba(0, 0, 0, 0.12)'};
   position: relative;
   top: 5px;
+`;
+
+export const StyledResultsMenuSubText = styled.div`
+  color: rgba(0, 0, 0, 0.7);
 `;
 
 export const StyledState = styled.div`

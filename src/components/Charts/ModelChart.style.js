@@ -18,7 +18,7 @@ export const ChartContainer = styled.section`
 
 export const ChartHeader = styled.div`
   max-width: 900px;
-  padding: 16px 32px 32px;
+  padding: 16px 32px;
   margin: auto;
 
   @media (min-width: 600px) {
@@ -28,6 +28,28 @@ export const ChartHeader = styled.div`
   span {
     color: rgba(0, 0, 0, 0.7);
   }
+`;
+
+export const Disclaimer = styled.div`
+  background: #f2f2f2;
+  padding: 1rem;
+  border-radius: 4px;
+  color: rgba(0, 0, 0, 0.7);
+  margin: 0 2rem 2rem 2rem;
+
+  @media (min-width: 900px) {
+    text-align: center;
+    margin: 0 0 2rem 0;
+  }
+
+  @media (min-width: 600px) {
+    text-align: center;
+  }
+`;
+
+export const DisclaimerContent = styled.div`
+  max-width: 620px;
+  margin: auto;
 `;
 
 export const Wrapper = styled.div`
