@@ -66,9 +66,9 @@ export default function HomePage() {
           <Typography variant="h3" component="h3" style={{ marginBottom: 20 }}>
             Endorsements
           </Typography>
-          <div style={{ margin: '-2rem' }}>
-            <Endorsements />
-          </div>
+        </Content>
+        <Content wide>
+          <Endorsements />
         </Content>
       </Wrapper>
     </>

@@ -15,8 +15,9 @@ export const Profile = styled(Card)`
   box-shadow: none;
   margin: 0;
   width: 100%;
+  height: 100%;
 
-  @media (min-width: 600px) {
+  @media (min-width: 960px) {
     min-height: 305px;
   }
 `;

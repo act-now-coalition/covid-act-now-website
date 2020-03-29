@@ -9,15 +9,12 @@ export const Wrapper = styled.div`
 
 export const Content = styled.div`
   margin: auto;
+  max-width: 1000px;
 
   h1,
   h5,
   p {
     margin-bottom: 24px;
-  }
-
-  @media (min-width: 600px) {
-    width: 1000px;
   }
 `;
 
