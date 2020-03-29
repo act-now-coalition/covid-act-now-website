@@ -32,3 +32,5 @@ yarn-error.log*
 
 # you should use yarn; not npm
 package-lock.json
+
+/.nyc_output/
