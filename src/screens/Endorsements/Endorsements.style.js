@@ -3,6 +3,7 @@ import Grid from '@material-ui/core/Grid';
 
 export const Wrapper = styled.div`
   background-color: #f2f2f2;
+  margin: -32px;
   padding: 1rem;
   min-height: calc(100vh - 64px);
 `;
