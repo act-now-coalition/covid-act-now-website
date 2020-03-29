@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
 
 export const Content = styled.div`
   margin: auto;
-  max-width: 1000px;
+  max-width: 1140px;
 
   h1,
   h5,
