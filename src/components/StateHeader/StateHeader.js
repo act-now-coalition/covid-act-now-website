@@ -29,12 +29,10 @@ const Stateheader = ({
 
   const model = interventionToModel[intervention];
 
-  const earlyDateDays = moment(model.dateOverwhelmed)
-    .subtract(14, 'days')
-    .diff(moment(), 'days');
-  const lateDateDays = moment(model.dateOverwhelmed)
-    .subtract(9, 'days')
-    .diff(moment(), 'days');
+  const earlyDate = moment(model.dateOverwhelmed).subtract(14, 'days');
+  // .diff(moment(), 'days');
+  const lateDate = moment(model.dateOverwhelmed).subtract(9, 'days');
+  // .diff(moment(), 'days');
 
   const buildInterventionTitle = () => {
     switch (intervention) {
@@ -42,7 +40,7 @@ const Stateheader = ({
       case INTERVENTIONS.SOCIAL_DISTANCING:
         return (
           <span>
-            Intervention is needed in <strong>{locationName}</strong>
+            You must act now in <strong>{locationName}.</strong>
           </span>
         );
       case INTERVENTIONS.SHELTER_IN_PLACE:
@@ -59,7 +57,7 @@ const Stateheader = ({
     switch (intervention) {
       case INTERVENTIONS.LIMITED_ACTION:
       case INTERVENTIONS.SOCIAL_DISTANCING:
-        if (earlyDateDays <= 0) {
+        if (earlyDate.isBefore(moment())) {
           return (
             <HeaderSubCopy>
               To limit hospital overload, our projections indicate shelter in
@@ -73,12 +71,14 @@ const Stateheader = ({
         } else {
           return (
             <HeaderSubCopy>
-              To prevent hospital overload, our projections indicate that
-              shelter in place must be implemented{' '}
+              To prevent hospital overload, our projections indicate shelter in
+              place must be implemented{' '}
               <HeaderHighlight color={INTERVENTION_COLOR_MAP[intervention]}>
-                within the next {earlyDateDays}-{lateDateDays} days
+                between {earlyDate.format('MMMM Do')} and{' '}
+                {lateDate.format('MMMM Do')} at the latest
               </HeaderHighlight>
-              .
+              . The only thing that matters right now is the speed of your
+              response.
             </HeaderSubCopy>
           );
         }
