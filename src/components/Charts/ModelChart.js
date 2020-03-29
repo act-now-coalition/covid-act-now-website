@@ -35,7 +35,7 @@ const ModelChart = ({
     let plotLineText;
     switch (currentIntervention) {
       case INTERVENTIONS.SHELTER_IN_PLACE:
-        plotLineText = '<span>Shelter in place<br />Worst case scenario</span>';
+        plotLineText = '<span>Shelter in place<br />(poor compliance)</span>';
         break;
       case INTERVENTIONS.LIMITED_ACTION:
         plotLineText = 'Assuming limited action';
@@ -83,7 +83,10 @@ const ModelChart = ({
   const socialDistancing = {
     name:
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
-        ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (worst case)')
+        ? formatIntervention(
+            INTERVENTIONS.SHELTER_IN_PLACE,
+            ' (poor compliance)',
+          )
         : formatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
     type: 'areaspline',
     data: data[2].data,
@@ -94,7 +97,10 @@ const ModelChart = ({
   const shelterInPlace = {
     name:
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
-        ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (best case)')
+        ? formatIntervention(
+            INTERVENTIONS.SHELTER_IN_PLACE,
+            ' (strict compliance)',
+          )
         : formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
     type: 'areaspline',
     data: data[1].data,
