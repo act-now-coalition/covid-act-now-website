@@ -91,16 +91,13 @@ const COLUMNS = {
 const MS_PER_DAY = 1000 * 60 * 60 * 24;
 
 //intersection between lines connect points [a, b] and [c, d]
-function intersection(a, b, c, d){
-  const det = (a.x - b.x)*(c.y - d.y) 
-          - (a.y - b.y)*(c.x - d.x),
-
-  l = a.x*b.y - a.y*b.x,
-  m = c.x*d.y - c.y*d.x,
-
-  ix = (l*(c.x - d.x) - m*(a.x - b.x))/det,
-  iy = (l*(c.y - d.y) - m*(a.y - b.y))/det,
-  i = { x: ix, y: iy };
+function intersection(a, b, c, d) {
+  const det = (a.x - b.x) * (c.y - d.y) - (a.y - b.y) * (c.x - d.x),
+    l = a.x * b.y - a.y * b.x,
+    m = c.x * d.y - c.y * d.x,
+    ix = (l * (c.x - d.x) - m * (a.x - b.x)) / det,
+    iy = (l * (c.y - d.y) - m * (a.y - b.y)) / det,
+    i = { x: ix, y: iy };
 
   return i;
 }
@@ -153,23 +150,31 @@ export class Model {
       this.dateOverwhelmed = null;
     } else {
       // since we only get reports every 4 daysfind x coordinate of the crossing point of
-      // hospitalizations and beds. 
+      // hospitalizations and beds.
       const startIdx = overwhelmedIdx - 1;
-      const endIdx =  overwhelmedIdx;
+      const endIdx = overwhelmedIdx;
       // create coords normalized with an x range of 1
-      const bedsStart = { y: this.beds[startIdx], x: 0 }
-      const bedsEnd = { y: this.beds[endIdx], x: 1 }
-      const hospitalizationsStart = { y: this.hospitalizations[startIdx], x: 0 }
-      const hospitalizationsEnd = { y: this.hospitalizations[endIdx], x: 1}
+      const bedsStart = { y: this.beds[startIdx], x: 0 };
+      const bedsEnd = { y: this.beds[endIdx], x: 1 };
+      const hospitalizationsStart = {
+        y: this.hospitalizations[startIdx],
+        x: 0,
+      };
+      const hospitalizationsEnd = { y: this.hospitalizations[endIdx], x: 1 };
       // find the point at which they intersect. this method uses linear interpolation for
       // simplicity so there may be some disconnect here.
-      const crossingPoint = intersection(bedsStart, bedsEnd, hospitalizationsStart, hospitalizationsEnd);
+      const crossingPoint = intersection(
+        bedsStart,
+        bedsEnd,
+        hospitalizationsStart,
+        hospitalizationsEnd,
+      );
       // scale the normalized range of 4 back up to the actual range of 4 days.
       let dayDelta = Math.floor(4 * crossingPoint.x);
       // create the new date by adding the delta to the day prior to overwhelming.
       const startDate = this.dates[startIdx];
       const deltaSecs = dayDelta * MS_PER_DAY;
-      const estimatedTimeStamp = startDate.getTime() + deltaSecs 
+      const estimatedTimeStamp = startDate.getTime() + deltaSecs;
       this.dateOverwhelmed = new Date(estimatedTimeStamp);
     }
 
