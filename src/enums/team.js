@@ -29,7 +29,7 @@ export default [
   {
     name: 'Ellie Graeden, Ph.D.',
     title:
-      'CEO of Talus Analytics; Fmr Epidemiological modeling faculty, Georgetown University',
+      'CEO, Talus Analytics; Affiliate and Adjunct, Georgetown University Center for Global Health Science and Security',
     link: 'https://www.linkedin.com/in/egraeden/',
   },
   {
