@@ -14,12 +14,25 @@ jobs:
         with:
           node-version: '10.x'
     
-      - name: Cache Node Modules
-        uses: actions/cache@v1
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      
+      - uses: actions/cache@v1
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
-          path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
-          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: ${{ runner.os }}-node-
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: ${{ runner.os }}-yarn-
+
+      # TODO: Discuss yarn vs. npm. I personally don't want to have to install yarn. 
+      # It's not needed for anything and only adds an additional 
+      # - name: Cache Node Modules
+      #   uses: actions/cache@v1
+      #   with:
+      #     path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
+      #     key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+      #     restore-keys: ${{ runner.os }}-node-
           
       - name: Cache Cypress
         uses: actions/cache@v1
