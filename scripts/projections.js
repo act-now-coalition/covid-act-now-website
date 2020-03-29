@@ -279,7 +279,6 @@ class Model {
 let ws = fs.createWriteStream('projections.txt');
 ws.write('Projection1,Projection2\n');
 
-
 // Go through each state and write the data
 Object.keys(STATES).forEach(state => {
   const stateKey =
@@ -300,7 +299,6 @@ Object.keys(STATES).forEach(state => {
   const firstDatePastNowIdx = baseline.dates.findIndex(
     date => date.getTime() > now.getTime(),
   );
-
 
   ws.write(
     `${state},${baseline.hospitalizations[firstDatePastNowIdx]},${

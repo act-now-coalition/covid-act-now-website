@@ -3,7 +3,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider, StylesProvider } from '@material-ui/core/styles';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
-import ModelPage from "screens/ModelPage/ModelPage";
+import ModelPage from 'screens/ModelPage/ModelPage';
 import HomePage from 'screens/HomePage/HomePage';
 // import ComingSoon from 'screens/ComingSoon/ComingSoon';
 import FAQ from 'screens/FAQ/FAQ';
