@@ -12,20 +12,6 @@ export const Content = styled.div`
   }
 `;
 
-export const ChartHeader = styled.div`
-  max-width: 900px;
-  padding: 16px 32px 0 32px;
-  margin: auto;
-
-  @media (min-width: 600px) {
-    text-align: center;
-  }
-
-  span {
-    color: rgba(0, 0, 0, 0.7);
-  }
-`;
-
 export const ShareSpacer = styled.div`
   padding-right: 32px;
 `;

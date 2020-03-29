@@ -5,10 +5,9 @@ import Outcomes from './Outcomes/Outcomes';
 import ShareModelBlock from './ShareModelBlock/ShareModelBlock';
 import CallToAction from './CallToAction/CallToAction';
 import Header from 'components/Header/Header';
-import Chart from 'components/Chart/Chart';
+import ModelChart from 'components/Charts/ModelChart';
 import Newsletter from 'components/Newsletter/Newsletter';
-import LightTooltip from 'components/LightTooltip/LightTooltip';
-import { Wrapper, Content, ChartHeader } from './ModelPage.style';
+import { Wrapper, Content } from './ModelPage.style';
 import {
   STATES,
   STATE_TO_INTERVENTION,
@@ -71,20 +70,7 @@ function ModelPage() {
       )}
       {showModel && interventions && (
         <Panel>
-          <ChartHeader>
-            <h2>Projected hospitalizations</h2>
-            <span>
-              <LightTooltip
-                title="Currently we aggregate data over 4 day intervals to smooth out inconsistencies in the source data. We’re working on improving this now."
-                placement="bottom"
-              >
-                <span>
-                  Last updated March 27th. This model updates every 4 days.
-                </span>
-              </LightTooltip>
-            </span>
-          </ChartHeader>
-          <Chart
+          <ModelChart
             state={locationName}
             county={county}
             subtitle="Hospitalizations over time"

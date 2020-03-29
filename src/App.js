@@ -8,6 +8,7 @@ import HomePage from 'screens/HomePage/HomePage';
 // import ComingSoon from 'screens/ComingSoon/ComingSoon';
 import FAQ from 'screens/FAQ/FAQ';
 import Contact from 'screens/Contact/Contact';
+import Terms from 'screens/Terms/Terms';
 import Endorsements from 'screens/Endorsements/Endorsements';
 import About from 'screens/About/About';
 import AppBar from 'components/AppBar/AppBar';
@@ -28,6 +29,7 @@ export default function App() {
             <Route path="/endorsements" component={Endorsements} />
             <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />
+            <Route path="/terms" component={Terms} />
             {/* <Route path="/donate" component={ComingSoon} /> */}
             <Route path="/*">
               <Redirect to="/" />

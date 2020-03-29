@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import Highcharts, { dateFormat } from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
-import 'highcharts/css/highcharts.css';
+import { dateFormat } from 'highcharts';
 import moment from 'moment';
-import { INTERVENTIONS } from 'enums';
 import { snakeCase } from 'lodash';
+import { INTERVENTIONS } from 'enums';
+import LightTooltip from 'components/LightTooltip/LightTooltip';
+import Chart from './Chart';
 
-import { ChartContainer, Wrapper } from './Chart.style';
+import { ChartContainer, ChartHeader, Wrapper } from './ModelChart.style';
 
 const formatIntervention = (intervention, optCase) =>
   `3 months of ${intervention}${optCase || ''}`;
 
-const Chart = ({
+const ModelChart = ({
   state,
   county,
   subtitle,
@@ -69,6 +69,7 @@ const Chart = ({
       'Available Hospital Beds',
     ),
   ];
+
   const data = scenarioComparisonOverTime(100);
 
   const noAction = {
@@ -201,7 +202,7 @@ const Chart = ({
       formatter: function () {
         const date = moment(this.x).format('MMMM D');
         const beds = this.y.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        if (this.series.userOptions.type === 'line') {
+        if (this.series.userOptions.name === availableBeds.name) {
           return `<b>${beds}</b> expected beds <br/> available on <b>${date}</b>`;
         }
         return `<b>${beds}</b> hospitalizations <br/> expected by <b>${date}</b>`;
@@ -243,15 +244,28 @@ const Chart = ({
 
   return (
     <ChartContainer>
+      <ChartHeader>
+        <h2>Projected hospitalizations: {state}</h2>
+        <span>
+          <LightTooltip
+            title="Currently we aggregate data over 4 day intervals to smooth out inconsistencies in the source data. We’re working on improving this now."
+            placement="bottom"
+          >
+            <span>
+              Last updated March 27th. This model updates every 4 days.
+            </span>
+          </LightTooltip>
+        </span>
+      </ChartHeader>
       <Wrapper
         inShelterInPlace={
           currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         }
       >
-        <HighchartsReact highcharts={Highcharts} options={options} />
+        <Chart options={options} />
       </Wrapper>
     </ChartContainer>
   );
 };
 
-export default Chart;
+export default ModelChart;
