@@ -27,5 +27,5 @@ jobs:
             ${{ runner.os }}-
     
       - run: yarn install
-      # - run: npm run lint
+      - run: yarn run lint
       - run: yarn run e2e.ci

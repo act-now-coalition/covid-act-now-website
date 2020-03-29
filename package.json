@@ -45,7 +45,7 @@
     "e2e": "start-server-and-test start http://localhost:3000 cy.open",
     "e2e.ci": "cross-env BROWSER=none start-server-and-test start http://localhost:3000 cy.run",
     "eject": "react-scripts eject",
-    "lint": "eslint src || printf '\\n\\e[31mRun lint-fix to fix\\e[0m\\n\\n'",
+    "lint": "eslint src",
     "lint-fix": "eslint --fix src",
     "prettier": "prettier --check '**/*.{css,scss,js}' || printf '\\n\\e[31mRun prettier-fix to fix\\e[0m\\n\\n'",
     "prettier-fix": "prettier --write '**/*.{css,scss,js}'"
