@@ -1,38 +1,31 @@
 import { find, each, sortBy, isEqual } from 'lodash';
-import React, { useState }             from 'react';
-import Select, { components }          from 'react-select';
-import CustomStyles                    from './CustomStyles';
-import BaseValueContainer              from './BaseValueContainer';
-import ShortNumber                     from 'utils/ShortNumber';
-import StateSvg                        from 'components/StateSvg/StateSvg';
-import US_STATE_DATASET                from './datasets/us_states_dataset_01_02_2020';
+import React, { useState } from 'react';
+import Select, { components } from 'react-select';
+import CustomStyles from './CustomStyles';
+import BaseValueContainer from './BaseValueContainer';
+import ShortNumber from 'utils/ShortNumber';
+import StateSvg from 'components/StateSvg/StateSvg';
+import US_STATE_DATASET from './datasets/us_states_dataset_01_02_2020';
 
-import { 
-  STATE_TO_INTERVENTION,
-  INTERVENTION_COLOR_MAP,
-} from 'enums';
+import { STATE_TO_INTERVENTION, INTERVENTION_COLOR_MAP } from 'enums';
 
 import {
   // StyledDot,
   StyledState,
   StyledResultsMenuOption,
   StyledNoOptionsMessage,
-} from './MapSelectors.style'
+} from './MapSelectors.style';
 
-const SingleValue = ({children, ...props}) => {
+const SingleValue = ({ children, ...props }) => {
   return (
-    <components.SingleValue {...props}>
-      {children.state}
-    </components.SingleValue>
+    <components.SingleValue {...props}>{children.state}</components.SingleValue>
   );
 };
 
 const NoOptionsMessage = props => {
   return (
     <components.NoOptionsMessage {...props}>
-      <StyledNoOptionsMessage>
-        No matching states
-      </StyledNoOptionsMessage>
+      <StyledNoOptionsMessage>No matching states</StyledNoOptionsMessage>
     </components.NoOptionsMessage>
   );
 };
@@ -42,37 +35,40 @@ const Option = ({ children, ...props }) => {
   const interventionColor = INTERVENTION_COLOR_MAP[intervention];
 
   return (
-      <components.Option {...props}>
-        <StyledResultsMenuOption hasData={true}>
-          <div style={{ marginLeft: '0', marginRight: '.75rem' }}>
-            <StyledState color={interventionColor}>
-              <StateSvg state={children.state_code} />
-            </StyledState>
-          </div>
+    <components.Option {...props}>
+      <StyledResultsMenuOption hasData={true}>
+        <div style={{ marginLeft: '0', marginRight: '.75rem' }}>
+          <StyledState color={interventionColor}>
+            <StateSvg state={children.state_code} />
+          </StyledState>
+        </div>
+        <div>
           <div>
-            <div>
-              <strong>{children.state}</strong>
-            </div>
-              <span>{intervention && 
-                  <span>{intervention} - </span>
-              } {ShortNumber(children.population)} residents</span>
+            <strong>{children.state}</strong>
           </div>
-        </StyledResultsMenuOption>
-      </components.Option>
+          <span>
+            {intervention && <span>{intervention} - </span>}{' '}
+            {ShortNumber(children.population)} residents
+          </span>
+        </div>
+      </StyledResultsMenuOption>
+    </components.Option>
   );
 };
 
 const StateSelector = ({
   state,
   handleChange,
-  dataset = [{
-    county: 'Wayne County',
-  }],
+  dataset = [
+    {
+      county: 'Wayne County',
+    },
+  ],
 }) => {
   const [selectedOption, setSelectedOption] = useState(null);
   const options = US_STATE_DATASET.state_dataset;
 
-  each(dataset, (item) => {
+  each(dataset, item => {
     const county = find(options, {
       state: item,
     });
@@ -84,7 +80,7 @@ const StateSelector = ({
 
   const sortedOptions = sortBy(options, ['state']);
 
-  const handleSelectChange = (option) => {
+  const handleSelectChange = option => {
     setSelectedOption(option);
 
     if (!option) {
@@ -94,7 +90,7 @@ const StateSelector = ({
     return handleChange(option);
   };
 
-  const isOptionSelected = (option) => {
+  const isOptionSelected = option => {
     return isEqual(option, selectedOption);
   };
 
@@ -102,11 +98,10 @@ const StateSelector = ({
     const words = searchInput.split(' ');
 
     return words.reduce(
-      (acc, cur) => acc && 
-      (
-        option.data.state.toLowerCase().includes(cur.toLowerCase()) 
-        || option.data.state_code.toLowerCase().includes(cur.toLowerCase())
-      ),
+      (acc, cur) =>
+        acc &&
+        (option.data.state.toLowerCase().includes(cur.toLowerCase()) ||
+          option.data.state_code.toLowerCase().includes(cur.toLowerCase())),
       true,
     );
   };
@@ -114,7 +109,7 @@ const StateSelector = ({
   return (
     <Select
       onChange={handleSelectChange}
-      components={{ 
+      components={{
         NoOptionsMessage,
         ValueContainer: BaseValueContainer,
         Option,

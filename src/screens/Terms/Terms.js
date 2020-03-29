@@ -33,7 +33,7 @@ const Terms = ({ children }) => {
             </li>
             <li>
               There are known (and unknown) limitations of the model (known
-              limitations available {' '}
+              limitations available{' '}
               <a href="https://docs.google.com/document/d/1ETeXAfYOvArfLvlxExE0_xrO5M4ITC0_Am38CRusCko/preview#">
                 here
               </a>
@@ -509,7 +509,7 @@ const Terms = ({ children }) => {
         <Typography variant="body1" component="p">
           The information provided on this Website is subject to various
           assumptions and dependencies. More information on our Model, its
-          limitations, and these assumptions and dependencies can be found here: {' '}
+          limitations, and these assumptions and dependencies can be found here:{' '}
           <a href="https://docs.google.com/document/d/1ETeXAfYOvArfLvlxExE0_xrO5M4ITC0_Am38CRusCko/preview#heading=h.mnrhco67rpwe">
             Coronavirus: Why You Must Act Now Reference/Assumptions
           </a>
@@ -803,7 +803,7 @@ const Terms = ({ children }) => {
         </Typography>
         <Typography variant="body1" component="p">
           All other feedback, comments, requests for technical support and other
-          communications relating to the Website should be directed to: {' '}
+          communications relating to the Website should be directed to:{' '}
           <a href="mailto:info@CoVidActNow.org">info@CoVidActNow.org</a>.
         </Typography>
       </Content>

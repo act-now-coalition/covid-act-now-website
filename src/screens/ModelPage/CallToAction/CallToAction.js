@@ -35,7 +35,7 @@ const CallToAction = ({ interventions, currentIntervention }) => {
     const earlyDate = new Date(model.dateOverwhelmed.getTime() - 14 * DAYS);
     const lateDate = new Date(model.dateOverwhelmed.getTime() - 9 * DAYS);
     actionDateRange = (
-      <div style={{ fontWeight: "bold", marginTop: "1.2rem" }}>
+      <div style={{ fontWeight: 'bold', marginTop: '1.2rem' }}>
         {formatDate(earlyDate)} to {formatDate(lateDate)}
       </div>
     );

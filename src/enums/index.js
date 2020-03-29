@@ -7,7 +7,7 @@ import {
   INTERVENTION_COLOR_MAP,
   INTERVENTION_DESCRIPTIONS,
   INTERVENTION_EFFICACY_ORDER_ASC,
-} from "./interventions";
+} from './interventions';
 
 export {
   STATES,

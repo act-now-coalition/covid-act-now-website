@@ -1,4 +1,4 @@
-import InterventionJSON from '../assets/data/interventions.json'
+import InterventionJSON from '../assets/data/interventions.json';
 
 const LIMITED_ACTION = 'Limited Action';
 const SOCIAL_DISTANCING = 'Social Distancing';

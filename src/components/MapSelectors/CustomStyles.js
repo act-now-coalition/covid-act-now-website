@@ -1,5 +1,5 @@
 export default {
-  control: (styles, { menuIsOpen}) => {
+  control: (styles, { menuIsOpen }) => {
     return {
       ...styles,
       borderTop: '1px solid black',
@@ -20,17 +20,17 @@ export default {
       },
     };
   },
-  placeholder: (styles) => ({
+  placeholder: styles => ({
     ...styles,
     marginLeft: '27px',
   }),
-  input: (styles) => ({
+  input: styles => ({
     ...styles,
     '& input': {
       fontSize: '16px !important',
     },
   }),
-  singleValue: (styles) => ({
+  singleValue: styles => ({
     ...styles,
     marginLeft: '26px',
   }),
@@ -48,7 +48,7 @@ export default {
     boxShadow: 'none',
     borderRadius: '0 0 3px 3px',
   }),
-  option: (styles, { data, isDisabled, isFocused, isSelected}) => {
+  option: (styles, { data, isDisabled, isFocused, isSelected }) => {
     return {
       ...styles,
       borderTop: '1px solid black',
