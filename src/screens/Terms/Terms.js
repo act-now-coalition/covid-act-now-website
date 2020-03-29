@@ -1,7 +1,7 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 
-import { Wrapper, Content, StyledContactLink } from './Terms.style';
+import { Wrapper, Content } from './Terms.style';
 
 const Terms = ({ children }) => {
   return (
