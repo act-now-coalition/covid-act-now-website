@@ -25,12 +25,12 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ~/.cache/Cypress # npm cache files are stored in `~/.npm` on Linux/macOS
-          key: ${{ runner.os }}-cypress-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-cypress-${{ hashFiles('**/yarn.lock') }}
           restore-keys: ${{ runner.os }}-cypress-
 
       - run: yarn install
       - run: yarn run lint
-      - run: yarn run test
+      - run: yarn run test.ci
       - run: npx nyc report --reporter=text-summary
 
       - name: Archive code coverage results

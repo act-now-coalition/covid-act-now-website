@@ -45,6 +45,7 @@
     "test.ci": "cross-env BROWSER=none start-server-and-test start http://localhost:3000 cy.run",
     "cy.open": "cypress open",
     "cy.run": "cypress run",
+    "lint": "eslint src",
     "lint-fix": "eslint --fix src",
     "prettier": "prettier --check '**/*.{css,scss,js}'",
     "prettier-fix": "prettier --write '**/*.{css,scss,js}'"
