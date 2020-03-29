@@ -28,3 +28,4 @@ yarn-error.log*
 .idea
 .tern-port
 .vscode/
+/cypress/videos/
