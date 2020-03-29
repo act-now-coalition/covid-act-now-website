@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import Outcomes from './Outcomes/Outcomes';
 import ShareModelBlock from './ShareModelBlock/ShareModelBlock';
 import StateHeader from 'components/StateHeader/StateHeader';
-import Chart from 'components/Chart/Chart';
+import ModelChart from 'components/Charts/ModelChart';
 import Newsletter from 'components/Newsletter/Newsletter';
 import { Wrapper, Content } from './ModelPage.style';
 import {
@@ -21,7 +21,8 @@ const socialDistancingColor =
 const shelterInPlaceColor =
   INTERVENTION_COLOR_MAP[INTERVENTIONS.SHELTER_IN_PLACE];
 const lockdownColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.LOCKDOWN];
-const shelterInPlaceWorseCaseColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE];
+const shelterInPlaceWorseCaseColor =
+  INTERVENTION_COLOR_MAP[INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE];
 
 function ModelPage() {
   const { id: location } = useParams();
@@ -55,39 +56,34 @@ function ModelPage() {
           intervention={intervention}
           interventions={interventions}
         />
-      )
-      }
-        {false && (
-          <Panel>
+      )}
+      {false && (
+        <Panel>
+          <input
+            type="checkbox"
+            checked={countyView}
+            value={countyView}
+            onClick={() => setCountyView(!countyView)}
+          />{' '}
+          Show County View
+          {countyView && (
             <input
-              type="checkbox"
-              checked={countyView}
-              value={countyView}
-              onClick={() => setCountyView(!countyView)}
-            />{' '}
-            Show County View
-            {countyView && (
-              <input
-                type="text"
-                value={county}
-                onChange={e => setCounty({ county: e.target.value })}
-              />
-            )}
-          </Panel>
-        )}
-        {showModel && interventions && (
-          <Panel>
-            <ChartHeader>
-              <h2>Projected hospitalizations</h2>
-              <span>Last updated March 23rd</span>
-            </ChartHeader>
-            <Chart
-              state={locationName}
-              county={county}
-              subtitle="Hospitalizations over time"
-              interventions={interventions}
-              currentIntervention={intervention}
+              type="text"
+              value={county}
+              onChange={e => setCounty({ county: e.target.value })}
             />
+          )}
+        </Panel>
+      )}
+      {showModel && interventions && (
+        <Panel>
+          <ModelChart
+            state={locationName}
+            county={county}
+            subtitle="Hospitalizations over time"
+            interventions={interventions}
+            currentIntervention={intervention}
+          />
 
           <Content>
             <ShareModelBlock location={location} />
