@@ -81,7 +81,8 @@ const ModelChart = ({
     },
   };
   const socialDistancing = {
-    name: currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+    name:
+      currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (worst case)')
         : formatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
     type: 'areaspline',

@@ -16,8 +16,8 @@ export const Content = styled.div`
 export const StateSelectorWrapper = styled.div`
   padding: 1rem;
 
-  @media(min-width: 600px) {
-    background-color: #F2F2F2;
+  @media (min-width: 600px) {
+    background-color: #f2f2f2;
   }
 `;
 
@@ -31,7 +31,7 @@ export const MapTitle = styled.div`
   text-align: center;
   font-weight: bold;
 
-  @media(min-width: 600px) {
+  @media (min-width: 600px) {
     padding: 2rem 1rem 1rem;
   }
 `;
@@ -42,12 +42,12 @@ export const MapTitleDivider = styled.div`
   justify-content: space-between;
 
   div {
-     width: 50%;
-     height: 1px;
-     background: #C4C4C4;
-   }
+    width: 50%;
+    height: 1px;
+    background: #c4c4c4;
+  }
 
-   span {
-     padding: 0 2rem;
-   }
+  span {
+    padding: 0 2rem;
+  }
 `;

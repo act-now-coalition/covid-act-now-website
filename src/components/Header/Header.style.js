@@ -21,7 +21,7 @@ export const HeaderTitle = styled(Typography)`
 export const HeaderRule = styled(Typography)`
   width: 100px;
   height: 1px;
-  background: #FFFFFF;
+  background: #ffffff;
   opacity: 0.4;
   margin: 2.25rem 0 2rem;
 `;
@@ -30,7 +30,7 @@ export const HeaderSubCopy = styled(Typography)`
   font-size: 1rem;
   font-weight: 600;
 
-  @media(min-width: 1280px) {
+  @media (min-width: 1280px) {
     text-align: right;
     font-size: 1rem;
   }
@@ -45,7 +45,7 @@ export const BlackBar = styled(Box)`
   padding: 2rem 1rem;
   margin: 0;
 
-  @media(min-width: 1280px) {
+  @media (min-width: 1280px) {
     align-items: center;
     padding: 1.5rem 2rem;
     flex-direction: row;

@@ -16,7 +16,17 @@ const USE_EXISTING_FILE = ''; // '20200325061811';
 const AEI_EMBED_URL = 'https://e.infogram.com/_/bo5pjUi7dprQAvs1l6oZ?src=embed';
 
 // This is the path to the actual data within the 'infographicData={...}' object.
-const JSON_PATH_TO_DATA = ['elements', 'content', 'content', 'entities', '8bbc0f22-218e-4ad9-aa1d-262e2e6aa154', 'props', 'chartData', 'data', 0];
+const JSON_PATH_TO_DATA = [
+  'elements',
+  'content',
+  'content',
+  'entities',
+  '8bbc0f22-218e-4ad9-aa1d-262e2e6aa154',
+  'props',
+  'chartData',
+  'data',
+  0,
+];
 
 // Maps AEI data to short predictable strings. For things we want to ignore we explicitly map to ''
 // so as to help us notice if their data structure changes.
@@ -39,28 +49,30 @@ const INTERVENTION_MAP = {
   'Ordered hospitals to increase capacity': '',
 };
 
-
 const execSync = require('child_process').execSync;
 const fs = require('fs');
 const dataDir = `${__dirname}/data`;
 
 // Change YYYY-MM-DDTHH:MM:SS.mmm ISO timestamp into YYYYMMDDHHMMSS for
 // including in filenames.
-const FILE_TIME = USE_EXISTING_FILE || new Date().toISOString()
-  .replace('T', '')
-  .replace(/-/g, '')
-  .replace(/:/g, '')
-  .replace(/\..+/, '');
+const FILE_TIME =
+  USE_EXISTING_FILE ||
+  new Date()
+    .toISOString()
+    .replace('T', '')
+    .replace(/-/g, '')
+    .replace(/:/g, '')
+    .replace(/\..+/, '');
 
 let html = downloadAEIHtml();
-let rawData = extractRawInterventionsDataFromHtml(html)
+let rawData = extractRawInterventionsDataFromHtml(html);
 const data = massageRawInterventionsData(rawData);
 bucketData(data);
 
 // Downloads the HTML page, saves it in data/, and returns the contents.
 function downloadAEIHtml() {
   let file = '';
-  file = `${dataDir}/aei-interventions-${FILE_TIME}.html`
+  file = `${dataDir}/aei-interventions-${FILE_TIME}.html`;
   if (USE_EXISTING_FILE) {
     console.log(`Using existing ${file} file.`);
   } else {
@@ -78,7 +90,9 @@ function extractRawInterventionsDataFromHtml(html) {
 
   // Traverse the JSON to the actual data we want.
   let data = parsed;
-  JSON_PATH_TO_DATA.forEach(key => { data = data[key] });
+  JSON_PATH_TO_DATA.forEach(key => {
+    data = data[key];
+  });
 
   const result = {};
   data.forEach(stateData => {
@@ -94,7 +108,7 @@ function extractRawInterventionsDataFromHtml(html) {
       if (itemMatch) {
         const key = itemMatch[1];
         const value = itemMatch[2];
-        result[state] = result[state] || { };
+        result[state] = result[state] || {};
         result[state][key] = value;
       }
     });
@@ -103,19 +117,19 @@ function extractRawInterventionsDataFromHtml(html) {
 }
 
 function massageRawInterventionsData(data) {
-  const result = { };
-  for(const state in data) {
+  const result = {};
+  for (const state in data) {
     const stateData = data[state];
-    for(const key in stateData) {
+    for (const key in stateData) {
       const value = stateData[key];
       const mapped_key = INTERVENTION_MAP[key];
       if (mapped_key !== '') {
         let mapped_value;
         if (mapped_key === 'gathering_size_limit') {
-          mapped_value = (value === 'No limit') ? false : parseInt(value);
+          mapped_value = value === 'No limit' ? false : parseInt(value);
         } else if (mapped_key === 'curfew') {
           // coerce 'Recommended' into true.
-          mapped_value = (value === 'No') ? false : true;
+          mapped_value = value === 'No' ? false : true;
         } else if (value === 'Yes') {
           mapped_value = true;
         } else if (value === 'No') {
@@ -125,7 +139,7 @@ function massageRawInterventionsData(data) {
           console.error('Unexpected AEI data:', state, ':', key, ':', value);
           process.exit(-1);
         }
-        result[state] = result[state] || { };
+        result[state] = result[state] || {};
         result[state][mapped_key] = mapped_value;
       }
     }
@@ -135,10 +149,14 @@ function massageRawInterventionsData(data) {
 
 function bucketData(data) {
   const buckets = [];
-  for(const state in data) {
+  for (const state in data) {
     const stateData = data[state];
     let action;
-    const { stay_at_home_order, closed_schools, closed_bars_restaurants } = stateData;
+    const {
+      stay_at_home_order,
+      closed_schools,
+      closed_bars_restaurants,
+    } = stateData;
     if (stay_at_home_order) {
       action = 'Shelter in Place';
     } else if (closed_schools && closed_bars_restaurants) {
@@ -151,7 +169,7 @@ function bucketData(data) {
       action,
       stay_at_home_order ? 'Stay At Home' : '',
       closed_schools ? 'Closed Schools' : '',
-      closed_bars_restaurants ? 'Closed Bars/Restaurants' : ''
+      closed_bars_restaurants ? 'Closed Bars/Restaurants' : '',
     ];
     buckets.push(bucket.join(','));
   }

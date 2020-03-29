@@ -2,10 +2,10 @@ import React from 'react';
 import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
-import { 
-  HeaderSubCopy, 
-  HeaderRule, 
-  HeaderTitle, 
+import {
+  HeaderSubCopy,
+  HeaderRule,
+  HeaderTitle,
   BlackBar,
 } from './Header.style';
 
@@ -19,26 +19,24 @@ const Header = ({ children, locationName, intervention }) => {
         <HeaderTitle>
           Why you must act now{locationName ? `: ${locationName}` : ''}
         </HeaderTitle>
-          {isMobile && 
-              <HeaderRule />
-          }
+        {isMobile && <HeaderRule />}
       </div>
       <div>
         <HeaderSubCopy
-          style={{marginBottom: isMobile ? '1rem' : '0.5rem'}}
+          style={{ marginBottom: isMobile ? '1rem' : '0.5rem' }}
           color="inherit"
           component="p"
           variant="subtitle2"
         >
-          Public leaders &amp; health officials: The only thing that matters right now is the speed of your response.
+          Public leaders &amp; health officials: The only thing that matters
+          right now is the speed of your response.
         </HeaderSubCopy>
 
-        <HeaderSubCopy
-          color="inherit"
-          component="p"
-          variant="subtitle2"
-        >
-            <i>This model is intended to help make fast decisions, not predict the future.</i>
+        <HeaderSubCopy color="inherit" component="p" variant="subtitle2">
+          <i>
+            This model is intended to help make fast decisions, not predict the
+            future.
+          </i>
         </HeaderSubCopy>
       </div>
     </BlackBar>

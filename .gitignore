@@ -28,3 +28,9 @@ yarn-error.log*
 .idea
 .tern-port
 .vscode/
+/cypress/videos/
+
+# you should use yarn; not npm
+package-lock.json
+
+/.nyc_output/
