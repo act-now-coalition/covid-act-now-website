@@ -10,7 +10,7 @@ import * as QueryString from 'query-string';
 
 import ModelChart from 'components/Charts/ModelChart';
 import { STATES, STATE_TO_INTERVENTION } from 'enums';
-import { useModelDatas } from 'utils/model';
+import { useAllStateModelDatas } from 'utils/model';
 import { buildInterventionMap } from 'screens/ModelPage/ModelPage';
 
 import {
@@ -70,6 +70,22 @@ export function CompareModels({ match, location }) {
     setTimeout(() => setRefreshing(false), 0);
   }
 
+  // Load models for all states.
+  const leftModelDatas = useAllStateModelDatas(leftUrl);
+  const rightModelDatas = useAllStateModelDatas(rightUrl);
+
+  // Now call buildInterventionMap() for each left/right state model datas.
+  const leftModels = { }, rightModels = { };
+  const states = Object.keys(STATES);
+  if (leftModelDatas && rightModelDatas) {
+    for(const state of states) {
+      leftModels[state] = buildInterventionMap(leftModelDatas[state]);
+      rightModels[state] = buildInterventionMap(rightModelDatas[state]);
+    }
+  }
+
+  // TODO: Re-sort states based on diffs?
+
   return (
     <Wrapper>
       <ModelSelectorContainer>
@@ -122,23 +138,24 @@ export function CompareModels({ match, location }) {
       </ModelSelectorContainer>
 
       <StateComparisonList
-        left={leftUrl}
-        right={rightUrl}
+        states={states}
+        leftModels={leftModels}
+        rightModels={rightModels}
         refreshing={refreshing}
       />
     </Wrapper>
   );
 }
 
-const StateComparisonList = React.memo(function ({ left, right, refreshing }) {
+const StateComparisonList = React.memo(function ({ states, leftModels, rightModels, refreshing }) {
   return (
     <ModelComparisonsContainer>
-      {Object.keys(STATES).map(state => (
+      {states.map(state => (
         <StateCompare
           key={state}
           state={state}
-          left={left}
-          right={right}
+          leftModels={leftModels[state]}
+          rightModels={rightModels[state]}
           refreshing={refreshing}
         />
       ))}
@@ -146,7 +163,7 @@ const StateComparisonList = React.memo(function ({ left, right, refreshing }) {
   );
 });
 
-function StateCompare({ state, left, right, refreshing }) {
+function StateCompare({ state, leftModels, rightModels, refreshing }) {
   return (
     <>
       <hr />
@@ -154,10 +171,10 @@ function StateCompare({ state, left, right, refreshing }) {
       {!refreshing && (
         <Grid container spacing={3}>
           <Grid item xs={6}>
-            <StateChart state={state} dataUrl={left} />
+            <StateChart state={state} models={leftModels} />
           </Grid>
           <Grid item xs={6}>
-            <StateChart state={state} dataUrl={right} />
+            <StateChart state={state} models={rightModels} />
           </Grid>
         </Grid>
       )}
@@ -165,26 +182,26 @@ function StateCompare({ state, left, right, refreshing }) {
   );
 }
 
-function StateChart({ state, dataUrl }) {
-  const modelDatasMap = useModelDatas(state, /*county=*/ null, dataUrl);
+function StateChart({ state, models }) {
   const locationName = STATES[state];
   const intervention = STATE_TO_INTERVENTION[state];
-  const interventions = buildInterventionMap(modelDatasMap.state);
 
-  return (
-    modelDatasMap.state && (
+  if (!models) {
+    return null;
+  } else {
+    return (
       // Chart height is 600px; we pre-load when a chart is within 1200px of view.
       <LazyLoad height={600} offset={1200}>
         <ModelChart
           state={locationName}
           county={null}
           subtitle="Hospitalizations over time"
-          interventions={interventions}
+          interventions={models}
           currentIntervention={intervention}
         />
       </LazyLoad>
-    )
-  );
+    );
+  }
 }
 
 export default CompareModels;

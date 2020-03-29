@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+import { STATES } from 'enums';
+
 async function fetchAll(urls) {
   try {
     var data = await Promise.all(
@@ -21,11 +23,31 @@ export const ModelIds = {
   containNow: 2,
 };
 
-export function useModelDatas(_location, county = null, dataUrl = null) {
+// Fetch model data for a given location (e.g. 'WA' or '53033'), returning an object
+// with the models we care about (baseline, strictDistancingNow, etc.)
+async function fetchModelDatas(location, dataUrl = null) {
   dataUrl = dataUrl || '/data/';
   if (dataUrl[dataUrl.length - 1] !== '/') {
     dataUrl += '/';
   }
+
+  const urls = [
+    ModelIds.baseline,
+    ModelIds.strictDistancingNow,
+    ModelIds.weakDistancingNow,
+    ModelIds.containNow,
+  ].map(i => `${dataUrl}${location}.${i}.json`);
+
+  const loadedModelDatas = await fetchAll(urls);
+  return {
+    baseline: loadedModelDatas[0],
+    strictDistancingNow: loadedModelDatas[1],
+    weakDistancingNow: loadedModelDatas[2],
+    containNow: loadedModelDatas[3],
+  };
+}
+
+function fetchStateModelDatas(state, dataUrl = null) {
   //Some state data files are lowercase, unsure why, but we need to handle it here.
   let lowercaseStates = [
     'AK',
@@ -41,53 +63,54 @@ export function useModelDatas(_location, county = null, dataUrl = null) {
     'WA',
   ];
 
-  let location = _location;
-
-  if (lowercaseStates.indexOf(location) > -1) {
-    location = _location.toLowerCase();
+  if (lowercaseStates.indexOf(state) > -1) {
+    state = state.toLowerCase();
   }
 
+  return fetchModelDatas(state, dataUrl);
+}
+
+export function useModelDatas(_location, county = null, dataUrl = null) {
   const [modelDatas, setModelDatas] = useState({ state: null, county: null });
   useEffect(() => {
-    async function fetchData(county = null) {
-      let urls = [
-        ModelIds.baseline,
-        ModelIds.strictDistancingNow,
-        ModelIds.weakDistancingNow,
-        ModelIds.containNow,
-      ].map(i => {
-        const stateUrl = `${dataUrl}${location}.${i}.json`;
-        const countyUrl = `${dataUrl}${location}.${i}.json`; // TODO: update when we know filenames
-        return county ? countyUrl : stateUrl;
-      });
-      try {
-        let loadedModelDatas = await fetchAll(urls);
-        const key = county ? 'county' : 'state';
-        setModelDatas(m => {
-          return {
-            ...m,
-            [key]: {
-              baseline: loadedModelDatas[0],
-              strictDistancingNow: loadedModelDatas[1],
-              weakDistancingNow: loadedModelDatas[2],
-              containNow: loadedModelDatas[3],
-            },
-          };
-        });
-      } catch (e) {
-        // Make sure we clear the model data state if we fail to load data. This ensures that
-        // the CompareModels screen doesn't show stale data when you enter a bad URL by mistake.
-        setModelDatas({ state: null, county: null });
-        throw e;
-      }
-    }
-    fetchData();
+    const promises = [fetchStateModelDatas(_location, dataUrl)];
     if (county) {
-      fetchData(county);
+      promises.push(fetchModelDatas(county, dataUrl));
     }
-  }, [location, county, dataUrl]);
+    Promise.all(promises).then(results => {
+      setModelDatas({ state: results[0], county: county ? results[1] : null });
+    }).catch(e => {
+      setModelDatas({ state: null, county: null });
+      throw e;
+    });
+  }, [_location, county, dataUrl]);
 
   return modelDatas;
+}
+
+export function useAllStateModelDatas(dataUrl = null) {
+  const [stateModels, setStateModels] = useState(null);
+  useEffect(() => {
+    const promises = [];
+    const states = Object.keys(STATES);
+    for(const state of states) {
+      promises.push(fetchStateModelDatas(state));
+    }
+    Promise.all(promises).then(results => {
+      const models = { };
+      let i = 0;
+      for(const state of states) {
+        models[state] = results[i];
+        i++;
+      }
+      console.log('Setting state:', models);
+      setStateModels(models);
+    }).catch(e => {
+      setStateModels(null);
+      throw e;
+    });
+  }, [dataUrl]);
+  return stateModels;
 }
 
 const COLUMNS = {
