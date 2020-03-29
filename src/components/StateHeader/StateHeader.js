@@ -30,9 +30,7 @@ const Stateheader = ({
   const model = interventionToModel[intervention];
 
   const earlyDate = moment(model.dateOverwhelmed).subtract(14, 'days');
-  // .diff(moment(), 'days');
   const lateDate = moment(model.dateOverwhelmed).subtract(9, 'days');
-  // .diff(moment(), 'days');
 
   const buildInterventionTitle = () => {
     switch (intervention) {
