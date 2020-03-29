@@ -40,7 +40,6 @@
     "start": "react-scripts -r @cypress/instrument-cra start",
     "build": "react-scripts build",
     "serve": "react-scripts build && serve -s build",
-    "eject": "react-scripts eject",
     "test": "start-server-and-test start http://localhost:3000 cy.open",
     "test.ci": "cross-env BROWSER=none start-server-and-test start http://localhost:3000 cy.run",
     "cy.open": "cypress open",

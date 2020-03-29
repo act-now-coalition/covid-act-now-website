@@ -10,12 +10,19 @@ jobs:
     name: Build_and_Deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - run: yarn install
-      - run: yarn build
+      - name: Cache Node Modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-node-
+      - run: npm install 
+      - run: npm build 
       - uses: jakejarvis/s3-sync-action@master
         with:
           args: --acl public-read --follow-symlinks --delete

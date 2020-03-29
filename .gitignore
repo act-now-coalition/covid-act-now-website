@@ -30,7 +30,7 @@ yarn-error.log*
 .vscode/
 /cypress/videos/
 
-# you should use yarn; not npm
-package-lock.json
+# you should use npm; not yarn
+yarn.lock
 
 /.nyc_output/
