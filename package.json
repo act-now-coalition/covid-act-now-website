@@ -58,7 +58,7 @@
   },
   "lint-staged": {
     "src/**/*.{css,scss,js}": [
-      "eslint --fix src"
+      "eslint --cache --fix src"
     ]
   },
   "browserslist": {
@@ -81,9 +81,15 @@
     "eslint": "6.8.0",
     "eslint-config-prettier": "6.10.1",
     "eslint-plugin-prettier": "3.1.2",
+    "husky": ">=4",
     "istanbul-lib-coverage": "^3.0.0",
     "nyc": "^15.0.0",
     "prettier": "2.0.2",
     "start-server-and-test": "^1.10.11"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
