@@ -3,7 +3,18 @@ import { useState, useEffect } from 'react';
 async function fetchAll(urls) {
   try {
     var data = await Promise.all(
-      urls.map(url => fetch(url).then(response => response.json())),
+      urls.map(url =>
+        fetch(url)
+          .then(response => {
+            // 404 files currently return an html page instead of 404,
+            // so need to handle this way...
+            return response.text();
+          })
+          .then(responseText => {
+            const jsonResponse = JSON.parse(responseText);
+            return jsonResponse;
+          }),
+      ),
     );
 
     return data;
@@ -21,51 +32,102 @@ export const ModelIds = {
   weakDistancingNow: 3,
 };
 
-export function useModelDatas(location, county = null, dataUrl = null) {
+const initialData = {
+  location: null,
+  county: null,
+  stateDatas: null,
+  countyDatas: null,
+};
+
+async function fetchSummary(setModelDatas, location) {
+  const summaryUrl = `/data/summary/${location.toUpperCase()}.summary.json`;
+  try {
+    const summary = await fetchAll([summaryUrl]);
+    setModelDatas(state => {
+      return {
+        ...state,
+        summary: summary[0],
+      };
+    });
+  } catch (err) {}
+}
+
+async function fetchData(setModelDatas, location, county = null, dataUrl = null) {
   dataUrl = dataUrl || '/data/';
   if (dataUrl[dataUrl.length - 1] !== '/') {
     dataUrl += '/';
   }
 
-  const [modelDatas, setModelDatas] = useState({ state: null, county: null });
+  let modelDataForKey = null;
+  let urls = [
+    ModelIds.baseline,
+    ModelIds.strictDistancingNow,
+    ModelIds.weakDistancingNow,
+    ModelIds.containNow,
+  ].map(i => {
+    let fipsCode =
+      county && county.full_fips_code ? county.full_fips_code : null;
+    const stateUrl = `${dataUrl}${location}.${i}.json`;
+    const countyUrl = `${dataUrl}county/${location.toUpperCase()}.${fipsCode}.${i}.json`;
+    return county ? countyUrl : stateUrl;
+  });
+  try {
+    let loadedModelDatas = await fetchAll(urls);
+    modelDataForKey = {
+      baseline: loadedModelDatas[0],
+      strictDistancingNow: loadedModelDatas[1],
+      weakDistancingNow: loadedModelDatas[2],
+      containNow: loadedModelDatas[3],
+    };
+  } catch (err) {
+    modelDataForKey = {
+      error: true,
+      payload: err,
+    };
+  }
+  const key = county ? 'countyDatas' : 'stateDatas';
+
+  setModelDatas(m => {
+    return {
+      ...m,
+      location,
+      county,
+      [key]: modelDataForKey,
+    };
+  });
+}
+
+export function useModelDatas(_location, county = null, dataUrl = null) {
+  //Some state data files are lowercase, unsure why, but we need to handle it here.
+  let lowercaseStates = [
+    'AK',
+    'CA',
+    'CO',
+    'FL',
+    'MO',
+    'NM',
+    'NV',
+    'NY',
+    'OR',
+    'TX',
+    'WA',
+  ];
+
+  let location = _location;
+
+  if (lowercaseStates.indexOf(location) > -1) {
+    location = _location.toLowerCase();
+  }
+
+  const [modelDatas, setModelDatas] = useState(initialData);
   useEffect(() => {
-    async function fetchData(county = null) {
-      let urls = [
-        ModelIds.baseline,
-        ModelIds.strictDistancingNow,
-        ModelIds.weakDistancingNow,
-        ModelIds.containNow,
-      ].map(i => {
-        const stateUrl = `${dataUrl}${location}.${i}.json`;
-        const countyUrl = `${dataUrl}${location}.${i}.json`; // TODO: update when we know filenames
-        return county ? countyUrl : stateUrl;
-      });
-      try {
-        let loadedModelDatas = await fetchAll(urls);
-        const key = county ? 'county' : 'state';
-        setModelDatas(m => {
-          return {
-            ...m,
-            [key]: {
-              baseline: loadedModelDatas[0],
-              strictDistancingNow: loadedModelDatas[1],
-              weakDistancingNow: loadedModelDatas[2],
-              containNow: loadedModelDatas[3],
-            },
-          };
-        });
-      } catch (e) {
-        // Make sure we clear the model data state if we fail to load data. This ensures that
-        // the CompareModels screen doesn't show stale data when you enter a bad URL by mistake.
-        setModelDatas({ state: null, county: null });
-        throw e;
-      }
-    }
-    fetchData();
-    if (county) {
-      fetchData(county);
-    }
-  }, [location, county, dataUrl]);
+    fetchData(setModelDatas, location, null, dataUrl);
+    fetchSummary(setModelDatas, location);
+  }, [location]);
+
+  useEffect(() => {
+    fetchData(setModelDatas, location, county, dataUrl);
+  }, [county]);
 
   return modelDatas;
 }
