@@ -22,7 +22,7 @@ const CallToAction = ({ interventions, currentIntervention }) => {
 
   const model = interventionToModel[currentIntervention];
 
-  let actionText, actionDateRange;
+  let actionText, actionDateRange, nudgeText;
   if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE) {
     actionText = `${currentIntervention} is projected to reduce hospital overload over the next 3 months`;
   } else if (
@@ -39,6 +39,9 @@ const CallToAction = ({ interventions, currentIntervention }) => {
         {formatDate(earlyDate)} to {formatDate(lateDate)}
       </div>
     );
+    nudgeText = (
+      <div style={{ fontWeight: 'normal', marginTop: '1.2rem' }}><b>Act now</b>: <a href="https://docs.google.com/document/d/1ETeXAfYOvArfLvlxExE0_xrO5M4ITC0_Am38CRusCko/preview#heading=h.vyhw42b7pgoj">stricter intervention</a> could mean hospitals are never overloaded</div>
+    );
   }
 
   const [calloutFillColor, calloutStrokeColor] = LAST_DATES_CALLOUT_COLORS[
@@ -52,6 +55,7 @@ const CallToAction = ({ interventions, currentIntervention }) => {
     >
       <div style={{ fontWeight: 'normal' }}>{actionText}</div>
       {actionDateRange}
+      {nudgeText}
     </Callout>
   );
 };

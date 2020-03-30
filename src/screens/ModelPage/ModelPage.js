@@ -71,6 +71,13 @@ function ModelPage() {
       )}
       {showModel && interventions && (
         <Panel>
+          <Content>
+          <CallToAction
+              currentIntervention={intervention}
+              interventions={interventions}
+            />
+          </Content>
+          
           <ModelChart
             state={locationName}
             county={county}
@@ -80,11 +87,6 @@ function ModelPage() {
           />
 
           <Content>
-            <CallToAction
-              currentIntervention={intervention}
-              interventions={interventions}
-            />
-
             <ShareModelBlock location={location} />
 
             <Outcomes
