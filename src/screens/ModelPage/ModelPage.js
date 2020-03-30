@@ -152,7 +152,8 @@ function ModelPage() {
   );
 }
 
-const buildInterventionMap = modelDatas => {
+// Exported for use by CompareModels screen, so it can generate identical charts.
+export const buildInterventionMap = modelDatas => {
   let interventions = {
     baseline: null,
     distancing: null,

@@ -21,7 +21,11 @@ export const ModelIds = {
   containNow: 2,
 };
 
-export function useModelDatas(_location, county = null) {
+export function useModelDatas(_location, county = null, dataUrl = null) {
+  dataUrl = dataUrl || '/data/';
+  if (dataUrl[dataUrl.length - 1] !== '/') {
+    dataUrl += '/';
+  }
   //Some state data files are lowercase, unsure why, but we need to handle it here.
   let lowercaseStates = [
     'AK',
@@ -52,29 +56,36 @@ export function useModelDatas(_location, county = null) {
         ModelIds.weakDistancingNow,
         ModelIds.containNow,
       ].map(i => {
-        const stateUrl = `/data/${location}.${i}.json`;
-        const countyUrl = `/data/${location}.${i}.json`; // TODO: update when we know filenames
+        const stateUrl = `${dataUrl}${location}.${i}.json`;
+        const countyUrl = `${dataUrl}${location}.${i}.json`; // TODO: update when we know filenames
         return county ? countyUrl : stateUrl;
       });
-      let loadedModelDatas = await fetchAll(urls);
-      const key = county ? 'county' : 'state';
-      setModelDatas(m => {
-        return {
-          ...m,
-          [key]: {
-            baseline: loadedModelDatas[0],
-            strictDistancingNow: loadedModelDatas[1],
-            weakDistancingNow: loadedModelDatas[2],
-            containNow: loadedModelDatas[3],
-          },
-        };
-      });
+      try {
+        let loadedModelDatas = await fetchAll(urls);
+        const key = county ? 'county' : 'state';
+        setModelDatas(m => {
+          return {
+            ...m,
+            [key]: {
+              baseline: loadedModelDatas[0],
+              strictDistancingNow: loadedModelDatas[1],
+              weakDistancingNow: loadedModelDatas[2],
+              containNow: loadedModelDatas[3],
+            },
+          };
+        });
+      } catch (e) {
+        // Make sure we clear the model data state if we fail to load data. This ensures that
+        // the CompareModels screen doesn't show stale data when you enter a bad URL by mistake.
+        setModelDatas({ state: null, county: null });
+        throw e;
+      }
     }
     fetchData();
     if (county) {
       fetchData(county);
     }
-  }, [location, county]);
+  }, [location, county, dataUrl]);
 
   return modelDatas;
 }

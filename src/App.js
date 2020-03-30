@@ -12,6 +12,7 @@ import Terms from 'screens/Terms/Terms';
 import Privacy from 'screens/Terms/Privacy';
 import Endorsements from 'screens/Endorsements/Endorsements';
 import About from 'screens/About/About';
+import CompareModels from 'screens/CompareModels/CompareModels';
 import AppBar from 'components/AppBar/AppBar';
 import Footer from 'components/Footer/Footer';
 import theme from 'assets/theme';
@@ -32,6 +33,7 @@ export default function App() {
             <Route path="/contact" component={Contact} />
             <Route path="/terms" component={Terms} />
             <Route path="/privacy" component={Privacy} />
+            <Route path="/compare" component={CompareModels} />
             {/* <Route path="/donate" component={ComingSoon} /> */}
             <Route path="/*">
               <Redirect to="/" />

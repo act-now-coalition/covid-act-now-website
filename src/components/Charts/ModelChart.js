@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { dateFormat } from 'highcharts';
 import moment from 'moment';
 import { snakeCase } from 'lodash';
@@ -131,7 +131,7 @@ const ModelChart = ({
     },
   };
 
-  const [options] = useState({
+  const options = {
     chart: {
       styledMode: true,
       height: '600',
@@ -253,7 +253,7 @@ const ModelChart = ({
       wuhanStyle,
       availableBeds,
     ],
-  });
+  };
 
   return (
     <ChartContainer>
