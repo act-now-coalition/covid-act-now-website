@@ -72,12 +72,12 @@ function ModelPage() {
       {showModel && interventions && (
         <Panel>
           <Content>
-          <CallToAction
+            <CallToAction
               currentIntervention={intervention}
               interventions={interventions}
             />
           </Content>
-          
+
           <ModelChart
             state={locationName}
             county={county}

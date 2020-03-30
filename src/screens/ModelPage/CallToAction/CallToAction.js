@@ -40,7 +40,13 @@ const CallToAction = ({ interventions, currentIntervention }) => {
       </div>
     );
     nudgeText = (
-      <div style={{ fontWeight: 'normal', marginTop: '1.2rem' }}><b>Act now</b>: <a href="https://docs.google.com/document/d/1ETeXAfYOvArfLvlxExE0_xrO5M4ITC0_Am38CRusCko/preview#heading=h.vyhw42b7pgoj">stricter intervention</a> could mean hospitals are never overloaded</div>
+      <div style={{ fontWeight: 'normal', marginTop: '1.2rem' }}>
+        <b>Act now</b>:{' '}
+        <a href="https://docs.google.com/document/d/1ETeXAfYOvArfLvlxExE0_xrO5M4ITC0_Am38CRusCko/preview#heading=h.vyhw42b7pgoj">
+          stricter intervention
+        </a>{' '}
+        could mean hospitals are never overloaded
+      </div>
     );
   }
 
