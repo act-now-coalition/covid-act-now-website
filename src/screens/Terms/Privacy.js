@@ -39,8 +39,8 @@ const Privacy = ({ children }) => {
             </li>
             <li>
               Through mobile and desktop applications you download from this
-              Website, which provide dedicated non-browser-based interaction
-              between you and this Website.
+              Website or an app store, which provide dedicated non-browser-based
+              interaction between you and this Website.
             </li>
             <li>
               When you interact with our advertising and applications on
