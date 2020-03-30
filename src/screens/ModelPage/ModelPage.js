@@ -18,6 +18,7 @@ import {
   LoadingScreen,
   NoData,
 } from './ModelPage.style';
+import { MapTitle, MapTitleDivider } from 'screens/HomePage/HomePage.style';
 import {
   STATES,
   STATE_TO_INTERVENTION,
@@ -129,6 +130,9 @@ function ModelPage() {
                   state={location}
                   selectedCounty={selectedCounty}
                   handleChange={option => {
+                    if (!option || !option.county_url_name) {
+                      return;
+                    }
                     setRedirectTarget(
                       `/state/${location}/county/${option.county_url_name}`,
                     );
@@ -136,6 +140,14 @@ function ModelPage() {
                   }}
                   autoFocus
                 />
+                <MapTitle>
+                  <MapTitleDivider>
+                    <div></div>
+                    <span>Or</span>
+                    <div></div>
+                  </MapTitleDivider>
+                  <p>Select your county below to see detailed projections</p>
+                </MapTitle>
                 <CountyMap
                   fill={INTERVENTION_COLOR_MAP[intervention]}
                   selectedCounty={selectedCounty}
@@ -225,13 +237,13 @@ function ModelPage() {
 
             <ShareModelBlock location={location} />
           </Content>
+          <Content>
+            <div style={{ marginTop: '3rem' }}>
+              <Newsletter />
+            </div>
+          </Content>
         </Panel>
       )}
-      <Content>
-        <div style={{ marginTop: '3rem' }}>
-          <Newsletter />
-        </div>
-      </Content>
     </Wrapper>
   );
 }
