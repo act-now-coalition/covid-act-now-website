@@ -27,7 +27,14 @@ import { STATES } from 'enums';
 const _AppBar = () => {
   const history = useHistory();
   const { pathname } = useLocation();
-  const panels = ['/', '/about', '/model', '/endorsements', '/contact'];
+  const panels = [
+    '/',
+    '/about',
+    '/model',
+    '/endorsements',
+    '/contact',
+    '/blog',
+  ];
 
   const getDefaultPanelId = () => {
     const defaultPanelIndex = Number(panels.indexOf(pathname));
@@ -63,6 +70,13 @@ const _AppBar = () => {
     history.push(route);
 
     window.scrollTo(0, 0);
+  };
+
+  const forwardTo = url => e => {
+    e.preventDefault();
+
+    setOpen(false);
+    window.open(url, '_blank');
   };
 
   const shareURL = `https://covidactnow.org${match ? match.url : ''}`;
@@ -143,6 +157,12 @@ const _AppBar = () => {
               disableRipple
               onClick={goTo('/contact')}
             />
+            <StyledTab
+              label="Blog"
+              value={5}
+              disableRipple
+              onClick={forwardTo('https://blog.covidactnow.org')}
+            />
           </StyledTabs>
         </StyledDesktopMenu>
         <StyledMobileMenu>
@@ -162,7 +182,12 @@ const _AppBar = () => {
             <TwitterIcon size={32} round={true} />
           </TwitterShareButton>
           <Burger open={open} setOpen={setOpen} />
-          <MobileMenu open={open} setOpen={setOpen} goTo={goTo} />
+          <MobileMenu
+            open={open}
+            setOpen={setOpen}
+            goTo={goTo}
+            forwardTo={forwardTo}
+          />
         </StyledMobileMenu>
       </Wrapper>
     </StyledAppBar>

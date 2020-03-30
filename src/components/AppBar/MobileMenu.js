@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyledMenu } from './AppBar.style';
 
-const MobileMenu = ({ open, goTo }) => {
+const MobileMenu = ({ open, goTo, forwardTo }) => {
   return (
     <StyledMenu open={open}>
       <a onClick={goTo('/')} href="/">
@@ -18,6 +18,12 @@ const MobileMenu = ({ open, goTo }) => {
       </a>
       <a onClick={goTo('/contact')} href="/contact">
         Contact
+      </a>
+      <a
+        onClick={forwardTo('https://blog.covidactnow.org')}
+        href="https://blog.covidactnow.org"
+      >
+        Blog
       </a>
     </StyledMenu>
   );
