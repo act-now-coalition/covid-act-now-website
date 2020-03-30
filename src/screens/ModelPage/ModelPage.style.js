@@ -65,3 +65,26 @@ export const NoData = styled.div`
   justify-content: center;
   color: red;
 `;
+
+export const StyledCountySelectorWrapper = styled.div`
+  display: flex;
+  width: 100%;
+`;
+
+export const MapIconButton = styled.div`
+  margin-left: 10px;
+  width: 54px;
+  background: ${props => (props.showCountyMap ? 'black' : 'white')};
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  & path {
+    fill: ${props => (props.showCountyMap ? 'white' : 'black')};
+  }
+  &:hover {
+  }
+`;

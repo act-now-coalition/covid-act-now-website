@@ -15,8 +15,10 @@ import {
   ModelViewOption,
   ModelViewToggle,
   CountySelectorWrapper,
+  StyledCountySelectorWrapper,
   LoadingScreen,
   NoData,
+  MapIconButton,
 } from './ModelPage.style';
 import { MapTitle, MapTitleDivider } from 'screens/HomePage/HomePage.style';
 import {
@@ -28,6 +30,7 @@ import {
 } from 'enums';
 import { useModelDatas, Model } from 'utils/model';
 import _ from 'lodash';
+import MapIcon from 'assets/images/mapIcon';
 
 const limitedActionColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.LIMITED_ACTION];
 const socialDistancingColor =
@@ -42,6 +45,7 @@ function ModelPage() {
   const { id: location, countyId } = useParams();
   // const [countyView, setCountyView] = useState(countyId ? true : false);
   const [countyView, setCountyView] = useState(true);
+  const [showCountyMap, setShowCountyMap] = useState(false);
   let countyOption = null;
   if (countyId) {
     countyOption = _.find(
@@ -126,40 +130,56 @@ function ModelPage() {
             </ModelViewToggle>
             {countyView && (
               <div>
-                <CountySelector
-                  state={location}
-                  selectedCounty={selectedCounty}
-                  handleChange={option => {
-                    if (!option || !option.county_url_name) {
-                      return;
-                    }
-                    setRedirectTarget(
-                      `/state/${location}/county/${option.county_url_name}`,
-                    );
-                    setSelectedCounty(option);
-                  }}
-                  autoFocus
-                />
-                <MapTitle>
-                  <MapTitleDivider>
-                    <div></div>
-                    <span>Or</span>
-                    <div></div>
-                  </MapTitleDivider>
-                  <p>Select your county below to see detailed projections</p>
-                </MapTitle>
-                <CountyMap
-                  fill={INTERVENTION_COLOR_MAP[intervention]}
-                  selectedCounty={selectedCounty}
-                  setSelectedCounty={fullFips => {
-                    const county = _.find(
-                      US_STATE_DATASET.state_county_map_dataset[location]
-                        .county_dataset,
-                      ['full_fips_code', fullFips],
-                    );
-                    setSelectedCounty(county);
-                  }}
-                />
+                <StyledCountySelectorWrapper>
+                  <div style={{ flexGrow: 1 }}>
+                    <CountySelector
+                      state={location}
+                      selectedCounty={selectedCounty}
+                      handleChange={option => {
+                        if (!option || !option.county_url_name) {
+                          return;
+                        }
+                        setRedirectTarget(
+                          `/state/${location}/county/${option.county_url_name}`,
+                        );
+                        setSelectedCounty(option);
+                      }}
+                      autoFocus
+                    />
+                  </div>
+                  <MapIconButton
+                    showCountyMap={showCountyMap}
+                    onClick={() => setShowCountyMap(!showCountyMap)}
+                  >
+                    <MapIcon />
+                  </MapIconButton>
+                </StyledCountySelectorWrapper>
+                {((modelDatas && showCountyMap) || !modelDatas) && (
+                  <>
+                    <MapTitle>
+                      <MapTitleDivider>
+                        <div></div>
+                        <span>Or</span>
+                        <div></div>
+                      </MapTitleDivider>
+                      <p>
+                        Select your county below to see detailed projections
+                      </p>
+                    </MapTitle>
+                    <CountyMap
+                      fill={INTERVENTION_COLOR_MAP[intervention]}
+                      selectedCounty={selectedCounty}
+                      setSelectedCounty={fullFips => {
+                        const county = _.find(
+                          US_STATE_DATASET.state_county_map_dataset[location]
+                            .county_dataset,
+                          ['full_fips_code', fullFips],
+                        );
+                        setSelectedCounty(county);
+                      }}
+                    />
+                  </>
+                )}
               </div>
             )}
           </CountySelectorWrapper>
