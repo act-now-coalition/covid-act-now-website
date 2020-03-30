@@ -94,8 +94,6 @@ function ModelPage() {
           />
 
           <Content>
-            <ShareModelBlock location={location} />
-
             <Outcomes
               title="Predicted Outcomes after 3 Months"
               models={[
