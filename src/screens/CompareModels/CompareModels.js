@@ -19,9 +19,14 @@ import {
 export function CompareModels() {
   // NOTE: The actual website doesn't handle CORS requests so we have to hit the S3 buckets for now.
   const [leftUrl, setLeftUrl] = useState(
-    'http://covidactnow.org.s3-website-us-west-1.amazonaws.com/data/',
+    // TODO(#294): We're hardcoding these to be most useful to modelers right now.
+    //'http://covidactnow.org.s3-website-us-west-1.amazonaws.com/data/',
+    '/data/'
   );
-  const [rightUrl, setRightUrl] = useState('/data/');
+  const [rightUrl, setRightUrl] = useState(
+    // '/data/'
+    'https://covidactnow-testing.s3-us-west-1.amazonaws.com/'
+  );
 
   // We have separate state for the input field text because we don't want to actually update our
   // URLs (and reload all the charts) until the input field loses focus (onBlur).
