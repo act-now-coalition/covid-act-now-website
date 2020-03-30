@@ -16,6 +16,8 @@ function Map() {
   let [redirectTarget, setRedirectTarget] = useState();
 
   if (redirectTarget) {
+    window.scrollTo(0, 0);
+
     return <Redirect push to={redirectTarget} />;
   }
 

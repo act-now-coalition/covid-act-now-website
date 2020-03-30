@@ -6,7 +6,13 @@ import { INTERVENTIONS } from 'enums';
 import LightTooltip from 'components/LightTooltip/LightTooltip';
 import Chart from './Chart';
 
-import { ChartContainer, ChartHeader, Wrapper } from './ModelChart.style';
+import {
+  ChartContainer,
+  ChartHeader,
+  Wrapper,
+  Disclaimer,
+  DisclaimerContent,
+} from './ModelChart.style';
 
 const formatIntervention = (intervention, optCase) =>
   `3 months of ${intervention}${optCase || ''}`;
@@ -252,17 +258,8 @@ const ModelChart = ({
   return (
     <ChartContainer>
       <ChartHeader>
-        <h2>Projected hospitalizations: {state}</h2>
-        <span>
-          <LightTooltip
-            title="Currently we aggregate data over 4 day intervals to smooth out inconsistencies in the source data. We’re working on improving this now."
-            placement="bottom"
-          >
-            <span>
-              Last updated March 27th. This model updates every 4 days.
-            </span>
-          </LightTooltip>
-        </span>
+        <h2>Projected hospitalizations</h2>
+        <span>{state}</span>
       </ChartHeader>
       <Wrapper
         inShelterInPlace={
@@ -270,6 +267,28 @@ const ModelChart = ({
         }
       >
         <Chart options={options} />
+        <Disclaimer>
+          <DisclaimerContent>
+            <LightTooltip
+              title="Currently we aggregate data over 4 day intervals to smooth out inconsistencies in the source data. We’re working on improving this now."
+              placement="bottom"
+            >
+              <span>
+                <strong>Last updated March 27th</strong>.{' '}
+              </span>
+            </LightTooltip>
+            This model updates every 4 days and is intended to help make fast
+            decisions, not predict the future.{' '}
+            <a
+              href="https://docs.google.com/document/d/1ETeXAfYOvArfLvlxExE0_xrO5M4ITC0_Am38CRusCko/edit#heading=h.vyhw42b7pgoj"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Learn more about our model and its limitations
+            </a>
+            .
+          </DisclaimerContent>
+        </Disclaimer>
       </Wrapper>
     </ChartContainer>
   );
