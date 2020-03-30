@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 // import CountyMap from 'components/CountyMap/CountyMap';
 import Outcomes from './Outcomes/Outcomes';
-import ShareModelBlock from './ShareModelBlock/ShareModelBlock';
 import CallToAction from './CallToAction/CallToAction';
-import Header from 'components/Header/Header';
+import ShareModelBlock from './ShareModelBlock/ShareModelBlock';
+import StateHeader from 'components/StateHeader/StateHeader';
 import ModelChart from 'components/Charts/ModelChart';
 import Newsletter from 'components/Newsletter/Newsletter';
-import { Wrapper, Content } from './ModelPage.style';
+import { Wrapper, Content, LoadingScreen } from './ModelPage.style';
 import {
   STATES,
   STATE_TO_INTERVENTION,
@@ -45,12 +45,19 @@ function ModelPage() {
 
   // No model data
   if ((!countyView && !modelDatas) || (countyView && county && !modelDatas)) {
-    return <Header locationName={locationName} intervention={intervention} />;
+    return <LoadingScreen></LoadingScreen>;
   }
 
   return (
     <Wrapper>
-      <Header locationName={locationName} intervention={intervention} />
+      {showModel && interventions && (
+        <StateHeader
+          location={location}
+          locationName={locationName}
+          intervention={intervention}
+          interventions={interventions}
+        />
+      )}
       {false && (
         <Panel>
           <input
@@ -81,11 +88,9 @@ function ModelPage() {
 
           <Content>
             <CallToAction
-              currentIntervention={intervention}
               interventions={interventions}
+              currentIntervention={intervention}
             />
-
-            <ShareModelBlock location={location} />
 
             <Outcomes
               title="Predicted Outcomes after 3 Months"
@@ -133,6 +138,8 @@ function ModelPage() {
                 </a>
               </li>
             </ul>
+
+            <ShareModelBlock location={location} />
           </Content>
         </Panel>
       )}

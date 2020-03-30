@@ -5,11 +5,15 @@ export const Wrapper = styled.div``;
 export const Content = styled.div`
   text-align: center;
   max-width: 900px;
-  padding: 32px;
+  padding: 2rem;
   margin: auto;
-  @media (min-width: 600px) {
+  @media (min-width: 900px) {
     padding: 0;
   }
+`;
+
+export const LoadingScreen = styled.div`
+  min-height: 90vh;
 `;
 
 export const ShareSpacer = styled.div`
