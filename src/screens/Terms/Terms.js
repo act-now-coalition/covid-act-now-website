@@ -75,8 +75,8 @@ const Terms = ({ children }) => {
           Website.{' '}
           <b>
             By using the Website, you accept and agree to be bound and abide by
-            these Terms of Use and our Privacy Policy, incorporated herein by
-            reference.
+            these Terms of Use and our <a href="/privacy">Privacy Policy</a>,
+            incorporated herein by reference.
           </b>{' '}
           If you do not want to agree to these Terms of Use or the Privacy
           Policy, you must not access or use the Website.
@@ -134,7 +134,7 @@ const Terms = ({ children }) => {
           otherwise, including, but not limited to, through the use of any
           interactive features on the Website, is governed by our Privacy
           Policy, and you consent to all actions we take with respect to your
-          information consistent with our Privacy Policy.
+          information consistent with our <a href="/privacy">Privacy Policy</a>.
         </Typography>
         <Typography variant="body1" component="p">
           If you choose, or are provided with, a user name, password or any
@@ -435,7 +435,7 @@ const Terms = ({ children }) => {
               privacy) of others or contain any material that could give rise to
               any civil or criminal liability under applicable laws or
               regulations or that otherwise may be in conflict with these Terms
-              of Use and our Privacy Policy.
+              of Use and our <a href="/privacy">Privacy Policy</a>.
             </li>
             <li>Be likely to deceive any person.</li>
             <li>
@@ -787,11 +787,11 @@ const Terms = ({ children }) => {
           Entire Agreement
         </Typography>
         <Typography variant="body1" component="p">
-          The Terms of Use and our Privacy Policy constitute the sole and entire
-          agreement between you and CoVidActNow.org with respect to the Website
-          and supersede all prior and contemporaneous understandings,
-          agreements, representations and warranties, both written and oral,
-          with respect to the Website.
+          The Terms of Use and our <a href="/privacy">Privacy Policy</a>{' '}
+          constitute the sole and entire agreement between you and
+          CoVidActNow.org with respect to the Website and supersede all prior
+          and contemporaneous understandings, agreements, representations and
+          warranties, both written and oral, with respect to the Website.
         </Typography>
 
         <Typography variant="h5" component="h1">
