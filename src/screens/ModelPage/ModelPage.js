@@ -22,7 +22,7 @@ const socialDistancingColor =
 const shelterInPlaceColor =
   INTERVENTION_COLOR_MAP[INTERVENTIONS.SHELTER_IN_PLACE];
 const lockdownColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.LOCKDOWN];
-const shelterInPlaceWorseCaseColor =
+const shelterInPlaceWorstCaseColor =
   INTERVENTION_COLOR_MAP[INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE];
 
 function ModelPage() {
@@ -103,7 +103,7 @@ function ModelPage() {
               colors={[
                 limitedActionColor,
                 intervention === INTERVENTIONS.SHELTER_IN_PLACE
-                  ? shelterInPlaceWorseCaseColor
+                  ? shelterInPlaceWorstCaseColor
                   : socialDistancingColor,
                 shelterInPlaceColor,
                 lockdownColor,

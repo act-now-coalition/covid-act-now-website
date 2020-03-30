@@ -33,13 +33,10 @@ const CallToAction = ({ interventions, currentIntervention }) => {
     ) {
       return {
         label: `Reduced overload projected`,
-        shortActionText: `We project a reduced overload over the next 3 months`,
+        shortActionText: `We project no overload over the next 3 months`,
         capacityIcon: <CheckShelterInPlace />,
       };
     } else {
-      const earlyDate = new Date(model.dateOverwhelmed.getTime() - 14 * DAYS);
-      const lateDate = new Date(model.dateOverwhelmed.getTime() - 9 * DAYS);
-
       const isShelterInPlaceWorstCaseModel =
         currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE &&
         model.intervention === INTERVENTIONS.SOCIAL_DISTANCING;
@@ -56,9 +53,9 @@ const CallToAction = ({ interventions, currentIntervention }) => {
 
       return {
         label: `Overload projected`,
-        shortActionText: `We project hospitals will begin to become overloaded between ${formatDate(
-          earlyDate,
-        )} and ${formatDate(lateDate)}.`,
+        shortActionText: `We project hospitals will become overloaded by ${formatDate(
+          model.dateOverwhelmed,
+        )}.`,
         capacityIcon,
       };
     }
