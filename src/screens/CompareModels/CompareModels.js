@@ -21,11 +21,11 @@ export function CompareModels() {
   const [leftUrl, setLeftUrl] = useState(
     // TODO(#294): We're hardcoding these to be most useful to modelers right now.
     //'http://covidactnow.org.s3-website-us-west-1.amazonaws.com/data/',
-    '/data/'
+    '/data/',
   );
   const [rightUrl, setRightUrl] = useState(
     // '/data/'
-    'https://covidactnow-testing.s3-us-west-1.amazonaws.com/'
+    'https://covidactnow-testing.s3-us-west-1.amazonaws.com/',
   );
 
   // We have separate state for the input field text because we don't want to actually update our
