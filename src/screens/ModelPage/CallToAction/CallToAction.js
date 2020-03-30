@@ -53,7 +53,7 @@ const CallToAction = ({ interventions, currentIntervention }) => {
 
       return {
         label: `Overload projected`,
-        shortActionText: `We project hospitals will begin to become overloaded by ${formatDate(
+        shortActionText: `We project hospitals will become overloaded by ${formatDate(
           model.dateOverwhelmed,
         )}.`,
         capacityIcon,
