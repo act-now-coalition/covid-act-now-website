@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
-<<<<<<< 9d004625243d69d10b608c4317a6fe814897a9f9
-import { Redirect, useParams } from 'react-router-dom';
-// import CountyMap from 'components/CountyMap/CountyMap';
-=======
 import { useParams, useHistory } from 'react-router-dom';
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020';
 import CountyMap from 'components/CountyMap/CountyMap';
->>>>>>> Add topo json, add county picker
 import Outcomes from './Outcomes/Outcomes';
 import CallToAction from './CallToAction/CallToAction';
 import ShareModelBlock from './ShareModelBlock/ShareModelBlock';
@@ -42,11 +37,6 @@ const shelterInPlaceWorseCaseColor =
   INTERVENTION_COLOR_MAP[INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE];
 
 function ModelPage() {
-<<<<<<< 9d004625243d69d10b608c4317a6fe814897a9f9
-  const { id: location, countyId: countyId } = useParams();
-  const [countyView, setCountyView] = useState(false);
-  const [selectedCounty, setSelectedCounty] = useState(null);
-=======
   const { id: location, countyId } = useParams();
   // const [countyView, setCountyView] = useState(countyId ? true : false);
   const [countyView, setCountyView] = useState(true);
@@ -58,7 +48,6 @@ function ModelPage() {
     );
   }
   const [selectedCounty, setSelectedCounty] = useState(countyOption);
->>>>>>> Add topo json, add county picker
   const [redirectTarget, setRedirectTarget] = useState();
 
   let modelDatas = null;
@@ -147,19 +136,6 @@ function ModelPage() {
               </ModelViewOption>
             </ModelViewToggle>
             {countyView && (
-<<<<<<< 9d004625243d69d10b608c4317a6fe814897a9f9
-              <CountySelector
-                state={location}
-                selectedCounty={selectedCounty}
-                handleChange={option => {
-                  setRedirectTarget(
-                    `/state/${location}/county/${option.county}`,
-                  );
-                  setSelectedCounty(option);
-                }}
-                autoFocus
-              />
-=======
               <div>
                 <CountySelector
                   state={location}
@@ -184,7 +160,6 @@ function ModelPage() {
                   }}
                 />
               </div>
->>>>>>> Add topo json, add county picker
             )}
           </CountySelectorWrapper>
         </Panel>
