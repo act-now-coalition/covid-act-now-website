@@ -43,16 +43,4 @@ export const StyledResultsMenuSubText = styled.div`
 export const StyledState = styled.div`
   position: relative;
   top: 3px;
-  svg {
-    width: 40px;
-    height: 40px;
-    svg {
-      opacity: 1;
-    }
-    ,
-    path {
-      opacity: 1;
-      fill: ${props => (props.color ? props.color : 'rgba(0, 0, 0, 0.12)')};
-    }
-  }
 `;
