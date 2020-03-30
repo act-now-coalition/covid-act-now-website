@@ -46,6 +46,7 @@ const CountyMap = ({ selectedCounty, setSelectedCounty, fill }) => {
         <ComposableMap
           projection="geoAlbers"
           data-tip=""
+          style={{ border: '1px solid black' }}
           projectionConfig={{
             rotate: state.rotate ? state.rotate : null,
             scale: state.scale ? state.scale : 4000,

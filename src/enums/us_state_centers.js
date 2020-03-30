@@ -266,8 +266,8 @@ export default {
     'Province/State': 'Pennsylvania',
     StateCode: 'PA',
     Latitude: 40.5908,
-    Longitude: -78.2098,
-    scale: 6000,
+    Longitude: -77.5098,
+    scale: 7000,
   },
   PR: {
     'Province/State': 'Puerto Rico',
@@ -340,7 +340,7 @@ export default {
     StateCode: 'WA',
     Latitude: 47.4009,
     Longitude: -120.4905,
-    scale: 5000,
+    scale: 8000,
   },
   WV: {
     'Province/State': 'West Virginia',

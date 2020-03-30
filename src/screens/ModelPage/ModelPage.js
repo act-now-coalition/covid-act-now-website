@@ -115,9 +115,10 @@ function ModelPage() {
                   setRedirectTarget(`/state/${location}`);
                   setCountyView(false);
                   setSelectedCounty(null);
+                  setShowCountyMap(true);
                 }}
               >
-                State View
+                Entire State
               </ModelViewOption>
               <ModelViewOption
                 selected={countyView}
@@ -125,7 +126,7 @@ function ModelPage() {
                   setCountyView(true);
                 }}
               >
-                County View
+                By County
               </ModelViewOption>
             </ModelViewToggle>
             {countyView && (
