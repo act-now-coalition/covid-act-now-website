@@ -517,7 +517,7 @@ const Privacy = ({ children }) => {
           <a href="mailto:privacy@covidactnow.org">privacy@covidactnow.org</a>.
         </Typography>
         <Typography variant="body1" component="p">
-          To register a complaint or concern, please contact us as the email
+          To register a complaint or concern, please contact us at the email
           address provided above.
         </Typography>
       </Content>
