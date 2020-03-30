@@ -26,6 +26,7 @@ import {
   SHELTER_IN_PLACE_WORST_CASE_COLOR,
 } from 'enums';
 import { useModelDatas, Model } from 'utils/model';
+import _ from 'lodash';
 
 const limitedActionColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.LIMITED_ACTION];
 const socialDistancingColor =
@@ -49,6 +50,7 @@ function ModelPage() {
   }
   const [selectedCounty, setSelectedCounty] = useState(countyOption);
   const [redirectTarget, setRedirectTarget] = useState();
+  const history = useHistory();
 
   let modelDatas = null;
   let interventions = null;
@@ -75,17 +77,10 @@ function ModelPage() {
   }
 
   if (redirectTarget) {
+    const goToLocation = redirectTarget;
     setRedirectTarget(null);
-    return <Redirect push to={redirectTarget} />;
+    history.push(goToLocation);
   }
-
-  // const HeaderWithProps = (
-  //   <Header
-  //     locationName={locationName}
-  //     countyName={countyName}
-  //     intervention={intervention}
-  //   />
-  // );
 
   // No model data
   if (
@@ -93,13 +88,6 @@ function ModelPage() {
     (countyView && selectedCounty && !modelDatas)
   ) {
     return <LoadingScreen></LoadingScreen>;
-    // return (
-    //   <Header
-    //     locationName={locationName}
-    //     countyName={countyName}
-    //     intervention={intervention}
-    //   />
-    // );
   }
 
   return (
@@ -149,6 +137,7 @@ function ModelPage() {
                   autoFocus
                 />
                 <CountyMap
+                  fill={INTERVENTION_COLOR_MAP[intervention]}
                   selectedCounty={selectedCounty}
                   setSelectedCounty={fullFips => {
                     const county = _.find(
