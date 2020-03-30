@@ -57,7 +57,7 @@ export const ModelViewOption = styled.div`
 
 export const NoData = styled.div`
   padding: 16px;
-  height: 25vh;
+  /* height: 25vh; */
   font-weight: bold;
   font-size: 30px;
   display: flex;

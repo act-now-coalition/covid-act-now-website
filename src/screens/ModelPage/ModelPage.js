@@ -131,6 +131,14 @@ function ModelPage() {
             </ModelViewToggle>
             {countyView && (
               <div>
+                {countyName && modelDatas && modelDatas.error && (
+                  <Content>
+                    <NoData>
+                      No data available for {countyName}, {locationName}
+                    </NoData>
+                  </Content>
+                )}
+
                 <StyledCountySelectorWrapper>
                   <div style={{ flexGrow: 1 }}>
                     <CountySelector
@@ -155,7 +163,9 @@ function ModelPage() {
                     <MapIcon />
                   </MapIconButton>
                 </StyledCountySelectorWrapper>
-                {((modelDatas && showCountyMap) || !modelDatas) && (
+                {((modelDatas && showCountyMap) ||
+                  (modelDatas && modelDatas.error) ||
+                  !modelDatas) && (
                   <>
                     <MapTitle>
                       <MapTitleDivider>
@@ -186,13 +196,6 @@ function ModelPage() {
           </CountySelectorWrapper>
         </Panel>
       </Content>
-      {countyName && modelDatas && modelDatas.error && (
-        <Content>
-          <NoData>
-            No data available for {countyName}, {locationName}
-          </NoData>
-        </Content>
-      )}
       {showModel && interventions && (
         <Panel>
           <ModelChart
