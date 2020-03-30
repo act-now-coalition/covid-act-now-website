@@ -54,16 +54,11 @@ export const StyledTab = styled(Tab)`
   font-size: 15px;
   padding: 0;
 
-  &[aria-selected="true"] {
+  &[aria-selected='true'] {
     color: ${palette.secondary.main};
   }
 
-  &:focus {
-    color: ${palette.secondary.main};
-    /* border-bottom: 4px solid ${palette.secondary.main}; */
-  }
-
-  @media(min-width: ${mobileBreakpoint}) {
+  @media (min-width: ${mobileBreakpoint}) {
     margin-left: 28px;
     font-size: 16px;
   }
