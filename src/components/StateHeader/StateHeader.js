@@ -16,6 +16,7 @@ import {
 const Stateheader = ({
   location,
   locationName,
+  countyName,
   intervention,
   interventions,
 }) => {
@@ -30,6 +31,9 @@ const Stateheader = ({
 
   const earlyDate = moment(model.dateOverwhelmed).subtract(14, 'days');
   const lateDate = moment(model.dateOverwhelmed).subtract(9, 'days');
+  const displayName = countyName
+    ? `${countyName}, ${locationName}`
+    : locationName;
 
   const buildInterventionTitle = () => {
     switch (intervention) {
@@ -37,13 +41,13 @@ const Stateheader = ({
       case INTERVENTIONS.SOCIAL_DISTANCING:
         return (
           <span>
-            You must act now in <strong>{locationName}.</strong>
+            You must act now in <strong>{displayName}</strong>
           </span>
         );
       case INTERVENTIONS.SHELTER_IN_PLACE:
         return (
           <span>
-            Maintain shelter in place in <strong>{locationName}.</strong>
+            Maintain shelter in place in <strong>{displayName}</strong>
           </span>
         );
       default:

@@ -101,6 +101,7 @@ function ModelPage() {
         <StateHeader
           location={location}
           locationName={locationName}
+          countyName={countyName}
           intervention={intervention}
           interventions={interventions}
         />
@@ -200,7 +201,7 @@ function ModelPage() {
         <Panel>
           <ModelChart
             state={locationName}
-            county={selectedCounty}
+            countyName={countyName}
             subtitle="Hospitalizations over time"
             interventions={interventions}
             currentIntervention={intervention}
@@ -259,7 +260,7 @@ function ModelPage() {
               </li>
             </ul>
 
-            <ShareModelBlock location={location} />
+            <ShareModelBlock location={location} county={selectedCounty} />
           </Content>
           <Content>
             <div style={{ marginTop: '3rem' }}>

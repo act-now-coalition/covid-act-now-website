@@ -19,7 +19,7 @@ const formatIntervention = (intervention, optCase) =>
 
 const ModelChart = ({
   state,
-  county,
+  countyName,
   subtitle,
   interventions,
   currentIntervention,
@@ -255,11 +255,13 @@ const ModelChart = ({
     ],
   });
 
+  const displayName = countyName ? `${countyName}, ${state}` : state;
+
   return (
     <ChartContainer>
       <ChartHeader>
         <h2>Projected hospitalizations</h2>
-        <span>{state}</span>
+        <span>{displayName}</span>
       </ChartHeader>
       <Wrapper
         inShelterInPlace={
