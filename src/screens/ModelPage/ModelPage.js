@@ -187,6 +187,10 @@ function ModelPage() {
                             .county_dataset,
                           ['full_fips_code', fullFips],
                         );
+
+                        setRedirectTarget(
+                          `/state/${location}/county/${county.county_url_name}`,
+                        );
                         setSelectedCounty(county);
                       }}
                     />
