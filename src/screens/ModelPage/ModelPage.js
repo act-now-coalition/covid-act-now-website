@@ -62,15 +62,15 @@ function ModelPage() {
   const countyName = selectedCounty ? selectedCounty.county : null;
 
   const intervention = STATE_TO_INTERVENTION[location];
-  const showModel =
-    !countyView ||
-    (countyView && selectedCounty && modelDatas && !modelDatas.error);
-
   const datasForView = countyView
     ? modelDatasMap.countyDatas
     : modelDatasMap.stateDatas;
 
   modelDatas = datasForView;
+
+  const showModel =
+    !countyView ||
+    (countyView && selectedCounty && modelDatas && !modelDatas.error);
 
   interventions = null;
   if (modelDatas && !modelDatas.error) {
