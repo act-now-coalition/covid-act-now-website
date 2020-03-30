@@ -58,7 +58,6 @@ function ModelPage() {
   const history = useHistory();
 
   let modelDatas = null;
-  let interventions = null;
   const modelDatasMap = useModelDatas(location, selectedCounty);
   console.log('modelDatasMap', modelDatasMap, selectedCounty);
 
@@ -76,9 +75,14 @@ function ModelPage() {
     !countyView ||
     (countyView && selectedCounty && modelDatas && !modelDatas.error);
 
-  interventions = null;
+  let interventions = null;
   if (modelDatas && !modelDatas.error) {
     interventions = buildInterventionMap(datasForView);
+  }
+
+  let stateInterventions = null;
+  if (modelDatasMap.stateDatas) {
+    stateInterventions = buildInterventionMap(modelDatasMap.stateDatas);
   }
 
   if (redirectTarget) {
@@ -97,13 +101,13 @@ function ModelPage() {
 
   return (
     <Wrapper>
-      {showModel && interventions && (
+      {stateInterventions && (
         <StateHeader
           location={location}
           locationName={locationName}
           countyName={countyName}
           intervention={intervention}
-          interventions={interventions}
+          interventions={stateInterventions}
         />
       )}
       <Content>
