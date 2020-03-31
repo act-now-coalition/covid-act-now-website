@@ -5,7 +5,7 @@ export const Wrapper = styled.div``;
 export const Content = styled.div`
   text-align: center;
   max-width: 900px;
-  padding: 2rem;
+  padding: 0 2rem;
   margin: auto;
   @media (min-width: 900px) {
     padding: 0;
@@ -42,8 +42,6 @@ export const ModelViewToggle = styled.div`
   border-radius: 4px;
   overflow: hidden;
   margin: auto;
-  margin-bottom: 2rem;
-  margin-top: 2rem;
 `;
 
 export const ModelViewOption = styled.div`
@@ -57,18 +55,22 @@ export const ModelViewOption = styled.div`
 
 export const NoData = styled.div`
   padding: 16px;
-  /* height: 25vh; */
   font-weight: bold;
-  font-size: 30px;
+  font-size: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: red;
+  color: rgba(232, 0, 0, 1);
+  background: rgba(232, 0, 0, 0.1);
+  border: 1px solid rgba(232, 0, 0, 0.1);
+  margin-top: 1rem;
+  border-radius: 4px;
 `;
 
 export const StyledCountySelectorWrapper = styled.div`
   display: flex;
   width: 100%;
+  margin-top: 1rem;
 `;
 
 export const MapIconButton = styled.div`
@@ -86,5 +88,25 @@ export const MapIconButton = styled.div`
     fill: ${props => (props.showCountyMap ? 'white' : 'black')};
   }
   &:hover {
+  }
+`;
+
+export const CountyMapWrapper = styled.div`
+  margin-top: 1rem;
+  background: #f2f2f2;
+  border-radius: 4px;
+`;
+
+export const ChartHeader = styled.div`
+  max-width: 900px;
+  margin: 2rem auto;
+  text-align: left;
+
+  @media (min-width: 600px) {
+    text-align: center;
+  }
+
+  span {
+    color: rgba(0, 0, 0, 0.7);
   }
 `;

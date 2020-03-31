@@ -8,7 +8,6 @@ import Chart from './Chart';
 
 import {
   ChartContainer,
-  ChartHeader,
   Wrapper,
   Disclaimer,
   DisclaimerContent,
@@ -255,14 +254,8 @@ const ModelChart = ({
     ],
   });
 
-  const displayName = countyName ? `${countyName}, ${state}` : state;
-
   return (
     <ChartContainer>
-      <ChartHeader>
-        <h2>Projected hospitalizations</h2>
-        <span>{displayName}</span>
-      </ChartHeader>
       <Wrapper
         inShelterInPlace={
           currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE

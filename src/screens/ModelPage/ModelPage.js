@@ -19,6 +19,8 @@ import {
   LoadingScreen,
   NoData,
   MapIconButton,
+  CountyMapWrapper,
+  ChartHeader,
 } from './ModelPage.style';
 import { MapTitle, MapTitleDivider } from 'screens/HomePage/HomePage.style';
 import {
@@ -60,6 +62,7 @@ function ModelPage() {
   let modelDatas = null;
   const modelDatasMap = useModelDatas(location, selectedCounty);
   console.log('modelDatasMap', modelDatasMap, selectedCounty);
+  console.log(selectedCounty);
 
   const locationName = STATES[location];
   const countyName = selectedCounty ? selectedCounty.county : null;
@@ -99,6 +102,16 @@ function ModelPage() {
     return <LoadingScreen></LoadingScreen>;
   }
 
+  const shouldShowCountyMap =
+    showCountyMap || // The map was explicitly toggled on
+    (modelDatas && modelDatas.error) || // There are no results for a county
+    !modelDatas; // There are no results for a county
+
+  const shouldShowMapButton =
+    selectedCounty && // There is a currently selected county
+    modelDatas && // We have model data to toggle back to
+    !modelDatas.error; // That model data does not contain an error
+
   return (
     <Wrapper>
       {stateInterventions && (
@@ -112,6 +125,12 @@ function ModelPage() {
       )}
       <Content>
         <Panel>
+          <ChartHeader>
+            <h2>Projected hospitalizations</h2>
+            <span>
+              {countyName ? `${countyName}, ${locationName}` : locationName}
+            </span>
+          </ChartHeader>
           <CountySelectorWrapper>
             <ModelViewToggle>
               <ModelViewOption
@@ -120,7 +139,7 @@ function ModelPage() {
                   setRedirectTarget(`/state/${location}`);
                   setCountyView(false);
                   setSelectedCounty(null);
-                  setShowCountyMap(true);
+                  setShowCountyMap(false);
                 }}
               >
                 Entire State
@@ -129,6 +148,9 @@ function ModelPage() {
                 selected={countyView}
                 onClick={() => {
                   setCountyView(true);
+                  if (!selectedCounty) {
+                    setShowCountyMap(true);
+                  }
                 }}
               >
                 By County
@@ -136,14 +158,6 @@ function ModelPage() {
             </ModelViewToggle>
             {countyView && (
               <div>
-                {countyName && modelDatas && modelDatas.error && (
-                  <Content>
-                    <NoData>
-                      No data available for {countyName}, {locationName}
-                    </NoData>
-                  </Content>
-                )}
-
                 <StyledCountySelectorWrapper>
                   <div style={{ flexGrow: 1 }}>
                     <CountySelector
@@ -157,47 +171,58 @@ function ModelPage() {
                           `/state/${location}/county/${option.county_url_name}`,
                         );
                         setSelectedCounty(option);
+                        setShowCountyMap(false);
                       }}
                       autoFocus
                     />
                   </div>
-                  <MapIconButton
-                    showCountyMap={showCountyMap}
-                    onClick={() => setShowCountyMap(!showCountyMap)}
-                  >
-                    <MapIcon />
-                  </MapIconButton>
+                  {shouldShowMapButton && (
+                    <MapIconButton
+                      showCountyMap={showCountyMap}
+                      onClick={() => setShowCountyMap(!showCountyMap)}
+                    >
+                      <MapIcon />
+                    </MapIconButton>
+                  )}
                 </StyledCountySelectorWrapper>
-                {((modelDatas && showCountyMap) ||
-                  (modelDatas && modelDatas.error) ||
-                  !modelDatas) && (
+                {countyName && modelDatas && modelDatas.error && (
+                  <NoData>
+                    No data available for {countyName}, {locationName}
+                  </NoData>
+                )}
+                {shouldShowCountyMap && (
                   <>
-                    <MapTitle>
-                      <MapTitleDivider>
-                        <div></div>
-                        <span>Or</span>
-                        <div></div>
-                      </MapTitleDivider>
-                      <p>
-                        Select your county below to see detailed projections
-                      </p>
-                    </MapTitle>
-                    <CountyMap
-                      fill={INTERVENTION_COLOR_MAP[intervention]}
-                      selectedCounty={selectedCounty}
-                      setSelectedCounty={fullFips => {
-                        const county = _.find(
-                          US_STATE_DATASET.state_county_map_dataset[location]
-                            .county_dataset,
-                          ['full_fips_code', fullFips],
-                        );
+                    {!selectedCounty && (
+                      <MapTitle>
+                        <MapTitleDivider>
+                          <div></div>
+                          <span>Or</span>
+                          <div></div>
+                        </MapTitleDivider>
+                        <p>
+                          Select your county below to see detailed projections
+                        </p>
+                      </MapTitle>
+                    )}
+                    <CountyMapWrapper>
+                      <CountyMap
+                        fill={INTERVENTION_COLOR_MAP[intervention]}
+                        selectedCounty={selectedCounty}
+                        setSelectedCounty={fullFips => {
+                          const county = _.find(
+                            US_STATE_DATASET.state_county_map_dataset[location]
+                              .county_dataset,
+                            ['full_fips_code', fullFips],
+                          );
 
-                        setRedirectTarget(
-                          `/state/${location}/county/${county.county_url_name}`,
-                        );
-                        setSelectedCounty(county);
-                      }}
-                    />
+                          setRedirectTarget(
+                            `/state/${location}/county/${county.county_url_name}`,
+                          );
+                          setShowCountyMap(false);
+                          setSelectedCounty(county);
+                        }}
+                      />
+                    </CountyMapWrapper>
                   </>
                 )}
               </div>
@@ -205,7 +230,7 @@ function ModelPage() {
           </CountySelectorWrapper>
         </Panel>
       </Content>
-      {showModel && interventions && (
+      {!shouldShowCountyMap && showModel && interventions && (
         <Panel>
           <ModelChart
             state={locationName}
@@ -242,8 +267,18 @@ function ModelPage() {
               currentIntervention={intervention}
             />
 
-            <ul style={{ textAlign: 'left', lineHeight: '2em' }}>
-              <li style={{ listStyleType: 'none', marginBottom: 10 }}>
+            <ul
+              style={{
+                textAlign: 'left',
+                lineHeight: '2em',
+              }}
+            >
+              <li
+                style={{
+                  listStyleType: 'none',
+                  marginBottom: 10,
+                }}
+              >
                 *{' '}
                 <b>
                   A second spike in disease may occur after social distancing is
