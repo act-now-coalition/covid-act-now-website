@@ -35,7 +35,7 @@ const Option = ({ children, ...props }) => {
           <div>
             <strong>{children.county}</strong>
           </div>
-          {!props.data.hasData && <span>No data available - </span>}
+          {false && !props.data.hasData && <span>No data available - </span>}
           <span>
             {new Intl.NumberFormat().format(children.population)} residents
           </span>
@@ -123,7 +123,7 @@ const CountySelector = ({
         SingleValue,
         NoOptionsMessage,
         Option,
-        MenuList,
+        // MenuList, TODO use when we kbow if there is county data
         ValueContainer: BaseValueContainer,
         IndicatorsContainer: () => null,
       }}
