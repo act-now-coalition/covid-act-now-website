@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Content = styled.div`
-  max-width: 900px;
+  max-width: ${props => (props.wide ? '1100px' : '900px')};
   margin: auto;
 `;
 

@@ -3,21 +3,19 @@ import Grid from '@material-ui/core/Grid';
 
 export const Wrapper = styled.div`
   background-color: #f2f2f2;
+  margin: -32px;
   padding: 1rem;
   min-height: calc(100vh - 64px);
 `;
 
 export const Content = styled.div`
   margin: auto;
+  max-width: 1140px;
 
   h1,
   h5,
   p {
     margin-bottom: 24px;
-  }
-
-  @media (min-width: 600px) {
-    width: 1000px;
   }
 `;
 

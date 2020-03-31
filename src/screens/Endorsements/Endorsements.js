@@ -40,7 +40,7 @@ const Endorsements = () => {
           wrap={'wrap'}
         >
           {ENDORSERS.map((e, index) => (
-            <Grid item key={index} xs={12} sm={e.size}>
+            <Grid item key={index} xs={12} md={e.size}>
               <EndorsementCard {...e} />
             </Grid>
           ))}
