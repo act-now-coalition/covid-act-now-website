@@ -89,7 +89,7 @@ const _AppBar = () => {
 
   const trackShare = target => {
     window.gtag('event', 'share', {
-      'event_label': target,
+      event_label: target,
     });
   };
 
