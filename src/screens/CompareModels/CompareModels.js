@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { get } from 'lodash';
+import { useHistory } from 'react-router-dom';
 import LazyLoad from 'react-lazyload';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
+import * as QueryString from 'query-string';
 
 import ModelChart from 'components/Charts/ModelChart';
 import { STATES, STATE_TO_INTERVENTION } from 'enums';
@@ -16,30 +19,50 @@ import {
   ModelComparisonsContainer,
 } from './CompareModels.style';
 
-export function CompareModels() {
-  // NOTE: The actual website doesn't handle CORS requests so we have to hit the S3 buckets for now.
-  const [leftUrl, setLeftUrl] = useState(
-    // TODO(#294): We're hardcoding these to be most useful to modelers right now.
-    //'http://covidactnow.org.s3-website-us-west-1.amazonaws.com/data/',
-    '/data/',
-  );
+export function CompareModels({ match, location }) {
+  const history = useHistory();
+
+  const params = QueryString.parse(history.location.search);
+
+  const [leftUrl, setLeftUrl] = useState(get(params, 'left', '/data/'));
   const [rightUrl, setRightUrl] = useState(
-    // '/data/'
-    'https://covidactnow-testing.s3-us-west-1.amazonaws.com/',
+    // NOTE: The actual website doesn't handle CORS
+    // requests so we have to hit the S3 buckets for now.
+    get(
+      params,
+      'right',
+      'https://covidactnow-testing.s3-us-west-1.amazonaws.com/',
+    ),
   );
 
-  // We have separate state for the input field text because we don't want to actually update our
-  // URLs (and reload all the charts) until the input field loses focus (onBlur).
+  // We have separate state for the input field text
+  // because we don't want to actually update our
+  // URLs (and reload all the charts) until the
+  // input field loses focus (onBlur).
   const [leftText, setLeftText] = useState(leftUrl);
   const [rightText, setRightText] = useState(rightUrl);
 
-  // We need to let you force a refresh because you may be pointing at model files on a localhost
+  // We need to let you force a refresh because you may
+  // be pointing at model files on a localhost
   // webserver that have changed since the page was loaded.
   const [refreshing, setRefreshing] = useState(false);
+
+  function setQueryParams(leftText, rightText) {
+    const params = {
+      left: leftText,
+      right: rightText,
+    };
+
+    history.push({
+      ...location,
+      search: QueryString.stringify(params),
+    });
+  }
 
   function refresh() {
     setLeftUrl(leftText);
     setRightUrl(rightText);
+    setQueryParams(leftText, rightText);
     setRefreshing(true);
   }
 

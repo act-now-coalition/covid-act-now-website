@@ -22,6 +22,7 @@
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "pageres": "^5.2.0",
+    "query-string": "^6.11.1",
     "react": "^16.13.0",
     "react-d3-library": "^1.1.8",
     "react-d3-map-choropleth": "^0.5.1",
