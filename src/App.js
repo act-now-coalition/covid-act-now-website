@@ -10,7 +10,7 @@ import FAQ from 'screens/FAQ/FAQ';
 import Contact from 'screens/Contact/Contact';
 import Terms from 'screens/Terms/Terms';
 import Privacy from 'screens/Terms/Privacy';
-import Endorsements from 'screens/Endorsements/Endorsements';
+import EndorsementsPage from 'screens/Endorsements/EndorsementsPage';
 import About from 'screens/About/About';
 import CompareModels from 'screens/CompareModels/CompareModels';
 import AppBar from 'components/AppBar/AppBar';
@@ -28,7 +28,7 @@ export default function App() {
             <Route exact path="/" component={HomePage} />
             <Route path="/state/:id" component={ModelPage} />
             <Route path="/model" component={FAQ} />
-            <Route path="/endorsements" component={Endorsements} />
+            <Route path="/endorsements" component={EndorsementsPage} />
             <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />
             <Route path="/terms" component={Terms} />
