@@ -43,8 +43,8 @@ const shelterInPlaceWorseCaseColor =
 
 function ModelPage() {
   const { id: location, countyId } = useParams();
-  // const [countyView, setCountyView] = useState(countyId ? true : false);
-  const [countyView, setCountyView] = useState(true);
+  const [countyView, setCountyView] = useState(countyId ? true : false);
+  // const [countyView, setCountyView] = useState(true);
   const [showCountyMap, setShowCountyMap] = useState(false);
   let countyOption = null;
   if (countyId) {
