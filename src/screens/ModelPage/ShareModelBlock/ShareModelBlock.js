@@ -30,8 +30,8 @@ const ShareModelBlock = ({ location }) => {
     <ShareContainer>
       <ShareInstruction>{`Share ${locationName}'s COVID-19 trends:`}</ShareInstruction>
       <ShareButtonContainer>
-        <FacebookShareButton 
-          url={shareURL} 
+        <FacebookShareButton
+          url={shareURL}
           quote={shareQuote}
           beforeOnClick={() => {
             trackShare('facebook');
