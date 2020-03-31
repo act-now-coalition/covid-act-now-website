@@ -57,6 +57,12 @@ export function CompareModels() {
             value={leftText}
             onChange={e => setLeftText(e.target.value)}
             onBlur={() => refresh()}
+            onKeyPress={ev => {
+              if (ev.key === 'Enter') {
+                refresh();
+                ev.preventDefault();
+              }
+            }}
           />
         </FormControl>
         <FormControl style={{ width: '35rem' }}>
@@ -66,6 +72,12 @@ export function CompareModels() {
             value={rightText}
             onChange={e => setRightText(e.target.value)}
             onBlur={() => refresh()}
+            onKeyPress={ev => {
+              if (ev.key === 'Enter') {
+                refresh();
+                ev.preventDefault();
+              }
+            }}
           />
         </FormControl>
         <Button variant="contained" onClick={() => refresh()}>
