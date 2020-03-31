@@ -20,12 +20,23 @@ const ShareModelBlock = ({ location }) => {
   const shareURL = `https://covidactnow.org/state/${location}`;
   const shareQuote = `This is the point of no return for intervention to prevent ${locationName}'s hospital system from being overloaded by Coronavirus: `;
   const hashtag = 'COVIDActNow';
+  const trackShare = target => {
+    window.gtag('event', 'share', {
+      event_label: target,
+    });
+  };
 
   return (
     <ShareContainer>
       <ShareInstruction>{`Share ${locationName}'s COVID-19 trends:`}</ShareInstruction>
       <ShareButtonContainer>
-        <FacebookShareButton url={shareURL} quote={shareQuote}>
+        <FacebookShareButton 
+          url={shareURL} 
+          quote={shareQuote}
+          beforeOnClick={() => {
+            trackShare('facebook');
+          }}
+        >
           <FacebookIcon size={40} round={false} borderRadius={5} />
         </FacebookShareButton>
 
@@ -35,6 +46,9 @@ const ShareModelBlock = ({ location }) => {
           url={shareURL}
           title={shareQuote}
           hashtags={[hashtag]}
+          beforeOnClick={() => {
+            trackShare('twitter');
+          }}
         >
           <TwitterIcon size={40} round={false} borderRadius={5} />
         </TwitterShareButton>
@@ -45,6 +59,9 @@ const ShareModelBlock = ({ location }) => {
           url={shareURL}
           title={shareQuote}
           hashtags={[hashtag]}
+          beforeOnClick={() => {
+            trackShare('linkedin');
+          }}
         >
           <LinkedinIcon size={40} round={false} borderRadius={5} />
         </LinkedinShareButton>
