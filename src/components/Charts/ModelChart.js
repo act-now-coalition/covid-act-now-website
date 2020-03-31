@@ -41,7 +41,7 @@ const ModelChart = ({
     let plotLineText;
     switch (currentIntervention) {
       case INTERVENTIONS.SHELTER_IN_PLACE:
-        plotLineText = '<span>Shelter in place<br />(poor compliance)</span>';
+        plotLineText = '<span>Stay at Home<br/>(poor compliance)</span>';
         break;
       case INTERVENTIONS.LIMITED_ACTION:
         plotLineText = 'Assuming limited action';

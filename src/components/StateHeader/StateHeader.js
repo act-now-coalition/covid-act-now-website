@@ -43,7 +43,7 @@ const Stateheader = ({
       case INTERVENTIONS.SHELTER_IN_PLACE:
         return (
           <span>
-            Maintain shelter in place in <strong>{locationName}.</strong>
+            Keep staying at home in <strong>{locationName}.</strong>
           </span>
         );
       default:

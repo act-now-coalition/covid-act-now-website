@@ -2,9 +2,9 @@ import InterventionJSON from '../assets/data/interventions.json';
 
 const LIMITED_ACTION = 'Limited Action';
 const SOCIAL_DISTANCING = 'Social Distancing';
-const SHELTER_IN_PLACE = 'Shelter in Place';
+const SHELTER_IN_PLACE = 'Stay at Home';
 const LOCKDOWN = 'Lockdown';
-const SHELTER_IN_PLACE_WORST_CASE = 'Shelter in Place Worst Case';
+const SHELTER_IN_PLACE_WORST_CASE = 'Stay at Home Worst Case';
 
 export const INTERVENTIONS = {
   LIMITED_ACTION,

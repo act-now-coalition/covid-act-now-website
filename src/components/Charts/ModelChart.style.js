@@ -125,7 +125,7 @@ export const Wrapper = styled.div`
         : socialDistancingColor};
     fill-opacity: 0.8;
   }
-  /* Shelter in place */
+  /* Stay at home */
   .highcharts-series-2 {
     fill: ${shelterInPlaceColor};
     stroke: ${shelterInPlaceColor};
