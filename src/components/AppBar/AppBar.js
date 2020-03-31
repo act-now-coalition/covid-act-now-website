@@ -90,16 +90,11 @@ const _AppBar = () => {
   return (
     <StyledAppBar position="sticky">
       <Wrapper>
-        <Left>
-          {pathname.includes('state') ? (
-            <ArrowBack onClick={goTo('/')} />
-          ) : (
-            <Logo onClick={goTo('/')} />
-          )}
+        <Left onClick={goTo('/')}>
+          {pathname.includes('state') ? <ArrowBack /> : <Logo />}
           <MenuTitle>
             <Typography
               variant="button"
-              onClick={goTo('/')}
               style={{
                 textDecoration: 'none',
                 color: 'black',
