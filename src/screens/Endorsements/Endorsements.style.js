@@ -27,7 +27,7 @@ export const QuoteContainer = styled.div`
   margin: 24px 12px;
   display: flex;
   flex-direction: column;
-  padding: 24px;
+  padding: 24px 30px 24px 24px;
 `;
 
 export const Quote = styled.div`
@@ -63,6 +63,7 @@ export const EndorseLink = styled.a`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  margin-top: 0.5rem;
 
   div {
     margin-right: 4px;

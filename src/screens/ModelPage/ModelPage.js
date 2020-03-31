@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 // import CountyMap from 'components/CountyMap/CountyMap';
 import Outcomes from './Outcomes/Outcomes';
@@ -48,8 +49,28 @@ function ModelPage() {
     return <LoadingScreen></LoadingScreen>;
   }
 
+  let title;
+  let description;
+  const canonical = `/state/${location}`;
+  if (intervention === 'Shelter in Place') {
+    title = `Maintain shelter in place in ${locationName}.`;
+    description = `Avoiding hospital overload depends heavily on your cooperation.`;
+  } else {
+    title = `You must act now in ${locationName}!`;
+    description = `To prevent hospital overload, our projections indicate shelter in place must be implemented soon.`;
+  }
   return (
     <Wrapper>
+      <Helmet>
+        <title>{title}</title>
+        <meta name="title" content={title} />
+        <meta name="twitter:title" content={title} />
+        <meta property="og:title" content={title} />
+        <meta name="description" content={description} />
+        <meta name="twitter:description" content={description} />
+        <meta property="og:description" content={description} />
+        <link rel="canonical" href={canonical} />
+      </Helmet>
       {showModel && interventions && (
         <StateHeader
           location={location}

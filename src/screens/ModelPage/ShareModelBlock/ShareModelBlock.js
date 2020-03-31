@@ -7,8 +7,12 @@ import {
   TwitterIcon,
   LinkedinIcon,
 } from 'react-share';
-import { ShareContainer, ShareSpacer } from './../ModelPage.style';
-import Callout from 'components/Callout/Callout';
+import {
+  ShareButtonContainer,
+  ShareContainer,
+  ShareInstruction,
+  ShareSpacer,
+} from './../ModelPage.style';
 import { STATES } from 'enums';
 
 const ShareModelBlock = ({ location }) => {
@@ -18,12 +22,9 @@ const ShareModelBlock = ({ location }) => {
   const hashtag = 'COVIDActNow';
 
   return (
-    <Callout borderColor="black">
-      <ShareContainer>
-        <div
-          style={{ paddingRight: 28, fontWeight: 'bold' }}
-        >{`Share ${locationName}'s COVID-19 trends:`}</div>
-
+    <ShareContainer>
+      <ShareInstruction>{`Share ${locationName}'s COVID-19 trends:`}</ShareInstruction>
+      <ShareButtonContainer>
         <FacebookShareButton url={shareURL} quote={shareQuote}>
           <FacebookIcon size={40} round={false} borderRadius={5} />
         </FacebookShareButton>
@@ -47,8 +48,8 @@ const ShareModelBlock = ({ location }) => {
         >
           <LinkedinIcon size={40} round={false} borderRadius={5} />
         </LinkedinShareButton>
-      </ShareContainer>
-    </Callout>
+      </ShareButtonContainer>
+    </ShareContainer>
   );
 };
 export default ShareModelBlock;
