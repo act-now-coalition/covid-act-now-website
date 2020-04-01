@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
 import { get } from 'lodash';
 import { useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import LazyLoad from 'react-lazyload';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import * as QueryString from 'query-string';
+import MenuItem from '@material-ui/core/MenuItem';
+import moment from 'moment';
 
 import ModelChart from 'components/Charts/ModelChart';
-import { STATES, STATE_TO_INTERVENTION } from 'enums';
+import { INTERVENTION_JSON_MAPPING, STATES, STATE_TO_INTERVENTION } from 'enums';
 import { useModelDatas } from 'utils/model';
 import { buildInterventionMap } from 'screens/ModelPage/ModelPage';
 
@@ -59,6 +62,9 @@ export function CompareModels({ match, location }) {
     });
   }
 
+  const [sortedStates, setSortedStates] = useState(Object.keys(STATES));
+  const [sortType, setSortType] = useState(0);
+
   function refresh() {
     setLeftUrl(leftText);
     setRightUrl(rightText);
@@ -69,6 +75,55 @@ export function CompareModels({ match, location }) {
   if (refreshing) {
     setTimeout(() => setRefreshing(false), 0);
   }
+
+  useEffect(() => {
+    let sortFn = (a, b) => {
+      return a < b ? -1 : 1;
+    };
+
+    if (sortType === 1) {
+      // sortFn = (a, b) => {
+      //   return a > b ? -1 : 1;
+      // };
+
+      sortFn = (a, b) => {
+        const overwhelmedA = GetDifferenceInDateOverwhelmed(a);
+        const overwhelmedB = GetDifferenceInDateOverwhelmed(b);
+        return overwhelmedA > overwhelmedB ? -1 : 1;
+      };
+
+      const GetDifferenceInDateOverwhelmed = (stateAbbr) => {
+        let overwhelmedLeft = GetDateOverwhelmed(stateAbbr, useModelDatas(stateAbbr, /*county=*/ null, leftUrl));
+        let overwhelmedRight = GetDateOverwhelmed(stateAbbr, useModelDatas(stateAbbr, /*county=*/ null, rightUrl));
+
+        return Math.abs(moment.duration(overwhelmedLeft.diff(overwhelmedRight, 'hours', true)));
+      };
+
+      const GetDateOverwhelmed = (stateAbbr, modelDatasMap) => {
+        const intervention = STATE_TO_INTERVENTION[stateAbbr];
+        const interventions = buildInterventionMap(modelDatasMap.state);
+
+        let targetKey = Object.keys(interventions).find(key => {
+          let selectedIntervention = interventions[key];
+          if (selectedIntervention && selectedIntervention.now) {
+            return selectedIntervention.now.intervention === intervention;
+          }
+        });
+
+        if (!!targetKey) {
+          return interventions[targetKey].now.dateOverwhelmed;
+        }
+      };
+    }
+
+    let states = Object.keys(STATES);
+    const sorted = [...states].sort(sortFn);
+    setSortedStates(sorted);
+  }, [sortType]);
+
+  const changeFilter = event => {
+    setSortType(event.target.value);
+  };
 
   return (
     <Wrapper>
@@ -119,21 +174,26 @@ export function CompareModels({ match, location }) {
             Python HTTP Server
           </a>
         </div>
+        <Select value={sortType} onChange={changeFilter}>
+          <MenuItem value={0}>Alphabetical</MenuItem>
+          <MenuItem value={1}>Difference in "Hospital Overload"</MenuItem>
+        </Select>
       </ModelSelectorContainer>
 
       <StateComparisonList
         left={leftUrl}
         right={rightUrl}
         refreshing={refreshing}
+        sortedStates={sortedStates}
       />
     </Wrapper>
   );
 }
 
-const StateComparisonList = React.memo(function ({ left, right, refreshing }) {
+const StateComparisonList = React.memo(function ({ left, right, refreshing, sortedStates }) {
   return (
     <ModelComparisonsContainer>
-      {Object.keys(STATES).map(state => (
+      {sortedStates.map(state => (
         <StateCompare
           key={state}
           state={state}
