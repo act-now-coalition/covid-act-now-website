@@ -18,10 +18,10 @@ export const ChartContainer = styled.section`
 
 export const Disclaimer = styled.div`
   background: #f2f2f2;
+  margin: 2rem;
   padding: 1rem;
   border-radius: 4px;
   color: rgba(0, 0, 0, 0.7);
-  /* margin: 0 2rem 2rem 2rem; */
 
   @media (min-width: 900px) {
     text-align: center;

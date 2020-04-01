@@ -1,15 +1,97 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div``;
+export const Wrapper = styled.div`
+`;
+
+export const ContentWrapper = styled.div`
+`;
+
+export const MainContentWrapper = styled.div`
+    margin-top: 85px;
+`;
+
+export const MainContentInner = styled.div`
+  margin: 0;
+`;
+
+export const MainContentInnerBody = styled.div`
+  margin: 0;
+  
+  @media (min-width: 900px) {
+      max-width: 900px;
+      margin: 0 auto;
+  }
+  
+  @media (min-width: 1350px) {
+    margin: 0 500px 0 auto;
+  }
+  
+  @media (min-width: 1750px) {
+    margin: 0 auto;
+  }
+`;
+
+export const SearchHeaderWrapper = styled.div`
+  position: fixed;
+  top: 65px;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  border-bottom: 1px solid #e3e3e3;
+`;
+
+export const CountyMapAltWrapper = styled.div`
+  width: 100%;
+`;
+
+export const MapContentInner = styled.div`
+  .Map {
+    width: 100%;
+  }
+  
+  border-top: 1px solid #e3e3e3;
+  padding-top: 1rem;
+  margin-top: 1rem;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+
+  @media (min-width: 1200px) {
+    display: flex;
+    height: inherit;
+    align-items: flex-start;
+  }
+`;
+
+export const MapContentWrapper = styled.div`
+  z-index: 900;
+  display: none;
+  flex: ${props => (props.mobileMenuOpen ? 1 : 0)};
+  height: inherit;
+
+  @media (min-width: 1350px) {
+    display: block;
+    background: white;
+    position: fixed;
+    border: 1px solid rgba(0,0,0,0.20);
+    border-radius: 4px;
+    top: 81px;
+    right: 16px;
+    height: 400px;
+    width: 400px;
+    padding: 0 1rem 1rem;
+  }
+`;
 
 export const Content = styled.div`
-  text-align: center;
-  max-width: 900px;
-  padding: 0 2rem;
-  margin: auto;
-  @media (min-width: 900px) {
-    padding: 0;
-  }
+    text-align: center;
+    padding: 0 2rem;
+    
+    @media(min-width: 932px) {
+        padding: 0;
+    }
+    
 `;
 
 export const LoadingScreen = styled.div`
@@ -54,79 +136,9 @@ export const ShareButtonContainer = styled.div`
   flex-direction: row;
 `;
 
-export const CountySelectorWrapper = styled.div`
-  margin-bottom: 2rem;
-`;
-
-export const ModelViewToggle = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  border: 1px solid black;
-  box-sizing: border-box;
-  border-radius: 4px;
-  overflow: hidden;
-  margin: auto;
-`;
-
-export const ModelViewOption = styled.div`
-  padding: 16px;
-  background: ${props => (props.selected ? 'black' : 'white')};
-  color: ${props => (props.selected ? 'white' : 'black')};
-  font-weight: ${props => (props.selected ? 'bold' : 'normal')};
-  width: 100%;
-  cursor: pointer;
-`;
-
-export const NoData = styled.div`
-  padding: 16px;
-  font-weight: bold;
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(232, 0, 0, 1);
-  background: rgba(232, 0, 0, 0.1);
-  border: 1px solid rgba(232, 0, 0, 0.1);
-  margin-top: 1rem;
-  border-radius: 4px;
-`;
-
-export const StyledCountySelectorWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  margin-top: 1rem;
-`;
-
-export const MapIconButton = styled.div`
-  margin-left: 10px;
-  width: 54px;
-  background: ${props => (props.showCountyMap ? 'black' : 'white')};
-  border: 1px solid black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 4px;
-  overflow: hidden;
-  cursor: pointer;
-  & path {
-    fill: ${props => (props.showCountyMap ? 'white' : 'black')};
-  }
-  &:hover {
-  }
-`;
-
-export const CountyMapWrapper = styled.div`
-  margin-top: 1rem;
-  background: #f2f2f2;
-  border-radius: 4px;
-`;
-
 export const ChartHeader = styled.div`
   max-width: 900px;
-  margin: 2rem auto;
+  padding: 0.5rem 2rem 1.5rem;
   text-align: left;
 
   @media (min-width: 600px) {

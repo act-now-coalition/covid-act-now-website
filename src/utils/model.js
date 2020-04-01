@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import _ from 'lodash';
 
 async function fetchAll(urls) {
   try {
@@ -11,8 +12,13 @@ async function fetchAll(urls) {
             return response.text();
           })
           .then(responseText => {
-            const jsonResponse = JSON.parse(responseText);
-            return jsonResponse;
+            try {
+              const jsonResponse = JSON.parse(responseText);
+
+              return jsonResponse;
+            } catch (err) {
+              console.log(err);
+            }
           }),
       ),
     );
@@ -53,7 +59,12 @@ async function fetchSummary(setModelDatas, location) {
   } catch (err) {}
 }
 
-async function fetchData(setModelDatas, location, county = null, dataUrl = null) {
+async function fetchData(
+  setModelDatas,
+  location,
+  county = null,
+  dataUrl = null,
+) {
   dataUrl = dataUrl || '/data/';
   if (dataUrl[dataUrl.length - 1] !== '/') {
     dataUrl += '/';
@@ -74,6 +85,16 @@ async function fetchData(setModelDatas, location, county = null, dataUrl = null)
   });
   try {
     let loadedModelDatas = await fetchAll(urls);
+    //This is to fix county data format
+    if (county) {
+      loadedModelDatas.map((loadedModelData, interventionIndex) => {
+        loadedModelData.map((dataPoint, dataIndex) => {
+          loadedModelDatas[interventionIndex][dataIndex] = _.tail(
+            loadedModelDatas[interventionIndex][dataIndex],
+          );
+        });
+      });
+    }
     modelDataForKey = {
       baseline: loadedModelDatas[0],
       strictDistancingNow: loadedModelDatas[1],
@@ -124,11 +145,21 @@ export function useModelDatas(_location, county = null, dataUrl = null) {
   useEffect(() => {
     fetchData(setModelDatas, location, null, dataUrl);
     fetchSummary(setModelDatas, location);
-  }, [location]);
+  }, [dataUrl, location]);
 
   useEffect(() => {
-    fetchData(setModelDatas, location, county, dataUrl);
-  }, [county]);
+    if (county === null) {
+      setModelDatas(state => {
+        return {
+          ...state,
+          county: null,
+          countyDatas: null,
+        };
+      });
+    } else {
+      fetchData(setModelDatas, location, county, dataUrl);
+    }
+  }, [dataUrl, county]);
 
   return modelDatas;
 }

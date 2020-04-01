@@ -1,44 +1,18 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import { useHistory } from 'react-router-dom';
-
-import Header from 'components/Header/Header';
+import HomePageHeader from 'components/Header/HomePageHeader';
 import Map from 'components/Map/Map';
 import Endorsements from 'screens/Endorsements/Endorsements';
 import Newsletter from 'components/Newsletter/Newsletter';
 
-import { StateSelector } from 'components/MapSelectors/MapSelectors';
-
-import {
-  Wrapper,
-  Content,
-  StateSelectorInner,
-  MapTitle,
-  MapTitleDivider,
-  StateSelectorWrapper,
-} from './HomePage.style';
+import { Wrapper, Content, MapTitle, MapTitleDivider } from './HomePage.style';
 
 export default function HomePage() {
-  const history = useHistory();
-
-  const handleStateSelectChange = option => {
-    const route = `/state/${option.state_code}`;
-
-    history.push(route);
-
-    window.scrollTo(0, 0);
-  };
-
   return (
     <>
-      <Header />
+      <HomePageHeader />
       <main>
         <div className="App">
-          <StateSelectorWrapper>
-            <StateSelectorInner>
-              <StateSelector handleChange={handleStateSelectChange} />
-            </StateSelectorInner>
-          </StateSelectorWrapper>
           <Content>
             <MapTitle>
               <MapTitleDivider>

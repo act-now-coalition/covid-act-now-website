@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { dateFormat } from 'highcharts';
 import moment from 'moment';
 import { snakeCase } from 'lodash';
@@ -130,129 +130,131 @@ const ModelChart = ({
     },
   };
 
-  const options = {
-    chart: {
-      styledMode: true,
-      height: '600',
-      spacing: [8, 0, 32, 0],
-    },
-    title: {
-      // text: county ? `${county.county}, ${state}` : state,
-      text: undefined,
-    },
-    subtitle: {
-      // text: subtitle,
-      text: undefined,
-    },
-    xAxis: {
-      type: 'datetime',
-      step: 7,
-      labels: {
-        useHTML: true,
-        rotation: 0,
-        formatter: function () {
-          return dateFormat('%b %e', this.value);
-        },
+  const options = useMemo(() => {
+    return {
+      chart: {
+        styledMode: true,
+        height: '600',
+        spacing: [8, 0, 32, 0],
       },
-      plotLines: [
-        {
-          value: model.dateOverwhelmed,
-          className: snakeCase(
-            currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
-              ? INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE
-              : currentIntervention,
-          ),
-          zIndex: 10,
-          label: {
-            formatter: function () {
-              return `<div class="custom-plot-label custom-plot-label-${snakeCase(
-                currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
-                  ? INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE
-                  : currentIntervention,
-              )}">Hospitals Overloaded<br /><span>${hospitalsOverloadedPlotLineText(
-                currentIntervention,
-              )}</span></div>`;
-            },
-            rotation: 0,
-            useHTML: true,
-            x: 1,
-            y: 12,
-          },
-        },
-        {
-          value: Date.now(),
-          className: 'today',
-          zIndex: 10,
-          label: {
-            formatter: function () {
-              return `<div class="custom-plot-label">Today</div>`;
-            },
-            rotation: 0,
-            useHTML: true,
-            x: 1,
-            y: 96,
-          },
-        },
-      ],
-    },
-    yAxis: {
       title: {
+        // text: county ? `${county.county}, ${state}` : state,
         text: undefined,
       },
-      labels: {
-        useHTML: true,
-        x: 48,
+      subtitle: {
+        // text: subtitle,
+        text: undefined,
+      },
+      xAxis: {
+        type: 'datetime',
+        step: 7,
+        labels: {
+          useHTML: true,
+          rotation: 0,
+          formatter: function () {
+            return dateFormat('%b %e', this.value);
+          },
+        },
+        plotLines: [
+          {
+            value: model.dateOverwhelmed,
+            className: snakeCase(
+              currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+                ? INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE
+                : currentIntervention,
+            ),
+            zIndex: 10,
+            label: {
+              formatter: function () {
+                return `<div class="custom-plot-label custom-plot-label-${snakeCase(
+                  currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+                    ? INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE
+                    : currentIntervention,
+                )}">Hospitals Overloaded<br /><span>${hospitalsOverloadedPlotLineText(
+                  currentIntervention,
+                )}</span></div>`;
+              },
+              rotation: 0,
+              useHTML: true,
+              x: 1,
+              y: 12,
+            },
+          },
+          {
+            value: Date.now(),
+            className: 'today',
+            zIndex: 10,
+            label: {
+              formatter: function () {
+                return `<div class="custom-plot-label">Today</div>`;
+              },
+              rotation: 0,
+              useHTML: true,
+              x: 1,
+              y: 96,
+            },
+          },
+        ],
+      },
+      yAxis: {
+        title: {
+          text: undefined,
+        },
+        labels: {
+          useHTML: true,
+          x: 48,
+          formatter: function () {
+            return this.value === 0
+              ? ''
+              : this.axis.defaultLabelFormatter.call(this);
+          },
+        },
+        maxPadding: 0.2,
+      },
+      tooltip: {
         formatter: function () {
-          return this.value === 0
-            ? ''
-            : this.axis.defaultLabelFormatter.call(this);
+          const date = moment(this.x).format('MMMM D');
+          const beds = this.y.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+          if (this.series.userOptions.name === availableBeds.name) {
+            return `<b>${beds}</b> expected beds <br/> available on <b>${date}</b>`;
+          }
+          return `<b>${beds}</b> hospitalizations <br/> expected by <b>${date}</b>`;
+        },
+        backgroundColor: null,
+        borderWidth: 0,
+        shadow: false,
+        useHTML: true,
+        style: {
+          padding: 0,
         },
       },
-      maxPadding: 0.2,
-    },
-    tooltip: {
-      formatter: function () {
-        const date = moment(this.x).format('MMMM D');
-        const beds = this.y.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        if (this.series.userOptions.name === availableBeds.name) {
-          return `<b>${beds}</b> expected beds <br/> available on <b>${date}</b>`;
-        }
-        return `<b>${beds}</b> hospitalizations <br/> expected by <b>${date}</b>`;
+      legend: {
+        useHTML: true,
+        margin: 32,
+        symbolPadding: 8,
+        itemMarginBottom: 8,
       },
-      backgroundColor: null,
-      borderWidth: 0,
-      shadow: false,
-      useHTML: true,
-      style: {
-        padding: 0,
-      },
-    },
-    legend: {
-      useHTML: true,
-      margin: 32,
-      symbolPadding: 8,
-      itemMarginBottom: 8,
-    },
-    plotOptions: {
-      series: {
-        marker: {
-          enabled: false,
+      plotOptions: {
+        series: {
+          marker: {
+            enabled: false,
+          },
+        },
+        area: {
+          marker: {
+            enabled: false,
+          },
         },
       },
-      area: {
-        marker: {
-          enabled: false,
-        },
-      },
-    },
-    series: [
-      noAction,
-      socialDistancing,
-      shelterInPlace,
-      wuhanStyle,
-      availableBeds,
-    ],
-  };
+      series: [
+        noAction,
+        socialDistancing,
+        shelterInPlace,
+        wuhanStyle,
+        availableBeds,
+      ],
+    };
+  }, [state, countyName, subtitle, interventions, currentIntervention]);
 
   return (
     <ChartContainer>

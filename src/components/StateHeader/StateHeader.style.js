@@ -21,13 +21,13 @@ export const HeaderSubCopy = styled(Typography)`
 
 export const StyledStateHeaderWrapper = styled(Box)`
   display: flex;
-  justify-content: center;
   flex-direction: column;
   background-color: #f2f2f2;
   padding: 2rem;
   margin: 0;
 
   @media (min-width: 600px) {
+    border-bottom: 1px solid #e3e3e3;
     align-items: center;
     flex-direction: row;
   }
@@ -36,11 +36,23 @@ export const StyledStateHeaderWrapper = styled(Box)`
 export const StyledStateHeaderInner = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 900px;
+  margin: 0;
 
   @media (min-width: 600px) {
-    margin: 0 auto;
     flex-direction: row;
+    margin: 0 auto;
+  }
+  
+  @media (min-width: 900px) {
+    width: 900px;
+  }
+  
+  @media (min-width: 1350px) {
+    margin: 0 500px 0 auto;
+  }
+  
+  @media (min-width: 1750px) {
+    margin: 0 auto;
   }
 `;
 

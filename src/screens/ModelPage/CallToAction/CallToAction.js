@@ -40,6 +40,7 @@ const CallToAction = ({ interventions, currentIntervention }) => {
       const isShelterInPlaceWorstCaseModel =
         currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE &&
         model.intervention === INTERVENTIONS.SOCIAL_DISTANCING;
+
       let capacityIcon;
       if (isShelterInPlaceWorstCaseModel) {
         capacityIcon = <WarnShelterInPlaceWorstCase />;

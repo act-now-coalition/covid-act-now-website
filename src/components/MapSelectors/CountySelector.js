@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { find, each, sortBy, some } from 'lodash';
 import Select, { components } from 'react-select';
 import BaseValueContainer from './BaseValueContainer';
@@ -78,7 +78,6 @@ const CountySelector = ({
   setSelectedCounty,
   autoFocus = false,
 }) => {
-  const [selectedOption, setSelectedOption] = useState(null);
   const options =
     US_STATE_DATASET.state_county_map_dataset[state].county_dataset;
   const COUNTY_FIELD = 'county';
@@ -124,7 +123,7 @@ const CountySelector = ({
         SingleValue,
         NoOptionsMessage,
         Option,
-        // MenuList, TODO use when we kbow if there is county data
+        MenuList,
         ValueContainer: BaseValueContainer,
         IndicatorsContainer: () => null,
       }}
