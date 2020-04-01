@@ -86,15 +86,6 @@ async function fetchData(
   try {
     let loadedModelDatas = await fetchAll(urls);
     //This is to fix county data format
-    if (county) {
-      loadedModelDatas.map((loadedModelData, interventionIndex) => {
-        loadedModelData.map((dataPoint, dataIndex) => {
-          loadedModelDatas[interventionIndex][dataIndex] = _.tail(
-            loadedModelDatas[interventionIndex][dataIndex],
-          );
-        });
-      });
-    }
     modelDataForKey = {
       baseline: loadedModelDatas[0],
       strictDistancingNow: loadedModelDatas[1],
@@ -165,12 +156,12 @@ export function useModelDatas(_location, county = null, dataUrl = null) {
 }
 
 const COLUMNS = {
-  hospitalizations: 8+1,
-  beds: 11+1,
-  deaths: 10+1,
-  infected: 9+1,
-  totalPopulation: 16+1,
-  date: 0+1,
+  hospitalizations: 8 + 1,
+  beds: 11 + 1,
+  deaths: 10 + 1,
+  infected: 9 + 1,
+  totalPopulation: 16 + 1,
+  date: 0 + 1,
 };
 
 const MS_PER_DAY = 1000 * 60 * 60 * 24;
@@ -215,9 +206,9 @@ export class Model {
     this.deaths = data.map(row => _parseInt(row[COLUMNS.deaths]));
     this.cumulativeDeaths = [];
     let deathsSoFar = 0;
-    for (let i=0; i<this.deaths.length; i++) {
+    for (let i = 0; i < this.deaths.length; i++) {
       deathsSoFar += this.deaths[i];
-      this.cumulativeDeaths.push(deathsSoFar)
+      this.cumulativeDeaths.push(deathsSoFar);
     }
 
     this.cumulativeInfected = [];
@@ -227,7 +218,7 @@ export class Model {
       infectedSoFar += this.infected[i];
       this.cumulativeInfected.push(infectedSoFar);
     }
-    console.log("Cumulative infected: ");
+    console.log('Cumulative infected: ');
     console.log(this.infected);
     console.log(this.cumulativeInfected);
 
