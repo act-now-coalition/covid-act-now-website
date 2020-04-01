@@ -119,20 +119,20 @@ export class Model {
     );
     this.beds = data.map(row => _parseInt(row[COLUMNS.beds]));
     this.deaths = data.map(row => _parseInt(row[COLUMNS.deaths]));
-    this.cumulativeDeaths = [];
-    let deathsSoFar = 0;
+    this.cumulativeDeaths = this.deaths;
+/*    let deathsSoFar = 0;
     for (let i=0; i<this.deaths.length; i++) {
       deathsSoFar += this.deaths[i];
       this.cumulativeDeaths.push(deathsSoFar)
-    }
+    }*/
 
-    this.cumulativeInfected = [];
-    let infectedSoFar = 0;
     this.infected = data.map(row => _parseInt(row[COLUMNS.infected]));
+    this.cumulativeInfected = this.infected;
+/*    let infectedSoFar = 0;
     for (let i = 0; i < this.infected.length; i++) {
       infectedSoFar += this.infected[i];
       this.cumulativeInfected.push(infectedSoFar);
-    }
+    }*/
     console.log("Cumulative infected: ");
     console.log(this.infected);
     console.log(this.cumulativeInfected);
