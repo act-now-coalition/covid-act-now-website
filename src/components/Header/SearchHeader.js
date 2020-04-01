@@ -29,8 +29,12 @@ const SearchHeader = ({
   const history = useHistory();
   const isMobile = useMediaQuery('(max-width:1200px)');
 
-  const handleStateSelectChange = option => {
-    const route = `/state/${option.state_code}`;
+  const handleSelectChange = option => {
+    let route = `/state/${option.state_code}`;
+
+    if (option.county_url_name) {
+      route = `${route}/county/${option.county_url_name}`;
+    }
 
     history.push(route);
 
@@ -40,24 +44,25 @@ const SearchHeader = ({
   };
 
   const toggleMobileMenu = () => {
-    setMobileMenuOpen(mobileMenuOpen = !mobileMenuOpen)
-  }
+    setMobileMenuOpen((mobileMenuOpen = !mobileMenuOpen));
+  };
 
   return (
     <Wrapper>
       <Content>
         <MenuBarWrapper>
           <SelectorWrapper>
-            <GlobalSelector handleChange={handleStateSelectChange} />
+            <GlobalSelector handleChange={handleSelectChange} />
           </SelectorWrapper>
-          {isMobile &&
-              <MapToggle
-                onClick={() => toggleMobileMenu()}
-                 isActive={mobileMenuOpen}>
+          {isMobile && (
+            <MapToggle
+              onClick={() => toggleMobileMenu()}
+              isActive={mobileMenuOpen}
+            >
               <MapIcon />
             </MapToggle>
-          }
-          {!isMobile &&
+          )}
+          {!isMobile && (
             <MapMenuWrapper>
               <MapMenuItem
                 onClick={() => setMapOption('NATIONAL')}
@@ -65,16 +70,16 @@ const SearchHeader = ({
               >
                 United States
               </MapMenuItem>
-                <MapMenuItem
-                  onClick={() => setMapOption('STATE')}
-                  selected={mapOption === 'STATE'}
-                >
+              <MapMenuItem
+                onClick={() => setMapOption('STATE')}
+                selected={mapOption === 'STATE'}
+              >
                 {locationName}
               </MapMenuItem>
             </MapMenuWrapper>
-          }
+          )}
         </MenuBarWrapper>
-        {(isMobile && mobileMenuOpen) &&
+        {isMobile && mobileMenuOpen && (
           <MapMenuMobileWrapper>
             <MapMenuItem
               onClick={() => setMapOption('NATIONAL')}
@@ -82,14 +87,14 @@ const SearchHeader = ({
             >
               United States
             </MapMenuItem>
-              <MapMenuItem
-                onClick={() => setMapOption('STATE')}
-                selected={mapOption === 'STATE'}
-              >
+            <MapMenuItem
+              onClick={() => setMapOption('STATE')}
+              selected={mapOption === 'STATE'}
+            >
               {locationName}
             </MapMenuItem>
           </MapMenuMobileWrapper>
-        }
+        )}
       </Content>
     </Wrapper>
   );

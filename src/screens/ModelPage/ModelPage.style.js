@@ -25,7 +25,7 @@ export const MainContentInner = styled.div`
 `;
 
 export const MainContentWrapper = styled.div`
-  flex: ${props => props.mobileMenuOpen ? 0 : 1 };
+  flex: ${props => (props.mobileMenuOpen ? 0 : 1)};
   height: inherit;
   overflow-y: auto;
 
@@ -56,11 +56,11 @@ export const MapContentInner = styled.div`
 `;
 
 export const MapContentWrapper = styled.div`
-  flex: ${props => props.mobileMenuOpen ? 1 : 0 };
+  flex: ${props => (props.mobileMenuOpen ? 1 : 0)};
   background-color: #f2f2f2;
   height: inherit;
   overflow-y: auto;
-  padding: ${props => props.mobileMenuOpen ? '1rem 0' : 0};
+  padding: ${props => (props.mobileMenuOpen ? '1rem 0' : 0)};
 
   @media (min-width: 1200px) {
     flex: 0 0 540px;

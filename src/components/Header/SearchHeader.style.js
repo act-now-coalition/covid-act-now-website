@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+const BORDER_COLOR = 'rgba(0,0,0,0.20)';
+
 export const Wrapper = styled.div`
   margin: 0;
   padding: 1rem;
@@ -15,7 +17,7 @@ export const SelectorWrapper = styled.div`
   margin-right: 1rem;
 
   > div {
-    @media(min-width: 1700px) {
+    @media (min-width: 1700px) {
       max-width: 900px;
       margin: 0 auto;
     }
@@ -24,15 +26,15 @@ export const SelectorWrapper = styled.div`
 
 export const MapToggle = styled.div`
   width: 54px;
-  border: 1px solid #e3e3e3;
+  border: 1px solid ${BORDER_COLOR};
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 4px;
-  background: ${props => props.isActive ? 'red' : 'transparent'};
+  background: ${props => (props.isActive ? 'red' : 'transparent')};
 
   svg path {
-    fill: ${props => props.isActive ? 'white' : 'red' }
+    fill: ${props => (props.isActive ? 'white' : 'red')};
   }
 `;
 
@@ -63,9 +65,10 @@ export const MapMenuItem = styled.div`
   flex: 1;
   height: inherit;
   font-weight: 600;
-  color: ${props => props.selected ? 'red': 'inherit'};
-  background: ${props => (props.selected ? 'white': 'transparent')};
-  box-shadow: ${props => props.selected ? '0px 2px 2px rgba(0, 0, 0, 0.16)': 'none'};
+  color: ${props => (props.selected ? 'red' : 'inherit')};
+  background: ${props => (props.selected ? 'white' : 'transparent')};
+  box-shadow: ${props =>
+    props.selected ? '0px 2px 2px rgba(0, 0, 0, 0.16)' : 'none'};
   cursor: pointer;
   border-radius: 4px;
   padding: 0.5rem;

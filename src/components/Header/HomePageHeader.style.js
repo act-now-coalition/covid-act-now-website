@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   padding: 3rem 2rem 2rem;
   background-color: #f2f2f2;
 
-  @media(min-width: 600px) {
+  @media (min-width: 600px) {
     padding: 4rem 2rem 3rem;
   }
 `;
@@ -43,7 +43,6 @@ export const Disclaimer = styled.div`
   a {
     color: red;
   }
-
 `;
 
 export const SelectorWrapper = styled.div`

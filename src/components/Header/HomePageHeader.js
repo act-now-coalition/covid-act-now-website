@@ -1,7 +1,5 @@
 import React from 'react';
-import { useTheme } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { GlobalSelector } from 'components/MapSelectors/MapSelectors';
 
 import {
@@ -22,11 +20,13 @@ const HomePageHeader = ({
   intervention,
 }) => {
   const history = useHistory();
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
-  const handleStateSelectChange = option => {
-    const route = `/state/${option.state_code}`;
+  const handleSelectChange = option => {
+    let route = `/state/${option.state_code}`;
+
+    if (option.county_url_name) {
+      route = `${route}/county/${option.county_url_name}`;
+    }
 
     history.push(route);
 
@@ -37,22 +37,23 @@ const HomePageHeader = ({
     <Wrapper>
       <Content>
         <HeaderTitle>
-          Act now to <HighlightColor>save lives</HighlightColor> in your community.
+          Act now to <HighlightColor>save lives</HighlightColor> in your
+          community.
         </HeaderTitle>
         <div>
-          <HeaderSubCopy
-            color="inherit"
-            component="p"
-            variant="subtitle2"
-          >
-            Our projections show when hospitals will likely become overloaded throughout the county, and what you can do to change the course of COVID-19 in your local area.
+          <HeaderSubCopy color="inherit" component="p" variant="subtitle2">
+            Our projections show when hospitals will likely become overloaded
+            throughout the county, and what you can do to change the course of
+            COVID-19 in your local area.
           </HeaderSubCopy>
 
           <SelectorWrapper>
-            <GlobalSelector handleChange={handleStateSelectChange} />
+            <GlobalSelector handleChange={handleSelectChange} />
           </SelectorWrapper>
+
           <Disclaimer>
-            We also make projections for the country as a whole. <a href="">View our nationwide projections</a>
+            We also make projections for the country as a whole.{' '}
+            <a href="">View our nationwide projections</a>
           </Disclaimer>
         </div>
       </Content>

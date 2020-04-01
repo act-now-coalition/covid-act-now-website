@@ -12,13 +12,10 @@ import {
 } from 'enums';
 import { Legend, LegendItem } from './Legend';
 
-function Map({
-  hideLegend = false,
-  setMobileMenuOpen,
-}) {
+function Map({ hideLegend = false, setMobileMenuOpen }) {
   const history = useHistory();
 
-  const goToStatePage = (page) => {
+  const goToStatePage = page => {
     window.scrollTo(0, 0);
 
     history.push(page);
@@ -55,22 +52,22 @@ function Map({
         <Grid item xs={12}>
           <USAMap width="100%" height="auto" customize={statesCustomConfig} />
         </Grid>
-          {!hideLegend &&
-            <Grid item xs={12}>
-              <Legend>
-                {INTERVENTION_EFFICACY_ORDER_ASC.filter(
-                  intervention => legendConfig[intervention],
-                ).map(intervention => (
-                  <LegendItem
-                    key={`legend-${intervention}`}
-                    title={intervention}
-                    color={INTERVENTION_COLOR_MAP[intervention]}
-                    description={INTERVENTION_DESCRIPTIONS[intervention]}
-                  />
-                ))}
-              </Legend>
-            </Grid>
-          }
+        {!hideLegend && (
+          <Grid item xs={12}>
+            <Legend>
+              {INTERVENTION_EFFICACY_ORDER_ASC.filter(
+                intervention => legendConfig[intervention],
+              ).map(intervention => (
+                <LegendItem
+                  key={`legend-${intervention}`}
+                  title={intervention}
+                  color={INTERVENTION_COLOR_MAP[intervention]}
+                  description={INTERVENTION_DESCRIPTIONS[intervention]}
+                />
+              ))}
+            </Legend>
+          </Grid>
+        )}
       </Grid>
     </div>
   );

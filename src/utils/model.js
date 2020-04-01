@@ -11,8 +11,13 @@ async function fetchAll(urls) {
             return response.text();
           })
           .then(responseText => {
-            const jsonResponse = JSON.parse(responseText);
-            return jsonResponse;
+            try {
+              const jsonResponse = JSON.parse(responseText);
+
+              return jsonResponse;
+            } catch (err) {
+              console.log(err);
+            }
           }),
       ),
     );
@@ -120,7 +125,7 @@ export function useModelDatas(_location, county = null) {
 
   useEffect(() => {
     fetchData(setModelDatas, location, county);
-  }, [county]);
+  }, [county, location]);
 
   return modelDatas;
 }
