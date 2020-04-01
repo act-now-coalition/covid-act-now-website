@@ -25,9 +25,9 @@ export const INTERVENTION_DESCRIPTIONS = {
   [LIMITED_ACTION]:
     'Public advocacy around “social distancing” and enhanced hygiene. Minimal mandated restrictions.',
   [SOCIAL_DISTANCING]:
-    'Voluntary “shelter-in-place” for high-risk groups, schools and bars / restaurants closed.',
+    'Voluntary “stay at home” directive for high-risk groups, schools and bars / restaurants closed.',
   [SHELTER_IN_PLACE]:
-    'Legal order or strong recommendation for citizens to employ “shelter-in-place” home quarantine (especially firm for high-risk groups), shutdown of non-essential businesses, ban on all group events.',
+    'Legal order for citizens to employ “Stay at Home” quarantine except for essential work / exercise, shutdown of non-essential businesses, ban on all group events.',
 };
 
 export const INTERVENTION_COLOR_MAP = {

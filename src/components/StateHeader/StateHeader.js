@@ -57,8 +57,8 @@ const Stateheader = ({
         if (earlyDate.isBefore(moment())) {
           return (
             <HeaderSubCopy>
-              To limit hospital overload, our projections indicate shelter in
-              place must be implemented{' '}
+              To limit hospital overload, our projections indicate a Stay at
+              Home order must be implemented{' '}
               <HeaderHighlight color={INTERVENTION_COLOR_MAP[intervention]}>
                 immediately
               </HeaderHighlight>
@@ -68,8 +68,8 @@ const Stateheader = ({
         } else {
           return (
             <HeaderSubCopy>
-              To prevent hospital overload, our projections indicate shelter in
-              place must be implemented{' '}
+              To prevent hospital overload, our projections indicate a Stay at
+              Home order must be implemented{' '}
               <HeaderHighlight color={INTERVENTION_COLOR_MAP[intervention]}>
                 between {earlyDate.format('MMMM Do')} and{' '}
                 {lateDate.format('MMMM Do')} at the latest
