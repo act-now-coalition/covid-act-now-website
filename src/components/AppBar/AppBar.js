@@ -27,7 +27,7 @@ import { STATES } from 'enums';
 const _AppBar = () => {
   const history = useHistory();
   const { pathname } = useLocation();
-  const panels = ['/', '/about', '/faq', '/endorsements', '/contact', '/blog'];
+  const panels = ['/', '/faq', '/endorsements', '/contact', '/blog'];
 
   const getDefaultPanelId = () => {
     const defaultPanelIndex = Number(panels.indexOf(pathname));
@@ -122,32 +122,26 @@ const _AppBar = () => {
               onClick={goTo('/')}
             />
             <StyledTab
-              label="About"
-              value={1}
-              disableRipple
-              onClick={goTo('/about')}
-            />
-            <StyledTab
               label="FAQ"
-              value={2}
+              value={1}
               disableRipple
               onClick={goTo('/faq')}
             />
             <StyledTab
               label="Endorsements"
-              value={3}
+              value={2}
               disableRipple
               onClick={goTo('/endorsements')}
             />
             <StyledTab
               label="Contact"
-              value={4}
+              value={3}
               disableRipple
               onClick={goTo('/contact')}
             />
             <StyledTab
               label="Blog"
-              value={5}
+              value={4}
               disableRipple
               onClick={forwardTo('https://blog.covidactnow.org')}
             />
