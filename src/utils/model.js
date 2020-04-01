@@ -73,8 +73,8 @@ export function useModelDatas(location, county = null, dataUrl = null) {
 const COLUMNS = {
   hospitalizations: 8,
   beds: 11,
-  cumulativeDeaths: 10,
-  cumulativeInfected: 9,
+  deaths: 10,
+  infected: 9,
   totalPopulation: 16,
   date: 0,
 };
@@ -118,12 +118,24 @@ export class Model {
       _parseInt(row[COLUMNS.hospitalizations]),
     );
     this.beds = data.map(row => _parseInt(row[COLUMNS.beds]));
-    this.cumulativeDeaths = data.map(row =>
-      _parseInt(row[COLUMNS.cumulativeDeaths]),
-    );
-    this.cumulativeInfected = data.map(row =>
-      _parseInt(row[COLUMNS.cumulativeInfected]),
-    );
+    this.deaths = data.map(row => _parseInt(row[COLUMNS.deaths]));
+    this.cumulativeDeaths = [];
+    let deathsSoFar = 0;
+    for (let i=0; i<this.deaths.length; i++) {
+      deathsSoFar += this.deaths[i];
+      this.cumulativeDeaths.push(deathsSoFar)
+    }
+
+    this.cumulativeInfected = [];
+    let infectedSoFar = 0;
+    this.infected = data.map(row => _parseInt(row[COLUMNS.infected]));
+    for (let i = 0; i < this.infected.length; i++) {
+      infectedSoFar += this.infected[i];
+      this.cumulativeInfected.push(infectedSoFar);
+    }
+    console.log("Cumulative infected: ");
+    console.log(this.infected);
+    console.log(this.cumulativeInfected);
 
     this.maxInfected = this.cumulativeInfected[
       this.cumulativeInfected.length - 1
