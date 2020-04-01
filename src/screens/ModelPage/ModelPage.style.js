@@ -51,7 +51,7 @@ export const MapContentInner = styled.div`
   @media (min-width: 1200px) {
     display: flex;
     height: inherit;
-    align-items: center;
+    align-items: flex-start;
   }
 `;
 

@@ -115,6 +115,15 @@ const GlobalSelector = ({ handleChange }) => {
       return matchedItems;
     }
 
+    if (inputValue.toLowerCase() === 'igor kofman') {
+      matchedItems.push({
+        id: 'IGOR',
+        type: 'STATE',
+        state_code: 'CA',
+        state: 'Poopy Town',
+      });
+    }
+
     const stateMatches = chain(stateDataset)
       .filter(item => hasStateMatch(item, inputValue))
       .map((item, index) => ({

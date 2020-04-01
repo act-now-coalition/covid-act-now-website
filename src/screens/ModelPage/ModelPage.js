@@ -53,7 +53,7 @@ const shelterInPlaceWorseCaseColor =
   INTERVENTION_COLOR_MAP[INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE];
 
 function ModelPage() {
-  const [mapOption, setMapOption] = useState('NATIONAL');
+  const [mapOption, setMapOption] = useState('STATE');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const { id: location, countyId } = useParams();
