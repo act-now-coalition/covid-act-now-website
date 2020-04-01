@@ -71,12 +71,12 @@ export function useModelDatas(location, county = null, dataUrl = null) {
 }
 
 const COLUMNS = {
-  hospitalizations: 8,
-  beds: 11,
-  deaths: 10,
-  infected: 9,
-  totalPopulation: 16,
-  date: 0,
+  hospitalizations: 8+1,
+  beds: 11+1,
+  deaths: 10+1,
+  infected: 9+1,
+  totalPopulation: 16+1,
+  date: 0+1,
 };
 
 const MS_PER_DAY = 1000 * 60 * 60 * 24;
