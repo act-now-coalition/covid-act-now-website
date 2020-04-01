@@ -5,8 +5,12 @@ import { snakeCase } from 'lodash';
 import { INTERVENTIONS } from 'enums';
 import LightTooltip from 'components/LightTooltip/LightTooltip';
 import Chart from './Chart';
+<<<<<<< HEAD
 import { Typography } from '@material-ui/core';
 import { useEmbed } from 'utils/hooks';
+=======
+import { interventionToModelMap } from 'utils/model';
+>>>>>>> Add sort and filter
 
 import {
   ChartContainer,
@@ -26,6 +30,7 @@ const ModelChart = ({
   interventions,
   currentIntervention,
 }) => {
+<<<<<<< HEAD
   const { isEmbed } = useEmbed();
   const interventionToModel = {
     [INTERVENTIONS.LIMITED_ACTION]: interventions.baseline,
@@ -33,6 +38,9 @@ const ModelChart = ({
       interventions.distancingPoorEnforcement.now,
     [INTERVENTIONS.SHELTER_IN_PLACE]: interventions.distancing.now,
   };
+=======
+  let interventionToModel = interventionToModelMap(interventions);
+>>>>>>> Add sort and filter
 
   let model = interventionToModel[currentIntervention];
 

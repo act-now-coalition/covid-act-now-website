@@ -1,9 +1,10 @@
+import React, { useState } from 'react';
 import { get } from 'lodash';
 import { useHistory } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
 import LazyLoad from 'react-lazyload';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
@@ -12,15 +13,23 @@ import MenuItem from '@material-ui/core/MenuItem';
 import moment from 'moment';
 
 import ModelChart from 'components/Charts/ModelChart';
-import { INTERVENTION_JSON_MAPPING, STATES, STATE_TO_INTERVENTION } from 'enums';
-import { useModelDatasStateMap, useModelDatas } from 'utils/model';
+import { INTERVENTIONS, STATES, STATE_TO_INTERVENTION } from 'enums';
+import { interventionToModelMap, useAllStateModelDatas } from 'utils/model';
 import { buildInterventionMap } from 'screens/ModelPage/ModelPage';
 
 import {
+  ComparisonControlsContainer,
   Wrapper,
   ModelSelectorContainer,
   ModelComparisonsContainer,
 } from './CompareModels.style';
+
+const SORT_TYPES = {
+  ALPHABETICAL: 0,
+  OVERWHELMED: 1,
+};
+
+const DEFAULT_INTERVENTION_FILTER = 'All';
 
 export function CompareModels({ match, location }) {
   const history = useHistory();
@@ -34,12 +43,24 @@ export function CompareModels({ match, location }) {
     get(
       params,
       'right',
-      'https://covidactnow-testing.s3-us-west-1.amazonaws.com/',
+      'https://covid-projections-git-2020-03-31-legacy.covidactnow.now.sh/data/',
     ),
   );
 
-  const modelDatasMapRight = useModelDatasStateMap(Object.keys(STATES), leftUrl);
-  const modelDatasMapLeft = useModelDatasStateMap(Object.keys(STATES), leftUrl);
+  // Load models for all states.
+  const leftModelDatas = useAllStateModelDatas(leftUrl);
+  const rightModelDatas = useAllStateModelDatas(rightUrl);
+
+  // Now call buildInterventionMap() for each left/right state model datas.
+  const leftModels = {},
+    rightModels = {};
+  const states = Object.keys(STATES);
+  if (leftModelDatas && rightModelDatas) {
+    for (const state of states) {
+      leftModels[state] = buildInterventionMap(leftModelDatas[state]);
+      rightModels[state] = buildInterventionMap(rightModelDatas[state]);
+    }
+  }
 
   // We have separate state for the input field text
   // because we don't want to actually update our
@@ -65,11 +86,15 @@ export function CompareModels({ match, location }) {
     });
   }
 
-  const [sortedStates, setSortedStates] = useState(Object.keys(STATES));
-  const [sortFn, setSortFn] = useState((a, b) => (a < b ? -1 : 1));
-  const [sortType, setSortType] = useState(0);
+  const [sortType, setSortType] = useState(SORT_TYPES.ALPHABETICAL);
+  const [filterTypeIntervention, setFilterTypeIntervention] = useState(
+    DEFAULT_INTERVENTION_FILTER,
+  );
 
-  // const modelDatasMap = useModelDatas(location, county);
+  const sortFunctionMap = {
+    [SORT_TYPES.ALPHABETICAL]: sortAlphabetical,
+    [SORT_TYPES.OVERWHELMED]: sortByDateOverwhelmed,
+  };
 
   function refresh() {
     setLeftUrl(leftText);
@@ -78,55 +103,66 @@ export function CompareModels({ match, location }) {
     setRefreshing(true);
   }
 
+  function sortAlphabetical(a, b) {
+    return a < b ? -1 : 1;
+  }
+
+  function sortByDateOverwhelmed(a, b) {
+    const overwhelmedDifferenceA = getDifferenceInDateOverwhelmed(a);
+    const overwhelmedDifferenceB = getDifferenceInDateOverwhelmed(b);
+    return overwhelmedDifferenceA > overwhelmedDifferenceB ? -1 : 1;
+  }
+
+  function getDifferenceInDateOverwhelmed(stateAbbr) {
+    let overwhelmedLeft = getDateOverwhelmed(stateAbbr, leftModels);
+    let overwhelmedRight = getDateOverwhelmed(stateAbbr, rightModels);
+
+    if (overwhelmedLeft === overwhelmedRight) {
+      return 0;
+    } else if (overwhelmedLeft === null || overwhelmedRight === null) {
+      // if resources are never overwhelmed for only one of the models,
+      // return a large number to sort that model to the top
+      return 9999;
+    } else {
+      var dateOverwhelmedLeft = moment(overwhelmedLeft);
+      var dateOverwhelmedRight = moment(overwhelmedRight);
+      return Math.abs(
+        moment
+          .duration(dateOverwhelmedLeft.diff(dateOverwhelmedRight))
+          .asHours(),
+      );
+    }
+  }
+
+  function getDateOverwhelmed(stateAbbr, models) {
+    const currentIntervention = STATE_TO_INTERVENTION[stateAbbr];
+    const interventions = models[stateAbbr];
+    let interventionToModel = interventionToModelMap(interventions);
+    let model = interventionToModel[currentIntervention];
+
+    if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE) {
+      model = interventionToModel[INTERVENTIONS.SOCIAL_DISTANCING];
+    }
+    return model.dateOverwhelmed;
+  }
+
+  function filterByIntervention(stateAbbr) {
+    return (
+      filterTypeIntervention === DEFAULT_INTERVENTION_FILTER ||
+      filterTypeIntervention === STATE_TO_INTERVENTION[stateAbbr]
+    );
+  }
+
   if (refreshing) {
     setTimeout(() => setRefreshing(false), 0);
   }
 
-  useEffect(() => {
-    let sortFn = (a, b) => {
-      return a < b ? -1 : 1;
-    };
-
-    if (sortType === 1) {
-      // sortFn = (a, b) => {
-      //   return a > b ? -1 : 1;
-      // };
-
-      sortFn = (a, b) => {
-        const overwhelmedA = GetDifferenceInDateOverwhelmed(a);
-        const overwhelmedB = GetDifferenceInDateOverwhelmed(b);
-        return overwhelmedA > overwhelmedB ? -1 : 1;
-      };
-
-      const GetDifferenceInDateOverwhelmed = (stateAbbr) => {
-        // let overwhelmedLeft = GetDateOverwhelmed(stateAbbr, modelDatasMapLeft);
-        // let overwhelmedRight = GetDateOverwhelmed(stateAbbr, modelDatasMapRight);
-
-        // return Math.abs(moment.duration(overwhelmedLeft.diff(overwhelmedRight, 'hours', true)));
-      };
-
-      // const GetDateOverwhelmed = (stateAbbr, modelDatasMap) => {
-      //   const intervention = STATE_TO_INTERVENTION[stateAbbr];
-      //   const interventions = buildInterventionMap(modelDatasMap.state);
-
-      //   let targetKey = Object.keys(interventions).find(key => {
-      //     let selectedIntervention = interventions[key];
-      //     if (selectedIntervention && selectedIntervention.now) {
-      //       return selectedIntervention.now.intervention === intervention;
-      //     }
-      //   });
-
-      //   if (!!targetKey) {
-      //     return interventions[targetKey].now.dateOverwhelmed;
-      //   }
-      // };
-    }
-
-    setSortFn(sortFn);
-  }, [leftUrl, rightUrl, refreshing, sortType, sortFn]);
-
-  const changeFilter = event => {
+  const changeSort = event => {
     setSortType(event.target.value);
+  };
+
+  const changeInterventionFilter = event => {
+    setFilterTypeIntervention(event.target.value);
   };
 
   return (
@@ -178,40 +214,83 @@ export function CompareModels({ match, location }) {
             Python HTTP Server
           </a>
         </div>
-        <Select value={sortType} onChange={changeFilter}>
-          <MenuItem value={0}>Alphabetical</MenuItem>
-          <MenuItem value={1}>Difference in "Hospital Overload"</MenuItem>
-        </Select>
+        <ComparisonControlsContainer>
+          <FormControl style={{ width: '12rem' }}>
+            <InputLabel focused={false}>Sort by:</InputLabel>
+            <Select value={sortType} onChange={changeSort}>
+              ><MenuItem value={SORT_TYPES.ALPHABETICAL}>State Name</MenuItem>
+              <MenuItem value={SORT_TYPES.OVERWHELMED}>
+                Hospital Overload
+              </MenuItem>
+            </Select>
+            {sortType === SORT_TYPES.OVERWHELMED && (
+              <div style={{ fontSize: 'x-small' }}>
+                ∆ between "Hospitals Overloaded" dates
+              </div>
+            )}
+          </FormControl>
+          <FormControl style={{ width: '12rem', marginLeft: '2rem' }}>
+            <InputLabel focused={false}>Filter by intervention:</InputLabel>
+            <Select
+              value={filterTypeIntervention}
+              onChange={changeInterventionFilter}
+            >
+              <MenuItem value={DEFAULT_INTERVENTION_FILTER}>
+                {DEFAULT_INTERVENTION_FILTER}
+              </MenuItem>
+              <MenuItem value={INTERVENTIONS.LIMITED_ACTION}>
+                {INTERVENTIONS.LIMITED_ACTION}
+              </MenuItem>
+              <MenuItem value={INTERVENTIONS.SOCIAL_DISTANCING}>
+                {INTERVENTIONS.SOCIAL_DISTANCING}
+              </MenuItem>
+              <MenuItem value={INTERVENTIONS.SHELTER_IN_PLACE}>
+                {INTERVENTIONS.SHELTER_IN_PLACE}
+              </MenuItem>
+            </Select>
+          </FormControl>
+        </ComparisonControlsContainer>
       </ModelSelectorContainer>
 
       <StateComparisonList
-        left={leftUrl}
-        right={rightUrl}
+        states={states}
+        leftModels={leftModels}
+        rightModels={rightModels}
         refreshing={refreshing}
+        sortFn={sortFunctionMap[sortType]}
+        filterFn={filterByIntervention}
       />
     </Wrapper>
   );
 }
 
-const StateComparisonList = function ({ left, right, refreshing, sortFn }) {
+const StateComparisonList = function ({
+  states,
+  leftModels,
+  rightModels,
+  refreshing,
+  sortFn,
+  filterFn,
+}) {
   return (
     <ModelComparisonsContainer>
-      {Object.keys(STATES)
+      {states
+        .filter(filterFn)
         .sort(sortFn)
         .map(state => (
-        <StateCompare
+          <StateCompare
             key={state}
             state={state}
-            left={left}
-            right={right}
+            leftModels={leftModels[state]}
+            rightModels={rightModels[state]}
             refreshing={refreshing}
-        />
-      ))}
+          />
+        ))}
     </ModelComparisonsContainer>
   );
 };
 
-function StateCompare({ state, left, right, refreshing }) {
+function StateCompare({ state, leftModels, rightModels, refreshing }) {
   return (
     <>
       <hr />
@@ -219,10 +298,10 @@ function StateCompare({ state, left, right, refreshing }) {
       {!refreshing && (
         <Grid container spacing={3}>
           <Grid item xs={6}>
-            <StateChart state={state} dataUrl={left} />
+            <StateChart state={state} models={leftModels} />
           </Grid>
           <Grid item xs={6}>
-            <StateChart state={state} dataUrl={right} />
+            <StateChart state={state} models={rightModels} />
           </Grid>
         </Grid>
       )}
@@ -230,26 +309,26 @@ function StateCompare({ state, left, right, refreshing }) {
   );
 }
 
-function StateChart({ state, dataUrl }) {
-  const modelDatasMap = useModelDatas(state, /*county=*/ null, dataUrl);
+function StateChart({ state, models }) {
   const locationName = STATES[state];
   const intervention = STATE_TO_INTERVENTION[state];
-  const interventions = buildInterventionMap(modelDatasMap.state);
 
-  return (
-    modelDatasMap.state && (
-      // Chart height is 600px; we pre-load when a chart is within 1200px of view.
+  if (!models) {
+    return null;
+  } else {
+    // Chart height is 600px; we pre-load when a chart is within 1200px of view.
+    return (
       <LazyLoad height={600} offset={1200}>
         <ModelChart
           state={locationName}
           county={null}
           subtitle="Hospitalizations over time"
-          interventions={interventions}
+          interventions={models}
           currentIntervention={intervention}
         />
       </LazyLoad>
-    )
-  );
+    );
+  }
 }
 
 export default CompareModels;

@@ -40,12 +40,6 @@ export const INTERVENTION_COLOR_MAP = {
 
 export const STATE_TO_INTERVENTION = stateInterventions();
 
-export const INTERVENTION_JSON_MAPPING = {
-  limited_action: LIMITED_ACTION,
-  social_distancing: SOCIAL_DISTANCING,
-  shelter_in_place: SHELTER_IN_PLACE,
-};
-
 function stateInterventions() {
   const INTERVENTION_JSON_MAPPING = {
     limited_action: LIMITED_ACTION,
