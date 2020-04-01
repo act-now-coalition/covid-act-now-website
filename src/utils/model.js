@@ -17,34 +17,14 @@ async function fetchAll(urls) {
 export const ModelIds = {
   baseline: 0,
   strictDistancingNow: 1,
-  weakDistancingNow: 7,
   containNow: 2,
+  weakDistancingNow: 3,
 };
 
-export function useModelDatas(_location, county = null, dataUrl = null) {
+export function useModelDatas(location, county = null, dataUrl = null) {
   dataUrl = dataUrl || '/data/';
   if (dataUrl[dataUrl.length - 1] !== '/') {
     dataUrl += '/';
-  }
-  //Some state data files are lowercase, unsure why, but we need to handle it here.
-  let lowercaseStates = [
-    'AK',
-    'CA',
-    'CO',
-    'FL',
-    'MO',
-    'NM',
-    'NV',
-    'NY',
-    'OR',
-    'TX',
-    'WA',
-  ];
-
-  let location = _location;
-
-  if (lowercaseStates.indexOf(location) > -1) {
-    location = _location.toLowerCase();
   }
 
   const [modelDatas, setModelDatas] = useState({ state: null, county: null });
