@@ -52,12 +52,12 @@ function ModelPage() {
   let title;
   let description;
   const canonical = `/state/${location}`;
-  if (intervention === 'Shelter in Place') {
-    title = `Maintain shelter in place in ${locationName}.`;
+  if (intervention === INTERVENTIONS.SHELTER_IN_PLACE) {
+    title = `Keep staying at home in ${locationName}.`;
     description = `Avoiding hospital overload depends heavily on your cooperation.`;
   } else {
     title = `You must act now in ${locationName}!`;
-    description = `To prevent hospital overload, our projections indicate shelter in place must be implemented soon.`;
+    description = `To prevent hospital overload, our projections indicate a Stay at Home order must be implemented soon.`;
   }
   return (
     <Wrapper>
