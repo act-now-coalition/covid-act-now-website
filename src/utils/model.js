@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import * as Promise from 'bluebird';
 
 async function fetchAll(urls) {
   try {
@@ -42,91 +43,117 @@ const initialData = {
   countyDatas: null,
 };
 
-async function fetchSummary(setModelDatas, location) {
-  const summaryUrl = `/data/county_summaries/${location.toUpperCase()}.summary.json`;
-
-  try {
-    const summary = await fetchAll([summaryUrl]);
-    setModelDatas(state => {
-      return {
-        ...state,
-        summary: summary[0],
-      };
-    });
-  } catch (err) {}
-}
-
-async function fetchData(
-  setModelDatas,
-  location,
-  county = null,
-  dataUrl = null,
-) {
+function fixDataUrl(dataUrl) {
   dataUrl = dataUrl || '/data/';
   if (dataUrl[dataUrl.length - 1] !== '/') {
     dataUrl += '/';
   }
-
-  let modelDataForKey = null;
-  let urls = [
-    ModelIds.baseline,
-    ModelIds.strictDistancingNow,
-    ModelIds.weakDistancingNow,
-    ModelIds.containNow,
-  ].map(i => {
-    let fipsCode =
-      county && county.full_fips_code ? county.full_fips_code : null;
-    const stateUrl = `${dataUrl}${location}.${i}.json`;
-    const countyUrl = `${dataUrl}county/${location.toUpperCase()}.${fipsCode}.${i}.json`;
-    return county ? countyUrl : stateUrl;
-  });
-  try {
-    let loadedModelDatas = await fetchAll(urls);
-    //This is to fix county data format
-    modelDataForKey = {
-      baseline: loadedModelDatas[0],
-      strictDistancingNow: loadedModelDatas[1],
-      weakDistancingNow: loadedModelDatas[2],
-      containNow: loadedModelDatas[3],
-    };
-  } catch (err) {
-    modelDataForKey = {
-      error: true,
-      payload: err,
-    };
-  }
-  const key = county ? 'countyDatas' : 'stateDatas';
-
-  setModelDatas(m => {
-    return {
-      ...m,
-      location,
-      county,
-      [key]: modelDataForKey,
-    };
-  });
+  return dataUrl;
 }
 
-export function useModelDatas(location, county = null, dataUrl = null) {
-  const [modelDatas, setModelDatas] = useState(initialData);
-  useEffect(() => {
-    fetchData(setModelDatas, location, null, dataUrl);
-    fetchSummary(setModelDatas, location);
-  }, [dataUrl, location]);
+function fixStateCode(_location) {
+  //Some state data files are lowercase, unsure why, but we need to handle it here.
+  let lowercaseStates = [
+    'AK',
+    'CA',
+    'CO',
+    'FL',
+    'MO',
+    'NM',
+    'NV',
+    'NY',
+    'OR',
+    'TX',
+    'WA',
+  ];
+
+  let location = _location;
+  if (lowercaseStates.indexOf(location) > -1) {
+    location = _location.toLowerCase();
+  }
+  return location;
+}
+
+export function useModelDatasStateMap(states, modelBaseUrl = null) {
+  const stateCodes = fixStateCode(states);
+  const [stateData, setStateData] = useState({ states: {} }); // Will be an array of state model data
 
   useEffect(() => {
-    if (county === null) {
-      setModelDatas(state => {
-        return {
-          ...state,
-          county: null,
-          countyDatas: null,
-        };
+    const fetchData = async stateCode => {
+      const urls = [
+        ModelIds.baseline,
+        ModelIds.strictDistancingNow,
+        ModelIds.weakDistancingNow,
+        ModelIds.containNow,
+      ].map(i => {
+        const stateUrl = `${modelBaseUrl}${stateCode}.${i}.json`;
+        return stateUrl;
       });
-    } else {
-      fetchData(setModelDatas, location, county, dataUrl);
+      return fetchAll(urls)
+        .then(loadedModelDatas => {
+          const result = {};
+          result[stateCode] = {
+            baseline: loadedModelDatas[0],
+            strictDistancingNow: loadedModelDatas[1],
+            weakDistancingNow: loadedModelDatas[2],
+            containNow: loadedModelDatas[3],
+          };
+          return result;
+        })
+        .catch(e => {
+          return {};
+        });
+    };
+
+    const fetchAllStateData = async () => {
+      const data = await Promise.map(stateCodes, fetchData, { concurrency: 5 });
+      setStateData(m => Object.assign(m, ...data));
+    };
+
+    fetchAllStateData();
+  }, [stateCodes, modelBaseUrl]);
+
+  return stateData;
+}
+
+export function useModelDatas(_location, county = null, modelBaseUrl = null) {
+  modelBaseUrl = fixDataUrl(modelBaseUrl);
+  const location = fixStateCode(_location);
+
+  useEffect(() => {
+    async function fetchData(county = null) {
+      let urls = [
+        ModelIds.baseline,
+        ModelIds.strictDistancingNow,
+        ModelIds.weakDistancingNow,
+        ModelIds.containNow,
+      ].map(i => {
+        const stateUrl = `${modelBaseUrl}${location}.${i}.json`;
+        const countyUrl = `${modelBaseUrl}${location}.${i}.json`; // TODO: update when we know filenames
+        return county ? countyUrl : stateUrl;
+      });
+      return fetchAll(urls)
+        .then(loadedModelDatas => {
+          const key = county ? 'county' : 'state';
+          setModelDatas(m => {
+            return {
+              ...m,
+              [key]: {
+                baseline: loadedModelDatas[0],
+                strictDistancingNow: loadedModelDatas[1],
+                weakDistancingNow: loadedModelDatas[2],
+                containNow: loadedModelDatas[3],
+              },
+            };
+          });
+        })
+        .catch(e => setModelDatas({ state: null, county: null }));
     }
-  }, [dataUrl, county, location]);
+    fetchData();
+    if (county) {
+      fetchData(county);
+    }
+  }, [location, county, modelBaseUrl]);
 
   return modelDatas;
 }

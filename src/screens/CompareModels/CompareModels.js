@@ -13,7 +13,7 @@ import moment from 'moment';
 
 import ModelChart from 'components/Charts/ModelChart';
 import { INTERVENTION_JSON_MAPPING, STATES, STATE_TO_INTERVENTION } from 'enums';
-import { useModelDatas } from 'utils/model';
+import { useModelDatasStateMap, useModelDatas } from 'utils/model';
 import { buildInterventionMap } from 'screens/ModelPage/ModelPage';
 
 import {
@@ -37,6 +37,9 @@ export function CompareModels({ match, location }) {
       'https://covidactnow-testing.s3-us-west-1.amazonaws.com/',
     ),
   );
+
+  const modelDatasMapRight = useModelDatasStateMap(Object.keys(STATES), leftUrl);
+  const modelDatasMapLeft = useModelDatasStateMap(Object.keys(STATES), leftUrl);
 
   // We have separate state for the input field text
   // because we don't want to actually update our
@@ -63,7 +66,10 @@ export function CompareModels({ match, location }) {
   }
 
   const [sortedStates, setSortedStates] = useState(Object.keys(STATES));
+  const [sortFn, setSortFn] = useState((a, b) => (a < b ? -1 : 1));
   const [sortType, setSortType] = useState(0);
+
+  // const modelDatasMap = useModelDatas(location, county);
 
   function refresh() {
     setLeftUrl(leftText);
@@ -93,33 +99,31 @@ export function CompareModels({ match, location }) {
       };
 
       const GetDifferenceInDateOverwhelmed = (stateAbbr) => {
-        let overwhelmedLeft = GetDateOverwhelmed(stateAbbr, useModelDatas(stateAbbr, /*county=*/ null, leftUrl));
-        let overwhelmedRight = GetDateOverwhelmed(stateAbbr, useModelDatas(stateAbbr, /*county=*/ null, rightUrl));
+        // let overwhelmedLeft = GetDateOverwhelmed(stateAbbr, modelDatasMapLeft);
+        // let overwhelmedRight = GetDateOverwhelmed(stateAbbr, modelDatasMapRight);
 
-        return Math.abs(moment.duration(overwhelmedLeft.diff(overwhelmedRight, 'hours', true)));
+        // return Math.abs(moment.duration(overwhelmedLeft.diff(overwhelmedRight, 'hours', true)));
       };
 
-      const GetDateOverwhelmed = (stateAbbr, modelDatasMap) => {
-        const intervention = STATE_TO_INTERVENTION[stateAbbr];
-        const interventions = buildInterventionMap(modelDatasMap.state);
+      // const GetDateOverwhelmed = (stateAbbr, modelDatasMap) => {
+      //   const intervention = STATE_TO_INTERVENTION[stateAbbr];
+      //   const interventions = buildInterventionMap(modelDatasMap.state);
 
-        let targetKey = Object.keys(interventions).find(key => {
-          let selectedIntervention = interventions[key];
-          if (selectedIntervention && selectedIntervention.now) {
-            return selectedIntervention.now.intervention === intervention;
-          }
-        });
+      //   let targetKey = Object.keys(interventions).find(key => {
+      //     let selectedIntervention = interventions[key];
+      //     if (selectedIntervention && selectedIntervention.now) {
+      //       return selectedIntervention.now.intervention === intervention;
+      //     }
+      //   });
 
-        if (!!targetKey) {
-          return interventions[targetKey].now.dateOverwhelmed;
-        }
-      };
+      //   if (!!targetKey) {
+      //     return interventions[targetKey].now.dateOverwhelmed;
+      //   }
+      // };
     }
 
-    let states = Object.keys(STATES);
-    const sorted = [...states].sort(sortFn);
-    setSortedStates(sorted);
-  }, [sortType]);
+    setSortFn(sortFn);
+  }, [leftUrl, rightUrl, refreshing, sortType, sortFn]);
 
   const changeFilter = event => {
     setSortType(event.target.value);
@@ -184,27 +188,28 @@ export function CompareModels({ match, location }) {
         left={leftUrl}
         right={rightUrl}
         refreshing={refreshing}
-        sortedStates={sortedStates}
       />
     </Wrapper>
   );
 }
 
-const StateComparisonList = React.memo(function ({ left, right, refreshing, sortedStates }) {
+const StateComparisonList = function ({ left, right, refreshing, sortFn }) {
   return (
     <ModelComparisonsContainer>
-      {sortedStates.map(state => (
+      {Object.keys(STATES)
+        .sort(sortFn)
+        .map(state => (
         <StateCompare
-          key={state}
-          state={state}
-          left={left}
-          right={right}
-          refreshing={refreshing}
+            key={state}
+            state={state}
+            left={left}
+            right={right}
+            refreshing={refreshing}
         />
       ))}
     </ModelComparisonsContainer>
   );
-});
+};
 
 function StateCompare({ state, left, right, refreshing }) {
   return (
