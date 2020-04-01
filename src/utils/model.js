@@ -77,12 +77,17 @@ export function useModelDatas(_location, county = null, dataUrl = null) {
     if (county) {
       promises.push(fetchModelDatas(county, dataUrl));
     }
-    Promise.all(promises).then(results => {
-      setModelDatas({ state: results[0], county: county ? results[1] : null });
-    }).catch(e => {
-      setModelDatas({ state: null, county: null });
-      throw e;
-    });
+    Promise.all(promises)
+      .then(results => {
+        setModelDatas({
+          state: results[0],
+          county: county ? results[1] : null,
+        });
+      })
+      .catch(e => {
+        setModelDatas({ state: null, county: null });
+        throw e;
+      });
   }, [_location, county, dataUrl]);
 
   return modelDatas;
@@ -93,21 +98,23 @@ export function useAllStateModelDatas(dataUrl = null) {
   useEffect(() => {
     const promises = [];
     const states = Object.keys(STATES);
-    for(const state of states) {
+    for (const state of states) {
       promises.push(fetchStateModelDatas(state));
     }
-    Promise.all(promises).then(results => {
-      const models = { };
-      let i = 0;
-      for(const state of states) {
-        models[state] = results[i];
-        i++;
-      }
-      setStateModels(models);
-    }).catch(e => {
-      setStateModels(null);
-      throw e;
-    });
+    Promise.all(promises)
+      .then(results => {
+        const models = {};
+        let i = 0;
+        for (const state of states) {
+          models[state] = results[i];
+          i++;
+        }
+        setStateModels(models);
+      })
+      .catch(e => {
+        setStateModels(null);
+        throw e;
+      });
   });
   return stateModels;
 }

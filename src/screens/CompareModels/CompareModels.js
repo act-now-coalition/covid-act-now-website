@@ -75,10 +75,11 @@ export function CompareModels({ match, location }) {
   const rightModelDatas = useAllStateModelDatas(rightUrl);
 
   // Now call buildInterventionMap() for each left/right state model datas.
-  const leftModels = { }, rightModels = { };
+  const leftModels = {},
+    rightModels = {};
   const states = Object.keys(STATES);
   if (leftModelDatas && rightModelDatas) {
-    for(const state of states) {
+    for (const state of states) {
       leftModels[state] = buildInterventionMap(leftModelDatas[state]);
       rightModels[state] = buildInterventionMap(rightModelDatas[state]);
     }
@@ -147,7 +148,12 @@ export function CompareModels({ match, location }) {
   );
 }
 
-const StateComparisonList = React.memo(function ({ states, leftModels, rightModels, refreshing }) {
+const StateComparisonList = React.memo(function ({
+  states,
+  leftModels,
+  rightModels,
+  refreshing,
+}) {
   return (
     <ModelComparisonsContainer>
       {states.map(state => (
