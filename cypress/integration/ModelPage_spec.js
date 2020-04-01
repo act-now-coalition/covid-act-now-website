@@ -1,7 +1,7 @@
 describe('/state/:id', () => {
   it(`Stay At Home has the correct title & description`, () => {
     cy.visit('/state/NY');
-    cy.title().should('eq', 'Maintain staying at home in New York.');
+    cy.title().should('eq', 'Keep staying at home in New York.');
     cy.get('head meta[name="description"]').should(
       'have.attr',
       'content',
