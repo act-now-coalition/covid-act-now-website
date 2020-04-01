@@ -1,15 +1,75 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div``;
+export const Wrapper = styled.div`
+  position: absolute;
+  top: 65px;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: white;
+  overflow: hidden;
+`;
+
+export const ContentWrapper = styled.div`
+  display: flex;
+  height: 100%;
+  width: 100vw;
+`;
+
+export const MainContentInner = styled.div`
+  margin: 0 auto;
+
+  @media (min-width: 1200px) {
+    max-width: 900px;
+  }
+`;
+
+export const MainContentWrapper = styled.div`
+  flex: ${props => props.mobileMenuOpen ? 0 : 1 };
+  height: inherit;
+  overflow-y: auto;
+
+  @media (min-width: 1200px) {
+    flex: 1;
+    padding: 2rem;
+  }
+`;
+
+export const SearchHeaderWrapper = styled.div`
+  border-bottom: 1px solid #e3e3e3;
+`;
+
+export const CountyMapAltWrapper = styled.div`
+  width: 100%;
+`;
+
+export const MapContentInner = styled.div`
+  .Map {
+    width: 100%;
+  }
+
+  @media (min-width: 1200px) {
+    display: flex;
+    height: inherit;
+    align-items: center;
+  }
+`;
+
+export const MapContentWrapper = styled.div`
+  flex: ${props => props.mobileMenuOpen ? 1 : 0 };
+  background-color: #f2f2f2;
+  height: inherit;
+  overflow-y: auto;
+  padding: ${props => props.mobileMenuOpen ? '1rem 0' : 0};
+
+  @media (min-width: 1200px) {
+    flex: 0 0 540px;
+    padding: 1rem;
+  }
+`;
 
 export const Content = styled.div`
-  text-align: center;
-  max-width: 900px;
-  padding: 0 2rem;
-  margin: auto;
-  @media (min-width: 900px) {
-    padding: 0;
-  }
+  padding: 2rem;
 `;
 
 export const LoadingScreen = styled.div`
@@ -99,7 +159,7 @@ export const CountyMapWrapper = styled.div`
 
 export const ChartHeader = styled.div`
   max-width: 900px;
-  margin: 2rem auto;
+  padding: 1rem 2rem;
   text-align: left;
 
   @media (min-width: 600px) {

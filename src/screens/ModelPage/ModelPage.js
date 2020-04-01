@@ -4,21 +4,30 @@ import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset
 import CountyMap from 'components/CountyMap/CountyMap';
 import Outcomes from './Outcomes/Outcomes';
 import CallToAction from './CallToAction/CallToAction';
+import Map from 'components/Map/Map';
 import ShareModelBlock from './ShareModelBlock/ShareModelBlock';
+import SearchHeader from 'components/Header/SearchHeader';
 import StateHeader from 'components/StateHeader/StateHeader';
 import ModelChart from 'components/Charts/ModelChart';
 import Newsletter from 'components/Newsletter/Newsletter';
 import CountySelector from 'components/MapSelectors/CountySelector';
 import {
   Wrapper,
+  ContentWrapper,
+  MainContentWrapper,
+  MainContentInner,
+  MapContentWrapper,
+  MapContentInner,
   Content,
   ModelViewOption,
   ModelViewToggle,
   CountySelectorWrapper,
+  SearchHeaderWrapper,
   StyledCountySelectorWrapper,
   LoadingScreen,
   NoData,
   MapIconButton,
+  CountyMapAltWrapper,
   CountyMapWrapper,
   ChartHeader,
 } from './ModelPage.style';
@@ -44,6 +53,9 @@ const shelterInPlaceWorseCaseColor =
   INTERVENTION_COLOR_MAP[INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE];
 
 function ModelPage() {
+  const [mapOption, setMapOption] = useState('NATIONAL');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const { id: location, countyId } = useParams();
   const [countyView, setCountyView] = useState(countyId ? true : false);
   // const [countyView, setCountyView] = useState(true);
@@ -113,16 +125,29 @@ function ModelPage() {
 
   return (
     <Wrapper>
-      {stateInterventions && (
-        <StateHeader
+      <SearchHeaderWrapper>
+        <SearchHeader
+          mapOption={mapOption}
+          setMapOption={setMapOption}
+          mobileMenuOpen={mobileMenuOpen}
+          setMobileMenuOpen={setMobileMenuOpen}
           location={location}
           locationName={locationName}
-          countyName={countyName}
-          intervention={intervention}
-          interventions={stateInterventions}
+          countyName={location}
         />
-      )}
-      <Content>
+      </SearchHeaderWrapper>
+      <ContentWrapper>
+        <MainContentWrapper mobileMenuOpen={mobileMenuOpen}>
+          <MainContentInner>
+        {stateInterventions && (
+          <StateHeader
+            location={location}
+            locationName={locationName}
+            countyName={countyName}
+            intervention={intervention}
+            interventions={stateInterventions}
+          />
+        )}
         <Panel>
           <ChartHeader>
             <h2>Projected hospitalizations</h2>
@@ -130,188 +155,119 @@ function ModelPage() {
               {countyName ? `${countyName}, ${locationName}` : locationName}
             </span>
           </ChartHeader>
-          <CountySelectorWrapper>
-            <ModelViewToggle>
-              <ModelViewOption
-                selected={!countyView}
-                onClick={() => {
-                  setRedirectTarget(`/state/${location}`);
-                  setCountyView(false);
-                  setSelectedCounty(null);
-                  setShowCountyMap(false);
-                }}
-              >
-                Entire State
-              </ModelViewOption>
-              <ModelViewOption
-                selected={countyView}
-                onClick={() => {
-                  setCountyView(true);
-                  if (!selectedCounty) {
-                    setShowCountyMap(true);
-                  }
-                }}
-              >
-                By County
-              </ModelViewOption>
-            </ModelViewToggle>
-            {countyView && (
-              <div>
-                <StyledCountySelectorWrapper>
-                  <div style={{ flexGrow: 1 }}>
-                    <CountySelector
-                      state={location}
-                      selectedCounty={selectedCounty}
-                      handleChange={option => {
-                        if (!option || !option.county_url_name) {
-                          return;
-                        }
-                        setRedirectTarget(
-                          `/state/${location}/county/${option.county_url_name}`,
-                        );
-                        setSelectedCounty(option);
-                        setShowCountyMap(false);
-                      }}
-                      autoFocus
-                    />
-                  </div>
-                  {shouldShowMapButton && (
-                    <MapIconButton
-                      showCountyMap={showCountyMap}
-                      onClick={() => setShowCountyMap(!showCountyMap)}
-                    >
-                      <MapIcon />
-                    </MapIconButton>
-                  )}
-                </StyledCountySelectorWrapper>
-                {countyName && modelDatas && modelDatas.error && (
-                  <NoData>
-                    No data available for {countyName}, {locationName}
-                  </NoData>
-                )}
-                {shouldShowCountyMap && (
-                  <>
-                    {!selectedCounty && (
-                      <MapTitle>
-                        <MapTitleDivider>
-                          <div></div>
-                          <span>Or</span>
-                          <div></div>
-                        </MapTitleDivider>
-                        <p>
-                          Select your county below to see detailed projections
-                        </p>
-                      </MapTitle>
-                    )}
-                    <CountyMapWrapper>
-                      <CountyMap
-                        fill={INTERVENTION_COLOR_MAP[intervention]}
-                        stateSummary={modelDatasMap && modelDatasMap.summary}
-                        selectedCounty={selectedCounty}
-                        setSelectedCounty={fullFips => {
-                          const county = _.find(
-                            US_STATE_DATASET.state_county_map_dataset[location]
-                              .county_dataset,
-                            ['full_fips_code', fullFips],
-                          );
-
-                          setRedirectTarget(
-                            `/state/${location}/county/${county.county_url_name}`,
-                          );
-                          setShowCountyMap(false);
-                          setSelectedCounty(county);
-                        }}
-                      />
-                    </CountyMapWrapper>
-                  </>
-                )}
-              </div>
-            )}
-          </CountySelectorWrapper>
         </Panel>
-      </Content>
-      {!shouldShowCountyMap && showModel && interventions && (
-        <Panel>
-          <ModelChart
-            state={locationName}
-            countyName={countyName}
-            subtitle="Hospitalizations over time"
-            interventions={interventions}
-            currentIntervention={intervention}
-            dateOverwhelmed={interventions.baseline.dateOverwhelmed}
-          />
-          <Content>
-            <CallToAction
+        {!shouldShowCountyMap && showModel && interventions && (
+          <Panel>
+            <ModelChart
+              state={locationName}
+              countyName={countyName}
+              subtitle="Hospitalizations over time"
               interventions={interventions}
               currentIntervention={intervention}
+              dateOverwhelmed={interventions.baseline.dateOverwhelmed}
             />
+            <Content>
+              <CallToAction
+                interventions={interventions}
+                currentIntervention={intervention}
+              />
 
-            <Outcomes
-              title="Predicted Outcomes after 3 Months"
-              models={[
-                interventions.baseline,
-                interventions.distancingPoorEnforcement.now,
-                interventions.distancing.now,
-                interventions.contain.now,
-              ]}
-              colors={[
-                limitedActionColor,
-                intervention === INTERVENTIONS.SHELTER_IN_PLACE
-                  ? shelterInPlaceWorseCaseColor
-                  : socialDistancingColor,
-                shelterInPlaceColor,
-                lockdownColor,
-              ]}
-              asterisk={['', '*', '*', '**']}
-              timeHorizon={100}
-              currentIntervention={intervention}
-            />
+              <Outcomes
+                title="Predicted Outcomes after 3 Months"
+                models={[
+                  interventions.baseline,
+                  interventions.distancingPoorEnforcement.now,
+                  interventions.distancing.now,
+                  interventions.contain.now,
+                ]}
+                colors={[
+                  limitedActionColor,
+                  intervention === INTERVENTIONS.SHELTER_IN_PLACE
+                    ? shelterInPlaceWorseCaseColor
+                    : socialDistancingColor,
+                  shelterInPlaceColor,
+                  lockdownColor,
+                ]}
+                asterisk={['', '*', '*', '**']}
+                timeHorizon={100}
+                currentIntervention={intervention}
+              />
 
-            <ul
-              style={{
-                textAlign: 'left',
-                lineHeight: '2em',
-              }}
-            >
-              <li
+              <ul
                 style={{
-                  listStyleType: 'none',
-                  marginBottom: 10,
+                  textAlign: 'left',
+                  lineHeight: '2em',
                 }}
               >
-                *{' '}
-                <b>
-                  A second spike in disease may occur after social distancing is
-                  stopped.
-                </b>{' '}
-                Interventions are important because they buy time to create
-                surge capacity in hospitals and develop therapeutic drugs that
-                may have potential to lower hospitalization and fatality rates
-                from COVID-19.{' '}
-                <a href="https://docs.google.com/document/d/1ETeXAfYOvArfLvlxExE0_xrO5M4ITC0_Am38CRusCko/edit#heading=h.vyhw42b7pgoj">
-                  See full scenario definitions here.
-                </a>
-              </li>
-              <li style={{ listStyleType: 'none' }}>
-                ** Our models show that it would take at least 2 months of
-                Wuhan-style Lockdown to achieve full containment. However, it is
-                unclear at this time how you could manage newly introduced
-                infections.{' '}
-                <a href="https://docs.google.com/document/d/1ETeXAfYOvArfLvlxExE0_xrO5M4ITC0_Am38CRusCko/edit#heading=h.vyhw42b7pgoj">
-                  See full scenario definitions here.
-                </a>
-              </li>
-            </ul>
+                <li
+                  style={{
+                    listStyleType: 'none',
+                    marginBottom: 10,
+                  }}
+                >
+                  *{' '}
+                  <b>
+                    A second spike in disease may occur after social distancing is
+                    stopped.
+                  </b>{' '}
+                  Interventions are important because they buy time to create
+                  surge capacity in hospitals and develop therapeutic drugs that
+                  may have potential to lower hospitalization and fatality rates
+                  from COVID-19.{' '}
+                  <a href="https://docs.google.com/document/d/1ETeXAfYOvArfLvlxExE0_xrO5M4ITC0_Am38CRusCko/edit#heading=h.vyhw42b7pgoj">
+                    See full scenario definitions here.
+                  </a>
+                </li>
+                <li style={{ listStyleType: 'none' }}>
+                  ** Our models show that it would take at least 2 months of
+                  Wuhan-style Lockdown to achieve full containment. However, it is
+                  unclear at this time how you could manage newly introduced
+                  infections.{' '}
+                  <a href="https://docs.google.com/document/d/1ETeXAfYOvArfLvlxExE0_xrO5M4ITC0_Am38CRusCko/edit#heading=h.vyhw42b7pgoj">
+                    See full scenario definitions here.
+                  </a>
+                </li>
+              </ul>
 
-            <ShareModelBlock location={location} county={selectedCounty} />
-          </Content>
-          <Content>
-            <div style={{ marginTop: '3rem' }}>
-              <Newsletter />
-            </div>
-          </Content>
-        </Panel>
-      )}
+              <ShareModelBlock location={location} county={selectedCounty} />
+            </Content>
+          </Panel>
+        )}
+          </MainContentInner>
+        </MainContentWrapper>
+        <MapContentWrapper mobileMenuOpen={mobileMenuOpen}>
+          <MapContentInner>
+            {mapOption === 'NATIONAL' &&
+                <Map hideLegend={true}
+                  setMobileMenuOpen={setMobileMenuOpen}
+                />
+            }
+
+            {mapOption === 'STATE' &&
+            <CountyMapAltWrapper>
+              <CountyMap
+                fill={INTERVENTION_COLOR_MAP[intervention]}
+                selectedCounty={selectedCounty}
+                setSelectedCounty={fullFips => {
+                  const county = _.find(
+                    US_STATE_DATASET.state_county_map_dataset[location]
+                      .county_dataset,
+                    ['full_fips_code', fullFips],
+                  );
+
+                  setRedirectTarget(
+                    `/state/${location}/county/${county.county_url_name}`,
+                  );
+                  setMobileMenuOpen(false);
+                  setShowCountyMap(false);
+                  setSelectedCounty(county);
+                }}
+              />
+            </CountyMapAltWrapper>
+            }
+          </MapContentInner>
+        </MapContentWrapper>
+      </ContentWrapper>
     </Wrapper>
   );
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { useHistory } from 'react-router-dom';
 
-import Header from 'components/Header/Header';
+import HomePageHeader from 'components/Header/HomePageHeader';
 import Map from 'components/Map/Map';
 import Endorsements from 'screens/Endorsements/Endorsements';
 import Newsletter from 'components/Newsletter/Newsletter';
@@ -31,14 +31,9 @@ export default function HomePage() {
 
   return (
     <>
-      <Header />
+      <HomePageHeader />
       <main>
         <div className="App">
-          <StateSelectorWrapper>
-            <StateSelectorInner>
-              <StateSelector handleChange={handleStateSelectChange} />
-            </StateSelectorInner>
-          </StateSelectorWrapper>
           <Content>
             <MapTitle>
               <MapTitleDivider>
