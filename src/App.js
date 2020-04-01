@@ -27,7 +27,7 @@ export default function App() {
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route path="/state/:id" component={ModelPage} />
-            <Route path="/model" component={FAQ} />
+            <Route path="/faq" component={FAQ} />
             <Route path="/endorsements" component={EndorsementsPage} />
             <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />
@@ -35,6 +35,10 @@ export default function App() {
             <Route path="/privacy" component={Privacy} />
             <Route path="/compare" component={CompareModels} />
             {/* <Route path="/donate" component={ComingSoon} /> */}
+            {/* /model is deprecated in favor of /faq */}
+            <Route path="/model">
+              <Redirect to="/faq" />
+            </Route>
             <Route path="/*">
               <Redirect to="/" />
             </Route>

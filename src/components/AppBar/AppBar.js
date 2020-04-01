@@ -27,14 +27,7 @@ import { STATES } from 'enums';
 const _AppBar = () => {
   const history = useHistory();
   const { pathname } = useLocation();
-  const panels = [
-    '/',
-    '/about',
-    '/model',
-    '/endorsements',
-    '/contact',
-    '/blog',
-  ];
+  const panels = ['/', '/about', '/faq', '/endorsements', '/contact', '/blog'];
 
   const getDefaultPanelId = () => {
     const defaultPanelIndex = Number(panels.indexOf(pathname));
@@ -135,10 +128,10 @@ const _AppBar = () => {
               onClick={goTo('/about')}
             />
             <StyledTab
-              label="Model"
+              label="FAQ"
               value={2}
               disableRipple
-              onClick={goTo('/model')}
+              onClick={goTo('/faq')}
             />
             <StyledTab
               label="Endorsements"
