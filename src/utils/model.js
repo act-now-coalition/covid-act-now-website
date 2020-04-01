@@ -39,6 +39,17 @@ const initialData = {
   countyDatas: null,
 };
 
+async function fetchSummary(setModelDatas, location) {
+  const summaryUrl = `/data/${location.toUpperCase()}.summary.json`;
+  const summary = await fetchAll([summaryUrl]);
+  setModelDatas(state => {
+    return {
+      ...state,
+      summary: summary[0],
+    };
+  });
+}
+
 async function fetchData(setModelDatas, location, county = null) {
   let modelDataForKey = null;
   let urls = [
@@ -104,6 +115,7 @@ export function useModelDatas(_location, county = null) {
   const [modelDatas, setModelDatas] = useState(initialData);
   useEffect(() => {
     fetchData(setModelDatas, location);
+    fetchSummary(setModelDatas, location);
   }, [location]);
 
   useEffect(() => {

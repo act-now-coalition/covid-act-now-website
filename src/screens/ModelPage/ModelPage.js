@@ -206,6 +206,7 @@ function ModelPage() {
                     <CountyMapWrapper>
                       <CountyMap
                         fill={INTERVENTION_COLOR_MAP[intervention]}
+                        stateSummary={modelDatasMap && modelDatasMap.summary}
                         selectedCounty={selectedCounty}
                         setSelectedCounty={fullFips => {
                           const county = _.find(

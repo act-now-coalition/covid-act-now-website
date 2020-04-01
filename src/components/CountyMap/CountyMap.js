@@ -11,11 +11,20 @@ import { csv } from 'd3-fetch';
 import ReactTooltip from 'react-tooltip';
 import STATE_CENTERS from '../../enums/us_state_centers';
 
-const CountyMap = ({ selectedCounty, setSelectedCounty, fill }) => {
+const CountyMap = ({
+  selectedCounty,
+  setSelectedCounty,
+  fill,
+  stateSummary = {},
+}) => {
   const [data, setData] = useState([]);
   const { id: location } = useParams();
   const state = STATE_CENTERS[location];
   const counties = require(`./countyTopoJson/${location}.json`);
+  const countiesWithData =
+    stateSummary && stateSummary.counties_with_data
+      ? stateSummary.counties_with_data
+      : [];
 
   useEffect(() => {
     csv('/countyConfigData/sampleData.csv').then(counties => {
@@ -69,7 +78,11 @@ const CountyMap = ({ selectedCounty, setSelectedCounty, fill }) => {
                           ? 0.5
                           : 1
                       }
-                      fill={fill}
+                      fill={
+                        countiesWithData.includes(geo.properties.GEOID)
+                          ? fill
+                          : '#ccc'
+                      }
                       stroke={'white'}
                       onMouseEnter={() => {
                         const { NAME } = geo.properties;
