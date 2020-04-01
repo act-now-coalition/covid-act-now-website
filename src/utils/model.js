@@ -103,13 +103,12 @@ export function useAllStateModelDatas(dataUrl = null) {
         models[state] = results[i];
         i++;
       }
-      console.log('Setting state:', models);
       setStateModels(models);
     }).catch(e => {
       setStateModels(null);
       throw e;
     });
-  }, [dataUrl]);
+  });
   return stateModels;
 }
 
