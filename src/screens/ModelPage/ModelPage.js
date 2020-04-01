@@ -62,7 +62,6 @@ function ModelPage() {
   let modelDatas = null;
   const modelDatasMap = useModelDatas(location, selectedCounty);
   console.log('modelDatasMap', modelDatasMap, selectedCounty);
-  console.log(selectedCounty);
 
   const locationName = STATES[location];
   const countyName = selectedCounty ? selectedCounty.county : null;

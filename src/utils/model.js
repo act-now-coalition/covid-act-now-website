@@ -50,7 +50,7 @@ async function fetchData(setModelDatas, location, county = null) {
     let fipsCode =
       county && county.full_fips_code ? county.full_fips_code : null;
     const stateUrl = `/data/${location}.${i}.json`;
-    const countyUrl = `/data/${fipsCode}.${i}.json`;
+    const countyUrl = `/data/${location.toUpperCase()}.${fipsCode}.${i}.json`;
     return county ? countyUrl : stateUrl;
   });
   try {

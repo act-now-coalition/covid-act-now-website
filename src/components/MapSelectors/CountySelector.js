@@ -117,6 +117,7 @@ const CountySelector = ({
   return (
     <Select
       defaultValue={selectedCounty}
+      value={selectedCounty}
       placeholder="Select a county"
       options={sortedOptions}
       components={{
