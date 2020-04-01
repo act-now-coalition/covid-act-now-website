@@ -87,6 +87,12 @@ const _AppBar = () => {
 
   const shareTitle = locationName ? stateShareTitle : defaultShareTitle;
 
+  const trackShare = target => {
+    window.gtag('event', 'share', {
+      event_label: target,
+    });
+  };
+
   return (
     <StyledAppBar position="sticky">
       <Wrapper>
@@ -109,6 +115,9 @@ const _AppBar = () => {
           <FacebookShareButton
             url={shareURL}
             quote={shareTitle}
+            beforeOnClick={() => {
+              trackShare('facebook');
+            }}
             style={{ alignItems: 'center', display: 'flex', paddingRight: 28 }}
           >
             <FacebookIcon size={32} round={true} />
@@ -117,6 +126,9 @@ const _AppBar = () => {
             url={shareURL}
             title={shareTitle}
             hashtags={[hashtag]}
+            beforeOnClick={() => {
+              trackShare('twitter');
+            }}
             style={{ alignItems: 'center', display: 'flex' }}
           >
             <TwitterIcon size={32} round={true} />
