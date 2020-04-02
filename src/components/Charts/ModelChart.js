@@ -276,9 +276,8 @@ const ModelChart = ({
         }
       >
         <Chart options={options} />
-        
-          {countyName ? (
-            <Disclaimer>
+        {countyName ? (
+          <Disclaimer>
             <DisclaimerContent>
               <b>County data is currently in beta.</b> See something wrong?{' '}
               <a
@@ -289,10 +288,10 @@ const ModelChart = ({
                 Please let us know.
               </a>
             </DisclaimerContent>
-            </Disclaimer>
-          ) : (
-            <Typography></Typography>
-          )}
+          </Disclaimer>
+        ) : (
+          <Typography></Typography>
+        )}
         <Disclaimer>
           <DisclaimerContent>
             <LightTooltip
