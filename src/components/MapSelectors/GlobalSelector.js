@@ -1,5 +1,6 @@
 import React from 'react';
 import { chain, each, map, some } from 'lodash';
+import { useParams } from 'react-router-dom';
 import Downshift from 'downshift';
 import SearchIcon from '@material-ui/icons/Search';
 import ShortNumber from 'utils/ShortNumber';
@@ -69,6 +70,8 @@ const CountyItem = ({ dataset }) => {
 };
 
 const GlobalSelector = ({ handleChange, extendRight }) => {
+  const { id: location } = useParams();
+
   const stateDataset = US_STATE_DATASET.state_dataset;
   const countyDataset = [];
 
@@ -113,18 +116,35 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
       window.location = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
     }
 
-    const stateMatches = chain(stateDataset)
-      .filter(item => hasStateMatch(item, inputValue))
-      .map((item, index) => ({
-        ...item,
-        id: item.state_fips_code,
-        value: item.state,
-        type: 'STATE',
-      }))
-      .uniq()
-      .value();
+    if (location && !inputValue) {
+      const topCountiesByParamState = chain(countyDataset)
+          .filter(item => item.state_code === location)
+          .map((item) => ({
+            ...item,
+            id: item.full_fips_code,
+            value: `${item.county}, ${item.state_code}`,
+            type: 'COUNTY',
+          }))
+          .uniqBy('id')
+          .sortBy('population')
+          .reverse()
+          .slice(0, 20)
+          .value();
 
-    matchedItems.push(...stateMatches);
+      matchedItems.push(...topCountiesByParamState);
+    } else {
+      const stateMatches = chain(stateDataset)
+          .filter(item => hasStateMatch(item, inputValue))
+          .map((item) => ({
+            ...item,
+            id: item.state_fips_code,
+            value: item.state,
+            type: 'STATE',
+          }))
+          .uniq()
+          .value();
+
+      matchedItems.push(...stateMatches);
 
     if (inputValue.length > 2) {
       const countyMatches = chain(countyDataset)
@@ -140,12 +160,13 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
           value: `${item.county}, ${item.state_code}`,
           type: 'COUNTY',
         }))
-        .sortBy('population')
         .uniqBy('id')
+          .sortBy('population')
         .reverse()
         .value();
 
-      matchedItems.push(...countyMatches);
+        matchedItems.push(...countyMatches);
+      }
     }
 
     return map(matchedItems, (item, index) => {
