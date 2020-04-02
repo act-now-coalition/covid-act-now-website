@@ -13,7 +13,7 @@ export const StyledMenu = styled.ul`
   background: white;
   position: absolute;
   left: 0;
-  /* right: ${props => props.extendRight ? '-70px' : '0'}; */
+  /* right: ${props => (props.extendRight ? '-70px' : '0')}; */
   right: 0;
   transfrom: translateY(100%);
   max-height: 400px;
@@ -21,9 +21,9 @@ export const StyledMenu = styled.ul`
   list-style: none;
   border: ${props => (props.isOpen ? '1px solid ' + BORDER_COLOR : 'none')};
   border-radius: 0 0 3px 3px;
-  
-  @media(min-width: 600px) {
-   right: 0;
+
+  @media (min-width: 600px) {
+    right: 0;
   }
 `;
 

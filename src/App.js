@@ -7,11 +7,9 @@ import ModelPage from 'screens/ModelPage/ModelPage';
 import HomePage from 'screens/HomePage/HomePage';
 // import ComingSoon from 'screens/ComingSoon/ComingSoon';
 import FAQ from 'screens/FAQ/FAQ';
-import Contact from 'screens/Contact/Contact';
 import Terms from 'screens/Terms/Terms';
 import Privacy from 'screens/Terms/Privacy';
 import EndorsementsPage from 'screens/Endorsements/EndorsementsPage';
-import About from 'screens/About/About';
 import CompareModels from 'screens/CompareModels/CompareModels';
 import AppBar from 'components/AppBar/AppBar';
 import Footer from 'components/Footer/Footer';
@@ -32,14 +30,22 @@ export default function App() {
               path="/state/:id/county/:countyId"
               component={ModelPage}
             />
-            <Route path="/model" component={FAQ} />
+            <Route path="/faq" component={FAQ} />
             <Route path="/endorsements" component={EndorsementsPage} />
-            <Route path="/about" component={About} />
-            <Route path="/contact" component={Contact} />
             <Route path="/terms" component={Terms} />
             <Route path="/privacy" component={Privacy} />
             <Route path="/compare" component={CompareModels} />
             {/* <Route path="/donate" component={ComingSoon} /> */}
+            {/* /model, /contact, and /about are deprecated in favor of /faq */}
+            <Route path="/model">
+              <Redirect to="/faq" />
+            </Route>
+            <Route path="/contact">
+              <Redirect to="/faq" />
+              <Route path="/about">
+                <Redirect to="/faq" />
+              </Route>
+            </Route>
             <Route path="/*">
               <Redirect to="/" />
             </Route>

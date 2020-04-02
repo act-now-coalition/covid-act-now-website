@@ -50,8 +50,9 @@ const SearchHeader = ({
         <MenuBarWrapper>
           <SelectorWrapper>
             <GlobalSelector
-                extendRight={true}
-                handleChange={handleSelectChange} />
+              extendRight={true}
+              handleChange={handleSelectChange}
+            />
           </SelectorWrapper>
           {isMobile && (
             <MapToggle

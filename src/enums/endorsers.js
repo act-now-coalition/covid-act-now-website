@@ -11,11 +11,11 @@ export default [
   },
   {
     size: 4,
-    name: "Valerie Nurr'araaluk Davidson",
+    name: "Valerie Nurr'araaluk Davidson, JD",
     avatarUrl: '/images/endorsers/Valerie-Davidson-A__resized-100-100.jpg',
     profileUrl: 'https://en.wikipedia.org/wiki/Valerie_Davidson',
     credentials: [
-      'Former Commissioner of the Alaska Department of Health and Social Services',
+      'Former Commissioner, Alaska Department of Health and Social Services',
       "Founder's Council member, United States of Care",
     ],
   },
@@ -38,8 +38,6 @@ export default [
       'Florence Pirce Grant University Professor',
       'Professor of Health Services, Policy and Practice, Brown University',
     ],
-    quote:
-      "This model offers a great tool for state policy staff who's job it is to advise the Governor and the Director of Health regarding what kinds of policies should be instituted to encourage social distancing to minimize contagion with corona virus. Staff need to be prepared to defend with comparative data their recommendations regarding whether to close schools, close bars, restrict gatherings to a select number or encourage non-essential workers to telecommute. This web site offers state specific estimates that  demonstrate the impact of such policies on the curve of infections, hospitalizations and deaths in a very sophisticated manner.",
   },
   {
     size: 4,
@@ -54,7 +52,7 @@ export default [
     avatarUrl: '/images/endorsers/Leo_Nissola__resized-100-100.jpg',
     profileUrl: 'https://www.linkedin.com/in/nissolamd/',
     credentials: [
-      'Published immunology scholar and scientist at Parker Institute for Cancer Immunothera',
+      'Immunology scholar at Parker Institute for Cancer Immunotherapy',
     ],
   },
   {
@@ -69,7 +67,7 @@ export default [
   },
   {
     size: 4,
-    name: 'Dr. Vincent DeGennaro, Jr, MD, MPH',
+    name: 'Vincent DeGennaro, Jr, MD, MPH',
     avatarUrl: '/images/endorsers/dr_vincent__resized-100-100.jpg',
     profileUrl: 'https://www.linkedin.com/in/joe-nation-1045536/',
     credentials: [
@@ -80,7 +78,7 @@ export default [
   },
   {
     size: 4,
-    name: 'Robert David Siegel, M.D., PhD',
+    name: 'Robert David Siegel, MD, PhD',
     avatarUrl: '/images/endorsers/robert_siegel__resized-100-100.jpeg',
     profileUrl: 'https://med.stanford.edu/profiles/robert-siegel',
     credentials: [
@@ -93,7 +91,7 @@ export default [
     avatarUrl: '/images/endorsers/rebecca_katz__resized-100-100.jpg',
     profileUrl: 'https://ghss.georgetown.edu/people/katz/',
     credentials: [
-      'Professor and Director of the Center for Global Health Science and Security at Georgetown University Medical Center',
+      'Professor and Director, Center for Global Health Science and Security, Georgetown University',
     ],
   },
 ];

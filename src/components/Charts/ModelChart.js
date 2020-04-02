@@ -5,6 +5,7 @@ import { snakeCase } from 'lodash';
 import { INTERVENTIONS } from 'enums';
 import LightTooltip from 'components/LightTooltip/LightTooltip';
 import Chart from './Chart';
+import { Typography } from '@material-ui/core';
 
 import {
   ChartContainer,
@@ -258,7 +259,13 @@ const ModelChart = ({
       ],
     };
   }, [
-    state, countyName, subtitle, interventions, currentIntervention
+    model.dateOverwhelmed,
+    currentIntervention,
+    noAction,
+    socialDistancing,
+    shelterInPlace,
+    wuhanStyle,
+    availableBeds,
   ]);
 
   return (
@@ -269,6 +276,22 @@ const ModelChart = ({
         }
       >
         <Chart options={options} />
+        {countyName ? (
+          <Disclaimer>
+            <DisclaimerContent>
+              <b>County data is currently in beta.</b> See something wrong?{' '}
+              <a
+                href="mailto:info@covidactnow.org"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Please let us know.
+              </a>
+            </DisclaimerContent>
+          </Disclaimer>
+        ) : (
+          <Typography></Typography>
+        )}
         <Disclaimer>
           <DisclaimerContent>
             <LightTooltip
@@ -279,7 +302,7 @@ const ModelChart = ({
                 <strong>Last updated March 27th</strong>.{' '}
               </span>
             </LightTooltip>
-            This model updates every 4 days and is intended to help make fast
+            This model updates every 24 hours and is intended to help make fast
             decisions, not predict the future.{' '}
             <a
               href="https://docs.google.com/document/d/1ETeXAfYOvArfLvlxExE0_xrO5M4ITC0_Am38CRusCko/edit#heading=h.vyhw42b7pgoj"

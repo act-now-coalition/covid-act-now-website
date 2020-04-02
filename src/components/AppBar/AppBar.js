@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory, useLocation, matchPath } from 'react-router-dom';
 import { ArrowBack } from '@material-ui/icons';
-import Typography from '@material-ui/core/Typography';
 import Logo from 'assets/images/logo';
 import MobileMenu from './MobileMenu';
 import Burger from './Burger';
@@ -12,7 +11,6 @@ import {
   StyledDesktopMenu,
   StyledTabs,
   StyledTab,
-  MenuTitle,
   StyledMobileMenu,
 } from './AppBar.style';
 
@@ -27,14 +25,7 @@ import { STATES } from 'enums';
 const _AppBar = () => {
   const history = useHistory();
   const { pathname } = useLocation();
-  const panels = [
-    '/',
-    '/about',
-    '/model',
-    '/endorsements',
-    '/contact',
-    '/blog',
-  ];
+  const panels = ['/', '/faq', '/endorsements', '/contact', '/blog'];
 
   const getDefaultPanelId = () => {
     const defaultPanelIndex = Number(panels.indexOf(pathname));
@@ -81,9 +72,9 @@ const _AppBar = () => {
 
   const shareURL = `https://covidactnow.org${match ? match.url : ''}`;
   const hashtag = 'COVIDActNow';
-  const stateShareTitle = `This is the point of no return for intervention to prevent ${locationName}'s hospital system from being overloaded by Coronavirus: `;
+  const stateShareTitle = `See a projection for how long ${locationName}'s hospital system has until COVID overwhelms hospitals and how interventions flatten the curve and save lives: @COVIDActNow`;
   const defaultShareTitle =
-    'See a forecast for how long each US state has until COVID-19 overwhelms hospitals and how interventions could flatten the curve:';
+    'See a projection for how long states and counties have until COVID overwhelms hospitals and how interventions flatten the curve and save lives: @COVIDActNow';
 
   const shareTitle = locationName ? stateShareTitle : defaultShareTitle;
 
@@ -108,27 +99,46 @@ const _AppBar = () => {
       <Wrapper>
         <Left onClick={goTo('/')}>
           {pathname.includes('state') ? <ArrowBack /> : <Logo />}
-          <MenuTitle>
-            <Typography
-              variant="button"
-              style={{
-                textDecoration: 'none',
-                color: 'black',
-                cursor: 'pointer',
-              }}
-            >
-              COVID ACT NOW
-            </Typography>
-          </MenuTitle>
         </Left>
         <StyledDesktopMenu value={false}>
+          <StyledTabs value={panelIdx}>
+            <StyledTab
+              label="Map"
+              value={0}
+              disableRipple
+              onClick={goTo('/')}
+            />
+            <StyledTab
+              label="FAQ"
+              value={1}
+              disableRipple
+              onClick={goTo('/faq')}
+            />
+            <StyledTab
+              label="Endorsements"
+              value={2}
+              disableRipple
+              onClick={goTo('/endorsements')}
+            />
+            <StyledTab
+              label="Blog"
+              value={3}
+              disableRipple
+              onClick={forwardTo('https://blog.covidactnow.org')}
+            />
+          </StyledTabs>
           <FacebookShareButton
             url={shareURL}
             quote={shareTitle}
             beforeOnClick={() => {
               trackShare('facebook');
             }}
-            style={{ alignItems: 'center', display: 'flex', paddingRight: 28 }}
+            style={{
+              alignItems: 'center',
+              display: 'flex',
+              paddingLeft: 28,
+              paddingRight: 14,
+            }}
           >
             <FacebookIcon size={32} round={true} />
           </FacebookShareButton>
@@ -143,44 +153,6 @@ const _AppBar = () => {
           >
             <TwitterIcon size={32} round={true} />
           </TwitterShareButton>
-          <StyledTabs value={panelIdx}>
-            <StyledTab
-              label="Map"
-              value={0}
-              disableRipple
-              onClick={goTo('/')}
-            />
-            <StyledTab
-              label="About"
-              value={1}
-              disableRipple
-              onClick={goTo('/about')}
-            />
-            <StyledTab
-              label="Model"
-              value={2}
-              disableRipple
-              onClick={goTo('/model')}
-            />
-            <StyledTab
-              label="Endorsements"
-              value={3}
-              disableRipple
-              onClick={goTo('/endorsements')}
-            />
-            <StyledTab
-              label="Contact"
-              value={4}
-              disableRipple
-              onClick={goTo('/contact')}
-            />
-            <StyledTab
-              label="Blog"
-              value={5}
-              disableRipple
-              onClick={forwardTo('https://blog.covidactnow.org')}
-            />
-          </StyledTabs>
         </StyledDesktopMenu>
         <StyledMobileMenu>
           <FacebookShareButton

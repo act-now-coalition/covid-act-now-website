@@ -7,7 +7,7 @@ import { Wrapper, BackgroundImage, Layer } from './ComingSoon.style';
 const ComingSoon = () => {
   return (
     <Wrapper>
-      <BackgroundImage src={covid} alt="covid-19 virus" />
+      <BackgroundImage src={covid} alt="covid virus" />
       <Layer />
       <Typography align="center" variant="h2" component="p">
         Coming Soon
