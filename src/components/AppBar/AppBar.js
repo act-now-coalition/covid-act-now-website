@@ -72,9 +72,9 @@ const _AppBar = () => {
 
   const shareURL = `https://covidactnow.org${match ? match.url : ''}`;
   const hashtag = 'COVIDActNow';
-  const stateShareTitle = `This is the point of no return for intervention to prevent ${locationName}'s hospital system from being overloaded by Coronavirus: `;
+  const stateShareTitle = `See a projection for how long ${locationName}'s hospital system has until COVID overwhelms hospitals and how interventions flatten the curve and save lives: @COVIDActNow`;
   const defaultShareTitle =
-    'See a forecast for how long each US state has until COVID-19 overwhelms hospitals and how interventions could flatten the curve:';
+    'See a projection for how long states and counties have until COVID overwhelms hospitals and how interventions flatten the curve and save lives: @COVIDActNow';
 
   const shareTitle = locationName ? stateShareTitle : defaultShareTitle;
 

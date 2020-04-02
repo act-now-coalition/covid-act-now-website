@@ -34,7 +34,7 @@ const ShareModelBlock = ({ location, county }) => {
 
   return (
     <ShareContainer>
-      <ShareInstruction>{`Share ${displayName}'s COVID-19 trends:`}</ShareInstruction>
+      <ShareInstruction>{`Share ${displayName}'s COVID trends:`}</ShareInstruction>
       <ShareButtonContainer>
         <FacebookShareButton
           url={shareURL}

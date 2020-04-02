@@ -455,7 +455,7 @@ const FAQ = ({ children }) => {
         </Typography>
 
         <Typography variant="h5" component="h5">
-          Where can I get more information about COVID-19?
+          Where can I get more information about COVID?
         </Typography>
         <Typography variant="body1" component="p">
           The CDC has additional information on{' '}
@@ -464,7 +464,7 @@ const FAQ = ({ children }) => {
             rel="noopener noreferrer"
             href="https://www.cdc.gov/coronavirus/2019-ncov/index.html"
           >
-            COVID-19
+            COVID
           </a>
           .
         </Typography>
