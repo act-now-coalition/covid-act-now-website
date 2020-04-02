@@ -7,12 +7,9 @@ import MapIcon from 'assets/images/mapIcon';
 import {
   Wrapper,
   Content,
-  MapMenuItem,
   SelectorWrapper,
   MapToggle,
   MenuBarWrapper,
-  MapMenuWrapper,
-  MapMenuMobileWrapper,
 } from './SearchHeader.style';
 
 const SearchHeader = ({
@@ -52,7 +49,9 @@ const SearchHeader = ({
       <Content>
         <MenuBarWrapper>
           <SelectorWrapper>
-            <GlobalSelector handleChange={handleSelectChange} />
+            <GlobalSelector
+                extendRight={true}
+                handleChange={handleSelectChange} />
           </SelectorWrapper>
           {isMobile && (
             <MapToggle

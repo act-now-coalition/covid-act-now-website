@@ -41,7 +41,7 @@ const ModelChart = ({
     let plotLineText;
     switch (currentIntervention) {
       case INTERVENTIONS.SHELTER_IN_PLACE:
-        plotLineText = '<span>Stay at Home<br/>(poor compliance)</span>';
+        plotLineText = '<span>Stay at home<br/>(poor compliance)</span>';
         break;
       case INTERVENTIONS.LIMITED_ACTION:
         plotLineText = 'Assuming limited action';
@@ -72,7 +72,7 @@ const ModelChart = ({
       'beds',
       duration,
       'black',
-      'Available Hospital Beds',
+      'Available hospital beds',
     ),
   ];
 
@@ -123,7 +123,7 @@ const ModelChart = ({
     },
   };
   const availableBeds = {
-    name: 'Available Hospital Beds',
+    name: 'Available hospital beds',
     type: 'spline',
     data: data[4].data,
     marker: {
@@ -134,6 +134,7 @@ const ModelChart = ({
   const options = useMemo(() => {
     return {
       chart: {
+        animation: false,
         styledMode: true,
         height: '600',
         spacing: [8, 0, 32, 0],
@@ -237,11 +238,13 @@ const ModelChart = ({
       },
       plotOptions: {
         series: {
+          animation: false,
           marker: {
             enabled: false,
           },
         },
         area: {
+          animation: false,
           marker: {
             enabled: false,
           },
