@@ -32,7 +32,7 @@ export const HeaderSubCopy = styled(Typography)`
   font-size: 1rem;
   line-height: 1.6rem;
   margin-bottom: 2rem;
-  max-width: 700px;
+  max-width: 750px;
   color: rgba(0, 0, 0, 0.7);
 `;
 
