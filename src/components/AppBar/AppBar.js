@@ -125,7 +125,12 @@ const _AppBar = () => {
             beforeOnClick={() => {
               trackShare('facebook');
             }}
-            style={{ alignItems: 'center', display: 'flex', paddingLeft: 28, paddingRight: 14 }}
+            style={{
+              alignItems: 'center',
+              display: 'flex',
+              paddingLeft: 28,
+              paddingRight: 14,
+            }}
           >
             <FacebookIcon size={32} round={true} />
           </FacebookShareButton>

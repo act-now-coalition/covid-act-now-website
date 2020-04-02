@@ -419,7 +419,7 @@ const FAQ = ({ children }) => {
           What are the symptoms of COVID?
         </Typography>
         <Typography variant="body1" component="p">
-          The Centers for Disease Control and Prevention has a list of{' '}
+          The CDC has a list of{' '}
           <a
             target="_blank"
             rel="noopener noreferrer"
@@ -434,8 +434,7 @@ const FAQ = ({ children }) => {
           Where/how should I get tested?
         </Typography>
         <Typography variant="body1" component="p">
-          The Centers for Disease Control and Prevention has additional
-          information on{' '}
+          The CDC has additional information on{' '}
           <a
             target="_blank"
             rel="noopener noreferrer"
@@ -450,7 +449,7 @@ const FAQ = ({ children }) => {
           What should I do if I think I am sick?
         </Typography>
         <Typography variant="body1" component="p">
-          The Centers for Disease Control and Prevention provides advice on{' '}
+          The CDC provides advice on{' '}
           <a
             target="_blank"
             rel="noopener noreferrer"
@@ -465,8 +464,7 @@ const FAQ = ({ children }) => {
           Where can I get more information about COVID-19?
         </Typography>
         <Typography variant="body1" component="p">
-          The Centers for Disease Control and Prevention has additional
-          information on{' '}
+          The CDC has additional information on{' '}
           <a
             target="_blank"
             rel="noopener noreferrer"
