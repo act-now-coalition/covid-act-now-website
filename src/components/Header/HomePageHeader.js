@@ -40,14 +40,8 @@ const HomePageHeader = ({
         </HeaderTitle>
         <div>
           <HeaderSubCopy color="inherit" component="p" variant="subtitle2">
-<<<<<<< HEAD
             Our projections show when hospitals will likely become overloaded,
             and what you can do to stop COVID.
-=======
-            Our projections show when hospitals will likely become overloaded
-            throughout the country, and what you can do to change the course of
-            COVID in your local area.
->>>>>>> 3432a3102e3a8de354535379874724b850056a17
           </HeaderSubCopy>
 
           <SelectorWrapper>
