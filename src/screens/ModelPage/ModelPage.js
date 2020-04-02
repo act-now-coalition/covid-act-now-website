@@ -315,7 +315,8 @@ function ModelPage() {
           <div>
             <StyledNoResultsWrapper>
               <StyledNoResults>
-                We either weren't able to get data for {selectedCounty.county}, {selectedCounty.state_code}, or no cases have yet been confirmed. We’re unable to produce our model for this county until we have data. Check back soon.
+                We either weren't able to get data for {selectedCounty.county}, {selectedCounty.state_code}, or no cases have yet been confirmed.
+                <br><br>We’re unable to produce our model for this county until we have data. Check back soon.
               </StyledNoResults>
             </StyledNoResultsWrapper>
             {renderMapContent()}
