@@ -313,7 +313,8 @@ function ModelPage() {
           <div>
             <StyledNoResultsWrapper>
               <StyledNoResults>
-                No cases have been reported or no data exists for {selectedCounty.county}, {selectedCounty.state_code}
+                No cases have been reported or no data exists for{' '}
+                {selectedCounty.county}, {selectedCounty.state_code}
               </StyledNoResults>
             </StyledNoResultsWrapper>
             {renderMapContent()}
