@@ -21,8 +21,10 @@ const ShareModelBlock = ({ location, county }) => {
   const displayName = countyName
     ? `${countyName}, ${locationName}`
     : locationName;
-  const shareURL = `https://covidactnow.org/state/${location}`;
-  const shareQuote = `This is the point of no return for intervention to prevent ${locationName}'s hospital system from being overloaded by Coronavirus: `;
+  const shareURL = `https://covidactnow.org/state/${location}${
+    county ? `/county/${county.county_url_name}` : ''
+  }`;
+  const shareQuote = `This is the point of no return for intervention to prevent ${displayName}'s hospital system from being overloaded by Coronavirus: `;
   const hashtag = 'COVIDActNow';
   const trackShare = target => {
     window.gtag('event', 'share', {

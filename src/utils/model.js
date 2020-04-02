@@ -218,9 +218,6 @@ export class Model {
       infectedSoFar += this.infected[i];
       this.cumulativeInfected.push(infectedSoFar);
     }
-    console.log('Cumulative infected: ');
-    console.log(this.infected);
-    console.log(this.cumulativeInfected);
 
     this.maxInfected = this.cumulativeInfected[
       this.cumulativeInfected.length - 1
