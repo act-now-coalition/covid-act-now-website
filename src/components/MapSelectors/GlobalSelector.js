@@ -132,7 +132,7 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
         .filter(item => {
           // TODO this is a temporary filter
           // to remove combined county name
-            return !item.county.includes(' / ');
+          return !item.county.includes(' / ');
         })
         .map((item, index) => ({
           ...item,
@@ -178,7 +178,7 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
 
   return (
     <Downshift
-      onChange={(selection) => handleChange(selection)}
+      onChange={selection => handleChange(selection)}
       itemToString={item => (item ? item.value : '')}
     >
       {({

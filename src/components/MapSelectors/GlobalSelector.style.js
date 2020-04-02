@@ -13,7 +13,7 @@ export const StyledMenu = styled.ul`
   background: white;
   position: absolute;
   left: 0;
-  /* right: ${props => props.extendRight ? '-70px' : '0'}; */
+  /* right: ${props => (props.extendRight ? '-70px' : '0')}; */
   right: 0;
   transfrom: translateY(100%);
   max-height: 400px;
