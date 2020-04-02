@@ -129,7 +129,7 @@ export function useModelDatas(location, county = null, dataUrl = null) {
     } else {
       fetchData(setModelDatas, location, county, dataUrl);
     }
-  }, [dataUrl, county]);
+  }, [dataUrl, county, location]);
 
   return modelDatas;
 }
