@@ -114,11 +114,6 @@ export default [
     link: 'https://www.linkedin.com/in/traewallace/',
   },
   {
-    name: 'Steph Eaneff',
-    title: 'Data Science Research Fellow, UC Berkeley',
-    link: 'https://www.linkedin.com/in/seaneff/',
-  },
-  {
     name: 'Chris Wilcox',
     title: 'Senior Engineer, Google',
     link: 'https://www.linkedin.com/in/chrisrwilcox/',
