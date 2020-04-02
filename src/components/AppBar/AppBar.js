@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory, useLocation, matchPath } from 'react-router-dom';
 import { ArrowBack } from '@material-ui/icons';
-import Typography from '@material-ui/core/Typography';
 import Logo from 'assets/images/logo';
 import MobileMenu from './MobileMenu';
 import Burger from './Burger';
@@ -12,7 +11,6 @@ import {
   StyledDesktopMenu,
   StyledTabs,
   StyledTab,
-  MenuTitle,
   StyledMobileMenu,
 } from './AppBar.style';
 

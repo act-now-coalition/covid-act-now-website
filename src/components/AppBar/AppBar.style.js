@@ -51,7 +51,9 @@ export const StyledTab = styled(Tab)`
   min-width: 36px;
   height: 64px;
   margin-left: 15px;
-  font-size: 15px;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.1em;
   padding: 0;
 
   &[aria-selected='true'] {
@@ -60,7 +62,7 @@ export const StyledTab = styled(Tab)`
 
   @media (min-width: ${mobileBreakpoint}) {
     margin-left: 28px;
-    font-size: 16px;
+    font-size: 14px;
   }
 `;
 

@@ -36,14 +36,12 @@ const HomePageHeader = ({
     <Wrapper>
       <Content>
         <HeaderTitle>
-          Act now to <HighlightColor>save lives</HighlightColor> in your
-          community.
+          Act now. <HighlightColor>Save lives.</HighlightColor>
         </HeaderTitle>
         <div>
           <HeaderSubCopy color="inherit" component="p" variant="subtitle2">
-            Our projections show when hospitals will likely become overloaded
-            throughout the county, and what you can do to change the course of
-            COVID-19 in your local area.
+            Our projections show when hospitals will likely become overloaded,
+            and what you can do to stop COVID.
           </HeaderSubCopy>
 
           <SelectorWrapper>

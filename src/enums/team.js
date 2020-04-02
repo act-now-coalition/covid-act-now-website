@@ -11,7 +11,7 @@ export default [
   },
   {
     name: 'Representative Jonathan Kreiss-Tomkins',
-    title: 'Alaska Legislator',
+    title: 'Alaska legislator',
     link: 'https://en.wikipedia.org/wiki/Jonathan_Kreiss-Tomkins',
   },
   {
@@ -23,7 +23,7 @@ export default [
   {
     name: 'Dr. Nirav Shah, MD, MPH',
     title:
-      'Senior Scholar, Stanford University Clinical Excellence Research Center',
+      'senior scholar, Stanford University Clinical Excellence Research Center',
     link: 'https://profiles.stanford.edu/nirav-shah',
   },
   {
@@ -34,7 +34,7 @@ export default [
   },
   {
     name: 'James Tamplin',
-    title: 'Founder/CEO, Firebase',
+    title: 'founder/CEO, Firebase',
     link: 'https://www.linkedin.com/in/jamest/',
   },
   {
@@ -49,7 +49,7 @@ export default [
   },
   {
     name: 'Zack Rosen',
-    title: 'Engineering Lead, Stitch Labs',
+    title: 'engineering lead, Stitch Labs',
     link: 'https://www.linkedin.com/in/zack-rosen-a03abb3a/',
   },
   {
@@ -59,7 +59,7 @@ export default [
   },
   {
     name: 'Ali Berlin Johnson',
-    title: 'Ex Lead Designer, Firebase',
+    title: 'ex-lead designer, Firebase',
     link: 'https://www.linkedin.com/in/berlinjohnson/',
   },
   {
@@ -69,37 +69,37 @@ export default [
   },
   {
     name: 'Jacob Redding',
-    title: 'Sr Principal, Accenture',
+    title: 'senior principal, Accenture',
     link: 'https://www.linkedin.com/in/jacobredding/',
   },
   {
     name: 'Joseph Ensminger',
-    title: 'Founder, J.E. Consulting',
+    title: 'founder, J.E. Consulting',
     link: 'https://www.linkedin.com/in/josephensminger/',
   },
   {
     name: 'Simon Frid',
-    title: 'Founder, Fridiculous Ventures',
+    title: 'founder, Fridiculous Ventures',
     link: 'https://www.linkedin.com/in/simonfrid/',
   },
   {
     name: 'Virsaviya Efraim',
-    title: 'Software Engineer, Almanac',
+    title: 'software engineer, Almanac',
     link: 'https://www.linkedin.com/in/virsaviyaefraim/',
   },
   {
-    name: 'Andrew Krackov',
-    title: 'President, Hillcrest Advisory',
-    link: 'https://www.linkedin.com/in/andykrackov/',
+    name: 'Mike McDonald',
+    title: 'head of product, Stedi',
+    link: 'https://www.linkedin.com/in/asciimike/',
   },
   {
     name: 'Adnan Pirzada',
-    title: 'Software Engineer, Lattice',
+    title: 'software engineer, Lattice',
     link: 'https://www.linkedin.com/in/adpirz/',
   },
   {
     name: 'Rachel RoseFigura',
-    title: 'Software Engineer, Uber',
+    title: 'software engineer, Uber',
     link: 'https://www.linkedin.com/in/rachelrosefigura/',
   },
 ];

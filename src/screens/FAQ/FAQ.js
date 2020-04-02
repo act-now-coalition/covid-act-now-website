@@ -15,31 +15,29 @@ const FAQ = ({ children }) => {
           What is Covid Act Now?
         </Typography>
         <Typography variant="body1" component="p">
-          Covid Act Now was created by four volunteers who were looking at the
-          spread and speed of COVID around the world and felt they had to do
-          something. The Covid Act Now team has partnered with some of our
-          nation's best epidemiologists and data scientists to develop the U.S.
-          Intervention Model.
+          Covid Act Now was created by four volunteers who saw the explosive and
+          deadly growth of COVID infections around the world and felt they had
+          to do something. The Covid Act Now team has partnered with some of
+          America’s preeminent epidemiologists and data scientists to develop
+          the U.S. Intervention Model.
         </Typography>
         <Typography variant="body1" component="p">
           We help decision makers understand when and how COVID will affect
-          their constituents, which allows for better allocation of fixed
-          resources like beds, ventilators, and clinical support staff.
+          their communities in order to make better decisions that save lives.
         </Typography>
         <Typography variant="body1" component="p">
-          Our U.S. Intervention Model has been shared with every level of
-          government across the U.S., and is currently being used by thousands
-          of decision makers, from elected officials, public health leaders, the
-          U.S. military, and medical equipment manufacturers. The model has also
-          been used by several countries around the world, including India.
+          Our U.S. Intervention Model is being used at every level of government
+          across the U.S., the military, private sector, and more. The model has
+          also been used by several countries around the world, including India.
         </Typography>
 
         <Typography variant="h5" component="h5">
           Who works at Covid Act Now?
         </Typography>
         <Typography variant="body1" component="p">
-          Covid Act Now is a distributed team of volunteers. CoVidActNow was
-          founded by{' '}
+          Covid Act Now is a distributed team of volunteers working with some of
+          the nation’s preeminent epidemiologists and public health experts.
+          CoVidActNow was founded by{' '}
           <a href="https://www.linkedin.com/in/maxhenderson/">Max Henderson</a>,{' '}
           <a href="https://en.wikipedia.org/wiki/Jonathan_Kreiss-Tomkins">
             Rep Jonathan Kreiss-Tomkins
@@ -47,9 +45,7 @@ const FAQ = ({ children }) => {
           , <a href="https://twitter.com/igorkofman">Igor Kofman</a>, and{' '}
           <a href="https://www.linkedin.com/in/zacharyrosen/">Zack Rosen</a>,
           with medical and policy guidance from{' '}
-          <a href="https://profiles.stanford.edu/nirav-shah">Dr. Nirav Shah</a>{' '}
-          (MD, MPH, senior scholar, Stanford University Clinical Excellence
-          Research Center).
+          <a href="https://profiles.stanford.edu/nirav-shah">Dr. Nirav Shah</a>.
         </Typography>
         <Typography variant="body1" component="p">
           We have since grown into a large distributed team:
@@ -65,7 +61,8 @@ const FAQ = ({ children }) => {
                     rel="noopener noreferrer"
                   >
                     {teammate.name}
-                  </a>{' '}
+                  </a>
+                  {', '}
                   {teammate.title}
                 </li>
               );
@@ -102,8 +99,9 @@ const FAQ = ({ children }) => {
             solve an urgent problem:
           </a>{' '}
           If we try to fight COVID in the present we will lose. We can only beat
-          COVID by understanding what it will do to us in the near future. Our
-          leaders need such a forecasting tool. We are building it.
+          COVID by understanding what it will do in the future. Our leaders need
+          a forecasting tool to better understand the future spread of COVID. We
+          are building that tool.
         </Typography>
 
         <Typography variant="h5" component="h5">
@@ -119,23 +117,18 @@ const FAQ = ({ children }) => {
           >
             Private Kit: Safe Paths
           </a>
-          , a project developed by MIT, the Mayo Clinic, the World Health
-          Organization, and others.
-        </Typography>
-
-        <Typography variant="body1" component="p">
-          Private Kit is a mobile app for contact tracing that protects
-          indivdual privacy. Contact tracing is a technology that notifies
-          individuals if they have come in contact with someone who then later
-          tests positive for COVID.
+          , a project developed by MIT, Mayo Clinic, WHO, and others. Private
+          Kit is a contact tracing app that notifies someone if they have come
+          in contact with someone who later tests positive for COVID while
+          protecting individual privacy.
         </Typography>
 
         <Typography variant="body1" component="p">
           <ul>
             <li>
-              Read the white paper{' '}
+              Read{' '}
               <a href="https://arxiv.org/pdf/2003.08567.pdf">
-                Apps Gone Rogue: Maintaining Personal Privacy in an Epidemic
+                "Apps Gone Rogue: Maintaining Personal Privacy in an Epidemic"
               </a>
             </li>
             <li>
@@ -163,32 +156,31 @@ const FAQ = ({ children }) => {
           Can I contribute or help?
         </Typography>
         <Typography variant="body1" component="p">
-          Yes. To improve the capability and accuracy of the tool, we need the
-          help of:
+          Yes. To improve the tool, we need the help of:
         </Typography>
         <Typography>
           <ul>
             <li>JavaScript/React, Python engineers</li>
             <li>
-              Sign up to contribute:{' '}
+              Is this you?{' '}
               <a
                 target="_blank"
                 rel="noopener noreferrer"
                 href="https://docs.google.com/forms/d/e/1FAIpQLSfQkdwXsbDbwLHhWwBD6wzNiw54_0P6A60r8hujP3qnaxxFkA/viewform"
               >
-                Form
+                Let us know
               </a>
             </li>
           </ul>
         </Typography>
 
         <Typography variant="h5" component="h5">
-          How can I contact you?
+          How do I contact you?
         </Typography>
         <Typography>
           <ul>
             <li>
-              Medical organizations:{' '}
+              Are you in healthcare?{' '}
               <a
                 target="_blank"
                 rel="noopener noreferrer"
@@ -198,7 +190,7 @@ const FAQ = ({ children }) => {
               </a>
             </li>
             <li>
-              Government agencies:{' '}
+              Are you in government?{' '}
               <a
                 target="_blank"
                 rel="noopener noreferrer"
@@ -208,7 +200,7 @@ const FAQ = ({ children }) => {
               </a>
             </li>
             <li>
-              Press:{' '}
+              Are you a journalist?{' '}
               <a
                 target="_blank"
                 rel="noopener noreferrer"
@@ -218,7 +210,7 @@ const FAQ = ({ children }) => {
               </a>
             </li>
             <li>
-              General inquiries:{' '}
+              Anyone and everything else:{' '}
               <a
                 target="_blank"
                 rel="noopener noreferrer"
@@ -228,13 +220,13 @@ const FAQ = ({ children }) => {
               </a>
             </li>
             <li>
-              Sign up to contribute:{' '}
+              Do you want to contribute to Covid Act Now in other ways?{' '}
               <a
                 target="_blank"
                 rel="noopener noreferrer"
                 href="https://docs.google.com/forms/d/e/1FAIpQLSfQkdwXsbDbwLHhWwBD6wzNiw54_0P6A60r8hujP3qnaxxFkA/viewform"
               >
-                Form
+                Let us know
               </a>
             </li>
           </ul>
@@ -248,23 +240,22 @@ const FAQ = ({ children }) => {
           What is the U.S. Intervention Model?
         </Typography>
         <Typography variant="body1" component="p">
-          The U.S. Intervention Model by Covid Act Now is a data platform that
-          can project COVID infections, hospitalizations, and deaths across the
-          United States, as well as model how public health interventions
-          contain the spread of COVID and save lives.
+          The U.S. Intervention Model is a data platform that projects COVID
+          infections, hospitalizations, and deaths across the United States, as
+          well as model how public health interventions contain the spread of
+          COVID and save lives.
         </Typography>
 
         <Typography variant="h5" component="h5">
           Can I view the model?
         </Typography>
         <Typography variant="body1" component="p">
-          Yes, the model is public, and{' '}
           <a
             target="_blank"
             rel="noopener noreferrer"
             href="https://github.com/covid-projections/covid-data-model"
           >
-            can be viewed here
+            Yes, the model is public
           </a>
           .
         </Typography>
@@ -288,21 +279,21 @@ const FAQ = ({ children }) => {
           How often does the model update?
         </Typography>
         <Typography variant="body1" component="p">
-          The model currently updates every 24 hours.
+          The model updates every 24 hours.
         </Typography>
 
         <Typography variant="h5" component="h5">
           When was the last update?
         </Typography>
         <Typography variant="body1" component="p">
-          See the last updated date stamp on the state page.
+          See the "last updated" date stamp on the state page.
         </Typography>
 
         <Typography variant="h5" component="h5">
           What are the current limitations of the model?
         </Typography>
         <Typography variant="body1" component="p">
-          Here is a non-exhaustive list:
+          A non-exhaustive list:
         </Typography>
         <Typography>
           <ul>
@@ -311,41 +302,44 @@ const FAQ = ({ children }) => {
               disease. Variables will change.
             </li>
             <li>
-              R0s for interventions are guesses, in some cases informed by data.
+              R0s (
+              <a href="https://en.wikipedia.org/wiki/Basic_reproduction_number">
+                R0 is a fundamental epidemiological metric
+              </a>
+              ) for interventions are guesses, in some cases informed by data.
               There is no historical precedent for what is going on right now to
               draw from.
             </li>
             <li>
               The default R0 used in this model is an average. The model does
               not adjust for the population density, culturally-determined
-              interaction frequency and closeness, humidity, temperature, etc in
-              calculating R0.
+              interaction frequency and closeness, humidity, etc. in calculating
+              R0.
             </li>
             <li>
-              This is not a node-based analysis, and thus assumes everyone
+              This is not a node-based analysis and thus assumes everyone
               spreads the disease at the same rate. In practice, there are some
               folks who are “super-spreaders,” and others who are almost
               isolated. Interventions should be targeted primarily at those most
               likely to spread the disease.
             </li>
             <li>
-              Only hospital beds at aggregate are considered. ICU beds and
+              Only hospital beds in aggregate are considered. ICU beds and
               ventilators, which are likely to run low before beds, are not
               considered.
             </li>
             <li>
-              Demographics, populations, and hospital bed counts are outdated.
-              Demographics for the U.S. as a whole are used, rather than
-              specific to each state.
+              Demographics, populations, and hospital bed count data are
+              outdated. Demographics for the U.S. as a whole are used, rather
+              than specific to each state.
             </li>
 
             <li>
-              In containment cases, we do not deal with the longer-term impacts
-              of maintaining containment, primarily the concern with avoiding
-              reintroduction of the disease due to incoming travelers. 14-day
-              mandatory border quarantines, such as those currently in place in
-              China, would likely need to continue until a vaccine or
-              therapeutic is developed.
+              In containment cases, we do not consider the longer-term impacts
+              of maintaining containment; primarily, the reintroduction of COVID
+              through travel. 14-day mandatory border quarantines, such as those
+              currently in place in China, would likely need to be implemented
+              until a vaccine or therapeutic is developed.
             </li>
           </ul>
         </Typography>
@@ -381,8 +375,8 @@ const FAQ = ({ children }) => {
         </Typography>
 
         <Typography variant="h5" component="h5">
-          How do you define "Poor Compliance" vs. "Strict Compliance" in your
-          "Stay at Home" intervention definitions?
+          How do you define "poor compliance" amd "strict compliance" in your
+          "stay at home" intervention definitions?
         </Typography>
         <Typography variant="body1" component="p">
           Definitions can be found in our{' '}
@@ -479,15 +473,23 @@ const FAQ = ({ children }) => {
           Should I wear a mask in public?
         </Typography>
         <Typography variant="body1" component="p">
-          The World Health Organization has advice on{' '}
+          The WHO offers{' '}
           <a
             target="_blank"
             rel="noopener noreferrer"
             href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/when-and-how-to-use-masks"
           >
-            when and how to use face masks
-          </a>
-          .
+            advice
+          </a>{' '}
+          on the use of face masks, though there seems to be{' '}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.washingtonpost.com/outlook/2020/03/28/masks-all-coronavirus/"
+          >
+            an emerging body of thought and evidence
+          </a>{' '}
+          that masks should be worn by everyone.
         </Typography>
 
         <Typography variant="h3" component="h1">
@@ -497,15 +499,18 @@ const FAQ = ({ children }) => {
           Where/when will I get more my stimulus check?
         </Typography>
         <Typography variant="body1" component="p">
-          The Internal Revenue Service has additional information on{' '}
+          Please visit the{' '}
           <a
             target="_blank"
             rel="noopener noreferrer"
             href="https://www.irs.gov/coronavirus"
           >
-            economic impact payments
-          </a>
-          .
+            IRS’s page on stimulus checks
+          </a>{' '}
+          for more info, though this (from the IRS) is the takeaway for many
+          folks: “The distribution of economic impact payments will begin in the
+          next three weeks and will be distributed automatically, with no action
+          required for most people.” .
         </Typography>
       </Content>
     </Wrapper>
