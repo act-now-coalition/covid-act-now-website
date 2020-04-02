@@ -75,7 +75,7 @@ function ModelPage() {
   console.log('modelDatasMap', modelDatasMap, selectedCounty);
 
   const locationName = STATES[location];
-  const countyName = selectedCounty ? selectedCounty.county : null;
+  let countyName = selectedCounty ? selectedCounty.county : null;
 
   const intervention = STATE_TO_INTERVENTION[location];
   const datasForView = selectedCounty
@@ -143,6 +143,19 @@ function ModelPage() {
   };
 
   const renderMainContent = () => {
+
+    if (
+      locationName == 'New York' &&
+      [
+        'Kings County',
+        'Queens County',
+        'Bronx County',
+        'Richmond County',
+      ].indexOf(countyName) > -1
+    ) {
+      countyName = 'New York';
+    }
+
     return (
       <MainContentWrapper mobileMenuOpen={mobileMenuOpen}>
         <MainContentInner>

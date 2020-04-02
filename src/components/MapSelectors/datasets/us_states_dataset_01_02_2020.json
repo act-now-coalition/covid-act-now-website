@@ -6601,7 +6601,7 @@
           "county_fips_code": "031",
           "state_fips_code": "06",
           "state_code": "CA",
-          "full_fips_code": "06031",
+          "full_fips_code": "36061",
           "cities": [
             "Armona",
             "Avenal",
@@ -61333,7 +61333,7 @@
           "county_fips_code": "005",
           "state_fips_code": "36",
           "state_code": "NY",
-          "full_fips_code": "36005",
+          "full_fips_code": "36061",
           "cities": [
             "New York City"
           ],
@@ -61357,7 +61357,7 @@
           "county_fips_code": "081",
           "state_fips_code": "36",
           "state_code": "NY",
-          "full_fips_code": "36081",
+          "full_fips_code": "36061",
           "cities": [
             "Queens"
           ],
@@ -61393,7 +61393,7 @@
           "county_fips_code": "085",
           "state_fips_code": "36",
           "state_code": "NY",
-          "full_fips_code": "36085",
+          "full_fips_code": "36061",
           "cities": [
             "Staten Island"
           ],
@@ -61405,7 +61405,7 @@
           "county_fips_code": "005",
           "state_fips_code": "36",
           "state_code": "NY",
-          "full_fips_code": "36005",
+          "full_fips_code": "36061",
           "cities": [
             "The Bronx"
           ],

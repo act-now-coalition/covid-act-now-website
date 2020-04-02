@@ -27,6 +27,11 @@ const Stateheader = ({
     [INTERVENTIONS.SHELTER_IN_PLACE]: interventions.distancing.now,
   };
 
+  // hardcoded new york
+  if (locationName == "New York" && ["Kings County", "Queens County", "Bronx County", "Richmond County"].indexOf(countyName) > -1 ) {
+    countyName = "New York";
+  }
+
   const model = interventionToModel[intervention];
 
   const earlyDate = moment(model.dateOverwhelmed).subtract(14, 'days');
