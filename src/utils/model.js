@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 async function fetchAll(urls) {
   try {
-    var data = await Promise.all(
+    const data = await Promise.all(
       urls.map(url =>
         fetch(url)
           .then(response => {
@@ -17,7 +17,7 @@ async function fetchAll(urls) {
 
               return jsonResponse;
             } catch (err) {
-              console.log(err);
+              throw err;
             }
           }),
       ),
@@ -25,8 +25,6 @@ async function fetchAll(urls) {
 
     return data;
   } catch (error) {
-    console.log(error);
-
     throw error;
   }
 }

@@ -27,7 +27,7 @@ const SearchHeader = ({
   intervention,
 }) => {
   const history = useHistory();
-  const isMobile = useMediaQuery('(max-width:1200px)');
+  const isMobile = useMediaQuery('(max-width:1350px)');
 
   const handleSelectChange = option => {
     let route = `/state/${option.state_code}`;
@@ -54,7 +54,7 @@ const SearchHeader = ({
           <SelectorWrapper>
             <GlobalSelector handleChange={handleSelectChange} />
           </SelectorWrapper>
-          {false && isMobile && (
+          {isMobile && (
             <MapToggle
               onClick={() => toggleMobileMenu()}
               isActive={mobileMenuOpen}
@@ -63,22 +63,6 @@ const SearchHeader = ({
             </MapToggle>
           )}
         </MenuBarWrapper>
-        {false && isMobile && mobileMenuOpen && (
-          <MapMenuMobileWrapper>
-            <MapMenuItem
-              onClick={() => setMapOption('NATIONAL')}
-              selected={mapOption === 'NATIONAL'}
-            >
-              United States
-            </MapMenuItem>
-            <MapMenuItem
-              onClick={() => setMapOption('STATE')}
-              selected={mapOption === 'STATE'}
-            >
-              {locationName}
-            </MapMenuItem>
-          </MapMenuMobileWrapper>
-        )}
       </Content>
     </Wrapper>
   );
