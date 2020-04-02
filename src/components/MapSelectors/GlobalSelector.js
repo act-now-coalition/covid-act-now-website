@@ -118,8 +118,43 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
 
     if (location && !inputValue) {
       const topCountiesByParamState = chain(countyDataset)
-          .filter(item => item.state_code === location)
-          .map((item) => ({
+        .filter(item => item.state_code === location)
+        .map(item => ({
+          ...item,
+          id: item.full_fips_code,
+          value: `${item.county}, ${item.state_code}`,
+          type: 'COUNTY',
+        }))
+        .uniqBy('id')
+        .sortBy('population')
+        .reverse()
+        .slice(0, 20)
+        .value();
+
+      matchedItems.push(...topCountiesByParamState);
+    } else {
+      const stateMatches = chain(stateDataset)
+        .filter(item => hasStateMatch(item, inputValue))
+        .map(item => ({
+          ...item,
+          id: item.state_fips_code,
+          value: item.state,
+          type: 'STATE',
+        }))
+        .uniq()
+        .value();
+
+      matchedItems.push(...stateMatches);
+
+      if (inputValue.length > 2) {
+        const countyMatches = chain(countyDataset)
+          .filter(item => hasCountyMatch(item, inputValue))
+          .filter(item => {
+            // TODO this is a temporary filter
+            // to remove combined county name
+            return !item.county.includes(' / ');
+          })
+          .map((item, index) => ({
             ...item,
             id: item.full_fips_code,
             value: `${item.county}, ${item.state_code}`,
@@ -128,42 +163,7 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
           .uniqBy('id')
           .sortBy('population')
           .reverse()
-          .slice(0, 20)
           .value();
-
-      matchedItems.push(...topCountiesByParamState);
-    } else {
-      const stateMatches = chain(stateDataset)
-          .filter(item => hasStateMatch(item, inputValue))
-          .map((item) => ({
-            ...item,
-            id: item.state_fips_code,
-            value: item.state,
-            type: 'STATE',
-          }))
-          .uniq()
-          .value();
-
-      matchedItems.push(...stateMatches);
-
-    if (inputValue.length > 2) {
-      const countyMatches = chain(countyDataset)
-        .filter(item => hasCountyMatch(item, inputValue))
-        .filter(item => {
-          // TODO this is a temporary filter
-          // to remove combined county name
-          return !item.county.includes(' / ');
-        })
-        .map((item, index) => ({
-          ...item,
-          id: item.full_fips_code,
-          value: `${item.county}, ${item.state_code}`,
-          type: 'COUNTY',
-        }))
-        .uniqBy('id')
-          .sortBy('population')
-        .reverse()
-        .value();
 
         matchedItems.push(...countyMatches);
       }
