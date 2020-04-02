@@ -110,28 +110,7 @@ async function fetchData(
   });
 }
 
-export function useModelDatas(_location, county = null, dataUrl = null) {
-  //Some state data files are lowercase, unsure why, but we need to handle it here.
-  let lowercaseStates = [
-    'AK',
-    'CA',
-    'CO',
-    'FL',
-    'MO',
-    'NM',
-    'NV',
-    'NY',
-    'OR',
-    'TX',
-    'WA',
-  ];
-
-  let location = _location;
-
-  if (lowercaseStates.indexOf(location) > -1) {
-    location = _location.toLowerCase();
-  }
-
+export function useModelDatas(location, county = null, dataUrl = null) {
   const [modelDatas, setModelDatas] = useState(initialData);
   useEffect(() => {
     fetchData(setModelDatas, location, null, dataUrl);
@@ -150,7 +129,7 @@ export function useModelDatas(_location, county = null, dataUrl = null) {
     } else {
       fetchData(setModelDatas, location, county, dataUrl);
     }
-  }, [dataUrl, county, location]);
+  }, [dataUrl, county]);
 
   return modelDatas;
 }
@@ -204,7 +183,7 @@ export class Model {
     );
     this.beds = data.map(row => _parseInt(row[COLUMNS.beds]));
     this.deaths = data.map(row => _parseInt(row[COLUMNS.deaths]));
-    this.cumulativeDeaths = this.deaths;
+    this.cumulativeDeaths = [];
     let deathsSoFar = 0;
     for (let i = 0; i < this.deaths.length; i++) {
       deathsSoFar += this.deaths[i];
@@ -212,7 +191,7 @@ export class Model {
     }
 
     this.infected = data.map(row => _parseInt(row[COLUMNS.infected]));
-    this.cumulativeInfected = this.infected;
+    this.cumulativeInfected = [];
     let infectedSoFar = 0;
     for (let i = 0; i < this.infected.length; i++) {
       infectedSoFar += this.infected[i];
