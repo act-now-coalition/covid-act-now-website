@@ -37,7 +37,7 @@ const Stateheader = ({
   const earlyDate = moment(model.dateOverwhelmed).subtract(14, 'days');
   const lateDate = moment(model.dateOverwhelmed).subtract(9, 'days');
   const displayName = countyName
-    ? `${countyName}, ${locationName}`
+    ? (<> {countyName}, <a href={`/state/${location}`}>{locationName}</a></>)
     : locationName;
 
   const buildInterventionTitle = () => {
