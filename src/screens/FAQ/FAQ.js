@@ -277,7 +277,7 @@ const FAQ = ({ children }) => {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://s3.amazonaws.com/data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
+            href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
           >
             are available here
           </a>
@@ -358,7 +358,7 @@ const FAQ = ({ children }) => {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://s3.amazonaws.com/data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
+            href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
           >
             Model Reference and Assumptions
           </a>{' '}
@@ -373,7 +373,7 @@ const FAQ = ({ children }) => {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://s3.amazonaws.com/data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
+            href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
           >
             Model Reference and Assumptions
           </a>{' '}
@@ -389,7 +389,7 @@ const FAQ = ({ children }) => {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://s3.amazonaws.com/data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
+            href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
           >
             Model Reference and Assumptions
           </a>{' '}
