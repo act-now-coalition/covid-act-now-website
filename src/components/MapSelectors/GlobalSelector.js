@@ -214,7 +214,7 @@ const GlobalSelector = ({ handleChange, extendRight, onIsFocusedChanged }) => {
         getRootProps,
         openMenu,
       }) => {
-        onIsFocusedChanged(isOpen);
+        if (onIsFocusedChanged) onIsFocusedChanged(isOpen);
         return (
           <StyledDropDownWrapper>
             <StyledInputWrapper
