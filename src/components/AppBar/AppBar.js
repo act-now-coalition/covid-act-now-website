@@ -91,18 +91,6 @@ const _AppBar = () => {
       <Wrapper>
         <Left onClick={goTo('/')}>
           {pathname.includes('state') ? <ArrowBack /> : <Logo />}
-          <MenuTitle>
-            <Typography
-              variant="button"
-              style={{
-                textDecoration: 'none',
-                color: 'black',
-                cursor: 'pointer',
-              }}
-            >
-              COVID ACT NOW
-            </Typography>
-          </MenuTitle>
         </Left>
         <StyledDesktopMenu value={false}>
           <FacebookShareButton
