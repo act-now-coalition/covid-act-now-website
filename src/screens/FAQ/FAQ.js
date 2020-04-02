@@ -15,7 +15,7 @@ const FAQ = ({ children }) => {
           What is Covid Act Now?
         </Typography>
         <Typography variant="body1" component="p">
-          Covid Act Now was created by four volunteers who saw the explosive and
+          Covid Act Now was started by four volunteers who saw the explosive and
           deadly growth of COVID infections around the world and felt they had
           to do something. The Covid Act Now team has partnered with some of
           America’s preeminent epidemiologists and data scientists to develop
@@ -32,7 +32,7 @@ const FAQ = ({ children }) => {
         </Typography>
 
         <Typography variant="h5" component="h5">
-          Who works at Covid Act Now?
+          Who made Covid Act Now?
         </Typography>
         <Typography variant="body1" component="p">
           Covid Act Now is a distributed team of volunteers working with some of
