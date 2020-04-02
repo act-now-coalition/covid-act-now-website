@@ -2,9 +2,9 @@ import InterventionJSON from '../assets/data/interventions.json';
 
 const LIMITED_ACTION = 'Limited Action';
 const SOCIAL_DISTANCING = 'Social Distancing';
-const SHELTER_IN_PLACE = 'Shelter in Place';
+const SHELTER_IN_PLACE = 'Stay at Home';
 const LOCKDOWN = 'Lockdown';
-const SHELTER_IN_PLACE_WORST_CASE = 'Shelter in Place Worst Case';
+const SHELTER_IN_PLACE_WORST_CASE = 'Stay at Home Worst Case';
 
 export const INTERVENTIONS = {
   LIMITED_ACTION,
@@ -25,9 +25,9 @@ export const INTERVENTION_DESCRIPTIONS = {
   [LIMITED_ACTION]:
     'Public advocacy around “social distancing” and enhanced hygiene. Minimal mandated restrictions.',
   [SOCIAL_DISTANCING]:
-    'Voluntary “shelter-in-place” for high-risk groups, schools and bars / restaurants closed.',
+    'Voluntary “stay at home” directive for high-risk groups, schools and bars / restaurants closed.',
   [SHELTER_IN_PLACE]:
-    'Legal order or strong recommendation for citizens to employ “shelter-in-place” home quarantine (especially firm for high-risk groups), shutdown of non-essential businesses, ban on all group events.',
+    'Legal order for citizens to employ “Stay at Home” quarantine except for essential activities, shutdown of non-essential businesses, ban on all group events.',
 };
 
 export const INTERVENTION_COLOR_MAP = {

@@ -9,5 +9,5 @@ module.exports = {
   STATE_PAGES: {
     SELECTOR: '.highcharts-container',
     DATASET: map(US_STATES, (_, stateCode) => `/state/${stateCode}`),
-  }
-}
+  },
+};

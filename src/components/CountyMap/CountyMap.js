@@ -11,11 +11,20 @@ import { csv } from 'd3-fetch';
 import ReactTooltip from 'react-tooltip';
 import STATE_CENTERS from '../../enums/us_state_centers';
 
-const CountyMap = () => {
+const CountyMap = ({
+  selectedCounty,
+  setSelectedCounty,
+  fill,
+  stateSummary = {},
+}) => {
   const [data, setData] = useState([]);
   const { id: location } = useParams();
   const state = STATE_CENTERS[location];
   const counties = require(`./countyTopoJson/${location}.json`);
+  const countiesWithData =
+    stateSummary && stateSummary.counties_with_data
+      ? stateSummary.counties_with_data
+      : [];
 
   useEffect(() => {
     csv('/countyConfigData/sampleData.csv').then(counties => {
@@ -38,16 +47,17 @@ const CountyMap = () => {
     ]);
 
   const [content, setContent] = useState('');
+  // Once we add fill back, add this to geography
+  // fill={cur ? colorScale(cur.unemployment_rate) : '#EEE'}
   return (
     <div>
       {data && (
         <ComposableMap
           projection="geoAlbers"
           data-tip=""
-          style={{ border: '1px solid black' }}
           projectionConfig={{
             rotate: state.rotate ? state.rotate : null,
-            scale: state.scale ? state.scale : 2000,
+            scale: state.scale ? state.scale : 4000,
           }}
         >
           <ZoomableGroup
@@ -62,23 +72,35 @@ const CountyMap = () => {
                     <Geography
                       key={geo.rsmKey}
                       geography={geo}
-                      fill={cur ? colorScale(cur.unemployment_rate) : '#EEE'}
+                      fillOpacity={
+                        selectedCounty &&
+                        selectedCounty.full_fips_code === geo.properties.GEOID
+                          ? 0.5
+                          : 1
+                      }
+                      fill={
+                        countiesWithData.includes(geo.properties.GEOID)
+                          ? fill
+                          : '#ccc'
+                      }
+                      stroke={'white'}
                       onMouseEnter={() => {
                         const { NAME } = geo.properties;
-                        setContent(
-                          `${NAME} — ${cur ? cur.unemployment_rate : 'n/a'}`,
-                        );
+                        setContent(NAME);
                       }}
                       onMouseLeave={() => {
                         setContent('');
                       }}
+                      onClick={() => setSelectedCounty(geo.properties.GEOID)}
                       style={{
+                        cursor: 'pointer',
                         hover: {
-                          fill: '#F53',
+                          // fill: '#A0AEC0',
+                          opacity: '0.5',
                           outline: 'none',
                         },
                         pressed: {
-                          fill: '#E42',
+                          // fill: '#A0AEC0',
                           outline: 'none',
                         },
                       }}

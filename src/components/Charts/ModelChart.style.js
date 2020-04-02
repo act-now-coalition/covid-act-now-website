@@ -16,26 +16,12 @@ export const ChartContainer = styled.section`
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 `;
 
-export const ChartHeader = styled.div`
-  max-width: 900px;
-  padding: 16px 32px;
-  margin: auto;
-
-  @media (min-width: 600px) {
-    text-align: center;
-  }
-
-  span {
-    color: rgba(0, 0, 0, 0.7);
-  }
-`;
-
 export const Disclaimer = styled.div`
   background: #f2f2f2;
+  margin: 2rem;
   padding: 1rem;
   border-radius: 4px;
   color: rgba(0, 0, 0, 0.7);
-  margin: 0 2rem 2rem 2rem;
 
   @media (min-width: 900px) {
     text-align: center;
@@ -125,7 +111,7 @@ export const Wrapper = styled.div`
         : socialDistancingColor};
     fill-opacity: 0.8;
   }
-  /* Shelter in place */
+  /* Stay at home */
   .highcharts-series-2 {
     fill: ${shelterInPlaceColor};
     stroke: ${shelterInPlaceColor};

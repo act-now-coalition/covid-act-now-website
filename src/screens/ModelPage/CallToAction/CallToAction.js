@@ -9,6 +9,7 @@ import {
   WarnSocialDistancing,
   CheckShelterInPlace,
   WarnShelterInPlaceWorstCase,
+  WarnShelterInPlace,
 } from 'assets/images/capacityIcons';
 import InterventionIcon from 'assets/images/interventionIcon';
 import {
@@ -40,6 +41,7 @@ const CallToAction = ({ interventions, currentIntervention }) => {
       const isShelterInPlaceWorstCaseModel =
         currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE &&
         model.intervention === INTERVENTIONS.SOCIAL_DISTANCING;
+
       let capacityIcon;
       if (isShelterInPlaceWorstCaseModel) {
         capacityIcon = <WarnShelterInPlaceWorstCase />;
@@ -47,7 +49,11 @@ const CallToAction = ({ interventions, currentIntervention }) => {
         if (model.intervention === INTERVENTIONS.LIMITED_ACTION) {
           capacityIcon = <WarnLimitedAction />;
         } else {
-          capacityIcon = <WarnSocialDistancing />;
+          if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE) {
+            capacityIcon = <WarnShelterInPlace />;
+          } else {
+            capacityIcon = <WarnSocialDistancing />;
+          }
         }
       }
 
