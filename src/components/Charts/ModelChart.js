@@ -255,13 +255,7 @@ const ModelChart = ({
       ],
     };
   }, [
-    model.dateOverwhelmed,
-    currentIntervention,
-    noAction,
-    socialDistancing,
-    shelterInPlace,
-    wuhanStyle,
-    availableBeds,
+    state, countyName, subtitle, interventions, currentIntervention
   ]);
 
   return (
