@@ -93,27 +93,6 @@ const _AppBar = () => {
           {pathname.includes('state') ? <ArrowBack /> : <Logo />}
         </Left>
         <StyledDesktopMenu value={false}>
-          <FacebookShareButton
-            url={shareURL}
-            quote={shareTitle}
-            beforeOnClick={() => {
-              trackShare('facebook');
-            }}
-            style={{ alignItems: 'center', display: 'flex', paddingRight: 28 }}
-          >
-            <FacebookIcon size={32} round={true} />
-          </FacebookShareButton>
-          <TwitterShareButton
-            url={shareURL}
-            title={shareTitle}
-            hashtags={[hashtag]}
-            beforeOnClick={() => {
-              trackShare('twitter');
-            }}
-            style={{ alignItems: 'center', display: 'flex' }}
-          >
-            <TwitterIcon size={32} round={true} />
-          </TwitterShareButton>
           <StyledTabs value={panelIdx}>
             <StyledTab
               label="Map"
@@ -140,6 +119,27 @@ const _AppBar = () => {
               onClick={forwardTo('https://blog.covidactnow.org')}
             />
           </StyledTabs>
+          <FacebookShareButton
+            url={shareURL}
+            quote={shareTitle}
+            beforeOnClick={() => {
+              trackShare('facebook');
+            }}
+            style={{ alignItems: 'center', display: 'flex', paddingLeft: 28, paddingRight: 14 }}
+          >
+            <FacebookIcon size={32} round={true} />
+          </FacebookShareButton>
+          <TwitterShareButton
+            url={shareURL}
+            title={shareTitle}
+            hashtags={[hashtag]}
+            beforeOnClick={() => {
+              trackShare('twitter');
+            }}
+            style={{ alignItems: 'center', display: 'flex' }}
+          >
+            <TwitterIcon size={32} round={true} />
+          </TwitterShareButton>
         </StyledDesktopMenu>
         <StyledMobileMenu>
           <FacebookShareButton
