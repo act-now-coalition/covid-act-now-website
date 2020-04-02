@@ -24,6 +24,8 @@ import {
   MainContentInnerBody,
   MapContentWrapper,
   MapContentInner,
+  StyledNoResultsWrapper,
+  StyledNoResults,
   Content,
   SearchHeaderWrapper,
   LoadingScreen,
@@ -120,100 +122,94 @@ function ModelPage() {
     description = `To prevent hospital overload, our projections indicate a Stay at Home order must be implemented soon.`;
   }
 
-  return (
-    <Wrapper>
-      <Helmet>
-        <title>{title}</title>
-        <meta name="title" content={title} />
-        <meta name="twitter:title" content={title} />
-        <meta property="og:title" content={title} />
-        <meta name="description" content={description} />
-        <meta name="twitter:description" content={description} />
-        <meta property="og:description" content={description} />
-        <link rel="canonical" href={canonical} />
-      </Helmet>
-      <SearchHeaderWrapper>
-        <SearchHeader
-          mapOption={mapOption}
-          setMapOption={setMapOption}
-          mobileMenuOpen={mobileMenuOpen}
-          setMobileMenuOpen={setMobileMenuOpen}
-          location={location}
-          locationName={locationName}
-          countyName={location}
-        />
-      </SearchHeaderWrapper>
-      <ContentWrapper>
-        <MainContentWrapper mobileMenuOpen={mobileMenuOpen}>
-          <MainContentInner>
-            {stateInterventions && (
+  const renderHeader = () => {
+    return (
+        <SearchHeaderWrapper>
+          <SearchHeader
+              mapOption={mapOption}
+              setMapOption={setMapOption}
+              mobileMenuOpen={mobileMenuOpen}
+              setMobileMenuOpen={setMobileMenuOpen}
+              location={location}
+              locationName={locationName}
+              countyName={location}
+          />
+        </SearchHeaderWrapper>
+    );
+  };
+
+  const renderMainContent = () => {
+    return (
+      <MainContentWrapper mobileMenuOpen={mobileMenuOpen}>
+        <MainContentInner>
+          {stateInterventions && (
               <StateHeader
-                location={location}
-                locationName={locationName}
-                countyName={countyName}
-                intervention={intervention}
-                interventions={stateInterventions}
+                  location={location}
+                  locationName={locationName}
+                  countyName={countyName}
+                  intervention={intervention}
+                  interventions={stateInterventions}
               />
-            )}
-            <MainContentInnerBody>
-              <Panel>
-                <ChartHeader>
-                  <h2>Projected hospitalizations</h2>
-                  <span>
-                    {countyName
-                      ? `${countyName}, ${locationName}`
-                      : locationName}
-                  </span>
-                </ChartHeader>
-              </Panel>
-              {showModel && interventions && (
+          )}
+          <MainContentInnerBody>
+            <Panel>
+              <ChartHeader>
+                <h2>Projected hospitalizations</h2>
+                <span>
+                      {countyName
+                          ? `${countyName}, ${locationName}`
+                          : locationName}
+                    </span>
+              </ChartHeader>
+            </Panel>
+            {showModel && interventions && (
                 <Panel>
                   <ModelChart
-                    state={locationName}
-                    countyName={countyName}
-                    subtitle="Hospitalizations over time"
-                    interventions={interventions}
-                    currentIntervention={intervention}
-                    dateOverwhelmed={interventions.baseline.dateOverwhelmed}
+                      state={locationName}
+                      countyName={countyName}
+                      subtitle="Hospitalizations over time"
+                      interventions={interventions}
+                      currentIntervention={intervention}
+                      dateOverwhelmed={interventions.baseline.dateOverwhelmed}
                   />
                   <Content>
                     <CallToAction
-                      interventions={interventions}
-                      currentIntervention={intervention}
+                        interventions={interventions}
+                        currentIntervention={intervention}
                     />
 
                     <Outcomes
-                      title="Predicted Outcomes after 3 Months"
-                      models={[
-                        interventions.baseline,
-                        interventions.distancingPoorEnforcement.now,
-                        interventions.distancing.now,
-                        interventions.contain.now,
-                      ]}
-                      colors={[
-                        limitedActionColor,
-                        intervention === INTERVENTIONS.SHELTER_IN_PLACE
-                          ? shelterInPlaceWorstCaseColor
-                          : socialDistancingColor,
-                        shelterInPlaceColor,
-                        lockdownColor,
-                      ]}
-                      asterisk={['', '*', '*', '**']}
-                      timeHorizon={100}
-                      currentIntervention={intervention}
+                        title="Predicted Outcomes after 3 Months"
+                        models={[
+                          interventions.baseline,
+                          interventions.distancingPoorEnforcement.now,
+                          interventions.distancing.now,
+                          interventions.contain.now,
+                        ]}
+                        colors={[
+                          limitedActionColor,
+                          intervention === INTERVENTIONS.SHELTER_IN_PLACE
+                              ? shelterInPlaceWorstCaseColor
+                              : socialDistancingColor,
+                          shelterInPlaceColor,
+                          lockdownColor,
+                        ]}
+                        asterisk={['', '*', '*', '**']}
+                        timeHorizon={100}
+                        currentIntervention={intervention}
                     />
 
                     <ul
-                      style={{
-                        textAlign: 'left',
-                        lineHeight: '2em',
-                      }}
+                        style={{
+                          textAlign: 'left',
+                          lineHeight: '2em',
+                        }}
                     >
                       <li
-                        style={{
-                          listStyleType: 'none',
-                          marginBottom: 10,
-                        }}
+                          style={{
+                            listStyleType: 'none',
+                            marginBottom: 10,
+                          }}
                       >
                         *{' '}
                         <b>
@@ -240,59 +236,93 @@ function ModelPage() {
                     </ul>
 
                     <ShareModelBlock
-                      location={location}
-                      county={selectedCounty}
+                        location={location}
+                        county={selectedCounty}
                     />
                   </Content>
                 </Panel>
-              )}
-            </MainContentInnerBody>
-          </MainContentInner>
-        </MainContentWrapper>
-        <MapContentWrapper mobileMenuOpen={mobileMenuOpen}>
-          <MapMenuMobileWrapper>
-            <MapMenuItem
+            )}
+          </MainContentInnerBody>
+        </MainContentInner>
+      </MainContentWrapper>
+    )
+  };
+
+  const renderMapContent = () => {
+    return (
+      <MapContentWrapper mobileMenuOpen={mobileMenuOpen}>
+        <MapMenuMobileWrapper>
+          <MapMenuItem
               onClick={() => setMapOption('NATIONAL')}
               selected={mapOption === 'NATIONAL'}
-            >
-              United States
-            </MapMenuItem>
-            <MapMenuItem
+          >
+            United States
+          </MapMenuItem>
+          <MapMenuItem
               onClick={() => setMapOption('STATE')}
               selected={mapOption === 'STATE'}
-            >
-              {locationName}
-            </MapMenuItem>
-          </MapMenuMobileWrapper>
-          <MapContentInner>
-            {mapOption === 'NATIONAL' && (
+          >
+            {locationName}
+          </MapMenuItem>
+        </MapMenuMobileWrapper>
+        <MapContentInner>
+          {mapOption === 'NATIONAL' && (
               <Map hideLegend={true} setMobileMenuOpen={setMobileMenuOpen} />
-            )}
+          )}
 
-            {mapOption === 'STATE' && (
+          {mapOption === 'STATE' && (
               <CountyMapAltWrapper>
                 <CountyMap
-                  fill={INTERVENTION_COLOR_MAP[intervention]}
-                  stateSummary={modelDatasMap.summary}
-                  selectedCounty={selectedCounty}
-                  setSelectedCounty={fullFips => {
-                    const county = _.find(
-                      US_STATE_DATASET.state_county_map_dataset[location]
-                        .county_dataset,
-                      ['full_fips_code', fullFips],
-                    );
+                    fill={INTERVENTION_COLOR_MAP[intervention]}
+                    stateSummary={modelDatasMap.summary}
+                    selectedCounty={selectedCounty}
+                    setSelectedCounty={fullFips => {
+                      const county = _.find(
+                          US_STATE_DATASET.state_county_map_dataset[location]
+                              .county_dataset,
+                          ['full_fips_code', fullFips],
+                      );
 
-                    setRedirectTarget(
-                      `/state/${location}/county/${county.county_url_name}`,
-                    );
-                    setMobileMenuOpen(false);
-                    setSelectedCounty(county);
-                  }}
+                      setRedirectTarget(
+                          `/state/${location}/county/${county.county_url_name}`,
+                      );
+                      setMobileMenuOpen(false);
+                      setSelectedCounty(county);
+                    }}
                 />
               </CountyMapAltWrapper>
-            )}
-          </MapContentInner>
-        </MapContentWrapper>
+          )}
+        </MapContentInner>
+      </MapContentWrapper>
+    )
+  };
+
+  return (
+      <Wrapper>
+        <Helmet>
+          <title>{title}</title>
+          <meta name="title" content={title} />
+          <meta name="twitter:title" content={title} />
+        <meta property="og:title" content={title} />
+        <meta name="description" content={description} />
+        <meta name="twitter:description" content={description} />
+        <meta property="og:description" content={description} />
+        <link rel="canonical" href={canonical} />
+      </Helmet>
+      <ContentWrapper>
+        {renderHeader()}
+        {modelDatas && modelDatas.error ?
+          <div>
+            <StyledNoResultsWrapper>
+              <StyledNoResults>
+                No data exists for {selectedCounty.county}, {selectedCounty.state_code}
+              </StyledNoResults>
+            </StyledNoResultsWrapper>
+            {renderMapContent()}
+          </div>
+          :
+          [renderMainContent(), renderMapContent()]
+        }
       </ContentWrapper>
     </Wrapper>
   );

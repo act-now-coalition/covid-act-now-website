@@ -6,6 +6,9 @@ export const Wrapper = styled.div`
   margin: 0;
   padding: 1rem;
   background-color: white;
+  @media(min-width: 1350px) {
+     padding: 1rem 0;
+  }
 `;
 
 export const Content = styled.div`
@@ -17,11 +20,11 @@ export const SelectorWrapper = styled.div`
   margin-right: 0;
 
   > div {
-    max-width: 900px;
     margin: 0 auto;
 
     @media (min-width: 1350px) {
-      margin: 0 500px 0 auto;
+      max-width: 900px;
+      margin: 0 445px 0 auto;
     }
 
     @media (min-width: 1750px) {
@@ -37,6 +40,7 @@ export const MapToggle = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 4px;
+  margin-left: 1rem;
   background: ${props => (props.isActive ? 'red' : 'transparent')};
 
   svg path {

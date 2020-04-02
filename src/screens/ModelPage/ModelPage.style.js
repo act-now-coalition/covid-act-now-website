@@ -21,7 +21,7 @@ export const MainContentInnerBody = styled.div`
   }
 
   @media (min-width: 1350px) {
-    margin: 0 500px 0 auto;
+    margin: 0 445px 0 auto;
   }
 
   @media (min-width: 1750px) {
@@ -62,21 +62,69 @@ export const MapContentInner = styled.div`
   }
 `;
 
-export const MapContentWrapper = styled.div`
-  z-index: 900;
-  display: none;
-  flex: ${props => (props.mobileMenuOpen ? 1 : 0)};
-  height: inherit;
+export const StyledNoResultsWrapper = styled.div`
+    margin: 85px auto 0;
+    height: calc(100vh - 85px - 85px - 273px);
+    max-width: 900px;
+    padding: 1rem 2rem;
+    
+    @media (min-width: 1350px) {
+      padding: 2rem 0 0;
+      width: 900px;
+      margin: 85px 445px 0 auto;
+    }
 
+    @media (min-width: 1750px) {
+      margin: 85px auto 0 ;
+    }
+`;
+
+export const StyledNoResults = styled.div`
+    padding: 16px;
+    font-weight: bold;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(232, 0, 0, 1);
+    background: rgba(232, 0, 0, 0.1);
+    border: 1px solid rgba(232, 0, 0, 0.1);
+    margin-top: 1rem;
+    border-radius: 4px;
+`;
+
+
+export const MapContentWrapper = styled.div`
+  z-index: 800;
+  display: ${props => (props.mobileMenuOpen ? 'block' : 'none')};
+  height: inherit;
+  position: fixed;
+  top: calc(85px + 65px);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+  padding: 0 1rem 1rem;
+
+  @media (min-width: 700px) {
+      z-index: 901;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      width: 400px;
+      height: 400px;
+      top: calc(85px + 65px + 16px);
+      right: 16px;
+      left: auto;
+      bottom: auto;
+      border-radius: 4px;
+  }
+  
   @media (min-width: 1350px) {
     display: block;
-    background: white;
-    position: fixed;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 4px;
     top: 81px;
     right: 16px;
     height: 400px;
+    left: auto;
+    bottom: auto;
     width: 400px;
     padding: 0 1rem 1rem;
   }

@@ -27,6 +27,7 @@ export const StyledStateHeaderWrapper = styled(Box)`
   margin: 0;
 
   @media (min-width: 600px) {
+    padding: 2rem 0;
     border-bottom: 1px solid #e3e3e3;
     align-items: center;
     flex-direction: row;
@@ -48,7 +49,7 @@ export const StyledStateHeaderInner = styled.div`
   }
 
   @media (min-width: 1350px) {
-    margin: 0 500px 0 auto;
+    margin: 0 445px 0 auto;
   }
 
   @media (min-width: 1750px) {
