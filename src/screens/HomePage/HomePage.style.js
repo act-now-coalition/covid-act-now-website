@@ -13,21 +13,8 @@ export const Content = styled.div`
   margin: auto;
 `;
 
-export const StateSelectorWrapper = styled.div`
-  padding: 1rem;
-
-  @media (min-width: 600px) {
-    background-color: #f2f2f2;
-  }
-`;
-
-export const StateSelectorInner = styled.div`
-  max-width: 900px;
-  margin: 0 auto;
-`;
-
 export const MapTitle = styled.div`
-  padding: 0.5rem 1rem;
+  padding: 1.5rem 1rem 1rem;
   text-align: center;
   font-weight: bold;
 

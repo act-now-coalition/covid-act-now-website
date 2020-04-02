@@ -15,10 +15,16 @@ import {
 } from './../ModelPage.style';
 import { STATES } from 'enums';
 
-const ShareModelBlock = ({ location }) => {
+const ShareModelBlock = ({ location, county }) => {
   const locationName = STATES[location];
-  const shareURL = `https://covidactnow.org/state/${location}`;
-  const shareQuote = `This is the point of no return for intervention to prevent ${locationName}'s hospital system from being overloaded by Coronavirus: `;
+  const countyName = county && county.county;
+  const displayName = countyName
+    ? `${countyName}, ${locationName}`
+    : locationName;
+  const shareURL = `https://covidactnow.org/state/${location}${
+    county ? `/county/${county.county_url_name}` : ''
+  }`;
+  const shareQuote = `This is the point of no return for intervention to prevent ${displayName}'s hospital system from being overloaded by Coronavirus: `;
   const hashtag = 'COVIDActNow';
   const trackShare = target => {
     window.gtag('event', 'share', {
@@ -28,7 +34,7 @@ const ShareModelBlock = ({ location }) => {
 
   return (
     <ShareContainer>
-      <ShareInstruction>{`Share ${locationName}'s COVID-19 trends:`}</ShareInstruction>
+      <ShareInstruction>{`Share ${displayName}'s COVID-19 trends:`}</ShareInstruction>
       <ShareButtonContainer>
         <FacebookShareButton
           url={shareURL}
