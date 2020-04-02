@@ -110,28 +110,7 @@ async function fetchData(
   });
 }
 
-export function useModelDatas(_location, county = null, dataUrl = null) {
-  //Some state data files are lowercase, unsure why, but we need to handle it here.
-  let lowercaseStates = [
-    'AK',
-    'CA',
-    'CO',
-    'FL',
-    'MO',
-    'NM',
-    'NV',
-    'NY',
-    'OR',
-    'TX',
-    'WA',
-  ];
-
-  let location = _location;
-
-  if (lowercaseStates.indexOf(location) > -1) {
-    location = _location.toLowerCase();
-  }
-
+export function useModelDatas(location, county = null, dataUrl = null) {
   const [modelDatas, setModelDatas] = useState(initialData);
   useEffect(() => {
     fetchData(setModelDatas, location, null, dataUrl);
