@@ -18,7 +18,7 @@ const FAQ = ({ children }) => {
           Covid Act Now was created by four volunteers who were looking at the
           spread and speed of COVID around the world and felt they had to do
           something. The Covid Act Now team has partnered with some of our
-          nation's best epidemiologists and data scientists to develop the US
+          nation's best epidemiologists and data scientists to develop the U.S.
           Intervention Model.
         </Typography>
         <Typography variant="body1" component="p">
@@ -27,7 +27,7 @@ const FAQ = ({ children }) => {
           resources like beds, ventilators, and clinical support staff.
         </Typography>
         <Typography variant="body1" component="p">
-          Our US Intervention Model has been shared with every level of
+          Our U.S. Intervention Model has been shared with every level of
           government across the U.S., and is currently being used by thousands
           of decision makers, from elected officials, public health leaders, the
           U.S. military, and medical equipment manufacturers. The model has also
@@ -47,7 +47,7 @@ const FAQ = ({ children }) => {
           , <a href="https://twitter.com/igorkofman">Igor Kofman</a>, and{' '}
           <a href="https://www.linkedin.com/in/zacharyrosen/">Zack Rosen</a>,
           with medical and policy guidance from{' '}
-          <a href="https://profiles.stanford.edu/nirav-shah">Nirav R. Shah</a>{' '}
+          <a href="https://profiles.stanford.edu/nirav-shah">Dr. Nirav Shah</a>{' '}
           (MD, MPH, senior scholar, Stanford University Clinical Excellence
           Research Center).
         </Typography>
@@ -102,9 +102,8 @@ const FAQ = ({ children }) => {
             solve an urgent problem:
           </a>{' '}
           If we try to fight COVID in the present we will lose. We can only beat
-          COVID by understanding what it will do to us in the near future.
-          Coronavirus response leaders need the tools to do this — we are
-          building them the tools.
+          COVID by understanding what it will do to us in the near future. Our
+          leaders need such a forecasting tool. We are building it.
         </Typography>
 
         <Typography variant="h5" component="h5">
@@ -112,46 +111,52 @@ const FAQ = ({ children }) => {
         </Typography>
 
         <Typography variant="body1" component="p">
-          CoVidActNow endorses Private Kit: Safe Paths, a project developed by
-          MIT, the Mayo Clinic, the World Health Organization, and others.
+          We endorse{' '}
+          <a
+            href="https://safepaths.mit.edu"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Private Kit: Safe Paths
+          </a>
+          , a project developed by MIT, the Mayo Clinic, the World Health
+          Organization, and others.
         </Typography>
 
         <Typography variant="body1" component="p">
           Private Kit is a mobile app for contact tracing that protects
           indivdual privacy. Contact tracing is a technology that notifies
           individuals if they have come in contact with someone who then later
-          tests positive for CoVid-19. Learn more at{' '}
-          <a
-            href="https://safepaths.mit.edu"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            https://safepaths.mit.edu
-          </a>{' '}
-          or read the white paper{' '}
-          <a href="https://arxiv.org/pdf/2003.08567.pdf">
-            Apps Gone Rogue: Maintaining Personal Privacy in an Epidemic
-          </a>
-          .
+          tests positive for COVID.
         </Typography>
 
         <Typography variant="body1" component="p">
-          Download the app on{' '}
-          <a
-            href="https://play.google.com/store/apps/details?id=edu.mit.privatekit"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Google Play
-          </a>{' '}
-          or{' '}
-          <a
-            href="https://apps.apple.com/us/app/private-kit/id1501903733"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Apple Store
-          </a>
+          <ul>
+            <li>
+              Read the white paper{' '}
+              <a href="https://arxiv.org/pdf/2003.08567.pdf">
+                Apps Gone Rogue: Maintaining Personal Privacy in an Epidemic
+              </a>
+            </li>
+            <li>
+              Download the app on{' '}
+              <a
+                href="https://play.google.com/store/apps/details?id=edu.mit.privatekit"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Google Play
+              </a>{' '}
+              or{' '}
+              <a
+                href="https://apps.apple.com/us/app/private-kit/id1501903733"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Apple Store
+              </a>
+            </li>
+          </ul>
         </Typography>
 
         <Typography variant="h5" component="h5">
@@ -177,25 +182,13 @@ const FAQ = ({ children }) => {
           </ul>
         </Typography>
 
-        <Typography variant="body1" component="p">
-          <a
-            href="mailto:info@covidactnow.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Email us
-          </a>{' '}
-          to share feedback or access to expertise, questions, or if you
-          otherwise want to help.
-        </Typography>
-
         <Typography variant="h5" component="h5">
           How can I contact you?
         </Typography>
         <Typography>
           <ul>
             <li>
-              Medical Organizations:{' '}
+              Medical organizations:{' '}
               <a
                 target="_blank"
                 rel="noopener noreferrer"
@@ -205,7 +198,7 @@ const FAQ = ({ children }) => {
               </a>
             </li>
             <li>
-              Government Agencies:{' '}
+              Government agencies:{' '}
               <a
                 target="_blank"
                 rel="noopener noreferrer"
@@ -225,7 +218,7 @@ const FAQ = ({ children }) => {
               </a>
             </li>
             <li>
-              General Inquiries:{' '}
+              General inquiries:{' '}
               <a
                 target="_blank"
                 rel="noopener noreferrer"
@@ -248,15 +241,15 @@ const FAQ = ({ children }) => {
         </Typography>
 
         <Typography variant="h3" component="h1">
-          About the US Intervention Model
+          About the U.S. Intervention Model
         </Typography>
 
         <Typography variant="h5" component="h5">
-          What is the US Intervention Model?
+          What is the U.S. Intervention Model?
         </Typography>
         <Typography variant="body1" component="p">
-          The US Intervention Model by Covid Act Now is a data platform that can
-          project COVID infections, hospitalizations, and deaths across the
+          The U.S. Intervention Model by Covid Act Now is a data platform that
+          can project COVID infections, hospitalizations, and deaths across the
           United States, as well as model how public health interventions
           contain the spread of COVID and save lives.
         </Typography>
@@ -269,7 +262,7 @@ const FAQ = ({ children }) => {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://bit.ly/391uB80"
+            href="https://github.com/covid-projections/covid-data-model"
           >
             can be viewed here
           </a>
@@ -277,14 +270,14 @@ const FAQ = ({ children }) => {
         </Typography>
 
         <Typography variant="h5" component="h5">
-          Can I view the model?
+          What are your sources of data?
         </Typography>
         <Typography variant="body1" component="p">
           Reference materials, including assumptions, logic, and definitions{' '}
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://bit.ly/394SJ9I"
+            href="https://s3.amazonaws.com/data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
           >
             are available here
           </a>
@@ -295,7 +288,7 @@ const FAQ = ({ children }) => {
           How often does the model update?
         </Typography>
         <Typography variant="body1" component="p">
-          At a minimum, the model is updated every four days.
+          The model currently updates every 24 hours.
         </Typography>
 
         <Typography variant="h5" component="h5">
@@ -342,8 +335,8 @@ const FAQ = ({ children }) => {
             </li>
             <li>
               Demographics, populations, and hospital bed counts are outdated.
-              Demographics for the USA as a whole are used, rather than specific
-              to each state.
+              Demographics for the U.S. as a whole are used, rather than
+              specific to each state.
             </li>
 
             <li>
@@ -365,7 +358,7 @@ const FAQ = ({ children }) => {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://bit.ly/394SJ9I"
+            href="https://s3.amazonaws.com/data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
           >
             Model Reference and Assumptions
           </a>{' '}
@@ -380,7 +373,7 @@ const FAQ = ({ children }) => {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://bit.ly/394SJ9I"
+            href="https://s3.amazonaws.com/data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
           >
             Model Reference and Assumptions
           </a>{' '}
@@ -396,7 +389,7 @@ const FAQ = ({ children }) => {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://bit.ly/394SJ9I"
+            href="https://s3.amazonaws.com/data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
           >
             Model Reference and Assumptions
           </a>{' '}
@@ -407,23 +400,23 @@ const FAQ = ({ children }) => {
           What are the specific policies for my state?
         </Typography>
         <Typography variant="body1" component="p">
-          The New York Times has a list of{' '}
+          <i>The New York Times</i> has a list of{' '}
           <a
             target="_blank"
             rel="noopener noreferrer"
             href="https://www.nytimes.com/interactive/2020/us/coronavirus-stay-at-home-order.html"
           >
-            specific state-by-state policies
+            state-by-state policies
           </a>
           .
         </Typography>
 
         <Typography variant="h3" component="h1">
-          About COVID-19
+          About COVID
         </Typography>
 
         <Typography variant="h5" component="h5">
-          What are the symptoms of COVID-19?
+          What are the symptoms of COVID?
         </Typography>
         <Typography variant="body1" component="p">
           The Centers for Disease Control and Prevention has a list of{' '}
@@ -432,7 +425,7 @@ const FAQ = ({ children }) => {
             rel="noopener noreferrer"
             href="https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/symptoms.html"
           >
-            COVID-19 symptoms
+            COVID symptoms
           </a>
           .
         </Typography>

@@ -42,9 +42,9 @@ export default function App() {
             </Route>
             <Route path="/contact">
               <Redirect to="/faq" />
-            <Route path="/about">
-              <Redirect to="/faq" />
-            </Route>
+              <Route path="/about">
+                <Redirect to="/faq" />
+              </Route>
             </Route>
             <Route path="/*">
               <Redirect to="/" />

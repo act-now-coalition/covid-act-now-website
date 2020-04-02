@@ -21,7 +21,7 @@ export default [
     link: 'https://www.linkedin.com/in/rebecca-katz-43a04a5/',
   },
   {
-    name: 'Nirav R. Shah, MD, MPH',
+    name: 'Dr. Nirav Shah, MD, MPH',
     title:
       'Senior Scholar, Stanford University Clinical Excellence Research Center',
     link: 'https://profiles.stanford.edu/nirav-shah',
