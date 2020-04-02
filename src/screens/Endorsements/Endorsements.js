@@ -45,6 +45,7 @@ const Endorsements = () => {
             </Grid>
           ))}
         </EndorsersWrapper>
+        <span data-sumome-listbuilder-embed-id="a5e4680c84878d727c01eac4fbfb8bf4d3269f51339bf3499040aa642d59b6a2"></span>
       </Content>
     </Wrapper>
   );
