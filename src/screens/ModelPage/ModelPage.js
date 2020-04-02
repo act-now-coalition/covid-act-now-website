@@ -315,7 +315,7 @@ function ModelPage() {
           <div>
             <StyledNoResultsWrapper>
               <StyledNoResults>
-                No cases have been reported or no data exists for {selectedCounty.county}, {selectedCounty.state_code}
+                We either weren't able to get data for {selectedCounty.county}, {selectedCounty.state_code}, or no cases have yet been confirmed. We’re unable to produce our model for this county until we have data. Check back soon.
               </StyledNoResults>
             </StyledNoResultsWrapper>
             {renderMapContent()}
