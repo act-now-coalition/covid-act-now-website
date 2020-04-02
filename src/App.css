@@ -86,6 +86,10 @@ tr {
   cursor: pointer;
 }
 
+svg path:focus {
+  outline: none;
+}
+
 input[type='text'],
 textarea {
   font-size: 16px;

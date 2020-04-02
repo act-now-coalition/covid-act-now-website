@@ -1,5 +1,5 @@
-import { find, each, sortBy, some, isEqual } from 'lodash';
-import React, { useState } from 'react';
+import React from 'react';
+import { find, each, sortBy, some } from 'lodash';
 import Select, { components } from 'react-select';
 import BaseValueContainer from './BaseValueContainer';
 import CustomStyles from './CustomStyles';
@@ -35,7 +35,7 @@ const Option = ({ children, ...props }) => {
           <div>
             <strong>{children.county}</strong>
           </div>
-          {!props.data.hasData && <span>No data available - </span>}
+          {false && !props.data.hasData && <span>No data available - </span>}
           <span>
             {new Intl.NumberFormat().format(children.population)} residents
           </span>
@@ -74,8 +74,10 @@ const CountySelector = ({
       county: 'Wayne County',
     },
   ],
+  selectedCounty,
+  setSelectedCounty,
+  autoFocus = false,
 }) => {
-  const [selectedOption, setSelectedOption] = useState(null);
   const options =
     US_STATE_DATASET.state_county_map_dataset[state].county_dataset;
   const COUNTY_FIELD = 'county';
@@ -96,25 +98,6 @@ const CountySelector = ({
 
   const sortedOptions = sortBy(options, ['population', 'hasData']).reverse();
 
-  const handleSelectChange = option => {
-    console.log('change', option);
-    setSelectedOption(option);
-
-    if (!option) {
-      return;
-    }
-
-    return handleChange(option);
-  };
-
-  const isOptionSelected = option => {
-    if (!selectedOption) {
-      return false;
-    }
-
-    return isEqual(option, selectedOption);
-  };
-
   const handleCustomFilter = (option, searchInput) => {
     const words = searchInput.split(' ');
     const lowerCasedCities = option.data.cities.map(city => city.toLowerCase());
@@ -132,7 +115,10 @@ const CountySelector = ({
 
   return (
     <Select
-      onChange={handleSelectChange}
+      defaultValue={selectedCounty}
+      value={selectedCounty}
+      placeholder="Select a county"
+      options={sortedOptions}
       components={{
         SingleValue,
         NoOptionsMessage,
@@ -143,14 +129,13 @@ const CountySelector = ({
       }}
       name="county"
       isClearable={true}
-      placeholder="Select a county"
-      isOptionSelected={isOptionSelected}
       styles={CustomStyles}
       filterOption={handleCustomFilter}
       getOptionLabel={option => option}
       getOptionValue={option => option}
       isSearchable={true}
-      options={sortedOptions}
+      autoFocus={autoFocus}
+      onChange={handleChange}
     />
   );
 };

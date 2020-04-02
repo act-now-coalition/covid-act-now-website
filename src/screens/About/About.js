@@ -18,7 +18,7 @@ const About = ({ children }) => {
           </a>{' '}
           was created by a team of data scientists, engineers, and designers in
           partnership with epidemiologists, public health officials, and
-          political leaders to help understand how the COVID-19 pandemic will
+          political leaders to help understand how the COVID pandemic will
           affect their region.
         </Typography>
         <Typography variant="body1" component="p">
@@ -145,7 +145,7 @@ const About = ({ children }) => {
           Private Kit is a mobile app for contact tracing that protects
           indivdual privacy. Contact tracing is a technology that notifies
           individuals if they have come in contact with someone who then later
-          tests positive for CoVid-19. Learn more at{' '}
+          tests positive for COVID. Learn more at{' '}
           <a
             href="https://safepaths.mit.edu"
             target="_blank"
@@ -206,19 +206,10 @@ const About = ({ children }) => {
                 Python
               </Link>
             </li>
-            <li>Communications Leaders</li>
-            <ul>
-              <li>
-                <a href="https://docs.google.com/document/d/1do_XQ0twIpjiNzmD2-TydO8h9CnorE1TiNEHe1suH0Q/edit">
-                  Growth Lead
-                </a>
-              </li>
-              <li>
-                <a href="https://docs.google.com/document/d/1SHSx8C8j11UNpxyLVYGgnv106ho2cHg41f5AStgVPkU/edit?ts=5e792bd0">
-                  Community Manager / Social Media Lead
-                </a>
-              </li>
-            </ul>
+            <li>Data Visualization Experts</li>
+            <li>UX Designer (Bonus if you write code!)</li>
+            <li>Epidimiologist / Modeler</li>
+            <li>Engineering Manager</li>
           </ul>
         </Typography>
         <Typography variant="body1" component="p">

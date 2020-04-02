@@ -1,12 +1,12 @@
 export default [
   {
     name: 'Max Henderson',
-    title: 'ex-Firebase/Google Data Science & Product Leader',
+    title: 'Ex-Firebase/Google Data Science & Product Leader',
     link: 'https://www.linkedin.com/in/maxhenderson/',
   },
   {
     name: 'Igor Kofman',
-    title: 'ex-CTO, Dropbox Paper',
+    title: 'Ex-CTO, Dropbox Paper',
     link: 'https://twitter.com/igorkofman',
   },
   {
@@ -21,7 +21,7 @@ export default [
     link: 'https://www.linkedin.com/in/rebecca-katz-43a04a5/',
   },
   {
-    name: 'Nirav R. Shah, MD, MPH',
+    name: 'Dr. Nirav Shah, MD, MPH',
     title:
       'Senior Scholar, Stanford University Clinical Excellence Research Center',
     link: 'https://profiles.stanford.edu/nirav-shah',
@@ -59,7 +59,7 @@ export default [
   },
   {
     name: 'Ali Berlin Johnson',
-    title: 'Ex Lead Designer, Firebase',
+    title: 'Former Lead Designer, Firebase',
     link: 'https://www.linkedin.com/in/berlinjohnson/',
   },
   {
@@ -69,7 +69,7 @@ export default [
   },
   {
     name: 'Jacob Redding',
-    title: 'Sr Principal, Accenture',
+    title: 'Senior Principal, Accenture',
     link: 'https://www.linkedin.com/in/jacobredding/',
   },
   {
@@ -88,11 +88,6 @@ export default [
     link: 'https://www.linkedin.com/in/virsaviyaefraim/',
   },
   {
-    name: 'Andrew Krackov',
-    title: 'President, Hillcrest Advisory',
-    link: 'https://www.linkedin.com/in/andykrackov/',
-  },
-  {
     name: 'Adnan Pirzada',
     title: 'Software Engineer, Lattice',
     link: 'https://www.linkedin.com/in/adpirz/',
@@ -101,5 +96,146 @@ export default [
     name: 'Rachel RoseFigura',
     title: 'Software Engineer, Uber',
     link: 'https://www.linkedin.com/in/rachelrosefigura/',
+  },
+  {
+    name: 'Dani Fontanesi',
+    title:
+      'Former Associate General Counsel of an Andreessen Horowitz tech company',
+    link: 'https://www.linkedin.com/in/dani-fontanesi-esq-26509a8/',
+  },
+  {
+    name: 'Jess Schwartz',
+    title: 'Lead Program Manager, Google',
+    link: 'https://www.linkedin.com/in/jessicajschwartz/',
+  },
+  {
+    name: 'Trae Wallace',
+    title: 'Head of Data, Talus Analytics',
+    link: 'https://www.linkedin.com/in/traewallace/',
+  },
+  {
+    name: 'Steph Eaneff',
+    title: 'Data Science Research Fellow, UC Berkeley',
+    link: 'https://www.linkedin.com/in/seaneff/',
+  },
+  {
+    name: 'Chris Wilcox',
+    title: 'Senior Engineer, Google',
+    link: 'https://www.linkedin.com/in/chrisrwilcox/',
+  },
+  {
+    name: 'Michael Lehenbauer',
+    title: 'Former Software Engineer, Google',
+    link: 'https://www.linkedin.com/in/mikelehen/',
+  },
+  {
+    name: 'Chris Kelly',
+    title: 'Software Engineer, Fritz',
+    link: 'https://www.linkedin.com/in/ckelly90/',
+  },
+  {
+    name: 'Vincent Woo',
+    title: 'Founder, CoderPad',
+    link: 'https://www.linkedin.com/in/vincent-woo-b2716399/',
+  },
+  {
+    name: 'Jeremy Lubin',
+    title: 'Former Lead Designer, Square',
+    link: 'https://www.linkedin.com/in/jeremy-lubin/',
+  },
+  {
+    name: 'Mike McDonald',
+    title: 'Head of Product, Stedi',
+    link: 'https://www.linkedin.com/in/asciimike/',
+  },
+  {
+    name: 'Rebecca Mark',
+    title: 'Former Head of Public Affairs and Policy, Cruise',
+    link: 'https://www.linkedin.com/in/rebeccamark/',
+  },
+  {
+    name: 'Audra Grassia',
+    title: 'Former Senior Director, ACRONYM',
+    link: 'https://www.linkedin.com/in/audragrassia/',
+  },
+  {
+    name: 'Bradley Lautenbach',
+    title: 'Vice President, Marriott',
+    link: 'https://www.linkedin.com/in/lautenbach/',
+  },
+  {
+    name: 'Laurent Crenshaw',
+    title: 'Director of Public Policy, Yelp',
+    link: 'https://www.linkedin.com/in/laurentcrenshaw/',
+  },
+  {
+    name: 'Anya Lehr',
+    title: 'Former Director of Operations, Vice Media',
+    link: 'https://www.linkedin.com/in/anyalehr/',
+  },
+  {
+    name: 'Debbie Lai',
+    title: 'Former Strategic Partnerships Manager, Google',
+    link: 'https://www.linkedin.com/in/iamdlai/',
+  },
+  {
+    name: 'Hannah Lee',
+    title: 'Former Operations Manager, Google',
+    link: 'https://www.linkedin.com/in/hannahbnguyen/',
+  },
+  {
+    name: 'Brittany Braxton',
+    title: 'Executive Business Partner, Pantheon',
+    link: 'https://www.linkedin.com/in/brittany-braxton-39187549/',
+  },
+  {
+    name: 'Shaeleigh Jacobs',
+    title: 'Principal Research Investigator, Austin Paey University',
+    link: 'https://www.linkedin.com/in/shaeleigh-jacobs-672152114/',
+  },
+  {
+    name: 'David Duran',
+    title: 'Product Operations Analyst, Google',
+    link: 'https://www.linkedin.com/in/davidduran971/',
+  },
+  {
+    name: 'Peter Reinhardt',
+    title: 'CEO and Co-founder, Segment',
+    link: 'https://www.linkedin.com/in/peterreinhardt/',
+  },
+  {
+    name: 'Vincent DeGennaro, MD',
+    title: 'Founder, Innovating Health International',
+    link: 'https://www.linkedin.com/in/vincent-degennaro-jr-3b234ba3/',
+  },
+  {
+    name: 'Susan Goldblatt',
+    title: 'Former Software Engineer, Google',
+    link: 'https://www.linkedin.com/in/susan-goldblatt/',
+  },
+  {
+    name: 'Abe Haskins',
+    title: 'Developer Programs Engineer, Google',
+    link: 'https://www.linkedin.com/in/abe-haskins-1a267a13/',
+  },
+  {
+    name: 'Eusden Shing',
+    title: 'Former Head of Product, Pinterest',
+    link: 'https://www.linkedin.com/in/eusden/',
+  },
+  {
+    name: 'Dan Schlosser',
+    title: 'Senior Product Manager, The New York Times',
+    link: 'https://www.linkedin.com/in/danrschlosser/',
+  },
+  {
+    name: "Mikayla O'Bryan",
+    title: '',
+    link: 'https://www.linkedin.com/in/mikayla-o-bryan-867087135/',
+  },
+  {
+    name: 'Doug Pan',
+    title: '',
+    link: 'https://www.linkedin.com/in/dougspan/',
   },
 ];

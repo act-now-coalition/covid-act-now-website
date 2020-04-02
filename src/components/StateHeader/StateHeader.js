@@ -16,6 +16,7 @@ import {
 const Stateheader = ({
   location,
   locationName,
+  countyName,
   intervention,
   interventions,
 }) => {
@@ -26,10 +27,18 @@ const Stateheader = ({
     [INTERVENTIONS.SHELTER_IN_PLACE]: interventions.distancing.now,
   };
 
+  // hardcoded new york
+  if (locationName == "New York" && ["Kings County", "Queens County", "Bronx County", "Richmond County"].indexOf(countyName) > -1 ) {
+    countyName = "New York";
+  }
+
   const model = interventionToModel[intervention];
 
   const earlyDate = moment(model.dateOverwhelmed).subtract(14, 'days');
   const lateDate = moment(model.dateOverwhelmed).subtract(9, 'days');
+  const displayName = countyName
+    ? (<> {countyName}, <a href={`/state/${location}`}>{locationName}</a></>)
+    : locationName;
 
   const buildInterventionTitle = () => {
     switch (intervention) {
@@ -37,13 +46,13 @@ const Stateheader = ({
       case INTERVENTIONS.SOCIAL_DISTANCING:
         return (
           <span>
-            You must act now in <strong>{locationName}.</strong>
+            You must act now in <strong>{displayName}</strong>
           </span>
         );
       case INTERVENTIONS.SHELTER_IN_PLACE:
         return (
           <span>
-            Maintain shelter in place in <strong>{locationName}.</strong>
+            Keep staying at home in <strong>{displayName}.</strong>
           </span>
         );
       default:
@@ -57,8 +66,8 @@ const Stateheader = ({
         if (earlyDate.isBefore(moment())) {
           return (
             <HeaderSubCopy>
-              To limit hospital overload, our projections indicate shelter in
-              place must be implemented{' '}
+              To limit hospital overload, our projections indicate a Stay at
+              Home order must be implemented{' '}
               <HeaderHighlight color={INTERVENTION_COLOR_MAP[intervention]}>
                 immediately
               </HeaderHighlight>
@@ -68,8 +77,8 @@ const Stateheader = ({
         } else {
           return (
             <HeaderSubCopy>
-              To prevent hospital overload, our projections indicate shelter in
-              place must be implemented{' '}
+              To prevent hospital overload, our projections indicate a Stay at
+              Home order must be implemented{' '}
               <HeaderHighlight color={INTERVENTION_COLOR_MAP[intervention]}>
                 between {earlyDate.format('MMMM Do')} and{' '}
                 {lateDate.format('MMMM Do')} at the latest
@@ -81,10 +90,7 @@ const Stateheader = ({
       case INTERVENTIONS.SHELTER_IN_PLACE:
         return (
           <HeaderSubCopy>
-            Avoiding hospital overload depends heavily on population density and
-            public cooperation. Best and worst case scenarios are shown below,
-            and we’ll have projections on how things are actually going as soon
-            as data becomes available.
+              Avoiding hospital overload heavily depends on population density and public cooperation. Best and worst case scenarios are shown below, and we’ll update our projections as soon as more data becomes available.
           </HeaderSubCopy>
         );
       default:

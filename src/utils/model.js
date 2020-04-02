@@ -2,14 +2,28 @@ import { useState, useEffect } from 'react';
 
 async function fetchAll(urls) {
   try {
-    var data = await Promise.all(
-      urls.map(url => fetch(url).then(response => response.json())),
+    const data = await Promise.all(
+      urls.map(url =>
+        fetch(url)
+          .then(response => {
+            // 404 files currently return an html page instead of 404,
+            // so need to handle this way...
+            return response.text();
+          })
+          .then(responseText => {
+            try {
+              const jsonResponse = JSON.parse(responseText);
+
+              return jsonResponse;
+            } catch (err) {
+              throw err;
+            }
+          }),
+      ),
     );
 
     return data;
   } catch (error) {
-    console.log(error);
-
     throw error;
   }
 }
@@ -17,86 +31,113 @@ async function fetchAll(urls) {
 export const ModelIds = {
   baseline: 0,
   strictDistancingNow: 1,
-  weakDistancingNow: 7,
   containNow: 2,
+  weakDistancingNow: 3,
 };
 
-export function useModelDatas(_location, county = null, dataUrl = null) {
+const initialData = {
+  location: null,
+  county: null,
+  stateDatas: null,
+  countyDatas: null,
+};
+
+async function fetchSummary(setModelDatas, location) {
+  const summaryUrl = `/data/county_summaries/${location.toUpperCase()}.summary.json`;
+
+  try {
+    const summary = await fetchAll([summaryUrl]);
+    setModelDatas(state => {
+      return {
+        ...state,
+        summary: summary[0],
+      };
+    });
+  } catch (err) {}
+}
+
+async function fetchData(
+  setModelDatas,
+  location,
+  county = null,
+  dataUrl = null,
+) {
   dataUrl = dataUrl || '/data/';
   if (dataUrl[dataUrl.length - 1] !== '/') {
     dataUrl += '/';
   }
-  //Some state data files are lowercase, unsure why, but we need to handle it here.
-  let lowercaseStates = [
-    'AK',
-    'CA',
-    'CO',
-    'FL',
-    'MO',
-    'NM',
-    'NV',
-    'NY',
-    'OR',
-    'TX',
-    'WA',
-  ];
 
-  let location = _location;
-
-  if (lowercaseStates.indexOf(location) > -1) {
-    location = _location.toLowerCase();
+  let modelDataForKey = null;
+  let urls = [
+    ModelIds.baseline,
+    ModelIds.strictDistancingNow,
+    ModelIds.weakDistancingNow,
+    ModelIds.containNow,
+  ].map(i => {
+    let fipsCode =
+      county && county.full_fips_code ? county.full_fips_code : null;
+    const stateUrl = `${dataUrl}${location}.${i}.json`;
+    const countyUrl = `${dataUrl}county/${location.toUpperCase()}.${fipsCode}.${i}.json`;
+    return county ? countyUrl : stateUrl;
+  });
+  try {
+    let loadedModelDatas = await fetchAll(urls);
+    //This is to fix county data format
+    modelDataForKey = {
+      baseline: loadedModelDatas[0],
+      strictDistancingNow: loadedModelDatas[1],
+      weakDistancingNow: loadedModelDatas[2],
+      containNow: loadedModelDatas[3],
+    };
+  } catch (err) {
+    modelDataForKey = {
+      error: true,
+      payload: err,
+    };
   }
+  const key = county ? 'countyDatas' : 'stateDatas';
 
-  const [modelDatas, setModelDatas] = useState({ state: null, county: null });
+  setModelDatas(m => {
+    return {
+      ...m,
+      location,
+      county,
+      [key]: modelDataForKey,
+    };
+  });
+}
+
+export function useModelDatas(location, county = null, dataUrl = null) {
+  const [modelDatas, setModelDatas] = useState(initialData);
   useEffect(() => {
-    async function fetchData(county = null) {
-      let urls = [
-        ModelIds.baseline,
-        ModelIds.strictDistancingNow,
-        ModelIds.weakDistancingNow,
-        ModelIds.containNow,
-      ].map(i => {
-        const stateUrl = `${dataUrl}${location}.${i}.json`;
-        const countyUrl = `${dataUrl}${location}.${i}.json`; // TODO: update when we know filenames
-        return county ? countyUrl : stateUrl;
+    fetchData(setModelDatas, location, null, dataUrl);
+    fetchSummary(setModelDatas, location);
+  }, [dataUrl, location]);
+
+  useEffect(() => {
+    if (county === null) {
+      setModelDatas(state => {
+        return {
+          ...state,
+          county: null,
+          countyDatas: null,
+        };
       });
-      try {
-        let loadedModelDatas = await fetchAll(urls);
-        const key = county ? 'county' : 'state';
-        setModelDatas(m => {
-          return {
-            ...m,
-            [key]: {
-              baseline: loadedModelDatas[0],
-              strictDistancingNow: loadedModelDatas[1],
-              weakDistancingNow: loadedModelDatas[2],
-              containNow: loadedModelDatas[3],
-            },
-          };
-        });
-      } catch (e) {
-        // Make sure we clear the model data state if we fail to load data. This ensures that
-        // the CompareModels screen doesn't show stale data when you enter a bad URL by mistake.
-        setModelDatas({ state: null, county: null });
-        throw e;
-      }
+    } else {
+      fetchData(setModelDatas, location, county, dataUrl);
     }
-    fetchData();
-    if (county) {
-      fetchData(county);
-    }
-  }, [location, county, dataUrl]);
+  }, [dataUrl, county, location]);
 
   return modelDatas;
 }
 
 const COLUMNS = {
-  hospitalizations: 8,
-  beds: 11,
-  cumulativeDeaths: 10,
-  cumulativeInfected: 9,
-  totalPopulation: 16,
-  date: 0,
+  hospitalizations: 8 + 1,
+  beds: 11 + 1,
+  deaths: 10 + 1,
+  infected: 9 + 1,
+  totalPopulation: 16 + 1,
+  date: 0 + 1,
 };
 
 const MS_PER_DAY = 1000 * 60 * 60 * 24;
@@ -138,16 +179,18 @@ export class Model {
       _parseInt(row[COLUMNS.hospitalizations]),
     );
     this.beds = data.map(row => _parseInt(row[COLUMNS.beds]));
-    this.cumulativeDeaths = data.map(row =>
-      _parseInt(row[COLUMNS.cumulativeDeaths]),
-    );
-    this.cumulativeInfected = data.map(row =>
-      _parseInt(row[COLUMNS.cumulativeInfected]),
-    );
+    this.deaths = data.map(row => _parseInt(row[COLUMNS.deaths]));
+    this.cumulativeDeaths = this.deaths;
+    this.totalPopulation = _parseInt(data[0][COLUMNS.totalPopulation]);
+    this.infected = data.map(row => _parseInt(row[COLUMNS.infected]));
 
-    this.maxInfected = this.cumulativeInfected[
-      this.cumulativeInfected.length - 1
-    ];
+    this.cumulativeInfected = [];
+    let infectedSoFar = 0;
+    for (let i = 0; i < this.infected.length; i++) {
+      infectedSoFar += this.infected[i];
+      this.cumulativeInfected.push(infectedSoFar * (2/3));
+    }
+
     this.cumulativeDead = this.cumulativeDeaths[
       this.cumulativeDeaths.length - 1
     ];
@@ -189,7 +232,6 @@ export class Model {
       this.dateOverwhelmed = new Date(estimatedTimeStamp);
     }
 
-    this.totalPopulation = _parseInt(data[0][COLUMNS.totalPopulation]);
   }
 
   get durationLabelMonths() {
@@ -237,13 +279,13 @@ export class Model {
   idxForDay = day => Math.ceil(day / 4);
 
   cumulativeInfectedAfter(days) {
-    return this.cumulativeInfected[this.idxForDay(days)];
+    return this.cumulativeInfected[this.cumulativeInfected.length-1];
   }
   cumulativeDeadAfter(days) {
-    return this.cumulativeDeaths[this.idxForDay(days)];
+    return this.cumulativeDeaths[this.cumulativeDeaths.length-1];
   }
   dateAfter(days) {
-    return this.dates[this.idxForDay(days)];
+    return this.dates[this.dates.length-1];
   }
   getColumn(columnName, days) {
     return this.dates

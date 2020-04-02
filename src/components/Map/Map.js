@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../../App.css'; /* optional for styling like the :hover pseudo-class */
 import USAMap from 'react-usa-map';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import {
   STATES,
@@ -12,14 +12,14 @@ import {
 } from 'enums';
 import { Legend, LegendItem } from './Legend';
 
-function Map() {
-  let [redirectTarget, setRedirectTarget] = useState();
+function Map({ hideLegend = false, setMobileMenuOpen }) {
+  const history = useHistory();
 
-  if (redirectTarget) {
+  const goToStatePage = page => {
     window.scrollTo(0, 0);
 
-    return <Redirect push to={redirectTarget} />;
-  }
+    history.push(page);
+  };
 
   const legendConfig = {};
 
@@ -36,7 +36,11 @@ function Map() {
       [currState]: {
         fill: interventionColor,
         clickHandler: event => {
-          setRedirectTarget(`/state/${currState}`);
+          goToStatePage(`/state/${currState}`);
+
+          if (setMobileMenuOpen) {
+            setMobileMenuOpen(false);
+          }
         },
       },
     };
@@ -48,20 +52,22 @@ function Map() {
         <Grid item xs={12}>
           <USAMap width="100%" height="auto" customize={statesCustomConfig} />
         </Grid>
-        <Grid item xs={12}>
-          <Legend>
-            {INTERVENTION_EFFICACY_ORDER_ASC.filter(
-              intervention => legendConfig[intervention],
-            ).map(intervention => (
-              <LegendItem
-                key={`legend-${intervention}`}
-                title={intervention}
-                color={INTERVENTION_COLOR_MAP[intervention]}
-                description={INTERVENTION_DESCRIPTIONS[intervention]}
-              />
-            ))}
-          </Legend>
-        </Grid>
+        {!hideLegend && (
+          <Grid item xs={12}>
+            <Legend>
+              {INTERVENTION_EFFICACY_ORDER_ASC.filter(
+                intervention => legendConfig[intervention],
+              ).map(intervention => (
+                <LegendItem
+                  key={`legend-${intervention}`}
+                  title={intervention}
+                  color={INTERVENTION_COLOR_MAP[intervention]}
+                  description={INTERVENTION_DESCRIPTIONS[intervention]}
+                />
+              ))}
+            </Legend>
+          </Grid>
+        )}
       </Grid>
     </div>
   );

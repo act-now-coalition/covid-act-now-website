@@ -7,17 +7,11 @@ const MobileMenu = ({ open, goTo, forwardTo }) => {
       <a onClick={goTo('/')} href="/">
         Map
       </a>
-      <a onClick={goTo('/about')} href="/about">
+      <a onClick={goTo('/faq')} href="/faq">
         About
-      </a>
-      <a onClick={goTo('/model')} href="/model">
-        Model
       </a>
       <a onClick={goTo('/endorsements')} href="/endorsements">
         Endorsements
-      </a>
-      <a onClick={goTo('/contact')} href="/contact">
-        Contact
       </a>
       <a
         onClick={forwardTo('https://blog.covidactnow.org')}

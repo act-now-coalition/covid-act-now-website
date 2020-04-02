@@ -19,7 +19,8 @@ export const StyledResultsMenuOption = styled.div`
   display: flex;
   text-align: left;
   align-items: center;
-  opacity: ${props => (props.hasData ? '1' : '0.4')};
+  /* TODO use when we kbow if there is county data */
+  /* opacity: ${props => (props.hasData ? '1' : '0.4')}; */
 
   strong {
     font-weight: 600;

@@ -83,20 +83,6 @@ const STATES = {
   WY: 'Wyoming',
 };
 
-const lowercaseStates = [
-  'AK',
-  'CA',
-  'CO',
-  'FL',
-  'NY',
-  'MO',
-  'NM',
-  'NV',
-  'OR',
-  'TX',
-  'WA',
-];
-
 const COLUMNS = {
   hospitalizations: 8,
   beds: 11,
@@ -277,12 +263,13 @@ class Model {
 }
 
 let ws = fs.createWriteStream('projections.txt');
-ws.write('16-day_Hopitalization_Prediction,32-day_Hospitalization_Prediction,16-day_Beds_Shortfall,32-day_Beds_Shortwall\n');
+ws.write(
+  '16-day_Hopitalization_Prediction,32-day_Hospitalization_Prediction,16-day_Beds_Shortfall,32-day_Beds_Shortwall\n',
+);
 
 // Go through each state and write the data
 Object.keys(STATES).forEach(state => {
-  const stateKey =
-    lowercaseStates.indexOf(state) > -1 ? state.toLowerCase() : state;
+  const stateKey = state;
   const files = Array.from(
     { length: 8 }, // 8 different models
     (_, i) => `public/data/${stateKey}.${i}.json`,
@@ -299,10 +286,8 @@ Object.keys(STATES).forEach(state => {
   const firstDatePastNowIdx = baseline.dates.findIndex(
     date => date.getTime() > now.getTime(),
   );
-  hosp1 = baseline.hospitalizations[firstDatePastNowIdx+3]
-  hosp2 = baseline.hospitalizations[firstDatePastNowIdx+7]
- 
-  ws.write(
-    `${state},${hosp1},${hosp2}}\n`,
-  );
+  hosp1 = baseline.hospitalizations[firstDatePastNowIdx + 3];
+  hosp2 = baseline.hospitalizations[firstDatePastNowIdx + 7];
+
+  ws.write(`${state},${hosp1},${hosp2}}\n`);
 });
