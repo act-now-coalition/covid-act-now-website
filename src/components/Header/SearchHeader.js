@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { GlobalSelector } from 'components/MapSelectors/MapSelectors';
@@ -25,6 +25,7 @@ const SearchHeader = ({
 }) => {
   const history = useHistory();
   const isMobile = useMediaQuery('(max-width:1350px)');
+  const [isGlobalSelectorFocused, setIsGlobalSelectorFocused] = useState(false);
 
   const handleSelectChange = option => {
     let route = `/state/${option.state_code}`;
@@ -52,6 +53,7 @@ const SearchHeader = ({
             <GlobalSelector
               extendRight={true}
               handleChange={handleSelectChange}
+              onIsFocusedChanged={setIsGlobalSelectorFocused}
             />
           </SelectorWrapper>
           {isMobile && (
@@ -59,6 +61,7 @@ const SearchHeader = ({
               onClick={() => toggleMobileMenu()}
               isActive={mobileMenuOpen}
             >
+              {!isGlobalSelectorFocused && <>See county data&nbsp;&nbsp;</>}
               <MapIcon />
             </MapToggle>
           )}
