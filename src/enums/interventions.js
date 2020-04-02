@@ -27,7 +27,7 @@ export const INTERVENTION_DESCRIPTIONS = {
   [SOCIAL_DISTANCING]:
     'Voluntary “stay at home” directive for high-risk groups, schools and bars / restaurants closed.',
   [SHELTER_IN_PLACE]:
-    'Legal order for citizens to employ “Stay at Home” quarantine except for essential activities, shutdown of non-essential businesses, ban on all group events.',
+    'Legal order for citizens to employ “stay at home” quarantine except for essential activities, shutdown of non-essential businesses, ban on all group events.',
 };
 
 export const INTERVENTION_COLOR_MAP = {

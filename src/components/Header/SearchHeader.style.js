@@ -6,6 +6,9 @@ export const Wrapper = styled.div`
   margin: 0;
   padding: 1rem;
   background-color: white;
+  @media(min-width: 1350px) {
+     padding: 1rem 0;
+  }
 `;
 
 export const Content = styled.div`
@@ -21,7 +24,7 @@ export const SelectorWrapper = styled.div`
 
     @media (min-width: 1350px) {
       max-width: 900px;
-      margin: 0 500px 0 auto;
+      margin: 0 445px 0 auto;
     }
 
     @media (min-width: 1750px) {

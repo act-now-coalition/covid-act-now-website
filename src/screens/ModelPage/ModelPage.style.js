@@ -21,7 +21,7 @@ export const MainContentInnerBody = styled.div`
   }
 
   @media (min-width: 1350px) {
-    margin: 0 500px 0 auto;
+    margin: 0 445px 0 auto;
   }
 
   @media (min-width: 1750px) {
@@ -71,7 +71,7 @@ export const StyledNoResultsWrapper = styled.div`
     @media (min-width: 1350px) {
       padding: 2rem 0 0;
       width: 900px;
-      margin: 85px 500px 0 auto;
+      margin: 85px 445px 0 auto;
     }
 
     @media (min-width: 1750px) {
@@ -105,9 +105,9 @@ export const MapContentWrapper = styled.div`
   bottom: 0;
   background: white;
   padding: 0 1rem 1rem;
-  border: 1px solid rgba(0, 0, 0, 0.2);
 
   @media (min-width: 700px) {
+      border: 1px solid rgba(0, 0, 0, 0.2);
       width: 400px;
       height: 400px;
       top: calc(85px + 65px + 16px);

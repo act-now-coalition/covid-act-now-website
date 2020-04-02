@@ -42,8 +42,8 @@ const HomePageHeader = ({
         <div>
           <HeaderSubCopy color="inherit" component="p" variant="subtitle2">
             Our projections show when hospitals will likely become overloaded
-            throughout the county, and what you can do to change the course of
-            COVID-19 in your local area.
+            throughout the country, and what you can do to change the course of
+            COVID in your local area.
           </HeaderSubCopy>
 
           <SelectorWrapper>
