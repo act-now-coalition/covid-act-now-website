@@ -17,7 +17,7 @@ export const Content = styled.div`
 `;
 
 export const HighlightColor = styled.span`
-  color: red;
+  color: #07d180;
   font-weight: 600;
 `;
 
@@ -41,7 +41,7 @@ export const Disclaimer = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.12);
 
   a {
-    color: red;
+    color: #07d180;
   }
 `;
 
