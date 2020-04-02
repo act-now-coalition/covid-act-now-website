@@ -129,6 +129,11 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
     if (inputValue.length > 2) {
       const countyMatches = chain(countyDataset)
         .filter(item => hasCountyMatch(item, inputValue))
+        .filter(item => {
+          // TODO this is a temporary filter
+          // to remove combined county name
+            return !item.county.includes(' / ');
+        })
         .map((item, index) => ({
           ...item,
           id: item.full_fips_code,
