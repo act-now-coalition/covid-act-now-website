@@ -36,15 +36,15 @@ export default function App() {
             <Route path="/privacy" component={Privacy} />
             <Route path="/compare" component={CompareModels} />
             {/* <Route path="/donate" component={ComingSoon} /> */}
-            {/* /model and /about are deprecated in favor of /faq */}
+            {/* /model, /contact, and /about are deprecated in favor of /faq */}
             <Route path="/model">
-              <Redirect to="/faq" />
-            </Route>
-            <Route path="/about">
               <Redirect to="/faq" />
             </Route>
             <Route path="/contact">
               <Redirect to="/faq" />
+            <Route path="/about">
+              <Redirect to="/faq" />
+            </Route>
             </Route>
             <Route path="/*">
               <Redirect to="/" />
