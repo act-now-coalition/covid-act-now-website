@@ -15,6 +15,12 @@ export const StyledFooterBody = styled.div`
   justify-content: space-between;
 `;
 
+export const StyledFooterBodyLinksSection = styled.div`
+  @media (min-width: 600px) {
+      margin-top: 2rem;
+  }
+`;
+
 export const StyledFooterBodyLinks = styled.div`
   flex: 0 0 100%;
   text-align: center;
