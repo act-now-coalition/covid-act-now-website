@@ -90,10 +90,7 @@ const Stateheader = ({
       case INTERVENTIONS.SHELTER_IN_PLACE:
         return (
           <HeaderSubCopy>
-            Avoiding hospital overload depends heavily on population density and
-            public cooperation. Best and worst case scenarios are shown below,
-            and we’ll have projections on how things are actually going as soon
-            as data becomes available.
+              Avoiding hospital overload heavily depends on population density and public cooperation. Best and worst case scenarios are shown below, and we’ll update our projections as soon as more data becomes available.
           </HeaderSubCopy>
         );
       default:
