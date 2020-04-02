@@ -76,7 +76,7 @@ const ModelChart = ({
     ),
   ];
 
-  const data = scenarioComparisonOverTime(100);
+  const data = scenarioComparisonOverTime(200);
 
   const noAction = {
     name: INTERVENTIONS.LIMITED_ACTION,

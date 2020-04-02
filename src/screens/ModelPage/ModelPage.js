@@ -175,7 +175,6 @@ function ModelPage() {
                     interventions={interventions}
                     currentIntervention={intervention}
                   />
-
                   <Outcomes
                     title="Predicted Outcomes after 3 Months"
                     models={[
@@ -193,10 +192,9 @@ function ModelPage() {
                       lockdownColor,
                     ]}
                     asterisk={['', '*', '*', '**']}
-                    timeHorizon={100}
+                    timeHorizon={120}
                     currentIntervention={intervention}
                   />
-
                   <ul
                     style={{
                       textAlign: 'left',

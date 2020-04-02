@@ -180,24 +180,17 @@ export class Model {
     );
     this.beds = data.map(row => _parseInt(row[COLUMNS.beds]));
     this.deaths = data.map(row => _parseInt(row[COLUMNS.deaths]));
-    this.cumulativeDeaths = [];
-    let deathsSoFar = 0;
-    for (let i = 0; i < this.deaths.length; i++) {
-      deathsSoFar += this.deaths[i];
-      this.cumulativeDeaths.push(deathsSoFar);
-    }
-
+    this.cumulativeDeaths = this.deaths;
+    this.totalPopulation = _parseInt(data[0][COLUMNS.totalPopulation]);
     this.infected = data.map(row => _parseInt(row[COLUMNS.infected]));
+
     this.cumulativeInfected = [];
     let infectedSoFar = 0;
     for (let i = 0; i < this.infected.length; i++) {
       infectedSoFar += this.infected[i];
-      this.cumulativeInfected.push(infectedSoFar);
+      this.cumulativeInfected.push(infectedSoFar * (2/3));
     }
 
-    this.maxInfected = this.cumulativeInfected[
-      this.cumulativeInfected.length - 1
-    ];
     this.cumulativeDead = this.cumulativeDeaths[
       this.cumulativeDeaths.length - 1
     ];
@@ -239,7 +232,6 @@ export class Model {
       this.dateOverwhelmed = new Date(estimatedTimeStamp);
     }
 
-    this.totalPopulation = _parseInt(data[0][COLUMNS.totalPopulation]);
   }
 
   get durationLabelMonths() {
@@ -287,13 +279,13 @@ export class Model {
   idxForDay = day => Math.ceil(day / 4);
 
   cumulativeInfectedAfter(days) {
-    return this.cumulativeInfected[this.idxForDay(days)];
+    return this.cumulativeInfected[this.cumulativeInfected.length-1];
   }
   cumulativeDeadAfter(days) {
-    return this.cumulativeDeaths[this.idxForDay(days)];
+    return this.cumulativeDeaths[this.cumulativeDeaths.length-1];
   }
   dateAfter(days) {
-    return this.dates[this.idxForDay(days)];
+    return this.dates[this.dates.length-1];
   }
   getColumn(columnName, days) {
     return this.dates
