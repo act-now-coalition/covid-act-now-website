@@ -206,19 +206,10 @@ const About = ({ children }) => {
                 Python
               </Link>
             </li>
-            <li>Communications Leaders</li>
-            <ul>
-              <li>
-                <a href="https://docs.google.com/document/d/1do_XQ0twIpjiNzmD2-TydO8h9CnorE1TiNEHe1suH0Q/edit">
-                  Growth Lead
-                </a>
-              </li>
-              <li>
-                <a href="https://docs.google.com/document/d/1SHSx8C8j11UNpxyLVYGgnv106ho2cHg41f5AStgVPkU/edit?ts=5e792bd0">
-                  Community Manager / Social Media Lead
-                </a>
-              </li>
-            </ul>
+            <li>Data Visualization Experts</li>
+            <li>UX Designer (Bonus if you write code!)</li>
+            <li>Epidimiologist / Modeler</li>
+            <li>Engineering Manager</li>
           </ul>
         </Typography>
         <Typography variant="body1" component="p">
