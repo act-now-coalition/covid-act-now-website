@@ -1,7 +1,8 @@
 import React from 'react';
 import moment from 'moment';
 import StateCircleSvg from 'components/StateSvg/StateCircleSvg';
-import { INTERVENTIONS, INTERVENTION_COLOR_MAP } from 'enums';
+import { INTERVENTIONS, INTERVENTION_COLOR_MAP, COLORS } from 'enums';
+import { useEmbed } from 'utils/hooks';
 
 import {
   HeaderHighlight,
@@ -26,6 +27,7 @@ const Stateheader = ({
       interventions.distancingPoorEnforcement.now,
     [INTERVENTIONS.SHELTER_IN_PLACE]: interventions.distancing.now,
   };
+  const { isEmbed } = useEmbed();
 
   // hardcoded new york
   if (
@@ -114,11 +116,11 @@ const Stateheader = ({
   };
 
   return (
-    <StyledStateHeaderWrapper>
+    <StyledStateHeaderWrapper condensed={isEmbed}>
       <StyledStateHeaderInner>
         <StyledStateImageWrapper>
           <StateCircleSvg
-            actionBackgroundFill={'#F2F2F2'}
+            actionBackgroundFill={COLORS.LIGHTGRAY}
             state={location}
             intervention={intervention}
             hasAction={true}
@@ -127,7 +129,7 @@ const Stateheader = ({
         <StyledStateCopyWrapper>
           <div>
             <HeaderTitle>{buildInterventionTitle()}</HeaderTitle>
-            {buildPredection()}
+            {!isEmbed && buildPredection()}
           </div>
         </StyledStateCopyWrapper>
       </StyledStateHeaderInner>

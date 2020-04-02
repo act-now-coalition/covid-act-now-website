@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { COLORS } from 'enums';
 
 export const CallToActionBox = styled.div`
   margin-top: 2rem;
@@ -34,7 +35,7 @@ export const Section = styled.div`
 `;
 
 export const Title = styled.div`
-  background: #f2f2f2;
+  background: ${COLORS.LIGHTGRAY};
   padding: 16px;
   /* font-weight: bold; */
   text-align: left;
