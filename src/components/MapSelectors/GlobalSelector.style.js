@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const BORDER_COLOR = 'rgba(0,0,0,0.20)';
+const BORDER_COLOR = 'rgba(0,0,0,0.12)';
 
 export const StyledDropDownWrapper = styled.div`
   position: relative;
@@ -13,7 +13,8 @@ export const StyledMenu = styled.ul`
   background: white;
   position: absolute;
   left: 0;
-  right: -70px;
+  /* right: ${props => props.extendRight ? '-70px' : '0'}; */
+  right: 0;
   transfrom: translateY(100%);
   max-height: 400px;
   overflow-y: auto;
@@ -24,7 +25,6 @@ export const StyledMenu = styled.ul`
   @media(min-width: 600px) {
    right: 0;
   }
-  
 `;
 
 export const StyledMenuItem = styled.li`
@@ -44,11 +44,12 @@ export const StyledInputWrapper = styled.div`
   border-left: 1px solid ${BORDER_COLOR};
   border-right: 1px solid ${BORDER_COLOR};
   border-bottom: 1px solid ${BORDER_COLOR};
-  border-radius: ${props => (props.isOpen ? '3px 3px 0 0' : '3px')};
+  border-radius: ${props => (props.isOpen ? '4px 4px 0 0' : '4px')};
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
 `;
 
 export const StyledInput = styled.input`
-  border-radius: ${props => (props.isOpen ? '3px 3px 0 0' : '3px')};
+  border-radius: ${props => (props.isOpen ? '4px 4px 0 0' : '4px')};
   font-size: 16px;
   border: none;
   width: 100%;

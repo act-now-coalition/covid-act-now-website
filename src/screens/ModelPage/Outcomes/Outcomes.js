@@ -35,9 +35,9 @@ const Outcomes = ({
             let rowLabel = model.label;
             if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE) {
               if (rowLabel === '3 Months of Social Distancing') {
-                rowLabel = '3 Months of Stay at Home (worst case)';
-              } else if (rowLabel === '3 Months of Stay at Home') {
-                rowLabel = '3 Months of Stay at Home (best case)';
+                rowLabel = '3 Months of Stay at home (worst case)';
+              } else if (rowLabel === '3 Months of Stay at home') {
+                rowLabel = '3 Months of Stay at home (best case)';
               }
             }
 

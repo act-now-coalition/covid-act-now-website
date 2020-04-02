@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import _ from 'lodash';
 
 async function fetchAll(urls) {
   try {

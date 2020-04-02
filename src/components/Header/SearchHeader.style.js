@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const BORDER_COLOR = 'rgba(0,0,0,0.20)';
+const BORDER_COLOR = 'rgba(0,0,0,0.12)';
 
 export const Wrapper = styled.div`
   margin: 0;
@@ -34,6 +34,8 @@ export const SelectorWrapper = styled.div`
 `;
 
 export const MapToggle = styled.div`
+  curosr: pointer;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
   width: 54px;
   border: 1px solid ${BORDER_COLOR};
   display: flex;

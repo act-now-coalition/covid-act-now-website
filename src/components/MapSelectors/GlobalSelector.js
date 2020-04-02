@@ -68,7 +68,7 @@ const CountyItem = ({ dataset }) => {
   );
 };
 
-const GlobalSelector = ({ handleChange }) => {
+const GlobalSelector = ({ handleChange, extendRight }) => {
   const stateDataset = US_STATE_DATASET.state_dataset;
   const countyDataset = [];
 
@@ -109,17 +109,8 @@ const GlobalSelector = ({ handleChange }) => {
   ) => {
     const matchedItems = [];
 
-    if (!inputValue) {
-      return matchedItems;
-    }
-
     if (inputValue.toLowerCase() === 'igor kofman') {
-      matchedItems.push({
-        id: 'IGOR',
-        type: 'STATE',
-        state_code: 'CA',
-        state: 'Poopy Town',
-      });
+      window.location = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
     }
 
     const stateMatches = chain(stateDataset)
@@ -182,7 +173,7 @@ const GlobalSelector = ({ handleChange }) => {
 
   return (
     <Downshift
-      onChange={selection => handleChange(selection)}
+      onChange={(selection) => handleChange(selection)}
       itemToString={item => (item ? item.value : '')}
     >
       {({
@@ -195,6 +186,7 @@ const GlobalSelector = ({ handleChange }) => {
         highlightedIndex,
         selectedItem,
         getRootProps,
+        openMenu,
       }) => (
         <StyledDropDownWrapper>
           <StyledInputWrapper
@@ -211,6 +203,9 @@ const GlobalSelector = ({ handleChange }) => {
             <StyledInput
               {...getInputProps({
                 isOpen,
+                onFocus: () => {
+                  openMenu();
+                },
                 placeholder: 'Find your county or state',
               })}
             />
@@ -218,6 +213,7 @@ const GlobalSelector = ({ handleChange }) => {
           <StyledMenu
             {...getMenuProps({
               isOpen,
+              extendRight,
             })}
           >
             {isOpen

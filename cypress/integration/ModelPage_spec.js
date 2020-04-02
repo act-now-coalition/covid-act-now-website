@@ -17,7 +17,7 @@ describe('/state/:id', () => {
     cy.get('head meta[name="description"]').should(
       'have.attr',
       'content',
-      'To prevent hospital overload, our projections indicate a Stay at Home order must be implemented soon.',
+      'To prevent hospital overload, our projections indicate a Stay at home order must be implemented soon.',
     );
   });
   it(`Social Distancing has the correct title & description`, () => {
@@ -26,7 +26,7 @@ describe('/state/:id', () => {
     cy.get('head meta[name="description"]').should(
       'have.attr',
       'content',
-      'To prevent hospital overload, our projections indicate a Stay at Home order must be implemented soon.',
+      'To prevent hospital overload, our projections indicate a Stay at home order must be implemented soon.',
     );
   });
 });

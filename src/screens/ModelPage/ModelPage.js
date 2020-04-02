@@ -119,7 +119,7 @@ function ModelPage() {
     description = `Avoiding hospital overload depends heavily on your cooperation.`;
   } else {
     title = `You must act now in ${locationName}!`;
-    description = `To prevent hospital overload, our projections indicate a Stay at Home order must be implemented soon.`;
+    description = `To prevent hospital overload, our projections indicate a Stay at home order must be implemented soon.`;
   }
 
   const renderHeader = () => {
