@@ -161,6 +161,10 @@ const FAQ = ({ children }) => {
         <Typography>
           <ul>
             <li>JavaScript/React, Python engineers</li>
+            <li>Data Visualization Experts</li>
+            <li>UX Designer (Bonus if you write code!)</li>
+            <li>Epidimiologist / Modeler</li>
+            <li>Engineering Manager</li>
             <li>
               Is this you?{' '}
               <a
