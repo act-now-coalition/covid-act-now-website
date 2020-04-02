@@ -94,4 +94,14 @@ export default [
       'Professor and Director, Center for Global Health Science and Security, Georgetown University',
     ],
   },
+  {
+    size: 4, 
+    name: 'Donald M. Berwick, MD, MPP, FRCP', 
+    avatarUrl: '/images/endorsers/don_berwick__resized-100-100.jpg',
+    profileUrl: 'https://www.linkedin.com/in/don-berwick-46a49380/',
+    credentials: [
+      'Former Administrator, Centers for Medicare and Medicaid Services',
+      'President Emeritus and Senior Fellow, Institute for Healthcare Improvement'
+    ]
+  }
 ];
