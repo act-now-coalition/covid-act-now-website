@@ -13,13 +13,18 @@ export const StyledMenu = styled.ul`
   background: white;
   position: absolute;
   left: 0;
-  right: 0;
+  right: -70px;
   transfrom: translateY(100%);
   max-height: 400px;
   overflow-y: auto;
   list-style: none;
   border: ${props => (props.isOpen ? '1px solid ' + BORDER_COLOR : 'none')};
   border-radius: 0 0 3px 3px;
+  
+  @media(min-width: 600px) {
+   right: 0;
+  }
+  
 `;
 
 export const StyledMenuItem = styled.li`

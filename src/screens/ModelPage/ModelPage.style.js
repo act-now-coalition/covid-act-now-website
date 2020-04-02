@@ -95,7 +95,7 @@ export const StyledNoResults = styled.div`
 
 
 export const MapContentWrapper = styled.div`
-  z-index: 900;
+  z-index: 800;
   display: ${props => (props.mobileMenuOpen ? 'block' : 'none')};
   height: inherit;
   position: fixed;
@@ -107,6 +107,7 @@ export const MapContentWrapper = styled.div`
   padding: 0 1rem 1rem;
 
   @media (min-width: 700px) {
+      z-index: 901;
       border: 1px solid rgba(0, 0, 0, 0.2);
       width: 400px;
       height: 400px;
