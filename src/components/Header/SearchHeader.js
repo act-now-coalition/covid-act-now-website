@@ -25,6 +25,7 @@ const SearchHeader = ({
 }) => {
   const history = useHistory();
   const isMobile = useMediaQuery('(max-width:1350px)');
+  const isNarrowMobile = useMediaQuery('(max-width:500px)');
   const [isGlobalSelectorFocused, setIsGlobalSelectorFocused] = useState(false);
 
   const handleSelectChange = option => {
@@ -61,7 +62,9 @@ const SearchHeader = ({
               onClick={() => toggleMobileMenu()}
               isActive={mobileMenuOpen}
             >
-              {!isGlobalSelectorFocused && <>See county data&nbsp;&nbsp;</>}
+              {!isGlobalSelectorFocused && !isNarrowMobile && (
+                <>See county data&nbsp;&nbsp;</>
+              )}
               <MapIcon />
             </MapToggle>
           )}
