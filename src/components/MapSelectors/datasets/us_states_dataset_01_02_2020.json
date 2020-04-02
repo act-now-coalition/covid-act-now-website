@@ -6601,7 +6601,7 @@
           "county_fips_code": "031",
           "state_fips_code": "06",
           "state_code": "CA",
-          "full_fips_code": "36061",
+          "full_fips_code": "06031",
           "cities": [
             "Armona",
             "Avenal",
@@ -60961,7 +60961,7 @@
           "county_fips_code": "047",
           "state_fips_code": "36",
           "state_code": "NY",
-          "full_fips_code": "36047",
+          "full_fips_code": "36061",
           "cities": [
             "Brooklyn"
           ],
