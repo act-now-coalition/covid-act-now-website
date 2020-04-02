@@ -7,7 +7,6 @@ import ModelPage from 'screens/ModelPage/ModelPage';
 import HomePage from 'screens/HomePage/HomePage';
 // import ComingSoon from 'screens/ComingSoon/ComingSoon';
 import FAQ from 'screens/FAQ/FAQ';
-import Contact from 'screens/Contact/Contact';
 import Terms from 'screens/Terms/Terms';
 import Privacy from 'screens/Terms/Privacy';
 import EndorsementsPage from 'screens/Endorsements/EndorsementsPage';
@@ -25,20 +24,14 @@ export default function App() {
           <AppBar />
           <Switch>
             <Route exact path="/" component={HomePage} />
-<<<<<<< HEAD
-            <Route path="/state/:id" component={ModelPage} />
-            <Route path="/faq" component={FAQ} />
-=======
             <Route exact path="/state/:id" component={ModelPage} />
             <Route
               exact
               path="/state/:id/county/:countyId"
               component={ModelPage}
             />
-            <Route path="/model" component={FAQ} />
->>>>>>> 084b7a30e0d90745919e367f0f95e80417495d41
+            <Route path="/faq" component={FAQ} />
             <Route path="/endorsements" component={EndorsementsPage} />
-            <Route path="/contact" component={Contact} />
             <Route path="/terms" component={Terms} />
             <Route path="/privacy" component={Privacy} />
             <Route path="/compare" component={CompareModels} />
@@ -48,6 +41,9 @@ export default function App() {
               <Redirect to="/faq" />
             </Route>
             <Route path="/about">
+              <Redirect to="/faq" />
+            </Route>
+            <Route path="/contact">
               <Redirect to="/faq" />
             </Route>
             <Route path="/*">

@@ -146,14 +146,8 @@ const _AppBar = () => {
               onClick={goTo('/endorsements')}
             />
             <StyledTab
-              label="Contact"
-              value={3}
-              disableRipple
-              onClick={goTo('/contact')}
-            />
-            <StyledTab
               label="Blog"
-              value={4}
+              value={3}
               disableRipple
               onClick={forwardTo('https://blog.covidactnow.org')}
             />
