@@ -281,7 +281,7 @@ const ModelChart = ({
             <DisclaimerContent>
               <b>County data is currently in beta.</b> See something wrong?{' '}
               <a
-                href="mailto:info@covidactnow.org"
+                href="https://forms.gle/DhW3MwKn4Pyon88V8"
                 target="_blank"
                 rel="noopener noreferrer"
               >
