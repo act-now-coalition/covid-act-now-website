@@ -49,11 +49,11 @@ const CallToAction = ({ interventions, currentIntervention }) => {
         if (model.intervention === INTERVENTIONS.LIMITED_ACTION) {
           capacityIcon = <WarnLimitedAction />;
         } else {
-            if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE) {
-              capacityIcon = <WarnShelterInPlace />;
-            } else {
-              capacityIcon = <WarnSocialDistancing />;
-            }
+          if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE) {
+            capacityIcon = <WarnShelterInPlace />;
+          } else {
+            capacityIcon = <WarnSocialDistancing />;
+          }
         }
       }
 

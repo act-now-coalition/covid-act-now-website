@@ -19,13 +19,13 @@ export const SelectorWrapper = styled.div`
   > div {
     max-width: 900px;
     margin: 0 auto;
-    
+
     @media (min-width: 1350px) {
-        margin: 0 500px 0 auto;
+      margin: 0 500px 0 auto;
     }
-    
+
     @media (min-width: 1750px) {
-        margin: 0 auto;
+      margin: 0 auto;
     }
   }
 `;

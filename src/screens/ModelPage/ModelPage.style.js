@@ -1,13 +1,11 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
-`;
+export const Wrapper = styled.div``;
 
-export const ContentWrapper = styled.div`
-`;
+export const ContentWrapper = styled.div``;
 
 export const MainContentWrapper = styled.div`
-    margin-top: 85px;
+  margin-top: 85px;
 `;
 
 export const MainContentInner = styled.div`
@@ -16,16 +14,16 @@ export const MainContentInner = styled.div`
 
 export const MainContentInnerBody = styled.div`
   margin: 0;
-  
+
   @media (min-width: 900px) {
-      max-width: 900px;
-      margin: 0 auto;
+    max-width: 900px;
+    margin: 0 auto;
   }
-  
+
   @media (min-width: 1350px) {
     margin: 0 500px 0 auto;
   }
-  
+
   @media (min-width: 1750px) {
     margin: 0 auto;
   }
@@ -48,7 +46,7 @@ export const MapContentInner = styled.div`
   .Map {
     width: 100%;
   }
-  
+
   border-top: 1px solid #e3e3e3;
   padding-top: 1rem;
   margin-top: 1rem;
@@ -74,7 +72,7 @@ export const MapContentWrapper = styled.div`
     display: block;
     background: white;
     position: fixed;
-    border: 1px solid rgba(0,0,0,0.20);
+    border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 4px;
     top: 81px;
     right: 16px;
@@ -85,13 +83,12 @@ export const MapContentWrapper = styled.div`
 `;
 
 export const Content = styled.div`
-    text-align: center;
-    padding: 0 2rem;
-    
-    @media(min-width: 932px) {
-        padding: 0;
-    }
-    
+  text-align: center;
+  padding: 0 2rem;
+
+  @media (min-width: 932px) {
+    padding: 0;
+  }
 `;
 
 export const LoadingScreen = styled.div`

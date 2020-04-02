@@ -42,15 +42,15 @@ export const StyledStateHeaderInner = styled.div`
     flex-direction: row;
     margin: 0 auto;
   }
-  
+
   @media (min-width: 900px) {
     width: 900px;
   }
-  
+
   @media (min-width: 1350px) {
     margin: 0 500px 0 auto;
   }
-  
+
   @media (min-width: 1750px) {
     margin: 0 auto;
   }

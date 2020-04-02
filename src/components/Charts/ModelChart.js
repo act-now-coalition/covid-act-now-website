@@ -254,7 +254,15 @@ const ModelChart = ({
         availableBeds,
       ],
     };
-  }, [state, countyName, subtitle, interventions, currentIntervention]);
+  }, [
+    model.dateOverwhelmed,
+    currentIntervention,
+    noAction,
+    socialDistancing,
+    shelterInPlace,
+    wuhanStyle,
+    availableBeds,
+  ]);
 
   return (
     <ChartContainer>
