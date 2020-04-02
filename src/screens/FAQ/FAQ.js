@@ -349,41 +349,12 @@ const FAQ = ({ children }) => {
         </Typography>
 
         <Typography variant="h5" component="h5">
-          What are the definitions for "social distancing" and "stay at home"?
+          What definition does Covid Act Now use for “social distancing” and
+          “stay at home”? How about “poor/strict compliance” (re. “stay at
+          home”)?{' '}
         </Typography>
         <Typography variant="body1" component="p">
-          Definitions can be found in our{' '}
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
-          >
-            Model Reference and Assumptions
-          </a>{' '}
-          document.
-        </Typography>
-
-        <Typography variant="h5" component="h5">
-          How are "social distancing" and "stay at home" different?
-        </Typography>
-        <Typography variant="body1" component="p">
-          Definitions can be found in our{' '}
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
-          >
-            Model Reference and Assumptions
-          </a>{' '}
-          document.
-        </Typography>
-
-        <Typography variant="h5" component="h5">
-          How do you define "poor compliance" amd "strict compliance" in your
-          "stay at home" intervention definitions?
-        </Typography>
-        <Typography variant="body1" component="p">
-          Definitions can be found in our{' '}
+          All these definitions — and much more — can be found in our{' '}
           <a
             target="_blank"
             rel="noopener noreferrer"
@@ -398,13 +369,13 @@ const FAQ = ({ children }) => {
           What are the specific policies for my state?
         </Typography>
         <Typography variant="body1" component="p">
-          <i>The New York Times</i> has a list of{' '}
+          <i>The New York Times</i> lists{' '}
           <a
             target="_blank"
             rel="noopener noreferrer"
             href="https://www.nytimes.com/interactive/2020/us/coronavirus-stay-at-home-order.html"
           >
-            state-by-state policies
+            every state's policies
           </a>
           .
         </Typography>
@@ -500,7 +471,7 @@ const FAQ = ({ children }) => {
           Other questions
         </Typography>
         <Typography variant="h5" component="h5">
-          Where/when will I get more my stimulus check?
+          When will I get more my stimulus check?
         </Typography>
         <Typography variant="body1" component="p">
           Please visit the{' '}
