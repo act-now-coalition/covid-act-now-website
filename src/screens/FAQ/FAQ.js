@@ -22,7 +22,10 @@ const FAQ = ({ children }) => {
           the U.S. Intervention Model.
         </Typography>
         <Typography variant="body1" component="p">
-          We help decision makers understand when and how COVID will affect
+          The U.S. Intervention Model is a data platform that projects COVID
+          infections, hospitalizations, and deaths across the United States, as
+          well as model how public health interventions contain the spread of
+          COVID. We help decision makers understand when and how COVID will affect
           their communities in order to make better decisions that save lives.
         </Typography>
         <Typography variant="body1" component="p">
@@ -165,7 +168,7 @@ const FAQ = ({ children }) => {
             <li>UX Designer (Bonus if you write code!)</li>
             <li>Epidimiologist / Modeler</li>
             <li>Engineering Manager</li>
-            <li>
+          </ul>
               Is this you?{' '}
               <a
                 target="_blank"
@@ -174,8 +177,6 @@ const FAQ = ({ children }) => {
               >
                 Let us know
               </a>
-            </li>
-          </ul>
         </Typography>
 
         <Typography variant="h5" component="h5">
@@ -471,7 +472,7 @@ const FAQ = ({ children }) => {
           Other questions
         </Typography>
         <Typography variant="h5" component="h5">
-          When will I get more my stimulus check?
+          When will I get my stimulus check?
         </Typography>
         <Typography variant="body1" component="p">
           Please visit the{' '}
