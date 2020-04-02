@@ -4,16 +4,7 @@ import { StyledNewsletter } from './Newsletter.style';
 const Newsletter = () => {
   return (
     <StyledNewsletter>
-      <iframe
-        title="newsletter"
-        className="mj-w-res-iframe"
-        frameBorder="0"
-        scrolling="no"
-        marginHeight="0"
-        marginWidth="0"
-        src="https://app.mailjet.com/widget/iframe/1dtU/pZV"
-        width="100%"
-      ></iframe>
+      <span data-sumome-listbuilder-embed-id="a5e4680c84878d727c01eac4fbfb8bf4d3269f51339bf3499040aa642d59b6a2"></span>
     </StyledNewsletter>
   );
 };
