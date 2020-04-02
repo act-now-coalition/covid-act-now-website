@@ -81,16 +81,20 @@ export const StyledNoResultsWrapper = styled.div`
 
 export const StyledNoResults = styled.div`
   padding: 16px;
-  font-weight: bold;
+  font-weight: 600;
   font-size: 1rem;
-  display: flex;
-  align-items: center;
   justify-content: center;
   color: rgba(232, 0, 0, 1);
   background: rgba(232, 0, 0, 0.1);
   border: 1px solid rgba(232, 0, 0, 0.1);
   margin-top: 1rem;
   border-radius: 4px;
+  
+  a {
+    cursor: pointer;
+    margin-top: 1rem;
+    text-decoration: underline;
+  }
 `;
 
 export const MapContentWrapper = styled.div`

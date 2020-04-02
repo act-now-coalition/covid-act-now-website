@@ -103,6 +103,10 @@ function ModelPage() {
     history.push(goToLocation);
   }
 
+  const goTo = (route) => {
+    history.push(route);
+  };
+
   // No model data
   if (
     (!selectedCounty && !modelDatas) ||
@@ -311,8 +315,15 @@ function ModelPage() {
           <div>
             <StyledNoResultsWrapper>
               <StyledNoResults>
-                No cases have been reported or no data exists for{' '}
-                {selectedCounty.county}, {selectedCounty.state_code}
+                  <div>
+                    We either weren't able to get data for {selectedCounty.county}, {selectedCounty.state_code}, or no cases have yet been confirmed.
+                  </div>
+                  <div>
+                    We’re unable to produce our model for this county until we have data. Check back soon.
+                  </div>
+                  <div style={{marginTop: '1rem'}}>
+                    View projections for <a onClick={() => goTo('/state/'+ location)}>{locationName}</a>
+                  </div>
               </StyledNoResults>
             </StyledNoResultsWrapper>
             {renderMapContent()}

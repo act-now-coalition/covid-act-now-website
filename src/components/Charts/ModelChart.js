@@ -277,7 +277,9 @@ const ModelChart = ({
       >
         <Chart options={options} />
         {countyName ? (
-          <Disclaimer>
+          <Disclaimer
+            style={{ border: '2px solid #07d180', background: 'white' }}
+          >
             <DisclaimerContent>
               <b>County data is currently in beta.</b> See something wrong?{' '}
               <a
