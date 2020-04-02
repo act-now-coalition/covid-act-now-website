@@ -30,7 +30,7 @@ export default [
     ],
   },
   {
-    size: 8,
+    size: 4,
     name: 'Vincent Mor, PhD',
     avatarUrl: '/images/endorsers/vincent_mor__resized-100-100.jpg',
     profileUrl: 'https://vivo.brown.edu/display/vmor',
