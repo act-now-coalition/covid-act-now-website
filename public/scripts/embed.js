@@ -121,18 +121,13 @@
     for (i = 0; i < widgets.length; i++) {
       widget = widgets[i];
       iframe = document.createElement('iframe');
-      isDev = document.getAttribute('is-dev');
-      href = isDev
-        ? 'http://localhost:3000/embed/us/'
-        : 'https://www.covidactnow.org/embed/us/';
-      iframe.setAttribute(
-        'src',
-        'https://' + widget.getAttribute('data-state-id'),
-      );
+      href = 'https://covidactnow.org/embed/us/';
+      iframe.setAttribute('src', href + widget.getAttribute('data-state-id'));
       iframe.setAttribute('width', '350');
       iframe.setAttribute('height', '700');
       iframe.setAttribute('frameborder', '0');
       // iframe.setAttribute('scrolling', 'no');
+
       widget.parentNode.replaceChild(iframe, widget);
     }
   });
