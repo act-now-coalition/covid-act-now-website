@@ -11,19 +11,19 @@ import {
   FooterLogoWrapper,
 } from './Embed.style';
 
-export default function EmbedFooter() {
+export default function EmbedFooter({ onShare }) {
   return (
     <FooterContainer>
       <FooterButtonContainer>
-        <IconButton icon={<LaunchIcon />} iconPosition="right">
-          More&nbsp;
-        </IconButton>
         <IconButton
           target="_blank"
-          href="https://www.google.com"
-          icon={<ShareIcon />}
-          iconPosition="left"
+          href="https://www.covidactnow.org"
+          icon={<LaunchIcon />}
+          iconPosition="right"
         >
+          More&nbsp;
+        </IconButton>
+        <IconButton onClick={onShare} icon={<ShareIcon />} iconPosition="left">
           &nbsp;Share
         </IconButton>
       </FooterButtonContainer>

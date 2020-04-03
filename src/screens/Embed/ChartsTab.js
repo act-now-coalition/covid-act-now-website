@@ -14,6 +14,7 @@ export default function ChartsTab({
     <EmbedChartContainer>
       <ModelChart
         state={state}
+        height={'450'}
         county={county}
         subtitle="Hospitalizations over time"
         interventions={interventions}

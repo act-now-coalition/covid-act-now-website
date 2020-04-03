@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { STATES, STATE_TO_INTERVENTION } from 'enums';
 import Tabs from '@material-ui/core/Tabs';
@@ -22,7 +22,9 @@ import EmbedFooter from './EmbedFooter';
 export default function Embed() {
   const { id: location } = useParams();
 
+  const [summaryData, setSummaryData] = useState(null);
   const [tabState, setTabState] = useState(0);
+  const [shareDrawerOpen, setShareDrawerOpen] = useState(false);
   const handleTabChange = (_event, newTabValue) => setTabState(newTabValue);
 
   const modelDatasMap = useModelDatas(location, null);
@@ -31,13 +33,29 @@ export default function Embed() {
   const intervention = STATE_TO_INTERVENTION[location];
   const interventions = buildInterventionMap(modelDatasMap.stateDatas);
 
-  if (!modelDatasMap || !modelDatasMap.stateDatas) {
+  useEffect(() => {
+    console.log(`/data/${location}.summary.json`);
+    fetch(`/data/case_summary/${location}.summary.json`)
+      .then(data => data.json())
+      .then(setSummaryData)
+      .catch(err => {
+        throw err;
+      });
+  }, [location]);
+
+  if (!modelDatasMap || !modelDatasMap.stateDatas || !summaryData) {
     return null;
   }
 
+  const { cases, deaths } = summaryData;
+
   const baseline = interventions.baseline;
-  const { deaths } = baseline;
-  console.log({ baseline, deaths });
+  const totalPopulation = baseline.totalPopulation;
+  const populationPercentage =
+    Number.parseFloat(deaths / totalPopulation).toPrecision(2) * 100;
+
+  const deathsPercentage =
+    Number.parseFloat(deaths / cases).toPrecision(2) * 100;
 
   return (
     <EmbedContainer elevation="2">
@@ -54,7 +72,14 @@ export default function Embed() {
         </Tabs>
       </EmbedHeaderContainer>
       {tabState === 0 ? (
-        <ProjectionsTab intervention={intervention} />
+        <ProjectionsTab
+          cases={cases}
+          deaths={deaths}
+          intervention={intervention}
+          totalPopulation={totalPopulation}
+          deathsPercentage={deathsPercentage}
+          populationPercentage={populationPercentage}
+        />
       ) : (
         <ChartsTab
           state={STATES[location]}
@@ -68,5 +93,5 @@ export default function Embed() {
     </EmbedContainer>
   );
 }
-
+// TODO
 function LoadingState() {}

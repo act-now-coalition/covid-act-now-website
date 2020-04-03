@@ -14,35 +14,47 @@ import {
   Spacer,
 } from './Embed.style';
 
-export default function DataPage({ intervention, populationPercentage }) {
+export default function DataPage({
+  cases,
+  deaths,
+  intervention,
+  totalPopulation,
+  deathsPercentage,
+  populationPercentage,
+}) {
   return (
     <Grid container>
       <Grid container item xs={12}>
         <PaddedGridItem container item xs={12} p="2rem" direction="column">
           <H1Statistic mb="0.5rem">
-            {new Intl.NumberFormat().format(6000)}
+            {new Intl.NumberFormat().format(cases)}
           </H1Statistic>
           <H3Statistic>Total Cases</H3Statistic>
-          <H4Statistic>{populationPercentage}% of population</H4Statistic>
+          {/* <H4Statistic>{populationPercentage}% of population</H4Statistic> */}
         </PaddedGridItem>
         <Grid container item xs={12}>
           <Grid item xs={12}>
             <Spacer />
           </Grid>
-          <Grid container item xs={12}>
+          <Grid container item xs={12} align="center" justify="center">
             {[
+              // TODO
+              // {
+              //   total: 5370,
+              //   percentage: 10,
+              //   subHeading: 'Predicted recovered',
+              // },
               {
-                total: 5370,
-                percentage: 10,
-                subHeading: 'Predicted recovered',
+                total: deaths,
+                percentage: deathsPercentage,
+                subHeading: 'Deceased',
               },
-              { total: 60, percentage: 10, subHeading: 'Deceased' },
             ].map(GroupStat)}
           </Grid>
         </Grid>
       </Grid>
       <Grid container item xs={12}>
-        <TotalPopulation population={1232312} />
+        <TotalPopulation population={totalPopulation} />
         <CurrentIntervention intervention={intervention} />
       </Grid>
     </Grid>
