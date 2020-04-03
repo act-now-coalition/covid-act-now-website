@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory, useLocation, matchPath } from 'react-router-dom';
 import Logo from 'assets/images/logo';
+import { useEmbed } from 'utils/hooks';
 import MobileMenu from './MobileMenu';
 import Burger from './Burger';
 import {
@@ -43,8 +44,12 @@ const _AppBar = () => {
 
   const [panelIdx, setPanelIdx] = useState(getDefaultPanelId());
   const [open, setOpen] = useState(false);
-
   const locationPath = useLocation();
+  const { isEmbed } = useEmbed();
+
+  // Don't show in iFrame
+  if (isEmbed) return null;
+
   let match = matchPath(locationPath.pathname, {
     path: '/us/:id',
     exact: true,
@@ -62,7 +67,6 @@ const _AppBar = () => {
   }
 
   const locationName = match && match.params ? STATES[match.params.id] : '';
-
   const goTo = route => e => {
     e.preventDefault();
     setOpen(false);

@@ -1,4 +1,9 @@
 import styled from 'styled-components';
+import Button from '@material-ui/core/Button';
+
+export const EmbedButton = styled(Button)`
+  height: 40px;
+`;
 
 export const Wrapper = styled.div``;
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { INTERVENTIONS, INTERVENTION_COLOR_MAP } from 'enums';
+import { INTERVENTIONS, INTERVENTION_COLOR_MAP, COLORS } from 'enums';
 import { snakeCase } from 'lodash';
 
 const noActionColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.LIMITED_ACTION];
@@ -17,7 +17,7 @@ export const ChartContainer = styled.section`
 `;
 
 export const Disclaimer = styled.div`
-  background: #f2f2f2;
+  background: ${COLORS.LIGHTGRAY};
   margin: 2rem;
   padding: 1rem;
   border-radius: 4px;
