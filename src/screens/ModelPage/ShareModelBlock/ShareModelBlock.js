@@ -90,7 +90,7 @@ const ShareModelBlock = ({ location, county, embedSnippet }) => {
       <Snackbar
         message="Embed code copied!"
         open={embedCopySuccess}
-        autoHideDuratiion={3000}
+        autoHideDuration={3000}
         onClose={() => setEmbedCopySuccess(false)}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       />
