@@ -24,6 +24,12 @@ export default function App() {
           <AppBar />
           <Switch>
             <Route exact path="/" component={HomePage} />
+            <Route exact path="/us/:id" component={ModelPage} />
+            <Route
+              exact
+              path="/us/:id/county/:countyId"
+              component={ModelPage}
+            />
             <Route exact path="/state/:id" component={ModelPage} />
             <Route
               exact

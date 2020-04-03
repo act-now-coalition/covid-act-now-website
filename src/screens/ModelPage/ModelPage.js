@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet';
 import { useParams, useHistory } from 'react-router-dom';
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020';
 import CountyMap from 'components/CountyMap/CountyMap';
+import { MAP_FILTERS } from './Enums/MapFilterEnums';
 import Outcomes from './Outcomes/Outcomes';
 import CallToAction from './CallToAction/CallToAction';
 import Map from 'components/Map/Map';
@@ -50,15 +51,17 @@ const shelterInPlaceWorstCaseColor =
   INTERVENTION_COLOR_MAP[INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE];
 
 function ModelPage() {
-  const [mapOption, setMapOption] = useState('STATE');
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
   const { id: location, countyId } = useParams();
+  const _location = location.toUpperCase();
 
+  const [mapOption, setMapOption] = useState(
+    _location === MAP_FILTERS.DC ? MAP_FILTERS.NATIONAL : MAP_FILTERS.STATE,
+  );
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   let countyOption = null;
   if (countyId) {
     countyOption = _.find(
-      US_STATE_DATASET.state_county_map_dataset[location].county_dataset,
+      US_STATE_DATASET.state_county_map_dataset[_location].county_dataset,
       ['county_url_name', countyId],
     );
   }
@@ -71,13 +74,12 @@ function ModelPage() {
   const history = useHistory();
 
   let modelDatas = null;
-  const modelDatasMap = useModelDatas(location, selectedCounty);
-  console.log('modelDatasMap', modelDatasMap, selectedCounty);
+  const modelDatasMap = useModelDatas(_location, selectedCounty);
 
-  const locationName = STATES[location];
+  const locationName = STATES[_location];
   let countyName = selectedCounty ? selectedCounty.county : null;
 
-  const intervention = STATE_TO_INTERVENTION[location];
+  const intervention = STATE_TO_INTERVENTION[_location];
   const datasForView = selectedCounty
     ? modelDatasMap.countyDatas
     : modelDatasMap.stateDatas;
@@ -117,7 +119,7 @@ function ModelPage() {
 
   let title;
   let description;
-  const canonical = `/state/${location}`;
+  const canonical = `/us/${_location.toLowerCase()}`;
   if (intervention === INTERVENTIONS.SHELTER_IN_PLACE) {
     title = `Keep staying at home in ${locationName}.`;
     description = `Avoiding hospital overload depends heavily on your cooperation.`;
@@ -130,13 +132,9 @@ function ModelPage() {
     return (
       <SearchHeaderWrapper>
         <SearchHeader
-          mapOption={mapOption}
           setMapOption={setMapOption}
           mobileMenuOpen={mobileMenuOpen}
           setMobileMenuOpen={setMobileMenuOpen}
-          location={location}
-          locationName={locationName}
-          countyName={location}
         />
       </SearchHeaderWrapper>
     );
@@ -160,7 +158,7 @@ function ModelPage() {
         <MainContentInner>
           {stateInterventions && (
             <StateHeader
-              location={location}
+              location={_location}
               locationName={locationName}
               countyName={countyName}
               intervention={intervention}
@@ -232,8 +230,10 @@ function ModelPage() {
                       create surge capacity in hospitals and develop therapeutic
                       drugs that may have potential to lower hospitalization and
                       fatality rates from COVID.{' '}
-                      <a href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
-                         rel="noreferrer noopener">
+                      <a
+                        href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
+                        rel="noreferrer noopener"
+                      >
                         See full scenario definitions here.
                       </a>
                     </li>
@@ -242,15 +242,17 @@ function ModelPage() {
                       Wuhan-style Lockdown to achieve full containment. However,
                       it is unclear at this time how you could manage newly
                       introduced infections.{' '}
-                      <a href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
-                         rel="noreferrer noopener">
+                      <a
+                        href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
+                        rel="noreferrer noopener"
+                      >
                         See full scenario definitions here.
                       </a>
                     </li>
                   </ul>
 
                   <ShareModelBlock
-                    location={location}
+                    location={_location}
                     county={selectedCounty}
                   />
                 </Content>
@@ -267,24 +269,26 @@ function ModelPage() {
       <MapContentWrapper mobileMenuOpen={mobileMenuOpen}>
         <MapMenuMobileWrapper>
           <MapMenuItem
-            onClick={() => setMapOption('NATIONAL')}
-            selected={mapOption === 'NATIONAL'}
+            onClick={() => setMapOption(MAP_FILTERS.NATIONAL)}
+            selected={mapOption === MAP_FILTERS.NATIONAL}
           >
             United States
           </MapMenuItem>
-          <MapMenuItem
-            onClick={() => setMapOption('STATE')}
-            selected={mapOption === 'STATE'}
-          >
-            {locationName}
-          </MapMenuItem>
+          {_location !== MAP_FILTERS.DC && (
+            <MapMenuItem
+              onClick={() => setMapOption(MAP_FILTERS.STATE)}
+              selected={mapOption === MAP_FILTERS.STATE}
+            >
+              {locationName}
+            </MapMenuItem>
+          )}
         </MapMenuMobileWrapper>
         <MapContentInner>
-          {mapOption === 'NATIONAL' && (
+          {mapOption === MAP_FILTERS.NATIONAL && (
             <Map hideLegend={true} setMobileMenuOpen={setMobileMenuOpen} />
           )}
 
-          {mapOption === 'STATE' && (
+          {mapOption === MAP_FILTERS.STATE && _location !== MAP_FILTERS.DC && (
             <CountyMapAltWrapper>
               <CountyMap
                 fill={INTERVENTION_COLOR_MAP[intervention]}
@@ -292,13 +296,15 @@ function ModelPage() {
                 selectedCounty={selectedCounty}
                 setSelectedCounty={fullFips => {
                   const county = _.find(
-                    US_STATE_DATASET.state_county_map_dataset[location]
+                    US_STATE_DATASET.state_county_map_dataset[_location]
                       .county_dataset,
                     ['full_fips_code', fullFips],
                   );
 
                   setRedirectTarget(
-                    `/state/${location}/county/${county.county_url_name}`,
+                    `/us/${_location.toLowerCase()}/county/${
+                      county.county_url_name
+                    }`,
                   );
                   setMobileMenuOpen(false);
                   setSelectedCounty(county);
@@ -340,9 +346,9 @@ function ModelPage() {
                 </div>
                 <div style={{ marginTop: '1rem' }}>
                   View projections for{' '}
-                  <a onClick={() => goTo('/state/' + location)}>
+                  <span onClick={() => goTo('/us/' + _location.toLowerCase())}>
                     {locationName}
-                  </a>
+                  </span>
                 </div>
               </StyledNoResults>
             </StyledNoResultsWrapper>

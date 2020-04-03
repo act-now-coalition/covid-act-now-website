@@ -94,7 +94,7 @@ export const StyledNoResults = styled.div`
   margin-top: 1rem;
   border-radius: 4px;
 
-  a {
+  span {
     cursor: pointer;
     margin-top: 1rem;
     text-decoration: underline;

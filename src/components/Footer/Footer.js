@@ -26,8 +26,7 @@ const Footer = ({ children }) => {
   const history = useHistory();
   const { pathname } = useLocation();
 
-  const isMapPage = pathname.startsWith('/us')
-      || pathname.startsWith('/state');
+  const isMapPage = pathname.startsWith('/us') || pathname.startsWith('/state');
 
   const goTo = route => {
     history.push(route);
