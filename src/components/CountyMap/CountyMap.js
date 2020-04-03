@@ -32,6 +32,7 @@ const CountyMap = ({
     });
   }, []);
 
+  // eslint-disable-next-line no-unused-vars
   const colorScale = scaleQuantile()
     .domain(data.map(d => d.unemployment_rate))
     .range([
@@ -67,6 +68,7 @@ const CountyMap = ({
             <Geographies geography={counties}>
               {({ geographies }) =>
                 geographies.map(geo => {
+                  // eslint-disable-next-line no-unused-vars
                   const cur = data.find(s => s.id === geo.properties.GEOID);
                   return (
                     <Geography
