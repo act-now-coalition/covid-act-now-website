@@ -26,7 +26,7 @@ const SearchHeader = ({
   const history = useHistory();
   const isMobile = useMediaQuery('(max-width:1350px)');
   const isNarrowMobile = useMediaQuery('(max-width:500px)');
-  const [isGlobalSelectorFocused, setIsGlobalSelectorFocused] = useState(false);
+  const [isGlobalSelectorOpen, setIsGlobalSelectorOpen] = useState(false);
 
   const handleSelectChange = option => {
     let route = `/state/${option.state_code}`;
@@ -54,7 +54,7 @@ const SearchHeader = ({
             <GlobalSelector
               extendRight={true}
               handleChange={handleSelectChange}
-              onIsFocusedChanged={setIsGlobalSelectorFocused}
+              handleIsOpen={setIsGlobalSelectorOpen}
             />
           </SelectorWrapper>
           {isMobile && (
@@ -62,8 +62,8 @@ const SearchHeader = ({
               onClick={() => toggleMobileMenu()}
               isActive={mobileMenuOpen}
             >
-              {!isGlobalSelectorFocused && !isNarrowMobile && (
-                <>See county data&nbsp;&nbsp;</>
+              {!isGlobalSelectorOpen && !isNarrowMobile && (
+                <>Find on map&nbsp;&nbsp;</>
               )}
               <MapIcon />
             </MapToggle>

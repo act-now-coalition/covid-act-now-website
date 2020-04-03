@@ -69,7 +69,7 @@ const CountyItem = ({ dataset }) => {
   );
 };
 
-const GlobalSelector = ({ handleChange, extendRight, onIsFocusedChanged }) => {
+const GlobalSelector = ({ handleChange, extendRight, handleIsOpen }) => {
   const { id: location } = useParams();
 
   const stateDataset = US_STATE_DATASET.state_dataset;
@@ -214,7 +214,7 @@ const GlobalSelector = ({ handleChange, extendRight, onIsFocusedChanged }) => {
         getRootProps,
         openMenu,
       }) => {
-        if (onIsFocusedChanged) onIsFocusedChanged(isOpen);
+        if (handleIsOpen) handleIsOpen(isOpen);
         return (
           <StyledDropDownWrapper>
             <StyledInputWrapper
