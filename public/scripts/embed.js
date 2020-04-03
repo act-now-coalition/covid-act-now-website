@@ -121,7 +121,7 @@
     for (i = 0; i < widgets.length; i++) {
       widget = widgets[i];
       iframe = document.createElement('iframe');
-      href = 'https://www.covidactnow.org/embed/us/';
+      href = 'https://covidactnow.org/embed/us/';
       iframe.setAttribute('src', href + widget.getAttribute('data-state-id'));
       iframe.setAttribute('width', '350');
       iframe.setAttribute('height', '700');
