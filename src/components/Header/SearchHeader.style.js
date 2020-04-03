@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import palette from 'assets/theme/palette';
 
 const BORDER_COLOR = 'rgba(0,0,0,0.12)';
 
@@ -7,7 +8,8 @@ export const Wrapper = styled.div`
   padding: 1rem;
   background-color: white;
   @media (min-width: 1350px) {
-    padding: 1rem 0;
+    padding: 1rem 0 calc(1rem + 1px) 0; /* The extra pixel aligns the bottom border with the adjascent map box */
+    background-color: #f2f2f2;
   }
 `;
 
@@ -43,10 +45,11 @@ export const MapToggle = styled.div`
   align-items: center;
   border-radius: 4px;
   margin-left: 1rem;
-  background: ${props => (props.isActive ? 'red' : 'transparent')};
+  background: ${props =>
+    props.isActive ? palette.secondary.main : 'transparent'};
 
   svg path {
-    fill: ${props => (props.isActive ? 'white' : 'red')};
+    fill: ${props => (props.isActive ? 'white' : palette.secondary.main)};
   }
 `;
 
@@ -77,7 +80,7 @@ export const MapMenuItem = styled.div`
   flex: 1;
   height: inherit;
   font-weight: 600;
-  color: ${props => (props.selected ? 'red' : 'inherit')};
+  color: ${props => (props.selected ? palette.secondary.main : 'inherit')};
   background: ${props => (props.selected ? 'white' : 'transparent')};
   box-shadow: ${props =>
     props.selected ? '0px 2px 2px rgba(0, 0, 0, 0.16)' : 'none'};

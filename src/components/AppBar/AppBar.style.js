@@ -19,13 +19,18 @@ export const Wrapper = styled.div`
 
 export const StyledAppBar = styled(AppBar)`
   box-shadow: none;
-  border-bottom: 1px solid #e3e3e3;
+  border-bottom: 1px solid white;
+
+  @media (min-width: 1350px) {
+    border-bottom: 1px solid #e3e3e3;
+  }
 `;
 
 export const Left = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
   * {
     font-weight: 900;
     margin-right: 16px;
@@ -33,7 +38,6 @@ export const Left = styled.div`
   svg {
     width: 32px;
     height: 32px;
-    cursor: pointer;
   }
 `;
 
@@ -41,28 +45,38 @@ export const StyledDesktopMenu = styled(Tabs)`
   display: none;
 
   @media (min-width: ${mobileBreakpoint}) {
-    display: inline-block;
+    display: flex;
+    align-items: center;
   }
 `;
 
-export const StyledTabs = styled(Tabs)``;
+export const StyledTabs = styled(Tabs)`
+  min-height: 32px;
+`;
 
 export const StyledTab = styled(Tab)`
   min-width: 36px;
-  height: 64px;
+  min-height: 32px;
   margin-left: 15px;
-  font-size: 14px;
+  font-size: 1.125rem;
   font-weight: bold;
-  letter-spacing: 0.1em;
+  letter-spacing: 0em;
   padding: 0;
+  color: ${palette.black};
+  opacity: 1;
+  text-transform: none;
 
   &[aria-selected='true'] {
     color: ${palette.secondary.main};
   }
 
   @media (min-width: ${mobileBreakpoint}) {
-    margin-left: 28px;
-    font-size: 14px;
+    margin-left: 2rem;
+    font-size: 1rem;
+  }
+
+  @media (min-width: 1350px) {
+    height: 64px;
   }
 `;
 
@@ -127,12 +141,11 @@ export const StyledMobileMenu = styled.nav`
 export const StyledMenu = styled.nav`
   display: flex;
   flex-direction: column;
-  background: white;
+  background: #f2f2f2;
   border-top: 1px solid #e3e3e3;
   transform: ${({ open }) => (open ? 'translateY(64px)' : 'translateY(-100%)')};
   height: 100vh;
   text-align: left;
-  padding: 1rem 2rem 0;
   position: absolute;
   top: 0;
   left: 0;
@@ -140,10 +153,25 @@ export const StyledMenu = styled.nav`
 
   a {
     cursor: pointer;
-    font-size: 2rem;
-    padding: 1.5rem 0;
-    color: #0d0c1d;
+    font-size: 1rem;
+    color: ${palette.black};
     text-decoration: none;
+    font-weight: bold;
+    padding: 2rem 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    background: white;
+
+    &:hover,
+    &:active {
+      background: #f2f2f2;
+    }
+
+    display: flex;
+    align-items: center;
+
+    svg {
+      margin-right: 1rem;
+    }
   }
 `;
 

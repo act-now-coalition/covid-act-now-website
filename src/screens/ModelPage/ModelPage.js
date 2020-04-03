@@ -143,7 +143,6 @@ function ModelPage() {
   };
 
   const renderMainContent = () => {
-
     if (
       locationName == 'New York' &&
       [
@@ -328,15 +327,21 @@ function ModelPage() {
           <div>
             <StyledNoResultsWrapper>
               <StyledNoResults>
-                  <div>
-                    We either weren't able to get data for {selectedCounty.county}, {selectedCounty.state_code}, or no cases have yet been confirmed.
-                  </div>
-                  <div>
-                    We’re unable to produce our model for this county until we have data. Check back soon.
-                  </div>
-                  <div style={{marginTop: '1rem'}}>
-                    View projections for <a onClick={() => goTo('/state/'+ location)}>{locationName}</a>
-                  </div>
+                <div>
+                  We either weren't able to get data for {selectedCounty.county}
+                  , {selectedCounty.state_code}, or no cases have yet been
+                  confirmed.
+                </div>
+                <div>
+                  We’re unable to produce our model for this county until we
+                  have data. Check back soon.
+                </div>
+                <div style={{ marginTop: '1rem' }}>
+                  View projections for{' '}
+                  <a onClick={() => goTo('/state/' + location)}>
+                    {locationName}
+                  </a>
+                </div>
               </StyledNoResults>
             </StyledNoResultsWrapper>
             {renderMapContent()}
