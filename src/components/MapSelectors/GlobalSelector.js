@@ -69,7 +69,7 @@ const CountyItem = ({ dataset }) => {
   );
 };
 
-const GlobalSelector = ({ handleChange, extendRight }) => {
+const GlobalSelector = ({ handleChange, extendRight, handleIsOpen }) => {
   const { id: location } = useParams();
 
   const stateDataset = US_STATE_DATASET.state_dataset;
@@ -213,46 +213,49 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
         selectedItem,
         getRootProps,
         openMenu,
-      }) => (
-        <StyledDropDownWrapper>
-          <StyledInputWrapper
-            {...getRootProps(
-              {
-                isOpen,
-              },
-              { suppressRefError: true },
-            )}
-          >
-            <StyledInputIcon>
-              <SearchIcon />
-            </StyledInputIcon>
-            <StyledInput
-              {...getInputProps({
-                isOpen,
-                onFocus: () => {
-                  openMenu();
+      }) => {
+        if (handleIsOpen) handleIsOpen(isOpen);
+        return (
+          <StyledDropDownWrapper>
+            <StyledInputWrapper
+              {...getRootProps(
+                {
+                  isOpen,
                 },
-                placeholder: 'Find your county or state',
+                { suppressRefError: true },
+              )}
+            >
+              <StyledInputIcon>
+                <SearchIcon />
+              </StyledInputIcon>
+              <StyledInput
+                {...getInputProps({
+                  isOpen,
+                  onFocus: () => {
+                    openMenu();
+                  },
+                  placeholder: 'Find your county or state',
+                })}
+              />
+            </StyledInputWrapper>
+            <StyledMenu
+              {...getMenuProps({
+                isOpen,
+                extendRight,
               })}
-            />
-          </StyledInputWrapper>
-          <StyledMenu
-            {...getMenuProps({
-              isOpen,
-              extendRight,
-            })}
-          >
-            {isOpen
-              ? getMatchedItems(
-                  getItemProps,
-                  inputValue,
-                  highlightedIndex,
-                  selectedItem,
-                )
-              : null}
-          </StyledMenu>
-        </StyledDropDownWrapper>
-      )}
+            >
+              {isOpen
+                ? getMatchedItems(
+                    getItemProps,
+                    inputValue,
+                    highlightedIndex,
+                    selectedItem,
+                  )
+                : null}
+            </StyledMenu>
+          </StyledDropDownWrapper>
+        );
+      }}
     </Downshift>
   );
 };
