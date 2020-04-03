@@ -1,19 +1,32 @@
 import React from 'react';
-import Logo from 'assets/images/logo';
-
-import { useHistory } from 'react-router-dom';
+import Logo from 'assets/images/footerlogoDarkWithURL';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import {
   StyledFooter,
-  StyledFooterHeader,
-  StyledFooterBody,
+  StyledFooterContent,
   StyledFooterBodyLinks,
-  StyledFooterBodyLinksSection,
-  StyledFooterBodyCallout,
+  StyledFooterInner,
+  StyledFooterBodyNav,
+  StyledFooterBodyButton,
+  StyledFooterDivider,
 } from './Footer.style';
+
+const FooterButton = props => (
+  <StyledFooterBodyButton
+    href="https://forms.gle/JTCcqrGb5yzoD6hg6"
+    target="_blank"
+    {...props}
+  >
+    Contribute to this tool
+  </StyledFooterBodyButton>
+);
 
 const Footer = ({ children }) => {
   const history = useHistory();
+  const { pathname } = useLocation();
+
+  const isMapPage = pathname.startsWith('/us') || pathname.startsWith('/state');
 
   const goTo = route => {
     history.push(route);
@@ -24,32 +37,27 @@ const Footer = ({ children }) => {
   return (
     <div>
       <StyledFooter>
-        <StyledFooterHeader>
-          <div></div>
-          <Logo />
-          <div></div>
-        </StyledFooterHeader>
-        <StyledFooterBody>
-          <StyledFooterBodyLinks>
-            <div>
-              <span onClick={() => goTo('/')}>MAP</span>
-              <span onClick={() => goTo('/about')}>ABOUT</span>
-              <span onClick={() => goTo('/model')}>MODEL</span>
-              <span onClick={() => goTo('/endorsements')}>ENDORSEMENTS</span>
-              <StyledFooterBodyLinksSection>
-                <span onClick={() => goTo('/contact')}>CONTACT</span>
-                <span onClick={() => goTo('/terms')}>TERMS</span>
-              </StyledFooterBodyLinksSection>
-            </div>
-          </StyledFooterBodyLinks>
-          <StyledFooterBodyCallout>
-            Press contact:{' '}
-            <a href="mailto:press@covidactnow.org">press@covidactnow.org</a>
-            <br />
-            <a href="https://forms.gle/JTCcqrGb5yzoD6hg6">Contribute</a> to this
-            tool
-          </StyledFooterBodyCallout>
-        </StyledFooterBody>
+        <StyledFooterInner isMapPage={isMapPage}>
+          <StyledFooterContent>
+            <Logo />
+            <StyledFooterBodyNav>
+              <span onClick={() => goTo('/')}>Map</span>
+              <span onClick={() => goTo('/about')}>FAQ</span>
+              <span onClick={() => goTo('/model')}>Model</span>
+              <span onClick={() => goTo('/endorsements')}>Endorsements</span>
+            </StyledFooterBodyNav>
+            <FooterButton className="footer__narrow-screen-only" />
+            <StyledFooterDivider />
+            <StyledFooterBodyLinks>
+              <span onClick={() => goTo('/contact')}>Contact</span>
+              {' ∙ '}
+              <span onClick={() => goTo('/terms')}>Terms</span>
+              {' ∙ '}
+              <a href="mailto:press@covidactnow.org">Press</a>
+            </StyledFooterBodyLinks>
+          </StyledFooterContent>
+          <FooterButton className="footer__wide-screen-only" />
+        </StyledFooterInner>
       </StyledFooter>
     </div>
   );

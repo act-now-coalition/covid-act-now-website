@@ -188,7 +188,7 @@ export class Model {
     let infectedSoFar = 0;
     for (let i = 0; i < this.infected.length; i++) {
       infectedSoFar += this.infected[i];
-      this.cumulativeInfected.push(infectedSoFar * (2/3));
+      this.cumulativeInfected.push(infectedSoFar * (2 / 3));
     }
 
     this.cumulativeDead = this.cumulativeDeaths[
@@ -231,7 +231,6 @@ export class Model {
       const estimatedTimeStamp = startDate.getTime() + deltaSecs;
       this.dateOverwhelmed = new Date(estimatedTimeStamp);
     }
-
   }
 
   get durationLabelMonths() {
@@ -279,13 +278,13 @@ export class Model {
   idxForDay = day => Math.ceil(day / 4);
 
   cumulativeInfectedAfter(days) {
-    return this.cumulativeInfected[this.cumulativeInfected.length-1];
+    return this.cumulativeInfected[this.cumulativeInfected.length - 1];
   }
   cumulativeDeadAfter(days) {
-    return this.cumulativeDeaths[this.cumulativeDeaths.length-1];
+    return this.cumulativeDeaths[this.cumulativeDeaths.length - 1];
   }
   dateAfter(days) {
-    return this.dates[this.dates.length-1];
+    return this.dates[this.dates.length - 1];
   }
   getColumn(columnName, days) {
     return this.dates

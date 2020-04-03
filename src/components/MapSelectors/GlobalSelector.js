@@ -20,6 +20,7 @@ import {
 
 import {
   StyledState,
+  StyledCounty,
   StyledResultsMenuOption,
   StyledResultsMenuSubText,
 } from './MapSelectors.style';
@@ -52,8 +53,19 @@ const StateItem = ({ dataset }) => {
 };
 
 const CountyItem = ({ dataset }) => {
+  const intervention = STATE_TO_INTERVENTION[dataset.state_code];
+
   return (
     <StyledResultsMenuOption hasData={dataset.hasData}>
+      <div style={{ marginLeft: '0', marginRight: '.75rem' }}>
+        <StyledCounty>
+          <StateCircleSvg
+            ratio={0.8}
+            intervention={intervention}
+            state={dataset.state_code}
+          />
+        </StyledCounty>
+      </div>
       <div>
         <div>
           {dataset.county}, {dataset.state_code}
@@ -69,7 +81,7 @@ const CountyItem = ({ dataset }) => {
   );
 };
 
-const GlobalSelector = ({ handleChange, extendRight, handleIsOpen }) => {
+const GlobalSelector = ({ handleChange, extendRight }) => {
   const { id: location } = useParams();
 
   const stateDataset = US_STATE_DATASET.state_dataset;
@@ -118,7 +130,7 @@ const GlobalSelector = ({ handleChange, extendRight, handleIsOpen }) => {
 
     if (location && !inputValue) {
       const topCountiesByParamState = chain(countyDataset)
-        .filter(item => item.state_code === location)
+        .filter(item => item.state_code === location.toUpperCase())
         .map(item => ({
           ...item,
           id: item.full_fips_code,
@@ -163,6 +175,7 @@ const GlobalSelector = ({ handleChange, extendRight, handleIsOpen }) => {
           .uniqBy('id')
           .sortBy('population')
           .reverse()
+          .slice(0, 50)
           .value();
 
         matchedItems.push(...countyMatches);
@@ -214,7 +227,6 @@ const GlobalSelector = ({ handleChange, extendRight, handleIsOpen }) => {
         getRootProps,
         openMenu,
       }) => {
-        if (handleIsOpen) handleIsOpen(isOpen);
         return (
           <StyledDropDownWrapper>
             <StyledInputWrapper

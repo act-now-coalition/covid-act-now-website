@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../App.css'; /* optional for styling like the :hover pseudo-class */
-import USAMap from 'react-usa-map';
+import USAMap from 'components/Map/USAMap/USAMap';
 import { useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import {
@@ -36,7 +36,7 @@ function Map({ hideLegend = false, setMobileMenuOpen }) {
       [currState]: {
         fill: interventionColor,
         clickHandler: event => {
-          goToStatePage(`/state/${currState}`);
+          goToStatePage(`/us/${currState.toLowerCase()}`);
 
           if (setMobileMenuOpen) {
             setMobileMenuOpen(false);

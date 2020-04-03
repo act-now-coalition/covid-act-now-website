@@ -21,7 +21,7 @@ const HomePageHeader = ({
   const history = useHistory();
 
   const handleSelectChange = option => {
-    let route = `/state/${option.state_code}`;
+    let route = `/us/${option.state_code.toLowerCase()}`;
 
     if (option.county_url_name) {
       route = `${route}/county/${option.county_url_name}`;
