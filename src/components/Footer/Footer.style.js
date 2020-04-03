@@ -1,87 +1,156 @@
 import styled from 'styled-components';
+import palette from 'assets/theme/palette';
 
 export const StyledFooter = styled.div`
-  padding: 1rem;
-  background: white;
+  padding: 2em;
+  box-sizing: content-box;
+  background: ${palette.black};
+  color: ${palette.white};
 
-  @media (min-width: 600px) {
-    padding: 2rem;
+  img {
+    height: 32px;
+    align-self: flex-start;
   }
 `;
 
-export const StyledFooterBody = styled.div`
+export const StyledFooterInner = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-`;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
 
-export const StyledFooterBodyLinksSection = styled.div`
-  @media (min-width: 600px) {
-    margin-top: 2rem;
+  @media (min-width: 900px) {
+    padding: 2rem;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
   }
 `;
 
-export const StyledFooterBodyLinks = styled.div`
-  flex: 0 0 100%;
+export const StyledFooterContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media (min-width: 900px) {
+    align-items: flex-start;
+  }
+`;
+
+export const StyledFooterBodyNav = styled.div`
   text-align: center;
   padding: 2rem 0 1rem;
+  padding-bottom: 0;
 
-  @media (min-width: 600px) {
-    flex: 0 0 40%;
-    padding: 3rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (min-width: 900px) {
+    text-align: left;
+    flex-direction: row;
+    padding-top: 0.5rem;
   }
 
-  span {
+  > span {
     cursor: pointer;
     display: block;
-    margin: 0 0 1.5rem;
-  }
+    margin-bottom: 1rem;
+    font-weight: bold;
 
-  @media (min-width: 600px) {
-    flex: 0 0 40%;
-    padding: 3rem 0;
-    span {
-      display: inline-block;
-      margin: 0 1rem;
+    @media (min-width: 900px) {
+      margin-bottom: 0;
+      margin-right: 1em;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
     }
   }
 `;
 
-export const StyledFooterBodyCallout = styled.div`
-  flex: 0 0 100%;
+export const StyledFooterActions = styled.div`
+  display: flex;
+  @media (min-width: 900px) {
+    flex-direction: column;
+    align-items: center;
+  }
+`;
+
+export const StyledFooterBodyLinks = styled.div`
+  display: flex;
   text-align: center;
-  padding: 1rem 0 2rem;
 
-  @media (min-width: 600px) {
-    flex: 0 0 40%;
-    padding: 3rem;
+  * {
+    margin: 0 0.5rem;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  span,
+  a {
+    text-decoration: underline;
+    color: white;
+    cursor: pointer;
+
+    @media (min-width: 900px) {
+      font-size: 0.875rem;
+    }
   }
 `;
 
-export const StyledFooterCaption = styled.div`
+const buttonHeight = 56;
+export const StyledFooterBodyButton = styled.a`
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+
+  height: ${buttonHeight}px;
+  border-radius: ${buttonHeight / 2}px;
+  border: 1px solid white;
+  background: white;
+  padding: 0 1rem;
+
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+
+  &.footer__narrow-screen-only {
+    margin-top: 2rem;
+    margin-bottom: 0;
+
+    @media (min-width: 900px) {
+      display: none;
+    }
+  }
+
+  &.footer__wide-screen-only {
+    display: none;
+    @media (min-width: 900px) {
+      display: flex;
+    }
+  }
+
+  @media (min-width: 900px) {
+    margin-top: 0rem;
+    margin-bottom: 2em;
+  }
 `;
 
-export const StyledFooterHeader = styled.div`
-  padding: 0 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  svg {
-    width: 65px;
-    height: 65px;
-  }
-
-  @media (min-width: 600px) {
-    padding: 0 4rem;
-  }
-
-  div {
-    width: 35%;
-    height: 1px;
-    background: black;
-  }
+export const StyledFooterDivider = styled.div`
+  max-height: 1px;
+  height: 1px;
+  width: 2rem;
+  background: rgba(255, 255, 255, 0.32);
+  margin: 2rem 0;
 `;

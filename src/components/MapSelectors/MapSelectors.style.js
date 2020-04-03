@@ -45,3 +45,8 @@ export const StyledState = styled.div`
   position: relative;
   top: 3px;
 `;
+
+export const StyledCounty = styled.div`
+  position: relative;
+  top: 3px;
+`;
