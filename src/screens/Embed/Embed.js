@@ -67,10 +67,12 @@ export default function Embed() {
           intervention={intervention}
           interventions={interventions}
         />
-        <Tabs value={tabState} variant="fullWidth" onChange={handleTabChange}>
+        {/* Remove this break once tabs are back */}
+        <br />
+        {/* <Tabs value={tabState} variant="fullWidth" onChange={handleTabChange}>
           <Tab label="Projections" />
           <Tab label="Charts" />
-        </Tabs>
+        </Tabs> */}
       </EmbedHeaderContainer>
       {tabState === 0 ? (
         <ProjectionsTab

@@ -16,6 +16,7 @@ export function useEmbed() {
     'width="350" ' +
     'height="700" ' +
     'frameBorder="0" ' +
+    'scrolling="no"' +
     '></iframe>';
 
   return { isEmbed, iFrameCodeSnippet };
