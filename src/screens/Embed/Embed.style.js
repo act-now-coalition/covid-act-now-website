@@ -19,6 +19,9 @@ export const EmbedHeaderContainer = styled(Box)`
 export const EmbedContainer = styled(Paper)`
   margin: 3px;
   overflow: hidden;
+  border-radius: 3px;
+  max-height: 600px;
+  overflow-y: scroll;
 `;
 
 // DATA PAGE STYLES
