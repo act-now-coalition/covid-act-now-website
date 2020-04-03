@@ -34,3 +34,6 @@ yarn-error.log*
 package-lock.json
 
 /.nyc_output/
+
+# a scratch file for lil scripts/notes
+scratch

@@ -9359,30 +9359,6 @@
         }
       ]
     },
-    "DC": {
-      "dataset": [
-        {
-          "counties": [
-            "District of Columbia"
-          ],
-          "population": 702455
-        }
-      ],
-      "county_dataset": [
-        {
-          "county": "District of Columbia",
-          "county_url_name": "district_of_columbia",
-          "county_fips_code": "001",
-          "state_fips_code": "11",
-          "state_code": "DC",
-          "full_fips_code": "11001",
-          "cities": [
-            "Washington"
-          ],
-          "population": 705749
-        }
-      ]
-    },
     "DE": {
       "dataset": [
         {
