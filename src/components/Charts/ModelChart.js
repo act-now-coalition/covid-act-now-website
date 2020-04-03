@@ -301,7 +301,7 @@ const ModelChart = ({
               placement="bottom"
             >
               <span>
-                <strong>Last updated March 31st</strong>.{' '}
+                <strong>Last updated April 2nd</strong>.{' '}
               </span>
             </LightTooltip>
             This model updates every 24 hours and is intended to help make fast
