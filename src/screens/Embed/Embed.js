@@ -20,7 +20,8 @@ import ChartsTab from './ChartsTab';
 import EmbedFooter from './EmbedFooter';
 
 export default function Embed() {
-  const { id: location } = useParams();
+  const { id: _location } = useParams();
+  const location = _location.toUpperCase();
 
   const [summaryData, setSummaryData] = useState(null);
   const [tabState, setTabState] = useState(0);

@@ -42,7 +42,7 @@ export default function App() {
             <Route path="/terms" component={Terms} />
             <Route path="/privacy" component={Privacy} />
             <Route path="/compare" component={CompareModels} />
-            <Route path="/embed/state/:id" component={Embed} />
+            <Route path="/embed/us/:id" component={Embed} />
             {/* <Route path="/donate" component={ComingSoon} /> */}
             {/* /model, /contact, and /about are deprecated in favor of /faq */}
             <Route path="/model">
