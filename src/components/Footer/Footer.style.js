@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import palette from 'assets/theme/palette';
 
 export const StyledFooter = styled.div`
-  padding: 2em;
+  padding: 2rem 0;
   box-sizing: content-box;
   background: ${palette.black};
   color: ${palette.white};
@@ -22,10 +22,18 @@ export const StyledFooterInner = styled.div`
   margin: 0 auto;
 
   @media (min-width: 900px) {
-    padding: 2rem;
+    padding: 2rem 0;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
+  }
+  
+  @media (min-width: 1350px) {
+    margin: ${props => props.isMapPage ? '0 445px 0 auto' : '0 auto'}; 
+  }
+  
+  @media (min-width: 1750px) {
+    margin: 0 auto;
   }
 `;
 
@@ -67,14 +75,6 @@ export const StyledFooterBodyNav = styled.div`
     &:last-child {
       margin-bottom: 0;
     }
-  }
-`;
-
-export const StyledFooterActions = styled.div`
-  display: flex;
-  @media (min-width: 900px) {
-    flex-direction: column;
-    align-items: center;
   }
 `;
 

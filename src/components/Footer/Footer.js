@@ -1,14 +1,11 @@
 import React from 'react';
 import Logo from 'assets/images/footerlogoDarkWithURL';
-import { useLocation } from 'react-router-dom';
-
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import {
   StyledFooter,
   StyledFooterContent,
   StyledFooterBodyLinks,
-  StyledFooterActions,
   StyledFooterInner,
   StyledFooterBodyNav,
   StyledFooterBodyButton,
@@ -27,6 +24,10 @@ const FooterButton = props => (
 
 const Footer = ({ children }) => {
   const history = useHistory();
+  const { pathname } = useLocation();
+
+  const isMapPage = pathname.startsWith('/us')
+      || pathname.startsWith('/state');
 
   const goTo = route => {
     history.push(route);
@@ -37,7 +38,7 @@ const Footer = ({ children }) => {
   return (
     <div>
       <StyledFooter>
-        <StyledFooterInner>
+        <StyledFooterInner isMapPage={isMapPage}>
           <StyledFooterContent>
             <Logo />
             <StyledFooterBodyNav>
