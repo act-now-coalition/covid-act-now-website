@@ -194,11 +194,6 @@ export default [
     link: 'https://www.linkedin.com/in/davidduran971/',
   },
   {
-    name: 'Peter Reinhardt',
-    title: 'CEO and Co-founder, Segment',
-    link: 'https://www.linkedin.com/in/peterreinhardt/',
-  },
-  {
     name: 'Vincent DeGennaro, MD',
     title: 'Founder, Innovating Health International',
     link: 'https://www.linkedin.com/in/vincent-degennaro-jr-3b234ba3/',
