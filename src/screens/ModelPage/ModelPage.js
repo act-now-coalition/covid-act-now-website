@@ -103,7 +103,7 @@ function ModelPage() {
     history.push(goToLocation);
   }
 
-  const goTo = (route) => {
+  const goTo = route => {
     history.push(route);
   };
 
@@ -144,7 +144,7 @@ function ModelPage() {
 
   const renderMainContent = () => {
     if (
-      locationName == 'New York' &&
+      locationName === 'New York' &&
       [
         'Kings County',
         'Queens County',

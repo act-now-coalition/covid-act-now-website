@@ -8,7 +8,6 @@ import {
   StyledFooter,
   StyledFooterContent,
   StyledFooterBodyLinks,
-  StyledFooterActions,
   StyledFooterBodyNav,
   StyledFooterBodyButton,
   StyledFooterDivider,

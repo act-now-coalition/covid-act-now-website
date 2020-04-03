@@ -28,17 +28,30 @@ const Stateheader = ({
   };
 
   // hardcoded new york
-  if (locationName == "New York" && ["Kings County", "Queens County", "Bronx County", "Richmond County"].indexOf(countyName) > -1 ) {
-    countyName = "New York";
+  if (
+    locationName === 'New York' &&
+    [
+      'Kings County',
+      'Queens County',
+      'Bronx County',
+      'Richmond County',
+    ].indexOf(countyName) > -1
+  ) {
+    countyName = 'New York';
   }
 
   const model = interventionToModel[intervention];
 
   const earlyDate = moment(model.dateOverwhelmed).subtract(14, 'days');
   const lateDate = moment(model.dateOverwhelmed).subtract(9, 'days');
-  const displayName = countyName
-    ? (<> {countyName}, <a href={`/state/${location}`}>{locationName}</a></>)
-    : locationName;
+  const displayName = countyName ? (
+    <>
+      {' '}
+      {countyName}, <a href={`/state/${location}`}>{locationName}</a>
+    </>
+  ) : (
+    locationName
+  );
 
   const buildInterventionTitle = () => {
     switch (intervention) {
@@ -90,7 +103,10 @@ const Stateheader = ({
       case INTERVENTIONS.SHELTER_IN_PLACE:
         return (
           <HeaderSubCopy>
-              Avoiding hospital overload heavily depends on population density and public cooperation. Best and worst case scenarios are shown below, and we’ll update our projections as soon as more data becomes available.
+            Avoiding hospital overload heavily depends on population density and
+            public cooperation. Best and worst case scenarios are shown below,
+            and we’ll update our projections as soon as more data becomes
+            available.
           </HeaderSubCopy>
         );
       default:

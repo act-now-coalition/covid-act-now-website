@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useHistory, useLocation, matchPath } from 'react-router-dom';
-import { ArrowBack } from '@material-ui/icons';
 import Logo from 'assets/images/logo';
 import MobileMenu from './MobileMenu';
 import Burger from './Burger';
