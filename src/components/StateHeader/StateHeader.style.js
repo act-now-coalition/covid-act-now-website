@@ -12,6 +12,7 @@ export const HeaderHighlight = styled.span`
 export const HeaderTitle = styled(Typography)`
   font-size: 1.5rem;
   line-height: 1.75rem;
+  padding-top: 0.2em;
 
   a {
     color: ${palette.black};
@@ -45,7 +46,7 @@ export const StyledStateHeaderWrapper = styled(Box)`
 
 export const StyledStateHeaderInner = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: ${props => (props.condensed ? 'row' : 'column')};
   margin: 0;
 
   @media (min-width: 600px) {

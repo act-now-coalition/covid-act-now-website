@@ -117,7 +117,7 @@ const Stateheader = ({
 
   return (
     <StyledStateHeaderWrapper condensed={isEmbed}>
-      <StyledStateHeaderInner>
+      <StyledStateHeaderInner condensed={isEmbed}>
         <StyledStateImageWrapper>
           <StateCircleSvg
             actionBackgroundFill={COLORS.LIGHTGRAY}

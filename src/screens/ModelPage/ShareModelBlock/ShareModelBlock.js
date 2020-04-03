@@ -18,7 +18,7 @@ import {
 } from './../ModelPage.style';
 import { STATES } from 'enums';
 
-const ShareModelBlock = ({ location, county }) => {
+const ShareModelBlock = ({ location, county, embedSnippet }) => {
   const locationName = STATES[location];
   const countyName = county && county.county;
   const displayName = countyName
@@ -79,7 +79,7 @@ const ShareModelBlock = ({ location, county }) => {
         <ShareSpacer />
 
         <CopyToClipboard
-          text={'www.google.com'}
+          text={embedSnippet}
           onCopy={() => setEmbedCopySuccess(true)}
         >
           <EmbedButton variant="contained" disableElevation>

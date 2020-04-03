@@ -11,7 +11,6 @@ import {
   WarnShelterInPlaceWorstCase,
   WarnShelterInPlace,
 } from 'assets/images/capacityIcons';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 import InterventionIcon from 'assets/images/interventionIcon';
 import {
   CallToActionBox,
