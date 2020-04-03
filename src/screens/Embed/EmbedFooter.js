@@ -18,7 +18,12 @@ export default function EmbedFooter() {
         <IconButton icon={<LaunchIcon />} iconPosition="right">
           More&nbsp;
         </IconButton>
-        <IconButton icon={<ShareIcon />} iconPosition="left">
+        <IconButton
+          target="_blank"
+          href="https://www.google.com"
+          icon={<ShareIcon />}
+          iconPosition="left"
+        >
           &nbsp;Share
         </IconButton>
       </FooterButtonContainer>
@@ -39,9 +44,9 @@ export default function EmbedFooter() {
   );
 }
 
-function IconButton({ iconPosition, children, icon }) {
+function IconButton({ iconPosition, children, icon, ...rest }) {
   return (
-    <FooterButton disableElevation variant="contained">
+    <FooterButton disableElevation variant="contained" {...rest}>
       {iconPosition === 'left' && icon}
       {children}
       {iconPosition === 'right' && icon}

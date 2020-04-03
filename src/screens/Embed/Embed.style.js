@@ -89,7 +89,7 @@ export const FooterButtonContainer = styled(Box)`
 export const FooterButton = styled(Button)`
   text-transform: none;
   min-width: 9rem;
-  color: red;
+  color: #00d07d;
   :not(:last-child) {
     margin-right: 1rem;
   }
@@ -104,7 +104,7 @@ export const FooterSignature = styled(Box)`
   text-align: center;
   & > a:link,
   a:visited {
-    color: red;
+    color: #00d07d;
   }
 `;
 export const FooterLogoWrapper = styled(Box)`
