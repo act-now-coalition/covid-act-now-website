@@ -123,8 +123,8 @@
       iframe = document.createElement('iframe');
       isDev = document.getAttribute('is-dev');
       href = isDev
-        ? 'http://localhost:3000/embed/state/'
-        : 'https://www.covidactnow.org/embed/state/';
+        ? 'http://localhost:3000/embed/us/'
+        : 'https://www.covidactnow.org/embed/us/';
       iframe.setAttribute(
         'src',
         'https://' + widget.getAttribute('data-state-id'),
