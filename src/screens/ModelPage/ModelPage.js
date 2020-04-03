@@ -103,7 +103,7 @@ function ModelPage() {
     history.push(goToLocation);
   }
 
-  const goTo = (route) => {
+  const goTo = route => {
     history.push(route);
   };
 
@@ -143,9 +143,8 @@ function ModelPage() {
   };
 
   const renderMainContent = () => {
-
     if (
-      locationName == 'New York' &&
+      locationName === 'New York' &&
       [
         'Kings County',
         'Queens County',
@@ -233,7 +232,8 @@ function ModelPage() {
                       create surge capacity in hospitals and develop therapeutic
                       drugs that may have potential to lower hospitalization and
                       fatality rates from COVID.{' '}
-                      <a href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf">
+                      <a href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
+                         rel="noreferrer noopener">
                         See full scenario definitions here.
                       </a>
                     </li>
@@ -242,7 +242,8 @@ function ModelPage() {
                       Wuhan-style Lockdown to achieve full containment. However,
                       it is unclear at this time how you could manage newly
                       introduced infections.{' '}
-                      <a href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf">
+                      <a href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
+                         rel="noreferrer noopener">
                         See full scenario definitions here.
                       </a>
                     </li>
@@ -328,15 +329,21 @@ function ModelPage() {
           <div>
             <StyledNoResultsWrapper>
               <StyledNoResults>
-                  <div>
-                    We either weren't able to get data for {selectedCounty.county}, {selectedCounty.state_code}, or no cases have yet been confirmed.
-                  </div>
-                  <div>
-                    We’re unable to produce our model for this county until we have data. Check back soon.
-                  </div>
-                  <div style={{marginTop: '1rem'}}>
-                    View projections for <a onClick={() => goTo('/state/'+ location)}>{locationName}</a>
-                  </div>
+                <div>
+                  We either weren't able to get data for {selectedCounty.county}
+                  , {selectedCounty.state_code}, or no cases have yet been
+                  confirmed.
+                </div>
+                <div>
+                  We’re unable to produce our model for this county until we
+                  have data. Check back soon.
+                </div>
+                <div style={{ marginTop: '1rem' }}>
+                  View projections for{' '}
+                  <a onClick={() => goTo('/state/' + location)}>
+                    {locationName}
+                  </a>
+                </div>
               </StyledNoResults>
             </StyledNoResultsWrapper>
             {renderMapContent()}

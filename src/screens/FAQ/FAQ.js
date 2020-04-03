@@ -25,8 +25,9 @@ const FAQ = ({ children }) => {
           The U.S. Intervention Model is a data platform that projects COVID
           infections, hospitalizations, and deaths across the United States, as
           well as model how public health interventions contain the spread of
-          COVID. We help decision makers understand when and how COVID will affect
-          their communities in order to make better decisions that save lives.
+          COVID. We help decision makers understand when and how COVID will
+          affect their communities in order to make better decisions that save
+          lives.
         </Typography>
         <Typography variant="body1" component="p">
           Our U.S. Intervention Model is being used at every level of government
@@ -169,14 +170,14 @@ const FAQ = ({ children }) => {
             <li>Epidimiologist / Modeler</li>
             <li>Engineering Manager</li>
           </ul>
-              Is this you?{' '}
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://docs.google.com/forms/d/e/1FAIpQLSfQkdwXsbDbwLHhWwBD6wzNiw54_0P6A60r8hujP3qnaxxFkA/viewform"
-              >
-                Let us know
-              </a>
+          Is this you?{' '}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSfQkdwXsbDbwLHhWwBD6wzNiw54_0P6A60r8hujP3qnaxxFkA/viewform"
+          >
+            Let us know
+          </a>
         </Typography>
 
         <Typography variant="h5" component="h5">

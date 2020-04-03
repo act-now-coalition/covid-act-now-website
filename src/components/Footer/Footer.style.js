@@ -17,7 +17,7 @@ export const StyledFooterBody = styled.div`
 
 export const StyledFooterBodyLinksSection = styled.div`
   @media (min-width: 600px) {
-      margin-top: 2rem;
+    margin-top: 2rem;
   }
 `;
 

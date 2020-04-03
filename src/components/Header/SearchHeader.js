@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { GlobalSelector } from 'components/MapSelectors/MapSelectors';
@@ -24,9 +24,8 @@ const SearchHeader = ({
   intervention,
 }) => {
   const history = useHistory();
-  const isMobile = useMediaQuery('(max-width:1350px)');
+  const isMobile = useMediaQuery('(max-width:1349px)');
   const isNarrowMobile = useMediaQuery('(max-width:500px)');
-  const [isGlobalSelectorOpen, setIsGlobalSelectorOpen] = useState(false);
 
   const handleSelectChange = option => {
     let route = `/state/${option.state_code}`;
@@ -54,7 +53,6 @@ const SearchHeader = ({
             <GlobalSelector
               extendRight={true}
               handleChange={handleSelectChange}
-              handleIsOpen={setIsGlobalSelectorOpen}
             />
           </SelectorWrapper>
           {isMobile && (
@@ -62,9 +60,7 @@ const SearchHeader = ({
               onClick={() => toggleMobileMenu()}
               isActive={mobileMenuOpen}
             >
-              {!isGlobalSelectorOpen && !isNarrowMobile && (
-                <>Find on map&nbsp;&nbsp;</>
-              )}
+              {!isNarrowMobile && <>Find on map&nbsp;&nbsp;</>}
               <MapIcon />
             </MapToggle>
           )}

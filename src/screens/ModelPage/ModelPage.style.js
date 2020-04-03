@@ -89,7 +89,7 @@ export const StyledNoResults = styled.div`
   border: 1px solid rgba(232, 0, 0, 0.1);
   margin-top: 1rem;
   border-radius: 4px;
-  
+
   a {
     cursor: pointer;
     margin-top: 1rem;
