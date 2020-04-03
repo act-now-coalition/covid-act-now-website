@@ -130,7 +130,7 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
 
     if (location && !inputValue) {
       const topCountiesByParamState = chain(countyDataset)
-        .filter(item => item.state_code === location)
+        .filter(item => item.state_code === location.toUpperCase())
         .map(item => ({
           ...item,
           id: item.full_fips_code,
@@ -175,6 +175,7 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
           .uniqBy('id')
           .sortBy('population')
           .reverse()
+          .slice(0, 50)
           .value();
 
         matchedItems.push(...countyMatches);

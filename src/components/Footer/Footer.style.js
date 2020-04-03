@@ -27,11 +27,11 @@ export const StyledFooterInner = styled.div`
     justify-content: space-between;
     align-items: flex-start;
   }
-  
+
   @media (min-width: 1350px) {
-    margin: ${props => props.isMapPage ? '0 445px 0 auto' : '0 auto'}; 
+    margin: ${props => (props.isMapPage ? '0 445px 0 auto' : '0 auto')};
   }
-  
+
   @media (min-width: 1750px) {
     margin: 0 auto;
   }

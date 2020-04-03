@@ -45,8 +45,7 @@ export const MapToggle = styled.div`
   align-items: center;
   border-radius: 4px;
   margin-left: 1rem;
-  color: ${props =>
-    props.isActive ? 'white' : palette.secondary.main};
+  color: ${props => (props.isActive ? 'white' : palette.secondary.main)};
   background: ${props =>
     props.isActive ? palette.secondary.main : 'transparent'};
 

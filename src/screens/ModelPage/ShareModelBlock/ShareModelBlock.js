@@ -21,7 +21,7 @@ const ShareModelBlock = ({ location, county }) => {
   const displayName = countyName
     ? `${countyName}, ${locationName}`
     : locationName;
-  const shareURL = `https://covidactnow.org/state/${location}${
+  const shareURL = `https://covidactnow.org/us/${location.toLowerCase()}${
     county ? `/county/${county.county_url_name}` : ''
   }`;
   const shareQuote = `This is the point of no return for intervention to prevent ${displayName}'s hospital system from being overloaded by Coronavirus: `;
