@@ -36,13 +36,14 @@ export const SelectorWrapper = styled.div`
 export const MapToggle = styled.div`
   cursor: pointer;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
-  width: 54px;
+  padding: 0 15px;
   border: 1px solid ${BORDER_COLOR};
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 4px;
   margin-left: 1rem;
+  color: ${props => (props.isActive ? 'white' : 'red')};
   background: ${props => (props.isActive ? 'red' : 'transparent')};
 
   svg path {
