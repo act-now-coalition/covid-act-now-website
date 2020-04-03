@@ -72,13 +72,14 @@ export const MenuTitle = styled.div`
 
 export const StyledBurger = styled.button`
   position: relative;
-  top: 15px;
+  top: 20px;
   margin-left: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 2rem;
-  height: 2rem;
+  align-items: center;
+  width: 24px;
+  height: 24px;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -90,15 +91,17 @@ export const StyledBurger = styled.button`
   }
 
   div {
-    width: 2rem;
-    height: 0.25rem;
+    width: 16px;
+    height: 2px;
     background: ${({ open }) => (open ? '#0D0C1D' : '#000000')};
-    border-radius: 10px;
     position: relative;
     transform-origin: 1px;
+    /* left: 4px; */
 
     :first-child {
+      top: 2px;
       transform: ${({ open }) => (open ? 'rotate(45deg)' : 'rotate(0)')};
+      width: ${({ open }) => (open ? '19px' : '16px')};
     }
 
     :nth-child(2) {
@@ -108,6 +111,8 @@ export const StyledBurger = styled.button`
 
     :nth-child(3) {
       transform: ${({ open }) => (open ? 'rotate(-45deg)' : 'rotate(0)')};
+      width: ${({ open }) => (open ? '19px' : '16px')};
+      bottom: 2px;
     }
   }
 `;
