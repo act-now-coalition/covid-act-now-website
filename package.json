@@ -25,6 +25,7 @@
     "pageres": "^5.2.0",
     "query-string": "^6.11.1",
     "react": "^16.13.0",
+    "react-copy-to-clipboard": "^5.0.2",
     "react-d3-library": "^1.1.8",
     "react-d3-map-choropleth": "^0.5.1",
     "react-dom": "^16.13.0",

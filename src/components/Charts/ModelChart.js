@@ -6,6 +6,7 @@ import { INTERVENTIONS } from 'enums';
 import LightTooltip from 'components/LightTooltip/LightTooltip';
 import Chart from './Chart';
 import { Typography } from '@material-ui/core';
+import { useEmbed } from 'utils/hooks';
 
 import {
   ChartContainer,
@@ -19,11 +20,13 @@ const formatIntervention = (intervention, optCase) =>
 
 const ModelChart = ({
   state,
+  height,
   countyName,
   subtitle,
   interventions,
   currentIntervention,
 }) => {
+  const { isEmbed } = useEmbed();
   const interventionToModel = {
     [INTERVENTIONS.LIMITED_ACTION]: interventions.baseline,
     [INTERVENTIONS.SOCIAL_DISTANCING]:
@@ -136,7 +139,7 @@ const ModelChart = ({
       chart: {
         animation: false,
         styledMode: true,
-        height: '600',
+        height: height || '600',
         spacing: [8, 0, 32, 0],
       },
       title: {
