@@ -1,23 +1,32 @@
 import React from 'react';
 import { StyledMenu } from './AppBar.style';
+import MapIcon from 'assets/images/mapIconTwoTone';
+import FAQIcon from 'assets/images/faqIconTwoTone';
+import EndorsementsIcon from 'assets/images/endorsementsIconTwoTone';
+import BlogIcon from 'assets/images/blogIconTwoTone';
+import palette from 'assets/theme/palette';
 
 const MobileMenu = ({ open, goTo, forwardTo }) => {
   return (
     <StyledMenu open={open}>
       <a onClick={goTo('/')} href="/">
-        Map
+        <MapIcon color={palette.secondary.main} />
+        <span>Map</span>
       </a>
       <a onClick={goTo('/faq')} href="/faq">
-        About
+        <FAQIcon color={palette.secondary.main} />
+        <span>FAQ</span>
       </a>
       <a onClick={goTo('/endorsements')} href="/endorsements">
-        Endorsements
+        <EndorsementsIcon color={palette.secondary.main} />
+        <span>Endorsements</span>
       </a>
       <a
         onClick={forwardTo('https://blog.covidactnow.org')}
         href="https://blog.covidactnow.org"
       >
-        Blog
+        <BlogIcon color={palette.secondary.main} />
+        <span>Blog</span>
       </a>
     </StyledMenu>
   );

@@ -25,14 +25,14 @@ export const HeaderTitle = styled(Typography)`
   font-size: 2em;
   font-weight: 500;
   line-height: 2.3rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
 `;
 
 export const HeaderSubCopy = styled(Typography)`
   font-size: 1rem;
   line-height: 1.6rem;
   margin-bottom: 2rem;
-  max-width: 750px;
+  max-width: 560px;
   color: rgba(0, 0, 0, 0.7);
 `;
 

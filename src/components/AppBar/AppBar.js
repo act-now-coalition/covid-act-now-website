@@ -98,7 +98,7 @@ const _AppBar = () => {
     <StyledAppBar position="sticky">
       <Wrapper>
         <Left onClick={goTo('/')}>
-          {pathname.includes('state') ? <ArrowBack /> : <Logo />}
+          <Logo />
         </Left>
         <StyledDesktopMenu value={false}>
           <StyledTabs value={panelIdx}>

@@ -20,6 +20,7 @@ import {
 
 import {
   StyledState,
+  StyledCounty,
   StyledResultsMenuOption,
   StyledResultsMenuSubText,
 } from './MapSelectors.style';
@@ -52,8 +53,19 @@ const StateItem = ({ dataset }) => {
 };
 
 const CountyItem = ({ dataset }) => {
+  const intervention = STATE_TO_INTERVENTION[dataset.state_code];
+
   return (
     <StyledResultsMenuOption hasData={dataset.hasData}>
+      <div style={{ marginLeft: '0', marginRight: '.75rem' }}>
+        <StyledCounty>
+          <StateCircleSvg
+            ratio={0.8}
+            intervention={intervention}
+            state={dataset.state_code}
+          />
+        </StyledCounty>
+      </div>
       <div>
         <div>
           {dataset.county}, {dataset.state_code}
