@@ -20,7 +20,7 @@ export const EmbedContainer = styled(Paper)`
   margin: 3px;
   overflow: hidden;
   border-radius: 3px;
-  max-height: 600px;
+  max-height: 650px;
   overflow-y: scroll;
 `;
 
