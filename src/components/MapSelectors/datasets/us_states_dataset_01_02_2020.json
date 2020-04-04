@@ -11491,6 +11491,7 @@
             "Schley County",
             "Bleckley County / Dodge County",
             "Ben Hill County / Irwin County",
+            "Ben Hill County",
             "Butts County",
             "Charlton County",
             "Catoosa County / Walker County",
@@ -13425,6 +13426,18 @@
           "population": 16700
         },
         {
+          "county": "Ben Hill County",
+          "county_url_name": "ben_hill_county",
+          "county_fips_code": "017",
+          "state_fips_code": "13",
+          "state_code": "GA",
+          "full_fips_code": "13017",
+          "cities": [
+            "Fitzgerald"
+          ],
+          "population": 16700
+        },
+        {
           "county": "Butts County",
           "county_url_name": "butts_county",
           "county_fips_code": "035",
@@ -14451,6 +14464,7 @@
           "counties": [
             "Honolulu County",
             "Hawaii County",
+            "Kalawao County",
             "Kauai County",
             "Maui County"
           ],
@@ -14611,6 +14625,18 @@
             "Wainiha"
           ],
           "population": 72293
+        },
+        {
+          "county": "Kalawao County",
+          "county_url_name": "kalawao_county",
+          "county_fips_code": "005",
+          "state_fips_code": "15",
+          "state_code": "HI",
+          "full_fips_code": "15005",
+          "cities": [
+            "Kalaupapa"
+          ],
+          "population": 86
         },
         {
           "county": "Maui County",
@@ -23417,7 +23443,6 @@
             "Blackford County",
             "Ripley County",
             "LaGrange County",
-            "Marion County.",
             "Boone County / Hendricks County",
             "Tipton County",
             "Marshall County / Starke County",
@@ -25150,18 +25175,6 @@
             "Topeka"
           ],
           "population": 39614
-        },
-        {
-          "county": "Marion County.",
-          "county_url_name": "marion_county",
-          "county_fips_code": "097",
-          "state_fips_code": "18",
-          "state_code": "IN",
-          "full_fips_code": "18097",
-          "cities": [
-            "Indianapolis"
-          ],
-          "population": 964582
         },
         {
           "county": "Boone County / Hendricks County",
@@ -48517,6 +48530,7 @@
             "Rockingham County",
             "Chowan County",
             "Camden County / Pasquotank County",
+            "Pasquotank County",
             "Surry County / Wilkes County",
             "Halifax County",
             "Hyde County",
@@ -50169,6 +50183,18 @@
           "state_fips_code": "37",
           "state_code": "NC",
           "full_fips_code": "37029",
+          "cities": [
+            "Elizabeth City"
+          ],
+          "population": 10867
+        },
+        {
+          "county": "Pasquotank County",
+          "county_url_name": "pasquotank_county",
+          "county_fips_code": "139",
+          "state_fips_code": "37",
+          "state_code": "NC",
+          "full_fips_code": "37139",
           "cities": [
             "Elizabeth City"
           ],
@@ -73436,6 +73462,7 @@
             "Williamsburg County",
             "Greenville County / Spartanburg County",
             "Beaufort County / Jasper County",
+            "Jasper County",
             "Dorchester County",
             "Abbeville County / Anderson County",
             "Fairfield County",
@@ -74358,6 +74385,19 @@
           "state_fips_code": "45",
           "state_code": "SC",
           "full_fips_code": "45013",
+          "cities": [
+            "Hardeeville",
+            "Ridgeland"
+          ],
+          "population": 192122
+        },
+        {
+          "county": "Jasper County",
+          "county_url_name": "jasper_county",
+          "county_fips_code": "053",
+          "state_fips_code": "45",
+          "state_code": "SC",
+          "full_fips_code": "45053",
           "cities": [
             "Hardeeville",
             "Ridgeland"
@@ -76903,6 +76943,7 @@
             "Robertson County / Sumner County",
             "Franklin County / Grundy County / Marion County",
             "Hamblen County / Jefferson County",
+            "Hamblen County",
             "Johnson County",
             "Cocke County",
             "Anderson County / Roane County",
@@ -78502,6 +78543,19 @@
           "population": 64934
         },
         {
+          "county": "Hamblen County",
+          "county_url_name": "hamblen_county",
+          "county_fips_code": "063",
+          "state_fips_code": "47",
+          "state_code": "TN",
+          "full_fips_code": "47063",
+          "cities": [
+            "Morristown",
+            "White Pine"
+          ],
+          "population": 64934
+        },
+        {
           "county": "Johnson County",
           "county_url_name": "johnson_county",
           "county_fips_code": "091",
@@ -79065,6 +79119,7 @@
             "Irion County",
             "Roberts County",
             "Martin County / Midland County",
+            "Midland County",
             "Titus County",
             "Palo Pinto County / Parker County",
             "Wheeler County",
@@ -84006,6 +84061,18 @@
           "population": 5771
         },
         {
+          "county": "Midland County",
+          "county_url_name": "midland_county",
+          "county_fips_code": "329",
+          "state_fips_code": "48",
+          "state_code": "TX",
+          "full_fips_code": "48329",
+          "cities": [
+            "Midland"
+          ],
+          "population": 5771
+        },
+        {
           "county": "Titus County",
           "county_url_name": "titus_county",
           "county_fips_code": "449",
@@ -85762,6 +85829,7 @@
             "Bath County",
             "Lancaster County",
             "Greensville County / Sussex County",
+            "Greensville County",
             "Lunenburg County",
             "Lancaster County / Northumberland County",
             "King and Queen County",
@@ -85807,7 +85875,8 @@
             "Waynesboro City",
             "Williamsburg City",
             "Winchester City",
-            "Augusta County / Nelson County"
+            "Augusta County / Nelson County",
+            "James City County"
           ],
           "population": 5759240
         }
@@ -87513,6 +87582,18 @@
           "population": 11336
         },
         {
+          "county": "Greensville County",
+          "county_url_name": "greensville_county",
+          "county_fips_code": "081",
+          "state_fips_code": "51",
+          "state_code": "VA",
+          "full_fips_code": "51081",
+          "cities": [
+            "Jarratt"
+          ],
+          "population": 11336
+        },
+        {
           "county": "Lunenburg County",
           "county_url_name": "lunenburg_county",
           "county_fips_code": "111",
@@ -88075,6 +88156,17 @@
           "full_fips_code": "51015",
           "cities": [
             "Wintergreen"
+          ],
+          "population": 75558
+        },
+        {
+          "county": "James City County",
+          "county_url_name": "james_city_county",
+          "county_fips_code": "095",
+          "state_fips_code": "51",
+          "state_code": "VA",
+          "full_fips_code": "51095",
+          "cities": [
           ],
           "population": 75558
         }
