@@ -22,6 +22,7 @@ import {
   Primary,
   Detail,
 } from './CallToAction.style';
+import { getWorstCaseIntervention } from 'utils/interventions';
 
 const DAYS = 1000 * 60 * 60 * 24;
 const ONE_HUNDRED_DAYS = 100 * DAYS;
@@ -78,8 +79,9 @@ const CallToAction = ({ interventions, currentIntervention }) => {
   const interventionCalloutData = calloutDataForModel(model);
 
   let worstCaseModel, worstCaseCalloutData;
-  if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE) {
-    worstCaseModel = interventionToModel[INTERVENTIONS.SOCIAL_DISTANCING];
+  let worstCaseIntervention = getWorstCaseIntervention(currentIntervention);
+  if (currentIntervention !== worstCaseIntervention) {
+    worstCaseModel = interventionToModel[worstCaseIntervention];
     worstCaseCalloutData = calloutDataForModel(worstCaseModel);
   }
 

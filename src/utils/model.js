@@ -1,14 +1,30 @@
 import { useState, useEffect } from 'react';
-import { STATES, INTERVENTIONS } from 'enums';
+import { STATES } from 'enums';
 
 async function fetchAll(urls) {
   try {
-    var data = await Promise.all(
-      urls.map(url => fetch(url).then(response => response.json())),
+    const data = await Promise.all(
+      urls.map(url =>
+        fetch(url)
+          .then(response => {
+            // 404 files currently return an html page instead of 404,
+            // so need to handle this way...
+            return response.text();
+          })
+          .then(responseText => {
+            try {
+              const jsonResponse = JSON.parse(responseText);
+
+              return jsonResponse;
+            } catch (err) {
+              throw err;
+            }
+          }),
+      ),
     );
+
     return data;
   } catch (error) {
-    console.log(error);
     throw error;
   }
 }
@@ -27,73 +43,97 @@ const initialData = {
   countyDatas: null,
 };
 
-function fixDataUrl(dataUrl) {
+async function fetchSummary(setModelDatas, location) {
+  const summaryUrl = `/data/county_summaries/${location.toUpperCase()}.summary.json`;
+
+  try {
+    const summary = await fetchAll([summaryUrl]);
+    setModelDatas(state => {
+      return {
+        ...state,
+        summary: summary[0],
+      };
+    });
+  } catch (err) {}
+}
+
+async function fetchData(location, county = null, dataUrl = null) {
   dataUrl = dataUrl || '/data/';
   if (dataUrl[dataUrl.length - 1] !== '/') {
     dataUrl += '/';
   }
-  return dataUrl;
-}
 
-// Fetch model data for a given location (e.g. 'WA' or '53033'), returning an object
-// with the models we care about (baseline, strictDistancingNow, etc.)
-async function fetchModelDatas(location, dataUrl = null) {
-  dataUrl = fixDataUrl(dataUrl);
-  const urls = [
+  let modelDataForKey = null;
+  let urls = [
     ModelIds.baseline,
     ModelIds.strictDistancingNow,
     ModelIds.weakDistancingNow,
     ModelIds.containNow,
-  ].map(i => `${dataUrl}${location}.${i}.json`);
-  const loadedModelDatas = await fetchAll(urls);
-  return {
-    baseline: loadedModelDatas[0],
-    strictDistancingNow: loadedModelDatas[1],
-    weakDistancingNow: loadedModelDatas[2],
-    containNow: loadedModelDatas[3],
-  };
-}
-
-function fetchStateModelDatas(state, dataUrl = null) {
-  //Some state data files are lowercase, unsure why, but we need to handle it here.
-  let lowercaseStates = [
-    'AK',
-    'CA',
-    'CO',
-    'FL',
-    'MO',
-    'NM',
-    'NV',
-    'NY',
-    'OR',
-    'TX',
-    'WA',
-  ];
-  if (lowercaseStates.indexOf(state) > -1) {
-    state = state.toLowerCase();
+  ].map(i => {
+    let fipsCode =
+      county && county.full_fips_code ? county.full_fips_code : null;
+    const stateUrl = `${dataUrl}${location}.${i}.json`;
+    const countyUrl = `${dataUrl}county/${location.toUpperCase()}.${fipsCode}.${i}.json`;
+    return county ? countyUrl : stateUrl;
+  });
+  try {
+    let loadedModelDatas = await fetchAll(urls);
+    //This is to fix county data format
+    modelDataForKey = {
+      baseline: loadedModelDatas[0],
+      strictDistancingNow: loadedModelDatas[1],
+      weakDistancingNow: loadedModelDatas[2],
+      containNow: loadedModelDatas[3],
+    };
+  } catch (err) {
+    modelDataForKey = {
+      error: true,
+      payload: err,
+    };
   }
-  return fetchModelDatas(state, dataUrl);
+
+  return modelDataForKey;
 }
 
-export function useModelDatas(_location, county = null, dataUrl = null) {
-  const [modelDatas, setModelDatas] = useState({ state: null, county: null });
+async function fetchDataAndSet(
+  setModelDatas,
+  location,
+  county = null,
+  dataUrl = null,
+) {
+  let modelDataForKey = await fetchData(location, county, dataUrl);
+  const key = county ? 'countyDatas' : 'stateDatas';
+
+  setModelDatas(m => {
+    return {
+      ...m,
+      location,
+      county,
+      [key]: modelDataForKey,
+    };
+  });
+}
+
+export function useModelDatas(location, county = null, dataUrl = null) {
+  const [modelDatas, setModelDatas] = useState(initialData);
   useEffect(() => {
-    const promises = [fetchStateModelDatas(_location, dataUrl)];
-    if (county) {
-      promises.push(fetchModelDatas(county, dataUrl));
-    }
-    Promise.all(promises)
-      .then(results => {
-        setModelDatas({
-          state: results[0],
-          county: county ? results[1] : null,
-        });
-      })
-      .catch(e => {
-        setModelDatas({ state: null, county: null });
-        throw e;
+    fetchDataAndSet(setModelDatas, location, null, dataUrl);
+    fetchSummary(setModelDatas, location);
+  }, [dataUrl, location]);
+
+  useEffect(() => {
+    if (county === null) {
+      setModelDatas(state => {
+        return {
+          ...state,
+          county: null,
+          countyDatas: null,
+        };
       });
-  }, [_location, county, dataUrl]);
+    } else {
+      fetchDataAndSet(setModelDatas, location, county, dataUrl);
+    }
+  }, [dataUrl, county, location]);
   return modelDatas;
 }
 
@@ -102,8 +142,8 @@ export function useAllStateModelDatas(dataUrl = null) {
   useEffect(() => {
     const promises = [];
     const states = Object.keys(STATES);
-    for (const state of states) {
-      promises.push(fetchStateModelDatas(state, dataUrl));
+    for (let state of states) {
+      promises.push(fetchData(state, null, dataUrl));
     }
     Promise.all(promises)
       .then(results => {
@@ -120,6 +160,7 @@ export function useAllStateModelDatas(dataUrl = null) {
         throw e;
       });
   }, [dataUrl]);
+
   return stateModels;
 }
 
@@ -296,13 +337,4 @@ export class Model {
       data: this.getColumn(columnName, duration + this.daysSinceDayZero),
     };
   }
-}
-
-export function interventionToModelMap(interventions) {
-  return {
-    [INTERVENTIONS.LIMITED_ACTION]: interventions.baseline,
-    [INTERVENTIONS.SOCIAL_DISTANCING]:
-      interventions.distancingPoorEnforcement.now,
-    [INTERVENTIONS.SHELTER_IN_PLACE]: interventions.distancing.now,
-  };
 }

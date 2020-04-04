@@ -14,7 +14,11 @@ import moment from 'moment';
 
 import ModelChart from 'components/Charts/ModelChart';
 import { INTERVENTIONS, STATES, STATE_TO_INTERVENTION } from 'enums';
-import { interventionToModelMap, useAllStateModelDatas } from 'utils/model';
+import { useAllStateModelDatas } from 'utils/model';
+import {
+  interventionToModelMap,
+  getWorstCaseIntervention,
+} from 'utils/interventions';
 import { buildInterventionMap } from 'screens/ModelPage/ModelPage';
 
 import {
@@ -57,8 +61,17 @@ export function CompareModels({ match, location }) {
   const states = Object.keys(STATES);
   if (leftModelDatas && rightModelDatas) {
     for (const state of states) {
-      leftModels[state] = buildInterventionMap(leftModelDatas[state]);
-      rightModels[state] = buildInterventionMap(rightModelDatas[state]);
+      try {
+        leftModels[state] = buildInterventionMap(leftModelDatas[state]);
+      } catch (err) {
+        console.log('Left models invalid:', err);
+      }
+
+      try {
+        rightModels[state] = buildInterventionMap(rightModelDatas[state]);
+      } catch (err) {
+        console.log('Right model invalid:', err);
+      }
     }
   }
 
@@ -110,6 +123,9 @@ export function CompareModels({ match, location }) {
   function sortByDateOverwhelmed(a, b) {
     const overwhelmedDifferenceA = getDifferenceInDateOverwhelmed(a);
     const overwhelmedDifferenceB = getDifferenceInDateOverwhelmed(b);
+    if (overwhelmedDifferenceA === overwhelmedDifferenceB) {
+      return 0;
+    }
     return overwhelmedDifferenceA > overwhelmedDifferenceB ? -1 : 1;
   }
 
@@ -135,14 +151,19 @@ export function CompareModels({ match, location }) {
   }
 
   function getDateOverwhelmed(stateAbbr, models) {
-    const currentIntervention = STATE_TO_INTERVENTION[stateAbbr];
     const interventions = models[stateAbbr];
-    let interventionToModel = interventionToModelMap(interventions);
-    let model = interventionToModel[currentIntervention];
-
-    if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE) {
-      model = interventionToModel[INTERVENTIONS.SOCIAL_DISTANCING];
+    let interventionToModel;
+    try {
+      interventionToModel = interventionToModelMap(interventions);
+    } catch (error) {
+      console.log(error);
+      return;
     }
+
+    let worstCaseIntervention = getWorstCaseIntervention(
+      STATE_TO_INTERVENTION[stateAbbr],
+    );
+    let model = interventionToModel[worstCaseIntervention];
     return model.dateOverwhelmed;
   }
 
@@ -251,14 +272,13 @@ export function CompareModels({ match, location }) {
           </FormControl>
         </ComparisonControlsContainer>
       </ModelSelectorContainer>
-
       <StateComparisonList
-        states={states}
+        states={states
+          .filter(filterByIntervention)
+          .sort(sortFunctionMap[sortType])}
         leftModels={leftModels}
         rightModels={rightModels}
         refreshing={refreshing}
-        sortFn={sortFunctionMap[sortType]}
-        filterFn={filterByIntervention}
       />
     </Wrapper>
   );
@@ -269,23 +289,18 @@ const StateComparisonList = function ({
   leftModels,
   rightModels,
   refreshing,
-  sortFn,
-  filterFn,
 }) {
   return (
     <ModelComparisonsContainer>
-      {states
-        .filter(filterFn)
-        .sort(sortFn)
-        .map(state => (
-          <StateCompare
-            key={state}
-            state={state}
-            leftModels={leftModels[state]}
-            rightModels={rightModels[state]}
-            refreshing={refreshing}
-          />
-        ))}
+      {states.map(state => (
+        <StateCompare
+          key={state}
+          state={state}
+          leftModels={leftModels[state]}
+          rightModels={rightModels[state]}
+          refreshing={refreshing}
+        />
+      ))}
     </ModelComparisonsContainer>
   );
 };
@@ -297,12 +312,16 @@ function StateCompare({ state, leftModels, rightModels, refreshing }) {
       <h2>{STATES[state]}</h2>
       {!refreshing && (
         <Grid container spacing={3}>
-          <Grid item xs={6}>
-            <StateChart state={state} models={leftModels} />
-          </Grid>
-          <Grid item xs={6}>
-            <StateChart state={state} models={rightModels} />
-          </Grid>
+          {leftModels && (
+            <Grid item xs={6}>
+              <StateChart state={state} models={leftModels} />
+            </Grid>
+          )}
+          {rightModels && (
+            <Grid item xs={6}>
+              <StateChart state={state} models={rightModels} />
+            </Grid>
+          )}
         </Grid>
       )}
     </>

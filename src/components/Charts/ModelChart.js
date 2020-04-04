@@ -5,12 +5,12 @@ import { snakeCase } from 'lodash';
 import { INTERVENTIONS } from 'enums';
 import LightTooltip from 'components/LightTooltip/LightTooltip';
 import Chart from './Chart';
-<<<<<<< HEAD
 import { Typography } from '@material-ui/core';
-import { useEmbed } from 'utils/hooks';
-=======
-import { interventionToModelMap } from 'utils/model';
->>>>>>> Add sort and filter
+
+import {
+  interventionToModelMap,
+  getWorstCaseIntervention,
+} from 'utils/interventions';
 
 import {
   ChartContainer,
@@ -30,120 +30,140 @@ const ModelChart = ({
   interventions,
   currentIntervention,
 }) => {
-<<<<<<< HEAD
-  const { isEmbed } = useEmbed();
-  const interventionToModel = {
-    [INTERVENTIONS.LIMITED_ACTION]: interventions.baseline,
-    [INTERVENTIONS.SOCIAL_DISTANCING]:
-      interventions.distancingPoorEnforcement.now,
-    [INTERVENTIONS.SHELTER_IN_PLACE]: interventions.distancing.now,
-  };
-=======
-  let interventionToModel = interventionToModelMap(interventions);
->>>>>>> Add sort and filter
+  let interventionsModelIsValid = true;
+  let model;
 
-  let model = interventionToModel[currentIntervention];
-
-  if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE) {
-    model = interventionToModel[INTERVENTIONS.SOCIAL_DISTANCING];
+  // In future we can do further model shape/schema checking
+  try {
+    let interventionToModel = interventionToModelMap(interventions);
+    let worstCaseIntervention = getWorstCaseIntervention(currentIntervention);
+    model = interventionToModel[worstCaseIntervention];
+  } catch (e) {
+    interventionsModelIsValid = false;
   }
 
-  const hospitalsOverloadedPlotLineText = currentIntervention => {
-    let plotLineText;
-    switch (currentIntervention) {
-      case INTERVENTIONS.SHELTER_IN_PLACE:
-        plotLineText = '<span>Stay at home<br/>(poor compliance)</span>';
-        break;
-      case INTERVENTIONS.LIMITED_ACTION:
-        plotLineText = 'Assuming limited action';
-        break;
-      case INTERVENTIONS.SOCIAL_DISTANCING:
-        plotLineText = 'Assuming social distancing';
-        break;
-      default:
-    }
+  // All model variables
+  let hospitalsOverloadedPlotLineText;
+  let scenarioComparisonOverTime;
+  let data;
+  let noAction;
+  let socialDistancing;
+  let shelterInPlace;
+  let wuhanStyle;
+  let availableBeds;
+  let dateOverwhelmed;
 
-    return plotLineText;
-  };
+  // Only process a valid model shape
+  if (interventionsModelIsValid) {
+    dateOverwhelmed = model.dateOverwhelmed;
 
-  const scenarioComparisonOverTime = duration => [
-    interventions.baseline.getDataset('hospitalizations', duration, 'red'),
-    interventions.distancing.now.getDataset(
-      'hospitalizations',
-      duration,
-      'blue',
-    ),
-    interventions.distancingPoorEnforcement.now.getDataset(
-      'hospitalizations',
-      duration,
-      'orange',
-    ),
-    interventions.contain.now.getDataset('hospitalizations', duration, 'green'),
-    interventions.baseline.getDataset(
-      'beds',
-      duration,
-      'black',
-      'Available hospital beds',
-    ),
-  ];
+    hospitalsOverloadedPlotLineText = currentIntervention => {
+      let plotLineText;
+      switch (currentIntervention) {
+        case INTERVENTIONS.SHELTER_IN_PLACE:
+          plotLineText = '<span>Stay at home<br/>(poor compliance)</span>';
+          break;
+        case INTERVENTIONS.LIMITED_ACTION:
+          plotLineText = 'Assuming limited action';
+          break;
+        case INTERVENTIONS.SOCIAL_DISTANCING:
+          plotLineText = 'Assuming social distancing';
+          break;
+        default:
+      }
 
-  const data = scenarioComparisonOverTime(200);
+      return plotLineText;
+    };
 
-  const noAction = {
-    name: INTERVENTIONS.LIMITED_ACTION,
-    type: 'areaspline',
-    data: data[0].data,
-    marker: {
-      symbol: 'circle',
-    },
-  };
-  const socialDistancing = {
-    name:
-      currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
-        ? formatIntervention(
-            INTERVENTIONS.SHELTER_IN_PLACE,
-            ' (poor compliance)',
-          )
-        : formatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
-    type: 'areaspline',
-    data: data[2].data,
-    marker: {
-      symbol: 'circle',
-    },
-  };
-  const shelterInPlace = {
-    name:
-      currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
-        ? formatIntervention(
-            INTERVENTIONS.SHELTER_IN_PLACE,
-            ' (strict compliance)',
-          )
-        : formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
-    type: 'areaspline',
-    data: data[1].data,
-    marker: {
-      symbol: 'circle',
-    },
-  };
-  const wuhanStyle = {
-    name: formatIntervention(INTERVENTIONS.LOCKDOWN),
-    type: 'areaspline',
-    data: data[3].data,
-    marker: {
-      symbol: 'circle',
-    },
-  };
-  const availableBeds = {
-    name: 'Available hospital beds',
-    type: 'spline',
-    data: data[4].data,
-    marker: {
-      symbol: 'circle',
-    },
-  };
+    scenarioComparisonOverTime = duration => [
+      interventions.baseline.getDataset('hospitalizations', duration, 'red'),
+      interventions.distancing.now.getDataset(
+        'hospitalizations',
+        duration,
+        'blue',
+      ),
+      interventions.distancingPoorEnforcement.now.getDataset(
+        'hospitalizations',
+        duration,
+        'orange',
+      ),
+      interventions.contain.now.getDataset(
+        'hospitalizations',
+        duration,
+        'green',
+      ),
+      interventions.baseline.getDataset(
+        'beds',
+        duration,
+        'black',
+        'Available hospital beds',
+      ),
+    ];
+
+    data = scenarioComparisonOverTime(200);
+
+    noAction = {
+      name: INTERVENTIONS.LIMITED_ACTION,
+      type: 'areaspline',
+      data: data[0].data,
+      marker: {
+        symbol: 'circle',
+      },
+    };
+    socialDistancing = {
+      name:
+        currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+          ? formatIntervention(
+              INTERVENTIONS.SHELTER_IN_PLACE,
+              ' (poor compliance)',
+            )
+          : formatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
+      type: 'areaspline',
+      data: data[2].data,
+      marker: {
+        symbol: 'circle',
+      },
+    };
+    shelterInPlace = {
+      name:
+        currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+          ? formatIntervention(
+              INTERVENTIONS.SHELTER_IN_PLACE,
+              ' (strict compliance)',
+            )
+          : formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
+      type: 'areaspline',
+      data: data[1].data,
+      marker: {
+        symbol: 'circle',
+      },
+    };
+    wuhanStyle = {
+      name: formatIntervention(INTERVENTIONS.LOCKDOWN),
+      type: 'areaspline',
+      data: data[3].data,
+      marker: {
+        symbol: 'circle',
+      },
+    };
+    availableBeds = {
+      name: 'Available hospital beds',
+      type: 'spline',
+      data: data[4].data,
+      marker: {
+        symbol: 'circle',
+      },
+    };
+  }
 
   const options = useMemo(() => {
+    if (!interventionsModelIsValid) {
+      return {
+        modelHasBadData: true,
+      };
+    }
     return {
+      modelHasBadData: false,
       chart: {
         animation: false,
         styledMode: true,
@@ -170,7 +190,7 @@ const ModelChart = ({
         },
         plotLines: [
           {
-            value: model.dateOverwhelmed,
+            value: dateOverwhelmed,
             className: snakeCase(
               currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
                 ? INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE
@@ -270,14 +290,21 @@ const ModelChart = ({
       ],
     };
   }, [
-    model.dateOverwhelmed,
+    interventionsModelIsValid,
+    height,
+    dateOverwhelmed,
     currentIntervention,
     noAction,
     socialDistancing,
     shelterInPlace,
     wuhanStyle,
     availableBeds,
+    hospitalsOverloadedPlotLineText,
   ]);
+
+  if (options.modelHasBadData) {
+    return <div>{'This model has bad data'}</div>;
+  }
 
   return (
     <ChartContainer>
