@@ -12,6 +12,7 @@ import ShareModelBlock from './ShareModelBlock/ShareModelBlock';
 import SearchHeader from 'components/Header/SearchHeader';
 import StateHeader from 'components/StateHeader/StateHeader';
 import ModelChart from 'components/Charts/ModelChart';
+import Newsletter from 'components/Newsletter/Newsletter';
 import {
   MapMenuMobileWrapper,
   MapMenuItem,
@@ -253,7 +254,7 @@ function ModelPage() {
                     county={selectedCounty}
                     embedSnippet={iFrameCodeSnippet}
                   />
-                  <span data-sumome-listbuilder-embed-id="93b0ee9a31c30132f8c3e6b586feac9f4904126edcae1426f98bced80950ea58"></span>
+                  <Newsletter county={countyName} stateAbbr={location} stateFull={locationName} />
                 </Content>
               </Panel>
             )}

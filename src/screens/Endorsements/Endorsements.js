@@ -3,6 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import QuoteIcon from '@material-ui/icons/FormatQuoteRounded';
 import CheckCircleOutline from '@material-ui/icons/CheckCircleOutline';
 import Grid from '@material-ui/core/Grid';
+import Newsletter from 'components/Newsletter/Newsletter';
 
 import EndorsementCard from 'components/EndorsementCard/EndorsementCard';
 import { ENDORSERS } from 'enums';
@@ -45,7 +46,7 @@ const Endorsements = () => {
             </Grid>
           ))}
         </EndorsersWrapper>
-        <span data-sumome-listbuilder-embed-id="a5e4680c84878d727c01eac4fbfb8bf4d3269f51339bf3499040aa642d59b6a2"></span>
+        <Newsletter />
       </Content>
     </Wrapper>
   );
