@@ -49,7 +49,10 @@ const Stateheader = ({
   const displayName = countyName ? (
     <>
       {' '}
-      {countyName}, <a href={`/us/${location.toLowerCase()}`}>{locationName}</a>
+      {countyName},{' '}
+      <a href={`${isEmbed ? '/embed' : ''}/us/${location.toLowerCase()}`}>
+        {locationName}
+      </a>
     </>
   ) : (
     locationName
