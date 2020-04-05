@@ -8,11 +8,8 @@ import { MAP_FILTERS } from 'screens/ModelPage/Enums/MapFilterEnums';
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020';
 import { useModelDatas } from 'utils/model';
 import CountyMap from 'components/CountyMap/CountyMap';
-import {
-  STATE_TO_INTERVENTION,
-  INTERVENTION_COLOR_MAP,
-} from 'enums';
-import { useParams, } from 'react-router-dom';
+import { INTERVENTION_COLOR_MAP, STATE_TO_INTERVENTION } from 'enums';
+import { useParams } from 'react-router-dom';
 
 import {
   Wrapper,
@@ -37,8 +34,7 @@ const SearchHeader = ({ mobileMenuOpen, setMobileMenuOpen, setMapOption }) => {
     );
   }
   const intervention = STATE_TO_INTERVENTION[_location];
-  const [selectedCounty, setSelectedCounty] = useState(countyOption);
-  const [redirectTarget, setRedirectTarget] = useState();
+  const [selectedCounty] = useState(countyOption);
   const modelDatasMap = useModelDatas(_location, selectedCounty);
 
   const handleSelectChange = option => {
@@ -80,15 +76,15 @@ const SearchHeader = ({ mobileMenuOpen, setMobileMenuOpen, setMapOption }) => {
             >
               {!isNarrowMobile && <React.Fragment>Find on map</React.Fragment>}
               <CountyMiniMapWrapper>
-                {mobileMenuOpen ?
-                  <MapIcon /> : (
-                    <CountyMap
-                      fill={INTERVENTION_COLOR_MAP[intervention]}
-                      stateSummary={modelDatasMap.summary}
-                      selectedCounty={selectedCounty}
-                    />
-                  )
-                }
+                {mobileMenuOpen ? (
+                  <MapIcon />
+                ) : (
+                  <CountyMap
+                    fill={INTERVENTION_COLOR_MAP[intervention]}
+                    stateSummary={modelDatasMap.summary}
+                    selectedCounty={selectedCounty}
+                  />
+                )}
               </CountyMiniMapWrapper>
             </MapToggle>
           )}
