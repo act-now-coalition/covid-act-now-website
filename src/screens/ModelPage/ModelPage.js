@@ -96,11 +96,6 @@ function ModelPage() {
     interventions = buildInterventionMap(datasForView);
   }
 
-  let stateInterventions = null;
-  if (modelDatasMap.stateDatas) {
-    stateInterventions = buildInterventionMap(modelDatasMap.stateDatas);
-  }
-
   if (redirectTarget) {
     const goToLocation = redirectTarget;
     setRedirectTarget(null);
@@ -158,13 +153,13 @@ function ModelPage() {
     return (
       <MainContentWrapper mobileMenuOpen={mobileMenuOpen}>
         <MainContentInner>
-          {stateInterventions && (
+          {interventions && (
             <StateHeader
               location={_location}
               locationName={locationName}
               countyName={countyName}
               intervention={intervention}
-              interventions={stateInterventions}
+              interventions={interventions}
             />
           )}
           <MainContentInnerBody>

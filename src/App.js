@@ -25,24 +25,40 @@ export default function App() {
           <AppBar />
           <Switch>
             <Route exact path="/" component={HomePage} />
+
             <Route exact path="/us/:id" component={ModelPage} />
             <Route
               exact
               path="/us/:id/county/:countyId"
               component={ModelPage}
             />
+            {/* /state/ routes are deprecated but still supported. */}
             <Route exact path="/state/:id" component={ModelPage} />
             <Route
               exact
               path="/state/:id/county/:countyId"
               component={ModelPage}
             />
+
             <Route path="/faq" component={FAQ} />
             <Route path="/endorsements" component={EndorsementsPage} />
             <Route path="/terms" component={Terms} />
             <Route path="/privacy" component={Privacy} />
             <Route path="/compare" component={CompareModels} />
-            <Route path="/embed/us/:id" component={Embed} />
+
+            <Route exact path="/embed/us/:id" component={Embed} />
+            <Route
+              exact
+              path="/embed/us/:id/county/:countyId"
+              component={Embed}
+            />
+            {/* TODO: We might want to support non-embed fips-code URLs too for consistency? */}
+            <Route
+              exact
+              path="/embed/us/county/:countyFipsId"
+              component={Embed}
+            />
+
             {/* <Route path="/donate" component={ComingSoon} /> */}
             {/* /model, /contact, and /about are deprecated in favor of /faq */}
             <Route path="/model">
