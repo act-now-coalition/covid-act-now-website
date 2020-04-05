@@ -9,7 +9,7 @@ import '../../App.css'; /* optional for styling like the :hover pseudo-class */
 import StateHeader from '../../components/StateHeader/StateHeader';
 
 import { buildInterventionMap } from '../../screens/ModelPage/ModelPage';
-import { useModelDatas } from 'utils/model';
+import { useModelDatas, useStateSummaryData } from 'utils/model';
 
 import {
   EmbedContainer,
@@ -24,7 +24,6 @@ import EmbedFooter from './EmbedFooter';
 export default function Embed() {
   const { id: _location, countyId, countyFipsId } = useParams();
 
-  const [stateSummaryData, setSummaryData] = useState(null);
   const [tabState, setTabState] = useState(0);
   const [shareDrawerOpen, setShareDrawerOpen] = useState(false);
   const handleTabChange = (_event, newTabValue) => setTabState(newTabValue);
@@ -33,25 +32,26 @@ export default function Embed() {
   const [location, setLocation] = useState(null);
   const [missingCounty, setMissingCounty] = useState(false);
   useMemo(() => {
-    if (countyId) {
-      const loc = _location.toUpperCase();
-      setLocation(loc);
-      setSelectedCounty(
-        _.find(US_STATE_DATASET.state_county_map_dataset[loc].county_dataset, [
-          'county_url_name',
-          countyId,
-        ]),
-      );
-    } else if (countyFipsId) {
-      const found = findCountyByFips(countyFipsId);
-      setSelectedCounty(found);
-      if (found) {
-        setLocation(found.state_code);
-      } else {
-        setMissingCounty(true);
-      }
+    let state = null,
+      county = null;
+    if (countyFipsId) {
+      county = findCountyByFips(countyFipsId);
+      state = county?.state_code;
     } else {
-      setLocation(_location.toUpperCase());
+      state = _location.toUpperCase();
+      if (countyId) {
+        county = _.find(
+          US_STATE_DATASET.state_county_map_dataset[state].county_dataset,
+          ['county_url_name', countyId],
+        );
+      }
+    }
+
+    setLocation(state);
+    if (county === undefined) {
+      setMissingCounty(true);
+    } else {
+      setSelectedCounty(county);
     }
   }, [_location, countyId, countyFipsId]);
 
@@ -67,21 +67,8 @@ export default function Embed() {
   if (datasForView && !datasForView.error) {
     interventions = buildInterventionMap(datasForView);
   }
-  let stateInterventions = null;
-  if (modelDatasMap.stateDatas) {
-    stateInterventions = buildInterventionMap(modelDatasMap.stateDatas);
-  }
 
-  useEffect(() => {
-    if (location !== null) {
-      fetch(`/data/case_summary/${location}.summary.json`)
-        .then(data => data.json())
-        .then(setSummaryData)
-        .catch(err => {
-          throw err;
-        });
-    }
-  }, [location]);
+  const stateSummaryData = useStateSummaryData(location);
 
   let summaryData = stateSummaryData;
   if (stateSummaryData && selectedCounty) {
@@ -114,8 +101,9 @@ export default function Embed() {
   const populationPercentage =
     Number.parseFloat(deaths / totalPopulation).toPrecision(2) * 100;
 
-  const deathsPercentage =
-    Number.parseFloat(deaths / cases).toPrecision(2) * 100;
+  const deathsPercentage = Number.parseFloat(
+    (deaths / cases) * 100,
+  ).toPrecision(2);
 
   return (
     <EmbedContainer elevation="2">
@@ -125,7 +113,7 @@ export default function Embed() {
           locationName={locationName}
           countyName={selectedCounty?.county}
           intervention={intervention}
-          interventions={stateInterventions}
+          interventions={interventions}
         />
         {/* Remove this break once tabs are back */}
         <br />
@@ -169,9 +157,10 @@ function findCountyByFips(fips) {
   for (const state in statesData) {
     const countiesData = statesData[state].county_dataset;
     for (const county of countiesData) {
-      if (county.full_fips_code === fips) {
+      if (String(county.full_fips_code) === String(fips)) {
         return county;
       }
     }
   }
+  return undefined;
 }
