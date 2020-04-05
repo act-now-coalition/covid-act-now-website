@@ -1,1 +1,1 @@
-{"state": "PR", "cases": 286.0, "deaths": 11.0, "source": "JHU", "date": "2020-04-01", "counties": []}
+{"state": "PR", "cases": 452.0, "deaths": 18.0, "source": "JHU", "date": "2020-04-04", "counties": [{"fips": "00072", "cases": 452.0, "deaths": 18.0, "source": "JHU", "date": "2020-04-04"}]}
