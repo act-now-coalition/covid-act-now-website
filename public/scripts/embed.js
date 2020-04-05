@@ -122,7 +122,13 @@
       widget = widgets[i];
       iframe = document.createElement('iframe');
       href = 'https://covidactnow.org/embed/us/';
-      iframe.setAttribute('src', href + widget.getAttribute('data-state-id'));
+      var fips = widget.getAttribute('data-fips-id');
+      if (fips) {
+        href += 'county/' + fips;
+      } else {
+        href += widget.getAttribute('data-state-id');
+      }
+      iframe.setAttribute('src', href);
       iframe.setAttribute('width', '350');
       iframe.setAttribute('height', '700');
       iframe.setAttribute('frameborder', '0');

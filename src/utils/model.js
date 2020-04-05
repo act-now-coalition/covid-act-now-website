@@ -110,8 +110,10 @@ async function fetchData(
 export function useModelDatas(location, county = null, dataUrl = null) {
   const [modelDatas, setModelDatas] = useState(initialData);
   useEffect(() => {
-    fetchData(setModelDatas, location, null, dataUrl);
-    fetchSummary(setModelDatas, location);
+    if (location !== null) {
+      fetchData(setModelDatas, location, null, dataUrl);
+      fetchSummary(setModelDatas, location);
+    }
   }, [dataUrl, location]);
 
   useEffect(() => {
@@ -123,7 +125,7 @@ export function useModelDatas(location, county = null, dataUrl = null) {
           countyDatas: null,
         };
       });
-    } else {
+    } else if (location !== null) {
       fetchData(setModelDatas, location, county, dataUrl);
     }
   }, [dataUrl, county, location]);
