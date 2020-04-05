@@ -1,1 +1,1 @@
-{"state": "MP", "cases": 6.0, "deaths": 1.0, "source": "JHU", "date": "2020-04-01", "counties": [{"fips": "69000", "cases": 0.0, "deaths": 0.0, "source": "JHU", "date": "2020-03-30"}]}
+{"state": "MP", "cases": 6.0, "deaths": 1.0, "source": "JHU", "date": "2020-04-04", "counties": [{"fips": "69000", "cases": 0.0, "deaths": 0.0, "source": "JHU", "date": "2020-03-30"}, {"fips": "99999", "cases": 2.0, "deaths": 0.0, "source": "JHU", "date": "2020-04-04"}]}
