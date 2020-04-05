@@ -49,8 +49,34 @@ export const MapToggle = styled.div`
   background: ${props =>
     props.isActive ? palette.secondary.main : 'transparent'};
 
-  svg path {
-    fill: ${props => (props.isActive ? 'white' : palette.secondary.main)};
+  svg {
+    position: ${props => (props.isActive ? 'absolute' : 'relative')};
+    left: ${props => (props.isActive ? '50%' : 'auto')};
+    top: ${props => (props.isActive ? '50%' : 'auto')};
+    transform: ${props => (props.isActive ? 'translate(-50%,-50%)' : 'none')};
+
+    path {
+      fill: ${props => (props.isActive ? 'white' : '')};
+    }
+  }
+`;
+
+export const CountyMiniMapWrapper = styled.div`
+  width: 4.5rem;
+  border-left: 1px solid ${BORDER_COLOR};
+  margin-right: -15px;
+  margin-left: 15px;
+  height: 100%;
+  position: relative;
+
+  svg {
+    display: block;
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: 500px) {
+    margin-left: -15px;
+    border-left: 0;
   }
 `;
 
