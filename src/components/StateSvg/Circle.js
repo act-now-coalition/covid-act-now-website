@@ -1,32 +1,29 @@
 import React from 'react';
 import * as States from './index';
 
-import { INTERVENTIONS, INTERVENTION_COLOR_MAP } from 'enums/interventions';
-
+import { COLOR_MAP } from 'enums/interventions';
 import { CircleWrapper, StateWrapper, ActionWrapper } from './Circle.style';
 
 const CircleStateAction = ({
   state,
   ratio = 1,
   actionBackgroundFill = '#FFFFFF',
-  intervention,
+  fillColor,
   hasAction = false,
 }) => {
-  const fillColor = INTERVENTION_COLOR_MAP[intervention];
   const State = States[state];
 
   const getAction = () => {
-    switch (intervention) {
-      case INTERVENTIONS.SHELTER_IN_PLACE:
+    switch (fillColor) {
+      case COLOR_MAP.GREEN:
         return (
           <path
             d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z"
             fill={fillColor}
           />
         );
-      case INTERVENTIONS.LIMITED_ACTION:
-      case INTERVENTIONS.SOCIAL_DISTANCING:
-      case INTERVENTIONS.LOCKDOWN:
+      case COLOR_MAP.RED:
+      case COLOR_MAP.ORANGE:
         return (
           <path
             d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z"

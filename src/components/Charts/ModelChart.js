@@ -6,7 +6,6 @@ import { INTERVENTIONS } from 'enums';
 import LightTooltip from 'components/LightTooltip/LightTooltip';
 import Chart from './Chart';
 import { Typography } from '@material-ui/core';
-import { useEmbed } from 'utils/hooks';
 
 import {
   ChartContainer,
@@ -19,14 +18,11 @@ const formatIntervention = (intervention, optCase) =>
   `3 months of ${intervention}${optCase || ''}`;
 
 const ModelChart = ({
-  state,
   height,
   countyName,
-  subtitle,
   interventions,
   currentIntervention,
 }) => {
-  const { isEmbed } = useEmbed();
   const interventionToModel = {
     [INTERVENTIONS.LIMITED_ACTION]: interventions.baseline,
     [INTERVENTIONS.SOCIAL_DISTANCING]:
@@ -70,7 +66,6 @@ const ModelChart = ({
       duration,
       'orange',
     ),
-    interventions.contain.now.getDataset('hospitalizations', duration, 'green'),
     interventions.baseline.getDataset(
       'beds',
       duration,
@@ -89,6 +84,7 @@ const ModelChart = ({
       symbol: 'circle',
     },
   };
+
   const socialDistancing = {
     name:
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
@@ -103,6 +99,7 @@ const ModelChart = ({
       symbol: 'circle',
     },
   };
+
   const shelterInPlace = {
     name:
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
@@ -117,18 +114,11 @@ const ModelChart = ({
       symbol: 'circle',
     },
   };
-  const wuhanStyle = {
-    name: formatIntervention(INTERVENTIONS.LOCKDOWN),
-    type: 'areaspline',
-    data: data[3].data,
-    marker: {
-      symbol: 'circle',
-    },
-  };
+
   const availableBeds = {
     name: 'Available hospital beds',
     type: 'spline',
-    data: data[4].data,
+    data: data[3].data,
     marker: {
       symbol: 'circle',
     },
@@ -253,21 +243,15 @@ const ModelChart = ({
           },
         },
       },
-      series: [
-        noAction,
-        socialDistancing,
-        shelterInPlace,
-        wuhanStyle,
-        availableBeds,
-      ],
+      series: [noAction, socialDistancing, shelterInPlace, availableBeds],
     };
   }, [
+    height,
     model.dateOverwhelmed,
     currentIntervention,
     noAction,
     socialDistancing,
     shelterInPlace,
-    wuhanStyle,
     availableBeds,
   ]);
 

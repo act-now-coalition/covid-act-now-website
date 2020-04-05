@@ -17,7 +17,7 @@ import {
 export function Legend(props) {
   return (
     <>
-      <LegendContainer item container spacing={1} direction="row" {...props}>
+      <LegendContainer item container spacing={0} direction="row" {...props}>
         {React.Children.map(props.children, child =>
           React.cloneElement(child, { condensed: props.condensed }),
         )}
@@ -46,7 +46,7 @@ export function LegendItem(props) {
   const { title, color, description, condensed } = props;
   if (condensed) {
     return (
-      <Grid item xs="4" sm="4">
+      <Grid item xs="3" sm="3">
         <CustomTooltip arrow title={description}>
           <LegendItemContainer color={color}>
             <LegendItemHeader condensed>
@@ -61,7 +61,7 @@ export function LegendItem(props) {
   }
 
   return (
-    <Grid item xs={12} md={4}>
+    <Grid item xs={12} md={3}>
       <LegendItemContainer>
         <LegendItemHeader>
           <ColorBox color={color} />

@@ -117,18 +117,12 @@ export const Wrapper = styled.div`
     stroke: ${shelterInPlaceColor};
     fill-opacity: 0.8;
   }
-  /* Lockdown */
   .highcharts-series-3 {
-    fill: ${lockdownColor};
-    stroke: ${lockdownColor};
-    fill-opacity: 0.8;
-  }
-  .highcharts-series-4 {
     stroke: rgba(0, 0, 0, 0.7);
     stroke-width: 1px;
     stroke-dasharray: 8, 8;
   }
-  .highcharts-color-4 {
+  .highcharts-color-3 {
     fill: rgba(0, 0, 0, 0.7);
     stroke: rgba(0, 0, 0, 0.7);
   }
