@@ -1,5 +1,4 @@
 import React from 'react';
-import ShareIcon from '@material-ui/icons/Share';
 import LaunchIcon from '@material-ui/icons/Launch';
 import Logo from 'assets/images/logo';
 

@@ -9,17 +9,17 @@ export const Wrapper = styled.div`
 `;
 
 export const Content = styled.div`
-  max-width: ${props => (props.wide ? '1100px' : '900px')};
+  max-width: 1000px;
   margin: auto;
 `;
 
 export const MapTitle = styled.div`
-  padding: 1.5rem 1rem 1rem;
+  padding: 1.5rem 1rem 0;
   text-align: center;
   font-weight: bold;
 
   @media (min-width: 600px) {
-    padding: 2rem 1rem 1rem;
+    padding: 2rem 1rem 0;
   }
 `;
 
