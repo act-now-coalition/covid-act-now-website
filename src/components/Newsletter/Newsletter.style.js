@@ -41,6 +41,7 @@ export const StyledNewsletter = styled.div`
     }
 
     button {
+      cursor: pointer;
       display: block;
       appearance: none;
       box-sizing: border-box;
@@ -56,10 +57,15 @@ export const StyledNewsletter = styled.div`
       padding: 0.25rem 1.25rem;
       line-height: 2rem;
       text-transform: uppercase;
+      transition: 0.3s ease background-color;
       background-color: ${palette.secondary.main};
       color: ${palette.white};
       font-weight: 700;
       font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+
+      &:hover {
+        background-color: ${palette.secondary.dark};
+      }
     }
   }
 
