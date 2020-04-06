@@ -4,6 +4,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 
 import { useEmbed } from 'utils/hooks';
 
+import FooterSocialLinks from './FooterSocialLinks';
 import {
   StyledFooter,
   StyledFooterContent,
@@ -61,6 +62,10 @@ const Footer = ({ children }) => {
               </span>
             </StyledFooterBodyNav>
             <FooterButton className="footer__narrow-screen-only" />
+            <StyledFooterDivider />
+            <StyledFooterBodyLinks>
+              <FooterSocialLinks />
+            </StyledFooterBodyLinks>
             <StyledFooterDivider />
             <StyledFooterBodyLinks>
               <span onClick={() => goTo('/contact')}>Contact</span>
