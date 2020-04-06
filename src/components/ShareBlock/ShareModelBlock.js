@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ShareBlock from './ShareBlock';
 import { STATES } from 'enums';
 
-const ShareModelBlock = ({ condensed, location, county, embedSnippet }) => {
+import EmbedPreview from './EmbedPreview';
+
+const ShareModelBlock = ({ condensed, location, county }) => {
   const locationName = STATES[location];
   const countyName = county && county.county;
   const displayName = countyName
@@ -14,19 +16,27 @@ const ShareModelBlock = ({ condensed, location, county, embedSnippet }) => {
   const shareQuote = `This is the point of no return for intervention to prevent ${displayName}'s hospital system from being overloaded by Coronavirus: `;
   const shareInstruction = `Share ${displayName}'s COVID trends`;
   const newsletterInstruction = `Get the latest updates from the Covid Act Now team for ${displayName}`;
+  const [showEmbedPreviewModal, setShowEmbedPreviewModal] = useState(false);
 
   return (
-    <ShareBlock
-      condensed={condensed}
-      displayName={displayName}
-      location={location}
-      shareURL={shareURL}
-      countyName={countyName}
-      embedSnippet={embedSnippet}
-      shareQuote={shareQuote}
-      shareInstruction={shareInstruction}
-      newsletterInstruction={newsletterInstruction}
-    />
+    <>
+      <ShareBlock
+        condensed={condensed}
+        displayName={displayName}
+        location={location}
+        shareURL={shareURL}
+        countyName={countyName}
+        shareQuote={shareQuote}
+        shareInstruction={shareInstruction}
+        newsletterInstruction={newsletterInstruction}
+        onClickEmbed={() => setShowEmbedPreviewModal(true)}
+      />
+      <EmbedPreview
+        open={showEmbedPreviewModal}
+        county={county}
+        onClose={() => setShowEmbedPreviewModal(false)}
+      />
+    </>
   );
 };
 export default ShareModelBlock;
