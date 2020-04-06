@@ -353,7 +353,7 @@ const FAQ = ({ children }) => {
 
         <Typography variant="h5" component="h5">
           What definition does Covid Act Now use for “social distancing” and
-          “stay at home”? How about “poor/strict compliance” (re. “stay at
+          “stay at home”? How about “lax/strict” compliance (re. “stay at
           home”)?{' '}
         </Typography>
         <Typography variant="body1" component="p">

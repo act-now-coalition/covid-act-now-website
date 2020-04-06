@@ -106,14 +106,14 @@ const CallToAction = ({ interventions, currentIntervention }) => {
             <Content>
               <Icon>{worstCaseCalloutData.capacityIcon}</Icon>
               <Text>
-                <Primary>Poor Compliance</Primary>
+                <Primary>Lax Stay At Home</Primary>
                 <Detail>{worstCaseCalloutData.shortActionText}</Detail>
               </Text>
             </Content>
             <Content>
               <Icon>{interventionCalloutData.capacityIcon}</Icon>
               <Text>
-                <Primary>Strict Compliance</Primary>
+                <Primary>Strict Stay At Home</Primary>
                 <Detail>{interventionCalloutData.shortActionText}</Detail>
               </Text>
             </Content>

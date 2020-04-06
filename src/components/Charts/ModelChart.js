@@ -91,7 +91,7 @@ const ModelChart = ({
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         ? formatIntervention(
             INTERVENTIONS.SHELTER_IN_PLACE,
-            ' (poor compliance)',
+            ' (lax)',
           )
         : formatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
     type: 'areaspline',
@@ -106,7 +106,7 @@ const ModelChart = ({
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         ? formatIntervention(
             INTERVENTIONS.SHELTER_IN_PLACE,
-            ' (strict compliance)',
+            ' (strict)',
           )
         : formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
     type: 'areaspline',
