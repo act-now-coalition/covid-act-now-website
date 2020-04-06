@@ -6,9 +6,13 @@ const path = require('path');
 const promisify = require('util').promisify;
 const csvParse = promisify(require('csv-parse'));
 
-const POPULATION_CSV_URL = 'https://raw.githubusercontent.com/covid-projections/covid-data-model/master/libs/datasets/sources/fips_population.csv';
+const POPULATION_CSV_URL =
+  'https://raw.githubusercontent.com/covid-projections/covid-data-model/master/libs/datasets/sources/fips_population.csv';
 const REPO_FOLDER = path.join(__dirname, '../..');
-const SEARCH_JSON_FILE = path.join(REPO_FOLDER, 'src/components/MapSelectors/datasets/us_states_dataset_01_02_2020.json');
+const SEARCH_JSON_FILE = path.join(
+  REPO_FOLDER,
+  'src/components/MapSelectors/datasets/us_states_dataset_01_02_2020.json',
+);
 
 main();
 
@@ -40,7 +44,9 @@ async function fixSearchData(populationData) {
       if (county.includes('/')) {
         continue;
       }
-      if (['36005', '36047', '36061', '36081', '36085'].includes(full_fips_code)) {
+      if (
+        ['36005', '36047', '36061', '36081', '36085'].includes(full_fips_code)
+      ) {
         // skip NYC stuff.
         continue;
       }
@@ -49,10 +55,10 @@ async function fixSearchData(populationData) {
         continue;
       }
       const countyPopData = findPopData(countyPops, full_fips_code, county);
-      const {fips, population} = countyPopData;
+      const { fips, population } = countyPopData;
       countyData['full_fips_code'] = fips;
       countyData['state_fips_code'] = fips.substring(0, 2);
-      countyData['county_fips_code'] =  fips.substring(2);
+      countyData['county_fips_code'] = fips.substring(2);
       countyData['population'] = population;
     }
   }
@@ -61,7 +67,7 @@ async function fixSearchData(populationData) {
 
 function findPopData(countyPops, fips, name) {
   let bestFips = 0;
-  for(const popFips in countyPops) {
+  for (const popFips in countyPops) {
     if (compareNames(countyPops[popFips].name, name)) {
       bestFips = popFips;
       if (countyPops[popFips].name.toLowerCase() === name.toLowerCase()) {
@@ -69,24 +75,31 @@ function findPopData(countyPops, fips, name) {
       }
     }
   }
-  assert(bestFips !== 0, `Couldn't find population match for ${fips} / ${name}`);
+  assert(
+    bestFips !== 0,
+    `Couldn't find population match for ${fips} / ${name}`,
+  );
   return countyPops[bestFips];
 }
 
 async function readPopulationData() {
-  const result = { };
+  const result = {};
   const csv = await fetch(POPULATION_CSV_URL);
   const parsed = await csvParse(csv);
   const columns = parsed.shift();
-  for(const row of parsed) {
-    const rowCols = { };
+  for (const row of parsed) {
+    const rowCols = {};
     for (let i = 0; i < row.length; i++) {
       rowCols[columns[i]] = row[i];
     }
 
-    const {state, county, fips, population} = rowCols;
-    result[state] = result[state] || { };
-    result[state][fips] = { fips, name: county, population: parseInt(population) };
+    const { state, county, fips, population } = rowCols;
+    result[state] = result[state] || {};
+    result[state][fips] = {
+      fips,
+      name: county,
+      population: parseInt(population),
+    };
   }
   return result;
 }
@@ -94,11 +107,11 @@ async function readPopulationData() {
 function fetch(url) {
   return new Promise((resolve, reject) => {
     let contents = '';
-    https.get(url, function(response) {
+    https.get(url, function (response) {
       if (response.statusCode !== 200) {
         reject(`Request Failed. Status: ${response.statusCode}`);
       }
-      response.on('data', chunk => contents += chunk);
+      response.on('data', chunk => (contents += chunk));
       response.on('end', () => resolve(contents));
       response.on('error', reject);
     });
@@ -106,11 +119,21 @@ function fetch(url) {
 }
 
 function normalizeCityCountyName(name) {
-  if (!name) { return name; }
+  if (!name) {
+    return name;
+  }
 
   name = name.toLowerCase();
-  const removals = ['city and borough', 'city', 'county', 'parish', 'borough', 'municipality', 'census area'];
-  for(const removal of removals) {
+  const removals = [
+    'city and borough',
+    'city',
+    'county',
+    'parish',
+    'borough',
+    'municipality',
+    'census area',
+  ];
+  for (const removal of removals) {
     name = name.replace(removal, '');
   }
   return name.trim();

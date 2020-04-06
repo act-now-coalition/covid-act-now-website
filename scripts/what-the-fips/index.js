@@ -6,11 +6,18 @@ const path = require('path');
 const promisify = require('util').promisify;
 const csvParse = promisify(require('csv-parse'));
 
-const POPULATION_CSV_URL = 'https://raw.githubusercontent.com/covid-projections/covid-data-model/master/libs/datasets/sources/fips_population.csv';
+const POPULATION_CSV_URL =
+  'https://raw.githubusercontent.com/covid-projections/covid-data-model/master/libs/datasets/sources/fips_population.csv';
 const REPO_FOLDER = path.join(__dirname, '../..');
 const CENSUS_JSON_FILE = path.join(__dirname, '2018-census-fips-codes.json');
-const SEARCH_JSON_FILE = path.join(REPO_FOLDER, 'src/components/MapSelectors/datasets/us_states_dataset_01_02_2020.json');
-const TOPO_FOLDER = path.join(REPO_FOLDER, 'src/components/CountyMap/countyTopoJson/');
+const SEARCH_JSON_FILE = path.join(
+  REPO_FOLDER,
+  'src/components/MapSelectors/datasets/us_states_dataset_01_02_2020.json',
+);
+const TOPO_FOLDER = path.join(
+  REPO_FOLDER,
+  'src/components/CountyMap/countyTopoJson/',
+);
 const MODELS_FOLDER = path.join(REPO_FOLDER, 'public/data/county/');
 
 main();
@@ -22,12 +29,33 @@ async function main() {
   const modelsData = await readModelsData();
   const populationData = await readPopulationData();
 
-  console.log(csv('State', 'FIPS Code', 'Census Entry', 'Population Entry', 'Search Entry', 'TOPO Entry'));
-  for(const state of unionKeys(censusData, populationData, searchData, topoData, modelsData)) {
-    const cd = censusData[state], pd = populationData[state], sd = searchData[state], td = topoData[state], md = modelsData[state];
+  console.log(
+    csv(
+      'State',
+      'FIPS Code',
+      'Census Entry',
+      'Population Entry',
+      'Search Entry',
+      'TOPO Entry',
+    ),
+  );
+  for (const state of unionKeys(
+    censusData,
+    populationData,
+    searchData,
+    topoData,
+    modelsData,
+  )) {
+    const cd = censusData[state],
+      pd = populationData[state],
+      sd = searchData[state],
+      td = topoData[state],
+      md = modelsData[state];
 
     // Ignore territories for now.
-    if (['DC', 'PR'].includes(state)) { continue; }
+    if (['DC', 'PR'].includes(state)) {
+      continue;
+    }
 
     assert(cd, `Census Data is missing ${state}.`);
     assert(pd, `Population Data is missing ${state}.`);
@@ -50,8 +78,12 @@ async function main() {
       }
     }
 
-    for(const fips of unionKeys(cd, pd, sd, td, md)) {
-      const census = cd[fips], population = pd[fips], search = sd[fips], topo = td[fips], model = md[fips];
+    for (const fips of unionKeys(cd, pd, sd, td, md)) {
+      const census = cd[fips],
+        population = pd[fips],
+        search = sd[fips],
+        topo = td[fips],
+        model = md[fips];
       if (!census) {
         // Census is authoritative. If it's not there, there's a bug.
         throw new Error(`No census entry for ${state} / ${fips}`);
@@ -81,7 +113,7 @@ async function readSearchData() {
   for (const state in stateCounties) {
     const counties = stateCounties[state]['county_dataset'];
     for (const countyData of counties) {
-      const {full_fips_code, county} = countyData;
+      const { full_fips_code, county } = countyData;
       // Ignore combined counties, to match https://github.com/covid-projections/covid-projections/blob/1b0ba5aa826a00e6b5fc436a9129049b82679331/src/components/MapSelectors/GlobalSelector.js#L152
       if (county.includes('/')) {
         continue;
@@ -93,7 +125,7 @@ async function readSearchData() {
 }
 
 async function readTopoData() {
-  const result = { };
+  const result = {};
   const files = await fs.readdir(TOPO_FOLDER);
   for (const file of files) {
     const state = file.split('.')[0];
@@ -101,12 +133,15 @@ async function readTopoData() {
     const objects = json['objects'];
     // I don't exactly understand the file, but there seems to be a single object in each JSON file.
     const objectKeys = Object.keys(objects);
-    assert(objectKeys.length === 1, `Expected 1 object in ${file}, but found: ${objectKeys.join(',')}`);
+    assert(
+      objectKeys.length === 1,
+      `Expected 1 object in ${file}, but found: ${objectKeys.join(',')}`,
+    );
     const object = objects[objectKeys[0]];
     const { geometries } = object;
     for (const geometry of geometries) {
-      const {properties} = geometry;
-      const {GEOID, NAME} = properties;
+      const { properties } = geometry;
+      const { GEOID, NAME } = properties;
       record(result, state, GEOID, NAME);
     }
   }
@@ -114,7 +149,7 @@ async function readTopoData() {
 }
 
 async function readModelsData() {
-  const result = { };
+  const result = {};
   const files = await fs.readdir(MODELS_FOLDER);
   for (const file of files) {
     const [state, county] = file.split('.');
@@ -124,17 +159,17 @@ async function readModelsData() {
 }
 
 async function readPopulationData() {
-  const result = { };
+  const result = {};
   const csv = await fetch(POPULATION_CSV_URL);
   const parsed = await csvParse(csv);
   const columns = parsed.shift();
-  for(const row of parsed) {
-    const rowCols = { };
+  for (const row of parsed) {
+    const rowCols = {};
     for (let i = 0; i < row.length; i++) {
       rowCols[columns[i]] = row[i];
     }
 
-    const {state, county, fips} = rowCols;
+    const { state, county, fips } = rowCols;
     record(result, state, fips, county);
   }
   return result;
@@ -142,7 +177,7 @@ async function readPopulationData() {
 
 function record(results, state, fips, countyName) {
   assert(typeof results === 'object', 'Passed uninitialized result set.');
-  results[state] = results[state] || { };
+  results[state] = results[state] || {};
   const existing = results[state][fips];
   if (existing) {
     // This shouldn't happen. But we'll just aggregate them for reporting purposes.
@@ -155,11 +190,11 @@ function record(results, state, fips, countyName) {
 function fetch(url) {
   return new Promise((resolve, reject) => {
     let contents = '';
-    https.get(url, function(response) {
+    https.get(url, function (response) {
       if (response.statusCode !== 200) {
         reject(`Request Failed. Status: ${response.statusCode}`);
       }
-      response.on('data', chunk => contents += chunk);
+      response.on('data', chunk => (contents += chunk));
       response.on('end', () => resolve(contents));
       response.on('error', reject);
     });
@@ -167,8 +202,8 @@ function fetch(url) {
 }
 
 function unionKeys(...objects) {
-  const keys = { };
-  for(const object of objects) {
+  const keys = {};
+  for (const object of objects) {
     for (const key in object) {
       keys[key] = true;
     }
@@ -178,22 +213,33 @@ function unionKeys(...objects) {
 
 // TODO: Use a library.
 function csv(...items) {
-  return items.map(item =>
-    '"' + ('' + item).replace('\\', '\\\\').replace('"', '\\"') + '"'
-  ).join(', ');
+  return items
+    .map(
+      item => '"' + ('' + item).replace('\\', '\\\\').replace('"', '\\"') + '"',
+    )
+    .join(', ');
 }
 
 function normalizeCityCountyName(name) {
-  if (!name) { return name; }
+  if (!name) {
+    return name;
+  }
 
   name = name.toLowerCase();
-  const removals = ['city and borough', 'city', 'county', 'parish', 'borough', 'municipality', 'census area'];
-  for(const removal of removals) {
+  const removals = [
+    'city and borough',
+    'city',
+    'county',
+    'parish',
+    'borough',
+    'municipality',
+    'census area',
+  ];
+  for (const removal of removals) {
     name = name.replace(removal, '');
   }
   return name.trim();
 }
-
 
 function assert(exp, message) {
   if (!exp) {

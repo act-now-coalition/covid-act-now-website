@@ -43,8 +43,7 @@ class Newsletter extends React.Component {
     return (
       <StyledNewsletter>
         <NewsletterCopy color="inherit" component="p" variant="subtitle2">
-          Get the latest updates from the Covid Act Now team {' '}
-          {location}
+          Get the latest updates from the Covid Act Now team {location}
         </NewsletterCopy>
         <form
           ref={f => (this.form = f)}
