@@ -11,7 +11,7 @@ class Newsletter extends React.Component {
 
   submitForm(e) {
     e.preventDefault();
-    let url = new URL('https://createsend.com//t/getsecuresubscribelink');
+    let url = new URL('https://createsend.com/t/getsecuresubscribelink');
     url.searchParams.append('email', this.emailInput.value);
     url.searchParams.append('data', this.form.getAttribute('data-id'));
     fetch(url, {
