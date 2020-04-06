@@ -6,7 +6,7 @@ import ShareBlock from 'components/ShareBlock/ShareBlock';
 
 import { Wrapper, Content } from './FAQ.style';
 
-const FAQ = ({ children }) => {
+const FAQ = ({ children }: { children: React.ReactNode }) => {
   return (
     <Wrapper>
       <AppMetaTags

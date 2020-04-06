@@ -27,6 +27,14 @@ const ShareBlock = ({
   shareURL,
   shareInstruction,
   newsletterInstruction,
+}: {
+  location?: string;
+  countyName?: String;
+  embedSnippet?: string;
+  shareQuote?: string;
+  shareURL?: string;
+  shareInstruction?: string;
+  newsletterInstruction?: string;
 }) => {
   const url = shareURL || 'https://covidactnow.org/';
   const quote =
@@ -34,7 +42,7 @@ const ShareBlock = ({
     'See a projection for how long states and counties have until COVID overwhelms hospitals and how interventions flatten the curve and save lives: @COVIDActNow';
   const hashtag = 'COVIDActNow';
   const [embedCopySuccess, setEmbedCopySuccess] = useState(false);
-  const trackShare = target => {
+  const trackShare = (target: string) => {
     window.gtag('event', 'share', {
       event_label: target,
     });
@@ -52,6 +60,7 @@ const ShareBlock = ({
             quote={quote}
             beforeOnClick={() => {
               trackShare('facebook');
+              return Promise.resolve();
             }}
           >
             <FacebookIcon size={40} round={false} bgStyle={{ fill: 'auto' }} />
@@ -65,6 +74,7 @@ const ShareBlock = ({
             hashtags={[hashtag]}
             beforeOnClick={() => {
               trackShare('twitter');
+              return Promise.resolve();
             }}
           >
             <TwitterIcon size={40} round={false} bgStyle={{ fill: 'auto' }} />
@@ -75,9 +85,11 @@ const ShareBlock = ({
           <LinkedinShareButton
             url={url}
             title={quote}
+            // @ts-ignore: seems to not be available for linkedin?
             hashtags={[hashtag]}
             beforeOnClick={() => {
               trackShare('linkedin');
+              return Promise.resolve();
             }}
           >
             <LinkedinIcon size={40} round={false} bgStyle={{ fill: 'auto' }} />

@@ -10,10 +10,11 @@ import {
 } from './Header.style';
 
 const Header = ({
-  children,
   locationName,
   countyName = null,
-  intervention,
+}: {
+  locationName: string;
+  countyName?: string | null;
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
