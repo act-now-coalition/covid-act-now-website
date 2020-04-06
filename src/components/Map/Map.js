@@ -3,7 +3,7 @@ import '../../App.css'; /* optional for styling like the :hover pseudo-class */
 import { invert } from 'lodash';
 import { useHistory } from 'react-router-dom';
 import { STATES } from 'enums';
-import { Legend, LegendItem } from './Legend';
+import { Legend, LegendItem, MiniLegendItem } from './Legend';
 import USACountyMap from './USACountyMap';
 import { MAP_FILTERS } from '../../screens/ModelPage/Enums/MapFilterEnums';
 import { COLOR_MAP } from 'enums/interventions';
@@ -40,35 +40,27 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
       {!hideLegend && (
         <Legend>
           <LegendItem
-            key={'legend-1'}
-            title={'Hospital overloaded not likely'}
-            color={COLOR_MAP.GREEN}
+            key={'legend-3'}
+            title={'Hospital overload in 0-3 weeks'}
+            color={COLOR_MAP.RED}
             description={
-              'Hospitals unlikely to be overloaded in the next 6 weeks assuming anti-COVID interventions are continued.'
+              'Hospitals could be overloaded in immediate future. Take drastic measures.'
             }
           />
           <LegendItem
             key={'legend-2'}
-            title={'Hospital overload likely'}
+            title={'Hospital overload in 3-6 weeks'}
             color={COLOR_MAP.ORANGE}
             description={
-              'Hospitals projected to overload in the next 4-6 weeks. Act now to flatten the curve.'
+              'Hospitals could be overloaded in the next 3-6 weeks. Act now to flatten the curve.'
             }
           />
           <LegendItem
-            key={'legend-3'}
-            title={'Hospital overload near certain'}
-            color={COLOR_MAP.RED}
+            key={'legend-1'}
+            title={'Hospital overload not likely'}
+            color={COLOR_MAP.GREEN}
             description={
-              'Hospitals projected to overload in immediate future. Take drastic measures.'
-            }
-          />
-          <LegendItem
-            key={'legend-4'}
-            title={'Hospital overload unavailable'}
-            color={COLOR_MAP.GREY}
-            description={
-              'No cases reported, or not enough data to make a prediction.'
+              'Hospitals unlikely to be overloaded in the next 6 weeks assuming anti-COVID interventions are continued.'
             }
           />
         </Legend>
@@ -77,6 +69,17 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
         setTooltipContent={setContent}
         stateClickHandler={onClick}
       />
+      <Legend>
+        <MiniLegendItem
+          key={'legend-4'}
+          title={'Data unavailable'}
+          color={COLOR_MAP.GREY}
+          description={
+            'Insufficient data to make a prediction.'
+          }
+        />
+      </Legend>
+
       <ReactTooltip>{content}</ReactTooltip>
     </div>
   );

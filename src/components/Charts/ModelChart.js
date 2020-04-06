@@ -83,6 +83,7 @@ const ModelChart = ({
     marker: {
       symbol: 'circle',
     },
+    visible: currentIntervention == INTERVENTIONS.LIMITED_ACTION
   };
 
   const socialDistancing = {

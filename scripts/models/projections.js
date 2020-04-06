@@ -103,13 +103,13 @@ class Projections {
   }
 
   isLimitedActionOverwhelmedDateWithinThresholdWeeks() {
-    return !this.isOverwhelmedDateAfterNumberOfWeeks(this.baseline, 4);
+    return !this.isOverwhelmedDateAfterNumberOfWeeks(this.baseline, 3);
   }
 
   isSocialDistancingOverwhelmedDateWithinThresholdWeeks() {
     return !this.isOverwhelmedDateAfterNumberOfWeeks(
       this.distancingPoorEnforcement.now,
-      8,
+      6,
     );
   }
 

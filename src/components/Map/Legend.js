@@ -46,7 +46,7 @@ export function LegendItem(props) {
   const { title, color, description, condensed } = props;
   if (condensed) {
     return (
-      <Grid item xs="3" sm="3">
+      <Grid item xs="4" sm="4">
         <CustomTooltip arrow title={description}>
           <LegendItemContainer color={color}>
             <LegendItemHeader condensed>
@@ -61,7 +61,7 @@ export function LegendItem(props) {
   }
 
   return (
-    <Grid item xs={12} md={3}>
+    <Grid item xs={12} md={4}>
       <LegendItemContainer>
         <LegendItemHeader>
           <ColorBox color={color} />
@@ -73,6 +73,34 @@ export function LegendItem(props) {
           </Typography>
         </LegendItemDescription>
       </LegendItemContainer>
+    </Grid>
+  );
+}
+
+export function MiniLegendItem(props) {
+  const { title, color, description, condensed } = props;
+  if (condensed) {
+    return (
+      <Grid item xs="4" sm="4">
+        <CustomTooltip arrow title={description}>
+          <LegendItemContainer color={color}>
+            <LegendItemHeader condensed>
+              <CondensedLegendItemText align="center" variant="body1">
+                {title}
+              </CondensedLegendItemText>
+            </LegendItemHeader>
+          </LegendItemContainer>
+        </CustomTooltip>
+      </Grid>
+    );
+  }
+
+  return (
+    <Grid item xs={12} md={4}>
+        <LegendItemHeader>
+          <ColorBox color={color} />
+          {description}
+        </LegendItemHeader>
     </Grid>
   );
 }

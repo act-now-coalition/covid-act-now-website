@@ -55,7 +55,7 @@ const SearchHeader = ({ mobileMenuOpen, setMobileMenuOpen, setMapOption }) => {
               onClick={() => toggleMobileMenu()}
               isActive={mobileMenuOpen}
             >
-              {!isNarrowMobile && <>Find on map&nbsp;&nbsp;</>}
+              {!isNarrowMobile && <>Counties&nbsp;&nbsp;</>}
               <MapIcon />
             </MapToggle>
           )}
