@@ -50,9 +50,15 @@ const Footer = ({ children }) => {
             <Logo />
             <StyledFooterBodyNav>
               <span onClick={() => goTo('/')}>Map</span>
-              <span onClick={() => goTo('/about')}>FAQ</span>
-              <span onClick={() => goTo('/model')}>Model</span>
+              <span onClick={() => goTo('/faq')}>FAQ</span>
               <span onClick={() => goTo('/endorsements')}>Endorsements</span>
+              <span
+                onClick={() =>
+                  window.open('https://blog.covidactnow.org', '_blank')
+                }
+              >
+                Blog
+              </span>
             </StyledFooterBodyNav>
             <FooterButton className="footer__narrow-screen-only" />
             <StyledFooterDivider />

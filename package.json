@@ -49,7 +49,7 @@
     "serve": "react-scripts build && serve -s build",
     "eject": "react-scripts eject",
     "test": "start-server-and-test start http://localhost:3000 cy.open",
-    "test.ci": "cross-env BROWSER=none start-server-and-test start http://localhost:3000 cy.run",
+    "test.ci": "CHOKIDAR_USEPOLLING=1 cross-env BROWSER=none start-server-and-test start http://localhost:3000 cy.run",
     "cy.open": "cypress open",
     "cy.run": "cypress run",
     "lint": "eslint src",
