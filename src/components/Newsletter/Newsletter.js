@@ -34,16 +34,16 @@ class Newsletter extends React.Component {
   render() {
     const { stateAbbr, stateFull, county } = this.props;
     const location = county
-      ? ` in ${county}`
+      ? ` about ${county}`
       : stateFull
-      ? ` in ${stateFull}`
+      ? ` about ${stateFull}`
       : stateAbbr
-      ? ` in ${stateAbbr}`
+      ? ` about ${stateAbbr}`
       : '';
     return (
       <StyledNewsletter>
         <NewsletterCopy color="inherit" component="p" variant="subtitle2">
-          Get the latest projections for when COVID will overload hospitals{' '}
+          Get the latest updates from the Covid Act Now team {' '}
           {location}
         </NewsletterCopy>
         <form
