@@ -12,6 +12,7 @@ import ShareModelBlock from './ShareModelBlock/ShareModelBlock';
 import SearchHeader from 'components/Header/SearchHeader';
 import StateHeader from 'components/StateHeader/StateHeader';
 import ModelChart from 'components/Charts/ModelChart';
+import Newsletter from 'components/Newsletter/Newsletter';
 import {
   MapMenuMobileWrapper,
   MapMenuItem,
@@ -252,6 +253,11 @@ function ModelPage() {
                     location={_location}
                     county={selectedCounty}
                     embedSnippet={iFrameCodeSnippet}
+                  />
+                  <Newsletter
+                    county={countyName}
+                    stateAbbr={location}
+                    stateFull={locationName}
                   />
                 </Content>
               </Panel>
