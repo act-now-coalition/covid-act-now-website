@@ -25,6 +25,7 @@ import ArrowBack from '@material-ui/icons/ArrowBack';
 import { STATES } from 'enums';
 import { Location } from 'history';
 import US_STATE_DATASET from '../MapSelectors/datasets/us_states_dataset_01_02_2020';
+import { Location } from 'history';
 
 const Panels = ['/', '/faq', '/endorsements', '/contact', '/blog'];
 
@@ -73,7 +74,7 @@ const _AppBar = () => {
   if (isEmbed) return null;
 
   let match = matchPath<{ id: keyof typeof STATES }>(locationPath.pathname, {
-    path: '/us/:id',
+    path: ['/us/:id', '/us/:id/county/:county'],
     exact: true,
     strict: false,
   });
@@ -91,8 +92,6 @@ const _AppBar = () => {
     match = matchFromLegacyPath;
   }
   const locationName = locationNameFromMatch(match);
-
-  const locationName = match && match.params ? STATES[match.params.id] : '';
   const goTo = (route: string) => (e: React.MouseEvent) => {
     e.preventDefault();
     setOpen(false);
