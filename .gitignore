@@ -28,7 +28,10 @@ yarn-error.log*
 .idea
 .tern-port
 .vscode/
+
+# cypress debug output
 /cypress/videos/
+/cypress/screenshots/
 
 # you should use yarn; not npm
 package-lock.json
