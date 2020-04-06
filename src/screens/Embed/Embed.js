@@ -1,10 +1,8 @@
 import _ from 'lodash';
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { STATES, STATE_TO_INTERVENTION } from 'enums';
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 import '../../App.css'; /* optional for styling like the :hover pseudo-class */
 import StateHeader from '../../components/StateHeader/StateHeader';
 
@@ -24,9 +22,10 @@ import EmbedFooter from './EmbedFooter';
 export default function Embed() {
   const { id: _location, countyId, countyFipsId } = useParams();
 
-  const [tabState, setTabState] = useState(0);
-  const [shareDrawerOpen, setShareDrawerOpen] = useState(false);
-  const handleTabChange = (_event, newTabValue) => setTabState(newTabValue);
+  // TODO(#426): Add embed charts back.
+  const [tabState /*, setTabState*/] = useState(0);
+  // const [shareDrawerOpen, setShareDrawerOpen] = useState(false);
+  // const handleTabChange = (_event, newTabValue) => setTabState(newTabValue);
 
   const [selectedCounty, setSelectedCounty] = useState(null);
   const [location, setLocation] = useState(null);
@@ -144,8 +143,6 @@ export default function Embed() {
     </EmbedContainer>
   );
 }
-// TODO
-function LoadingState() {}
 
 function findCountyByFips(fips) {
   // NYC HACK.

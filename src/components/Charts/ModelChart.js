@@ -6,7 +6,6 @@ import { INTERVENTIONS } from 'enums';
 import LightTooltip from 'components/LightTooltip/LightTooltip';
 import Chart from './Chart';
 import { Typography } from '@material-ui/core';
-import { useEmbed } from 'utils/hooks';
 
 import {
   ChartContainer,
@@ -26,7 +25,6 @@ const ModelChart = ({
   interventions,
   currentIntervention,
 }) => {
-  const { isEmbed } = useEmbed();
   const interventionToModel = {
     [INTERVENTIONS.LIMITED_ACTION]: interventions.baseline,
     [INTERVENTIONS.SOCIAL_DISTANCING]:
@@ -269,6 +267,7 @@ const ModelChart = ({
     shelterInPlace,
     wuhanStyle,
     availableBeds,
+    height,
   ]);
 
   return (

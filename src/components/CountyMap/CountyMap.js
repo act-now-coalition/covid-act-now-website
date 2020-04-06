@@ -6,7 +6,6 @@ import {
   Geography,
   ZoomableGroup,
 } from 'react-simple-maps';
-import { scaleQuantile } from 'd3-scale';
 import { csv } from 'd3-fetch';
 import ReactTooltip from 'react-tooltip';
 import STATE_CENTERS from '../../enums/us_state_centers';
@@ -33,23 +32,22 @@ const CountyMap = ({
     });
   }, []);
 
-  const colorScale = scaleQuantile()
-    .domain(data.map(d => d.unemployment_rate))
-    .range([
-      '#ffedea',
-      '#ffcec5',
-      '#ffad9f',
-      '#ff8a75',
-      '#ff5533',
-      '#e2492d',
-      '#be3d26',
-      '#9a311f',
-      '#782618',
-    ]);
+  // TODO: Add fill back (see comment below)
+  // const colorScale = scaleQuantile()
+  //   .domain(data.map(d => d.unemployment_rate))
+  //   .range([
+  //     '#ffedea',
+  //     '#ffcec5',
+  //     '#ffad9f',
+  //     '#ff8a75',
+  //     '#ff5533',
+  //     '#e2492d',
+  //     '#be3d26',
+  //     '#9a311f',
+  //     '#782618',
+  //   ]);
 
   const [content, setContent] = useState('');
-  // Once we add fill back, add this to geography
-  // fill={cur ? colorScale(cur.unemployment_rate) : '#EEE'}
   return (
     <div>
       {data && (
@@ -68,7 +66,10 @@ const CountyMap = ({
             <Geographies geography={counties}>
               {({ geographies }) =>
                 geographies.map(geo => {
-                  const cur = data.find(s => s.id === geo.properties.GEOID);
+                  // TODO: Once we add fill back, add this to geography
+                  // fill={cur ? colorScale(cur.unemployment_rate) : '#EEE'}
+
+                  // const cur = data.find(s => s.id === geo.properties.GEOID);
                   return (
                     <Geography
                       key={geo.rsmKey}
