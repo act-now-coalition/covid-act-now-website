@@ -30,9 +30,10 @@ const FAQ = ({ children }) => {
           lives.
         </Typography>
         <Typography variant="body1" component="p">
-          Our U.S. Interventions Model is being used at every level of government
-          across the U.S., the military, private sector, and more. The model has
-          also been used by several countries around the world, including India.
+          Our U.S. Interventions Model is being used at every level of
+          government across the U.S., the military, private sector, and more.
+          The model has also been used by several countries around the world,
+          including India.
         </Typography>
 
         <Typography variant="h5" component="h5">
@@ -66,7 +67,7 @@ const FAQ = ({ children }) => {
                   >
                     {teammate.name}
                   </a>
-                  {teammate.title ? ", " + teammate.title : ""} 
+                  {teammate.title ? ', ' + teammate.title : ''}
                 </li>
               );
             })}
