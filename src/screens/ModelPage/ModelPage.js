@@ -254,7 +254,11 @@ function ModelPage() {
                     county={selectedCounty}
                     embedSnippet={iFrameCodeSnippet}
                   />
-                  <Newsletter county={countyName} stateAbbr={location} stateFull={locationName} />
+                  <Newsletter
+                    county={countyName}
+                    stateAbbr={location}
+                    stateFull={locationName}
+                  />
                 </Content>
               </Panel>
             )}

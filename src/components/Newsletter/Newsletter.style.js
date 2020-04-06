@@ -8,7 +8,8 @@ export const StyledNewsletter = styled.div`
   border: 1px solid ${palette.divider};
   padding: 1.5rem;
   border-radius: 4px;
-  box-shadow: 0 0 0 1px rgba(63,63,68,0.05), 0 1px 3px 0 rgba(63,63,68,0.15);
+  box-shadow: 0 0 0 1px rgba(63, 63, 68, 0.05),
+    0 1px 3px 0 rgba(63, 63, 68, 0.15);
 
   p {
     margin-top: 0;
@@ -33,7 +34,7 @@ export const StyledNewsletter = styled.div`
       appearance: none;
       font-size: 0.875rem;
       box-sizing: border-box;
-      font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+      font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 
       &[hidden] {
         display: none;
@@ -61,7 +62,7 @@ export const StyledNewsletter = styled.div`
       background-color: ${palette.secondary.main};
       color: ${palette.white};
       font-weight: 700;
-      font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+      font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 
       &:hover {
         background-color: ${palette.secondary.dark};
