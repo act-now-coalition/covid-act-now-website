@@ -24,16 +24,16 @@ export function CompareModels({ match, location }) {
 
   const params = QueryString.parse(history.location.search);
 
-  const [leftUrl, setLeftUrl] = useState(get(params, 'left', '/data/'));
-  const [rightUrl, setRightUrl] = useState(
-    // NOTE: The actual website doesn't handle CORS
-    // requests so we have to hit the S3 buckets for now.
+  // NOTE: The actual website doesn't handle CORS
+  // requests so we have to hit the S3 buckets for now.
+  const [leftUrl, setLeftUrl] = useState(
     get(
       params,
-      'right',
-      'https://covidactnow-testing.s3-us-west-1.amazonaws.com/',
+      'left',
+      'https://s3-us-west-1.amazonaws.com/covidactnow.org/data/',
     ),
   );
+  const [rightUrl, setRightUrl] = useState(get(params, 'right', '/data/'));
 
   // We have separate state for the input field text
   // because we don't want to actually update our
@@ -169,10 +169,10 @@ function StateChart({ state, dataUrl }) {
   const modelDatasMap = useModelDatas(state, /*county=*/ null, dataUrl);
   const locationName = STATES[state];
   const intervention = STATE_TO_INTERVENTION[state];
-  const interventions = buildInterventionMap(modelDatasMap.state);
+  const interventions = buildInterventionMap(modelDatasMap.stateDatas);
 
   return (
-    modelDatasMap.state && (
+    modelDatasMap.stateDatas && (
       // Chart height is 600px; we pre-load when a chart is within 1200px of view.
       <LazyLoad height={600} offset={1200}>
         <ModelChart
