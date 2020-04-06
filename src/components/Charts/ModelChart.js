@@ -83,7 +83,7 @@ const ModelChart = ({
     marker: {
       symbol: 'circle',
     },
-    visible: currentIntervention == INTERVENTIONS.LIMITED_ACTION
+    visible: currentIntervention === INTERVENTIONS.LIMITED_ACTION,
   };
 
   const socialDistancing = {
@@ -259,6 +259,7 @@ const ModelChart = ({
   return (
     <ChartContainer>
       <Wrapper
+        interventions={interventions}
         inShelterInPlace={
           currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         }

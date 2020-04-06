@@ -13,11 +13,21 @@ const INTERVENTIONS = {
 };
 
 const COLOR_MAP = {
-  RED: 'rgb(255, 51, 72)',
-  ORANGE: 'rgb(255, 144, 0)',
-  GREEN: 'rgb(30, 224, 175)',
-  DARK_GREEN: 'rgb(18, 146, 116)',
-  PURPLE: 'rgb(223, 31, 210)',
+  ORANGE: {
+    BASE: '#F88722',
+    LIGHT: '#FFC020',
+    DARK: '#933500',
+  },
+  RED: {
+    BASE: '#F03147',
+    LIGHT: '#FC818F',
+    DARK: '#82000E',
+  },
+  GREEN: {
+    BASE: '#4BE6BF',
+    LIGHT: '#D0FFF4',
+    DARK: '#0A3D31',
+  },
 };
 
 const STATE_TO_INTERVENTION = stateInterventions();

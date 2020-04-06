@@ -20,7 +20,6 @@ export class Projections {
     this.baseline = null;
     this.distancing = null;
     this.distancingPoorEnforcement = null;
-    this.contain = null;
     this.currentInterventionModel = null;
 
     this.populateInterventions(props);
@@ -93,11 +92,11 @@ export class Projections {
   getInterventionTitleForShelterInPlace(displayName) {
     let title = <span>Keep staying at home in {displayName}</span>;
 
-    if (this.getInterventionColor() === COLOR_MAP.ORANGE) {
+    if (this.getInterventionColor() === COLOR_MAP.ORANGE.BASE) {
       title = <span>More aggressive action needed in {displayName}</span>;
     }
 
-    if (this.getInterventionColor() === COLOR_MAP.RED) {
+    if (this.getInterventionColor() === COLOR_MAP.RED.BASE) {
       title = <span>Work harder in {displayName}</span>;
     }
 
@@ -151,12 +150,12 @@ export class Projections {
     let predictionText =
       'Avoiding hospital overload depends on aggressive government interventions and the public taking COVID seriously. Best and worst case scenarios are shown below. Projections will update as more data becomes available.';
 
-    if (this.getInterventionColor() === COLOR_MAP.ORANGE) {
+    if (this.getInterventionColor() === COLOR_MAP.ORANGE.BASE) {
       predictionText =
         'To prevent hospital overload, more aggressive action is needed: staying home, eliminating all possible means of infection. Do your part. Help others do the same. Encourage policymakers to do more.';
     }
 
-    if (this.getInterventionColor() === COLOR_MAP.RED) {
+    if (this.getInterventionColor() === COLOR_MAP.RED.BASE) {
       predictionText =
         'To prevent hospital overload, policymakers and the public must take immediate and drastic action: staying home, eliminating all possible means of infection. Do your part. Help others do the same. Encourage policymakers to do more.';
     }
@@ -177,34 +176,101 @@ export class Projections {
   }
 
   getInterventionColorForStayAtHome() {
-    let color = COLOR_MAP.GREEN;
+    let color = COLOR_MAP.GREEN.BASE;
 
     if (this.isSocialDistancingOverwhelmedDateWithinThresholdWeeks()) {
-      color = COLOR_MAP.ORANGE;
+      color = COLOR_MAP.ORANGE.BASE;
     }
 
     if (this.isSocialDistancingOverwhelmedDateWithinOneWeek()) {
-      color = COLOR_MAP.RED;
+      color = COLOR_MAP.RED.BASE;
     }
 
     return color;
   }
 
-  getInterventionColorForSocialDistancing() {
-    let color = COLOR_MAP.ORANGE;
+  getChartSeriesColorMap() {
+    return {
+      limitedActionSeries: this.getSeriesColorForLimitedAction(),
+      socialDistancingSeries: this.getSeriesColorForSocialDistancing(),
+      shelterInPlaceSeries: this.getSeriesColorForShelterInPlace(),
+    };
+  }
 
-    if (
-      this.isSocialDistancingOverwhelmedDateWithinThresholdWeeks() ||
-      this.isLimitedActionOverwhelmedDateWithinThresholdWeeks()
-    ) {
-      color = COLOR_MAP.RED;
+  getSeriesColorForLimitedAction() {
+    let seriesColor = COLOR_MAP.RED.BASE;
+
+    const interventionColor = this.getInterventionColor();
+
+    if (interventionColor === COLOR_MAP.RED.BASE) {
+      seriesColor = COLOR_MAP.RED.DARK;
+    }
+
+    return seriesColor;
+  }
+
+  getSeriesColorForSocialDistancing() {
+    let seriesColor = COLOR_MAP.ORANGE.BASE;
+
+    switch (this.getInterventionColor()) {
+      case COLOR_MAP.RED.BASE:
+        seriesColor = COLOR_MAP.RED.BASE;
+        break;
+      case COLOR_MAP.ORANGE.BASE:
+        seriesColor = COLOR_MAP.ORANGE.BASE;
+        break;
+      case COLOR_MAP.GREEN.BASE:
+        seriesColor = COLOR_MAP.GREEN.BASE;
+        break;
+    }
+
+    return seriesColor;
+  }
+
+  getSeriesColorForShelterInPlace() {
+    let seriesColor = COLOR_MAP.GREEN.BASE;
+
+    const isShelterInPlaceOverwheled =
+      this.stateIntervention === INTERVENTIONS.SHELTER_IN_PLACE &&
+      this.currentInterventionModel.dateOverwhelmed;
+
+    switch (this.getInterventionColor()) {
+      case COLOR_MAP.RED.BASE:
+        seriesColor = isShelterInPlaceOverwheled
+          ? COLOR_MAP.RED.LIGHT
+          : COLOR_MAP.GREEN.BASE;
+        break;
+      case COLOR_MAP.ORANGE.BASE:
+        seriesColor = isShelterInPlaceOverwheled
+          ? COLOR_MAP.ORANGE.LIGHT
+          : COLOR_MAP.GREEN.BASE;
+        break;
+      case COLOR_MAP.GREEN.BASE:
+        seriesColor = isShelterInPlaceOverwheled
+          ? COLOR_MAP.ORANGE.LIGHT
+          : COLOR_MAP.GREEN.LIGHT;
+        break;
+    }
+
+    return seriesColor;
+  }
+
+  getInterventionColorForSocialDistancing() {
+    let color = COLOR_MAP.GREEN.BASE;
+
+    if (this.isSocialDistancingOverwhelmedDateWithinThresholdWeeks()) {
+      color = COLOR_MAP.ORANGE.BASE;
+    }
+
+    if (this.isLimitedActionOverwhelmedDateWithinThresholdWeeks()) {
+      color = COLOR_MAP.RED.BASE;
     }
 
     return color;
   }
 
   getInterventionColorForLimitedAction() {
-    return COLOR_MAP.RED;
+    return COLOR_MAP.RED.BASE;
   }
 
   isLimitedActionOverwhelmedDateWithinThresholdWeeks() {
@@ -221,7 +287,7 @@ export class Projections {
   isSocialDistancingOverwhelmedDateWithinOneWeek() {
     return !this.isOverwhelmedDateAfterNumberOfWeeks(
       this.distancingPoorEnforcement.now,
-      1,
+      4,
     );
   }
 

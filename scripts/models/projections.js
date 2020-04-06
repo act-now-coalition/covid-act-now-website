@@ -64,59 +64,60 @@ class Projections {
     switch (this.stateIntervention) {
       case INTERVENTIONS.LIMITED_ACTION:
         return this.getInterventionColorForLimitedAction();
-      case INTERVENTIONS.SHELTER_IN_PLACE:
-        return this.getInterventionColorForStayAtHome();
       case INTERVENTIONS.SOCIAL_DISTANCING:
         return this.getInterventionColorForSocialDistancing();
+      case INTERVENTIONS.SHELTER_IN_PLACE:
+        return this.getInterventionColorForStayAtHome();
     }
   }
 
   getInterventionColorForStayAtHome() {
-    let color = COLOR_MAP.GREEN;
+    let color = COLOR_MAP.GREEN.BASE;
 
     if (this.isSocialDistancingOverwhelmedDateWithinThresholdWeeks()) {
-      color = COLOR_MAP.ORANGE;
+      color = COLOR_MAP.ORANGE.BASE;
     }
 
     if (this.isSocialDistancingOverwhelmedDateWithinOneWeek()) {
-      color = COLOR_MAP.RED;
+      color = COLOR_MAP.RED.BASE;
     }
 
     return color;
   }
 
   getInterventionColorForSocialDistancing() {
-    let color = COLOR_MAP.ORANGE;
+    let color = COLOR_MAP.GREEN.BASE;
 
-    if (
-      this.isSocialDistancingOverwhelmedDateWithinThresholdWeeks() ||
-      this.isLimitedActionOverwhelmedDateWithinThresholdWeeks()
-    ) {
-      color = COLOR_MAP.RED;
+    if (this.isSocialDistancingOverwhelmedDateWithinThresholdWeeks()) {
+      color = COLOR_MAP.ORANGE.BASE;
+    }
+
+    if (this.isLimitedActionOverwhelmedDateWithinThresholdWeeks()) {
+      color = COLOR_MAP.RED.BASE;
     }
 
     return color;
   }
 
   getInterventionColorForLimitedAction() {
-    return COLOR_MAP.RED;
+    return COLOR_MAP.RED.BASE;
   }
 
   isLimitedActionOverwhelmedDateWithinThresholdWeeks() {
-    return !this.isOverwhelmedDateAfterNumberOfWeeks(this.baseline, 3);
+    return !this.isOverwhelmedDateAfterNumberOfWeeks(this.baseline, 4);
   }
 
   isSocialDistancingOverwhelmedDateWithinThresholdWeeks() {
     return !this.isOverwhelmedDateAfterNumberOfWeeks(
       this.distancingPoorEnforcement.now,
-      6,
+      8,
     );
   }
 
   isSocialDistancingOverwhelmedDateWithinOneWeek() {
     return !this.isOverwhelmedDateAfterNumberOfWeeks(
       this.distancingPoorEnforcement.now,
-      1,
+      4,
     );
   }
 

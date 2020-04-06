@@ -41,16 +41,16 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
         <Legend>
           <LegendItem
             key={'legend-3'}
-            title={'Hospital overload in 0-3 weeks'}
-            color={COLOR_MAP.RED}
+            title={'Hospital overload in 0-4 weeks'}
+            color={COLOR_MAP.RED.BASE}
             description={
               'Hospitals could be overloaded in immediate future. Take drastic measures.'
             }
           />
           <LegendItem
             key={'legend-2'}
-            title={'Hospital overload in 3-6 weeks'}
-            color={COLOR_MAP.ORANGE}
+            title={'Hospital overload in 4-8 weeks'}
+            color={COLOR_MAP.ORANGE.BASE}
             description={
               'Hospitals could be overloaded in the next 3-6 weeks. Act now to flatten the curve.'
             }
@@ -58,7 +58,7 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
           <LegendItem
             key={'legend-1'}
             title={'Hospital overload not likely'}
-            color={COLOR_MAP.GREEN}
+            color={COLOR_MAP.GREEN.BASE}
             description={
               'Hospitals unlikely to be overloaded in the next 6 weeks assuming anti-COVID interventions are continued.'
             }
