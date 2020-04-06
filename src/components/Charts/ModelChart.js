@@ -44,13 +44,14 @@ const ModelChart = ({
     let plotLineText;
     switch (currentIntervention) {
       case INTERVENTIONS.SHELTER_IN_PLACE:
-        plotLineText = '<span>Stay at home<br/>(poor compliance)</span>';
+        plotLineText =
+          '<span>assuming stay at home<br/>(poor compliance)</span>';
         break;
       case INTERVENTIONS.LIMITED_ACTION:
-        plotLineText = 'Assuming limited action';
+        plotLineText = 'assuming limited action';
         break;
       case INTERVENTIONS.SOCIAL_DISTANCING:
-        plotLineText = 'Assuming social distancing';
+        plotLineText = 'assuming social distancing';
         break;
       default:
     }
@@ -171,11 +172,12 @@ const ModelChart = ({
             zIndex: 10,
             label: {
               formatter: function () {
+                const date = moment(this.options.value).fromNow();
                 return `<div class="custom-plot-label custom-plot-label-${snakeCase(
                   currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
                     ? INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE
                     : currentIntervention,
-                )}">Hospitals Overloaded<br /><span>${hospitalsOverloadedPlotLineText(
+                )}">Hospitals Overloaded<span><br />${date}<br />${hospitalsOverloadedPlotLineText(
                   currentIntervention,
                 )}</span></div>`;
               },
@@ -223,7 +225,7 @@ const ModelChart = ({
           if (this.series.userOptions.name === availableBeds.name) {
             return `<b>${beds}</b> expected beds <br/> available on <b>${date}</b>`;
           }
-          return `<b>${beds}</b> hospitalizations <br/> expected by <b>${date}</b>`;
+          return `<b>${beds}</b> hospitalizations <br/> expected by <b>${date}</b><br>assuming <b>${this.series.name}</b>`;
         },
         backgroundColor: null,
         borderWidth: 0,
