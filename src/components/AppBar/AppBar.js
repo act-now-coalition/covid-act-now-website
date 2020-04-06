@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory, useLocation, matchPath } from 'react-router-dom';
-import { ArrowBack } from '@material-ui/icons';
 import Logo from 'assets/images/logo';
+import { useEmbed } from 'utils/hooks';
 import MobileMenu from './MobileMenu';
 import Burger from './Burger';
 import {
@@ -44,15 +44,29 @@ const _AppBar = () => {
 
   const [panelIdx, setPanelIdx] = useState(getDefaultPanelId());
   const [open, setOpen] = useState(false);
-
   const locationPath = useLocation();
-  const match = matchPath(locationPath.pathname, {
-    path: '/state/:id',
+  const { isEmbed } = useEmbed();
+
+  // Don't show in iFrame
+  if (isEmbed) return null;
+
+  let match = matchPath(locationPath.pathname, {
+    path: '/us/:id',
     exact: true,
     strict: false,
   });
-  const locationName = match && match.params ? STATES[match.params.id] : '';
 
+  const matchFromLegacyPath = matchPath(locationPath.pathname, {
+    path: '/states/:id',
+    exact: true,
+    strict: false,
+  });
+
+  if (!match) {
+    match = matchFromLegacyPath;
+  }
+
+  const locationName = match && match.params ? STATES[match.params.id] : '';
   const goTo = route => e => {
     e.preventDefault();
     setOpen(false);
@@ -98,7 +112,7 @@ const _AppBar = () => {
     <StyledAppBar position="sticky">
       <Wrapper>
         <Left onClick={goTo('/')}>
-          {pathname.includes('state') ? <ArrowBack /> : <Logo />}
+          <Logo />
         </Left>
         <StyledDesktopMenu value={false}>
           <StyledTabs value={panelIdx}>

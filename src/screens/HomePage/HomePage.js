@@ -1,6 +1,7 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import HomePageHeader from 'components/Header/HomePageHeader';
+import { COLORS } from 'enums';
 import Map from 'components/Map/Map';
 import Endorsements from 'screens/Endorsements/Endorsements';
 import Newsletter from 'components/Newsletter/Newsletter';
@@ -35,7 +36,7 @@ export default function HomePage() {
           </Content>
         </div>
       </main>
-      <Wrapper style={{ backgroundColor: '#F2F2F2' }}>
+      <Wrapper style={{ backgroundColor: COLORS.LIGHTGRAY }}>
         <Content wide>
           <Typography variant="h3" component="h3" style={{ marginBottom: 20 }}>
             Endorsements

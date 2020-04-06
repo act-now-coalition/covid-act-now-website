@@ -6,6 +6,7 @@ import { INTERVENTIONS } from 'enums';
 import LightTooltip from 'components/LightTooltip/LightTooltip';
 import Chart from './Chart';
 import { Typography } from '@material-ui/core';
+import { useEmbed } from 'utils/hooks';
 
 import {
   ChartContainer,
@@ -19,11 +20,13 @@ const formatIntervention = (intervention, optCase) =>
 
 const ModelChart = ({
   state,
+  height,
   countyName,
   subtitle,
   interventions,
   currentIntervention,
 }) => {
+  const { isEmbed } = useEmbed();
   const interventionToModel = {
     [INTERVENTIONS.LIMITED_ACTION]: interventions.baseline,
     [INTERVENTIONS.SOCIAL_DISTANCING]:
@@ -136,7 +139,7 @@ const ModelChart = ({
       chart: {
         animation: false,
         styledMode: true,
-        height: '600',
+        height: height || '600',
         spacing: [8, 0, 32, 0],
       },
       title: {
@@ -283,7 +286,7 @@ const ModelChart = ({
             <DisclaimerContent>
               <b>County data is currently in beta.</b> See something wrong?{' '}
               <a
-                href="https://forms.gle/DhW3MwKn4Pyon88V8"
+                href="https://forms.gle/NPsLcFnrvfS1kqkn9"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -301,7 +304,7 @@ const ModelChart = ({
               placement="bottom"
             >
               <span>
-                <strong>Last updated March 27th</strong>.{' '}
+                <strong>Last updated April 4th</strong>.{' '}
               </span>
             </LightTooltip>
             This model updates every 24 hours and is intended to help make fast

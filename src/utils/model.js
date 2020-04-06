@@ -110,12 +110,14 @@ async function fetchData(
 export function useModelDatas(location, county = null, dataUrl = null) {
   const [modelDatas, setModelDatas] = useState(initialData);
   useEffect(() => {
-    fetchData(setModelDatas, location, null, dataUrl);
-    fetchSummary(setModelDatas, location);
+    if (location) {
+      fetchData(setModelDatas, location, null, dataUrl);
+      fetchSummary(setModelDatas, location);
+    }
   }, [dataUrl, location]);
 
   useEffect(() => {
-    if (county === null) {
+    if (!county) {
       setModelDatas(state => {
         return {
           ...state,
@@ -123,7 +125,7 @@ export function useModelDatas(location, county = null, dataUrl = null) {
           countyDatas: null,
         };
       });
-    } else {
+    } else if (location) {
       fetchData(setModelDatas, location, county, dataUrl);
     }
   }, [dataUrl, county, location]);
@@ -304,4 +306,20 @@ export class Model {
       data: this.getColumn(columnName, duration + this.daysSinceDayZero),
     };
   }
+}
+
+export function useStateSummaryData(state) {
+  const [summaryData, setSummaryData] = useState(null);
+  useEffect(() => {
+    if (state) {
+      fetch(`/data/case_summary/${state}.summary.json`)
+        .then(data => data.json())
+        .then(setSummaryData)
+        .catch(err => {
+          throw err;
+        });
+    }
+  }, [state]);
+
+  return summaryData;
 }

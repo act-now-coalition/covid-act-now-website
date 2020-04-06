@@ -1,4 +1,9 @@
 import styled from 'styled-components';
+import Button from '@material-ui/core/Button';
+
+export const EmbedButton = styled(Button)`
+  height: 40px;
+`;
 
 export const Wrapper = styled.div``;
 
@@ -6,6 +11,10 @@ export const ContentWrapper = styled.div``;
 
 export const MainContentWrapper = styled.div`
   margin-top: 85px;
+
+  @media (min-width: 1350px) {
+    margin-top: 97px;
+  }
 `;
 
 export const MainContentInner = styled.div`
@@ -71,11 +80,11 @@ export const StyledNoResultsWrapper = styled.div`
   @media (min-width: 1350px) {
     padding: 2rem 0 0;
     width: 900px;
-    margin: 85px 445px 0 auto;
+    margin: 97px 445px 0 auto;
   }
 
   @media (min-width: 1750px) {
-    margin: 85px auto 0;
+    margin: 97px auto 0;
   }
 `;
 
@@ -89,8 +98,8 @@ export const StyledNoResults = styled.div`
   border: 1px solid rgba(232, 0, 0, 0.1);
   margin-top: 1rem;
   border-radius: 4px;
-  
-  a {
+
+  span {
     cursor: pointer;
     margin-top: 1rem;
     text-decoration: underline;
@@ -111,7 +120,7 @@ export const MapContentWrapper = styled.div`
 
   @media (min-width: 700px) {
     z-index: 901;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.12);
     width: 400px;
     height: 400px;
     top: calc(85px + 65px + 16px);

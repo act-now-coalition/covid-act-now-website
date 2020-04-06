@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   FacebookShareButton,
   TwitterShareButton,
@@ -7,25 +7,29 @@ import {
   TwitterIcon,
   LinkedinIcon,
 } from 'react-share';
+import Snackbar from '@material-ui/core/Snackbar';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import {
   ShareButtonContainer,
   ShareContainer,
   ShareInstruction,
   ShareSpacer,
+  EmbedButton,
 } from './../ModelPage.style';
 import { STATES } from 'enums';
 
-const ShareModelBlock = ({ location, county }) => {
+const ShareModelBlock = ({ location, county, embedSnippet }) => {
   const locationName = STATES[location];
   const countyName = county && county.county;
   const displayName = countyName
     ? `${countyName}, ${locationName}`
     : locationName;
-  const shareURL = `https://covidactnow.org/state/${location}${
+  const shareURL = `https://covidactnow.org/us/${location.toLowerCase()}${
     county ? `/county/${county.county_url_name}` : ''
   }`;
   const shareQuote = `This is the point of no return for intervention to prevent ${displayName}'s hospital system from being overloaded by Coronavirus: `;
   const hashtag = 'COVIDActNow';
+  const [embedCopySuccess, setEmbedCopySuccess] = useState(false);
   const trackShare = target => {
     window.gtag('event', 'share', {
       event_label: target,
@@ -71,7 +75,25 @@ const ShareModelBlock = ({ location, county }) => {
         >
           <LinkedinIcon size={40} round={false} borderRadius={5} />
         </LinkedinShareButton>
+
+        <ShareSpacer />
+
+        <CopyToClipboard
+          text={embedSnippet}
+          onCopy={() => setEmbedCopySuccess(true)}
+        >
+          <EmbedButton variant="contained" disableElevation>
+            Embed
+          </EmbedButton>
+        </CopyToClipboard>
       </ShareButtonContainer>
+      <Snackbar
+        message="Embed code copied!"
+        open={embedCopySuccess}
+        autoHideDuration={3000}
+        onClose={() => setEmbedCopySuccess(false)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      />
     </ShareContainer>
   );
 };

@@ -1,7 +1,8 @@
 import React from 'react';
 import moment from 'moment';
 import StateCircleSvg from 'components/StateSvg/StateCircleSvg';
-import { INTERVENTIONS, INTERVENTION_COLOR_MAP } from 'enums';
+import { INTERVENTIONS, INTERVENTION_COLOR_MAP, COLORS } from 'enums';
+import { useEmbed } from 'utils/hooks';
 
 import {
   HeaderHighlight,
@@ -26,14 +27,36 @@ const Stateheader = ({
       interventions.distancingPoorEnforcement.now,
     [INTERVENTIONS.SHELTER_IN_PLACE]: interventions.distancing.now,
   };
+  const { isEmbed } = useEmbed();
+
+  // hardcoded new york
+  if (
+    locationName === 'New York' &&
+    [
+      'Kings County',
+      'Queens County',
+      'Bronx County',
+      'Richmond County',
+    ].indexOf(countyName) > -1
+  ) {
+    countyName = 'New York';
+  }
 
   const model = interventionToModel[intervention];
 
   const earlyDate = moment(model.dateOverwhelmed).subtract(14, 'days');
   const lateDate = moment(model.dateOverwhelmed).subtract(9, 'days');
-  const displayName = countyName
-    ? `${countyName}, ${locationName}`
-    : locationName;
+  const displayName = countyName ? (
+    <>
+      {' '}
+      {countyName},{' '}
+      <a href={`${isEmbed ? '/embed' : ''}/us/${location.toLowerCase()}`}>
+        {locationName}
+      </a>
+    </>
+  ) : (
+    locationName
+  );
 
   const buildInterventionTitle = () => {
     switch (intervention) {
@@ -85,10 +108,10 @@ const Stateheader = ({
       case INTERVENTIONS.SHELTER_IN_PLACE:
         return (
           <HeaderSubCopy>
-            Avoiding hospital overload depends heavily on population density and
+            Avoiding hospital overload heavily depends on population density and
             public cooperation. Best and worst case scenarios are shown below,
-            and we’ll have projections on how things are actually going as soon
-            as data becomes available.
+            and we’ll update our projections as soon as more data becomes
+            available.
           </HeaderSubCopy>
         );
       default:
@@ -96,11 +119,11 @@ const Stateheader = ({
   };
 
   return (
-    <StyledStateHeaderWrapper>
-      <StyledStateHeaderInner>
+    <StyledStateHeaderWrapper condensed={isEmbed}>
+      <StyledStateHeaderInner condensed={isEmbed}>
         <StyledStateImageWrapper>
           <StateCircleSvg
-            actionBackgroundFill={'#F2F2F2'}
+            actionBackgroundFill={COLORS.LIGHTGRAY}
             state={location}
             intervention={intervention}
             hasAction={true}
@@ -109,7 +132,7 @@ const Stateheader = ({
         <StyledStateCopyWrapper>
           <div>
             <HeaderTitle>{buildInterventionTitle()}</HeaderTitle>
-            {buildPredection()}
+            {!isEmbed && buildPredection()}
           </div>
         </StyledStateCopyWrapper>
       </StyledStateHeaderInner>

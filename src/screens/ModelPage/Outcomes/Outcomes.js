@@ -34,10 +34,10 @@ const Outcomes = ({
           {models.map((model, idx) => {
             let rowLabel = model.label;
             if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE) {
-              if (rowLabel === '3 Months of Social Distancing') {
-                rowLabel = '3 Months of Stay at home (worst case)';
+              if (rowLabel === '3 Months of Social distancing') {
+                rowLabel = '3 Months of Stay at home (poor compliance)';
               } else if (rowLabel === '3 Months of Stay at home') {
-                rowLabel = '3 Months of Stay at home (best case)';
+                rowLabel = '3 Months of Stay at home (strict compliance)';
               }
             }
 
