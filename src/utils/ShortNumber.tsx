@@ -1,4 +1,4 @@
-export default function shortNumber(x) {
+export default function shortNumber(x: number) {
   if (isNaN(x)) {
     return x;
   }

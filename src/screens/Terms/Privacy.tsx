@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 
 import { Wrapper, Content } from './Terms.style';
 
-const Privacy = ({ children }) => {
+const Privacy = ({ children }: { children: React.ReactNode }) => {
   return (
     <Wrapper>
       <Content>

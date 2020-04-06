@@ -5,6 +5,10 @@ const Callout = ({
   children,
   backgroundColor = 'white',
   borderColor = '#e3e3e3',
+}: {
+  children: React.ReactNode;
+  backgroundColor?: string;
+  borderColor?: string;
 }) => {
   return (
     <StyledCallout

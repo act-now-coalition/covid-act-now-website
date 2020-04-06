@@ -13,6 +13,7 @@ export const StyledFooter = styled.div`
   }
 `;
 
+type FooterInnerProps = { isMapPage: boolean };
 export const StyledFooterInner = styled.div`
   display: flex;
   flex-direction: column;
@@ -29,7 +30,8 @@ export const StyledFooterInner = styled.div`
   }
 
   @media (min-width: 1350px) {
-    margin: ${props => (props.isMapPage ? '0 445px 0 auto' : '0 auto')};
+    margin: ${(props: FooterInnerProps) =>
+      props.isMapPage ? '0 445px 0 auto' : '0 auto'};
   }
 
   @media (min-width: 1750px) {

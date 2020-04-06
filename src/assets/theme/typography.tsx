@@ -1,12 +1,19 @@
 import palette from './palette';
+import {
+  Variant,
+  TypographyStyleOptions,
+  FontStyleOptions,
+} from '@material-ui/core/styles/createTypography';
 
-export default {
+type TypographyOptions = Record<Variant | 'p', TypographyStyleOptions> &
+  FontStyleOptions;
+const typographyOptions: TypographyOptions = {
   p: {
-    lineHeight: '1',
+    lineHeight: 1,
   },
   h2: {
     fontSize: '1.8rem',
-    fontWeight: '500',
+    fontWeight: 500,
     lineHeight: '2.2rem',
     margin: '0 0 2rem',
     '@media (min-width:600px)': {
@@ -15,7 +22,7 @@ export default {
   },
   h3: {
     fontSize: '1.8rem',
-    fontWeight: '500',
+    fontWeight: 500,
     margin: '2rem 0 1rem',
     '@media (min-width:600px)': {
       fontSize: '2.2rem',
@@ -23,13 +30,13 @@ export default {
   },
   h4: {
     fontSize: '1.4rem',
-    fontWeight: '500',
+    fontWeight: 500,
     '@media (min-width:600px)': {
       fontSize: '1.5rem',
     },
   },
   h5: {
-    fontWeight: '500',
+    fontWeight: 500,
     fontSize: '1.2rem',
     margin: '1.4rem 0',
     '@media (min-width:600px)': {
@@ -65,6 +72,7 @@ export default {
     letterSpacing: '-0.04px',
     lineHeight: '1.4rem',
   },
+  // @ts-ignore This seems like a bug?
   whiteText: {
     color: palette.white,
   },
@@ -87,3 +95,5 @@ export default {
     textTransform: 'uppercase',
   },
 };
+
+export default typographyOptions;

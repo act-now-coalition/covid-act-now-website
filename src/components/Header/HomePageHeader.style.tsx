@@ -21,14 +21,14 @@ export const HighlightColor = styled.span`
   font-weight: 600;
 `;
 
-export const HeaderTitle = styled(Typography)`
+export const HeaderTitle = styled(Typography)<{ component?: string }>`
   font-size: 2em;
   font-weight: 500;
   line-height: 2.3rem;
   margin-bottom: 0.5rem;
 `;
 
-export const HeaderSubCopy = styled(Typography)`
+export const HeaderSubCopy = styled(Typography)<{ component?: string }>`
   font-size: 1rem;
   line-height: 1.6rem;
   margin-bottom: 2rem;

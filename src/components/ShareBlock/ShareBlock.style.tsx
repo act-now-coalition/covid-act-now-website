@@ -21,7 +21,7 @@ export const ShareContainer = styled.div`
     0 1px 3px 0 rgba(63, 63, 68, 0.15);
 `;
 
-export const ShareInstruction = styled(Typography)`
+export const ShareInstruction = styled(Typography)<{ component?: string }>`
   margin-top: 0;
   margin-bottom: 1rem;
   font-size: 1rem;
@@ -31,7 +31,7 @@ export const ShareInstruction = styled(Typography)`
   text-align: center;
 `;
 
-export const ShareButtonContainer = styled.div`
+export const ShareButtonContainer = styled.div<{ reflow: boolean }>`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -57,7 +57,11 @@ export const ShareTypeDivider = styled.div`
   margin: 1.5rem -1.5rem;
 `;
 
-export const StyledShareButton = styled.div`
+export const StyledShareButton = styled.div<{
+  color: string;
+  disableElevation?: boolean /* seems to do nothing? */;
+  variant?: string;
+}>`
   background-color: ${props => props.color};
   border-radius: 5px;
   cursor: pointer;
