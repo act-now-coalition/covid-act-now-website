@@ -125,22 +125,32 @@ export class Projections {
 
     let predictionText = (
       <span>
-        To prevent hospital overload, our projections indicate a Stay at Home
-        order must be implemented between{' '}
-        <strong>{earlyDate.format('MMMM Do')}</strong> and{' '}
-        <strong>{lateDate.format('MMMM Do')}</strong> at the latest. The sooner
-        you act, the more lives you save.
+        Avoiding hospital overload depends on aggressive government
+        interventions and the public taking COVID seriously. Projections will
+        update as more data becomes available.
       </span>
     );
 
-    if (earlyDate.isBefore(moment())) {
+    if (this.currentInterventionModel.dateOverwhelmed) {
       predictionText = (
         <span>
           To prevent hospital overload, our projections indicate a Stay at Home
-          order must be implemented immediately. The sooner you act, the more
-          lives you save.
+          order must be implemented between{' '}
+          <strong>{earlyDate.format('MMMM Do')}</strong> and{' '}
+          <strong>{lateDate.format('MMMM Do')}</strong> at the latest. The
+          sooner you act, the more lives you save.
         </span>
       );
+
+      if (earlyDate.isBefore(moment())) {
+        predictionText = (
+          <span>
+            To prevent hospital overload, our projections indicate a Stay at
+            Home order must be implemented immediately. The sooner you act, the
+            more lives you save.
+          </span>
+        );
+      }
     }
 
     return <HeaderSubCopy>{predictionText}</HeaderSubCopy>;
