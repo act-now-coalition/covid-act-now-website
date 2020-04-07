@@ -11,7 +11,6 @@ import * as QueryString from 'query-string';
 import ModelChart from 'components/Charts/ModelChart';
 import { STATES, STATE_TO_INTERVENTION } from 'enums';
 import { useModelDatas } from 'utils/model';
-import { buildInterventionMap } from 'screens/ModelPage/ModelPage';
 
 import {
   Wrapper,
@@ -169,7 +168,7 @@ function StateChart({ state, dataUrl }) {
   const modelDatasMap = useModelDatas(state, /*county=*/ null, dataUrl);
   const locationName = STATES[state];
   const intervention = STATE_TO_INTERVENTION[state];
-  const interventions = buildInterventionMap(modelDatasMap.stateDatas);
+  const interventions = modelDatasMap.stateDatas.projections;
 
   return (
     modelDatasMap.stateDatas && (

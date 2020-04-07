@@ -1,19 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../../App.css'; /* optional for styling like the :hover pseudo-class */
-import USAMap from 'components/Map/USAMap/USAMap';
+import { invert } from 'lodash';
 import { useHistory } from 'react-router-dom';
-import Grid from '@material-ui/core/Grid';
-import {
-  STATES,
-  STATE_TO_INTERVENTION,
-  INTERVENTION_COLOR_MAP,
-  INTERVENTION_DESCRIPTIONS,
-  INTERVENTION_EFFICACY_ORDER_ASC,
-} from 'enums';
-import { Legend, LegendItem } from './Legend';
+import { STATES } from 'enums';
+import { Legend, LegendItem, MiniLegendItem } from './Legend';
+import USACountyMap from './USACountyMap';
+import { MAP_FILTERS } from '../../screens/ModelPage/Enums/MapFilterEnums';
+import { COLOR_MAP } from 'enums/interventions';
+import ReactTooltip from 'react-tooltip';
 
-function Map({ hideLegend = false, setMobileMenuOpen }) {
+function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
   const history = useHistory();
+  const [content, setContent] = useState('');
 
   const goToStatePage = page => {
     window.scrollTo(0, 0);
@@ -21,54 +19,66 @@ function Map({ hideLegend = false, setMobileMenuOpen }) {
     history.push(page);
   };
 
-  const legendConfig = {};
+  const onClick = stateName => {
+    const reversedStateMap = invert(STATES);
 
-  const statesCustomConfig = Object.keys(STATES).reduce((config, currState) => {
-    const intervention = STATE_TO_INTERVENTION[currState];
-    const interventionColor = INTERVENTION_COLOR_MAP[intervention];
+    const stateCode = reversedStateMap[stateName];
 
-    if (!legendConfig[intervention]) {
-      legendConfig[intervention] = true;
+    goToStatePage(`/us/${stateCode.toLowerCase()}`);
+
+    if (setMapOption) {
+      setMapOption(MAP_FILTERS.STATE);
     }
 
-    return {
-      ...config,
-      [currState]: {
-        fill: interventionColor,
-        clickHandler: event => {
-          goToStatePage(`/us/${currState.toLowerCase()}`);
-
-          if (setMobileMenuOpen) {
-            setMobileMenuOpen(false);
-          }
-        },
-      },
-    };
-  }, {});
+    if (setMobileMenuOpen) {
+      setMobileMenuOpen(false);
+    }
+  };
 
   return (
     <div className="Map">
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <USAMap width="100%" height="auto" customize={statesCustomConfig} />
-        </Grid>
-        {!hideLegend && (
-          <Grid item xs={12}>
-            <Legend>
-              {INTERVENTION_EFFICACY_ORDER_ASC.filter(
-                intervention => legendConfig[intervention],
-              ).map(intervention => (
-                <LegendItem
-                  key={`legend-${intervention}`}
-                  title={intervention}
-                  color={INTERVENTION_COLOR_MAP[intervention]}
-                  description={INTERVENTION_DESCRIPTIONS[intervention]}
-                />
-              ))}
-            </Legend>
-          </Grid>
-        )}
-      </Grid>
+      {!hideLegend && (
+        <Legend>
+          <LegendItem
+            key={'legend-3'}
+            title={'Hospital overload in 0-4 weeks'}
+            color={COLOR_MAP.RED.BASE}
+            description={
+              'Hospitals could be overloaded in immediate future. Take drastic measures.'
+            }
+          />
+          <LegendItem
+            key={'legend-2'}
+            title={'Hospital overload in 4-8 weeks'}
+            color={COLOR_MAP.ORANGE.BASE}
+            description={
+              'Hospitals could be overloaded in the next 4-8 weeks. Act now to flatten the curve.'
+            }
+          />
+          <LegendItem
+            key={'legend-1'}
+            title={'Hospital overload not likely'}
+            color={COLOR_MAP.GREEN.BASE}
+            description={
+              'Hospitals unlikely to be overloaded in the next 8 weeks assuming anti-COVID interventions are continued.'
+            }
+          />
+        </Legend>
+      )}
+      <USACountyMap
+        setTooltipContent={setContent}
+        stateClickHandler={onClick}
+      />
+      <Legend>
+        <MiniLegendItem
+          key={'legend-4'}
+          title={'Data unavailable'}
+          color={COLOR_MAP.GREY}
+          description={'Predictions not available'}
+        />
+      </Legend>
+
+      <ReactTooltip>{content}</ReactTooltip>
     </div>
   );
 }
