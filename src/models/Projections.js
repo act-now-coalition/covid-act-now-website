@@ -284,7 +284,7 @@ export class Projections {
       color = COLOR_MAP.ORANGE.BASE;
     }
 
-    if (this.isLimitedActionOverwhelmedDateWithinThresholdWeeks()) {
+    if (this.isSocialDistancingOverwhelmedDateWithinOneWeek()) {
       color = COLOR_MAP.RED.BASE;
     }
 
@@ -293,10 +293,6 @@ export class Projections {
 
   getInterventionColorForLimitedAction() {
     return COLOR_MAP.RED.BASE;
-  }
-
-  isLimitedActionOverwhelmedDateWithinThresholdWeeks() {
-    return !this.isOverwhelmedDateAfterNumberOfWeeks(this.baseline, 4);
   }
 
   isSocialDistancingOverwhelmedDateWithinThresholdWeeks() {
