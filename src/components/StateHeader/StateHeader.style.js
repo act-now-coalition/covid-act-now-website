@@ -7,6 +7,10 @@ import { COLORS } from 'enums';
 export const HeaderHighlight = styled.span`
   color: ${props => props.color};
   font-weight: 600;
+
+  a {
+    color: ${props => props.color} !important;
+  }
 `;
 
 export const HeaderTitle = styled(Typography)`

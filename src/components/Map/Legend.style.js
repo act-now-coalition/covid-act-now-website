@@ -15,41 +15,40 @@ export const CondensedLegendItemText = styled(Typography)`
   text-shadow: rgba(0, 0, 0, 0.75) 0.5px 0.5px 2px;
 `;
 
-export const LegendContainer = styled(Grid)`
-  padding: ${props => (props.condensed ? '0.1rem 1rem' : '1rem')};
-`;
+export const LegendContainer = styled(Grid)``;
 
 export const LegendItemHeader = styled(Box)`
   width: 100%;
-  padding: 4px ${props => (props.condensed ? '8px' : '20px')};
+  padding: 8px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+  font-size: 13px;
 `;
 
 export const LegendItemContainer = styled(Paper)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 3px 5px;
-  padding: 4px 2px;
   background-color: ${props => props.color || 'none'};
+  margin: 0.5rem 1rem;
+  @media (min-width: 960px) {
+    margin: 0.5rem;
+  }
 `;
 
 export const LegendItemDescription = styled(Box)`
-  margin: 8px;
   padding: 8px;
   background-color: #f7f7f7;
   border-radius: 3px;
-  width: 90%;
+  width: 100%;
 `;
 
 export const ColorBox = styled(Grid)`
   background-color: ${props => props.color};
-  border: 1px solid gray;
-  border-radius: 10px;
-  margin: 2px 10px 0 0;
-  height: 20px;
-  width: 20px;
+  margin-right: 8px;
+  border-radius: 100%;
+  height: 14px;
+  width: 14px;
 `;
