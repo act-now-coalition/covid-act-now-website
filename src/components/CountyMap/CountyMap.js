@@ -33,7 +33,7 @@ const CountyMap = ({
   return (
     <div>
       <ComposableMap
-        projection="geoAlbers"
+        projection={state.StateCode == 'AK' ? 'geoAlbers' : 'geoMercator'}
         data-tip=""
         projectionConfig={{
           rotate: state.rotate ? state.rotate : null,

@@ -92,14 +92,13 @@ export default {
     StateCode: 'ID',
     Latitude: 44.2405,
     Longitude: -114.4788,
-    scale: 3000,
+    scale: 2000,
   },
   IL: {
     'Province/State': 'Illinois',
     StateCode: 'IL',
     Latitude: 40.3495,
     Longitude: -88.9861,
-    scale: 4500,
   },
   IN: {
     'Province/State': 'Indiana',
@@ -141,7 +140,6 @@ export default {
     StateCode: 'ME',
     Latitude: 44.6939,
     Longitude: -69.3819,
-    scale: 5000,
   },
   MD: {
     'Province/State': 'Maryland',
@@ -189,6 +187,7 @@ export default {
     StateCode: 'MT',
     Latitude: 46.9219,
     Longitude: -110.4544,
+    scale: 3000,
   },
   NE: {
     'Province/State': 'Nebraska',
@@ -233,14 +232,12 @@ export default {
     StateCode: 'NC',
     Latitude: 35.6301,
     Longitude: -79.8064,
-    scale: 6000,
   },
   ND: {
     'Province/State': 'North Dakota',
     StateCode: 'ND',
     Latitude: 47.5289,
     Longitude: -99.784,
-    scale: 5000,
   },
   OH: {
     'Province/State': 'Ohio',
@@ -254,7 +251,6 @@ export default {
     StateCode: 'OK',
     Latitude: 35.5653,
     Longitude: -97.9289,
-    scale: 5000,
   },
   OR: {
     'Province/State': 'Oregon',
@@ -321,6 +317,7 @@ export default {
     StateCode: 'VT',
     Latitude: 44.0459,
     Longitude: -72.7107,
+    scale: 8000,
   },
   VI: {
     'Province/State': 'Virgin Islands, U.S.',
@@ -340,7 +337,6 @@ export default {
     StateCode: 'WA',
     Latitude: 47.4009,
     Longitude: -120.4905,
-    scale: 8000,
   },
   WV: {
     'Province/State': 'West Virginia',
