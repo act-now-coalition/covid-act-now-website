@@ -17,7 +17,7 @@ import {
 export function Legend(props) {
   return (
     <>
-      <LegendContainer item container spacing={0} direction="row" {...props}>
+      <LegendContainer item container spacing={1} direction="row" {...props}>
         {React.Children.map(props.children, child =>
           React.cloneElement(child, { condensed: props.condensed }),
         )}
@@ -73,34 +73,6 @@ export function LegendItem(props) {
           </Typography>
         </LegendItemDescription>
       </LegendItemContainer>
-    </Grid>
-  );
-}
-
-export function MiniLegendItem(props) {
-  const { title, color, description, condensed } = props;
-  if (condensed) {
-    return (
-      <Grid item xs="4" sm="4">
-        <CustomTooltip arrow title={description}>
-          <LegendItemContainer color={color}>
-            <LegendItemHeader condensed>
-              <CondensedLegendItemText align="center" variant="body1">
-                {title}
-              </CondensedLegendItemText>
-            </LegendItemHeader>
-          </LegendItemContainer>
-        </CustomTooltip>
-      </Grid>
-    );
-  }
-
-  return (
-    <Grid item xs={12} md={4}>
-      <LegendItemHeader>
-        <ColorBox color={color} />
-        {description}
-      </LegendItemHeader>
     </Grid>
   );
 }

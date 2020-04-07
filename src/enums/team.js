@@ -11,11 +11,11 @@ export default [
   },
   {
     name: 'Representative Jonathan Kreiss-Tomkins',
-    title: 'Alaska Legislature',
+    title: 'Alaska Legislator',
     link: 'https://en.wikipedia.org/wiki/Jonathan_Kreiss-Tomkins',
   },
   {
-    name: 'Professor Rebecca Katz, PhD, MPH',
+    name: 'Professor Rebecca Katz, Ph.D., MPH',
     title:
       'Director of the Center for Global Health Science and Security, Georgetown University',
     link: 'https://www.linkedin.com/in/rebecca-katz-43a04a5/',
@@ -27,7 +27,7 @@ export default [
     link: 'https://profiles.stanford.edu/nirav-shah',
   },
   {
-    name: 'Ellie Graeden, PhD',
+    name: 'Ellie Graeden, Ph.D.',
     title:
       'CEO, Talus Analytics; Affiliate and Adjunct, Georgetown University Center for Global Health Science and Security',
     link: 'https://www.linkedin.com/in/egraeden/',

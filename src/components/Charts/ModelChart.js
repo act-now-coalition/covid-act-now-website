@@ -6,6 +6,7 @@ import { INTERVENTIONS } from 'enums';
 import LightTooltip from 'components/LightTooltip/LightTooltip';
 import Chart from './Chart';
 import { Typography } from '@material-ui/core';
+import { useEmbed } from 'utils/hooks';
 
 import {
   ChartContainer,
@@ -18,11 +19,14 @@ const formatIntervention = (intervention, optCase) =>
   `3 months of ${intervention}${optCase || ''}`;
 
 const ModelChart = ({
+  state,
   height,
   countyName,
+  subtitle,
   interventions,
   currentIntervention,
 }) => {
+  const { isEmbed } = useEmbed();
   const interventionToModel = {
     [INTERVENTIONS.LIMITED_ACTION]: interventions.baseline,
     [INTERVENTIONS.SOCIAL_DISTANCING]:
@@ -36,6 +40,24 @@ const ModelChart = ({
     model = interventionToModel[INTERVENTIONS.SOCIAL_DISTANCING];
   }
 
+  const hospitalsOverloadedPlotLineText = currentIntervention => {
+    let plotLineText;
+    switch (currentIntervention) {
+      case INTERVENTIONS.SHELTER_IN_PLACE:
+        plotLineText = '<span>Stay at home<br/>(poor compliance)</span>';
+        break;
+      case INTERVENTIONS.LIMITED_ACTION:
+        plotLineText = 'Assuming limited action';
+        break;
+      case INTERVENTIONS.SOCIAL_DISTANCING:
+        plotLineText = 'Assuming social distancing';
+        break;
+      default:
+    }
+
+    return plotLineText;
+  };
+
   const scenarioComparisonOverTime = duration => [
     interventions.baseline.getDataset('hospitalizations', duration, 'red'),
     interventions.distancing.now.getDataset(
@@ -48,6 +70,7 @@ const ModelChart = ({
       duration,
       'orange',
     ),
+    interventions.contain.now.getDataset('hospitalizations', duration, 'green'),
     interventions.baseline.getDataset(
       'beds',
       duration,
@@ -65,13 +88,14 @@ const ModelChart = ({
     marker: {
       symbol: 'circle',
     },
-    visible: currentIntervention === INTERVENTIONS.LIMITED_ACTION,
   };
-
   const socialDistancing = {
     name:
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
-        ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (lax)')
+        ? formatIntervention(
+            INTERVENTIONS.SHELTER_IN_PLACE,
+            ' (poor compliance)',
+          )
         : formatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
     type: 'areaspline',
     data: data[2].data,
@@ -79,11 +103,13 @@ const ModelChart = ({
       symbol: 'circle',
     },
   };
-
   const shelterInPlace = {
     name:
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
-        ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (strict)')
+        ? formatIntervention(
+            INTERVENTIONS.SHELTER_IN_PLACE,
+            ' (strict compliance)',
+          )
         : formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
     type: 'areaspline',
     data: data[1].data,
@@ -91,11 +117,18 @@ const ModelChart = ({
       symbol: 'circle',
     },
   };
-
+  const wuhanStyle = {
+    name: formatIntervention(INTERVENTIONS.LOCKDOWN),
+    type: 'areaspline',
+    data: data[3].data,
+    marker: {
+      symbol: 'circle',
+    },
+  };
   const availableBeds = {
     name: 'Available hospital beds',
     type: 'spline',
-    data: data[3].data,
+    data: data[4].data,
     marker: {
       symbol: 'circle',
     },
@@ -142,7 +175,9 @@ const ModelChart = ({
                   currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
                     ? INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE
                     : currentIntervention,
-                )}">Hospitals Overloaded<br /><span>${interventions.getChartHospitalsOverloadedText()}</span></div>`;
+                )}">Hospitals Overloaded<br /><span>${hospitalsOverloadedPlotLineText(
+                  currentIntervention,
+                )}</span></div>`;
               },
               rotation: 0,
               useHTML: true,
@@ -218,23 +253,27 @@ const ModelChart = ({
           },
         },
       },
-      series: [noAction, socialDistancing, shelterInPlace, availableBeds],
+      series: [
+        noAction,
+        socialDistancing,
+        shelterInPlace,
+        wuhanStyle,
+        availableBeds,
+      ],
     };
   }, [
-    height,
     model.dateOverwhelmed,
     currentIntervention,
     noAction,
     socialDistancing,
     shelterInPlace,
+    wuhanStyle,
     availableBeds,
-    interventions,
   ]);
 
   return (
     <ChartContainer>
       <Wrapper
-        interventions={interventions}
         inShelterInPlace={
           currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         }
@@ -265,7 +304,7 @@ const ModelChart = ({
               placement="bottom"
             >
               <span>
-                <strong>Last updated April 4th</strong>.{' '}
+                <strong>Last updated April 6th</strong>.{' '}
               </span>
             </LightTooltip>
             This model updates every 24 hours and is intended to help make fast
