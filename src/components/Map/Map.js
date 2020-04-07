@@ -69,14 +69,17 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
         setTooltipContent={setContent}
         stateClickHandler={onClick}
       />
-      <Legend>
-        <MiniLegendItem
-          key={'legend-4'}
-          title={'Data unavailable'}
-          color={COLOR_MAP.GREY}
-          description={'Predictions not available'}
-        />
-      </Legend>
+
+      {!hideLegend && (
+        <Legend>
+          <MiniLegendItem
+            key={'legend-4'}
+            title={'Data unavailable'}
+            color={COLOR_MAP.GREY}
+            description={'Predictions not available'}
+          />
+        </Legend>
+      )}
 
       <ReactTooltip>{content}</ReactTooltip>
     </div>
