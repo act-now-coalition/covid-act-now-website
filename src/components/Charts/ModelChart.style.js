@@ -1,6 +1,15 @@
 import styled from 'styled-components';
-import { INTERVENTIONS, COLORS } from 'enums';
+import { INTERVENTIONS, INTERVENTION_COLOR_MAP, COLORS } from 'enums';
 import { snakeCase } from 'lodash';
+
+const noActionColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.LIMITED_ACTION];
+const socialDistancingColor =
+  INTERVENTION_COLOR_MAP[INTERVENTIONS.SOCIAL_DISTANCING];
+const shelterInPlaceColor =
+  INTERVENTION_COLOR_MAP[INTERVENTIONS.SHELTER_IN_PLACE];
+const shelterInPlaceWorstCaseColor =
+  INTERVENTION_COLOR_MAP[INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE];
+const lockdownColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.LOCKDOWN];
 
 export const ChartContainer = styled.section`
   width: 100%;
@@ -64,14 +73,6 @@ export const Wrapper = styled.div`
     padding: 0;
     border: none;
   }
-  .highcharts-markers {
-    stroke: white !important;
-  }
-  .highcharts-halo {
-    fill: white !important;
-    fill-opacity: 1;
-    box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.5);
-  }
   .highcharts-tooltip > span {
     background: rgba(0, 0, 0, 0.7);
     color: #ffffff;
@@ -90,38 +91,44 @@ export const Wrapper = styled.div`
     font-size: 13px;
     color: rgba(0, 0, 0, 0.7);
   }
-  .highcharts-area {
-    fill-opacity: 1;
-  }
   /* these are styled according to the
      order passed into the series array */
   /* No action */
   .highcharts-series-0 {
-    fill: ${props =>
-      props.interventions.getChartSeriesColorMap().limitedActionSeries};
-    stroke: white;
-    fill-opacity: ;
+    fill: ${noActionColor};
+    stroke: ${noActionColor};
+    fill-opacity: 0.8;
   }
   /* Social distancing */
   .highcharts-series-1 {
     fill: ${props =>
-      props.interventions.getChartSeriesColorMap().socialDistancingSeries};
-    stroke: white;
-    fill-opacity: 1;
+      props.inShelterInPlace
+        ? shelterInPlaceWorstCaseColor
+        : socialDistancingColor};
+    stroke: ${props =>
+      props.inShelterInPlace
+        ? shelterInPlaceWorstCaseColor
+        : socialDistancingColor};
+    fill-opacity: 0.8;
   }
   /* Stay at home */
   .highcharts-series-2 {
-    fill: ${props =>
-      props.interventions.getChartSeriesColorMap().shelterInPlaceSeries};
-    stroke: white;
-    fill-opacity: 1;
+    fill: ${shelterInPlaceColor};
+    stroke: ${shelterInPlaceColor};
+    fill-opacity: 0.8;
   }
+  /* Lockdown */
   .highcharts-series-3 {
-    stroke: white;
+    fill: ${lockdownColor};
+    stroke: ${lockdownColor};
+    fill-opacity: 0.8;
+  }
+  .highcharts-series-4 {
+    stroke: rgba(0, 0, 0, 0.7);
     stroke-width: 1px;
     stroke-dasharray: 8, 8;
   }
-  .highcharts-color-3 {
+  .highcharts-color-4 {
     fill: rgba(0, 0, 0, 0.7);
     stroke: rgba(0, 0, 0, 0.7);
   }
@@ -130,21 +137,20 @@ export const Wrapper = styled.div`
     stroke-width: 3px;
   }
   .${snakeCase(INTERVENTIONS.LIMITED_ACTION)} {
-    stroke: ${props => props.interventions.getInterventionColor()};
+    stroke: ${noActionColor};
   }
   .${snakeCase(INTERVENTIONS.SOCIAL_DISTANCING)} {
-    stroke: ${props => props.interventions.getInterventionColor()};
+    stroke: ${socialDistancingColor};
   }
   .${snakeCase(INTERVENTIONS.SHELTER_IN_PLACE)} {
-    stroke: ${props => props.interventions.getInterventionColor()};
+    stroke: ${shelterInPlaceColor};
   }
   .${snakeCase(INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE)} {
-    stroke: ${props => props.interventions.getInterventionColor()};
+    stroke: ${shelterInPlaceWorstCaseColor};
   }
   .${snakeCase(INTERVENTIONS.LOCKDOWN)} {
-    stroke: ${props => props.interventions.getInterventionColor()};
+    stroke: ${lockdownColor};
   }
-
   .today {
     stroke: rgba(0, 0, 0, 0.7);
     stroke-width: 3px;
@@ -168,25 +174,25 @@ export const Wrapper = styled.div`
     }
 
     &.custom-plot-label-${snakeCase(INTERVENTIONS.LIMITED_ACTION)} {
-      background: ${props => props.interventions.getInterventionColor()};
+      background: ${noActionColor};
     }
 
     &.custom-plot-label-${snakeCase(INTERVENTIONS.SOCIAL_DISTANCING)} {
-      background: ${props => props.interventions.getInterventionColor()};
+      background: ${socialDistancingColor};
     }
 
     &.custom-plot-label-${snakeCase(
         INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE,
       )} {
-      background: ${props => props.interventions.getInterventionColor()};
+      background: ${shelterInPlaceWorstCaseColor};
     }
 
     &.custom-plot-label-${snakeCase(INTERVENTIONS.SHELTER_IN_PLACE)} {
-      background: ${props => props.interventions.getInterventionColor()};
+      background: ${shelterInPlaceColor};
     }
 
     &.custom-plot-label-${snakeCase(INTERVENTIONS.LOCKDOWN)} {
-      background: ${props => props.interventions.getInterventionColor()};
+      background: ${lockdownColor};
     }
   }
 `;
