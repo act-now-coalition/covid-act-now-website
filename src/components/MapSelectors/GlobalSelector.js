@@ -7,11 +7,7 @@ import ShortNumber from 'utils/ShortNumber';
 import StateCircleSvg from 'components/StateSvg/StateCircleSvg';
 import US_STATE_DATASET from './datasets/us_states_dataset_01_02_2020';
 
-import {
-  STATE_TO_INTERVENTION,
-  STATE_TO_CALCULATED_INTERVENTION_COLOR,
-  FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR,
-} from 'enums/interventions';
+import { STATE_TO_INTERVENTION } from 'enums';
 
 import {
   StyledDropDownWrapper,
@@ -31,7 +27,6 @@ import {
 
 const StateItem = ({ dataset }) => {
   const intervention = STATE_TO_INTERVENTION[dataset.state_code];
-  const fillColor = STATE_TO_CALCULATED_INTERVENTION_COLOR[dataset.state_code];
 
   return (
     <StyledResultsMenuOption hasData={true}>
@@ -39,7 +34,7 @@ const StateItem = ({ dataset }) => {
         <StyledState>
           <StateCircleSvg
             ratio={0.8}
-            fillColor={fillColor}
+            intervention={intervention}
             state={dataset.state_code}
           />
         </StyledState>
@@ -58,12 +53,7 @@ const StateItem = ({ dataset }) => {
 };
 
 const CountyItem = ({ dataset }) => {
-  let fillColor = STATE_TO_CALCULATED_INTERVENTION_COLOR[dataset.state_code];
-
-  if (FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR[dataset.full_fips_code]) {
-    fillColor =
-      FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR[dataset.full_fips_code];
-  }
+  const intervention = STATE_TO_INTERVENTION[dataset.state_code];
 
   return (
     <StyledResultsMenuOption hasData={dataset.hasData}>
@@ -71,7 +61,7 @@ const CountyItem = ({ dataset }) => {
         <StyledCounty>
           <StateCircleSvg
             ratio={0.8}
-            fillColor={fillColor}
+            intervention={intervention}
             state={dataset.state_code}
           />
         </StyledCounty>
