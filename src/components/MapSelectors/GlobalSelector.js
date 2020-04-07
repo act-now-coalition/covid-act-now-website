@@ -246,7 +246,7 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
                   onFocus: () => {
                     openMenu();
                   },
-                  placeholder: 'Find your county or state',
+                  placeholder: 'Search for your city, county or state',
                 })}
               />
             </StyledInputWrapper>

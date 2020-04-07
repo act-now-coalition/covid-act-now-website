@@ -6615,7 +6615,7 @@
             "Lemoore Station",
             "Stratford"
           ],
-          "population": 1628706
+          "population": 152940
         },
         {
           "county": "Monterey County / San Benito County",
@@ -10177,7 +10177,7 @@
         {
           "county": "Miami-Dade County",
           "county_url_name": "miami_dade_county",
-          "county_fips_code": "025",
+          "county_fips_code": "086",
           "state_fips_code": "12",
           "state_code": "FL",
           "full_fips_code": "12086",
@@ -11491,6 +11491,7 @@
             "Schley County",
             "Bleckley County / Dodge County",
             "Ben Hill County / Irwin County",
+            "Ben Hill County",
             "Butts County",
             "Charlton County",
             "Catoosa County / Walker County",
@@ -12373,10 +12374,10 @@
         {
           "county": "Clayton County",
           "county_url_name": "clayton_county",
-          "county_fips_code": "061",
+          "county_fips_code": "063",
           "state_fips_code": "13",
           "state_code": "GA",
-          "full_fips_code": "13061",
+          "full_fips_code": "13063",
           "cities": [
             "Bonanza",
             "Conley",
@@ -12388,7 +12389,7 @@
             "Morrow",
             "Riverdale"
           ],
-          "population": 2834
+          "population": 292256
         },
         {
           "county": "Thomas County",
@@ -13425,6 +13426,18 @@
           "population": 16700
         },
         {
+          "county": "Ben Hill County",
+          "county_url_name": "ben_hill_county",
+          "county_fips_code": "017",
+          "state_fips_code": "13",
+          "state_code": "GA",
+          "full_fips_code": "13017",
+          "cities": [
+            "Fitzgerald"
+          ],
+          "population": 16700
+        },
+        {
           "county": "Butts County",
           "county_url_name": "butts_county",
           "county_fips_code": "035",
@@ -14451,6 +14464,7 @@
           "counties": [
             "Honolulu County",
             "Hawaii County",
+            "Kalawao County",
             "Kauai County",
             "Maui County"
           ],
@@ -14611,6 +14625,18 @@
             "Wainiha"
           ],
           "population": 72293
+        },
+        {
+          "county": "Kalawao County",
+          "county_url_name": "kalawao_county",
+          "county_fips_code": "005",
+          "state_fips_code": "15",
+          "state_code": "HI",
+          "full_fips_code": "15005",
+          "cities": [
+            "Kalaupapa"
+          ],
+          "population": 86
         },
         {
           "county": "Maui County",
@@ -16578,10 +16604,10 @@
         {
           "county": "Clayton County",
           "county_url_name": "clayton_county",
-          "county_fips_code": "041",
+          "county_fips_code": "043",
           "state_fips_code": "19",
           "state_code": "IA",
-          "full_fips_code": "19041",
+          "full_fips_code": "19043",
           "cities": [
             "Clayton",
             "Elkader",
@@ -16600,7 +16626,7 @@
             "Strawberry Point",
             "Volga"
           ],
-          "population": 16016
+          "population": 17549
         },
         {
           "county": "Ringgold County / Taylor County",
@@ -18067,15 +18093,15 @@
         {
           "county": "Adams County",
           "county_url_name": "adams_county",
-          "county_fips_code": "001",
+          "county_fips_code": "003",
           "state_fips_code": "16",
           "state_code": "ID",
-          "full_fips_code": "16001",
+          "full_fips_code": "16003",
           "cities": [
             "Council",
             "New Meadows"
           ],
-          "population": 481587
+          "population": 4294
         },
         {
           "county": "Lewis County",
@@ -19084,10 +19110,10 @@
         {
           "county": "Whiteside County",
           "county_url_name": "whiteside_county",
-          "county_fips_code": "193",
+          "county_fips_code": "195",
           "state_fips_code": "17",
           "state_code": "IL",
-          "full_fips_code": "17193",
+          "full_fips_code": "17195",
           "cities": [
             "Albany",
             "Albany (Township)",
@@ -19124,7 +19150,7 @@
             "Union Grove",
             "Ustick"
           ],
-          "population": 13537
+          "population": 55175
         },
         {
           "county": "Clinton County",
@@ -22322,10 +22348,10 @@
         {
           "county": "Williamson County",
           "county_url_name": "williamson_county",
-          "county_fips_code": "197",
+          "county_fips_code": "199",
           "state_fips_code": "17",
           "state_code": "IL",
-          "full_fips_code": "17197",
+          "full_fips_code": "17199",
           "cities": [
             "Bush",
             "Cambria",
@@ -22342,7 +22368,7 @@
             "Spillertown",
             "Whiteash"
           ],
-          "population": 690743
+          "population": 66597
         },
         {
           "county": "Ford County / Kankakee County",
@@ -23417,7 +23443,6 @@
             "Blackford County",
             "Ripley County",
             "LaGrange County",
-            "Marion County.",
             "Boone County / Hendricks County",
             "Tipton County",
             "Marshall County / Starke County",
@@ -25150,18 +25175,6 @@
             "Topeka"
           ],
           "population": 39614
-        },
-        {
-          "county": "Marion County.",
-          "county_url_name": "marion_county",
-          "county_fips_code": "097",
-          "state_fips_code": "18",
-          "state_code": "IN",
-          "full_fips_code": "18097",
-          "cities": [
-            "Indianapolis"
-          ],
-          "population": 964582
         },
         {
           "county": "Boone County / Hendricks County",
@@ -29420,10 +29433,10 @@
         {
           "county": "Greenup County",
           "county_url_name": "greenup_county",
-          "county_fips_code": "087",
+          "county_fips_code": "089",
           "state_fips_code": "21",
           "state_code": "KY",
-          "full_fips_code": "21087",
+          "full_fips_code": "21089",
           "cities": [
             "Bellefonte",
             "Flatwoods",
@@ -29434,7 +29447,7 @@
             "Worthington",
             "Wurtland"
           ],
-          "population": 10941
+          "population": 35098
         },
         {
           "county": "Boone County",
@@ -32246,10 +32259,10 @@
         {
           "county": "Jefferson Davis Parish",
           "county_url_name": "jefferson_davis_parish",
-          "county_fips_code": "051",
+          "county_fips_code": "053",
           "state_fips_code": "22",
           "state_code": "LA",
-          "full_fips_code": "22051",
+          "full_fips_code": "22053",
           "cities": [
             "Elton",
             "Fenton",
@@ -32259,7 +32272,7 @@
             "Roanoke",
             "Welsh"
           ],
-          "population": 432493
+          "population": 31368
         },
         {
           "county": "West Carroll Parish",
@@ -33739,14 +33752,14 @@
         {
           "county": "Baltimore city",
           "county_url_name": "baltimore_city",
-          "county_fips_code": "005",
+          "county_fips_code": "510",
           "state_fips_code": "24",
           "state_code": "MD",
-          "full_fips_code": "24005",
+          "full_fips_code": "24510",
           "cities": [
             "Baltimore"
           ],
-          "population": 827370
+          "population": 593490
         },
         {
           "county": "Queen Anne's County",
@@ -40173,16 +40186,16 @@
         {
           "county": "Lake of the Woods County",
           "county_url_name": "lake_of_the_woods_county",
-          "county_fips_code": "075",
+          "county_fips_code": "077",
           "state_fips_code": "27",
           "state_code": "MN",
-          "full_fips_code": "27075",
+          "full_fips_code": "27077",
           "cities": [
             "Angle Inlet",
             "Baudette",
             "Williams"
           ],
-          "population": 10641
+          "population": 3740
         },
         {
           "county": "Kanabec County",
@@ -45685,14 +45698,14 @@
         {
           "county": "St. Louis city",
           "county_url_name": "st_louis_city",
-          "county_fips_code": "189",
+          "county_fips_code": "510",
           "state_fips_code": "29",
           "state_code": "MO",
-          "full_fips_code": "29189",
+          "full_fips_code": "29510",
           "cities": [
             "St. Louis"
           ],
-          "population": 994205
+          "population": 300576
         },
         {
           "county": "Camden County / Laclede County",
@@ -46080,15 +46093,15 @@
         {
           "county": "Jefferson Davis County",
           "county_url_name": "jefferson_davis_county",
-          "county_fips_code": "063",
+          "county_fips_code": "065",
           "state_fips_code": "28",
           "state_code": "MS",
-          "full_fips_code": "28063",
+          "full_fips_code": "28065",
           "cities": [
             "Bassfield",
             "Prentiss"
           ],
-          "population": 6990
+          "population": 11128
         },
         {
           "county": "Panola County",
@@ -48517,6 +48530,7 @@
             "Rockingham County",
             "Chowan County",
             "Camden County / Pasquotank County",
+            "Pasquotank County",
             "Surry County / Wilkes County",
             "Halifax County",
             "Hyde County",
@@ -50173,6 +50187,18 @@
             "Elizabeth City"
           ],
           "population": 10867
+        },
+        {
+          "county": "Pasquotank County",
+          "county_url_name": "pasquotank_county",
+          "county_fips_code": "139",
+          "state_fips_code": "37",
+          "state_code": "NC",
+          "full_fips_code": "37139",
+          "cities": [
+            "Elizabeth City"
+          ],
+          "population": 39824
         },
         {
           "county": "Surry County / Wilkes County",
@@ -73436,6 +73462,7 @@
             "Williamsburg County",
             "Greenville County / Spartanburg County",
             "Beaufort County / Jasper County",
+            "Jasper County",
             "Dorchester County",
             "Abbeville County / Anderson County",
             "Fairfield County",
@@ -74084,10 +74111,10 @@
         {
           "county": "Chesterfield County",
           "county_url_name": "chesterfield_county",
-          "county_fips_code": "023",
+          "county_fips_code": "025",
           "state_fips_code": "45",
           "state_code": "SC",
-          "full_fips_code": "45023",
+          "full_fips_code": "45025",
           "cities": [
             "Cheraw",
             "Chesterfield",
@@ -74098,7 +74125,7 @@
             "Patrick",
             "Ruby"
           ],
-          "population": 32244
+          "population": 45650
         },
         {
           "county": "Cherokee County / Spartanburg County",
@@ -74363,6 +74390,19 @@
             "Ridgeland"
           ],
           "population": 192122
+        },
+        {
+          "county": "Jasper County",
+          "county_url_name": "jasper_county",
+          "county_fips_code": "053",
+          "state_fips_code": "45",
+          "state_code": "SC",
+          "full_fips_code": "45053",
+          "cities": [
+            "Hardeeville",
+            "Ridgeland"
+          ],
+          "population": 30073
         },
         {
           "county": "Dorchester County",
@@ -76903,6 +76943,7 @@
             "Robertson County / Sumner County",
             "Franklin County / Grundy County / Marion County",
             "Hamblen County / Jefferson County",
+            "Hamblen County",
             "Johnson County",
             "Cocke County",
             "Anderson County / Roane County",
@@ -78502,6 +78543,19 @@
           "population": 64934
         },
         {
+          "county": "Hamblen County",
+          "county_url_name": "hamblen_county",
+          "county_fips_code": "063",
+          "state_fips_code": "47",
+          "state_code": "TN",
+          "full_fips_code": "47063",
+          "cities": [
+            "Morristown",
+            "White Pine"
+          ],
+          "population": 64934
+        },
+        {
           "county": "Johnson County",
           "county_url_name": "johnson_county",
           "county_fips_code": "091",
@@ -79065,6 +79119,7 @@
             "Irion County",
             "Roberts County",
             "Martin County / Midland County",
+            "Midland County",
             "Titus County",
             "Palo Pinto County / Parker County",
             "Wheeler County",
@@ -80795,10 +80850,10 @@
         {
           "county": "Grayson County",
           "county_url_name": "grayson_county",
-          "county_fips_code": "179",
+          "county_fips_code": "181",
           "state_fips_code": "48",
           "state_code": "TX",
-          "full_fips_code": "48179",
+          "full_fips_code": "48181",
           "cities": [
             "Bells",
             "Collinsville",
@@ -80817,7 +80872,7 @@
             "Tom Bean",
             "Whitesboro"
           ],
-          "population": 21886
+          "population": 136212
         },
         {
           "county": "Austin County",
@@ -81198,17 +81253,17 @@
         {
           "county": "Robertson County",
           "county_url_name": "robertson_county",
-          "county_fips_code": "393",
+          "county_fips_code": "395",
           "state_fips_code": "48",
           "state_code": "TX",
-          "full_fips_code": "48393",
+          "full_fips_code": "48395",
           "cities": [
             "Bremond",
             "Calvert",
             "Franklin",
             "Hearne"
           ],
-          "population": 854
+          "population": 17074
         },
         {
           "county": "Washington County",
@@ -82575,17 +82630,17 @@
         {
           "county": "Collingsworth County",
           "county_url_name": "collingsworth_county",
-          "county_fips_code": "085",
+          "county_fips_code": "087",
           "state_fips_code": "48",
           "state_code": "TX",
-          "full_fips_code": "48085",
+          "full_fips_code": "48087",
           "cities": [
             "Dodson",
             "Quail",
             "Samnorwood",
             "Wellington"
           ],
-          "population": 1034730
+          "population": 2920
         },
         {
           "county": "Erath County",
@@ -82660,10 +82715,10 @@
         {
           "county": "Jackson County",
           "county_url_name": "jackson_county",
-          "county_fips_code": "237",
+          "county_fips_code": "239",
           "state_fips_code": "48",
           "state_code": "TX",
-          "full_fips_code": "48237",
+          "full_fips_code": "48239",
           "cities": [
             "Edna",
             "Ganado",
@@ -82671,7 +82726,7 @@
             "Lolita",
             "Vanderbilt"
           ],
-          "population": 8935
+          "population": 14760
         },
         {
           "county": "Throckmorton County",
@@ -83310,10 +83365,10 @@
         {
           "county": "Harrison County",
           "county_url_name": "harrison_county",
-          "county_fips_code": "201",
+          "county_fips_code": "203",
           "state_fips_code": "48",
           "state_code": "TX",
-          "full_fips_code": "48201",
+          "full_fips_code": "48203",
           "cities": [
             "Hallsville",
             "Marshall",
@@ -83322,7 +83377,7 @@
             "Uncertain",
             "Waskom"
           ],
-          "population": 4713325
+          "population": 66553
         },
         {
           "county": "Hamilton County",
@@ -84004,6 +84059,18 @@
             "Midland"
           ],
           "population": 5771
+        },
+        {
+          "county": "Midland County",
+          "county_url_name": "midland_county",
+          "county_fips_code": "329",
+          "state_fips_code": "48",
+          "state_code": "TX",
+          "full_fips_code": "48329",
+          "cities": [
+            "Midland"
+          ],
+          "population": 176832
         },
         {
           "county": "Titus County",
@@ -85762,6 +85829,7 @@
             "Bath County",
             "Lancaster County",
             "Greensville County / Sussex County",
+            "Greensville County",
             "Lunenburg County",
             "Lancaster County / Northumberland County",
             "King and Queen County",
@@ -85807,7 +85875,8 @@
             "Waynesboro City",
             "Williamsburg City",
             "Winchester City",
-            "Augusta County / Nelson County"
+            "Augusta County / Nelson County",
+            "James City County"
           ],
           "population": 5759240
         }
@@ -86838,14 +86907,14 @@
         {
           "county": "Charlottesville city",
           "county_url_name": "charlottesville_city",
-          "county_fips_code": "037",
+          "county_fips_code": "540",
           "state_fips_code": "51",
           "state_code": "VA",
-          "full_fips_code": "51037",
+          "full_fips_code": "51540",
           "cities": [
             "Charlottesville"
           ],
-          "population": 11880
+          "population": 47266
         },
         {
           "county": "Chesapeake City",
@@ -87157,14 +87226,14 @@
         {
           "county": "Fairfax city",
           "county_url_name": "fairfax_city",
-          "county_fips_code": "059",
+          "county_fips_code": "600",
           "state_fips_code": "51",
           "state_code": "VA",
-          "full_fips_code": "51059",
+          "full_fips_code": "51600",
           "cities": [
             "Fairfax"
           ],
-          "population": 1147532
+          "population": 24019
         },
         {
           "county": "Falls Church City",
@@ -87249,26 +87318,26 @@
         {
           "county": "Franklin city",
           "county_url_name": "franklin_city",
-          "county_fips_code": "067",
+          "county_fips_code": "620",
           "state_fips_code": "51",
           "state_code": "VA",
-          "full_fips_code": "51067",
+          "full_fips_code": "51620",
           "cities": [
             "Franklin"
           ],
-          "population": 56042
+          "population": 7967
         },
         {
           "county": "Fredericksburg city",
           "county_url_name": "fredericksburg_city",
-          "county_fips_code": "069",
+          "county_fips_code": "630",
           "state_fips_code": "51",
           "state_code": "VA",
-          "full_fips_code": "51069",
+          "full_fips_code": "51630",
           "cities": [
             "Fredericksburg"
           ],
-          "population": 89313
+          "population": 29036
         },
         {
           "county": "Grayson County",
@@ -87503,6 +87572,18 @@
         {
           "county": "Greensville County / Sussex County",
           "county_url_name": "greensville_county_sussex_county",
+          "county_fips_code": "081",
+          "state_fips_code": "51",
+          "state_code": "VA",
+          "full_fips_code": "51081",
+          "cities": [
+            "Jarratt"
+          ],
+          "population": 11336
+        },
+        {
+          "county": "Greensville County",
+          "county_url_name": "greensville_county",
           "county_fips_code": "081",
           "state_fips_code": "51",
           "state_code": "VA",
@@ -87860,26 +87941,26 @@
         {
           "county": "Richmond City",
           "county_url_name": "richmond_city",
-          "county_fips_code": "159",
+          "county_fips_code": "760",
           "state_fips_code": "51",
           "state_code": "VA",
-          "full_fips_code": "51159",
+          "full_fips_code": "51760",
           "cities": [
             "Richmond"
           ],
-          "population": 9023
+          "population": 230436
         },
         {
           "county": "Roanoke City",
           "county_url_name": "roanoke_city",
-          "county_fips_code": "161",
+          "county_fips_code": "770",
           "state_fips_code": "51",
           "state_code": "VA",
-          "full_fips_code": "51161",
+          "full_fips_code": "51770",
           "cities": [
             "Roanoke"
           ],
-          "population": 94186
+          "population": 99143
         },
         {
           "county": "Greene County",
@@ -88077,6 +88158,16 @@
             "Wintergreen"
           ],
           "population": 75558
+        },
+        {
+          "county": "James City County",
+          "county_url_name": "james_city_county",
+          "county_fips_code": "095",
+          "state_fips_code": "51",
+          "state_code": "VA",
+          "full_fips_code": "51095",
+          "cities": [],
+          "population": 76523
         }
       ]
     },
@@ -92287,10 +92378,10 @@
         {
           "county": "Green Lake County",
           "county_url_name": "green_lake_county",
-          "county_fips_code": "045",
+          "county_fips_code": "047",
           "state_fips_code": "55",
           "state_code": "WI",
-          "full_fips_code": "55045",
+          "full_fips_code": "55047",
           "cities": [
             "Berlin (Town)",
             "Brooklyn",
@@ -92309,7 +92400,7 @@
             "Seneca",
             "St. Marie"
           ],
-          "population": 36960
+          "population": 18913
         },
         {
           "county": "Waukesha County",

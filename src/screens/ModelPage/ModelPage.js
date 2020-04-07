@@ -12,6 +12,7 @@ import ShareModelBlock from './ShareModelBlock/ShareModelBlock';
 import SearchHeader from 'components/Header/SearchHeader';
 import StateHeader from 'components/StateHeader/StateHeader';
 import ModelChart from 'components/Charts/ModelChart';
+import Newsletter from 'components/Newsletter/Newsletter';
 import {
   MapMenuMobileWrapper,
   MapMenuItem,
@@ -96,11 +97,6 @@ function ModelPage() {
     interventions = buildInterventionMap(datasForView);
   }
 
-  let stateInterventions = null;
-  if (modelDatasMap.stateDatas) {
-    stateInterventions = buildInterventionMap(modelDatasMap.stateDatas);
-  }
-
   if (redirectTarget) {
     const goToLocation = redirectTarget;
     setRedirectTarget(null);
@@ -158,13 +154,13 @@ function ModelPage() {
     return (
       <MainContentWrapper mobileMenuOpen={mobileMenuOpen}>
         <MainContentInner>
-          {stateInterventions && (
+          {interventions && (
             <StateHeader
               location={_location}
               locationName={locationName}
               countyName={countyName}
               intervention={intervention}
-              interventions={stateInterventions}
+              interventions={interventions}
             />
           )}
           <MainContentInnerBody>
@@ -257,6 +253,11 @@ function ModelPage() {
                     location={_location}
                     county={selectedCounty}
                     embedSnippet={iFrameCodeSnippet}
+                  />
+                  <Newsletter
+                    county={countyName}
+                    stateAbbr={location}
+                    stateFull={locationName}
                   />
                 </Content>
               </Panel>

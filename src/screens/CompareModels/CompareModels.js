@@ -40,16 +40,16 @@ export function CompareModels({ match, location }) {
 
   const params = QueryString.parse(history.location.search);
 
-  const [leftUrl, setLeftUrl] = useState(get(params, 'left', '/data/'));
-  const [rightUrl, setRightUrl] = useState(
-    // NOTE: The actual website doesn't handle CORS
-    // requests so we have to hit the S3 buckets for now.
+  // NOTE: The actual website doesn't handle CORS
+  // requests so we have to hit the S3 buckets for now.
+  const [leftUrl, setLeftUrl] = useState(
     get(
       params,
-      'right',
-      'https://covid-projections-git-2020-03-31-legacy.covidactnow.now.sh/data/',
+      'left',
+      'https://s3-us-west-1.amazonaws.com/covidactnow.org/data/',
     ),
   );
+  const [rightUrl, setRightUrl] = useState(get(params, 'right', '/data/'));
 
   // Load models for all states.
   const leftModelDatas = useAllStateModelDatas(leftUrl);

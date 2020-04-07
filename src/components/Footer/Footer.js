@@ -4,6 +4,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 
 import { useEmbed } from 'utils/hooks';
 
+import FooterSocialLinks from './FooterSocialLinks';
 import {
   StyledFooter,
   StyledFooterContent,
@@ -50,11 +51,21 @@ const Footer = ({ children }) => {
             <Logo />
             <StyledFooterBodyNav>
               <span onClick={() => goTo('/')}>Map</span>
-              <span onClick={() => goTo('/about')}>FAQ</span>
-              <span onClick={() => goTo('/model')}>Model</span>
+              <span onClick={() => goTo('/faq')}>FAQ</span>
               <span onClick={() => goTo('/endorsements')}>Endorsements</span>
+              <span
+                onClick={() =>
+                  window.open('https://blog.covidactnow.org', '_blank')
+                }
+              >
+                Blog
+              </span>
             </StyledFooterBodyNav>
             <FooterButton className="footer__narrow-screen-only" />
+            <StyledFooterDivider />
+            <StyledFooterBodyLinks>
+              <FooterSocialLinks />
+            </StyledFooterBodyLinks>
             <StyledFooterDivider />
             <StyledFooterBodyLinks>
               <span onClick={() => goTo('/contact')}>Contact</span>

@@ -1,6 +1,7 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { TEAM } from './../../enums';
+import Newsletter from 'components/Newsletter/Newsletter';
 
 import { Wrapper, Content } from './FAQ.style';
 
@@ -236,6 +237,14 @@ const FAQ = ({ children }) => {
               </a>
             </li>
           </ul>
+        </Typography>
+        <Typography variant="h5" component="h5">
+          Are you on social media?
+        </Typography>
+        <Typography>
+          Follow us on <a href="https://twitter.com/CovidActNow">Twitter</a>,{' '}
+          <a href="https://www.facebook.com/covidactnow">Facebook</a> or{' '}
+          <a href="https://www.instagram.com/covidactnow">Instagram</a>.
         </Typography>
 
         <Typography variant="h3" component="h1">
@@ -489,6 +498,7 @@ const FAQ = ({ children }) => {
           next three weeks and will be distributed automatically, with no action
           required for most people.” .
         </Typography>
+        <Newsletter />
       </Content>
     </Wrapper>
   );
