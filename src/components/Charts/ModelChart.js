@@ -36,24 +36,6 @@ const ModelChart = ({
     model = interventionToModel[INTERVENTIONS.SOCIAL_DISTANCING];
   }
 
-  const hospitalsOverloadedPlotLineText = currentIntervention => {
-    let plotLineText;
-    switch (currentIntervention) {
-      case INTERVENTIONS.SHELTER_IN_PLACE:
-        plotLineText = '<span>Stay at home<br/>(poor compliance)</span>';
-        break;
-      case INTERVENTIONS.LIMITED_ACTION:
-        plotLineText = 'Assuming limited action';
-        break;
-      case INTERVENTIONS.SOCIAL_DISTANCING:
-        plotLineText = 'Assuming social distancing';
-        break;
-      default:
-    }
-
-    return plotLineText;
-  };
-
   const scenarioComparisonOverTime = duration => [
     interventions.baseline.getDataset('hospitalizations', duration, 'red'),
     interventions.distancing.now.getDataset(
@@ -89,10 +71,7 @@ const ModelChart = ({
   const socialDistancing = {
     name:
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
-        ? formatIntervention(
-            INTERVENTIONS.SHELTER_IN_PLACE,
-            ' (lax)',
-          )
+        ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (lax)')
         : formatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
     type: 'areaspline',
     data: data[2].data,
@@ -104,10 +83,7 @@ const ModelChart = ({
   const shelterInPlace = {
     name:
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
-        ? formatIntervention(
-            INTERVENTIONS.SHELTER_IN_PLACE,
-            ' (strict)',
-          )
+        ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (strict)')
         : formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
     type: 'areaspline',
     data: data[1].data,
@@ -166,9 +142,7 @@ const ModelChart = ({
                   currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
                     ? INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE
                     : currentIntervention,
-                )}">Hospitals Overloaded<br /><span>${hospitalsOverloadedPlotLineText(
-                  currentIntervention,
-                )}</span></div>`;
+                )}">Hospitals Overloaded<br /><span>${interventions.getChartHospitalsOverloadedText()}</span></div>`;
               },
               rotation: 0,
               useHTML: true,
@@ -254,6 +228,7 @@ const ModelChart = ({
     socialDistancing,
     shelterInPlace,
     availableBeds,
+    interventions,
   ]);
 
   return (

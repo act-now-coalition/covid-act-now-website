@@ -1,13 +1,9 @@
 import React from 'react';
 import {
   INTERVENTIONS,
-  INTERVENTION_COLOR_MAP,
   INTERVENTION_DESCRIPTIONS,
 } from 'enums';
-import {
-  WarningIcon,
-  CheckIcon,
-} from 'assets/images/capacityIcons';
+import { WarningIcon, CheckIcon } from 'assets/images/capacityIcons';
 import InterventionIcon from 'assets/images/interventionIcon';
 import {
   CallToActionBox,
@@ -32,7 +28,9 @@ const CallToAction = ({ interventions, currentIntervention }) => {
       return {
         label: `Reduced overload projected`,
         shortActionText: `We project no overload over the next 3 months`,
-        capacityIcon: <CheckIcon fill={interventions.getSeriesColorForShelterInPlace()} />,
+        capacityIcon: (
+          <CheckIcon fill={interventions.getSeriesColorForShelterInPlace()} />
+        ),
       };
     } else {
       const isShelterInPlaceWorstCaseModel =
@@ -41,15 +39,31 @@ const CallToAction = ({ interventions, currentIntervention }) => {
 
       let capacityIcon;
       if (isShelterInPlaceWorstCaseModel) {
-        capacityIcon = <WarningIcon fill={interventions.getSeriesColorForSocialDistancing()} />;
+        capacityIcon = (
+          <WarningIcon
+            fill={interventions.getSeriesColorForSocialDistancing()}
+          />
+        );
       } else {
         if (model.intervention === INTERVENTIONS.LIMITED_ACTION) {
-          capacityIcon = <WarningIcon fill={interventions.getSeriesColorForLimitedAction()} />;
+          capacityIcon = (
+            <WarningIcon
+              fill={interventions.getSeriesColorForLimitedAction()}
+            />
+          );
         } else {
           if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE) {
-            capacityIcon = <WarningIcon fill={interventions.getSeriesColorForShelterInPlace()} />;
+            capacityIcon = (
+              <WarningIcon
+                fill={interventions.getSeriesColorForShelterInPlace()}
+              />
+            );
           } else {
-            capacityIcon = <WarningIcon fill={interventions.getSeriesColorForSocialDistancing()} />;
+            capacityIcon = (
+              <WarningIcon
+                fill={interventions.getSeriesColorForSocialDistancing()}
+              />
+            );
           }
         }
       }

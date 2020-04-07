@@ -38,20 +38,10 @@ import {
 import {
   STATES,
   STATE_TO_INTERVENTION,
-  INTERVENTION_COLOR_MAP,
   INTERVENTIONS,
 } from 'enums';
 import { useModelDatas } from 'utils/model';
 import { useEmbed } from 'utils/hooks';
-
-const limitedActionColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.LIMITED_ACTION];
-const socialDistancingColor =
-  INTERVENTION_COLOR_MAP[INTERVENTIONS.SOCIAL_DISTANCING];
-const shelterInPlaceColor =
-  INTERVENTION_COLOR_MAP[INTERVENTIONS.SHELTER_IN_PLACE];
-const lockdownColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.LOCKDOWN];
-const shelterInPlaceWorstCaseColor =
-  INTERVENTION_COLOR_MAP[INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE];
 
 function ModelPage() {
   const { id: location, countyId } = useParams();

@@ -189,6 +189,26 @@ export class Projections {
     return color;
   }
 
+  getChartHospitalsOverloadedText() {
+    let text = '';
+
+    switch (this.getInterventionColor()) {
+      case COLOR_MAP.RED.BASE:
+        text = 'in less than four weeks';
+        break;
+      case COLOR_MAP.ORANGE.BASE:
+        text = 'in 4-8 weeks';
+        break;
+      case COLOR_MAP.GREEN.BASE:
+        text = this.distancingPoorEnforcement.now.dateOverwhelmed
+          ? 'in 8 weeks or more'
+          : '';
+        break;
+      default:
+    }
+
+    return text;
+  }
   getChartSeriesColorMap() {
     return {
       limitedActionSeries: this.getSeriesColorForLimitedAction(),
@@ -222,6 +242,7 @@ export class Projections {
       case COLOR_MAP.GREEN.BASE:
         seriesColor = COLOR_MAP.GREEN.DARK;
         break;
+      default:
     }
 
     return seriesColor;
@@ -250,6 +271,7 @@ export class Projections {
           ? COLOR_MAP.ORANGE.LIGHT
           : COLOR_MAP.GREEN.BASE;
         break;
+      default:
     }
 
     return seriesColor;

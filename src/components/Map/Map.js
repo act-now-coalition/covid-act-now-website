@@ -74,9 +74,7 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
           key={'legend-4'}
           title={'Data unavailable'}
           color={COLOR_MAP.GREY}
-          description={
-            'Insufficient data to make a prediction.'
-          }
+          description={'Predictions not available'}
         />
       </Legend>
 

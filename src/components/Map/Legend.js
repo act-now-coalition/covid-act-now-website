@@ -97,10 +97,10 @@ export function MiniLegendItem(props) {
 
   return (
     <Grid item xs={12} md={4}>
-        <LegendItemHeader>
-          <ColorBox color={color} />
-          {description}
-        </LegendItemHeader>
+      <LegendItemHeader>
+        <ColorBox color={color} />
+        {description}
+      </LegendItemHeader>
     </Grid>
   );
 }
