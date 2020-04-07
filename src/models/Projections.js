@@ -220,7 +220,7 @@ export class Projections {
         seriesColor = COLOR_MAP.ORANGE.BASE;
         break;
       case COLOR_MAP.GREEN.BASE:
-        seriesColor = COLOR_MAP.GREEN.BASE;
+        seriesColor = COLOR_MAP.GREEN.DARK;
         break;
     }
 
@@ -248,7 +248,7 @@ export class Projections {
       case COLOR_MAP.GREEN.BASE:
         seriesColor = isShelterInPlaceOverwheled
           ? COLOR_MAP.ORANGE.LIGHT
-          : COLOR_MAP.GREEN.LIGHT;
+          : COLOR_MAP.GREEN.BASE;
         break;
     }
 
