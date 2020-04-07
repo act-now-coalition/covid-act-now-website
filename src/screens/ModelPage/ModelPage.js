@@ -31,13 +31,26 @@ import {
   Content,
   SearchHeaderWrapper,
   LoadingScreen,
-  MapWrapper,
   CountyMapAltWrapper,
   ChartHeader,
 } from './ModelPage.style';
-import { STATES, STATE_TO_INTERVENTION, INTERVENTIONS } from 'enums';
-import { useModelDatas } from 'utils/model';
+import {
+  STATES,
+  STATE_TO_INTERVENTION,
+  INTERVENTION_COLOR_MAP,
+  INTERVENTIONS,
+} from 'enums';
+import { useModelDatas, Model } from 'utils/model';
 import { useEmbed } from 'utils/hooks';
+
+const limitedActionColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.LIMITED_ACTION];
+const socialDistancingColor =
+  INTERVENTION_COLOR_MAP[INTERVENTIONS.SOCIAL_DISTANCING];
+const shelterInPlaceColor =
+  INTERVENTION_COLOR_MAP[INTERVENTIONS.SHELTER_IN_PLACE];
+const lockdownColor = INTERVENTION_COLOR_MAP[INTERVENTIONS.LOCKDOWN];
+const shelterInPlaceWorstCaseColor =
+  INTERVENTION_COLOR_MAP[INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE];
 
 function ModelPage() {
   const { id: location, countyId } = useParams();
@@ -60,6 +73,7 @@ function ModelPage() {
   useMemo(() => {
     setSelectedCounty(countyOption);
   }, [countyOption]);
+  const [redirectTarget, setRedirectTarget] = useState();
   const history = useHistory();
 
   let modelDatas = null;
@@ -69,14 +83,24 @@ function ModelPage() {
   let countyName = selectedCounty ? selectedCounty.county : null;
 
   const intervention = STATE_TO_INTERVENTION[_location];
-
-  modelDatas = selectedCounty
+  const datasForView = selectedCounty
     ? modelDatasMap.countyDatas
     : modelDatasMap.stateDatas;
 
+  modelDatas = datasForView;
+
+  const showModel =
+    !selectedCounty || (selectedCounty && modelDatas && !modelDatas.error);
+
   let interventions = null;
   if (modelDatas && !modelDatas.error) {
-    interventions = modelDatas.projections;
+    interventions = buildInterventionMap(datasForView);
+  }
+
+  if (redirectTarget) {
+    const goToLocation = redirectTarget;
+    setRedirectTarget(null);
+    history.push(goToLocation);
   }
 
   const goTo = route => {
@@ -84,7 +108,10 @@ function ModelPage() {
   };
 
   // No model data
-  if (!modelDatas) {
+  if (
+    (!selectedCounty && !modelDatas) ||
+    (selectedCounty && selectedCounty && !modelDatas)
+  ) {
     return <LoadingScreen></LoadingScreen>;
   }
 
@@ -112,25 +139,45 @@ function ModelPage() {
   };
 
   const renderMainContent = () => {
+    if (
+      locationName === 'New York' &&
+      [
+        'Kings County',
+        'Queens County',
+        'Bronx County',
+        'Richmond County',
+      ].indexOf(countyName) > -1
+    ) {
+      countyName = 'New York';
+    }
+
     return (
       <MainContentWrapper mobileMenuOpen={mobileMenuOpen}>
         <MainContentInner>
-          <StateHeader interventions={interventions} />
+          {interventions && (
+            <StateHeader
+              location={_location}
+              locationName={locationName}
+              countyName={countyName}
+              intervention={intervention}
+              interventions={interventions}
+            />
+          )}
           <MainContentInnerBody>
             <Panel>
               <ChartHeader>
                 <h2>Projected hospitalizations</h2>
                 <span>
-                  {interventions.countyName
-                    ? `${interventions.countyName}, ${interventions.stateName}`
-                    : interventions.stateName}
+                  {countyName ? `${countyName}, ${locationName}` : locationName}
                 </span>
               </ChartHeader>
             </Panel>
-            {interventions && (
+            {showModel && interventions && (
               <Panel>
                 <ModelChart
+                  state={locationName}
                   countyName={countyName}
+                  subtitle="Hospitalizations over time"
                   interventions={interventions}
                   currentIntervention={intervention}
                   dateOverwhelmed={interventions.baseline.dateOverwhelmed}
@@ -146,11 +193,15 @@ function ModelPage() {
                       interventions.baseline,
                       interventions.distancingPoorEnforcement.now,
                       interventions.distancing.now,
+                      interventions.contain.now,
                     ]}
                     colors={[
-                      interventions.getSeriesColorForLimitedAction(),
-                      interventions.getSeriesColorForSocialDistancing(),
-                      interventions.getSeriesColorForShelterInPlace(),
+                      limitedActionColor,
+                      intervention === INTERVENTIONS.SHELTER_IN_PLACE
+                        ? shelterInPlaceWorstCaseColor
+                        : socialDistancingColor,
+                      shelterInPlaceColor,
+                      lockdownColor,
                     ]}
                     asterisk={['', '*', '*', '**']}
                     timeHorizon={120}
@@ -237,22 +288,14 @@ function ModelPage() {
           )}
         </MapMenuMobileWrapper>
         <MapContentInner>
-          <MapWrapper visible={mapOption === MAP_FILTERS.NATIONAL}>
-            <Map
-              hideLegend={true}
-              setMapOption={setMapOption}
-              setMobileMenuOpen={setMobileMenuOpen}
-            />
-          </MapWrapper>
+          {mapOption === MAP_FILTERS.NATIONAL && (
+            <Map hideLegend={true} setMobileMenuOpen={setMobileMenuOpen} />
+          )}
 
-          {_location !== MAP_FILTERS.DC && (
-            <CountyMapAltWrapper visible={mapOption === MAP_FILTERS.STATE}>
+          {mapOption === MAP_FILTERS.STATE && _location !== MAP_FILTERS.DC && (
+            <CountyMapAltWrapper>
               <CountyMap
-                fill={
-                  interventions
-                    ? interventions.getInterventionColor()
-                    : '#e3e3e3'
-                }
+                fill={INTERVENTION_COLOR_MAP[intervention]}
                 stateSummary={modelDatasMap.summary}
                 selectedCounty={selectedCounty}
                 setSelectedCounty={fullFips => {
@@ -262,7 +305,7 @@ function ModelPage() {
                     ['full_fips_code', fullFips],
                   );
 
-                  goTo(
+                  setRedirectTarget(
                     `/us/${_location.toLowerCase()}/county/${
                       county.county_url_name
                     }`,
@@ -322,6 +365,49 @@ function ModelPage() {
     </Wrapper>
   );
 }
+
+// Exported for use by CompareModels screen, so it can generate identical charts.
+export const buildInterventionMap = modelDatas => {
+  let interventions = {
+    baseline: null,
+    distancing: null,
+    distancingPoorEnforcement: null,
+    contain: null,
+  };
+
+  if (!modelDatas) {
+    return interventions;
+  }
+
+  // Initialize models
+  interventions.baseline = new Model(modelDatas.baseline, {
+    intervention: INTERVENTIONS.LIMITED_ACTION,
+    r0: 2.4,
+  });
+  interventions.distancing = {
+    now: new Model(modelDatas.strictDistancingNow, {
+      intervention: INTERVENTIONS.SHELTER_IN_PLACE,
+      durationDays: 90,
+      r0: 1.2,
+    }),
+  };
+  interventions.distancingPoorEnforcement = {
+    now: new Model(modelDatas.weakDistancingNow, {
+      intervention: INTERVENTIONS.SOCIAL_DISTANCING,
+      durationDays: 90,
+      r0: 1.7,
+    }),
+  };
+  interventions.contain = {
+    now: new Model(modelDatas.containNow, {
+      intervention: INTERVENTIONS.LOCKDOWN,
+      durationDays: 90,
+      r0: 0.3,
+    }),
+  };
+
+  return interventions;
+};
 
 const Panel = ({ children, title }) => {
   return <div style={{}}>{children}</div>;
