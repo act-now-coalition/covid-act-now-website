@@ -47,7 +47,13 @@ export const SearchHeaderWrapper = styled.div`
   border-bottom: 1px solid #e3e3e3;
 `;
 
+export const MapWrapper = styled.div`
+  display: ${props => (props.visible ? 'block' : 'none')};
+  width: 100%;
+`;
+
 export const CountyMapAltWrapper = styled.div`
+  display: ${props => (props.visible ? 'block' : 'none')};
   width: 100%;
 `;
 

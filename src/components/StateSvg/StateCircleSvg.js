@@ -5,7 +5,7 @@ const StateCircleSvg = ({
   state,
   ratio,
   actionBackgroundFill,
-  intervention,
+  fillColor,
   hasAction = false,
 }) => {
   return (
@@ -14,7 +14,7 @@ const StateCircleSvg = ({
       actionBackgroundFill={actionBackgroundFill}
       hasAction={hasAction}
       state={state}
-      intervention={intervention}
+      fillColor={fillColor}
     />
   );
 };

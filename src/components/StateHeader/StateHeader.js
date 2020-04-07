@@ -1,12 +1,10 @@
 import React from 'react';
-import moment from 'moment';
 import StateCircleSvg from 'components/StateSvg/StateCircleSvg';
-import { INTERVENTIONS, INTERVENTION_COLOR_MAP, COLORS } from 'enums';
+import { COLORS } from 'enums';
 import { useEmbed } from 'utils/hooks';
 
 import {
   HeaderHighlight,
-  HeaderSubCopy,
   HeaderTitle,
   StyledStateImageWrapper,
   StyledStateCopyWrapper,
@@ -14,108 +12,19 @@ import {
   StyledStateHeaderInner,
 } from './StateHeader.style';
 
-const Stateheader = ({
-  location,
-  locationName,
-  countyName,
-  intervention,
-  interventions,
-}) => {
-  const interventionToModel = {
-    [INTERVENTIONS.LIMITED_ACTION]: interventions.baseline,
-    [INTERVENTIONS.SOCIAL_DISTANCING]:
-      interventions.distancingPoorEnforcement.now,
-    [INTERVENTIONS.SHELTER_IN_PLACE]: interventions.distancing.now,
-  };
+const StateHeader = ({ interventions }) => {
   const { isEmbed } = useEmbed();
 
-  // hardcoded new york
-  if (
-    locationName === 'New York' &&
-    [
-      'Kings County',
-      'Queens County',
-      'Bronx County',
-      'Richmond County',
-    ].indexOf(countyName) > -1
-  ) {
-    countyName = 'New York';
-  }
-
-  const model = interventionToModel[intervention];
-
-  const earlyDate = moment(model.dateOverwhelmed).subtract(14, 'days');
-  const lateDate = moment(model.dateOverwhelmed).subtract(9, 'days');
-  const displayName = countyName ? (
-    <>
-      {' '}
-      {countyName},{' '}
-      <a href={`${isEmbed ? '/embed' : ''}/us/${location.toLowerCase()}`}>
-        {locationName}
-      </a>
-    </>
-  ) : (
-    locationName
-  );
-
   const buildInterventionTitle = () => {
-    switch (intervention) {
-      case INTERVENTIONS.LIMITED_ACTION:
-      case INTERVENTIONS.SOCIAL_DISTANCING:
-        return (
-          <span>
-            You must act now in <strong>{displayName}</strong>
-          </span>
-        );
-      case INTERVENTIONS.SHELTER_IN_PLACE:
-        return (
-          <span>
-            Keep staying at home in <strong>{displayName}.</strong>
-          </span>
-        );
-      default:
-    }
+    return (
+      <HeaderHighlight color={interventions.getInterventionColor()}>
+        {interventions.getInterventionTitle()}
+      </HeaderHighlight>
+    );
   };
 
   const buildPredection = () => {
-    switch (intervention) {
-      case INTERVENTIONS.LIMITED_ACTION:
-      case INTERVENTIONS.SOCIAL_DISTANCING:
-        if (earlyDate.isBefore(moment())) {
-          return (
-            <HeaderSubCopy>
-              To limit hospital overload, our projections indicate a Stay at
-              Home order must be implemented{' '}
-              <HeaderHighlight color={INTERVENTION_COLOR_MAP[intervention]}>
-                immediately
-              </HeaderHighlight>
-              . The sooner you act, the more lives you save.
-            </HeaderSubCopy>
-          );
-        } else {
-          return (
-            <HeaderSubCopy>
-              To prevent hospital overload, our projections indicate a Stay at
-              Home order must be implemented{' '}
-              <HeaderHighlight color={INTERVENTION_COLOR_MAP[intervention]}>
-                between {earlyDate.format('MMMM Do')} and{' '}
-                {lateDate.format('MMMM Do')} at the latest
-              </HeaderHighlight>
-              . The sooner you act, the more lives you save.
-            </HeaderSubCopy>
-          );
-        }
-      case INTERVENTIONS.SHELTER_IN_PLACE:
-        return (
-          <HeaderSubCopy>
-            Avoiding hospital overload heavily depends on population density and
-            public cooperation. Best and worst case scenarios are shown below,
-            and we’ll update our projections as soon as more data becomes
-            available.
-          </HeaderSubCopy>
-        );
-      default:
-    }
+    return interventions.getInterventionPrediction();
   };
 
   return (
@@ -124,8 +33,8 @@ const Stateheader = ({
         <StyledStateImageWrapper>
           <StateCircleSvg
             actionBackgroundFill={COLORS.LIGHTGRAY}
-            state={location}
-            intervention={intervention}
+            state={interventions.stateCode}
+            fillColor={interventions.getInterventionColor()}
             hasAction={true}
           />
         </StyledStateImageWrapper>
@@ -140,4 +49,4 @@ const Stateheader = ({
   );
 };
 
-export default Stateheader;
+export default StateHeader;
