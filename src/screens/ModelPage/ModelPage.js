@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from 'react';
 import _ from 'lodash';
-import { Helmet } from 'react-helmet';
 import { useParams, useHistory } from 'react-router-dom';
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020';
 import CountyMap from 'components/CountyMap/CountyMap';
@@ -17,6 +16,7 @@ import {
   MapMenuItem,
 } from 'components/Header/SearchHeader.style';
 
+import AppMetaTags from '../../components/AppMetaTags/AppMetaTags';
 import {
   Wrapper,
   ContentWrapper,
@@ -87,16 +87,24 @@ function ModelPage() {
     return <LoadingScreen></LoadingScreen>;
   }
 
-  let title;
-  let description;
-  const canonical = `/us/${_location.toLowerCase()}`;
+  let actionTitle;
+  let actionDescription;
   if (intervention === INTERVENTIONS.SHELTER_IN_PLACE) {
-    title = `Keep staying at home in ${locationName}.`;
-    description = `Avoiding hospital overload depends heavily on your cooperation.`;
+    actionTitle = `${locationName}: Keep staying at home to protect against the COVID-19 outbreak.`;
+    actionDescription = `Avoiding hospital overload depends heavily on your cooperation.`;
   } else {
-    title = `You must act now in ${locationName}!`;
-    description = `To prevent hospital overload, our projections indicate a Stay at home order must be implemented soon.`;
+    actionTitle = `${locationName}: Urge your public officials to act now against the COVID-19 outbreak!`;
+    actionDescription = `To prevent hospital overload, our projections indicate a Stay at home order must be implemented soon.`;
   }
+  let metaTags = (
+    <AppMetaTags
+      canonicalUrl={`/us/${_location.toLowerCase()}`}
+      pageTitle={`${locationName} Forecast`}
+      pageDescription={actionTitle}
+      shareTitle={actionTitle}
+      shareDescription={actionDescription}
+    />
+  );
 
   const renderHeader = () => {
     return (
@@ -262,16 +270,7 @@ function ModelPage() {
 
   return (
     <Wrapper>
-      <Helmet>
-        <title>{title}</title>
-        <meta name="title" content={title} />
-        <meta name="twitter:title" content={title} />
-        <meta property="og:title" content={title} />
-        <meta name="description" content={description} />
-        <meta name="twitter:description" content={description} />
-        <meta property="og:description" content={description} />
-        <link rel="canonical" href={canonical} />
-      </Helmet>
+      {metaTags}
       <ContentWrapper>
         {renderHeader()}
         {modelDatas && modelDatas.error ? (
