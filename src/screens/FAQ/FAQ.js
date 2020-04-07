@@ -238,6 +238,14 @@ const FAQ = ({ children }) => {
             </li>
           </ul>
         </Typography>
+        <Typography variant="h5" component="h5">
+          Are you on social media?
+        </Typography>
+        <Typography>
+          Follow us on <a href="https://twitter.com/CovidActNow">Twitter</a>,{' '}
+          <a href="https://www.facebook.com/covidactnow">Facebook</a> or{' '}
+          <a href="https://www.instagram.com/covidactnow">Instagram</a>.
+        </Typography>
 
         <Typography variant="h3" component="h1">
           About the U.S. Interventions Model
