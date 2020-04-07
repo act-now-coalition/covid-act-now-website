@@ -162,12 +162,9 @@ function ModelPage() {
                       interventions.distancing.now,
                     ]}
                     colors={[
-                      limitedActionColor,
-                      intervention === INTERVENTIONS.SHELTER_IN_PLACE
-                        ? shelterInPlaceWorstCaseColor
-                        : socialDistancingColor,
-                      shelterInPlaceColor,
-                      lockdownColor,
+                      interventions.getSeriesColorForLimitedAction(),
+                      interventions.getSeriesColorForSocialDistancing(),
+                      interventions.getSeriesColorForShelterInPlace(),
                     ]}
                     asterisk={['', '*', '*', '**']}
                     timeHorizon={120}

@@ -52,7 +52,7 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
             title={'Hospital overload in 4-8 weeks'}
             color={COLOR_MAP.ORANGE.BASE}
             description={
-              'Hospitals could be overloaded in the next 3-6 weeks. Act now to flatten the curve.'
+              'Hospitals could be overloaded in the next 4-8 weeks. Act now to flatten the curve.'
             }
           />
           <LegendItem
@@ -60,7 +60,7 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
             title={'Hospital overload not likely'}
             color={COLOR_MAP.GREEN.BASE}
             description={
-              'Hospitals unlikely to be overloaded in the next 6 weeks assuming anti-COVID interventions are continued.'
+              'Hospitals unlikely to be overloaded in the next 8 weeks assuming anti-COVID interventions are continued.'
             }
           />
         </Legend>

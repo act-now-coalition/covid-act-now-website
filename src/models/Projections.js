@@ -97,7 +97,7 @@ export class Projections {
     }
 
     if (this.getInterventionColor() === COLOR_MAP.RED.BASE) {
-      title = <span>Work harder in {displayName}</span>;
+      title = <span>Take immediate action in {displayName}</span>;
     }
 
     return title;
