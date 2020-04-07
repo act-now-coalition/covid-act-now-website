@@ -229,7 +229,7 @@ export default [
     link: 'https://www.linkedin.com/in/dougspan/',
   },
   {
-    name: "Eric Carlson",
+    name: 'Eric Carlson',
     title: 'Senior Data Scientist, Grand Rounds',
     link: 'https://www.linkedin.com/in/eric-c-carlson/',
   },
