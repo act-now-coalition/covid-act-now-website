@@ -3,6 +3,7 @@ import palette from 'assets/theme/palette';
 import Typography from '@material-ui/core/Typography';
 
 export const StyledNewsletter = styled.div`
+  background: white;
   max-width: 640px;
   margin: 0 auto 3rem;
   border: 1px solid ${palette.divider};

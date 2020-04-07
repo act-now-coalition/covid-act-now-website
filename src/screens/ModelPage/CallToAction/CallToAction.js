@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  INTERVENTIONS,
-  INTERVENTION_DESCRIPTIONS,
-} from 'enums';
+import { INTERVENTIONS, INTERVENTION_DESCRIPTIONS } from 'enums';
 import { WarningIcon, CheckIcon } from 'assets/images/capacityIcons';
 import InterventionIcon from 'assets/images/interventionIcon';
 import {

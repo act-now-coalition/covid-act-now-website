@@ -35,11 +35,7 @@ import {
   CountyMapAltWrapper,
   ChartHeader,
 } from './ModelPage.style';
-import {
-  STATES,
-  STATE_TO_INTERVENTION,
-  INTERVENTIONS,
-} from 'enums';
+import { STATES, STATE_TO_INTERVENTION, INTERVENTIONS } from 'enums';
 import { useModelDatas } from 'utils/model';
 import { useEmbed } from 'utils/hooks';
 
