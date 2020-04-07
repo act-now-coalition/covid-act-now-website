@@ -228,4 +228,14 @@ export default [
     title: '',
     link: 'https://www.linkedin.com/in/dougspan/',
   },
+  {
+    name: 'Eric Carlson',
+    title: 'Senior Data Scientist, Grand Rounds',
+    link: 'https://www.linkedin.com/in/eric-c-carlson/',
+  },
+  {
+    name: 'Xinyu Zhang',
+    title: 'Data Scientist, Grand Rounds',
+    link: 'https://www.linkedin.com/in/xinyuzhang-cathy/',
+  },
 ];
