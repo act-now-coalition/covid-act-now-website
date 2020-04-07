@@ -184,18 +184,6 @@ function ModelPage() {
                         See full scenario definitions here.
                       </a>
                     </li>
-                    <li style={{ listStyleType: 'none' }}>
-                      ** Our models show that it would take at least 2 months of
-                      Wuhan-style Lockdown to achieve full containment. However,
-                      it is unclear at this time how you could manage newly
-                      introduced infections.{' '}
-                      <a
-                        href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
-                        rel="noreferrer noopener"
-                      >
-                        See full scenario definitions here.
-                      </a>
-                    </li>
                   </ul>
 
                   <ShareModelBlock
