@@ -18,5 +18,12 @@ export const ModelSelectorContainer = styled.div`
 
 export const ModelComparisonsContainer = styled.div`
   // HACK: Leave extra space at the top to leave room for InputsContainer (which is position=fixed).
-  padding-top: 200px;
+  padding-top: 250px;
+`;
+
+export const ComparisonControlsContainer = styled.div`
+  display: flex;
+  background: #f2f2f2;
+  margin-top: 1rem;
+  padding: 1rem 2rem;
 `;

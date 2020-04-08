@@ -1,5 +1,7 @@
+import Promise from 'bluebird';
 import { useState, useEffect } from 'react';
 import { Projections } from './../models';
+import { STATES } from 'enums';
 
 async function fetchAll(urls) {
   try {
@@ -57,12 +59,7 @@ async function fetchSummary(setModelDatas, location) {
   } catch (err) {}
 }
 
-async function fetchData(
-  setModelDatas,
-  location,
-  county = null,
-  dataUrl = null,
-) {
+async function fetchData(location, county = null, dataUrl = null) {
   dataUrl = dataUrl || '/data/';
   if (dataUrl[dataUrl.length - 1] !== '/') {
     dataUrl += '/';
@@ -81,15 +78,12 @@ async function fetchData(
     const countyUrl = `${dataUrl}county/${location.toUpperCase()}.${fipsCode}.${i}.json`;
     return county ? countyUrl : stateUrl;
   });
+
   try {
     let loadedModelDatas = await fetchAll(urls);
     //This is to fix county data format
     modelDataForKey = {
       projections: new Projections(loadedModelDatas, location, county),
-      baseline: loadedModelDatas[0],
-      strictDistancingNow: loadedModelDatas[1],
-      weakDistancingNow: loadedModelDatas[2],
-      containNow: loadedModelDatas[3],
     };
   } catch (err) {
     modelDataForKey = {
@@ -97,7 +91,19 @@ async function fetchData(
       payload: err,
     };
   }
+
+  return modelDataForKey;
+}
+
+async function fetchDataAndSet(
+  setModelDatas,
+  location,
+  county = null,
+  dataUrl = null,
+) {
   const key = county ? 'countyDatas' : 'stateDatas';
+
+  const modelDataForKey = await fetchData(location, county, dataUrl);
 
   setModelDatas(m => {
     return {
@@ -113,7 +119,7 @@ export function useModelDatas(location, county = null, dataUrl = null) {
   const [modelDatas, setModelDatas] = useState(initialData);
   useEffect(() => {
     if (location) {
-      fetchData(setModelDatas, location, null, dataUrl);
+      fetchDataAndSet(setModelDatas, location, null, dataUrl);
       fetchSummary(setModelDatas, location);
     }
   }, [dataUrl, location]);
@@ -128,7 +134,7 @@ export function useModelDatas(location, county = null, dataUrl = null) {
         };
       });
     } else if (location) {
-      fetchData(setModelDatas, location, county, dataUrl);
+      fetchDataAndSet(setModelDatas, location, county, dataUrl);
     }
   }, [dataUrl, county, location]);
 
@@ -149,4 +155,29 @@ export function useStateSummaryData(state) {
   }, [state]);
 
   return summaryData;
+}
+
+export function useAllStateModelDatas(dataUrl = null) {
+  const [stateModels, setStateModels] = useState(null);
+
+  useEffect(() => {
+    const promises = {};
+    const states = Object.keys(STATES);
+
+    for (let state of states) {
+      promises[state] = fetchData(state, null, dataUrl);
+    }
+
+    Promise.props(promises)
+      .then(results => {
+        setStateModels(results);
+      })
+      .catch(e => {
+        setStateModels(null);
+
+        throw e;
+      });
+  }, [dataUrl]);
+
+  return stateModels;
 }
