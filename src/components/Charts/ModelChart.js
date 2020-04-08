@@ -12,13 +12,19 @@ import {
   Wrapper,
   Disclaimer,
   DisclaimerContent,
+  CondensedLegendStyled,
+  CondensedLegendItemStyled,
 } from './ModelChart.style';
 
 const formatIntervention = (intervention, optCase) =>
   `3 months of ${intervention}${optCase || ''}`;
 
+const condensedFormatIntervention = (intervention, optCase) =>
+  `${intervention}${optCase || ''}`;
+
 const ModelChart = ({
   height,
+  condensed,
   countyName,
   interventions,
   currentIntervention,
@@ -66,6 +72,7 @@ const ModelChart = ({
       symbol: 'circle',
     },
     visible: currentIntervention === INTERVENTIONS.LIMITED_ACTION,
+    bgColor: interventions.getChartSeriesColorMap().limitedActionSeries,
   };
 
   const socialDistancing = {
@@ -73,11 +80,16 @@ const ModelChart = ({
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (lax)')
         : formatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
+    condensedName:
+      currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+        ? condensedFormatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (lax)')
+        : condensedFormatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
     type: 'areaspline',
     data: data[2].data,
     marker: {
       symbol: 'circle',
     },
+    bgColor: interventions.getChartSeriesColorMap().socialDistancingSeries,
   };
 
   const shelterInPlace = {
@@ -85,11 +97,20 @@ const ModelChart = ({
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (strict)')
         : formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
+    condensedName:
+      currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+        ? condensedFormatIntervention(
+            INTERVENTIONS.SHELTER_IN_PLACE,
+            ' (strict)',
+          )
+        : condensedFormatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
     type: 'areaspline',
     data: data[1].data,
     marker: {
       symbol: 'circle',
     },
+    darkLegendText: true,
+    bgColor: interventions.getChartSeriesColorMap().shelterInPlaceSeries,
   };
 
   const availableBeds = {
@@ -99,6 +120,7 @@ const ModelChart = ({
     marker: {
       symbol: 'circle',
     },
+    outline: '2px dashed black',
   };
 
   const options = useMemo(() => {
@@ -107,7 +129,7 @@ const ModelChart = ({
         animation: false,
         styledMode: true,
         height: height || '600',
-        spacing: [8, 0, 32, 0],
+        spacing: [8, 0, condensed ? 12 : 32, 0],
       },
       title: {
         // text: county ? `${county.county}, ${state}` : state,
@@ -203,6 +225,7 @@ const ModelChart = ({
         margin: 32,
         symbolPadding: 8,
         itemMarginBottom: 8,
+        ...(condensed ? { enabled: false } : {}),
       },
       plotOptions: {
         series: {
@@ -231,6 +254,25 @@ const ModelChart = ({
     interventions,
   ]);
 
+  if (condensed) {
+    return (
+      <ChartContainer>
+        <Wrapper
+          interventions={interventions}
+          inShelterInPlace={
+            currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+          }
+        >
+          <Chart options={options} />
+          <CondensedLegend>
+            {[noAction, socialDistancing, shelterInPlace, availableBeds].map(
+              CondensedLegendItem,
+            )}
+          </CondensedLegend>
+        </Wrapper>
+      </ChartContainer>
+    );
+  }
   return (
     <ChartContainer>
       <Wrapper
@@ -284,5 +326,27 @@ const ModelChart = ({
     </ChartContainer>
   );
 };
+
+function CondensedLegend({ children }) {
+  return <CondensedLegendStyled>{children}</CondensedLegendStyled>;
+}
+
+function CondensedLegendItem({
+  name,
+  condensedName,
+  bgColor,
+  outline,
+  darkLegendText,
+}) {
+  return (
+    <CondensedLegendItemStyled
+      bgColor={bgColor}
+      outline={outline}
+      darkLegendText={darkLegendText}
+    >
+      {condensedName || name}
+    </CondensedLegendItemStyled>
+  );
+}
 
 export default ModelChart;

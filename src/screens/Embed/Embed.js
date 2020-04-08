@@ -5,8 +5,8 @@ import { STATES, STATE_TO_INTERVENTION } from 'enums';
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020';
 import '../../App.css'; /* optional for styling like the :hover pseudo-class */
 import StateHeader from '../../components/StateHeader/StateHeader';
-// import Tabs from '@material-ui/core/Tabs';
-// import Tab from '@material-ui/core/Tab';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 
 import { useModelDatas, useStateSummaryData } from 'utils/model';
 
@@ -14,6 +14,7 @@ import {
   EmbedContainer,
   EmbedGlobalStyle,
   EmbedHeaderContainer,
+  EmbedContentContainer,
 } from './Embed.style';
 
 import ProjectionsTab from './ProjectionsTab';
@@ -23,9 +24,9 @@ import EmbedFooter from './EmbedFooter';
 export default function Embed() {
   const { id: _location, countyId, countyFipsId } = useParams();
 
-  const [tabState /*, setTabState */] = useState(0);
-  // const [shareDrawerOpen, setShareDrawerOpen] = useState(false);
-  // const handleTabChange = (_event, newTabValue) => setTabState(newTabValue);
+  const [tabState, setTabState] = useState(0);
+  const [shareDrawerOpen, setShareDrawerOpen] = useState(false);
+  const handleTabChange = (_event, newTabValue) => setTabState(newTabValue);
 
   const [selectedCounty, setSelectedCounty] = useState(null);
   const [location, setLocation] = useState(null);
@@ -109,30 +110,30 @@ export default function Embed() {
           intervention={intervention}
           interventions={interventions}
         />
-        {/* Remove this break once tabs are back */}
-        <br />
-        {/* <Tabs value={tabState} variant="fullWidth" onChange={handleTabChange}>
+        <Tabs value={tabState} variant="fullWidth" onChange={handleTabChange}>
           <Tab label="Projections" />
           <Tab label="Charts" />
-        </Tabs> */}
+        </Tabs>
       </EmbedHeaderContainer>
-      {tabState === 0 ? (
-        <ProjectionsTab
-          cases={cases}
-          deaths={deaths}
-          intervention={intervention}
-          totalPopulation={totalPopulation}
-          deathsPercentage={deathsPercentage}
-          populationPercentage={populationPercentage}
-        />
-      ) : (
-        <ChartsTab
-          state={STATES[location]}
-          county={null}
-          interventions={interventions}
-          currentIntervention={intervention}
-        />
-      )}
+      <EmbedContentContainer>
+        {tabState === 0 ? (
+          <ProjectionsTab
+            cases={cases}
+            deaths={deaths}
+            intervention={intervention}
+            totalPopulation={totalPopulation}
+            deathsPercentage={deathsPercentage}
+            populationPercentage={populationPercentage}
+          />
+        ) : (
+          <ChartsTab
+            state={STATES[location]}
+            county={null}
+            interventions={interventions}
+            currentIntervention={intervention}
+          />
+        )}
+      </EmbedContentContainer>
       <EmbedFooter />
       <EmbedGlobalStyle />
     </EmbedContainer>

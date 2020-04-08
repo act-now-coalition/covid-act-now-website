@@ -17,19 +17,26 @@ export const EmbedHeaderContainer = styled(Box)`
 `;
 
 export const EmbedContainer = styled(Paper)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   margin: 3px;
   overflow: hidden;
   border-radius: 3px;
-  max-height: 650px;
+  height: 650px;
+`;
+
+export const EmbedContentContainer = styled(Box)`
+  flex: 1;
 `;
 
 // DATA PAGE STYLES
 export const PaddedGridItem = styled(Grid)`
   display: flex;
-  flex-grow: 0.5;
+  flex-grow: 1;
   justify-content: center;
   align-items: center;
-  padding: ${props => (props.flexGrow ? '1.2rem 0' : props.p || '1.2rem 2rem')};
+  padding: ${props => (props.flexGrow ? '0.6rem 0' : props.p || '0.5rem 2rem')};
   border-top: ${props => (props.bt ? '1px solid lightgray' : 'none')};
   border-bottom: ${props => (props.bb ? '1px solid lightgray' : 'none')};
   border-right: ${props => (props.br ? '1px solid lightgray' : 'none')};
@@ -68,14 +75,14 @@ export const Spacer = styled(Box)`
 
 // CHART STYLE
 export const EmbedChartContainer = styled(Box)`
-  padding: 0.5rem 0;
+  height: 100%;
 `;
 
 // FOOTER STYLES
 export const FooterContainer = styled(Box)`
   display: flex;
   flex-direction: column;
-  padding: 0.5rem;
+  padding: 0.3rem;
   background-color: ${COLORS.LIGHTGRAY};
   width: 100%;
 `;
@@ -83,7 +90,7 @@ export const FooterContainer = styled(Box)`
 export const FooterButtonContainer = styled(Box)`
   display: flex;
   flex-direction: row;
-  padding: 0.3rem;
+  padding: 0.1rem;
   justify-content: center;
   width: 100%;
 `;
