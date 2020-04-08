@@ -148,6 +148,7 @@ export default function Embed() {
         onClose={() => setShareDrawerOpen(false)}
       >
         <ShareModelBlock
+          condensed
           location={location}
           county={selectedCounty}
           embedSnippet={iFrameCodeSnippet}

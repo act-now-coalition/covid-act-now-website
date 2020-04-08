@@ -15,7 +15,7 @@ export default function ChartsTab({
       <ModelChart
         condensed
         state={state}
-        height={300}
+        height={290}
         county={county}
         subtitle="Hospitalizations over time"
         interventions={interventions}

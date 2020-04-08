@@ -19,6 +19,7 @@ import {
 } from './ShareBlock.style';
 
 const ShareBlock = ({
+  condensed,
   location,
   countyName,
   embedSnippet,
@@ -37,7 +38,7 @@ const ShareBlock = ({
   };
 
   return (
-    <ShareContainer>
+    <ShareContainer condensed={condensed}>
       <ShareInstruction>
         {shareInstruction || 'Share the Covid Act Now map'}
       </ShareInstruction>

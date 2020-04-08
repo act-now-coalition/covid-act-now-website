@@ -209,14 +209,16 @@ export const CondensedLegendItemStyled = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 0.3rem;
-  background-color: ${props => props.bgColor || COLORS.LIGHTGRAY};
-  padding: 0.1rem 0.7rem;
   width: 10rem;
   margin: 3px;
   font-size: 0.8rem;
   font-weight: 700;
   color: ${props =>
-    props.bgColor && !props.darkLegendText ? colors.grey[50] : 'black'};
+    props.bgColor && !props.darkLegendText
+      ? colors.grey[50]
+      : colors.grey[800]};
   box-sizing: border-box;
-  border: ${props => props.outline || 'none'};
+  background-color: ${props => props.bgColor || COLORS.LIGHTGRAY};
+  border: ${props =>
+    props.outline || (props.bgColor ? `1px solid ${props.bgColor}` : 'none')};
 `;

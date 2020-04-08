@@ -64,6 +64,10 @@ const ModelChart = ({
 
   const data = scenarioComparisonOverTime(200);
 
+  /**
+   * Note: `condensedLegend` is for embed formatting only, not Highcharts
+   */
+
   const noAction = {
     name: INTERVENTIONS.LIMITED_ACTION,
     type: 'areaspline',
@@ -72,7 +76,9 @@ const ModelChart = ({
       symbol: 'circle',
     },
     visible: currentIntervention === INTERVENTIONS.LIMITED_ACTION,
-    bgColor: interventions.getChartSeriesColorMap().limitedActionSeries,
+    condensedLegend: {
+      bgColor: interventions.getChartSeriesColorMap().limitedActionSeries,
+    },
   };
 
   const socialDistancing = {
@@ -80,16 +86,23 @@ const ModelChart = ({
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (lax)')
         : formatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
-    condensedName:
-      currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
-        ? condensedFormatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (lax)')
-        : condensedFormatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
+
     type: 'areaspline',
     data: data[2].data,
     marker: {
       symbol: 'circle',
     },
-    bgColor: interventions.getChartSeriesColorMap().socialDistancingSeries,
+    condensedLegend: {
+      condensedName:
+        currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+          ? condensedFormatIntervention(
+              INTERVENTIONS.SHELTER_IN_PLACE,
+              ' (lax)',
+            )
+          : condensedFormatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
+
+      bgColor: interventions.getChartSeriesColorMap().socialDistancingSeries,
+    },
   };
 
   const shelterInPlace = {
@@ -97,20 +110,25 @@ const ModelChart = ({
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (strict)')
         : formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
-    condensedName:
-      currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
-        ? condensedFormatIntervention(
-            INTERVENTIONS.SHELTER_IN_PLACE,
-            ' (strict)',
-          )
-        : condensedFormatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
+
     type: 'areaspline',
     data: data[1].data,
     marker: {
       symbol: 'circle',
     },
-    darkLegendText: true,
-    bgColor: interventions.getChartSeriesColorMap().shelterInPlaceSeries,
+    condensedLegend: {
+      // TODO: A better way to set text color to be darker
+      // on lighter colored backgrounds
+      darkLegendText: true,
+      condensedName:
+        currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+          ? condensedFormatIntervention(
+              INTERVENTIONS.SHELTER_IN_PLACE,
+              ' (strict)',
+            )
+          : condensedFormatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
+      bgColor: interventions.getChartSeriesColorMap().shelterInPlaceSeries,
+    },
   };
 
   const availableBeds = {
@@ -120,7 +138,9 @@ const ModelChart = ({
     marker: {
       symbol: 'circle',
     },
-    outline: '2px dashed black',
+    condensedLegend: {
+      outline: '2px dashed black',
+    },
   };
 
   const options = useMemo(() => {
@@ -266,9 +286,9 @@ const ModelChart = ({
         >
           <Chart options={options} />
           <CondensedLegend>
-            {[noAction, socialDistancing, shelterInPlace, availableBeds].map(
-              CondensedLegendItem,
-            )}
+            {[noAction, socialDistancing, shelterInPlace, availableBeds]
+              .filter(intervention => intervention.visible !== false)
+              .map(CondensedLegendItem)}
           </CondensedLegend>
         </Wrapper>
       </ChartContainer>
@@ -334,10 +354,7 @@ function CondensedLegend({ children }) {
 
 function CondensedLegendItem({
   name,
-  condensedName,
-  bgColor,
-  outline,
-  darkLegendText,
+  condensedLegend: { condensedName, bgColor, outline, darkLegendText },
 }) {
   return (
     <CondensedLegendItemStyled

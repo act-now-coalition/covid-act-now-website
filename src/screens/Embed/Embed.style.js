@@ -23,7 +23,7 @@ export const EmbedContainer = styled(Paper)`
   margin: 3px;
   overflow: hidden;
   border-radius: 3px;
-  height: 650px;
+  height: 660px;
 `;
 
 export const EmbedContentContainer = styled(Box)`
