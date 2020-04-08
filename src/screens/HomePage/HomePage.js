@@ -4,6 +4,7 @@ import HomePageHeader from 'components/Header/HomePageHeader';
 import { COLORS } from 'enums';
 import Map from 'components/Map/Map';
 import Endorsements from 'screens/Endorsements/Endorsements';
+import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import ShareBlock from 'components/ShareBlock/ShareBlock';
 
 import { Wrapper, Content, MapTitle, MapTitleDivider } from './HomePage.style';
@@ -11,6 +12,11 @@ import { Wrapper, Content, MapTitle, MapTitleDivider } from './HomePage.style';
 export default function HomePage() {
   return (
     <>
+      <AppMetaTags
+        canonicalUrl="/"
+        pageTitle={undefined}
+        pageDescription="Urge your public officials to quickly take action against the COVID-19 pandemic. These charts predict the last day each state can act before the point of no return."
+      />
       <HomePageHeader />
       <main>
         <div className="App">
