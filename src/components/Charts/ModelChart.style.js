@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { INTERVENTIONS, COLORS } from 'enums';
 import { snakeCase } from 'lodash';
+import { colors } from '@material-ui/core';
 
 export const ChartContainer = styled.section`
   width: 100%;
@@ -120,6 +121,7 @@ export const Wrapper = styled.div`
     stroke: white;
     fill-opacity: 1;
   }
+  /* Available beds */
   .highcharts-series-3 {
     stroke: white;
     stroke-width: 1px;
@@ -193,4 +195,30 @@ export const Wrapper = styled.div`
       background: ${props => props.interventions.getInterventionColor()};
     }
   }
+`;
+
+export const CondensedLegendStyled = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+export const CondensedLegendItemStyled = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.3rem;
+  width: 10rem;
+  margin: 3px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: ${props =>
+    props.bgColor && !props.darkLegendText
+      ? colors.grey[50]
+      : colors.grey[800]};
+  box-sizing: border-box;
+  background-color: ${props => props.bgColor || COLORS.LIGHTGRAY};
+  border: ${props =>
+    props.outline || (props.bgColor ? `1px solid ${props.bgColor}` : 'none')};
 `;

@@ -23,7 +23,7 @@ export default function DataPage({
   populationPercentage,
 }) {
   return (
-    <Grid container>
+    <Grid container style={{ height: '100%' }}>
       <Grid container item xs={12}>
         <PaddedGridItem container item xs={12} p="2rem" direction="column">
           <H1Statistic mb="0.5rem">
