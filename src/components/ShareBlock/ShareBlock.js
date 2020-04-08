@@ -27,7 +27,10 @@ const ShareBlock = ({
   shareInstruction,
   newsletterInstruction,
 }) => {
-  let url = shareURL || 'https://covidactnow.org/';
+  const url = shareURL || 'https://covidactnow.org/';
+  const quote =
+    shareQuote ||
+    'See a projection for how long states and counties have until COVID overwhelms hospitals and how interventions flatten the curve and save lives: @COVIDActNow';
   const hashtag = 'COVIDActNow';
   const [embedCopySuccess, setEmbedCopySuccess] = useState(false);
   const trackShare = target => {
@@ -45,7 +48,7 @@ const ShareBlock = ({
         <StyledShareButton disableElevation variant="contained" color="#3b5998">
           <FacebookShareButton
             url={url}
-            quote={shareQuote}
+            quote={quote}
             beforeOnClick={() => {
               trackShare('facebook');
             }}
@@ -57,7 +60,7 @@ const ShareBlock = ({
         <StyledShareButton disableElevation variant="contained" color="#00acee">
           <TwitterShareButton
             url={url}
-            title={shareQuote}
+            title={quote}
             hashtags={[hashtag]}
             beforeOnClick={() => {
               trackShare('twitter');
@@ -70,7 +73,7 @@ const ShareBlock = ({
         <StyledShareButton disableElevation variant="contained" color="#007fb1">
           <LinkedinShareButton
             url={url}
-            title={shareQuote}
+            title={quote}
             hashtags={[hashtag]}
             beforeOnClick={() => {
               trackShare('linkedin');
