@@ -86,7 +86,6 @@ const ModelChart = ({
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (lax)')
         : formatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
-
     type: 'areaspline',
     data: data[2].data,
     marker: {
@@ -110,7 +109,6 @@ const ModelChart = ({
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (strict)')
         : formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
-
     type: 'areaspline',
     data: data[1].data,
     marker: {
