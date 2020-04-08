@@ -81,7 +81,8 @@ async function fetchData(location, county = null, dataUrl = null) {
 
   try {
     let loadedModelDatas = await fetchAll(urls);
-    loadedModelDatas = loadedModelDatas.map(data => data.slice(0, 31));
+    // HACK: Truncate data to 32 data points to make new models match old models.
+    loadedModelDatas = loadedModelDatas.map(data => data.slice(0, 32));
     //This is to fix county data format
     modelDataForKey = {
       projections: new Projections(loadedModelDatas, location, county),
