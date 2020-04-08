@@ -81,9 +81,7 @@ async function fetchData(location, county = null, dataUrl = null) {
 
   try {
     let loadedModelDatas = await fetchAll(urls);
-    loadedModelDatas = loadedModelDatas.map(
-      data => data.slice(0, 31)
-    );
+    loadedModelDatas = loadedModelDatas.map(data => data.slice(0, 31));
     console.log(loadedModelDatas);
     //This is to fix county data format
     modelDataForKey = {
