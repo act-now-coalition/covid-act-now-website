@@ -90,8 +90,12 @@ export const Wrapper = styled.div`
     font-size: 13px;
     color: rgba(0, 0, 0, 0.7);
   }
+  .highcharts-legend-item {
+    cursor: pointer;
+    user-select: none;
+  }
   .highcharts-area {
-    fill-opacity: 1;
+    fill-opacity: 0.8;
   }
   /* these are styled according to the
      order passed into the series array */
@@ -100,7 +104,7 @@ export const Wrapper = styled.div`
     fill: ${props =>
       props.interventions.getChartSeriesColorMap().limitedActionSeries};
     stroke: white;
-    fill-opacity: ;
+    fill-opacity: 1;
   }
   /* Social distancing */
   .highcharts-series-1 {

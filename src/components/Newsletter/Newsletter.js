@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledNewsletter, NewsletterCopy } from './Newsletter.style';
+import { StyledNewsletter } from './Newsletter.style';
 
 class Newsletter extends React.Component {
   constructor() {
@@ -11,6 +11,9 @@ class Newsletter extends React.Component {
 
   submitForm(e) {
     e.preventDefault();
+    window.gtag('event', 'subscribe', {
+      event_category: 'engagement',
+    });
     let url = new URL('https://createsend.com/t/getsecuresubscribelink');
     url.searchParams.append('email', this.emailInput.value);
     url.searchParams.append('data', this.form.getAttribute('data-id'));
@@ -32,19 +35,9 @@ class Newsletter extends React.Component {
   }
 
   render() {
-    const { stateAbbr, stateFull, county } = this.props;
-    const location = county
-      ? ` about ${county}`
-      : stateFull
-      ? ` about ${stateFull}`
-      : stateAbbr
-      ? ` about ${stateAbbr}`
-      : '';
+    const { location, county } = this.props;
     return (
       <StyledNewsletter>
-        <NewsletterCopy color="inherit" component="p" variant="subtitle2">
-          Get the latest updates from the Covid Act Now team {location}
-        </NewsletterCopy>
         <form
           ref={f => (this.form = f)}
           className="js-cm-form"
@@ -56,7 +49,7 @@ class Newsletter extends React.Component {
             hidden
             readOnly
             aria-label="state"
-            value={stateAbbr || ''}
+            value={location || ''}
             id="fieldjlkiiyj"
             maxLength="200"
             name="cm-f-jlkiiyj"

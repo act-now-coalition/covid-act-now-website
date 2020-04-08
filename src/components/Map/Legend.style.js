@@ -24,6 +24,7 @@ export const LegendItemHeader = styled(Box)`
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+  font-weight: ${props => (props.mini ? 'normal' : 'bold')};
   font-size: 13px;
 `;
 

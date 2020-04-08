@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import QuoteIcon from '@material-ui/icons/FormatQuoteRounded';
 import CheckCircleOutline from '@material-ui/icons/CheckCircleOutline';
 import Grid from '@material-ui/core/Grid';
-import Newsletter from 'components/Newsletter/Newsletter';
+import ShareBlock from 'components/ShareBlock/ShareBlock';
 
 import EndorsementCard from 'components/EndorsementCard/EndorsementCard';
 import { ENDORSERS } from 'enums';
@@ -46,7 +46,7 @@ const Endorsements = () => {
             </Grid>
           ))}
         </EndorsersWrapper>
-        <Newsletter />
+        <ShareBlock />
       </Content>
     </Wrapper>
   );

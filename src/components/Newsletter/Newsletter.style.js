@@ -1,23 +1,7 @@
 import styled from 'styled-components';
 import palette from 'assets/theme/palette';
-import Typography from '@material-ui/core/Typography';
 
 export const StyledNewsletter = styled.div`
-  background: white;
-  max-width: 640px;
-  margin: 0 auto 3rem;
-  border: 1px solid ${palette.divider};
-  padding: 1.5rem;
-  border-radius: 4px;
-  box-shadow: 0 0 0 1px rgba(63, 63, 68, 0.05),
-    0 1px 3px 0 rgba(63, 63, 68, 0.15);
-
-  p {
-    margin-top: 0;
-    text-align: center;
-    color: ${palette.black};
-  }
-
   form {
     display: flex;
 
@@ -90,13 +74,4 @@ export const StyledNewsletter = styled.div`
       }
     }
   }
-`;
-
-export const NewsletterCopy = styled(Typography)`
-  margin-top: 0;
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.6rem;
-  color: rgba(0, 0, 0, 0.7);
 `;
