@@ -16,10 +16,14 @@ import {
   CondensedLegendItemStyled,
 } from './ModelChart.style';
 
-function dateIsPastHalfway(dateToCompare, dateArray) {
+function dateIsPastHalfway(dateToCompare, dateArray, itemKey) {
   if (dateArray.length === 0) return true;
   const midpoint = Math.floor(dateArray.length / 2);
-  return dateToCompare > dateArray[midpoint];
+  // Enforce date objects in case these are date strings
+  return (
+    new Date(dateToCompare) >
+    new Date(itemKey ? dateArray[midpoint][itemKey] : dateArray[midpoint])
+  );
 }
 
 const formatIntervention = (intervention, optCase) =>
@@ -74,7 +78,8 @@ const ModelChart = ({
   // or left-align our plot line labels
   const dateOverwhelmedIsPastHalfway = dateIsPastHalfway(
     new Date(model.dateOverwhelmed),
-    data[0].data.map(datum => new Date(datum.x)),
+    data[0].data,
+    'x',
   );
 
   const noAction = {
