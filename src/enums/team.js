@@ -243,4 +243,9 @@ export default [
     title: 'Data Scientist, Grand Rounds',
     link: 'https://www.linkedin.com/in/xinyuzhang-cathy/',
   },
+  {
+    name: 'Lana Rushing',
+    title: 'Founder, Rushing PR',
+    link: 'https://www.linkedin.com/in/lanarushing/',
+  },
 ];
