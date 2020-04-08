@@ -126,7 +126,7 @@ const ModelChart = ({
               INTERVENTIONS.SHELTER_IN_PLACE,
               ' (strict)',
             )
-          : condensedFormatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
+          : condensedFormatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
       bgColor: interventions.getChartSeriesColorMap().shelterInPlaceSeries,
     },
   };
