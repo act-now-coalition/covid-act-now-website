@@ -58,6 +58,11 @@ export default [
     link: 'https://twitter.com/davidstrauss?lang=en',
   },
   {
+    name: 'Elwyn Moir',
+    title: 'COMET Fellow, Stanford Medicine',
+    link: 'https://www.linkedin.com/in/elwyn-moir-12b1766b/',
+  },
+  {
     name: 'Ali Berlin Johnson',
     title: 'Former Lead Designer, Firebase',
     link: 'https://www.linkedin.com/in/berlinjohnson/',
