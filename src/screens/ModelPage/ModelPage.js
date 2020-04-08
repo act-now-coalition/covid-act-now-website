@@ -8,11 +8,10 @@ import { MAP_FILTERS } from './Enums/MapFilterEnums';
 import Outcomes from './Outcomes/Outcomes';
 import CallToAction from './CallToAction/CallToAction';
 import Map from 'components/Map/Map';
-import ShareModelBlock from './ShareModelBlock/ShareModelBlock';
+import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import SearchHeader from 'components/Header/SearchHeader';
 import StateHeader from 'components/StateHeader/StateHeader';
 import ModelChart from 'components/Charts/ModelChart';
-import Newsletter from 'components/Newsletter/Newsletter';
 import {
   MapMenuMobileWrapper,
   MapMenuItem,
@@ -202,11 +201,6 @@ function ModelPage() {
                     location={_location}
                     county={selectedCounty}
                     embedSnippet={iFrameCodeSnippet}
-                  />
-                  <Newsletter
-                    county={countyName}
-                    stateAbbr={location}
-                    stateFull={locationName}
                   />
                 </Content>
               </Panel>
