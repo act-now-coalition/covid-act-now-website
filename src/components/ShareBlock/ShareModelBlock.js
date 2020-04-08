@@ -2,7 +2,7 @@ import React from 'react';
 import ShareBlock from './ShareBlock';
 import { STATES } from 'enums';
 
-const ShareModelBlock = ({ location, county, embedSnippet }) => {
+const ShareModelBlock = ({ condensed, location, county, embedSnippet }) => {
   const locationName = STATES[location];
   const countyName = county && county.county;
   const displayName = countyName
@@ -17,6 +17,7 @@ const ShareModelBlock = ({ location, county, embedSnippet }) => {
 
   return (
     <ShareBlock
+      condensed={condensed}
       displayName={displayName}
       location={location}
       shareURL={shareURL}

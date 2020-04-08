@@ -1,6 +1,7 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { TEAM } from './../../enums';
+import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import ShareBlock from 'components/ShareBlock/ShareBlock';
 
 import { Wrapper, Content } from './FAQ.style';
@@ -8,6 +9,13 @@ import { Wrapper, Content } from './FAQ.style';
 const FAQ = ({ children }) => {
   return (
     <Wrapper>
+      <AppMetaTags
+        canonicalUrl="/faq"
+        pageTitle="FAQ"
+        pageDescription="Covid Act Now was started by four volunteers who saw the explosive and
+          deadly growth of COVID infections around the world and felt they had
+          to do something."
+      />
       <Content>
         <Typography variant="h3" component="h1">
           About Covid Act Now

@@ -1,5 +1,6 @@
 import React from 'react';
 import LaunchIcon from '@material-ui/icons/Launch';
+import ShareIcon from '@material-ui/icons/Share';
 import Logo from 'assets/images/logo';
 
 import {
@@ -22,9 +23,9 @@ export default function EmbedFooter({ onShare }) {
         >
           More&nbsp;
         </IconButton>
-        {/* <IconButton onClick={onShare} icon={<ShareIcon />} iconPosition="left">
+        <IconButton onClick={onShare} icon={<ShareIcon />} iconPosition="left">
           &nbsp;Share
-        </IconButton> */}
+        </IconButton>
       </FooterButtonContainer>
       <FooterSignature>
         <FooterLogoWrapper>

@@ -59,6 +59,11 @@ export class Projections {
 
     this.currentInterventionModel =
       interventionModelMap[this.stateIntervention];
+
+    this.worstCaseInterventionModel =
+      this.stateIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+        ? interventionModelMap[INTERVENTIONS.SOCIAL_DISTANCING]
+        : interventionModelMap[this.stateIntervention];
   }
 
   getInterventionTitle() {
@@ -201,6 +206,15 @@ export class Projections {
 
   getChartHospitalsOverloadedText() {
     let text = '';
+    const isDateOverWhelmedBeforeToday =
+      this.worstCaseInterventionModel.dateOverwhelmed &&
+      moment(this.worstCaseInterventionModel.dateOverwhelmed).isBefore(
+        moment().startOf('day'),
+      );
+
+    if (isDateOverWhelmedBeforeToday) {
+      return text;
+    }
 
     switch (this.getInterventionColor()) {
       case COLOR_MAP.RED.BASE:
