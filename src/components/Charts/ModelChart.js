@@ -252,6 +252,7 @@ const ModelChart = ({
     shelterInPlace,
     availableBeds,
     interventions,
+    condensed,
   ]);
 
   if (condensed) {

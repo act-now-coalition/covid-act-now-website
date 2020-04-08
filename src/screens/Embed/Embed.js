@@ -2,13 +2,17 @@ import _ from 'lodash';
 import React, { useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { STATES, STATE_TO_INTERVENTION } from 'enums';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Drawer from '@material-ui/core/Drawer';
+
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020';
 import '../../App.css'; /* optional for styling like the :hover pseudo-class */
 import StateHeader from '../../components/StateHeader/StateHeader';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+import ShareModelBlock from '../../components/ShareBlock/ShareModelBlock';
 
 import { useModelDatas, useStateSummaryData } from 'utils/model';
+import { useEmbed } from 'utils/hooks';
 
 import {
   EmbedContainer,
@@ -31,6 +35,7 @@ export default function Embed() {
   const [selectedCounty, setSelectedCounty] = useState(null);
   const [location, setLocation] = useState(null);
   const [missingCounty, setMissingCounty] = useState(false);
+  const { iFrameCodeSnippet } = useEmbed();
   useMemo(() => {
     let state = null,
       county = null;
@@ -134,8 +139,20 @@ export default function Embed() {
           />
         )}
       </EmbedContentContainer>
-      <EmbedFooter />
+      <EmbedFooter onShare={() => setShareDrawerOpen(true)} />
+
       <EmbedGlobalStyle />
+      <Drawer
+        anchor="bottom"
+        open={shareDrawerOpen}
+        onClose={() => setShareDrawerOpen(false)}
+      >
+        <ShareModelBlock
+          location={location}
+          county={selectedCounty}
+          embedSnippet={iFrameCodeSnippet}
+        />
+      </Drawer>
     </EmbedContainer>
   );
 }

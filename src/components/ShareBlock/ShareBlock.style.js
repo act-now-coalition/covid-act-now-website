@@ -71,6 +71,7 @@ export const StyledShareButton = styled.div`
   line-height: 2.5rem;
   text-transform: uppercase;
   user-select: none;
+  text-align: center;
 
   > button {
     width: 100%;
