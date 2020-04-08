@@ -16,7 +16,7 @@ import {
   MapMenuItem,
 } from 'components/Header/SearchHeader.style';
 
-import AppMetaTags from '../../components/AppMetaTags/AppMetaTags';
+import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import {
   Wrapper,
   ContentWrapper,

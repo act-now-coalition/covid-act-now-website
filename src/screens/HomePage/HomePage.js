@@ -4,7 +4,7 @@ import HomePageHeader from 'components/Header/HomePageHeader';
 import { COLORS } from 'enums';
 import Map from 'components/Map/Map';
 import Endorsements from 'screens/Endorsements/Endorsements';
-import AppMetaTags from '../../components/AppMetaTags/AppMetaTags';
+import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import ShareBlock from 'components/ShareBlock/ShareBlock';
 
 import { Wrapper, Content, MapTitle, MapTitleDivider } from './HomePage.style';

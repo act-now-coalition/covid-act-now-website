@@ -1,7 +1,7 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { TEAM } from './../../enums';
-import AppMetaTags from '../../components/AppMetaTags/AppMetaTags';
+import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import ShareBlock from 'components/ShareBlock/ShareBlock';
 
 import { Wrapper, Content } from './FAQ.style';

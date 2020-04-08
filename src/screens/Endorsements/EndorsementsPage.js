@@ -1,8 +1,8 @@
 import React from 'react';
 
 import Endorsements from 'screens/Endorsements/Endorsements';
-import { Wrapper } from 'screens/Endorsements/EndorsementsPage.style.js';
-import AppMetaTags from '../../components/AppMetaTags/AppMetaTags';
+import { Wrapper } from 'screens/Endorsements/EndorsementsPage.style';
+import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 
 const EndorsementsPage = () => {
   return (
