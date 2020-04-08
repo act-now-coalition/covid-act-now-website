@@ -4,7 +4,7 @@ import HomePageHeader from 'components/Header/HomePageHeader';
 import { COLORS } from 'enums';
 import Map from 'components/Map/Map';
 import Endorsements from 'screens/Endorsements/Endorsements';
-import Newsletter from 'components/Newsletter/Newsletter';
+import ShareBlock from 'components/ShareBlock/ShareBlock';
 
 import { Wrapper, Content, MapTitle, MapTitleDivider } from './HomePage.style';
 
@@ -26,11 +26,10 @@ export default function HomePage() {
             <Map />
             <div
               style={{
-                marginTop: '3rem',
                 padding: '1.5rem',
               }}
             >
-              <Newsletter />
+              <ShareBlock />
             </div>
           </Content>
         </div>
