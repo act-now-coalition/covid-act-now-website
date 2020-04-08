@@ -206,6 +206,15 @@ export class Projections {
 
   getChartHospitalsOverloadedText() {
     let text = '';
+    const isDateOverWhelmedBeforeToday =
+      this.worstCaseInterventionModel.dateOverwhelmed &&
+      moment(this.worstCaseInterventionModel.dateOverwhelmed).isBefore(
+        moment().startOf('day'),
+      );
+
+    if (isDateOverWhelmedBeforeToday) {
+      return text;
+    }
 
     switch (this.getInterventionColor()) {
       case COLOR_MAP.RED.BASE:
