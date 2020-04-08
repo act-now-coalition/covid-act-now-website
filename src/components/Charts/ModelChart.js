@@ -16,6 +16,12 @@ import {
   CondensedLegendItemStyled,
 } from './ModelChart.style';
 
+function dateIsPastHalfway(dateToCompare, dateArray) {
+  if (dateArray.length === 0) return true;
+  const midpoint = Math.floor(dateArray.length / 2);
+  return dateToCompare > dateArray[midpoint];
+}
+
 const formatIntervention = (intervention, optCase) =>
   `3 months of ${intervention}${optCase || ''}`;
 
@@ -64,9 +70,12 @@ const ModelChart = ({
 
   const data = scenarioComparisonOverTime(200);
 
-  /**
-   * Note: `condensedLegend` is for embed formatting only, not Highcharts
-   */
+  // We'll use this to determine whether to right-align
+  // or left-align our plot line labels
+  const dateOverwhelmedIsPastHalfway = dateIsPastHalfway(
+    new Date(model.dateOverwhelmed),
+    data[0].data.map(datum => new Date(datum.x)),
+  );
 
   const noAction = {
     name: INTERVENTIONS.LIMITED_ACTION,
@@ -182,8 +191,13 @@ const ModelChart = ({
                   currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
                     ? INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE
                     : currentIntervention,
-                )}">Hospitals Overloaded<br /><span>${interventions.getChartHospitalsOverloadedText()}</span></div>`;
+                )}${
+                  dateOverwhelmedIsPastHalfway
+                    ? ' custom-plot-label-reverse'
+                    : ''
+                }">Hospitals Overloaded<br /><span>${interventions.getChartHospitalsOverloadedText()}</span></div>`;
               },
+              align: dateOverwhelmedIsPastHalfway ? 'right' : 'left',
               rotation: 0,
               useHTML: true,
               x: 1,
@@ -271,6 +285,7 @@ const ModelChart = ({
     availableBeds,
     interventions,
     condensed,
+    dateOverwhelmedIsPastHalfway,
   ]);
 
   if (condensed) {
