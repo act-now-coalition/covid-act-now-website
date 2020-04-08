@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation, matchPath } from 'react-router-dom';
 import Logo from 'assets/images/logo';
 import { useEmbed } from 'utils/hooks';
@@ -22,30 +22,29 @@ import {
 } from 'react-share';
 import { STATES } from 'enums';
 
+const Panels = ['/', '/faq', '/endorsements', '/contact', '/blog'];
+
+function getPanelIdxFromLocation(location) {
+  let idx = Panels.indexOf(location.pathname);
+  return idx === -1 ? false : idx;
+}
+
 const _AppBar = () => {
   const history = useHistory();
-  const { pathname } = useLocation();
-  const panels = ['/', '/faq', '/endorsements', '/contact', '/blog'];
+  const location = useLocation();
 
-  const getDefaultPanelId = () => {
-    const defaultPanelIndex = Number(panels.indexOf(pathname));
-
-    if (!defaultPanelIndex) {
-      return 0;
-    }
-
-    // We are on the state page, don't highlight a tab
-    if (defaultPanelIndex === -1) {
-      return false;
-    }
-
-    return defaultPanelIndex;
-  };
-
-  const [panelIdx, setPanelIdx] = useState(getDefaultPanelId());
+  const [panelIdx, setPanelIdx] = useState(getPanelIdxFromLocation(location));
   const [open, setOpen] = useState(false);
   const locationPath = useLocation();
   const { isEmbed } = useEmbed();
+
+  useEffect(() => {
+    function handleLocationChange(location) {
+      setPanelIdx(getPanelIdxFromLocation(location));
+    }
+    // https://github.com/ReactTraining/react-router/issues/3385#issuecomment-214758008
+    return history.listen(handleLocationChange);
+  }, [history]);
 
   // Don't show in iFrame
   if (isEmbed) return null;
@@ -70,7 +69,6 @@ const _AppBar = () => {
   const goTo = route => e => {
     e.preventDefault();
     setOpen(false);
-    setPanelIdx(panels.indexOf(route));
 
     history.push(route);
 
