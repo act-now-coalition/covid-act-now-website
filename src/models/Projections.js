@@ -60,7 +60,7 @@ export class Projections {
     this.currentInterventionModel =
       interventionModelMap[this.stateIntervention];
 
-    this.worstCaseIInterventionModel =
+    this.worstCaseInterventionModel =
       this.stateIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         ? interventionModelMap[INTERVENTIONS.SOCIAL_DISTANCING]
         : interventionModelMap[this.stateIntervention];

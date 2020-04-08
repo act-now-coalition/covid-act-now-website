@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { get } from 'lodash';
 import { useHistory } from 'react-router-dom';
-import LazyLoad from 'react-lazyload';
+import LazyLoad, { forceCheck } from 'react-lazyload';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -130,7 +130,7 @@ export function CompareModels({ match, location }) {
   function getDateOverwhelmed(stateAbbr, models) {
     const interventions = models[stateAbbr];
 
-    return interventions.worstCaseIInterventionModel.dateOverwhelmed;
+    return interventions.worstCaseInterventionModel.dateOverwhelmed;
   }
 
   function filterByIntervention(stateAbbr) {
@@ -170,6 +170,9 @@ export function CompareModels({ match, location }) {
   const changeInterventionFilter = event => {
     setFilterTypeIntervention(event.target.value);
   };
+
+  // HACK: When we re-sort, etc. LazyLoad doesn't notice that it may be visible.
+  setTimeout(() => forceCheck(), 50);
 
   return (
     <Wrapper>
