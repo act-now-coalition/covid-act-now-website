@@ -173,6 +173,13 @@ export const Wrapper = styled.div`
       color: rgba(255, 255, 255, 0.84);
     }
 
+    &.custom-plot-label-reverse {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-top-left-radius: 16px;
+      border-bottom-left-radius: 16px;
+    }
+
     &.custom-plot-label-${snakeCase(INTERVENTIONS.LIMITED_ACTION)} {
       background: ${props => props.interventions.getInterventionColor()};
     }
