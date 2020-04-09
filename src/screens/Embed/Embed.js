@@ -116,8 +116,8 @@ export default function Embed() {
           interventions={interventions}
         />
         <Tabs value={tabState} variant="fullWidth" onChange={handleTabChange}>
+          <Tab label="Data" />
           <Tab label="Projections" />
-          <Tab label="Charts" />
         </Tabs>
       </EmbedHeaderContainer>
       <EmbedContentContainer>
