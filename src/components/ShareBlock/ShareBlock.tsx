@@ -30,7 +30,7 @@ const ShareBlock = ({
 }: {
   condensed?: boolean;
   location?: string;
-  countyName?: String;
+  countyName?: string;
   embedSnippet?: string;
   shareQuote?: string;
   shareURL?: string;
