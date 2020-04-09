@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import _ from 'lodash';
 import { useHistory, useLocation, matchPath } from 'react-router-dom';
 import Logo from 'assets/images/logo';
 import { useEmbed } from 'utils/hooks';
@@ -22,12 +23,32 @@ import {
 } from 'react-share';
 import { STATES } from 'enums';
 import { Location } from 'history';
+import US_STATE_DATASET from '../MapSelectors/datasets/us_states_dataset_01_02_2020';
 
 const Panels = ['/', '/faq', '/endorsements', '/contact', '/blog'];
 
 function getPanelIdxFromLocation(location: Location<any>) {
   let idx = Panels.indexOf(location.pathname);
   return idx === -1 ? false : idx;
+}
+
+function locationNameFromMatch(match) {
+  if (!match || !match.params) {
+    return '';
+  }
+
+  const stateId = match.params.id.toUpperCase();
+  const state = STATES[stateId];
+  const countyId = match.params.county;
+  if (!countyId) {
+    return state;
+  }
+
+  const county = _.find(
+    US_STATE_DATASET.state_county_map_dataset[stateId].county_dataset,
+    ['county_url_name', countyId],
+  ).county;
+  return `${county}, ${state}`;
 }
 
 const _AppBar = () => {
@@ -68,6 +89,7 @@ const _AppBar = () => {
   if (!match) {
     match = matchFromLegacyPath;
   }
+  const locationName = locationNameFromMatch(match);
 
   const locationName = match && match.params ? STATES[match.params.id] : '';
   const goTo = (route: string) => (e: React.MouseEvent) => {
@@ -88,11 +110,11 @@ const _AppBar = () => {
 
   const shareURL = `https://covidactnow.org${match ? match.url : ''}`;
   const hashtag = 'COVIDActNow';
-  const stateShareTitle = `See a projection for how long ${locationName}'s hospital system has until COVID overwhelms hospitals and how interventions flatten the curve and save lives: @COVIDActNow`;
+  const locationShareTitle = `See a projection for how long ${locationName}'s hospital system has until COVID overwhelms hospitals and how interventions flatten the curve and save lives: @COVIDActNow`;
   const defaultShareTitle =
     'See a projection for how long states and counties have until COVID overwhelms hospitals and how interventions flatten the curve and save lives: @COVIDActNow';
 
-  const shareTitle = locationName ? stateShareTitle : defaultShareTitle;
+  const shareTitle = locationName ? locationShareTitle : defaultShareTitle;
 
   const trackShare = (target: string) => {
     window.gtag('event', 'share', {
