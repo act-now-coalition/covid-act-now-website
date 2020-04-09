@@ -29,7 +29,7 @@ const Endorsements = () => {
               must make now.
             </Typography>
           </Quote>
-          <EndorseLink href={'mailto:endorse@covidactnow.org'}>
+          <EndorseLink href="https://docs.google.com/forms/d/e/1FAIpQLSfS0iYUy7eEHx-v8Jiyjwfkm6OiPSa2Iw8o4IK_2aklNl9qkQ/viewform">
             <div>Sign up to endorse</div>
             <CheckCircleOutline />
           </EndorseLink>
