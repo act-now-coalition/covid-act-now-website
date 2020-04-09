@@ -10,7 +10,7 @@ export const ShareSpacer = styled.div`
   }
 `;
 
-export const ShareContainer = styled.div`
+export const ShareContainer = styled.div<{ condensed?: boolean }>`
   background: ${palette.white};
   max-width: 640px;
   margin: ${props => (props.condensed ? 0 : '3rem auto')};

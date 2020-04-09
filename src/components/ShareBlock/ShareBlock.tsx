@@ -28,6 +28,7 @@ const ShareBlock = ({
   shareInstruction,
   newsletterInstruction,
 }: {
+  condensed?: boolean;
   location?: string;
   countyName?: String;
   embedSnippet?: string;
