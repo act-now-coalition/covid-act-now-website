@@ -65,7 +65,7 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
           />
         </Legend>
       )}
-      <div className='us-state-map'>
+      <div className="us-state-map">
         <USACountyMap
           setTooltipContent={setContent}
           stateClickHandler={onClick}
