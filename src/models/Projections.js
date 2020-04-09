@@ -364,13 +364,5 @@ export class Projections {
         r0: 1.7,
       }),
     };
-
-    this.contain = {
-      now: new Model(props[3], {
-        intervention: INTERVENTIONS.LOCKDOWN,
-        durationDays: 90,
-        r0: 0.3,
-      }),
-    };
   }
 }

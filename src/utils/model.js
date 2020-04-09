@@ -34,7 +34,6 @@ async function fetchAll(urls) {
 export const ModelIds = {
   baseline: 0,
   strictDistancingNow: 1,
-  containNow: 2,
   weakDistancingNow: 3,
 };
 
@@ -70,7 +69,6 @@ async function fetchData(location, county = null, dataUrl = null) {
     ModelIds.baseline,
     ModelIds.strictDistancingNow,
     ModelIds.weakDistancingNow,
-    ModelIds.containNow,
   ].map(i => {
     let fipsCode =
       county && county.full_fips_code ? county.full_fips_code : null;
