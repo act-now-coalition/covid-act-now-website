@@ -84,7 +84,7 @@ export const MenuTitle = styled.div`
   display: inline-block;
 `;
 
-export const StyledBurger = styled.button`
+export const StyledBurger = styled.button<{ open: boolean }>`
   position: relative;
   top: 20px;
   margin-left: 20px;
@@ -138,7 +138,7 @@ export const StyledMobileMenu = styled.nav`
   }
 `;
 
-export const StyledMenu = styled.nav`
+export const StyledMenu = styled.nav<{ open: boolean }>`
   display: flex;
   flex-direction: column;
   background: #f2f2f2;

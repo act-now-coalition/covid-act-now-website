@@ -15,7 +15,7 @@ import {
   StyledFooterDivider,
 } from './Footer.style';
 
-const FooterButton = props => (
+const FooterButton = (props: { className: string }) => (
   <StyledFooterBodyButton
     href="https://forms.gle/JTCcqrGb5yzoD6hg6"
     target="_blank"
@@ -25,13 +25,13 @@ const FooterButton = props => (
   </StyledFooterBodyButton>
 );
 
-const Footer = ({ children }) => {
+const Footer = ({ children }: { children: React.ReactNode }) => {
   const history = useHistory();
   const { pathname } = useLocation();
 
   const isMapPage = pathname.startsWith('/us') || pathname.startsWith('/state');
 
-  const goTo = route => {
+  const goTo = (route: string) => {
     history.push(route);
 
     window.scrollTo(0, 0);

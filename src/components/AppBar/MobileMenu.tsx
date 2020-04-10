@@ -6,7 +6,15 @@ import EndorsementsIcon from 'assets/images/endorsementsIconTwoTone';
 import BlogIcon from 'assets/images/blogIconTwoTone';
 import palette from 'assets/theme/palette';
 
-const MobileMenu = ({ open, goTo, forwardTo }) => {
+const MobileMenu = ({
+  open,
+  goTo,
+  forwardTo,
+}: {
+  open: boolean;
+  goTo: (route: string) => (e: React.MouseEvent) => void;
+  forwardTo: (route: string) => (e: React.MouseEvent) => void;
+}) => {
   return (
     <StyledMenu open={open}>
       <a onClick={goTo('/')} href="/">

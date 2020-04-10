@@ -12,14 +12,10 @@ import {
   HeaderTitle,
 } from './HomePageHeader.style';
 
-const HomePageHeader = ({
-  children,
-  locationName,
-  countyName = null,
-  intervention,
-}) => {
+const HomePageHeader = () => {
   const history = useHistory();
 
+  // @ts-ignore TODO(aj): remove when converting MapSelectors
   const handleSelectChange = option => {
     let route = `/us/${option.state_code.toLowerCase()}`;
 
@@ -45,7 +41,10 @@ const HomePageHeader = ({
           </HeaderSubCopy>
 
           <SelectorWrapper>
-            <GlobalSelector handleChange={handleSelectChange} />
+            <GlobalSelector
+              handleChange={handleSelectChange}
+              extendRight={undefined}
+            />
           </SelectorWrapper>
 
           {false && (

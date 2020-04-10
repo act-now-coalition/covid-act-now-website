@@ -13,11 +13,20 @@ import {
   MenuBarWrapper,
 } from './SearchHeader.style';
 
-const SearchHeader = ({ mobileMenuOpen, setMobileMenuOpen, setMapOption }) => {
+const SearchHeader = ({
+  mobileMenuOpen,
+  setMobileMenuOpen,
+  setMapOption,
+}: {
+  mobileMenuOpen: boolean;
+  setMobileMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setMapOption: React.Dispatch<React.SetStateAction<string>>;
+}) => {
   const history = useHistory();
   const isMobile = useMediaQuery('(max-width:1349px)');
   const isNarrowMobile = useMediaQuery('(max-width:500px)');
 
+  // @ts-ignore TODO(aj): remove when converting MapSelectors
   const handleSelectChange = option => {
     if (option.state_code === MAP_FILTERS.DC) {
       setMapOption(MAP_FILTERS.NATIONAL);

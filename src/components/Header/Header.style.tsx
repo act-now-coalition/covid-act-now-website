@@ -11,14 +11,14 @@ export const Wrapper = styled.div`
   color: ${colors.grey[50]};
 `;
 
-export const HeaderTitle = styled(Typography)`
+export const HeaderTitle = styled(Typography)<{ component?: string }>`
   color: white;
   font-size: 2em;
   font-weight: 700;
   line-height: 2rem;
 `;
 
-export const HeaderRule = styled(Typography)`
+export const HeaderRule = styled(Typography)<{ component?: string }>`
   width: 100px;
   height: 1px;
   background: #ffffff;
@@ -26,7 +26,7 @@ export const HeaderRule = styled(Typography)`
   margin: 2.25rem 0 2rem;
 `;
 
-export const HeaderSubCopy = styled(Typography)`
+export const HeaderSubCopy = styled(Typography)<{ component?: string }>`
   font-size: 1rem;
   font-weight: 600;
 

@@ -5,7 +5,7 @@ import { TEAM } from './../../enums';
 
 import { Wrapper, Content } from './About.style';
 
-const About = ({ children }) => {
+const About = ({ children }: { children: React.ReactNode }) => {
   return (
     <Wrapper>
       <Content>

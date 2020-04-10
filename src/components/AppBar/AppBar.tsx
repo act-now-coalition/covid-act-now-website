@@ -23,11 +23,17 @@ import {
 } from 'react-share';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import { STATES } from 'enums';
+<<<<<<< HEAD:src/components/AppBar/AppBar.tsx
+import { Location } from 'history';
 import US_STATE_DATASET from '../MapSelectors/datasets/us_states_dataset_01_02_2020';
+import { Location } from 'history';
+=======
+import US_STATE_DATASET from '../MapSelectors/datasets/us_states_dataset_01_02_2020';
+>>>>>>> develop:src/components/AppBar/AppBar.js
 
 const Panels = ['/', '/faq', '/endorsements', '/contact', '/blog'];
 
-function getPanelIdxFromLocation(location) {
+function getPanelIdxFromLocation(location: Location<any>) {
   let idx = Panels.indexOf(location.pathname);
   return idx === -1 ? false : idx;
 }
@@ -61,7 +67,7 @@ const _AppBar = () => {
   const { isEmbed } = useEmbed();
 
   useEffect(() => {
-    function handleLocationChange(location) {
+    function handleLocationChange(location: Location<any>) {
       setPanelIdx(getPanelIdxFromLocation(location));
     }
     // https://github.com/ReactTraining/react-router/issues/3385#issuecomment-214758008
@@ -71,24 +77,26 @@ const _AppBar = () => {
   // Don't show in iFrame
   if (isEmbed) return null;
 
-  let match = matchPath(locationPath.pathname, {
+  let match = matchPath<{ id: keyof typeof STATES }>(locationPath.pathname, {
     path: ['/us/:id', '/us/:id/county/:county'],
     exact: true,
     strict: false,
   });
 
-  const matchFromLegacyPath = matchPath(locationPath.pathname, {
-    path: '/states/:id',
-    exact: true,
-    strict: false,
-  });
+  const matchFromLegacyPath = matchPath<{ id: keyof typeof STATES }>(
+    locationPath.pathname,
+    {
+      path: '/states/:id',
+      exact: true,
+      strict: false,
+    },
+  );
 
   if (!match) {
     match = matchFromLegacyPath;
   }
   const locationName = locationNameFromMatch(match);
-
-  const goTo = route => e => {
+  const goTo = (route: string) => (e: React.MouseEvent) => {
     e.preventDefault();
     setOpen(false);
 
@@ -97,7 +105,7 @@ const _AppBar = () => {
     window.scrollTo(0, 0);
   };
 
-  const forwardTo = url => e => {
+  const forwardTo = (url: string) => (e: React.MouseEvent) => {
     e.preventDefault();
 
     setOpen(false);
@@ -112,7 +120,7 @@ const _AppBar = () => {
 
   const shareTitle = locationName ? locationShareTitle : defaultShareTitle;
 
-  const trackShare = target => {
+  const trackShare = (target: string) => {
     window.gtag('event', 'share', {
       event_label: target,
     });
@@ -167,6 +175,7 @@ const _AppBar = () => {
             quote={shareTitle}
             beforeOnClick={() => {
               trackShare('facebook');
+              return Promise.resolve();
             }}
             style={{
               alignItems: 'center',
@@ -183,6 +192,7 @@ const _AppBar = () => {
             hashtags={[hashtag]}
             beforeOnClick={() => {
               trackShare('twitter');
+              return Promise.resolve();
             }}
             style={{ alignItems: 'center', display: 'flex' }}
           >
@@ -206,12 +216,7 @@ const _AppBar = () => {
             <TwitterIcon size={32} round={true} />
           </TwitterShareButton>
           <Burger open={open} setOpen={setOpen} />
-          <MobileMenu
-            open={open}
-            setOpen={setOpen}
-            goTo={goTo}
-            forwardTo={forwardTo}
-          />
+          <MobileMenu open={open} goTo={goTo} forwardTo={forwardTo} />
         </StyledMobileMenu>
       </Wrapper>
     </StyledAppBar>
