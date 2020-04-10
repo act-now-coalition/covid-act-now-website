@@ -65,11 +65,12 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
           />
         </Legend>
       )}
-      <USACountyMap
-        setTooltipContent={setContent}
-        stateClickHandler={onClick}
-      />
-
+      <div className="us-state-map">
+        <USACountyMap
+          setTooltipContent={setContent}
+          stateClickHandler={onClick}
+        />
+      </div>
       {!hideLegend && (
         <Legend>
           <MiniLegendItem

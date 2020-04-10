@@ -1,4 +1,5 @@
 const path = require('path');
+const tar = require('tar');
 const fs = require('fs-extra');
 const Promise = require('bluebird');
 const Pageres = require('pageres');
@@ -8,24 +9,17 @@ const SCREENSHOT_ENUMS = require('./enums');
 
 (async () => {
   const FILE_NAME = '<%= url %>';
-  const BASE_URL = 'https://covidactnow.org';
+  const BASE_URL = 'http://localhost:3000';
   const OUTPUT_SIZE = '1920x1080';
-  const DELAY = 1;
-  const CHUNK_SIZE = 20;
+  const DELAY = 2;
+  const CHUNK_SIZE = 10;
 
   const now = moment();
 
-  const outputFolder = path.join(
-    __dirname,
-    'output',
-    'screenshots',
-    now.format('YYYY'),
-    now.format('MM'),
-    now.format('DD'),
-    now.format('HH_mm'),
-  );
+  const outputFolder = path.join(__dirname, 'output', 'screenshots');
 
   await fs.ensureDir(outputFolder);
+  await fs.emptyDir(outputFolder);
 
   function screenshot(selector, page) {
     return new Pageres({
@@ -52,7 +46,24 @@ const SCREENSHOT_ENUMS = require('./enums');
 
   const promiseChunks = chunk(promises, CHUNK_SIZE);
 
-  return Promise.each(promiseChunks, async chunks =>
+  await Promise.each(promiseChunks, async chunks =>
     Promise.all(chunks.map(p => p.run())),
   );
+
+  await tar.c(
+    {
+      gzip: true,
+      file: path.resolve(
+        `${__dirname}/output/archives/page_screenshots_${moment().format(
+          'YYYY-MM-DD-HH_mm',
+        )}.tgz`,
+      ),
+      cwd: path.resolve(`${__dirname}/output`),
+    },
+    ['screenshots'],
+  );
+
+  await fs.emptyDir(outputFolder);
+
+  process.exit();
 })();

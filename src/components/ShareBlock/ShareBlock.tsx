@@ -19,6 +19,7 @@ import {
 } from './ShareBlock.style';
 
 const ShareBlock = ({
+  condensed,
   location,
   countyName,
   embedSnippet,
@@ -27,6 +28,10 @@ const ShareBlock = ({
   shareInstruction,
   newsletterInstruction,
 }: {
+<<<<<<< HEAD:src/components/ShareBlock/ShareBlock.tsx
+=======
+  condensed?: boolean;
+>>>>>>> a6f9315745964848ac9d77cbcf6c0a8206fa38b3:src/components/ShareBlock/ShareBlock.tsx
   location?: string;
   countyName?: String;
   embedSnippet?: string;
@@ -48,7 +53,7 @@ const ShareBlock = ({
   };
 
   return (
-    <ShareContainer>
+    <ShareContainer condensed={condensed}>
       <ShareInstruction>
         {shareInstruction || 'Share the Covid Act Now map'}
       </ShareInstruction>

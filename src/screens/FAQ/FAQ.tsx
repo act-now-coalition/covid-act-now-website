@@ -28,10 +28,10 @@ const FAQ = ({ children }: { children: React.ReactNode }) => {
           deadly growth of COVID infections around the world and felt they had
           to do something. The Covid Act Now team has partnered with some of
           America’s preeminent epidemiologists and data scientists to develop
-          the U.S. Intervention Model.
+          the U.S. Interventions Model.
         </Typography>
         <Typography variant="body1" component="p">
-          The U.S. Intervention Model is a data platform that projects COVID
+          The U.S. Interventions Model is a data platform that projects COVID
           infections, hospitalizations, and deaths across the United States, as
           well as model how public health interventions contain the spread of
           COVID. We help decision makers understand when and how COVID will
@@ -39,9 +39,10 @@ const FAQ = ({ children }: { children: React.ReactNode }) => {
           lives.
         </Typography>
         <Typography variant="body1" component="p">
-          Our U.S. Intervention Model is being used at every level of government
-          across the U.S., the military, private sector, and more. The model has
-          also been used by several countries around the world, including India.
+          Our U.S. Interventions Model is being used at every level of
+          government across the U.S., the military, private sector, and more.
+          The model has also been used by several countries around the world,
+          including India.
         </Typography>
 
         <Typography variant="h5" component="h5">
@@ -50,7 +51,7 @@ const FAQ = ({ children }: { children: React.ReactNode }) => {
         <Typography variant="body1" component="p">
           Covid Act Now is a distributed team of volunteers working with some of
           the nation’s preeminent epidemiologists and public health experts.
-          CoVidActNow was founded by{' '}
+          Covid Act Now was founded by{' '}
           <a href="https://www.linkedin.com/in/maxhenderson/">Max Henderson</a>,{' '}
           <a href="https://en.wikipedia.org/wiki/Jonathan_Kreiss-Tomkins">
             Rep Jonathan Kreiss-Tomkins
@@ -256,14 +257,14 @@ const FAQ = ({ children }: { children: React.ReactNode }) => {
         </Typography>
 
         <Typography variant="h3" component="h1">
-          About the U.S. Intervention Model
+          About the U.S. Interventions Model
         </Typography>
 
         <Typography variant="h5" component="h5">
-          What is the U.S. Intervention Model?
+          What is the U.S. Interventions Model?
         </Typography>
         <Typography variant="body1" component="p">
-          The U.S. Intervention Model is a data platform that projects COVID
+          The U.S. Interventions Model is a data platform that projects COVID
           infections, hospitalizations, and deaths across the United States, as
           well as model how public health interventions contain the spread of
           COVID and save lives.
@@ -373,7 +374,7 @@ const FAQ = ({ children }: { children: React.ReactNode }) => {
           home”)?{' '}
         </Typography>
         <Typography variant="body1" component="p">
-          All these definitions — and much more — can be found in our{' '}
+          All these definitions — and many more — can be found in our{' '}
           <a
             target="_blank"
             rel="noopener noreferrer"
@@ -381,7 +382,17 @@ const FAQ = ({ children }: { children: React.ReactNode }) => {
           >
             Model Reference and Assumptions
           </a>{' '}
-          document.
+          document. The epidemiological assumptions how these various
+          interventions curb the curve of COVID infections is informed by recent
+          research from Europe, and most notably from{' '}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowships/Imperial-College-COVID19-Europe-estimates-and-NPI-impact-30-03-2020.pdf"
+          >
+            Imperial College London
+          </a>
+          , as well as the emerging corpus of COVID data in the U.S.
         </Typography>
 
         <Typography variant="h5" component="h5">
@@ -467,23 +478,14 @@ const FAQ = ({ children }: { children: React.ReactNode }) => {
           Should I wear a mask in public?
         </Typography>
         <Typography variant="body1" component="p">
-          The WHO offers{' '}
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/when-and-how-to-use-masks"
-          >
-            advice
-          </a>{' '}
-          on the use of face masks, though there seems to be{' '}
           <a
             target="_blank"
             rel="noopener noreferrer"
             href="https://www.washingtonpost.com/outlook/2020/03/28/masks-all-coronavirus/"
           >
-            an emerging body of thought and evidence
+            An emerging body of thought and evidence
           </a>{' '}
-          that masks should be worn by everyone.
+          suggests that masks should be worn by everyone.
         </Typography>
 
         <Typography variant="h3" component="h1">

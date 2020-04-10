@@ -12,13 +12,29 @@ import {
   Wrapper,
   Disclaimer,
   DisclaimerContent,
+  CondensedLegendStyled,
+  CondensedLegendItemStyled,
 } from './ModelChart.style';
+
+function dateIsPastHalfway(dateToCompare, dateArray, itemKey) {
+  if (dateArray.length === 0) return true;
+  const midpoint = Math.floor(dateArray.length / 2);
+  // Enforce date objects in case these are date strings
+  return (
+    new Date(dateToCompare) >
+    new Date(itemKey ? dateArray[midpoint][itemKey] : dateArray[midpoint])
+  );
+}
 
 const formatIntervention = (intervention, optCase) =>
   `3 months of ${intervention}${optCase || ''}`;
 
+const condensedFormatIntervention = (intervention, optCase) =>
+  `${intervention}${optCase || ''}`;
+
 const ModelChart = ({
   height,
+  condensed,
   countyName,
   interventions,
   currentIntervention,
@@ -58,6 +74,14 @@ const ModelChart = ({
 
   const data = scenarioComparisonOverTime(200);
 
+  // We'll use this to determine whether to right-align
+  // or left-align our plot line labels
+  const dateOverwhelmedIsPastHalfway = dateIsPastHalfway(
+    new Date(model.dateOverwhelmed),
+    data[0].data,
+    'x',
+  );
+
   const noAction = {
     name: INTERVENTIONS.LIMITED_ACTION,
     type: 'areaspline',
@@ -66,6 +90,9 @@ const ModelChart = ({
       symbol: 'circle',
     },
     visible: currentIntervention === INTERVENTIONS.LIMITED_ACTION,
+    condensedLegend: {
+      bgColor: interventions.getChartSeriesColorMap().limitedActionSeries,
+    },
   };
 
   const socialDistancing = {
@@ -77,6 +104,17 @@ const ModelChart = ({
     data: data[2].data,
     marker: {
       symbol: 'circle',
+    },
+    condensedLegend: {
+      condensedName:
+        currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+          ? condensedFormatIntervention(
+              INTERVENTIONS.SHELTER_IN_PLACE,
+              ' (lax)',
+            )
+          : condensedFormatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
+
+      bgColor: interventions.getChartSeriesColorMap().socialDistancingSeries,
     },
   };
 
@@ -90,6 +128,19 @@ const ModelChart = ({
     marker: {
       symbol: 'circle',
     },
+    condensedLegend: {
+      // TODO: A better way to set text color to be darker
+      // on lighter colored backgrounds
+      darkLegendText: true,
+      condensedName:
+        currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+          ? condensedFormatIntervention(
+              INTERVENTIONS.SHELTER_IN_PLACE,
+              ' (strict)',
+            )
+          : condensedFormatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
+      bgColor: interventions.getChartSeriesColorMap().shelterInPlaceSeries,
+    },
   };
 
   const availableBeds = {
@@ -99,6 +150,9 @@ const ModelChart = ({
     marker: {
       symbol: 'circle',
     },
+    condensedLegend: {
+      outline: '2px dashed black',
+    },
   };
 
   const options = useMemo(() => {
@@ -107,7 +161,7 @@ const ModelChart = ({
         animation: false,
         styledMode: true,
         height: height || '600',
-        spacing: [8, 0, 32, 0],
+        spacing: [8, 0, condensed ? 12 : 32, 0],
       },
       title: {
         // text: county ? `${county.county}, ${state}` : state,
@@ -142,8 +196,13 @@ const ModelChart = ({
                   currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
                     ? INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE
                     : currentIntervention,
-                )}">Hospitals Overloaded<br /><span>${interventions.getChartHospitalsOverloadedText()}</span></div>`;
+                )}${
+                  dateOverwhelmedIsPastHalfway
+                    ? ' custom-plot-label-reverse'
+                    : ''
+                }">Hospitals Overloaded<br /><span>${interventions.getChartHospitalsOverloadedText()}</span></div>`;
               },
+              align: dateOverwhelmedIsPastHalfway ? 'right' : 'left',
               rotation: 0,
               useHTML: true,
               x: 1,
@@ -203,6 +262,7 @@ const ModelChart = ({
         margin: 32,
         symbolPadding: 8,
         itemMarginBottom: 8,
+        ...(condensed ? { enabled: false } : {}),
       },
       plotOptions: {
         series: {
@@ -229,8 +289,29 @@ const ModelChart = ({
     shelterInPlace,
     availableBeds,
     interventions,
+    condensed,
+    dateOverwhelmedIsPastHalfway,
   ]);
 
+  if (condensed) {
+    return (
+      <ChartContainer>
+        <Wrapper
+          interventions={interventions}
+          inShelterInPlace={
+            currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+          }
+        >
+          <Chart options={options} />
+          <CondensedLegend>
+            {[noAction, socialDistancing, shelterInPlace, availableBeds]
+              .filter(intervention => intervention.visible !== false)
+              .map(CondensedLegendItem)}
+          </CondensedLegend>
+        </Wrapper>
+      </ChartContainer>
+    );
+  }
   return (
     <ChartContainer>
       <Wrapper
@@ -284,5 +365,24 @@ const ModelChart = ({
     </ChartContainer>
   );
 };
+
+function CondensedLegend({ children }) {
+  return <CondensedLegendStyled>{children}</CondensedLegendStyled>;
+}
+
+function CondensedLegendItem({
+  name,
+  condensedLegend: { condensedName, bgColor, outline, darkLegendText },
+}) {
+  return (
+    <CondensedLegendItemStyled
+      bgColor={bgColor}
+      outline={outline}
+      darkLegendText={darkLegendText}
+    >
+      {condensedName || name}
+    </CondensedLegendItemStyled>
+  );
+}
 
 export default ModelChart;

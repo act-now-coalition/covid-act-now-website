@@ -18,7 +18,6 @@ class Projections {
     this.baseline = null;
     this.distancing = null;
     this.distancingPoorEnforcement = null;
-    this.contain = null;
     this.currentInterventionModel = null;
 
     this.populateInterventions(props);
@@ -146,14 +145,6 @@ class Projections {
         intervention: INTERVENTIONS.SOCIAL_DISTANCING,
         durationDays: 90,
         r0: 1.7,
-      }),
-    };
-
-    this.contain = {
-      now: new Model(props[3], {
-        intervention: INTERVENTIONS.LOCKDOWN,
-        durationDays: 90,
-        r0: 0.3,
       }),
     };
   }

@@ -10,10 +10,10 @@ export const ShareSpacer = styled.div`
   }
 `;
 
-export const ShareContainer = styled.div`
+export const ShareContainer = styled.div<{ condensed?: boolean }>`
   background: ${palette.white};
   max-width: 640px;
-  margin: 3rem auto;
+  margin: ${props => (props.condensed ? 0 : '3rem auto')};
   border: 1px solid ${palette.divider};
   padding: 1.5rem;
   border-radius: 4px;
@@ -75,6 +75,7 @@ export const StyledShareButton = styled.div<{
   line-height: 2.5rem;
   text-transform: uppercase;
   user-select: none;
+  text-align: center;
 
   > button {
     width: 100%;

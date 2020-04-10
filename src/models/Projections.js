@@ -206,6 +206,15 @@ export class Projections {
 
   getChartHospitalsOverloadedText() {
     let text = '';
+    const isDateOverWhelmedBeforeToday =
+      this.worstCaseInterventionModel.dateOverwhelmed &&
+      moment(this.worstCaseInterventionModel.dateOverwhelmed).isBefore(
+        moment().startOf('day'),
+      );
+
+    if (isDateOverWhelmedBeforeToday) {
+      return text;
+    }
 
     switch (this.getInterventionColor()) {
       case COLOR_MAP.RED.BASE:
@@ -353,14 +362,6 @@ export class Projections {
         intervention: INTERVENTIONS.SOCIAL_DISTANCING,
         durationDays: 90,
         r0: 1.7,
-      }),
-    };
-
-    this.contain = {
-      now: new Model(props[3], {
-        intervention: INTERVENTIONS.LOCKDOWN,
-        durationDays: 90,
-        r0: 0.3,
       }),
     };
   }

@@ -2,18 +2,23 @@ import _ from 'lodash';
 import React, { useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { STATES, STATE_TO_INTERVENTION } from 'enums';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Drawer from '@material-ui/core/Drawer';
+
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020';
 import '../../App.css'; /* optional for styling like the :hover pseudo-class */
 import StateHeader from '../../components/StateHeader/StateHeader';
-// import Tabs from '@material-ui/core/Tabs';
-// import Tab from '@material-ui/core/Tab';
+import ShareModelBlock from '../../components/ShareBlock/ShareModelBlock';
 
 import { useModelDatas, useStateSummaryData } from 'utils/model';
+import { useEmbed } from 'utils/hooks';
 
 import {
   EmbedContainer,
   EmbedGlobalStyle,
   EmbedHeaderContainer,
+  EmbedContentContainer,
 } from './Embed.style';
 
 import ProjectionsTab from './ProjectionsTab';
@@ -23,13 +28,14 @@ import EmbedFooter from './EmbedFooter';
 export default function Embed() {
   const { id: _location, countyId, countyFipsId } = useParams();
 
-  const [tabState /*, setTabState */] = useState(0);
-  // const [shareDrawerOpen, setShareDrawerOpen] = useState(false);
-  // const handleTabChange = (_event, newTabValue) => setTabState(newTabValue);
+  const [tabState, setTabState] = useState(0);
+  const [shareDrawerOpen, setShareDrawerOpen] = useState(false);
+  const handleTabChange = (_event, newTabValue) => setTabState(newTabValue);
 
   const [selectedCounty, setSelectedCounty] = useState(null);
   const [location, setLocation] = useState(null);
   const [missingCounty, setMissingCounty] = useState(false);
+  const { iFrameCodeSnippet } = useEmbed();
   useMemo(() => {
     let state = null,
       county = null;
@@ -109,32 +115,45 @@ export default function Embed() {
           intervention={intervention}
           interventions={interventions}
         />
-        {/* Remove this break once tabs are back */}
-        <br />
-        {/* <Tabs value={tabState} variant="fullWidth" onChange={handleTabChange}>
+        <Tabs value={tabState} variant="fullWidth" onChange={handleTabChange}>
+          <Tab label="Data" />
           <Tab label="Projections" />
-          <Tab label="Charts" />
-        </Tabs> */}
+        </Tabs>
       </EmbedHeaderContainer>
-      {tabState === 0 ? (
-        <ProjectionsTab
-          cases={cases}
-          deaths={deaths}
-          intervention={intervention}
-          totalPopulation={totalPopulation}
-          deathsPercentage={deathsPercentage}
-          populationPercentage={populationPercentage}
-        />
-      ) : (
-        <ChartsTab
-          state={STATES[location]}
-          county={null}
-          interventions={interventions}
-          currentIntervention={intervention}
-        />
-      )}
-      <EmbedFooter />
+      <EmbedContentContainer>
+        {tabState === 0 ? (
+          <ProjectionsTab
+            cases={cases}
+            deaths={deaths}
+            intervention={intervention}
+            totalPopulation={totalPopulation}
+            deathsPercentage={deathsPercentage}
+            populationPercentage={populationPercentage}
+          />
+        ) : (
+          <ChartsTab
+            state={STATES[location]}
+            county={null}
+            interventions={interventions}
+            currentIntervention={intervention}
+          />
+        )}
+      </EmbedContentContainer>
+      <EmbedFooter onShare={() => setShareDrawerOpen(true)} />
+
       <EmbedGlobalStyle />
+      <Drawer
+        anchor="bottom"
+        open={shareDrawerOpen}
+        onClose={() => setShareDrawerOpen(false)}
+      >
+        <ShareModelBlock
+          condensed
+          location={location}
+          county={selectedCounty}
+          embedSnippet={iFrameCodeSnippet}
+        />
+      </Drawer>
     </EmbedContainer>
   );
 }
