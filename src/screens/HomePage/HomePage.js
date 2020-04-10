@@ -6,6 +6,7 @@ import Map from 'components/Map/Map';
 import Endorsements from 'screens/Endorsements/Endorsements';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import ShareBlock from 'components/ShareBlock/ShareBlock';
+import OverloadedHospitals from 'components/OverloadedHospitals/OverloadedHospitals';
 
 import { Wrapper, Content, MapTitle, MapTitleDivider } from './HomePage.style';
 
@@ -30,6 +31,7 @@ export default function HomePage() {
               <p>Select your state below to see detailed projections</p>
             </MapTitle>
             <Map />
+            <OverloadedHospitals />
             <div
               style={{
                 padding: '1.5rem',
