@@ -21,6 +21,7 @@ import {
   TwitterShareButton,
   TwitterIcon,
 } from 'react-share';
+import ArrowBack from '@material-ui/icons/ArrowBack';
 import { STATES } from 'enums';
 import US_STATE_DATASET from '../MapSelectors/datasets/us_states_dataset_01_02_2020';
 
@@ -131,6 +132,7 @@ const _AppBar = () => {
     <StyledAppBar position="sticky">
       <Wrapper>
         <Left onClick={goTo('/')}>
+          {match ? <ArrowBack /> : ''}
           <Logo />
         </Left>
         <StyledDesktopMenu value={false}>
