@@ -41,7 +41,7 @@ export const Quote = styled.div`
     top: -8px;
     &:after {
       content: '|';
-      color: #07d180;
+      color: #00d07d;
     }
     @media (min-width: 600px) {
       width: 48px;
