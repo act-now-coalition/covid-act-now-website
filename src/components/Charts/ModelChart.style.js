@@ -140,7 +140,11 @@ export const Wrapper = styled.div`
     stroke: ${props => props.interventions.getThresholdInterventionLevel()};
   }
   .${snakeCase(INTERVENTIONS.SOCIAL_DISTANCING)} {
-    stroke: ${props => props.interventions.getThresholdInterventionLevel()};
+    stroke: ${props =>
+      props.interventions.getThresholdInterventionLevel() ===
+      COLOR_MAP.GREEN.BASE
+        ? COLOR_MAP.GREEN.DARK
+        : props.interventions.getThresholdInterventionLevel()};
   }
   .${snakeCase(INTERVENTIONS.SHELTER_IN_PLACE)} {
     stroke: ${props => props.interventions.getThresholdInterventionLevel()};
@@ -192,7 +196,10 @@ export const Wrapper = styled.div`
 
     &.custom-plot-label-${snakeCase(INTERVENTIONS.SOCIAL_DISTANCING)} {
       background: ${props =>
-        props.interventions.getThresholdInterventionLevel()};
+        props.interventions.getThresholdInterventionLevel() ===
+        COLOR_MAP.GREEN.BASE
+          ? COLOR_MAP.GREEN.DARK
+          : props.interventions.getThresholdInterventionLevel()};
     }
 
     &.custom-plot-label-${snakeCase(
