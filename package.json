@@ -55,6 +55,8 @@
     "cy.run": "cypress run",
     "lint": "eslint --ext .js,.ts,tsx src",
     "lint-fix": "eslint --ext .js,.ts,tsx --fix src",
+    "tsc": "tsc",
+    "tsc-watch": "tsc --watch",
     "prettier": "prettier --check '**/*.{css,scss,js,tsx}'",
     "prettier-fix": "prettier --write '**/*.{css,scss,js,tsx}'"
   },
