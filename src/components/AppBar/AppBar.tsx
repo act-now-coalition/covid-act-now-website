@@ -23,9 +23,13 @@ import {
 } from 'react-share';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import { STATES } from 'enums';
+<<<<<<< HEAD:src/components/AppBar/AppBar.tsx
 import { Location } from 'history';
 import US_STATE_DATASET from '../MapSelectors/datasets/us_states_dataset_01_02_2020';
 import { Location } from 'history';
+=======
+import US_STATE_DATASET from '../MapSelectors/datasets/us_states_dataset_01_02_2020';
+>>>>>>> develop:src/components/AppBar/AppBar.js
 
 const Panels = ['/', '/faq', '/endorsements', '/contact', '/blog'];
 
