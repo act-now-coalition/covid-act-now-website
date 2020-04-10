@@ -18,7 +18,6 @@ class Projections {
     this.baseline = null;
     this.distancing = null;
     this.distancingPoorEnforcement = null;
-    this.contain = null;
     this.currentInterventionModel = null;
 
     this.populateInterventions(props);
@@ -60,18 +59,18 @@ class Projections {
       interventionModelMap[this.stateIntervention];
   }
 
-  getInterventionColor() {
+  getThresholdInterventionLevel() {
     switch (this.stateIntervention) {
       case INTERVENTIONS.LIMITED_ACTION:
-        return this.getInterventionColorForLimitedAction();
+        return this.getThresholdInterventionLevelForLimitedAction();
       case INTERVENTIONS.SOCIAL_DISTANCING:
-        return this.getInterventionColorForSocialDistancing();
+        return this.getThresholdInterventionLevelForSocialDistancing();
       case INTERVENTIONS.SHELTER_IN_PLACE:
-        return this.getInterventionColorForStayAtHome();
+        return this.getThresholdInterventionLevelForStayAtHome();
     }
   }
 
-  getInterventionColorForStayAtHome() {
+  getThresholdInterventionLevelForStayAtHome() {
     let color = COLOR_MAP.GREEN.BASE;
 
     if (this.isSocialDistancingOverwhelmedDateWithinThresholdWeeks()) {
@@ -85,7 +84,7 @@ class Projections {
     return color;
   }
 
-  getInterventionColorForSocialDistancing() {
+  getThresholdInterventionLevelForSocialDistancing() {
     let color = COLOR_MAP.GREEN.BASE;
 
     if (this.isSocialDistancingOverwhelmedDateWithinThresholdWeeks()) {
@@ -99,7 +98,7 @@ class Projections {
     return color;
   }
 
-  getInterventionColorForLimitedAction() {
+  getThresholdInterventionLevelForLimitedAction() {
     return COLOR_MAP.RED.BASE;
   }
 
@@ -146,14 +145,6 @@ class Projections {
         intervention: INTERVENTIONS.SOCIAL_DISTANCING,
         durationDays: 90,
         r0: 1.7,
-      }),
-    };
-
-    this.contain = {
-      now: new Model(props[3], {
-        intervention: INTERVENTIONS.LOCKDOWN,
-        durationDays: 90,
-        r0: 0.3,
       }),
     };
   }

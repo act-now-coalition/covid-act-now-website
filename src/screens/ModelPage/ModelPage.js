@@ -240,7 +240,7 @@ function ModelPage() {
               <CountyMap
                 fill={
                   interventions
-                    ? interventions.getInterventionColor()
+                    ? interventions.getThresholdInterventionLevel()
                     : '#e3e3e3'
                 }
                 stateSummary={modelDatasMap.summary}

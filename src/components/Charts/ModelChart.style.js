@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { INTERVENTIONS, COLORS } from 'enums';
 import { snakeCase } from 'lodash';
 import { colors } from '@material-ui/core';
+import { COLOR_MAP } from '../../enums/interventions';
 
 export const ChartContainer = styled.section`
   width: 100%;
@@ -136,19 +137,27 @@ export const Wrapper = styled.div`
     stroke-width: 3px;
   }
   .${snakeCase(INTERVENTIONS.LIMITED_ACTION)} {
-    stroke: ${props => props.interventions.getInterventionColor()};
+    stroke: ${props => props.interventions.getThresholdInterventionLevel()};
   }
   .${snakeCase(INTERVENTIONS.SOCIAL_DISTANCING)} {
-    stroke: ${props => props.interventions.getInterventionColor()};
+    stroke: ${props =>
+      props.interventions.getThresholdInterventionLevel() ===
+      COLOR_MAP.GREEN.BASE
+        ? COLOR_MAP.GREEN.DARK
+        : props.interventions.getThresholdInterventionLevel()};
   }
   .${snakeCase(INTERVENTIONS.SHELTER_IN_PLACE)} {
-    stroke: ${props => props.interventions.getInterventionColor()};
+    stroke: ${props => props.interventions.getThresholdInterventionLevel()};
   }
   .${snakeCase(INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE)} {
-    stroke: ${props => props.interventions.getInterventionColor()};
+    stroke: ${props =>
+      props.interventions.getThresholdInterventionLevel() ===
+      COLOR_MAP.GREEN.BASE
+        ? COLOR_MAP.GREEN.DARK
+        : props.interventions.getThresholdInterventionLevel()};
   }
   .${snakeCase(INTERVENTIONS.LOCKDOWN)} {
-    stroke: ${props => props.interventions.getInterventionColor()};
+    stroke: ${props => props.interventions.getThresholdInterventionLevel()};
   }
 
   .today {
@@ -181,25 +190,36 @@ export const Wrapper = styled.div`
     }
 
     &.custom-plot-label-${snakeCase(INTERVENTIONS.LIMITED_ACTION)} {
-      background: ${props => props.interventions.getInterventionColor()};
+      background: ${props =>
+        props.interventions.getThresholdInterventionLevel()};
     }
 
     &.custom-plot-label-${snakeCase(INTERVENTIONS.SOCIAL_DISTANCING)} {
-      background: ${props => props.interventions.getInterventionColor()};
+      background: ${props =>
+        props.interventions.getThresholdInterventionLevel() ===
+        COLOR_MAP.GREEN.BASE
+          ? COLOR_MAP.GREEN.DARK
+          : props.interventions.getThresholdInterventionLevel()};
     }
 
     &.custom-plot-label-${snakeCase(
         INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE,
       )} {
-      background: ${props => props.interventions.getInterventionColor()};
+      background: ${props =>
+        props.interventions.getThresholdInterventionLevel() ===
+        COLOR_MAP.GREEN.BASE
+          ? COLOR_MAP.GREEN.DARK
+          : props.interventions.getThresholdInterventionLevel()};
     }
 
     &.custom-plot-label-${snakeCase(INTERVENTIONS.SHELTER_IN_PLACE)} {
-      background: ${props => props.interventions.getInterventionColor()};
+      background: ${props =>
+        props.interventions.getThresholdInterventionLevel()};
     }
 
     &.custom-plot-label-${snakeCase(INTERVENTIONS.LOCKDOWN)} {
-      background: ${props => props.interventions.getInterventionColor()};
+      background: ${props =>
+        props.interventions.getThresholdInterventionLevel()};
     }
   }
 `;

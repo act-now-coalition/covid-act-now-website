@@ -200,7 +200,7 @@ const ModelChart = ({
                   dateOverwhelmedIsPastHalfway
                     ? ' custom-plot-label-reverse'
                     : ''
-                }">Hospitals Overloaded<br /><span>${interventions.getChartHospitalsOverloadedText()}</span></div>`;
+                }">Hospital Overload<br /><span>${interventions.getChartHospitalsOverloadedText()}</span></div>`;
               },
               align: dateOverwhelmedIsPastHalfway ? 'right' : 'left',
               rotation: 0,
@@ -323,7 +323,7 @@ const ModelChart = ({
         <Chart options={options} />
         {countyName ? (
           <Disclaimer
-            style={{ border: '2px solid #07d180', background: 'white' }}
+            style={{ border: '2px solid #00d07d', background: 'white' }}
           >
             <DisclaimerContent>
               <b>County data is currently in beta.</b> See something wrong?{' '}

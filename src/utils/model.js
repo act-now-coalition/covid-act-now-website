@@ -2,6 +2,9 @@ import Promise from 'bluebird';
 import { useState, useEffect } from 'react';
 import { Projections } from './../models';
 import { STATES } from 'enums';
+import DataUrlJson from 'assets/data/data_url';
+
+const DATA_URL = DataUrlJson.data_url.replace(/\/$/, '');
 
 async function fetchAll(urls) {
   try {
@@ -34,7 +37,6 @@ async function fetchAll(urls) {
 export const ModelIds = {
   baseline: 0,
   strictDistancingNow: 1,
-  containNow: 2,
   weakDistancingNow: 3,
 };
 
@@ -46,7 +48,7 @@ const initialData = {
 };
 
 async function fetchSummary(setModelDatas, location) {
-  const summaryUrl = `/data/county_summaries/${location.toUpperCase()}.summary.json`;
+  const summaryUrl = `${DATA_URL}/county_summaries/${location.toUpperCase()}.summary.json`;
 
   try {
     const summary = await fetchAll([summaryUrl]);
@@ -59,23 +61,18 @@ async function fetchSummary(setModelDatas, location) {
   } catch (err) {}
 }
 
-async function fetchData(location, county = null, dataUrl = null) {
-  dataUrl = dataUrl || '/data/';
-  if (dataUrl[dataUrl.length - 1] !== '/') {
-    dataUrl += '/';
-  }
-
+async function fetchData(location, county = null, dataUrl = DATA_URL) {
+  dataUrl = dataUrl || DATA_URL;
   let modelDataForKey = null;
   let urls = [
     ModelIds.baseline,
     ModelIds.strictDistancingNow,
     ModelIds.weakDistancingNow,
-    ModelIds.containNow,
   ].map(i => {
     let fipsCode =
       county && county.full_fips_code ? county.full_fips_code : null;
-    const stateUrl = `${dataUrl}${location}.${i}.json`;
-    const countyUrl = `${dataUrl}county/${location.toUpperCase()}.${fipsCode}.${i}.json`;
+    const stateUrl = `${dataUrl}/${location}.${i}.json`;
+    const countyUrl = `${dataUrl}/county/${location.toUpperCase()}.${fipsCode}.${i}.json`;
     return county ? countyUrl : stateUrl;
   });
 
@@ -147,7 +144,7 @@ export function useStateSummaryData(state) {
   const [summaryData, setSummaryData] = useState(null);
   useEffect(() => {
     if (state) {
-      fetch(`/data/case_summary/${state}.summary.json`)
+      fetch(`${DATA_URL}/case_summary/${state}.summary.json`)
         .then(data => data.json())
         .then(setSummaryData)
         .catch(err => {
