@@ -1,10 +1,10 @@
-const path             = require('path');
-const tar              = require('tar');
-const fs               = require('fs-extra');
-const Promise          = require('bluebird');
-const Pageres          = require('pageres');
-const moment           = require('moment');
-const { chunk }        = require('lodash');
+const path = require('path');
+const tar = require('tar');
+const fs = require('fs-extra');
+const Promise = require('bluebird');
+const Pageres = require('pageres');
+const moment = require('moment');
+const { chunk } = require('lodash');
 const SCREENSHOT_ENUMS = require('./enums');
 
 (async () => {
@@ -16,11 +16,7 @@ const SCREENSHOT_ENUMS = require('./enums');
 
   const now = moment();
 
-  const outputFolder = path.join(
-    __dirname,
-    'output',
-    'screenshots',
-  );
+  const outputFolder = path.join(__dirname, 'output', 'screenshots');
 
   await fs.ensureDir(outputFolder);
   await fs.emptyDir(outputFolder);
@@ -57,12 +53,14 @@ const SCREENSHOT_ENUMS = require('./enums');
   await tar.c(
     {
       gzip: true,
-      file: path.resolve(`${__dirname}/output/archives/page_screenshots_${moment().format('YYYY-MM-DD-HH_mm')}.tgz`),
+      file: path.resolve(
+        `${__dirname}/output/archives/page_screenshots_${moment().format(
+          'YYYY-MM-DD-HH_mm',
+        )}.tgz`,
+      ),
       cwd: path.resolve(`${__dirname}/output`),
     },
-    [
-      'screenshots',
-    ]
+    ['screenshots'],
   );
 
   await fs.emptyDir(outputFolder);

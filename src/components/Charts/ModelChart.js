@@ -323,7 +323,7 @@ const ModelChart = ({
         <Chart options={options} />
         {countyName ? (
           <Disclaimer
-            style={{ border: '2px solid #07d180', background: 'white' }}
+            style={{ border: '2px solid #00d07d', background: 'white' }}
           >
             <DisclaimerContent>
               <b>County data is currently in beta.</b> See something wrong?{' '}
@@ -346,7 +346,7 @@ const ModelChart = ({
               placement="bottom"
             >
               <span>
-                <strong>Last updated April 6th</strong>.{' '}
+                <strong>Last updated {new Date().toLocaleDateString()}</strong>.{' '}
               </span>
             </LightTooltip>
             This model updates every 24 hours and is intended to help make fast

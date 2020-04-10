@@ -5,6 +5,6 @@ describe('Main App Should be Visible', () => {
   });
 
   it(`Can See Map`, () => {
-    cy.get('.us-state-map').should('be.visible');
+    cy.get('.Map').should('be.visible');
   });
 });
