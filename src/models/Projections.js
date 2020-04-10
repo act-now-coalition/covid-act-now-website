@@ -221,10 +221,10 @@ export class Projections {
 
     switch (thresholdInterventionLevel) {
       case COLOR_MAP.RED.BASE:
-        text = 'in less than four weeks';
+        text = 'in 4 weeks or less';
         break;
       case COLOR_MAP.ORANGE.BASE:
-        text = 'in 4-8 weeks';
+        text = 'in 4 to 8 weeks';
         break;
       case COLOR_MAP.GREEN.BASE:
         text = this.distancingPoorEnforcement.now.dateOverwhelmed
@@ -234,7 +234,11 @@ export class Projections {
       default:
     }
 
-    let appendedPolicy = ' (lax)';
+    const appendedPolicy =
+      this.stateIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+        ? `<br/> with ${this.stateIntervention} (lax)`
+        : `<br/> with ${this.stateIntervention}`;
+
     if (!isEmpty(text)) {
       text += appendedPolicy;
     }
