@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import _ from 'lodash';
-import { useHistory, useLocation, matchPath } from 'react-router-dom';
+import { useHistory, useLocation, match, matchPath } from 'react-router-dom';
 import Logo from 'assets/images/logo';
 import { useEmbed } from 'utils/hooks';
 import MobileMenu from './MobileMenu';
@@ -24,7 +24,7 @@ import {
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import { STATES } from 'enums';
 import { Location } from 'history';
-import US_STATE_DATASET from '../MapSelectors/datasets/us_states_dataset_01_02_2020';
+import US_STATE_DATASET from '../MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 
 const Panels = ['/', '/faq', '/endorsements', '/contact', '/blog'];
 
@@ -33,12 +33,14 @@ function getPanelIdxFromLocation(location: Location<any>) {
   return idx === -1 ? false : idx;
 }
 
-function locationNameFromMatch(match) {
+function locationNameFromMatch(
+  match: match<{ id: keyof typeof STATES; county?: string }> | null,
+) {
   if (!match || !match.params) {
     return '';
   }
 
-  const stateId = match.params.id.toUpperCase();
+  const stateId = match.params.id.toUpperCase() as keyof typeof STATES;
   const state = STATES[stateId];
   const countyId = match.params.county;
   if (!countyId) {
@@ -46,6 +48,7 @@ function locationNameFromMatch(match) {
   }
 
   const county = _.find(
+    // @ts-ignore TODO(aj): Fix this when features/typescript3 merges
     US_STATE_DATASET.state_county_map_dataset[stateId].county_dataset,
     ['county_url_name', countyId],
   ).county;
@@ -72,23 +75,21 @@ const _AppBar = () => {
   // Don't show in iFrame
   if (isEmbed) return null;
 
-  let match = matchPath<{ id: keyof typeof STATES }>(locationPath.pathname, {
-    path: ['/us/:id', '/us/:id/county/:county'],
-    exact: true,
-    strict: false,
-  });
-
-  const matchFromLegacyPath = matchPath<{ id: keyof typeof STATES }>(
+  let match = matchPath<{ id: keyof typeof STATES; county?: string }>(
     locationPath.pathname,
     {
-      path: '/states/:id',
+      path: ['/us/:id', '/us/:id/county/:county'],
       exact: true,
       strict: false,
     },
   );
 
   if (!match) {
-    match = matchFromLegacyPath;
+    match = matchPath<{ id: keyof typeof STATES }>(locationPath.pathname, {
+      path: '/states/:id',
+      exact: true,
+      strict: false,
+    });
   }
   const locationName = locationNameFromMatch(match);
   const goTo = (route: string) => (e: React.MouseEvent) => {
