@@ -200,7 +200,7 @@ const ModelChart = ({
                   dateOverwhelmedIsPastHalfway
                     ? ' custom-plot-label-reverse'
                     : ''
-                }">Hospitals May Become Overloaded<br /><span>${interventions.getChartHospitalsOverloadedText()}</span></div>`;
+                }">Hospital Overload<br /><span>${interventions.getChartHospitalsOverloadedText()}</span></div>`;
               },
               align: dateOverwhelmedIsPastHalfway ? 'right' : 'left',
               rotation: 0,
