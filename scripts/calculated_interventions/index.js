@@ -44,7 +44,7 @@ async function getStateAndCountyDataFiles(stateCode) {
           );
           const countyProjections = new Projections(countyData, stateCode);
 
-          countyFipsData[fipsCode] = countyProjections.getInterventionColor();
+          countyFipsData[fipsCode] = countyProjections.getThresholdInterventionLevel();
         } catch (err) {
           console.error(`Failed to get data for ${stateCode}.${fipsCode}`, err);
         }
@@ -53,7 +53,7 @@ async function getStateAndCountyDataFiles(stateCode) {
 
     return {
       stateProjections,
-      stateInterventionColor: stateProjections.getInterventionColor(),
+      stateInterventionColor: stateProjections.getThresholdInterventionLevel(),
       countyFipsData,
     };
   } catch (err) {

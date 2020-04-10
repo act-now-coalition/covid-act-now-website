@@ -17,7 +17,7 @@ const StateHeader = ({ interventions }) => {
 
   const buildInterventionTitle = () => {
     return (
-      <HeaderHighlight color={interventions.getInterventionColor()}>
+      <HeaderHighlight color={interventions.getThresholdInterventionLevel()}>
         {interventions.getInterventionTitle()}
       </HeaderHighlight>
     );
@@ -34,7 +34,7 @@ const StateHeader = ({ interventions }) => {
           <StateCircleSvg
             actionBackgroundFill={COLORS.LIGHTGRAY}
             state={interventions.stateCode}
-            fillColor={interventions.getInterventionColor()}
+            fillColor={interventions.getThresholdInterventionLevel()}
             hasAction={true}
           />
         </StyledStateImageWrapper>
