@@ -92,7 +92,7 @@ const CallToAction = ({ interventions, currentIntervention }) => {
   }
 
   const interventionIcon = (
-    <InterventionIcon color={interventions.getInterventionColor()} />
+    <InterventionIcon color={interventions.getThresholdInterventionLevel()} />
   );
 
   return (
