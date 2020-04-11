@@ -55,7 +55,12 @@ const ShareBlock = ({
     id: keyof typeof STATES;
     county?: string;
   }>(locationPath.pathname, {
-    path: ['/us/:id', '/us/:id/county/:county'],
+    path: [
+      '/us/:id',
+      '/us/:id/county/:county',
+      '/embed/us/:id',
+      '/embed/us/:id/county/:county',
+    ],
     exact: true,
     strict: false,
   });
