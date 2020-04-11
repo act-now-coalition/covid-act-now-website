@@ -138,6 +138,7 @@ function ModelPage() {
                   countyName={countyName}
                   interventions={interventions}
                   currentIntervention={intervention}
+                  showDisclaimer={true}
                   dateOverwhelmed={interventions.baseline.dateOverwhelmed}
                 />
                 <Content>
