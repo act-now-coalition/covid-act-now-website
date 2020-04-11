@@ -97,6 +97,15 @@ const FAQ = ({ children }: { children: React.ReactNode }) => {
             validated and endorsed
           </a>{' '}
           by a number of experts in epidemiology, public health, and medicine.
+          We publish our COVID Modeling Values{' '}
+          <a
+            href="https://blog.covidactnow.org/covid-modeling-values/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            here
+          </a>
+          .
         </Typography>
 
         <Typography variant="h5" component="h5">
