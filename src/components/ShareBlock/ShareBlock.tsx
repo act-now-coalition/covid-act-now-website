@@ -1,4 +1,5 @@
 import React from 'react';
+import { matchPath, useLocation } from 'react-router-dom';
 import {
   FacebookShareButton,
   TwitterShareButton,
@@ -15,6 +16,7 @@ import {
   StyledShareButton,
   ShareTypeDivider,
 } from './ShareBlock.style';
+import { STATES } from 'enums';
 
 const ShareBlock = ({
   condensed,
@@ -35,6 +37,8 @@ const ShareBlock = ({
   newsletterInstruction?: string;
   onClickEmbed?: any;
 }) => {
+  const locationPath = useLocation();
+
   const url = shareURL || 'https://covidactnow.org/';
   const quote =
     shareQuote ||
@@ -46,6 +50,15 @@ const ShareBlock = ({
       event_label: target,
     });
   };
+
+  const isMatchingProjectionsRoute = matchPath<{
+    id: keyof typeof STATES;
+    county?: string;
+  }>(locationPath.pathname, {
+    path: ['/us/:id', '/us/:id/county/:county'],
+    exact: true,
+    strict: false,
+  });
 
   return (
     <ShareContainer condensed={condensed}>
@@ -92,14 +105,16 @@ const ShareBlock = ({
             <LinkedinIcon size={40} round={false} bgStyle={{ fill: 'auto' }} />
           </LinkedinShareButton>
         </StyledShareButton>
-        <StyledShareButton
-          disableElevation
-          variant="contained"
-          color="#616161"
-          onClick={onClickEmbed}
-        >
-          Embed
-        </StyledShareButton>
+        {isMatchingProjectionsRoute && (
+          <StyledShareButton
+            disableElevation
+            variant="contained"
+            color="#616161"
+            onClick={onClickEmbed}
+          >
+            Embed
+          </StyledShareButton>
+        )}
       </ShareButtonContainer>
 
       <ShareTypeDivider />
