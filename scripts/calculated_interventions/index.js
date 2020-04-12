@@ -14,7 +14,7 @@ async function getStateAndCountyDataFiles(stateCode) {
     `${stateCode}.0.json`,
     `${stateCode}.1.json`,
     `${stateCode}.3.json`,
-    `${stateCode}.2.json`,
+    // `${stateCode}.2.json`,
   ];
 
   const summaryFile = `county_summaries/${stateCode}.summary.json`;
@@ -35,7 +35,7 @@ async function getStateAndCountyDataFiles(stateCode) {
           `county/${stateCode}.${fipsCode}.0.json`,
           `county/${stateCode}.${fipsCode}.1.json`,
           `county/${stateCode}.${fipsCode}.3.json`,
-          `county/${stateCode}.${fipsCode}.2.json`,
+          // `county/${stateCode}.${fipsCode}.2.json`,
         ];
 
         try {
