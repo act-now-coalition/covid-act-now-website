@@ -38,6 +38,7 @@ const ModelChart = ({
   countyName,
   interventions,
   currentIntervention,
+  showDisclaimer,
 }) => {
   const interventionToModel = {
     [INTERVENTIONS.LIMITED_ACTION]: interventions.baseline,
@@ -339,28 +340,33 @@ const ModelChart = ({
         ) : (
           <Typography></Typography>
         )}
-        <Disclaimer>
-          <DisclaimerContent>
-            <LightTooltip
-              title="Currently we aggregate data over 4 day intervals to smooth out inconsistencies in the source data. We’re working on improving this now."
-              placement="bottom"
-            >
-              <span>
-                <strong>Last updated April 6th</strong>.{' '}
-              </span>
-            </LightTooltip>
-            This model updates every 24 hours and is intended to help make fast
-            decisions, not predict the future.{' '}
-            <a
-              href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn more about our model and its limitations
-            </a>
-            .
-          </DisclaimerContent>
-        </Disclaimer>
+        {showDisclaimer && (
+          <Disclaimer>
+            <DisclaimerContent>
+              <LightTooltip
+                title="Currently we aggregate data over 4 day intervals to smooth out inconsistencies in the source data. We’re working on improving this now."
+                placement="bottom"
+              >
+                <span>
+                  <strong>
+                    Last updated {new Date().toLocaleDateString()}
+                  </strong>
+                  .{' '}
+                </span>
+              </LightTooltip>
+              This model updates every 24 hours and is intended to help make
+              fast decisions, not predict the future.{' '}
+              <a
+                href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Learn more about our model and its limitations
+              </a>
+              .
+            </DisclaimerContent>
+          </Disclaimer>
+        )}
       </Wrapper>
     </ChartContainer>
   );

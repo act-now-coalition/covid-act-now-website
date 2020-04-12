@@ -36,12 +36,10 @@ import {
 } from './ModelPage.style';
 import { STATES, STATE_TO_INTERVENTION, INTERVENTIONS } from 'enums';
 import { useModelDatas } from 'utils/model';
-import { useEmbed } from 'utils/hooks';
 
 function ModelPage() {
   const { id: location, countyId } = useParams();
   const _location = location.toUpperCase();
-  const { iFrameCodeSnippet } = useEmbed();
 
   const [mapOption, setMapOption] = useState(
     _location === MAP_FILTERS.DC ? MAP_FILTERS.NATIONAL : MAP_FILTERS.STATE,
@@ -140,6 +138,7 @@ function ModelPage() {
                   countyName={countyName}
                   interventions={interventions}
                   currentIntervention={intervention}
+                  showDisclaimer={true}
                   dateOverwhelmed={interventions.baseline.dateOverwhelmed}
                 />
                 <Content>
@@ -196,7 +195,6 @@ function ModelPage() {
                   <ShareModelBlock
                     location={_location}
                     county={selectedCounty}
-                    embedSnippet={iFrameCodeSnippet}
                   />
                 </Content>
               </Panel>

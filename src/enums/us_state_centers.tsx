@@ -43,7 +43,7 @@ const centers: Record<StateOrTerritoryCode, StateCenter> = {
     StateCode: 'CA',
     Latitude: 37.1162,
     Longitude: -119.6816,
-    scale: 3000,
+    scale: 2500,
   },
   CO: {
     'Province/State': 'Colorado',
@@ -104,14 +104,13 @@ const centers: Record<StateOrTerritoryCode, StateCenter> = {
     StateCode: 'ID',
     Latitude: 44.2405,
     Longitude: -114.4788,
-    scale: 3000,
+    scale: 2000,
   },
   IL: {
     'Province/State': 'Illinois',
     StateCode: 'IL',
     Latitude: 40.3495,
     Longitude: -88.9861,
-    scale: 4500,
   },
   IN: {
     'Province/State': 'Indiana',
@@ -153,7 +152,6 @@ const centers: Record<StateOrTerritoryCode, StateCenter> = {
     StateCode: 'ME',
     Latitude: 44.6939,
     Longitude: -69.3819,
-    scale: 5000,
   },
   MD: {
     'Province/State': 'Maryland',
@@ -174,13 +172,13 @@ const centers: Record<StateOrTerritoryCode, StateCenter> = {
     StateCode: 'MI',
     Latitude: 44.7266,
     Longitude: -86.5361,
-    scale: 5000,
   },
   MN: {
     'Province/State': 'Minnesota',
     StateCode: 'MN',
     Latitude: 45.6945,
     Longitude: -93.9002,
+    scale: 3000,
   },
   MS: {
     'Province/State': 'Mississippi',
@@ -201,6 +199,7 @@ const centers: Record<StateOrTerritoryCode, StateCenter> = {
     StateCode: 'MT',
     Latitude: 46.9219,
     Longitude: -110.4544,
+    scale: 3000,
   },
   NE: {
     'Province/State': 'Nebraska',
@@ -245,14 +244,12 @@ const centers: Record<StateOrTerritoryCode, StateCenter> = {
     StateCode: 'NC',
     Latitude: 35.6301,
     Longitude: -79.8064,
-    scale: 6000,
   },
   ND: {
     'Province/State': 'North Dakota',
     StateCode: 'ND',
     Latitude: 47.5289,
     Longitude: -99.784,
-    scale: 5000,
   },
   OH: {
     'Province/State': 'Ohio',
@@ -266,7 +263,6 @@ const centers: Record<StateOrTerritoryCode, StateCenter> = {
     StateCode: 'OK',
     Latitude: 35.5653,
     Longitude: -97.9289,
-    scale: 5000,
   },
   OR: {
     'Province/State': 'Oregon',
@@ -333,6 +329,7 @@ const centers: Record<StateOrTerritoryCode, StateCenter> = {
     StateCode: 'VT',
     Latitude: 44.0459,
     Longitude: -72.7107,
+    scale: 8000,
   },
   VI: {
     'Province/State': 'Virgin Islands, U.S.',
@@ -352,7 +349,6 @@ const centers: Record<StateOrTerritoryCode, StateCenter> = {
     StateCode: 'WA',
     Latitude: 47.4009,
     Longitude: -120.4905,
-    scale: 8000,
   },
   WV: {
     'Province/State': 'West Virginia',
@@ -366,7 +362,6 @@ const centers: Record<StateOrTerritoryCode, StateCenter> = {
     StateCode: 'WI',
     Latitude: 44.2685,
     Longitude: -89.6165,
-    scale: 5000,
   },
   WY: {
     'Province/State': 'Wyoming',

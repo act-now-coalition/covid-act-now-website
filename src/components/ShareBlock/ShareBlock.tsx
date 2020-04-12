@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { matchPath, useLocation } from 'react-router-dom';
 import {
   FacebookShareButton,
   TwitterShareButton,
@@ -8,8 +9,6 @@ import {
   LinkedinIcon,
 } from 'react-share';
 import Newsletter from 'components/Newsletter/Newsletter';
-import Snackbar from '@material-ui/core/Snackbar';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 import {
   ShareButtonContainer,
   ShareContainer,
@@ -17,44 +16,61 @@ import {
   StyledShareButton,
   ShareTypeDivider,
 } from './ShareBlock.style';
+import { STATES } from 'enums';
 
 const ShareBlock = ({
   condensed,
   location,
   countyName,
-  embedSnippet,
   shareQuote,
   shareURL,
   shareInstruction,
   newsletterInstruction,
+  onClickEmbed,
 }: {
   condensed?: boolean;
   location?: string;
   countyName?: string;
-  embedSnippet?: string;
   shareQuote?: string;
   shareURL?: string;
   shareInstruction?: string;
   newsletterInstruction?: string;
+  onClickEmbed?: any;
 }) => {
+  const locationPath = useLocation();
+
   const url = shareURL || 'https://covidactnow.org/';
   const quote =
     shareQuote ||
     'See a projection for how long states and counties have until COVID overwhelms hospitals and how interventions flatten the curve and save lives: @COVIDActNow';
   const hashtag = 'COVIDActNow';
-  const [embedCopySuccess, setEmbedCopySuccess] = useState(false);
+
   const trackShare = (target: string) => {
     window.gtag('event', 'share', {
       event_label: target,
     });
   };
 
+  const isMatchingProjectionsRoute = matchPath<{
+    id: keyof typeof STATES;
+    county?: string;
+  }>(locationPath.pathname, {
+    path: [
+      '/us/:id',
+      '/us/:id/county/:county',
+      '/embed/us/:id',
+      '/embed/us/:id/county/:county',
+    ],
+    exact: true,
+    strict: false,
+  });
+
   return (
     <ShareContainer condensed={condensed}>
       <ShareInstruction>
         {shareInstruction || 'Share the Covid Act Now map'}
       </ShareInstruction>
-      <ShareButtonContainer reflow={!!embedSnippet}>
+      <ShareButtonContainer reflow>
         <StyledShareButton disableElevation variant="contained" color="#3b5998">
           <FacebookShareButton
             url={url}
@@ -67,7 +83,6 @@ const ShareBlock = ({
             <FacebookIcon size={40} round={false} bgStyle={{ fill: 'auto' }} />
           </FacebookShareButton>
         </StyledShareButton>
-
         <StyledShareButton disableElevation variant="contained" color="#00acee">
           <TwitterShareButton
             url={url}
@@ -81,7 +96,6 @@ const ShareBlock = ({
             <TwitterIcon size={40} round={false} bgStyle={{ fill: 'auto' }} />
           </TwitterShareButton>
         </StyledShareButton>
-
         <StyledShareButton disableElevation variant="contained" color="#007fb1">
           <LinkedinShareButton
             url={url}
@@ -96,20 +110,15 @@ const ShareBlock = ({
             <LinkedinIcon size={40} round={false} bgStyle={{ fill: 'auto' }} />
           </LinkedinShareButton>
         </StyledShareButton>
-
-        {embedSnippet && (
-          <CopyToClipboard
-            text={embedSnippet}
-            onCopy={() => setEmbedCopySuccess(true)}
+        {isMatchingProjectionsRoute && (
+          <StyledShareButton
+            disableElevation
+            variant="contained"
+            color="#616161"
+            onClick={onClickEmbed}
           >
-            <StyledShareButton
-              disableElevation
-              variant="contained"
-              color="#616161"
-            >
-              Embed
-            </StyledShareButton>
-          </CopyToClipboard>
+            Embed
+          </StyledShareButton>
         )}
       </ShareButtonContainer>
 
@@ -120,13 +129,6 @@ const ShareBlock = ({
           'Get the latest updates from the Covid Act Now team'}
       </ShareInstruction>
       <Newsletter county={countyName} location={location} />
-      <Snackbar
-        message="Embed code copied!"
-        open={embedCopySuccess}
-        autoHideDuration={3000}
-        onClose={() => setEmbedCopySuccess(false)}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-      />
     </ShareContainer>
   );
 };

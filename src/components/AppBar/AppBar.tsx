@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import _ from 'lodash';
-import { useHistory, useLocation, match, matchPath } from 'react-router-dom';
+import {
+  useHistory,
+  useLocation,
+  match as MatchType,
+  matchPath,
+} from 'react-router-dom';
 import Logo from 'assets/images/logo';
 import { useEmbed } from 'utils/hooks';
 import MobileMenu from './MobileMenu';
@@ -34,7 +39,7 @@ function getPanelIdxFromLocation(location: Location<any>) {
 }
 
 function locationNameFromMatch(
-  match: match<{ id: keyof typeof STATES; county?: string }> | null,
+  match: MatchType<{ id: keyof typeof STATES; county?: string }> | null,
 ) {
   if (!match || !match.params) {
     return '';

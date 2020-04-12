@@ -41,10 +41,10 @@ export function CompareModels({ match, location }) {
     get(
       params,
       'left',
-      'https://s3-us-west-1.amazonaws.com/covidactnow.org/data/',
+      'https://s3-us-west-1.amazonaws.com/covidactnow.org/data',
     ),
   );
-  const [rightUrl, setRightUrl] = useState(get(params, 'right', '/data/'));
+  const [rightUrl, setRightUrl] = useState(get(params, 'right', '/data'));
 
   // Load models for all states.
   const leftModelDatas = useAllStateModelDatas(leftUrl);

@@ -1,19 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ShareBlock from './ShareBlock';
 import { STATES } from 'enums';
 import { StateCode } from 'enums/us_states';
 import { County } from 'components/MapSelectors/MapTypes';
+import EmbedPreview from './EmbedPreview';
 
 const ShareModelBlock = ({
   condensed,
   location,
   county,
-  embedSnippet,
 }: {
   condensed: boolean;
   location: StateCode;
   county: County;
-  embedSnippet?: string;
 }) => {
   const locationName = STATES[location];
   const countyName = county && county.county;
@@ -26,18 +25,25 @@ const ShareModelBlock = ({
   const shareQuote = `This is the point of no return for intervention to prevent ${displayName}'s hospital system from being overloaded by Coronavirus: `;
   const shareInstruction = `Share ${displayName}'s COVID trends`;
   const newsletterInstruction = `Get the latest updates from the Covid Act Now team for ${displayName}`;
+  const [showEmbedPreviewModal, setShowEmbedPreviewModal] = useState(false);
 
   return (
-    <ShareBlock
-      condensed={condensed}
-      location={location}
-      shareURL={shareURL}
-      countyName={countyName}
-      embedSnippet={embedSnippet}
-      shareQuote={shareQuote}
-      shareInstruction={shareInstruction}
-      newsletterInstruction={newsletterInstruction}
-    />
+    <>
+      <ShareBlock
+        condensed={condensed}
+        location={location}
+        shareURL={shareURL}
+        countyName={countyName}
+        shareQuote={shareQuote}
+        shareInstruction={shareInstruction}
+        newsletterInstruction={newsletterInstruction}
+      />
+      <EmbedPreview
+        open={showEmbedPreviewModal}
+        county={county}
+        onClose={() => setShowEmbedPreviewModal(false)}
+      />
+    </>
   );
 };
 export default ShareModelBlock;
