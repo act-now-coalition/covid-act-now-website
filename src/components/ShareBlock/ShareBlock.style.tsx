@@ -13,12 +13,8 @@ export const ShareSpacer = styled.div`
 export const ShareContainer = styled.div<{ condensed?: boolean }>`
   background: ${palette.white};
   max-width: 640px;
-  margin: ${props => (props.condensed ? 0 : '3rem auto')};
-  border: 1px solid ${palette.divider};
-  padding: 1.5rem;
-  border-radius: 4px;
-  box-shadow: 0 0 0 1px rgba(63, 63, 68, 0.05),
-    0 1px 3px 0 rgba(63, 63, 68, 0.15);
+  margin: ${props => (props.condensed ? 0 : '1rem auto')};
+  padding: 0.5rem;
 `;
 
 export const ShareInstruction = styled(Typography)<{ component?: string }>`
@@ -34,7 +30,7 @@ export const ShareInstruction = styled(Typography)<{ component?: string }>`
 export const ShareButtonContainer = styled.div<{ reflow: boolean }>`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   margin: 0 -0.75rem;
 
   > div {
@@ -61,11 +57,14 @@ export const StyledShareButton = styled.div<{
   color: string;
   disableElevation?: boolean /* seems to do nothing? */;
   variant?: string;
+  border?: boolean;
+  padded?: boolean;
 }>`
   background-color: ${props => props.color};
   border-radius: 5px;
+  border: ${props => (props.border ? '1px solid #f2f2f2' : 'none')};
   cursor: pointer;
-  color: white;
+  color: #3bbce6;
   display: block;
   flex: 1;
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
@@ -73,10 +72,10 @@ export const StyledShareButton = styled.div<{
   font-weight: 700;
   height: 2.5rem;
   line-height: 2.5rem;
+  padding: ${props => (props.padded ? '0 1rem' : 0)};
   text-transform: uppercase;
   user-select: none;
   text-align: center;
-
   > button {
     width: 100%;
     height: 100%;

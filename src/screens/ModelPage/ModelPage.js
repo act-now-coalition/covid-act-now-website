@@ -7,10 +7,10 @@ import { MAP_FILTERS } from './Enums/MapFilterEnums';
 import Outcomes from './Outcomes/Outcomes';
 import CallToAction from './CallToAction/CallToAction';
 import Map from 'components/Map/Map';
-import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import SearchHeader from 'components/Header/SearchHeader';
 import StateHeader from 'components/StateHeader/StateHeader';
 import ModelChart from 'components/Charts/ModelChart';
+import PublicCallToAction from 'components/PublicCallToAction/PublicCallToAction';
 import {
   MapMenuMobileWrapper,
   MapMenuItem,
@@ -196,8 +196,8 @@ function ModelPage() {
                     </li>
                   </ul>
 
-                  <ShareModelBlock
-                    location={_location}
+                  <PublicCallToAction
+                    location={location}
                     county={selectedCounty}
                   />
                 </Content>

@@ -8,13 +8,10 @@ import {
   TwitterIcon,
   LinkedinIcon,
 } from 'react-share';
-import Newsletter from 'components/Newsletter/Newsletter';
 import {
   ShareButtonContainer,
   ShareContainer,
-  ShareInstruction,
   StyledShareButton,
-  ShareTypeDivider,
 } from './ShareBlock.style';
 import { STATES } from 'enums';
 
@@ -67,9 +64,9 @@ const ShareBlock = ({
 
   return (
     <ShareContainer condensed={condensed}>
-      <ShareInstruction>
+      {/* <ShareInstruction>
         {shareInstruction || 'Share the Covid Act Now map'}
-      </ShareInstruction>
+      </ShareInstruction> */}
       <ShareButtonContainer reflow>
         <StyledShareButton disableElevation variant="contained" color="#3b5998">
           <FacebookShareButton
@@ -112,23 +109,17 @@ const ShareBlock = ({
         </StyledShareButton>
         {isMatchingProjectionsRoute && (
           <StyledShareButton
+            border
+            padded
             disableElevation
             variant="contained"
-            color="#616161"
+            color="white"
             onClick={onClickEmbed}
           >
             Embed
           </StyledShareButton>
         )}
       </ShareButtonContainer>
-
-      <ShareTypeDivider />
-
-      <ShareInstruction color="inherit" component="p" variant="subtitle2">
-        {newsletterInstruction ||
-          'Get the latest updates from the Covid Act Now team'}
-      </ShareInstruction>
-      <Newsletter county={countyName} location={location} />
     </ShareContainer>
   );
 };

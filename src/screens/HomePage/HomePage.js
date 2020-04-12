@@ -5,7 +5,7 @@ import { COLORS } from 'enums';
 import Map from 'components/Map/Map';
 import Endorsements from 'screens/Endorsements/Endorsements';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
-import ShareBlock from 'components/ShareBlock/ShareBlock';
+import PublicCallToAction from 'components/PublicCallToAction/PublicCallToAction';
 
 import { Wrapper, Content, MapTitle, MapTitleDivider } from './HomePage.style';
 
@@ -35,7 +35,7 @@ export default function HomePage() {
                 padding: '1.5rem',
               }}
             >
-              <ShareBlock />
+              <PublicCallToAction />
             </div>
           </Content>
         </div>

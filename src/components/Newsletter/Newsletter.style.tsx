@@ -4,6 +4,7 @@ import palette from 'assets/theme/palette';
 export const StyledNewsletter = styled.div`
   form {
     display: flex;
+    margin-top: 1rem;
 
     input {
       flex: 3;
@@ -34,6 +35,7 @@ export const StyledNewsletter = styled.div`
       height: 2.5rem;
       flex-shrink: 0;
       flex: 1;
+      min-width: 95px;
       outline: 0;
       border: 0;
       border-top-right-radius: 4px;

@@ -73,7 +73,8 @@ function stateInterventions() {
 
   const interventions = {};
   for (const state in InterventionJSON) {
-    interventions[state] = INTERVENTION_JSON_MAPPING[InterventionJSON[state]];
+    interventions[state] =
+      INTERVENTION_JSON_MAPPING[InterventionJSON[state]['status']];
   }
   return interventions;
 }
