@@ -27,7 +27,7 @@ function dateIsPastHalfway(dateToCompare, dateArray, itemKey) {
 }
 
 const formatIntervention = (intervention, optCase) =>
-  `3 months of ${intervention}${optCase || ''}`;
+  `3 months of ${intervention.toLowerCase()}${optCase || ''}`;
 
 const condensedFormatIntervention = (intervention, optCase) =>
   `${intervention}${optCase || ''}`;
@@ -204,7 +204,7 @@ const ModelChart = ({
                   dateOverwhelmedIsPastHalfway
                     ? ' custom-plot-label-reverse'
                     : ''
-                }">Hospital Overload<br /><span>${interventions.getChartHospitalsOverloadedText()}</span></div>`;
+                }">Hospitals May Overload<br /><span>${interventions.getChartHospitalsOverloadedText()}</span></div>`;
               },
               align: dateOverwhelmedIsPastHalfway ? 'right' : 'left',
               rotation: 0,
