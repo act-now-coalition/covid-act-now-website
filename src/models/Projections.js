@@ -221,14 +221,14 @@ export class Projections {
 
     switch (thresholdInterventionLevel) {
       case COLOR_MAP.RED.BASE:
-        text = 'in 4 weeks or less';
+        text = 'in 3 weeks or less';
         break;
       case COLOR_MAP.ORANGE.BASE:
-        text = 'in 4 to 8 weeks';
+        text = 'in 3 to 6 weeks';
         break;
       case COLOR_MAP.GREEN.BASE:
         text = this.distancingPoorEnforcement.now.dateOverwhelmed
-          ? 'in 8 weeks or more'
+          ? 'in 6 weeks or more'
           : '';
         break;
       default:

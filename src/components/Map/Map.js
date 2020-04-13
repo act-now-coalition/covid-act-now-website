@@ -41,26 +41,26 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
         <Legend>
           <LegendItem
             key={'legend-3'}
-            title={'Hospital overload in 0-4 weeks'}
+            title={'Elevated risk of hospital overload'}
             color={COLOR_MAP.RED.BASE}
             description={
-              'Hospitals could be overloaded in immediate future. Take drastic measures.'
+              'Hospitals at elevated risk to be overloaded in the next 3 weeks. Act now to flatten the curve.'
             }
           />
           <LegendItem
             key={'legend-2'}
-            title={'Hospital overload in 4-8 weeks'}
+            title={'Moderate risk of hospital overload'}
             color={COLOR_MAP.ORANGE.BASE}
             description={
-              'Hospitals could be overloaded in the next 4-8 weeks. Act now to flatten the curve.'
+              'Hospitals at moderate risk to be overloaded in the next 3-6 weeks.'
             }
           />
           <LegendItem
             key={'legend-1'}
-            title={'Hospital overload not likely'}
+            title={'Low risk of hospital overload'}
             color={COLOR_MAP.GREEN.BASE}
             description={
-              'Hospitals unlikely to be overloaded in the next 8 weeks assuming anti-COVID interventions are continued.'
+              'Hospitals not projected to overload assuming anti-COVID interventions remain in place.'
             }
           />
         </Legend>
