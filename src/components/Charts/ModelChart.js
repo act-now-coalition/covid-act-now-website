@@ -27,7 +27,7 @@ function dateIsPastHalfway(dateToCompare, dateArray, itemKey) {
 }
 
 const formatIntervention = (intervention, optCase) =>
-  `3 months of ${intervention}${optCase || ''}`;
+  `3 months of ${intervention.toLowerCase()}${optCase || ''}`;
 
 const condensedFormatIntervention = (intervention, optCase) =>
   `${intervention}${optCase || ''}`;
