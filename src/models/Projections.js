@@ -335,14 +335,14 @@ export class Projections {
   isSocialDistancingOverwhelmedDateWithinThresholdWeeks() {
     return !this.isOverwhelmedDateAfterNumberOfWeeks(
       this.distancingPoorEnforcement.now,
-      8,
+      6,
     );
   }
 
   isSocialDistancingOverwhelmedDateWithinOneWeek() {
     return !this.isOverwhelmedDateAfterNumberOfWeeks(
       this.distancingPoorEnforcement.now,
-      4,
+      3,
     );
   }
 
