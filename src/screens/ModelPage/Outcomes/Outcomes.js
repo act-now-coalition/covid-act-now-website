@@ -40,8 +40,10 @@ const Outcomes = ({
                 rowLabel = '3 Months of Stay at home (strict)';
               }
             }
-            if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE ||
-                currentIntervention === INTERVENTIONS.SOCIAL_DISTANCING) {
+            if (
+              currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE ||
+              currentIntervention === INTERVENTIONS.SOCIAL_DISTANCING
+            ) {
               if (rowLabel === 'Limited action') {
                 rowLabel = 'Restrictions lifted';
               }
