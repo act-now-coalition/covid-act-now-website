@@ -1,5 +1,5 @@
 import React from 'react';
-import { chain, each, map, some } from 'lodash';
+import { chain, each, filter, map } from 'lodash';
 import { useParams } from 'react-router-dom';
 import Downshift from 'downshift';
 import SearchIcon from '@material-ui/icons/Search';
@@ -27,6 +27,7 @@ import {
   StyledCounty,
   StyledResultsMenuOption,
   StyledResultsMenuSubText,
+  StyledCityInCounty,
 } from './MapSelectors.style';
 
 const StateItem = ({ dataset }) => {
@@ -57,6 +58,32 @@ const StateItem = ({ dataset }) => {
   );
 };
 
+const MatchedCities = ({ matchedCities, stateCode }) => {
+  switch (matchedCities.length) {
+    case 0:
+      return '';
+    case 1:
+      return (
+        <StyledCityInCounty>
+          contains {matchedCities[0]}, {stateCode}
+        </StyledCityInCounty>
+      );
+    case 2:
+      return (
+        <StyledCityInCounty>
+          contains {matchedCities[0]}, {stateCode} and {matchedCities[1]},{' '}
+          {stateCode}
+        </StyledCityInCounty>
+      );
+    default:
+      return (
+        <StyledCityInCounty>
+          contains {matchedCities[0]}, {stateCode} and others
+        </StyledCityInCounty>
+      );
+  }
+};
+
 const CountyItem = ({ dataset }) => {
   let fillColor = STATE_TO_CALCULATED_INTERVENTION_COLOR[dataset.state_code];
 
@@ -78,7 +105,15 @@ const CountyItem = ({ dataset }) => {
       </div>
       <div>
         <div>
-          {dataset.county}, {dataset.state_code}
+          {dataset.county}, {dataset.state_code}{' '}
+          {dataset.directCountyMatch ? (
+            ''
+          ) : (
+            <MatchedCities
+              matchedCities={dataset.matchedCities}
+              stateCode={dataset.state_code}
+            />
+          )}
         </div>
         <StyledResultsMenuSubText>
           <span>
@@ -113,16 +148,18 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
     );
   };
 
-  const hasCountyMatch = (option, inputValue) => {
-    const lowerCasedCities = option.cities.map(city => city.toLowerCase());
+  const hasDirectCountyMatch = (option, inputValue) => {
     const countyWithState = `${option.county}, ${option.state_code}`;
 
     return (
       countyWithState.toLowerCase().includes(inputValue.toLowerCase()) ||
-      option.county.toLowerCase().includes(inputValue.toLowerCase()) ||
-      some(lowerCasedCities, lowerCasedCity =>
-        lowerCasedCity.includes(inputValue.toLowerCase()),
-      )
+      option.county.toLowerCase().includes(inputValue.toLowerCase())
+    );
+  };
+
+  const matchedCitiesInCounty = (option, inputValue) => {
+    return filter(option.cities, city =>
+      city.toLowerCase().includes(inputValue.toLowerCase()),
     );
   };
 
@@ -170,7 +207,14 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
 
       if (inputValue.length > 2) {
         const countyMatches = chain(countyDataset)
-          .filter(item => hasCountyMatch(item, inputValue))
+          .map(item => ({
+            ...item,
+            matchedCities: matchedCitiesInCounty(item, inputValue),
+            directCountyMatch: hasDirectCountyMatch(item, inputValue),
+          }))
+          .filter(
+            item => item.directCountyMatch || item.matchedCities.length > 0,
+          )
           .filter(item => {
             // TODO this is a temporary filter
             // to remove combined county name
@@ -256,7 +300,7 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
                   onFocus: () => {
                     openMenu();
                   },
-                  placeholder: 'Search for your county or state',
+                  placeholder: 'Search for your city, county or state',
                 })}
               />
             </StyledInputWrapper>

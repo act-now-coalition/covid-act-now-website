@@ -41,6 +41,12 @@ export const StyledResultsMenuSubText = styled.div`
   color: rgba(0, 0, 0, 0.7);
 `;
 
+export const StyledCityInCounty = styled.span`
+  color: rgba(0, 0, 0, 0.7);
+  font-style: italic;
+  padding-left: 0.3em;
+`;
+
 export const StyledState = styled.div`
   position: relative;
   top: 3px;
