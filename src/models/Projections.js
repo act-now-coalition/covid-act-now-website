@@ -99,11 +99,11 @@ export class Projections {
     let title = <span>Keep staying at home in {displayName}</span>;
 
     if (this.getThresholdInterventionLevel() === COLOR_MAP.ORANGE.BASE) {
-      title = <span>More aggressive action needed in {displayName}</span>;
+      title = <span>Keep staying at home in {displayName}</span>;
     }
 
     if (this.getThresholdInterventionLevel() === COLOR_MAP.RED.BASE) {
-      title = <span>Take immediate action in {displayName}</span>;
+      title = <span>More aggressive action needed in {displayName}</span>;
     }
 
     return title;
@@ -164,16 +164,16 @@ export class Projections {
 
   getInterventionPredictionForShelterInPlace() {
     let predictionText =
-      'Avoiding hospital overload depends on aggressive government interventions and the public taking COVID seriously. Best and worst case scenarios are shown below. Projections will update as more data becomes available.';
+      'Things look good, keep it up! Assuming stay-at-home interventions remain in place, hospitals are not projected to become overloaded. Check back- projections update every 24 hours with the most recent data.';
 
     if (this.getThresholdInterventionLevel() === COLOR_MAP.ORANGE.BASE) {
       predictionText =
-        'To prevent hospital overload, more aggressive action is needed: staying home, eliminating all possible means of infection. Do your part. Help others do the same. Encourage policymakers to do more.';
+        'Things look okay. Assuming stay-at-home interventions remain in place, projections show low-to-moderate probability of hospital overload in the next two months. Check back- projections update every 24 hours with the most recent data.';
     }
 
     if (this.getThresholdInterventionLevel() === COLOR_MAP.RED.BASE) {
       predictionText =
-        'To prevent hospital overload, policymakers and the public must take immediate and drastic action: staying home, eliminating all possible means of infection. Do your part. Help others do the same. Encourage policymakers to do more.';
+        'Be careful. Even with stay-at-home interventions in place, our projections show risk of hospital overload in your area. More action is needed to help flatten the curve. Check back- projections update every 24 hours with the most recent data.';
     }
 
     return <HeaderSubCopy>{predictionText}</HeaderSubCopy>;
