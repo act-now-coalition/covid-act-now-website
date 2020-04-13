@@ -85,7 +85,8 @@ const ModelChart = ({
 
   const noAction = {
     name:
-      currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+      (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE ||
+        currentIntervention === INTERVENTIONS.SOCIAL_DISTANCING)
         ? 'Restrictions lifted'
         : INTERVENTIONS.LIMITED_ACTION,
     type: 'areaspline',
