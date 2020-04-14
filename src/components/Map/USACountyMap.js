@@ -1,6 +1,9 @@
 import React from 'react';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
-import { FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR } from 'enums/interventions';
+import {
+  COLOR_MAP,
+  FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR,
+} from 'enums/interventions';
 import COUNTIES_JSON from './data/counties-10m.json';
 import STATES_JSON from './data/states-10m.json';
 import {
@@ -11,7 +14,7 @@ import {
 
 const USACountyMap = ({ stateClickHandler, setTooltipContent }) => {
   const getFillColor = geoId => {
-    return FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR[geoId] || '#e3e3e3';
+    return FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR[geoId] || COLOR_MAP.GREY;
   };
 
   return (
@@ -25,7 +28,7 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent }) => {
                   <Geography
                     key={geo.rsmKey}
                     geography={geo}
-                    stroke={'rgba(255,255,255,0.05)'}
+                    stroke={'hsla(0, 0%, 85%, 0.2)'}
                     fill={getFillColor(geo.id)}
                   />
                 );

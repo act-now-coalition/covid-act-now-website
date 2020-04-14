@@ -50,6 +50,9 @@ export const ColorBox = styled(Grid)`
   background-color: ${props => props.color};
   margin-right: 8px;
   border-radius: 100%;
+  border-color: hsla(0, 0%, 50%, 0.5);
+  border-width: 1px;
+  border-style: solid;
   height: 14px;
   width: 14px;
 `;

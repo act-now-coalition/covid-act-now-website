@@ -8,7 +8,10 @@ import {
 } from 'react-simple-maps';
 import ReactTooltip from 'react-tooltip';
 import STATE_CENTERS from '../../enums/us_state_centers';
-import { FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR } from 'enums/interventions';
+import {
+  COLOR_MAP,
+  FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR,
+} from 'enums/interventions';
 
 const CountyMap = ({
   selectedCounty,
@@ -60,9 +63,13 @@ const CountyMap = ({
                     fill={
                       countiesWithData.includes(geo.properties.GEOID)
                         ? getFillColor(geo.properties.GEOID)
-                        : '#ccc'
+                        : COLOR_MAP.GREY
                     }
-                    stroke={'white'}
+                    stroke={
+                      countiesWithData.includes(geo.properties.GEOID)
+                        ? 'white'
+                        : 'hsl(0,0%,50%)'
+                    }
                     onMouseEnter={() => {
                       const { NAME } = geo.properties;
                       setContent(NAME);

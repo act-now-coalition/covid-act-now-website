@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { useParams, useHistory } from 'react-router-dom';
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020';
 import CountyMap from 'components/CountyMap/CountyMap';
+import { COLOR_MAP } from '../../enums/interventions';
 import { MAP_FILTERS } from './Enums/MapFilterEnums';
 import Outcomes from './Outcomes/Outcomes';
 import CallToAction from './CallToAction/CallToAction';
@@ -239,7 +240,7 @@ function ModelPage() {
                 fill={
                   interventions
                     ? interventions.getThresholdInterventionLevel()
-                    : '#e3e3e3'
+                    : COLOR_MAP.GREY
                 }
                 stateSummary={modelDatasMap.summary}
                 selectedCounty={selectedCounty}
