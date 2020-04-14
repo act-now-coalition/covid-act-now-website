@@ -7,14 +7,20 @@ assignees: ''
 
 ---
 
-*summary:*
+## summary
 
-*expected result:*
 
-*actual result:*
+## expected result
 
-*environment (device, browser, mobile / web):*
 
-*link:*
+## actual result
 
-*screenshot (you can copy/paste images directly in):*
+
+## environment
+*(device, browser, mobile / web)*
+
+## link
+
+
+## screenshot
+*(you can copy/paste images directly in)*
