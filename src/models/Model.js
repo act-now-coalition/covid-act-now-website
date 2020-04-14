@@ -163,11 +163,9 @@ export class Model {
     return this[columnName][this.idxForDay(days)];
   }
 
-  getDataset(columnName, duration, color, customLabel) {
+  getDataset(columnName, duration, customLabel) {
     return {
       label: customLabel ? customLabel : this.labelWithR0,
-      fill: false,
-      borderColor: color,
       data: this.getColumn(columnName, duration + this.daysSinceDayZero),
     };
   }

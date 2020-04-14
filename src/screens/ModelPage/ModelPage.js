@@ -150,7 +150,9 @@ function ModelPage() {
                     title="Predicted Outcomes after 3 Months"
                     models={[
                       interventions.baseline,
-                      interventions.distancingPoorEnforcement.now,
+                      interventions.hasProjections
+                        ? interventions.projected
+                        : interventions.distancingPoorEnforcement.now,
                       interventions.distancing.now,
                     ]}
                     colors={[

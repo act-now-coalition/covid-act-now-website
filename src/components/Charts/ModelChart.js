@@ -44,31 +44,33 @@ const ModelChart = ({
     [INTERVENTIONS.LIMITED_ACTION]: interventions.baseline,
     [INTERVENTIONS.SOCIAL_DISTANCING]:
       interventions.distancingPoorEnforcement.now,
+    [INTERVENTIONS.PROJECTED]:
+      interventions.projected,
     [INTERVENTIONS.SHELTER_IN_PLACE]: interventions.distancing.now,
   };
+  const hasProjections = !countyName;
 
   let model = interventionToModel[currentIntervention];
-
-  if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE) {
+  if (hasProjections) {
+    model = interventionToModel[INTERVENTIONS.PROJECTED];
+  } else if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE) {
     model = interventionToModel[INTERVENTIONS.SOCIAL_DISTANCING];
   }
 
   const scenarioComparisonOverTime = duration => [
-    interventions.baseline.getDataset('hospitalizations', duration, 'red'),
+    interventions.baseline.getDataset('hospitalizations', duration),
+    interventions.distancingPoorEnforcement.now.getDataset(
+      'hospitalizations',
+      duration
+    ),
+    interventions.projected.getDataset('hospitalizations', duration),
     interventions.distancing.now.getDataset(
       'hospitalizations',
       duration,
-      'blue',
-    ),
-    interventions.distancingPoorEnforcement.now.getDataset(
-      'hospitalizations',
-      duration,
-      'orange',
     ),
     interventions.baseline.getDataset(
       'beds',
       duration,
-      'black',
       'Available hospital beds',
     ),
   ];
@@ -84,29 +86,30 @@ const ModelChart = ({
   );
 
   const noAction = {
+    className: 'limited-action',
     name:
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE ||
       currentIntervention === INTERVENTIONS.SOCIAL_DISTANCING
         ? 'Restrictions lifted'
         : INTERVENTIONS.LIMITED_ACTION,
-    type: 'areaspline',
+    type: hasProjections ? 'spline' : 'areaspline',
     data: data[0].data,
     marker: {
       symbol: 'circle',
     },
-    visible: currentIntervention === INTERVENTIONS.LIMITED_ACTION,
     condensedLegend: {
       bgColor: interventions.getChartSeriesColorMap().limitedActionSeries,
     },
   };
 
   const socialDistancing = {
+    className: 'social-distancing',
     name:
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (lax)')
         : formatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
-    type: 'areaspline',
-    data: data[2].data,
+    type: hasProjections ? 'spline' : 'areaspline',
+    data: data[1].data,
     marker: {
       symbol: 'circle',
     },
@@ -123,13 +126,30 @@ const ModelChart = ({
     },
   };
 
+  const projected = {
+    className: 'projected',
+    name: 'Projected based on current trends',
+    type: 'areaspline',
+    data: data[2].data,
+    marker: {
+      symbol: 'circle',
+    },
+    condensedLegend: {
+      bgColor: interventions.getChartSeriesColorMap().projectedSeries,
+    },
+  };
+
   const shelterInPlace = {
+    className: 'stay-at-home',
     name:
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (strict)')
         : formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
-    type: 'areaspline',
-    data: data[1].data,
+    type: hasProjections ? 'spline' : 'areaspline',
+    visible:
+      !hasProjections || currentIntervention != INTERVENTIONS.SHELTER_IN_PLACE,
+
+    data: data[3].data,
     marker: {
       symbol: 'circle',
     },
@@ -149,9 +169,10 @@ const ModelChart = ({
   };
 
   const availableBeds = {
+    className : 'beds',
     name: 'Available hospital beds',
     type: 'spline',
-    data: data[3].data,
+    data: data[4].data,
     marker: {
       symbol: 'circle',
     },
@@ -244,6 +265,7 @@ const ModelChart = ({
           },
         },
         maxPadding: 0.2,
+        ceiling: data[4].data[0].y * 1.2,
       },
       tooltip: {
         formatter: function () {
@@ -283,7 +305,9 @@ const ModelChart = ({
           },
         },
       },
-      series: [noAction, socialDistancing, shelterInPlace, availableBeds],
+      series: hasProjections
+        ? [noAction, projected, shelterInPlace, availableBeds]
+        : [noAction, socialDistancing, shelterInPlace, availableBeds],
     };
   }, [
     height,
@@ -291,6 +315,7 @@ const ModelChart = ({
     currentIntervention,
     noAction,
     socialDistancing,
+    projected,
     shelterInPlace,
     availableBeds,
     interventions,
@@ -303,6 +328,7 @@ const ModelChart = ({
       <ChartContainer>
         <Wrapper
           interventions={interventions}
+          hasProjections={hasProjections}
           inShelterInPlace={
             currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
           }
@@ -321,6 +347,7 @@ const ModelChart = ({
     <ChartContainer>
       <Wrapper
         interventions={interventions}
+        hasProjections={hasProjections}
         inShelterInPlace={
           currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         }
