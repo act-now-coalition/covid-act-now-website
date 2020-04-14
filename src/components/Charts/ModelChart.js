@@ -147,7 +147,7 @@ const ModelChart = ({
         : formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
     type: hasProjections ? 'spline' : 'areaspline',
     visible:
-      !hasProjections || currentIntervention != INTERVENTIONS.SHELTER_IN_PLACE,
+      !hasProjections || currentIntervention !== INTERVENTIONS.SHELTER_IN_PLACE,
 
     data: data[3].data,
     marker: {
@@ -313,6 +313,8 @@ const ModelChart = ({
     height,
     model.dateOverwhelmed,
     currentIntervention,
+    hasProjections,
+    data,
     noAction,
     socialDistancing,
     projected,
