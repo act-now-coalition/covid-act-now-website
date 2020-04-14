@@ -26,6 +26,7 @@ export class Projections {
     this.populateInterventions(props);
     this.populateCurrentIntervention();
     this.populateCounty(county);
+    this.hasProjections = county != null;
   }
 
   populateCounty(county) {
@@ -194,11 +195,15 @@ export class Projections {
   getThresholdInterventionLevelForStayAtHome() {
     let color = COLOR_MAP.GREEN.BASE;
 
-    if (this.isSocialDistancingOverwhelmedDateWithinThresholdWeeks()) {
+    if (this.hasProjections ?  this.isProjectedOverwhelmedDateWithinThresholdWeeks() :
+      this.isSocialDistancingOverwhelmedDateWithinThresholdWeeks()) {
       color = COLOR_MAP.ORANGE.BASE;
     }
 
-    if (this.isSocialDistancingOverwhelmedDateWithinOneWeek()) {
+    if (this.hasProjections
+        ? this.isProjectedOverwhelmedDateWithinOneweek()
+        : this.isSocialDistancingOverwhelmedDateWithinOneWeek()
+    ) {
       color = COLOR_MAP.RED.BASE;
     }
 
@@ -337,6 +342,20 @@ export class Projections {
     return !this.isOverwhelmedDateAfterNumberOfWeeks(
       this.distancingPoorEnforcement.now,
       6,
+    );
+  }
+
+  isProjectedOverwhelmedDateWithinThresholdWeeks() {
+    return !this.isOverwhelmedDateAfterNumberOfWeeks(
+      this.projected,
+      6,
+    );
+  }
+
+  isProjectedOverwhelmedDateWithinOneweek() {
+    return !this.isOverwhelmedDateAfterNumberOfWeeks(
+      this.projected,
+      3,
     );
   }
 
