@@ -102,14 +102,19 @@ export const Wrapper = styled.div`
          /* these are styled according to the
      order passed into the series array */
          /* No action */
-         .highcharts-series-0 {
+         .limited-action {
            fill: ${props =>
              props.interventions.getChartSeriesColorMap().limitedActionSeries};
-           stroke: white;
+           stroke: ${props =>
+             props.hasProjections
+               ? props.interventions.getChartSeriesColorMap()
+                   .limitedActionSeries
+               : 'white'};
+           stroke-dasharray: ${props => (props.hasProjections ? '2, 4' : '')};
            fill-opacity: 1;
          }
          /* Social distancing */
-         .highcharts-series-1 {
+         .social-distancing {
            fill: ${props =>
              props.interventions.getChartSeriesColorMap()
                .socialDistancingSeries};
@@ -122,14 +127,14 @@ export const Wrapper = styled.div`
            fill-opacity: 1;
          }
          /* Projected */
-         .highcharts-series-2 {
+         .projected {
            fill: ${props =>
              props.interventions.getChartSeriesColorMap().projectedSeries};
            stroke: white;
            fill-opacity: 1;
          }
          /* Stay at home */
-         .highcharts-series-3 {
+         .stay-at-home {
            fill: ${props =>
              props.interventions.getChartSeriesColorMap().shelterInPlaceSeries};
            stroke: ${props =>
@@ -141,12 +146,12 @@ export const Wrapper = styled.div`
            fill-opacity: 1;
          }
          /* Available beds */
-         .highcharts-series-4 {
+         .beds {
            stroke: white;
            stroke-width: 1px;
            stroke-dasharray: 8, 8;
          }
-         .highcharts-color-4 {
+         .beds {
            fill: rgba(0, 0, 0, 0.7);
            stroke: rgba(0, 0, 0, 0.7);
          }

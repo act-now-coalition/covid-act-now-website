@@ -51,9 +51,8 @@ const ModelChart = ({
   const haveProjections = !countyName;
 
   let model = interventionToModel[currentIntervention];
-
-
-
+  let hideSocialDistancing =
+    haveProjections && currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE;
   if (haveProjections) {
     model = interventionToModel[INTERVENTIONS.PROJECTED];
   } else if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE) {
@@ -89,11 +88,12 @@ const ModelChart = ({
   );
 
   const noAction = {
+    className: 'limited-action',
     name:
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         ? 'Restrictions lifted'
         : INTERVENTIONS.LIMITED_ACTION,
-    type: 'areaspline',
+    type: haveProjections ? 'spline' : 'areaspline',
     data: data[0].data,
     marker: {
       symbol: 'circle',
@@ -105,6 +105,7 @@ const ModelChart = ({
   };
 
   const socialDistancing = {
+    className: 'social-distancing',
     name:
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (lax)')
@@ -123,12 +124,13 @@ const ModelChart = ({
             )
           : condensedFormatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
 
-      bgColor:  interventions.getChartSeriesColorMap().socialDistancingSeries,
+      bgColor: interventions.getChartSeriesColorMap().socialDistancingSeries,
     },
   };
 
   const projected = {
-    name:'Projected',
+    className: 'projected',
+    name: 'Projected',
     type: 'areaspline',
     data: data[2].data,
     marker: {
@@ -140,6 +142,7 @@ const ModelChart = ({
   };
 
   const shelterInPlace = {
+    className: 'stay-at-home',
     name:
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (strict)')
@@ -165,6 +168,7 @@ const ModelChart = ({
   };
 
   const availableBeds = {
+    className : 'beds',
     name: 'Available hospital beds',
     type: 'spline',
     data: data[4].data,
@@ -299,13 +303,15 @@ const ModelChart = ({
           },
         },
       },
-      series: [
-        noAction,
-        socialDistancing,
-        projected,
-        shelterInPlace,
-        availableBeds,
-      ],
+      series: hideSocialDistancing
+        ? [noAction, projected, shelterInPlace, availableBeds]
+        : [
+            noAction,
+            socialDistancing,
+            projected,
+            shelterInPlace,
+            availableBeds,
+          ],
     };
   }, [
     height,
