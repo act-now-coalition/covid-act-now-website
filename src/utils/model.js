@@ -37,6 +37,7 @@ async function fetchAll(urls) {
 export const ModelIds = {
   baseline: 0,
   strictDistancingNow: 1,
+  projected: 2,
   weakDistancingNow: 3,
 };
 
@@ -64,11 +65,23 @@ async function fetchSummary(setModelDatas, location) {
 async function fetchData(location, county = null, dataUrl = DATA_URL) {
   dataUrl = dataUrl || DATA_URL;
   let modelDataForKey = null;
-  let urls = [
-    ModelIds.baseline,
-    ModelIds.strictDistancingNow,
-    ModelIds.weakDistancingNow,
-  ].map(i => {
+  let projectionsToLoad;
+  if (!county) {
+    projectionsToLoad = [
+      ModelIds.baseline,
+      ModelIds.strictDistancingNow,
+      ModelIds.projected,
+      ModelIds.weakDistancingNow,
+    ];
+  } else {
+    projectionsToLoad = [
+      ModelIds.baseline,
+      ModelIds.strictDistancingNow,
+      ModelIds.strictDistancingNow, // TODO(igor): HAX!
+      ModelIds.weakDistancingNow,
+    ];
+  }
+  let urls = projectionsToLoad.map(i => {
     let fipsCode =
       county && county.full_fips_code ? county.full_fips_code : null;
     const stateUrl = `${dataUrl}/${location}.${i}.json`;

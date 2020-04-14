@@ -26,6 +26,7 @@ export class Projections {
     this.populateInterventions(props);
     this.populateCurrentIntervention();
     this.populateCounty(county);
+    this.hasProjections = county == null;
   }
 
   populateCounty(county) {
@@ -194,11 +195,15 @@ export class Projections {
   getThresholdInterventionLevelForStayAtHome() {
     let color = COLOR_MAP.GREEN.BASE;
 
-    if (this.isSocialDistancingOverwhelmedDateWithinThresholdWeeks()) {
+    if (this.hasProjections ?  this.isProjectedOverwhelmedDateWithinThresholdWeeks() :
+      this.isSocialDistancingOverwhelmedDateWithinThresholdWeeks()) {
       color = COLOR_MAP.ORANGE.BASE;
     }
 
-    if (this.isSocialDistancingOverwhelmedDateWithinOneWeek()) {
+    if (this.hasProjections
+        ? this.isProjectedOverwhelmedDateWithinOneweek()
+        : this.isSocialDistancingOverwhelmedDateWithinOneWeek()
+    ) {
       color = COLOR_MAP.RED.BASE;
     }
 
@@ -251,6 +256,7 @@ export class Projections {
       limitedActionSeries: this.getSeriesColorForLimitedAction(),
       socialDistancingSeries: this.getSeriesColorForSocialDistancing(),
       shelterInPlaceSeries: this.getSeriesColorForShelterInPlace(),
+      projectedSeries: COLOR_MAP.PURPLE
     };
   }
 
@@ -339,6 +345,20 @@ export class Projections {
     );
   }
 
+  isProjectedOverwhelmedDateWithinThresholdWeeks() {
+    return !this.isOverwhelmedDateAfterNumberOfWeeks(
+      this.projected,
+      6,
+    );
+  }
+
+  isProjectedOverwhelmedDateWithinOneweek() {
+    return !this.isOverwhelmedDateAfterNumberOfWeeks(
+      this.projected,
+      3,
+    );
+  }
+
   isSocialDistancingOverwhelmedDateWithinOneWeek() {
     return !this.isOverwhelmedDateAfterNumberOfWeeks(
       this.distancingPoorEnforcement.now,
@@ -370,8 +390,13 @@ export class Projections {
       }),
     };
 
+    this.projected = new Model(props[2], {
+      intervention: INTERVENTIONS.PROJECTED,
+      r0: 'inferred',
+    });
+
     this.distancingPoorEnforcement = {
-      now: new Model(props[2], {
+      now: new Model(props[3], {
         intervention: INTERVENTIONS.SOCIAL_DISTANCING,
         durationDays: 90,
         r0: 1.7,
