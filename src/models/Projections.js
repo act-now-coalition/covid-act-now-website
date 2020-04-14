@@ -26,7 +26,7 @@ export class Projections {
     this.populateInterventions(props);
     this.populateCurrentIntervention();
     this.populateCounty(county);
-    this.hasProjections = county != null;
+    this.hasProjections = county == null;
   }
 
   populateCounty(county) {

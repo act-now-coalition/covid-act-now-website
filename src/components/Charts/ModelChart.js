@@ -48,12 +48,10 @@ const ModelChart = ({
       interventions.projected,
     [INTERVENTIONS.SHELTER_IN_PLACE]: interventions.distancing.now,
   };
-  const haveProjections = !countyName;
+  const hasProjections = !countyName;
 
   let model = interventionToModel[currentIntervention];
-  let hideSocialDistancing =
-    haveProjections && currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE;
-  if (haveProjections) {
+  if (hasProjections) {
     model = interventionToModel[INTERVENTIONS.PROJECTED];
   } else if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE) {
     model = interventionToModel[INTERVENTIONS.SOCIAL_DISTANCING];
@@ -94,12 +92,11 @@ const ModelChart = ({
       currentIntervention === INTERVENTIONS.SOCIAL_DISTANCING
         ? 'Restrictions lifted'
         : INTERVENTIONS.LIMITED_ACTION,
-    type: haveProjections ? 'spline' : 'areaspline',
+    type: hasProjections ? 'spline' : 'areaspline',
     data: data[0].data,
     marker: {
       symbol: 'circle',
     },
-    visible: currentIntervention === INTERVENTIONS.LIMITED_ACTION,
     condensedLegend: {
       bgColor: interventions.getChartSeriesColorMap().limitedActionSeries,
     },
@@ -111,7 +108,7 @@ const ModelChart = ({
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (lax)')
         : formatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
-    type: haveProjections ? 'spline' : 'areaspline',
+    type: hasProjections ? 'spline' : 'areaspline',
     data: data[1].data,
     marker: {
       symbol: 'circle',
@@ -131,7 +128,7 @@ const ModelChart = ({
 
   const projected = {
     className: 'projected',
-    name: 'Projected',
+    name: 'Projected based on current trends',
     type: 'areaspline',
     data: data[2].data,
     marker: {
@@ -148,7 +145,10 @@ const ModelChart = ({
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (strict)')
         : formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
-    type: haveProjections ? 'spline' : 'areaspline',
+    type: hasProjections ? 'spline' : 'areaspline',
+    visible:
+      !hasProjections || currentIntervention != INTERVENTIONS.SHELTER_IN_PLACE,
+
     data: data[3].data,
     marker: {
       symbol: 'circle',
@@ -265,6 +265,7 @@ const ModelChart = ({
           },
         },
         maxPadding: 0.2,
+        ceiling: data[4].data[0].y * 1.2,
       },
       tooltip: {
         formatter: function () {
@@ -304,15 +305,9 @@ const ModelChart = ({
           },
         },
       },
-      series: hideSocialDistancing
+      series: hasProjections
         ? [noAction, projected, shelterInPlace, availableBeds]
-        : [
-            noAction,
-            socialDistancing,
-            projected,
-            shelterInPlace,
-            availableBeds,
-          ],
+        : [noAction, socialDistancing, shelterInPlace, availableBeds],
     };
   }, [
     height,
@@ -333,7 +328,7 @@ const ModelChart = ({
       <ChartContainer>
         <Wrapper
           interventions={interventions}
-          hasProjections={haveProjections}
+          hasProjections={hasProjections}
           inShelterInPlace={
             currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
           }
@@ -352,7 +347,7 @@ const ModelChart = ({
     <ChartContainer>
       <Wrapper
         interventions={interventions}
-        hasProjections={haveProjections}
+        hasProjections={hasProjections}
         inShelterInPlace={
           currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         }

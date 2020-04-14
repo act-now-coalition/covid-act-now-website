@@ -5,7 +5,7 @@ import CalculatedCountyInterventionJSON from '../assets/data/calculated_county_i
 const LIMITED_ACTION = 'Limited action';
 const SOCIAL_DISTANCING = 'Social distancing';
 const SHELTER_IN_PLACE = 'Stay at home';
-const PROJECTED = 'Projected';
+const PROJECTED = 'Projected based on current trends';
 const SHELTER_IN_PLACE_WORST_CASE = 'Stay at home worst case';
 
 export const INTERVENTIONS = {
