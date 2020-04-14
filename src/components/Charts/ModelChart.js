@@ -44,31 +44,36 @@ const ModelChart = ({
     [INTERVENTIONS.LIMITED_ACTION]: interventions.baseline,
     [INTERVENTIONS.SOCIAL_DISTANCING]:
       interventions.distancingPoorEnforcement.now,
+    [INTERVENTIONS.PROJECTED]:
+      interventions.projected,
     [INTERVENTIONS.SHELTER_IN_PLACE]: interventions.distancing.now,
   };
+  const haveProjections = !countyName;
 
   let model = interventionToModel[currentIntervention];
 
-  if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE) {
+
+
+  if (haveProjections) {
+    model = interventionToModel[INTERVENTIONS.PROJECTED];
+  } else if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE) {
     model = interventionToModel[INTERVENTIONS.SOCIAL_DISTANCING];
   }
 
   const scenarioComparisonOverTime = duration => [
-    interventions.baseline.getDataset('hospitalizations', duration, 'red'),
+    interventions.baseline.getDataset('hospitalizations', duration),
+    interventions.distancingPoorEnforcement.now.getDataset(
+      'hospitalizations',
+      duration
+    ),
+    interventions.projected.getDataset('hospitalizations', duration),
     interventions.distancing.now.getDataset(
       'hospitalizations',
       duration,
-      'blue',
-    ),
-    interventions.distancingPoorEnforcement.now.getDataset(
-      'hospitalizations',
-      duration,
-      'orange',
     ),
     interventions.baseline.getDataset(
       'beds',
       duration,
-      'black',
       'Available hospital beds',
     ),
   ];
@@ -104,8 +109,8 @@ const ModelChart = ({
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (lax)')
         : formatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
-    type: 'areaspline',
-    data: data[2].data,
+    type: haveProjections ? 'spline' : 'areaspline',
+    data: data[1].data,
     marker: {
       symbol: 'circle',
     },
@@ -118,7 +123,19 @@ const ModelChart = ({
             )
           : condensedFormatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
 
-      bgColor: interventions.getChartSeriesColorMap().socialDistancingSeries,
+      bgColor:  interventions.getChartSeriesColorMap().socialDistancingSeries,
+    },
+  };
+
+  const projected = {
+    name:'Projected',
+    type: 'areaspline',
+    data: data[2].data,
+    marker: {
+      symbol: 'circle',
+    },
+    condensedLegend: {
+      bgColor: interventions.getChartSeriesColorMap().projectedSeries,
     },
   };
 
@@ -127,8 +144,8 @@ const ModelChart = ({
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (strict)')
         : formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
-    type: 'areaspline',
-    data: data[1].data,
+    type: haveProjections ? 'spline' : 'areaspline',
+    data: data[3].data,
     marker: {
       symbol: 'circle',
     },
@@ -150,7 +167,7 @@ const ModelChart = ({
   const availableBeds = {
     name: 'Available hospital beds',
     type: 'spline',
-    data: data[3].data,
+    data: data[4].data,
     marker: {
       symbol: 'circle',
     },
@@ -282,7 +299,13 @@ const ModelChart = ({
           },
         },
       },
-      series: [noAction, socialDistancing, shelterInPlace, availableBeds],
+      series: [
+        noAction,
+        socialDistancing,
+        projected,
+        shelterInPlace,
+        availableBeds,
+      ],
     };
   }, [
     height,
@@ -290,6 +313,7 @@ const ModelChart = ({
     currentIntervention,
     noAction,
     socialDistancing,
+    projected,
     shelterInPlace,
     availableBeds,
     interventions,
@@ -302,6 +326,7 @@ const ModelChart = ({
       <ChartContainer>
         <Wrapper
           interventions={interventions}
+          hasProjections={haveProjections}
           inShelterInPlace={
             currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
           }
@@ -320,6 +345,7 @@ const ModelChart = ({
     <ChartContainer>
       <Wrapper
         interventions={interventions}
+        hasProjections={haveProjections}
         inShelterInPlace={
           currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         }

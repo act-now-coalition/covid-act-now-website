@@ -5,22 +5,22 @@ import CalculatedCountyInterventionJSON from '../assets/data/calculated_county_i
 const LIMITED_ACTION = 'Limited action';
 const SOCIAL_DISTANCING = 'Social distancing';
 const SHELTER_IN_PLACE = 'Stay at home';
-const LOCKDOWN = 'Lockdown';
+const PROJECTED = 'Projected';
 const SHELTER_IN_PLACE_WORST_CASE = 'Stay at home worst case';
 
 export const INTERVENTIONS = {
   LIMITED_ACTION,
   SOCIAL_DISTANCING,
   SHELTER_IN_PLACE,
-  LOCKDOWN,
+  PROJECTED,
   SHELTER_IN_PLACE_WORST_CASE,
 };
 
 export const INTERVENTION_EFFICACY_ORDER_ASC = [
   LIMITED_ACTION,
   SOCIAL_DISTANCING,
+  PROJECTED,
   SHELTER_IN_PLACE,
-  LOCKDOWN,
 ];
 
 export const INTERVENTION_DESCRIPTIONS = {
@@ -57,7 +57,7 @@ export const INTERVENTION_COLOR_MAP = {
   [SOCIAL_DISTANCING]: COLOR_MAP.ORANGE.BASE,
   [SHELTER_IN_PLACE]: COLOR_MAP.GREEN.BASE,
   [SHELTER_IN_PLACE_WORST_CASE]: COLOR_MAP.GREEN.DARK,
-  [LOCKDOWN]: COLOR_MAP.PURPLE,
+  [PROJECTED]: COLOR_MAP.PURPLE,
 };
 
 export const STATE_TO_INTERVENTION = stateInterventions();

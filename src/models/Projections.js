@@ -251,6 +251,7 @@ export class Projections {
       limitedActionSeries: this.getSeriesColorForLimitedAction(),
       socialDistancingSeries: this.getSeriesColorForSocialDistancing(),
       shelterInPlaceSeries: this.getSeriesColorForShelterInPlace(),
+      projectedSeries: COLOR_MAP.PURPLE
     };
   }
 
@@ -370,8 +371,13 @@ export class Projections {
       }),
     };
 
+    this.projected = new Model(props[2], {
+      intervention: INTERVENTIONS.PROJECTED,
+      r0: 'inferred',
+    });
+
     this.distancingPoorEnforcement = {
-      now: new Model(props[2], {
+      now: new Model(props[3], {
         intervention: INTERVENTIONS.SOCIAL_DISTANCING,
         durationDays: 90,
         r0: 1.7,
