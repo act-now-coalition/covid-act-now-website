@@ -1,1 +1,1 @@
-{"state": "GU", "cases": 112.0, "deaths": 4.0, "source": "JHU", "date": "2020-04-05", "counties": [{"fips": "00066", "cases": 112.0, "deaths": 4.0, "source": "JHU", "date": "2020-04-05"}, {"fips": "66000", "cases": 77.0, "deaths": 3.0, "source": "JHU", "date": "2020-04-01"}]}
+{"state": "GU", "cases": 133.0, "deaths": 5.0, "source": "JHU", "date": "2020-04-14", "counties": [{"fips": "00066", "cases": 133.0, "deaths": 5.0, "source": "JHU", "date": "2020-04-14"}, {"fips": "66000", "cases": 77.0, "deaths": 3.0, "source": "JHU", "date": "2020-04-01"}]}
