@@ -63,7 +63,6 @@ interface LocalInterventions {
 }
 
 export default class Interventions {
-  // TODO: Enum typing for state codes
   state?: StateCode;
 
   constructor(state?: StateCode) {
@@ -77,6 +76,13 @@ export default class Interventions {
   getCurrentStateShelterInPlace(): boolean | null {
     if (!this.state) return null;
     return InterventionJSON[this.state]['status'] === 'shelter_in_place';
+  }
+
+  getCurrentStateSocialDistancing(): boolean | null {
+    if (!this.state) return null;
+    return ['social_distancing', 'shelter_in_place'].includes(
+      InterventionJSON[this.state]['status'],
+    );
   }
 
   getCurrentStateStayAtHome(): boolean | null {

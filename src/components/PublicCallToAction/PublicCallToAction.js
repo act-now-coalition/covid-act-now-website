@@ -1,5 +1,7 @@
 import * as React from 'react';
 import Typography from '@material-ui/core/Typography';
+import CheckIcon from '@material-ui/icons/Check';
+import ListIcon from '@material-ui/icons/List';
 
 import { STATES } from 'enums';
 
@@ -10,6 +12,7 @@ import Newsletter from 'components/Newsletter/Newsletter';
 import Interventions from 'models/Interventions';
 
 import {
+  IconWrapper,
   ListIconNumber,
   PublicCallToActionHeader,
   PublicCallToActionColumn,
@@ -21,12 +24,14 @@ import {
 import ProgressBar from './ProgressBar';
 
 const PublicCallToAction = ({ county, location }) => {
-  const nationalInterventions = new Interventions();
+  const modelInterventions = new Interventions(
+    location && location.toUpperCase(),
+  );
 
-  const totalStatesStayAtHome = nationalInterventions.getTotalStatesStayAtHome();
-  const totalStatesSchoolsClosed = nationalInterventions.getTotalStatesWithClosedSchools();
-  const totalStatesSocialDistancing = nationalInterventions.getTotalStatesSocialDistancing();
-  const totalStatesRestaurantsAndBarsClosed = nationalInterventions.getTotalStatesWithClosedRestaurantsAndBars();
+  const totalStatesStayAtHome = modelInterventions.getTotalStatesStayAtHome();
+  const totalStatesSchoolsClosed = modelInterventions.getTotalStatesWithClosedSchools();
+  const totalStatesSocialDistancing = modelInterventions.getTotalStatesSocialDistancing();
+  const totalStatesRestaurantsAndBarsClosed = modelInterventions.getTotalStatesWithClosedRestaurantsAndBars();
 
   return (
     <PublicCallToActionContainer>
@@ -69,15 +74,42 @@ const PublicCallToAction = ({ county, location }) => {
           How policy makers can help
         </PublicCallToActionHeader>
         {location ? (
+          // ------- STATE PAGE --------
           <>
             <ContentBlock
-              number={1}
+              icon={<CheckIcon />}
+              iconColor="#31E8BC"
               header={`Measures already taken by the state of ${STATES[location]}`}
             >
-              This is a thing
+              {[
+                modelInterventions.getCurrentStateSocialDistancing()
+                  ? 'Social distancing'
+                  : null,
+                modelInterventions.getCurrentStateStayAtHome()
+                  ? 'Stay at home'
+                  : null,
+                modelInterventions.getCurrentStateSchoolsClosed()
+                  ? 'Schools closed'
+                  : null,
+                modelInterventions.getCurrentStateRestaurantsAndBarsClosed()
+                  ? 'Restaurants and bars closed'
+                  : null,
+              ]
+                .filter(Boolean)
+                .map(text => (
+                  <Typography>{text}</Typography>
+                ))}
+            </ContentBlock>
+            <ContentBlock
+              icon={<ListIcon />}
+              iconColor="#3BBCE6"
+              header="Suggested next steps"
+            >
+              TODO
             </ContentBlock>
           </>
         ) : (
+          // ------- HOME / NATIONAL PAGE --------
           [
             {
               description: 'Social distancing',
@@ -104,14 +136,19 @@ const PublicCallToAction = ({ county, location }) => {
   );
 };
 
-const ContentBlock = ({ icon, number, header, children }) => (
+const ContentBlock = ({ icon, iconColor, number, header, children }) => (
   <PublicCallToActionContentBlock>
-    {icon || <ListIconNumber>{number}</ListIconNumber>}
+    {/* Icon will supercede number */}
+    {icon ? (
+      <IconWrapper iconColor={iconColor}>{icon}</IconWrapper>
+    ) : (
+      <ListIconNumber>{number}</ListIconNumber>
+    )}
     <PublicCallToActionContentContainer>
       <PublicCallToActionHeader variant="h6">{header}</PublicCallToActionHeader>
       {children}
     </PublicCallToActionContentContainer>
   </PublicCallToActionContentBlock>
-); // Icon will supercede number
+);
 
 export default PublicCallToAction;

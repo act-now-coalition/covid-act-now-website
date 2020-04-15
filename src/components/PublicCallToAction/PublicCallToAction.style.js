@@ -65,3 +65,17 @@ export const ListIconNumber = styled(Box)`
   color: white;
   font-weight: 800;
 `;
+
+export const IconWrapper = styled(Box)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.8rem;
+  width: 1.8rem;
+  min-width: 1.8rem;
+  margin: 0.8rem 0.5rem 0 0;
+  > svg {
+    font-size: 2rem;
+    color: ${props => props.iconColor || 'blue'};
+  }
+`;
