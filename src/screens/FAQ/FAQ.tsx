@@ -224,9 +224,9 @@ const FAQ = ({ children }: { children: React.ReactNode }) => {
             rel="noopener noreferrer"
             href="https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/symptoms.html"
           >
-          an excellent dashboard
-          </a>
-          {' '}that gives a sense of what treatments and vaccines are being
+            an excellent dashboard
+          </a>{' '}
+          that gives a sense of what treatments and vaccines are being
           researched and clinically trialed.
         </Typography>
 
