@@ -312,7 +312,6 @@ const ModelChart = ({
     model.dateOverwhelmed,
     currentIntervention,
     hasProjections,
-    data,
     noAction,
     socialDistancing,
     projected,
