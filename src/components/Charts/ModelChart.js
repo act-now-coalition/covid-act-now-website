@@ -264,8 +264,6 @@ const ModelChart = ({
               : this.axis.defaultLabelFormatter.call(this);
           },
         },
-        maxPadding: 0.2,
-        ceiling: data[4].data[0].y * 1.2,
       },
       tooltip: {
         formatter: function () {
@@ -314,7 +312,6 @@ const ModelChart = ({
     model.dateOverwhelmed,
     currentIntervention,
     hasProjections,
-    data,
     noAction,
     socialDistancing,
     projected,

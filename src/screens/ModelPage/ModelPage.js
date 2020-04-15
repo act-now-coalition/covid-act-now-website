@@ -157,7 +157,9 @@ function ModelPage() {
                     ]}
                     colors={[
                       interventions.getSeriesColorForLimitedAction(),
-                      interventions.getSeriesColorForSocialDistancing(),
+                      interventions.hasProjections
+                        ? interventions.getSeriesColorForProjected()
+                        : interventions.getSeriesColorForSocialDistancing(),
                       interventions.getSeriesColorForShelterInPlace(),
                     ]}
                     asterisk={['', '*', '*', '**']}
