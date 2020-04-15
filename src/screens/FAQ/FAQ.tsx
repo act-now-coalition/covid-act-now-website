@@ -31,7 +31,7 @@ const FAQ = ({ children }: { children: React.ReactNode }) => {
           type of epidemiological model).
         </Typography>
 
-        <Typography variant="body1" component="p">
+        <Typography variant="h5" component="h5">
           Wait, what’s an SEIR model?
         </Typography>
 
