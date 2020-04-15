@@ -22,11 +22,11 @@ export class Projections {
     this.distancing = null;
     this.distancingPoorEnforcement = null;
     this.currentInterventionModel = null;
+    this.hasProjections = county == null;
 
     this.populateInterventions(props);
     this.populateCurrentIntervention();
     this.populateCounty(county);
-    this.hasProjections = county == null;
   }
 
   populateCounty(county) {
@@ -59,7 +59,7 @@ export class Projections {
       [INTERVENTIONS.SHELTER_IN_PLACE]: this.distancing.now,
     };
 
-    this.currentInterventionModel =
+    this.currentInterventionModel = this.hasProjections ? this.projected :
       interventionModelMap[this.stateIntervention];
 
     this.worstCaseInterventionModel =
@@ -258,6 +258,10 @@ export class Projections {
       shelterInPlaceSeries: this.getSeriesColorForShelterInPlace(),
       projectedSeries: COLOR_MAP.PURPLE
     };
+  }
+
+  getSeriesColorForProjected() {
+    return COLOR_MAP.PURPLE;
   }
 
   getSeriesColorForLimitedAction() {

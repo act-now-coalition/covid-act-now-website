@@ -110,7 +110,6 @@ export const Wrapper = styled.div`
                ? props.interventions.getChartSeriesColorMap()
                    .limitedActionSeries
                : 'white'};
-           stroke-dasharray: ${props => (props.hasProjections ? '2, 4' : '')};
            fill-opacity: 1;
          }
          /* Social distancing */
@@ -123,7 +122,6 @@ export const Wrapper = styled.div`
                ? props.interventions.getChartSeriesColorMap()
                    .socialDistancingSeries
                : 'white'};
-           stroke-dasharray: ${props => (props.hasProjections ? '2, 4' : '')};
            fill-opacity: 1;
          }
          /* Projected */
@@ -142,7 +140,6 @@ export const Wrapper = styled.div`
                ? props.interventions.getChartSeriesColorMap()
                    .shelterInPlaceSeries
                : 'white'};
-           stroke-dasharray: ${props => (props.hasProjections ? '2, 4' : '')};
            fill-opacity: 1;
          }
          /* Available beds */
