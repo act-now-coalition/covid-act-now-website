@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
 import ModelPage from 'screens/ModelPage/ModelPage';
 import HomePage from 'screens/HomePage/HomePage';
+import About from 'screens/About/About';
 // import ComingSoon from 'screens/ComingSoon/ComingSoon';
 import FAQ from 'screens/FAQ/FAQ';
 import Terms from 'screens/Terms/Terms';
@@ -40,6 +41,7 @@ export default function App() {
               component={ModelPage}
             />
 
+            <Route path="/about" component={About} />
             <Route path="/faq" component={FAQ} />
             <Route path="/endorsements" component={EndorsementsPage} />
             <Route path="/terms" component={Terms} />
@@ -66,9 +68,6 @@ export default function App() {
             </Route>
             <Route path="/contact">
               <Redirect to="/faq" />
-              <Route path="/about">
-                <Redirect to="/faq" />
-              </Route>
             </Route>
             <Route path="/*">
               <Redirect to="/" />
