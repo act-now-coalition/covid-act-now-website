@@ -21,6 +21,10 @@ const MobileMenu = ({
         <MapIcon color={palette.secondary.main} />
         <span>Map</span>
       </a>
+      <a onClick={goTo('/about')} href="/about">
+        <FAQIcon color={palette.secondary.main} />
+        <span>About</span>
+      </a>
       <a onClick={goTo('/faq')} href="/faq">
         <FAQIcon color={palette.secondary.main} />
         <span>FAQ</span>

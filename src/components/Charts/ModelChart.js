@@ -44,8 +44,7 @@ const ModelChart = ({
     [INTERVENTIONS.LIMITED_ACTION]: interventions.baseline,
     [INTERVENTIONS.SOCIAL_DISTANCING]:
       interventions.distancingPoorEnforcement.now,
-    [INTERVENTIONS.PROJECTED]:
-      interventions.projected,
+    [INTERVENTIONS.PROJECTED]: interventions.projected,
     [INTERVENTIONS.SHELTER_IN_PLACE]: interventions.distancing.now,
   };
   const hasProjections = !countyName;
@@ -61,13 +60,10 @@ const ModelChart = ({
     interventions.baseline.getDataset('hospitalizations', duration),
     interventions.distancingPoorEnforcement.now.getDataset(
       'hospitalizations',
-      duration
-    ),
-    interventions.projected.getDataset('hospitalizations', duration),
-    interventions.distancing.now.getDataset(
-      'hospitalizations',
       duration,
     ),
+    interventions.projected.getDataset('hospitalizations', duration),
+    interventions.distancing.now.getDataset('hospitalizations', duration),
     interventions.baseline.getDataset(
       'beds',
       duration,
@@ -169,7 +165,7 @@ const ModelChart = ({
   };
 
   const availableBeds = {
-    className : 'beds',
+    className: 'beds',
     name: 'Available hospital beds',
     type: 'spline',
     data: data[4].data,

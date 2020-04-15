@@ -1,6 +1,5 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import { TEAM } from './../../enums';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import ShareBlock from 'components/ShareBlock/ShareBlock';
 
@@ -9,262 +8,14 @@ import { Wrapper, Content } from './FAQ.style';
 const FAQ = ({ children }: { children: React.ReactNode }) => {
   return (
     <Wrapper>
-      <AppMetaTags
-        canonicalUrl="/faq"
-        pageTitle="FAQ"
-        pageDescription="Covid Act Now was started by four volunteers who saw the explosive and
+      <Content>
+        <AppMetaTags
+          canonicalUrl="/faq"
+          pageTitle="FAQ"
+          pageDescription="Covid Act Now was started by four volunteers who saw the explosive and
           deadly growth of COVID infections around the world and felt they had
           to do something."
-      />
-      <Content>
-        <Typography variant="h3" component="h1">
-          About Covid Act Now
-        </Typography>
-        <Typography variant="h5" component="h5">
-          What is Covid Act Now?
-        </Typography>
-        <Typography variant="body1" component="p">
-          Covid Act Now was started by four volunteers who saw the explosive and
-          deadly growth of COVID infections around the world and felt they had
-          to do something. The Covid Act Now team has partnered with some of
-          America’s preeminent epidemiologists and data scientists to develop
-          the U.S. Interventions Model.
-        </Typography>
-        <Typography variant="body1" component="p">
-          The U.S. Interventions Model is a data platform that projects COVID
-          infections, hospitalizations, and deaths across the United States, as
-          well as model how public health interventions contain the spread of
-          COVID. We help decision makers understand when and how COVID will
-          affect their communities in order to make better decisions that save
-          lives.
-        </Typography>
-        <Typography variant="body1" component="p">
-          Our U.S. Interventions Model is being used at every level of
-          government across the U.S., the military, private sector, and more.
-          The model has also been used by several countries around the world,
-          including India.
-        </Typography>
-
-        <Typography variant="h5" component="h5">
-          Who made Covid Act Now?
-        </Typography>
-        <Typography variant="body1" component="p">
-          Covid Act Now is a distributed team of volunteers working with some of
-          the nation’s preeminent epidemiologists and public health experts.
-          Covid Act Now was founded by{' '}
-          <a href="https://www.linkedin.com/in/maxhenderson/">Max Henderson</a>,{' '}
-          <a href="https://en.wikipedia.org/wiki/Jonathan_Kreiss-Tomkins">
-            Rep Jonathan Kreiss-Tomkins
-          </a>
-          , <a href="https://twitter.com/igorkofman">Igor Kofman</a>, and{' '}
-          <a href="https://www.linkedin.com/in/zacharyrosen/">Zack Rosen</a>,
-          with medical and policy guidance from{' '}
-          <a href="https://profiles.stanford.edu/nirav-shah">Dr. Nirav Shah</a>.
-        </Typography>
-        <Typography variant="body1" component="p">
-          We have since grown into a large distributed team:
-        </Typography>
-        <Typography>
-          <ul>
-            {TEAM.map(teammate => {
-              return (
-                <li>
-                  <a
-                    href={teammate.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {teammate.name}
-                  </a>
-                  {', '}
-                  {teammate.title}
-                </li>
-              );
-            })}
-          </ul>
-        </Typography>
-
-        <Typography variant="h5" component="h5">
-          Who supports, endorses or validates your work?
-        </Typography>
-        <Typography variant="body1" component="p">
-          Our work has been{' '}
-          <a
-            href="https://covidactnow.org/endorsements"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            validated and endorsed
-          </a>{' '}
-          by a number of experts in epidemiology, public health, and medicine.
-          We publish our COVID Modeling Values{' '}
-          <a
-            href="https://blog.covidactnow.org/covid-modeling-values/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            here
-          </a>
-          .
-        </Typography>
-
-        <Typography variant="h5" component="h5">
-          Why did we build it?
-        </Typography>
-
-        <Typography variant="body1" component="p">
-          We built covidactnow.org to{' '}
-          <a
-            href="https://medium.com/@tomaspueyo/coronavirus-act-today-or-people-will-die-f4d3d9cd99ca"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            solve an urgent problem:
-          </a>{' '}
-          If we try to fight COVID in the present we will lose. We can only beat
-          COVID by understanding what it will do in the future. Our leaders need
-          a forecasting tool to better understand the future spread of COVID. We
-          are building that tool.
-        </Typography>
-
-        <Typography variant="h5" component="h5">
-          Who are you collaborating with?
-        </Typography>
-
-        <Typography variant="body1" component="p">
-          We endorse{' '}
-          <a
-            href="https://safepaths.mit.edu"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Private Kit: Safe Paths
-          </a>
-          , a project developed by MIT, Mayo Clinic, WHO, and others. Private
-          Kit is a contact tracing app that notifies someone if they have come
-          in contact with someone who later tests positive for COVID while
-          protecting individual privacy.
-        </Typography>
-
-        <Typography variant="body1" component="p">
-          <ul>
-            <li>
-              Read{' '}
-              <a href="https://arxiv.org/pdf/2003.08567.pdf">
-                "Apps Gone Rogue: Maintaining Personal Privacy in an Epidemic"
-              </a>
-            </li>
-            <li>
-              Download the app on{' '}
-              <a
-                href="https://play.google.com/store/apps/details?id=edu.mit.privatekit"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Google Play
-              </a>{' '}
-              or{' '}
-              <a
-                href="https://apps.apple.com/us/app/private-kit/id1501903733"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Apple Store
-              </a>
-            </li>
-          </ul>
-        </Typography>
-
-        <Typography variant="h5" component="h5">
-          Can I contribute or help?
-        </Typography>
-        <Typography variant="body1" component="p">
-          Yes. To improve the tool, we need the help of:
-        </Typography>
-        <Typography>
-          <ul>
-            <li>JavaScript/React, Python engineers</li>
-            <li>Data Visualization Experts</li>
-            <li>UX Designer (Bonus if you write code!)</li>
-            <li>Epidimiologist / Modeler</li>
-            <li>Engineering Manager</li>
-          </ul>
-          Is this you?{' '}
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://docs.google.com/forms/d/e/1FAIpQLSfQkdwXsbDbwLHhWwBD6wzNiw54_0P6A60r8hujP3qnaxxFkA/viewform"
-          >
-            Let us know
-          </a>
-        </Typography>
-
-        <Typography variant="h5" component="h5">
-          How do I contact you?
-        </Typography>
-        <Typography>
-          <ul>
-            <li>
-              Are you in healthcare?{' '}
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="mailto:medical@covidactnow.org"
-              >
-                medical@covidactnow.org
-              </a>
-            </li>
-            <li>
-              Are you in government?{' '}
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="mailto:gov@covidactnow.org"
-              >
-                gov@covidactnow.org
-              </a>
-            </li>
-            <li>
-              Are you a journalist?{' '}
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="mailto:press@covidactnow.org"
-              >
-                press@covidactnow.org
-              </a>
-            </li>
-            <li>
-              Anyone and everything else:{' '}
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="mailto:info@covidactnow.org"
-              >
-                info@covidactnow.org
-              </a>
-            </li>
-            <li>
-              Do you want to contribute to Covid Act Now in other ways?{' '}
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://docs.google.com/forms/d/e/1FAIpQLSfQkdwXsbDbwLHhWwBD6wzNiw54_0P6A60r8hujP3qnaxxFkA/viewform"
-              >
-                Let us know
-              </a>
-            </li>
-          </ul>
-        </Typography>
-        <Typography variant="h5" component="h5">
-          Are you on social media?
-        </Typography>
-        <Typography>
-          Follow us on <a href="https://twitter.com/CovidActNow">Twitter</a>,{' '}
-          <a href="https://www.facebook.com/covidactnow">Facebook</a> or{' '}
-          <a href="https://www.instagram.com/covidactnow">Instagram</a>.
-        </Typography>
-
+        />
         <Typography variant="h3" component="h1">
           About the U.S. Interventions Model
         </Typography>
@@ -275,8 +26,40 @@ const FAQ = ({ children }: { children: React.ReactNode }) => {
         <Typography variant="body1" component="p">
           The U.S. Interventions Model is a data platform that projects COVID
           infections, hospitalizations, and deaths across the United States, as
-          well as model how public health interventions contain the spread of
-          COVID and save lives.
+          well as models how public health interventions contain the spread of
+          COVID and save lives. The U.S. Interventions Model is an SEIR model (a
+          type of epidemiological model).
+        </Typography>
+
+        <Typography variant="body1" component="p">
+          Wait, what’s an SEIR model?
+        </Typography>
+
+        <Typography variant="body1" component="p">
+          SEIR is a way of modeling infection diseases. Simply put, it
+          specifically models the flows of people between four states:
+          susceptible (S), exposed (E), infected (I), and resistant (R):
+        </Typography>
+
+        <Typography variant="body1" component="p">
+          Susceptible (S) → 𝛃 → Exposed (E) → 𝝨 → Infectious (I) → 𝚪 → Recovered
+          (R)
+        </Typography>
+
+        <Typography variant="body1" component="p">
+          Each of those variables represents the number of people in those
+          groups. The parameters beta (𝛃), sigma (𝝨), and gamma (𝚪) control how
+          fast people move from one state to another. Our model is significantly
+          more complicated than this, and even this might sound complicated, but
+          in a nutshell this is the modeling approach we use. Why did we choose
+          an SEIR approach? SEIR models are widely used by epidemiologists to
+          model disease outbreaks in both research and practical settings. Our
+          model is adapted from a model{' '}
+          <a href="https://alhill.shinyapps.io/COVID19seir/">
+            originally developed and built
+          </a>{' '}
+          by Dr. Alison Hill, a research fellow at Harvard’s Program for
+          Evolutionary Dynamics.
         </Typography>
 
         <Typography variant="h5" component="h5">
@@ -288,7 +71,7 @@ const FAQ = ({ children }: { children: React.ReactNode }) => {
             rel="noopener noreferrer"
             href="https://github.com/covid-projections/covid-data-model"
           >
-            Yes, the model is public
+            Yes! The model is public
           </a>
           .
         </Typography>
@@ -312,14 +95,8 @@ const FAQ = ({ children }: { children: React.ReactNode }) => {
           How often does the model update?
         </Typography>
         <Typography variant="body1" component="p">
-          The model updates every 24 hours.
-        </Typography>
-
-        <Typography variant="h5" component="h5">
-          When was the last update?
-        </Typography>
-        <Typography variant="body1" component="p">
-          See the "last updated" date stamp on the state page.
+          The model updates every 24 hours, and the “last updated” date stamp on
+          the state page will tell you specifically.
         </Typography>
 
         <Typography variant="h5" component="h5">
@@ -419,8 +196,38 @@ const FAQ = ({ children }: { children: React.ReactNode }) => {
           .
         </Typography>
 
+        <Typography variant="h5" component="h5">
+          How does the Covid Act Now model differ from IHME model?
+        </Typography>
+        <Typography variant="body1" component="p">
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://blog.covidactnow.org/covid-act-now-ihme-why-two-models-are-better-than-one/"
+          >
+            See our explanation of differences here
+          </a>
+          .
+        </Typography>
+
         <Typography variant="h3" component="h1">
           About COVID
+        </Typography>
+
+        <Typography variant="h5" component="h5">
+          What’s the status of COVID vaccine and therapeutic development?
+        </Typography>
+        <Typography variant="body1" component="p">
+          Artis Ventures has created{' '}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/symptoms.html"
+          >
+          an excellent dashboard
+          </a>
+          {' '}that gives a sense of what treatments and vaccines are being
+          researched and clinically trialed.
         </Typography>
 
         <Typography variant="h5" component="h5">

@@ -59,8 +59,9 @@ export class Projections {
       [INTERVENTIONS.SHELTER_IN_PLACE]: this.distancing.now,
     };
 
-    this.currentInterventionModel = this.hasProjections ? this.projected :
-      interventionModelMap[this.stateIntervention];
+    this.currentInterventionModel = this.hasProjections
+      ? this.projected
+      : interventionModelMap[this.stateIntervention];
 
     this.worstCaseInterventionModel =
       this.stateIntervention === INTERVENTIONS.SHELTER_IN_PLACE
@@ -195,12 +196,16 @@ export class Projections {
   getThresholdInterventionLevelForStayAtHome() {
     let color = COLOR_MAP.GREEN.BASE;
 
-    if (this.hasProjections ?  this.isProjectedOverwhelmedDateWithinThresholdWeeks() :
-      this.isSocialDistancingOverwhelmedDateWithinThresholdWeeks()) {
+    if (
+      this.hasProjections
+        ? this.isProjectedOverwhelmedDateWithinThresholdWeeks()
+        : this.isSocialDistancingOverwhelmedDateWithinThresholdWeeks()
+    ) {
       color = COLOR_MAP.ORANGE.BASE;
     }
 
-    if (this.hasProjections
+    if (
+      this.hasProjections
         ? this.isProjectedOverwhelmedDateWithinOneweek()
         : this.isSocialDistancingOverwhelmedDateWithinOneWeek()
     ) {
@@ -256,7 +261,7 @@ export class Projections {
       limitedActionSeries: this.getSeriesColorForLimitedAction(),
       socialDistancingSeries: this.getSeriesColorForSocialDistancing(),
       shelterInPlaceSeries: this.getSeriesColorForShelterInPlace(),
-      projectedSeries: COLOR_MAP.PURPLE
+      projectedSeries: COLOR_MAP.PURPLE,
     };
   }
 
@@ -350,17 +355,11 @@ export class Projections {
   }
 
   isProjectedOverwhelmedDateWithinThresholdWeeks() {
-    return !this.isOverwhelmedDateAfterNumberOfWeeks(
-      this.projected,
-      6,
-    );
+    return !this.isOverwhelmedDateAfterNumberOfWeeks(this.projected, 6);
   }
 
   isProjectedOverwhelmedDateWithinOneweek() {
-    return !this.isOverwhelmedDateAfterNumberOfWeeks(
-      this.projected,
-      3,
-    );
+    return !this.isOverwhelmedDateAfterNumberOfWeeks(this.projected, 3);
   }
 
   isSocialDistancingOverwhelmedDateWithinOneWeek() {
