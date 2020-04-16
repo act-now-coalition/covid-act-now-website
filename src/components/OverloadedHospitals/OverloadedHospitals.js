@@ -3,7 +3,10 @@ import _ from 'lodash';
 import moment from 'moment';
 import FIPS_TO_COUNTY from '../MapSelectors/datasets/fips_to_county';
 
-import { OverloadedHospitalsContainer } from './OverloadedHospitals.style';
+import {
+  OverloadedHospitalsContainer,
+  LinkButton,
+} from './OverloadedHospitals.style';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
 export default class OverloadedHospitals extends React.Component {
@@ -42,12 +45,6 @@ export default class OverloadedHospitals extends React.Component {
       this._asyncRequest.cancel();
     }
   }
-
-  seeMore = e => {
-    this.setState({ numCounties: this.state.numCounties + 10 });
-    e.preventDefault();
-    return false;
-  };
 
   render() {
     return (
@@ -96,9 +93,14 @@ export default class OverloadedHospitals extends React.Component {
         <p>
           Showing <strong>{this.state.numCounties} counties</strong>{' '}
           {this.state.numCounties < 100 && (
-            <a href="#" onClick={this.seeMore}>
+            <LinkButton
+              onClick={() =>
+                this.setState({ numCounties: this.state.numCounties + 10 })
+              }
+              style={{ marginLeft: '20px' }}
+            >
               See more
-            </a>
+            </LinkButton>
           )}
         </p>
       </OverloadedHospitalsContainer>

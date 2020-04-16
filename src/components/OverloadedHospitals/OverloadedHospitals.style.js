@@ -37,8 +37,21 @@ export const OverloadedHospitalsContainer = styled.div`
       }
     }
   }
+`;
 
-  > p a {
-    margin-left: 15px;
+export const LinkButton = styled.button`
+  font-size: 1rem;
+  color: #3bbce6;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  display: inline;
+  margin: 0;
+  padding: 0;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
   }
 `;
