@@ -32,7 +32,12 @@ const HomePageHeader = () => {
     <Wrapper>
       <Content>
         <HeaderTitle>
-          43,000 American Lives Saved <HighlightColor><a href="https://blog.covidactnow.org/early-action-saves-43000-lives/">and Counting.</a></HighlightColor>
+          43,000 American Lives Saved{' '}
+          <HighlightColor>
+            <a href="https://blog.covidactnow.org/early-action-saves-43000-lives/">
+              and Counting.
+            </a>
+          </HighlightColor>
         </HeaderTitle>
         <div>
           <HeaderSubCopy color="inherit" component="p" variant="subtitle2">
