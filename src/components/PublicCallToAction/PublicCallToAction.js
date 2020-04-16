@@ -1,15 +1,15 @@
 import * as React from 'react';
 import Typography from '@material-ui/core/Typography';
-import CheckIcon from '@material-ui/icons/Check';
-import ListIcon from '@material-ui/icons/List';
+// import CheckIcon from '@material-ui/icons/Check';
+// import ListIcon from '@material-ui/icons/List';
 
-import { STATES } from 'enums';
+// import { STATES } from 'enums';
 
 import ShareBlock from 'components/ShareBlock/ShareBlock';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import Newsletter from 'components/Newsletter/Newsletter';
 
-import Interventions from 'models/Interventions';
+// import Interventions from 'models/Interventions';
 
 import {
   IconWrapper,
@@ -21,17 +21,17 @@ import {
   PublicCallToActionContentContainer,
 } from './PublicCallToAction.style';
 
-import ProgressBar from './ProgressBar';
+// import ProgressBar from './ProgressBar';
 
 const PublicCallToAction = ({ county, location }) => {
-  const modelInterventions = new Interventions(
-    location && location.toUpperCase(),
-  );
+  // const modelInterventions = new Interventions(
+  //   location && location.toUpperCase(),
+  // );
 
-  const totalStatesStayAtHome = modelInterventions.getTotalStatesStayAtHome();
-  const totalStatesSchoolsClosed = modelInterventions.getTotalStatesWithClosedSchools();
-  const totalStatesSocialDistancing = modelInterventions.getTotalStatesSocialDistancing();
-  const totalStatesRestaurantsAndBarsClosed = modelInterventions.getTotalStatesWithClosedRestaurantsAndBars();
+  // const totalStatesStayAtHome = modelInterventions.getTotalStatesStayAtHome();
+  // const totalStatesSchoolsClosed = modelInterventions.getTotalStatesWithClosedSchools();
+  // const totalStatesSocialDistancing = modelInterventions.getTotalStatesSocialDistancing();
+  // const totalStatesRestaurantsAndBarsClosed = modelInterventions.getTotalStatesWithClosedRestaurantsAndBars();
 
   return (
     <PublicCallToActionContainer>
