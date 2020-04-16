@@ -382,7 +382,7 @@ const ModelChart = ({
                   .{' '}
                 </span>
               </LightTooltip>
-              This model updates every 24 hours and is intended to help make
+              This model updates every 3 days and is intended to help make
               fast decisions, not predict the future.{' '}
               <a
                 href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
