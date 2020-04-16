@@ -36,10 +36,10 @@ const PublicCallToAction = ({ county, location }) => {
   return (
     <PublicCallToActionContainer>
       {/* Column 1 */}
-      <PublicCallToActionColumn flexGrow={1}>
-        <PublicCallToActionHeader variant="h4">
-          How citizens can help
-        </PublicCallToActionHeader>
+      <PublicCallToActionHeader variant="h4">
+        How citizens can help
+      </PublicCallToActionHeader>
+      <PublicCallToActionColumn fullWidth flexGrow={1}>
         <ContentBlock number={1} header="Continue staying inside">
           {[
             'Only leave for essential activities',
@@ -57,7 +57,7 @@ const PublicCallToAction = ({ county, location }) => {
           {location ? (
             <ShareModelBlock condensed location={location} county={county} />
           ) : (
-            <ShareBlock />
+            <ShareBlock condensed />
           )}
         </ContentBlock>
         <ContentBlock number={3} header="Get the latest updates from us">
@@ -69,7 +69,8 @@ const PublicCallToAction = ({ county, location }) => {
         </ContentBlock>
       </PublicCallToActionColumn>
       {/* Column 2 */}
-      <PublicCallToActionColumn flexGrow={2}>
+      {/* TODO: Policy makers */}
+      {/* <PublicCallToActionColumn flexGrow={2}>
         <PublicCallToActionHeader variant="h4">
           How policy makers can help
         </PublicCallToActionHeader>
@@ -131,7 +132,7 @@ const PublicCallToAction = ({ county, location }) => {
             <ProgressBar {...props} total={50} entity="state" verb="adopted" />
           ))
         )}
-      </PublicCallToActionColumn>
+          </PublicCallToActionColumn>*/}
     </PublicCallToActionContainer>
   );
 };

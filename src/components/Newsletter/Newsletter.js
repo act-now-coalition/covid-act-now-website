@@ -67,7 +67,7 @@ class Newsletter extends React.Component {
             ref={i => (this.emailInput = i)}
             autoComplete="Email"
             aria-label="Email"
-            placeholder="Enter your email address"
+            placeholder="Your email address"
             className="js-cm-email-input qa-input-email"
             id="fieldEmail"
             maxLength="200"

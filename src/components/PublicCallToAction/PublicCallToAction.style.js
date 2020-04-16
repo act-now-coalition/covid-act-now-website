@@ -9,7 +9,7 @@ export const PublicCallToActionContainer = styled(Box)`
   justify-content: center;
 
   @media only screen and (min-width: 768px) {
-    flex-direction: row;
+    /* flex-direction: row; UNCOMMENT WHEN IMPLEMENTING POLICY COLUMN*/
     align-items: flex-start;
   }
 `;
@@ -17,21 +17,24 @@ export const PublicCallToActionContainer = styled(Box)`
 export const PublicCallToActionColumn = styled(Box)`
   display: flex;
   flex-direction: column;
-  padding: 1em;
 
   @media only screen and (min-width: 768px) {
-    max-width: 50%;
+    padding: 0.5rem;
+    max-width: ${props => (props.fullWidth ? '100%' : '50%')}%;
+    flex-direction: ${props => (props.fullWidth ? 'row' : 'column')};
   }
 `;
 
 export const PublicCallToActionHeader = styled(Typography)`
-  padding-bottom: 1rem;
+  padding-bottom: 0.5rem;
   font-weight: 800;
+  font-size: ${props => (props.variant === 'h4' ? '28px' : 'inherit')};
 `;
 
 export const PublicCallToActionContentBlock = styled(Box)`
   display: flex;
   text-align: left;
+  flex: 1;
   flex-direction: column;
   justify-content: flex-start;
   padding: 0.5rem;
@@ -61,7 +64,7 @@ export const ListIconNumber = styled(Box)`
   min-width: 1.8rem;
   margin: 0.7rem 0.5rem 0 0;
   border-radius: 2rem;
-  background-color: #4be6bf;
+  background-color: rgb(0, 208, 125);
   color: white;
   font-weight: 800;
 `;
