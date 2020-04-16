@@ -39,6 +39,7 @@ const ModelChart = ({
   interventions,
   currentIntervention,
   showDisclaimer,
+  forCompareModels, // true when used by CompareModels.js component.
 }) => {
   const interventionToModel = {
     [INTERVENTIONS.LIMITED_ACTION]: interventions.baseline,
@@ -93,6 +94,7 @@ const ModelChart = ({
     marker: {
       symbol: 'circle',
     },
+    visible: !forCompareModels,
     condensedLegend: {
       bgColor: interventions.getChartSeriesColorMap().limitedActionSeries,
     },
