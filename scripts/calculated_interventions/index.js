@@ -28,7 +28,7 @@ async function getStateAndCountyDataFiles(stateCode) {
 
     const stateSummaryData = await fetchJson(summaryFile);
 
-    await Promise.map(
+    await Promise.mapSeries(
       stateSummaryData.counties_with_data,
       async fipsCode => {
         const files = [
@@ -51,7 +51,6 @@ async function getStateAndCountyDataFiles(stateCode) {
           console.error(`Failed to get data for ${stateCode}.${fipsCode}`, err);
         }
       },
-      { concurrency: 100 },
     );
 
     return {
