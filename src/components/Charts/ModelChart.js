@@ -26,6 +26,16 @@ function dateIsPastHalfway(dateToCompare, dateArray, itemKey) {
   );
 }
 
+function getDateUpdated() {
+  const now = new Date();
+  const start = new Date(now.getFullYear(), 0, 0);
+  const diff = now - start;
+  const oneDay = 1000 * 60 * 60 * 24;
+  const dayOfYear = Math.floor(diff / oneDay);
+  const daysSinceUpdate = dayOfYear % 3;
+  return new Date(now - oneDay * daysSinceUpdate).toLocaleDateString();
+}
+
 const formatIntervention = (intervention, optCase) =>
   `3 months of ${intervention.toLowerCase()}${optCase || ''}`;
 
@@ -39,13 +49,13 @@ const ModelChart = ({
   interventions,
   currentIntervention,
   showDisclaimer,
+  forCompareModels, // true when used by CompareModels.js component.
 }) => {
   const interventionToModel = {
     [INTERVENTIONS.LIMITED_ACTION]: interventions.baseline,
     [INTERVENTIONS.SOCIAL_DISTANCING]:
       interventions.distancingPoorEnforcement.now,
-    [INTERVENTIONS.PROJECTED]:
-      interventions.projected,
+    [INTERVENTIONS.PROJECTED]: interventions.projected,
     [INTERVENTIONS.SHELTER_IN_PLACE]: interventions.distancing.now,
   };
   const hasProjections = !countyName;
@@ -61,13 +71,10 @@ const ModelChart = ({
     interventions.baseline.getDataset('hospitalizations', duration),
     interventions.distancingPoorEnforcement.now.getDataset(
       'hospitalizations',
-      duration
-    ),
-    interventions.projected.getDataset('hospitalizations', duration),
-    interventions.distancing.now.getDataset(
-      'hospitalizations',
       duration,
     ),
+    interventions.projected.getDataset('hospitalizations', duration),
+    interventions.distancing.now.getDataset('hospitalizations', duration),
     interventions.baseline.getDataset(
       'beds',
       duration,
@@ -97,6 +104,7 @@ const ModelChart = ({
     marker: {
       symbol: 'circle',
     },
+    visible: !forCompareModels,
     condensedLegend: {
       bgColor: interventions.getChartSeriesColorMap().limitedActionSeries,
     },
@@ -169,7 +177,7 @@ const ModelChart = ({
   };
 
   const availableBeds = {
-    className : 'beds',
+    className: 'beds',
     name: 'Available hospital beds',
     type: 'spline',
     data: data[4].data,
@@ -378,14 +386,11 @@ const ModelChart = ({
                 placement="bottom"
               >
                 <span>
-                  <strong>
-                    Last updated {new Date().toLocaleDateString()}
-                  </strong>
-                  .{' '}
+                  <strong>Last updated {getDateUpdated()}</strong>.{' '}
                 </span>
               </LightTooltip>
-              This model updates every 24 hours and is intended to help make
-              fast decisions, not predict the future.{' '}
+              This model updates every 3 days and is intended to help make fast
+              decisions, not predict the future.{' '}
               <a
                 href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
                 target="_blank"

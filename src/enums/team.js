@@ -15,21 +15,21 @@ export default [
     link: 'https://en.wikipedia.org/wiki/Jonathan_Kreiss-Tomkins',
   },
   {
-    name: 'Professor Rebecca Katz, PhD, MPH',
+    name: 'Professor Rebecca Katz',
     title:
-      'Director of the Center for Global Health Science and Security, Georgetown University',
+      'PhD, MPH, Director of the Center for Global Health Science and Security, Georgetown University',
     link: 'https://www.linkedin.com/in/rebecca-katz-43a04a5/',
   },
   {
-    name: 'Dr. Nirav Shah, MD, MPH',
+    name: 'Dr. Nirav Shah',
     title:
-      'Senior Scholar, Stanford University Clinical Excellence Research Center',
+      'MD, MPH, Senior Scholar, Stanford University Clinical Excellence Research Center',
     link: 'https://profiles.stanford.edu/nirav-shah',
   },
   {
-    name: 'Ellie Graeden, PhD',
+    name: 'Ellie Graeden',
     title:
-      'CEO, Talus Analytics; Affiliate and Adjunct, Georgetown University Center for Global Health Science and Security',
+      'PhD, CEO, Talus Analytics; Affiliate and Adjunct, Georgetown University Center for Global Health Science and Security',
     link: 'https://www.linkedin.com/in/egraeden/',
   },
   {

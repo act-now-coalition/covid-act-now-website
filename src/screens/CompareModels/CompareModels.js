@@ -334,6 +334,7 @@ function StateChart({ state, models }) {
         subtitle="Hospitalizations over time"
         interventions={models}
         currentIntervention={intervention}
+        forCompareModels={true}
       />
     </LazyLoad>
   );
