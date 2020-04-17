@@ -32,11 +32,17 @@ const HomePageHeader = () => {
     <Wrapper>
       <Content>
         <HeaderTitle>
-          Act now. <HighlightColor>Save lives.</HighlightColor>
+          43,000 American Lives Saved{' '}
+          <HighlightColor>
+            <a href="https://blog.covidactnow.org/early-action-saves-43000-lives/">
+              and Counting.
+            </a>
+          </HighlightColor>
         </HeaderTitle>
         <div>
           <HeaderSubCopy color="inherit" component="p" variant="subtitle2">
-            Understand when hospitals will likely become overloaded by COVID and
+            Staying home saves lives. Our projections show how COVID is
+            spreading in your area, when hospitals may become overloaded, and
             what you can do to stop it.
           </HeaderSubCopy>
 

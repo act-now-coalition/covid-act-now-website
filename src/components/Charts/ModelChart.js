@@ -26,6 +26,16 @@ function dateIsPastHalfway(dateToCompare, dateArray, itemKey) {
   );
 }
 
+function getDateUpdated() {
+  const now = new Date();
+  const start = new Date(now.getFullYear(), 0, 0);
+  const diff = now - start;
+  const oneDay = 1000 * 60 * 60 * 24;
+  const dayOfYear = Math.floor(diff / oneDay);
+  const daysSinceUpdate = dayOfYear % 3;
+  return new Date(now - oneDay * daysSinceUpdate).toLocaleDateString();
+}
+
 const formatIntervention = (intervention, optCase) =>
   `3 months of ${intervention.toLowerCase()}${optCase || ''}`;
 
@@ -376,14 +386,11 @@ const ModelChart = ({
                 placement="bottom"
               >
                 <span>
-                  <strong>
-                    Last updated {new Date().toLocaleDateString()}
-                  </strong>
-                  .{' '}
+                  <strong>Last updated {getDateUpdated()}</strong>.{' '}
                 </span>
               </LightTooltip>
-              This model updates every 24 hours and is intended to help make
-              fast decisions, not predict the future.{' '}
+              This model updates every 3 days and is intended to help make fast
+              decisions, not predict the future.{' '}
               <a
                 href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
                 target="_blank"

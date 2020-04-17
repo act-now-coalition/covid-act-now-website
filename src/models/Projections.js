@@ -166,16 +166,16 @@ export class Projections {
 
   getInterventionPredictionForShelterInPlace() {
     let predictionText =
-      'Things look good, keep it up! Assuming stay-at-home interventions remain in place, hospitals are not projected to become overloaded. Check back — projections update every 24 hours with the most recent data.';
+      'Things look good, keep it up! Assuming stay-at-home interventions remain in place, hospitals are not projected to become overloaded. Check back — projections update every 3 days with the most recent data.';
 
     if (this.getThresholdInterventionLevel() === COLOR_MAP.ORANGE.BASE) {
       predictionText =
-        'Things look okay. Assuming stay-at-home interventions remain in place, projections show low-to-moderate probability of hospital overload in the next two months. Check back — projections update every 24 hours with the most recent data.';
+        'Things look okay. Assuming stay-at-home interventions remain in place, projections show low-to-moderate probability of hospital overload in the next two months. Check back — projections update every 3 days with the most recent data.';
     }
 
     if (this.getThresholdInterventionLevel() === COLOR_MAP.RED.BASE) {
       predictionText =
-        'Be careful. Even with stay-at-home interventions in place, our projections show risk of hospital overload in your area. More action is needed to help flatten the curve. Check back — projections update every 24 hours with the most recent data.';
+        'Be careful. Even with stay-at-home interventions in place, our projections show risk of hospital overload in your area. More action is needed to help flatten the curve. Check back — projections update every 3 days with the most recent data.';
     }
 
     return <HeaderSubCopy>{predictionText}</HeaderSubCopy>;

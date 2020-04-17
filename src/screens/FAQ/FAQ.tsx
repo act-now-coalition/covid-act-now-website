@@ -95,7 +95,7 @@ const FAQ = ({ children }: { children: React.ReactNode }) => {
           How often does the model update?
         </Typography>
         <Typography variant="body1" component="p">
-          The model updates every 24 hours, and the “last updated” date stamp on
+          The model updates every 3 days, and the “last updated” date stamp on
           the state page will tell you specifically.
         </Typography>
 
