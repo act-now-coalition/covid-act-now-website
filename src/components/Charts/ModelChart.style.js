@@ -1,35 +1,49 @@
 import styled from 'styled-components';
 import { INTERVENTIONS, COLORS } from 'enums';
+import palette from 'assets/theme/palette';
 import { snakeCase } from 'lodash';
 import { colors } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 import { COLOR_MAP } from '../../enums/interventions';
 
 export const ChartContainer = styled.section`
   width: 100%;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+`;
+
+export const DisclaimerWrapper = styled.div`
+  display: flex;
+  margin: 0 -0.75rem;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    margin: 0;
+  }
 `;
 
 export const Disclaimer = styled.div`
-  background: ${COLORS.LIGHTGRAY};
-  margin: 2rem;
-  padding: 1rem;
+  background: ${palette.white};
+  border: 1px solid ${palette.divider};
+  padding: 1.5rem;
   border-radius: 4px;
-  color: rgba(0, 0, 0, 0.7);
+  margin: 0 0.75rem 1.5rem;
+  padding: 1rem;
+  flex: 1;
 
-  @media (min-width: 900px) {
-    text-align: center;
-    margin: 0 0 2rem 0;
-  }
-
-  @media (min-width: 600px) {
-    text-align: center;
+  @media (max-width: 600px) {
+    margin: 0 1rem 1.5rem;
   }
 `;
 
-export const DisclaimerContent = styled.div`
-  max-width: 620px;
-  margin: auto;
+export const DisclaimerHeader = styled(Typography)`
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.6rem;
+  color: ${palette.black};
 `;
+
+export const DisclaimerBody = styled(Typography)``;
 
 export const Wrapper = styled.div`
   max-width: 900px;

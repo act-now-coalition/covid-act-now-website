@@ -7,7 +7,7 @@ import Endorsements from 'screens/Endorsements/Endorsements';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import ShareBlock from 'components/ShareBlock/ShareBlock';
 
-import { Wrapper, Content, MapTitle, MapTitleDivider } from './HomePage.style';
+import { Wrapper, Content } from './HomePage.style';
 
 export default function HomePage() {
   return (
@@ -21,18 +21,10 @@ export default function HomePage() {
       <main>
         <div className="App">
           <Content>
-            <MapTitle>
-              <MapTitleDivider>
-                <div></div>
-                <span>Or</span>
-                <div></div>
-              </MapTitleDivider>
-              <p>Select your state below to see detailed projections</p>
-            </MapTitle>
             <Map />
             <div
               style={{
-                padding: '1.5rem',
+                padding: '0 1.5rem',
               }}
             >
               <ShareBlock />
@@ -45,7 +37,7 @@ export default function HomePage() {
           <Typography variant="h3" component="h3" style={{ marginBottom: 20 }}>
             Endorsements
           </Typography>
-          <Endorsements />
+          <Endorsements social={false} />
         </Content>
       </Wrapper>
     </>

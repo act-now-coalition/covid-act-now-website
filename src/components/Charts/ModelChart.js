@@ -4,15 +4,16 @@ import moment from 'moment';
 import { snakeCase } from 'lodash';
 import { INTERVENTIONS } from 'enums';
 import LightTooltip from 'components/LightTooltip/LightTooltip';
+import ClaimStateBlock from 'components/ClaimStateBlock/ClaimStateBlock';
 import Chart from './Chart';
-import { Typography } from '@material-ui/core';
-import { useEmbed } from 'utils/hooks';
 
 import {
   ChartContainer,
   Wrapper,
+  DisclaimerWrapper,
   Disclaimer,
-  DisclaimerContent,
+  DisclaimerHeader,
+  DisclaimerBody,
   CondensedLegendStyled,
   CondensedLegendItemStyled,
 } from './ModelChart.style';
@@ -40,6 +41,8 @@ const ModelChart = ({
   currentIntervention,
   lastUpdatedDate,
   forCompareModels, // true when used by CompareModels.js component.
+  location,
+  selectedCounty,
 }) => {
   const interventionToModel = {
     [INTERVENTIONS.LIMITED_ACTION]: interventions.baseline,
@@ -49,7 +52,6 @@ const ModelChart = ({
     [INTERVENTIONS.SHELTER_IN_PLACE]: interventions.distancing.now,
   };
   const hasProjections = interventions.hasProjections;
-  const { isEmbed } = useEmbed();
 
   let model = interventionToModel[currentIntervention];
   if (hasProjections) {
@@ -350,40 +352,19 @@ const ModelChart = ({
         }
       >
         <Chart options={options} />
-        {interventions.isCounty && !isEmbed ? (
-          <Disclaimer
-            style={{ border: '2px solid #00d07d', background: 'white' }}
-          >
-            <DisclaimerContent>
-              <b>County data is currently in beta.</b> See something wrong?{' '}
-              <a
-                href="https://forms.gle/NPsLcFnrvfS1kqkn9"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Please let us know.
-              </a>
-            </DisclaimerContent>
-          </Disclaimer>
-        ) : (
-          <Typography></Typography>
-        )}
-        {lastUpdatedDate && (
+        <DisclaimerWrapper>
           <Disclaimer>
-            <DisclaimerContent>
+            <DisclaimerHeader>
               <LightTooltip
                 title="Currently we aggregate data over 4 day intervals to smooth out inconsistencies in the source data. We’re working on improving this now."
                 placement="bottom"
               >
-                <span>
-                  <strong>
-                    Last updated {lastUpdatedDate.toLocaleDateString()}
-                  </strong>
-                  .{' '}
-                </span>
+                <span>Last updated {getDateUpdated()}</span>
               </LightTooltip>
-              This model updates every 3 days and is intended to help make fast
-              decisions, not predict the future.{' '}
+            </DisclaimerHeader>
+            <DisclaimerBody>
+              This model updates every 3 days and is intended to help make
+              fast decisions, not predict the future.{' '}
               <a
                 href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
                 target="_blank"
@@ -392,9 +373,12 @@ const ModelChart = ({
                 Learn more about our model and its limitations
               </a>
               .
-            </DisclaimerContent>
+            </DisclaimerBody>
           </Disclaimer>
-        )}
+          <Disclaimer>
+            <ClaimStateBlock location={location} county={selectedCounty} />
+          </Disclaimer>
+        </DisclaimerWrapper>
       </Wrapper>
     </ChartContainer>
   );
