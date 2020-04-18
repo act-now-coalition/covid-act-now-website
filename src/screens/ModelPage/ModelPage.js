@@ -135,7 +135,6 @@ function ModelPage() {
             {interventions && (
               <Panel>
                 <ModelChart
-                  isCounty={countyName != null}
                   interventions={interventions}
                   currentIntervention={intervention}
                   showDisclaimer={true}

@@ -329,7 +329,6 @@ function StateChart({ state, models }) {
     // Chart height is 600px; we pre-load when a chart is within 1200px of view.
     <LazyLoad height={600} offset={1200}>
       <ModelChart
-        isCounty={false}
         subtitle="Hospitalizations over time"
         interventions={models}
         currentIntervention={intervention}

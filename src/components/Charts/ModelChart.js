@@ -46,7 +46,6 @@ const condensedFormatIntervention = (intervention, optCase) =>
 const ModelChart = ({
   height,
   condensed,
-  isCounty,
   interventions,
   currentIntervention,
   showDisclaimer,
@@ -59,7 +58,7 @@ const ModelChart = ({
     [INTERVENTIONS.PROJECTED]: interventions.projected,
     [INTERVENTIONS.SHELTER_IN_PLACE]: interventions.distancing.now,
   };
-  const hasProjections = !isCounty;
+  const hasProjections = interventions.hasProjections;
   const { isEmbed } = useEmbed();
 
   let model = interventionToModel[currentIntervention];
@@ -361,7 +360,7 @@ const ModelChart = ({
         }
       >
         <Chart options={options} />
-        {isCounty && !isEmbed ? (
+        {interventions.isCounty && !isEmbed ? (
           <Disclaimer
             style={{ border: '2px solid #00d07d', background: 'white' }}
           >
