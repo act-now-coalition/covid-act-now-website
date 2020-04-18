@@ -132,8 +132,6 @@ export default function Embed() {
           />
         ) : (
           <ChartsTab
-            state={STATES[location]}
-            county={null}
             interventions={interventions}
             currentIntervention={intervention}
           />

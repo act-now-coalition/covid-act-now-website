@@ -6,6 +6,7 @@ import { INTERVENTIONS } from 'enums';
 import LightTooltip from 'components/LightTooltip/LightTooltip';
 import Chart from './Chart';
 import { Typography } from '@material-ui/core';
+import { useEmbed } from 'utils/hooks';
 
 import {
   ChartContainer,
@@ -45,7 +46,6 @@ const condensedFormatIntervention = (intervention, optCase) =>
 const ModelChart = ({
   height,
   condensed,
-  countyName,
   interventions,
   currentIntervention,
   showDisclaimer,
@@ -58,7 +58,8 @@ const ModelChart = ({
     [INTERVENTIONS.PROJECTED]: interventions.projected,
     [INTERVENTIONS.SHELTER_IN_PLACE]: interventions.distancing.now,
   };
-  const hasProjections = !countyName;
+  const hasProjections = interventions.hasProjections;
+  const { isEmbed } = useEmbed();
 
   let model = interventionToModel[currentIntervention];
   if (hasProjections) {
@@ -198,7 +199,6 @@ const ModelChart = ({
         spacing: [8, 0, condensed ? 12 : 32, 0],
       },
       title: {
-        // text: county ? `${county.county}, ${state}` : state,
         text: undefined,
       },
       subtitle: {
@@ -360,7 +360,7 @@ const ModelChart = ({
         }
       >
         <Chart options={options} />
-        {countyName ? (
+        {interventions.isCounty && !isEmbed ? (
           <Disclaimer
             style={{ border: '2px solid #00d07d', background: 'white' }}
           >

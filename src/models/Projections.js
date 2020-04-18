@@ -22,7 +22,8 @@ export class Projections {
     this.distancing = null;
     this.distancingPoorEnforcement = null;
     this.currentInterventionModel = null;
-    this.hasProjections = county == null;
+    this.isCounty = county != null;
+    this.hasProjections = !this.isCounty;
 
     this.populateInterventions(props);
     this.populateCurrentIntervention();
