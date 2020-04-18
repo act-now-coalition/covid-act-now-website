@@ -51,6 +51,7 @@ const Footer = ({ children }: { children: React.ReactNode }) => {
             <Logo />
             <StyledFooterBodyNav>
               <span onClick={() => goTo('/')}>Map</span>
+              <span onClick={() => goTo('/about')}>About</span>
               <span onClick={() => goTo('/faq')}>FAQ</span>
               <span onClick={() => goTo('/endorsements')}>Endorsements</span>
               <span
