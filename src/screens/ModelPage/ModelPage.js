@@ -35,12 +35,13 @@ import {
   ChartHeader,
 } from './ModelPage.style';
 import { STATES, STATE_TO_INTERVENTION, INTERVENTIONS } from 'enums';
-import { useModelDatas } from 'utils/model';
+import { useModelDatas, useModelLastUpdatedDate } from 'utils/model';
 
 function ModelPage() {
   const { id: location, countyId } = useParams();
   const _location = location.toUpperCase();
 
+  const modelLastUpdatedDate = useModelLastUpdatedDate();
   const [mapOption, setMapOption] = useState(
     _location === MAP_FILTERS.DC ? MAP_FILTERS.NATIONAL : MAP_FILTERS.STATE,
   );
@@ -63,7 +64,6 @@ function ModelPage() {
   const modelDatasMap = useModelDatas(_location, selectedCounty);
 
   const locationName = STATES[_location];
-  let countyName = selectedCounty ? selectedCounty.county : null;
 
   const intervention = STATE_TO_INTERVENTION[_location];
 
@@ -135,10 +135,9 @@ function ModelPage() {
             {interventions && (
               <Panel>
                 <ModelChart
-                  countyName={countyName}
                   interventions={interventions}
                   currentIntervention={intervention}
-                  showDisclaimer={true}
+                  lastUpdatedDate={modelLastUpdatedDate}
                   dateOverwhelmed={interventions.baseline.dateOverwhelmed}
                 />
                 <Content>

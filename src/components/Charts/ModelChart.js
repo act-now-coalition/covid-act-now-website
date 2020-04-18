@@ -6,6 +6,7 @@ import { INTERVENTIONS } from 'enums';
 import LightTooltip from 'components/LightTooltip/LightTooltip';
 import Chart from './Chart';
 import { Typography } from '@material-ui/core';
+import { useEmbed } from 'utils/hooks';
 
 import {
   ChartContainer,
@@ -26,16 +27,6 @@ function dateIsPastHalfway(dateToCompare, dateArray, itemKey) {
   );
 }
 
-function getDateUpdated() {
-  const now = new Date();
-  const start = new Date(now.getFullYear(), 0, 0);
-  const diff = now - start;
-  const oneDay = 1000 * 60 * 60 * 24;
-  const dayOfYear = Math.floor(diff / oneDay);
-  const daysSinceUpdate = dayOfYear % 3;
-  return new Date(now - oneDay * daysSinceUpdate).toLocaleDateString();
-}
-
 const formatIntervention = (intervention, optCase) =>
   `3 months of ${intervention.toLowerCase()}${optCase || ''}`;
 
@@ -45,10 +36,9 @@ const condensedFormatIntervention = (intervention, optCase) =>
 const ModelChart = ({
   height,
   condensed,
-  countyName,
   interventions,
   currentIntervention,
-  showDisclaimer,
+  lastUpdatedDate,
   forCompareModels, // true when used by CompareModels.js component.
 }) => {
   const interventionToModel = {
@@ -58,7 +48,8 @@ const ModelChart = ({
     [INTERVENTIONS.PROJECTED]: interventions.projected,
     [INTERVENTIONS.SHELTER_IN_PLACE]: interventions.distancing.now,
   };
-  const hasProjections = !countyName;
+  const hasProjections = interventions.hasProjections;
+  const { isEmbed } = useEmbed();
 
   let model = interventionToModel[currentIntervention];
   if (hasProjections) {
@@ -198,7 +189,6 @@ const ModelChart = ({
         spacing: [8, 0, condensed ? 12 : 32, 0],
       },
       title: {
-        // text: county ? `${county.county}, ${state}` : state,
         text: undefined,
       },
       subtitle: {
@@ -360,7 +350,7 @@ const ModelChart = ({
         }
       >
         <Chart options={options} />
-        {countyName ? (
+        {interventions.isCounty && !isEmbed ? (
           <Disclaimer
             style={{ border: '2px solid #00d07d', background: 'white' }}
           >
@@ -378,7 +368,7 @@ const ModelChart = ({
         ) : (
           <Typography></Typography>
         )}
-        {showDisclaimer && (
+        {lastUpdatedDate && (
           <Disclaimer>
             <DisclaimerContent>
               <LightTooltip
@@ -386,7 +376,10 @@ const ModelChart = ({
                 placement="bottom"
               >
                 <span>
-                  <strong>Last updated {getDateUpdated()}</strong>.{' '}
+                  <strong>
+                    Last updated {lastUpdatedDate.toLocaleDateString()}
+                  </strong>
+                  .{' '}
                 </span>
               </LightTooltip>
               This model updates every 3 days and is intended to help make fast
