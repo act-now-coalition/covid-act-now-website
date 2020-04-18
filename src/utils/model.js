@@ -193,3 +193,15 @@ export function useAllStateModelDatas(dataUrl = null) {
 
   return stateModels;
 }
+
+export function useModelLastUpdatedDate() {
+  const [lastUpdated, setLastUpdated] = useState(null);
+  const versionUrl = `${DATA_URL}/version.json`;
+  useEffect(() => {
+    fetch(versionUrl)
+      .then(data => data.json())
+      .then(version => setLastUpdated(new Date(version.timestamp)));
+  }, [versionUrl]);
+
+  return lastUpdated;
+}
