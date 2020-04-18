@@ -63,7 +63,6 @@ function ModelPage() {
   const modelDatasMap = useModelDatas(_location, selectedCounty);
 
   const locationName = STATES[_location];
-  let countyName = selectedCounty ? selectedCounty.county : null;
 
   const intervention = STATE_TO_INTERVENTION[_location];
 
