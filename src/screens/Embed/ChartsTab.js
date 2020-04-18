@@ -6,7 +6,7 @@ import { EmbedChartContainer } from './Embed.style';
 
 export default function ChartsTab({
   state,
-  county,
+  isCounty,
   interventions,
   currentIntervention,
 }) {
@@ -14,9 +14,8 @@ export default function ChartsTab({
     <EmbedChartContainer>
       <ModelChart
         condensed
-        state={state}
         height={290}
-        county={county}
+        isCounty={isCounty}
         subtitle="Hospitalizations over time"
         interventions={interventions}
         currentIntervention={currentIntervention}
