@@ -140,7 +140,7 @@ const ModelChart = ({
   const projected = {
     className: 'projected',
     name: 'Projected based on current trends',
-    type: 'areaspline',
+    type: 'spline',
     data: data[2].data,
     marker: {
       symbol: 'circle',

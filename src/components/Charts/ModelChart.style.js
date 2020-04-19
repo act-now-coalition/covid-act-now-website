@@ -14,7 +14,7 @@ export const DisclaimerWrapper = styled.div`
   display: flex;
   margin: 0 -0.75rem;
 
-  @media (max-width: 600px) {
+  @media (max-width: 900px) {
     flex-direction: column;
     margin: 0;
   }
@@ -29,7 +29,7 @@ export const Disclaimer = styled.div`
   padding: 1rem;
   flex: 1;
 
-  @media (max-width: 600px) {
+  @media (max-width: 900px) {
     margin: 0 1rem 1.5rem;
   }
 `;
@@ -135,13 +135,6 @@ export const Wrapper = styled.div`
         : 'white'};
     fill-opacity: 1;
   }
-  /* Projected */
-  .projected {
-    fill: ${props =>
-      props.interventions.getChartSeriesColorMap().projectedSeries};
-    stroke: white;
-    fill-opacity: 1;
-  }
   /* Stay at home */
   .stay-at-home {
     fill: ${props =>
@@ -165,6 +158,11 @@ export const Wrapper = styled.div`
   .highcharts-plot-line {
     stroke: #ff3348;
     stroke-width: 3px;
+  }
+  /* Projected */
+  .projected {
+    stroke: ${props =>
+      props.interventions.getChartSeriesColorMap().projectedSeries};
   }
   .${snakeCase(INTERVENTIONS.LIMITED_ACTION)} {
     stroke: ${props => props.interventions.getThresholdInterventionLevel()};

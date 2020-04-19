@@ -6,7 +6,7 @@ import EndorsementCard from 'components/EndorsementCard/EndorsementCard';
 import { ENDORSERS } from 'enums';
 import { Content, EndorsersWrapper, Wrapper } from './Endorsements.style';
 
-const Endorsements = ({ social }) => {
+const Endorsements = ({ hideSocial }) => {
   return (
     <Wrapper>
       <Content>
@@ -22,7 +22,7 @@ const Endorsements = ({ social }) => {
             </Grid>
           ))}
         </EndorsersWrapper>
-        {social && <ShareBlock />}
+        {!hideSocial && <ShareBlock />}
       </Content>
     </Wrapper>
   );

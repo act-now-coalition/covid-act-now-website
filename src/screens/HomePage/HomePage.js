@@ -37,7 +37,7 @@ export default function HomePage() {
           <Typography variant="h3" component="h3" style={{ marginBottom: 20 }}>
             Endorsements
           </Typography>
-          <Endorsements social={false} />
+          <Endorsements hideSocial={true} />
         </Content>
       </Wrapper>
     </>
