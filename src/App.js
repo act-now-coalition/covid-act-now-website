@@ -8,6 +8,7 @@ import HomePage from 'screens/HomePage/HomePage';
 import About from 'screens/About/About';
 // import ComingSoon from 'screens/ComingSoon/ComingSoon';
 import FAQ from 'screens/FAQ/FAQ';
+import Government from 'screens/Government/Government';
 import Terms from 'screens/Terms/Terms';
 import Privacy from 'screens/Terms/Privacy';
 import EndorsementsPage from 'screens/Endorsements/EndorsementsPage';
@@ -43,6 +44,7 @@ export default function App() {
 
             <Route path="/about" component={About} />
             <Route path="/faq" component={FAQ} />
+            <Route path="/government" component={Government} />
             <Route path="/endorsements" component={EndorsementsPage} />
             <Route path="/terms" component={Terms} />
             <Route path="/privacy" component={Privacy} />

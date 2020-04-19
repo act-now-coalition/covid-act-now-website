@@ -31,7 +31,7 @@ import { STATES } from 'enums';
 import { Location } from 'history';
 import US_STATE_DATASET from '../MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 
-const Panels = ['/', '/about', '/faq', '/endorsements', '/contact', '/blog'];
+const Panels = ['/', '/about', '/faq', '/government', '/endorsements', '/contact', '/blog'];
 
 function getPanelIdxFromLocation(location: Location<any>) {
   let idx = Panels.indexOf(location.pathname);
@@ -165,14 +165,20 @@ const _AppBar = () => {
               onClick={goTo('/faq')}
             />
             <StyledTab
-              label="Endorsements"
+              label="Government"
               value={3}
+              disableRipple
+              onClick={goTo('/government')}
+            />
+            <StyledTab
+              label="Endorsements"
+              value={4}
               disableRipple
               onClick={goTo('/endorsements')}
             />
             <StyledTab
               label="Blog"
-              value={4}
+              value={5}
               disableRipple
               onClick={forwardTo('https://blog.covidactnow.org')}
             />

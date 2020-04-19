@@ -1,12 +1,20 @@
+
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { TEAM } from './../../enums';
 
-import { Wrapper, Content, Logo } from './About.style';
+import { Wrapper, Content, TextContent, Header } from './About.style';
 
 const About = ({ children }: { children: React.ReactNode }) => {
   return (
     <Wrapper>
+      <Header>
+        <Content>
+          <Typography variant="h3" component="h1">
+            About Covid Act Now
+          </Typography>
+        </Content>
+      </Header>
       <Content>
         <Typography variant="h3" component="h1">
           About Covid Act Now
@@ -106,7 +114,6 @@ const About = ({ children }: { children: React.ReactNode }) => {
           </a>
           .
         </Typography>
-
         <Typography variant="h5" component="h5">
           Why did we build it?
         </Typography>

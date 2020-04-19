@@ -59,9 +59,9 @@ const typographyOptions: TypographyOptions = {
   },
   body1: {
     color: palette.text.primary,
-    fontSize: '0.9rem',
+    fontSize: '1rem',
     letterSpacing: '-0.05px',
-    lineHeight: '21px',
+    lineHeight: '1.6',
   },
   body2: {
     color: palette.text.secondary,
