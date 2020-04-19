@@ -28,16 +28,6 @@ function dateIsPastHalfway(dateToCompare, dateArray, itemKey) {
   );
 }
 
-function getDateUpdated() {
-  const now = new Date();
-  const start = new Date(now.getFullYear(), 0, 0);
-  const diff = now - start;
-  const oneDay = 1000 * 60 * 60 * 24;
-  const dayOfYear = Math.floor(diff / oneDay);
-  const daysSinceUpdate = dayOfYear % 3;
-  return new Date(now - oneDay * daysSinceUpdate).toLocaleDateString();
-}
-
 const formatIntervention = (intervention, optCase) =>
   `3 months of ${intervention.toLowerCase()}${optCase || ''}`;
 
@@ -369,7 +359,7 @@ const ModelChart = ({
                 title="Currently we aggregate data over 4 day intervals to smooth out inconsistencies in the source data. We’re working on improving this now."
                 placement="bottom"
               >
-                <span>Last updated {getDateUpdated()}</span>
+                <span>Last updated {lastUpdatedDate.toLocaleDateString()}</span>
               </LightTooltip>
             </DisclaimerHeader>
             <DisclaimerBody>
