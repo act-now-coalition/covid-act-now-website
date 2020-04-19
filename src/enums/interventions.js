@@ -25,7 +25,7 @@ export const INTERVENTION_EFFICACY_ORDER_ASC = [
 
 export const INTERVENTION_DESCRIPTIONS = {
   [LIMITED_ACTION]:
-    'Government encouragement to “socially distance” and improve hygiene. Little or no .',
+    'Public advocacy around “social distancing” and enhanced hygiene. Minimal mandated restrictions.',
   [SOCIAL_DISTANCING]:
     'Voluntary “stay at home” guidance, especially for high-risk populations. Schools, bars, and restaurants closed.',
   [SHELTER_IN_PLACE]:
