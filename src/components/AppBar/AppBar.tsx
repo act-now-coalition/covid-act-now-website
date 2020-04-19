@@ -31,7 +31,15 @@ import { STATES } from 'enums';
 import { Location } from 'history';
 import US_STATE_DATASET from '../MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 
-const Panels = ['/', '/about', '/faq', '/government', '/endorsements', '/contact', '/blog'];
+const Panels = [
+  '/',
+  '/about',
+  '/faq',
+  '/government',
+  '/endorsements',
+  '/contact',
+  '/blog',
+];
 
 function getPanelIdxFromLocation(location: Location<any>) {
   let idx = Panels.indexOf(location.pathname);

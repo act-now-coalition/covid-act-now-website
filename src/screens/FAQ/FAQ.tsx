@@ -10,9 +10,9 @@ const FAQ = ({ children }: { children: React.ReactNode }) => {
     <Wrapper>
       <Header>
         <Content>
-        <Typography variant="h3" component="h1">
-          About the U.S. Interventions Model
-        </Typography>
+          <Typography variant="h3" component="h1">
+            About the U.S. Interventions Model
+          </Typography>
         </Content>
       </Header>
       <Content>
@@ -25,16 +25,15 @@ const FAQ = ({ children }: { children: React.ReactNode }) => {
             to do something."
           />
 
-
           <Typography variant="h5" component="h5">
             What is the U.S. Interventions Model?
           </Typography>
           <Typography variant="body1" component="p">
             The U.S. Interventions Model is a data platform that projects COVID
-            infections, hospitalizations, and deaths across the United States, as
-            well as models how public health interventions contain the spread of
-            COVID and save lives. The U.S. Interventions Model is an SEIR model (a
-            type of epidemiological model).
+            infections, hospitalizations, and deaths across the United States,
+            as well as models how public health interventions contain the spread
+            of COVID and save lives. The U.S. Interventions Model is an SEIR
+            model (a type of epidemiological model).
           </Typography>
 
           <Typography variant="h5" component="h5">
@@ -48,19 +47,19 @@ const FAQ = ({ children }: { children: React.ReactNode }) => {
           </Typography>
 
           <Typography variant="body1" component="p">
-            Susceptible (S) → 𝛃 → Exposed (E) → 𝝨 → Infectious (I) → 𝚪 → Recovered
-            (R)
+            Susceptible (S) → 𝛃 → Exposed (E) → 𝝨 → Infectious (I) → 𝚪 →
+            Recovered (R)
           </Typography>
 
           <Typography variant="body1" component="p">
             Each of those variables represents the number of people in those
-            groups. The parameters beta (𝛃), sigma (𝝨), and gamma (𝚪) control how
-            fast people move from one state to another. Our model is significantly
-            more complicated than this, and even this might sound complicated, but
-            in a nutshell this is the modeling approach we use. Why did we choose
-            an SEIR approach? SEIR models are widely used by epidemiologists to
-            model disease outbreaks in both research and practical settings. Our
-            model is adapted from a model{' '}
+            groups. The parameters beta (𝛃), sigma (𝝨), and gamma (𝚪) control
+            how fast people move from one state to another. Our model is
+            significantly more complicated than this, and even this might sound
+            complicated, but in a nutshell this is the modeling approach we use.
+            Why did we choose an SEIR approach? SEIR models are widely used by
+            epidemiologists to model disease outbreaks in both research and
+            practical settings. Our model is adapted from a model{' '}
             <a href="https://alhill.shinyapps.io/COVID19seir/">
               originally developed and built
             </a>{' '}
@@ -123,21 +122,21 @@ const FAQ = ({ children }: { children: React.ReactNode }) => {
                   R0 is a fundamental epidemiological metric
                 </a>
                 ) for interventions are guesses, in some cases informed by data.
-                There is no historical precedent for what is going on right now to
-                draw from.
+                There is no historical precedent for what is going on right now
+                to draw from.
               </li>
               <li>
                 The default R0 used in this model is an average. The model does
                 not adjust for the population density, culturally-determined
-                interaction frequency and closeness, humidity, etc. in calculating
-                R0.
+                interaction frequency and closeness, humidity, etc. in
+                calculating R0.
               </li>
               <li>
                 This is not a node-based analysis and thus assumes everyone
-                spreads the disease at the same rate. In practice, there are some
-                folks who are “super-spreaders,” and others who are almost
-                isolated. Interventions should be targeted primarily at those most
-                likely to spread the disease.
+                spreads the disease at the same rate. In practice, there are
+                some folks who are “super-spreaders,” and others who are almost
+                isolated. Interventions should be targeted primarily at those
+                most likely to spread the disease.
               </li>
               <li>
                 Only hospital beds in aggregate are considered. ICU beds and
@@ -152,10 +151,10 @@ const FAQ = ({ children }: { children: React.ReactNode }) => {
 
               <li>
                 In containment cases, we do not consider the longer-term impacts
-                of maintaining containment; primarily, the reintroduction of COVID
-                through travel. 14-day mandatory border quarantines, such as those
-                currently in place in China, would likely need to be implemented
-                until a vaccine or therapeutic is developed.
+                of maintaining containment; primarily, the reintroduction of
+                COVID through travel. 14-day mandatory border quarantines, such
+                as those currently in place in China, would likely need to be
+                implemented until a vaccine or therapeutic is developed.
               </li>
             </ul>
           </Typography>
@@ -175,8 +174,8 @@ const FAQ = ({ children }: { children: React.ReactNode }) => {
               Model Reference and Assumptions
             </a>{' '}
             document. The epidemiological assumptions how these various
-            interventions curb the curve of COVID infections is informed by recent
-            research from Europe, and most notably from{' '}
+            interventions curb the curve of COVID infections is informed by
+            recent research from Europe, and most notably from{' '}
             <a
               target="_blank"
               rel="noopener noreferrer"
