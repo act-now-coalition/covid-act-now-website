@@ -3,8 +3,12 @@ import styled from 'styled-components';
 export const USMapWrapper = styled.div`
   position: relative;
   padding-bottom: 70%;
-  top: -30px;
+  top: -45px;
   width: 100%;
+
+  @media (max-width: 600px) {
+    top: -15px;
+  }
 `;
 
 export const USCountyMapWrapper = styled.div`

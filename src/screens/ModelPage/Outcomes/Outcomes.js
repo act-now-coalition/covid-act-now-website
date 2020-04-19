@@ -1,5 +1,13 @@
 import React from 'react';
 import { INTERVENTIONS } from 'enums';
+
+import {
+  OutcomesWrapper,
+  OutcomesTable,
+  OutcomesTableHeader,
+  OutcomesTableRow,
+} from './Outcomes.style';
+
 const Outcomes = ({
   models,
   asterisk,
@@ -9,99 +17,85 @@ const Outcomes = ({
   currentIntervention,
 }) => {
   return (
-    <div style={{ overflow: 'scroll' }}>
-      <h3>{title}</h3>
-      <table
-        style={{
-          minWidth: 500,
-          width: '100%',
-          margin: 'auto',
-          border: '1px solid #ccc',
-          padding: 20,
-          textAlign: 'left',
-          tableLayout: 'fixed',
-        }}
-      >
-        <thead>
-          <tr>
-            <th>Scenario</th>
-            <th>Estimated Cumulative Infected</th>
-            <th>Estimated Date Hospitals Overloaded</th>
-            <th>Estimated Deaths</th>
-          </tr>
-        </thead>
-        <tbody>
-          {models.map((model, idx) => {
-            let rowLabel = model.label;
-            if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE) {
-              if (rowLabel === '3 Months of Social distancing') {
-                rowLabel = '3 Months of Stay at home (lax)';
-              } else if (rowLabel === '3 Months of Stay at home') {
-                rowLabel = '3 Months of Stay at home (strict)';
-              }
+    <OutcomesWrapper>
+      <h2>{title}</h2>
+      <OutcomesTable>
+        <OutcomesTableHeader>
+          <div>Scenario</div>
+          <div>Population Cumulatively Infected in 3 Months</div>
+          <div>Hospital Overload Date</div>
+          <div>Deaths in 3 Months</div>
+        </OutcomesTableHeader>
+        {models.map((model, idx) => {
+          let rowLabel = model.label;
+          if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE) {
+            if (rowLabel === '3 Months of Social distancing') {
+              rowLabel = '3 Months of Stay at home (lax)';
+            } else if (rowLabel === '3 Months of Stay at home') {
+              rowLabel = '3 Months of Stay at home (strict)';
             }
-            if (
-              currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE ||
-              currentIntervention === INTERVENTIONS.SOCIAL_DISTANCING
-            ) {
-              if (rowLabel === 'Limited action') {
-                rowLabel = 'Restrictions lifted';
-              }
+          }
+          if (
+            currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE ||
+            currentIntervention === INTERVENTIONS.SOCIAL_DISTANCING
+          ) {
+            if (rowLabel === 'Limited action') {
+              rowLabel = 'Restrictions lifted';
             }
+          }
 
-            return (
-              <OutcomesRow
-                key={idx}
-                model={model}
-                label={`${rowLabel}${asterisk[idx]}`}
-                color={colors[idx]}
-                timeHorizon={timeHorizon}
-              />
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+          return (
+            <OutcomesRow
+              key={idx}
+              model={model}
+              label={`${rowLabel}${asterisk[idx]}`}
+              color={colors[idx]}
+              timeHorizon={timeHorizon}
+            />
+          );
+        })}
+      </OutcomesTable>
+    </OutcomesWrapper>
   );
 };
 
 const OutcomesRow = ({ model, label, timeHorizon, color }) => {
   return (
-    <tr>
-      <td style={{ fontWeight: 'bold', color }}>{label}</td>
-      <td>
+    <OutcomesTableRow>
+      <div style={{ fontWeight: 'bold', color }}>{label}</div>
+      <div>
         {formatBucketedNumber(
           timeHorizon
             ? model.cumulativeInfectedAfter(timeHorizon)
             : model.cumulativeInfected,
           model.totalPopulation,
         )}
-      </td>
+      </div>
       {timeHorizon ? (
-        <td>
+        <div>
           {model.dateOverwhelmed &&
           model.dateOverwhelmed < model.dateAfter(timeHorizon)
             ? model.dateOverwhelmed.toDateString()
             : model.dateOverwhelmed
             ? 'outside time bound'
-            : 'never'}
-        </td>
+            : 'Not in the next 3 months'}
+        </div>
       ) : (
-        <td>
+        <div>
           {model.dateOverwhelmed
             ? model.dateOverwhelmed.toDateString()
-            : 'never'}
-        </td>
+            : 'Not in the next 3 months'}
+        </div>
       )}
 
-      <td>
+      <div>
         {formatNumber(
           timeHorizon
             ? model.cumulativeDeadAfter(timeHorizon)
             : model.cumulativeDead,
         )}
-      </td>
-    </tr>
+      </div>
+    </OutcomesTableRow>
   );
 };
 

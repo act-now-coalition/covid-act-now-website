@@ -28,13 +28,17 @@ export const HeaderSubCopy = styled(Typography)`
   font-size: 1rem;
   line-height: 1.5rem;
   color: rgba(0, 0, 0, 0.7);
+
+  + p {
+    margin-top: 1rem;
+  }
 `;
 
 export const StyledStateHeaderWrapper = styled(Box)`
   display: flex;
   flex-direction: column;
   background-color: ${COLORS.LIGHTGRAY};
-  padding: ${props => (props.condensed ? '1.5rem 1.4rem 0.2rem' : '2rem')};
+  padding: ${props => (props.condensed ? '1.5rem 1.4rem 0.2rem' : '2rem 1rem')};
   margin: 0;
 
   @media (min-width: 600px) {
