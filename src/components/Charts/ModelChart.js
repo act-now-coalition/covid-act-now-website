@@ -64,7 +64,6 @@ const ModelChart = ({
   ];
 
   const data = scenarioComparisonOverTime(200);
-  console.log(data);
 
   // We'll use this to determine whether to right-align
   // or left-align our plot line labels

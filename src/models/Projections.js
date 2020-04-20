@@ -54,24 +54,20 @@ export class Projections {
   }
 
   populateCurrentIntervention() {
-    const interventionModelMap = {
-      [INTERVENTIONS.LIMITED_ACTION]: this.baseline,
-      [INTERVENTIONS.SOCIAL_DISTANCING]: this.distancingPoorEnforcement.now,
-      [INTERVENTIONS.SHELTER_IN_PLACE]: this.distancing.now,
-    };
-
     this.currentInterventionModel = this.supportsInferred
       ? this.projected
-      : interventionModelMap[this.stateIntervention];
+      : this.interventionModelMap[this.stateIntervention];
 
     this.worstCaseInterventionModel =
       this.stateIntervention === INTERVENTIONS.SHELTER_IN_PLACE
-        ? interventionModelMap[INTERVENTIONS.SOCIAL_DISTANCING]
-        : interventionModelMap[this.stateIntervention];
+        ? this.interventionModelMap[INTERVENTIONS.SOCIAL_DISTANCING]
+        : this.interventionModelMap[this.stateIntervention];
   }
 
   get primary() {
-    return this.currentInterventionModel;
+    return this.supportsInferred
+      ? this.projected
+      : this.worstCaseInterventionModel;
   }
 
   getHeading() {
@@ -275,6 +271,8 @@ export class Projections {
   }
 
   getSeriesColorForPrimary() {
+    // TODO(igor): we shouldn't be hardcoding either of the two values below, but this is
+    // all about to simplify a lot and is not a regression, so not going to fix it
     return this.supportsInferred ? COLOR_MAP.BLUE : this.getSeriesColorForSocialDistancing();
   }
 
@@ -409,6 +407,12 @@ export class Projections {
         this.distancingPoorEnforcement = {now: projection};
       }
     });
+
+    this.interventionModelMap = {
+      [INTERVENTIONS.LIMITED_ACTION]: this.baseline,
+      [INTERVENTIONS.SOCIAL_DISTANCING]: this.distancingPoorEnforcement.now,
+      [INTERVENTIONS.SHELTER_IN_PLACE]: this.distancing.now,
+    };
 
   }
 

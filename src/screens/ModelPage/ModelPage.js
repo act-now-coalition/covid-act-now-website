@@ -62,7 +62,6 @@ function ModelPage() {
   }, [countyOption]);
   const history = useHistory();
 
-  console.log({selectedCounty})
   const projections = useProjections(
     _location,
     selectedCounty
