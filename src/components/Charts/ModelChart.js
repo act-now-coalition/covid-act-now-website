@@ -41,7 +41,7 @@ const ModelChart = ({
   currentIntervention,
   lastUpdatedDate,
   forCompareModels, // true when used by Compareprojections.js component.
-  location,
+  stateId,
   selectedCounty,
 }) => {
 
@@ -331,9 +331,7 @@ const ModelChart = ({
       <Wrapper
         projections={projections}
         isInferred={projection.isInferred}
-        inShelterInPlace={
-          currentIntervention === projections.SHELTER_IN_PLACE
-        }
+        inShelterInPlace={currentIntervention === projections.SHELTER_IN_PLACE}
       >
         <Chart options={options} />
         <DisclaimerWrapper>
@@ -363,7 +361,7 @@ const ModelChart = ({
             </DisclaimerBody>
           </Disclaimer>
           <Disclaimer>
-            <ClaimStateBlock location={location} county={selectedCounty} />
+            <ClaimStateBlock stateId={stateId} county={selectedCounty} />
           </Disclaimer>
         </DisclaimerWrapper>
       </Wrapper>

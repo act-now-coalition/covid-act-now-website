@@ -393,7 +393,7 @@ export class Projections {
         projection = new Projection(pi.data, {
           intervention: pi.intervention,
           durationDays: 90,
-          isInferred: pi.intervention == INTERVENTIONS.PROJECTED
+          isInferred: pi.intervention === INTERVENTIONS.PROJECTED
         });
       }
 
