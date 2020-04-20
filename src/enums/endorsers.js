@@ -56,5 +56,5 @@ export default [
     credentials: [
       'Immunology scholar at Parker Institute for Cancer Immunotherapy',
     ],
-  }
+  },
 ];

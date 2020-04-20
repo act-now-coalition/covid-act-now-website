@@ -32,8 +32,7 @@ const HomePageHeader = () => {
     <Wrapper>
       <Content>
         <HeaderTitle>
-          Stay home,{' '}
-          <HighlightColor>save lives</HighlightColor>.
+          Stay home, <HighlightColor>save lives</HighlightColor>.
         </HeaderTitle>
         <div>
           <HeaderSubCopy color="inherit" component="p" variant="subtitle2">
