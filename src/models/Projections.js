@@ -275,7 +275,7 @@ export class Projections {
   }
 
   getSeriesColorForPrimary() {
-    return this.supportsInferred ? COLOR_MAP.PURPLE : this.getSeriesColorForLimitedAction();
+    return this.supportsInferred ? COLOR_MAP.BLUE : this.getSeriesColorForSocialDistancing();
   }
 
   getSeriesColorForLimitedAction() {

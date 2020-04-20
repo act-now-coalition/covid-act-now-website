@@ -198,60 +198,51 @@ export const Wrapper = styled.div`
     border-top-right-radius: 16px;
     border-bottom-right-radius: 16px;
 
-         .today {
-           stroke: rgba(0, 0, 0, 0.7);
-           stroke-width: 3px;
-         }
-         .custom-plot-label {
-           padding: 8px 16px 8px 12px;
-           border-top-right-radius: 16px;
-           border-bottom-right-radius: 16px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 16px;
 
-           font-family: 'Roboto', sans-serif;
-           font-weight: bold;
-           font-size: 13px;
-           line-height: 16px;
+    color: rgba(255, 255, 255, 1);
+    background: rgba(0, 0, 0, 0.7);
 
-           color: rgba(255, 255, 255, 1);
-           background: rgba(0, 0, 0, 0.7);
+    span {
+      font-weight: normal;
+      color: rgba(255, 255, 255, 0.84);
+    }
 
-           span {
-             font-weight: normal;
-             color: rgba(255, 255, 255, 0.84);
-           }
+    &.custom-plot-label-reverse {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-top-left-radius: 16px;
+      border-bottom-left-radius: 16px;
+    }
 
-           &.custom-plot-label-reverse {
-             border-top-right-radius: 0;
-             border-bottom-right-radius: 0;
-             border-top-left-radius: 16px;
-             border-bottom-left-radius: 16px;
-           }
+    &.custom-plot-label-${snakeCase(INTERVENTIONS.LIMITED_ACTION)} {
+      background: ${props => props.projections.getAlarmLevelColor()};
+    }
 
-           &.custom-plot-label-${snakeCase(INTERVENTIONS.LIMITED_ACTION)} {
-             background: ${props => props.projections.getAlarmLevelColor()};
-           }
+    &.custom-plot-label-${snakeCase(INTERVENTIONS.SOCIAL_DISTANCING)} {
+      background: ${props =>
+        props.projections.getAlarmLevelColor() === COLOR_MAP.GREEN.BASE
+          ? COLOR_MAP.GREEN.DARK
+          : props.projections.getAlarmLevelColor()};
+    }
 
-           &.custom-plot-label-${snakeCase(INTERVENTIONS.SOCIAL_DISTANCING)} {
-             background: ${props =>
-               props.projections.getAlarmLevelColor() === COLOR_MAP.GREEN.BASE
-                 ? COLOR_MAP.GREEN.DARK
-                 : props.projections.getAlarmLevelColor()};
-           }
+    &.custom-plot-label-${snakeCase(
+      INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE,
+    )} {
+      background: ${props =>
+        props.projections.getAlarmLevelColor() === COLOR_MAP.GREEN.BASE
+          ? COLOR_MAP.GREEN.DARK
+          : props.projections.getAlarmLevelColor()};
+    }
 
-           &.custom-plot-label-${snakeCase(
-             INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE,
-           )} {
-             background: ${props =>
-               props.projections.getAlarmLevelColor() === COLOR_MAP.GREEN.BASE
-                 ? COLOR_MAP.GREEN.DARK
-                 : props.projections.getAlarmLevelColor()};
-           }
-
-           &.custom-plot-label-${snakeCase(INTERVENTIONS.SHELTER_IN_PLACE)} {
-             background: ${props => props.projections.getAlarmLevelColor()};
-           }
-         }
-       `;
+    &.custom-plot-label-${snakeCase(INTERVENTIONS.SHELTER_IN_PLACE)} {
+      background: ${props => props.projections.getAlarmLevelColor()};
+    }
+  }
+`;
 
 export const CondensedLegendStyled = styled.div`
   display: flex;
