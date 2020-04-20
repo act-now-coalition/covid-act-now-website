@@ -266,12 +266,12 @@ export class Projections {
       limitedActionSeries: this.getSeriesColorForLimitedAction(),
       socialDistancingSeries: this.getSeriesColorForSocialDistancing(),
       shelterInPlaceSeries: this.getSeriesColorForShelterInPlace(),
-      projectedSeries: COLOR_MAP.PURPLE,
+      projectedSeries: COLOR_MAP.BLUE,
     };
   }
 
   getSeriesColorForProjected() {
-    return COLOR_MAP.PURPLE;
+    return COLOR_MAP.BLUE;
   }
 
   getSeriesColorForPrimary() {

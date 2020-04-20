@@ -5,7 +5,6 @@ import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset
 import CountyMap from 'components/CountyMap/CountyMap';
 import { MAP_FILTERS } from './Enums/MapFilterEnums';
 import Outcomes from './Outcomes/Outcomes';
-import CallToAction from './CallToAction/CallToAction';
 import Map from 'components/Map/Map';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import SearchHeader from 'components/Header/SearchHeader';
@@ -136,23 +135,19 @@ function ModelPage() {
                   currentIntervention={intervention}
                   lastUpdatedDate={modelLastUpdatedDate}
                   dateOverwhelmed={projections.baseline.dateOverwhelmed}
+                  location={_location}
+                  selectedCounty={selectedCounty}
                 />
                 <Content>
-                  <CallToAction
-                    projections={projections}
-                    currentIntervention={intervention}
-                  />
                   <Outcomes
-                    title="Predicted Outcomes after 3 Months"
+                    title="Predicted Outcomes"
                     models={[
                       projections.baseline,
                       projections.primary,
-                      projections.distancing.now,
                     ]}
                     colors={[
                       projections.getSeriesColorForLimitedAction(),
                       projections.getSeriesColorForPrimary(),
-                      projections.getSeriesColorForShelterInPlace(),
                     ]}
                     asterisk={['', '*', '*', '**']}
                     timeHorizon={120}
@@ -162,6 +157,7 @@ function ModelPage() {
                     style={{
                       textAlign: 'left',
                       lineHeight: '2em',
+                      paddingLeft: 0,
                     }}
                   >
                     <li

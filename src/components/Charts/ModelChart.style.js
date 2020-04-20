@@ -1,36 +1,57 @@
 import styled from 'styled-components';
+<<<<<<< HEAD
 import { INTERVENTIONS } from 'enums/interventions';
 import { COLORS } from 'enums';
 import { snakeCase } from 'lodash';
 import { colors } from '@material-ui/core';
 import { COLOR_MAP } from 'enums/interventions';
+=======
+import { INTERVENTIONS, COLORS } from 'enums';
+import palette from 'assets/theme/palette';
+import { snakeCase } from 'lodash';
+import { colors } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+import { COLOR_MAP } from '../../enums/interventions';
+>>>>>>> develop
 
 export const ChartContainer = styled.section`
   width: 100%;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+`;
+
+export const DisclaimerWrapper = styled.div`
+  display: flex;
+  margin: 0 -0.75rem;
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+    margin: 0;
+  }
 `;
 
 export const Disclaimer = styled.div`
-  background: ${COLORS.LIGHTGRAY};
-  margin: 2rem;
-  padding: 1rem;
+  background: ${palette.white};
+  border: 1px solid ${palette.divider};
+  padding: 1.5rem;
   border-radius: 4px;
-  color: rgba(0, 0, 0, 0.7);
+  margin: 0 0.75rem 1.5rem;
+  padding: 1rem;
+  flex: 1;
 
-  @media (min-width: 900px) {
-    text-align: center;
-    margin: 0 0 2rem 0;
-  }
-
-  @media (min-width: 600px) {
-    text-align: center;
+  @media (max-width: 900px) {
+    margin: 0 1rem 1.5rem;
   }
 `;
 
-export const DisclaimerContent = styled.div`
-  max-width: 620px;
-  margin: auto;
+export const DisclaimerHeader = styled(Typography)`
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.6rem;
+  color: ${palette.black};
 `;
+
+export const DisclaimerBody = styled(Typography)``;
 
 export const Wrapper = styled.div`
          max-width: 900px;
@@ -86,95 +107,101 @@ export const Wrapper = styled.div`
     fill: white;
     text-shadow: 0 0 3px black;
   } */
-         .highcharts-legend {
-           font-family: 'Roboto', sans-serif;
-           font-style: normal;
-           font-weight: 600;
-           font-size: 13px;
-           color: rgba(0, 0, 0, 0.7);
-         }
-         .highcharts-legend-item {
-           cursor: pointer;
-           user-select: none;
-         }
-         .highcharts-area {
-           fill-opacity: 0.8;
-         }
-         /* these are styled according to the
-     order passed into the series array */
-         /* No action */
-         .limited-action {
-           fill: ${props =>
-             props.projections.getChartSeriesColorMap().limitedActionSeries};
-           stroke: ${props =>
-             props.isInferred
-               ? props.projections.getChartSeriesColorMap().limitedActionSeries
-               : 'white'};
-           fill-opacity: 1;
-         }
-         /* Social distancing */
-         .social-distancing {
-           fill: ${props =>
-             props.projections.getChartSeriesColorMap().socialDistancingSeries};
-           stroke: ${props =>
-             props.isInferred
-               ? props.projections.getChartSeriesColorMap()
-                   .socialDistancingSeries
-               : 'white'};
-           fill-opacity: 1;
-         }
-         /* Projected */
-         .projected {
-           fill: ${props =>
-             props.projections.getChartSeriesColorMap().projectedSeries};
-           stroke: white;
-           fill-opacity: 1;
-         }
-         /* Stay at home */
-         .stay-at-home {
-           fill: ${props =>
-             props.projections.getChartSeriesColorMap().shelterInPlaceSeries};
-           stroke: ${props =>
-             props.isInferred
-               ? props.projections.getChartSeriesColorMap().shelterInPlaceSeries
-               : 'white'};
-           fill-opacity: 1;
-         }
-         /* Available beds */
-         .beds {
-           stroke: white;
-           stroke-width: 1px;
-           stroke-dasharray: 8, 8;
-         }
-         .beds {
-           fill: rgba(0, 0, 0, 0.7);
-           stroke: rgba(0, 0, 0, 0.7);
-         }
-         .highcharts-plot-line {
-           stroke: #ff3348;
-           stroke-width: 3px;
-         }
-         .${snakeCase(INTERVENTIONS.LIMITED_ACTION)} {
-           stroke: ${props => props.projections.getAlarmLevelColor()};
-         }
-         .${snakeCase(INTERVENTIONS.SOCIAL_DISTANCING)} {
-           stroke: ${props =>
-             props.projections.getAlarmLevelColor() === COLOR_MAP.GREEN.BASE
-               ? COLOR_MAP.GREEN.DARK
-               : props.projections.getAlarmLevelColor()};
-         }
-         .${snakeCase(INTERVENTIONS.SHELTER_IN_PLACE)} {
-           stroke: ${props => props.projections.getAlarmLevelColor()};
-         }
-         .${snakeCase(INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE)} {
-           stroke: ${props =>
-             props.projections.getAlarmLevelColor() === COLOR_MAP.GREEN.BASE
-               ? COLOR_MAP.GREEN.DARK
-               : props.projections.getAlarmLevelColor()};
-         }
-         .${snakeCase(INTERVENTIONS.LOCKDOWN)} {
-           stroke: ${props => props.projections.getAlarmLevelColor()};
-         }
+  .highcharts-legend {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.7);
+  }
+  .highcharts-legend-item {
+    cursor: pointer;
+    user-select: none;
+  }
+  .highcharts-area {
+    fill-opacity: 0.8;
+  }
+  /* these are styled according to the
+  order passed into the series array */
+
+  /* No action */
+  .limited-action {
+    fill: ${props =>
+      props.interventions.getChartSeriesColorMap().limitedActionSeries};
+    stroke: ${props => isInferred
+        ? props.interventions.getChartSeriesColorMap().limitedActionSeries
+        : 'white'};
+    fill-opacity: 1;
+  }
+  /* Social distancing */
+  .social-distancing {
+    fill: ${props =>
+      props.projections.getChartSeriesColorMap().socialDistancingSeries};
+    stroke: ${props => isInferred
+        ? props.projections.getChartSeriesColorMap().socialDistancingSeries
+        : 'white'};
+    fill-opacity: 1;
+  }
+  /* Stay at home */
+  .stay-at-home {
+    fill: ${props =>
+      props.projections.getChartSeriesColorMap().shelterInPlaceSeries};
+    stroke: ${props => isInferred
+        ? props.projections.getChartSeriesColorMap().shelterInPlaceSeries
+        : 'white'};
+    fill-opacity: 1;
+  }
+  /* Available beds */
+  .beds {
+    stroke: white;
+    stroke-width: 1px;
+    stroke-dasharray: 8, 8;
+  }
+  .beds {
+    fill: rgba(0, 0, 0, 0.7);
+    stroke: rgba(0, 0, 0, 0.7);
+  }
+  .highcharts-plot-line {
+    stroke: #ff3348;
+    stroke-width: 3px;
+  }
+  /* Projected */
+  .projected {
+    stroke: ${props =>
+      props.projections.getChartSeriesColorMap().projectedSeries};
+  }
+  .${snakeCase(INTERVENTIONS.LIMITED_ACTION)} {
+    stroke: ${props => props.projections.getThresholdInterventionLevel()};
+  }
+  .${snakeCase(INTERVENTIONS.SOCIAL_DISTANCING)} {
+    stroke: ${props =>
+      props.projections.getThresholdInterventionLevel() ===
+      COLOR_MAP.GREEN.BASE
+        ? COLOR_MAP.GREEN.DARK
+        : props.projections.getThresholdInterventionLevel()};
+  }
+  .${snakeCase(INTERVENTIONS.SHELTER_IN_PLACE)} {
+    stroke: ${props => props.projections.getThresholdInterventionLevel()};
+  }
+  .${snakeCase(INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE)} {
+    stroke: ${props =>
+      props.projections.getThresholdInterventionLevel() ===
+      COLOR_MAP.GREEN.BASE
+        ? COLOR_MAP.GREEN.DARK
+        : props.projections.getThresholdInterventionLevel()};
+  }
+  .${snakeCase(INTERVENTIONS.LOCKDOWN)} {
+    stroke: ${props => props.projections.getThresholdInterventionLevel()};
+  }
+
+  .today {
+    stroke: rgba(0, 0, 0, 0.7);
+    stroke-width: 3px;
+  }
+  .custom-plot-label {
+    padding: 8px 16px 8px 12px;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
 
          .today {
            stroke: rgba(0, 0, 0, 0.7);
