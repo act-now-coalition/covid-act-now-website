@@ -15,7 +15,10 @@ export const CondensedLegendItemText = styled(Typography)`
   text-shadow: rgba(0, 0, 0, 0.75) 0.5px 0.5px 2px;
 `;
 
-export const LegendContainer = styled(Grid)``;
+export const LegendContainer = styled(Grid)`
+  max-width: calc(900px + 1rem);
+  margin: 1.5rem auto 0;
+`;
 
 export const LegendItemHeader = styled(Box)`
   width: 100%;
@@ -37,13 +40,6 @@ export const LegendItemContainer = styled(Paper)`
   @media (min-width: 960px) {
     margin: 0.5rem;
   }
-`;
-
-export const LegendItemDescription = styled(Box)`
-  padding: 8px;
-  background-color: #f7f7f7;
-  border-radius: 3px;
-  width: 100%;
 `;
 
 export const ColorBox = styled(Grid)`

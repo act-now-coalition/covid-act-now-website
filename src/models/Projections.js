@@ -22,6 +22,8 @@ export class Projections {
     this.distancing = null;
     this.distancingPoorEnforcement = null;
     this.currentInterventionModel = null;
+    this.isCounty = county != null;
+    this.hasProjections = !this.isCounty;
 
     this.populateInterventions(props);
     this.populateCurrentIntervention();
@@ -58,8 +60,9 @@ export class Projections {
       [INTERVENTIONS.SHELTER_IN_PLACE]: this.distancing.now,
     };
 
-    this.currentInterventionModel =
-      interventionModelMap[this.stateIntervention];
+    this.currentInterventionModel = this.hasProjections
+      ? this.projected
+      : interventionModelMap[this.stateIntervention];
 
     this.worstCaseInterventionModel =
       this.stateIntervention === INTERVENTIONS.SHELTER_IN_PLACE
@@ -164,16 +167,16 @@ export class Projections {
 
   getInterventionPredictionForShelterInPlace() {
     let predictionText =
-      'Things look good, keep it up! Assuming stay-at-home interventions remain in place, hospitals are not projected to become overloaded. Check back — projections update every 24 hours with the most recent data.';
+      'Things look good, keep it up! Assuming stay-at-home interventions remain in place, hospitals are not projected to become overloaded. Check back — projections update every 3 days with the most recent data.';
 
     if (this.getThresholdInterventionLevel() === COLOR_MAP.ORANGE.BASE) {
       predictionText =
-        'Things look okay. Assuming stay-at-home interventions remain in place, projections show low-to-moderate probability of hospital overload in the next two months. Check back — projections update every 24 hours with the most recent data.';
+        'Things look okay. Assuming stay-at-home interventions remain in place, projections show low-to-moderate probability of hospital overload in the next two months. Check back — projections update every 3 days with the most recent data.';
     }
 
     if (this.getThresholdInterventionLevel() === COLOR_MAP.RED.BASE) {
       predictionText =
-        'Be careful. Even with stay-at-home interventions in place, our projections show risk of hospital overload in your area. More action is needed to help flatten the curve. Check back — projections update every 24 hours with the most recent data.';
+        'Be careful. Even with stay-at-home interventions in place, our projections show risk of hospital overload in your area. More action is needed to help flatten the curve. Check back — projections update every 3 days with the most recent data.';
     }
 
     return <HeaderSubCopy>{predictionText}</HeaderSubCopy>;
@@ -194,11 +197,19 @@ export class Projections {
   getThresholdInterventionLevelForStayAtHome() {
     let color = COLOR_MAP.GREEN.BASE;
 
-    if (this.isSocialDistancingOverwhelmedDateWithinThresholdWeeks()) {
+    if (
+      this.hasProjections
+        ? this.isProjectedOverwhelmedDateWithinThresholdWeeks()
+        : this.isSocialDistancingOverwhelmedDateWithinThresholdWeeks()
+    ) {
       color = COLOR_MAP.ORANGE.BASE;
     }
 
-    if (this.isSocialDistancingOverwhelmedDateWithinOneWeek()) {
+    if (
+      this.hasProjections
+        ? this.isProjectedOverwhelmedDateWithinOneweek()
+        : this.isSocialDistancingOverwhelmedDateWithinOneWeek()
+    ) {
       color = COLOR_MAP.RED.BASE;
     }
 
@@ -251,7 +262,12 @@ export class Projections {
       limitedActionSeries: this.getSeriesColorForLimitedAction(),
       socialDistancingSeries: this.getSeriesColorForSocialDistancing(),
       shelterInPlaceSeries: this.getSeriesColorForShelterInPlace(),
+      projectedSeries: COLOR_MAP.BLUE,
     };
+  }
+
+  getSeriesColorForProjected() {
+    return COLOR_MAP.BLUE;
   }
 
   getSeriesColorForLimitedAction() {
@@ -339,6 +355,14 @@ export class Projections {
     );
   }
 
+  isProjectedOverwhelmedDateWithinThresholdWeeks() {
+    return !this.isOverwhelmedDateAfterNumberOfWeeks(this.projected, 6);
+  }
+
+  isProjectedOverwhelmedDateWithinOneweek() {
+    return !this.isOverwhelmedDateAfterNumberOfWeeks(this.projected, 3);
+  }
+
   isSocialDistancingOverwhelmedDateWithinOneWeek() {
     return !this.isOverwhelmedDateAfterNumberOfWeeks(
       this.distancingPoorEnforcement.now,
@@ -370,8 +394,13 @@ export class Projections {
       }),
     };
 
+    this.projected = new Model(props[2], {
+      intervention: INTERVENTIONS.PROJECTED,
+      r0: 'inferred',
+    });
+
     this.distancingPoorEnforcement = {
-      now: new Model(props[2], {
+      now: new Model(props[3], {
         intervention: INTERVENTIONS.SOCIAL_DISTANCING,
         durationDays: 90,
         r0: 1.7,

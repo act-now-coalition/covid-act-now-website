@@ -4,14 +4,16 @@ import moment from 'moment';
 import { snakeCase } from 'lodash';
 import { INTERVENTIONS } from 'enums';
 import LightTooltip from 'components/LightTooltip/LightTooltip';
+import ClaimStateBlock from 'components/ClaimStateBlock/ClaimStateBlock';
 import Chart from './Chart';
-import { Typography } from '@material-ui/core';
 
 import {
   ChartContainer,
   Wrapper,
+  DisclaimerWrapper,
   Disclaimer,
-  DisclaimerContent,
+  DisclaimerHeader,
+  DisclaimerBody,
   CondensedLegendStyled,
   CondensedLegendItemStyled,
 } from './ModelChart.style';
@@ -35,40 +37,40 @@ const condensedFormatIntervention = (intervention, optCase) =>
 const ModelChart = ({
   height,
   condensed,
-  countyName,
   interventions,
   currentIntervention,
-  showDisclaimer,
+  lastUpdatedDate,
+  forCompareModels, // true when used by CompareModels.js component.
+  location,
+  selectedCounty,
 }) => {
   const interventionToModel = {
     [INTERVENTIONS.LIMITED_ACTION]: interventions.baseline,
     [INTERVENTIONS.SOCIAL_DISTANCING]:
       interventions.distancingPoorEnforcement.now,
+    [INTERVENTIONS.PROJECTED]: interventions.projected,
     [INTERVENTIONS.SHELTER_IN_PLACE]: interventions.distancing.now,
   };
+  const hasProjections = interventions.hasProjections;
 
   let model = interventionToModel[currentIntervention];
-
-  if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE) {
+  if (hasProjections) {
+    model = interventionToModel[INTERVENTIONS.PROJECTED];
+  } else if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE) {
     model = interventionToModel[INTERVENTIONS.SOCIAL_DISTANCING];
   }
 
   const scenarioComparisonOverTime = duration => [
-    interventions.baseline.getDataset('hospitalizations', duration, 'red'),
-    interventions.distancing.now.getDataset(
-      'hospitalizations',
-      duration,
-      'blue',
-    ),
+    interventions.baseline.getDataset('hospitalizations', duration),
     interventions.distancingPoorEnforcement.now.getDataset(
       'hospitalizations',
       duration,
-      'orange',
     ),
+    interventions.projected.getDataset('hospitalizations', duration),
+    interventions.distancing.now.getDataset('hospitalizations', duration),
     interventions.baseline.getDataset(
       'beds',
       duration,
-      'black',
       'Available hospital beds',
     ),
   ];
@@ -84,29 +86,31 @@ const ModelChart = ({
   );
 
   const noAction = {
+    className: 'limited-action',
     name:
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE ||
       currentIntervention === INTERVENTIONS.SOCIAL_DISTANCING
         ? 'Restrictions lifted'
         : INTERVENTIONS.LIMITED_ACTION,
-    type: 'areaspline',
+    type: hasProjections ? 'spline' : 'areaspline',
     data: data[0].data,
     marker: {
       symbol: 'circle',
     },
-    visible: currentIntervention === INTERVENTIONS.LIMITED_ACTION,
+    visible: !forCompareModels,
     condensedLegend: {
       bgColor: interventions.getChartSeriesColorMap().limitedActionSeries,
     },
   };
 
   const socialDistancing = {
+    className: 'social-distancing',
     name:
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (lax)')
         : formatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
-    type: 'areaspline',
-    data: data[2].data,
+    type: hasProjections ? 'spline' : 'areaspline',
+    data: data[1].data,
     marker: {
       symbol: 'circle',
     },
@@ -123,13 +127,30 @@ const ModelChart = ({
     },
   };
 
+  const projected = {
+    className: 'projected',
+    name: 'Projected based on current trends',
+    type: 'spline',
+    data: data[2].data,
+    marker: {
+      symbol: 'circle',
+    },
+    condensedLegend: {
+      bgColor: interventions.getChartSeriesColorMap().projectedSeries,
+    },
+  };
+
   const shelterInPlace = {
+    className: 'stay-at-home',
     name:
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (strict)')
         : formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
-    type: 'areaspline',
-    data: data[1].data,
+    type: hasProjections ? 'spline' : 'areaspline',
+    visible:
+      !hasProjections || currentIntervention !== INTERVENTIONS.SHELTER_IN_PLACE,
+
+    data: data[3].data,
     marker: {
       symbol: 'circle',
     },
@@ -149,9 +170,10 @@ const ModelChart = ({
   };
 
   const availableBeds = {
+    className: 'beds',
     name: 'Available hospital beds',
     type: 'spline',
-    data: data[3].data,
+    data: data[4].data,
     marker: {
       symbol: 'circle',
     },
@@ -169,7 +191,6 @@ const ModelChart = ({
         spacing: [8, 0, condensed ? 12 : 32, 0],
       },
       title: {
-        // text: county ? `${county.county}, ${state}` : state,
         text: undefined,
       },
       subtitle: {
@@ -243,7 +264,6 @@ const ModelChart = ({
               : this.axis.defaultLabelFormatter.call(this);
           },
         },
-        maxPadding: 0.2,
       },
       tooltip: {
         formatter: function () {
@@ -283,14 +303,18 @@ const ModelChart = ({
           },
         },
       },
-      series: [noAction, socialDistancing, shelterInPlace, availableBeds],
+      series: hasProjections
+        ? [noAction, projected, shelterInPlace, availableBeds]
+        : [noAction, socialDistancing, shelterInPlace, availableBeds],
     };
   }, [
     height,
     model.dateOverwhelmed,
     currentIntervention,
+    hasProjections,
     noAction,
     socialDistancing,
+    projected,
     shelterInPlace,
     availableBeds,
     interventions,
@@ -303,6 +327,7 @@ const ModelChart = ({
       <ChartContainer>
         <Wrapper
           interventions={interventions}
+          hasProjections={hasProjections}
           inShelterInPlace={
             currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
           }
@@ -321,45 +346,28 @@ const ModelChart = ({
     <ChartContainer>
       <Wrapper
         interventions={interventions}
+        hasProjections={hasProjections}
         inShelterInPlace={
           currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         }
       >
         <Chart options={options} />
-        {countyName ? (
-          <Disclaimer
-            style={{ border: '2px solid #00d07d', background: 'white' }}
-          >
-            <DisclaimerContent>
-              <b>County data is currently in beta.</b> See something wrong?{' '}
-              <a
-                href="https://forms.gle/NPsLcFnrvfS1kqkn9"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Please let us know.
-              </a>
-            </DisclaimerContent>
-          </Disclaimer>
-        ) : (
-          <Typography></Typography>
-        )}
-        {showDisclaimer && (
+        <DisclaimerWrapper>
           <Disclaimer>
-            <DisclaimerContent>
+            <DisclaimerHeader>
               <LightTooltip
                 title="Currently we aggregate data over 4 day intervals to smooth out inconsistencies in the source data. We’re working on improving this now."
                 placement="bottom"
               >
                 <span>
-                  <strong>
-                    Last updated {new Date().toLocaleDateString()}
-                  </strong>
-                  .{' '}
+                  Last updated{' '}
+                  {lastUpdatedDate && lastUpdatedDate.toLocaleDateString()}
                 </span>
               </LightTooltip>
-              This model updates every 24 hours and is intended to help make
-              fast decisions, not predict the future.{' '}
+            </DisclaimerHeader>
+            <DisclaimerBody>
+              This model updates every 3 days and is intended to help make fast
+              decisions, not predict the future.{' '}
               <a
                 href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
                 target="_blank"
@@ -368,9 +376,12 @@ const ModelChart = ({
                 Learn more about our model and its limitations
               </a>
               .
-            </DisclaimerContent>
+            </DisclaimerBody>
           </Disclaimer>
-        )}
+          <Disclaimer>
+            <ClaimStateBlock location={location} county={selectedCounty} />
+          </Disclaimer>
+        </DisclaimerWrapper>
       </Wrapper>
     </ChartContainer>
   );

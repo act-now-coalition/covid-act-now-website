@@ -6,7 +6,6 @@ import CountyMap from 'components/CountyMap/CountyMap';
 import { COLOR_MAP } from '../../enums/interventions';
 import { MAP_FILTERS } from './Enums/MapFilterEnums';
 import Outcomes from './Outcomes/Outcomes';
-import CallToAction from './CallToAction/CallToAction';
 import Map from 'components/Map/Map';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import SearchHeader from 'components/Header/SearchHeader';
@@ -36,12 +35,13 @@ import {
   ChartHeader,
 } from './ModelPage.style';
 import { STATES, STATE_TO_INTERVENTION, INTERVENTIONS } from 'enums';
-import { useModelDatas } from 'utils/model';
+import { useModelDatas, useModelLastUpdatedDate } from 'utils/model';
 
 function ModelPage() {
   const { id: location, countyId } = useParams();
   const _location = location.toUpperCase();
 
+  const modelLastUpdatedDate = useModelLastUpdatedDate();
   const [mapOption, setMapOption] = useState(
     _location === MAP_FILTERS.DC ? MAP_FILTERS.NATIONAL : MAP_FILTERS.STATE,
   );
@@ -64,7 +64,6 @@ function ModelPage() {
   const modelDatasMap = useModelDatas(_location, selectedCounty);
 
   const locationName = STATES[_location];
-  let countyName = selectedCounty ? selectedCounty.county : null;
 
   const intervention = STATE_TO_INTERVENTION[_location];
 
@@ -136,28 +135,27 @@ function ModelPage() {
             {interventions && (
               <Panel>
                 <ModelChart
-                  countyName={countyName}
                   interventions={interventions}
                   currentIntervention={intervention}
-                  showDisclaimer={true}
+                  lastUpdatedDate={modelLastUpdatedDate}
                   dateOverwhelmed={interventions.baseline.dateOverwhelmed}
+                  location={_location}
+                  selectedCounty={selectedCounty}
                 />
                 <Content>
-                  <CallToAction
-                    interventions={interventions}
-                    currentIntervention={intervention}
-                  />
                   <Outcomes
-                    title="Predicted Outcomes after 3 Months"
+                    title="Predicted Outcomes"
                     models={[
                       interventions.baseline,
-                      interventions.distancingPoorEnforcement.now,
-                      interventions.distancing.now,
+                      interventions.hasProjections
+                        ? interventions.projected
+                        : interventions.distancingPoorEnforcement.now,
                     ]}
                     colors={[
                       interventions.getSeriesColorForLimitedAction(),
-                      interventions.getSeriesColorForSocialDistancing(),
-                      interventions.getSeriesColorForShelterInPlace(),
+                      interventions.hasProjections
+                        ? interventions.getSeriesColorForProjected()
+                        : interventions.getSeriesColorForSocialDistancing(),
                     ]}
                     asterisk={['', '*', '*', '**']}
                     timeHorizon={120}
@@ -167,6 +165,7 @@ function ModelPage() {
                     style={{
                       textAlign: 'left',
                       lineHeight: '2em',
+                      paddingLeft: 0,
                     }}
                   >
                     <li

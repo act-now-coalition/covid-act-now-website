@@ -1,4 +1,5 @@
 import Promise from 'bluebird';
+import * as moment from 'moment';
 import { useState, useEffect } from 'react';
 import { Projections } from './../models';
 import { STATES } from 'enums';
@@ -37,6 +38,7 @@ async function fetchAll(urls) {
 export const ModelIds = {
   baseline: 0,
   strictDistancingNow: 1,
+  projected: 2,
   weakDistancingNow: 3,
 };
 
@@ -64,11 +66,23 @@ async function fetchSummary(setModelDatas, location) {
 async function fetchData(location, county = null, dataUrl = DATA_URL) {
   dataUrl = dataUrl || DATA_URL;
   let modelDataForKey = null;
-  let urls = [
-    ModelIds.baseline,
-    ModelIds.strictDistancingNow,
-    ModelIds.weakDistancingNow,
-  ].map(i => {
+  let projectionsToLoad;
+  if (!county) {
+    projectionsToLoad = [
+      ModelIds.baseline,
+      ModelIds.strictDistancingNow,
+      ModelIds.projected,
+      ModelIds.weakDistancingNow,
+    ];
+  } else {
+    projectionsToLoad = [
+      ModelIds.baseline,
+      ModelIds.strictDistancingNow,
+      ModelIds.strictDistancingNow, // TODO(igor): HAX!
+      ModelIds.weakDistancingNow,
+    ];
+  }
+  let urls = projectionsToLoad.map(i => {
     let fipsCode =
       county && county.full_fips_code ? county.full_fips_code : null;
     const stateUrl = `${dataUrl}/${location}.${i}.json`;
@@ -179,4 +193,21 @@ export function useAllStateModelDatas(dataUrl = null) {
   }, [dataUrl]);
 
   return stateModels;
+}
+
+export function useModelLastUpdatedDate() {
+  const [lastUpdated, setLastUpdated] = useState(null);
+  const versionUrl = `${DATA_URL}/version.json`;
+  useEffect(() => {
+    fetch(versionUrl)
+      .then(data => data.json())
+      .then(version => {
+        // We add 1 day since models are generally published the day after
+        // they're generated (due to QA process).
+        const date = moment(version.timestamp).add(1, 'day');
+        setLastUpdated(date.toDate());
+      });
+  }, [versionUrl]);
+
+  return lastUpdated;
 }

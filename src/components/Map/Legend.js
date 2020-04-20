@@ -2,7 +2,6 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 
 import {
   ColorBox,
@@ -11,7 +10,6 @@ import {
   LegendContainer,
   LegendItemHeader,
   LegendItemContainer,
-  LegendItemDescription,
 } from './Legend.style';
 
 export function Legend(props) {
@@ -67,11 +65,6 @@ export function LegendItem(props) {
           <ColorBox color={color} />
           {title}
         </LegendItemHeader>
-        <LegendItemDescription>
-          <Typography variant="caption" display="block" align="left">
-            {description}
-          </Typography>
-        </LegendItemDescription>
       </LegendItemContainer>
     </Grid>
   );
