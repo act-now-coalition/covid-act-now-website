@@ -45,8 +45,6 @@ const ModelChart = ({
   selectedCounty,
 }) => {
 
-  const { isEmbed } = useEmbed();
-
   // We use the inferred projection if supported, otherwise the worst case for the currently active intervention
   let projection = projections.primary;
 

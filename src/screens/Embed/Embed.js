@@ -34,7 +34,6 @@ export default function Embed() {
 
   const [selectedCounty, setSelectedCounty] = useState(null);
   const [location, setLocation] = useState(null);
-  const [missingCounty, setMissingCounty] = useState(false);
   const { iFrameCodeSnippet } = useEmbed();
   useMemo(() => {
     let state = null,
@@ -53,9 +52,7 @@ export default function Embed() {
     }
 
     setLocation(state);
-    if (county === undefined) {
-      setMissingCounty(true);
-    } else {
+    if (county !== undefined) {
       setSelectedCounty(county);
     }
   }, [_location, countyId, countyFipsId]);
@@ -71,9 +68,6 @@ export default function Embed() {
       'fips',
       selectedCounty.full_fips_code,
     ]);
-    if (!summaryData) {
-      setMissingCounty(true);
-    }
   }
 
   if (!projections || !summaryData) {

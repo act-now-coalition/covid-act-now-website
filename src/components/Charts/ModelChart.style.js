@@ -1,18 +1,12 @@
 import styled from 'styled-components';
-<<<<<<< HEAD
-import { INTERVENTIONS } from 'enums/interventions';
+
 import { COLORS } from 'enums';
-import { snakeCase } from 'lodash';
-import { colors } from '@material-ui/core';
-import { COLOR_MAP } from 'enums/interventions';
-=======
-import { INTERVENTIONS, COLORS } from 'enums';
+import { INTERVENTIONS } from 'enums/interventions';
 import palette from 'assets/theme/palette';
 import { snakeCase } from 'lodash';
 import { colors } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { COLOR_MAP } from '../../enums/interventions';
->>>>>>> develop
 
 export const ChartContainer = styled.section`
   width: 100%;
@@ -127,9 +121,10 @@ export const Wrapper = styled.div`
   /* No action */
   .limited-action {
     fill: ${props =>
-      props.interventions.getChartSeriesColorMap().limitedActionSeries};
-    stroke: ${props => isInferred
-        ? props.interventions.getChartSeriesColorMap().limitedActionSeries
+      props.projections.getChartSeriesColorMap().limitedActionSeries};
+    stroke: ${props =>
+      props.isInferred
+        ? props.projections.getChartSeriesColorMap().limitedActionSeries
         : 'white'};
     fill-opacity: 1;
   }
@@ -137,7 +132,8 @@ export const Wrapper = styled.div`
   .social-distancing {
     fill: ${props =>
       props.projections.getChartSeriesColorMap().socialDistancingSeries};
-    stroke: ${props => isInferred
+    stroke: ${props =>
+      props.isInferred
         ? props.projections.getChartSeriesColorMap().socialDistancingSeries
         : 'white'};
     fill-opacity: 1;
@@ -146,7 +142,8 @@ export const Wrapper = styled.div`
   .stay-at-home {
     fill: ${props =>
       props.projections.getChartSeriesColorMap().shelterInPlaceSeries};
-    stroke: ${props => isInferred
+    stroke: ${props =>
+      props.isInferred
         ? props.projections.getChartSeriesColorMap().shelterInPlaceSeries
         : 'white'};
     fill-opacity: 1;
@@ -171,27 +168,25 @@ export const Wrapper = styled.div`
       props.projections.getChartSeriesColorMap().projectedSeries};
   }
   .${snakeCase(INTERVENTIONS.LIMITED_ACTION)} {
-    stroke: ${props => props.projections.getThresholdInterventionLevel()};
+    stroke: ${props => props.projections.getAlarmLevelColor()};
   }
   .${snakeCase(INTERVENTIONS.SOCIAL_DISTANCING)} {
     stroke: ${props =>
-      props.projections.getThresholdInterventionLevel() ===
-      COLOR_MAP.GREEN.BASE
+      props.projections.getAlarmLevelColor() === COLOR_MAP.GREEN.BASE
         ? COLOR_MAP.GREEN.DARK
-        : props.projections.getThresholdInterventionLevel()};
+        : props.projections.getAlarmLevelColor()};
   }
   .${snakeCase(INTERVENTIONS.SHELTER_IN_PLACE)} {
-    stroke: ${props => props.projections.getThresholdInterventionLevel()};
+    stroke: ${props => props.projections.getAlarmLevelColor()};
   }
   .${snakeCase(INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE)} {
     stroke: ${props =>
-      props.projections.getThresholdInterventionLevel() ===
-      COLOR_MAP.GREEN.BASE
+      props.projections.getAlarmLevelColor() === COLOR_MAP.GREEN.BASE
         ? COLOR_MAP.GREEN.DARK
-        : props.projections.getThresholdInterventionLevel()};
+        : props.projections.getAlarmLevelColor()};
   }
   .${snakeCase(INTERVENTIONS.LOCKDOWN)} {
-    stroke: ${props => props.projections.getThresholdInterventionLevel()};
+    stroke: ${props => props.projections.getAlarmLevelColor()};
   }
 
   .today {
@@ -244,8 +239,8 @@ export const Wrapper = styled.div`
            }
 
            &.custom-plot-label-${snakeCase(
-               INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE,
-             )} {
+             INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE,
+           )} {
              background: ${props =>
                props.projections.getAlarmLevelColor() === COLOR_MAP.GREEN.BASE
                  ? COLOR_MAP.GREEN.DARK
