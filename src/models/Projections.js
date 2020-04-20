@@ -22,7 +22,7 @@ export class Projections {
     this.distancing = null;
     this.distancingPoorEnforcement = null;
     this.currentInterventionModel = null;
-    this.supportsInferred = county == null;
+    this.supportsInferred = true;//county == null;
 
 
     this.populateInterventions(interventionInfos);
