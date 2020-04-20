@@ -26,7 +26,7 @@ import ChartsTab from './ChartsTab';
 import EmbedFooter from './EmbedFooter';
 
 export default function Embed() {
-  const { id: _location, countyId, countyFipsId } = useParams();
+  const { stateId, countyId, countyFipsId } = useParams();
 
   const [tabState, setTabState] = useState(0);
   const [shareDrawerOpen, setShareDrawerOpen] = useState(false);
@@ -42,7 +42,7 @@ export default function Embed() {
       county = findCountyByFips(countyFipsId);
       state = county?.state_code;
     } else {
-      state = _location.toUpperCase();
+      state = stateId.toUpperCase();
       if (countyId) {
         county = _.find(
           US_STATE_DATASET.state_county_map_dataset[state].county_dataset,
@@ -55,7 +55,7 @@ export default function Embed() {
     if (county !== undefined) {
       setSelectedCounty(county);
     }
-  }, [_location, countyId, countyFipsId]);
+  }, [stateId, countyId, countyFipsId]);
 
   const projections = useProjections(location, selectedCounty);
   const stateSummaryData = useStateSummaryData(location);
