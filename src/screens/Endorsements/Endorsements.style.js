@@ -4,9 +4,8 @@ import { COLORS } from 'enums';
 
 export const Wrapper = styled.div`
   background-color: ${COLORS.LIGHTGRAY};
-  margin: -32px;
+  margin: -32px -32px 0;
   padding: 1rem;
-  min-height: calc(100vh - 64px);
 `;
 
 export const Content = styled.div`

@@ -18,16 +18,7 @@ export const Content = styled.div`
 `;
 
 export const HighlightColor = styled.span`
-  > a {
-    color: #00d07d;
-    font-weight: 600;
-    text-decoration: underline rgba(0, 0, 0, 0);
-    transition: 0.2s ease text-decoration-color;
-
-    &:hover {
-      text-decoration-color: #00d07d;
-    }
-  }
+  color: #00d07d;
 `;
 
 export const HeaderTitle = styled(Typography)<{ component?: string }>`
@@ -47,6 +38,10 @@ export const HeaderSubCopy = styled(Typography)<{ component?: string }>`
   margin: 0 auto 2rem;
   max-width: 560px;
   color: rgba(0, 0, 0, 0.7);
+
+  a {
+    color: inherit;
+  }
 `;
 
 export const Disclaimer = styled.div`
