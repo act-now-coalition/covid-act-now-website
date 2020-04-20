@@ -45,7 +45,7 @@ const Outcomes = ({
               currentIntervention === INTERVENTIONS.SOCIAL_DISTANCING
             ) {
               if (rowLabel === 'Limited action') {
-                rowLabel = 'Restrictions lifted';
+                rowLabel = 'If restrictions are lifted';
               }
             }
 

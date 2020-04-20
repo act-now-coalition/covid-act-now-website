@@ -21,10 +21,10 @@ function intersection(a, b, c, d) {
   return i;
 }
 
-export class Model {
+export class Projection {
   constructor(data, parameters) {
     this.intervention = parameters.intervention;
-    this.r0 = parameters.r0;
+    this.isInferred = parameters.isInferred;
     this.durationDays = parameters.durationDays || null /* permanent */;
     this.delayDays = parameters.delayDays || 0;
 

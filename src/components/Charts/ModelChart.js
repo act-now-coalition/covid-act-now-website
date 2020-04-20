@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { dateFormat } from 'highcharts';
 import moment from 'moment';
 import { snakeCase } from 'lodash';
-import { INTERVENTIONS } from 'enums';
+import { INTERVENTIONS } from 'enums/interventions';
 import LightTooltip from 'components/LightTooltip/LightTooltip';
 import Chart from './Chart';
 import { Typography } from '@material-ui/core';
@@ -36,37 +36,26 @@ const condensedFormatIntervention = (intervention, optCase) =>
 const ModelChart = ({
   height,
   condensed,
-  interventions,
+  projections,
   currentIntervention,
   lastUpdatedDate,
-  forCompareModels, // true when used by CompareModels.js component.
+  forCompareModels, // true when used by Compareprojections.js component.
 }) => {
-  const interventionToModel = {
-    [INTERVENTIONS.LIMITED_ACTION]: interventions.baseline,
-    [INTERVENTIONS.SOCIAL_DISTANCING]:
-      interventions.distancingPoorEnforcement.now,
-    [INTERVENTIONS.PROJECTED]: interventions.projected,
-    [INTERVENTIONS.SHELTER_IN_PLACE]: interventions.distancing.now,
-  };
-  const hasProjections = interventions.hasProjections;
+
   const { isEmbed } = useEmbed();
 
-  let model = interventionToModel[currentIntervention];
-  if (hasProjections) {
-    model = interventionToModel[INTERVENTIONS.PROJECTED];
-  } else if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE) {
-    model = interventionToModel[INTERVENTIONS.SOCIAL_DISTANCING];
-  }
+  // We use the inferred projection if supported, otherwise the worst case for the currently active intervention
+  let projection = projections.primary;
 
   const scenarioComparisonOverTime = duration => [
-    interventions.baseline.getDataset('hospitalizations', duration),
-    interventions.distancingPoorEnforcement.now.getDataset(
+    projections.baseline.getDataset('hospitalizations', duration),
+    projections.distancingPoorEnforcement.now.getDataset(
       'hospitalizations',
       duration,
     ),
-    interventions.projected.getDataset('hospitalizations', duration),
-    interventions.distancing.now.getDataset('hospitalizations', duration),
-    interventions.baseline.getDataset(
+    projections.projected.getDataset('hospitalizations', duration),
+    projections.distancing.now.getDataset('hospitalizations', duration),
+    projections.baseline.getDataset(
       'beds',
       duration,
       'Available hospital beds',
@@ -74,30 +63,27 @@ const ModelChart = ({
   ];
 
   const data = scenarioComparisonOverTime(200);
+  console.log(data);
 
   // We'll use this to determine whether to right-align
   // or left-align our plot line labels
   const dateOverwhelmedIsPastHalfway = dateIsPastHalfway(
-    new Date(model.dateOverwhelmed),
+    new Date(projection.dateOverwhelmed),
     data[0].data,
     'x',
   );
 
   const noAction = {
     className: 'limited-action',
-    name:
-      currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE ||
-      currentIntervention === INTERVENTIONS.SOCIAL_DISTANCING
-        ? 'Restrictions lifted'
-        : INTERVENTIONS.LIMITED_ACTION,
-    type: hasProjections ? 'spline' : 'areaspline',
+    name: 'If restrictions are lifted',
+    type: projection.isInferred ? 'spline' : 'areaspline',
     data: data[0].data,
     marker: {
       symbol: 'circle',
     },
     visible: !forCompareModels,
     condensedLegend: {
-      bgColor: interventions.getChartSeriesColorMap().limitedActionSeries,
+      bgColor: projections.getChartSeriesColorMap().limitedActionSeries,
     },
   };
 
@@ -107,7 +93,7 @@ const ModelChart = ({
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (lax)')
         : formatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
-    type: hasProjections ? 'spline' : 'areaspline',
+    type: projection.isInferred ? 'spline' : 'areaspline',
     data: data[1].data,
     marker: {
       symbol: 'circle',
@@ -121,7 +107,7 @@ const ModelChart = ({
             )
           : condensedFormatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
 
-      bgColor: interventions.getChartSeriesColorMap().socialDistancingSeries,
+      bgColor: projections.getChartSeriesColorMap().socialDistancingSeries,
     },
   };
 
@@ -134,7 +120,7 @@ const ModelChart = ({
       symbol: 'circle',
     },
     condensedLegend: {
-      bgColor: interventions.getChartSeriesColorMap().projectedSeries,
+      bgColor: projections.getChartSeriesColorMap().projectedSeries,
     },
   };
 
@@ -144,9 +130,9 @@ const ModelChart = ({
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (strict)')
         : formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
-    type: hasProjections ? 'spline' : 'areaspline',
+    type: projection.isInferred ? 'spline' : 'areaspline',
     visible:
-      !hasProjections || currentIntervention !== INTERVENTIONS.SHELTER_IN_PLACE,
+      !projection.isInferred || currentIntervention !== INTERVENTIONS.SHELTER_IN_PLACE,
 
     data: data[3].data,
     marker: {
@@ -159,11 +145,11 @@ const ModelChart = ({
       condensedName:
         currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
           ? condensedFormatIntervention(
-              INTERVENTIONS.SHELTER_IN_PLACE,
+              projections.SHELTER_IN_PLACE,
               ' (strict)',
             )
           : condensedFormatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
-      bgColor: interventions.getChartSeriesColorMap().shelterInPlaceSeries,
+      bgColor: projections.getChartSeriesColorMap().shelterInPlaceSeries,
     },
   };
 
@@ -207,24 +193,24 @@ const ModelChart = ({
         },
         plotLines: [
           {
-            value: model.dateOverwhelmed,
+            value: projection.dateOverwhelmed,
             className: snakeCase(
-              currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
-                ? INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE
+              currentIntervention === projections.SHELTER_IN_PLACE
+                ? projections.SHELTER_IN_PLACE_WORST_CASE
                 : currentIntervention,
             ),
             zIndex: 10,
             label: {
               formatter: function () {
                 return `<div class="custom-plot-label custom-plot-label-${snakeCase(
-                  currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
-                    ? INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE
+                  currentIntervention === projections.SHELTER_IN_PLACE
+                    ? projections.SHELTER_IN_PLACE_WORST_CASE
                     : currentIntervention,
                 )}${
                   dateOverwhelmedIsPastHalfway
                     ? ' custom-plot-label-reverse'
                     : ''
-                }">Hospitals May Overload<br /><span>${interventions.getChartHospitalsOverloadedText()}</span></div>`;
+                }">Hospitals May Overload<br /><span>${projections.getChartHospitalsOverloadedText()}</span></div>`;
               },
               align: dateOverwhelmedIsPastHalfway ? 'right' : 'left',
               rotation: 0,
@@ -301,21 +287,21 @@ const ModelChart = ({
           },
         },
       },
-      series: hasProjections
+      series: projection.isInferred
         ? [noAction, projected, shelterInPlace, availableBeds]
         : [noAction, socialDistancing, shelterInPlace, availableBeds],
     };
   }, [
     height,
-    model.dateOverwhelmed,
+    projection.dateOverwhelmed,
     currentIntervention,
-    hasProjections,
+    projection.isInferred,
     noAction,
     socialDistancing,
     projected,
     shelterInPlace,
     availableBeds,
-    interventions,
+    projections,
     condensed,
     dateOverwhelmedIsPastHalfway,
   ]);
@@ -324,10 +310,10 @@ const ModelChart = ({
     return (
       <ChartContainer>
         <Wrapper
-          interventions={interventions}
-          hasProjections={hasProjections}
+          projections={projections}
+          isInferred={projection.isInferred}
           inShelterInPlace={
-            currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+            currentIntervention === projections.SHELTER_IN_PLACE
           }
         >
           <Chart options={options} />
@@ -343,14 +329,14 @@ const ModelChart = ({
   return (
     <ChartContainer>
       <Wrapper
-        interventions={interventions}
-        hasProjections={hasProjections}
+        projections={projections}
+        isInferred={projection.isInferred}
         inShelterInPlace={
-          currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+          currentIntervention === projections.SHELTER_IN_PLACE
         }
       >
         <Chart options={options} />
-        {interventions.isCounty && !isEmbed ? (
+        {projections.isCounty && !isEmbed ? (
           <Disclaimer
             style={{ border: '2px solid #00d07d', background: 'white' }}
           >
@@ -382,14 +368,14 @@ const ModelChart = ({
                   .{' '}
                 </span>
               </LightTooltip>
-              This model updates every 3 days and is intended to help make fast
+              This projection updates every 3 days and is intended to help make fast
               decisions, not predict the future.{' '}
               <a
-                href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
+                href="https://data.covidactnow.org/Covid_Act_Now_projection_References_and_Assumptions.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Learn more about our model and its limitations
+                Learn more about our projection and its limitations
               </a>
               .
             </DisclaimerContent>

@@ -16,7 +16,7 @@ import {
 const DAYS = 1000 * 60 * 60 * 24;
 const ONE_HUNDRED_DAYS = 100 * DAYS;
 
-const CallToAction = ({ interventions, currentIntervention }) => {
+const CallToAction = ({ projections, currentIntervention }) => {
   const calloutDataForModel = model => {
     if (
       !model.dateOverwhelmed ||
@@ -26,7 +26,7 @@ const CallToAction = ({ interventions, currentIntervention }) => {
         label: `Reduced overload projected`,
         shortActionText: `We project no overload over the next 3 months`,
         capacityIcon: (
-          <CheckIcon fill={interventions.getSeriesColorForShelterInPlace()} />
+          <CheckIcon fill={projections.getSeriesColorForShelterInPlace()} />
         ),
       };
     } else {
@@ -37,28 +37,24 @@ const CallToAction = ({ interventions, currentIntervention }) => {
       let capacityIcon;
       if (isShelterInPlaceWorstCaseModel) {
         capacityIcon = (
-          <WarningIcon
-            fill={interventions.getSeriesColorForSocialDistancing()}
-          />
+          <WarningIcon fill={projections.getSeriesColorForSocialDistancing()} />
         );
       } else {
         if (model.intervention === INTERVENTIONS.LIMITED_ACTION) {
           capacityIcon = (
-            <WarningIcon
-              fill={interventions.getSeriesColorForLimitedAction()}
-            />
+            <WarningIcon fill={projections.getSeriesColorForLimitedAction()} />
           );
         } else {
           if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE) {
             capacityIcon = (
               <WarningIcon
-                fill={interventions.getSeriesColorForShelterInPlace()}
+                fill={projections.getSeriesColorForShelterInPlace()}
               />
             );
           } else {
             capacityIcon = (
               <WarningIcon
-                fill={interventions.getSeriesColorForSocialDistancing()}
+                fill={projections.getSeriesColorForSocialDistancing()}
               />
             );
           }
@@ -76,10 +72,10 @@ const CallToAction = ({ interventions, currentIntervention }) => {
   };
 
   const interventionToModel = {
-    [INTERVENTIONS.LIMITED_ACTION]: interventions.baseline,
+    [INTERVENTIONS.LIMITED_ACTION]: projections.baseline,
     [INTERVENTIONS.SOCIAL_DISTANCING]:
-      interventions.distancingPoorEnforcement.now,
-    [INTERVENTIONS.SHELTER_IN_PLACE]: interventions.distancing.now,
+      projections.distancingPoorEnforcement.now,
+    [INTERVENTIONS.SHELTER_IN_PLACE]: projections.distancing.now,
   };
 
   const model = interventionToModel[currentIntervention];
@@ -92,7 +88,7 @@ const CallToAction = ({ interventions, currentIntervention }) => {
   }
 
   const interventionIcon = (
-    <InterventionIcon color={interventions.getThresholdInterventionLevel()} />
+    <InterventionIcon color={projections.getAlarmLevelColor()} />
   );
 
   return (
