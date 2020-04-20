@@ -18,7 +18,7 @@ const ClaimStateBlock = ({ location, countyName }) => {
   const bodyName = countyName ? `${countyName}` : `${locationName}`;
   return (
     <ClaimStateContainer>
-      <ClaimStateHeader>Do your work for {headerName}?</ClaimStateHeader>
+      <ClaimStateHeader>Do you work for {headerName}?</ClaimStateHeader>
       <ClaimStateBody>
         Let us know how we can make our model more useful for you and {bodyName}{' '}
         residents. Email us at <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.
