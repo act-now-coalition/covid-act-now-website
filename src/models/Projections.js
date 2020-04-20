@@ -179,7 +179,7 @@ export class Projections {
         'Be careful. Even with stay-at-home interventions in place, our projections show risk of hospital overload in your area. More action is needed to help flatten the curve. Check back — projections update every 3 days with the most recent data.';
     }
 
-    return <HeaderSubCopy>{this.projected.Rt}{predictionText}</HeaderSubCopy>;
+    return <HeaderSubCopy>{predictionText}</HeaderSubCopy>;
   }
 
   getAlarmLevelColor() {

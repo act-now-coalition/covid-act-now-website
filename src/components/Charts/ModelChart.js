@@ -54,7 +54,7 @@ const ModelChart = ({
       'hospitalizations',
       duration,
     ),
-    projections.projected.getDataset('hospitalizations', duration),
+    projections.primary.getDataset('hospitalizations', duration),
     projections.distancing.now.getDataset('hospitalizations', duration),
     projections.baseline.getDataset(
       'beds',
