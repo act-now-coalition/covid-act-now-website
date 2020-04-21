@@ -298,7 +298,6 @@ const ModelChart = ({
   }, [
     height,
     projection.dateOverwhelmed,
-    currentIntervention,
     projection.isInferred,
     noAction,
     socialDistancing,

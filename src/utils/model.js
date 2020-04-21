@@ -21,13 +21,8 @@ async function fetchAll(urls) {
   );
 }
 
-<<<<<<< HEAD
 export async function fetchProjections(
-  stateAbbr,
-=======
-async function fetchProjections(
   stateId,
->>>>>>> develop
   countyInfo = null,
   dataUrl = DATA_URL,
 ) {

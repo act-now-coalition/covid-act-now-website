@@ -14,7 +14,6 @@ import {
   StyledStateCopyWrapper,
   StyledLocationPageHeaderWrapper,
   StyledLocationPageHeaderInner,
-  HeaderSubCopy,
 } from './LocationPageHeader.style';
 
 function InterventionTitleForShelterInPlace({ projections, displayName }) {
