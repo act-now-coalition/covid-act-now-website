@@ -34,10 +34,13 @@ import {
   ChartHeader,
 } from './ModelPage.style';
 import { STATES, STATE_TO_INTERVENTION, INTERVENTIONS } from 'enums';
-import { useProjections, useStateSummary, useModelLastUpdatedDate } from 'utils/model';
+import {
+  useProjections,
+  useStateSummary,
+  useModelLastUpdatedDate,
+} from 'utils/model';
 
 function ModelPage() {
-
   const { id: location, countyId } = useParams();
   const _location = location.toUpperCase();
 
@@ -62,10 +65,7 @@ function ModelPage() {
   }, [countyOption]);
   const history = useHistory();
 
-  const projections = useProjections(
-    _location,
-    selectedCounty
-  );
+  const projections = useProjections(_location, selectedCounty);
   const stateSummary = useStateSummary(_location);
 
   const locationName = STATES[_location];
@@ -140,10 +140,7 @@ function ModelPage() {
                 <Content>
                   <Outcomes
                     title="Predicted Outcomes"
-                    models={[
-                      projections.baseline,
-                      projections.primary,
-                    ]}
+                    models={[projections.baseline, projections.primary]}
                     colors={[
                       projections.getSeriesColorForLimitedAction(),
                       projections.getSeriesColorForPrimary(),

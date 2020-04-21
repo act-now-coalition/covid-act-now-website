@@ -110,12 +110,14 @@ export function useAllStateModelDatas(dataUrl = null) {
   useEffect(() => {
     async function fetchData() {
       const states = Object.keys(STATES);
-      const stateProjectionPromises = states.map(state => fetchProjections(state, null, dataUrl));
+      const stateProjectionPromises = states.map(state =>
+        fetchProjections(state, null, dataUrl),
+      );
       const stateProjections = await Promise.all(stateProjectionPromises);
       const _stateModels = {};
       states.forEach((state, idx) => {
-        _stateModels[state] = stateProjections[idx]
-      })
+        _stateModels[state] = stateProjections[idx];
+      });
       setStateModels(_stateModels);
     }
     fetchData();

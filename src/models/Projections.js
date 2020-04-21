@@ -24,7 +24,6 @@ export class Projections {
     this.currentInterventionModel = null;
     this.supportsInferred = county == null;
 
-
     this.populateInterventions(interventionInfos);
     this.populateCurrentIntervention();
     this.populateCounty(county);
@@ -273,7 +272,9 @@ export class Projections {
   getSeriesColorForPrimary() {
     // TODO(igor): we shouldn't be hardcoding either of the two values below, but this is
     // all about to simplify a lot and is not a regression, so not going to fix it
-    return this.supportsInferred ? COLOR_MAP.BLUE : this.getSeriesColorForSocialDistancing();
+    return this.supportsInferred
+      ? COLOR_MAP.BLUE
+      : this.getSeriesColorForSocialDistancing();
   }
 
   getSeriesColorForLimitedAction() {
@@ -393,18 +394,18 @@ export class Projections {
         projection = new Projection(pi.data, {
           intervention: pi.intervention,
           durationDays: 90,
-          isInferred: pi.intervention == INTERVENTIONS.PROJECTED
+          isInferred: pi.intervention == INTERVENTIONS.PROJECTED,
         });
       }
 
       if (pi.intervention === INTERVENTIONS.LIMITED_ACTION) {
         this.baseline = projection;
       } else if (pi.intervention === INTERVENTIONS.SHELTER_IN_PLACE) {
-        this.distancing = {now: projection};
+        this.distancing = { now: projection };
       } else if (pi.intervention === INTERVENTIONS.PROJECTED) {
         this.projected = projection;
       } else if (pi.intervention === INTERVENTIONS.SOCIAL_DISTANCING) {
-        this.distancingPoorEnforcement = {now: projection};
+        this.distancingPoorEnforcement = { now: projection };
       }
     });
 
@@ -413,7 +414,5 @@ export class Projections {
       [INTERVENTIONS.SOCIAL_DISTANCING]: this.distancingPoorEnforcement.now,
       [INTERVENTIONS.SHELTER_IN_PLACE]: this.distancing.now,
     };
-
   }
-
 }

@@ -52,7 +52,7 @@ export function CompareModels({ match, location }) {
   console.log(leftModelDatas);
   console.log(rightModelDatas);
 
-      // Now call buildInterventionMap() for each left/right state model datas.
+  // Now call buildInterventionMap() for each left/right state model datas.
   const leftModels = {},
     rightModels = {};
   const states = Object.keys(STATES);
