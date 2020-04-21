@@ -92,7 +92,7 @@ const CountyItem = ({ dataset }) => {
 };
 
 const GlobalSelector = ({ handleChange, extendRight }) => {
-  const { id: location } = useParams();
+  const { stateId: location } = useParams();
 
   const stateDataset = US_STATE_DATASET.state_dataset;
   const countyDataset = [];

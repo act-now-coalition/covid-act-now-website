@@ -26,7 +26,7 @@ import ChartsTab from './ChartsTab';
 import EmbedFooter from './EmbedFooter';
 
 export default function Embed() {
-  const { id: _location, countyId, countyFipsId } = useParams();
+  const { stateId: _location, countyId, countyFipsId } = useParams();
 
   const [tabState, setTabState] = useState(0);
   const [shareDrawerOpen, setShareDrawerOpen] = useState(false);
@@ -130,7 +130,7 @@ export default function Embed() {
       >
         <ShareModelBlock
           condensed
-          location={location}
+          stateId={location}
           county={selectedCounty}
           embedSnippet={iFrameCodeSnippet}
         />

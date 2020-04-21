@@ -41,12 +41,13 @@ import {
 } from 'utils/model';
 
 function ModelPage() {
-  const { id: location, countyId } = useParams();
-  const _location = location.toUpperCase();
+  let { stateId, countyId } = useParams();
+  // TODO(igor): don't mix uppercase and lowercase in here
+  stateId = stateId.toUpperCase();
 
   const modelLastUpdatedDate = useModelLastUpdatedDate();
   const [mapOption, setMapOption] = useState(
-    _location === MAP_FILTERS.DC ? MAP_FILTERS.NATIONAL : MAP_FILTERS.STATE,
+    stateId === MAP_FILTERS.DC ? MAP_FILTERS.NATIONAL : MAP_FILTERS.STATE,
   );
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -54,7 +55,7 @@ function ModelPage() {
 
   if (countyId) {
     countyOption = _.find(
-      US_STATE_DATASET.state_county_map_dataset[_location].county_dataset,
+      US_STATE_DATASET.state_county_map_dataset[stateId].county_dataset,
       ['county_url_name', countyId],
     );
   }
@@ -65,34 +66,34 @@ function ModelPage() {
   }, [countyOption]);
   const history = useHistory();
 
-  const projections = useProjections(_location, selectedCounty);
-  const stateSummary = useStateSummary(_location);
+  const projections = useProjections(stateId, selectedCounty);
+  const stateSummary = useStateSummary(stateId);
 
-  const locationName = STATES[_location];
-  const intervention = STATE_TO_INTERVENTION[_location];
+  const stateName = STATES[stateId];
+  const intervention = STATE_TO_INTERVENTION[stateId];
 
   const goTo = route => {
     history.push(route);
   };
 
   // No projections
-  if (!projections || projections.county != selectedCounty) {
+  if (!projections || projections.county !== selectedCounty) {
     return <LoadingScreen></LoadingScreen>;
   }
 
   let actionTitle;
   let actionDescription;
   if (intervention === INTERVENTIONS.SHELTER_IN_PLACE) {
-    actionTitle = `${locationName}: Keep staying at home to protect against the COVID-19 outbreak.`;
+    actionTitle = `${stateName}: Keep staying at home to protect against the COVID-19 outbreak.`;
     actionDescription = `Avoiding hospital overload depends heavily on your cooperation.`;
   } else {
-    actionTitle = `${locationName}: Urge your public officials to act now against the COVID-19 outbreak!`;
+    actionTitle = `${stateName}: Urge your public officials to act now against the COVID-19 outbreak!`;
     actionDescription = `To prevent hospital overload, our projections indicate a Stay at home order must be implemented soon.`;
   }
   let metaTags = (
     <AppMetaTags
-      canonicalUrl={`/us/${_location.toLowerCase()}`}
-      pageTitle={`${locationName} Forecast`}
+      canonicalUrl={`/us/${stateId.toLowerCase()}`}
+      pageTitle={`${stateName} Forecast`}
       pageDescription={actionTitle}
       shareTitle={actionTitle}
       shareDescription={actionDescription}
@@ -134,7 +135,7 @@ function ModelPage() {
                   currentIntervention={intervention}
                   lastUpdatedDate={modelLastUpdatedDate}
                   dateOverwhelmed={projections.baseline.dateOverwhelmed}
-                  location={_location}
+                  stateId={stateId}
                   selectedCounty={selectedCounty}
                 />
                 <Content>
@@ -180,10 +181,7 @@ function ModelPage() {
                     </li>
                   </ul>
 
-                  <ShareModelBlock
-                    location={_location}
-                    county={selectedCounty}
-                  />
+                  <ShareModelBlock stateId={stateId} county={selectedCounty} />
                 </Content>
               </Panel>
             )}
@@ -203,12 +201,12 @@ function ModelPage() {
           >
             United States
           </MapMenuItem>
-          {_location !== MAP_FILTERS.DC && (
+          {stateId !== MAP_FILTERS.DC && (
             <MapMenuItem
               onClick={() => setMapOption(MAP_FILTERS.STATE)}
               selected={mapOption === MAP_FILTERS.STATE}
             >
-              {locationName}
+              {stateName}
             </MapMenuItem>
           )}
         </MapMenuMobileWrapper>
@@ -221,7 +219,7 @@ function ModelPage() {
             />
           </MapWrapper>
 
-          {_location !== MAP_FILTERS.DC && (
+          {stateId !== MAP_FILTERS.DC && (
             <CountyMapAltWrapper visible={mapOption === MAP_FILTERS.STATE}>
               <CountyMap
                 fill={
@@ -233,13 +231,13 @@ function ModelPage() {
                 selectedCounty={selectedCounty}
                 setSelectedCounty={fullFips => {
                   const county = _.find(
-                    US_STATE_DATASET.state_county_map_dataset[_location]
+                    US_STATE_DATASET.state_county_map_dataset[stateId]
                       .county_dataset,
                     ['full_fips_code', fullFips],
                   );
 
                   goTo(
-                    `/us/${_location.toLowerCase()}/county/${
+                    `/us/${stateId.toLowerCase()}/county/${
                       county.county_url_name
                     }`,
                   );
@@ -274,8 +272,8 @@ function ModelPage() {
                 </div>
                 <div style={{ marginTop: '1rem' }}>
                   View projections for{' '}
-                  <span onClick={() => goTo('/us/' + _location.toLowerCase())}>
-                    {locationName}
+                  <span onClick={() => goTo('/us/' + stateId.toLowerCase())}>
+                    {stateName}
                   </span>
                 </div>
               </StyledNoResults>
