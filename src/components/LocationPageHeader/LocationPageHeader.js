@@ -10,6 +10,7 @@ import {
   StyledStateCopyWrapper,
   StyledLocationPageHeaderWrapper,
   StyledLocationPageHeaderInner,
+  HeaderSubCopy,
 } from './LocationPageHeader.style';
 
 const LocationPageHeader = ({ projections }) => {
@@ -34,6 +35,22 @@ const LocationPageHeader = ({ projections }) => {
               </HeaderHighlight>
             </HeaderTitle>
             {!isEmbed && projections.getSummary()}
+            {projections.isCounty && !isEmbed && (
+              <HeaderSubCopy>
+                <strong>County data is currently in beta. </strong>
+                <span>
+                  Because counties don’t report hospitalizations, our forecasts
+                  may not be as accurate. See something wrong?{' '}
+                </span>
+                <a
+                  href="https://forms.gle/NPsLcFnrvfS1kqkn9"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Please let us know.
+                </a>
+              </HeaderSubCopy>
+            )}
           </div>
         </StyledStateCopyWrapper>
       </StyledLocationPageHeaderInner>
