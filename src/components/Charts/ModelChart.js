@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import { dateFormat } from 'highcharts';
 import moment from 'moment';
-import { snakeCase } from 'lodash';
 import { INTERVENTIONS } from 'enums/interventions';
 import LightTooltip from 'components/LightTooltip/LightTooltip';
 import ClaimStateBlock from 'components/ClaimStateBlock/ClaimStateBlock';
@@ -194,11 +193,6 @@ const ModelChart = ({
         plotLines: [
           {
             value: projection.dateOverwhelmed,
-            className:  snakeCase(
-              currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
-                ? INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE
-                : currentIntervention,
-            ),
             zIndex: 10,
             label: {
               formatter: function () {
