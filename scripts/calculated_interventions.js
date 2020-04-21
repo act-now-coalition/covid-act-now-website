@@ -1,11 +1,9 @@
-const _ = require('lodash');
-const fs = require('fs-extra');
-const path = require('path');
-const US_STATES = require('./../src/enums/us_states');
-import { fetchStateSummary, fetchProjections } from '../src/utils/model.js';
-
-//const DataUrlJson = require('./../src/assets/data/data_url.json');
-//const DATA_URL = DataUrlJson.data_url.replace(/\/$/, '');
+#!/usr/bin/env node -r esm
+import _ from 'lodash';
+import fs from 'fs-extra';
+import path from 'path';
+import US_STATES from './../src/enums/us_states';
+import { fetchStateSummary, fetchProjections } from '../src/utils/model';
 
 async function getStateAndCountyDataFiles(stateAbbr) {
   const stateSummaryData = await fetchStateSummary(stateAbbr);
@@ -18,16 +16,16 @@ async function getStateAndCountyDataFiles(stateAbbr) {
         const countyProjections = await fetchProjections(stateAbbr, {
           full_fips_code: fipsCode,
         });
-        countyFipsData[fipsCode] = countyProjections;
+        countyFipsData[fipsCode] = countyProjections.getAlarmLevelColor();
       } catch (ex) {
-        console.error(ex);
+        console.log(`No color found for: ${stateAbbr} / ${fipsCode}`);
       }
     }),
   );
 
   return {
     stateProjections,
-    stateInterventionColor: stateProjections.getThresholdInterventionLevel(),
+    stateInterventionColor: stateProjections.getAlarmLevelColor(),
     countyFipsData,
   };
 }
@@ -37,17 +35,13 @@ async function getStateAndCountyDataFiles(stateAbbr) {
   const countyInventionMap = {};
 
   const stateCodes = _.keys(US_STATES);
-  try {
-    await Promise.all(
-      stateCodes.map(async stateCode => {
-        const data = await getStateAndCountyDataFiles(stateCode);
-        stateInterventionMap[stateCode] = data.stateInterventionColor;
-        Object.assign(countyInventionMap, data.countyFipsData);
-      }),
-    );
-  } catch (ex) {
-    console.error(ex);
-  }
+  await Promise.all(
+    stateCodes.map(async stateCode => {
+      const data = await getStateAndCountyDataFiles(stateCode);
+      stateInterventionMap[stateCode] = data.stateInterventionColor;
+      Object.assign(countyInventionMap, data.countyFipsData);
+    }),
+  );
 
   const outputFolder = path.join(__dirname, '..', 'src', 'assets', 'data');
 
