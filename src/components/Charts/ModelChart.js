@@ -7,6 +7,7 @@ import ClaimStateBlock from 'components/ClaimStateBlock/ClaimStateBlock';
 import Chart from './Chart';
 import { isEmpty } from 'lodash';
 import { COLOR_MAP } from 'enums/interventions';
+import ReactDOMServer from 'react-dom/server';
 
 import {
   ChartContainer,
@@ -198,10 +199,10 @@ const ModelChart = ({
             zIndex: 10,
             label: {
               formatter: function () {
-                return (
+                return ReactDOMServer.renderToString(
                   <div
                     class="custom-plot-label custom-plot-label-hospital-overload ${
-                  dateOverwhelmedIsPastHalfway
+                    dateOverwhelmedIsPastHalfway
                     ? ' custom-plot-label-reverse'
                     : ''
                 }"
@@ -212,7 +213,7 @@ const ModelChart = ({
                       {' '}
                       <ChartHospitalsOverloadedText projections={projections} />
                     </span>
-                  </div>
+                  </div>,
                 );
               },
               align: dateOverwhelmedIsPastHalfway ? 'right' : 'left',
@@ -384,7 +385,7 @@ function CondensedLegendItem({
 function ChartHospitalsOverloadedText({ projections }) {
   let text = '';
   const isDateOverWhelmedBeforeToday =
-    this.worstCaseInterventionModel.dateOverwhelmed &&
+    projections.worstCaseInterventionModel.dateOverwhelmed &&
     moment(projections.worstCaseInterventionModel.dateOverwhelmed).isBefore(
       moment().startOf('day'),
     );
@@ -411,15 +412,11 @@ function ChartHospitalsOverloadedText({ projections }) {
   }
 
   const appendedPolicy =
-    this.stateIntervention === INTERVENTIONS.SHELTER_IN_PLACE
-      ? `<br/> with ${projections.stateIntervention} (lax)`
-      : `<br/> with ${projections.stateIntervention}`;
+    projections.stateIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+      ? <div> with {projections.stateIntervention} (lax) </div>
+      : <div> with {projections.stateIntervention} </div>;
 
-  if (!isEmpty(text)) {
-    text += appendedPolicy;
-  }
-
-  return text;
+  return <>{text} {!isEmpty(text)? appendedPolicy : ''} </>;
 }
 
 export default ModelChart;
