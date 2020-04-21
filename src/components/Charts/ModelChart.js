@@ -359,7 +359,10 @@ const ModelChart = ({
                 title="Currently we aggregate data over 4 day intervals to smooth out inconsistencies in the source data. We’re working on improving this now."
                 placement="bottom"
               >
-                <span>Last updated {lastUpdatedDate.toLocaleDateString()}</span>
+                <span>
+                  Last updated{' '}
+                  {lastUpdatedDate && lastUpdatedDate.toLocaleDateString()}
+                </span>
               </LightTooltip>
             </DisclaimerHeader>
             <DisclaimerBody>

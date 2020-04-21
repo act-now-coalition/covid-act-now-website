@@ -1,4 +1,5 @@
 import Promise from 'bluebird';
+import * as moment from 'moment';
 import { useState, useEffect } from 'react';
 import { Projections } from './../models';
 import { STATES } from 'enums';
@@ -200,7 +201,12 @@ export function useModelLastUpdatedDate() {
   useEffect(() => {
     fetch(versionUrl)
       .then(data => data.json())
-      .then(version => setLastUpdated(new Date(version.timestamp)));
+      .then(version => {
+        // We add 1 day since models are generally published the day after
+        // they're generated (due to QA process).
+        const date = moment(version.timestamp).add(1, 'day');
+        setLastUpdated(date.toDate());
+      });
   }, [versionUrl]);
 
   return lastUpdated;
