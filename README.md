@@ -1,28 +1,17 @@
-## Coronavirus Act Now! 
+# Covid Act Now
 
-This is the code repository for https://covidactnow.org/ - a tool dedicated to encouraging public leaders and health officials to act quickly to curtail the spread of the COVID-19 pandemic. 
+This is the code repository for https://covidactnow.org/ - a tool providing public leaders and health officials data to help answer the question: "how can the US can reopen safely?"
 
-# Public leaders & health officials:
-## The only thing that matters right now is the speed of your response
-
-
-### How to use this tool
-This tool is built to enable political leaders to quickly make decisions in their Coronavirus response informed by best available data and modeling.
+## How to use this tool
+This tool is built to enable political leaders to make decisions in their COVID-19 response informed by best available data and modeling.
 
 ### Here are the questions we built this tool to answer:
 * What will the impact be in my region be and when can I expect it?
 * How long until my hospital system is under severe pressure?
-* What are my menu of interventions, and how will they address the spread of Coronavirus?
+* What are my menu of interventions, and how will they address the spread of COVID-19?
 
-# Comments, questions, or want to get involved?
-To improve the capabilities and accuracy of our tool, we are requesting the help of:
-
-* Epidemiologists with expertise in modeling virus propagation
-* UI/UX Designers
-* Engineers: JavaScript (React), Python
-* Data scientists
-
-If you have time to give us feedback or access to this expertise, have questions, or otherwise want to get involved, please email us jonathan@covidactnow.org
+## Comments, questions, or want to get involved?
+If you have time to give us feedback or access to this expertise, have questions, or otherwise want to get involved, please email us info@covidactnow.org
 
 ## Already involved? 
 Check out the frontend 
