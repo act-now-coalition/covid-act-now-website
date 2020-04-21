@@ -49,8 +49,6 @@ export function CompareModels({ match, location }) {
   // Load models for all states.
   const leftModelDatas = useAllStateModelDatas(leftUrl);
   const rightModelDatas = useAllStateModelDatas(rightUrl);
-  console.log(leftModelDatas);
-  console.log(rightModelDatas);
 
   // Now call buildInterventionMap() for each left/right state model datas.
   const leftModels = {},

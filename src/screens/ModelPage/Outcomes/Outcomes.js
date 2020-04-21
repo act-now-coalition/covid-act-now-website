@@ -9,7 +9,7 @@ import {
 } from './Outcomes.style';
 
 const Outcomes = ({
-  models,
+  projections,
   asterisk,
   timeHorizon,
   title,
@@ -26,8 +26,8 @@ const Outcomes = ({
           <div>Hospital Overload Date</div>
           <div>Deaths in 3 Months</div>
         </OutcomesTableHeader>
-        {models.map((model, idx) => {
-          let rowLabel = model.label;
+        {projections.map((projection, idx) => {
+          let rowLabel = projection.label;
           if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE) {
             if (rowLabel === '3 Months of Social distancing') {
               rowLabel = '3 Months of Stay at home (lax)';
@@ -47,7 +47,7 @@ const Outcomes = ({
           return (
             <OutcomesRow
               key={idx}
-              model={model}
+              projection={projection}
               label={`${rowLabel}${asterisk[idx]}`}
               color={colors[idx]}
               timeHorizon={timeHorizon}
@@ -59,31 +59,31 @@ const Outcomes = ({
   );
 };
 
-const OutcomesRow = ({ model, label, timeHorizon, color }) => {
+const OutcomesRow = ({ projection, label, timeHorizon, color }) => {
   return (
     <OutcomesTableRow>
       <div style={{ fontWeight: 'bold', color }}>{label}</div>
       <div>
         {formatBucketedNumber(
           timeHorizon
-            ? model.cumulativeInfectedAfter(timeHorizon)
-            : model.cumulativeInfected,
-          model.totalPopulation,
+            ? projection.cumulativeInfectedAfter(timeHorizon)
+            : projection.cumulativeInfected,
+          projection.totalPopulation,
         )}
       </div>
       {timeHorizon ? (
         <div>
-          {model.dateOverwhelmed &&
-          model.dateOverwhelmed < model.dateAfter(timeHorizon)
-            ? model.dateOverwhelmed.toDateString()
-            : model.dateOverwhelmed
+          {projection.dateOverwhelmed &&
+          projection.dateOverwhelmed < projection.dateAfter(timeHorizon)
+            ? projection.dateOverwhelmed.toDateString()
+            : projection.dateOverwhelmed
             ? 'outside time bound'
             : 'Not in the next 3 months'}
         </div>
       ) : (
         <div>
-          {model.dateOverwhelmed
-            ? model.dateOverwhelmed.toDateString()
+          {projection.dateOverwhelmed
+            ? projection.dateOverwhelmed.toDateString()
             : 'Not in the next 3 months'}
         </div>
       )}
@@ -91,8 +91,8 @@ const OutcomesRow = ({ model, label, timeHorizon, color }) => {
       <div>
         {formatNumber(
           timeHorizon
-            ? model.cumulativeDeadAfter(timeHorizon)
-            : model.cumulativeDead,
+            ? projection.cumulativeDeadAfter(timeHorizon)
+            : projection.cumulativeDead,
         )}
       </div>
     </OutcomesTableRow>

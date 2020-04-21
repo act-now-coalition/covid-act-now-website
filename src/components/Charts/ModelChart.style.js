@@ -219,13 +219,11 @@ export const Wrapper = styled.div`
     }
 
     &.custom-plot-label-hospital-overload {
-      background: ${ props =>
+      background: ${props =>
         props.projections.getAlarmLevelColor() === COLOR_MAP.GREEN.BASE
           ? COLOR_MAP.GREEN.DARK
-          : props.projections.getAlarmLevelColor()
-      };
+          : props.projections.getAlarmLevelColor()};
     }
-
   }
 `;
 

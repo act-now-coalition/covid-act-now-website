@@ -299,10 +299,7 @@ const ModelChart = ({
   if (condensed) {
     return (
       <ChartContainer>
-        <Wrapper
-          projections={projections}
-          isInferred={projection.isInferred}
-        >
+        <Wrapper projections={projections} isInferred={projection.isInferred}>
           <Chart options={options} />
           <CondensedLegend>
             {[noAction, socialDistancing, shelterInPlace, availableBeds]
@@ -315,10 +312,7 @@ const ModelChart = ({
   }
   return (
     <ChartContainer>
-      <Wrapper
-        projections={projections}
-        isInferred={projection.isInferred}
-      >
+      <Wrapper projections={projections} isInferred={projection.isInferred}>
         <Chart options={options} />
         <DisclaimerWrapper>
           <Disclaimer>
@@ -337,7 +331,7 @@ const ModelChart = ({
               This model updates every 3 days and is intended to help make fast
               decisions, not predict the future.{' '}
               <a
-                href="https://data.covidactnow.org/Covid_Act_Now_projection_References_and_Assumptions.pdf"
+                href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
               >
