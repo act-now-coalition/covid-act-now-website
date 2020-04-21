@@ -198,11 +198,22 @@ const ModelChart = ({
             zIndex: 10,
             label: {
               formatter: function () {
-                return <div class="custom-plot-label custom-plot-label-hospital-overload ${
+                return (
+                  <div
+                    class="custom-plot-label custom-plot-label-hospital-overload ${
                   dateOverwhelmedIsPastHalfway
                     ? ' custom-plot-label-reverse'
                     : ''
-                }">Hospitals May Overload<br /><span> <ChartHospitalsOverloadedText projections={projections}/></span></div>;
+                }"
+                  >
+                    Hospitals May Overload
+                    <br />
+                    <span>
+                      {' '}
+                      <ChartHospitalsOverloadedText projections={projections} />
+                    </span>
+                  </div>
+                );
               },
               align: dateOverwhelmedIsPastHalfway ? 'right' : 'left',
               rotation: 0,

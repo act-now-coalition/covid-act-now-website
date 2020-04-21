@@ -2,7 +2,7 @@ const _ = require('lodash');
 const fs = require('fs-extra');
 const path = require('path');
 const US_STATES = require('./../src/enums/us_states');
-import {fetchStateSummary, fetchProjections} from '../src/utils/model.js';
+import { fetchStateSummary, fetchProjections } from '../src/utils/model.js';
 
 //const DataUrlJson = require('./../src/assets/data/data_url.json');
 //const DATA_URL = DataUrlJson.data_url.replace(/\/$/, '');
@@ -38,22 +38,18 @@ async function getStateAndCountyDataFiles(stateAbbr) {
 
   const stateCodes = _.keys(US_STATES);
   try {
-    await Promise.all(stateCodes.map(async stateCode => {
-      const data = await getStateAndCountyDataFiles(stateCode);
-      stateInterventionMap[stateCode] = data.stateInterventionColor;
-      Object.assign(countyInventionMap, data.countyFipsData);
-    }));
+    await Promise.all(
+      stateCodes.map(async stateCode => {
+        const data = await getStateAndCountyDataFiles(stateCode);
+        stateInterventionMap[stateCode] = data.stateInterventionColor;
+        Object.assign(countyInventionMap, data.countyFipsData);
+      }),
+    );
   } catch (ex) {
     console.error(ex);
   }
 
-  const outputFolder = path.join(
-    __dirname,
-    '..',
-    'src',
-    'assets',
-    'data',
-  );
+  const outputFolder = path.join(__dirname, '..', 'src', 'assets', 'data');
 
   await fs.writeJson(
     `${outputFolder}/calculated_state_interventions.json`,

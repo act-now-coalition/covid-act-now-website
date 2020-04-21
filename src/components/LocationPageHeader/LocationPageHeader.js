@@ -16,7 +16,7 @@ import {
   StyledLocationPageHeaderInner,
 } from './LocationPageHeader.style';
 
-function InterventionTitleForShelterInPlace({projections, displayName}) {
+function InterventionTitleForShelterInPlace({ projections, displayName }) {
   let title = <span>Keep staying at home in {displayName}</span>;
 
   if (projections.getAlarmLevelColor() === COLOR_MAP.ORANGE.BASE) {
@@ -64,16 +64,19 @@ function LocationPageHeading({ projections }) {
   }
 }
 
-
 function LocationSummary({ projections }) {
   switch (projections.stateIntervention) {
     case INTERVENTIONS.LIMITED_ACTION:
     case INTERVENTIONS.SOCIAL_DISTANCING:
-      return (<InterventionPredictionForLimitedActionAndSocialDistancing
-        projections={projections}
-      />);
+      return (
+        <InterventionPredictionForLimitedActionAndSocialDistancing
+          projections={projections}
+        />
+      );
     case INTERVENTIONS.SHELTER_IN_PLACE:
-      return (<InterventionPredictionForShelterInPlace projections={projections}/>);
+      return (
+        <InterventionPredictionForShelterInPlace projections={projections} />
+      );
     default:
       return '';
   }
@@ -140,7 +143,6 @@ function InterventionPredictionForShelterInPlace({ projections }) {
   return <HeaderSubCopy>{predictionText}</HeaderSubCopy>;
 }
 
-
 const LocationPageHeader = ({ projections }) => {
   const { isEmbed } = useEmbed();
 
@@ -159,10 +161,10 @@ const LocationPageHeader = ({ projections }) => {
           <div>
             <HeaderTitle>
               <HeaderHighlight color={projections.getAlarmLevelColor()}>
-                <LocationPageHeading projections={projections}/>
+                <LocationPageHeading projections={projections} />
               </HeaderHighlight>
             </HeaderTitle>
-            {!isEmbed ? <LocationSummary projections={projections}/> : ''}
+            {!isEmbed ? <LocationSummary projections={projections} /> : ''}
           </div>
         </StyledStateCopyWrapper>
       </StyledLocationPageHeaderInner>

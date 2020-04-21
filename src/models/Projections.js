@@ -69,7 +69,6 @@ export class Projections {
       : this.worstCaseInterventionModel;
   }
 
-
   getAlarmLevelColor() {
     switch (this.stateIntervention) {
       case INTERVENTIONS.LIMITED_ACTION:
