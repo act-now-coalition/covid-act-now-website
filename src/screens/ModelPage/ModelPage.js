@@ -8,7 +8,7 @@ import Outcomes from './Outcomes/Outcomes';
 import Map from 'components/Map/Map';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import SearchHeader from 'components/Header/SearchHeader';
-import StateHeader from 'components/StateHeader/StateHeader';
+import LocationPageHeader from 'components/LocationPageHeader/LocationPageHeader';
 import ModelChart from 'components/Charts/ModelChart';
 import {
   MapMenuMobileWrapper,
@@ -34,7 +34,11 @@ import {
   ChartHeader,
 } from './ModelPage.style';
 import { STATES, STATE_TO_INTERVENTION, INTERVENTIONS } from 'enums';
-import { useModelDatas, useModelLastUpdatedDate } from 'utils/model';
+import {
+  useProjections,
+  useStateSummary,
+  useModelLastUpdatedDate,
+} from 'utils/model';
 
 function ModelPage() {
   const { id: location, countyId } = useParams();
@@ -45,42 +49,34 @@ function ModelPage() {
     _location === MAP_FILTERS.DC ? MAP_FILTERS.NATIONAL : MAP_FILTERS.STATE,
   );
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   let countyOption = null;
+
   if (countyId) {
     countyOption = _.find(
       US_STATE_DATASET.state_county_map_dataset[_location].county_dataset,
       ['county_url_name', countyId],
     );
   }
-
   const [selectedCounty, setSelectedCounty] = useState(countyOption);
+
   useMemo(() => {
     setSelectedCounty(countyOption);
   }, [countyOption]);
   const history = useHistory();
 
-  let modelDatas = null;
-  const modelDatasMap = useModelDatas(_location, selectedCounty);
+  const projections = useProjections(_location, selectedCounty);
+  const stateSummary = useStateSummary(_location);
 
   const locationName = STATES[_location];
-
   const intervention = STATE_TO_INTERVENTION[_location];
-
-  modelDatas = selectedCounty
-    ? modelDatasMap.countyDatas
-    : modelDatasMap.stateDatas;
-
-  let interventions = null;
-  if (modelDatas && !modelDatas.error) {
-    interventions = modelDatas.projections;
-  }
 
   const goTo = route => {
     history.push(route);
   };
 
-  // No model data
-  if (!modelDatas) {
+  // No projections
+  if (!projections || projections.county != selectedCounty) {
     return <LoadingScreen></LoadingScreen>;
   }
 
@@ -119,42 +115,35 @@ function ModelPage() {
     return (
       <MainContentWrapper mobileMenuOpen={mobileMenuOpen}>
         <MainContentInner>
-          <StateHeader interventions={interventions} />
+          <LocationPageHeader projections={projections} />
           <MainContentInnerBody>
             <Panel>
               <ChartHeader>
                 <h2>Projected hospitalizations</h2>
                 <span>
-                  {interventions.countyName
-                    ? `${interventions.countyName}, ${interventions.stateName}`
-                    : interventions.stateName}
+                  {projections.countyName
+                    ? `${projections.countyName}, ${projections.stateName}`
+                    : projections.stateName}
                 </span>
               </ChartHeader>
             </Panel>
-            {interventions && (
+            {projections && (
               <Panel>
                 <ModelChart
-                  interventions={interventions}
+                  projections={projections}
                   currentIntervention={intervention}
                   lastUpdatedDate={modelLastUpdatedDate}
-                  dateOverwhelmed={interventions.baseline.dateOverwhelmed}
+                  dateOverwhelmed={projections.baseline.dateOverwhelmed}
                   location={_location}
                   selectedCounty={selectedCounty}
                 />
                 <Content>
                   <Outcomes
                     title="Predicted Outcomes"
-                    models={[
-                      interventions.baseline,
-                      interventions.hasProjections
-                        ? interventions.projected
-                        : interventions.distancingPoorEnforcement.now,
-                    ]}
+                    projections={[projections.baseline, projections.primary]}
                     colors={[
-                      interventions.getSeriesColorForLimitedAction(),
-                      interventions.hasProjections
-                        ? interventions.getSeriesColorForProjected()
-                        : interventions.getSeriesColorForSocialDistancing(),
+                      projections.getSeriesColorForLimitedAction(),
+                      projections.getSeriesColorForPrimary(),
                     ]}
                     asterisk={['', '*', '*', '**']}
                     timeHorizon={120}
@@ -236,11 +225,11 @@ function ModelPage() {
             <CountyMapAltWrapper visible={mapOption === MAP_FILTERS.STATE}>
               <CountyMap
                 fill={
-                  interventions
-                    ? interventions.getThresholdInterventionLevel()
+                  projections.primary
+                    ? projections.getAlarmLevelColor()
                     : '#e3e3e3'
                 }
-                stateSummary={modelDatasMap.summary}
+                stateSummary={stateSummary}
                 selectedCounty={selectedCounty}
                 setSelectedCounty={fullFips => {
                   const county = _.find(
@@ -270,7 +259,7 @@ function ModelPage() {
       {metaTags}
       <ContentWrapper>
         {renderHeader()}
-        {modelDatas && modelDatas.error ? (
+        {projections && !projections.primary ? (
           <div>
             <StyledNoResultsWrapper>
               <StyledNoResults>

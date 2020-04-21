@@ -4,14 +4,14 @@ import ModelChart from 'components/Charts/ModelChart';
 
 import { EmbedChartContainer } from './Embed.style';
 
-export default function ChartsTab({ interventions, currentIntervention }) {
+export default function ChartsTab({ projections, currentIntervention }) {
   return (
     <EmbedChartContainer>
       <ModelChart
         condensed
         height={290}
         subtitle="Hospitalizations over time"
-        interventions={interventions}
+        projections={projections}
         currentIntervention={currentIntervention}
       />
     </EmbedChartContainer>

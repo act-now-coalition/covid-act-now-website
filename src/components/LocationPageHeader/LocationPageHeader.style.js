@@ -34,7 +34,7 @@ export const HeaderSubCopy = styled(Typography)`
   }
 `;
 
-export const StyledStateHeaderWrapper = styled(Box)`
+export const StyledLocationPageHeaderWrapper = styled(Box)`
   display: flex;
   flex-direction: column;
   background-color: ${COLORS.LIGHTGRAY};
@@ -52,7 +52,7 @@ export const StyledStateHeaderWrapper = styled(Box)`
   }
 `;
 
-export const StyledStateHeaderInner = styled.div`
+export const StyledLocationPageHeaderInner = styled.div`
   display: flex;
   flex-direction: ${props => (props.condensed ? 'row' : 'column')};
   margin: 0;

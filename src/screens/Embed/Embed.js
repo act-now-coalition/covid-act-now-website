@@ -8,10 +8,10 @@ import Drawer from '@material-ui/core/Drawer';
 
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020';
 import '../../App.css'; /* optional for styling like the :hover pseudo-class */
-import StateHeader from '../../components/StateHeader/StateHeader';
+import LocationPageHeader from '../../components/LocationPageHeader/LocationPageHeader';
 import ShareModelBlock from '../../components/ShareBlock/ShareModelBlock';
 
-import { useModelDatas, useStateSummaryData } from 'utils/model';
+import { useProjections, useStateSummaryData } from 'utils/model';
 import { useEmbed } from 'utils/hooks';
 
 import {
@@ -34,7 +34,6 @@ export default function Embed() {
 
   const [selectedCounty, setSelectedCounty] = useState(null);
   const [location, setLocation] = useState(null);
-  const [missingCounty, setMissingCounty] = useState(false);
   const { iFrameCodeSnippet } = useEmbed();
   useMemo(() => {
     let state = null,
@@ -53,27 +52,15 @@ export default function Embed() {
     }
 
     setLocation(state);
-    if (county === undefined) {
-      setMissingCounty(true);
-    } else {
+    if (county !== undefined) {
       setSelectedCounty(county);
     }
   }, [_location, countyId, countyFipsId]);
 
-  const modelDatasMap = useModelDatas(location, selectedCounty);
-
+  const projections = useProjections(location, selectedCounty);
+  const stateSummaryData = useStateSummaryData(location);
   const locationName = STATES[location];
   const intervention = STATE_TO_INTERVENTION[location];
-
-  const datasForView = selectedCounty
-    ? modelDatasMap.countyDatas
-    : modelDatasMap.stateDatas;
-  let interventions = null;
-  if (datasForView && !datasForView.error) {
-    interventions = datasForView.projections;
-  }
-
-  const stateSummaryData = useStateSummaryData(location);
 
   let summaryData = stateSummaryData;
   if (stateSummaryData && selectedCounty) {
@@ -81,23 +68,19 @@ export default function Embed() {
       'fips',
       selectedCounty.full_fips_code,
     ]);
-    if (!summaryData) {
-      setMissingCounty(true);
-    }
   }
 
-  if (missingCounty || modelDatasMap?.countyDatas?.error) {
-    return <span>'No data available for county.'</span>;
-  }
-
-  if (!interventions || !summaryData) {
+  if (!projections || !summaryData) {
     return null;
+  }
+
+  if (!projections.primary) {
+    return <span>'No data available for county.'</span>;
   }
 
   const { cases, deaths } = summaryData;
 
-  const baseline = interventions.baseline;
-  const totalPopulation = baseline.totalPopulation;
+  const totalPopulation = projections.baseline.totalPopulation;
   const populationPercentage =
     Number.parseFloat(deaths / totalPopulation).toPrecision(2) * 100;
 
@@ -108,12 +91,12 @@ export default function Embed() {
   return (
     <EmbedContainer elevation="2">
       <EmbedHeaderContainer>
-        <StateHeader
+        <LocationPageHeader
           location={location}
           locationName={locationName}
           countyName={selectedCounty?.county}
           intervention={intervention}
-          interventions={interventions}
+          projections={projections}
         />
         <Tabs value={tabState} variant="fullWidth" onChange={handleTabChange}>
           <Tab label="Data" />
@@ -132,7 +115,7 @@ export default function Embed() {
           />
         ) : (
           <ChartsTab
-            interventions={interventions}
+            projections={projections}
             currentIntervention={intervention}
           />
         )}

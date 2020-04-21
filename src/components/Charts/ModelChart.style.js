@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-import { INTERVENTIONS, COLORS } from 'enums';
+
+import { COLORS } from 'enums';
+import { INTERVENTIONS } from 'enums/interventions';
 import palette from 'assets/theme/palette';
 import { snakeCase } from 'lodash';
 import { colors } from '@material-ui/core';
@@ -114,34 +116,35 @@ export const Wrapper = styled.div`
     fill-opacity: 0.8;
   }
   /* these are styled according to the
-     order passed into the series array */
+  order passed into the series array */
+
   /* No action */
   .limited-action {
     fill: ${props =>
-      props.interventions.getChartSeriesColorMap().limitedActionSeries};
+      props.projections.getChartSeriesColorMap().limitedActionSeries};
     stroke: ${props =>
-      props.hasProjections
-        ? props.interventions.getChartSeriesColorMap().limitedActionSeries
+      props.isInferred
+        ? props.projections.getChartSeriesColorMap().limitedActionSeries
         : 'white'};
     fill-opacity: 1;
   }
   /* Social distancing */
   .social-distancing {
     fill: ${props =>
-      props.interventions.getChartSeriesColorMap().socialDistancingSeries};
+      props.projections.getChartSeriesColorMap().socialDistancingSeries};
     stroke: ${props =>
-      props.hasProjections
-        ? props.interventions.getChartSeriesColorMap().socialDistancingSeries
+      props.isInferred
+        ? props.projections.getChartSeriesColorMap().socialDistancingSeries
         : 'white'};
     fill-opacity: 1;
   }
   /* Stay at home */
   .stay-at-home {
     fill: ${props =>
-      props.interventions.getChartSeriesColorMap().shelterInPlaceSeries};
+      props.projections.getChartSeriesColorMap().shelterInPlaceSeries};
     stroke: ${props =>
-      props.hasProjections
-        ? props.interventions.getChartSeriesColorMap().shelterInPlaceSeries
+      props.isInferred
+        ? props.projections.getChartSeriesColorMap().shelterInPlaceSeries
         : 'white'};
     fill-opacity: 1;
   }
@@ -162,30 +165,28 @@ export const Wrapper = styled.div`
   /* Projected */
   .projected {
     stroke: ${props =>
-      props.interventions.getChartSeriesColorMap().projectedSeries};
+      props.projections.getChartSeriesColorMap().projectedSeries};
   }
   .${snakeCase(INTERVENTIONS.LIMITED_ACTION)} {
-    stroke: ${props => props.interventions.getThresholdInterventionLevel()};
+    stroke: ${props => props.projections.getAlarmLevelColor()};
   }
   .${snakeCase(INTERVENTIONS.SOCIAL_DISTANCING)} {
     stroke: ${props =>
-      props.interventions.getThresholdInterventionLevel() ===
-      COLOR_MAP.GREEN.BASE
+      props.projections.getAlarmLevelColor() === COLOR_MAP.GREEN.BASE
         ? COLOR_MAP.GREEN.DARK
-        : props.interventions.getThresholdInterventionLevel()};
+        : props.projections.getAlarmLevelColor()};
   }
   .${snakeCase(INTERVENTIONS.SHELTER_IN_PLACE)} {
-    stroke: ${props => props.interventions.getThresholdInterventionLevel()};
+    stroke: ${props => props.projections.getAlarmLevelColor()};
   }
   .${snakeCase(INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE)} {
     stroke: ${props =>
-      props.interventions.getThresholdInterventionLevel() ===
-      COLOR_MAP.GREEN.BASE
+      props.projections.getAlarmLevelColor() === COLOR_MAP.GREEN.BASE
         ? COLOR_MAP.GREEN.DARK
-        : props.interventions.getThresholdInterventionLevel()};
+        : props.projections.getAlarmLevelColor()};
   }
   .${snakeCase(INTERVENTIONS.LOCKDOWN)} {
-    stroke: ${props => props.interventions.getThresholdInterventionLevel()};
+    stroke: ${props => props.projections.getAlarmLevelColor()};
   }
 
   .today {
@@ -217,37 +218,11 @@ export const Wrapper = styled.div`
       border-bottom-left-radius: 16px;
     }
 
-    &.custom-plot-label-${snakeCase(INTERVENTIONS.LIMITED_ACTION)} {
+    &.custom-plot-label-hospital-overload {
       background: ${props =>
-        props.interventions.getThresholdInterventionLevel()};
-    }
-
-    &.custom-plot-label-${snakeCase(INTERVENTIONS.SOCIAL_DISTANCING)} {
-      background: ${props =>
-        props.interventions.getThresholdInterventionLevel() ===
-        COLOR_MAP.GREEN.BASE
+        props.projections.getAlarmLevelColor() === COLOR_MAP.GREEN.BASE
           ? COLOR_MAP.GREEN.DARK
-          : props.interventions.getThresholdInterventionLevel()};
-    }
-
-    &.custom-plot-label-${snakeCase(
-        INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE,
-      )} {
-      background: ${props =>
-        props.interventions.getThresholdInterventionLevel() ===
-        COLOR_MAP.GREEN.BASE
-          ? COLOR_MAP.GREEN.DARK
-          : props.interventions.getThresholdInterventionLevel()};
-    }
-
-    &.custom-plot-label-${snakeCase(INTERVENTIONS.SHELTER_IN_PLACE)} {
-      background: ${props =>
-        props.interventions.getThresholdInterventionLevel()};
-    }
-
-    &.custom-plot-label-${snakeCase(INTERVENTIONS.LOCKDOWN)} {
-      background: ${props =>
-        props.interventions.getThresholdInterventionLevel()};
+          : props.projections.getAlarmLevelColor()};
     }
   }
 `;
