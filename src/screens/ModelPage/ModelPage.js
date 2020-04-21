@@ -141,7 +141,7 @@ function ModelPage() {
                 <Content>
                   <Outcomes
                     title="Predicted Outcomes"
-                    models={[projections.baseline, projections.primary]}
+                    projections={[projections.baseline, projections.primary]}
                     colors={[
                       projections.getSeriesColorForLimitedAction(),
                       projections.getSeriesColorForPrimary(),

@@ -218,11 +218,7 @@ export const Wrapper = styled.div`
       border-bottom-left-radius: 16px;
     }
 
-    &.custom-plot-label-${snakeCase(INTERVENTIONS.LIMITED_ACTION)} {
-      background: ${props => props.projections.getAlarmLevelColor()};
-    }
-
-    &.custom-plot-label-${snakeCase(INTERVENTIONS.SOCIAL_DISTANCING)} {
+    &.custom-plot-label-hospital-overload {
       background: ${props =>
         props.projections.getAlarmLevelColor() === COLOR_MAP.GREEN.BASE
           ? COLOR_MAP.GREEN.DARK

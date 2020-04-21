@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import { dateFormat } from 'highcharts';
 import moment from 'moment';
-import { snakeCase } from 'lodash';
 import { INTERVENTIONS } from 'enums/interventions';
 import LightTooltip from 'components/LightTooltip/LightTooltip';
 import ClaimStateBlock from 'components/ClaimStateBlock/ClaimStateBlock';
@@ -40,7 +39,7 @@ const ModelChart = ({
   projections,
   currentIntervention,
   lastUpdatedDate,
-  forCompareModels, // true when used by Compareprojections.js component.
+  forCompareModels, // true when used by CompareInterventions.js component.
   stateId,
   selectedCounty,
 }) => {
@@ -145,7 +144,7 @@ const ModelChart = ({
       condensedName:
         currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
           ? condensedFormatIntervention(
-              projections.SHELTER_IN_PLACE,
+              INTERVENTIONS.SHELTER_IN_PLACE,
               ' (strict)',
             )
           : condensedFormatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
@@ -194,19 +193,10 @@ const ModelChart = ({
         plotLines: [
           {
             value: projection.dateOverwhelmed,
-            className: snakeCase(
-              currentIntervention === projections.SHELTER_IN_PLACE
-                ? projections.SHELTER_IN_PLACE_WORST_CASE
-                : currentIntervention,
-            ),
             zIndex: 10,
             label: {
               formatter: function () {
-                return `<div class="custom-plot-label custom-plot-label-${snakeCase(
-                  currentIntervention === projections.SHELTER_IN_PLACE
-                    ? projections.SHELTER_IN_PLACE_WORST_CASE
-                    : currentIntervention,
-                )}${
+                return `<div class="custom-plot-label custom-plot-label-hospital-overload ${
                   dateOverwhelmedIsPastHalfway
                     ? ' custom-plot-label-reverse'
                     : ''
@@ -309,13 +299,7 @@ const ModelChart = ({
   if (condensed) {
     return (
       <ChartContainer>
-        <Wrapper
-          projections={projections}
-          isInferred={projection.isInferred}
-          inShelterInPlace={
-            currentIntervention === projections.SHELTER_IN_PLACE
-          }
-        >
+        <Wrapper projections={projections} isInferred={projection.isInferred}>
           <Chart options={options} />
           <CondensedLegend>
             {[noAction, socialDistancing, shelterInPlace, availableBeds]
@@ -328,11 +312,7 @@ const ModelChart = ({
   }
   return (
     <ChartContainer>
-      <Wrapper
-        projections={projections}
-        isInferred={projection.isInferred}
-        inShelterInPlace={currentIntervention === projections.SHELTER_IN_PLACE}
-      >
+      <Wrapper projections={projections} isInferred={projection.isInferred}>
         <Chart options={options} />
         <DisclaimerWrapper>
           <Disclaimer>
@@ -351,7 +331,7 @@ const ModelChart = ({
               This model updates every 3 days and is intended to help make fast
               decisions, not predict the future.{' '}
               <a
-                href="https://data.covidactnow.org/Covid_Act_Now_projection_References_and_Assumptions.pdf"
+                href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
               >
