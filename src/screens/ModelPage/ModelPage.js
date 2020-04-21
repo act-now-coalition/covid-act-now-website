@@ -76,8 +76,10 @@ function ModelPage() {
     history.push(route);
   };
 
-  // No projections
-  if (!projections || projections.county !== selectedCounty) {
+  // Projections haven't loaded yet
+  // If a new county has just been selected, we may not have projections
+  // for the new county loaded yet
+  if (!projections || projections.county != selectedCounty) {
     return <LoadingScreen></LoadingScreen>;
   }
 

@@ -5,6 +5,9 @@ import { INTERVENTIONS } from 'enums/interventions';
 import LightTooltip from 'components/LightTooltip/LightTooltip';
 import ClaimStateBlock from 'components/ClaimStateBlock/ClaimStateBlock';
 import Chart from './Chart';
+import { isEmpty } from 'lodash';
+import { COLOR_MAP } from 'enums/interventions';
+import ReactDOMServer from 'react-dom/server';
 
 import {
   ChartContainer,
@@ -196,11 +199,22 @@ const ModelChart = ({
             zIndex: 10,
             label: {
               formatter: function () {
-                return `<div class="custom-plot-label custom-plot-label-hospital-overload ${
-                  dateOverwhelmedIsPastHalfway
+                return ReactDOMServer.renderToString(
+                  <div
+                    class="custom-plot-label custom-plot-label-hospital-overload ${
+                    dateOverwhelmedIsPastHalfway
                     ? ' custom-plot-label-reverse'
                     : ''
-                }">Hospitals May Overload<br /><span>${projections.getChartHospitalsOverloadedText()}</span></div>`;
+                }"
+                  >
+                    Hospitals May Overload
+                    <br />
+                    <span>
+                      {' '}
+                      <ChartHospitalsOverloadedText projections={projections} />
+                    </span>
+                  </div>,
+                );
               },
               align: dateOverwhelmedIsPastHalfway ? 'right' : 'left',
               rotation: 0,
@@ -284,7 +298,6 @@ const ModelChart = ({
   }, [
     height,
     projection.dateOverwhelmed,
-    currentIntervention,
     projection.isInferred,
     noAction,
     socialDistancing,
@@ -365,6 +378,49 @@ function CondensedLegendItem({
     >
       {condensedName || name}
     </CondensedLegendItemStyled>
+  );
+}
+
+function ChartHospitalsOverloadedText({ projections }) {
+  let text = '';
+  const isDateOverWhelmedBeforeToday =
+    projections.worstCaseInterventionModel.dateOverwhelmed &&
+    moment(projections.worstCaseInterventionModel.dateOverwhelmed).isBefore(
+      moment().startOf('day'),
+    );
+
+  if (isDateOverWhelmedBeforeToday) {
+    return text;
+  }
+
+  const thresholdInterventionLevel = projections.getAlarmLevelColor();
+
+  switch (thresholdInterventionLevel) {
+    case COLOR_MAP.RED.BASE:
+      text = 'in 3 weeks or less';
+      break;
+    case COLOR_MAP.ORANGE.BASE:
+      text = 'in 3 to 6 weeks';
+      break;
+    case COLOR_MAP.GREEN.BASE:
+      text = projections.distancingPoorEnforcement.now.dateOverwhelmed
+        ? 'in 6 weeks or more'
+        : '';
+      break;
+    default:
+  }
+
+  const appendedPolicy =
+    projections.stateIntervention === INTERVENTIONS.SHELTER_IN_PLACE ? (
+      <div> with {projections.stateIntervention} (lax) </div>
+    ) : (
+      <div> with {projections.stateIntervention} </div>
+    );
+
+  return (
+    <>
+      {text} {!isEmpty(text) ? appendedPolicy : ''}{' '}
+    </>
   );
 }
 
