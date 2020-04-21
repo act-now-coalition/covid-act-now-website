@@ -4,6 +4,8 @@ const COLUMNS = {
   deaths: 10 + 1,
   infected: 9 + 1,
   totalPopulation: 16 + 1,
+  rt: 13 + 1,
+  rtStdev: 14 + 1,
   date: 0 + 1,
 };
 
@@ -34,9 +36,9 @@ export class Projection {
     this.delayDays = parameters.delayDays || 0;
     this.rt = null;
     if (this.isInferred) {
-      this.rt = (Math.random() + .98) % 1.3; // this is the value we will get from the data based off of inference?
+      this.rt = data[data.length - 1][COLUMNS.rt];
+      this.rtStdev = data[data.length - 1][COLUMNS.rtStdev];
     }
-
     let _parseInt = number => {
       // remove , in strings
       if (typeof number == 'string') {
