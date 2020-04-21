@@ -130,7 +130,7 @@ export default function Embed() {
       >
         <ShareModelBlock
           condensed
-          location={location}
+          stateId={stateId}
           county={selectedCounty}
           embedSnippet={iFrameCodeSnippet}
         />

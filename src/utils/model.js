@@ -21,7 +21,7 @@ async function fetchAll(urls) {
 }
 
 async function fetchProjections(
-  stateAbbr,
+  stateId,
   countyInfo = null,
   dataUrl = DATA_URL,
 ) {
@@ -35,10 +35,10 @@ async function fetchProjections(
 
   // load all the projections for a state or county in parallel
   const countyProjectionUrl = i =>
-    `${dataUrl}/county/${stateAbbr.toUpperCase()}.${
+    `${dataUrl}/county/${stateId.toUpperCase()}.${
       countyInfo.full_fips_code
     }.${i}.json`;
-  const stateProjectionUrl = i => `${dataUrl}/${stateAbbr}.${i}.json`;
+  const stateProjectionUrl = i => `${dataUrl}/${stateId}.${i}.json`;
   const urls = countyInfo
     ? fileIdsToLoad.map(i => countyProjectionUrl(i))
     : fileIdsToLoad.map(i => stateProjectionUrl(i));
@@ -55,7 +55,7 @@ async function fetchProjections(
     intervention: fileIdToIntervention[fileIdsToLoad[idx]],
   }));
 
-  return new Projections(projectionInfos, stateAbbr, countyInfo);
+  return new Projections(projectionInfos, stateId, countyInfo);
 }
 
 export function useProjections(location, county = null) {
@@ -72,18 +72,18 @@ export function useProjections(location, county = null) {
   return projections;
 }
 
-export function useStateSummary(stateAbbr) {
+export function useStateSummary(stateId) {
   const [countySummaries, setCountySummaries] = useState();
 
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(
-        `${DATA_URL}/county_summaries/${stateAbbr.toUpperCase()}.summary.json`,
+        `${DATA_URL}/county_summaries/${stateId.toUpperCase()}.summary.json`,
       );
       setCountySummaries(await response.json());
     }
     fetchData();
-  }, [stateAbbr]);
+  }, [stateId]);
 
   return countySummaries;
 }
