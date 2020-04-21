@@ -20,7 +20,12 @@ function intersection(a, b, c, d) {
 
   return i;
 }
-
+/**
+ * Represents a single projection for a given state or county.  Contains a
+ * time-series of things like hospitalizations, hospital capacity, infections, etc.
+ * The projection is either static or "inferred".  Inferred projections are based
+ * on the actual data observed in a given location
+ */
 export class Projection {
   constructor(data, parameters) {
     this.intervention = parameters.intervention;
@@ -142,8 +147,6 @@ export class Projection {
     );
   }
 
-  idxForDay = day => Math.ceil(day / 4);
-
   cumulativeInfectedAfter(days) {
     return this.cumulativeInfected[this.cumulativeInfected.length - 1];
   }
@@ -160,7 +163,8 @@ export class Projection {
   }
 
   getColumnAt(columnName, days) {
-    return this[columnName][this.idxForDay(days)];
+    const idxForDay = day => Math.ceil(day / 4);
+    return this[columnName][idxForDay(days)];
   }
 
   getDataset(columnName, duration, customLabel) {

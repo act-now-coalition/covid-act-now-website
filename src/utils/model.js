@@ -1,8 +1,9 @@
 import * as moment from 'moment';
 import { useState, useEffect } from 'react';
 import { Projections } from './../models/Projections';
-import { STATES, INTERVENTIONS } from 'enums';
-import DataUrlJson from 'assets/data/data_url';
+import { STATES, INTERVENTIONS } from '../enums';
+import DataUrlJson from '../assets/data/data_url';
+import fetch from 'node-fetch';
 
 const DATA_URL = DataUrlJson.data_url.replace(/\/$/, '');
 
@@ -20,7 +21,7 @@ async function fetchAll(urls) {
   );
 }
 
-async function fetchProjections(
+export async function fetchProjections(
   stateAbbr,
   countyInfo = null,
   dataUrl = DATA_URL,
@@ -72,15 +73,19 @@ export function useProjections(location, county = null) {
   return projections;
 }
 
+export async function fetchStateSummary(stateAbbr) {
+  const response = await fetch(
+    `${DATA_URL}/county_summaries/${stateAbbr.toUpperCase()}.summary.json`,
+  );
+  return response.json();
+}
+
 export function useStateSummary(stateAbbr) {
   const [countySummaries, setCountySummaries] = useState();
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch(
-        `${DATA_URL}/county_summaries/${stateAbbr.toUpperCase()}.summary.json`,
-      );
-      setCountySummaries(await response.json());
+      setCountySummaries(await fetchStateSummary(stateAbbr));
     }
     fetchData();
   }, [stateAbbr]);
