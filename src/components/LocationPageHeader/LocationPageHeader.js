@@ -54,9 +54,10 @@ function LocationSummary({ projections }) {
   const predictionText = {
     [COLOR_MAP.GREEN.BASE]: (
       <>
-        Our projections show that cases in your area are increasing
-        exponentially. Stay home to help prevent an outbreak. Check back —
-        projections update every 3 days with the most recent data.
+        Assuming current interventions remain in place, we expect the total
+        cases in your area to decrease.. 14 days of decreasing cases is the
+        first step to reopening. Check back — projections update every 3 days
+        with the most recent data.
       </>
     ),
     [COLOR_MAP.ORANGE.BASE]: (
@@ -68,10 +69,9 @@ function LocationSummary({ projections }) {
     ),
     [COLOR_MAP.RED.BASE]: (
       <>
-        Assuming current interventions remain in place, we expect the total
-        cases in your area to decrease.. 14 days of decreasing cases is the
-        first step to reopening. Check back — projections update every 3 days
-        with the most recent data.
+        Our projections show that cases in your area are increasing
+        exponentially. Stay home to help prevent an outbreak. Check back —
+        projections update every 3 days with the most recent data.
       </>
     ),
     [COLOR_MAP.BLACK]: (
