@@ -412,11 +412,17 @@ function ChartHospitalsOverloadedText({ projections }) {
   }
 
   const appendedPolicy =
-    projections.stateIntervention === INTERVENTIONS.SHELTER_IN_PLACE
-      ? <div> with {projections.stateIntervention} (lax) </div>
-      : <div> with {projections.stateIntervention} </div>;
+    projections.stateIntervention === INTERVENTIONS.SHELTER_IN_PLACE ? (
+      <div> with {projections.stateIntervention} (lax) </div>
+    ) : (
+      <div> with {projections.stateIntervention} </div>
+    );
 
-  return <>{text} {!isEmpty(text)? appendedPolicy : ''} </>;
+  return (
+    <>
+      {text} {!isEmpty(text) ? appendedPolicy : ''}{' '}
+    </>
+  );
 }
 
 export default ModelChart;
