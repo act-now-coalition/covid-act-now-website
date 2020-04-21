@@ -34,10 +34,13 @@ import {
   ChartHeader,
 } from './ModelPage.style';
 import { STATES, STATE_TO_INTERVENTION, INTERVENTIONS } from 'enums';
-import { useProjections, useStateSummary, useModelLastUpdatedDate } from 'utils/model';
+import {
+  useProjections,
+  useStateSummary,
+  useModelLastUpdatedDate,
+} from 'utils/model';
 
 function ModelPage() {
-
   let { stateId, countyId } = useParams();
   // TODO(igor): don't mix uppercase and lowercase in here
   stateId = stateId.toUpperCase();
@@ -52,8 +55,7 @@ function ModelPage() {
 
   if (countyId) {
     countyOption = _.find(
-      US_STATE_DATASET.state_county_map_dataset[stateId]
-        .county_dataset,
+      US_STATE_DATASET.state_county_map_dataset[stateId].county_dataset,
       ['county_url_name', countyId],
     );
   }
@@ -179,10 +181,7 @@ function ModelPage() {
                     </li>
                   </ul>
 
-                  <ShareModelBlock
-                    stateId={stateId}
-                    county={selectedCounty}
-                  />
+                  <ShareModelBlock stateId={stateId} county={selectedCounty} />
                 </Content>
               </Panel>
             )}

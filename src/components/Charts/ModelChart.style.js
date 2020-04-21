@@ -48,56 +48,56 @@ export const DisclaimerHeader = styled(Typography)`
 export const DisclaimerBody = styled(Typography)``;
 
 export const Wrapper = styled.div`
-         max-width: 900px;
-         margin: auto;
+  max-width: 900px;
+  margin: auto;
 
-         .highcharts-axis-labels {
-           font-family: 'Roboto', sans-serif;
-           font-weight: 'Medium';
-           font-size: 13px;
-           color: rgba(0, 0, 0, 0.5);
+  .highcharts-axis-labels {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 'Medium';
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.5);
 
-           span {
-             padding: 8px 8px;
-             background: rgba(255, 255, 255, 0.7);
-             border-radius: 16px;
-           }
-         }
+    span {
+      padding: 8px 8px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 16px;
+    }
+  }
 
-         /* Don't show a label for 0
+  /* Don't show a label for 0
      because it overlaps with the x-axis */
-         .highcharts-yaxis-labels span:first-child {
-           display: none;
-         }
+  .highcharts-yaxis-labels span:first-child {
+    display: none;
+  }
 
-         /* .highcharts-tooltip-box {
+  /* .highcharts-tooltip-box {
     fill: black;
     fill-opacity: 0.6;
   } */
-         g.highcharts-tooltip {
-           display: none;
-         }
-         .highcharts-tooltip {
-           background: none;
-           padding: 0;
-           border: none;
-         }
-         .highcharts-markers {
-           stroke: white !important;
-         }
-         .highcharts-halo {
-           fill: white !important;
-           fill-opacity: 1;
-           box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.5);
-         }
-         .highcharts-tooltip > span {
-           background: rgba(0, 0, 0, 0.7);
-           color: #ffffff;
-           border-radius: 4px;
-           box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
-           padding: 16px;
-         }
-         /* .highcharts-tooltip text {
+  g.highcharts-tooltip {
+    display: none;
+  }
+  .highcharts-tooltip {
+    background: none;
+    padding: 0;
+    border: none;
+  }
+  .highcharts-markers {
+    stroke: white !important;
+  }
+  .highcharts-halo {
+    fill: white !important;
+    fill-opacity: 1;
+    box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.5);
+  }
+  .highcharts-tooltip > span {
+    background: rgba(0, 0, 0, 0.7);
+    color: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+    padding: 16px;
+  }
+  /* .highcharts-tooltip text {
     fill: white;
     text-shadow: 0 0 3px black;
   } */
@@ -230,8 +230,8 @@ export const Wrapper = styled.div`
     }
 
     &.custom-plot-label-${snakeCase(
-      INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE,
-    )} {
+        INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE,
+      )} {
       background: ${props =>
         props.projections.getAlarmLevelColor() === COLOR_MAP.GREEN.BASE
           ? COLOR_MAP.GREEN.DARK

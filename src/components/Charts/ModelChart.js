@@ -44,7 +44,6 @@ const ModelChart = ({
   stateId,
   selectedCounty,
 }) => {
-
   // We use the inferred projection if supported, otherwise the worst case for the currently active intervention
   let projection = projections.primary;
 
@@ -132,7 +131,8 @@ const ModelChart = ({
         : formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
     type: projection.isInferred ? 'spline' : 'areaspline',
     visible:
-      !projection.isInferred || currentIntervention !== INTERVENTIONS.SHELTER_IN_PLACE,
+      !projection.isInferred ||
+      currentIntervention !== INTERVENTIONS.SHELTER_IN_PLACE,
 
     data: data[3].data,
     marker: {
