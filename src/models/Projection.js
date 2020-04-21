@@ -32,6 +32,10 @@ export class Projection {
     this.isInferred = parameters.isInferred;
     this.durationDays = parameters.durationDays || null /* permanent */;
     this.delayDays = parameters.delayDays || 0;
+    this.rt = null;
+    if (this.isInferred) {
+      this.rt = (Math.random() + .98) % 1.3; // this is the value we will get from the data based off of inference?
+    }
 
     let _parseInt = number => {
       // remove , in strings

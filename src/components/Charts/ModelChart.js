@@ -48,7 +48,6 @@ const ModelChart = ({
 }) => {
   // We use the inferred projection if supported, otherwise the worst case for the currently active intervention
   let projection = projections.primary;
-
   const scenarioComparisonOverTime = duration => [
     projections.baseline.getDataset('hospitalizations', duration),
     projections.distancingPoorEnforcement.now.getDataset(
@@ -293,7 +292,7 @@ const ModelChart = ({
       },
       series: projection.isInferred
         ? [noAction, projected, shelterInPlace, availableBeds]
-        : [noAction, socialDistancing, shelterInPlace, availableBeds],
+        : [noAction, shelterInPlace, availableBeds],
     };
   }, [
     height,

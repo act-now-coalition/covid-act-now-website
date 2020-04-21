@@ -61,7 +61,6 @@ export default function Embed() {
   const stateSummaryData = useStateSummaryData(location);
   const locationName = STATES[location];
   const intervention = STATE_TO_INTERVENTION[location];
-
   let summaryData = stateSummaryData;
   if (stateSummaryData && selectedCounty) {
     summaryData = _.find(summaryData.counties, [

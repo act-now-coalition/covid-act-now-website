@@ -22,7 +22,7 @@ export class Projections {
     this.distancing = null;
     this.distancingPoorEnforcement = null;
     this.currentInterventionModel = null;
-    this.supportsInferred = county == null;
+    this.supportsInferred = false;
     this.isCounty = county != null;
 
     this.populateInterventions(projectionInfos);
@@ -71,6 +71,15 @@ export class Projections {
   }
 
   getAlarmLevelColor() {
+    if (this.supportsInferred) {
+      if (this.primary.rt < 1) {
+        return COLOR_MAP.GREEN.BASE;
+      } else if (this.primary.rt < 1.2){
+        return COLOR_MAP.ORANGE.BASE;
+      } else {
+        return COLOR_MAP.RED.BASE;
+      }
+    }
     switch (this.stateIntervention) {
       case INTERVENTIONS.LIMITED_ACTION:
         return this.getAlarmLevelColorForLimitedAction();
@@ -244,18 +253,17 @@ export class Projections {
           isInferred: pi.intervention === INTERVENTIONS.PROJECTED,
         });
       }
-
       if (pi.intervention === INTERVENTIONS.LIMITED_ACTION) {
         this.baseline = projection;
       } else if (pi.intervention === INTERVENTIONS.SHELTER_IN_PLACE) {
         this.distancing = { now: projection };
       } else if (pi.intervention === INTERVENTIONS.PROJECTED) {
         this.projected = projection;
+        this.supportsInferred = !!this.projected;
       } else if (pi.intervention === INTERVENTIONS.SOCIAL_DISTANCING) {
         this.distancingPoorEnforcement = { now: projection };
       }
     });
-
     this.interventionModelMap = {
       [INTERVENTIONS.LIMITED_ACTION]: this.baseline,
       [INTERVENTIONS.SOCIAL_DISTANCING]: this.distancingPoorEnforcement.now,
