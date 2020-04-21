@@ -1,6 +1,6 @@
 # Covid Act Now
 
-This is the code repository for https://covidactnow.org/ - a tool providing public leaders and health officials data to help answer the question: "how can the US can reopen safely?"
+This is the code repository for https://covidactnow.org/ - a tool providing public leaders and health officials data to help answer the question: "how can the US reopen safely?"
 
 ## How to use this tool
 This tool is built to enable political leaders to make decisions in their COVID-19 response informed by best available data and modeling.
@@ -11,7 +11,7 @@ This tool is built to enable political leaders to make decisions in their COVID-
 * What are my menu of interventions, and how will they address the spread of COVID-19?
 
 ## Comments, questions, or want to get involved?
-If you have time to give us feedback or access to this expertise, have questions, or otherwise want to get involved, please email us info@covidactnow.org
+If you have time to give us feedback, have questions, or otherwise want to get involved, please email us info@covidactnow.org
 
 ## Already involved? 
 Check out the frontend 
