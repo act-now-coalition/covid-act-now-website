@@ -40,7 +40,7 @@ const ModelChart = ({
   projections,
   currentIntervention,
   lastUpdatedDate,
-  forCompareModels, // true when used by Compareprojections.js component.
+  forCompareModels, // true when used by CompareInterventions.js component.
   location,
   selectedCounty,
 }) => {
@@ -145,7 +145,7 @@ const ModelChart = ({
       condensedName:
         currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
           ? condensedFormatIntervention(
-              projections.SHELTER_IN_PLACE,
+              INTERVENTIONS.SHELTER_IN_PLACE,
               ' (strict)',
             )
           : condensedFormatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
@@ -194,19 +194,15 @@ const ModelChart = ({
         plotLines: [
           {
             value: projection.dateOverwhelmed,
-            className: snakeCase(
-              currentIntervention === projections.SHELTER_IN_PLACE
-                ? projections.SHELTER_IN_PLACE_WORST_CASE
+            className:  snakeCase(
+              currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
+                ? INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE
                 : currentIntervention,
             ),
             zIndex: 10,
             label: {
               formatter: function () {
-                return `<div class="custom-plot-label custom-plot-label-${snakeCase(
-                  currentIntervention === projections.SHELTER_IN_PLACE
-                    ? projections.SHELTER_IN_PLACE_WORST_CASE
-                    : currentIntervention,
-                )}${
+                return `<div class="custom-plot-label custom-plot-label-hospital-overload ${
                   dateOverwhelmedIsPastHalfway
                     ? ' custom-plot-label-reverse'
                     : ''
@@ -312,9 +308,6 @@ const ModelChart = ({
         <Wrapper
           projections={projections}
           isInferred={projection.isInferred}
-          inShelterInPlace={
-            currentIntervention === projections.SHELTER_IN_PLACE
-          }
         >
           <Chart options={options} />
           <CondensedLegend>
@@ -331,7 +324,6 @@ const ModelChart = ({
       <Wrapper
         projections={projections}
         isInferred={projection.isInferred}
-        inShelterInPlace={currentIntervention === projections.SHELTER_IN_PLACE}
       >
         <Chart options={options} />
         <DisclaimerWrapper>

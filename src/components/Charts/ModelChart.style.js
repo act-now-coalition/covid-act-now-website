@@ -218,29 +218,14 @@ export const Wrapper = styled.div`
       border-bottom-left-radius: 16px;
     }
 
-    &.custom-plot-label-${snakeCase(INTERVENTIONS.LIMITED_ACTION)} {
-      background: ${props => props.projections.getAlarmLevelColor()};
-    }
-
-    &.custom-plot-label-${snakeCase(INTERVENTIONS.SOCIAL_DISTANCING)} {
-      background: ${props =>
+    &.custom-plot-label-hospital-overload {
+      background: ${ props =>
         props.projections.getAlarmLevelColor() === COLOR_MAP.GREEN.BASE
           ? COLOR_MAP.GREEN.DARK
-          : props.projections.getAlarmLevelColor()};
+          : props.projections.getAlarmLevelColor()
+      };
     }
 
-    &.custom-plot-label-${snakeCase(
-        INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE,
-      )} {
-      background: ${props =>
-        props.projections.getAlarmLevelColor() === COLOR_MAP.GREEN.BASE
-          ? COLOR_MAP.GREEN.DARK
-          : props.projections.getAlarmLevelColor()};
-    }
-
-    &.custom-plot-label-${snakeCase(INTERVENTIONS.SHELTER_IN_PLACE)} {
-      background: ${props => props.projections.getAlarmLevelColor()};
-    }
   }
 `;
 
