@@ -20,7 +20,7 @@ import { STATES } from 'enums';
 
 const ShareBlock = ({
   condensed,
-  location,
+  stateId,
   countyName,
   shareQuote,
   shareURL,
@@ -29,7 +29,7 @@ const ShareBlock = ({
   onClickEmbed,
 }: {
   condensed?: boolean;
-  location?: string;
+  stateId?: string;
   countyName?: String;
   shareQuote?: string;
   shareURL?: string;
@@ -56,10 +56,10 @@ const ShareBlock = ({
     county?: string;
   }>(locationPath.pathname, {
     path: [
-      '/us/:id',
-      '/us/:id/county/:county',
-      '/embed/us/:id',
-      '/embed/us/:id/county/:county',
+      '/us/:stateId',
+      '/us/:stateId/county/:countyId',
+      '/embed/us/:stateId',
+      '/embed/us/:stateId/county/:countyId',
     ],
     exact: true,
     strict: false,
@@ -128,7 +128,7 @@ const ShareBlock = ({
         {newsletterInstruction ||
           'Get the latest updates from the Covid Act Now team'}
       </ShareInstruction>
-      <Newsletter county={countyName} location={location} />
+      <Newsletter county={countyName} stateId={stateId} />
     </ShareContainer>
   );
 };

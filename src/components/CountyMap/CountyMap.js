@@ -16,10 +16,10 @@ const CountyMap = ({
   fill,
   stateSummary = {},
 }) => {
-  const { id: location } = useParams();
-  const _location = location.toUpperCase();
-  const state = STATE_CENTERS[_location];
-  const counties = require(`./countyTopoJson/${_location.toUpperCase()}.json`);
+  let { stateId } = useParams();
+  stateId = stateId.toUpperCase();
+  const state = STATE_CENTERS[stateId];
+  const counties = require(`./countyTopoJson/${stateId}.json`);
   const countiesWithData =
     stateSummary && stateSummary.counties_with_data
       ? stateSummary.counties_with_data

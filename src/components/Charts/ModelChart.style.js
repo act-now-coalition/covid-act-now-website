@@ -224,6 +224,15 @@ export const Wrapper = styled.div`
           ? COLOR_MAP.GREEN.DARK
           : props.projections.getAlarmLevelColor()};
     }
+
+    &.custom-plot-label-${snakeCase(
+        INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE,
+      )} {
+      background: ${props =>
+        props.projections.getAlarmLevelColor() === COLOR_MAP.GREEN.BASE
+          ? COLOR_MAP.GREEN.DARK
+          : props.projections.getAlarmLevelColor()};
+    }
   }
 `;
 

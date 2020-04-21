@@ -10,15 +10,13 @@ import { STATES } from 'enums';
 
 const EMAIL = 'gov@covidactnow.org';
 
-const ClaimStateBlock = ({ location, countyName }) => {
-  const locationName = location && STATES[location];
-  const headerName = countyName
-    ? `${countyName}`
-    : `the state of ${locationName}`;
-  const bodyName = countyName ? `${countyName}` : `${locationName}`;
+const ClaimStateBlock = ({ stateId, countyName }) => {
+  const stateName = stateId && STATES[stateId];
+  const headerName = countyName ? `${countyName}` : `the state of ${stateName}`;
+  const bodyName = countyName ? `${countyName}` : `${stateName}`;
   return (
     <ClaimStateContainer>
-      <ClaimStateHeader>Do your work for {headerName}?</ClaimStateHeader>
+      <ClaimStateHeader>Do you work for {headerName}?</ClaimStateHeader>
       <ClaimStateBody>
         Let us know how we can make our model more useful for you and {bodyName}{' '}
         residents. Email us at <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.

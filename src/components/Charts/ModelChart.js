@@ -43,7 +43,7 @@ const ModelChart = ({
   currentIntervention,
   lastUpdatedDate,
   forCompareModels, // true when used by CompareInterventions.js component.
-  location,
+  stateId,
   selectedCounty,
 }) => {
   // We use the inferred projection if supported, otherwise the worst case for the currently active intervention
@@ -355,7 +355,7 @@ const ModelChart = ({
             </DisclaimerBody>
           </Disclaimer>
           <Disclaimer>
-            <ClaimStateBlock location={location} county={selectedCounty} />
+            <ClaimStateBlock stateId={stateId} county={selectedCounty} />
           </Disclaimer>
         </DisclaimerWrapper>
       </Wrapper>

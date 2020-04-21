@@ -7,14 +7,14 @@ const EMBED_HEIGHT = 700;
 export function useEmbed() {
   // Check if we're embedded in an iFrame
   const { pathname } = useLocation();
-  const { id } = useParams();
+  const { stateId } = useParams();
 
   const isEmbed = pathname.includes('/embed');
   const hostPath = window.location.origin;
 
   const getPath = (countyFipsCode: string) =>
     // Either "/us/county/:countyId" or "/us/:stateId"
-    `us/${countyFipsCode ? 'county/' + countyFipsCode : id || ''}`;
+    `us/${countyFipsCode ? 'county/' + countyFipsCode : stateId || ''}`;
 
   const getIframePath = (countyFipsCode: string) =>
     `${hostPath}/embed/${getPath(countyFipsCode)}`;
@@ -33,7 +33,7 @@ export function useEmbed() {
     return (
       '<div ' +
       'class="covid-act-now-embed" ' +
-      (id ? `data-state-id="${id}" ` : '') +
+      (stateId ? `data-state-id="${stateId}" ` : '') +
       (countyFipsCode ? `data-fips-id="${countyFipsCode}" ` : '') +
       '/>' +
       `<script src="${hostPath}/scripts/embed.js"></script>`
