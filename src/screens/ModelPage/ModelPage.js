@@ -14,6 +14,7 @@ import {
   MapMenuMobileWrapper,
   MapMenuItem,
 } from 'components/Header/SearchHeader.style';
+import Disclaimer from 'components/Charts/Disclaimer';
 
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import {
@@ -33,6 +34,7 @@ import {
   CountyMapAltWrapper,
   ChartHeader,
 } from './ModelPage.style';
+
 import { STATES, STATE_TO_INTERVENTION, INTERVENTIONS } from 'enums';
 import {
   useProjections,
@@ -135,11 +137,12 @@ function ModelPage() {
                 <ModelChart
                   projections={projections}
                   currentIntervention={intervention}
-                  lastUpdatedDate={modelLastUpdatedDate}
-                  dateOverwhelmed={projections.baseline.dateOverwhelmed}
-                  stateId={stateId}
-                  selectedCounty={selectedCounty}
-                />
+                  dateOverwhelmed={projections.baseline.dateOverwhelmed}>
+                    <Disclaimer 
+                      modelLastUpdatedDate={modelLastUpdatedDate}
+                      stateId={stateId}
+                      county={selectedCounty}/>
+                </ModelChart>
                 <Content>
                   <Outcomes
                     title="Predicted Outcomes"
