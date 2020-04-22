@@ -38,15 +38,6 @@ function LocationPageHeading({ projections }) {
     [COLOR_MAP.RED.BASE]: 'COVID cases are growing exponentially in',
     [COLOR_MAP.BLACK]: 'We don’t have enough data for',
   }[projections.getAlarmLevelColor()];
-  const rtInfo = projections.primary.rt ? (
-    <>
-      (R<sub>t</sub>
-      {projections.primary.rt === '0.99' ? '<' : '='}
-      {Math.max(projections.primary.rt, 1)})
-    </>
-  ) : (
-    ''
-  );
 
   return (
     <span>
