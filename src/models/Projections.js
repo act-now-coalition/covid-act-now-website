@@ -80,7 +80,7 @@ export class Projections {
         return COLOR_MAP.RED.BASE;
       }
     } else {
-      return COLOR_MAP.GRAY;
+      return COLOR_MAP.GRAY.BASE;
     }
   }
 

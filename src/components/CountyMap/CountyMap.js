@@ -9,6 +9,7 @@ import {
 import ReactTooltip from 'react-tooltip';
 import STATE_CENTERS from '../../enums/us_state_centers';
 import { FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR } from 'enums/interventions';
+import { COLOR_MAP } from 'enums/interventions';
 
 const CountyMap = ({
   selectedCounty,
@@ -60,7 +61,7 @@ const CountyMap = ({
                     fill={
                       countiesWithData.includes(geo.properties.GEOID)
                         ? getFillColor(geo.properties.GEOID)
-                        : '#ccc'
+                        : COLOR_MAP.GRAY.LIGHT
                     }
                     stroke={'white'}
                     onMouseEnter={() => {

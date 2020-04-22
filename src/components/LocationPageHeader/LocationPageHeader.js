@@ -39,7 +39,11 @@ function LocationPageHeading({ projections }) {
     [COLOR_MAP.BLACK]: 'We don’t have enough data for',
   }[projections.getAlarmLevelColor()];
   const rtInfo = projections.primary.rt ? (
-    <>(Rt={projections.primary.rt})</>
+    <>
+      (R<sub>t</sub>
+      {projections.primary.rt === "0.99" ? '<' : '='}
+      {Math.max(projections.primary.rt, 1)})
+    </>
   ) : (
     ''
   );
@@ -56,7 +60,7 @@ function LocationSummary({ projections }) {
     [COLOR_MAP.GREEN.BASE]: (
       <>
         Assuming current interventions remain in place, we expect the total
-        cases in your area to decrease.. 14 days of decreasing cases is the
+        cases in your area to decrease. 14 days of decreasing cases is the
         first step to reopening. Check back — projections update every 3 days
         with the most recent data.
       </>
@@ -64,7 +68,7 @@ function LocationSummary({ projections }) {
     [COLOR_MAP.ORANGE.BASE]: (
       <>
         Assuming current interventions remain in place, cases in your area are
-        stable, and may even begin to decrease soon.. Check back — projections
+        stable, and may even begin to decrease soon. Check back — projections
         update every 3 days with the most recent data.
       </>
     ),
@@ -89,7 +93,9 @@ function LocationSummary({ projections }) {
 
 const LocationPageHeader = ({ projections }) => {
   const { isEmbed } = useEmbed();
-
+  const fillColor = projections.getAlarmLevelColor();
+  // darken for legibility
+  const textColor = fillColor === COLOR_MAP.GRAY.BASE ? COLOR_MAP.GRAY.DARK : fillColor;
   return (
     <StyledLocationPageHeaderWrapper condensed={isEmbed}>
       <StyledLocationPageHeaderInner condensed={isEmbed}>
@@ -97,14 +103,14 @@ const LocationPageHeader = ({ projections }) => {
           <StateCircleSvg
             actionBackgroundFill={COLORS.LIGHTGRAY}
             state={projections.stateCode}
-            fillColor={projections.getAlarmLevelColor()}
+            fillColor={fillColor}
             hasAction={true}
           />
         </StyledStateImageWrapper>
         <StyledStateCopyWrapper>
           <div>
             <HeaderTitle>
-              <HeaderHighlight color={projections.getAlarmLevelColor()}>
+              <HeaderHighlight color={textColor}>
                 <LocationPageHeading projections={projections} />
               </HeaderHighlight>
             </HeaderTitle>

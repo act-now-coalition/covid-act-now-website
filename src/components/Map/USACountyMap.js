@@ -13,6 +13,7 @@ import {
 } from './Map.style';
 import { invert } from 'lodash';
 import { STATES } from 'enums';
+import { COLOR_MAP } from 'enums/interventions';
 
 const reversedStateMap = invert(STATES);
 
@@ -22,12 +23,40 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent }) => {
     if (stateCode) {
       return STATE_TO_CALCULATED_INTERVENTION_COLOR[stateCode] || '#e3e3e3';
     } else {
-      return FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR[geo.id] || '#e3e3e3';
+      let countyColor = FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR[geo.id];
+      if (countyColor == COLOR_MAP.GRAY.BASE || !countyColor) {
+        countyColor = 'rgba(0,0,0,0)'
+      }
+      return countyColor;
     }
   };
 
+  // TODO(igor): This has two sets of state maps: one for coloring and one for handling clicks
+  // This seems anecdotally bad for performance so we should do something better
   return (
     <USMapWrapper>
+      <USStateMapWrapper>
+        <ComposableMap
+          data-tip=""
+          projection="geoAlbersUsa"
+          stroke={'rgba(0,0,0,0.15)'}
+        >
+          <Geographies geography={STATES_JSON}>
+            {({ geographies }) =>
+              geographies.map(geo => {
+                return (
+                  <Geography
+                    opacity={0.3}
+                    key={geo.rsmKey}
+                    geography={geo}
+                    fill={getFillColor(geo)}
+                  />
+                );
+              })
+            }
+          </Geographies>
+        </ComposableMap>
+      </USStateMapWrapper>
       <USCountyMapWrapper>
         <ComposableMap projection="geoAlbersUsa">
           <Geographies geography={COUNTIES_JSON}>
@@ -39,6 +68,7 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent }) => {
                     geography={geo}
                     stroke={'rgba(255,255,255,0.05)'}
                     fill={getFillColor(geo)}
+                    opacity={1.0}
                   />
                 );
               })
@@ -57,7 +87,6 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent }) => {
               geographies.map(geo => {
                 return (
                   <Geography
-                    opacity={0.95}
                     key={geo.rsmKey}
                     geography={geo}
                     fill={'transparent'}

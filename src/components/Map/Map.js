@@ -76,7 +76,7 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
           <MiniLegendItem
             key={'legend-4'}
             title={'Data unavailable'}
-            color={COLOR_MAP.GREY}
+            color={COLOR_MAP.GRAY.BASE}
             description={'Predictions not available'}
           />
         </Legend>
