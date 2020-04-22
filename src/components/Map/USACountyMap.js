@@ -1,14 +1,14 @@
 import React from 'react';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import {
-  FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR,
+//  FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR,
   STATE_TO_CALCULATED_INTERVENTION_COLOR,
 } from 'enums/interventions';
-import COUNTIES_JSON from './data/counties-10m.json';
+//import COUNTIES_JSON from './data/counties-10m.json';
 import STATES_JSON from './data/states-10m.json';
 import {
   USMapWrapper,
-  USCountyMapWrapper,
+//  USCountyMapWrapper,
   USStateMapWrapper,
 } from './Map.style';
 import { invert } from 'lodash';

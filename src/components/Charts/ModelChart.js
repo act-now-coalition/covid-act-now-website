@@ -200,9 +200,9 @@ const ModelChart = ({
               formatter: function () {
                 return ReactDOMServer.renderToString(
                   <div
-                    class="custom-plot-label custom-plot-label-hospital-overload ${
-                    dateOverwhelmedIsPastHalfway
-                    ? ' custom-plot-label-reverse'
+                    class="custom-plot-label custom-plot-label-hospital-overload {
+                      dateOverwhelmedIsPastHalfway
+                      ? ' custom-plot-label-reverse'
                     : ''
                 }"
                   >
