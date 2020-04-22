@@ -50,7 +50,7 @@ function LocationPageHeading({ projections }) {
 
   return (
     <span>
-      {title} {displayName} {rtInfo}
+      {title} {displayName}
     </span>
   );
 }
