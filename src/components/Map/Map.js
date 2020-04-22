@@ -41,7 +41,7 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
         <Legend>
           <LegendItem
             key={'legend-3'}
-            title={'Elevated risk of hospital overload'}
+            title={'Cases are increasing'}
             color={COLOR_MAP.RED.BASE}
             description={
               'Hospitals at elevated risk to be overloaded in the next 3 weeks. Act now to flatten the curve.'
@@ -49,7 +49,7 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
           />
           <LegendItem
             key={'legend-2'}
-            title={'Moderate risk of hospital overload'}
+            title={'Cases are stable'}
             color={COLOR_MAP.ORANGE.BASE}
             description={
               'Hospitals at moderate risk to be overloaded in the next 3-6 weeks.'
@@ -57,7 +57,7 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
           />
           <LegendItem
             key={'legend-1'}
-            title={'Low risk of hospital overload'}
+            title={'Cases are decreasing'}
             color={COLOR_MAP.GREEN.BASE}
             description={
               'Hospitals not projected to overload assuming anti-COVID interventions remain in place.'
@@ -76,7 +76,7 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
           <MiniLegendItem
             key={'legend-4'}
             title={'Data unavailable'}
-            color={COLOR_MAP.GREY}
+            color={COLOR_MAP.GRAY.BASE}
             description={'Predictions not available'}
           />
         </Legend>

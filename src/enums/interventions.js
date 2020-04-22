@@ -49,7 +49,11 @@ export const COLOR_MAP = {
     DARK: '#0A3D31',
   },
   BLUE: '#3BBCE6',
-  GREY: '#E3E3E3',
+  GRAY: {
+    BASE: '#CCCCCC',
+    LIGHT: '#E3E3E3',
+    DARK: '#999999',
+  },
 };
 
 export const INTERVENTION_COLOR_MAP = {

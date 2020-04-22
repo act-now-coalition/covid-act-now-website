@@ -2,7 +2,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { TEAM } from './../../enums';
 
-import { Wrapper, Content } from './About.style';
+import { Wrapper, Content, Logo } from './About.style';
 
 const About = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -59,8 +59,11 @@ const About = ({ children }: { children: React.ReactNode }) => {
           with medical and policy guidance from{' '}
           <a href="https://profiles.stanford.edu/nirav-shah">Dr. Nirav Shah</a>.
         </Typography>
+        <Logo src="/images/ghss.png" />
         <Typography variant="body1" component="p">
-          We have since grown into a large distributed team:
+          We have since grown into a large distributed team working in
+          partnership with Georgetown University Center for Global Health
+          Science and Security.
         </Typography>
         <Typography>
           <ul>

@@ -35,7 +35,7 @@ class Newsletter extends React.Component {
   }
 
   render() {
-    const { location, county } = this.props;
+    const { stateId, county } = this.props;
     return (
       <StyledNewsletter>
         <form
@@ -49,7 +49,7 @@ class Newsletter extends React.Component {
             hidden
             readOnly
             aria-label="state"
-            value={location || ''}
+            value={stateId || ''}
             id="fieldjlkiiyj"
             maxLength="200"
             name="cm-f-jlkiiyj"

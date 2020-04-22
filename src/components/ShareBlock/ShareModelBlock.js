@@ -4,13 +4,11 @@ import { STATES } from 'enums';
 
 import EmbedPreview from './EmbedPreview';
 
-const ShareModelBlock = ({ condensed, location, county }) => {
-  const locationName = STATES[location];
+const ShareModelBlock = ({ condensed, stateId, county }) => {
+  const stateName = STATES[stateId];
   const countyName = county && county.county;
-  const displayName = countyName
-    ? `${countyName}, ${locationName}`
-    : locationName;
-  const shareURL = `https://covidactnow.org/us/${location.toLowerCase()}${
+  const displayName = countyName ? `${countyName}, ${stateName}` : stateName;
+  const shareURL = `https://covidactnow.org/us/${stateId.toLowerCase()}${
     county ? `/county/${county.county_url_name}` : ''
   }`;
   const shareQuote = `This is the point of no return for intervention to prevent ${displayName}'s hospital system from being overloaded by Coronavirus: `;
@@ -23,7 +21,7 @@ const ShareModelBlock = ({ condensed, location, county }) => {
       <ShareBlock
         condensed={condensed}
         displayName={displayName}
-        location={location}
+        stateId={stateId}
         shareURL={shareURL}
         countyName={countyName}
         shareQuote={shareQuote}

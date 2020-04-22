@@ -27,17 +27,17 @@ export default function App() {
           <Switch>
             <Route exact path="/" component={HomePage} />
 
-            <Route exact path="/us/:id" component={ModelPage} />
+            <Route exact path="/us/:stateId" component={ModelPage} />
             <Route
               exact
-              path="/us/:id/county/:countyId"
+              path="/us/:stateId/county/:countyId"
               component={ModelPage}
             />
             {/* /state/ routes are deprecated but still supported. */}
-            <Route exact path="/state/:id" component={ModelPage} />
+            <Route exact path="/state/:stateId" component={ModelPage} />
             <Route
               exact
-              path="/state/:id/county/:countyId"
+              path="/state/:stateId/county/:countyId"
               component={ModelPage}
             />
 
@@ -48,10 +48,10 @@ export default function App() {
             <Route path="/privacy" component={Privacy} />
             <Route path="/compare" component={CompareModels} />
 
-            <Route exact path="/embed/us/:id" component={Embed} />
+            <Route exact path="/embed/us/:stateId" component={Embed} />
             <Route
               exact
-              path="/embed/us/:id/county/:countyId"
+              path="/embed/us/:stateId/county/:countyId"
               component={Embed}
             />
             {/* TODO: We might want to support non-embed fips-code URLs too for consistency? */}

@@ -1,157 +1,96 @@
-import Promise from 'bluebird';
 import * as moment from 'moment';
 import { useState, useEffect } from 'react';
-import { Projections } from './../models';
-import { STATES } from 'enums';
-import DataUrlJson from 'assets/data/data_url';
+import { Projections } from './../models/Projections';
+import { STATES, INTERVENTIONS } from '../enums';
+import DataUrlJson from '../assets/data/data_url';
+import fetch from 'node-fetch';
 
 const DATA_URL = DataUrlJson.data_url.replace(/\/$/, '');
 
 async function fetchAll(urls) {
-  try {
-    const data = await Promise.all(
-      urls.map(url =>
-        fetch(url)
-          .then(response => {
-            // 404 files currently return an html page instead of 404,
-            // so need to handle this way...
-            return response.text();
-          })
-          .then(responseText => {
-            try {
-              const jsonResponse = JSON.parse(responseText);
-
-              return jsonResponse;
-            } catch (err) {
-              throw err;
-            }
-          }),
-      ),
-    );
-
-    return data;
-  } catch (error) {
-    throw error;
-  }
+  return Promise.all(
+    urls.map(async url => {
+      try {
+        const response = await fetch(url, { timeout: 60000 });
+        const textResponse = await response.text();
+        return JSON.parse(textResponse);
+      } catch {
+        return null;
+      }
+    }),
+  );
 }
 
-export const ModelIds = {
-  baseline: 0,
-  strictDistancingNow: 1,
-  projected: 2,
-  weakDistancingNow: 3,
-};
-
-const initialData = {
-  location: null,
-  county: null,
-  stateDatas: null,
-  countyDatas: null,
-};
-
-async function fetchSummary(setModelDatas, location) {
-  const summaryUrl = `${DATA_URL}/county_summaries/${location.toUpperCase()}.summary.json`;
-
-  try {
-    const summary = await fetchAll([summaryUrl]);
-    setModelDatas(state => {
-      return {
-        ...state,
-        summary: summary[0],
-      };
-    });
-  } catch (err) {}
-}
-
-async function fetchData(location, county = null, dataUrl = DATA_URL) {
-  dataUrl = dataUrl || DATA_URL;
-  let modelDataForKey = null;
-  let projectionsToLoad;
-  if (!county) {
-    projectionsToLoad = [
-      ModelIds.baseline,
-      ModelIds.strictDistancingNow,
-      ModelIds.projected,
-      ModelIds.weakDistancingNow,
-    ];
-  } else {
-    projectionsToLoad = [
-      ModelIds.baseline,
-      ModelIds.strictDistancingNow,
-      ModelIds.strictDistancingNow, // TODO(igor): HAX!
-      ModelIds.weakDistancingNow,
-    ];
-  }
-  let urls = projectionsToLoad.map(i => {
-    let fipsCode =
-      county && county.full_fips_code ? county.full_fips_code : null;
-    const stateUrl = `${dataUrl}/${location}.${i}.json`;
-    const countyUrl = `${dataUrl}/county/${location.toUpperCase()}.${fipsCode}.${i}.json`;
-    return county ? countyUrl : stateUrl;
-  });
-
-  try {
-    let loadedModelDatas = await fetchAll(urls);
-    // HACK: Truncate data to 32 data points to make new models match old models.
-    loadedModelDatas = loadedModelDatas.map(data => data.slice(0, 32));
-    //This is to fix county data format
-    modelDataForKey = {
-      projections: new Projections(loadedModelDatas, location, county),
-    };
-  } catch (err) {
-    modelDataForKey = {
-      error: true,
-      payload: err,
-    };
-  }
-
-  return modelDataForKey;
-}
-
-async function fetchDataAndSet(
-  setModelDatas,
-  location,
-  county = null,
-  dataUrl = null,
+export async function fetchProjections(
+  stateId,
+  countyInfo = null,
+  dataUrl = DATA_URL,
 ) {
-  const key = county ? 'countyDatas' : 'stateDatas';
+  const fileIdToIntervention = {
+    0: INTERVENTIONS.LIMITED_ACTION,
+    1: INTERVENTIONS.SHELTER_IN_PLACE,
+    2: INTERVENTIONS.PROJECTED,
+    3: INTERVENTIONS.SOCIAL_DISTANCING,
+  };
+  const fileIdsToLoad = Object.keys(fileIdToIntervention);
 
-  const modelDataForKey = await fetchData(location, county, dataUrl);
+  // load all the projections for a state or county in parallel
+  const countyProjectionUrl = i =>
+    `${dataUrl}/county/${stateId.toUpperCase()}.${
+      countyInfo.full_fips_code
+    }.${i}.json`;
+  const stateProjectionUrl = i => `${dataUrl}/${stateId}.${i}.json`;
+  const urls = countyInfo
+    ? fileIdsToLoad.map(i => countyProjectionUrl(i))
+    : fileIdsToLoad.map(i => stateProjectionUrl(i));
+  let projectionsData = await fetchAll(urls);
 
-  setModelDatas(m => {
-    return {
-      ...m,
-      location,
-      county,
-      [key]: modelDataForKey,
-    };
-  });
+  // HACK: Truncate data to 32 data points to make new models match old models.
+  projectionsData = projectionsData.map(data =>
+    data ? data.slice(0, 32) : null,
+  );
+
+  // annotate each dataset with the intervention
+  const projectionInfos = projectionsData.map((pd, idx) => ({
+    data: pd,
+    intervention: fileIdToIntervention[fileIdsToLoad[idx]],
+  }));
+
+  return new Projections(projectionInfos, stateId, countyInfo);
 }
 
-export function useModelDatas(location, county = null, dataUrl = null) {
-  const [modelDatas, setModelDatas] = useState(initialData);
-  useEffect(() => {
-    if (location) {
-      fetchDataAndSet(setModelDatas, location, null, dataUrl);
-      fetchSummary(setModelDatas, location);
-    }
-  }, [dataUrl, location]);
+export function useProjections(location, county = null) {
+  const [projections, setProjections] = useState();
 
   useEffect(() => {
-    if (!county) {
-      setModelDatas(state => {
-        return {
-          ...state,
-          county: null,
-          countyDatas: null,
-        };
-      });
-    } else if (location) {
-      fetchDataAndSet(setModelDatas, location, county, dataUrl);
+    async function fetchData() {
+      const projections = await fetchProjections(location, county);
+      setProjections(projections);
     }
-  }, [dataUrl, county, location]);
+    fetchData();
+  }, [location, county]);
 
-  return modelDatas;
+  return projections;
+}
+
+export async function fetchStateSummary(stateId) {
+  const response = await fetch(
+    `${DATA_URL}/county_summaries/${stateId.toUpperCase()}.summary.json`,
+  );
+  return response.json();
+}
+
+export function useStateSummary(stateId) {
+  const [countySummaries, setCountySummaries] = useState();
+
+  useEffect(() => {
+    async function fetchData() {
+      setCountySummaries(await fetchStateSummary(stateId));
+    }
+    fetchData();
+  }, [stateId]);
+
+  return countySummaries;
 }
 
 export function useStateSummaryData(state) {
@@ -174,22 +113,19 @@ export function useAllStateModelDatas(dataUrl = null) {
   const [stateModels, setStateModels] = useState(null);
 
   useEffect(() => {
-    const promises = {};
-    const states = Object.keys(STATES);
-
-    for (let state of states) {
-      promises[state] = fetchData(state, null, dataUrl);
-    }
-
-    Promise.props(promises)
-      .then(results => {
-        setStateModels(results);
-      })
-      .catch(e => {
-        setStateModels(null);
-
-        throw e;
+    async function fetchData() {
+      const states = Object.keys(STATES);
+      const stateProjectionPromises = states.map(state =>
+        fetchProjections(state, null, dataUrl),
+      );
+      const stateProjections = await Promise.all(stateProjectionPromises);
+      const _stateModels = {};
+      states.forEach((state, idx) => {
+        _stateModels[state] = stateProjections[idx];
       });
+      setStateModels(_stateModels);
+    }
+    fetchData();
   }, [dataUrl]);
 
   return stateModels;

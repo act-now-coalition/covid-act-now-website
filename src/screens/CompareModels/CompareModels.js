@@ -58,13 +58,13 @@ export function CompareModels({ match, location }) {
   if (leftModelDatas && rightModelDatas) {
     for (const state of states) {
       try {
-        leftModels[state] = leftModelDatas[state].projections;
+        leftModels[state] = leftModelDatas[state];
       } catch (err) {
         console.log('Left models invalid:', err);
       }
 
       try {
-        rightModels[state] = rightModelDatas[state].projections;
+        rightModels[state] = rightModelDatas[state];
       } catch (err) {
         console.log('Right model invalid:', err);
       }
@@ -330,7 +330,7 @@ function StateChart({ state, models }) {
     <LazyLoad height={600} offset={1200}>
       <ModelChart
         subtitle="Hospitalizations over time"
-        interventions={models}
+        projections={models}
         currentIntervention={intervention}
         forCompareModels={true}
       />

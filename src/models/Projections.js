@@ -1,18 +1,18 @@
-import React from 'react';
 import moment from 'moment';
-import { isEmpty } from 'lodash';
-import { Model } from 'models/Model';
+import { Projection } from '../models/Projection';
 import {
   INTERVENTIONS,
   STATE_TO_INTERVENTION,
   COLOR_MAP,
-} from 'enums/interventions';
-import { STATES } from 'enums';
-import { HeaderSubCopy } from '../components/StateHeader/StateHeader.style';
-import { useEmbed } from 'utils/hooks';
+} from '../enums/interventions';
+import { STATES } from '../enums';
 
+/**
+ * The model for the complete set of projections and related information
+ * (eg. current intervention) for a given location (state or county).
+ */
 export class Projections {
-  constructor(props, stateCode, county) {
+  constructor(projectionInfos, stateCode, county) {
     this.stateCode = stateCode.toUpperCase();
     this.stateName = STATES[this.stateCode];
     this.county = null;
@@ -22,10 +22,10 @@ export class Projections {
     this.distancing = null;
     this.distancingPoorEnforcement = null;
     this.currentInterventionModel = null;
+    this.supportsInferred = false;
     this.isCounty = county != null;
-    this.hasProjections = !this.isCounty;
 
-    this.populateInterventions(props);
+    this.populateInterventions(projectionInfos);
     this.populateCurrentIntervention();
     this.populateCounty(county);
   }
@@ -54,207 +54,34 @@ export class Projections {
   }
 
   populateCurrentIntervention() {
-    const interventionModelMap = {
-      [INTERVENTIONS.LIMITED_ACTION]: this.baseline,
-      [INTERVENTIONS.SOCIAL_DISTANCING]: this.distancingPoorEnforcement.now,
-      [INTERVENTIONS.SHELTER_IN_PLACE]: this.distancing.now,
-    };
-
-    this.currentInterventionModel = this.hasProjections
+    this.currentInterventionModel = this.supportsInferred
       ? this.projected
-      : interventionModelMap[this.stateIntervention];
+      : this.interventionModelMap[this.stateIntervention];
 
     this.worstCaseInterventionModel =
       this.stateIntervention === INTERVENTIONS.SHELTER_IN_PLACE
-        ? interventionModelMap[INTERVENTIONS.SOCIAL_DISTANCING]
-        : interventionModelMap[this.stateIntervention];
+        ? this.interventionModelMap[INTERVENTIONS.SOCIAL_DISTANCING]
+        : this.interventionModelMap[this.stateIntervention];
   }
 
-  getInterventionTitle() {
-    const { isEmbed } = useEmbed();
-
-    const displayName = this.countyName ? (
-      <>
-        {this.countyName},{' '}
-        <a
-          href={`${isEmbed ? '/embed' : ''}/us/${this.stateCode.toLowerCase()}`}
-        >
-          {this.stateName}
-        </a>
-      </>
-    ) : (
-      <span>{this.stateName}</span>
-    );
-
-    const defaultActNowTitle = <span>You must act now in {displayName}</span>;
-
-    switch (this.stateIntervention) {
-      case INTERVENTIONS.LIMITED_ACTION:
-      case INTERVENTIONS.SOCIAL_DISTANCING:
-        return defaultActNowTitle;
-      case INTERVENTIONS.SHELTER_IN_PLACE:
-        return this.getInterventionTitleForShelterInPlace(displayName);
-      default:
-    }
+  get primary() {
+    return this.supportsInferred
+      ? this.projected
+      : this.currentInterventionModel;
   }
 
-  getInterventionTitleForShelterInPlace(displayName) {
-    let title = <span>Keep staying at home in {displayName}</span>;
-
-    if (this.getThresholdInterventionLevel() === COLOR_MAP.ORANGE.BASE) {
-      title = <span>Keep staying at home in {displayName}</span>;
-    }
-
-    if (this.getThresholdInterventionLevel() === COLOR_MAP.RED.BASE) {
-      title = <span>More aggressive action needed in {displayName}</span>;
-    }
-
-    return title;
-  }
-
-  getInterventionPrediction() {
-    switch (this.stateIntervention) {
-      case INTERVENTIONS.LIMITED_ACTION:
-      case INTERVENTIONS.SOCIAL_DISTANCING:
-        return this.getInterventionPredictionForLimitedActionAndSocialDistancing();
-      case INTERVENTIONS.SHELTER_IN_PLACE:
-        return this.getInterventionPredictionForShelterInPlace();
-      default:
-    }
-  }
-
-  getInterventionPredictionForLimitedActionAndSocialDistancing() {
-    const earlyDate = moment(
-      this.currentInterventionModel.dateOverwhelmed,
-    ).subtract(14, 'days');
-
-    const lateDate = moment(
-      this.currentInterventionModel.dateOverwhelmed,
-    ).subtract(9, 'days');
-
-    let predictionText = (
-      <span>
-        Avoiding hospital overload depends on aggressive government
-        interventions and the public taking COVID seriously. Projections will
-        update as more data becomes available.
-      </span>
-    );
-
-    if (this.currentInterventionModel.dateOverwhelmed) {
-      predictionText = (
-        <span>
-          To prevent hospital overload, our projections indicate a Stay at Home
-          order must be implemented between{' '}
-          <strong>{earlyDate.format('MMMM Do')}</strong> and{' '}
-          <strong>{lateDate.format('MMMM Do')}</strong> at the latest. The
-          sooner you act, the more lives you save.
-        </span>
-      );
-
-      if (earlyDate.isBefore(moment())) {
-        predictionText = (
-          <span>
-            To prevent hospital overload, our projections indicate a Stay at
-            Home order must be implemented immediately. The sooner you act, the
-            more lives you save.
-          </span>
-        );
+  getAlarmLevelColor() {
+    if (this.supportsInferred) {
+      if (this.primary.rt < 1) {
+        return COLOR_MAP.GREEN.BASE;
+      } else if (this.primary.rt < 1.2) {
+        return COLOR_MAP.ORANGE.BASE;
+      } else {
+        return COLOR_MAP.RED.BASE;
       }
+    } else {
+      return COLOR_MAP.GRAY.BASE;
     }
-
-    return <HeaderSubCopy>{predictionText}</HeaderSubCopy>;
-  }
-
-  getInterventionPredictionForShelterInPlace() {
-    let predictionText =
-      'Things look good, keep it up! Assuming stay-at-home interventions remain in place, hospitals are not projected to become overloaded. Check back — projections update every 3 days with the most recent data.';
-
-    if (this.getThresholdInterventionLevel() === COLOR_MAP.ORANGE.BASE) {
-      predictionText =
-        'Things look okay. Assuming stay-at-home interventions remain in place, projections show low-to-moderate probability of hospital overload in the next two months. Check back — projections update every 3 days with the most recent data.';
-    }
-
-    if (this.getThresholdInterventionLevel() === COLOR_MAP.RED.BASE) {
-      predictionText =
-        'Be careful. Even with stay-at-home interventions in place, our projections show risk of hospital overload in your area. More action is needed to help flatten the curve. Check back — projections update every 3 days with the most recent data.';
-    }
-
-    return <HeaderSubCopy>{predictionText}</HeaderSubCopy>;
-  }
-
-  getThresholdInterventionLevel() {
-    switch (this.stateIntervention) {
-      case INTERVENTIONS.LIMITED_ACTION:
-        return this.getThresholdInterventionLevelForLimitedAction();
-      case INTERVENTIONS.SOCIAL_DISTANCING:
-        return this.getThresholdInterventionLevelForSocialDistancing();
-      case INTERVENTIONS.SHELTER_IN_PLACE:
-        return this.getThresholdInterventionLevelForStayAtHome();
-      default:
-    }
-  }
-
-  getThresholdInterventionLevelForStayAtHome() {
-    let color = COLOR_MAP.GREEN.BASE;
-
-    if (
-      this.hasProjections
-        ? this.isProjectedOverwhelmedDateWithinThresholdWeeks()
-        : this.isSocialDistancingOverwhelmedDateWithinThresholdWeeks()
-    ) {
-      color = COLOR_MAP.ORANGE.BASE;
-    }
-
-    if (
-      this.hasProjections
-        ? this.isProjectedOverwhelmedDateWithinOneweek()
-        : this.isSocialDistancingOverwhelmedDateWithinOneWeek()
-    ) {
-      color = COLOR_MAP.RED.BASE;
-    }
-
-    return color;
-  }
-
-  getChartHospitalsOverloadedText() {
-    let text = '';
-    const isDateOverWhelmedBeforeToday =
-      this.worstCaseInterventionModel.dateOverwhelmed &&
-      moment(this.worstCaseInterventionModel.dateOverwhelmed).isBefore(
-        moment().startOf('day'),
-      );
-
-    if (isDateOverWhelmedBeforeToday) {
-      return text;
-    }
-
-    const thresholdInterventionLevel = this.getThresholdInterventionLevel();
-
-    switch (thresholdInterventionLevel) {
-      case COLOR_MAP.RED.BASE:
-        text = 'in 3 weeks or less';
-        break;
-      case COLOR_MAP.ORANGE.BASE:
-        text = 'in 3 to 6 weeks';
-        break;
-      case COLOR_MAP.GREEN.BASE:
-        text = this.distancingPoorEnforcement.now.dateOverwhelmed
-          ? 'in 6 weeks or more'
-          : '';
-        break;
-      default:
-    }
-
-    const appendedPolicy =
-      this.stateIntervention === INTERVENTIONS.SHELTER_IN_PLACE
-        ? `<br/> with ${this.stateIntervention} (lax)`
-        : `<br/> with ${this.stateIntervention}`;
-
-    if (!isEmpty(text)) {
-      text += appendedPolicy;
-    }
-
-    return text;
   }
 
   getChartSeriesColorMap() {
@@ -270,10 +97,18 @@ export class Projections {
     return COLOR_MAP.BLUE;
   }
 
+  getSeriesColorForPrimary() {
+    // TODO(igor): we shouldn't be hardcoding either of the two values below, but this is
+    // all about to simplify a lot and is not a regression, so not going to fix it
+    return this.supportsInferred
+      ? COLOR_MAP.BLUE
+      : this.getSeriesColorForSocialDistancing();
+  }
+
   getSeriesColorForLimitedAction() {
     let seriesColor = COLOR_MAP.RED.BASE;
 
-    const interventionColor = this.getThresholdInterventionLevel();
+    const interventionColor = this.getAlarmLevelColor();
 
     if (interventionColor === COLOR_MAP.RED.BASE) {
       seriesColor = COLOR_MAP.RED.DARK;
@@ -285,7 +120,7 @@ export class Projections {
   getSeriesColorForSocialDistancing() {
     let seriesColor = COLOR_MAP.ORANGE.BASE;
 
-    switch (this.getThresholdInterventionLevel()) {
+    switch (this.getAlarmLevelColor()) {
       case COLOR_MAP.RED.BASE:
         seriesColor = COLOR_MAP.RED.BASE;
         break;
@@ -308,7 +143,7 @@ export class Projections {
       this.stateIntervention === INTERVENTIONS.SHELTER_IN_PLACE &&
       this.currentInterventionModel.dateOverwhelmed;
 
-    switch (this.getThresholdInterventionLevel()) {
+    switch (this.getAlarmLevelColor()) {
       case COLOR_MAP.RED.BASE:
         seriesColor = isShelterInPlaceOverwheled
           ? COLOR_MAP.RED.LIGHT
@@ -330,46 +165,7 @@ export class Projections {
     return seriesColor;
   }
 
-  getThresholdInterventionLevelForSocialDistancing() {
-    let color = COLOR_MAP.GREEN.BASE;
-
-    if (this.isSocialDistancingOverwhelmedDateWithinThresholdWeeks()) {
-      color = COLOR_MAP.ORANGE.BASE;
-    }
-
-    if (this.isSocialDistancingOverwhelmedDateWithinOneWeek()) {
-      color = COLOR_MAP.RED.BASE;
-    }
-
-    return color;
-  }
-
-  getThresholdInterventionLevelForLimitedAction() {
-    return COLOR_MAP.RED.BASE;
-  }
-
-  isSocialDistancingOverwhelmedDateWithinThresholdWeeks() {
-    return !this.isOverwhelmedDateAfterNumberOfWeeks(
-      this.distancingPoorEnforcement.now,
-      6,
-    );
-  }
-
-  isProjectedOverwhelmedDateWithinThresholdWeeks() {
-    return !this.isOverwhelmedDateAfterNumberOfWeeks(this.projected, 6);
-  }
-
-  isProjectedOverwhelmedDateWithinOneweek() {
-    return !this.isOverwhelmedDateAfterNumberOfWeeks(this.projected, 3);
-  }
-
-  isSocialDistancingOverwhelmedDateWithinOneWeek() {
-    return !this.isOverwhelmedDateAfterNumberOfWeeks(
-      this.distancingPoorEnforcement.now,
-      3,
-    );
-  }
-
+  // unused but likely to be used again
   isOverwhelmedDateAfterNumberOfWeeks(model, weeks) {
     if (!model.dateOverwhelmed) {
       return true;
@@ -380,31 +176,53 @@ export class Projections {
     return moment(model.dateOverwhelmed).isSameOrAfter(futureDate);
   }
 
-  populateInterventions(props) {
-    this.baseline = new Model(props[0], {
-      intervention: INTERVENTIONS.LIMITED_ACTION,
-      r0: 2.4,
+  populateInterventions(projectionInfos) {
+    const fipsBlacklist = [
+      '13275',
+      '18019',
+      '22089',
+      '22101',
+      '24021',
+      '28025',
+      '28083',
+      '31079',
+      '36079',
+      '39035',
+      '39109',
+      '41047',
+      '47065',
+      '50007',
+    ];
+    projectionInfos.forEach(pi => {
+      let projection = null;
+      if (pi.data) {
+        projection = new Projection(pi.data, {
+          intervention: pi.intervention,
+          isInferred: pi.intervention === INTERVENTIONS.PROJECTED,
+        });
+      }
+      if (pi.intervention === INTERVENTIONS.LIMITED_ACTION) {
+        this.baseline = projection;
+      } else if (pi.intervention === INTERVENTIONS.SHELTER_IN_PLACE) {
+        this.distancing = { now: projection };
+      } else if (pi.intervention === INTERVENTIONS.PROJECTED) {
+        if (
+          !this.county ||
+          fipsBlacklist.indexOf(this.county.full_fips_code) === -1
+        ) {
+          this.projected = projection;
+          this.supportsInferred = !!this.projected;
+        } else {
+          console.log('Blacklisted inference projection');
+        }
+      } else if (pi.intervention === INTERVENTIONS.SOCIAL_DISTANCING) {
+        this.distancingPoorEnforcement = { now: projection };
+      }
     });
-
-    this.distancing = {
-      now: new Model(props[1], {
-        intervention: INTERVENTIONS.SHELTER_IN_PLACE,
-        durationDays: 90,
-        r0: 1.2,
-      }),
-    };
-
-    this.projected = new Model(props[2], {
-      intervention: INTERVENTIONS.PROJECTED,
-      r0: 'inferred',
-    });
-
-    this.distancingPoorEnforcement = {
-      now: new Model(props[3], {
-        intervention: INTERVENTIONS.SOCIAL_DISTANCING,
-        durationDays: 90,
-        r0: 1.7,
-      }),
+    this.interventionModelMap = {
+      [INTERVENTIONS.LIMITED_ACTION]: this.baseline,
+      [INTERVENTIONS.SOCIAL_DISTANCING]: this.distancingPoorEnforcement.now,
+      [INTERVENTIONS.SHELTER_IN_PLACE]: this.distancing.now,
     };
   }
 }

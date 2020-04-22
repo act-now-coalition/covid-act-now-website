@@ -8,7 +8,7 @@ import Outcomes from './Outcomes/Outcomes';
 import Map from 'components/Map/Map';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import SearchHeader from 'components/Header/SearchHeader';
-import StateHeader from 'components/StateHeader/StateHeader';
+import LocationPageHeader from 'components/LocationPageHeader/LocationPageHeader';
 import ModelChart from 'components/Charts/ModelChart';
 import {
   MapMenuMobileWrapper,
@@ -34,69 +34,68 @@ import {
   ChartHeader,
 } from './ModelPage.style';
 import { STATES, STATE_TO_INTERVENTION, INTERVENTIONS } from 'enums';
-import { useModelDatas, useModelLastUpdatedDate } from 'utils/model';
+import {
+  useProjections,
+  useStateSummary,
+  useModelLastUpdatedDate,
+} from 'utils/model';
 
 function ModelPage() {
-  const { id: location, countyId } = useParams();
-  const _location = location.toUpperCase();
+  let { stateId, countyId } = useParams();
+  // TODO(igor): don't mix uppercase and lowercase in here
+  stateId = stateId.toUpperCase();
 
   const modelLastUpdatedDate = useModelLastUpdatedDate();
   const [mapOption, setMapOption] = useState(
-    _location === MAP_FILTERS.DC ? MAP_FILTERS.NATIONAL : MAP_FILTERS.STATE,
+    stateId === MAP_FILTERS.DC ? MAP_FILTERS.NATIONAL : MAP_FILTERS.STATE,
   );
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   let countyOption = null;
+
   if (countyId) {
     countyOption = _.find(
-      US_STATE_DATASET.state_county_map_dataset[_location].county_dataset,
+      US_STATE_DATASET.state_county_map_dataset[stateId].county_dataset,
       ['county_url_name', countyId],
     );
   }
-
   const [selectedCounty, setSelectedCounty] = useState(countyOption);
+
   useMemo(() => {
     setSelectedCounty(countyOption);
   }, [countyOption]);
   const history = useHistory();
 
-  let modelDatas = null;
-  const modelDatasMap = useModelDatas(_location, selectedCounty);
+  const projections = useProjections(stateId, selectedCounty);
+  const stateSummary = useStateSummary(stateId);
 
-  const locationName = STATES[_location];
-
-  const intervention = STATE_TO_INTERVENTION[_location];
-
-  modelDatas = selectedCounty
-    ? modelDatasMap.countyDatas
-    : modelDatasMap.stateDatas;
-
-  let interventions = null;
-  if (modelDatas && !modelDatas.error) {
-    interventions = modelDatas.projections;
-  }
+  const stateName = STATES[stateId];
+  const intervention = STATE_TO_INTERVENTION[stateId];
 
   const goTo = route => {
     history.push(route);
   };
 
-  // No model data
-  if (!modelDatas) {
+  // Projections haven't loaded yet
+  // If a new county has just been selected, we may not have projections
+  // for the new county loaded yet
+  if (!projections || projections.county !== selectedCounty) {
     return <LoadingScreen></LoadingScreen>;
   }
 
   let actionTitle;
   let actionDescription;
   if (intervention === INTERVENTIONS.SHELTER_IN_PLACE) {
-    actionTitle = `${locationName}: Keep staying at home to protect against the COVID-19 outbreak.`;
+    actionTitle = `${stateName}: Keep staying at home to protect against the COVID-19 outbreak.`;
     actionDescription = `Avoiding hospital overload depends heavily on your cooperation.`;
   } else {
-    actionTitle = `${locationName}: Urge your public officials to act now against the COVID-19 outbreak!`;
+    actionTitle = `${stateName}: Urge your public officials to act now against the COVID-19 outbreak!`;
     actionDescription = `To prevent hospital overload, our projections indicate a Stay at home order must be implemented soon.`;
   }
   let metaTags = (
     <AppMetaTags
-      canonicalUrl={`/us/${_location.toLowerCase()}`}
-      pageTitle={`${locationName} Forecast`}
+      canonicalUrl={`/us/${stateId.toLowerCase()}`}
+      pageTitle={`${stateName} Forecast`}
       pageDescription={actionTitle}
       shareTitle={actionTitle}
       shareDescription={actionDescription}
@@ -119,42 +118,35 @@ function ModelPage() {
     return (
       <MainContentWrapper mobileMenuOpen={mobileMenuOpen}>
         <MainContentInner>
-          <StateHeader interventions={interventions} />
+          <LocationPageHeader projections={projections} />
           <MainContentInnerBody>
             <Panel>
               <ChartHeader>
                 <h2>Projected hospitalizations</h2>
                 <span>
-                  {interventions.countyName
-                    ? `${interventions.countyName}, ${interventions.stateName}`
-                    : interventions.stateName}
+                  {projections.countyName
+                    ? `${projections.countyName}, ${projections.stateName}`
+                    : projections.stateName}
                 </span>
               </ChartHeader>
             </Panel>
-            {interventions && (
+            {projections && (
               <Panel>
                 <ModelChart
-                  interventions={interventions}
+                  projections={projections}
                   currentIntervention={intervention}
                   lastUpdatedDate={modelLastUpdatedDate}
-                  dateOverwhelmed={interventions.baseline.dateOverwhelmed}
-                  location={_location}
+                  dateOverwhelmed={projections.baseline.dateOverwhelmed}
+                  stateId={stateId}
                   selectedCounty={selectedCounty}
                 />
                 <Content>
                   <Outcomes
                     title="Predicted Outcomes"
-                    models={[
-                      interventions.baseline,
-                      interventions.hasProjections
-                        ? interventions.projected
-                        : interventions.distancingPoorEnforcement.now,
-                    ]}
+                    projections={[projections.baseline, projections.primary]}
                     colors={[
-                      interventions.getSeriesColorForLimitedAction(),
-                      interventions.hasProjections
-                        ? interventions.getSeriesColorForProjected()
-                        : interventions.getSeriesColorForSocialDistancing(),
+                      projections.getSeriesColorForLimitedAction(),
+                      projections.getSeriesColorForPrimary(),
                     ]}
                     asterisk={['', '*', '*', '**']}
                     timeHorizon={120}
@@ -191,10 +183,7 @@ function ModelPage() {
                     </li>
                   </ul>
 
-                  <ShareModelBlock
-                    location={_location}
-                    county={selectedCounty}
-                  />
+                  <ShareModelBlock stateId={stateId} county={selectedCounty} />
                 </Content>
               </Panel>
             )}
@@ -214,12 +203,12 @@ function ModelPage() {
           >
             United States
           </MapMenuItem>
-          {_location !== MAP_FILTERS.DC && (
+          {stateId !== MAP_FILTERS.DC && (
             <MapMenuItem
               onClick={() => setMapOption(MAP_FILTERS.STATE)}
               selected={mapOption === MAP_FILTERS.STATE}
             >
-              {locationName}
+              {stateName}
             </MapMenuItem>
           )}
         </MapMenuMobileWrapper>
@@ -232,25 +221,25 @@ function ModelPage() {
             />
           </MapWrapper>
 
-          {_location !== MAP_FILTERS.DC && (
+          {stateId !== MAP_FILTERS.DC && (
             <CountyMapAltWrapper visible={mapOption === MAP_FILTERS.STATE}>
               <CountyMap
                 fill={
-                  interventions
-                    ? interventions.getThresholdInterventionLevel()
+                  projections.primary
+                    ? projections.getAlarmLevelColor()
                     : '#e3e3e3'
                 }
-                stateSummary={modelDatasMap.summary}
+                stateSummary={stateSummary}
                 selectedCounty={selectedCounty}
                 setSelectedCounty={fullFips => {
                   const county = _.find(
-                    US_STATE_DATASET.state_county_map_dataset[_location]
+                    US_STATE_DATASET.state_county_map_dataset[stateId]
                       .county_dataset,
                     ['full_fips_code', fullFips],
                   );
 
                   goTo(
-                    `/us/${_location.toLowerCase()}/county/${
+                    `/us/${stateId.toLowerCase()}/county/${
                       county.county_url_name
                     }`,
                   );
@@ -270,7 +259,7 @@ function ModelPage() {
       {metaTags}
       <ContentWrapper>
         {renderHeader()}
-        {modelDatas && modelDatas.error ? (
+        {projections && !projections.primary ? (
           <div>
             <StyledNoResultsWrapper>
               <StyledNoResults>
@@ -285,8 +274,8 @@ function ModelPage() {
                 </div>
                 <div style={{ marginTop: '1rem' }}>
                   View projections for{' '}
-                  <span onClick={() => goTo('/us/' + _location.toLowerCase())}>
-                    {locationName}
+                  <span onClick={() => goTo('/us/' + stateId.toLowerCase())}>
+                    {stateName}
                   </span>
                 </div>
               </StyledNoResults>
