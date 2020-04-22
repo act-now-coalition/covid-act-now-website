@@ -299,7 +299,6 @@ const ModelChart = ({
     projection.dateOverwhelmed,
     projection.isInferred,
     noAction,
-    socialDistancing,
     projected,
     shelterInPlace,
     availableBeds,

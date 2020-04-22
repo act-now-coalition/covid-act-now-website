@@ -3,7 +3,6 @@ import StateCircleSvg from 'components/StateSvg/StateCircleSvg';
 import { COLORS } from 'enums';
 import { COLOR_MAP } from 'enums/interventions';
 import { useEmbed } from 'utils/hooks';
-import moment from 'moment';
 
 import {
   HeaderHighlight,
@@ -14,7 +13,6 @@ import {
   StyledLocationPageHeaderWrapper,
   StyledLocationPageHeaderInner,
 } from './LocationPageHeader.style';
-
 
 function LocationPageHeading({ projections }) {
   const { isEmbed } = useEmbed();
@@ -40,7 +38,11 @@ function LocationPageHeading({ projections }) {
     [COLOR_MAP.RED.BASE]: 'COVID cases are growing exponentially in',
     [COLOR_MAP.BLACK]: 'We don’t have enough data for',
   }[projections.getAlarmLevelColor()];
-  const rtInfo = projections.primary.rt ? <>(Rt={projections.primary.rt})</> : '';
+  const rtInfo = projections.primary.rt ? (
+    <>(Rt={projections.primary.rt})</>
+  ) : (
+    ''
+  );
 
   return (
     <span>
@@ -50,7 +52,6 @@ function LocationPageHeading({ projections }) {
 }
 
 function LocationSummary({ projections }) {
-
   const predictionText = {
     [COLOR_MAP.GREEN.BASE]: (
       <>
@@ -83,9 +84,7 @@ function LocationSummary({ projections }) {
     ),
   }[projections.getAlarmLevelColor()];
 
-  return <HeaderSubCopy>
-    {predictionText}
-    </HeaderSubCopy>;
+  return <HeaderSubCopy>{predictionText}</HeaderSubCopy>;
 }
 
 const LocationPageHeader = ({ projections }) => {

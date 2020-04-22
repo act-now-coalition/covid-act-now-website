@@ -19,7 +19,6 @@ const reversedStateMap = invert(STATES);
 const USACountyMap = ({ stateClickHandler, setTooltipContent }) => {
   const getFillColor = geo => {
     const stateCode = reversedStateMap[geo.properties.name];
-    console.log(stateCode);
     return STATE_TO_CALCULATED_INTERVENTION_COLOR[stateCode] || '#e3e3e3';
   };
 
@@ -56,14 +55,14 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent }) => {
           </Geographies>
         </ComposableMap>
       </USStateMapWrapper>
-
     </USMapWrapper>
   );
 };
 
 export default USACountyMap;
 
-      //                    fill={getFillColor(geo.id)}
+// TODO(igor): clean up once we know what we want
+//  fill={getFillColor(geo.id)}
 /*<USCountyMapWrapper>
   <ComposableMap projection="geoAlbersUsa">
     <Geographies geography={COUNTIES_JSON}>

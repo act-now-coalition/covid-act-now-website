@@ -28,7 +28,7 @@ async function getStateAndCountyDataFiles(stateAbbr) {
     stateProjections,
     stateInterventionColor: stateProjections.getAlarmLevelColor(),
     countyFipsData,
-    inferenceCounties
+    inferenceCounties,
   };
 }
 
@@ -43,7 +43,9 @@ async function getStateAndCountyDataFiles(stateAbbr) {
       const data = await getStateAndCountyDataFiles(stateCode);
       stateInterventionMap[stateCode] = data.stateInterventionColor;
       Object.assign(countyInventionMap, data.countyFipsData);
-      console.log(`Finishing ${stateCode}, ${data.inferenceCounties} counties had inference data`);
+      console.log(
+        `Finishing ${stateCode}, ${data.inferenceCounties} counties had inference data`,
+      );
     }),
   );
 

@@ -11,7 +11,7 @@ async function fetchAll(urls) {
   return Promise.all(
     urls.map(async url => {
       try {
-        const response = await fetch(url, {timeout: 60000});
+        const response = await fetch(url, { timeout: 60000 });
         const textResponse = await response.text();
         return JSON.parse(textResponse);
       } catch {
