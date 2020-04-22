@@ -22,7 +22,7 @@ export class Projections {
     this.distancing = null;
     this.distancingPoorEnforcement = null;
     this.currentInterventionModel = null;
-    this.supportsInferred = county == null;
+    this.supportsInferred = false;
     this.isCounty = county != null;
 
     this.populateInterventions(projectionInfos);
@@ -67,41 +67,21 @@ export class Projections {
   get primary() {
     return this.supportsInferred
       ? this.projected
-      : this.worstCaseInterventionModel;
+      : this.currentInterventionModel;
   }
 
   getAlarmLevelColor() {
-    switch (this.stateIntervention) {
-      case INTERVENTIONS.LIMITED_ACTION:
-        return this.getAlarmLevelColorForLimitedAction();
-      case INTERVENTIONS.SOCIAL_DISTANCING:
-        return this.getAlarmLevelColorForSocialDistancing();
-      case INTERVENTIONS.SHELTER_IN_PLACE:
-        return this.getAlarmLevelColorForStayAtHome();
-      default:
+    if (this.supportsInferred) {
+      if (this.primary.rt < 1) {
+        return COLOR_MAP.GREEN.BASE;
+      } else if (this.primary.rt < 1.2) {
+        return COLOR_MAP.ORANGE.BASE;
+      } else {
+        return COLOR_MAP.RED.BASE;
+      }
+    } else {
+      return COLOR_MAP.BLACK;
     }
-  }
-
-  getAlarmLevelColorForStayAtHome() {
-    let color = COLOR_MAP.GREEN.BASE;
-
-    if (
-      this.supportsInferred
-        ? this.isProjectedOverwhelmedDateWithinThresholdWeeks()
-        : this.isSocialDistancingOverwhelmedDateWithinThresholdWeeks()
-    ) {
-      color = COLOR_MAP.ORANGE.BASE;
-    }
-
-    if (
-      this.supportsInferred
-        ? this.isProjectedOverwhelmedDateWithinOneweek()
-        : this.isSocialDistancingOverwhelmedDateWithinOneWeek()
-    ) {
-      color = COLOR_MAP.RED.BASE;
-    }
-
-    return color;
   }
 
   getChartSeriesColorMap() {
@@ -185,46 +165,7 @@ export class Projections {
     return seriesColor;
   }
 
-  getAlarmLevelColorForSocialDistancing() {
-    let color = COLOR_MAP.GREEN.BASE;
-
-    if (this.isSocialDistancingOverwhelmedDateWithinThresholdWeeks()) {
-      color = COLOR_MAP.ORANGE.BASE;
-    }
-
-    if (this.isSocialDistancingOverwhelmedDateWithinOneWeek()) {
-      color = COLOR_MAP.RED.BASE;
-    }
-
-    return color;
-  }
-
-  getAlarmLevelColorForLimitedAction() {
-    return COLOR_MAP.RED.BASE;
-  }
-
-  isSocialDistancingOverwhelmedDateWithinThresholdWeeks() {
-    return !this.isOverwhelmedDateAfterNumberOfWeeks(
-      this.distancingPoorEnforcement.now,
-      6,
-    );
-  }
-
-  isProjectedOverwhelmedDateWithinThresholdWeeks() {
-    return !this.isOverwhelmedDateAfterNumberOfWeeks(this.projected, 6);
-  }
-
-  isProjectedOverwhelmedDateWithinOneweek() {
-    return !this.isOverwhelmedDateAfterNumberOfWeeks(this.projected, 3);
-  }
-
-  isSocialDistancingOverwhelmedDateWithinOneWeek() {
-    return !this.isOverwhelmedDateAfterNumberOfWeeks(
-      this.distancingPoorEnforcement.now,
-      3,
-    );
-  }
-
+  // unused but likely to be used again
   isOverwhelmedDateAfterNumberOfWeeks(model, weeks) {
     if (!model.dateOverwhelmed) {
       return true;
@@ -244,18 +185,17 @@ export class Projections {
           isInferred: pi.intervention === INTERVENTIONS.PROJECTED,
         });
       }
-
       if (pi.intervention === INTERVENTIONS.LIMITED_ACTION) {
         this.baseline = projection;
       } else if (pi.intervention === INTERVENTIONS.SHELTER_IN_PLACE) {
         this.distancing = { now: projection };
       } else if (pi.intervention === INTERVENTIONS.PROJECTED) {
         this.projected = projection;
+        this.supportsInferred = !!this.projected;
       } else if (pi.intervention === INTERVENTIONS.SOCIAL_DISTANCING) {
         this.distancingPoorEnforcement = { now: projection };
       }
     });
-
     this.interventionModelMap = {
       [INTERVENTIONS.LIMITED_ACTION]: this.baseline,
       [INTERVENTIONS.SOCIAL_DISTANCING]: this.distancingPoorEnforcement.now,

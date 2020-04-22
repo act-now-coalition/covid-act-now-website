@@ -41,6 +41,13 @@ yarn prettier-fix
 yarn lint-fix
 ```
 
+If you find the counties/states data seems to be out of date with the data we have, we mainly generate a json via running:
+(shoult take less than a minute or two to run)
+
+```
+./scripts/calculated_interventions.js 
+```
+
 ### Testing 
 
 Testing is run via cypress. Once cypress starts running, we need 

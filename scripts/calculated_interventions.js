@@ -8,7 +8,7 @@ import { fetchStateSummary, fetchProjections } from '../src/utils/model';
 async function getStateAndCountyDataFiles(stateAbbr) {
   const stateSummaryData = await fetchStateSummary(stateAbbr);
   const stateProjections = await fetchProjections(stateAbbr);
-
+  let inferenceCounties = 0;
   let countyFipsData = {};
   await Promise.all(
     stateSummaryData.counties_with_data.map(async fipsCode => {
@@ -16,6 +16,7 @@ async function getStateAndCountyDataFiles(stateAbbr) {
         const countyProjections = await fetchProjections(stateAbbr, {
           full_fips_code: fipsCode,
         });
+        inferenceCounties += countyProjections.supportsInferred ? 1 : 0;
         countyFipsData[fipsCode] = countyProjections.getAlarmLevelColor();
       } catch (ex) {
         console.log(`No color found for: ${stateAbbr} / ${fipsCode}`);
@@ -27,6 +28,7 @@ async function getStateAndCountyDataFiles(stateAbbr) {
     stateProjections,
     stateInterventionColor: stateProjections.getAlarmLevelColor(),
     countyFipsData,
+    inferenceCounties,
   };
 }
 
@@ -37,9 +39,13 @@ async function getStateAndCountyDataFiles(stateAbbr) {
   const stateCodes = _.keys(US_STATES);
   await Promise.all(
     stateCodes.map(async stateCode => {
+      console.log(`Starting ${stateCode}`);
       const data = await getStateAndCountyDataFiles(stateCode);
       stateInterventionMap[stateCode] = data.stateInterventionColor;
       Object.assign(countyInventionMap, data.countyFipsData);
+      console.log(
+        `Finishing ${stateCode}, ${data.inferenceCounties} counties had inference data`,
+      );
     }),
   );
 

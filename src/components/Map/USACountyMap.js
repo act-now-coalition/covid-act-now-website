@@ -1,6 +1,9 @@
 import React from 'react';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
-import { FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR } from 'enums/interventions';
+import {
+  FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR,
+  STATE_TO_CALCULATED_INTERVENTION_COLOR,
+} from 'enums/interventions';
 import COUNTIES_JSON from './data/counties-10m.json';
 import STATES_JSON from './data/states-10m.json';
 import {
@@ -8,32 +11,19 @@ import {
   USCountyMapWrapper,
   USStateMapWrapper,
 } from './Map.style';
+import { invert } from 'lodash';
+import { STATES } from 'enums';
+
+const reversedStateMap = invert(STATES);
 
 const USACountyMap = ({ stateClickHandler, setTooltipContent }) => {
-  const getFillColor = geoId => {
-    return FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR[geoId] || '#e3e3e3';
+  const getFillColor = geo => {
+    const stateCode = reversedStateMap[geo.properties.name];
+    return STATE_TO_CALCULATED_INTERVENTION_COLOR[stateCode] || '#e3e3e3';
   };
 
   return (
     <USMapWrapper>
-      <USCountyMapWrapper>
-        <ComposableMap projection="geoAlbersUsa">
-          <Geographies geography={COUNTIES_JSON}>
-            {({ geographies }) =>
-              geographies.map(geo => {
-                return (
-                  <Geography
-                    key={geo.rsmKey}
-                    geography={geo}
-                    stroke={'rgba(255,255,255,0.05)'}
-                    fill={getFillColor(geo.id)}
-                  />
-                );
-              })
-            }
-          </Geographies>
-        </ComposableMap>
-      </USCountyMapWrapper>
       <USStateMapWrapper>
         <ComposableMap
           data-tip=""
@@ -45,8 +35,10 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent }) => {
               geographies.map(geo => {
                 return (
                   <Geography
+                    opacity={0.95}
                     key={geo.rsmKey}
                     geography={geo}
+                    fill={getFillColor(geo)}
                     onClick={() => stateClickHandler(geo.properties.name)}
                     onMouseEnter={() => {
                       const { name } = geo.properties;
@@ -56,7 +48,6 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent }) => {
                     onMouseLeave={() => {
                       setTooltipContent('');
                     }}
-                    fill={'transparent'}
                   />
                 );
               })
@@ -69,3 +60,24 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent }) => {
 };
 
 export default USACountyMap;
+
+// TODO(igor): clean up once we know what we want
+//  fill={getFillColor(geo.id)}
+/*<USCountyMapWrapper>
+  <ComposableMap projection="geoAlbersUsa">
+    <Geographies geography={COUNTIES_JSON}>
+      {({ geographies }) =>
+        geographies.map(geo => {
+          return (
+            <Geography
+              key={geo.rsmKey}
+              geography={geo}
+              stroke={'rgba(255,255,255,0.05)'}
+              fill={'transparent'}
+            />
+          );
+        })
+      }
+    </Geographies>
+  </ComposableMap>
+</USCountyMapWrapper>;*/
