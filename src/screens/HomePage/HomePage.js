@@ -35,7 +35,7 @@ export default function HomePage() {
       <Wrapper style={{ backgroundColor: COLORS.LIGHTGRAY }}>
         <Content>
           <Typography variant="h3" component="h3" style={{ marginBottom: 20 }}>
-            Endorsements
+            Our Advisors
           </Typography>
           <Endorsements hideSocial={true} />
         </Content>
