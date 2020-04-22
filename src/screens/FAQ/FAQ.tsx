@@ -322,7 +322,7 @@ const FAQ = ({ children }: { children: React.ReactNode }) => {
           for more info, though this (from the IRS) is the takeaway for many
           folks: “The distribution of economic impact payments will begin in the
           next three weeks and will be distributed automatically, with no action
-          required for most people.” .
+          required for most people.”
         </Typography>
         <ShareBlock />
       </Content>

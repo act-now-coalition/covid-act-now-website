@@ -15,3 +15,16 @@ export const Content = styled.div`
     margin-bottom: 24px;
   }
 `;
+
+export const Logo = styled.img`
+  float: right;
+  width: 200px;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+
+  @media (max-width: 600px) {
+    display: block;
+    margin: 0 auto 1rem;
+    float: none;
+  }
+`;
