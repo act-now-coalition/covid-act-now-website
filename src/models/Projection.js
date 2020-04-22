@@ -78,12 +78,13 @@ export class Projection {
     let overwhelmedIdx = this.dates.findIndex(
       (num, idx) => this.hospitalizations[idx] > this.beds[idx],
     );
+
     if (overwhelmedIdx === -1) {
       this.dateOverwhelmed = null;
     } else {
       // since we only get reports every 4 daysfind x coordinate of the crossing point of
       // hospitalizations and beds.
-      const startIdx = overwhelmedIdx - 1;
+      const startIdx = Math.max(0, overwhelmedIdx - 1); // can't get overwhelmed before day 0
       const endIdx = overwhelmedIdx;
       // create coords normalized with an x range of 1
       const bedsStart = { y: this.beds[startIdx], x: 0 };
@@ -92,7 +93,10 @@ export class Projection {
         y: this.hospitalizations[startIdx],
         x: 0,
       };
-      const hospitalizationsEnd = { y: this.hospitalizations[endIdx], x: 1 };
+      const hospitalizationsEnd = {
+        y: this.hospitalizations[endIdx],
+        x: 1,
+      };
       // find the point at which they intersect. this method uses linear interpolation for
       // simplicity so there may be some disconnect here.
       const crossingPoint = intersection(

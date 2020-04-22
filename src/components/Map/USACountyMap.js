@@ -1,14 +1,14 @@
 import React from 'react';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import {
-  //  FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR,
+  FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR,
   STATE_TO_CALCULATED_INTERVENTION_COLOR,
 } from 'enums/interventions';
-//import COUNTIES_JSON from './data/counties-10m.json';
+import COUNTIES_JSON from './data/counties-10m.json';
 import STATES_JSON from './data/states-10m.json';
 import {
   USMapWrapper,
-  //  USCountyMapWrapper,
+  USCountyMapWrapper,
   USStateMapWrapper,
 } from './Map.style';
 import { invert } from 'lodash';
@@ -19,11 +19,33 @@ const reversedStateMap = invert(STATES);
 const USACountyMap = ({ stateClickHandler, setTooltipContent }) => {
   const getFillColor = geo => {
     const stateCode = reversedStateMap[geo.properties.name];
-    return STATE_TO_CALCULATED_INTERVENTION_COLOR[stateCode] || '#e3e3e3';
+    if (stateCode) {
+      return STATE_TO_CALCULATED_INTERVENTION_COLOR[stateCode] || '#e3e3e3';
+    } else {
+      return FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR[geo.id] || '#e3e3e3';
+    }
   };
 
   return (
     <USMapWrapper>
+      <USCountyMapWrapper>
+        <ComposableMap projection="geoAlbersUsa">
+          <Geographies geography={COUNTIES_JSON}>
+            {({ geographies }) =>
+              geographies.map(geo => {
+                return (
+                  <Geography
+                    key={geo.rsmKey}
+                    geography={geo}
+                    stroke={'rgba(255,255,255,0.05)'}
+                    fill={getFillColor(geo)}
+                  />
+                );
+              })
+            }
+          </Geographies>
+        </ComposableMap>
+      </USCountyMapWrapper>
       <USStateMapWrapper>
         <ComposableMap
           data-tip=""
@@ -38,11 +60,10 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent }) => {
                     opacity={0.95}
                     key={geo.rsmKey}
                     geography={geo}
-                    fill={getFillColor(geo)}
+                    fill={'transparent'}
                     onClick={() => stateClickHandler(geo.properties.name)}
                     onMouseEnter={() => {
                       const { name } = geo.properties;
-
                       setTooltipContent(name);
                     }}
                     onMouseLeave={() => {

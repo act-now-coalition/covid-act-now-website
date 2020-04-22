@@ -80,7 +80,7 @@ export class Projections {
         return COLOR_MAP.RED.BASE;
       }
     } else {
-      return COLOR_MAP.BLACK;
+      return COLOR_MAP.GRAY;
     }
   }
 
@@ -177,6 +177,22 @@ export class Projections {
   }
 
   populateInterventions(projectionInfos) {
+    const fipsBlacklist = [
+      '13275',
+      '18019',
+      '22089',
+      '22101',
+      '24021',
+      '28025',
+      '28083',
+      '31079',
+      '36079',
+      '39035',
+      '39109',
+      '41047',
+      '47065',
+      '50007',
+    ];
     projectionInfos.forEach(pi => {
       let projection = null;
       if (pi.data) {
@@ -190,8 +206,15 @@ export class Projections {
       } else if (pi.intervention === INTERVENTIONS.SHELTER_IN_PLACE) {
         this.distancing = { now: projection };
       } else if (pi.intervention === INTERVENTIONS.PROJECTED) {
-        this.projected = projection;
-        this.supportsInferred = !!this.projected;
+        if (
+          !this.county ||
+          fipsBlacklist.indexOf(this.county.full_fips_code) == -1
+        ) {
+          this.projected = projection;
+          this.supportsInferred = !!this.projected;
+        } else {
+          console.log('Blacklisted inference projection');
+        }
       } else if (pi.intervention === INTERVENTIONS.SOCIAL_DISTANCING) {
         this.distancingPoorEnforcement = { now: projection };
       }
