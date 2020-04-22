@@ -53,7 +53,7 @@ export const COLOR_MAP = {
     BASE: '#CCCCCC',
     LIGHT: '#E3E3E3',
     DARK: '#999999',
-  }
+  },
 };
 
 export const INTERVENTION_COLOR_MAP = {

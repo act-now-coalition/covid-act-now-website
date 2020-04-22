@@ -41,7 +41,7 @@ function LocationPageHeading({ projections }) {
   const rtInfo = projections.primary.rt ? (
     <>
       (R<sub>t</sub>
-      {projections.primary.rt === "0.99" ? '<' : '='}
+      {projections.primary.rt === '0.99' ? '<' : '='}
       {Math.max(projections.primary.rt, 1)})
     </>
   ) : (
@@ -60,9 +60,9 @@ function LocationSummary({ projections }) {
     [COLOR_MAP.GREEN.BASE]: (
       <>
         Assuming current interventions remain in place, we expect the total
-        cases in your area to decrease. 14 days of decreasing cases is the
-        first step to reopening. Check back — projections update every 3 days
-        with the most recent data.
+        cases in your area to decrease. 14 days of decreasing cases is the first
+        step to reopening. Check back — projections update every 3 days with the
+        most recent data.
       </>
     ),
     [COLOR_MAP.ORANGE.BASE]: (
@@ -95,7 +95,8 @@ const LocationPageHeader = ({ projections }) => {
   const { isEmbed } = useEmbed();
   const fillColor = projections.getAlarmLevelColor();
   // darken for legibility
-  const textColor = fillColor === COLOR_MAP.GRAY.BASE ? COLOR_MAP.GRAY.DARK : fillColor;
+  const textColor =
+    fillColor === COLOR_MAP.GRAY.BASE ? COLOR_MAP.GRAY.DARK : fillColor;
   return (
     <StyledLocationPageHeaderWrapper condensed={isEmbed}>
       <StyledLocationPageHeaderInner condensed={isEmbed}>

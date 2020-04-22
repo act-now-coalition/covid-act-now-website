@@ -25,7 +25,7 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent }) => {
     } else {
       let countyColor = FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR[geo.id];
       if (countyColor == COLOR_MAP.GRAY.BASE || !countyColor) {
-        countyColor = 'rgba(0,0,0,0)'
+        countyColor = 'rgba(0,0,0,0)';
       }
       return countyColor;
     }
