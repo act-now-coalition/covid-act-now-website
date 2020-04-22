@@ -39,7 +39,9 @@ function LocationPageHeading({ projections }) {
     [COLOR_MAP.BLACK]: 'We don’t have enough data for',
   }[projections.getAlarmLevelColor()];
   const rtInfo = projections.primary.rt ? (
-    <>(Rt={projections.primary.rt})</>
+    <>
+      (R<sub>t</sub>={projections.primary.rt})
+    </>
   ) : (
     ''
   );
