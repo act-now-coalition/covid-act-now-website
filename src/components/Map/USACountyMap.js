@@ -19,8 +19,8 @@ const reversedStateMap = invert(STATES);
 
 const USACountyMap = ({ stateClickHandler, setTooltipContent }) => {
   const getFillColor = geo => {
-    const stateCode = reversedStateMap[geo.properties.name];
-    if (stateCode) {
+    if (geo.id.length <= 2) {
+      const stateCode = reversedStateMap[geo.properties.name];
       return STATE_TO_CALCULATED_INTERVENTION_COLOR[stateCode] || '#e3e3e3';
     } else {
       let countyColor = FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR[geo.id];
@@ -35,6 +35,7 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent }) => {
   // This seems anecdotally bad for performance so we should do something better
   return (
     <USMapWrapper>
+      {/** Map with shaded background colors for states. */}
       <USStateMapWrapper>
         <ComposableMap
           data-tip=""
@@ -57,6 +58,7 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent }) => {
           </Geographies>
         </ComposableMap>
       </USStateMapWrapper>
+      {/** Map with shaded background colors for counties. */}
       <USCountyMapWrapper>
         <ComposableMap projection="geoAlbersUsa">
           <Geographies geography={COUNTIES_JSON}>
@@ -76,6 +78,7 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent }) => {
           </Geographies>
         </ComposableMap>
       </USCountyMapWrapper>
+      {/** Map with state outlines and mouse event handlers. */}
       <USStateMapWrapper>
         <ComposableMap
           data-tip=""
