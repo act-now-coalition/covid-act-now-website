@@ -208,7 +208,7 @@ export class Projections {
       } else if (pi.intervention === INTERVENTIONS.PROJECTED) {
         if (
           !this.county ||
-          fipsBlacklist.indexOf(this.county.full_fips_code) == -1
+          fipsBlacklist.indexOf(this.county.full_fips_code) === -1
         ) {
           this.projected = projection;
           this.supportsInferred = !!this.projected;
