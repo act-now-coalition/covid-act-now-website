@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
-import { COLORS } from 'enums';
 
 export const Wrapper = styled.div`
   margin: 0 -32px;

@@ -159,7 +159,7 @@ const _AppBar = () => {
               onClick={goTo('/about')}
             />
             <StyledTab
-              label="Our Products"
+              label="Products"
               value={2}
               disableRipple
               onClick={goTo('/products')}

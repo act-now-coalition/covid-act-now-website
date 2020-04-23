@@ -26,7 +26,7 @@ const MobileMenu = ({
       </a>
       <a onClick={goTo('/products')} href="/products">
         <FAQIcon color={palette.secondary.main} />
-        <span>Our Products</span>
+        <span>Products</span>
       </a>
       <a
         onClick={forwardTo('https://blog.covidactnow.org')}
