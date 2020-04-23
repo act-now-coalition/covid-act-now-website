@@ -235,7 +235,27 @@ const Products = ({ children }: { children: React.ReactNode }) => {
           </SectionHeader>
 
           <Typography variant="body1" component="p">
-            Mike TODO
+            If you host your own website and want to easily include data from
+            the U.S. Interventions Model, Covid Act Now provides an embeddable
+            widget. This widget updates daily and provides the latest actual
+            information about number of cases and deaths, as well as projections
+            about what hospitalizations might look like given certain
+            interventions.
+          </Typography>
+
+          <Typography variant="body1" component="p">
+            Embeds are available for both states and counties, where data
+            exists. Embeds can be added to your website via an iframe or script
+            tag. You can learn more about how to add these embeds to your
+            website in our{' '}
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://blog.covidactnow.org/data-feeds/"
+            >
+              embed docs
+            </a>
+            .
           </Typography>
 
           <SectionHeader variant="h4" component="h4" id="api">
@@ -243,7 +263,26 @@ const Products = ({ children }: { children: React.ReactNode }) => {
           </SectionHeader>
 
           <Typography variant="body1" component="p">
-            Mike TODO
+            If you are running your Covid project or comparing models, you can
+            access our data directly. Our API provides currently known actuals
+            (cases, deaths, hospitalizations), projections (if/when capacity
+            will be exceeded, by how much), as well as timeseries data for what
+            the U.S. Interventions Model predicts what will happen every three
+            days.
+          </Typography>
+
+          <Typography variant="body1" component="p">
+            Data is available as either a JSON or CSV file. Our API is{' '}
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/covid-projections/covid-data-model/blob/master/api/README.V1.md"
+            >
+              documented on Github
+            </a>
+            . These files can be easily consumed by other models, by data
+            visualization tools like Tableau, or in spreadsheet tools like
+            Airtable, Google Sheets, or Microsoft Excel.
           </Typography>
 
           <SectionHeader variant="h4" component="h4" id="raw-data">
@@ -251,7 +290,16 @@ const Products = ({ children }: { children: React.ReactNode }) => {
           </SectionHeader>
 
           <Typography variant="body1" component="p">
-            Mike TODO
+            If you can't consume our data via one of the above sources or are
+            looking for the raw data, all of our data sources are{' '}
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/covid-projections/covid-data-public"
+            >
+              available on Github
+            </a>
+            .
           </Typography>
 
           <ShareBlock />
