@@ -1,17 +1,17 @@
-#!/usr/bin/env node -r esm
+// You can run via `yarn update-calculated-interventions`
 import _ from 'lodash';
 import fs from 'fs-extra';
 import path from 'path';
 import US_STATES from './../src/enums/us_states';
 import { fetchStateSummary, fetchProjections } from '../src/utils/model';
 
-async function getStateAndCountyDataFiles(stateAbbr) {
+async function getStateAndCountyDataFiles(stateAbbr: string) {
   const stateSummaryData = await fetchStateSummary(stateAbbr);
   const stateProjections = await fetchProjections(stateAbbr);
   let inferenceCounties = 0;
-  let countyFipsData = {};
+  let countyFipsData = {} as { [key: string]: string };
   await Promise.all(
-    stateSummaryData.counties_with_data.map(async fipsCode => {
+    stateSummaryData.counties_with_data.map(async (fipsCode: string) => {
       try {
         const countyProjections = await fetchProjections(stateAbbr, {
           full_fips_code: fipsCode,
@@ -33,7 +33,7 @@ async function getStateAndCountyDataFiles(stateAbbr) {
 }
 
 (async () => {
-  const stateInterventionMap = {};
+  const stateInterventionMap = {} as { [key: string]: string };
   const countyInventionMap = {};
 
   const stateCodes = _.keys(US_STATES);
