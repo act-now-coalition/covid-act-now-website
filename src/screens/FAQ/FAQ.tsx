@@ -73,6 +73,24 @@ const FAQ = ({ children }: { children: React.ReactNode }) => {
           >
             Yes! The model is public
           </a>
+          . 
+          <br><br>
+          You can also get the output of the model via our 
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/covid-projections/covid-data-model/blob/master/api/README.V1.md"
+          >
+            API
+          </a>
+           or 
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://blog.covidactnow.org/export-covid-act-now-data-spreadsheet/"
+          >
+            spreadsheet
+          </a>
           .
         </Typography>
 
