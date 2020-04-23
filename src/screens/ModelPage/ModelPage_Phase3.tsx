@@ -9,7 +9,7 @@ import Map from 'components/Map/Map';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import SearchHeader from 'components/Header/SearchHeader';
 import LocationPageHeader from 'components/LocationPageHeader/LocationPageHeader';
-import ModelChart from 'components/Charts/ModelChart';
+import ChartModule from 'components/Charts/ChartModule';
 import {
   MapMenuMobileWrapper,
   MapMenuItem,
@@ -42,7 +42,7 @@ import {
   useModelLastUpdatedDate,
 } from 'utils/model';
 
-function ModelPage() {
+function ModelPage_Phase3() {
   let { stateId, countyId } = useParams();
   // TODO(igor): don't mix uppercase and lowercase in here
   stateId = stateId.toUpperCase();
@@ -124,72 +124,18 @@ function ModelPage() {
           <MainContentInnerBody>
             <Panel>
               <ChartHeader>
-                <h2>Projected hospitalizations</h2>
-                <span>
-                  {projections.countyName
-                    ? `${projections.countyName}, ${projections.stateName}`
-                    : projections.stateName}
-                </span>
+                <h2>[DEV] Projected hospitalizations</h2>
               </ChartHeader>
             </Panel>
             {projections && (
               <Panel>
-                <ModelChart
-                  projections={projections}
-                  currentIntervention={intervention}
-                  dateOverwhelmed={projections.baseline.dateOverwhelmed}>
+                <ChartModule
+                  series={["test"]}>
                     <Disclaimer 
                       modelLastUpdatedDate={modelLastUpdatedDate}
                       stateId={stateId}
                       county={selectedCounty}/>
-                </ModelChart>
-                <Content>
-                  <Outcomes
-                    title="Predicted Outcomes"
-                    projections={[projections.baseline, projections.primary]}
-                    colors={[
-                      projections.getSeriesColorForLimitedAction(),
-                      projections.getSeriesColorForPrimary(),
-                    ]}
-                    asterisk={['', '*', '*', '**']}
-                    timeHorizon={120}
-                    currentIntervention={intervention}
-                  />
-                  <ul
-                    style={{
-                      textAlign: 'left',
-                      lineHeight: '2em',
-                      paddingLeft: 0,
-                    }}
-                  >
-                    <li
-                      style={{
-                        listStyleType: 'none',
-                        marginBottom: 10,
-                      }}
-                    >
-                      *{' '}
-                      <b>
-                        A second spike in disease may occur after social
-                        distancing is stopped.
-                      </b>{' '}
-                      Interventions are important because they buy time to
-                      create surge capacity in hospitals and develop therapeutic
-                      drugs that may have potential to lower hospitalization and
-                      fatality rates from COVID.{' '}
-                      <a
-                        href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
-                        rel="noreferrer noopener"
-                      >
-                        See full scenario definitions here.
-                      </a>
-                    </li>
-                  </ul>
-
-                  <ShareModelBlock stateId={stateId} county={selectedCounty} />
-                </Content>
-              
-              
+                </ChartModule>              
               </Panel>
             )}
           </MainContentInnerBody>
@@ -299,4 +245,4 @@ const Panel = ({ children, title }) => {
   return <div style={{}}>{children}</div>;
 };
 
-export default ModelPage;
+export default ModelPage_Phase3;
