@@ -1,62 +1,29 @@
 import * as moment from 'moment';
 import { useState, useEffect } from 'react';
 import { Projections } from './../models/Projections';
-import { STATES, INTERVENTIONS } from '../enums';
+import { STATES } from '../enums';
 import DataUrlJson from '../assets/data/data_url';
 import fetch from 'node-fetch';
+import { RegionDescriptor } from './RegionDescriptor';
+import { fetchSummaryTimeseriesMap } from 'api';
 
 const DATA_URL = DataUrlJson.data_url.replace(/\/$/, '');
-
-async function fetchAll(urls) {
-  return Promise.all(
-    urls.map(async url => {
-      try {
-        const response = await fetch(url, { timeout: 60000 });
-        const textResponse = await response.text();
-        return JSON.parse(textResponse);
-      } catch {
-        return null;
-      }
-    }),
-  );
-}
 
 export async function fetchProjections(
   stateId,
   countyInfo = null,
+  // TODO(michael): This is ignored right now. Need to fix if we want to revive
+  // /compare (which is currently broken)
   dataUrl = DATA_URL,
 ) {
-  const fileIdToIntervention = {
-    0: INTERVENTIONS.LIMITED_ACTION,
-    1: INTERVENTIONS.SHELTER_IN_PLACE,
-    2: INTERVENTIONS.PROJECTED,
-    3: INTERVENTIONS.SOCIAL_DISTANCING,
-  };
-  const fileIdsToLoad = Object.keys(fileIdToIntervention);
-
-  // load all the projections for a state or county in parallel
-  const countyProjectionUrl = i =>
-    `${dataUrl}/county/${stateId.toUpperCase()}.${
-      countyInfo.full_fips_code
-    }.${i}.json`;
-  const stateProjectionUrl = i => `${dataUrl}/${stateId}.${i}.json`;
-  const urls = countyInfo
-    ? fileIdsToLoad.map(i => countyProjectionUrl(i))
-    : fileIdsToLoad.map(i => stateProjectionUrl(i));
-  let projectionsData = await fetchAll(urls);
-
-  // HACK: Truncate data to 32 data points to make new models match old models.
-  projectionsData = projectionsData.map(data =>
-    data ? data.slice(0, 32) : null,
-  );
-
-  // annotate each dataset with the intervention
-  const projectionInfos = projectionsData.map((pd, idx) => ({
-    data: pd,
-    intervention: fileIdToIntervention[fileIdsToLoad[idx]],
-  }));
-
-  return new Projections(projectionInfos, stateId, countyInfo);
+  let region;
+  if (countyInfo) {
+    region = RegionDescriptor.forCounty(countyInfo.full_fips_code);
+  } else {
+    region = RegionDescriptor.forState(stateId);
+  }
+  const summaryTimeseriesMap = await fetchSummaryTimeseriesMap(region);
+  return new Projections(summaryTimeseriesMap, stateId, countyInfo);
 }
 
 export function useProjections(location, county = null) {

@@ -1,27 +1,6 @@
-const COLUMNS = {
-  hospitalizations: 8 + 1,
-  beds: 11 + 1,
-  deaths: 10 + 1,
-  infected: 9 + 1,
-  totalPopulation: 16 + 1,
-  rt: 13 + 1,
-  rtStdev: 14 + 1,
-  date: 0 + 1,
-};
+import { RegionSummaryTimeseries } from 'api';
 
 const MS_PER_DAY = 1000 * 60 * 60 * 24;
-
-//intersection between lines connect points [a, b] and [c, d]
-function intersection(a: any, b: any, c: any, d: any) {
-  const det = (a.x - b.x) * (c.y - d.y) - (a.y - b.y) * (c.x - d.x),
-    l = a.x * b.y - a.y * b.x,
-    m = c.x * d.y - c.y * d.x,
-    ix = (l * (c.x - d.x) - m * (a.x - b.x)) / det,
-    iy = (l * (c.y - d.y) - m * (a.y - b.y)) / det,
-    i = { x: ix, y: iy };
-
-  return i;
-}
 
 /** Parameters that can be provided when constructing a Projection. */
 export interface ProjectionParameters {
@@ -49,98 +28,47 @@ export class Projection {
   daysSinceDayZero: number;
   hospitalizations: number[];
   beds: number[];
-  deaths: number[];
   cumulativeDeaths: number[];
   totalPopulation: number;
-  infected: number[];
   cumulativeInfected: number[];
   cumulativeDead: number;
   dateOverwhelmed: Date | null;
 
-  constructor(data: any[], parameters: ProjectionParameters) {
+  constructor(
+    summaryTimeseries: RegionSummaryTimeseries,
+    parameters: ProjectionParameters,
+  ) {
+    const timeseries = summaryTimeseries.timeseries;
     this.intervention = parameters.intervention;
     this.isInferred = parameters.isInferred;
     this.durationDays = parameters.durationDays || null /* permanent */;
     this.delayDays = parameters.delayDays || 0;
     this.rt = null;
     if (this.isInferred) {
-      this.rt = data[data.length - 1][COLUMNS.rt];
-      this.rtStdev = data[data.length - 1][COLUMNS.rtStdev];
+      this.rt = summaryTimeseries.projections.Rt;
+      this.rtStdev = summaryTimeseries.projections.RtCI90;
     }
-    let _parseInt = (number: string) => {
-      // remove , in strings
-      if (typeof number == 'string') {
-        number = number.replace(/,/g, '');
-      }
-      return number ? parseInt(number) : 0;
-    };
 
-    this.dates = data.map(row => new Date(row[COLUMNS.date]));
+    this.dates = timeseries.map(row => new Date(row.date));
     this.dayZero = this.dates[0];
     this.daysSinceDayZero = Math.floor(
       (new Date().getTime() - this.dayZero.getTime()) / MS_PER_DAY,
     );
 
-    this.hospitalizations = data.map(row =>
-      _parseInt(row[COLUMNS.hospitalizations]),
-    );
-    this.beds = data.map(row => _parseInt(row[COLUMNS.beds]));
-    this.deaths = data.map(row => _parseInt(row[COLUMNS.deaths]));
-    this.cumulativeDeaths = this.deaths;
-    this.totalPopulation = _parseInt(data[0][COLUMNS.totalPopulation]);
-    this.infected = data.map(row => _parseInt(row[COLUMNS.infected]));
-
-    this.cumulativeInfected = [];
-    let infectedSoFar = 0;
-    for (let i = 0; i < this.infected.length; i++) {
-      infectedSoFar += this.infected[i];
-      this.cumulativeInfected.push(infectedSoFar * (2 / 3));
-    }
+    this.hospitalizations = timeseries.map(row => row.hospitalBedsRequired);
+    this.beds = timeseries.map(row => row.hospitalBedCapacity);
+    this.cumulativeDeaths = timeseries.map(row => row.cumulativeDeaths);
+    this.totalPopulation = summaryTimeseries.actuals.population;
+    this.cumulativeInfected = timeseries.map(row => row.cumulativeInfected);
 
     this.cumulativeDead = this.cumulativeDeaths[
       this.cumulativeDeaths.length - 1
     ];
 
-    // approximate the date when the hospitals will be overwhelmed
-    // assume r0~=2 => 25% daily case growth
-    let overwhelmedIdx = this.dates.findIndex(
-      (num, idx) => this.hospitalizations[idx] > this.beds[idx],
-    );
-
-    if (overwhelmedIdx === -1) {
-      this.dateOverwhelmed = null;
-    } else {
-      // since we only get reports every 4 daysfind x coordinate of the crossing point of
-      // hospitalizations and beds.
-      const startIdx = Math.max(0, overwhelmedIdx - 1); // can't get overwhelmed before day 0
-      const endIdx = overwhelmedIdx;
-      // create coords normalized with an x range of 1
-      const bedsStart = { y: this.beds[startIdx], x: 0 };
-      const bedsEnd = { y: this.beds[endIdx], x: 1 };
-      const hospitalizationsStart = {
-        y: this.hospitalizations[startIdx],
-        x: 0,
-      };
-      const hospitalizationsEnd = {
-        y: this.hospitalizations[endIdx],
-        x: 1,
-      };
-      // find the point at which they intersect. this method uses linear interpolation for
-      // simplicity so there may be some disconnect here.
-      const crossingPoint = intersection(
-        bedsStart,
-        bedsEnd,
-        hospitalizationsStart,
-        hospitalizationsEnd,
-      );
-      // scale the normalized range of 4 back up to the actual range of 4 days.
-      let dayDelta = Math.floor(4 * crossingPoint.x);
-      // create the new date by adding the delta to the day prior to overwhelming.
-      const startDate = this.dates[startIdx];
-      const deltaSecs = dayDelta * MS_PER_DAY;
-      const estimatedTimeStamp = startDate.getTime() + deltaSecs;
-      this.dateOverwhelmed = new Date(estimatedTimeStamp);
-    }
+    const shortageStart =
+      summaryTimeseries.projections.totalHospitalBeds.shortageStartDate;
+    this.dateOverwhelmed =
+      shortageStart === null ? null : new Date(shortageStart);
   }
 
   get durationLabelMonths() {
