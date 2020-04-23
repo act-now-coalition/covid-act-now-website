@@ -3,11 +3,17 @@ import CardHeader from '@material-ui/core/CardHeader';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import { COLORS } from 'enums';
 
 export const Wrapper = styled(CardContent)`
   display: flex;
   justify-content: space-between;
-  /* background-color: bisque; */
+`;
+
+export const Inner = styled(CardContent)`
+  padding: 6px;
+  margin: -6px;
+  border: 1px solid ${COLORS.LIGHTGRAY};
 `;
 
 export const Profile = styled(Card)`

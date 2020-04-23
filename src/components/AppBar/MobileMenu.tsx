@@ -2,7 +2,6 @@ import React from 'react';
 import { StyledMenu } from './AppBar.style';
 import MapIcon from 'assets/images/mapIconTwoTone';
 import FAQIcon from 'assets/images/faqIconTwoTone';
-import EndorsementsIcon from 'assets/images/endorsementsIconTwoTone';
 import BlogIcon from 'assets/images/blogIconTwoTone';
 import palette from 'assets/theme/palette';
 
@@ -25,17 +24,9 @@ const MobileMenu = ({
         <FAQIcon color={palette.secondary.main} />
         <span>About</span>
       </a>
-      <a onClick={goTo('/faq')} href="/faq">
+      <a onClick={goTo('/products')} href="/products">
         <FAQIcon color={palette.secondary.main} />
-        <span>FAQ</span>
-      </a>
-      <a onClick={goTo('/government')} href="/government">
-        <FAQIcon color={palette.secondary.main} />
-        <span>Government</span>
-      </a>
-      <a onClick={goTo('/endorsements')} href="/endorsements">
-        <EndorsementsIcon color={palette.secondary.main} />
-        <span>Endorsements</span>
+        <span>Our Products</span>
       </a>
       <a
         onClick={forwardTo('https://blog.covidactnow.org')}
@@ -43,6 +34,10 @@ const MobileMenu = ({
       >
         <BlogIcon color={palette.secondary.main} />
         <span>Blog</span>
+      </a>
+      <a onClick={goTo('/contact')} href="/contact">
+        <FAQIcon color={palette.secondary.main} />
+        <span>Contact Us</span>
       </a>
     </StyledMenu>
   );

@@ -9,6 +9,7 @@ import {
   Profile,
   ProfileHeader,
   Wrapper,
+  Inner,
   Left,
   Quote,
 } from './EndorsementCard.style';
@@ -23,46 +24,48 @@ const EndorsementCard = ({
 }) => {
   return (
     <Wrapper>
-      <Grid container>
-        <Grid item xs={12} sm={quote ? 4 : 12}>
-          <Profile>
-            <ProfileHeader
-              onClick={() => window.open(profileUrl, '_blank')}
-              avatar={
-                <Avatar
-                  aria-label={name}
-                  src={window.location.origin + avatarUrl}
-                />
-              }
-              title={name}
-            />
-            <Divider variant="middle" />
-            <Left>
-              <CardContent>
-                {credentials.map((c, index) => (
-                  <Credential
-                    key={index}
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    {c}
-                  </Credential>
-                ))}
-              </CardContent>
-            </Left>
-          </Profile>
-        </Grid>
-        {quote && (
-          <Grid item xs={12} sm={8}>
-            <Quote>
-              <Typography variant="body1" component="p">
-                {quote}
-              </Typography>
-            </Quote>
+      <Inner>
+        <Grid container>
+          <Grid item xs={12} sm={quote ? 4 : 12}>
+            <Profile>
+              <ProfileHeader
+                onClick={() => window.open(profileUrl, '_blank')}
+                avatar={
+                  <Avatar
+                    aria-label={name}
+                    src={window.location.origin + avatarUrl}
+                  />
+                }
+                title={name}
+              />
+              <Divider variant="middle" />
+              <Left>
+                <CardContent>
+                  {credentials.map((c, index) => (
+                    <Credential
+                      key={index}
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      {c}
+                    </Credential>
+                  ))}
+                </CardContent>
+              </Left>
+            </Profile>
           </Grid>
-        )}
-      </Grid>
+          {quote && (
+            <Grid item xs={12} sm={8}>
+              <Quote>
+                <Typography variant="body1" component="p">
+                  {quote}
+                </Typography>
+              </Quote>
+            </Grid>
+          )}
+        </Grid>
+      </Inner>
     </Wrapper>
   );
 };

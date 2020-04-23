@@ -50,3 +50,10 @@ export const EmailButton = styled.a`
     background-color: ${palette.secondary.dark};
   }
 `;
+
+export const NavLinks = styled.div``;
+
+export const NavLink = styled.a`
+  margin-bottom: 0.5rem;
+  display: block;
+`;

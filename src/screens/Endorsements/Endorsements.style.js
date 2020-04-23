@@ -3,8 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import { COLORS } from 'enums';
 
 export const Wrapper = styled.div`
-  background-color: ${COLORS.LIGHTGRAY};
-  margin: -32px -32px 0;
+  margin: 0 -32px;
   padding: 1rem;
 `;
 

@@ -3,9 +3,9 @@ import Typography from '@material-ui/core/Typography';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import ShareBlock from 'components/ShareBlock/ShareBlock';
 
-import { Wrapper, Content, TextContent, Header } from './FAQ.style';
+import { Wrapper, Content, TextContent, Header } from './Products.style';
 
-const FAQ = ({ children }: { children: React.ReactNode }) => {
+const Products = ({ children }: { children: React.ReactNode }) => {
   return (
     <Wrapper>
       <Header>
@@ -18,8 +18,8 @@ const FAQ = ({ children }: { children: React.ReactNode }) => {
       <Content>
         <TextContent>
           <AppMetaTags
-            canonicalUrl="/faq"
-            pageTitle="FAQ"
+            canonicalUrl="/products"
+            pageTitle="Products"
             pageDescription="Covid Act Now was started by four volunteers who saw the explosive and
             deadly growth of COVID infections around the world and felt they had
             to do something."
@@ -213,109 +213,11 @@ const FAQ = ({ children }: { children: React.ReactNode }) => {
             </a>
             .
           </Typography>
-          <Typography variant="h3" component="h1">
-            About COVID
-          </Typography>
-
-          <Typography variant="h5" component="h5">
-            What’s the status of COVID vaccine and therapeutic development?
-          </Typography>
-          <Typography variant="body1" component="p">
-            Artis Ventures has created{' '}
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/symptoms.html"
-            >
-              an excellent dashboard
-            </a>{' '}
-            that gives a sense of what treatments and vaccines are being
-            researched and clinically trialed.
-          </Typography>
-
-          <Typography variant="h5" component="h5">
-            What are the symptoms of COVID?
-          </Typography>
-          <Typography variant="body1" component="p">
-            The CDC has a list of{' '}
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/symptoms.html"
-            >
-              COVID symptoms
-            </a>
-            .
-          </Typography>
-
-          <Typography variant="h5" component="h5">
-            Where/how should I get tested?
-          </Typography>
-          <Typography variant="body1" component="p">
-            The CDC has additional information on{' '}
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/testing.html"
-            >
-              when and how to get tested
-            </a>
-            .
-          </Typography>
-
-          <Typography variant="h5" component="h5">
-            What should I do if I think I am sick?
-          </Typography>
-          <Typography variant="body1" component="p">
-            The CDC provides advice on{' '}
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.cdc.gov/coronavirus/2019-ncov/if-you-are-sick/steps-when-sick.html"
-            >
-              what to do if you think you are sick
-            </a>
-            .
-          </Typography>
-
-          <Typography variant="h5" component="h5">
-            Where can I get more information about COVID?
-          </Typography>
-          <Typography variant="body1" component="p">
-            The CDC has additional information on{' '}
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.cdc.gov/coronavirus/2019-ncov/index.html"
-            >
-              COVID
-            </a>
-            .
-          </Typography>
-          <Typography variant="h3" component="h1">
-            Other questions
-          </Typography>
-          <Typography variant="h5" component="h5">
-            When will I get my stimulus check?
-          </Typography>
-          <Typography variant="body1" component="p">
-            Please visit the{' '}
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.irs.gov/coronavirus"
-            >
-              IRS’s page on stimulus checks
-            </a>{' '}
-            for more info, though this (from the IRS) is the takeaway for many
-            folks: “The distribution of economic impact payments will begin in the
-            next three weeks and will be distributed automatically, with no action
-            required for most people.”
-          </Typography>
-        <ShareBlock />
+          <ShareBlock />
+        </TextContent>
       </Content>
     </Wrapper>
   );
 };
 
-export default FAQ;
+export default Products;

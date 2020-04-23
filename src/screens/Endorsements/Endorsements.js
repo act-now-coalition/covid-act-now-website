@@ -1,12 +1,11 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import ShareBlock from 'components/ShareBlock/ShareBlock';
 
 import EndorsementCard from 'components/EndorsementCard/EndorsementCard';
 import { ENDORSERS } from 'enums';
 import { Content, EndorsersWrapper, Wrapper } from './Endorsements.style';
 
-const Endorsements = ({ hideSocial }) => {
+const Endorsements = ({ compact }) => {
   return (
     <Wrapper>
       <Content>
@@ -17,12 +16,11 @@ const Endorsements = ({ hideSocial }) => {
           wrap={'wrap'}
         >
           {ENDORSERS.map((e, index) => (
-            <Grid item key={index} xs={12} md={e.size}>
+            <Grid item key={index} xs={12} md={compact ? 6 : 4}>
               <EndorsementCard {...e} />
             </Grid>
           ))}
         </EndorsersWrapper>
-        {!hideSocial && <ShareBlock />}
       </Content>
     </Wrapper>
   );

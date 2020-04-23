@@ -22,15 +22,16 @@ const typographyOptions: TypographyOptions = {
   },
   h3: {
     fontSize: '1.8rem',
-    fontWeight: 500,
-    margin: '2rem 0 1rem',
+    fontWeight: 700,
+    margin: '2rem 0 1.5rem',
     '@media (min-width:600px)': {
       fontSize: '2.2rem',
     },
   },
   h4: {
     fontSize: '1.4rem',
-    fontWeight: 500,
+    margin: '2rem 0 1.5rem',
+    fontWeight: 700,
     '@media (min-width:600px)': {
       fontSize: '1.5rem',
     },
@@ -42,6 +43,15 @@ const typographyOptions: TypographyOptions = {
     '@media (min-width:600px)': {
       margin: '1.8rem 0 1.2rem',
       fontSize: '1.4rem',
+    },
+  },
+  h6: {
+    fontWeight: 700,
+    fontSize: '1.2rem',
+    margin: '1.5rem 0 0',
+    '@media (min-width:600px)': {
+      margin: '1.5rem 0 0.5rem',
+      fontSize: '1rem',
     },
   },
   subtitle1: {
