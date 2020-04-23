@@ -31,17 +31,14 @@ export const TextContent = styled.div`
 
 export const Logo = styled.img`
   float: right;
-  width: 400px;
+  width: 50%;
   margin-left: 1rem;
   margin-bottom: 1rem;
-
-  @media (max-width: 900px) {
-    width: 300px;
-  }
 
   @media (max-width: 600px) {
     display: block;
     margin: 0 auto 1rem;
     float: none;
+    width: 100%;
   }
 `;

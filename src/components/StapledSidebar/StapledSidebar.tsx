@@ -4,8 +4,11 @@ import {
   Wrapper,
   ContentWrapper,
   SidebarWrapper,
+  StyledSidebarLink,
   Sidebar,
 } from './StapledSidebar.style';
+import { scrollToLink } from 'utils/ScrollUtils';
+export { SectionHeader } from './StapledSidebar.style';
 
 type StapledSidebarProps = {
   offset: number;
@@ -22,7 +25,22 @@ type StapledSidebarState = {
   stapledTop: boolean;
 };
 
-export { SidebarLink, SectionHeader } from './StapledSidebar.style';
+type SidebarLinkProps = {
+  href: string;
+};
+
+export class SidebarLink extends React.Component<SidebarLinkProps> {
+  onClick: any;
+  constructor(props: SidebarLinkProps) {
+    super(props);
+    const { href } = this.props;
+    this.onClick = () => scrollToLink(href);
+  }
+
+  render() {
+    return <StyledSidebarLink {...this.props} onClick={this.onClick} />;
+  }
+}
 
 export default class StapledSidebar extends React.Component<
   StapledSidebarProps,
@@ -78,7 +96,6 @@ export default class StapledSidebar extends React.Component<
       inRAF,
     } = this.state;
     const { offset } = this.props;
-    console.log(lastYOffset);
 
     if (!inRAF) {
       this.setState({ inRAF: true });

@@ -58,7 +58,13 @@ const About = ({ children }: { children: React.ReactNode }) => {
           <SectionHeader variant="h4" component="h4" id="team">
             The Team
           </SectionHeader>
-          <Logo src="/images/ghss.png" />
+          <a
+            href="https://ghss.georgetown.edu/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Logo src="/images/ghss.png" />
+          </a>
           <Typography variant="body1" component="p">
             Covid Act Now is a distributed team of volunteers working with some
             of the nation’s preeminent epidemiologists and public health experts{' '}
@@ -90,11 +96,11 @@ const About = ({ children }: { children: React.ReactNode }) => {
             partnership with Georgetown University Center for Global Health
             Science and Security.
           </Typography>
-          <Typography>
-            <ul>
-              {TEAM.map(teammate => {
-                return (
-                  <li>
+          <ul>
+            {TEAM.map((teammate, idx) => {
+              return (
+                <li key={idx}>
+                  <Typography variant="body1" component="p">
                     <a
                       href={teammate.link}
                       target="_blank"
@@ -103,11 +109,11 @@ const About = ({ children }: { children: React.ReactNode }) => {
                       {teammate.name}
                     </a>
                     {teammate.title ? ', ' + teammate.title : ''}
-                  </li>
-                );
-              })}
-            </ul>
-          </Typography>
+                  </Typography>
+                </li>
+              );
+            })}
+          </ul>
 
           <SectionHeader variant="h4" component="h4" id="partners-advisors">
             Partners &amp; Advisors
@@ -157,20 +163,20 @@ const About = ({ children }: { children: React.ReactNode }) => {
             leaders need a forecasting tool to better understand the future
             spread of COVID. We are building that tool.
           </Typography>
-        <Typography variant="body1" component="p">
-          We built covidactnow.org to{' '}
-          <a
-            href="https://medium.com/@tomaspueyo/coronavirus-act-today-or-people-will-die-f4d3d9cd99ca"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            solve an urgent problem:
-          </a>{' '}
-          If we try to fight COVID in the present we will lose. We can only beat
-          COVID by understanding what it will do in the future. Our leaders need
-          a forecasting tool to better understand the future spread of COVID. We
-          are building that tool.
-        </Typography>
+          <Typography variant="body1" component="p">
+            We built covidactnow.org to{' '}
+            <a
+              href="https://medium.com/@tomaspueyo/coronavirus-act-today-or-people-will-die-f4d3d9cd99ca"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              solve an urgent problem:
+            </a>{' '}
+            If we try to fight COVID in the present we will lose. We can only
+            beat COVID by understanding what it will do in the future. Our
+            leaders need a forecasting tool to better understand the future
+            spread of COVID. We are building that tool.
+          </Typography>
 
           <Typography variant="h6" component="h6">
             Can I contribute or help?
@@ -178,14 +184,34 @@ const About = ({ children }: { children: React.ReactNode }) => {
           <Typography variant="body1" component="p">
             Yes. To improve the tool, we need the help of:
           </Typography>
-          <Typography>
-            <ul>
-              <li>JavaScript/React, Python engineers</li>
-              <li>Data Visualization Experts</li>
-              <li>UX Designer (Bonus if you write code!)</li>
-              <li>Epidimiologist / Modeler</li>
-              <li>Engineering Manager</li>
-            </ul>
+          <ul>
+            <li>
+              <Typography variant="body1" component="p">
+                JavaScript/React, Python engineers
+              </Typography>
+            </li>
+            <li>
+              <Typography variant="body1" component="p">
+                Data Visualization Experts
+              </Typography>
+            </li>
+            <li>
+              <Typography variant="body1" component="p">
+                UX Designer (Bonus if you write code!)
+              </Typography>
+            </li>
+            <li>
+              <Typography variant="body1" component="p">
+                Epidimiologist / Modeler
+              </Typography>
+            </li>
+            <li>
+              <Typography variant="body1" component="p">
+                Engineering Manager
+              </Typography>
+            </li>
+          </ul>
+          <Typography variant="body1" component="p">
             Is this you?{' '}
             <a
               target="_blank"

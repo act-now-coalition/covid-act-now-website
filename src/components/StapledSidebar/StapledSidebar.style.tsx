@@ -3,15 +3,25 @@ import Typography from '@material-ui/core/Typography';
 
 export const Wrapper = styled.div`
   display: flex;
+
+  @media (max-width: 900px) {
+    flex-direction: column-reverse;
+  }
 `;
 
 export const ContentWrapper = styled.div``;
 
 export const SidebarWrapper = styled.div`
   flex-shrink: 0;
-  margin-right: 3rem;
+  margin-left: 4.5rem;
+  margin-top: 1rem;
   position: relative;
   width: 15rem;
+
+  @media (max-width: 900px) {
+    width: 100%;
+    margin-left: 0;
+  }
 `;
 
 export const Sidebar = styled.div<{
@@ -19,19 +29,20 @@ export const Sidebar = styled.div<{
   stapledBottom: boolean;
   offset: Number;
 }>`
-  padding: 2rem 0 0 3rem;
+  padding: 2rem 0 0;
   position: ${({ stapledTop, stapledBottom }) =>
     stapledTop ? 'fixed' : stapledBottom ? 'absolute' : 'relative'};
   top: ${({ stapledTop, offset }) => (stapledTop ? offset + 'px' : 'auto')};
   bottom: ${({ stapledBottom }) => (stapledBottom ? '0' : 'auto')};
 
-  @media (max-width: 600px) {
+  @media (max-width: 900px) {
+    bottom: auto;
     position: relative;
     top: auto;
   }
 `;
 
-export const SidebarLink = styled.a`
+export const StyledSidebarLink = styled.a`
   margin-bottom: 0.5rem;
   display: block;
   text-decoration: none;
@@ -43,8 +54,8 @@ export const SectionHeader = styled(Typography)<{
   variant: String;
   component: String;
 }>`
-  padding-top: 80px;
-  margin-top: -40px;
+  padding-top: 105px;
+  margin-top: -65px;
 `;
 
 // .pillars-wrapper {
