@@ -39,6 +39,7 @@ const About = ({ children }: { children: React.ReactNode }) => {
         <Typography variant="h5" component="h5">
           Who made Covid Act Now?
         </Typography>
+        <Logo src="/images/ghss.png" />
         <Typography variant="body1" component="p">
           Covid Act Now is a distributed team of volunteers working with some of
           the nation’s preeminent epidemiologists and public health experts{' '}
@@ -59,7 +60,6 @@ const About = ({ children }: { children: React.ReactNode }) => {
           with medical and policy guidance from{' '}
           <a href="https://profiles.stanford.edu/nirav-shah">Dr. Nirav Shah</a>.
         </Typography>
-        <Logo src="/images/ghss.png" />
         <Typography variant="body1" component="p">
           We have since grown into a large distributed team working in
           partnership with Georgetown University Center for Global Health
