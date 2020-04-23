@@ -28,7 +28,9 @@ const ApiInterventions: { [intervention: string]: string } = {
 type InterventionKey = keyof typeof INTERVENTIONS;
 
 /** Represents summary+timeseries for any kind of region. */
-export type RegionSummaryTimeseries = CovidActNowCountyTimeseries | CovidActNowStateTimeseries;
+export type RegionSummaryTimeseries =
+  | CovidActNowCountyTimeseries
+  | CovidActNowStateTimeseries;
 
 /** A mapping of interventions to the corresponding region summary+timeseries data. */
 export type RegionSummaryTimeseriesMap = {
@@ -45,7 +47,7 @@ export type RegionSummaryTimeseriesMap = {
  * and returns them as a map.
  */
 export async function fetchSummaryTimeseriesMap(
-  region: RegionDescriptor
+  region: RegionDescriptor,
 ): Promise<RegionSummaryTimeseriesMap> {
   const result = {} as RegionSummaryTimeseriesMap;
   await Promise.all(
