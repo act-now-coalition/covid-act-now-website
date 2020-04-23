@@ -12,7 +12,7 @@ const COLUMNS = {
 const MS_PER_DAY = 1000 * 60 * 60 * 24;
 
 //intersection between lines connect points [a, b] and [c, d]
-function intersection(a, b, c, d) {
+function intersection(a: any, b: any, c: any, d: any) {
   const det = (a.x - b.x) * (c.y - d.y) - (a.y - b.y) * (c.x - d.x),
     l = a.x * b.y - a.y * b.x,
     m = c.x * d.y - c.y * d.x,
@@ -22,6 +22,15 @@ function intersection(a, b, c, d) {
 
   return i;
 }
+
+/** Parameters that can be provided when constructing a Projection. */
+export interface ProjectionParameters {
+  intervention: string;
+  isInferred: boolean;
+  durationDays?: number;
+  delayDays?: number;
+}
+
 /**
  * Represents a single projection for a given state or county.  Contains a
  * time-series of things like hospitalizations, hospital capacity, infections, etc.
@@ -29,7 +38,26 @@ function intersection(a, b, c, d) {
  * on the actual data observed in a given location
  */
 export class Projection {
-  constructor(data, parameters) {
+  intervention: string;
+  isInferred: boolean;
+  durationDays: number | null;
+  delayDays: number;
+  rt: number | null;
+  rtStdev: number | undefined;
+  dates: Date[];
+  dayZero: Date;
+  daysSinceDayZero: number;
+  hospitalizations: number[];
+  beds: number[];
+  deaths: number[];
+  cumulativeDeaths: number[];
+  totalPopulation: number;
+  infected: number[];
+  cumulativeInfected: number[];
+  cumulativeDead: number;
+  dateOverwhelmed: Date | null;
+
+  constructor(data: any[], parameters: ProjectionParameters) {
     this.intervention = parameters.intervention;
     this.isInferred = parameters.isInferred;
     this.durationDays = parameters.durationDays || null /* permanent */;
@@ -39,7 +67,7 @@ export class Projection {
       this.rt = data[data.length - 1][COLUMNS.rt];
       this.rtStdev = data[data.length - 1][COLUMNS.rtStdev];
     }
-    let _parseInt = number => {
+    let _parseInt = (number: string) => {
       // remove , in strings
       if (typeof number == 'string') {
         number = number.replace(/,/g, '');
@@ -153,31 +181,31 @@ export class Projection {
   get interventionEnd() {
     return new Date(
       this.dayZero.getTime() +
-        (this.daysSinceDayZero + this.durationDays) * MS_PER_DAY,
+        (this.daysSinceDayZero + this.durationDays!) * MS_PER_DAY,
     );
   }
 
-  cumulativeInfectedAfter(days) {
+  cumulativeInfectedAfter(days: number) {
     return this.cumulativeInfected[this.cumulativeInfected.length - 1];
   }
-  cumulativeDeadAfter(days) {
+  cumulativeDeadAfter(days: number) {
     return this.cumulativeDeaths[this.cumulativeDeaths.length - 1];
   }
-  dateAfter(days) {
+  dateAfter(days: number) {
     return this.dates[this.dates.length - 1];
   }
-  getColumn(columnName, days) {
+  getColumn(columnName: string, days: number) {
     return this.dates
       .slice(0, Math.ceil(days / 4) + 1) //fixme!!!
-      .map((date, idx) => ({ x: date, y: this[columnName][idx] }));
+      .map((date, idx) => ({ x: date, y: (this as any)[columnName][idx] }));
   }
 
-  getColumnAt(columnName, days) {
-    const idxForDay = day => Math.ceil(day / 4);
-    return this[columnName][idxForDay(days)];
+  getColumnAt(columnName: string, days: number) {
+    const idxForDay = (day: number) => Math.ceil(day / 4);
+    return (this as any)[columnName][idxForDay(days)];
   }
 
-  getDataset(columnName, duration, customLabel) {
+  getDataset(columnName: string, duration: number, customLabel: string) {
     return {
       label: customLabel ? customLabel : this.labelWithR0,
       data: this.getColumn(columnName, duration + this.daysSinceDayZero),

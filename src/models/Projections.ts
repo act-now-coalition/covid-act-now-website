@@ -12,12 +12,27 @@ import { STATES } from '../enums';
  * (eg. current intervention) for a given location (state or county).
  */
 export class Projections {
-  constructor(projectionInfos, stateCode, county) {
+  stateCode: string;
+  stateName: string;
+  county: any;
+  countyName: string | null;
+  stateIntervention: any;
+  baseline: any;
+  distancing: any;
+  distancingPoorEnforcement: any;
+  projected: any;
+  currentInterventionModel: any;
+  supportsInferred: boolean;
+  isCounty: boolean;
+  interventionModelMap: any;
+  worstCaseInterventionModel: any;
+
+  constructor(projectionInfos: any, stateCode: string, county: any) {
     this.stateCode = stateCode.toUpperCase();
-    this.stateName = STATES[this.stateCode];
+    this.stateName = (STATES as any)[this.stateCode];
     this.county = null;
     this.countyName = null;
-    this.stateIntervention = STATE_TO_INTERVENTION[this.stateCode];
+    this.stateIntervention = (STATE_TO_INTERVENTION as any)[this.stateCode];
     this.baseline = null;
     this.distancing = null;
     this.distancingPoorEnforcement = null;
@@ -30,7 +45,7 @@ export class Projections {
     this.populateCounty(county);
   }
 
-  populateCounty(county) {
+  populateCounty(county: any) {
     if (!county) {
       return;
     }
@@ -47,7 +62,7 @@ export class Projections {
 
     if (
       this.stateCode === 'NY' &&
-      NEW_YORK_COUNTIES_BLACKLIST.includes(this.countyName)
+      NEW_YORK_COUNTIES_BLACKLIST.includes(this.countyName!)
     ) {
       this.countyName = 'New York';
     }
@@ -166,7 +181,7 @@ export class Projections {
   }
 
   // unused but likely to be used again
-  isOverwhelmedDateAfterNumberOfWeeks(model, weeks) {
+  isOverwhelmedDateAfterNumberOfWeeks(model: any, weeks: number) {
     if (!model.dateOverwhelmed) {
       return true;
     }
@@ -176,7 +191,7 @@ export class Projections {
     return moment(model.dateOverwhelmed).isSameOrAfter(futureDate);
   }
 
-  populateInterventions(projectionInfos) {
+  populateInterventions(projectionInfos: any) {
     const fipsBlacklist = [
       '13275',
       '18019',
@@ -193,7 +208,7 @@ export class Projections {
       '47065',
       '50007',
     ];
-    projectionInfos.forEach(pi => {
+    projectionInfos.forEach((pi: any) => {
       let projection = null;
       if (pi.data) {
         projection = new Projection(pi.data, {
