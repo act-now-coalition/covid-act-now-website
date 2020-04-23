@@ -18,9 +18,13 @@ export const Content = styled.div`
 
 export const Logo = styled.img`
   float: right;
-  width: 200px;
+  width: 400px;
   margin-left: 1rem;
   margin-bottom: 1rem;
+
+  @media (max-width: 900px) {
+    width: 300px;
+  }
 
   @media (max-width: 600px) {
     display: block;
