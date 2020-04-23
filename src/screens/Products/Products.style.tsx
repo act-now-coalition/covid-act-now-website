@@ -24,7 +24,3 @@ export const Content = styled.div`
 export const Header = styled.div`
   background-color: ${COLORS.LIGHTGRAY};
 `;
-
-export const TextContent = styled.div`
-  max-width: 600px;
-`;

@@ -2,30 +2,45 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import ShareBlock from 'components/ShareBlock/ShareBlock';
+import StapledSidebar, {
+  SidebarLink,
+  SectionHeader,
+} from 'components/StapledSidebar/StapledSidebar';
 
-import { Wrapper, Content, TextContent, Header } from './Products.style';
+import { Wrapper, Content, Header } from './Products.style';
+
+const sidebar = (
+  <React.Fragment>
+    <SidebarLink href="#model">U.S. Interventions Model</SidebarLink>
+    <SidebarLink href="#embed">Embed</SidebarLink>
+    <SidebarLink href="#api">API</SidebarLink>
+    <SidebarLink href="#raw-data">Raw Data</SidebarLink>
+  </React.Fragment>
+);
 
 const Products = ({ children }: { children: React.ReactNode }) => {
   return (
     <Wrapper>
+      <AppMetaTags
+        canonicalUrl="/products"
+        pageTitle="Products"
+        pageDescription="Covid Act Now was started by four volunteers who saw the explosive and
+        deadly growth of COVID infections around the world and felt they had
+        to do something."
+      />
       <Header>
         <Content>
           <Typography variant="h3" component="h1">
-            About the U.S. Interventions Model
+            Products
           </Typography>
         </Content>
       </Header>
       <Content>
-        <TextContent>
-          <AppMetaTags
-            canonicalUrl="/products"
-            pageTitle="Products"
-            pageDescription="Covid Act Now was started by four volunteers who saw the explosive and
-            deadly growth of COVID infections around the world and felt they had
-            to do something."
-          />
-
-          <Typography variant="h5" component="h5">
+        <StapledSidebar sidebar={sidebar}>
+          <SectionHeader variant="h4" component="h4" id="model">
+            U.S. Interventions Model
+          </SectionHeader>
+          <Typography variant="h6" component="h6">
             What is the U.S. Interventions Model?
           </Typography>
           <Typography variant="body1" component="p">
@@ -36,7 +51,7 @@ const Products = ({ children }: { children: React.ReactNode }) => {
             model (a type of epidemiological model).
           </Typography>
 
-          <Typography variant="h5" component="h5">
+          <Typography variant="h6" component="h6">
             Wait, what’s an SEIR model?
           </Typography>
 
@@ -67,7 +82,7 @@ const Products = ({ children }: { children: React.ReactNode }) => {
             Evolutionary Dynamics.
           </Typography>
 
-          <Typography variant="h5" component="h5">
+          <Typography variant="h6" component="h6">
             Can I view the model?
           </Typography>
           <Typography variant="body1" component="p">
@@ -81,7 +96,7 @@ const Products = ({ children }: { children: React.ReactNode }) => {
             .
           </Typography>
 
-          <Typography variant="h5" component="h5">
+          <Typography variant="h6" component="h6">
             What are your sources of data?
           </Typography>
           <Typography variant="body1" component="p">
@@ -96,7 +111,7 @@ const Products = ({ children }: { children: React.ReactNode }) => {
             .
           </Typography>
 
-          <Typography variant="h5" component="h5">
+          <Typography variant="h6" component="h6">
             How often does the model update?
           </Typography>
           <Typography variant="body1" component="p">
@@ -104,7 +119,7 @@ const Products = ({ children }: { children: React.ReactNode }) => {
             the state page will tell you specifically.
           </Typography>
 
-          <Typography variant="h5" component="h5">
+          <Typography variant="h6" component="h6">
             What are the current limitations of the model?
           </Typography>
           <Typography variant="body1" component="p">
@@ -159,7 +174,7 @@ const Products = ({ children }: { children: React.ReactNode }) => {
             </ul>
           </Typography>
 
-          <Typography variant="h5" component="h5">
+          <Typography variant="h6" component="h6">
             What definition does Covid Act Now use for “social distancing” and
             “stay at home”? How about “lax/strict” compliance (re. “stay at
             home”)?{' '}
@@ -186,7 +201,7 @@ const Products = ({ children }: { children: React.ReactNode }) => {
             , as well as the emerging corpus of COVID data in the U.S.
           </Typography>
 
-          <Typography variant="h5" component="h5">
+          <Typography variant="h6" component="h6">
             What are the specific policies for my state?
           </Typography>
           <Typography variant="body1" component="p">
@@ -200,7 +215,8 @@ const Products = ({ children }: { children: React.ReactNode }) => {
             </a>
             .
           </Typography>
-          <Typography variant="h5" component="h5">
+
+          <Typography variant="h6" component="h6">
             How does the Covid Act Now model differ from IHME model?
           </Typography>
           <Typography variant="body1" component="p">
@@ -213,8 +229,33 @@ const Products = ({ children }: { children: React.ReactNode }) => {
             </a>
             .
           </Typography>
+
+          <SectionHeader variant="h4" component="h4" id="embed">
+            Embed
+          </SectionHeader>
+
+          <Typography variant="body1" component="p">
+            Mike TODO
+          </Typography>
+
+          <SectionHeader variant="h4" component="h4" id="api">
+            API
+          </SectionHeader>
+
+          <Typography variant="body1" component="p">
+            Mike TODO
+          </Typography>
+
+          <SectionHeader variant="h4" component="h4" id="raw-data">
+            Raw Data
+          </SectionHeader>
+
+          <Typography variant="body1" component="p">
+            Mike TODO
+          </Typography>
+
           <ShareBlock />
-        </TextContent>
+        </StapledSidebar>
       </Content>
     </Wrapper>
   );
