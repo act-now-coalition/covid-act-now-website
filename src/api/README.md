@@ -1,0 +1,1 @@
+Run `yarn update-api-types` to regenerate the type definitions in this directory.
