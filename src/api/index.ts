@@ -6,8 +6,9 @@
 import DataUrlJson from '../assets/data/data_url.json';
 import { CovidActNowStateTimeseries } from './schema/CovidActNowStatesTimeseries';
 import { CovidActNowCountyTimeseries } from './schema/CovidActNowCountiesTimeseries';
-import { assertStateId, assertCountyId as assertCountyFipsId } from 'utils';
 import { INTERVENTIONS } from 'enums';
+import { RegionDescriptor } from '../utils/RegionDescriptor';
+import { fail } from 'assert';
 
 const API_URL = DataUrlJson.data_url.replace(/\/$/, '');
 
@@ -26,30 +27,31 @@ const ApiInterventions: { [intervention: string]: string } = {
 // consolidate these different intervention types.
 type InterventionKey = keyof typeof INTERVENTIONS;
 
-/** A mapping of interventions to the corresponding state timeseries data. */
-export type StateTimeseriesMap = {
-  [intervention: string]: CovidActNowStateTimeseries | null;
+/** Represents summary+timeseries for any kind of region. */
+export type RegionSummaryTimeseries = CovidActNowCountyTimeseries | CovidActNowStateTimeseries;
+
+/** A mapping of interventions to the corresponding region summary+timeseries data. */
+export type RegionSummaryTimeseriesMap = {
+  /**
+   * We use null to represent data we tried to fetch from the API but which was
+   * missing (e.g. the region doesn't exist or doesn't have data for a
+   * particular intervention. E.g. not all counties have inference data.)
+   */
+  [intervention: string]: RegionSummaryTimeseries | null;
 };
 
 /**
- * A mapping of interventions to the corresponding county timeseries data.
+ * Fetches the summary+timeseries for a region for each available intervention
+ * and returns them as a map.
  */
-export type CountyTimeseriesMap = {
-  [intervention: string]: CovidActNowCountyTimeseries | null;
-};
-
-/**
- * Fetches the state timeseries for each available intervention and returns it
- * as a map.
- */
-export async function fetchStateTimeseriesMap(
-  stateId: string,
-): Promise<StateTimeseriesMap> {
-  const result = {} as StateTimeseriesMap;
+export async function fetchSummaryTimeseriesMap(
+  region: RegionDescriptor
+): Promise<RegionSummaryTimeseriesMap> {
+  const result = {} as RegionSummaryTimeseriesMap;
   await Promise.all(
     Object.keys(ApiInterventions).map(async intervention => {
-      result[intervention] = await fetchStateTimeseries(
-        stateId,
+      result[intervention] = await fetchSummaryTimeseries(
+        region,
         intervention as InterventionKey,
       );
     }),
@@ -57,51 +59,23 @@ export async function fetchStateTimeseriesMap(
   return result;
 }
 
-/** Fetches the state timeseries for a single intervention. */
-export async function fetchStateTimeseries(
-  stateId: string,
+/** Fetches the summary+timeseries for a region and a single intervention. */
+export async function fetchSummaryTimeseries(
+  region: RegionDescriptor,
   intervention: InterventionKey,
-): Promise<CovidActNowStateTimeseries | null> {
-  stateId = stateId.toUpperCase();
-  assertStateId(stateId);
+): Promise<RegionSummaryTimeseries | null> {
   const apiIntervention = ApiInterventions[intervention];
-  return await fetchApiJson<CovidActNowStateTimeseries>(
-    `us/states/${stateId}.${apiIntervention}.timeseries.json`,
-  );
-}
-
-/**
- * Fetches the county timeseries for each available intervention and returns it
- * as a map.
- *
- * NOTE: Counties don't always support the projected/observed intervention, so
- * it can be null.
- */
-export async function fetchCountyTimeseriesMap(
-  countyFipsId: string,
-): Promise<CountyTimeseriesMap | null> {
-  const result = {} as CountyTimeseriesMap;
-  await Promise.all(
-    Object.keys(ApiInterventions).map(async intervention => {
-      result[intervention] = await fetchCountyTimeseries(
-        countyFipsId,
-        intervention as InterventionKey,
-      );
-    }),
-  );
-  return result;
-}
-
-/** Fetches the county timeseries for a single intervention. */
-export async function fetchCountyTimeseries(
-  countyFipsId: string,
-  intervention: InterventionKey,
-): Promise<CovidActNowCountyTimeseries | null> {
-  assertCountyFipsId(countyFipsId);
-  const apiIntervention = ApiInterventions[intervention];
-  return await fetchApiJson<CovidActNowCountyTimeseries>(
-    `us/counties/${countyFipsId}.${apiIntervention}.timeseries.json`,
-  );
+  if (region.isState()) {
+    return await fetchApiJson<CovidActNowStateTimeseries>(
+      `us/states/${region.stateId}.${apiIntervention}.timeseries.json`,
+    );
+  } else if (region.isCounty()) {
+    return await fetchApiJson<CovidActNowStateTimeseries>(
+      `us/counties/${region.countyFipsId}.${apiIntervention}.timeseries.json`,
+    );
+  } else {
+    fail('Unknown region type: ' + region);
+  }
 }
 
 /**
@@ -117,6 +91,7 @@ async function fetchApiJson<T extends object>(
     const response = await fetch(`${API_URL}/${endpoint}`);
     return (await response.json()) as T;
   } catch {
+    // TODO: Implement better error handling (only treat 404 as null?)
     return null;
   }
 }

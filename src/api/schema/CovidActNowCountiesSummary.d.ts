@@ -42,6 +42,14 @@ export type Shortagestartdate = string;
  */
 export type Icubeds = _ResourceUsageProjection;
 /**
+ * Historical or Inferred Rt
+ */
+export type Rt = number;
+/**
+ * Rt standard deviation
+ */
+export type Rtci90 = number;
+/**
  * Total population in geographic area
  */
 export type Population = number;
@@ -89,6 +97,8 @@ export interface CovidActNowCountySummary {
 export interface _Projections {
   totalHospitalBeds: Totalhospitalbeds;
   ICUBeds: Icubeds;
+  Rt: Rt;
+  RtCI90: Rtci90;
 }
 export interface _ResourceUsageProjection {
   peakShortfall: Peakshortfall;
