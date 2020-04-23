@@ -46,7 +46,8 @@
     "tsc-watch": "tsc --watch",
     "prettier": "prettier --check '**/*.{css,scss,js,ts,tsx}'",
     "prettier-fix": "prettier --write '**/*.{css,scss,js,ts,tsx}'",
-    "update-api-types": "ts-node-script scripts/update_api_types.ts"
+    "update-api-types": "ts-node-script scripts/update_api_types.ts",
+    "update-calculated-interventions": "ts-node-script scripts/calculated_interventions.ts"
   },
   "lint-staged": {
     "src/**/*.{css,scss,js}": [
