@@ -48,6 +48,17 @@ const CountyMap = ({
           <Geographies geography={counties}>
             {({ geographies }) =>
               geographies.map(geo => {
+                const fillColor = countiesWithData.includes(
+                  geo.properties.GEOID,
+                )
+                  ? getFillColor(geo.properties.GEOID)
+                  : COLOR_MAP.GRAY.LIGHT;
+
+                const fillColorGray = [
+                  COLOR_MAP.GRAY.LIGHT,
+                  COLOR_MAP.GRAY.BASE,
+                ].includes(fillColor);
+
                 return (
                   <Geography
                     key={geo.rsmKey}
@@ -58,11 +69,7 @@ const CountyMap = ({
                         ? 0.5
                         : 1
                     }
-                    fill={
-                      countiesWithData.includes(geo.properties.GEOID)
-                        ? getFillColor(geo.properties.GEOID)
-                        : COLOR_MAP.GRAY.LIGHT
-                    }
+                    fill={fillColor}
                     stroke={'white'}
                     onMouseEnter={() => {
                       const { NAME } = geo.properties;
@@ -75,8 +82,8 @@ const CountyMap = ({
                     style={{
                       cursor: 'pointer',
                       hover: {
-                        // fill: '#A0AEC0',
-                        opacity: '0.5',
+                        fill: fillColorGray ? '#888' : fillColor,
+                        opacity: fillColorGray ? '1' : '0.5',
                         outline: 'none',
                       },
                       pressed: {

@@ -16,8 +16,10 @@ export const CondensedLegendItemText = styled(Typography)`
 `;
 
 export const LegendContainer = styled(Grid)`
+  position: relative;
   max-width: calc(900px + 1rem);
   margin: 1.5rem auto 0;
+  z-index: 1;
 `;
 
 export const LegendItemHeader = styled(Box)`
