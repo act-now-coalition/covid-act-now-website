@@ -1,4 +1,4 @@
-import { RegionSummaryTimeseries } from 'api';
+import { RegionSummaryWithTimeseries } from 'api';
 
 const MS_PER_DAY = 1000 * 60 * 60 * 24;
 
@@ -22,7 +22,6 @@ export class Projection {
   durationDays: number | null;
   delayDays: number;
   rt: number | null;
-  rtStdev: number | undefined;
   dates: Date[];
   dayZero: Date;
   daysSinceDayZero: number;
@@ -35,18 +34,17 @@ export class Projection {
   dateOverwhelmed: Date | null;
 
   constructor(
-    summaryTimeseries: RegionSummaryTimeseries,
+    summaryWithTimeseries: RegionSummaryWithTimeseries,
     parameters: ProjectionParameters,
   ) {
-    const timeseries = summaryTimeseries.timeseries;
+    const timeseries = summaryWithTimeseries.timeseries;
     this.intervention = parameters.intervention;
     this.isInferred = parameters.isInferred;
     this.durationDays = parameters.durationDays || null /* permanent */;
     this.delayDays = parameters.delayDays || 0;
     this.rt = null;
     if (this.isInferred) {
-      this.rt = summaryTimeseries.projections.Rt;
-      this.rtStdev = summaryTimeseries.projections.RtCI90;
+      this.rt = summaryWithTimeseries.projections.Rt;
     }
 
     this.dates = timeseries.map(row => new Date(row.date));
@@ -58,7 +56,7 @@ export class Projection {
     this.hospitalizations = timeseries.map(row => row.hospitalBedsRequired);
     this.beds = timeseries.map(row => row.hospitalBedCapacity);
     this.cumulativeDeaths = timeseries.map(row => row.cumulativeDeaths);
-    this.totalPopulation = summaryTimeseries.actuals.population;
+    this.totalPopulation = summaryWithTimeseries.actuals.population;
     this.cumulativeInfected = timeseries.map(row => row.cumulativeInfected);
 
     this.cumulativeDead = this.cumulativeDeaths[
@@ -66,7 +64,7 @@ export class Projection {
     ];
 
     const shortageStart =
-      summaryTimeseries.projections.totalHospitalBeds.shortageStartDate;
+      summaryWithTimeseries.projections.totalHospitalBeds.shortageStartDate;
     this.dateOverwhelmed =
       shortageStart === null ? null : new Date(shortageStart);
   }

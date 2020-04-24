@@ -5,7 +5,7 @@ import { STATES } from '../enums';
 import DataUrlJson from '../assets/data/data_url';
 import fetch from 'node-fetch';
 import { RegionDescriptor } from './RegionDescriptor';
-import { fetchSummaryTimeseriesMap } from 'api';
+import { fetchSummaryWithTimeseriesMap } from 'api';
 
 const DATA_URL = DataUrlJson.data_url.replace(/\/$/, '');
 
@@ -22,8 +22,8 @@ export async function fetchProjections(
   } else {
     region = RegionDescriptor.forState(stateId);
   }
-  const summaryTimeseriesMap = await fetchSummaryTimeseriesMap(region);
-  return new Projections(summaryTimeseriesMap, stateId, countyInfo);
+  const summaryWithTimeseriesMap = await fetchSummaryWithTimeseriesMap(region);
+  return new Projections(summaryWithTimeseriesMap, stateId, countyInfo);
 }
 
 export function useProjections(location, county = null) {

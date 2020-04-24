@@ -6,7 +6,7 @@ import {
   COLOR_MAP,
 } from '../enums/interventions';
 import { STATES } from '../enums';
-import { RegionSummaryTimeseriesMap } from 'api';
+import { RegionSummaryWithTimeseriesMap } from 'api';
 
 /**
  * The model for the complete set of projections and related information
@@ -29,7 +29,7 @@ export class Projections {
   worstCaseInterventionModel: any;
 
   constructor(
-    summaryTimeseriesMap: RegionSummaryTimeseriesMap,
+    summaryWithTimeseriesMap: RegionSummaryWithTimeseriesMap,
     stateCode: string,
     county: any,
   ) {
@@ -45,7 +45,7 @@ export class Projections {
     this.supportsInferred = false;
     this.isCounty = county != null;
 
-    this.populateInterventions(summaryTimeseriesMap);
+    this.populateInterventions(summaryWithTimeseriesMap);
     this.populateCurrentIntervention();
     this.populateCounty(county);
   }
@@ -196,7 +196,9 @@ export class Projections {
     return moment(model.dateOverwhelmed).isSameOrAfter(futureDate);
   }
 
-  populateInterventions(summaryTimeseriesMap: RegionSummaryTimeseriesMap) {
+  populateInterventions(
+    summaryWithTimeseriesMap: RegionSummaryWithTimeseriesMap,
+  ) {
     const fipsBlacklist = [
       '13275',
       '18019',
@@ -213,11 +215,11 @@ export class Projections {
       '47065',
       '50007',
     ];
-    for (const intervention in summaryTimeseriesMap) {
-      const summaryTimeseries = summaryTimeseriesMap[intervention];
+    for (const intervention in summaryWithTimeseriesMap) {
+      const summaryWithTimeseries = summaryWithTimeseriesMap[intervention];
       let projection = null;
-      if (summaryTimeseries !== null) {
-        projection = new Projection(summaryTimeseries, {
+      if (summaryWithTimeseries !== null) {
+        projection = new Projection(summaryWithTimeseries, {
           intervention: intervention,
           isInferred: intervention === INTERVENTIONS.PROJECTED,
         });
