@@ -6,8 +6,6 @@ const MS_PER_DAY = 1000 * 60 * 60 * 24;
 export interface ProjectionParameters {
   intervention: string;
   isInferred: boolean;
-  durationDays?: number;
-  delayDays?: number;
 }
 
 /**
@@ -17,21 +15,23 @@ export interface ProjectionParameters {
  * on the actual data observed in a given location
  */
 export class Projection {
-  intervention: string;
-  isInferred: boolean;
-  durationDays: number | null;
-  delayDays: number;
-  rt: number | null;
-  dates: Date[];
-  dayZero: Date;
-  daysSinceDayZero: number;
-  hospitalizations: number[];
-  beds: number[];
-  cumulativeDeaths: number[];
-  totalPopulation: number;
-  cumulativeInfected: number[];
-  cumulativeDead: number;
-  dateOverwhelmed: Date | null;
+  readonly isInferred: boolean;
+  readonly totalPopulation: number;
+  readonly cumulativeDead: number;
+  readonly dateOverwhelmed: Date | null;
+  readonly rt: number | null;
+
+  private readonly intervention: string;
+  private readonly dates: Date[];
+  private readonly dayZero: Date;
+  private readonly daysSinceDayZero: number;
+
+  // NOTE: These can be used dynamically by getColumn()
+  private readonly hospitalizations: number[];
+  private readonly beds: number[];
+  private readonly cumulativeDeaths: number[];
+  // TODO: This should be private, but Outcomes.js has a probably erroneous reference.
+  readonly cumulativeInfected: number[];
 
   constructor(
     summaryWithTimeseries: RegionSummaryWithTimeseries,
@@ -40,8 +40,7 @@ export class Projection {
     const timeseries = summaryWithTimeseries.timeseries;
     this.intervention = parameters.intervention;
     this.isInferred = parameters.isInferred;
-    this.durationDays = parameters.durationDays || null /* permanent */;
-    this.delayDays = parameters.delayDays || 0;
+    this.totalPopulation = summaryWithTimeseries.actuals.population;
     this.rt = null;
     if (this.isInferred) {
       this.rt = summaryWithTimeseries.projections.Rt;
@@ -56,7 +55,6 @@ export class Projection {
     this.hospitalizations = timeseries.map(row => row.hospitalBedsRequired);
     this.beds = timeseries.map(row => row.hospitalBedCapacity);
     this.cumulativeDeaths = timeseries.map(row => row.cumulativeDeaths);
-    this.totalPopulation = summaryWithTimeseries.actuals.population;
     this.cumulativeInfected = timeseries.map(row => row.cumulativeInfected);
 
     this.cumulativeDead = this.cumulativeDeaths[
@@ -69,46 +67,8 @@ export class Projection {
       shortageStart === null ? null : new Date(shortageStart);
   }
 
-  get durationLabelMonths() {
-    if (this.durationDays) {
-      let months = Math.round(this.durationDays / 30);
-      return `${months} Month${months > 1 ? 's' : ''}`;
-    } else {
-      return ''; // permanent intervetion
-    }
-  }
-
-  get delayLabelWeeks() {
-    if (this.delayDays) {
-      let weeks = Math.round(this.delayDays / 7);
-      return `Starting In ${weeks} Month${weeks > 1 ? 's' : ''}`;
-    } else {
-      return 'Starting Today';
-    }
-  }
-
   get label() {
-    let parts = [];
-    if (this.durationDays) {
-      parts.push(`${this.durationLabelMonths} of `);
-    }
-    parts.push(this.intervention);
-    if (this.delayDays) {
-      parts.push(`, ${this.delayLabelWeeks}`);
-    }
-
-    return parts.join('');
-  }
-
-  get labelWithR0() {
-    return `${this.label}`;
-  }
-
-  get interventionEnd() {
-    return new Date(
-      this.dayZero.getTime() +
-        (this.daysSinceDayZero + this.durationDays!) * MS_PER_DAY,
-    );
+    return this.intervention;
   }
 
   cumulativeInfectedAfter(days: number) {
@@ -120,20 +80,16 @@ export class Projection {
   dateAfter(days: number) {
     return this.dates[this.dates.length - 1];
   }
-  getColumn(columnName: string, days: number) {
+
+  private getColumn(columnName: string, days: number) {
     return this.dates
       .slice(0, Math.ceil(days / 4) + 1) //fixme!!!
       .map((date, idx) => ({ x: date, y: (this as any)[columnName][idx] }));
   }
 
-  getColumnAt(columnName: string, days: number) {
-    const idxForDay = (day: number) => Math.ceil(day / 4);
-    return (this as any)[columnName][idxForDay(days)];
-  }
-
   getDataset(columnName: string, duration: number, customLabel: string) {
     return {
-      label: customLabel ? customLabel : this.labelWithR0,
+      label: customLabel ? customLabel : this.label,
       data: this.getColumn(columnName, duration + this.daysSinceDayZero),
     };
   }
