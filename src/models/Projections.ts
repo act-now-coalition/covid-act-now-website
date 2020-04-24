@@ -45,9 +45,9 @@ export class Projections {
     this.supportsInferred = false;
     this.isCounty = county != null;
 
+    this.populateCounty(county);
     this.populateInterventions(summaryWithTimeseriesMap);
     this.populateCurrentIntervention();
-    this.populateCounty(county);
   }
 
   populateCounty(county: any) {

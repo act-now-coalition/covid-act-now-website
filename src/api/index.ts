@@ -8,7 +8,8 @@ import { CovidActNowStateTimeseries } from './schema/CovidActNowStatesTimeseries
 import { CovidActNowCountyTimeseries } from './schema/CovidActNowCountiesTimeseries';
 import { INTERVENTIONS } from 'enums';
 import { RegionDescriptor } from '../utils/RegionDescriptor';
-import { fail } from 'assert';
+import { fail } from 'utils';
+import fetch from 'node-fetch';
 
 const API_URL = DataUrlJson.data_url.replace(/\/$/, '');
 
