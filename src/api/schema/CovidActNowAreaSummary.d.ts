@@ -62,6 +62,14 @@ export type Intervention = string;
  */
 export type Cumulativeconfirmedcases = number;
 /**
+ * Number of positive test results to date
+ */
+export type Cumulativepositivetests = number;
+/**
+ * Number of negative test results to date
+ */
+export type Cumulativenegativetests = number;
+/**
  * Number of deaths so far
  */
 export type Cumulativedeaths = number;
@@ -98,6 +106,8 @@ export interface _Actuals {
   population: Population;
   intervention: Intervention;
   cumulativeConfirmedCases: Cumulativeconfirmedcases;
+  cumulativePositiveTests: Cumulativepositivetests;
+  cumulativeNegativeTests: Cumulativenegativetests;
   cumulativeDeaths: Cumulativedeaths;
   hospitalBeds: _ResourceUtilization;
   ICUBeds: _ResourceUtilization;

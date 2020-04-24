@@ -62,6 +62,14 @@ export type Intervention = string;
  */
 export type Cumulativeconfirmedcases = number;
 /**
+ * Number of positive test results to date
+ */
+export type Cumulativepositivetests = number;
+/**
+ * Number of negative test results to date
+ */
+export type Cumulativenegativetests = number;
+/**
  * Number of deaths so far
  */
 export type Cumulativedeaths = number;
@@ -99,6 +107,14 @@ export type Icubedsinuse = number;
  */
 export type Icubedcapacity = number;
 /**
+ * Number of ventilators projected to be in-use.
+ */
+export type Ventilatorsinuse = number;
+/**
+ * Total ventilator capacity.
+ */
+export type Ventilatorcapacity = number;
+/**
  * Number of cumulative deaths
  */
 export type Cumulativedeaths1 = number;
@@ -106,6 +122,14 @@ export type Cumulativedeaths1 = number;
  * Number of cumulative infections
  */
 export type Cumulativeinfected = number;
+/**
+ * Number of positive test results to date
+ */
+export type Cumulativepositivetests1 = number;
+/**
+ * Number of negative test results to date
+ */
+export type Cumulativenegativetests1 = number;
 export type Timeseries = CANPredictionTimeseriesRow[];
 export type CovidActNowStatesTimeseries = CovidActNowStateTimeseries[];
 
@@ -136,6 +160,8 @@ export interface _Actuals {
   population: Population;
   intervention: Intervention;
   cumulativeConfirmedCases: Cumulativeconfirmedcases;
+  cumulativePositiveTests: Cumulativepositivetests;
+  cumulativeNegativeTests: Cumulativenegativetests;
   cumulativeDeaths: Cumulativedeaths;
   hospitalBeds: _ResourceUtilization;
   ICUBeds: _ResourceUtilization;
@@ -150,6 +176,10 @@ export interface CANPredictionTimeseriesRow {
   hospitalBedCapacity: Hospitalbedcapacity;
   ICUBedsInUse: Icubedsinuse;
   ICUBedCapacity: Icubedcapacity;
+  ventilatorsInUse: Ventilatorsinuse;
+  ventilatorCapacity: Ventilatorcapacity;
   cumulativeDeaths: Cumulativedeaths1;
   cumulativeInfected: Cumulativeinfected;
+  cumulativePositiveTests: Cumulativepositivetests1;
+  cumulativeNegativeTests: Cumulativenegativetests1;
 }

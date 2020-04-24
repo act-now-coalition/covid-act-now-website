@@ -22,6 +22,14 @@ export type Icubedsinuse = number;
  */
 export type Icubedcapacity = number;
 /**
+ * Number of ventilators projected to be in-use.
+ */
+export type Ventilatorsinuse = number;
+/**
+ * Total ventilator capacity.
+ */
+export type Ventilatorcapacity = number;
+/**
  * Number of cumulative deaths
  */
 export type Cumulativedeaths = number;
@@ -29,6 +37,14 @@ export type Cumulativedeaths = number;
  * Number of cumulative infections
  */
 export type Cumulativeinfected = number;
+/**
+ * Number of positive test results to date
+ */
+export type Cumulativepositivetests = number;
+/**
+ * Number of negative test results to date
+ */
+export type Cumulativenegativetests = number;
 
 export interface CANPredictionTimeseriesRow {
   date: Date;
@@ -36,6 +52,10 @@ export interface CANPredictionTimeseriesRow {
   hospitalBedCapacity: Hospitalbedcapacity;
   ICUBedsInUse: Icubedsinuse;
   ICUBedCapacity: Icubedcapacity;
+  ventilatorsInUse: Ventilatorsinuse;
+  ventilatorCapacity: Ventilatorcapacity;
   cumulativeDeaths: Cumulativedeaths;
   cumulativeInfected: Cumulativeinfected;
+  cumulativePositiveTests: Cumulativepositivetests;
+  cumulativeNegativeTests: Cumulativenegativetests;
 }
