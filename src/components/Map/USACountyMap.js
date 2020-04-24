@@ -4,11 +4,9 @@ import {
   FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR,
   STATE_TO_CALCULATED_INTERVENTION_COLOR,
 } from 'enums/interventions';
-import COUNTIES_JSON from './data/counties-10m.json';
 import STATES_JSON from './data/states-10m.json';
 import {
   USMapWrapper,
-  USCountyMapWrapper,
   USStateMapWrapper,
 } from './Map.style';
 import { invert } from 'lodash';
@@ -31,8 +29,6 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent }) => {
     }
   };
 
-  // TODO(igor): This has two sets of state maps: one for coloring and one for handling clicks
-  // This seems anecdotally bad for performance so we should do something better
   return (
     <USMapWrapper>
       {/** Map with shaded background colors for states. */}
