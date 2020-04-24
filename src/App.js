@@ -4,7 +4,6 @@ import { ThemeProvider, StylesProvider } from '@material-ui/core/styles';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
 import ModelPage from 'screens/ModelPage/ModelPage';
-import ModelPage_Phase3 from 'screens/ModelPage/ModelPage_Phase3';
 import HomePage from 'screens/HomePage/HomePage';
 import About from 'screens/About/About';
 // import ComingSoon from 'screens/ComingSoon/ComingSoon';
@@ -33,11 +32,6 @@ export default function App() {
               exact
               path="/us/:stateId/county/:countyId"
               component={ModelPage}
-            />
-            <Route
-              exact
-              path="/us/:stateId/county/:countyId/p3"
-              component={ModelPage_Phase3}
             />
 
             {/* /state/ routes are deprecated but still supported. */}

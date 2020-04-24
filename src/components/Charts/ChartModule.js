@@ -9,7 +9,6 @@ const ChartModule = ({
   series,
   condensed,
   forCompareModels, // true when used by CompareInterventions.js component.
-  children,
 }) => {
   return (
     <>
@@ -22,15 +21,15 @@ const ChartModule = ({
         <ChartContainer>
           <Wrapper>
             <Chart />
-            {children}
           </Wrapper>
         </ChartContainer>
+        {/* TODO(add in descriotsions here) */}
       </Panel>
     </>
   );
 };
 
-const Panel = ({ children, title }) => {
+const Panel = ({ children }) => {
   return <div style={{}}>{children}</div>;
 };
 

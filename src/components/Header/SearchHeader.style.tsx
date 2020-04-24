@@ -57,39 +57,3 @@ export const MapToggle = styled.div<{ isActive: boolean }>`
 export const MenuBarWrapper = styled.div`
   display: flex;
 `;
-
-export const MapMenuMobileWrapper = styled.div`
-  width: 100%;
-  margin-top: 1rem;
-  background: #f2f2f2;
-  border-radius: 4px;
-  padding: 0.25rem;
-  display: flex;
-  align-items: stretch;
-`;
-
-export const MapMenuWrapper = styled.div`
-  flex: 0 0 524px;
-  background: #f2f2f2;
-  border-radius: 4px;
-  padding: 0.25rem;
-  display: flex;
-  align-items: stretch;
-`;
-
-export const MapMenuItem = styled.div<{ selected: boolean }>`
-  flex: 1;
-  height: inherit;
-  font-weight: 600;
-  color: ${props => (props.selected ? palette.secondary.main : 'inherit')};
-  background: ${props => (props.selected ? 'white' : 'transparent')};
-  box-shadow: ${props =>
-    props.selected ? '0px 2px 2px rgba(0, 0, 0, 0.16)' : 'none'};
-  cursor: pointer;
-  border-radius: 4px;
-  padding: 0.5rem;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
