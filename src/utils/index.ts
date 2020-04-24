@@ -2,8 +2,12 @@ import { STATES } from 'enums';
 
 export function assert(condition: any, msg?: string): asserts condition {
   if (!condition) {
-    throw new Error('INTERNAL ASSERTION FAILED: ' + msg);
+    fail(msg);
   }
+}
+
+export function fail(msg?: string): never {
+  throw new Error('INTERNAL ASSERTION FAILED: ' + msg);
 }
 
 export function assertStateId(id: string): asserts id is keyof typeof STATES {
