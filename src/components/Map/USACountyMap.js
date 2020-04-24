@@ -40,50 +40,7 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent }) => {
         <ComposableMap
           data-tip=""
           projection="geoAlbersUsa"
-          stroke={'rgba(0,0,0,0.15)'}
-        >
-          <Geographies geography={STATES_JSON}>
-            {({ geographies }) =>
-              geographies.map(geo => {
-                return (
-                  <Geography
-                    opacity={0.3}
-                    key={geo.rsmKey}
-                    geography={geo}
-                    fill={getFillColor(geo)}
-                  />
-                );
-              })
-            }
-          </Geographies>
-        </ComposableMap>
-      </USStateMapWrapper>
-      {/** Map with shaded background colors for counties. */}
-      <USCountyMapWrapper>
-        <ComposableMap projection="geoAlbersUsa">
-          <Geographies geography={COUNTIES_JSON}>
-            {({ geographies }) =>
-              geographies.map(geo => {
-                return (
-                  <Geography
-                    key={geo.rsmKey}
-                    geography={geo}
-                    stroke={'rgba(255,255,255,0.05)'}
-                    fill={getFillColor(geo)}
-                    opacity={1.0}
-                  />
-                );
-              })
-            }
-          </Geographies>
-        </ComposableMap>
-      </USCountyMapWrapper>
-      {/** Map with state outlines and mouse event handlers. */}
-      <USStateMapWrapper>
-        <ComposableMap
-          data-tip=""
-          projection="geoAlbersUsa"
-          stroke={'rgba(0,0,0,0.15)'}
+          stroke={'white'}
         >
           <Geographies geography={STATES_JSON}>
             {({ geographies }) =>
@@ -92,7 +49,6 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent }) => {
                   <Geography
                     key={geo.rsmKey}
                     geography={geo}
-                    fill={'transparent'}
                     onClick={() => stateClickHandler(geo.properties.name)}
                     onMouseEnter={() => {
                       const { name } = geo.properties;
@@ -101,6 +57,7 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent }) => {
                     onMouseLeave={() => {
                       setTooltipContent('');
                     }}
+                    fill={getFillColor(geo)}
                   />
                 );
               })

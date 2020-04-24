@@ -27,9 +27,7 @@ export const USStateMapWrapper = styled.div`
   bottom: 0;
 
   path:hover {
-    opacity: 0.1;
-    background-color: #cccccc;
-    fill: unset;
+    opacity: 0.8;
     cursor: pointer;
   }
 }
