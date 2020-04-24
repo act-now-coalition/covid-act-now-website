@@ -6,6 +6,7 @@ import {
   COLOR_MAP,
 } from '../enums/interventions';
 import { STATES } from '../enums';
+import { RegionSummaryWithTimeseriesMap } from 'api';
 
 /**
  * The model for the complete set of projections and related information
@@ -27,7 +28,11 @@ export class Projections {
   interventionModelMap: any;
   worstCaseInterventionModel: any;
 
-  constructor(projectionInfos: any, stateCode: string, county: any) {
+  constructor(
+    summaryWithTimeseriesMap: RegionSummaryWithTimeseriesMap,
+    stateCode: string,
+    county: any,
+  ) {
     this.stateCode = stateCode.toUpperCase();
     this.stateName = (STATES as any)[this.stateCode];
     this.county = null;
@@ -40,7 +45,7 @@ export class Projections {
     this.supportsInferred = false;
     this.isCounty = county != null;
 
-    this.populateInterventions(projectionInfos);
+    this.populateInterventions(summaryWithTimeseriesMap);
     this.populateCurrentIntervention();
     this.populateCounty(county);
   }
@@ -191,7 +196,9 @@ export class Projections {
     return moment(model.dateOverwhelmed).isSameOrAfter(futureDate);
   }
 
-  populateInterventions(projectionInfos: any) {
+  populateInterventions(
+    summaryWithTimeseriesMap: RegionSummaryWithTimeseriesMap,
+  ) {
     const fipsBlacklist = [
       '13275',
       '18019',
@@ -208,19 +215,20 @@ export class Projections {
       '47065',
       '50007',
     ];
-    projectionInfos.forEach((pi: any) => {
+    for (const intervention in summaryWithTimeseriesMap) {
+      const summaryWithTimeseries = summaryWithTimeseriesMap[intervention];
       let projection = null;
-      if (pi.data) {
-        projection = new Projection(pi.data, {
-          intervention: pi.intervention,
-          isInferred: pi.intervention === INTERVENTIONS.PROJECTED,
+      if (summaryWithTimeseries !== null) {
+        projection = new Projection(summaryWithTimeseries, {
+          intervention: intervention,
+          isInferred: intervention === INTERVENTIONS.PROJECTED,
         });
       }
-      if (pi.intervention === INTERVENTIONS.LIMITED_ACTION) {
+      if (intervention === INTERVENTIONS.LIMITED_ACTION) {
         this.baseline = projection;
-      } else if (pi.intervention === INTERVENTIONS.SHELTER_IN_PLACE) {
+      } else if (intervention === INTERVENTIONS.SHELTER_IN_PLACE) {
         this.distancing = { now: projection };
-      } else if (pi.intervention === INTERVENTIONS.PROJECTED) {
+      } else if (intervention === INTERVENTIONS.PROJECTED) {
         if (
           !this.county ||
           fipsBlacklist.indexOf(this.county.full_fips_code) === -1
@@ -230,10 +238,10 @@ export class Projections {
         } else {
           console.log('Blacklisted inference projection');
         }
-      } else if (pi.intervention === INTERVENTIONS.SOCIAL_DISTANCING) {
+      } else if (intervention === INTERVENTIONS.SOCIAL_DISTANCING) {
         this.distancingPoorEnforcement = { now: projection };
       }
-    });
+    }
     this.interventionModelMap = {
       [INTERVENTIONS.LIMITED_ACTION]: this.baseline,
       [INTERVENTIONS.SOCIAL_DISTANCING]: this.distancingPoorEnforcement.now,

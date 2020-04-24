@@ -28,31 +28,31 @@ const ApiInterventions: { [intervention: string]: string } = {
 type InterventionKey = keyof typeof INTERVENTIONS;
 
 /** Represents summary+timeseries for any kind of region. */
-export type RegionSummaryTimeseries =
+export type RegionSummaryWithTimeseries =
   | CovidActNowCountyTimeseries
   | CovidActNowStateTimeseries;
 
 /** A mapping of interventions to the corresponding region summary+timeseries data. */
-export type RegionSummaryTimeseriesMap = {
+export type RegionSummaryWithTimeseriesMap = {
   /**
    * We use null to represent data we tried to fetch from the API but which was
    * missing (e.g. the region doesn't exist or doesn't have data for a
    * particular intervention. E.g. not all counties have inference data.)
    */
-  [intervention: string]: RegionSummaryTimeseries | null;
+  [intervention: string]: RegionSummaryWithTimeseries | null;
 };
 
 /**
  * Fetches the summary+timeseries for a region for each available intervention
  * and returns them as a map.
  */
-export async function fetchSummaryTimeseriesMap(
+export async function fetchSummaryWithTimeseriesMap(
   region: RegionDescriptor,
-): Promise<RegionSummaryTimeseriesMap> {
-  const result = {} as RegionSummaryTimeseriesMap;
+): Promise<RegionSummaryWithTimeseriesMap> {
+  const result = {} as RegionSummaryWithTimeseriesMap;
   await Promise.all(
     Object.keys(ApiInterventions).map(async intervention => {
-      result[intervention] = await fetchSummaryTimeseries(
+      result[intervention] = await fetchSummaryWithTimeseries(
         region,
         intervention as InterventionKey,
       );
@@ -62,10 +62,10 @@ export async function fetchSummaryTimeseriesMap(
 }
 
 /** Fetches the summary+timeseries for a region and a single intervention. */
-export async function fetchSummaryTimeseries(
+export async function fetchSummaryWithTimeseries(
   region: RegionDescriptor,
   intervention: InterventionKey,
-): Promise<RegionSummaryTimeseries | null> {
+): Promise<RegionSummaryWithTimeseries | null> {
   const apiIntervention = ApiInterventions[intervention];
   if (region.isState()) {
     return await fetchApiJson<CovidActNowStateTimeseries>(
