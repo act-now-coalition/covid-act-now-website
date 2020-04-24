@@ -47,7 +47,9 @@
     "prettier": "prettier --check '**/*.{css,scss,js,ts,tsx}'",
     "prettier-fix": "prettier --write '**/*.{css,scss,js,ts,tsx}'",
     "update-api-types": "ts-node-script scripts/update_api_types.ts",
-    "update-calculated-interventions": "ts-node-script scripts/calculated_interventions.ts"
+    "update-calculated-interventions": "ts-node-script scripts/calculated_interventions.ts",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "lint-staged": {
     "src/**/*.{css,scss,js}": [
@@ -69,6 +71,11 @@
   "devDependencies": {
     "@cypress/code-coverage": "^1.14.0",
     "@cypress/instrument-cra": "^1.1.0",
+    "@storybook/addon-actions": "^5.3.18",
+    "@storybook/addon-links": "^5.3.18",
+    "@storybook/addons": "^5.3.18",
+    "@storybook/preset-create-react-app": "^2.1.1",
+    "@storybook/react": "^5.3.18",
     "@testing-library/jest-dom": "^4.2.4",
     "@types/d3-fetch": "^1.1.5",
     "@types/d3-scale": "^2.2.0",
