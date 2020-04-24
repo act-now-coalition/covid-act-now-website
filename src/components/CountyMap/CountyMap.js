@@ -48,18 +48,18 @@ const CountyMap = ({
           <Geographies geography={counties}>
             {({ geographies }) =>
               geographies.map(geo => {
+                const isSelected =
+                  selectedCounty?.full_fips_code === geo.properties.GEOID;
+
                 return (
                   <Geography
                     key={geo.rsmKey}
                     geography={geo}
-                    fillOpacity={
-                      selectedCounty &&
-                      selectedCounty.full_fips_code === geo.properties.GEOID
-                        ? 0.5
-                        : 1
-                    }
+                    fillOpacity={isSelected ? 0.5 : 1}
                     fill={
-                      countiesWithData.includes(geo.properties.GEOID)
+                      isSelected
+                        ? 'blue'
+                        : countiesWithData.includes(geo.properties.GEOID)
                         ? getFillColor(geo.properties.GEOID)
                         : COLOR_MAP.GRAY.LIGHT
                     }
