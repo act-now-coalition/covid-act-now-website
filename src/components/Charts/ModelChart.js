@@ -48,22 +48,13 @@ const ModelChart = ({
 }) => {
   // We use the inferred projection if supported, otherwise the worst case for the currently active intervention
   let projection = projections.primary;
-  const scenarioComparisonOverTime = duration => [
-    projections.baseline.getDataset('hospitalizations', duration),
-    projections.distancingPoorEnforcement.now.getDataset(
-      'hospitalizations',
-      duration,
-    ),
-    projections.primary.getDataset('hospitalizations', duration),
-    projections.distancing.now.getDataset('hospitalizations', duration),
-    projections.baseline.getDataset(
-      'beds',
-      duration,
-      'Available hospital beds',
-    ),
+  const data = [
+    projections.baseline.getDataset('hospitalizations'),
+    projections.distancingPoorEnforcement.now.getDataset('hospitalizations'),
+    projections.primary.getDataset('hospitalizations'),
+    projections.distancing.now.getDataset('hospitalizations'),
+    projections.baseline.getDataset('beds', 'Available hospital beds'),
   ];
-
-  const data = scenarioComparisonOverTime(200);
 
   // We'll use this to determine whether to right-align
   // or left-align our plot line labels

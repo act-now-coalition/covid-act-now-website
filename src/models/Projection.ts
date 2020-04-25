@@ -57,6 +57,9 @@ export class Projection {
     this.cumulativeDeaths = timeseries.map(row => row.cumulativeDeaths);
     this.cumulativeInfected = timeseries.map(row => row.cumulativeInfected);
 
+    this.fixZeros(this.hospitalizations);
+    this.fixZeros(this.cumulativeDeaths);
+
     this.cumulativeDead = this.cumulativeDeaths[
       this.cumulativeDeaths.length - 1
     ];
@@ -81,16 +84,29 @@ export class Projection {
     return this.dates[this.dates.length - 1];
   }
 
-  private getColumn(columnName: string, days: number) {
-    return this.dates
-      .slice(0, Math.ceil(days / 4) + 1) //fixme!!!
-      .map((date, idx) => ({ x: date, y: (this as any)[columnName][idx] }));
+  private getColumn(columnName: string) {
+    return this.dates.map((date, idx) => ({
+      x: date,
+      y: (this as any)[columnName][idx],
+    }));
   }
 
-  getDataset(columnName: string, duration: number, customLabel: string) {
+  getDataset(columnName: string, customLabel: string) {
     return {
       label: customLabel ? customLabel : this.label,
-      data: this.getColumn(columnName, duration + this.daysSinceDayZero),
+      data: this.getColumn(columnName),
     };
+  }
+
+  // TODO: Due to
+  // https://github.com/covid-projections/covid-data-model/issues/315 there may
+  // be an erroneous "zero" data point ~today. We detect these and just average
+  // the adjacent numbers.
+  fixZeros(data: number[]) {
+    for (let i = 1; i < data.length - 1; i++) {
+      if (data[i] === 0 && data[i - 1] !== 0 && data[i + 1] !== 0) {
+        data[i] = (data[i - 1] + data[i + 1]) / 2;
+      }
+    }
   }
 }
