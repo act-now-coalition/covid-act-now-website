@@ -8,15 +8,24 @@ import {
 import LocationPageHeader from 'components/LocationPageHeader/LocationPageHeader';
 import NoCountyDetail from './NoCountyDetail';
 import ModelChart from 'components/Charts/ModelChart';
+import { Projections } from 'models/Projections';
+import { Projection } from 'models/Projection';
 
 const ChartsHolder = (props: {
-  projections: any; // make this be a type with
+  projections: Projections; // make this be a type with
   stateId: string;
   countyId: string;
 }) => {
+  // this is the inferred projection. Ideally we'd pass in just the single projeciton, but the location page header needs the full obj
+  const projection: Projection = props.projections.primary;
+
+  if (projection && projection.isInferred) {
+    const rt_data = projection.getDataset('rt');
+  }
+
   return (
     <>
-      {props.projections && !props.projections.primary ? (
+      {!projection.isInferred ? (
         <NoCountyDetail countyId={props.countyId} stateId={props.stateId} />
       ) : (
         <MainContentWrapper>

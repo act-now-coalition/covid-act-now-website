@@ -1,11 +1,22 @@
 import { RegionSummaryWithTimeseries } from 'api';
 
 const MS_PER_DAY = 1000 * 60 * 60 * 24;
+const DURATION_CONSTANT = 200;
 
 /** Parameters that can be provided when constructing a Projection. */
 export interface ProjectionParameters {
   intervention: string;
   isInferred: boolean;
+}
+
+interface Column {
+  x: Date;
+  y: any;
+}
+
+export interface ProjectionDataset {
+  label: string;
+  data: Column[];
 }
 
 /**
@@ -84,14 +95,14 @@ export class Projection {
     return this.dates[this.dates.length - 1];
   }
 
-  private getColumn(columnName: string) {
+  private getColumn(columnName: string): Column[] {
     return this.dates.map((date, idx) => ({
       x: date,
       y: (this as any)[columnName][idx],
     }));
   }
 
-  getDataset(columnName: string, customLabel: string) {
+  getDataset(columnName: string, customLabel: string): ProjectionDataset  {
     return {
       label: customLabel ? customLabel : this.label,
       data: this.getColumn(columnName),
