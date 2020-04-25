@@ -12,7 +12,7 @@ const NoCountyDetail = (props: { stateId: string; countyId: string }) => {
   const history = useHistory();
 
   // @ts-ignore: States is .js, but this is valid
-  const stateName = STATES[stateId];
+  const stateName = STATES[props.stateId];
 
   const { county, state_code } = _.find(
     // @ts-ignore: US_STATE_DATASET is .js, but this is valid

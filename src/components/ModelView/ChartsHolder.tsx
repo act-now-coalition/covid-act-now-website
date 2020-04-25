@@ -6,34 +6,14 @@ import {
   MainContentInnerBody,
 } from './ChartsHolder.style';
 import LocationPageHeader from 'components/LocationPageHeader/LocationPageHeader';
-import ChartModule from 'components/Charts/ChartModule';
 import NoCountyDetail from './NoCountyDetail';
-
-interface ChartDetails {
-  title: string;
-  series: any[];
-}
+import ModelChart from 'components/Charts/ModelChart';
 
 const ChartsHolder = (props: {
   projections: any; // make this be a type with
   stateId: string;
   countyId: string;
 }) => {
-  const chart_modules: ChartDetails[] = [
-    {
-      title: '[DEV] Projections',
-      series: [],
-    },
-    {
-      title: '[DEV] Case Growth Rate',
-      series: [],
-    },
-    {
-      title: '[DEV] Testing',
-      series: [],
-    },
-  ];
-
   return (
     <>
       {props.projections && !props.projections.primary ? (
@@ -43,22 +23,16 @@ const ChartsHolder = (props: {
           <MainContentInner>
             <LocationPageHeader projections={props.projections} />
             <MainContentInnerBody>
-              {chart_modules.map((chart_module, _) => {
-                return (
-                  <>
-                    {props.projections && (
-                      <ChartModule
-                        height=""
-                        title={chart_module.title}
-                        series={chart_module.series}
-                        condensed={false}
-                        forCompareModels={false}
-                      />
-                    )}
-                  </>
-                );
-              })}
-              {/* TODO(): Disclaimer should go here! */}
+              <ModelChart
+                projections={props.projections}
+                stateId={props.stateId}
+                selectedCounty={props.countyId}
+                height
+                condensed
+                forCompareModels
+              />
+              {/* TODO(sgoldblatt): Chart Module looping goes here! */}
+              {/* TODO(sgoldblatt): Disclaimer should go here! */}
             </MainContentInnerBody>
           </MainContentInner>
         </MainContentWrapper>
