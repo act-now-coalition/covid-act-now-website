@@ -1,7 +1,6 @@
 import { RegionSummaryWithTimeseries } from 'api';
 
 const MS_PER_DAY = 1000 * 60 * 60 * 24;
-const DURATION_CONSTANT = 200;
 
 /** Parameters that can be provided when constructing a Projection. */
 export interface ProjectionParameters {
@@ -102,7 +101,7 @@ export class Projection {
     }));
   }
 
-  getDataset(columnName: string, customLabel: string): ProjectionDataset  {
+  getDataset(columnName: string, customLabel?: string): ProjectionDataset  {
     return {
       label: customLabel ? customLabel : this.label,
       data: this.getColumn(columnName),

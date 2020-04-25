@@ -6,14 +6,9 @@ import { MAP_FILTERS } from './Enums/MapFilterEnums';
 import SearchHeader from 'components/Header/SearchHeader';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import MiniMap from 'components/MiniMap/MiniMap';
-import ChartsHolder from 'components/ModelView/ChartsHolder';
-import {
-  Wrapper,
-  ContentWrapper,
-  SearchHeaderWrapper,
-  LoadingScreen,
-} from './ModelPage.style';
-import { STATES, STATE_TO_INTERVENTION, INTERVENTIONS } from 'enums';
+import ChartsHolder from 'components/LocationPage/ChartsHolder';
+import { LoadingScreen} from './ModelPage.style';
+import { INTERVENTIONS } from 'enums';
 import { useProjections } from 'utils/model';
 
 function ModelPage() {
@@ -42,9 +37,6 @@ function ModelPage() {
 
   const projections = useProjections(stateId, selectedCounty);
 
-  const stateName = STATES[stateId];
-  const intervention = STATE_TO_INTERVENTION[stateId];
-
   // Projections haven't loaded yet
   // If a new county has just been selected, we may not have projections
   // for the new county loaded yet
@@ -52,6 +44,8 @@ function ModelPage() {
     return <LoadingScreen></LoadingScreen>;
   }
 
+  const stateName = projections.stateName;
+  const intervention = projections.stateIntervention;
   let actionTitle;
   let actionDescription;
   if (intervention === INTERVENTIONS.SHELTER_IN_PLACE) {
@@ -63,7 +57,7 @@ function ModelPage() {
   }
 
   return (
-    <Wrapper>
+    <div>
       <AppMetaTags
         canonicalUrl={`/us/${stateId.toLowerCase()}`}
         pageTitle={`${stateName} Forecast`}
@@ -71,14 +65,12 @@ function ModelPage() {
         shareTitle={actionTitle}
         shareDescription={actionDescription}
       />
-      <ContentWrapper>
-        <SearchHeaderWrapper>
-          <SearchHeader
-            setMapOption={setMapOption}
-            mobileMenuOpen={mobileMenuOpen}
-            setMobileMenuOpen={setMobileMenuOpen}
-          />
-        </SearchHeaderWrapper>
+      <div>
+        <SearchHeader
+          setMapOption={setMapOption}
+          mobileMenuOpen={mobileMenuOpen}
+          setMobileMenuOpen={setMobileMenuOpen}
+        />
         <ChartsHolder
           projections={projections}
           stateId={stateId}
@@ -94,8 +86,8 @@ function ModelPage() {
           mapOption={mapOption}
           setMapOption={setMapOption}
         />
-      </ContentWrapper>
-    </Wrapper>
+      </div>
+    </div>
   );
 }
 

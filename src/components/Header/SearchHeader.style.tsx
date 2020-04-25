@@ -57,3 +57,14 @@ export const MapToggle = styled.div<{ isActive: boolean }>`
 export const MenuBarWrapper = styled.div`
   display: flex;
 `;
+
+export const SearchHeaderWrapper = styled.div`
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  border-bottom: 1px solid #e3e3e3;
+  border-top: 1px solid #e3e3e3;
+`;
+

@@ -8,7 +8,6 @@ import Chart from './Chart';
 import { isEmpty } from 'lodash';
 import { COLOR_MAP } from 'enums/interventions';
 import ReactDOMServer from 'react-dom/server';
-import { STATE_TO_INTERVENTION } from 'enums';
 import { useModelLastUpdatedDate } from 'utils/model';
 import {
   ChartContainer,
@@ -47,8 +46,7 @@ const ModelChart = ({
 }) => {
   // We use the inferred projection if supported, otherwise the worst case for the currently active intervention
   let projection = projections.primary;
-  
-  const currentIntervention = STATE_TO_INTERVENTION[stateId];
+  const currentIntervention = projections.stateIntervention;
   const lastUpdatedDate = useModelLastUpdatedDate();
 
   const data = [

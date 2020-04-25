@@ -33,7 +33,6 @@ export default function App() {
               path="/us/:stateId/county/:countyId"
               component={ModelPage}
             />
-
             {/* /state/ routes are deprecated but still supported. */}
             <Route exact path="/state/:stateId" component={ModelPage} />
             <Route

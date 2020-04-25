@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 
 import {
   MapMenuMobileWrapper,
@@ -12,15 +12,14 @@ import {
 import Map from 'components/Map/Map';
 import CountyMap from 'components/CountyMap/CountyMap';
 import _ from 'lodash';
-
 import { MAP_FILTERS } from 'screens/ModelPage/Enums/MapFilterEnums';
-import { STATES } from 'enums';
 import { useStateSummary } from 'utils/model';
 import { useHistory } from 'react-router-dom';
 import US_STATE_DATASET from '../MapSelectors/datasets/us_states_dataset_01_02_2020.json';
+import { Projections } from 'models/Projections';
 
-const MiniMap = (props: {
-  projections: any;
+interface MiniMapProperties {
+  projections: Projections;
   stateId: string;
   selectedCounty: string;
   setSelectedCounty: (input: string) => {};
@@ -28,11 +27,17 @@ const MiniMap = (props: {
   setMobileMenuOpen: (input: boolean) => {};
   mapOption: string;
   setMapOption: (input: string) => {};
-}) => {
+}
+
+/**
+ * TODO(sgoldblatt): Don't pass in the setState vars here and use a provider
+ * to set the selected MobileMenu and map options as well
+ */
+const MiniMap: FunctionComponent<MiniMapProperties> = (
+  props: MiniMapProperties,
+) => {
   const history = useHistory();
   const stateSummary = useStateSummary(props.stateId);
-  // @ts-ignore: States is .js, but this is valid
-  const stateName = STATES[props.stateId];
 
   const goTo = (route: string) => {
     history.push(route);
@@ -52,7 +57,7 @@ const MiniMap = (props: {
             onClick={() => props.setMapOption(MAP_FILTERS.STATE)}
             selected={props.mapOption === MAP_FILTERS.STATE}
           >
-            {stateName}
+            {props.projections.stateName}
           </MapMenuItem>
         )}
       </MapMenuMobileWrapper>

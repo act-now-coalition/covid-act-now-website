@@ -11,6 +11,7 @@ import {
   SelectorWrapper,
   MapToggle,
   MenuBarWrapper,
+  SearchHeaderWrapper
 } from './SearchHeader.style';
 
 const SearchHeader = ({
@@ -49,28 +50,31 @@ const SearchHeader = ({
     setMobileMenuOpen((mobileMenuOpen = !mobileMenuOpen));
   };
 
+  // TODO (sgoldblatt): WHY are there so many wrappers?
   return (
-    <Wrapper>
-      <Content>
-        <MenuBarWrapper>
-          <SelectorWrapper>
-            <GlobalSelector
-              extendRight={true}
-              handleChange={handleSelectChange}
-            />
-          </SelectorWrapper>
-          {isMobile && (
-            <MapToggle
-              onClick={() => toggleMobileMenu()}
-              isActive={mobileMenuOpen}
-            >
-              {!isNarrowMobile && <>Counties&nbsp;&nbsp;</>}
-              <MapIcon />
-            </MapToggle>
-          )}
-        </MenuBarWrapper>
-      </Content>
-    </Wrapper>
+    <SearchHeaderWrapper>
+      <Wrapper>
+        <Content>
+          <MenuBarWrapper>
+            <SelectorWrapper>
+              <GlobalSelector
+                extendRight={true}
+                handleChange={handleSelectChange}
+              />
+            </SelectorWrapper>
+            {isMobile && (
+              <MapToggle
+                onClick={() => toggleMobileMenu()}
+                isActive={mobileMenuOpen}
+              >
+                {!isNarrowMobile && <>Counties&nbsp;&nbsp;</>}
+                <MapIcon />
+              </MapToggle>
+            )}
+          </MenuBarWrapper>
+        </Content>
+      </Wrapper>
+    </SearchHeaderWrapper>
   );
 };
 

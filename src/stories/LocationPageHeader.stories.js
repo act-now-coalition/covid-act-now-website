@@ -1,5 +1,5 @@
 import React from 'react';
-import LocationPageHeader from '../components/LocationPageHeader/LocationPageHeader';
+import LocationPageHeader from '../components/LocationPage/LocationPageHeader';
 import * as dataNv from './data-nv';
 import * as dataMd from './data-md';
 
