@@ -37,11 +37,7 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent }) => {
     <USMapWrapper>
       {/** Map with shaded background colors for states. */}
       <USStateMapWrapper>
-        <ComposableMap
-          data-tip=""
-          projection="geoAlbersUsa"
-          stroke={'white'}
-        >
+        <ComposableMap data-tip="" projection="geoAlbersUsa" stroke={'white'}>
           <Geographies geography={STATES_JSON}>
             {({ geographies }) =>
               geographies.map(geo => {
