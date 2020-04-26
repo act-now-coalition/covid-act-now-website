@@ -61,12 +61,10 @@ export function LegendItem(props) {
   return (
     <Grid item xs={12} md={4}>
       <LegendItemContainer>
-        <CustomTooltip arrow title={description}>
-          <LegendItemHeader>
-            <ColorBox color={color} />
-            {title}
-          </LegendItemHeader>
-        </CustomTooltip>
+        <LegendItemHeader>
+          <ColorBox color={color} />
+          {title}
+        </LegendItemHeader>
       </LegendItemContainer>
     </Grid>
   );
