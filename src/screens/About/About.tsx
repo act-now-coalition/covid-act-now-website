@@ -45,8 +45,15 @@ const About = ({ children }: { children: React.ReactNode }) => {
             Covid Act Now (CAN) is a multidisciplinary team of technologists,
             epidemiologists, health experts, and public policy leaders working
             to model how COVID-19 will spread in the U.S. We work in partnership
-            with the Georgetown University for Global Health Science and
-            Security.
+            with the{' '}
+            <a
+              href="https://ghss.georgetown.edu/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Georgetown University for Global Health Science and Security
+            </a>
+            \.
           </Typography>
           <Typography variant="body1" component="p">
             We published the first version of our model on March 20. Over 10

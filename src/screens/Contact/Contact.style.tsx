@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { COLORS } from 'enums';
-import palette from 'assets/theme/palette';
 
 export const Wrapper = styled.div`
   background-color: white;

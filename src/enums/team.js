@@ -71,11 +71,6 @@ export default {
       link: 'https://www.linkedin.com/in/anna-blech-121277138',
     },
     {
-      name: 'Anya Lehr',
-      title: 'Ex-Vice Media Director of Operations',
-      link: 'https://www.linkedin.com/in/anyalehr/',
-    },
-    {
       name: 'Audra Grassia',
       title: 'Former Senior Director at ACRONYM',
       link: 'https://www.linkedin.com/in/audragrassia/',
