@@ -1,14 +1,12 @@
 import { RegionSummaryWithTimeseries } from 'api';
 
-const MS_PER_DAY = 1000 * 60 * 60 * 24;
-
 /** Parameters that can be provided when constructing a Projection. */
 export interface ProjectionParameters {
   intervention: string;
   isInferred: boolean;
 }
 
-interface Column {
+export interface Column {
   x: Date;
   y: any;
 }
@@ -33,15 +31,12 @@ export class Projection {
 
   private readonly intervention: string;
   private readonly dates: Date[];
-  private readonly dayZero: Date;
-  private readonly daysSinceDayZero: number;
 
   // NOTE: These can be used dynamically by getColumn()
   private readonly hospitalizations: number[];
   private readonly beds: number[];
   private readonly cumulativeDeaths: number[];
-  // TODO: This should be private, but Outcomes.js has a probably erroneous reference.
-  readonly cumulativeInfected: number[];
+  private readonly cumulativeInfected: number[];
 
   constructor(
     summaryWithTimeseries: RegionSummaryWithTimeseries,
@@ -57,10 +52,6 @@ export class Projection {
     }
 
     this.dates = timeseries.map(row => new Date(row.date));
-    this.dayZero = this.dates[0];
-    this.daysSinceDayZero = Math.floor(
-      (new Date().getTime() - this.dayZero.getTime()) / MS_PER_DAY,
-    );
 
     this.hospitalizations = timeseries.map(row => row.hospitalBedsRequired);
     this.beds = timeseries.map(row => row.hospitalBedCapacity);

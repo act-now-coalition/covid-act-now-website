@@ -67,7 +67,7 @@ const OutcomesRow = ({ projection, label, timeHorizon, color }) => {
         {formatBucketedNumber(
           timeHorizon
             ? projection.cumulativeInfectedAfter(timeHorizon)
-            : projection.cumulativeInfected,
+            : projection.cumulativeInfectedAfter(999),
           projection.totalPopulation,
         )}
       </div>
