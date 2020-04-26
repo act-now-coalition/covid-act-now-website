@@ -1,4 +1,6 @@
 import React from 'react';
+import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
 import StateCircleSvg from 'components/StateSvg/StateCircleSvg';
 import { COLORS } from 'enums';
 import { COLOR_MAP } from 'enums/interventions';
@@ -8,8 +10,12 @@ import {
   HeaderHighlight,
   HeaderSubCopy,
   HeaderTitle,
-  StyledStateImageWrapper,
+  StyledStatusBadge,
+  StyledWidgetWrapper,
+  StyledWidgetTitle,
+  StyledWidgetValue,
   StyledStateCopyWrapper,
+  StyledDashboardWrapper,
   StyledLocationPageHeaderWrapper,
   StyledLocationPageHeaderInner,
 } from './LocationPageHeader.style';
@@ -32,18 +38,7 @@ function LocationPageHeading({ projections }) {
     <span>{projections.stateName}</span>
   );
 
-  const title = {
-    [COLOR_MAP.GREEN.BASE]: 'COVID cases are shrinking in',
-    [COLOR_MAP.ORANGE.BASE]: 'COVID cases are roughly stable in',
-    [COLOR_MAP.RED.BASE]: 'COVID cases are growing exponentially in',
-    [COLOR_MAP.BLACK]: 'We don’t have enough data for',
-  }[projections.getAlarmLevelColor()];
-
-  return (
-    <span>
-      {title} {displayName}
-    </span>
-  );
+  return <span>{displayName}</span>;
 }
 
 function LocationSummary({ projections }) {
@@ -86,48 +81,73 @@ const LocationPageHeader = ({ projections }) => {
   const { isEmbed } = useEmbed();
   const fillColor = projections.getAlarmLevelColor();
   // darken for legibility
-  const textColor =
+  const fill =
     fillColor === COLOR_MAP.GRAY.BASE ? COLOR_MAP.GRAY.DARK : fillColor;
   return (
-    <StyledLocationPageHeaderWrapper condensed={isEmbed}>
-      <StyledLocationPageHeaderInner condensed={isEmbed}>
-        <StyledStateImageWrapper>
-          <StateCircleSvg
-            actionBackgroundFill={COLORS.LIGHTGRAY}
-            state={projections.stateCode}
-            fillColor={fillColor}
-            hasAction={true}
-          />
-        </StyledStateImageWrapper>
-        <StyledStateCopyWrapper>
-          <div>
-            <HeaderTitle>
-              <HeaderHighlight color={textColor}>
-                <LocationPageHeading projections={projections} />
-              </HeaderHighlight>
-            </HeaderTitle>
-            {!isEmbed ? <LocationSummary projections={projections} /> : ''}
-            {projections.isCounty && !isEmbed && (
-              <HeaderSubCopy>
-                <strong>County data is currently in beta. </strong>
-                <span>
-                  Because counties don’t report hospitalizations, our forecasts
-                  may not be as accurate. See something wrong?{' '}
-                </span>
-                <a
-                  href="https://forms.gle/NPsLcFnrvfS1kqkn9"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Please let us know.
-                </a>
-              </HeaderSubCopy>
-            )}
-          </div>
-        </StyledStateCopyWrapper>
-      </StyledLocationPageHeaderInner>
-    </StyledLocationPageHeaderWrapper>
+    <>
+      <StyledLocationPageHeaderWrapper bgColor={fill} condensed={isEmbed}>
+        <StyledLocationPageHeaderInner condensed={isEmbed}>
+          <StyledStateCopyWrapper>
+            <div>
+              <HeaderTitle>
+                <HeaderHighlight>
+                  <LocationPageHeading projections={projections} />
+                </HeaderHighlight>
+              </HeaderTitle>
+              <StyledStatusBadge color={fill}>
+                Status goes here
+              </StyledStatusBadge>
+              {!isEmbed ? <LocationSummary projections={projections} /> : ''}
+              {projections.isCounty && !isEmbed && (
+                <HeaderSubCopy>
+                  <strong>County data is currently in beta. </strong>
+                  <span>
+                    Because counties don’t report hospitalizations, our
+                    forecasts may not be as accurate. See something wrong?{' '}
+                  </span>
+                  <a
+                    href="https://forms.gle/NPsLcFnrvfS1kqkn9"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Please let us know.
+                  </a>
+                </HeaderSubCopy>
+              )}
+            </div>
+          </StyledStateCopyWrapper>
+        </StyledLocationPageHeaderInner>
+      </StyledLocationPageHeaderWrapper>
+      <StyledDashboardWrapper>
+        <StatusWidget
+          title="Cases"
+          value="2%"
+          badgeText="Sufficient"
+          badgeColor={fill}
+        />
+        <StatusWidget
+          title="Positive Test Rate"
+          value="2%"
+          badgeText="Sufficient"
+          badgeColor={fill}
+        />
+        <StatusWidget
+          title="Hospital Occupancy"
+          value="2%"
+          badgeText="Sufficient"
+          badgeColor={fill}
+        />
+      </StyledDashboardWrapper>
+    </>
   );
 };
+
+const StatusWidget = ({ title, value, badgeText, badgeColor }) => (
+  <StyledWidgetWrapper>
+    <StyledWidgetTitle>{title}</StyledWidgetTitle>
+    <StyledWidgetValue>{value}</StyledWidgetValue>
+    <StyledStatusBadge color={badgeColor}>{badgeText}</StyledStatusBadge>
+  </StyledWidgetWrapper>
+);
 
 export default LocationPageHeader;
