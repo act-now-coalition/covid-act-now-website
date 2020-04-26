@@ -3,16 +3,11 @@ import '../../App.css'; /* optional for styling like the :hover pseudo-class */
 import { invert } from 'lodash';
 import { useHistory } from 'react-router-dom';
 import { STATES } from 'enums';
-import { STATE_TO_CALCULATED_INTERVENTION_COLOR } from 'enums/interventions';
-import { Legend, LegendItem, MiniLegendItem } from './Legend';
+import { Legend, LegendItem } from './Legend';
 import USACountyMap from './USACountyMap';
 import { MAP_FILTERS } from '../../screens/ModelPage/Enums/MapFilterEnums';
 import { COLOR_MAP } from 'enums/interventions';
 import ReactTooltip from 'react-tooltip';
-
-const missingStatePrediction = Object.values(
-  STATE_TO_CALCULATED_INTERVENTION_COLOR,
-).filter(color => color === '#E3E3E3' || !color);
 
 function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
   const history = useHistory();
@@ -76,16 +71,6 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
           stateClickHandler={onClick}
         />
       </div>
-      {!hideLegend && missingStatePrediction.length > 0 && (
-        <Legend>
-          <MiniLegendItem
-            key={'legend-4'}
-            title={'Data unavailable'}
-            color={COLOR_MAP.GRAY.BASE}
-            description={'Predictions not available'}
-          />
-        </Legend>
-      )}
 
       <ReactTooltip>{content}</ReactTooltip>
     </div>
