@@ -222,7 +222,7 @@ const FAQ = ({ children }: { children: React.ReactNode }) => {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/symptoms.html"
+            href="https://www.av.co/covid"
           >
             an excellent dashboard
           </a>{' '}
