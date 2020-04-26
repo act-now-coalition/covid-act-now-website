@@ -63,12 +63,6 @@ const CountyMap = ({
                   <Geography
                     key={geo.rsmKey}
                     geography={geo}
-                    fillOpacity={
-                      selectedCounty &&
-                      selectedCounty.full_fips_code === geo.properties.GEOID
-                        ? 0.5
-                        : 1
-                    }
                     fill={fillColor}
                     stroke={'white'}
                     onMouseEnter={() => {
