@@ -8,7 +8,7 @@ import Chart from './Chart';
 import { isEmpty } from 'lodash';
 import { COLOR_MAP } from 'enums/interventions';
 import ReactDOMServer from 'react-dom/server';
-
+import { useModelLastUpdatedDate } from 'utils/model';
 import {
   ChartContainer,
   Wrapper,
@@ -40,14 +40,15 @@ const ModelChart = ({
   height,
   condensed,
   projections,
-  currentIntervention,
-  lastUpdatedDate,
   forCompareModels, // true when used by CompareInterventions.js component.
   stateId,
   selectedCounty,
 }) => {
   // We use the inferred projection if supported, otherwise the worst case for the currently active intervention
   let projection = projections.primary;
+  const currentIntervention = projections.stateIntervention;
+  const lastUpdatedDate = useModelLastUpdatedDate();
+
   const data = [
     projections.baseline.getDataset('hospitalizations'),
     projections.distancingPoorEnforcement.now.getDataset('hospitalizations'),

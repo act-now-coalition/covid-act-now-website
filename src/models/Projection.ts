@@ -8,6 +8,16 @@ export interface ProjectionParameters {
   isInferred: boolean;
 }
 
+interface Column {
+  x: Date;
+  y: any;
+}
+
+export interface ProjectionDataset {
+  label: string;
+  data: Column[];
+}
+
 /**
  * Represents a single projection for a given state or county.  Contains a
  * time-series of things like hospitalizations, hospital capacity, infections, etc.
@@ -84,14 +94,14 @@ export class Projection {
     return this.dates[this.dates.length - 1];
   }
 
-  private getColumn(columnName: string) {
+  private getColumn(columnName: string): Column[] {
     return this.dates.map((date, idx) => ({
       x: date,
       y: (this as any)[columnName][idx],
     }));
   }
 
-  getDataset(columnName: string, customLabel: string) {
+  getDataset(columnName: string, customLabel?: string): ProjectionDataset {
     return {
       label: customLabel ? customLabel : this.label,
       data: this.getColumn(columnName),
