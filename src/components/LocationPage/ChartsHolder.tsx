@@ -19,7 +19,7 @@ const ChartsHolder = (props: {
   const projection: Projection = props.projections.primary;
 
   if (projection && projection.isInferred) {
-    const rtData = projection.getDataset('rt');
+    const rtData = projection.getDataset('rtRange');
   }
 
   return (

@@ -4,8 +4,14 @@
  */
 
 import DataUrlJson from '../assets/data/data_url.json';
-import { CovidActNowStateTimeseries } from './schema/CovidActNowStatesTimeseries';
-import { CovidActNowCountyTimeseries } from './schema/CovidActNowCountiesTimeseries';
+import {
+  CovidActNowStateTimeseries,
+  Timeseries as CountyTimeseries,
+} from './schema/CovidActNowStatesTimeseries';
+import {
+  CovidActNowCountyTimeseries,
+  Timeseries as StateTimeseries,
+} from './schema/CovidActNowCountiesTimeseries';
 import { INTERVENTIONS } from 'enums';
 import { RegionDescriptor } from '../utils/RegionDescriptor';
 import { fail } from 'utils';
@@ -27,6 +33,9 @@ const ApiInterventions: { [intervention: string]: string } = {
 // INTERVENTIONS was a TypeScript enum or string union, and we should ideally
 // consolidate these different intervention types.
 type InterventionKey = keyof typeof INTERVENTIONS;
+
+/** Represents timeseries for any kind of region. */
+export type Timeseries = CountyTimeseries | StateTimeseries;
 
 /** Represents summary+timeseries for any kind of region. */
 export type RegionSummaryWithTimeseries =
