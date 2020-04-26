@@ -15,7 +15,6 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
 
   const goToStatePage = page => {
     window.scrollTo(0, 0);
-
     history.push(page);
   };
 

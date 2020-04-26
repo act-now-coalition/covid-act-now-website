@@ -76,7 +76,7 @@ const About = ({ children }: { children: React.ReactNode }) => {
           </Typography>
           <TeamTable people={TEAM.team} />
 
-          <SectionHeader variant="h4" component="h4" id="partners-advisors">
+          <SectionHeader variant="h4" component="h4" id="model">
             The Model
           </SectionHeader>
           <Typography variant="body1" component="p">

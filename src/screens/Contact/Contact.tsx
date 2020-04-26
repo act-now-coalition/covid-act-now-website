@@ -4,7 +4,7 @@ import StapledSidebar, {
   SidebarLink,
   SectionHeader,
 } from 'components/StapledSidebar/StapledSidebar';
-import { Wrapper, Content, Header, EmailButton } from './Contact.style';
+import { Wrapper, Content, Header } from './Contact.style';
 
 const sidebar = (
   <React.Fragment>
@@ -28,17 +28,16 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
       <Content>
         <StapledSidebar sidebar={sidebar}>
           <SectionHeader variant="body1" component="p">
-            General questions?
-          </SectionHeader>
-          <Typography variant="body1" component="p">
-            <EmailButton
+            General questions? Email{' '}
+            <a
               href="mailto:info@covidactnow.org"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Email info@covidactnow.org
-            </EmailButton>
-          </Typography>
+              info@covidactnow.org
+            </a>
+            .
+          </SectionHeader>
           <SectionHeader variant="h4" component="h4" id="governments">
             Governments
           </SectionHeader>
@@ -51,40 +50,45 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
             good as its data. If you have different or higher quality data, we
             can work together to ingest that data into the model and create
             better, more accurate COVID projections to help your government plan
-            its response. Drop us a line
-          </Typography>
-          <Typography variant="body1" component="p">
-            <EmailButton
+            its response. Drop us a line at{' '}
+            <a
               href="mailto:gov@covidactnow.org"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Email gov@covidactnow.org
-            </EmailButton>
+              gov@covidactnow.org
+            </a>
+            .
           </Typography>
 
           <SectionHeader variant="h4" component="h4" id="press">
             Press
           </SectionHeader>
           <Typography variant="body1" component="p">
-            Check out our press packet here, or reach out to us directly.
-          </Typography>
-          <Typography variant="body1" component="p">
-            <EmailButton
+            Reach out to us at{' '}
+            <a
               target="_blank"
               rel="noopener noreferrer"
               href="mailto:press@covidactnow.org"
             >
-              Email press@covidactnow.org
-            </EmailButton>
+              press@covidactnow.org
+            </a>
+            .
           </Typography>
 
           <SectionHeader variant="h4" component="h4" id="join-us">
             Join us!
           </SectionHeader>
           <Typography variant="body1" component="p">
-            Do you want to join the Covid Act Now team? Right now, we’re in
-            particular need of:
+            Do you want to join the Covid Act Now team?{' '}
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfQkdwXsbDbwLHhWwBD6wzNiw54_0P6A60r8hujP3qnaxxFkA/viewform"
+            >
+              Let us know
+            </a>
+            . Right now, we’re in particular need of:
           </Typography>
           <ul>
             <li>
@@ -113,15 +117,6 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
               </Typography>
             </li>
           </ul>
-          <Typography variant="body1" component="p">
-            <EmailButton
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://docs.google.com/forms/d/e/1FAIpQLSfQkdwXsbDbwLHhWwBD6wzNiw54_0P6A60r8hujP3qnaxxFkA/viewform"
-            >
-              Join our team
-            </EmailButton>
-          </Typography>
 
           <SectionHeader variant="h4" component="h4" id="donate">
             Donate

@@ -7,8 +7,21 @@ import {
   StyledSidebarLink,
   Sidebar,
 } from './StapledSidebar.style';
-import { scrollToLink } from 'utils/ScrollUtils';
 export { SectionHeader } from './StapledSidebar.style';
+
+const scrollToLink = function (href: string) {
+  const anchor = href.replace('#', '');
+  const elem = document.getElementById(anchor);
+  if (!elem) {
+    console.error('No such ID: ', anchor);
+    return;
+  }
+  document.documentElement.style.scrollBehavior = 'smooth';
+  elem.scrollIntoView();
+  setTimeout(() => {
+    document.documentElement.style.scrollBehavior = 'auto';
+  }, 50);
+};
 
 type StapledSidebarProps = {
   offset: number;

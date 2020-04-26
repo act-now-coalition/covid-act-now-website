@@ -16,7 +16,7 @@ export const SidebarWrapper = styled.div`
   margin-left: 4.5rem;
   margin-top: 1rem;
   position: relative;
-  width: 15rem;
+  width: 11rem;
 
   @media (max-width: 900px) {
     width: 100%;
