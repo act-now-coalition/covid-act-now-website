@@ -26,7 +26,7 @@ export type DatasetId =
   | 'cumulativeDeaths'
   | 'cumulativeInfected'
   | 'rtRange'
-  | 'icuUsage'
+  | 'icuUtilization'
   | 'testPositiveRate';
 
 export interface RtRange {
@@ -60,8 +60,8 @@ export class Projection {
   private readonly cumulativeDeaths: number[];
   private readonly cumulativeInfected: number[];
   private readonly rtRange: Array<RtRange | null>;
-  // Hospital Usage series as values between 0-1 (or > 1 if over capacity).
-  private readonly icuUsage: number[];
+  // ICU Utilization series as values between 0-1 (or > 1 if over capacity).
+  private readonly icuUtilization: number[];
   // Test Positive series as values between 0-1.
   private readonly testPositiveRate: Array<number | null>;
 
@@ -87,7 +87,7 @@ export class Projection {
     this.cumulativeInfected = timeseries.map(row => row.cumulativeInfected);
     this.rtRange = this.calcRtRange(timeseries);
     this.testPositiveRate = this.calcTestPositiveRate(timeseries);
-    this.icuUsage = this.calcIcuUsage(timeseries);
+    this.icuUtilization = this.calcIcuUtilization(timeseries);
 
     this.fixZeros(this.hospitalizations);
     this.fixZeros(this.cumulativeDeaths);
@@ -156,25 +156,41 @@ export class Projection {
       timeseries.map(row => row.cumulativeNegativeTests),
     );
 
-    return dailyPositives.map((positive, idx) => {
-      const negative = dailyNegatives[idx];
+    return dailyPositives.map((dailyPositive, idx) => {
+      const positive = dailyPositive || 0;
+      const negative = dailyNegatives[idx] || 0;
       const total = positive + negative;
       return total > 0 ? round(positive / total, 3) : null;
     });
   }
 
-  // Given a series of cumulative values, convert to a series of deltas.
-  // Treats null values as 0s.
-  private deltasFromCumulatives(cumulatives: Array<number | null>) {
-    let previous = 0;
-    return cumulatives.map(value => {
-      const delta = (value || 0) - previous;
-      previous = value || 0;
-      return delta;
-    });
+  /**
+   * Given a series of cumulative values, convert it to a series of deltas.
+   *
+   * Always returns null for the first value to avoid an arbitrarily large
+   * delta (that may represent a bunch of historical data).
+   *
+   * Nulls are skipped, emitting null as the delta and keeping track of the
+   * last non-null as the prior to use for calculating the next delta.
+   */
+  private deltasFromCumulatives(
+    cumulatives: Array<number | null>,
+  ): Array<number | null> {
+    let lastNonNull = 0;
+    const result: Array<number | null> = [null];
+    for (let i = 1; i < cumulatives.length; i++) {
+      const current = cumulatives[i];
+      if (current === null) {
+        result.push(null);
+      } else {
+        result.push(current - lastNonNull);
+        lastNonNull = current;
+      }
+    }
+    return result;
   }
 
-  private calcIcuUsage(timeseries: Timeseries): number[] {
+  private calcIcuUtilization(timeseries: Timeseries): number[] {
     return timeseries.map(row => {
       return round(row.ICUBedsInUse / row.ICUBedCapacity, 3);
     });
