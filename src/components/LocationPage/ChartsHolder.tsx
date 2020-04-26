@@ -10,6 +10,7 @@ import NoCountyDetail from './NoCountyDetail';
 import ModelChart from 'components/Charts/ModelChart';
 import { Projections } from 'models/Projections';
 import { Projection } from 'models/Projection';
+import SummaryStats from 'components/SummaryStats/SummaryStats';
 
 const ChartsHolder = (props: {
   projections: Projections;
@@ -29,6 +30,7 @@ const ChartsHolder = (props: {
       ) : (
         <ChartContentWrapper>
           <LocationPageHeader projections={props.projections} />
+          <SummaryStats stats={[]}/>
           <MainContentInner>
             <ChartHeader>
               <h2>Projected hospitalizations</h2>
