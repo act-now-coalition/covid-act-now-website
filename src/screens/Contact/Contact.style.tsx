@@ -10,11 +10,20 @@ export const Wrapper = styled.div`
 export const Content = styled.div`
   max-width: 900px;
   margin: auto;
-  padding: 1rem 0;
+  padding: 1rem 0 3rem;
+
   h1,
   h5,
   p {
     margin-bottom: 24px;
+  }
+
+  ul li p {
+    margin-bottom: 0;
+  }
+
+  ul {
+    margin-bottom: 1.5rem;
   }
 
   @media (max-width: 932px) {
@@ -49,11 +58,4 @@ export const EmailButton = styled.a`
   &:hover {
     background-color: ${palette.secondary.dark};
   }
-`;
-
-export const NavLinks = styled.div``;
-
-export const NavLink = styled.a`
-  margin-bottom: 0.5rem;
-  display: block;
 `;

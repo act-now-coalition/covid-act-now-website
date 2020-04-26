@@ -9,11 +9,16 @@ export const Wrapper = styled.div`
 export const Content = styled.div`
   max-width: 900px;
   margin: auto;
-  padding: 1rem 0;
+  padding: 1rem 0 3rem;
+
   h1,
-  h5,
+  h4,
   p {
-    margin-bottom: 24px;
+    margin-bottom: 1.5rem;
+  }
+
+  ul li p {
+    margin-bottom: 1rem;
   }
 
   @media (max-width: 932px) {

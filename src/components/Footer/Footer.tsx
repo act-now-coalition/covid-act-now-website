@@ -52,8 +52,7 @@ const Footer = ({ children }: { children: React.ReactNode }) => {
             <StyledFooterBodyNav>
               <span onClick={() => goTo('/')}>Map</span>
               <span onClick={() => goTo('/about')}>About</span>
-              <span onClick={() => goTo('/faq')}>FAQ</span>
-              <span onClick={() => goTo('/endorsements')}>Endorsements</span>
+              <span onClick={() => goTo('/products')}>Products</span>
               <span
                 onClick={() =>
                   window.open('https://blog.covidactnow.org', '_blank')
@@ -61,6 +60,7 @@ const Footer = ({ children }: { children: React.ReactNode }) => {
               >
                 Blog
               </span>
+              <span onClick={() => goTo('/contact')}>Contact Us</span>
             </StyledFooterBodyNav>
             <FooterButton className="footer__narrow-screen-only" />
             <StyledFooterDivider />

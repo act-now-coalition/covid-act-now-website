@@ -12,9 +12,9 @@ import { Wrapper, Content, Header } from './Products.style';
 const sidebar = (
   <React.Fragment>
     <SidebarLink href="#model">U.S. Interventions Model</SidebarLink>
-    <SidebarLink href="#embed">Embed</SidebarLink>
     <SidebarLink href="#api">API</SidebarLink>
-    <SidebarLink href="#raw-data">Raw Data</SidebarLink>
+    <SidebarLink href="#csv-files">CSV Files</SidebarLink>
+    <SidebarLink href="#embed">Embed</SidebarLink>
   </React.Fragment>
 );
 
@@ -40,220 +40,14 @@ const Products = ({ children }: { children: React.ReactNode }) => {
           <SectionHeader variant="h4" component="h4" id="model">
             U.S. Interventions Model
           </SectionHeader>
-          <Typography variant="h6" component="h6">
-            What is the U.S. Interventions Model?
-          </Typography>
           <Typography variant="body1" component="p">
-            The U.S. Interventions Model is a data platform that projects COVID
-            infections, hospitalizations, and deaths across the United States,
-            as well as models how public health interventions contain the spread
-            of COVID and save lives. The U.S. Interventions Model is an SEIR
-            model (a type of epidemiological model).
-          </Typography>
-
-          <Typography variant="h6" component="h6">
-            Wait, what’s an SEIR model?
-          </Typography>
-
-          <Typography variant="body1" component="p">
-            SEIR is a way of modeling infection diseases. Simply put, it
-            specifically models the flows of people between four states:
-            susceptible (S), exposed (E), infected (I), and resistant (R):
-          </Typography>
-
-          <Typography variant="body1" component="p">
-            Susceptible (S) → 𝛃 → Exposed (E) → 𝝨 → Infectious (I) → 𝚪 →
-            Recovered (R)
-          </Typography>
-
-          <Typography variant="body1" component="p">
-            Each of those variables represents the number of people in those
-            groups. The parameters beta (𝛃), sigma (𝝨), and gamma (𝚪) control
-            how fast people move from one state to another. Our model is
-            significantly more complicated than this, and even this might sound
-            complicated, but in a nutshell this is the modeling approach we use.
-            Why did we choose an SEIR approach? SEIR models are widely used by
-            epidemiologists to model disease outbreaks in both research and
-            practical settings. Our model is adapted from a model{' '}
-            <a href="https://alhill.shinyapps.io/COVID19seir/">
-              originally developed and built
-            </a>{' '}
-            by Dr. Alison Hill, a research fellow at Harvard’s Program for
-            Evolutionary Dynamics.
-          </Typography>
-
-          <Typography variant="h6" component="h6">
-            Can I view the model?
-          </Typography>
-          <Typography variant="body1" component="p">
+            Our model is open source and{' '}
             <a
+              href="https://github.com/covid-projections/covid-projections"
               target="_blank"
               rel="noopener noreferrer"
-              href="https://github.com/covid-projections/covid-data-model"
             >
-              Yes! The model is public
-            </a>
-            .
-          </Typography>
-
-          <Typography variant="h6" component="h6">
-            What are your sources of data?
-          </Typography>
-          <Typography variant="body1" component="p">
-            Reference materials, including assumptions, logic, and definitions{' '}
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
-            >
-              are available here
-            </a>
-            .
-          </Typography>
-
-          <Typography variant="h6" component="h6">
-            How often does the model update?
-          </Typography>
-          <Typography variant="body1" component="p">
-            The model updates every 3 days, and the “last updated” date stamp on
-            the state page will tell you specifically.
-          </Typography>
-
-          <Typography variant="h6" component="h6">
-            What are the current limitations of the model?
-          </Typography>
-          <Typography variant="body1" component="p">
-            A non-exhaustive list:
-          </Typography>
-          <Typography>
-            <ul>
-              <li>
-                Only a small fraction of the world has been infected. It’s a new
-                disease. Variables will change.
-              </li>
-              <li>
-                R0s (
-                <a href="https://en.wikipedia.org/wiki/Basic_reproduction_number">
-                  R0 is a fundamental epidemiological metric
-                </a>
-                ) for interventions are guesses, in some cases informed by data.
-                There is no historical precedent for what is going on right now
-                to draw from.
-              </li>
-              <li>
-                The default R0 used in this model is an average. The model does
-                not adjust for the population density, culturally-determined
-                interaction frequency and closeness, humidity, etc. in
-                calculating R0.
-              </li>
-              <li>
-                This is not a node-based analysis and thus assumes everyone
-                spreads the disease at the same rate. In practice, there are
-                some folks who are “super-spreaders,” and others who are almost
-                isolated. Interventions should be targeted primarily at those
-                most likely to spread the disease.
-              </li>
-              <li>
-                Only hospital beds in aggregate are considered. ICU beds and
-                ventilators, which are likely to run low before beds, are not
-                considered.
-              </li>
-              <li>
-                Demographics, populations, and hospital bed count data are
-                outdated. Demographics for the U.S. as a whole are used, rather
-                than specific to each state.
-              </li>
-
-              <li>
-                In containment cases, we do not consider the longer-term impacts
-                of maintaining containment; primarily, the reintroduction of
-                COVID through travel. 14-day mandatory border quarantines, such
-                as those currently in place in China, would likely need to be
-                implemented until a vaccine or therapeutic is developed.
-              </li>
-            </ul>
-          </Typography>
-
-          <Typography variant="h6" component="h6">
-            What definition does Covid Act Now use for “social distancing” and
-            “stay at home”? How about “lax/strict” compliance (re. “stay at
-            home”)?{' '}
-          </Typography>
-          <Typography variant="body1" component="p">
-            All these definitions — and many more — can be found in our{' '}
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
-            >
-              Model Reference and Assumptions
-            </a>{' '}
-            document. The epidemiological assumptions how these various
-            interventions curb the curve of COVID infections is informed by
-            recent research from Europe, and most notably from{' '}
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowships/Imperial-College-COVID19-Europe-estimates-and-NPI-impact-30-03-2020.pdf"
-            >
-              Imperial College London
-            </a>
-            , as well as the emerging corpus of COVID data in the U.S.
-          </Typography>
-
-          <Typography variant="h6" component="h6">
-            What are the specific policies for my state?
-          </Typography>
-          <Typography variant="body1" component="p">
-            <i>The New York Times</i> lists{' '}
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.nytimes.com/interactive/2020/us/coronavirus-stay-at-home-order.html"
-            >
-              every state's policies
-            </a>
-            .
-          </Typography>
-
-          <Typography variant="h6" component="h6">
-            How does the Covid Act Now model differ from IHME model?
-          </Typography>
-          <Typography variant="body1" component="p">
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://blog.covidactnow.org/covid-act-now-ihme-why-two-models-are-better-than-one/"
-            >
-              See our explanation of differences here
-            </a>
-            .
-          </Typography>
-
-          <SectionHeader variant="h4" component="h4" id="embed">
-            Embed
-          </SectionHeader>
-
-          <Typography variant="body1" component="p">
-            If you host your own website and want to easily include data from
-            the U.S. Interventions Model, Covid Act Now provides an embeddable
-            widget. This widget updates daily and provides the latest actual
-            information about number of cases and deaths, as well as projections
-            about what hospitalizations might look like given certain
-            interventions.
-          </Typography>
-
-          <Typography variant="body1" component="p">
-            Embeds are available for both states and counties, where data
-            exists. Embeds can be added to your website via an iframe or script
-            tag. You can learn more about how to add these embeds to your
-            website in our{' '}
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://blog.covidactnow.org/data-feeds/"
-            >
-              embed docs
+              available on GitHub
             </a>
             .
           </Typography>
@@ -263,45 +57,169 @@ const Products = ({ children }: { children: React.ReactNode }) => {
           </SectionHeader>
 
           <Typography variant="body1" component="p">
-            If you are running your Covid project or comparing models, you can
-            access our data directly. Our API provides currently known actuals
-            (cases, deaths, hospitalizations), projections (if/when capacity
-            will be exceeded, by how much), as well as timeseries data for what
-            the U.S. Interventions Model predicts what will happen every three
-            days.
-          </Typography>
-
-          <Typography variant="body1" component="p">
-            Data is available as either a JSON or CSV file. Our API is{' '}
+            We launched the{' '}
             <a
-              target="_blank"
-              rel="noopener noreferrer"
               href="https://github.com/covid-projections/covid-data-model/blob/master/api/README.V1.md"
-            >
-              documented on Github
-            </a>
-            . These files can be easily consumed by other models, by data
-            visualization tools like Tableau, or in spreadsheet tools like
-            Airtable, Google Sheets, or Microsoft Excel.
-          </Typography>
-
-          <SectionHeader variant="h4" component="h4" id="raw-data">
-            Raw Data
-          </SectionHeader>
-
-          <Typography variant="body1" component="p">
-            If you can't consume our data via one of the above sources or are
-            looking for the raw data, all of our data sources are{' '}
-            <a
               target="_blank"
               rel="noopener noreferrer"
-              href="https://github.com/covid-projections/covid-data-public"
             >
-              available on Github
+              Covid Act Now API
+            </a>{' '}
+            to make the data that powers our model available to anyone, free of
+            charge, under a{' '}
+            <a
+              href="https://creativecommons.org/licenses/by/4.0/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Creative Commons 4.0 license
+            </a>
+            .
+          </Typography>
+          <Typography variant="body1" component="p">
+            Specifically, our API exposes:
+          </Typography>
+          <ul>
+            <li>
+              <Typography variant="body1" component="p">
+                <strong>Reported data:</strong> State and county level data for
+                confirmed cases, deaths, and hospital bed capacity. The data is
+                collected from a number of sources, including Johns Hopkins
+                University, and is updated daily.
+              </Typography>
+            </li>
+            <li>
+              <Typography variant="body1" component="p">
+                <strong>Forward projections:</strong> State- and county-level
+                projections for hospitalizations and deaths based on several
+                possible interventions. This data is generated from our model.
+              </Typography>
+            </li>
+          </ul>
+          <Typography variant="body1" component="p">
+            In the future, we intend to make more data available, including:
+          </Typography>
+          <ul>
+            <li>
+              <Typography variant="body1" component="p">
+                Additional file formats like shapefiles for GIS systems.
+              </Typography>
+            </li>
+            <li>
+              <Typography variant="body1" component="p">
+                Integrations with data visualization products, such as{' '}
+                <a
+                  href="https://www.tableau.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Tableau
+                </a>
+                .
+              </Typography>
+            </li>
+          </ul>
+          <Typography variant="body1" component="p">
+            In order to safely reopen the country and keep COVID in check, our
+            country must work together in an unprecedented fashion. We hope the
+            data we provide plays a small, positive role. Please use it, adapt
+            it, visualize it, and otherwise have at it!
+          </Typography>
+          <Typography variant="body1" component="p">
+            For more on the API{' '}
+            <a
+              href="https://blog.covidactnow.org/covid-act-now-api-intervention-model/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              see our blog post
             </a>
             .
           </Typography>
 
+          <SectionHeader variant="h4" component="h4" id="csv-files">
+            CSV Files
+          </SectionHeader>
+          <Typography variant="body1" component="p">
+            If you prefer a spreadsheet to code, we have you covered.
+          </Typography>
+          <Typography variant="body1" component="p">
+            You can now export data from Covid Act Now’s model as CSV files. You
+            can find data for:
+          </Typography>
+          <ul>
+            <li>
+              <Typography variant="body1" component="p">
+                <strong>All states:</strong>{' '}
+                <a
+                  href="https://data.covidactnow.org/latest/us/states.NO_INTERVENTION.timeseries.csv"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  https://data.covidactnow.org/latest/us/states.NO_INTERVENTION.timeseries.csv
+                </a>
+              </Typography>
+            </li>
+            <li>
+              <Typography variant="body1" component="p">
+                <strong>All counties:</strong>{' '}
+                <a
+                  href="https://data.covidactnow.org/latest/us/counties.NO_INTERVENTION.timeseries.csv"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  https://data.covidactnow.org/latest/us/counties.NO_INTERVENTION.timeseries.csv
+                </a>
+              </Typography>
+            </li>
+          </ul>
+          <Typography variant="body1" component="p">
+            To import the CSV files into Microsoft Excel, open Excel, select
+            File Menu, and choose Open (File => Open). Then navigate and select
+            the CSV you just downloaded.
+          </Typography>
+          <Typography variant="body1" component="p">
+            To import into Google Sheets, create a new blank Google Sheet and
+            select File => Open. Then select “Upload” and drag-and-drop the CSV
+            file you just downloaded.
+          </Typography>
+          <Typography variant="body1" component="p">
+            This data is updated at least every three days. We include a “Last
+            Updated” field in the download so you can ensure your data is fresh.
+            The CSV files include COVID forward projections for all 50 states
+            and more than 2,100 Counties.
+          </Typography>
+          <Typography variant="body1" component="p">
+            For more details on exporting data via CSV{' '}
+            <a
+              href="https://blog.covidactnow.org/export-covid-act-now-data-spreadsheet/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              see our blog post
+            </a>
+            .
+          </Typography>
+
+          <SectionHeader variant="h4" component="h4" id="embed">
+            Embed
+          </SectionHeader>
+          <Typography variant="body1" component="p">
+            We want our data and modeling to be available to all who are
+            interested, including by third parties. That’s why we’ve made our
+            data embeddable by other publishers.
+          </Typography>
+          <Typography variant="body1" component="p">
+            Here is what it looks like live:
+          </Typography>
+          <iframe
+            src="https://covidactnow.org/embed/us/co"
+            title="CoVid Act Now"
+            width="350"
+            height="700"
+            frameBorder="0"
+            scrolling="no"
+          />
           <ShareBlock />
         </StapledSidebar>
       </Content>

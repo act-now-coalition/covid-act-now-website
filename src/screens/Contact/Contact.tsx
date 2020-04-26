@@ -10,7 +10,7 @@ const sidebar = (
   <React.Fragment>
     <SidebarLink href="#governments">Governments</SidebarLink>
     <SidebarLink href="#press">Press</SidebarLink>
-    <SidebarLink href="#join">Join Us</SidebarLink>
+    <SidebarLink href="#join-us">Join Us</SidebarLink>
     <SidebarLink href="#donate">Donate</SidebarLink>
   </React.Fragment>
 );
@@ -27,6 +27,18 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
       </Header>
       <Content>
         <StapledSidebar sidebar={sidebar}>
+          <SectionHeader variant="body1" component="p">
+            General questions?
+          </SectionHeader>
+          <Typography variant="body1" component="p">
+            <EmailButton
+              href="mailto:info@covidactnow.org"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Email info@covidactnow.org
+            </EmailButton>
+          </Typography>
           <SectionHeader variant="h4" component="h4" id="governments">
             Governments
           </SectionHeader>
@@ -36,12 +48,10 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
           <Typography variant="body1" component="p">
             Our goal is to provide you with data, modeling, and analysis to help
             your government manage its response to COVID. Our model is only as
-            good as its data. We want to work with you to improve the data
-            inputs for your state or county. If you have different or higher
-            quality data, we can work together to ingest that data into the
-            model and create better, more accurate COVID projections to help
-            your government plan its response. Drop us a line. We’re here to
-            help.
+            good as its data. If you have different or higher quality data, we
+            can work together to ingest that data into the model and create
+            better, more accurate COVID projections to help your government plan
+            its response. Drop us a line
           </Typography>
           <Typography variant="body1" component="p">
             <EmailButton
@@ -69,12 +79,40 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
             </EmailButton>
           </Typography>
 
-          <SectionHeader variant="h4" component="h4" id="donate">
+          <SectionHeader variant="h4" component="h4" id="join-us">
             Join us!
           </SectionHeader>
           <Typography variant="body1" component="p">
-            Do you want to join the Covid Act Now team?{' '}
+            Do you want to join the Covid Act Now team? Right now, we’re in
+            particular need of:
           </Typography>
+          <ul>
+            <li>
+              <Typography variant="body1" component="p">
+                JavaScript/React, Python engineers
+              </Typography>
+            </li>
+            <li>
+              <Typography variant="body1" component="p">
+                Data visualization experts
+              </Typography>
+            </li>
+            <li>
+              <Typography variant="body1" component="p">
+                Epidimiologists and modelers
+              </Typography>
+            </li>
+            <li>
+              <Typography variant="body1" component="p">
+                A UX Designer (bonus if you write code!)
+              </Typography>
+            </li>
+            <li>
+              <Typography variant="body1" component="p">
+                An engineering manager
+              </Typography>
+            </li>
+          </ul>
           <Typography variant="body1" component="p">
             <EmailButton
               target="_blank"
@@ -89,7 +127,23 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
             Donate
           </SectionHeader>
           <Typography variant="body1" component="p">
-            TK.
+            You can contribute to our work{' '}
+            <a
+              href="https://multiplier.org/projects/#"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              here
+            </a>
+            , or{' '}
+            <a
+              href="mailto:info@covidactnow.org"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              drop a line
+            </a>{' '}
+            if you’re interested in making a grant.
           </Typography>
         </StapledSidebar>
       </Content>
