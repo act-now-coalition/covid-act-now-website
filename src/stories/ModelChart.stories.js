@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import ModelChart from '../components/Charts/ModelChart';
-import * as dataNv from './data-nv';
-import * as dataMd from './data-md';
+import * as data from './data';
 import stateDataWrapper from './stateDataWrapper';
 
 const lastUpdated = new Date('2020-04-22');
@@ -15,20 +14,20 @@ export const Nevada = stateDataWrapper(
   ({ data }) => (
     <ModelChart
       projections={data}
-      stateId={dataNv.stateId}
+      stateId={data.NV.stateId}
       lastUpdatedDate={lastUpdated}
     />
   ),
-  dataNv,
+  data.NV,
 );
 
 export const Maryland = stateDataWrapper(
   ({ data }) => (
     <ModelChart
       projections={data}
-      stateId={dataMd.stateId}
+      stateId={data.MD.stateId}
       lastUpdatedDate={lastUpdated}
     />
   ),
-  dataMd,
+  data.MD,
 );
