@@ -11,7 +11,7 @@ import {
   SelectorWrapper,
   MapToggle,
   MenuBarWrapper,
-  SearchHeaderWrapper
+  SearchHeaderWrapper,
 } from './SearchHeader.style';
 
 const SearchHeader = ({

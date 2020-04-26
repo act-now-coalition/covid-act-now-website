@@ -1,6 +1,10 @@
 import React from 'react';
 
-import { ChartContentWrapper, MainContentInner } from './ChartsHolder.style';
+import {
+  ChartContentWrapper,
+  MainContentInner,
+  ChartHeader,
+} from './ChartsHolder.style';
 import LocationPageHeader from 'components/LocationPage/LocationPageHeader';
 import NoCountyDetail from './NoCountyDetail';
 import ModelChart from 'components/Charts/ModelChart';
@@ -26,13 +30,21 @@ const ChartsHolder = (props: {
         <ChartContentWrapper>
           <LocationPageHeader projections={props.projections} />
           <MainContentInner>
+            <ChartHeader>
+              <h2>Projected hospitalizations</h2>
+              <span>
+                {props.projections.countyName
+                  ? `${props.projections.countyName}, ${props.projections.stateName}`
+                  : props.projections.stateName}
+              </span>
+            </ChartHeader>
             <ModelChart
               projections={props.projections}
               stateId={props.stateId}
               selectedCounty={props.countyId}
-              height
-              condensed
-              forCompareModels
+              height={''}
+              condensed={false}
+              forCompareModels={false}
             />
             {/* TODO(sgoldblatt): Inferred Chart Module looping goes here! */}
             {/* TODO(sgoldblatt): Disclaimer should go here! */}

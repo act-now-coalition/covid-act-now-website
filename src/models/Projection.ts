@@ -101,7 +101,7 @@ export class Projection {
     }));
   }
 
-  getDataset(columnName: string, customLabel?: string): ProjectionDataset  {
+  getDataset(columnName: string, customLabel?: string): ProjectionDataset {
     return {
       label: customLabel ? customLabel : this.label,
       data: this.getColumn(columnName),

@@ -7,7 +7,7 @@ import SearchHeader from 'components/Header/SearchHeader';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import MiniMap from 'components/MiniMap/MiniMap';
 import ChartsHolder from 'components/LocationPage/ChartsHolder';
-import { LoadingScreen} from './ModelPage.style';
+import { LoadingScreen } from './ModelPage.style';
 import { INTERVENTIONS } from 'enums';
 import { useProjections } from 'utils/model';
 

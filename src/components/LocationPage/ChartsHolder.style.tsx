@@ -23,3 +23,18 @@ export const MainContentInner = styled.div`
     margin: 0 auto;
   }
 `;
+
+export const ChartHeader = styled.div`
+  max-width: 900px;
+  padding: 1.5rem 0;
+  text-align: left;
+  span {
+    color: rgba(0, 0, 0, 0.7);
+  }
+  h2 {
+    font-weight: 700;
+  }
+  @media (max-width: 600px) {
+    padding: 1.5rem 1rem;
+  }
+`;

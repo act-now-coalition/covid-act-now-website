@@ -67,4 +67,3 @@ export const SearchHeaderWrapper = styled.div`
   border-bottom: 1px solid #e3e3e3;
   border-top: 1px solid #e3e3e3;
 `;
-
