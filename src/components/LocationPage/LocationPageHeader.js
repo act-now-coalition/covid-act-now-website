@@ -79,32 +79,28 @@ const LocationPageHeader = ({ projections }) => {
   return (
     <StyledLocationPageHeaderWrapper bgColor={fillColor} condensed={isEmbed}>
       <StyledLocationPageHeaderInner condensed={isEmbed}>
-        <StyledStateCopyWrapper>
-          <div>
-            <HeaderTitle textColor={textColor}>
-              <HeaderHighlight textColor={textColor}>
-                <LocationPageHeading projections={projections} />
-              </HeaderHighlight>
-            </HeaderTitle>
-            <SignalStatus status={INFECTION_RATE_STATUSES[Level.LOW]} />
-            {!isEmbed ? <LocationSummary projections={projections} /> : ''}
-            {projections.isCounty && !isEmbed && (
-              <HeaderSubCopy textColor={textColor}>
-                <strong>County data is currently in beta. </strong>
-                <span>
-                  Because counties don’t report hospitalizations, our forecasts
-                  may not be as accurate. See something wrong?{' '}
-                </span>
-                <a
-                  href="https://forms.gle/NPsLcFnrvfS1kqkn9"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Please let us know.
-                </a>
-              </HeaderSubCopy>
-            )}
-          </div>
+        <StyledStateCopyWrapper isEmbed={isEmbed}>
+          <HeaderTitle isEmbed={isEmbed} textColor={textColor}>
+            <LocationPageHeading projections={projections} />
+          </HeaderTitle>
+          <SignalStatus status={INFECTION_RATE_STATUSES[Level.LOW]} />
+          {!isEmbed ? <LocationSummary projections={projections} /> : ''}
+          {projections.isCounty && !isEmbed && (
+            <HeaderSubCopy textColor={textColor}>
+              <strong>County data is currently in beta. </strong>
+              <span>
+                Because counties don’t report hospitalizations, our forecasts
+                may not be as accurate. See something wrong?{' '}
+              </span>
+              <a
+                href="https://forms.gle/NPsLcFnrvfS1kqkn9"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Please let us know.
+              </a>
+            </HeaderSubCopy>
+          )}
         </StyledStateCopyWrapper>
       </StyledLocationPageHeaderInner>
     </StyledLocationPageHeaderWrapper>

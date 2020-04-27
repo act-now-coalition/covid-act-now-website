@@ -4,16 +4,12 @@ import Box from '@material-ui/core/Box';
 import palette from 'assets/theme/palette';
 import { COLORS } from 'enums';
 
-export const HeaderHighlight = styled.span`
-  color: ${props => props.textColor || 'white'};
-  font-weight: 600;
-  padding: 0.4rem 0;
-`;
-
 export const HeaderTitle = styled(Typography)`
-  font-size: 2.2rem;
-  line-height: 2.2rem;
-  padding: 0.5rem 0 2rem;
+  color: ${props => props.textColor || 'white'};
+  font-size: ${props => (props.isEmbed ? '1.8rem' : '2.2rem')};
+  font-weight: 600;
+  line-height: ${props => (props.isEmbed ? '1.5rem' : '2.2rem')};
+  padding: 1.4rem 1rem 1.4rem 0;
   a {
     color: ${props => props.textColor || palette.black};
   }
@@ -76,7 +72,13 @@ export const StyledStateImageWrapper = styled.div`
   }
 `;
 
-export const StyledStateCopyWrapper = styled.div`
+export const StyledStateCopyWrapper = styled(Box)`
+  width: 100%;
+  display: ${props => (props.isEmbed ? 'flex' : 'block')};
+  padding-bottom: ${props => (props.isEmbed ? '1rem' : 0)};
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
   text-align: left;
   max-width: 600px;
 `;
