@@ -42,7 +42,7 @@ const About = ({ children }: { children: React.ReactNode }) => {
             <Logo src="/images/ghss.png" />
           </a>
           <Typography variant="body1" component="p">
-            Covid Act Now (CAN) is a multidisciplinary team of technologists,
+            Covid Act Now is a multidisciplinary team of technologists,
             epidemiologists, health experts, and public policy leaders working
             to model how COVID-19 will spread in the U.S. We work in partnership
             with the{' '}
