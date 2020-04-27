@@ -30,7 +30,7 @@ const ChartsHolder = (props: {
       ) : (
         <ChartContentWrapper>
           <LocationPageHeader projections={props.projections} />
-          <SummaryStats stats={[]}/>
+          <SummaryStats stats={[]} />
           <MainContentInner>
             <ChartHeader>
               <h2>Projected hospitalizations</h2>
