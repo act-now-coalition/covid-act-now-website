@@ -17,6 +17,20 @@ import {
   optionsHospitalUsage,
   optionsPositiveTests,
 } from 'components/Charts/zoneUtils';
+import {
+  Level,
+  CASE_GROWTH_RATE,
+  POSITIVE_TESTS,
+  HOSPITAL_USAGE,
+  determineZone,
+} from 'enums/zones';
+// TODO(michael): These format helpers should probably live in a more
+// general-purpose location, not just for charts.
+import {
+  formatDecimal,
+  formatPercent,
+  formatInteger,
+} from 'components/Charts/utils';
 
 const ChartsHolder = (props: {
   projections: Projections;
@@ -55,13 +69,15 @@ const ChartsHolder = (props: {
           <LocationPageHeader projections={props.projections} />
           <MainContentInner>
             <ChartHeader></ChartHeader>
-            <h2>Case growth</h2>
+            <h1>Case growth</h1>
+            {caseGrowthStatusText(projection)}
             {rtRangeData && (
               <ZoneChartWrapper>
                 <Chart options={optionsRt(rtRangeData, endDate) as any} />
               </ZoneChartWrapper>
             )}
-            <h2>Positive tests</h2>
+            <h1>Positive tests</h1>
+            {positiveTestsStatusText(projection)}
             {testPositiveData && (
               <ZoneChartWrapper>
                 <Chart
@@ -71,7 +87,8 @@ const ChartsHolder = (props: {
                 />
               </ZoneChartWrapper>
             )}
-            <h2>Hospital ICU occupancy</h2>
+            <h1>Hospital ICU occupancy</h1>
+            {hospitalOccupancyStatusText(projection)}
             {icuUtilizationData && (
               <ZoneChartWrapper>
                 <Chart
@@ -81,7 +98,7 @@ const ChartsHolder = (props: {
                 />
               </ZoneChartWrapper>
             )}
-            <h2>Future projections</h2>
+            <h1>Future projections</h1>
             <span>
               {props.projections.countyName
                 ? `${props.projections.countyName}, ${props.projections.stateName}`
@@ -103,5 +120,80 @@ const ChartsHolder = (props: {
     </>
   );
 };
+
+function caseGrowthStatusText(projection: Projection) {
+  const rt = projection.rt!;
+  if (rt === null) {
+    return 'No case load data is available.';
+  }
+  const level = determineZone(CASE_GROWTH_RATE, rt);
+  const decreasingStabilizingGrowing = levelText(
+    level,
+    'decreasing',
+    'stabilizing',
+    'growing',
+  );
+
+  const additionalPeople = formatDecimal(rt);
+
+  const d = projection.weeklyNewCasesDelta;
+  const weeklyDelta =
+    d >= 0 ? formatInteger(d) + ' more' : formatInteger(-d) + ' fewer';
+  const weeklyDeltaText =
+    d === 0 ? '' : `There are ${weeklyDelta} new cases this week than last.`;
+
+  return `Case load is ${decreasingStabilizingGrowing}, because each person with COVID infects ${additionalPeople} additional people. ${weeklyDeltaText}`;
+}
+
+function positiveTestsStatusText(projection: Projection) {
+  const testPositiveRate = projection.currentTestPositiveRate;
+  if (testPositiveRate === null) {
+    return 'No testing data is available.';
+  }
+  const level = determineZone(POSITIVE_TESTS, testPositiveRate);
+  const lowSizableLarge = levelText(level, 'low', 'sizable', 'large');
+  const percentage = formatPercent(testPositiveRate);
+
+  const location = projection.locationName;
+  const testingBroadlyText = levelText(
+    level,
+    `${location} is testing broadly`,
+    `testing in ${location} is not sufficiently broad`,
+    `testing is not widely available in ${location}`,
+  );
+
+  return `A ${lowSizableLarge} percentage (${percentage}) of people tested for COVID test positive, meaning that ${testingBroadlyText}.`;
+}
+
+function hospitalOccupancyStatusText(projection: Projection) {
+  const icuUtilization = projection.currentIcuUtilization;
+  if (icuUtilization === null) {
+    return 'No ICU occupancy data is available.';
+  }
+  const level = determineZone(HOSPITAL_USAGE, icuUtilization);
+
+  const location = projection.locationName;
+  const lowText = `Hospitals in ${location} have sufficient capacity to support COVID patients if cases were to spike.`;
+  const mediumText = `Hospitals in ${location} are not overloaded, but a spike in cases could strain the hospital system.`;
+  const highText = `Hospitals in ${location} are overloaded.`;
+  return levelText(level, lowText, mediumText, highText);
+}
+
+/**
+ * Depending on provided `level`, returns the provided `lowText`, `mediumText`,
+ * or `highText`.
+ */
+function levelText(
+  level: Level,
+  lowText: string,
+  mediumText: string,
+  highText: string,
+) {
+  return level === Level.LOW
+    ? lowText
+    : level === Level.MEDIUM
+    ? mediumText
+    : highText;
+}
 
 export default ChartsHolder;
