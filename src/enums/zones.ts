@@ -2,10 +2,16 @@ import { COLOR_MAP } from './interventions';
 import { fail } from 'assert';
 
 export enum ChartType {
-  CASE_GROWTH_RATE = 'Case growth',
+  CASE_GROWTH_RATE = 'Infection rate',
   POSITIVE_TESTS = 'Positive tests',
-  HOSPITAL_USAGE = 'Hospital ICU occupancy',
+  HOSPITAL_USAGE = 'COVID Patients in ICU',
 }
+
+export const ChartTypeToTitle = {
+  [ChartType.CASE_GROWTH_RATE]: 'Infection rate',
+  [ChartType.POSITIVE_TESTS]: 'Positive tests',
+  [ChartType.HOSPITAL_USAGE]: 'COVID Patients in ICU',
+};
 
 export interface LevelInfo {
   upperLimit: number;
@@ -54,7 +60,7 @@ export const SUMMARY_TEXT: Zones = {
   [Level.UNKNOWN]: {
     upperLimit: 0,
     name: 'Unknown',
-    color: COLOR_MAP.GRAY.BASE
+    color: COLOR_MAP.GRAY.BASE,
   },
 };
 
@@ -78,7 +84,7 @@ export const CASE_GROWTH_RATE: Zones = {
   [Level.UNKNOWN]: {
     upperLimit: 0,
     name: 'Unknown',
-    color: COLOR_MAP.GRAY.BASE
+    color: COLOR_MAP.GRAY.BASE,
   },
 };
 
@@ -102,7 +108,7 @@ export const POSITIVE_TESTS: Zones = {
   [Level.UNKNOWN]: {
     upperLimit: 0,
     name: 'Unknown',
-    color: COLOR_MAP.GRAY.BASE
+    color: COLOR_MAP.GRAY.BASE,
   },
 };
 
@@ -126,7 +132,7 @@ export const HOSPITAL_USAGE: Zones = {
   [Level.UNKNOWN]: {
     upperLimit: 0,
     name: 'Unknown',
-    color: COLOR_MAP.GRAY.BASE
+    color: COLOR_MAP.GRAY.BASE,
   },
 };
 
@@ -154,33 +160,20 @@ export function getLevelForChart(chartType: ChartType, value: number) {
 
 export function getLevelInfoForChartType(
   chartType: ChartType,
-  value: number,
+  value: number | null,
 ): LevelInfo {
   const allZonesForChartType = CHART_ZONES[chartType];
   const zone = determineZone(allZonesForChartType, value);
   return allZonesForChartType[zone];
 }
 
-export function determineZone(zones: Zones, value: number): Level {
+export function determineZone(zones: Zones, value: number | null): Level {
   // TODO(michael): Is there a typesafe way to enumerate enum values? :-/
+  if (value === null) return Level.UNKNOWN;
   for (const level of [Level.LOW, Level.MEDIUM, Level.HIGH]) {
     if (value <= zones[level].upperLimit) {
       return level;
     }
   }
   return Level.UNKNOWN;
-}
-
-export function worstStatus(statusList: Level[]): Level {
-  if (statusList.indexOf(Level.HIGH) > -1) {
-    return Level.HIGH;
-  } else if (statusList.indexOf(Level.MEDIUM) > -1) {
-    return Level.MEDIUM;
-  } else {
-    return Level.LOW;
-  }
-}
-
-export function worstStatusColor(statusList: Level[]): string {
-  return CASE_GROWTH_RATE[worstStatus(statusList)].color;
 }

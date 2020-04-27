@@ -1,7 +1,7 @@
 import React from 'react';
 import SignalStatus from 'components/SignalStatus/SignalStatus';
 import { COLOR_MAP } from 'enums/interventions';
-import { ChartType, getLevelForChart, Level, SUMMARY_TEXT } from 'enums/zones';
+import { SUMMARY_TEXT } from 'enums/zones';
 import { useEmbed } from 'utils/hooks';
 import palette from 'assets/theme/palette';
 
@@ -71,7 +71,7 @@ function LocationSummary({ projections }) {
 
 const LocationPageHeader = ({ projections }) => {
   const { isEmbed } = useEmbed();
-
+  console.log(projections.getAlarmLevel());
   const level = SUMMARY_TEXT[projections.getAlarmLevel()];
   const [fillColor, textColor] = projections.supportsInferred
     ? [level.color, palette.secondary.contrastText]

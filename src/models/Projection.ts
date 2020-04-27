@@ -1,5 +1,4 @@
 import { RegionSummaryWithTimeseries, Timeseries } from 'api';
-import { fail } from 'assert';
 
 /** Parameters that can be provided when constructing a Projection. */
 export interface ProjectionParameters {
@@ -298,9 +297,11 @@ export class Projection {
     }
   }
 
-  private indexOfLastValue<T>(data: Array<T | null>): number | null {
+  private indexOfLastValue(
+    data: Array<number | null | RtRange>,
+  ): number | null {
     for (let i = data.length - 1; i >= 0; i--) {
-      if (data[i] !== null) {
+      if (data[i] !== null && !isNaN(data[i] as number)) {
         return i;
       }
     }
