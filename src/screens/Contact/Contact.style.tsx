@@ -12,13 +12,17 @@ export const Content = styled.div`
   padding: 1rem 0 3rem;
 
   h1,
-  h4,
+  h5,
   p {
-    margin-bottom: 1.5rem;
+    margin-bottom: 24px;
   }
 
   ul li p {
-    margin-bottom: 1rem;
+    margin-bottom: 0;
+  }
+
+  ul {
+    margin-bottom: 1.5rem;
   }
 
   @media (max-width: 932px) {
@@ -32,18 +36,4 @@ export const Header = styled.div`
 
 export const TextContent = styled.div`
   max-width: 600px;
-`;
-
-export const Logo = styled.img`
-  float: right;
-  width: 50%;
-  margin-left: 1rem;
-  margin-bottom: 1rem;
-
-  @media (max-width: 600px) {
-    display: block;
-    margin: 0 auto 1rem;
-    float: none;
-    width: 100%;
-  }
 `;

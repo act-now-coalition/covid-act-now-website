@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import { COLORS } from 'enums';
 
 import palette from 'assets/theme/palette';
 import { mobileBreakpoint } from 'assets/theme/sizes';
@@ -19,10 +20,10 @@ export const Wrapper = styled.div`
 
 export const StyledAppBar = styled(AppBar)`
   box-shadow: none;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid ${COLORS.LIGHTGRAY};
 
   @media (min-width: 1350px) {
-    border-bottom: 1px solid #e3e3e3;
+    border-bottom: 1px solid ${COLORS.LIGHTGRAY};
   }
 `;
 

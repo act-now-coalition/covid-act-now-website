@@ -3,7 +3,7 @@ import '../../App.css'; /* optional for styling like the :hover pseudo-class */
 import { invert } from 'lodash';
 import { useHistory } from 'react-router-dom';
 import { STATES } from 'enums';
-import { Legend, LegendItem, MiniLegendItem } from './Legend';
+import { Legend, LegendItem } from './Legend';
 import USACountyMap from './USACountyMap';
 import { MAP_FILTERS } from '../../screens/ModelPage/Enums/MapFilterEnums';
 import { COLOR_MAP } from 'enums/interventions';
@@ -15,7 +15,6 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
 
   const goToStatePage = page => {
     window.scrollTo(0, 0);
-
     history.push(page);
   };
 
@@ -71,17 +70,6 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
           stateClickHandler={onClick}
         />
       </div>
-      {!hideLegend && (
-        <Legend>
-          <MiniLegendItem
-            key={'legend-4'}
-            title={'Data unavailable'}
-            color={COLOR_MAP.GRAY.BASE}
-            description={'Predictions not available'}
-          />
-        </Legend>
-      )}
-
       <ReactTooltip>{content}</ReactTooltip>
     </div>
   );

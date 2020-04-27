@@ -1,13 +1,10 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
 import HomePageHeader from 'components/Header/HomePageHeader';
-import { COLORS } from 'enums';
 import Map from 'components/Map/Map';
-import Endorsements from 'screens/Endorsements/Endorsements';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import ShareBlock from 'components/ShareBlock/ShareBlock';
 
-import { Wrapper, Content } from './HomePage.style';
+import { Content } from './HomePage.style';
 
 export default function HomePage() {
   return (
@@ -32,14 +29,6 @@ export default function HomePage() {
           </Content>
         </div>
       </main>
-      <Wrapper style={{ backgroundColor: COLORS.LIGHTGRAY }}>
-        <Content>
-          <Typography variant="h3" component="h3" style={{ marginBottom: 20 }}>
-            Our Advisors
-          </Typography>
-          <Endorsements hideSocial={true} />
-        </Content>
-      </Wrapper>
     </>
   );
 }
