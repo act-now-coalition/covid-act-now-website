@@ -70,6 +70,11 @@ export default {
       link: 'https://www.linkedin.com/in/anna-blech-121277138',
     },
     {
+      name: 'Anya Lehr',
+      title: 'Ex-Vice Media Director of Operations',
+      link: 'https://www.linkedin.com/in/anyalehr/',
+    },
+    {
       name: 'Audra Grassia',
       title: 'Former Senior Director at ACRONYM',
       link: 'https://www.linkedin.com/in/audragrassia/',
@@ -93,6 +98,11 @@ export default {
       name: 'Chris Wilcox',
       title: 'Senior Engineer at Google',
       link: 'https://www.linkedin.com/in/chrisrwilcox/',
+    },
+    {
+      name: 'Colleen Murphy',
+      title: 'Freelance designer',
+      link: 'https://www.linkedin.com/in/colleenmurphyco',
     },
     {
       name: 'Dan Schlosser',
@@ -121,7 +131,7 @@ export default {
     },
     {
       name: 'Doug Pan',
-      title: '',
+      title: 'Mechanical Engineer at Mashgin',
       link: 'https://www.linkedin.com/in/dougspan/',
     },
     {

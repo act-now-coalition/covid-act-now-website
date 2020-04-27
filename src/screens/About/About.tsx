@@ -42,7 +42,7 @@ const About = ({ children }: { children: React.ReactNode }) => {
             <Logo src="/images/ghss.png" />
           </a>
           <Typography variant="body1" component="p">
-            Covid Act Now (CAN) is a multidisciplinary team of technologists,
+            Covid Act Now is a multidisciplinary team of technologists,
             epidemiologists, health experts, and public policy leaders working
             to model how COVID-19 will spread in the U.S. We work in partnership
             with the{' '}
@@ -208,6 +208,10 @@ const About = ({ children }: { children: React.ReactNode }) => {
           <Typography variant="body1" component="p">
             The model updates every three days. The “last updated” date stamp on
             specifically the state page will tell you when it was last updated.
+          </Typography>
+
+          <Typography variant="h6" component="h6">
+            How do I know your model is right?
           </Typography>
           <Typography variant="body1" component="p">
             There are two major disclaimers for our model:
