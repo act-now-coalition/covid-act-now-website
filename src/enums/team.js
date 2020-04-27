@@ -95,6 +95,11 @@ export default {
       link: 'https://www.linkedin.com/in/chrisrwilcox/',
     },
     {
+      name: 'Colleen Murphy',
+      title: 'Freelance designer',
+      link: 'https://www.linkedin.com/in/colleenmurphyco',
+    },
+    {
       name: 'Dan Schlosser',
       title: 'Senior Product Manager at <em>The New York Times</em>',
       link: 'https://www.linkedin.com/in/danrschlosser/',
@@ -121,7 +126,7 @@ export default {
     },
     {
       name: 'Doug Pan',
-      title: '',
+      title: 'Mechanical Engineer at Mashgin',
       link: 'https://www.linkedin.com/in/dougspan/',
     },
     {
