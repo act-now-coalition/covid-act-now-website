@@ -7,7 +7,12 @@ import {
 } from '../enums/interventions';
 import { STATES } from '../enums';
 import { RegionSummaryWithTimeseriesMap } from 'api';
-import { CASE_GROWTH_RATE, POSITIVE_TESTS, HOSPITAL_USAGE, determineZone } from 'enums/zones';
+import {
+  CASE_GROWTH_RATE,
+  POSITIVE_TESTS,
+  HOSPITAL_USAGE,
+  determineZone,
+} from 'enums/zones';
 import { worstStatusColor } from 'enums/status';
 
 /**
