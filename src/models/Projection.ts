@@ -7,7 +7,7 @@ export interface ProjectionParameters {
 }
 
 export interface Column {
-  x: Date;
+  x: number; // ms since epoch
   y: any;
 }
 
@@ -45,6 +45,7 @@ export interface RtRange {
  * on the actual data observed in a given location
  */
 export class Projection {
+  readonly locationName: string;
   readonly isInferred: boolean;
   readonly totalPopulation: number;
   readonly cumulativeDead: number;
@@ -59,9 +60,10 @@ export class Projection {
   private readonly beds: number[];
   private readonly cumulativeDeaths: number[];
   private readonly cumulativeInfected: number[];
+  private readonly cumulativePositiveTests: Array<number | null>;
   private readonly rtRange: Array<RtRange | null>;
   // ICU Utilization series as values between 0-1 (or > 1 if over capacity).
-  private readonly icuUtilization: number[];
+  private readonly icuUtilization: Array<number | null>;
   // Test Positive series as values between 0-1.
   private readonly testPositiveRate: Array<number | null>;
 
@@ -70,6 +72,8 @@ export class Projection {
     parameters: ProjectionParameters,
   ) {
     const timeseries = summaryWithTimeseries.timeseries;
+    const lastUpdated = new Date(summaryWithTimeseries.lastUpdatedDate);
+    this.locationName = this.getLocationName(summaryWithTimeseries);
     this.intervention = parameters.intervention;
     this.isInferred = parameters.isInferred;
     this.totalPopulation = summaryWithTimeseries.actuals.population;
@@ -85,9 +89,12 @@ export class Projection {
     this.beds = timeseries.map(row => row.hospitalBedCapacity);
     this.cumulativeDeaths = timeseries.map(row => row.cumulativeDeaths);
     this.cumulativeInfected = timeseries.map(row => row.cumulativeInfected);
+    this.cumulativePositiveTests = timeseries.map(
+      row => row.cumulativePositiveTests,
+    );
     this.rtRange = this.calcRtRange(timeseries);
     this.testPositiveRate = this.calcTestPositiveRate(timeseries);
-    this.icuUtilization = this.calcIcuUtilization(timeseries);
+    this.icuUtilization = this.calcIcuUtilization(timeseries, lastUpdated);
 
     this.fixZeros(this.hospitalizations);
     this.fixZeros(this.cumulativeDeaths);
@@ -116,9 +123,40 @@ export class Projection {
     return this.dates[this.dates.length - 1];
   }
 
+  /**
+   * Returns the delta between the number of new cases in the past week and the
+   * number in the prior week.
+   */
+  get weeklyNewCasesDelta(): number {
+    const i = this.indexOfLastValue(this.cumulativePositiveTests);
+    if (i === null) {
+      return 0;
+    } else {
+      // NOTE: If i < 14 we'll be taking advantage of JS letting us do negative
+      // array indexes. :-)
+      const cumulativeToday = this.cumulativePositiveTests[i] || 0;
+      const cumulative7daysAgo = this.cumulativePositiveTests[i - 7] || 0;
+      const cumulative14daysAgo = this.cumulativePositiveTests[i - 14] || 0;
+      const thisWeek = cumulativeToday - cumulative7daysAgo;
+      const lastWeek = cumulative7daysAgo - cumulative14daysAgo;
+      return thisWeek - lastWeek;
+    }
+  }
+
+  // TODO(michael): We should probably average this out over a week since the data can be spiky.
+  get currentTestPositiveRate(): number | null {
+    const i = this.indexOfLastValue(this.testPositiveRate);
+    return i && this.testPositiveRate[i];
+  }
+
+  get currentIcuUtilization(): number | null {
+    const i = this.indexOfLastValue(this.icuUtilization);
+    return i && this.icuUtilization[i];
+  }
+
   private getColumn(columnName: string): Column[] {
     return this.dates.map((date, idx) => ({
-      x: date,
+      x: date.getTime(),
       y: (this as any)[columnName][idx],
     }));
   }
@@ -130,6 +168,15 @@ export class Projection {
     };
   }
 
+  private getLocationName(s: RegionSummaryWithTimeseries) {
+    // TODO(michael): I don't like hardcoding "County" into the name. We should
+    // probably delete this code and get the location name from somewhere other
+    // than the API (or improve the API value).
+    return s.countyName
+      ? `${s.countyName} County, ${s.stateName}`
+      : s.stateName;
+  }
+
   private calcRtRange(timeseries: Timeseries): Array<RtRange | null> {
     return timeseries.map(row => {
       // TODO(michael): Why are the types wrong? I think
@@ -138,9 +185,9 @@ export class Projection {
       const ci = (row.RtCI90 as any) as number;
       if (rt) {
         return {
-          rt: round(rt, 2),
-          low: round(rt - ci, 2),
-          high: round(rt + ci, 2),
+          rt: rt,
+          low: rt - ci,
+          high: rt + ci,
         };
       } else {
         return null;
@@ -160,7 +207,7 @@ export class Projection {
       const positive = dailyPositive || 0;
       const negative = dailyNegatives[idx] || 0;
       const total = positive + negative;
-      return total > 0 ? round(positive / total, 3) : null;
+      return total > 0 ? positive / total : null;
     });
   }
 
@@ -190,9 +237,33 @@ export class Projection {
     return result;
   }
 
-  private calcIcuUtilization(timeseries: Timeseries): number[] {
-    return timeseries.map(row => {
-      return round(row.ICUBedsInUse / row.ICUBedCapacity, 3);
+  private calcIcuUtilization(
+    timeseries: Timeseries,
+    lastUpdated: Date,
+  ): Array<number | null> {
+    const icuUtilization = timeseries.map(
+      row => row.ICUBedsInUse / row.ICUBedCapacity,
+    );
+
+    // Strip off the future projections.
+    // TODO(michael): I'm worried about an off-by-one here. I _think_ we usually
+    // update our projections using yesterday's data. So we want to strip
+    // everything >= lastUpdatedDate. But since the ICU data is all estimates, I
+    // can't really validate that's correct.
+    return this.omitDataAtOrAfterDate(icuUtilization, lastUpdated);
+  }
+
+  /**
+   * Replaces all values at or after (>=) the specified date with nulls. Keeps data for
+   * dates before (<) the specified date as-is.
+   */
+  private omitDataAtOrAfterDate<T>(
+    data: Array<T | null> | Array<T>,
+    cutoffDate: Date,
+  ): Array<T | null> {
+    return this.dates.map((date, idx) => {
+      const value = data[idx];
+      return date < cutoffDate ? value : null;
     });
   }
 
@@ -207,9 +278,13 @@ export class Projection {
       }
     }
   }
-}
 
-// Round a number to have only decimalDigits digits after the decimal.
-function round(x: number, decimalDigits: number): number {
-  return parseFloat(x.toFixed(decimalDigits));
+  private indexOfLastValue(data: Array<number | null>): number | null {
+    for (let i = data.length - 1; i >= 0; i--) {
+      if (data[i] !== null) {
+        return i;
+      }
+    }
+    return null;
+  }
 }
