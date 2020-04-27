@@ -38,7 +38,16 @@ const ZONES_HOSPITAL_USAGE = getHighchartZones(HOSPITAL_USAGE);
 
 export const optionsRt = (data, endDate) => {
   const { x, y } = last(data);
-  const [minYAxis, maxYAxis] = roundAxisLimits(0, getMaxY(data));
+  // Ensure high-region is at least as large as medium region.
+  const mediumRegionHeight =
+    CASE_GROWTH_RATE.MEDIUM.upperLimit - CASE_GROWTH_RATE.LOW.upperLimit;
+  const minHighRegionLimit =
+    CASE_GROWTH_RATE.MEDIUM.upperLimit + mediumRegionHeight;
+  const [minYAxis, maxYAxis] = roundAxisLimits(
+    0,
+    Math.max(getMaxY(data), minHighRegionLimit),
+  );
+
   return {
     ...baseOptions,
     xAxis: {
