@@ -44,8 +44,7 @@ export default {
     },
     {
       name: 'Dr. Shuhan He',
-      title:
-        'Associate Director of Massachusetts General Hospital Center for Innovation in Digital Healthcare',
+      title: 'Emergency Medicine Physician and Co-Founder of GetUsPPE.org',
       link: 'https://www.massgeneral.org/doctors/20771/shuhan-he',
     },
   ],
