@@ -241,8 +241,15 @@ export class Projection {
     timeseries: Timeseries,
     lastUpdated: Date,
   ): Array<number | null> {
+    const AVERAGE_OCCUPANCY = 0.75;
+    const AVERAGE_AVAILABILITY = 1 - AVERAGE_OCCUPANCY;
+    const CAPACITY_MULTIPLIER = 1 / AVERAGE_AVAILABILITY;
+    const USAGE_CAPACITY_MULTIPLIER = AVERAGE_OCCUPANCY / AVERAGE_AVAILABILITY;
+
     const icuUtilization = timeseries.map(
-      row => row.ICUBedsInUse / row.ICUBedCapacity,
+      row =>
+        (row.ICUBedsInUse + USAGE_CAPACITY_MULTIPLIER * row.ICUBedCapacity) /
+        (row.ICUBedCapacity * CAPACITY_MULTIPLIER),
     );
 
     // Strip off the future projections.
