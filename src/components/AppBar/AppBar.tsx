@@ -31,7 +31,7 @@ import { STATES } from 'enums';
 import { Location } from 'history';
 import US_STATE_DATASET from '../MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 
-const Panels = ['/', '/about', '/products', '/blog', '/contact'];
+const Panels = ['/', '/about', '/resources', '/blog', '/contact'];
 
 function getPanelIdxFromLocation(location: Location<any>) {
   let idx = Panels.indexOf(location.pathname);
@@ -159,10 +159,10 @@ const _AppBar = () => {
               onClick={goTo('/about')}
             />
             <StyledTab
-              label="Products"
+              label="Resources"
               value={2}
               disableRipple
-              onClick={goTo('/products')}
+              onClick={goTo('/resources')}
             />
             <StyledTab
               label="Blog"

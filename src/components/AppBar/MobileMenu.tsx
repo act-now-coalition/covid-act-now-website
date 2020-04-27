@@ -24,9 +24,9 @@ const MobileMenu = ({
         <FAQIcon color={palette.secondary.main} />
         <span>About</span>
       </a>
-      <a onClick={goTo('/products')} href="/products">
+      <a onClick={goTo('/resources')} href="/resources">
         <FAQIcon color={palette.secondary.main} />
-        <span>Products</span>
+        <span>Resources</span>
       </a>
       <a
         onClick={forwardTo('https://blog.covidactnow.org')}

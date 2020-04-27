@@ -7,7 +7,7 @@ import StapledSidebar, {
   SectionHeader,
 } from 'components/StapledSidebar/StapledSidebar';
 
-import { Wrapper, Content, Header } from './Products.style';
+import { Wrapper, Content, Header } from './Resources.style';
 
 const sidebar = (
   <React.Fragment>
@@ -18,12 +18,12 @@ const sidebar = (
   </React.Fragment>
 );
 
-const Products = ({ children }: { children: React.ReactNode }) => {
+const Resources = ({ children }: { children: React.ReactNode }) => {
   return (
     <Wrapper>
       <AppMetaTags
-        canonicalUrl="/products"
-        pageTitle="Products"
+        canonicalUrl="/resources"
+        pageTitle="Resources"
         pageDescription="Covid Act Now was started by four volunteers who saw the explosive and
         deadly growth of COVID infections around the world and felt they had
         to do something."
@@ -31,7 +31,7 @@ const Products = ({ children }: { children: React.ReactNode }) => {
       <Header>
         <Content>
           <Typography variant="h3" component="h1">
-            Products
+            Resources
           </Typography>
         </Content>
       </Header>
@@ -227,4 +227,4 @@ const Products = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default Products;
+export default Resources;

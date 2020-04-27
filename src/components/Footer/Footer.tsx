@@ -52,7 +52,7 @@ const Footer = ({ children }: { children: React.ReactNode }) => {
             <StyledFooterBodyNav>
               <span onClick={() => goTo('/')}>Map</span>
               <span onClick={() => goTo('/about')}>About</span>
-              <span onClick={() => goTo('/products')}>Products</span>
+              <span onClick={() => goTo('/resources')}>Resources</span>
               <span
                 onClick={() =>
                   window.open('https://blog.covidactnow.org', '_blank')
