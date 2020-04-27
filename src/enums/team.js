@@ -1,6 +1,11 @@
 export default {
   founders: [
     {
+      name: 'Max Henderson',
+      title: 'Ex-Google Data Science',
+      link: 'https://www.linkedin.com/in/maxhenderson/',
+    },
+    {
       name: 'Igor Kofman',
       title: 'Ex-CTO of Dropbox Paper',
       link: 'https://twitter.com/igorkofman',
@@ -9,11 +14,6 @@ export default {
       name: 'Rep. Jonathan Kreiss-Tomkins',
       title: 'Alaska Legislature',
       link: 'https://en.wikipedia.org/wiki/Jonathan_Kreiss-Tomkins',
-    },
-    {
-      name: 'Max Henderson',
-      title: 'Ex-Google Data Science',
-      link: 'https://www.linkedin.com/in/maxhenderson/',
     },
     {
       name: 'Zack Rosen',
