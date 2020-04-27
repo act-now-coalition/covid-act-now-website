@@ -24,6 +24,7 @@ import {
   POSITIVE_TESTS,
   HOSPITAL_USAGE,
   determineZone,
+  ChartType,
 } from 'enums/zones';
 // TODO(michael): These format helpers should probably live in a more
 // general-purpose location, not just for charts.
@@ -71,14 +72,14 @@ const ChartsHolder = (props: {
           <SummaryStats stats={[]} />
           <MainContentInner>
             <ChartHeader></ChartHeader>
-            <h1>Case growth</h1>
+            <h1>{ChartType.CASE_GROWTH_RATE}</h1>
             {caseGrowthStatusText(projection)}
             {rtRangeData && (
               <ZoneChartWrapper>
                 <Chart options={optionsRt(rtRangeData, endDate) as any} />
               </ZoneChartWrapper>
             )}
-            <h1>Positive tests</h1>
+            <h1>{ChartType.POSITIVE_TESTS}</h1>
             {positiveTestsStatusText(projection)}
             {testPositiveData && (
               <ZoneChartWrapper>
@@ -89,7 +90,7 @@ const ChartsHolder = (props: {
                 />
               </ZoneChartWrapper>
             )}
-            <h1>Hospital ICU occupancy</h1>
+            <h1>{ChartType.HOSPITAL_USAGE}</h1>
             {hospitalOccupancyStatusText(projection)}
             {icuUtilizationData && (
               <ZoneChartWrapper>
@@ -100,7 +101,7 @@ const ChartsHolder = (props: {
                 />
               </ZoneChartWrapper>
             )}
-            <h1>Future projections</h1>
+            <h1>Future Projections</h1>
             <span>
               {props.projections.countyName
                 ? `${props.projections.countyName}, ${props.projections.stateName}`

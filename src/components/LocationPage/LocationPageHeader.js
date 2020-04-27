@@ -1,7 +1,7 @@
 import React from 'react';
 import SignalStatus from 'components/SignalStatus/SignalStatus';
 import { COLOR_MAP } from 'enums/interventions';
-import { INFECTION_RATE_STATUSES, Level } from 'enums/status';
+import { CASE_GROWTH_RATE, Level } from 'enums/zones';
 import { useEmbed } from 'utils/hooks';
 import palette from 'assets/theme/palette';
 
@@ -82,7 +82,7 @@ const LocationPageHeader = ({ projections }) => {
           <HeaderTitle isEmbed={isEmbed} textColor={textColor}>
             <LocationPageHeading projections={projections} />
           </HeaderTitle>
-          <SignalStatus status={INFECTION_RATE_STATUSES[Level.LOW]} />
+          <SignalStatus zoneInfo={CASE_GROWTH_RATE[Level.LOW]} />
           {!isEmbed ? <LocationSummary projections={projections} /> : ''}
           {projections.isCounty && !isEmbed && (
             <HeaderSubCopy textColor={textColor}>

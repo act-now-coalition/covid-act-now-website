@@ -13,7 +13,7 @@ import {
   HOSPITAL_USAGE,
   determineZone,
 } from 'enums/zones';
-import { worstStatusColor } from 'enums/status';
+import { worstStatusColor } from 'enums/zones';
 
 /**
  * The model for the complete set of projections and related information

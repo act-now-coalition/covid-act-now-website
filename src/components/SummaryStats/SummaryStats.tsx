@@ -1,6 +1,6 @@
 import React from 'react';
 import SummaryStat from './SummaryStat';
-import { INFECTION_RATE_STATUSES, Level } from 'enums/status';
+import { ChartType } from 'enums/zones';
 import { SummaryStatsWrapper, SummaryHolder } from './SummaryStats.style';
 
 const SummaryStats = (props: { stats: [] }) => {
@@ -8,19 +8,16 @@ const SummaryStats = (props: { stats: [] }) => {
     <SummaryHolder>
       <SummaryStatsWrapper>
         <SummaryStat
-          name={'Testing'}
-          value={'1.5'}
-          status={INFECTION_RATE_STATUSES[Level.LOW]}
+          chartType={ChartType.CASE_GROWTH_RATE}
+          value={1.5}
         />
         <SummaryStat
-          name={'Postive Rates'}
-          value={'.5'}
-          status={INFECTION_RATE_STATUSES[Level.HIGH]}
+          chartType={ChartType.POSITIVE_TESTS}
+          value={.5}
         />
         <SummaryStat
-          name={'Rate of Infection'}
-          value={'.15'}
-          status={INFECTION_RATE_STATUSES[Level.MEDIUM]}
+          chartType={ChartType.HOSPITAL_USAGE}
+          value={.15}
         />
       </SummaryStatsWrapper>
     </SummaryHolder>

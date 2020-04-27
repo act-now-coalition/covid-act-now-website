@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Status } from 'enums/status';
+import { ChartType, determineZoneInfoForChart } from 'enums/zones';
 import SignalStatus from 'components/SignalStatus/SignalStatus';
 import {
   SummaryStatWrapper,
@@ -9,17 +9,17 @@ import {
 } from './SummaryStat.style';
 
 export interface SummaryStatProp {
-  name: string;
-  value: string;
-  status: Status;
+  chartType: ChartType;
+  value: number;
 }
 
 const SummaryStat = (props: SummaryStatProp) => {
+  const zoneInfo = determineZoneInfoForChart(props.chartType, props.value)
   return (
     <SummaryStatWrapper>
-      <StatNameText>{props.name}</StatNameText>
+      <StatNameText>{props.chartType}</StatNameText>
       <StatValueText>{props.value}</StatValueText>
-      <SignalStatus status={props.status} />
+      <SignalStatus zoneInfo={zoneInfo} />
     </SummaryStatWrapper>
   );
 };

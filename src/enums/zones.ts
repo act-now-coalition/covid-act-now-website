@@ -1,8 +1,13 @@
 import { COLOR_MAP } from './interventions';
 import { fail } from 'assert';
 
-// TODO(@pnavarrc): Integrate with @sgoldblatt enums/status.ts
-interface ZoneInfo {
+export enum ChartType {
+  CASE_GROWTH_RATE = "Case growth",
+  POSITIVE_TESTS = "Positive tests",
+  HOSPITAL_USAGE = 'Hospital ICU occupancy',
+}
+
+export interface ZoneInfo {
   upperLimit: number;
   name: string;
   color: string;
@@ -83,6 +88,18 @@ export const HOSPITAL_USAGE: Zones = {
   },
 };
 
+const CHART_ZONES = {
+  [ChartType.CASE_GROWTH_RATE]: CASE_GROWTH_RATE,
+  [ChartType.POSITIVE_TESTS]: POSITIVE_TESTS,
+  [ChartType.HOSPITAL_USAGE]: HOSPITAL_USAGE, 
+}
+
+export function determineZoneInfoForChart(chartType: ChartType, value: number): ZoneInfo {
+  const zonesForChart = CHART_ZONES[chartType];
+  const zone = determineZone(zonesForChart, value)
+  return zonesForChart[zone];
+}
+
 export function determineZone(zones: Zones, value: number): Level {
   // TODO(michael): Is there a typesafe way to enumerate enum values? :-/
   for (const level of [Level.LOW, Level.MEDIUM, Level.HIGH]) {
@@ -91,4 +108,18 @@ export function determineZone(zones: Zones, value: number): Level {
     }
   }
   fail('Failed to find zone for value: ' + value);
+}
+
+export function worstStatus(statusList: Level[]): Level {
+  if (statusList.indexOf(Level.HIGH) > -1) {
+    return Level.HIGH;
+  } else if (statusList.indexOf(Level.MEDIUM) > -1) {
+    return Level.MEDIUM;
+  } else {
+    return Level.LOW;
+  }
+}
+
+export function worstStatusColor(statusList: Level[]): string {
+  return CASE_GROWTH_RATE[worstStatus(statusList)].color;
 }
