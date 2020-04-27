@@ -36,7 +36,7 @@ const ChartsHolder = (props: {
     projection.getDataset('rtRange').data.map(d => ({
       x: d.x,
       y: d.y?.rt,
-      low: d?.y.low,
+      low: d.y?.low,
       hi: d.y?.high,
     }));
 

@@ -71,7 +71,7 @@ export const optionsRt = (data, endDate) => {
       },
     },
     annotations: [
-      currentValueAnnotation(x, y, formatDecimal(y)),
+      currentValueAnnotation(x, y, y && formatDecimal(y)),
       ...zoneAnnotations(endDate, minYAxis, maxYAxis, y, ZONES_RT),
     ],
   };
@@ -83,7 +83,7 @@ export const optionsPositiveTests = (data, endDate) => {
   return {
     ...baseOptions,
     annotations: [
-      currentValueAnnotation(x, y, formatPercent(y)),
+      currentValueAnnotation(x, y, y && formatPercent(y)),
       ...zoneAnnotations(endDate, minYAxis, maxYAxis, y, ZONES_POSITIVE_RATE),
     ],
     series: [
@@ -120,7 +120,7 @@ export const optionsHospitalUsage = (data, endDate) => {
   return {
     ...baseOptions,
     annotations: [
-      currentValueAnnotation(x, y, formatPercent(y)),
+      currentValueAnnotation(x, y, y && formatPercent(y)),
       ...zoneAnnotations(endDate, minYAxis, maxYAxis, y, ZONES_HOSPITAL_USAGE),
     ],
     tooltip: {
