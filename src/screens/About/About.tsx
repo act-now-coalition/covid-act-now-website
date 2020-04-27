@@ -209,6 +209,10 @@ const About = ({ children }: { children: React.ReactNode }) => {
             The model updates every three days. The “last updated” date stamp on
             specifically the state page will tell you when it was last updated.
           </Typography>
+
+          <Typography variant="h6" component="h6">
+            How do I know your model is right?
+          </Typography>
           <Typography variant="body1" component="p">
             There are two major disclaimers for our model:
           </Typography>
