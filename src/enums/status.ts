@@ -40,3 +40,17 @@ export const INFECTION_RATE_STATUSES: Statuses = {
     level: Level.HIGH,
   },
 };
+
+export function worstStatus(statusList: Level[]): Level {
+  if (statusList.indexOf(Level.HIGH) > -1) {
+    return Level.HIGH;
+  } else if (statusList.indexOf(Level.MEDIUM) > -1) {
+    return Level.MEDIUM;
+  } else {
+    return Level.LOW;
+  }
+}
+
+export function worstStatusColor(statusList: Level[]): string {
+  return INFECTION_RATE_STATUSES[worstStatus(statusList)].color;
+}

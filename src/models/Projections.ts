@@ -7,6 +7,13 @@ import {
 } from '../enums/interventions';
 import { STATES } from '../enums';
 import { RegionSummaryWithTimeseriesMap } from 'api';
+import {
+  CASE_GROWTH_RATE,
+  POSITIVE_TESTS,
+  HOSPITAL_USAGE,
+  determineZone,
+} from 'enums/zones';
+import { worstStatusColor } from 'enums/status';
 
 /**
  * The model for the complete set of projections and related information
@@ -91,17 +98,19 @@ export class Projections {
   }
 
   getAlarmLevelColor() {
-    if (this.supportsInferred) {
-      if (this.primary.rt < 1) {
-        return COLOR_MAP.GREEN.BASE;
-      } else if (this.primary.rt < 1.2) {
-        return COLOR_MAP.ORANGE.BASE;
-      } else {
-        return COLOR_MAP.RED.BASE;
-      }
-    } else {
+    const rt = this.primary.rt!;
+    const testPositiveRate = this.primary.currentTestPositiveRate;
+    const icuUtilization = this.primary.currentIcuUtilization;
+
+    if (rt === null || testPositiveRate === null || icuUtilization === null) {
       return COLOR_MAP.GRAY.BASE;
     }
+
+    return worstStatusColor([
+      determineZone(CASE_GROWTH_RATE, rt),
+      determineZone(POSITIVE_TESTS, testPositiveRate),
+      determineZone(HOSPITAL_USAGE, icuUtilization),
+    ]);
   }
 
   getChartSeriesColorMap() {
