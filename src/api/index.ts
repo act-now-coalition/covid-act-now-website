@@ -99,11 +99,10 @@ export async function fetchSummaryWithTimeseries(
 async function fetchApiJson<T extends object>(
   endpoint: string,
 ): Promise<T | null> {
-  try {
-    const response = await fetch(`${API_URL}/${endpoint}`);
-    return (await response.json()) as T;
-  } catch {
-    // TODO: Implement better error handling (only treat 404 as null?)
+  const response = await fetch(`${API_URL}/${endpoint}`);
+  // TODO(michael): This should really check for 404 only, but S3 currently returns 403s.
+  if ((!response.ok && response.status === 404) || response.status === 403) {
     return null;
   }
+  return (await response.json()) as T;
 }
