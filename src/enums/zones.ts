@@ -1,4 +1,5 @@
 import { COLOR_MAP } from './interventions';
+import { fail } from 'assert';
 
 // TODO(@pnavarrc): Integrate with @sgoldblatt enums/status.ts
 interface ZoneInfo {
@@ -81,3 +82,13 @@ export const HOSPITAL_USAGE: Zones = {
     color: COLOR_MAP.RED.BASE,
   },
 };
+
+export function determineZone(zones: Zones, value: number): Level {
+  // TODO(michael): Is there a typesafe way to enumerate enum values? :-/
+  for (const level of [Level.LOW, Level.MEDIUM, Level.HIGH]) {
+    if (value <= zones[level].upperLimit) {
+      return level;
+    }
+  }
+  fail('Failed to find zone for value: ' + value);
+}

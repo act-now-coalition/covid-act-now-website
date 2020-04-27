@@ -10,6 +10,9 @@ export const formatDecimal = (num: number, places = 2): string =>
 export const formatPercent = (num: number): string =>
   `${formatDecimal(100 * num, 1)} %`;
 
+/** Adds comma's for thousands, millions, etc. */
+export const formatInteger = (num: number): string => num.toLocaleString();
+
 export const parseDate = (date: Date): number => new Date(date).valueOf();
 
 export const titleCase = (str: string) => _.startCase(_.toLower(str));

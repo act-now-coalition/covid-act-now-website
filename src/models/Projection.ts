@@ -45,6 +45,7 @@ export interface RtRange {
  * on the actual data observed in a given location
  */
 export class Projection {
+  readonly locationName: string;
   readonly isInferred: boolean;
   readonly totalPopulation: number;
   readonly cumulativeDead: number;
@@ -59,6 +60,7 @@ export class Projection {
   private readonly beds: number[];
   private readonly cumulativeDeaths: number[];
   private readonly cumulativeInfected: number[];
+  private readonly cumulativePositiveTests: Array<number | null>;
   private readonly rtRange: Array<RtRange | null>;
   // ICU Utilization series as values between 0-1 (or > 1 if over capacity).
   private readonly icuUtilization: Array<number | null>;
@@ -71,6 +73,7 @@ export class Projection {
   ) {
     const timeseries = summaryWithTimeseries.timeseries;
     const lastUpdated = new Date(summaryWithTimeseries.lastUpdatedDate);
+    this.locationName = this.getLocationName(summaryWithTimeseries);
     this.intervention = parameters.intervention;
     this.isInferred = parameters.isInferred;
     this.totalPopulation = summaryWithTimeseries.actuals.population;
@@ -86,6 +89,9 @@ export class Projection {
     this.beds = timeseries.map(row => row.hospitalBedCapacity);
     this.cumulativeDeaths = timeseries.map(row => row.cumulativeDeaths);
     this.cumulativeInfected = timeseries.map(row => row.cumulativeInfected);
+    this.cumulativePositiveTests = timeseries.map(
+      row => row.cumulativePositiveTests,
+    );
     this.rtRange = this.calcRtRange(timeseries);
     this.testPositiveRate = this.calcTestPositiveRate(timeseries);
     this.icuUtilization = this.calcIcuUtilization(timeseries, lastUpdated);
@@ -117,6 +123,37 @@ export class Projection {
     return this.dates[this.dates.length - 1];
   }
 
+  /**
+   * Returns the delta between the number of new cases in the past week and the
+   * number in the prior week.
+   */
+  get weeklyNewCasesDelta(): number {
+    const i = this.indexOfLastValue(this.cumulativePositiveTests);
+    if (i === null) {
+      return 0;
+    } else {
+      // NOTE: If i < 14 we'll be taking advantage of JS letting us do negative
+      // array indexes. :-)
+      const cumulativeToday = this.cumulativePositiveTests[i] || 0;
+      const cumulative7daysAgo = this.cumulativePositiveTests[i - 7] || 0;
+      const cumulative14daysAgo = this.cumulativePositiveTests[i - 14] || 0;
+      const thisWeek = cumulativeToday - cumulative7daysAgo;
+      const lastWeek = cumulative7daysAgo - cumulative14daysAgo;
+      return thisWeek - lastWeek;
+    }
+  }
+
+  // TODO(michael): We should probably average this out over a week since the data can be spiky.
+  get currentTestPositiveRate(): number | null {
+    const i = this.indexOfLastValue(this.testPositiveRate);
+    return i && this.testPositiveRate[i];
+  }
+
+  get currentIcuUtilization(): number | null {
+    const i = this.indexOfLastValue(this.icuUtilization);
+    return i && this.icuUtilization[i];
+  }
+
   private getColumn(columnName: string): Column[] {
     return this.dates.map((date, idx) => ({
       x: date.getTime(),
@@ -129,6 +166,15 @@ export class Projection {
       label: customLabel ? customLabel : this.label,
       data: this.getColumn(dataset),
     };
+  }
+
+  private getLocationName(s: RegionSummaryWithTimeseries) {
+    // TODO(michael): I don't like hardcoding "County" into the name. We should
+    // probably delete this code and get the location name from somewhere other
+    // than the API (or improve the API value).
+    return s.countyName
+      ? `${s.countyName} County, ${s.stateName}`
+      : s.stateName;
   }
 
   private calcRtRange(timeseries: Timeseries): Array<RtRange | null> {
@@ -231,5 +277,14 @@ export class Projection {
         data[i] = (data[i - 1] + data[i + 1]) / 2;
       }
     }
+  }
+
+  private indexOfLastValue(data: Array<number | null>): number | null {
+    for (let i = data.length - 1; i >= 0; i--) {
+      if (data[i] !== null) {
+        return i;
+      }
+    }
+    return null;
   }
 }
