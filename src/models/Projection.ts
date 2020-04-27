@@ -139,9 +139,9 @@ export class Projection {
       const ci = (row.RtCI90 as any) as number;
       if (rt) {
         return {
-          rt: round(rt, 2),
-          low: round(rt - ci, 2),
-          high: round(rt + ci, 2),
+          rt: rt,
+          low: rt - ci,
+          high: rt + ci,
         };
       } else {
         return null;
@@ -161,7 +161,7 @@ export class Projection {
       const positive = dailyPositive || 0;
       const negative = dailyNegatives[idx] || 0;
       const total = positive + negative;
-      return total > 0 ? round(positive / total, 3) : null;
+      return total > 0 ? positive / total : null;
     });
   }
 
@@ -195,9 +195,9 @@ export class Projection {
     timeseries: Timeseries,
     lastUpdated: Date,
   ): Array<number | null> {
-    const icuUtilization = timeseries.map(row => {
-      return round(row.ICUBedsInUse / row.ICUBedCapacity, 3);
-    });
+    const icuUtilization = timeseries.map(
+      row => row.ICUBedsInUse / row.ICUBedCapacity,
+    );
 
     // Strip off the future projections.
     // TODO(michael): I'm worried about an off-by-one here. I _think_ we usually
@@ -232,9 +232,4 @@ export class Projection {
       }
     }
   }
-}
-
-// Round a number to have only decimalDigits digits after the decimal.
-function round(x: number, decimalDigits: number): number {
-  return parseFloat(x.toFixed(decimalDigits));
 }
