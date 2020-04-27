@@ -25,6 +25,7 @@ import {
   HOSPITAL_USAGE,
   determineZone,
   ChartType,
+  getChartColumnFromChartType,
 } from 'enums/zones';
 // TODO(michael): These format helpers should probably live in a more
 // general-purpose location, not just for charts.
@@ -62,6 +63,18 @@ const ChartsHolder = (props: {
   const icuUtilizationData =
     projection && projection.getDataset('icuUtilization').data;
 
+  const getChartSummarys = (projection: Projection) => {
+    return {
+      [ChartType.CASE_GROWTH_RATE]: projection.getLatestColumnValue('rtRange'),
+      [ChartType.HOSPITAL_USAGE]: projection.getLatestColumnValue(
+        'icuUtilization',
+      ),
+      [ChartType.POSITIVE_TESTS]: projection.getLatestColumnValue(
+        'testPositiveRate',
+      ),
+    };
+  };
+
   return (
     <>
       {!projection ? (
@@ -69,7 +82,7 @@ const ChartsHolder = (props: {
       ) : (
         <ChartContentWrapper>
           <LocationPageHeader projections={props.projections} />
-          <SummaryStats stats={[]} />
+          {projection.isInferred && <SummaryStats stats={getChartSummarys(projection)} />}
           <MainContentInner>
             <ChartHeader></ChartHeader>
             <h1>{ChartType.CASE_GROWTH_RATE}</h1>

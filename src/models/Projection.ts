@@ -1,4 +1,5 @@
 import { RegionSummaryWithTimeseries, Timeseries } from 'api';
+import { fail } from 'assert';
 
 /** Parameters that can be provided when constructing a Projection. */
 export interface ProjectionParameters {
@@ -157,6 +158,14 @@ export class Projection {
       x: date.getTime(),
       y: (this as any)[columnName][idx],
     }));
+  }
+
+  getLatestColumnValue(columnName: string) {
+    // Returns the column valeu for the given date. If the given date is not
+    // available, return the one before the given date (since otherwise it's a prediction)
+    // note we could use find for this
+    let currentDateIndex = this.indexOfLastValue((this as any)[columnName]);
+    return currentDateIndex && (this as any)[columnName][currentDateIndex];
   }
 
   getDataset(dataset: DatasetId, customLabel?: string): ProjectionDataset {

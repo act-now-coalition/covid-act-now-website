@@ -1,7 +1,7 @@
 import React from 'react';
 import SignalStatus from 'components/SignalStatus/SignalStatus';
 import { COLOR_MAP } from 'enums/interventions';
-import { CASE_GROWTH_RATE, Level } from 'enums/zones';
+import { ChartType, getLevelForChart, Level, SUMMARY_TEXT } from 'enums/zones';
 import { useEmbed } from 'utils/hooks';
 import palette from 'assets/theme/palette';
 
@@ -71,8 +71,10 @@ function LocationSummary({ projections }) {
 
 const LocationPageHeader = ({ projections }) => {
   const { isEmbed } = useEmbed();
+
+  const level = SUMMARY_TEXT[projections.getAlarmLevel()];
   const [fillColor, textColor] = projections.supportsInferred
-    ? [projections.getAlarmLevelColor(), palette.secondary.contrastText]
+    ? [level.color, palette.secondary.contrastText]
     : [COLOR_MAP.GRAY.LIGHT, palette.text.primary];
 
   return (
@@ -82,7 +84,7 @@ const LocationPageHeader = ({ projections }) => {
           <HeaderTitle isEmbed={isEmbed} textColor={textColor}>
             <LocationPageHeading projections={projections} />
           </HeaderTitle>
-          <SignalStatus zoneInfo={CASE_GROWTH_RATE[Level.LOW]} />
+          {projections.supportsInferred && <SignalStatus levelInfo={level} />}
           {!isEmbed ? <LocationSummary projections={projections} /> : ''}
           {projections.isCounty && !isEmbed && (
             <HeaderSubCopy textColor={textColor}>

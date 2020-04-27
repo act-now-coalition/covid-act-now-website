@@ -12,8 +12,11 @@ import {
   POSITIVE_TESTS,
   HOSPITAL_USAGE,
   determineZone,
+  Level,
+  ChartType,
+  getLevelForChart, 
+  worstStatusColor,
 } from 'enums/zones';
-import { worstStatusColor } from 'enums/zones';
 
 /**
  * The model for the complete set of projections and related information
@@ -97,20 +100,63 @@ export class Projections {
       : this.currentInterventionModel;
   }
 
-  getAlarmLevelColor() {
-    const rt = this.primary.rt!;
-    const testPositiveRate = this.primary.currentTestPositiveRate;
-    const icuUtilization = this.primary.currentIcuUtilization;
+  getAlarmLevel() {
+    const projection = this.primary
+    const rt_level = getLevelForChart(
+      ChartType.CASE_GROWTH_RATE,
+      projection.getLatestColumnValue('rtRange').rt,
+    );
+    const hospitalizations_level = getLevelForChart(
+      ChartType.HOSPITAL_USAGE,
+      projection.getLatestColumnValue('icuUtilization'),
+    );
+    const test_rate_level = getLevelForChart(
+      ChartType.POSITIVE_TESTS,
+      projection.getLatestColumnValue('testPositiveRate'),
+    );
+    let level;
 
-    if (rt === null || testPositiveRate === null || icuUtilization === null) {
-      return COLOR_MAP.GRAY.BASE;
+    if (
+      rt_level === Level.LOW &&
+      hospitalizations_level === Level.LOW &&
+      test_rate_level === Level.LOW
+    ) {
+      // if all the factors are low, level is low
+      level = Level.LOW;
+    } else if (
+      rt_level === Level.UNKNOWN &&
+      hospitalizations_level === Level.UNKNOWN &&
+      test_rate_level === Level.UNKNOWN
+    ) {
+      // if all the levels are unkown, status is unkwonw
+      level = Level.UNKNOWN;
+    }else if (
+      rt_level !== Level.LOW &&
+      hospitalizations_level !== Level.LOW &&
+      test_rate_level !== Level.LOW
+    ) {
+      // if none of the levels are low, high level
+      level = Level.HIGH;
+    } else {
+      // otherwise level is medium
+      level = Level.MEDIUM;
     }
 
-    return worstStatusColor([
-      determineZone(CASE_GROWTH_RATE, rt),
-      determineZone(POSITIVE_TESTS, testPositiveRate),
-      determineZone(HOSPITAL_USAGE, icuUtilization),
-    ]);
+    return level;
+     
+  }
+
+  getAlarmLevelColor() {
+    const level = this.getAlarmLevel()
+    if (level === Level.LOW) {
+      return COLOR_MAP.GREEN.BASE;
+    } else if (level === Level.MEDIUM) {
+      return COLOR_MAP.ORANGE.BASE;
+    } else if (level === Level.HIGH){
+      return COLOR_MAP.RED.BASE;
+    } else {
+      return COLOR_MAP.GRAY.BASE;
+    } 
   }
 
   getChartSeriesColorMap() {

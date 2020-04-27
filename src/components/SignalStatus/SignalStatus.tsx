@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { ZoneInfo } from 'enums/zones';
+import { LevelInfo } from 'enums/zones';
 import { SignalStatusWrapper } from './SignalStatus.style';
 
-const SignalStatus = (props: { zoneInfo: ZoneInfo }) => {
+const SignalStatus = (props: { levelInfo: LevelInfo }) => {
   return (
-    <SignalStatusWrapper color={props.zoneInfo.color}>
-      {props.zoneInfo.name}
+    <SignalStatusWrapper color={props.levelInfo.color}>
+      {props.levelInfo.name}
     </SignalStatusWrapper>
   );
 };
