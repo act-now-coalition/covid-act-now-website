@@ -1,5 +1,5 @@
 import React from 'react';
-import SummaryStat, { SummaryStatProp } from './SummaryStat';
+import SummaryStat from './SummaryStat';
 import { INFECTION_RATE_STATUSES, Level } from 'enums/status';
 import { SummaryStatsWrapper, SummaryHolder } from './SummaryStats.style';
 

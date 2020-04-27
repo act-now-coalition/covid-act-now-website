@@ -6,7 +6,6 @@ import { useEmbed } from 'utils/hooks';
 import palette from 'assets/theme/palette';
 
 import {
-  HeaderHighlight,
   HeaderSubCopy,
   HeaderTitle,
   StyledStateCopyWrapper,
