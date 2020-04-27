@@ -65,6 +65,11 @@ export const optionsRt = (data, endDate) => {
         data,
       },
     ],
+    tooltip: {
+      pointFormatter: function () {
+        return `Rt ${formatDecimal(this.y)}`;
+      },
+    },
     annotations: [
       currentValueAnnotation(x, y, formatDecimal(y)),
       ...zoneAnnotations(endDate, minYAxis, maxYAxis, y, ZONES_RT),
@@ -77,6 +82,22 @@ export const optionsPositiveTests = (data, endDate) => {
   const [minYAxis, maxYAxis] = roundAxisLimits(0, getMaxY(data));
   return {
     ...baseOptions,
+    annotations: [
+      currentValueAnnotation(x, y, formatPercent(y)),
+      ...zoneAnnotations(endDate, minYAxis, maxYAxis, y, ZONES_POSITIVE_RATE),
+    ],
+    series: [
+      {
+        name: 'Positive Tests',
+        data,
+        zones: ZONES_POSITIVE_RATE,
+      },
+    ],
+    tooltip: {
+      pointFormatter: function () {
+        return `Positive Tests ${formatPercent(this.y)}`;
+      },
+    },
     xAxis: {
       ...baseOptions.xAxis,
       max: parseDate(endDate),
@@ -90,17 +111,6 @@ export const optionsPositiveTests = (data, endDate) => {
       },
       tickPositions: getTickPositions(minYAxis, maxYAxis, ZONES_POSITIVE_RATE),
     },
-    annotations: [
-      currentValueAnnotation(x, y, formatPercent(y)),
-      ...zoneAnnotations(endDate, minYAxis, maxYAxis, y, ZONES_POSITIVE_RATE),
-    ],
-    series: [
-      {
-        name: 'Positive Tests',
-        data,
-        zones: ZONES_POSITIVE_RATE,
-      },
-    ],
   };
 };
 
@@ -109,6 +119,15 @@ export const optionsHospitalUsage = (data, endDate) => {
   const [minYAxis, maxYAxis] = roundAxisLimits(0, getMaxY(data));
   return {
     ...baseOptions,
+    annotations: [
+      currentValueAnnotation(x, y, formatPercent(y)),
+      ...zoneAnnotations(endDate, minYAxis, maxYAxis, y, ZONES_HOSPITAL_USAGE),
+    ],
+    tooltip: {
+      pointFormatter: function () {
+        return `Hospital Usage ${formatPercent(this.y)}`;
+      },
+    },
     xAxis: {
       ...baseOptions.xAxis,
       max: parseDate(endDate),
@@ -122,10 +141,6 @@ export const optionsHospitalUsage = (data, endDate) => {
       },
       tickPositions: getTickPositions(minYAxis, maxYAxis, ZONES_HOSPITAL_USAGE),
     },
-    annotations: [
-      currentValueAnnotation(x, y, formatPercent(y)),
-      ...zoneAnnotations(endDate, minYAxis, maxYAxis, y, ZONES_HOSPITAL_USAGE),
-    ],
     series: [
       {
         name: 'Hospital Usage',
