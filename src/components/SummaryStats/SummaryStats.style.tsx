@@ -3,6 +3,7 @@ import { Box } from '@material-ui/core';
 import palette from 'assets/theme/palette';
 
 export const SummaryStatsWrapper = styled(Box)`
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;

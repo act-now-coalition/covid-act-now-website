@@ -1,19 +1,18 @@
 import React from 'react';
-import StateCircleSvg from 'components/StateSvg/StateCircleSvg';
-import { COLORS } from 'enums';
+import SignalStatus from 'components/SignalStatus/SignalStatus';
 import { COLOR_MAP } from 'enums/interventions';
+import { INFECTION_RATE_STATUSES, Level } from 'enums/status';
 import { useEmbed } from 'utils/hooks';
+import palette from 'assets/theme/palette';
 
 import {
   HeaderHighlight,
   HeaderSubCopy,
   HeaderTitle,
-  StyledStateImageWrapper,
   StyledStateCopyWrapper,
   StyledLocationPageHeaderWrapper,
   StyledLocationPageHeaderInner,
 } from './LocationPageHeader.style';
-
 function LocationPageHeading({ projections }) {
   const { isEmbed } = useEmbed();
 
@@ -32,18 +31,7 @@ function LocationPageHeading({ projections }) {
     <span>{projections.stateName}</span>
   );
 
-  const title = {
-    [COLOR_MAP.GREEN.BASE]: 'COVID cases are shrinking in',
-    [COLOR_MAP.ORANGE.BASE]: 'COVID cases are roughly stable in',
-    [COLOR_MAP.RED.BASE]: 'COVID cases are growing exponentially in',
-    [COLOR_MAP.BLACK]: 'We don’t have enough data for',
-  }[projections.getAlarmLevelColor()];
-
-  return (
-    <span>
-      {title} {displayName}
-    </span>
-  );
+  return <span>{displayName}</span>;
 }
 
 function LocationSummary({ projections }) {
@@ -84,31 +72,24 @@ function LocationSummary({ projections }) {
 
 const LocationPageHeader = ({ projections }) => {
   const { isEmbed } = useEmbed();
-  const fillColor = projections.getAlarmLevelColor();
-  // darken for legibility
-  const textColor =
-    fillColor === COLOR_MAP.GRAY.BASE ? COLOR_MAP.GRAY.DARK : fillColor;
+  const [fillColor, textColor] = projections.supportsInferred
+    ? [projections.getAlarmLevelColor(), palette.secondary.contrastText]
+    : [COLOR_MAP.GRAY.LIGHT, palette.text.primary];
+
   return (
-    <StyledLocationPageHeaderWrapper condensed={isEmbed}>
+    <StyledLocationPageHeaderWrapper bgColor={fillColor} condensed={isEmbed}>
       <StyledLocationPageHeaderInner condensed={isEmbed}>
-        <StyledStateImageWrapper>
-          <StateCircleSvg
-            actionBackgroundFill={COLORS.LIGHTGRAY}
-            state={projections.stateCode}
-            fillColor={fillColor}
-            hasAction={true}
-          />
-        </StyledStateImageWrapper>
         <StyledStateCopyWrapper>
           <div>
-            <HeaderTitle>
-              <HeaderHighlight color={textColor}>
+            <HeaderTitle textColor={textColor}>
+              <HeaderHighlight textColor={textColor}>
                 <LocationPageHeading projections={projections} />
               </HeaderHighlight>
             </HeaderTitle>
+            <SignalStatus status={INFECTION_RATE_STATUSES[Level.LOW]} />
             {!isEmbed ? <LocationSummary projections={projections} /> : ''}
             {projections.isCounty && !isEmbed && (
-              <HeaderSubCopy>
+              <HeaderSubCopy textColor={textColor}>
                 <strong>County data is currently in beta. </strong>
                 <span>
                   Because counties don’t report hospitalizations, our forecasts

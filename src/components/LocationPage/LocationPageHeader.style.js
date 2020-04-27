@@ -5,30 +5,25 @@ import palette from 'assets/theme/palette';
 import { COLORS } from 'enums';
 
 export const HeaderHighlight = styled.span`
-  color: ${props => props.color};
+  color: ${props => props.textColor || 'white'};
   font-weight: 600;
-
-  a {
-    color: ${props => props.color} !important;
-  }
+  padding: 0.4rem 0;
 `;
 
 export const HeaderTitle = styled(Typography)`
-  font-size: 1.5rem;
-  line-height: 1.75rem;
-  padding-top: 0.2em;
-
+  font-size: 2.2rem;
+  line-height: 2.2rem;
+  padding: 0.5rem 0 2rem;
   a {
-    color: ${palette.black};
+    color: ${props => props.textColor || palette.black};
   }
 `;
 
 export const HeaderSubCopy = styled(Typography)`
-  margin-top: 0.5rem;
+  color: ${props => props.textColor || 'white'};
   font-size: 1rem;
   line-height: 1.5rem;
-  color: rgba(0, 0, 0, 0.7);
-
+  padding: 1.5rem 0 0.2rem;
   + p {
     margin-top: 1rem;
   }
@@ -37,16 +32,14 @@ export const HeaderSubCopy = styled(Typography)`
 export const StyledLocationPageHeaderWrapper = styled(Box)`
   display: flex;
   flex-direction: column;
-  background-color: ${COLORS.LIGHTGRAY};
+  background-color: ${props => props.bgColor || COLORS.LIGHTGRAY};
   padding: ${props => (props.condensed ? '1.5rem 1.4rem 0.2rem' : '2rem 1rem')};
   margin: 0;
-
   @media (min-width: 600px) {
     border-bottom: 1px solid #e3e3e3;
     align-items: center;
     flex-direction: row;
   }
-
   @media (min-width: 900px) {
     padding: 2rem 0;
   }
@@ -56,20 +49,17 @@ export const StyledLocationPageHeaderInner = styled.div`
   display: flex;
   flex-direction: ${props => (props.condensed ? 'row' : 'column')};
   margin: 0;
-
   @media (min-width: 600px) {
     flex-direction: row;
     margin: 0 auto;
+    padding: 2rem 0;
   }
-
   @media (min-width: 900px) {
     width: 900px;
   }
-
   @media (min-width: 1350px) {
     margin: 0 445px 0 auto;
   }
-
   @media (min-width: 1750px) {
     margin: 0 auto;
   }
@@ -79,7 +69,6 @@ export const StyledStateImageWrapper = styled.div`
   height: 64px;
   margin-bottom: 2em;
   margin-right: 2em;
-
   @media (min-width: 600px) {
     display: flex;
     justify-content: center;

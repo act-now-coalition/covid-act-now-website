@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { Box } from '@material-ui/core';
 
 export const SignalStatusWrapper = styled(Box)`
+  padding: 0 0.4rem;
   max-width: 150px;
-  min-width: 120px;
   border-radius: 2px;
   border: 1px solid rgba(0, 0, 0, 0.12);
   background-color: white;
@@ -15,4 +15,8 @@ export const SignalStatusWrapper = styled(Box)`
   font-size: 0.8rem;
   line-height: 1.6rem;
   text-align: center;
+
+  @media (min-width: 600px) {
+    min-width: 120px;
+  }
 `;
