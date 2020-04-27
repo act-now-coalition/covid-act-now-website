@@ -7,7 +7,7 @@ export interface ProjectionParameters {
 }
 
 export interface Column {
-  x: Date;
+  x: number; // ms since epoch
   y: any;
 }
 
@@ -61,7 +61,7 @@ export class Projection {
   private readonly cumulativeInfected: number[];
   private readonly rtRange: Array<RtRange | null>;
   // ICU Utilization series as values between 0-1 (or > 1 if over capacity).
-  private readonly icuUtilization: number[];
+  private readonly icuUtilization: Array<number | null>;
   // Test Positive series as values between 0-1.
   private readonly testPositiveRate: Array<number | null>;
 
@@ -70,6 +70,7 @@ export class Projection {
     parameters: ProjectionParameters,
   ) {
     const timeseries = summaryWithTimeseries.timeseries;
+    const lastUpdated = new Date(summaryWithTimeseries.lastUpdatedDate);
     this.intervention = parameters.intervention;
     this.isInferred = parameters.isInferred;
     this.totalPopulation = summaryWithTimeseries.actuals.population;
@@ -87,7 +88,7 @@ export class Projection {
     this.cumulativeInfected = timeseries.map(row => row.cumulativeInfected);
     this.rtRange = this.calcRtRange(timeseries);
     this.testPositiveRate = this.calcTestPositiveRate(timeseries);
-    this.icuUtilization = this.calcIcuUtilization(timeseries);
+    this.icuUtilization = this.calcIcuUtilization(timeseries, lastUpdated);
 
     this.fixZeros(this.hospitalizations);
     this.fixZeros(this.cumulativeDeaths);
@@ -118,7 +119,7 @@ export class Projection {
 
   private getColumn(columnName: string): Column[] {
     return this.dates.map((date, idx) => ({
-      x: date,
+      x: date.getTime(),
       y: (this as any)[columnName][idx],
     }));
   }
@@ -190,9 +191,33 @@ export class Projection {
     return result;
   }
 
-  private calcIcuUtilization(timeseries: Timeseries): number[] {
-    return timeseries.map(row => {
+  private calcIcuUtilization(
+    timeseries: Timeseries,
+    lastUpdated: Date,
+  ): Array<number | null> {
+    const icuUtilization = timeseries.map(row => {
       return round(row.ICUBedsInUse / row.ICUBedCapacity, 3);
+    });
+
+    // Strip off the future projections.
+    // TODO(michael): I'm worried about an off-by-one here. I _think_ we usually
+    // update our projections using yesterday's data. So we want to strip
+    // everything >= lastUpdatedDate. But since the ICU data is all estimates, I
+    // can't really validate that's correct.
+    return this.omitDataAtOrAfterDate(icuUtilization, lastUpdated);
+  }
+
+  /**
+   * Replaces all values at or after (>=) the specified date with nulls. Keeps data for
+   * dates before (<) the specified date as-is.
+   */
+  private omitDataAtOrAfterDate<T>(
+    data: Array<T | null> | Array<T>,
+    cutoffDate: Date,
+  ): Array<T | null> {
+    return this.dates.map((date, idx) => {
+      const value = data[idx];
+      return date < cutoffDate ? value : null;
     });
   }
 
