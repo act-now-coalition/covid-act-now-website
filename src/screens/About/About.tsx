@@ -53,7 +53,7 @@ const About = ({ children }: { children: React.ReactNode }) => {
             >
               Georgetown University for Global Health Science and Security
             </a>
-            \.
+            .
           </Typography>
           <Typography variant="body1" component="p">
             We published the first version of our model on March 20. Over 10
