@@ -1,19 +1,18 @@
 import React from 'react';
-import StateCircleSvg from 'components/StateSvg/StateCircleSvg';
-import { COLORS } from 'enums';
+import SignalStatus from 'components/SignalStatus/SignalStatus';
 import { COLOR_MAP } from 'enums/interventions';
+import { INFECTION_RATE_STATUSES, Level } from 'enums/status';
 import { useEmbed } from 'utils/hooks';
+import palette from 'assets/theme/palette';
 
 import {
   HeaderHighlight,
   HeaderSubCopy,
   HeaderTitle,
-  StyledStateImageWrapper,
   StyledStateCopyWrapper,
   StyledLocationPageHeaderWrapper,
   StyledLocationPageHeaderInner,
 } from './LocationPageHeader.style';
-
 function LocationPageHeading({ projections }) {
   const { isEmbed } = useEmbed();
 
@@ -32,18 +31,7 @@ function LocationPageHeading({ projections }) {
     <span>{projections.stateName}</span>
   );
 
-  const title = {
-    [COLOR_MAP.GREEN.BASE]: 'COVID cases are shrinking in',
-    [COLOR_MAP.ORANGE.BASE]: 'COVID cases are roughly stable in',
-    [COLOR_MAP.RED.BASE]: 'COVID cases are growing exponentially in',
-    [COLOR_MAP.BLACK]: 'We don’t have enough data for',
-  }[projections.getAlarmLevelColor()];
-
-  return (
-    <span>
-      {title} {displayName}
-    </span>
-  );
+  return <span>{displayName}</span>;
 }
 
 function LocationSummary({ projections }) {
@@ -84,46 +72,35 @@ function LocationSummary({ projections }) {
 
 const LocationPageHeader = ({ projections }) => {
   const { isEmbed } = useEmbed();
-  const fillColor = projections.getAlarmLevelColor();
-  // darken for legibility
-  const textColor =
-    fillColor === COLOR_MAP.GRAY.BASE ? COLOR_MAP.GRAY.DARK : fillColor;
+  const [fillColor, textColor] = projections.supportsInferred
+    ? [projections.getAlarmLevelColor(), palette.secondary.contrastText]
+    : [COLOR_MAP.GRAY.LIGHT, palette.text.primary];
+
   return (
-    <StyledLocationPageHeaderWrapper condensed={isEmbed}>
+    <StyledLocationPageHeaderWrapper bgColor={fillColor} condensed={isEmbed}>
       <StyledLocationPageHeaderInner condensed={isEmbed}>
-        <StyledStateImageWrapper>
-          <StateCircleSvg
-            actionBackgroundFill={COLORS.LIGHTGRAY}
-            state={projections.stateCode}
-            fillColor={fillColor}
-            hasAction={true}
-          />
-        </StyledStateImageWrapper>
-        <StyledStateCopyWrapper>
-          <div>
-            <HeaderTitle>
-              <HeaderHighlight color={textColor}>
-                <LocationPageHeading projections={projections} />
-              </HeaderHighlight>
-            </HeaderTitle>
-            {!isEmbed ? <LocationSummary projections={projections} /> : ''}
-            {projections.isCounty && !isEmbed && (
-              <HeaderSubCopy>
-                <strong>County data is currently in beta. </strong>
-                <span>
-                  Because counties don’t report hospitalizations, our forecasts
-                  may not be as accurate. See something wrong?{' '}
-                </span>
-                <a
-                  href="https://forms.gle/NPsLcFnrvfS1kqkn9"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Please let us know.
-                </a>
-              </HeaderSubCopy>
-            )}
-          </div>
+        <StyledStateCopyWrapper isEmbed={isEmbed}>
+          <HeaderTitle isEmbed={isEmbed} textColor={textColor}>
+            <LocationPageHeading projections={projections} />
+          </HeaderTitle>
+          <SignalStatus status={INFECTION_RATE_STATUSES[Level.LOW]} />
+          {!isEmbed ? <LocationSummary projections={projections} /> : ''}
+          {projections.isCounty && !isEmbed && (
+            <HeaderSubCopy textColor={textColor}>
+              <strong>County data is currently in beta. </strong>
+              <span>
+                Because counties don’t report hospitalizations, our forecasts
+                may not be as accurate. See something wrong?{' '}
+              </span>
+              <a
+                href="https://forms.gle/NPsLcFnrvfS1kqkn9"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Please let us know.
+              </a>
+            </HeaderSubCopy>
+          )}
         </StyledStateCopyWrapper>
       </StyledLocationPageHeaderInner>
     </StyledLocationPageHeaderWrapper>

@@ -10,6 +10,7 @@ import NoCountyDetail from './NoCountyDetail';
 import ModelChart from 'components/Charts/ModelChart';
 import { Projections } from 'models/Projections';
 import { Projection } from 'models/Projection';
+import SummaryStats from 'components/SummaryStats/SummaryStats';
 import { ZoneChartWrapper } from 'components/Charts/ZoneChart.style';
 import Chart from 'components/Charts/Chart';
 import {
@@ -67,6 +68,7 @@ const ChartsHolder = (props: {
       ) : (
         <ChartContentWrapper>
           <LocationPageHeader projections={props.projections} />
+          <SummaryStats stats={[]} />
           <MainContentInner>
             <ChartHeader></ChartHeader>
             <h1>Case growth</h1>
