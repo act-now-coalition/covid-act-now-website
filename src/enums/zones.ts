@@ -4,13 +4,13 @@ import { fail } from 'assert';
 export enum ChartType {
   CASE_GROWTH_RATE = 'Infection rate',
   POSITIVE_TESTS = 'Positive tests',
-  HOSPITAL_USAGE = 'COVID Patients in ICU',
+  HOSPITAL_USAGE = 'Hospital ICU occupancy',
 }
 
 export const ChartTypeToTitle = {
   [ChartType.CASE_GROWTH_RATE]: 'Infection rate',
   [ChartType.POSITIVE_TESTS]: 'Positive tests',
-  [ChartType.HOSPITAL_USAGE]: 'COVID Patients in ICU',
+  [ChartType.HOSPITAL_USAGE]: 'Hospital ICU occupancy',
 };
 
 export interface LevelInfo {
@@ -72,18 +72,18 @@ export const SUMMARY_TEXT: Zones = {
 export const CASE_GROWTH_RATE: Zones = {
   [Level.LOW]: {
     lowerLimit: 0.85,
-    upperLimit: 1.05,
+    upperLimit: 1.0,
     name: 'Low',
     color: COLOR_MAP.GREEN.BASE,
   },
   [Level.MEDIUM]: {
-    lowerLimit: 1.05,
-    upperLimit: 1.4,
+    lowerLimit: 1.0,
+    upperLimit: 1.2,
     name: 'Medium',
     color: COLOR_MAP.ORANGE.BASE,
   },
   [Level.HIGH]: {
-    lowerLimit: 1.4,
+    lowerLimit: 1.2,
     upperLimit: 2.5,
     name: 'High',
     color: COLOR_MAP.RED.BASE,
@@ -99,18 +99,18 @@ export const CASE_GROWTH_RATE: Zones = {
 export const POSITIVE_TESTS: Zones = {
   [Level.LOW]: {
     lowerLimit: 0.0,
-    upperLimit: 0.1,
+    upperLimit: 0.03,
     name: 'Low',
     color: COLOR_MAP.GREEN.BASE,
   },
   [Level.MEDIUM]: {
-    lowerLimit: 0.1,
-    upperLimit: 0.25,
+    lowerLimit: 0.03,
+    upperLimit: 0.10,
     name: 'Medium',
     color: COLOR_MAP.ORANGE.BASE,
   },
   [Level.HIGH]: {
-    lowerLimit: 0.25,
+    lowerLimit: 0.10,
     upperLimit: 1.1,
     name: 'High',
     color: COLOR_MAP.RED.BASE,
@@ -126,18 +126,18 @@ export const POSITIVE_TESTS: Zones = {
 export const HOSPITAL_USAGE: Zones = {
   [Level.LOW]: {
     lowerLimit: 0.2,
-    upperLimit: 0.8125,
+    upperLimit: 0.88,
     name: 'Low',
     color: COLOR_MAP.GREEN.BASE,
   },
   [Level.MEDIUM]: {
-    lowerLimit: 0.8125,
-    upperLimit: 0.95,
+    lowerLimit: 0.88,
+    upperLimit: 1.0,
     name: 'Medium',
     color: COLOR_MAP.ORANGE.BASE,
   },
   [Level.HIGH]: {
-    lowerLimit: 0.95,
+    lowerLimit: 1.0,
     upperLimit: 1.25,
     name: 'High',
     color: COLOR_MAP.RED.BASE,

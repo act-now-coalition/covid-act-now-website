@@ -60,6 +60,7 @@ export class Projection {
   private readonly cumulativeDeaths: number[];
   private readonly cumulativeInfected: number[];
   private readonly cumulativePositiveTests: Array<number | null>;
+  private readonly cumulativeNegativeTests: Array<number | null>;
   private readonly rtRange: Array<RtRange | null>;
   // ICU Utilization series as values between 0-1 (or > 1 if over capacity).
   private readonly icuUtilization: Array<number | null>;
@@ -84,11 +85,14 @@ export class Projection {
     this.beds = timeseries.map(row => row.hospitalBedCapacity);
     this.cumulativeDeaths = timeseries.map(row => row.cumulativeDeaths);
     this.cumulativeInfected = timeseries.map(row => row.cumulativeInfected);
-    this.cumulativePositiveTests = timeseries.map(
-      row => row.cumulativePositiveTests,
+    this.cumulativePositiveTests = this.smoothCumulatives(
+      timeseries.map(row => row.cumulativePositiveTests),
+    );
+    this.cumulativeNegativeTests = this.smoothCumulatives(
+      timeseries.map(row => row.cumulativeNegativeTests),
     );
     this.rtRange = this.calcRtRange(timeseries);
-    this.testPositiveRate = this.calcTestPositiveRate(timeseries);
+    this.testPositiveRate = this.calcTestPositiveRate();
     this.icuUtilization = this.calcIcuUtilization(timeseries, lastUpdated);
 
     this.fixZeros(this.hospitalizations);
@@ -193,20 +197,25 @@ export class Projection {
     });
   }
 
-  private calcTestPositiveRate(timeseries: Timeseries): Array<number | null> {
+  private calcTestPositiveRate(): Array<number | null> {
     const dailyPositives = this.deltasFromCumulatives(
-      timeseries.map(row => row.cumulativePositiveTests),
+      this.cumulativePositiveTests,
     );
     const dailyNegatives = this.deltasFromCumulatives(
-      timeseries.map(row => row.cumulativeNegativeTests),
+      this.cumulativeNegativeTests,
     );
 
-    return dailyPositives.map((dailyPositive, idx) => {
+    const testPositiveRate = dailyPositives.map((dailyPositive, idx) => {
       const positive = dailyPositive || 0;
       const negative = dailyNegatives[idx] || 0;
       const total = positive + negative;
-      return total > 0 ? positive / total : null;
+      // If there are no negatives (but there are positives), then this is
+      // likely the last data point, else it would have gotten smoothed, and
+      // it's probably a reporting lag issue. So just return null.
+      return negative > 0 ? positive / total : null;
     });
+
+    return this.smoothWithRollingAverage(testPositiveRate);
   }
 
   /**
@@ -306,5 +315,96 @@ export class Projection {
   private lastValue<T>(data: Array<T | null>): T | null {
     const i = this.indexOfLastValue(data);
     return i === null ? null : data[i]!;
+  }
+
+  /**
+   * Finds any "gaps" where data is missing or stalls at a steady number for
+   * multiple days and replaces them with interpolated data.
+   */
+  private smoothCumulatives(data: Array<number | null>): Array<number | null> {
+    const gaps = this.findGapsInCumulatives(data);
+    return this.interpolateRanges(data, gaps);
+  }
+
+  /**
+   * Given data and a list of ranges, interpolates the values inside each
+   * range, using the start/end of each range as the fixed values to
+   * interpolate between.
+   */
+  private interpolateRanges(
+    data: Array<number | null>,
+    ranges: Array<{ start: number; end: number }>,
+  ): Array<number | null> {
+    let result = [...data];
+    for (const { start, end } of ranges) {
+      const startValue = data[start]!;
+      const endValue = data[end]!;
+      const round = Number.isInteger(startValue) && Number.isInteger(endValue);
+      const divisions = end - start;
+      const divisionDelta = (endValue - startValue) / divisions;
+      for (let i = start + 1; i < end; i++) {
+        const value = startValue + divisionDelta * (i - start);
+        result[i] = round ? Math.round(value) : value;
+      }
+    }
+    return result;
+  }
+
+  /**
+   * Given a series of data points representing cumulative values (should be
+   * monotonically increasing), finds any "gaps" where data is `0`, `null`, or
+   * stalls at a steady number for multiple days.
+   *
+   * The returned {start, end} tuples are the indices of the entries surrounding each gap.
+   *
+   * Any `0` / `null` data points at the beginning or end of the data are not
+   * considered a gap.
+   */
+  private findGapsInCumulatives(
+    data: Array<number | null>,
+  ): Array<{ start: number; end: number }> {
+    let lastValidValueIndex: number | null = null;
+    const gaps = [];
+    for (let i = 0; i < data.length; i++) {
+      const value = data[i];
+      const isValid =
+        value !== 0 &&
+        value !== null &&
+        (lastValidValueIndex === null || value !== data[lastValidValueIndex]);
+      if (isValid) {
+        if (lastValidValueIndex !== null && lastValidValueIndex !== i - 1) {
+          // we found a gap!
+          gaps.push({ start: lastValidValueIndex, end: i });
+        }
+        lastValidValueIndex = i;
+      }
+    }
+    return gaps;
+  }
+
+  private smoothWithRollingAverage(
+    data: Array<number | null>,
+    days = 7,
+  ): Array<number | null> {
+    const result = [];
+    let sum = 0;
+    let count = 0;
+    for (let i = 0; i < data.length; i++) {
+      const newValue = data[i];
+      if (newValue !== null) {
+        sum += newValue;
+        count++;
+        result.push(sum / count);
+      } else {
+        result.push(null);
+      }
+
+      const oldValue = i < days ? null : data[i - days];
+      if (oldValue !== null) {
+        sum -= oldValue;
+        count--;
+      }
+    }
+    return result;
   }
 }
