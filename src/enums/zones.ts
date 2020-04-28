@@ -111,7 +111,7 @@ export const POSITIVE_TESTS: Zones = {
   },
   [Level.HIGH]: {
     lowerLimit: 0.10,
-    upperLimit: 1.1,
+    upperLimit: 1,
     name: 'High',
     color: COLOR_MAP.RED.BASE,
   },
@@ -125,7 +125,7 @@ export const POSITIVE_TESTS: Zones = {
 
 export const HOSPITAL_USAGE: Zones = {
   [Level.LOW]: {
-    lowerLimit: 0.2,
+    lowerLimit: 0.6,
     upperLimit: 0.88,
     name: 'Low',
     color: COLOR_MAP.GREEN.BASE,
