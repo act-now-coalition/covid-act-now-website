@@ -205,7 +205,7 @@ export class Projection {
       this.cumulativeNegativeTests,
     );
 
-    return dailyPositives.map((dailyPositive, idx) => {
+    const testPositiveRate = dailyPositives.map((dailyPositive, idx) => {
       const positive = dailyPositive || 0;
       const negative = dailyNegatives[idx] || 0;
       const total = positive + negative;
@@ -214,6 +214,8 @@ export class Projection {
       // it's probably a reporting lag issue. So just return null.
       return negative > 0 ? positive / total : null;
     });
+
+    return this.smoothWithRollingAverage(testPositiveRate);
   }
 
   /**
@@ -378,5 +380,31 @@ export class Projection {
       }
     }
     return gaps;
+  }
+
+  private smoothWithRollingAverage(
+    data: Array<number | null>,
+    days = 7,
+  ): Array<number | null> {
+    const result = [];
+    let sum = 0;
+    let count = 0;
+    for (let i = 0; i < data.length; i++) {
+      const newValue = data[i];
+      if (newValue !== null) {
+        sum += newValue;
+        count++;
+        result.push(sum / count);
+      } else {
+        result.push(null);
+      }
+
+      const oldValue = i < days ? null : data[i - days];
+      if (oldValue !== null) {
+        sum -= oldValue;
+        count--;
+      }
+    }
+    return result;
   }
 }
