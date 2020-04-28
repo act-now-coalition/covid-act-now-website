@@ -14,6 +14,7 @@ export const ChartTypeToTitle = {
 };
 
 export interface LevelInfo {
+  lowerLimit: number;
   upperLimit: number;
   name: string;
   color: string;
@@ -43,93 +44,106 @@ export const COLOR_ZONE = {
 // For the summary text
 export const SUMMARY_TEXT: Zones = {
   [Level.LOW]: {
+    lowerLimit: 0,
     upperLimit: 0,
     name: 'All criteria met for reopening',
     color: COLOR_MAP.GREEN.BASE,
   },
   [Level.MEDIUM]: {
+    lowerLimit: 0,
     upperLimit: 0,
     name: 'Some criteria met for reopening',
     color: COLOR_MAP.ORANGE.BASE,
   },
   [Level.HIGH]: {
+    lowerLimit: 0,
     upperLimit: 0,
     name: 'No criteria met for reopening',
     color: COLOR_MAP.RED.BASE,
   },
   [Level.UNKNOWN]: {
+    lowerLimit: 0,
     upperLimit: 0,
     name: 'Unknown',
     color: COLOR_MAP.GRAY.BASE,
   },
 };
 
-// Case Growth Rate
 export const CASE_GROWTH_RATE: Zones = {
   [Level.LOW]: {
+    lowerLimit: 0.85,
     upperLimit: 1.05,
     name: 'Low',
     color: COLOR_MAP.GREEN.BASE,
   },
   [Level.MEDIUM]: {
+    lowerLimit: 1.05,
     upperLimit: 1.4,
     name: 'Medium',
     color: COLOR_MAP.ORANGE.BASE,
   },
   [Level.HIGH]: {
-    upperLimit: Infinity,
+    lowerLimit: 1.4,
+    upperLimit: 2.5,
     name: 'High',
     color: COLOR_MAP.RED.BASE,
   },
   [Level.UNKNOWN]: {
+    lowerLimit: 0,
     upperLimit: 0,
     name: 'Unknown',
     color: COLOR_MAP.GRAY.BASE,
   },
 };
 
-// Positive Tests (upperLimit as %)
 export const POSITIVE_TESTS: Zones = {
   [Level.LOW]: {
-    upperLimit: 0.06,
+    lowerLimit: 0.0,
+    upperLimit: 0.1,
     name: 'Low',
     color: COLOR_MAP.GREEN.BASE,
   },
   [Level.MEDIUM]: {
-    upperLimit: 0.12,
+    lowerLimit: 0.1,
+    upperLimit: 0.25,
     name: 'Medium',
     color: COLOR_MAP.ORANGE.BASE,
   },
   [Level.HIGH]: {
-    upperLimit: Infinity,
+    lowerLimit: 0.25,
+    upperLimit: 1.1,
     name: 'High',
     color: COLOR_MAP.RED.BASE,
   },
   [Level.UNKNOWN]: {
+    lowerLimit: 0,
     upperLimit: 0,
     name: 'Unknown',
     color: COLOR_MAP.GRAY.BASE,
   },
 };
 
-// Hospital Usage (upperLimit as %)
 export const HOSPITAL_USAGE: Zones = {
   [Level.LOW]: {
+    lowerLimit: 0.2,
     upperLimit: 0.8125,
     name: 'Low',
     color: COLOR_MAP.GREEN.BASE,
   },
   [Level.MEDIUM]: {
+    lowerLimit: 0.8125,
     upperLimit: 0.95,
     name: 'Medium',
     color: COLOR_MAP.ORANGE.BASE,
   },
   [Level.HIGH]: {
-    upperLimit: Infinity,
+    lowerLimit: 0.95,
+    upperLimit: 1.25,
     name: 'High',
     color: COLOR_MAP.RED.BASE,
   },
   [Level.UNKNOWN]: {
+    lowerLimit: 0,
     upperLimit: 0,
     name: 'Unknown',
     color: COLOR_MAP.GRAY.BASE,

@@ -3,11 +3,10 @@ import {
   currentValueAnnotation,
   formatDecimal,
   formatPercent,
-  getMaxY,
   getTickPositions,
+  getYAxisLimits,
   lastValidPoint,
   parseDate,
-  roundAxisLimits,
   titleCase,
   zoneAnnotations,
 } from './utils';
@@ -16,6 +15,8 @@ import {
   HOSPITAL_USAGE,
   POSITIVE_TESTS,
   Level,
+  ChartType,
+  ChartTypeToTitle,
 } from '../../enums/zones';
 
 const toHighchartZone = (zone, level) => ({
@@ -32,22 +33,13 @@ const getHighchartZones = zone => [
   toHighchartZone(zone.HIGH, Level.HIGH),
 ];
 
-const ZONES_RT = getHighchartZones(CASE_GROWTH_RATE);
-const ZONES_POSITIVE_RATE = getHighchartZones(POSITIVE_TESTS);
-const ZONES_HOSPITAL_USAGE = getHighchartZones(HOSPITAL_USAGE);
-
 export const optionsRt = (data, endDate) => {
+  const chartType = ChartType.CASE_GROWTH_RATE;
+  const zones = CASE_GROWTH_RATE;
+  const highchartsZones = getHighchartZones(zones);
+  const chartTitle = ChartTypeToTitle[chartType];
   const { x, y } = lastValidPoint(data);
-  // Ensure high-region is at least as large as medium region.
-  const mediumRegionHeight =
-    CASE_GROWTH_RATE.MEDIUM.upperLimit - CASE_GROWTH_RATE.LOW.upperLimit;
-  const minHighRegionLimit =
-    CASE_GROWTH_RATE.MEDIUM.upperLimit + mediumRegionHeight;
-  const [minYAxis, maxYAxis] = roundAxisLimits(
-    0,
-    Math.max(getMaxY(data), minHighRegionLimit),
-  );
-
+  const [minYAxis, maxYAxis] = getYAxisLimits(zones);
   return {
     ...baseOptions,
     xAxis: {
@@ -56,7 +48,7 @@ export const optionsRt = (data, endDate) => {
     },
     yAxis: {
       ...baseOptions.yAxis,
-      tickPositions: getTickPositions(minYAxis, maxYAxis, ZONES_RT),
+      tickPositions: getTickPositions(minYAxis, maxYAxis, highchartsZones),
     },
     series: [
       {
@@ -68,43 +60,47 @@ export const optionsRt = (data, endDate) => {
         data: data.map(d => [d.x, d.low, d.hi]),
       },
       {
-        name: 'Rt',
+        name: `${chartTitle}`,
         type: 'spline',
-        zones: ZONES_RT,
+        zones: highchartsZones,
         data,
       },
     ],
     tooltip: {
       pointFormatter: function () {
-        return `Rt ${formatDecimal(this.y)}`;
+        return `${chartTitle} ${formatDecimal(this.y)}`;
       },
     },
     annotations: [
-      currentValueAnnotation(x, y, y && formatDecimal(y)),
-      ...zoneAnnotations(endDate, minYAxis, maxYAxis, y, ZONES_RT),
+      currentValueAnnotation(x, y, y && formatDecimal(y), zones),
+      ...zoneAnnotations(endDate, minYAxis, maxYAxis, y, highchartsZones),
     ],
   };
 };
 
 export const optionsPositiveTests = (data, endDate) => {
+  const chartType = ChartType.POSITIVE_TESTS;
+  const zones = POSITIVE_TESTS;
+  const highchartsZones = getHighchartZones(zones);
+  const chartTitle = ChartTypeToTitle[chartType];
   const { x, y } = lastValidPoint(data);
-  const [minYAxis, maxYAxis] = roundAxisLimits(0, getMaxY(data));
+  const [minYAxis, maxYAxis] = getYAxisLimits(zones);
   return {
     ...baseOptions,
     annotations: [
-      currentValueAnnotation(x, y, y && formatPercent(y)),
-      ...zoneAnnotations(endDate, minYAxis, maxYAxis, y, ZONES_POSITIVE_RATE),
+      currentValueAnnotation(x, y, y && formatPercent(y), POSITIVE_TESTS),
+      ...zoneAnnotations(endDate, minYAxis, maxYAxis, y, highchartsZones),
     ],
     series: [
       {
-        name: 'Positive Tests',
+        name: chartTitle,
         data,
-        zones: ZONES_POSITIVE_RATE,
+        zones: highchartsZones,
       },
     ],
     tooltip: {
       pointFormatter: function () {
-        return `Positive Tests ${formatPercent(this.y)}`;
+        return `${chartTitle} ${formatPercent(this.y)}`;
       },
     },
     xAxis: {
@@ -118,23 +114,27 @@ export const optionsPositiveTests = (data, endDate) => {
           return formatPercent(this.value);
         },
       },
-      tickPositions: getTickPositions(minYAxis, maxYAxis, ZONES_POSITIVE_RATE),
+      tickPositions: getTickPositions(minYAxis, maxYAxis, highchartsZones),
     },
   };
 };
 
 export const optionsHospitalUsage = (data, endDate) => {
+  const chartType = ChartType.HOSPITAL_USAGE;
+  const zones = HOSPITAL_USAGE;
+  const highchartsZones = getHighchartZones(zones);
+  const chartTitle = ChartTypeToTitle[chartType];
   const { x, y } = lastValidPoint(data);
-  const [minYAxis, maxYAxis] = roundAxisLimits(0, getMaxY(data));
+  const [minYAxis, maxYAxis] = getYAxisLimits(zones);
   return {
     ...baseOptions,
     annotations: [
-      currentValueAnnotation(x, y, y && formatPercent(y)),
-      ...zoneAnnotations(endDate, minYAxis, maxYAxis, y, ZONES_HOSPITAL_USAGE),
+      currentValueAnnotation(x, y, y && formatPercent(y), zones),
+      ...zoneAnnotations(endDate, minYAxis, maxYAxis, y, highchartsZones),
     ],
     tooltip: {
       pointFormatter: function () {
-        return `Hospital Usage ${formatPercent(this.y)}`;
+        return `${chartTitle} ${formatPercent(this.y)}`;
       },
     },
     xAxis: {
@@ -148,13 +148,13 @@ export const optionsHospitalUsage = (data, endDate) => {
           return formatPercent(this.value);
         },
       },
-      tickPositions: getTickPositions(minYAxis, maxYAxis, ZONES_HOSPITAL_USAGE),
+      tickPositions: getTickPositions(minYAxis, maxYAxis, highchartsZones),
     },
     series: [
       {
         name: 'Hospital Usage',
         data,
-        zones: ZONES_HOSPITAL_USAGE,
+        zones: highchartsZones,
       },
     ],
   };

@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import Highcharts, { dateFormat } from 'highcharts';
 import palette from '../../assets/theme/palette';
+import { Zones } from '../../enums/zones';
 
 const isValidPoint = (d: Highcharts.Point): boolean =>
   _.isFinite(d.x) && _.isFinite(d.y);
@@ -23,37 +24,50 @@ export const parseDate = (date: Date): number => new Date(date).valueOf();
 
 export const titleCase = (str: string) => _.startCase(_.toLower(str));
 
+export const getYAxisLimits = (zone: Zones): number[] => [
+  zone.LOW.lowerLimit,
+  zone.HIGH.upperLimit,
+];
+
 export const currentValueAnnotation = (
   x: number,
   y: number,
   text: string,
-): Highcharts.AnnotationsOptions => ({
-  draggable: '',
-  labelOptions: {
-    backgroundColor: palette.white,
-  },
-  labels: [
-    {
-      align: 'left',
-      // @ts-ignore - Bug in Highchart types
-      verticalAlign: 'center',
-      x: 12,
-      shape: 'rect',
-      point: {
-        xAxis: 0,
-        yAxis: 0,
-        x,
-        y,
-      },
-      style: {
-        fontSize: '14px',
-        fontWeight: 'bold',
-      },
-      text,
-      className: 'ZoneAnnotation ZoneAnnotation--CurrentValue',
+  zones: Zones,
+): Highcharts.AnnotationsOptions => {
+  // Adjusts the position of the label if is too close to the x-axis
+  const lowHeight = zones.LOW.upperLimit - zones.LOW.lowerLimit;
+  const yOffset = y < zones.LOW.lowerLimit + 0.2 * lowHeight ? -5 : -15;
+  return {
+    draggable: '',
+    labelOptions: {
+      backgroundColor: palette.white,
     },
-  ],
-});
+    labels: [
+      {
+        align: 'left',
+        // @ts-ignore - Bug in Highchart types
+        verticalAlign: 'center',
+        // x and y are the offset of the label relative to the point (px)
+        x: 10,
+        y: yOffset,
+        shape: 'rect',
+        point: {
+          xAxis: 0,
+          yAxis: 0,
+          x,
+          y,
+        },
+        style: {
+          fontSize: '14px',
+          fontWeight: 'bold',
+        },
+        text,
+        className: `ZoneAnnotation ZoneAnnotation--CurrentValue`,
+      },
+    ],
+  };
+};
 
 export const getTickPositions = (
   minY: number,
@@ -65,13 +79,6 @@ export const getTickPositions = (
     .filter(val => !_.isUndefined(val))
     .concat([minY, maxY])
     .sort();
-
-export const getMaxY = (data: Highcharts.Point[]) => _.max(data.map(d => d.y));
-
-export const roundAxisLimits = (axisMin: number, axisMax: number) => [
-  axisMin,
-  _.ceil(1.2 * axisMax, 1),
-];
 
 export const baseOptions: Highcharts.Options = {
   title: {
