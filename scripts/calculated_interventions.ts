@@ -4,6 +4,10 @@ import fs from 'fs-extra';
 import path from 'path';
 import US_STATES from './../src/enums/us_states';
 import { fetchStateSummary, fetchProjections } from '../src/utils/model';
+// Using require since there are no TypeScript types. :-()
+const dnscache = require('dnscache');
+
+dnscache({ enable: true });
 
 async function getStateAndCountyDataFiles(stateAbbr: string) {
   const stateSummaryData = await fetchStateSummary(stateAbbr);
