@@ -178,8 +178,8 @@ export interface CANPredictionTimeseriesRow {
   ICUBedCapacity: Icubedcapacity;
   ventilatorsInUse: Ventilatorsinuse;
   ventilatorCapacity: Ventilatorcapacity;
-  Rt: Rt1;
-  RtCI90: Rtci901;
+  RtIndicator: Rtindicator;
+  RtIndicatorCI90: Rtindicatorci90;
   cumulativeDeaths: Cumulativedeaths1;
   cumulativeInfected: Cumulativeinfected;
   cumulativePositiveTests: Cumulativepositivetests1;
@@ -188,12 +188,12 @@ export interface CANPredictionTimeseriesRow {
 /**
  * Historical or Inferred Rt
  */
-export interface Rt1 {
+export interface Rtindicator {
   [k: string]: any;
 }
 /**
  * Rt standard deviation
  */
-export interface Rtci901 {
+export interface Rtindicatorci90 {
   [k: string]: any;
 }

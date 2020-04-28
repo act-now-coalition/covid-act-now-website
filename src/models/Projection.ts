@@ -50,7 +50,6 @@ export class Projection {
   readonly totalPopulation: number;
   readonly cumulativeDead: number;
   readonly dateOverwhelmed: Date | null;
-  readonly rt: number | null;
 
   private readonly intervention: string;
   private readonly dates: Date[];
@@ -77,10 +76,6 @@ export class Projection {
     this.intervention = parameters.intervention;
     this.isInferred = parameters.isInferred;
     this.totalPopulation = summaryWithTimeseries.actuals.population;
-    this.rt = null;
-    if (this.isInferred) {
-      this.rt = summaryWithTimeseries.projections.Rt;
-    }
 
     this.dates = timeseries.map(row => new Date(row.date));
 
@@ -145,13 +140,16 @@ export class Projection {
 
   // TODO(michael): We should probably average this out over a week since the data can be spiky.
   get currentTestPositiveRate(): number | null {
-    const i = this.indexOfLastValue(this.testPositiveRate);
-    return i && this.testPositiveRate[i];
+    return this.lastValue(this.testPositiveRate);
   }
 
   get currentIcuUtilization(): number | null {
-    const i = this.indexOfLastValue(this.icuUtilization);
-    return i && this.icuUtilization[i];
+    return this.lastValue(this.icuUtilization);
+  }
+
+  get rt(): number | null {
+    const lastRange = this.lastValue(this.rtRange);
+    return lastRange && lastRange.rt;
   }
 
   private getColumn(columnName: string): Column[] {
@@ -181,8 +179,8 @@ export class Projection {
     return timeseries.map(row => {
       // TODO(michael): Why are the types wrong? I think
       // json-schema-to-typescript may be broken. :-(
-      const rt = (row.Rt as any) as number;
-      const ci = (row.RtCI90 as any) as number;
+      const rt = (row.RtIndicator as any) as number;
+      const ci = (row.RtIndicatorCI90 as any) as number;
       if (rt) {
         return {
           rt: rt,
@@ -291,12 +289,17 @@ export class Projection {
     }
   }
 
-  private indexOfLastValue(data: Array<number | null>): number | null {
+  private indexOfLastValue<T>(data: Array<T | null>): number | null {
     for (let i = data.length - 1; i >= 0; i--) {
       if (data[i] !== null) {
         return i;
       }
     }
     return null;
+  }
+
+  private lastValue<T>(data: Array<T | null>): T | null {
+    const i = this.indexOfLastValue(data);
+    return i === null ? null : data[i]!;
   }
 }
