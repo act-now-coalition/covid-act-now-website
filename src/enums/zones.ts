@@ -71,7 +71,7 @@ export const SUMMARY_TEXT: Zones = {
 
 export const CASE_GROWTH_RATE: Zones = {
   [Level.LOW]: {
-    lowerLimit: 0.85,
+    lowerLimit: 0.5,
     upperLimit: 1.0,
     name: 'Low',
     color: COLOR_MAP.GREEN.BASE,
