@@ -110,8 +110,6 @@ export class Projections {
     let level;
     const levelList = [rt_level, hospitalizations_level, test_rate_level];
 
-    const highCount = levelList.filter((level: Level) => level === Level.HIGH)
-      .length;
     const mediumCount = levelList.filter(
       (level: Level) => level === Level.MEDIUM,
     ).length;
