@@ -96,7 +96,7 @@ export const POSITIVE_TESTS: Zones = {
     color: COLOR_MAP.GREEN.BASE,
   },
   [Level.MEDIUM]: {
-    upperLimit: 0.10,
+    upperLimit: 0.1,
     name: 'Medium',
     color: COLOR_MAP.ORANGE.BASE,
   },
