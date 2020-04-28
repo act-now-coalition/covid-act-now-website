@@ -1,8 +1,19 @@
 import { COLOR_MAP } from './interventions';
 import { fail } from 'assert';
 
-// TODO(@pnavarrc): Integrate with @sgoldblatt enums/status.ts
-interface ZoneInfo {
+export enum ChartType {
+  CASE_GROWTH_RATE = 'Infection rate',
+  POSITIVE_TESTS = 'Positive tests',
+  HOSPITAL_USAGE = 'COVID Patients in ICU',
+}
+
+export const ChartTypeToTitle = {
+  [ChartType.CASE_GROWTH_RATE]: 'Infection rate',
+  [ChartType.POSITIVE_TESTS]: 'Positive tests',
+  [ChartType.HOSPITAL_USAGE]: 'COVID Patients in ICU',
+};
+
+export interface LevelInfo {
   upperLimit: number;
   name: string;
   color: string;
@@ -12,36 +23,68 @@ export enum Level {
   LOW = 'LOW',
   MEDIUM = 'MEDIUM',
   HIGH = 'HIGH',
+  UNKNOWN = 'UNKNOWN',
 }
 
 export interface Zones {
-  [Level.LOW]: ZoneInfo;
-  [Level.MEDIUM]: ZoneInfo;
-  [Level.HIGH]: ZoneInfo;
+  [Level.LOW]: LevelInfo;
+  [Level.MEDIUM]: LevelInfo;
+  [Level.HIGH]: LevelInfo;
+  [Level.UNKNOWN]: LevelInfo;
 }
 
 export const COLOR_ZONE = {
   [Level.LOW]: COLOR_MAP.GREEN.BASE,
   [Level.MEDIUM]: COLOR_MAP.ORANGE.BASE,
   [Level.HIGH]: COLOR_MAP.RED.BASE,
+  [Level.UNKNOWN]: COLOR_MAP.GRAY.BASE,
+};
+
+// For the summary text
+export const SUMMARY_TEXT: Zones = {
+  [Level.LOW]: {
+    upperLimit: 0,
+    name: 'All criteria met for reopening',
+    color: COLOR_MAP.GREEN.BASE,
+  },
+  [Level.MEDIUM]: {
+    upperLimit: 0,
+    name: 'Some criteria met for reopening',
+    color: COLOR_MAP.ORANGE.BASE,
+  },
+  [Level.HIGH]: {
+    upperLimit: 0,
+    name: 'No criteria met for reopening',
+    color: COLOR_MAP.RED.BASE,
+  },
+  [Level.UNKNOWN]: {
+    upperLimit: 0,
+    name: 'Unknown',
+    color: COLOR_MAP.GRAY.BASE,
+  },
 };
 
 // Case Growth Rate
 export const CASE_GROWTH_RATE: Zones = {
   [Level.LOW]: {
     upperLimit: 1.05,
-    name: 'Shrinking',
+    name: 'Low',
     color: COLOR_MAP.GREEN.BASE,
   },
   [Level.MEDIUM]: {
     upperLimit: 1.4,
-    name: 'Stabilizing',
+    name: 'Medium',
     color: COLOR_MAP.ORANGE.BASE,
   },
   [Level.HIGH]: {
     upperLimit: Infinity,
-    name: 'Growing',
+    name: 'High',
     color: COLOR_MAP.RED.BASE,
+  },
+  [Level.UNKNOWN]: {
+    upperLimit: 0,
+    name: 'Unknown',
+    color: COLOR_MAP.GRAY.BASE,
   },
 };
 
@@ -62,33 +105,75 @@ export const POSITIVE_TESTS: Zones = {
     name: 'High',
     color: COLOR_MAP.RED.BASE,
   },
+  [Level.UNKNOWN]: {
+    upperLimit: 0,
+    name: 'Unknown',
+    color: COLOR_MAP.GRAY.BASE,
+  },
 };
 
 // Hospital Usage (upperLimit as %)
 export const HOSPITAL_USAGE: Zones = {
   [Level.LOW]: {
     upperLimit: 0.8125,
-    name: 'Sufficient',
+    name: 'Low',
     color: COLOR_MAP.GREEN.BASE,
   },
   [Level.MEDIUM]: {
     upperLimit: 0.95,
-    name: 'At risk',
+    name: 'Medium',
     color: COLOR_MAP.ORANGE.BASE,
   },
   [Level.HIGH]: {
     upperLimit: Infinity,
-    name: 'Overloaded',
+    name: 'High',
     color: COLOR_MAP.RED.BASE,
+  },
+  [Level.UNKNOWN]: {
+    upperLimit: 0,
+    name: 'Unknown',
+    color: COLOR_MAP.GRAY.BASE,
   },
 };
 
-export function determineZone(zones: Zones, value: number): Level {
+const CHART_ZONES = {
+  [ChartType.CASE_GROWTH_RATE]: CASE_GROWTH_RATE,
+  [ChartType.POSITIVE_TESTS]: POSITIVE_TESTS,
+  [ChartType.HOSPITAL_USAGE]: HOSPITAL_USAGE,
+};
+
+export function getChartColumnFromChartType(chartType: ChartType): string {
+  if (chartType === ChartType.CASE_GROWTH_RATE) {
+    return 'rtRange';
+  } else if (chartType === ChartType.HOSPITAL_USAGE) {
+    return 'icuUtilization';
+  } else if (chartType === ChartType.POSITIVE_TESTS) {
+    return 'testPositiveRate';
+  }
+  fail('Unsupported ChartType');
+}
+
+export function getLevelForChart(chartType: ChartType, value: number) {
+  const allZonesForChartType = CHART_ZONES[chartType];
+  return determineZone(allZonesForChartType, value);
+}
+
+export function getLevelInfoForChartType(
+  chartType: ChartType,
+  value: number | null,
+): LevelInfo {
+  const allZonesForChartType = CHART_ZONES[chartType];
+  const zone = determineZone(allZonesForChartType, value);
+  return allZonesForChartType[zone];
+}
+
+export function determineZone(zones: Zones, value: number | null): Level {
   // TODO(michael): Is there a typesafe way to enumerate enum values? :-/
+  if (value === null) return Level.UNKNOWN;
   for (const level of [Level.LOW, Level.MEDIUM, Level.HIGH]) {
     if (value <= zones[level].upperLimit) {
       return level;
     }
   }
-  fail('Failed to find zone for value: ' + value);
+  return Level.UNKNOWN;
 }

@@ -249,11 +249,16 @@ export class Projection {
     // patients. We've decided to show full ICU utilization (not just covid), so
     // we need to undo that assumption.
     // TODO(igor): Update this on the API side so we can undo this logic.
-    const icuUtilization = timeseries.map(
-      row =>
-        (row.ICUBedsInUse + USAGE_CAPACITY_MULTIPLIER * row.ICUBedCapacity) /
-        (row.ICUBedCapacity * CAPACITY_MULTIPLIER),
-    );
+    const icuUtilization = timeseries.map(row => {
+      if (row.ICUBedCapacity > 0) {
+        return (
+          (row.ICUBedsInUse + USAGE_CAPACITY_MULTIPLIER * row.ICUBedCapacity) /
+          (row.ICUBedCapacity * CAPACITY_MULTIPLIER)
+        );
+      } else {
+        return null;
+      }
+    });
 
     // Strip off the future projections.
     // TODO(michael): I'm worried about an off-by-one here. I _think_ we usually

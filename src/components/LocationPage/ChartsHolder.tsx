@@ -24,6 +24,8 @@ import {
   POSITIVE_TESTS,
   HOSPITAL_USAGE,
   determineZone,
+  ChartType,
+  ChartTypeToTitle,
 } from 'enums/zones';
 // TODO(michael): These format helpers should probably live in a more
 // general-purpose location, not just for charts.
@@ -47,7 +49,7 @@ const ChartsHolder = (props: {
   // to hide charts or show a no-data indicator of some kind.
   const rtRangeData =
     projection &&
-    projection.isInferred &&
+    projection.rt &&
     projection.getDataset('rtRange').data.map(d => ({
       x: d.x,
       y: d.y?.rt,
@@ -56,10 +58,22 @@ const ChartsHolder = (props: {
     }));
 
   const testPositiveData =
-    projection && projection.getDataset('testPositiveRate').data;
+    projection &&
+    projection.currentTestPositiveRate &&
+    projection.getDataset('testPositiveRate').data;
 
   const icuUtilizationData =
-    projection && projection.getDataset('icuUtilization').data;
+    projection &&
+    projection.currentIcuUtilization &&
+    projection.getDataset('icuUtilization').data;
+
+  const getChartSummarys = (projection: Projection) => {
+    return {
+      [ChartType.CASE_GROWTH_RATE]: projection.rt,
+      [ChartType.HOSPITAL_USAGE]: projection.currentIcuUtilization,
+      [ChartType.POSITIVE_TESTS]: projection.currentTestPositiveRate,
+    };
+  };
 
   return (
     <>
@@ -68,17 +82,17 @@ const ChartsHolder = (props: {
       ) : (
         <ChartContentWrapper>
           <LocationPageHeader projections={props.projections} />
-          <SummaryStats stats={[]} />
+          <SummaryStats stats={getChartSummarys(projection)} />
           <MainContentInner>
             <ChartHeader></ChartHeader>
-            <h1>Case growth</h1>
+            <h1>{ChartTypeToTitle[ChartType.CASE_GROWTH_RATE]}</h1>
             {caseGrowthStatusText(projection)}
             {rtRangeData && (
               <ZoneChartWrapper>
                 <Chart options={optionsRt(rtRangeData, endDate) as any} />
               </ZoneChartWrapper>
             )}
-            <h1>Positive tests</h1>
+            <h1>{ChartTypeToTitle[ChartType.POSITIVE_TESTS]}</h1>
             {positiveTestsStatusText(projection)}
             {testPositiveData && (
               <ZoneChartWrapper>
@@ -89,7 +103,7 @@ const ChartsHolder = (props: {
                 />
               </ZoneChartWrapper>
             )}
-            <h1>Hospital ICU occupancy</h1>
+            <h1>{ChartTypeToTitle[ChartType.HOSPITAL_USAGE]}</h1>
             {hospitalOccupancyStatusText(projection)}
             {icuUtilizationData && (
               <ZoneChartWrapper>
@@ -100,7 +114,7 @@ const ChartsHolder = (props: {
                 />
               </ZoneChartWrapper>
             )}
-            <h1>Future projections</h1>
+            <h1>Future Projections</h1>
             <span>
               {props.projections.countyName
                 ? `${props.projections.countyName}, ${props.projections.stateName}`
