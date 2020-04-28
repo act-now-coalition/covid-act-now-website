@@ -1,11 +1,11 @@
 import {
   baseOptions,
+  currentValueAnnotation,
   formatDecimal,
   formatPercent,
   getMaxY,
   getTickPositions,
-  last,
-  currentValueAnnotation,
+  lastValidPoint,
   parseDate,
   roundAxisLimits,
   titleCase,
@@ -37,7 +37,7 @@ const ZONES_POSITIVE_RATE = getHighchartZones(POSITIVE_TESTS);
 const ZONES_HOSPITAL_USAGE = getHighchartZones(HOSPITAL_USAGE);
 
 export const optionsRt = (data, endDate) => {
-  const { x, y } = last(data);
+  const { x, y } = lastValidPoint(data);
   // Ensure high-region is at least as large as medium region.
   const mediumRegionHeight =
     CASE_GROWTH_RATE.MEDIUM.upperLimit - CASE_GROWTH_RATE.LOW.upperLimit;
@@ -87,7 +87,7 @@ export const optionsRt = (data, endDate) => {
 };
 
 export const optionsPositiveTests = (data, endDate) => {
-  const { x, y } = last(data);
+  const { x, y } = lastValidPoint(data);
   const [minYAxis, maxYAxis] = roundAxisLimits(0, getMaxY(data));
   return {
     ...baseOptions,
@@ -124,7 +124,7 @@ export const optionsPositiveTests = (data, endDate) => {
 };
 
 export const optionsHospitalUsage = (data, endDate) => {
-  const { x, y } = last(data);
+  const { x, y } = lastValidPoint(data);
   const [minYAxis, maxYAxis] = roundAxisLimits(0, getMaxY(data));
   return {
     ...baseOptions,
