@@ -71,7 +71,6 @@ function LocationSummary({ projections }) {
 
 const LocationPageHeader = ({ projections }) => {
   const { isEmbed } = useEmbed();
-  console.log(projections.getAlarmLevel());
   const level = SUMMARY_TEXT[projections.getAlarmLevel()];
   const [fillColor, textColor] = projections.supportsInferred
     ? [level.color, palette.secondary.contrastText]

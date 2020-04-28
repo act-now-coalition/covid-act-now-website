@@ -19,7 +19,6 @@ async function getStateAndCountyDataFiles(stateAbbr: string) {
         inferenceCounties += countyProjections.supportsInferred ? 1 : 0;
         countyFipsData[fipsCode] = countyProjections.getAlarmLevelColor();
       } catch (ex) {
-        console.log(ex)
         console.log(`No color found for: ${stateAbbr} / ${fipsCode}`);
       }
     }),

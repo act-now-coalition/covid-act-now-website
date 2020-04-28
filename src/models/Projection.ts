@@ -159,14 +159,6 @@ export class Projection {
     }));
   }
 
-  getLatestColumnValue(columnName: string) {
-    // Returns the column valeu for the given date. If the given date is not
-    // available, return the one before the given date (since otherwise it's a prediction)
-    // note we could use find for this
-    let currentDateIndex = this.indexOfLastValue((this as any)[columnName]);
-    return currentDateIndex && (this as any)[columnName][currentDateIndex];
-  }
-
   getDataset(dataset: DatasetId, customLabel?: string): ProjectionDataset {
     return {
       label: customLabel ? customLabel : this.label,
@@ -299,11 +291,7 @@ export class Projection {
 
   private indexOfLastValue<T>(data: Array<T | null>): number | null {
     for (let i = data.length - 1; i >= 0; i--) {
-      if (
-        data[i] !== null &&
-        typeof data[i] === 'number' &&
-        !isNaN(data[i] as any)
-      ) {
+      if (data[i] !== null) {
         return i;
       }
     }
