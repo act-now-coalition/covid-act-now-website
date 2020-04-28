@@ -23,6 +23,28 @@ export const HeaderSubCopy = styled(Typography)`
   + p {
     margin-top: 1rem;
   }
+
+  ul {
+    list-style: none;
+    margin: 8px 0 24px 0;
+    padding: 0;
+  }
+
+  li {
+    align-items: start;
+    display: flex;
+    margin: 12px 0;
+  }
+
+  p {
+    padding: 0;
+    margin: 0;
+  }
+
+  svg {
+    margin: 0 4px;
+    flex-shrink: 0;
+  }
 `;
 
 export const StyledLocationPageHeaderWrapper = styled(Box)`

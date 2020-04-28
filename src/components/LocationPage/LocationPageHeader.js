@@ -1,9 +1,18 @@
 import React from 'react';
 import SignalStatus from 'components/SignalStatus/SignalStatus';
 import { COLOR_MAP } from 'enums/interventions';
-import { SUMMARY_TEXT } from 'enums/zones';
+import {
+  LEGEND_TEXT,
+  POSITIVE_TESTS,
+  CASE_GROWTH_RATE,
+  HOSPITAL_USAGE,
+  Level,
+} from 'enums/zones';
 import { useEmbed } from 'utils/hooks';
 import palette from 'assets/theme/palette';
+import CheckIcon from 'assets/images/checkIcon';
+import ExclamationIcon from 'assets/images/exclamationIcon';
+import QuestionIcon from 'assets/images/questionIcon';
 
 import {
   HeaderSubCopy,
@@ -33,48 +42,59 @@ function LocationPageHeading({ projections }) {
   return <span>{displayName}</span>;
 }
 
-function LocationSummary({ projections }) {
-  const predictionText = {
-    [COLOR_MAP.GREEN.BASE]: (
-      <>
-        Assuming current interventions remain in place, we expect the total
-        cases in your area to decrease. 14 days of decreasing cases is the first
-        step to reopening. Check back — projections update every 3 days with the
-        most recent data.
-      </>
-    ),
-    [COLOR_MAP.ORANGE.BASE]: (
-      <>
-        Assuming current interventions remain in place, cases in your area are
-        stable, and may even begin to decrease soon. Check back — projections
-        update every 3 days with the most recent data.
-      </>
-    ),
-    [COLOR_MAP.RED.BASE]: (
-      <>
-        Our projections show that cases in your area are increasing
-        exponentially. Stay home to help prevent an outbreak. Check back —
-        projections update every 3 days with the most recent data.
-      </>
-    ),
-    [COLOR_MAP.BLACK]: (
-      <>
-        Unfortunately, we don’t have enough data for your area to make a
-        prediction, or your area has not reported cases yet. Check back —
-        projections update every 3 days with the most recent data.
-      </>
-    ),
-  }[projections.getAlarmLevelColor()];
+function LocationSummary({ projections, textColor }) {
+  const ol = projections.getAlarmLevel();
+  const overalLevel = LEGEND_TEXT[ol];
 
-  return <HeaderSubCopy>{predictionText}</HeaderSubCopy>;
+  const {
+    rt_level,
+    hospitalizations_level,
+    test_rate_level,
+  } = projections.getLevels();
+
+  const levelList = [
+    { level: rt_level, levelInfo: CASE_GROWTH_RATE[rt_level] },
+    { level: test_rate_level, levelInfo: POSITIVE_TESTS[test_rate_level] },
+    {
+      level: hospitalizations_level,
+      levelInfo: HOSPITAL_USAGE[hospitalizations_level],
+    },
+  ];
+
+  return (
+    <>
+      <HeaderSubCopy textColor={textColor}>
+        {overalLevel.detail}
+        <ul>
+          {levelList.map(item => {
+            return (
+              <li>
+                {item.level === Level.LOW && (
+                  <CheckIcon textColor={textColor} />
+                )}
+                {(item.level === Level.MEDIUM || item.level === Level.HIGH) && (
+                  <ExclamationIcon textColor={textColor} />
+                )}
+                {item.level === Level.UNKNOWN && (
+                  <QuestionIcon textColor={textColor} />
+                )}
+                <p>{item.levelInfo.detail}</p>
+              </li>
+            );
+          })}
+        </ul>
+      </HeaderSubCopy>
+    </>
+  );
 }
 
 const LocationPageHeader = ({ projections }) => {
   const { isEmbed } = useEmbed();
-  const level = SUMMARY_TEXT[projections.getAlarmLevel()];
-  const [fillColor, textColor] = projections.supportsInferred
-    ? [level.color, palette.secondary.contrastText]
-    : [COLOR_MAP.GRAY.LIGHT, palette.text.primary];
+  const level = LEGEND_TEXT[projections.getAlarmLevel()];
+  const [fillColor, textColor] =
+    level !== Level.UNKNOWN
+      ? [level.color, palette.secondary.contrastText]
+      : [COLOR_MAP.GRAY.LIGHT, palette.text.primary];
 
   return (
     <StyledLocationPageHeaderWrapper bgColor={fillColor} condensed={isEmbed}>
@@ -83,8 +103,12 @@ const LocationPageHeader = ({ projections }) => {
           <HeaderTitle isEmbed={isEmbed} textColor={textColor}>
             <LocationPageHeading projections={projections} />
           </HeaderTitle>
-          {projections.supportsInferred && <SignalStatus levelInfo={level} />}
-          {!isEmbed ? <LocationSummary projections={projections} /> : ''}
+          <SignalStatus levelInfo={level} />
+          {!isEmbed ? (
+            <LocationSummary textColor={textColor} projections={projections} />
+          ) : (
+            ''
+          )}
           {projections.isCounty && !isEmbed && (
             <HeaderSubCopy textColor={textColor}>
               <strong>County data is currently in beta. </strong>
