@@ -67,12 +67,12 @@ export const POSITIVE_TESTS: Zones = {
 // Hospital Usage (upperLimit as %)
 export const HOSPITAL_USAGE: Zones = {
   [Level.LOW]: {
-    upperLimit: 0.25,
+    upperLimit: 0.8125,
     name: 'Sufficient',
     color: COLOR_MAP.GREEN.BASE,
   },
   [Level.MEDIUM]: {
-    upperLimit: 0.8,
+    upperLimit: 0.95,
     name: 'At risk',
     color: COLOR_MAP.ORANGE.BASE,
   },
