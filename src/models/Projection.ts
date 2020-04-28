@@ -297,11 +297,13 @@ export class Projection {
     }
   }
 
-  private indexOfLastValue(
-    data: Array<number | null | RtRange>,
-  ): number | null {
+  private indexOfLastValue<T>(data: Array<T | null>): number | null {
     for (let i = data.length - 1; i >= 0; i--) {
-      if (data[i] !== null && !isNaN(data[i] as number)) {
+      if (
+        data[i] !== null &&
+        typeof data[i] === 'number' &&
+        !isNaN(data[i] as any)
+      ) {
         return i;
       }
     }
