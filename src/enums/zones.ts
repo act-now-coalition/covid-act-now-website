@@ -4,13 +4,13 @@ import { fail } from 'assert';
 export enum ChartType {
   CASE_GROWTH_RATE = 'Infection rate',
   POSITIVE_TESTS = 'Positive tests',
-  HOSPITAL_USAGE = 'COVID Patients in ICU',
+  HOSPITAL_USAGE = 'Hospital ICU occupancy',
 }
 
 export const ChartTypeToTitle = {
   [ChartType.CASE_GROWTH_RATE]: 'Infection rate',
   [ChartType.POSITIVE_TESTS]: 'Positive tests',
-  [ChartType.HOSPITAL_USAGE]: 'COVID Patients in ICU',
+  [ChartType.HOSPITAL_USAGE]: 'Hospital ICU occupancy',
 };
 
 export interface LevelInfo {
@@ -67,12 +67,12 @@ export const SUMMARY_TEXT: Zones = {
 // Case Growth Rate
 export const CASE_GROWTH_RATE: Zones = {
   [Level.LOW]: {
-    upperLimit: 1.05,
+    upperLimit: 1.0,
     name: 'Low',
     color: COLOR_MAP.GREEN.BASE,
   },
   [Level.MEDIUM]: {
-    upperLimit: 1.4,
+    upperLimit: 1.2,
     name: 'Medium',
     color: COLOR_MAP.ORANGE.BASE,
   },
@@ -91,12 +91,12 @@ export const CASE_GROWTH_RATE: Zones = {
 // Positive Tests (upperLimit as %)
 export const POSITIVE_TESTS: Zones = {
   [Level.LOW]: {
-    upperLimit: 0.06,
+    upperLimit: 0.03,
     name: 'Low',
     color: COLOR_MAP.GREEN.BASE,
   },
   [Level.MEDIUM]: {
-    upperLimit: 0.12,
+    upperLimit: 0.10,
     name: 'Medium',
     color: COLOR_MAP.ORANGE.BASE,
   },
@@ -115,12 +115,12 @@ export const POSITIVE_TESTS: Zones = {
 // Hospital Usage (upperLimit as %)
 export const HOSPITAL_USAGE: Zones = {
   [Level.LOW]: {
-    upperLimit: 0.8125,
+    upperLimit: 0.88,
     name: 'Low',
     color: COLOR_MAP.GREEN.BASE,
   },
   [Level.MEDIUM]: {
-    upperLimit: 0.95,
+    upperLimit: 1.0,
     name: 'Medium',
     color: COLOR_MAP.ORANGE.BASE,
   },
