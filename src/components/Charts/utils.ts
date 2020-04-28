@@ -2,7 +2,13 @@ import _ from 'lodash';
 import Highcharts, { dateFormat } from 'highcharts';
 import palette from '../../assets/theme/palette';
 
-export const last = (list: any[]) => list[list.length - 1];
+const isValidPoint = (d: Highcharts.Point): boolean =>
+  _.isFinite(d.x) && _.isFinite(d.y);
+
+const last = (list: any[]) => list[list.length - 1];
+
+export const lastValidPoint = (data: Highcharts.Point[]) =>
+  last(data.filter(isValidPoint));
 
 export const formatDecimal = (num: number, places = 2): string =>
   num.toFixed(places);
