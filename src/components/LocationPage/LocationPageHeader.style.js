@@ -9,7 +9,7 @@ export const HeaderTitle = styled(Typography)`
   font-size: ${props => (props.isEmbed ? '1.8rem' : '2.2rem')};
   font-weight: 600;
   line-height: ${props => (props.isEmbed ? '1.5rem' : '2.2rem')};
-  padding: 0 1rem 1.4rem 0;
+  padding: 0 1rem 0 0;
   a {
     color: ${props => props.textColor || palette.black};
   }
@@ -26,7 +26,7 @@ export const HeaderSubCopy = styled(Typography)`
 
   ul {
     list-style: none;
-    margin: 8px 0 24px 0;
+    margin: 8px 0 0;
     padding: 0;
   }
 
@@ -34,6 +34,10 @@ export const HeaderSubCopy = styled(Typography)`
     align-items: start;
     display: flex;
     margin: 12px 0;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
   p {
@@ -42,7 +46,7 @@ export const HeaderSubCopy = styled(Typography)`
   }
 
   svg {
-    margin: 0 1rem;
+    margin: 0 1rem 0 0;
     flex-shrink: 0;
   }
 `;
