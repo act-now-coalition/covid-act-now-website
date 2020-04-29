@@ -1,5 +1,4 @@
 import React from 'react';
-import SignalStatus from 'components/SignalStatus/SignalStatus';
 import { COLOR_MAP } from 'enums/interventions';
 import {
   LEGEND_TEXT,
@@ -66,7 +65,7 @@ function LocationSummary({ projections, textColor }) {
       <HeaderSubCopy textColor={textColor}>
         {locationLevelInfo.detail}
         <ul>
-          {locationLevel != Level.UNKNOWN &&
+          {locationLevel !== Level.UNKNOWN &&
             levelList.map(item => {
               return (
                 <li>
@@ -93,10 +92,10 @@ function LocationSummary({ projections, textColor }) {
 const LocationPageHeader = ({ projections }) => {
   const { isEmbed } = useEmbed();
   const alarmLevel = projections.getAlarmLevel();
-  const level = LEGEND_TEXT[alarmLevel];
+  const levelInfo = LEGEND_TEXT[alarmLevel];
   const [fillColor, textColor] =
     alarmLevel !== Level.UNKNOWN
-      ? [level.color, palette.secondary.contrastText]
+      ? [levelInfo.color, palette.secondary.contrastText]
       : [COLOR_MAP.GRAY.LIGHT, palette.text.primary];
   return (
     <StyledLocationPageHeaderWrapper bgColor={fillColor} condensed={isEmbed}>
@@ -105,7 +104,6 @@ const LocationPageHeader = ({ projections }) => {
           <HeaderTitle isEmbed={isEmbed} textColor={textColor}>
             <LocationPageHeading projections={projections} />
           </HeaderTitle>
-          <SignalStatus levelInfo={level} />
           {!isEmbed ? (
             <LocationSummary textColor={textColor} projections={projections} />
           ) : (

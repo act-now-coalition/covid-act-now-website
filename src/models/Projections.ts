@@ -148,16 +148,16 @@ export class Projections {
     if (lowCount === 3) {
       // if all the factors are low, level is low
       level = Level.LOW;
-    } else if (unKnownCount === 3 || (mediumCount === 0 && highcount === 0)) {
+    } else if (unKnownCount + lowCount === 3) {
       // if all the levels are unkown, status is unkwonw
       // no reds and no yellows, but at least one unknown
       level = Level.UNKNOWN;
-    } else if (mediumCount >= 2 || lowCount >= 1) {
-      // otherwise level is medium
-      level = Level.MEDIUM;
-    } else {
-      // if none of the levels are low, high level
+    } else if (highcount >= 2 || (mediumCount === 2 && highcount === 1)) {
+      // if there are more than two highs it's high or two mediums one red
       level = Level.HIGH;
+    } else {
+      // if there is one red + two greens, two mediums + one green,  or three mediums
+      level = Level.MEDIUM;
     }
     return level;
   }

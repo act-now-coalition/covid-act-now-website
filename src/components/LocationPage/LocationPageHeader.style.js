@@ -19,7 +19,7 @@ export const HeaderSubCopy = styled(Typography)`
   color: ${props => props.textColor || 'white'};
   font-size: 1rem;
   line-height: 1.5rem;
-  padding: 1.5rem 0 0.2rem;
+  padding: 0 0 0.2rem;
   + p {
     margin-top: 1rem;
   }
@@ -42,7 +42,7 @@ export const HeaderSubCopy = styled(Typography)`
   }
 
   svg {
-    margin: 0 4px;
+    margin: 0 1rem;
     flex-shrink: 0;
   }
 `;

@@ -187,7 +187,7 @@ function hospitalOccupancyStatusText(projection: Projection) {
   const mediumText = ` hospitals’ ICUs are not at capacity, but a surge in COVID cases could quickly push the healthcare system to a breaking point`;
   const highText = `hospitals’ ICUs are at capacity`;
 
-  return `Available data indicate that ${location} ${levelText(
+  return `Available data indicates that ${location} ${levelText(
     level,
     lowText,
     mediumText,
