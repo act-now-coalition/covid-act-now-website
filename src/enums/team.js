@@ -200,6 +200,11 @@ export default {
       link: 'https://www.linkedin.com/in/mishachellam/',
     },
     {
+      name: 'Pablo Navarro Castillo',
+      title: 'Software Engineer at Alloy.ai',
+      link: 'https://www.linkedin.com/in/pnavarrc/',
+    },
+    {
       name: 'Rachel RoseFigura',
       title: 'Software Engineer at Uber',
       link: 'https://www.linkedin.com/in/rachelrosefigura/',
