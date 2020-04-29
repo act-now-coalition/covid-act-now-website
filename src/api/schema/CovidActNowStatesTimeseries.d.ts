@@ -82,6 +82,10 @@ export type Capacity = number;
  */
 export type Currentusage = number;
 /**
+ * Typical used capacity rate for resource. This excludes any COVID usage.
+ */
+export type Typicalusagerate = number;
+/**
  * The state name
  */
 export type Statename = string;
@@ -114,6 +118,14 @@ export type Ventilatorsinuse = number;
  * Total ventilator capacity.
  */
 export type Ventilatorcapacity = number;
+/**
+ * Historical or Inferred Rt
+ */
+export type Rtindicator = number;
+/**
+ * Rt standard deviation
+ */
+export type Rtindicatorci90 = number;
 /**
  * Number of cumulative deaths
  */
@@ -169,6 +181,7 @@ export interface _Actuals {
 export interface _ResourceUtilization {
   capacity: Capacity;
   currentUsage: Currentusage;
+  typicalUsageRate: Typicalusagerate;
 }
 export interface CANPredictionTimeseriesRow {
   date: Date;
@@ -184,16 +197,4 @@ export interface CANPredictionTimeseriesRow {
   cumulativeInfected: Cumulativeinfected;
   cumulativePositiveTests: Cumulativepositivetests1;
   cumulativeNegativeTests: Cumulativenegativetests1;
-}
-/**
- * Historical or Inferred Rt
- */
-export interface Rtindicator {
-  [k: string]: any;
-}
-/**
- * Rt standard deviation
- */
-export interface Rtindicatorci90 {
-  [k: string]: any;
 }

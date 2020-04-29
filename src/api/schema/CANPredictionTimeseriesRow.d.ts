@@ -30,6 +30,14 @@ export type Ventilatorsinuse = number;
  */
 export type Ventilatorcapacity = number;
 /**
+ * Historical or Inferred Rt
+ */
+export type Rtindicator = number;
+/**
+ * Rt standard deviation
+ */
+export type Rtindicatorci90 = number;
+/**
  * Number of cumulative deaths
  */
 export type Cumulativedeaths = number;
@@ -60,16 +68,4 @@ export interface CANPredictionTimeseriesRow {
   cumulativeInfected: Cumulativeinfected;
   cumulativePositiveTests: Cumulativepositivetests;
   cumulativeNegativeTests: Cumulativenegativetests;
-}
-/**
- * Historical or Inferred Rt
- */
-export interface Rtindicator {
-  [k: string]: any;
-}
-/**
- * Rt standard deviation
- */
-export interface Rtindicatorci90 {
-  [k: string]: any;
 }
