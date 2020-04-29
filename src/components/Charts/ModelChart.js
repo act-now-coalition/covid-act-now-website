@@ -312,16 +312,16 @@ const ModelChart = ({
       <Wrapper projections={projections} isInferred={projection.isInferred}>
         <Chart options={options} />
         <Outcomes
-            title="Predicted Outcomes"
-            projections={[projections.baseline, projections.primary]}
-            colors={[
-              projections.getSeriesColorForLimitedAction(),
-              projections.getSeriesColorForPrimary(),
-            ]}
-            asterisk={['', '*', '*', '**']}
-            timeHorizon={120}
-            currentIntervention={projections.stateIntervention}
-          />
+          title="Predicted Outcomes"
+          projections={[projections.baseline, projections.primary]}
+          colors={[
+            projections.getSeriesColorForLimitedAction(),
+            projections.getSeriesColorForPrimary(),
+          ]}
+          asterisk={['', '*', '*', '**']}
+          timeHorizon={120}
+          currentIntervention={projections.stateIntervention}
+        />
         <DisclaimerWrapper>
           <Disclaimer>
             <DisclaimerHeader>
