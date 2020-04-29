@@ -3,6 +3,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider, StylesProvider } from '@material-ui/core/styles';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
+import AllStates from 'screens/AllStates/AllStates';
 import ModelPage from 'screens/ModelPage/ModelPage';
 import HomePage from 'screens/HomePage/HomePage';
 import About from 'screens/About/About';
@@ -40,6 +41,9 @@ export default function App() {
               path="/state/:stateId/county/:countyId"
               component={ModelPage}
             />
+
+            {/** Debug endpoint that shows all the state charts. */}
+            <Route path="/all" component={AllStates} />
 
             <Route path="/about" component={About} />
             <Route path="/resources" component={Resources} />

@@ -43,27 +43,9 @@ const ChartsHolder = (props: {
   // TODO(michael): This should probably be some function of today's date?
   const endDate = new Date('2020-05-15');
 
-  // TODO(michael): We need to handle absence of data better and decide whether
-  // to hide charts or show a no-data indicator of some kind.
-  const rtRangeData =
-    projection &&
-    projection.rt &&
-    projection.getDataset('rtRange').data.map(d => ({
-      x: d.x,
-      y: d.y?.rt,
-      low: d.y?.low,
-      hi: d.y?.high,
-    }));
-
-  const testPositiveData =
-    projection &&
-    projection.currentTestPositiveRate &&
-    projection.getDataset('testPositiveRate').data;
-
-  const icuUtilizationData =
-    projection &&
-    projection.currentIcuUtilization &&
-    projection.getDataset('icuUtilization').data;
+  const { rtRangeData, testPositiveData, icuUtilizationData } = getChartData(
+    projection,
+  );
 
   const getChartSummarys = (projection: Projection) => {
     return {
@@ -143,6 +125,33 @@ const ChartsHolder = (props: {
     </>
   );
 };
+
+// Exported for use by AllStates.js.
+export function getChartData(
+  projection: Projection,
+): { rtRangeData: any; testPositiveData: any; icuUtilizationData: any } {
+  const rtRangeData =
+    projection &&
+    projection.rt &&
+    projection.getDataset('rtRange').data.map(d => ({
+      x: d.x,
+      y: d.y?.rt,
+      low: d.y?.low,
+      hi: d.y?.high,
+    }));
+
+  const testPositiveData =
+    projection &&
+    projection.currentTestPositiveRate &&
+    projection.getDataset('testPositiveRate').data;
+
+  const icuUtilizationData =
+    projection &&
+    projection.currentIcuUtilization &&
+    projection.getDataset('icuUtilization').data;
+
+  return { rtRangeData, testPositiveData, icuUtilizationData };
+}
 
 function caseGrowthStatusText(projection: Projection) {
   const rt = projection.rt!;
