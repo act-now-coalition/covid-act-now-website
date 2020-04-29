@@ -43,8 +43,8 @@ function LocationPageHeading({ projections }) {
 }
 
 function LocationSummary({ projections, textColor }) {
-  const ol = projections.getAlarmLevel();
-  const overalLevel = LEGEND_TEXT[ol];
+  const locationLevel = projections.getAlarmLevel();
+  const locationLevelInfo = LEGEND_TEXT[locationLevel];
 
   const {
     rt_level,
@@ -64,9 +64,9 @@ function LocationSummary({ projections, textColor }) {
   return (
     <>
       <HeaderSubCopy textColor={textColor}>
-        {overalLevel.detail}
+        {locationLevelInfo.detail}
         <ul>
-          {levelList.map(item => {
+          {locationLevel != Level.UNKNOWN && levelList.map(item => {
             return (
               <li>
                 {item.level === Level.LOW && (
@@ -90,12 +90,11 @@ function LocationSummary({ projections, textColor }) {
 
 const LocationPageHeader = ({ projections }) => {
   const { isEmbed } = useEmbed();
-  const level = LEGEND_TEXT[projections.getAlarmLevel()];
-  const [fillColor, textColor] =
-    level !== Level.UNKNOWN
+  const alarmLevel = projections.getAlarmLevel()
+  const level = LEGEND_TEXT[alarmLevel];
+  const [fillColor, textColor] = alarmLevel !== Level.UNKNOWN
       ? [level.color, palette.secondary.contrastText]
       : [COLOR_MAP.GRAY.LIGHT, palette.text.primary];
-
   return (
     <StyledLocationPageHeaderWrapper bgColor={fillColor} condensed={isEmbed}>
       <StyledLocationPageHeaderInner condensed={isEmbed}>
