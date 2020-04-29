@@ -55,6 +55,12 @@ export const StatNameText = styled(Typography)`
   }
 `;
 
+export const StatDetailText = styled(Typography)`
+  font-size: 0.875rem;
+  color: rgba(0, 0, 0, 0.7);
+  margin-top: 0.25rem;
+`;
+
 export const StatValueText = styled(Typography)`
   font-family: 'Source Code Pro', Menlo, Monaco, Consolas, 'Courier New',
     monospace;

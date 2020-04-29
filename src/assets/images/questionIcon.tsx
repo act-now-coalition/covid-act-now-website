@@ -2,31 +2,12 @@ import React from 'react';
 
 const QuestionIcon = (props: { textColor: string }) => {
   return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M9.09009 8.99999C9.57552 7.62004 10.9855 6.7914 12.4273 7.0387C13.8691 7.28601 14.9223 8.53714 14.9201 9.99999C14.9201 12 11.9201 13 11.9201 13"
-        stroke={props.textColor}
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-      <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
-        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-        stroke={props.textColor}
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-      <circle cx="12" cy="17" r="1" fill={props.textColor} />
+    <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M6.66667 13.8333C10.3486 13.8333 13.3333 10.8486 13.3333 7.16667C13.3333 3.48477 10.3486 0.5 6.66667 0.5C2.98477 0.5 0 3.48477 0 7.16667C0 10.8486 2.98477 13.8333 6.66667 13.8333Z" fill={props.textColor}/>
+      <path d="M4.75 5.3365C5.07362 4.41653 6.01359 3.86411 6.97478 4.02898C7.93598 4.19385 8.63812 5.02794 8.63667 6.00317C8.63667 7.3365 6.63667 8.00317 6.63667 8.00317" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <ellipse cx="6.5" cy="11.0032" rx="1" ry="1" fill="white"/>
     </svg>
+
   );
 };
 

@@ -8,6 +8,7 @@ import {
   SummaryStatsWrapper,
   SummaryStatWrapper,
   StatNameText,
+  StatDetailText,
   StatValueText,
 } from './SummaryStats.style';
 
@@ -18,6 +19,8 @@ import { isNull } from 'util';
 
 const SummaryStat = (props: { chartType: ChartType; value: number }) => {
   const levelInfo = getLevelInfoForChartType(props.chartType, props.value);
+
+
   const formatValueForChart = (
     chartType: ChartType,
     value: number | null,
@@ -37,6 +40,7 @@ const SummaryStat = (props: { chartType: ChartType; value: number }) => {
   return (
     <SummaryStatWrapper>
       <StatNameText>{ChartTypeToTitle[props.chartType]}</StatNameText>
+      <StatDetailText>{levelInfo.detail}</StatDetailText>
       <StatValueText>
         {formatValueForChart(props.chartType, props.value)}
       </StatValueText>
