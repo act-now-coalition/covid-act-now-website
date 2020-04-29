@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { COLORS } from 'enums';
 
 export const OutcomesWrapper = styled.div`
-  overflow: scroll;
   margin-bottom: 2em;
+  overflow: auto;
   text-align: left;
 
   h2 {
