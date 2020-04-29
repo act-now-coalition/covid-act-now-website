@@ -265,7 +265,7 @@ export class Projection {
     // we need to undo that assumption.
     // TODO(igor): Update this on the API side so we can undo this logic.
     const icuUtilization = timeseries.map(row => {
-      if (row.ICUBedCapacity > 0) {
+      if (row.ICUBedCapacity > 0 && row.ICUBedsInUse > 0) {
         return (
           (row.ICUBedsInUse + USAGE_CAPACITY_MULTIPLIER * row.ICUBedCapacity) /
           (row.ICUBedCapacity * CAPACITY_MULTIPLIER)
