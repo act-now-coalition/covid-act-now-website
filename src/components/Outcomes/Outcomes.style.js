@@ -3,6 +3,7 @@ import { COLORS } from 'enums';
 
 export const OutcomesWrapper = styled.div`
   overflow: scroll;
+  margin-bottom: 2em;
   text-align: left;
 
   h2 {
