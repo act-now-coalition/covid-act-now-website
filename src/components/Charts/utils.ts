@@ -59,19 +59,28 @@ export const getTickPositions = (
   minY: number,
   maxY: number,
   zones: Zone[],
-): (number | undefined)[] =>
-  zones
+): (number | undefined)[] => {
+  const zoneTicks = zones
     .map(zone => zone.value)
-    .filter(val => !_.isUndefined(val))
-    .concat([minY, maxY])
-    .sort();
+    .filter(val => !_.isUndefined(val));
+  const maxZone = _.max(zoneTicks) || maxY;
+  const maxYAxis = maxY < maxZone ? 1.5 * maxZone : maxY;
+  return [minY, maxYAxis, ...zoneTicks].sort();
+};
 
-export const getMaxY = (data: Highcharts.Point[]) => _.max(data.map(d => d.y));
+export const getYAxisLimits = (minY: number, maxY: number, zones: Zone[]) => {
+  const tickPositions = getTickPositions(minY, maxY, zones);
+  const minTickPosition = _.min(tickPositions) || minY;
+  const maxTickPosition = _.max(tickPositions) || maxY;
+  return roundAxisLimits(minTickPosition, maxTickPosition);
+};
 
 export const roundAxisLimits = (axisMin: number, axisMax: number) => [
   axisMin,
   _.ceil(1.2 * axisMax, 1),
 ];
+
+export const getMaxY = (data: Highcharts.Point[]) => _.max(data.map(d => d.y));
 
 export const baseOptions: Highcharts.Options = {
   title: {
