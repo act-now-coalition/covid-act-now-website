@@ -94,13 +94,7 @@ export class Projection {
     );
     this.rtRange = this.calcRtRange(timeseries);
     this.testPositiveRate = this.calcTestPositiveRate();
-    this.icuUtilization = this.calcIcuUtilization(
-      timeseries,
-      actuals.ICUBeds && actuals.ICUBeds.typicalUsageRate
-        ? actuals.ICUBeds.typicalUsageRate
-        : ICU_CAPACITY_RATE_DEFAULT,
-      lastUpdated,
-    );
+    this.icuUtilization = this.calcIcuUtilization(timeseries, lastUpdated);
 
     this.fixZeros(this.hospitalizations);
     this.fixZeros(this.cumulativeDeaths);
@@ -250,13 +244,8 @@ export class Projection {
 
   private calcIcuUtilization(
     timeseries: Timeseries,
-    typicalUsageRate: number,
     lastUpdated: Date,
   ): Array<number | null> {
-    const AVERAGE_OCCUPANCY = typicalUsageRate;
-    const AVERAGE_AVAILABILITY = 1 - AVERAGE_OCCUPANCY;
-    const CAPACITY_MULTIPLIER = 1 / AVERAGE_AVAILABILITY;
-    const USAGE_CAPACITY_MULTIPLIER = AVERAGE_OCCUPANCY / AVERAGE_AVAILABILITY;
     // The API gives us the beds in use *by covid*, and the total capacity *for
     // covid*, using an assumption that ICUs are usually 75% full with non-covid
     // patients. We've decided to show full ICU utilization (not just covid), so
@@ -264,10 +253,7 @@ export class Projection {
     // TODO(igor): Update this on the API side so we can undo this logic.
     const icuUtilization = timeseries.map(row => {
       if (row.ICUBedCapacity > 0) {
-        return (
-          (row.ICUBedsInUse + USAGE_CAPACITY_MULTIPLIER * row.ICUBedCapacity) /
-          (row.ICUBedCapacity * CAPACITY_MULTIPLIER)
-        );
+        return row.ICUBedsInUse / row.ICUBedCapacity;
       } else {
         return null;
       }
