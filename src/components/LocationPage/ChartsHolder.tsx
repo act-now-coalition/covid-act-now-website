@@ -31,11 +31,7 @@ import {
 } from 'enums/zones';
 // TODO(michael): These format helpers should probably live in a more
 // general-purpose location, not just for charts.
-import {
-  formatDecimal,
-  formatPercent,
-  formatInteger,
-} from 'components/Charts/utils';
+import { formatDecimal, formatPercent } from 'components/Charts/utils';
 
 const ChartsHolder = (props: {
   projections: Projections;
@@ -141,8 +137,6 @@ const ChartsHolder = (props: {
               condensed={false}
               forCompareModels={false}
             />
-            {/* TODO(sgoldblatt): Inferred Chart Module looping goes here! */}
-            {/* TODO(sgoldblatt): Disclaimer should go here! */}
           </MainContentInner>
         </ChartContentWrapper>
       )}
@@ -156,22 +150,17 @@ function caseGrowthStatusText(projection: Projection) {
     return 'No case load data is available.';
   }
   const level = determineZone(CASE_GROWTH_RATE, rt);
-  const decreasingStabilizingGrowing = levelText(
+  const additionalPeople = formatDecimal(rt);
+  const infectionRate = `On average, each person in ${projection.locationName} with COVID is infecting ${additionalPeople} other people.`;
+
+  const epidemiologyReasoning = levelText(
     level,
-    'decreasing',
-    'stabilizing',
-    'growing',
+    `Because this number has been driven below 1.0 — an all-important epidemiology threshold — the total number of cases in ${projection.locationName} is shrinking.`,
+    `Because this number is above (but not that far above) 1.0 it means that COVID is growing, and growing exponentially, but not at runaway speed.`,
+    `As such, the total number of cases in ${projection.locationName} is growing exponentially.`,
   );
 
-  const additionalPeople = formatDecimal(rt);
-
-  const d = projection.weeklyNewCasesDelta;
-  const weeklyDelta =
-    d >= 0 ? formatInteger(d) + ' more' : formatInteger(-d) + ' fewer';
-  const weeklyDeltaText =
-    d === 0 ? '' : `There are ${weeklyDelta} new cases this week than last.`;
-
-  return `Case load is ${decreasingStabilizingGrowing}, because each person with COVID infects ${additionalPeople} additional people. ${weeklyDeltaText}`;
+  return `${infectionRate} ${epidemiologyReasoning}`;
 }
 
 function positiveTestsStatusText(projection: Projection) {
@@ -180,18 +169,23 @@ function positiveTestsStatusText(projection: Projection) {
     return 'No testing data is available.';
   }
   const level = determineZone(POSITIVE_TESTS, testPositiveRate);
-  const lowSizableLarge = levelText(level, 'low', 'sizable', 'large');
+  const lowSizableLarge = levelText(
+    level,
+    'low',
+    'relatively sizable',
+    'relatively large',
+  );
   const percentage = formatPercent(testPositiveRate);
 
   const location = projection.locationName;
   const testingBroadlyText = levelText(
     level,
-    `${location} is testing broadly`,
-    `testing in ${location} is not sufficiently broad`,
-    `testing is not widely available in ${location}`,
+    `relatively widespread, aggressive testing in ${location}`,
+    `that testing in ${location} is not widespread`,
+    `that testing in ${location} is relatively limited`,
   );
 
-  return `A ${lowSizableLarge} percentage (${percentage}) of people tested for COVID test positive, meaning that ${testingBroadlyText}.`;
+  return `A ${lowSizableLarge} percentage (${percentage}) of COVID tests were positive, which indicates ${testingBroadlyText}.`;
 }
 
 function hospitalOccupancyStatusText(projection: Projection) {
@@ -202,10 +196,16 @@ function hospitalOccupancyStatusText(projection: Projection) {
   const level = determineZone(HOSPITAL_USAGE, icuUtilization);
 
   const location = projection.locationName;
-  const lowText = `Hospitals in ${location} have sufficient capacity to support COVID patients if cases were to spike.`;
-  const mediumText = `Hospitals in ${location} are not overloaded, but a spike in cases could strain the hospital system.`;
-  const highText = `Hospitals in ${location} are overloaded.`;
-  return levelText(level, lowText, mediumText, highText);
+  const lowText = `hospitals have sufficient ICU capacity to absorb a surge of COVID hospitalizations`;
+  const mediumText = ` hospitals’ ICUs are not at capacity, but a surge in COVID cases could quickly push the healthcare system to a breaking point`;
+  const highText = `hospitals’ ICUs are at capacity`;
+
+  return `Available data indicates that ${location} ${levelText(
+    level,
+    lowText,
+    mediumText,
+    highText,
+  )}.`;
 }
 
 /**
