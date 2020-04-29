@@ -46,24 +46,20 @@ function ModelPage() {
 
   const stateName = projections.stateName;
   const intervention = projections.stateIntervention;
-  let actionTitle;
-  let actionDescription;
-  if (intervention === INTERVENTIONS.SHELTER_IN_PLACE) {
-    actionTitle = `${stateName}: Keep staying at home to protect against the COVID-19 outbreak.`;
-    actionDescription = `Avoiding hospital overload depends heavily on your cooperation.`;
-  } else {
-    actionTitle = `${stateName}: Urge your public officials to act now against the COVID-19 outbreak!`;
-    actionDescription = `To prevent hospital overload, our projections indicate a Stay at home order must be implemented soon.`;
-  }
+  const actionTitle =
+    'Real-time models and metrics to understand where we stand against COVID.';
+  const actionDescription = `Real-time models and metrics to understand where we stand against COVID. 50 states. 2,100+ counties. Click the map to dive in.`;
 
   return (
     <div>
       <AppMetaTags
         canonicalUrl={`/us/${stateId.toLowerCase()}`}
-        pageTitle={`${stateName} Forecast`}
-        pageDescription={actionTitle}
+        pageTitle={actionTitle}
+        pageDescription={actionDescription}
         shareTitle={actionTitle}
-        shareDescription={actionDescription}
+        shareDescription={
+          '50 states. 2,100+ counties. Click the map to dive in. '
+        }
       />
       <div>
         <SearchHeader
