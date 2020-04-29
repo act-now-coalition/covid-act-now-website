@@ -128,7 +128,6 @@ const ChartsHolder = (props: {
             )}
             <ChartHeader>Future projections</ChartHeader>
             <ChartLocationName>{projection.locationName}</ChartLocationName>
-            <ChartDescription>Chart Description TK</ChartDescription>
             <ModelChart
               projections={props.projections}
               stateId={props.stateId}
