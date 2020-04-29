@@ -91,9 +91,18 @@ export class Projections {
       : this.currentInterventionModel;
   }
 
-  getAlarmLevel() {
+  getLevels(): {
+    rt_level: Level;
+    hospitalizations_level: Level;
+    test_rate_level: Level;
+  } {
     const projection = this.primary;
-    if (!projection) return Level.UNKNOWN;
+    if (!projection)
+      return {
+        rt_level: Level.UNKNOWN,
+        hospitalizations_level: Level.UNKNOWN,
+        test_rate_level: Level.UNKNOWN,
+      };
 
     const rt_level = getLevelForChart(
       ChartType.CASE_GROWTH_RATE,
@@ -107,9 +116,26 @@ export class Projections {
       ChartType.POSITIVE_TESTS,
       projection.currentTestPositiveRate,
     );
+
+    return {
+      rt_level,
+      hospitalizations_level,
+      test_rate_level,
+    };
+  }
+
+  getAlarmLevel(): Level {
+    const {
+      rt_level,
+      hospitalizations_level,
+      test_rate_level,
+    } = this.getLevels();
+
     let level;
     const levelList = [rt_level, hospitalizations_level, test_rate_level];
 
+    const highcount = levelList.filter((level: Level) => level === Level.HIGH)
+      .length;
     const mediumCount = levelList.filter(
       (level: Level) => level === Level.MEDIUM,
     ).length;
@@ -122,15 +148,16 @@ export class Projections {
     if (lowCount === 3) {
       // if all the factors are low, level is low
       level = Level.LOW;
-    } else if (unKnownCount === 3) {
+    } else if (unKnownCount + lowCount === 3) {
       // if all the levels are unkown, status is unkwonw
+      // no reds and no yellows, but at least one unknown
       level = Level.UNKNOWN;
-    } else if (mediumCount >= 2 || lowCount >= 1) {
-      // otherwise level is medium
-      level = Level.MEDIUM;
-    } else {
-      // if none of the levels are low, high level
+    } else if (highcount >= 2 || (mediumCount === 2 && highcount === 1)) {
+      // if there are more than two highs it's high or two mediums one red
       level = Level.HIGH;
+    } else {
+      // if there is one red + two greens, two mediums + one green,  or three mediums
+      level = Level.MEDIUM;
     }
     return level;
   }

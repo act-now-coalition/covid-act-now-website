@@ -3,6 +3,8 @@ import palette from '../../assets/theme/palette';
 import { COLOR_ZONE } from '../../enums/zones';
 
 export const ZoneChartWrapper = styled.div`
+  margin: 24px;
+
   .ZoneChart__Line {
     stroke-width: 4px;
   }
