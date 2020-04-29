@@ -18,13 +18,13 @@ const ClaimStateBlock = ({ stateId, countyName }) => {
     <ClaimStateContainer>
       <ClaimStateHeader>Do you work for {headerName}?</ClaimStateHeader>
       <ClaimStateBody>
-        Let us know how we can make our model more useful for you and {bodyName}{' '}
-        residents. Email us at <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.
+        We’d love to know how you’re using our model. Email us at{' '}
+        <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.
       </ClaimStateBody>
       <ClaimStateButtonWrapper>
         <a href={`mailto:${EMAIL}`}>
           <ClaimStateButton disableElevation variant="contained">
-            Claim this page
+            Connect with us
           </ClaimStateButton>
         </a>
       </ClaimStateButtonWrapper>
