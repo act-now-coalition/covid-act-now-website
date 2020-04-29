@@ -198,14 +198,14 @@ export class Projection {
   }
 
   private calcTestPositiveRate(): Array<number | null> {
-    const dailyPositives = this.deltasFromCumulatives(
-      this.cumulativePositiveTests,
+    const dailyPositives = this.smoothWithRollingAverage(
+      this.deltasFromCumulatives(this.cumulativePositiveTests),
     );
-    const dailyNegatives = this.deltasFromCumulatives(
-      this.cumulativeNegativeTests,
+    const dailyNegatives = this.smoothWithRollingAverage(
+      this.deltasFromCumulatives(this.cumulativeNegativeTests),
     );
 
-    const testPositiveRate = dailyPositives.map((dailyPositive, idx) => {
+    return dailyPositives.map((dailyPositive, idx) => {
       const positive = dailyPositive || 0;
       const negative = dailyNegatives[idx] || 0;
       const total = positive + negative;
@@ -214,8 +214,6 @@ export class Projection {
       // it's probably a reporting lag issue. So just return null.
       return negative > 0 ? positive / total : null;
     });
-
-    return this.smoothWithRollingAverage(testPositiveRate);
   }
 
   /**
