@@ -13,7 +13,6 @@ const EMAIL = 'gov@covidactnow.org';
 const ClaimStateBlock = ({ stateId, countyName }) => {
   const stateName = stateId && STATES[stateId];
   const headerName = countyName ? `${countyName}` : `the state of ${stateName}`;
-  const bodyName = countyName ? `${countyName}` : `${stateName}`;
   return (
     <ClaimStateContainer>
       <ClaimStateHeader>Do you work for {headerName}?</ClaimStateHeader>
