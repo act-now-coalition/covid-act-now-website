@@ -4,6 +4,8 @@ import {
   ChartContentWrapper,
   MainContentInner,
   ChartHeader,
+  ChartDescription,
+  ChartLocationName,
 } from './ChartsHolder.style';
 import LocationPageHeader from 'components/LocationPage/LocationPageHeader';
 import NoCountyDetail from './NoCountyDetail';
@@ -80,16 +82,25 @@ const ChartsHolder = (props: {
           <LocationPageHeader projections={props.projections} />
           <SummaryStats stats={getChartSummarys(projection)} />
           <MainContentInner>
-            <ChartHeader></ChartHeader>
-            <h1>{ChartTypeToTitle[ChartType.CASE_GROWTH_RATE]}</h1>
-            {caseGrowthStatusText(projection)}
+            <ChartHeader>
+              {ChartTypeToTitle[ChartType.CASE_GROWTH_RATE]}
+            </ChartHeader>
+            <ChartLocationName>{projection.locationName}</ChartLocationName>
+            <ChartDescription>
+              {caseGrowthStatusText(projection)}
+            </ChartDescription>
             {rtRangeData && (
               <ZoneChartWrapper>
                 <Chart options={optionsRt(rtRangeData, endDate) as any} />
               </ZoneChartWrapper>
             )}
-            <h1>{ChartTypeToTitle[ChartType.POSITIVE_TESTS]}</h1>
-            {positiveTestsStatusText(projection)}
+            <ChartHeader>
+              {ChartTypeToTitle[ChartType.POSITIVE_TESTS]}
+            </ChartHeader>
+            <ChartLocationName>{projection.locationName}</ChartLocationName>
+            <ChartDescription>
+              {positiveTestsStatusText(projection)}
+            </ChartDescription>
             {testPositiveData && (
               <ZoneChartWrapper>
                 <Chart
@@ -99,8 +110,13 @@ const ChartsHolder = (props: {
                 />
               </ZoneChartWrapper>
             )}
-            <h1>{ChartTypeToTitle[ChartType.HOSPITAL_USAGE]}</h1>
-            {hospitalOccupancyStatusText(projection)}
+            <ChartHeader>
+              {ChartTypeToTitle[ChartType.HOSPITAL_USAGE]}
+            </ChartHeader>
+            <ChartLocationName>{projection.locationName}</ChartLocationName>
+            <ChartDescription>
+              {hospitalOccupancyStatusText(projection)}
+            </ChartDescription>
             {icuUtilizationData && (
               <ZoneChartWrapper>
                 <Chart
@@ -110,12 +126,9 @@ const ChartsHolder = (props: {
                 />
               </ZoneChartWrapper>
             )}
-            <h1>Future projections</h1>
-            <span>
-              {props.projections.countyName
-                ? `${props.projections.countyName}, ${props.projections.stateName}`
-                : props.projections.stateName}
-            </span>
+            <ChartHeader>Future projections</ChartHeader>
+            <ChartLocationName>{projection.locationName}</ChartLocationName>
+            <ChartDescription>Chart Description TK</ChartDescription>
             <ModelChart
               projections={props.projections}
               stateId={props.stateId}

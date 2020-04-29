@@ -175,6 +175,11 @@ export default {
       link: 'https://www.linkedin.com/in/jessicajschwartz/',
     },
     {
+      name: 'Josh Ziman',
+      title: 'Former Senior Experience Designer at Expedia Group',
+      link: 'https://www.linkedin.com/in/josh-ziman',
+    },
+    {
       name: 'Joseph Ensminger',
       title: 'Founder, J.E. Consulting',
       link: 'https://www.linkedin.com/in/josephensminger/',
@@ -243,6 +248,11 @@ export default {
       name: 'Xinyu Zhang',
       title: 'Data Scientist at Grand Rounds',
       link: 'https://www.linkedin.com/in/xinyuzhang-cathy/',
+    },
+    {
+      name: 'Yvonne Hung',
+      title: 'Founder of Studio Nonymous',
+      link: 'https://www.linkedin.com/in/hungyvonne/',
     },
     {
       name: 'Zack Rosen',

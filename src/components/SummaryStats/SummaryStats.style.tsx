@@ -3,59 +3,64 @@ import { Box, Typography } from '@material-ui/core';
 import palette from 'assets/theme/palette';
 
 export const SummaryStatsWrapper = styled(Box)`
-  width: 100%;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-around;
-  padding: 1rem;
+  padding: 2rem 0.5rem;
   background-color: ${palette.lightGray};
   border-radius: 0;
   box-shadow: none;
+  max-width: 900px;
 
   @media (min-width: 600px) {
     border-radius: 2px;
     box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.1);
     background-color: white;
-    margin: 0 auto;
-    padding: 1rem 2rem;
+    padding: 1.75rem;
     position: relative;
-    top: -3rem;
-    border-radius: 2px;
-    /* Material UI equivalent: boxShadow="2" */
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px,
-      rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
+    margin: -3rem 1rem 0;
+    border-radius: 5px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.12);
   }
-  @media (min-width: 900px) {
-    width: 800px;
+  @media (min-width: 932px) {
+    margin: -3rem auto 0;
   }
   @media (min-width: 1350px) {
-    margin: 0 445px 0 auto;
+    margin: -3rem 445px 0 auto;
   }
   @media (min-width: 1750px) {
-    margin: 0 auto;
+    margin: -3rem auto 0;
   }
-`;
-
-export const SummaryHolder = styled.div`
-  display: flex;
-  justify-content: center;
 `;
 
 export const SummaryStatWrapper = styled(Box)`
   display: flex;
+  flex: 1;
   flex-direction: column;
+  padding: 0 0.5rem;
   align-items: center;
 `;
 
 export const StatNameText = styled(Typography)`
-  font-weight: bold;
+  font-weight: 500;
+  text-align: center;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  flex: 1;
+
+  @media (min-width: 600px) {
+    font-size: 1.125rem;
+    min-height: 0;
+  }
 `;
 
 export const StatValueText = styled(Typography)`
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: 'Source Code Pro', Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-  font-size: 2.2rem;
-  font-weight: bold;
-  padding: 1rem 0 1.2rem;
+  font-size: 1.875rem;
+  line-height: 3.5rem;
+  margin-bottom: 0.25rem;
+  text-align: center;
+  font-weight: 700;
 `;

@@ -17,9 +17,10 @@ export const Content = styled.div`
   margin: 0 auto;
 `;
 
-export const SelectorWrapper = styled.div`
+export const SelectorWrapper = styled.div<{ isNarrowMobile: Boolean }>`
   flex: 1;
   margin-right: 0;
+  position: ${props => (props.isNarrowMobile ? 'static' : 'relative')};
 
   > div {
     margin: 0 auto;
@@ -56,6 +57,7 @@ export const MapToggle = styled.div<{ isActive: boolean }>`
 
 export const MenuBarWrapper = styled.div`
   display: flex;
+  position: relative;
 `;
 
 export const SearchHeaderWrapper = styled.div`

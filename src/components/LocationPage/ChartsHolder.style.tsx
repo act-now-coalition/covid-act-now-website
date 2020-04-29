@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Typography } from '@material-ui/core';
 
 export const ChartContentWrapper = styled.div`
   margin-top: 85px;
@@ -8,9 +9,9 @@ export const ChartContentWrapper = styled.div`
 `;
 
 export const MainContentInner = styled.div`
-  margin: 0;
+  margin: 0 1rem;
 
-  @media (min-width: 900px) {
+  @media (min-width: 932px) {
     max-width: 900px;
     margin: 0 auto;
   }
@@ -25,16 +26,19 @@ export const MainContentInner = styled.div`
 `;
 
 export const ChartHeader = styled.div`
-  max-width: 900px;
-  padding: 1.5rem 0;
-  text-align: left;
-  span {
-    color: rgba(0, 0, 0, 0.7);
-  }
-  h2 {
-    font-weight: 700;
-  }
-  @media (max-width: 600px) {
-    padding: 1.5rem 1rem;
-  }
+  margin: 4.875rem 0 0.5rem;
+  font-weight: 700;
+  font-size: 1.5rem;
+`;
+
+export const ChartLocationName = styled(Typography)`
+  font-size: 0.875rem;
+  color: rgba(0, 0, 0, 0.7);
+  margin-bottom: 0.625rem;
+`;
+
+export const ChartDescription = styled(Typography)`
+  max-width: 600px;
+  color: rgba(0, 0, 0, 0.7);
+  margin-bottom: 1rem;
 `;

@@ -6,7 +6,6 @@ import {
 } from 'enums/zones';
 import {
   SummaryStatsWrapper,
-  SummaryHolder,
   SummaryStatWrapper,
   StatNameText,
   StatValueText,
@@ -53,22 +52,20 @@ const SummaryStats = (props: { stats: { [key: string]: number | null } }) => {
   return (
     <>
       {hasStats && (
-        <SummaryHolder>
-          <SummaryStatsWrapper>
-            <SummaryStat
-              chartType={ChartType.CASE_GROWTH_RATE}
-              value={props.stats[ChartType.CASE_GROWTH_RATE] as number}
-            />
-            <SummaryStat
-              chartType={ChartType.POSITIVE_TESTS}
-              value={props.stats[ChartType.POSITIVE_TESTS] as number}
-            />
-            <SummaryStat
-              chartType={ChartType.HOSPITAL_USAGE}
-              value={props.stats[ChartType.HOSPITAL_USAGE] as number}
-            />
-          </SummaryStatsWrapper>
-        </SummaryHolder>
+        <SummaryStatsWrapper>
+          <SummaryStat
+            chartType={ChartType.CASE_GROWTH_RATE}
+            value={props.stats[ChartType.CASE_GROWTH_RATE] as number}
+          />
+          <SummaryStat
+            chartType={ChartType.POSITIVE_TESTS}
+            value={props.stats[ChartType.POSITIVE_TESTS] as number}
+          />
+          <SummaryStat
+            chartType={ChartType.HOSPITAL_USAGE}
+            value={props.stats[ChartType.HOSPITAL_USAGE] as number}
+          />
+        </SummaryStatsWrapper>
       )}
     </>
   );
