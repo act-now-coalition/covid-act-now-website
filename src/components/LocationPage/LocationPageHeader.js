@@ -66,22 +66,24 @@ function LocationSummary({ projections, textColor }) {
       <HeaderSubCopy textColor={textColor}>
         {locationLevelInfo.detail}
         <ul>
-          {locationLevel != Level.UNKNOWN && levelList.map(item => {
-            return (
-              <li>
-                {item.level === Level.LOW && (
-                  <CheckIcon textColor={textColor} />
-                )}
-                {(item.level === Level.MEDIUM || item.level === Level.HIGH) && (
-                  <ExclamationIcon textColor={textColor} />
-                )}
-                {item.level === Level.UNKNOWN && (
-                  <QuestionIcon textColor={textColor} />
-                )}
-                <p>{item.levelInfo.detail}</p>
-              </li>
-            );
-          })}
+          {locationLevel != Level.UNKNOWN &&
+            levelList.map(item => {
+              return (
+                <li>
+                  {item.level === Level.LOW && (
+                    <CheckIcon textColor={textColor} />
+                  )}
+                  {(item.level === Level.MEDIUM ||
+                    item.level === Level.HIGH) && (
+                    <ExclamationIcon textColor={textColor} />
+                  )}
+                  {item.level === Level.UNKNOWN && (
+                    <QuestionIcon textColor={textColor} />
+                  )}
+                  <p>{item.levelInfo.detail}</p>
+                </li>
+              );
+            })}
         </ul>
       </HeaderSubCopy>
     </>
@@ -90,9 +92,10 @@ function LocationSummary({ projections, textColor }) {
 
 const LocationPageHeader = ({ projections }) => {
   const { isEmbed } = useEmbed();
-  const alarmLevel = projections.getAlarmLevel()
+  const alarmLevel = projections.getAlarmLevel();
   const level = LEGEND_TEXT[alarmLevel];
-  const [fillColor, textColor] = alarmLevel !== Level.UNKNOWN
+  const [fillColor, textColor] =
+    alarmLevel !== Level.UNKNOWN
       ? [level.color, palette.secondary.contrastText]
       : [COLOR_MAP.GRAY.LIGHT, palette.text.primary];
   return (

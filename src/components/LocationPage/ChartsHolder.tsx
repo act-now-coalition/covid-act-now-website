@@ -141,7 +141,7 @@ function caseGrowthStatusText(projection: Projection) {
   const infectionRate = `On average, each person in ${projection.locationName} with COVID is infecting ${additionalPeople} other people.`;
 
   const epidemiologyReasoning = levelText(
-    level,    
+    level,
     `Because this number has been driven below 1.0 — an all-important epidemiology threshold — the total number of cases in ${projection.locationName} is shrinking.`,
     `Because this number is above (but not that far above) 1.0 it means that COVID is growing, and growing exponentially, but not at runaway speed.`,
     `As such, the total number of cases in ${projection.locationName} is growing exponentially.`,
