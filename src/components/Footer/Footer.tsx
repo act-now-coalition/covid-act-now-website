@@ -11,19 +11,8 @@ import {
   StyledFooterBodyLinks,
   StyledFooterInner,
   StyledFooterBodyNav,
-  StyledFooterBodyButton,
   StyledFooterDivider,
 } from './Footer.style';
-
-const FooterButton = (props: { className: string }) => (
-  <StyledFooterBodyButton
-    href="https://forms.gle/JTCcqrGb5yzoD6hg6"
-    target="_blank"
-    {...props}
-  >
-    Contribute to this tool
-  </StyledFooterBodyButton>
-);
 
 const Footer = ({ children }: { children: React.ReactNode }) => {
   const history = useHistory();
@@ -62,7 +51,6 @@ const Footer = ({ children }: { children: React.ReactNode }) => {
               </span>
               <span onClick={() => goTo('/contact')}>Contact Us</span>
             </StyledFooterBodyNav>
-            <FooterButton className="footer__narrow-screen-only" />
             <StyledFooterDivider />
             <StyledFooterBodyLinks>
               <FooterSocialLinks />
@@ -76,7 +64,6 @@ const Footer = ({ children }: { children: React.ReactNode }) => {
               <a href="mailto:press@covidactnow.org">Press</a>
             </StyledFooterBodyLinks>
           </StyledFooterContent>
-          <FooterButton className="footer__wide-screen-only" />
         </StyledFooterInner>
       </StyledFooter>
     </div>

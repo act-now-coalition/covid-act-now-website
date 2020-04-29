@@ -28,6 +28,7 @@ export const SelectorWrapper = styled.div<{ isNarrowMobile: Boolean }>`
     @media (min-width: 1350px) {
       max-width: 900px;
       margin: 0 445px 0 auto;
+      position: relative;
     }
 
     @media (min-width: 1750px) {

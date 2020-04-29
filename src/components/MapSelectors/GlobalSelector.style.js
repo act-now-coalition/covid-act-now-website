@@ -4,6 +4,10 @@ const BORDER_COLOR = 'rgba(0,0,0,0.12)';
 
 export const StyledDropDownWrapper = styled.div`
   height: 3.5rem;
+
+  @media (min-width: 1350px) {
+    height: 4rem;
+  }
 `;
 
 export const StyledMenu = styled.ul`
@@ -25,6 +29,10 @@ export const StyledMenu = styled.ul`
 
   @media (min-width: 600px) {
     right: 0;
+  }
+
+  @media (min-width: 1350px) {
+    margin-top: 4rem;
   }
 `;
 
