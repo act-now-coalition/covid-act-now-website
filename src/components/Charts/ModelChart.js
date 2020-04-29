@@ -1,13 +1,11 @@
 import React, { useMemo } from 'react';
-import { dateFormat } from 'highcharts';
+import _ from 'lodash';
+import { dateFormat, numberFormat } from 'highcharts';
 import moment from 'moment';
 import { INTERVENTIONS } from 'enums/interventions';
 import LightTooltip from 'components/LightTooltip/LightTooltip';
 import ClaimStateBlock from 'components/ClaimStateBlock/ClaimStateBlock';
 import Chart from './Chart';
-import { isEmpty } from 'lodash';
-import { COLOR_MAP } from 'enums/interventions';
-import ReactDOMServer from 'react-dom/server';
 import { useModelLastUpdatedDate } from 'utils/model';
 import {
   ChartContainer,
@@ -20,21 +18,13 @@ import {
   CondensedLegendItemStyled,
 } from './ModelChart.style';
 
-function dateIsPastHalfway(dateToCompare, dateArray, itemKey) {
-  if (dateArray.length === 0) return true;
-  const midpoint = Math.floor(dateArray.length / 2);
-  // Enforce date objects in case these are date strings
-  return (
-    new Date(dateToCompare) >
-    new Date(itemKey ? dateArray[midpoint][itemKey] : dateArray[midpoint])
-  );
-}
-
 const formatIntervention = (intervention, optCase) =>
   `3 months of ${intervention.toLowerCase()}${optCase || ''}`;
 
 const condensedFormatIntervention = (intervention, optCase) =>
   `${intervention}${optCase || ''}`;
+
+const isFuture = d => d.x > new Date().valueOf();
 
 const ModelChart = ({
   height,
@@ -57,19 +47,11 @@ const ModelChart = ({
     projections.baseline.getDataset('beds', 'Available hospital beds'),
   ];
 
-  // We'll use this to determine whether to right-align
-  // or left-align our plot line labels
-  const dateOverwhelmedIsPastHalfway = dateIsPastHalfway(
-    new Date(projection.dateOverwhelmed),
-    data[0].data,
-    'x',
-  );
-
   const noAction = {
     className: 'limited-action',
     name: 'If restrictions are lifted',
-    type: projection.isInferred ? 'spline' : 'areaspline',
-    data: data[0].data,
+    type: 'spline',
+    data: data[0].data.filter(isFuture),
     marker: {
       symbol: 'circle',
     },
@@ -77,6 +59,7 @@ const ModelChart = ({
     condensedLegend: {
       bgColor: projections.getChartSeriesColorMap().limitedActionSeries,
     },
+    legendIndex: 1,
   };
 
   const socialDistancing = {
@@ -107,13 +90,29 @@ const ModelChart = ({
     className: 'projected',
     name: 'Projected based on current trends',
     type: 'spline',
-    data: data[2].data,
+    data: data[2].data.filter(isFuture),
     marker: {
       symbol: 'circle',
     },
     condensedLegend: {
       bgColor: projections.getChartSeriesColorMap().projectedSeries,
     },
+    legendIndex: 2,
+  };
+
+  const previousEstimates = {
+    className: 'hospitalizations',
+    name: 'Hospitalizations',
+    type: 'spline',
+    data: data[2].data.filter(d => !isFuture(d)),
+    color: 'black',
+    marker: {
+      symbol: 'circle',
+    },
+    condensedLegend: {
+      bgColor: projections.getChartSeriesColorMap().projectedSeries,
+    },
+    legendIndex: 1,
   };
 
   const shelterInPlace = {
@@ -122,7 +121,7 @@ const ModelChart = ({
       currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
         ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (strict)')
         : formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
-    type: projection.isInferred ? 'spline' : 'areaspline',
+    type: 'spline',
     visible:
       !projection.isInferred ||
       currentIntervention !== INTERVENTIONS.SHELTER_IN_PLACE,
@@ -144,6 +143,7 @@ const ModelChart = ({
           : condensedFormatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
       bgColor: projections.getChartSeriesColorMap().shelterInPlaceSeries,
     },
+    legendIndex: 2,
   };
 
   const availableBeds = {
@@ -157,9 +157,15 @@ const ModelChart = ({
     condensedLegend: {
       outline: '2px dashed black',
     },
+    showInLegend: false,
   };
 
   const options = useMemo(() => {
+    const maxAvailableBeds = _.max(availableBeds.data.map(d => d.y));
+    const minDate = _.min(availableBeds.data.map(d => d.x));
+    const lastPreviousEstimate = _.last(
+      previousEstimates.data.filter(d => !isFuture(d)),
+    );
     return {
       chart: {
         animation: false,
@@ -171,7 +177,6 @@ const ModelChart = ({
         text: undefined,
       },
       subtitle: {
-        // text: subtitle,
         text: undefined,
       },
       xAxis: {
@@ -184,64 +189,10 @@ const ModelChart = ({
             return dateFormat('%b %e', this.value);
           },
         },
-        plotLines: [
-          {
-            value: projection.dateOverwhelmed,
-            zIndex: 10,
-            label: {
-              formatter: function () {
-                return ReactDOMServer.renderToString(
-                  <div
-                    class="custom-plot-label custom-plot-label-hospital-overload {
-                      dateOverwhelmedIsPastHalfway
-                      ? ' custom-plot-label-reverse'
-                    : ''
-                }"
-                  >
-                    Hospitals May Overload
-                    <br />
-                    <span>
-                      {' '}
-                      <ChartHospitalsOverloadedText projections={projections} />
-                    </span>
-                  </div>,
-                );
-              },
-              align: dateOverwhelmedIsPastHalfway ? 'right' : 'left',
-              rotation: 0,
-              useHTML: true,
-              x: 1,
-              y: 12,
-            },
-          },
-          {
-            value: Date.now(),
-            className: 'today',
-            zIndex: 10,
-            label: {
-              formatter: function () {
-                return `<div class="custom-plot-label">Today</div>`;
-              },
-              rotation: 0,
-              useHTML: true,
-              x: 1,
-              y: 96,
-            },
-          },
-        ],
       },
       yAxis: {
         title: {
           text: undefined,
-        },
-        labels: {
-          useHTML: true,
-          x: 48,
-          formatter: function () {
-            return this.value === 0
-              ? ''
-              : this.axis.defaultLabelFormatter.call(this);
-          },
         },
       },
       tooltip: {
@@ -282,21 +233,63 @@ const ModelChart = ({
           },
         },
       },
-      series: projection.isInferred
-        ? [noAction, projected, shelterInPlace, availableBeds]
-        : [noAction, shelterInPlace, availableBeds],
+      series: [
+        noAction,
+        projection.isInferred ? projected : shelterInPlace,
+        availableBeds,
+        previousEstimates,
+      ],
+      annotations: [
+        {
+          draggable: '',
+          labelOptions: {
+            backgroundColor: '#fff',
+          },
+          labels: [
+            {
+              align: 'right',
+              className: 'Annotation Annotation--BedsAvailable',
+              shape: 'rect',
+              y: 2,
+              point: {
+                xAxis: 0,
+                yAxis: 0,
+                x: minDate,
+                y: maxAvailableBeds,
+              },
+              style: {
+                fontWeight: 'bold',
+              },
+              formatter: function () {
+                return `${numberFormat(this.y, 0, '.', ',')} beds`;
+              },
+            },
+          ],
+          shapes: [
+            {
+              draggable: '',
+              type: 'circle',
+              x: 2,
+              point: {
+                xAxis: 0,
+                yAxis: 0,
+                ...lastPreviousEstimate,
+              },
+              r: 6,
+            },
+          ],
+        },
+      ],
     };
   }, [
     height,
-    projection.dateOverwhelmed,
-    projection.isInferred,
     noAction,
     projected,
-    shelterInPlace,
+    projection.isInferred,
     availableBeds,
-    projections,
     condensed,
-    dateOverwhelmedIsPastHalfway,
+    previousEstimates,
+    shelterInPlace,
   ]);
 
   if (condensed) {
@@ -368,49 +361,6 @@ function CondensedLegendItem({
     >
       {condensedName || name}
     </CondensedLegendItemStyled>
-  );
-}
-
-function ChartHospitalsOverloadedText({ projections }) {
-  let text = '';
-  const isDateOverWhelmedBeforeToday =
-    projections.worstCaseInterventionModel.dateOverwhelmed &&
-    moment(projections.worstCaseInterventionModel.dateOverwhelmed).isBefore(
-      moment().startOf('day'),
-    );
-
-  if (isDateOverWhelmedBeforeToday) {
-    return text;
-  }
-
-  const thresholdInterventionLevel = projections.getAlarmLevelColor();
-
-  switch (thresholdInterventionLevel) {
-    case COLOR_MAP.RED.BASE:
-      text = 'in 3 weeks or less';
-      break;
-    case COLOR_MAP.ORANGE.BASE:
-      text = 'in 3 to 6 weeks';
-      break;
-    case COLOR_MAP.GREEN.BASE:
-      text = projections.distancingPoorEnforcement.now.dateOverwhelmed
-        ? 'in 6 weeks or more'
-        : '';
-      break;
-    default:
-  }
-
-  const appendedPolicy =
-    projections.stateIntervention === INTERVENTIONS.SHELTER_IN_PLACE ? (
-      <div> with {projections.stateIntervention} (lax) </div>
-    ) : (
-      <div> with {projections.stateIntervention} </div>
-    );
-
-  return (
-    <>
-      {text} {!isEmpty(text) ? appendedPolicy : ''}{' '}
-    </>
   );
 }
 

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-
 import { COLORS } from 'enums';
 import { INTERVENTIONS } from 'enums/interventions';
 import palette from 'assets/theme/palette';
@@ -64,16 +63,14 @@ export const Wrapper = styled.div`
     }
   }
 
-  /* Don't show a label for 0
-     because it overlaps with the x-axis */
-  .highcharts-yaxis-labels span:first-child {
+  /* Hide the ticks and grid lines for the y-axis*/
+  .highcharts-yaxis-labels {
     display: none;
   }
 
-  /* .highcharts-tooltip-box {
-    fill: black;
-    fill-opacity: 0.6;
-  } */
+  .highcharts-grid-line {
+    display: none;
+  }
   g.highcharts-tooltip {
     display: none;
   }
@@ -84,6 +81,7 @@ export const Wrapper = styled.div`
   }
   .highcharts-markers {
     stroke: white !important;
+    stroke-dasharray: none !important; /* I'm really, really sorry */
   }
   .highcharts-halo {
     fill: white !important;
@@ -92,7 +90,7 @@ export const Wrapper = styled.div`
   }
   .highcharts-tooltip > span {
     background: rgba(0, 0, 0, 0.7);
-    color: #ffffff;
+    color: ${palette.white};
     border-radius: 4px;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
     padding: 16px;
@@ -120,14 +118,81 @@ export const Wrapper = styled.div`
 
   /* No action */
   .limited-action {
-    fill: ${props =>
-      props.projections.getChartSeriesColorMap().limitedActionSeries};
-    stroke: ${props =>
-      props.isInferred
-        ? props.projections.getChartSeriesColorMap().limitedActionSeries
-        : 'white'};
-    fill-opacity: 1;
+    .highcharts-graph {
+      stroke: ${COLORS.LIMITED_ACTION};
+      stroke-dasharray: 1, 6;
+      stroke-width: 4px;
+      fill-opacity: 1;
+      stroke-linecap: square;
+    }
+
+    &.highcharts-markers {
+      path {
+        fill: ${COLORS.LIMITED_ACTION};
+      }
+    }
   }
+  /* Projected */
+  .projected {
+    .highcharts-graph {
+      stroke: ${COLORS.PROJECTED};
+      stroke-dasharray: 1, 6;
+      stroke-width: 4px;
+      stroke-linecap: square;
+    }
+
+    &.highcharts-markers {
+      path {
+        fill: ${COLORS.PROJECTED};
+      }
+    }
+  }
+  /* Hospitalizations */
+  .hospitalizations {
+    .highcharts-graph {
+      stroke: ${COLORS.HOSPITALIZATIONS};
+      stroke-width: 4px;
+      stroke-linecap: round;
+    }
+
+    &.highcharts-markers {
+      path {
+        fill: ${COLORS.HOSPITALIZATIONS};
+      }
+    }
+  }
+
+  /* Stay at home */
+  .stay-at-home {
+    .highcharts-graph {
+      stroke: ${props =>
+        props.projections.getChartSeriesColorMap().shelterInPlaceSeries};
+      stroke-dasharray: 1, 6;
+      stroke-width: 4px;
+      stroke-linecap: square;
+    }
+
+    &.highcharts-markers {
+      path {
+        fill: ${props =>
+          props.projections.getChartSeriesColorMap().shelterInPlaceSeries};
+      }
+    }
+  }
+
+  .Annotation {
+    &.Annotation--BedsAvailable {
+      text {
+        fill: ${palette.primary.contrastText};
+        font-size: 18px;
+      }
+      rect {
+        fill-opacity: 0;
+        stroke: none;
+      }
+    }
+  }
+
   /* Social distancing */
   .social-distancing {
     fill: ${props =>
@@ -138,16 +203,7 @@ export const Wrapper = styled.div`
         : 'white'};
     fill-opacity: 1;
   }
-  /* Stay at home */
-  .stay-at-home {
-    fill: ${props =>
-      props.projections.getChartSeriesColorMap().shelterInPlaceSeries};
-    stroke: ${props =>
-      props.isInferred
-        ? props.projections.getChartSeriesColorMap().shelterInPlaceSeries
-        : 'white'};
-    fill-opacity: 1;
-  }
+
   /* Available beds */
   .beds {
     stroke: white;
@@ -158,15 +214,7 @@ export const Wrapper = styled.div`
     fill: rgba(0, 0, 0, 0.7);
     stroke: rgba(0, 0, 0, 0.7);
   }
-  .highcharts-plot-line {
-    stroke: #ff3348;
-    stroke-width: 3px;
-  }
-  /* Projected */
-  .projected {
-    stroke: ${props =>
-      props.projections.getChartSeriesColorMap().projectedSeries};
-  }
+
   .${snakeCase(INTERVENTIONS.LIMITED_ACTION)} {
     stroke: ${props => props.projections.getAlarmLevelColor()};
   }
