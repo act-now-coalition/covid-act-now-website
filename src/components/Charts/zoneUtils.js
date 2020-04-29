@@ -5,9 +5,9 @@ import {
   formatPercent,
   getMaxY,
   getTickPositions,
+  getYAxisLimits,
   lastValidPoint,
   parseDate,
-  roundAxisLimits,
   titleCase,
   zoneAnnotations,
 } from './utils';
@@ -38,16 +38,9 @@ const ZONES_HOSPITAL_USAGE = getHighchartZones(HOSPITAL_USAGE);
 
 export const optionsRt = (data, endDate) => {
   const { x, y } = lastValidPoint(data);
-  // Ensure high-region is at least as large as medium region.
-  const mediumRegionHeight =
-    CASE_GROWTH_RATE.MEDIUM.upperLimit - CASE_GROWTH_RATE.LOW.upperLimit;
-  const minHighRegionLimit =
-    CASE_GROWTH_RATE.MEDIUM.upperLimit + mediumRegionHeight;
-  const [minYAxis, maxYAxis] = roundAxisLimits(
-    0,
-    Math.max(getMaxY(data), minHighRegionLimit),
-  );
-
+  const zones = ZONES_RT;
+  const [minY, maxY] = [0, getMaxY(data)];
+  const [minYAxis, maxYAxis] = getYAxisLimits(minY, maxY, zones);
   return {
     ...baseOptions,
     xAxis: {
@@ -87,19 +80,21 @@ export const optionsRt = (data, endDate) => {
 };
 
 export const optionsPositiveTests = (data, endDate) => {
+  const zones = ZONES_POSITIVE_RATE;
   const { x, y } = lastValidPoint(data);
-  const [minYAxis, maxYAxis] = roundAxisLimits(0, getMaxY(data));
+  const [minY, maxY] = [0, getMaxY(data)];
+  const [minYAxis, maxYAxis] = getYAxisLimits(minY, maxY, zones);
   return {
     ...baseOptions,
     annotations: [
       currentValueAnnotation(x, y, y && formatPercent(y)),
-      ...zoneAnnotations(endDate, minYAxis, maxYAxis, y, ZONES_POSITIVE_RATE),
+      ...zoneAnnotations(endDate, minYAxis, maxYAxis, y, zones),
     ],
     series: [
       {
         name: 'Positive Tests',
         data,
-        zones: ZONES_POSITIVE_RATE,
+        zones,
       },
     ],
     tooltip: {
@@ -118,19 +113,21 @@ export const optionsPositiveTests = (data, endDate) => {
           return formatPercent(this.value);
         },
       },
-      tickPositions: getTickPositions(minYAxis, maxYAxis, ZONES_POSITIVE_RATE),
+      tickPositions: getTickPositions(minYAxis, maxYAxis, zones),
     },
   };
 };
 
 export const optionsHospitalUsage = (data, endDate) => {
   const { x, y } = lastValidPoint(data);
-  const [minYAxis, maxYAxis] = roundAxisLimits(0, getMaxY(data));
+  const zones = ZONES_HOSPITAL_USAGE;
+  const [minY, maxY] = [0, getMaxY(data)];
+  const [minYAxis, maxYAxis] = getYAxisLimits(minY, maxY, zones);
   return {
     ...baseOptions,
     annotations: [
       currentValueAnnotation(x, y, y && formatPercent(y)),
-      ...zoneAnnotations(endDate, minYAxis, maxYAxis, y, ZONES_HOSPITAL_USAGE),
+      ...zoneAnnotations(endDate, minYAxis, maxYAxis, y, zones),
     ],
     tooltip: {
       pointFormatter: function () {
@@ -148,13 +145,13 @@ export const optionsHospitalUsage = (data, endDate) => {
           return formatPercent(this.value);
         },
       },
-      tickPositions: getTickPositions(minYAxis, maxYAxis, ZONES_HOSPITAL_USAGE),
+      tickPositions: getTickPositions(minYAxis, maxYAxis, zones),
     },
     series: [
       {
         name: 'Hospital Usage',
         data,
-        zones: ZONES_HOSPITAL_USAGE,
+        zones,
       },
     ],
   };
