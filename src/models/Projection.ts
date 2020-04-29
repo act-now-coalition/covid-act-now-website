@@ -38,6 +38,8 @@ export interface RtRange {
   high: number;
 }
 
+const ICU_CAPACITY_RATE_DEFAULT = 0.75;
+
 /**
  * Represents a single projection for a given state or county.  Contains a
  * time-series of things like hospitalizations, hospital capacity, infections, etc.
@@ -72,12 +74,12 @@ export class Projection {
     parameters: ProjectionParameters,
   ) {
     const timeseries = summaryWithTimeseries.timeseries;
+    const actuals = summaryWithTimeseries.actuals;
     const lastUpdated = new Date(summaryWithTimeseries.lastUpdatedDate);
     this.locationName = this.getLocationName(summaryWithTimeseries);
     this.intervention = parameters.intervention;
     this.isInferred = parameters.isInferred;
     this.totalPopulation = summaryWithTimeseries.actuals.population;
-
     this.dates = timeseries.map(row => new Date(row.date));
 
     // Set up our series data exposed via getDataset().
@@ -93,7 +95,13 @@ export class Projection {
     );
     this.rtRange = this.calcRtRange(timeseries);
     this.testPositiveRate = this.calcTestPositiveRate();
-    this.icuUtilization = this.calcIcuUtilization(timeseries, lastUpdated);
+    this.icuUtilization = this.calcIcuUtilization(
+      timeseries,
+      actuals.ICUBeds && actuals.ICUBeds.typicalUsageRate
+        ? actuals.ICUBeds.typicalUsageRate
+        : ICU_CAPACITY_RATE_DEFAULT,
+      lastUpdated,
+    );
 
     this.fixZeros(this.hospitalizations);
     this.fixZeros(this.cumulativeDeaths);
@@ -244,13 +252,13 @@ export class Projection {
 
   private calcIcuUtilization(
     timeseries: Timeseries,
+    typicalUsageRate: number,
     lastUpdated: Date,
   ): Array<number | null> {
-    const AVERAGE_OCCUPANCY = 0.75;
+    const AVERAGE_OCCUPANCY = typicalUsageRate;
     const AVERAGE_AVAILABILITY = 1 - AVERAGE_OCCUPANCY;
     const CAPACITY_MULTIPLIER = 1 / AVERAGE_AVAILABILITY;
     const USAGE_CAPACITY_MULTIPLIER = AVERAGE_OCCUPANCY / AVERAGE_AVAILABILITY;
-
     // The API gives us the beds in use *by covid*, and the total capacity *for
     // covid*, using an assumption that ICUs are usually 75% full with non-covid
     // patients. We've decided to show full ICU utilization (not just covid), so

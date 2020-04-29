@@ -82,6 +82,10 @@ export type Capacity = number;
  */
 export type Currentusage = number;
 /**
+ * Typical used capacity rate for resource. This excludes any COVID usage.
+ */
+export type Typicalusagerate = number;
+/**
  * The state name
  */
 export type Statename = string;
@@ -126,4 +130,5 @@ export interface _Actuals {
 export interface _ResourceUtilization {
   capacity: Capacity;
   currentUsage: Currentusage;
+  typicalUsageRate: Typicalusagerate;
 }

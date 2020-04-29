@@ -81,6 +81,10 @@ export type Capacity = number;
  * Currently used capacity for resource
  */
 export type Currentusage = number;
+/**
+ * Typical used capacity rate for resource. This excludes any COVID usage.
+ */
+export type Typicalusagerate = number;
 
 export interface CovidActNowAreaSummary {
   countryName?: Countryname;
@@ -115,4 +119,5 @@ export interface _Actuals {
 export interface _ResourceUtilization {
   capacity: Capacity;
   currentUsage: Currentusage;
+  typicalUsageRate: Typicalusagerate;
 }
