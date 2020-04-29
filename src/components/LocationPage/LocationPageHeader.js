@@ -66,7 +66,9 @@ function LocationSummary({ projections }) {
     ),
   }[projections.getAlarmLevelColor()];
 
-  return <HeaderSubCopy>{predictionText}</HeaderSubCopy>;
+  return predictionText ? (
+    <HeaderSubCopy>{predictionText}</HeaderSubCopy>
+  ) : null;
 }
 
 const LocationPageHeader = ({ projections }) => {

@@ -56,7 +56,7 @@ const SearchHeader = ({
       <Wrapper>
         <Content>
           <MenuBarWrapper>
-            <SelectorWrapper>
+            <SelectorWrapper isNarrowMobile={isNarrowMobile}>
               <GlobalSelector
                 extendRight={true}
                 handleChange={handleSelectChange}
@@ -67,7 +67,7 @@ const SearchHeader = ({
                 onClick={() => toggleMobileMenu()}
                 isActive={mobileMenuOpen}
               >
-                {!isNarrowMobile && <>Counties&nbsp;&nbsp;</>}
+                <>Counties&nbsp;&nbsp;</>
                 <MapIcon />
               </MapToggle>
             )}

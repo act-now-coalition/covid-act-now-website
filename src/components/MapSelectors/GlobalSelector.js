@@ -6,6 +6,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import ShortNumber from 'utils/ShortNumber';
 import StateCircleSvg from 'components/StateSvg/StateCircleSvg';
 import US_STATE_DATASET from './datasets/us_states_dataset_01_02_2020';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import {
   STATE_TO_INTERVENTION,
@@ -93,6 +94,7 @@ const CountyItem = ({ dataset }) => {
 
 const GlobalSelector = ({ handleChange, extendRight }) => {
   const { stateId: location } = useParams();
+  const isNarrowMobile = useMediaQuery('(max-width:500px)');
 
   const stateDataset = US_STATE_DATASET.state_dataset;
   const countyDataset = [];
@@ -256,7 +258,9 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
                   onFocus: () => {
                     openMenu();
                   },
-                  placeholder: 'Search for your county or state',
+                  placeholder: isNarrowMobile
+                    ? 'Search'
+                    : 'Search for your county or state',
                 })}
               />
             </StyledInputWrapper>

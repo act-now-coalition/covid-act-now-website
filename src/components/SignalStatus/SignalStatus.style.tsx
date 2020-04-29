@@ -3,12 +3,12 @@ import { Box } from '@material-ui/core';
 
 export const SignalStatusWrapper = styled(Box)`
   padding: 0 0.4rem;
-  border-radius: 2px;
+  border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.12);
   background-color: white;
   color: ${props => props.color || 'darkgray'};
   display: inline-block;
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: 'Source Code Pro', Menlo, Monaco, Consolas, 'Courier New',
     monospace;
   font-style: normal;
   font-weight: bold;
