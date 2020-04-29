@@ -32,16 +32,12 @@ const HomePageHeader = () => {
     <Wrapper>
       <Content>
         <HeaderTitle>
-          Stay home, <HighlightColor>save lives.</HighlightColor>
+          Data to, <HighlightColor>reopen safely.</HighlightColor>
         </HeaderTitle>
         <div>
           <HeaderSubCopy color="inherit" component="p" variant="subtitle2">
-            Staying home has saved at least{' '}
-            <a href="https://blog.covidactnow.org/early-action-saves-43000-lives/">
-              43,000 lives and counting
-            </a>
-            . Click the map below to see COVID projections for your region and
-            what you can do to stop it.
+            Real-time models and metrics to see where we stand against COVID.
+            <p>All 50 states. 2,100+ counties. Click the map to dive in.</p>
           </HeaderSubCopy>
 
           <SelectorWrapper>
