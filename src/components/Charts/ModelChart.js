@@ -17,6 +17,7 @@ import {
   CondensedLegendStyled,
   CondensedLegendItemStyled,
 } from './ModelChart.style';
+import Outcomes from '../Outcomes/Outcomes';
 
 const formatIntervention = (intervention, optCase) =>
   `3 months of ${intervention.toLowerCase()}${optCase || ''}`;
@@ -310,6 +311,17 @@ const ModelChart = ({
     <ChartContainer>
       <Wrapper projections={projections} isInferred={projection.isInferred}>
         <Chart options={options} />
+        <Outcomes
+            title="Predicted Outcomes"
+            projections={[projections.baseline, projections.primary]}
+            colors={[
+              projections.getSeriesColorForLimitedAction(),
+              projections.getSeriesColorForPrimary(),
+            ]}
+            asterisk={['', '*', '*', '**']}
+            timeHorizon={120}
+            currentIntervention={projections.stateIntervention}
+          />
         <DisclaimerWrapper>
           <Disclaimer>
             <DisclaimerHeader>

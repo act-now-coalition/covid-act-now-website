@@ -35,7 +35,7 @@ export const OutcomesTableHeader = styled.div`
 `;
 
 export const OutcomesTableRow = styled.div`
-  display flex;
+  display: flex;
   width: 100%;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 
