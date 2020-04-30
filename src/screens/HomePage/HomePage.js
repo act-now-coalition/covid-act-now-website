@@ -26,7 +26,7 @@ export default function HomePage() {
                 padding: '0 1rem',
               }}
             >
-              <ShareBlock />
+              <ShareBlock centered={true} />
             </div>
           </Content>
         </div>

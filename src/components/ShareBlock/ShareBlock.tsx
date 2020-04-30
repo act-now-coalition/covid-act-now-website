@@ -20,6 +20,7 @@ import { STATES } from 'enums';
 
 const ShareBlock = ({
   condensed,
+  centered,
   stateId,
   countyName,
   shareQuote,
@@ -29,6 +30,7 @@ const ShareBlock = ({
   onClickEmbed,
 }: {
   condensed?: boolean;
+  centered?: boolean;
   stateId?: string;
   countyName?: String;
   shareQuote?: string;
@@ -66,7 +68,7 @@ const ShareBlock = ({
   });
 
   return (
-    <ShareContainer condensed={condensed}>
+    <ShareContainer condensed={condensed} centered={centered}>
       <ShareInstruction>
         {shareInstruction || 'Share the Covid Act Now map'}
       </ShareInstruction>
