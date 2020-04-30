@@ -7,7 +7,7 @@ export const ClaimStateWrapper = styled.div`
   text-align: left;
   background-color: #fbfbfb;
   padding: 3.5rem 1rem;
-  margin-top: 6rem;
+  margin-top: 3rem;
 `;
 
 export const ClaimStateContainer = styled.div`
