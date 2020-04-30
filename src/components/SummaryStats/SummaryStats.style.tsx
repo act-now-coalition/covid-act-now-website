@@ -120,12 +120,13 @@ export const StatValueText = styled(Typography)`
 `;
 
 export const BetaTag = styled.span`
-  font-size: 0.675rem;
   margin-left: 0.25rem;
   border-radius: 5px;
   display: inline-block;
   background-color: ${palette.info.main};
   color: white;
+  font-size: 0.675rem;
   padding: 0 0.75rem;
-  transform: translateY(-0.125rem);
+  transform: translateY(-0.25rem);
+  line-height: 1.25rem;
 `;
