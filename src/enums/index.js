@@ -1,5 +1,4 @@
 import STATES from './us_states';
-import ENDORSERS from './endorsers';
 import TEAM from './team';
 import COLORS from './colors';
 import {
@@ -13,7 +12,6 @@ import {
 export {
   COLORS,
   STATES,
-  ENDORSERS,
   TEAM,
   INTERVENTIONS,
   STATE_TO_INTERVENTION,

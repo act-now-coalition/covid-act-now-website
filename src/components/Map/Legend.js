@@ -7,15 +7,18 @@ import {
   ColorBox,
   CondensedCaption,
   CondensedLegendItemText,
+  LegendTitle,
   LegendContainer,
   LegendItemHeader,
   LegendItemContainer,
+  LegendWrapper,
 } from './Legend.style';
 
 export function Legend(props) {
   return (
-    <>
-      <LegendContainer item container spacing={0} direction="row" {...props}>
+    <LegendWrapper>
+      <LegendTitle>COVID Reopening Risk:</LegendTitle>
+      <LegendContainer {...props}>
         {React.Children.map(props.children, child =>
           React.cloneElement(child, { condensed: props.condensed }),
         )}
@@ -29,7 +32,7 @@ export function Legend(props) {
           Hover to learn more
         </CondensedCaption>
       )}
-    </>
+    </LegendWrapper>
   );
 }
 
@@ -41,32 +44,26 @@ const CustomTooltip = withStyles(theme => ({
 }))(Tooltip);
 
 export function LegendItem(props) {
-  const { title, color, description, condensed } = props;
+  const { title, color, condensed } = props;
   if (condensed) {
     return (
-      <Grid item xs="4" sm="4">
-        <CustomTooltip arrow title={description}>
-          <LegendItemContainer color={color}>
-            <LegendItemHeader condensed>
-              <CondensedLegendItemText align="center" variant="body1">
-                {title}
-              </CondensedLegendItemText>
-            </LegendItemHeader>
-          </LegendItemContainer>
-        </CustomTooltip>
-      </Grid>
+      <LegendItemContainer color={color}>
+        <LegendItemHeader condensed>
+          <CondensedLegendItemText align="center" variant="body1">
+            {title}
+          </CondensedLegendItemText>
+        </LegendItemHeader>
+      </LegendItemContainer>
     );
   }
 
   return (
-    <Grid item xs={12} md={4}>
-      <LegendItemContainer>
-        <LegendItemHeader>
-          <ColorBox color={color} />
-          {title}
-        </LegendItemHeader>
-      </LegendItemContainer>
-    </Grid>
+    <LegendItemContainer>
+      <LegendItemHeader>
+        <ColorBox color={color} />
+        {title}
+      </LegendItemHeader>
+    </LegendItemContainer>
   );
 }
 

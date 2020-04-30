@@ -8,7 +8,7 @@ import Drawer from '@material-ui/core/Drawer';
 
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020';
 import '../../App.css'; /* optional for styling like the :hover pseudo-class */
-import LocationPageHeader from '../../components/LocationPageHeader/LocationPageHeader';
+import LocationPageHeader from '../../components/LocationPage/LocationPageHeader';
 import ShareModelBlock from '../../components/ShareBlock/ShareModelBlock';
 
 import { useProjections, useStateSummaryData } from 'utils/model';

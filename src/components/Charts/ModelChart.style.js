@@ -1,51 +1,16 @@
 import styled from 'styled-components';
-
 import { COLORS } from 'enums';
 import { INTERVENTIONS } from 'enums/interventions';
 import palette from 'assets/theme/palette';
 import { snakeCase } from 'lodash';
 import { colors } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
 import { COLOR_MAP } from '../../enums/interventions';
+
+const chartFontFamily = "'Source Code Pro', 'Roboto', sans-serif";
 
 export const ChartContainer = styled.section`
   width: 100%;
 `;
-
-export const DisclaimerWrapper = styled.div`
-  display: flex;
-  margin: 0 -0.75rem;
-
-  @media (max-width: 900px) {
-    flex-direction: column;
-    margin: 0;
-  }
-`;
-
-export const Disclaimer = styled.div`
-  background: ${palette.white};
-  border: 1px solid ${palette.divider};
-  padding: 1.5rem;
-  border-radius: 4px;
-  margin: 0 0.75rem 1.5rem;
-  padding: 1rem;
-  flex: 1;
-
-  @media (max-width: 900px) {
-    margin: 0 1rem 1.5rem;
-  }
-`;
-
-export const DisclaimerHeader = styled(Typography)`
-  margin-top: 0;
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.6rem;
-  color: ${palette.black};
-`;
-
-export const DisclaimerBody = styled(Typography)``;
 
 export const Wrapper = styled.div`
   max-width: 900px;
@@ -64,16 +29,23 @@ export const Wrapper = styled.div`
     }
   }
 
-  /* Don't show a label for 0
-     because it overlaps with the x-axis */
-  .highcharts-yaxis-labels span:first-child {
+  /* Hide the ticks and grid lines for the y-axis*/
+  .highcharts-yaxis-labels {
     display: none;
   }
 
-  /* .highcharts-tooltip-box {
-    fill: black;
-    fill-opacity: 0.6;
-  } */
+  .highcharts-axis-labels.highcharts-xaxis-labels {
+    /* Highcharts sets inline styles, so we need !important to increase specificity */
+    text,
+    span {
+      font-family: ${chartFontFamily} !important;
+      font-size: 13px !important;
+    }
+  }
+
+  .highcharts-grid-line {
+    display: none;
+  }
   g.highcharts-tooltip {
     display: none;
   }
@@ -84,6 +56,7 @@ export const Wrapper = styled.div`
   }
   .highcharts-markers {
     stroke: white !important;
+    stroke-dasharray: none !important; /* I'm really, really sorry */
   }
   .highcharts-halo {
     fill: white !important;
@@ -92,15 +65,12 @@ export const Wrapper = styled.div`
   }
   .highcharts-tooltip > span {
     background: rgba(0, 0, 0, 0.7);
-    color: #ffffff;
+    color: ${palette.white};
     border-radius: 4px;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
     padding: 16px;
   }
-  /* .highcharts-tooltip text {
-    fill: white;
-    text-shadow: 0 0 3px black;
-  } */
+
   .highcharts-legend {
     font-family: 'Roboto', sans-serif;
     font-style: normal;
@@ -120,14 +90,84 @@ export const Wrapper = styled.div`
 
   /* No action */
   .limited-action {
-    fill: ${props =>
-      props.projections.getChartSeriesColorMap().limitedActionSeries};
-    stroke: ${props =>
-      props.isInferred
-        ? props.projections.getChartSeriesColorMap().limitedActionSeries
-        : 'white'};
-    fill-opacity: 1;
+    .highcharts-graph {
+      stroke: ${COLORS.LIMITED_ACTION};
+      stroke-dasharray: 1, 6;
+      stroke-width: 4px;
+      fill-opacity: 1;
+      stroke-linecap: square;
+    }
+
+    &.highcharts-markers {
+      path {
+        fill: ${COLORS.LIMITED_ACTION};
+      }
+    }
   }
+  /* Projected */
+  .projected {
+    .highcharts-graph {
+      stroke: ${COLORS.PROJECTED};
+      stroke-dasharray: 1, 6;
+      stroke-width: 4px;
+      stroke-linecap: square;
+    }
+
+    &.highcharts-markers {
+      path {
+        fill: ${COLORS.PROJECTED};
+      }
+    }
+  }
+  /* Hospitalizations */
+  .hospitalizations {
+    .highcharts-graph {
+      stroke: ${COLORS.HOSPITALIZATIONS};
+      stroke-width: 4px;
+      stroke-linecap: round;
+    }
+
+    &.highcharts-markers {
+      path {
+        fill: ${COLORS.HOSPITALIZATIONS};
+      }
+    }
+  }
+
+  /* Stay at home */
+  .stay-at-home {
+    .highcharts-graph {
+      stroke: ${props =>
+        props.projections.getChartSeriesColorMap().shelterInPlaceSeries};
+      stroke-dasharray: 1, 6;
+      stroke-width: 4px;
+      stroke-linecap: square;
+    }
+
+    &.highcharts-markers {
+      path {
+        fill: ${props =>
+          props.projections.getChartSeriesColorMap().shelterInPlaceSeries};
+      }
+    }
+  }
+
+  .Annotation {
+    text {
+      font-family: ${chartFontFamily};
+    }
+    &.Annotation--BedsAvailable {
+      text {
+        fill: ${palette.primary.contrastText};
+        font-size: 14px;
+      }
+      rect {
+        fill-opacity: 0;
+        stroke: none;
+      }
+    }
+  }
+
   /* Social distancing */
   .social-distancing {
     fill: ${props =>
@@ -138,35 +178,17 @@ export const Wrapper = styled.div`
         : 'white'};
     fill-opacity: 1;
   }
-  /* Stay at home */
-  .stay-at-home {
-    fill: ${props =>
-      props.projections.getChartSeriesColorMap().shelterInPlaceSeries};
-    stroke: ${props =>
-      props.isInferred
-        ? props.projections.getChartSeriesColorMap().shelterInPlaceSeries
-        : 'white'};
-    fill-opacity: 1;
-  }
+
   /* Available beds */
   .beds {
-    stroke: white;
-    stroke-width: 1px;
-    stroke-dasharray: 8, 8;
+    .highcharts-graph {
+      stroke: ${palette.black};
+      stroke-opacity: 0.6;
+      stroke-width: 1px;
+      stroke-dasharray: 4, 3;
+    }
   }
-  .beds {
-    fill: rgba(0, 0, 0, 0.7);
-    stroke: rgba(0, 0, 0, 0.7);
-  }
-  .highcharts-plot-line {
-    stroke: #ff3348;
-    stroke-width: 3px;
-  }
-  /* Projected */
-  .projected {
-    stroke: ${props =>
-      props.projections.getChartSeriesColorMap().projectedSeries};
-  }
+
   .${snakeCase(INTERVENTIONS.LIMITED_ACTION)} {
     stroke: ${props => props.projections.getAlarmLevelColor()};
   }

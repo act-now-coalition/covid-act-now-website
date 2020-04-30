@@ -1,13 +1,11 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
 import HomePageHeader from 'components/Header/HomePageHeader';
-import { COLORS } from 'enums';
 import Map from 'components/Map/Map';
-import Endorsements from 'screens/Endorsements/Endorsements';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import ShareBlock from 'components/ShareBlock/ShareBlock';
+import CriteriaExplanation from './CriteriaExplanation/CriteriaExplanation';
 
-import { Wrapper, Content } from './HomePage.style';
+import { Content } from './HomePage.style';
 
 export default function HomePage() {
   return (
@@ -15,16 +13,17 @@ export default function HomePage() {
       <AppMetaTags
         canonicalUrl="/"
         pageTitle={undefined}
-        pageDescription="Urge your public officials to quickly take action against the COVID-19 pandemic. These charts predict the last day each state can act before the point of no return."
+        pageDescription="Real-time modeling and metrics to understand where we stand against COVID. 50 states. 2,100+ counties. Click the map to dive in"
       />
       <HomePageHeader />
       <main>
         <div className="App">
           <Content>
             <Map />
+            <CriteriaExplanation />
             <div
               style={{
-                padding: '0 1.5rem',
+                padding: '0 1rem',
               }}
             >
               <ShareBlock />
@@ -32,14 +31,6 @@ export default function HomePage() {
           </Content>
         </div>
       </main>
-      <Wrapper style={{ backgroundColor: COLORS.LIGHTGRAY }}>
-        <Content>
-          <Typography variant="h3" component="h3" style={{ marginBottom: 20 }}>
-            Our Advisors
-          </Typography>
-          <Endorsements hideSocial={true} />
-        </Content>
-      </Wrapper>
     </>
   );
 }

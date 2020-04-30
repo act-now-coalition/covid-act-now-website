@@ -4,9 +4,11 @@ import {
   FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR,
   STATE_TO_CALCULATED_INTERVENTION_COLOR,
 } from 'enums/interventions';
+// import COUNTIES_JSON from './data/counties-10m.json';
 import STATES_JSON from './data/states-10m.json';
 import {
   USMapWrapper,
+  // USCountyMapWrapper,
   USStateMapWrapper,
 } from './Map.style';
 import { invert } from 'lodash';
@@ -33,11 +35,7 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent }) => {
     <USMapWrapper>
       {/** Map with shaded background colors for states. */}
       <USStateMapWrapper>
-        <ComposableMap
-          data-tip=""
-          projection="geoAlbersUsa"
-          stroke={'white'}
-        >
+        <ComposableMap data-tip="" projection="geoAlbersUsa" stroke={'white'}>
           <Geographies geography={STATES_JSON}>
             {({ geographies }) =>
               geographies.map(geo => {

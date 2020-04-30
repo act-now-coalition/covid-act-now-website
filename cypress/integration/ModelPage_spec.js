@@ -1,33 +1,14 @@
 describe('/state/:id', () => {
   it(`Stay At Home has the correct title & description`, () => {
     cy.visit('/us/ny');
-    cy.title().should('eq', 'New York Forecast - Covid Act Now');
-    cy.get('head meta[name="description"]').should(
-      'have.attr',
-      'content',
-      'New York: Keep staying at home to protect against the COVID-19 outbreak.',
+    cy.title().should(
+      'eq',
+      'Real-time modeling and metrics to understand where we stand against COVID. - Covid Act Now',
     );
-  });
-
-  // NOTE: These tests will need to be updated as states change their status
-  // (and may ultimately need to be removed).
-  it(`Limited Action has the correct title & description`, () => {
-    cy.visit('/us/sd');
-    cy.title().should('eq', 'South Dakota Forecast - Covid Act Now');
     cy.get('head meta[name="description"]').should(
       'have.attr',
       'content',
-      'South Dakota: Urge your public officials to act now against the COVID-19 outbreak!',
-    );
-  });
-
-  it(`Social Distancing has the correct title & description`, () => {
-    cy.visit('/us/nd');
-    cy.title().should('eq', 'North Dakota Forecast - Covid Act Now');
-    cy.get('head meta[name="description"]').should(
-      'have.attr',
-      'content',
-      'North Dakota: Urge your public officials to act now against the COVID-19 outbreak!',
+      'Real-time modeling and metrics to understand where we stand against COVID. 50 states. 2,100+ counties. Click the map to dive in.',
     );
   });
 });

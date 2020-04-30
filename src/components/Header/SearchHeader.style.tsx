@@ -17,9 +17,10 @@ export const Content = styled.div`
   margin: 0 auto;
 `;
 
-export const SelectorWrapper = styled.div`
+export const SelectorWrapper = styled.div<{ isNarrowMobile: Boolean }>`
   flex: 1;
   margin-right: 0;
+  position: ${props => (props.isNarrowMobile ? 'static' : 'relative')};
 
   > div {
     margin: 0 auto;
@@ -27,6 +28,7 @@ export const SelectorWrapper = styled.div`
     @media (min-width: 1350px) {
       max-width: 900px;
       margin: 0 445px 0 auto;
+      position: relative;
     }
 
     @media (min-width: 1750px) {
@@ -56,40 +58,15 @@ export const MapToggle = styled.div<{ isActive: boolean }>`
 
 export const MenuBarWrapper = styled.div`
   display: flex;
+  position: relative;
 `;
 
-export const MapMenuMobileWrapper = styled.div`
-  width: 100%;
-  margin-top: 1rem;
-  background: #f2f2f2;
-  border-radius: 4px;
-  padding: 0.25rem;
-  display: flex;
-  align-items: stretch;
-`;
-
-export const MapMenuWrapper = styled.div`
-  flex: 0 0 524px;
-  background: #f2f2f2;
-  border-radius: 4px;
-  padding: 0.25rem;
-  display: flex;
-  align-items: stretch;
-`;
-
-export const MapMenuItem = styled.div<{ selected: boolean }>`
-  flex: 1;
-  height: inherit;
-  font-weight: 600;
-  color: ${props => (props.selected ? palette.secondary.main : 'inherit')};
-  background: ${props => (props.selected ? 'white' : 'transparent')};
-  box-shadow: ${props =>
-    props.selected ? '0px 2px 2px rgba(0, 0, 0, 0.16)' : 'none'};
-  cursor: pointer;
-  border-radius: 4px;
-  padding: 0.5rem;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+export const SearchHeaderWrapper = styled.div`
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  border-bottom: 1px solid #e3e3e3;
+  border-top: 1px solid #e3e3e3;
 `;

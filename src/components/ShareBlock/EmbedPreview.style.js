@@ -16,7 +16,7 @@ export const EmbedPreviewExitButton = styled.div`
   cursor: pointer;
   position: absolute;
   top: 1rem;
-  right: 1rem;
+  right: 2rem;
   font-size: 1.5rem;
   font-weight: 200;
   color: ${colors.grey[400]};
@@ -35,7 +35,7 @@ export const CenteredModal = styled(Modal)`
 
 export const EmbedPreviewScrollContainer = styled(Box)`
   max-height: 95vh;
-  overflow-y: scroll;
+  overflow-y: hidden;
 `;
 
 export const EmbedPreviewStyled = styled(Paper)`

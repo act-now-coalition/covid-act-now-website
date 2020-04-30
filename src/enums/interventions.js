@@ -34,7 +34,7 @@ export const INTERVENTION_DESCRIPTIONS = {
 
 export const COLOR_MAP = {
   ORANGE: {
-    BASE: '#F88722',
+    BASE: '#FFAD16',
     LIGHT: '#FFC020',
     DARK: '#933500',
   },
@@ -44,8 +44,10 @@ export const COLOR_MAP = {
     DARK: '#82000E',
   },
   GREEN: {
-    BASE: '#4BE6BF',
-    LIGHT: '#D0FFF4',
+    // Chosen to match "official" green from logo, etc.
+    BASE: 'rgb(0, 208, 125)',
+    // TODO: Remove GREEN.DARK? Per Josh Ziman we want to consolidate all
+    // instances of green into one, as long as text readability is maintained.
     DARK: '#0A3D31',
   },
   BLUE: '#3BBCE6',

@@ -3,11 +3,12 @@ import '../../App.css'; /* optional for styling like the :hover pseudo-class */
 import { invert } from 'lodash';
 import { useHistory } from 'react-router-dom';
 import { STATES } from 'enums';
-import { Legend, LegendItem, MiniLegendItem } from './Legend';
+import { LEGEND_TEXT, Level } from 'enums/zones';
+import { Legend, LegendItem } from './Legend';
 import USACountyMap from './USACountyMap';
 import { MAP_FILTERS } from '../../screens/ModelPage/Enums/MapFilterEnums';
-import { COLOR_MAP } from 'enums/interventions';
 import ReactTooltip from 'react-tooltip';
+import { MapInstructions } from './Map.style';
 
 function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
   const history = useHistory();
@@ -15,7 +16,6 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
 
   const goToStatePage = page => {
     window.scrollTo(0, 0);
-
     history.push(page);
   };
 
@@ -38,32 +38,10 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
   return (
     <div className="Map">
       {!hideLegend && (
-        <Legend>
-          <LegendItem
-            key={'legend-3'}
-            title={'Cases are increasing'}
-            color={COLOR_MAP.RED.BASE}
-            description={
-              'Hospitals at elevated risk to be overloaded in the next 3 weeks. Act now to flatten the curve.'
-            }
-          />
-          <LegendItem
-            key={'legend-2'}
-            title={'Cases are stable'}
-            color={COLOR_MAP.ORANGE.BASE}
-            description={
-              'Hospitals at moderate risk to be overloaded in the next 3-6 weeks.'
-            }
-          />
-          <LegendItem
-            key={'legend-1'}
-            title={'Cases are decreasing'}
-            color={COLOR_MAP.GREEN.BASE}
-            description={
-              'Hospitals not projected to overload assuming anti-COVID interventions remain in place.'
-            }
-          />
-        </Legend>
+        <MapInstructions>
+          <strong>Click a state</strong> to view reopening risk details and
+          county projections.
+        </MapInstructions>
       )}
       <div className="us-state-map">
         <USACountyMap
@@ -73,15 +51,26 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
       </div>
       {!hideLegend && (
         <Legend>
-          <MiniLegendItem
-            key={'legend-4'}
-            title={'Data unavailable'}
-            color={COLOR_MAP.GRAY.BASE}
-            description={'Predictions not available'}
+          <LegendItem
+            key={'legend-3'}
+            title={LEGEND_TEXT[Level.HIGH].name}
+            color={LEGEND_TEXT[Level.HIGH].color}
+            description={LEGEND_TEXT[Level.HIGH].detail}
+          />
+          <LegendItem
+            key={'legend-2'}
+            title={LEGEND_TEXT[Level.MEDIUM].name}
+            color={LEGEND_TEXT[Level.MEDIUM].color}
+            description={LEGEND_TEXT[Level.MEDIUM].detail}
+          />
+          <LegendItem
+            key={'legend-1'}
+            title={LEGEND_TEXT[Level.LOW].name}
+            color={LEGEND_TEXT[Level.LOW].color}
+            description={LEGEND_TEXT[Level.LOW].detail}
           />
         </Legend>
       )}
-
       <ReactTooltip>{content}</ReactTooltip>
     </div>
   );
