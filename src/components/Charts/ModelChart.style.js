@@ -7,6 +7,8 @@ import { colors } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { COLOR_MAP } from '../../enums/interventions';
 
+const chartFontFamily = "'Source Code Pro', 'Roboto', sans-serif";
+
 export const ChartContainer = styled.section`
   width: 100%;
 `;
@@ -181,6 +183,9 @@ export const Wrapper = styled.div`
   }
 
   .Annotation {
+    text {
+      font-family: ${chartFontFamily};
+    }
     &.Annotation--BedsAvailable {
       text {
         fill: ${palette.primary.contrastText};
@@ -206,13 +211,12 @@ export const Wrapper = styled.div`
 
   /* Available beds */
   .beds {
-    stroke: white;
-    stroke-width: 1px;
-    stroke-dasharray: 8, 8;
-  }
-  .beds {
-    fill: rgba(0, 0, 0, 0.7);
-    stroke: rgba(0, 0, 0, 0.7);
+    .highcharts-graph {
+      stroke: ${palette.black};
+      stroke-opacity: 0.6;
+      stroke-width: 1px;
+      stroke-dasharray: 4, 3;
+    }
   }
 
   .${snakeCase(INTERVENTIONS.LIMITED_ACTION)} {

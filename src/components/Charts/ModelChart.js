@@ -61,7 +61,7 @@ const ModelChart = ({
     condensedLegend: {
       bgColor: projections.getChartSeriesColorMap().limitedActionSeries,
     },
-    legendIndex: 1,
+    legendIndex: 2,
   };
 
   const socialDistancing = {
@@ -99,7 +99,7 @@ const ModelChart = ({
     condensedLegend: {
       bgColor: projections.getChartSeriesColorMap().projectedSeries,
     },
-    legendIndex: 2,
+    legendIndex: 3,
   };
 
   const previousEstimates = {
@@ -145,7 +145,7 @@ const ModelChart = ({
           : condensedFormatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
       bgColor: projections.getChartSeriesColorMap().shelterInPlaceSeries,
     },
-    legendIndex: 2,
+    legendIndex: 3,
   };
 
   const availableBeds = {
@@ -193,9 +193,7 @@ const ModelChart = ({
         },
       },
       yAxis: {
-        title: {
-          text: undefined,
-        },
+        visible: false,
       },
       tooltip: {
         formatter: function () {
