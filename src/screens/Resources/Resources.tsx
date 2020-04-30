@@ -41,7 +41,7 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
           <Typography variant="body1" component="p">
             Our model is open source and{' '}
             <a
-              href="https://github.com/covid-projections/covid-projections"
+              href="https://github.com/covid-projections/covid-data-model"
               target="_blank"
               rel="noopener noreferrer"
             >
