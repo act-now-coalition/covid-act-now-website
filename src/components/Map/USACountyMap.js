@@ -31,8 +31,6 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent }) => {
     }
   };
 
-  // TODO(igor): This has two sets of state maps: one for coloring and one for handling clicks
-  // This seems anecdotally bad for performance so we should do something better
   return (
     <USMapWrapper>
       {/** Map with shaded background colors for states. */}
