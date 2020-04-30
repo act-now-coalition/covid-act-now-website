@@ -50,7 +50,6 @@ export class Projection {
   readonly locationName: string;
   readonly isInferred: boolean;
   readonly totalPopulation: number;
-  readonly cumulativeDead: number;
   readonly dateOverwhelmed: Date | null;
 
   private readonly intervention: string;
@@ -106,10 +105,6 @@ export class Projection {
     this.fixZeros(this.hospitalizations);
     this.fixZeros(this.cumulativeDeaths);
 
-    this.cumulativeDead = this.cumulativeDeaths[
-      this.cumulativeDeaths.length - 1
-    ];
-
     const shortageStart =
       summaryWithTimeseries.projections.totalHospitalBeds.shortageStartDate;
     this.dateOverwhelmed =
@@ -120,13 +115,16 @@ export class Projection {
     return this.intervention;
   }
 
-  cumulativeInfectedAfter(days: number) {
+  get finalCumulativeInfected() {
     return this.cumulativeInfected[this.cumulativeInfected.length - 1];
   }
-  cumulativeDeadAfter(days: number) {
+
+  get finalCumulativeDeaths() {
     return this.cumulativeDeaths[this.cumulativeDeaths.length - 1];
   }
-  dateAfter(days: number) {
+
+  /** Returns the date when projections end (should be 90 days out). */
+  get finalDate(): Date {
     return this.dates[this.dates.length - 1];
   }
 

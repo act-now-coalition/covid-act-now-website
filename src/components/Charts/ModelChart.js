@@ -18,6 +18,7 @@ import {
   CondensedLegendItemStyled,
 } from './ModelChart.style';
 import Outcomes from '../Outcomes/Outcomes';
+import { formatDate } from 'utils';
 
 const formatIntervention = (intervention, optCase) =>
   `3 months of ${intervention.toLowerCase()}${optCase || ''}`;
@@ -307,20 +308,28 @@ const ModelChart = ({
       </ChartContainer>
     );
   }
+
+  // TODO(michael): I think this logic matches what we show in the chart, but we should
+  // unify this logic.
+  let outcomesProjections = [projections.baseline],
+    outcomesColors = [projections.getSeriesColorForLimitedAction()];
+  if (projections.primary.isInferred) {
+    outcomesProjections.push(projections.primary);
+    outcomesColors.push(projections.getSeriesColorForPrimary());
+  } else {
+    outcomesProjections.push(projections.distancing.now);
+    outcomesColors.push(projections.getSeriesColorForShelterInPlace());
+  }
   return (
     <ChartContainer>
       <Wrapper projections={projections} isInferred={projection.isInferred}>
         <Chart options={options} />
         <Outcomes
-          title="Predicted Outcomes"
-          projections={[projections.baseline, projections.primary]}
-          colors={[
-            projections.getSeriesColorForLimitedAction(),
-            projections.getSeriesColorForPrimary(),
-          ]}
-          asterisk={['', '*', '*', '**']}
-          timeHorizon={120}
-          currentIntervention={projections.stateIntervention}
+          title={`Predicted Outcomes by ${formatDate(
+            projections.primary.finalDate,
+          )} (90 days from now)`}
+          projections={outcomesProjections}
+          colors={outcomesColors}
         />
         <DisclaimerWrapper>
           <Disclaimer>

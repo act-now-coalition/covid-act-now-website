@@ -1,6 +1,5 @@
 import React from 'react';
-import { INTERVENTIONS } from 'enums';
-
+import { formatDate } from 'utils';
 import {
   OutcomesWrapper,
   OutcomesTable,
@@ -8,49 +7,29 @@ import {
   OutcomesTableRow,
 } from './Outcomes.style';
 
-const Outcomes = ({
-  projections,
-  asterisk,
-  timeHorizon,
-  title,
-  colors,
-  currentIntervention,
-}) => {
+const Outcomes = ({ projections, title, colors }) => {
   return (
     <OutcomesWrapper>
       <h2>{title}</h2>
       <OutcomesTable>
         <OutcomesTableHeader>
           <div>Scenario</div>
-          <div>Population Cumulatively Infected in 3 Months</div>
           <div>Hospital Overload Date</div>
-          <div>Deaths in 3 Months</div>
+          <div>Population Infected (Cumulative)</div>
+          <div>Deaths</div>
         </OutcomesTableHeader>
         {projections.map((projection, idx) => {
           let rowLabel = projection.label;
-          if (currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE) {
-            if (rowLabel === '3 Months of Social distancing') {
-              rowLabel = '3 Months of Stay at home (lax)';
-            } else if (rowLabel === '3 Months of Stay at home') {
-              rowLabel = '3 Months of Stay at home (strict)';
-            }
-            if (
-              currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE ||
-              currentIntervention === INTERVENTIONS.SOCIAL_DISTANCING
-            ) {
-              if (rowLabel === 'Limited action') {
-                rowLabel = 'If restrictions are lifted';
-              }
-            }
+          if (rowLabel === 'Limited action') {
+            rowLabel = 'If restrictions are lifted';
           }
 
           return (
             <OutcomesRow
               key={idx}
               projection={projection}
-              label={`${rowLabel}${asterisk[idx]}`}
+              label={rowLabel}
               color={colors[idx]}
-              timeHorizon={timeHorizon}
             />
           );
         })}
@@ -59,42 +38,25 @@ const Outcomes = ({
   );
 };
 
-const OutcomesRow = ({ projection, label, timeHorizon, color }) => {
+const OutcomesRow = ({ projection, label, color }) => {
   return (
     <OutcomesTableRow>
       <div style={{ fontWeight: 'bold', color }}>{label}</div>
+
+      <div>
+        {projection.dateOverwhelmed
+          ? formatDate(projection.dateOverwhelmed)
+          : 'Not in the next 90 days'}
+      </div>
+
       <div>
         {formatBucketedNumber(
-          timeHorizon
-            ? projection.cumulativeInfectedAfter(timeHorizon)
-            : projection.cumulativeInfectedAfter(999),
+          projection.finalCumulativeInfected,
           projection.totalPopulation,
         )}
       </div>
-      {timeHorizon ? (
-        <div>
-          {projection.dateOverwhelmed &&
-          projection.dateOverwhelmed < projection.dateAfter(timeHorizon)
-            ? projection.dateOverwhelmed.toDateString()
-            : projection.dateOverwhelmed
-            ? 'outside time bound'
-            : 'Not in the next 3 months'}
-        </div>
-      ) : (
-        <div>
-          {projection.dateOverwhelmed
-            ? projection.dateOverwhelmed.toDateString()
-            : 'Not in the next 3 months'}
-        </div>
-      )}
 
-      <div>
-        {formatNumber(
-          timeHorizon
-            ? projection.cumulativeDeadAfter(timeHorizon)
-            : projection.cumulativeDead,
-        )}
-      </div>
+      <div>{formatNumber(projection.finalCumulativeDeaths)}</div>
     </OutcomesTableRow>
   );
 };
