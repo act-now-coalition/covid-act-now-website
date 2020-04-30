@@ -211,13 +211,12 @@ export const Wrapper = styled.div`
 
   /* Available beds */
   .beds {
-    stroke: white;
-    stroke-width: 1px;
-    stroke-dasharray: 8, 8;
-  }
-  .beds {
-    fill: rgba(0, 0, 0, 0.7);
-    stroke: rgba(0, 0, 0, 0.7);
+    .highcharts-graph {
+      stroke: ${palette.black};
+      stroke-opacity: 0.6;
+      stroke-width: 1px;
+      stroke-dasharray: 4, 3;
+    }
   }
 
   .${snakeCase(INTERVENTIONS.LIMITED_ACTION)} {

@@ -11,7 +11,7 @@ export const ZoneChartWrapper = styled.div`
 
   .highcharts-yaxis-grid .highcharts-grid-line {
     stroke: ${palette.black};
-    stroke-opacity: 0.7;
+    stroke-opacity: 0.6;
     stroke-width: 1px;
     stroke-dasharray: 4, 3;
   }
