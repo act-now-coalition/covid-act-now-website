@@ -13,8 +13,11 @@ import ModelChart from 'components/Charts/ModelChart';
 import { Projections } from 'models/Projections';
 import { Projection } from 'models/Projection';
 import SummaryStats from 'components/SummaryStats/SummaryStats';
+import Disclaimer from 'components/Disclaimer/Disclaimer';
 import { ZoneChartWrapper } from 'components/Charts/ZoneChart.style';
 import Chart from 'components/Charts/Chart';
+import ClaimStateBlock from 'components/ClaimStateBlock/ClaimStateBlock';
+
 import {
   optionsRt,
   optionsHospitalUsage,
@@ -74,9 +77,16 @@ const ChartsHolder = (props: {
               {caseGrowthStatusText(projection)}
             </ChartDescription>
             {rtRangeData && (
-              <ZoneChartWrapper>
-                <Chart options={optionsRt(rtRangeData, endDate) as any} />
-              </ZoneChartWrapper>
+              <>
+                <ZoneChartWrapper>
+                  <Chart options={optionsRt(rtRangeData, endDate) as any} />
+                </ZoneChartWrapper>
+                <Disclaimer>
+                  We define <strong>infection rate</strong> as “reproductive
+                  number” implied by the growth of new cases and new deaths, day
+                  over day.
+                </Disclaimer>
+              </>
             )}
             <ChartHeader>
               {ChartTypeToTitle[ChartType.POSITIVE_TESTS]}
@@ -86,13 +96,19 @@ const ChartsHolder = (props: {
               {positiveTestsStatusText(projection)}
             </ChartDescription>
             {testPositiveData && (
-              <ZoneChartWrapper>
-                <Chart
-                  options={
-                    optionsPositiveTests(testPositiveData, endDate) as any
-                  }
-                />
-              </ZoneChartWrapper>
+              <>
+                <ZoneChartWrapper>
+                  <Chart
+                    options={
+                      optionsPositiveTests(testPositiveData, endDate) as any
+                    }
+                  />
+                </ZoneChartWrapper>
+                <Disclaimer>
+                  We define <strong>positive tests</strong> as the percent of
+                  people tested for COVID on any given day that test positive.
+                </Disclaimer>
+              </>
             )}
             <ChartHeader>
               {ChartTypeToTitle[ChartType.HOSPITAL_USAGE]}
@@ -102,13 +118,20 @@ const ChartsHolder = (props: {
               {hospitalOccupancyStatusText(projection)}
             </ChartDescription>
             {icuUtilizationData && (
-              <ZoneChartWrapper>
-                <Chart
-                  options={
-                    optionsHospitalUsage(icuUtilizationData, endDate) as any
-                  }
-                />
-              </ZoneChartWrapper>
+              <>
+                <ZoneChartWrapper>
+                  <Chart
+                    options={
+                      optionsHospitalUsage(icuUtilizationData, endDate) as any
+                    }
+                  />
+                </ZoneChartWrapper>
+                <Disclaimer>
+                  We define <strong>COVID ICU usage</strong> as the percentage
+                  of typically available ICU beds currently occupied by COVID
+                  patients.
+                </Disclaimer>
+              </>
             )}
             <ChartHeader>Future projections</ChartHeader>
             <ChartLocationName>{projection.locationName}</ChartLocationName>
@@ -117,13 +140,15 @@ const ChartsHolder = (props: {
             </ChartDescription>
             <ModelChart
               projections={props.projections}
-              stateId={props.stateId}
-              selectedCounty={props.countyId}
               height={''}
               condensed={false}
               forCompareModels={false}
             />
           </MainContentInner>
+          <ClaimStateBlock
+            stateId={props.stateId}
+            countyName={props.countyId}
+          />
         </ChartContentWrapper>
       )}
     </>

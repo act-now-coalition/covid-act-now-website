@@ -11,9 +11,9 @@
 
 h2 {
   font-size: 20px;
-  line-height: 28px;
   font-style: normal;
   font-weight: 400;
+  line-height: 28px;
   margin-bottom: 0;
 }
 
@@ -24,6 +24,10 @@ h4 {
 p {
   font-size: 16px;
   line-height: 24px;
+}
+
+p a {
+  color: #3bbce6;
 }
 
 th,
@@ -44,8 +48,8 @@ tr {
 
 .analysis-group {
   background-color: '#fafafa';
-  padding: 20;
   margin-top: 20;
+  padding: 20;
 }
 
 .stark {
@@ -54,14 +58,14 @@ tr {
 }
 
 .App-header {
+  align-items: center;
   background-color: #282c34;
-  min-height: 100vh;
+  color: white;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: center;
+  min-height: 100vh;
 }
 
 .App-link {

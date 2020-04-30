@@ -3,17 +3,10 @@ import _ from 'lodash';
 import { dateFormat, numberFormat } from 'highcharts';
 import moment from 'moment';
 import { INTERVENTIONS } from 'enums/interventions';
-import LightTooltip from 'components/LightTooltip/LightTooltip';
-import ClaimStateBlock from 'components/ClaimStateBlock/ClaimStateBlock';
 import Chart from './Chart';
-import { useModelLastUpdatedDate } from 'utils/model';
 import {
   ChartContainer,
   Wrapper,
-  DisclaimerWrapper,
-  Disclaimer,
-  DisclaimerHeader,
-  DisclaimerBody,
   CondensedLegendStyled,
   CondensedLegendItemStyled,
 } from './ModelChart.style';
@@ -33,13 +26,10 @@ const ModelChart = ({
   condensed,
   projections,
   forCompareModels, // true when used by CompareInterventions.js component.
-  stateId,
-  selectedCounty,
 }) => {
   // We use the inferred projection if supported, otherwise the worst case for the currently active intervention
   let projection = projections.primary;
   const currentIntervention = projections.stateIntervention;
-  const lastUpdatedDate = useModelLastUpdatedDate();
 
   const data = [
     projections.baseline.getDataset('hospitalizations'),
@@ -334,36 +324,6 @@ const ModelChart = ({
           projections={outcomesProjections}
           colors={outcomesColors}
         />
-        <DisclaimerWrapper>
-          <Disclaimer>
-            <DisclaimerHeader>
-              <LightTooltip
-                title="Currently we aggregate data over 4 day intervals to smooth out inconsistencies in the source data. We’re working on improving this now."
-                placement="bottom"
-              >
-                <span>
-                  Last updated{' '}
-                  {lastUpdatedDate && lastUpdatedDate.toLocaleDateString()}
-                </span>
-              </LightTooltip>
-            </DisclaimerHeader>
-            <DisclaimerBody>
-              This model updates every 3 days and is intended to help make fast
-              decisions, not predict the future.{' '}
-              <a
-                href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Learn more about our projection and its limitations
-              </a>
-              .
-            </DisclaimerBody>
-          </Disclaimer>
-          <Disclaimer>
-            <ClaimStateBlock stateId={stateId} county={selectedCounty} />
-          </Disclaimer>
-        </DisclaimerWrapper>
       </Wrapper>
     </ChartContainer>
   );
