@@ -28,7 +28,20 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
       <Content>
         <StapledSidebar sidebar={sidebar}>
           <SectionHeader variant="body1" component="p">
-            General questions? Email{' '}
+            See our{' '}
+            <a
+              href="mailto:info@covidactnow.org"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              FAQ here
+            </a>
+            . If you have more questions, please reach out to us at the email addresses below.
+          <SectionHeader variant="h4" component="h4" id="governments">
+            General Questions
+          </SectionHeader>
+          <Typography variant="body1" component="p">
+            Email{' '}
             <a
               href="mailto:info@covidactnow.org"
               target="_blank"
@@ -37,7 +50,8 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
               info@covidactnow.org
             </a>
             .
-          </SectionHeader>
+          </Typography>
+            
           <SectionHeader variant="h4" component="h4" id="governments">
             Governments
           </SectionHeader>
