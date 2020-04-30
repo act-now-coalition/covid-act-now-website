@@ -1,5 +1,6 @@
 import React from 'react';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
+import ShareBlock from 'components/ShareBlock/ShareBlock';
 import Typography from '@material-ui/core/Typography';
 import StapledSidebar, {
   SidebarLink,
@@ -145,6 +146,7 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
             </a>{' '}
             if you’re interested in making a grant.
           </Typography>
+          <ShareBlock forceVertical={true} />
         </StapledSidebar>
       </Content>
     </Wrapper>

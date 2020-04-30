@@ -21,7 +21,7 @@ export const Wrapper = styled.div`
     padding-top: 3rem;
   }
 
-  @media (min-width: 900px) {
+  @media (min-width: 932px) {
     margin: 4.5rem auto 0;
   }
 `;

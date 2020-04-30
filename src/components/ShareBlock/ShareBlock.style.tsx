@@ -10,15 +10,19 @@ export const ShareSpacer = styled.div`
   }
 `;
 
-export const ShareContainer = styled.div<{ condensed?: boolean }>`
+export const ShareContainer = styled.div<{
+  condensed?: boolean;
+  forceVertical?: boolean;
+}>`
   background: ${palette.white};
-  max-width: 640px;
-  margin: ${props => (props.condensed ? 0 : '3rem auto')};
-  border: 1px solid ${palette.divider};
-  padding: 1.5rem;
+  max-width: 900px;
+  margin: ${props => (props.condensed ? 0 : '3rem 0')};
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 4px;
-  box-shadow: 0 0 0 1px rgba(63, 63, 68, 0.05),
-    0 1px 3px 0 rgba(63, 63, 68, 0.15);
+
+  @media screen and (min-width: 900px) {
+    display: ${props => (props.forceVertical ? 'block' : 'flex')};
+  }
 `;
 
 export const ShareInstruction = styled(Typography)<{ component?: string }>`
@@ -28,7 +32,7 @@ export const ShareInstruction = styled(Typography)<{ component?: string }>`
   font-weight: 700;
   line-height: 1.6rem;
   color: ${palette.black};
-  text-align: center;
+  text-align: left;
 `;
 
 export const ShareButtonContainer = styled.div<{ reflow: boolean }>`
@@ -52,9 +56,25 @@ export const ShareButtonContainer = styled.div<{ reflow: boolean }>`
   }
 `;
 
-export const ShareTypeDivider = styled.div`
-  border-top: 1px solid ${palette.divider};
-  margin: 1.5rem -1.5rem;
+export const ShareType = styled.div<{ forceVertical?: Boolean }>`
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 1.5rem;
+  flex: 1;
+  &:last-child {
+    border-bottom: 0;
+  }
+
+
+  @media (min-width: 900px) {
+    border-right: ${props =>
+      props.forceVertical ? '0' : '1px solid rgba(0, 0, 0, 0.12);'}
+    border-bottom: ${props =>
+      props.forceVertical ? '1px solid rgba(0, 0, 0, 0.12);' : '0'};
+
+    &:last-child {
+      border-right: 0;
+    }
+  }
 `;
 
 export const StyledShareButton = styled.div<{
