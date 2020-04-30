@@ -14,19 +14,19 @@ async function getStateAndCountyDataFiles(stateAbbr: string) {
   const stateProjections = await fetchProjections(stateAbbr);
   let inferenceCounties = 0;
   let countyFipsData = {} as { [key: string]: string };
-  await Promise.all(
-    stateSummaryData.counties_with_data.map(async (fipsCode: string) => {
-      try {
-        const countyProjections = await fetchProjections(stateAbbr, {
-          full_fips_code: fipsCode,
-        });
-        inferenceCounties += countyProjections.supportsInferred ? 1 : 0;
-        countyFipsData[fipsCode] = countyProjections.getAlarmLevelColor();
-      } catch (ex) {
-        console.log(`No color found for: ${stateAbbr} / ${fipsCode}`);
-      }
-    }),
-  );
+  let counties = stateSummaryData.counties_with_data;
+  for (var i = 0; i < counties.length; i++) {
+    const fipsCode = counties[i];
+    try {
+      const countyProjections = await fetchProjections(stateAbbr, {
+        full_fips_code: fipsCode,
+      });
+      inferenceCounties += countyProjections.supportsInferred ? 1 : 0;
+      countyFipsData[fipsCode] = countyProjections.getAlarmLevelColor();
+    } catch (ex) {
+      console.log(`No color found for: ${stateAbbr} / ${fipsCode}`);
+    }
+  }
 
   return {
     stateProjections,

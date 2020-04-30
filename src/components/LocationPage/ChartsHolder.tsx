@@ -148,6 +148,7 @@ function generateChartDescription(
       `If all restrictions were lifted today, hospitals would overload on ${worstCaseProjection.dateOverwhelmed}.`
     );
   }
+}
 
 // Exported for use by AllStates.js.
 export function getChartData(
