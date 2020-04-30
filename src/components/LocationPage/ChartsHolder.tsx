@@ -147,12 +147,12 @@ const ChartsHolder = (props: {
               condensed={false}
               forCompareModels={false}
             />
+            <ShareModelBlock
+              condensed={false}
+              stateId={props.stateId}
+              county={props.countyId}
+            />
           </MainContentInner>
-          <ShareModelBlock
-            condensed={false}
-            stateId={props.stateId}
-            county={props.countyId}
-          />
           <ClaimStateBlock
             stateId={props.stateId}
             countyName={props.countyId}

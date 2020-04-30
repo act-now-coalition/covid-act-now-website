@@ -1,5 +1,6 @@
 import React from 'react';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
+import ShareBlock from 'components/ShareBlock/ShareBlock';
 import Typography from '@material-ui/core/Typography';
 import { TEAM } from './../../enums';
 import StapledSidebar, {
@@ -359,6 +360,7 @@ const About = ({ children }: { children: React.ReactNode }) => {
             </a>
             .
           </Typography>
+          <ShareBlock forceVertical={true} />
         </StapledSidebar>
       </Content>
     </Wrapper>

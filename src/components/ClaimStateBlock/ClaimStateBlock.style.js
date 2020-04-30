@@ -8,6 +8,10 @@ export const ClaimStateWrapper = styled.div`
   background-color: #fbfbfb;
   padding: 3.5rem 1rem;
   margin-top: 3rem;
+
+  @media (min-width: 600px) {
+    padding: 3.5rem 0;
+  }
 `;
 
 export const ClaimStateContainer = styled.div`
@@ -16,8 +20,14 @@ export const ClaimStateContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media (min-width: 600px) {
-    flex-direction: row;
+  @media (min-width: 1350px) {
+    max-width: 900px;
+    margin: 0 445px 0 auto;
+    position: relative;
+  }
+
+  @media (min-width: 1750px) {
+    margin: 0 auto;
   }
 `;
 
@@ -31,7 +41,7 @@ export const ClaimStateText = styled.div`
 
 export const ClaimStateHeader = styled(Typography)`
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.6rem;
