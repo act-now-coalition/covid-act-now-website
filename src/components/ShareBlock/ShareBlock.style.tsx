@@ -15,12 +15,15 @@ export const ShareContainer = styled.div<{
   centered?: boolean;
 }>`
   background: ${palette.white};
-  max-width: 640px;
+  max-width: 900px;
   margin: ${props =>
     props.condensed ? 0 : props.centered ? '3rem auto' : '3rem 0'};
   border: 1px solid rgba(0, 0, 0, 0.12);
-  padding: 1.5rem;
   border-radius: 4px;
+
+  @media screen and (min-width: 900px) {
+    display: flex;
+  }
 `;
 
 export const ShareInstruction = styled(Typography)<{ component?: string }>`
@@ -30,7 +33,7 @@ export const ShareInstruction = styled(Typography)<{ component?: string }>`
   font-weight: 700;
   line-height: 1.6rem;
   color: ${palette.black};
-  text-align: center;
+  text-align: left;
 `;
 
 export const ShareButtonContainer = styled.div<{ reflow: boolean }>`
@@ -54,9 +57,23 @@ export const ShareButtonContainer = styled.div<{ reflow: boolean }>`
   }
 `;
 
-export const ShareTypeDivider = styled.div`
-  border-top: 1px solid rgba(0, 0, 0, 0.12);
-  margin: 1.5rem -1.5rem;
+export const ShareType = styled.div`
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 1.5rem;
+  flex: 1;
+  &:last-child {
+    border-bottom: 0;
+  }
+
+
+  @media (min-width: 900px) {
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+    border-bottom: 0;
+
+    &:last-child {
+      border-right: 0;
+    }
+  }
 `;
 
 export const StyledShareButton = styled.div<{
