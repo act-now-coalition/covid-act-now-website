@@ -130,9 +130,9 @@ const ChartsHolder = (props: {
                   />
                 </ZoneChartWrapper>
                 <Disclaimer metricName="COVID ICU usage">
-                  While experts agree surge healthcare capacity is critical, there
-                  is no benchmark for ICU surge capacity. This metric attempts to
-                  model capacity as interventions are relaxed.
+                  While experts agree surge healthcare capacity is critical,
+                  there is no benchmark for ICU surge capacity. This metric
+                  attempts to model capacity as interventions are relaxed.
                 </Disclaimer>
               </>
             )}
