@@ -21,6 +21,9 @@ export const ZoneChartWrapper = styled.div`
     .highcharts-graph {
       stroke: none;
     }
+    &.highcharts-series-inactive {
+      opacity: 1;
+    }
   }
 
   .ZoneAnnotation--CurrentValue {
