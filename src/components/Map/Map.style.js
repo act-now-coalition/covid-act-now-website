@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Typography from '@material-ui/core/Typography';
 
 export const USMapWrapper = styled.div`
   position: relative;
@@ -30,6 +31,10 @@ export const USStateMapWrapper = styled.div`
     opacity: 0.8;
     cursor: pointer;
   }
-}
+`;
 
+export const MapInstructions = styled(Typography)`
+  text-align: center;
+  margin: 2rem 1rem -0.5rem;
+  font-size: 0.875rem;
 `;

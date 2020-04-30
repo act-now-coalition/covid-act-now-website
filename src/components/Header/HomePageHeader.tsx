@@ -36,8 +36,8 @@ const HomePageHeader = () => {
         </HeaderTitle>
         <div>
           <HeaderSubCopy color="inherit" component="p" variant="subtitle2">
-            Real-time models and metrics to see where we stand against COVID.
-            <p>All 50 states. 2,100+ counties. Click the map to dive in.</p>
+            Real-time models and metrics to see where we stand against COVID and
+            help us reopen. All 50 states. 2,100+ counties.
           </HeaderSubCopy>
 
           <SelectorWrapper>

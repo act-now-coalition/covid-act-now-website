@@ -3,6 +3,7 @@ import HomePageHeader from 'components/Header/HomePageHeader';
 import Map from 'components/Map/Map';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import ShareBlock from 'components/ShareBlock/ShareBlock';
+import CriteriaExplanation from './CriteriaExplanation/CriteriaExplanation';
 
 import { Content } from './HomePage.style';
 
@@ -19,9 +20,10 @@ export default function HomePage() {
         <div className="App">
           <Content>
             <Map />
+            <CriteriaExplanation />
             <div
               style={{
-                padding: '0 1.5rem',
+                padding: '0 1rem',
               }}
             >
               <ShareBlock />
