@@ -5,18 +5,10 @@ import {
   Kicker,
   CriterionHeader,
   CriterionDescription,
-  CriteraFootnote,
   CriteriaList,
 } from './CriteriaExplanation.style';
-import { useHistory } from 'react-router-dom';
 
 const CriteriaExplanation = () => {
-  const history = useHistory();
-  const goTo = (route: string) => {
-    history.push(route);
-    window.scrollTo(0, 0);
-  };
-
   return (
     <Wrapper>
       <CriteriaList>
@@ -29,9 +21,7 @@ const CriteriaExplanation = () => {
         </Criterion>
         <Criterion>
           <Kicker>Criterion 2</Kicker>
-          <CriterionHeader>
-            Do we know how much COVID is actually out there?
-          </CriterionHeader>
+          <CriterionHeader>Are we testing enough?</CriterionHeader>
           <CriterionDescription>
             Is COVID testing widespread enough to be identifying most of the new
             cases?
@@ -46,10 +36,6 @@ const CriteriaExplanation = () => {
           </CriterionDescription>
         </Criterion>
       </CriteriaList>
-      <CriteraFootnote>
-        Learn more about our assessment criteria and US Interventions model{' '}
-        <span onClick={() => goTo('/about#model')}>here</span>.
-      </CriteraFootnote>
     </Wrapper>
   );
 };

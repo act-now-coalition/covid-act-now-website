@@ -7,7 +7,7 @@ export const DisclaimerWrapper = styled.div`
   max-width: 600px;
   padding: 1.5rem;
   border-radius: 4px;
-  margin: 0 0 1.5rem;
+  margin: 0.5rem 0 1.5rem;
   padding: 1rem;
   flex: 1;
 

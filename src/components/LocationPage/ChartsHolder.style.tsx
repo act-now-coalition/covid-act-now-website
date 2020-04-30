@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import palette from 'assets/theme/palette';
 import { Typography } from '@material-ui/core';
 
 export const ChartContentWrapper = styled.div`
@@ -46,4 +47,16 @@ export const ChartDescription = styled(Typography)`
   max-width: 600px;
   color: rgba(0, 0, 0, 0.7);
   margin-bottom: 1rem;
+`;
+
+export const BetaTag = styled.span`
+  font-size: 0.675rem;
+  padding: 0 0.75rem;
+  line-height: 1.25rem;
+  margin-left: 1rem;
+  border-radius: 5px;
+  display: inline-block;
+  background-color: ${palette.info.main};
+  color: white;
+  transform: translateY(-0.375rem);
 `;

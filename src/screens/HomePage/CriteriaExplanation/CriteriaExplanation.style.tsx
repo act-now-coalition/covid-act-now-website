@@ -61,18 +61,3 @@ export const CriterionHeader = styled(Typography)`
 export const CriterionDescription = styled(Typography)`
   font-size: 0.875rem;
 `;
-
-export const CriteraFootnote = styled(Typography)`
-  font-size: 0.75rem;
-  color: #6c6c6c;
-  margin-top: 0.5rem;
-
-  span {
-    text-decoration: underline;
-    cursor: pointer;
-  }
-
-  @media (min-width: 600px) {
-    text-align: center;
-  }
-`;

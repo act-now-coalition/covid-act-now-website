@@ -1,4 +1,5 @@
 import React from 'react';
+import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import Typography from '@material-ui/core/Typography';
 import { TEAM } from './../../enums';
 import StapledSidebar, {
@@ -21,6 +22,11 @@ const sidebar = (
 const About = ({ children }: { children: React.ReactNode }) => {
   return (
     <Wrapper>
+      <AppMetaTags
+        canonicalUrl="/about"
+        pageTitle="About Cvoid Act Now"
+        pageDescription="Covid Act Now is a multidisciplinary team of technologists, epidemiologists, health experts, and public policy leaders working to model how COVID is spreading in the U.S."
+      />
       <Header>
         <Content>
           <Typography variant="h3" component="h1">
@@ -44,8 +50,10 @@ const About = ({ children }: { children: React.ReactNode }) => {
           <Typography variant="body1" component="p">
             Covid Act Now is a multidisciplinary team of technologists,
             epidemiologists, health experts, and public policy leaders working
-            to model how COVID-19 will spread in the U.S. We work in partnership
-            with the{' '}
+            to model how COVID-19 will spread in the U.S.
+          </Typography>
+          <Typography variant="body1" component="p">
+            We work in partnership with the{' '}
             <a
               href="https://ghss.georgetown.edu/"
               target="_blank"

@@ -55,7 +55,7 @@ export const SummaryStatWrapper = styled(Box)`
 
   @media (min-width: 600px) {
     border-bottom: 0;
-    padding: 0 0.5rem;
+    padding: 0;
     flex-direction: column;
     align-items: center;
   }
@@ -117,4 +117,16 @@ export const StatValueText = styled(Typography)`
     font-size: 1.875rem;
     line-height: 3.5rem;
   }
+`;
+
+export const BetaTag = styled.span`
+  margin-left: 0.25rem;
+  border-radius: 5px;
+  display: inline-block;
+  background-color: ${palette.info.main};
+  color: white;
+  font-size: 0.675rem;
+  padding: 0 0.75rem;
+  transform: translateY(-0.25rem);
+  line-height: 1.25rem;
 `;
