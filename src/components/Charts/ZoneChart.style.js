@@ -11,9 +11,14 @@ export const ZoneChartWrapper = styled.div`
     stroke-width: 4px;
   }
 
-  .ZoneChart__AreaRange path {
-    stroke-width: 0;
-    stroke: none;
+  .ZoneChart__AreaRange {
+    .highcharts-area {
+      fill: ${palette.black};
+      fill-opacity: 0.07;
+    }
+    .highcharts-graph {
+      stroke: none;
+    }
   }
 
   .ZoneAnnotation--CurrentValue {

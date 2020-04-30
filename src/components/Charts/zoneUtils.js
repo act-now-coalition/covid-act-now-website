@@ -49,13 +49,12 @@ export const optionsRt = (data, endDate) => {
     },
     yAxis: {
       ...baseOptions.yAxis,
-      tickPositions: getTickPositions(minYAxis, maxYAxis, ZONES_RT),
+      tickPositions: getTickPositions(minYAxis, maxYAxis, zones),
     },
     series: [
       {
         className: 'ZoneChart__AreaRange',
         type: 'arearange',
-        fillColor: '#efefef',
         zIndex: 0,
         enableMouseTracking: false,
         data: data.map(d => [d.x, d.low, d.hi]),
@@ -63,7 +62,7 @@ export const optionsRt = (data, endDate) => {
       {
         name: 'Rt',
         type: 'spline',
-        zones: ZONES_RT,
+        zones,
         data,
       },
     ],
