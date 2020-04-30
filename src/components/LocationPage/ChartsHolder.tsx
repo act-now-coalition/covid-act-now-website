@@ -130,8 +130,9 @@ const ChartsHolder = (props: {
                   />
                 </ZoneChartWrapper>
                 <Disclaimer metricName="COVID ICU usage">
-                  Less than half of typically unoccupied ICU capacity should be
-                  occupied by COVID patients before reopening.
+                  While experts agree surge healthcare capacity is critical, there
+                  is no benchmark for ICU surge capacity. This metric attempts to
+                  model capacity as interventions are relaxed.
                 </Disclaimer>
               </>
             )}
