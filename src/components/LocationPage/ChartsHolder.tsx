@@ -271,7 +271,7 @@ function hospitalOccupancyStatusText(projection: Projection) {
   const location = projection.locationName;
   const capacity = projection.totalICUCapacity;
   const normallyFree = Math.floor(projection.typicallyFreeICUCapacity);
-  const percentUtilization = Math.round(100 * currentlyInICU / normallyFree);
+  const percentUtilization = Math.round((100 * currentlyInICU) / normallyFree);
 
   const lowText = `This suggests there is enough capacity to absorb a
       wave of new COVID hospitalizations.`;
