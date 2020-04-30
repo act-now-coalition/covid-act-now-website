@@ -38,8 +38,6 @@ export interface RtRange {
   high: number;
 }
 
-const ICU_CAPACITY_RATE_DEFAULT = 0.75;
-
 /**
  * Represents a single projection for a given state or county.  Contains a
  * time-series of things like hospitalizations, hospital capacity, infections, etc.
@@ -73,7 +71,6 @@ export class Projection {
     parameters: ProjectionParameters,
   ) {
     const timeseries = summaryWithTimeseries.timeseries;
-    const actuals = summaryWithTimeseries.actuals;
     const lastUpdated = new Date(summaryWithTimeseries.lastUpdatedDate);
     this.locationName = this.getLocationName(summaryWithTimeseries);
     this.intervention = parameters.intervention;
@@ -252,7 +249,7 @@ export class Projection {
     // we need to undo that assumption.
     // TODO(igor): Update this on the API side so we can undo this logic.
     const icuUtilization = timeseries.map(row => {
-      if (row.ICUBedCapacity > 0) {
+      if (row.ICUBedCapacity > 0 && row.ICUBedsInUse > 0) {
         return row.ICUBedsInUse / row.ICUBedCapacity;
       } else {
         return null;

@@ -142,14 +142,14 @@ export const POSITIVE_TESTS: Zones = {
 export const HOSPITAL_USAGE: Zones = {
   [Level.LOW]: {
     level: Level.LOW,
-    upperLimit: 0.88,
+    upperLimit: 0.4,
     name: 'Low',
     color: COLOR_MAP.GREEN.BASE,
     detail: 'Can handle a spike in COVID cases',
   },
   [Level.MEDIUM]: {
     level: Level.MEDIUM,
-    upperLimit: 1.0,
+    upperLimit: 0.6,
     name: 'Medium',
     color: COLOR_MAP.ORANGE.BASE,
     detail: 'May be at risk if COVID cases surge',
