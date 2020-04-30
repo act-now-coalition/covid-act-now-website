@@ -6,6 +6,7 @@ import {
   ChartHeader,
   ChartDescription,
   ChartLocationName,
+  BetaTag,
 } from './ChartsHolder.style';
 import LocationPageHeader from 'components/LocationPage/LocationPageHeader';
 import NoCountyDetail from './NoCountyDetail';
@@ -106,6 +107,7 @@ const ChartsHolder = (props: {
             )}
             <ChartHeader>
               {ChartTypeToTitle[ChartType.HOSPITAL_USAGE]}
+              <BetaTag>Beta</BetaTag>
             </ChartHeader>
             <ChartLocationName>{projection.locationName}</ChartLocationName>
             <ChartDescription>

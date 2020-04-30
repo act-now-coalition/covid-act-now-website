@@ -50,8 +50,10 @@ const About = ({ children }: { children: React.ReactNode }) => {
           <Typography variant="body1" component="p">
             Covid Act Now is a multidisciplinary team of technologists,
             epidemiologists, health experts, and public policy leaders working
-            to model how COVID-19 will spread in the U.S. We work in partnership
-            with the{' '}
+            to model how COVID-19 will spread in the U.S.
+          </Typography>
+          <Typography variant="body1" component="p">
+            We work in partnership with the{' '}
             <a
               href="https://ghss.georgetown.edu/"
               target="_blank"

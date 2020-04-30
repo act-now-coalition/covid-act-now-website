@@ -14,9 +14,9 @@ export const ChartTypeToMetricName = {
 };
 
 export const ChartTypeToTitle = {
-  [ChartType.CASE_GROWTH_RATE]: 'COVID infection growth rate',
-  [ChartType.POSITIVE_TESTS]: 'COVID positive test rate',
-  [ChartType.HOSPITAL_USAGE]: 'Available ICU capcity used by COVID patients',
+  [ChartType.CASE_GROWTH_RATE]: 'Infection growth rate',
+  [ChartType.POSITIVE_TESTS]: 'Positive test rate',
+  [ChartType.HOSPITAL_USAGE]: 'COVID ICU usage',
 };
 
 export interface LevelInfo {

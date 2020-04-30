@@ -22,8 +22,9 @@ const Disclaimer = ({ metricName }: { metricName: String }) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn more about how we calculate {metricName} here.
+          Learn more about how we calculate {metricName} here
         </a>
+        .
       </DisclaimerBody>
     </DisclaimerWrapper>
   );

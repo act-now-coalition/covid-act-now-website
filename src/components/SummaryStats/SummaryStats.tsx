@@ -12,6 +12,7 @@ import {
   StatValueText,
   StatTextWrapper,
   StatValueWrapper,
+  BetaTag,
 } from './SummaryStats.style';
 
 import SignalStatus from 'components/SignalStatus/SignalStatus';
@@ -19,7 +20,11 @@ import { formatDecimal, formatPercent } from 'components/Charts/utils';
 import { fail } from 'assert';
 import { isNull } from 'util';
 
-const SummaryStat = (props: { chartType: ChartType; value: number }) => {
+const SummaryStat = (props: {
+  chartType: ChartType;
+  value: number;
+  beta?: Boolean;
+}) => {
   const levelInfo = getLevelInfoForChartType(props.chartType, props.value);
 
   const formatValueForChart = (
@@ -41,7 +46,10 @@ const SummaryStat = (props: { chartType: ChartType; value: number }) => {
   return (
     <SummaryStatWrapper>
       <StatTextWrapper>
-        <StatNameText>{ChartTypeToMetricName[props.chartType]}</StatNameText>
+        <StatNameText>
+          {ChartTypeToMetricName[props.chartType]}{' '}
+          {props.beta && <BetaTag>Beta</BetaTag>}
+        </StatNameText>
         <StatDetailText>{levelInfo.detail}</StatDetailText>
       </StatTextWrapper>
       <StatValueWrapper>
@@ -74,6 +82,7 @@ const SummaryStats = (props: { stats: { [key: string]: number | null } }) => {
           />
           <SummaryStat
             chartType={ChartType.HOSPITAL_USAGE}
+            beta={true}
             value={props.stats[ChartType.HOSPITAL_USAGE] as number}
           />
         </SummaryStatsWrapper>
