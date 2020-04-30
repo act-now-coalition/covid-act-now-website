@@ -8,6 +8,7 @@ import { Wrapper, Content, Header } from './Contact.style';
 
 const sidebar = (
   <React.Fragment>
+    <SidebarLink href="#general">General Questions</SidebarLink>
     <SidebarLink href="#governments">Governments</SidebarLink>
     <SidebarLink href="#press">Press</SidebarLink>
     <SidebarLink href="#join-us">Join Us</SidebarLink>
@@ -28,16 +29,10 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
       <Content>
         <StapledSidebar sidebar={sidebar}>
           <SectionHeader variant="body1" component="p">
-            See our{' '}
-            <a
-              href="mailto:info@covidactnow.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              FAQ here
-            </a>
-            . If you have more questions, please reach out to us at the email addresses below.
-          <SectionHeader variant="h4" component="h4" id="governments">
+            See our <a href="/about#faq">FAQ here</a>. If you have more
+            questions, please reach out to us at the email addresses below.
+          </SectionHeader>
+          <SectionHeader variant="h4" component="h4" id="general">
             General Questions
           </SectionHeader>
           <Typography variant="body1" component="p">
@@ -51,7 +46,7 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
             </a>
             .
           </Typography>
-            
+
           <SectionHeader variant="h4" component="h4" id="governments">
             Governments
           </SectionHeader>
