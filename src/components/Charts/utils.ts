@@ -124,7 +124,6 @@ export const baseOptions: Highcharts.Options = {
           : this.axis.defaultLabelFormatter.call(this);
       },
     },
-    gridLineDashStyle: 'Dash',
   },
 };
 

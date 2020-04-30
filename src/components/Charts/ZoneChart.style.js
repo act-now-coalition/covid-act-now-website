@@ -9,6 +9,12 @@ export const ZoneChartWrapper = styled.div`
     margin-left: -3rem;
   }
 
+  .highcharts-yaxis-grid .highcharts-grid-line {
+    stroke: ${palette.black};
+    stroke-opacity: 0.7;
+    stroke-width: 1px;
+    stroke-dasharray: 4, 3;
+  }
   .ZoneChart__Line {
     stroke-width: 4px;
   }
@@ -41,6 +47,7 @@ export const ZoneChartWrapper = styled.div`
       fill: ${palette.white};
       stroke: ${palette.black};
       stroke-opacity: 0.12;
+      fill-opacity: 1;
     }
     text {
       font-family: ${chartFontFamily};
