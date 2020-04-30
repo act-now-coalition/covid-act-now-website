@@ -16,7 +16,7 @@ export const ShareContainer = styled.div<{
 }>`
   background: ${palette.white};
   max-width: 900px;
-  margin: ${props => (props.condensed ? 0 : '3rem 0')};
+  margin: ${props => (props.condensed ? 0 : '3rem auto')};
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 4px;
 
