@@ -42,7 +42,7 @@ const ShareBlock = ({
   const url = shareURL || 'https://covidactnow.org/';
   const quote =
     shareQuote ||
-    'See a projection for how long states and counties have until COVID overwhelms hospitals and how interventions flatten the curve and save lives: @COVIDActNow';
+    '@CovidActNow has real-time modeling and metrics to help America reopen safely. Check it out:';
   const hashtag = 'COVIDActNow';
 
   const trackShare = (target: string) => {

@@ -11,7 +11,7 @@ const ShareModelBlock = ({ condensed, stateId, county }) => {
   const shareURL = `https://covidactnow.org/us/${stateId.toLowerCase()}${
     county ? `/county/${county.county_url_name}` : ''
   }`;
-  const shareQuote = `This is the point of no return for intervention to prevent ${displayName}'s hospital system from being overloaded by Coronavirus: `;
+  const shareQuote = `@CovidActNow has real-time modeling and metrics to help assess how ${displayName} can reopen safely. Check it out: `;
   const shareInstruction = `Share ${displayName}'s COVID trends`;
   const newsletterInstruction = `Get the latest updates from the Covid Act Now team for ${displayName}`;
   const [showEmbedPreviewModal, setShowEmbedPreviewModal] = useState(false);

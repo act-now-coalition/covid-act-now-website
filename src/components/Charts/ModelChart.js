@@ -316,7 +316,7 @@ const ModelChart = ({
       <Wrapper projections={projections} isInferred={projection.isInferred}>
         <Chart options={options} />
         <Outcomes
-          title={`Predicted Outcomes by ${formatDate(
+          title={`Predicted outcomes by ${formatDate(
             projections.primary.finalDate,
           )} (90 days from now)`}
           projections={outcomesProjections}
