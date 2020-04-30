@@ -21,8 +21,7 @@ const ClaimStateBlock = ({ stateId, countyName }) => {
         <ClaimStateText>
           <ClaimStateHeader>Do you work for {headerName}?</ClaimStateHeader>
           <ClaimStateBody>
-            We’d love to know how you’re using our model. Email us at{' '}
-            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.
+            We’d love to know how you’re using our model.
           </ClaimStateBody>
         </ClaimStateText>
         <ClaimStateButtonWrapper>

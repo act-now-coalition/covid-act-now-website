@@ -130,8 +130,8 @@ const ChartsHolder = (props: {
                   />
                 </ZoneChartWrapper>
                 <Disclaimer metricName="COVID ICU usage">
-                  We recommend that less than half of typically unoccupied ICU
-                  capacity be occupied by COVID patients before re-opening.
+                  Less than half of typically unoccupied ICU capacity should be
+                  occupied by COVID patients before reopening.
                 </Disclaimer>
               </>
             )}
