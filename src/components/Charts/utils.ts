@@ -53,6 +53,7 @@ export const currentValueAnnotation = (
       className: 'ZoneAnnotation ZoneAnnotation--CurrentValue',
     },
   ],
+  zIndex: -1,
 });
 
 export const getTickPositions = (
@@ -77,7 +78,7 @@ export const getYAxisLimits = (minY: number, maxY: number, zones: Zone[]) => {
 
 export const roundAxisLimits = (axisMin: number, axisMax: number) => [
   axisMin,
-  _.ceil(1.2 * axisMax, 1),
+  _.ceil(axisMax, 2),
 ];
 
 export const getMaxY = (data: Highcharts.Point[]) => _.max(data.map(d => d.y));
@@ -173,6 +174,7 @@ const getZoneLabels = (
       },
       text: zone.name,
       className: `${zone.labelClassName} ${activeClassName}`,
+      allowOverlap: false,
     };
   });
 
