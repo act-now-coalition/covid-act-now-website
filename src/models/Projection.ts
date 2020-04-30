@@ -98,9 +98,10 @@ export class Projection {
 
     this.totalICUCapacity = this.calcIcuCapacity(summaryWithTimeseries);
     this.typicallyFreeICUCapacity =
-        summaryWithTimeseries.actuals.ICUBeds.capacity;
+      summaryWithTimeseries.actuals.ICUBeds.capacity;
     this.currentICUPatients = this.calcCurrentICUPatients(
-      timeseries, lastUpdated
+      timeseries,
+      lastUpdated,
     );
 
     this.fixZeros(this.hospitalizations);
@@ -275,13 +276,20 @@ export class Projection {
   }
 
   private calcIcuCapacity(s: RegionSummaryWithTimeseries) {
-    return (s.actuals.ICUBeds.capacity) * (1 / (1 - s.actuals.ICUBeds.typicalUsageRate));
+    return (
+      s.actuals.ICUBeds.capacity *
+      (1 / (1 - s.actuals.ICUBeds.typicalUsageRate))
+    );
   }
 
   private calcCurrentICUPatients(
     timeseries: Timeseries,
-    lastUpdated: Date): number|null {
-    const icuPatients = this.omitDataAtOrAfterDate( timeseries.map(row => row.ICUBedCapacity ), lastUpdated);
+    lastUpdated: Date,
+  ): number | null {
+    const icuPatients = this.omitDataAtOrAfterDate(
+      timeseries.map(row => row.ICUBedCapacity),
+      lastUpdated,
+    );
 
     return this.lastValue(icuPatients);
   }
