@@ -125,35 +125,17 @@ export class Projections {
       test_rate_level,
     } = this.getLevels();
 
-    let level;
     const levelList = [rt_level, hospitalizations_level, test_rate_level];
 
-    const highcount = levelList.filter((level: Level) => level === Level.HIGH)
-      .length;
-    const mediumCount = levelList.filter(
-      (level: Level) => level === Level.MEDIUM,
-    ).length;
-    const lowCount = levelList.filter((level: Level) => level === Level.LOW)
-      .length;
-    const unKnownCount = levelList.filter(
-      (level: Level) => level === Level.UNKNOWN,
-    ).length;
-
-    if (lowCount === 3) {
-      // if all the factors are low, level is low
-      level = Level.LOW;
-    } else if (unKnownCount + lowCount === 3) {
-      // if all the levels are unkown, status is unkwonw
-      // no reds and no yellows, but at least one unknown
-      level = Level.UNKNOWN;
-    } else if (highcount >= 2 || (mediumCount === 2 && highcount === 1)) {
-      // if there are more than two highs it's high or two mediums one red
-      level = Level.HIGH;
+    if (levelList.some(level => level == Level.HIGH)) {
+      return Level.HIGH;
+    } else if (levelList.some(level => level == Level.MEDIUM)) {
+      return Level.MEDIUM;
+    } else if (levelList.some(level => level == Level.UNKNOWN)) {
+      return Level.UNKNOWN;
     } else {
-      // if there is one red + two greens, two mediums + one green,  or three mediums
-      level = Level.MEDIUM;
+      return Level.LOW;
     }
-    return level;
   }
 
   getAlarmLevelColor() {
