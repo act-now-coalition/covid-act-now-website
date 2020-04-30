@@ -25,7 +25,7 @@ const Disclaimer = ({
         </LightTooltip>{' '}
         {children}{' '}
         <a
-          href="https://blog.covidactnow.org/covid-act-now-releases-new-modeling-for-three-metrics-critical-to-help-america-reopen-safely/"
+          href="https://blog.covidactnow.org/modeling-metrics-critical-to-reopen-safely/"
           target="_blank"
           rel="noopener noreferrer"
         >
