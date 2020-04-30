@@ -23,8 +23,6 @@ export const SignalStatusWrapper = styled(Box)`
   }
 
   svg {
-    height: 0.75rem;
-    width: 0.75rem;
     margin-right: 0.25rem;
   }
 `;

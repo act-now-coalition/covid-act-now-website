@@ -8,18 +8,18 @@ import CheckIcon from 'assets/images/checkIcon';
 import ExclamationIcon from 'assets/images/exclamationIcon';
 import QuestionIcon from 'assets/images/questionIcon';
 
-const getIcon = function(levelInfo: LevelInfo) {
-  switch(levelInfo.level) {
+const getIcon = function (levelInfo: LevelInfo) {
+  switch (levelInfo.level) {
     case Level.LOW:
-      return (<CheckIcon textColor={levelInfo.color} />);
+      return <CheckIcon textColor={levelInfo.color} />;
     case Level.MEDIUM:
-      return (<TildeIcon textColor={levelInfo.color} />);
+      return <TildeIcon textColor={levelInfo.color} />;
     case Level.HIGH:
-      return (<ExclamationIcon textColor={levelInfo.color} />);
+      return <ExclamationIcon textColor={levelInfo.color} />;
     case Level.UNKNOWN:
-      return (<QuestionIcon textColor={levelInfo.color} />);
+      return <QuestionIcon textColor={levelInfo.color} />;
   }
-}
+};
 
 const SignalStatus = (props: { levelInfo: LevelInfo }) => {
   return (

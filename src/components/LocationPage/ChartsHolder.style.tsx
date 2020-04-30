@@ -26,15 +26,20 @@ export const MainContentInner = styled.div`
 `;
 
 export const ChartHeader = styled.div`
-  margin: 4.875rem 0 0.5rem;
+  margin: 4.875rem 0 0.25rem;
   font-weight: 700;
   font-size: 1.5rem;
 `;
 
 export const ChartLocationName = styled(Typography)`
-  font-size: 0.875rem;
-  color: rgba(0, 0, 0, 0.7);
   margin-bottom: 0.625rem;
+  font-weight: normal;
+  font-size: 0.875rem;
+  line-height: 1.125rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.7);
+  opacity: 0.7;
 `;
 
 export const ChartDescription = styled(Typography)`

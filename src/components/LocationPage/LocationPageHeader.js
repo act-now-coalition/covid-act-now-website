@@ -1,12 +1,6 @@
 import React from 'react';
 import { COLOR_MAP } from 'enums/interventions';
-import {
-  LEGEND_TEXT,
-  POSITIVE_TESTS,
-  CASE_GROWTH_RATE,
-  HOSPITAL_USAGE,
-  Level,
-} from 'enums/zones';
+import { LEGEND_TEXT, Level } from 'enums/zones';
 import { useEmbed } from 'utils/hooks';
 import palette from 'assets/theme/palette';
 

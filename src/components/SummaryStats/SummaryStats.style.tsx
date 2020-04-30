@@ -4,7 +4,6 @@ import palette from 'assets/theme/palette';
 
 export const SummaryStatsWrapper = styled(Box)`
   display: flex;
-  flex-direction: row;
   align-items: stretch;
   justify-content: space-around;
   padding: 2rem 0.5rem;
@@ -12,8 +11,10 @@ export const SummaryStatsWrapper = styled(Box)`
   border-radius: 0;
   box-shadow: none;
   max-width: 900px;
+  flex-direction: column;
 
   @media (min-width: 600px) {
+    flex-direction: row;
     border-radius: 2px;
     box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.1);
     background-color: white;
@@ -37,26 +38,68 @@ export const SummaryStatsWrapper = styled(Box)`
 export const SummaryStatWrapper = styled(Box)`
   display: flex;
   flex: 1;
-  flex-direction: column;
-  padding: 0 0.5rem;
-  align-items: center;
+  flex-direction: row;
+  margin: 0 0.5rem;
+  padding: 1.5rem 0;
+  align-items: stretch;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  &:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  @media (min-width: 600px) {
+    border-bottom: 0;
+    padding: 0 0.5rem;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const StatNameText = styled(Typography)`
   font-weight: 500;
-  text-align: center;
-  font-size: 0.875rem;
+  font-size: 1.125rem;
   line-height: 1.25rem;
-  flex: 1;
 
   @media (min-width: 600px) {
-    font-size: 1.125rem;
     min-height: 0;
+  }
+`;
+
+export const StatTextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: left;
+  flex: 1;
+  margin-right: 1.5rem;
+
+  @media (min-width: 600px) {
+    text-align: center;
+    margin-right: 0;
+  }
+`;
+export const StatValueWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  align-items: flex-end;
+  justify-content: center;
+
+  @media (min-width: 600px) {
+    align-items: center;
+    text-align: center;
   }
 `;
 
 export const StatDetailText = styled(Typography)`
   font-size: 0.875rem;
+  line-height: 1.125rem;
   color: rgba(0, 0, 0, 0.7);
   margin-top: 0.25rem;
 `;
@@ -64,9 +107,14 @@ export const StatDetailText = styled(Typography)`
 export const StatValueText = styled(Typography)`
   font-family: 'Source Code Pro', Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-  font-size: 1.875rem;
-  line-height: 3.5rem;
-  margin-bottom: 0.25rem;
-  text-align: center;
+  font-size: 1.5rem;
+  line-height: 1.125rem;
+  margin-bottom: 0.5rem;
   font-weight: 700;
+
+  @media (min-width: 600px) {
+    text-align: center;
+    font-size: 1.875rem;
+    line-height: 3.5rem;
+  }
 `;

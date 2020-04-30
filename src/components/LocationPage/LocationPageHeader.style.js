@@ -56,7 +56,7 @@ export const StyledLocationPageHeaderInner = styled.div`
 
   @media (min-width: 600px) {
     flex-direction: row;
-    padding: 4.5rem 0 6.5rem;
+    padding: 3.75rem 0 6rem;
   }
   @media (min-width: 932px) {
     margin: 0 auto;

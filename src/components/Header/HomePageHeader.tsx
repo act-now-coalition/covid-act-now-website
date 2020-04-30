@@ -32,7 +32,7 @@ const HomePageHeader = () => {
     <Wrapper>
       <Content>
         <HeaderTitle>
-          Data to, <HighlightColor>reopen safely.</HighlightColor>
+          Data to <HighlightColor>reopen safely.</HighlightColor>
         </HeaderTitle>
         <div>
           <HeaderSubCopy color="inherit" component="p" variant="subtitle2">

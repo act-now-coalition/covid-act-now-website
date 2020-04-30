@@ -4,13 +4,13 @@ import { fail } from 'assert';
 export enum ChartType {
   CASE_GROWTH_RATE = 'Infection rate',
   POSITIVE_TESTS = 'Positive tests',
-  HOSPITAL_USAGE = 'Hospital ICU occupancy',
+  HOSPITAL_USAGE = 'ICU occupancy',
 }
 
 export const ChartTypeToTitle = {
   [ChartType.CASE_GROWTH_RATE]: 'Infection rate',
   [ChartType.POSITIVE_TESTS]: 'Positive tests',
-  [ChartType.HOSPITAL_USAGE]: 'Hospital ICU occupancy',
+  [ChartType.HOSPITAL_USAGE]: 'ICU occupancy',
 };
 
 export interface LevelInfo {
@@ -145,16 +145,14 @@ export const HOSPITAL_USAGE: Zones = {
     upperLimit: 0.88,
     name: 'Low',
     color: COLOR_MAP.GREEN.BASE,
-    detail:
-      'Can handle a spike in COVID cases',
+    detail: 'Can handle a spike in COVID cases',
   },
   [Level.MEDIUM]: {
     level: Level.MEDIUM,
     upperLimit: 1.0,
     name: 'Medium',
     color: COLOR_MAP.ORANGE.BASE,
-    detail:
-      'May be at risk if COVID cases surge',
+    detail: 'May be at risk if COVID cases surge',
   },
   [Level.HIGH]: {
     level: Level.HIGH,
