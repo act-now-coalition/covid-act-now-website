@@ -71,6 +71,9 @@ export const Wrapper = styled.div`
   }
 
   .highcharts-axis-labels.highcharts-xaxis-labels {
+    text {
+      font-family: ${chartFontFamily} !important;
+    }
     span {
       font-family: ${chartFontFamily} !important;
     }
