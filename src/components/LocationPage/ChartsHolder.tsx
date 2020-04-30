@@ -39,6 +39,8 @@ const ChartsHolder = (props: {
   countyId: string;
 }) => {
   const projection: Projection = props.projections.primary;
+  const worstCaseProjection: Projection =
+    props.projections.worstCaseInterventionModel;
 
   // TODO(michael): This should probably be some function of today's date?
   const endDate = new Date('2020-05-15');
@@ -110,7 +112,9 @@ const ChartsHolder = (props: {
             )}
             <ChartHeader>Future projections</ChartHeader>
             <ChartLocationName>{projection.locationName}</ChartLocationName>
-            <ChartDescription>Chart Description TK</ChartDescription>
+            <ChartDescription>
+              {generateChartDescription(projection, worstCaseProjection)}
+            </ChartDescription>
             <ModelChart
               projections={props.projections}
               stateId={props.stateId}
@@ -125,6 +129,25 @@ const ChartsHolder = (props: {
     </>
   );
 };
+
+function generateChartDescription(
+  projection: Projection,
+  worstCaseProjection: Projection,
+) {
+  // TODO(sgoldblatt): figure out how to get people number data from projection
+  if (projection.dateOverwhelmed) {
+    return (
+      `Projections indicate that many additional people will ` +
+      `be hospitalized in the next 3 months. At this rate, ${projection.locationName} ` +
+      `hospitals may become overloaded on ${projection.dateOverwhelmed}.`
+    );
+  } else {
+    return (
+      `Projections indicate that additional people will be hospitalized in the next 3 months.` +
+      `Projections indicate that ${projection.locationName} hospitals are unlikely to become overloaded in the next 3 months.` +
+      `If all restrictions were lifted today, hospitals would overload on ${worstCaseProjection.dateOverwhelmed}.`
+    );
+  }
 
 // Exported for use by AllStates.js.
 export function getChartData(
