@@ -268,11 +268,16 @@ function hospitalOccupancyStatusText(projection: Projection) {
   const level = determineZone(HOSPITAL_USAGE, icuUtilization);
 
   const location = projection.locationName;
-  const lowText = `hospitals have sufficient ICU capacity to absorb a surge of COVID hospitalizations`;
-  const mediumText = ` hospitals’ ICUs are not at capacity, but a surge in COVID cases could quickly push the healthcare system to a breaking point`;
-  const highText = `hospitals’ ICUs are at capacity`;
+  const capacity = Math.round(projection.totalICUCapacity / 100) * 100;
+  const normallyFree =
+    Math.round(projection.typicallyFreeICUCapacity / 100) * 100;
+  const currentlyInICU = projection.currentICUPatients;
 
-  return `Available data indicates that ${location} ${levelText(
+  const lowText = `Hospitals have sufficient ICU capacity to absorb a surge of COVID hospitalizations`;
+  const mediumText = `Hospitals’ ICUs are not at capacity, but a surge in COVID cases could quickly push the healthcare system to a breaking point`;
+  const highText = `Hospitals’ ICUs are at capacity`;
+
+  return `${location} has ${capacity} ICU Beds, and normally ${normallyFree} of them are unoccupied. Currently we estimate there are ${currentlyInICU} COVID ICU patients. ${levelText(
     level,
     lowText,
     mediumText,
