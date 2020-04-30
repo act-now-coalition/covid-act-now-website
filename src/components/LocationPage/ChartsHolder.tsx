@@ -135,7 +135,7 @@ const ChartsHolder = (props: {
                 </Disclaimer>
               </>
             )}
-            <ChartHeader>Future projections</ChartHeader>
+            <ChartHeader>Future projections: all hospitalizations</ChartHeader>
             <ChartLocationName>{projection.locationName}</ChartLocationName>
             <ChartDescription>
               {generateChartDescription(projection, noInterventionProjection)}
