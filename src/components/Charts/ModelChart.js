@@ -309,10 +309,13 @@ const ModelChart = ({
     );
   }
 
-  // TODO(michael): I think this logic matches what we show in the chart, but we should
-  // unify this logic.
-  let outcomesProjections = [projections.baseline],
-    outcomesColors = [projections.getSeriesColorForLimitedAction()];
+  // TODO(michael): I think this logic matches what we show in the chart above.
+  // We show baseline + inference or baseline + stay-at-home depending on if we
+  // have inference or not. But we should really merge this logic, and maybe move
+  // the projection color into `Projection` or otherwise make it so we don't have to
+  // pass these in separately.
+  let outcomesProjections = [projections.baseline];
+  let outcomesColors = [projections.getSeriesColorForLimitedAction()];
   if (projections.primary.isInferred) {
     outcomesProjections.push(projections.primary);
     outcomesColors.push(projections.getSeriesColorForPrimary());
