@@ -127,11 +127,11 @@ export class Projections {
 
     const levelList = [rt_level, hospitalizations_level, test_rate_level];
 
-    if (levelList.some(level => level == Level.HIGH)) {
+    if (levelList.some(level => level === Level.HIGH)) {
       return Level.HIGH;
-    } else if (levelList.some(level => level == Level.MEDIUM)) {
+    } else if (levelList.some(level => level === Level.MEDIUM)) {
       return Level.MEDIUM;
-    } else if (levelList.some(level => level == Level.UNKNOWN)) {
+    } else if (levelList.some(level => level === Level.UNKNOWN)) {
       return Level.UNKNOWN;
     } else {
       return Level.LOW;
