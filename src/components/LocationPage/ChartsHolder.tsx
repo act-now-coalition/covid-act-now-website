@@ -279,8 +279,8 @@ function hospitalOccupancyStatusText(projection: Projection) {
       wave of new COVID hospitalizations.`;
   const mediumText = `This suggests less ability to absorb a wave of
       new COVID hospitalizations.`;
-  const highText = `This suggests the healthcare system may struggleis
-      unlikely to be able to absorb a wave of new COVID hospitalizations.`;
+  const highText = `This suggests the healthcare system may struggle
+       to absorb a wave of new COVID hospitalizations.`;
 
   return `${location} has ${capacity} ICU Beds. Normally ${normallyFree} are unoccupied.
       We estimate there are currently ${currentlyInICU} COVID cases in the ICU,
@@ -289,7 +289,7 @@ function hospitalOccupancyStatusText(projection: Projection) {
     lowText,
     mediumText,
     highText,
-  )}.`;
+  )}`;
 }
 
 /**
