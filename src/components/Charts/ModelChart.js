@@ -191,9 +191,7 @@ const ModelChart = ({
         },
       },
       yAxis: {
-        title: {
-          text: undefined,
-        },
+        visible: false,
       },
       tooltip: {
         formatter: function () {
