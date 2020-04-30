@@ -54,6 +54,8 @@ export const Kicker = styled(Typography)`
 export const CriterionHeader = styled(Typography)`
   font-size: 1.25rem;
   font-weight: 700;
+  line-height: 1.75rem;
+  margin-bottom: 0.75rem;
 `;
 
 export const CriterionDescription = styled(Typography)`

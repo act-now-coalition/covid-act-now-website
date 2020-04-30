@@ -39,9 +39,7 @@ const CriteriaExplanation = () => {
         </Criterion>
         <Criterion>
           <Kicker>Criterion 3</Kicker>
-          <CriterionHeader>
-            If there’s a new wave of infections, are our hospitals ready?
-          </CriterionHeader>
+          <CriterionHeader>Are our hospitals ready?</CriterionHeader>
           <CriterionDescription>
             Do hospitals have enough capacity to treat a possible surge of COVID
             hospitalizations?
