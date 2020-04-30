@@ -17,6 +17,7 @@ import Disclaimer from 'components/Disclaimer/Disclaimer';
 import { ZoneChartWrapper } from 'components/Charts/ZoneChart.style';
 import Chart from 'components/Charts/Chart';
 import ClaimStateBlock from 'components/ClaimStateBlock/ClaimStateBlock';
+import ShareModelBlock from '../../components/ShareBlock/ShareModelBlock';
 
 import {
   optionsRt,
@@ -145,6 +146,11 @@ const ChartsHolder = (props: {
               forCompareModels={false}
             />
           </MainContentInner>
+          <ShareModelBlock
+            condensed={false}
+            stateId={props.stateId}
+            county={props.countyId}
+          />
           <ClaimStateBlock
             stateId={props.stateId}
             countyName={props.countyId}
