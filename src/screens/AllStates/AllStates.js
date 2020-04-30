@@ -67,8 +67,6 @@ function State({ stateId }) {
       </div>
     </>
   );
-
-  return stateName;
 }
 
 export default AllStates;
