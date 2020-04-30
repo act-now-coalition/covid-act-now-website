@@ -71,11 +71,11 @@ export const Wrapper = styled.div`
   }
 
   .highcharts-axis-labels.highcharts-xaxis-labels {
-    text {
-      font-family: ${chartFontFamily} !important;
-    }
+    /* Highcharts sets inline styles, so we need !important to increase specificity */
+    text,
     span {
       font-family: ${chartFontFamily} !important;
+      font-size: 13px !important;
     }
   }
 
@@ -195,7 +195,7 @@ export const Wrapper = styled.div`
     &.Annotation--BedsAvailable {
       text {
         fill: ${palette.primary.contrastText};
-        font-size: 18px;
+        font-size: 14px;
       }
       rect {
         fill-opacity: 0;
