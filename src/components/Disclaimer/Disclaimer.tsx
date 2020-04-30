@@ -4,7 +4,13 @@ import { DisclaimerWrapper, DisclaimerBody } from './Disclaimer.style';
 import LightTooltip from 'components/LightTooltip/LightTooltip';
 import { useModelLastUpdatedDate } from 'utils/model';
 
-const Disclaimer = ({ metricName }: { metricName: String }) => {
+const Disclaimer = ({
+  metricName,
+  children,
+}: {
+  metricName: String;
+  children: React.ReactNode;
+}) => {
   const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
   const lastUpdatedDateString =
     lastUpdatedDate !== null ? lastUpdatedDate.toLocaleDateString() : '';
@@ -17,6 +23,7 @@ const Disclaimer = ({ metricName }: { metricName: String }) => {
         >
           <span>Last updated {lastUpdatedDateString}.</span>
         </LightTooltip>{' '}
+        {children}{' '}
         <a
           href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
           target="_blank"

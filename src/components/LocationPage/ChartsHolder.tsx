@@ -83,7 +83,10 @@ const ChartsHolder = (props: {
                 <ZoneChartWrapper>
                   <Chart options={optionsRt(rtRangeData, endDate) as any} />
                 </ZoneChartWrapper>
-                <Disclaimer metricName="infection growth rate" />
+                <Disclaimer metricName="infection growth rate">
+                  Most experts recommend an infection rate of less than 1.0
+                  before reopening.
+                </Disclaimer>
               </>
             )}
             <ChartHeader>
@@ -102,7 +105,11 @@ const ChartsHolder = (props: {
                     }
                   />
                 </ZoneChartWrapper>
-                <Disclaimer metricName="positive test rate" />
+                <Disclaimer metricName="positive test rate">
+                  The World Health Organization recommends a positive test rate
+                  of less than 10% before reopening. The countries most
+                  successful in containing COVID have rates of 3% or less.
+                </Disclaimer>
               </>
             )}
             <ChartHeader>
@@ -122,7 +129,10 @@ const ChartsHolder = (props: {
                     }
                   />
                 </ZoneChartWrapper>
-                <Disclaimer metricName="COVID ICU usage" />
+                <Disclaimer metricName="COVID ICU usage">
+                  We recommend that less than half of typically unoccupied ICU
+                  capacity be occupied by COVID patients before re-opening.
+                </Disclaimer>
               </>
             )}
             <ChartHeader>Future projections</ChartHeader>
