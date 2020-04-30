@@ -4,13 +4,13 @@ import { fail } from 'assert';
 export enum ChartType {
   CASE_GROWTH_RATE = 'Infection rate',
   POSITIVE_TESTS = 'Positive tests',
-  HOSPITAL_USAGE = 'ICU occupancy',
+  HOSPITAL_USAGE = 'COVID ICU usage',
 }
 
 export const ChartTypeToTitle = {
   [ChartType.CASE_GROWTH_RATE]: 'Infection rate',
   [ChartType.POSITIVE_TESTS]: 'Positive tests',
-  [ChartType.HOSPITAL_USAGE]: 'ICU occupancy',
+  [ChartType.HOSPITAL_USAGE]: 'COVID ICU usage',
 };
 
 export interface LevelInfo {
@@ -47,23 +47,23 @@ export const LEGEND_TEXT: Zones = {
   [Level.LOW]: {
     level: Level.LOW,
     upperLimit: 0,
-    name: 'Reduced COVID risk',
+    name: 'Reduced',
     color: COLOR_MAP.GREEN.BASE,
-    detail: 'Reduced risk relative to broadly identified reopening criteria.',
+    detail: 'Reduced reopening risk based on standard benchmarks.',
   },
   [Level.MEDIUM]: {
     level: Level.MEDIUM,
     upperLimit: 0,
-    name: 'Moderate COVID risk',
+    name: 'Moderate',
     color: COLOR_MAP.ORANGE.BASE,
-    detail: 'Moderate risk relative to broadly identified reopening criteria.',
+    detail: 'Moderate reopening risk based on standard benchmarks.',
   },
   [Level.HIGH]: {
     level: Level.HIGH,
     upperLimit: 0,
-    name: 'Elevated COVID risk',
+    name: 'Elevated',
     color: COLOR_MAP.RED.BASE,
-    detail: 'Elevated risk relative to broadly identified reopening criteria.',
+    detail: 'Elevated reopening risk based on standard benchmarks.',
   },
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,
@@ -127,7 +127,7 @@ export const POSITIVE_TESTS: Zones = {
     upperLimit: Infinity,
     name: 'High',
     color: COLOR_MAP.RED.BASE,
-    detail: 'Implies testing is relatively limited',
+    detail: 'Implies testing is limited',
   },
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,
@@ -145,21 +145,21 @@ export const HOSPITAL_USAGE: Zones = {
     upperLimit: 0.4,
     name: 'Low',
     color: COLOR_MAP.GREEN.BASE,
-    detail: 'Can handle a spike in COVID cases',
+    detail: 'Can likely handle a spike in COVID',
   },
   [Level.MEDIUM]: {
     level: Level.MEDIUM,
     upperLimit: 0.6,
     name: 'Medium',
     color: COLOR_MAP.ORANGE.BASE,
-    detail: 'May be at risk if COVID cases surge',
+    detail: 'May be at risk if COVID resurges',
   },
   [Level.HIGH]: {
     level: Level.HIGH,
     upperLimit: Infinity,
     name: 'High',
     color: COLOR_MAP.RED.BASE,
-    detail: 'At capacity',
+    detail: 'Unable to handle a COVID surge',
   },
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,

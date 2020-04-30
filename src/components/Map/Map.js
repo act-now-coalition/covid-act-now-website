@@ -8,6 +8,7 @@ import { Legend, LegendItem } from './Legend';
 import USACountyMap from './USACountyMap';
 import { MAP_FILTERS } from '../../screens/ModelPage/Enums/MapFilterEnums';
 import ReactTooltip from 'react-tooltip';
+import { MapInstructions } from './Map.style';
 
 function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
   const history = useHistory();
@@ -36,6 +37,16 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
 
   return (
     <div className="Map">
+      <MapInstructions>
+        <strong>Click on a state</strong> to view reopening risk details and
+        county projections.
+      </MapInstructions>
+      <div className="us-state-map">
+        <USACountyMap
+          setTooltipContent={setContent}
+          stateClickHandler={onClick}
+        />
+      </div>
       {!hideLegend && (
         <Legend>
           <LegendItem
@@ -58,12 +69,6 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
           />
         </Legend>
       )}
-      <div className="us-state-map">
-        <USACountyMap
-          setTooltipContent={setContent}
-          stateClickHandler={onClick}
-        />
-      </div>
       <ReactTooltip>{content}</ReactTooltip>
     </div>
   );

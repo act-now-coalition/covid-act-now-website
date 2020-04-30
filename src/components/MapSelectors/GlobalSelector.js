@@ -258,9 +258,10 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
                   onFocus: () => {
                     openMenu();
                   },
-                  placeholder: isNarrowMobile
-                    ? 'Search'
-                    : 'Search for your county or state',
+                  placeholder:
+                    isNarrowMobile && extendRight
+                      ? 'Search'
+                      : 'Search for your county or state',
                 })}
               />
             </StyledInputWrapper>
