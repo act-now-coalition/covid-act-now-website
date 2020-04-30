@@ -9,6 +9,18 @@ export const ZoneChartWrapper = styled.div`
     margin-left: -3rem;
   }
 
+  .highcharts-axis-labels.highcharts-yaxis-labels {
+    span {
+      font-family: ${chartFontFamily} !important;
+    }
+  }
+
+  .highcharts-axis-labels.highcharts-xaxis-labels {
+    span {
+      font-family: ${chartFontFamily} !important;
+    }
+  }
+
   .highcharts-yaxis-grid .highcharts-grid-line {
     stroke: ${palette.black};
     stroke-opacity: 0.6;
@@ -37,7 +49,8 @@ export const ZoneChartWrapper = styled.div`
       fill: ${palette.primary.contrastText};
     }
     &.ZoneAnnotation rect {
-      fill-opacity: 0;
+      fill-opacity: 1;
+      fill: ${palette.white};
       stroke: none;
     }
   }

@@ -70,6 +70,12 @@ export const Wrapper = styled.div`
     display: none;
   }
 
+  .highcharts-axis-labels.highcharts-xaxis-labels {
+    span {
+      font-family: ${chartFontFamily} !important;
+    }
+  }
+
   .highcharts-grid-line {
     display: none;
   }
@@ -97,10 +103,7 @@ export const Wrapper = styled.div`
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
     padding: 16px;
   }
-  /* .highcharts-tooltip text {
-    fill: white;
-    text-shadow: 0 0 3px black;
-  } */
+
   .highcharts-legend {
     font-family: 'Roboto', sans-serif;
     font-style: normal;
