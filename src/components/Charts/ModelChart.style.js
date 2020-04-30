@@ -7,6 +7,8 @@ import { colors } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { COLOR_MAP } from '../../enums/interventions';
 
+const chartFontFamily = "'Source Code Pro', 'Roboto', sans-serif";
+
 export const ChartContainer = styled.section`
   width: 100%;
 `;
@@ -181,6 +183,9 @@ export const Wrapper = styled.div`
   }
 
   .Annotation {
+    text {
+      font-family: ${chartFontFamily};
+    }
     &.Annotation--BedsAvailable {
       text {
         fill: ${palette.primary.contrastText};

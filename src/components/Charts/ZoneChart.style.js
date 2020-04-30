@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import palette from '../../assets/theme/palette';
 import { COLOR_ZONE } from '../../enums/zones';
 
+const chartFontFamily = "'Source Code Pro', 'Roboto', sans-serif";
+
 export const ZoneChartWrapper = styled.div`
   @media (min-width: 996px) {
     margin-left: -3rem;
@@ -31,10 +33,15 @@ export const ZoneChartWrapper = styled.div`
     }
   }
 
-  .ZoneAnnotation rect {
-    fill: ${palette.white};
-    stroke: ${palette.black};
-    stroke-opacity: 0.12;
+  .ZoneAnnotation {
+    rect {
+      fill: ${palette.white};
+      stroke: ${palette.black};
+      stroke-opacity: 0.12;
+    }
+    text {
+      font-family: ${chartFontFamily};
+    }
   }
 
   .ZoneAnnotation--isActive {
