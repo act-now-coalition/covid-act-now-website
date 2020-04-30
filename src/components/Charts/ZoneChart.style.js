@@ -10,20 +10,20 @@ export const ZoneChartWrapper = styled.div`
   }
 
   .highcharts-axis-labels.highcharts-yaxis-labels {
-    text {
-      font-family: ${chartFontFamily} !important;
-    }
+    /* Highcharts sets inline styles, so we need !important to increase specificity */
+    text,
     span {
       font-family: ${chartFontFamily} !important;
+      font-size: 13px !important;
     }
   }
 
   .highcharts-axis-labels.highcharts-xaxis-labels {
-    text {
-      font-family: ${chartFontFamily} !important;
-    }
+    /* Highcharts sets inline styles, so we need !important to increase specificity */
+    text,
     span {
       font-family: ${chartFontFamily} !important;
+      font-size: 13px !important;
     }
   }
 
