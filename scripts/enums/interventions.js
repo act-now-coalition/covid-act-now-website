@@ -14,7 +14,7 @@ const INTERVENTIONS = {
 
 const COLOR_MAP = {
   ORANGE: {
-    BASE: '#F88722',
+    BASE: '#FFAD16',
     LIGHT: '#FFC020',
     DARK: '#933500',
   },

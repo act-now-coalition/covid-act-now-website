@@ -1,17 +1,8 @@
 import React from 'react';
 import { COLOR_MAP } from 'enums/interventions';
-import {
-  LEGEND_TEXT,
-  POSITIVE_TESTS,
-  CASE_GROWTH_RATE,
-  HOSPITAL_USAGE,
-  Level,
-} from 'enums/zones';
+import { LEGEND_TEXT, Level } from 'enums/zones';
 import { useEmbed } from 'utils/hooks';
 import palette from 'assets/theme/palette';
-import CheckIcon from 'assets/images/checkIcon';
-import ExclamationIcon from 'assets/images/exclamationIcon';
-import QuestionIcon from 'assets/images/questionIcon';
 
 import {
   HeaderSubCopy,
@@ -41,54 +32,6 @@ function LocationPageHeading({ projections }) {
   return <span>{displayName}</span>;
 }
 
-function LocationSummary({ projections, textColor }) {
-  const locationLevel = projections.getAlarmLevel();
-  const locationLevelInfo = LEGEND_TEXT[locationLevel];
-
-  const {
-    rt_level,
-    hospitalizations_level,
-    test_rate_level,
-  } = projections.getLevels();
-
-  const levelList = [
-    { level: rt_level, levelInfo: CASE_GROWTH_RATE[rt_level] },
-    { level: test_rate_level, levelInfo: POSITIVE_TESTS[test_rate_level] },
-    {
-      level: hospitalizations_level,
-      levelInfo: HOSPITAL_USAGE[hospitalizations_level],
-    },
-  ];
-
-  return (
-    <>
-      <HeaderSubCopy textColor={textColor}>
-        {locationLevelInfo.detail}
-        <ul>
-          {locationLevel !== Level.UNKNOWN &&
-            levelList.map(item => {
-              return (
-                <li>
-                  {item.level === Level.LOW && (
-                    <CheckIcon textColor={textColor} />
-                  )}
-                  {(item.level === Level.MEDIUM ||
-                    item.level === Level.HIGH) && (
-                    <ExclamationIcon textColor={textColor} />
-                  )}
-                  {item.level === Level.UNKNOWN && (
-                    <QuestionIcon textColor={textColor} />
-                  )}
-                  <p>{item.levelInfo.detail}</p>
-                </li>
-              );
-            })}
-        </ul>
-      </HeaderSubCopy>
-    </>
-  );
-}
-
 const LocationPageHeader = ({ projections }) => {
   const { isEmbed } = useEmbed();
   const alarmLevel = projections.getAlarmLevel();
@@ -105,7 +48,9 @@ const LocationPageHeader = ({ projections }) => {
             <LocationPageHeading projections={projections} />
           </HeaderTitle>
           {!isEmbed ? (
-            <LocationSummary textColor={textColor} projections={projections} />
+            <HeaderSubCopy textColor={textColor}>
+              {levelInfo.detail}
+            </HeaderSubCopy>
           ) : (
             ''
           )}

@@ -4,16 +4,17 @@ import { fail } from 'assert';
 export enum ChartType {
   CASE_GROWTH_RATE = 'Infection rate',
   POSITIVE_TESTS = 'Positive tests',
-  HOSPITAL_USAGE = 'Hospital ICU occupancy',
+  HOSPITAL_USAGE = 'ICU occupancy',
 }
 
 export const ChartTypeToTitle = {
   [ChartType.CASE_GROWTH_RATE]: 'Infection rate',
   [ChartType.POSITIVE_TESTS]: 'Positive tests',
-  [ChartType.HOSPITAL_USAGE]: 'Hospital ICU occupancy',
+  [ChartType.HOSPITAL_USAGE]: 'ICU occupancy',
 };
 
 export interface LevelInfo {
+  level: string;
   upperLimit: number;
   name: string;
   color: string;
@@ -44,24 +45,28 @@ export const COLOR_ZONE = {
 // For the summary text
 export const LEGEND_TEXT: Zones = {
   [Level.LOW]: {
+    level: Level.LOW,
     upperLimit: 0,
     name: 'Reduced COVID risk',
     color: COLOR_MAP.GREEN.BASE,
     detail: 'Reduced risk relative to broadly identified reopening criteria.',
   },
   [Level.MEDIUM]: {
+    level: Level.MEDIUM,
     upperLimit: 0,
     name: 'Moderate COVID risk',
     color: COLOR_MAP.ORANGE.BASE,
     detail: 'Moderate risk relative to broadly identified reopening criteria.',
   },
   [Level.HIGH]: {
+    level: Level.HIGH,
     upperLimit: 0,
     name: 'Elevated COVID risk',
     color: COLOR_MAP.RED.BASE,
     detail: 'Elevated risk relative to broadly identified reopening criteria.',
   },
   [Level.UNKNOWN]: {
+    level: Level.UNKNOWN,
     upperLimit: 0,
     name: 'Unknown',
     color: COLOR_MAP.GRAY.BASE,
@@ -72,86 +77,96 @@ export const LEGEND_TEXT: Zones = {
 // Case Growth Rate
 export const CASE_GROWTH_RATE: Zones = {
   [Level.LOW]: {
+    level: Level.LOW,
     upperLimit: 1.0,
     name: 'Low',
     color: COLOR_MAP.GREEN.BASE,
     detail: 'Cases are decreasing',
   },
   [Level.MEDIUM]: {
+    level: Level.MEDIUM,
     upperLimit: 1.2,
     name: 'Medium',
     color: COLOR_MAP.ORANGE.BASE,
     detail: 'Cases are slowly increasing',
   },
   [Level.HIGH]: {
+    level: Level.HIGH,
     upperLimit: Infinity,
     name: 'High',
     color: COLOR_MAP.RED.BASE,
     detail: 'Cases are increasing',
   },
   [Level.UNKNOWN]: {
+    level: Level.UNKNOWN,
     upperLimit: 0,
     name: 'Unknown',
     color: COLOR_MAP.GRAY.BASE,
-    detail: 'Insufficient data to predict infection rate',
+    detail: 'Insufficient data to predict',
   },
 };
 
 // Positive Tests (upperLimit as %)
 export const POSITIVE_TESTS: Zones = {
   [Level.LOW]: {
+    level: Level.LOW,
     upperLimit: 0.03,
     name: 'Low',
     color: COLOR_MAP.GREEN.BASE,
-    detail: 'Testing is widespread',
+    detail: 'Implies testing is widespread',
   },
   [Level.MEDIUM]: {
+    level: Level.MEDIUM,
     upperLimit: 0.1,
     name: 'Medium',
     color: COLOR_MAP.ORANGE.BASE,
-    detail: 'Testing is not widespread',
+    detail: 'Implies testing is not widespread',
   },
   [Level.HIGH]: {
+    level: Level.HIGH,
     upperLimit: Infinity,
     name: 'High',
     color: COLOR_MAP.RED.BASE,
-    detail: 'Testing is relatively limited',
+    detail: 'Implies testing is relatively limited',
   },
   [Level.UNKNOWN]: {
+    level: Level.UNKNOWN,
     upperLimit: 0,
     name: 'Unknown',
     color: COLOR_MAP.GRAY.BASE,
-    detail: 'Insufficient data to predict testing capacity',
+    detail: 'Insufficient data to predict',
   },
 };
 
 // Hospital Usage (upperLimit as %)
 export const HOSPITAL_USAGE: Zones = {
   [Level.LOW]: {
+    level: Level.LOW,
     upperLimit: 0.88,
     name: 'Low',
     color: COLOR_MAP.GREEN.BASE,
-    detail:
-      'ICUs are projected to have enough capacity to handle a spike in COVID cases',
+    detail: 'Can handle a spike in COVID cases',
   },
   [Level.MEDIUM]: {
+    level: Level.MEDIUM,
     upperLimit: 1.0,
     name: 'Medium',
     color: COLOR_MAP.ORANGE.BASE,
-    detail:
-      'ICUs are projected to be at risk should a surge of COVID hospitalizations occur',
+    detail: 'May be at risk if COVID cases surge',
   },
   [Level.HIGH]: {
+    level: Level.HIGH,
     upperLimit: Infinity,
     name: 'High',
     color: COLOR_MAP.RED.BASE,
-    detail: 'Data indicates that ICUs are at capacity',
+    detail: 'At capacity',
   },
   [Level.UNKNOWN]: {
+    level: Level.UNKNOWN,
     upperLimit: 0,
     name: 'Unknown',
     color: COLOR_MAP.GRAY.BASE,
-    detail: 'Insufficient data to predict ICU occupancy',
+    detail: 'Insufficient data to predict',
   },
 };
 

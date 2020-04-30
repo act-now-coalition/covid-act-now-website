@@ -20,29 +20,9 @@ export const HeaderSubCopy = styled(Typography)`
   font-size: 1rem;
   line-height: 1.5rem;
   padding: 1.5rem 0 0.2rem;
+
   a {
     color: ${props => props.textColor || 'white'};
-  }
-
-  ul {
-    list-style: none;
-    margin: 8px 0 0;
-    padding: 0;
-  }
-
-  li {
-    align-items: start;
-    display: flex;
-    margin: 12px 0;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  p {
-    padding: 0;
-    margin: 0;
   }
 
   svg {
@@ -76,7 +56,7 @@ export const StyledLocationPageHeaderInner = styled.div`
 
   @media (min-width: 600px) {
     flex-direction: row;
-    padding: 4.5rem 0 6.5rem;
+    padding: 3.75rem 0 6rem;
   }
   @media (min-width: 932px) {
     margin: 0 auto;
