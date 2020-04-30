@@ -12,7 +12,7 @@ export default function HomePage() {
       <AppMetaTags
         canonicalUrl="/"
         pageTitle={undefined}
-        pageDescription="Urge your public officials to quickly take action against the COVID-19 pandemic. These charts predict the last day each state can act before the point of no return."
+        pageDescription="Real-time models and metrics to understand where we stand against COVID. 50 states. 2,100+ counties. Click the map to dive in"
       />
       <HomePageHeader />
       <main>

@@ -24,9 +24,7 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
       <AppMetaTags
         canonicalUrl="/resources"
         pageTitle="Resources"
-        pageDescription="Covid Act Now was started by four volunteers who saw the explosive and
-        deadly growth of COVID infections around the world and felt they had
-        to do something."
+        pageDescription="Covid Act Now is a multidisciplinary team of technologists, epidemiologists, health experts, and public policy leaders working in partnership with the Georgetown University’s Center for Global Health Science and Security"
       />
       <Header>
         <Content>
