@@ -8,7 +8,6 @@ import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import MiniMap from 'components/MiniMap/MiniMap';
 import ChartsHolder from 'components/LocationPage/ChartsHolder';
 import { LoadingScreen } from './ModelPage.style';
-import { INTERVENTIONS } from 'enums';
 import { useProjections } from 'utils/model';
 
 function ModelPage() {
@@ -44,8 +43,6 @@ function ModelPage() {
     return <LoadingScreen></LoadingScreen>;
   }
 
-  const stateName = projections.stateName;
-  const intervention = projections.stateIntervention;
   const actionTitle =
     'Real-time models and metrics to understand where we stand against COVID.';
   const actionDescription = `Real-time models and metrics to understand where we stand against COVID. 50 states. 2,100+ counties. Click the map to dive in.`;
