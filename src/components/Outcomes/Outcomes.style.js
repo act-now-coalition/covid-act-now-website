@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import { COLORS } from 'enums';
 
 export const OutcomesWrapper = styled.div`
-  overflow: scroll;
+  margin-bottom: 2em;
+  overflow: auto;
   text-align: left;
 
   h2 {
@@ -35,7 +36,7 @@ export const OutcomesTableHeader = styled.div`
 `;
 
 export const OutcomesTableRow = styled.div`
-  display flex;
+  display: flex;
   width: 100%;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 

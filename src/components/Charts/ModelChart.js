@@ -17,6 +17,8 @@ import {
   CondensedLegendStyled,
   CondensedLegendItemStyled,
 } from './ModelChart.style';
+import Outcomes from '../Outcomes/Outcomes';
+import { formatDate } from 'utils';
 
 const formatIntervention = (intervention, optCase) =>
   `3 months of ${intervention.toLowerCase()}${optCase || ''}`;
@@ -306,10 +308,32 @@ const ModelChart = ({
       </ChartContainer>
     );
   }
+
+  // TODO(michael): I think this logic matches what we show in the chart above.
+  // We show baseline + inference or baseline + stay-at-home depending on if we
+  // have inference or not. But we should really merge this logic, and maybe move
+  // the projection color into `Projection` or otherwise make it so we don't have to
+  // pass these in separately.
+  let outcomesProjections = [projections.baseline];
+  let outcomesColors = [projections.getSeriesColorForLimitedAction()];
+  if (projections.primary.isInferred) {
+    outcomesProjections.push(projections.primary);
+    outcomesColors.push(projections.getSeriesColorForPrimary());
+  } else {
+    outcomesProjections.push(projections.distancing.now);
+    outcomesColors.push(projections.getSeriesColorForShelterInPlace());
+  }
   return (
     <ChartContainer>
       <Wrapper projections={projections} isInferred={projection.isInferred}>
         <Chart options={options} />
+        <Outcomes
+          title={`Predicted Outcomes by ${formatDate(
+            projections.primary.finalDate,
+          )} (90 days from now)`}
+          projections={outcomesProjections}
+          colors={outcomesColors}
+        />
         <DisclaimerWrapper>
           <Disclaimer>
             <DisclaimerHeader>
