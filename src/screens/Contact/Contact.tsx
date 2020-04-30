@@ -1,4 +1,5 @@
 import React from 'react';
+import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import Typography from '@material-ui/core/Typography';
 import StapledSidebar, {
   SidebarLink,
@@ -19,6 +20,11 @@ const sidebar = (
 const Contact = ({ children }: { children: React.ReactNode }) => {
   return (
     <Wrapper>
+      <AppMetaTags
+        canonicalUrl="/contact"
+        pageTitle="Contact us"
+        pageDescription="We’re here to help. Drop us a line."
+      />
       <Header>
         <Content>
           <Typography variant="h3" component="h1">

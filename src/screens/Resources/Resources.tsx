@@ -24,7 +24,7 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
       <AppMetaTags
         canonicalUrl="/resources"
         pageTitle="Resources"
-        pageDescription="Covid Act Now is a multidisciplinary team of technologists, epidemiologists, health experts, and public policy leaders working in partnership with the Georgetown University’s Center for Global Health Science and Security"
+        pageDescription="Free COVID data resources — API, embeds, downloadable CSVs — to help governments and other partners."
       />
       <Header>
         <Content>

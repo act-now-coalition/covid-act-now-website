@@ -82,11 +82,7 @@ const ChartsHolder = (props: {
                 <ZoneChartWrapper>
                   <Chart options={optionsRt(rtRangeData, endDate) as any} />
                 </ZoneChartWrapper>
-                <Disclaimer>
-                  We define <strong>infection rate</strong> as “reproductive
-                  number” implied by the growth of new cases and new deaths, day
-                  over day.
-                </Disclaimer>
+                <Disclaimer metricName="infection growth rate" />
               </>
             )}
             <ChartHeader>
@@ -105,10 +101,7 @@ const ChartsHolder = (props: {
                     }
                   />
                 </ZoneChartWrapper>
-                <Disclaimer>
-                  We define <strong>positive tests</strong> as the percent of
-                  people tested for COVID on any given day that test positive.
-                </Disclaimer>
+                <Disclaimer metricName="positive test rate" />
               </>
             )}
             <ChartHeader>
@@ -127,11 +120,7 @@ const ChartsHolder = (props: {
                     }
                   />
                 </ZoneChartWrapper>
-                <Disclaimer>
-                  We define <strong>COVID ICU usage</strong> as the percentage
-                  of typically available ICU beds currently occupied by COVID
-                  patients.
-                </Disclaimer>
+                <Disclaimer metricName="COVID ICU usage" />
               </>
             )}
             <ChartHeader>Future projections</ChartHeader>
@@ -227,8 +216,8 @@ function caseGrowthStatusText(projection: Projection) {
 
   const epidemiologyReasoning = levelText(
     level,
-    `Because this number has been driven below 1.0 — an all-important epidemiology threshold — the total number of cases in ${projection.locationName} is shrinking.`,
-    `Because this number is above (but not that far above) 1.0 it means that COVID is growing, and growing exponentially, but not at runaway speed.`,
+    `Because each person is infecting less than one other person, the total number of cases in ${projection.locationName} is shrinking.`,
+    `Because this number is only slightly above 1.0, it means that COVID is growing, but slowly.`,
     `As such, the total number of cases in ${projection.locationName} is growing exponentially.`,
   );
 
@@ -252,12 +241,12 @@ function positiveTestsStatusText(projection: Projection) {
   const location = projection.locationName;
   const testingBroadlyText = levelText(
     level,
-    `relatively widespread, aggressive testing in ${location}`,
-    `that testing in ${location} is not widespread`,
-    `that testing in ${location} is relatively limited`,
+    `which suggests enough widespread, aggressive testing to catch most/all cases in ${location}`,
+    `which indicates that testing in ${location} is not widespread enough to detect all cases`,
+    `which indicates that testing in ${location} is limited, meaning that many cases may go undetected`,
   );
 
-  return `A ${lowSizableLarge} percentage (${percentage}) of COVID tests were positive, which indicates ${testingBroadlyText}.`;
+  return `A ${lowSizableLarge} percentage (${percentage}) of COVID tests were positive, ${testingBroadlyText}.`;
 }
 
 function hospitalOccupancyStatusText(projection: Projection) {

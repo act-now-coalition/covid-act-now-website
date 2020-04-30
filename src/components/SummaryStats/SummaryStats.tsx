@@ -2,7 +2,7 @@ import React from 'react';
 import {
   ChartType,
   getLevelInfoForChartType,
-  ChartTypeToTitle,
+  ChartTypeToMetricName,
 } from 'enums/zones';
 import {
   SummaryStatsWrapper,
@@ -41,7 +41,7 @@ const SummaryStat = (props: { chartType: ChartType; value: number }) => {
   return (
     <SummaryStatWrapper>
       <StatTextWrapper>
-        <StatNameText>{ChartTypeToTitle[props.chartType]}</StatNameText>
+        <StatNameText>{ChartTypeToMetricName[props.chartType]}</StatNameText>
         <StatDetailText>{levelInfo.detail}</StatDetailText>
       </StatTextWrapper>
       <StatValueWrapper>

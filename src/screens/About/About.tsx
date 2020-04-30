@@ -1,4 +1,5 @@
 import React from 'react';
+import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import Typography from '@material-ui/core/Typography';
 import { TEAM } from './../../enums';
 import StapledSidebar, {
@@ -21,6 +22,11 @@ const sidebar = (
 const About = ({ children }: { children: React.ReactNode }) => {
   return (
     <Wrapper>
+      <AppMetaTags
+        canonicalUrl="/about"
+        pageTitle="About Cvoid Act Now"
+        pageDescription="Covid Act Now is a multidisciplinary team of technologists, epidemiologists, health experts, and public policy leaders working to model how COVID is spreading in the U.S."
+      />
       <Header>
         <Content>
           <Typography variant="h3" component="h1">

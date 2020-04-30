@@ -4,8 +4,10 @@ import { DisclaimerWrapper, DisclaimerBody } from './Disclaimer.style';
 import LightTooltip from 'components/LightTooltip/LightTooltip';
 import { useModelLastUpdatedDate } from 'utils/model';
 
-const Disclaimer = ({ children }: { children: React.ReactNode }) => {
-  const lastUpdatedDate: Date = useModelLastUpdatedDate() || new Date();
+const Disclaimer = ({ metricName }: { metricName: String }) => {
+  const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
+  const lastUpdatedDateString =
+    lastUpdatedDate !== null ? lastUpdatedDate.toLocaleDateString() : '';
   return (
     <DisclaimerWrapper>
       <DisclaimerBody>
@@ -13,20 +15,15 @@ const Disclaimer = ({ children }: { children: React.ReactNode }) => {
           title="Currently we aggregate data over 4 day intervals to smooth out inconsistencies in the source data. We’re working on improving this now."
           placement="bottom"
         >
-          <span>
-            Last updated on{' '}
-            {lastUpdatedDate && lastUpdatedDate.toLocaleDateString()}.
-          </span>
+          <span>Last updated {lastUpdatedDateString}.</span>
         </LightTooltip>{' '}
-        {children}{' '}
         <a
           href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn more about our projection and its limitations
+          Learn more about how we calculate {metricName} here.
         </a>
-        .
       </DisclaimerBody>
     </DisclaimerWrapper>
   );

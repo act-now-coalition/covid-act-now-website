@@ -2,15 +2,21 @@ import { COLOR_MAP } from './interventions';
 import { fail } from 'assert';
 
 export enum ChartType {
-  CASE_GROWTH_RATE = 'Infection rate',
-  POSITIVE_TESTS = 'Positive tests',
+  CASE_GROWTH_RATE = 'Infection growth rate',
+  POSITIVE_TESTS = 'Positive test rate',
   HOSPITAL_USAGE = 'COVID ICU usage',
 }
 
-export const ChartTypeToTitle = {
-  [ChartType.CASE_GROWTH_RATE]: 'Infection rate',
-  [ChartType.POSITIVE_TESTS]: 'Positive tests',
+export const ChartTypeToMetricName = {
+  [ChartType.CASE_GROWTH_RATE]: 'Infection growth rate',
+  [ChartType.POSITIVE_TESTS]: 'Positive test rate',
   [ChartType.HOSPITAL_USAGE]: 'COVID ICU usage',
+};
+
+export const ChartTypeToTitle = {
+  [ChartType.CASE_GROWTH_RATE]: 'COVID infection growth rate',
+  [ChartType.POSITIVE_TESTS]: 'COVID positive test rate',
+  [ChartType.HOSPITAL_USAGE]: 'Available ICU capcity used by COVID patients',
 };
 
 export interface LevelInfo {
@@ -49,28 +55,28 @@ export const LEGEND_TEXT: Zones = {
     upperLimit: 0,
     name: 'Reduced',
     color: COLOR_MAP.GREEN.BASE,
-    detail: 'Reduced reopening risk based on standard benchmarks.',
+    detail: 'Reduced risk based on reopening benchmarks.',
   },
   [Level.MEDIUM]: {
     level: Level.MEDIUM,
     upperLimit: 0,
     name: 'Moderate',
     color: COLOR_MAP.ORANGE.BASE,
-    detail: 'Moderate reopening risk based on standard benchmarks.',
+    detail: 'Moderate risk based on reopening benchmarks.',
   },
   [Level.HIGH]: {
     level: Level.HIGH,
     upperLimit: 0,
     name: 'Elevated',
     color: COLOR_MAP.RED.BASE,
-    detail: 'Elevated reopening risk based on standard benchmarks.',
+    detail: 'Elevated risk based on reopening benchmarks.',
   },
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,
     upperLimit: 0,
     name: 'Unknown',
     color: COLOR_MAP.GRAY.BASE,
-    detail: 'We don’t have enough data to predict reopening risk.',
+    detail: 'We don’t have enough data to assess reopening risk.',
   },
 };
 
@@ -81,28 +87,28 @@ export const CASE_GROWTH_RATE: Zones = {
     upperLimit: 1.0,
     name: 'Low',
     color: COLOR_MAP.GREEN.BASE,
-    detail: 'Cases are decreasing',
+    detail: 'Active cases are decreasing',
   },
   [Level.MEDIUM]: {
     level: Level.MEDIUM,
     upperLimit: 1.2,
     name: 'Medium',
     color: COLOR_MAP.ORANGE.BASE,
-    detail: 'Cases are slowly increasing',
+    detail: 'Active cases are slowly increasing',
   },
   [Level.HIGH]: {
     level: Level.HIGH,
     upperLimit: Infinity,
     name: 'High',
     color: COLOR_MAP.RED.BASE,
-    detail: 'Cases are increasing',
+    detail: 'Active cases are increasing',
   },
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,
     upperLimit: 0,
     name: 'Unknown',
     color: COLOR_MAP.GRAY.BASE,
-    detail: 'Insufficient data to predict',
+    detail: 'Insufficient data to assess',
   },
 };
 
@@ -113,28 +119,28 @@ export const POSITIVE_TESTS: Zones = {
     upperLimit: 0.03,
     name: 'Low',
     color: COLOR_MAP.GREEN.BASE,
-    detail: 'Implies testing is widespread',
+    detail: 'Indicates testing is widespread',
   },
   [Level.MEDIUM]: {
     level: Level.MEDIUM,
     upperLimit: 0.1,
     name: 'Medium',
     color: COLOR_MAP.ORANGE.BASE,
-    detail: 'Implies testing is not widespread',
+    detail: 'Indicates testing is not widespread',
   },
   [Level.HIGH]: {
     level: Level.HIGH,
     upperLimit: Infinity,
     name: 'High',
     color: COLOR_MAP.RED.BASE,
-    detail: 'Implies testing is limited',
+    detail: 'Indicates testing is limited',
   },
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,
     upperLimit: 0,
     name: 'Unknown',
     color: COLOR_MAP.GRAY.BASE,
-    detail: 'Insufficient data to predict',
+    detail: 'Insufficient data to assess',
   },
 };
 
@@ -145,28 +151,28 @@ export const HOSPITAL_USAGE: Zones = {
     upperLimit: 0.5,
     name: 'Low',
     color: COLOR_MAP.GREEN.BASE,
-    detail: 'Can likely handle a spike in COVID',
+    detail: 'Can likely handle a new wave of COVID',
   },
   [Level.MEDIUM]: {
     level: Level.MEDIUM,
     upperLimit: 0.75,
     name: 'Medium',
     color: COLOR_MAP.ORANGE.BASE,
-    detail: 'May be at risk if COVID resurges',
+    detail: 'At risk to a new wave of COVID',
   },
   [Level.HIGH]: {
     level: Level.HIGH,
     upperLimit: Infinity,
     name: 'High',
     color: COLOR_MAP.RED.BASE,
-    detail: 'Unable to handle a COVID surge',
+    detail: 'Unable to handle a new wave of COVID',
   },
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,
     upperLimit: 0,
     name: 'Unknown',
     color: COLOR_MAP.GRAY.BASE,
-    detail: 'Insufficient data to predict',
+    detail: 'Insufficient data to assess',
   },
 };
 
