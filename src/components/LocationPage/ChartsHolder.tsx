@@ -29,6 +29,7 @@ import {
   ChartType,
   ChartTypeToTitle,
 } from 'enums/zones';
+import { formatDate } from 'utils';
 // TODO(michael): These format helpers should probably live in a more
 // general-purpose location, not just for charts.
 import { formatDecimal, formatPercent } from 'components/Charts/utils';
@@ -39,8 +40,7 @@ const ChartsHolder = (props: {
   countyId: string;
 }) => {
   const projection: Projection = props.projections.primary;
-  const worstCaseProjection: Projection =
-    props.projections.worstCaseInterventionModel;
+  const noInterventionProjection: Projection = props.projections.baseline;
 
   // TODO(michael): This should probably be some function of today's date?
   const endDate = new Date('2020-05-15');
@@ -113,7 +113,7 @@ const ChartsHolder = (props: {
             <ChartHeader>Future projections</ChartHeader>
             <ChartLocationName>{projection.locationName}</ChartLocationName>
             <ChartDescription>
-              {generateChartDescription(projection, worstCaseProjection)}
+              {generateChartDescription(projection, noInterventionProjection)}
             </ChartDescription>
             <ModelChart
               projections={props.projections}
@@ -132,20 +132,28 @@ const ChartsHolder = (props: {
 
 function generateChartDescription(
   projection: Projection,
-  worstCaseProjection: Projection,
+  noInterventionProjection: Projection,
 ) {
   // TODO(sgoldblatt): figure out how to get people number data from projection
   if (projection.dateOverwhelmed) {
     return (
       `Projections indicate that many additional people will ` +
       `be hospitalized in the next 3 months. At this rate, ${projection.locationName} ` +
-      `hospitals may become overloaded on ${projection.dateOverwhelmed}.`
+      `hospitals may become overloaded by ${formatDate(
+        projection.dateOverwhelmed,
+      )}.`
     );
   } else {
+    const noInterventionDate = noInterventionProjection.dateOverwhelmed;
+    const restrictionsLiftedText =
+      noInterventionDate &&
+      `If all restrictions were lifted today, hospitals would become overloaded by ${formatDate(
+        noInterventionDate,
+      )}.`;
+
     return (
-      `Projections indicate that additional people will be hospitalized in the next 3 months.` +
-      `Projections indicate that ${projection.locationName} hospitals are unlikely to become overloaded in the next 3 months.` +
-      `If all restrictions were lifted today, hospitals would overload on ${worstCaseProjection.dateOverwhelmed}.`
+      `Projections indicate that ${projection.locationName} hospitals are unlikely to become overloaded in the next 3 months. ` +
+      `${restrictionsLiftedText || ''}`
     );
   }
 }
