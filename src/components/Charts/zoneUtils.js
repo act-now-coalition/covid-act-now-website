@@ -83,8 +83,12 @@ export const optionsPositiveTests = (data, endDate) => {
   const { x, y } = lastValidPoint(data);
   const [minY, maxY] = [0, getMaxY(data)];
   const [minYAxis, maxYAxis] = getYAxisLimits(minY, maxY, zones);
-  // sets the limit on the y-axis to be no more than 50%
-  const adjustedMaxYAxis = Math.min(maxYAxis, 0.5);
+
+  // sets the limit on the y-axis to be no more than 40%
+  const CAP = 0.4;
+  const adjustedMaxYAxis = Math.min(maxYAxis, CAP);
+  data = data.map(({ x, y }) => ({ x, y: y && Math.min(y, CAP) }));
+
   return {
     ...baseOptions,
     annotations: [
@@ -100,7 +104,9 @@ export const optionsPositiveTests = (data, endDate) => {
     ],
     tooltip: {
       pointFormatter: function () {
-        return `Positive Tests ${formatPercent(this.y)}`;
+        return `Positive Tests ${
+          this.y === CAP ? `> ${formatPercent(CAP)}` : formatPercent(this.y)
+        }`;
       },
     },
     xAxis: {
