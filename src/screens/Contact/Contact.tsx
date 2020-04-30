@@ -107,7 +107,7 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
             </li>
             <li>
               <Typography variant="body1" component="p">
-                Epidimiologists
+                Epidemiologists
               </Typography>
             </li>
             <li>
