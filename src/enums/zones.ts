@@ -4,19 +4,19 @@ import { fail } from 'assert';
 export enum ChartType {
   CASE_GROWTH_RATE = 'Infection growth rate',
   POSITIVE_TESTS = 'Positive test rate',
-  HOSPITAL_USAGE = 'COVID ICU usage',
+  HOSPITAL_USAGE = 'ICU Headroom Utilization',
 }
 
 export const ChartTypeToMetricName = {
   [ChartType.CASE_GROWTH_RATE]: 'Infection growth rate',
   [ChartType.POSITIVE_TESTS]: 'Positive test rate',
-  [ChartType.HOSPITAL_USAGE]: 'COVID ICU usage',
+  [ChartType.HOSPITAL_USAGE]: 'ICU Headroom Utilization',
 };
 
 export const ChartTypeToTitle = {
   [ChartType.CASE_GROWTH_RATE]: 'Infection growth rate',
   [ChartType.POSITIVE_TESTS]: 'Positive test rate',
-  [ChartType.HOSPITAL_USAGE]: 'COVID ICU usage',
+  [ChartType.HOSPITAL_USAGE]: 'ICU Headroom Utilization',
 };
 
 export interface LevelInfo {
