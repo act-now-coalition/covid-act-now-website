@@ -262,22 +262,27 @@ function positiveTestsStatusText(projection: Projection) {
 
 function hospitalOccupancyStatusText(projection: Projection) {
   const icuUtilization = projection.currentIcuUtilization;
-  if (icuUtilization === null) {
+  const currentlyInICU = projection.currentICUPatients;
+  if (icuUtilization === null || currentlyInICU == null) {
     return 'No ICU occupancy data is available.';
   }
   const level = determineZone(HOSPITAL_USAGE, icuUtilization);
 
   const location = projection.locationName;
-  const capacity = Math.round(projection.totalICUCapacity / 100) * 100;
-  const normallyFree =
-    Math.round(projection.typicallyFreeICUCapacity / 100) * 100;
-  const currentlyInICU = projection.currentICUPatients;
+  const capacity = projection.totalICUCapacity;
+  const normallyFree = Math.floor(projection.typicallyFreeICUCapacity);
+  const percentUtilization = Math.round(100 * currentlyInICU / normallyFree);
 
-  const lowText = `Hospitals have sufficient ICU capacity to absorb a surge of COVID hospitalizations`;
-  const mediumText = `Hospitals’ ICUs are not at capacity, but a surge in COVID cases could quickly push the healthcare system to a breaking point`;
-  const highText = `Hospitals’ ICUs are at capacity`;
+  const lowText = `This suggests there is enough capacity to absorb a
+      wave of new COVID hospitalizations.`;
+  const mediumText = `This suggests less ability to absorb a wave of
+      new COVID hospitalizations.`;
+  const highText = `This suggests the healthcare system may struggleis
+      unlikely to be able to absorb a wave of new COVID hospitalizations.`;
 
-  return `${location} has ${capacity} ICU Beds, and normally ${normallyFree} of them are unoccupied. Currently we estimate there are ${currentlyInICU} COVID ICU patients. ${levelText(
+  return `${location} has ${capacity} ICU Beds. Normally ${normallyFree} are unoccupied.
+      We estimate there are currently ${currentlyInICU} COVID cases in the ICU,
+      or ${percentUtilization}% of typically free beds. ${levelText(
     level,
     lowText,
     mediumText,
