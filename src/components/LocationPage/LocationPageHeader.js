@@ -66,8 +66,9 @@ const LocationPageHeader = ({ projections }) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Please let us know.
+                Please let us know
               </a>
+              .
             </HeaderSubCopy>
           )}
         </StyledStateCopyWrapper>
