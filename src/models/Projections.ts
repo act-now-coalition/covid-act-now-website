@@ -27,7 +27,6 @@ export class Projections {
   supportsInferred: boolean;
   isCounty: boolean;
   interventionModelMap: any;
-  worstCaseInterventionModel: any;
 
   constructor(
     summaryWithTimeseriesMap: RegionSummaryWithTimeseriesMap,
@@ -78,11 +77,6 @@ export class Projections {
     this.currentInterventionModel = this.supportsInferred
       ? this.projected
       : this.interventionModelMap[this.stateIntervention];
-
-    this.worstCaseInterventionModel =
-      this.stateIntervention === INTERVENTIONS.SHELTER_IN_PLACE
-        ? this.interventionModelMap[INTERVENTIONS.SOCIAL_DISTANCING]
-        : this.interventionModelMap[this.stateIntervention];
   }
 
   get primary() {
