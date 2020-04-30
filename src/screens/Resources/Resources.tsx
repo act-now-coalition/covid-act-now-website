@@ -179,7 +179,7 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
             frameBorder="0"
             scrolling="no"
           />
-          <ShareBlock />
+          <ShareBlock forceVertical={true} />
         </StapledSidebar>
       </Content>
     </Wrapper>

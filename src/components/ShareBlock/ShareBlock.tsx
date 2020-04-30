@@ -20,7 +20,7 @@ import { STATES } from 'enums';
 
 const ShareBlock = ({
   condensed,
-  centered,
+  forceVertical,
   stateId,
   countyName,
   shareQuote,
@@ -30,7 +30,7 @@ const ShareBlock = ({
   onClickEmbed,
 }: {
   condensed?: boolean;
-  centered?: boolean;
+  forceVertical?: boolean;
   stateId?: string;
   countyName?: String;
   shareQuote?: string;
@@ -68,13 +68,17 @@ const ShareBlock = ({
   });
 
   return (
-    <ShareContainer condensed={condensed} centered={centered}>
-      <ShareType>
+    <ShareContainer condensed={condensed} forceVertical={forceVertical}>
+      <ShareType forceVertical={forceVertical}>
         <ShareInstruction>
           {shareInstruction || 'Share the Covid Act Now map'}
         </ShareInstruction>
         <ShareButtonContainer reflow>
-          <StyledShareButton disableElevation variant="contained" color="#3b5998">
+          <StyledShareButton
+            disableElevation
+            variant="contained"
+            color="#3b5998"
+          >
             <FacebookShareButton
               url={url}
               quote={quote}
@@ -83,10 +87,18 @@ const ShareBlock = ({
                 return Promise.resolve();
               }}
             >
-              <FacebookIcon size={40} round={false} bgStyle={{ fill: 'auto' }} />
+              <FacebookIcon
+                size={40}
+                round={false}
+                bgStyle={{ fill: 'auto' }}
+              />
             </FacebookShareButton>
           </StyledShareButton>
-          <StyledShareButton disableElevation variant="contained" color="#00acee">
+          <StyledShareButton
+            disableElevation
+            variant="contained"
+            color="#00acee"
+          >
             <TwitterShareButton
               url={url}
               title={quote}
@@ -99,7 +111,11 @@ const ShareBlock = ({
               <TwitterIcon size={40} round={false} bgStyle={{ fill: 'auto' }} />
             </TwitterShareButton>
           </StyledShareButton>
-          <StyledShareButton disableElevation variant="contained" color="#007fb1">
+          <StyledShareButton
+            disableElevation
+            variant="contained"
+            color="#007fb1"
+          >
             <LinkedinShareButton
               url={url}
               title={quote}
@@ -110,7 +126,11 @@ const ShareBlock = ({
                 return Promise.resolve();
               }}
             >
-              <LinkedinIcon size={40} round={false} bgStyle={{ fill: 'auto' }} />
+              <LinkedinIcon
+                size={40}
+                round={false}
+                bgStyle={{ fill: 'auto' }}
+              />
             </LinkedinShareButton>
           </StyledShareButton>
           {isMatchingProjectionsRoute && (
@@ -125,7 +145,7 @@ const ShareBlock = ({
           )}
         </ShareButtonContainer>
       </ShareType>
-      <ShareType>
+      <ShareType forceVertical={forceVertical}>
         <ShareInstruction color="inherit" component="p" variant="subtitle2">
           {newsletterInstruction ||
             'Get the latest updates from the Covid Act Now team'}

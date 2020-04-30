@@ -12,7 +12,7 @@ export const StyledNewsletter = styled.div`
       line-height: 2rem;
       height: 2.5rem;
       outline: 0;
-      border: 1px solid rgba(0, 0, 0, 0.12);;
+      border: 1px solid rgba(0, 0, 0, 0.12);
       border-right-width: 0;
       border-top-left-radius: 4px;
       border-bottom-left-radius: 4px;

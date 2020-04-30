@@ -12,17 +12,16 @@ export const ShareSpacer = styled.div`
 
 export const ShareContainer = styled.div<{
   condensed?: boolean;
-  centered?: boolean;
+  forceVertical?: boolean;
 }>`
   background: ${palette.white};
   max-width: 900px;
-  margin: ${props =>
-    props.condensed ? 0 : props.centered ? '3rem auto' : '3rem 0'};
+  margin: ${props => (props.condensed ? 0 : '3rem 0')};
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 4px;
 
   @media screen and (min-width: 900px) {
-    display: flex;
+    display: ${props => (props.forceVertical ? 'block' : 'flex')};
   }
 `;
 
@@ -57,7 +56,7 @@ export const ShareButtonContainer = styled.div<{ reflow: boolean }>`
   }
 `;
 
-export const ShareType = styled.div`
+export const ShareType = styled.div<{ forceVertical?: Boolean }>`
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   padding: 1.5rem;
   flex: 1;
@@ -67,8 +66,10 @@ export const ShareType = styled.div`
 
 
   @media (min-width: 900px) {
-    border-right: 1px solid rgba(0, 0, 0, 0.12);
-    border-bottom: 0;
+    border-right: ${props =>
+      props.forceVertical ? '0' : '1px solid rgba(0, 0, 0, 0.12);'}
+    border-bottom: ${props =>
+      props.forceVertical ? '1px solid rgba(0, 0, 0, 0.12);' : '0'};
 
     &:last-child {
       border-right: 0;
