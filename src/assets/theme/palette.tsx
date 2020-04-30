@@ -29,7 +29,7 @@ export default {
   info: {
     contrastText: white,
     dark: colors.blue[900],
-    main: colors.blue[600],
+    main: '#3BBCE6',
     light: colors.blue[400],
   },
   warning: {

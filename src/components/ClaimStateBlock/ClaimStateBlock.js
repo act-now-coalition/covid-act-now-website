@@ -1,7 +1,9 @@
 import React from 'react';
 import {
+  ClaimStateWrapper,
   ClaimStateContainer,
   ClaimStateHeader,
+  ClaimStateText,
   ClaimStateBody,
   ClaimStateButton,
   ClaimStateButtonWrapper,
@@ -14,20 +16,24 @@ const ClaimStateBlock = ({ stateId, countyName }) => {
   const stateName = stateId && STATES[stateId];
   const headerName = countyName ? `${countyName}` : `the state of ${stateName}`;
   return (
-    <ClaimStateContainer>
-      <ClaimStateHeader>Do you work for {headerName}?</ClaimStateHeader>
-      <ClaimStateBody>
-        We’d love to know how you’re using our model. Email us at{' '}
-        <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.
-      </ClaimStateBody>
-      <ClaimStateButtonWrapper>
-        <a href={`mailto:${EMAIL}`}>
-          <ClaimStateButton disableElevation variant="contained">
-            Connect with us
-          </ClaimStateButton>
-        </a>
-      </ClaimStateButtonWrapper>
-    </ClaimStateContainer>
+    <ClaimStateWrapper>
+      <ClaimStateContainer>
+        <ClaimStateText>
+          <ClaimStateHeader>Do you work for {headerName}?</ClaimStateHeader>
+          <ClaimStateBody>
+            We’d love to know how you’re using our model. Email us at{' '}
+            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.
+          </ClaimStateBody>
+        </ClaimStateText>
+        <ClaimStateButtonWrapper>
+          <a href={`mailto:${EMAIL}`}>
+            <ClaimStateButton disableElevation variant="contained">
+              Connect with us
+            </ClaimStateButton>
+          </a>
+        </ClaimStateButtonWrapper>
+      </ClaimStateContainer>
+    </ClaimStateWrapper>
   );
 };
 export default ClaimStateBlock;

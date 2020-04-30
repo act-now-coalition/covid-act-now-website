@@ -141,64 +141,16 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
             CSV Files
           </SectionHeader>
           <Typography variant="body1" component="p">
-            If you prefer a spreadsheet to code, we have you covered.
-          </Typography>
-          <Typography variant="body1" component="p">
-            You can now export data from Covid Act Now’s model as CSV files. You
-            can find data for:
-          </Typography>
-          <ul>
-            <li>
-              <Typography variant="body1" component="p">
-                <strong>All states:</strong>{' '}
-                <a
-                  href="https://data.covidactnow.org/latest/us/states.NO_INTERVENTION.timeseries.csv"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  https://data.covidactnow.org/latest/us/states.NO_INTERVENTION.timeseries.csv
-                </a>
-              </Typography>
-            </li>
-            <li>
-              <Typography variant="body1" component="p">
-                <strong>All counties:</strong>{' '}
-                <a
-                  href="https://data.covidactnow.org/latest/us/counties.NO_INTERVENTION.timeseries.csv"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  https://data.covidactnow.org/latest/us/counties.NO_INTERVENTION.timeseries.csv
-                </a>
-              </Typography>
-            </li>
-          </ul>
-          <Typography variant="body1" component="p">
-            To import the CSV files into Microsoft Excel, open Excel, select
-            File Menu, and choose Open (File => Open). Then navigate and select
-            the CSV you just downloaded.
-          </Typography>
-          <Typography variant="body1" component="p">
-            To import into Google Sheets, create a new blank Google Sheet and
-            select File => Open. Then select “Upload” and drag-and-drop the CSV
-            file you just downloaded.
-          </Typography>
-          <Typography variant="body1" component="p">
-            This data is updated at least every three days. We include a “Last
-            Updated” field in the download so you can ensure your data is fresh.
-            The CSV files include COVID forward projections for all 50 states
-            and more than 2,100 Counties.
-          </Typography>
-          <Typography variant="body1" component="p">
-            For more details on exporting data via CSV{' '}
+            If you prefer a spreadsheet to code, we have you covered. See our{' '}
             <a
               href="https://blog.covidactnow.org/export-covid-act-now-data-spreadsheet/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              see our blog post
-            </a>
-            .
+              blog post
+            </a>{' '}
+            for full details on how to import our data into Excel or Google
+            Sheets.
           </Typography>
 
           <SectionHeader variant="h4" component="h4" id="embed">
@@ -210,7 +162,16 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
             data embeddable by other publishers.
           </Typography>
           <Typography variant="body1" component="p">
-            Here is what it looks like live:
+            Read our{' '}
+            <a
+              href="https://blog.covidactnow.org/data-feeds/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              blog post
+            </a>{' '}
+            for instructions for how to use our embed. Here's what it looks like
+            live:
           </Typography>
           <iframe
             src="https://covidactnow.org/embed/us/co"
