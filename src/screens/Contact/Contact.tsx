@@ -8,6 +8,7 @@ import { Wrapper, Content, Header } from './Contact.style';
 
 const sidebar = (
   <React.Fragment>
+    <SidebarLink href="#general">General Questions</SidebarLink>
     <SidebarLink href="#governments">Governments</SidebarLink>
     <SidebarLink href="#press">Press</SidebarLink>
     <SidebarLink href="#join-us">Join Us</SidebarLink>
@@ -28,7 +29,14 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
       <Content>
         <StapledSidebar sidebar={sidebar}>
           <SectionHeader variant="body1" component="p">
-            General questions? Email{' '}
+            See our <a href="/about#faq">FAQ here</a>. If you have more
+            questions, please reach out to us at the email addresses below.
+          </SectionHeader>
+          <SectionHeader variant="h4" component="h4" id="general">
+            General Questions
+          </SectionHeader>
+          <Typography variant="body1" component="p">
+            Email{' '}
             <a
               href="mailto:info@covidactnow.org"
               target="_blank"
@@ -37,20 +45,13 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
               info@covidactnow.org
             </a>
             .
-          </SectionHeader>
+          </Typography>
+
           <SectionHeader variant="h4" component="h4" id="governments">
             Governments
           </SectionHeader>
           <Typography variant="body1" component="p">
-            Are you with a state or local government?
-          </Typography>
-          <Typography variant="body1" component="p">
-            Our goal is to provide you with data, modeling, and analysis to help
-            your government manage its response to COVID. Our model is only as
-            good as its data. If you have different or higher quality data, we
-            can work together to ingest that data into the model and create
-            better, more accurate COVID projections to help your government plan
-            its response. Drop us a line at{' '}
+            Are you with a state or local government? Reach out to us at{' '}
             <a
               href="mailto:gov@covidactnow.org"
               target="_blank"
@@ -59,6 +60,14 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
               gov@covidactnow.org
             </a>
             .
+          </Typography>
+          <Typography variant="body1" component="p">
+            Our goal is to provide you with data, modeling, and analysis to help
+            your government manage its response to COVID. Our model is only as
+            good as its data. If you have different or higher quality data, we
+            can work together to ingest that data into the model and create
+            better, more accurate COVID projections to help your government plan
+            its response.
           </Typography>
 
           <SectionHeader variant="h4" component="h4" id="press">
@@ -88,7 +97,7 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
             >
               Let us know
             </a>
-            . Right now, we’re in particular need of:
+            . Right now, we need:
           </Typography>
           <ul>
             <li>
@@ -98,22 +107,12 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
             </li>
             <li>
               <Typography variant="body1" component="p">
-                Data visualization experts
+                Epidimiologists
               </Typography>
             </li>
             <li>
               <Typography variant="body1" component="p">
-                Epidimiologists and modelers
-              </Typography>
-            </li>
-            <li>
-              <Typography variant="body1" component="p">
-                A UX Designer (bonus if you write code!)
-              </Typography>
-            </li>
-            <li>
-              <Typography variant="body1" component="p">
-                An engineering manager
+                Data Modelers
               </Typography>
             </li>
           </ul>
