@@ -250,7 +250,7 @@ export class Projection {
     // TODO(igor): Update this on the API side so we can undo this logic.
     const icuUtilization = timeseries.map(row => {
       if (row.ICUBedCapacity > 0 && row.ICUBedsInUse > 0) {
-        return row.ICUBedsInUse / row.ICUBedCapacity;
+        return Math.min(1, row.ICUBedsInUse / row.ICUBedCapacity);
       } else {
         return null;
       }
