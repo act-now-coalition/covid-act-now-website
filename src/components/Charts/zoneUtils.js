@@ -92,7 +92,7 @@ export const optionsPositiveTests = (data, endDate) => {
   return {
     ...baseOptions,
     annotations: [
-      currentValueAnnotation(x, y, y && formatPercent(y)),
+      currentValueAnnotation(x, y, y && formatPercent(y, 1)),
       ...zoneAnnotations(endDate, minYAxis, adjustedMaxYAxis, y, zones),
     ],
     series: [
