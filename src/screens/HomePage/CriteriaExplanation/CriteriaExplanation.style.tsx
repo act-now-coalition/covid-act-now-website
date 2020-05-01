@@ -4,22 +4,22 @@ import palette from 'assets/theme/palette';
 
 export const CriteriaList = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  margin: 0 -0.5rem;
 
   @media (min-width: 600px) {
-    flex-direction: row;
+    margin: 0 -1rem;
   }
 `;
 
 export const Wrapper = styled.div`
-  margin: 3rem 1rem 0;
-  padding: 1rem 0 0;
+  margin: 0 1rem;
+  padding: 1rem 0;
   max-width: 900px;
-  border-top: 1px solid ${palette.lightGray};
+  border-bottom: 1px solid ${palette.lightGray};
 
   @media (min-width: 600px) {
     padding-top: 3rem;
-    border-top: 0;
     margin-top: 0;
   }
 
@@ -30,15 +30,18 @@ export const Wrapper = styled.div`
 
 export const Criterion = styled.div`
   flex: 1;
-  margin-bottom: 1rem;
-  padding: 0 0 1rem;
-  border-bottom: 1px solid ${palette.lightGray};
+  padding: 0 0.5rem 0.5rem;
+  border-right: 1px solid ${palette.lightGray};
+
+  &:last-child {
+    border-right: 0;
+  }
 
   @media (min-width: 600px) {
     flex-direction: row;
+    padding: 0 1rem 1rem;
     margin-right: 2rem;
     border-bottom: 0;
-    margin-bottom: 0;
 
     &:last-child {
       margin-right: 0;
@@ -58,8 +61,19 @@ export const CriterionHeader = styled(Typography)`
   font-weight: 700;
   line-height: 1.75rem;
   margin-bottom: 0.75rem;
+
+  @media screen and (max-width: 599px) {
+    display: none;
+  }
 `;
 
 export const CriterionDescription = styled(Typography)`
-  font-size: 0.875rem;
+  font-size: 0.75rem;
+  line-height: 1.125rem;
+  font-weight: 500;
+
+  @media (min-width: 600px) {
+    font-weight: 400;
+    font-size: 0.875rem;
+  }
 `;

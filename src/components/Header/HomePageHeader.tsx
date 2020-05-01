@@ -10,6 +10,7 @@ import {
   HeaderSubCopy,
   HighlightColor,
   HeaderTitle,
+  MobileLineBreak,
 } from './HomePageHeader.style';
 
 const HomePageHeader = () => {
@@ -32,11 +33,11 @@ const HomePageHeader = () => {
     <Wrapper>
       <Content>
         <HeaderTitle>
-          Is your community <HighlightColor>ready to reopen?</HighlightColor>
+          Is your community <MobileLineBreak/><HighlightColor>ready to reopen?</HighlightColor>
         </HeaderTitle>
         <div>
           <HeaderSubCopy color="inherit" component="p" variant="subtitle2">
-            Real-time modeling and metrics. All 50 states. 2,100+ counties.
+            Real-time modeling and metrics.<MobileLineBreak/> All 50 states. 2,100+ counties.
           </HeaderSubCopy>
 
           <SelectorWrapper>

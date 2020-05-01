@@ -4,12 +4,10 @@ import Map from 'components/Map/Map';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import ShareBlock from 'components/ShareBlock/ShareBlock';
 import CriteriaExplanation from './CriteriaExplanation/CriteriaExplanation';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import { Content } from './HomePage.style';
 
 export default function HomePage() {
-  const isMobile = useMediaQuery('(max-width:600px)');
   return (
     <>
       <AppMetaTags
@@ -21,9 +19,8 @@ export default function HomePage() {
       <main>
         <div className="App">
           <Content>
-            {!isMobile && <CriteriaExplanation />}
+            <CriteriaExplanation />
             <Map />
-            {isMobile && <CriteriaExplanation />}
             <div
               style={{
                 padding: '0 1rem',
