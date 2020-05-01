@@ -59,6 +59,7 @@ export const StyledSidebarLink = styled.a`
   font-weight: 500;
 `;
 
+/* Ensurse that the scroll-to links position the header perfectly. */
 const NAV_HEIGHT = 65;
 const OUTER_PADDING = 16;
 const INNER_PADDING = 40;
@@ -81,17 +82,3 @@ export const SectionHeader = styled(Typography)<{
     display: none;
   }
 `;
-
-// .pillars-wrapper {
-//   flex-direction: column;
-
-//   .pillars-cta {
-//     margin-bottom: 1.5rem;
-//     margin-right: 0;
-//     width: 100%;
-//   }
-
-//   .pillar {
-//     margin-bottom: 3rem;
-//   }
-// }
