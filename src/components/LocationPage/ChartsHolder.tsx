@@ -276,7 +276,7 @@ function hospitalOccupancyStatusText(projection: Projection) {
 
   const lowText = `This suggests there is enough capacity to absorb a wave of new COVID infections.`;
   const mediumText = `Caution is warranted as a wave of new COVID infections could create pressure on the healthcare system.`;
-  const highText = `This suggests the healthcare system is not well positioned  to absorb a wave of new COVID infections.`;
+  const highText = `This suggests the healthcare system is not well positioned to absorb a wave of new COVID infections.`;
 
   return `${location} has ${capacity} ICU Beds. Normally, ${normallyFree} are unoccupied.
       We estimate there are currently ${currentlyInICU} COVID cases in the ICU,
