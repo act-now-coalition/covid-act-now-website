@@ -262,7 +262,11 @@ function positiveTestsStatusText(projection: Projection) {
 function hospitalOccupancyStatusText(projection: Projection) {
   const icuUtilization = projection.currentIcuUtilization;
   const currentlyInICU = projection.currentICUPatients;
-  if (icuUtilization === null || currentlyInICU == null) {
+  if (
+    icuUtilization === null ||
+    currentlyInICU == null ||
+    projection.typicallyFreeICUCapacity == null
+  ) {
     return 'No ICU occupancy data is available.';
   }
   const level = determineZone(HOSPITAL_USAGE, icuUtilization);
