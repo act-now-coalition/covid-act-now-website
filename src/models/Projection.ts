@@ -49,8 +49,8 @@ export class Projection {
   readonly isInferred: boolean;
   readonly totalPopulation: number;
   readonly dateOverwhelmed: Date | null;
-  readonly totalICUCapacity: number;
-  readonly typicallyFreeICUCapacity: number;
+  readonly totalICUCapacity: number | null;
+  readonly typicallyFreeICUCapacity: number | null;
   readonly currentICUPatients: number | null;
 
   private readonly intervention: string;
@@ -96,10 +96,10 @@ export class Projection {
     this.testPositiveRate = this.calcTestPositiveRate();
     this.icuUtilization = this.calcIcuUtilization(timeseries, lastUpdated);
 
-    this.totalICUCapacity = this.calcIcuCapacity(summaryWithTimeseries);
+    const ICUBeds = summaryWithTimeseries?.actuals?.ICUBeds;
+    this.totalICUCapacity = ICUBeds && ICUBeds.capacity;
     this.typicallyFreeICUCapacity =
-      summaryWithTimeseries.actuals.ICUBeds.capacity *
-      (1 - summaryWithTimeseries.actuals.ICUBeds.typicalUsageRate);
+      ICUBeds && ICUBeds.capacity * (1 - ICUBeds.typicalUsageRate);
     this.currentICUPatients = this.calcCurrentICUPatients(
       timeseries,
       lastUpdated,
@@ -281,10 +281,6 @@ export class Projection {
     // everything >= lastUpdatedDate. But since the ICU data is all estimates, I
     // can't really validate that's correct.
     return this.omitDataAtOrAfterDate(icuUtilization, lastUpdated);
-  }
-
-  private calcIcuCapacity(s: RegionSummaryWithTimeseries) {
-    return s.actuals.ICUBeds.capacity;
   }
 
   private calcCurrentICUPatients(
