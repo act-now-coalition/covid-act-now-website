@@ -32,13 +32,11 @@ const HomePageHeader = () => {
     <Wrapper>
       <Content>
         <HeaderTitle>
-          Data to <HighlightColor>reopen safely.</HighlightColor>
+          Is your community <HighlightColor>ready to reopen?</HighlightColor>
         </HeaderTitle>
         <div>
           <HeaderSubCopy color="inherit" component="p" variant="subtitle2">
-            Real-time modeling and metrics to see where we stand against COVID.{' '}
-            <br />
-            All 50 states. 2,100+ counties.
+            Real-time modeling and metrics. All 50 states. 2,100+ counties.
           </HeaderSubCopy>
 
           <SelectorWrapper>
