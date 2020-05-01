@@ -109,6 +109,7 @@ const ChartsHolder = (props: {
                   The World Health Organization recommends a positive test rate
                   of less than 10% before reopening. The countries most
                   successful in containing COVID have rates of 3% or less.
+                  We calculate the rate as a 7-day trailing average.
                 </Disclaimer>
               </>
             )}
