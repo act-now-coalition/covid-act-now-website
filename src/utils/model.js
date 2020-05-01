@@ -107,7 +107,9 @@ export function useModelLastUpdatedDate() {
       .then(version => {
         // We add 1 day since models are generally published the day after
         // they're generated (due to QA process).
-        const date = moment(version.timestamp).add(1, 'day');
+        let date = moment(version.timestamp).add(1, 'day');
+        // But we don't want to accidentally show a future date.
+        date = moment().diff(date) < 0 ? moment() : date;
         setLastUpdated(date.toDate());
       });
   }, [versionUrl]);
