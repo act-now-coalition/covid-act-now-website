@@ -189,12 +189,19 @@ export class Projection {
   }
 
   private calcRtRange(timeseries: Timeseries): Array<RtRange | null> {
-    return timeseries.map(row => {
-      // TODO(michael): Why are the types wrong? I think
-      // json-schema-to-typescript may be broken. :-(
-      const rt = (row.RtIndicator as any) as number;
-      const ci = (row.RtIndicatorCI90 as any) as number;
-      if (rt) {
+    const rtSeriesRaw = timeseries.map(row => row.RtIndicator);
+    const rtCiSeriesRaw = timeseries.map(row => row.RtIndicatorCI90);
+
+    // This hides small gaps (less than 2 data points) in the rt series to make
+    // it more visually appealing without making up large amounts of data.
+    // TODO(michael): Remove this if we fix it in the model / API.
+    // https://github.com/covid-projections/covid-data-model/issues/340
+    const rtSeries = this.interpolateNullGaps(rtSeriesRaw, /*maxGap=*/ 2);
+    const rtCiSeries = this.interpolateNullGaps(rtCiSeriesRaw, /*maxGap=*/ 2);
+
+    return rtSeries.map((rt, idx) => {
+      const ci = rtCiSeries[idx];
+      if (rt !== null && ci !== null) {
         return {
           rt: rt,
           low: rt - ci,
@@ -332,6 +339,15 @@ export class Projection {
     return i === null ? null : data[i]!;
   }
 
+  private interpolateNullGaps(data: Array<number | null>, maxGap: number) {
+    const gaps = this.findNullGaps(data).filter(({ start, end }) => {
+      const length = end - start - 1;
+      return length <= maxGap;
+    });
+
+    return this.interpolateRanges(data, gaps);
+  }
+
   /**
    * Finds any "gaps" where data is missing or stalls at a steady number for
    * multiple days and replaces them with interpolated data.
@@ -387,6 +403,31 @@ export class Projection {
         value !== null &&
         (lastValidValueIndex === null || value !== data[lastValidValueIndex]);
       if (isValid) {
+        if (lastValidValueIndex !== null && lastValidValueIndex !== i - 1) {
+          // we found a gap!
+          gaps.push({ start: lastValidValueIndex, end: i });
+        }
+        lastValidValueIndex = i;
+      }
+    }
+    return gaps;
+  }
+
+  /**
+   * Given a series of data points, finds any "gaps" where data is `null`.
+   *
+   * The returned {start, end} tuples are the indices of the entries surrounding each gap.
+   *
+   * Any `null` data points at the beginning or end of the data are not considered a gap.
+   */
+  private findNullGaps(
+    data: Array<number | null>,
+  ): Array<{ start: number; end: number }> {
+    let lastValidValueIndex: number | null = null;
+    const gaps = [];
+    for (let i = 0; i < data.length; i++) {
+      const value = data[i];
+      if (value !== null) {
         if (lastValidValueIndex !== null && lastValidValueIndex !== i - 1) {
           // we found a gap!
           gaps.push({ start: lastValidValueIndex, end: i });
