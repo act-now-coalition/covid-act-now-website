@@ -244,15 +244,15 @@ function positiveTestsStatusText(projection: Projection) {
     level,
     'low',
     'relatively sizable',
-    'relatively large',
+    'relatively high',
   );
   const percentage = formatPercent(testPositiveRate);
 
   const location = projection.locationName;
   const testingBroadlyText = levelText(
     level,
-    `which suggests enough widespread, aggressive testing to catch most/all cases in ${location}`,
-    `which indicates that testing in ${location} is not widespread enough to detect all cases`,
+    `which suggests widespread, aggressive testing in ${location}`,
+    `which indicates that testing in ${location} is not widespread, meaning that many cases may go undetected`,
     `which indicates that testing in ${location} is limited, meaning that many cases may go undetected`,
   );
 
@@ -272,14 +272,11 @@ function hospitalOccupancyStatusText(projection: Projection) {
   const normallyFree = Math.floor(projection.typicallyFreeICUCapacity);
   const percentUtilization = Math.round((100 * currentlyInICU) / normallyFree);
 
-  const lowText = `This suggests there is enough capacity to absorb a
-      wave of new COVID hospitalizations.`;
-  const mediumText = `This suggests less ability to absorb a wave of
-      new COVID hospitalizations.`;
-  const highText = `This suggests the healthcare system may struggle
-       to absorb a wave of new COVID hospitalizations.`;
+  const lowText = `This suggests there is enough capacity to absorb a wave of new COVID infections.`;
+  const mediumText = `Caution is warranted as a wave of new COVID infections could create pressure on the healthcare system.`;
+  const highText = `This suggests the healthcare system is not well positioned  to absorb a wave of new COVID infections.`;
 
-  return `${location} has ${capacity} ICU Beds. Normally ${normallyFree} are unoccupied.
+  return `${location} has ${capacity} ICU Beds. Normally, ${normallyFree} are unoccupied.
       We estimate there are currently ${currentlyInICU} COVID cases in the ICU,
       or ${percentUtilization}% of typically free beds. ${levelText(
     level,
