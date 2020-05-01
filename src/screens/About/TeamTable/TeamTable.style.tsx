@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
 
-export const TeamTable = styled.div``;
+export const TeamTableGrid = styled.div``;
 export const TeamMember = styled.div`
   display: flex;
   margin: 0;

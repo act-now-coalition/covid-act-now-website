@@ -8,12 +8,15 @@ import StapledSidebar, {
   SectionHeader,
 } from 'components/StapledSidebar/StapledSidebar';
 import TeamTable from './TeamTable/TeamTable';
+import HeadshotGrid, { HeadshotGrid2Up } from './HeadshotGrid/HeadshotGrid';
+import PartnerLogoGrid from './PartnerLogoGrid/PartnerLogoGrid';
 
-import { Wrapper, Content, Header, Logo } from './About.style';
+import { Wrapper, Content, Header } from './About.style';
 
 const sidebar = (
   <React.Fragment>
     <SidebarLink href="#can">Covid Act Now</SidebarLink>
+    <SidebarLink href="#partners">Our Partners</SidebarLink>
     <SidebarLink href="#team">The Team</SidebarLink>
     <SidebarLink href="#model">The Model</SidebarLink>
     <SidebarLink href="#faq">FAQ</SidebarLink>
@@ -41,28 +44,10 @@ const About = ({ children }: { children: React.ReactNode }) => {
             Covid Act Now
           </SectionHeader>
 
-          <a
-            href="https://ghss.georgetown.edu/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Logo src="/images/ghss.png" />
-          </a>
           <Typography variant="body1" component="p">
             Covid Act Now is a multidisciplinary team of technologists,
             epidemiologists, health experts, and public policy leaders working
             to model how COVID-19 will spread in the U.S.
-          </Typography>
-          <Typography variant="body1" component="p">
-            We work in partnership with the{' '}
-            <a
-              href="https://ghss.georgetown.edu/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Georgetown University for Global Health Science and Security
-            </a>
-            .
           </Typography>
           <Typography variant="body1" component="p">
             We published the first version of our model on March 20. Over 10
@@ -70,6 +55,38 @@ const About = ({ children }: { children: React.ReactNode }) => {
             dozens of federal, state, and local government officials, including
             the U.S. military and White House, to assist with response planning.
           </Typography>
+          <SectionHeader variant="h4" component="h4" id="partners">
+            Our Partners
+          </SectionHeader>
+          <Typography variant="body1" component="p">
+            We work in partnership with the{' '}
+            <a
+              href="https://ghss.georgetown.edu/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Georgetown University Center for Global Health Science and
+              Security
+            </a>
+            ,{' '}
+            <a
+              href="http://med.stanford.edu/cerc.html"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Stanford University Clinical Excellence Research Center
+            </a>
+            , and{' '}
+            <a
+              href="https://grandrounds.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Grand Rounds
+            </a>
+            .
+          </Typography>
+          <PartnerLogoGrid />
 
           <SectionHeader variant="h4" component="h4" id="team">
             The Team
@@ -78,15 +95,23 @@ const About = ({ children }: { children: React.ReactNode }) => {
           <Typography variant="h6" component="h6">
             Our Founders
           </Typography>
-          <TeamTable people={TEAM.founders} />
-          <Typography variant="h6" component="h6">
-            Our Epidemiological Advisors
-          </Typography>
-          <TeamTable people={TEAM.epidemiologicalAdvisors} />
-          <Typography variant="h6" component="h6">
-            Our Medical Advisors
-          </Typography>
-          <TeamTable people={TEAM.medicalAdvisors} />
+          <HeadshotGrid people={TEAM.founders} />
+
+          <HeadshotGrid2Up>
+            <div>
+              <Typography variant="h6" component="h6">
+                Our Epidemiological Advisors
+              </Typography>
+              <HeadshotGrid people={TEAM.epidemiologicalAdvisors} />
+            </div>
+            <div>
+              <Typography variant="h6" component="h6">
+                Our Medical Advisors
+              </Typography>
+              <HeadshotGrid people={TEAM.medicalAdvisors} />
+            </div>
+          </HeadshotGrid2Up>
+
           <Typography variant="h6" component="h6">
             Our Team
           </Typography>

@@ -29,12 +29,9 @@ const typographyOptions: TypographyOptions = {
     },
   },
   h4: {
-    fontSize: '1.4rem',
+    fontSize: '1.75rem',
     margin: '2rem 0 1.5rem',
     fontWeight: 700,
-    '@media (min-width:600px)': {
-      fontSize: '1.5rem',
-    },
   },
   h5: {
     fontWeight: 500,
@@ -47,12 +44,9 @@ const typographyOptions: TypographyOptions = {
   },
   h6: {
     fontWeight: 700,
-    fontSize: '1.2rem',
-    margin: '1.5rem 0 0',
-    '@media (min-width:600px)': {
-      margin: '1.5rem 0 0.5rem',
-      fontSize: '1rem',
-    },
+    fontSize: '1.125rem',
+    lineHeight: '1.75rem',
+    margin: '1.5rem 0',
   },
   subtitle1: {
     color: palette.text.primary,
