@@ -41,7 +41,7 @@ export const Criterion = styled.div`
     flex-direction: row;
     padding: 0 1rem 1rem;
     margin-right: 2rem;
-    border-bottom: 0;
+    border-right: 0;
 
     &:last-child {
       margin-right: 0;

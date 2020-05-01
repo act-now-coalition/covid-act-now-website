@@ -48,4 +48,3 @@ export const MobileLineBreak = styled.br`
     display: none;
   }
 `;
-
