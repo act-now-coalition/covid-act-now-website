@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import '../../App.css'; /* optional for styling like the :hover pseudo-class */
-import { invert } from 'lodash';
 import { useHistory } from 'react-router-dom';
-import { STATES } from 'enums';
+import { REVERSED_STATES } from 'enums';
 import { LEGEND_TEXT, Level } from 'enums/zones';
 import { Legend, LegendItem } from './Legend';
 import USACountyMap from './USACountyMap';
@@ -20,9 +19,7 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
   };
 
   const onClick = stateName => {
-    const reversedStateMap = invert(STATES);
-
-    const stateCode = reversedStateMap[stateName];
+    const stateCode = REVERSED_STATES[stateName];
 
     goToStatePage(`/us/${stateCode.toLowerCase()}`);
 

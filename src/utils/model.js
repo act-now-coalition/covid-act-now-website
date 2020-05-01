@@ -1,11 +1,17 @@
 import * as moment from 'moment';
 import { useState, useEffect } from 'react';
 import { Projections } from './../models/Projections';
-import { STATES } from '../enums';
+import { STATES, REVERSED_STATES, INTERVENTIONS } from '../enums';
 import DataUrlJson from '../assets/data/data_url';
 import fetch from 'node-fetch';
-import { RegionDescriptor } from './RegionDescriptor';
-import { fetchSummaryWithTimeseriesMap } from 'api';
+import {
+  RegionAggregateDescriptor,
+  RegionDescriptor,
+} from './RegionDescriptor';
+import {
+  fetchSummaryWithTimeseriesMap,
+  fetchAggregatedSummaryWithTimeseriesMaps,
+} from 'api';
 
 const DATA_URL = DataUrlJson.data_url.replace(/\/$/, '');
 
@@ -26,6 +32,40 @@ export async function fetchProjections(
   return new Projections(summaryWithTimeseriesMap, stateId, countyInfo);
 }
 
+/** Returns an array of `Projections` instances for all states. */
+export async function fetchAllStateProjections() {
+  const all = await fetchAggregatedSummaryWithTimeseriesMaps(
+    RegionAggregateDescriptor.STATES,
+  );
+  return all.map(summaryWithTimeseriesMap => {
+    // We grab the state from an arbitrary intervention's summary data.
+    const stateName =
+      summaryWithTimeseriesMap[INTERVENTIONS.LIMITED_ACTION].stateName;
+    return new Projections(
+      summaryWithTimeseriesMap,
+      REVERSED_STATES[stateName],
+    );
+  });
+}
+
+/** Returns an array of `Projections` instances for all counties. */
+export async function fetchAllCountyProjections() {
+  const all = await fetchAggregatedSummaryWithTimeseriesMaps(
+    RegionAggregateDescriptor.COUNTIES,
+  );
+  return all.map(summaryWithTimeseriesMap => {
+    // We grab the state / fips from an arbitrary intervention's summary data.
+    const stateName =
+      summaryWithTimeseriesMap[INTERVENTIONS.LIMITED_ACTION].stateName;
+    const fips = summaryWithTimeseriesMap[INTERVENTIONS.LIMITED_ACTION].fips;
+    return new Projections(
+      summaryWithTimeseriesMap,
+      REVERSED_STATES[stateName],
+      fips,
+    );
+  });
+}
+
 export function useProjections(location, county = null) {
   const [projections, setProjections] = useState();
 
@@ -38,13 +78,6 @@ export function useProjections(location, county = null) {
   }, [location, county]);
 
   return projections;
-}
-
-export async function fetchStateSummary(stateId) {
-  const response = await fetch(
-    `${DATA_URL}/county_summaries/${stateId.toUpperCase()}.summary.json`,
-  );
-  return response.json();
 }
 
 export function useStateSummaryData(state) {
