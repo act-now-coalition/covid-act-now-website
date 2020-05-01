@@ -172,25 +172,24 @@ function generateChartDescription(
   // TODO(sgoldblatt): figure out how to get people number data from projection
   if (projection.dateOverwhelmed) {
     if (projection.dateOverwhelmed < new Date()) {
-      return `Hospitals in ${projection.locationName} are overloaded.`;
+      return `Our projections suggest hospitals in ${projection.locationName} are overloaded.`;
     }
-    return (
-      `Exercise caution. At the present rate, ${projection.locationName} ` +
-      `hospitals may become overloaded on ${formatDate(
-        projection.dateOverwhelmed,
-      )}.`
-    );
+    return `Assuming current trends and interventions continue, ${
+      projection.locationName
+    } hospitals are projected to become overloaded on ${formatDate(
+      projection.dateOverwhelmed,
+    )}. Exercise caution.`;
   } else {
     const noInterventionDate = noInterventionProjection.dateOverwhelmed;
-    const restrictionsLiftedText =
-      noInterventionDate &&
-      `If all restrictions were completely lifted today, hospitals would overload on ${formatDate(
-        noInterventionDate,
-      )}.`;
+    const restrictionsLiftedText = noInterventionDate
+      ? `However, any reopening should happen in a slow and phased fashion. If all restrictions were completely lifted today, hospitals would overload on ${formatDate(
+          noInterventionDate,
+        )}.`
+      : `However, any reopening should happen in a slow and phased fashion.`;
 
     return (
-      `Projections indicate that ${projection.locationName} hospitals are unlikely to become overloaded in the next 3 months. ` +
-      `${restrictionsLiftedText || ''}`
+      `Assuming current trends and interventions continue, ${projection.locationName} hospitals are unlikely to become overloaded in the next 3 months. ` +
+      `${restrictionsLiftedText}`
     );
   }
 }
@@ -283,9 +282,9 @@ function hospitalOccupancyStatusText(projection: Projection) {
   const normallyFree = Math.floor(projection.typicallyFreeICUCapacity);
   const percentUtilization = Math.round((100 * currentlyInICU) / normallyFree);
 
-  const lowText = `This suggests there is enough capacity to absorb a wave of new COVID infections.`;
-  const mediumText = `Caution is warranted as a wave of new COVID infections could create pressure on the healthcare system.`;
-  const highText = `This suggests the healthcare system is not well positioned to absorb a wave of new COVID infections.`;
+  const lowText = `This suggests there is likely enough capacity to absorb a wave of new COVID infections.`;
+  const mediumText = `This suggests some ability to absorb an increase in COVID cases, but caution is warranted.`;
+  const highText = `This suggests the healthcare system is not well positioned  to absorb a wave of new COVID infections without substantial surge capacity.`;
 
   return `${location} has ${formatInteger(
     capacity!,
