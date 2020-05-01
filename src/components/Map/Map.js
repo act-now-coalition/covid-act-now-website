@@ -39,8 +39,7 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
     <div className="Map">
       {!hideLegend && (
         <MapInstructions>
-          <strong>Click a state</strong> to view reopening risk details and
-          county projections.
+          <strong>Click a state</strong>
         </MapInstructions>
       )}
       <div className="us-state-map">
