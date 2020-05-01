@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 
 export const Wrapper = styled.div`
   margin: 0;
-  padding: 3rem 2rem 2rem;
+  padding: 1.5rem 1rem;
   background-color: #f2f2f2;
   text-align: center;
 
@@ -22,25 +22,30 @@ export const HighlightColor = styled.span`
 `;
 
 export const HeaderTitle = styled(Typography)<{ component?: string }>`
-  font-size: 2em;
-  font-weight: 500;
+  font-size: 2rem;
+  font-weight: 700;
   line-height: 2.3rem;
   margin-bottom: 0.5rem;
 
   @media (max-width: 599px) {
-    font-size: 1.5em;
+    font-size: 1.75rem;
+    line-height: 2rem;
   }
 `;
 
 export const HeaderSubCopy = styled(Typography)<{ component?: string }>`
   font-size: 1rem;
   line-height: 1.6rem;
-  margin: 0 auto 2rem;
+  margin: 0 auto 1rem;
   max-width: 560px;
   color: rgba(0, 0, 0, 0.7);
 
   a {
     color: inherit;
+  }
+
+  @media (min-width: 600px) {
+    margin-bottom: 2rem;
   }
 `;
 
@@ -56,4 +61,10 @@ export const Disclaimer = styled.div`
 export const SelectorWrapper = styled.div`
   margin-bottom: 0rem;
   position: relative;
+`;
+
+export const MobileLineBreak = styled.br`
+  @media (min-width: 600px) {
+    display: none;
+  }
 `;

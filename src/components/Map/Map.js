@@ -8,7 +8,7 @@ import { Legend, LegendItem } from './Legend';
 import USACountyMap from './USACountyMap';
 import { MAP_FILTERS } from '../../screens/ModelPage/Enums/MapFilterEnums';
 import ReactTooltip from 'react-tooltip';
-import { MapInstructions } from './Map.style';
+import { MapInstructions, MobileLineBreak } from './Map.style';
 
 function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
   const history = useHistory();
@@ -39,8 +39,8 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
     <div className="Map">
       {!hideLegend && (
         <MapInstructions>
-          <strong>Click a state</strong> to view reopening risk details and
-          county projections.
+          <strong>Click a state</strong> to view reopening risk details{' '}
+          <MobileLineBreak /> and county projections.
         </MapInstructions>
       )}
       <div className="us-state-map">

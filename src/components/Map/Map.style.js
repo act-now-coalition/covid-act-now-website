@@ -35,6 +35,16 @@ export const USStateMapWrapper = styled.div`
 
 export const MapInstructions = styled(Typography)`
   text-align: center;
-  margin: 2rem 1rem -0.5rem;
+  margin: 1rem 1rem -0.5rem;
   font-size: 0.875rem;
+
+  @media (min-width: 600px) {
+    margin-top: 2rem;
+  }
+`;
+
+export const MobileLineBreak = styled.br`
+  @media (min-width: 600px) {
+    display: none;
+  }
 `;
