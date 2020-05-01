@@ -9,12 +9,14 @@ import {
   ClaimStateButtonWrapper,
 } from './ClaimStateBlock.style';
 import { STATES } from 'enums';
+import { getFormattedCountyName } from 'utils';
 
 const EMAIL = 'gov@covidactnow.org';
 
-const ClaimStateBlock = ({ stateId, countyName }) => {
-  const stateName = stateId && STATES[stateId];
-  const headerName = countyName ? `${countyName}` : `the state of ${stateName}`;
+const ClaimStateBlock = ({ stateId, countyId }) => {
+  const headerName = countyId
+    ? getFormattedCountyName(stateId, countyId)
+    : `the state of ${STATES[stateId]}`;
   return (
     <ClaimStateWrapper>
       <ClaimStateContainer>

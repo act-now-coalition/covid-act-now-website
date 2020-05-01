@@ -153,10 +153,7 @@ const ChartsHolder = (props: {
               county={props.countyId}
             />
           </MainContentInner>
-          <ClaimStateBlock
-            stateId={props.stateId}
-            countyName={props.countyId}
-          />
+          <ClaimStateBlock stateId={props.stateId} countyId={props.countyId} />
         </ChartContentWrapper>
       )}
     </>
