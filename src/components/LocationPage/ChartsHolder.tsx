@@ -37,7 +37,11 @@ import {
 import { formatDate } from 'utils';
 // TODO(michael): These format helpers should probably live in a more
 // general-purpose location, not just for charts.
-import { formatDecimal, formatPercent } from 'components/Charts/utils';
+import {
+  formatDecimal,
+  formatPercent,
+  formatInteger,
+} from 'components/Charts/utils';
 
 const ChartsHolder = (props: {
   projections: Projections;
@@ -108,7 +112,8 @@ const ChartsHolder = (props: {
                 <Disclaimer metricName="positive test rate">
                   The World Health Organization recommends a positive test rate
                   of less than 10% before reopening. The countries most
-                  successful in containing COVID have rates of 3% or less.
+                  successful in containing COVID have rates of 3% or less. We
+                  calculate the rate as a 7-day trailing average.
                 </Disclaimer>
               </>
             )}
@@ -282,8 +287,12 @@ function hospitalOccupancyStatusText(projection: Projection) {
   const mediumText = `Caution is warranted as a wave of new COVID infections could create pressure on the healthcare system.`;
   const highText = `This suggests the healthcare system is not well positioned to absorb a wave of new COVID infections.`;
 
-  return `${location} has ${capacity} ICU Beds. Normally, ${normallyFree} are unoccupied.
-      We estimate there are currently ${currentlyInICU} COVID cases in the ICU,
+  return `${location} has ${formatInteger(
+    capacity!,
+  )} ICU Beds. Normally, ${formatInteger(normallyFree)} are unoccupied.
+      We estimate there are currently ${formatInteger(
+        currentlyInICU,
+      )} COVID cases in the ICU,
       or ${percentUtilization}% of typically free beds. ${levelText(
     level,
     lowText,
