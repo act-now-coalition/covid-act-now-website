@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
 import {
   ComposableMap,
   Geographies,
@@ -13,12 +12,12 @@ import { COLOR_MAP } from 'enums/interventions';
 import { CountyMapWrapper, CountyMapLayerWrapper } from './CountyMap.style';
 
 const CountyMap = ({
+  stateId,
   selectedCounty,
   setSelectedCounty,
   fill,
   stateSummary = {},
 }) => {
-  let { stateId } = useParams();
   stateId = stateId.toUpperCase();
   const state = STATE_CENTERS[stateId];
   const counties = require(`./countyTopoJson/${stateId}.json`);

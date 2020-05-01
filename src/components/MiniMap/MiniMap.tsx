@@ -78,6 +78,7 @@ const MiniMap: FunctionComponent<MiniMapProperties> = (
                   ? props.projections.getAlarmLevelColor()
                   : '#e3e3e3'
               }
+              stateId={props.stateId}
               stateSummary={stateSummary}
               selectedCounty={props.selectedCounty}
               setSelectedCounty={(fullFips: string) => {

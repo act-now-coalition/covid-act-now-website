@@ -1,24 +1,18 @@
-import React from 'react';
+import React  from 'react';
 import { LoadingScreen } from './AllStates.style';
-import { useProjections } from 'utils/model';
+import { useProjections, useStateSummary } from 'utils/model';
 import { STATES } from 'enums';
-import { ZoneChartWrapper } from 'components/Charts/ZoneChart.style';
-import Chart from 'components/Charts/Chart';
-import {
-  optionsRt,
-  optionsHospitalUsage,
-  optionsPositiveTests,
-} from 'components/Charts/zoneUtils';
-import { getChartData } from 'components/LocationPage/ChartsHolder';
+import CountyMap from 'components/CountyMap/CountyMap';
 
 function AllStates() {
-  return Object.keys(STATES).map(stateId => (
+  return Object.keys(STATES).filter(s => s !== 'DC').map(stateId => (
     <State key={stateId} stateId={stateId} />
   ));
 }
 
 function State({ stateId }) {
   const projections = useProjections(stateId);
+  const stateSummary = useStateSummary(stateId);
 
   // Projections haven't loaded yet
   if (!projections) {
@@ -26,46 +20,21 @@ function State({ stateId }) {
   }
   const stateName = projections.stateName;
 
-  const projection = projections.primary;
-
-  // TODO(michael): This should probably be some function of today's date?
-  const endDate = new Date('2020-05-15');
-
-  const { rtRangeData, testPositiveData, icuUtilizationData } = getChartData(
-    projection,
-  );
-
   return (
-    <>
+    <div style={{width: 390, height: 300, position: 'relative' }}>
       <h3>{stateName}</h3>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <div style={{ width: '32%', height: '450px' }}>
-          {rtRangeData && (
-            <ZoneChartWrapper>
-              <Chart options={optionsRt(rtRangeData, endDate)} />
-            </ZoneChartWrapper>
-          )}
-        </div>
-        <div style={{ width: '32%', height: '450px' }}>
-          {testPositiveData && (
-            <ZoneChartWrapper>
-              <Chart
-                options={optionsPositiveTests(testPositiveData, endDate)}
-              />
-            </ZoneChartWrapper>
-          )}
-        </div>
-        <div style={{ width: '32%', height: '450px' }}>
-          {icuUtilizationData && (
-            <ZoneChartWrapper>
-              <Chart
-                options={optionsHospitalUsage(icuUtilizationData, endDate)}
-              />
-            </ZoneChartWrapper>
-          )}
-        </div>
-      </div>
-    </>
+            <CountyMap
+              fill={
+                projections.primary
+                  ? projections.getAlarmLevelColor()
+                  : '#e3e3e3'
+              }
+              stateId={stateId}
+              stateSummary={stateSummary}
+              selectedCounty={null}
+              setSelectedCounty={() => { }}
+            />
+    </div>
   );
 }
 
