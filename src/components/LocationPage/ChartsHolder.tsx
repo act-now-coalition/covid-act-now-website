@@ -166,10 +166,12 @@ function generateChartDescription(
 ) {
   // TODO(sgoldblatt): figure out how to get people number data from projection
   if (projection.dateOverwhelmed) {
+    if (projection.dateOverwhelmed < new Date()) {
+      return `Hospitals in ${projection.locationName} are overloaded.`;
+    }
     return (
-      `Projections indicate that many additional people will ` +
-      `be hospitalized in the next 3 months. At this rate, ${projection.locationName} ` +
-      `hospitals may become overloaded by ${formatDate(
+      `Exercise caution. At the present rate, ${projection.locationName} ` +
+      `hospitals may become overloaded on ${formatDate(
         projection.dateOverwhelmed,
       )}.`
     );
@@ -177,7 +179,7 @@ function generateChartDescription(
     const noInterventionDate = noInterventionProjection.dateOverwhelmed;
     const restrictionsLiftedText =
       noInterventionDate &&
-      `If all restrictions were lifted today, hospitals would become overloaded by ${formatDate(
+      `If all restrictions were completely lifted today, hospitals would overload on ${formatDate(
         noInterventionDate,
       )}.`;
 
