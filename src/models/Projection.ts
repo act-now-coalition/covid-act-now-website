@@ -4,6 +4,7 @@ import { RegionSummaryWithTimeseries, Timeseries } from 'api';
 export interface ProjectionParameters {
   intervention: string;
   isInferred: boolean;
+  isCounty: boolean;
 }
 
 export interface Column {
@@ -55,6 +56,7 @@ export class Projection {
 
   private readonly intervention: string;
   private readonly dates: Date[];
+  private readonly isCounty: boolean;
 
   // NOTE: These are used dynamically by getColumn()
   private readonly hospitalizations: number[];
@@ -78,6 +80,7 @@ export class Projection {
     this.locationName = this.getLocationName(summaryWithTimeseries);
     this.intervention = parameters.intervention;
     this.isInferred = parameters.isInferred;
+    this.isCounty = parameters.isCounty;
     this.totalPopulation = summaryWithTimeseries.actuals.population;
     this.dates = timeseries.map(row => new Date(row.date));
 
@@ -94,7 +97,8 @@ export class Projection {
     );
     this.rtRange = this.calcRtRange(timeseries);
     this.testPositiveRate = this.calcTestPositiveRate();
-    this.icuUtilization = this.calcIcuUtilization(timeseries, lastUpdated);
+    // disable icuUtilization for counties for now
+    this.icuUtilization = this.isCounty ? [null] : this.calcIcuUtilization(timeseries, lastUpdated);
 
     const ICUBeds = summaryWithTimeseries?.actuals?.ICUBeds;
     this.totalICUCapacity = ICUBeds && ICUBeds.capacity;
