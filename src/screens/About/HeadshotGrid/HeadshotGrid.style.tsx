@@ -30,6 +30,7 @@ export const TeamMember = styled.div`
 
   img {
     max-width: 100%;
+    border-radius: 4px;
   }
 
   @media (min-width: 600px) {
