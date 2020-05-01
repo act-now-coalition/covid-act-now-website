@@ -23,15 +23,14 @@ const CriteriaExplanation = () => {
           <Kicker>Criterion 2</Kicker>
           <CriterionHeader>Are we testing enough?</CriterionHeader>
           <CriterionDescription>
-            Is COVID testing widespread enough to be identifying most of the new
-            cases?
+            Is COVID testing widespread enough to identify new cases?
           </CriterionDescription>
         </Criterion>
         <Criterion>
           <Kicker>Criterion 3</Kicker>
           <CriterionHeader>Are our hospitals ready?</CriterionHeader>
           <CriterionDescription>
-            Do hospitals have enough capacity to treat a possible surge of COVID
+            Do hospitals have capacity to treat a surge of COVID
             hospitalizations?
           </CriterionDescription>
         </Criterion>

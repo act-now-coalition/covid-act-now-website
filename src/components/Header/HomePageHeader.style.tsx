@@ -55,4 +55,5 @@ export const Disclaimer = styled.div`
 
 export const SelectorWrapper = styled.div`
   margin-bottom: 0rem;
+  position: relative;
 `;

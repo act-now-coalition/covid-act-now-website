@@ -41,7 +41,7 @@ const ModelChart = ({
 
   const noAction = {
     className: 'limited-action',
-    name: 'If restrictions are lifted',
+    name: 'If all restrictions are lifted',
     type: 'spline',
     data: data[0].data.filter(isFuture),
     marker: {

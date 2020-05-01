@@ -12,17 +12,19 @@ export const CriteriaList = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  margin: 4.5rem 1rem 0;
+  margin: 3rem 1rem 0;
   padding: 1rem 0 0;
   max-width: 900px;
   border-top: 1px solid ${palette.lightGray};
 
   @media (min-width: 600px) {
     padding-top: 3rem;
+    border-top: 0;
+    margin-top: 0;
   }
 
   @media (min-width: 932px) {
-    margin: 4.5rem auto 0;
+    margin: 0 auto;
   }
 `;
 

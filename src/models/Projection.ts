@@ -4,6 +4,7 @@ import { RegionSummaryWithTimeseries, Timeseries } from 'api';
 export interface ProjectionParameters {
   intervention: string;
   isInferred: boolean;
+  isCounty: boolean;
 }
 
 export interface Column {
@@ -49,12 +50,13 @@ export class Projection {
   readonly isInferred: boolean;
   readonly totalPopulation: number;
   readonly dateOverwhelmed: Date | null;
-  readonly totalICUCapacity: number;
-  readonly typicallyFreeICUCapacity: number;
+  readonly totalICUCapacity: number | null;
+  readonly typicallyFreeICUCapacity: number | null;
   readonly currentICUPatients: number | null;
 
   private readonly intervention: string;
   private readonly dates: Date[];
+  private readonly isCounty: boolean;
 
   // NOTE: These are used dynamically by getColumn()
   private readonly hospitalizations: number[];
@@ -78,6 +80,7 @@ export class Projection {
     this.locationName = this.getLocationName(summaryWithTimeseries);
     this.intervention = parameters.intervention;
     this.isInferred = parameters.isInferred;
+    this.isCounty = parameters.isCounty;
     this.totalPopulation = summaryWithTimeseries.actuals.population;
     this.dates = timeseries.map(row => new Date(row.date));
 
@@ -94,12 +97,15 @@ export class Projection {
     );
     this.rtRange = this.calcRtRange(timeseries);
     this.testPositiveRate = this.calcTestPositiveRate();
-    this.icuUtilization = this.calcIcuUtilization(timeseries, lastUpdated);
+    // disable icuUtilization for counties for now
+    this.icuUtilization = this.isCounty
+      ? [null]
+      : this.calcIcuUtilization(timeseries, lastUpdated);
 
-    this.totalICUCapacity = this.calcIcuCapacity(summaryWithTimeseries);
+    const ICUBeds = summaryWithTimeseries?.actuals?.ICUBeds;
+    this.totalICUCapacity = ICUBeds && ICUBeds.capacity;
     this.typicallyFreeICUCapacity =
-      summaryWithTimeseries.actuals.ICUBeds.capacity *
-      (1 - summaryWithTimeseries.actuals.ICUBeds.typicalUsageRate);
+      ICUBeds && ICUBeds.capacity * (1 - ICUBeds.typicalUsageRate);
     this.currentICUPatients = this.calcCurrentICUPatients(
       timeseries,
       lastUpdated,
@@ -189,12 +195,19 @@ export class Projection {
   }
 
   private calcRtRange(timeseries: Timeseries): Array<RtRange | null> {
-    return timeseries.map(row => {
-      // TODO(michael): Why are the types wrong? I think
-      // json-schema-to-typescript may be broken. :-(
-      const rt = (row.RtIndicator as any) as number;
-      const ci = (row.RtIndicatorCI90 as any) as number;
-      if (rt) {
+    const rtSeriesRaw = timeseries.map(row => row.RtIndicator);
+    const rtCiSeriesRaw = timeseries.map(row => row.RtIndicatorCI90);
+
+    // This hides small gaps (less than 2 data points) in the rt series to make
+    // it more visually appealing without making up large amounts of data.
+    // TODO(michael): Remove this if we fix it in the model / API.
+    // https://github.com/covid-projections/covid-data-model/issues/340
+    const rtSeries = this.interpolateNullGaps(rtSeriesRaw, /*maxGap=*/ 2);
+    const rtCiSeries = this.interpolateNullGaps(rtCiSeriesRaw, /*maxGap=*/ 2);
+
+    return rtSeries.map((rt, idx) => {
+      const ci = rtCiSeries[idx];
+      if (rt !== null && ci !== null) {
         return {
           rt: rt,
           low: rt - ci,
@@ -276,10 +289,6 @@ export class Projection {
     return this.omitDataAtOrAfterDate(icuUtilization, lastUpdated);
   }
 
-  private calcIcuCapacity(s: RegionSummaryWithTimeseries) {
-    return s.actuals.ICUBeds.capacity;
-  }
-
   private calcCurrentICUPatients(
     timeseries: Timeseries,
     lastUpdated: Date,
@@ -330,6 +339,15 @@ export class Projection {
   private lastValue<T>(data: Array<T | null>): T | null {
     const i = this.indexOfLastValue(data);
     return i === null ? null : data[i]!;
+  }
+
+  private interpolateNullGaps(data: Array<number | null>, maxGap: number) {
+    const gaps = this.findNullGaps(data).filter(({ start, end }) => {
+      const length = end - start - 1;
+      return length <= maxGap;
+    });
+
+    return this.interpolateRanges(data, gaps);
   }
 
   /**
@@ -387,6 +405,31 @@ export class Projection {
         value !== null &&
         (lastValidValueIndex === null || value !== data[lastValidValueIndex]);
       if (isValid) {
+        if (lastValidValueIndex !== null && lastValidValueIndex !== i - 1) {
+          // we found a gap!
+          gaps.push({ start: lastValidValueIndex, end: i });
+        }
+        lastValidValueIndex = i;
+      }
+    }
+    return gaps;
+  }
+
+  /**
+   * Given a series of data points, finds any "gaps" where data is `null`.
+   *
+   * The returned {start, end} tuples are the indices of the entries surrounding each gap.
+   *
+   * Any `null` data points at the beginning or end of the data are not considered a gap.
+   */
+  private findNullGaps(
+    data: Array<number | null>,
+  ): Array<{ start: number; end: number }> {
+    let lastValidValueIndex: number | null = null;
+    const gaps = [];
+    for (let i = 0; i < data.length; i++) {
+      const value = data[i];
+      if (value !== null) {
         if (lastValidValueIndex !== null && lastValidValueIndex !== i - 1) {
           // we found a gap!
           gaps.push({ start: lastValidValueIndex, end: i });

@@ -269,6 +269,7 @@ export class Projections {
         projection = new Projection(summaryWithTimeseries, {
           intervention: intervention,
           isInferred: intervention === INTERVENTIONS.PROJECTED,
+          isCounty: this.isCounty,
         });
       }
       if (intervention === INTERVENTIONS.LIMITED_ACTION) {
