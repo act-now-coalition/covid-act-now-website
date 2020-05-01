@@ -11,12 +11,6 @@ export const Content = styled.div`
   margin: auto;
   padding: 1rem 0 3rem;
 
-  h1,
-  h5,
-  p {
-    margin-bottom: 24px;
-  }
-
   ul li p {
     margin-bottom: 0;
   }

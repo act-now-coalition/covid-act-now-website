@@ -2,34 +2,46 @@ export default {
   founders: [
     {
       name: 'Max Henderson',
+      headshot: 'Max.jpg',
+      role: 'CEO',
       title: 'Ex-Google Data Science',
       link: 'https://www.linkedin.com/in/maxhenderson/',
     },
     {
       name: 'Igor Kofman',
+      headshot: 'Igor.jpg',
+      role: 'CTO',
       title: 'Ex-CTO of Dropbox Paper',
       link: 'https://twitter.com/igorkofman',
     },
     {
       name: 'Rep. Jonathan Kreiss-Tomkins',
+      headshot: 'JKT.jpg',
+      role: 'Political Lead',
       title: 'Alaska Legislature',
       link: 'https://en.wikipedia.org/wiki/Jonathan_Kreiss-Tomkins',
     },
     {
       name: 'Zack Rosen',
+      headshot: 'Zack.jpg',
+      role: 'Strategy',
       title: 'CEO of Pantheon',
       link: 'https://www.linkedin.com/in/zacharyrosen/',
     },
   ],
   epidemiologicalAdvisors: [
     {
-      name: 'Prof. Rebecca Katz, PhD',
+      name: 'Prof. Rebecca Katz',
+      headshot: 'Rebecca.jpg',
+      role: 'PhD',
       title:
         'Director of Georgetown Center for Global Health Science and Security',
       link: 'https://www.linkedin.com/in/rebecca-katz-43a04a5/',
     },
     {
-      name: 'Ellie Graeden, PhD',
+      name: 'Ellie Graeden',
+      headshot: 'Ellie.png',
+      role: 'PhD',
       title:
         'CEO of Talus Analytics and Georgetown University Adjunct Professor',
       link: 'https://www.linkedin.com/in/egraeden/',
@@ -38,12 +50,14 @@ export default {
   medicalAdvisors: [
     {
       name: 'Dr. Nirav Shah',
+      headshot: 'Nirav.jpg',
       title:
         'Senior Scholar at Stanford Medical School and former New York State Commissioner of Health',
       link: 'https://profiles.stanford.edu/nirav-shah',
     },
     {
       name: 'Dr. Shuhan He',
+      headshot: 'Shuhan.jpg',
       title: 'Emergency Medicine Physician and Co-Founder of GetUsPPE.org',
       link: 'https://www.massgeneral.org/doctors/20771/shuhan-he',
     },
