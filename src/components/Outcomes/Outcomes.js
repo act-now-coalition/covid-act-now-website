@@ -21,7 +21,7 @@ const Outcomes = ({ projections, title, colors }) => {
         {projections.map((projection, idx) => {
           let rowLabel = projection.label;
           if (rowLabel === 'Limited action') {
-            rowLabel = 'If restrictions are lifted';
+            rowLabel = 'If all restrictions are lifted';
           }
 
           return (

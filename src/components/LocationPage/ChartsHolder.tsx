@@ -166,10 +166,12 @@ function generateChartDescription(
 ) {
   // TODO(sgoldblatt): figure out how to get people number data from projection
   if (projection.dateOverwhelmed) {
+    if (projection.dateOverwhelmed < new Date()) {
+      return `Hospitals in ${projection.locationName} are overloaded.`;
+    }
     return (
-      `Projections indicate that many additional people will ` +
-      `be hospitalized in the next 3 months. At this rate, ${projection.locationName} ` +
-      `hospitals may become overloaded by ${formatDate(
+      `Exercise caution. At the present rate, ${projection.locationName} ` +
+      `hospitals may become overloaded on ${formatDate(
         projection.dateOverwhelmed,
       )}.`
     );
@@ -177,7 +179,7 @@ function generateChartDescription(
     const noInterventionDate = noInterventionProjection.dateOverwhelmed;
     const restrictionsLiftedText =
       noInterventionDate &&
-      `If all restrictions were lifted today, hospitals would become overloaded by ${formatDate(
+      `If all restrictions were completely lifted today, hospitals would overload on ${formatDate(
         noInterventionDate,
       )}.`;
 
@@ -244,15 +246,15 @@ function positiveTestsStatusText(projection: Projection) {
     level,
     'low',
     'relatively sizable',
-    'relatively large',
+    'relatively high',
   );
   const percentage = formatPercent(testPositiveRate);
 
   const location = projection.locationName;
   const testingBroadlyText = levelText(
     level,
-    `which suggests enough widespread, aggressive testing to catch most/all cases in ${location}`,
-    `which indicates that testing in ${location} is not widespread enough to detect all cases`,
+    `which suggests widespread, aggressive testing in ${location}`,
+    `which indicates that testing in ${location} is not widespread, meaning that many cases may go undetected`,
     `which indicates that testing in ${location} is limited, meaning that many cases may go undetected`,
   );
 
@@ -272,14 +274,11 @@ function hospitalOccupancyStatusText(projection: Projection) {
   const normallyFree = Math.floor(projection.typicallyFreeICUCapacity);
   const percentUtilization = Math.round((100 * currentlyInICU) / normallyFree);
 
-  const lowText = `This suggests there is enough capacity to absorb a
-      wave of new COVID hospitalizations.`;
-  const mediumText = `This suggests less ability to absorb a wave of
-      new COVID hospitalizations.`;
-  const highText = `This suggests the healthcare system may struggle
-       to absorb a wave of new COVID hospitalizations.`;
+  const lowText = `This suggests there is enough capacity to absorb a wave of new COVID infections.`;
+  const mediumText = `Caution is warranted as a wave of new COVID infections could create pressure on the healthcare system.`;
+  const highText = `This suggests the healthcare system is not well positioned to absorb a wave of new COVID infections.`;
 
-  return `${location} has ${capacity} ICU Beds. Normally ${normallyFree} are unoccupied.
+  return `${location} has ${capacity} ICU Beds. Normally, ${normallyFree} are unoccupied.
       We estimate there are currently ${currentlyInICU} COVID cases in the ICU,
       or ${percentUtilization}% of typically free beds. ${levelText(
     level,
