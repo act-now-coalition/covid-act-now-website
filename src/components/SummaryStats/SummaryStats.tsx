@@ -39,7 +39,7 @@ const SummaryStat = (props: {
     } else if (chartType === ChartType.HOSPITAL_USAGE) {
       return formatPercent(value);
     } else if (chartType === ChartType.POSITIVE_TESTS) {
-      return formatPercent(value);
+      return formatPercent(value, 1);
     }
     fail('Invalid Chart Type');
   };
