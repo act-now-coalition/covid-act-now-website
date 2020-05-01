@@ -98,7 +98,9 @@ export class Projection {
     this.rtRange = this.calcRtRange(timeseries);
     this.testPositiveRate = this.calcTestPositiveRate();
     // disable icuUtilization for counties for now
-    this.icuUtilization = this.isCounty ? [null] : this.calcIcuUtilization(timeseries, lastUpdated);
+    this.icuUtilization = this.isCounty
+      ? [null]
+      : this.calcIcuUtilization(timeseries, lastUpdated);
 
     const ICUBeds = summaryWithTimeseries?.actuals?.ICUBeds;
     this.totalICUCapacity = ICUBeds && ICUBeds.capacity;
