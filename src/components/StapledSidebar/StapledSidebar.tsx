@@ -60,7 +60,7 @@ export default class StapledSidebar extends React.Component<
   StapledSidebarState
 > {
   static defaultProps = {
-    offset: 80,
+    offset: 65,
   };
 
   t: number;

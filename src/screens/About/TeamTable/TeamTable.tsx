@@ -1,14 +1,14 @@
 import React from 'react';
 
-import { TeamTable, TeamMember, TeamMemberCell } from './TeamTable.style';
+import { TeamTableGrid, TeamMember, TeamMemberCell } from './TeamTable.style';
 
-const About = ({
+const TeamTable = ({
   people,
 }: {
   people: { name: string; title: string; link: string }[];
 }) => {
   return (
-    <TeamTable>
+    <TeamTableGrid>
       {people.map((teammate, idx) => {
         return (
           <TeamMember key={idx}>
@@ -23,8 +23,8 @@ const About = ({
           </TeamMember>
         );
       })}
-    </TeamTable>
+    </TeamTableGrid>
   );
 };
 
-export default About;
+export default TeamTable;

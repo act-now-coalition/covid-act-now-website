@@ -88,8 +88,8 @@ const ChartsHolder = (props: {
                   <Chart options={optionsRt(rtRangeData, endDate) as any} />
                 </ZoneChartWrapper>
                 <Disclaimer metricName="infection growth rate">
-                  Most experts recommend an infection rate of less than 1.0
-                  before reopening.
+                  Most experts recommend an infection rate of less than 1.0 for
+                  two weeks before reopening.
                 </Disclaimer>
               </>
             )}
