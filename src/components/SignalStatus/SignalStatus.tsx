@@ -21,9 +21,12 @@ const getIcon = function (levelInfo: LevelInfo) {
   }
 };
 
-const SignalStatus = (props: { levelInfo: LevelInfo }) => {
+const SignalStatus = (props: { levelInfo: LevelInfo; condensed?: Boolean }) => {
   return (
-    <SignalStatusWrapper color={props.levelInfo.color}>
+    <SignalStatusWrapper
+      color={props.levelInfo.color}
+      condensed={props.condensed}
+    >
       {getIcon(props.levelInfo)}
       <span>{props.levelInfo.name}</span>
     </SignalStatusWrapper>

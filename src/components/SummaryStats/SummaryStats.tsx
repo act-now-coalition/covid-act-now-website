@@ -20,12 +20,18 @@ import { formatDecimal, formatPercent } from 'components/Charts/utils';
 import { fail } from 'assert';
 import { isNull } from 'util';
 
-const SummaryStat = (props: {
+const SummaryStat = ({
+  chartType,
+  value,
+  beta,
+  condensed,
+}: {
   chartType: ChartType;
   value: number;
   beta?: Boolean;
+  condensed?: Boolean;
 }) => {
-  const levelInfo = getLevelInfoForChartType(props.chartType, props.value);
+  const levelInfo = getLevelInfoForChartType(chartType, value);
 
   const formatValueForChart = (
     chartType: ChartType,
@@ -44,45 +50,51 @@ const SummaryStat = (props: {
     fail('Invalid Chart Type');
   };
   return (
-    <SummaryStatWrapper>
+    <SummaryStatWrapper condensed={condensed}>
       <StatTextWrapper>
-        <StatNameText>
-          {ChartTypeToMetricName[props.chartType]}{' '}
-          {props.beta && <BetaTag>Beta</BetaTag>}
+        <StatNameText condensed={condensed}>
+          {ChartTypeToMetricName[chartType]}{' '}
+          {!condensed && beta && <BetaTag>Beta</BetaTag>}
         </StatNameText>
-        <StatDetailText>{levelInfo.detail}</StatDetailText>
+        {!condensed && <StatDetailText>{levelInfo.detail}</StatDetailText>}
       </StatTextWrapper>
-      <StatValueWrapper>
-        {props.value && (
-          <StatValueText>
-            {formatValueForChart(props.chartType, props.value)}
+      <StatValueWrapper condensed={condensed}>
+        {value && (
+          <StatValueText condensed={condensed}>
+            {formatValueForChart(chartType, value)}
           </StatValueText>
         )}
-        <SignalStatus levelInfo={levelInfo} />
+        <SignalStatus levelInfo={levelInfo} condensed={condensed} />
       </StatValueWrapper>
     </SummaryStatWrapper>
   );
 };
 
-const SummaryStats = (props: { stats: { [key: string]: number | null } }) => {
+const SummaryStats = (props: {
+  stats: { [key: string]: number | null };
+  condensed?: Boolean;
+}) => {
   const hasStats = !!Object.values(props.stats).filter(
     (val: number | null) => !isNull(val),
   ).length;
   return (
     <>
       {hasStats && (
-        <SummaryStatsWrapper>
+        <SummaryStatsWrapper condensed={props.condensed}>
           <SummaryStat
             chartType={ChartType.CASE_GROWTH_RATE}
+            condensed={props.condensed}
             value={props.stats[ChartType.CASE_GROWTH_RATE] as number}
           />
           <SummaryStat
             chartType={ChartType.POSITIVE_TESTS}
+            condensed={props.condensed}
             value={props.stats[ChartType.POSITIVE_TESTS] as number}
           />
           <SummaryStat
             chartType={ChartType.HOSPITAL_USAGE}
             beta={true}
+            condensed={props.condensed}
             value={props.stats[ChartType.HOSPITAL_USAGE] as number}
           />
         </SummaryStatsWrapper>

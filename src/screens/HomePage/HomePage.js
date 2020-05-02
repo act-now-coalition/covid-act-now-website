@@ -21,14 +21,8 @@ export default function HomePage() {
           <Content>
             <CriteriaExplanation />
             <Map />
-            <div
-              style={{
-                padding: '0 1rem',
-              }}
-            >
-              <ShareBlock />
-            </div>
           </Content>
+          <ShareBlock />
         </div>
       </main>
     </>

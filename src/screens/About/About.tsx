@@ -385,9 +385,9 @@ const About = ({ children }: { children: React.ReactNode }) => {
             </a>
             .
           </Typography>
-          <ShareBlock forceVertical={true} />
         </StapledSidebar>
       </Content>
+      <ShareBlock />
     </Wrapper>
   );
 };

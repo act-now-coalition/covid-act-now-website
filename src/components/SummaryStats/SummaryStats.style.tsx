@@ -2,73 +2,107 @@ import styled from 'styled-components';
 import { Box, Typography } from '@material-ui/core';
 import palette from 'assets/theme/palette';
 
-export const SummaryStatsWrapper = styled(Box)`
-  display: flex;
-  align-items: stretch;
-  justify-content: space-around;
-  padding: 2rem 0.5rem;
-  background-color: ${palette.lightGray};
-  border-radius: 0;
-  box-shadow: none;
-  max-width: 900px;
-  flex-direction: column;
-
-  @media (min-width: 600px) {
-    flex-direction: row;
-    border-radius: 2px;
-    box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.1);
-    background-color: white;
-    padding: 1.75rem;
-    position: relative;
-    margin: -3rem 1rem 0;
-    border-radius: 5px;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.12);
-  }
-  @media (min-width: 932px) {
-    margin: -3rem auto 0;
-  }
-  @media (min-width: 1350px) {
-    margin: -3rem 445px 0 auto;
-  }
-  @media (min-width: 1750px) {
-    margin: -3rem auto 0;
-  }
-`;
-
-export const SummaryStatWrapper = styled(Box)`
-  display: flex;
-  flex: 1;
-  flex-direction: row;
-  margin: 0 0.5rem;
-  padding: 1.5rem 0;
-  align-items: stretch;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-
-  &:first-child {
-    padding-top: 0;
-  }
-
-  &:last-child {
-    border-bottom: 0;
-    padding-bottom: 0;
-  }
-
-  @media (min-width: 600px) {
-    border-bottom: 0;
-    padding: 0;
+export const SummaryStatsWrapper = styled(Box)<{ condensed?: Boolean }>`
+  ${props =>
+    props.condensed
+      ? `
+    display: block;
+  `
+      : `
+    display: flex;
+    align-items: stretch;
+    justify-content: space-around;
+    padding: 2rem 0.5rem;
+    background-color: ${palette.lightGray};
+    border-radius: 0;
+    box-shadow: none;
+    max-width: 900px;
     flex-direction: column;
-    align-items: center;
-  }
+
+    @media (min-width: 600px) {
+      flex-direction: row;
+      border-radius: 2px;
+      box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.1);
+      background-color: white;
+      padding: 1.75rem;
+      position: relative;
+      margin: -3rem 1rem 0;
+      border-radius: 5px;
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.12);
+    }
+    @media (min-width: 932px) {
+      margin: -3rem auto 0;
+    }
+    @media (min-width: 1350px) {
+      margin: -3rem 445px 0 auto;
+    }
+    @media (min-width: 1750px) {
+      margin: -3rem auto 0;
+    }
+  `}
 `;
 
-export const StatNameText = styled(Typography)`
-  font-weight: 500;
-  font-size: 1.125rem;
-  line-height: 1.25rem;
+export const SummaryStatWrapper = styled(Box)<{ condensed?: Boolean }>`
+  ${props =>
+    props.condensed
+      ? `
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
 
-  @media (min-width: 600px) {
-    min-height: 0;
-  }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  `
+      : `
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    margin: 0 0.5rem;
+    padding: 1.5rem 0;
+    align-items: stretch;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+    &:first-child {
+      padding-top: 0;
+    }
+
+    &:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    @media (min-width: 600px) {
+      border-bottom: 0;
+      padding: 0;
+      flex-direction: column;
+      align-items: center;
+    }
+  `}
+`;
+
+export const StatNameText = styled(Typography)<{ condensed?: Boolean }>`
+  ${props =>
+    props.condensed
+      ? `
+    font-weight: 500;
+    font-size: 0.75rem;
+    line-height: 0.875rem;;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-align: left;
+    color: rgba(0, 0, 0, 0.7);
+    margin-right: 1rem;
+  `
+      : `
+    font-weight: 500;
+    font-size: 1.125rem;
+    line-height: 1.25rem;
+
+    @media (min-width: 600px) {
+      min-height: 0;
+    }
+  `}
 `;
 
 export const StatTextWrapper = styled.div`
@@ -84,17 +118,25 @@ export const StatTextWrapper = styled.div`
     margin-right: 0;
   }
 `;
-export const StatValueWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: right;
-  align-items: flex-end;
-  justify-content: center;
-
-  @media (min-width: 600px) {
+export const StatValueWrapper = styled.div<{ condensed?: Boolean }>`
+  ${props =>
+    props.condensed
+      ? `
+    display: flex;
     align-items: center;
-    text-align: center;
-  }
+  `
+      : `
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    align-items: flex-end;
+    justify-content: center;
+
+    @media (min-width: 600px) {
+      align-items: center;
+      text-align: center;
+    }
+  `}
 `;
 
 export const StatDetailText = styled(Typography)`
@@ -104,19 +146,29 @@ export const StatDetailText = styled(Typography)`
   margin-top: 0.25rem;
 `;
 
-export const StatValueText = styled(Typography)`
+export const StatValueText = styled(Typography)<{ condensed?: Boolean }>`
   font-family: 'Source Code Pro', Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-  font-size: 1.5rem;
-  line-height: 1.125rem;
-  margin-bottom: 0.5rem;
   font-weight: 700;
 
-  @media (min-width: 600px) {
-    text-align: center;
-    font-size: 1.875rem;
-    line-height: 3.5rem;
-  }
+  ${props =>
+    props.condensed
+      ? `
+    font-size: 1rem;
+    line-height: 1rem;
+    text-align: right;
+  `
+      : `
+    font-size: 1.5rem;
+    line-height: 1.125rem;
+    margin-bottom: 0.5rem;
+
+    @media (min-width: 600px) {
+      text-align: center;
+      font-size: 1.875rem;
+      line-height: 3.5rem;
+    }
+  `}
 `;
 
 export const BetaTag = styled.span`

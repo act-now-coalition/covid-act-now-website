@@ -9,18 +9,28 @@ import {
   LinkedinIcon,
 } from 'react-share';
 import Newsletter from 'components/Newsletter/Newsletter';
+import SocialLocationPreview from 'components/SocialLocationPreview/SocialLocationPreview';
+import { Projections } from 'models/Projections';
+import NewsletterMockup from 'assets/images/newsletterMockup';
 import {
   ShareButtonContainer,
   ShareContainer,
-  ShareInstruction,
+  ShareInstructionHeader,
+  ShareInstructionBody,
   StyledShareButton,
-  ShareType,
+  ShareRow,
+  ShareRowContentArea,
+  NewsletterMockupWrapper,
+  SocialMockupWrapper,
+  NewsletterTextArea,
+  SocialTextArea,
+  SocialTextAreaWrapper,
+  EmbedPrompt,
 } from './ShareBlock.style';
 import { STATES } from 'enums';
 
 const ShareBlock = ({
   condensed,
-  forceVertical,
   stateId,
   countyName,
   shareQuote,
@@ -28,9 +38,10 @@ const ShareBlock = ({
   shareInstruction,
   newsletterInstruction,
   onClickEmbed,
+  projections,
+  stats,
 }: {
   condensed?: boolean;
-  forceVertical?: boolean;
   stateId?: string;
   countyName?: String;
   shareQuote?: string;
@@ -38,6 +49,8 @@ const ShareBlock = ({
   shareInstruction?: string;
   newsletterInstruction?: string;
   onClickEmbed?: any;
+  projections?: Projections;
+  stats?: { [key: string]: number | null };
 }) => {
   const locationPath = useLocation();
 
@@ -68,90 +81,110 @@ const ShareBlock = ({
   });
 
   return (
-    <ShareContainer condensed={condensed} forceVertical={forceVertical}>
-      <ShareType forceVertical={forceVertical}>
-        <ShareInstruction>
-          {shareInstruction || 'Share the Covid Act Now map'}
-        </ShareInstruction>
-        <ShareButtonContainer reflow>
-          <StyledShareButton
-            disableElevation
-            variant="contained"
-            color="#3b5998"
-          >
-            <FacebookShareButton
-              url={url}
-              quote={quote}
-              beforeOnClick={() => {
-                trackShare('facebook');
-                return Promise.resolve();
-              }}
-            >
-              <FacebookIcon
-                size={40}
-                round={false}
-                bgStyle={{ fill: 'auto' }}
-              />
-            </FacebookShareButton>
-          </StyledShareButton>
-          <StyledShareButton
-            disableElevation
-            variant="contained"
-            color="#00acee"
-          >
-            <TwitterShareButton
-              url={url}
-              title={quote}
-              hashtags={[hashtag]}
-              beforeOnClick={() => {
-                trackShare('twitter');
-                return Promise.resolve();
-              }}
-            >
-              <TwitterIcon size={40} round={false} bgStyle={{ fill: 'auto' }} />
-            </TwitterShareButton>
-          </StyledShareButton>
-          <StyledShareButton
-            disableElevation
-            variant="contained"
-            color="#007fb1"
-          >
-            <LinkedinShareButton
-              url={url}
-              title={quote}
-              // @ts-ignore: seems to not be available for linkedin?
-              hashtags={[hashtag]}
-              beforeOnClick={() => {
-                trackShare('linkedin');
-                return Promise.resolve();
-              }}
-            >
-              <LinkedinIcon
-                size={40}
-                round={false}
-                bgStyle={{ fill: 'auto' }}
-              />
-            </LinkedinShareButton>
-          </StyledShareButton>
-          {isMatchingProjectionsRoute && (
-            <StyledShareButton
-              disableElevation
-              variant="contained"
-              color="#616161"
-              onClick={onClickEmbed}
-            >
-              Embed
-            </StyledShareButton>
-          )}
-        </ShareButtonContainer>
-      </ShareType>
-      <ShareType forceVertical={forceVertical}>
-        <ShareInstruction color="inherit" component="p" variant="subtitle2">
-          {newsletterInstruction ||
-            'Get the latest updates from the Covid Act Now team'}
-        </ShareInstruction>
-        <Newsletter county={countyName} stateId={stateId} />
-      </ShareType>
+    <ShareContainer>
+      <ShareRow newsletter={true}>
+        <ShareRowContentArea>
+          <NewsletterMockupWrapper>
+            <NewsletterMockup />
+          </NewsletterMockupWrapper>
+          <NewsletterTextArea>
+            <ShareInstructionHeader>
+              Receive daily updates
+            </ShareInstructionHeader>
+            <ShareInstructionBody>
+              We’ll email you fresh data and high-quality news related to
+              COVID-19.
+            </ShareInstructionBody>
+            <Newsletter county={countyName} stateId={stateId} />
+          </NewsletterTextArea>
+        </ShareRowContentArea>
+      </ShareRow>
+      <ShareRow newsletter={false}>
+        <ShareRowContentArea>
+          <SocialTextAreaWrapper>
+            <SocialTextArea>
+              <ShareInstructionHeader>
+                Share data, save lives
+              </ShareInstructionHeader>
+              <ShareInstructionBody>
+                Save lives by sharing useful data with your neighbors, friends,
+                family and coworkers.
+              </ShareInstructionBody>
+              <ShareButtonContainer reflow>
+                <StyledShareButton
+                  disableElevation
+                  variant="contained"
+                  color="#3b5998"
+                >
+                  <FacebookShareButton
+                    url={url}
+                    quote={quote}
+                    beforeOnClick={() => {
+                      trackShare('facebook');
+                      return Promise.resolve();
+                    }}
+                  >
+                    <FacebookIcon
+                      size={40}
+                      round={false}
+                      bgStyle={{ fill: 'auto' }}
+                    />
+                  </FacebookShareButton>
+                </StyledShareButton>
+                <StyledShareButton
+                  disableElevation
+                  variant="contained"
+                  color="#00acee"
+                >
+                  <TwitterShareButton
+                    url={url}
+                    title={quote}
+                    hashtags={[hashtag]}
+                    beforeOnClick={() => {
+                      trackShare('twitter');
+                      return Promise.resolve();
+                    }}
+                  >
+                    <TwitterIcon
+                      size={40}
+                      round={false}
+                      bgStyle={{ fill: 'auto' }}
+                    />
+                  </TwitterShareButton>
+                </StyledShareButton>
+                <StyledShareButton
+                  disableElevation
+                  variant="contained"
+                  color="#007fb1"
+                >
+                  <LinkedinShareButton
+                    url={url}
+                    title={quote}
+                    // @ts-ignore: seems to not be available for linkedin?
+                    hashtags={[hashtag]}
+                    beforeOnClick={() => {
+                      trackShare('linkedin');
+                      return Promise.resolve();
+                    }}
+                  >
+                    <LinkedinIcon
+                      size={40}
+                      round={false}
+                      bgStyle={{ fill: 'auto' }}
+                    />
+                  </LinkedinShareButton>
+                </StyledShareButton>
+              </ShareButtonContainer>
+              <EmbedPrompt>
+                Or <span onClick={onClickEmbed}>embed on your website</span>
+              </EmbedPrompt>
+            </SocialTextArea>
+          </SocialTextAreaWrapper>
+          <SocialMockupWrapper>
+            <SocialLocationPreview projections={projections} stats={stats} />
+          </SocialMockupWrapper>
+        </ShareRowContentArea>
+      </ShareRow>
     </ShareContainer>
   );
 };

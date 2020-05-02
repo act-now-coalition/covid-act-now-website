@@ -17,7 +17,7 @@ import { COLOR_MAP } from 'enums/interventions';
 
 const reversedStateMap = invert(STATES);
 
-const USACountyMap = ({ stateClickHandler, setTooltipContent }) => {
+const USACountyMap = ({ stateClickHandler, setTooltipContent, condensed }) => {
   const getFillColor = geo => {
     if (geo.id.length <= 2) {
       const stateCode = reversedStateMap[geo.properties.name];
@@ -32,7 +32,7 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent }) => {
   };
 
   return (
-    <USMapWrapper>
+    <USMapWrapper condensed={condensed}>
       {/** Map with shaded background colors for states. */}
       <USStateMapWrapper>
         <ComposableMap data-tip="" projection="geoAlbersUsa" stroke={'white'}>
