@@ -15,10 +15,15 @@ export const ShareContainer = styled.div``;
 export const ShareInstructionHeader = styled(Typography)`
   margin-top: 0;
   margin-bottom: 1rem;
-  font-size: 2.125rem;
+  font-size: 1.75rem;
   font-weight: 700;
-  line-height: 2.25rem;
+  line-height: 2rem;
   color: inherit;
+
+  @media (min-width: 600px) {
+    font-size: 2.125rem;
+    line-height: 2.25rem;
+  }
 `;
 export const ShareInstructionBody = styled(Typography)`
   margin-top: 0;
@@ -155,6 +160,15 @@ export const ShareButtonContainer = styled.div<{ reflow: boolean }>`
     left: -3rem;
     margin-top: 0.75rem;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (max-width: 480px) {
+    &:before {
+      width: 1.25rem;
+    }
+    &:after {
+      left: -1.75rem;
+    }
   }
 
   @media (min-width: 600px) {

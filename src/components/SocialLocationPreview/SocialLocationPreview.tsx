@@ -1,7 +1,5 @@
 import React from 'react';
 import { Projections } from 'models/Projections';
-import { Projection } from 'models/Projection';
-import { getLevelInfoForChartType } from 'enums/zones';
 import { useModelLastUpdatedDate } from 'utils/model';
 
 import {
@@ -18,7 +16,6 @@ import {
 import { LEGEND_TEXT, Level } from 'enums/zones';
 import Map from 'components/Map/Map';
 import { COLOR_MAP } from 'enums/interventions';
-import palette from 'assets/theme/palette';
 import SummaryStats from 'components/SummaryStats/SummaryStats';
 
 const SocialLocationPreview = (props: {
@@ -41,13 +38,10 @@ const SocialLocationPreview = (props: {
     );
   }
 
-  const projection: Projection = props.projections.primary;
   const alarmLevel = props.projections.getAlarmLevel();
   const levelInfo = LEGEND_TEXT[alarmLevel];
-  const [fillColor, textColor] =
-    alarmLevel !== Level.UNKNOWN
-      ? [levelInfo.color, palette.secondary.contrastText]
-      : [COLOR_MAP.GRAY.LIGHT, palette.text.primary];
+  const fillColor =
+    alarmLevel !== Level.UNKNOWN ? levelInfo.color : COLOR_MAP.GRAY.LIGHT;
 
   return (
     <Wrapper>

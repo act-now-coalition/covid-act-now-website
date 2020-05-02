@@ -176,7 +176,13 @@ const ShareBlock = ({
                 </StyledShareButton>
               </ShareButtonContainer>
               <EmbedPrompt>
-                Or <span onClick={onClickEmbed}>embed on your website</span>
+                {isMatchingProjectionsRoute ? (
+                  <>
+                    Or <span onClick={onClickEmbed}>embed on your website</span>
+                  </>
+                ) : (
+                  <>&nbsp;</>
+                )}
               </EmbedPrompt>
             </SocialTextArea>
           </SocialTextAreaWrapper>
