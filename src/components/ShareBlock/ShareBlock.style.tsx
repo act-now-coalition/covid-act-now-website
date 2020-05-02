@@ -43,7 +43,9 @@ export const ShareRow = styled.div<{ newsletter?: Boolean }>`
   }
 `;
 
-export const ShareRowContentArea = styled.div`
+export const ShareRowContentArea = styled.div<{
+  isMatchingProjectionsRoute?: Boolean;
+}>`
   margin: 0 auto;
   max-width: 900px;
   display: flex;
@@ -56,7 +58,8 @@ export const ShareRowContentArea = styled.div`
 
   @media (min-width: 1350px) {
     max-width: 900px;
-    margin: 0 445px 0 auto;
+    margin: ${(props: any) =>
+      props.isMatchingProjectionsRoute ? '0 445px 0 auto' : '0 auto'};
     position: relative;
   }
 

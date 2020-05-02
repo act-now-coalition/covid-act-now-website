@@ -83,7 +83,9 @@ const ShareBlock = ({
   return (
     <ShareContainer>
       <ShareRow newsletter={true}>
-        <ShareRowContentArea>
+        <ShareRowContentArea
+          isMatchingProjectionsRoute={isMatchingProjectionsRoute !== null}
+        >
           <NewsletterMockupWrapper>
             <NewsletterMockup />
           </NewsletterMockupWrapper>
@@ -100,7 +102,9 @@ const ShareBlock = ({
         </ShareRowContentArea>
       </ShareRow>
       <ShareRow newsletter={false}>
-        <ShareRowContentArea>
+        <ShareRowContentArea
+          isMatchingProjectionsRoute={isMatchingProjectionsRoute !== null}
+        >
           <SocialTextAreaWrapper>
             <SocialTextArea>
               <ShareInstructionHeader>
