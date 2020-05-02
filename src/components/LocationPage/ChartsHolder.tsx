@@ -169,8 +169,23 @@ function generateChartDescription(
   projection: Projection,
   noInterventionProjection: Projection,
 ) {
-  // TODO(sgoldblatt): figure out how to get people number data from projection
+  const noInterventionDate = noInterventionProjection.dateOverwhelmed;
+  const reopeningText = noInterventionDate
+    ? `happen in a slow and phased fashion. If all restrictions were completely lifted today, ` +
+      `hospitals are projected to become overloaded by ${formatDate(
+        noInterventionDate,
+      )}.`
+    : `happen in a slow and phased fashion.`;
+
+  if (!projection.isInferred) {
+    return (
+      `We don't have enough data to project whether hospitals are likely to become overloaded. ` +
+      `Reopening should always ${reopeningText}`
+    );
+  }
+
   if (projection.dateOverwhelmed) {
+    // TODO(sgoldblatt): figure out how to get people number data from projection
     if (projection.dateOverwhelmed < new Date()) {
       return `Our projections suggest hospitals in ${projection.locationName} are overloaded.`;
     }
@@ -180,16 +195,9 @@ function generateChartDescription(
       projection.dateOverwhelmed,
     )}. Exercise caution.`;
   } else {
-    const noInterventionDate = noInterventionProjection.dateOverwhelmed;
-    const restrictionsLiftedText = noInterventionDate
-      ? `However, any reopening should happen in a slow and phased fashion. If all restrictions were completely lifted today, hospitals would overload on ${formatDate(
-          noInterventionDate,
-        )}.`
-      : `However, any reopening should happen in a slow and phased fashion.`;
-
     return (
       `Assuming current trends and interventions continue, ${projection.locationName} hospitals are unlikely to become overloaded in the next 3 months. ` +
-      `${restrictionsLiftedText}`
+      `However, any reopening should ${reopeningText}`
     );
   }
 }
