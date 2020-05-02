@@ -2,7 +2,6 @@
 import _ from 'lodash';
 import fs from 'fs-extra';
 import path from 'path';
-import US_STATES from './../src/enums/us_states';
 import { fetchStateSummary, fetchProjections } from '../src/utils/model';
 // Using require since there are no TypeScript types. :-()
 const dnscache = require('dnscache');
@@ -15,8 +14,8 @@ async function getStateAndCountyDataFiles(stateAbbr: string) {
   let inferenceCounties = 0;
   let countyFipsData = {} as { [key: string]: string };
   let counties = stateSummaryData.counties_with_data;
-  for (var i = 0; i < counties.length; i++) {
-    const fipsCode = counties[i];
+  console.log(counties);
+  await Promise.all(counties.map(async (fipsCode: any) => {
     try {
       const countyProjections = await fetchProjections(stateAbbr, {
         full_fips_code: fipsCode,
@@ -26,7 +25,7 @@ async function getStateAndCountyDataFiles(stateAbbr: string) {
     } catch (ex) {
       console.log(`No color found for: ${stateAbbr} / ${fipsCode}`);
     }
-  }
+  }));
 
   return {
     stateProjections,
@@ -40,7 +39,7 @@ async function getStateAndCountyDataFiles(stateAbbr: string) {
   const stateInterventionMap = {} as { [key: string]: string };
   const countyInventionMap = {};
 
-  const stateCodes = _.keys(US_STATES);
+  const stateCodes = ['TX'];
   for (var i = 0; i < stateCodes.length; i++) {
     const stateCode = stateCodes[i];
     console.log(`Starting ${stateCode}`);
