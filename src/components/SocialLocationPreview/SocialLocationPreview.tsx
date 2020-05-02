@@ -7,16 +7,19 @@ import {
   PreviewHeader,
   HeaderText,
   HeaderHeader,
+  MapHeaderHeader,
   HeaderSubhead,
   AlarmLevel,
   PreviewBody,
   PreviewFooter,
   FooterText,
+  MapWrapper,
 } from './SocialLocationPreview.style';
 import { LEGEND_TEXT, Level } from 'enums/zones';
 import Map from 'components/Map/Map';
 import { COLOR_MAP } from 'enums/interventions';
 import SummaryStats from 'components/SummaryStats/SummaryStats';
+import { Legend, LegendItem } from 'components/Map/Legend';
 
 const SocialLocationPreview = (props: {
   projections?: Projections;
@@ -29,11 +32,43 @@ const SocialLocationPreview = (props: {
   if (!props.projections || !props.stats) {
     return (
       <Wrapper hasMap={true}>
-        <Map
-          hideLegend={true}
-          setMapOption={function () {}}
-          setMobileMenuOpen={function () {}}
-        />
+        <PreviewHeader>
+          <MapWrapper>
+            <Map
+              hideLegend={true}
+              setMapOption={function () {}}
+              setMobileMenuOpen={function () {}}
+            />
+          </MapWrapper>
+          <HeaderText>
+            <MapHeaderHeader>Who is ready to reopen?</MapHeaderHeader>
+            <HeaderSubhead>RISK LEVELS</HeaderSubhead>
+            <Legend condensed={true}>
+              <LegendItem
+                key={'legend-3'}
+                title={LEGEND_TEXT[Level.HIGH].name}
+                color={LEGEND_TEXT[Level.HIGH].color}
+                description={LEGEND_TEXT[Level.HIGH].detail}
+              />
+              <LegendItem
+                key={'legend-2'}
+                title={LEGEND_TEXT[Level.MEDIUM].name}
+                color={LEGEND_TEXT[Level.MEDIUM].color}
+                description={LEGEND_TEXT[Level.MEDIUM].detail}
+              />
+              <LegendItem
+                key={'legend-1'}
+                title={LEGEND_TEXT[Level.LOW].name}
+                color={LEGEND_TEXT[Level.LOW].color}
+                description={LEGEND_TEXT[Level.LOW].detail}
+              />
+            </Legend>
+          </HeaderText>
+        </PreviewHeader>
+        <PreviewFooter>
+          <FooterText>Last Updated {lastUpdatedDateString}</FooterText>
+          <FooterText>covidactnow.org</FooterText>
+        </PreviewFooter>
       </Wrapper>
     );
   }

@@ -11,7 +11,6 @@ export const Wrapper = styled.div<{ hasMap?: Boolean }>`
   min-height: 10rem;
   overflow: hidden;
   pointer-events: none;
-  padding: ${props => (props.hasMap ? '1rem' : '0')};
 `;
 
 export const PreviewHeader = styled.div`
@@ -20,6 +19,11 @@ export const PreviewHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+`;
+
+export const MapWrapper = styled.div`
+  flex: 1;
+  margin: 0 1rem -1.5rem -0.5rem;
 `;
 
 export const PreviewBody = styled.div`
@@ -44,7 +48,9 @@ export const FooterText = styled(Typography)`
   color: rgba(0, 0, 0, 0.7);
 `;
 
-export const HeaderText = styled.div``;
+export const HeaderText = styled.div`
+  flex: 1;
+`;
 
 export const AlarmLevel = styled.div`
   background-color: ${(props: any) => props.color || 'darkgray'};
@@ -62,6 +68,13 @@ export const AlarmLevel = styled.div`
 export const HeaderHeader = styled(Typography)`
   font-size: 1.125rem;
   line-height: 1.25rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+`;
+
+export const MapHeaderHeader = styled(Typography)`
+  font-size: 1rem;
+  line-height: 1rem;
   margin-bottom: 0.5rem;
   font-weight: 700;
 `;

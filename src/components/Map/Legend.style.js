@@ -1,20 +1,10 @@
 import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
-import { colors, Typography } from '@material-ui/core';
-
-export const CondensedCaption = styled(Typography)`
-  color: ${colors.grey[600]};
-  font-weight: 400;
-`;
-
-export const CondensedLegendItemText = styled(Typography)`
-  font-weight: 900;
-  color: ${colors.grey[50]};
-  text-shadow: rgba(0, 0, 0, 0.75) 0.5px 0.5px 2px;
-`;
+import { Typography } from '@material-ui/core';
 
 export const LegendContainer = styled.div`
   display: inline-flex;
+  flex-direction: ${props => (props.condensed ? 'column' : 'row')};
 `;
 
 export const LegendItemHeader = styled.div`
@@ -30,16 +20,25 @@ export const LegendItemHeader = styled.div`
 `;
 
 export const LegendItemContainer = styled.div`
-  display: flex;
-  margin-right: 1.5rem;
+  ${props =>
+    props.condensed
+      ? `
+    display: flex;
+    margin: 0;
+    padding: 0;
+  `
+      : `
+    display: flex;
+    margin-right: 1.5rem;
 
-  &:last-child {
-    margin-right: 0;
-  }
+    &:last-child {
+      margin-right: 0;
+    }
 
-  @media (min-width: 960px) {
-    margin: 0.5rem;
-  }
+    @media (min-width: 960px) {
+      margin: 0.5rem;
+    }
+  `}
 `;
 
 export const ColorBox = styled(Grid)`
@@ -51,16 +50,27 @@ export const ColorBox = styled(Grid)`
 `;
 
 export const LegendWrapper = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0 1rem;
+  ${props =>
+    props.condensed
+      ? `
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.75rem 0 0;
+  `
+      : `
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 1rem;
 
-  @media (min-width: 600px) {
-    flex-direction: row;
-    margin-top: -1rem;
-  }
+    @media (min-width: 600px) {
+      flex-direction: row;
+      margin-top: -1rem;
+    }
+  `}
 `;
 
 export const LegendTitle = styled(Typography)`
