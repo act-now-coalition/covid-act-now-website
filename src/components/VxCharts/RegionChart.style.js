@@ -13,6 +13,9 @@ const line = {
   stroke: 'black',
 };
 
+const area = {
+  fill: '#eee',
+};
 const grid = {
   stroke: '#000',
   strokeOpacity: 0.6,
@@ -40,7 +43,7 @@ export const RegionChartWrapper = styled.div`
   }
 
   .chart__area {
-    fill: #eee;
+    fill: ${area.fill};
     stroke: none;
   }
   .chart__grid {

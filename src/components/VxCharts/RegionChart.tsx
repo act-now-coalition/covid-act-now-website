@@ -8,16 +8,8 @@ import { GridRows } from '@vx/grid';
 import AreaRangeChart from './AreaRangeChart';
 import LineChart from './LineChart';
 import { RegionChartWrapper } from './RegionChart.style';
-import { randomizeId } from './utils';
+import { calculateYTicks, formatDecimal, randomizeId } from './utils';
 import { Zones } from '../../enums/zones';
-
-const calculateYTicks = (
-  minY: number,
-  maxY: number,
-  zones: Zones,
-): number[] => {
-  return [minY, zones.LOW.upperLimit, zones.MEDIUM.upperLimit, maxY];
-};
 
 const RegionChart = ({
   width = 600,
@@ -60,6 +52,7 @@ const RegionChart = ({
   const yScale = scaleLinear({
     domain: [minY, maxY],
     range: [innerHeight, 0],
+    tickFormat: formatDecimal,
   });
 
   // Element IDs should be unique in the DOM
