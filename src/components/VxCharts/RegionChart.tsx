@@ -1,8 +1,9 @@
 import React from 'react';
 import { extent as d3extent } from 'd3-array';
+import { scaleLinear, scaleTime } from '@vx/scale';
 import { Group } from '@vx/group';
 import { AxisBottom, AxisLeft } from '@vx/axis';
-import { scaleLinear, scaleTime } from '@vx/scale';
+import LineChart from './LineChart';
 import { RegionChartWrapper } from './RegionChart.style';
 
 const RegionChart = ({
@@ -24,7 +25,7 @@ const RegionChart = ({
   marginBottom: number;
   data: any[];
   x: (d: any) => Date;
-  y: (d: any) => Date;
+  y: (d: any) => number;
 }) => {
   const innerWidth = width - marginLeft - marginRight;
   const innerHeight = height - marginTop - marginBottom;
@@ -45,6 +46,7 @@ const RegionChart = ({
     <RegionChartWrapper>
       <svg className="chart chart--region" width={width} height={height}>
         <Group left={marginLeft} top={marginTop}>
+          <LineChart data={data} x={d => xScale(x(d))} y={d => yScale(y(d))} />
           <AxisBottom
             axisClassName="chart__axis"
             top={innerHeight}

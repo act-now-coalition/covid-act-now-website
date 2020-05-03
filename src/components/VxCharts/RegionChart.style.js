@@ -8,6 +8,11 @@ const axis = {
   color: '#666',
 };
 
+const line = {
+  strokeWidth: '3px',
+  stroke: 'black',
+};
+
 export const RegionChartWrapper = styled.div`
   .chart {
     background-color: #f0f0f0; /* debug */
@@ -23,5 +28,11 @@ export const RegionChartWrapper = styled.div`
     line {
       fill: ${axis.color};
     }
+  }
+
+  .chart__line {
+    stroke: ${line.stroke};
+    stroke-width: ${line.strokeWidth};
+    stroke-linecap: round;
   }
 `;
