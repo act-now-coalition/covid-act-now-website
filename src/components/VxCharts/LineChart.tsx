@@ -13,7 +13,7 @@ const LineChart = ({
   y: (d: any) => number;
 }) => {
   return (
-    <Group>
+    <Group className="line-chart">
       <LinePath
         className="chart__line"
         data={data}

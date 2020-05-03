@@ -17,5 +17,13 @@ export const RegionChartRt = () => {
     { date: '2020-04-16', rt: 1.01, st: 0.12 },
     { date: '2020-04-23', rt: 1.04, st: 0.15 },
   ];
-  return <RegionChart data={data} x={d => new Date(d.date)} y={d => d.rt} />;
+  return (
+    <RegionChart
+      data={data}
+      x={d => new Date(d.date)}
+      y={d => d.rt}
+      y0={d => d.rt - d.st}
+      y1={d => d.rt + d.st}
+    />
+  );
 };

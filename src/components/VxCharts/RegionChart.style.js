@@ -14,10 +14,6 @@ const line = {
 };
 
 export const RegionChartWrapper = styled.div`
-  .chart {
-    background-color: #f0f0f0; /* debug */
-  }
-
   .chart__axis {
     text {
       font-family: ${axis.fontFamily};
@@ -34,5 +30,10 @@ export const RegionChartWrapper = styled.div`
     stroke: ${line.stroke};
     stroke-width: ${line.strokeWidth};
     stroke-linecap: round;
+  }
+
+  .chart__area {
+    fill: #eee;
+    stroke: none;
   }
 `;
