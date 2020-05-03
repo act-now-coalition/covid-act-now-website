@@ -13,6 +13,13 @@ const line = {
   stroke: 'black',
 };
 
+const grid = {
+  stroke: '#000',
+  strokeOpacity: 0.6,
+  strokeDasharray: '4, 3',
+  strokeWidth: '1px',
+};
+
 export const RegionChartWrapper = styled.div`
   .chart__axis {
     text {
@@ -35,5 +42,13 @@ export const RegionChartWrapper = styled.div`
   .chart__area {
     fill: #eee;
     stroke: none;
+  }
+  .chart__grid {
+    line {
+      stroke: ${grid.stroke};
+      stroke-opacity: ${grid.strokeOpacity};
+      stroke-width: ${grid.strokeWidth};
+      stroke-dasharray: ${grid.strokeDasharray};
+    }
   }
 `;

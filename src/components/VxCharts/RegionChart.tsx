@@ -1,18 +1,23 @@
 import React from 'react';
-import { isUndefined as _isUndefined } from 'lodash';
 import { extent as d3extent } from 'd3-array';
 import { scaleLinear, scaleTime } from '@vx/scale';
 import { Group } from '@vx/group';
-import { AxisBottom, AxisLeft } from '@vx/axis';
 import { RectClipPath } from '@vx/clip-path';
+import { AxisBottom, AxisLeft } from '@vx/axis';
+import { GridRows } from '@vx/grid';
 import AreaRangeChart from './AreaRangeChart';
 import LineChart from './LineChart';
 import { RegionChartWrapper } from './RegionChart.style';
+import { randomizeId } from './utils';
+import { Zones } from '../../enums/zones';
 
-const randInt = (a: number, b: number): number =>
-  Math.round(a + (b - a) * Math.random());
-
-const randId = (name: string): string => `${randInt(100, 999)}-${name}`;
+const calculateYTicks = (
+  minY: number,
+  maxY: number,
+  zones: Zones,
+): number[] => {
+  return [minY, zones.LOW.upperLimit, zones.MEDIUM.upperLimit, maxY];
+};
 
 const RegionChart = ({
   width = 600,
@@ -26,6 +31,7 @@ const RegionChart = ({
   y = d => d.y,
   y0,
   y1,
+  zones,
 }: {
   width: number;
   height: number;
@@ -38,10 +44,12 @@ const RegionChart = ({
   y: (d: any) => number;
   y0?: (d: any) => number;
   y1?: (d: any) => number;
+  zones: Zones;
 }) => {
   const innerWidth = width - marginLeft - marginRight;
   const innerHeight = height - marginTop - marginBottom;
 
+  // TODO(@pnavarrc) - Fix the TS warning here (min, max could be undefined)
   const [minX, maxX] = d3extent(data, x);
   const xScale = scaleTime({
     domain: [minX, maxX],
@@ -54,33 +62,32 @@ const RegionChart = ({
     range: [innerHeight, 0],
   });
 
-  const areaRangeChart =
-    _isUndefined(y0) || _isUndefined(y1) ? null : (
-      <AreaRangeChart
-        data={data}
-        x={d => xScale(x(d))}
-        y0={d => yScale(y0(d))}
-        y1={d => yScale(y1(d))}
-      />
-    );
-
-  const chartClipPathId = randId('chart-clip-path');
+  // Element IDs should be unique in the DOM
+  const clipPathId = randomizeId('chart-clip-path');
+  const yTicks = calculateYTicks(minY, maxY, zones);
 
   return (
     <RegionChartWrapper>
       <svg className="chart chart--region" width={width} height={height}>
-        <RectClipPath
-          id={chartClipPathId}
-          width={innerWidth}
-          height={innerHeight}
-        />
+        <RectClipPath id={clipPathId} width={innerWidth} height={innerHeight} />
         <Group left={marginLeft} top={marginTop}>
-          <Group clipPath={`url(#${chartClipPathId})`}>
-            {areaRangeChart}
+          <Group clipPath={`url(#${clipPathId})`}>
+            <AreaRangeChart
+              data={data}
+              x={d => xScale(x(d))}
+              y0={d => (y0 ? yScale(y0(d)) : y0)}
+              y1={d => (y1 ? yScale(y1(d)) : y1)}
+            />
             <LineChart
               data={data}
               x={d => xScale(x(d))}
               y={d => yScale(y(d))}
+            />
+            <GridRows
+              className="chart__grid chart__grid--zones"
+              scale={yScale}
+              width={innerWidth}
+              tickValues={yTicks}
             />
           </Group>
           <AxisBottom
@@ -89,7 +96,13 @@ const RegionChart = ({
             scale={xScale}
             numTicks={7}
           />
-          <AxisLeft axisClassName="chart__axis" scale={yScale} />
+          <AxisLeft
+            axisClassName="chart__axis"
+            scale={yScale}
+            tickValues={yTicks}
+            hideAxisLine
+            hideTicks
+          />
         </Group>
       </svg>
     </RegionChartWrapper>

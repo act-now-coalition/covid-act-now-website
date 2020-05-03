@@ -1,4 +1,5 @@
 import React from 'react';
+import { isUndefined as _isUndefined } from 'lodash';
 import { Group } from '@vx/group';
 import { Area } from '@vx/shape';
 import { curveNatural } from '@vx/curve';
@@ -11,9 +12,12 @@ const AreaRangeChart = ({
 }: {
   data: any[];
   x: (d: any) => number;
-  y0: (d: any) => number;
-  y1: (d: any) => number;
+  y0?: (d: any) => number;
+  y1?: (d: any) => number;
 }) => {
+  if (_isUndefined(y0) || _isUndefined(y1)) {
+    return null;
+  }
   return (
     <Group className="chart-area-range">
       <Area
