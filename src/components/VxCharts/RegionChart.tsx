@@ -4,9 +4,15 @@ import { extent as d3extent } from 'd3-array';
 import { scaleLinear, scaleTime } from '@vx/scale';
 import { Group } from '@vx/group';
 import { AxisBottom, AxisLeft } from '@vx/axis';
+import { RectClipPath } from '@vx/clip-path';
 import AreaRangeChart from './AreaRangeChart';
 import LineChart from './LineChart';
 import { RegionChartWrapper } from './RegionChart.style';
+
+const randInt = (a: number, b: number): number =>
+  Math.round(a + (b - a) * Math.random());
+
+const randId = (name: string): string => `${randInt(100, 999)}-${name}`;
 
 const RegionChart = ({
   width = 600,
@@ -58,12 +64,25 @@ const RegionChart = ({
       />
     );
 
+  const chartClipPathId = randId('chart-clip-path');
+
   return (
     <RegionChartWrapper>
       <svg className="chart chart--region" width={width} height={height}>
+        <RectClipPath
+          id={chartClipPathId}
+          width={innerWidth}
+          height={innerHeight}
+        />
         <Group left={marginLeft} top={marginTop}>
-          {areaRangeChart}
-          <LineChart data={data} x={d => xScale(x(d))} y={d => yScale(y(d))} />
+          <Group clipPath={`url(#${chartClipPathId})`}>
+            {areaRangeChart}
+            <LineChart
+              data={data}
+              x={d => xScale(x(d))}
+              y={d => yScale(y(d))}
+            />
+          </Group>
           <AxisBottom
             axisClassName="chart__axis"
             top={innerHeight}
