@@ -47,19 +47,6 @@ export async function fetchStateSummary(stateId) {
   return response.json();
 }
 
-export function useStateSummary(stateId) {
-  const [countySummaries, setCountySummaries] = useState();
-
-  useEffect(() => {
-    async function fetchData() {
-      setCountySummaries(await fetchStateSummary(stateId));
-    }
-    fetchData();
-  }, [stateId]);
-
-  return countySummaries;
-}
-
 export function useStateSummaryData(state) {
   const [summaryData, setSummaryData] = useState(null);
   useEffect(() => {

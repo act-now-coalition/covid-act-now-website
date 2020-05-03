@@ -12,24 +12,17 @@ import { FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR } from 'enums/interventions'
 import { COLOR_MAP } from 'enums/interventions';
 import { CountyMapWrapper, CountyMapLayerWrapper } from './CountyMap.style';
 
-const CountyMap = ({
-  selectedCounty,
-  setSelectedCounty,
-  fill,
-  stateSummary = {},
-}) => {
+const CountyMap = ({ selectedCounty, setSelectedCounty }) => {
   let { stateId } = useParams();
   stateId = stateId.toUpperCase();
   const state = STATE_CENTERS[stateId];
   const counties = require(`./countyTopoJson/${stateId}.json`);
-  const countiesWithData =
-    stateSummary && stateSummary.counties_with_data
-      ? stateSummary.counties_with_data
-      : [];
   const [content, setContent] = useState('');
 
   const getFillColor = geoId => {
-    return FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR[geoId] || fill;
+    return (
+      FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR[geoId] || COLOR_MAP.GRAY.LIGHT
+    );
   };
 
   return (
@@ -49,11 +42,7 @@ const CountyMap = ({
             <Geography
               key={geo.rsmKey}
               geography={geo}
-              fill={
-                countiesWithData.includes(geo.properties.GEOID)
-                  ? getFillColor(geo.properties.GEOID)
-                  : COLOR_MAP.GRAY.LIGHT
-              }
+              fill={getFillColor(geo.properties.GEOID)}
               stroke={'white'}
             />
           );

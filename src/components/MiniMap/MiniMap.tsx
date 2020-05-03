@@ -13,7 +13,6 @@ import Map from 'components/Map/Map';
 import CountyMap from 'components/CountyMap/CountyMap';
 import _ from 'lodash';
 import { MAP_FILTERS } from 'screens/ModelPage/Enums/MapFilterEnums';
-import { useStateSummary } from 'utils/model';
 import { useHistory } from 'react-router-dom';
 import US_STATE_DATASET from '../MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 import { Projections } from 'models/Projections';
@@ -37,7 +36,6 @@ const MiniMap: FunctionComponent<MiniMapProperties> = (
   props: MiniMapProperties,
 ) => {
   const history = useHistory();
-  const stateSummary = useStateSummary(props.stateId);
 
   const goTo = (route: string) => {
     history.push(route);
@@ -73,12 +71,6 @@ const MiniMap: FunctionComponent<MiniMapProperties> = (
         {props.stateId !== MAP_FILTERS.DC && (
           <CountyMapAltWrapper visible={props.mapOption === MAP_FILTERS.STATE}>
             <CountyMap
-              fill={
-                props.projections.primary
-                  ? props.projections.getAlarmLevelColor()
-                  : '#e3e3e3'
-              }
-              stateSummary={stateSummary}
               selectedCounty={props.selectedCounty}
               setSelectedCounty={(fullFips: string) => {
                 const county = _.find(
