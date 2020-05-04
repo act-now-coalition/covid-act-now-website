@@ -1,4 +1,5 @@
 import React from 'react';
+import { isUndefined as _isUndefined } from 'lodash';
 import { extent as d3extent } from 'd3-array';
 import { scaleLinear, scaleTime } from '@vx/scale';
 import { Group } from '@vx/group';
@@ -8,15 +9,17 @@ import { GridRows } from '@vx/grid';
 import AreaRangeChart from './AreaRangeChart';
 import LineChart from './LineChart';
 import { RegionChartWrapper } from './RegionChart.style';
-import { calculateYTicks, formatDecimal, randomizeId } from './utils';
+import { calculateYTicks, formatDecimal, last, randomizeId } from './utils';
 import { Zones } from '../../enums/zones';
+
+const isDefined = (d: any): boolean => !_isUndefined(d);
 
 const RegionChart = ({
   width = 600,
   height = 400,
   marginLeft = 40,
   marginTop = 10,
-  marginRight = 10,
+  marginRight = 50,
   marginBottom = 40,
   data,
   x = d => d.x,
@@ -59,6 +62,11 @@ const RegionChart = ({
   const clipPathId = randomizeId('chart-clip-path');
   const yTicks = calculateYTicks(minY, maxY, zones);
 
+  // Current Value Annotation
+  const isValidPoint = (d: any): boolean => isDefined(x(d)) && isDefined(y(d));
+  const lastDataPoint = last(data.filter(isValidPoint));
+  const lastDataY = y(lastDataPoint);
+
   return (
     <RegionChartWrapper>
       <svg className="chart chart--region" width={width} height={height}>
@@ -83,6 +91,14 @@ const RegionChart = ({
               tickValues={yTicks}
             />
           </Group>
+          <text
+            className="chart-annotation chart-annotation--current-value"
+            x={innerWidth}
+            y={yScale(lastDataY)}
+            dx={5}
+          >
+            {formatDecimal(lastDataY)}
+          </text>
           <AxisBottom
             axisClassName="chart__axis"
             top={innerHeight}

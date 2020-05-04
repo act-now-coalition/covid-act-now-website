@@ -16,6 +16,7 @@ const line = {
 const area = {
   fill: '#eee',
 };
+
 const grid = {
   stroke: '#000',
   strokeOpacity: 0.6,
@@ -46,6 +47,7 @@ export const RegionChartWrapper = styled.div`
     fill: ${area.fill};
     stroke: none;
   }
+
   .chart__grid {
     line {
       stroke: ${grid.stroke};
@@ -53,5 +55,17 @@ export const RegionChartWrapper = styled.div`
       stroke-width: ${grid.strokeWidth};
       stroke-dasharray: ${grid.strokeDasharray};
     }
+  }
+
+  .chart-annotation {
+    font-family: ${axis.fontFamily};
+  }
+
+  .chart-annotation--current-value {
+    text-anchor: start;
+    dominant-baseline: middle;
+    font-size: 14px;
+    font-weight: bold;
+    fill: #000;
   }
 `;
