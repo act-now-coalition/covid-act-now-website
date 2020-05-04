@@ -9,6 +9,7 @@ import AnnotationLastValue from './AnnotationLastValue';
 import ZoneAnnotations from './ZoneAnnotations';
 import ZoneLineChart from './ZoneLineChart';
 import GridZones from './GridZones';
+import VoroniChart from './VoroniChart';
 import { RegionChartWrapper } from './RegionChart.style';
 import { formatDecimal, randomizeId } from './utils';
 import { Zones } from '../../enums/zones';
@@ -81,6 +82,13 @@ const RegionChart = ({
               zones={zones}
               width={innerWidth}
               yScale={yScale}
+            />
+            <VoroniChart
+              data={data}
+              x={d => xScale(x(d))}
+              y={d => yScale(y(d))}
+              width={innerWidth}
+              height={innerHeight}
             />
           </Group>
           <GridZones
