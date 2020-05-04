@@ -1,3 +1,4 @@
+import { isUndefined as _isUndefined } from 'lodash';
 import { Zones } from '../../enums/zones';
 
 const randInt = (a: number, b: number): number =>
@@ -22,3 +23,5 @@ export const formatPercent = (num: number, places = 0): string =>
 
 /** Adds comma's for thousands, millions, etc. */
 export const formatInteger = (num: number): string => num.toLocaleString();
+
+export const isDefined = (d: any): boolean => !_isUndefined(d);

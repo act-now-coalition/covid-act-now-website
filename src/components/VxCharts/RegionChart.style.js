@@ -68,4 +68,30 @@ export const RegionChartWrapper = styled.div`
     font-weight: bold;
     fill: #000;
   }
+
+  .chart-annotation--zone {
+    text {
+      text-anchor: end;
+      font-size: 14px;
+      font-weight: bold;
+    }
+  }
+
+  .chart-annotation--zone-high {
+    text {
+      fill: #f03147;
+    }
+  }
+
+  .chart-annotation--zone-medium {
+    text {
+      fill: #ffad16;
+    }
+  }
+
+  .chart-annotation--zone-low {
+    text {
+      fill: #00d07d;
+    }
+  }
 `;

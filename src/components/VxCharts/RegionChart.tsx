@@ -1,25 +1,24 @@
 import React from 'react';
-import { isUndefined as _isUndefined } from 'lodash';
 import { extent as d3extent } from 'd3-array';
 import { scaleLinear, scaleTime } from '@vx/scale';
 import { Group } from '@vx/group';
 import { RectClipPath } from '@vx/clip-path';
-import { AxisBottom, AxisLeft } from '@vx/axis';
-import { GridRows } from '@vx/grid';
+import { AxisBottom } from '@vx/axis';
 import AreaRangeChart from './AreaRangeChart';
 import LineChart from './LineChart';
+import AnnotationLastValue from './AnnotationLastValue';
+import ZoneAnnotations from './ZoneAnnotations';
+import GridZones from './GridZones';
 import { RegionChartWrapper } from './RegionChart.style';
-import { calculateYTicks, formatDecimal, last, randomizeId } from './utils';
+import { formatDecimal, randomizeId } from './utils';
 import { Zones } from '../../enums/zones';
-
-const isDefined = (d: any): boolean => !_isUndefined(d);
 
 const RegionChart = ({
   width = 600,
   height = 400,
   marginLeft = 40,
   marginTop = 10,
-  marginRight = 50,
+  marginRight = 100,
   marginBottom = 40,
   data,
   x = d => d.x,
@@ -60,12 +59,6 @@ const RegionChart = ({
 
   // Element IDs should be unique in the DOM
   const clipPathId = randomizeId('chart-clip-path');
-  const yTicks = calculateYTicks(minY, maxY, zones);
-
-  // Current Value Annotation
-  const isValidPoint = (d: any): boolean => isDefined(x(d)) && isDefined(y(d));
-  const lastDataPoint = last(data.filter(isValidPoint));
-  const lastDataY = y(lastDataPoint);
 
   return (
     <RegionChartWrapper>
@@ -84,33 +77,34 @@ const RegionChart = ({
               x={d => xScale(x(d))}
               y={d => yScale(y(d))}
             />
-            <GridRows
-              className="chart__grid chart__grid--zones"
-              scale={yScale}
-              width={innerWidth}
-              tickValues={yTicks}
-            />
           </Group>
-          <text
-            className="chart-annotation chart-annotation--current-value"
-            x={innerWidth}
-            y={yScale(lastDataY)}
-            dx={5}
-          >
-            {formatDecimal(lastDataY)}
-          </text>
+          <GridZones
+            minY={minY}
+            maxY={maxY}
+            zones={zones}
+            yScale={yScale}
+            width={innerWidth}
+          />
           <AxisBottom
             axisClassName="chart__axis"
             top={innerHeight}
             scale={xScale}
             numTicks={7}
           />
-          <AxisLeft
-            axisClassName="chart__axis"
-            scale={yScale}
-            tickValues={yTicks}
-            hideAxisLine
-            hideTicks
+          <AnnotationLastValue
+            data={data}
+            x={x}
+            y={y}
+            xScale={xScale}
+            yScale={yScale}
+          />
+        </Group>
+        <Group left={width} top={marginTop}>
+          <ZoneAnnotations
+            minY={minY}
+            maxY={maxY}
+            zones={zones}
+            yScale={yScale}
           />
         </Group>
       </svg>
