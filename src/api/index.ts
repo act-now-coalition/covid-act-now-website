@@ -7,14 +7,19 @@ import DataUrlJson from '../assets/data/data_url.json';
 import {
   CovidActNowStateTimeseries,
   Timeseries as CountyTimeseries,
+  CovidActNowStatesTimeseries,
 } from './schema/CovidActNowStatesTimeseries';
 import {
   CovidActNowCountyTimeseries,
   Timeseries as StateTimeseries,
+  CovidActNowCountiesTimeseries,
 } from './schema/CovidActNowCountiesTimeseries';
-import { INTERVENTIONS } from 'enums';
-import { RegionDescriptor } from '../utils/RegionDescriptor';
-import { fail } from 'utils';
+import { INTERVENTIONS, REVERSED_STATES } from 'enums';
+import {
+  RegionAggregateDescriptor,
+  RegionDescriptor,
+} from '../utils/RegionDescriptor';
+import { fail, assert } from 'utils';
 import fetch from 'node-fetch';
 
 const API_URL = DataUrlJson.data_url.replace(/\/$/, '');
@@ -51,6 +56,48 @@ export type RegionSummaryWithTimeseriesMap = {
    */
   [intervention: string]: RegionSummaryWithTimeseries | null;
 };
+
+/** Represents summary+timeseries data for all states or all counties. */
+type AggregateSummaryWithTimeseries =
+  | CovidActNowStatesTimeseries
+  | CovidActNowCountiesTimeseries;
+
+/**
+ * Fetches the summary+timeseries for every intervention for every region in
+ * the specified region aggregate (e.g. all counties or all states).
+ */
+export async function fetchAggregatedSummaryWithTimeseriesMaps(
+  regionAggregate: RegionAggregateDescriptor,
+): Promise<RegionSummaryWithTimeseriesMap[]> {
+  // We have to fetch each intervention separately and then merge them per region ID.
+  const merged = {} as { [id: string]: RegionSummaryWithTimeseriesMap };
+
+  await Promise.all(
+    Object.keys(ApiInterventions).map(async intervention => {
+      const apiIntervention = ApiInterventions[intervention];
+      let all = await fetchApiJson<AggregateSummaryWithTimeseries>(
+        `us/${regionAggregate}.${apiIntervention}.timeseries.json`,
+      );
+      // TODO(michael): Remove this once we have a new snapshot with Chris's fix.
+      if ((all as any)['__root__']) {
+        all = (all as any)['__root__'];
+      }
+      assert(all != null, 'Failed to load timeseries');
+
+      for (const summaryTimeseries of all) {
+        let id;
+        if (summaryTimeseries.countyName != null) {
+          id = summaryTimeseries.fips;
+        } else {
+          id = REVERSED_STATES[summaryTimeseries.stateName];
+        }
+        merged[id] = merged[id] || {};
+        merged[id][intervention] = summaryTimeseries;
+      }
+    }),
+  );
+  return Object.values(merged);
+}
 
 /**
  * Fetches the summary+timeseries for a region for each available intervention
