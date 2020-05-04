@@ -11,16 +11,13 @@ import {
   // USCountyMapWrapper,
   USStateMapWrapper,
 } from './Map.style';
-import { invert } from 'lodash';
-import { STATES } from 'enums';
+import { REVERSED_STATES } from 'enums';
 import { COLOR_MAP } from 'enums/interventions';
-
-const reversedStateMap = invert(STATES);
 
 const USACountyMap = ({ stateClickHandler, setTooltipContent }) => {
   const getFillColor = geo => {
     if (geo.id.length <= 2) {
-      const stateCode = reversedStateMap[geo.properties.name];
+      const stateCode = REVERSED_STATES[geo.properties.name];
       return STATE_TO_CALCULATED_INTERVENTION_COLOR[stateCode] || '#e3e3e3';
     } else {
       let countyColor = FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR[geo.id];

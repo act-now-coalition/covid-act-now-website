@@ -17,7 +17,7 @@ export default {
     {
       name: 'Rep. Jonathan Kreiss-Tomkins',
       headshot: 'JKT.jpg',
-      role: 'Political Lead',
+      role: 'Policy Lead',
       title: 'Alaska Legislature',
       link: 'https://en.wikipedia.org/wiki/Jonathan_Kreiss-Tomkins',
     },
