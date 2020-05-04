@@ -1,5 +1,11 @@
 import { assertStateId, assertCountyId } from 'utils';
 
+export enum RegionAggregateDescriptor {
+  // NOTE: These strings must match the API endpoints.
+  COUNTIES = 'counties',
+  STATES = 'states',
+}
+
 /**
  * Represents a region (e.g. US State or County).
  */
