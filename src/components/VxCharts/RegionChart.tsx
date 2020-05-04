@@ -98,14 +98,14 @@ const RegionChart = ({
             xScale={xScale}
             yScale={yScale}
           />
-        </Group>
-        <Group left={width} top={marginTop}>
-          <ZoneAnnotations
-            minY={minY}
-            maxY={maxY}
-            zones={zones}
-            yScale={yScale}
-          />
+          <Group left={innerWidth + marginRight}>
+            <ZoneAnnotations
+              minY={minY}
+              maxY={maxY}
+              zones={zones}
+              yScale={yScale}
+            />
+          </Group>
         </Group>
       </svg>
     </RegionChartWrapper>
