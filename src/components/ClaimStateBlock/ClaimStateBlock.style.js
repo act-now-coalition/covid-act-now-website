@@ -5,12 +5,11 @@ import Button from '@material-ui/core/Button';
 
 export const ClaimStateWrapper = styled.div`
   text-align: left;
-  background-color: #fbfbfb;
   padding: 3.5rem 1rem;
   margin-top: 3rem;
 
   @media (min-width: 600px) {
-    padding: 3.5rem 0;
+    padding: 3.5rem 1rem;
   }
 `;
 

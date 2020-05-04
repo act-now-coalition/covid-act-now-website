@@ -10,7 +10,7 @@ export const StyledNewsletter = styled.div`
       display: block;
       padding: 0.25rem 0.75rem;
       line-height: 2rem;
-      height: 2.5rem;
+      height: 3.25rem;
       outline: 0;
       border: 1px solid rgba(0, 0, 0, 0.12);
       border-right-width: 0;
@@ -31,11 +31,10 @@ export const StyledNewsletter = styled.div`
       display: block;
       appearance: none;
       box-sizing: border-box;
-      height: 2.5rem;
+      height: 3.25rem;
       flex-shrink: 0;
       flex: 1;
       outline: 0;
-      border: 0;
       border-top-right-radius: 4px;
       border-bottom-right-radius: 4px;
       appearance: none;
@@ -44,33 +43,14 @@ export const StyledNewsletter = styled.div`
       line-height: 2rem;
       text-transform: uppercase;
       transition: 0.3s ease background-color;
-      background-color: ${palette.secondary.main};
+      background-color: ${palette.info.main};
+      border: 1px solid ${palette.info.dark};
       color: ${palette.white};
       font-weight: 700;
       font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 
       &:hover {
-        background-color: ${palette.secondary.dark};
-      }
-    }
-  }
-
-  @media screen and (max-width: 640px) {
-    form {
-      display: block;
-
-      input {
-        border-top-right-radius: 4px;
-        border-bottom-left-radius: 0;
-        border-right-width: 1px;
-        border-bottom-width: 0;
-        width: 100%;
-      }
-
-      button {
-        border-top-right-radius: 0;
-        border-bottom-left-radius: 4px;
-        width: 100%;
+        background-color: ${palette.info.dark};
       }
     }
   }

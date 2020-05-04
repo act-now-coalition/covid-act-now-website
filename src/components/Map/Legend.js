@@ -1,12 +1,7 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import Tooltip from '@material-ui/core/Tooltip';
-import { withStyles } from '@material-ui/core/styles';
 
 import {
   ColorBox,
-  CondensedCaption,
-  CondensedLegendItemText,
   LegendTitle,
   LegendContainer,
   LegendItemHeader,
@@ -16,81 +11,25 @@ import {
 
 export function Legend(props) {
   return (
-    <LegendWrapper>
-      <LegendTitle>COVID Reopening Risk:</LegendTitle>
+    <LegendWrapper condensed={props.condensed}>
+      {!props.condensed && <LegendTitle>COVID Reopening Risk:</LegendTitle>}
       <LegendContainer {...props}>
         {React.Children.map(props.children, child =>
           React.cloneElement(child, { condensed: props.condensed }),
         )}
       </LegendContainer>
-      {props.condensed && (
-        <CondensedCaption
-          variant="caption"
-          color="inherit"
-          style={{ padding: '0 calc(1rem + 8px)' }}
-        >
-          Hover to learn more
-        </CondensedCaption>
-      )}
     </LegendWrapper>
   );
 }
 
-const CustomTooltip = withStyles(theme => ({
-  tooltip: {
-    fontSize: theme.typography.pxToRem(13),
-    maxWidth: 250,
-  },
-}))(Tooltip);
-
 export function LegendItem(props) {
   const { title, color, condensed } = props;
-  if (condensed) {
-    return (
-      <LegendItemContainer color={color}>
-        <LegendItemHeader condensed>
-          <CondensedLegendItemText align="center" variant="body1">
-            {title}
-          </CondensedLegendItemText>
-        </LegendItemHeader>
-      </LegendItemContainer>
-    );
-  }
-
   return (
-    <LegendItemContainer>
+    <LegendItemContainer condensed={condensed}>
       <LegendItemHeader>
         <ColorBox color={color} />
         {title}
       </LegendItemHeader>
     </LegendItemContainer>
-  );
-}
-
-export function MiniLegendItem(props) {
-  const { title, color, description, condensed } = props;
-  if (condensed) {
-    return (
-      <Grid item xs="4" sm="4">
-        <CustomTooltip arrow title={description}>
-          <LegendItemContainer color={color}>
-            <LegendItemHeader condensed>
-              <CondensedLegendItemText align="center" variant="body1">
-                {title}
-              </CondensedLegendItemText>
-            </LegendItemHeader>
-          </LegendItemContainer>
-        </CustomTooltip>
-      </Grid>
-    );
-  }
-
-  return (
-    <Grid item xs={12} md={4}>
-      <LegendItemHeader mini>
-        <ColorBox color={color} />
-        {description}
-      </LegendItemHeader>
-    </Grid>
   );
 }

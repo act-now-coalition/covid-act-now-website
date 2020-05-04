@@ -10,69 +10,190 @@ export const ShareSpacer = styled.div`
   }
 `;
 
-export const ShareContainer = styled.div<{
-  condensed?: boolean;
-  forceVertical?: boolean;
-}>`
-  background: ${palette.white};
-  max-width: 900px;
-  margin: ${props => (props.condensed ? 0 : '3rem auto')};
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 4px;
+export const ShareContainer = styled.div``;
 
-  @media screen and (min-width: 900px) {
-    display: ${props => (props.forceVertical ? 'block' : 'flex')};
+export const ShareInstructionHeader = styled(Typography)`
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 2rem;
+  color: inherit;
+
+  @media (min-width: 600px) {
+    font-size: 2.125rem;
+    line-height: 2.25rem;
+  }
+`;
+export const ShareInstructionBody = styled(Typography)`
+  margin-top: 0;
+  margin-bottom: 1rem;
+  line-height: 1.6rem;
+  color: inherit;
+`;
+
+export const ShareRow = styled.div<{ newsletter?: Boolean }>`
+  background-color: ${props =>
+    props.newsletter ? '#FBFBFB' : palette.secondary.main};
+  color: ${props => (props.newsletter ? palette.black : palette.white)};
+  padding: 4.5rem 1rem;
+
+  @media (min-width: 600px) {
+    padding: 6rem 1rem;
   }
 `;
 
-export const ShareInstruction = styled(Typography)<{ component?: string }>`
-  margin-top: 0;
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.6rem;
-  color: ${palette.black};
-  text-align: left;
+export const ShareRowContentArea = styled.div<{
+  isMatchingProjectionsRoute?: Boolean;
+}>`
+  margin: 0 auto;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  @media (min-width: 600px) {
+    flex-direction: row;
+  }
+
+  @media (min-width: 1350px) {
+    max-width: 900px;
+    margin: ${(props: any) =>
+      props.isMatchingProjectionsRoute ? '0 445px 0 auto' : '0 auto'};
+    position: relative;
+  }
+
+  @media (min-width: 1750px) {
+    margin: 0 auto;
+  }
+`;
+
+export const NewsletterMockupWrapper = styled.div`
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+  box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.05);
+  margin: -1rem 0 -6rem;
+
+  @media (max-width: 599px) {
+    display: none;
+  }
+`;
+
+export const SocialMockupWrapper = styled.div`
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+
+  @media screen and (min-width: 600px) {
+    width: 50%;
+    padding-left: 1.5rem;
+    margin: -1.5rem 0;
+  }
+`;
+
+export const NewsletterTextArea = styled.div`
+  @media screen and (min-width: 600px) {
+    width: 50%;
+    padding-left: 1.5rem;
+  }
+`;
+
+export const SocialTextAreaWrapper = styled.div`
+  flex: 1;
+  position: relative;
+`;
+
+export const SocialTextArea = styled.div`
+  text-align: center;
+
+  @media (min-width: 600px) {
+    text-align: left;
+    max-width: 21rem;
+  }
+`;
+
+export const EmbedPrompt = styled(Typography)`
+  text-align: center;
+  color: inherit;
+  max-width: 15rem;
+  line-height: 1.5rem;
+  margin: 1rem auto 3rem;
+
+  span {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  @media (min-width: 600px) {
+    margin: 0;
+  }
 `;
 
 export const ShareButtonContainer = styled.div<{ reflow: boolean }>`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin: 0 -0.75rem;
+  background-color: ${palette.white};
+  border-radius: 4px;
+  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.2);
+  max-width: 15rem;
+  margin: 1.5rem auto 0;
+  position: relative;
 
-  > div {
-    margin: 0 0.75rem;
+  &:before {
+    content: ' ';
+    height: 0;
+    right: 100%;
+    top: 1.25rem;
+    width: 2.5rem;
+    height: 6.25rem;
+    position: absolute;
+    border-top: 1px dashed ${palette.white};
+    border-left: 1px dashed ${palette.white};
+  }
+  &:after {
+    content: ' ';
+    background-color: #cbcbcb;
+    height: 1rem;
+    width: 1rem;
+    top: 6.75rem;
+    border-radius: 50%;
+    border: 0.25rem solid ${palette.white};
+    position: absolute;
+    left: -3rem;
+    margin-top: 0.75rem;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
   }
 
-  @media (max-width: 600px) {
-    margin: -0.5rem;
-    flex-wrap: ${props => (props.reflow ? 'wrap' : 'nowrap')};
-
-    > div {
-      margin: 0.5rem;
-      min-width: ${props => (props.reflow ? '40%' : '0')};
+  @media (max-width: 480px) {
+    &:before {
+      width: 1.25rem;
+    }
+    &:after {
+      left: -1.75rem;
     }
   }
-`;
 
-export const ShareType = styled.div<{ forceVertical?: Boolean }>`
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-  padding: 1.5rem;
-  flex: 1;
-  &:last-child {
-    border-bottom: 0;
-  }
+  @media (min-width: 600px) {
+    margin: 1.5rem 0 0.75rem;
+    position: static;
 
-
-  @media (min-width: 900px) {
-    border-right: ${props =>
-      props.forceVertical ? '0' : '1px solid rgba(0, 0, 0, 0.12);'}
-    border-bottom: ${props =>
-      props.forceVertical ? '1px solid rgba(0, 0, 0, 0.12);' : '0'};
-
-    &:last-child {
-      border-right: 0;
+    &:before {
+      height: 0;
+      left: 15rem;
+      right: -1.5rem;
+      height: 1.25rem;
+      width: auto;
+      border-top: 0;
+      border-left: 0;
+      top: auto;
+      border-bottom: 1px dashed ${palette.white};
+    }
+    &:after {
+      top: auto;
+      right: -2rem;
+      left: auto;
+      margin-top: 0.75rem;
     }
   }
 `;
@@ -82,8 +203,6 @@ export const StyledShareButton = styled.div<{
   disableElevation?: boolean /* seems to do nothing? */;
   variant?: string;
 }>`
-  background-color: ${props => props.color};
-  border-radius: 5px;
   cursor: pointer;
   color: white;
   display: block;
@@ -97,6 +216,10 @@ export const StyledShareButton = styled.div<{
   user-select: none;
   text-align: center;
 
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.12);
+  }
+
   > button {
     width: 100%;
     height: 100%;
@@ -106,5 +229,11 @@ export const StyledShareButton = styled.div<{
 
   svg {
     display: block;
+    rect {
+      fill: transparent;
+    }
+    path {
+      fill: ${props => props.color};
+    }
   }
 `;

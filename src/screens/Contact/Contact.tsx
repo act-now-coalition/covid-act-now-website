@@ -146,9 +146,9 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
             </a>{' '}
             if you’re interested in making a grant.
           </Typography>
-          <ShareBlock forceVertical={true} />
         </StapledSidebar>
       </Content>
+      <ShareBlock />
     </Wrapper>
   );
 };

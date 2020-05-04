@@ -4,7 +4,13 @@ import { STATES } from 'enums';
 
 import EmbedPreview from './EmbedPreview';
 
-const ShareModelBlock = ({ condensed, stateId, county }) => {
+const ShareModelBlock = ({
+  condensed,
+  stateId,
+  county,
+  projections,
+  stats,
+}) => {
   const stateName = STATES[stateId];
   const countyName = county && county.county;
   const displayName = countyName ? `${countyName}, ${stateName}` : stateName;
@@ -12,8 +18,6 @@ const ShareModelBlock = ({ condensed, stateId, county }) => {
     county ? `/county/${county.county_url_name}` : ''
   }`;
   const shareQuote = `@CovidActNow has real-time modeling and metrics to help assess how ${displayName} can reopen safely. Check it out: `;
-  const shareInstruction = `Share ${displayName}'s COVID trends`;
-  const newsletterInstruction = `Get the latest updates from the Covid Act Now team for ${displayName}`;
   const [showEmbedPreviewModal, setShowEmbedPreviewModal] = useState(false);
 
   return (
@@ -25,9 +29,9 @@ const ShareModelBlock = ({ condensed, stateId, county }) => {
         shareURL={shareURL}
         countyName={countyName}
         shareQuote={shareQuote}
-        shareInstruction={shareInstruction}
-        newsletterInstruction={newsletterInstruction}
+        projections={projections}
         onClickEmbed={() => setShowEmbedPreviewModal(true)}
+        stats={stats}
       />
       <EmbedPreview
         open={showEmbedPreviewModal}

@@ -138,7 +138,7 @@ export const optionsHospitalUsage = (data, endDate) => {
     ],
     tooltip: {
       pointFormatter: function () {
-        return `Hospital Usage ${formatPercent(this.y)}`;
+        return `ICU headroom used ${formatPercent(this.y)}`;
       },
     },
     xAxis: {
@@ -156,7 +156,7 @@ export const optionsHospitalUsage = (data, endDate) => {
     },
     series: [
       {
-        name: 'Hospital Usage',
+        name: 'ICU headroom used',
         data,
         zones,
       },
