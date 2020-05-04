@@ -24,6 +24,12 @@ const grid = {
   strokeWidth: '1px',
 };
 
+const zoneColor = {
+  low: '#00d07d',
+  medium: '#ffad16',
+  high: '#f03147',
+};
+
 export const RegionChartWrapper = styled.div`
   .chart__axis {
     text {
@@ -79,19 +85,31 @@ export const RegionChartWrapper = styled.div`
 
   .chart-annotation--zone-high {
     text {
-      fill: #f03147;
+      fill: ${zoneColor.high};
     }
   }
 
   .chart-annotation--zone-medium {
     text {
-      fill: #ffad16;
+      fill: ${zoneColor.medium};
     }
   }
 
   .chart-annotation--zone-low {
     text {
-      fill: #00d07d;
+      fill: ${zoneColor.low};
     }
+  }
+
+  .chart-line--zone-high {
+    stroke: ${zoneColor.high};
+  }
+
+  .chart-line--zone-medium {
+    stroke: ${zoneColor.medium};
+  }
+
+  .chart-line--zone-low {
+    stroke: ${zoneColor.low};
   }
 `;

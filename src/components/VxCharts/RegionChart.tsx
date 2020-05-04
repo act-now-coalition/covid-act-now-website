@@ -5,9 +5,9 @@ import { Group } from '@vx/group';
 import { RectClipPath } from '@vx/clip-path';
 import { AxisBottom } from '@vx/axis';
 import AreaRangeChart from './AreaRangeChart';
-import LineChart from './LineChart';
 import AnnotationLastValue from './AnnotationLastValue';
 import ZoneAnnotations from './ZoneAnnotations';
+import ZoneLineChart from './ZoneLineChart';
 import GridZones from './GridZones';
 import { RegionChartWrapper } from './RegionChart.style';
 import { formatDecimal, randomizeId } from './utils';
@@ -72,10 +72,15 @@ const RegionChart = ({
               y0={d => (y0 ? yScale(y0(d)) : y0)}
               y1={d => (y1 ? yScale(y1(d)) : y1)}
             />
-            <LineChart
+            <ZoneLineChart
+              minY={minY}
+              maxY={maxY}
               data={data}
               x={d => xScale(x(d))}
               y={d => yScale(y(d))}
+              zones={zones}
+              width={innerWidth}
+              yScale={yScale}
             />
           </Group>
           <GridZones

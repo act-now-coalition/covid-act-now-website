@@ -1,25 +1,7 @@
 import React from 'react';
 import { Group } from '@vx/group';
 import { Zones } from '../../enums/zones';
-
-// TODO(@pnavarrc) - define types for the elements
-const computeZoneRegions = (minY: number, maxY: number, zones: Zones) => [
-  {
-    y: (minY + zones.LOW.upperLimit) / 2,
-    name: zones.LOW.name,
-    color: zones.LOW.color,
-  },
-  {
-    y: (zones.LOW.upperLimit + zones.MEDIUM.upperLimit) / 2,
-    name: zones.MEDIUM.name,
-    color: zones.MEDIUM.color,
-  },
-  {
-    y: (zones.MEDIUM.upperLimit + maxY) / 2,
-    name: zones.HIGH.name,
-    color: zones.HIGH.color,
-  },
-];
+import { computeZoneRegions } from './utils';
 
 // TODO(@pnavarrc) - use types for this function
 const groupZoneClassName = (zone: any): string =>
@@ -42,9 +24,13 @@ const ZoneAnnotations = ({
   return (
     <Group className="chart-zone-annotations">
       {zoneRegions.map((zone, i) => {
+        const yZone = (zone.valueFrom + zone.valueTo) / 2;
         return (
-          <Group className={groupZoneClassName(zone)}>
-            <text key={`zone-annotation-${i}`} x={0} dx={dx} y={yScale(zone.y)}>
+          <Group
+            key={`zone-annotation-${i}`}
+            className={groupZoneClassName(zone)}
+          >
+            <text x={0} dx={dx} y={yScale(yZone)}>
               {zone.name}
             </text>
           </Group>

@@ -25,3 +25,29 @@ export const formatPercent = (num: number, places = 0): string =>
 export const formatInteger = (num: number): string => num.toLocaleString();
 
 export const isDefined = (d: any): boolean => !_isUndefined(d);
+
+// TODO(@pnavarrc) - define types for the elements
+export const computeZoneRegions = (
+  minY: number,
+  maxY: number,
+  zones: Zones,
+) => [
+  {
+    valueFrom: minY,
+    valueTo: zones.LOW.upperLimit,
+    name: zones.LOW.name,
+    color: zones.LOW.color,
+  },
+  {
+    valueFrom: zones.LOW.upperLimit,
+    valueTo: zones.MEDIUM.upperLimit,
+    name: zones.MEDIUM.name,
+    color: zones.MEDIUM.color,
+  },
+  {
+    valueFrom: zones.MEDIUM.upperLimit,
+    valueTo: maxY,
+    name: zones.HIGH.name,
+    color: zones.HIGH.color,
+  },
+];
