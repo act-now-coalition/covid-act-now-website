@@ -71,95 +71,104 @@ const ChartsHolder = (props: {
       {!projection ? (
         <NoCountyDetail countyId={props.countyId} stateId={props.stateId} />
       ) : (
-        <ChartContentWrapper>
-          <LocationPageHeader projections={props.projections} />
-          <SummaryStats stats={getChartSummarys(projection)} />
-          <MainContentInner>
-            <ChartHeader>
-              {ChartTypeToTitle[ChartType.CASE_GROWTH_RATE]}
-            </ChartHeader>
-            <ChartLocationName>{projection.locationName}</ChartLocationName>
-            <ChartDescription>
-              {caseGrowthStatusText(projection)}
-            </ChartDescription>
-            {rtRangeData && (
-              <>
-                <ZoneChartWrapper>
-                  <Chart options={optionsRt(rtRangeData, endDate) as any} />
-                </ZoneChartWrapper>
-                <Disclaimer metricName="infection growth rate">
-                  Most experts recommend an infection rate of less than 1.0 for
-                  two weeks before reopening.
-                </Disclaimer>
-              </>
-            )}
-            <ChartHeader>
-              {ChartTypeToTitle[ChartType.POSITIVE_TESTS]}
-            </ChartHeader>
-            <ChartLocationName>{projection.locationName}</ChartLocationName>
-            <ChartDescription>
-              {positiveTestsStatusText(projection)}
-            </ChartDescription>
-            {testPositiveData && (
-              <>
-                <ZoneChartWrapper>
-                  <Chart
-                    options={
-                      optionsPositiveTests(testPositiveData, endDate) as any
-                    }
-                  />
-                </ZoneChartWrapper>
-                <Disclaimer metricName="positive test rate">
-                  The World Health Organization recommends a positive test rate
-                  of less than 10% before reopening. The countries most
-                  successful in containing COVID have rates of 3% or less. We
-                  calculate the rate as a 7-day trailing average.
-                </Disclaimer>
-              </>
-            )}
-            <ChartHeader>
-              {ChartTypeToTitle[ChartType.HOSPITAL_USAGE]}
-              <BetaTag>Beta</BetaTag>
-            </ChartHeader>
-            <ChartLocationName>{projection.locationName}</ChartLocationName>
-            <ChartDescription>
-              {hospitalOccupancyStatusText(projection)}
-            </ChartDescription>
-            {icuUtilizationData && (
-              <>
-                <ZoneChartWrapper>
-                  <Chart
-                    options={
-                      optionsHospitalUsage(icuUtilizationData, endDate) as any
-                    }
-                  />
-                </ZoneChartWrapper>
-                <Disclaimer metricName="COVID ICU usage">
-                  While experts agree surge healthcare capacity is critical,
-                  there is no benchmark for ICU surge capacity. This metric
-                  attempts to model capacity as interventions are relaxed.
-                </Disclaimer>
-              </>
-            )}
-            <ChartHeader>Future projections: all hospitalizations</ChartHeader>
-            <ChartLocationName>{projection.locationName}</ChartLocationName>
-            <ChartDescription>
-              {generateChartDescription(projection, noInterventionProjection)}
-            </ChartDescription>
-            <ModelChart
-              projections={props.projections}
-              height={''}
-              condensed={false}
-              forCompareModels={false}
-            />
-            <ShareModelBlock
-              condensed={false}
+        <>
+          <ChartContentWrapper>
+            <LocationPageHeader projections={props.projections} />
+            <SummaryStats stats={getChartSummarys(projection)} />
+            <MainContentInner>
+              <ChartHeader>
+                {ChartTypeToTitle[ChartType.CASE_GROWTH_RATE]}
+              </ChartHeader>
+              <ChartLocationName>{projection.locationName}</ChartLocationName>
+              <ChartDescription>
+                {caseGrowthStatusText(projection)}
+              </ChartDescription>
+              {rtRangeData && (
+                <>
+                  <ZoneChartWrapper>
+                    <Chart options={optionsRt(rtRangeData, endDate) as any} />
+                  </ZoneChartWrapper>
+                  <Disclaimer metricName="infection growth rate">
+                    Most experts recommend an infection rate of less than 1.0
+                    for two weeks before reopening.
+                  </Disclaimer>
+                </>
+              )}
+              <ChartHeader>
+                {ChartTypeToTitle[ChartType.POSITIVE_TESTS]}
+              </ChartHeader>
+              <ChartLocationName>{projection.locationName}</ChartLocationName>
+              <ChartDescription>
+                {positiveTestsStatusText(projection)}
+              </ChartDescription>
+              {testPositiveData && (
+                <>
+                  <ZoneChartWrapper>
+                    <Chart
+                      options={
+                        optionsPositiveTests(testPositiveData, endDate) as any
+                      }
+                    />
+                  </ZoneChartWrapper>
+                  <Disclaimer metricName="positive test rate">
+                    The World Health Organization recommends a positive test
+                    rate of less than 10% before reopening. The countries most
+                    successful in containing COVID have rates of 3% or less. We
+                    calculate the rate as a 7-day trailing average.
+                  </Disclaimer>
+                </>
+              )}
+              <ChartHeader>
+                {ChartTypeToTitle[ChartType.HOSPITAL_USAGE]}
+                <BetaTag>Beta</BetaTag>
+              </ChartHeader>
+              <ChartLocationName>{projection.locationName}</ChartLocationName>
+              <ChartDescription>
+                {hospitalOccupancyStatusText(projection)}
+              </ChartDescription>
+              {icuUtilizationData && (
+                <>
+                  <ZoneChartWrapper>
+                    <Chart
+                      options={
+                        optionsHospitalUsage(icuUtilizationData, endDate) as any
+                      }
+                    />
+                  </ZoneChartWrapper>
+                  <Disclaimer metricName="COVID ICU usage">
+                    While experts agree surge healthcare capacity is critical,
+                    there is no benchmark for ICU surge capacity. This metric
+                    attempts to model capacity as interventions are relaxed.
+                  </Disclaimer>
+                </>
+              )}
+              <ChartHeader>
+                Future projections: all hospitalizations
+              </ChartHeader>
+              <ChartLocationName>{projection.locationName}</ChartLocationName>
+              <ChartDescription>
+                {generateChartDescription(projection, noInterventionProjection)}
+              </ChartDescription>
+              <ModelChart
+                projections={props.projections}
+                height={''}
+                condensed={false}
+                forCompareModels={false}
+              />
+            </MainContentInner>
+            <ClaimStateBlock
               stateId={props.stateId}
-              county={props.countyId}
+              countyId={props.countyId}
             />
-          </MainContentInner>
-          <ClaimStateBlock stateId={props.stateId} countyId={props.countyId} />
-        </ChartContentWrapper>
+          </ChartContentWrapper>
+          <ShareModelBlock
+            condensed={false}
+            stateId={props.stateId}
+            county={props.countyId}
+            projections={props.projections}
+            stats={getChartSummarys(projection)}
+          />
+        </>
       )}
     </>
   );

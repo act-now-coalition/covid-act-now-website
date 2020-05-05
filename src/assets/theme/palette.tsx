@@ -28,7 +28,7 @@ export default {
   },
   info: {
     contrastText: white,
-    dark: colors.blue[900],
+    dark: '#3BA5C8',
     main: '#3BBCE6',
     light: colors.blue[400],
   },

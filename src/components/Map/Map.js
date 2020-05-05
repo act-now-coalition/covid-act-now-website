@@ -42,6 +42,7 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
       )}
       <div className="us-state-map">
         <USACountyMap
+          condensed={hideLegend}
           setTooltipContent={setContent}
           stateClickHandler={onClick}
         />

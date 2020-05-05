@@ -13,9 +13,9 @@ const CheckIcon = (props: { textColor: string }) => {
       <path
         d="M13.1666 1.16666L5.83325 8.5L3.83325 6.5"
         stroke="white"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
