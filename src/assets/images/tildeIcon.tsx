@@ -10,8 +10,8 @@ const TildeIcon = (props: { textColor: string }) => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M0 1.5C0 0.947715 0.447715 0.5 1 0.5H11C11.5523 0.5 12 0.947715 12 1.5V11.5C12 12.0523 11.5523 12.5 11 12.5H1C0.447715 12.5 0 12.0523 0 11.5V1.5Z"
         fill={props.textColor}
       />
