@@ -14,6 +14,7 @@ import {
 import { REVERSED_STATES } from 'enums';
 import { COLOR_MAP } from 'enums/interventions';
 
+const reversedStateMap = invert(STATES);
 const USACountyMap = ({ stateClickHandler, setTooltipContent, condensed }) => {
   const getFillColor = geo => {
     if (geo.id.length <= 2) {
