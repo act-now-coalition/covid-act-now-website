@@ -45,9 +45,17 @@ const About = ({ children }: { children: React.ReactNode }) => {
           </SectionHeader>
 
           <Typography variant="body1" component="p">
-            Covid Act Now is a multidisciplinary team of technologists,
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://blog.covidactnow.org/covid-modeling-values/"
+            >
+              Guided by common values
+            </a>
+            , Covid Act Now is a multidisciplinary team of technologists,
             epidemiologists, health experts, and public policy leaders working
-            to model how COVID-19 will spread in the U.S.
+            to provide disease intelligence and data analysis how COVID in the
+            U.S.
           </Typography>
           <Typography variant="body1" component="p">
             We published the first version of our model on March 20. Over 10
@@ -337,6 +345,15 @@ const About = ({ children }: { children: React.ReactNode }) => {
             >
               We wrote a blog post explaining the differences
             </a>
+            .{' '}
+            <a
+              href="https://grandrounds.com/blog/covid-19-forecasting-fit-to-a-curve-or-model-the-disease-in-real-time/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              This post by Ground Rounds also provides analysis on different
+              modeling approaches
+            </a>
             .
           </Typography>
 
@@ -362,7 +379,7 @@ const About = ({ children }: { children: React.ReactNode }) => {
           </Typography>
           <Typography variant="body1" component="p">
             <a
-              href="https://www.washingtonpost.com/outlook/2020/03/28/masks-all-coronavirus/"
+              href="https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/diy-cloth-face-coverings.html"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -377,7 +394,7 @@ const About = ({ children }: { children: React.ReactNode }) => {
           <Typography variant="body1" component="p">
             <em>The New York Times</em> lists{' '}
             <a
-              href="https://www.nytimes.com/interactive/2020/us/coronavirus-stay-at-home-order.html"
+              href="https://www.nytimes.com/interactive/2020/us/states-reopen-map-coronavirus.html"
               target="_blank"
               rel="noopener noreferrer"
             >
