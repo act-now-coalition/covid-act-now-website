@@ -48,6 +48,7 @@
     "prettier-fix": "prettier --write '**/*.{css,scss,js,ts,tsx}'",
     "update-api-types": "ts-node-script scripts/update_api_types.ts",
     "update-calculated-interventions": "ts-node-script -r tsconfig-paths/register scripts/calculated_interventions.ts",
+    "update-share-images": "ts-node-script -r tsconfig-paths/register scripts/share_images/index.ts",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
   },
@@ -102,6 +103,7 @@
     "cross-env": "^7.0.2",
     "cypress": "^4.2.0",
     "dnscache": "^1.0.2",
+    "es6-promise-pool": "^2.5.0",
     "eslint": "6.8.0",
     "eslint-config-prettier": "6.10.1",
     "eslint-config-react-app": "^5.2.1",
