@@ -43,6 +43,7 @@ import {
   formatInteger,
 } from 'components/Charts/utils';
 
+// TODO(michael): figure out where this type declaration should live.
 type County = {
   county: string;
   county_url_name: string;
@@ -81,7 +82,7 @@ const ChartsHolder = (props: {
     <>
       {!projection ? (
         <NoCountyDetail
-          countyId={props.county.county_url_name}
+          countyId={props.county?.county_url_name}
           stateId={props.stateId}
         />
       ) : (
@@ -172,7 +173,7 @@ const ChartsHolder = (props: {
             </MainContentInner>
             <ClaimStateBlock
               stateId={props.stateId}
-              countyId={props.county && props.county.county_url_name}
+              countyId={props.county?.county_url_name}
             />
           </ChartContentWrapper>
           <ShareModelBlock
