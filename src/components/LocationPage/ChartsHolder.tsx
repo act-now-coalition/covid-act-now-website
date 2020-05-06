@@ -43,10 +43,21 @@ import {
   formatInteger,
 } from 'components/Charts/utils';
 
+type County = {
+  county: string;
+  county_url_name: string;
+  county_fips_code: string;
+  state_fips_code: string;
+  state_code: string;
+  full_fips_code: string;
+  cities: string[];
+  population: string;
+};
+
 const ChartsHolder = (props: {
   projections: Projections;
   stateId: string;
-  countyId: string;
+  county: County;
 }) => {
   const projection: Projection = props.projections.primary;
   const noInterventionProjection: Projection = props.projections.baseline;
@@ -69,7 +80,10 @@ const ChartsHolder = (props: {
   return (
     <>
       {!projection ? (
-        <NoCountyDetail countyId={props.countyId} stateId={props.stateId} />
+        <NoCountyDetail
+          countyId={props.county.county_url_name}
+          stateId={props.stateId}
+        />
       ) : (
         <>
           <ChartContentWrapper>
@@ -158,13 +172,13 @@ const ChartsHolder = (props: {
             </MainContentInner>
             <ClaimStateBlock
               stateId={props.stateId}
-              countyId={props.countyId}
+              countyId={props.county.county_url_name}
             />
           </ChartContentWrapper>
           <ShareModelBlock
             condensed={false}
             stateId={props.stateId}
-            county={props.countyId}
+            county={props.county}
             projections={props.projections}
             stats={getChartSummarys(projection)}
           />
