@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { GlobalSelector } from 'components/MapSelectors/MapSelectors';
 import MapIcon from 'assets/images/mapIcon';
-import { MAP_FILTERS } from 'screens/ModelPage/Enums/MapFilterEnums';
+import { MAP_FILTERS } from 'screens/LocationPage/Enums/MapFilterEnums';
 
 import {
   Wrapper,

@@ -7,10 +7,10 @@ import SearchHeader from 'components/Header/SearchHeader';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import MiniMap from 'components/MiniMap/MiniMap';
 import ChartsHolder from 'components/LocationPage/ChartsHolder';
-import { LoadingScreen } from './ModelPage.style';
+import { LoadingScreen } from './LocationPage.style';
 import { useProjections } from 'utils/model';
 
-function ModelPage() {
+function LocationPage() {
   let { stateId, countyId } = useParams();
   // TODO(igor): don't mix uppercase and lowercase in here
   stateId = stateId.toUpperCase();
@@ -84,4 +84,4 @@ function ModelPage() {
   );
 }
 
-export default ModelPage;
+export default LocationPage;

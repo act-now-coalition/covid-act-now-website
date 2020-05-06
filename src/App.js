@@ -4,7 +4,7 @@ import { ThemeProvider, StylesProvider } from '@material-ui/core/styles';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
 import AllStates from 'screens/AllStates/AllStates';
-import ModelPage from 'screens/ModelPage/ModelPage';
+import LocationPage from 'screens/LocationPage/LocationPage';
 import HomePage from 'screens/HomePage/HomePage';
 import About from 'screens/About/About';
 // import ComingSoon from 'screens/ComingSoon/ComingSoon';
@@ -28,18 +28,18 @@ export default function App() {
           <Switch>
             <Route exact path="/" component={HomePage} />
 
-            <Route exact path="/us/:stateId" component={ModelPage} />
+            <Route exact path="/us/:stateId" component={LocationPage} />
             <Route
               exact
               path="/us/:stateId/county/:countyId"
-              component={ModelPage}
+              component={LocationPage}
             />
             {/* /state/ routes are deprecated but still supported. */}
-            <Route exact path="/state/:stateId" component={ModelPage} />
+            <Route exact path="/state/:stateId" component={LocationPage} />
             <Route
               exact
               path="/state/:stateId/county/:countyId"
-              component={ModelPage}
+              component={LocationPage}
             />
 
             {/** Debug endpoint that shows all the state charts. */}
