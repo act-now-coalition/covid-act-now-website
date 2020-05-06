@@ -54,7 +54,7 @@ const About = ({ children }: { children: React.ReactNode }) => {
             </a>
             , Covid Act Now is a multidisciplinary team of technologists,
             epidemiologists, health experts, and public policy leaders working
-            to provide disease intelligence and data analysis how COVID in the
+            to provide disease intelligence and data analysis on COVID in the
             U.S.
           </Typography>
           <Typography variant="body1" component="p">
