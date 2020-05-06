@@ -82,7 +82,11 @@ const SocialLocationPreview = (props: {
     <Wrapper>
       <PreviewHeader>
         <HeaderText>
-          <HeaderHeader>{props.projections.stateName}</HeaderHeader>
+          <HeaderHeader>
+            {props.projections.countyName
+              ? `${props.projections.countyName}, ${props.projections.stateCode}`
+              : props.projections.stateName}
+          </HeaderHeader>
           <HeaderSubhead>Overall risk if reopening</HeaderSubhead>
         </HeaderText>
         <AlarmLevel color={fillColor}>{levelInfo.name}</AlarmLevel>

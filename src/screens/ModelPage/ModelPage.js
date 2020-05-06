@@ -67,7 +67,7 @@ function ModelPage() {
         <ChartsHolder
           projections={projections}
           stateId={stateId}
-          countyId={countyId}
+          county={countyOption}
         />
         <MiniMap
           projections={projections}
