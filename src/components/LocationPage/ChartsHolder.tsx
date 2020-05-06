@@ -172,7 +172,7 @@ const ChartsHolder = (props: {
             </MainContentInner>
             <ClaimStateBlock
               stateId={props.stateId}
-              countyId={props.county.county_url_name}
+              countyId={props.county && props.county.county_url_name}
             />
           </ChartContentWrapper>
           <ShareModelBlock
