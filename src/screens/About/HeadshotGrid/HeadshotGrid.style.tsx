@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 
 export const Grid = styled.div`
   display: flex;
-  margin: 0 -1rem 1.5rem;
+  margin: -1rem -1rem 0.5rem;
   flex-wrap: wrap;
 `;
 
@@ -25,7 +25,7 @@ export const HeadshotGrid2Up = styled.div`
 `;
 
 export const TeamMember = styled.div`
-  padding: 0 1rem;
+  padding: 1rem 1rem;
   width: 50%;
 
   img {
