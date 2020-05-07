@@ -5,7 +5,7 @@ import { REVERSED_STATES } from 'enums';
 import { LEGEND_TEXT, Level } from 'enums/zones';
 import { Legend, LegendItem } from './Legend';
 import USACountyMap from './USACountyMap';
-import { MAP_FILTERS } from '../../screens/ModelPage/Enums/MapFilterEnums';
+import { MAP_FILTERS } from '../../screens/LocationPage/Enums/MapFilterEnums';
 import ReactTooltip from 'react-tooltip';
 import { MapInstructions, MobileLineBreak } from './Map.style';
 

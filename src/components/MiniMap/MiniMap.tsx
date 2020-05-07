@@ -12,7 +12,7 @@ import {
 import Map from 'components/Map/Map';
 import CountyMap from 'components/CountyMap/CountyMap';
 import _ from 'lodash';
-import { MAP_FILTERS } from 'screens/ModelPage/Enums/MapFilterEnums';
+import { MAP_FILTERS } from 'screens/LocationPage/Enums/MapFilterEnums';
 import { useHistory } from 'react-router-dom';
 import US_STATE_DATASET from '../MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 import { Projections } from 'models/Projections';
