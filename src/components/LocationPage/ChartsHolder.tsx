@@ -291,37 +291,39 @@ function positiveTestsStatusText(projection: Projection) {
 
 function hospitalOccupancyStatusText(projection: Projection) {
   const icuUtilization = projection.currentIcuUtilization;
-  const currentlyInICU = projection.currentICUPatients;
+  const currentCovidICUPatients = projection.currentCovidICUPatients;
+  const capacity = projection.totalICUCapacity;
+
   if (
     icuUtilization === null ||
-    currentlyInICU == null ||
-    projection.typicallyFreeICUCapacity == null
+    currentCovidICUPatients == null ||
+    projection.typicallyFreeICUCapacity == null ||
+    capacity === null
   ) {
     return 'No ICU occupancy data is available.';
   }
   const level = determineZone(HOSPITAL_USAGE, icuUtilization);
 
   const location = projection.locationName;
-  const capacity = projection.totalICUCapacity;
   const normallyFree = Math.floor(projection.typicallyFreeICUCapacity);
-  const percentUtilization = Math.round((100 * currentlyInICU) / normallyFree);
-
-  const lowText = `This suggests there is likely enough capacity to absorb a wave of new COVID infections.`;
-  const mediumText = `This suggests some ability to absorb an increase in COVID cases, but caution is warranted.`;
-  const highText = `This suggests the healthcare system is not well positioned  to absorb a wave of new COVID infections without substantial surge capacity.`;
+  const percentUtilization = Math.round(
+    (100 * currentCovidICUPatients) / normallyFree,
+  );
+  const nonCovidOccupation = capacity - normallyFree;
 
   return `${location} has ${formatInteger(
     capacity!,
-  )} ICU Beds. Normally, ${formatInteger(normallyFree)} are unoccupied.
-      We estimate there are currently ${formatInteger(
-        currentlyInICU,
-      )} COVID cases in the ICU,
-      or ${percentUtilization}% of typically free beds. ${levelText(
-    level,
-    lowText,
-    mediumText,
-    highText,
-  )}`;
+  )} ICU Beds. Currently, ${formatPercent(
+    nonCovidOccupation / capacity,
+  )} (${formatInteger(nonCovidOccupation)})
+      are occupied by non-COVID patients. Of the remaining ${formatInteger(
+        capacity - nonCovidOccupation,
+      )} ICU beds,
+      ${formatInteger(
+        currentCovidICUPatients,
+      )} are occupied by COVID cases, or ${formatPercent(
+        (nonCovidOccupation + currentCovidICUPatients) / capacity,
+  )} of available beds.`;
 }
 
 /**
