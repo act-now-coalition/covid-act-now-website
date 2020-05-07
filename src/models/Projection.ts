@@ -6,6 +6,7 @@ import { RegionSummaryWithTimeseries, Timeseries } from 'api';
  * get future data points.
  */
 export const RT_TRUNCATION_DAYS = 7;
+const DECOMP_FACTOR = 0.3;
 
 /** Parameters that can be provided when constructing a Projection. */
 export interface ProjectionParameters {
@@ -60,6 +61,7 @@ export class Projection {
   readonly totalICUCapacity: number | null;
   readonly typicallyFreeICUCapacity: number | null;
   readonly currentICUPatients: number | null;
+  readonly typicalICUUtilization: number | null;
 
   private readonly intervention: string;
   private readonly dates: Date[];
@@ -112,6 +114,7 @@ export class Projection {
 
     const ICUBeds = summaryWithTimeseries?.actuals?.ICUBeds;
     this.totalICUCapacity = ICUBeds && ICUBeds.capacity;
+    this.typicalICUUtilization = ICUBeds && ICUBeds.typicalUsageRate;
     this.typicallyFreeICUCapacity =
       ICUBeds && ICUBeds.capacity * (1 - ICUBeds.typicalUsageRate);
     this.currentICUPatients = this.calcCurrentICUPatients(
@@ -288,7 +291,13 @@ export class Projection {
     // TODO(igor): Update this on the API side so we can undo this logic.
     const icuUtilization = timeseries.map(row => {
       if (row.ICUBedCapacity > 0 && row.ICUBedsInUse > 0) {
-        return Math.min(1, row.ICUBedsInUse / row.ICUBedCapacity);
+        const estimated = row.ICUBedsInUse;
+        const typicalBedCapacity = row.ICUBedCapacity;
+        const typicalUtilization = this.typicalICUUtilization || 0.7;
+        const icuHeadroomUsed =
+          estimated /
+          (typicalBedCapacity * (1 - (typicalUtilization - DECOMP_FACTOR)));
+        return Math.min(1, icuHeadroomUsed);
       } else {
         return null;
       }
