@@ -287,6 +287,7 @@ export class Projection {
     // update our projections using yesterday's data. So we want to strip
     // everything >= lastUpdatedDate. But since the ICU data is all estimates, I
     // can't really validate that's correct.
+
     return this.omitDataAtOrAfterDate(icuUtilization, lastUpdated);
   }
 
