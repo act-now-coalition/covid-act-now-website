@@ -14,7 +14,7 @@ export const LogoGrid = styled.div`
     }
   }
 
-  @media (min-width: 600px) {
+  @media (min-width: 900px) {
     flex-direction: row;
     > a {
       margin-bottom: 0;
@@ -26,7 +26,7 @@ export const Logo = styled.img`
   width: 100%;
   max-width: 300px;
 
-  @media (max-width: 600px) {
+  @media (max-width: 900px) {
     display: block;
     margin: 0 auto;
     float: none;

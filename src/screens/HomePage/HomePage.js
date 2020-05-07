@@ -4,8 +4,9 @@ import Map from 'components/Map/Map';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import ShareBlock from 'components/ShareBlock/ShareBlock';
 import CriteriaExplanation from './CriteriaExplanation/CriteriaExplanation';
+import PartnerLogoGrid from 'components/PartnerLogoGrid/PartnerLogoGrid';
 
-import { Content } from './HomePage.style';
+import { Content, PartnerSection, PartnerHeader } from './HomePage.style';
 
 export default function HomePage() {
   return (
@@ -22,6 +23,12 @@ export default function HomePage() {
             <CriteriaExplanation />
             <Map />
           </Content>
+          <PartnerSection>
+            <Content>
+              <PartnerHeader>Our Partners</PartnerHeader>
+              <PartnerLogoGrid />
+            </Content>
+          </PartnerSection>
           <ShareBlock />
         </div>
       </main>
