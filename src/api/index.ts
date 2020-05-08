@@ -7,13 +7,13 @@ import DataUrlJson from '../assets/data/data_url.json';
 import {
   CovidActNowStateTimeseries,
   Timeseries as CountyTimeseries,
-  ActualsTimeseries as CountyActualTimeseries,
+  Actualstimeseries as CountyActualTimeseries,
   CovidActNowStatesTimeseries,
 } from './schema/CovidActNowStatesTimeseries';
 import {
   CovidActNowCountyTimeseries,
   Timeseries as StateTimeseries,
-  ActualsTimeseries as StateActualTimeseries,
+  Actualstimeseries as StateActualTimeseries,
   CovidActNowCountiesTimeseries,
 } from './schema/CovidActNowCountiesTimeseries';
 import { INTERVENTIONS, REVERSED_STATES } from 'enums';

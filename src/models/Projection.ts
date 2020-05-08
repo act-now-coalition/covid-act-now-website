@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 import {
   RegionSummaryWithTimeseries,
   Timeseries,
@@ -91,9 +93,13 @@ export class Projection {
     parameters: ProjectionParameters,
   ) {
     const timeseries = summaryWithTimeseries.timeseries;
-    const actualTimeseries = (summaryWithTimeseries as any).actualsTimeseries;
-    const lastUpdated = new Date(summaryWithTimeseries.lastUpdatedDate);
+    const actualTimeseries = summaryWithTimeseries.actualsTimeseries;
+    let lastUpdated = new Date(summaryWithTimeseries.lastUpdatedDate);
     this.locationName = this.getLocationName(summaryWithTimeseries);
+    // TODO(sgoldblatt): Nevada is one day off
+    if (this.locationName === 'Nevada') {
+      lastUpdated = moment(lastUpdated).subtract(1, 'day').toDate();
+    }
     this.intervention = parameters.intervention;
     this.isInferred = parameters.isInferred;
     this.isCounty = parameters.isCounty;
@@ -300,15 +306,16 @@ export class Projection {
   }
 
   private useActualTimeseries(actualTimeseries: ActualsTimeseries) {
-    // make sure the three most recent data points exist to use the actuals
+    // make sure there are recent datapoints.
     if (actualTimeseries.length < 3) return false;
-    for (var i = 0; i < 3; i++) {
+    let count = 0;
+    for (var i = 0; i < 5; i++) {
       const actual = actualTimeseries[actualTimeseries.length - 1 - i];
-      if (!actual.ICUBeds.currentUsageCovid || !actual.ICUBeds.totalCapacity) {
-        return false;
+      if (actual.ICUBeds.currentUsageCovid && actual.ICUBeds.totalCapacity) {
+        count += 1;
       }
     }
-    return true;
+    return count > 3;
   }
 
   private calcICUHeadroom(
@@ -322,17 +329,17 @@ export class Projection {
       icuUtilization = actualTimeseries.map(row => {
         if (row.ICUBeds.currentUsageCovid > 0 && row.ICUBeds.totalCapacity) {
           // use the actual icu patients total here
-          const actualIcuPatientsToal = 0.75 * row.ICUBeds.totalCapacity;
+          const actualIcuPatientsToal = row.ICUBeds.currentUsageTotal;
           const icuHeadroomUsed =
-            row.ICUBeds.currentUsageCovid / row.ICUBeds.totalCapacity -
-            (actualIcuPatientsToal - row.ICUBeds.currentUsageCovid);
+            row.ICUBeds.currentUsageCovid /
+            (row.ICUBeds.totalCapacity -
+              (actualIcuPatientsToal - row.ICUBeds.currentUsageCovid));
           return Math.min(1, icuHeadroomUsed);
         } else {
           return null;
         }
       });
     } else {
-      console.log(timeseries[timeseries.length - 1]);
       icuUtilization = timeseries.map(row => {
         if (row.ICUBedCapacity > 0 && row.ICUBedsInUse > 0) {
           const icuUtilizationOrDefault =
@@ -353,7 +360,6 @@ export class Projection {
     // update our projections using yesterday's data. So we want to strip
     // everything >= lastUpdatedDate. But since the ICU data is all estimates, I
     // can't really validate that's correct.
-
     return this.omitDataAtOrAfterDate(icuUtilization, lastUpdated);
   }
 

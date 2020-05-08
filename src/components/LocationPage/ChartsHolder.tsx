@@ -329,13 +329,11 @@ function hospitalOccupancyStatusText(projection: Projection) {
       ${formatInteger(
         currentCovidICUPatients,
       )} are occupied by COVID cases, or ${formatPercent(
-    currentCovidICUPatients / (totalICUCapacity - nonCovidICUCapacity),
-  )} of available beds. ${levelText(
-    level,
-    lowText,
-    mediumText,
-    highText,
-  )} [DEBUG: using actuals: ${projection.hasActualData}]`;
+    Math.min(
+      1,
+      currentCovidICUPatients / (totalICUCapacity - nonCovidICUCapacity),
+    ),
+  )} of available beds. ${levelText(level, lowText, mediumText, highText)}`;
 }
 
 /**
