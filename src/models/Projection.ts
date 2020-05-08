@@ -128,10 +128,7 @@ export class Projection {
       lastUpdated,
     );
 
-    this.icuUtilization =
-      this.isCounty && summaryWithTimeseries.stateName === 'Nevada'
-        ? [null]
-        : this.calcICUHeadroom(actualTimeseries, timeseries, lastUpdated);
+    this.icuUtilization = this.calcICUHeadroom(actualTimeseries, timeseries, lastUpdated);
 
     this.fixZeros(this.hospitalizations);
     this.fixZeros(this.cumulativeDeaths);
@@ -338,8 +335,8 @@ export class Projection {
             this.typicalICUUtilization || DEFAULT_UTILIZATION;
           const icuHeadroomUsed =
             row.ICUBedsInUse /
-            (row.ICUBedCapacity -
-              row.ICUBedCapacity *
+            (this.totalICUCapacity! -
+              this.totalICUCapacity! *
                 Math.max(0, icuUtilizationOrDefault - DECOMP_FACTOR));
           return Math.min(1, icuHeadroomUsed);
         } else {
