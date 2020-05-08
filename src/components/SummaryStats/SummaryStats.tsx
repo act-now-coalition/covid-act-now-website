@@ -2,7 +2,7 @@ import React from 'react';
 import {
   ChartType,
   getLevelInfoForChartType,
-  ChartTypeToMetricName,
+  ChartTypeToTitle,
 } from 'enums/zones';
 import {
   SummaryStatsWrapper,
@@ -53,7 +53,7 @@ const SummaryStat = ({
     <SummaryStatWrapper condensed={condensed}>
       <StatTextWrapper>
         <StatNameText condensed={condensed}>
-          {ChartTypeToMetricName[chartType]}{' '}
+          {ChartTypeToTitle[chartType]}{' '}
           {!condensed && beta && <BetaTag>Beta</BetaTag>}
         </StatNameText>
         {!condensed && <StatDetailText>{levelInfo.detail}</StatDetailText>}

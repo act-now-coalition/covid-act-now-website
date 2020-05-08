@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { COLOR_MAP } from './interventions';
-import { fail } from 'assert';
+import * as ChartContent from 'content/charts';
 
 export enum ChartType {
   CASE_GROWTH_RATE = 'Infection growth rate',
@@ -8,16 +8,10 @@ export enum ChartType {
   HOSPITAL_USAGE = 'ICU headroom used',
 }
 
-export const ChartTypeToMetricName = {
-  [ChartType.CASE_GROWTH_RATE]: 'Infection growth rate',
-  [ChartType.POSITIVE_TESTS]: 'Positive test rate',
-  [ChartType.HOSPITAL_USAGE]: 'ICU headroom used',
-};
-
 export const ChartTypeToTitle = {
-  [ChartType.CASE_GROWTH_RATE]: 'Infection growth rate',
-  [ChartType.POSITIVE_TESTS]: 'Positive test rate',
-  [ChartType.HOSPITAL_USAGE]: 'ICU headroom used',
+  [ChartType.CASE_GROWTH_RATE]: ChartContent.CASE_GROWTH_RATE_TITLE,
+  [ChartType.POSITIVE_TESTS]: ChartContent.POSITIVE_TESTS_TITLE,
+  [ChartType.HOSPITAL_USAGE]: ChartContent.HOSPITAL_USAGE_TITLE,
 };
 
 export interface LevelInfo {
@@ -54,30 +48,30 @@ export const LEGEND_TEXT: Zones = {
   [Level.LOW]: {
     level: Level.LOW,
     upperLimit: 0,
-    name: 'Reduced',
+    name: ChartContent.ZONE_LOW_NAME,
     color: COLOR_MAP.GREEN.BASE,
-    detail: 'Reduced risk based on reopening metrics.',
+    detail: ChartContent.SUMMARY_LEGEND_LOW,
   },
   [Level.MEDIUM]: {
     level: Level.MEDIUM,
     upperLimit: 0,
-    name: 'Moderate',
+    name: ChartContent.ZONE_MEDIUM_NAME,
     color: COLOR_MAP.ORANGE.BASE,
-    detail: 'Moderate risk based on reopening metrics.',
+    detail: ChartContent.SUMMARY_LEGEND_MEDIUM,
   },
   [Level.HIGH]: {
     level: Level.HIGH,
     upperLimit: 0,
-    name: 'Elevated',
+    name: ChartContent.ZONE_HIGH_NAME,
     color: COLOR_MAP.RED.BASE,
-    detail: 'Elevated risk based on reopening metrics.',
+    detail: ChartContent.SUMMARY_LEGEND_HIGH,
   },
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,
     upperLimit: 0,
-    name: 'Unknown',
+    name: ChartContent.ZONE_UNKNOWN,
     color: COLOR_MAP.GRAY.BASE,
-    detail: 'We don’t have enough data to assess reopening risk.',
+    detail: ChartContent.SUMMARY_LEGEND_UNKNWON,
   },
 };
 
@@ -85,31 +79,31 @@ export const LEGEND_TEXT: Zones = {
 export const CASE_GROWTH_RATE: Zones = {
   [Level.LOW]: {
     level: Level.LOW,
-    upperLimit: 1.0,
-    name: 'Low',
+    upperLimit: ChartContent.CASE_GROWTH_LIMIT_LOW,
+    name: ChartContent.ZONE_LOW_NAME,
     color: COLOR_MAP.GREEN.BASE,
-    detail: 'Active cases are decreasing',
+    detail: ChartContent.CASE_GROWTH_LEGEND_LOW,
   },
   [Level.MEDIUM]: {
     level: Level.MEDIUM,
-    upperLimit: 1.2,
-    name: 'Medium',
+    upperLimit: ChartContent.CASE_GROWTH_LIMIT_MEDIUM,
+    name: ChartContent.ZONE_MEDIUM_NAME,
     color: COLOR_MAP.ORANGE.BASE,
-    detail: 'Active cases are slowly increasing',
+    detail: ChartContent.CASE_GROWTH_LEGEND_MEDIUM,
   },
   [Level.HIGH]: {
     level: Level.HIGH,
-    upperLimit: Infinity,
-    name: 'High',
+    upperLimit: ChartContent.CASE_GROWTH_LIMIT_HIGH,
+    name: ChartContent.ZONE_HIGH_NAME,
     color: COLOR_MAP.RED.BASE,
-    detail: 'Active cases are increasing',
+    detail: ChartContent.CASE_GROWTH_LEGEND_HIGH,
   },
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,
     upperLimit: 0,
-    name: 'Unknown',
+    name: ChartContent.ZONE_UNKNOWN,
     color: COLOR_MAP.GRAY.BASE,
-    detail: 'Insufficient data to assess',
+    detail: ChartContent.CASE_GROWTH_LEGEND_UNKNOWN,
   },
 };
 
@@ -117,31 +111,31 @@ export const CASE_GROWTH_RATE: Zones = {
 export const POSITIVE_TESTS: Zones = {
   [Level.LOW]: {
     level: Level.LOW,
-    upperLimit: 0.03,
-    name: 'Low',
+    upperLimit: ChartContent.POSITIVE_TESTS_LIMIT_LOW,
+    name: ChartContent.ZONE_LOW_NAME,
     color: COLOR_MAP.GREEN.BASE,
-    detail: 'Indicates testing is widespread',
+    detail: ChartContent.POSITIVE_TESTS_LEGEND_LOW,
   },
   [Level.MEDIUM]: {
     level: Level.MEDIUM,
-    upperLimit: 0.1,
-    name: 'Medium',
+    upperLimit: ChartContent.POSITIVE_TESTS_LIMIT_MEDIUM,
+    name: ChartContent.ZONE_MEDIUM_NAME,
     color: COLOR_MAP.ORANGE.BASE,
-    detail: 'Indicates testing is not widespread',
+    detail: ChartContent.POSITIVE_TESTS_LEGEND_MEDIUM,
   },
   [Level.HIGH]: {
     level: Level.HIGH,
-    upperLimit: Infinity,
-    name: 'High',
+    upperLimit: ChartContent.POSITIVE_TESTS_LIMIT_HIGH,
+    name: ChartContent.ZONE_HIGH_NAME,
     color: COLOR_MAP.RED.BASE,
-    detail: 'Indicates testing is limited',
+    detail: ChartContent.POSITIVE_TESTS_LEGEND_HIGH,
   },
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,
     upperLimit: 0,
-    name: 'Unknown',
+    name: ChartContent.ZONE_UNKNOWN,
     color: COLOR_MAP.GRAY.BASE,
-    detail: 'Insufficient data to assess',
+    detail: ChartContent.POSITIVE_TESTS_LEGEND_UNKNOWN,
   },
 };
 
@@ -149,31 +143,31 @@ export const POSITIVE_TESTS: Zones = {
 export const HOSPITAL_USAGE: Zones = {
   [Level.LOW]: {
     level: Level.LOW,
-    upperLimit: 0.5,
-    name: 'Low',
+    upperLimit: ChartContent.HOSPITAL_USAGE_LIMIT_LOW,
+    name: ChartContent.ZONE_LOW_NAME,
     color: COLOR_MAP.GREEN.BASE,
-    detail: 'Can likely handle a new wave of COVID',
+    detail: ChartContent.HOSPTIAL_USAGE_LEGEND_LOW,
   },
   [Level.MEDIUM]: {
     level: Level.MEDIUM,
-    upperLimit: 0.7,
-    name: 'Medium',
+    upperLimit: ChartContent.HOSPITAL_USAGE_LIMIT_MEDIUM,
+    name: ChartContent.ZONE_MEDIUM_NAME,
     color: COLOR_MAP.ORANGE.BASE,
-    detail: 'At risk to a new wave of COVID',
+    detail: ChartContent.HOSPTIAL_USAGE_LEGEND_MEDIUM,
   },
   [Level.HIGH]: {
     level: Level.HIGH,
-    upperLimit: Infinity,
-    name: 'High',
+    upperLimit: ChartContent.HOSPITAL_USAGE_LIMIT_HIGH,
+    name: ChartContent.ZONE_HIGH_NAME,
     color: COLOR_MAP.RED.BASE,
-    detail: 'Unable to handle a new wave of COVID',
+    detail: ChartContent.HOSPTIAL_USAGE_LEGEND_HIGH,
   },
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,
     upperLimit: 0,
-    name: 'Unknown',
+    name: ChartContent.ZONE_UNKNOWN,
     color: COLOR_MAP.GRAY.BASE,
-    detail: 'Insufficient data to assess',
+    detail: ChartContent.HOSPTIAL_USAGE_LEGEND_UNKNOWN,
   },
 };
 
@@ -182,19 +176,6 @@ const CHART_ZONES = {
   [ChartType.POSITIVE_TESTS]: POSITIVE_TESTS,
   [ChartType.HOSPITAL_USAGE]: HOSPITAL_USAGE,
 };
-
-export const CHART_END_DATE = moment().add(2, 'weeks').toDate();
-
-export function getChartColumnFromChartType(chartType: ChartType): string {
-  if (chartType === ChartType.CASE_GROWTH_RATE) {
-    return 'rtRange';
-  } else if (chartType === ChartType.HOSPITAL_USAGE) {
-    return 'icuUtilization';
-  } else if (chartType === ChartType.POSITIVE_TESTS) {
-    return 'testPositiveRate';
-  }
-  fail('Unsupported ChartType');
-}
 
 export function getLevelForChart(chartType: ChartType, value: number) {
   const allZonesForChartType = CHART_ZONES[chartType];

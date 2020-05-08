@@ -14,13 +14,13 @@ import {
 } from './utils';
 import {
   CASE_GROWTH_RATE,
-  CHART_END_DATE,
   HOSPITAL_USAGE,
   POSITIVE_TESTS,
   Level,
 } from '../../enums/zones';
 import { RT_TRUNCATION_DAYS } from '../../models/Projection';
 
+const CHART_END_DATE = moment().add(2, 'weeks').toDate();
 const toHighchartZone = (zone, level) => ({
   color: zone.color,
   name: zone.name,
