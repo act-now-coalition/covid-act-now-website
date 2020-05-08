@@ -16,11 +16,9 @@ const VoroniChart = ({
   y: (d: any) => number;
   width: number;
   height: number;
-  onMouseOver: (
-    event: React.MouseEvent<SVGPathElement, MouseEvent>,
-    d: any,
-  ) => void;
-  onMouseOut: (event: React.MouseEvent<SVGPathElement, MouseEvent>) => void;
+  // TODO(@pnavarrc) - fix the type of the event
+  onMouseOver: (event: any, d: any) => void;
+  onMouseOut: (event: any) => void;
 }) => {
   const voronoiDiagram = voronoi({ x, y, width, height })(data);
   const polygons = voronoiDiagram.polygons();

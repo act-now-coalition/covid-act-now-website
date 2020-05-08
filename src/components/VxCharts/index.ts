@@ -1,4 +1,4 @@
 import ProjectionChart from './ProjectionChart';
-import RegionChart from './RegionChart';
+import ZoneChart from './ZoneChart';
 
-export { ProjectionChart, RegionChart };
+export { ProjectionChart, ZoneChart };

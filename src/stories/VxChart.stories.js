@@ -1,10 +1,10 @@
 import React from 'react';
-import { RegionChart } from '../components/VxCharts';
+import { ZoneChart } from '../components/VxCharts';
 import { CASE_GROWTH_RATE } from '../enums/zones';
 
 export default {
   title: 'RegionChart',
-  component: RegionChart,
+  component: ZoneChart,
 };
 
 export const RegionChartRt = () => {
@@ -19,7 +19,7 @@ export const RegionChartRt = () => {
     { date: '2020-04-23', rt: 1.04, st: 0.15 },
   ];
   return (
-    <RegionChart
+    <ZoneChart
       data={data}
       zones={CASE_GROWTH_RATE}
       x={d => new Date(d.date)}

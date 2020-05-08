@@ -10,7 +10,7 @@ export const TooltipWrapper = styled.div`
 `;
 
 export const TooltipContent = styled.div`
-  transform: translate(-50%, calc(-100% - 10px));
+  transform: translate(-50%, calc(-100% - 15px));
   width: 160px;
   padding: 10px;
   border-radius: 2px;
