@@ -86,6 +86,10 @@ export type Totalcapacity = number;
  */
 export type Currentusagecovid = number;
 /**
+ * Currently used capacity for resource by all patients (COVID + Non-COVID)
+ */
+export type Currentusagetotal = number;
+/**
  * Typical used capacity rate for resource. This excludes any COVID usage.
  */
 export type Typicalusagerate = number;
@@ -140,5 +144,6 @@ export interface _ResourceUtilization {
   capacity: Capacity;
   totalCapacity: Totalcapacity;
   currentUsageCovid: Currentusagecovid;
+  currentUsageTotal: Currentusagetotal;
   typicalUsageRate: Typicalusagerate;
 }
