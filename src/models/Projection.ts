@@ -11,7 +11,7 @@ import {
  */
 export const RT_TRUNCATION_DAYS = 7;
 const DECOMP_FACTOR = 0.3;
-const DEFAULT_CAPACITY = 0.75;
+const DEFAULT_UTILIZATION = 0.75;
 
 /** Parameters that can be provided when constructing a Projection. */
 export interface ProjectionParameters {
@@ -66,7 +66,8 @@ export class Projection {
   readonly totalICUCapacity: number | null;
   readonly typicallyFreeICUCapacity: number | null;
   readonly currentCovidICUPatients: number | null;
-  readonly typicalICUUtilization: number | null;
+  readonly typicalICUUtilization: number;
+  readonly hasActualData: boolean;
 
   private readonly intervention: string;
   private readonly dates: Date[];
@@ -113,20 +114,24 @@ export class Projection {
     this.rtRange = this.calcRtRange(timeseries);
     this.testPositiveRate = this.calcTestPositiveRate();
     // disable icuUtilization for counties for now
-    this.icuUtilization =
-      this.isCounty && summaryWithTimeseries.stateName === 'Nevada'
-        ? [null]
-        : this.calcIcuUtilization(actualTimeseries, timeseries, lastUpdated);
-
+    this.hasActualData = this.useActualTimeseries(actualTimeseries);
     const ICUBeds = summaryWithTimeseries?.actuals?.ICUBeds;
-    this.totalICUCapacity = ICUBeds && ICUBeds.capacity;
-    this.typicalICUUtilization = ICUBeds && ICUBeds.typicalUsageRate;
+    this.totalICUCapacity = ICUBeds && ICUBeds.totalCapacity;
+    this.typicalICUUtilization =
+      ICUBeds && ICUBeds.typicalUsageRate
+        ? ICUBeds.typicalUsageRate
+        : DEFAULT_UTILIZATION;
     this.typicallyFreeICUCapacity =
       ICUBeds && ICUBeds.capacity * (1 - ICUBeds.typicalUsageRate);
     this.currentCovidICUPatients = this.calcCurrentCovidICUPatients(
       timeseries,
       lastUpdated,
     );
+
+    this.icuUtilization =
+      this.isCounty && summaryWithTimeseries.stateName === 'Nevada'
+        ? [null]
+        : this.calcICUHeadroom(actualTimeseries, timeseries, lastUpdated);
 
     this.fixZeros(this.hospitalizations);
     this.fixZeros(this.cumulativeDeaths);
@@ -147,6 +152,13 @@ export class Projection {
 
   get finalCumulativeDeaths() {
     return this.cumulativeDeaths[this.cumulativeDeaths.length - 1];
+  }
+
+  get nonCovidICUCapacity() {
+    return (
+      this.totalICUCapacity! *
+      Math.max(0, this.typicalICUUtilization - DECOMP_FACTOR)
+    );
   }
 
   /** Returns the date when projections end (should be 90 days out). */
@@ -287,47 +299,48 @@ export class Projection {
   }
 
   private useActualTimeseries(actualTimeseries: ActualsTimeseries) {
-    // If the actual timeseries has more than half the data use it for calculations
-    if (actualTimeseries.length < 1) return false;
-    const countWithData = actualTimeseries.reduce(
-      (previousValue: number, currentValue) => {
-        const hasData =
-          currentValue.ICUBeds.capacity &&
-          currentValue.ICUBeds.currentUsageCovid;
-        return previousValue + hasData ? 1 : 0;
-      },
-      0,
-    );
-    return countWithData > actualTimeseries.length / 2;
+    // make sure the three most recent data points exist to use the actuals
+    if (actualTimeseries.length < 3) return false;
+    for (var i = 0; i < 3; i++) {
+      const actual = actualTimeseries[actualTimeseries.length - 1 - i];
+      if (!actual.ICUBeds.currentUsageCovid || !actual.ICUBeds.totalCapacity) {
+        return false;
+      }
+    }
+    return true;
   }
 
-  private calcIcuUtilization(
+  private calcICUHeadroom(
     actualTimeseries: ActualsTimeseries,
     timeseries: Timeseries,
     lastUpdated: Date,
   ): Array<number | null> {
-    const useActuals = this.useActualTimeseries(actualTimeseries);
     let icuUtilization;
 
-    if (useActuals) {
+    if (this.hasActualData) {
       icuUtilization = actualTimeseries.map(row => {
-        if (row.ICUBeds.currentUsageCovid > 0 && row.ICUBeds.capacity) {
+        if (row.ICUBeds.currentUsageCovid > 0 && row.ICUBeds.totalCapacity) {
+          // use the actual icu patients total here
+          const actualIcuPatientsToal = 0.75 * row.ICUBeds.totalCapacity;
           const icuHeadroomUsed =
-            row.ICUBeds.currentUsageCovid / row.ICUBeds.capacity;
+            row.ICUBeds.currentUsageCovid / row.ICUBeds.totalCapacity -
+            (actualIcuPatientsToal - row.ICUBeds.currentUsageCovid);
           return Math.min(1, icuHeadroomUsed);
         } else {
           return null;
         }
       });
     } else {
+      console.log(timeseries[timeseries.length - 1]);
       icuUtilization = timeseries.map(row => {
         if (row.ICUBedCapacity > 0 && row.ICUBedsInUse > 0) {
           const icuUtilizationOrDefault =
-            this.typicalICUUtilization || DEFAULT_CAPACITY;
+            this.typicalICUUtilization || DEFAULT_UTILIZATION;
           const icuHeadroomUsed =
             row.ICUBedsInUse /
-            (row.ICUBedCapacity *
-              (1 - Math.max(0, icuUtilizationOrDefault - DECOMP_FACTOR)));
+            (row.ICUBedCapacity -
+              row.ICUBedCapacity *
+                Math.max(0, icuUtilizationOrDefault - DECOMP_FACTOR));
           return Math.min(1, icuHeadroomUsed);
         } else {
           return null;
