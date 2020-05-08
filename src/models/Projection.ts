@@ -128,7 +128,11 @@ export class Projection {
       lastUpdated,
     );
 
-    this.icuUtilization = this.calcICUHeadroom(actualTimeseries, timeseries, lastUpdated);
+    this.icuUtilization = this.calcICUHeadroom(
+      actualTimeseries,
+      timeseries,
+      lastUpdated,
+    );
 
     this.fixZeros(this.hospitalizations);
     this.fixZeros(this.cumulativeDeaths);
