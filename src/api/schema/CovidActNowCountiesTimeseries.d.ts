@@ -86,6 +86,10 @@ export type Totalcapacity = number;
  */
 export type Currentusagecovid = number;
 /**
+ * Currently used capacity for resource by all patients (COVID + Non-COVID)
+ */
+export type Currentusagetotal = number;
+/**
  * Typical used capacity rate for resource. This excludes any COVID usage.
  */
 export type Typicalusagerate = number;
@@ -176,7 +180,7 @@ export type Cumulativenegativetests2 = number;
  */
 export type Cumulativedeaths2 = number;
 export type Date1 = string;
-export type ActualsTimeseries = CANActualsTimeseriesRow[];
+export type Actualstimeseries = CANActualsTimeseriesRow[];
 export type CovidActNowCountiesTimeseries = CovidActNowCountyTimeseries[];
 
 export interface CovidActNowCountyTimeseries {
@@ -191,7 +195,7 @@ export interface CovidActNowCountyTimeseries {
   stateName: Statename;
   countyName: Countyname;
   timeseries: Timeseries;
-  actuals_timeseries: ActualsTimeseries;
+  actualsTimeseries: Actualstimeseries;
 }
 export interface _Projections {
   totalHospitalBeds: Totalhospitalbeds;
@@ -218,6 +222,7 @@ export interface _ResourceUtilization {
   capacity: Capacity;
   totalCapacity: Totalcapacity;
   currentUsageCovid: Currentusagecovid;
+  currentUsageTotal: Currentusagetotal;
   typicalUsageRate: Typicalusagerate;
 }
 export interface CANPredictionTimeseriesRow {
