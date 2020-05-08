@@ -155,7 +155,7 @@ export const HOSPITAL_USAGE: Zones = {
   },
   [Level.MEDIUM]: {
     level: Level.MEDIUM,
-    upperLimit: 0.95,
+    upperLimit: 0.7,
     name: 'Medium',
     color: COLOR_MAP.ORANGE.BASE,
     detail: 'At risk to a new wave of COVID',
