@@ -1,5 +1,12 @@
 import { RegionSummaryWithTimeseries, Timeseries } from 'api';
 
+/**
+ * We truncate (or in the case of charts, switch to a dashed line) the last
+ * seven days of r(t) data because it is susceptible to continued change as we
+ * get future data points.
+ */
+export const RT_TRUNCATION_DAYS = 7;
+
 /** Parameters that can be provided when constructing a Projection. */
 export interface ProjectionParameters {
   intervention: string;
@@ -168,8 +175,13 @@ export class Projection {
   }
 
   get rt(): number | null {
-    const lastRange = this.lastValue(this.rtRange);
-    return lastRange && lastRange.rt;
+    const lastIndex = this.indexOfLastValue(this.rtRange);
+    if (lastIndex !== null && lastIndex >= RT_TRUNCATION_DAYS) {
+      const range = this.rtRange[lastIndex - RT_TRUNCATION_DAYS];
+      return range === null ? null : range.rt;
+    } else {
+      return null;
+    }
   }
 
   private getColumn(columnName: string): Column[] {
