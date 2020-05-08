@@ -8,12 +8,19 @@ const VoroniChart = ({
   y,
   width,
   height,
+  onMouseOver,
+  onMouseOut,
 }: {
   data: any[];
   x: (d: any) => number;
   y: (d: any) => number;
   width: number;
   height: number;
+  onMouseOver: (
+    event: React.MouseEvent<SVGPathElement, MouseEvent>,
+    d: any,
+  ) => void;
+  onMouseOut: (event: React.MouseEvent<SVGPathElement, MouseEvent>) => void;
 }) => {
   const voronoiDiagram = voronoi({ x, y, width, height })(data);
   const polygons = voronoiDiagram.polygons();
@@ -24,10 +31,9 @@ const VoroniChart = ({
         <VoronoiPolygon
           key={`polygon-${i}`}
           polygon={polygon}
-          stroke="#ffffff"
-          strokeWidth={1}
-          fill="black"
-          fillOpacity={0.2}
+          fillOpacity={0}
+          onMouseOver={e => onMouseOver(e, polygon.data)}
+          onMouseOut={onMouseOut}
         />
       ))}
     </Group>

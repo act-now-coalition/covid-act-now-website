@@ -18,7 +18,7 @@ const ZoneAnnotations = ({
   maxY: number;
   zones: Zones;
   yScale: (num: number) => number;
-  dx: number;
+  dx?: number;
 }) => {
   const zoneRegions = computeZoneRegions(minY, maxY, zones);
   return (

@@ -30,6 +30,24 @@ const zoneColor = {
   high: '#f03147',
 };
 
+export const HoveredPoint = styled.circle`
+  fill: black;
+  stroke: white;
+  stroke-width: 2px;
+`;
+
+export const AxisWrapper = styled.g`
+  text {
+    font-family: ${axis.fontFamily};
+    font-size: ${axis.fontSize};
+    font-weight: ${axis.fontWeight};
+    fill: ${axis.color};
+  }
+  line {
+    fill: ${axis.color};
+  }
+`;
+
 export const RegionChartWrapper = styled.div`
   .chart__axis {
     text {
@@ -111,5 +129,9 @@ export const RegionChartWrapper = styled.div`
 
   .chart-line--zone-low {
     stroke: ${zoneColor.low};
+  }
+
+  .chart-container {
+    position: relative;
   }
 `;
