@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import { extent as d3extent } from 'd3-array';
 import { scaleLinear, scaleTime } from '@vx/scale';
 import { Group } from '@vx/group';
@@ -31,6 +32,9 @@ import {
   LineChart,
   RegionChartWrapper,
 } from './ZoneChart.style';
+
+// https://momentjs.com/docs/#/parsing/string-format/
+const TOOLTIP_DATE_FORMAT = 'dddd, MMM D, YYYY';
 
 const RegionChart = ({
   width = 600,
@@ -208,7 +212,9 @@ const RegionChart = ({
           left={marginLeft + xCoord(tooltipData)}
           top={marginTop + yCoord(tooltipData)}
         >
-          <TooltipTitle>{x(tooltipData).toLocaleDateString()}</TooltipTitle>
+          <TooltipTitle>
+            {moment(x(tooltipData)).format(TOOLTIP_DATE_FORMAT)}
+          </TooltipTitle>
           <TooltipBody>{`Rt ${formatDecimal(y(tooltipData))}`}</TooltipBody>
         </Tooltip>
       )}

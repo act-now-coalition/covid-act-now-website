@@ -22,6 +22,7 @@ export const TooltipContent = styled.div`
 
 export const TooltipTitle = styled.div`
   font-size: 11px;
+  margin-bottom: 4px;
 `;
 
 export const TooltipBody = styled.div`
