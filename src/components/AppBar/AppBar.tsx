@@ -110,7 +110,7 @@ const _AppBar = () => {
     e.preventDefault();
 
     setOpen(false);
-    window.open(url, '_blank');
+    window.location.href = url;
   };
 
   const shareURL = `https://covidactnow.org${match ? match.url : ''}`;

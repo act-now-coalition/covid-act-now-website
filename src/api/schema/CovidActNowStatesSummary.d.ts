@@ -50,7 +50,7 @@ export type Rt = number;
  */
 export type Rtci90 = number;
 /**
- * Total population in geographic area
+ * Total population in geographic area [*deprecated*: refer to summary for this]
  */
 export type Population = number;
 /**
@@ -74,17 +74,29 @@ export type Cumulativenegativetests = number;
  */
 export type Cumulativedeaths = number;
 /**
- * Total capacity for resource
+ * *deprecated*: Capacity for resource. In the case of ICUs, this refers to total capacity. For hospitalization this refers to free capacity for COVID patients. This value is calculated by (1 - typicalUsageRate) * totalCapacity * 2.07
  */
 export type Capacity = number;
 /**
- * Currently used capacity for resource
+ * Total capacity for resource.
  */
-export type Currentusage = number;
+export type Totalcapacity = number;
+/**
+ * Currently used capacity for resource by COVID
+ */
+export type Currentusagecovid = number;
+/**
+ * Currently used capacity for resource by all patients (COVID + Non-COVID)
+ */
+export type Currentusagetotal = number;
 /**
  * Typical used capacity rate for resource. This excludes any COVID usage.
  */
 export type Typicalusagerate = number;
+/**
+ * Total Population in geographic area.
+ */
+export type Population1 = number;
 /**
  * The state name
  */
@@ -103,6 +115,7 @@ export interface CovidActNowStateSummary {
   lastUpdatedDate: Lastupdateddate;
   projections: _Projections;
   actuals: _Actuals;
+  population: Population1;
   stateName: Statename;
   countyName?: Countyname;
 }
@@ -129,6 +142,8 @@ export interface _Actuals {
 }
 export interface _ResourceUtilization {
   capacity: Capacity;
-  currentUsage: Currentusage;
+  totalCapacity: Totalcapacity;
+  currentUsageCovid: Currentusagecovid;
+  currentUsageTotal: Currentusagetotal;
   typicalUsageRate: Typicalusagerate;
 }

@@ -1,5 +1,12 @@
 import { RegionSummaryWithTimeseries, Timeseries } from 'api';
 
+/**
+ * We truncate (or in the case of charts, switch to a dashed line) the last
+ * seven days of r(t) data because it is susceptible to continued change as we
+ * get future data points.
+ */
+export const RT_TRUNCATION_DAYS = 7;
+
 /** Parameters that can be provided when constructing a Projection. */
 export interface ProjectionParameters {
   intervention: string;
@@ -97,11 +104,14 @@ export class Projection {
     );
     this.rtRange = this.calcRtRange(timeseries);
     this.testPositiveRate = this.calcTestPositiveRate();
-    // disable icuUtilization for counties for now
-    this.icuUtilization =
-      this.isCounty && summaryWithTimeseries.stateName === 'Nevada'
-        ? [null]
-        : this.calcIcuUtilization(timeseries, lastUpdated);
+    // TODO(https://trello.com/c/5Ts62M2x): Reenable Nevada counties.
+    // TODO(https://trello.com/c/CrcF4MsE): Reenable Utah.
+    const disableIcu =
+      (this.isCounty && summaryWithTimeseries.stateName === 'Nevada') ||
+      summaryWithTimeseries.stateName === 'Utah';
+    this.icuUtilization = disableIcu
+      ? [null]
+      : this.calcIcuUtilization(timeseries, lastUpdated);
 
     const ICUBeds = summaryWithTimeseries?.actuals?.ICUBeds;
     this.totalICUCapacity = ICUBeds && ICUBeds.capacity;
@@ -158,8 +168,14 @@ export class Projection {
     }
   }
 
-  // TODO(michael): We should probably average this out over a week since the data can be spiky.
   get currentTestPositiveRate(): number | null {
+    // Corona Data Scraper is pulling in bogus test data for Washoe County.
+    // Just disable for now.
+    // TODO(michael): Plumb FIPS in here so this is less fragile.
+    if (this.locationName === 'Washoe County, Nevada') {
+      return null;
+    }
+
     return this.lastValue(this.testPositiveRate);
   }
 
@@ -168,8 +184,13 @@ export class Projection {
   }
 
   get rt(): number | null {
-    const lastRange = this.lastValue(this.rtRange);
-    return lastRange && lastRange.rt;
+    const lastIndex = this.indexOfLastValue(this.rtRange);
+    if (lastIndex !== null && lastIndex >= RT_TRUNCATION_DAYS) {
+      const range = this.rtRange[lastIndex - RT_TRUNCATION_DAYS];
+      return range === null ? null : range.rt;
+    } else {
+      return null;
+    }
   }
 
   private getColumn(columnName: string): Column[] {
@@ -287,6 +308,7 @@ export class Projection {
     // update our projections using yesterday's data. So we want to strip
     // everything >= lastUpdatedDate. But since the ICU data is all estimates, I
     // can't really validate that's correct.
+
     return this.omitDataAtOrAfterDate(icuUtilization, lastUpdated);
   }
 

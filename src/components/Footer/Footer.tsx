@@ -43,9 +43,9 @@ const Footer = ({ children }: { children: React.ReactNode }) => {
               <span onClick={() => goTo('/about')}>About</span>
               <span onClick={() => goTo('/resources')}>Resources</span>
               <span
-                onClick={() =>
-                  window.open('https://blog.covidactnow.org', '_blank')
-                }
+                onClick={() => {
+                  window.location.href = 'https://blog.covidactnow.org';
+                }}
               >
                 Blog
               </span>

@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 import {
   ChartContentWrapper,
@@ -63,8 +64,7 @@ const ChartsHolder = (props: {
   const projection: Projection = props.projections.primary;
   const noInterventionProjection: Projection = props.projections.baseline;
 
-  // TODO(michael): This should probably be some function of today's date?
-  const endDate = new Date('2020-05-15');
+  const endDate = moment().add(2, 'weeks').toDate();
 
   const { rtRangeData, testPositiveData, icuUtilizationData } = getChartData(
     projection,
