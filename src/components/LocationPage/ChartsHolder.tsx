@@ -36,6 +36,7 @@ import {
   ChartTypeToTitle,
 } from 'enums/zones';
 import { formatDate } from 'utils';
+
 // TODO(michael): These format helpers should probably live in a more
 // general-purpose location, not just for charts.
 import {
@@ -43,6 +44,9 @@ import {
   formatPercent,
   formatInteger,
 } from 'components/Charts/utils';
+
+// States here that give us specific
+const STATES_WITH_DATA_OVERRIDES = ['Nevada'];
 
 // TODO(michael): figure out where this type declaration should live.
 type County = {
@@ -290,38 +294,49 @@ function positiveTestsStatusText(projection: Projection) {
 }
 
 function hospitalOccupancyStatusText(projection: Projection) {
-  const icuUtilization = projection.currentIcuUtilization;
-  const currentlyInICU = projection.currentICUPatients;
+  const currentIcuUtilization = projection.currentIcuUtilization;
+  const currentCovidICUPatients = projection.currentCovidICUPatients;
+  const totalICUCapacity = projection.totalICUCapacity;
+  const nonCovidPatients = Math.floor(projection.nonCovidPatients);
+
   if (
-    icuUtilization === null ||
-    currentlyInICU == null ||
-    projection.typicallyFreeICUCapacity == null
+    currentIcuUtilization === null ||
+    currentCovidICUPatients === null ||
+    totalICUCapacity === null
   ) {
     return 'No ICU occupancy data is available.';
   }
-  const level = determineZone(HOSPITAL_USAGE, icuUtilization);
+  const level = determineZone(HOSPITAL_USAGE, currentIcuUtilization);
 
   const location = projection.locationName;
-  const capacity = projection.totalICUCapacity;
-  const normallyFree = Math.floor(projection.typicallyFreeICUCapacity);
-  const percentUtilization = Math.round((100 * currentlyInICU) / normallyFree);
 
   const lowText = `This suggests there is likely enough capacity to absorb a wave of new COVID infections.`;
   const mediumText = `This suggests some ability to absorb an increase in COVID cases, but caution is warranted.`;
   const highText = `This suggests the healthcare system is not well positioned  to absorb a wave of new COVID infections without substantial surge capacity.`;
 
-  return `${location} has ${formatInteger(
-    capacity!,
-  )} ICU Beds. Normally, ${formatInteger(normallyFree)} are unoccupied.
-      We estimate there are currently ${formatInteger(
-        currentlyInICU,
-      )} COVID cases in the ICU,
-      or ${percentUtilization}% of typically free beds. ${levelText(
-    level,
-    lowText,
-    mediumText,
-    highText,
-  )}`;
+  const noStateOverride =
+    STATES_WITH_DATA_OVERRIDES.indexOf(projection.stateName) < 0 ||
+    !projection.hasActualData;
+
+  return `${location} ${noStateOverride ? 'has about' : 'has'} ${formatInteger(
+    totalICUCapacity,
+  )} ICU Beds.
+   ${
+     noStateOverride ? 'We estimate that currently' : 'Currently'
+   } ${formatPercent(nonCovidPatients / totalICUCapacity)} (${formatInteger(
+    nonCovidPatients,
+  )})
+      are occupied by non-COVID patients. Of the remaining ${formatInteger(
+        totalICUCapacity - nonCovidPatients,
+      )} ICU beds, ${noStateOverride ? 'we estimate ' : ''}
+      ${formatInteger(
+        currentCovidICUPatients,
+      )} are occupied by COVID cases, or ${formatPercent(
+    Math.min(
+      1,
+      currentCovidICUPatients / (totalICUCapacity - nonCovidPatients),
+    ),
+  )} of available beds. ${levelText(level, lowText, mediumText, highText)}`;
 }
 
 /**
