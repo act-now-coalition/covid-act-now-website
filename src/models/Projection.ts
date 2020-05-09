@@ -104,11 +104,14 @@ export class Projection {
     );
     this.rtRange = this.calcRtRange(timeseries);
     this.testPositiveRate = this.calcTestPositiveRate();
-    // disable icuUtilization for counties for now
-    this.icuUtilization =
-      this.isCounty && summaryWithTimeseries.stateName === 'Nevada'
-        ? [null]
-        : this.calcIcuUtilization(timeseries, lastUpdated);
+    // TODO(https://trello.com/c/5Ts62M2x): Reenable Nevada counties.
+    // TODO(https://trello.com/c/CrcF4MsE): Reenable Utah.
+    const disableIcu =
+      (this.isCounty && summaryWithTimeseries.stateName === 'Nevada') ||
+      summaryWithTimeseries.stateName === 'Utah';
+    this.icuUtilization = disableIcu
+      ? [null]
+      : this.calcIcuUtilization(timeseries, lastUpdated);
 
     const ICUBeds = summaryWithTimeseries?.actuals?.ICUBeds;
     this.totalICUCapacity = ICUBeds && ICUBeds.capacity;
