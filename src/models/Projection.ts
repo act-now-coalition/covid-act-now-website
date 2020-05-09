@@ -79,6 +79,8 @@ export class Projection {
   readonly typicallyFreeICUCapacity: number | null;
   readonly currentCovidICUPatients: number | null;
   readonly typicalICUUtilization: number;
+  readonly currentCumulativeDeaths: number | null;
+  readonly currentCumulativeCases: number | null;
   readonly stateName: string;
 
   private readonly intervention: string;
@@ -163,6 +165,11 @@ export class Projection {
       summaryWithTimeseries.projections.totalHospitalBeds.shortageStartDate;
     this.dateOverwhelmed =
       shortageStart === null ? null : new Date(shortageStart);
+
+    this.currentCumulativeDeaths =
+      summaryWithTimeseries.actuals.cumulativeDeaths;
+    this.currentCumulativeCases =
+      summaryWithTimeseries.actuals.cumulativeConfirmedCases;
   }
 
   /**
