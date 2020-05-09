@@ -104,9 +104,11 @@ export class Projection {
     summaryWithTimeseries: RegionSummaryWithTimeseries,
     parameters: ProjectionParameters,
   ) {
-    const { timeseries, actualsTimeseries, dates } = this.fillDates(
-      summaryWithTimeseries,
-    );
+    const {
+      timeseries,
+      actualsTimeseries,
+      dates,
+    } = this.getAlignedTimeseriesAndDates(summaryWithTimeseries);
     this.timeseries = timeseries;
     this.actualTimeseries = actualsTimeseries;
     this.dates = dates;
@@ -286,18 +288,29 @@ export class Projection {
       [date: string]: CANPredictionTimeseriesRow | CANActualsTimeseriesRow;
     } = {};
     ts.forEach((row: CANPredictionTimeseriesRow | CANActualsTimeseriesRow) => {
-      const ts_date = moment(row.date).toString();
+      const ts_date = moment.utc(row.date).toString();
       dict[ts_date] = row;
     });
     return dict;
   }
 
-  private fillDates(summaryWithTimeseries: RegionSummaryWithTimeseries) {
+  /** getAlignedTimeseriesAndDates aligns all timeseries (both the actuals and predicted
+   * timeseries) as well as the dates to be consistent (since we keep track of
+   * three lists).
+   *
+   * In order to this grab the earliest and latest dates from the
+   * timeseries and for every single day in between them fill the each array
+   * (the dates, the actuals and the timeseres(predicted)) with the value at
+   * that date or null.
+   */
+  private getAlignedTimeseriesAndDates(
+    summaryWithTimeseries: RegionSummaryWithTimeseries,
+  ) {
     const earliestDate = moment.min(
-      summaryWithTimeseries.timeseries.map(row => moment(row.date)),
+      summaryWithTimeseries.timeseries.map(row => moment.utc(row.date)),
     );
     const latestDate = moment.max(
-      summaryWithTimeseries.timeseries.map(row => moment(row.date)),
+      summaryWithTimeseries.timeseries.map(row => moment.utc(row.date)),
     );
 
     const timeseries: Array<CANPredictionTimeseriesRow | null> = [];
