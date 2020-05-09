@@ -332,9 +332,8 @@ export class Projection {
    * Then we want to use the actual timeseries for them
    */
   private useActualTimeseries(actualTimeseries: ActualsTimeseries) {
-    if (actualTimeseries.length < 3) return false;
-    for (var i = 0; i < 3; i++) {
-      const actual = actualTimeseries[actualTimeseries.length - i - 1];
+    for (var i = 0; i < actualTimeseries.length; i++) {
+      const actual = actualTimeseries[i];
       if (
         actual.ICUBeds.currentUsageCovid &&
         actual.ICUBeds.totalCapacity &&
