@@ -1,3 +1,4 @@
+import moment from 'moment';
 import {
   baseOptions,
   currentValueAnnotation,
@@ -17,6 +18,7 @@ import {
   POSITIVE_TESTS,
   Level,
 } from '../../enums/zones';
+import { RT_TRUNCATION_DAYS } from '../../models/Projection';
 
 const toHighchartZone = (zone, level) => ({
   color: zone.color,
@@ -37,10 +39,16 @@ const ZONES_POSITIVE_RATE = getHighchartZones(POSITIVE_TESTS);
 const ZONES_HOSPITAL_USAGE = getHighchartZones(HOSPITAL_USAGE);
 
 export const optionsRt = (data, endDate) => {
-  const { x, y } = lastValidPoint(data);
   const zones = ZONES_RT;
   const [minY, maxY] = [0, getMaxY(data)];
   const [minYAxis, maxYAxis] = getYAxisLimits(minY, maxY, zones);
+
+  // Split the Rt data in two sets, recent data and previous data so we can
+  // dot the line for most recent dates. They overlap to minimize the gap
+  // between the series.
+  const dateRecent = moment().subtract(RT_TRUNCATION_DAYS, 'days').toDate();
+  const prevData = data.filter(d => d.x <= dateRecent);
+  const { x, y } = lastValidPoint(prevData);
   return {
     ...baseOptions,
     xAxis: {
@@ -63,7 +71,15 @@ export const optionsRt = (data, endDate) => {
         name: 'Rt',
         type: 'spline',
         zones,
-        data,
+        data: data,
+        enableMouseTracking: false,
+        dashStyle: 'Dot',
+      },
+      {
+        name: 'Rt',
+        type: 'spline',
+        zones,
+        data: prevData,
       },
     ],
     tooltip: {
@@ -72,7 +88,23 @@ export const optionsRt = (data, endDate) => {
       },
     },
     annotations: [
-      currentValueAnnotation(x, y, y && formatDecimal(y)),
+      currentValueAnnotation(x, y, y && formatDecimal(y), -15, -40),
+      {
+        draggable: '',
+        shapes: [
+          {
+            draggable: '',
+            type: 'circle',
+            point: {
+              xAxis: 0,
+              yAxis: 0,
+              x,
+              y,
+            },
+            r: 5,
+          },
+        ],
+      },
       ...zoneAnnotations(endDate, minYAxis, maxYAxis, y, ZONES_RT),
     ],
   };
