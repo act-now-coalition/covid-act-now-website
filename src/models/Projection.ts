@@ -1,4 +1,8 @@
-import { RegionSummaryWithTimeseries, Timeseries } from 'api';
+import {
+  RegionSummaryWithTimeseries,
+  Timeseries,
+  ActualsTimeseries,
+} from 'api';
 
 /**
  * We truncate (or in the case of charts, switch to a dashed line) the last
@@ -6,6 +10,14 @@ import { RegionSummaryWithTimeseries, Timeseries } from 'api';
  * get future data points.
  */
 export const RT_TRUNCATION_DAYS = 7;
+
+/**
+ * We subtract this "decomp" factor from the typical ICU Utilization rates we
+ * get from the API to account for hospitals being able to decrease their utilization
+ * (by cancelling elective surgeries, using surge capacity, etc.).
+ */
+const ICU_DECOMP_FACTOR = 0.3;
+const DEFAULT_UTILIZATION = 0.75;
 
 /** Parameters that can be provided when constructing a Projection. */
 export interface ProjectionParameters {
@@ -59,7 +71,10 @@ export class Projection {
   readonly dateOverwhelmed: Date | null;
   readonly totalICUCapacity: number | null;
   readonly typicallyFreeICUCapacity: number | null;
-  readonly currentICUPatients: number | null;
+  readonly currentCovidICUPatients: number | null;
+  readonly typicalICUUtilization: number;
+  readonly hasActualData: boolean;
+  readonly stateName: string;
 
   private readonly intervention: string;
   private readonly dates: Date[];
@@ -68,6 +83,7 @@ export class Projection {
   // NOTE: These are used dynamically by getColumn()
   private readonly hospitalizations: number[];
   private readonly beds: number[];
+  private readonly actualTimeseries: Array<any>;
   private readonly cumulativeDeaths: number[];
   private readonly cumulativeInfected: number[];
   private readonly cumulativePositiveTests: Array<number | null>;
@@ -83,13 +99,17 @@ export class Projection {
     parameters: ProjectionParameters,
   ) {
     const timeseries = summaryWithTimeseries.timeseries;
+    this.actualTimeseries = summaryWithTimeseries.actualsTimeseries;
+    this.hasActualData = this.useActualTimeseries(this.actualTimeseries);
+
     const lastUpdated = new Date(summaryWithTimeseries.lastUpdatedDate);
     this.locationName = this.getLocationName(summaryWithTimeseries);
+    this.stateName = summaryWithTimeseries.stateName;
     this.intervention = parameters.intervention;
     this.isInferred = parameters.isInferred;
     this.isCounty = parameters.isCounty;
     this.totalPopulation = summaryWithTimeseries.actuals.population;
-    this.dates = timeseries.map(row => new Date(row.date));
+    this.dates = this.getDates(this.actualTimeseries, timeseries);
 
     // Set up our series data exposed via getDataset().
     this.hospitalizations = timeseries.map(row => row.hospitalBedsRequired);
@@ -104,17 +124,20 @@ export class Projection {
     );
     this.rtRange = this.calcRtRange(timeseries);
     this.testPositiveRate = this.calcTestPositiveRate();
-    // disable icuUtilization for counties for now
-    this.icuUtilization =
-      this.isCounty && summaryWithTimeseries.stateName === 'Nevada'
-        ? [null]
-        : this.calcIcuUtilization(timeseries, lastUpdated);
 
     const ICUBeds = summaryWithTimeseries?.actuals?.ICUBeds;
-    this.totalICUCapacity = ICUBeds && ICUBeds.capacity;
+    this.totalICUCapacity = ICUBeds && ICUBeds.totalCapacity;
+    this.typicalICUUtilization =
+      ICUBeds?.typicalUsageRate || DEFAULT_UTILIZATION;
     this.typicallyFreeICUCapacity =
       ICUBeds && ICUBeds.capacity * (1 - ICUBeds.typicalUsageRate);
-    this.currentICUPatients = this.calcCurrentICUPatients(
+    this.currentCovidICUPatients = this.calcCurrentCovidICUPatients(
+      timeseries,
+      lastUpdated,
+    );
+
+    this.icuUtilization = this.calcICUHeadroom(
+      this.actualTimeseries,
       timeseries,
       lastUpdated,
     );
@@ -138,6 +161,22 @@ export class Projection {
 
   get finalCumulativeDeaths() {
     return this.cumulativeDeaths[this.cumulativeDeaths.length - 1];
+  }
+
+  get nonCovidPatients() {
+    if (this.hasActualData) {
+      const latestCurrentUssage = this.lastValue(
+        this.actualTimeseries.map(row => row.ICUBeds.currentUsageTotal),
+      );
+      const latestUsageCovid = this.lastValue(
+        this.actualTimeseries.map(row => row.ICUBeds.currentUsageCovid),
+      );
+      return latestCurrentUssage - latestUsageCovid;
+    }
+    return (
+      this.totalICUCapacity! *
+      Math.max(0, this.typicalICUUtilization - ICU_DECOMP_FACTOR)
+    );
   }
 
   /** Returns the date when projections end (should be 90 days out). */
@@ -187,6 +226,14 @@ export class Projection {
       return range === null ? null : range.rt;
     } else {
       return null;
+    }
+  }
+
+  private getDates(actualTimeseries: Timeseries, timeseries: Timeseries) {
+    if (this.hasActualData) {
+      return actualTimeseries.map(row => new Date(row.date));
+    } else {
+      return timeseries.map(row => new Date(row.date));
     }
   }
 
@@ -283,40 +330,99 @@ export class Projection {
     return result;
   }
 
-  private calcIcuUtilization(
+  /**
+   * If one of the most recent days has any data for all of:
+   *   - currentUsageCovid
+   *   - totalCapacity
+   *   - currentUsageTotal
+   * Then we want to use the actual timeseries for them
+   */
+  private useActualTimeseries(actualTimeseries: ActualsTimeseries) {
+    for (var i = 0; i < actualTimeseries.length; i++) {
+      const actual = actualTimeseries[i];
+      if (
+        actual.ICUBeds.currentUsageCovid &&
+        actual.ICUBeds.totalCapacity &&
+        actual.ICUBeds.currentUsageTotal
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private calcICUHeadroom(
+    actualTimeseries: ActualsTimeseries,
     timeseries: Timeseries,
     lastUpdated: Date,
   ): Array<number | null> {
-    // The API gives us the beds in use *by covid*, and the total capacity *for
-    // covid*, using an assumption that ICUs are usually 75% full with non-covid
-    // patients. We've decided to show full ICU utilization (not just covid), so
-    // we need to undo that assumption.
-    // TODO(igor): Update this on the API side so we can undo this logic.
-    const icuUtilization = timeseries.map(row => {
-      if (row.ICUBedCapacity > 0 && row.ICUBedsInUse > 0) {
-        return Math.min(1, row.ICUBedsInUse / row.ICUBedCapacity);
-      } else {
-        return null;
-      }
-    });
+    let icuUtilization;
 
+    if (this.hasActualData) {
+      icuUtilization = actualTimeseries.map(row => {
+        if (
+          row.ICUBeds.currentUsageCovid !== null &&
+          row.ICUBeds.totalCapacity !== null &&
+          row.ICUBeds.currentUsageTotal !== null
+        ) {
+          const nonCovidPatientsAtDate =
+            row.ICUBeds.currentUsageTotal - row.ICUBeds.currentUsageCovid;
+          if (row.ICUBeds.currentUsageCovid === 0) return 0;
+          const icuHeadroomUsed =
+            row.ICUBeds.currentUsageCovid /
+            (row.ICUBeds.totalCapacity - nonCovidPatientsAtDate);
+          // TODO: This metric needs to go to the chart eventually
+          return Math.min(1, icuHeadroomUsed);
+        } else {
+          return null;
+        }
+      });
+    } else {
+      icuUtilization = timeseries.map(row => {
+        if (
+          this.totalICUCapacity &&
+          this.totalICUCapacity > 0 &&
+          row.ICUBedsInUse > 0
+        ) {
+          const predictedNonCovidPatientsAtDate =
+            this.totalICUCapacity! *
+            Math.max(0, this.typicalICUUtilization - ICU_DECOMP_FACTOR);
+
+          const icuHeadroomUsed =
+            row.ICUBedsInUse /
+            (this.totalICUCapacity - predictedNonCovidPatientsAtDate);
+          // TODO: This metric needs to go to the chart eventually
+          return Math.min(1, icuHeadroomUsed);
+        } else {
+          return null;
+        }
+      });
+    }
     // Strip off the future projections.
     // TODO(michael): I'm worried about an off-by-one here. I _think_ we usually
     // update our projections using yesterday's data. So we want to strip
     // everything >= lastUpdatedDate. But since the ICU data is all estimates, I
     // can't really validate that's correct.
-
     return this.omitDataAtOrAfterDate(icuUtilization, lastUpdated);
   }
 
-  private calcCurrentICUPatients(
+  private calcCurrentCovidICUPatients(
     timeseries: Timeseries,
     lastUpdated: Date,
   ): number | null {
-    const icuPatients = this.omitDataAtOrAfterDate(
-      timeseries.map(row => row.ICUBedsInUse),
-      lastUpdated,
-    );
+    /** This is specifically current icu patients with covid */
+    let icuPatients;
+    if (this.hasActualData) {
+      icuPatients = this.omitDataAtOrAfterDate(
+        this.actualTimeseries.map(row => row.ICUBeds.currentUsageCovid),
+        lastUpdated,
+      );
+    } else {
+      icuPatients = this.omitDataAtOrAfterDate(
+        timeseries.map(row => row.ICUBedsInUse),
+        lastUpdated,
+      );
+    }
 
     return this.lastValue(icuPatients);
   }
@@ -349,7 +455,7 @@ export class Projection {
 
   private indexOfLastValue<T>(data: Array<T | null>): number | null {
     for (let i = data.length - 1; i >= 0; i--) {
-      if (data[i] !== null) {
+      if (data[i] !== null && data[i] !== undefined) {
         return i;
       }
     }

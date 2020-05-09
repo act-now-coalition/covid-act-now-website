@@ -7,11 +7,13 @@ import DataUrlJson from '../assets/data/data_url.json';
 import {
   CovidActNowStateTimeseries,
   Timeseries as CountyTimeseries,
+  Actualstimeseries as CountyActualTimeseries,
   CovidActNowStatesTimeseries,
 } from './schema/CovidActNowStatesTimeseries';
 import {
   CovidActNowCountyTimeseries,
   Timeseries as StateTimeseries,
+  Actualstimeseries as StateActualTimeseries,
   CovidActNowCountiesTimeseries,
 } from './schema/CovidActNowCountiesTimeseries';
 import { INTERVENTIONS, REVERSED_STATES } from 'enums';
@@ -41,6 +43,9 @@ type InterventionKey = keyof typeof INTERVENTIONS;
 
 /** Represents timeseries for any kind of region. */
 export type Timeseries = CountyTimeseries | StateTimeseries;
+
+/** Represents the actuals timeseries for any kind of region */
+export type ActualsTimeseries = CountyActualTimeseries | StateActualTimeseries;
 
 /** Represents summary+timeseries for any kind of region. */
 export type RegionSummaryWithTimeseries =
