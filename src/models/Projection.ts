@@ -150,7 +150,9 @@ export class Projection {
       lastUpdated,
     );
 
-    this.icuUtilization = this.calcICUHeadroom(
+    // TODO(https://trello.com/c/CrcF4MsE): Reenable Utah.
+    const disableIcu = summaryWithTimeseries.stateName === 'Utah';
+    this.icuUtilization = disableIcu ? [null] : this.calcICUHeadroom(
       this.actualTimeseries,
       timeseries,
       lastUpdated,
