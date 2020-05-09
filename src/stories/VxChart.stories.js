@@ -1,6 +1,7 @@
 import React from 'react';
-import { ZoneChart } from '../components/VxCharts';
+import { ZoneChart, ProjectionChart } from '../components/VxCharts';
 import { CASE_GROWTH_RATE } from '../enums/zones';
+import { data as projectionData } from './data';
 
 export default {
   title: 'RegionChart',
@@ -28,4 +29,8 @@ export const RegionChartRt = () => {
       y1={d => d.rt + d.st}
     />
   );
+};
+
+export const Projection = () => {
+  return <ProjectionChart data={projectionData} x={d => new Date(d.x)} />;
 };
