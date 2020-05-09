@@ -1,8 +1,14 @@
+import moment from 'moment';
+
 import {
   RegionSummaryWithTimeseries,
   Timeseries,
   ActualsTimeseries,
 } from 'api';
+import {
+  CANPredictionTimeseriesRow,
+  CANActualsTimeseriesRow,
+} from 'api/schema/CovidActNowStatesTimeseries';
 
 /**
  * We truncate (or in the case of charts, switch to a dashed line) the last
@@ -73,7 +79,6 @@ export class Projection {
   readonly typicallyFreeICUCapacity: number | null;
   readonly currentCovidICUPatients: number | null;
   readonly typicalICUUtilization: number;
-  readonly hasActualData: boolean;
   readonly stateName: string;
 
   private readonly intervention: string;
@@ -81,11 +86,12 @@ export class Projection {
   private readonly isCounty: boolean;
 
   // NOTE: These are used dynamically by getColumn()
-  private readonly hospitalizations: number[];
-  private readonly beds: number[];
-  private readonly actualTimeseries: Array<any>;
-  private readonly cumulativeDeaths: number[];
-  private readonly cumulativeInfected: number[];
+  private readonly hospitalizations: Array<number | null>;
+  private readonly beds: Array<number | null>;
+  private readonly timeseries: Array<CANPredictionTimeseriesRow | null>;
+  private readonly actualTimeseries: Array<CANActualsTimeseriesRow | null>;
+  private readonly cumulativeDeaths: Array<number | null>;
+  private readonly cumulativeInfected: Array<number | null>;
   private readonly cumulativePositiveTests: Array<number | null>;
   private readonly cumulativeNegativeTests: Array<number | null>;
   private readonly rtRange: Array<RtRange | null>;
@@ -98,9 +104,12 @@ export class Projection {
     summaryWithTimeseries: RegionSummaryWithTimeseries,
     parameters: ProjectionParameters,
   ) {
-    const timeseries = summaryWithTimeseries.timeseries;
-    this.actualTimeseries = summaryWithTimeseries.actualsTimeseries;
-    this.hasActualData = this.useActualTimeseries(this.actualTimeseries);
+    const { timeseries, actualsTimeseries, dates } = this.fillDates(
+      summaryWithTimeseries,
+    );
+    this.timeseries = timeseries;
+    this.actualTimeseries = actualsTimeseries;
+    this.dates = dates;
 
     const lastUpdated = new Date(summaryWithTimeseries.lastUpdatedDate);
     this.locationName = this.getLocationName(summaryWithTimeseries);
@@ -109,18 +118,21 @@ export class Projection {
     this.isInferred = parameters.isInferred;
     this.isCounty = parameters.isCounty;
     this.totalPopulation = summaryWithTimeseries.actuals.population;
-    this.dates = this.getDates(this.actualTimeseries, timeseries);
 
     // Set up our series data exposed via getDataset().
-    this.hospitalizations = timeseries.map(row => row.hospitalBedsRequired);
-    this.beds = timeseries.map(row => row.hospitalBedCapacity);
-    this.cumulativeDeaths = timeseries.map(row => row.cumulativeDeaths);
-    this.cumulativeInfected = timeseries.map(row => row.cumulativeInfected);
+    this.hospitalizations = timeseries.map(
+      row => row && row.hospitalBedsRequired,
+    );
+    this.beds = timeseries.map(row => row && row.hospitalBedCapacity);
+    this.cumulativeDeaths = timeseries.map(row => row && row.cumulativeDeaths);
+    this.cumulativeInfected = timeseries.map(
+      row => row && row.cumulativeInfected,
+    );
     this.cumulativePositiveTests = this.smoothCumulatives(
-      timeseries.map(row => row.cumulativePositiveTests),
+      timeseries.map(row => row && row.cumulativePositiveTests),
     );
     this.cumulativeNegativeTests = this.smoothCumulatives(
-      timeseries.map(row => row.cumulativeNegativeTests),
+      timeseries.map(row => row && row.cumulativeNegativeTests),
     );
     this.rtRange = this.calcRtRange(timeseries);
     this.testPositiveRate = this.calcTestPositiveRate();
@@ -151,6 +163,28 @@ export class Projection {
       shortageStart === null ? null : new Date(shortageStart);
   }
 
+  /**
+   * If one of the most recent days has any data for all of:
+   *   - currentUsageCovid
+   *   - totalCapacity
+   *   - currentUsageTotal
+   * Then we want to use the actual timeseries for them
+   */
+  get hasActualData() {
+    for (var i = 0; i < this.actualTimeseries.length; i++) {
+      const actual = this.actualTimeseries[i];
+      if (
+        actual &&
+        actual.ICUBeds.currentUsageCovid &&
+        actual.ICUBeds.totalCapacity &&
+        actual.ICUBeds.currentUsageTotal
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   get label() {
     return this.intervention;
   }
@@ -166,12 +200,12 @@ export class Projection {
   get nonCovidPatients() {
     if (this.hasActualData) {
       const latestCurrentUssage = this.lastValue(
-        this.actualTimeseries.map(row => row.ICUBeds.currentUsageTotal),
+        this.actualTimeseries.map(row => row && row.ICUBeds.currentUsageTotal),
       );
       const latestUsageCovid = this.lastValue(
-        this.actualTimeseries.map(row => row.ICUBeds.currentUsageCovid),
+        this.actualTimeseries.map(row => row && row.ICUBeds.currentUsageCovid),
       );
-      return latestCurrentUssage - latestUsageCovid;
+      return latestCurrentUssage! - latestUsageCovid!;
     }
     return (
       this.totalICUCapacity! *
@@ -229,14 +263,6 @@ export class Projection {
     }
   }
 
-  private getDates(actualTimeseries: Timeseries, timeseries: Timeseries) {
-    if (this.hasActualData) {
-      return actualTimeseries.map(row => new Date(row.date));
-    } else {
-      return timeseries.map(row => new Date(row.date));
-    }
-  }
-
   private getColumn(columnName: string): Column[] {
     return this.dates.map((date, idx) => ({
       x: date.getTime(),
@@ -251,6 +277,64 @@ export class Projection {
     };
   }
 
+  /** Makes a dictionary from a timerseries to a row so that we can look up the values
+   * based off the date. Eventually would be nice to use this around instead of the
+   * two list scenario we have going right now.
+   */
+  private makeDateDictionary(ts: Timeseries | ActualsTimeseries) {
+    const dict: {
+      [date: string]: CANPredictionTimeseriesRow | CANActualsTimeseriesRow;
+    } = {};
+    ts.forEach((row: CANPredictionTimeseriesRow | CANActualsTimeseriesRow) => {
+      const ts_date = moment(row.date).toString();
+      dict[ts_date] = row;
+    });
+    return dict;
+  }
+
+  private fillDates(summaryWithTimeseries: RegionSummaryWithTimeseries) {
+    const earliestDate = moment.min(
+      summaryWithTimeseries.timeseries.map(row => moment(row.date)),
+    );
+    const latestDate = moment.max(
+      summaryWithTimeseries.timeseries.map(row => moment(row.date)),
+    );
+
+    const timeseries: Array<CANPredictionTimeseriesRow | null> = [];
+    const actualsTimeseries: Array<CANActualsTimeseriesRow | null> = [];
+    const dates: Date[] = [];
+
+    const timeseriesDictionary = this.makeDateDictionary(
+      summaryWithTimeseries.timeseries,
+    );
+    const actualsTimeseriesDictionary = this.makeDateDictionary(
+      summaryWithTimeseries.actualsTimeseries,
+    );
+
+    let currDate = earliestDate.clone();
+    while (currDate.diff(latestDate) <= 0) {
+      const timeseriesRowForDate = timeseriesDictionary[
+        currDate.toString()
+      ] as CANPredictionTimeseriesRow;
+      const actualsTimeseriesrowForDate = actualsTimeseriesDictionary[
+        currDate.toString()
+      ] as CANActualsTimeseriesRow;
+
+      timeseries.push(timeseriesRowForDate || null);
+      actualsTimeseries.push(actualsTimeseriesrowForDate || null);
+      dates.push(currDate.toDate());
+
+      // increment the date by one
+      currDate = currDate.clone().add(1, 'days');
+    }
+
+    return {
+      timeseries,
+      actualsTimeseries,
+      dates,
+    };
+  }
+
   private getLocationName(s: RegionSummaryWithTimeseries) {
     // TODO(michael): I don't like hardcoding "County" into the name. We should
     // probably delete this code and get the location name from somewhere other
@@ -260,9 +344,11 @@ export class Projection {
       : s.stateName;
   }
 
-  private calcRtRange(timeseries: Timeseries): Array<RtRange | null> {
-    const rtSeriesRaw = timeseries.map(row => row.RtIndicator);
-    const rtCiSeriesRaw = timeseries.map(row => row.RtIndicatorCI90);
+  private calcRtRange(
+    timeseries: Array<CANPredictionTimeseriesRow | null>,
+  ): Array<RtRange | null> {
+    const rtSeriesRaw = timeseries.map(row => row && row.RtIndicator);
+    const rtCiSeriesRaw = timeseries.map(row => row && row.RtIndicatorCI90);
 
     // This hides small gaps (less than 2 data points) in the rt series to make
     // it more visually appealing without making up large amounts of data.
@@ -330,30 +416,9 @@ export class Projection {
     return result;
   }
 
-  /**
-   * If one of the most recent days has any data for all of:
-   *   - currentUsageCovid
-   *   - totalCapacity
-   *   - currentUsageTotal
-   * Then we want to use the actual timeseries for them
-   */
-  private useActualTimeseries(actualTimeseries: ActualsTimeseries) {
-    for (var i = 0; i < actualTimeseries.length; i++) {
-      const actual = actualTimeseries[i];
-      if (
-        actual.ICUBeds.currentUsageCovid &&
-        actual.ICUBeds.totalCapacity &&
-        actual.ICUBeds.currentUsageTotal
-      ) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   private calcICUHeadroom(
-    actualTimeseries: ActualsTimeseries,
-    timeseries: Timeseries,
+    actualTimeseries: Array<CANActualsTimeseriesRow | null>,
+    timeseries: Array<CANPredictionTimeseriesRow | null>,
     lastUpdated: Date,
   ): Array<number | null> {
     let icuUtilization;
@@ -361,6 +426,7 @@ export class Projection {
     if (this.hasActualData) {
       icuUtilization = actualTimeseries.map(row => {
         if (
+          row &&
           row.ICUBeds.currentUsageCovid !== null &&
           row.ICUBeds.totalCapacity !== null &&
           row.ICUBeds.currentUsageTotal !== null
@@ -380,6 +446,7 @@ export class Projection {
     } else {
       icuUtilization = timeseries.map(row => {
         if (
+          row &&
           this.totalICUCapacity &&
           this.totalICUCapacity > 0 &&
           row.ICUBedsInUse > 0
@@ -407,19 +474,19 @@ export class Projection {
   }
 
   private calcCurrentCovidICUPatients(
-    timeseries: Timeseries,
+    timeseries: Array<CANPredictionTimeseriesRow | null>,
     lastUpdated: Date,
   ): number | null {
     /** This is specifically current icu patients with covid */
     let icuPatients;
     if (this.hasActualData) {
       icuPatients = this.omitDataAtOrAfterDate(
-        this.actualTimeseries.map(row => row.ICUBeds.currentUsageCovid),
+        this.actualTimeseries.map(row => row && row.ICUBeds.currentUsageCovid),
         lastUpdated,
       );
     } else {
       icuPatients = this.omitDataAtOrAfterDate(
-        timeseries.map(row => row.ICUBedsInUse),
+        timeseries.map(row => row && row.ICUBedsInUse),
         lastUpdated,
       );
     }
@@ -445,10 +512,16 @@ export class Projection {
   // https://github.com/covid-projections/covid-data-model/issues/315 there may
   // be an erroneous "zero" data point ~today. We detect these and just average
   // the adjacent numbers.
-  private fixZeros(data: number[]) {
+  private fixZeros(data: (number | null)[]) {
     for (let i = 1; i < data.length - 1; i++) {
-      if (data[i] === 0 && data[i - 1] !== 0 && data[i + 1] !== 0) {
-        data[i] = (data[i - 1] + data[i + 1]) / 2;
+      if (
+        (data[i] === null || data[i] === 0) &&
+        data[i - 1] !== 0 &&
+        data[i - 1] !== null &&
+        data[i + 1] !== 0 &&
+        data[i + 1] !== null
+      ) {
+        data[i] = (data[i - 1]! + data[i + 1]!) / 2;
       }
     }
   }
