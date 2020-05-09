@@ -231,7 +231,11 @@ export class Projection {
 
   private getDates(actualTimeseries: Timeseries, timeseries: Timeseries) {
     if (this.hasActualData) {
-      return actualTimeseries.map(row => new Date(row.date));
+      const actuals_dates = actualTimeseries.map(row => new Date(row.date));
+      const latest_actual = actuals_dates[actuals_dates.length - 1]
+      const timeseries_dates = timeseries.map(row => new Date(row.date))
+      // In order to keep the projections chart, we need the future dates
+      return actuals_dates.concat(timeseries_dates.filter( ts_date => ts_date > latest_actual))
     } else {
       return timeseries.map(row => new Date(row.date));
     }
