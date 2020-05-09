@@ -165,8 +165,14 @@ export class Projection {
     }
   }
 
-  // TODO(michael): We should probably average this out over a week since the data can be spiky.
   get currentTestPositiveRate(): number | null {
+    // Corona Data Scraper is pulling in bogus test data for Washoe County.
+    // Just disable for now.
+    // TODO(michael): Plumb FIPS in here so this is less fragile.
+    if (this.locationName === 'Washoe County, Nevada') {
+      return null;
+    }
+
     return this.lastValue(this.testPositiveRate);
   }
 
