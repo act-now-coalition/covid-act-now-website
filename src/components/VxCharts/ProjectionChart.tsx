@@ -9,6 +9,7 @@ import { AxisBottom } from '@vx/axis';
 import { randomizeId, last } from './utils';
 import * as Style from './Charts.style';
 import { formatInteger } from '../Charts/utils';
+import VoroniChart from './VoroniChart';
 
 const ProjectionChart = ({
   width = 600,
@@ -44,10 +45,12 @@ const ProjectionChart = ({
     range: [0, innerWidth],
   });
 
-  const [minY, maxY] = d3extent(
-    [...dataLimitedAction, ...dataCurrentTrends, ...dataAvailableBeds],
-    y,
-  );
+  const allPoints = [
+    ...dataLimitedAction,
+    ...dataCurrentTrends,
+    ...dataAvailableBeds,
+  ];
+  const [minY, maxY] = d3extent(allPoints, y);
 
   const yScale = scaleLinear({
     domain: [minY!, maxY!],
@@ -61,6 +64,9 @@ const ProjectionChart = ({
   const currentPoint = last(dataCurrentTrends.filter(isPast));
   const currentBeds = last(dataAvailableBeds);
   const clipPathId = randomizeId('chart-clip-path');
+
+  const handleMouseOver = (e, d) => {};
+  const hideTooltip = () => {};
 
   return (
     <Style.ChartContainer>
@@ -100,7 +106,7 @@ const ProjectionChart = ({
                 curve={curveNatural}
               />
             </Style.LineGrid>
-            <Style.TextAnnotation x={0} y={yCoord(currentBeds) - 5}>
+            <Style.TextAnnotation x={0} y={yCoord(currentBeds)} dy={-10}>
               {`${formatInteger(y(currentBeds))} available beds`}
             </Style.TextAnnotation>
             <Style.CircleMarker
@@ -108,10 +114,19 @@ const ProjectionChart = ({
               cy={yCoord(currentPoint)}
               r={6}
             />
+            <VoroniChart
+              data={allPoints}
+              x={xCoord}
+              y={yCoord}
+              width={innerWidth}
+              height={innerHeight}
+              onMouseOver={handleMouseOver}
+              onMouseOut={hideTooltip}
+            />
           </Group>
-          <Style.ChartAxis>
+          <Style.Axis>
             <AxisBottom top={innerHeight} scale={xScale} numTicks={7} />
-          </Style.ChartAxis>
+          </Style.Axis>
         </Group>
       </svg>
     </Style.ChartContainer>

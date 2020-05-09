@@ -22,16 +22,7 @@ import {
 } from './utils';
 import Tooltip from './Tooltip';
 import { TooltipTitle, TooltipBody } from './Tooltip.style';
-import {
-  AreaRange,
-  AxisWrapper,
-  DashedLine,
-  PointCircle,
-  TextCurrentValue,
-  TextZone,
-  LineChart,
-  RegionChartWrapper,
-} from './ZoneChart.style';
+import * as Style from './Charts.style';
 
 // https://momentjs.com/docs/#/parsing/string-format/
 const TOOLTIP_DATE_FORMAT = 'dddd, MMM D, YYYY';
@@ -92,7 +83,7 @@ const RegionChart = ({
     datum: any,
   ) => {
     // @ts-ignore - typing bug
-    const coords = localPoint(event.target.ownerSVGElement, event); // tslint:ignore
+    const coords = localPoint(event.target.ownerSVGElement, event);
     showTooltip({
       tooltipLeft: coords?.x || 0,
       tooltipTop: coords?.y || 0,
@@ -110,10 +101,12 @@ const RegionChart = ({
     return value > zones.MEDIUM.upperLimit ? zones.HIGH : zones.MEDIUM;
   };
 
+  const currentZone = getZoneByValue(y(currentPoint));
+
   const lineChart = zoneRegions.map((zone, i) => {
     const clipPathZoneId = randomizeId(`clip-path-zone-${zone.name}`);
     return (
-      <LineChart key={`chart-zone-line-group-${i}`} color={zone.color}>
+      <Style.LineMain key={`chart-zone-line-group-${i}`} stroke={zone.color}>
         <RectClipPath
           id={clipPathZoneId}
           width={innerWidth}
@@ -127,13 +120,13 @@ const RegionChart = ({
           curve={curveNatural}
           clipPath={`url(#${clipPathZoneId})`}
         />
-      </LineChart>
+      </Style.LineMain>
     );
   });
 
   const areaRangeChart =
     isDefined(y0) && isDefined(y1) ? (
-      <AreaRange>
+      <Style.Area fill="#eee">
         <Area
           data={data}
           x={xCoord}
@@ -141,13 +134,13 @@ const RegionChart = ({
           y1={d => (y1 ? yScale(y1(d)) : 0)}
           curve={curveNatural}
         />
-      </AreaRange>
+      </Style.Area>
     ) : null;
 
   const clipPathId = randomizeId('chart-clip-path');
 
   return (
-    <RegionChartWrapper>
+    <Style.ChartContainer>
       <svg width={width} height={height}>
         <RectClipPath id={clipPathId} width={innerWidth} height={innerHeight} />
         <Group left={marginLeft} top={marginTop}>
@@ -155,11 +148,11 @@ const RegionChart = ({
             {areaRangeChart}
             {lineChart}
             {tooltipOpen && (
-              <PointCircle
+              <Style.CircleMarker
                 cx={xCoord(tooltipData)}
                 cy={yCoord(tooltipData)}
                 r={6}
-                fill={getZoneByValue(y(tooltipData))?.color}
+                fill={currentZone.color}
               />
             )}
             <VoroniChart
@@ -172,41 +165,43 @@ const RegionChart = ({
               onMouseOut={hideTooltip}
             />
           </Group>
-          <AxisWrapper>
+          <Style.Axis>
             <AxisLeft
               scale={yScale}
               tickValues={ticks}
               hideAxisLine
               hideTicks
             />
-          </AxisWrapper>
-          <DashedLine>
+          </Style.Axis>
+          <Style.LineGrid>
             <GridRows scale={yScale} width={innerWidth} tickValues={ticks} />
-          </DashedLine>
-          <AxisWrapper>
+          </Style.LineGrid>
+          <Style.Axis>
             <AxisBottom top={innerHeight} scale={xScale} numTicks={7} />
-          </AxisWrapper>
-          <TextCurrentValue
+          </Style.Axis>
+          <Style.TextAnnotation
             x={xCoord(currentPoint)}
             y={yCoord(currentPoint)}
             dx={5}
+            fill="#000"
           >
             {formatDecimal(y(currentPoint))}
-          </TextCurrentValue>
-          <Group left={innerWidth + marginRight}>
-            {zoneRegions.map((zone, i) => (
-              <TextZone
-                key={`text-zone-${i}`}
-                dx={-5}
-                y={yScale(0.5 * (zone.valueFrom + zone.valueTo))}
-                fill={zone.color}
-              >
-                {zone.name}
-              </TextZone>
-            ))}
-          </Group>
+          </Style.TextAnnotation>
         </Group>
       </svg>
+      {/* Zone Annotations */}
+      {zoneRegions.map((zone, i) => (
+        <Style.ZoneAnnotation
+          key={`zone-annotation-${i}`}
+          isActive={zone.name === currentZone.name}
+          primaryColor={zone.color}
+          left={width - 50}
+          top={marginTop + yScale((zone.valueFrom + zone.valueTo) / 2)}
+        >
+          {zone.name}
+        </Style.ZoneAnnotation>
+      ))}
+      {/* Tooltip */}
       {tooltipOpen && (
         <Tooltip
           left={marginLeft + xCoord(tooltipData)}
@@ -218,7 +213,7 @@ const RegionChart = ({
           <TooltipBody>{`Rt ${formatDecimal(y(tooltipData))}`}</TooltipBody>
         </Tooltip>
       )}
-    </RegionChartWrapper>
+    </Style.ChartContainer>
   );
 };
 
