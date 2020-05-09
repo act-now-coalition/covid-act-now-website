@@ -1,5 +1,3 @@
-import moment from 'moment';
-
 import {
   RegionSummaryWithTimeseries,
   Timeseries,
@@ -102,18 +100,16 @@ export class Projection {
   ) {
     const timeseries = summaryWithTimeseries.timeseries;
     this.actualTimeseries = summaryWithTimeseries.actualsTimeseries;
-    let lastUpdated = new Date(summaryWithTimeseries.lastUpdatedDate);
+    this.hasActualData = this.useActualTimeseries(this.actualTimeseries);
+
+    const lastUpdated = new Date(summaryWithTimeseries.lastUpdatedDate);
     this.locationName = this.getLocationName(summaryWithTimeseries);
     this.stateName = summaryWithTimeseries.stateName;
-    // TODO(sgoldblatt): Nevada is one day off
-    if (this.locationName === 'Nevada') {
-      lastUpdated = moment(lastUpdated).subtract(1, 'day').toDate();
-    }
     this.intervention = parameters.intervention;
     this.isInferred = parameters.isInferred;
     this.isCounty = parameters.isCounty;
     this.totalPopulation = summaryWithTimeseries.actuals.population;
-    this.dates = timeseries.map(row => new Date(row.date));
+    this.dates = this.getDates(this.actualTimeseries, timeseries);
 
     // Set up our series data exposed via getDataset().
     this.hospitalizations = timeseries.map(row => row.hospitalBedsRequired);
@@ -129,7 +125,6 @@ export class Projection {
     this.rtRange = this.calcRtRange(timeseries);
     this.testPositiveRate = this.calcTestPositiveRate();
 
-    this.hasActualData = this.useActualTimeseries();
     const ICUBeds = summaryWithTimeseries?.actuals?.ICUBeds;
     this.totalICUCapacity = ICUBeds && ICUBeds.totalCapacity;
     this.typicalICUUtilization =
@@ -228,6 +223,14 @@ export class Projection {
     }
   }
 
+  private getDates(actualTimeseries: Timeseries, timeseries: Timeseries) {
+    if (this.hasActualData) {
+      return actualTimeseries.map(row => new Date(row.date));
+    } else {
+      return timeseries.map(row => new Date(row.date));
+    }
+  }
+
   private getColumn(columnName: string): Column[] {
     return this.dates.map((date, idx) => ({
       x: date.getTime(),
@@ -321,16 +324,26 @@ export class Projection {
     return result;
   }
 
-  private useActualTimeseries() {
-    // make sure there are recent datapoints. 3 of the last days should have data
-    if (this.actualTimeseries.length < 3) return false;
+  /**
+   * If one of the most recent days has any data for all of:
+   *   - currentUsageCovid
+   *   - totalCapacity
+   *   - currentUsageTotal
+   * Then we want to use the actual timeseries for them
+   */
+  private useActualTimeseries(actualTimeseries: ActualsTimeseries) {
+    if (actualTimeseries.length < 3) return false;
     for (var i = 0; i < 3; i++) {
-      const actual = this.actualTimeseries[this.actualTimeseries.length - i - 1];
-      if (!(actual.ICUBeds.currentUsageCovid && actual.ICUBeds.totalCapacity)) {
-        return false;
+      const actual = actualTimeseries[actualTimeseries.length - i - 1];
+      if (
+        actual.ICUBeds.currentUsageCovid &&
+        actual.ICUBeds.totalCapacity &&
+        actual.ICUBeds.currentUsageTotal
+      ) {
+        return true;
       }
     }
-    return true;
+    return false;
   }
 
   private calcICUHeadroom(
@@ -342,9 +355,14 @@ export class Projection {
 
     if (this.hasActualData) {
       icuUtilization = actualTimeseries.map(row => {
-        if (row.ICUBeds.currentUsageCovid > 0 && row.ICUBeds.totalCapacity) {
+        if (
+          row.ICUBeds.currentUsageCovid !== null &&
+          row.ICUBeds.totalCapacity !== null &&
+          row.ICUBeds.currentUsageTotal !== null
+        ) {
           const nonCovidPatientsAtDate =
             row.ICUBeds.currentUsageTotal - row.ICUBeds.currentUsageCovid;
+          if (row.ICUBeds.currentUsageCovid === 0) return 0;
           const icuHeadroomUsed =
             row.ICUBeds.currentUsageCovid /
             (row.ICUBeds.totalCapacity - nonCovidPatientsAtDate);
