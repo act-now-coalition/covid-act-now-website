@@ -3,6 +3,8 @@ import {
   Timeseries,
   ActualsTimeseries,
 } from 'api';
+import { assert, fail } from 'utils';
+import { CANActualsTimeseriesRow } from 'api/schema/CovidActNowStatesTimeseries';
 
 /**
  * We truncate (or in the case of charts, switch to a dashed line) the last
@@ -79,11 +81,11 @@ export class Projection {
   private readonly intervention: string;
   private readonly dates: Date[];
   private readonly isCounty: boolean;
+  private readonly actualTimeseries: Array<CANActualsTimeseriesRow | null>;
 
   // NOTE: These are used dynamically by getColumn()
   private readonly hospitalizations: number[];
   private readonly beds: number[];
-  private readonly actualTimeseries: Array<any>;
   private readonly cumulativeDeaths: number[];
   private readonly cumulativeInfected: number[];
   private readonly cumulativePositiveTests: Array<number | null>;
@@ -99,7 +101,10 @@ export class Projection {
     parameters: ProjectionParameters,
   ) {
     const timeseries = summaryWithTimeseries.timeseries;
-    this.actualTimeseries = summaryWithTimeseries.actualsTimeseries;
+    this.dates = timeseries.map(row => new Date(row.date));
+    this.actualTimeseries = this.alignActualsTimeseriesByDate(
+      summaryWithTimeseries.actualsTimeseries,
+    );
     this.hasActualData = this.useActualTimeseries(this.actualTimeseries);
 
     const lastUpdated = new Date(summaryWithTimeseries.lastUpdatedDate);
@@ -109,7 +114,6 @@ export class Projection {
     this.isInferred = parameters.isInferred;
     this.isCounty = parameters.isCounty;
     this.totalPopulation = summaryWithTimeseries.actuals.population;
-    this.dates = this.getDates(this.actualTimeseries, timeseries);
 
     // Set up our series data exposed via getDataset().
     this.hospitalizations = timeseries.map(row => row.hospitalBedsRequired);
@@ -165,13 +169,13 @@ export class Projection {
 
   get nonCovidPatients() {
     if (this.hasActualData) {
-      const latestCurrentUssage = this.lastValue(
-        this.actualTimeseries.map(row => row.ICUBeds.currentUsageTotal),
+      const latestCurrentUsage = this.lastValue(
+        this.actualTimeseries.map(row => row && row.ICUBeds.currentUsageTotal),
       );
       const latestUsageCovid = this.lastValue(
-        this.actualTimeseries.map(row => row.ICUBeds.currentUsageCovid),
+        this.actualTimeseries.map(row => row && row.ICUBeds.currentUsageCovid),
       );
-      return latestCurrentUssage - latestUsageCovid;
+      return latestCurrentUsage! - latestUsageCovid!;
     }
     return (
       this.totalICUCapacity! *
@@ -229,12 +233,68 @@ export class Projection {
     }
   }
 
-  private getDates(actualTimeseries: Timeseries, timeseries: Timeseries) {
-    if (this.hasActualData) {
-      return actualTimeseries.map(row => new Date(row.date));
-    } else {
-      return timeseries.map(row => new Date(row.date));
+  /**
+   * Returns a copy of the actuals timeseries that is aligned with the
+   * projections timeseries by trimming any rows for early dates and inserting
+   * nulls to fill any missing dates.
+   *
+   * This requires that the projections timeseries is contiguous (will assert
+   * otherwise).
+   */
+  private alignActualsTimeseriesByDate(
+    actuals: ActualsTimeseries,
+  ): Array<CANActualsTimeseriesRow | null> {
+    if (actuals.length === 0) {
+      return actuals;
     }
+
+    const result: Array<CANActualsTimeseriesRow | null> = [];
+
+    let iActuals = 0; // index into actuals timeseries
+    let iProjections = 0; // index into dates (which corresponds to projections timeseries).
+    while (true) {
+      const actualsRow = iActuals <= actuals.length ? actuals[iActuals] : null;
+      const projectionsDate =
+        iProjections <= this.dates.length ? this.dates[iProjections] : null;
+      const actualsDate = actualsRow && new Date(actualsRow.date);
+
+      if (!actualsDate && !projectionsDate) {
+        // We're done!
+        break;
+      } else if (!actualsDate) {
+        // We ran out of actuals rows. Pad with nulls to compensate.
+        result.push(null);
+        iProjections++;
+      } else if (!projectionsDate) {
+        // We ran out of projections rows.
+        fail(`Actuals has newer data than projections!?`);
+      } else if (actualsDate < projectionsDate) {
+        // Indicates a missing projections row.
+        assert(
+          iProjections === 0,
+          `Should only be missing projections rows at the start of the timeseries since ` +
+            `projection data should be contiguous`,
+        );
+        // We just trim these early actuals rows.
+        iActuals++;
+      } else if (actualsDate > projectionsDate) {
+        // Indicates a missing actuals row. Fill it with null.
+        result.push(null);
+        iProjections++;
+      } else {
+        // The dates match. We are aligned.
+        result.push(actualsRow);
+        iProjections++;
+        iActuals++;
+      }
+    }
+
+    assert(
+      result.length === this.dates.length,
+      `Actual timeseries length (${result.length}) != ` +
+        `projections timeseries length (${this.dates.length})`,
+    );
+    return result;
   }
 
   private getColumn(columnName: string): Column[] {
@@ -337,10 +397,13 @@ export class Projection {
    *   - currentUsageTotal
    * Then we want to use the actual timeseries for them
    */
-  private useActualTimeseries(actualTimeseries: ActualsTimeseries) {
+  private useActualTimeseries(
+    actualTimeseries: Array<CANActualsTimeseriesRow | null>,
+  ) {
     for (var i = 0; i < actualTimeseries.length; i++) {
       const actual = actualTimeseries[i];
       if (
+        actual &&
         actual.ICUBeds.currentUsageCovid &&
         actual.ICUBeds.totalCapacity &&
         actual.ICUBeds.currentUsageTotal
@@ -352,7 +415,7 @@ export class Projection {
   }
 
   private calcICUHeadroom(
-    actualTimeseries: ActualsTimeseries,
+    actualTimeseries: Array<CANActualsTimeseriesRow | null>,
     timeseries: Timeseries,
     lastUpdated: Date,
   ): Array<number | null> {
@@ -361,6 +424,7 @@ export class Projection {
     if (this.hasActualData) {
       icuUtilization = actualTimeseries.map(row => {
         if (
+          row &&
           row.ICUBeds.currentUsageCovid !== null &&
           row.ICUBeds.totalCapacity !== null &&
           row.ICUBeds.currentUsageTotal !== null
@@ -414,7 +478,7 @@ export class Projection {
     let icuPatients;
     if (this.hasActualData) {
       icuPatients = this.omitDataAtOrAfterDate(
-        this.actualTimeseries.map(row => row.ICUBeds.currentUsageCovid),
+        this.actualTimeseries.map(row => row && row.ICUBeds.currentUsageCovid),
         lastUpdated,
       );
     } else {
