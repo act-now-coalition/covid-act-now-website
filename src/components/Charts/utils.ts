@@ -27,6 +27,8 @@ export const currentValueAnnotation = (
   x: number,
   y: number,
   text: string,
+  xOffset = 12,
+  yOffset = -16,
 ): Highcharts.AnnotationsOptions => ({
   draggable: '',
   labelOptions: {
@@ -37,7 +39,8 @@ export const currentValueAnnotation = (
       align: 'left',
       // @ts-ignore - Bug in Highchart types
       verticalAlign: 'center',
-      x: 12,
+      x: xOffset,
+      y: yOffset,
       shape: 'rect',
       point: {
         xAxis: 0,
@@ -53,7 +56,6 @@ export const currentValueAnnotation = (
       className: 'ZoneAnnotation ZoneAnnotation--CurrentValue',
     },
   ],
-  zIndex: -1,
 });
 
 export const getTickPositions = (
@@ -95,6 +97,7 @@ export const baseOptions: Highcharts.Options = {
       animation: false,
       marker: {
         enabled: false,
+        symbol: 'circle',
       },
     },
   },
