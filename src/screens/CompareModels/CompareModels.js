@@ -319,7 +319,6 @@ function StateCompare({ state, leftModels, rightModels, refreshing }) {
 
 function StateChart({ state, models }) {
   const locationName = STATES[state];
-  const intervention = STATE_TO_INTERVENTION[state];
 
   if (!models) {
     return <div>Failed to load data for {locationName}</div>;
@@ -331,7 +330,6 @@ function StateChart({ state, models }) {
       <ModelChart
         subtitle="Hospitalizations over time"
         projections={models}
-        currentIntervention={intervention}
         forCompareModels={true}
       />
     </LazyLoad>
