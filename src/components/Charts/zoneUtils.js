@@ -46,7 +46,10 @@ export const optionsRt = (data, endDate) => {
   // Split the Rt data in two sets, recent data and previous data so we can
   // dot the line for most recent dates. They overlap to minimize the gap
   // between the series.
-  const dateRecent = moment().subtract(RT_TRUNCATION_DAYS, 'days').toDate();
+  const { x: lastValidDate } = lastValidPoint(data);
+  const dateRecent = moment(lastValidDate)
+    .subtract(RT_TRUNCATION_DAYS, 'days')
+    .toDate();
   const prevData = data.filter(d => d.x <= dateRecent);
   const { x, y } = lastValidPoint(prevData);
   return {
