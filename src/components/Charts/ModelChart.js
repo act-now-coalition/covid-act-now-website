@@ -11,6 +11,7 @@ import {
   CondensedLegendItemStyled,
 } from './ModelChart.style';
 import Outcomes from '../Outcomes/Outcomes';
+import { COLORS } from 'enums';
 import { formatDate } from 'utils';
 
 const formatIntervention = (intervention, optCase) =>
@@ -49,33 +50,9 @@ const ModelChart = ({
     },
     visible: !forCompareModels,
     condensedLegend: {
-      bgColor: projections.getChartSeriesColorMap().limitedActionSeries,
+      bgColor: COLORS.LIMITED_ACTION,
     },
     legendIndex: 2,
-  };
-
-  const socialDistancing = {
-    className: 'social-distancing',
-    name:
-      currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
-        ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (lax)')
-        : formatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
-    type: projection.isInferred ? 'spline' : 'areaspline',
-    data: data[1].data,
-    marker: {
-      symbol: 'circle',
-    },
-    condensedLegend: {
-      condensedName:
-        currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
-          ? condensedFormatIntervention(
-              INTERVENTIONS.SHELTER_IN_PLACE,
-              ' (lax)',
-            )
-          : condensedFormatIntervention(INTERVENTIONS.SOCIAL_DISTANCING),
-
-      bgColor: projections.getChartSeriesColorMap().socialDistancingSeries,
-    },
   };
 
   const projected = {
@@ -87,7 +64,7 @@ const ModelChart = ({
       symbol: 'circle',
     },
     condensedLegend: {
-      bgColor: projections.getChartSeriesColorMap().projectedSeries,
+      bgColor: COLORS.PROJECTED,
     },
     legendIndex: 3,
   };
@@ -102,7 +79,7 @@ const ModelChart = ({
       symbol: 'circle',
     },
     condensedLegend: {
-      bgColor: projections.getChartSeriesColorMap().projectedSeries,
+      bgColor: 'black',
     },
     legendIndex: 1,
   };
@@ -288,8 +265,8 @@ const ModelChart = ({
         <Wrapper projections={projections} isInferred={projection.isInferred}>
           <Chart options={options} />
           <CondensedLegend>
-            {[noAction, socialDistancing, shelterInPlace, availableBeds]
-              .filter(intervention => intervention.visible !== false)
+            {[previousEstimates, noAction, projected]
+              .filter(series => series.visible !== false)
               .map(CondensedLegendItem)}
           </CondensedLegend>
         </Wrapper>
