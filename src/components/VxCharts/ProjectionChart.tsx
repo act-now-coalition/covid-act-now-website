@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import { extent as d3extent } from 'd3-array';
 import { scaleLinear, scaleTime } from '@vx/scale';
 import { Group } from '@vx/group';
@@ -6,10 +7,14 @@ import { curveNatural } from '@vx/curve';
 import { LinePath } from '@vx/shape';
 import { RectClipPath } from '@vx/clip-path';
 import { AxisBottom } from '@vx/axis';
-import { randomizeId, last } from './utils';
-import * as Style from './Charts.style';
-import { formatInteger } from '../Charts/utils';
+import { useTooltip } from '@vx/tooltip';
+import { localPoint } from '@vx/event';
+import { formatInteger, randomizeId, last } from './utils';
 import VoroniChart from './VoroniChart';
+import * as Style from './Charts.style';
+
+// https://momentjs.com/docs/#/parsing/string-format/
+const TOOLTIP_DATE_FORMAT = 'dddd, MMM D, YYYY';
 
 const ProjectionChart = ({
   width = 600,
@@ -65,8 +70,20 @@ const ProjectionChart = ({
   const currentBeds = last(dataAvailableBeds);
   const clipPathId = randomizeId('chart-clip-path');
 
-  const handleMouseOver = (e, d) => {};
-  const hideTooltip = () => {};
+  const { tooltipData, tooltipOpen, showTooltip, hideTooltip } = useTooltip();
+
+  const handleMouseOver = (
+    event: React.MouseEvent<SVGPathElement, MouseEvent>,
+    datum: any,
+  ) => {
+    // @ts-ignore - typing bug
+    const coords = localPoint(event.target.ownerSVGElement, event);
+    showTooltip({
+      tooltipLeft: coords?.x || 0,
+      tooltipTop: coords?.y || 0,
+      tooltipData: datum,
+    });
+  };
 
   return (
     <Style.ChartContainer>
@@ -114,6 +131,13 @@ const ProjectionChart = ({
               cy={yCoord(currentPoint)}
               r={6}
             />
+            {tooltipOpen && (
+              <Style.CircleMarker
+                cx={xCoord(tooltipData)}
+                cy={yCoord(tooltipData)}
+                r={6}
+              />
+            )}
             <VoroniChart
               data={allPoints}
               x={xCoord}
@@ -129,6 +153,18 @@ const ProjectionChart = ({
           </Style.Axis>
         </Group>
       </svg>
+      {/* Tooltip */}
+      {tooltipOpen && (
+        <Style.Tooltip
+          left={marginLeft + xCoord(tooltipData)}
+          top={marginTop + yCoord(tooltipData)}
+        >
+          <Style.TooltipTitle>
+            {moment(x(tooltipData)).format(TOOLTIP_DATE_FORMAT)}
+          </Style.TooltipTitle>
+          <Style.TooltipBody>{formatInteger(y(tooltipData))}</Style.TooltipBody>
+        </Style.Tooltip>
+      )}
     </Style.ChartContainer>
   );
 };

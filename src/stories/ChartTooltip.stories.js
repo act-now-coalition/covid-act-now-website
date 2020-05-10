@@ -1,9 +1,9 @@
 import React from 'react';
-import Tooltip from '../components/VxCharts/Tooltip';
 import {
+  Tooltip,
   TooltipTitle,
   TooltipBody,
-} from '../components/VxCharts/Tooltip.style';
+} from '../components/VxCharts/Charts.style';
 
 export default {
   title: 'Tooltip',

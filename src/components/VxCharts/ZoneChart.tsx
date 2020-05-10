@@ -20,8 +20,6 @@ import {
   last,
   randomizeId,
 } from './utils';
-import Tooltip from './Tooltip';
-import { TooltipTitle, TooltipBody } from './Tooltip.style';
 import * as Style from './Charts.style';
 
 // https://momentjs.com/docs/#/parsing/string-format/
@@ -126,7 +124,7 @@ const RegionChart = ({
 
   const areaRangeChart =
     isDefined(y0) && isDefined(y1) ? (
-      <Style.Area fill="#eee">
+      <Style.Area>
         <Area
           data={data}
           x={xCoord}
@@ -152,7 +150,7 @@ const RegionChart = ({
                 cx={xCoord(tooltipData)}
                 cy={yCoord(tooltipData)}
                 r={6}
-                fill={currentZone.color}
+                fill={getZoneByValue(y(tooltipData))?.color}
               />
             )}
             <VoroniChart
@@ -183,7 +181,6 @@ const RegionChart = ({
             x={xCoord(currentPoint)}
             y={yCoord(currentPoint)}
             dx={5}
-            fill="#000"
           >
             {formatDecimal(y(currentPoint))}
           </Style.TextAnnotation>
@@ -203,15 +200,17 @@ const RegionChart = ({
       ))}
       {/* Tooltip */}
       {tooltipOpen && (
-        <Tooltip
+        <Style.Tooltip
           left={marginLeft + xCoord(tooltipData)}
           top={marginTop + yCoord(tooltipData)}
         >
-          <TooltipTitle>
+          <Style.TooltipTitle>
             {moment(x(tooltipData)).format(TOOLTIP_DATE_FORMAT)}
-          </TooltipTitle>
-          <TooltipBody>{`Rt ${formatDecimal(y(tooltipData))}`}</TooltipBody>
-        </Tooltip>
+          </Style.TooltipTitle>
+          <Style.TooltipBody>{`Rt ${formatDecimal(
+            y(tooltipData),
+          )}`}</Style.TooltipBody>
+        </Style.Tooltip>
       )}
     </Style.ChartContainer>
   );
