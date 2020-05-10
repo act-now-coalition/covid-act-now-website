@@ -80,22 +80,6 @@ export function useProjections(location, county = null) {
   return projections;
 }
 
-export function useStateSummaryData(state) {
-  const [summaryData, setSummaryData] = useState(null);
-  useEffect(() => {
-    if (state) {
-      fetch(`${DATA_URL}/case_summary/${state}.summary.json`)
-        .then(data => data.json())
-        .then(setSummaryData)
-        .catch(err => {
-          throw err;
-        });
-    }
-  }, [state]);
-
-  return summaryData;
-}
-
 export function useAllStateModelDatas(dataUrl = null) {
   const [stateModels, setStateModels] = useState(null);
 

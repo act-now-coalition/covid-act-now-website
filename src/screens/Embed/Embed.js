@@ -11,7 +11,7 @@ import '../../App.css'; /* optional for styling like the :hover pseudo-class */
 import LocationPageHeader from '../../components/LocationPage/LocationPageHeader';
 import ShareModelBlock from '../../components/ShareBlock/ShareModelBlock';
 
-import { useProjections, useStateSummaryData } from 'utils/model';
+import { useProjections } from 'utils/model';
 import { useEmbed } from 'utils/hooks';
 
 import {
@@ -58,28 +58,21 @@ export default function Embed() {
   }, [_location, countyId, countyFipsId]);
 
   const projections = useProjections(location, selectedCounty);
-  const stateSummaryData = useStateSummaryData(location);
   const locationName = STATES[location];
   const intervention = STATE_TO_INTERVENTION[location];
-  let summaryData = stateSummaryData;
-  if (stateSummaryData && selectedCounty) {
-    summaryData = _.find(summaryData.counties, [
-      'fips',
-      selectedCounty.full_fips_code,
-    ]);
-  }
-
-  if (!projections || !summaryData) {
+  if (!projections) {
     return null;
   }
 
-  if (!projections.primary) {
+  const primary = projections.primary;
+  if (!primary) {
     return <span>'No data available for county.'</span>;
   }
 
-  const { cases, deaths } = summaryData;
+  const cases = primary.currentCumulativeCases;
+  const deaths = primary.currentCumulativeDeaths;
 
-  const totalPopulation = projections.baseline.totalPopulation;
+  const totalPopulation = primary.totalPopulation;
   const populationPercentage =
     Number.parseFloat(deaths / totalPopulation).toPrecision(2) * 100;
 
