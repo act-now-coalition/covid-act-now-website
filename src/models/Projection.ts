@@ -28,7 +28,6 @@ const DEFAULT_UTILIZATION = 0.75;
 /** Parameters that can be provided when constructing a Projection. */
 export interface ProjectionParameters {
   intervention: string;
-  isInferred: boolean;
   isCounty: boolean;
 }
 
@@ -62,12 +61,9 @@ export interface RtRange {
 /**
  * Represents a single projection for a given state or county.  Contains a
  * time-series of things like hospitalizations, hospital capacity, infections, etc.
- * The projection is either static or "inferred".  Inferred projections are based
- * on the actual data observed in a given location
  */
 export class Projection {
   readonly locationName: string;
-  readonly isInferred: boolean;
   readonly totalPopulation: number;
   readonly dateOverwhelmed: Date | null;
   readonly totalICUCapacity: number | null;
@@ -114,7 +110,6 @@ export class Projection {
     this.locationName = this.getLocationName(summaryWithTimeseries);
     this.stateName = summaryWithTimeseries.stateName;
     this.intervention = parameters.intervention;
-    this.isInferred = parameters.isInferred;
     this.isCounty = parameters.isCounty;
     this.totalPopulation = summaryWithTimeseries.actuals.population;
 
