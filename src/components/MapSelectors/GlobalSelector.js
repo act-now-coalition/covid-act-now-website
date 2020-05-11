@@ -9,7 +9,6 @@ import US_STATE_DATASET from './datasets/us_states_dataset_01_02_2020';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import {
-  STATE_TO_INTERVENTION,
   STATE_TO_CALCULATED_INTERVENTION_COLOR,
   FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR,
 } from 'enums/interventions';
@@ -31,7 +30,6 @@ import {
 } from './MapSelectors.style';
 
 const StateItem = ({ dataset }) => {
-  const intervention = STATE_TO_INTERVENTION[dataset.state_code];
   const fillColor = STATE_TO_CALCULATED_INTERVENTION_COLOR[dataset.state_code];
 
   return (
@@ -48,10 +46,7 @@ const StateItem = ({ dataset }) => {
       <div>
         <div>{dataset.state}</div>
         <StyledResultsMenuSubText>
-          <span>
-            {intervention && <span>{intervention} • </span>}{' '}
-            {ShortNumber(dataset.population)} residents
-          </span>
+          <span>{ShortNumber(dataset.population)} residents</span>
         </StyledResultsMenuSubText>
       </div>
     </StyledResultsMenuOption>
