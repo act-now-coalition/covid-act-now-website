@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment';
 
 import {
   ChartContentWrapper,
@@ -68,8 +67,6 @@ const ChartsHolder = (props: {
   const projection: Projection = props.projections.primary;
   const noInterventionProjection: Projection = props.projections.baseline;
 
-  const endDate = moment().add(2, 'weeks').toDate();
-
   const { rtRangeData, testPositiveData, icuUtilizationData } = getChartData(
     projection,
   );
@@ -105,7 +102,7 @@ const ChartsHolder = (props: {
               {rtRangeData && (
                 <>
                   <ZoneChartWrapper>
-                    <Chart options={optionsRt(rtRangeData, endDate) as any} />
+                    <Chart options={optionsRt(rtRangeData) as any} />
                   </ZoneChartWrapper>
                   <Disclaimer metricName="infection growth rate">
                     Most experts recommend an infection rate of less than 1.0
@@ -124,9 +121,7 @@ const ChartsHolder = (props: {
                 <>
                   <ZoneChartWrapper>
                     <Chart
-                      options={
-                        optionsPositiveTests(testPositiveData, endDate) as any
-                      }
+                      options={optionsPositiveTests(testPositiveData) as any}
                     />
                   </ZoneChartWrapper>
                   <Disclaimer metricName="positive test rate">
@@ -149,9 +144,7 @@ const ChartsHolder = (props: {
                 <>
                   <ZoneChartWrapper>
                     <Chart
-                      options={
-                        optionsHospitalUsage(icuUtilizationData, endDate) as any
-                      }
+                      options={optionsHospitalUsage(icuUtilizationData) as any}
                     />
                   </ZoneChartWrapper>
                   <Disclaimer metricName="COVID ICU usage">

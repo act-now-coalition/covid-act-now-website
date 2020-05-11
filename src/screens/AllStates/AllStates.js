@@ -28,9 +28,6 @@ function State({ stateId }) {
 
   const projection = projections.primary;
 
-  // TODO(michael): This should probably be some function of today's date?
-  const endDate = new Date('2020-05-15');
-
   const { rtRangeData, testPositiveData, icuUtilizationData } = getChartData(
     projection,
   );
@@ -42,25 +39,21 @@ function State({ stateId }) {
         <div style={{ width: '32%', height: '450px' }}>
           {rtRangeData && (
             <ZoneChartWrapper>
-              <Chart options={optionsRt(rtRangeData, endDate)} />
+              <Chart options={optionsRt(rtRangeData)} />
             </ZoneChartWrapper>
           )}
         </div>
         <div style={{ width: '32%', height: '450px' }}>
           {testPositiveData && (
             <ZoneChartWrapper>
-              <Chart
-                options={optionsPositiveTests(testPositiveData, endDate)}
-              />
+              <Chart options={optionsPositiveTests(testPositiveData)} />
             </ZoneChartWrapper>
           )}
         </div>
         <div style={{ width: '32%', height: '450px' }}>
           {icuUtilizationData && (
             <ZoneChartWrapper>
-              <Chart
-                options={optionsHospitalUsage(icuUtilizationData, endDate)}
-              />
+              <Chart options={optionsHospitalUsage(icuUtilizationData)} />
             </ZoneChartWrapper>
           )}
         </div>
