@@ -13,7 +13,7 @@ import moment from 'moment';
 import * as QueryString from 'query-string';
 
 import ModelChart from 'components/Charts/ModelChart';
-import { INTERVENTIONS, STATES, STATE_TO_INTERVENTION } from 'enums';
+import { STATES } from 'enums';
 import { useAllStateModelDatas } from 'utils/model';
 
 import {
@@ -27,8 +27,6 @@ const SORT_TYPES = {
   ALPHABETICAL: 0,
   OVERWHELMED: 1,
 };
-
-const DEFAULT_INTERVENTION_FILTER = 'All';
 
 export function CompareModels({ match, location }) {
   const history = useHistory();
@@ -50,7 +48,6 @@ export function CompareModels({ match, location }) {
   const leftModelDatas = useAllStateModelDatas(leftUrl);
   const rightModelDatas = useAllStateModelDatas(rightUrl);
 
-  // Now call buildInterventionMap() for each left/right state model datas.
   const leftModels = {},
     rightModels = {};
   const states = Object.keys(STATES);
@@ -84,9 +81,6 @@ export function CompareModels({ match, location }) {
   const [refreshing, setRefreshing] = useState(false);
 
   const [sortType, setSortType] = useState(SORT_TYPES.ALPHABETICAL);
-  const [filterTypeIntervention, setFilterTypeIntervention] = useState(
-    DEFAULT_INTERVENTION_FILTER,
-  );
 
   const sortFunctionMap = {
     [SORT_TYPES.ALPHABETICAL]: sortAlphabetical,
@@ -127,17 +121,10 @@ export function CompareModels({ match, location }) {
     }
   }
 
-  function getDateOverwhelmed(stateAbbr, models) {
-    const interventions = models[stateAbbr];
+  function getDateOverwhelmed(stateAbbr, stateProjections) {
+    const projections = stateProjections[stateAbbr];
 
-    return interventions.worstCaseInterventionModel.dateOverwhelmed;
-  }
-
-  function filterByIntervention(stateAbbr) {
-    return (
-      filterTypeIntervention === DEFAULT_INTERVENTION_FILTER ||
-      filterTypeIntervention === STATE_TO_INTERVENTION[stateAbbr]
-    );
+    return projections.projected.dateOverwhelmed;
   }
 
   function setQueryParams(leftText, rightText) {
@@ -165,10 +152,6 @@ export function CompareModels({ match, location }) {
 
   const changeSort = event => {
     setSortType(event.target.value);
-  };
-
-  const changeInterventionFilter = event => {
-    setFilterTypeIntervention(event.target.value);
   };
 
   // HACK: When we re-sort, etc. LazyLoad doesn't notice that it may be visible.
@@ -238,33 +221,11 @@ export function CompareModels({ match, location }) {
               </div>
             )}
           </FormControl>
-          <FormControl style={{ width: '12rem', marginLeft: '2rem' }}>
-            <InputLabel focused={false}>Filter by intervention:</InputLabel>
-            <Select
-              value={filterTypeIntervention}
-              onChange={changeInterventionFilter}
-            >
-              <MenuItem value={DEFAULT_INTERVENTION_FILTER}>
-                {DEFAULT_INTERVENTION_FILTER}
-              </MenuItem>
-              <MenuItem value={INTERVENTIONS.LIMITED_ACTION}>
-                {INTERVENTIONS.LIMITED_ACTION}
-              </MenuItem>
-              <MenuItem value={INTERVENTIONS.SOCIAL_DISTANCING}>
-                {INTERVENTIONS.SOCIAL_DISTANCING}
-              </MenuItem>
-              <MenuItem value={INTERVENTIONS.SHELTER_IN_PLACE}>
-                {INTERVENTIONS.SHELTER_IN_PLACE}
-              </MenuItem>
-            </Select>
-          </FormControl>
         </ComparisonControlsContainer>
       </ModelSelectorContainer>
 
       <StateComparisonList
-        states={states
-          .filter(filterByIntervention)
-          .sort(sortFunctionMap[sortType])}
+        states={states.sort(sortFunctionMap[sortType])}
         leftModels={leftModels}
         rightModels={rightModels}
         refreshing={refreshing}
