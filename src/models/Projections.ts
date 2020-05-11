@@ -7,8 +7,9 @@ import {
 } from '../enums/interventions';
 import { STATES } from '../enums';
 import { RegionSummaryWithTimeseriesMap } from 'api';
-import { Level, ChartType, getLevelForChart } from 'enums/zones';
-
+import { Metric } from 'enums/metrics';
+import { getLevel } from 'metrics/utils';
+import { Level, LEVEL_COLOR } from 'enums/levels';
 /**
  * The model for the complete set of projections and related information
  * (eg. current intervention) for a given location (state or county).
@@ -98,16 +99,13 @@ export class Projections {
         test_rate_level: Level.UNKNOWN,
       };
 
-    const rt_level = getLevelForChart(
-      ChartType.CASE_GROWTH_RATE,
-      projection.rt,
-    );
-    const hospitalizations_level = getLevelForChart(
-      ChartType.HOSPITAL_USAGE,
+    const rt_level = getLevel(Metric.CASE_GROWTH_RATE, projection.rt);
+    const hospitalizations_level = getLevel(
+      Metric.HOSPITAL_USAGE,
       projection.currentIcuUtilization,
     );
-    const test_rate_level = getLevelForChart(
-      ChartType.POSITIVE_TESTS,
+    const test_rate_level = getLevel(
+      Metric.POSITIVE_TESTS,
       projection.currentTestPositiveRate,
     );
 
@@ -140,15 +138,7 @@ export class Projections {
 
   getAlarmLevelColor() {
     const level = this.getAlarmLevel();
-    if (level === Level.LOW) {
-      return COLOR_MAP.GREEN.BASE;
-    } else if (level === Level.MEDIUM) {
-      return COLOR_MAP.ORANGE.BASE;
-    } else if (level === Level.HIGH) {
-      return COLOR_MAP.RED.BASE;
-    } else {
-      return COLOR_MAP.GRAY.BASE;
-    }
+    return LEVEL_COLOR[level];
   }
 
   getChartSeriesColorMap() {

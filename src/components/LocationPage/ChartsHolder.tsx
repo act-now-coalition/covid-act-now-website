@@ -25,15 +25,9 @@ import {
   optionsHospitalUsage,
   optionsPositiveTests,
 } from 'components/Charts/zoneUtils';
-import {
-  Level,
-  CASE_GROWTH_RATE,
-  POSITIVE_TESTS,
-  HOSPITAL_USAGE,
-  determineZone,
-  ChartType,
-  ChartTypeToTitle,
-} from 'enums/zones';
+import { getLevel, getMetricName } from 'metrics/utils';
+import { Metric } from 'enums/metrics';
+import { Level } from 'enums/levels';
 import { formatDate } from 'utils';
 
 // TODO(michael): These format helpers should probably live in a more
@@ -73,9 +67,9 @@ const ChartsHolder = (props: {
 
   const getChartSummarys = (projection: Projection) => {
     return {
-      [ChartType.CASE_GROWTH_RATE]: projection.rt,
-      [ChartType.HOSPITAL_USAGE]: projection.currentIcuUtilization,
-      [ChartType.POSITIVE_TESTS]: projection.currentTestPositiveRate,
+      [Metric.CASE_GROWTH_RATE]: projection.rt,
+      [Metric.HOSPITAL_USAGE]: projection.currentIcuUtilization,
+      [Metric.POSITIVE_TESTS]: projection.currentTestPositiveRate,
     };
   };
 
@@ -93,7 +87,7 @@ const ChartsHolder = (props: {
             <SummaryStats stats={getChartSummarys(projection)} />
             <MainContentInner>
               <ChartHeader>
-                {ChartTypeToTitle[ChartType.CASE_GROWTH_RATE]}
+                {getMetricName(Metric.CASE_GROWTH_RATE)}
               </ChartHeader>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
               <ChartDescription>
@@ -110,9 +104,7 @@ const ChartsHolder = (props: {
                   </Disclaimer>
                 </>
               )}
-              <ChartHeader>
-                {ChartTypeToTitle[ChartType.POSITIVE_TESTS]}
-              </ChartHeader>
+              <ChartHeader>{getMetricName(Metric.POSITIVE_TESTS)}</ChartHeader>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
               <ChartDescription>
                 {positiveTestsStatusText(projection)}
@@ -133,7 +125,7 @@ const ChartsHolder = (props: {
                 </>
               )}
               <ChartHeader>
-                {ChartTypeToTitle[ChartType.HOSPITAL_USAGE]}
+                {getMetricName(Metric.HOSPITAL_USAGE)}
                 <BetaTag>Beta</BetaTag>
               </ChartHeader>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
@@ -247,7 +239,7 @@ function caseGrowthStatusText(projection: Projection) {
   if (rt === null) {
     return 'No case load data is available.';
   }
-  const level = determineZone(CASE_GROWTH_RATE, rt);
+  const level = getLevel(Metric.CASE_GROWTH_RATE, rt);
   const additionalPeople = formatDecimal(rt);
   const infectionRate = `On average, each person in ${projection.locationName} with COVID is infecting ${additionalPeople} other people.`;
 
@@ -266,7 +258,7 @@ function positiveTestsStatusText(projection: Projection) {
   if (testPositiveRate === null) {
     return 'No testing data is available.';
   }
-  const level = determineZone(POSITIVE_TESTS, testPositiveRate);
+  const level = getLevel(Metric.POSITIVE_TESTS, testPositiveRate);
   const lowSizableLarge = levelText(
     level,
     'low',
@@ -299,7 +291,7 @@ function hospitalOccupancyStatusText(projection: Projection) {
   ) {
     return 'No ICU occupancy data is available.';
   }
-  const level = determineZone(HOSPITAL_USAGE, currentIcuUtilization);
+  const level = getLevel(Metric.HOSPITAL_USAGE, currentIcuUtilization);
 
   const location = projection.locationName;
 

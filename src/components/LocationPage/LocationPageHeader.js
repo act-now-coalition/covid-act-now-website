@@ -1,6 +1,7 @@
 import React from 'react';
 import { COLOR_MAP } from 'enums/interventions';
-import { LEGEND_TEXT, Level } from 'enums/zones';
+import { Level } from 'enums/levels';
+import { LOCATION_SUMMARY_LEVELS } from 'metrics/location_summary';
 import { useEmbed } from 'utils/hooks';
 import palette from 'assets/theme/palette';
 
@@ -35,7 +36,7 @@ function LocationPageHeading({ projections }) {
 const LocationPageHeader = ({ projections }) => {
   const { isEmbed } = useEmbed();
   const alarmLevel = projections.getAlarmLevel();
-  const levelInfo = LEGEND_TEXT[alarmLevel];
+  const levelInfo = LOCATION_SUMMARY_LEVELS[alarmLevel];
   const [fillColor, textColor] =
     alarmLevel !== Level.UNKNOWN
       ? [levelInfo.color, palette.secondary.contrastText]

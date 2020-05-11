@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import '../../App.css'; /* optional for styling like the :hover pseudo-class */
 import { useHistory } from 'react-router-dom';
 import { REVERSED_STATES } from 'enums';
-import { LEGEND_TEXT, Level } from 'enums/zones';
+import { Level } from 'enums/levels';
+import { LOCATION_SUMMARY_LEVELS } from 'metrics/location_summary';
 import { Legend, LegendItem } from './Legend';
 import USACountyMap from './USACountyMap';
 import { MAP_FILTERS } from '../../screens/LocationPage/Enums/MapFilterEnums';
@@ -51,21 +52,21 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
         <Legend>
           <LegendItem
             key={'legend-3'}
-            title={LEGEND_TEXT[Level.HIGH].name}
-            color={LEGEND_TEXT[Level.HIGH].color}
-            description={LEGEND_TEXT[Level.HIGH].detail}
+            title={LOCATION_SUMMARY_LEVELS[Level.HIGH].name}
+            color={LOCATION_SUMMARY_LEVELS[Level.HIGH].color}
+            description={LOCATION_SUMMARY_LEVELS[Level.HIGH].detail}
           />
           <LegendItem
             key={'legend-2'}
-            title={LEGEND_TEXT[Level.MEDIUM].name}
-            color={LEGEND_TEXT[Level.MEDIUM].color}
-            description={LEGEND_TEXT[Level.MEDIUM].detail}
+            title={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].name}
+            color={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].color}
+            description={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].detail}
           />
           <LegendItem
             key={'legend-1'}
-            title={LEGEND_TEXT[Level.LOW].name}
-            color={LEGEND_TEXT[Level.LOW].color}
-            description={LEGEND_TEXT[Level.LOW].detail}
+            title={LOCATION_SUMMARY_LEVELS[Level.LOW].name}
+            color={LOCATION_SUMMARY_LEVELS[Level.LOW].color}
+            description={LOCATION_SUMMARY_LEVELS[Level.LOW].detail}
           />
         </Legend>
       )}

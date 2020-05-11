@@ -12,12 +12,10 @@ import {
   titleCase,
   zoneAnnotations,
 } from './utils';
-import {
-  CASE_GROWTH_RATE,
-  HOSPITAL_USAGE,
-  POSITIVE_TESTS,
-  Level,
-} from '../../enums/zones';
+import { CASE_GROWTH_RATE_LEVELS } from 'metrics/case_growth';
+import { POSITIVE_TESTS_LEVELS } from 'metrics/test_rates';
+import { HOSPITAL_USAGE_LEVELS } from 'metrics/hospitalizations';
+import { Level } from '../../enums/levels';
 import { RT_TRUNCATION_DAYS } from '../../models/Projection';
 
 const CHART_END_DATE = moment().add(2, 'weeks').toDate();
@@ -35,9 +33,9 @@ const getHighchartZones = zone => [
   toHighchartZone(zone.HIGH, Level.HIGH),
 ];
 
-const ZONES_RT = getHighchartZones(CASE_GROWTH_RATE);
-const ZONES_POSITIVE_RATE = getHighchartZones(POSITIVE_TESTS);
-const ZONES_HOSPITAL_USAGE = getHighchartZones(HOSPITAL_USAGE);
+const ZONES_RT = getHighchartZones(CASE_GROWTH_RATE_LEVELS);
+const ZONES_POSITIVE_RATE = getHighchartZones(POSITIVE_TESTS_LEVELS);
+const ZONES_HOSPITAL_USAGE = getHighchartZones(HOSPITAL_USAGE_LEVELS);
 
 export const optionsRt = data => {
   const zones = ZONES_RT;
