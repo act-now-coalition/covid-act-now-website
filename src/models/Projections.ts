@@ -246,22 +246,6 @@ export class Projections {
   populateInterventions(
     summaryWithTimeseriesMap: RegionSummaryWithTimeseriesMap,
   ) {
-    const fipsBlacklist = [
-      '13275',
-      '18019',
-      '22089',
-      '22101',
-      '24021',
-      '28025',
-      '28083',
-      '31079',
-      '36079',
-      '39035',
-      '39109',
-      '41047',
-      '47065',
-      '50007',
-    ];
     for (const intervention in summaryWithTimeseriesMap) {
       const summaryWithTimeseries = summaryWithTimeseriesMap[intervention];
       let projection = null;
@@ -277,15 +261,8 @@ export class Projections {
       } else if (intervention === INTERVENTIONS.SHELTER_IN_PLACE) {
         this.distancing = { now: projection };
       } else if (intervention === INTERVENTIONS.PROJECTED) {
-        if (
-          !this.county ||
-          fipsBlacklist.indexOf(this.county.full_fips_code) === -1
-        ) {
-          this.projected = projection;
-          this.supportsInferred = !!this.projected;
-        } else {
-          console.log('Blacklisted inference projection');
-        }
+        this.projected = projection;
+        this.supportsInferred = !!this.projected;
       } else if (intervention === INTERVENTIONS.SOCIAL_DISTANCING) {
         this.distancingPoorEnforcement = { now: projection };
       }
