@@ -29,7 +29,7 @@ const ModelChart = ({
     className: 'limited-action',
     name: 'If all restrictions are lifted',
     type: 'spline',
-    data: noActionDataset.data.filter(isFuture),
+    data: noActionDataset.filter(isFuture),
     marker: {
       symbol: 'circle',
     },
@@ -44,7 +44,7 @@ const ModelChart = ({
     className: 'projected',
     name: 'Projected based on current trends',
     type: 'spline',
-    data: projectedDataset.data.filter(isFuture),
+    data: projectedDataset.filter(isFuture),
     marker: {
       symbol: 'circle',
     },
@@ -58,7 +58,7 @@ const ModelChart = ({
     className: 'hospitalizations',
     name: 'Hospitalizations',
     type: 'spline',
-    data: projectedDataset.data.filter(d => !isFuture(d)),
+    data: projectedDataset.filter(d => !isFuture(d)),
     color: 'black',
     marker: {
       symbol: 'circle',
@@ -73,7 +73,7 @@ const ModelChart = ({
     className: 'beds',
     name: 'Available hospital beds',
     type: 'spline',
-    data: bedsDataset.data,
+    data: bedsDataset,
     marker: {
       symbol: 'circle',
     },

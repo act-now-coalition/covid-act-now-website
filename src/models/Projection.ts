@@ -37,11 +37,6 @@ export interface Column {
   y: any;
 }
 
-export interface ProjectionDataset {
-  label: string;
-  data: Column[];
-}
-
 // TODO(michael): Rework the way we expose datasets (use an enum or separate
 // functions instead of magic strings).
 // These names must match exactly the field in `Projection` that stores the
@@ -279,11 +274,8 @@ export class Projection {
     }));
   }
 
-  getDataset(dataset: DatasetId, customLabel?: string): ProjectionDataset {
-    return {
-      label: customLabel ? customLabel : this.label,
-      data: this.getColumn(dataset),
-    };
+  getDataset(dataset: DatasetId): Column[] {
+    return this.getColumn(dataset);
   }
 
   /** Makes a dictionary from a timerseries to a row so that we can look up the values
