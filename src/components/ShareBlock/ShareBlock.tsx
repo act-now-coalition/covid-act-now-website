@@ -108,11 +108,10 @@ const ShareBlock = ({
           <SocialTextAreaWrapper>
             <SocialTextArea>
               <ShareInstructionHeader>
-                Share data, save lives
+                Share metrics to reopen
               </ShareInstructionHeader>
               <ShareInstructionBody>
-                Save lives by sharing useful data with your neighbors, friends,
-                family and coworkers.
+                Share local COVID data with your neighbors, friends, and family.
               </ShareInstructionBody>
               <ShareButtonContainer reflow>
                 <StyledShareButton
