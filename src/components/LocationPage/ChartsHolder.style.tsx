@@ -7,6 +7,10 @@ export const ChartContentWrapper = styled.div`
   @media (min-width: 1350px) {
     margin-top: 97px;
   }
+
+  @media print {
+    margin-top: 0;
+  }
 `;
 
 export const MainContentInner = styled.div`
@@ -24,12 +28,22 @@ export const MainContentInner = styled.div`
   @media (min-width: 1750px) {
     margin: 0 auto;
   }
+
+  @media print {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 3rem;
+  }
 `;
 
 export const ChartHeader = styled.div`
   margin: 4.875rem 0 0.25rem;
   font-weight: 700;
   font-size: 1.5rem;
+
+  @media print {
+    page-break-before: always;
+  }
 `;
 
 export const ChartLocationName = styled(Typography)`
