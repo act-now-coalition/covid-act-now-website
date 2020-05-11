@@ -10,7 +10,11 @@ export const ShareSpacer = styled.div`
   }
 `;
 
-export const ShareContainer = styled.div``;
+export const ShareContainer = styled.div`
+  @media print {
+    display: none;
+  }
+`;
 
 export const ShareInstructionHeader = styled(Typography)`
   margin-top: 0;

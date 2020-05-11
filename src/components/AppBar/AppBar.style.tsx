@@ -25,6 +25,10 @@ export const StyledAppBar = styled(AppBar)`
   @media (min-width: 1350px) {
     border-bottom: 1px solid ${COLORS.LIGHTGRAY};
   }
+
+  @media print {
+    border-bottom: 0;
+  }
 `;
 
 export const Left = styled.div`
@@ -135,6 +139,9 @@ export const StyledBurger = styled.button<{ open: boolean }>`
 export const StyledMobileMenu = styled.nav`
   display: inherit;
   @media (min-width: ${mobileBreakpoint}) {
+    display: none;
+  }
+  @media print {
     display: none;
   }
 `;

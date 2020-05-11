@@ -15,6 +15,10 @@ export const StyledNoResultsWrapper = styled.div`
   @media (min-width: 1750px) {
     margin: 97px auto 0;
   }
+
+  @media print {
+    margin-top: 0;
+  }
 `;
 
 export const StyledNoResults = styled.div`

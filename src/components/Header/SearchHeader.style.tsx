@@ -11,6 +11,10 @@ export const Wrapper = styled.div`
     padding: 1rem 0 calc(1rem + 1px) 0; /* The extra pixel aligns the bottom border with the adjacent map box */
     background-color: #f2f2f2;
   }
+
+  @media print {
+    display: none;
+  }
 `;
 
 export const Content = styled.div`
@@ -69,4 +73,8 @@ export const SearchHeaderWrapper = styled.div`
   z-index: 900;
   border-bottom: 1px solid #e3e3e3;
   border-top: 1px solid #e3e3e3;
+
+  @media print {
+    display: none;
+  }
 `;
