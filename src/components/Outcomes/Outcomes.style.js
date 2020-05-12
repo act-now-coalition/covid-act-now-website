@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLORS } from 'enums';
+import { COLORS } from 'common';
 
 export const OutcomesWrapper = styled.div`
   margin-bottom: 2em;

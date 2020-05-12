@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import _ from 'lodash';
 import { dateFormat, numberFormat } from 'highcharts';
 import moment from 'moment';
-import { INTERVENTIONS } from 'enums/interventions';
+import { INTERVENTIONS } from 'common/interventions';
 import Chart from './Chart';
 import {
   ChartContainer,
@@ -11,8 +11,8 @@ import {
   CondensedLegendItemStyled,
 } from './ModelChart.style';
 import Outcomes from '../Outcomes/Outcomes';
-import { COLORS } from 'enums';
-import { formatDate } from 'utils';
+import { COLORS } from 'common';
+import { formatDate } from 'common/utils';
 
 const formatIntervention = (intervention, optCase) =>
   `3 months of ${intervention.toLowerCase()}${optCase || ''}`;

@@ -11,8 +11,8 @@ import {
 import LocationPageHeader from 'components/LocationPage/LocationPageHeader';
 import NoCountyDetail from './NoCountyDetail';
 import ModelChart from 'components/Charts/ModelChart';
-import { Projections } from 'models/Projections';
-import { Projection } from 'models/Projection';
+import { Projections } from 'common/models/Projections';
+import { Projection } from 'common/models/Projection';
 import SummaryStats from 'components/SummaryStats/SummaryStats';
 import Disclaimer from 'components/Disclaimer/Disclaimer';
 import { ZoneChartWrapper } from 'components/Charts/ZoneChart.style';
@@ -25,10 +25,10 @@ import {
   optionsHospitalUsage,
   optionsPositiveTests,
 } from 'components/Charts/zoneUtils';
-import { getLevel, getMetricName } from 'metrics/utils';
-import { Metric } from 'enums/metrics';
-import { Level } from 'enums/levels';
-import { formatDate } from 'utils';
+import { getLevel, getMetricName } from 'common/metric';
+import { Metric } from 'common/metric';
+import { Level } from 'common/level';
+import { formatDate } from 'common/utils';
 
 // TODO(michael): These format helpers should probably live in a more
 // general-purpose location, not just for charts.

@@ -7,9 +7,11 @@ import {
   ZoomableGroup,
 } from 'react-simple-maps';
 import ReactTooltip from 'react-tooltip';
-import STATE_CENTERS from '../../enums/us_state_centers';
-import { FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR } from 'enums/interventions';
-import { COLOR_MAP } from 'enums/interventions';
+import STATE_CENTERS from '../../common/us_state_centers';
+import {
+  FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR,
+  COLOR_MAP,
+} from 'common/colors';
 import { CountyMapWrapper, CountyMapLayerWrapper } from './CountyMap.style';
 
 const CountyMap = ({ selectedCounty, setSelectedCounty }) => {

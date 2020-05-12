@@ -1,6 +1,6 @@
 import React from 'react';
-import { Projections } from 'models/Projections';
-import { useModelLastUpdatedDate } from 'utils/model';
+import { Projections } from 'common/models/Projections';
+import { useModelLastUpdatedDate } from 'common/utils/model';
 
 import {
   Wrapper,
@@ -15,10 +15,10 @@ import {
   FooterText,
   MapWrapper,
 } from './SocialLocationPreview.style';
-import { Level } from 'enums/levels';
-import { LOCATION_SUMMARY_LEVELS } from 'metrics/location_summary';
+import { Level } from 'common/level';
+import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import Map from 'components/Map/Map';
-import { COLOR_MAP } from 'enums/interventions';
+import { COLOR_MAP } from 'common/colors';
 import SummaryStats from 'components/SummaryStats/SummaryStats';
 import { Legend, LegendItem } from 'components/Map/Legend';
 

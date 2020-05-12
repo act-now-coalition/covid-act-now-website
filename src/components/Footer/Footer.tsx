@@ -2,7 +2,7 @@ import React from 'react';
 import Logo from 'assets/images/footerlogoDarkWithURL';
 import { useHistory, useLocation } from 'react-router-dom';
 
-import { useEmbed } from 'utils/hooks';
+import { useEmbed } from 'common/utils/hooks';
 
 import FooterSocialLinks from './FooterSocialLinks';
 import {

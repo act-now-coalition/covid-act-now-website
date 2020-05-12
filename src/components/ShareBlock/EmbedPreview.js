@@ -17,7 +17,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import Typography from '@material-ui/core/Typography';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import { useEmbed } from 'utils/hooks';
+import { useEmbed } from 'common/utils/hooks';
 
 export default function EmbedPreview({ open, onClose, county }) {
   const {

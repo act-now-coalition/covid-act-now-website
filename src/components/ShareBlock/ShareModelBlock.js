@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ShareBlock from './ShareBlock';
-import { STATES } from 'enums';
+import { STATES } from 'common';
 
 import EmbedPreview from './EmbedPreview';
 

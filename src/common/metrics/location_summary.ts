@@ -1,24 +1,18 @@
-import { COLOR_MAP } from 'enums/interventions';
-import { Level, Levels } from 'enums/levels';
+import { COLOR_MAP } from 'common/colors';
+import { Level, LevelInfoMap } from 'common/level';
 
 const LOW_NAME = 'Reduced';
 const MEDIUM_NAME = 'Moderate';
 const HIGH_NAME = 'Elevated';
 const UNKNOWN = 'Unknown';
 
-/**
- * Short descriptions are a quick text about the given metric and it's level.
- * They live in the summary component per location. The location summary lives
- * at the page header and describes the overall status of the location.
- */
 const SHORT_DESCRIPTION_LOW = 'Reduced risk based on reopening metrics.';
 const SHORT_DESCRIPTION_MEDIUM = 'Moderate risk based on reopening metrics.';
 const SHORT_DESCRIPTION_HIGH = 'Elevated risk based on reopening metrics.';
 const SHORT_DESCRIPTION_UNKNWON =
   'We don’t have enough data to assess reopening risk.';
 
-// For the summary text
-export const LOCATION_SUMMARY_LEVELS: Levels = {
+export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
   [Level.LOW]: {
     level: Level.LOW,
     upperLimit: 0,

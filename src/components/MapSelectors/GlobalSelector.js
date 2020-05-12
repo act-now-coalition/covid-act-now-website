@@ -3,7 +3,7 @@ import { chain, each, map, some } from 'lodash';
 import { useParams } from 'react-router-dom';
 import Downshift from 'downshift';
 import SearchIcon from '@material-ui/icons/Search';
-import ShortNumber from 'utils/ShortNumber';
+import ShortNumber from 'common/utils/ShortNumber';
 import StateCircleSvg from 'components/StateSvg/StateCircleSvg';
 import US_STATE_DATASET from './datasets/us_states_dataset_01_02_2020';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -11,7 +11,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import {
   STATE_TO_CALCULATED_INTERVENTION_COLOR,
   FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR,
-} from 'enums/interventions';
+} from 'common/colors';
 
 import {
   StyledDropDownWrapper,

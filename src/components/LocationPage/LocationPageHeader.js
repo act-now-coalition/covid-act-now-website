@@ -1,8 +1,8 @@
 import React from 'react';
-import { COLOR_MAP } from 'enums/interventions';
-import { Level } from 'enums/levels';
-import { LOCATION_SUMMARY_LEVELS } from 'metrics/location_summary';
-import { useEmbed } from 'utils/hooks';
+import { COLOR_MAP } from 'common/colors';
+import { Level } from 'common/level';
+import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
+import { useEmbed } from 'common/utils/hooks';
 import palette from 'assets/theme/palette';
 
 import {

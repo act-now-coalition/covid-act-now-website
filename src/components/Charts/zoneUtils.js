@@ -12,30 +12,30 @@ import {
   titleCase,
   zoneAnnotations,
 } from './utils';
-import { CASE_GROWTH_RATE_LEVELS } from 'metrics/case_growth';
-import { POSITIVE_TESTS_LEVELS } from 'metrics/test_rates';
-import { HOSPITAL_USAGE_LEVELS } from 'metrics/hospitalizations';
-import { Level } from '../../enums/levels';
-import { RT_TRUNCATION_DAYS } from '../../models/Projection';
+import { CASE_GROWTH_RATE_LEVEL_INFO_MAP } from 'common/metrics/case_growth';
+import { POSITIVE_TESTS_LEVEL_INFO_MAP } from 'common/metrics/positive_rate';
+import { HOSPITAL_USAGE_LEVEL_INFO_MAP } from 'common/metrics/hospitalizations';
+import { Level } from '../../common/level';
+import { RT_TRUNCATION_DAYS } from '../../common/models/Projection';
 
 const CHART_END_DATE = moment().add(2, 'weeks').toDate();
-const toHighchartZone = (zone, level) => ({
-  color: zone.color,
-  name: zone.name,
-  value: isFinite(zone.upperLimit) ? zone.upperLimit : undefined,
+const toHighchartZone = (levelInfo, level) => ({
+  color: levelInfo.color,
+  name: levelInfo.name,
+  value: isFinite(levelInfo.upperLimit) ? levelInfo.upperLimit : undefined,
   className: 'ZoneChart__Line',
   labelClassName: `ZoneAnnotation ZoneAnnotation--${titleCase(level)}`,
 });
 
-const getHighchartZones = zone => [
-  toHighchartZone(zone.LOW, Level.LOW),
-  toHighchartZone(zone.MEDIUM, Level.MEDIUM),
-  toHighchartZone(zone.HIGH, Level.HIGH),
+const getHighchartZones = levelInfoMap => [
+  toHighchartZone(levelInfoMap[Level.LOW], Level.LOW),
+  toHighchartZone(levelInfoMap[Level.MEDIUM], Level.MEDIUM),
+  toHighchartZone(levelInfoMap[Level.HIGH], Level.HIGH),
 ];
 
-const ZONES_RT = getHighchartZones(CASE_GROWTH_RATE_LEVELS);
-const ZONES_POSITIVE_RATE = getHighchartZones(POSITIVE_TESTS_LEVELS);
-const ZONES_HOSPITAL_USAGE = getHighchartZones(HOSPITAL_USAGE_LEVELS);
+const ZONES_RT = getHighchartZones(CASE_GROWTH_RATE_LEVEL_INFO_MAP);
+const ZONES_POSITIVE_RATE = getHighchartZones(POSITIVE_TESTS_LEVEL_INFO_MAP);
+const ZONES_HOSPITAL_USAGE = getHighchartZones(HOSPITAL_USAGE_LEVEL_INFO_MAP);
 
 export const optionsRt = data => {
   const zones = ZONES_RT;

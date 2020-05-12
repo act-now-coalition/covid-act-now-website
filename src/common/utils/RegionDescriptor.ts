@@ -1,4 +1,4 @@
-import { assertStateId, assertCountyId } from 'utils';
+import { assertStateId, assertCountyId } from 'common/utils';
 
 export enum RegionAggregateDescriptor {
   // NOTE: These strings must match the API endpoints.

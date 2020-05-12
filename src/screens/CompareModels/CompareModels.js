@@ -13,8 +13,8 @@ import moment from 'moment';
 import * as QueryString from 'query-string';
 
 import ModelChart from 'components/Charts/ModelChart';
-import { INTERVENTIONS, STATES, STATE_TO_INTERVENTION } from 'enums';
-import { useAllStateModelDatas } from 'utils/model';
+import { INTERVENTIONS, STATES, STATE_TO_INTERVENTION } from 'common';
+import { useAllStateModelDatas } from 'common/utils/model';
 
 import {
   Wrapper,

@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { COLORS } from 'enums';
-import { INTERVENTIONS } from 'enums/interventions';
+import { COLORS } from 'common';
+import { INTERVENTIONS } from 'common/interventions';
 import palette from 'assets/theme/palette';
 import { snakeCase } from 'lodash';
 import { colors } from '@material-ui/core';
-import { COLOR_MAP } from '../../enums/interventions';
+import { COLOR_MAP } from '../../common/colors';
 
 const chartFontFamily = "'Source Code Pro', 'Roboto', sans-serif";
 

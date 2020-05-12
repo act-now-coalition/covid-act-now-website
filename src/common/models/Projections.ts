@@ -1,15 +1,13 @@
 import moment from 'moment';
-import { Projection } from '../models/Projection';
-import {
-  INTERVENTIONS,
-  STATE_TO_INTERVENTION,
-  COLOR_MAP,
-} from '../enums/interventions';
-import { STATES } from '../enums';
+import { Projection } from './Projection';
+import { INTERVENTIONS, STATE_TO_INTERVENTION } from '../interventions';
+import { COLOR_MAP } from '../colors';
+import { STATES } from '..';
 import { RegionSummaryWithTimeseriesMap } from 'api';
-import { Metric } from 'enums/metrics';
-import { getLevel } from 'metrics/utils';
-import { Level, LEVEL_COLOR } from 'enums/levels';
+import { Metric, getLevel } from 'common/metric';
+import { Level } from 'common/level';
+import { LEVEL_COLOR } from 'common/colors';
+
 /**
  * The model for the complete set of projections and related information
  * (eg. current intervention) for a given location (state or county).

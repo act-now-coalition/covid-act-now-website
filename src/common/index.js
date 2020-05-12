@@ -5,10 +5,10 @@ import COLORS from './colors';
 import {
   INTERVENTIONS,
   STATE_TO_INTERVENTION,
-  INTERVENTION_COLOR_MAP,
   INTERVENTION_DESCRIPTIONS,
   INTERVENTION_EFFICACY_ORDER_ASC,
 } from './interventions';
+import { INTERVENTION_COLOR_MAP } from './colors';
 
 const REVERSED_STATES = invert(STATES);
 

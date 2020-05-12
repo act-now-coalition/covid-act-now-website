@@ -1,6 +1,6 @@
 import React from 'react';
-import { Metric } from 'enums/metrics';
-import { getMetricName, getLevelInfo } from 'metrics/utils';
+import { Metric } from 'common/metric';
+import { getMetricName, getLevelInfo } from 'common/metric';
 
 import {
   SummaryStatsWrapper,

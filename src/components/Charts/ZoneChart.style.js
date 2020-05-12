@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import palette from '../../assets/theme/palette';
-import { LEVEL_COLOR } from '../../enums/levels';
+import { LEVEL_COLOR } from '../../common/colors';
 
 const chartFontFamily = "'Source Code Pro', 'Roboto', sans-serif";
 

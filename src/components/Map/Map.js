@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import '../../App.css'; /* optional for styling like the :hover pseudo-class */
 import { useHistory } from 'react-router-dom';
-import { REVERSED_STATES } from 'enums';
-import { Level } from 'enums/levels';
-import { LOCATION_SUMMARY_LEVELS } from 'metrics/location_summary';
+import { REVERSED_STATES } from 'common';
+import { Level } from 'common/level';
+import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { Legend, LegendItem } from './Legend';
 import USACountyMap from './USACountyMap';
 import { MAP_FILTERS } from '../../screens/LocationPage/Enums/MapFilterEnums';

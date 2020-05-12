@@ -1,26 +1,23 @@
-import { COLOR_MAP } from 'enums/interventions';
-import { Level, Levels } from 'enums/levels';
+import { COLOR_MAP } from 'common/colors';
+import { Level, LevelInfoMap } from 'common/level';
 
-export const METRIC_NAME = 'ICU headroom used';
-
-// SHORT_DESCRIPTION --> HOSPITAL USAGE
-const SHORT_DESCRIPTION_LOW = 'Can likely handle a new wave of COVID';
-const SHORT_DESCRIPTION_MEDIUM = 'At risk to a new wave of COVID';
-const SHORT_DESCRIPTION_HIGH = 'Unable to handle a new wave of COVID';
-const SHORT_DESCRIPTION_UNKNOWN = 'Insufficient data to assess';
-
-// LIMITS --> HOSPITAL USAGE
-const LIMIT_LOW = 0.7;
-const LIMIT_MEDIUM = 0.95;
-const LIMIT_HIGH = Infinity;
+export const METRIC_NAME = 'Positive test rate';
 
 const LOW_NAME = 'Reduced';
 const MEDIUM_NAME = 'Moderate';
 const HIGH_NAME = 'Elevated';
 const UNKNOWN = 'Unknown';
 
-// Hospital Usage (upperLimit as %)
-export const HOSPITAL_USAGE_LEVELS: Levels = {
+const SHORT_DESCRIPTION_LOW = 'Indicates testing is widespread';
+const SHORT_DESCRIPTION_MEDIUM = 'Indicates testing is not widespread';
+const SHORT_DESCRIPTION_HIGH = 'Indicates testing is limited';
+const SHORT_DESCRIPTION_UNKNOWN = 'Insufficient data to assess';
+
+const LIMIT_LOW = 0.03;
+const LIMIT_MEDIUM = 0.1;
+const LIMIT_HIGH = Infinity;
+
+export const POSITIVE_TESTS_LEVEL_INFO_MAP: LevelInfoMap = {
   [Level.LOW]: {
     level: Level.LOW,
     upperLimit: LIMIT_LOW,

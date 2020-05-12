@@ -1,5 +1,5 @@
-import { COLOR_MAP } from 'enums/interventions';
-import { Level, Levels } from 'enums/levels';
+import { COLOR_MAP } from 'common/colors';
+import { Level, LevelInfoMap } from 'common/level';
 
 export const METRIC_NAME = 'Infection growth rate';
 
@@ -17,7 +17,7 @@ const MEDIUM_NAME = 'Moderate';
 const HIGH_NAME = 'Elevated';
 const UNKNOWN = 'Unknown';
 
-export const CASE_GROWTH_RATE_LEVELS: Levels = {
+export const CASE_GROWTH_RATE_LEVEL_INFO_MAP: LevelInfoMap = {
   [Level.LOW]: {
     level: Level.LOW,
     upperLimit: LIMIT_LOW,

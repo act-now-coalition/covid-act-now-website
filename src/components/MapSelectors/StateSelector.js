@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import Select, { components } from 'react-select';
 import CustomStyles from './CustomStyles';
 import BaseValueContainer from './BaseValueContainer';
-import ShortNumber from 'utils/ShortNumber';
+import ShortNumber from 'common/utils/ShortNumber';
 import StateCircleSvg from 'components/StateSvg/StateCircleSvg';
 import US_STATE_DATASET from './datasets/us_states_dataset_01_02_2020';
 
-import { STATE_TO_INTERVENTION } from 'enums';
+import { STATE_TO_INTERVENTION } from 'common';
 
 import {
   // StyledDot,
