@@ -10,6 +10,11 @@ export const OutcomesWrapper = styled.div`
     font-weight: 700;
     margin-bottom: 1.5rem;
   }
+
+  @media print {
+    page-break-before: always;
+    padding-top: 6rem;
+  }
 `;
 
 export const OutcomesTable = styled.div`

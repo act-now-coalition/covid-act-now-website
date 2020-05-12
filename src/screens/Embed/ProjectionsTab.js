@@ -2,8 +2,6 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import PeopleIcon from '@material-ui/icons/People';
-import InterventionIcon from 'assets/images/interventionIcon';
-import { INTERVENTION_COLOR_MAP } from 'enums';
 import {
   H1Statistic,
   PaddedGridItem,
@@ -17,7 +15,6 @@ import {
 export default function DataPage({
   cases,
   deaths,
-  intervention,
   totalPopulation,
   deathsPercentage,
   populationPercentage,
@@ -55,7 +52,6 @@ export default function DataPage({
       </Grid>
       <Grid container item xs={12}>
         <TotalPopulation population={totalPopulation} />
-        <CurrentIntervention intervention={intervention} />
       </Grid>
     </Grid>
   );
@@ -63,20 +59,10 @@ export default function DataPage({
 
 function TotalPopulation({ population }) {
   return (
-    <PaddedGridItem br bt bb xs={6} direction="column">
+    <PaddedGridItem br bt bb xs={12} direction="column">
       <PeopleIcon />
       <H3Statistic>{new Intl.NumberFormat().format(population)}</H3Statistic>
       <H4Statistic>Total Population</H4Statistic>
-    </PaddedGridItem>
-  );
-}
-
-function CurrentIntervention({ intervention }) {
-  return (
-    <PaddedGridItem bt bb xs={6} direction="column">
-      <InterventionIcon color={INTERVENTION_COLOR_MAP[intervention]} />
-      <H3Statistic>{intervention}</H3Statistic>
-      <H4Statistic>Official Policy</H4Statistic>
     </PaddedGridItem>
   );
 }

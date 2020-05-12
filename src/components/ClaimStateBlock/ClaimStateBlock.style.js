@@ -11,6 +11,10 @@ export const ClaimStateWrapper = styled.div`
   @media (min-width: 600px) {
     padding: 3.5rem 1rem;
   }
+
+  @media print {
+    display: none;
+  }
 `;
 
 export const ClaimStateContainer = styled.div`

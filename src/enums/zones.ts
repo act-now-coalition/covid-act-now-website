@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { COLOR_MAP } from './interventions';
 import { fail } from 'assert';
 
@@ -181,6 +182,8 @@ const CHART_ZONES = {
   [ChartType.POSITIVE_TESTS]: POSITIVE_TESTS,
   [ChartType.HOSPITAL_USAGE]: HOSPITAL_USAGE,
 };
+
+export const CHART_END_DATE = moment().add(2, 'weeks').toDate();
 
 export function getChartColumnFromChartType(chartType: ChartType): string {
   if (chartType === ChartType.CASE_GROWTH_RATE) {

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React, { useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
-import { STATES, STATE_TO_INTERVENTION } from 'enums';
+import { STATES } from 'enums';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Drawer from '@material-ui/core/Drawer';
@@ -59,7 +59,7 @@ export default function Embed() {
 
   const projections = useProjections(location, selectedCounty);
   const locationName = STATES[location];
-  const intervention = STATE_TO_INTERVENTION[location];
+
   if (!projections) {
     return null;
   }
@@ -87,7 +87,6 @@ export default function Embed() {
           location={location}
           locationName={locationName}
           countyName={selectedCounty?.county}
-          intervention={intervention}
           projections={projections}
         />
         <Tabs value={tabState} variant="fullWidth" onChange={handleTabChange}>
@@ -100,16 +99,12 @@ export default function Embed() {
           <ProjectionsTab
             cases={cases}
             deaths={deaths}
-            intervention={intervention}
             totalPopulation={totalPopulation}
             deathsPercentage={deathsPercentage}
             populationPercentage={populationPercentage}
           />
         ) : (
-          <ChartsTab
-            projections={projections}
-            currentIntervention={intervention}
-          />
+          <ChartsTab projections={projections} />
         )}
       </EmbedContentContainer>
       <EmbedFooter onShare={() => setShareDrawerOpen(true)} />

@@ -14,6 +14,7 @@ import {
 } from './utils';
 import {
   CASE_GROWTH_RATE,
+  CHART_END_DATE,
   HOSPITAL_USAGE,
   POSITIVE_TESTS,
   Level,
@@ -38,7 +39,7 @@ const ZONES_RT = getHighchartZones(CASE_GROWTH_RATE);
 const ZONES_POSITIVE_RATE = getHighchartZones(POSITIVE_TESTS);
 const ZONES_HOSPITAL_USAGE = getHighchartZones(HOSPITAL_USAGE);
 
-export const optionsRt = (data, endDate) => {
+export const optionsRt = data => {
   const zones = ZONES_RT;
   const [minY, maxY] = [0, getMaxY(data)];
   const [minYAxis, maxYAxis] = getYAxisLimits(minY, maxY, zones);
@@ -56,7 +57,7 @@ export const optionsRt = (data, endDate) => {
     ...baseOptions,
     xAxis: {
       ...baseOptions.xAxis,
-      max: parseDate(endDate),
+      max: parseDate(CHART_END_DATE),
     },
     yAxis: {
       ...baseOptions.yAxis,
@@ -108,12 +109,12 @@ export const optionsRt = (data, endDate) => {
           },
         ],
       },
-      ...zoneAnnotations(endDate, minYAxis, maxYAxis, y, ZONES_RT),
+      ...zoneAnnotations(CHART_END_DATE, minYAxis, maxYAxis, y, ZONES_RT),
     ],
   };
 };
 
-export const optionsPositiveTests = (data, endDate) => {
+export const optionsPositiveTests = data => {
   const zones = ZONES_POSITIVE_RATE;
   const { x, y } = lastValidPoint(data);
   const [minY, maxY] = [0, getMaxY(data)];
@@ -128,7 +129,7 @@ export const optionsPositiveTests = (data, endDate) => {
     ...baseOptions,
     annotations: [
       currentValueAnnotation(x, y, y && formatPercent(y, 1)),
-      ...zoneAnnotations(endDate, minYAxis, adjustedMaxYAxis, y, zones),
+      ...zoneAnnotations(CHART_END_DATE, minYAxis, adjustedMaxYAxis, y, zones),
     ],
     series: [
       {
@@ -146,7 +147,7 @@ export const optionsPositiveTests = (data, endDate) => {
     },
     xAxis: {
       ...baseOptions.xAxis,
-      max: parseDate(endDate),
+      max: parseDate(CHART_END_DATE),
     },
     yAxis: {
       ...baseOptions.yAxis,
@@ -160,7 +161,7 @@ export const optionsPositiveTests = (data, endDate) => {
   };
 };
 
-export const optionsHospitalUsage = (data, endDate) => {
+export const optionsHospitalUsage = data => {
   const { x, y } = lastValidPoint(data);
   const zones = ZONES_HOSPITAL_USAGE;
   const [minY, maxY] = [0, getMaxY(data)];
@@ -169,7 +170,7 @@ export const optionsHospitalUsage = (data, endDate) => {
     ...baseOptions,
     annotations: [
       currentValueAnnotation(x, y, y && formatPercent(y)),
-      ...zoneAnnotations(endDate, minYAxis, maxYAxis, y, zones),
+      ...zoneAnnotations(CHART_END_DATE, minYAxis, maxYAxis, y, zones),
     ],
     tooltip: {
       pointFormatter: function () {
@@ -178,7 +179,7 @@ export const optionsHospitalUsage = (data, endDate) => {
     },
     xAxis: {
       ...baseOptions.xAxis,
-      max: parseDate(endDate),
+      max: parseDate(CHART_END_DATE),
     },
     yAxis: {
       ...baseOptions.yAxis,
