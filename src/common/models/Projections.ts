@@ -1,4 +1,3 @@
-import moment from 'moment';
 import { Projection } from './Projection';
 import { INTERVENTIONS } from '../interventions';
 import { STATES } from '..';
