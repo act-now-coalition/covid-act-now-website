@@ -1,7 +1,7 @@
 import moment from 'moment';
 import _ from 'lodash';
-import US_STATE_DATASET from '../components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
-import { STATES } from 'enums';
+import US_STATE_DATASET from '../../components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
+import { STATES } from 'common';
 
 export function assert(condition: any, msg?: string): asserts condition {
   if (!condition) {

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { COLORS } from 'enums';
+import { COLORS } from 'common';
 
 import palette from 'assets/theme/palette';
 import { mobileBreakpoint } from 'assets/theme/sizes';

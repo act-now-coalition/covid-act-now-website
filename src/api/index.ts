@@ -3,7 +3,7 @@
  * schema definitions.
  */
 
-import DataUrlJson from '../assets/data/data_url.json';
+import DataUrlJson from 'assets/data/data_url.json';
 import {
   CovidActNowStateTimeseries,
   Timeseries as CountyTimeseries,
@@ -16,12 +16,12 @@ import {
   Actualstimeseries as StateActualTimeseries,
   CovidActNowCountiesTimeseries,
 } from './schema/CovidActNowCountiesTimeseries';
-import { INTERVENTIONS, REVERSED_STATES } from 'enums';
+import { INTERVENTIONS, REVERSED_STATES } from 'common';
 import {
   RegionAggregateDescriptor,
   RegionDescriptor,
-} from '../utils/RegionDescriptor';
-import { fail, assert } from 'utils';
+} from '../common/utils/RegionDescriptor';
+import { fail, assert } from 'common/utils';
 import fetch from 'node-fetch';
 
 const API_URL = DataUrlJson.data_url.replace(/\/$/, '');

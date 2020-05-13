@@ -3,7 +3,8 @@ import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import {
   FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR,
   STATE_TO_CALCULATED_INTERVENTION_COLOR,
-} from 'enums/interventions';
+  COLOR_MAP,
+} from 'common/colors';
 // import COUNTIES_JSON from './data/counties-10m.json';
 import STATES_JSON from './data/states-10m.json';
 import {
@@ -11,8 +12,7 @@ import {
   // USCountyMapWrapper,
   USStateMapWrapper,
 } from './Map.style';
-import { REVERSED_STATES } from 'enums';
-import { COLOR_MAP } from 'enums/interventions';
+import { REVERSED_STATES } from 'common';
 
 const USACountyMap = ({ stateClickHandler, setTooltipContent, condensed }) => {
   const getFillColor = geo => {

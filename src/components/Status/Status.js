@@ -1,6 +1,6 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import { INTERVENTIONS, INTERVENTION_COLOR_MAP } from 'enums';
+import { INTERVENTIONS, INTERVENTION_COLOR_MAP } from 'common';
 
 import { StatusWrapper } from './Status.style';
 

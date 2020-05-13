@@ -1,7 +1,7 @@
 import React from 'react';
 import { LoadingScreen } from './AllStates.style';
-import { useProjections } from 'utils/model';
-import { STATES } from 'enums';
+import { useProjections } from 'common/utils/model';
+import { STATES } from 'common';
 import { ZoneChartWrapper } from 'components/Charts/ZoneChart.style';
 import Chart from 'components/Charts/Chart';
 import {

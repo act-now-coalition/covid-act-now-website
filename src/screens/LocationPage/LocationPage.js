@@ -8,7 +8,7 @@ import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import MiniMap from 'components/MiniMap/MiniMap';
 import ChartsHolder from 'components/LocationPage/ChartsHolder';
 import { LoadingScreen } from './LocationPage.style';
-import { useProjections } from 'utils/model';
+import { useProjections } from 'common/utils/model';
 
 function LocationPage() {
   let { stateId, countyId } = useParams();

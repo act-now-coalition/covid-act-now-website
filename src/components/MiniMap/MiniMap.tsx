@@ -15,7 +15,7 @@ import _ from 'lodash';
 import { MAP_FILTERS } from 'screens/LocationPage/Enums/MapFilterEnums';
 import { useHistory } from 'react-router-dom';
 import US_STATE_DATASET from '../MapSelectors/datasets/us_states_dataset_01_02_2020.json';
-import { Projections } from 'models/Projections';
+import { Projections } from 'common/models/Projections';
 
 interface MiniMapProperties {
   projections: Projections;

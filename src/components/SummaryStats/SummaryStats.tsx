@@ -1,9 +1,7 @@
 import React from 'react';
-import {
-  ChartType,
-  getLevelInfoForChartType,
-  ChartTypeToMetricName,
-} from 'enums/zones';
+import { Metric } from 'common/metric';
+import { getMetricName, getLevelInfo } from 'common/metric';
+
 import {
   SummaryStatsWrapper,
   SummaryStatWrapper,
@@ -26,25 +24,25 @@ const SummaryStat = ({
   beta,
   condensed,
 }: {
-  chartType: ChartType;
+  chartType: Metric;
   value: number;
   beta?: Boolean;
   condensed?: Boolean;
 }) => {
-  const levelInfo = getLevelInfoForChartType(chartType, value);
+  const levelInfo = getLevelInfo(chartType, value);
 
   const formatValueForChart = (
-    chartType: ChartType,
+    chartType: Metric,
     value: number | null,
   ): string => {
     if (value === null) {
       return '-';
     }
-    if (chartType === ChartType.CASE_GROWTH_RATE) {
+    if (chartType === Metric.CASE_GROWTH_RATE) {
       return formatDecimal(value);
-    } else if (chartType === ChartType.HOSPITAL_USAGE) {
+    } else if (chartType === Metric.HOSPITAL_USAGE) {
       return formatPercent(value);
-    } else if (chartType === ChartType.POSITIVE_TESTS) {
+    } else if (chartType === Metric.POSITIVE_TESTS) {
       return formatPercent(value, 1);
     }
     fail('Invalid Chart Type');
@@ -53,7 +51,7 @@ const SummaryStat = ({
     <SummaryStatWrapper condensed={condensed}>
       <StatTextWrapper>
         <StatNameText condensed={condensed}>
-          {ChartTypeToMetricName[chartType]}{' '}
+          {getMetricName(chartType)}{' '}
           {!condensed && beta && <BetaTag>Beta</BetaTag>}
         </StatNameText>
         {!condensed && <StatDetailText>{levelInfo.detail}</StatDetailText>}
@@ -82,20 +80,20 @@ const SummaryStats = (props: {
       {hasStats && (
         <SummaryStatsWrapper condensed={props.condensed}>
           <SummaryStat
-            chartType={ChartType.CASE_GROWTH_RATE}
+            chartType={Metric.CASE_GROWTH_RATE}
             condensed={props.condensed}
-            value={props.stats[ChartType.CASE_GROWTH_RATE] as number}
+            value={props.stats[Metric.CASE_GROWTH_RATE] as number}
           />
           <SummaryStat
-            chartType={ChartType.POSITIVE_TESTS}
+            chartType={Metric.POSITIVE_TESTS}
             condensed={props.condensed}
-            value={props.stats[ChartType.POSITIVE_TESTS] as number}
+            value={props.stats[Metric.POSITIVE_TESTS] as number}
           />
           <SummaryStat
-            chartType={ChartType.HOSPITAL_USAGE}
+            chartType={Metric.HOSPITAL_USAGE}
             beta={true}
             condensed={props.condensed}
-            value={props.stats[ChartType.HOSPITAL_USAGE] as number}
+            value={props.stats[Metric.HOSPITAL_USAGE] as number}
           />
         </SummaryStatsWrapper>
       )}
