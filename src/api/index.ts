@@ -31,8 +31,6 @@ const API_URL = DataUrlJson.data_url.replace(/\/$/, '');
  */
 const ApiInterventions: { [intervention: string]: string } = {
   [INTERVENTIONS.LIMITED_ACTION]: 'NO_INTERVENTION',
-  [INTERVENTIONS.SOCIAL_DISTANCING]: 'WEAK_INTERVENTION',
-  [INTERVENTIONS.SHELTER_IN_PLACE]: 'STRONG_INTERVENTION',
   [INTERVENTIONS.PROJECTED]: 'OBSERVED_INTERVENTION',
 };
 

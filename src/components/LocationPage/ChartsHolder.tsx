@@ -214,7 +214,7 @@ export function getChartData(
   const rtRangeData =
     projection &&
     projection.rt &&
-    projection.getDataset('rtRange').data.map(d => ({
+    projection.getDataset('rtRange').map(d => ({
       x: d.x,
       y: d.y?.rt,
       low: d.y?.low,
@@ -224,12 +224,12 @@ export function getChartData(
   const testPositiveData =
     projection &&
     projection.currentTestPositiveRate &&
-    projection.getDataset('testPositiveRate').data;
+    projection.getDataset('testPositiveRate');
 
   const icuUtilizationData =
     projection &&
     projection.currentIcuUtilization &&
-    projection.getDataset('icuUtilization').data;
+    projection.getDataset('icuUtilization');
 
   return { rtRangeData, testPositiveData, icuUtilizationData };
 }

@@ -1,7 +1,6 @@
 import moment from 'moment';
 import { Projection } from './Projection';
-import { INTERVENTIONS, STATE_TO_INTERVENTION } from '../interventions';
-import { COLOR_MAP } from '../colors';
+import { INTERVENTIONS } from '../interventions';
 import { STATES } from '..';
 import { RegionSummaryWithTimeseriesMap } from 'api';
 import { Metric, getLevel } from 'common/metric';
@@ -17,15 +16,9 @@ export class Projections {
   stateName: string;
   county: any;
   countyName: string | null;
-  stateIntervention: any;
   baseline: any;
-  distancing: any;
-  distancingPoorEnforcement: any;
   projected: any;
-  currentInterventionModel: any;
-  supportsInferred: boolean;
   isCounty: boolean;
-  interventionModelMap: any;
 
   constructor(
     summaryWithTimeseriesMap: RegionSummaryWithTimeseriesMap,
@@ -36,17 +29,11 @@ export class Projections {
     this.stateName = (STATES as any)[this.stateCode];
     this.county = null;
     this.countyName = null;
-    this.stateIntervention = (STATE_TO_INTERVENTION as any)[this.stateCode];
     this.baseline = null;
-    this.distancing = null;
-    this.distancingPoorEnforcement = null;
-    this.currentInterventionModel = null;
-    this.supportsInferred = false;
     this.isCounty = county != null;
 
     this.populateCounty(county);
     this.populateInterventions(summaryWithTimeseriesMap);
-    this.populateCurrentIntervention();
   }
 
   populateCounty(county: any) {
@@ -72,16 +59,8 @@ export class Projections {
     }
   }
 
-  populateCurrentIntervention() {
-    this.currentInterventionModel = this.supportsInferred
-      ? this.projected
-      : this.interventionModelMap[this.stateIntervention];
-  }
-
   get primary() {
-    return this.supportsInferred
-      ? this.projected
-      : this.currentInterventionModel;
+    return this.projected;
   }
 
   getLevels(): {
@@ -139,98 +118,6 @@ export class Projections {
     return LEVEL_COLOR[level];
   }
 
-  getChartSeriesColorMap() {
-    return {
-      limitedActionSeries: this.getSeriesColorForLimitedAction(),
-      socialDistancingSeries: this.getSeriesColorForSocialDistancing(),
-      shelterInPlaceSeries: this.getSeriesColorForShelterInPlace(),
-      projectedSeries: COLOR_MAP.BLUE,
-    };
-  }
-
-  getSeriesColorForProjected() {
-    return COLOR_MAP.BLUE;
-  }
-
-  getSeriesColorForPrimary() {
-    // TODO(igor): we shouldn't be hardcoding either of the two values below, but this is
-    // all about to simplify a lot and is not a regression, so not going to fix it
-    return this.supportsInferred
-      ? COLOR_MAP.BLUE
-      : this.getSeriesColorForSocialDistancing();
-  }
-
-  getSeriesColorForLimitedAction() {
-    let seriesColor = COLOR_MAP.RED.BASE;
-
-    const interventionColor = this.getAlarmLevelColor();
-
-    if (interventionColor === COLOR_MAP.RED.BASE) {
-      seriesColor = COLOR_MAP.RED.DARK;
-    }
-
-    return seriesColor;
-  }
-
-  getSeriesColorForSocialDistancing() {
-    let seriesColor = COLOR_MAP.ORANGE.BASE;
-
-    switch (this.getAlarmLevelColor()) {
-      case COLOR_MAP.RED.BASE:
-        seriesColor = COLOR_MAP.RED.BASE;
-        break;
-      case COLOR_MAP.ORANGE.BASE:
-        seriesColor = COLOR_MAP.ORANGE.BASE;
-        break;
-      case COLOR_MAP.GREEN.BASE:
-        seriesColor = COLOR_MAP.GREEN.DARK;
-        break;
-      default:
-    }
-
-    return seriesColor;
-  }
-
-  getSeriesColorForShelterInPlace() {
-    let seriesColor = COLOR_MAP.GREEN.BASE;
-
-    const isShelterInPlaceOverwheled =
-      this.stateIntervention === INTERVENTIONS.SHELTER_IN_PLACE &&
-      this.currentInterventionModel.dateOverwhelmed;
-
-    switch (this.getAlarmLevelColor()) {
-      case COLOR_MAP.RED.BASE:
-        seriesColor = isShelterInPlaceOverwheled
-          ? COLOR_MAP.RED.LIGHT
-          : COLOR_MAP.GREEN.BASE;
-        break;
-      case COLOR_MAP.ORANGE.BASE:
-        seriesColor = isShelterInPlaceOverwheled
-          ? COLOR_MAP.ORANGE.LIGHT
-          : COLOR_MAP.GREEN.BASE;
-        break;
-      case COLOR_MAP.GREEN.BASE:
-        seriesColor = isShelterInPlaceOverwheled
-          ? COLOR_MAP.ORANGE.LIGHT
-          : COLOR_MAP.GREEN.BASE;
-        break;
-      default:
-    }
-
-    return seriesColor;
-  }
-
-  // unused but likely to be used again
-  isOverwhelmedDateAfterNumberOfWeeks(model: any, weeks: number) {
-    if (!model.dateOverwhelmed) {
-      return true;
-    }
-
-    const futureDate = moment().add(weeks, 'weeks');
-
-    return moment(model.dateOverwhelmed).isSameOrAfter(futureDate);
-  }
-
   populateInterventions(
     summaryWithTimeseriesMap: RegionSummaryWithTimeseriesMap,
   ) {
@@ -240,25 +127,14 @@ export class Projections {
       if (summaryWithTimeseries !== null) {
         projection = new Projection(summaryWithTimeseries, {
           intervention: intervention,
-          isInferred: intervention === INTERVENTIONS.PROJECTED,
           isCounty: this.isCounty,
         });
       }
       if (intervention === INTERVENTIONS.LIMITED_ACTION) {
         this.baseline = projection;
-      } else if (intervention === INTERVENTIONS.SHELTER_IN_PLACE) {
-        this.distancing = { now: projection };
       } else if (intervention === INTERVENTIONS.PROJECTED) {
         this.projected = projection;
-        this.supportsInferred = !!this.projected;
-      } else if (intervention === INTERVENTIONS.SOCIAL_DISTANCING) {
-        this.distancingPoorEnforcement = { now: projection };
       }
     }
-    this.interventionModelMap = {
-      [INTERVENTIONS.LIMITED_ACTION]: this.baseline,
-      [INTERVENTIONS.SOCIAL_DISTANCING]: this.distancingPoorEnforcement.now,
-      [INTERVENTIONS.SHELTER_IN_PLACE]: this.distancing.now,
-    };
   }
 }

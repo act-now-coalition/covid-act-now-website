@@ -1,10 +1,7 @@
 import styled from 'styled-components';
 import { COLORS } from 'common';
-import { INTERVENTIONS } from 'common/interventions';
 import palette from 'assets/theme/palette';
-import { snakeCase } from 'lodash';
 import { colors } from '@material-ui/core';
-import { COLOR_MAP } from '../../common/colors';
 
 const chartFontFamily = "'Source Code Pro', 'Roboto', sans-serif";
 
@@ -134,24 +131,6 @@ export const Wrapper = styled.div`
     }
   }
 
-  /* Stay at home */
-  .stay-at-home {
-    .highcharts-graph {
-      stroke: ${props =>
-        props.projections.getChartSeriesColorMap().shelterInPlaceSeries};
-      stroke-dasharray: 1, 6;
-      stroke-width: 4px;
-      stroke-linecap: square;
-    }
-
-    &.highcharts-markers {
-      path {
-        fill: ${props =>
-          props.projections.getChartSeriesColorMap().shelterInPlaceSeries};
-      }
-    }
-  }
-
   .Annotation {
     text {
       font-family: ${chartFontFamily};
@@ -168,17 +147,6 @@ export const Wrapper = styled.div`
     }
   }
 
-  /* Social distancing */
-  .social-distancing {
-    fill: ${props =>
-      props.projections.getChartSeriesColorMap().socialDistancingSeries};
-    stroke: ${props =>
-      props.isInferred
-        ? props.projections.getChartSeriesColorMap().socialDistancingSeries
-        : 'white'};
-    fill-opacity: 1;
-  }
-
   /* Available beds */
   .beds {
     .highcharts-graph {
@@ -187,28 +155,6 @@ export const Wrapper = styled.div`
       stroke-width: 1px;
       stroke-dasharray: 4, 3;
     }
-  }
-
-  .${snakeCase(INTERVENTIONS.LIMITED_ACTION)} {
-    stroke: ${props => props.projections.getAlarmLevelColor()};
-  }
-  .${snakeCase(INTERVENTIONS.SOCIAL_DISTANCING)} {
-    stroke: ${props =>
-      props.projections.getAlarmLevelColor() === COLOR_MAP.GREEN.BASE
-        ? COLOR_MAP.GREEN.DARK
-        : props.projections.getAlarmLevelColor()};
-  }
-  .${snakeCase(INTERVENTIONS.SHELTER_IN_PLACE)} {
-    stroke: ${props => props.projections.getAlarmLevelColor()};
-  }
-  .${snakeCase(INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE)} {
-    stroke: ${props =>
-      props.projections.getAlarmLevelColor() === COLOR_MAP.GREEN.BASE
-        ? COLOR_MAP.GREEN.DARK
-        : props.projections.getAlarmLevelColor()};
-  }
-  .${snakeCase(INTERVENTIONS.LOCKDOWN)} {
-    stroke: ${props => props.projections.getAlarmLevelColor()};
   }
 
   .today {
@@ -238,22 +184,6 @@ export const Wrapper = styled.div`
       border-bottom-right-radius: 0;
       border-top-left-radius: 16px;
       border-bottom-left-radius: 16px;
-    }
-
-    &.custom-plot-label-hospital-overload {
-      background: ${props =>
-        props.projections.getAlarmLevelColor() === COLOR_MAP.GREEN.BASE
-          ? COLOR_MAP.GREEN.DARK
-          : props.projections.getAlarmLevelColor()};
-    }
-
-    &.custom-plot-label-${snakeCase(
-        INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE,
-      )} {
-      background: ${props =>
-        props.projections.getAlarmLevelColor() === COLOR_MAP.GREEN.BASE
-          ? COLOR_MAP.GREEN.DARK
-          : props.projections.getAlarmLevelColor()};
     }
   }
 `;
