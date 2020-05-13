@@ -10,8 +10,8 @@ import {
   CondensedLegendItemStyled,
 } from './ModelChart.style';
 import Outcomes from '../Outcomes/Outcomes';
-import { COLORS } from 'enums';
-import { formatDate } from 'utils';
+import { COLORS } from 'common';
+import { formatDate } from 'common/utils';
 
 const isFuture = d => d.x > new Date().valueOf();
 

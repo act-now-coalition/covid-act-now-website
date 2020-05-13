@@ -1,8 +1,11 @@
-import { Projection } from '../models/Projection';
-import { INTERVENTIONS } from '../enums/interventions';
-import { STATES } from '../enums';
+import moment from 'moment';
+import { Projection } from './Projection';
+import { INTERVENTIONS } from '../interventions';
+import { STATES } from '..';
 import { RegionSummaryWithTimeseriesMap } from 'api';
-import { Level, ChartType, getLevelForChart, COLOR_ZONE } from 'enums/zones';
+import { Metric, getLevel } from 'common/metric';
+import { Level } from 'common/level';
+import { LEVEL_COLOR } from 'common/colors';
 
 /**
  * The model for the complete set of projections and related information
@@ -73,16 +76,13 @@ export class Projections {
         test_rate_level: Level.UNKNOWN,
       };
 
-    const rt_level = getLevelForChart(
-      ChartType.CASE_GROWTH_RATE,
-      projection.rt,
-    );
-    const hospitalizations_level = getLevelForChart(
-      ChartType.HOSPITAL_USAGE,
+    const rt_level = getLevel(Metric.CASE_GROWTH_RATE, projection.rt);
+    const hospitalizations_level = getLevel(
+      Metric.HOSPITAL_USAGE,
       projection.currentIcuUtilization,
     );
-    const test_rate_level = getLevelForChart(
-      ChartType.POSITIVE_TESTS,
+    const test_rate_level = getLevel(
+      Metric.POSITIVE_TESTS,
       projection.currentTestPositiveRate,
     );
 
@@ -114,7 +114,8 @@ export class Projections {
   }
 
   getAlarmLevelColor() {
-    return COLOR_ZONE[this.getAlarmLevel()];
+    const level = this.getAlarmLevel();
+    return LEVEL_COLOR[level];
   }
 
   populateInterventions(

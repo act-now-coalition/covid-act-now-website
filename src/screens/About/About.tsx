@@ -2,7 +2,7 @@ import React from 'react';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import ShareBlock from 'components/ShareBlock/ShareBlock';
 import Typography from '@material-ui/core/Typography';
-import { TEAM } from './../../enums';
+import { TEAM } from '../../common';
 import StapledSidebar, {
   SidebarLink,
   SectionHeader,

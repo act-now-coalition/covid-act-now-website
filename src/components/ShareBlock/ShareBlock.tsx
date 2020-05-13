@@ -10,7 +10,7 @@ import {
 } from 'react-share';
 import Newsletter from 'components/Newsletter/Newsletter';
 import SocialLocationPreview from 'components/SocialLocationPreview/SocialLocationPreview';
-import { Projections } from 'models/Projections';
+import { Projections } from 'common/models/Projections';
 import NewsletterMockup from 'assets/images/newsletterMockup';
 import {
   ShareButtonContainer,
@@ -27,7 +27,7 @@ import {
   SocialTextAreaWrapper,
   EmbedPrompt,
 } from './ShareBlock.style';
-import { STATES } from 'enums';
+import { STATES } from 'common';
 
 const ShareBlock = ({
   condensed,
@@ -108,11 +108,10 @@ const ShareBlock = ({
           <SocialTextAreaWrapper>
             <SocialTextArea>
               <ShareInstructionHeader>
-                Share data, save lives
+                Share metrics to reopen
               </ShareInstructionHeader>
               <ShareInstructionBody>
-                Save lives by sharing useful data with your neighbors, friends,
-                family and coworkers.
+                Share local COVID data with your neighbors, friends, and family.
               </ShareInstructionBody>
               <ShareButtonContainer reflow>
                 <StyledShareButton

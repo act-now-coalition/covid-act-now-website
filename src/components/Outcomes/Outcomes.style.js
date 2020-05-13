@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLORS } from 'enums';
+import { COLORS } from 'common';
 
 export const OutcomesWrapper = styled.div`
   margin-bottom: 2em;
@@ -9,6 +9,11 @@ export const OutcomesWrapper = styled.div`
   h2 {
     font-weight: 700;
     margin-bottom: 1.5rem;
+  }
+
+  @media print {
+    page-break-before: always;
+    padding-top: 6rem;
   }
 `;
 

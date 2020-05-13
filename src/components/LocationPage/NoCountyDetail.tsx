@@ -3,9 +3,9 @@ import {
   StyledNoResultsWrapper,
   StyledNoResults,
 } from './NoCountyDetail.style';
-import { STATES } from 'enums';
+import { STATES } from 'common';
 import { useHistory } from 'react-router-dom';
-import { getFormattedCountyName } from 'utils';
+import { getFormattedCountyName } from 'common/utils';
 
 const NoCountyDetail = (props: { stateId: string; countyId: string }) => {
   const history = useHistory();

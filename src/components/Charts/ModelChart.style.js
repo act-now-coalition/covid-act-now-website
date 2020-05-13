@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLORS } from 'enums';
+import { COLORS } from 'common';
 import palette from 'assets/theme/palette';
 import { colors } from '@material-ui/core';
 

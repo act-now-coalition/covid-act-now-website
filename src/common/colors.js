@@ -1,12 +1,15 @@
+import { INTERVENTIONS } from 'common/interventions';
+import { Level } from 'common/level';
+
 import CalculatedInterventionJSON from '../assets/data/calculated_state_interventions.json';
 import CalculatedCountyInterventionJSON from '../assets/data/calculated_county_interventions.json';
 
-const LIMITED_ACTION = 'Limited action';
-const PROJECTED = 'Projected based on current trends';
-
-export const INTERVENTIONS = {
-  LIMITED_ACTION,
-  PROJECTED,
+export default {
+  LIGHTGRAY: '#f2f2f2',
+  // Future projections
+  HOSPITALIZATIONS: 'black',
+  PROJECTED: '#3bbce6',
+  LIMITED_ACTION: '#fc374d',
 };
 
 export const COLOR_MAP = {
@@ -33,6 +36,21 @@ export const COLOR_MAP = {
     LIGHT: '#E3E3E3',
     DARK: '#999999',
   },
+};
+
+export const LEVEL_COLOR = {
+  [Level.LOW]: COLOR_MAP.GREEN.BASE,
+  [Level.MEDIUM]: COLOR_MAP.ORANGE.BASE,
+  [Level.HIGH]: COLOR_MAP.RED.BASE,
+  [Level.UNKNOWN]: COLOR_MAP.GRAY.BASE,
+};
+
+export const INTERVENTION_COLOR_MAP = {
+  [INTERVENTIONS.LIMITED_ACTION]: COLOR_MAP.RED.BASE,
+  [INTERVENTIONS.SOCIAL_DISTANCING]: COLOR_MAP.ORANGE.BASE,
+  [INTERVENTIONS.SHELTER_IN_PLACE]: COLOR_MAP.GREEN.BASE,
+  [INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE]: COLOR_MAP.GREEN.DARK,
+  [INTERVENTIONS.PROJECTED]: COLOR_MAP.BLUE,
 };
 
 export const STATE_TO_CALCULATED_INTERVENTION_COLOR = CalculatedInterventionJSON;

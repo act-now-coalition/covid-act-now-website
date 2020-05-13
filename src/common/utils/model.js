@@ -1,8 +1,8 @@
 import * as moment from 'moment';
 import { useState, useEffect } from 'react';
-import { Projections } from './../models/Projections';
-import { STATES, REVERSED_STATES, INTERVENTIONS } from '../enums';
-import DataUrlJson from '../assets/data/data_url';
+import { Projections } from '../models/Projections';
+import { STATES, REVERSED_STATES, INTERVENTIONS } from '..';
+import DataUrlJson from 'assets/data/data_url';
 import fetch from 'node-fetch';
 import {
   RegionAggregateDescriptor,

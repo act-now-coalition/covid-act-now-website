@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React, { useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
-import { STATES } from 'enums';
+import { STATES } from 'common';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Drawer from '@material-ui/core/Drawer';
@@ -11,8 +11,8 @@ import '../../App.css'; /* optional for styling like the :hover pseudo-class */
 import LocationPageHeader from '../../components/LocationPage/LocationPageHeader';
 import ShareModelBlock from '../../components/ShareBlock/ShareModelBlock';
 
-import { useProjections } from 'utils/model';
-import { useEmbed } from 'utils/hooks';
+import { useProjections } from 'common/utils/model';
+import { useEmbed } from 'common/utils/hooks';
 
 import {
   EmbedContainer,

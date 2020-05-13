@@ -2,7 +2,7 @@ import React from 'react';
 
 import { DisclaimerWrapper, DisclaimerBody } from './Disclaimer.style';
 import LightTooltip from 'components/LightTooltip/LightTooltip';
-import { useModelLastUpdatedDate } from 'utils/model';
+import { useModelLastUpdatedDate } from 'common/utils/model';
 
 const Disclaimer = ({
   metricName,
