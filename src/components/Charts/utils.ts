@@ -163,7 +163,6 @@ const getZoneLabels = (
     const toValue = zone.value || maxYAxis;
     const isActive = fromValue <= value && value < toValue;
     const activeClassName = isActive ? 'ZoneAnnotation--isActive' : '';
-    console.log(zone.labelClassName, activeClassName);
     return {
       ...annotationZoneLabelBase,
       style: {
