@@ -9,7 +9,6 @@ import {
   getYAxisLimits,
   lastValidPoint,
   parseDate,
-  titleCase,
   zoneAnnotations,
 } from './utils';
 import { CASE_GROWTH_RATE_LEVEL_INFO_MAP } from 'common/metrics/case_growth';
@@ -19,18 +18,20 @@ import { Level } from '../../common/level';
 import { RT_TRUNCATION_DAYS } from '../../common/models/Projection';
 
 const CHART_END_DATE = moment().add(2, 'weeks').toDate();
-const toHighchartZone = (levelInfo, level) => ({
-  color: levelInfo.color,
-  name: levelInfo.name,
-  value: isFinite(levelInfo.upperLimit) ? levelInfo.upperLimit : undefined,
-  className: 'ZoneChart__Line',
-  labelClassName: `ZoneAnnotation ZoneAnnotation--${titleCase(level)}`,
-});
+const toHighchartZone = levelInfo => {
+  return {
+    color: levelInfo.color,
+    name: levelInfo.name,
+    value: isFinite(levelInfo.upperLimit) ? levelInfo.upperLimit : undefined,
+    className: 'ZoneChart__Line',
+    labelClassName: `ZoneAnnotation ZoneAnnotation--${levelInfo.level}`,
+  };
+};
 
 const getHighchartZones = levelInfoMap => [
-  toHighchartZone(levelInfoMap[Level.LOW], Level.LOW),
-  toHighchartZone(levelInfoMap[Level.MEDIUM], Level.MEDIUM),
-  toHighchartZone(levelInfoMap[Level.HIGH], Level.HIGH),
+  toHighchartZone(levelInfoMap[Level.LOW]),
+  toHighchartZone(levelInfoMap[Level.MEDIUM]),
+  toHighchartZone(levelInfoMap[Level.HIGH]),
 ];
 
 const ZONES_RT = getHighchartZones(CASE_GROWTH_RATE_LEVEL_INFO_MAP);

@@ -12,9 +12,9 @@ const LIMIT_LOW = 1;
 const LIMIT_MEDIUM = 1.2;
 const LIMIT_HIGH = Infinity;
 
-const LOW_NAME = 'Reduced';
-const MEDIUM_NAME = 'Moderate';
-const HIGH_NAME = 'Elevated';
+const LOW_NAME = 'Low';
+const MEDIUM_NAME = 'Medium';
+const HIGH_NAME = 'High';
 const UNKNOWN = 'Unknown';
 
 export const CASE_GROWTH_RATE_LEVEL_INFO_MAP: LevelInfoMap = {

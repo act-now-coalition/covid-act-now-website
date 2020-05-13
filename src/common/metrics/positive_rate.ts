@@ -3,9 +3,9 @@ import { Level, LevelInfoMap } from 'common/level';
 
 export const METRIC_NAME = 'Positive test rate';
 
-const LOW_NAME = 'Reduced';
-const MEDIUM_NAME = 'Moderate';
-const HIGH_NAME = 'Elevated';
+const LOW_NAME = 'Low';
+const MEDIUM_NAME = 'Medium';
+const HIGH_NAME = 'High';
 const UNKNOWN = 'Unknown';
 
 const SHORT_DESCRIPTION_LOW = 'Indicates testing is widespread';

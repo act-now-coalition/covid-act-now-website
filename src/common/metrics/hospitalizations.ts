@@ -8,13 +8,13 @@ const SHORT_DESCRIPTION_MEDIUM = 'At risk to a new wave of COVID';
 const SHORT_DESCRIPTION_HIGH = 'Unable to handle a new wave of COVID';
 const SHORT_DESCRIPTION_UNKNOWN = 'Insufficient data to assess';
 
-const LIMIT_LOW = 0.7;
-const LIMIT_MEDIUM = 0.95;
+const LIMIT_LOW = 0.5;
+const LIMIT_MEDIUM = 0.7;
 const LIMIT_HIGH = Infinity;
 
-const LOW_NAME = 'Reduced';
-const MEDIUM_NAME = 'Moderate';
-const HIGH_NAME = 'Elevated';
+const LOW_NAME = 'Low';
+const MEDIUM_NAME = 'Medium';
+const HIGH_NAME = 'High';
 const UNKNOWN = 'Unknown';
 
 export const HOSPITAL_USAGE_LEVEL_INFO_MAP: LevelInfoMap = {

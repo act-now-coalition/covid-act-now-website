@@ -1,8 +1,8 @@
 export enum Level {
-  LOW = 'LOW',
-  MEDIUM = 'MEDIUM',
-  HIGH = 'HIGH',
-  UNKNOWN = 'UNKNOWN',
+  LOW,
+  MEDIUM,
+  HIGH,
+  UNKNOWN,
 }
 
 export interface LevelInfo {

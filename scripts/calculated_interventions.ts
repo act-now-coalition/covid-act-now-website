@@ -4,7 +4,7 @@ import path from 'path';
 import {
   fetchAllStateProjections,
   fetchAllCountyProjections,
-} from '../src/utils/model';
+} from '../src/common/utils/model';
 
 (async () => {
   const stateInterventionMap = {} as { [key: string]: string };

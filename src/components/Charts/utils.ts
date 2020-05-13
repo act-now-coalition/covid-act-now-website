@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import Highcharts, { dateFormat } from 'highcharts';
-import palette from '../../assets/theme/palette';
+import palette from 'assets/theme/palette';
 
 const isValidPoint = (d: Highcharts.Point): boolean =>
   _.isFinite(d.x) && _.isFinite(d.y);
@@ -163,6 +163,7 @@ const getZoneLabels = (
     const toValue = zone.value || maxYAxis;
     const isActive = fromValue <= value && value < toValue;
     const activeClassName = isActive ? 'ZoneAnnotation--isActive' : '';
+    console.log(zone.labelClassName, activeClassName);
     return {
       ...annotationZoneLabelBase,
       style: {

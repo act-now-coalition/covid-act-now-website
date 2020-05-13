@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import palette from '../../assets/theme/palette';
-import { LEVEL_COLOR } from '../../common/colors';
+import { Level } from 'common/level';
+import { LEVEL_COLOR } from 'common/colors';
 
 const chartFontFamily = "'Source Code Pro', 'Roboto', sans-serif";
 
@@ -74,16 +75,16 @@ export const ZoneChartWrapper = styled.div`
   }
 
   .ZoneAnnotation--isActive {
-    &.ZoneAnnotation--High rect {
-      fill: ${LEVEL_COLOR.HIGH};
+    &.ZoneAnnotation--2 rect {
+      fill: ${LEVEL_COLOR[Level.HIGH]};
       stroke: none;
     }
-    &.ZoneAnnotation--Medium rect {
-      fill: ${LEVEL_COLOR.MEDIUM};
+    &.ZoneAnnotation--1 rect {
+      fill: ${LEVEL_COLOR[Level.MEDIUM]};
       stroke: none;
     }
-    &.ZoneAnnotation--Low rect {
-      fill: ${LEVEL_COLOR.LOW};
+    &.ZoneAnnotation--0 rect {
+      fill: ${LEVEL_COLOR[Level.LOW]};
       stroke: none;
     }
   }
