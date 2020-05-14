@@ -44,6 +44,8 @@ const SummaryStat = ({
       return formatPercent(value);
     } else if (chartType === Metric.POSITIVE_TESTS) {
       return formatPercent(value, 1);
+    } else if (chartType === Metric.CONTACT_TRACING) {
+      return formatPercent(value, 1);
     }
     fail('Invalid Chart Type');
   };
@@ -91,6 +93,12 @@ const SummaryStats = (props: {
           />
           <SummaryStat
             chartType={Metric.HOSPITAL_USAGE}
+            beta={true}
+            condensed={props.condensed}
+            value={props.stats[Metric.HOSPITAL_USAGE] as number}
+          />
+          <SummaryStat
+            chartType={Metric.CONTACT_TRACING}
             beta={true}
             condensed={props.condensed}
             value={props.stats[Metric.HOSPITAL_USAGE] as number}
