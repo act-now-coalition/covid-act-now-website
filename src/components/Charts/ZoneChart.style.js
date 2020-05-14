@@ -10,6 +10,14 @@ export const ZoneChartWrapper = styled.div`
     margin-left: -3rem;
   }
 
+  @media print {
+    width: 100%;
+    > div {
+      transform: scale(0.9);
+      transform-origin: center left;
+    }
+  }
+
   .highcharts-axis-labels.highcharts-yaxis-labels {
     /* Highcharts sets inline styles, so we need !important to increase specificity */
     text,

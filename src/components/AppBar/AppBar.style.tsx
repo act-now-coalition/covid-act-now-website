@@ -16,6 +16,10 @@ export const Wrapper = styled.div`
   @media (min-width: ${mobileBreakpoint}) {
     padding: 0 20px;
   }
+
+  @media print {
+    justify-content: center;
+  }
 `;
 
 export const StyledAppBar = styled(AppBar)`
@@ -28,6 +32,7 @@ export const StyledAppBar = styled(AppBar)`
 
   @media print {
     border-bottom: 0;
+    position: relative;
   }
 `;
 
@@ -44,6 +49,12 @@ export const Left = styled.div`
     width: 32px;
     height: 32px;
   }
+
+  @media print {
+    svg {
+      display: none;
+    }
+  }
 `;
 
 export const StyledDesktopMenu = styled(Tabs)`
@@ -52,6 +63,10 @@ export const StyledDesktopMenu = styled(Tabs)`
   @media (min-width: ${mobileBreakpoint}) {
     display: flex;
     align-items: center;
+  }
+
+  @media print {
+    display: none;
   }
 `;
 
