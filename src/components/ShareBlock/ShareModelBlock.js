@@ -17,7 +17,7 @@ const ShareModelBlock = ({
   const shareURL = `https://covidactnow.org/us/${stateId.toLowerCase()}${
     county ? `/county/${county.county_url_name}` : ''
   }`;
-  const shareQuote = `@CovidActNow has real-time modeling and metrics to help assess how ${displayName} can reopen safely. Check it out: `;
+  const shareQuote = `See ${displayName}'s COVID statistics, predictions, and reopening risk on @CovidActNow: `;
   const [showEmbedPreviewModal, setShowEmbedPreviewModal] = useState(false);
 
   return (

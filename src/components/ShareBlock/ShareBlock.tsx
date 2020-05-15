@@ -57,7 +57,7 @@ const ShareBlock = ({
   const url = shareURL || 'https://covidactnow.org/';
   const quote =
     shareQuote ||
-    '@CovidActNow has real-time modeling and metrics to help America reopen safely. Check it out:';
+    'Check out @CovidActNow, data and predictions to help America reopen safely: ';
   const hashtag = 'COVIDActNow';
 
   const trackShare = (target: string) => {
