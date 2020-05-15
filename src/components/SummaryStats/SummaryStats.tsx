@@ -21,11 +21,13 @@ import { isNull } from 'util';
 const SummaryStat = ({
   chartType,
   value,
+  onClick,
   beta,
   condensed,
 }: {
   chartType: Metric;
   value: number;
+  onClick: () => void;
   beta?: Boolean;
   condensed?: Boolean;
 }) => {
@@ -50,19 +52,21 @@ const SummaryStat = ({
     fail('Invalid Chart Type');
   };
   return (
-    <SummaryStatWrapper condensed={condensed}>
+    <SummaryStatWrapper onClick={onClick} condensed={condensed}>
       <StatTextWrapper>
         <StatNameText condensed={condensed}>
           {getMetricName(chartType)}{' '}
-          {!condensed && beta && <BetaTag>Beta</BetaTag>}
         </StatNameText>
         {!condensed && <StatDetailText>{levelInfo.detail}</StatDetailText>}
       </StatTextWrapper>
       <StatValueWrapper condensed={condensed}>
         {value && (
-          <StatValueText condensed={condensed}>
-            {formatValueForChart(chartType, value)}
-          </StatValueText>
+          <>
+            <StatValueText condensed={condensed}>
+              {formatValueForChart(chartType, value)}
+              {!condensed && beta && <BetaTag>Beta</BetaTag>}
+            </StatValueText>
+          </>
         )}
         <SignalStatus levelInfo={levelInfo} condensed={condensed} />
       </StatValueWrapper>
@@ -70,9 +74,15 @@ const SummaryStat = ({
   );
 };
 
+const noop = () => {};
+
 const SummaryStats = (props: {
   stats: { [key: string]: number | null };
   condensed?: Boolean;
+  onRtRangeClick?: () => void;
+  onTestPositiveClick?: () => void;
+  onIcuUtilizationClick?: () => void;
+  onContactTracingClick?: () => void;
 }) => {
   const hasStats = !!Object.values(props.stats).filter(
     (val: number | null) => !isNull(val),
@@ -82,25 +92,30 @@ const SummaryStats = (props: {
       {hasStats && (
         <SummaryStatsWrapper condensed={props.condensed}>
           <SummaryStat
+            onClick={props.onRtRangeClick || noop}
             chartType={Metric.CASE_GROWTH_RATE}
             condensed={props.condensed}
             value={props.stats[Metric.CASE_GROWTH_RATE] as number}
           />
           <SummaryStat
+            onClick={props.onTestPositiveClick || noop}
             chartType={Metric.POSITIVE_TESTS}
             condensed={props.condensed}
             value={props.stats[Metric.POSITIVE_TESTS] as number}
           />
           <SummaryStat
+            onClick={props.onIcuUtilizationClick || noop}
             chartType={Metric.HOSPITAL_USAGE}
             beta={true}
             condensed={props.condensed}
             value={props.stats[Metric.HOSPITAL_USAGE] as number}
           />
           <SummaryStat
+            onClick={props.onContactTracingClick || noop}
             chartType={Metric.CONTACT_TRACING}
             beta={true}
             condensed={props.condensed}
+            // TODO: Add real contact tracing number
             value={props.stats[Metric.HOSPITAL_USAGE] as number}
           />
         </SummaryStatsWrapper>
