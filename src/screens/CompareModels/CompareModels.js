@@ -210,7 +210,7 @@ export function CompareModels({ match, location }) {
           <FormControl style={{ width: '12rem' }}>
             <InputLabel focused={false}>Sort by:</InputLabel>
             <Select value={sortType} onChange={changeSort}>
-              ><MenuItem value={SORT_TYPES.ALPHABETICAL}>State Name</MenuItem>
+              <MenuItem value={SORT_TYPES.ALPHABETICAL}>State Name</MenuItem>
               <MenuItem value={SORT_TYPES.OVERWHELMED}>
                 Hospital Overload
               </MenuItem>
