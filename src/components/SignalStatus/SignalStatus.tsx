@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { Level } from 'enums/zones';
-import { LevelInfo } from 'enums/zones';
+import { Level, LevelInfo } from 'common/level';
 import { SignalStatusWrapper } from './SignalStatus.style';
 import TildeIcon from 'assets/images/tildeIcon';
 import CheckIcon from 'assets/images/checkIcon';

@@ -1,12 +1,21 @@
 import styled from 'styled-components';
 import palette from '../../assets/theme/palette';
-import { COLOR_ZONE } from '../../enums/zones';
+import { Level } from 'common/level';
+import { LEVEL_COLOR } from 'common/colors';
 
 const chartFontFamily = "'Source Code Pro', 'Roboto', sans-serif";
 
 export const ZoneChartWrapper = styled.div`
   @media (min-width: 996px) {
     margin-left: -3rem;
+  }
+
+  @media print {
+    width: 100%;
+    > div {
+      transform: scale(0.9);
+      transform-origin: center left;
+    }
   }
 
   .highcharts-axis-labels.highcharts-yaxis-labels {
@@ -74,16 +83,16 @@ export const ZoneChartWrapper = styled.div`
   }
 
   .ZoneAnnotation--isActive {
-    &.ZoneAnnotation--High rect {
-      fill: ${COLOR_ZONE.HIGH};
+    &.ZoneAnnotation--2 rect {
+      fill: ${LEVEL_COLOR[Level.HIGH]};
       stroke: none;
     }
-    &.ZoneAnnotation--Medium rect {
-      fill: ${COLOR_ZONE.MEDIUM};
+    &.ZoneAnnotation--1 rect {
+      fill: ${LEVEL_COLOR[Level.MEDIUM]};
       stroke: none;
     }
-    &.ZoneAnnotation--Low rect {
-      fill: ${COLOR_ZONE.LOW};
+    &.ZoneAnnotation--0 rect {
+      fill: ${LEVEL_COLOR[Level.LOW]};
       stroke: none;
     }
   }

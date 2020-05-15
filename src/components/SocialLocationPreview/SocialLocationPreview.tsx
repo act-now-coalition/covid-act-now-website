@@ -1,6 +1,6 @@
 import React from 'react';
-import { Projections } from 'models/Projections';
-import { useModelLastUpdatedDate } from 'utils/model';
+import { Projections } from 'common/models/Projections';
+import { useModelLastUpdatedDate } from 'common/utils/model';
 
 import {
   Wrapper,
@@ -15,9 +15,10 @@ import {
   FooterText,
   MapWrapper,
 } from './SocialLocationPreview.style';
-import { LEGEND_TEXT, Level } from 'enums/zones';
+import { Level } from 'common/level';
+import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import Map from 'components/Map/Map';
-import { COLOR_MAP } from 'enums/interventions';
+import { COLOR_MAP } from 'common/colors';
 import SummaryStats from 'components/SummaryStats/SummaryStats';
 import { Legend, LegendItem } from 'components/Map/Legend';
 
@@ -46,21 +47,21 @@ const SocialLocationPreview = (props: {
             <Legend condensed={true}>
               <LegendItem
                 key={'legend-3'}
-                title={LEGEND_TEXT[Level.HIGH].name}
-                color={LEGEND_TEXT[Level.HIGH].color}
-                description={LEGEND_TEXT[Level.HIGH].detail}
+                title={LOCATION_SUMMARY_LEVELS[Level.HIGH].name}
+                color={LOCATION_SUMMARY_LEVELS[Level.HIGH].color}
+                description={LOCATION_SUMMARY_LEVELS[Level.HIGH].detail}
               />
               <LegendItem
                 key={'legend-2'}
-                title={LEGEND_TEXT[Level.MEDIUM].name}
-                color={LEGEND_TEXT[Level.MEDIUM].color}
-                description={LEGEND_TEXT[Level.MEDIUM].detail}
+                title={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].name}
+                color={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].color}
+                description={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].detail}
               />
               <LegendItem
                 key={'legend-1'}
-                title={LEGEND_TEXT[Level.LOW].name}
-                color={LEGEND_TEXT[Level.LOW].color}
-                description={LEGEND_TEXT[Level.LOW].detail}
+                title={LOCATION_SUMMARY_LEVELS[Level.LOW].name}
+                color={LOCATION_SUMMARY_LEVELS[Level.LOW].color}
+                description={LOCATION_SUMMARY_LEVELS[Level.LOW].detail}
               />
             </Legend>
           </HeaderText>
@@ -74,7 +75,7 @@ const SocialLocationPreview = (props: {
   }
 
   const alarmLevel = props.projections.getAlarmLevel();
-  const levelInfo = LEGEND_TEXT[alarmLevel];
+  const levelInfo = LOCATION_SUMMARY_LEVELS[alarmLevel];
   const fillColor =
     alarmLevel !== Level.UNKNOWN ? levelInfo.color : COLOR_MAP.GRAY.LIGHT;
 

@@ -8,8 +8,8 @@ import {
   ClaimStateButton,
   ClaimStateButtonWrapper,
 } from './ClaimStateBlock.style';
-import { STATES } from 'enums';
-import { getFormattedCountyName } from 'utils';
+import { STATES } from 'common';
+import { getFormattedCountyName } from 'common/utils';
 
 const EMAIL = 'gov@covidactnow.org';
 

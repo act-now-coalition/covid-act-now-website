@@ -3,7 +3,7 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-import { COLORS } from 'enums';
+import { COLORS } from 'common';
 
 // EMBED GLOBAL STYLES
 export const EmbedGlobalStyle = createGlobalStyle`

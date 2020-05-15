@@ -1,7 +1,7 @@
 import React from 'react';
 import * as States from './index';
 
-import { COLOR_MAP } from 'enums/interventions';
+import { COLOR_MAP } from 'common/colors';
 import { CircleWrapper, StateWrapper, ActionWrapper } from './Circle.style';
 
 const CircleStateAction = ({

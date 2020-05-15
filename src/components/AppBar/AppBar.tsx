@@ -7,7 +7,7 @@ import {
   matchPath,
 } from 'react-router-dom';
 import Logo from 'assets/images/logo';
-import { useEmbed } from 'utils/hooks';
+import { useEmbed } from 'common/utils/hooks';
 import MobileMenu from './MobileMenu';
 import Burger from './Burger';
 import {
@@ -27,7 +27,7 @@ import {
   TwitterIcon,
 } from 'react-share';
 import ArrowBack from '@material-ui/icons/ArrowBack';
-import { STATES } from 'enums';
+import { STATES } from 'common';
 import { Location } from 'history';
 import US_STATE_DATASET from '../MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 

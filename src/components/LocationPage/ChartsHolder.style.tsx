@@ -11,6 +11,11 @@ export const ChartContentWrapper = styled.div`
   @media print {
     margin-top: 0;
   }
+
+  @media print {
+    max-width: 7.5in;
+    margin: 0 auto;
+  }
 `;
 
 export const MainContentInner = styled.div`
@@ -30,9 +35,8 @@ export const MainContentInner = styled.div`
   }
 
   @media print {
-    max-width: 900px;
     margin: 0 auto;
-    padding: 0 3rem;
+    padding: 0 1rem;
   }
 `;
 

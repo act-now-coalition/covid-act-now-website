@@ -10,7 +10,7 @@ import {
 } from 'react-share';
 import Newsletter from 'components/Newsletter/Newsletter';
 import SocialLocationPreview from 'components/SocialLocationPreview/SocialLocationPreview';
-import { Projections } from 'models/Projections';
+import { Projections } from 'common/models/Projections';
 import NewsletterMockup from 'assets/images/newsletterMockup';
 import {
   ShareButtonContainer,
@@ -27,7 +27,7 @@ import {
   SocialTextAreaWrapper,
   EmbedPrompt,
 } from './ShareBlock.style';
-import { STATES } from 'enums';
+import { STATES } from 'common';
 
 const ShareBlock = ({
   condensed,

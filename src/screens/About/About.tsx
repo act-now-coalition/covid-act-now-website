@@ -2,7 +2,7 @@ import React from 'react';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import ShareBlock from 'components/ShareBlock/ShareBlock';
 import Typography from '@material-ui/core/Typography';
-import { TEAM } from './../../enums';
+import { TEAM } from '../../common';
 import StapledSidebar, {
   SidebarLink,
   SectionHeader,
@@ -239,9 +239,9 @@ const About = ({ children }: { children: React.ReactNode }) => {
             1.0. This means that, on average, each person with COVID will
             transmit to 0.9 other people, which means the disease is shrinking.
             An R<sub>0</sub> of 1.0 means COVID is in perfect equilibrium,
-            neither growing nor shrinking. And an R<sub>0</sub> greater than 1.0
-            means that COVID is growing exponentially — and the greater the
-            value above 1.0, the faster the doubling speed.
+            neither growing nor shrinking. An R<sub>0</sub> greater than 1.0
+            means that COVID is growing exponentially. The greater the value
+            above 1.0, the faster the doubling speed.
           </Typography>
 
           <Typography variant="h6" component="h6">
@@ -288,8 +288,6 @@ const About = ({ children }: { children: React.ReactNode }) => {
                 model assumes everyone spreads the disease at the same rate.
                 Reality is, of course, messier. Evidence suggests there may be
                 some people who are “super-spreaders” and others who are not.
-                Interventions should be targeted primarily at those most likely
-                to spread the disease.
               </Typography>
             </li>
             <li>
@@ -303,7 +301,12 @@ const About = ({ children }: { children: React.ReactNode }) => {
               <Typography variant="body1" component="p">
                 Demographic, population, and hospital bed count data are
                 outdated. Demographics for the U.S. as a whole are used, rather
-                than demographics specific to each state.
+                than demographics specific to each state. In other words, we
+                assume each state’s population exactly reflects the country’s.
+                In reality, a state might have a slightly younger population
+                than the nation’s, for instance, or a population with a higher
+                rate of comorbidities. These state-specific demographic nuances
+                would consequently affect morbidity and mortality projections.
               </Typography>
             </li>
           </ul>
@@ -335,26 +338,43 @@ const About = ({ children }: { children: React.ReactNode }) => {
           </Typography>
 
           <Typography variant="h6" component="h6">
+            What does the dotted line on the “infection growth” graph mean?
+          </Typography>
+
+          <Typography variant="body1" component="p">
+            Because of how we weight our data (Gaussian smoothing), and because
+            of potential reporting delays and errors in the incoming case data,
+            we need 7 preceding days of data before we can calculate a final R
+            <sub>t</sub> value. Therefore, we notate preliminary R<sub>t</sub>{' '}
+            values &mdash; values for which we don’t yet have 7 preceding days
+            of data &mdash; with the dotted line.
+          </Typography>
+
+          <Typography variant="h6" component="h6">
             How does the Covid Act Now model differ from the IHME model?
           </Typography>
           <Typography variant="body1" component="p">
+            Until May 4, Covid Act Now and IHME used fundamentally different
+            modeling approaches. (
             <a
               href="https://blog.covidactnow.org/covid-act-now-ihme-why-two-models-are-better-than-one/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              We wrote a blog post explaining the differences
+              We explained those differences here
             </a>
-            .{' '}
+            , and{' '}
             <a
               href="https://grandrounds.com/blog/covid-19-forecasting-fit-to-a-curve-or-model-the-disease-in-real-time/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              This post by Ground Rounds also provides analysis on different
-              modeling approaches
+              Grand Rounds did a similar analysis
             </a>
-            .
+            .) On May 4, IHME started using an SEIR model for their projections.
+            While the specific assumptions and parameters of IHME’s SEIR model
+            are not publicly available, since May 4 the fundamental modeling
+            approach has been the same.
           </Typography>
 
           <Typography variant="h6" component="h6">

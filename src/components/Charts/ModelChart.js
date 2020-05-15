@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import _ from 'lodash';
 import { dateFormat, numberFormat } from 'highcharts';
 import moment from 'moment';
-import { INTERVENTIONS } from 'enums/interventions';
 import Chart from './Chart';
 import {
   ChartContainer,
@@ -11,14 +10,8 @@ import {
   CondensedLegendItemStyled,
 } from './ModelChart.style';
 import Outcomes from '../Outcomes/Outcomes';
-import { COLORS } from 'enums';
-import { formatDate } from 'utils';
-
-const formatIntervention = (intervention, optCase) =>
-  `3 months of ${intervention.toLowerCase()}${optCase || ''}`;
-
-const condensedFormatIntervention = (intervention, optCase) =>
-  `${intervention}${optCase || ''}`;
+import { COLORS } from 'common';
+import { formatDate } from 'common/utils';
 
 const isFuture = d => d.x > new Date().valueOf();
 
@@ -26,25 +19,17 @@ const ModelChart = ({
   height,
   condensed,
   projections,
-  forCompareModels, // true when used by CompareInterventions.js component.
+  forCompareModels, // true when used by CompareModels.js component.
 }) => {
-  // We use the inferred projection if supported, otherwise the worst case for the currently active intervention
-  let projection = projections.primary;
-  const currentIntervention = projections.stateIntervention;
-
-  const data = [
-    projections.baseline.getDataset('hospitalizations'),
-    projections.distancingPoorEnforcement.now.getDataset('hospitalizations'),
-    projections.primary.getDataset('hospitalizations'),
-    projections.distancing.now.getDataset('hospitalizations'),
-    projections.baseline.getDataset('beds', 'Available hospital beds'),
-  ];
+  const noActionDataset = projections.baseline.getDataset('hospitalizations');
+  const projectedDataset = projections.projected.getDataset('hospitalizations');
+  const bedsDataset = projections.primary.getDataset('beds');
 
   const noAction = {
     className: 'limited-action',
     name: 'If all restrictions are lifted',
     type: 'spline',
-    data: data[0].data.filter(isFuture),
+    data: noActionDataset.filter(isFuture),
     marker: {
       symbol: 'circle',
     },
@@ -59,7 +44,7 @@ const ModelChart = ({
     className: 'projected',
     name: 'Projected based on current trends',
     type: 'spline',
-    data: data[2].data.filter(isFuture),
+    data: projectedDataset.filter(isFuture),
     marker: {
       symbol: 'circle',
     },
@@ -73,7 +58,7 @@ const ModelChart = ({
     className: 'hospitalizations',
     name: 'Hospitalizations',
     type: 'spline',
-    data: data[2].data.filter(d => !isFuture(d)),
+    data: projectedDataset.filter(d => !isFuture(d)),
     color: 'black',
     marker: {
       symbol: 'circle',
@@ -84,42 +69,11 @@ const ModelChart = ({
     legendIndex: 1,
   };
 
-  const shelterInPlace = {
-    className: 'stay-at-home',
-    name:
-      currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
-        ? formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE, ' (strict)')
-        : formatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
-    type: 'spline',
-    visible:
-      !projection.isInferred ||
-      currentIntervention !== INTERVENTIONS.SHELTER_IN_PLACE,
-
-    data: data[3].data,
-    marker: {
-      symbol: 'circle',
-    },
-    condensedLegend: {
-      // TODO: A better way to set text color to be darker
-      // on lighter colored backgrounds
-      darkLegendText: true,
-      condensedName:
-        currentIntervention === INTERVENTIONS.SHELTER_IN_PLACE
-          ? condensedFormatIntervention(
-              INTERVENTIONS.SHELTER_IN_PLACE,
-              ' (strict)',
-            )
-          : condensedFormatIntervention(INTERVENTIONS.SHELTER_IN_PLACE),
-      bgColor: projections.getChartSeriesColorMap().shelterInPlaceSeries,
-    },
-    legendIndex: 3,
-  };
-
   const availableBeds = {
     className: 'beds',
     name: 'Available hospital beds',
     type: 'spline',
-    data: data[4].data,
+    data: bedsDataset,
     marker: {
       symbol: 'circle',
     },
@@ -200,12 +154,7 @@ const ModelChart = ({
           },
         },
       },
-      series: [
-        noAction,
-        projection.isInferred ? projected : shelterInPlace,
-        availableBeds,
-        previousEstimates,
-      ],
+      series: [noAction, projected, availableBeds, previousEstimates],
       annotations: [
         {
           draggable: '',
@@ -252,17 +201,15 @@ const ModelChart = ({
     height,
     noAction,
     projected,
-    projection.isInferred,
     availableBeds,
     condensed,
     previousEstimates,
-    shelterInPlace,
   ]);
 
   if (condensed) {
     return (
       <ChartContainer>
-        <Wrapper projections={projections} isInferred={projection.isInferred}>
+        <Wrapper projections={projections}>
           <Chart options={options} />
           <CondensedLegend>
             {[previousEstimates, noAction, projected]
@@ -274,27 +221,15 @@ const ModelChart = ({
     );
   }
 
-  // TODO(michael): I think this logic matches what we show in the chart above.
-  // We show baseline + inference or baseline + stay-at-home depending on if we
-  // have inference or not. But we should really merge this logic, and maybe move
-  // the projection color into `Projection` or otherwise make it so we don't have to
-  // pass these in separately.
-  let outcomesProjections = [projections.baseline];
-  let outcomesColors = [projections.getSeriesColorForLimitedAction()];
-  if (projections.primary.isInferred) {
-    outcomesProjections.push(projections.primary);
-    outcomesColors.push(projections.getSeriesColorForPrimary());
-  } else {
-    outcomesProjections.push(projections.distancing.now);
-    outcomesColors.push(projections.getSeriesColorForShelterInPlace());
-  }
+  let outcomesProjections = [projections.baseline, projections.projected];
+  let outcomesColors = [COLORS.LIMITED_ACTION, COLORS.PROJECTED];
   return (
     <ChartContainer>
-      <Wrapper projections={projections} isInferred={projection.isInferred}>
+      <Wrapper projections={projections}>
         <Chart options={options} />
         <Outcomes
           title={`Predicted outcomes by ${formatDate(
-            projections.primary.finalDate,
+            projections.projected.finalDate,
           )} (90 days from now)`}
           projections={outcomesProjections}
           colors={outcomesColors}
