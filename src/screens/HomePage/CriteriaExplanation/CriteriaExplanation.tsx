@@ -36,7 +36,7 @@ const CriteriaExplanation = () => {
         </Criterion>
         <Criterion>
           <Kicker>Criterion 4</Kicker>
-          <CriterionHeader>Are we contact tracing?</CriterionHeader>
+          <CriterionHeader>Are cases being traced?</CriterionHeader>
           <CriterionDescription>
             How many new cases are not traced to a known infected individual?
           </CriterionDescription>
