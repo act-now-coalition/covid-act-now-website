@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import {
   ChartContentWrapper,
@@ -53,6 +53,16 @@ type County = {
   population: string;
 };
 
+const smoothScrollTo = (div: null | HTMLDivElement) => () =>
+  div &&
+  window.scrollTo({
+    left: 0,
+    // TODO: 180 is rough accounting for the navbar and searchbar;
+    // could make these constants so we don't have to manually update
+    top: div.offsetTop - 180,
+    behavior: 'smooth',
+  });
+
 const ChartsHolder = (props: {
   projections: Projections;
   stateId: string;
@@ -64,6 +74,11 @@ const ChartsHolder = (props: {
   const { rtRangeData, testPositiveData, icuUtilizationData } = getChartData(
     projection,
   );
+
+  const rtRangeRef = useRef<HTMLDivElement>(null);
+  const testPositiveRef = useRef<HTMLDivElement>(null);
+  const icuUtilizationRef = useRef<HTMLDivElement>(null);
+  const contactTracingRef = useRef<HTMLDivElement>(null);
 
   const getChartSummarys = (projection: Projection) => {
     return {
@@ -84,9 +99,15 @@ const ChartsHolder = (props: {
         <>
           <ChartContentWrapper>
             <LocationPageHeader projections={props.projections} />
-            <SummaryStats stats={getChartSummarys(projection)} />
+            <SummaryStats
+              stats={getChartSummarys(projection)}
+              onRtRangeClick={smoothScrollTo(rtRangeRef.current)}
+              onTestPositiveClick={smoothScrollTo(testPositiveRef.current)}
+              onIcuUtilizationClick={smoothScrollTo(icuUtilizationRef.current)}
+              onContactTracingClick={smoothScrollTo(contactTracingRef.current)}
+            />
             <MainContentInner>
-              <ChartHeader>
+              <ChartHeader ref={rtRangeRef}>
                 {getMetricName(Metric.CASE_GROWTH_RATE)}
               </ChartHeader>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
@@ -104,7 +125,9 @@ const ChartsHolder = (props: {
                   </Disclaimer>
                 </>
               )}
-              <ChartHeader>{getMetricName(Metric.POSITIVE_TESTS)}</ChartHeader>
+              <ChartHeader ref={testPositiveRef}>
+                {getMetricName(Metric.POSITIVE_TESTS)}
+              </ChartHeader>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
               <ChartDescription>
                 {positiveTestsStatusText(projection)}
@@ -124,7 +147,7 @@ const ChartsHolder = (props: {
                   </Disclaimer>
                 </>
               )}
-              <ChartHeader>
+              <ChartHeader ref={icuUtilizationRef}>
                 {getMetricName(Metric.HOSPITAL_USAGE)}
                 <BetaTag>Beta</BetaTag>
               </ChartHeader>
@@ -132,6 +155,30 @@ const ChartsHolder = (props: {
               <ChartDescription>
                 {hospitalOccupancyStatusText(projection)}
               </ChartDescription>
+              {icuUtilizationData && (
+                <>
+                  <ZoneChartWrapper>
+                    <Chart
+                      options={optionsHospitalUsage(icuUtilizationData) as any}
+                    />
+                  </ZoneChartWrapper>
+                  <Disclaimer metricName="COVID ICU usage">
+                    While experts agree surge healthcare capacity is critical,
+                    there is no benchmark for ICU surge capacity. This metric
+                    attempts to model capacity as interventions are relaxed.
+                  </Disclaimer>
+                </>
+              )}
+              <ChartHeader ref={contactTracingRef}>
+                {getMetricName(Metric.CONTACT_TRACING)}
+                <BetaTag>Beta</BetaTag>
+              </ChartHeader>
+              <ChartLocationName>{projection.locationName}</ChartLocationName>
+              <ChartDescription>
+                {/* TODO: Contact tracing status text */}
+                {hospitalOccupancyStatusText(projection)}
+              </ChartDescription>
+              {/* TODO: Use contact tracing data here */}
               {icuUtilizationData && (
                 <>
                   <ZoneChartWrapper>
