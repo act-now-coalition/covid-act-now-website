@@ -117,7 +117,7 @@ const _AppBar = () => {
   const hashtag = 'COVIDActNow';
   const locationShareTitle = `See ${locationName}'s reopening risk on @CovidActNow, dashboards to help America reopen safely: `;
   const defaultShareTitle =
-    'Check out @CovidActNow, clear data and a simple dashboard to help America reopen safely: ';
+    'Check out @CovidActNow, data and dashboards to help America reopen safely: ';
 
   const shareTitle = locationName ? locationShareTitle : defaultShareTitle;
 
