@@ -55,7 +55,7 @@ type County = {
   population: string;
 };
 
-const smoothScrollTo = (div: null | HTMLDivElement) => () =>
+const scrollTo = (div: null | HTMLDivElement) =>
   div &&
   window.scrollTo({
     left: 0,
@@ -103,10 +103,10 @@ const ChartsHolder = (props: {
             <LocationPageHeader projections={props.projections} />
             <SummaryStats
               stats={getChartSummarys(projection)}
-              onRtRangeClick={smoothScrollTo(rtRangeRef.current)}
-              onTestPositiveClick={smoothScrollTo(testPositiveRef.current)}
-              onIcuUtilizationClick={smoothScrollTo(icuUtilizationRef.current)}
-              onContactTracingClick={smoothScrollTo(contactTracingRef.current)}
+              onRtRangeClick={() => scrollTo(rtRangeRef.current)}
+              onTestPositiveClick={() => scrollTo(testPositiveRef.current)}
+              onIcuUtilizationClick={() => scrollTo(icuUtilizationRef.current)}
+              onContactTracingClick={() => scrollTo(contactTracingRef.current)}
             />
             <MainContentInner>
               <ChartHeader ref={rtRangeRef}>
