@@ -24,8 +24,6 @@ import {
 import { fail, assert } from 'common/utils';
 import fetch from 'node-fetch';
 
-const API_URL = DataUrlJson.data_url.replace(/\/$/, '');
-
 /**
  * Maps values from the INTERVENTIONS enum to the API endpoints.
  */
@@ -65,94 +63,106 @@ type AggregateSummaryWithTimeseries =
   | CovidActNowStatesTimeseries
   | CovidActNowCountiesTimeseries;
 
-/**
- * Fetches the summary+timeseries for every intervention for every region in
- * the specified region aggregate (e.g. all counties or all states).
- */
-export async function fetchAggregatedSummaryWithTimeseriesMaps(
-  regionAggregate: RegionAggregateDescriptor,
-): Promise<RegionSummaryWithTimeseriesMap[]> {
-  // We have to fetch each intervention separately and then merge them per region ID.
-  const merged = {} as { [id: string]: RegionSummaryWithTimeseriesMap };
+export class Api {
+  readonly snapshotUrl: string;
+  constructor(dataUrl?: string) {
+    this.snapshotUrl = dataUrl || DataUrlJson.data_url;
+    // trim any trailing /
+    this.snapshotUrl = this.snapshotUrl.replace(/\/$/, '');
+  }
 
-  await Promise.all(
-    Object.keys(ApiInterventions).map(async intervention => {
-      const apiIntervention = ApiInterventions[intervention];
-      let all = await fetchApiJson<AggregateSummaryWithTimeseries>(
-        `us/${regionAggregate}.${apiIntervention}.timeseries.json`,
-      );
-      // TODO(michael): Remove this once we have a new snapshot with Chris's fix.
-      if ((all as any)['__root__']) {
-        all = (all as any)['__root__'];
-      }
-      assert(all != null, 'Failed to load timeseries');
+  /**
+   * Fetches the summary+timeseries for every intervention for every region in
+   * the specified region aggregate (e.g. all counties or all states).
+   */
+  async fetchAggregatedSummaryWithTimeseriesMaps(
+    regionAggregate: RegionAggregateDescriptor,
+  ): Promise<RegionSummaryWithTimeseriesMap[]> {
+    // We have to fetch each intervention separately and then merge them per region ID.
+    const merged = {} as { [id: string]: RegionSummaryWithTimeseriesMap };
 
-      for (const summaryTimeseries of all) {
-        let id;
-        if (summaryTimeseries.countyName != null) {
-          id = summaryTimeseries.fips;
-        } else {
-          id = REVERSED_STATES[summaryTimeseries.stateName];
+    await Promise.all(
+      Object.keys(ApiInterventions).map(async intervention => {
+        const apiIntervention = ApiInterventions[intervention];
+        let all = await this.fetchApiJson<AggregateSummaryWithTimeseries>(
+          `us/${regionAggregate}.${apiIntervention}.timeseries.json`,
+        );
+        assert(all != null, 'Failed to load timeseries');
+
+        for (const summaryTimeseries of all) {
+          let id;
+          if (summaryTimeseries.countyName != null) {
+            id = summaryTimeseries.fips;
+          } else {
+            id = REVERSED_STATES[summaryTimeseries.stateName];
+          }
+          merged[id] = merged[id] || {};
+          merged[id][intervention] = summaryTimeseries;
         }
-        merged[id] = merged[id] || {};
-        merged[id][intervention] = summaryTimeseries;
-      }
-    }),
-  );
-  return Object.values(merged);
-}
+      }),
+    );
+    return Object.values(merged);
+  }
 
-/**
- * Fetches the summary+timeseries for a region for each available intervention
- * and returns them as a map.
- */
-export async function fetchSummaryWithTimeseriesMap(
-  region: RegionDescriptor,
-): Promise<RegionSummaryWithTimeseriesMap> {
-  const result = {} as RegionSummaryWithTimeseriesMap;
-  await Promise.all(
-    Object.keys(ApiInterventions).map(async intervention => {
-      result[intervention] = await fetchSummaryWithTimeseries(
-        region,
-        intervention as InterventionKey,
+  /**
+   * Fetches the summary+timeseries for a region for each available intervention
+   * and returns them as a map.
+   */
+  async fetchSummaryWithTimeseriesMap(
+    region: RegionDescriptor,
+  ): Promise<RegionSummaryWithTimeseriesMap> {
+    const result = {} as RegionSummaryWithTimeseriesMap;
+    await Promise.all(
+      Object.keys(ApiInterventions).map(async intervention => {
+        result[intervention] = await this.fetchSummaryWithTimeseries(
+          region,
+          intervention as InterventionKey,
+        );
+      }),
+    );
+    return result;
+  }
+
+  /** Fetches the summary+timeseries for a region and a single intervention. */
+  async fetchSummaryWithTimeseries(
+    region: RegionDescriptor,
+    intervention: InterventionKey,
+  ): Promise<RegionSummaryWithTimeseries | null> {
+    const apiIntervention = ApiInterventions[intervention];
+    if (region.isState()) {
+      return await this.fetchApiJson<CovidActNowStateTimeseries>(
+        `us/states/${region.stateId}.${apiIntervention}.timeseries.json`,
       );
-    }),
-  );
-  return result;
-}
-
-/** Fetches the summary+timeseries for a region and a single intervention. */
-export async function fetchSummaryWithTimeseries(
-  region: RegionDescriptor,
-  intervention: InterventionKey,
-): Promise<RegionSummaryWithTimeseries | null> {
-  const apiIntervention = ApiInterventions[intervention];
-  if (region.isState()) {
-    return await fetchApiJson<CovidActNowStateTimeseries>(
-      `us/states/${region.stateId}.${apiIntervention}.timeseries.json`,
-    );
-  } else if (region.isCounty()) {
-    return await fetchApiJson<CovidActNowStateTimeseries>(
-      `us/counties/${region.countyFipsId}.${apiIntervention}.timeseries.json`,
-    );
-  } else {
-    fail('Unknown region type: ' + region);
+    } else if (region.isCounty()) {
+      return await this.fetchApiJson<CovidActNowStateTimeseries>(
+        `us/counties/${region.countyFipsId}.${apiIntervention}.timeseries.json`,
+      );
+    } else {
+      fail('Unknown region type: ' + region);
+    }
   }
-}
 
-/**
- * Fetches a URL endpoint and returns the parsed JSON cast to the specified
- * type T, or null if the request fails in any way.
- *
- * TODO: Implement better error-handling.
- */
-async function fetchApiJson<T extends object>(
-  endpoint: string,
-): Promise<T | null> {
-  const response = await fetch(`${API_URL}/${endpoint}`);
-  // TODO(michael): This should really check for 404 only, but S3 currently returns 403s.
-  if ((!response.ok && response.status === 404) || response.status === 403) {
-    return null;
+  /** Fetches the ISO Date String at which the API was last updated. */
+  async fetchVersionTimestamp(): Promise<string> {
+    return await this.fetchApiJson<{ timestamp: string }>('version.json').then(
+      data => data!.timestamp,
+    );
   }
-  return (await response.json()) as T;
+
+  /**
+   * Fetches a URL endpoint and returns the parsed JSON cast to the specified
+   * type T, or null if the request fails in any way.
+   *
+   * TODO: Implement better error-handling.
+   */
+  private async fetchApiJson<T extends object>(
+    endpoint: string,
+  ): Promise<T | null> {
+    const response = await fetch(`${this.snapshotUrl}/${endpoint}`);
+    // TODO(michael): This should really check for 404 only, but S3 currently returns 403s.
+    if ((!response.ok && response.status === 404) || response.status === 403) {
+      return null;
+    }
+    return (await response.json()) as T;
+  }
 }
