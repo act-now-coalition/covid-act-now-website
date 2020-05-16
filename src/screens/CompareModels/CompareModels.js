@@ -119,11 +119,22 @@ function CompareModelsMain({ masterSnapshot, location }) {
 
     const leftDataset = getDataset(leftStateProjections[stateAbbr].primary);
     const rightDataset = getDataset(rightStateProjections[stateAbbr].primary);
+    const leftDataPoints = _.filter(leftDataset, d => d.y != null).length;
+    const rightDataPoints = _.filter(rightDataset, d => d.y != null).length;
+
+    // TODO(michael): Figure out how to incorporate missing data points better.
+    if ((leftDataPoints === 0) !== (rightDataPoints === 0)) {
+      // Only one state has data for the metric. That's probably bad.
+      return 9999;
+    } else if (leftDataPoints === 0 && rightDataPoints === 0) {
+      // This can happen if a metric is disabled for a state.
+      return 0;
+    }
+
     const [left, right] = trimDatasetsToMatch(leftDataset, rightDataset);
     assert(left.length === right.length, `Datasets should match`);
     const length = left.length;
 
-    // TODO(michael): Figure out how to incorporate missing data points better.
     const min = Math.min(_.minBy(left, d => d.y).y, _.minBy(right, d => d.y).y);
     const max = Math.max(_.maxBy(left, d => d.y).y, _.maxBy(right, d => d.y).y);
     const range = max - min;
