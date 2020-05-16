@@ -4,9 +4,14 @@ import Map from 'components/Map/Map';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import ShareBlock from 'components/ShareBlock/ShareBlock';
 import CriteriaExplanation from './CriteriaExplanation/CriteriaExplanation';
-import PartnerLogoGrid from 'components/PartnerLogoGrid/PartnerLogoGrid';
+import { PartnerLogoGrid, PressLogoGrid } from 'components/LogoGrid/LogoGrid';
 
-import { Content, PartnerSection, PartnerHeader } from './HomePage.style';
+import {
+  Content,
+  FeaturedHeader,
+  PartnerSection,
+  PartnerHeader,
+} from './HomePage.style';
 
 export default function HomePage() {
   return (
@@ -27,6 +32,8 @@ export default function HomePage() {
             <Content>
               <PartnerHeader>Our Partners</PartnerHeader>
               <PartnerLogoGrid />
+              <FeaturedHeader>Featured In</FeaturedHeader>
+              <PressLogoGrid />
             </Content>
           </PartnerSection>
           <ShareBlock />
