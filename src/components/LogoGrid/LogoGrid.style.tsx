@@ -64,7 +64,7 @@ export const LogoWrapper = styled.div`
 
   &:first-child {
     height: 4.75rem;
-    margin-right: 2.5rem;
+    margin-right: 2.0rem;
 
     > img {
       float: right;
@@ -73,7 +73,7 @@ export const LogoWrapper = styled.div`
   }
 
   &:last-child {
-    margin-left: 2.5rem;
+    margin-left: 2.0rem;
     height: 3rem;
 
     > img {
