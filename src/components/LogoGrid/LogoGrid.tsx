@@ -22,7 +22,7 @@ export const PartnerLogoGrid = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <Logo src="/images/cerc.jpg" />
+        <Logo src="/images/cerc.jpg" style={{ transform: 'scale(1.1)' }} />
       </a>
       <a
         href="https://grandrounds.com/"

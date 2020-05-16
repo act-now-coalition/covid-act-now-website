@@ -40,7 +40,7 @@ export const Logo = styled.img`
 export const StyledPressLogoGrid = styled.div`
   display: flex;
   align-items: center;
-  margin: 0 -0.5rem 1.5rem;
+  margin: 0 0 1.5rem;
   position: relative;
   flex-wrap: wrap;
 
@@ -64,7 +64,7 @@ export const LogoWrapper = styled.div`
 
   &:first-child {
     height: 4.75rem;
-    margin-right: 2.0rem;
+    margin-right: 2rem;
 
     > img {
       float: right;
@@ -73,7 +73,7 @@ export const LogoWrapper = styled.div`
   }
 
   &:last-child {
-    margin-left: 2.0rem;
+    margin-left: 2rem;
     height: 3rem;
 
     > img {
@@ -86,15 +86,19 @@ export const LogoWrapper = styled.div`
     object-fit: contain;
     width: auto;
     margin: 0 auto;
-    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
   }
 
   @media (max-width: 899px) {
-    min-width: 40%;
-    margin-top: 1.5rem;
+    min-width: 34%;
+    width: 100%;
+    margin-top: 2rem;
 
     &:nth-child(2) {
       order: 3;
+      max-width: 20rem;
+      margin: 2rem auto 0;
     }
 
     &:nth-child(3) {
