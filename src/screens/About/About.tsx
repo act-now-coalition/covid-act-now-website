@@ -9,7 +9,7 @@ import StapledSidebar, {
 } from 'components/StapledSidebar/StapledSidebar';
 import TeamTable from './TeamTable/TeamTable';
 import HeadshotGrid, { HeadshotGrid2Up } from './HeadshotGrid/HeadshotGrid';
-import PartnerLogoGrid from 'components/PartnerLogoGrid/PartnerLogoGrid';
+import { PartnerLogoGrid } from 'components/LogoGrid/LogoGrid';
 
 import { Wrapper, Content, Header } from './About.style';
 
