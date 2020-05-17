@@ -71,9 +71,12 @@ const ChartsHolder = (props: {
   const projection: Projection = props.projections.primary;
   const noInterventionProjection: Projection = props.projections.baseline;
 
-  const { rtRangeData, testPositiveData, icuUtilizationData } = getChartData(
-    projection,
-  );
+  const {
+    rtRangeData,
+    testPositiveData,
+    icuUtilizationData,
+    contactTracingData,
+  } = getChartData(projection);
 
   const rtRangeRef = useRef<HTMLDivElement>(null);
   const testPositiveRef = useRef<HTMLDivElement>(null);
@@ -85,6 +88,7 @@ const ChartsHolder = (props: {
       [Metric.CASE_GROWTH_RATE]: projection.rt,
       [Metric.HOSPITAL_USAGE]: projection.currentIcuUtilization,
       [Metric.POSITIVE_TESTS]: projection.currentTestPositiveRate,
+      [Metric.CONTACT_TRACING]: projection.currentContractTracers,
     };
   };
 
@@ -176,20 +180,20 @@ const ChartsHolder = (props: {
               <ChartLocationName>{projection.locationName}</ChartLocationName>
               <ChartDescription>
                 {/* TODO: Contact tracing status text */}
-                {hospitalOccupancyStatusText(projection)}
+                Contact Tracing
               </ChartDescription>
               {/* TODO: Use contact tracing data here */}
-              {icuUtilizationData && (
+              {contactTracingData && (
                 <>
                   <ZoneChartWrapper>
                     <Chart
-                      options={optionsHospitalUsage(icuUtilizationData) as any}
+                      options={optionsPositiveTests(contactTracingData) as any}
                     />
                   </ZoneChartWrapper>
-                  <Disclaimer metricName="COVID ICU usage">
-                    While experts agree surge healthcare capacity is critical,
-                    there is no benchmark for ICU surge capacity. This metric
-                    attempts to model capacity as interventions are relaxed.
+                  <Disclaimer metricName="Contract Tracers">
+                    We estimate to need 10 Contract Tracers per case. We
+                    calculate that we need a given percentage of cases tracked
+                    before reopening.
                   </Disclaimer>
                 </>
               )}
@@ -257,7 +261,12 @@ function generateChartDescription(
 // Exported for use by AllStates.js.
 export function getChartData(
   projection: Projection,
-): { rtRangeData: any; testPositiveData: any; icuUtilizationData: any } {
+): {
+  rtRangeData: any;
+  testPositiveData: any;
+  icuUtilizationData: any;
+  contactTracingData: any;
+} {
   const rtRangeData =
     projection &&
     projection.rt &&
@@ -278,7 +287,17 @@ export function getChartData(
     projection.currentIcuUtilization &&
     projection.getDataset('icuUtilization');
 
-  return { rtRangeData, testPositiveData, icuUtilizationData };
+  const contactTracingData =
+    projection &&
+    projection.currentContractTracers &&
+    projection.getDataset('contractTracers');
+  console.log(projection.currentContractTracers);
+  return {
+    rtRangeData,
+    testPositiveData,
+    icuUtilizationData,
+    contactTracingData,
+  };
 }
 
 function caseGrowthStatusText(projection: Projection) {

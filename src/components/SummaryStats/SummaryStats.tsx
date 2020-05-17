@@ -116,7 +116,7 @@ const SummaryStats = (props: {
             beta={true}
             condensed={props.condensed}
             // TODO: Add real contact tracing number
-            value={props.stats[Metric.HOSPITAL_USAGE] as number}
+            value={props.stats[Metric.CONTACT_TRACING] as number}
           />
         </SummaryStatsWrapper>
       )}
