@@ -1,0 +1,36 @@
+diff --git a/node_modules/pageres/dist/index.d.ts b/node_modules/pageres/dist/index.d.ts
+index d6a910c..d9179d4 100644
+--- a/node_modules/pageres/dist/index.d.ts
++++ b/node_modules/pageres/dist/index.d.ts
+@@ -22,6 +22,8 @@ export interface Options {
+         [key: string]: string;
+     };
+     readonly transparent?: boolean;
++    readonly keepAlive?: boolean;
++    browser?: any;
+ }
+ export interface Source {
+     readonly url: string;
+diff --git a/node_modules/pageres/dist/index.js b/node_modules/pageres/dist/index.js
+index 4b82e8e..7e5b6b7 100644
+--- a/node_modules/pageres/dist/index.js
++++ b/node_modules/pageres/dist/index.js
+@@ -39,6 +39,7 @@ class Pageres extends EventEmitter {
+         this.urls = [];
+         this._source = [];
+         this._destination = '';
++        this._browser = options.browser;
+     }
+     src(url, sizes, options) {
+         if (url === undefined) {
+@@ -159,7 +160,9 @@ class Pageres extends EventEmitter {
+             scaleFactor: options.scale === undefined ? 1 : options.scale,
+             type: options.format === 'jpg' ? 'jpeg' : 'png',
+             userAgent: options.userAgent,
+-            headers: options.headers
++            headers: options.headers,
++            _browser: options.browser,
++            _keepAlive: options.keepAlive,
+         };
+         if (options.username && options.password) {
+             finalOptions.authentication = {
