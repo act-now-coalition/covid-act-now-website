@@ -5,12 +5,12 @@ import {
   STATE_TO_CALCULATED_INTERVENTION_COLOR,
   COLOR_MAP,
 } from 'common/colors';
-// import COUNTIES_JSON from './data/counties-10m.json';
+import COUNTIES_JSON from './data/counties-10m.json';
 import STATES_JSON from './data/states-10m.json';
 import {
   USMapWrapper,
-  // USCountyMapWrapper,
   USStateMapWrapper,
+  USCountyMapWrapper,
 } from './Map.style';
 import { REVERSED_STATES } from 'common';
 
@@ -31,54 +31,41 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent, condensed }) => {
   return (
     <USMapWrapper condensed={condensed}>
       {/** Map with shaded background colors for states. */}
-      <USStateMapWrapper>
-        <ComposableMap data-tip="" projection="geoAlbersUsa" stroke={'white'}>
+      <ComposableMap data-tip="" projection="geoAlbersUsa" stroke={'white'}>
+        <USStateMapWrapper>
           <Geographies geography={STATES_JSON}>
             {({ geographies }) =>
-              geographies.map(geo => {
-                return (
-                  <Geography
-                    key={geo.rsmKey}
-                    geography={geo}
-                    onClick={() => stateClickHandler(geo.properties.name)}
-                    onMouseEnter={() => {
-                      const { name } = geo.properties;
-                      setTooltipContent(name);
-                    }}
-                    onMouseLeave={() => {
-                      setTooltipContent('');
-                    }}
-                    fill={getFillColor(geo)}
-                  />
-                );
-              })
+              geographies.map(geo => (
+                <Geography
+                  key={geo.rsmKey}
+                  geography={geo}
+                  onClick={() => stateClickHandler(geo.properties.name)}
+                  onMouseEnter={() => {
+                    const { name } = geo.properties;
+                    setTooltipContent(name);
+                  }}
+                  onMouseLeave={() => {
+                    setTooltipContent('');
+                  }}
+                  fill={getFillColor(geo)}
+                />
+              ))
             }
           </Geographies>
-        </ComposableMap>
-      </USStateMapWrapper>
+        </USStateMapWrapper>
+        {/* County lines are overlaid over the state map and ignore pointer events */}
+        <USCountyMapWrapper>
+          <Geographies geography={COUNTIES_JSON}>
+            {({ geographies }) =>
+              geographies.map((geo, i) => (
+                <Geography key={`county-${i}`} geography={geo} />
+              ))
+            }
+          </Geographies>
+        </USCountyMapWrapper>
+      </ComposableMap>
     </USMapWrapper>
   );
 };
 
 export default USACountyMap;
-
-// TODO(igor): clean up once we know what we want
-//  fill={getFillColor(geo.id)}
-/*<USCountyMapWrapper>
-  <ComposableMap projection="geoAlbersUsa">
-    <Geographies geography={COUNTIES_JSON}>
-      {({ geographies }) =>
-        geographies.map(geo => {
-          return (
-            <Geography
-              key={geo.rsmKey}
-              geography={geo}
-              stroke={'rgba(255,255,255,0.05)'}
-              fill={'transparent'}
-            />
-          );
-        })
-      }
-    </Geographies>
-  </ComposableMap>
-</USCountyMapWrapper>;*/

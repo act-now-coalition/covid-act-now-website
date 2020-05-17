@@ -3,7 +3,6 @@ import Typography from '@material-ui/core/Typography';
 
 export const USMapWrapper = styled.div`
   position: relative;
-  padding-bottom: 70%;
   top: ${props => (props.condensed ? '-16px' : '-45px')};
   width: 100%;
 
@@ -12,21 +11,16 @@ export const USMapWrapper = styled.div`
   }
 `;
 
-export const USCountyMapWrapper = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+export const USCountyMapWrapper = styled.g`
+  pointer-events: none;
+  fill: none;
+  fill-opacity: 0;
+  stroke: white;
+  stroke-width: 0.5;
+  stroke-opacity: 0.5;
 `;
 
-export const USStateMapWrapper = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-
+export const USStateMapWrapper = styled.g`
   path:hover {
     opacity: 0.8;
     cursor: pointer;
