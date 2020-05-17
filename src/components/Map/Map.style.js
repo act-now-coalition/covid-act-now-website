@@ -17,10 +17,13 @@ export const USCountyMapWrapper = styled.g`
   fill-opacity: 0;
   stroke: white;
   stroke-width: 0.5;
-  stroke-opacity: 0.5;
+  stroke-opacity: 0.3;
 `;
 
 export const USStateMapWrapper = styled.g`
+  path {
+    stroke-width: 2px;
+  }
   path:hover {
     opacity: 0.8;
     cursor: pointer;
