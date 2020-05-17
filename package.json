@@ -32,7 +32,7 @@
   },
   "scripts": {
     "start": "cross-env TSC_COMPILE_ON_ERROR=false react-scripts -r @cypress/instrument-cra start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && yarn generate-index-pages",
     "serve": "react-scripts build && serve -s build",
     "eject": "react-scripts eject",
     "test": "start-server-and-test start http://localhost:3000 cy.open",
@@ -47,6 +47,7 @@
     "prettier-fix": "prettier --write '**/*.{css,scss,js,ts,tsx}'",
     "update-api-types": "ts-node-script scripts/update_api_types.ts",
     "update-calculated-interventions": "ts-node-script -r tsconfig-paths/register scripts/calculated_interventions.ts",
+    "generate-index-pages": "ts-node-script -r tsconfig-paths/register scripts/generate_index_pages.ts",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
   },
@@ -95,6 +96,7 @@
     "@types/react-simple-maps": "^1.0.1",
     "@types/react-tooltip": "^3.11.0",
     "@types/styled-components": "^5.0.1",
+    "@types/url-join": "^4.0.0",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
     "axios": "^0.19.2",
@@ -114,6 +116,7 @@
     "start-server-and-test": "^1.10.11",
     "ts-node": "^8.9.0",
     "tsconfig-paths": "^3.9.0",
-    "typescript": "^3.8.3"
+    "typescript": "^3.8.3",
+    "url-join": "^4.0.1"
   }
 }
