@@ -49,7 +49,7 @@ function locationNameFromMatch(
   const state = STATES[stateId];
   const countyId = match.params.county;
   if (!state) {
-    // if an invalid state is typed into the URL, redirect to homepage
+    // if invalid state entered in URL, redirect to homepage
     window.location.href = '/';
   }
 
@@ -64,7 +64,7 @@ function locationNameFromMatch(
   );
 
   if (!countyData) {
-    // if an invalid county is typed into the URL, redirect to homepage
+    // if invalid county entered in URL, redirect to homepage
     window.location.href = '/';
   }
 
