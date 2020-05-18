@@ -8,8 +8,8 @@ const SHORT_DESCRIPTION_MEDIUM = 'Some contact tracing';
 const SHORT_DESCRIPTION_HIGH = 'A good amount of content tracing';
 const SHORT_DESCRIPTION_UNKNOWN = 'Insufficient data to assess contact tracing';
 
-const LIMIT_LOW = 0.05;
-const LIMIT_MEDIUM = 0.5;
+const LIMIT_LOW = 0.5;
+const LIMIT_MEDIUM = 0.7;
 const LIMIT_HIGH = 1;
 
 const LOW_NAME = 'Low';

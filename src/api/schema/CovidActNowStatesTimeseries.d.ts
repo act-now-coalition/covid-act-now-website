@@ -94,6 +94,10 @@ export type Currentusagetotal = number;
  */
 export type Typicalusagerate = number;
 /**
+ * # of Contact Tracers
+ */
+export type Contacttracers = number;
+/**
  * Total Population in geographic area.
  */
 export type Population1 = number;
@@ -179,6 +183,10 @@ export type Cumulativenegativetests2 = number;
  * Number of deaths so far
  */
 export type Cumulativedeaths2 = number;
+/**
+ * # of Contact Tracers
+ */
+export type Contacttracers1 = number;
 export type Date1 = string;
 export type Actualstimeseries = CANActualsTimeseriesRow[];
 export type CovidActNowStatesTimeseries = CovidActNowStateTimeseries[];
@@ -217,6 +225,7 @@ export interface _Actuals {
   cumulativeDeaths: Cumulativedeaths;
   hospitalBeds: _ResourceUtilization;
   ICUBeds: _ResourceUtilization;
+  contactTracers?: Contacttracers;
 }
 export interface _ResourceUtilization {
   capacity: Capacity;
@@ -249,5 +258,6 @@ export interface CANActualsTimeseriesRow {
   cumulativeDeaths: Cumulativedeaths2;
   hospitalBeds: _ResourceUtilization;
   ICUBeds: _ResourceUtilization;
+  contactTracers?: Contacttracers1;
   date: Date1;
 }
