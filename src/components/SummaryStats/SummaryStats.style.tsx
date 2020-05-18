@@ -78,7 +78,7 @@ export const SummaryStatWrapper = styled(Box)<{ condensed?: Boolean }>`
       margin: 0;
       padding: 0 1.2rem 0 1rem;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
 
       &:not(:last-child) {
         border-right: 1px solid ${palette.divider};
