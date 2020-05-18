@@ -29,6 +29,9 @@ import { getLevel, getMetricName } from 'common/metric';
 import { Metric } from 'common/metric';
 import { Level } from 'common/level';
 import { formatDate } from 'common/utils';
+import { POSITIVE_RATE_DISCLAIMER } from 'common/metrics/positive_rate';
+import { CASE_GROWTH_DISCLAIMER } from 'common/metrics/case_growth';
+import { HOSPITALIZATIONS_DISCLAIMER } from 'common/metrics/hospitalizations';
 
 // TODO(michael): These format helpers should probably live in a more
 // general-purpose location, not just for charts.
@@ -99,8 +102,7 @@ const ChartsHolder = (props: {
                     <Chart options={optionsRt(rtRangeData) as any} />
                   </ZoneChartWrapper>
                   <Disclaimer metricName="infection growth rate">
-                    Most experts recommend an infection rate of less than 1.0
-                    for two weeks before reopening.
+                    {CASE_GROWTH_DISCLAIMER}
                   </Disclaimer>
                 </>
               )}
@@ -117,10 +119,7 @@ const ChartsHolder = (props: {
                     />
                   </ZoneChartWrapper>
                   <Disclaimer metricName="positive test rate">
-                    The World Health Organization recommends a positive test
-                    rate of less than 10% before reopening. The countries most
-                    successful in containing COVID have rates of 3% or less. We
-                    calculate the rate as a 7-day trailing average.
+                    {POSITIVE_RATE_DISCLAIMER}
                   </Disclaimer>
                 </>
               )}
@@ -140,9 +139,7 @@ const ChartsHolder = (props: {
                     />
                   </ZoneChartWrapper>
                   <Disclaimer metricName="COVID ICU usage">
-                    While experts agree surge healthcare capacity is critical,
-                    there is no benchmark for ICU surge capacity. This metric
-                    attempts to model capacity as interventions are relaxed.
+                    {HOSPITALIZATIONS_DISCLAIMER}
                   </Disclaimer>
                 </>
               )}
