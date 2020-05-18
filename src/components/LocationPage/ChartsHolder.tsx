@@ -23,6 +23,7 @@ import { ChartRt } from '../../components/Charts';
 import {
   optionsHospitalUsage,
   optionsPositiveTests,
+  optionsContactTracing,
 } from 'components/Charts/zoneUtils';
 import { getLevel, getMetricName } from 'common/metric';
 import { Metric } from 'common/metric';
@@ -188,7 +189,7 @@ const ChartsHolder = (props: {
                 <>
                   <ZoneChartWrapper>
                     <Chart
-                      options={optionsPositiveTests(contactTracingData) as any}
+                      options={optionsContactTracing(contactTracingData) as any}
                     />
                   </ZoneChartWrapper>
                   <Disclaimer metricName="Contract Tracers">

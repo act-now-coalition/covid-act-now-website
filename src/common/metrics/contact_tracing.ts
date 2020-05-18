@@ -17,7 +17,7 @@ const MEDIUM_NAME = 'Medium';
 const HIGH_NAME = 'High';
 const UNKNOWN = 'Unknown';
 
-export const CONTACT_TRACING_LEVEL_INFI_MAP: LevelInfoMap = {
+export const CONTACT_TRACING_LEVEL_INFO_MAP: LevelInfoMap = {
   [Level.LOW]: {
     level: Level.LOW,
     upperLimit: LIMIT_LOW,
