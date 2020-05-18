@@ -291,7 +291,7 @@ export function getChartData(
     projection &&
     projection.currentContractTracers &&
     projection.getDataset('contractTracers');
-  console.log(projection.currentContractTracers);
+
   return {
     rtRangeData,
     testPositiveData,

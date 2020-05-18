@@ -171,11 +171,9 @@ export class Projection {
       summaryWithTimeseries.actuals.cumulativeDeaths;
     this.currentCumulativeCases =
       summaryWithTimeseries.actuals.cumulativeConfirmedCases;
-    // todo this a lil hacky
     this.currentContractTracers = this.contractTracers
       .filter(x => x !== null)
       .slice(-1)[0];
-    console.log();
   }
 
   /**
@@ -367,7 +365,13 @@ export class Projection {
       : s.stateName;
   }
 
-  private calculateWeeklyCases(
+  /**
+   * Generates a dictionary of ISO week number, to the daily average number
+   * of cases that happened in that week. Used to generate the contract
+   * tracing metric.
+   * @param actualTimeseries
+   */
+  private getWeeklyAveragedDailyCases(
     actualTimeseries: Array<CANActualsTimeseriesRow | null>,
   ) {
     let currentWeek: number = -1;
@@ -375,14 +379,13 @@ export class Projection {
     let totalInCurrentWeek = 0;
 
     // A dictionary from week number to the cases averaged for that week.
-    const weeklyCases: { [key: number]: number } = {};
+    const weeklyCases: { [week: number]: number } = {};
 
     const deltasFromCumulatives = this.deltasFromCumulatives(
       this.cumulativePositiveTests,
     );
 
-    for (let i = 0; i < actualTimeseries.length; i++) {
-      const row = actualTimeseries[i];
+    actualTimeseries.forEach((row, i) => {
       if (row) {
         const row_week = moment.utc(row.date).week();
         if (currentWeek !== row_week) {
@@ -392,11 +395,11 @@ export class Projection {
         }
         countInCurrentWeek += 1;
         totalInCurrentWeek += deltasFromCumulatives[i] || 0;
-        if (countInCurrentWeek == 7) {
+        if (countInCurrentWeek === 7) {
           weeklyCases[currentWeek] = totalInCurrentWeek / 7;
         }
       }
-    }
+    });
     return weeklyCases;
   }
 
@@ -404,7 +407,7 @@ export class Projection {
     actualTimeseries: Array<CANActualsTimeseriesRow | null>,
   ): Array<number | null> {
     // calculate the new cases per week. week number -> average, no value if week not full
-    const weeklyCases = this.calculateWeeklyCases(actualTimeseries);
+    const weeklyCases = this.getWeeklyAveragedDailyCases(actualTimeseries);
     // use date.getWeek() to get the week number
     return actualTimeseries.map(
       (row: CANActualsTimeseriesRow | null, i: number) => {

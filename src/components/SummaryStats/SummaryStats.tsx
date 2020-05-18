@@ -115,7 +115,6 @@ const SummaryStats = (props: {
             chartType={Metric.CONTACT_TRACING}
             beta={true}
             condensed={props.condensed}
-            // TODO: Add real contact tracing number
             value={props.stats[Metric.CONTACT_TRACING] as number}
           />
         </SummaryStatsWrapper>
