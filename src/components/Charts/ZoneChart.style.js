@@ -88,4 +88,19 @@ export const ZoneChartWrapper = styled.div`
       stroke: none;
     }
   }
+
+  .ZoneAnnotation--isActive--flippedOrder {
+    &.ZoneAnnotation--2 rect {
+      fill: ${LEVEL_COLOR[Level.LOW]};
+      stroke: none;
+    }
+    &.ZoneAnnotation--1 rect {
+      fill: ${LEVEL_COLOR[Level.MEDIUM]};
+      stroke: none;
+    }
+    &.ZoneAnnotation--0 rect {
+      fill: ${LEVEL_COLOR[Level.HIGH]};
+      stroke: none;
+    }
+  }
 `;
