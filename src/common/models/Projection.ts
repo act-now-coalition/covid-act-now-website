@@ -18,6 +18,12 @@ import {
 export const RT_TRUNCATION_DAYS = 7;
 
 /**
+ * We will assume roughly 10 tracers are needed to trace a case within 48h.
+ * The range we give here could be between 10 -15 contact tracers per case.
+ */
+export const TRACERS_NEEDED_PER_CASE = 10;
+
+/**
  * We subtract this "decomp" factor from the typical ICU Utilization rates we
  * get from the API to account for hospitals being able to decrease their utilization
  * (by cancelling elective surgeries, using surge capacity, etc.).
@@ -47,7 +53,8 @@ export type DatasetId =
   | 'cumulativeInfected'
   | 'rtRange'
   | 'icuUtilization'
-  | 'testPositiveRate';
+  | 'testPositiveRate'
+  | 'contractTracers';
 
 export interface RtRange {
   /** The actual Rt value. */
@@ -72,6 +79,7 @@ export class Projection {
   readonly typicalICUUtilization: number;
   readonly currentCumulativeDeaths: number | null;
   readonly currentCumulativeCases: number | null;
+  readonly currentContractTracers: number | null;
   readonly stateName: string;
 
   private readonly intervention: string;
@@ -92,6 +100,7 @@ export class Projection {
   private readonly icuUtilization: Array<number | null>;
   // Test Positive series as values between 0-1.
   private readonly testPositiveRate: Array<number | null>;
+  private readonly contractTracers: Array<number | null>;
 
   constructor(
     summaryWithTimeseries: RegionSummaryWithTimeseries,
@@ -145,6 +154,8 @@ export class Projection {
     // We have in the past disabled states due to bad data. We can do that
     // by flipping this flag. If we don't use this
     const disableIcu = false; //summaryWithTimeseries.stateName === 'BadState';
+    this.contractTracers = this.calcContactTracers(this.actualTimeseries);
+
     this.icuUtilization = disableIcu
       ? [null]
       : this.calcICUHeadroom(this.actualTimeseries, timeseries, lastUpdated);
@@ -161,6 +172,9 @@ export class Projection {
       summaryWithTimeseries.actuals.cumulativeDeaths;
     this.currentCumulativeCases =
       summaryWithTimeseries.actuals.cumulativeConfirmedCases;
+    this.currentContractTracers = this.contractTracers
+      .filter(x => x !== null)
+      .slice(-1)[0];
   }
 
   /**
@@ -350,6 +364,67 @@ export class Projection {
     return s.countyName
       ? `${s.countyName} County, ${s.stateName}`
       : s.stateName;
+  }
+
+  /**
+   * Generates a dictionary of ISO week number, to the daily average number
+   * of cases that happened in that week. Used to generate the contract
+   * tracing metric.
+   * @param actualTimeseries
+   */
+  private getWeeklyAveragedDailyCases(
+    actualTimeseries: Array<CANActualsTimeseriesRow | null>,
+  ) {
+    let currentWeek: number = -1;
+    let countInCurrentWeek = 0;
+    let totalInCurrentWeek = 0;
+
+    // A dictionary from week number to the cases averaged for that week.
+    const weeklyCases: { [week: number]: number } = {};
+
+    const deltasFromCumulatives = this.deltasFromCumulatives(
+      this.cumulativePositiveTests,
+    );
+
+    actualTimeseries.forEach((row, i) => {
+      if (row) {
+        const row_week = moment.utc(row.date).week();
+        if (currentWeek !== row_week) {
+          currentWeek = row_week;
+          totalInCurrentWeek = 0;
+          countInCurrentWeek = 0;
+        }
+        countInCurrentWeek += 1;
+        totalInCurrentWeek += deltasFromCumulatives[i] || 0;
+        if (countInCurrentWeek === 7) {
+          weeklyCases[currentWeek] = totalInCurrentWeek / 7;
+        }
+      }
+    });
+    return weeklyCases;
+  }
+
+  private calcContactTracers(
+    actualTimeseries: Array<CANActualsTimeseriesRow | null>,
+  ): Array<number | null> {
+    // calculate the new cases per week. week number -> average, no value if week not full
+    const weeklyCases = this.getWeeklyAveragedDailyCases(actualTimeseries);
+    // use date.getWeek() to get the week number
+    return actualTimeseries.map(
+      (row: CANActualsTimeseriesRow | null, i: number) => {
+        if (row && row.contactTracers) {
+          const row_week = moment.utc(row.date).week();
+          const weeklyAverage = weeklyCases[row_week];
+          if (weeklyAverage) {
+            return (
+              row.contactTracers / (weeklyAverage * TRACERS_NEEDED_PER_CASE)
+            );
+          }
+        }
+
+        return null;
+      },
+    );
   }
 
   private calcRtRange(

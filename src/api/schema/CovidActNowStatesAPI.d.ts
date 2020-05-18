@@ -81,6 +81,10 @@ export type Capacity = number;
  * Currently used capacity for resource
  */
 export type Currentusage = number;
+/**
+ * Number of contact tracers in the region
+ */
+export type ContactTracersCount = number;
 export type Data = CovidActNowAreaSummary[];
 
 export interface CovidActNowStatesAPI {
@@ -115,6 +119,7 @@ export interface _Actuals {
   cumulativeDeaths: Cumulativedeaths1;
   hospitalBeds: _ResourceUtilization;
   ICUBeds: _ResourceUtilization;
+  contactTracersCount?: ContactTracersCount;
 }
 export interface _ResourceUtilization {
   capacity: Capacity;
