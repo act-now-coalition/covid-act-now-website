@@ -24,12 +24,14 @@ const SummaryStat = ({
   onClick,
   beta,
   condensed,
+  flipSignalStatusOrder,
 }: {
   chartType: Metric;
   value: number;
   onClick: () => void;
   beta?: Boolean;
   condensed?: Boolean;
+  flipSignalStatusOrder?: Boolean;
 }) => {
   const levelInfo = getLevelInfo(chartType, value);
 
@@ -68,7 +70,11 @@ const SummaryStat = ({
             </StatValueText>
           </>
         )}
-        <SignalStatus levelInfo={levelInfo} condensed={condensed} />
+        <SignalStatus
+          levelInfo={levelInfo}
+          condensed={condensed}
+          flipOrder={flipSignalStatusOrder}
+        />
       </StatValueWrapper>
     </SummaryStatWrapper>
   );
@@ -116,6 +122,7 @@ const SummaryStats = (props: {
             beta={true}
             condensed={props.condensed}
             value={props.stats[Metric.CONTACT_TRACING] as number}
+            flipSignalStatusOrder
           />
         </SummaryStatsWrapper>
       )}
