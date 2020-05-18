@@ -27,7 +27,7 @@ const ALL_METRICS_LEVEL_INFO_MAP = {
   [Metric.CASE_GROWTH_RATE]: CaseGrowth.CASE_GROWTH_RATE_LEVEL_INFO_MAP,
   [Metric.POSITIVE_TESTS]: TestRates.POSITIVE_TESTS_LEVEL_INFO_MAP,
   [Metric.HOSPITAL_USAGE]: Hospitalizations.HOSPITAL_USAGE_LEVEL_INFO_MAP,
-  [Metric.CONTACT_TRACING]: ContactTracing.CONTACT_TRACING_LEVEL_INFI_MAP,
+  [Metric.CONTACT_TRACING]: ContactTracing.CONTACT_TRACING_LEVEL_INFO_MAP,
 };
 
 export function getLevelInfo(metric: Metric, value: number | null): LevelInfo {
