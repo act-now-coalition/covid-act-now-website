@@ -48,7 +48,7 @@ const BLACKLISTED_COUNTIES = [
   }
 
   // For testing.
-  // screenshots = screenshots.slice(0, 43);
+  screenshots = screenshots.slice(0, 43);
 
   while (screenshots.length > 0) {
     const pageres = new Pageres().dest(
