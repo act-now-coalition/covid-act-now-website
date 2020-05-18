@@ -48,15 +48,27 @@ function locationNameFromMatch(
   const stateId = match.params.id.toUpperCase() as keyof typeof STATES;
   const state = STATES[stateId];
   const countyId = match.params.county;
+  if (!state) {
+    // if an invalid state is typed into the URL, redirect to homepage
+    window.location.href = '/';
+  }
+
   if (!countyId) {
     return state;
   }
 
-  const county = _.find(
+  const countyData = _.find(
     // @ts-ignore TODO(aj): Fix this when features/typescript3 merges
     US_STATE_DATASET.state_county_map_dataset[stateId].county_dataset,
     ['county_url_name', countyId],
-  ).county;
+  );
+
+  if (!countyData) {
+    // if an invalid county is typed into the URL, redirect to homepage
+    window.location.href = '/';
+  }
+
+  const county = countyData.county;
   return `${county}, ${state}`;
 }
 
