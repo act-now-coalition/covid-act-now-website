@@ -1,7 +1,15 @@
-// You can run via `yarn generate-share-images`
+/**
+ * Generates all of our share images (for Open Graph tags, etc.)
+ *
+ * Run via: yarn generate-share-images
+ *
+ * You must be running local server on port 3000 already (e.g. via `yarn start` or
+ * `yarn serve -l 3000`)
+ */
 import fs from 'fs-extra';
 import path from 'path';
 import Pageres from 'pageres';
+import urlJoin from 'url-join';
 import { STATES } from '../../src/common';
 
 // We don't care about the values here, but this is a cheap way to determine all
@@ -59,7 +67,7 @@ const BLACKLISTED_COUNTIES = [
     for (let i = 0; i < batchSize; i++) {
       const s = screenshots.pop()!;
       urls.push(s.url);
-      pageres.src(BASE_URL + s.url, [OUTPUT_SIZE], {
+      pageres.src(urlJoin(BASE_URL, s.url), [OUTPUT_SIZE], {
         selector: CSS_SELECTOR,
         filename: s.filename,
       });
