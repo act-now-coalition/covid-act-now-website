@@ -53,10 +53,6 @@ function LocationPage() {
         canonicalUrl={`/us/${stateId.toLowerCase()}`}
         pageTitle={actionTitle}
         pageDescription={actionDescription}
-        shareTitle={actionTitle}
-        shareDescription={
-          '50 states. 2,100+ counties. Click the map to dive in. '
-        }
       />
       <div>
         <SearchHeader

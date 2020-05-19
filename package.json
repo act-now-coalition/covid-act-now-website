@@ -45,7 +45,7 @@
   },
   "scripts": {
     "start": "cross-env TSC_COMPILE_ON_ERROR=false react-scripts -r @cypress/instrument-cra start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && yarn generate-index-pages",
     "serve": "react-scripts build && serve -s build",
     "eject": "react-scripts eject",
     "test": "start-server-and-test start http://localhost:3000 cy.open",
@@ -60,6 +60,7 @@
     "prettier-fix": "prettier --write '**/*.{css,scss,js,ts,tsx}'",
     "update-api-types": "ts-node-script scripts/update_api_types.ts",
     "update-calculated-interventions": "ts-node-script -r tsconfig-paths/register scripts/calculated_interventions.ts",
+    "generate-index-pages": "ts-node-script -r tsconfig-paths/register scripts/generate_index_pages.ts",
     "generate-share-images": "ts-node-script -r tsconfig-paths/register scripts/generate_share_images/index.ts",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
