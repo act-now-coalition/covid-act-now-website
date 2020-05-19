@@ -69,23 +69,23 @@ jobs:
             * Regenerate calculated interventions files.
             * Point at updated share images.
 
-    - name: Slack notification
-      if: job.status != 'success'
-      env:
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-        STATUS: ${{job.status}}
-      uses: Ilshidur/action-slack@fb92a78
-      with:
-        args: 'update-snapshot failed: {{STATUS}}'
-    - name: Slack notification
-      if: job.status == 'success'
-      env:
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-        STATUS: ${{job.status}}
-      uses: Ilshidur/action-slack@fb92a78
-      with:
-        args: |
-          Website update to new data snapshot completed.
-          PR: https://github.com/covid-projections/covid-projections/pull/${{env.PULL_REQUEST_NUMBER}}
-          Preview: https://covid-projections-git-bump-snapshot-${{env.RUN_ID}}.covidactnow.now.sh/
-          Compare: https://covid-projections-git-bump-snapshot-${{env.RUN_ID}}.covidactnow.now.sh/compare/
+      - name: Slack notification
+        if: job.status != 'success'
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          STATUS: ${{job.status}}
+        uses: Ilshidur/action-slack@fb92a78
+        with:
+          args: 'update-snapshot failed: {{STATUS}}'
+      - name: Slack notification
+        if: job.status == 'success'
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          STATUS: ${{job.status}}
+        uses: Ilshidur/action-slack@fb92a78
+        with:
+          args: |
+            Website update to new data snapshot completed.
+            PR: https://github.com/covid-projections/covid-projections/pull/${{env.PULL_REQUEST_NUMBER}}
+            Preview: https://covid-projections-git-bump-snapshot-${{env.RUN_ID}}.covidactnow.now.sh/
+            Compare: https://covid-projections-git-bump-snapshot-${{env.RUN_ID}}.covidactnow.now.sh/compare/
