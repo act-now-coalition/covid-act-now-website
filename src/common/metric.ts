@@ -5,6 +5,7 @@ import * as ContactTracing from 'common/metrics/contact_tracing';
 
 import { Level, LevelInfo } from 'common/level';
 
+// TODO(sgoldblatt): handle future projections
 export enum Metric {
   CASE_GROWTH_RATE,
   POSITIVE_TESTS,

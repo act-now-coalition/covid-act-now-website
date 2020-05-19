@@ -79,7 +79,8 @@ export class Projection {
   readonly typicalICUUtilization: number;
   readonly currentCumulativeDeaths: number | null;
   readonly currentCumulativeCases: number | null;
-  readonly currentContractTracers: number | null;
+  readonly currentContactTracerMetric: number | null;
+  readonly currentContactTracers: number | null;
   readonly stateName: string;
 
   private readonly intervention: string;
@@ -172,9 +173,13 @@ export class Projection {
       summaryWithTimeseries.actuals.cumulativeDeaths;
     this.currentCumulativeCases =
       summaryWithTimeseries.actuals.cumulativeConfirmedCases;
-    this.currentContractTracers = this.contractTracers
+    this.currentContactTracerMetric = this.contractTracers
       .filter(x => x !== null)
       .slice(-1)[0];
+    this.currentContactTracers =
+      this.lastValue(
+        this.actualTimeseries.map(row => row && row.contactTracers),
+      ) || null;
   }
 
   /**
@@ -369,7 +374,12 @@ export class Projection {
   /**
    * G
    */
-  private getWeeklyAverageCaseForDay(i: number) {
+  getWeeklyAverageCaseForDay(i?: number) {
+    if (i === undefined) {
+      const lastIndex = this.indexOfLastValue(this.cumulativePositiveTests);
+      if (!lastIndex) return null;
+      i = lastIndex;
+    }
     const cumulativeToday = this.cumulativePositiveTests[i];
     const cumulative7daysAgo = this.cumulativePositiveTests[i - 7];
 

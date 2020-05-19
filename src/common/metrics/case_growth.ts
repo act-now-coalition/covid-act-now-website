@@ -1,5 +1,9 @@
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
+import { getLevel, Metric } from 'common/metric';
+import { levelText } from 'common/utils/chart';
+import { formatDecimal } from 'components/Charts/utils';
+import { Projection } from 'common/models/Projection';
 
 export const METRIC_NAME = 'Infection growth rate';
 
@@ -50,3 +54,22 @@ export const CASE_GROWTH_RATE_LEVEL_INFO_MAP: LevelInfoMap = {
 
 export const CASE_GROWTH_DISCLAIMER =
   'Most experts recommend an infection rate of less than 1.0 for two weeks before reopening.';
+  
+export function caseGrowthStatusText(projection: Projection) {
+  const rt = projection.rt!;
+  if (rt === null) {
+    return 'No case load data is available.';
+  }
+  const level = getLevel(Metric.CASE_GROWTH_RATE, rt);
+  const additionalPeople = formatDecimal(rt);
+  const infectionRate = `On average, each person in ${projection.locationName} with COVID is infecting ${additionalPeople} other people.`;
+
+  const epidemiologyReasoning = levelText(
+    level,
+    `Because each person is infecting less than one other person, the total number of cases in ${projection.locationName} is shrinking.`,
+    `Because this number is only slightly above 1.0, it means that COVID is growing, but slowly.`,
+    `As such, the total number of cases in ${projection.locationName} is growing exponentially.`,
+  );
+
+  return `${infectionRate} ${epidemiologyReasoning}`;
+}

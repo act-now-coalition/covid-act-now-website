@@ -1,5 +1,9 @@
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
+import { levelText } from 'common/utils/chart';
+import { getLevel, Metric } from 'common/metric';
+import { formatPercent } from 'components/Charts/utils';
+import { Projection } from 'common/models/Projection';
 
 export const METRIC_NAME = 'Positive test rate';
 
@@ -50,3 +54,28 @@ export const POSITIVE_TESTS_LEVEL_INFO_MAP: LevelInfoMap = {
 
 export const POSITIVE_RATE_DISCLAIMER =
   'The World Health Organization recommends a positive test rate of less than 10% before reopening. The countries most successful in containing COVID have rates of 3% or less. We calculate the rate as a 7-day trailing average.';
+
+  export function positiveTestsStatusText(projection: Projection) {
+  const testPositiveRate = projection.currentTestPositiveRate;
+  if (testPositiveRate === null) {
+    return 'No testing data is available.';
+  }
+  const level = getLevel(Metric.POSITIVE_TESTS, testPositiveRate);
+  const lowSizableLarge = levelText(
+    level,
+    'low',
+    'relatively sizable',
+    'relatively high',
+  );
+  const percentage = formatPercent(testPositiveRate);
+
+  const location = projection.locationName;
+  const testingBroadlyText = levelText(
+    level,
+    `which suggests widespread, aggressive testing in ${location}`,
+    `which indicates that testing in ${location} is not widespread, meaning that many cases may go undetected`,
+    `which indicates that testing in ${location} is limited, meaning that many cases may go undetected`,
+  );
+
+  return `A ${lowSizableLarge} percentage (${percentage}) of COVID tests were positive, ${testingBroadlyText}.`;
+}

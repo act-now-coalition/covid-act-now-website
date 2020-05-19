@@ -20,29 +20,23 @@ import Chart from 'components/Charts/Chart';
 import ClaimStateBlock from 'components/ClaimStateBlock/ClaimStateBlock';
 import ShareModelBlock from '../../components/ShareBlock/ShareModelBlock';
 import { ChartRt } from '../../components/Charts';
+
+import { caseGrowthStatusText, CASE_GROWTH_DISCLAIMER } from 'common/metrics/case_growth';
+import { positiveTestsStatusText, POSITIVE_RATE_DISCLAIMER } from 'common/metrics/positive_rate';
+import { hospitalOccupancyStatusText, HOSPITALIZATIONS_DISCLAIMER } from 'common/metrics/hospitalizations';
+import { generateChartDescription } from 'common/metrics/future_projection';
+import {
+  contactTracingStatusText,
+  CONTACT_TRACING_DISCLAIMER,
+} from 'common/metrics/contact_tracing';
+
 import {
   optionsHospitalUsage,
   optionsPositiveTests,
   optionsContactTracing,
 } from 'components/Charts/zoneUtils';
-import { getLevel, getMetricName } from 'common/metric';
+import { getMetricName } from 'common/metric';
 import { Metric } from 'common/metric';
-import { Level } from 'common/level';
-import { formatDate } from 'common/utils';
-import { POSITIVE_RATE_DISCLAIMER } from 'common/metrics/positive_rate';
-import { CASE_GROWTH_DISCLAIMER } from 'common/metrics/case_growth';
-import { HOSPITALIZATIONS_DISCLAIMER } from 'common/metrics/hospitalizations';
-
-// TODO(michael): These format helpers should probably live in a more
-// general-purpose location, not just for charts.
-import {
-  formatDecimal,
-  formatPercent,
-  formatInteger,
-} from 'components/Charts/utils';
-
-// States here that give us specific
-const STATES_WITH_DATA_OVERRIDES = ['Nevada'];
 
 // TODO(michael): figure out where this type declaration should live.
 type County = {
@@ -91,7 +85,7 @@ const ChartsHolder = (props: {
       [Metric.CASE_GROWTH_RATE]: projection.rt,
       [Metric.HOSPITAL_USAGE]: projection.currentIcuUtilization,
       [Metric.POSITIVE_TESTS]: projection.currentTestPositiveRate,
-      [Metric.CONTACT_TRACING]: projection.currentContractTracers,
+      [Metric.CONTACT_TRACING]: projection.currentContactTracerMetric,
     };
   };
 
@@ -174,8 +168,7 @@ const ChartsHolder = (props: {
               </ChartHeader>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
               <ChartDescription>
-                {/* TODO: Contact tracing status text */}
-                Contact Tracing
+                {contactTracingStatusText(projection)}
               </ChartDescription>
               {/* TODO: Use contact tracing data here */}
               {contactTracingData && (
@@ -186,9 +179,7 @@ const ChartsHolder = (props: {
                     />
                   </ZoneChartWrapper>
                   <Disclaimer metricName="Contract Tracers">
-                    We estimate to need 10 Contract Tracers per case. We
-                    calculate that we need a given percentage of cases tracked
-                    before reopening.
+                    {CONTACT_TRACING_DISCLAIMER}
                   </Disclaimer>
                 </>
               )}
@@ -224,35 +215,6 @@ const ChartsHolder = (props: {
   );
 };
 
-function generateChartDescription(
-  projection: Projection,
-  noInterventionProjection: Projection,
-) {
-  // TODO(sgoldblatt): figure out how to get people number data from projection
-  if (projection.dateOverwhelmed) {
-    if (projection.dateOverwhelmed < new Date()) {
-      return `Our projections suggest hospitals in ${projection.locationName} are overloaded.`;
-    }
-    return `Assuming current trends and interventions continue, ${
-      projection.locationName
-    } hospitals are projected to become overloaded on ${formatDate(
-      projection.dateOverwhelmed,
-    )}. Exercise caution.`;
-  } else {
-    const noInterventionDate = noInterventionProjection.dateOverwhelmed;
-    const restrictionsLiftedText = noInterventionDate
-      ? `However, any reopening should happen in a slow and phased fashion. If all restrictions were completely lifted today, hospitals would overload on ${formatDate(
-          noInterventionDate,
-        )}.`
-      : `However, any reopening should happen in a slow and phased fashion.`;
-
-    return (
-      `Assuming current trends and interventions continue, ${projection.locationName} hospitals are unlikely to become overloaded in the next 3 months. ` +
-      `${restrictionsLiftedText}`
-    );
-  }
-}
-
 // Exported for use by AllStates.js.
 export function getChartData(
   projection: Projection,
@@ -284,7 +246,7 @@ export function getChartData(
 
   const contactTracingData =
     projection &&
-    projection.currentContractTracers &&
+    projection.currentContactTracerMetric &&
     projection.getDataset('contractTracers');
 
   return {
@@ -293,113 +255,6 @@ export function getChartData(
     icuUtilizationData,
     contactTracingData,
   };
-}
-
-function caseGrowthStatusText(projection: Projection) {
-  const rt = projection.rt!;
-  if (rt === null) {
-    return 'No case load data is available.';
-  }
-  const level = getLevel(Metric.CASE_GROWTH_RATE, rt);
-  const additionalPeople = formatDecimal(rt);
-  const infectionRate = `On average, each person in ${projection.locationName} with COVID is infecting ${additionalPeople} other people.`;
-
-  const epidemiologyReasoning = levelText(
-    level,
-    `Because each person is infecting less than one other person, the total number of cases in ${projection.locationName} is shrinking.`,
-    `Because this number is only slightly above 1.0, it means that COVID is growing, but slowly.`,
-    `As such, the total number of cases in ${projection.locationName} is growing exponentially.`,
-  );
-
-  return `${infectionRate} ${epidemiologyReasoning}`;
-}
-
-function positiveTestsStatusText(projection: Projection) {
-  const testPositiveRate = projection.currentTestPositiveRate;
-  if (testPositiveRate === null) {
-    return 'No testing data is available.';
-  }
-  const level = getLevel(Metric.POSITIVE_TESTS, testPositiveRate);
-  const lowSizableLarge = levelText(
-    level,
-    'low',
-    'relatively sizable',
-    'relatively high',
-  );
-  const percentage = formatPercent(testPositiveRate);
-
-  const location = projection.locationName;
-  const testingBroadlyText = levelText(
-    level,
-    `which suggests widespread, aggressive testing in ${location}`,
-    `which indicates that testing in ${location} is not widespread, meaning that many cases may go undetected`,
-    `which indicates that testing in ${location} is limited, meaning that many cases may go undetected`,
-  );
-
-  return `A ${lowSizableLarge} percentage (${percentage}) of COVID tests were positive, ${testingBroadlyText}.`;
-}
-
-function hospitalOccupancyStatusText(projection: Projection) {
-  const currentIcuUtilization = projection.currentIcuUtilization;
-  const currentCovidICUPatients = projection.currentCovidICUPatients;
-  const totalICUCapacity = projection.totalICUCapacity;
-  const nonCovidPatients = Math.floor(projection.nonCovidPatients);
-
-  if (
-    currentIcuUtilization === null ||
-    currentCovidICUPatients === null ||
-    totalICUCapacity === null
-  ) {
-    return 'No ICU occupancy data is available.';
-  }
-  const level = getLevel(Metric.HOSPITAL_USAGE, currentIcuUtilization);
-
-  const location = projection.locationName;
-
-  const lowText = `This suggests there is likely enough capacity to absorb a wave of new COVID infections.`;
-  const mediumText = `This suggests some ability to absorb an increase in COVID cases, but caution is warranted.`;
-  const highText = `This suggests the healthcare system is not well positioned  to absorb a wave of new COVID infections without substantial surge capacity.`;
-
-  const noStateOverride =
-    STATES_WITH_DATA_OVERRIDES.indexOf(projection.stateName) < 0 ||
-    !projection.hasActualData;
-
-  return `${location} ${noStateOverride ? 'has about' : 'has'} ${formatInteger(
-    totalICUCapacity,
-  )} ICU Beds.
-   ${
-     noStateOverride ? 'We estimate that currently' : 'Currently'
-   } ${formatPercent(nonCovidPatients / totalICUCapacity)} (${formatInteger(
-    nonCovidPatients,
-  )})
-      are occupied by non-COVID patients. Of the remaining ${formatInteger(
-        totalICUCapacity - nonCovidPatients,
-      )} ICU beds, ${noStateOverride ? 'we estimate ' : ''}
-      ${formatInteger(
-        currentCovidICUPatients,
-      )} are occupied by COVID cases, or ${formatPercent(
-    Math.min(
-      1,
-      currentCovidICUPatients / (totalICUCapacity - nonCovidPatients),
-    ),
-  )} of available beds. ${levelText(level, lowText, mediumText, highText)}`;
-}
-
-/**
- * Depending on provided `level`, returns the provided `lowText`, `mediumText`,
- * or `highText`.
- */
-function levelText(
-  level: Level,
-  lowText: string,
-  mediumText: string,
-  highText: string,
-) {
-  return level === Level.LOW
-    ? lowText
-    : level === Level.MEDIUM
-    ? mediumText
-    : highText;
 }
 
 export default ChartsHolder;
