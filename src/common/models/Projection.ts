@@ -142,8 +142,9 @@ export class Projection {
       lastUpdated,
     );
 
-    // TODO(https://trello.com/c/CrcF4MsE): Reenable Utah.
-    const disableIcu = summaryWithTimeseries.stateName === 'Utah';
+    // We have in the past disabled states due to bad data. We can do that
+    // by flipping this flag. If we don't use this
+    const disableIcu = false; //summaryWithTimeseries.stateName === 'BadState';
     this.icuUtilization = disableIcu
       ? [null]
       : this.calcICUHeadroom(this.actualTimeseries, timeseries, lastUpdated);

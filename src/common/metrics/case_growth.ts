@@ -47,3 +47,6 @@ export const CASE_GROWTH_RATE_LEVEL_INFO_MAP: LevelInfoMap = {
     detail: SHORT_DESCRIPTION_UNKNOWN,
   },
 };
+
+export const CASE_GROWTH_DISCLAIMER =
+  'Most experts recommend an infection rate of less than 1.0 for two weeks before reopening.';
