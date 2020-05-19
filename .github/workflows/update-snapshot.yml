@@ -8,9 +8,11 @@ on:
 
 env:
   AWS_S3_BUCKET: content.covidactnow.org
-  BRANCH: ${{ github.event.client_payload.branch }}
-  SNAPSHOT_ID: ${{ github.event.client_payload.snapshot_id }}
-  IMAGES_ID: ${{ github.event.client_payload.snapshot_id }}-${{github.run_number}}
+#  BRANCH: ${{ github.event.client_payload.branch }}
+#  SNAPSHOT_ID: ${{ github.event.client_payload.snapshot_id }}
+  BRANCH: mikelehen/test-sharing
+  SNAPSHOT_ID: 299
+  IMAGES_ID: 299-${{github.run_number}}
 
 jobs:
   update-data-snapshot:
