@@ -55,4 +55,15 @@ export default {
   },
   icon: colors.blueGrey[600],
   divider: colors.grey[200],
+  chart: {
+    axis: colors.grey[700],
+    grid: black,
+    area: colors.grey[200],
+    tooltip: {
+      background: black,
+      text: lightGray,
+      shadow: colors.grey[400],
+    },
+    annotation: black,
+  },
 };
