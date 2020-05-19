@@ -40,7 +40,7 @@ jobs:
 
       # Generate Share Images and Upload to S3
       - run: yarn serve -l 3000 &
-      - run: npx wait-on -t 60000 http://localhost:3000/
+      - run: npx wait-on -t 120000 http://localhost:3000/
       - run: yarn generate-share-images
       - uses: jakejarvis/s3-sync-action@master
         with:
