@@ -13,11 +13,16 @@ import urlJoin from 'url-join';
 import US_STATE_DATASET from '../src/components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 import ShareImageUrlJSON from '../src/assets/data/share_images_url.json';
 import { STATES } from '../src/common';
+import { assert } from '../src/common/utils';
 
 // We don't care about the values here, but this is a cheap way to determine all
 // of the counties we have any data for and are therefore share-able.
 import CalculatedCountyInterventionJSON from '../src/assets/data/calculated_county_interventions.json';
 const COUNTIES = Object.keys(CalculatedCountyInterventionJSON);
+
+const BLACKLISTED_COUNTIES = [
+  '11001', // Washington, DC - We treat it as a state, not a county.
+];
 
 type MetaTags = {[name: string]: string}
 
@@ -32,7 +37,7 @@ function homePageTags(imageUrl: string): MetaTags {
 
 function locationPageTags(fullImageUrl: string, canonicalUrl: string, locationName: string): MetaTags {
   const title = `Is ${locationName} ready to reopen?`;
-  const description = 'Real-time modeling and metrics to understand where we stand against COVID.';
+  const description = 'Metrics and modeling to help America reopen safely.';
   return {
     'og:url': canonicalUrl,
     'og:image:url': fullImageUrl,
@@ -62,11 +67,11 @@ async function main() {
   }
 
   for (const fips of COUNTIES) {
-    const county = findCountyByFips(fips);
-    if (!county) {
-      console.warn('Skipping missing county: ', fips);
+    if (BLACKLISTED_COUNTIES.includes(fips)) {
       continue;
     }
+    const county = findCountyByFips(fips);
+    assert(county, 'Failed to find county ' + fips);
     const stateCode = county.state_code;
     const locationName = `${county.county}, ${(STATES as any)[stateCode]}`;
     const relativeUrl = `/us/${stateCode.toLowerCase()}/county/${county.county_url_name}`;
