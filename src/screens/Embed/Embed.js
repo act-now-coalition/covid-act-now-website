@@ -11,6 +11,7 @@ import '../../App.css'; /* optional for styling like the :hover pseudo-class */
 import LocationPageHeader from '../../components/LocationPage/LocationPageHeader';
 import ShareModelBlock from '../../components/ShareBlock/ShareModelBlock';
 
+import { findCountyByFips } from 'common/locations';
 import { useProjections } from 'common/utils/model';
 import { useEmbed } from 'common/utils/hooks';
 
@@ -124,22 +125,4 @@ export default function Embed() {
       </Drawer>
     </EmbedContainer>
   );
-}
-
-function findCountyByFips(fips) {
-  // NYC HACK.
-  if (['36047', '36061', '36005', '36081', '36085'].includes(fips)) {
-    fips = '36061';
-  }
-
-  const statesData = US_STATE_DATASET.state_county_map_dataset;
-  for (const state in statesData) {
-    const countiesData = statesData[state].county_dataset;
-    for (const county of countiesData) {
-      if (String(county.full_fips_code) === String(fips)) {
-        return county;
-      }
-    }
-  }
-  return undefined;
 }

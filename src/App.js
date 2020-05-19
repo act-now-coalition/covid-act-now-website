@@ -3,7 +3,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider, StylesProvider } from '@material-ui/core/styles';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
-import AllStates from 'screens/AllStates/AllStates';
 import LocationPage from 'screens/LocationPage/LocationPage';
 import HomePage from 'screens/HomePage/HomePage';
 import About from 'screens/About/About';
@@ -13,7 +12,9 @@ import Contact from 'screens/Contact/Contact';
 import Terms from 'screens/Terms/Terms';
 import Privacy from 'screens/Terms/Privacy';
 import Embed from 'screens/Embed/Embed';
-import CompareModels from 'screens/CompareModels/CompareModels';
+import AllStates from 'screens/internal/AllStates/AllStates';
+import CompareModels from 'screens/internal/CompareModels/CompareModels';
+import ShareImage from 'screens/internal/ShareImage/ShareImage';
 import AppBar from 'components/AppBar/AppBar';
 import Footer from 'components/Footer/Footer';
 import theme from 'assets/theme';
@@ -42,15 +43,11 @@ export default function App() {
               component={LocationPage}
             />
 
-            {/** Debug endpoint that shows all the state charts. */}
-            <Route path="/all" component={AllStates} />
-
             <Route path="/about" component={About} />
             <Route path="/resources" component={Resources} />
             <Route path="/contact" component={Contact} />
             <Route path="/terms" component={Terms} />
             <Route path="/privacy" component={Privacy} />
-            <Route path="/compare" component={CompareModels} />
 
             <Route exact path="/embed/us/:stateId" component={Embed} />
             <Route
@@ -73,6 +70,33 @@ export default function App() {
             <Route path="/contact">
               <Redirect to="/faq" />
             </Route>
+
+            {/** Internal endpoint that shows all the state charts. */}
+            <Route path="/all">
+              <Redirect to="/internal/all" />
+            </Route>
+            <Route path="/internal/all" component={AllStates} />
+
+            {/** Internal endpoint for comparing API snapshots. */}
+            <Route path="/compare">
+              <Redirect to="/internal/compare" />
+            </Route>
+            <Route path="/internal/compare" component={CompareModels} />
+
+            {/** Internal endpoints we use to generate the content that we want to
+            screenshot for our social sharing images (OpenGraph / Twitter Card). */}
+            <Route exact path="/internal/share-image/" component={ShareImage} />
+            <Route
+              exact
+              path="/internal/share-image/states/:stateId"
+              component={ShareImage}
+            />
+            <Route
+              exact
+              path="/internal/share-image/counties/:countyFipsId"
+              component={ShareImage}
+            />
+
             <Route path="/*">
               <Redirect to="/" />
             </Route>
