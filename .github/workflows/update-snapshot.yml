@@ -8,7 +8,8 @@ env:
   AWS_S3_BUCKET: content.covidactnow.org
   BRANCH: ${{ github.event.client_payload.branch }}
   SNAPSHOT_ID: ${{ github.event.client_payload.snapshot_id }}
-  IMAGES_ID: ${{ github.event.client_payload.snapshot_id }}-${{github.run_number}}
+  # Used in the shared images URL and in the PR branch.
+  RUN_ID: ${{ github.event.client_payload.snapshot_id }}-${{github.run_number}}
 
 jobs:
   update-data-snapshot:
@@ -31,7 +32,7 @@ jobs:
 
       # Update snapshot URL and regenerate map colors.
       - run: yarn install
-      - run: 'echo "{ \"data_url\": \"https://data.covidactnow.org/snapshot/${{env.SNAPSHOT_ID}}/\" }" > src/assets/data/data_url.json'
+      - run: 'echo "{ \"data_url\": \"https://data.covidactnow.org/snapshot/${{env.SNAPSHOT_ID}}/\" }" | python -mjson.tool > src/assets/data/data_url.json'
       - run: yarn update-calculated-interventions
 
       # Generate Share Images and Upload to S3
@@ -42,26 +43,49 @@ jobs:
         with:
           args: '--acl public-read --follow-symlinks --delete'
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          #TODO(michael): Make default secrets work.
+          #AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          #AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.CONTENT_AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.CONTENT_AWS_SECRET_ACCESS_KEY }}
           SOURCE_DIR: scripts/generate_share_images/output
-          DEST_DIR: share/${{env.IMAGES_ID}}
-      - run: 'echo "{ \"share_image_url\": \"https://content.covidactnow.org/share/${{env.IMAGES_ID}}/\" }" > src/assets/data/share_images_url.json'
+          DEST_DIR: share/${{env.RUN_ID}}
+      - run: 'echo "{ \"share_image_url\": \"https://content.covidactnow.org/share/${{env.RUN_ID}}/\" }" | python -mjson.tool > src/assets/data/share_images_url.json'
 
       # Generate Pull Request
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v2
         with:
-          branch: 'bump-snapshot-${{env.SNAPSHOT_ID}}'
-          branch-suffix: random
-          commit-message: >
+          branch: 'bump-snapshot-${{env.RUN_ID}}'
+          commit-message: |
             Update to data snapshot ${{env.SNAPSHOT_ID}}.
 
             * Regenerate calculated interventions files.
             * Point at updated share images.
           title: Update to data snapshot ${{env.SNAPSHOT_ID}}
-          body: >
+          body: |
             Update to data snapshot ${{env.SNAPSHOT_ID}}.
 
             * Regenerate calculated interventions files.
             * Point at updated share images.
+
+    - name: Slack notification
+      if: job.status != 'success'
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        STATUS: ${{job.status}}
+      uses: Ilshidur/action-slack@fb92a78
+      with:
+        args: 'update-snapshot failed: {{STATUS}}'
+    - name: Slack notification
+      if: job.status == 'success'
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        STATUS: ${{job.status}}
+      uses: Ilshidur/action-slack@fb92a78
+      with:
+        args: |
+          Website update to new data snapshot completed.
+          PR: https://github.com/covid-projections/covid-projections/pull/${{env.PULL_REQUEST_NUMBER}}
+          Preview: https://covid-projections-git-bump-snapshot-${{env.RUN_ID}}.covidactnow.now.sh/
+          Compare: https://covid-projections-git-bump-snapshot-${{env.RUN_ID}}.covidactnow.now.sh/compare/
