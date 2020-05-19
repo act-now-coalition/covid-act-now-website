@@ -6,7 +6,6 @@ on:
 
 env:
   AWS_S3_BUCKET: content.covidactnow.org
-  # To pin to an old data set or model code, put the branch/tag/commit here:
   BRANCH: ${{ github.event.client_payload.branch }}
   SNAPSHOT_ID: ${{ github.event.client_payload.snapshot_id }}
   IMAGES_ID: ${{ github.event.client_payload.snapshot_id }}-${{github.run_number}}
