@@ -4,8 +4,8 @@ import { useProjections } from 'common/utils/model';
 import { STATES } from 'common';
 import { ZoneChartWrapper } from 'components/Charts/ZoneChart.style';
 import Chart from 'components/Charts/Chart';
+import { ChartRt } from 'components/Charts';
 import {
-  optionsRt,
   optionsHospitalUsage,
   optionsPositiveTests,
 } from 'components/Charts/zoneUtils';
@@ -38,9 +38,10 @@ function State({ stateId }) {
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <div style={{ width: '32%', height: '450px' }}>
           {rtRangeData && (
-            <ZoneChartWrapper>
-              <Chart options={optionsRt(rtRangeData)} />
-            </ZoneChartWrapper>
+            <ChartRt
+              height={450}
+              columnData={projection.getDataset('rtRange')}
+            />
           )}
         </div>
         <div style={{ width: '32%', height: '450px' }}>

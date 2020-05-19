@@ -47,3 +47,6 @@ export const HOSPITAL_USAGE_LEVEL_INFO_MAP: LevelInfoMap = {
     detail: SHORT_DESCRIPTION_UNKNOWN,
   },
 };
+
+export const HOSPITALIZATIONS_DISCLAIMER =
+  'While experts agree surge healthcare capacity is critical, there is no benchmark for ICU surge capacity. This metric attempts to model capacity as interventions are relaxed.';

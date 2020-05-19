@@ -1,11 +1,13 @@
 import _ from 'lodash';
+import moment from 'moment';
 import Highcharts, { dateFormat } from 'highcharts';
 import palette from 'assets/theme/palette';
+import { LevelInfoMap as Zones, Level } from 'common/level';
 
 const isValidPoint = (d: Highcharts.Point): boolean =>
   _.isFinite(d.x) && _.isFinite(d.y);
 
-const last = (list: any[]) => list[list.length - 1];
+export const last = (list: any[]) => list[list.length - 1];
 
 export const lastValidPoint = (data: Highcharts.Point[]) =>
   last(data.filter(isValidPoint));
@@ -196,3 +198,39 @@ export const zoneAnnotations = (
     labels: getZoneLabels(endDate, minYAxis, maxYAxis, value, zones),
   },
 ];
+
+export const getTruncationDate = (date: Date, truncationDays: number) =>
+  moment(date).subtract(truncationDays, 'days').toDate();
+
+export const randomizeId = (name: string): string =>
+  `${name}-${Math.random().toFixed(9)}`;
+
+export const getChartRegions = (minY: number, maxY: number, zones: Zones) => [
+  {
+    valueFrom: minY,
+    valueTo: zones[Level.LOW].upperLimit,
+    name: zones[Level.LOW].name,
+    color: zones[Level.LOW].color,
+  },
+  {
+    valueFrom: zones[Level.LOW].upperLimit,
+    valueTo: zones[Level.MEDIUM].upperLimit,
+    name: zones[Level.MEDIUM].name,
+    color: zones[Level.MEDIUM].color,
+  },
+  {
+    valueFrom: zones[Level.MEDIUM].upperLimit,
+    valueTo: maxY,
+    name: zones[Level.HIGH].name,
+    color: zones[Level.HIGH].color,
+  },
+];
+
+export const getZoneByValue = (value: number, zones: Zones) => {
+  if (value < zones[Level.LOW].upperLimit) {
+    return zones[Level.LOW];
+  }
+  return value > zones[Level.MEDIUM].upperLimit
+    ? zones[Level.HIGH]
+    : zones[Level.MEDIUM];
+};
