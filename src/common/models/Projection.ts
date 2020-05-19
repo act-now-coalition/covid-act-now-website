@@ -367,54 +367,29 @@ export class Projection {
   }
 
   /**
-   * Generates a dictionary of ISO week number, to the daily average number
-   * of cases that happened in that week. Used to generate the contract
-   * tracing metric.
-   * @param actualTimeseries
+   * G
    */
-  private getWeeklyAveragedDailyCases(
-    actualTimeseries: Array<CANActualsTimeseriesRow | null>,
-  ) {
-    let currentWeek: number = -1;
-    let countInCurrentWeek = 0;
-    let totalInCurrentWeek = 0;
+  private getWeeklyAverageCaseForDay(i: number) {
+    const cumulativeToday = this.cumulativePositiveTests[i];
+    const cumulative7daysAgo = this.cumulativePositiveTests[i - 7];
 
-    // A dictionary from week number to the cases averaged for that week.
-    const weeklyCases: { [week: number]: number } = {};
+    if (!cumulativeToday || !cumulative7daysAgo) {
+      return null;
+    }
 
-    const deltasFromCumulatives = this.deltasFromCumulatives(
-      this.cumulativePositiveTests,
-    );
+    const thisWeek = cumulativeToday - cumulative7daysAgo;
 
-    actualTimeseries.forEach((row, i) => {
-      if (row) {
-        const row_week = moment.utc(row.date).week();
-        if (currentWeek !== row_week) {
-          currentWeek = row_week;
-          totalInCurrentWeek = 0;
-          countInCurrentWeek = 0;
-        }
-        countInCurrentWeek += 1;
-        totalInCurrentWeek += deltasFromCumulatives[i] || 0;
-        if (countInCurrentWeek === 7) {
-          weeklyCases[currentWeek] = totalInCurrentWeek / 7;
-        }
-      }
-    });
-    return weeklyCases;
+    return thisWeek / 7;
   }
 
   private calcContactTracers(
     actualTimeseries: Array<CANActualsTimeseriesRow | null>,
   ): Array<number | null> {
-    // calculate the new cases per week. week number -> average, no value if week not full
-    const weeklyCases = this.getWeeklyAveragedDailyCases(actualTimeseries);
     // use date.getWeek() to get the week number
     return actualTimeseries.map(
       (row: CANActualsTimeseriesRow | null, i: number) => {
         if (row && row.contactTracers) {
-          const row_week = moment.utc(row.date).week();
-          const weeklyAverage = weeklyCases[row_week];
+          const weeklyAverage = this.getWeeklyAverageCaseForDay(i);
           if (weeklyAverage) {
             return (
               row.contactTracers / (weeklyAverage * TRACERS_NEEDED_PER_CASE)
