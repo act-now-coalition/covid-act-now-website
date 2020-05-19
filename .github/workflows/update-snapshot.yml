@@ -1,6 +1,8 @@
 name: Update to new data snapshot (regenerate colors and sharing images).
 
 on:
+  push:
+
   repository_dispatch:
     types: update-data-snapshot
 
@@ -53,6 +55,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v2
         with:
+          draft: true
           branch: 'bump-snapshot-${{env.SNAPSHOT_ID}}'
           branch-suffix: random
           commit-message: >
