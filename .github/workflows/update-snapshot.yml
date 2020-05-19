@@ -11,8 +11,8 @@ env:
 #  BRANCH: ${{ github.event.client_payload.branch }}
 #  SNAPSHOT_ID: ${{ github.event.client_payload.snapshot_id }}
   BRANCH: mikelehen/test-sharing
-  SNAPSHOT_ID: 299
-  RUN_ID: 299-${{github.run_number}}
+  SNAPSHOT_ID: 306
+  RUN_ID: 306-${{github.run_number}}
 
 jobs:
   update-data-snapshot:
