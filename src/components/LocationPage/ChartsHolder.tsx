@@ -24,6 +24,7 @@ import {
   optionsHospitalUsage,
   optionsPositiveTests,
 } from 'components/Charts/zoneUtils';
+import ChartShareButtons from 'components/LocationPage/ChartShareButtons';
 import { getLevel, getMetricName } from 'common/metric';
 import { Metric } from 'common/metric';
 import { Level } from 'common/level';
@@ -88,8 +89,11 @@ const ChartsHolder = (props: {
             <LocationPageHeader projections={props.projections} />
             <SummaryStats stats={getChartSummarys(projection)} />
             <MainContentInner>
+              <ChartShareButtons />
+
               <ChartHeader>
                 {getMetricName(Metric.CASE_GROWTH_RATE)}
+                {/* <ChartShareButtons /> */}
               </ChartHeader>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
               <ChartDescription>
