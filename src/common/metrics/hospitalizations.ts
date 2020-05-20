@@ -56,7 +56,7 @@ export const HOSPITAL_USAGE_LEVEL_INFO_MAP: LevelInfoMap = {
 export const HOSPITALIZATIONS_DISCLAIMER =
   'While experts agree surge healthcare capacity is critical, there is no benchmark for ICU surge capacity. This metric attempts to model capacity as interventions are relaxed.';
 
-  export function hospitalOccupancyStatusText(projection: Projection) {
+export function hospitalOccupancyStatusText(projection: Projection) {
   const currentIcuUtilization = projection.currentIcuUtilization;
   const currentCovidICUPatients = projection.currentCovidICUPatients;
   const totalICUCapacity = projection.totalICUCapacity;

@@ -21,9 +21,18 @@ import ClaimStateBlock from 'components/ClaimStateBlock/ClaimStateBlock';
 import ShareModelBlock from '../../components/ShareBlock/ShareModelBlock';
 import { ChartRt } from '../../components/Charts';
 
-import { caseGrowthStatusText, CASE_GROWTH_DISCLAIMER } from 'common/metrics/case_growth';
-import { positiveTestsStatusText, POSITIVE_RATE_DISCLAIMER } from 'common/metrics/positive_rate';
-import { hospitalOccupancyStatusText, HOSPITALIZATIONS_DISCLAIMER } from 'common/metrics/hospitalizations';
+import {
+  caseGrowthStatusText,
+  CASE_GROWTH_DISCLAIMER,
+} from 'common/metrics/case_growth';
+import {
+  positiveTestsStatusText,
+  POSITIVE_RATE_DISCLAIMER,
+} from 'common/metrics/positive_rate';
+import {
+  hospitalOccupancyStatusText,
+  HOSPITALIZATIONS_DISCLAIMER,
+} from 'common/metrics/hospitalizations';
 import { generateChartDescription } from 'common/metrics/future_projection';
 import {
   contactTracingStatusText,

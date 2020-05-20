@@ -49,7 +49,7 @@ const SummaryStat = ({
     } else if (chartType === Metric.POSITIVE_TESTS) {
       return formatPercent(value, 1);
     } else if (chartType === Metric.CONTACT_TRACING) {
-      return formatPercent(value, 1);
+      return formatPercent(value, 0);
     }
     fail('Invalid Chart Type');
   };

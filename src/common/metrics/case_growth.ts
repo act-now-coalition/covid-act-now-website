@@ -54,7 +54,7 @@ export const CASE_GROWTH_RATE_LEVEL_INFO_MAP: LevelInfoMap = {
 
 export const CASE_GROWTH_DISCLAIMER =
   'Most experts recommend an infection rate of less than 1.0 for two weeks before reopening.';
-  
+
 export function caseGrowthStatusText(projection: Projection) {
   const rt = projection.rt!;
   if (rt === null) {

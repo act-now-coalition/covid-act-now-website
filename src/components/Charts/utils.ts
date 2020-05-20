@@ -16,7 +16,7 @@ export const formatDecimal = (num: number, places = 2): string =>
   num.toFixed(places);
 
 export const formatPercent = (num: number, places = 0): string =>
-  `${formatDecimal(100 * num, places)}%`;
+  `${formatDecimal(100 * Math.min(1, num), places)}%`;
 
 /** Adds comma's for thousands, millions, etc. */
 export const formatInteger = (num: number): string => num.toLocaleString();

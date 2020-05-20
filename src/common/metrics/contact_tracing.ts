@@ -13,14 +13,16 @@ const SHORT_DESCRIPTION_MEDIUM =
 const SHORT_DESCRIPTION_HIGH = 'Enough tracing to help contain COVID';
 const SHORT_DESCRIPTION_UNKNOWN = 'Insufficient data to assess contact tracing';
 
-const LIMIT_LOW = 0.5;
-const LIMIT_MEDIUM = 0.7;
-const LIMIT_HIGH = 1;
+const LIMIT_LOW = 0.4;
+const LIMIT_MEDIUM = 0.8;
+const LIMIT_HIGH = Infinity;
 
 const LOW_NAME = 'Low';
 const MEDIUM_NAME = 'Medium';
 const HIGH_NAME = 'High';
 const UNKNOWN = 'Unknown';
+
+export const REVERSE_ORDER = true;
 
 export const CONTACT_TRACING_LEVEL_INFO_MAP: LevelInfoMap = {
   [Level.LOW]: {
@@ -55,7 +57,7 @@ export const CONTACT_TRACING_LEVEL_INFO_MAP: LevelInfoMap = {
 
 export const CONTACT_TRACING_DISCLAIMER =
   'Studies suggest that in order to successfully contain COVID,' +
-  '80% of contacts for each new COVID case must be traced within 48 hours. ' +
+  ' 80% of contacts for each new COVID case must be traced in 48 hours. ' +
   'Experts estimate that tracing this requires about 10 contact tracers per new case, ' +
   'as well as efficient processes and fast testing.';
 
@@ -70,29 +72,27 @@ export function contactTracingStatusText(projection: Projection) {
     currentContactTracers === null ||
     currentWeeklyAverage === null
   ) {
-    return 'No testing data is available.';
+    return 'No contact tracing data is available.';
   }
   const location = projection.locationName;
   const level = getLevel(Metric.CONTACT_TRACING, currentContactTracingMetric);
 
   const overview =
-    `${location} has [${formatInteger(
-      currentContactTracers,
-    )}] contact tracers.` +
-    `With an average of [${formatInteger(
+    `${location} has ${formatInteger(currentContactTracers)} contact tracers.` +
+    ` With an average of ${formatInteger(
       currentWeeklyAverage,
-    )}] new daily cases, ` +
-    `we estimate ${location} needs [${formatInteger(
+    )} new daily cases, ` +
+    `we estimate ${location} needs ${formatInteger(
       currentWeeklyAverage * TRACERS_NEEDED_PER_CASE,
-    )}] ` +
-    `contact tracing staff to trace all new cases with 48 hours, before too ` +
+    )} ` +
+    `contact tracing staff to trace all new cases in 48 hours, before too ` +
     `many other people are infected.`;
 
   const contactTracingRate = levelText(
     level,
-    `[only ${formatPercent(currentContactTracingMetric)}]`,
-    `[${formatPercent(currentContactTracingMetric)}]`,
-    `[${formatPercent(currentContactTracingMetric)}]`,
+    `only ${formatPercent(currentContactTracingMetric)}`,
+    `${formatPercent(currentContactTracingMetric)}`,
+    `${formatPercent(currentContactTracingMetric)}`,
   );
 
   const outcomesAtLevel = levelText(
@@ -103,8 +103,8 @@ export function contactTracingStatusText(projection: Projection) {
   );
 
   const details =
-    `This means that ${location} is likely able to trace, ${contactTracingRate}` +
-    ` of new COVID infection with 48 hours. ${outcomesAtLevel}`;
+    `This means that ${location} is likely able to trace ${contactTracingRate}` +
+    ` of new COVID infections in 48 hours. ${outcomesAtLevel}`;
 
   return `${overview} ${details}`;
 }
