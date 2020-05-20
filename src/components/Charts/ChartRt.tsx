@@ -144,7 +144,7 @@ const ChartRt = ({
 
   const getTooltipBody = (d: PointRt): string => {
     const Rt = formatDecimal(getRt(d));
-    return getDate(d) < truncationDate ? `Rt ${Rt}` : `Rt ${Rt} (preliminary)`;
+    return getDate(d) <= truncationDate ? `Rt ${Rt}` : `Rt ${Rt} (preliminary)`;
   };
 
   return (
