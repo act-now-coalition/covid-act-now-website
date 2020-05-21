@@ -59,9 +59,7 @@ const BLACKLISTED_COUNTIES = [
   // screenshots = screenshots.slice(0, 43);
 
   while (screenshots.length > 0) {
-    const pageres = new Pageres().dest(
-      OUTPUT_DIR,
-    );
+    const pageres = new Pageres().dest(OUTPUT_DIR);
     const urls = [];
     const batchSize = Math.min(PAGERES_BATCH_SIZE, screenshots.length);
     for (let i = 0; i < batchSize; i++) {
