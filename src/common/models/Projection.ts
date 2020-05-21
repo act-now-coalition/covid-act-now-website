@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import moment from 'moment';
 
 import {
@@ -96,6 +97,8 @@ export class Projection {
   private readonly cumulativeInfected: Array<number | null>;
   private readonly cumulativePositiveTests: Array<number | null>;
   private readonly cumulativeNegativeTests: Array<number | null>;
+  private readonly dailyPositiveTests: Array<number | null>;
+  private readonly dailyNegativeTests: Array<number | null>;
   private readonly rtRange: Array<RtRange | null>;
   // ICU Utilization series as values between 0-1 (or > 1 if over capacity).
   private readonly icuUtilization: Array<number | null>;
@@ -138,6 +141,13 @@ export class Projection {
     this.cumulativeNegativeTests = this.smoothCumulatives(
       timeseries.map(row => row && row.cumulativeNegativeTests),
     );
+    this.dailyPositiveTests = this.deltasFromCumulatives(
+      this.cumulativePositiveTests,
+    );
+    this.dailyNegativeTests = this.deltasFromCumulatives(
+      this.cumulativeNegativeTests,
+    );
+
     this.rtRange = this.calcRtRange(timeseries);
     this.testPositiveRate = this.calcTestPositiveRate();
 
@@ -372,24 +382,27 @@ export class Projection {
   }
 
   /**
-   * G
+   * Gets the cases/day on day i, by averaging the trailing week of cases/day
+   * data.
+   *
+   * Note: In the case of a data point with negative cases/day (can happen due
+   * to reporting weirdness), we skip that data point and may average fewer
+   * than 7 days worth of data.
    */
   getWeeklyAverageCaseForDay(i?: number) {
+    const lastIndex = this.indexOfLastValue(this.dailyPositiveTests);
     if (i === undefined) {
-      const lastIndex = this.indexOfLastValue(this.cumulativePositiveTests);
       if (!lastIndex) return null;
       i = lastIndex;
-    }
-    const cumulativeToday = this.cumulativePositiveTests[i];
-    const cumulative7daysAgo = this.cumulativePositiveTests[i - 7];
-
-    if (!cumulativeToday || !cumulative7daysAgo) {
+    } else if (lastIndex === null || i > lastIndex) {
       return null;
     }
-
-    const thisWeek = cumulativeToday - cumulative7daysAgo;
-
-    return thisWeek / 7;
+    // Get last week of sane data (ignore negative values)
+    const lastWeekOfPositives = _.filter(
+      this.dailyPositiveTests.slice(Math.max(0, i - 6), i + 1),
+      p => p !== null && p >= 0,
+    );
+    return _.mean(lastWeekOfPositives);
   }
 
   private calcContactTracers(
@@ -441,10 +454,10 @@ export class Projection {
 
   private calcTestPositiveRate(): Array<number | null> {
     const dailyPositives = this.smoothWithRollingAverage(
-      this.deltasFromCumulatives(this.cumulativePositiveTests),
+      this.dailyPositiveTests,
     );
     const dailyNegatives = this.smoothWithRollingAverage(
-      this.deltasFromCumulatives(this.cumulativeNegativeTests),
+      this.dailyNegativeTests,
     );
 
     return dailyPositives.map((dailyPositive, idx) => {
