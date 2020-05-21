@@ -57,45 +57,45 @@ export const HOSPITALIZATIONS_DISCLAIMER =
   ', a pandemic think tank, recommends that hospitals maintain enough ICU capacity to double the number of COVID patients hospitalized.';
 
 export function hospitalOccupancyStatusText(projection: Projection) {
-    const currentIcuUtilization = projection.currentIcuUtilization;
-    const currentCovidICUPatients = projection.currentCovidICUPatients;
-    const totalICUCapacity = projection.totalICUCapacity;
-    const nonCovidPatients = Math.floor(projection.nonCovidPatients);
-  
-    if (
-      currentIcuUtilization === null ||
-      currentCovidICUPatients === null ||
-      totalICUCapacity === null
-    ) {
-      return 'No ICU occupancy data is available.';
-    }
-    const level = getLevel(Metric.HOSPITAL_USAGE, currentIcuUtilization);
-  
-    const location = projection.locationName;
-  
-    const lowText = `This suggests there is likely enough capacity to absorb a wave of new COVID infections.`;
-    const mediumText = `This suggests some ability to absorb an increase in COVID cases, but caution is warranted.`;
-    const highText = `This suggests the healthcare system is not well positioned  to absorb a wave of new COVID infections without substantial surge capacity.`;
-  
-    const noStateOverride =
-      STATES_WITH_DATA_OVERRIDES.indexOf(projection.stateName) < 0 ||
-      !projection.hasActualData;
-  
-    return `${location} ${noStateOverride ? 'has about' : 'has'} ${formatInteger(
-      totalICUCapacity,
-    )} ICU beds.
+  const currentIcuUtilization = projection.currentIcuUtilization;
+  const currentCovidICUPatients = projection.currentCovidICUPatients;
+  const totalICUCapacity = projection.totalICUCapacity;
+  const nonCovidPatients = Math.floor(projection.nonCovidPatients);
+
+  if (
+    currentIcuUtilization === null ||
+    currentCovidICUPatients === null ||
+    totalICUCapacity === null
+  ) {
+    return 'No ICU occupancy data is available.';
+  }
+  const level = getLevel(Metric.HOSPITAL_USAGE, currentIcuUtilization);
+
+  const location = projection.locationName;
+
+  const lowText = `This suggests there is likely enough capacity to absorb a wave of new COVID infections.`;
+  const mediumText = `This suggests some ability to absorb an increase in COVID cases, but caution is warranted.`;
+  const highText = `This suggests the healthcare system is not well positioned  to absorb a wave of new COVID infections without substantial surge capacity.`;
+
+  const noStateOverride =
+    STATES_WITH_DATA_OVERRIDES.indexOf(projection.stateName) < 0 ||
+    !projection.hasActualData;
+
+  return `${location} ${noStateOverride ? 'has about' : 'has'} ${formatInteger(
+    totalICUCapacity,
+  )} ICU beds.
      ${noStateOverride ? 'We estimate that' : ''} ${formatPercent(
-      nonCovidPatients / totalICUCapacity,
-    )} (${formatInteger(nonCovidPatients)})
+    nonCovidPatients / totalICUCapacity,
+  )} (${formatInteger(nonCovidPatients)})
         are currently occupied by non-COVID patients. Of the remaining ${formatInteger(
           totalICUCapacity - nonCovidPatients,
         )} ICU beds, ${noStateOverride ? 'we estimate ' : ''}
         ${formatInteger(
           currentCovidICUPatients,
         )} are occupied by COVID cases, or ${formatPercent(
-      Math.min(
-        1,
-        currentCovidICUPatients / (totalICUCapacity - nonCovidPatients),
-      ),
-    )} of available beds. ${levelText(level, lowText, mediumText, highText)}`;
-  }
+    Math.min(
+      1,
+      currentCovidICUPatients / (totalICUCapacity - nonCovidPatients),
+    ),
+  )} of available beds. ${levelText(level, lowText, mediumText, highText)}`;
+}

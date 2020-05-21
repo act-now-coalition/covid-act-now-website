@@ -79,4 +79,3 @@ export function positiveTestsStatusText(projection: Projection) {
 
   return `A ${lowSizableLarge} percentage (${percentage}) of COVID tests were positive, ${testingBroadlyText}. Identifying and isolating new cases can help contain COVID without resorting to lockdowns.`;
 }
-  

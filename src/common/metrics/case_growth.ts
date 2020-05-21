@@ -54,7 +54,7 @@ export const CASE_GROWTH_RATE_LEVEL_INFO_MAP: LevelInfoMap = {
 
 export const CASE_GROWTH_DISCLAIMER =
   'Each data point is a 14-day weighted average. We present the most recent seven days of data as a dashed line, as data is often revised by states several days after reporting. Containing COVID requires an infection rate of less than 1.0.';
-  
+
 export function caseGrowthStatusText(projection: Projection) {
   const rt = projection.rt!;
   if (rt === null) {
