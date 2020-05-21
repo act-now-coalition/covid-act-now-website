@@ -25,7 +25,7 @@ export const DesktopButtonsWrapper = styled.div`
 
 export const MobileButtonsWrapper = styled.div`
   ${WrapperStyles};
-  margin: 10px 0 50px;
+  margin: 28px 0 50px;
 
   @media (min-width: 600px) {
     display: none;
