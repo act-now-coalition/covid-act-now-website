@@ -37,8 +37,8 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
     <div className="Map">
       {!hideLegend && (
         <MapInstructions>
-          <strong>Click a state</strong> to view reopening risk details{' '}
-          <MobileLineBreak /> and county projections.
+          <strong>Click a state</strong> to view risk details{' '}
+          <MobileLineBreak /> and county info.
         </MapInstructions>
       )}
       <div className="us-state-map">
@@ -54,19 +54,16 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
             key={'legend-3'}
             title={LOCATION_SUMMARY_LEVELS[Level.HIGH].name}
             color={LOCATION_SUMMARY_LEVELS[Level.HIGH].color}
-            description={LOCATION_SUMMARY_LEVELS[Level.HIGH].detail}
           />
           <LegendItem
             key={'legend-2'}
             title={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].name}
             color={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].color}
-            description={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].detail}
           />
           <LegendItem
             key={'legend-1'}
             title={LOCATION_SUMMARY_LEVELS[Level.LOW].name}
             color={LOCATION_SUMMARY_LEVELS[Level.LOW].color}
-            description={LOCATION_SUMMARY_LEVELS[Level.LOW].detail}
           />
         </Legend>
       )}

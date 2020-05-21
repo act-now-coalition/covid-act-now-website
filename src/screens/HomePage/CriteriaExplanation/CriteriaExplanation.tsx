@@ -14,9 +14,9 @@ const CriteriaExplanation = () => {
       <CriteriaList>
         <Criterion>
           <Kicker>Criterion 1</Kicker>
-          <CriterionHeader>Is COVID in retreat?</CriterionHeader>
+          <CriterionHeader>Is COVID spreading?</CriterionHeader>
           <CriterionDescription>
-            Are COVID cases and deaths decreasing?{' '}
+            Are COVID cases and deaths increasing?{' '}
           </CriterionDescription>
         </Criterion>
         <Criterion>
