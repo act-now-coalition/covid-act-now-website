@@ -7,7 +7,7 @@ import { COLOR_MAP } from 'common/colors';
 export const ShareWrapper = styled.div`
   margin-left: auto;
   position: relative;
-  top: 78px;
+  top: 4.875rem;
   height: 0;
 `;
 
@@ -20,10 +20,6 @@ export const SaveOrShareContainer = styled.div`
   width: fit-content;
   border: 1px solid ${COLOR_MAP.GRAY.LIGHT};
   height: auto;
-
-  // margin-left: auto;
-  // position: relative;
-  // top: 119px;
 
   // @media (min-width: 600px) {
   margin-left: auto;
@@ -54,11 +50,7 @@ export const SocialButtonsContainer = styled.div`
   margin-top: 10px;
   margin-left: auto;
 
-  // position: relative;
-
   @media (min-width: 600px) {
-    // position: relative;
-    // top: 119px;
     left: 78.5%;
     z-index: 1000;
     margin-top: 10px;
