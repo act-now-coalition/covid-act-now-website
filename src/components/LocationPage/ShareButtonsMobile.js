@@ -12,6 +12,8 @@ const ShareButtonsMobile = props => {
   const { isFirst } = props;
   const [showShareIcons, setShowShareIcons] = useState(false);
 
+  const iconSize = 40;
+
   return (
     <MobileButtonsWrapper isFirst={isFirst}>
       <SaveOrShareContainer>
@@ -25,7 +27,7 @@ const ShareButtonsMobile = props => {
           Share
         </SaveOrShareButton>
       </SaveOrShareContainer>
-      {showShareIcons && <SocialButtons />}
+      {showShareIcons && <SocialButtons iconSize={iconSize} />}
     </MobileButtonsWrapper>
   );
 };

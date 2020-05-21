@@ -15,16 +15,18 @@ import {
   SocialShareButton,
 } from './ShareButtons.style';
 
-const SocialButtons = () => {
+const SocialButtons = props => {
+  const { iconSize: size } = props;
+
+  const iconProps = {
+    size,
+    round: false,
+    fill: 'auto',
+  };
+
   const buttonProps = {
     disableElevation: true,
     variant: 'contained',
-  };
-
-  const iconProps = {
-    size: 50,
-    round: false,
-    fill: 'auto',
   };
 
   return (

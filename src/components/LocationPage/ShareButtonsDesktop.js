@@ -12,6 +12,8 @@ const ShareButtonsDesktop = props => {
   const { isFirst, chartAbove } = props;
   const [showShareIcons, setShowShareIcons] = useState(false);
 
+  const iconSize = 50;
+
   return (
     <DesktopButtonsWrapper isFirst={isFirst} chartAbove={chartAbove}>
       <SaveOrShareContainer>
@@ -26,7 +28,7 @@ const ShareButtonsDesktop = props => {
         </SaveOrShareButton>
       </SaveOrShareContainer>
 
-      {showShareIcons && <SocialButtons />}
+      {showShareIcons && <SocialButtons iconSize={iconSize} />}
     </DesktopButtonsWrapper>
   );
 };

@@ -25,7 +25,7 @@ export const DesktopButtonsWrapper = styled.div`
 
 export const MobileButtonsWrapper = styled.div`
   ${WrapperStyles};
-  margin: 10px 0 60px;
+  margin: 10px 0 50px;
 
   @media (min-width: 600px) {
     display: none;
@@ -50,11 +50,21 @@ export const SaveOrShareContainer = styled.div`
 
 export const SaveOrShareButton = styled.div`
   ${StyledShareButtonStyles};
-  width: 64px;
   border-right: ${({ isLast }) =>
     !isLast && `1px solid ${COLOR_MAP.GRAY.LIGHT}`};
   color: #3b94e6;
   text-transform: none;
+  line-height: 1;
+  height: 30px;
+  width: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (min-width: 600px) {
+    height: 40px;
+    line-height: 2.5rem;
+  }
 `;
 
 export const SocialButtonsContainer = styled.div`
@@ -69,20 +79,31 @@ export const SocialShareButton = styled.div`
   border-right: ${({ isLast }) =>
     !isLast && `1px solid ${COLOR_MAP.GRAY.LIGHT}`};
   display: ${({ isLast }) => (isLast ? 'flex' : 'block')};
-  width: 80px;
-  height: 56px;
+  width: 60px;
+  height: 42px;
+
+  @media (min-width: 600px) {
+    width: 80px;
+    height: 56px;
+  }
 `;
 
 export const CopyLinkButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 0.875rem;
+  font-size: 0.775rem;
   line-height: 1.3;
   text-transform: none;
   color: rgba(0, 0, 0, 0.7);
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  width: 80px;
-  height: 56px;
+  width: 60px;
+  height: 42px;
   font-weight: normal;
+
+  @media (min-width: 600px) {
+    width: 80px;
+    height: 56px;
+    font-size: 0.875rem;
+  }
 `;
