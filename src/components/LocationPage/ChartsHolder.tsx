@@ -231,7 +231,7 @@ export function getChartData(
 function caseGrowthStatusText(projection: Projection) {
   const rt = projection.rt!;
   if (rt === null) {
-    return 'No case load data is available.';
+    return 'Not enough case data is available to generate infection growth rate.';
   }
   const level = getLevel(Metric.CASE_GROWTH_RATE, rt);
   const additionalPeople = formatDecimal(rt);
