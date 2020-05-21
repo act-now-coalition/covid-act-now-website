@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-
+import React, { useState, useRef } from 'react';
+import useOutsideClickHandler from '../../common/utils/useOutsideClickHandler';
 import SocialButtons from './SocialButtons';
-
 import {
   SaveOrShareContainer,
   SaveOrShareButton,
@@ -14,23 +13,9 @@ const ShareButtonsDesktop = props => {
 
   const iconSize = 50;
 
-  function useOutsideClickHandler(ref) {
-    useEffect(() => {
-      function handleClick(e) {
-        if (ref.current && !ref.current.contains(e.target)) {
-          setShowShareIcons(false);
-        }
-      }
-      document.addEventListener('mousedown', handleClick);
-      return () => {
-        document.removeEventListener('mousedown', handleClick);
-      };
-    }, [ref]);
-  }
-
   const shareButtonsRef = useRef(null);
 
-  useOutsideClickHandler(shareButtonsRef);
+  useOutsideClickHandler(shareButtonsRef, setShowShareIcons);
 
   return (
     <DesktopButtonsWrapper
