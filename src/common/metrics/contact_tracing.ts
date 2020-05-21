@@ -13,7 +13,7 @@ const SHORT_DESCRIPTION_MEDIUM =
 const SHORT_DESCRIPTION_HIGH = 'Enough tracing to help contain COVID';
 const SHORT_DESCRIPTION_UNKNOWN = 'Insufficient data to assess';
 
-const LIMIT_LOW = 0.4;
+const LIMIT_LOW = 0.07;
 const LIMIT_MEDIUM = 0.8;
 const LIMIT_HIGH = Infinity;
 
@@ -99,9 +99,9 @@ export function contactTracingStatusText(projection: Projection) {
 
   const outcomesAtLevel = levelText(
     level,
-    'When this level of tracing is coupled with widely available testing, COVID can be contained without resorting to lockdowns.',
-    'When this level of tracing is coupled with widely available testing, COVID can be contained without resorting to lockdowns.',
     'Tracing is largely ineffective relative to these levels of case growth and does little to contain the spread of COVID.',
+    'When this level of tracing is coupled with widely available testing, COVID can be contained without resorting to lockdowns.',
+    'When this level of tracing is coupled with widely available testing, COVID can be contained without resorting to lockdowns.',
   );
 
   const details =
