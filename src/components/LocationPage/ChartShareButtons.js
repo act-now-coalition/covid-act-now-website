@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState } from 'react';
 
 import {
   FacebookShareButton,
@@ -19,10 +19,11 @@ import {
 } from './ChartShareButtons.style';
 
 const ChartShareButtons = props => {
+  const { isFirst } = props;
   const [showShareIcons, setShowShareIcons] = useState(false);
 
   return (
-    <ShareWrapper>
+    <ShareWrapper isFirst={isFirst}>
       <SaveOrShareContainer>
         <SaveOrShareButton>Save</SaveOrShareButton>
         <SaveOrShareButton

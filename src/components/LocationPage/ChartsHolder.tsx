@@ -89,7 +89,7 @@ const ChartsHolder = (props: {
             <LocationPageHeader projections={props.projections} />
             <SummaryStats stats={getChartSummarys(projection)} />
             <MainContentInner>
-              <ChartShareButtons />
+              {getChartSummarys(projection)[0] && <ChartShareButtons isFirst />}
               <ChartHeader>
                 {getMetricName(Metric.CASE_GROWTH_RATE)}
               </ChartHeader>
@@ -106,7 +106,7 @@ const ChartsHolder = (props: {
                   </Disclaimer>
                 </>
               )}
-              <ChartShareButtons />
+              {getChartSummarys(projection)[1] && <ChartShareButtons />}
               <ChartHeader>{getMetricName(Metric.POSITIVE_TESTS)}</ChartHeader>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
               <ChartDescription>
@@ -124,7 +124,7 @@ const ChartsHolder = (props: {
                   </Disclaimer>
                 </>
               )}
-              <ChartShareButtons />
+              {getChartSummarys(projection)[2] && <ChartShareButtons />}
               <ChartHeader>
                 {getMetricName(Metric.HOSPITAL_USAGE)}
                 <BetaTag>Beta</BetaTag>
