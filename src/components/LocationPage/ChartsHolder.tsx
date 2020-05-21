@@ -34,10 +34,7 @@ import {
   HOSPITALIZATIONS_DISCLAIMER,
 } from 'common/metrics/hospitalizations';
 import { generateChartDescription } from 'common/metrics/future_projection';
-import {
-  contactTracingStatusText,
-  CONTACT_TRACING_DISCLAIMER,
-} from 'common/metrics/contact_tracing';
+import { contactTracingStatusText } from 'common/metrics/contact_tracing';
 
 import {
   optionsHospitalUsage,
@@ -194,8 +191,36 @@ const ChartsHolder = (props: {
                       options={optionsContactTracing(contactTracingData) as any}
                     />
                   </ZoneChartWrapper>
-                  <Disclaimer metricName="Contract Tracers">
-                    {CONTACT_TRACING_DISCLAIMER}
+                  <Disclaimer>
+                    <a
+                      href="https://science.sciencemag.org/content/368/6491/eabb6936"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Studies
+                    </a>{' '}
+                    suggest that in order to successfully contain COVID, 80% of
+                    contacts for each new COVID case must be traced within 48
+                    hours in order to contain the spread of infection. Experts
+                    estimate that tracing each new case within 48 hours requires
+                    an average of 10 contact tracers per new case, as well as
+                    fast testing.{' '}
+                    <a
+                      href="https://blog.covidactnow.org/modeling-metrics-critical-to-reopen-safely/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Learn more about how we calculate traced contacts here
+                    </a>
+                    . Our contact tracing data is sourced from{' '}
+                    <a
+                      href="https://testandtrace.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      testandtrace.com
+                    </a>{' '}
+                    and NPR.
                   </Disclaimer>
                 </>
               )}
