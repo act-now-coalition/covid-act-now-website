@@ -94,6 +94,10 @@ export type Currentusagetotal = number;
  */
 export type Typicalusagerate = number;
 /**
+ * # of Contact Tracers
+ */
+export type Contacttracers = number;
+/**
  * Total Population in geographic area.
  */
 export type Population1 = number;
@@ -128,6 +132,7 @@ export interface _Actuals {
   cumulativeDeaths: Cumulativedeaths;
   hospitalBeds: _ResourceUtilization;
   ICUBeds: _ResourceUtilization;
+  contactTracers?: Contacttracers;
 }
 export interface _ResourceUtilization {
   capacity: Capacity;

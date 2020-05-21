@@ -34,6 +34,15 @@ const CriteriaExplanation = () => {
             hospitalizations?
           </CriterionDescription>
         </Criterion>
+        <Criterion>
+          <Kicker>Criterion 4</Kicker>
+          <CriterionHeader>
+            Are we tracing most cases fast enough?
+          </CriterionHeader>
+          <CriterionDescription>
+            Are we finding and isolating new cases before COVID spreads?
+          </CriterionDescription>
+        </Criterion>
       </CriteriaList>
     </Wrapper>
   );

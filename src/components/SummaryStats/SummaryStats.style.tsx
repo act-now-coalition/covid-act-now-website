@@ -18,13 +18,14 @@ export const SummaryStatsWrapper = styled(Box)<{ condensed?: Boolean }>`
     box-shadow: none;
     max-width: 900px;
     flex-direction: column;
+    cursor: pointer;
 
     @media (min-width: 600px) {
       flex-direction: row;
       border-radius: 2px;
       box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.1);
       background-color: white;
-      padding: 1.75rem;
+      padding: 1.75rem 1;
       position: relative;
       margin: -3rem 1rem 0;
       border-radius: 5px;
@@ -74,9 +75,18 @@ export const SummaryStatWrapper = styled(Box)<{ condensed?: Boolean }>`
 
     @media (min-width: 600px) {
       border-bottom: 0;
-      padding: 0;
+      margin: 0;
+      padding: 0 1.2rem 0 1rem;
       flex-direction: column;
       align-items: center;
+
+      &:not(:last-child) {
+        border-right: 1px solid ${palette.divider};
+      }
+
+      &:last-child{
+        padding-right: 0;
+      }
     }
   `}
 `;
@@ -86,7 +96,7 @@ export const StatNameText = styled(Typography)<{ condensed?: Boolean }>`
     props.condensed
       ? `
     font-weight: 500;
-    font-size: 0.75rem;
+    font-size: 0675rem;
     line-height: 0.875rem;;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -95,7 +105,7 @@ export const StatNameText = styled(Typography)<{ condensed?: Boolean }>`
     margin-right: 1rem;
   `
       : `
-    font-weight: 500;
+    font-weight: 600;
     font-size: 1.125rem;
     line-height: 1.25rem;
 
@@ -114,7 +124,7 @@ export const StatTextWrapper = styled.div`
   margin-right: 1.5rem;
 
   @media (min-width: 600px) {
-    text-align: center;
+    text-align: left;
     margin-right: 0;
   }
 `;
@@ -134,7 +144,7 @@ export const StatValueWrapper = styled.div<{ condensed?: Boolean }>`
 
     @media (min-width: 600px) {
       align-items: center;
-      text-align: center;
+      text-align: left;
     }
   `}
 `;
@@ -164,7 +174,7 @@ export const StatValueText = styled(Typography)<{ condensed?: Boolean }>`
     margin-bottom: 0.5rem;
 
     @media (min-width: 600px) {
-      text-align: center;
+      text-align: left;
       font-size: 1.875rem;
       line-height: 3.5rem;
     }
@@ -172,13 +182,13 @@ export const StatValueText = styled(Typography)<{ condensed?: Boolean }>`
 `;
 
 export const BetaTag = styled.span`
-  margin-left: 0.25rem;
+  margin-left: 1rem;
   border-radius: 5px;
   display: inline-block;
   background-color: ${palette.info.main};
   color: white;
   font-size: 0.675rem;
   padding: 0 0.75rem;
-  transform: translateY(-0.25rem);
+  transform: translateY(-0.45rem);
   line-height: 1.25rem;
 `;
