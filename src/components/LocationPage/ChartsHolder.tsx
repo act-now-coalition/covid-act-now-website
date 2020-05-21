@@ -273,7 +273,7 @@ function positiveTestsStatusText(projection: Projection) {
     level,
     `which suggests enough widespread, aggressive testing in ${location} to detect most new cases`,
     `meaning that ${location}’s testing meets WHO minimums but needs to be further expanded to detect most new cases`,
-    `which indicates that testing in ${location} is limited, meaning that most cases may go undetected`,
+    `which indicates that testing in ${location} is limited and that most cases may go undetected`,
   );
 
   return `A ${lowSizableLarge} percentage (${percentage}) of COVID tests were positive, ${testingBroadlyText}. Identifying and isolating new cases can help contain COVID without resorting to lockdowns.`;
