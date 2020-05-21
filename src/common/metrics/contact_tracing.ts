@@ -100,8 +100,8 @@ export function contactTracingStatusText(projection: Projection) {
   const outcomesAtLevel = levelText(
     level,
     'When this level of tracing is coupled with widely available testing, COVID can be contained without resorting to lockdowns.',
-    'When this level of tracing is coupled with widely available testing, COVID can be contained without resorting to lockdowns.',
-    'Tracing is largely ineffective relative to these levels of case growth and does little to contain the spread of COVID.',
+    'At these lower levels of tracing, it is unlikely Mississippi will be able to successfully identify and isolate sources of disease spread and prevent new outbreaks.',
+    'Such low levels of tracing indicate that there are far too many COVID cases and/or far too little tracing capacity, all of which bodes poorly for containing the spread of COVID.',
   );
 
   const details =
