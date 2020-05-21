@@ -54,7 +54,7 @@ const SummaryStat = ({
           {getMetricName(chartType)}{' '}
           {!condensed && beta && <BetaTag>Beta</BetaTag>}
         </StatNameText>
-        {!condensed && <StatDetailText>{levelInfo.detail}</StatDetailText>}
+        {!condensed && <StatDetailText>{levelInfo.detail()}</StatDetailText>}
       </StatTextWrapper>
       <StatValueWrapper condensed={condensed}>
         {value && (

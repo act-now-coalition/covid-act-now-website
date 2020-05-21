@@ -23,30 +23,30 @@ export const HOSPITAL_USAGE_LEVEL_INFO_MAP: LevelInfoMap = {
     upperLimit: LIMIT_LOW,
     name: LOW_NAME,
     color: COLOR_MAP.GREEN.BASE,
-    detail: SHORT_DESCRIPTION_LOW,
+    detail: () => SHORT_DESCRIPTION_LOW,
   },
   [Level.MEDIUM]: {
     level: Level.MEDIUM,
     upperLimit: LIMIT_MEDIUM,
     name: MEDIUM_NAME,
     color: COLOR_MAP.ORANGE.BASE,
-    detail: SHORT_DESCRIPTION_MEDIUM,
+    detail: () => SHORT_DESCRIPTION_MEDIUM,
   },
   [Level.HIGH]: {
     level: Level.HIGH,
     upperLimit: LIMIT_HIGH,
     name: HIGH_NAME,
     color: COLOR_MAP.RED.BASE,
-    detail: SHORT_DESCRIPTION_HIGH,
+    detail: () => SHORT_DESCRIPTION_HIGH,
   },
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,
     upperLimit: 0,
     name: UNKNOWN,
     color: COLOR_MAP.GRAY.BASE,
-    detail: SHORT_DESCRIPTION_UNKNOWN,
+    detail: () => SHORT_DESCRIPTION_UNKNOWN,
   },
 };
 
 export const HOSPITALIZATIONS_DISCLAIMER =
-  'While experts agree surge healthcare capacity is critical, there is no benchmark for ICU surge capacity. This metric attempts to model capacity as interventions are relaxed.';
+  ', a pandemic think tank, recommends that hospitals maintain enough ICU capacity to double the number of COVID patients hospitalized.';

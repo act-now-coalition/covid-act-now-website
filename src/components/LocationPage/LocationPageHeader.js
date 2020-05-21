@@ -37,6 +37,7 @@ const LocationPageHeader = ({ projections }) => {
   const { isEmbed } = useEmbed();
   const alarmLevel = projections.getAlarmLevel();
   const levelInfo = LOCATION_SUMMARY_LEVELS[alarmLevel];
+  const locationName = projections.countyName || projections.stateName;
   const [fillColor, textColor] =
     alarmLevel !== Level.UNKNOWN
       ? [levelInfo.color, palette.secondary.contrastText]
@@ -50,7 +51,7 @@ const LocationPageHeader = ({ projections }) => {
           </HeaderTitle>
           {!isEmbed ? (
             <HeaderSubCopy textColor={textColor}>
-              {levelInfo.detail}
+              {levelInfo.detail(locationName)}
             </HeaderSubCopy>
           ) : (
             ''

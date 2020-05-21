@@ -29,7 +29,7 @@ const About = ({ children }: { children: React.ReactNode }) => {
       <AppMetaTags
         canonicalUrl="/about"
         pageTitle="About Covid Act Now"
-        pageDescription="Covid Act Now is a multidisciplinary team of technologists, epidemiologists, health experts, and public policy leaders working to model how COVID is spreading in the U.S."
+        pageDescription="Covid Act Now is a multidisciplinary team of technologists, epidemiologists, and health experts working to help Americans understand  COVID risk in their own community."
       />
       <Header>
         <Content>

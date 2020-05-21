@@ -136,12 +136,19 @@ const ChartsHolder = (props: {
                     />
                   </ZoneChartWrapper>
                   <Disclaimer metricName="COVID ICU usage">
+                    <a
+                      href="https://preventepidemics.org/wp-content/uploads/2020/04/COV020_WhenHowTightenFaucet_v3.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Resolve to Save Lives
+                    </a>
                     {HOSPITALIZATIONS_DISCLAIMER}
                   </Disclaimer>
                 </>
               )}
               <ChartHeader>
-                Future projections: all hospitalizations
+                Future Hospitalization (both ICU and non-ICU) Projections
               </ChartHeader>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
               <ChartDescription>
@@ -231,7 +238,7 @@ export function getChartData(
 function caseGrowthStatusText(projection: Projection) {
   const rt = projection.rt!;
   if (rt === null) {
-    return 'No case load data is available.';
+    return 'Not enough case data is available to generate infection growth rate.';
   }
   const level = getLevel(Metric.CASE_GROWTH_RATE, rt);
   const additionalPeople = formatDecimal(rt);
@@ -256,7 +263,7 @@ function positiveTestsStatusText(projection: Projection) {
   const lowSizableLarge = levelText(
     level,
     'low',
-    'relatively sizable',
+    'significant',
     'relatively high',
   );
   const percentage = formatPercent(testPositiveRate);
@@ -264,12 +271,12 @@ function positiveTestsStatusText(projection: Projection) {
   const location = projection.locationName;
   const testingBroadlyText = levelText(
     level,
-    `which suggests widespread, aggressive testing in ${location}`,
-    `which indicates that testing in ${location} is not widespread, meaning that many cases may go undetected`,
-    `which indicates that testing in ${location} is limited, meaning that many cases may go undetected`,
+    `which suggests enough widespread, aggressive testing in ${location} to detect most new cases`,
+    `meaning that ${location}’s testing meets WHO minimums but needs to be further expanded to detect most new cases`,
+    `which indicates that testing in ${location} is limited, meaning that most cases may go undetected`,
   );
 
-  return `A ${lowSizableLarge} percentage (${percentage}) of COVID tests were positive, ${testingBroadlyText}.`;
+  return `A ${lowSizableLarge} percentage (${percentage}) of COVID tests were positive, ${testingBroadlyText}. Identifying and isolating new cases can help contain COVID without resorting to lockdowns.`;
 }
 
 function hospitalOccupancyStatusText(projection: Projection) {
@@ -299,13 +306,11 @@ function hospitalOccupancyStatusText(projection: Projection) {
 
   return `${location} ${noStateOverride ? 'has about' : 'has'} ${formatInteger(
     totalICUCapacity,
-  )} ICU Beds.
-   ${
-     noStateOverride ? 'We estimate that currently' : 'Currently'
-   } ${formatPercent(nonCovidPatients / totalICUCapacity)} (${formatInteger(
-    nonCovidPatients,
-  )})
-      are occupied by non-COVID patients. Of the remaining ${formatInteger(
+  )} ICU beds.
+   ${noStateOverride ? 'We estimate that' : ''} ${formatPercent(
+    nonCovidPatients / totalICUCapacity,
+  )} (${formatInteger(nonCovidPatients)})
+      are currently occupied by non-COVID patients. Of the remaining ${formatInteger(
         totalICUCapacity - nonCovidPatients,
       )} ICU beds, ${noStateOverride ? 'we estimate ' : ''}
       ${formatInteger(
