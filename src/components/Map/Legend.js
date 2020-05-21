@@ -12,7 +12,7 @@ import {
 export function Legend(props) {
   return (
     <LegendWrapper condensed={props.condensed}>
-      {!props.condensed && <LegendTitle>COVID Reopening Risk:</LegendTitle>}
+      {!props.condensed && <LegendTitle>COVID Risk:</LegendTitle>}
       <LegendContainer {...props}>
         {React.Children.map(props.children, child =>
           React.cloneElement(child, { condensed: props.condensed }),

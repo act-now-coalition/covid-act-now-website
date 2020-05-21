@@ -1,7 +1,7 @@
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
 
-export const METRIC_NAME = 'Infection growth rate';
+export const METRIC_NAME = 'Infection rate';
 
 const SHORT_DESCRIPTION_LOW = 'Active cases are decreasing';
 const SHORT_DESCRIPTION_MEDIUM = 'Active cases are slowly increasing';
@@ -23,30 +23,30 @@ export const CASE_GROWTH_RATE_LEVEL_INFO_MAP: LevelInfoMap = {
     upperLimit: LIMIT_LOW,
     name: LOW_NAME,
     color: COLOR_MAP.GREEN.BASE,
-    detail: SHORT_DESCRIPTION_LOW,
+    detail: () => SHORT_DESCRIPTION_LOW,
   },
   [Level.MEDIUM]: {
     level: Level.MEDIUM,
     upperLimit: LIMIT_MEDIUM,
     name: MEDIUM_NAME,
     color: COLOR_MAP.ORANGE.BASE,
-    detail: SHORT_DESCRIPTION_MEDIUM,
+    detail: () => SHORT_DESCRIPTION_MEDIUM,
   },
   [Level.HIGH]: {
     level: Level.HIGH,
     upperLimit: LIMIT_HIGH,
     name: HIGH_NAME,
     color: COLOR_MAP.RED.BASE,
-    detail: SHORT_DESCRIPTION_HIGH,
+    detail: () => SHORT_DESCRIPTION_HIGH,
   },
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,
     upperLimit: 0,
     name: UNKNOWN,
     color: COLOR_MAP.GRAY.BASE,
-    detail: SHORT_DESCRIPTION_UNKNOWN,
+    detail: () => SHORT_DESCRIPTION_UNKNOWN,
   },
 };
 
 export const CASE_GROWTH_DISCLAIMER =
-  'Most experts recommend an infection rate of less than 1.0 for two weeks before reopening.';
+  'Each data point is a 14-day weighted average. We present the most recent seven days of data as a dashed line, as data is often revised by states several days after reporting. Containing COVID requires an infection rate of less than 1.0.';

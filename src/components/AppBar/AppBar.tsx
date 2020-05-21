@@ -127,9 +127,9 @@ const _AppBar = () => {
 
   const shareURL = `https://covidactnow.org${match ? match.url : ''}`;
   const hashtag = 'COVIDActNow';
-  const locationShareTitle = `See ${locationName}'s reopening risk on @CovidActNow, dashboards to help America reopen safely: `;
+  const locationShareTitle = `${locationName}'s COVID risk from @CovidActNow, check it out: `;
   const defaultShareTitle =
-    'Check out @CovidActNow, data and dashboards to help America reopen safely: ';
+    '@CovidActNow has real-time COVID data and risk level for your community. Check it out: ';
 
   const shareTitle = locationName ? locationShareTitle : defaultShareTitle;
 

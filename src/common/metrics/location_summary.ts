@@ -6,39 +6,37 @@ const MEDIUM_NAME = 'Moderate';
 const HIGH_NAME = 'Elevated';
 const UNKNOWN = 'Unknown';
 
-const SHORT_DESCRIPTION_LOW = 'Reduced risk based on reopening metrics.';
-const SHORT_DESCRIPTION_MEDIUM = 'Moderate risk based on reopening metrics.';
-const SHORT_DESCRIPTION_HIGH = 'Elevated risk based on reopening metrics.';
-const SHORT_DESCRIPTION_UNKNWON =
-  'We don’t have enough data to assess reopening risk.';
-
 export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
   [Level.LOW]: {
     level: Level.LOW,
     upperLimit: 0,
     name: LOW_NAME,
     color: COLOR_MAP.GREEN.BASE,
-    detail: SHORT_DESCRIPTION_LOW,
+    detail: locationName =>
+      `${locationName}’s COVID risk is reduced because all of ${locationName}’s COVID metrics  meet international standards.`,
   },
   [Level.MEDIUM]: {
     level: Level.MEDIUM,
     upperLimit: 0,
     name: MEDIUM_NAME,
     color: COLOR_MAP.ORANGE.BASE,
-    detail: SHORT_DESCRIPTION_MEDIUM,
+    detail: locationName =>
+      `${locationName}’s COVID risk is moderate because at least one of ${locationName}’s  COVID metrics do not meet international standards.`,
   },
   [Level.HIGH]: {
     level: Level.HIGH,
     upperLimit: 0,
     name: HIGH_NAME,
     color: COLOR_MAP.RED.BASE,
-    detail: SHORT_DESCRIPTION_HIGH,
+    detail: locationName =>
+      `${locationName}’s COVID risk is elevated because at least one of ${locationName}’s COVID metrics is substantially below international standards.`,
   },
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,
     upperLimit: 0,
     name: UNKNOWN,
     color: COLOR_MAP.GRAY.BASE,
-    detail: SHORT_DESCRIPTION_UNKNWON,
+    detail: locationName =>
+      'We don’t have enough data to assess reopening risk.',
   },
 };
