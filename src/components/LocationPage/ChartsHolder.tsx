@@ -90,15 +90,14 @@ const ChartsHolder = (props: {
             <SummaryStats stats={getChartSummarys(projection)} />
             <MainContentInner>
               <ChartShareButtons />
-
               <ChartHeader>
                 {getMetricName(Metric.CASE_GROWTH_RATE)}
-                {/* <ChartShareButtons /> */}
               </ChartHeader>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
               <ChartDescription>
                 {caseGrowthStatusText(projection)}
               </ChartDescription>
+              {/* <ChartShareButtons /> */}
               {rtRangeData && (
                 <>
                   <ChartRt columnData={projection.getDataset('rtRange')} />
@@ -107,6 +106,7 @@ const ChartsHolder = (props: {
                   </Disclaimer>
                 </>
               )}
+              <ChartShareButtons />
               <ChartHeader>{getMetricName(Metric.POSITIVE_TESTS)}</ChartHeader>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
               <ChartDescription>
@@ -124,6 +124,7 @@ const ChartsHolder = (props: {
                   </Disclaimer>
                 </>
               )}
+              <ChartShareButtons />
               <ChartHeader>
                 {getMetricName(Metric.HOSPITAL_USAGE)}
                 <BetaTag>Beta</BetaTag>
@@ -144,6 +145,7 @@ const ChartsHolder = (props: {
                   </Disclaimer>
                 </>
               )}
+              <ChartShareButtons />
               <ChartHeader>
                 Future projections: all hospitalizations
               </ChartHeader>

@@ -1,6 +1,4 @@
-import React, { Fragment } from 'react';
-// import { FacebookIcon, TwitterIcon } from 'react-share';
-import InstagramIcon from '../../assets/images/InstagramIcon';
+import React, { Fragment, useState, useEffect } from 'react';
 
 import {
   FacebookShareButton,
@@ -12,82 +10,75 @@ import {
 } from 'react-share';
 
 import {
-  ShareButtonContainer,
-  StyledShareButton,
-} from '../ShareBlock/ShareBlock.style';
-
-import {
   CopyLinkButton,
-  ChartShareButtonsContainer,
-  ChartShareButton,
+  SocialButtonsContainer,
+  SaveOrShareContainer,
+  SaveOrShareButton,
+  SocialShareButton,
+  ShareWrapper,
 } from './ChartShareButtons.style';
-import ChartRtAutosize from 'components/Charts/ChartRt';
 
 const ChartShareButtons = props => {
-  const iconSize = 40;
+  const [showShareIcons, setShowShareIcons] = useState(false);
 
+  return (
+    <ShareWrapper>
+      <SaveOrShareContainer>
+        <SaveOrShareButton>Save</SaveOrShareButton>
+        <SaveOrShareButton
+          isLast
+          onClick={() => {
+            setShowShareIcons(!showShareIcons);
+          }}
+        >
+          Share
+        </SaveOrShareButton>
+      </SaveOrShareContainer>
+
+      {showShareIcons && <SocialButtons />}
+    </ShareWrapper>
+  );
+};
+
+const SocialButtons = props => {
   const buttonProps = {
     disableElevation: true,
     variant: 'contained',
   };
 
   const iconProps = {
-    size: 40,
+    size: 50,
     round: false,
     fill: 'auto',
-    // bgStyle={{ fill: 'auto' }}
   };
 
   return (
-    <ChartShareButtonsContainer>
-      {/* before: border-bottom: none */}
-      <ChartShareButton {...buttonProps} color="#3b5998">
-        <FacebookShareButton
-        // url='{url}'
-        // quote={quote}
-        // beforeOnClick={() => {
-        //   trackShare('facebook');
-        //   return Promise.resolve();
-        // }}
-        >
+    <SocialButtonsContainer>
+      <SocialShareButton {...buttonProps} color="#3b5998">
+        <FacebookShareButton>
           <FacebookIcon {...iconProps} />
         </FacebookShareButton>
-      </ChartShareButton>
-      <ChartShareButton {...buttonProps} color="#00acee">
+      </SocialShareButton>
+      <SocialShareButton {...buttonProps} color="#00acee">
         <TwitterShareButton
-        // url={url}
-        // title={quote}
-        // hashtags={[hashtag]}
-        // beforeOnClick={() => {
-        //   trackShare('twitter');
-        //   return Promise.resolve();
         // }}
         >
           <TwitterIcon {...iconProps} />
         </TwitterShareButton>
-      </ChartShareButton>
-      <ChartShareButton {...buttonProps} color="#007fb1">
-        <LinkedinShareButton
-        // url={url}
-        // title={quote}
-        // @ts-ignore: seems to not be available for linkedin?
-        // hashtags={[hashtag]}
-        // beforeOnClick={() => {
-        //   trackShare('linkedin');
-        //   return Promise.resolve();
-        // }}
-        >
+      </SocialShareButton>
+      <SocialShareButton {...buttonProps} color="#007fb1">
+        <LinkedinShareButton>
           <LinkedinIcon {...iconProps} />
         </LinkedinShareButton>
-      </ChartShareButton>
-      <ChartShareButton {...buttonProps} color="#007fb1" isLast>
+      </SocialShareButton>
+      <SocialShareButton {...buttonProps} color="#007fb1" isLast>
         <CopyLinkButton>
           Copy
           <br />
           Link
         </CopyLinkButton>
-      </ChartShareButton>
-    </ChartShareButtonsContainer>
+      </SocialShareButton>
+    </SocialButtonsContainer>
   );
 };
 
