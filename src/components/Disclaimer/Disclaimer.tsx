@@ -8,7 +8,7 @@ const Disclaimer = ({
   metricName,
   children,
 }: {
-  metricName: String;
+  metricName?: String;
   children: React.ReactNode;
 }) => {
   const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
@@ -24,14 +24,18 @@ const Disclaimer = ({
           <span>Last updated {lastUpdatedDateString}.</span>
         </LightTooltip>{' '}
         {children}{' '}
-        <a
-          href="https://blog.covidactnow.org/modeling-metrics-critical-to-reopen-safely/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn more about how we calculate {metricName} here
-        </a>
-        .
+        {metricName && (
+          <>
+            <a
+              href="https://blog.covidactnow.org/modeling-metrics-critical-to-reopen-safely/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Learn more about how we calculate {metricName} here
+            </a>
+            .
+          </>
+        )}
       </DisclaimerBody>
     </DisclaimerWrapper>
   );

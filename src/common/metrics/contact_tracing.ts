@@ -5,13 +5,13 @@ import { getLevel, Metric } from 'common/metric';
 import { formatPercent, formatInteger } from 'components/Charts/utils';
 import { Projection, TRACERS_NEEDED_PER_CASE } from 'common/models/Projection';
 
-export const METRIC_NAME = 'Contacts traced';
+export const METRIC_NAME = 'Contacts traced in 48 hours';
 
 const SHORT_DESCRIPTION_LOW = 'Too many cases and too little tracing';
 const SHORT_DESCRIPTION_MEDIUM =
   'Insufficient tracing to stop the spread of COVID';
 const SHORT_DESCRIPTION_HIGH = 'Enough tracing to help contain COVID';
-const SHORT_DESCRIPTION_UNKNOWN = 'Insufficient data to assess contact tracing';
+const SHORT_DESCRIPTION_UNKNOWN = 'Insufficient data to assess';
 
 const LIMIT_LOW = 0.4;
 const LIMIT_MEDIUM = 0.8;
@@ -78,7 +78,9 @@ export function contactTracingStatusText(projection: Projection) {
   const level = getLevel(Metric.CONTACT_TRACING, currentContactTracingMetric);
 
   const overview =
-    `${location} has ${formatInteger(currentContactTracers)} contact tracers.` +
+    `Per best available data, ${location} has ${formatInteger(
+      currentContactTracers,
+    )} contact tracers.` +
     ` With an average of ${formatInteger(
       currentWeeklyAverage,
     )} new daily cases, ` +
@@ -97,9 +99,9 @@ export function contactTracingStatusText(projection: Projection) {
 
   const outcomesAtLevel = levelText(
     level,
+    'When this level of tracing is coupled with widely available testing, COVID can be contained without resorting to lockdowns.',
+    'When this level of tracing is coupled with widely available testing, COVID can be contained without resorting to lockdowns.',
     'Tracing is largely ineffective relative to these levels of case growth and does little to contain the spread of COVID.',
-    'When tracing is coupled with widely available testing, COVID can be contained without resorting to lockdowns.',
-    'When tracing is coupled with widely available testing, COVID can be contained without resorting to lockdowns.',
   );
 
   const details =
