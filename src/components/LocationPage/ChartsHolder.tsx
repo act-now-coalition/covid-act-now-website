@@ -100,9 +100,7 @@ const ChartsHolder = (props: {
               <ChartDescription>
                 {caseGrowthStatusText(projection)}
               </ChartDescription>
-              {getChartSummarys(projection)[0] && (
-                <ShareButtonsMobile isFirst />
-              )}
+              {getChartSummarys(projection)[0] && <ShareButtonsMobile />}
               {rtRangeData && (
                 <>
                   <ChartRt columnData={projection.getDataset('rtRange')} />
