@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React from 'react';
 
 import {
   FacebookShareButton,
@@ -12,36 +12,10 @@ import {
 import {
   CopyLinkButton,
   SocialButtonsContainer,
-  SaveOrShareContainer,
-  SaveOrShareButton,
   SocialShareButton,
-  ShareWrapper,
-} from './ChartShareButtons.style';
+} from './ShareButtons.style';
 
-const ChartShareButtons = props => {
-  const { isFirst } = props;
-  const [showShareIcons, setShowShareIcons] = useState(false);
-
-  return (
-    <ShareWrapper isFirst={isFirst}>
-      <SaveOrShareContainer>
-        <SaveOrShareButton>Save</SaveOrShareButton>
-        <SaveOrShareButton
-          isLast
-          onClick={() => {
-            setShowShareIcons(!showShareIcons);
-          }}
-        >
-          Share
-        </SaveOrShareButton>
-      </SaveOrShareContainer>
-
-      {showShareIcons && <SocialButtons />}
-    </ShareWrapper>
-  );
-};
-
-const SocialButtons = props => {
+const SocialButtons = () => {
   const buttonProps = {
     disableElevation: true,
     variant: 'contained',
@@ -83,4 +57,4 @@ const SocialButtons = props => {
   );
 };
 
-export default ChartShareButtons;
+export default SocialButtons;

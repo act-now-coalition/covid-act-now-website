@@ -3,13 +3,25 @@ import palette from 'assets/theme/palette';
 import { StyledShareButtonStyles } from '../ShareBlock/ShareBlock.style';
 import { COLOR_MAP } from 'common/colors';
 
-export const ShareWrapper = styled.div`
-  position: relative;
-  top: 4.875rem;
-  height: 0;
-  margin-top: ${({ isFirst }) => !isFirst && '-24px'};
+export const DesktopButtonsWrapper = styled.div`
+  display: none;
 
-  @media (max-width: 600px) {
+  @media (min-width: 600px) {
+    display: block;
+    position: relative;
+    top: 4.875rem;
+    height: 0;
+    margin-top: ${({ isFirst }) => !isFirst && '-24px'};
+  }
+`;
+
+export const MobileButtonsWrapper = styled.div`
+  position: relative;
+  height: 0;
+  margin: 10px 0 60px;
+  z-index: 1;
+
+  @media (min-width: 600px) {
     display: none;
   }
 `;
