@@ -9,11 +9,11 @@ import {
 } from './ShareButtons.style';
 
 const ShareButtonsDesktop = props => {
-  const { isFirst } = props;
+  const { isFirst, chartAbove } = props;
   const [showShareIcons, setShowShareIcons] = useState(false);
 
   return (
-    <DesktopButtonsWrapper isFirst={isFirst}>
+    <DesktopButtonsWrapper isFirst={isFirst} chartAbove={chartAbove}>
       <SaveOrShareContainer>
         <SaveOrShareButton>Save</SaveOrShareButton>
         <SaveOrShareButton

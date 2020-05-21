@@ -35,9 +35,7 @@ const SocialButtons = () => {
         </FacebookShareButton>
       </SocialShareButton>
       <SocialShareButton {...buttonProps} color="#00acee">
-        <TwitterShareButton
-        // }}
-        >
+        <TwitterShareButton>
           <TwitterIcon {...iconProps} />
         </TwitterShareButton>
       </SocialShareButton>

@@ -111,7 +111,11 @@ const ChartsHolder = (props: {
                   </Disclaimer>
                 </>
               )}
-              {getChartSummarys(projection)[1] && <ShareButtonsDesktop />}
+              {getChartSummarys(projection)[1] && (
+                <ShareButtonsDesktop
+                  chartAbove={getChartSummarys(projection)[0]}
+                />
+              )}
               <ChartHeader>{getMetricName(Metric.POSITIVE_TESTS)}</ChartHeader>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
               <ChartDescription>
@@ -130,7 +134,11 @@ const ChartsHolder = (props: {
                   </Disclaimer>
                 </>
               )}
-              {getChartSummarys(projection)[2] && <ShareButtonsDesktop />}
+              {getChartSummarys(projection)[2] && (
+                <ShareButtonsDesktop
+                  chartAbove={getChartSummarys(projection)[1]}
+                />
+              )}
               <ChartHeader>
                 {getMetricName(Metric.HOSPITAL_USAGE)}
                 <BetaTag>Beta</BetaTag>
@@ -152,7 +160,9 @@ const ChartsHolder = (props: {
                   </Disclaimer>
                 </>
               )}
-              <ShareButtonsDesktop />
+              <ShareButtonsDesktop
+                chartAbove={getChartSummarys(projection)[2]}
+              />
               <ChartHeader>
                 Future projections: all hospitalizations
               </ChartHeader>

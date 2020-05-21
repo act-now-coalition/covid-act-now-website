@@ -1,38 +1,48 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import palette from 'assets/theme/palette';
 import { StyledShareButtonStyles } from '../ShareBlock/ShareBlock.style';
 import { COLOR_MAP } from 'common/colors';
+
+const WrapperStyles = css`
+  display: block;
+  position: relative;
+  height: 0;
+  z-index: 1;
+`;
 
 export const DesktopButtonsWrapper = styled.div`
   display: none;
 
   @media (min-width: 600px) {
-    display: block;
-    position: relative;
+    ${WrapperStyles};
     top: 4.875rem;
-    height: 0;
-    margin-top: ${({ isFirst }) => !isFirst && '-24px'};
+    margin-top: ${({ isFirst, chartAbove }) =>
+      !isFirst && chartAbove && '-24px'};
+    margin-top: ${({ isFirst, chartAbove }) =>
+      !isFirst && !chartAbove && '-16px'};
   }
 `;
 
 export const MobileButtonsWrapper = styled.div`
-  position: relative;
-  height: 0;
+  ${WrapperStyles};
   margin: 10px 0 60px;
-  z-index: 1;
 
   @media (min-width: 600px) {
     display: none;
   }
 `;
 
-export const SaveOrShareContainer = styled.div`
+export const ButtonContainerStyles = css`
   display: flex;
   flex-direction: row;
   justify-content: center;
   background-color: ${palette.white};
   border-radius: 4px;
   width: fit-content;
+`;
+
+export const SaveOrShareContainer = styled.div`
+  ${ButtonContainerStyles};
   border: 1px solid ${COLOR_MAP.GRAY.LIGHT};
   height: auto;
   margin-left: auto;
@@ -48,14 +58,9 @@ export const SaveOrShareButton = styled.div`
 `;
 
 export const SocialButtonsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  background-color: ${palette.white};
-  border-radius: 4px;
+  ${ButtonContainerStyles};
   box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.2);
   z-index: 1000;
-  width: fit-content;
   margin: 10px 0 0 auto;
 `;
 
@@ -69,16 +74,15 @@ export const SocialShareButton = styled.div`
 `;
 
 export const CopyLinkButton = styled.div`
-  font-size: 0.875rem;
-  line-height: 1.3;
-  text-transform: none;
-  margin: auto;
-  color: rgba(0, 0, 0, 0.7);
-  width: 80px;
-  height: 56px;
-  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 0.875rem;
+  line-height: 1.3;
+  text-transform: none;
+  color: rgba(0, 0, 0, 0.7);
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  width: 80px;
+  height: 56px;
   font-weight: normal;
 `;

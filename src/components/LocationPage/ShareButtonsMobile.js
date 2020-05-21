@@ -25,7 +25,6 @@ const ShareButtonsMobile = props => {
           Share
         </SaveOrShareButton>
       </SaveOrShareContainer>
-
       {showShareIcons && <SocialButtons />}
     </MobileButtonsWrapper>
   );
