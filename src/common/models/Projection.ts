@@ -384,6 +384,10 @@ export class Projection {
   /**
    * Gets the cases/day on day i, by averaging the trailing week of cases/day
    * data.
+   *
+   * Note: In the case of a data point with negative cases/day (can happen due
+   * to reporting weirdness), we skip that data point and may average fewer
+   * than 7 days worth of data.
    */
   getWeeklyAverageCaseForDay(i?: number) {
     const lastIndex = this.indexOfLastValue(this.dailyPositiveTests);
