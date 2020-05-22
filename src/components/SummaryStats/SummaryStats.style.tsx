@@ -25,7 +25,7 @@ export const SummaryStatsWrapper = styled(Box)<{ condensed?: Boolean }>`
       border-radius: 2px;
       box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.1);
       background-color: white;
-      padding: 1.75rem 1;
+      padding: 1.75rem 1em;
       position: relative;
       margin: -3rem 1rem 0;
       border-radius: 5px;
@@ -96,7 +96,7 @@ export const StatNameText = styled(Typography)<{ condensed?: Boolean }>`
     props.condensed
       ? `
     font-weight: 500;
-    font-size: 0675rem;
+    font-size: 0.75rem;
     line-height: 0.875rem;;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -124,7 +124,7 @@ export const StatTextWrapper = styled.div`
   margin-right: 1.5rem;
 
   @media (min-width: 600px) {
-    text-align: left;
+    text-align: center;
     margin-right: 0;
   }
 `;

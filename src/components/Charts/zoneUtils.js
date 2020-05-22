@@ -227,7 +227,7 @@ export const optionsContactTracing = data => {
     ],
     tooltip: {
       pointFormatter: function () {
-        return `Contact tracing ${formatPercent(this.y)}`;
+        return `Contacts traced ${formatPercent(this.y)}`;
       },
     },
     xAxis: {
@@ -246,7 +246,7 @@ export const optionsContactTracing = data => {
     },
     series: [
       {
-        name: 'Contact tracing',
+        name: 'Contacts traced',
         data,
         zones,
       },
