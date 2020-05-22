@@ -5,7 +5,7 @@ import { getLevel, Metric } from 'common/metric';
 import { formatPercent, formatInteger } from 'components/Charts/utils';
 import { Projection, TRACERS_NEEDED_PER_CASE } from 'common/models/Projection';
 
-export const METRIC_NAME = 'Contacts traced in 48 hours';
+export const METRIC_NAME = 'Contacts traced';
 
 const SHORT_DESCRIPTION_LOW = 'Too many cases and too little tracing';
 const SHORT_DESCRIPTION_MEDIUM =
@@ -14,7 +14,7 @@ const SHORT_DESCRIPTION_HIGH = 'Enough tracing to help contain COVID';
 const SHORT_DESCRIPTION_UNKNOWN = 'Insufficient data to assess';
 
 const LIMIT_LOW = 0.07;
-const LIMIT_MEDIUM = 0.8;
+const LIMIT_MEDIUM = 0.7;
 const LIMIT_HIGH = Infinity;
 
 const LOW_NAME = 'Low';
@@ -100,8 +100,8 @@ export function contactTracingStatusText(projection: Projection) {
   const outcomesAtLevel = levelText(
     level,
     'Tracing is largely ineffective relative to these levels of case growth and does little to contain the spread of COVID.',
-    `At these lower levels of tracing, it is unlikely ${location} will be able to successfully identify and isolate sources of disease spread and prevent new outbreaks.`,
-    'Such low levels of tracing indicate that there are far too many COVID cases and/or far too little tracing capacity, all of which bodes poorly for containing the spread of COVID.',
+    'When tracing is coupled with widely available testing, COVID can be contained without resorting to lockdowns.',
+    'When tracing is coupled with widely available testing, COVID can be contained without resorting to lockdowns.',
   );
 
   const details =
