@@ -199,11 +199,11 @@ const ChartsHolder = (props: {
                     >
                       Experts recommend
                     </a>{' '}
-                    that 80% of contacts for each new case must be traced within
-                    48 hours in order to contain COVID. Experts estimate that
-                    tracing each new case within 48 hours requires an average of
-                    10 contact tracers per new case, as well as fast testing.
-                    Our contact tracing data is sourced from{' '}
+                    that at least 70% of contacts for each new case must be
+                    traced within 48 hours in order to contain COVID. Experts
+                    estimate that tracing each new case within 48 hours requires
+                    an average of 10 contact tracers per new case, as well as
+                    fast testing. Our contact tracing data is sourced from{' '}
                     <a
                       href="https://testandtrace.com/"
                       target="_blank"
