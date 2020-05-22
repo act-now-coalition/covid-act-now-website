@@ -42,8 +42,8 @@ const SocialLocationPreview = (props: {
             />
           </MapWrapper>
           <HeaderText>
-            <MapHeaderHeader>Who is ready to reopen?</MapHeaderHeader>
-            <HeaderSubhead>RISK LEVELS</HeaderSubhead>
+            <MapHeaderHeader>America’s COVID warning system</MapHeaderHeader>
+            <HeaderSubhead>Risk levels</HeaderSubhead>
             <Legend condensed={true}>
               <LegendItem
                 key={'legend-3'}
@@ -85,7 +85,7 @@ const SocialLocationPreview = (props: {
               ? `${props.projections.countyName}, ${props.projections.stateCode}`
               : props.projections.stateName}
           </HeaderHeader>
-          <HeaderSubhead>Overall risk if reopening</HeaderSubhead>
+          <HeaderSubhead>Overall COVID risk</HeaderSubhead>
         </HeaderText>
         <AlarmLevel color={fillColor}>{levelInfo.name}</AlarmLevel>
       </PreviewHeader>

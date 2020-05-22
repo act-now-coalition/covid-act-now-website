@@ -16,7 +16,7 @@ export const formatDecimal = (num: number, places = 2): string =>
   num.toFixed(places);
 
 export const formatPercent = (num: number, places = 0): string =>
-  `${formatDecimal(100 * num, places)}%`;
+  `${formatDecimal(100 * Math.min(1, num), places)}%`;
 
 /** Adds comma's for thousands, millions, etc. */
 export const formatInteger = (num: number): string => num.toLocaleString();
@@ -159,12 +159,20 @@ const getZoneLabels = (
   maxYAxis: number,
   value: number,
   zones: Zone[],
+  flippedOrder?: boolean, // ie, high is good, low is bad
 ): Highcharts.AnnotationsLabelOptions[] =>
   zones.map((zone: Zone, i: number) => {
     const fromValue = i === 0 ? minYAxis : zones[i - 1].value || 0;
     const toValue = zone.value || maxYAxis;
     const isActive = fromValue <= value && value < toValue;
-    const activeClassName = isActive ? 'ZoneAnnotation--isActive' : '';
+    let activeClassName = '';
+
+    if (isActive && flippedOrder) {
+      activeClassName = 'ZoneAnnotation--isActive--flippedOrder';
+    } else if (isActive) {
+      activeClassName = 'ZoneAnnotation--isActive';
+    }
+
     return {
       ...annotationZoneLabelBase,
       style: {
@@ -189,13 +197,21 @@ export const zoneAnnotations = (
   maxYAxis: number,
   value: number,
   zones: Zone[],
+  flippedOrder?: boolean,
 ) => [
   {
     draggable: '',
     labelOptions: {
       backgroundColor: palette.white,
     },
-    labels: getZoneLabels(endDate, minYAxis, maxYAxis, value, zones),
+    labels: getZoneLabels(
+      endDate,
+      minYAxis,
+      maxYAxis,
+      value,
+      zones,
+      flippedOrder || false,
+    ),
   },
 ];
 
