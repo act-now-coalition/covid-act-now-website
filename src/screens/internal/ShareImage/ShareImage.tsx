@@ -74,6 +74,7 @@ const LocationShareCard = ({ stateId, countyFipsId }: ShareCardProps) => {
     [Metric.CASE_GROWTH_RATE]: projection.rt,
     [Metric.HOSPITAL_USAGE]: projection.currentIcuUtilization,
     [Metric.POSITIVE_TESTS]: projection.currentTestPositiveRate,
+    [Metric.CONTACT_TRACING]: projection.currentContactTracerMetric,
   };
 
   return <SocialLocationPreview projections={projections} stats={stats} />;
