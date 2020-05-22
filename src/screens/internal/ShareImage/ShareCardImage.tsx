@@ -4,35 +4,31 @@ import SocialLocationPreview from 'components/SocialLocationPreview/SocialLocati
 import { Projections } from 'common/models/Projections';
 import { useProjections } from 'common/utils/model';
 import {
-  Wrapper,
-  Content,
   ShareCardWrapper,
   TitleWrapper,
   LastUpdatedWrapper,
-  ScreenshotWrapper,
-} from './ShareImage.style';
+} from './ShareCardImage.style';
+import { ScreenshotWrapper } from './ShareImage.style';
 import { formatDate } from 'common/utils';
 import { findCountyByFips } from 'common/locations';
 import { Metric } from 'common/metric';
+
+// TODO(michael): Split this into HomeImage and LocationImage (with some shared code).
 
 /**
  * Screen that just shows the appropriate share card so that we can take a
  * screenshot that we then use as our OpenGraph image.
  */
-const OpenGraphImage = () => {
+const ShareCardImage = () => {
   const { stateId, countyFipsId } = useParams();
   const isHomePage = !stateId && !countyFipsId;
   return (
-    <Wrapper>
-      <Content>
-        <ScreenshotWrapper className={'screenshot'}>
-          <Header />
-          <ShareCardWrapper isHomePage={isHomePage}>
-            <ShareCard stateId={stateId} countyFipsId={countyFipsId} />
-          </ShareCardWrapper>
-        </ScreenshotWrapper>
-      </Content>
-    </Wrapper>
+    <ScreenshotWrapper className={'screenshot'}>
+      <Header />
+      <ShareCardWrapper isHomePage={isHomePage}>
+        <ShareCard stateId={stateId} countyFipsId={countyFipsId} />
+      </ShareCardWrapper>
+    </ScreenshotWrapper>
   );
 };
 
@@ -80,4 +76,4 @@ const LocationShareCard = ({ stateId, countyFipsId }: ShareCardProps) => {
   return <SocialLocationPreview projections={projections} stats={stats} />;
 };
 
-export default OpenGraphImage;
+export default ShareCardImage;
