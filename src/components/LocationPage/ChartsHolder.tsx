@@ -24,8 +24,7 @@ import {
   optionsHospitalUsage,
   optionsPositiveTests,
 } from 'components/Charts/zoneUtils';
-import ShareButtonsDesktop from 'components/LocationPage/ShareButtonsDesktop';
-import ShareButtonsMobile from 'components/LocationPage/ShareButtonsMobile';
+import ShareButtons from 'components/LocationPage/ShareButtons';
 import { getLevel, getMetricName } from 'common/metric';
 import { Metric } from 'common/metric';
 import { Level } from 'common/level';
@@ -33,6 +32,8 @@ import { formatDate } from 'common/utils';
 import { POSITIVE_RATE_DISCLAIMER } from 'common/metrics/positive_rate';
 import { CASE_GROWTH_DISCLAIMER } from 'common/metrics/case_growth';
 import { HOSPITALIZATIONS_DISCLAIMER } from 'common/metrics/hospitalizations';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
 
 // TODO(michael): These format helpers should probably live in a more
 // general-purpose location, not just for charts.
@@ -69,6 +70,9 @@ const ChartsHolder = (props: {
     projection,
   );
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+
   const getChartSummarys = (projection: Projection) => {
     return {
       [Metric.CASE_GROWTH_RATE]: projection.rt,
@@ -90,8 +94,8 @@ const ChartsHolder = (props: {
             <LocationPageHeader projections={props.projections} />
             <SummaryStats stats={getChartSummarys(projection)} />
             <MainContentInner>
-              {getChartSummarys(projection)[0] && (
-                <ShareButtonsDesktop isFirst />
+              {!isMobile && getChartSummarys(projection)[0] && (
+                <ShareButtons isFirst />
               )}
               <ChartHeader>
                 {getMetricName(Metric.CASE_GROWTH_RATE)}
@@ -100,7 +104,7 @@ const ChartsHolder = (props: {
               <ChartDescription>
                 {caseGrowthStatusText(projection)}
               </ChartDescription>
-              {getChartSummarys(projection)[0] && <ShareButtonsMobile />}
+              {isMobile && getChartSummarys(projection)[0] && <ShareButtons />}
               {rtRangeData && (
                 <>
                   <ChartRt columnData={projection.getDataset('rtRange')} />
@@ -109,17 +113,15 @@ const ChartsHolder = (props: {
                   </Disclaimer>
                 </>
               )}
-              {getChartSummarys(projection)[1] && (
-                <ShareButtonsDesktop
-                  chartAbove={getChartSummarys(projection)[0]}
-                />
+              {!isMobile && getChartSummarys(projection)[1] && (
+                <ShareButtons chartAbove={getChartSummarys(projection)[0]} />
               )}
               <ChartHeader>{getMetricName(Metric.POSITIVE_TESTS)}</ChartHeader>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
               <ChartDescription>
                 {positiveTestsStatusText(projection)}
               </ChartDescription>
-              {getChartSummarys(projection)[1] && <ShareButtonsMobile />}
+              {isMobile && getChartSummarys(projection)[1] && <ShareButtons />}
               {testPositiveData && (
                 <>
                   <ZoneChartWrapper>
@@ -132,10 +134,8 @@ const ChartsHolder = (props: {
                   </Disclaimer>
                 </>
               )}
-              {getChartSummarys(projection)[2] && (
-                <ShareButtonsDesktop
-                  chartAbove={getChartSummarys(projection)[1]}
-                />
+              {!isMobile && getChartSummarys(projection)[2] && (
+                <ShareButtons chartAbove={getChartSummarys(projection)[1]} />
               )}
               <ChartHeader>
                 {getMetricName(Metric.HOSPITAL_USAGE)}
@@ -145,7 +145,7 @@ const ChartsHolder = (props: {
               <ChartDescription>
                 {hospitalOccupancyStatusText(projection)}
               </ChartDescription>
-              {getChartSummarys(projection)[2] && <ShareButtonsMobile />}
+              {isMobile && getChartSummarys(projection)[2] && <ShareButtons />}
               {icuUtilizationData && (
                 <>
                   <ZoneChartWrapper>
@@ -158,9 +158,9 @@ const ChartsHolder = (props: {
                   </Disclaimer>
                 </>
               )}
-              <ShareButtonsDesktop
-                chartAbove={getChartSummarys(projection)[2]}
-              />
+              {!isMobile && (
+                <ShareButtons chartAbove={getChartSummarys(projection)[2]} />
+              )}
               <ChartHeader>
                 Future projections: all hospitalizations
               </ChartHeader>
@@ -168,7 +168,7 @@ const ChartsHolder = (props: {
               <ChartDescription>
                 {generateChartDescription(projection, noInterventionProjection)}
               </ChartDescription>
-              <ShareButtonsMobile />
+              {isMobile && <ShareButtons />}
               <ModelChart
                 projections={props.projections}
                 height={''}
