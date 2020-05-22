@@ -7,6 +7,7 @@ import {
   ChartDescription,
   ChartLocationName,
   BetaTag,
+  ChartHeaderWrapper,
 } from './ChartsHolder.style';
 import LocationPageHeader from 'components/LocationPage/LocationPageHeader';
 import NoCountyDetail from './NoCountyDetail';
@@ -94,17 +95,17 @@ const ChartsHolder = (props: {
             <LocationPageHeader projections={props.projections} />
             <SummaryStats stats={getChartSummarys(projection)} />
             <MainContentInner>
-              {!isMobile && getChartSummarys(projection)[0] && (
-                <ShareButtons isFirst />
-              )}
-              <ChartHeader>
-                {getMetricName(Metric.CASE_GROWTH_RATE)}
-              </ChartHeader>
+              <ChartHeaderWrapper>
+                <ChartHeader>
+                  {getMetricName(Metric.CASE_GROWTH_RATE)}
+                </ChartHeader>
+                {!isMobile && rtRangeData && <ShareButtons isFirst />}
+              </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
               <ChartDescription>
                 {caseGrowthStatusText(projection)}
               </ChartDescription>
-              {isMobile && getChartSummarys(projection)[0] && <ShareButtons />}
+              {isMobile && rtRangeData && <ShareButtons />}
               {rtRangeData && (
                 <>
                   <ChartRt columnData={projection.getDataset('rtRange')} />
@@ -113,15 +114,17 @@ const ChartsHolder = (props: {
                   </Disclaimer>
                 </>
               )}
-              {!isMobile && getChartSummarys(projection)[1] && (
-                <ShareButtons chartAbove={getChartSummarys(projection)[0]} />
-              )}
-              <ChartHeader>{getMetricName(Metric.POSITIVE_TESTS)}</ChartHeader>
+              <ChartHeaderWrapper>
+                <ChartHeader>
+                  {getMetricName(Metric.POSITIVE_TESTS)}
+                </ChartHeader>
+                {!isMobile && testPositiveData && <ShareButtons />}
+              </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
               <ChartDescription>
                 {positiveTestsStatusText(projection)}
               </ChartDescription>
-              {isMobile && getChartSummarys(projection)[1] && <ShareButtons />}
+              {isMobile && testPositiveData && <ShareButtons />}
               {testPositiveData && (
                 <>
                   <ZoneChartWrapper>
@@ -134,18 +137,18 @@ const ChartsHolder = (props: {
                   </Disclaimer>
                 </>
               )}
-              {!isMobile && getChartSummarys(projection)[2] && (
-                <ShareButtons chartAbove={getChartSummarys(projection)[1]} />
-              )}
-              <ChartHeader>
-                {getMetricName(Metric.HOSPITAL_USAGE)}
-                <BetaTag>Beta</BetaTag>
-              </ChartHeader>
+              <ChartHeaderWrapper>
+                <ChartHeader>
+                  {getMetricName(Metric.HOSPITAL_USAGE)}
+                  <BetaTag>Beta</BetaTag>
+                </ChartHeader>
+                {!isMobile && icuUtilizationData && <ShareButtons />}
+              </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
               <ChartDescription>
                 {hospitalOccupancyStatusText(projection)}
               </ChartDescription>
-              {isMobile && getChartSummarys(projection)[2] && <ShareButtons />}
+              {isMobile && icuUtilizationData && <ShareButtons />}
               {icuUtilizationData && (
                 <>
                   <ZoneChartWrapper>
@@ -158,12 +161,12 @@ const ChartsHolder = (props: {
                   </Disclaimer>
                 </>
               )}
-              {!isMobile && (
-                <ShareButtons chartAbove={getChartSummarys(projection)[2]} />
-              )}
-              <ChartHeader>
-                Future projections: all hospitalizations
-              </ChartHeader>
+              <ChartHeaderWrapper>
+                <ChartHeader>
+                  Future projections: all hospitalizations
+                </ChartHeader>
+                {!isMobile && <ShareButtons />}
+              </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
               <ChartDescription>
                 {generateChartDescription(projection, noInterventionProjection)}

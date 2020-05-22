@@ -15,11 +15,6 @@ export const DesktopButtonsWrapper = styled.div`
 
   @media (min-width: 600px) {
     ${WrapperStyles};
-    top: 4.875rem;
-    margin-top: ${({ isFirst, chartAbove }) =>
-      !isFirst && chartAbove && '-24px'};
-    margin-top: ${({ isFirst, chartAbove }) =>
-      !isFirst && !chartAbove && '-16px'};
   }
 `;
 

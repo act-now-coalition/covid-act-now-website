@@ -1,5 +1,4 @@
-import React, { Fragment, useState, useRef } from 'react';
-import useOutsideClickHandler from '../../common/utils/useOutsideClickHandler';
+import React, { Fragment, useState } from 'react';
 import SocialButtons from './SocialButtons';
 import {
   SaveOrShareContainer,
@@ -7,8 +6,8 @@ import {
   DesktopButtonsWrapper,
   MobileButtonsWrapper,
 } from './ShareButtons.style';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
+import { ClickAwayListener, useMediaQuery } from '@material-ui/core';
 
 const InnerContent = props => {
   const { iconSize, setShowShareIcons, showShareIcons } = props;
@@ -38,12 +37,8 @@ const InnerContent = props => {
 };
 
 const ShareButtons = props => {
-  const { isFirst, chartAbove } = props;
+  const { isFirst } = props;
   const [showShareIcons, setShowShareIcons] = useState(false);
-
-  const shareButtonsRef = useRef(null);
-
-  useOutsideClickHandler(shareButtonsRef, setShowShareIcons);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
@@ -51,26 +46,26 @@ const ShareButtons = props => {
   return (
     <Fragment>
       {isMobile && (
-        <MobileButtonsWrapper isFirst={isFirst} ref={shareButtonsRef}>
-          <InnerContent
-            iconSize="40"
-            showShareIcons={showShareIcons}
-            setShowShareIcons={setShowShareIcons}
-          />
-        </MobileButtonsWrapper>
+        <ClickAwayListener onClickAway={() => setShowShareIcons(false)}>
+          <MobileButtonsWrapper>
+            <InnerContent
+              iconSize="40"
+              showShareIcons={showShareIcons}
+              setShowShareIcons={setShowShareIcons}
+            />
+          </MobileButtonsWrapper>
+        </ClickAwayListener>
       )}
       {!isMobile && (
-        <DesktopButtonsWrapper
-          isFirst={isFirst}
-          chartAbove={chartAbove}
-          ref={shareButtonsRef}
-        >
-          <InnerContent
-            iconSize="50"
-            showShareIcons={showShareIcons}
-            setShowShareIcons={setShowShareIcons}
-          />
-        </DesktopButtonsWrapper>
+        <ClickAwayListener onClickAway={() => setShowShareIcons(false)}>
+          <DesktopButtonsWrapper isFirst={isFirst}>
+            <InnerContent
+              iconSize="50"
+              showShareIcons={showShareIcons}
+              setShowShareIcons={setShowShareIcons}
+            />
+          </DesktopButtonsWrapper>
+        </ClickAwayListener>
       )}
     </Fragment>
   );

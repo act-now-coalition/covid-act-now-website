@@ -40,14 +40,21 @@ export const MainContentInner = styled.div`
   }
 `;
 
-export const ChartHeader = styled.div`
+export const ChartHeaderWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   margin: 4.875rem 0 0.25rem;
-  font-weight: 700;
-  font-size: 1.5rem;
+  height: 24px;
 
   @media print {
     page-break-before: always;
   }
+`;
+
+export const ChartHeader = styled.div`
+  font-weight: 700;
+  font-size: 1.5rem;
 `;
 
 export const ChartLocationName = styled(Typography)`
