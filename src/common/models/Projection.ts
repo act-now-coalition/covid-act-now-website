@@ -32,6 +32,19 @@ export const TRACERS_NEEDED_PER_CASE = 10;
 const ICU_DECOMP_FACTOR = 0.3;
 const DEFAULT_UTILIZATION = 0.75;
 
+/**
+ * We override the contact tracing for specific states due to data inconsistincies.
+ * Ideally we would fix this in either the original data source or in the API level,
+ * but for now, check if the state is in the dictionary and return the constant
+ * value for the time being.
+ * TODO: Revert this to use the API data once it's more valid
+ */
+const CONTACT_TRACER_STATE_OVERRIDES: { [key: string]: number } = {
+  Hawaii: 80,
+  Indiana: 500,
+  'New Jersey': 800,
+};
+
 /** Parameters that can be provided when constructing a Projection. */
 export interface ProjectionParameters {
   intervention: string;
@@ -81,7 +94,6 @@ export class Projection {
   readonly currentCumulativeDeaths: number | null;
   readonly currentCumulativeCases: number | null;
   readonly currentContactTracerMetric: number | null;
-  readonly currentContactTracers: number | null;
   readonly stateName: string;
 
   private readonly intervention: string;
@@ -186,12 +198,17 @@ export class Projection {
     this.currentContactTracerMetric = this.contractTracers
       .filter(x => x !== null)
       .slice(-1)[0];
-    this.currentContactTracers =
-      this.lastValue(
-        this.actualTimeseries.map(row => row && row.contactTracers),
-      ) || null;
   }
 
+  get currentContactTracers() {
+    return (
+      CONTACT_TRACER_STATE_OVERRIDES[this.stateName] ||
+      this.lastValue(
+        this.actualTimeseries.map(row => row && row.contactTracers),
+      ) ||
+      null
+    );
+  }
   /**
    * If one of the most recent days has any data for all of:
    *   - currentUsageCovid
@@ -412,11 +429,12 @@ export class Projection {
     return actualTimeseries.map(
       (row: CANActualsTimeseriesRow | null, i: number) => {
         if (row && row.contactTracers) {
+          const contactTracers =
+            CONTACT_TRACER_STATE_OVERRIDES[this.stateName] ||
+            row.contactTracers;
           const weeklyAverage = this.getWeeklyAverageCaseForDay(i);
           if (weeklyAverage) {
-            return (
-              row.contactTracers / (weeklyAverage * TRACERS_NEEDED_PER_CASE)
-            );
+            return contactTracers / (weeklyAverage * TRACERS_NEEDED_PER_CASE);
           }
         }
 
