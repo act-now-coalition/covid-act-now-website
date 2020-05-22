@@ -96,7 +96,7 @@ export const StatNameText = styled(Typography)<{ condensed?: Boolean }>`
     props.condensed
       ? `
     font-weight: 500;
-    font-size: 0675rem;
+    font-size: 0.75rem;
     line-height: 0.875rem;;
     letter-spacing: 0.06em;
     text-transform: uppercase;
