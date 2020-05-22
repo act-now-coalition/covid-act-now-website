@@ -42,7 +42,10 @@ const DEFAULT_UTILIZATION = 0.75;
 const CONTACT_TRACER_STATE_OVERRIDES: { [key: string]: number } = {
   Hawaii: 80,
   Indiana: 500,
-  'New Jersey': 800,
+  'New Jersey': 900,
+  'New Mexico': 100,
+  'North Carolina': 400,
+  'North Dakota': 352,
 };
 
 /** Parameters that can be provided when constructing a Projection. */
