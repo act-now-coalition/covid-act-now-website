@@ -178,11 +178,11 @@ export class Projection {
     // TODO(https://trello.com/c/CPcYKmdo/): Reenable once we get to the bottom of
     // Montgomery, AL issue.
     const disableIcu = summaryWithTimeseries.fips === '01101';
-    this.contractTracers = this.calcContactTracers(this.actualTimeseries);
-
     this.icuUtilization = disableIcu
       ? [null]
       : this.calcICUHeadroom(this.actualTimeseries, timeseries, lastUpdated);
+
+    this.contractTracers = this.calcContactTracers(this.actualTimeseries);
 
     this.fixZeros(this.hospitalizations);
     this.fixZeros(this.cumulativeDeaths);
