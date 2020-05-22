@@ -142,9 +142,11 @@ export class Projection {
       lastUpdated,
     );
 
-    // We have in the past disabled states due to bad data. We can do that
-    // by flipping this flag. If we don't use this
-    const disableIcu = false; //summaryWithTimeseries.stateName === 'BadState';
+    // We sometimes need to disable the ICU metric for locations due to bad data, etc.
+    // TODO(https://trello.com/c/CPcYKmdo/): Reenable once we get to the bottom of
+    // Montgomery, AL issue.
+    const disableIcu = summaryWithTimeseries.fips === '01101';
+
     this.icuUtilization = disableIcu
       ? [null]
       : this.calcICUHeadroom(this.actualTimeseries, timeseries, lastUpdated);
