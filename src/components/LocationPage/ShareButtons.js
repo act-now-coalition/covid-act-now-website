@@ -41,7 +41,6 @@ const ShareButtons = props => {
   const { isFirst, chartAbove } = props;
   const [showShareIcons, setShowShareIcons] = useState(false);
 
-  console.log('showShareIcons', showShareIcons);
   const shareButtonsRef = useRef(null);
 
   useOutsideClickHandler(shareButtonsRef, setShowShareIcons);
