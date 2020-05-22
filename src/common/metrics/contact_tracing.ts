@@ -55,12 +55,6 @@ export const CONTACT_TRACING_LEVEL_INFO_MAP: LevelInfoMap = {
   },
 };
 
-export const CONTACT_TRACING_DISCLAIMER =
-  'Studies suggest that in order to successfully contain COVID,' +
-  ' 80% of contacts for each new COVID case must be traced in 48 hours. ' +
-  'Experts estimate that tracing this requires about 10 contact tracers per new case, ' +
-  'as well as efficient processes and fast testing.';
-
 export function contactTracingStatusText(projection: Projection) {
   const currentContactTracers = projection.currentContactTracers;
   const currentWeeklyAverage =
@@ -99,9 +93,9 @@ export function contactTracingStatusText(projection: Projection) {
 
   const outcomesAtLevel = levelText(
     level,
-    'Tracing is largely ineffective relative to these levels of case growth and does little to contain the spread of COVID.',
-    'When tracing is coupled with widely available testing, COVID can be contained without resorting to lockdowns.',
-    'When tracing is coupled with widely available testing, COVID can be contained without resorting to lockdowns.',
+    `These low levels of tracing suggest there is either an active outbreak underway in ${location}, or almost no tracing capacity exists. Strong caution is warranted.`,
+    `At these lower levels of tracing, it is unlikely ${location} will be able to successfully identify and isolate sources of disease spread fast enough to prevent new outbreaks.`,
+    'When this level of tracing is coupled with widely available testing, COVID can be contained without resorting to lockdowns.',
   );
 
   const details =
