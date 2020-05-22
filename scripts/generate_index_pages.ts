@@ -14,6 +14,7 @@ import US_STATE_DATASET from '../src/components/MapSelectors/datasets/us_states_
 import ShareImageUrlJSON from '../src/assets/data/share_images_url.json';
 import { STATES } from '../src/common';
 import { assert } from '../src/common/utils';
+import moment from 'moment';
 
 // We don't care about the values here, but this is a cheap way to determine all
 // of the counties we have any data for and are therefore share-able.
@@ -64,10 +65,12 @@ async function main() {
     homePageTags(builder.fullImageUrl('home.png')),
   );
 
+  const formattedDateParam = moment().format("[?date=]YYYY-MM-D");
+
   for (const stateCode in STATES) {
     const stateName = (STATES as any)[stateCode];
     const relativeUrl = `/us/${stateCode.toLowerCase()}/`;
-    const canonicalUrl = urlJoin('https://covidactnow.org/', relativeUrl);
+    const canonicalUrl = urlJoin('https://covidactnow.org/', relativeUrl, formattedDateParam);
     const imageUrl = builder.fullImageUrl(
       `states/${stateCode.toLowerCase()}.png`,
     );
@@ -89,7 +92,7 @@ async function main() {
     const relativeUrl = `/us/${stateCode.toLowerCase()}/county/${
       county.county_url_name
     }`;
-    const canonicalUrl = urlJoin('https://covidactnow.org/', relativeUrl);
+    const canonicalUrl = urlJoin('https://covidactnow.org/', relativeUrl, formattedDateParam);
     const imageUrl = builder.fullImageUrl(`counties/${fips}.png`);
     const page = path.join(relativeUrl, 'index.html');
     await builder.writeTemplatedPage(
