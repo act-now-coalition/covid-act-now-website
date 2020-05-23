@@ -4,11 +4,8 @@ import { useProjections } from 'common/utils/model';
 import { STATES } from 'common';
 import { ZoneChartWrapper } from 'components/Charts/ZoneChart.style';
 import Chart from 'components/Charts/Chart';
-import { ChartRt } from 'components/Charts';
-import {
-  optionsHospitalUsage,
-  optionsPositiveTests,
-} from 'components/Charts/zoneUtils';
+import { ChartRt, ChartPositiveTestRate } from 'components/Charts';
+import { optionsHospitalUsage } from 'components/Charts/zoneUtils';
 import { getChartData } from 'components/LocationPage/ChartsHolder';
 
 function AllStates() {
@@ -46,9 +43,7 @@ function State({ stateId }) {
         </div>
         <div style={{ width: '32%', height: '450px' }}>
           {testPositiveData && (
-            <ZoneChartWrapper>
-              <Chart options={optionsPositiveTests(testPositiveData)} />
-            </ZoneChartWrapper>
+            <ChartPositiveTestRate columnData={testPositiveData} />
           )}
         </div>
         <div style={{ width: '32%', height: '450px' }}>
