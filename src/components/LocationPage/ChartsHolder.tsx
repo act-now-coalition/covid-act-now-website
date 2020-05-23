@@ -19,8 +19,7 @@ import { ZoneChartWrapper } from 'components/Charts/ZoneChart.style';
 import Chart from 'components/Charts/Chart';
 import ClaimStateBlock from 'components/ClaimStateBlock/ClaimStateBlock';
 import ShareModelBlock from '../../components/ShareBlock/ShareModelBlock';
-import { ChartRt } from '../../components/Charts';
-
+import { ChartRt, ChartPositiveTestRate } from '../../components/Charts';
 import {
   caseGrowthStatusText,
   CASE_GROWTH_DISCLAIMER,
@@ -35,14 +34,11 @@ import {
 } from 'common/metrics/hospitalizations';
 import { generateChartDescription } from 'common/metrics/future_projection';
 import { contactTracingStatusText } from 'common/metrics/contact_tracing';
-
 import {
   optionsHospitalUsage,
-  optionsPositiveTests,
   optionsContactTracing,
 } from 'components/Charts/zoneUtils';
-import { getMetricName } from 'common/metric';
-import { Metric } from 'common/metric';
+import { Metric, getMetricName } from 'common/metric';
 
 // TODO(michael): figure out where this type declaration should live.
 type County = {
@@ -138,11 +134,7 @@ const ChartsHolder = (props: {
               </ChartDescription>
               {testPositiveData && (
                 <>
-                  <ZoneChartWrapper>
-                    <Chart
-                      options={optionsPositiveTests(testPositiveData) as any}
-                    />
-                  </ZoneChartWrapper>
+                  <ChartPositiveTestRate columnData={testPositiveData} />
                   <Disclaimer metricName="positive test rate">
                     {POSITIVE_RATE_DISCLAIMER}
                   </Disclaimer>

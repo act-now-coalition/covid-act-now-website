@@ -17,7 +17,7 @@ const charts = {
 };
 
 const tooltip = {
-  width: '160px',
+  width: '200px',
   boxShadow: `3px 3px 5px ${palette.chart.tooltip.shadow}`,
   fontSizeTitle: '11px',
 };
