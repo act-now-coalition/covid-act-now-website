@@ -1,7 +1,7 @@
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
 
-const LOW_NAME = 'Reduced';
+const LOW_NAME = 'Low';
 const MEDIUM_NAME = 'Moderate';
 const HIGH_NAME = 'Elevated';
 const UNKNOWN = 'Unknown';
@@ -13,7 +13,7 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     name: LOW_NAME,
     color: COLOR_MAP.GREEN.BASE,
     detail: locationName =>
-      `${locationName}’s COVID risk is reduced because all of ${locationName}’s COVID metrics  meet international standards.`,
+      `${locationName}’s COVID risk is low because all of ${locationName}’s COVID metrics  meet international standards.`,
   },
   [Level.MEDIUM]: {
     level: Level.MEDIUM,

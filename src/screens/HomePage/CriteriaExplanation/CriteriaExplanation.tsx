@@ -38,7 +38,7 @@ const CriteriaExplanation = () => {
           <Kicker>Indicator 4</Kicker>
           <CriterionHeader>Are we tracing fast enough?</CriterionHeader>
           <CriterionDescription>
-            Are we finding and isolating new cases before COVID spreads?
+            Are we finding and isolating most new cases before COVID spreads?
           </CriterionDescription>
         </Criterion>
       </CriteriaList>
