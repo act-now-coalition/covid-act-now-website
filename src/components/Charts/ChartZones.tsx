@@ -45,6 +45,7 @@ const ChartZones = ({
   marginRight = 5,
   capY,
   getTooltipText,
+  getPointText,
 }: {
   width: number;
   height: number;
@@ -52,6 +53,7 @@ const ChartZones = ({
   zones: LevelInfoMap;
   capY: number;
   getTooltipText: (valueY: number) => string;
+  getPointText: (valueY: number) => string;
   marginTop?: number;
   marginBottom?: number;
   marginLeft?: number;
@@ -154,7 +156,7 @@ const ChartZones = ({
         <BoxedAnnotation
           x={getXCoord(lastPoint) + 30}
           y={getYCoord(lastPoint)}
-          text={formatPercent(lastPointY, 1)}
+          text={getPointText(lastPointY)}
         />
       </Style.TextAnnotation>
       <Style.Axis>
@@ -184,12 +186,14 @@ const ChartZoneAutosize = ({
   zones,
   capY,
   getTooltipText,
+  getPointText,
   height = 400,
 }: {
   columnData: Point[];
   zones: LevelInfoMap;
   capY: number;
   getTooltipText: (valueY: number) => string;
+  getPointText: (valueY: number) => string;
   height?: number;
 }) => (
   <Style.ChartContainer>
@@ -202,6 +206,7 @@ const ChartZoneAutosize = ({
           zones={zones}
           capY={capY}
           getTooltipText={getTooltipText}
+          getPointText={getPointText}
         />
       )}
     </ParentSize>
