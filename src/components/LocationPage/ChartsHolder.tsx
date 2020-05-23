@@ -15,14 +15,13 @@ import { Projections } from 'common/models/Projections';
 import { Projection } from 'common/models/Projection';
 import SummaryStats from 'components/SummaryStats/SummaryStats';
 import Disclaimer from 'components/Disclaimer/Disclaimer';
-import { ZoneChartWrapper } from 'components/Charts/ZoneChart.style';
-import Chart from 'components/Charts/Chart';
 import ClaimStateBlock from 'components/ClaimStateBlock/ClaimStateBlock';
 import ShareModelBlock from '../../components/ShareBlock/ShareModelBlock';
 import {
   ChartRt,
   ChartPositiveTestRate,
   ChartICUHeadroom,
+  ChartContactTracing,
 } from 'components/Charts';
 import {
   caseGrowthStatusText,
@@ -38,7 +37,6 @@ import {
 } from 'common/metrics/hospitalizations';
 import { generateChartDescription } from 'common/metrics/future_projection';
 import { contactTracingStatusText } from 'common/metrics/contact_tracing';
-import { optionsContactTracing } from 'components/Charts/zoneUtils';
 import { Metric, getMetricName } from 'common/metric';
 
 // TODO(michael): figure out where this type declaration should live.
@@ -175,11 +173,7 @@ const ChartsHolder = (props: {
               {/* TODO: Use contact tracing data here */}
               {contactTracingData && (
                 <>
-                  <ZoneChartWrapper>
-                    <Chart
-                      options={optionsContactTracing(contactTracingData) as any}
-                    />
-                  </ZoneChartWrapper>
+                  <ChartContactTracing columnData={contactTracingData} />
                   <Disclaimer>
                     <a
                       href="https://science.sciencemag.org/content/368/6491/eabb6936"
