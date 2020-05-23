@@ -70,9 +70,7 @@ async function main() {
   for (const stateCode in STATES) {
     const stateName = (STATES as any)[stateCode];
     const relativeUrl = `/us/${stateCode.toLowerCase()}/`;
-    // temporary, for testing:
-        const canonicalUrl = urlJoin('https://covid-projections-git-casulin-url-param-sharing.covidactnow.now.sh/', relativeUrl, formattedDateParam);
-    // const canonicalUrl = urlJoin('https://covidactnow.org/', relativeUrl, formattedDateParam);
+    const canonicalUrl = urlJoin('https://covidactnow.org/', relativeUrl, formattedDateParam);
     const imageUrl = builder.fullImageUrl(
       `states/${stateCode.toLowerCase()}.png`,
     );
@@ -94,9 +92,7 @@ async function main() {
     const relativeUrl = `/us/${stateCode.toLowerCase()}/county/${
       county.county_url_name
     }`;
-    // temporary, for testing:
-    const canonicalUrl = urlJoin('https://covid-projections-git-casulin-url-param-sharing.covidactnow.now.sh/', relativeUrl, formattedDateParam);
-    // const canonicalUrl = urlJoin('https://covidactnow.org/', relativeUrl, formattedDateParam);
+    const canonicalUrl = urlJoin('https://covidactnow.org/', relativeUrl, formattedDateParam);
     const imageUrl = builder.fullImageUrl(`counties/${fips}.png`);
     const page = path.join(relativeUrl, 'index.html');
     await builder.writeTemplatedPage(
