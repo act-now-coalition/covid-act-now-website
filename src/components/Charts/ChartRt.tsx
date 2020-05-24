@@ -106,7 +106,7 @@ const ChartRt = ({
       top={marginTop + getYCoord(d)}
       title={formatDate(getDate(d))}
     >
-      {`Rt ${formatDecimal(getRt(d), 1)}`}{' '}
+      {`Rt ${formatDecimal(getRt(d), 2)}`}{' '}
       {getDate(d) < truncationDate ? '' : '(preliminary)'}
     </Tooltip>
   );
