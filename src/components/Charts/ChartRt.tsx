@@ -26,6 +26,7 @@ import {
   getZoneByValue,
   last,
   getAxisLimits,
+  formatDate,
 } from './utils';
 
 type PointRt = Omit<Column, 'y'> & {
@@ -99,18 +100,16 @@ const ChartRt = ({
   const yTruncationRt = yScale(truncationRt);
   const truncationZone = getZoneByValue(truncationRt, zones);
 
-  const renderTooltip = (d: PointRt) => {
-    const date = getDate(d);
-    const disclaimer = date < truncationDate ? '' : '(preliminary)';
-    return (
-      <Tooltip
-        left={marginLeft + getXCoord(d)}
-        top={marginTop + getYCoord(d)}
-        date={date}
-        text={`Rt ${formatDecimal(getRt(d), 1)} ${disclaimer}`}
-      />
-    );
-  };
+  const renderTooltip = (d: PointRt) => (
+    <Tooltip
+      left={marginLeft + getXCoord(d)}
+      top={marginTop + getYCoord(d)}
+      title={formatDate(getDate(d))}
+    >
+      {`Infection rate ${formatDecimal(getRt(d), 2)}`}{' '}
+      {getDate(d) < truncationDate ? '' : '(preliminary)'}
+    </Tooltip>
+  );
 
   const renderMarker = (d: PointRt) => (
     <Style.CircleMarker
@@ -136,15 +135,17 @@ const ChartRt = ({
       marginRight={marginRight}
     >
       <RectClipGroup width={chartWidth} height={chartHeight}>
-        <Style.SeriesArea>
-          <Area
-            data={data}
-            x={getXCoord}
-            y0={(d: PointRt) => yScale(getYAreaLow(d))}
-            y1={(d: PointRt) => yScale(getYAreaHigh(d))}
-            curve={curveNatural}
-          />
-        </Style.SeriesArea>
+        <RectClipGroup width={chartWidth} height={chartHeight} topPadding={0}>
+          <Style.SeriesArea>
+            <Area
+              data={data}
+              x={getXCoord}
+              y0={(d: PointRt) => yScale(getYAreaLow(d))}
+              y1={(d: PointRt) => yScale(getYAreaHigh(d))}
+              curve={curveNatural}
+            />
+          </Style.SeriesArea>
+        </RectClipGroup>
         {regions.map((region, i) => (
           <Group key={`chart-region-${i}`}>
             <Style.SeriesLine stroke={region.color}>
@@ -157,7 +158,7 @@ const ChartRt = ({
                 yScale={yScale}
               />
             </Style.SeriesLine>
-            <Style.SeriesDashed stroke={region.color}>
+            <Style.SeriesDotted stroke={region.color}>
               <ZoneLinePath<PointRt>
                 data={restData}
                 x={getXCoord}
@@ -166,7 +167,7 @@ const ChartRt = ({
                 width={chartWidth}
                 yScale={yScale}
               />
-            </Style.SeriesDashed>
+            </Style.SeriesDotted>
             <ZoneAnnotation
               color={region.color}
               name={region.name}

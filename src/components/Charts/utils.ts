@@ -283,3 +283,6 @@ export const getAxisLimits = (minY: number, maxY: number, zones: Zones) => {
   const maxTickPosition = _.max(tickPositions) || maxY;
   return roundAxisLimits(minTickPosition, maxTickPosition);
 };
+
+export const formatDate = (date: Date, format = 'dddd, MMM D, YYYY'): string =>
+  moment(date).format(format);

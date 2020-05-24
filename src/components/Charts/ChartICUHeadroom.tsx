@@ -8,7 +8,7 @@ const CAP_Y = 1;
 
 const getPointText = (valueY: number) => formatPercent(valueY, 0);
 
-const getTooltipText = (valueY: number) =>
+const getTooltipBody = (valueY: number) =>
   valueY > CAP_Y
     ? `ICU headroom used > ${getPointText(CAP_Y)}`
     : `ICU headroom used ${getPointText(valueY)}`;
@@ -25,7 +25,7 @@ const ChartICUHeadroom = ({
     columnData={columnData}
     capY={CAP_Y}
     zones={HOSPITAL_USAGE_LEVEL_INFO_MAP}
-    getTooltipText={getTooltipText}
+    getTooltipBody={getTooltipBody}
     getPointText={getPointText}
   />
 );

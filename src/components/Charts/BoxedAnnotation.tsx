@@ -31,8 +31,8 @@ export const BoxedAnnotation = ({
       <rect
         y={top - padding}
         x={left - padding}
-        width={width + 2 * padding}
-        height={height + 2 * padding}
+        width={Math.abs(width + 2 * padding)}
+        height={Math.abs(height + 2 * padding)}
       />
       <text ref={textRef}>{text}</text>
     </Group>

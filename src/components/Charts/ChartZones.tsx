@@ -24,6 +24,7 @@ import {
   formatPercent,
   getZoneByValue,
   getAxisLimits,
+  formatDate,
 } from './utils';
 
 type Point = Omit<Column, 'y'> & {
@@ -44,7 +45,7 @@ const ChartZones = ({
   marginLeft = 40,
   marginRight = 5,
   capY,
-  getTooltipText,
+  getTooltipBody,
   getPointText,
 }: {
   width: number;
@@ -52,7 +53,7 @@ const ChartZones = ({
   columnData: Point[];
   zones: LevelInfoMap;
   capY: number;
-  getTooltipText: (valueY: number) => string;
+  getTooltipBody: (valueY: number) => string;
   getPointText: (valueY: number) => string;
   marginTop?: number;
   marginBottom?: number;
@@ -106,9 +107,10 @@ const ChartZones = ({
     <Tooltip
       top={marginTop + getYCoord(d)}
       left={marginLeft + getXCoord(d)}
-      date={getDate(d)}
-      text={getTooltipText(getY(d))}
-    />
+      title={formatDate(getDate(d))}
+    >
+      {getTooltipBody(getY(d))}
+    </Tooltip>
   );
 
   return (
@@ -185,14 +187,14 @@ const ChartZoneAutosize = ({
   columnData,
   zones,
   capY,
-  getTooltipText,
+  getTooltipBody,
   getPointText,
   height = 400,
 }: {
   columnData: Point[];
   zones: LevelInfoMap;
   capY: number;
-  getTooltipText: (valueY: number) => string;
+  getTooltipBody: (valueY: number) => string;
   getPointText: (valueY: number) => string;
   height?: number;
 }) => (
@@ -205,7 +207,7 @@ const ChartZoneAutosize = ({
           columnData={columnData}
           zones={zones}
           capY={capY}
-          getTooltipText={getTooltipText}
+          getTooltipBody={getTooltipBody}
           getPointText={getPointText}
         />
       )}

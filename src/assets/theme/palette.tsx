@@ -60,9 +60,9 @@ export default {
     grid: black,
     area: colors.grey[200],
     tooltip: {
-      background: black,
-      text: lightGray,
-      shadow: colors.grey[400],
+      background: colors.grey[900],
+      text: white,
+      shadow: colors.grey[500],
     },
     annotation: black,
   },

@@ -10,18 +10,19 @@ import {
 } from './ChartsHolder.style';
 import LocationPageHeader from 'components/LocationPage/LocationPageHeader';
 import NoCountyDetail from './NoCountyDetail';
-import ModelChart from 'components/Charts/ModelChart';
 import { Projections } from 'common/models/Projections';
 import { Projection } from 'common/models/Projection';
 import SummaryStats from 'components/SummaryStats/SummaryStats';
 import Disclaimer from 'components/Disclaimer/Disclaimer';
 import ClaimStateBlock from 'components/ClaimStateBlock/ClaimStateBlock';
-import ShareModelBlock from '../../components/ShareBlock/ShareModelBlock';
+import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
+import Outcomes from 'components/Outcomes/Outcomes';
 import {
   ChartRt,
   ChartPositiveTestRate,
   ChartICUHeadroom,
   ChartContactTracing,
+  ChartFutureHospitalization,
 } from 'components/Charts';
 import {
   caseGrowthStatusText,
@@ -38,6 +39,8 @@ import {
 import { generateChartDescription } from 'common/metrics/future_projection';
 import { contactTracingStatusText } from 'common/metrics/contact_tracing';
 import { Metric, getMetricName } from 'common/metric';
+import { COLORS } from 'common';
+import { formatDate } from 'common/utils';
 
 // TODO(michael): figure out where this type declaration should live.
 type County = {
@@ -89,6 +92,12 @@ const ChartsHolder = (props: {
       [Metric.CONTACT_TRACING]: projection.currentContactTracerMetric,
     };
   };
+
+  let outcomesProjections = [
+    props.projections.baseline,
+    props.projections.projected,
+  ];
+  let outcomesColors = [COLORS.LIMITED_ACTION, COLORS.PROJECTED];
 
   return (
     <>
@@ -213,11 +222,13 @@ const ChartsHolder = (props: {
               <ChartDescription>
                 {generateChartDescription(projection, noInterventionProjection)}
               </ChartDescription>
-              <ModelChart
-                projections={props.projections}
-                height={''}
-                condensed={false}
-                forCompareModels={false}
+              <ChartFutureHospitalization projections={props.projections} />
+              <Outcomes
+                title={`Predicted outcomes by ${formatDate(
+                  props.projections.projected.finalDate,
+                )} (90 days from now)`}
+                projections={outcomesProjections}
+                colors={outcomesColors}
               />
             </MainContentInner>
             <ClaimStateBlock

@@ -8,7 +8,7 @@ const CAP_Y = 1;
 
 const getPointText = (valueY: number) => formatPercent(valueY, 0);
 
-const getTooltipText = (valueY: number) =>
+const getTooltipBody = (valueY: number) =>
   `Contacts traced ${getPointText(valueY)}`;
 
 const ChartContactTracing = ({
@@ -23,7 +23,7 @@ const ChartContactTracing = ({
     columnData={columnData}
     capY={CAP_Y}
     zones={CONTACT_TRACING_LEVEL_INFO_MAP}
-    getTooltipText={getTooltipText}
+    getTooltipBody={getTooltipBody}
     getPointText={getPointText}
   />
 );
