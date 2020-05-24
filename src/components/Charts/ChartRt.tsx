@@ -26,6 +26,7 @@ import {
   getZoneByValue,
   last,
   getAxisLimits,
+  formatDate,
 } from './utils';
 
 type PointRt = Omit<Column, 'y'> & {
@@ -99,18 +100,16 @@ const ChartRt = ({
   const yTruncationRt = yScale(truncationRt);
   const truncationZone = getZoneByValue(truncationRt, zones);
 
-  const renderTooltip = (d: PointRt) => {
-    const date = getDate(d);
-    const disclaimer = date < truncationDate ? '' : '(preliminary)';
-    return (
-      <Tooltip
-        left={marginLeft + getXCoord(d)}
-        top={marginTop + getYCoord(d)}
-        date={date}
-        text={`Rt ${formatDecimal(getRt(d), 1)} ${disclaimer}`}
-      />
-    );
-  };
+  const renderTooltip = (d: PointRt) => (
+    <Tooltip
+      left={marginLeft + getXCoord(d)}
+      top={marginTop + getYCoord(d)}
+      title={formatDate(getDate(d))}
+    >
+      {`Rt ${formatDecimal(getRt(d), 1)}`}{' '}
+      {getDate(d) < truncationDate ? '' : '(preliminary)'}
+    </Tooltip>
+  );
 
   const renderMarker = (d: PointRt) => (
     <Style.CircleMarker

@@ -117,19 +117,24 @@ export const RegionAnnotation = styled(TextAnnotation)<{ isActive: boolean }>`
 
 export const Tooltip = styled.div`
   position: absolute;
-  transform: translate(-50%, calc(-100% - 15px));
   pointer-events: none;
+  transform: translate(-50%, calc(-100% - 15px));
+  width: ${tooltip.width};
+  padding: 12px;
+  border-radius: 3px;
   font-family: ${charts.fontFamily};
   font-weight: ${charts.fontWeight};
   font-size: ${charts.fontSize};
-  width: ${tooltip.width};
+  line-height: 1.4;
   color: ${palette.chart.tooltip.text};
   background-color: ${palette.chart.tooltip.background};
-  box-shadow: ${palette.chart.tooltip.shadow};
-  padding: 5px 10px;
-  border-radius: 3px;
+  box-shadow: 2px 2px 6px ${palette.chart.tooltip.shadow};
 `;
 
 export const TooltipTitle = styled.div`
   font-size: ${tooltip.fontSizeTitle};
+`;
+
+export const TooltipBody = styled.div`
+  font-size: 11px;
 `;

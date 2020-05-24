@@ -1,24 +1,20 @@
 import React from 'react';
-import moment from 'moment';
 import * as Style from './Charts.style';
 
-const formatDate = (date: Date): string =>
-  moment(date).format('dddd, MMM D, YYYY');
-
 const Tooltip = ({
-  date,
-  text,
+  title,
   left,
   top,
+  children,
 }: {
-  date: Date;
-  text: string;
   left: number;
   top: number;
+  title?: string;
+  children?: React.ReactNode;
 }) => (
   <Style.Tooltip style={{ top, left }}>
-    <Style.TooltipTitle>{formatDate(date)}</Style.TooltipTitle>
-    {text}
+    {title && <Style.TooltipTitle>{title}</Style.TooltipTitle>}
+    {children && <Style.TooltipBody>{children}</Style.TooltipBody>}
   </Style.Tooltip>
 );
 
