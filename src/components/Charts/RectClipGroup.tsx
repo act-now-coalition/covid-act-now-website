@@ -28,8 +28,8 @@ const RectClipGroup: React.FunctionComponent<{
         x={x}
         y={y - topPadding}
         id={clipPathId}
-        width={width}
-        height={height + topPadding}
+        width={Math.abs(width)}
+        height={Math.abs(height + topPadding)}
       />
       <Group clipPath={`url(#${clipPathId})`}>{children}</Group>
     </>
