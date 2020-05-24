@@ -66,10 +66,18 @@ export const SeriesLine = styled.g`
   }
 `;
 
+export const SeriesDotted = styled(SeriesLine)`
+  line,
+  path {
+    stroke-dasharray: 1, 6;
+  }
+`;
+
 export const SeriesDashed = styled(SeriesLine)`
   line,
   path {
     stroke-dasharray: 1, 6;
+    stroke-linecap: square;
   }
 `;
 
@@ -98,8 +106,8 @@ export const TextAnnotation = styled.g`
     font-weight: ${charts.fontWeight};
     font-size: ${charts.fontSize};
     fill: ${palette.chart.annotation};
-    text-anchor: middle;
-    dominant-baseline: middle;
+    text-anchor: ${props => props.textAnchor || 'middle'};
+    dominant-baseline: ${props => props.dominantBaseline || 'middle'};
   }
 `;
 
@@ -137,4 +145,37 @@ export const TooltipTitle = styled.div`
 
 export const TooltipBody = styled.div`
   font-size: 11px;
+`;
+
+export const LegendContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media (min-width: 600px) {
+    flex-direction: row;
+  }
+  justify-content: center;
+  > * {
+    margin-right: 15px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+`;
+
+export const LegendItem = styled.div`
+  flex: 0 1 auto;
+  align-items: center;
+  > * {
+    margin-right: 5px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+`;
+
+export const LegendLabel = styled.span`
+  font-family: ${charts.fontFamily};
+  font-size: 11px;
+  font-weight: bold;
+  color: ${palette.chart.axis};
 `;

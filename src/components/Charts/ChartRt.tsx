@@ -158,7 +158,7 @@ const ChartRt = ({
                 yScale={yScale}
               />
             </Style.SeriesLine>
-            <Style.SeriesDashed stroke={region.color}>
+            <Style.SeriesDotted stroke={region.color}>
               <ZoneLinePath<PointRt>
                 data={restData}
                 x={getXCoord}
@@ -167,7 +167,7 @@ const ChartRt = ({
                 width={chartWidth}
                 yScale={yScale}
               />
-            </Style.SeriesDashed>
+            </Style.SeriesDotted>
             <ZoneAnnotation
               color={region.color}
               name={region.name}
