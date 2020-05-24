@@ -18,6 +18,7 @@ import Privacy from 'screens/Terms/Privacy';
 import Embed from 'screens/Embed/Embed';
 import AllStates from 'screens/internal/AllStates/AllStates';
 import CompareModels from 'screens/internal/CompareModels/CompareModels';
+import ExportImage from 'screens/internal/ShareImage/ChartExportImage';
 import ShareImage from 'screens/internal/ShareImage/ShareImage';
 import AppBar from 'components/AppBar/AppBar';
 import Footer from 'components/Footer/Footer';
@@ -94,6 +95,10 @@ export default function App() {
               want to screenshot for our social sharing images (OpenGraph /
               Twitter Card). */}
               <Route path="/internal/share-image/" component={ShareImage} />
+
+              {/** Internal endpoints we use to generate downloadable chart
+              exports images. */}
+              <Route path="/internal/export-image/" component={ExportImage} />
 
               <Route path="/*">
                 <Redirect to="/" />
