@@ -7,7 +7,6 @@ import {
   ChartPositiveTestRate,
   ChartICUHeadroom,
 } from 'components/Charts';
-import { getChartData } from 'components/LocationPage/ChartsHolder';
 
 function AllStates() {
   return Object.keys(STATES).map(stateId => (
@@ -26,30 +25,33 @@ function State({ stateId }) {
 
   const projection = projections.primary;
 
-  const { rtRangeData, testPositiveData, icuUtilizationData } = getChartData(
-    projection,
-  );
-
   return (
     <>
       <h3>{stateName}</h3>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <div style={{ width: '32%', height: '450px' }}>
-          {rtRangeData && (
-            <ChartRt
-              height={450}
-              columnData={projection.getDataset('rtRange')}
+      <div
+        style={{
+          marginLeft: '50px',
+          display: 'flex',
+          justifyContent: 'space-between',
+        }}
+      >
+        <div style={{ width: '31%' }}>
+          {projection.rt && (
+            <ChartRt columnData={projection.getDataset('rtRange')} />
+          )}
+        </div>
+        <div style={{ width: '31%' }}>
+          {projection.currentTestPositiveRate && (
+            <ChartPositiveTestRate
+              columnData={projection.getDataset('testPositiveRate')}
             />
           )}
         </div>
-        <div style={{ width: '32%', height: '450px' }}>
-          {testPositiveData && (
-            <ChartPositiveTestRate columnData={testPositiveData} />
-          )}
-        </div>
-        <div style={{ width: '32%', height: '450px' }}>
-          {icuUtilizationData && (
-            <ChartICUHeadroom columnData={icuUtilizationData} />
+        <div style={{ width: '31%' }}>
+          {projection.currentIcuUtilization && (
+            <ChartICUHeadroom
+              columnData={projection.getDataset('icuUtilization')}
+            />
           )}
         </div>
       </div>
