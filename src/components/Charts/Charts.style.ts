@@ -155,7 +155,7 @@ export const LegendContainer = styled.div`
   }
   justify-content: center;
   > * {
-    margin-right: 15px;
+    margin-right: 20px;
     &:last-child {
       margin-right: 0;
     }
@@ -166,7 +166,7 @@ export const LegendItem = styled.div`
   flex: 0 1 auto;
   align-items: center;
   > * {
-    margin-right: 5px;
+    margin-right: 4px;
     &:last-child {
       margin-right: 0;
     }
@@ -178,4 +178,5 @@ export const LegendLabel = styled.span`
   font-size: 11px;
   font-weight: bold;
   color: ${palette.chart.axis};
+  white-space: nowrap;
 `;
