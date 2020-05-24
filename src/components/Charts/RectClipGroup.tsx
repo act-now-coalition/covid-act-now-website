@@ -18,12 +18,19 @@ const RectClipGroup: React.FunctionComponent<{
   height: number;
   x?: number;
   y?: number;
-}> = ({ width, height, x = 0, y = 0, children }) => {
+  topPadding?: number;
+}> = ({ width, height, x = 0, y = 0, children, topPadding = 5 }) => {
   // Random ID for the clipping shape, to ensure that is unique in the DOM tree.
   const clipPathId = randomizeId('clip-path');
   return (
     <>
-      <RectClipPath x={x} y={y} id={clipPathId} width={width} height={height} />
+      <RectClipPath
+        x={x}
+        y={y - topPadding}
+        id={clipPathId}
+        width={width}
+        height={height + topPadding}
+      />
       <Group clipPath={`url(#${clipPathId})`}>{children}</Group>
     </>
   );

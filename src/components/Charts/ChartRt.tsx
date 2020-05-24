@@ -136,15 +136,17 @@ const ChartRt = ({
       marginRight={marginRight}
     >
       <RectClipGroup width={chartWidth} height={chartHeight}>
-        <Style.SeriesArea>
-          <Area
-            data={data}
-            x={getXCoord}
-            y0={(d: PointRt) => yScale(getYAreaLow(d))}
-            y1={(d: PointRt) => yScale(getYAreaHigh(d))}
-            curve={curveNatural}
-          />
-        </Style.SeriesArea>
+        <RectClipGroup width={chartWidth} height={chartHeight} topPadding={0}>
+          <Style.SeriesArea>
+            <Area
+              data={data}
+              x={getXCoord}
+              y0={(d: PointRt) => yScale(getYAreaLow(d))}
+              y1={(d: PointRt) => yScale(getYAreaHigh(d))}
+              curve={curveNatural}
+            />
+          </Style.SeriesArea>
+        </RectClipGroup>
         {regions.map((region, i) => (
           <Group key={`chart-region-${i}`}>
             <Style.SeriesLine stroke={region.color}>
