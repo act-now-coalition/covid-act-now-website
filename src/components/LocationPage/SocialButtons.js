@@ -16,7 +16,10 @@ import {
 } from './ShareButtons.style';
 
 const SocialButtons = props => {
-  const { iconSize: size } = props;
+  const { iconSize: size, shareURL } = props;
+
+  const url = shareURL || 'https://covidactnow.org/';
+  const hashtag = 'COVIDActNow';
 
   const iconProps = {
     size,
@@ -32,17 +35,17 @@ const SocialButtons = props => {
   return (
     <SocialButtonsContainer>
       <SocialShareButton {...buttonProps} color="#3b5998">
-        <FacebookShareButton>
+        <FacebookShareButton url={url}>
           <FacebookIcon {...iconProps} />
         </FacebookShareButton>
       </SocialShareButton>
       <SocialShareButton {...buttonProps} color="#00acee">
-        <TwitterShareButton>
+        <TwitterShareButton url={url} hashtags={[hashtag]}>
           <TwitterIcon {...iconProps} />
         </TwitterShareButton>
       </SocialShareButton>
       <SocialShareButton {...buttonProps} color="#007fb1">
-        <LinkedinShareButton>
+        <LinkedinShareButton url={url} hashtags={[hashtag]}>
           <LinkedinIcon {...iconProps} />
         </LinkedinShareButton>
       </SocialShareButton>

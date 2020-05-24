@@ -74,6 +74,10 @@ const ChartsHolder = (props: {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
+  const shareURL = `https://covidactnow.org/us/${props.stateId.toLowerCase()}${
+    props.county ? `/county/${props.county.county_url_name}/?chart=` : ''
+  }`;
+
   const getChartSummarys = (projection: Projection) => {
     return {
       [Metric.CASE_GROWTH_RATE]: projection.rt,
@@ -99,13 +103,17 @@ const ChartsHolder = (props: {
                 <ChartHeader>
                   {getMetricName(Metric.CASE_GROWTH_RATE)}
                 </ChartHeader>
-                {!isMobile && rtRangeData && <ShareButtons isFirst />}
+                {!isMobile && rtRangeData && (
+                  <ShareButtons shareURL={`${shareURL}0`} />
+                )}
               </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
               <ChartDescription>
                 {caseGrowthStatusText(projection)}
               </ChartDescription>
-              {isMobile && rtRangeData && <ShareButtons />}
+              {isMobile && rtRangeData && (
+                <ShareButtons shareURL={`${shareURL}0`} />
+              )}
               {rtRangeData && (
                 <>
                   <ChartRt columnData={projection.getDataset('rtRange')} />
@@ -118,13 +126,17 @@ const ChartsHolder = (props: {
                 <ChartHeader>
                   {getMetricName(Metric.POSITIVE_TESTS)}
                 </ChartHeader>
-                {!isMobile && testPositiveData && <ShareButtons />}
+                {!isMobile && testPositiveData && (
+                  <ShareButtons shareURL={`${shareURL}1`} />
+                )}
               </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
               <ChartDescription>
                 {positiveTestsStatusText(projection)}
               </ChartDescription>
-              {isMobile && testPositiveData && <ShareButtons />}
+              {isMobile && testPositiveData && (
+                <ShareButtons shareURL={`${shareURL}1`} />
+              )}
               {testPositiveData && (
                 <>
                   <ZoneChartWrapper>
@@ -142,13 +154,17 @@ const ChartsHolder = (props: {
                   {getMetricName(Metric.HOSPITAL_USAGE)}
                   <BetaTag>Beta</BetaTag>
                 </ChartHeader>
-                {!isMobile && icuUtilizationData && <ShareButtons />}
+                {!isMobile && icuUtilizationData && (
+                  <ShareButtons shareURL={`${shareURL}2`} />
+                )}
               </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
               <ChartDescription>
                 {hospitalOccupancyStatusText(projection)}
               </ChartDescription>
-              {isMobile && icuUtilizationData && <ShareButtons />}
+              {isMobile && icuUtilizationData && (
+                <ShareButtons shareURL={`${shareURL}2`} />
+              )}
               {icuUtilizationData && (
                 <>
                   <ZoneChartWrapper>
@@ -165,13 +181,13 @@ const ChartsHolder = (props: {
                 <ChartHeader>
                   Future projections: all hospitalizations
                 </ChartHeader>
-                {!isMobile && <ShareButtons />}
+                {!isMobile && <ShareButtons shareURL={`${shareURL}3`} />}
               </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
               <ChartDescription>
                 {generateChartDescription(projection, noInterventionProjection)}
               </ChartDescription>
-              {isMobile && <ShareButtons />}
+              {isMobile && <ShareButtons shareURL={`${shareURL}3`} />}
               <ModelChart
                 projections={props.projections}
                 height={''}

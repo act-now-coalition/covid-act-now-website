@@ -102,3 +102,5 @@ export const CopyLinkButton = styled.div`
     font-size: 0.875rem;
   }
 `;
+
+export const ClickAwayWrapper = styled.div``;

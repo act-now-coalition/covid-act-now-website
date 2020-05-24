@@ -5,40 +5,46 @@ import {
   SaveOrShareButton,
   DesktopButtonsWrapper,
   MobileButtonsWrapper,
+  ClickAwayWrapper,
 } from './ShareButtons.style';
 import { useTheme } from '@material-ui/core/styles';
 import { ClickAwayListener, useMediaQuery } from '@material-ui/core';
 
 const InnerContent = props => {
-  const { iconSize, setShowShareIcons, showShareIcons } = props;
+  const { iconSize, shareURL } = props;
+
+  const [showShareIcons, setShowShareIcons] = useState(false);
 
   return (
-    <Fragment>
-      <SaveOrShareContainer>
-        <SaveOrShareButton
-          onClick={() => {
-            setShowShareIcons(false);
-          }}
-        >
-          Save
-        </SaveOrShareButton>
-        <SaveOrShareButton
-          isLast
-          onClick={() => {
-            setShowShareIcons(!showShareIcons);
-          }}
-        >
-          Share
-        </SaveOrShareButton>
-      </SaveOrShareContainer>
-      {showShareIcons && <SocialButtons iconSize={iconSize} />}
-    </Fragment>
+    <ClickAwayListener onClickAway={() => setShowShareIcons(false)}>
+      <ClickAwayWrapper>
+        <SaveOrShareContainer>
+          <SaveOrShareButton
+            onClick={() => {
+              setShowShareIcons(false);
+            }}
+          >
+            Save
+          </SaveOrShareButton>
+          <SaveOrShareButton
+            isLast
+            onClick={() => {
+              setShowShareIcons(!showShareIcons);
+            }}
+          >
+            Share
+          </SaveOrShareButton>
+        </SaveOrShareContainer>
+        {showShareIcons && (
+          <SocialButtons iconSize={iconSize} shareURL={shareURL} />
+        )}
+      </ClickAwayWrapper>
+    </ClickAwayListener>
   );
 };
 
 const ShareButtons = props => {
-  const { isFirst } = props;
-  const [showShareIcons, setShowShareIcons] = useState(false);
+  const { shareURL } = props;
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
@@ -46,26 +52,14 @@ const ShareButtons = props => {
   return (
     <Fragment>
       {isMobile && (
-        <ClickAwayListener onClickAway={() => setShowShareIcons(false)}>
-          <MobileButtonsWrapper>
-            <InnerContent
-              iconSize="40"
-              showShareIcons={showShareIcons}
-              setShowShareIcons={setShowShareIcons}
-            />
-          </MobileButtonsWrapper>
-        </ClickAwayListener>
+        <MobileButtonsWrapper>
+          <InnerContent iconSize="40" shareURL={shareURL} />
+        </MobileButtonsWrapper>
       )}
       {!isMobile && (
-        <ClickAwayListener onClickAway={() => setShowShareIcons(false)}>
-          <DesktopButtonsWrapper isFirst={isFirst}>
-            <InnerContent
-              iconSize="50"
-              showShareIcons={showShareIcons}
-              setShowShareIcons={setShowShareIcons}
-            />
-          </DesktopButtonsWrapper>
-        </ClickAwayListener>
+        <DesktopButtonsWrapper>
+          <InnerContent iconSize="50" shareURL={shareURL} />
+        </DesktopButtonsWrapper>
       )}
     </Fragment>
   );
