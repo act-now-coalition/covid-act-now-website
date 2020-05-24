@@ -1,4 +1,5 @@
-import React, { ReactNode } from 'react';
+import React, { useContext, ReactNode } from 'react';
+import { ThemeContext } from 'styled-components';
 import moment from 'moment';
 import { last, isDate } from 'lodash';
 import { min as d3min, max as d3max } from 'd3-array';
@@ -15,7 +16,6 @@ import Tooltip from './Tooltip';
 import { LegendMarker, LegendLine } from './Legend';
 import * as Style from './Charts.style';
 import { formatDate, formatInteger } from './utils';
-import palette from 'assets/theme/palette';
 
 type Point = {
   x: number;
@@ -64,6 +64,8 @@ const ChartFutureHospitalization = ({
   marginLeft?: number;
   marginRight?: number;
 }) => {
+  const theme = useContext(ThemeContext);
+
   const chartWidth = width - marginLeft - marginRight;
   const chartHeight = height - marginTop - marginBottom;
 
@@ -85,8 +87,12 @@ const ChartFutureHospitalization = ({
   const allData: PointTooltip[] = [
     ...getTooltipPoint(dataProjectedFuture, COLORS.PROJECTED, 'projected'),
     ...getTooltipPoint(dataNoActionFuture, COLORS.LIMITED_ACTION, 'no-action'),
-    ...getTooltipPoint(dataProjectedPast, palette.black, 'past'),
-    ...getTooltipPoint(dataBeds, palette.chart.axis, 'beds'),
+    ...getTooltipPoint(
+      dataProjectedPast,
+      theme.palette.chart.foreground,
+      'past',
+    ),
+    ...getTooltipPoint(dataBeds, theme.palette.chart.axis, 'beds'),
   ];
 
   const dateTwoWeeks = moment().add(2, 'weeks').toDate();
@@ -147,7 +153,7 @@ const ChartFutureHospitalization = ({
           <Style.SeriesDashed stroke={COLORS.PROJECTED}>
             <LinePath data={dataProjectedFuture} x={getXCoord} y={getYCoord} />
           </Style.SeriesDashed>
-          <Style.SeriesLine stroke={palette.black}>
+          <Style.SeriesLine stroke={theme.palette.chart.foreground}>
             <LinePath data={dataProjectedPast} x={getXCoord} y={getYCoord} />
           </Style.SeriesLine>
           <Style.TextAnnotation
