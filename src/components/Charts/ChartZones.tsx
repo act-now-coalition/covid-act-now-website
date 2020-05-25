@@ -26,6 +26,7 @@ import {
   getAxisLimits,
   formatDate,
 } from './utils';
+import { assert } from 'common/utils';
 
 type Point = Omit<Column, 'y'> & {
   y: number;
@@ -66,8 +67,9 @@ const ChartZones = ({
   const data: Point[] = columnData.filter(hasData);
   const dates: Date[] = columnData.map(getDate).filter(isDate);
 
-  const minDate = d3min(dates) || new Date('2020-01-01');
+  const minDate = d3min(dates);
   const maxDate = moment().add(2, 'weeks').toDate();
+  assert(minDate !== undefined, 'Data must not be empty');
 
   const xScale = scaleTime({
     domain: [minDate, maxDate],
@@ -75,7 +77,8 @@ const ChartZones = ({
   });
 
   const yDataMin = 0;
-  const yDataMax = d3max(data, getY) || 1;
+  const yDataMax = d3max(data, getY);
+  assert(yDataMax !== undefined, 'Data must not be empty');
   const [yAxisMin, yAxisMax] = getAxisLimits(yDataMin, yDataMax, zones);
   const yMax = Math.min(capY, yAxisMax);
 
