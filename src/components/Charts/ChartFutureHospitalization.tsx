@@ -1,30 +1,30 @@
 import React, { useContext, ReactNode } from 'react';
 import { ThemeContext } from 'styled-components';
-import moment from 'moment';
 import { last, isDate } from 'lodash';
-import { min as d3min, max as d3max } from 'd3-array';
+import { extent as d3extent } from 'd3-array';
 import { AxisBottom, AxisLeft } from '@vx/axis';
 import { LinePath } from '@vx/shape';
 import { ParentSize } from '@vx/responsive';
 import { scaleLinear, scaleTime } from '@vx/scale';
 import { Projections } from 'common/models/Projections';
 import { COLORS } from 'common';
+import { assert } from 'common/utils';
 import BoxedAnnotation from './BoxedAnnotation';
 import ChartContainer from './ChartContainer';
 import RectClipGroup from './RectClipGroup';
 import Tooltip from './Tooltip';
 import { LegendMarker, LegendLine } from './Legend';
-import * as Style from './Charts.style';
 import { formatDate, formatInteger } from './utils';
+import * as Style from './Charts.style';
 
 type Point = {
   x: number;
   y: number;
 };
 
-type PointTooltip = Point & {
+type PointProjections = Point & {
   color: string;
-  name: string;
+  isBeds: boolean;
 };
 
 const getDate = (p: Point) => new Date(p.x);
@@ -33,16 +33,16 @@ const hasData = (d: any) => isDate(getDate(d)) && Number.isFinite(getY(d));
 const getLastPoint = (points: Point[]): Point => last(points) || { x: 0, y: 0 };
 const isFuture = (p: Point) => getDate(p) > new Date();
 
-const getTooltipPoint = (
+const getProjectionsPoints = (
   points: Point[],
   color: string,
-  name: string,
-): PointTooltip[] => points.map(p => ({ ...p, color, name }));
+  isBeds: boolean,
+): PointProjections[] => points.map(p => ({ ...p, color, isBeds }));
 
-const getTooltipBody = (p: PointTooltip): ReactNode => (
+const getTooltipBody = (p: PointProjections): ReactNode => (
   <span>
     <b>{formatInteger(getY(p))}</b>{' '}
-    {p.name === 'beds' ? 'beds available on' : 'hospitalizations expected by'}{' '}
+    {p.isBeds ? 'beds available on' : 'hospitalizations expected by'}{' '}
     <b>{formatDate(getDate(p), 'MMMM D')}</b>
   </span>
 );
@@ -84,28 +84,26 @@ const ChartFutureHospitalization = ({
 
   const dataBeds = projections.primary.getDataset('beds');
 
-  const allData: PointTooltip[] = [
-    ...getTooltipPoint(dataProjectedFuture, COLORS.PROJECTED, 'projected'),
-    ...getTooltipPoint(dataNoActionFuture, COLORS.LIMITED_ACTION, 'no-action'),
-    ...getTooltipPoint(
+  const allData: PointProjections[] = [
+    ...getProjectionsPoints(dataProjectedFuture, COLORS.PROJECTED, false),
+    ...getProjectionsPoints(dataNoActionFuture, COLORS.LIMITED_ACTION, false),
+    ...getProjectionsPoints(
       dataProjectedPast,
       theme.palette.chart.foreground,
-      'past',
+      false,
     ),
-    ...getTooltipPoint(dataBeds, theme.palette.chart.axis, 'beds'),
+    ...getProjectionsPoints(dataBeds, theme.palette.chart.axis, true),
   ];
 
-  const dateTwoWeeks = moment().add(2, 'weeks').toDate();
-  const minDate = d3min(allData, getDate) || new Date('2020-01-01');
-  const maxDate = d3max(allData, getDate) || dateTwoWeeks;
+  const [minDate, maxDate] = d3extent(allData, getDate);
+  assert(minDate && maxDate, 'Data must not be empty');
   const xScale = scaleTime({
     domain: [minDate, maxDate],
     range: [0, chartWidth],
   });
 
-  const minY = d3min(allData, getY) || 0;
-  const maxY = d3max(allData, getY) || 1;
-
+  const [minY, maxY] = d3extent(allData, getY);
+  assert(minY !== undefined && maxY !== undefined, 'Data must not be empty');
   const yScale = scaleLinear({
     domain: [minY, maxY],
     range: [chartHeight, 0],
@@ -117,12 +115,12 @@ const ChartFutureHospitalization = ({
   const firstPointBeds = dataBeds[0];
   const lastPastPoint = getLastPoint(dataProjectedPast);
 
-  const renderTooltip = (p: PointTooltip) => (
+  const renderTooltip = (p: PointProjections) => (
     <Tooltip left={marginLeft + getXCoord(p)} top={marginTop + getYCoord(p)}>
       {getTooltipBody(p)}
     </Tooltip>
   );
-  const renderMarker = (p: PointTooltip) => (
+  const renderMarker = (p: PointProjections) => (
     <Style.CircleMarker
       cx={getXCoord(p)}
       cy={getYCoord(p)}

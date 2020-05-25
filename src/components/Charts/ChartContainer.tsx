@@ -58,7 +58,7 @@ const ChartContainer = <T extends unknown>({
         <Group left={marginLeft} top={marginTop}>
           {children}
           {tooltipOpen && tooltipData && renderMarker(tooltipData)}
-          <HoverOverlay
+          <HoverOverlay<T>
             width={chartWidth}
             height={chartHeight}
             data={data}
