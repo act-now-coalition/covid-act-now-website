@@ -10,10 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import * as QueryString from 'query-string';
 import { assert } from 'common/utils';
-import { ZoneChartWrapper } from 'components/Charts/ZoneChart.style';
-import Chart from 'components/Charts/Chart';
-import { getChartData } from 'components/LocationPage/ChartsHolder';
-import { optionsRt, optionsHospitalUsage } from 'components/Charts/zoneUtils';
+import { ChartRt, ChartICUHeadroom } from 'components/Charts';
 import { STATES } from 'common';
 import { useAllStateProjections } from 'common/utils/model';
 import DataUrlJson from 'assets/data/data_url.json';
@@ -326,10 +323,10 @@ const StateComparisonList = function ({
 
 function StateCompare({ state, metric, leftProjections, rightProjections }) {
   return (
-    <>
+    <div style={{ marginLeft: '40px' }}>
       <hr />
       <h2>{STATES[state]}</h2>
-      <Grid container spacing={3}>
+      <Grid container spacing={8}>
         <Grid item xs={6}>
           <StateChart
             state={state}
@@ -345,7 +342,7 @@ function StateCompare({ state, metric, leftProjections, rightProjections }) {
           />
         </Grid>
       </Grid>
-    </>
+    </div>
   );
 }
 
@@ -359,20 +356,20 @@ const StateChart = React.memo(function StateChart({
   if (!projections) {
     return <div>Failed to load data for {locationName}</div>;
   }
-
-  const { rtRangeData, icuUtilizationData } = getChartData(projections.primary);
+  const projection = projections.primary;
 
   return (
     <>
-      {metric === Metric.CASE_GROWTH_RATE && rtRangeData && (
-        <ZoneChartWrapper style={{ marginLeft: '25px' }}>
-          <Chart options={optionsRt(rtRangeData)} />
-        </ZoneChartWrapper>
+      {metric === Metric.CASE_GROWTH_RATE && projection.rt && (
+        <ChartRt
+          columnData={projection.getDataset('rtRange')}
+          marginRight={50}
+        />
       )}
-      {metric === Metric.HOSPITAL_USAGE && icuUtilizationData && (
-        <ZoneChartWrapper style={{ marginLeft: '25px' }}>
-          <Chart options={optionsHospitalUsage(icuUtilizationData)} />
-        </ZoneChartWrapper>
+      {metric === Metric.HOSPITAL_USAGE && projection.currentIcuUtilization && (
+        <ChartICUHeadroom
+          columnData={projection.getDataset('icuUtilization')}
+        />
       )}
     </>
   );
