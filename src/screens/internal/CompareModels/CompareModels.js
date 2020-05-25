@@ -10,7 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import * as QueryString from 'query-string';
 import { assert } from 'common/utils';
-import { ChartRt, ChartICUHeadroom } from 'components/Charts';
+import { MetricChart } from 'components/Charts';
 import { STATES } from 'common';
 import { useAllStateProjections } from 'common/utils/model';
 import DataUrlJson from 'assets/data/data_url.json';
@@ -356,23 +356,8 @@ const StateChart = React.memo(function StateChart({
   if (!projections) {
     return <div>Failed to load data for {locationName}</div>;
   }
-  const projection = projections.primary;
 
-  return (
-    <>
-      {metric === Metric.CASE_GROWTH_RATE && projection.rt && (
-        <ChartRt
-          columnData={projection.getDataset('rtRange')}
-          marginRight={50}
-        />
-      )}
-      {metric === Metric.HOSPITAL_USAGE && projection.currentIcuUtilization && (
-        <ChartICUHeadroom
-          columnData={projection.getDataset('icuUtilization')}
-        />
-      )}
-    </>
-  );
+  return <MetricChart metric={metric} projections={projections} />;
 });
 
 function useMasterSnapshot() {

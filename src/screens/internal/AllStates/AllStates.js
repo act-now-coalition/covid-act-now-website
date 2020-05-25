@@ -2,11 +2,8 @@ import React from 'react';
 import { LoadingScreen } from './AllStates.style';
 import { useProjections } from 'common/utils/model';
 import { STATES } from 'common';
-import {
-  ChartRt,
-  ChartPositiveTestRate,
-  ChartICUHeadroom,
-} from 'components/Charts';
+import { Metric } from 'common/metric';
+import { MetricChart } from 'components/Charts';
 
 function AllStates() {
   return Object.keys(STATES).map(stateId => (
@@ -23,8 +20,6 @@ function State({ stateId }) {
   }
   const stateName = projections.stateName;
 
-  const projection = projections.primary;
-
   return (
     <>
       <h3>{stateName}</h3>
@@ -35,25 +30,15 @@ function State({ stateId }) {
           justifyContent: 'space-between',
         }}
       >
-        <div style={{ width: '31%' }}>
-          {projection.rt && (
-            <ChartRt columnData={projection.getDataset('rtRange')} />
-          )}
-        </div>
-        <div style={{ width: '31%' }}>
-          {projection.currentTestPositiveRate && (
-            <ChartPositiveTestRate
-              columnData={projection.getDataset('testPositiveRate')}
-            />
-          )}
-        </div>
-        <div style={{ width: '31%' }}>
-          {projection.currentIcuUtilization && (
-            <ChartICUHeadroom
-              columnData={projection.getDataset('icuUtilization')}
-            />
-          )}
-        </div>
+        {[
+          Metric.CASE_GROWTH_RATE,
+          Metric.POSITIVE_TESTS,
+          Metric.HOSPITAL_USAGE,
+        ].map(metric => (
+          <div style={{ width: '31%' }}>
+            <MetricChart metric={metric} projections={projections} />
+          </div>
+        ))}
       </div>
     </>
   );

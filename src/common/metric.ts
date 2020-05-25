@@ -2,8 +2,10 @@ import * as CaseGrowth from 'common/metrics/case_growth';
 import * as TestRates from 'common/metrics/positive_rate';
 import * as Hospitalizations from 'common/metrics/hospitalizations';
 import * as ContactTracing from 'common/metrics/contact_tracing';
+import * as FutureProjections from 'common/metrics/future_projection';
 
 import { Level, LevelInfo } from 'common/level';
+import { assert } from './utils';
 
 // TODO(sgoldblatt): handle future projections
 export enum Metric {
@@ -11,6 +13,7 @@ export enum Metric {
   POSITIVE_TESTS,
   HOSPITAL_USAGE,
   CONTACT_TRACING,
+  FUTURE_PROJECTIONS,
 }
 
 const METRIC_TO_NAME = {
@@ -18,6 +21,7 @@ const METRIC_TO_NAME = {
   [Metric.POSITIVE_TESTS]: TestRates.METRIC_NAME,
   [Metric.HOSPITAL_USAGE]: Hospitalizations.METRIC_NAME,
   [Metric.CONTACT_TRACING]: ContactTracing.METRIC_NAME,
+  [Metric.FUTURE_PROJECTIONS]: FutureProjections.METRIC_NAME,
 };
 
 export function getMetricName(metric: Metric) {
@@ -29,14 +33,23 @@ const ALL_METRICS_LEVEL_INFO_MAP = {
   [Metric.POSITIVE_TESTS]: TestRates.POSITIVE_TESTS_LEVEL_INFO_MAP,
   [Metric.HOSPITAL_USAGE]: Hospitalizations.HOSPITAL_USAGE_LEVEL_INFO_MAP,
   [Metric.CONTACT_TRACING]: ContactTracing.CONTACT_TRACING_LEVEL_INFO_MAP,
+  [Metric.FUTURE_PROJECTIONS]: null, // Future Projections doesn't have levels.
 };
 
 export function getLevelInfo(metric: Metric, value: number | null): LevelInfo {
+  assert(
+    metric !== Metric.FUTURE_PROJECTIONS,
+    `Future Projections don't have levels`,
+  );
   const level = getLevel(metric, value);
   return ALL_METRICS_LEVEL_INFO_MAP[metric][level];
 }
 
 export function getLevel(metric: Metric, value: number | null): Level {
+  assert(
+    metric !== Metric.FUTURE_PROJECTIONS,
+    `Future Projections don't have levels`,
+  );
   const levelInfoMap = ALL_METRICS_LEVEL_INFO_MAP[metric];
   // TODO(michael): Is there a typesafe way to enumerate enum values? :-/
   if (value === null) return Level.UNKNOWN;
