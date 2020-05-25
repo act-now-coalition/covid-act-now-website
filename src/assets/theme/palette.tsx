@@ -16,10 +16,6 @@ const chart = {
     shadow: colors.grey[500],
   },
   annotation: black,
-
-  // TODO(michael): Not loving this complexity. Perhaps we could just always use regionColor?
-  regionAnnotationStroke: (isActive: boolean, regionColor: string) =>
-    isActive ? regionColor : lightGray,
 };
 
 // Used for share image charts (e.g. http://localhost:3000/internal/share-image/states/wa/chart/0)
@@ -30,8 +26,7 @@ export const chartDarkMode = {
   grid: '#fbfbfb80',
   area: '#ffffff26',
   annotation: white,
-  regionAnnotationStroke: (isActive: boolean, regionColor: string) =>
-    regionColor,
+  isDarkMode: true,
 };
 
 export default {
