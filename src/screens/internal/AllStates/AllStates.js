@@ -20,8 +20,6 @@ function State({ stateId }) {
   }
   const stateName = projections.stateName;
 
-  const projection = projections.primary;
-
   return (
     <>
       <h3>{stateName}</h3>
