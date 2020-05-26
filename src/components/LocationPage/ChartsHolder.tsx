@@ -1,5 +1,4 @@
 import React, { useRef, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 
 import {
   ChartContentWrapper,
@@ -94,8 +93,12 @@ const ChartsHolder = (props: {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
-  const { pathname } = useLocation();
-  const shareUrlBase = `https://covidactnow.org${pathname}`;
+  const makeShareLink = (chartIdentifier: string) => {
+    const shareURL = `https://covidactnow.org/us/${props.stateId.toLowerCase()}${
+      props.county ? `/county/${props.county.county_url_name}` : ''
+    }`;
+    return `${shareURL}/chart/${chartIdentifier}`;
+  };
 
   useEffect(() => {
     if (props.chartId === '0' && rtRangeRef.current)
@@ -149,7 +152,7 @@ const ChartsHolder = (props: {
                   {getMetricName(Metric.CASE_GROWTH_RATE)}
                 </ChartHeader>
                 {!isMobile && rtRangeData && (
-                  <ShareButtons shareURL={`${shareUrlBase}chart/0`} />
+                  <ShareButtons shareURL={makeShareLink('0')} />
                 )}
               </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
@@ -157,7 +160,7 @@ const ChartsHolder = (props: {
                 {caseGrowthStatusText(projection)}
               </ChartDescription>
               {isMobile && rtRangeData && (
-                <ShareButtons shareURL={`${shareUrlBase}chart/0`} />
+                <ShareButtons shareURL={makeShareLink('0')} />
               )}
               {rtRangeData && (
                 <>
@@ -172,7 +175,7 @@ const ChartsHolder = (props: {
                   {getMetricName(Metric.POSITIVE_TESTS)}
                 </ChartHeader>
                 {!isMobile && testPositiveData && (
-                  <ShareButtons shareURL={`${shareUrlBase}chart/1`} />
+                  <ShareButtons shareURL={makeShareLink('1')} />
                 )}
               </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
@@ -180,7 +183,7 @@ const ChartsHolder = (props: {
                 {positiveTestsStatusText(projection)}
               </ChartDescription>
               {isMobile && testPositiveData && (
-                <ShareButtons shareURL={`${shareUrlBase}chart/1`} />
+                <ShareButtons shareURL={makeShareLink('1')} />
               )}
               {testPositiveData && (
                 <>
@@ -196,7 +199,7 @@ const ChartsHolder = (props: {
                   <BetaTag>Beta</BetaTag>
                 </ChartHeader>
                 {!isMobile && icuUtilizationData && (
-                  <ShareButtons shareURL={`${shareUrlBase}chart/2`} />
+                  <ShareButtons shareURL={makeShareLink('2')} />
                 )}
               </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
@@ -204,7 +207,7 @@ const ChartsHolder = (props: {
                 {hospitalOccupancyStatusText(projection)}
               </ChartDescription>
               {isMobile && icuUtilizationData && (
-                <ShareButtons shareURL={`${shareUrlBase}chart/2`} />
+                <ShareButtons shareURL={makeShareLink('2')} />
               )}
               {icuUtilizationData && (
                 <>
@@ -227,7 +230,7 @@ const ChartsHolder = (props: {
                   <BetaTag>Beta</BetaTag>
                 </ChartHeader>
                 {!isMobile && contactTracingData && (
-                  <ShareButtons shareURL={`${shareUrlBase}chart/3`} />
+                  <ShareButtons shareURL={makeShareLink('3')} />
                 )}
               </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
@@ -235,7 +238,7 @@ const ChartsHolder = (props: {
                 {contactTracingStatusText(projection)}
               </ChartDescription>
               {isMobile && contactTracingData && (
-                <ShareButtons shareURL={`${shareUrlBase}chart/3`} />
+                <ShareButtons shareURL={makeShareLink('3')} />
               )}
               {/* TODO: Use contact tracing data here */}
               {contactTracingData && (
@@ -277,15 +280,13 @@ const ChartsHolder = (props: {
                 <ChartHeader ref={futureProjectionsRef}>
                   Future Hospitalization (both ICU and non-ICU) Projections
                 </ChartHeader>
-                {!isMobile && (
-                  <ShareButtons shareURL={`${shareUrlBase}chart/4`} />
-                )}
+                {!isMobile && <ShareButtons shareURL={makeShareLink('4')} />}
               </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
               <ChartDescription>
                 {generateChartDescription(projection, noInterventionProjection)}
               </ChartDescription>
-              {isMobile && <ShareButtons shareURL={`${shareUrlBase}chart/4`} />}
+              {isMobile && <ShareButtons shareURL={makeShareLink('4')} />}
               <ChartFutureHospitalization projections={props.projections} />
               <Outcomes
                 title={`Predicted outcomes by ${formatDate(

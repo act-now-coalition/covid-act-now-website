@@ -1,4 +1,5 @@
 import React from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import {
   FacebookShareButton,
@@ -49,13 +50,20 @@ const SocialButtons = props => {
           <LinkedinIcon {...iconProps} />
         </LinkedinShareButton>
       </SocialShareButton>
-      <SocialShareButton {...buttonProps} color="#007fb1" isLast>
-        <CopyLinkButton>
-          Copy
-          <br />
-          Link
-        </CopyLinkButton>
-      </SocialShareButton>
+      <CopyToClipboard
+        text={url}
+        onCopy={() => {
+          console.log('Todo: figure out what ux change should be here');
+        }}
+      >
+        <SocialShareButton {...buttonProps} color="#007fb1" isLast>
+          <CopyLinkButton>
+            Copy
+            <br />
+            Link
+          </CopyLinkButton>
+        </SocialShareButton>
+      </CopyToClipboard>
     </SocialButtonsContainer>
   );
 };
