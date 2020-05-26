@@ -21,6 +21,7 @@ import CompareModels from 'screens/internal/CompareModels/CompareModels';
 import ShareImage from 'screens/internal/ShareImage/ShareImage';
 import AppBar from 'components/AppBar/AppBar';
 import Footer from 'components/Footer/Footer';
+import ScrollToTop from 'components/ScrollToTop';
 import theme from 'assets/theme';
 
 export default function App() {
@@ -30,6 +31,7 @@ export default function App() {
         <StylesProvider injectFirst>
           <CssBaseline />
           <BrowserRouter>
+            <ScrollToTop />
             <AppBar />
             <Switch>
               <Route exact path="/" component={HomePage} />
