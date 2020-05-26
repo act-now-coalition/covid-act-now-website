@@ -10,12 +10,10 @@ import fs from 'fs-extra';
 import path from 'path';
 import Pageres from 'pageres';
 import urlJoin from 'url-join';
-import { STATES } from '../../src/common';
-
-// We don't care about the values here, but this is a cheap way to determine all
-// of the counties we have any data for and should therefore screenshot.
-import CalculatedCountyInterventionJSON from '../../src/assets/data/calculated_county_interventions.json';
-const COUNTIES = Object.keys(CalculatedCountyInterventionJSON);
+import {
+  fetchAllStateProjections,
+  fetchAllCountyProjections,
+} from '../../src/common/utils/model';
 
 const BASE_URL = 'http://localhost:3000/internal/share-image';
 const CSS_SELECTOR = '.screenshot';
@@ -34,19 +32,25 @@ const BLACKLISTED_COUNTIES = [
   await fs.emptyDir(`${OUTPUT_DIR}/states`);
   await fs.emptyDir(`${OUTPUT_DIR}/counties`);
 
+  console.log('Fetching projections...');
+  const allStatesProjections = await fetchAllStateProjections();
+  const allCountiesProjections = await fetchAllCountyProjections();
+  console.log('Fetch complete.');
+
   let screenshots = [] as Array<{ url: string; filename: string }>;
 
   screenshots.push({ url: '/', filename: 'home' });
 
-  for (const stateCode in STATES) {
-    const state = stateCode.toLowerCase();
+  for (const stateProjections of allStatesProjections) {
+    const state = stateProjections.stateCode.toLowerCase();
     screenshots.push({
       url: `/states/${state}`,
       filename: `/states/${state}`,
     });
   }
 
-  for (const fips of COUNTIES) {
+  for (const countyProjections of allCountiesProjections) {
+    const fips = countyProjections.county;
     if (!BLACKLISTED_COUNTIES.includes(fips)) {
       screenshots.push({
         url: `/counties/${fips}`,
