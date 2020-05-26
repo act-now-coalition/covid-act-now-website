@@ -10,17 +10,20 @@ import {
 } from './ChartsHolder.style';
 import LocationPageHeader from 'components/LocationPage/LocationPageHeader';
 import NoCountyDetail from './NoCountyDetail';
-import ModelChart from 'components/Charts/ModelChart';
 import { Projections } from 'common/models/Projections';
 import { Projection } from 'common/models/Projection';
 import SummaryStats from 'components/SummaryStats/SummaryStats';
 import Disclaimer from 'components/Disclaimer/Disclaimer';
-import { ZoneChartWrapper } from 'components/Charts/ZoneChart.style';
-import Chart from 'components/Charts/Chart';
 import ClaimStateBlock from 'components/ClaimStateBlock/ClaimStateBlock';
-import ShareModelBlock from '../../components/ShareBlock/ShareModelBlock';
-import { ChartRt } from '../../components/Charts';
-
+import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
+import Outcomes from 'components/Outcomes/Outcomes';
+import {
+  ChartRt,
+  ChartPositiveTestRate,
+  ChartICUHeadroom,
+  ChartContactTracing,
+  ChartFutureHospitalization,
+} from 'components/Charts';
 import {
   caseGrowthStatusText,
   CASE_GROWTH_DISCLAIMER,
@@ -35,14 +38,9 @@ import {
 } from 'common/metrics/hospitalizations';
 import { generateChartDescription } from 'common/metrics/future_projection';
 import { contactTracingStatusText } from 'common/metrics/contact_tracing';
-
-import {
-  optionsHospitalUsage,
-  optionsPositiveTests,
-  optionsContactTracing,
-} from 'components/Charts/zoneUtils';
-import { getMetricName } from 'common/metric';
-import { Metric } from 'common/metric';
+import { Metric, getMetricName } from 'common/metric';
+import { COLORS } from 'common';
+import { formatDate } from 'common/utils';
 
 // TODO(michael): figure out where this type declaration should live.
 type County = {
@@ -95,6 +93,12 @@ const ChartsHolder = (props: {
     };
   };
 
+  let outcomesProjections = [
+    props.projections.baseline,
+    props.projections.projected,
+  ];
+  let outcomesColors = [COLORS.LIMITED_ACTION, COLORS.PROJECTED];
+
   return (
     <>
       {!projection ? (
@@ -138,11 +142,7 @@ const ChartsHolder = (props: {
               </ChartDescription>
               {testPositiveData && (
                 <>
-                  <ZoneChartWrapper>
-                    <Chart
-                      options={optionsPositiveTests(testPositiveData) as any}
-                    />
-                  </ZoneChartWrapper>
+                  <ChartPositiveTestRate columnData={testPositiveData} />
                   <Disclaimer metricName="positive test rate">
                     {POSITIVE_RATE_DISCLAIMER}
                   </Disclaimer>
@@ -158,11 +158,7 @@ const ChartsHolder = (props: {
               </ChartDescription>
               {icuUtilizationData && (
                 <>
-                  <ZoneChartWrapper>
-                    <Chart
-                      options={optionsHospitalUsage(icuUtilizationData) as any}
-                    />
-                  </ZoneChartWrapper>
+                  <ChartICUHeadroom columnData={icuUtilizationData} />
                   <Disclaimer metricName="COVID ICU usage">
                     <a
                       href="https://preventepidemics.org/wp-content/uploads/2020/04/COV020_WhenHowTightenFaucet_v3.pdf"
@@ -186,11 +182,7 @@ const ChartsHolder = (props: {
               {/* TODO: Use contact tracing data here */}
               {contactTracingData && (
                 <>
-                  <ZoneChartWrapper>
-                    <Chart
-                      options={optionsContactTracing(contactTracingData) as any}
-                    />
-                  </ZoneChartWrapper>
+                  <ChartContactTracing columnData={contactTracingData} />
                   <Disclaimer>
                     <a
                       href="https://science.sciencemag.org/content/368/6491/eabb6936"
@@ -230,11 +222,13 @@ const ChartsHolder = (props: {
               <ChartDescription>
                 {generateChartDescription(projection, noInterventionProjection)}
               </ChartDescription>
-              <ModelChart
-                projections={props.projections}
-                height={''}
-                condensed={false}
-                forCompareModels={false}
+              <ChartFutureHospitalization projections={props.projections} />
+              <Outcomes
+                title={`Predicted outcomes by ${formatDate(
+                  props.projections.projected.finalDate,
+                )} (90 days from now)`}
+                projections={outcomesProjections}
+                colors={outcomesColors}
               />
             </MainContentInner>
             <ClaimStateBlock

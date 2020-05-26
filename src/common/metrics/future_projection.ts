@@ -1,6 +1,8 @@
 import { formatDate } from 'common/utils';
 import { Projection } from 'common/models/Projection';
 
+export const METRIC_NAME = 'Future hospitalization projections';
+
 export function generateChartDescription(
   projection: Projection,
   noInterventionProjection: Projection,

@@ -221,7 +221,18 @@ export const getTruncationDate = (date: Date, truncationDays: number) =>
 export const randomizeId = (name: string): string =>
   `${name}-${Math.random().toFixed(9)}`;
 
-export const getChartRegions = (minY: number, maxY: number, zones: Zones) => [
+export interface Region {
+  valueFrom: number;
+  valueTo: number;
+  name: string;
+  color: string;
+}
+
+export const getChartRegions = (
+  minY: number,
+  maxY: number,
+  zones: Zones,
+): Region[] => [
   {
     valueFrom: minY,
     valueTo: zones[Level.LOW].upperLimit,
@@ -250,3 +261,28 @@ export const getZoneByValue = (value: number, zones: Zones) => {
     ? zones[Level.HIGH]
     : zones[Level.MEDIUM];
 };
+
+export const computeTickPositions = (
+  minY: number,
+  maxY: number,
+  zones: Zones,
+) => {
+  const maxZones = zones[Level.MEDIUM].upperLimit;
+  const maxTick = maxY < maxZones ? 1.5 * maxZones : maxY;
+  return [
+    minY,
+    zones[Level.LOW].upperLimit,
+    zones[Level.MEDIUM].upperLimit,
+    maxTick,
+  ];
+};
+
+export const getAxisLimits = (minY: number, maxY: number, zones: Zones) => {
+  const tickPositions = computeTickPositions(minY, maxY, zones);
+  const minTickPosition = _.min(tickPositions) || minY;
+  const maxTickPosition = _.max(tickPositions) || maxY;
+  return roundAxisLimits(minTickPosition, maxTickPosition);
+};
+
+export const formatDate = (date: Date, format = 'dddd, MMM D, YYYY'): string =>
+  moment(date).format(format);
