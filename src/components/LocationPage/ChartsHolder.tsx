@@ -1,4 +1,5 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import {
   ChartContentWrapper,
@@ -21,9 +22,6 @@ import Outcomes from 'components/Outcomes/Outcomes';
 import ShareButtons from 'components/LocationPage/ShareButtons';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-
-// TODO(michael): These format helpers should probably live in a more
-// general-purpose location, not just for charts.
 import {
   ChartRt,
   ChartPositiveTestRate,
@@ -75,6 +73,7 @@ const ChartsHolder = (props: {
   projections: Projections;
   stateId: string;
   county: County;
+  chartId: string;
 }) => {
   const projection: Projection = props.projections.primary;
   const noInterventionProjection: Projection = props.projections.baseline;
@@ -90,13 +89,26 @@ const ChartsHolder = (props: {
   const testPositiveRef = useRef<HTMLDivElement>(null);
   const icuUtilizationRef = useRef<HTMLDivElement>(null);
   const contactTracingRef = useRef<HTMLDivElement>(null);
+  const futureProjectionsRef = useRef<HTMLDivElement>(null);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
-  const shareURL = `https://covidactnow.org/us/${props.stateId.toLowerCase()}${
-    props.county ? `/county/${props.county.county_url_name}` : ''
-  }`;
+  const { pathname } = useLocation();
+  const shareUrlBase = `https://covidactnow.org${pathname}`;
+
+  useEffect(() => {
+    if (props.chartId === '0' && rtRangeRef.current)
+      scrollTo(rtRangeRef.current);
+    if (props.chartId === '1' && testPositiveRef.current)
+      scrollTo(testPositiveRef.current);
+    if (props.chartId === '2' && icuUtilizationRef.current)
+      scrollTo(icuUtilizationRef.current);
+    if (props.chartId === '3' && contactTracingRef.current)
+      scrollTo(contactTracingRef.current);
+    if (props.chartId === '4' && futureProjectionsRef.current)
+      scrollTo(futureProjectionsRef.current);
+  }, [props.chartId]);
 
   const getChartSummarys = (projection: Projection) => {
     return {
@@ -137,7 +149,7 @@ const ChartsHolder = (props: {
                   {getMetricName(Metric.CASE_GROWTH_RATE)}
                 </ChartHeader>
                 {!isMobile && rtRangeData && (
-                  <ShareButtons shareURL={`${shareURL}/?chart=0`} />
+                  <ShareButtons shareURL={`${shareUrlBase}chart/0`} />
                 )}
               </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
@@ -145,7 +157,7 @@ const ChartsHolder = (props: {
                 {caseGrowthStatusText(projection)}
               </ChartDescription>
               {isMobile && rtRangeData && (
-                <ShareButtons shareURL={`${shareURL}/?chart=0`} />
+                <ShareButtons shareURL={`${shareUrlBase}chart/0`} />
               )}
               {rtRangeData && (
                 <>
@@ -160,7 +172,7 @@ const ChartsHolder = (props: {
                   {getMetricName(Metric.POSITIVE_TESTS)}
                 </ChartHeader>
                 {!isMobile && testPositiveData && (
-                  <ShareButtons shareURL={`${shareURL}/?chart=1`} />
+                  <ShareButtons shareURL={`${shareUrlBase}chart/1`} />
                 )}
               </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
@@ -168,7 +180,7 @@ const ChartsHolder = (props: {
                 {positiveTestsStatusText(projection)}
               </ChartDescription>
               {isMobile && testPositiveData && (
-                <ShareButtons shareURL={`${shareURL}/?chart=1`} />
+                <ShareButtons shareURL={`${shareUrlBase}chart/1`} />
               )}
               {testPositiveData && (
                 <>
@@ -184,7 +196,7 @@ const ChartsHolder = (props: {
                   <BetaTag>Beta</BetaTag>
                 </ChartHeader>
                 {!isMobile && icuUtilizationData && (
-                  <ShareButtons shareURL={`${shareURL}/?chart=2`} />
+                  <ShareButtons shareURL={`${shareUrlBase}chart/2`} />
                 )}
               </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
@@ -192,7 +204,7 @@ const ChartsHolder = (props: {
                 {hospitalOccupancyStatusText(projection)}
               </ChartDescription>
               {isMobile && icuUtilizationData && (
-                <ShareButtons shareURL={`${shareURL}/?chart=2`} />
+                <ShareButtons shareURL={`${shareUrlBase}chart/2`} />
               )}
               {icuUtilizationData && (
                 <>
@@ -214,11 +226,17 @@ const ChartsHolder = (props: {
                   {getMetricName(Metric.CONTACT_TRACING)}
                   <BetaTag>Beta</BetaTag>
                 </ChartHeader>
+                {!isMobile && contactTracingData && (
+                  <ShareButtons shareURL={`${shareUrlBase}chart/3`} />
+                )}
               </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
               <ChartDescription>
                 {contactTracingStatusText(projection)}
               </ChartDescription>
+              {isMobile && contactTracingData && (
+                <ShareButtons shareURL={`${shareUrlBase}chart/3`} />
+              )}
               {/* TODO: Use contact tracing data here */}
               {contactTracingData && (
                 <>
@@ -256,18 +274,18 @@ const ChartsHolder = (props: {
                 </>
               )}
               <ChartHeaderWrapper>
-                <ChartHeader>
+                <ChartHeader ref={futureProjectionsRef}>
                   Future Hospitalization (both ICU and non-ICU) Projections
                 </ChartHeader>
                 {!isMobile && (
-                  <ShareButtons shareURL={`${shareURL}/?chart=3`} />
+                  <ShareButtons shareURL={`${shareUrlBase}chart/4`} />
                 )}
               </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
               <ChartDescription>
                 {generateChartDescription(projection, noInterventionProjection)}
               </ChartDescription>
-              {isMobile && <ShareButtons shareURL={`${shareURL}/?chart=3`} />}
+              {isMobile && <ShareButtons shareURL={`${shareUrlBase}chart/4`} />}
               <ChartFutureHospitalization projections={props.projections} />
               <Outcomes
                 title={`Predicted outcomes by ${formatDate(
