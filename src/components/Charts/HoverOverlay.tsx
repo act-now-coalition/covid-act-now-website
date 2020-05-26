@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Group } from '@vx/group';
 import { voronoi, VoronoiPolygon } from '@vx/voronoi';
 
-const HoverOverlay = ({
+const HoverOverlay = <T extends unknown>({
   data,
   x,
   y,
@@ -11,14 +11,14 @@ const HoverOverlay = ({
   onMouseOver,
   onMouseOut,
 }: {
-  data: any[];
-  x: (d: any) => number;
-  y: (d: any) => number;
+  data: T[];
+  x: (d: T) => number;
+  y: (d: T) => number;
   width: number;
   height: number;
   onMouseOver: (
     event: React.MouseEvent<SVGPathElement, MouseEvent>,
-    d: any,
+    d: T,
   ) => void;
   onMouseOut: (event: React.MouseEvent<SVGPathElement, MouseEvent>) => void;
 }) => {

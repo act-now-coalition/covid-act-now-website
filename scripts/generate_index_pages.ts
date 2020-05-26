@@ -24,7 +24,7 @@ const BLACKLISTED_COUNTIES = [
   '11001', // Washington, DC - We treat it as a state, not a county.
 ];
 
-type MetaTags = {[name: string]: string}
+type MetaTags = { [name: string]: string };
 
 function homePageTags(imageUrl: string): MetaTags {
   // Most of the tags are set correctly in public/index.html so we don't need to
@@ -35,7 +35,11 @@ function homePageTags(imageUrl: string): MetaTags {
   };
 }
 
-function locationPageTags(fullImageUrl: string, canonicalUrl: string, locationName: string): MetaTags {
+function locationPageTags(
+  fullImageUrl: string,
+  canonicalUrl: string,
+  locationName: string,
+): MetaTags {
   const title = `Is ${locationName} ready to reopen?`;
   const description = 'Metrics and modeling to help America reopen safely.';
   return {
@@ -55,15 +59,23 @@ async function main() {
 
   const builder = await IndexPageBuilder.initialize();
 
-  await builder.writeTemplatedPage('/index.html', homePageTags(builder.fullImageUrl('home.png')));
+  await builder.writeTemplatedPage(
+    '/index.html',
+    homePageTags(builder.fullImageUrl('home.png')),
+  );
 
   for (const stateCode in STATES) {
     const stateName = (STATES as any)[stateCode];
     const relativeUrl = `/us/${stateCode.toLowerCase()}/`;
     const canonicalUrl = urlJoin('https://covidactnow.org/', relativeUrl);
-    const imageUrl = builder.fullImageUrl(`states/${stateCode.toLowerCase()}.png`);
+    const imageUrl = builder.fullImageUrl(
+      `states/${stateCode.toLowerCase()}.png`,
+    );
     const page = path.join(relativeUrl, 'index.html');
-    await builder.writeTemplatedPage(page, locationPageTags(imageUrl, canonicalUrl, stateName));
+    await builder.writeTemplatedPage(
+      page,
+      locationPageTags(imageUrl, canonicalUrl, stateName),
+    );
   }
 
   for (const fips of COUNTIES) {
@@ -74,11 +86,16 @@ async function main() {
     assert(county, 'Failed to find county ' + fips);
     const stateCode = county.state_code;
     const locationName = `${county.county}, ${(STATES as any)[stateCode]}`;
-    const relativeUrl = `/us/${stateCode.toLowerCase()}/county/${county.county_url_name}`;
+    const relativeUrl = `/us/${stateCode.toLowerCase()}/county/${
+      county.county_url_name
+    }`;
     const canonicalUrl = urlJoin('https://covidactnow.org/', relativeUrl);
     const imageUrl = builder.fullImageUrl(`counties/${fips}.png`);
     const page = path.join(relativeUrl, 'index.html');
-    await builder.writeTemplatedPage(page, locationPageTags(imageUrl, canonicalUrl, locationName));
+    await builder.writeTemplatedPage(
+      page,
+      locationPageTags(imageUrl, canonicalUrl, locationName),
+    );
   }
 }
 
@@ -86,22 +103,33 @@ class IndexPageBuilder {
   // TODO(michael): I know parsing HTML via regex is super fraught (could be
   // fragile) but I'm also hesitant to parse / emit modified HTML. This feels
   // safer, at least for now.
-  private readonly META_TAG_REGEX =
-      new RegExp(/<meta\s+(?<propKey>(?:property|name))="(?<name>[^"]*?)"\s+content="(?<value>[^"]*?)"/, 'g');
+  private readonly META_TAG_REGEX = new RegExp(
+    /<meta\s+(?<propKey>(?:property|name))="(?<name>[^"]*?)"\s+content="(?<value>[^"]*?)"/,
+    'g',
+  );
 
-  constructor(private readonly buildDir: string, private readonly imagesBaseUrl: string, private readonly indexHtmlTemplate: string) { }
+  constructor(
+    private readonly buildDir: string,
+    private readonly imagesBaseUrl: string,
+    private readonly indexHtmlTemplate: string,
+  ) {}
 
   static async initialize(): Promise<IndexPageBuilder> {
     const imagesBaseUrl = ShareImageUrlJSON.share_image_url;
 
     const buildDir = path.join(__dirname, '../build');
 
-    const indexHtmlTemplate = (await fs.readFile(path.join(buildDir, 'index.html'))).toString();
+    const indexHtmlTemplate = (
+      await fs.readFile(path.join(buildDir, 'index.html'))
+    ).toString();
 
     return new IndexPageBuilder(buildDir, imagesBaseUrl, indexHtmlTemplate);
   }
 
-  async writeTemplatedPage(relHtmlUrl: string, tags: { [tag: string]: string }): Promise<void> {
+  async writeTemplatedPage(
+    relHtmlUrl: string,
+    tags: { [tag: string]: string },
+  ): Promise<void> {
     const pageFile = path.join(this.buildDir, relHtmlUrl);
     const parentDir = path.resolve(pageFile, '..');
     await fs.ensureDir(parentDir);
@@ -116,15 +144,18 @@ class IndexPageBuilder {
 
   private templatedHtml(tags: { [tag: string]: string }): string {
     const replaced: string[] = [];
-    const html = this.indexHtmlTemplate.replace(this.META_TAG_REGEX, (original, propKey, name) => {
-      const newValue = tags[name];
-      if (newValue !== undefined) {
-        replaced.push(name);
-        return `<meta ${propKey}="${name}" content="${newValue}"`;
-      } else {
-        return original;
-      }
-    });
+    const html = this.indexHtmlTemplate.replace(
+      this.META_TAG_REGEX,
+      (original, propKey, name) => {
+        const newValue = tags[name];
+        if (newValue !== undefined) {
+          replaced.push(name);
+          return `<meta ${propKey}="${name}" content="${newValue}"`;
+        } else {
+          return original;
+        }
+      },
+    );
 
     const notFoundTags = _.difference(Object.keys(tags), replaced);
     if (notFoundTags.length > 0) {
@@ -141,7 +172,7 @@ let fipsLookup: any = undefined!;
 
 function findCountyByFips(fips: string) {
   if (!fipsLookup) {
-    fipsLookup = { };
+    fipsLookup = {};
     const statesData = US_STATE_DATASET.state_county_map_dataset as any;
     for (const state in statesData) {
       const countiesData = statesData[state].county_dataset;

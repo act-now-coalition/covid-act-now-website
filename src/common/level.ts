@@ -10,7 +10,7 @@ export interface LevelInfo {
   upperLimit: number;
   name: string;
   color: string;
-  detail: string;
+  detail(locationName?: string): string;
 }
 
 export interface LevelInfoMap {

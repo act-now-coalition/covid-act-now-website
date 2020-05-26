@@ -46,6 +46,7 @@ export const ChartHeaderWrapper = styled.div`
   justify-content: space-between;
   margin: 4.875rem 0 0.25rem;
   height: 24px;
+  // scroll-margin-top: 180px;
 
   @media print {
     page-break-before: always;

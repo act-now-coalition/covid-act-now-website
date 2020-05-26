@@ -14,6 +14,7 @@ import {
 import { CASE_GROWTH_RATE_LEVEL_INFO_MAP } from 'common/metrics/case_growth';
 import { POSITIVE_TESTS_LEVEL_INFO_MAP } from 'common/metrics/positive_rate';
 import { HOSPITAL_USAGE_LEVEL_INFO_MAP } from 'common/metrics/hospitalizations';
+import { CONTACT_TRACING_LEVEL_INFO_MAP } from 'common/metrics/contact_tracing';
 import { Level } from '../../common/level';
 import { RT_TRUNCATION_DAYS } from '../../common/models/Projection';
 
@@ -37,6 +38,7 @@ const getHighchartZones = levelInfoMap => [
 const ZONES_RT = getHighchartZones(CASE_GROWTH_RATE_LEVEL_INFO_MAP);
 const ZONES_POSITIVE_RATE = getHighchartZones(POSITIVE_TESTS_LEVEL_INFO_MAP);
 const ZONES_HOSPITAL_USAGE = getHighchartZones(HOSPITAL_USAGE_LEVEL_INFO_MAP);
+const ZONES_CONTACT_TRACING = getHighchartZones(CONTACT_TRACING_LEVEL_INFO_MAP);
 
 export const optionsRt = data => {
   const zones = ZONES_RT;
@@ -192,6 +194,59 @@ export const optionsHospitalUsage = data => {
     series: [
       {
         name: 'ICU headroom used',
+        data,
+        zones,
+      },
+    ],
+  };
+};
+
+export const optionsContactTracing = data => {
+  const { x, y } = lastValidPoint(data);
+  const zones = ZONES_CONTACT_TRACING;
+  const [minY, maxY] = [0, getMaxY(data)];
+  const [minYAxis, maxYAxis] = getYAxisLimits(minY, maxY, zones);
+
+  // sets the limit on the y-axis to be no more than 100%
+  const CAP = 1;
+  const adjustedMaxYAxis = Math.min(maxYAxis, CAP);
+  data = data.map(({ x, y }) => ({ x, y: y && Math.min(y, CAP) }));
+
+  return {
+    ...baseOptions,
+    annotations: [
+      currentValueAnnotation(x, y, y && formatPercent(y)),
+      ...zoneAnnotations(
+        CHART_END_DATE,
+        minYAxis,
+        adjustedMaxYAxis,
+        y,
+        zones,
+        true,
+      ),
+    ],
+    tooltip: {
+      pointFormatter: function () {
+        return `Contacts traced ${formatPercent(this.y)}`;
+      },
+    },
+    xAxis: {
+      ...baseOptions.xAxis,
+      max: parseDate(CHART_END_DATE),
+    },
+    yAxis: {
+      ...baseOptions.yAxis,
+      max: 0.5,
+      labels: {
+        formatter: function () {
+          return formatPercent(this.value);
+        },
+      },
+      tickPositions: getTickPositions(minYAxis, adjustedMaxYAxis, zones),
+    },
+    series: [
+      {
+        name: 'Contacts traced',
         data,
         zones,
       },

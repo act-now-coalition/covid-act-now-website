@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import moment from 'moment';
 
 import {
@@ -18,12 +19,34 @@ import {
 export const RT_TRUNCATION_DAYS = 7;
 
 /**
+ * We will assume roughly 10 tracers are needed to trace a case within 48h.
+ * The range we give here could be between 10 -15 contact tracers per case.
+ */
+export const TRACERS_NEEDED_PER_CASE = 10;
+
+/**
  * We subtract this "decomp" factor from the typical ICU Utilization rates we
  * get from the API to account for hospitals being able to decrease their utilization
  * (by cancelling elective surgeries, using surge capacity, etc.).
  */
 const ICU_DECOMP_FACTOR = 0.3;
 const DEFAULT_UTILIZATION = 0.75;
+
+/**
+ * We override the contact tracing for specific states due to data inconsistincies.
+ * Ideally we would fix this in either the original data source or in the API level,
+ * but for now, check if the state is in the dictionary and return the constant
+ * value for the time being.
+ * TODO: Revert this to use the API data once it's more valid
+ */
+const CONTACT_TRACER_STATE_OVERRIDES: { [key: string]: number } = {
+  Hawaii: 80,
+  Indiana: 500,
+  'New Jersey': 900,
+  'New Mexico': 100,
+  'North Carolina': 400,
+  'North Dakota': 352,
+};
 
 /** Parameters that can be provided when constructing a Projection. */
 export interface ProjectionParameters {
@@ -47,7 +70,8 @@ export type DatasetId =
   | 'cumulativeInfected'
   | 'rtRange'
   | 'icuUtilization'
-  | 'testPositiveRate';
+  | 'testPositiveRate'
+  | 'contractTracers';
 
 export interface RtRange {
   /** The actual Rt value. */
@@ -72,6 +96,7 @@ export class Projection {
   readonly typicalICUUtilization: number;
   readonly currentCumulativeDeaths: number | null;
   readonly currentCumulativeCases: number | null;
+  readonly currentContactTracerMetric: number | null;
   readonly stateName: string;
 
   private readonly intervention: string;
@@ -87,11 +112,14 @@ export class Projection {
   private readonly cumulativeInfected: Array<number | null>;
   private readonly cumulativePositiveTests: Array<number | null>;
   private readonly cumulativeNegativeTests: Array<number | null>;
+  private readonly dailyPositiveTests: Array<number | null>;
+  private readonly dailyNegativeTests: Array<number | null>;
   private readonly rtRange: Array<RtRange | null>;
   // ICU Utilization series as values between 0-1 (or > 1 if over capacity).
   private readonly icuUtilization: Array<number | null>;
   // Test Positive series as values between 0-1.
   private readonly testPositiveRate: Array<number | null>;
+  private readonly contractTracers: Array<number | null>;
 
   constructor(
     summaryWithTimeseries: RegionSummaryWithTimeseries,
@@ -128,6 +156,13 @@ export class Projection {
     this.cumulativeNegativeTests = this.smoothCumulatives(
       timeseries.map(row => row && row.cumulativeNegativeTests),
     );
+    this.dailyPositiveTests = this.deltasFromCumulatives(
+      this.cumulativePositiveTests,
+    );
+    this.dailyNegativeTests = this.deltasFromCumulatives(
+      this.cumulativeNegativeTests,
+    );
+
     this.rtRange = this.calcRtRange(timeseries);
     this.testPositiveRate = this.calcTestPositiveRate();
 
@@ -142,12 +177,15 @@ export class Projection {
       lastUpdated,
     );
 
-    // We have in the past disabled states due to bad data. We can do that
-    // by flipping this flag. If we don't use this
-    const disableIcu = false; //summaryWithTimeseries.stateName === 'BadState';
+    // We sometimes need to disable the ICU metric for locations due to bad data, etc.
+    // TODO(https://trello.com/c/CPcYKmdo/): Reenable once we get to the bottom of
+    // Montgomery, AL issue.
+    const disableIcu = summaryWithTimeseries.fips === '01101';
     this.icuUtilization = disableIcu
       ? [null]
       : this.calcICUHeadroom(this.actualTimeseries, timeseries, lastUpdated);
+
+    this.contractTracers = this.calcContactTracers(this.actualTimeseries);
 
     this.fixZeros(this.hospitalizations);
     this.fixZeros(this.cumulativeDeaths);
@@ -161,8 +199,20 @@ export class Projection {
       summaryWithTimeseries.actuals.cumulativeDeaths;
     this.currentCumulativeCases =
       summaryWithTimeseries.actuals.cumulativeConfirmedCases;
+    this.currentContactTracerMetric = this.contractTracers
+      .filter(x => x !== null)
+      .slice(-1)[0];
   }
 
+  get currentContactTracers() {
+    return (
+      CONTACT_TRACER_STATE_OVERRIDES[this.stateName] ||
+      this.lastValue(
+        this.actualTimeseries.map(row => row && row.contactTracers),
+      ) ||
+      null
+    );
+  }
   /**
    * If one of the most recent days has any data for all of:
    *   - currentUsageCovid
@@ -352,6 +402,51 @@ export class Projection {
       : s.stateName;
   }
 
+  /**
+   * Gets the cases/day on day i, by averaging the trailing week of cases/day
+   * data.
+   *
+   * Note: In the case of a data point with negative cases/day (can happen due
+   * to reporting weirdness), we skip that data point and may average fewer
+   * than 7 days worth of data.
+   */
+  getWeeklyAverageCaseForDay(i?: number) {
+    const lastIndex = this.indexOfLastValue(this.dailyPositiveTests);
+    if (i === undefined) {
+      if (!lastIndex) return null;
+      i = lastIndex;
+    } else if (lastIndex === null || i > lastIndex) {
+      return null;
+    }
+    // Get last week of sane data (ignore negative values)
+    const lastWeekOfPositives = _.filter(
+      this.dailyPositiveTests.slice(Math.max(0, i - 6), i + 1),
+      p => p !== null && p >= 0,
+    );
+    return _.mean(lastWeekOfPositives);
+  }
+
+  private calcContactTracers(
+    actualTimeseries: Array<CANActualsTimeseriesRow | null>,
+  ): Array<number | null> {
+    // use date.getWeek() to get the week number
+    return actualTimeseries.map(
+      (row: CANActualsTimeseriesRow | null, i: number) => {
+        if (row && row.contactTracers) {
+          const contactTracers =
+            CONTACT_TRACER_STATE_OVERRIDES[this.stateName] ||
+            row.contactTracers;
+          const weeklyAverage = this.getWeeklyAverageCaseForDay(i);
+          if (weeklyAverage) {
+            return contactTracers / (weeklyAverage * TRACERS_NEEDED_PER_CASE);
+          }
+        }
+
+        return null;
+      },
+    );
+  }
+
   private calcRtRange(
     timeseries: Array<CANPredictionTimeseriesRow | null>,
   ): Array<RtRange | null> {
@@ -381,10 +476,10 @@ export class Projection {
 
   private calcTestPositiveRate(): Array<number | null> {
     const dailyPositives = this.smoothWithRollingAverage(
-      this.deltasFromCumulatives(this.cumulativePositiveTests),
+      this.dailyPositiveTests,
     );
     const dailyNegatives = this.smoothWithRollingAverage(
-      this.deltasFromCumulatives(this.cumulativeNegativeTests),
+      this.dailyNegativeTests,
     );
 
     return dailyPositives.map((dailyPositive, idx) => {

@@ -4,11 +4,13 @@ import palette from 'assets/theme/palette';
 
 export const CriteriaList = styled.div`
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   margin: 0 -0.5rem;
 
   @media (min-width: 600px) {
     margin: 0 -1rem;
+    flex-wrap: nowrap;
   }
 `;
 
@@ -29,7 +31,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Criterion = styled.div`
-  flex: 1;
+  flex: 1 50%;
   padding: 0 0.5rem 0.5rem;
   border-right: 1px solid ${palette.lightGray};
 
@@ -38,6 +40,7 @@ export const Criterion = styled.div`
   }
 
   @media (min-width: 600px) {
+    flex: 1;
     flex-direction: row;
     padding: 0 1rem 1rem;
     margin-right: 2rem;

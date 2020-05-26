@@ -29,7 +29,7 @@ const About = ({ children }: { children: React.ReactNode }) => {
       <AppMetaTags
         canonicalUrl="/about"
         pageTitle="About Covid Act Now"
-        pageDescription="Covid Act Now is a multidisciplinary team of technologists, epidemiologists, health experts, and public policy leaders working to model how COVID is spreading in the U.S."
+        pageDescription="Covid Act Now is a multidisciplinary team of technologists, epidemiologists, and health experts working to help Americans understand  COVID risk in their own community."
       />
       <Header>
         <Content>
@@ -139,7 +139,7 @@ const About = ({ children }: { children: React.ReactNode }) => {
             </a>
             . You can see all of our data, sources, and assumptions{' '}
             <a
-              href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
+              href="https://docs.google.com/document/d/1cd_cEpNiIl1TzUJBvw9sHLbrbUZ2qCxgN32IqVLa3Do/edit?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -176,10 +176,11 @@ const About = ({ children }: { children: React.ReactNode }) => {
             Where do you get your data?
           </Typography>
           <Typography variant="body1" component="p">
-            Our data comes from a number of sources, including Johns Hopkins
-            University, and is updated daily. You can see our data sources{' '}
+            Our data comes from a number of sources, including{' '}
+            <em>The New York Times</em>, and is updated daily. You can see our
+            data sources{' '}
             <a
-              href="https://data.covidactnow.org/Covid_Act_Now_Model_References_and_Assumptions.pdf"
+              href="https://docs.google.com/document/d/1cd_cEpNiIl1TzUJBvw9sHLbrbUZ2qCxgN32IqVLa3Do/edit?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
             >

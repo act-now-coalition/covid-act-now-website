@@ -62,9 +62,3 @@ export const SelectorWrapper = styled.div`
   margin-bottom: 0rem;
   position: relative;
 `;
-
-export const MobileLineBreak = styled.br`
-  @media (min-width: 600px) {
-    display: none;
-  }
-`;

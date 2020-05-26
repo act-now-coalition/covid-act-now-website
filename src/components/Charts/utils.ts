@@ -16,7 +16,7 @@ export const formatDecimal = (num: number, places = 2): string =>
   num.toFixed(places);
 
 export const formatPercent = (num: number, places = 0): string =>
-  `${formatDecimal(100 * num, places)}%`;
+  `${formatDecimal(100 * Math.min(1, num), places)}%`;
 
 /** Adds comma's for thousands, millions, etc. */
 export const formatInteger = (num: number): string => num.toLocaleString();
@@ -159,12 +159,20 @@ const getZoneLabels = (
   maxYAxis: number,
   value: number,
   zones: Zone[],
+  flippedOrder?: boolean, // ie, high is good, low is bad
 ): Highcharts.AnnotationsLabelOptions[] =>
   zones.map((zone: Zone, i: number) => {
     const fromValue = i === 0 ? minYAxis : zones[i - 1].value || 0;
     const toValue = zone.value || maxYAxis;
     const isActive = fromValue <= value && value < toValue;
-    const activeClassName = isActive ? 'ZoneAnnotation--isActive' : '';
+    let activeClassName = '';
+
+    if (isActive && flippedOrder) {
+      activeClassName = 'ZoneAnnotation--isActive--flippedOrder';
+    } else if (isActive) {
+      activeClassName = 'ZoneAnnotation--isActive';
+    }
+
     return {
       ...annotationZoneLabelBase,
       style: {
@@ -189,13 +197,21 @@ export const zoneAnnotations = (
   maxYAxis: number,
   value: number,
   zones: Zone[],
+  flippedOrder?: boolean,
 ) => [
   {
     draggable: '',
     labelOptions: {
       backgroundColor: palette.white,
     },
-    labels: getZoneLabels(endDate, minYAxis, maxYAxis, value, zones),
+    labels: getZoneLabels(
+      endDate,
+      minYAxis,
+      maxYAxis,
+      value,
+      zones,
+      flippedOrder || false,
+    ),
   },
 ];
 
@@ -205,7 +221,18 @@ export const getTruncationDate = (date: Date, truncationDays: number) =>
 export const randomizeId = (name: string): string =>
   `${name}-${Math.random().toFixed(9)}`;
 
-export const getChartRegions = (minY: number, maxY: number, zones: Zones) => [
+export interface Region {
+  valueFrom: number;
+  valueTo: number;
+  name: string;
+  color: string;
+}
+
+export const getChartRegions = (
+  minY: number,
+  maxY: number,
+  zones: Zones,
+): Region[] => [
   {
     valueFrom: minY,
     valueTo: zones[Level.LOW].upperLimit,
@@ -234,3 +261,28 @@ export const getZoneByValue = (value: number, zones: Zones) => {
     ? zones[Level.HIGH]
     : zones[Level.MEDIUM];
 };
+
+export const computeTickPositions = (
+  minY: number,
+  maxY: number,
+  zones: Zones,
+) => {
+  const maxZones = zones[Level.MEDIUM].upperLimit;
+  const maxTick = maxY < maxZones ? 1.5 * maxZones : maxY;
+  return [
+    minY,
+    zones[Level.LOW].upperLimit,
+    zones[Level.MEDIUM].upperLimit,
+    maxTick,
+  ];
+};
+
+export const getAxisLimits = (minY: number, maxY: number, zones: Zones) => {
+  const tickPositions = computeTickPositions(minY, maxY, zones);
+  const minTickPosition = _.min(tickPositions) || minY;
+  const maxTickPosition = _.max(tickPositions) || maxY;
+  return roundAxisLimits(minTickPosition, maxTickPosition);
+};
+
+export const formatDate = (date: Date, format = 'dddd, MMM D, YYYY'): string =>
+  moment(date).format(format);

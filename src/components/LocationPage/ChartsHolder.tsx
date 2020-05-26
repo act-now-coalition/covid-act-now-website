@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import {
   ChartContentWrapper,
@@ -11,41 +11,43 @@ import {
 } from './ChartsHolder.style';
 import LocationPageHeader from 'components/LocationPage/LocationPageHeader';
 import NoCountyDetail from './NoCountyDetail';
-import ModelChart from 'components/Charts/ModelChart';
 import { Projections } from 'common/models/Projections';
 import { Projection } from 'common/models/Projection';
 import SummaryStats from 'components/SummaryStats/SummaryStats';
 import Disclaimer from 'components/Disclaimer/Disclaimer';
-import { ZoneChartWrapper } from 'components/Charts/ZoneChart.style';
-import Chart from 'components/Charts/Chart';
 import ClaimStateBlock from 'components/ClaimStateBlock/ClaimStateBlock';
-import ShareModelBlock from '../../components/ShareBlock/ShareModelBlock';
-import { ChartRt } from '../../components/Charts';
-import {
-  optionsHospitalUsage,
-  optionsPositiveTests,
-} from 'components/Charts/zoneUtils';
+import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
+import Outcomes from 'components/Outcomes/Outcomes';
 import ShareButtons from 'components/LocationPage/ShareButtons';
-import { getLevel, getMetricName } from 'common/metric';
-import { Metric } from 'common/metric';
-import { Level } from 'common/level';
-import { formatDate } from 'common/utils';
-import { POSITIVE_RATE_DISCLAIMER } from 'common/metrics/positive_rate';
-import { CASE_GROWTH_DISCLAIMER } from 'common/metrics/case_growth';
-import { HOSPITALIZATIONS_DISCLAIMER } from 'common/metrics/hospitalizations';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 
 // TODO(michael): These format helpers should probably live in a more
 // general-purpose location, not just for charts.
 import {
-  formatDecimal,
-  formatPercent,
-  formatInteger,
-} from 'components/Charts/utils';
-
-// States here that give us specific
-const STATES_WITH_DATA_OVERRIDES = ['Nevada'];
+  ChartRt,
+  ChartPositiveTestRate,
+  ChartICUHeadroom,
+  ChartContactTracing,
+  ChartFutureHospitalization,
+} from 'components/Charts';
+import {
+  caseGrowthStatusText,
+  CASE_GROWTH_DISCLAIMER,
+} from 'common/metrics/case_growth';
+import {
+  positiveTestsStatusText,
+  POSITIVE_RATE_DISCLAIMER,
+} from 'common/metrics/positive_rate';
+import {
+  hospitalOccupancyStatusText,
+  HOSPITALIZATIONS_DISCLAIMER,
+} from 'common/metrics/hospitalizations';
+import { generateChartDescription } from 'common/metrics/future_projection';
+import { contactTracingStatusText } from 'common/metrics/contact_tracing';
+import { Metric, getMetricName } from 'common/metric';
+import { COLORS } from 'common';
+import { formatDate } from 'common/utils';
 
 // TODO(michael): figure out where this type declaration should live.
 type County = {
@@ -59,6 +61,16 @@ type County = {
   population: string;
 };
 
+const scrollTo = (div: null | HTMLDivElement) =>
+  div &&
+  window.scrollTo({
+    left: 0,
+    // TODO: 180 is rough accounting for the navbar and searchbar;
+    // could make these constants so we don't have to manually update
+    top: div.offsetTop - 180,
+    behavior: 'smooth',
+  });
+
 const ChartsHolder = (props: {
   projections: Projections;
   stateId: string;
@@ -67,9 +79,17 @@ const ChartsHolder = (props: {
   const projection: Projection = props.projections.primary;
   const noInterventionProjection: Projection = props.projections.baseline;
 
-  const { rtRangeData, testPositiveData, icuUtilizationData } = getChartData(
-    projection,
-  );
+  const {
+    rtRangeData,
+    testPositiveData,
+    icuUtilizationData,
+    contactTracingData,
+  } = getChartData(projection);
+
+  const rtRangeRef = useRef<HTMLDivElement>(null);
+  const testPositiveRef = useRef<HTMLDivElement>(null);
+  const icuUtilizationRef = useRef<HTMLDivElement>(null);
+  const contactTracingRef = useRef<HTMLDivElement>(null);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
@@ -83,8 +103,15 @@ const ChartsHolder = (props: {
       [Metric.CASE_GROWTH_RATE]: projection.rt,
       [Metric.HOSPITAL_USAGE]: projection.currentIcuUtilization,
       [Metric.POSITIVE_TESTS]: projection.currentTestPositiveRate,
+      [Metric.CONTACT_TRACING]: projection.currentContactTracerMetric,
     };
   };
+
+  let outcomesProjections = [
+    props.projections.baseline,
+    props.projections.projected,
+  ];
+  let outcomesColors = [COLORS.LIMITED_ACTION, COLORS.PROJECTED];
 
   return (
     <>
@@ -97,10 +124,16 @@ const ChartsHolder = (props: {
         <>
           <ChartContentWrapper>
             <LocationPageHeader projections={props.projections} />
-            <SummaryStats stats={getChartSummarys(projection)} />
+            <SummaryStats
+              stats={getChartSummarys(projection)}
+              onRtRangeClick={() => scrollTo(rtRangeRef.current)}
+              onTestPositiveClick={() => scrollTo(testPositiveRef.current)}
+              onIcuUtilizationClick={() => scrollTo(icuUtilizationRef.current)}
+              onContactTracingClick={() => scrollTo(contactTracingRef.current)}
+            />
             <MainContentInner>
               <ChartHeaderWrapper>
-                <ChartHeader>
+                <ChartHeader ref={rtRangeRef}>
                   {getMetricName(Metric.CASE_GROWTH_RATE)}
                 </ChartHeader>
                 {!isMobile && rtRangeData && (
@@ -123,7 +156,7 @@ const ChartsHolder = (props: {
                 </>
               )}
               <ChartHeaderWrapper>
-                <ChartHeader>
+                <ChartHeader ref={testPositiveRef}>
                   {getMetricName(Metric.POSITIVE_TESTS)}
                 </ChartHeader>
                 {!isMobile && testPositiveData && (
@@ -139,18 +172,14 @@ const ChartsHolder = (props: {
               )}
               {testPositiveData && (
                 <>
-                  <ZoneChartWrapper>
-                    <Chart
-                      options={optionsPositiveTests(testPositiveData) as any}
-                    />
-                  </ZoneChartWrapper>
+                  <ChartPositiveTestRate columnData={testPositiveData} />
                   <Disclaimer metricName="positive test rate">
                     {POSITIVE_RATE_DISCLAIMER}
                   </Disclaimer>
                 </>
               )}
               <ChartHeaderWrapper>
-                <ChartHeader>
+                <ChartHeader ref={icuUtilizationRef}>
                   {getMetricName(Metric.HOSPITAL_USAGE)}
                   <BetaTag>Beta</BetaTag>
                 </ChartHeader>
@@ -167,19 +196,68 @@ const ChartsHolder = (props: {
               )}
               {icuUtilizationData && (
                 <>
-                  <ZoneChartWrapper>
-                    <Chart
-                      options={optionsHospitalUsage(icuUtilizationData) as any}
-                    />
-                  </ZoneChartWrapper>
+                  <ChartICUHeadroom columnData={icuUtilizationData} />
                   <Disclaimer metricName="COVID ICU usage">
+                    <a
+                      href="https://preventepidemics.org/wp-content/uploads/2020/04/COV020_WhenHowTightenFaucet_v3.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Resolve to Save Lives
+                    </a>
                     {HOSPITALIZATIONS_DISCLAIMER}
                   </Disclaimer>
                 </>
               )}
               <ChartHeaderWrapper>
+                <ChartHeader ref={contactTracingRef}>
+                  {getMetricName(Metric.CONTACT_TRACING)}
+                  <BetaTag>Beta</BetaTag>
+                </ChartHeader>
+              </ChartHeaderWrapper>
+              <ChartLocationName>{projection.locationName}</ChartLocationName>
+              <ChartDescription>
+                {contactTracingStatusText(projection)}
+              </ChartDescription>
+              {/* TODO: Use contact tracing data here */}
+              {contactTracingData && (
+                <>
+                  <ChartContactTracing columnData={contactTracingData} />
+                  <Disclaimer>
+                    <a
+                      href="https://science.sciencemag.org/content/368/6491/eabb6936"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Experts recommend
+                    </a>{' '}
+                    that at least 70% of contacts for each new case must be
+                    traced within 48 hours in order to contain COVID. Experts
+                    estimate that tracing each new case within 48 hours requires
+                    an average of 10 contact tracers per new case, as well as
+                    fast testing. Our contact tracing data is sourced from{' '}
+                    <a
+                      href="https://testandtrace.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      testandtrace.com
+                    </a>{' '}
+                    and NPR.{' '}
+                    <a
+                      href="https://blog.covidactnow.org/modeling-metrics-critical-to-reopen-safely/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Learn more
+                    </a>
+                    .
+                  </Disclaimer>
+                </>
+              )}
+              <ChartHeaderWrapper>
                 <ChartHeader>
-                  Future projections: all hospitalizations
+                  Future Hospitalization (both ICU and non-ICU) Projections
                 </ChartHeader>
                 {!isMobile && (
                   <ShareButtons shareURL={`${shareURL}/?chart=3`} />
@@ -190,11 +268,13 @@ const ChartsHolder = (props: {
                 {generateChartDescription(projection, noInterventionProjection)}
               </ChartDescription>
               {isMobile && <ShareButtons shareURL={`${shareURL}/?chart=3`} />}
-              <ModelChart
-                projections={props.projections}
-                height={''}
-                condensed={false}
-                forCompareModels={false}
+              <ChartFutureHospitalization projections={props.projections} />
+              <Outcomes
+                title={`Predicted outcomes by ${formatDate(
+                  props.projections.projected.finalDate,
+                )} (90 days from now)`}
+                projections={outcomesProjections}
+                colors={outcomesColors}
               />
             </MainContentInner>
             <ClaimStateBlock
@@ -215,39 +295,15 @@ const ChartsHolder = (props: {
   );
 };
 
-function generateChartDescription(
-  projection: Projection,
-  noInterventionProjection: Projection,
-) {
-  // TODO(sgoldblatt): figure out how to get people number data from projection
-  if (projection.dateOverwhelmed) {
-    if (projection.dateOverwhelmed < new Date()) {
-      return `Our projections suggest hospitals in ${projection.locationName} are overloaded.`;
-    }
-    return `Assuming current trends and interventions continue, ${
-      projection.locationName
-    } hospitals are projected to become overloaded on ${formatDate(
-      projection.dateOverwhelmed,
-    )}. Exercise caution.`;
-  } else {
-    const noInterventionDate = noInterventionProjection.dateOverwhelmed;
-    const restrictionsLiftedText = noInterventionDate
-      ? `However, any reopening should happen in a slow and phased fashion. If all restrictions were completely lifted today, hospitals would overload on ${formatDate(
-          noInterventionDate,
-        )}.`
-      : `However, any reopening should happen in a slow and phased fashion.`;
-
-    return (
-      `Assuming current trends and interventions continue, ${projection.locationName} hospitals are unlikely to become overloaded in the next 3 months. ` +
-      `${restrictionsLiftedText}`
-    );
-  }
-}
-
 // Exported for use by AllStates.js.
 export function getChartData(
   projection: Projection,
-): { rtRangeData: any; testPositiveData: any; icuUtilizationData: any } {
+): {
+  rtRangeData: any;
+  testPositiveData: any;
+  icuUtilizationData: any;
+  contactTracingData: any;
+} {
   const rtRangeData =
     projection &&
     projection.rt &&
@@ -268,114 +324,17 @@ export function getChartData(
     projection.currentIcuUtilization &&
     projection.getDataset('icuUtilization');
 
-  return { rtRangeData, testPositiveData, icuUtilizationData };
-}
+  const contactTracingData =
+    projection &&
+    projection.currentContactTracerMetric &&
+    projection.getDataset('contractTracers');
 
-function caseGrowthStatusText(projection: Projection) {
-  const rt = projection.rt!;
-  if (rt === null) {
-    return 'No case load data is available.';
-  }
-  const level = getLevel(Metric.CASE_GROWTH_RATE, rt);
-  const additionalPeople = formatDecimal(rt);
-  const infectionRate = `On average, each person in ${projection.locationName} with COVID is infecting ${additionalPeople} other people.`;
-
-  const epidemiologyReasoning = levelText(
-    level,
-    `Because each person is infecting less than one other person, the total number of cases in ${projection.locationName} is shrinking.`,
-    `Because this number is only slightly above 1.0, it means that COVID is growing, but slowly.`,
-    `As such, the total number of cases in ${projection.locationName} is growing exponentially.`,
-  );
-
-  return `${infectionRate} ${epidemiologyReasoning}`;
-}
-
-function positiveTestsStatusText(projection: Projection) {
-  const testPositiveRate = projection.currentTestPositiveRate;
-  if (testPositiveRate === null) {
-    return 'No testing data is available.';
-  }
-  const level = getLevel(Metric.POSITIVE_TESTS, testPositiveRate);
-  const lowSizableLarge = levelText(
-    level,
-    'low',
-    'relatively sizable',
-    'relatively high',
-  );
-  const percentage = formatPercent(testPositiveRate);
-
-  const location = projection.locationName;
-  const testingBroadlyText = levelText(
-    level,
-    `which suggests widespread, aggressive testing in ${location}`,
-    `which indicates that testing in ${location} is not widespread, meaning that many cases may go undetected`,
-    `which indicates that testing in ${location} is limited, meaning that many cases may go undetected`,
-  );
-
-  return `A ${lowSizableLarge} percentage (${percentage}) of COVID tests were positive, ${testingBroadlyText}.`;
-}
-
-function hospitalOccupancyStatusText(projection: Projection) {
-  const currentIcuUtilization = projection.currentIcuUtilization;
-  const currentCovidICUPatients = projection.currentCovidICUPatients;
-  const totalICUCapacity = projection.totalICUCapacity;
-  const nonCovidPatients = Math.floor(projection.nonCovidPatients);
-
-  if (
-    currentIcuUtilization === null ||
-    currentCovidICUPatients === null ||
-    totalICUCapacity === null
-  ) {
-    return 'No ICU occupancy data is available.';
-  }
-  const level = getLevel(Metric.HOSPITAL_USAGE, currentIcuUtilization);
-
-  const location = projection.locationName;
-
-  const lowText = `This suggests there is likely enough capacity to absorb a wave of new COVID infections.`;
-  const mediumText = `This suggests some ability to absorb an increase in COVID cases, but caution is warranted.`;
-  const highText = `This suggests the healthcare system is not well positioned  to absorb a wave of new COVID infections without substantial surge capacity.`;
-
-  const noStateOverride =
-    STATES_WITH_DATA_OVERRIDES.indexOf(projection.stateName) < 0 ||
-    !projection.hasActualData;
-
-  return `${location} ${noStateOverride ? 'has about' : 'has'} ${formatInteger(
-    totalICUCapacity,
-  )} ICU Beds.
-   ${
-     noStateOverride ? 'We estimate that currently' : 'Currently'
-   } ${formatPercent(nonCovidPatients / totalICUCapacity)} (${formatInteger(
-    nonCovidPatients,
-  )})
-      are occupied by non-COVID patients. Of the remaining ${formatInteger(
-        totalICUCapacity - nonCovidPatients,
-      )} ICU beds, ${noStateOverride ? 'we estimate ' : ''}
-      ${formatInteger(
-        currentCovidICUPatients,
-      )} are occupied by COVID cases, or ${formatPercent(
-    Math.min(
-      1,
-      currentCovidICUPatients / (totalICUCapacity - nonCovidPatients),
-    ),
-  )} of available beds. ${levelText(level, lowText, mediumText, highText)}`;
-}
-
-/**
- * Depending on provided `level`, returns the provided `lowText`, `mediumText`,
- * or `highText`.
- */
-function levelText(
-  level: Level,
-  lowText: string,
-  mediumText: string,
-  highText: string,
-) {
-  return level === Level.LOW
-    ? lowText
-    : level === Level.MEDIUM
-    ? mediumText
-    : highText;
+  return {
+    rtRangeData,
+    testPositiveData,
+    icuUtilizationData,
+    contactTracingData,
+  };
 }
 
 export default ChartsHolder;

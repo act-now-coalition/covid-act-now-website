@@ -42,26 +42,23 @@ const SocialLocationPreview = (props: {
             />
           </MapWrapper>
           <HeaderText>
-            <MapHeaderHeader>Who is ready to reopen?</MapHeaderHeader>
-            <HeaderSubhead>RISK LEVELS</HeaderSubhead>
+            <MapHeaderHeader>America’s COVID warning system</MapHeaderHeader>
+            <HeaderSubhead>Risk levels</HeaderSubhead>
             <Legend condensed={true}>
               <LegendItem
                 key={'legend-3'}
                 title={LOCATION_SUMMARY_LEVELS[Level.HIGH].name}
                 color={LOCATION_SUMMARY_LEVELS[Level.HIGH].color}
-                description={LOCATION_SUMMARY_LEVELS[Level.HIGH].detail}
               />
               <LegendItem
                 key={'legend-2'}
                 title={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].name}
                 color={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].color}
-                description={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].detail}
               />
               <LegendItem
                 key={'legend-1'}
                 title={LOCATION_SUMMARY_LEVELS[Level.LOW].name}
                 color={LOCATION_SUMMARY_LEVELS[Level.LOW].color}
-                description={LOCATION_SUMMARY_LEVELS[Level.LOW].detail}
               />
             </Legend>
           </HeaderText>
@@ -88,7 +85,7 @@ const SocialLocationPreview = (props: {
               ? `${props.projections.countyName}, ${props.projections.stateCode}`
               : props.projections.stateName}
           </HeaderHeader>
-          <HeaderSubhead>Overall risk if reopening</HeaderSubhead>
+          <HeaderSubhead>Overall COVID risk</HeaderSubhead>
         </HeaderText>
         <AlarmLevel color={fillColor}>{levelInfo.name}</AlarmLevel>
       </PreviewHeader>

@@ -66,6 +66,7 @@ export class Projections {
     rt_level: Level;
     hospitalizations_level: Level;
     test_rate_level: Level;
+    contact_tracing_level: Level;
   } {
     const projection = this.primary;
     if (!projection)
@@ -73,6 +74,7 @@ export class Projections {
         rt_level: Level.UNKNOWN,
         hospitalizations_level: Level.UNKNOWN,
         test_rate_level: Level.UNKNOWN,
+        contact_tracing_level: Level.UNKNOWN,
       };
 
     const rt_level = getLevel(Metric.CASE_GROWTH_RATE, projection.rt);
@@ -85,10 +87,16 @@ export class Projections {
       projection.currentTestPositiveRate,
     );
 
+    const contact_tracing_level = getLevel(
+      Metric.CONTACT_TRACING,
+      projection.currentContactTracerMetric,
+    );
+
     return {
       rt_level,
       hospitalizations_level,
       test_rate_level,
+      contact_tracing_level,
     };
   }
 
@@ -97,15 +105,28 @@ export class Projections {
       rt_level,
       hospitalizations_level,
       test_rate_level,
+      contact_tracing_level,
     } = this.getLevels();
 
     const levelList = [rt_level, hospitalizations_level, test_rate_level];
 
-    if (levelList.some(level => level === Level.HIGH)) {
+    // contact tracing levels are reversed (i.e low is bad, high is good)
+    const reverseList = [contact_tracing_level];
+
+    if (
+      levelList.some(level => level === Level.HIGH) ||
+      reverseList.some(level => level === Level.LOW)
+    ) {
       return Level.HIGH;
-    } else if (levelList.some(level => level === Level.MEDIUM)) {
+    } else if (
+      levelList.some(level => level === Level.MEDIUM) ||
+      reverseList.some(level => level === Level.MEDIUM)
+    ) {
       return Level.MEDIUM;
-    } else if (levelList.some(level => level === Level.UNKNOWN)) {
+    } else if (
+      levelList.some(level => level === Level.UNKNOWN) ||
+      reverseList.some(level => level === Level.UNKNOWN)
+    ) {
       return Level.UNKNOWN;
     } else {
       return Level.LOW;
