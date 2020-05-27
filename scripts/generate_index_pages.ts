@@ -18,6 +18,7 @@ import { assert } from '../src/common/utils';
 // We don't care about the values here, but this is a cheap way to determine all
 // of the counties we have any data for and are therefore share-able.
 import CalculatedCountyInterventionJSON from '../src/assets/data/calculated_county_interventions.json';
+import { ALL_METRICS, getMetricName } from '../src/common/metric';
 const COUNTIES = Object.keys(CalculatedCountyInterventionJSON);
 
 const BLACKLISTED_COUNTIES = [
@@ -54,6 +55,52 @@ function locationPageTags(
   };
 }
 
+function chartPageTags(
+  fullImageUrl: string,
+  canonicalUrl: string,
+  locationName: string,
+  metricName: string,
+): MetaTags {
+  // TODO(michael): What should these tags say?
+  const title = `${locationName}: ${metricName}`;
+  const description = 'Metrics and modeling to help America reopen safely.';
+  return {
+    'og:url': canonicalUrl,
+    'og:image:url': fullImageUrl,
+    'og:title': title,
+    'og:description': description,
+
+    'twitter:image': fullImageUrl,
+    'twitter:title': title,
+    'twitter:description': description,
+  };
+}
+
+async function buildLocationPages(builder: IndexPageBuilder, relativeSiteUrl: string, relativeImageUrl: string, locationName: string) {
+  const canonicalUrl = urlJoin('https://covidactnow.org/', relativeSiteUrl);
+  const imageUrl = builder.fullImageUrl(relativeImageUrl + '.png');
+  const page = path.join(relativeSiteUrl, 'index.html');
+  await builder.writeTemplatedPage(
+    page,
+    locationPageTags(imageUrl, canonicalUrl, locationName),
+  );
+
+  for (const metric of ALL_METRICS) {
+    const chartPage = path.join(relativeSiteUrl, `/chart/${metric}/index.html`);
+    const chartCanonicalUrl = urlJoin(canonicalUrl, `/chart/${metric}`);
+    const chartImageUrl = builder.fullImageUrl(urlJoin(relativeImageUrl, `/chart/${metric}.png`));
+    await builder.writeTemplatedPage(
+      chartPage,
+      chartPageTags(
+        chartImageUrl,
+        chartCanonicalUrl,
+        locationName,
+        getMetricName(metric)
+      )
+    );
+  }
+}
+
 async function main() {
   console.log('Building index.html pages...');
 
@@ -66,16 +113,9 @@ async function main() {
 
   for (const stateCode in STATES) {
     const stateName = (STATES as any)[stateCode];
-    const relativeUrl = `/us/${stateCode.toLowerCase()}/`;
-    const canonicalUrl = urlJoin('https://covidactnow.org/', relativeUrl);
-    const imageUrl = builder.fullImageUrl(
-      `states/${stateCode.toLowerCase()}.png`,
-    );
-    const page = path.join(relativeUrl, 'index.html');
-    await builder.writeTemplatedPage(
-      page,
-      locationPageTags(imageUrl, canonicalUrl, stateName),
-    );
+    const relativeSiteUrl = `/us/${stateCode.toLowerCase()}/`;
+    const relativeImageUrl = `/states/${stateCode.toLowerCase()}`;
+    await buildLocationPages(builder, relativeSiteUrl, relativeImageUrl, stateName);
   }
 
   for (const fips of COUNTIES) {
@@ -86,16 +126,11 @@ async function main() {
     assert(county, 'Failed to find county ' + fips);
     const stateCode = county.state_code;
     const locationName = `${county.county}, ${(STATES as any)[stateCode]}`;
-    const relativeUrl = `/us/${stateCode.toLowerCase()}/county/${
+    const relativeSiteUrl = `/us/${stateCode.toLowerCase()}/county/${
       county.county_url_name
     }`;
-    const canonicalUrl = urlJoin('https://covidactnow.org/', relativeUrl);
-    const imageUrl = builder.fullImageUrl(`counties/${fips}.png`);
-    const page = path.join(relativeUrl, 'index.html');
-    await builder.writeTemplatedPage(
-      page,
-      locationPageTags(imageUrl, canonicalUrl, locationName),
-    );
+    const relativeImageUrl = `counties/${fips}`;
+    await buildLocationPages(builder, relativeSiteUrl, relativeImageUrl, locationName);
   }
 }
 

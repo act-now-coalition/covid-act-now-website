@@ -14,13 +14,17 @@ import {
   fetchAllStateProjections,
   fetchAllCountyProjections,
 } from '../../src/common/utils/model';
+import { Projections } from '../../src/common/models/Projections';
+import { Metric, ALL_METRICS } from '../../src/common/metric';
 
 const BASE_URL = 'http://localhost:3000/internal/share-image';
 const CSS_SELECTOR = '.screenshot';
 const OUTPUT_DIR = path.join(__dirname, 'output');
-const OUTPUT_SIZE = '1200x630';
 // How many screenshots to send to pageres at once.
 const PAGERES_BATCH_SIZE = 10;
+
+const SHARE_OUTPUT_SIZE = '1200x630';
+const EXPORT_OUTPUT_SIZE = '2400x1350';
 
 const BLACKLISTED_COUNTIES = [
   '11001', // DC - We treat it as a state, not a county.
@@ -29,33 +33,53 @@ const BLACKLISTED_COUNTIES = [
 (async () => {
   await fs.ensureDir(OUTPUT_DIR);
   await fs.emptyDir(OUTPUT_DIR);
-  await fs.emptyDir(`${OUTPUT_DIR}/states`);
-  await fs.emptyDir(`${OUTPUT_DIR}/counties`);
 
   console.log('Fetching projections...');
   const allStatesProjections = await fetchAllStateProjections();
   const allCountiesProjections = await fetchAllCountyProjections();
   console.log('Fetch complete.');
 
-  let screenshots = [] as Array<{ url: string; filename: string }>;
+  let screenshots = [] as Array<{ url: string; filename: string, outputSize: string }>;
 
-  screenshots.push({ url: '/', filename: 'home' });
+  // Homepage share image.
+  screenshots.push({ url: '/', filename: 'home', outputSize: SHARE_OUTPUT_SIZE });
+
+  function addScreenshotsForLocation(relativeUrl: string, projections: Projections) {
+    // Overall share image.
+    screenshots.push({
+      url: relativeUrl,
+      filename: relativeUrl,
+      outputSize: SHARE_OUTPUT_SIZE,
+    });
+
+    // Chart images.
+    for (const metric of ALL_METRICS) {
+      if (metric === Metric.FUTURE_PROJECTIONS || projections.getMetricValue(metric) !== null) {
+        const shareUrl = urlJoin(relativeUrl, '/chart/', '' + metric);
+        const exportUrl = urlJoin(shareUrl, '/export');
+        screenshots.push({
+          url: shareUrl,
+          filename: shareUrl,
+          outputSize: SHARE_OUTPUT_SIZE,
+        });
+        screenshots.push({
+          url: exportUrl,
+          filename: exportUrl,
+          outputSize: EXPORT_OUTPUT_SIZE,
+        });
+      }
+    }
+  }
 
   for (const stateProjections of allStatesProjections) {
     const state = stateProjections.stateCode.toLowerCase();
-    screenshots.push({
-      url: `/states/${state}`,
-      filename: `/states/${state}`,
-    });
+    addScreenshotsForLocation(`/states/${state}`, stateProjections);
   }
 
   for (const countyProjections of allCountiesProjections) {
     const fips = countyProjections.county;
     if (!BLACKLISTED_COUNTIES.includes(fips)) {
-      screenshots.push({
-        url: `/counties/${fips}`,
-        filename: `/counties/${fips}`,
-      });
+      addScreenshotsForLocation(`/counties/${fips}`, countyProjections);
     }
   }
 
@@ -69,7 +93,8 @@ const BLACKLISTED_COUNTIES = [
     for (let i = 0; i < batchSize; i++) {
       const s = screenshots.pop()!;
       urls.push(s.url);
-      pageres.src(urlJoin(BASE_URL, s.url), [OUTPUT_SIZE], {
+      await fs.ensureDir(path.join(OUTPUT_DIR, s.filename, '..'));
+      pageres.src(urlJoin(BASE_URL, s.url), [s.outputSize], {
         selector: CSS_SELECTOR,
         filename: s.filename,
       });
