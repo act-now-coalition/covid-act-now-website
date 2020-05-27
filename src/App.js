@@ -90,23 +90,10 @@ export default function App() {
               </Route>
               <Route path="/internal/compare" component={CompareModels} />
 
-              {/** Internal endpoints we use to generate the content that we want to
-            screenshot for our social sharing images (OpenGraph / Twitter Card). */}
-              <Route
-                exact
-                path="/internal/share-image/"
-                component={ShareImage}
-              />
-              <Route
-                exact
-                path="/internal/share-image/states/:stateId"
-                component={ShareImage}
-              />
-              <Route
-                exact
-                path="/internal/share-image/counties/:countyFipsId"
-                component={ShareImage}
-              />
+              {/** Internal endpoints we use to generate the content that we
+              want to screenshot for our social sharing images (OpenGraph /
+              Twitter Card). */}
+              <Route path="/internal/share-image/" component={ShareImage} />
 
               <Route path="/*">
                 <Redirect to="/" />
