@@ -2,7 +2,7 @@ import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
 import { levelText } from 'common/utils/chart';
 import { getLevel, Metric } from 'common/metric';
-import { formatPercent, formatInteger } from 'components/Charts/utils';
+import { formatPercent, formatInteger } from 'common/utils';
 import { Projection } from 'common/models/Projection';
 
 export const METRIC_NAME = 'ICU headroom used';

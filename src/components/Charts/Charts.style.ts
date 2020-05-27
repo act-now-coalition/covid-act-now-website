@@ -142,14 +142,6 @@ export const Tooltip = styled.div`
   box-shadow: 2px 2px 6px ${props => palette(props).tooltip.shadow};
 `;
 
-export const TooltipTitle = styled.div`
-  font-size: ${tooltip.fontSizeTitle};
-`;
-
-export const TooltipBody = styled.div`
-  font-size: 11px;
-`;
-
 export const LegendContainer = styled.div`
   display: flex;
   flex-direction: column;

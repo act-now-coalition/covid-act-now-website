@@ -26,6 +26,7 @@ class Newsletter extends React.Component {
       .then(response => {
         response.text().then(text => {
           this.form.action = text;
+          console.log(new FormData(this.form));
           this.form.submit();
         });
       })
@@ -43,25 +44,25 @@ class Newsletter extends React.Component {
           className="js-cm-form"
           id="subForm"
           method="post"
-          data-id="2BE4EF332AA2E32596E38B640E905619AA6E1FB8D17A78ED48A8BBBF6B7BCEE2B5CA9AB5B4861F0A4E7AD231EC5D9077A3A8C1F7BFD94F2E4DA103E6791E7F2A"
+          data-id="2BE4EF332AA2E32596E38B640E90561930C9C3A433D015D9D4BD88E99175E51395EF5EBFFD527179E032AC15455BB1208D87A6CE87843E524B0EA520CBFF446E"
         >
           <input
             hidden
             readOnly
             aria-label="state"
             value={stateId || ''}
-            id="fieldjlkiiyj"
+            id="fieldjlkiyul"
             maxLength="200"
-            name="cm-f-jlkiiyj"
+            name="cm-f-jlkiyul"
           />
           <input
             hidden
             readOnly
             aria-label="county"
             value={county || ''}
-            id="fieldjlkiiyt"
+            id="fieldjlkulhk"
             maxLength="200"
-            name="cm-f-jlkiiyt"
+            name="cm-f-jlkulhk"
           />
           <input
             ref={i => (this.emailInput = i)}
@@ -71,7 +72,7 @@ class Newsletter extends React.Component {
             className="js-cm-email-input qa-input-email"
             id="fieldEmail"
             maxLength="200"
-            name="cm-wuyluk-wuyluk"
+            name="cm-wurhhh-wurhhh"
             required=""
             type="email"
           />

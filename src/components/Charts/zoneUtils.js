@@ -2,8 +2,6 @@ import moment from 'moment';
 import {
   baseOptions,
   currentValueAnnotation,
-  formatDecimal,
-  formatPercent,
   getMaxY,
   getTickPositions,
   getYAxisLimits,
@@ -17,7 +15,7 @@ import { HOSPITAL_USAGE_LEVEL_INFO_MAP } from 'common/metrics/hospitalizations';
 import { CONTACT_TRACING_LEVEL_INFO_MAP } from 'common/metrics/contact_tracing';
 import { Level } from '../../common/level';
 import { RT_TRUNCATION_DAYS } from '../../common/models/Projection';
-
+import { formatDecimal, formatPercent } from 'common/utils';
 const CHART_END_DATE = moment().add(2, 'weeks').toDate();
 const toHighchartZone = levelInfo => {
   return {

@@ -18,9 +18,11 @@ import Privacy from 'screens/Terms/Privacy';
 import Embed from 'screens/Embed/Embed';
 import AllStates from 'screens/internal/AllStates/AllStates';
 import CompareModels from 'screens/internal/CompareModels/CompareModels';
+import ExportImage from 'screens/internal/ShareImage/ChartExportImage';
 import ShareImage from 'screens/internal/ShareImage/ShareImage';
 import AppBar from 'components/AppBar/AppBar';
 import Footer from 'components/Footer/Footer';
+import ScrollToTop from 'components/ScrollToTop';
 import theme from 'assets/theme';
 
 export default function App() {
@@ -30,6 +32,7 @@ export default function App() {
         <StylesProvider injectFirst>
           <CssBaseline />
           <BrowserRouter>
+            <ScrollToTop />
             <AppBar />
             <Switch>
               <Route exact path="/" component={HomePage} />
@@ -99,23 +102,14 @@ export default function App() {
               </Route>
               <Route path="/internal/compare" component={CompareModels} />
 
-              {/** Internal endpoints we use to generate the content that we want to
-            screenshot for our social sharing images (OpenGraph / Twitter Card). */}
-              <Route
-                exact
-                path="/internal/share-image/"
-                component={ShareImage}
-              />
-              <Route
-                exact
-                path="/internal/share-image/states/:stateId"
-                component={ShareImage}
-              />
-              <Route
-                exact
-                path="/internal/share-image/counties/:countyFipsId"
-                component={ShareImage}
-              />
+              {/** Internal endpoints we use to generate the content that we
+              want to screenshot for our social sharing images (OpenGraph /
+              Twitter Card). */}
+              <Route path="/internal/share-image/" component={ShareImage} />
+
+              {/** Internal endpoints we use to generate downloadable chart
+              exports images. */}
+              <Route path="/internal/export-image/" component={ExportImage} />
 
               <Route path="/*">
                 <Redirect to="/" />
