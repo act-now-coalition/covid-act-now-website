@@ -5,6 +5,7 @@ import { RegionSummaryWithTimeseriesMap } from 'api';
 import { Metric, getLevel } from 'common/metric';
 import { Level } from 'common/level';
 import { LEVEL_COLOR } from 'common/colors';
+import { fail } from 'common/utils';
 
 /**
  * The model for the complete set of projections and related information
@@ -62,41 +63,41 @@ export class Projections {
     return this.projected;
   }
 
+  getMetricValue(metric: Metric): number | null {
+    if (!this.primary) {
+      return null;
+    }
+    switch (metric) {
+      case Metric.CASE_GROWTH_RATE:
+        return this.primary.rt;
+      case Metric.HOSPITAL_USAGE:
+        return this.primary.currentIcuUtilization;
+      case Metric.POSITIVE_TESTS:
+        return this.primary.currentTestPositiveRate;
+      case Metric.CONTACT_TRACING:
+        return this.primary.currentContactTracerMetric;
+      default:
+        fail('Cannot get value of metric: ' + metric);
+    }
+  }
+
+  getMetricLevel(metric: Metric): Level {
+    return getLevel(metric, this.getMetricValue(metric));
+  }
+
+  // TODO(michael): Rework this to return a { [metric in Metric]: Level } map
+  // instead of using the custom "rt_level", etc. keys.
   getLevels(): {
     rt_level: Level;
     hospitalizations_level: Level;
     test_rate_level: Level;
     contact_tracing_level: Level;
   } {
-    const projection = this.primary;
-    if (!projection)
-      return {
-        rt_level: Level.UNKNOWN,
-        hospitalizations_level: Level.UNKNOWN,
-        test_rate_level: Level.UNKNOWN,
-        contact_tracing_level: Level.UNKNOWN,
-      };
-
-    const rt_level = getLevel(Metric.CASE_GROWTH_RATE, projection.rt);
-    const hospitalizations_level = getLevel(
-      Metric.HOSPITAL_USAGE,
-      projection.currentIcuUtilization,
-    );
-    const test_rate_level = getLevel(
-      Metric.POSITIVE_TESTS,
-      projection.currentTestPositiveRate,
-    );
-
-    const contact_tracing_level = getLevel(
-      Metric.CONTACT_TRACING,
-      projection.currentContactTracerMetric,
-    );
-
     return {
-      rt_level,
-      hospitalizations_level,
-      test_rate_level,
-      contact_tracing_level,
+      rt_level: this.getMetricLevel(Metric.CASE_GROWTH_RATE),
+      hospitalizations_level: this.getMetricLevel(Metric.HOSPITAL_USAGE),
+      test_rate_level: this.getMetricLevel(Metric.POSITIVE_TESTS),
+      contact_tracing_level: this.getMetricLevel(Metric.CONTACT_TRACING),
     };
   }
 

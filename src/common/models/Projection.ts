@@ -199,9 +199,7 @@ export class Projection {
       summaryWithTimeseries.actuals.cumulativeDeaths;
     this.currentCumulativeCases =
       summaryWithTimeseries.actuals.cumulativeConfirmedCases;
-    this.currentContactTracerMetric = this.contractTracers
-      .filter(x => x !== null)
-      .slice(-1)[0];
+    this.currentContactTracerMetric = this.lastValue(this.contractTracers);
   }
 
   get currentContactTracers() {
