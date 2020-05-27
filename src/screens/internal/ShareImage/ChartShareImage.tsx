@@ -14,16 +14,15 @@ import LogoDark from 'assets/images/logoDark';
 import { chartDarkMode } from 'assets/theme/palette';
 import { Projections } from 'common/models/Projections';
 import { MetricChart } from '../../../components/Charts';
-import { getMetricName } from 'common/metric';
+import { getMetricName, ALL_METRICS } from 'common/metric';
 import { Metric } from 'common/metric';
 import { findCountyByFips } from 'common/locations';
 import { useProjections } from 'common/utils/model';
 import { Projection } from 'common/models/Projection';
 
 export default function ChartShareImage() {
-  let { stateId, countyFipsId, metric } = useParams();
+  let { stateId, countyFipsId, metric: metricString } = useParams();
   const theme = useContext(ThemeContext);
-  metric = parseInt(metric) as Metric;
 
   let projections: Projections | undefined;
   const [countyOption] = useState(
@@ -35,6 +34,11 @@ export default function ChartShareImage() {
     return null;
   }
   const projection = projections.primary as Projection;
+
+  const metric = parseInt(metricString) as Metric;
+  if (isNaN(metric) || !ALL_METRICS.includes(metric)) {
+    return <h1>Unknown metric: {metricString}!</h1>;
+  }
 
   const chartHeight = 225;
 

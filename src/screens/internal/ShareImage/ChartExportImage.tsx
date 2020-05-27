@@ -14,7 +14,7 @@ import {
 import LogoUrlLight from 'assets/images/logoUrlLight';
 import { Projections } from 'common/models/Projections';
 import { MetricChart } from '../../../components/Charts';
-import { getMetricName } from 'common/metric';
+import { getMetricName, ALL_METRICS } from 'common/metric';
 import { Metric } from 'common/metric';
 import { findCountyByFips } from 'common/locations';
 import { useProjections, useModelLastUpdatedDate } from 'common/utils/model';
@@ -22,10 +22,8 @@ import { Projection } from 'common/models/Projection';
 import { formatDate } from 'common/utils';
 
 const ExportChartImage = () => {
-  let { stateId, countyFipsId, metric } = useParams();
+  let { stateId, countyFipsId, metric: metricString } = useParams();
   const lastUpdated = useModelLastUpdatedDate();
-
-  metric = parseInt(metric) as Metric;
 
   let projections: Projections | undefined;
   const [countyOption] = useState(
@@ -37,6 +35,11 @@ const ExportChartImage = () => {
     return null;
   }
   const projection = projections.primary as Projection;
+
+  const metric = parseInt(metricString) as Metric;
+  if (isNaN(metric) || !ALL_METRICS.includes(metric)) {
+    return <h1>Unknown metric: {metricString}!</h1>;
+  }
 
   const chartHeight = 415;
 
