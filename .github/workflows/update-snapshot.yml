@@ -3,13 +3,14 @@ name: Update to new data snapshot (regenerate colors and sharing images).
 on:
   repository_dispatch:
     types: update-data-snapshot
+  push:
 
 env:
   AWS_S3_BUCKET: content.covidactnow.org
-  BRANCH: ${{ github.event.client_payload.branch }}
-  SNAPSHOT_ID: ${{ github.event.client_payload.snapshot_id }}
+  BRANCH: mikelehen/temp-generate-screenshots
+  SNAPSHOT_ID: 373
   # Used in the shared images URL and in the PR branch.
-  RUN_ID: ${{ github.event.client_payload.snapshot_id }}-${{github.run_number}}
+  RUN_ID: 373-${{github.run_number}}
 
 jobs:
   update-data-snapshot:
@@ -69,23 +70,23 @@ jobs:
             * Regenerate calculated interventions files.
             * Point at updated share images.
 
-      - name: Slack notification
-        if: job.status != 'success'
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          STATUS: ${{job.status}}
-        uses: Ilshidur/action-slack@fb92a78
-        with:
-          args: 'update-snapshot failed: {{STATUS}}'
-      - name: Slack notification
-        if: job.status == 'success'
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          STATUS: ${{job.status}}
-        uses: Ilshidur/action-slack@fb92a78
-        with:
-          args: |
-            PR to update the website to snapshot ${{env.SNAPSHOT_ID}} (with updated map colors and share images) is available.
-            PR: https://github.com/covid-projections/covid-projections/pull/${{env.PULL_REQUEST_NUMBER}}
-            Preview: https://covid-projections-git-bump-snapshot-${{env.RUN_ID}}.covidactnow.now.sh/
-            Compare: https://covid-projections-git-bump-snapshot-${{env.RUN_ID}}.covidactnow.now.sh/compare/
+#      - name: Slack notification
+#        if: job.status != 'success'
+#        env:
+#          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+#          STATUS: ${{job.status}}
+#        uses: Ilshidur/action-slack@fb92a78
+#        with:
+#          args: 'update-snapshot failed: {{STATUS}}'
+#      - name: Slack notification
+#        if: job.status == 'success'
+#        env:
+#          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+#          STATUS: ${{job.status}}
+#        uses: Ilshidur/action-slack@fb92a78
+#        with:
+#          args: |
+#            PR to update the website to snapshot ${{env.SNAPSHOT_ID}} (with updated map colors and share images) is available.
+#            PR: https://github.com/covid-projections/covid-projections/pull/${{env.PULL_REQUEST_NUMBER}}
+#            Preview: https://covid-projections-git-bump-snapshot-${{env.RUN_ID}}.covidactnow.now.sh/
+#            Compare: https://covid-projections-git-bump-snapshot-${{env.RUN_ID}}.covidactnow.now.sh/compare/
