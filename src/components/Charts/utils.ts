@@ -12,15 +12,6 @@ export const last = (list: any[]) => list[list.length - 1];
 export const lastValidPoint = (data: Highcharts.Point[]) =>
   last(data.filter(isValidPoint));
 
-export const formatDecimal = (num: number, places = 2): string =>
-  num.toFixed(places);
-
-export const formatPercent = (num: number, places = 0): string =>
-  `${formatDecimal(100 * Math.min(1, num), places)}%`;
-
-/** Adds comma's for thousands, millions, etc. */
-export const formatInteger = (num: number): string => num.toLocaleString();
-
 export const parseDate = (date: Date): number => new Date(date).valueOf();
 
 export const titleCase = (str: string) => _.startCase(_.toLower(str));
@@ -283,6 +274,3 @@ export const getAxisLimits = (minY: number, maxY: number, zones: Zones) => {
   const maxTickPosition = _.max(tickPositions) || maxY;
   return roundAxisLimits(minTickPosition, maxTickPosition);
 };
-
-export const formatDate = (date: Date, format = 'dddd, MMM D, YYYY'): string =>
-  moment(date).format(format);

@@ -14,7 +14,7 @@ import {
 } from './SummaryStats.style';
 
 import SignalStatus from 'components/SignalStatus/SignalStatus';
-import { formatDecimal, formatPercent } from 'components/Charts/utils';
+import { formatDecimal, formatPercent } from 'common/utils';
 import { fail } from 'assert';
 import { isNull } from 'util';
 
