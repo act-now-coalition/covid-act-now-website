@@ -101,16 +101,20 @@ const ChartsHolder = (props: {
   };
 
   useEffect(() => {
-    if (props.chartId === '0' && rtRangeRef.current)
-      scrollTo(rtRangeRef.current);
-    if (props.chartId === '1' && testPositiveRef.current)
-      scrollTo(testPositiveRef.current);
-    if (props.chartId === '2' && icuUtilizationRef.current)
-      scrollTo(icuUtilizationRef.current);
-    if (props.chartId === '3' && contactTracingRef.current)
-      scrollTo(contactTracingRef.current);
-    if (props.chartId === '4' && futureProjectionsRef.current)
-      scrollTo(futureProjectionsRef.current);
+    const chartIdentifiers = ['0', '1', '2', '3', '4'];
+    if (props.chartId && !chartIdentifiers.includes(props.chartId)) return;
+    else {
+      if (props.chartId === '0' && rtRangeRef.current)
+        scrollTo(rtRangeRef.current);
+      if (props.chartId === '1' && testPositiveRef.current)
+        scrollTo(testPositiveRef.current);
+      if (props.chartId === '2' && icuUtilizationRef.current)
+        scrollTo(icuUtilizationRef.current);
+      if (props.chartId === '3' && contactTracingRef.current)
+        scrollTo(contactTracingRef.current);
+      if (props.chartId === '4' && futureProjectionsRef.current)
+        scrollTo(futureProjectionsRef.current);
+    }
   }, [props.chartId]);
 
   const getChartSummarys = (projection: Projection) => {
