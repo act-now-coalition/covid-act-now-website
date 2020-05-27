@@ -54,7 +54,9 @@ const ShareBlock = ({
 }) => {
   const locationPath = useLocation();
 
-  const url = shareURL || 'https://covidactnow.org/';
+  const url =
+    shareURL ||
+    'https://covid-projections-git-share-testing.covidactnow.now.sh/';
   const quote =
     shareQuote ||
     '@CovidActNow has real-time COVID data and risk level for your community. Check it out: ';

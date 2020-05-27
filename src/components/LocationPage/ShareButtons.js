@@ -100,7 +100,7 @@ const ShareButtons = props => {
     projections,
   );
 
-  const shareBaseURL = `https://covidactnow.org/us/${stateId.toLowerCase()}${
+  const shareBaseURL = `https://covid-projections-git-share-testing.covidactnow.now.sh/us/${stateId.toLowerCase()}${
     county ? `/county/${county.county_url_name}` : ''
   }`;
   const shareURL = `${shareBaseURL}/chart/${chartIdentifier}`;
