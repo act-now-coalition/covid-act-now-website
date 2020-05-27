@@ -2,7 +2,7 @@ import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
 import { levelText } from 'common/utils/chart';
 import { getLevel, Metric } from 'common/metric';
-import { formatPercent } from 'components/Charts/utils';
+import { formatPercent } from 'common/utils';
 import { Projection } from 'common/models/Projection';
 
 export const METRIC_NAME = 'Positive test rate';

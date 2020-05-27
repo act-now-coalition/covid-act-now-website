@@ -11,22 +11,22 @@ import { scaleLinear, scaleTime } from '@vx/scale';
 import { Area } from '@vx/shape';
 import { Column, RtRange, RT_TRUNCATION_DAYS } from 'common/models/Projection';
 import { CASE_GROWTH_RATE_LEVEL_INFO_MAP as zones } from 'common/metrics/case_growth';
+import { formatDate, formatDecimal } from 'common/utils';
 import BoxedAnnotation from './BoxedAnnotation';
 import RectClipGroup from './RectClipGroup';
 import ZoneAnnotation from './ZoneAnnotation';
 import ZoneLinePath from './ZoneLinePath';
 import ChartContainer from './ChartContainer';
 import Tooltip from './Tooltip';
+import * as TooltipStyle from './Tooltip.style';
 import * as Style from './Charts.style';
 import {
   computeTickPositions,
-  formatDecimal,
   getChartRegions,
   getTruncationDate,
   getZoneByValue,
   last,
   getAxisLimits,
-  formatDate,
 } from './utils';
 
 type PointRt = Omit<Column, 'y'> & {
@@ -100,17 +100,25 @@ const ChartRt = ({
   const yTruncationRt = yScale(truncationRt);
   const truncationZone = getZoneByValue(truncationRt, zones);
 
-  const renderTooltip = (d: PointRt) => (
-    <Tooltip
-      left={marginLeft + getXCoord(d)}
-      top={marginTop + getYCoord(d)}
-      title={formatDate(getDate(d))}
-    >
-      {`Infection rate ${formatDecimal(getRt(d), 2)}`}{' '}
-      {getDate(d) < truncationDate ? '' : '(preliminary)'}
-    </Tooltip>
-  );
-
+  const renderTooltip = (d: PointRt) => {
+    const isConfirmed = getDate(d) < truncationDate;
+    const rtLow = formatDecimal(getYAreaLow(d), 2);
+    const rtHigh = formatDecimal(getYAreaHigh(d), 2);
+    const rt = formatDecimal(getRt(d), 2);
+    return (
+      <Tooltip
+        left={marginLeft + getXCoord(d)}
+        top={marginTop + getYCoord(d)}
+        title={formatDate(getDate(d), 'MMM D, YYYY')}
+        subtext={isConfirmed ? undefined : 'Data might change'}
+      >
+        <TooltipStyle.Body>
+          {`Infection rate ${isConfirmed ? '' : '~'}${rt}`}
+        </TooltipStyle.Body>
+        <TooltipStyle.BodyMuted>{`90% CI  [${rtLow}, ${rtHigh}]`}</TooltipStyle.BodyMuted>
+      </Tooltip>
+    );
+  };
   const renderMarker = (d: PointRt) => (
     <Style.CircleMarker
       cx={getXCoord(d)}

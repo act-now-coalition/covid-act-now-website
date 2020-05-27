@@ -11,8 +11,9 @@ const chart = {
   grid: black,
   area: colors.grey[200],
   tooltip: {
-    background: colors.grey[900],
+    background: black,
     text: white,
+    textMuted: colors.grey[400],
     shadow: colors.grey[500],
   },
   annotation: black,
