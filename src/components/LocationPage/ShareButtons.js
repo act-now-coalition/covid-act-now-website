@@ -25,6 +25,7 @@ const InnerContent = props => {
 
   const [showShareIcons, setShowShareIcons] = useState(false);
 
+  // Delay allows the user to briefly see copy-link button text change when clicked
   const hideSocialButtons = () => {
     const timeoutId = setTimeout(() => {
       setShowShareIcons(false);
