@@ -73,6 +73,7 @@ const ChartsHolder = (props: {
   stateId: string;
   county: County;
   chartId: string;
+  countyId: string;
 }) => {
   const projection: Projection = props.projections.primary;
   const noInterventionProjection: Projection = props.projections.baseline;
@@ -92,13 +93,6 @@ const ChartsHolder = (props: {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
-
-  const makeShareLink = (chartIdentifier: string) => {
-    const shareURL = `https://covidactnow.org/us/${props.stateId.toLowerCase()}${
-      props.county ? `/county/${props.county.county_url_name}` : ''
-    }`;
-    return `${shareURL}/chart/${chartIdentifier}`;
-  };
 
   useEffect(() => {
     const chartIdentifiers = ['0', '1', '2', '3', '4'];
@@ -133,7 +127,9 @@ const ChartsHolder = (props: {
   let outcomesColors = [COLORS.LIMITED_ACTION, COLORS.PROJECTED];
 
   const shareButtonProps = {
+    chartId: props.chartId,
     stateId: props.stateId,
+    countyId: props.countyId,
     county: props.county,
     stats: getChartSummarys(projection),
     projections: props.projections,
@@ -165,7 +161,7 @@ const ChartsHolder = (props: {
                 </ChartHeader>
                 {!isMobile && rtRangeData && (
                   <ShareButtons
-                    shareURL={makeShareLink('0')}
+                    chartIdentifier="0"
                     chartType={Metric.CASE_GROWTH_RATE}
                     {...shareButtonProps}
                   />
@@ -177,7 +173,7 @@ const ChartsHolder = (props: {
               </ChartDescription>
               {isMobile && rtRangeData && (
                 <ShareButtons
-                  shareURL={makeShareLink('0')}
+                  chartIdentifier="0"
                   chartType={Metric.CASE_GROWTH_RATE}
                   {...shareButtonProps}
                 />
@@ -196,7 +192,7 @@ const ChartsHolder = (props: {
                 </ChartHeader>
                 {!isMobile && testPositiveData && (
                   <ShareButtons
-                    shareURL={makeShareLink('1')}
+                    chartIdentifier="1"
                     chartType={Metric.POSITIVE_TESTS}
                     {...shareButtonProps}
                   />
@@ -208,7 +204,7 @@ const ChartsHolder = (props: {
               </ChartDescription>
               {isMobile && testPositiveData && (
                 <ShareButtons
-                  shareURL={makeShareLink('1')}
+                  chartIdentifier="1"
                   chartType={Metric.POSITIVE_TESTS}
                   {...shareButtonProps}
                 />
@@ -228,7 +224,7 @@ const ChartsHolder = (props: {
                 </ChartHeader>
                 {!isMobile && icuUtilizationData && (
                   <ShareButtons
-                    shareURL={makeShareLink('2')}
+                    chartIdentifier="2"
                     chartType={Metric.HOSPITAL_USAGE}
                     {...shareButtonProps}
                   />
@@ -240,7 +236,7 @@ const ChartsHolder = (props: {
               </ChartDescription>
               {isMobile && icuUtilizationData && (
                 <ShareButtons
-                  shareURL={makeShareLink('2')}
+                  chartIdentifier="2"
                   chartType={Metric.HOSPITAL_USAGE}
                   {...shareButtonProps}
                 />
@@ -267,7 +263,7 @@ const ChartsHolder = (props: {
                 </ChartHeader>
                 {!isMobile && contactTracingData && (
                   <ShareButtons
-                    shareURL={makeShareLink('3')}
+                    chartIdentifier="3"
                     chartType={Metric.CONTACT_TRACING}
                     {...shareButtonProps}
                   />
@@ -279,7 +275,7 @@ const ChartsHolder = (props: {
               </ChartDescription>
               {isMobile && contactTracingData && (
                 <ShareButtons
-                  shareURL={makeShareLink('3')}
+                  chartIdentifier="3"
                   chartType={Metric.CONTACT_TRACING}
                   {...shareButtonProps}
                 />
@@ -326,7 +322,7 @@ const ChartsHolder = (props: {
                 </ChartHeader>
                 {!isMobile && (
                   <ShareButtons
-                    shareURL={makeShareLink('4')}
+                    chartIdentifier="4"
                     chartType="hospitalizationProjections"
                     {...shareButtonProps}
                   />
@@ -338,7 +334,7 @@ const ChartsHolder = (props: {
               </ChartDescription>
               {isMobile && (
                 <ShareButtons
-                  shareURL={makeShareLink('4')}
+                  chartIdentifier="4"
                   chartType="hospitalizationProjections"
                   {...shareButtonProps}
                 />

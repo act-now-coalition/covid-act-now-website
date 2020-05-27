@@ -55,6 +55,7 @@ export const SaveOrShareButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  text-decoration: none;
 
   @media (min-width: 600px) {
     height: 40px;
