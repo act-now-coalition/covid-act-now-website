@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import palette from 'assets/theme/palette';
 import Typography from '@material-ui/core/Typography';
 
@@ -202,7 +202,7 @@ export const ShareButtonContainer = styled.div<{ reflow: boolean }>`
   }
 `;
 
-export const StyledShareButton = styled.div<{
+export const StyledShareButtonStyles = css<{
   color: string;
   disableElevation?: boolean /* seems to do nothing? */;
   variant?: string;
@@ -240,4 +240,8 @@ export const StyledShareButton = styled.div<{
       fill: ${props => props.color};
     }
   }
+`;
+
+export const StyledShareButton = styled.div`
+  ${StyledShareButtonStyles}
 `;
