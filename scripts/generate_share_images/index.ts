@@ -55,6 +55,8 @@ const BLACKLISTED_COUNTIES = [
     // Chart images.
     for (const metric of ALL_METRICS) {
       if (metric === Metric.FUTURE_PROJECTIONS || projections.getMetricValue(metric) !== null) {
+        // TODO(michael): Unify the generation of these URLs somehow to make
+        // sure we don't end up with accidental mismatches, etc.
         const shareUrl = urlJoin(relativeUrl, '/chart/', '' + metric);
         const exportUrl = urlJoin(shareUrl, '/export');
         screenshots.push({

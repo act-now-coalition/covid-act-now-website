@@ -78,7 +78,7 @@ function chartPageTags(
 
 async function buildLocationPages(builder: IndexPageBuilder, relativeSiteUrl: string, relativeImageUrl: string, locationName: string) {
   const canonicalUrl = urlJoin('https://covidactnow.org/', relativeSiteUrl);
-  const imageUrl = builder.fullImageUrl(relativeImageUrl + '.png');
+  const imageUrl = builder.fullImageUrl(`${relativeImageUrl}.png`);
   const page = path.join(relativeSiteUrl, 'index.html');
   await builder.writeTemplatedPage(
     page,
