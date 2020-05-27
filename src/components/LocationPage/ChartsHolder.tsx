@@ -96,21 +96,27 @@ const ChartsHolder = (props: {
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
   useEffect(() => {
-    //TODO(chelsi): reconcile these ids with the Metric enum values
     const chartIdentifiers = ['0', '1', '2', '3', '4'];
-    if (props.chartId && !chartIdentifiers.includes(props.chartId)) return;
-    else {
-      if (props.chartId === '0' && rtRangeRef.current)
-        scrollTo(rtRangeRef.current);
-      if (props.chartId === '1' && testPositiveRef.current)
-        scrollTo(testPositiveRef.current);
-      if (props.chartId === '2' && icuUtilizationRef.current)
-        scrollTo(icuUtilizationRef.current);
-      if (props.chartId === '3' && contactTracingRef.current)
-        scrollTo(contactTracingRef.current);
-      if (props.chartId === '4' && futureProjectionsRef.current)
-        scrollTo(futureProjectionsRef.current);
-    }
+    const scrollToChart = () => {
+      const timeoutId = setTimeout(() => {
+        if (props.chartId && !chartIdentifiers.includes(props.chartId)) return;
+        else {
+          if (props.chartId === '0' && rtRangeRef.current)
+            scrollTo(rtRangeRef.current);
+          if (props.chartId === '1' && testPositiveRef.current)
+            scrollTo(testPositiveRef.current);
+          if (props.chartId === '2' && icuUtilizationRef.current)
+            scrollTo(icuUtilizationRef.current);
+          if (props.chartId === '3' && contactTracingRef.current)
+            scrollTo(contactTracingRef.current);
+          if (props.chartId === '4' && futureProjectionsRef.current)
+            scrollTo(futureProjectionsRef.current);
+        }
+      }, 200);
+      return () => clearTimeout(timeoutId);
+    };
+
+    scrollToChart();
   }, [props.chartId]);
 
   const getChartSummarys = (projection: Projection) => {
