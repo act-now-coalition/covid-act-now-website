@@ -133,6 +133,7 @@ const ChartsHolder = (props: {
     county: props.county,
     stats: getChartSummarys(projection),
     projections: props.projections,
+    isMobile,
   };
 
   return (

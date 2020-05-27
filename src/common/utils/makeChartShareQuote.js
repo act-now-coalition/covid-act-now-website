@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { STATES } from 'common';
 import { formatDecimal, formatPercent } from 'components/Charts/utils';
 import { Metric } from 'common/metric';

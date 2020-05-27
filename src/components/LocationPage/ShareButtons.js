@@ -8,8 +8,7 @@ import {
   ClickAwayWrapper,
   SocialButtonsWrapper,
 } from './ShareButtons.style';
-import { useTheme } from '@material-ui/core/styles';
-import { ClickAwayListener, useMediaQuery } from '@material-ui/core';
+import { ClickAwayListener } from '@material-ui/core';
 import makeChartShareQuote from 'common/utils/makeChartShareQuote';
 
 const InnerContent = props => {
@@ -63,7 +62,15 @@ const InnerContent = props => {
 };
 
 const ShareButtons = props => {
-  const { shareURL, stateId, county, stats, chartType, projections } = props;
+  const {
+    shareURL,
+    stateId,
+    county,
+    stats,
+    chartType,
+    projections,
+    isMobile,
+  } = props;
 
   const shareQuote = makeChartShareQuote(
     stateId,
@@ -73,27 +80,18 @@ const ShareButtons = props => {
     projections,
   );
 
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const innerContentProps = { shareURL, shareQuote };
 
   return (
     <Fragment>
       {isMobile && (
         <MobileButtonsWrapper>
-          <InnerContent
-            iconSize="40"
-            shareURL={shareURL}
-            shareQuote={shareQuote}
-          />
+          <InnerContent iconSize="40" {...innerContentProps} />
         </MobileButtonsWrapper>
       )}
       {!isMobile && (
         <DesktopButtonsWrapper>
-          <InnerContent
-            iconSize="50"
-            shareURL={shareURL}
-            shareQuote={shareQuote}
-          />
+          <InnerContent iconSize="50" {...innerContentProps} />
         </DesktopButtonsWrapper>
       )}
     </Fragment>
