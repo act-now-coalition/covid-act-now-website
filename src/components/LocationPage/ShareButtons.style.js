@@ -103,6 +103,10 @@ export const CopyLinkButton = styled.div`
   }
 `;
 
-export const ClickAwayWrapper = styled.div``;
+export const ClickAwayWrapper = styled.div`
+  @media (min-width: 600px) {
+    margin-top: -24px;
+  }
+`;
 
 export const SocialButtonsWrapper = styled.div``;
