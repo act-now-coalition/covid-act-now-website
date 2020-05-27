@@ -104,3 +104,5 @@ export const CopyLinkButton = styled.div`
 `;
 
 export const ClickAwayWrapper = styled.div``;
+
+export const SocialButtonsWrapper = styled.div``;

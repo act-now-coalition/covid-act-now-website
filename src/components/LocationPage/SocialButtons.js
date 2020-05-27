@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import {
@@ -21,6 +21,9 @@ const SocialButtons = props => {
 
   const url = shareURL || 'https://covidactnow.org/';
   const hashtag = 'COVIDActNow';
+
+  const [copyLinkButtonTextA, setCopyLinkButtonTextA] = useState('Copy');
+  const [copyLinkButtonTextB, setCopyLinkButtonTextB] = useState('Link');
 
   const iconProps = {
     size,
@@ -53,14 +56,15 @@ const SocialButtons = props => {
       <CopyToClipboard
         text={url}
         onCopy={() => {
-          console.log('Todo: figure out what ux change should be here');
+          setCopyLinkButtonTextA('Copied!');
+          setCopyLinkButtonTextB('');
         }}
       >
         <SocialShareButton {...buttonProps} color="#007fb1" isLast>
           <CopyLinkButton>
-            Copy
+            {copyLinkButtonTextA}
             <br />
-            Link
+            {copyLinkButtonTextB}
           </CopyLinkButton>
         </SocialShareButton>
       </CopyToClipboard>

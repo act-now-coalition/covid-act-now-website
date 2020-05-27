@@ -6,6 +6,7 @@ import {
   DesktopButtonsWrapper,
   MobileButtonsWrapper,
   ClickAwayWrapper,
+  SocialButtonsWrapper,
 } from './ShareButtons.style';
 import { useTheme } from '@material-ui/core/styles';
 import { ClickAwayListener, useMediaQuery } from '@material-ui/core';
@@ -14,6 +15,13 @@ const InnerContent = props => {
   const { iconSize, shareURL } = props;
 
   const [showShareIcons, setShowShareIcons] = useState(false);
+
+  const hideSocialButtons = () => {
+    const timeoutId = setTimeout(() => {
+      setShowShareIcons(false);
+    }, 1500);
+    return () => clearTimeout(timeoutId);
+  };
 
   return (
     <ClickAwayListener onClickAway={() => setShowShareIcons(false)}>
@@ -35,9 +43,15 @@ const InnerContent = props => {
             Share
           </SaveOrShareButton>
         </SaveOrShareContainer>
-        {showShareIcons && (
-          <SocialButtons iconSize={iconSize} shareURL={shareURL} />
-        )}
+        <SocialButtonsWrapper
+          onClick={() => {
+            hideSocialButtons();
+          }}
+        >
+          {showShareIcons && (
+            <SocialButtons iconSize={iconSize} shareURL={shareURL} />
+          )}
+        </SocialButtonsWrapper>
       </ClickAwayWrapper>
     </ClickAwayListener>
   );
