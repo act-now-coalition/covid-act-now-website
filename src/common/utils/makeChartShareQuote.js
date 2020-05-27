@@ -7,32 +7,32 @@ export default function makeChartShareQuote(
   stateId,
   county,
   stats = {},
-  chartType,
+  chartIdentifier,
   projections,
 ) {
   const stateName = STATES[stateId];
   const countyName = county && county.county;
   const displayName = countyName ? `${countyName}, ${stateName}` : stateName;
 
-  if (chartType === Metric.CASE_GROWTH_RATE) {
+  if (chartIdentifier === '0') {
     return `${displayName}’s infection growth rate is ${formatDecimal(
       stats[0],
     )}, according to @CovidActNow. See the chart: `;
-  } else if (chartType === Metric.POSITIVE_TESTS) {
+  } else if (chartIdentifier === '1') {
     return `${formatPercent(
       stats[1],
       1,
     )} of people tested for COVID in ${displayName} tested positive, according to @CovidActNow. See the chart: `;
-  } else if (chartType === Metric.HOSPITAL_USAGE) {
+  } else if (chartIdentifier === '2') {
     return `${displayName}'s ICUs are ${formatPercent(
       stats[2],
     )} full with COVID patients, according to @CovidActNow. See the chart: `;
-  } else if (chartType === Metric.CONTACT_TRACING) {
-    return `${displayName} is only tracking ${formatPercent(
+  } else if (chartIdentifier === '3') {
+    return `${displayName} is tracking only ${formatPercent(
       stats[3],
       0,
     )} of COVID cases, according to @CovidActNow. See the chart: `;
-  } else if (chartType === 'hospitalizationProjections') {
+  } else if (chartIdentifier === '4') {
     if (projections && projections.baseline.dateOverwhelmed) {
       return `If all restrictions were completely lifted today, ${displayName}'s hospitals would overload on ${formatDate(
         projections.baseline.dateOverwhelmed,

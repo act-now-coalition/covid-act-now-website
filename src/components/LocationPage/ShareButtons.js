@@ -85,10 +85,8 @@ const ShareButtons = props => {
     stateId,
     county,
     stats,
-    chartType,
     projections,
     isMobile,
-    chartId,
     countyId,
     chartIdentifier,
   } = props;
@@ -97,7 +95,7 @@ const ShareButtons = props => {
     stateId,
     county,
     stats,
-    chartType,
+    chartIdentifier,
     projections,
   );
 
@@ -111,7 +109,6 @@ const ShareButtons = props => {
     shareQuote,
     county,
     stateId,
-    chartId,
     countyId,
     chartIdentifier,
   };

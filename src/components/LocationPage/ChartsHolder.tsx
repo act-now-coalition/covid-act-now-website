@@ -160,11 +160,7 @@ const ChartsHolder = (props: {
                   {getMetricName(Metric.CASE_GROWTH_RATE)}
                 </ChartHeader>
                 {!isMobile && rtRangeData && (
-                  <ShareButtons
-                    chartIdentifier="0"
-                    chartType={Metric.CASE_GROWTH_RATE}
-                    {...shareButtonProps}
-                  />
+                  <ShareButtons chartIdentifier="0" {...shareButtonProps} />
                 )}
               </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
@@ -172,11 +168,7 @@ const ChartsHolder = (props: {
                 {caseGrowthStatusText(projection)}
               </ChartDescription>
               {isMobile && rtRangeData && (
-                <ShareButtons
-                  chartIdentifier="0"
-                  chartType={Metric.CASE_GROWTH_RATE}
-                  {...shareButtonProps}
-                />
+                <ShareButtons chartIdentifier="0" {...shareButtonProps} />
               )}
               {rtRangeData && (
                 <>
@@ -191,11 +183,7 @@ const ChartsHolder = (props: {
                   {getMetricName(Metric.POSITIVE_TESTS)}
                 </ChartHeader>
                 {!isMobile && testPositiveData && (
-                  <ShareButtons
-                    chartIdentifier="1"
-                    chartType={Metric.POSITIVE_TESTS}
-                    {...shareButtonProps}
-                  />
+                  <ShareButtons chartIdentifier="1" {...shareButtonProps} />
                 )}
               </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
@@ -203,11 +191,7 @@ const ChartsHolder = (props: {
                 {positiveTestsStatusText(projection)}
               </ChartDescription>
               {isMobile && testPositiveData && (
-                <ShareButtons
-                  chartIdentifier="1"
-                  chartType={Metric.POSITIVE_TESTS}
-                  {...shareButtonProps}
-                />
+                <ShareButtons chartIdentifier="1" {...shareButtonProps} />
               )}
               {testPositiveData && (
                 <>
@@ -223,11 +207,7 @@ const ChartsHolder = (props: {
                   <BetaTag>Beta</BetaTag>
                 </ChartHeader>
                 {!isMobile && icuUtilizationData && (
-                  <ShareButtons
-                    chartIdentifier="2"
-                    chartType={Metric.HOSPITAL_USAGE}
-                    {...shareButtonProps}
-                  />
+                  <ShareButtons chartIdentifier="2" {...shareButtonProps} />
                 )}
               </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
@@ -235,11 +215,7 @@ const ChartsHolder = (props: {
                 {hospitalOccupancyStatusText(projection)}
               </ChartDescription>
               {isMobile && icuUtilizationData && (
-                <ShareButtons
-                  chartIdentifier="2"
-                  chartType={Metric.HOSPITAL_USAGE}
-                  {...shareButtonProps}
-                />
+                <ShareButtons chartIdentifier="2" {...shareButtonProps} />
               )}
               {icuUtilizationData && (
                 <>
@@ -262,11 +238,7 @@ const ChartsHolder = (props: {
                   <BetaTag>Beta</BetaTag>
                 </ChartHeader>
                 {!isMobile && contactTracingData && (
-                  <ShareButtons
-                    chartIdentifier="3"
-                    chartType={Metric.CONTACT_TRACING}
-                    {...shareButtonProps}
-                  />
+                  <ShareButtons chartIdentifier="3" {...shareButtonProps} />
                 )}
               </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
@@ -274,11 +246,7 @@ const ChartsHolder = (props: {
                 {contactTracingStatusText(projection)}
               </ChartDescription>
               {isMobile && contactTracingData && (
-                <ShareButtons
-                  chartIdentifier="3"
-                  chartType={Metric.CONTACT_TRACING}
-                  {...shareButtonProps}
-                />
+                <ShareButtons chartIdentifier="3" {...shareButtonProps} />
               )}
               {/* TODO: Use contact tracing data here */}
               {contactTracingData && (
@@ -321,11 +289,7 @@ const ChartsHolder = (props: {
                   Future Hospitalization (both ICU and non-ICU) Projections
                 </ChartHeader>
                 {!isMobile && (
-                  <ShareButtons
-                    chartIdentifier="4"
-                    chartType="hospitalizationProjections"
-                    {...shareButtonProps}
-                  />
+                  <ShareButtons chartIdentifier="4" {...shareButtonProps} />
                 )}
               </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
@@ -333,11 +297,7 @@ const ChartsHolder = (props: {
                 {generateChartDescription(projection, noInterventionProjection)}
               </ChartDescription>
               {isMobile && (
-                <ShareButtons
-                  chartIdentifier="4"
-                  chartType="hospitalizationProjections"
-                  {...shareButtonProps}
-                />
+                <ShareButtons chartIdentifier="4" {...shareButtonProps} />
               )}
               <ChartFutureHospitalization projections={props.projections} />
               <Outcomes
