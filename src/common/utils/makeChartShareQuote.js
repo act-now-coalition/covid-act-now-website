@@ -1,6 +1,5 @@
 import { STATES } from 'common';
-import { formatDecimal, formatPercent } from 'components/Charts/utils';
-import { formatDate } from 'common/utils';
+import { formatDate, formatDecimal, formatPercent } from 'common/utils';
 
 //TODO(chelsi): move this copy into individual metric files. remove need for hardcoded identifying numers
 export default function makeChartShareQuote(
