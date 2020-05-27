@@ -26,6 +26,7 @@ class Newsletter extends React.Component {
       .then(response => {
         response.text().then(text => {
           this.form.action = text;
+          console.log(new FormData(this.form));
           this.form.submit();
         });
       })
@@ -50,18 +51,18 @@ class Newsletter extends React.Component {
             readOnly
             aria-label="state"
             value={stateId || ''}
-            id="fieldjlkiiyj"
+            id="fieldjlkiyul"
             maxLength="200"
-            name="cm-f-jlkiiyj"
+            name="cm-f-jlkiyul"
           />
           <input
             hidden
             readOnly
             aria-label="county"
             value={county || ''}
-            id="fieldjlkiiyt"
+            id="fieldjlkulhk"
             maxLength="200"
-            name="cm-f-jlkiiyt"
+            name="cm-f-jlkulhk"
           />
           <input
             ref={i => (this.emailInput = i)}
@@ -71,7 +72,7 @@ class Newsletter extends React.Component {
             className="js-cm-email-input qa-input-email"
             id="fieldEmail"
             maxLength="200"
-            name="cm-wuyluk-wuyluk"
+            name="cm-wurhhh-wurhhh"
             required=""
             type="email"
           />
