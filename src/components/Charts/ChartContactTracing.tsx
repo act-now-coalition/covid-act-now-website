@@ -2,7 +2,7 @@ import React from 'react';
 import ChartZones from './ChartZones';
 import { CONTACT_TRACING_LEVEL_INFO_MAP } from 'common/metrics/contact_tracing';
 import { Column } from 'common/models/Projection';
-import { formatPercent } from './utils';
+import { formatPercent } from 'common/utils';
 
 const CAP_Y = 1;
 

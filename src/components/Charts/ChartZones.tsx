@@ -9,6 +9,7 @@ import { Group } from '@vx/group';
 import { ParentSize } from '@vx/responsive';
 import { scaleLinear, scaleTime } from '@vx/scale';
 import { Column } from 'common/models/Projection';
+import { assert, formatDate, formatPercent } from 'common/utils';
 import { LevelInfoMap } from 'common/level';
 import RectClipGroup from './RectClipGroup';
 import BoxedAnnotation from './BoxedAnnotation';
@@ -16,17 +17,15 @@ import ZoneAnnotation from './ZoneAnnotation';
 import ZoneLinePath from './ZoneLinePath';
 import ChartContainer from './ChartContainer';
 import Tooltip from './Tooltip';
+import * as TooltipStyle from './Tooltip.style';
 import * as Style from './Charts.style';
 import {
   getChartRegions,
   computeTickPositions,
   last,
-  formatPercent,
   getZoneByValue,
   getAxisLimits,
-  formatDate,
 } from './utils';
-import { assert } from 'common/utils';
 
 type Point = Omit<Column, 'y'> & {
   y: number;
@@ -110,9 +109,9 @@ const ChartZones = ({
     <Tooltip
       top={marginTop + getYCoord(d)}
       left={marginLeft + getXCoord(d)}
-      title={formatDate(getDate(d))}
+      title={formatDate(getDate(d), 'MMM D, YYYY')}
     >
-      {getTooltipBody(getY(d))}
+      <TooltipStyle.Body>{getTooltipBody(getY(d))}</TooltipStyle.Body>
     </Tooltip>
   );
 

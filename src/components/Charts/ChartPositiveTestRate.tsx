@@ -1,8 +1,8 @@
 import React from 'react';
 import ChartZones from './ChartZones';
 import { POSITIVE_TESTS_LEVEL_INFO_MAP } from 'common/metrics/positive_rate';
-import { formatPercent } from './utils';
-import { Column } from '../../common/models/Projection';
+import { formatPercent } from 'common/utils';
+import { Column } from 'common/models/Projection';
 
 const CAP_Y = 0.4;
 

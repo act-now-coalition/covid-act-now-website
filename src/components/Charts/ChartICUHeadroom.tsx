@@ -2,7 +2,7 @@ import React from 'react';
 import { HOSPITAL_USAGE_LEVEL_INFO_MAP } from 'common/metrics/hospitalizations';
 import { Column } from 'common/models/Projection';
 import ChartZones from './ChartZones';
-import { formatPercent } from './utils';
+import { formatPercent } from 'common/utils';
 
 const CAP_Y = 1;
 

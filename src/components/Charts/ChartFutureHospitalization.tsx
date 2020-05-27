@@ -1,4 +1,4 @@
-import React, { useContext, ReactNode } from 'react';
+import React, { useContext } from 'react';
 import { ThemeContext } from 'styled-components';
 import { last, isDate } from 'lodash';
 import { extent as d3extent } from 'd3-array';
@@ -6,15 +6,15 @@ import { AxisBottom, AxisLeft } from '@vx/axis';
 import { LinePath } from '@vx/shape';
 import { ParentSize } from '@vx/responsive';
 import { scaleLinear, scaleTime } from '@vx/scale';
-import { Projections } from 'common/models/Projections';
 import { COLORS } from 'common';
-import { assert } from 'common/utils';
+import { Projections } from 'common/models/Projections';
+import { assert, formatDate, formatInteger } from 'common/utils';
 import BoxedAnnotation from './BoxedAnnotation';
 import ChartContainer from './ChartContainer';
 import RectClipGroup from './RectClipGroup';
 import Tooltip from './Tooltip';
+import * as TooltipStyle from './Tooltip.style';
 import { LegendMarker, LegendLine } from './Legend';
-import { formatDate, formatInteger } from './utils';
 import * as Style from './Charts.style';
 
 type Point = {
@@ -38,14 +38,6 @@ const getProjectionsPoints = (
   color: string,
   isBeds: boolean,
 ): PointProjections[] => points.map(p => ({ ...p, color, isBeds }));
-
-const getTooltipBody = (p: PointProjections): ReactNode => (
-  <span>
-    <b>{formatInteger(getY(p))}</b>{' '}
-    {p.isBeds ? 'beds available on' : 'hospitalizations expected by'}{' '}
-    <b>{formatDate(getDate(p), 'MMMM D')}</b>
-  </span>
-);
 
 const ChartFutureHospitalization = ({
   projections,
@@ -117,7 +109,11 @@ const ChartFutureHospitalization = ({
 
   const renderTooltip = (p: PointProjections) => (
     <Tooltip left={marginLeft + getXCoord(p)} top={marginTop + getYCoord(p)}>
-      {getTooltipBody(p)}
+      <TooltipStyle.Body style={{ fontWeight: 'normal' }}>
+        <b style={{ color: 'white' }}>{formatInteger(getY(p))}</b>{' '}
+        {p.isBeds ? 'beds available on' : 'hospitalizations expected by'}{' '}
+        <b style={{ color: 'white' }}>{formatDate(getDate(p), 'MMMM D')}</b>
+      </TooltipStyle.Body>
     </Tooltip>
   );
   const renderMarker = (p: PointProjections) => (

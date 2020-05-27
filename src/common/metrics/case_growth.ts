@@ -2,7 +2,7 @@ import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
 import { getLevel, Metric } from 'common/metric';
 import { levelText } from 'common/utils/chart';
-import { formatDecimal } from 'components/Charts/utils';
+import { formatDecimal } from 'common/utils';
 import { Projection } from 'common/models/Projection';
 
 export const METRIC_NAME = 'Infection rate';

@@ -1,21 +1,24 @@
 import React from 'react';
-import * as Style from './Charts.style';
+import * as StyleTooltip from './Tooltip.style';
 
 const Tooltip = ({
   title,
   left,
   top,
   children,
+  subtext,
 }: {
   left: number;
   top: number;
   title?: string;
   children?: React.ReactNode;
+  subtext?: string;
 }) => (
-  <Style.Tooltip style={{ top, left }}>
-    {title && <Style.TooltipTitle>{title}</Style.TooltipTitle>}
-    {children && <Style.TooltipBody>{children}</Style.TooltipBody>}
-  </Style.Tooltip>
+  <StyleTooltip.TooltipArrowDown style={{ top, left }}>
+    {title && <StyleTooltip.Title>{title}</StyleTooltip.Title>}
+    {children}
+    {subtext && <StyleTooltip.SubText>{subtext}</StyleTooltip.SubText>}
+  </StyleTooltip.TooltipArrowDown>
 );
 
 export default Tooltip;
