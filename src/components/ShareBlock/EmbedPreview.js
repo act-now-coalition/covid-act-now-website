@@ -87,7 +87,7 @@ export default function EmbedPreview({ open, onClose, county }) {
             <Grid container align="center" justify="center">
               {/* If we're sharing from an embed, we don't need a preview */}
               {!isEmbed && (
-                <Grid xs="12" lg="6">
+                <Grid xs={12} lg={6} item>
                   <iframe
                     src={iFramePath}
                     title="Embed Preview"
@@ -97,7 +97,7 @@ export default function EmbedPreview({ open, onClose, county }) {
                   ></iframe>
                 </Grid>
               )}
-              <Grid xs="12" lg="6">
+              <Grid xs={12} lg={6} item>
                 <EmbedDetailsStyled condensed={isMobile}>
                   <Typography variant="h4" style={{ margin: '0.5rem 0 1rem' }}>
                     {isEmbed ? 'Share Embed' : 'Embed Preview'}
