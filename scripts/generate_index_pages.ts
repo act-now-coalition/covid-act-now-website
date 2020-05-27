@@ -41,8 +41,8 @@ function locationPageTags(
   canonicalUrl: string,
   locationName: string,
 ): MetaTags {
-  const title = `Is ${locationName} ready to reopen?`;
-  const description = 'Metrics and modeling to help America reopen safely.';
+  const title = `America’s COVID warning system`;
+  const description = `Covid Act Now has real-time COVID data and risk level for your community. See how ${locationName} is doing at covidactnow.org.`;
   return {
     'og:url': canonicalUrl,
     'og:image:url': fullImageUrl,
@@ -61,9 +61,8 @@ function chartPageTags(
   locationName: string,
   metricName: string,
 ): MetaTags {
-  // TODO(michael): What should these tags say?
   const title = `${locationName}: ${metricName}`;
-  const description = 'Metrics and modeling to help America reopen safely.';
+  const description = `Covid Act Now has real-time COVID data and risk level for your community. See how ${locationName} is doing at covidactnow.org.`;
   return {
     'og:url': canonicalUrl,
     'og:image:url': fullImageUrl,
