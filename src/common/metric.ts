@@ -7,7 +7,6 @@ import * as FutureProjections from 'common/metrics/future_projection';
 import { Level, LevelInfo } from 'common/level';
 import { assert } from './utils';
 
-// TODO(sgoldblatt): handle future projections
 export enum Metric {
   CASE_GROWTH_RATE,
   POSITIVE_TESTS,
@@ -15,6 +14,11 @@ export enum Metric {
   CONTACT_TRACING,
   FUTURE_PROJECTIONS,
 }
+
+// Not sure if there's a better way to enumerate all enum values? :-(
+export const ALL_METRICS = Object.values(Metric).filter(
+  v => typeof v === 'number',
+) as Metric[];
 
 const METRIC_TO_NAME = {
   [Metric.CASE_GROWTH_RATE]: CaseGrowth.METRIC_NAME,
