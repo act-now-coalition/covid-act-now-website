@@ -1,8 +1,8 @@
 import { STATES } from 'common';
 import { formatDecimal, formatPercent } from 'components/Charts/utils';
-import { Metric } from 'common/metric';
 import { formatDate } from 'common/utils';
 
+//TODO(chelsi): move this copy into individual metric files. remove need for hardcoded identifying numers
 export default function makeChartShareQuote(
   stateId,
   county,
@@ -22,13 +22,13 @@ export default function makeChartShareQuote(
     return `${formatPercent(
       stats[1],
       1,
-    )} of people tested for COVID in ${displayName} tested positive, according to @CovidActNow. See the chart: `;
+    )} of those tested for COVID in ${displayName} tested positive, according to @CovidActNow. See the chart: `;
   } else if (chartIdentifier === '2') {
-    return `${displayName}'s ICUs are ${formatPercent(
+    return `${displayName}'s available ICU capacity is ${formatPercent(
       stats[2],
     )} full with COVID patients, according to @CovidActNow. See the chart: `;
   } else if (chartIdentifier === '3') {
-    return `${displayName} is tracking only ${formatPercent(
+    return `${displayName} is tracing only ${formatPercent(
       stats[3],
       0,
     )} of COVID cases, according to @CovidActNow. See the chart: `;

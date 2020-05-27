@@ -68,6 +68,7 @@ const scrollTo = (div: null | HTMLDivElement) =>
     behavior: 'smooth',
   });
 
+//TODO(chelsi): implement a metricToShareButtons map to get rid of repeated instances of ShareButtons
 const ChartsHolder = (props: {
   projections: Projections;
   stateId: string;
@@ -95,6 +96,7 @@ const ChartsHolder = (props: {
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
   useEffect(() => {
+    //TODO(chelsi): reconcile these ids with the Metric enum values
     const chartIdentifiers = ['0', '1', '2', '3', '4'];
     if (props.chartId && !chartIdentifiers.includes(props.chartId)) return;
     else {
