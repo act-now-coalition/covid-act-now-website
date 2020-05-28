@@ -14,6 +14,7 @@ import US_STATE_DATASET from '../src/components/MapSelectors/datasets/us_states_
 import ShareImageUrlJSON from '../src/assets/data/share_images_url.json';
 import { STATES } from '../src/common';
 import { assert } from '../src/common/utils';
+import * as urls from '../src/common/urls';
 
 // We don't care about the values here, but this is a cheap way to determine all
 // of the counties we have any data for and are therefore share-able.
@@ -76,7 +77,9 @@ function chartPageTags(
 }
 
 async function buildLocationPages(builder: IndexPageBuilder, relativeSiteUrl: string, relativeImageUrl: string, locationName: string) {
-  const canonicalUrl = urlJoin('https://covidactnow.org/', relativeSiteUrl);
+  const canonicalUrlBase = urlJoin('https://covidactnow.org/', relativeSiteUrl);
+
+  const canonicalUrl = urls.addSharingId(canonicalUrlBase);
   const imageUrl = builder.fullImageUrl(`${relativeImageUrl}.png`);
   const page = path.join(relativeSiteUrl, 'index.html');
   await builder.writeTemplatedPage(
@@ -86,7 +89,7 @@ async function buildLocationPages(builder: IndexPageBuilder, relativeSiteUrl: st
 
   for (const metric of ALL_METRICS) {
     const chartPage = path.join(relativeSiteUrl, `/chart/${metric}/index.html`);
-    const chartCanonicalUrl = urlJoin(canonicalUrl, `/chart/${metric}`);
+    const chartCanonicalUrl = urls.addSharingId(urlJoin(canonicalUrlBase, `/chart/${metric}`));
     const chartImageUrl = builder.fullImageUrl(urlJoin(relativeImageUrl, `/chart/${metric}.png`));
     await builder.writeTemplatedPage(
       chartPage,
