@@ -30,6 +30,7 @@ import ArrowBack from '@material-ui/icons/ArrowBack';
 import { STATES } from 'common';
 import { Location } from 'history';
 import US_STATE_DATASET from '../MapSelectors/datasets/us_states_dataset_01_02_2020.json';
+import * as urls from 'common/urls';
 
 const Panels = ['/', '/about', '/resources', '/blog', '/contact'];
 
@@ -125,7 +126,9 @@ const _AppBar = () => {
     window.location.href = url;
   };
 
-  const shareURL = `https://covidactnow.org${match ? match.url : ''}`;
+  const shareURL = urls.addSharingId(
+    `https://covidactnow.org${match ? match.url : ''}`,
+  );
   const hashtag = 'COVIDActNow';
   const locationShareTitle = `I'm keeping track of ${locationName}'s data and risk level with @CovidActNow. What does your community look like?`;
   const defaultShareTitle =

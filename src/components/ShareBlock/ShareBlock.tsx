@@ -11,6 +11,7 @@ import {
 import Newsletter from 'components/Newsletter/Newsletter';
 import SocialLocationPreview from 'components/SocialLocationPreview/SocialLocationPreview';
 import { Projections } from 'common/models/Projections';
+import * as urls from 'common/urls';
 import NewsletterMockup from 'assets/images/newsletterMockup';
 import {
   ShareButtonContainer,
@@ -54,7 +55,7 @@ const ShareBlock = ({
 }) => {
   const locationPath = useLocation();
 
-  const url = shareURL || 'https://covidactnow.org/';
+  const url = urls.addSharingId(shareURL || 'https://covidactnow.org/');
   const quote =
     shareQuote ||
     '@CovidActNow has real-time COVID data and risk levels for all communities across the country. What does yours look like?';
