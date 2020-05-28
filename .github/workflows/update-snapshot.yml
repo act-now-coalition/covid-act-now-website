@@ -89,3 +89,5 @@ jobs:
             PR: https://github.com/covid-projections/covid-projections/pull/${{env.PULL_REQUEST_NUMBER}}
             Preview: https://covid-projections-git-bump-snapshot-${{env.RUN_ID}}.covidactnow.now.sh/
             Compare: https://covid-projections-git-bump-snapshot-${{env.RUN_ID}}.covidactnow.now.sh/compare/
+            Compare-csv: https://data.covidactnow.org/snapshot/${{env.SNAPSHOT_ID}}/qa/compared.csv
+            Raw Data QA: https://data.covidactnow.org/snapshot/${{env.SNAPSHOT_ID}}/RAW_QA/outputreport.txt

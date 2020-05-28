@@ -11,7 +11,7 @@ import { LoadingScreen } from './LocationPage.style';
 import { useProjections } from 'common/utils/model';
 
 function LocationPage() {
-  let { stateId, countyId } = useParams();
+  let { stateId, countyId, chartId } = useParams();
   // TODO(igor): don't mix uppercase and lowercase in here
   stateId = stateId.toUpperCase();
 
@@ -64,6 +64,8 @@ function LocationPage() {
           projections={projections}
           stateId={stateId}
           county={countyOption}
+          chartId={chartId}
+          countyId={countyId}
         />
         <MiniMap
           projections={projections}

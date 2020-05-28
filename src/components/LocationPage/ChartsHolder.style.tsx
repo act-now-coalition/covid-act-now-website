@@ -40,13 +40,30 @@ export const MainContentInner = styled.div`
   }
 `;
 
-export const ChartHeader = styled.div`
+export const ChartHeaderWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   margin: 4.875rem 0 0.25rem;
-  font-weight: 700;
-  font-size: 1.5rem;
+
+  @media (min-width: 600px) {
+    flex-direction: column;
+  }
 
   @media print {
     page-break-before: always;
+  }
+`;
+
+// TODO(chelsi)- max-width in ChartHeader is quick fix for share buttons overlapping header
+// Figure out better approach:
+export const ChartHeader = styled.div`
+  font-weight: 700;
+  font-size: 1.5rem;
+  max-width: 440px;
+
+  @media (min-width: 800px) {
+    max-width: unset;
   }
 `;
 
