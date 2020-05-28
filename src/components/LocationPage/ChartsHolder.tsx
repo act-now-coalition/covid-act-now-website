@@ -272,23 +272,7 @@ const ChartsHolder = (props: {
                     traced within 48 hours in order to contain COVID. Experts
                     estimate that tracing each new case within 48 hours requires
                     an average of 10 contact tracers per new case, as well as
-                    fast testing. Our contact tracing data is sourced from{' '}
-                    <a
-                      href="https://testandtrace.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      testandtrace.com
-                    </a>{' '}
-                    and NPR.{' '}
-                    <a
-                      href="https://blog.covidactnow.org/modeling-metrics-critical-to-reopen-safely/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Learn more
-                    </a>
-                    .
+                    fast testing.
                   </Disclaimer>
                 </>
               )}
