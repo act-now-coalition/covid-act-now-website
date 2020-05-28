@@ -66,9 +66,9 @@ export function caseGrowthStatusText(projection: Projection) {
 
   const epidemiologyReasoning = levelText(
     level,
-    `Because each person is infecting less than one other person, the total number of cases in ${projection.locationName} is shrinking.`,
+    `Because each person is infecting less than one other person, the total number of current cases in ${projection.locationName} is shrinking.`,
     `Because this number is only slightly above 1.0, it means that COVID is growing, but slowly.`,
-    `As such, the total number of cases in ${projection.locationName} is growing exponentially.`,
+    `As such, the total number of current cases in ${projection.locationName} is growing exponentially.`,
   );
 
   return `${infectionRate} ${epidemiologyReasoning}`;
