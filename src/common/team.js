@@ -4,7 +4,7 @@ export default {
       name: 'Max Henderson',
       headshot: 'Max.jpg',
       role: 'CEO',
-      title: 'Ex-Google Data Science',
+      title: 'Ex-Google Data Science Executive',
       link: 'https://www.linkedin.com/in/maxhenderson/',
     },
     {

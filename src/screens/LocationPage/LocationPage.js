@@ -6,6 +6,7 @@ import { MAP_FILTERS } from './Enums/MapFilterEnums';
 import SearchHeader from 'components/Header/SearchHeader';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import MiniMap from 'components/MiniMap/MiniMap';
+import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ChartsHolder from 'components/LocationPage/ChartsHolder';
 import { LoadingScreen } from './LocationPage.style';
 import { useProjections } from 'common/utils/model';
@@ -49,6 +50,7 @@ function LocationPage() {
 
   return (
     <div>
+      <EnsureSharingIdInUrl />
       <AppMetaTags
         canonicalUrl={`/us/${stateId.toLowerCase()}`}
         pageTitle={actionTitle}

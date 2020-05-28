@@ -11,6 +11,7 @@ import {
 import { ClickAwayListener } from '@material-ui/core';
 import makeChartShareQuote from 'common/utils/makeChartShareQuote';
 import ShareImageUrlJSON from 'assets/data/share_images_url.json';
+import * as urls from 'common/urls';
 
 const InnerContent = props => {
   const {
@@ -103,7 +104,9 @@ const ShareButtons = props => {
   const shareBaseURL = `https://covidactnow.org/us/${stateId.toLowerCase()}${
     county ? `/county/${county.county_url_name}` : ''
   }`;
-  const shareURL = `${shareBaseURL}/chart/${chartIdentifier}`;
+  const shareURL = urls.addSharingId(
+    `${shareBaseURL}/chart/${chartIdentifier}`,
+  );
 
   const innerContentProps = {
     shareURL,

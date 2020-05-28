@@ -35,9 +35,9 @@ export default function makeChartShareQuote(
     if (projections && projections.baseline.dateOverwhelmed) {
       return `If all restrictions were completely lifted today, ${displayName}'s hospitals would overload on ${formatDate(
         projections.baseline.dateOverwhelmed,
-      )}. See the chart: `;
+      )}, according to @CovidActNow. See the chart: `;
     }
-    return `Assuming current trends and interventions continue, ${displayName}'s hospitals are unlikely to become overloaded in the next 3 months. See the chart: `;
+    return `Assuming current trends and interventions continue, ${displayName}'s hospitals are unlikely to become overloaded in the next 3 months, according to @CovidActNow. See the chart: `;
   }
-  return `${displayName}'s COVID risk from @CovidActNow, check it out: `;
+  return `I'm keeping track of ${displayName}'s data and risk level with @CovidActNow. What does your community look like?`;
 }

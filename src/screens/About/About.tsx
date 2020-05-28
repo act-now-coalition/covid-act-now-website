@@ -190,27 +190,26 @@ const About = ({ children }: { children: React.ReactNode }) => {
           </Typography>
 
           <Typography variant="h6" component="h6">
-            What R<sub>0</sub> value do you use?
+            What R value do you use?
           </Typography>
           <Typography variant="body1" component="p">
-            Epidemiology models use a metric called R<sub>0</sub> (pronounced “R
-            naught”), which effectively quantifies the disease’s “virality” — on
-            average, how many other people someone with the disease will infect.
-            COVID R<sub>0</sub> values are educated guesses derived from disease
-            data around the country and the world.
+            Epidemiology models use a metric called R (pronounced “R”), which
+            effectively quantifies the disease’s “virality”: On average, how
+            many other people someone with the disease will infect. COVID R
+            values are educated guesses derived from disease data around the
+            country and the world.
           </Typography>
           <Typography variant="body1" component="p">
-            The R<sub>0</sub> value is then incorporated into an epidemiology
-            model as a single, omnipotent R<sub>0</sub> value that is
-            universally applied to the model’s projections for different
-            regions. (This is the methodology our model started with, and is the
-            methodology most common in COVID projection models.)
+            The R value is then incorporated into an epidemiology model as a
+            single, all-encompassing R value that is universally applied to the
+            model’s projections for different regions. (This is the methodology
+            our model started with, and is the methodology most common in COVID
+            projection models.)
           </Typography>
           <Typography variant="body1" component="p">
-            Our model is a bit different. It <em>infers</em> the R<sub>0</sub>{' '}
-            value from each state’s or county’s own COVID data and uses that
-            bespoke R<sub>0</sub> value to make state- or county-specific
-            projections (
+            Our model is a bit different. It <em>infers</em> the R value from
+            each state’s or county’s own COVID data and uses that custom,
+            localized R value to make state- or county-specific projections (
             <a
               href="https://blog.covidactnow.org/inference-projections-for-states/"
               target="_blank"
@@ -223,26 +222,25 @@ const About = ({ children }: { children: React.ReactNode }) => {
           <Typography variant="body1" component="p">
             In other words, we look at the COVID data for Alaska or San Mateo
             County and infer the actual rate at which COVID is spreading in
-            Alaska and San Mateo County, respectively. This results in a R
-            <sub>0</sub> value specific to Alaska (and inferred from the Alaska
-            data) and an R<sub>0</sub> value specific to San Mateo County (and
-            inferred from the San Mateo County data).
+            Alaska and San Mateo County, respectively. This results in a R value
+            specific to Alaska (and inferred from the Alaska data) and an R
+            value specific to San Mateo County (and inferred from the San Mateo
+            County data).
           </Typography>
           <Typography variant="body1" component="p">
-            As shorthand, we call these regionally-inferred, region-specific R
-            <sub>0</sub> values “R-effective,” because they are the actual — or{' '}
-            <em>effective</em> — R<sub>0</sub> value for any given place, be it
-            Alaska or San Mateo County or anywhere else.
+            As a shorthand, we call these regionally-inferred, region-specific R
+            values “R(t),” because they are the actual R value for a given
+            place, be it Alaska or San Mateo County or anywhere else, at any
+            given time.
           </Typography>
           <Typography variant="body1" component="p">
-            A helpful framework for thinking about R<sub>0</sub> values: In
-            order to eliminate COVID, the R<sub>0</sub> must be driven below
-            1.0. This means that, on average, each person with COVID will
-            transmit to 0.9 other people, which means the disease is shrinking.
-            An R<sub>0</sub> of 1.0 means COVID is in perfect equilibrium,
-            neither growing nor shrinking. An R<sub>0</sub> greater than 1.0
-            means that COVID is growing exponentially. The greater the value
-            above 1.0, the faster the doubling speed.
+            A helpful framework for thinking about R(t) values: In order to
+            eliminate COVID, the R(t) must be driven below 1.0. This means that,
+            on average, each person with COVID will transmit to 0.9 other
+            people, which means the disease is shrinking. An R(t) of 1.0 means
+            COVID is in perfect equilibrium, neither growing nor shrinking. An
+            R(t) greater than 1.0 means that COVID is growing exponentially. The
+            greater the value above 1.0, the faster the doubling speed.
           </Typography>
 
           <Typography variant="h6" component="h6">

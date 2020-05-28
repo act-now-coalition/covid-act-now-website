@@ -23,19 +23,23 @@ const Disclaimer = ({
         >
           <span>Last updated {lastUpdatedDateString}.</span>
         </LightTooltip>{' '}
-        {children}{' '}
-        {metricName && (
-          <>
-            <a
-              href="https://blog.covidactnow.org/modeling-metrics-critical-to-reopen-safely/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn more about how we calculate {metricName} here
-            </a>
-            .
-          </>
-        )}
+        {children} Learn more about{' '}
+        <a
+          href="https://blog.covidactnow.org/modeling-metrics-critical-to-reopen-safely/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          our methodology
+        </a>{' '}
+        and{' '}
+        <a
+          href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          our data sources
+        </a>
+        .
       </DisclaimerBody>
     </DisclaimerWrapper>
   );

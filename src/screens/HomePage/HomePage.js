@@ -2,6 +2,7 @@ import React from 'react';
 import HomePageHeader from 'components/Header/HomePageHeader';
 import Map from 'components/Map/Map';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
+import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ShareBlock from 'components/ShareBlock/ShareBlock';
 import CriteriaExplanation from './CriteriaExplanation/CriteriaExplanation';
 import { PartnerLogoGrid, PressLogoGrid } from 'components/LogoGrid/LogoGrid';
@@ -16,6 +17,7 @@ import {
 export default function HomePage() {
   return (
     <>
+      <EnsureSharingIdInUrl />
       <AppMetaTags
         canonicalUrl="/"
         pageTitle={undefined}
