@@ -109,7 +109,12 @@ export class Projections {
       contact_tracing_level,
     } = this.getLevels();
 
-    const levelList = [rt_level, hospitalizations_level, test_rate_level];
+    // TODO(https://trello.com/c/ybqacRAN): Montana ICU disappeared and we don't
+    // want that to pull the state grey.
+    const levelList =
+      this.stateCode === 'MT'
+        ? [rt_level, test_rate_level]
+        : [rt_level, hospitalizations_level, test_rate_level];
 
     // contact tracing levels are reversed (i.e low is bad, high is good)
     const reverseList = [contact_tracing_level];
