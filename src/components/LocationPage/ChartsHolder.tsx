@@ -76,7 +76,7 @@ const ChartsHolder = (props: {
   chartId: string;
   countyId: string;
 }) => {
-  const projection: Projection = props.projections.primary;
+  const projection: Projection | null = props.projections.primary;
   const noInterventionProjection: Projection = props.projections.baseline;
 
   const {
@@ -139,7 +139,7 @@ const ChartsHolder = (props: {
     stateId: props.stateId,
     countyId: props.countyId,
     county: props.county,
-    stats: getChartSummarys(projection),
+    stats: projection ? getChartSummarys(projection) : {},
     projections: props.projections,
     isMobile,
   };
@@ -314,7 +314,7 @@ const ChartsHolder = (props: {
 
 // Exported for use by AllStates.js.
 export function getChartData(
-  projection: Projection,
+  projection: Projection | null,
 ): {
   rtRangeData: any;
   testPositiveData: any;
