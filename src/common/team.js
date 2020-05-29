@@ -109,6 +109,11 @@ export default {
       link: 'https://www.linkedin.com/in/brittany-braxton-39187549/',
     },
     {
+      name: 'Chelsi Asulin',
+      title: 'Software Engineer',
+      link: 'https://www.linkedin.com/in/chelsi-asulin/',
+    },
+    {
       name: 'Chris Kelly',
       title: 'Software Engineer at Fritz',
       link: 'https://www.linkedin.com/in/ckelly90/',
