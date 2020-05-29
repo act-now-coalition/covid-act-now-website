@@ -99,9 +99,19 @@ export default {
       link: 'https://www.linkedin.com/in/lautenbach/',
     },
     {
+      name: 'Brett Boval',
+      title: 'Data Scientist',
+      link: 'https://www.linkedin.com/in/brettboval/',
+    },
+    {
       name: 'Brittany Braxton',
       title: 'Executive Business Partner at Pantheon',
       link: 'https://www.linkedin.com/in/brittany-braxton-39187549/',
+    },
+    {
+      name: 'Chelsi Asulin',
+      title: 'Software Engineer',
+      link: 'https://www.linkedin.com/in/chelsi-asulin/',
     },
     {
       name: 'Chris Kelly',
@@ -179,6 +189,11 @@ export default {
       link: 'https://www.linkedin.com/in/jamest/',
     },
     {
+      name: 'Jeremiah Edwards',
+      title: 'Principal ML Scientist at Sage Intacct',
+      link: 'https://www.linkedin.com/in/jeremiq/',
+    },
+    {
       name: 'Jeremy Lubin',
       title: 'Ex-Square Lead Designer',
       link: 'https://www.linkedin.com/in/jeremy-lubin/',
@@ -247,6 +262,11 @@ export default {
       name: 'Susan Goldblatt',
       title: 'Ex-Google Software Engineer',
       link: 'https://www.linkedin.com/in/susan-goldblatt/',
+    },
+    {
+      name: 'Tom Brown',
+      title: 'Software Engineer, formerly at Google and Lyft',
+      link: 'https://www.linkedin.com/in/tomdbrown/',
     },
     {
       name: 'Vincent DeGennaro',
