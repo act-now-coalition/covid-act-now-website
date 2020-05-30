@@ -14,6 +14,13 @@ import {
   LocationCopyWrapper,
   HeaderSubCopyWrapper,
   LastUpdatedDate,
+  RiskLevelThermometer,
+  RiskLevelWrapper,
+  RiskLevelTitle,
+  RiskLevel,
+  RiskLevelGraphicMobile,
+  RiskLevelGraphicDesktop,
+  Triangle,
 } from 'components/LocationPage/NewLocationPageHeader.style';
 import { useEmbed } from 'common/utils/hooks';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
@@ -23,7 +30,22 @@ import { useModelLastUpdatedDate } from 'common/utils/model';
 import { STATES_WITH_DATA_OVERRIDES } from 'common/metrics/hospitalizations';
 import { Projections } from 'common/models/Projections';
 
-function LocationPageHeading(props: { projections: Projections }) {
+const RiskLevelGraphic = (props: {
+  projections: Projections;
+  level: number;
+  levelName: string;
+}) => {
+  return (
+    <RiskLevelWrapper>
+      <RiskLevel>{props.levelName}</RiskLevel>
+      <RiskLevelThermometer level={props.level} />
+      <Triangle level={props.level} />
+      <RiskLevelTitle>Covid Risk Level</RiskLevelTitle>
+    </RiskLevelWrapper>
+  );
+};
+
+const LocationPageHeading = (props: { projections: Projections }) => {
   const { isEmbed } = useEmbed();
 
   const displayName = props.projections.countyName ? (
@@ -42,7 +64,7 @@ function LocationPageHeading(props: { projections: Projections }) {
   );
 
   return <span>{displayName}</span>;
-}
+};
 
 // add in condensed
 const noop = () => {};
@@ -82,6 +104,12 @@ const NewLocationPageHeader = (props: {
   const lastUpdatedDateString =
     lastUpdatedDate !== null ? lastUpdatedDate.toLocaleDateString() : '';
 
+  const RiskLevelGraphicProps = {
+    level: levelInfo.level,
+    levelName: levelInfo.name,
+    projections: props.projections,
+  };
+
   return (
     <Fragment>
       <ColoredHeaderBanner bgcolor={fillColor} />
@@ -91,10 +119,15 @@ const NewLocationPageHeader = (props: {
             <HeaderTitle isEmbed={isEmbed} textColor={textColor}>
               <LocationPageHeading projections={props.projections} />
             </HeaderTitle>
+            <RiskLevelGraphicMobile>
+              <RiskLevelGraphic {...RiskLevelGraphicProps} />
+            </RiskLevelGraphicMobile>
             <HeaderSubtitle>{levelInfo.detail(locationName)}</HeaderSubtitle>
           </LocationCopyWrapper>
+          <RiskLevelGraphicDesktop>
+            <RiskLevelGraphic {...RiskLevelGraphicProps} />
+          </RiskLevelGraphicDesktop>
         </HeaderSection>
-
         <SummaryStats
           stats={props.stats}
           onRtRangeClick={props.onRtRangeClick}

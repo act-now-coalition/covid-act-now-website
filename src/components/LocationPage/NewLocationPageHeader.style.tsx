@@ -79,6 +79,7 @@ export const HeaderSection = styled(Box)`
 
   @media (min-width: 600px) {
     flex-direction: row;
+    justify-content: space-between;
   }
 `;
 
@@ -87,7 +88,7 @@ export const LocationCopyWrapper = styled(Box)`
   margin: 1.5rem;
 
   @media (min-width: 600px) {
-    margin: 2rem 0.875rem 2rem 2rem;
+    margin: 2.5rem 0.875rem 2.5rem 2.5rem;
   }
 `;
 
@@ -99,7 +100,7 @@ export const HeaderTitle = styled(Typography)<{
   font-size: ${props => (props.isEmbed ? '1.8rem' : '22px')};
   font-weight: normal;
   line-height: ${props => (props.isEmbed ? '1.5rem' : '2.2rem')};
-  padding: 0 1rem 0 0;
+  padding: 0;
   text-align: center;
 
   a {
@@ -117,10 +118,11 @@ export const HeaderSubtitle = styled(Typography)`
   font-size: 15px;
   line-height: 1.4;
   color: #4f4f4f;
-  margin-top: 1rem;
+  margin-top: 1.2rem;
 
   @media (min-width: 600px) {
     font-size: 16px;
+    margin-top: 1rem;
   }
 `;
 
@@ -224,4 +226,71 @@ export const LastUpdatedDate = styled.span`
     margin-left: 0;
     margin-bottom: 10px;
   }
+`;
+
+export const RiskLevelGraphicMobile = styled(Box)`
+  @media (min-width: 600px) {
+    display: none;
+  }
+`;
+
+export const RiskLevelGraphicDesktop = styled(Box)`
+  display: none;
+
+  @media (min-width: 600px) {
+    display: flex;
+  }
+`;
+
+export const RiskLevelWrapper = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  width: 170px;
+  text-align: center;
+  align-items: center;
+  align-self: center;
+  margin: 1rem auto 0;
+
+  @media (min-width: 600px) {
+    margin: auto 2rem auto 0.875rem;
+  }
+`;
+
+export const RiskLevelTitle = styled.span`
+  text-transform: uppercase;
+  color: #828282;
+  font-size: 14px;
+  line-height: 1.4;
+  font-family: 'Roboto';
+  margin-top: 0.5rem;
+`;
+
+export const RiskLevel = styled.span`
+  color: black;
+  font-family: 'Source Code Pro';
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: bold;
+`;
+
+export const RiskLevelThermometer = styled(Box)<{ level: number }>`
+  height: 8px;
+  width: 96px;
+  margin-top: 0.5rem;
+  border-radius: 5px;
+  background: ${({ level }) =>
+    level === 3
+      ? '#e3e3e3'
+      : 'linear-gradient(to right, rgb(0, 208, 125), rgb(0, 208, 125) 33.33%, #FFAB00 33.33%, #FFAB00 66.66%, #FF0034 66.66%)'};
+`;
+
+export const Triangle = styled(Box)<{ level: number }>`
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid black;
+  margin-top: 6px;
+  margin-left: ${({ level }) =>
+    level === 0 ? '-64px' : level === 2 ? '64px' : '0'};
 `;
