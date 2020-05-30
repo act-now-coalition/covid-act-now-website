@@ -9,7 +9,6 @@ import {
   BetaTag,
   ChartHeaderWrapper,
 } from './ChartsHolder.style';
-import LocationPageHeader from 'components/LocationPage/LocationPageHeader';
 import NoCountyDetail from './NoCountyDetail';
 import { Projections } from 'common/models/Projections';
 import { Projection } from 'common/models/Projection';
@@ -155,7 +154,6 @@ const ChartsHolder = (props: {
       ) : (
         <>
           <ChartContentWrapper>
-            {/* <LocationPageHeader projections={props.projections} /> */}
             <NewLocationPageHeader
               projections={props.projections}
               stats={getChartSummarys(projection)}

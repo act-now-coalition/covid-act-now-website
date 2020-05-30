@@ -66,7 +66,6 @@ const LocationPageHeading = (props: { projections: Projections }) => {
   return <span>{displayName}</span>;
 };
 
-// add in condensed
 const noop = () => {};
 
 const NewLocationPageHeader = (props: {
@@ -136,7 +135,6 @@ const NewLocationPageHeader = (props: {
           onContactTracingClick={props.onContactTracingClick}
           isMobile={props.isMobile}
         />
-
         <HeaderSection>
           <HeaderSubCopyWrapper verifiedStateStyling={verifiedStateStyling}>
             {props.projections.isCounty && !isEmbed && (

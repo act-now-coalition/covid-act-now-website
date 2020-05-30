@@ -4,22 +4,16 @@ import { Box } from '@material-ui/core';
 import palette from 'assets/theme/palette';
 import { COLORS } from 'common';
 
+//fix mobile banner height
+
 export const ColoredHeaderBanner = styled(Box)`
   display: flex;
   flex-direction: column;
+  height: 400px;
   background-color: ${props => props.bgcolor || COLORS.LIGHTGRAY};
-  padding: 0 1rem;
-  height: 250px;
 
-  margin: 0;
   @media (min-width: 600px) {
-    height: 350px;
-    border-bottom: 1px solid #e3e3e3;
-    align-items: center;
-    flex-direction: row;
-  }
-  @media (min-width: 932px) {
-    padding: 0;
+    height: 380px;
   }
 `;
 
@@ -41,24 +35,24 @@ export const HeaderContainer = styled(Box)<{ condensed?: Boolean }>`
     cursor: pointer;
     margin-left: 1rem;
     margin-right: 1rem;
-    margin-top: -200px;
+    margin-top: -350px;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.12);
 
     @media (min-width: 600px) {
       position: relative;
       margin: -3rem 1rem 0;
       flex-direction: column;
-      margin: -250px 1rem 0;
+      margin: -330px 1rem 0;
     }
 
     @media (min-width: 932px) {
-      margin: -250px auto 0;
+      margin: -330px auto 0;
     }
     @media (min-width: 1350px) {
-      margin: -250px 445px 0 auto;
+      margin: -330px 445px 0 auto;
     }
     @media (min-width: 1750px) {
-      margin: -250px auto 0;
+      margin: -330px auto 0;
     }
   `}
 `;
@@ -88,7 +82,7 @@ export const LocationCopyWrapper = styled(Box)`
   margin: 1.5rem;
 
   @media (min-width: 600px) {
-    margin: 2.5rem 0.875rem 2.5rem 2.5rem;
+    margin: 2.25rem 0.875rem 2.25rem 2.25rem;
   }
 `;
 
@@ -132,13 +126,6 @@ export const HeaderSubCopyWrapper = styled(Box)<{
   margin: ${({ verifiedStateStyling }) =>
     verifiedStateStyling ? '.4rem 1rem 1rem;' : '1rem'};
 
-  @media (min-width: 600px) {
-    margin: ${({ verifiedStateStyling }) =>
-      verifiedStateStyling
-        ? '1.5rem 0.875rem 2rem 1.5rem'
-        : '1.5rem 0.875rem 1.5rem 1.5rem'};
-  }
-
   p {
     padding: 0;
   }
@@ -146,8 +133,15 @@ export const HeaderSubCopyWrapper = styled(Box)<{
   svg {
     transform: translateY(0.75rem);
     margin-right: 0.75rem;
+  }
 
-    @media (min-width: 600px) {
+  @media (min-width: 600px) {
+    margin: ${({ verifiedStateStyling }) =>
+      verifiedStateStyling
+        ? '1.5rem 0.875rem 2rem 1.5rem'
+        : '1.5rem 0.875rem 1.5rem 1.5rem'};
+
+    svg {
       transform: translateY(0.35rem);
     }
   }
@@ -159,10 +153,6 @@ export const HeaderSubCopy = styled(Typography)<{ textColor: string }>`
   line-height: 1.4;
   padding: 1.5rem 0 0.2rem;
 
-  @media (min-width: 600px) {
-    font-size: 14px;
-  }
-
   a {
     color: #828282;
   }
@@ -170,6 +160,10 @@ export const HeaderSubCopy = styled(Typography)<{ textColor: string }>`
   svg {
     margin: 0 1rem 0 0;
     flex-shrink: 0;
+  }
+
+  @media (min-width: 600px) {
+    font-size: 14px;
   }
 `;
 
@@ -190,7 +184,7 @@ export const HeaderButton = styled(Box)`
   height: 50px;
   width: 50%;
   font-size: 15px;
-  line-height: 18px;
+  line-height: 1.2;
   cursor: pointer;
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   color: #00bfea;
