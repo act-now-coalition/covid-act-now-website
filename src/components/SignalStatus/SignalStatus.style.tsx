@@ -23,7 +23,6 @@ export const SignalStatusWrapper = styled(Box)<{ condensed?: Boolean }>`
       : `
     padding: 0 0.4rem;
     border-radius: 5px;
-    // border: 1px solid rgba(0, 0, 0, 0.12);
     background-color: white;
     color: ${(props: any) => props.color || 'darkgray'};
     display: inline-block;

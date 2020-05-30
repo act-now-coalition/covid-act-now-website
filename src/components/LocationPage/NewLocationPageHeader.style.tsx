@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
-import { Box, Button } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import palette from 'assets/theme/palette';
 import { COLORS } from 'common';
 

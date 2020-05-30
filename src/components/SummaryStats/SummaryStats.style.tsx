@@ -12,7 +12,6 @@ export const SummaryStatsWrapper = styled(Box)<{ condensed?: Boolean }>`
     display: flex;
     align-items: stretch;
     justify-content: space-around;
-    // padding: 2rem 0.5rem;
     background-color: white;
     border-radius: 0;
     box-shadow: none;
@@ -24,15 +23,8 @@ export const SummaryStatsWrapper = styled(Box)<{ condensed?: Boolean }>`
       background-color: ${palette.lightGray};
 
       flex-direction: row;
-      // border-radius: 2px;
-      // box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.1);
       background-color: white;
-      // padding: 1.75rem 1em;
-      // padding: 0 1em;
       position: relative;
-      // margin: -3rem 1rem 0;
-      // border-radius: 5px;
-      // box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.12);
     }
     @media (min-width: 932px) {
       // margin: -3rem auto 0;
@@ -62,30 +54,20 @@ export const SummaryStatWrapper = styled(Box)<{ condensed?: Boolean }>`
     display: flex;
     flex: 1;
     flex-direction: row;
-    // margin: 0 0.5rem;
-    // padding: 1.5rem 0;
     padding: 1.85rem 1rem;
 
 
     align-items: stretch;
     border-bottom: 1px solid ${palette.lightGray};
-    // border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 
     &:first-child {
       border-top: 1px solid ${palette.lightGray};
     }
 
-    // &:last-child {
-    //   border-bottom: 0;
-    //   // padding-bottom: 0;
-    // }
-
     @media (min-width: 600px) {
       border-bottom: 1px solid ${palette.lightGray};
       border-top: 1px solid ${palette.lightGray};
-      // border-bottom: 0;
       margin: 0;
-      // padding: 0 1.2rem 0 1rem;
       padding: 1.75rem 1.2rem 1.75rem 1rem;
       flex-direction: column;
       align-items: center;
@@ -97,12 +79,6 @@ export const SummaryStatWrapper = styled(Box)<{ condensed?: Boolean }>`
 
       &:first-child {
         padding-top: 1.75rem;
-        // padding-left: 0;
-      }
-
-      &:last-child{
-        // padding-right: 0;
-        // padding-bottom: 1.75rem;
       }
     }
   `}
@@ -172,8 +148,6 @@ export const StatValueWrapper = styled.div<{ condensed?: Boolean }>`
 `;
 
 export const StatDetailText = styled(Typography)`
-  // font-size: 0.875rem;
-  // line-height: 1.125rem;
   color: rgba(0, 0, 0, 0.7);
   margin-top: 0.35rem;
   font-family: 'Source Code Pro';
