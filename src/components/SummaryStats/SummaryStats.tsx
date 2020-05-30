@@ -25,6 +25,7 @@ const SummaryStat = ({
   beta,
   condensed,
   flipSignalStatusOrder,
+  isMobile,
 }: {
   chartType: Metric;
   value: number;
@@ -32,6 +33,7 @@ const SummaryStat = ({
   beta?: Boolean;
   condensed?: Boolean;
   flipSignalStatusOrder?: Boolean;
+  isMobile?: Boolean;
 }) => {
   const levelInfo = getLevelInfo(chartType, value);
 
@@ -58,6 +60,7 @@ const SummaryStat = ({
       <StatTextWrapper>
         <StatNameText condensed={condensed}>
           {getMetricName(chartType)}{' '}
+          {!condensed && beta && isMobile && <BetaTag>Beta</BetaTag>}
         </StatNameText>
         {!condensed && <StatDetailText>{levelInfo.detail()}</StatDetailText>}
       </StatTextWrapper>
@@ -66,7 +69,7 @@ const SummaryStat = ({
           <>
             <StatValueText condensed={condensed}>
               {formatValueForChart(chartType, value)}
-              {!condensed && beta && <BetaTag>Beta</BetaTag>}
+              {!condensed && beta && !isMobile && <BetaTag>Beta</BetaTag>}
             </StatValueText>
           </>
         )}
@@ -89,10 +92,17 @@ const SummaryStats = (props: {
   onTestPositiveClick?: () => void;
   onIcuUtilizationClick?: () => void;
   onContactTracingClick?: () => void;
+  isMobile?: Boolean;
 }) => {
   const hasStats = !!Object.values(props.stats).filter(
     (val: number | null) => !isNull(val),
   ).length;
+
+  const sharedStatProps = {
+    isMobile: props.isMobile,
+    condensed: props.condensed,
+  };
+
   return (
     <>
       {hasStats && (
@@ -100,29 +110,29 @@ const SummaryStats = (props: {
           <SummaryStat
             onClick={props.onRtRangeClick || noop}
             chartType={Metric.CASE_GROWTH_RATE}
-            condensed={props.condensed}
             value={props.stats[Metric.CASE_GROWTH_RATE] as number}
+            {...sharedStatProps}
           />
           <SummaryStat
             onClick={props.onTestPositiveClick || noop}
             chartType={Metric.POSITIVE_TESTS}
-            condensed={props.condensed}
             value={props.stats[Metric.POSITIVE_TESTS] as number}
+            {...sharedStatProps}
           />
           <SummaryStat
             onClick={props.onIcuUtilizationClick || noop}
             chartType={Metric.HOSPITAL_USAGE}
             beta={true}
-            condensed={props.condensed}
             value={props.stats[Metric.HOSPITAL_USAGE] as number}
+            {...sharedStatProps}
           />
           <SummaryStat
             onClick={props.onContactTracingClick || noop}
             chartType={Metric.CONTACT_TRACING}
             beta={true}
-            condensed={props.condensed}
             value={props.stats[Metric.CONTACT_TRACING] as number}
             flipSignalStatusOrder
+            {...sharedStatProps}
           />
         </SummaryStatsWrapper>
       )}

@@ -58,13 +58,13 @@ type County = {
   population: string;
 };
 
-const scrollTo = (div: null | HTMLDivElement) =>
+const scrollTo = (div: null | HTMLDivElement, offset: number = 180) =>
   div &&
   window.scrollTo({
     left: 0,
     // TODO: 180 is rough accounting for the navbar and searchbar;
     // could make these constants so we don't have to manually update
-    top: div.offsetTop - 180,
+    top: div.offsetTop - offset,
     behavior: 'smooth',
   });
 
@@ -91,6 +91,7 @@ const ChartsHolder = (props: {
   const icuUtilizationRef = useRef<HTMLDivElement>(null);
   const contactTracingRef = useRef<HTMLDivElement>(null);
   const futureProjectionsRef = useRef<HTMLDivElement>(null);
+  const shareBlockRef = useRef<HTMLDivElement>(null);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
@@ -162,6 +163,9 @@ const ChartsHolder = (props: {
               onTestPositiveClick={() => scrollTo(testPositiveRef.current)}
               onIcuUtilizationClick={() => scrollTo(icuUtilizationRef.current)}
               onContactTracingClick={() => scrollTo(contactTracingRef.current)}
+              onHeaderShareClick={() => scrollTo(shareBlockRef.current, -215)}
+              onHeaderSignupClick={() => scrollTo(shareBlockRef.current)}
+              isMobile={isMobile}
             />
             <MainContentInner>
               <ChartHeaderWrapper>
@@ -306,7 +310,9 @@ const ChartsHolder = (props: {
               countyId={props.county?.county_url_name}
             />
           </ChartContentWrapper>
-          <ShareModelBlock condensed={false} {...shareButtonProps} />
+          <div ref={shareBlockRef}>
+            <ShareModelBlock condensed={false} {...shareButtonProps} />
+          </div>
         </>
       )}
     </>
