@@ -66,7 +66,7 @@ export const SummaryStatWrapper = styled(Box)<{ condensed?: Boolean }>`
       border-bottom: 1px solid ${palette.lightGray};
       border-top: 1px solid ${palette.lightGray};
       margin: 0;
-      padding: 1.75rem 1.2rem 1.75rem 1rem;
+      padding: 1.5rem 1rem;
       flex-direction: column;
       align-items: center;
       max-width: 25%;
@@ -75,9 +75,9 @@ export const SummaryStatWrapper = styled(Box)<{ condensed?: Boolean }>`
         border-right: 1px solid ${palette.divider};
       }
 
-      &:first-child {
-        padding-top: 1.75rem;
-      }
+      // &:first-child {
+      //   padding-top: 1.75rem;
+      // }
     }
   `}
 `;
@@ -97,7 +97,7 @@ export const StatNameText = styled(Typography)<{ condensed?: Boolean }>`
   `
       : `
     font-weight: 600;
-    font-size: 1.125rem;
+    // font-size: 1.125rem;
     line-height: 1.25rem;
 
     text-transform: uppercase;
@@ -106,6 +106,8 @@ export const StatNameText = styled(Typography)<{ condensed?: Boolean }>`
 
     @media (min-width: 600px) {
       min-height: 0;
+      text-transform: none;
+      font-size: 1.125rem;
     }
   `}
 `;
@@ -154,6 +156,8 @@ export const StatDetailText = styled(Typography)`
   @media (min-width: 600px) {
     font-family: 'Roboto';
     margin-top: 0.25rem;
+    font-size: 0.875rem;
+    line-height: 1.125rem;
   }
 `;
 

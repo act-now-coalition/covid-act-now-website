@@ -39,6 +39,7 @@ export const SignalStatusWrapper = styled(Box)<{ condensed?: Boolean }>`
     @media (min-width: 600px) {
       min-width: 120px;
       margin: 0;
+      border: 1px solid #eeeeee;
     }
 
     svg {

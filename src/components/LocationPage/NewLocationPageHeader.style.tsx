@@ -61,6 +61,7 @@ export const HeaderSection = styled(Box)`
   background-color: #fbfbfb;
   display: flex;
   flex-direction: column;
+  cursor: default;
 
   &:first-child {
     border-radius: 5px 5px 0 0;
