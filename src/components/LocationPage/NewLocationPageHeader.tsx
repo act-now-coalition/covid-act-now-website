@@ -30,7 +30,6 @@ import { useModelLastUpdatedDate } from 'common/utils/model';
 import { STATES_WITH_DATA_OVERRIDES } from 'common/metrics/hospitalizations';
 import { Projections } from 'common/models/Projections';
 import { formatDate } from 'common/utils';
-import moment from 'moment';
 
 const RiskLevelGraphic = (props: {
   projections: Projections;

@@ -26,15 +26,6 @@ export const SummaryStatsWrapper = styled(Box)<{ condensed?: Boolean }>`
       background-color: white;
       position: relative;
     }
-    // @media (min-width: 932px) {
-    //   // margin: -3rem auto 0;
-    // }
-    // @media (min-width: 1350px) {
-    //   // margin: -3rem 445px 0 auto;
-    // }
-    // @media (min-width: 1750px) {
-    //   // margin: -3rem auto 0;
-    // }
   `}
 `;
 
@@ -74,10 +65,6 @@ export const SummaryStatWrapper = styled(Box)<{ condensed?: Boolean }>`
       &:not(:last-child) {
         border-right: 1px solid ${palette.divider};
       }
-
-      // &:first-child {
-      //   padding-top: 1.75rem;
-      // }
     }
   `}
 `;
@@ -97,7 +84,6 @@ export const StatNameText = styled(Typography)<{ condensed?: Boolean }>`
   `
       : `
     font-weight: 600;
-    // font-size: 1.125rem;
     line-height: 1.25rem;
 
     text-transform: uppercase;
