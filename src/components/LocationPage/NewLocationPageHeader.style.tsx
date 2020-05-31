@@ -212,9 +212,11 @@ export const HeaderButton = styled(Box)`
   }
 `;
 
-export const LastUpdatedDate = styled.span`
+export const LastUpdatedDate = styled.span<{
+  verifiedStateStyling?: Boolean;
+}>`
   display: flex;
-  margin-left: 40px;
+  margin-left: ${({ verifiedStateStyling }) => verifiedStateStyling && '40px'};
 
   @media (min-width: 600px) {
     display: inline;
