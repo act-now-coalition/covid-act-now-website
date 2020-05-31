@@ -180,7 +180,7 @@ const About = ({ children }: { children: React.ReactNode }) => {
             <em>The New York Times</em>, and is updated daily. You can see our
             data sources{' '}
             <a
-              href="https://docs.google.com/document/d/1cd_cEpNiIl1TzUJBvw9sHLbrbUZ2qCxgN32IqVLa3Do/edit?usp=sharing"
+              href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -193,11 +193,11 @@ const About = ({ children }: { children: React.ReactNode }) => {
             What R value do you use?
           </Typography>
           <Typography variant="body1" component="p">
-            Epidemiology models use a metric called R (pronounced “R”), which
-            effectively quantifies the disease’s “virality”: On average, how
-            many other people someone with the disease will infect. COVID R
-            values are educated guesses derived from disease data around the
-            country and the world.
+            Epidemiology models use a metric called “R,” which effectively
+            quantifies the disease’s “virality”: On average, how many other
+            people someone with the disease will infect. COVID R values are
+            educated guesses derived from disease data around the country and
+            the world.
           </Typography>
           <Typography variant="body1" component="p">
             The R value is then incorporated into an epidemiology model as a
