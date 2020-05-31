@@ -33,14 +33,14 @@ import { formatDate } from 'common/utils';
 
 const RiskLevelGraphic = (props: {
   projections: Projections;
-  level: number;
+  alarmLevel: number;
   levelName: string;
 }) => {
   return (
     <RiskLevelWrapper>
       <RiskLevel>{props.levelName}</RiskLevel>
-      <RiskLevelThermometer level={props.level} />
-      <Triangle level={props.level} />
+      <RiskLevelThermometer alarmLevel={props.alarmLevel} />
+      <Triangle alarmLevel={props.alarmLevel} />
       <RiskLevelTitle>Covid Risk Level</RiskLevelTitle>
     </RiskLevelWrapper>
   );
@@ -91,29 +91,39 @@ const NewLocationPageHeader = (props: {
   const verified = STATES_WITH_DATA_OVERRIDES.includes(
     props.projections.stateName,
   );
-  const [fillColor, textColor] =
-    alarmLevel !== Level.UNKNOWN
-      ? [levelInfo.color, palette.black]
-      : [COLOR_MAP.GRAY.LIGHT, palette.black];
+
+  const alarmLevelUnknown = alarmLevel === Level.UNKNOWN;
+
+  const headerTopMargin = alarmLevelUnknown ? -268 : -330;
+
+  const [fillColor, textColor] = !alarmLevelUnknown
+    ? [levelInfo.color, palette.black]
+    : [COLOR_MAP.GRAY.LIGHT, palette.black];
 
   const { isEmbed } = useEmbed();
 
-  const verifiedStateStyling = !props.projections.isCounty && verified;
+  const isVerifiedState = !props.projections.isCounty && verified;
 
   const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
   const lastUpdatedDateString =
     lastUpdatedDate !== null ? formatDate(lastUpdatedDate) : '';
 
   const RiskLevelGraphicProps = {
-    level: levelInfo.level,
+    alarmLevel,
     levelName: levelInfo.name,
     projections: props.projections,
   };
 
   return (
     <Fragment>
-      <ColoredHeaderBanner bgcolor={fillColor} />
-      <HeaderContainer condensed={props.condensed}>
+      <ColoredHeaderBanner
+        bgcolor={fillColor}
+        alarmLevelUnknown={alarmLevelUnknown}
+      />
+      <HeaderContainer
+        condensed={props.condensed}
+        headerTopMargin={headerTopMargin}
+      >
         <HeaderSection>
           <LocationCopyWrapper>
             <HeaderTitle isEmbed={isEmbed} textColor={textColor}>
@@ -137,7 +147,7 @@ const NewLocationPageHeader = (props: {
           isMobile={props.isMobile}
         />
         <HeaderSection>
-          <HeaderSubCopyWrapper verifiedStateStyling={verifiedStateStyling}>
+          <HeaderSubCopyWrapper isVerifiedState={isVerifiedState}>
             {props.projections.isCounty && !isEmbed && (
               <HeaderSubCopy textColor={textColor}>
                 <span>Updated {lastUpdatedDateString} · </span>
@@ -164,7 +174,7 @@ const NewLocationPageHeader = (props: {
                     <span>Government verified data · </span>
                   </Fragment>
                 )}
-                <LastUpdatedDate verifiedStateStyling={verifiedStateStyling}>
+                <LastUpdatedDate isVerifiedState={isVerifiedState}>
                   Updated {lastUpdatedDateString}
                 </LastUpdatedDate>
               </HeaderSubCopy>

@@ -3,21 +3,27 @@ import Typography from '@material-ui/core/Typography';
 import { Box } from '@material-ui/core';
 import palette from 'assets/theme/palette';
 import { COLORS } from 'common';
+import { Level } from 'common/level';
 
 //fix mobile banner height
 
-export const ColoredHeaderBanner = styled(Box)`
+export const ColoredHeaderBanner = styled(Box)<{ alarmLevelUnknown?: Boolean }>`
   display: flex;
   flex-direction: column;
   height: 400px;
   background-color: ${props => props.bgcolor || COLORS.LIGHTGRAY};
 
   @media (min-width: 600px) {
+    // height: ${({ alarmLevelUnknown }) =>
+      alarmLevelUnknown ? '318px' : '380px'};
     height: 380px;
   }
 `;
 
-export const HeaderContainer = styled(Box)<{ condensed?: Boolean }>`
+export const HeaderContainer = styled(Box)<{
+  condensed?: Boolean;
+  headerTopMargin: number;
+}>`
   ${props =>
     props.condensed
       ? `
@@ -40,18 +46,21 @@ export const HeaderContainer = styled(Box)<{ condensed?: Boolean }>`
 
     @media (min-width: 600px) {
       position: relative;
-      margin: -3rem 1rem 0;
       flex-direction: column;
+      // margin: ${props.headerTopMargin}px 1rem 0;
       margin: -330px 1rem 0;
     }
 
     @media (min-width: 932px) {
+      // margin: ${props.headerTopMargin}px auto 0;
       margin: -330px auto 0;
     }
     @media (min-width: 1350px) {
+      // margin: ${props.headerTopMargin}px 445px 0 auto;
       margin: -330px 445px 0 auto;
     }
     @media (min-width: 1750px) {
+      // margin: ${props.headerTopMargin}px auto 0;
       margin: -330px auto 0;
     }
   `}
@@ -122,10 +131,10 @@ export const HeaderSubtitle = styled(Typography)`
 `;
 
 export const HeaderSubCopyWrapper = styled(Box)<{
-  verifiedStateStyling?: Boolean;
+  isVerifiedState?: Boolean;
 }>`
-  margin: ${({ verifiedStateStyling }) =>
-    verifiedStateStyling ? '.4rem 1rem 1rem;' : '1rem'};
+  margin: ${({ isVerifiedState }) =>
+    isVerifiedState ? '.4rem 1rem 1rem;' : '1rem'};
 
   p {
     padding: 0;
@@ -137,8 +146,8 @@ export const HeaderSubCopyWrapper = styled(Box)<{
   }
 
   @media (min-width: 600px) {
-    margin: ${({ verifiedStateStyling }) =>
-      verifiedStateStyling
+    margin: ${({ isVerifiedState }) =>
+      isVerifiedState
         ? '1.5rem 0.875rem 2rem 1.5rem'
         : '1.5rem 0.875rem 1.5rem 1.5rem'};
 
@@ -213,10 +222,10 @@ export const HeaderButton = styled(Box)`
 `;
 
 export const LastUpdatedDate = styled.span<{
-  verifiedStateStyling?: Boolean;
+  isVerifiedState?: Boolean;
 }>`
   display: flex;
-  margin-left: ${({ verifiedStateStyling }) => verifiedStateStyling && '40px'};
+  margin-left: ${({ isVerifiedState }) => isVerifiedState && '40px'};
 
   @media (min-width: 600px) {
     display: inline;
@@ -270,24 +279,28 @@ export const RiskLevel = styled.span`
   font-weight: bold;
 `;
 
-export const RiskLevelThermometer = styled(Box)<{ level: number }>`
+export const RiskLevelThermometer = styled(Box)<{ alarmLevel: number }>`
   height: 8px;
   width: 96px;
   margin-top: 0.5rem;
   border-radius: 5px;
-  background: ${({ level }) =>
-    level === 3
+  background: ${({ alarmLevel }) =>
+    alarmLevel === Level.UNKNOWN
       ? '#e3e3e3'
       : 'linear-gradient(to right, rgb(0, 208, 125), rgb(0, 208, 125) 33.33%, #FFAB00 33.33%, #FFAB00 66.66%, #FF0034 66.66%)'};
 `;
 
-export const Triangle = styled(Box)<{ level: number }>`
+export const Triangle = styled(Box)<{ alarmLevel: number }>`
   width: 0;
   height: 0;
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
   border-bottom: 6px solid black;
   margin-top: 6px;
-  margin-left: ${({ level }) =>
-    level === 0 ? '-64px' : level === 2 ? '64px' : '0'};
+  margin-left: ${({ alarmLevel }) =>
+    alarmLevel === Level.LOW
+      ? '-64px'
+      : alarmLevel === Level.HIGH
+      ? '64px'
+      : '0'};
 `;
