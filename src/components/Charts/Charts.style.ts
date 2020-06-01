@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const charts = {
-  fontFamily: "'Source Code Pro', 'Roboto', sans-serif",
+  fontFamily: "'Source Code Pro', 'Roboto Mono', monospace",
   fontWeight: 'bold',
   fontSize: '13px',
   series: {
