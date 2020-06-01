@@ -67,7 +67,7 @@ export function positiveTestsStatusText(projection: Projection) {
     'significant',
     'relatively high',
   );
-  const percentage = formatPercent(testPositiveRate);
+  const percentage = formatPercent(testPositiveRate, 1);
 
   const location = projection.locationName;
   const testingBroadlyText = levelText(
