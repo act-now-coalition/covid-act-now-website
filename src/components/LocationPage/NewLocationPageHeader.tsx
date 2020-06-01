@@ -30,6 +30,7 @@ import { useModelLastUpdatedDate } from 'common/utils/model';
 import { STATES_WITH_DATA_OVERRIDES } from 'common/metrics/hospitalizations';
 import { Projections } from 'common/models/Projections';
 import { formatDate } from 'common/utils';
+import { isNull } from 'util';
 
 const RiskLevelGraphic = (props: {
   projections: Projections;
@@ -83,6 +84,10 @@ const NewLocationPageHeader = (props: {
 }) => {
   const alarmLevel = props.projections.getAlarmLevel();
 
+  const hasStats = !!Object.values(props.stats).filter(
+    (val: number | null) => !isNull(val),
+  ).length;
+
   const levelInfo = LOCATION_SUMMARY_LEVELS[alarmLevel];
 
   const locationName =
@@ -92,13 +97,13 @@ const NewLocationPageHeader = (props: {
     props.projections.stateName,
   );
 
-  const alarmLevelUnknown = alarmLevel === Level.UNKNOWN;
+  const headerTopMargin = !hasStats ? -268 : -330;
+  const headerBottomMargin = !hasStats ? 115 : 0;
 
-  const headerTopMargin = alarmLevelUnknown ? -268 : -330;
-
-  const [fillColor, textColor] = !alarmLevelUnknown
-    ? [levelInfo.color, palette.black]
-    : [COLOR_MAP.GRAY.LIGHT, palette.black];
+  const [fillColor, textColor] =
+    alarmLevel !== Level.UNKNOWN
+      ? [levelInfo.color, palette.black]
+      : [COLOR_MAP.GRAY.LIGHT, palette.black];
 
   const { isEmbed } = useEmbed();
 
@@ -116,13 +121,11 @@ const NewLocationPageHeader = (props: {
 
   return (
     <Fragment>
-      <ColoredHeaderBanner
-        bgcolor={fillColor}
-        alarmLevelUnknown={alarmLevelUnknown}
-      />
+      <ColoredHeaderBanner bgcolor={fillColor} hasStats={hasStats} />
       <HeaderContainer
         condensed={props.condensed}
         headerTopMargin={headerTopMargin}
+        headerBottomMargin={headerBottomMargin}
       >
         <HeaderSection>
           <LocationCopyWrapper>

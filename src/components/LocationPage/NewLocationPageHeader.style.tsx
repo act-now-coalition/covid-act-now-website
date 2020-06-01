@@ -5,24 +5,21 @@ import palette from 'assets/theme/palette';
 import { COLORS } from 'common';
 import { Level } from 'common/level';
 
-//fix mobile banner height
-
-export const ColoredHeaderBanner = styled(Box)<{ alarmLevelUnknown?: Boolean }>`
+export const ColoredHeaderBanner = styled(Box)<{ hasStats?: Boolean }>`
   display: flex;
   flex-direction: column;
   height: 400px;
   background-color: ${props => props.bgcolor || COLORS.LIGHTGRAY};
 
   @media (min-width: 600px) {
-    // height: ${({ alarmLevelUnknown }) =>
-      alarmLevelUnknown ? '318px' : '380px'};
-    height: 380px;
+    height: ${({ hasStats }) => (!hasStats ? '318px' : '380px')};
   }
 `;
 
 export const HeaderContainer = styled(Box)<{
   condensed?: Boolean;
   headerTopMargin: number;
+  headerBottomMargin: number;
 }>`
   ${props =>
     props.condensed
@@ -47,21 +44,17 @@ export const HeaderContainer = styled(Box)<{
     @media (min-width: 600px) {
       position: relative;
       flex-direction: column;
-      // margin: ${props.headerTopMargin}px 1rem 0;
-      margin: -330px 1rem 0;
+      margin: ${props.headerTopMargin}px 1rem ${props.headerBottomMargin}px;
     }
 
     @media (min-width: 932px) {
-      // margin: ${props.headerTopMargin}px auto 0;
-      margin: -330px auto 0;
+      margin: ${props.headerTopMargin}px auto ${props.headerBottomMargin}px;
     }
     @media (min-width: 1350px) {
-      // margin: ${props.headerTopMargin}px 445px 0 auto;
-      margin: -330px 445px 0 auto;
+      margin: ${props.headerTopMargin}px 445px ${props.headerBottomMargin}px auto;
     }
     @media (min-width: 1750px) {
-      // margin: ${props.headerTopMargin}px auto 0;
-      margin: -330px auto 0;
+      margin: ${props.headerTopMargin}px auto ${props.headerBottomMargin}px;
     }
   `}
 `;
