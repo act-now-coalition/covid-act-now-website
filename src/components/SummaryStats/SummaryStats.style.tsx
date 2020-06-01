@@ -92,8 +92,7 @@ export const StatNameText = styled(Typography)<{ condensed?: Boolean }>`
 
     @media (min-width: 600px) {
       min-height: 0;
-      text-transform: none;
-      font-size: 1.125rem;
+      font-size: 1rem;
     }
   `}
 `;
@@ -140,9 +139,8 @@ export const StatDetailText = styled(Typography)`
   line-height: 1.4;
 
   @media (min-width: 600px) {
-    font-family: 'Roboto';
     margin-top: 0.25rem;
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     line-height: 1.125rem;
   }
 `;

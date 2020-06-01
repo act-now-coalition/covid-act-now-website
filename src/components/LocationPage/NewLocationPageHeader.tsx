@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import CheckIcon from '@material-ui/icons/Check';
-import palette from 'assets/theme/palette';
 import SummaryStats from 'components/SummaryStats/SummaryStats';
 import {
   ColoredHeaderBanner,

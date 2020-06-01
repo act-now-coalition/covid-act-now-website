@@ -31,14 +31,14 @@ export const HeaderContainer = styled(Box)<{
     align-items: stretch;
     justify-content: space-around;
     background-color: unset;
-    border-radius: 0;
+    border-radius: 8px;
     box-shadow: none;
     max-width: 900px;
     flex-direction: column;
     cursor: pointer;
     margin-left: 1rem;
     margin-right: 1rem;
-    margin-top: -350px;
+    margin-top: -380px;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.12);
 
     @media (min-width: 600px) {
@@ -66,11 +66,11 @@ export const HeaderSection = styled(Box)`
   cursor: default;
 
   &:first-child {
-    border-radius: 5px 5px 0 0;
+    border-radius: 8px 8px 0 0;
   }
 
   &:last-child {
-    border-radius: 0 0 5px 5px;
+    border-radius: 0 0 8px 8px;
     justify-content: space-between;
   }
 
@@ -82,7 +82,7 @@ export const HeaderSection = styled(Box)`
 
 export const LocationCopyWrapper = styled(Box)`
   line-height: 1.4;
-  margin: 1.5rem;
+  margin: 1.5rem 1rem;
 
   @media (min-width: 600px) {
     margin: 2.25rem 0.875rem 2.25rem 2.25rem;
@@ -175,10 +175,12 @@ export const ButtonsWrapper = styled(Box)`
   width: 100%;
   margin-right: 1.5rem;
   background-color: white;
+  border-radius: 0 0 8px 8px;
 
   @media (min-width: 600px) {
     width: fit-content;
     background-color: unset;
+    border-radius: 0;
   }
 `;
 
