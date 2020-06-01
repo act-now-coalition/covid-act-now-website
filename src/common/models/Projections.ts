@@ -109,10 +109,10 @@ export class Projections {
       contact_tracing_level,
     } = this.getLevels();
 
-    // TODO(https://trello.com/c/ybqacRAN): Montana ICU disappeared and we don't
+    // TODO(https://trello.com/c/ybqacRAN): Hawaii ICU disappeared and we don't
     // want that to pull the state grey.
     const levelList =
-      this.stateCode === 'MT'
+      this.stateCode === 'HI'
         ? [rt_level, test_rate_level]
         : [rt_level, hospitalizations_level, test_rate_level];
 
