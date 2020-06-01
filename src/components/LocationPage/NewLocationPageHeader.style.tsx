@@ -3,6 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import { Box } from '@material-ui/core';
 import palette from 'assets/theme/palette';
 import { COLORS } from 'common';
+import { COLOR_MAP } from 'common/colors';
 import { Level } from 'common/level';
 
 export const ColoredHeaderBanner = styled(Box)<{ hasStats?: Boolean }>`
@@ -160,7 +161,7 @@ export const HeaderSubCopy = styled(Typography)`
   }
 
   svg {
-    margin: 0 1rem 0 0;
+    margin: 0 0.5rem 0 0;
     flex-shrink: 0;
   }
 
@@ -219,7 +220,7 @@ export const LastUpdatedDate = styled.span<{
   isVerifiedState?: Boolean;
 }>`
   display: flex;
-  margin-left: ${({ isVerifiedState }) => isVerifiedState && '40px'};
+  margin-left: ${({ isVerifiedState }) => isVerifiedState && '32px'};
 
   @media (min-width: 600px) {
     display: inline;
@@ -275,13 +276,13 @@ export const RiskLevel = styled.span`
 
 export const RiskLevelThermometer = styled(Box)<{ alarmLevel: number }>`
   height: 8px;
-  width: 96px;
+  width: 128px;
   margin-top: 0.5rem;
   border-radius: 5px;
   background: ${({ alarmLevel }) =>
     alarmLevel === Level.UNKNOWN
       ? '#e3e3e3'
-      : 'linear-gradient(to right, rgb(0, 208, 125), rgb(0, 208, 125) 33.33%, #FFAB00 33.33%, #FFAB00 66.66%, #FF0034 66.66%)'};
+      : `linear-gradient(to right, ${COLOR_MAP.GREEN.BASE}, ${COLOR_MAP.GREEN.BASE} 25%, ${COLOR_MAP.ORANGE.BASE} 25%, ${COLOR_MAP.ORANGE.BASE} 50%, #FF6D00 50%, #FF6D00 75%, ${COLOR_MAP.RED.BASE} 75%)`};
 `;
 
 export const Triangle = styled(Box)<{ alarmLevel: number }>`
@@ -293,8 +294,8 @@ export const Triangle = styled(Box)<{ alarmLevel: number }>`
   margin-top: 6px;
   margin-left: ${({ alarmLevel }) =>
     alarmLevel === Level.LOW
-      ? '-64px'
-      : alarmLevel === Level.HIGH
-      ? '64px'
-      : '0'};
+      ? '-96px'
+      : alarmLevel === Level.MEDIUM
+      ? '-32px'
+      : '96px'};
 `;

@@ -98,13 +98,6 @@ const NewLocationPageHeader = (props: {
   const fillColor =
     alarmLevel !== Level.UNKNOWN ? levelInfo.color : COLOR_MAP.GRAY.LIGHT;
 
-  // const [fillColor, textColor] =
-  //   alarmLevel !== Level.UNKNOWN
-  //     ? [levelInfo.color, palette.black]
-  //     : [COLOR_MAP.GRAY.LIGHT, palette.black];
-
-  // console.log('fill color, textcolor', [fillColor, textColor])
-
   const { isEmbed } = useEmbed();
 
   const verified = STATES_WITH_DATA_OVERRIDES.includes(
