@@ -91,7 +91,6 @@ export const LocationCopyWrapper = styled(Box)`
 
 export const HeaderTitle = styled(Typography)<{
   isEmbed?: Boolean;
-  textColor: string;
 }>`
   color: ${palette.black};
   font-size: ${props => (props.isEmbed ? '1.8rem' : '22px')};
@@ -101,7 +100,7 @@ export const HeaderTitle = styled(Typography)<{
   text-align: center;
 
   a {
-    color: ${props => props.textColor || palette.black};
+    color: ${palette.black};
     text-decoration: none;
   }
 
@@ -150,7 +149,7 @@ export const HeaderSubCopyWrapper = styled(Box)<{
   }
 `;
 
-export const HeaderSubCopy = styled(Typography)<{ textColor: string }>`
+export const HeaderSubCopy = styled(Typography)`
   color: #828282;
   font-size: 13px;
   line-height: 1.4;

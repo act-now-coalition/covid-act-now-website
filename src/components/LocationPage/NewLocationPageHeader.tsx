@@ -82,30 +82,35 @@ const NewLocationPageHeader = (props: {
   onHeaderSignupClick: () => void;
   isMobile?: Boolean;
 }) => {
-  const alarmLevel = props.projections.getAlarmLevel();
-
   const hasStats = !!Object.values(props.stats).filter(
     (val: number | null) => !isNull(val),
   ).length;
 
-  const levelInfo = LOCATION_SUMMARY_LEVELS[alarmLevel];
+  const headerTopMargin = !hasStats ? -268 : -330;
+  const headerBottomMargin = !hasStats ? 115 : 0;
 
   const locationName =
     props.projections.countyName || props.projections.stateName;
 
+  const alarmLevel = props.projections.getAlarmLevel();
+
+  const levelInfo = LOCATION_SUMMARY_LEVELS[alarmLevel];
+
+  const fillColor =
+    alarmLevel !== Level.UNKNOWN ? levelInfo.color : COLOR_MAP.GRAY.LIGHT;
+
+  // const [fillColor, textColor] =
+  //   alarmLevel !== Level.UNKNOWN
+  //     ? [levelInfo.color, palette.black]
+  //     : [COLOR_MAP.GRAY.LIGHT, palette.black];
+
+  // console.log('fill color, textcolor', [fillColor, textColor])
+
+  const { isEmbed } = useEmbed();
+
   const verified = STATES_WITH_DATA_OVERRIDES.includes(
     props.projections.stateName,
   );
-
-  const headerTopMargin = !hasStats ? -268 : -330;
-  const headerBottomMargin = !hasStats ? 115 : 0;
-
-  const [fillColor, textColor] =
-    alarmLevel !== Level.UNKNOWN
-      ? [levelInfo.color, palette.black]
-      : [COLOR_MAP.GRAY.LIGHT, palette.black];
-
-  const { isEmbed } = useEmbed();
 
   const isVerifiedState = !props.projections.isCounty && verified;
 
@@ -113,7 +118,7 @@ const NewLocationPageHeader = (props: {
   const lastUpdatedDateString =
     lastUpdatedDate !== null ? formatDate(lastUpdatedDate) : '';
 
-  const RiskLevelGraphicProps = {
+  const riskLevelGraphicProps = {
     alarmLevel,
     levelName: levelInfo.name,
     projections: props.projections,
@@ -129,16 +134,16 @@ const NewLocationPageHeader = (props: {
       >
         <HeaderSection>
           <LocationCopyWrapper>
-            <HeaderTitle isEmbed={isEmbed} textColor={textColor}>
+            <HeaderTitle isEmbed={isEmbed}>
               <LocationPageHeading projections={props.projections} />
             </HeaderTitle>
             <RiskLevelGraphicMobile>
-              <RiskLevelGraphic {...RiskLevelGraphicProps} />
+              <RiskLevelGraphic {...riskLevelGraphicProps} />
             </RiskLevelGraphicMobile>
             <HeaderSubtitle>{levelInfo.detail(locationName)}</HeaderSubtitle>
           </LocationCopyWrapper>
           <RiskLevelGraphicDesktop>
-            <RiskLevelGraphic {...RiskLevelGraphicProps} />
+            <RiskLevelGraphic {...riskLevelGraphicProps} />
           </RiskLevelGraphicDesktop>
         </HeaderSection>
         <SummaryStats
@@ -152,7 +157,7 @@ const NewLocationPageHeader = (props: {
         <HeaderSection>
           <HeaderSubCopyWrapper isVerifiedState={isVerifiedState}>
             {props.projections.isCounty && !isEmbed && (
-              <HeaderSubCopy textColor={textColor}>
+              <HeaderSubCopy>
                 <span>Updated {lastUpdatedDateString} · </span>
                 <span>County data is currently in beta. </span>
                 <span>
@@ -170,7 +175,7 @@ const NewLocationPageHeader = (props: {
               </HeaderSubCopy>
             )}
             {!props.projections.isCounty && !isEmbed && (
-              <HeaderSubCopy textColor={textColor}>
+              <HeaderSubCopy>
                 {verified && (
                   <Fragment>
                     <CheckIcon htmlColor="#00D474" />
