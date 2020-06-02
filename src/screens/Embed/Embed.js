@@ -8,11 +8,9 @@ import { useProjections } from 'common/utils/model';
 import { useEmbed } from 'common/utils/hooks';
 import { Projection } from 'common/models/Projection';
 import { Metric } from 'common/metric';
-import { useModelLastUpdatedDate } from 'common/utils/model';
 import { Level } from 'common/level';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { COLOR_MAP } from 'common/colors';
-import { STATES } from 'common';
 import LogoUrlLight from 'assets/images/logoUrlLight';
 import SummaryStats from 'components/SummaryStats/SummaryStats';
 import {
@@ -36,7 +34,6 @@ export default function Embed() {
 
   const [selectedCounty, setSelectedCounty] = useState(null);
   const [location, setLocation] = useState(null);
-  const { iFrameCodeSnippet } = useEmbed();
   useMemo(() => {
     let state = null,
       county = null;
@@ -70,9 +67,9 @@ export default function Embed() {
     };
   };
 
-  const projection = projections ? projections.primary : {};
+  const projection = projections && projections.primary;
 
-  const stats = projection ? getChartSummarys(projection) : {};
+  const stats = projection && getChartSummarys(projection);
 
   if (!projections) {
     return null;
@@ -89,7 +86,7 @@ export default function Embed() {
     alarmLevel !== Level.UNKNOWN ? levelInfo.color : COLOR_MAP.GRAY.LIGHT;
 
   return (
-    <EmbedContainer elevation="2">
+    <EmbedContainer>
       <EmbedWrapper>
         <EmbedHeaderWrapper>
           <HeaderText>
