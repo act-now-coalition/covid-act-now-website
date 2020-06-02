@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Box, Typography } from '@material-ui/core';
 import palette from 'assets/theme/palette';
+import { COLOR_MAP } from 'common/colors';
 
 export const SummaryStatsWrapper = styled(Box)<{ condensed?: Boolean }>`
   ${props =>
@@ -49,10 +50,15 @@ export const SummaryStatWrapper = styled(Box)<{ condensed?: Boolean }>`
       ? `
     display: flex;
     align-items: center;
-    margin-bottom: 0.75rem;
+    cursor: pointer;
+    padding: 14px 17px;
 
     &:last-child {
       margin-bottom: 0;
+    }
+
+    &:hover {
+      background-color: ${COLOR_MAP.GRAY.LIGHT};
     }
   `
       : `

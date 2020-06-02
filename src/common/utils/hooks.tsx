@@ -1,8 +1,8 @@
 import { useLocation, useParams } from 'react-router-dom';
 
 // TODO: Mv to enums?
-const EMBED_WIDTH = 350;
-const EMBED_HEIGHT = 700;
+const EMBED_WIDTH = 375;
+const EMBED_HEIGHT = 393;
 
 export function useEmbed() {
   // Check if we're embedded in an iFrame

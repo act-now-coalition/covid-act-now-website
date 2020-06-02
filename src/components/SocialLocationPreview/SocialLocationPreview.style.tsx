@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import palette from 'assets/theme/palette';
 import Typography from '@material-ui/core/Typography';
 
@@ -13,12 +13,16 @@ export const Wrapper = styled.div<{ hasMap?: Boolean }>`
   pointer-events: none;
 `;
 
-export const PreviewHeader = styled.div`
+export const PreviewHeaderStyles = css`
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   padding: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+`;
+
+export const PreviewHeader = styled.div`
+  ${PreviewHeaderStyles}
 `;
 
 export const MapWrapper = styled.div`
@@ -31,12 +35,16 @@ export const PreviewBody = styled.div`
   padding: 1.5rem;
 `;
 
-export const PreviewFooter = styled.div`
+export const PreviewFooterStyles = css`
   background-color: #fbfbfb;
   padding: 1rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+`;
+
+export const PreviewFooter = styled.div`
+  ${PreviewFooterStyles}
 `;
 
 export const FooterText = styled(Typography)`

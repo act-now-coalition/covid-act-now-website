@@ -35,7 +35,7 @@ export const CenteredModal = styled(Modal)`
 
 export const EmbedPreviewScrollContainer = styled(Box)`
   max-height: 95vh;
-  overflow-y: hidden;
+  overflow-y: scroll;
 `;
 
 export const EmbedPreviewStyled = styled(Paper)`
@@ -45,8 +45,7 @@ export const EmbedPreviewStyled = styled(Paper)`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem 0;
-  padding: 1rem;
+  padding: 3rem;
 `;
 
 export const EmbedDetailsStyled = styled(Paper)`
@@ -54,7 +53,10 @@ export const EmbedDetailsStyled = styled(Paper)`
   flex-direction: column;
   align-items: center;
   padding: ${props => (props.condensed ? '0.5rem 2rem' : '1rem')};
-  margin: ${props => (props.condensed ? '0 0 0.5rem' : '2rem')};
+  margin: ${props => !props.condensed && '0 2rem'};
+  box-shadow: none;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
 `;
 
 export const CodeSnippetPreview = styled.pre`

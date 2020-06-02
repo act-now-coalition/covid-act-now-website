@@ -1,9 +1,12 @@
 import styled, { createGlobalStyle } from 'styled-components';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
+import { Box, Grid, Typography, Paper, Button } from '@material-ui/core';
 import { COLORS } from 'common';
+import { COLOR_MAP } from 'common/colors';
+import palette from 'assets/theme/palette';
+import {
+  PreviewFooterStyles,
+  PreviewHeaderStyles,
+} from 'components/SocialLocationPreview/SocialLocationPreview.style';
 
 // EMBED GLOBAL STYLES
 export const EmbedGlobalStyle = createGlobalStyle`
@@ -20,10 +23,10 @@ export const EmbedContainer = styled(Paper)`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 3px;
   overflow: hidden;
-  border-radius: 3px;
-  height: 660px;
+  border-radius: 4px;
+  height: 393px;
+  width: 375px;
 `;
 
 export const EmbedContentContainer = styled(Box)`
@@ -120,4 +123,58 @@ export const FooterLogoWrapper = styled(Box)`
   max-width: 0.5rem;
   padding-top: 7px;
   padding-right: 70px;
+`;
+
+export const EmbedWrapper = styled(Box)`
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border: 24px solid ${COLOR_MAP.GRAY.DARK};
+
+  @media screen and (min-width: 600px) {
+    border-radius: 4px;
+    flex-grow: 1;
+    justify-content: space-between;
+  }
+`;
+
+export const Wrapper = styled(Box)`
+  border-radius: 4px;
+  color: black;
+  background-color: ${palette.white};
+  width: 100%;
+`;
+
+export const EmbedFooterWrapper = styled(Box)`
+  ${PreviewFooterStyles}
+  width: 100%;
+  font-size: 10px;
+  padding: 0.7rem 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+`;
+
+export const EmbedBody = styled(Box)`
+  width: 100%;
+`;
+
+export const EmbedHeaderWrapper = styled(Box)`
+  ${PreviewHeaderStyles}
+  width: 100%;
+  padding: 25px 17px;
+`;
+
+export const FooterDate = styled(Typography)`
+  font-family: 'Source Code Pro', Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 0.875rem;
+  color: rgba(0, 0, 0, 0.7);
+`;
+
+export const LogoWrapper = styled.a`
+  padding-top: 7px;
+  padding-right: 1.5rem;
+  cursor: pointer;
 `;
