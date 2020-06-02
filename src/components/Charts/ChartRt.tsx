@@ -2,7 +2,6 @@ import React from 'react';
 import moment from 'moment';
 import { isDate } from 'lodash';
 import { min as d3min, max as d3max } from 'd3-array';
-import { AxisBottom, AxisLeft } from '@vx/axis';
 import { curveNatural } from '@vx/curve';
 import { GridRows } from '@vx/grid';
 import { Group } from '@vx/group';
@@ -12,11 +11,12 @@ import { Area } from '@vx/shape';
 import { Column, RtRange, RT_TRUNCATION_DAYS } from 'common/models/Projection';
 import { CASE_GROWTH_RATE_LEVEL_INFO_MAP as zones } from 'common/metrics/case_growth';
 import { formatDate, formatDecimal } from 'common/utils';
+import { AxisBottom, AxisLeft } from './Axis';
 import BoxedAnnotation from './BoxedAnnotation';
+import ChartContainer from './ChartContainer';
 import RectClipGroup from './RectClipGroup';
 import ZoneAnnotation from './ZoneAnnotation';
 import ZoneLinePath from './ZoneLinePath';
-import ChartContainer from './ChartContainer';
 import Tooltip from './Tooltip';
 import * as TooltipStyle from './Tooltip.style';
 import * as Style from './Charts.style';
@@ -201,23 +201,8 @@ const ChartRt = ({
         cy={yTruncationRt}
         r={6}
       />
-      <Style.Axis>
-        <AxisBottom
-          top={chartHeight}
-          scale={xScale}
-          numTicks={Math.round(chartWidth / 100)}
-        />
-      </Style.Axis>
-      <Style.Axis>
-        <AxisLeft
-          top={marginTop}
-          scale={yScale}
-          tickValues={yTicks}
-          hideAxisLine
-          hideTicks
-          hideZero
-        />
-      </Style.Axis>
+      <AxisBottom top={chartHeight} scale={xScale} />
+      <AxisLeft top={marginTop} scale={yScale} tickValues={yTicks} />
     </ChartContainer>
   );
 };
