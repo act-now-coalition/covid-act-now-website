@@ -26,6 +26,12 @@ import ProjectionsTab from './ProjectionsTab';
 import ChartsTab from './ChartsTab';
 import EmbedFooter from './EmbedFooter';
 
+import SocialLocationPreview from 'components/SocialLocationPreview/SocialLocationPreview';
+
+import { Projections } from 'common/models/Projections';
+import { Projection } from 'common/models/Projection';
+import { Metric, getMetricName } from 'common/metric';
+
 export default function Embed() {
   const { stateId: _location, countyId, countyFipsId } = useParams();
 
@@ -60,6 +66,19 @@ export default function Embed() {
 
   const projections = useProjections(location, selectedCounty);
   const locationName = STATES[location];
+
+  const getChartSummarys = (projection = Projection) => {
+    return {
+      [Metric.CASE_GROWTH_RATE]: projection.rt,
+      [Metric.HOSPITAL_USAGE]: projection.currentIcuUtilization,
+      [Metric.POSITIVE_TESTS]: projection.currentTestPositiveRate,
+      [Metric.CONTACT_TRACING]: projection.currentContactTracerMetric,
+    };
+  };
+
+  const projection = projections ? projections.primary : {};
+
+  const stats = projection ? getChartSummarys(projection) : {};
 
   if (!projections) {
     return null;
