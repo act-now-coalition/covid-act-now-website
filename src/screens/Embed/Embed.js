@@ -28,7 +28,6 @@ import {
   FooterDate,
   LogoWrapper,
 } from './Embed.style';
-import * as urls from 'common/urls';
 
 export default function Embed() {
   const { stateId: _location, countyId, countyFipsId } = useParams();

@@ -139,13 +139,6 @@ export const EmbedWrapper = styled(Box)`
   }
 `;
 
-export const Wrapper = styled(Box)`
-  border-radius: 4px;
-  color: black;
-  background-color: ${palette.white};
-  width: 100%;
-`;
-
 export const EmbedFooterWrapper = styled(Box)`
   ${PreviewFooterStyles}
   width: 100%;
