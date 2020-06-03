@@ -91,12 +91,10 @@ const ShareBlock = ({
             <NewsletterMockup />
           </NewsletterMockupWrapper>
           <NewsletterTextArea>
-            <ShareInstructionHeader>
-              Receive daily updates
-            </ShareInstructionHeader>
+            <ShareInstructionHeader>Email alerts</ShareInstructionHeader>
             <ShareInstructionBody>
-              We’ll email you fresh data and high-quality news related to
-              COVID-19.
+              We'll email you when your state or county sees a signicant change
+              in one of their metrics or overall threat score.
             </ShareInstructionBody>
             <Newsletter county={countyName} stateId={stateId} />
           </NewsletterTextArea>
