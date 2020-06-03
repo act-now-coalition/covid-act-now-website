@@ -130,7 +130,7 @@ export const EmbedWrapper = styled(Box)`
   display: flex;
   align-items: center;
   flex-direction: column;
-  border: 24px solid ${COLOR_MAP.GRAY.DARK};
+  border: 24px solid rgba(0, 0, 0, 0.7);
 
   @media screen and (min-width: 600px) {
     border-radius: 4px;
