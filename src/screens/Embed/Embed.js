@@ -28,6 +28,7 @@ import {
   FooterDate,
   LogoWrapper,
 } from './Embed.style';
+import * as urls from 'common/urls';
 
 export default function Embed() {
   const { stateId: _location, countyId, countyFipsId } = useParams();
@@ -85,6 +86,14 @@ export default function Embed() {
   const fillColor =
     alarmLevel !== Level.UNKNOWN ? levelInfo.color : COLOR_MAP.GRAY.LIGHT;
 
+  const embedOnClickBaseURL = projections
+    ? `https://covidactnow.org/us/${location.toLowerCase()}${
+        projections.isCounty
+          ? `/county/${projections.county.county_url_name}`
+          : ''
+      }`
+    : '';
+
   return (
     <EmbedContainer>
       <EmbedWrapper>
@@ -100,7 +109,12 @@ export default function Embed() {
           <AlarmLevel color={fillColor}>{levelInfo.name}</AlarmLevel>
         </EmbedHeaderWrapper>
         <EmbedBody>
-          <SummaryStats stats={stats} condensed={true} />
+          <SummaryStats
+            stats={stats}
+            condensed={true}
+            isEmbed={true}
+            embedOnClickBaseURL={embedOnClickBaseURL}
+          />
         </EmbedBody>
         <EmbedFooterWrapper>
           <LogoWrapper
