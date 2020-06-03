@@ -5,7 +5,7 @@ import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset
 import '../../App.css'; /* optional for styling like the :hover pseudo-class */
 import { findCountyByFips } from 'common/locations';
 import { useProjections } from 'common/utils/model';
-import { useEmbed } from 'common/utils/hooks';
+import { useModelLastUpdatedDate } from 'common/utils/model';
 import { Projection } from 'common/models/Projection';
 import { Metric } from 'common/metric';
 import { Level } from 'common/level';
@@ -32,6 +32,10 @@ import * as urls from 'common/urls';
 
 export default function Embed() {
   const { stateId: _location, countyId, countyFipsId } = useParams();
+
+  const lastUpdatedDate = useModelLastUpdatedDate() || new Date();
+  const lastUpdatedDateString =
+    lastUpdatedDate && lastUpdatedDate.toLocaleDateString();
 
   const [selectedCounty, setSelectedCounty] = useState(null);
   const [location, setLocation] = useState(null);
@@ -124,7 +128,7 @@ export default function Embed() {
           >
             <LogoUrlLight height={15} />
           </LogoWrapper>
-          <FooterDate>Last Updated 5/29/2020</FooterDate>
+          <FooterDate>Last Updated {lastUpdatedDateString}</FooterDate>
         </EmbedFooterWrapper>
       </EmbedWrapper>
     </EmbedContainer>
