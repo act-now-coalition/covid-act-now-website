@@ -9,7 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import * as QueryString from 'query-string';
-import { assert } from 'common/utils';
+import { assert, fail } from 'common/utils';
 import { MetricChart } from 'components/Charts';
 import { STATES } from 'common';
 import { useAllStateProjections } from 'common/utils/model';
@@ -28,8 +28,6 @@ import { Metric, getMetricName } from 'common/metric';
 // * Add a chart that overlays the two series on top of each other.
 // * Include counties.  We could fetch all the counties and then use our sorting
 //   to find the ~50 with biggest changes.
-// * Add Test Positive metric.
-// * Add Future Projections chart.
 // * Show the diff value (the RMSD of the series or the delta between metric values).
 // * Automatically find the latest snapshot (probably by just incrementing the
 //   snapshot number until it 404s)
@@ -109,9 +107,22 @@ function CompareModelsMain({ masterSnapshot, location }) {
 
   function getSeriesDiffForState(stateAbbr) {
     const getDataset = projection => {
-      return metric === Metric.HOSPITAL_USAGE
-        ? projection.getDataset('icuUtilization')
-        : projection.getDataset('rtRange').map(d => ({ x: d.x, y: d.y?.rt }));
+      switch (metric) {
+        case Metric.CASE_GROWTH_RATE:
+          return projection
+            .getDataset('rtRange')
+            .map(d => ({ x: d.x, y: d.y?.rt }));
+        case Metric.POSITIVE_TESTS:
+          return projection.getDataset('testPositiveRate');
+        case Metric.HOSPITAL_USAGE:
+          return projection.getDataset('icuUtilization');
+        case Metric.CONTACT_TRACING:
+          return projection.getDataset('contactTracers');
+        case Metric.FUTURE_PROJECTIONS:
+          return projection.getDataset('hospitalizations');
+        default:
+          fail('Unknown metric: ' + metric);
+      }
     };
 
     const leftDataset = getDataset(leftStateProjections[stateAbbr].primary);
@@ -181,9 +192,20 @@ function CompareModelsMain({ masterSnapshot, location }) {
 
   function getMetricDiffForState(stateAbbr) {
     const getMetric = projection => {
-      return metric === Metric.HOSPITAL_USAGE
-        ? projection.currentIcuUtilization
-        : projection.rt;
+      switch (metric) {
+        case Metric.CASE_GROWTH_RATE:
+          return projection.rt;
+        case Metric.POSITIVE_TESTS:
+          return projection.currentTestPositiveRate;
+        case Metric.HOSPITAL_USAGE:
+          return projection.currentIcuUtilization;
+        case Metric.CONTACT_TRACING:
+          return projection.currentContactTracerMetric;
+        case Metric.FUTURE_PROJECTIONS:
+          return projection.finalCumulativeDeaths;
+        default:
+          fail('Unknown metric: ' + metric);
+      }
     };
 
     const left = getMetric(leftStateProjections[stateAbbr].primary);
@@ -266,8 +288,13 @@ function CompareModelsMain({ masterSnapshot, location }) {
         <FormControl style={{ width: '12rem', marginLeft: '1rem' }}>
           <InputLabel focused={false}>Metric:</InputLabel>
           <Select value={metric} onChange={changeMetric}>
-            {/* TODO(michael): Add test positive rate (and projections?) */}
-            {[Metric.CASE_GROWTH_RATE, Metric.HOSPITAL_USAGE].map(metric => (
+            {[
+              Metric.CASE_GROWTH_RATE,
+              Metric.POSITIVE_TESTS,
+              Metric.HOSPITAL_USAGE,
+              Metric.CONTACT_TRACING,
+              Metric.FUTURE_PROJECTIONS,
+            ].map(metric => (
               <MenuItem key={metric} value={metric}>
                 {getMetricName(metric)}
               </MenuItem>
