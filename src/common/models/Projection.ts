@@ -550,7 +550,7 @@ export class Projection {
           row &&
           this.totalICUCapacity &&
           this.totalICUCapacity > 0 &&
-          row.ICUBedsInUse != null
+          row.ICUBedsInUse !== null
         ) {
           const predictedNonCovidPatientsAtDate =
             this.totalICUCapacity! *
