@@ -322,29 +322,29 @@ export function getChartData(
   contactTracingData: any;
 } {
   const rtRangeData =
-    projection &&
-    projection.rt &&
-    projection.getDataset('rtRange').map(d => ({
-      x: d.x,
-      y: d.y?.rt,
-      low: d.y?.low,
-      hi: d.y?.high,
-    }));
+    projection?.rt == null
+      ? null
+      : projection.getDataset('rtRange').map(d => ({
+          x: d.x,
+          y: d.y?.rt,
+          low: d.y?.low,
+          hi: d.y?.high,
+        }));
 
   const testPositiveData =
-    projection &&
-    projection.currentTestPositiveRate &&
-    projection.getDataset('testPositiveRate');
+    projection?.currentTestPositiveRate == null
+      ? null
+      : projection.getDataset('testPositiveRate');
 
   const icuUtilizationData =
-    projection &&
-    projection.currentIcuUtilization &&
-    projection.getDataset('icuUtilization');
+    projection?.currentIcuUtilization == null
+      ? null
+      : projection.getDataset('icuUtilization');
 
   const contactTracingData =
-    projection &&
-    projection.currentContactTracerMetric &&
-    projection.getDataset('contractTracers');
+    projection?.currentContactTracerMetric == null
+      ? null
+      : projection.getDataset('contractTracers');
 
   return {
     rtRangeData,
