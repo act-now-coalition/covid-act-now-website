@@ -62,7 +62,7 @@ const SummaryStat = ({
         {!condensed && <StatDetailText>{levelInfo.detail()}</StatDetailText>}
       </StatTextWrapper>
       <StatValueWrapper condensed={condensed}>
-        {value && (
+        {value == null ? null : (
           <>
             <StatValueText condensed={condensed}>
               {formatValueForChart(chartType, value)}
