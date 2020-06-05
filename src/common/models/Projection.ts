@@ -40,13 +40,8 @@ const DEFAULT_UTILIZATION = 0.75;
  * TODO: Revert this to use the API data once it's more valid
  */
 const CONTACT_TRACER_STATE_OVERRIDES: { [key: string]: number } = {
-  Hawaii: 80,
-  Indiana: 500,
-  'New Jersey': 900,
-  'New Mexico': 100,
-  'North Carolina': 400,
-  'North Dakota': 352,
-  Kentucky: 287,
+  Indiana: 500, // 325 on TnT
+  Kentucky: 287, // awaiting for TnT to match
 };
 
 /** Parameters that can be provided when constructing a Projection. */
