@@ -130,7 +130,7 @@
       }
       iframe.setAttribute('src', href);
       iframe.setAttribute('width', '350');
-      iframe.setAttribute('height', '393');
+      iframe.setAttribute('height', '395');
       iframe.setAttribute('frameborder', '0');
       // iframe.setAttribute('scrolling', 'no');
 
