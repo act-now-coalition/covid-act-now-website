@@ -46,6 +46,7 @@ const CONTACT_TRACER_STATE_OVERRIDES: { [key: string]: number } = {
   'New Mexico': 100,
   'North Carolina': 400,
   'North Dakota': 352,
+  Kentucky: 287,
 };
 
 /** Parameters that can be provided when constructing a Projection. */
