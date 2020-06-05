@@ -9,16 +9,19 @@ export const METRIC_NAME = 'Positive test rate';
 
 const LOW_NAME = 'Low';
 const MEDIUM_NAME = 'Medium';
-const HIGH_NAME = 'High';
+const MEDIUM_HIGH_NAME = 'High';
+const HIGH_NAME = 'Critical';
 const UNKNOWN = 'Unknown';
 
 const SHORT_DESCRIPTION_LOW = 'Indicates widespread testing';
-const SHORT_DESCRIPTION_MEDIUM = 'Indicates limited testing';
-const SHORT_DESCRIPTION_HIGH = 'Indicates insufficient testing';
+const SHORT_DESCRIPTION_MEDIUM = 'Indicates adequate testing';
+const SHORT_DESCRIPTION_MEDIUM_HIGH = 'Indicates insufficient testing';
+const SHORT_DESCRIPTION_HIGH = 'Indicates dangerously little testing';
 const SHORT_DESCRIPTION_UNKNOWN = 'Insufficient data to assess';
 
 const LIMIT_LOW = 0.03;
 const LIMIT_MEDIUM = 0.1;
+const LIMIT_MEDIUM_HIGH = 0.2;
 const LIMIT_HIGH = Infinity;
 
 export const POSITIVE_TESTS_LEVEL_INFO_MAP: LevelInfoMap = {
@@ -29,12 +32,20 @@ export const POSITIVE_TESTS_LEVEL_INFO_MAP: LevelInfoMap = {
     color: COLOR_MAP.GREEN.BASE,
     detail: () => SHORT_DESCRIPTION_LOW,
   },
+
   [Level.MEDIUM]: {
     level: Level.MEDIUM,
     upperLimit: LIMIT_MEDIUM,
     name: MEDIUM_NAME,
     color: COLOR_MAP.ORANGE.BASE,
     detail: () => SHORT_DESCRIPTION_MEDIUM,
+  },
+  [Level.MEDIUM_HIGH]: {
+    level: Level.MEDIUM_HIGH,
+    upperLimit: LIMIT_MEDIUM_HIGH,
+    name: MEDIUM_HIGH_NAME,
+    color: COLOR_MAP.ORANGE_DARK.BASE,
+    detail: () => SHORT_DESCRIPTION_MEDIUM_HIGH,
   },
   [Level.HIGH]: {
     level: Level.HIGH,
@@ -66,6 +77,7 @@ export function positiveTestsStatusText(projection: Projection) {
     'low',
     'significant',
     'relatively high',
+    'relatively high',
   );
   const percentage = formatPercent(testPositiveRate, 1);
 
@@ -75,7 +87,16 @@ export function positiveTestsStatusText(projection: Projection) {
     `which suggests enough widespread, aggressive testing in ${location} to detect most new cases`,
     `meaning that ${location}’s testing meets WHO minimums but needs to be further expanded to detect most new cases`,
     `which indicates that testing in ${location} is limited and that most cases may go undetected`,
+    `which indicates that testing in ${location} is limited and that most cases likely go undetected`,
   );
 
-  return `A ${lowSizableLarge} percentage (${percentage}) of COVID tests were positive, ${testingBroadlyText}. Identifying and isolating new cases can help contain COVID without resorting to lockdowns.`;
+  const textForecast = levelText(
+    level,
+    `Identifying and isolating new cases can help contain COVID without resorting to lockdowns`,
+    `Identifying and isolating new cases can help contain COVID without resorting to lockdowns`,
+    `At these levels, it is hard to know how fast COVID is actually spreading, and there is risk of being surprised by a second wave of disease. Caution is warranted`,
+    `At these levels, it is hard to know how fast COVID is actually spreading, and there is very high risk of being surprised by a wave of disease. More testing urgently needed`,
+  );
+
+  return `A ${lowSizableLarge} percentage (${percentage}) of COVID tests were positive, ${testingBroadlyText}. ${textForecast}.`;
 }

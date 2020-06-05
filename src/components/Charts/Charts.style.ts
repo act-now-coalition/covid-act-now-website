@@ -33,8 +33,8 @@ export const PositionRelative = styled.div`
 export const Axis = styled.g`
   text {
     font-family: ${charts.fontFamily};
-    font-weight: ${charts.fontWeight};
-    font-size: ${charts.fontSize};
+    font-weight: 'medium';
+    font-size: 12px;
     fill: ${props => palette(props).axis};
   }
   line {
@@ -114,9 +114,7 @@ export const RegionAnnotation = styled(TextAnnotation)<{ isActive: boolean }>`
     fill: ${props =>
       props.isActive ? props.color : palette(props).background};
     stroke: ${props =>
-      props.isActive || palette(props).isDarkMode
-        ? props.color
-        : props.theme.palette.lightGray};
+      props.isActive || palette(props).isDarkMode ? props.color : 'none'};
     stroke-width: 1px;
   }
   text {

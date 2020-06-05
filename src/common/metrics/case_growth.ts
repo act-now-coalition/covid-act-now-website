@@ -8,17 +8,20 @@ import { Projection } from 'common/models/Projection';
 export const METRIC_NAME = 'Infection rate';
 
 const SHORT_DESCRIPTION_LOW = 'Active cases are decreasing';
-const SHORT_DESCRIPTION_MEDIUM = 'Active cases are slowly increasing';
-const SHORT_DESCRIPTION_HIGH = 'Active cases are increasing';
+const SHORT_DESCRIPTION_MEDIUM = 'COVID is still spreading, but slowly';
+const SHORT_DESCRIPTION_MEDIUM_HIGH = 'Active cases are rapidly increasing';
+const SHORT_DESCRIPTION_HIGH = 'Active cases are exponentially increasing';
 const SHORT_DESCRIPTION_UNKNOWN = 'Insufficient data to assess';
 
-const LIMIT_LOW = 1;
-const LIMIT_MEDIUM = 1.2;
+const LIMIT_LOW = 0.9;
+const LIMIT_MEDIUM = 1.1;
+const LIMIT_MEDIUM_HIGH = 1.4;
 const LIMIT_HIGH = Infinity;
 
 const LOW_NAME = 'Low';
 const MEDIUM_NAME = 'Medium';
-const HIGH_NAME = 'High';
+const MEDIUM_HIGH_NAME = 'High';
+const HIGH_NAME = 'Critical';
 const UNKNOWN = 'Unknown';
 
 export const CASE_GROWTH_RATE_LEVEL_INFO_MAP: LevelInfoMap = {
@@ -35,6 +38,13 @@ export const CASE_GROWTH_RATE_LEVEL_INFO_MAP: LevelInfoMap = {
     name: MEDIUM_NAME,
     color: COLOR_MAP.ORANGE.BASE,
     detail: () => SHORT_DESCRIPTION_MEDIUM,
+  },
+  [Level.MEDIUM_HIGH]: {
+    level: Level.MEDIUM_HIGH,
+    upperLimit: LIMIT_MEDIUM_HIGH,
+    name: MEDIUM_HIGH_NAME,
+    color: COLOR_MAP.ORANGE_DARK.BASE,
+    detail: () => SHORT_DESCRIPTION_MEDIUM_HIGH,
   },
   [Level.HIGH]: {
     level: Level.HIGH,
@@ -53,7 +63,7 @@ export const CASE_GROWTH_RATE_LEVEL_INFO_MAP: LevelInfoMap = {
 };
 
 export const CASE_GROWTH_DISCLAIMER =
-  'Each data point is a 14-day weighted average. We present the most recent seven days of data as a dashed line, as data is often revised by states several days after reporting. Containing COVID requires an infection rate of less than 1.0.';
+  'Each data point is a 14-day weighted average. We present the most recent seven days of data as a dashed line, as data is often revised by states several days after reporting.';
 
 export function caseGrowthStatusText(projection: Projection) {
   const rt = projection.rt!;
@@ -67,8 +77,9 @@ export function caseGrowthStatusText(projection: Projection) {
   const epidemiologyReasoning = levelText(
     level,
     `Because each person is infecting less than one other person, the total number of current cases in ${projection.locationName} is shrinking.`,
-    `Because this number is only slightly above 1.0, it means that COVID is growing, but slowly.`,
-    `As such, the total number of current cases in ${projection.locationName} is growing exponentially.`,
+    `Because this number is around 1.0, it means that COVID continues to spread, but in a slow and controlled fashion.`,
+    `As such, the total number of active cases in ${projection.locationName} is growing at an unsustainable rate. If this trend continues, the hospital system may become overloaded. Caution is warranted.`,
+    `As such, the total number of current cases in ${projection.locationName} is exploding, putting the hospital system at risk. Aggressive action urgently needed.`,
   );
 
   return `${infectionRate} ${epidemiologyReasoning}`;
