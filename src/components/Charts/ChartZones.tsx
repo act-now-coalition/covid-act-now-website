@@ -23,8 +23,8 @@ import {
   getChartRegions,
   computeTickPositions,
   last,
-  getZoneByValue,
   getAxisLimits,
+  getZoneByValue,
 } from './utils';
 
 type Point = Omit<Column, 'y'> & {

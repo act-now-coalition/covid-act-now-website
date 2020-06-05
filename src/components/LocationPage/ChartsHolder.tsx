@@ -12,7 +12,7 @@ import {
 import LocationPageHeader from 'components/LocationPage/LocationPageHeader';
 import NoCountyDetail from './NoCountyDetail';
 import { Projections } from 'common/models/Projections';
-import { Projection } from 'common/models/Projection';
+import { Projection, TRACERS_NEEDED_PER_CASE } from 'common/models/Projection';
 import SummaryStats from 'components/SummaryStats/SummaryStats';
 import Disclaimer from 'components/Disclaimer/Disclaimer';
 import ClaimStateBlock from 'components/ClaimStateBlock/ClaimStateBlock';
@@ -262,17 +262,17 @@ const ChartsHolder = (props: {
                   <ChartContactTracing columnData={contactTracingData} />
                   <Disclaimer>
                     <a
-                      href="https://science.sciencemag.org/content/368/6491/eabb6936"
+                      href="https://covidlocal.org/assets/documents/COVID%20Local%20Metrics%20overview.pdf"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       Experts recommend
                     </a>{' '}
-                    that at least 70% of contacts for each new case must be
+                    {`that at least 90% of contacts for each new case must be
                     traced within 48 hours in order to contain COVID. Experts
                     estimate that tracing each new case within 48 hours requires
-                    an average of 10 contact tracers per new case, as well as
-                    fast testing.
+                    an average of ${TRACERS_NEEDED_PER_CASE} contact tracers per
+                    new case, as well as fast testing.`}
                   </Disclaimer>
                 </>
               )}
