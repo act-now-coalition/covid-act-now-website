@@ -61,12 +61,12 @@ const ChartFutureHospitalization = ({
   const chartWidth = width - marginLeft - marginRight;
   const chartHeight = height - marginTop - marginBottom;
 
-  const dataNoAction = projections.baseline.getDataset('hospitalizations');
+  const dataNoAction = projections.baseline.getDataset('icuHospitalizations');
   const dataNoActionFuture: Point[] = dataNoAction
     .filter(hasData)
     .filter(isFuture);
 
-  const dataProjected = projections.projected.getDataset('hospitalizations');
+  const dataProjected = projections.projected.getDataset('icuHospitalizations');
   const dataProjectedFuture: Point[] = dataProjected
     .filter(hasData)
     .filter(isFuture);
@@ -74,7 +74,7 @@ const ChartFutureHospitalization = ({
     .filter(hasData)
     .filter((p: Point) => !isFuture(p));
 
-  const dataBeds = projections.primary.getDataset('beds');
+  const dataBeds = projections.primary.getDataset('icuBeds');
 
   const allData: PointProjections[] = [
     ...getProjectionsPoints(dataProjectedFuture, COLORS.PROJECTED, false),

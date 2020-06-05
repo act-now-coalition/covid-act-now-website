@@ -65,7 +65,9 @@ export interface Column {
 // data. See `getColumn()`.
 export type DatasetId =
   | 'hospitalizations'
+  | 'icuHospitalizations'
   | 'beds'
+  | 'icuBeds'
   | 'cumulativeDeaths'
   | 'cumulativeInfected'
   | 'rtRange'
@@ -106,6 +108,8 @@ export class Projection {
   // NOTE: These are used dynamically by getColumn()
   private readonly hospitalizations: Array<number | null>;
   private readonly beds: Array<number | null>;
+  private readonly icuHospitalizations: Array<number | null>;
+  private readonly icuBeds: Array<number | null>;
   private readonly timeseries: Array<CANPredictionTimeseriesRow | null>;
   private readonly actualTimeseries: Array<CANActualsTimeseriesRow | null>;
   private readonly cumulativeDeaths: Array<number | null>;
@@ -146,6 +150,8 @@ export class Projection {
       row => row && row.hospitalBedsRequired,
     );
     this.beds = timeseries.map(row => row && row.hospitalBedCapacity);
+    this.icuHospitalizations = timeseries.map(row => row && row.ICUBedsInUse);
+    this.icuBeds = timeseries.map(row => row && row.ICUBedCapacity);
     this.cumulativeDeaths = timeseries.map(row => row && row.cumulativeDeaths);
     this.cumulativeInfected = timeseries.map(
       row => row && row.cumulativeInfected,
