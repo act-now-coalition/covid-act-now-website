@@ -2,7 +2,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import Highcharts, { dateFormat } from 'highcharts';
 import palette from 'assets/theme/palette';
-import { LevelInfoMap as Zones, Level } from 'common/level';
+import { LevelInfoMap as Zones, Level, LevelInfo } from 'common/level';
 
 const isValidPoint = (d: Highcharts.Point): boolean =>
   _.isFinite(d.x) && _.isFinite(d.y);
@@ -238,19 +238,35 @@ export const getChartRegions = (
   },
   {
     valueFrom: zones[Level.MEDIUM].upperLimit,
+    valueTo: zones[Level.MEDIUM_HIGH].upperLimit,
+    name: zones[Level.MEDIUM_HIGH].name,
+    color: zones[Level.MEDIUM_HIGH].color,
+  },
+  {
+    valueFrom: zones[Level.MEDIUM_HIGH].upperLimit,
     valueTo: maxY,
     name: zones[Level.HIGH].name,
     color: zones[Level.HIGH].color,
   },
 ];
 
+const isBetween = (zoneLow: LevelInfo, zoneHigh: LevelInfo, value: number) =>
+  zoneLow.upperLimit <= value && value < zoneHigh.upperLimit;
+
 export const getZoneByValue = (value: number, zones: Zones) => {
   if (value < zones[Level.LOW].upperLimit) {
     return zones[Level.LOW];
   }
-  return value > zones[Level.MEDIUM].upperLimit
-    ? zones[Level.HIGH]
-    : zones[Level.MEDIUM];
+
+  if (isBetween(zones[Level.LOW], zones[Level.MEDIUM], value)) {
+    return zones[Level.MEDIUM];
+  }
+
+  if (isBetween(zones[Level.MEDIUM], zones[Level.MEDIUM_HIGH], value)) {
+    return zones[Level.MEDIUM_HIGH];
+  }
+
+  return zones[Level.HIGH];
 };
 
 export const computeTickPositions = (
@@ -258,12 +274,13 @@ export const computeTickPositions = (
   maxY: number,
   zones: Zones,
 ) => {
-  const maxZones = zones[Level.MEDIUM].upperLimit;
+  const maxZones = zones[Level.MEDIUM_HIGH].upperLimit;
   const maxTick = maxY < maxZones ? 1.5 * maxZones : maxY;
   return [
     minY,
     zones[Level.LOW].upperLimit,
     zones[Level.MEDIUM].upperLimit,
+    zones[Level.MEDIUM_HIGH].upperLimit,
     maxTick,
   ];
 };

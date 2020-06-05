@@ -11,7 +11,8 @@ import {
 } from './ChartsHolder.style';
 import NoCountyDetail from './NoCountyDetail';
 import { Projections } from 'common/models/Projections';
-import { Projection } from 'common/models/Projection';
+import { Projection, TRACERS_NEEDED_PER_CASE } from 'common/models/Projection';
+import SummaryStats from 'components/SummaryStats/SummaryStats';
 import Disclaimer from 'components/Disclaimer/Disclaimer';
 import ClaimStateBlock from 'components/ClaimStateBlock/ClaimStateBlock';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
@@ -265,17 +266,17 @@ const ChartsHolder = (props: {
                   <ChartContactTracing columnData={contactTracingData} />
                   <Disclaimer>
                     <a
-                      href="https://science.sciencemag.org/content/368/6491/eabb6936"
+                      href="https://covidlocal.org/assets/documents/COVID%20Local%20Metrics%20overview.pdf"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       Experts recommend
                     </a>{' '}
-                    that at least 70% of contacts for each new case must be
+                    {`that at least 90% of contacts for each new case must be
                     traced within 48 hours in order to contain COVID. Experts
                     estimate that tracing each new case within 48 hours requires
-                    an average of 10 contact tracers per new case, as well as
-                    fast testing.
+                    an average of ${TRACERS_NEEDED_PER_CASE} contact tracers per
+                    new case, as well as fast testing.`}
                   </Disclaimer>
                 </>
               )}
@@ -327,29 +328,29 @@ export function getChartData(
   contactTracingData: any;
 } {
   const rtRangeData =
-    projection &&
-    projection.rt &&
-    projection.getDataset('rtRange').map(d => ({
-      x: d.x,
-      y: d.y?.rt,
-      low: d.y?.low,
-      hi: d.y?.high,
-    }));
+    projection?.rt == null
+      ? null
+      : projection.getDataset('rtRange').map(d => ({
+          x: d.x,
+          y: d.y?.rt,
+          low: d.y?.low,
+          hi: d.y?.high,
+        }));
 
   const testPositiveData =
-    projection &&
-    projection.currentTestPositiveRate &&
-    projection.getDataset('testPositiveRate');
+    projection?.currentTestPositiveRate == null
+      ? null
+      : projection.getDataset('testPositiveRate');
 
   const icuUtilizationData =
-    projection &&
-    projection.currentIcuUtilization &&
-    projection.getDataset('icuUtilization');
+    projection?.currentIcuUtilization == null
+      ? null
+      : projection.getDataset('icuUtilization');
 
   const contactTracingData =
-    projection &&
-    projection.currentContactTracerMetric &&
-    projection.getDataset('contractTracers');
+    projection?.currentContactTracerMetric == null
+      ? null
+      : projection.getDataset('contractTracers');
 
   return {
     rtRangeData,

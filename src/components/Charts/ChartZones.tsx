@@ -2,7 +2,6 @@ import React from 'react';
 import moment from 'moment';
 import { isDate } from 'lodash';
 import { min as d3min, max as d3max } from 'd3-array';
-import { AxisBottom, AxisLeft } from '@vx/axis';
 import { curveLinear } from '@vx/curve';
 import { GridRows } from '@vx/grid';
 import { Group } from '@vx/group';
@@ -12,10 +11,11 @@ import { Column } from 'common/models/Projection';
 import { assert, formatDate, formatPercent } from 'common/utils';
 import { LevelInfoMap } from 'common/level';
 import RectClipGroup from './RectClipGroup';
+import { AxisBottom, AxisLeft } from './Axis';
 import BoxedAnnotation from './BoxedAnnotation';
+import ChartContainer from './ChartContainer';
 import ZoneAnnotation from './ZoneAnnotation';
 import ZoneLinePath from './ZoneLinePath';
-import ChartContainer from './ChartContainer';
 import Tooltip from './Tooltip';
 import * as TooltipStyle from './Tooltip.style';
 import * as Style from './Charts.style';
@@ -23,8 +23,8 @@ import {
   getChartRegions,
   computeTickPositions,
   last,
-  getZoneByValue,
   getAxisLimits,
+  getZoneByValue,
 } from './utils';
 
 type Point = Omit<Column, 'y'> & {
@@ -163,24 +163,16 @@ const ChartZones = ({
           text={getPointText(lastPointY)}
         />
       </Style.TextAnnotation>
-      <Style.Axis>
-        <AxisBottom
-          top={chartHeight}
-          scale={xScale}
-          numTicks={Math.round(chartWidth / 100)}
-        />
-      </Style.Axis>
-      <Style.Axis>
-        <AxisLeft
-          top={marginTop}
-          scale={yScale}
-          tickValues={yTicks}
-          hideAxisLine
-          hideTicks
-          hideZero
-          tickFormat={(num: number) => formatPercent(num, 0)}
-        />
-      </Style.Axis>
+      <AxisBottom top={chartHeight} scale={xScale} />
+      <AxisLeft
+        top={marginTop}
+        scale={yScale}
+        tickValues={yTicks}
+        hideAxisLine
+        hideTicks
+        hideZero
+        tickFormat={(num: number) => formatPercent(num, 0)}
+      />
     </ChartContainer>
   );
 };

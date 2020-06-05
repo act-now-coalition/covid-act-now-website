@@ -21,37 +21,39 @@ export default function MetricChart({
   height?: number;
 }) {
   const projection = projections.primary;
-  if (!projection) {
+  if (
+    projection === null ||
+    (metric !== Metric.FUTURE_PROJECTIONS &&
+      projections.getMetricValue(metric) === null)
+  ) {
     return null;
   }
   return (
     <>
-      {metric === Metric.CASE_GROWTH_RATE && projection.rt && (
+      {metric === Metric.CASE_GROWTH_RATE && (
         <ChartRt
           height={height}
           columnData={projection.getDataset('rtRange')}
         />
       )}
-      {metric === Metric.POSITIVE_TESTS &&
-        projection.currentTestPositiveRate && (
-          <ChartPositiveTestRate
-            height={height}
-            columnData={projection.getDataset('testPositiveRate')}
-          />
-        )}
-      {metric === Metric.HOSPITAL_USAGE && projection.currentIcuUtilization && (
+      {metric === Metric.POSITIVE_TESTS && (
+        <ChartPositiveTestRate
+          height={height}
+          columnData={projection.getDataset('testPositiveRate')}
+        />
+      )}
+      {metric === Metric.HOSPITAL_USAGE && (
         <ChartICUHeadroom
           height={height}
           columnData={projection.getDataset('icuUtilization')}
         />
       )}
-      {metric === Metric.CONTACT_TRACING &&
-        projection.currentContactTracerMetric && (
-          <ChartContactTracing
-            height={height}
-            columnData={projection.getDataset('contractTracers')}
-          />
-        )}
+      {metric === Metric.CONTACT_TRACING && (
+        <ChartContactTracing
+          height={height}
+          columnData={projection.getDataset('contractTracers')}
+        />
+      )}
       {metric === Metric.FUTURE_PROJECTIONS && (
         <ChartFutureHospitalization height={height} projections={projections} />
       )}
