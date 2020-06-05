@@ -85,8 +85,8 @@ const NewLocationPageHeader = (props: {
     (val: number | null) => !isNull(val),
   ).length;
 
-  const headerTopMargin = !hasStats ? -268 : -330;
-  const headerBottomMargin = !hasStats ? 115 : 0;
+  const headerTopMargin = !hasStats ? -270 : -330;
+  const headerBottomMargin = !hasStats ? 100 : 0;
 
   const locationName =
     props.projections.countyName || props.projections.stateName;

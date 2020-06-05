@@ -192,7 +192,7 @@ export const HeaderButton = styled(Box)`
   line-height: 1.2;
   cursor: pointer;
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  color: #00bfea;
+  color: ${COLOR_MAP.BLUE};
   font-weight: 500;
   text-align: center;
   margin: auto;
