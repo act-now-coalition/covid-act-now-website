@@ -43,14 +43,18 @@ export const SummaryStatsWrapper = styled(Box)<{ condensed?: Boolean }>`
   `}
 `;
 
-export const SummaryStatWrapper = styled(Box)<{ condensed?: Boolean }>`
+export const SummaryStatWrapper = styled(Box)<{
+  condensed?: Boolean;
+  isEmbed?: Boolean;
+}>`
   ${props =>
     props.condensed
       ? `
     display: flex;
     align-items: center;
     cursor: pointer;
-    padding: 15px 16px;
+    padding: ${props.isEmbed && '15px 16px'};
+    margin-bottom:  ${!props.isEmbed && '0.75rem'};
 
     &:last-child {
       margin-bottom: 0;

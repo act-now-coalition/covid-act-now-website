@@ -1,8 +1,6 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import { Box, Grid, Typography, Paper, Button } from '@material-ui/core';
 import { COLORS } from 'common';
-import { COLOR_MAP } from 'common/colors';
-import palette from 'assets/theme/palette';
 import {
   PreviewFooterStyles,
   PreviewHeaderStyles,

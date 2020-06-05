@@ -66,7 +66,11 @@ const SummaryStat = ({
     fail('Invalid Chart Type');
   };
   return (
-    <SummaryStatWrapper onClick={finalOnClick} condensed={condensed}>
+    <SummaryStatWrapper
+      onClick={finalOnClick}
+      condensed={condensed}
+      isEmbed={isEmbed}
+    >
       <StatTextWrapper>
         <StatNameText condensed={condensed}>
           {getMetricName(chartType)}{' '}

@@ -35,7 +35,7 @@ export const CenteredModal = styled(Modal)`
 
 export const EmbedPreviewScrollContainer = styled(Box)`
   max-height: 95vh;
-  overflow-y: scroll;
+  overflow-y: hidden;
 `;
 
 export const EmbedPreviewStyled = styled(Paper)`
