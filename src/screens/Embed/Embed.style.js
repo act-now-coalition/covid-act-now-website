@@ -25,6 +25,7 @@ export const EmbedContainer = styled(Paper)`
   border-radius: 4px;
   height: 393px;
   width: 375px;
+  box-shadow: none;
 `;
 
 export const EmbedContentContainer = styled(Box)`
@@ -128,10 +129,11 @@ export const EmbedWrapper = styled(Box)`
   display: flex;
   align-items: center;
   flex-direction: column;
-  border: 24px solid rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  margin: 24px;
+  border-radius: 4px;
 
   @media screen and (min-width: 600px) {
-    border-radius: 4px;
     flex-grow: 1;
     justify-content: space-between;
   }
@@ -143,6 +145,7 @@ export const EmbedFooterWrapper = styled(Box)`
   font-size: 10px;
   padding: 0.7rem 1rem;
   border-top: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 0 0 4px 4px;
 `;
 
 export const EmbedBody = styled(Box)`
