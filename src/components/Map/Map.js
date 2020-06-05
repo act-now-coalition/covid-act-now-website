@@ -10,6 +10,12 @@ import { MAP_FILTERS } from '../../screens/LocationPage/Enums/MapFilterEnums';
 import ReactTooltip from 'react-tooltip';
 import { MapInstructions, MobileLineBreak } from './Map.style';
 
+// TODO(@pablo): We might want to move this to LOCATION_SUMMARY_LEVELS
+const LEGEND_LOW = 'On track to contain COVID';
+const LEGEND_MEDIUM = 'On track for "herd immunity"';
+const LEGEND_MEDIUM_HIGH = 'At risk';
+const LEGEND_HIGH = 'Active or imminent outbreak';
+
 function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
   const history = useHistory();
   const [content, setContent] = useState('');
@@ -36,10 +42,28 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
   return (
     <div className="Map">
       {!hideLegend && (
-        <MapInstructions>
-          <strong>Click a state</strong> to view risk details{' '}
-          <MobileLineBreak /> and county info.
-        </MapInstructions>
+        <Legend>
+          <LegendItem
+            key={'legend-4'}
+            title={LEGEND_HIGH}
+            color={LOCATION_SUMMARY_LEVELS[Level.HIGH].color}
+          />
+          <LegendItem
+            key={'legend-3'}
+            title={LEGEND_MEDIUM_HIGH}
+            color={LOCATION_SUMMARY_LEVELS[Level.MEDIUM_HIGH].color}
+          />
+          <LegendItem
+            key={'legend-2'}
+            title={LEGEND_MEDIUM}
+            color={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].color}
+          />
+          <LegendItem
+            key={'legend-1'}
+            title={LEGEND_LOW}
+            color={LOCATION_SUMMARY_LEVELS[Level.LOW].color}
+          />
+        </Legend>
       )}
       <div className="us-state-map">
         <USACountyMap
@@ -49,23 +73,10 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
         />
       </div>
       {!hideLegend && (
-        <Legend>
-          <LegendItem
-            key={'legend-3'}
-            title={LOCATION_SUMMARY_LEVELS[Level.HIGH].name}
-            color={LOCATION_SUMMARY_LEVELS[Level.HIGH].color}
-          />
-          <LegendItem
-            key={'legend-2'}
-            title={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].name}
-            color={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].color}
-          />
-          <LegendItem
-            key={'legend-1'}
-            title={LOCATION_SUMMARY_LEVELS[Level.LOW].name}
-            color={LOCATION_SUMMARY_LEVELS[Level.LOW].color}
-          />
-        </Legend>
+        <MapInstructions>
+          <strong>Click a state</strong> to view risk details{' '}
+          <MobileLineBreak /> and county info.
+        </MapInstructions>
       )}
       <ReactTooltip>{content}</ReactTooltip>
     </div>

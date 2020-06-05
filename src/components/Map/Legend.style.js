@@ -1,10 +1,13 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Grid from '@material-ui/core/Grid';
 import { Typography } from '@material-ui/core';
 
 export const LegendContainer = styled.div`
-  display: inline-flex;
-  flex-direction: ${props => (props.condensed ? 'column' : 'row')};
+  display: flex;
+  flex-direction: column;
+  @media (min-width: 960px) {
+    flex-direction: ${props => (props.condensed ? 'column' : 'row')};
+  }
 `;
 
 export const LegendItemHeader = styled.div`
@@ -50,27 +53,20 @@ export const ColorBox = styled(Grid)`
 `;
 
 export const LegendWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 1rem;
+  align-items: ${props => (props.condensed ? 'flex-start' : 'center')};
+  padding: ${props => (props.condensed ? '0.75rem 0 0' : '0 1rem')};
   ${props =>
-    props.condensed
-      ? `
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0.75rem 0 0;
-  `
-      : `
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 1rem;
-
-    @media (min-width: 600px) {
-      flex-direction: row;
-      margin-top: -1rem;
-    }
-  `}
+    !props.condensed &&
+    css`
+      @media (min-width: 600px) {
+        flex-direction: row;
+        margin-top: 2rem;
+      }
+    `};
 `;
 
 export const LegendTitle = styled(Typography)`

@@ -19,10 +19,10 @@ import {
 export const RT_TRUNCATION_DAYS = 7;
 
 /**
- * We will assume roughly 10 tracers are needed to trace a case within 48h.
- * The range we give here could be between 10 -15 contact tracers per case.
+ * We will assume roughly 5 tracers are needed to trace a case within 48h.
+ * The range we give here could be between 5-15 contact tracers per case.
  */
-export const TRACERS_NEEDED_PER_CASE = 10;
+export const TRACERS_NEEDED_PER_CASE = 5;
 
 /**
  * We subtract this "decomp" factor from the typical ICU Utilization rates we

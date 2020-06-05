@@ -8,17 +8,20 @@ import { Projection, TRACERS_NEEDED_PER_CASE } from 'common/models/Projection';
 export const METRIC_NAME = 'Contacts traced';
 
 const SHORT_DESCRIPTION_LOW = 'Too many cases and too little tracing';
-const SHORT_DESCRIPTION_MEDIUM =
+const SHORT_DESCRIPTION_MEDIUM = 'Too many cases and too little tracing';
+const SHORT_DESCRIPTION_MEDIUM_HIGH =
   'Insufficient tracing to stop the spread of COVID';
 const SHORT_DESCRIPTION_HIGH = 'Enough tracing to help contain COVID';
 const SHORT_DESCRIPTION_UNKNOWN = 'Insufficient data to assess';
 
 const LIMIT_LOW = 0.07;
-const LIMIT_MEDIUM = 0.7;
+const LIMIT_MEDIUM = 0.2;
+const LIMIT_MEDIUM_HIGH = 0.9;
 const LIMIT_HIGH = Infinity;
 
-const LOW_NAME = 'Low';
-const MEDIUM_NAME = 'Medium';
+const LOW_NAME = 'Critical';
+const MEDIUM_NAME = 'Low';
+const MEDIUM_HIGH_NAME = 'Medium';
 const HIGH_NAME = 'High';
 const UNKNOWN = 'Unknown';
 
@@ -36,8 +39,15 @@ export const CONTACT_TRACING_LEVEL_INFO_MAP: LevelInfoMap = {
     level: Level.MEDIUM,
     upperLimit: LIMIT_MEDIUM,
     name: MEDIUM_NAME,
-    color: COLOR_MAP.ORANGE.BASE,
+    color: COLOR_MAP.ORANGE_DARK.BASE,
     detail: () => SHORT_DESCRIPTION_MEDIUM,
+  },
+  [Level.MEDIUM_HIGH]: {
+    level: Level.MEDIUM_HIGH,
+    upperLimit: LIMIT_MEDIUM_HIGH,
+    name: MEDIUM_HIGH_NAME,
+    color: COLOR_MAP.ORANGE.BASE,
+    detail: () => SHORT_DESCRIPTION_MEDIUM_HIGH,
   },
   [Level.HIGH]: {
     level: Level.HIGH,
@@ -71,21 +81,17 @@ export function contactTracingStatusText(projection: Projection) {
   const location = projection.locationName;
   const level = getLevel(Metric.CONTACT_TRACING, currentContactTracingMetric);
 
-  const overview =
-    `Per best available data, ${location} has ${formatInteger(
-      currentContactTracers,
-    )} contact tracers.` +
-    ` With an average of ${formatInteger(
-      currentWeeklyAverage,
-    )} new daily cases, ` +
-    `we estimate ${location} needs ${formatInteger(
-      currentWeeklyAverage * TRACERS_NEEDED_PER_CASE,
-    )} ` +
-    `contact tracing staff to trace all new cases in 48 hours, before too ` +
-    `many other people are infected.`;
+  const numTracers = formatInteger(currentContactTracers);
+  const weeklyAverage = formatInteger(currentWeeklyAverage);
+  const numNeededTracers = formatInteger(
+    currentWeeklyAverage * TRACERS_NEEDED_PER_CASE,
+  );
+  const overview = `Per best available data, ${location} has ${numTracers} contact tracers. With an average of ${weeklyAverage} new daily cases, 
+    we estimate ${location} needs ${numNeededTracers} contact tracing staff to trace all new cases in 48 hours, before too many other people are infected.`;
 
   const contactTracingRate = levelText(
     level,
+    `only ${formatPercent(currentContactTracingMetric)}`,
     `only ${formatPercent(currentContactTracingMetric)}`,
     `${formatPercent(currentContactTracingMetric)}`,
     `${formatPercent(currentContactTracingMetric)}`,
@@ -93,14 +99,13 @@ export function contactTracingStatusText(projection: Projection) {
 
   const outcomesAtLevel = levelText(
     level,
-    `These low levels of tracing suggest there is either an active outbreak underway in ${location}, or almost no tracing capacity exists. Strong caution is warranted.`,
+    `These low levels of tracing suggest there may be an active outbreak underway in ${location}, or almost no tracing capacity exists. Aggressive action urgently needed.`,
+    `These low levels of tracing suggest there may be an active outbreak underway in ${location}, or that little tracing capacity exists. Strong caution warranted.`,
     `At these lower levels of tracing, it is unlikely ${location} will be able to successfully identify and isolate sources of disease spread fast enough to prevent new outbreaks.`,
     'When this level of tracing is coupled with widely available testing, COVID can be contained without resorting to lockdowns.',
   );
 
-  const details =
-    `This means that ${location} is likely able to trace ${contactTracingRate}` +
-    ` of new COVID infections in 48 hours. ${outcomesAtLevel}`;
+  const details = `This means that ${location} is likely able to trace ${contactTracingRate} of new COVID infections in 48 hours. ${outcomesAtLevel}`;
 
   return `${overview} ${details}`;
 }
