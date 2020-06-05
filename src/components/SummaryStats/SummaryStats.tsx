@@ -72,7 +72,7 @@ const SummaryStat = ({
       isEmbed={isEmbed}
     >
       <StatTextWrapper>
-        <StatNameText condensed={condensed}>
+        <StatNameText condensed={condensed} isEmbed={isEmbed}>
           {getMetricName(chartType)}{' '}
         </StatNameText>
         {!condensed && <StatDetailText>{levelInfo.detail()}</StatDetailText>}
@@ -80,7 +80,7 @@ const SummaryStat = ({
       <StatValueWrapper condensed={condensed}>
         {value && (
           <>
-            <StatValueText condensed={condensed}>
+            <StatValueText condensed={condensed} isEmbed={isEmbed}>
               {formatValueForChart(chartType, value)}
               {!condensed && beta && <BetaTag>Beta</BetaTag>}
             </StatValueText>
@@ -90,6 +90,7 @@ const SummaryStat = ({
           levelInfo={levelInfo}
           condensed={condensed}
           flipOrder={flipSignalStatusOrder}
+          isEmbed={isEmbed}
         />
       </StatValueWrapper>
     </SummaryStatWrapper>

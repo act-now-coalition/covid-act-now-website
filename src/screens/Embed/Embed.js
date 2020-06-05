@@ -15,8 +15,6 @@ import LogoUrlLight from 'assets/images/logoUrlLight';
 import SummaryStats from 'components/SummaryStats/SummaryStats';
 import {
   HeaderText,
-  HeaderHeader,
-  HeaderSubhead,
   AlarmLevel,
 } from 'components/SocialLocationPreview/SocialLocationPreview.style';
 import {
@@ -27,6 +25,8 @@ import {
   EmbedHeaderWrapper,
   FooterDate,
   LogoWrapper,
+  EmbedHeader,
+  EmbedSubheader,
 } from './Embed.style';
 
 export default function Embed() {
@@ -102,12 +102,12 @@ export default function Embed() {
       <EmbedWrapper>
         <EmbedHeaderWrapper>
           <HeaderText>
-            <HeaderHeader>
+            <EmbedHeader>
               {projections.countyName
                 ? `${projections.countyName}, ${projections.stateCode}`
                 : projections.stateName}
-            </HeaderHeader>
-            <HeaderSubhead>Overall COVID risk</HeaderSubhead>
+            </EmbedHeader>
+            <EmbedSubheader>Overall COVID risk</EmbedSubheader>
           </HeaderText>
           <AlarmLevel color={fillColor}>{levelInfo.name}</AlarmLevel>
         </EmbedHeaderWrapper>

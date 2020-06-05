@@ -169,3 +169,19 @@ export const LogoWrapper = styled.a`
   padding-right: 1.5rem;
   cursor: pointer;
 `;
+
+export const EmbedHeader = styled(Typography)`
+  font-size: 17px;
+  line-height: 1.25rem;
+  margin-bottom: 0.25rem;
+  font-weight: 700;
+`;
+
+export const EmbedSubheader = styled(Typography)`
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.7);
+  line-height: 0.875rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+`;
