@@ -40,7 +40,6 @@ const DEFAULT_UTILIZATION = 0.75;
  * TODO: Revert this to use the API data once it's more valid
  */
 const CONTACT_TRACER_STATE_OVERRIDES: { [key: string]: number } = {
-  Indiana: 500, // 325 on TnT
   Kentucky: 287, // awaiting for TnT to match
 };
 
