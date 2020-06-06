@@ -26,6 +26,7 @@ export const BoxedAnnotation = ({
 }) => {
   const textRef = useRef<SVGTextElement>(null);
   const { top, left, height, width } = useSvgBox(textRef);
+  const textLines = text.split('\n');
   return (
     <Group left={x} top={y}>
       <rect
@@ -34,7 +35,13 @@ export const BoxedAnnotation = ({
         width={Math.abs(width + 2 * padding)}
         height={Math.abs(height + 2 * padding)}
       />
-      <text ref={textRef}>{text}</text>
+      <text ref={textRef}>
+        {textLines.map((line, i) => (
+          <tspan key={`text-line-${i}`} x={0} dy={i === 0 ? 0 : '1.2em'}>
+            {line}
+          </tspan>
+        ))}
+      </text>
     </Group>
   );
 };

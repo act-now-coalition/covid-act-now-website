@@ -141,10 +141,12 @@ export const InterventionAnnotation = styled(TextAnnotation)<{
     fill: white;
     stroke: none;
   }
-  text {
-    fill: #828282;
+  text,
+  tspan {
+    fill: #4f4f4f;
     font-weight: normal;
     text-anchor: ${props => props.textAnchor};
+    dominant-baseline: hanging;
   }
 `;
 

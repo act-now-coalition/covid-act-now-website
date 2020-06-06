@@ -44,12 +44,12 @@ const hasData = (d: any) =>
   Number.isFinite(getYAreaLow(d)) &&
   Number.isFinite(getYAreaHigh(d));
 
-const INTERVENTIONS_MARGIN = 20;
+const INTERVENTIONS_MARGIN = 50;
 
 const INTERVENTIONS = [
   { date: '2020-03-20', intervention: 'Stay-at-home' },
-  { date: '2020-05-31', intervention: 'Phase 1 Reopen' },
-  { date: '2020-06-02', intervention: 'Stay-at-home ends' },
+  { date: '2020-05-31', intervention: 'Phase 1\nReopen' },
+  { date: '2020-06-02', intervention: 'Stay-at-home\nends' },
 ];
 
 const ChartRt = ({
@@ -210,26 +210,27 @@ const ChartRt = ({
         r={6}
       />
       <Group top={-1 * INTERVENTIONS_MARGIN}>
-        {INTERVENTIONS.map((d, i) => {
-          const x = xScale(new Date(d.date));
-          return (
-            <Group>
-              <Style.InterventionAnnotation
-                textAnchor={i % 2 === 1 ? 'end' : 'start'}
-              >
-                <BoxedAnnotation x={x} y={0} text={d.intervention} />
-              </Style.InterventionAnnotation>
-              <Style.LineIntervention>
-                <line
-                  x1={x}
-                  x2={x}
-                  y1={INTERVENTIONS_MARGIN / 2}
-                  y2={chartHeight + INTERVENTIONS_MARGIN}
-                />
-              </Style.LineIntervention>
-            </Group>
-          );
-        })}
+        {INTERVENTIONS.map((d, i) => (
+          <Group>
+            <Style.LineIntervention>
+              <line
+                x1={xScale(new Date(d.date))}
+                x2={xScale(new Date(d.date))}
+                y1={INTERVENTIONS_MARGIN / 2}
+                y2={chartHeight + INTERVENTIONS_MARGIN}
+              />
+            </Style.LineIntervention>
+            <Style.InterventionAnnotation
+              textAnchor={i % 2 === 1 ? 'end' : 'start'}
+            >
+              <BoxedAnnotation
+                x={xScale(new Date(d.date))}
+                y={0}
+                text={d.intervention}
+              />
+            </Style.InterventionAnnotation>
+          </Group>
+        ))}
       </Group>
       <AxisBottom top={chartHeight} scale={xScale} />
       <AxisLeft scale={yScale} tickValues={yTicks} />
