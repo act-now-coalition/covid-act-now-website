@@ -19,10 +19,10 @@ import {
 export const RT_TRUNCATION_DAYS = 7;
 
 /**
- * We will assume roughly 10 tracers are needed to trace a case within 48h.
- * The range we give here could be between 10 -15 contact tracers per case.
+ * We will assume roughly 5 tracers are needed to trace a case within 48h.
+ * The range we give here could be between 5-15 contact tracers per case.
  */
-export const TRACERS_NEEDED_PER_CASE = 10;
+export const TRACERS_NEEDED_PER_CASE = 5;
 
 /**
  * We subtract this "decomp" factor from the typical ICU Utilization rates we
@@ -46,6 +46,7 @@ const CONTACT_TRACER_STATE_OVERRIDES: { [key: string]: number } = {
   'New Mexico': 100,
   'North Carolina': 400,
   'North Dakota': 352,
+  Kentucky: 287,
 };
 
 /** Parameters that can be provided when constructing a Projection. */
@@ -481,13 +482,16 @@ export class Projection {
     );
 
     return dailyPositives.map((dailyPositive, idx) => {
-      const positive = dailyPositive || 0;
-      const negative = dailyNegatives[idx] || 0;
-      const total = positive + negative;
+      const positive = dailyPositive;
+      const negative = dailyNegatives[idx];
       // If there are no negatives (but there are positives), then this is
       // likely the last data point, else it would have gotten smoothed, and
       // it's probably a reporting lag issue. So just return null.
-      return negative > 0 ? positive / total : null;
+      if (negative !== null && positive !== null && negative > 0) {
+        return positive / (negative + positive);
+      } else {
+        return null;
+      }
     });
   }
 
@@ -510,7 +514,15 @@ export class Projection {
       if (current === null) {
         result.push(null);
       } else {
-        result.push(current - lastNonNull);
+        if (current - lastNonNull < 0) {
+          // Sometimes series have a "correction" that resets the count
+          // backwards. We treat that as a 'null' delta. Note: They could also
+          // have a correction in the opposite direction, forcing an unusually
+          // high delta, but we don't have a way to detect / handle that. :-(
+          result.push(null);
+        } else {
+          result.push(current - lastNonNull);
+        }
         lastNonNull = current;
       }
     }
@@ -550,7 +562,7 @@ export class Projection {
           row &&
           this.totalICUCapacity &&
           this.totalICUCapacity > 0 &&
-          row.ICUBedsInUse > 0
+          row.ICUBedsInUse !== null
         ) {
           const predictedNonCovidPatientsAtDate =
             this.totalICUCapacity! *

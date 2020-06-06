@@ -109,12 +109,7 @@ export class Projections {
       contact_tracing_level,
     } = this.getLevels();
 
-    // TODO(https://trello.com/c/ybqacRAN): Hawaii ICU disappeared and we don't
-    // want that to pull the state grey.
-    const levelList =
-      this.stateCode === 'HI'
-        ? [rt_level, test_rate_level]
-        : [rt_level, hospitalizations_level, test_rate_level];
+    const levelList = [rt_level, hospitalizations_level, test_rate_level];
 
     // contact tracing levels are reversed (i.e low is bad, high is good)
     const reverseList = [contact_tracing_level];
@@ -125,8 +120,13 @@ export class Projections {
     ) {
       return Level.HIGH;
     } else if (
-      levelList.some(level => level === Level.MEDIUM) ||
+      levelList.some(level => level === Level.MEDIUM_HIGH) ||
       reverseList.some(level => level === Level.MEDIUM)
+    ) {
+      return Level.MEDIUM_HIGH;
+    } else if (
+      levelList.some(level => level === Level.MEDIUM) ||
+      reverseList.some(level => level === Level.MEDIUM_HIGH)
     ) {
       return Level.MEDIUM;
     } else if (

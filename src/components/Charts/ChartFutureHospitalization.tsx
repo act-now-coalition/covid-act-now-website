@@ -2,13 +2,13 @@ import React, { useContext } from 'react';
 import { ThemeContext } from 'styled-components';
 import { last, isDate } from 'lodash';
 import { extent as d3extent } from 'd3-array';
-import { AxisBottom, AxisLeft } from '@vx/axis';
 import { LinePath } from '@vx/shape';
 import { ParentSize } from '@vx/responsive';
 import { scaleLinear, scaleTime } from '@vx/scale';
 import { COLORS } from 'common';
 import { Projections } from 'common/models/Projections';
 import { assert, formatDate, formatInteger } from 'common/utils';
+import { AxisBottom, AxisLeft } from './Axis';
 import BoxedAnnotation from './BoxedAnnotation';
 import ChartContainer from './ChartContainer';
 import RectClipGroup from './RectClipGroup';
@@ -111,7 +111,7 @@ const ChartFutureHospitalization = ({
     <Tooltip left={marginLeft + getXCoord(p)} top={marginTop + getYCoord(p)}>
       <TooltipStyle.Body style={{ fontWeight: 'normal' }}>
         <b style={{ color: 'white' }}>{formatInteger(getY(p))}</b>{' '}
-        {p.isBeds ? 'beds available on' : 'hospitalizations expected by'}{' '}
+        {p.isBeds ? 'beds available on' : 'hospitalizations expected on'}{' '}
         <b style={{ color: 'white' }}>{formatDate(getDate(p), 'MMMM D')}</b>
       </TooltipStyle.Body>
     </Tooltip>
