@@ -146,6 +146,7 @@ const NewLocationPageHeader = (props: {
           onIcuUtilizationClick={props.onIcuUtilizationClick}
           onContactTracingClick={props.onContactTracingClick}
           isMobile={props.isMobile}
+          isHeader={true}
         />
         <HeaderSection>
           <HeaderSubCopyWrapper isVerifiedState={isVerifiedState}>

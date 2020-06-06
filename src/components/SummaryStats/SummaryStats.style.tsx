@@ -171,8 +171,8 @@ export const StatValueText = styled(Typography)<{ condensed?: Boolean }>`
   `}
 `;
 
-export const BetaTag = styled.span`
-  margin-left: 1rem;
+export const BetaTag = styled.span<{ isHeader?: Boolean }>`
+  margin-left: ${({ isHeader }) => (isHeader ? '.9rem' : '1rem')};
   border-radius: 5px;
   display: inline-block;
   background-color: ${palette.info.main};

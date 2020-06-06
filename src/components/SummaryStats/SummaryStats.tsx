@@ -26,6 +26,7 @@ const SummaryStat = ({
   condensed,
   flipSignalStatusOrder,
   isMobile,
+  isHeader,
 }: {
   chartType: Metric;
   value: number;
@@ -34,6 +35,7 @@ const SummaryStat = ({
   condensed?: Boolean;
   flipSignalStatusOrder?: Boolean;
   isMobile?: Boolean;
+  isHeader?: Boolean;
 }) => {
   const levelInfo = getLevelInfo(chartType, value);
 
@@ -55,12 +57,16 @@ const SummaryStat = ({
     }
     fail('Invalid Chart Type');
   };
+
+  console.log('isHeader', isHeader);
   return (
     <SummaryStatWrapper onClick={onClick} condensed={condensed}>
       <StatTextWrapper>
         <StatNameText condensed={condensed}>
           {getMetricName(chartType)}{' '}
-          {!condensed && beta && isMobile && <BetaTag>Beta</BetaTag>}
+          {!condensed && beta && isMobile && (
+            <BetaTag isHeader={isHeader}>Beta</BetaTag>
+          )}
         </StatNameText>
         {!condensed && <StatDetailText>{levelInfo.detail()}</StatDetailText>}
       </StatTextWrapper>
@@ -93,6 +99,7 @@ const SummaryStats = (props: {
   onIcuUtilizationClick?: () => void;
   onContactTracingClick?: () => void;
   isMobile?: Boolean;
+  isHeader?: Boolean;
 }) => {
   const hasStats = !!Object.values(props.stats).filter(
     (val: number | null) => !isNull(val),
@@ -101,6 +108,7 @@ const SummaryStats = (props: {
   const sharedStatProps = {
     isMobile: props.isMobile,
     condensed: props.condensed,
+    isHeader: props.isHeader,
   };
 
   return (
