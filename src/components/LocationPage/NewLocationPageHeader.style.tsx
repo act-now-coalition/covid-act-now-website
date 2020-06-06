@@ -185,7 +185,9 @@ export const ButtonsWrapper = styled(Box)`
   }
 `;
 
-export const HeaderButton = styled(Box)`
+export const HeaderButton = styled(Box)<{
+  hide?: Boolean;
+}>`
   height: 50px;
   width: 50%;
   font-size: 15px;
@@ -196,7 +198,7 @@ export const HeaderButton = styled(Box)`
   font-weight: 500;
   text-align: center;
   margin: auto;
-  display: flex;
+  display: ${props => (props.hide ? 'none' : 'flex')};
   align-items: center;
   justify-content: center;
   border-top: 1px solid #f2f2f2;

@@ -184,7 +184,10 @@ const NewLocationPageHeader = (props: {
             <HeaderButton onClick={props.onHeaderShareClick || noop}>
               Share
             </HeaderButton>
-            <HeaderButton onClick={props.onHeaderSignupClick || noop}>
+            <HeaderButton
+              onClick={props.onHeaderSignupClick || noop}
+              hide={true}
+            >
               Get alerts
             </HeaderButton>
           </ButtonsWrapper>
