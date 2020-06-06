@@ -189,7 +189,7 @@ export const HeaderButton = styled(Box)<{
   hide?: Boolean;
 }>`
   height: 50px;
-  width: 50%;
+  width: 100%;
   font-size: 15px;
   line-height: 1.2;
   cursor: pointer;
@@ -203,18 +203,10 @@ export const HeaderButton = styled(Box)<{
   justify-content: center;
   border-top: 1px solid #f2f2f2;
 
-  &:first-child {
-    border-right: 1px solid #f2f2f2;
-  }
-
   @media (min-width: 600px) {
     border-top: none;
     width: 75px;
     height: 40px;
-
-    &:first-child {
-      border-right: none;
-    }
   }
 `;
 

@@ -58,12 +58,12 @@ type County = {
   population: string;
 };
 
+// TODO: 180 is rough accounting for the navbar and searchbar;
+// could make these constants so we don't have to manually update
 const scrollTo = (div: null | HTMLDivElement, offset: number = 180) =>
   div &&
   window.scrollTo({
     left: 0,
-    // TODO: 180 is rough accounting for the navbar and searchbar;
-    // could make these constants so we don't have to manually update
     top: div.offsetTop - offset,
     behavior: 'smooth',
   });

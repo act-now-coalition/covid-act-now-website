@@ -33,6 +33,7 @@ function LocationPageHeading({ projections }) {
   return <span>{displayName}</span>;
 }
 
+//TODO(chelsi) delete this file + all other old header code
 const LocationPageHeader = ({ projections }) => {
   const { isEmbed } = useEmbed();
   const alarmLevel = projections.getAlarmLevel();

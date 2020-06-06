@@ -57,7 +57,7 @@ export const SummaryStatWrapper = styled(Box)<{ condensed?: Boolean }>`
       border-bottom: 1px solid ${palette.lightGray};
       border-top: 1px solid ${palette.lightGray};
       margin: 0;
-      padding: 1.5rem 1rem;
+      padding: 1.5rem 1.25rem;
       flex-direction: column;
       align-items: center;
       max-width: 25%;

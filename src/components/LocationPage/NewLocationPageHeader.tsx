@@ -69,6 +69,7 @@ const LocationPageHeading = (props: { projections: Projections }) => {
 
 const noop = () => {};
 
+//TODO(chelsi) delete all old header code + rename this as LocationPageHeader
 const NewLocationPageHeader = (props: {
   projections: Projections;
   condensed?: Boolean;
