@@ -43,16 +43,30 @@ export const SummaryStatsWrapper = styled(Box)<{ condensed?: Boolean }>`
   `}
 `;
 
-export const SummaryStatWrapper = styled(Box)<{ condensed?: Boolean }>`
+export const SummaryStatWrapper = styled(Box)<{
+  condensed?: Boolean;
+  isEmbed?: Boolean;
+}>`
   ${props =>
     props.condensed
       ? `
     display: flex;
     align-items: center;
-    margin-bottom: 0.75rem;
+    cursor: pointer;
+    padding: ${props.isEmbed && '15px 16px'};
+    margin-bottom:  ${!props.isEmbed && '0.75rem'};
 
     &:last-child {
       margin-bottom: 0;
+    }
+
+    &:hover {
+      background-color: #fbfbfb;
+
+      ${StatNameText} {
+        color: #00bfea;
+        text-decoration: underline;
+      }
     }
   `
       : `
@@ -91,14 +105,17 @@ export const SummaryStatWrapper = styled(Box)<{ condensed?: Boolean }>`
   `}
 `;
 
-export const StatNameText = styled(Typography)<{ condensed?: Boolean }>`
+export const StatNameText = styled(Typography)<{
+  condensed?: Boolean;
+  isEmbed?: Boolean;
+}>`
   ${props =>
     props.condensed
       ? `
     font-weight: 500;
     font-size: 0.75rem;
-    line-height: 0.875rem;;
-    letter-spacing: 0.06em;
+    line-height: 0.875rem;
+    letter-spacing: ${props.isEmbed ? '0.04em' : '0.06em'};
     text-transform: uppercase;
     text-align: left;
     color: rgba(0, 0, 0, 0.7);
@@ -156,7 +173,10 @@ export const StatDetailText = styled(Typography)`
   margin-top: 0.25rem;
 `;
 
-export const StatValueText = styled(Typography)<{ condensed?: Boolean }>`
+export const StatValueText = styled(Typography)<{
+  condensed?: Boolean;
+  isEmbed?: Boolean;
+}>`
   font-family: 'Source Code Pro', Menlo, Monaco, Consolas, 'Courier New',
     monospace;
   font-weight: 700;
@@ -164,7 +184,7 @@ export const StatValueText = styled(Typography)<{ condensed?: Boolean }>`
   ${props =>
     props.condensed
       ? `
-    font-size: 1rem;
+    font-size: ${props.isEmbed ? '17px' : '1rem'};
     line-height: 1rem;
     text-align: right;
   `

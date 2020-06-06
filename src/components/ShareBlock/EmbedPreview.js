@@ -92,7 +92,7 @@ export default function EmbedPreview({ open, onClose, county }) {
                     src={iFramePath}
                     title="Embed Preview"
                     width={EMBED_WIDTH}
-                    height={EMBED_HEIGHT - 30} // Extra padding we don't need here
+                    height={EMBED_HEIGHT}
                     frameBorder="0"
                   ></iframe>
                 </Grid>

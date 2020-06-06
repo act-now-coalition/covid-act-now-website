@@ -1,41 +1,43 @@
 import _ from 'lodash';
 import React, { useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
-import { STATES } from 'common';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Drawer from '@material-ui/core/Drawer';
-
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020';
 import '../../App.css'; /* optional for styling like the :hover pseudo-class */
-import LocationPageHeader from '../../components/LocationPage/LocationPageHeader';
-import ShareModelBlock from '../../components/ShareBlock/ShareModelBlock';
-
 import { findCountyByFips } from 'common/locations';
 import { useProjections } from 'common/utils/model';
-import { useEmbed } from 'common/utils/hooks';
-
+import { useModelLastUpdatedDate } from 'common/utils/model';
+import { Projection } from 'common/models/Projection';
+import { Metric } from 'common/metric';
+import { Level } from 'common/level';
+import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
+import { COLOR_MAP } from 'common/colors';
+import LogoUrlLight from 'assets/images/logoUrlLight';
+import SummaryStats from 'components/SummaryStats/SummaryStats';
+import {
+  HeaderText,
+  AlarmLevel,
+} from 'components/SocialLocationPreview/SocialLocationPreview.style';
 import {
   EmbedContainer,
-  EmbedGlobalStyle,
-  EmbedHeaderContainer,
-  EmbedContentContainer,
+  EmbedWrapper,
+  EmbedFooterWrapper,
+  EmbedBody,
+  EmbedHeaderWrapper,
+  FooterDate,
+  LogoWrapper,
+  EmbedHeader,
+  EmbedSubheader,
 } from './Embed.style';
-
-import ProjectionsTab from './ProjectionsTab';
-import ChartsTab from './ChartsTab';
-import EmbedFooter from './EmbedFooter';
 
 export default function Embed() {
   const { stateId: _location, countyId, countyFipsId } = useParams();
 
-  const [tabState, setTabState] = useState(0);
-  const [shareDrawerOpen, setShareDrawerOpen] = useState(false);
-  const handleTabChange = (_event, newTabValue) => setTabState(newTabValue);
+  const lastUpdatedDate = useModelLastUpdatedDate() || new Date();
+  const lastUpdatedDateString =
+    lastUpdatedDate && lastUpdatedDate.toLocaleDateString();
 
   const [selectedCounty, setSelectedCounty] = useState(null);
   const [location, setLocation] = useState(null);
-  const { iFrameCodeSnippet } = useEmbed();
   useMemo(() => {
     let state = null,
       county = null;
@@ -59,7 +61,19 @@ export default function Embed() {
   }, [_location, countyId, countyFipsId]);
 
   const projections = useProjections(location, selectedCounty);
-  const locationName = STATES[location];
+
+  const getChartSummarys = (projection = Projection) => {
+    return {
+      [Metric.CASE_GROWTH_RATE]: projection.rt,
+      [Metric.HOSPITAL_USAGE]: projection.currentIcuUtilization,
+      [Metric.POSITIVE_TESTS]: projection.currentTestPositiveRate,
+      [Metric.CONTACT_TRACING]: projection.currentContactTracerMetric,
+    };
+  };
+
+  const projection = projections && projections.primary;
+
+  const stats = projection && getChartSummarys(projection);
 
   if (!projections) {
     return null;
@@ -70,59 +84,52 @@ export default function Embed() {
     return <span>'No data available for county.'</span>;
   }
 
-  const cases = primary.currentCumulativeCases;
-  const deaths = primary.currentCumulativeDeaths;
+  const alarmLevel = projections.getAlarmLevel();
+  const levelInfo = LOCATION_SUMMARY_LEVELS[alarmLevel];
+  const fillColor =
+    alarmLevel !== Level.UNKNOWN ? levelInfo.color : COLOR_MAP.GRAY.LIGHT;
 
-  const totalPopulation = primary.totalPopulation;
-  const populationPercentage =
-    Number.parseFloat(deaths / totalPopulation).toPrecision(2) * 100;
-
-  const deathsPercentage = Number.parseFloat(
-    (deaths / cases) * 100,
-  ).toPrecision(2);
+  const embedOnClickBaseURL = projections
+    ? `https://covidactnow.org/us/${location.toLowerCase()}${
+        projections.isCounty
+          ? `/county/${projections.county.county_url_name}`
+          : ''
+      }`
+    : '';
 
   return (
-    <EmbedContainer elevation="2">
-      <EmbedHeaderContainer>
-        <LocationPageHeader
-          location={location}
-          locationName={locationName}
-          countyName={selectedCounty?.county}
-          projections={projections}
-        />
-        <Tabs value={tabState} variant="fullWidth" onChange={handleTabChange}>
-          <Tab label="Data" />
-          <Tab label="Projections" />
-        </Tabs>
-      </EmbedHeaderContainer>
-      <EmbedContentContainer>
-        {tabState === 0 ? (
-          <ProjectionsTab
-            cases={cases}
-            deaths={deaths}
-            totalPopulation={totalPopulation}
-            deathsPercentage={deathsPercentage}
-            populationPercentage={populationPercentage}
+    <EmbedContainer>
+      <EmbedWrapper>
+        <EmbedHeaderWrapper>
+          <HeaderText>
+            <EmbedHeader>
+              {projections.countyName
+                ? `${projections.countyName}, ${projections.stateCode}`
+                : projections.stateName}
+            </EmbedHeader>
+            <EmbedSubheader>Overall COVID risk</EmbedSubheader>
+          </HeaderText>
+          <AlarmLevel color={fillColor}>{levelInfo.name}</AlarmLevel>
+        </EmbedHeaderWrapper>
+        <EmbedBody>
+          <SummaryStats
+            stats={stats}
+            condensed={true}
+            isEmbed={true}
+            embedOnClickBaseURL={embedOnClickBaseURL}
           />
-        ) : (
-          <ChartsTab projections={projections} />
-        )}
-      </EmbedContentContainer>
-      <EmbedFooter onShare={() => setShareDrawerOpen(true)} />
-
-      <EmbedGlobalStyle />
-      <Drawer
-        anchor="bottom"
-        open={shareDrawerOpen}
-        onClose={() => setShareDrawerOpen(false)}
-      >
-        <ShareModelBlock
-          condensed
-          stateId={location}
-          county={selectedCounty}
-          embedSnippet={iFrameCodeSnippet}
-        />
-      </Drawer>
+        </EmbedBody>
+        <EmbedFooterWrapper>
+          <LogoWrapper
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.covidactnow.org"
+          >
+            <LogoUrlLight height={15} />
+          </LogoWrapper>
+          <FooterDate>Last Updated {lastUpdatedDateString}</FooterDate>
+        </EmbedFooterWrapper>
+      </EmbedWrapper>
     </EmbedContainer>
   );
 }
