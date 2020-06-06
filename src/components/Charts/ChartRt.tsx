@@ -202,7 +202,7 @@ const ChartRt = ({
         r={6}
       />
       <AxisBottom top={chartHeight} scale={xScale} />
-      <AxisLeft top={marginTop} scale={yScale} tickValues={yTicks} />
+      <AxisLeft scale={yScale} tickValues={yTicks} />
     </ChartContainer>
   );
 };
