@@ -38,8 +38,16 @@ const Disclaimer = ({
           rel="noopener noreferrer"
         >
           our data sources
+        </a>{' '}
+        (for contact tracing data, we partner with{' '}
+        <a
+          href="https://testandtrace.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          testandtrace.com
         </a>
-        .
+        ).
       </DisclaimerBody>
     </DisclaimerWrapper>
   );

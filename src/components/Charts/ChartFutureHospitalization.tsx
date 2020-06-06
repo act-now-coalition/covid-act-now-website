@@ -111,7 +111,7 @@ const ChartFutureHospitalization = ({
     <Tooltip left={marginLeft + getXCoord(p)} top={marginTop + getYCoord(p)}>
       <TooltipStyle.Body style={{ fontWeight: 'normal' }}>
         <b style={{ color: 'white' }}>{formatInteger(getY(p))}</b>{' '}
-        {p.isBeds ? 'beds available on' : 'hospitalizations expected by'}{' '}
+        {p.isBeds ? 'beds available on' : 'hospitalizations expected on'}{' '}
         <b style={{ color: 'white' }}>{formatDate(getDate(p), 'MMMM D')}</b>
       </TooltipStyle.Body>
     </Tooltip>
