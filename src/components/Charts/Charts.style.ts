@@ -53,6 +53,16 @@ export const LineGrid = styled.g`
   }
 `;
 
+export const LineIntervention = styled.g`
+  line,
+  path {
+    fill: none;
+    stroke: #d1d1d1;
+    stroke-dasharray: 1, 1;
+    stroke-width: 1px;
+  }
+`;
+
 export const SeriesLine = styled.g`
   line,
   path {
@@ -121,6 +131,20 @@ export const RegionAnnotation = styled(TextAnnotation)<{ isActive: boolean }>`
     fill: ${props =>
       props.isActive ? palette(props).background : props.color};
     text-anchor: end;
+  }
+`;
+
+export const InterventionAnnotation = styled(TextAnnotation)<{
+  textAnchor: string;
+}>`
+  rect {
+    fill: white;
+    stroke: none;
+  }
+  text {
+    fill: #828282;
+    font-weight: normal;
+    text-anchor: ${props => props.textAnchor};
   }
 `;
 
