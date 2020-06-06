@@ -23,7 +23,7 @@ export const EmbedContainer = styled(Paper)`
   justify-content: center;
   overflow: hidden;
   border-radius: 4px;
-  height: 395px;
+  height: 370px;
   width: 350px;
   box-shadow: none;
 `;
