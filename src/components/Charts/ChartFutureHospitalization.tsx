@@ -8,7 +8,7 @@ import { scaleLinear, scaleTime } from '@vx/scale';
 import { COLORS } from 'common';
 import { Projections } from 'common/models/Projections';
 import { assert, formatDate, formatInteger } from 'common/utils';
-import { AxisBottom, AxisLeft } from './Axis';
+import { AxisBottom } from './Axis';
 import BoxedAnnotation from './BoxedAnnotation';
 import ChartContainer from './ChartContainer';
 import RectClipGroup from './RectClipGroup';
@@ -167,13 +167,6 @@ const ChartFutureHospitalization = ({
             cx={getXCoord(lastPastPoint)}
             cy={getYCoord(lastPastPoint)}
             r={6}
-          />
-          <AxisLeft
-            top={marginTop}
-            scale={yScale}
-            hideAxisLine
-            hideTicks
-            hideZero
           />
         </RectClipGroup>
         <Style.Axis>
