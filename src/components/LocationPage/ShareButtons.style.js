@@ -47,7 +47,7 @@ export const SaveOrShareButton = styled.div`
   ${StyledShareButtonStyles};
   border-right: ${({ isLast }) =>
     !isLast && `1px solid ${COLOR_MAP.GRAY.LIGHT}`};
-  color: #3b94e6;
+  color: ${COLOR_MAP.BLUE};
   text-transform: none;
   line-height: 1;
   height: 30px;
@@ -56,6 +56,7 @@ export const SaveOrShareButton = styled.div`
   justify-content: center;
   align-items: center;
   text-decoration: none;
+  font-weight: 500;
 
   @media (min-width: 600px) {
     height: 40px;

@@ -1,14 +1,17 @@
 import styled from 'styled-components';
 import { Box } from '@material-ui/core';
 
-export const SignalStatusWrapper = styled(Box)<{ condensed?: Boolean }>`
+export const SignalStatusWrapper = styled(Box)<{
+  condensed?: Boolean;
+  isEmbed?: Boolean;
+}>`
   ${props =>
     props.condensed
       ? `
     font-family: 'Source Code Pro', Menlo, Monaco, Consolas, 'Courier New',
       monospace;
     font-weight: bold;
-    font-size: 0.875rem;
+    font-size: ${props.isEmbed ? '13px' : '0.875rem'};
     width: 4.5rem;
     margin-left: 1rem;
     line-height: 1.25rem;
@@ -21,9 +24,7 @@ export const SignalStatusWrapper = styled(Box)<{ condensed?: Boolean }>`
     }
   `
       : `
-    padding: 0 0.4rem;
     border-radius: 5px;
-    border: 1px solid rgba(0, 0, 0, 0.12);
     background-color: white;
     color: ${(props: any) => props.color || 'darkgray'};
     display: inline-block;
@@ -40,6 +41,7 @@ export const SignalStatusWrapper = styled(Box)<{ condensed?: Boolean }>`
     @media (min-width: 600px) {
       min-width: 120px;
       margin: 0;
+      border: 1px solid #eeeeee;
     }
 
     svg {

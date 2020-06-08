@@ -9,7 +9,6 @@ import {
   BetaTag,
   ChartHeaderWrapper,
 } from './ChartsHolder.style';
-import LocationPageHeader from 'components/LocationPage/LocationPageHeader';
 import NoCountyDetail from './NoCountyDetail';
 import { Projections } from 'common/models/Projections';
 import { Projection, TRACERS_NEEDED_PER_CASE } from 'common/models/Projection';
@@ -17,6 +16,7 @@ import SummaryStats from 'components/SummaryStats/SummaryStats';
 import Disclaimer from 'components/Disclaimer/Disclaimer';
 import ClaimStateBlock from 'components/ClaimStateBlock/ClaimStateBlock';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
+import NewLocationPageHeader from 'components/LocationPage/NewLocationPageHeader';
 import Outcomes from 'components/Outcomes/Outcomes';
 import ShareButtons from 'components/LocationPage/ShareButtons';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -58,13 +58,13 @@ type County = {
   population: string;
 };
 
-const scrollTo = (div: null | HTMLDivElement) =>
+// TODO: 180 is rough accounting for the navbar and searchbar;
+// could make these constants so we don't have to manually update
+const scrollTo = (div: null | HTMLDivElement, offset: number = 180) =>
   div &&
   window.scrollTo({
     left: 0,
-    // TODO: 180 is rough accounting for the navbar and searchbar;
-    // could make these constants so we don't have to manually update
-    top: div.offsetTop - 180,
+    top: div.offsetTop - offset,
     behavior: 'smooth',
   });
 
@@ -91,6 +91,7 @@ const ChartsHolder = (props: {
   const icuUtilizationRef = useRef<HTMLDivElement>(null);
   const contactTracingRef = useRef<HTMLDivElement>(null);
   const futureProjectionsRef = useRef<HTMLDivElement>(null);
+  const shareBlockRef = useRef<HTMLDivElement>(null);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
@@ -154,13 +155,16 @@ const ChartsHolder = (props: {
       ) : (
         <>
           <ChartContentWrapper>
-            <LocationPageHeader projections={props.projections} />
-            <SummaryStats
+            <NewLocationPageHeader
+              projections={props.projections}
               stats={getChartSummarys(projection)}
               onRtRangeClick={() => scrollTo(rtRangeRef.current)}
               onTestPositiveClick={() => scrollTo(testPositiveRef.current)}
               onIcuUtilizationClick={() => scrollTo(icuUtilizationRef.current)}
               onContactTracingClick={() => scrollTo(contactTracingRef.current)}
+              onHeaderShareClick={() => scrollTo(shareBlockRef.current, -215)}
+              onHeaderSignupClick={() => scrollTo(shareBlockRef.current)}
+              isMobile={isMobile}
             />
             <MainContentInner>
               <ChartHeaderWrapper>
@@ -305,7 +309,9 @@ const ChartsHolder = (props: {
               countyId={props.county?.county_url_name}
             />
           </ChartContentWrapper>
-          <ShareModelBlock condensed={false} {...shareButtonProps} />
+          <div ref={shareBlockRef}>
+            <ShareModelBlock condensed={false} {...shareButtonProps} />
+          </div>
         </>
       )}
     </>

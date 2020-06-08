@@ -12,8 +12,7 @@ export const SummaryStatsWrapper = styled(Box)<{ condensed?: Boolean }>`
     display: flex;
     align-items: stretch;
     justify-content: space-around;
-    padding: 2rem 0.5rem;
-    background-color: ${palette.lightGray};
+    background-color: white;
     border-radius: 0;
     box-shadow: none;
     max-width: 900px;
@@ -21,84 +20,80 @@ export const SummaryStatsWrapper = styled(Box)<{ condensed?: Boolean }>`
     cursor: pointer;
 
     @media (min-width: 600px) {
+      background-color: ${palette.lightGray};
+
       flex-direction: row;
-      border-radius: 2px;
-      box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.1);
       background-color: white;
-      padding: 1.75rem 1em;
       position: relative;
-      margin: -3rem 1rem 0;
-      border-radius: 5px;
-      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.12);
-    }
-    @media (min-width: 932px) {
-      margin: -3rem auto 0;
-    }
-    @media (min-width: 1350px) {
-      margin: -3rem 445px 0 auto;
-    }
-    @media (min-width: 1750px) {
-      margin: -3rem auto 0;
     }
   `}
 `;
 
-export const SummaryStatWrapper = styled(Box)<{ condensed?: Boolean }>`
+export const SummaryStatWrapper = styled(Box)<{
+  condensed?: Boolean;
+  isEmbed?: Boolean;
+}>`
   ${props =>
     props.condensed
       ? `
     display: flex;
     align-items: center;
-    margin-bottom: 0.75rem;
+    cursor: pointer;
+    padding: ${props.isEmbed && '15px 16px'};
+    margin-bottom:  ${!props.isEmbed && '0.75rem'};
 
     &:last-child {
       margin-bottom: 0;
+    }
+
+    &:hover {
+      background-color: #fbfbfb;
+
+      ${StatNameText} {
+        color: #00bfea;
+        text-decoration: underline;
+      }
     }
   `
       : `
     display: flex;
     flex: 1;
     flex-direction: row;
-    margin: 0 0.5rem;
-    padding: 1.5rem 0;
+    padding: 1.85rem 1rem;
     align-items: stretch;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    border-bottom: 1px solid ${palette.lightGray};
 
     &:first-child {
-      padding-top: 0;
-    }
-
-    &:last-child {
-      border-bottom: 0;
-      padding-bottom: 0;
+      border-top: 1px solid ${palette.lightGray};
     }
 
     @media (min-width: 600px) {
-      border-bottom: 0;
+      border-bottom: 1px solid ${palette.lightGray};
+      border-top: 1px solid ${palette.lightGray};
       margin: 0;
-      padding: 0 1.2rem 0 1rem;
+      padding: 1.5rem 1.25rem;
       flex-direction: column;
       align-items: center;
+      max-width: 25%;
 
       &:not(:last-child) {
         border-right: 1px solid ${palette.divider};
-      }
-
-      &:last-child{
-        padding-right: 0;
       }
     }
   `}
 `;
 
-export const StatNameText = styled(Typography)<{ condensed?: Boolean }>`
+export const StatNameText = styled(Typography)<{
+  condensed?: Boolean;
+  isEmbed?: Boolean;
+}>`
   ${props =>
     props.condensed
       ? `
     font-weight: 500;
     font-size: 0.75rem;
-    line-height: 0.875rem;;
-    letter-spacing: 0.06em;
+    line-height: 0.875rem;
+    letter-spacing: ${props.isEmbed ? '0.04em' : '0.06em'};
     text-transform: uppercase;
     text-align: left;
     color: rgba(0, 0, 0, 0.7);
@@ -106,11 +101,15 @@ export const StatNameText = styled(Typography)<{ condensed?: Boolean }>`
   `
       : `
     font-weight: 600;
-    font-size: 1.125rem;
     line-height: 1.25rem;
+
+    text-transform: uppercase;
+    font-size: 14px;
+    line-height: 1.4;
 
     @media (min-width: 600px) {
       min-height: 0;
+      font-size: 1rem;
     }
   `}
 `;
@@ -150,13 +149,23 @@ export const StatValueWrapper = styled.div<{ condensed?: Boolean }>`
 `;
 
 export const StatDetailText = styled(Typography)`
-  font-size: 0.875rem;
-  line-height: 1.125rem;
   color: rgba(0, 0, 0, 0.7);
-  margin-top: 0.25rem;
+  margin-top: 0.35rem;
+  font-family: 'Source Code Pro';
+  font-size: 12px;
+  line-height: 1.4;
+
+  @media (min-width: 600px) {
+    margin-top: 0.25rem;
+    font-size: 0.8rem;
+    line-height: 1.125rem;
+  }
 `;
 
-export const StatValueText = styled(Typography)<{ condensed?: Boolean }>`
+export const StatValueText = styled(Typography)<{
+  condensed?: Boolean;
+  isEmbed?: Boolean;
+}>`
   font-family: 'Source Code Pro', Menlo, Monaco, Consolas, 'Courier New',
     monospace;
   font-weight: 700;
@@ -164,31 +173,36 @@ export const StatValueText = styled(Typography)<{ condensed?: Boolean }>`
   ${props =>
     props.condensed
       ? `
-    font-size: 1rem;
+    font-size: ${props.isEmbed ? '17px' : '1rem'};
     line-height: 1rem;
     text-align: right;
   `
       : `
     font-size: 1.5rem;
     line-height: 1.125rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.35rem;
 
     @media (min-width: 600px) {
       text-align: left;
       font-size: 1.875rem;
       line-height: 3.5rem;
+      margin-bottom: 0.5rem;
     }
   `}
 `;
 
-export const BetaTag = styled.span`
-  margin-left: 1rem;
+export const BetaTag = styled.span<{ isHeader?: Boolean }>`
+  margin-left: ${({ isHeader }) => (isHeader ? '.8rem' : '1rem')};
   border-radius: 5px;
   display: inline-block;
   background-color: ${palette.info.main};
   color: white;
   font-size: 0.675rem;
   padding: 0 0.75rem;
-  transform: translateY(-0.45rem);
-  line-height: 1.25rem;
+  transform: translateY(-0.15rem);
+  line-height: 1.35rem;
+
+  @media (min-width: 600px) {
+    transform: translateY(-0.45rem);
+  }
 `;
