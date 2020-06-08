@@ -8,7 +8,7 @@ import { scaleLinear, scaleTime } from '@vx/scale';
 import { COLORS } from 'common';
 import { Projections } from 'common/models/Projections';
 import { assert, formatDate, formatInteger } from 'common/utils';
-import { AxisBottom, AxisLeft } from './Axis';
+import { AxisBottom } from './Axis';
 import BoxedAnnotation from './BoxedAnnotation';
 import ChartContainer from './ChartContainer';
 import RectClipGroup from './RectClipGroup';
@@ -111,7 +111,7 @@ const ChartFutureHospitalization = ({
     <Tooltip left={marginLeft + getXCoord(p)} top={marginTop + getYCoord(p)}>
       <TooltipStyle.Body style={{ fontWeight: 'normal' }}>
         <b style={{ color: 'white' }}>{formatInteger(getY(p))}</b>{' '}
-        {p.isBeds ? 'beds available on' : 'hospitalizations expected by'}{' '}
+        {p.isBeds ? 'beds available on' : 'hospitalizations expected on'}{' '}
         <b style={{ color: 'white' }}>{formatDate(getDate(p), 'MMMM D')}</b>
       </TooltipStyle.Body>
     </Tooltip>
@@ -167,13 +167,6 @@ const ChartFutureHospitalization = ({
             cx={getXCoord(lastPastPoint)}
             cy={getYCoord(lastPastPoint)}
             r={6}
-          />
-          <AxisLeft
-            top={marginTop}
-            scale={yScale}
-            hideAxisLine
-            hideTicks
-            hideZero
           />
         </RectClipGroup>
         <Style.Axis>

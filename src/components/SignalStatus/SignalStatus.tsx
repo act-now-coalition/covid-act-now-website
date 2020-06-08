@@ -30,11 +30,13 @@ const SignalStatus = (props: {
   levelInfo: LevelInfo;
   condensed?: Boolean;
   flipOrder?: Boolean;
+  isEmbed?: Boolean;
 }) => {
   return (
     <SignalStatusWrapper
       color={props.levelInfo.color}
       condensed={props.condensed}
+      isEmbed={props.isEmbed}
     >
       {getIcon(props.levelInfo, props.flipOrder || false)}
       <span>{props.levelInfo.name}</span>

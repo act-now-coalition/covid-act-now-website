@@ -12,7 +12,7 @@ import { MapInstructions, MobileLineBreak } from './Map.style';
 
 // TODO(@pablo): We might want to move this to LOCATION_SUMMARY_LEVELS
 const LEGEND_LOW = 'On track to contain COVID';
-const LEGEND_MEDIUM = 'On track for "herd immunity"';
+const LEGEND_MEDIUM = 'Controlled disease growth';
 const LEGEND_MEDIUM_HIGH = 'At risk';
 const LEGEND_HIGH = 'Active or imminent outbreak';
 
