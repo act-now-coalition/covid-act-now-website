@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import { DisclaimerWrapper, DisclaimerBody } from './Disclaimer.style';
 import LightTooltip from 'components/LightTooltip/LightTooltip';
@@ -38,16 +38,22 @@ const Disclaimer = ({
           rel="noopener noreferrer"
         >
           our data sources
-        </a>{' '}
-        (for contact tracing data, we partner with{' '}
-        <a
-          href="https://testandtrace.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          testandtrace.com
         </a>
-        ).
+        {metricName === 'contact tracing' && (
+          <Fragment>
+            {' '}
+            (for contact tracing data, we partner with{' '}
+            <a
+              href="https://testandtrace.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              testandtrace.com
+            </a>
+            )
+          </Fragment>
+        )}
+        .
       </DisclaimerBody>
     </DisclaimerWrapper>
   );

@@ -12,7 +12,6 @@ import {
 import NoCountyDetail from './NoCountyDetail';
 import { Projections } from 'common/models/Projections';
 import { Projection, TRACERS_NEEDED_PER_CASE } from 'common/models/Projection';
-import SummaryStats from 'components/SummaryStats/SummaryStats';
 import Disclaimer from 'components/Disclaimer/Disclaimer';
 import ClaimStateBlock from 'components/ClaimStateBlock/ClaimStateBlock';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
@@ -264,7 +263,7 @@ const ChartsHolder = (props: {
               {contactTracingData && (
                 <>
                   <ChartContactTracing columnData={contactTracingData} />
-                  <Disclaimer>
+                  <Disclaimer metricName="contact tracing">
                     <a
                       href="https://covidlocal.org/assets/documents/COVID%20Local%20Metrics%20overview.pdf"
                       target="_blank"
