@@ -17,6 +17,7 @@ import SignalStatus from 'components/SignalStatus/SignalStatus';
 import { formatDecimal, formatPercent } from 'common/utils';
 import { fail } from 'assert';
 import { isNull } from 'util';
+import * as urls from 'common/urls';
 
 const SummaryStat = ({
   chartType,
@@ -25,6 +26,8 @@ const SummaryStat = ({
   beta,
   condensed,
   flipSignalStatusOrder,
+  isEmbed,
+  embedOnClickBaseURL,
 }: {
   chartType: Metric;
   value: number;
@@ -32,8 +35,17 @@ const SummaryStat = ({
   beta?: Boolean;
   condensed?: Boolean;
   flipSignalStatusOrder?: Boolean;
+  isEmbed?: Boolean;
+  embedOnClickBaseURL?: string;
 }) => {
   const levelInfo = getLevelInfo(chartType, value);
+
+  const embedOnClick = () => {
+    const url = urls.addSharingId(`${embedOnClickBaseURL}/chart/${chartType}`);
+    window.open(url, '_blank');
+  };
+
+  const finalOnClick = isEmbed ? embedOnClick : onClick;
 
   const formatValueForChart = (
     chartType: Metric,
@@ -54,9 +66,13 @@ const SummaryStat = ({
     fail('Invalid Chart Type');
   };
   return (
-    <SummaryStatWrapper onClick={onClick} condensed={condensed}>
+    <SummaryStatWrapper
+      onClick={finalOnClick}
+      condensed={condensed}
+      isEmbed={isEmbed}
+    >
       <StatTextWrapper>
-        <StatNameText condensed={condensed}>
+        <StatNameText condensed={condensed} isEmbed={isEmbed}>
           {getMetricName(chartType)}{' '}
         </StatNameText>
         {!condensed && <StatDetailText>{levelInfo.detail()}</StatDetailText>}
@@ -64,7 +80,7 @@ const SummaryStat = ({
       <StatValueWrapper condensed={condensed}>
         {value == null ? null : (
           <>
-            <StatValueText condensed={condensed}>
+            <StatValueText condensed={condensed} isEmbed={isEmbed}>
               {formatValueForChart(chartType, value)}
               {!condensed && beta && <BetaTag>Beta</BetaTag>}
             </StatValueText>
@@ -74,6 +90,7 @@ const SummaryStat = ({
           levelInfo={levelInfo}
           condensed={condensed}
           flipOrder={flipSignalStatusOrder}
+          isEmbed={isEmbed}
         />
       </StatValueWrapper>
     </SummaryStatWrapper>
@@ -85,14 +102,22 @@ const noop = () => {};
 const SummaryStats = (props: {
   stats: { [key: string]: number | null };
   condensed?: Boolean;
+  isEmbed?: Boolean;
   onRtRangeClick?: () => void;
   onTestPositiveClick?: () => void;
   onIcuUtilizationClick?: () => void;
   onContactTracingClick?: () => void;
+  embedOnClickBaseURL?: string;
 }) => {
   const hasStats = !!Object.values(props.stats).filter(
     (val: number | null) => !isNull(val),
   ).length;
+
+  const embedProps = {
+    embedOnClickBaseURL: props.embedOnClickBaseURL,
+    isEmbed: props.isEmbed,
+  };
+
   return (
     <>
       {hasStats && (
@@ -102,12 +127,14 @@ const SummaryStats = (props: {
             chartType={Metric.CASE_GROWTH_RATE}
             condensed={props.condensed}
             value={props.stats[Metric.CASE_GROWTH_RATE] as number}
+            {...embedProps}
           />
           <SummaryStat
             onClick={props.onTestPositiveClick || noop}
             chartType={Metric.POSITIVE_TESTS}
             condensed={props.condensed}
             value={props.stats[Metric.POSITIVE_TESTS] as number}
+            {...embedProps}
           />
           <SummaryStat
             onClick={props.onIcuUtilizationClick || noop}
@@ -115,6 +142,7 @@ const SummaryStats = (props: {
             beta={true}
             condensed={props.condensed}
             value={props.stats[Metric.HOSPITAL_USAGE] as number}
+            {...embedProps}
           />
           <SummaryStat
             onClick={props.onContactTracingClick || noop}
@@ -123,6 +151,7 @@ const SummaryStats = (props: {
             condensed={props.condensed}
             value={props.stats[Metric.CONTACT_TRACING] as number}
             flipSignalStatusOrder
+            {...embedProps}
           />
         </SummaryStatsWrapper>
       )}

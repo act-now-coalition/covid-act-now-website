@@ -165,7 +165,6 @@ const ChartZones = ({
       </Style.TextAnnotation>
       <AxisBottom top={chartHeight} scale={xScale} />
       <AxisLeft
-        top={marginTop}
         scale={yScale}
         tickValues={yTicks}
         hideAxisLine
