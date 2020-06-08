@@ -3,8 +3,7 @@ import { StyledNewsletter, InputHolder } from './Newsletter.style';
 import Chip from '@material-ui/core/Chip';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
-import { each } from 'lodash';
-import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020';
+import { getLocationNames } from 'common/locations';
 
 class Newsletter extends React.Component {
   constructor() {
@@ -12,7 +11,9 @@ class Newsletter extends React.Component {
     this.form = null;
     this.emailInput = null;
     this.alertsSelectionArray = [];
-    this.state = { alertSignUps: '' };
+    this.defaultValues = [];
+    this.autocompleteOptions = getLocationNames();
+    this.state = { alertSignUps: '', checked: true};
     this.submitForm = this.submitForm.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
   }
@@ -51,25 +52,34 @@ class Newsletter extends React.Component {
     });
   };
 
+  componentDidMount() {
+    this.handleSelectChange(this.defaultValues);
+  }
+
   render() {
     const { stateId, county } = this.props;
-
-    const stateDataset = US_STATE_DATASET.state_dataset.map(state => {
-      return {
-        ...state,
-        full_fips_code: state.state_fips_code + '000',
-      };
+    this.defaultValues = this.autocompleteOptions.filter(location => {
+      const matching_state =
+        location.state_code === stateId && location.full_fips_code.length === 2;
+      let matching_county = false;
+      if (county) {
+        matching_county =
+          location.county === county &&
+          location.state_code === stateId &&
+          location.full_fips_code.length === 5;
+      }
+      return matching_state || matching_county;
     });
-    const countyDataset = [];
-
-    each(US_STATE_DATASET.state_county_map_dataset, (value, key) => {
-      countyDataset.push(...value.county_dataset);
-    });
-
-    const autocomplete_options = stateDataset.concat(countyDataset);
 
     return (
       <StyledNewsletter>
+        {/* This form comes from the signup form builder
+        (https://covidactnow.createsend.com/subscribers/signupformbuilder/58a40b3258be0d56) within the subscribers page
+        From there choose the option where you add code to your website without css.
+        To update the grab the data-id, classNames, ids and names for each of the inputs in order to subscribe users.
+        We hide some of the information users don't need to enter and add some form fields that the api doesn't
+        require (i.e the alert-loctions autocomplete).
+         */}
         <form
           ref={f => (this.form = f)}
           className="js-cm-form"
@@ -101,6 +111,8 @@ class Newsletter extends React.Component {
               value="wurhhh"
               id="wurhhh"
               name="cm-ol-wurhhh"
+              onChange={() => this.setState({"checked": !this.state.checked})}
+              checked={this.state.checked}
             />
             <label for="checkbox">
               {' '}
@@ -114,21 +126,20 @@ class Newsletter extends React.Component {
             id="fieldjrdtwy"
             maxlength="200"
             name="cm-f-jrdtwy"
-            onChange={value => {
-              console.log(value);
-            }}
+            onChange={value => {}}
             value={this.state.alertSignUps}
           />
           <Autocomplete
             multiple
             id="alert-locations"
+            defaultValue={this.defaultValues}
             getOptionSelected={(option, value) =>
               option.full_fips_code === value.full_fips_code
             }
             onChange={(event, newValue) => {
               this.handleSelectChange(newValue);
             }}
-            options={autocomplete_options}
+            options={this.autocompleteOptions}
             getOptionLabel={option =>
               option.county
                 ? `${option.county}, ${option.state_code}`
