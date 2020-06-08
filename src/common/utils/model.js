@@ -72,23 +72,20 @@ export function useProjections(location, county = null) {
 }
 
 export function useAllStateProjections(snapshotUrl = null) {
-  const [stateProjectionsMap, setStateProjectionsMap] = useState(null);
+  const [stateProjections, setStateProjections] = useState(null);
 
   useEffect(() => {
+    setStateProjections(null);
     async function fetchData() {
-      const result = {};
       const projections = await fetchAllStateProjections(snapshotUrl);
-      for (const projection of projections) {
-        result[REVERSED_STATES[projection.stateName]] = projection;
-      }
-      setStateProjectionsMap(result);
+      setStateProjections(projections);
     }
     if (snapshotUrl !== undefined) {
       fetchData();
     }
   }, [snapshotUrl]);
 
-  return stateProjectionsMap;
+  return stateProjections;
 }
 
 export function useModelLastUpdatedDate() {
