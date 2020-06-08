@@ -24,9 +24,7 @@ export const SignalStatusWrapper = styled(Box)<{
     }
   `
       : `
-    padding: 0 0.4rem;
     border-radius: 5px;
-    border: 1px solid rgba(0, 0, 0, 0.12);
     background-color: white;
     color: ${(props: any) => props.color || 'darkgray'};
     display: inline-block;
@@ -43,6 +41,7 @@ export const SignalStatusWrapper = styled(Box)<{
     @media (min-width: 600px) {
       min-width: 120px;
       margin: 0;
+      border: 1px solid #eeeeee;
     }
 
     svg {
