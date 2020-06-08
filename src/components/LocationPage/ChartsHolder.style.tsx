@@ -44,7 +44,7 @@ export const ChartHeaderWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 4.875rem 0 0.25rem;
+  margin: 3.5rem 0 0.25rem;
 
   @media (min-width: 600px) {
     flex-direction: column;
