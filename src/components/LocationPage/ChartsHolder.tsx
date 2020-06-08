@@ -184,7 +184,7 @@ const ChartsHolder = (props: {
               {rtRangeData && (
                 <>
                   <ChartRt columnData={projection.getDataset('rtRange')} />
-                  <Disclaimer metricName="infection growth rate">
+                  <Disclaimer metricName={Metric.CASE_GROWTH_RATE}>
                     {CASE_GROWTH_DISCLAIMER}
                   </Disclaimer>
                 </>
@@ -207,7 +207,7 @@ const ChartsHolder = (props: {
               {testPositiveData && (
                 <>
                   <ChartPositiveTestRate columnData={testPositiveData} />
-                  <Disclaimer metricName="positive test rate">
+                  <Disclaimer metricName={Metric.POSITIVE_TESTS}>
                     {POSITIVE_RATE_DISCLAIMER}
                   </Disclaimer>
                 </>
@@ -231,7 +231,7 @@ const ChartsHolder = (props: {
               {icuUtilizationData && (
                 <>
                   <ChartICUHeadroom columnData={icuUtilizationData} />
-                  <Disclaimer metricName="COVID ICU usage">
+                  <Disclaimer metricName={Metric.HOSPITAL_USAGE}>
                     <a
                       href="https://preventepidemics.org/wp-content/uploads/2020/04/COV020_WhenHowTightenFaucet_v3.pdf"
                       target="_blank"
@@ -263,7 +263,7 @@ const ChartsHolder = (props: {
               {contactTracingData && (
                 <>
                   <ChartContactTracing columnData={contactTracingData} />
-                  <Disclaimer metricName="contact tracing">
+                  <Disclaimer metricName={Metric.CONTACT_TRACING}>
                     <a
                       href="https://covidlocal.org/assets/documents/COVID%20Local%20Metrics%20overview.pdf"
                       target="_blank"
