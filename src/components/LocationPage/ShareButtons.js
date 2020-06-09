@@ -59,6 +59,8 @@ const InnerContent = props => {
     return `${location}_${chartType}_${downloadDate}`;
   }
 
+  // The following is a little hacky, adds a link to the blob and immediately clicks it
+  // As described in https://stackoverflow.com/a/49500465
   function downloadChart(blob, filename) {
     var a = document.createElement('a');
     a.download = filename;
@@ -71,12 +73,7 @@ const InnerContent = props => {
   function downloadChartOnClick(url) {
     const filename =
       makeDownloadFilename(chartIdentifier) || `CovidActNow_${downloadDate}`;
-    fetch(url, {
-      headers: new Headers({
-        Origin: window.location.origin,
-      }),
-      mode: 'cors',
-    })
+    fetch(url)
       .then(response => response.blob())
       .then(blob => {
         let blobUrl = window.URL.createObjectURL(blob);
