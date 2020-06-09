@@ -1,604 +1,604 @@
 {
-    "MS": [
-      {
-        "date": "2020-04-03",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-04-27",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-04-27",
-        "type": "reopening"
-      }
-    ],
-    "OK": [
-      {
-        "date": "2020-04-24",
-        "type": "reopening"
-      }
-    ],
-    "MO": [
-      {
-        "date": "2020-04-06",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-05-03",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-05-04",
-        "type": "reopening"
-      }
-    ],
-    "MN": [
-      {
-        "date": "2020-03-27",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-05-17",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-05-18",
-        "type": "reopening"
-      }
-    ],
-    "AK": [
-      {
-        "date": "2020-03-28",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-04-24",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-04-24",
-        "type": "reopening"
-      }
-    ],
-    "IL": [
-      {
-        "date": "2020-03-21",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-05-29",
-        "type": "orderEnd"
-      }
-    ],
-    "AR": [
-      {
-        "date": "2020-05-06",
-        "type": "reopening"
-      }
-    ],
-    "NM": [
-      {
-        "date": "2020-03-24",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-05-31",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-05-16",
-        "type": "reopening"
-      }
-    ],
-    "OH": [
-      {
-        "date": "2020-03-23",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-05-29",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-05-12",
-        "type": "reopening"
-      }
-    ],
-    "IN": [
-      {
-        "date": "2020-03-24",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-05-04",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-05-04",
-        "type": "reopening"
-      }
-    ],
-    "MD": [
-      {
-        "date": "2020-03-30",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-05-15",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-05-15",
-        "type": "reopening"
-      }
-    ],
-    "LA": [
-      {
-        "date": "2020-03-23",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-05-15",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-05-15",
-        "type": "reopening"
-      }
-    ],
-    "TX": [
-      {
-        "date": "2020-04-02",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-04-30",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-05-01",
-        "type": "reopening"
-      }
-    ],
-    "WY": [
-      {
-        "date": "2020-05-01",
-        "type": "reopening"
-      }
-    ],
-    "AZ": [
-      {
-        "date": "2020-03-31",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-05-15",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-05-08",
-        "type": "reopening"
-      }
-    ],
-    "WI": [
-      {
-        "date": "2020-03-25",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-05-13",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-05-13",
-        "type": "reopening"
-      }
-    ],
-    "MI": [
-      {
-        "date": "2020-03-24",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-06-01",
-        "type": "orderEnd"
-      }
-    ],
-    "KS": [
-      {
-        "date": "2020-03-30",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-05-03",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-05-04",
-        "type": "reopening"
-      }
-    ],
-    "UT": [
-      {
-        "date": "2020-05-01",
-        "type": "reopening"
-      }
-    ],
-    "VA": [
-      {
-        "date": "2020-03-30",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-06-10",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-05-28",
-        "type": "reopening"
-      }
-    ],
-    "OR": [
-      {
-        "date": "2020-03-23",
-        "type": "orderStart"
-      }
-    ],
-    "CT": [
-      {
-        "date": "2020-03-23",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-05-20",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-05-20",
-        "type": "reopening"
-      }
-    ],
-    "NY": [
-      {
-        "date": "2020-03-22",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-05-28",
-        "type": "orderEnd"
-      }
-    ],
-    "CA": [
-      {
-        "date": "2020-03-19",
-        "type": "orderStart"
-      }
-    ],
-    "MA": [
-      {
-        "date": "2020-03-24",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-05-18",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-05-18",
-        "type": "reopening"
-      }
-    ],
-    "SC": [
-      {
-        "date": "2020-04-07",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-05-04",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-04-20",
-        "type": "reopening"
-      }
-    ],
-    "NH": [
-      {
-        "date": "2020-03-27",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-06-15",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-05-11",
-        "type": "reopening"
-      }
-    ],
-    "VT": [
-      {
-        "date": "2020-03-25",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-05-15",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-05-15",
-        "type": "reopening"
-      }
-    ],
-    "GA": [
-      {
-        "date": "2020-04-03",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-04-30",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-04-24",
-        "type": "reopening"
-      }
-    ],
-    "ND": [
-      {
-        "date": "2020-05-01",
-        "type": "reopening"
-      }
-    ],
-    "PA": [
-      {
-        "date": "2020-04-01",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-06-04",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-05-08",
-        "type": "reopening"
-      }
-    ],
-    "WV": [
-      {
-        "date": "2020-03-24",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-05-03",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-05-04",
-        "type": "reopening"
-      }
-    ],
-    "FL": [
-      {
-        "date": "2020-04-03",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-05-04",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-05-04",
-        "type": "reopening"
-      }
-    ],
-    "HI": [
-      {
-        "date": "2020-03-25",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-05-31",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-05-07",
-        "type": "reopening"
-      }
-    ],
-    "KY": [
-      {
-        "date": "2020-03-26",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-05-20",
-        "type": "reopening"
-      }
-    ],
-    "RI": [
-      {
-        "date": "2020-03-28",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-05-08",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-05-09",
-        "type": "reopening"
-      }
-    ],
-    "NE": [
-      {
-        "date": "2020-05-04",
-        "type": "reopening"
-      }
-    ],
-    "DC": [
-      {
-        "date": "2020-04-01",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-05-29",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-05-29",
-        "type": "reopening"
-      }
-    ],
-    "IA": [
-      {
-        "date": "2020-05-01",
-        "type": "reopening"
-      }
-    ],
-    "AL": [
-      {
-        "date": "2020-04-04",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-04-30",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-04-30",
-        "type": "reopening"
-      }
-    ],
-    "SD": [
-      {
-        "date": "2020-04-28",
-        "type": "reopening"
-      }
-    ],
-    "CO": [
-      {
-        "date": "2020-03-26",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-04-26",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-04-27",
-        "type": "reopening"
-      }
-    ],
-    "ID": [
-      {
-        "date": "2020-03-25",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-04-30",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-05-01",
-        "type": "reopening"
-      }
-    ],
-    "NJ": [
-      {
-        "date": "2020-03-21",
-        "type": "orderStart"
-      }
-    ],
-    "WA": [
-      {
-        "date": "2020-03-25",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-05-31",
-        "type": "orderEnd"
-      }
-    ],
-    "NC": [
-      {
-        "date": "2020-03-30",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-05-22",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-05-08",
-        "type": "reopening"
-      }
-    ],
-    "TN": [
-      {
-        "date": "2020-03-31",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-04-30",
-        "type": "orderEnd"
-      }
-    ],
-    "MT": [
-      {
-        "date": "2020-03-28",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-04-26",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-04-26",
-        "type": "reopening"
-      }
-    ],
-    "NV": [
-      {
-        "date": "2020-04-01",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-05-09",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-05-09",
-        "type": "reopening"
-      }
-    ],
-    "DE": [
-      {
-        "date": "2020-03-24",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-05-31",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-06-01",
-        "type": "reopening"
-      }
-    ],
-    "ME": [
-      {
-        "date": "2020-04-02",
-        "type": "orderStart"
-      },
-      {
-        "date": "2020-05-31",
-        "type": "orderEnd"
-      },
-      {
-        "date": "2020-05-01",
-        "type": "reopening"
-      }
-    ]
-  }
+  "MS": [
+    {
+      "date": "2020-04-03",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-04-27",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-04-27",
+      "type": "reopening"
+    }
+  ],
+  "OK": [
+    {
+      "date": "2020-04-24",
+      "type": "reopening"
+    }
+  ],
+  "MO": [
+    {
+      "date": "2020-04-06",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-05-03",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-05-04",
+      "type": "reopening"
+    }
+  ],
+  "MN": [
+    {
+      "date": "2020-03-27",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-05-17",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-05-18",
+      "type": "reopening"
+    }
+  ],
+  "AK": [
+    {
+      "date": "2020-03-28",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-04-24",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-04-24",
+      "type": "reopening"
+    }
+  ],
+  "IL": [
+    {
+      "date": "2020-03-21",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-05-29",
+      "type": "orderEnd"
+    }
+  ],
+  "AR": [
+    {
+      "date": "2020-05-06",
+      "type": "reopening"
+    }
+  ],
+  "NM": [
+    {
+      "date": "2020-03-24",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-05-31",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-05-16",
+      "type": "reopening"
+    }
+  ],
+  "OH": [
+    {
+      "date": "2020-03-23",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-05-29",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-05-12",
+      "type": "reopening"
+    }
+  ],
+  "IN": [
+    {
+      "date": "2020-03-24",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-05-04",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-05-04",
+      "type": "reopening"
+    }
+  ],
+  "MD": [
+    {
+      "date": "2020-03-30",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-05-15",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-05-15",
+      "type": "reopening"
+    }
+  ],
+  "LA": [
+    {
+      "date": "2020-03-23",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-05-15",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-05-15",
+      "type": "reopening"
+    }
+  ],
+  "TX": [
+    {
+      "date": "2020-04-02",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-04-30",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-05-01",
+      "type": "reopening"
+    }
+  ],
+  "WY": [
+    {
+      "date": "2020-05-01",
+      "type": "reopening"
+    }
+  ],
+  "AZ": [
+    {
+      "date": "2020-03-31",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-05-15",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-05-08",
+      "type": "reopening"
+    }
+  ],
+  "WI": [
+    {
+      "date": "2020-03-25",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-05-13",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-05-13",
+      "type": "reopening"
+    }
+  ],
+  "MI": [
+    {
+      "date": "2020-03-24",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-06-01",
+      "type": "orderEnd"
+    }
+  ],
+  "KS": [
+    {
+      "date": "2020-03-30",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-05-03",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-05-04",
+      "type": "reopening"
+    }
+  ],
+  "UT": [
+    {
+      "date": "2020-05-01",
+      "type": "reopening"
+    }
+  ],
+  "VA": [
+    {
+      "date": "2020-03-30",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-06-10",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-05-28",
+      "type": "reopening"
+    }
+  ],
+  "OR": [
+    {
+      "date": "2020-03-23",
+      "type": "orderStart"
+    }
+  ],
+  "CT": [
+    {
+      "date": "2020-03-23",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-05-20",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-05-20",
+      "type": "reopening"
+    }
+  ],
+  "NY": [
+    {
+      "date": "2020-03-22",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-05-28",
+      "type": "orderEnd"
+    }
+  ],
+  "CA": [
+    {
+      "date": "2020-03-19",
+      "type": "orderStart"
+    }
+  ],
+  "MA": [
+    {
+      "date": "2020-03-24",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-05-18",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-05-18",
+      "type": "reopening"
+    }
+  ],
+  "SC": [
+    {
+      "date": "2020-04-07",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-05-04",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-04-20",
+      "type": "reopening"
+    }
+  ],
+  "NH": [
+    {
+      "date": "2020-03-27",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-06-15",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-05-11",
+      "type": "reopening"
+    }
+  ],
+  "VT": [
+    {
+      "date": "2020-03-25",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-05-15",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-05-15",
+      "type": "reopening"
+    }
+  ],
+  "GA": [
+    {
+      "date": "2020-04-03",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-04-30",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-04-24",
+      "type": "reopening"
+    }
+  ],
+  "ND": [
+    {
+      "date": "2020-05-01",
+      "type": "reopening"
+    }
+  ],
+  "PA": [
+    {
+      "date": "2020-04-01",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-06-04",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-05-08",
+      "type": "reopening"
+    }
+  ],
+  "WV": [
+    {
+      "date": "2020-03-24",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-05-03",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-05-04",
+      "type": "reopening"
+    }
+  ],
+  "FL": [
+    {
+      "date": "2020-04-03",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-05-04",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-05-04",
+      "type": "reopening"
+    }
+  ],
+  "HI": [
+    {
+      "date": "2020-03-25",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-05-31",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-05-07",
+      "type": "reopening"
+    }
+  ],
+  "KY": [
+    {
+      "date": "2020-03-26",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-05-20",
+      "type": "reopening"
+    }
+  ],
+  "RI": [
+    {
+      "date": "2020-03-28",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-05-08",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-05-09",
+      "type": "reopening"
+    }
+  ],
+  "NE": [
+    {
+      "date": "2020-05-04",
+      "type": "reopening"
+    }
+  ],
+  "DC": [
+    {
+      "date": "2020-04-01",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-05-29",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-05-29",
+      "type": "reopening"
+    }
+  ],
+  "IA": [
+    {
+      "date": "2020-05-01",
+      "type": "reopening"
+    }
+  ],
+  "AL": [
+    {
+      "date": "2020-04-04",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-04-30",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-04-30",
+      "type": "reopening"
+    }
+  ],
+  "SD": [
+    {
+      "date": "2020-04-28",
+      "type": "reopening"
+    }
+  ],
+  "CO": [
+    {
+      "date": "2020-03-26",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-04-26",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-04-27",
+      "type": "reopening"
+    }
+  ],
+  "ID": [
+    {
+      "date": "2020-03-25",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-04-30",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-05-01",
+      "type": "reopening"
+    }
+  ],
+  "NJ": [
+    {
+      "date": "2020-03-21",
+      "type": "orderStart"
+    }
+  ],
+  "WA": [
+    {
+      "date": "2020-03-25",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-05-31",
+      "type": "orderEnd"
+    }
+  ],
+  "NC": [
+    {
+      "date": "2020-03-30",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-05-22",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-05-08",
+      "type": "reopening"
+    }
+  ],
+  "TN": [
+    {
+      "date": "2020-03-31",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-04-30",
+      "type": "orderEnd"
+    }
+  ],
+  "MT": [
+    {
+      "date": "2020-03-28",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-04-26",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-04-26",
+      "type": "reopening"
+    }
+  ],
+  "NV": [
+    {
+      "date": "2020-04-01",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-05-09",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-05-09",
+      "type": "reopening"
+    }
+  ],
+  "DE": [
+    {
+      "date": "2020-03-24",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-05-31",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-06-01",
+      "type": "reopening"
+    }
+  ],
+  "ME": [
+    {
+      "date": "2020-04-02",
+      "type": "orderStart"
+    },
+    {
+      "date": "2020-05-31",
+      "type": "orderEnd"
+    },
+    {
+      "date": "2020-05-01",
+      "type": "reopening"
+    }
+  ]
+}

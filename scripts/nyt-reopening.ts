@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { REVERSED_STATES } from '../src/common';
 
 (async () => {
-  const response = await fetch('https://static01.nyt.com/newsgraphics/2020/04/22/states-reopening-coronavirus/1dfc1eb055bd1dfda276aec1dc8a1a4d9e67de06/statesData.json');
+  const response = await fetch('https://static01.nyt.com/newsgraphics/2020/04/22/states-reopening-coronavirus/b1b95228c6c701d7bed02f15b301f937055c4f75/statesData.json');
   const json = await response.json();
   const result = { } as any;
   for (const state in json) {
