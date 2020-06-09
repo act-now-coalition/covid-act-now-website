@@ -1,6 +1,6 @@
 /** Helpers for dealing with the State / Counties dataset. */
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
-import { each, uniqBy } from 'lodash';
+import { each } from 'lodash';
 
 // TODO(michael): Add types, move more common code here.
 
@@ -22,9 +22,7 @@ export function getLocationNames() {
     );
   });
 
-  // Currently check for the unique fips so there aren't duplicates, but maybe
-  // match the way that the homepage gets unique values
-  return uniqBy(locations, 'full_fips_code');
+  return locations;
 }
 
 export function findCountyByFips(fips: string) {
