@@ -28,7 +28,7 @@ import { COLOR_MAP } from 'common/colors';
 import { useModelLastUpdatedDate } from 'common/utils/model';
 import { STATES_WITH_DATA_OVERRIDES } from 'common/metrics/hospitalizations';
 import { Projections } from 'common/models/Projections';
-import { formatDate } from 'common/utils';
+import { formatUtcDate } from 'common/utils';
 import { isNull } from 'util';
 
 const RiskLevelGraphic = (props: {
@@ -109,7 +109,7 @@ const NewLocationPageHeader = (props: {
 
   const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
   const lastUpdatedDateString =
-    lastUpdatedDate !== null ? formatDate(lastUpdatedDate) : '';
+    lastUpdatedDate !== null ? formatUtcDate(lastUpdatedDate) : '';
 
   const riskLevelGraphicProps = {
     alarmLevel,

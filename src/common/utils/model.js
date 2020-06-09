@@ -1,4 +1,3 @@
-import * as moment from 'moment';
 import { useState, useEffect } from 'react';
 import { Projections } from '../models/Projections';
 import { REVERSED_STATES, INTERVENTIONS } from '..';
@@ -96,12 +95,7 @@ export function useModelLastUpdatedDate() {
   const [lastUpdated, setLastUpdated] = useState(null);
   useEffect(() => {
     new Api().fetchVersionTimestamp().then(timestamp => {
-      // We add 1 day since models are generally published the day after
-      // they're generated (due to QA process).
-      let date = moment(timestamp).add(1, 'day');
-      // But we don't want to accidentally show a future date.
-      date = moment().diff(date) < 0 ? moment() : date;
-      setLastUpdated(date.toDate());
+      setLastUpdated(new Date(timestamp));
     });
   }, []);
 
