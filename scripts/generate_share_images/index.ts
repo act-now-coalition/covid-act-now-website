@@ -39,12 +39,23 @@ const BLACKLISTED_COUNTIES = [
   const allCountiesProjections = await fetchAllCountyProjections();
   console.log('Fetch complete.');
 
-  let screenshots = [] as Array<{ url: string; filename: string, outputSize: string }>;
+  let screenshots = [] as Array<{
+    url: string;
+    filename: string;
+    outputSize: string;
+  }>;
 
   // Homepage share image.
-  screenshots.push({ url: '/', filename: 'home', outputSize: SHARE_OUTPUT_SIZE });
+  screenshots.push({
+    url: '/',
+    filename: 'home',
+    outputSize: SHARE_OUTPUT_SIZE,
+  });
 
-  function addScreenshotsForLocation(relativeUrl: string, projections: Projections) {
+  function addScreenshotsForLocation(
+    relativeUrl: string,
+    projections: Projections,
+  ) {
     // Overall share image.
     screenshots.push({
       url: relativeUrl,
@@ -54,7 +65,10 @@ const BLACKLISTED_COUNTIES = [
 
     // Chart images.
     for (const metric of ALL_METRICS) {
-      if (metric === Metric.FUTURE_PROJECTIONS || projections.getMetricValue(metric) !== null) {
+      if (
+        metric === Metric.FUTURE_PROJECTIONS ||
+        projections.getMetricValue(metric) !== null
+      ) {
         // TODO(michael): Unify the generation of these URLs somehow to make
         // sure we don't end up with accidental mismatches, etc.
         const shareUrl = urlJoin(relativeUrl, '/chart/', '' + metric);

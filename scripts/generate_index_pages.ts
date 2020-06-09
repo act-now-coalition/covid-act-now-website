@@ -76,7 +76,12 @@ function chartPageTags(
   };
 }
 
-async function buildLocationPages(builder: IndexPageBuilder, relativeSiteUrl: string, relativeImageUrl: string, locationName: string) {
+async function buildLocationPages(
+  builder: IndexPageBuilder,
+  relativeSiteUrl: string,
+  relativeImageUrl: string,
+  locationName: string,
+) {
   const canonicalUrlBase = urlJoin('https://covidactnow.org/', relativeSiteUrl);
 
   const canonicalUrl = urls.addSharingId(canonicalUrlBase);
@@ -89,16 +94,20 @@ async function buildLocationPages(builder: IndexPageBuilder, relativeSiteUrl: st
 
   for (const metric of ALL_METRICS) {
     const chartPage = path.join(relativeSiteUrl, `/chart/${metric}/index.html`);
-    const chartCanonicalUrl = urls.addSharingId(urlJoin(canonicalUrlBase, `/chart/${metric}`));
-    const chartImageUrl = builder.fullImageUrl(urlJoin(relativeImageUrl, `/chart/${metric}.png`));
+    const chartCanonicalUrl = urls.addSharingId(
+      urlJoin(canonicalUrlBase, `/chart/${metric}`),
+    );
+    const chartImageUrl = builder.fullImageUrl(
+      urlJoin(relativeImageUrl, `/chart/${metric}.png`),
+    );
     await builder.writeTemplatedPage(
       chartPage,
       chartPageTags(
         chartImageUrl,
         chartCanonicalUrl,
         locationName,
-        getMetricName(metric)
-      )
+        getMetricName(metric),
+      ),
     );
   }
 }
@@ -117,7 +126,12 @@ async function main() {
     const stateName = (STATES as any)[stateCode];
     const relativeSiteUrl = `/us/${stateCode.toLowerCase()}/`;
     const relativeImageUrl = `/states/${stateCode.toLowerCase()}`;
-    await buildLocationPages(builder, relativeSiteUrl, relativeImageUrl, stateName);
+    await buildLocationPages(
+      builder,
+      relativeSiteUrl,
+      relativeImageUrl,
+      stateName,
+    );
   }
 
   for (const fips of COUNTIES) {
@@ -132,7 +146,12 @@ async function main() {
       county.county_url_name
     }`;
     const relativeImageUrl = `counties/${fips}`;
-    await buildLocationPages(builder, relativeSiteUrl, relativeImageUrl, locationName);
+    await buildLocationPages(
+      builder,
+      relativeSiteUrl,
+      relativeImageUrl,
+      locationName,
+    );
   }
 }
 
