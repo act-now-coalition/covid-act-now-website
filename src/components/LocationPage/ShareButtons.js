@@ -12,6 +12,7 @@ import { ClickAwayListener } from '@material-ui/core';
 import makeChartShareQuote from 'common/utils/makeChartShareQuote';
 import ShareImageUrlJSON from 'assets/data/share_images_url.json';
 import * as urls from 'common/urls';
+import moment from 'moment';
 
 const InnerContent = props => {
   const {
@@ -41,17 +42,58 @@ const InnerContent = props => {
     : imageBaseUrl +
       `states/${stateId.toLowerCase()}/chart/${chartIdentifier}/export.png`;
 
+  const downloadDate = moment().format('YYYY-MM-DD');
+
+  function makeDownloadFilename(chartIdentifier) {
+    const chartDownloadType = {
+      0: 'infection_growth',
+      1: 'posative_test_rate',
+      2: 'hospitalization_usage',
+      3: 'contact_tracing',
+      4: 'future_projections',
+    };
+    const chartType = chartDownloadType[chartIdentifier];
+    const location = countyId
+      ? `${stateId.toLowerCase()}_${countyId}`
+      : `${stateId.toLowerCase()}`;
+    return `${location}_${chartType}_${downloadDate}`;
+  }
+
+  function downloadChart(blob, filename) {
+    var a = document.createElement('a');
+    a.download = filename;
+    a.href = blob;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+
+  function downloadChartOnClick(url) {
+    const filename =
+      makeDownloadFilename(chartIdentifier) || `CovidActNow_${downloadDate}`;
+    fetch(url, {
+      headers: new Headers({
+        Origin: window.location.origin,
+      }),
+      mode: 'cors',
+    })
+      .then(response => response.blob())
+      .then(blob => {
+        let blobUrl = window.URL.createObjectURL(blob);
+        downloadChart(blobUrl, filename);
+      })
+      .catch(error => console.error(error));
+  }
+
   return (
     <ClickAwayListener onClickAway={() => setShowShareIcons(false)}>
       <ClickAwayWrapper>
         <SaveOrShareContainer>
           <SaveOrShareButton
-            as="a"
             onClick={() => {
               setShowShareIcons(false);
+              downloadChartOnClick(downloadLink);
             }}
-            href={downloadLink}
-            target="_blank"
           >
             Save
           </SaveOrShareButton>
