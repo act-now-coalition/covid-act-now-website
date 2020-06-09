@@ -54,7 +54,7 @@ const InnerContent = props => {
     };
     const chartType = chartDownloadType[chartIdentifier];
     const location = countyId
-      ? `${stateId.toLowerCase()}_${countyId}`
+      ? `${countyId}_${stateId.toLowerCase()}`
       : `${stateId.toLowerCase()}`;
     return `${location}_${chartType}_${downloadDate}`;
   }
