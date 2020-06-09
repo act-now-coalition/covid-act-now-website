@@ -13,34 +13,37 @@ class Newsletter extends React.Component {
     this.alertsSelectionArray = [];
     this.defaultValues = [];
     this.autocompleteOptions = getLocationNames();
-    this.state = { alertSignUps: '', checked: true};
+    this.state = { alertSignUps: '', checked: true, email: '' };
     this.submitForm = this.submitForm.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
   }
 
   submitForm(e) {
     e.preventDefault();
-    window.gtag('event', 'subscribe', {
-      event_category: 'engagement',
-    });
-    let url = new URL('https://createsend.com/t/getsecuresubscribelink');
-    url.searchParams.append('email', this.emailInput.value);
-    url.searchParams.append('data', this.form.getAttribute('data-id'));
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/x-www-form-urlencoded',
-      },
-    })
-      .then(response => {
-        response.text().then(text => {
-          this.form.action = text;
-          this.form.submit();
-        });
-      })
-      .then(data => {
-        console.log(data);
+    // can't submit the form without the email entered
+    if (this.state.email) {
+      window.gtag('event', 'subscribe', {
+        event_category: 'engagement',
       });
+      let url = new URL('https://createsend.com/t/getsecuresubscribelink');
+      url.searchParams.append('email', this.emailInput.value);
+      url.searchParams.append('data', this.form.getAttribute('data-id'));
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/x-www-form-urlencoded',
+        },
+      })
+        .then(response => {
+          response.text().then(text => {
+            this.form.action = text;
+            this.form.submit();
+          });
+        })
+        .then(data => {
+          console.log(data);
+        });
+    }
   }
 
   handleSelectChange = selectedOption => {
@@ -74,9 +77,9 @@ class Newsletter extends React.Component {
     return (
       <StyledNewsletter>
         {/* This form comes from the signup form builder
-        (https://covidactnow.createsend.com/subscribers/signupformbuilder/58a40b3258be0d56) within the subscribers page
+        (https://covidactnow.createsend.com/subscribers/signupformbuilder/<listid>) within the subscribers page
         From there choose the option where you add code to your website without css.
-        To update the grab the data-id, classNames, ids and names for each of the inputs in order to subscribe users.
+        To update grab the data-id, classNames, ids and names for each of the inputs in order to subscribe users.
         We hide some of the information users don't need to enter and add some form fields that the api doesn't
         require (i.e the alert-loctions autocomplete).
          */}
@@ -111,7 +114,7 @@ class Newsletter extends React.Component {
               value="wurhhh"
               id="wurhhh"
               name="cm-ol-wurhhh"
-              onChange={() => this.setState({"checked": !this.state.checked})}
+              onChange={() => this.setState({ checked: !this.state.checked })}
               checked={this.state.checked}
             />
             <label for="checkbox">
@@ -173,6 +176,7 @@ class Newsletter extends React.Component {
               name="cm-yddtsd-yddtsd"
               required=""
               type="email"
+              onChange={e => this.setState({ email: e.target.value })}
             />
             <button type="submit" onClick={this.submitForm}>
               Sign up
