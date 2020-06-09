@@ -2,7 +2,7 @@ import React from 'react';
 import { timeDay, timeMonth } from 'd3-time';
 import { AxisBottom as VxAxisBottom, AxisLeft as VxAxisLeft } from '@vx/axis';
 import { SharedAxisProps } from '@vx/axis/lib/types';
-import { formatDate } from 'common/utils';
+import { formatUtcDate } from 'common/utils';
 import * as Style from './Charts.style';
 
 export const AxisLeft = (props: SharedAxisProps<number>) => (
@@ -26,7 +26,7 @@ export const AxisBottom = (props: SharedAxisProps<Date>) => {
       <VxAxisBottom
         {...props}
         tickValues={tickValues}
-        tickFormat={date => formatDate(date, dateFormat)}
+        tickFormat={date => formatUtcDate(date, dateFormat)}
       />
     </Style.Axis>
   );

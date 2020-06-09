@@ -10,7 +10,7 @@ import { scaleLinear, scaleTime } from '@vx/scale';
 import { Area } from '@vx/shape';
 import { Column, RtRange, RT_TRUNCATION_DAYS } from 'common/models/Projection';
 import { CASE_GROWTH_RATE_LEVEL_INFO_MAP as zones } from 'common/metrics/case_growth';
-import { formatDate, formatDecimal } from 'common/utils';
+import { formatUtcDate, formatDecimal } from 'common/utils';
 import { AxisBottom, AxisLeft } from './Axis';
 import BoxedAnnotation from './BoxedAnnotation';
 import ChartContainer from './ChartContainer';
@@ -109,7 +109,7 @@ const ChartRt = ({
       <Tooltip
         left={marginLeft + getXCoord(d)}
         top={marginTop + getYCoord(d)}
-        title={formatDate(getDate(d), 'MMM D, YYYY')}
+        title={formatUtcDate(getDate(d), 'MMM D, YYYY')}
         subtext={isConfirmed ? undefined : 'Data might change'}
       >
         <TooltipStyle.Body>

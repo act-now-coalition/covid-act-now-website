@@ -9,7 +9,7 @@ import {
   LastUpdatedWrapper,
 } from './ShareCardImage.style';
 import { ScreenshotWrapper } from './ShareImage.style';
-import { formatDate } from 'common/utils';
+import { formatLocalDate } from 'common/utils';
 import { findCountyByFips } from 'common/locations';
 import { Metric } from 'common/metric';
 
@@ -41,7 +41,9 @@ const Header = () => {
   return (
     <>
       <TitleWrapper>Real-time COVID metrics</TitleWrapper>
-      <LastUpdatedWrapper>Updated {formatDate(new Date())}</LastUpdatedWrapper>
+      <LastUpdatedWrapper>
+        Updated {formatLocalDate(new Date())}
+      </LastUpdatedWrapper>
     </>
   );
 };

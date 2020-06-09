@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatDate } from 'common/utils';
+import { formatUtcDate } from 'common/utils';
 import {
   OutcomesWrapper,
   OutcomesTable,
@@ -45,7 +45,7 @@ const OutcomesRow = ({ projection, label, color }) => {
 
       <div>
         {projection.dateOverwhelmed
-          ? formatDate(projection.dateOverwhelmed)
+          ? formatUtcDate(projection.dateOverwhelmed)
           : 'Not in the next 90 days'}
       </div>
 

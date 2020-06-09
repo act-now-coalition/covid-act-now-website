@@ -8,7 +8,7 @@ import { Group } from '@vx/group';
 import { ParentSize } from '@vx/responsive';
 import { scaleLinear, scaleTime } from '@vx/scale';
 import { Column } from 'common/models/Projection';
-import { assert, formatDate, formatPercent } from 'common/utils';
+import { assert, formatUtcDate, formatPercent } from 'common/utils';
 import { LevelInfoMap } from 'common/level';
 import RectClipGroup from './RectClipGroup';
 import { AxisBottom, AxisLeft } from './Axis';
@@ -109,7 +109,7 @@ const ChartZones = ({
     <Tooltip
       top={marginTop + getYCoord(d)}
       left={marginLeft + getXCoord(d)}
-      title={formatDate(getDate(d), 'MMM D, YYYY')}
+      title={formatUtcDate(getDate(d), 'MMM D, YYYY')}
     >
       <TooltipStyle.Body>{getTooltipBody(getY(d))}</TooltipStyle.Body>
     </Tooltip>

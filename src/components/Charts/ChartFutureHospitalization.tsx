@@ -7,7 +7,7 @@ import { ParentSize } from '@vx/responsive';
 import { scaleLinear, scaleTime } from '@vx/scale';
 import { COLORS } from 'common';
 import { Projections } from 'common/models/Projections';
-import { assert, formatDate, formatInteger } from 'common/utils';
+import { assert, formatUtcDate, formatInteger } from 'common/utils';
 import { AxisBottom } from './Axis';
 import BoxedAnnotation from './BoxedAnnotation';
 import ChartContainer from './ChartContainer';
@@ -114,7 +114,7 @@ const ChartFutureHospitalization = ({
       <TooltipStyle.Body style={{ fontWeight: 'normal' }}>
         <b style={{ color: 'white' }}>{formatInteger(getY(p))}</b>{' '}
         {p.isBeds ? 'beds available on' : 'hospitalizations expected on'}{' '}
-        <b style={{ color: 'white' }}>{formatDate(getDate(p), 'MMMM D')}</b>
+        <b style={{ color: 'white' }}>{formatUtcDate(getDate(p), 'MMMM D')}</b>
       </TooltipStyle.Body>
     </Tooltip>
   );

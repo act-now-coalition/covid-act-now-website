@@ -11,7 +11,7 @@ import {
 } from './ModelChart.style';
 import Outcomes from '../Outcomes/Outcomes';
 import { COLORS } from 'common';
-import { formatDate } from 'common/utils';
+import { formatUtcDate } from 'common/utils';
 
 const isFuture = d => d.x > new Date().valueOf();
 
@@ -228,7 +228,7 @@ const ModelChart = ({
       <Wrapper projections={projections}>
         <Chart options={options} />
         <Outcomes
-          title={`Predicted outcomes by ${formatDate(
+          title={`Predicted outcomes by ${formatUtcDate(
             projections.projected.finalDate,
           )} (90 days from now)`}
           projections={outcomesProjections}

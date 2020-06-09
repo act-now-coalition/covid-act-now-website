@@ -43,7 +43,7 @@ import { generateChartDescription } from 'common/metrics/future_projection';
 import { contactTracingStatusText } from 'common/metrics/contact_tracing';
 import { Metric, getMetricName } from 'common/metric';
 import { COLORS } from 'common';
-import { formatDate } from 'common/utils';
+import { formatUtcDate } from 'common/utils';
 
 // TODO(chelsi): organize chart disclaimer copy more centrally
 
@@ -298,7 +298,7 @@ const ChartsHolder = (props: {
               )}
               <ChartFutureHospitalization projections={props.projections} />
               <Outcomes
-                title={`Predicted outcomes by ${formatDate(
+                title={`Predicted outcomes by ${formatUtcDate(
                   props.projections.projected.finalDate,
                 )} (90 days from now)`}
                 projections={outcomesProjections}

@@ -1,4 +1,4 @@
-import { formatDate } from 'common/utils';
+import { formatUtcDate } from 'common/utils';
 import { Projection } from 'common/models/Projection';
 
 export const METRIC_NAME = 'Future hospitalization projections';
@@ -14,13 +14,13 @@ export function generateChartDescription(
     }
     return `Assuming current trends and interventions continue, ${
       projection.locationName
-    } hospitals are projected to become overloaded on ${formatDate(
+    } hospitals are projected to become overloaded on ${formatUtcDate(
       projection.dateOverwhelmed,
     )}. Exercise caution.`;
   } else {
     const noInterventionDate = noInterventionProjection.dateOverwhelmed;
     const restrictionsLiftedText = noInterventionDate
-      ? `However, any reopening should happen in a slow and phased fashion. If all restrictions were completely lifted today, hospitals would overload on ${formatDate(
+      ? `However, any reopening should happen in a slow and phased fashion. If all restrictions were completely lifted today, hospitals would overload on ${formatUtcDate(
           noInterventionDate,
         )}.`
       : `However, any reopening should happen in a slow and phased fashion.`;
