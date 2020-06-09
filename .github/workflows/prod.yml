@@ -18,7 +18,7 @@ jobs:
       - run: yarn build
       - uses: jakejarvis/s3-sync-action@master
         with:
-          args: --acl public-read --follow-symlinks --delete --cache-control no-cache
+          args: --acl public-read --follow-symlinks --delete
         env:
           AWS_S3_BUCKET: 'covidactnow.org'
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
