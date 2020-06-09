@@ -8,6 +8,7 @@ import {
   ChartFutureHospitalization,
 } from 'components/Charts';
 import { Metric } from 'common/metric';
+import { stateInterventionDates } from 'common/interventions';
 
 // TODO(michael): Rename to `Chart` once we get rid of existing (highcharts) Chart component.
 // TODO(michael): Update ChartsHolder to use this component instead of the individual chart components.
@@ -21,6 +22,7 @@ export default function MetricChart({
   height?: number;
 }) {
   const projection = projections.primary;
+  const interventionDates = stateInterventionDates(projections.stateCode);
   if (
     projection === null ||
     (metric !== Metric.FUTURE_PROJECTIONS &&
@@ -34,6 +36,7 @@ export default function MetricChart({
         <ChartRt
           height={height}
           columnData={projection.getDataset('rtRange')}
+          interventionDates={interventionDates}
         />
       )}
       {metric === Metric.POSITIVE_TESTS && (

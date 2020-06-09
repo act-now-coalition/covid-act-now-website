@@ -46,12 +46,6 @@ const hasData = (d: any) =>
 
 const INTERVENTIONS_MARGIN = 50;
 
-const INTERVENTIONS = [
-  { date: '2020-03-20', intervention: 'Stay-at-home' },
-  { date: '2020-05-31', intervention: 'Phase 1\nReopen' },
-  { date: '2020-06-02', intervention: 'Stay-at-home\nends' },
-];
-
 const ChartRt = ({
   columnData,
   interventionDates = [],
