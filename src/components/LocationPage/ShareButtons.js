@@ -47,7 +47,7 @@ const InnerContent = props => {
   function makeDownloadFilename(chartIdentifier) {
     const chartDownloadType = {
       0: 'infection_rate',
-      1: 'posative_test_rate',
+      1: 'positive_test_rate',
       2: 'hospital_usage',
       3: 'contact_tracing',
       4: 'future_projections',
