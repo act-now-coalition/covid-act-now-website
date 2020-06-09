@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import { DisclaimerWrapper, DisclaimerBody } from './Disclaimer.style';
 import LightTooltip from 'components/LightTooltip/LightTooltip';
 import { useModelLastUpdatedDate } from 'common/utils/model';
+import { Metric } from 'common/metric';
 
 const Disclaimer = ({
   metricName,
   children,
 }: {
-  metricName?: String;
+  metricName?: number;
   children: React.ReactNode;
 }) => {
   const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
@@ -38,16 +39,22 @@ const Disclaimer = ({
           rel="noopener noreferrer"
         >
           our data sources
-        </a>{' '}
-        (for contact tracing data, we partner with{' '}
-        <a
-          href="https://testandtrace.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          testandtrace.com
         </a>
-        ).
+        {metricName === Metric.CONTACT_TRACING && (
+          <Fragment>
+            {' '}
+            (for contact tracing data, we partner with{' '}
+            <a
+              href="https://testandtrace.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              testandtrace.com
+            </a>
+            )
+          </Fragment>
+        )}
+        .
       </DisclaimerBody>
     </DisclaimerWrapper>
   );
