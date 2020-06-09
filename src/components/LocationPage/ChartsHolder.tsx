@@ -45,6 +45,7 @@ import { contactTracingStatusText } from 'common/metrics/contact_tracing';
 import { Metric, getMetricName } from 'common/metric';
 import { COLORS } from 'common';
 import { formatDate } from 'common/utils';
+import { stateInterventionDates } from 'common/interventions';
 
 // TODO(michael): figure out where this type declaration should live.
 type County = {
@@ -94,6 +95,8 @@ const ChartsHolder = (props: {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+
+  const interventionDates = stateInterventionDates(props.stateId);
 
   useEffect(() => {
     const chartIdentifiers = ['0', '1', '2', '3', '4'];
@@ -180,7 +183,10 @@ const ChartsHolder = (props: {
               )}
               {rtRangeData && (
                 <>
-                  <ChartRt columnData={projection.getDataset('rtRange')} />
+                  <ChartRt
+                    columnData={projection.getDataset('rtRange')}
+                    interventionDates={interventionDates}
+                  />
                   <Disclaimer metricName="infection growth rate">
                     {CASE_GROWTH_DISCLAIMER}
                   </Disclaimer>

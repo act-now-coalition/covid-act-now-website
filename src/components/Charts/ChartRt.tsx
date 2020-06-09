@@ -54,6 +54,7 @@ const INTERVENTIONS = [
 
 const ChartRt = ({
   columnData,
+  interventionDates = [],
   width,
   height = 400,
   marginTop = 10 + INTERVENTIONS_MARGIN,
@@ -62,6 +63,7 @@ const ChartRt = ({
   marginRight = 5,
 }: {
   columnData: Column[];
+  interventionDates?: Array<{ intervention: string; date: string }>;
   width: number;
   height?: number;
   marginTop?: number;
@@ -210,7 +212,7 @@ const ChartRt = ({
         r={6}
       />
       <Group top={-1 * INTERVENTIONS_MARGIN}>
-        {INTERVENTIONS.map((d, i) => (
+        {interventionDates.map((d, i) => (
           <Group>
             <Style.LineIntervention>
               <line
@@ -240,9 +242,11 @@ const ChartRt = ({
 
 const ChartRtAutosize = ({
   columnData,
+  interventionDates = [],
   height = 400,
 }: {
   columnData: Column[];
+  interventionDates?: Array<{ intervention: string; date: string }>;
   height?: number;
 }) => (
   <Style.ChartContainer>
@@ -253,6 +257,7 @@ const ChartRtAutosize = ({
           height={height}
           marginLeft={48}
           columnData={columnData}
+          interventionDates={interventionDates}
         />
       )}
     </ParentSize>
