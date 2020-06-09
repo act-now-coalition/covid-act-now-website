@@ -26,6 +26,8 @@ const SummaryStat = ({
   beta,
   condensed,
   flipSignalStatusOrder,
+  isMobile,
+  isHeader,
   isEmbed,
   embedOnClickBaseURL,
 }: {
@@ -35,6 +37,8 @@ const SummaryStat = ({
   beta?: Boolean;
   condensed?: Boolean;
   flipSignalStatusOrder?: Boolean;
+  isMobile?: Boolean;
+  isHeader?: Boolean;
   isEmbed?: Boolean;
   embedOnClickBaseURL?: string;
 }) => {
@@ -65,6 +69,7 @@ const SummaryStat = ({
     }
     fail('Invalid Chart Type');
   };
+
   return (
     <SummaryStatWrapper
       onClick={finalOnClick}
@@ -74,6 +79,9 @@ const SummaryStat = ({
       <StatTextWrapper>
         <StatNameText condensed={condensed} isEmbed={isEmbed}>
           {getMetricName(chartType)}{' '}
+          {!condensed && beta && isMobile && (
+            <BetaTag isHeader={isHeader}>Beta</BetaTag>
+          )}
         </StatNameText>
         {!condensed && <StatDetailText>{levelInfo.detail()}</StatDetailText>}
       </StatTextWrapper>
@@ -82,7 +90,7 @@ const SummaryStat = ({
           <>
             <StatValueText condensed={condensed} isEmbed={isEmbed}>
               {formatValueForChart(chartType, value)}
-              {!condensed && beta && <BetaTag>Beta</BetaTag>}
+              {!condensed && beta && !isMobile && <BetaTag>Beta</BetaTag>}
             </StatValueText>
           </>
         )}
@@ -107,13 +115,18 @@ const SummaryStats = (props: {
   onTestPositiveClick?: () => void;
   onIcuUtilizationClick?: () => void;
   onContactTracingClick?: () => void;
+  isMobile?: Boolean;
+  isHeader?: Boolean;
   embedOnClickBaseURL?: string;
 }) => {
   const hasStats = !!Object.values(props.stats).filter(
     (val: number | null) => !isNull(val),
   ).length;
 
-  const embedProps = {
+  const sharedStatProps = {
+    isMobile: props.isMobile,
+    condensed: props.condensed,
+    isHeader: props.isHeader,
     embedOnClickBaseURL: props.embedOnClickBaseURL,
     isEmbed: props.isEmbed,
   };
@@ -125,33 +138,29 @@ const SummaryStats = (props: {
           <SummaryStat
             onClick={props.onRtRangeClick || noop}
             chartType={Metric.CASE_GROWTH_RATE}
-            condensed={props.condensed}
             value={props.stats[Metric.CASE_GROWTH_RATE] as number}
-            {...embedProps}
+            {...sharedStatProps}
           />
           <SummaryStat
             onClick={props.onTestPositiveClick || noop}
             chartType={Metric.POSITIVE_TESTS}
-            condensed={props.condensed}
             value={props.stats[Metric.POSITIVE_TESTS] as number}
-            {...embedProps}
+            {...sharedStatProps}
           />
           <SummaryStat
             onClick={props.onIcuUtilizationClick || noop}
             chartType={Metric.HOSPITAL_USAGE}
             beta={true}
-            condensed={props.condensed}
             value={props.stats[Metric.HOSPITAL_USAGE] as number}
-            {...embedProps}
+            {...sharedStatProps}
           />
           <SummaryStat
             onClick={props.onContactTracingClick || noop}
             chartType={Metric.CONTACT_TRACING}
             beta={true}
-            condensed={props.condensed}
             value={props.stats[Metric.CONTACT_TRACING] as number}
             flipSignalStatusOrder
-            {...embedProps}
+            {...sharedStatProps}
           />
         </SummaryStatsWrapper>
       )}

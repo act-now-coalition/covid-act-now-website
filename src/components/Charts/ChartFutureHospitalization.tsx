@@ -27,6 +27,8 @@ type PointProjections = Point & {
   isBeds: boolean;
 };
 
+const MAX_LINE_WIDTH = 3;
+
 const getDate = (p: Point) => new Date(p.x);
 const getY = (p: Point) => p.y;
 const hasData = (d: any) => isDate(getDate(d)) && Number.isFinite(getY(d));
@@ -43,7 +45,7 @@ const ChartFutureHospitalization = ({
   projections,
   width,
   height,
-  marginTop = 5,
+  marginTop = 25,
   marginBottom = 40,
   marginLeft = 48,
   marginRight = 5,
@@ -98,7 +100,7 @@ const ChartFutureHospitalization = ({
   assert(minY !== undefined && maxY !== undefined, 'Data must not be empty');
   const yScale = scaleLinear({
     domain: [minY, maxY],
-    range: [chartHeight, 0],
+    range: [chartHeight - MAX_LINE_WIDTH, 0],
   });
 
   const getXCoord = (p: Point): number => xScale(getDate(p));
@@ -150,16 +152,6 @@ const ChartFutureHospitalization = ({
           <Style.SeriesLine stroke={theme.palette.chart.foreground}>
             <LinePath data={dataProjectedPast} x={getXCoord} y={getYCoord} />
           </Style.SeriesLine>
-          <Style.TextAnnotation
-            textAnchor={'start'}
-            dominantBaseline={'baseline'}
-          >
-            <BoxedAnnotation
-              x={getXCoord(firstPointBeds)}
-              y={getYCoord(firstPointBeds) - 5}
-              text={`${formatInteger(getY(firstPointBeds))} beds`}
-            />
-          </Style.TextAnnotation>
           <Style.LineGrid>
             <LinePath data={dataBeds} x={getXCoord} y={getYCoord} />
           </Style.LineGrid>
@@ -169,6 +161,16 @@ const ChartFutureHospitalization = ({
             r={6}
           />
         </RectClipGroup>
+        <Style.TextAnnotation
+          textAnchor={'start'}
+          dominantBaseline={'baseline'}
+        >
+          <BoxedAnnotation
+            x={getXCoord(firstPointBeds)}
+            y={getYCoord(firstPointBeds) - 10}
+            text={`${formatInteger(getY(firstPointBeds))} beds`}
+          />
+        </Style.TextAnnotation>
         <Style.Axis>
           <AxisBottom
             top={chartHeight}
