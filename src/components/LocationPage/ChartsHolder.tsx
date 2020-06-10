@@ -48,8 +48,6 @@ import { Metric, getMetricName } from 'common/metric';
 import { COLORS } from 'common';
 import { formatUtcDate } from 'common/utils';
 
-// TODO(chelsi): organize chart disclaimer copy more centrally
-
 // TODO(michael): figure out where this type declaration should live.
 type County = {
   county: string;
