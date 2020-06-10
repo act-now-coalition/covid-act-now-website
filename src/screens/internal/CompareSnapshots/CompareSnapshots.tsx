@@ -26,8 +26,8 @@ import {
 } from './CompareSnapshots.style';
 import { Metric, getMetricName } from 'common/metric';
 import { Projections } from 'common/models/Projections';
-import { ProjectionsSet } from './ProjectionsSet';
-import { SortType, ProjectionsPair } from './ProjectionsPair';
+import { ProjectionsSet } from 'common/models/ProjectionsSet';
+import { SortType, ProjectionsPair } from 'common/models/ProjectionsPair';
 import { topCountiesByPopulation } from 'common/locations';
 import { SNAPSHOT_URL } from 'api';
 
