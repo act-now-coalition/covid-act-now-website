@@ -33,12 +33,23 @@ export function getFormattedCountyName(stateId: string, countyUrlName: string) {
 }
 
 /**
- * Returns a date formatted as a string. The default format is locale-specific,
- * for US: April 29, 2020.
+ * Returns a date formatted as a string, assuming the Date is in the UTC
+ * timezone (this is probably the case if it came from our API). The default
+ * format is locale-specific, for US: April 29, 2020.
  *
  * See https://momentjs.com/docs/#/displaying/format/ for more details.
  */
-export function formatDate(date: Date, format: string = 'LL'): string {
+export function formatUtcDate(date: Date, format: string = 'LL'): string {
+  return moment.utc(date).format(format);
+}
+
+/**
+ * Returns a local timezone date formatted as a string. The default format is
+ * locale-specific, for US: April 29, 2020.
+ *
+ * See https://momentjs.com/docs/#/displaying/format/ for more details.
+ */
+export function formatLocalDate(date: Date, format: string = 'LL'): string {
   return moment(date).format(format);
 }
 

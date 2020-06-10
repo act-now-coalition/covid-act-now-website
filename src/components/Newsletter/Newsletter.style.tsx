@@ -1,11 +1,23 @@
 import styled from 'styled-components';
 import palette from 'assets/theme/palette';
 
+export const InputHolder = styled.div`
+  align-items: baseline;
+  display: flex;
+  flex-direction: row;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  label {
+    margin: 0 0 8px 8px;
+  }
+`;
+
 export const StyledNewsletter = styled.div`
   form {
     display: flex;
+    flex-direction: column;
 
-    input {
+    input[type='email'] {
       flex: 3;
       display: block;
       padding: 0.25rem 0.75rem;
@@ -13,7 +25,6 @@ export const StyledNewsletter = styled.div`
       height: 3.25rem;
       outline: 0;
       border: 1px solid rgba(0, 0, 0, 0.12);
-      border-right-width: 0;
       border-top-left-radius: 4px;
       border-bottom-left-radius: 4px;
       appearance: none;
@@ -26,7 +37,7 @@ export const StyledNewsletter = styled.div`
       }
     }
 
-    button {
+    button[type='submit'] {
       cursor: pointer;
       display: block;
       appearance: none;

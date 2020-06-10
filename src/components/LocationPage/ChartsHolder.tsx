@@ -43,7 +43,9 @@ import { generateChartDescription } from 'common/metrics/future_projection';
 import { contactTracingStatusText } from 'common/metrics/contact_tracing';
 import { Metric, getMetricName } from 'common/metric';
 import { COLORS } from 'common';
-import { formatDate } from 'common/utils';
+import { formatUtcDate } from 'common/utils';
+
+// TODO(chelsi): organize chart disclaimer copy more centrally
 
 // TODO(michael): figure out where this type declaration should live.
 type County = {
@@ -171,7 +173,10 @@ const ChartsHolder = (props: {
                   {getMetricName(Metric.CASE_GROWTH_RATE)}
                 </ChartHeader>
                 {!isMobile && rtRangeData && (
-                  <ShareButtons chartIdentifier="0" {...shareButtonProps} />
+                  <ShareButtons
+                    chartIdentifier={Metric.CASE_GROWTH_RATE}
+                    {...shareButtonProps}
+                  />
                 )}
               </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
@@ -179,12 +184,15 @@ const ChartsHolder = (props: {
                 {caseGrowthStatusText(projection)}
               </ChartDescription>
               {isMobile && rtRangeData && (
-                <ShareButtons chartIdentifier="0" {...shareButtonProps} />
+                <ShareButtons
+                  chartIdentifier={Metric.CASE_GROWTH_RATE}
+                  {...shareButtonProps}
+                />
               )}
               {rtRangeData && (
                 <>
                   <ChartRt columnData={projection.getDataset('rtRange')} />
-                  <Disclaimer metricName="infection growth rate">
+                  <Disclaimer metricName={Metric.CASE_GROWTH_RATE}>
                     {CASE_GROWTH_DISCLAIMER}
                   </Disclaimer>
                 </>
@@ -194,7 +202,10 @@ const ChartsHolder = (props: {
                   {getMetricName(Metric.POSITIVE_TESTS)}
                 </ChartHeader>
                 {!isMobile && testPositiveData && (
-                  <ShareButtons chartIdentifier="1" {...shareButtonProps} />
+                  <ShareButtons
+                    chartIdentifier={Metric.POSITIVE_TESTS}
+                    {...shareButtonProps}
+                  />
                 )}
               </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
@@ -202,12 +213,15 @@ const ChartsHolder = (props: {
                 {positiveTestsStatusText(projection)}
               </ChartDescription>
               {isMobile && testPositiveData && (
-                <ShareButtons chartIdentifier="1" {...shareButtonProps} />
+                <ShareButtons
+                  chartIdentifier={Metric.POSITIVE_TESTS}
+                  {...shareButtonProps}
+                />
               )}
               {testPositiveData && (
                 <>
                   <ChartPositiveTestRate columnData={testPositiveData} />
-                  <Disclaimer metricName="positive test rate">
+                  <Disclaimer metricName={Metric.POSITIVE_TESTS}>
                     {POSITIVE_RATE_DISCLAIMER}
                   </Disclaimer>
                 </>
@@ -218,7 +232,10 @@ const ChartsHolder = (props: {
                   <BetaTag>Beta</BetaTag>
                 </ChartHeader>
                 {!isMobile && icuUtilizationData && (
-                  <ShareButtons chartIdentifier="2" {...shareButtonProps} />
+                  <ShareButtons
+                    chartIdentifier={Metric.HOSPITAL_USAGE}
+                    {...shareButtonProps}
+                  />
                 )}
               </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
@@ -226,12 +243,15 @@ const ChartsHolder = (props: {
                 {hospitalOccupancyStatusText(projection)}
               </ChartDescription>
               {isMobile && icuUtilizationData && (
-                <ShareButtons chartIdentifier="2" {...shareButtonProps} />
+                <ShareButtons
+                  chartIdentifier={Metric.HOSPITAL_USAGE}
+                  {...shareButtonProps}
+                />
               )}
               {icuUtilizationData && (
                 <>
                   <ChartICUHeadroom columnData={icuUtilizationData} />
-                  <Disclaimer metricName="COVID ICU usage">
+                  <Disclaimer metricName={Metric.HOSPITAL_USAGE}>
                     <a
                       href="https://preventepidemics.org/wp-content/uploads/2020/04/COV020_WhenHowTightenFaucet_v3.pdf"
                       target="_blank"
@@ -249,7 +269,10 @@ const ChartsHolder = (props: {
                   <BetaTag>Beta</BetaTag>
                 </ChartHeader>
                 {!isMobile && contactTracingData && (
-                  <ShareButtons chartIdentifier="3" {...shareButtonProps} />
+                  <ShareButtons
+                    chartIdentifier={Metric.CONTACT_TRACING}
+                    {...shareButtonProps}
+                  />
                 )}
               </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
@@ -257,13 +280,16 @@ const ChartsHolder = (props: {
                 {contactTracingStatusText(projection)}
               </ChartDescription>
               {isMobile && contactTracingData && (
-                <ShareButtons chartIdentifier="3" {...shareButtonProps} />
+                <ShareButtons
+                  chartIdentifier={Metric.CONTACT_TRACING}
+                  {...shareButtonProps}
+                />
               )}
               {/* TODO: Use contact tracing data here */}
               {contactTracingData && (
                 <>
                   <ChartContactTracing columnData={contactTracingData} />
-                  <Disclaimer>
+                  <Disclaimer metricName={Metric.CONTACT_TRACING}>
                     <a
                       href="https://covidlocal.org/assets/documents/COVID%20Local%20Metrics%20overview.pdf"
                       target="_blank"
@@ -284,7 +310,10 @@ const ChartsHolder = (props: {
                   Future Hospitalization (both ICU and non-ICU) Projections
                 </ChartHeader>
                 {!isMobile && (
-                  <ShareButtons chartIdentifier="4" {...shareButtonProps} />
+                  <ShareButtons
+                    chartIdentifier={Metric.FUTURE_PROJECTIONS}
+                    {...shareButtonProps}
+                  />
                 )}
               </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
@@ -292,11 +321,14 @@ const ChartsHolder = (props: {
                 {generateChartDescription(projection, noInterventionProjection)}
               </ChartDescription>
               {isMobile && (
-                <ShareButtons chartIdentifier="4" {...shareButtonProps} />
+                <ShareButtons
+                  chartIdentifier={Metric.FUTURE_PROJECTIONS}
+                  {...shareButtonProps}
+                />
               )}
               <ChartFutureHospitalization projections={props.projections} />
               <Outcomes
-                title={`Predicted outcomes by ${formatDate(
+                title={`Predicted outcomes by ${formatUtcDate(
                   props.projections.projected.finalDate,
                 )} (90 days from now)`}
                 projections={outcomesProjections}
