@@ -9,9 +9,13 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import * as QueryString from 'query-string';
-import { assert } from 'common/utils';
+import { assert, fail } from 'common/utils';
 import { MetricChart } from 'components/Charts';
-import { useAllStateProjections } from 'common/utils/model';
+import {
+  fetchAllStateProjections,
+  fetchAllCountyProjections,
+  fetchProjections,
+} from 'common/utils/model';
 import DataUrlJson from 'assets/data/data_url.json';
 import {
   Wrapper,
@@ -22,6 +26,7 @@ import { Metric, getMetricName } from 'common/metric';
 import { Projections } from 'common/models/Projections';
 import { ProjectionsSet } from './ProjectionsSet';
 import { SortType, ProjectionsPair } from './ProjectionsPair';
+import { topCountiesByPopulation } from 'common/locations';
 
 // TODO(michael): Compare page improvements:
 // * Virtualize the list so that it's not so awful slow. NOTE: I previously
@@ -34,6 +39,14 @@ import { SortType, ProjectionsPair } from './ProjectionsPair';
 // * Automatically find the latest snapshot (probably by just incrementing the
 //   snapshot number until it 404s)
 // * Show snapshot metadata (the version.json file).
+
+enum Locations {
+  STATES,
+  TOP_COUNTIES_BY_POPULATION,
+  TOP_COUNTIES_BY_DIFF,
+}
+
+const COUNTIES_LIMIT = 50;
 
 export function CompareSnapshots() {
   const masterSnapshot = useMasterSnapshot();
@@ -76,26 +89,34 @@ function CompareSnapshotsInner({ masterSnapshot }: { masterSnapshot: number }) {
   const [metric, setMetric] = useState(
     getParamValue(params, 'metric', Metric.CASE_GROWTH_RATE),
   );
+  const [locations, setLocations] = useState(
+    getParamValue(params, 'locations', Locations.STATES),
+  );
 
-  // Load models for all states.
-  const leftProjections: Projections[] | null = useAllStateProjections(
+  // Load models for all states or counties.
+  const leftProjections: Projections[] | null = useAllProjections(
     snapshotUrl(leftSnapshot),
+    locations,
   );
-  const rightProjections: Projections[] | null = useAllStateProjections(
+  const rightProjections: Projections[] | null = useAllProjections(
     snapshotUrl(rightSnapshot),
+    locations,
   );
 
-  function setQueryParams(
-    left: number,
-    right: number,
-    sort: number,
-    metric: number,
-  ) {
+  function setQueryParams(newParams: {
+    left?: number;
+    right?: number;
+    sort?: number;
+    metric?: number;
+    locations?: number;
+  }) {
     const params = {
-      left,
-      right,
-      sort,
-      metric,
+      left: leftSnapshot,
+      right: rightSnapshot,
+      sort: sortType,
+      metric: metric,
+      locations: locations,
+      ...newParams,
     };
 
     history.push({
@@ -108,7 +129,7 @@ function CompareSnapshotsInner({ masterSnapshot }: { masterSnapshot: number }) {
     const left = parseInt(leftSnapshotText);
     if (!Number.isNaN(left)) {
       setLeftSnapshot(left);
-      setQueryParams(left, rightSnapshot, sortType, metric);
+      setQueryParams({ left });
     }
   };
 
@@ -116,22 +137,29 @@ function CompareSnapshotsInner({ masterSnapshot }: { masterSnapshot: number }) {
     const right = parseInt(rightSnapshotText);
     if (!Number.isNaN(right)) {
       setRightSnapshot(right);
-      setQueryParams(leftSnapshot, right, sortType, metric);
+      setQueryParams({ right });
     }
   };
 
   // TODO: Figure out correct type for event.
   const changeSort = (event: any) => {
-    const value = parseInt(event.target.value);
-    setSortType(value);
-    setQueryParams(leftSnapshot, rightSnapshot, value, metric);
+    const sort = parseInt(event.target.value);
+    setSortType(sort);
+    setQueryParams({ sort });
   };
 
   // TODO: Figure out correct type for event.
   const changeMetric = (event: any) => {
-    const value = parseInt(event.target.value);
-    setMetric(value);
-    setQueryParams(leftSnapshot, rightSnapshot, sortType, value);
+    const metric = parseInt(event.target.value);
+    setMetric(metric);
+    setQueryParams({ metric });
+  };
+
+  // TODO: Figure out correct type for event.
+  const changeLocations = (event: any) => {
+    const locations = parseInt(event.target.value);
+    setLocations(locations);
+    setQueryParams({ locations });
   };
 
   let projectionsSet = new ProjectionsSet([]);
@@ -140,6 +168,17 @@ function CompareSnapshotsInner({ masterSnapshot }: { masterSnapshot: number }) {
       leftProjections,
       rightProjections,
     );
+
+    if (locations === Locations.TOP_COUNTIES_BY_DIFF) {
+      projectionsSet = projectionsSet.top(COUNTIES_LIMIT, sortType, metric);
+    } else if (locations === Locations.TOP_COUNTIES_BY_POPULATION) {
+      projectionsSet = projectionsSet.top(
+        COUNTIES_LIMIT,
+        SortType.POPULATION,
+        metric,
+      );
+    }
+
     projectionsSet = projectionsSet.sortBy(sortType, metric);
   }
 
@@ -177,6 +216,18 @@ function CompareSnapshotsInner({ masterSnapshot }: { masterSnapshot: number }) {
           />
         </FormControl>
         <FormControl style={{ width: '12rem', marginLeft: '1rem' }}>
+          <InputLabel focused={false}>Show:</InputLabel>
+          <Select value={locations} onChange={changeLocations}>
+            <MenuItem value={Locations.STATES}>States</MenuItem>
+            <MenuItem value={Locations.TOP_COUNTIES_BY_POPULATION}>
+              Top {COUNTIES_LIMIT} Counties (by Population)
+            </MenuItem>
+            <MenuItem value={Locations.TOP_COUNTIES_BY_DIFF}>
+              Top {COUNTIES_LIMIT} Counties (by Diff) [SLOW!!!]
+            </MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl style={{ width: '12rem', marginLeft: '1rem' }}>
           <InputLabel focused={false}>Metric:</InputLabel>
           <Select value={metric} onChange={changeMetric}>
             {[
@@ -197,6 +248,7 @@ function CompareSnapshotsInner({ masterSnapshot }: { masterSnapshot: number }) {
           <Select value={sortType} onChange={changeSort}>
             <MenuItem value={SortType.SERIES_DIFF}>Series Diff (RMSD)</MenuItem>
             <MenuItem value={SortType.METRIC_DIFF}>Metric Diff</MenuItem>
+            <MenuItem value={SortType.POPULATION}>Population</MenuItem>
             <MenuItem value={SortType.ALPHABETICAL}>Name</MenuItem>
           </Select>
         </FormControl>
@@ -280,6 +332,49 @@ function useMasterSnapshot(): number | null {
   return snapshot;
 }
 
+function useAllProjections(
+  snapshotUrl: string,
+  locations: Locations,
+): Projections[] | null {
+  const [allProjections, setAllProjections] = useState<Projections[] | null>(
+    null,
+  );
+
+  useEffect(() => {
+    setAllProjections(null);
+
+    async function fetchData() {
+      const projections = await fetchAllProjections(snapshotUrl, locations);
+      setAllProjections(projections);
+    }
+    if (snapshotUrl !== undefined) {
+      fetchData();
+    }
+  }, [snapshotUrl, locations]);
+
+  return allProjections;
+}
+
+function fetchAllProjections(
+  snapshotUrl: string,
+  locations: Locations,
+): Promise<Projections[]> {
+  if (locations === Locations.STATES) {
+    return fetchAllStateProjections(snapshotUrl);
+  } else if (locations === Locations.TOP_COUNTIES_BY_DIFF) {
+    return fetchAllCountyProjections(snapshotUrl);
+  } else if (locations === Locations.TOP_COUNTIES_BY_POPULATION) {
+    const topCounties = topCountiesByPopulation(COUNTIES_LIMIT);
+    return Promise.all(
+      topCounties.map(county =>
+        fetchProjections(county.state_code, county, snapshotUrl),
+      ),
+    );
+  } else {
+    fail(`Unknown locations: ${locations}`);
+  }
+}
+
 function getParamValue(
   params: QueryString.ParsedQuery,
   param: string,
@@ -304,7 +399,7 @@ function snapshotFromUrl(url: string): number {
 }
 
 function snapshotUrl(snapshotNum: string | number) {
-  return snapshotNum && `https://data.covidactnow.org/snapshot/${snapshotNum}`;
+  return `https://data.covidactnow.org/snapshot/${snapshotNum}`;
 }
 
 export default CompareSnapshots;

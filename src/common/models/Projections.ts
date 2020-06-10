@@ -71,6 +71,10 @@ export class Projections {
     }
   }
 
+  get population(): number {
+    return this.primary.totalPopulation;
+  }
+
   get primary() {
     return this.projected;
   }

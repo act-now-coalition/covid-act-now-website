@@ -1,6 +1,6 @@
 /** Helpers for dealing with the State / Counties dataset. */
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
-import { each } from 'lodash';
+import { each, sortBy, takeRight } from 'lodash';
 
 // TODO(michael): Add types, move more common code here.
 
@@ -41,4 +41,22 @@ export function findCountyByFips(fips: string) {
     }
   }
   return undefined;
+}
+
+export function topCountiesByPopulation(limit: number) {
+  const allCounties = [];
+  const statesData = US_STATE_DATASET.state_county_map_dataset as any;
+  for (const state in statesData) {
+    const countiesData = statesData[state].county_dataset;
+    for (const county of countiesData) {
+      if (!county.county.includes('/')) {
+        allCounties.push(county);
+      }
+    }
+  }
+
+  return takeRight(
+    sortBy(allCounties, c => c.population),
+    limit,
+  );
 }

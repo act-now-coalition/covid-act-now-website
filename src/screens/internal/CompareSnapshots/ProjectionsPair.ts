@@ -6,6 +6,7 @@ import { fail, assert } from 'common/utils';
 
 export enum SortType {
   ALPHABETICAL,
+  POPULATION,
   SERIES_DIFF,
   METRIC_DIFF,
 }
@@ -15,8 +16,8 @@ export class ProjectionsPair {
   constructor(public left: Projections, public right: Projections) {}
 
   metricDiff(metric: Metric): number {
-    const leftMetric = this.left.getMetricValue(metric);
-    const rightMetric = this.right.getMetricValue(metric);
+    const leftMetric = getMetricValue(this.left, metric);
+    const rightMetric = getMetricValue(this.right, metric);
 
     if (leftMetric === null || rightMetric === null) {
       return leftMetric === null && rightMetric === null ? 0 : 9999;
@@ -35,15 +36,22 @@ export class ProjectionsPair {
     return this.left.locationName;
   }
 
+  get population(): number {
+    return this.left.population;
+  }
+
   compare(other: ProjectionsPair, sortType: SortType, metric: Metric) {
     switch (sortType) {
       case SortType.ALPHABETICAL:
         return this.locationName.localeCompare(other.locationName);
+
+      // NOTE: The following all do (other - this) to intentionally sort in
+      // reverse order (biggest to smallest).
+      case SortType.POPULATION:
+        return other.population - this.population;
       case SortType.SERIES_DIFF:
-        // sort largest to smallest.
         return other.seriesDiff(metric) - this.seriesDiff(metric);
       case SortType.METRIC_DIFF:
-        // sort largest to smallest.
         return other.metricDiff(metric) - this.metricDiff(metric);
       default:
         fail(`Unknown sortType: ${sortType}`);
@@ -128,4 +136,12 @@ function trimDatasetsToMatch(left: Column[], right: Column[]) {
     left.slice(leftStartIndex, leftEndIndex + 1),
     right.slice(rightStartIndex, rightEndIndex + 1),
   ];
+}
+
+function getMetricValue(projections: Projections, metric: Metric) {
+  if (metric === Metric.FUTURE_PROJECTIONS) {
+    return projections.primary.finalCumulativeDeaths;
+  } else {
+    return projections.getMetricValue(metric);
+  }
 }
