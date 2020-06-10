@@ -62,7 +62,7 @@ const LocationShareCard = ({ stateId, countyFipsId }: ShareCardProps) => {
     countyFipsId && findCountyByFips(countyFipsId),
   );
   stateId = stateId || countyOption.state_code;
-  projections = useProjections(stateId, countyOption) as any;
+  projections = useProjections(stateId!, countyOption) as any;
 
   if (!projections) {
     return null;

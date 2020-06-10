@@ -65,7 +65,7 @@ type AggregateSummaryWithTimeseries =
 
 export class Api {
   readonly snapshotUrl: string;
-  constructor(dataUrl?: string) {
+  constructor(dataUrl?: string | null) {
     this.snapshotUrl = dataUrl || DataUrlJson.data_url;
     // trim any trailing /
     this.snapshotUrl = this.snapshotUrl.replace(/\/$/, '');
