@@ -320,7 +320,7 @@ const About = ({ children }: { children: React.ReactNode }) => {
 
           <Typography variant="body1" component="p">
             An SEIR model tracks the flow of people between four states:
-            susceptible (S), exposed (E), infected (I), and resistant (R):
+            susceptible (S), exposed (E), infected (I), and recovered (R):
           </Typography>
 
           <Typography variant="body1" component="p">
