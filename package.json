@@ -27,8 +27,6 @@
     "downshift": "^5.0.5",
     "esm": "^3.2.25",
     "googleapis": "^39.2.0",
-    "highcharts": "^8.0.4",
-    "highcharts-react-official": "^3.0.0",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "pageres": "^5.2.0",
