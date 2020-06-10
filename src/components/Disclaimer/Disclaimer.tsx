@@ -4,13 +4,12 @@ import { DisclaimerWrapper, DisclaimerBody } from './Disclaimer.style';
 import LightTooltip from 'components/LightTooltip/LightTooltip';
 import { useModelLastUpdatedDate } from 'common/utils/model';
 import { Metric } from 'common/metric';
-
 const Disclaimer = ({
   metricName,
-  children,
+  chartDisclaimer,
 }: {
   metricName?: number;
-  children: React.ReactNode;
+  chartDisclaimer: string;
 }) => {
   const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
   const lastUpdatedDateString =
@@ -24,7 +23,27 @@ const Disclaimer = ({
         >
           <span>Last updated {lastUpdatedDateString}.</span>
         </LightTooltip>{' '}
-        {children} Learn more about{' '}
+        {metricName === Metric.CONTACT_TRACING && (
+          <Fragment>
+            <a
+              href="https://covidlocal.org/assets/documents/COVID%20Local%20Metrics%20overview.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Experts recommend
+            </a>{' '}
+          </Fragment>
+        )}
+        {metricName === Metric.HOSPITAL_USAGE && (
+          <a
+            href="https://preventepidemics.org/wp-content/uploads/2020/04/COV020_WhenHowTightenFaucet_v3.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Resolve to Save Lives
+          </a>
+        )}
+        {chartDisclaimer} Learn more about{' '}
         <a
           href="https://blog.covidactnow.org/modeling-metrics-critical-to-reopen-safely/"
           target="_blank"
