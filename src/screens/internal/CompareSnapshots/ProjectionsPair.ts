@@ -72,7 +72,9 @@ function getDataset(projection: Projection, metric: Metric): Column[] {
     case Metric.CONTACT_TRACING:
       return projection.getDataset('contractTracers');
     case Metric.FUTURE_PROJECTIONS:
-      return projection.getDataset('hospitalizations');
+      return projection
+        .getDataset('hospitalizations')
+        .map(({ x, y }) => ({ x, y: y / projection.finalHospitalBeds }));
     default:
       fail('Unknown metric: ' + metric);
   }
@@ -140,7 +142,7 @@ function trimDatasetsToMatch(left: Column[], right: Column[]) {
 
 function getMetricValue(projections: Projections, metric: Metric) {
   if (metric === Metric.FUTURE_PROJECTIONS) {
-    return projections.primary.finalCumulativeDeaths;
+    return projections.primary.finalCumulativeDeaths / projections.population;
   } else {
     return projections.getMetricValue(metric);
   }
