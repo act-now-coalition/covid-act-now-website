@@ -6,17 +6,22 @@ import {
   RegionDescriptor,
 } from './RegionDescriptor';
 import { Api } from 'api';
+import { findCountyByFips } from 'common/locations';
 
-export async function fetchProjections(stateId, countyInfo = null) {
+export async function fetchProjections(
+  stateId,
+  countyInfo = null,
+  snapshotUrl = null,
+) {
   let region;
   if (countyInfo) {
     region = RegionDescriptor.forCounty(countyInfo.full_fips_code);
   } else {
     region = RegionDescriptor.forState(stateId);
   }
-  const summaryWithTimeseriesMap = await new Api().fetchSummaryWithTimeseriesMap(
-    region,
-  );
+  const summaryWithTimeseriesMap = await new Api(
+    snapshotUrl,
+  ).fetchSummaryWithTimeseriesMap(region);
   return new Projections(summaryWithTimeseriesMap, stateId, countyInfo);
 }
 
@@ -24,10 +29,7 @@ export async function fetchProjections(stateId, countyInfo = null) {
 export async function fetchAllStateProjections(snapshotUrl = null) {
   const all = await new Api(
     snapshotUrl,
-  ).fetchAggregatedSummaryWithTimeseriesMaps(
-    RegionAggregateDescriptor.STATES,
-    snapshotUrl,
-  );
+  ).fetchAggregatedSummaryWithTimeseriesMaps(RegionAggregateDescriptor.STATES);
   return all.map(summaryWithTimeseriesMap => {
     // We grab the state from an arbitrary intervention's summary data.
     const stateName =
@@ -40,8 +42,10 @@ export async function fetchAllStateProjections(snapshotUrl = null) {
 }
 
 /** Returns an array of `Projections` instances for all counties. */
-export async function fetchAllCountyProjections() {
-  const all = await new Api().fetchAggregatedSummaryWithTimeseriesMaps(
+export async function fetchAllCountyProjections(snapshotUrl = null) {
+  const all = await new Api(
+    snapshotUrl,
+  ).fetchAggregatedSummaryWithTimeseriesMaps(
     RegionAggregateDescriptor.COUNTIES,
   );
   return all.map(summaryWithTimeseriesMap => {
@@ -52,7 +56,7 @@ export async function fetchAllCountyProjections() {
     return new Projections(
       summaryWithTimeseriesMap,
       REVERSED_STATES[stateName],
-      fips,
+      findCountyByFips(fips),
     );
   });
 }
@@ -69,26 +73,6 @@ export function useProjections(location, county = null) {
   }, [location, county]);
 
   return projections;
-}
-
-export function useAllStateProjections(snapshotUrl = null) {
-  const [stateProjectionsMap, setStateProjectionsMap] = useState(null);
-
-  useEffect(() => {
-    async function fetchData() {
-      const result = {};
-      const projections = await fetchAllStateProjections(snapshotUrl);
-      for (const projection of projections) {
-        result[REVERSED_STATES[projection.stateName]] = projection;
-      }
-      setStateProjectionsMap(result);
-    }
-    if (snapshotUrl !== undefined) {
-      fetchData();
-    }
-  }, [snapshotUrl]);
-
-  return stateProjectionsMap;
 }
 
 export function useModelLastUpdatedDate() {

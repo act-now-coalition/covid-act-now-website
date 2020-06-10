@@ -17,7 +17,7 @@ import Terms from 'screens/Terms/Terms';
 import Privacy from 'screens/Terms/Privacy';
 import Embed from 'screens/Embed/Embed';
 import AllStates from 'screens/internal/AllStates/AllStates';
-import CompareModels from 'screens/internal/CompareModels/CompareModels';
+import CompareSnapshots from 'screens/internal/CompareSnapshots/CompareSnapshots';
 import ExportImage from 'screens/internal/ShareImage/ChartExportImage';
 import ShareImage from 'screens/internal/ShareImage/ShareImage';
 import AppBar from 'components/AppBar/AppBar';
@@ -100,7 +100,7 @@ export default function App() {
               <Route path="/compare">
                 <Redirect to="/internal/compare" />
               </Route>
-              <Route path="/internal/compare" component={CompareModels} />
+              <Route path="/internal/compare" component={CompareSnapshots} />
 
               {/** Internal endpoints we use to generate the content that we
               want to screenshot for our social sharing images (OpenGraph /

@@ -59,6 +59,22 @@ export class Projections {
     }
   }
 
+  get fips(): string {
+    return this.primary.fips;
+  }
+
+  get locationName(): string {
+    if (this.isCounty) {
+      return `${this.countyName}, ${this.stateCode}`;
+    } else {
+      return this.stateName;
+    }
+  }
+
+  get population(): number {
+    return this.primary.totalPopulation;
+  }
+
   get primary() {
     return this.projected;
   }

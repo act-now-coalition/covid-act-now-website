@@ -84,6 +84,8 @@ export interface RtRange {
 export class Projection {
   readonly locationName: string;
   readonly totalPopulation: number;
+  readonly finalHospitalBeds: number;
+  readonly fips: string;
   readonly dateOverwhelmed: Date | null;
   readonly totalICUCapacity: number | null;
   readonly typicallyFreeICUCapacity: number | null;
@@ -135,12 +137,14 @@ export class Projection {
     this.intervention = parameters.intervention;
     this.isCounty = parameters.isCounty;
     this.totalPopulation = summaryWithTimeseries.actuals.population;
+    this.fips = summaryWithTimeseries.fips;
 
     // Set up our series data exposed via getDataset().
     this.hospitalizations = timeseries.map(
       row => row && row.hospitalBedsRequired,
     );
     this.beds = timeseries.map(row => row && row.hospitalBedCapacity);
+    this.finalHospitalBeds = this.beds[this.beds.length - 1]!;
     this.cumulativeDeaths = timeseries.map(row => row && row.cumulativeDeaths);
     this.cumulativeInfected = timeseries.map(
       row => row && row.cumulativeInfected,
