@@ -283,7 +283,7 @@ const ChartsHolder = (props: {
               </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
               {futureProjectionsDisabled ? (
-                'Future hospitalization projections not currently available. Check back soon.'
+                'Future hospitalization projections are not currently available. Check back soon.'
               ) : (
                 <Fragment>
                   <ChartDescription>
