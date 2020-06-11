@@ -8,7 +8,7 @@
  * snapshot.
  *
  * Generates a file alerts/<old_snapshot>-<new_snapshot>.json containing an
- * array of alerts. See the Alert interface below for schema.
+ * a map of { <fips>: Alert } (See the Alert interface below for schema).
  */
 
 import fs from 'fs-extra';
@@ -49,7 +49,7 @@ async function main() {
     await fetchAllProjections(snapshotUrl(newSnap))
   );
 
-  const alerts: Alert[] = [ ];
+  const alerts: { [fips: string]: Alert } = { };
   for(const pair of projectionsSet.pairs) {
     const oldLevel = pair.left.getAlarmLevel();
     const newLevel = pair.left.getAlarmLevel();
@@ -64,12 +64,13 @@ async function main() {
       }
     }
     if (oldLevel !== newLevel || changedMetrics.length > 0) {
-      alerts.push({
-        fips: pair.fips,
+      const fips = pair.fips;
+      alerts[fips] = {
+        fips,
         oldLevel,
         newLevel,
         changedMetrics
-      });
+      };
     }
   }
 
