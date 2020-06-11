@@ -4,13 +4,18 @@ import { DisclaimerWrapper, DisclaimerBody } from './Disclaimer.style';
 import LightTooltip from 'components/LightTooltip/LightTooltip';
 import { useModelLastUpdatedDate } from 'common/utils/model';
 import { Metric } from 'common/metric';
-const Disclaimer = ({
-  metricName,
-  chartDisclaimer,
-}: {
-  metricName?: number;
-  chartDisclaimer: string;
-}) => {
+import { CASE_GROWTH_DISCLAIMER } from 'common/metrics/case_growth';
+import { POSITIVE_RATE_DISCLAIMER } from 'common/metrics/positive_rate';
+import { HOSPITALIZATIONS_DISCLAIMER } from 'common/metrics/hospitalizations';
+import { CONTACT_TRACING_DISCLAIMER } from 'common/metrics/contact_tracing';
+const Disclaimer = ({ metricName }: { metricName: number }) => {
+  const METRIC_TO_DISCLAIMER: { [metricName: number]: string } = {
+    [Metric.CASE_GROWTH_RATE]: CASE_GROWTH_DISCLAIMER,
+    [Metric.POSITIVE_TESTS]: POSITIVE_RATE_DISCLAIMER,
+    [Metric.HOSPITAL_USAGE]: HOSPITALIZATIONS_DISCLAIMER,
+    [Metric.CONTACT_TRACING]: CONTACT_TRACING_DISCLAIMER,
+  };
+
   const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
   const lastUpdatedDateString =
     lastUpdatedDate !== null ? lastUpdatedDate.toLocaleDateString() : '';
@@ -43,7 +48,7 @@ const Disclaimer = ({
             Resolve to Save Lives
           </a>
         )}
-        {chartDisclaimer} Learn more about{' '}
+        {METRIC_TO_DISCLAIMER[metricName]} Learn more about{' '}
         <a
           href="https://blog.covidactnow.org/modeling-metrics-critical-to-reopen-safely/"
           target="_blank"

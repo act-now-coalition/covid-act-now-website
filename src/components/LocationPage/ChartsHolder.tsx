@@ -27,22 +27,10 @@ import {
   ChartContactTracing,
   ChartFutureHospitalization,
 } from 'components/Charts';
-import {
-  caseGrowthStatusText,
-  CASE_GROWTH_DISCLAIMER,
-} from 'common/metrics/case_growth';
-import {
-  positiveTestsStatusText,
-  POSITIVE_RATE_DISCLAIMER,
-} from 'common/metrics/positive_rate';
-import {
-  hospitalOccupancyStatusText,
-  HOSPITALIZATIONS_DISCLAIMER,
-} from 'common/metrics/hospitalizations';
-import {
-  contactTracingStatusText,
-  CONTACT_TRACING_DISCLAIMER,
-} from 'common/metrics/contact_tracing';
+import { caseGrowthStatusText } from 'common/metrics/case_growth';
+import { positiveTestsStatusText } from 'common/metrics/positive_rate';
+import { hospitalOccupancyStatusText } from 'common/metrics/hospitalizations';
+import { contactTracingStatusText } from 'common/metrics/contact_tracing';
 import { generateChartDescription } from 'common/metrics/future_projection';
 import { Metric, getMetricName } from 'common/metric';
 import { COLORS } from 'common';
@@ -193,10 +181,7 @@ const ChartsHolder = (props: {
               {rtRangeData && (
                 <>
                   <ChartRt columnData={projection.getDataset('rtRange')} />
-                  <Disclaimer
-                    metricName={Metric.CASE_GROWTH_RATE}
-                    chartDisclaimer={CASE_GROWTH_DISCLAIMER}
-                  />
+                  <Disclaimer metricName={Metric.CASE_GROWTH_RATE} />
                 </>
               )}
               <ChartHeaderWrapper>
@@ -223,10 +208,7 @@ const ChartsHolder = (props: {
               {testPositiveData && (
                 <>
                   <ChartPositiveTestRate columnData={testPositiveData} />
-                  <Disclaimer
-                    metricName={Metric.POSITIVE_TESTS}
-                    chartDisclaimer={POSITIVE_RATE_DISCLAIMER}
-                  />
+                  <Disclaimer metricName={Metric.POSITIVE_TESTS} />
                 </>
               )}
               <ChartHeaderWrapper>
@@ -254,10 +236,7 @@ const ChartsHolder = (props: {
               {icuUtilizationData && (
                 <>
                   <ChartICUHeadroom columnData={icuUtilizationData} />
-                  <Disclaimer
-                    metricName={Metric.HOSPITAL_USAGE}
-                    chartDisclaimer={HOSPITALIZATIONS_DISCLAIMER}
-                  />
+                  <Disclaimer metricName={Metric.HOSPITAL_USAGE} />
                 </>
               )}
               <ChartHeaderWrapper>
@@ -286,10 +265,7 @@ const ChartsHolder = (props: {
               {contactTracingData && (
                 <>
                   <ChartContactTracing columnData={contactTracingData} />
-                  <Disclaimer
-                    metricName={Metric.CONTACT_TRACING}
-                    chartDisclaimer={CONTACT_TRACING_DISCLAIMER}
-                  />
+                  <Disclaimer metricName={Metric.CONTACT_TRACING} />
                 </>
               )}
               <ChartHeaderWrapper>
