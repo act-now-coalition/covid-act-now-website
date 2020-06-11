@@ -26,6 +26,9 @@ import { Metric, ALL_METRICS } from '../../src/common/metric';
 
 const outputFolder = path.join(__dirname, 'alerts');
 
+// Disable counties; mostly useful for faster testing / debugging.
+const STATES_ONLY = false;
+
 interface Alert {
   fips: string;
   oldLevel: Level;
@@ -102,9 +105,13 @@ function exitWithUsage(): never {
 }
 
 async function fetchAllProjections(snapshotUrl: string): Promise<Projections[]> {
-  const county = await fetchAllCountyProjections(snapshotUrl);
   const state = await fetchAllStateProjections(snapshotUrl);
-  return county.concat(state);
+  if (STATES_ONLY) {
+    return state;
+  } else {
+    const county = await fetchAllCountyProjections(snapshotUrl);
+    return county.concat(state);
+  }
 }
 
 main().catch(e => {
