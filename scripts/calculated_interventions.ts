@@ -23,7 +23,7 @@ import {
   }
 
   for (const countyProjections of allCountiesProjections) {
-    const fips = countyProjections.county;
+    const fips = countyProjections.fips;
     countyInventionMap[fips] = countyProjections.getAlarmLevelColor();
   }
 
