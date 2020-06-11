@@ -185,11 +185,9 @@ export const ButtonsWrapper = styled(Box)`
   }
 `;
 
-export const HeaderButton = styled(Box)<{
-  hide?: Boolean;
-}>`
+export const HeaderButton = styled(Box)`
   height: 50px;
-  width: 100%;
+  width: 50%;
   font-size: 15px;
   line-height: 1.2;
   cursor: pointer;
@@ -198,15 +196,23 @@ export const HeaderButton = styled(Box)<{
   font-weight: 500;
   text-align: center;
   margin: auto;
-  display: ${props => (props.hide ? 'none' : 'flex')};
+  display: flex;
   align-items: center;
   justify-content: center;
-  border-top: 1px solid #f2f2f2;
+  border-top: 1px solid ${COLORS.LIGHTGRAY};
+
+  &:first-child {
+    border-right: 1px solid ${COLORS.LIGHTGRAY};
+  }
 
   @media (min-width: 600px) {
     border-top: none;
     width: 75px;
     height: 40px;
+
+    &:first-child {
+      border-right: none;
+    }
   }
 `;
 
