@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { COLORS } from 'common';
+import { COLOR_MAP } from 'common/colors';
 
 export const Wrapper = styled.div`
   background-color: white;
@@ -22,4 +23,35 @@ export const Header = styled.div`
 
 export const TextContent = styled.div`
   max-width: 600px;
+`;
+
+export const ActiveAlumniButtonContainer = styled.div`
+  display: flex;
+  width: 150px;
+  border: 1px solid black;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2rem;
+`;
+
+export const ActiveAlumniButton = styled.div<{
+  teamList?: string;
+}>`
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  padding: 0.1rem;
+
+  &:first-child {
+    border-right: 1px solid black;
+    background-color: ${({ teamList }) =>
+      teamList === 'active' && 'rgba(59,188,230,.5)'};
+  }
+
+  &:last-child {
+    border-right: 1px solid black;
+    background-color: ${({ teamList }) =>
+      teamList === 'alumni' && 'rgba(59,188,230,.5)'};
+  }
 `;

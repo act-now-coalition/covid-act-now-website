@@ -1,21 +1,31 @@
 import React from 'react';
 
 import { TeamTableGrid, TeamMember, TeamMemberCell } from './TeamTable.style';
+import { TeamMemberName } from '../HeadshotGrid/HeadshotGrid.style';
 
 const TeamTable = ({
   people,
+  isTeam,
 }: {
   people: { name: string; title: string; link: string }[];
+  isTeam?: Boolean;
 }) => {
   return (
-    <TeamTableGrid>
+    <TeamTableGrid isTeam={isTeam}>
       {people.map((teammate, idx) => {
         return (
-          <TeamMember key={idx}>
+          <TeamMember key={idx} isTeam={isTeam}>
             <TeamMemberCell variant="body1" component="p">
-              <a href={teammate.link} target="_blank" rel="noopener noreferrer">
-                {teammate.name}
-              </a>
+              {isTeam && (
+                <a
+                  href={teammate.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {teammate.name}
+                </a>
+              )}
+              {!isTeam && <TeamMemberName>{teammate.name}</TeamMemberName>}
             </TeamMemberCell>
             <TeamMemberCell variant="body1" component="p">
               <span dangerouslySetInnerHTML={{ __html: teammate.title }} />

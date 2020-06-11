@@ -1,10 +1,28 @@
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
 
-export const TeamTableGrid = styled.div``;
-export const TeamMember = styled.div`
+export const TeamTableGrid = styled.div<{
+  isTeam?: Boolean;
+}>`
+  column-count: 1;
+  display: inline-block;
+
+  @media (min-width: 600px) {
+    column-count: 2;
+  }
+`;
+
+export const TeamMember = styled.div<{
+  isTeam?: Boolean;
+}>`
   display: flex;
   margin: 0;
+  flex-direction: row;
+
+  @media (min-width: 600px) {
+    flex-direction: column;
+    break-inside: avoid-column;
+  }
 `;
 
 export const TeamMemberCell = styled(Typography)<{
