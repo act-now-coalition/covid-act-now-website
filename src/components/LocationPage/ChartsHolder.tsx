@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { Fragment, useRef, useEffect } from 'react';
 
 import {
   ChartContentWrapper,
@@ -134,6 +134,8 @@ const ChartsHolder = (props: {
     projections: props.projections,
     isMobile,
   };
+
+  const futureProjectionsDisabled = props.stateId === 'SC' && !props.countyId;
 
   return (
     <>
@@ -272,7 +274,7 @@ const ChartsHolder = (props: {
                 <ChartHeader ref={futureProjectionsRef}>
                   Future Hospitalization (both ICU and non-ICU) Projections
                 </ChartHeader>
-                {!isMobile && (
+                {!isMobile && !futureProjectionsDisabled && (
                   <ShareButtons
                     chartIdentifier={Metric.FUTURE_PROJECTIONS}
                     {...shareButtonProps}
@@ -280,23 +282,32 @@ const ChartsHolder = (props: {
                 )}
               </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
-              <ChartDescription>
-                {generateChartDescription(projection, noInterventionProjection)}
-              </ChartDescription>
-              {isMobile && (
-                <ShareButtons
-                  chartIdentifier={Metric.FUTURE_PROJECTIONS}
-                  {...shareButtonProps}
-                />
+              {futureProjectionsDisabled ? (
+                'Future hospitalization projections not currently available. Check back soon.'
+              ) : (
+                <Fragment>
+                  <ChartDescription>
+                    {generateChartDescription(
+                      projection,
+                      noInterventionProjection,
+                    )}
+                  </ChartDescription>
+                  {isMobile && (
+                    <ShareButtons
+                      chartIdentifier={Metric.FUTURE_PROJECTIONS}
+                      {...shareButtonProps}
+                    />
+                  )}
+                  <ChartFutureHospitalization projections={props.projections} />
+                  <Outcomes
+                    title={`Predicted outcomes by ${formatUtcDate(
+                      props.projections.projected.finalDate,
+                    )} (90 days from now)`}
+                    projections={outcomesProjections}
+                    colors={outcomesColors}
+                  />
+                </Fragment>
               )}
-              <ChartFutureHospitalization projections={props.projections} />
-              <Outcomes
-                title={`Predicted outcomes by ${formatUtcDate(
-                  props.projections.projected.finalDate,
-                )} (90 days from now)`}
-                projections={outcomesProjections}
-                colors={outcomesColors}
-              />
             </MainContentInner>
             <ClaimStateBlock
               stateId={props.stateId}
