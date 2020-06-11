@@ -23,7 +23,7 @@ export class Projections {
   constructor(
     summaryWithTimeseriesMap: RegionSummaryWithTimeseriesMap,
     stateCode: string,
-    county: any,
+    county?: any,
   ) {
     this.stateCode = stateCode.toUpperCase();
     this.stateName = (STATES as any)[this.stateCode];

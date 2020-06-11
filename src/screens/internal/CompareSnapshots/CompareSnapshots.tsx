@@ -15,8 +15,10 @@ import {
   fetchAllStateProjections,
   fetchAllCountyProjections,
   fetchProjections,
+  snapshotFromUrl,
+  snapshotUrl,
+  fetchMasterSnapshotNumber,
 } from 'common/utils/model';
-import DataUrlJson from 'assets/data/data_url.json';
 import {
   Wrapper,
   ModelComparisonsContainer,
@@ -24,17 +26,16 @@ import {
 } from './CompareSnapshots.style';
 import { Metric, getMetricName } from 'common/metric';
 import { Projections } from 'common/models/Projections';
-import { ProjectionsSet } from './ProjectionsSet';
-import { SortType, ProjectionsPair } from './ProjectionsPair';
+import { ProjectionsSet } from 'common/models/ProjectionsSet';
+import { SortType, ProjectionsPair } from 'common/models/ProjectionsPair';
 import { topCountiesByPopulation } from 'common/locations';
+import { SNAPSHOT_URL } from 'api';
 
 // TODO(michael): Compare page improvements:
 // * Virtualize the list so that it's not so awful slow. NOTE: I previously
 //   used react-lazyload for this, but it was buggy (sometimes would show stale
 //   charts after changing state properties)
 // * Add a chart that overlays the two series on top of each other.
-// * Include counties.  We could fetch all the counties and then use our sorting
-//   to find the ~50 with biggest changes.
 // * Show the diff value (the RMSD of the series or the delta between metric values).
 // * Automatically find the latest snapshot (probably by just incrementing the
 //   snapshot number until it 404s)
@@ -69,7 +70,7 @@ function CompareSnapshotsInner({ masterSnapshot }: { masterSnapshot: number }) {
     getParamValue(params, 'left', masterSnapshot),
   );
   const [rightSnapshot, setRightSnapshot] = useState(
-    getParamValue(params, 'right', snapshotFromUrl(DataUrlJson.data_url)),
+    getParamValue(params, 'right', snapshotFromUrl(SNAPSHOT_URL)),
   );
 
   // We have separate state for the input field text
@@ -320,11 +321,7 @@ function useMasterSnapshot(): number | null {
   const [snapshot, setSnapshot] = useState<number | null>(null);
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch(
-        'https://raw.githubusercontent.com/covid-projections/covid-projections/master/src/assets/data/data_url.json',
-      );
-      const json = await response.json();
-      setSnapshot(snapshotFromUrl(json['data_url']));
+      setSnapshot(await fetchMasterSnapshotNumber());
     }
     fetchData();
   }, []);
@@ -389,17 +386,6 @@ function getParamValue(
     `Parameter ${param} has non-numeric value: ${value}`,
   );
   return value;
-}
-
-function snapshotFromUrl(url: string): number {
-  assert(url, 'Empty URL provided');
-  const match = /(\d+)\/?$/.exec(url);
-  assert(match, `${url} did not match snapshot URL regex.`);
-  return parseInt(match[1]);
-}
-
-function snapshotUrl(snapshotNum: string | number) {
-  return `https://data.covidactnow.org/snapshot/${snapshotNum}`;
 }
 
 export default CompareSnapshots;

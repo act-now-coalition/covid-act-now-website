@@ -11,7 +11,7 @@ import { Wrapper, Content, Header } from './Resources.style';
 
 const sidebar = (
   <React.Fragment>
-    <SidebarLink href="#model">U.S. Interventions Model</SidebarLink>
+    <SidebarLink href="#model">SEIR Epidemiology Model</SidebarLink>
     <SidebarLink href="#api">API</SidebarLink>
     <SidebarLink href="#csv-files">CSV Files</SidebarLink>
     <SidebarLink href="#embed">Embed</SidebarLink>
@@ -36,7 +36,7 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
       <Content>
         <StapledSidebar sidebar={sidebar}>
           <SectionHeader variant="h4" component="h4" id="model">
-            U.S. Interventions Model
+            SEIR Epidemiology Model
           </SectionHeader>
           <Typography variant="body1" component="p">
             Our model is open source and{' '}
@@ -82,8 +82,15 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
               <Typography variant="body1" component="p">
                 <strong>Reported data:</strong> State and county level data for
                 confirmed cases, deaths, and hospital bed capacity. The data is
-                collected from a number of sources, including Johns Hopkins
-                University, and is updated daily.
+                collected from{' '}
+                <a
+                  href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  a number of sources
+                </a>{' '}
+                and is updated daily.
               </Typography>
             </li>
             <li>

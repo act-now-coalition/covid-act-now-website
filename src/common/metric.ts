@@ -69,3 +69,14 @@ export function getLevel(metric: Metric, value: number | null): Level {
   }
   return Level.UNKNOWN;
 }
+
+const METRIC_TO_DISCLAIMER: { [metricName: number]: string } = {
+  [Metric.CASE_GROWTH_RATE]: CaseGrowth.CASE_GROWTH_DISCLAIMER,
+  [Metric.POSITIVE_TESTS]: TestRates.POSITIVE_RATE_DISCLAIMER,
+  [Metric.HOSPITAL_USAGE]: Hospitalizations.HOSPITALIZATIONS_DISCLAIMER,
+  [Metric.CONTACT_TRACING]: ContactTracing.CONTACT_TRACING_DISCLAIMER,
+};
+
+export function getMetricDisclaimer(metric: number) {
+  return METRIC_TO_DISCLAIMER[metric];
+}

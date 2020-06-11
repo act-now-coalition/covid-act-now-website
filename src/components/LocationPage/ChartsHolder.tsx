@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { Fragment, useRef, useEffect } from 'react';
 
 import {
   ChartContentWrapper,
@@ -11,7 +11,7 @@ import {
 } from './ChartsHolder.style';
 import NoCountyDetail from './NoCountyDetail';
 import { Projections } from 'common/models/Projections';
-import { Projection, TRACERS_NEEDED_PER_CASE } from 'common/models/Projection';
+import { Projection } from 'common/models/Projection';
 import Disclaimer from 'components/Disclaimer/Disclaimer';
 import ClaimStateBlock from 'components/ClaimStateBlock/ClaimStateBlock';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
@@ -27,25 +27,14 @@ import {
   ChartContactTracing,
   ChartFutureHospitalization,
 } from 'components/Charts';
-import {
-  caseGrowthStatusText,
-  CASE_GROWTH_DISCLAIMER,
-} from 'common/metrics/case_growth';
-import {
-  positiveTestsStatusText,
-  POSITIVE_RATE_DISCLAIMER,
-} from 'common/metrics/positive_rate';
-import {
-  hospitalOccupancyStatusText,
-  HOSPITALIZATIONS_DISCLAIMER,
-} from 'common/metrics/hospitalizations';
-import { generateChartDescription } from 'common/metrics/future_projection';
+import { caseGrowthStatusText } from 'common/metrics/case_growth';
+import { positiveTestsStatusText } from 'common/metrics/positive_rate';
+import { hospitalOccupancyStatusText } from 'common/metrics/hospitalizations';
 import { contactTracingStatusText } from 'common/metrics/contact_tracing';
+import { generateChartDescription } from 'common/metrics/future_projection';
 import { Metric, getMetricName } from 'common/metric';
 import { COLORS } from 'common';
 import { formatUtcDate } from 'common/utils';
-
-// TODO(chelsi): organize chart disclaimer copy more centrally
 
 // TODO(michael): figure out where this type declaration should live.
 type County = {
@@ -146,6 +135,8 @@ const ChartsHolder = (props: {
     isMobile,
   };
 
+  const futureProjectionsDisabled = props.stateId === 'SC' && !props.countyId;
+
   return (
     <>
       {!projection ? (
@@ -192,9 +183,7 @@ const ChartsHolder = (props: {
               {rtRangeData && (
                 <>
                   <ChartRt columnData={projection.getDataset('rtRange')} />
-                  <Disclaimer metricName={Metric.CASE_GROWTH_RATE}>
-                    {CASE_GROWTH_DISCLAIMER}
-                  </Disclaimer>
+                  <Disclaimer metricName={Metric.CASE_GROWTH_RATE} />
                 </>
               )}
               <ChartHeaderWrapper>
@@ -221,9 +210,7 @@ const ChartsHolder = (props: {
               {testPositiveData && (
                 <>
                   <ChartPositiveTestRate columnData={testPositiveData} />
-                  <Disclaimer metricName={Metric.POSITIVE_TESTS}>
-                    {POSITIVE_RATE_DISCLAIMER}
-                  </Disclaimer>
+                  <Disclaimer metricName={Metric.POSITIVE_TESTS} />
                 </>
               )}
               <ChartHeaderWrapper>
@@ -251,16 +238,7 @@ const ChartsHolder = (props: {
               {icuUtilizationData && (
                 <>
                   <ChartICUHeadroom columnData={icuUtilizationData} />
-                  <Disclaimer metricName={Metric.HOSPITAL_USAGE}>
-                    <a
-                      href="https://preventepidemics.org/wp-content/uploads/2020/04/COV020_WhenHowTightenFaucet_v3.pdf"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Resolve to Save Lives
-                    </a>
-                    {HOSPITALIZATIONS_DISCLAIMER}
-                  </Disclaimer>
+                  <Disclaimer metricName={Metric.HOSPITAL_USAGE} />
                 </>
               )}
               <ChartHeaderWrapper>
@@ -289,27 +267,14 @@ const ChartsHolder = (props: {
               {contactTracingData && (
                 <>
                   <ChartContactTracing columnData={contactTracingData} />
-                  <Disclaimer metricName={Metric.CONTACT_TRACING}>
-                    <a
-                      href="https://covidlocal.org/assets/documents/COVID%20Local%20Metrics%20overview.pdf"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Experts recommend
-                    </a>{' '}
-                    {`that at least 90% of contacts for each new case must be
-                    traced within 48 hours in order to contain COVID. Experts
-                    estimate that tracing each new case within 48 hours requires
-                    an average of ${TRACERS_NEEDED_PER_CASE} contact tracers per
-                    new case, as well as fast testing.`}
-                  </Disclaimer>
+                  <Disclaimer metricName={Metric.CONTACT_TRACING} />
                 </>
               )}
               <ChartHeaderWrapper>
                 <ChartHeader ref={futureProjectionsRef}>
                   Future Hospitalization (both ICU and non-ICU) Projections
                 </ChartHeader>
-                {!isMobile && (
+                {!isMobile && !futureProjectionsDisabled && (
                   <ShareButtons
                     chartIdentifier={Metric.FUTURE_PROJECTIONS}
                     {...shareButtonProps}
@@ -317,23 +282,32 @@ const ChartsHolder = (props: {
                 )}
               </ChartHeaderWrapper>
               <ChartLocationName>{projection.locationName}</ChartLocationName>
-              <ChartDescription>
-                {generateChartDescription(projection, noInterventionProjection)}
-              </ChartDescription>
-              {isMobile && (
-                <ShareButtons
-                  chartIdentifier={Metric.FUTURE_PROJECTIONS}
-                  {...shareButtonProps}
-                />
+              {futureProjectionsDisabled ? (
+                'Future hospitalization projections are not currently available. Check back soon.'
+              ) : (
+                <Fragment>
+                  <ChartDescription>
+                    {generateChartDescription(
+                      projection,
+                      noInterventionProjection,
+                    )}
+                  </ChartDescription>
+                  {isMobile && (
+                    <ShareButtons
+                      chartIdentifier={Metric.FUTURE_PROJECTIONS}
+                      {...shareButtonProps}
+                    />
+                  )}
+                  <ChartFutureHospitalization projections={props.projections} />
+                  <Outcomes
+                    title={`Predicted outcomes by ${formatUtcDate(
+                      props.projections.projected.finalDate,
+                    )} (90 days from now)`}
+                    projections={outcomesProjections}
+                    colors={outcomesColors}
+                  />
+                </Fragment>
               )}
-              <ChartFutureHospitalization projections={props.projections} />
-              <Outcomes
-                title={`Predicted outcomes by ${formatUtcDate(
-                  props.projections.projected.finalDate,
-                )} (90 days from now)`}
-                projections={outcomesProjections}
-                colors={outcomesColors}
-              />
             </MainContentInner>
             <ClaimStateBlock
               stateId={props.stateId}
