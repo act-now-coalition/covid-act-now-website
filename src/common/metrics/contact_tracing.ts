@@ -109,3 +109,5 @@ export function contactTracingStatusText(projection: Projection) {
 
   return `${overview} ${details}`;
 }
+
+export const CONTACT_TRACING_DISCLAIMER = `that at least 90% of contacts for each new case must be traced within 48 hours in order to contain COVID. Experts estimate that tracing each new case within 48 hours requires an average of ${TRACERS_NEEDED_PER_CASE} contact tracers per new case, as well as fast testing.`;
