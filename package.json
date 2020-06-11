@@ -63,9 +63,7 @@
     "update-api-types": "ts-node-script scripts/update_api_types.ts",
     "update-calculated-interventions": "ts-node-script -r tsconfig-paths/register scripts/calculated_interventions.ts",
     "generate-index-pages": "ts-node-script -r tsconfig-paths/register scripts/generate_index_pages.ts",
-    "generate-share-images": "ts-node-script -r tsconfig-paths/register scripts/generate_share_images/index.ts",
-    "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "generate-share-images": "ts-node-script -r tsconfig-paths/register scripts/generate_share_images/index.ts"
   },
   "lint-staged": {
     "src/**/*.{css,scss,js,ts,tsx}": [
@@ -92,11 +90,6 @@
   "devDependencies": {
     "@cypress/code-coverage": "^1.14.0",
     "@cypress/instrument-cra": "^1.1.0",
-    "@storybook/addon-actions": "^5.3.18",
-    "@storybook/addon-links": "^5.3.18",
-    "@storybook/addons": "^5.3.18",
-    "@storybook/preset-create-react-app": "^2.1.1",
-    "@storybook/react": "^5.3.18",
     "@testing-library/jest-dom": "^4.2.4",
     "@types/d3-fetch": "^1.1.5",
     "@types/d3-scale": "^2.2.0",
