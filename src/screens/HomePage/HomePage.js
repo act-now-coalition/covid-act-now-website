@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import HomePageHeader from 'components/Header/HomePageHeader';
 import Map from 'components/Map/Map';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
@@ -6,6 +6,7 @@ import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ShareBlock from 'components/ShareBlock/ShareBlock';
 import CriteriaExplanation from './CriteriaExplanation/CriteriaExplanation';
 import { PartnerLogoGrid, PressLogoGrid } from 'components/LogoGrid/LogoGrid';
+import { useLocation } from 'react-router-dom';
 
 import {
   Content,
@@ -14,7 +15,26 @@ import {
   PartnerHeader,
 } from './HomePage.style';
 
+// TODO: 180 is rough accounting for the navbar and searchbar;
+// could make these constants so we don't have to manually update
+const scrollTo = (div, offset = 180) =>
+  div &&
+  window.scrollTo({
+    left: 0,
+    top: div.offsetTop - offset,
+    behavior: 'smooth',
+  });
+
 export default function HomePage() {
+  const shareBlockRef = useRef(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname.includes('alert_signup') && shareBlockRef.current) {
+      scrollTo(shareBlockRef.current, -80);
+    }
+  }, [location.pathname, shareBlockRef]);
+
   return (
     <>
       <EnsureSharingIdInUrl />
@@ -38,7 +58,9 @@ export default function HomePage() {
               <PressLogoGrid />
             </Content>
           </PartnerSection>
-          <ShareBlock />
+          <div ref={shareBlockRef}>
+            <ShareBlock />
+          </div>
         </div>
       </main>
     </>
