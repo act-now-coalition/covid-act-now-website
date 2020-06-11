@@ -7,6 +7,7 @@
  * `yarn serve -l 3000`)
  */
 import fs from 'fs-extra';
+import _ from 'lodash';
 import path from 'path';
 import Pageres from 'pageres';
 import urlJoin from 'url-join';
@@ -20,8 +21,13 @@ import { Metric, ALL_METRICS } from '../../src/common/metric';
 const BASE_URL = 'http://localhost:3000/internal/share-image';
 const CSS_SELECTOR = '.screenshot';
 const OUTPUT_DIR = path.join(__dirname, 'output');
+
 // How many screenshots to send to pageres at once.
 const PAGERES_BATCH_SIZE = 10;
+// How long (seconds) to wait for the expected div to render in the browser.
+const PAGERES_TIMEOUT = 90;
+// How many times to retry after any pageres failure.
+const PAGERES_RETRIES = 2;
 
 const SHARE_OUTPUT_SIZE = '1200x630';
 const EXPORT_OUTPUT_SIZE = '2400x1350';
@@ -33,6 +39,11 @@ const BLACKLISTED_COUNTIES = [
 (async () => {
   await fs.ensureDir(OUTPUT_DIR);
   await fs.emptyDir(OUTPUT_DIR);
+
+  // Pageres adds process exit listeners for each chrome instance it launches,
+  // and these can exceed the node's memory leak detection threshold and trigger
+  // noisy "Possible EventEmitter memory leak detected." messages.
+  process.setMaxListeners(100);
 
   console.log('Fetching projections...');
   const allStatesProjections = await fetchAllStateProjections();
@@ -93,7 +104,7 @@ const BLACKLISTED_COUNTIES = [
   }
 
   for (const countyProjections of allCountiesProjections) {
-    const fips = countyProjections.county;
+    const fips = countyProjections.primary.fips;
     if (!BLACKLISTED_COUNTIES.includes(fips)) {
       addScreenshotsForLocation(`/counties/${fips}`, countyProjections);
     }
@@ -102,23 +113,42 @@ const BLACKLISTED_COUNTIES = [
   // For testing.
   // screenshots = screenshots.slice(0, 43);
 
-  while (screenshots.length > 0) {
-    const pageres = new Pageres().dest(OUTPUT_DIR);
-    const urls = [];
-    const batchSize = Math.min(PAGERES_BATCH_SIZE, screenshots.length);
-    for (let i = 0; i < batchSize; i++) {
-      const s = screenshots.pop()!;
-      urls.push(s.url);
-      await fs.ensureDir(path.join(OUTPUT_DIR, s.filename, '..'));
-      pageres.src(urlJoin(BASE_URL, s.url), [s.outputSize], {
-        selector: CSS_SELECTOR,
-        filename: s.filename,
-      });
+  const batches = _.chunk(screenshots, PAGERES_BATCH_SIZE);
+  let screenshotsLeft = screenshots.length;
+  for (const batch of batches) {
+    let triesLeft = PAGERES_RETRIES + 1;
+    let success = false;
+    while (!success && triesLeft > 0) {
+      console.log(
+        `Screenshotting: ${batch
+          .map(s => s.url)
+          .join(', ')} [${screenshotsLeft} left]`,
+      );
+      const pageres = new Pageres({ timeout: PAGERES_TIMEOUT }).dest(
+        OUTPUT_DIR,
+      );
+      for (const s of batch) {
+        await fs.ensureDir(path.join(OUTPUT_DIR, s.filename, '..'));
+        pageres.src(urlJoin(BASE_URL, s.url), [s.outputSize], {
+          selector: CSS_SELECTOR,
+          filename: s.filename,
+        });
+      }
+
+      try {
+        await pageres.run();
+        success = true;
+        screenshotsLeft -= batch.length;
+      } catch (e) {
+        triesLeft--;
+        if (triesLeft > 0) {
+          console.error(e);
+          console.error('Retries left: ', triesLeft);
+        } else {
+          throw e;
+        }
+      }
     }
-    const batchUrls = urls.join(', ');
-    console.log('Screenshotting:', batchUrls);
-    console.log('Remaining screenshots:', screenshots.length);
-    await pageres.run();
   }
 
   console.log('Completed successfully.');
