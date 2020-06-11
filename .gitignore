@@ -23,9 +23,13 @@ token.json
 .env.test.local
 .env.production.local
 
+# email alert files
+/scripts/alerts/users-to-email.json
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
 
 # ides
 .idea
