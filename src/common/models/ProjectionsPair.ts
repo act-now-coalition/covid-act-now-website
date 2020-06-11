@@ -32,6 +32,10 @@ export class ProjectionsPair {
     return rootMeanSquareDiff(leftDataset, rightDataset);
   }
 
+  get fips(): string {
+    return this.left.fips;
+  }
+
   get locationName(): string {
     return this.left.locationName;
   }

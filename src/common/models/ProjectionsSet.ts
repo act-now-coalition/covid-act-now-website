@@ -29,7 +29,7 @@ export class ProjectionsSet {
     return new ProjectionsSet(projectionPairs);
   }
 
-  constructor(private readonly pairs: ProjectionsPair[]) {}
+  constructor(readonly pairs: ProjectionsPair[]) {}
 
   sortBy(sortType: SortType, metric: Metric): ProjectionsSet {
     return new ProjectionsSet(
