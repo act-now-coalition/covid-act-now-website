@@ -30,6 +30,10 @@ export const TRACERS_NEEDED_PER_CASE = 5;
  * (by cancelling elective surgeries, using surge capacity, etc.).
  */
 const ICU_DECOMP_FACTOR = 0.3;
+const ICU_DECOMP_FACTOR_STATE_OVERRIDES: { [key: string]: number } = {
+  Arizona: 0,
+};
+
 const DEFAULT_UTILIZATION = 0.75;
 
 /**
@@ -244,6 +248,18 @@ export class Projection {
     return this.cumulativeDeaths[this.cumulativeDeaths.length - 1];
   }
 
+  get icuDecompFactor(): number {
+    if (this.stateName in ICU_DECOMP_FACTOR_STATE_OVERRIDES) {
+      return Math.max(
+        0,
+        this.typicalICUUtilization -
+          ICU_DECOMP_FACTOR_STATE_OVERRIDES[this.locationName],
+      );
+    } else {
+      return Math.max(0, this.typicalICUUtilization - ICU_DECOMP_FACTOR);
+    }
+  }
+
   get nonCovidPatients() {
     if (this.hasActualData) {
       const latestCurrentUssage = this.lastValue(
@@ -254,10 +270,7 @@ export class Projection {
       );
       return latestCurrentUssage! - latestUsageCovid!;
     }
-    return (
-      this.totalICUCapacity! *
-      Math.max(0, this.typicalICUUtilization - ICU_DECOMP_FACTOR)
-    );
+    return this.totalICUCapacity! * this.icuDecompFactor;
   }
 
   /** Returns the date when projections end (should be 90 days out). */
@@ -575,8 +588,7 @@ export class Projection {
           row.ICUBedsInUse !== null
         ) {
           const predictedNonCovidPatientsAtDate =
-            this.totalICUCapacity! *
-            Math.max(0, this.typicalICUUtilization - ICU_DECOMP_FACTOR);
+            this.totalICUCapacity! * this.icuDecompFactor;
 
           const icuHeadroomUsed =
             row.ICUBedsInUse /
