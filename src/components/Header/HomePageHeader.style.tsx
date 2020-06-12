@@ -49,6 +49,13 @@ export const HeaderSubCopy = styled(Typography)<{ component?: string }>`
   }
 `;
 
+export const HeaderSubCopyItem = styled.span<{ hideOnMobile?: boolean }>`
+  display: ${props => (props.hideOnMobile ? 'none' : 'unset')};
+  @media (min-width: 600px) {
+    display: unset;
+  }
+`;
+
 export const Disclaimer = styled.div`
   padding: 0.7rem 1rem;
   border: 1px solid rgba(0, 0, 0, 0.12);
