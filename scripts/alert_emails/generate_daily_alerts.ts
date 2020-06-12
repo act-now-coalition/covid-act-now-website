@@ -63,7 +63,7 @@ async function main() {
         }
       }
     }
-    if (oldLevel !== newLevel || changedMetrics.length > 0) {
+    if (oldLevel !== newLevel) {
       const fips = pair.fips;
       alerts[fips] = {
         fips,
