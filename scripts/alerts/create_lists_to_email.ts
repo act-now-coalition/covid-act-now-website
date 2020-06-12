@@ -1,4 +1,4 @@
-//@ts-ignore
+//@ts-ignore createsend has no types and throws an error
 import createsend from 'createsend-node';
 import fs from 'fs-extra';
 import path from 'path';
@@ -42,23 +42,25 @@ async function getSubscribersForList(
  *
  * Takes in a file with {[fips: string]: {...data}}
  *
- * You can run via `yarn create-lists-to-email`
+ * You can run via `yarn create-lists-to-email fipsToAlertFilename [outputfileName]`
  *
  * Generates a file alerts/users-to-email.json containing an object of fips and
- * users to send an email to. See the Alert interface below for schema.
+ * users to send an email to.
  */
 (async () => {
+    const outputFolder = path.join(__dirname);
+    await fs.ensureDir(outputFolder);
 
-    // Sample fips, will eventually be json loaded from a file
-    const locationsWithAlerts: { [fips: string]: { [key: string]: any } } = {
-        "06": { "overall": true },
-        "13127": { "overall": true }
-    }
+    const {fipsToAlertFilename, outputFilename} = await parseArgs();
+    const alertPath = path.join(outputFolder, fipsToAlertFilename);
+
+    const rawdata = fs.readFileSync(alertPath, "utf8");
+    const locationsWithAlerts: { [fips: string]: { [key: string]: any } } = JSON.parse(rawdata);
 
     // fips to object with a list of users and the previous meta data
     const usersToEmail: { [fips: string]: Array<string> } = {};
 
-    // TODO: use oauth here and add secrets into github.
+    // TODO: maybe oauth here and add secrets into github.
     const auth = { apiKey: process.env.CREATE_SEND_TOKEN };
     const api: any = new createsend(auth);
 
@@ -86,11 +88,30 @@ async function getSubscribersForList(
         pageToGet += 1
     }
 
-    const outputFolder = path.join(__dirname, 'alerts');
-    await fs.ensureDir(outputFolder);
-    const file = path.join(outputFolder, `users-to-email.json`);
+    // note that this file is only temporary and should not be saved
+    const file = path.join(outputFolder, outputFilename);
     await fs.writeFile(file, JSON.stringify(usersToEmail));
 
     console.log(`Done. Generated ${file}`);
 
 })();
+
+async function parseArgs(): Promise<{fipsToAlertFilename: string, outputFilename: string}> {
+    const args = process.argv.slice(2);
+    const defaultFilename = 'users-to-email.json';
+    if (args.length === 1) {
+        const fipsToAlertFilename = args[0];
+        return {fipsToAlertFilename, outputFilename: defaultFilename};
+    } else if (args.length == 2) {
+        const fipsToAlertFilename = args[0];
+        const outputFilename = args[1];
+        return {fipsToAlertFilename, outputFilename};
+    } else {
+        exitWithUsage();
+    }
+  }
+
+function exitWithUsage(): never {
+    console.log('Usage: yarn create-lists-to-email fipsToAlertFilename [outputfileName]');
+    process.exit(-1);
+}
