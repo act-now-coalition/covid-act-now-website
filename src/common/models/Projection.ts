@@ -29,16 +29,16 @@ export const TRACERS_NEEDED_PER_CASE = 5;
  * get from the API to account for hospitals being able to decrease their utilization
  * (by cancelling elective surgeries, using surge capacity, etc.).
  */
-const ICU_DECOMP_FACTOR = 0.25;
+const ICU_DECOMP_FACTOR = 0.20;
 const ICU_DECOMP_FACTOR_STATE_OVERRIDES: { [key: string]: number } = {
-  Alabama: 0.2,
+  Alabama: 0.15,
   Arizona: 0,
-  Delaware: 0.3,
-  'District of Columbia': 0.1,
-  Georgia: 0.2,
-  Mississippi: 0.2,
-  Nevada: 0.3,
-  'Rhode Island': 0.15,
+  Delaware: 0.25,
+  'District of Columbia': 0.05,
+  Georgia: 0.15,
+  Mississippi: 0.15,
+  Nevada: 0.25,
+  'Rhode Island': 0.1,
 };
 
 const DEFAULT_UTILIZATION = 0.75;
