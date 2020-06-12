@@ -479,18 +479,30 @@ export class Projection {
       this.dailyNegativeTests,
     );
 
-    return dailyPositives.map((dailyPositive, idx) => {
+    let numTailPositivesWithoutNegatives = 0;
+    const testPositiveRate = dailyPositives.map((dailyPositive, idx) => {
       const positive = dailyPositive;
       const negative = dailyNegatives[idx];
       // If there are no negatives (but there are positives), then this is
       // likely the last data point, else it would have gotten smoothed, and
       // it's probably a reporting lag issue. So just return null.
       if (negative !== null && positive !== null && negative > 0) {
+        numTailPositivesWithoutNegatives = 0;
         return positive / (negative + positive);
       } else {
+        if (positive !== null && (negative === null || negative === 0)) {
+          numTailPositivesWithoutNegatives += 1;
+        }
         return null;
       }
     });
+
+    // if we've stopped getting testing data more than a week ago, don't report a metric
+    if (numTailPositivesWithoutNegatives > 7 /* one week */) {
+      return [];
+    } else {
+      return testPositiveRate;
+    }
   }
 
   /**
