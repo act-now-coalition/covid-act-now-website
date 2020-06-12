@@ -36,6 +36,9 @@ import { Metric, getMetricName } from 'common/metric';
 import { COLORS } from 'common';
 import { formatUtcDate } from 'common/utils';
 
+// Occasionally we need to disable projections for states due to temporary bugs.
+const FUTURE_PROJECTIONS_DISABLED_STATES: string[] = [];
+
 // TODO(michael): figure out where this type declaration should live.
 type County = {
   county: string;
@@ -135,7 +138,9 @@ const ChartsHolder = (props: {
     isMobile,
   };
 
-  const futureProjectionsDisabled = props.stateId === 'SC' && !props.countyId;
+  const futureProjectionsDisabled =
+    FUTURE_PROJECTIONS_DISABLED_STATES.includes(props.stateId) &&
+    !props.countyId;
 
   return (
     <>
