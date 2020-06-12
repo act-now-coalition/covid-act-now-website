@@ -36,6 +36,7 @@ export default function App() {
             <AppBar />
             <Switch>
               <Route exact path="/" component={HomePage} />
+              <Route exact path="/alert_signup" component={HomePage} />
 
               <Route exact path="/us/:stateId" component={LocationPage} />
               <Route
