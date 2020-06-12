@@ -189,6 +189,7 @@ export class Projection {
       : this.calcICUHeadroom(this.actualTimeseries, timeseries, lastUpdated);
 
     this.contractTracers = this.calcContactTracers(this.actualTimeseries);
+
     this.fixZeros(this.hospitalizations);
     this.fixZeros(this.cumulativeDeaths);
 
@@ -445,12 +446,8 @@ export class Projection {
           const contactTracers =
             CONTACT_TRACER_STATE_OVERRIDES[this.stateName] ||
             row.contactTracers;
-          console.log(JSON.stringify(row));
           const weeklyAverage = this.getWeeklyAverageCaseForDay(i);
           if (weeklyAverage) {
-            console.log(
-              contactTracers / (weeklyAverage * TRACERS_NEEDED_PER_CASE),
-            );
             return contactTracers / (weeklyAverage * TRACERS_NEEDED_PER_CASE);
           }
         }
