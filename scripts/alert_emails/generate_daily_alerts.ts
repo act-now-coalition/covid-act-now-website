@@ -52,7 +52,7 @@ async function main() {
   const alerts: { [fips: string]: Alert } = { };
   for(const pair of projectionsSet.pairs) {
     const oldLevel = pair.left.getAlarmLevel();
-    const newLevel = pair.left.getAlarmLevel();
+    const newLevel = pair.right.getAlarmLevel();
     const changedMetrics = [];
     for(const metric of ALL_METRICS) {
       if (metric !== Metric.FUTURE_PROJECTIONS) {
