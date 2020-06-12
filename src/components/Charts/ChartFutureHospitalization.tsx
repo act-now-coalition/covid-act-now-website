@@ -96,8 +96,10 @@ const ChartFutureHospitalization = ({
     range: [0, chartWidth],
   });
 
-  const [minY, maxY] = d3extent(allData, getY);
-  assert(minY !== undefined && maxY !== undefined, 'Data must not be empty');
+  const [yAxisMin, yAxisMax] = d3extent(allData, getY);
+  assert(yAxisMax !== undefined, 'Data must not be empty');
+  const minY = 0;
+  const maxY = yAxisMax;
   const yScale = scaleLinear({
     domain: [minY, maxY],
     range: [chartHeight - MAX_LINE_WIDTH, 0],
