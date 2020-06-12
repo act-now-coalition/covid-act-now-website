@@ -19,7 +19,11 @@ import {
 } from '../../src/common/utils/model';
 import { ProjectionsSet } from '../../src/common/models/ProjectionsSet';
 import { Projections } from '../../src/common/models/Projections';
-import { fetchMasterSnapshotNumber, snapshotFromUrl, snapshotUrl } from '../../src/common/utils/model';
+import {
+  fetchMasterSnapshotNumber,
+  snapshotFromUrl,
+  snapshotUrl,
+} from '../../src/common/utils/model';
 import { SNAPSHOT_URL } from '../../src/api';
 import { Level } from '../../src/common/level';
 import { Metric, ALL_METRICS } from '../../src/common/metric';
@@ -34,27 +38,27 @@ interface Alert {
   oldLevel: Level;
   newLevel: Level;
   changedMetrics: Array<{
-    metric: Metric,
-    oldLevel: Level,
-    newLevel: Level
+    metric: Metric;
+    oldLevel: Level;
+    newLevel: Level;
   }>;
 }
 
 async function main() {
-  const {oldSnap, newSnap} = await parseArgs();
+  const { oldSnap, newSnap } = await parseArgs();
 
   console.log('Fetching projections from snapshots...');
   const projectionsSet = ProjectionsSet.fromProjections(
     await fetchAllProjections(snapshotUrl(oldSnap)),
-    await fetchAllProjections(snapshotUrl(newSnap))
+    await fetchAllProjections(snapshotUrl(newSnap)),
   );
 
-  const alerts: { [fips: string]: Alert } = { };
-  for(const pair of projectionsSet.pairs) {
+  const alerts: { [fips: string]: Alert } = {};
+  for (const pair of projectionsSet.pairs) {
     const oldLevel = pair.left.getAlarmLevel();
     const newLevel = pair.right.getAlarmLevel();
     const changedMetrics = [];
-    for(const metric of ALL_METRICS) {
+    for (const metric of ALL_METRICS) {
       if (metric !== Metric.FUTURE_PROJECTIONS) {
         const oldLevel = pair.left.getMetricLevel(metric);
         const newLevel = pair.right.getMetricLevel(metric);
@@ -69,7 +73,7 @@ async function main() {
         fips,
         oldLevel,
         newLevel,
-        changedMetrics
+        changedMetrics,
       };
     }
   }
@@ -81,7 +85,7 @@ async function main() {
   console.log(`Done. Generated ${file}`);
 }
 
-async function parseArgs(): Promise<{oldSnap: number, newSnap: number}> {
+async function parseArgs(): Promise<{ oldSnap: number; newSnap: number }> {
   const args = process.argv.slice(2);
   if (args.length === 2) {
     const oldSnap = parseInt(args[0]);
@@ -89,7 +93,7 @@ async function parseArgs(): Promise<{oldSnap: number, newSnap: number}> {
     if (Number.isNaN(oldSnap) || Number.isNaN(newSnap)) {
       exitWithUsage();
     }
-    return {oldSnap, newSnap};
+    return { oldSnap, newSnap };
   } else if (args.length === 0) {
     // no args
     const oldSnap = snapshotFromUrl(SNAPSHOT_URL);
@@ -105,7 +109,9 @@ function exitWithUsage(): never {
   process.exit(-1);
 }
 
-async function fetchAllProjections(snapshotUrl: string): Promise<Projections[]> {
+async function fetchAllProjections(
+  snapshotUrl: string,
+): Promise<Projections[]> {
   const state = await fetchAllStateProjections(snapshotUrl);
   if (STATES_ONLY) {
     return state;
