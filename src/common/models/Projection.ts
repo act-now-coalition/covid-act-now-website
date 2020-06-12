@@ -31,15 +31,14 @@ export const TRACERS_NEEDED_PER_CASE = 5;
  */
 const ICU_DECOMP_FACTOR = 0.25;
 const ICU_DECOMP_FACTOR_STATE_OVERRIDES: { [key: string]: number } = {
-  Alabama: 20,
+  Alabama: 0.2,
   Arizona: 0,
-  Delaware: 30,
-  "District of Columbia": 10,
-  Georgia: 20,
-  Mississippi: 20,
-  Nevada: 30,
-  "Rhode Island": 15,
-  
+  Delaware: 0.3,
+  'District of Columbia': 0.1,
+  Georgia: 0.2,
+  Mississippi: 0.2,
+  Nevada: 0.3,
+  'Rhode Island': 0.15,
 };
 
 const DEFAULT_UTILIZATION = 0.75;
@@ -256,7 +255,7 @@ export class Projection {
     return this.cumulativeDeaths[this.cumulativeDeaths.length - 1];
   }
 
-  get icuDecompFactor(): number {
+  get nonCovidICUUtilization(): number {
     if (this.stateName in ICU_DECOMP_FACTOR_STATE_OVERRIDES) {
       return Math.max(
         0,
@@ -278,7 +277,7 @@ export class Projection {
       );
       return latestCurrentUssage! - latestUsageCovid!;
     }
-    return this.totalICUCapacity! * this.icuDecompFactor;
+    return this.totalICUCapacity! * this.nonCovidICUUtilization;
   }
 
   /** Returns the date when projections end (should be 90 days out). */
@@ -596,7 +595,7 @@ export class Projection {
           row.ICUBedsInUse !== null
         ) {
           const predictedNonCovidPatientsAtDate =
-            this.totalICUCapacity! * this.icuDecompFactor;
+            this.totalICUCapacity! * this.nonCovidICUUtilization;
 
           const icuHeadroomUsed =
             row.ICUBedsInUse /
