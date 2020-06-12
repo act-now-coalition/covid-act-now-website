@@ -9,6 +9,7 @@ import {
 import { Api } from 'api';
 import { assert } from 'common/utils';
 import { findCountyByFips } from 'common/locations';
+import moment from 'moment';
 
 export async function fetchProjections(
   stateId: string,
@@ -85,7 +86,9 @@ export function useModelLastUpdatedDate() {
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
   useEffect(() => {
     new Api().fetchVersionTimestamp().then(timestamp => {
-      setLastUpdated(new Date(timestamp));
+      // NOTE: "new Date(timestamp)" on safari fails due to pickiness about the
+      // date formatting, so just use moment to parse.
+      setLastUpdated(moment.utc(timestamp).toDate());
     });
   }, []);
 
