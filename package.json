@@ -67,7 +67,7 @@
     "generate-daily-alerts": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/generate_daily_alerts.ts"
   },
   "lint-staged": {
-    "src/**/*.{css,scss,js,ts,tsx}": [
+    "{src,scripts}/**/*.{css,scss,js,ts,tsx}": [
       "eslint --fix"
     ]
   },
