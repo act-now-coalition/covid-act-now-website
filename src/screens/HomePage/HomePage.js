@@ -17,11 +17,11 @@ import {
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
-const scrollTo = (div, offset = 180) =>
+const scrollTo = (div, offset = 80) =>
   div &&
   window.scrollTo({
     left: 0,
-    top: div.offsetTop - offset,
+    top: div.offsetTop + offset,
     behavior: 'smooth',
   });
 
@@ -31,7 +31,7 @@ export default function HomePage() {
 
   useEffect(() => {
     if (location.pathname.includes('alert_signup') && shareBlockRef.current) {
-      scrollTo(shareBlockRef.current, -80);
+      scrollTo(shareBlockRef.current);
     }
   }, [location.pathname, shareBlockRef]);
 
