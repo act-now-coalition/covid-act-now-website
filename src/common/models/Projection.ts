@@ -35,7 +35,7 @@ const ICU_DECOMP_FACTOR_STATE_OVERRIDES: { [key: string]: number } = {
   Arizona: 0,
   Delaware: 0.3,
   'District of Columbia': 0.025,
-  Georgia: 0.10,
+  Georgia: 0.1,
   Mississippi: 0.12,
   Nevada: 0.25,
   'Rhode Island': 0,
