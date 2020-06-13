@@ -63,10 +63,11 @@
     "update-api-types": "ts-node-script scripts/update_api_types.ts",
     "update-calculated-interventions": "ts-node-script -r tsconfig-paths/register scripts/calculated_interventions.ts",
     "generate-index-pages": "ts-node-script -r tsconfig-paths/register scripts/generate_index_pages.ts",
-    "generate-share-images": "ts-node-script -r tsconfig-paths/register scripts/generate_share_images/index.ts"
+    "generate-share-images": "ts-node-script -r tsconfig-paths/register scripts/generate_share_images/index.ts",
+    "generate-daily-alerts": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/generate_daily_alerts.ts"
   },
   "lint-staged": {
-    "src/**/*.{css,scss,js,ts,tsx}": [
+    "{src,scripts}/**/*.{css,scss,js,ts,tsx}": [
       "eslint --fix"
     ]
   },
