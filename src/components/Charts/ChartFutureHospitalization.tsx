@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from 'styled-components';
 import { last, isDate } from 'lodash';
-import { extent as d3extent } from 'd3-array';
+import { extent as d3extent, max as d3max } from 'd3-array';
 import { LinePath } from '@vx/shape';
 import { ParentSize } from '@vx/responsive';
 import { scaleLinear, scaleTime } from '@vx/scale';
@@ -96,8 +96,10 @@ const ChartFutureHospitalization = ({
     range: [0, chartWidth],
   });
 
-  const [minY, maxY] = d3extent(allData, getY);
-  assert(minY !== undefined && maxY !== undefined, 'Data must not be empty');
+  const minY = 0;
+  const maxY = d3max(allData, getY);
+  assert(maxY !== undefined, 'Data must not be empty');
+
   const yScale = scaleLinear({
     domain: [minY, maxY],
     range: [chartHeight - MAX_LINE_WIDTH, 0],
