@@ -260,7 +260,7 @@ export class Projection {
       return Math.max(
         0,
         this.typicalICUUtilization -
-          ICU_DECOMP_FACTOR_STATE_OVERRIDES[this.locationName],
+          ICU_DECOMP_FACTOR_STATE_OVERRIDES[this.stateName],
       );
     } else {
       return Math.max(0, this.typicalICUUtilization - ICU_DECOMP_FACTOR);
