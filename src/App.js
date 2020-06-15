@@ -24,6 +24,7 @@ import AppBar from 'components/AppBar/AppBar';
 import Footer from 'components/Footer/Footer';
 import ScrollToTop from 'components/ScrollToTop';
 import theme from 'assets/theme';
+import AlertEmail from 'components/AlertEmail/AlertEmail';
 
 export default function App() {
   return (
@@ -37,6 +38,8 @@ export default function App() {
             <Switch>
               <Route exact path="/" component={HomePage} />
               <Route exact path="/alert_signup" component={HomePage} />
+
+              <Route exact path="/alert_email" component={AlertEmail} />
 
               <Route exact path="/us/:stateId" component={LocationPage} />
               <Route

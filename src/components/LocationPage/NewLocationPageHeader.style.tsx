@@ -285,7 +285,10 @@ export const RiskLevelThermometer = styled(Box)<{ alarmLevel: number }>`
       : `linear-gradient(to right, ${COLOR_MAP.GREEN.BASE}, ${COLOR_MAP.GREEN.BASE} 25%, ${COLOR_MAP.ORANGE.BASE} 25%, ${COLOR_MAP.ORANGE.BASE} 50%, ${COLOR_MAP.ORANGE_DARK.BASE} 50%, ${COLOR_MAP.ORANGE_DARK.BASE} 75%, ${COLOR_MAP.RED.BASE} 75%)`};
 `;
 
-export const Triangle = styled(Box)<{ alarmLevel: number }>`
+export const Triangle = styled(Box)<{
+  alarmLevel?: number;
+  direction?: string;
+}>`
   width: 0;
   height: 0;
   border-left: 6px solid transparent;
@@ -302,4 +305,6 @@ export const Triangle = styled(Box)<{ alarmLevel: number }>`
       : alarmLevel === Level.HIGH
       ? '96px'
       : '0'};
+  transform: ${({ direction }) =>
+    direction === 'Decreased' && 'rotate(180deg)'};
 `;
