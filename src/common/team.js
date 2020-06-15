@@ -66,43 +66,35 @@ export default {
     {
       name: 'Bob Inglis',
       title: 'Former Republican Congressman, George Mason University',
-      link: '',
     },
     {
       name: 'Don Berwick',
       title: 'Former Administrator, Centers for Medicare & Medicaid Services',
-      link: '',
     },
     {
       name: 'Jason Wang',
       title: 'Director, Stanford Center for Policy, Outcomes, and Prevention',
-      link: '',
     },
     {
       name: 'Nahid Bhadelia',
       title: 'Medical Director, Special Pathogens Unit, Boston Medical Center',
-      link: '',
     },
     {
       name: 'Nigam Shah',
       title:
         'Associate Professor for Biomedical Data Science, Stanford University',
-      link: '',
     },
     {
       name: 'Roni Rosenfeld',
       title: 'Carnegie Mellon University',
-      link: '',
     },
     {
       name: 'Ryan Tibshirani',
       title: 'Carnegie Mellon University',
-      link: '',
     },
     {
       name: 'Tomas Pueyo',
       title: 'Author, "Hammer and the Dance," and other pieces',
-      link: '',
     },
   ],
   teamActive: [
@@ -273,7 +265,7 @@ export default {
     },
     {
       name: 'Natasha Woods',
-      title: 'Council on Society & Technology',
+      title: 'Former Physicist at CERN',
       link: 'https://www.linkedin.com/in/natasha-l-woods/',
     },
     {
@@ -375,8 +367,9 @@ export default {
     },
     {
       name: 'Colin Carlson',
-      title: '',
-      link: '',
+      title: 'Data Scientist',
+      link:
+        'https://twitter.com/wormmaps?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor',
     },
     {
       name: 'Dan Schlosser',
@@ -420,7 +413,7 @@ export default {
     },
     {
       name: 'Laurent Crenshaw',
-      title: '',
+      title: 'Government Affairs',
       link: 'https://www.linkedin.com/in/laurentcrenshaw/',
     },
     {
