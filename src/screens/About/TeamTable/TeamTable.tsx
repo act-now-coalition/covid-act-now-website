@@ -7,7 +7,7 @@ const TeamTable = ({
   people,
   isTeam,
 }: {
-  people: { name: string; title: string; link: string }[];
+  people: { name: string; title: string; link?: string }[];
   isTeam?: Boolean;
 }) => {
   return (
