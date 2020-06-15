@@ -24,7 +24,7 @@ token.json
 .env.production.local
 
 # email alert files
-/scripts/alerts/users-to-email.json
+/scripts/alert_emails/users-to-email.json
 
 npm-debug.log*
 yarn-debug.log*
