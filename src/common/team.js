@@ -74,12 +74,6 @@ export default {
       link: '',
     },
     {
-      name: 'Ellie Graeden',
-      title:
-        'CEO, Talus Analytics; adjunct faculty, Georgetown University Center for Global Health Science and Security',
-      link: '',
-    },
-    {
       name: 'Jason Wang',
       title: 'Director, Stanford Center for Policy, Outcomes, and Prevention',
       link: '',
@@ -96,12 +90,6 @@ export default {
       link: '',
     },
     {
-      name: 'Rebecca Katz',
-      title:
-        'Director, Georgetown University Center for Global Health Science and Security',
-      link: '',
-    },
-    {
       name: 'Roni Rosenfeld',
       title: 'Carnegie Mellon University',
       link: '',
@@ -109,11 +97,6 @@ export default {
     {
       name: 'Ryan Tibshirani',
       title: 'Carnegie Mellon University',
-      link: '',
-    },
-    {
-      name: 'Dr. Shuhan He',
-      title: 'Emergency Medicine Physician and Co-Founder of GetUsPPE.org',
       link: '',
     },
     {
@@ -227,6 +210,11 @@ export default {
       name: 'Henry Bair',
       title: 'Senior Principal at Accenture',
       link: 'https://www.linkedin.com/in/henrybair/',
+    },
+    {
+      name: 'James Tamplin',
+      title: 'Founder/CEO of Firebase',
+      link: 'https://www.linkedin.com/in/jamest/',
     },
     {
       name: 'Jess Schwartz',
@@ -361,147 +349,147 @@ export default {
       link: 'https://www.linkedin.com/in/aj-palkovic-5170259a/',
     },
     {
-      name: 'Ali 	Berlin Johnson',
+      name: 'Ali Berlin Johnson',
       title: 'Former Lead Designer of Firebase',
       link: 'https://www.linkedin.com/in/berlinjohnson/',
     },
     {
-      name: 'Audra	Grassia',
+      name: 'Audra Grassia',
       title: 'Former Senior Director at ACRONYM',
       link: 'https://www.linkedin.com/in/audragrassia/',
     },
     {
-      name: 'Bradley	Lautenbach',
+      name: 'Bradley Lautenbach',
       title: 'Vice President at Marriott',
       link: 'https://www.linkedin.com/in/lautenbach/',
     },
     {
-      name: 'Chris	Wilcox',
+      name: 'Chris Wilcox',
       title: 'Senior Engineer at Google',
       link: 'https://www.linkedin.com/in/chrisrwilcox/',
     },
     {
-      name: 'Cillian	O’Mongain',
+      name: 'Cillian O’Mongain',
       title: 'Digital Product Designer',
       link: 'https://www.linkedin.com/in/cillianomongain/',
     },
     {
-      name: 'Colin	Carlson',
+      name: 'Colin Carlson',
       title: '',
       link: '',
     },
     {
-      name: 'Dan 	Schlosser',
+      name: 'Dan Schlosser',
       title: 'Senior Product Manager at The New York Times',
       link: 'https://www.linkedin.com/in/danrschlosser/',
     },
     {
-      name: 'David	Strauss',
+      name: 'David Strauss',
       title: 'CTO of Pantheon',
       link: 'https://twitter.com/davidstrauss?lang=en',
     },
     {
-      name: 'Eric	Carlson',
+      name: 'Eric Carlson',
       title: 'Staff Data Scientist, Grand Rounds',
       link: 'https://www.linkedin.com/in/eric-c-carlson/',
     },
     {
-      name: 'Eusden	Shing',
+      name: 'Eusden Shing',
       title: 'Former Head of Product of Pinterest',
       link: 'https://www.linkedin.com/in/eusden/',
     },
     {
-      name: 'Jacob	Redding',
+      name: 'Jacob Redding',
       title: 'Senior Principal at Accenture',
       link: 'https://www.linkedin.com/in/jacobredding/',
     },
     {
-      name: 'Jake	Mauer',
+      name: 'Jake Mauer',
       title: 'Director of Design at Allovue',
       link: 'https://www.linkedin.com/in/jakemauer/',
     },
     {
-      name: 'Jeremiah	Edwards',
+      name: 'Jeremiah Edwards',
       title: 'Principal ML Scientist at Sage Intacct',
       link: 'https://www.linkedin.com/in/jeremiq/',
     },
     {
-      name: 'Jeremy	Lubin',
+      name: 'Jeremy Lubin',
       title: 'Ex-Square Lead Designer',
       link: 'https://www.linkedin.com/in/jeremy-lubin/',
     },
     {
-      name: 'Laurent	Crenshaw',
+      name: 'Laurent Crenshaw',
       title: '',
       link: 'https://www.linkedin.com/in/laurentcrenshaw/',
     },
     {
-      name: 'Myles	Borins',
+      name: 'Myles Borins',
       title: 'Staff Product Manager at Github',
       link: 'https://www.linkedin.com/in/mylesborins/',
     },
     {
-      name: 'Rachel	RoseFigura',
+      name: 'Rachel RoseFigura',
       title: 'Software Engineer at Uber',
       link: 'https://www.linkedin.com/in/rachelrosefigura/',
     },
     {
-      name: 'Ranjit	Chacko',
+      name: 'Ranjit Chacko',
       title: 'Director of Data Science at Oracle',
       link: 'https://www.linkedin.com/in/ranjitchacko/',
     },
     {
-      name: 'Ray	Gilbert',
+      name: 'Ray Gilbert',
       title: 'Director Of Engineering and DevOps at Amazon',
       link: 'https://www.linkedin.com/in/raymondgilbert/',
     },
     {
-      name: 'Rebecca	Mark',
+      name: 'Rebecca Mark',
       title: 'Strategic Engagement Consultant at Hella Strategic',
       link: 'https://www.linkedin.com/in/rebeccamark/',
     },
     {
-      name: 'Sean	Zhu',
+      name: 'Sean Zhu',
       title: 'Ex-Affinity Software Engineer',
       link: 'https://www.linkedin.com/in/terestinglythere/',
     },
     {
-      name: 'Simon	Frid',
+      name: 'Simon Frid',
       title: 'Founder, Fridiculous Ventures',
       link: 'https://www.linkedin.com/in/simonfrid/',
     },
     {
-      name: 'Steph	Eaneff',
+      name: 'Steph Eaneff',
       title: 'Data Science Research Fellow, UC Berkeley',
       link: 'https://www.linkedin.com/in/seaneff/',
     },
     {
-      name: 'Stephen	Fiskell',
+      name: 'Stephen Fiskell',
       title: 'Founder, Commonbook.me',
       link: 'https://www.linkedin.com/in/takemoreaction/',
     },
     {
-      name: 'Trae 	Wallace',
+      name: 'Trae Wallace',
       title: 'Head of Data at Talus Analytics',
       link: 'https://www.linkedin.com/in/traewallace/',
     },
     {
-      name: 'Vincent	Woo',
+      name: 'Vincent Woo',
       title: 'Founder of CoderPad',
       link: 'https://www.linkedin.com/in/vincent-woo-b2716399/',
     },
     {
-      name: 'Virsaviya	Efraim',
+      name: 'Virsaviya Efraim',
       title: 'Software Engineer at Almanac',
       link: 'https://www.linkedin.com/in/virsaviyaefraim/',
     },
     {
-      name: 'Xinyu	Zhang',
+      name: 'Xinyu Zhang',
       title: 'Data Scientist at Grand Rounds',
       link: 'https://www.linkedin.com/in/xinyuzhang-cathy/',
     },
     {
-      name: 'Zack 	Rosen',
+      name: 'Zack Rosen',
       title: 'Engineering Lead at Stitch Labs',
       link: 'https://www.linkedin.com/in/zack-rosen-a03abb3a/',
     },

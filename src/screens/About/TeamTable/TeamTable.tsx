@@ -6,15 +6,21 @@ import { TeamMemberName } from '../HeadshotGrid/HeadshotGrid.style';
 const TeamTable = ({
   people,
   isTeam,
+  isAdditionalAdvisors,
 }: {
   people: { name: string; title: string; link?: string }[];
   isTeam?: Boolean;
+  isAdditionalAdvisors?: Boolean;
 }) => {
   return (
     <TeamTableGrid isTeam={isTeam}>
       {people.map((teammate, idx) => {
         return (
-          <TeamMember key={idx} isTeam={isTeam}>
+          <TeamMember
+            key={idx}
+            isTeam={isTeam}
+            isAdditionalAdvisors={isAdditionalAdvisors}
+          >
             <TeamMemberCell variant="body1" component="p">
               {isTeam && (
                 <a

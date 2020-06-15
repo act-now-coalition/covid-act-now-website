@@ -138,7 +138,10 @@ const About = ({ children }: { children: React.ReactNode }) => {
             <Typography variant="h6" component="h6">
               Additional Advisors
             </Typography>
-            <TeamTable people={TEAM.additionalAdvisors} />
+            <TeamTable
+              people={TEAM.additionalAdvisors}
+              isAdditionalAdvisors={true}
+            />
           </div>
           {/* </HeadshotGrid2Up> */}
 

@@ -14,6 +14,7 @@ export const TeamTableGrid = styled.div<{
 
 export const TeamMember = styled.div<{
   isTeam?: Boolean;
+  isAdditionalAdvisors?: Boolean;
 }>`
   display: flex;
   margin: 0;
@@ -22,6 +23,8 @@ export const TeamMember = styled.div<{
   @media (min-width: 600px) {
     flex-direction: column;
     break-inside: avoid-column;
+    margin-bottom: ${({ isAdditionalAdvisors }) =>
+      isAdditionalAdvisors && '0.5rem'};
   }
 `;
 
