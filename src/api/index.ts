@@ -65,6 +65,12 @@ type AggregateSummaryWithTimeseries =
   | CovidActNowStatesTimeseries
   | CovidActNowCountiesTimeseries;
 
+export interface SnapshotVersion {
+  timestamp: string;
+  'covid-data-public': string;
+  'covid-data-model': string;
+}
+
 export class Api {
   readonly snapshotUrl: string;
   constructor(dataUrl?: string | null) {
@@ -148,6 +154,16 @@ export class Api {
   async fetchVersionTimestamp(): Promise<string> {
     return await this.fetchApiJson<{ timestamp: string }>('version.json').then(
       data => data!.timestamp,
+    );
+  }
+
+  /** Fetches the version info for the snapshot. */
+  async fetchVersionInfo(): Promise<SnapshotVersion> {
+    return await this.fetchApiJson<SnapshotVersion>('version.json').then(
+      data => {
+        assert(data !== null, 'Failed to fetch version.json');
+        return data;
+      },
     );
   }
 

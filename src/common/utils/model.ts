@@ -85,10 +85,10 @@ export function useProjections(location: string, county = null) {
 export function useModelLastUpdatedDate() {
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
   useEffect(() => {
-    new Api().fetchVersionTimestamp().then(timestamp => {
-      // NOTE: "new Date(timestamp)" on safari fails due to pickiness about the
+    new Api().fetchVersionInfo().then(version => {
+      // NOTE: "new Date(version.timestamp)" on safari fails due to pickiness about the
       // date formatting, so just use moment to parse.
-      setLastUpdated(moment.utc(timestamp).toDate());
+      setLastUpdated(moment.utc(version.timestamp).toDate());
     });
   }, []);
 
