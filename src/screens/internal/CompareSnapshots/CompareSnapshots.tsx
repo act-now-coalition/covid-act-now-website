@@ -29,7 +29,8 @@ import { Projections } from 'common/models/Projections';
 import { ProjectionsSet } from 'common/models/ProjectionsSet';
 import { SortType, ProjectionsPair } from 'common/models/ProjectionsPair';
 import { topCountiesByPopulation } from 'common/locations';
-import { SNAPSHOT_URL } from 'api';
+import { SNAPSHOT_URL, SnapshotVersion, Api } from 'api';
+import moment from 'moment';
 
 // TODO(michael): Compare page improvements:
 // * Virtualize the list so that it's not so awful slow. NOTE: I previously
@@ -103,6 +104,9 @@ function CompareSnapshotsInner({ masterSnapshot }: { masterSnapshot: number }) {
     snapshotUrl(rightSnapshot),
     locations,
   );
+
+  const leftVersion = useSnapshotVersion(leftSnapshot);
+  const rightVersion = useSnapshotVersion(rightSnapshot);
 
   function setQueryParams(newParams: {
     left?: number;
@@ -255,10 +259,43 @@ function CompareSnapshotsInner({ masterSnapshot }: { masterSnapshot: number }) {
         </FormControl>
       </ModelSelectorContainer>
 
+      <Grid container spacing={8} style={{ margin: '1px' }}>
+        <Grid item xs={6}>
+          Left Snapshot: <b>{leftSnapshot}</b>
+          <VersionInfo version={leftVersion} />
+        </Grid>
+        <Grid item xs={6}>
+          Right Snapshot: <b>{rightSnapshot}</b>
+          <VersionInfo version={rightVersion} />
+        </Grid>
+      </Grid>
+
       <ComparisonList metric={metric} projectionsSet={projectionsSet} />
     </Wrapper>
   );
 }
+
+const VersionInfo = function ({
+  version,
+}: {
+  version: SnapshotVersion | null;
+}) {
+  return (
+    version && (
+      <div style={{ fontSize: 'small' }}>
+        <b>Build finished:</b>{' '}
+        {moment.utc(version.timestamp).local().toDate().toString()}
+        <br />
+        <b>covid-data-model:</b>{' '}
+        {JSON.stringify(version['covid-data-model']).replace(',', ', ')}
+        <br />
+        <b>covid-data-public:</b>{' '}
+        {JSON.stringify(version['covid-data-public']).replace(',', ', ')}
+        <br />
+      </div>
+    )
+  );
+};
 
 const ComparisonList = function ({
   metric,
@@ -268,7 +305,7 @@ const ComparisonList = function ({
   projectionsSet: ProjectionsSet;
 }) {
   if (projectionsSet.isEmpty) {
-    return <div>Loading...</div>;
+    return <h1>Loading...</h1>;
   }
 
   return (
@@ -386,6 +423,22 @@ function getParamValue(
     `Parameter ${param} has non-numeric value: ${value}`,
   );
   return value;
+}
+
+export function useSnapshotVersion(
+  snapshot: number | null,
+): SnapshotVersion | null {
+  const [version, setVersion] = useState<SnapshotVersion | null>(null);
+  useEffect(() => {
+    setVersion(null);
+    if (snapshot !== null) {
+      new Api(snapshotUrl(snapshot)).fetchVersionInfo().then(version => {
+        setVersion(version);
+      });
+    }
+  }, [snapshot]);
+
+  return version;
 }
 
 export default CompareSnapshots;
