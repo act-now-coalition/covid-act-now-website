@@ -1,7 +1,10 @@
 import React from 'react';
 
 import { TeamTableGrid, TeamMember, TeamMemberCell } from './TeamTable.style';
-import { TeamMemberName } from '../HeadshotGrid/HeadshotGrid.style';
+import {
+  TeamMemberName,
+  TeamMemberTitle,
+} from '../HeadshotGrid/HeadshotGrid.style';
 
 const TeamTable = ({
   people,
@@ -33,9 +36,9 @@ const TeamTable = ({
               )}
               {!isTeam && <TeamMemberName>{teammate.name}</TeamMemberName>}
             </TeamMemberCell>
-            <TeamMemberCell variant="body1" component="p">
+            <TeamMemberTitle>
               <span dangerouslySetInnerHTML={{ __html: teammate.title }} />
-            </TeamMemberCell>
+            </TeamMemberTitle>
           </TeamMember>
         );
       })}
