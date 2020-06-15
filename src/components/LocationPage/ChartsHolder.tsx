@@ -37,7 +37,7 @@ import { COLORS } from 'common';
 import { formatUtcDate } from 'common/utils';
 
 // Occasionally we need to disable projections for states due to temporary bugs.
-const FUTURE_PROJECTIONS_DISABLED_STATES: string[] = [];
+const FUTURE_PROJECTIONS_DISABLED_STATES: string[] = ['HI'];
 
 // TODO(michael): figure out where this type declaration should live.
 type County = {
