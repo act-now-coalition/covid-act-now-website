@@ -110,9 +110,6 @@ const About = ({ children }: { children: React.ReactNode }) => {
           <SectionHeader variant="h4" component="h4" id="founders">
             Founders
           </SectionHeader>
-          {/* <Typography variant="h6" component="h6">
-            Our Founders
-          </Typography> */}
           <HeadshotGrid people={TEAM.founders} />
 
           <SectionHeader variant="h4" component="h4" id="advisors">
@@ -133,7 +130,6 @@ const About = ({ children }: { children: React.ReactNode }) => {
             </div>
           </HeadshotGrid2Up>
 
-          {/* <HeadshotGrid2Up> */}
           <div>
             <Typography variant="h6" component="h6">
               Additional Advisors
@@ -143,7 +139,6 @@ const About = ({ children }: { children: React.ReactNode }) => {
               isAdditionalAdvisors={true}
             />
           </div>
-          {/* </HeadshotGrid2Up> */}
 
           <SectionHeader variant="h4" component="h4" id="team">
             Team

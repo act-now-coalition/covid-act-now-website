@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { COLORS } from 'common';
-import { COLOR_MAP } from 'common/colors';
 
 export const Wrapper = styled.div`
   background-color: white;
