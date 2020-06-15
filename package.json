@@ -64,7 +64,8 @@
     "update-calculated-interventions": "ts-node-script -r tsconfig-paths/register scripts/calculated_interventions.ts",
     "generate-index-pages": "ts-node-script -r tsconfig-paths/register scripts/generate_index_pages.ts",
     "generate-share-images": "ts-node-script -r tsconfig-paths/register scripts/generate_share_images/index.ts",
-    "generate-daily-alerts": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/generate_daily_alerts.ts"
+    "generate-daily-alerts": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/generate_daily_alerts.ts",
+    "generate-alerts-html": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/generate_html_bits.tsx"
   },
   "lint-staged": {
     "{src,scripts}/**/*.{css,scss,js,ts,tsx}": [

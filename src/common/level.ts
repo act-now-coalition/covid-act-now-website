@@ -6,6 +6,11 @@ export enum Level {
   UNKNOWN,
 }
 
+// Not sure if there's a better way to enumerate all enum values? :-(
+export const ALL_LEVELS = Object.values(Level).filter(
+  v => typeof v === 'number',
+) as Level[];
+
 export interface LevelInfo {
   level: Level;
   upperLimit: number;
