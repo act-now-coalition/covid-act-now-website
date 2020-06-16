@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { COLORS } from 'common';
+import { TeamList } from 'screens/About/About';
 
 export const Wrapper = styled.div`
   background-color: white;
@@ -33,7 +34,7 @@ export const ActiveAlumniButtonContainer = styled.div`
 `;
 
 export const ActiveAlumniButton = styled.div<{
-  teamList?: string;
+  teamList?: TeamList;
 }>`
   width: 50%;
   display: flex;
@@ -45,12 +46,12 @@ export const ActiveAlumniButton = styled.div<{
   &:first-child {
     border-right: 1px solid black;
     background-color: ${({ teamList }) =>
-      teamList === 'active' && 'rgba(59,188,230,.5)'};
+      teamList === TeamList.Active && 'rgba(59,188,230,.5)'};
   }
 
   &:last-child {
     border-right: 1px solid black;
     background-color: ${({ teamList }) =>
-      teamList === 'alumni' && 'rgba(59,188,230,.5)'};
+      teamList === TeamList.Alumni && 'rgba(59,188,230,.5)'};
   }
 `;

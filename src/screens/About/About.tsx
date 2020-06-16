@@ -26,15 +26,20 @@ const sidebar = (
     <SidebarLink href="#founders">Founders</SidebarLink>
     <SidebarLink href="#advisors">Advisors</SidebarLink>
     <SidebarLink href="#team">Team</SidebarLink>
-    <SidebarLink href="#model">Model Info</SidebarLink>
+    <SidebarLink href="#model">Our Model</SidebarLink>
     <SidebarLink href="#faq">FAQ</SidebarLink>
   </React.Fragment>
 );
 
+export enum TeamList {
+  Active,
+  Alumni,
+}
+
 const About = ({ children }: { children: React.ReactNode }) => {
-  const [teamList, setTeamList] = useState('active');
-  const teamToShow = teamList === 'alumni' ? TEAM.teamAlumni : TEAM.teamActive;
-  console.log('teamList', teamList);
+  const [teamList, setTeamList] = useState(TeamList.Active);
+  const teamToShow =
+    teamList === TeamList.Alumni ? TEAM.teamAlumni : TEAM.teamActive;
   return (
     <Wrapper>
       <AppMetaTags
@@ -134,10 +139,7 @@ const About = ({ children }: { children: React.ReactNode }) => {
             <Typography variant="h6" component="h6">
               Additional Advisors
             </Typography>
-            <TeamTable
-              people={TEAM.additionalAdvisors}
-              isAdditionalAdvisors={true}
-            />
+            <TeamTable people={TEAM.additionalAdvisors} />
           </div>
 
           <SectionHeader variant="h4" component="h4" id="team">
@@ -146,13 +148,13 @@ const About = ({ children }: { children: React.ReactNode }) => {
           <ActiveAlumniButtonContainer>
             <ActiveAlumniButton
               teamList={teamList}
-              onClick={() => setTeamList('active')}
+              onClick={() => setTeamList(TeamList.Active)}
             >
               Active
             </ActiveAlumniButton>
             <ActiveAlumniButton
               teamList={teamList}
-              onClick={() => setTeamList('alumni')}
+              onClick={() => setTeamList(TeamList.Alumni)}
             >
               Alumni
             </ActiveAlumniButton>

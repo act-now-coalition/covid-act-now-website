@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
 
-export const TeamTableGrid = styled.div<{
-  isTeam?: Boolean;
-}>`
+export const TeamTableGrid = styled.div`
   column-count: 1;
   display: inline-block;
 
@@ -12,10 +10,7 @@ export const TeamTableGrid = styled.div<{
   }
 `;
 
-export const TeamMember = styled.div<{
-  isTeam?: Boolean;
-  isAdditionalAdvisors?: Boolean;
-}>`
+export const TeamMember = styled.div`
   display: flex;
   margin: 0;
   margin-bottom: 1rem;
