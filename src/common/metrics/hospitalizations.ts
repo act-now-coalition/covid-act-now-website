@@ -95,10 +95,8 @@ export function hospitalOccupancyStatusText(projection: Projection) {
   );
   const remainingICUBeds = formatInteger(totalICUCapacity - nonCovidPatients);
   const covidICUPatients = formatInteger(currentCovidICUPatients);
-  const covidICUBeds = Math.min(
-    1,
-    currentCovidICUPatients / (totalICUCapacity - nonCovidPatients),
-  );
+  const covidICUBeds =
+    currentCovidICUPatients / (totalICUCapacity - nonCovidPatients);
 
   const textHasAbout = noStateOverride ? 'has about' : 'has';
   const textWeEstimateThat = noStateOverride ? 'We estimate that' : '';
@@ -113,7 +111,9 @@ export function hospitalOccupancyStatusText(projection: Projection) {
   );
 
   return `${location} ${textHasAbout} ${totalICUBeds} ICU beds.
-    ${textWeEstimateThat} ${nonCovidUsedBedsPercent} (${nonCovidUsedBeds}) are currently occupied by non-COVID patients. 
-    Of the remaining ${remainingICUBeds} ICU beds, ${textWeEstimate} ${covidICUPatients} are occupied by COVID cases, 
-    or ${formatPercent(covidICUBeds)} of available beds. ${textLevel}.`;
+    ${textWeEstimateThat} ${nonCovidUsedBedsPercent} (${nonCovidUsedBeds}) are currently occupied by non-COVID patients.
+    With ${remainingICUBeds} ICU beds remaining, ${textWeEstimate} ${covidICUPatients} are needed by COVID cases,
+    or ${
+      covidICUBeds > 1 ? '>100%' : formatPercent(covidICUBeds)
+    } of available beds. ${textLevel}.`;
 }
