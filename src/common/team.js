@@ -185,8 +185,8 @@ export default {
     },
     {
       name: 'Gil Rosen',
-      title: '',
-      link: '',
+      title: 'State Manager',
+      link: 'https://www.linkedin.com/in/rosengil/',
     },
     {
       name: 'Hannah Lee',
@@ -240,7 +240,7 @@ export default {
     },
     {
       name: 'Molly Pam',
-      title: '',
+      title: 'Owner at Molly Pam: Culinary Services',
       link: 'https://www.linkedin.com/in/mollypam/',
     },
     {
