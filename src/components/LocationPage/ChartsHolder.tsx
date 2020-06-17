@@ -307,7 +307,7 @@ const ChartsHolder = (props: {
                   <Outcomes
                     title={`Predicted outcomes by ${formatUtcDate(
                       props.projections.projected.finalDate,
-                    )} (90 days from now)`}
+                    )} (30 days from now)`}
                     projections={outcomesProjections}
                     colors={outcomesColors}
                   />

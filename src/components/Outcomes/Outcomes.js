@@ -46,7 +46,7 @@ const OutcomesRow = ({ projection, label, color }) => {
       <div>
         {projection.dateOverwhelmed
           ? formatUtcDate(projection.dateOverwhelmed)
-          : 'Not in the next 90 days'}
+          : 'Not in the next 30 days'}
       </div>
 
       <div>

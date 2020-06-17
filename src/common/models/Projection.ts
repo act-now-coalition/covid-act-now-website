@@ -19,6 +19,11 @@ import {
 export const RT_TRUNCATION_DAYS = 7;
 
 /**
+ * We truncate our projections to 4 weeks out.
+ */
+export const PROJECTIONS_TRUNCATION_DAYS = 30;
+
+/**
  * We will assume roughly 5 tracers are needed to trace a case within 48h.
  * The range we give here could be between 5-15 contact tracers per case.
  */
@@ -135,11 +140,15 @@ export class Projection {
   ) {
     const {
       timeseries,
-      actualsTimeseries,
+      actualTimeseries,
       dates,
-    } = this.getAlignedTimeseriesAndDates(summaryWithTimeseries);
+    } = this.getAlignedTimeseriesAndDates(
+      summaryWithTimeseries,
+      PROJECTIONS_TRUNCATION_DAYS,
+    );
+
     this.timeseries = timeseries;
-    this.actualTimeseries = actualsTimeseries;
+    this.actualTimeseries = actualTimeseries;
     this.dates = dates;
 
     const lastUpdated = new Date(summaryWithTimeseries.lastUpdatedDate);
@@ -280,7 +289,7 @@ export class Projection {
     return this.totalICUCapacity! * this.nonCovidICUUtilization;
   }
 
-  /** Returns the date when projections end (should be 90 days out). */
+  /** Returns the date when projections end (should be 30 days out). */
   get finalDate(): Date {
     return this.dates[this.dates.length - 1];
   }
@@ -367,6 +376,7 @@ export class Projection {
    */
   private getAlignedTimeseriesAndDates(
     summaryWithTimeseries: RegionSummaryWithTimeseries,
+    futureDaysToInclude: number,
   ) {
     const earliestDate = moment.min(
       summaryWithTimeseries.timeseries.map(row => moment.utc(row.date)),
@@ -403,10 +413,13 @@ export class Projection {
       currDate = currDate.clone().add(1, 'days');
     }
 
+    // only keep futureDaysToInclude days ahead of today
+    const now = new Date();
+    const days = dates.findIndex(date => date > now) + futureDaysToInclude;
     return {
-      timeseries,
-      actualsTimeseries,
-      dates,
+      timeseries: timeseries.slice(0, days),
+      actualTimeseries: actualsTimeseries.slice(0, days),
+      dates: dates.slice(0, days),
     };
   }
 
