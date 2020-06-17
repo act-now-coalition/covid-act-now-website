@@ -4,31 +4,31 @@ import {
   LogoContainer,
   AlertHeader,
   BellIconContainer,
-  AlertLocationIntro,
-  AlertLocation,
+  LocationIntro,
+  Location,
   AlertBody,
   OverallThreatCopy,
   DirectionChangeContainer,
-  BodyCopyBold,
+  DirectionCopy,
   LastUpdatedDate,
   ThermometerContainer,
   ThermometerRow,
   NowOrPrevContainer,
   NowOrPrevText,
-  ThermometerLevelColor,
-  ThermometerLevelText,
+  RowLevelColor,
+  RowLevelText,
   ViewChartButton,
   FooterWrapper,
   LeaveFeedbackCopy,
   FeedbackInstructionsCopy,
 } from 'components/AlertEmail/AlertEmail.style';
 import Logo from 'assets/images/logoUrlLight';
-import NotificationsNoneOutlined from '@material-ui/icons/NotificationsNoneOutlined';
 import { LEVEL_COLOR } from 'common/colors';
 import { Level } from 'common/level';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
+import NotificationsNoneOutlined from '@material-ui/icons/NotificationsNoneOutlined';
 
 function EmailFooter() {
   return (
@@ -103,21 +103,22 @@ function AlertEmail() {
         <NowOrPrevContainer isCurrentLevel={isCurrentLevel}>
           {(isCurrentLevel || isPrevLevel) && (
             <Fragment>
-              <NowOrPrevText isCurrentLevel={isCurrentLevel}>
+              <NowOrPrevText
+                isCurrentLevel={isCurrentLevel}
+                isPrevLevel={isPrevLevel}
+              >
                 {statusText}
               </NowOrPrevText>
               <ArrowRightIcon />
             </Fragment>
           )}
         </NowOrPrevContainer>
-        <ThermometerLevelColor
+        <RowLevelColor
           isCurrentLevel={isCurrentLevel}
           color={row.color}
           level={row.level}
         />
-        <ThermometerLevelText isCurrentLevel={isCurrentLevel}>
-          {row.text}
-        </ThermometerLevelText>
+        <RowLevelText isCurrentLevel={isCurrentLevel}>{row.text}</RowLevelText>
       </ThermometerRow>
     );
   }
@@ -131,14 +132,14 @@ function AlertEmail() {
         <BellIconContainer>
           <NotificationsNoneOutlined />
         </BellIconContainer>
-        <AlertLocationIntro>Covid Alert For</AlertLocationIntro>
-        <AlertLocation>{location}</AlertLocation>
+        <LocationIntro>Covid Alert For</LocationIntro>
+        <Location>{location}</Location>
       </AlertHeader>
       <AlertBody>
         <OverallThreatCopy>Overall Covid Threat</OverallThreatCopy>
         <DirectionChangeContainer>
           {arrowIcon}
-          <BodyCopyBold>{direction}</BodyCopyBold>
+          <DirectionCopy>{direction}</DirectionCopy>
         </DirectionChangeContainer>
         <LastUpdatedDate>on {updatedLocation}</LastUpdatedDate>
         <ThermometerContainer>

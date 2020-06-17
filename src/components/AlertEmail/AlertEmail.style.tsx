@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { COLORS } from 'common';
 import { Box, Typography } from '@material-ui/core';
-import { COLOR_MAP, LEVEL_COLOR } from 'common/colors';
+import { COLOR_MAP } from 'common/colors';
 import { Level } from 'common/level';
 
 const SharedContainerStyles = css`
@@ -53,7 +53,7 @@ export const BellIconContainer = styled(Box)`
   }
 `;
 
-export const AlertLocationIntro = styled(Typography)`
+export const LocationIntro = styled(Typography)`
   font-size: 12px;
   line-height: 14px;
   letter-spacing: 0.05em;
@@ -61,7 +61,7 @@ export const AlertLocationIntro = styled(Typography)`
   margin-bottom: 0.25rem;
 `;
 
-export const AlertLocation = styled(Typography)`
+export const Location = styled(Typography)`
   font-family: 'Source Code Pro';
   font-size: 20px;
   line-height: 140%;
@@ -73,10 +73,13 @@ export const AlertBody = styled(Box)`
   ${SharedContainerStyles};
   background-color: white;
   width: 100%;
-  max-width: 600px;
-  padding: 2rem;
+  max-width: 560px;
+  padding: 2rem 0.25rem;
   border-radius: 0px 0px 8px 8px;
   margin-bottom: 1.25rem;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04) @media (min-width: 600px) {
+    padding: 2rem;
+  }
 `;
 
 export const OverallThreatCopy = styled(Typography)`
@@ -93,7 +96,7 @@ export const DirectionChangeContainer = styled(Box)`
   border: 1px solid ${COLOR_MAP.GRAY.BASE};
   border-radius: 4px;
   align-items: center;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 `;
 
 const SharedCopyStyles = css`
@@ -102,7 +105,7 @@ const SharedCopyStyles = css`
   line-height: 16px;
 `;
 
-export const BodyCopyBold = styled(Typography)`
+export const DirectionCopy = styled(Typography)`
   ${SharedCopyStyles};
   font-weight: bold;
   color: black;
@@ -152,17 +155,22 @@ export const NowOrPrevContainer = styled(Box)<{ isCurrentLevel: Boolean }>`
   align-self: center;
 `;
 
-export const NowOrPrevText = styled.span<{ isCurrentLevel: Boolean }>`
+export const NowOrPrevText = styled.span<{
+  isCurrentLevel: Boolean;
+  isPrevLevel: Boolean;
+}>`
   font-family: 'Source Code Pro';
   font-size: 11px;
   font-weight: bold;
+  text-transform: uppercase;
   color: ${({ isCurrentLevel }) =>
     isCurrentLevel ? 'black' : `${COLOR_MAP.GRAY.DARK}`};
+  margin-right: ${({ isPrevLevel }) => isPrevLevel && '-1px'};
 `;
 
-export const ThermometerLevelColor = styled(Box)<{
-  color: any;
-  level: any;
+export const RowLevelColor = styled(Box)<{
+  color: string;
+  level: number;
   isCurrentLevel: Boolean;
 }>`
   width: 12px;
@@ -176,19 +184,21 @@ export const ThermometerLevelColor = styled(Box)<{
       : 0};
 `;
 
-export const ThermometerLevelText = styled(Typography)<{
+export const RowLevelText = styled(Typography)<{
   isCurrentLevel: Boolean;
 }>`
   ${SharedCopyStyles};
-  color: ${COLOR_MAP.GRAY.DARK};
+  color: ${({ isCurrentLevel }) =>
+    isCurrentLevel ? 'black' : `${COLOR_MAP.GRAY.DARK}`};
+  font-weight: ${({ isCurrentLevel }) => isCurrentLevel && 'bold'};
   width: 255px;
   display: flex;
   align-self: center;
-  margin-left: ${({ isCurrentLevel }) => (isCurrentLevel ? '11px' : '12px')};
+  margin-left: 12px;
 `;
 
 export const ViewChartButton = styled(Box)`
-  max-width: 600px;
+  max-width: 560px;
   width: 100%;
   display: flex;
   align-self: center;
