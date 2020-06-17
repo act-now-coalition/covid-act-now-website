@@ -62,41 +62,61 @@ export default {
       link: 'https://www.massgeneral.org/doctors/20771/shuhan-he',
     },
   ],
-  team: [
+  additionalAdvisors: [
     {
-      name: 'Abe Haskins',
-      title: 'Developer Programs Engineer at Google',
-      link: 'https://www.linkedin.com/in/abe-haskins-1a267a13/',
+      name: 'Bob Inglis',
+      title: 'Former Republican Congressman, George Mason University',
     },
+    {
+      name: 'Don Berwick',
+      title: 'Former Administrator, Centers for Medicare & Medicaid Services',
+    },
+    {
+      name: 'Jason Wang',
+      title: 'Director, Stanford Center for Policy, Outcomes, and Prevention',
+    },
+    {
+      name: 'Nahid Bhadelia',
+      title: 'Medical Director, Special Pathogens Unit, Boston Medical Center',
+    },
+    {
+      name: 'Nigam Shah',
+      title:
+        'Associate Professor for Biomedical Data Science, Stanford University',
+    },
+    {
+      name: 'Roni Rosenfeld',
+      title: 'Carnegie Mellon University',
+    },
+    {
+      name: 'Ryan Tibshirani',
+      title: 'Carnegie Mellon University',
+    },
+    {
+      name: 'Tomas Pueyo',
+      title: 'Author, "Hammer and the Dance," and other pieces',
+    },
+  ],
+  teamActive: [
     {
       name: 'Adnan Pirzada',
       title: 'Software Engineer at Lattice',
       link: 'https://www.linkedin.com/in/adpirz/',
     },
     {
-      name: 'Ali Berlin Johnson',
-      title: 'Former Lead Designer of Firebase',
-      link: 'https://www.linkedin.com/in/berlinjohnson/',
+      name: 'Alan Fritzler',
+      title: 'Consultant at The World Bank',
+      link: 'https://www.linkedin.com/in/alanfritzler/',
     },
     {
-      name: 'Anna Blech',
-      title: 'Icahn School of Medicine at Mount Sinai',
-      link: 'https://www.linkedin.com/in/anna-blech-121277138',
+      name: 'Alex MacAulay',
+      title: 'Modeling',
+      link: 'https://www.linkedin.com/in/w-alex-c-macaulay-b70b92a4/',
     },
     {
       name: 'Anya Lehr',
       title: 'Ex-Vice Media Director of Operations',
       link: 'https://www.linkedin.com/in/anyalehr/',
-    },
-    {
-      name: 'Audra Grassia',
-      title: 'Former Senior Director at ACRONYM',
-      link: 'https://www.linkedin.com/in/audragrassia/',
-    },
-    {
-      name: 'Bradley Lautenbach',
-      title: 'Vice President at Marriott',
-      link: 'https://www.linkedin.com/in/lautenbach/',
     },
     {
       name: 'Brett Boval',
@@ -109,6 +129,11 @@ export default {
       link: 'https://www.linkedin.com/in/brittany-braxton-39187549/',
     },
     {
+      name: 'Charles Pieper',
+      title: 'Director of Partnerships at SWIDIA',
+      link: 'https://www.linkedin.com/in/charlesepieper/',
+    },
+    {
       name: 'Chelsi Asulin',
       title: 'Software Engineer',
       link: 'https://www.linkedin.com/in/chelsi-asulin/',
@@ -119,19 +144,14 @@ export default {
       link: 'https://www.linkedin.com/in/ckelly90/',
     },
     {
-      name: 'Chris Wilcox',
-      title: 'Senior Engineer at Google',
-      link: 'https://www.linkedin.com/in/chrisrwilcox/',
+      name: 'Claudia Meng',
+      title: 'Student at Yale University',
+      link: 'https://www.linkedin.com/in/claudia-meng/',
     },
     {
       name: 'Colleen Murphy',
       title: 'Freelance designer',
       link: 'https://www.linkedin.com/in/colleenmurphyco',
-    },
-    {
-      name: 'Dan Schlosser',
-      title: 'Senior Product Manager at <em>The New York Times</em>',
-      link: 'https://www.linkedin.com/in/danrschlosser/',
     },
     {
       name: 'Dani Fontanesi',
@@ -144,11 +164,6 @@ export default {
       link: 'https://www.linkedin.com/in/davidduran971/',
     },
     {
-      name: 'David Strauss',
-      title: 'CTO of Pantheon',
-      link: 'https://twitter.com/davidstrauss?lang=en',
-    },
-    {
       name: 'Debbie Lai',
       title: 'Ex-Google Policy Strategist and Strategic Partnerships Manager',
       link: 'https://www.linkedin.com/in/iamdlai/',
@@ -159,9 +174,197 @@ export default {
       link: 'https://www.linkedin.com/in/dougspan/',
     },
     {
-      name: 'Elwyn Moir',
-      title: 'COMET Fellow at Stanford Medicine',
-      link: 'https://www.linkedin.com/in/elwyn-moir-12b1766b/',
+      name: 'Erin Kelly',
+      title: 'Student at Middlebury College',
+      link: 'https://www.linkedin.com/in/erin-kelly-643645179/',
+    },
+    {
+      name: 'Gaston Kelly',
+      title: 'Public Policy Manager at Getaround',
+      link: 'https://www.linkedin.com/in/gaston-kelly/',
+    },
+    {
+      name: 'Gil Rosen',
+      title: 'State Manager',
+      link: 'https://www.linkedin.com/in/rosengil/',
+    },
+    {
+      name: 'Hannah Lee',
+      title: 'Former Operations Manager at Google',
+      link: 'https://www.linkedin.com/in/hannahbnguyen/',
+    },
+    {
+      name: 'Henry Bair',
+      title: 'MD/MBA Candidate at Stanford University',
+      link: 'https://www.linkedin.com/in/henrybair/',
+    },
+    {
+      name: 'James Tamplin',
+      title: 'Founder/CEO of Firebase',
+      link: 'https://www.linkedin.com/in/jamest/',
+    },
+    {
+      name: 'Josh Ziman',
+      title: 'Former Senior Experience Designer at Expedia Group',
+      link: 'https://www.linkedin.com/in/josh-ziman',
+    },
+    {
+      name: 'Lara Mitra',
+      title: 'MBA | MPA candidate at MIT Sloan & Harvard Kennedy School',
+      link: 'https://www.linkedin.com/in/lara-mitra-31394b97/',
+    },
+    {
+      name: 'Lekha Maruthur',
+      title: 'Corporate Counsel',
+      link: 'https://www.linkedin.com/in/sreelekha-haridas-m-12380210/',
+    },
+    {
+      name: 'Lily Donovan-Seid',
+      title: 'Visual Designer at Google',
+      link: 'https://www.linkedin.com/in/lily-donovan-seid-88977a14/',
+    },
+    {
+      name: 'Michael Carlson',
+      title: 'Medical Student at Western University of Health Sciences',
+      link: 'https://www.linkedin.com/in/michael-carlson-200995193/',
+    },
+    {
+      name: 'Michael Lehenbauer',
+      title: 'Ex-Google Software Engineer',
+      link: 'https://www.linkedin.com/in/mikelehen/',
+    },
+    {
+      name: "Mikayla O'Bryan",
+      title: 'Policy Analyst, City of Los Angeles',
+      link: 'https://www.linkedin.com/in/mikayla-o-bryan-867087135/',
+    },
+    {
+      name: 'Molly Pam',
+      title: 'Owner at Molly Pam: Culinary Services',
+      link: 'https://www.linkedin.com/in/mollypam/',
+    },
+    {
+      name: 'Natasha Woods',
+      title: 'Former Physicist at CERN',
+      link: 'https://www.linkedin.com/in/natasha-l-woods/',
+    },
+    {
+      name: 'Pablo Navarro Castillo',
+      title: 'Software Engineer at Alloy.ai',
+      link: 'https://www.linkedin.com/in/pnavarrc/',
+    },
+    {
+      name: 'Ryan Fuentes',
+      title: 'Student at Yale University',
+      link: 'https://www.linkedin.com/in/ryan-fuentes-0944301a7/',
+    },
+    {
+      name: 'Samantha Day',
+      title: 'Social Media Manager',
+      link: 'https://www.linkedin.com/in/samanthapaigeday/',
+    },
+    {
+      name: 'Shaeleigh Jacobs',
+      title: 'Principal Research Investigator at Austin Paey University',
+      link: 'https://www.linkedin.com/in/shaeleigh-jacobs-672152114/',
+    },
+    {
+      name: 'Shannon Cooke',
+      title: 'Social Media Manager',
+      link: 'https://www.linkedin.com/in/shannon-cooke-7a330095/',
+    },
+    {
+      name: 'Stefan Turkheimer',
+      title: 'Government Relations',
+      link: 'https://www.linkedin.com/in/stefan-turkheimer-06466a5/',
+    },
+    {
+      name: 'Steve Hassey',
+      title: 'Social Media Manager',
+      link: 'https://www.linkedin.com/in/steve-hassey-675b629b/',
+    },
+    {
+      name: 'Susan Goldblatt',
+      title: 'Ex-Google Software Engineer',
+      link: 'https://www.linkedin.com/in/susan-goldblatt/',
+    },
+    {
+      name: 'Tom Brown',
+      title: 'Software Engineer, formerly at Google and Lyft',
+      link: 'https://www.linkedin.com/in/tomdbrown/',
+    },
+    {
+      name: 'Will Pate',
+      title: 'Account Executive at Google',
+      link: 'https://www.linkedin.com/in/willpate/',
+    },
+    {
+      name: 'Youyoung Lee',
+      title: 'Senior Manager, Media Partnerships at Reddit',
+      link: 'https://www.linkedin.com/in/youyounglee',
+    },
+    {
+      name: 'Yvonne Hung',
+      title: 'Founder of Studio Nonymous',
+      link: 'https://www.linkedin.com/in/hungyvonne/',
+    },
+  ],
+  teamAlumni: [
+    {
+      name: 'Abe Haskins',
+      title: 'Engineer at Google',
+      link: 'https://www.linkedin.com/in/abe-haskins-1a267a13/',
+    },
+    {
+      name: 'AJ	Palkovic',
+      title: 'Engineer at Discord',
+      link: 'https://www.linkedin.com/in/aj-palkovic-5170259a/',
+    },
+    {
+      name: 'Ali Berlin Johnson',
+      title: 'Former Lead Designer of Firebase',
+      link: 'https://www.linkedin.com/in/berlinjohnson/',
+    },
+    {
+      name: 'Anna Blech',
+      title: 'Icahn School of Medicine at Mount Sinai',
+      link: 'https://www.linkedin.com/in/anna-blech-121277138',
+    },
+    {
+      name: 'Audra Grassia',
+      title: 'Former Senior Director at ACRONYM',
+      link: 'https://www.linkedin.com/in/audragrassia/',
+    },
+    {
+      name: 'Bradley Lautenbach',
+      title: 'Vice President at Marriott',
+      link: 'https://www.linkedin.com/in/lautenbach/',
+    },
+    {
+      name: 'Chris Wilcox',
+      title: 'Senior Engineer at Google',
+      link: 'https://www.linkedin.com/in/chrisrwilcox/',
+    },
+    {
+      name: 'Cillian O’Mongain',
+      title: 'Digital Product Designer',
+      link: 'https://www.linkedin.com/in/cillianomongain/',
+    },
+    {
+      name: 'Colin Carlson',
+      title: 'Data Scientist',
+      link:
+        'https://twitter.com/wormmaps?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor',
+    },
+    {
+      name: 'Dan Schlosser',
+      title: 'Senior Product Manager at The New York Times',
+      link: 'https://www.linkedin.com/in/danrschlosser/',
+    },
+    {
+      name: 'David Strauss',
+      title: 'CTO of Pantheon',
+      link: 'https://twitter.com/davidstrauss?lang=en',
     },
     {
       name: 'Eric Carlson',
@@ -174,19 +377,14 @@ export default {
       link: 'https://www.linkedin.com/in/eusden/',
     },
     {
-      name: 'Hannah Lee',
-      title: 'Former Operations Manager at Google',
-      link: 'https://www.linkedin.com/in/hannahbnguyen/',
-    },
-    {
       name: 'Jacob Redding',
       title: 'Senior Principal at Accenture',
       link: 'https://www.linkedin.com/in/jacobredding/',
     },
     {
-      name: 'James Tamplin',
-      title: 'Founder/CEO of Firebase',
-      link: 'https://www.linkedin.com/in/jamest/',
+      name: 'Jake Mauer',
+      title: 'Director of Design at Allovue',
+      link: 'https://www.linkedin.com/in/jakemauer/',
     },
     {
       name: 'Jeremiah Edwards',
@@ -204,24 +402,14 @@ export default {
       link: 'https://www.linkedin.com/in/jessicajschwartz/',
     },
     {
-      name: 'Josh Ziman',
-      title: 'Former Senior Experience Designer at Expedia Group',
-      link: 'https://www.linkedin.com/in/josh-ziman',
-    },
-    {
       name: 'Joseph Ensminger',
       title: 'Founder, J.E. Consulting',
       link: 'https://www.linkedin.com/in/josephensminger/',
     },
     {
-      name: 'Michael Lehenbauer',
-      title: 'Ex-Google Software Engineer',
-      link: 'https://www.linkedin.com/in/mikelehen/',
-    },
-    {
-      name: "Mikayla O'Bryan",
-      title: 'Policy Analyst, City of Los Angeles',
-      link: 'https://www.linkedin.com/in/mikayla-o-bryan-867087135/',
+      name: 'Laurent Crenshaw',
+      title: 'Government Affairs',
+      link: 'https://www.linkedin.com/in/laurentcrenshaw/',
     },
     {
       name: 'Mike McDonald',
@@ -229,14 +417,9 @@ export default {
       link: 'https://www.linkedin.com/in/asciimike/',
     },
     {
-      name: 'Misha Chellam',
-      title: 'Council on Society & Technology',
-      link: 'https://www.linkedin.com/in/mishachellam/',
-    },
-    {
-      name: 'Pablo Navarro Castillo',
-      title: 'Software Engineer at Alloy.ai',
-      link: 'https://www.linkedin.com/in/pnavarrc/',
+      name: 'Myles Borins',
+      title: 'Staff Product Manager at Github',
+      link: 'https://www.linkedin.com/in/mylesborins/',
     },
     {
       name: 'Rachel RoseFigura',
@@ -244,9 +427,24 @@ export default {
       link: 'https://www.linkedin.com/in/rachelrosefigura/',
     },
     {
-      name: 'Shaeleigh Jacobs',
-      title: 'Principal Research Investigator at Austin Paey University',
-      link: 'https://www.linkedin.com/in/shaeleigh-jacobs-672152114/',
+      name: 'Ranjit Chacko',
+      title: 'Director of Data Science at Oracle',
+      link: 'https://www.linkedin.com/in/ranjitchacko/',
+    },
+    {
+      name: 'Ray Gilbert',
+      title: 'Director Of Engineering and DevOps at Amazon',
+      link: 'https://www.linkedin.com/in/raymondgilbert/',
+    },
+    {
+      name: 'Rebecca Mark',
+      title: 'Strategic Engagement Consultant at Hella Strategic',
+      link: 'https://www.linkedin.com/in/rebeccamark/',
+    },
+    {
+      name: 'Sean Zhu',
+      title: 'Ex-Affinity Software Engineer',
+      link: 'https://www.linkedin.com/in/terestinglythere/',
     },
     {
       name: 'Simon Frid',
@@ -254,24 +452,19 @@ export default {
       link: 'https://www.linkedin.com/in/simonfrid/',
     },
     {
+      name: 'Steph Eaneff',
+      title: 'Data Science Research Fellow, UC Berkeley',
+      link: 'https://www.linkedin.com/in/seaneff/',
+    },
+    {
       name: 'Stephen Fiskell',
       title: 'Founder, Commonbook.me',
       link: 'https://www.linkedin.com/in/takemoreaction/',
     },
     {
-      name: 'Susan Goldblatt',
-      title: 'Ex-Google Software Engineer',
-      link: 'https://www.linkedin.com/in/susan-goldblatt/',
-    },
-    {
-      name: 'Tom Brown',
-      title: 'Software Engineer, formerly at Google and Lyft',
-      link: 'https://www.linkedin.com/in/tomdbrown/',
-    },
-    {
-      name: 'Vincent DeGennaro',
-      title: 'MD, Founder of Innovating Health International',
-      link: 'https://www.linkedin.com/in/vincent-degennaro-jr-3b234ba3/',
+      name: 'Trae Wallace',
+      title: 'Head of Data at Talus Analytics',
+      link: 'https://www.linkedin.com/in/traewallace/',
     },
     {
       name: 'Vincent Woo',
@@ -287,11 +480,6 @@ export default {
       name: 'Xinyu Zhang',
       title: 'Data Scientist at Grand Rounds',
       link: 'https://www.linkedin.com/in/xinyuzhang-cathy/',
-    },
-    {
-      name: 'Yvonne Hung',
-      title: 'Founder of Studio Nonymous',
-      link: 'https://www.linkedin.com/in/hungyvonne/',
     },
     {
       name: 'Zack Rosen',
