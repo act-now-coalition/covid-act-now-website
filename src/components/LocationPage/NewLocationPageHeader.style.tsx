@@ -287,7 +287,6 @@ export const RiskLevelThermometer = styled(Box)<{ alarmLevel: number }>`
 
 export const Triangle = styled(Box)<{
   alarmLevel?: number;
-  direction?: string;
 }>`
   width: 0;
   height: 0;
@@ -305,6 +304,4 @@ export const Triangle = styled(Box)<{
       : alarmLevel === Level.HIGH
       ? '96px'
       : '0'};
-  transform: ${({ direction }) =>
-    direction === 'Decreased' && 'rotate(180deg)'};
 `;

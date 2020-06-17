@@ -17,11 +17,13 @@ export const Wrapper = styled(Box)`
   background-color: ${COLORS.LIGHTGRAY};
   flex-direction: column;
   display: flex;
+  padding: 3rem 1rem;
 `;
 
 export const LogoContainer = styled(Box)`
   width: fit-content;
-  margin: 0 auto 2.5rem;
+  margin: 0 auto 2rem;
+  cursor: pointer;
 `;
 
 export const AlertHeader = styled(Box)`
@@ -29,7 +31,11 @@ export const AlertHeader = styled(Box)`
   border-bottom: 1px solid ${COLORS.LIGHTGRAY};
   text-transform: uppercase;
   width: 100%;
-  max-width: 900px;
+  border-radius: 8px 8px 0px 0px;
+
+  @media (min-width: 600px) {
+    max-width: 340px;
+  }
 `;
 
 export const BellIconContainer = styled(Box)`
@@ -60,13 +66,17 @@ export const AlertLocation = styled(Typography)`
   font-size: 20px;
   line-height: 140%;
   font-weight: bold;
+  margin-bottom: 1rem;
 `;
 
 export const AlertBody = styled(Box)`
   ${SharedContainerStyles};
   background-color: white;
   width: 100%;
-  max-width: 900px;
+  max-width: 600px;
+  padding: 2rem;
+  border-radius: 0px 0px 8px 8px;
+  margin-bottom: 1.25rem;
 `;
 
 export const OverallThreatCopy = styled(Typography)`
@@ -75,10 +85,15 @@ export const OverallThreatCopy = styled(Typography)`
   line-height: 18px;
   letter-spacing: 0.03em;
   text-transform: uppercase;
+  margin-bottom: 0.75rem;
 `;
 
-export const ThreatChangeContainer = styled(Box)`
+export const DirectionChangeContainer = styled(Box)`
   display: flex;
+  border: 1px solid ${COLOR_MAP.GRAY.BASE};
+  border-radius: 4px;
+  align-items: center;
+  margin-bottom: 0.75rem;
 `;
 
 const SharedCopyStyles = css`
@@ -91,11 +106,13 @@ export const BodyCopyBold = styled(Typography)`
   ${SharedCopyStyles};
   font-weight: bold;
   color: black;
+  padding: 0.4rem 0.4rem 0.4rem 0;
 `;
 
-export const BodyCopyRegular = styled(Typography)`
+export const LastUpdatedDate = styled(Typography)`
   ${SharedCopyStyles};
   color: ${COLOR_MAP.GRAY.DARK};
+  margin-bottom: 2rem;
 `;
 
 export const ThermometerContainer = styled(Box)`
@@ -123,28 +140,24 @@ export const ThermometerRow = styled(Box)<{
   height: 34px;
 `;
 
-export const NowOrPrevContainer = styled(Box)`
+export const NowOrPrevContainer = styled(Box)<{ isCurrentLevel: Boolean }>`
   font-family: 'Source Code Pro';
   font-size: 11px;
   flex-direction: row;
   display: flex;
   justify-content: flex-end;
   width: 56px;
-  color: black;
+  color: ${({ isCurrentLevel }) =>
+    isCurrentLevel ? 'black' : `${COLOR_MAP.GRAY.DARK}`};
   align-self: center;
 `;
 
-export const Pointer = styled(Box)`
-  height: 5px;
-  width: 5px;
-  background-color: black;
-`;
-
-export const NowOrPrevText = styled.span`
+export const NowOrPrevText = styled.span<{ isCurrentLevel: Boolean }>`
   font-family: 'Source Code Pro';
   font-size: 11px;
   font-weight: bold;
-  color: black;
+  color: ${({ isCurrentLevel }) =>
+    isCurrentLevel ? 'black' : `${COLOR_MAP.GRAY.DARK}`};
 `;
 
 export const ThermometerLevelColor = styled(Box)<{
@@ -172,4 +185,56 @@ export const ThermometerLevelText = styled(Typography)<{
   display: flex;
   align-self: center;
   margin-left: ${({ isCurrentLevel }) => (isCurrentLevel ? '11px' : '12px')};
+`;
+
+export const ViewChartButton = styled(Box)`
+  max-width: 600px;
+  width: 100%;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  background-color: ${COLOR_MAP.BLUE};
+  cursor: pointer;
+  color: white;
+  font-family: 'Roboto';
+  font-size: 17px;
+  line-height: 20px;
+  font-weight: bold;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 2rem;
+
+  &:hover {
+    background-color: rgb(59, 165, 200);
+  }
+`;
+
+export const FooterWrapper = styled(Box)`
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+
+  a {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+`;
+
+const FooterCopy = css`
+  font-family: 'Roboto';
+  font-size: 15px;
+  line-height: 1.4;
+`;
+export const LeaveFeedbackCopy = styled(Typography)`
+  ${FooterCopy};
+  color: black;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+`;
+
+export const FeedbackInstructionsCopy = styled(Typography)`
+  ${FooterCopy};
+  color: #4f4f4f;
+  margin-bottom: 3.25rem;
 `;

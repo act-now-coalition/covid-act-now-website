@@ -8,23 +8,43 @@ import {
   AlertLocation,
   AlertBody,
   OverallThreatCopy,
-  ThreatChangeContainer,
+  DirectionChangeContainer,
   BodyCopyBold,
-  BodyCopyRegular,
+  LastUpdatedDate,
   ThermometerContainer,
   ThermometerRow,
   NowOrPrevContainer,
-  Pointer,
   NowOrPrevText,
   ThermometerLevelColor,
   ThermometerLevelText,
+  ViewChartButton,
+  FooterWrapper,
+  LeaveFeedbackCopy,
+  FeedbackInstructionsCopy,
 } from 'components/AlertEmail/AlertEmail.style';
-import { Triangle } from 'components/LocationPage/NewLocationPageHeader.style';
 import Logo from 'assets/images/logoUrlLight';
 import NotificationsNoneOutlined from '@material-ui/icons/NotificationsNoneOutlined';
-import { COLOR_MAP, LEVEL_COLOR } from 'common/colors';
+import { LEVEL_COLOR } from 'common/colors';
 import { Level } from 'common/level';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
+
+function EmailFooter() {
+  return (
+    <FooterWrapper>
+      <LeaveFeedbackCopy>Leave feedback</LeaveFeedbackCopy>
+      <FeedbackInstructionsCopy>
+        Tell us how we can provide you more useful COVID-related stats and
+        projections in your area. <strong>Just respond to this email.</strong>{' '}
+      </FeedbackInstructionsCopy>
+      <LogoContainer>
+        <Logo height={20} />
+      </LogoContainer>
+      <FeedbackInstructionsCopy as="a">Unsubscribe</FeedbackInstructionsCopy>
+    </FooterWrapper>
+  );
+}
 
 function AlertEmail() {
   const location = 'TRAVIS COUNTY, TX';
@@ -66,6 +86,9 @@ function AlertEmail() {
     },
   ];
 
+  const arrowIcon =
+    direction === 'Increased' ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />;
+
   function mapThermometerRows(row: any, i: any) {
     const isCurrentLevel = row.level === currentLevel;
     const isPrevLevel = row.level === previousLevel;
@@ -77,10 +100,12 @@ function AlertEmail() {
         color={row.color}
         bgColor={row.bgColor}
       >
-        <NowOrPrevContainer>
+        <NowOrPrevContainer isCurrentLevel={isCurrentLevel}>
           {(isCurrentLevel || isPrevLevel) && (
             <Fragment>
-              <NowOrPrevText>{statusText}</NowOrPrevText>
+              <NowOrPrevText isCurrentLevel={isCurrentLevel}>
+                {statusText}
+              </NowOrPrevText>
               <ArrowRightIcon />
             </Fragment>
           )}
@@ -100,7 +125,7 @@ function AlertEmail() {
   return (
     <Wrapper>
       <LogoContainer>
-        <Logo height={25} />
+        <Logo height={20} />
       </LogoContainer>
       <AlertHeader>
         <BellIconContainer>
@@ -111,15 +136,17 @@ function AlertEmail() {
       </AlertHeader>
       <AlertBody>
         <OverallThreatCopy>Overall Covid Threat</OverallThreatCopy>
-        <ThreatChangeContainer>
-          <Triangle direction={direction} />
+        <DirectionChangeContainer>
+          {arrowIcon}
           <BodyCopyBold>{direction}</BodyCopyBold>
-        </ThreatChangeContainer>
-        <BodyCopyRegular>on {updatedLocation}</BodyCopyRegular>
+        </DirectionChangeContainer>
+        <LastUpdatedDate>on {updatedLocation}</LastUpdatedDate>
         <ThermometerContainer>
           {thermometerContent.map((row, i) => mapThermometerRows(row, i))}
         </ThermometerContainer>
       </AlertBody>
+      <ViewChartButton>View metrics and charts</ViewChartButton>
+      <EmailFooter />
     </Wrapper>
   );
 }
