@@ -1,11 +1,17 @@
 import React from 'react';
 
 import { TeamTableGrid, TeamMember, TeamMemberCell } from './TeamTable.style';
+import {
+  TeamMemberName,
+  TeamMemberTitle,
+} from '../HeadshotGrid/HeadshotGrid.style';
 
 const TeamTable = ({
   people,
+  isTeam,
 }: {
-  people: { name: string; title: string; link: string }[];
+  people: { name: string; title: string; link?: string }[];
+  isTeam?: Boolean;
 }) => {
   return (
     <TeamTableGrid>
@@ -13,13 +19,20 @@ const TeamTable = ({
         return (
           <TeamMember key={idx}>
             <TeamMemberCell variant="body1" component="p">
-              <a href={teammate.link} target="_blank" rel="noopener noreferrer">
-                {teammate.name}
-              </a>
+              {isTeam && (
+                <a
+                  href={teammate.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {teammate.name}
+                </a>
+              )}
+              {!isTeam && <TeamMemberName>{teammate.name}</TeamMemberName>}
             </TeamMemberCell>
-            <TeamMemberCell variant="body1" component="p">
+            <TeamMemberTitle>
               <span dangerouslySetInnerHTML={{ __html: teammate.title }} />
-            </TeamMemberCell>
+            </TeamMemberTitle>
           </TeamMember>
         );
       })}

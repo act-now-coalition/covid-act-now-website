@@ -26,7 +26,7 @@ export function generateChartDescription(
       : `However, any reopening should happen in a slow and phased fashion.`;
 
     return (
-      `Assuming current trends and interventions continue, ${projection.locationName} hospitals are unlikely to become overloaded in the next 3 months. ` +
+      `Assuming current trends and interventions continue, ${projection.locationName} hospitals are unlikely to become overloaded in the next 30 days. ` +
       `${restrictionsLiftedText}`
     );
   }

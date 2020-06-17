@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import ShareBlock from 'components/ShareBlock/ShareBlock';
 import Typography from '@material-ui/core/Typography';
@@ -11,19 +11,35 @@ import TeamTable from './TeamTable/TeamTable';
 import HeadshotGrid, { HeadshotGrid2Up } from './HeadshotGrid/HeadshotGrid';
 import { PartnerLogoGrid } from 'components/LogoGrid/LogoGrid';
 
-import { Wrapper, Content, Header } from './About.style';
+import {
+  Wrapper,
+  Content,
+  Header,
+  ActiveAlumniButtonContainer,
+  ActiveAlumniButton,
+} from './About.style';
 
 const sidebar = (
   <React.Fragment>
-    <SidebarLink href="#can">Covid Act Now</SidebarLink>
-    <SidebarLink href="#partners">Our Partners</SidebarLink>
-    <SidebarLink href="#team">The Team</SidebarLink>
-    <SidebarLink href="#model">The Model</SidebarLink>
+    <SidebarLink href="#can">About Covid Act Now</SidebarLink>
+    <SidebarLink href="#partners">Partners</SidebarLink>
+    <SidebarLink href="#founders">Founders</SidebarLink>
+    <SidebarLink href="#advisors">Advisors</SidebarLink>
+    <SidebarLink href="#team">Team</SidebarLink>
+    <SidebarLink href="#model">Our Model</SidebarLink>
     <SidebarLink href="#faq">FAQ</SidebarLink>
   </React.Fragment>
 );
 
+export enum TeamList {
+  Active,
+  Alumni,
+}
+
 const About = ({ children }: { children: React.ReactNode }) => {
+  const [teamList, setTeamList] = useState(TeamList.Active);
+  const teamToShow =
+    teamList === TeamList.Alumni ? TEAM.teamAlumni : TEAM.teamActive;
   return (
     <Wrapper>
       <AppMetaTags
@@ -64,7 +80,7 @@ const About = ({ children }: { children: React.ReactNode }) => {
             the U.S. military and White House, to assist with response planning.
           </Typography>
           <SectionHeader variant="h4" component="h4" id="partners">
-            Our Partners
+            Partners
           </SectionHeader>
           <Typography variant="body1" component="p">
             We work in partnership with the{' '}
@@ -96,37 +112,57 @@ const About = ({ children }: { children: React.ReactNode }) => {
           </Typography>
           <PartnerLogoGrid />
 
-          <SectionHeader variant="h4" component="h4" id="team">
-            The Team
+          <SectionHeader variant="h4" component="h4" id="founders">
+            Founders
           </SectionHeader>
-
-          <Typography variant="h6" component="h6">
-            Our Founders
-          </Typography>
           <HeadshotGrid people={TEAM.founders} />
 
+          <SectionHeader variant="h4" component="h4" id="advisors">
+            Advisors
+          </SectionHeader>
           <HeadshotGrid2Up>
             <div>
               <Typography variant="h6" component="h6">
-                Our Epidemiological Advisors
+                Epidemiological Advisors
               </Typography>
               <HeadshotGrid people={TEAM.epidemiologicalAdvisors} />
             </div>
             <div>
               <Typography variant="h6" component="h6">
-                Our Medical Advisors
+                Medical Advisors
               </Typography>
               <HeadshotGrid people={TEAM.medicalAdvisors} />
             </div>
           </HeadshotGrid2Up>
 
-          <Typography variant="h6" component="h6">
-            Our Team
-          </Typography>
-          <TeamTable people={TEAM.team} />
+          <div>
+            <Typography variant="h6" component="h6">
+              Additional Advisors
+            </Typography>
+            <TeamTable people={TEAM.additionalAdvisors} />
+          </div>
+
+          <SectionHeader variant="h4" component="h4" id="team">
+            Team
+          </SectionHeader>
+          <ActiveAlumniButtonContainer>
+            <ActiveAlumniButton
+              teamList={teamList}
+              onClick={() => setTeamList(TeamList.Active)}
+            >
+              Active
+            </ActiveAlumniButton>
+            <ActiveAlumniButton
+              teamList={teamList}
+              onClick={() => setTeamList(TeamList.Alumni)}
+            >
+              Alumni
+            </ActiveAlumniButton>
+          </ActiveAlumniButtonContainer>
+          <TeamTable people={teamToShow} isTeam={true} />
 
           <SectionHeader variant="h4" component="h4" id="model">
-            The Model
+            Our Model
           </SectionHeader>
           <Typography variant="body1" component="p">
             Our model is open source.{' '}

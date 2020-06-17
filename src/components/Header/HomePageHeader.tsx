@@ -10,6 +10,7 @@ import {
   HeaderSubCopy,
   HighlightColor,
   HeaderTitle,
+  HeaderSubCopyItem,
 } from './HomePageHeader.style';
 
 const HomePageHeader = () => {
@@ -36,8 +37,13 @@ const HomePageHeader = () => {
         </HeaderTitle>
         <div>
           <HeaderSubCopy color="inherit" component="p" variant="subtitle2">
-            See COVID data and risk level for your community.
-            <br /> All 50 states. 2,100+ counties.
+            <HeaderSubCopyItem hideOnMobile>
+              See COVID data and risk level for your community.
+              <br />
+            </HeaderSubCopyItem>
+            <HeaderSubCopyItem>
+              All 50 states. 2,100+ counties.
+            </HeaderSubCopyItem>
           </HeaderSubCopy>
 
           <SelectorWrapper>
