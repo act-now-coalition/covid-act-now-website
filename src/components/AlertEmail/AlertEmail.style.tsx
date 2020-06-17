@@ -129,15 +129,15 @@ export const ThermometerContainer = styled(Box)`
 export const ThermometerRow = styled(Box)<{
   isCurrentLevel: Boolean;
   color: string;
-  bgColor: string;
+  bgfill: string;
 }>`
   border-radius: 4px;
   display: flex;
   flex-direction: row;
   border: ${({ isCurrentLevel, color }) =>
     isCurrentLevel && `1px solid ${color}`};
-  background-color: ${({ isCurrentLevel, bgColor }) =>
-    isCurrentLevel && `${bgColor}`};
+  background-color: ${({ isCurrentLevel, bgfill }) =>
+    isCurrentLevel && `${bgfill}`};
   color: ${({ isCurrentLevel }) =>
     isCurrentLevel ? 'black' : `${COLOR_MAP.GRAY.DARK}`};
   height: 34px;
@@ -194,7 +194,7 @@ export const RowLevelText = styled(Typography)<{
   width: 255px;
   display: flex;
   align-self: center;
-  margin-left: 12px;
+  margin-left: ${({ isCurrentLevel }) => (isCurrentLevel ? '11px' : '12px')};
 `;
 
 export const ViewChartButton = styled(Box)`

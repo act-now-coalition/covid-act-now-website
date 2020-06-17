@@ -23,11 +23,7 @@ import {
 } from 'styled-components';
 import theme from '../../src/assets/theme';
 import { Level, ALL_LEVELS } from '../../src/common/level';
-import {
-  RiskLevelThermometer,
-  Triangle,
-  RiskLevelWrapper,
-} from '../../src/components/LocationPage/NewLocationPageHeader.style';
+import AlertEmail from '../../src/components/AlertEmail/AlertEmail';
 
 const outputFolder = path.join(__dirname, 'html');
 
@@ -80,21 +76,15 @@ function Wrapper({ children }: { children: React.ReactNode }) {
   );
 }
 
-interface RiskLevelChangeProps {
+export interface RiskLevelChangeProps {
   oldLevel: Level;
   newLevel: Level;
 }
+
 function RiskLevelChange({ oldLevel, newLevel }: RiskLevelChangeProps) {
   return (
     <>
-      <RiskLevelWrapper>
-        <RiskLevelThermometer alarmLevel={oldLevel} />
-        <Triangle alarmLevel={oldLevel} />
-      </RiskLevelWrapper>
-      <RiskLevelWrapper>
-        <RiskLevelThermometer alarmLevel={newLevel} />
-        <Triangle alarmLevel={newLevel} />
-      </RiskLevelWrapper>
+      <AlertEmail oldLevel={oldLevel} newLevel={newLevel} />
     </>
   );
 }

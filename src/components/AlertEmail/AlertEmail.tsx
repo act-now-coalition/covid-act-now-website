@@ -29,7 +29,7 @@ import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import NotificationsNoneOutlined from '@material-ui/icons/NotificationsNoneOutlined';
-
+import { RiskLevelChangeProps } from '../../../scripts/alert_emails/generate_html_bits';
 function EmailFooter() {
   return (
     <FooterWrapper>
@@ -38,21 +38,21 @@ function EmailFooter() {
         Tell us how we can provide you more useful COVID-related stats and
         projections in your area. <strong>Just respond to this email.</strong>{' '}
       </FeedbackInstructionsCopy>
-      <LogoContainer>
+      {/* <LogoContainer>
         <Logo height={20} />
-      </LogoContainer>
+      </LogoContainer> */}
       <FeedbackInstructionsCopy as="a">Unsubscribe</FeedbackInstructionsCopy>
     </FooterWrapper>
   );
 }
 
-function AlertEmail() {
+function AlertEmail({ oldLevel, newLevel }: RiskLevelChangeProps) {
   const location = 'TRAVIS COUNTY, TX';
   const updatedLocation = '5/1/2020';
 
   const [direction, setDirection] = useState('');
-  const [currentLevel, setCurrentLevel] = useState(3);
-  const [previousLevel, setPreviousLevel] = useState(2);
+  const [currentLevel, setCurrentLevel] = useState(0);
+  const [previousLevel, setPreviousLevel] = useState(1);
 
   useEffect(() => {
     if (currentLevel > previousLevel) setDirection('Increased');
@@ -64,25 +64,25 @@ function AlertEmail() {
       level: Level.HIGH,
       text: 'Active outbreak or major gaps',
       color: `${LEVEL_COLOR[Level.HIGH]}`,
-      bgColor: 'rgba(255, 0, 52, 0.05)',
+      bgfill: 'rgba(255, 0, 52, 0.05)',
     },
     {
       level: Level.MEDIUM_HIGH,
       text: 'Risk of second spike',
       color: `${LEVEL_COLOR[Level.MEDIUM_HIGH]}`,
-      bgColor: 'rgba(255, 150, 0, 0.05)',
+      bgfill: 'rgba(255, 150, 0, 0.05)',
     },
     {
       level: Level.MEDIUM,
       text: 'On track for herd immunity',
       color: `${LEVEL_COLOR[Level.MEDIUM]}`,
-      bgColor: 'rgba(255, 201, 0, 0.05)',
+      bgfill: 'rgba(255, 201, 0, 0.05)',
     },
     {
       level: Level.LOW,
       text: 'On track for containment',
       color: `${LEVEL_COLOR[Level.LOW]}`,
-      bgColor: 'rgba(0, 212, 116, 0.05)',
+      bgfill: 'rgba(0, 212, 116, 0.05)',
     },
   ];
 
@@ -98,7 +98,7 @@ function AlertEmail() {
       <ThermometerRow
         isCurrentLevel={isCurrentLevel}
         color={row.color}
-        bgColor={row.bgColor}
+        bgfill={row.bgfill}
       >
         <NowOrPrevContainer isCurrentLevel={isCurrentLevel}>
           {(isCurrentLevel || isPrevLevel) && (
@@ -125,9 +125,9 @@ function AlertEmail() {
 
   return (
     <Wrapper>
-      <LogoContainer>
+      {/* <LogoContainer>
         <Logo height={20} />
-      </LogoContainer>
+      </LogoContainer> */}
       <AlertHeader>
         <BellIconContainer>
           <NotificationsNoneOutlined />
@@ -139,7 +139,7 @@ function AlertEmail() {
         <OverallThreatCopy>Overall Covid Threat</OverallThreatCopy>
         <DirectionChangeContainer>
           {arrowIcon}
-          <DirectionCopy>{direction}</DirectionCopy>
+          <DirectionCopy>Decreased</DirectionCopy>
         </DirectionChangeContainer>
         <LastUpdatedDate>on {updatedLocation}</LastUpdatedDate>
         <ThermometerContainer>
