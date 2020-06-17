@@ -69,7 +69,8 @@
     "create-lists-to-email": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/create_lists_to_email.ts",
     "generate-index-pages": "ts-node-script -r tsconfig-paths/register scripts/generate_index_pages.ts",
     "generate-share-images": "ts-node-script -r tsconfig-paths/register scripts/generate_share_images/index.ts",
-    "generate-daily-alerts": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/generate_daily_alerts.ts"
+    "generate-daily-alerts": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/generate_daily_alerts.ts",
+    "send-emails": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/send_emails.ts"
   },
   "lint-staged": {
     "{src,scripts}/**/*.{css,scss,js,ts,tsx}": [

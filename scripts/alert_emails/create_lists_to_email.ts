@@ -2,6 +2,7 @@
 import createsend from 'createsend-node';
 import fs from 'fs-extra';
 import path from 'path';
+import { Alert } from './interfaces';
 
 const ALERT_LIST_CUSTOM_FIELD = "[alert_list_csv]";
 const ALERT_SIGNUPS_LIST_ID = "768d7917086d0c35bfa52b95af2a67e7";
@@ -55,7 +56,7 @@ async function getSubscribersForList(
     const alertPath = path.join(outputFolder, fipsToAlertFilename);
 
     const rawdata = fs.readFileSync(alertPath, "utf8");
-    const locationsWithAlerts: { [fips: string]: { [key: string]: any } } = JSON.parse(rawdata);
+    const locationsWithAlerts: { [fips: string]: Alert } = JSON.parse(rawdata);
 
     // fips to object with a list of users and the previous meta data
     const usersToEmail: { [fips: string]: Array<string> } = {};

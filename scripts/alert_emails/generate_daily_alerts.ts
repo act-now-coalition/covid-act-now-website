@@ -25,24 +25,13 @@ import {
   snapshotUrl,
 } from '../../src/common/utils/model';
 import { SNAPSHOT_URL } from '../../src/api';
-import { Level } from '../../src/common/level';
+import { Alert } from './interfaces';
 import { Metric, ALL_METRICS } from '../../src/common/metric';
 
 const outputFolder = path.join(__dirname, 'alerts');
 
 // Disable counties; mostly useful for faster testing / debugging.
 const STATES_ONLY = false;
-
-interface Alert {
-  fips: string;
-  oldLevel: Level;
-  newLevel: Level;
-  changedMetrics: Array<{
-    metric: Metric;
-    oldLevel: Level;
-    newLevel: Level;
-  }>;
-}
 
 async function main() {
   const { oldSnap, newSnap } = await parseArgs();
@@ -57,6 +46,7 @@ async function main() {
   for (const pair of projectionsSet.pairs) {
     const oldLevel = pair.left.getAlarmLevel();
     const newLevel = pair.right.getAlarmLevel();
+    const locationName = pair.locationName;
     const changedMetrics = [];
     for (const metric of ALL_METRICS) {
       if (metric !== Metric.FUTURE_PROJECTIONS) {
@@ -71,6 +61,7 @@ async function main() {
       const fips = pair.fips;
       alerts[fips] = {
         fips,
+        locationName,
         oldLevel,
         newLevel,
         changedMetrics,
