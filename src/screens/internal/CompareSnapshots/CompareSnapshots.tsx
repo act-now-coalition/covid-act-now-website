@@ -48,7 +48,7 @@ enum Locations {
   TOP_COUNTIES_BY_DIFF,
 }
 
-const COUNTIES_LIMIT = 50;
+const COUNTIES_LIMIT = 100;
 
 export function CompareSnapshots() {
   const masterSnapshot = useMasterSnapshot();
