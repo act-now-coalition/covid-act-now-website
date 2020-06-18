@@ -110,8 +110,8 @@ export default {
     },
     {
       name: 'Alex MacAulay',
-      title: 'Modeling',
-      link: 'https://www.linkedin.com/in/w-alex-c-macaulay-b70b92a4/',
+      title: 'Modeler',
+      link: 'https://www.linkedin.com/in/alexmacaulay/',
     },
     {
       name: 'Anya Lehr',
