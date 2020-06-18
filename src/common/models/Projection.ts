@@ -213,6 +213,12 @@ export class Projection {
       summaryWithTimeseries.projections.totalHospitalBeds.shortageStartDate;
     this.dateOverwhelmed =
       shortageStart === null ? null : new Date(shortageStart);
+    if (
+      moment(this.dateOverwhelmed).diff(moment(), 'days') >
+      PROJECTIONS_TRUNCATION_DAYS
+    ) {
+      this.dateOverwhelmed = null;
+    }
 
     this.currentCumulativeDeaths =
       summaryWithTimeseries.actuals.cumulativeDeaths;
