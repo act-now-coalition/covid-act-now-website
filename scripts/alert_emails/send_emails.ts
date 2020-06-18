@@ -3,6 +3,7 @@ import createsend from 'createsend-node';
 import fs from 'fs-extra';
 import path from 'path';
 import { Alert } from './interfaces';
+import moment from 'moment';
 
 interface EmailSendData {
     To: string[] | null,
@@ -35,19 +36,20 @@ async function sendEmail(
     });
 }
 
-function generateSendData(usersToEmail: string[]): EmailSendData {
-    const raw_image = "https://static.fox2detroit.com/www.fox2detroit.com/content/uploads/2020/06/wjbk-covid-act-now-map-061720.jpg"
+function generateSendData(usersToEmail: string[], locationName: string, currentValue: number, previousValue: number): EmailSendData {
+    const base_url = "https://data.covidactnow.org/thermometer_screenshot"
     return {
         "To": usersToEmail,
         "CC": null,
         "BCC": null,
         "Attachments": null,
-        "smartEmailID": "",
+        "smartEmailID": `${process.env.SMART_EMAIL_ID}`,
         "data": {
-            "state": "GA",
-            "county": "Glynn",
-            "img_url": raw_image,
-            "last_updated": "June 17, 2020",
+            "change": (currentValue < previousValue) ? `${base_url}/email_decreased.png`: `${base_url}/email_increased.png`,
+            "location_name": locationName,
+            "img_url": `${base_url}/therm-${currentValue}-${previousValue}.png`,
+            "last_updated": moment.utc().format("MM/DD/YYYY"),
+            "learn_more_link": 'https://covidactnow.org/',
         },
         "AddRecipientsToList": null,
     }
@@ -84,7 +86,9 @@ function generateSendData(usersToEmail: string[]): EmailSendData {
     Object.entries(usersToEmail).map(async ([fips, userList]) => {
         const testHTML = `<html> Test Alert Email for ${fips}, ${locationsWithAlerts[fips].locationName} went from ${locationsWithAlerts[fips].oldLevel} to ${locationsWithAlerts[fips].newLevel}</html>`;
         const testText = "Test Email, Please Ignore";
-        await sendEmail(api, generateSendData(userList))
+        await sendEmail(api, generateSendData(
+            userList,locationsWithAlerts[fips].locationName,
+             locationsWithAlerts[fips].newLevel, locationsWithAlerts[fips].oldLevel))
             .then(result => {
                 console.log(result)
                 results_array.push(result);
