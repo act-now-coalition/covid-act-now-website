@@ -66,7 +66,8 @@
     "create-lists-to-email": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/create_lists_to_email.ts",
     "generate-index-pages": "ts-node-script -r tsconfig-paths/register scripts/generate_index_pages.ts",
     "generate-share-images": "ts-node-script -r tsconfig-paths/register scripts/generate_share_images/index.ts",
-    "generate-daily-alerts": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/generate_daily_alerts.ts"
+    "generate-daily-alerts": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/generate_daily_alerts.ts",
+    "firestore-test": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/firestore_test.ts"
   },
   "lint-staged": {
     "{src,scripts}/**/*.{css,scss,js,ts,tsx}": [
@@ -119,6 +120,7 @@
     "eslint-config-prettier": "6.10.1",
     "eslint-config-react-app": "^5.2.1",
     "eslint-plugin-prettier": "3.1.2",
+    "firebase-admin": "^8.12.1",
     "husky": "^4.2.5",
     "istanbul-lib-coverage": "^3.0.0",
     "json-schema-to-typescript": "^8.2.0",
