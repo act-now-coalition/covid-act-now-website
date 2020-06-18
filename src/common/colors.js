@@ -1,8 +1,7 @@
 import { INTERVENTIONS } from 'common/interventions';
 import { Level } from 'common/level';
 
-import CalculatedInterventionJSON from '../assets/data/calculated_state_interventions.json';
-import CalculatedCountyInterventionJSON from '../assets/data/calculated_county_interventions.json';
+import { stateSummary, countySummary } from './location_summaries';
 
 export default {
   LIGHTGRAY: '#f2f2f2',
@@ -57,5 +56,15 @@ export const INTERVENTION_COLOR_MAP = {
   [INTERVENTIONS.PROJECTED]: COLOR_MAP.BLUE,
 };
 
-export const STATE_TO_CALCULATED_INTERVENTION_COLOR = CalculatedInterventionJSON;
-export const FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR = CalculatedCountyInterventionJSON;
+export function stateColor(stateCode) {
+  const summary = stateSummary(stateCode);
+  return summary ? LEVEL_COLOR[summary.level] : COLOR_MAP.GRAY.LIGHT;
+}
+
+export function countyColor(
+  countyFipsCode,
+  defaultColor = COLOR_MAP.GRAY_LIGHT,
+) {
+  const summary = countySummary(countyFipsCode);
+  return summary ? LEVEL_COLOR[summary.level] : defaultColor;
+}

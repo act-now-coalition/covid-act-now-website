@@ -8,10 +8,7 @@ import StateCircleSvg from 'components/StateSvg/StateCircleSvg';
 import US_STATE_DATASET from './datasets/us_states_dataset_01_02_2020';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
-import {
-  STATE_TO_CALCULATED_INTERVENTION_COLOR,
-  FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR,
-} from 'common/colors';
+import { stateColor, countyColor } from 'common/colors';
 
 import {
   StyledDropDownWrapper,
@@ -30,7 +27,7 @@ import {
 } from './MapSelectors.style';
 
 const StateItem = ({ dataset }) => {
-  const fillColor = STATE_TO_CALCULATED_INTERVENTION_COLOR[dataset.state_code];
+  const fillColor = stateColor(dataset.state_code);
 
   return (
     <StyledResultsMenuOption hasData={true}>
@@ -54,12 +51,10 @@ const StateItem = ({ dataset }) => {
 };
 
 const CountyItem = ({ dataset }) => {
-  let fillColor = STATE_TO_CALCULATED_INTERVENTION_COLOR[dataset.state_code];
-
-  if (FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR[dataset.full_fips_code]) {
-    fillColor =
-      FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR[dataset.full_fips_code];
-  }
+  const fillColor = countyColor(
+    dataset.full_fips_code,
+    stateColor(dataset.state_code),
+  );
 
   return (
     <StyledResultsMenuOption hasData={dataset.hasData}>

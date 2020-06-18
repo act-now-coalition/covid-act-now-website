@@ -6,7 +6,7 @@ import {
   RegionAggregateDescriptor,
   RegionDescriptor,
 } from './RegionDescriptor';
-import { Api } from 'api';
+import { Api, SNAPSHOT_URL } from 'api';
 import { assert } from 'common/utils';
 import { findCountyByFips } from 'common/locations';
 import moment from 'moment';
@@ -112,4 +112,8 @@ export function snapshotFromUrl(url: string): number {
 
 export function snapshotUrl(snapshotNum: string | number) {
   return `https://data.covidactnow.org/snapshot/${snapshotNum}`;
+}
+
+export function currentSnapshot(): number {
+  return snapshotFromUrl(SNAPSHOT_URL);
 }

@@ -8,10 +8,7 @@ import {
 } from 'react-simple-maps';
 import ReactTooltip from 'react-tooltip';
 import STATE_CENTERS from '../../common/us_state_centers';
-import {
-  FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR,
-  COLOR_MAP,
-} from 'common/colors';
+import { countyColor } from 'common/colors';
 import { CountyMapWrapper, CountyMapLayerWrapper } from './CountyMap.style';
 
 const CountyMap = ({ selectedCounty, setSelectedCounty }) => {
@@ -20,12 +17,6 @@ const CountyMap = ({ selectedCounty, setSelectedCounty }) => {
   const state = STATE_CENTERS[stateId];
   const counties = require(`./countyTopoJson/${stateId}.json`);
   const [content, setContent] = useState('');
-
-  const getFillColor = geoId => {
-    return (
-      FIPS_CODE_TO_CALCULATED_INTERVENTION_COLOR[geoId] || COLOR_MAP.GRAY.LIGHT
-    );
-  };
 
   return (
     <CountyMapWrapper>
@@ -44,7 +35,7 @@ const CountyMap = ({ selectedCounty, setSelectedCounty }) => {
             <Geography
               key={geo.rsmKey}
               geography={geo}
-              fill={getFillColor(geo.properties.GEOID)}
+              fill={countyColor(geo.properties.GEOID)}
               stroke={'white'}
             />
           );

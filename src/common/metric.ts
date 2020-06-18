@@ -20,6 +20,11 @@ export const ALL_METRICS = Object.values(Metric).filter(
   v => typeof v === 'number',
 ) as Metric[];
 
+// Future Projections has a graph but not a value.
+export const ALL_VALUE_METRICS = ALL_METRICS.filter(
+  m => m !== Metric.FUTURE_PROJECTIONS,
+);
+
 const METRIC_TO_NAME = {
   [Metric.CASE_GROWTH_RATE]: CaseGrowth.METRIC_NAME,
   [Metric.POSITIVE_TESTS]: TestRates.METRIC_NAME,
