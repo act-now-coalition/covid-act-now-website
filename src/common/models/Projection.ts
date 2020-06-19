@@ -213,6 +213,12 @@ export class Projection {
       summaryWithTimeseries.projections.totalHospitalBeds.shortageStartDate;
     this.dateOverwhelmed =
       shortageStart === null ? null : new Date(shortageStart);
+    if (
+      moment(this.dateOverwhelmed).diff(moment(), 'days') >
+      PROJECTIONS_TRUNCATION_DAYS
+    ) {
+      this.dateOverwhelmed = null;
+    }
 
     this.currentCumulativeDeaths =
       summaryWithTimeseries.actuals.cumulativeDeaths;
@@ -238,6 +244,9 @@ export class Projection {
    * Then we want to use the actual timeseries for them
    */
   get hasActualData() {
+    // TODO(https://trello.com/c/qW1dJ1um/): Reenable actuals once we get Valorum
+    // data fixed?
+    /*
     for (var i = 0; i < this.actualTimeseries.length; i++) {
       const actual = this.actualTimeseries[i];
       if (
@@ -249,6 +258,7 @@ export class Projection {
         return true;
       }
     }
+    */
     return false;
   }
 

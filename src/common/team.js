@@ -110,8 +110,8 @@ export default {
     },
     {
       name: 'Alex MacAulay',
-      title: 'Modeling',
-      link: 'https://www.linkedin.com/in/w-alex-c-macaulay-b70b92a4/',
+      title: 'Modeler',
+      link: 'https://www.linkedin.com/in/alexmacaulay/',
     },
     {
       name: 'Anya Lehr',
@@ -179,13 +179,8 @@ export default {
       link: 'https://www.linkedin.com/in/erin-kelly-643645179/',
     },
     {
-      name: 'Gaston Kelly',
-      title: 'Public Policy Manager at Getaround',
-      link: 'https://www.linkedin.com/in/gaston-kelly/',
-    },
-    {
       name: 'Gil Rosen',
-      title: 'State Manager',
+      title: 'Government Relations, Lower Midwest',
       link: 'https://www.linkedin.com/in/rosengil/',
     },
     {
