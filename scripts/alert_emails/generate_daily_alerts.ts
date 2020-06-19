@@ -27,6 +27,7 @@ import {
 import { SNAPSHOT_URL } from '../../src/api';
 import { Alert } from './interfaces';
 import { Metric, ALL_METRICS } from '../../src/common/metric';
+import moment from 'moment';
 
 const outputFolder = path.join(__dirname, 'alerts');
 
@@ -47,6 +48,8 @@ async function main() {
     const oldLevel = pair.left.getAlarmLevel();
     const newLevel = pair.right.getAlarmLevel();
     const locationName = pair.locationName;
+    const locationURL = pair.locationURL;
+    const lastUpdated = moment.utc().format("MM/DD/YYYY"); // This might not be accurate, grab from the pair? idk
     const changedMetrics = [];
     for (const metric of ALL_METRICS) {
       if (metric !== Metric.FUTURE_PROJECTIONS) {
@@ -62,6 +65,8 @@ async function main() {
       alerts[fips] = {
         fips,
         locationName,
+        locationURL,
+        lastUpdated,
         oldLevel,
         newLevel,
         changedMetrics,

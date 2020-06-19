@@ -3,7 +3,6 @@ import createsend from 'createsend-node';
 import fs from 'fs-extra';
 import path from 'path';
 import { Alert } from './interfaces';
-import moment from 'moment';
 
 interface EmailSendData {
     To: string[] | null,
@@ -36,7 +35,7 @@ async function sendEmail(
     });
 }
 
-function generateSendData(usersToEmail: string[], locationName: string, currentValue: number, previousValue: number): EmailSendData {
+function generateSendData(usersToEmail: string[], alertForLocation: Alert) : EmailSendData {
     const base_url = "https://data.covidactnow.org/thermometer_screenshot"
     return {
         "To": usersToEmail,
@@ -45,11 +44,11 @@ function generateSendData(usersToEmail: string[], locationName: string, currentV
         "Attachments": null,
         "smartEmailID": `${process.env.SMART_EMAIL_ID}`,
         "data": {
-            "change": (currentValue < previousValue) ? `${base_url}/email_decreased.png`: `${base_url}/email_increased.png`,
-            "location_name": locationName,
-            "img_url": `${base_url}/therm-${currentValue}-${previousValue}.png`,
-            "last_updated": moment.utc().format("MM/DD/YYYY"),
-            "learn_more_link": 'https://covidactnow.org/',
+            "change": (alertForLocation.newLevel < alertForLocation.oldLevel) ? "DECREASED": "INCREASED",
+            "location_name": alertForLocation.locationName,
+            "img_url": `${base_url}/therm-green-yellow-lightmode.png`,
+            "last_updated": alertForLocation.lastUpdated,
+            "location_url": alertForLocation.locationURL,
         },
         "AddRecipientsToList": null,
     }
@@ -86,9 +85,7 @@ function generateSendData(usersToEmail: string[], locationName: string, currentV
     Object.entries(usersToEmail).map(async ([fips, userList]) => {
         const testHTML = `<html> Test Alert Email for ${fips}, ${locationsWithAlerts[fips].locationName} went from ${locationsWithAlerts[fips].oldLevel} to ${locationsWithAlerts[fips].newLevel}</html>`;
         const testText = "Test Email, Please Ignore";
-        await sendEmail(api, generateSendData(
-            userList,locationsWithAlerts[fips].locationName,
-             locationsWithAlerts[fips].newLevel, locationsWithAlerts[fips].oldLevel))
+        await sendEmail(api, generateSendData(userList, locationsWithAlerts[fips]))
             .then(result => {
                 console.log(result)
                 results_array.push(result);
