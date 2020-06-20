@@ -36,6 +36,8 @@ import { Metric, getMetricName } from 'common/metric';
 import { COLORS } from 'common';
 import { formatUtcDate } from 'common/utils';
 
+import ChartContent from 'components/LocationPage/ChartContent';
+
 // Occasionally we need to disable projections for states due to temporary bugs.
 const FUTURE_PROJECTIONS_DISABLED_STATES: string[] = ['HI'];
 
@@ -142,6 +144,61 @@ const ChartsHolder = (props: {
     FUTURE_PROJECTIONS_DISABLED_STATES.includes(props.stateId) &&
     !props.countyId;
 
+  const chartDataForMap = [
+    {
+      chartRef: rtRangeRef,
+      isMobile,
+      data: rtRangeData,
+      projection,
+      shareButtonProps: shareButtonProps,
+      metric: Metric.CASE_GROWTH_RATE,
+      dataSet: 'rtRange',
+      statusText: projection && caseGrowthStatusText(projection),
+    },
+    {
+      chartRef: testPositiveRef,
+      isMobile,
+      data: testPositiveData,
+      projection,
+      shareButtonProps: shareButtonProps,
+      metric: Metric.POSITIVE_TESTS,
+      dataSet: 'testPositiveRate',
+      statusText: projection && positiveTestsStatusText(projection),
+    },
+    {
+      chartRef: icuUtilizationRef,
+      isMobile,
+      data: icuUtilizationData,
+      projection,
+      shareButtonProps: shareButtonProps,
+      metric: Metric.HOSPITAL_USAGE,
+      dataSet: 'icuUtilization',
+      statusText: projection && hospitalOccupancyStatusText(projection),
+    },
+    {
+      chartRef: contactTracingRef,
+      isMobile,
+      data: contactTracingData,
+      projection,
+      shareButtonProps: shareButtonProps,
+      metric: Metric.CONTACT_TRACING,
+      dataSet: 'contractTracers',
+      statusText: projection && contactTracingStatusText(projection),
+    },
+    // {
+    //   chartRef: futureProjectionsRef,
+    //   futureProjectionsDisabled: futureProjectionsDisabled,
+    //   noInterventionProjection: noInterventionProjection,
+    //   isMobile,
+    //   data: contactTracingData,
+    //   projection,
+    //   shareButtonProps: shareButtonProps,
+    //   metric: Metric.CONTACT_TRACING,
+    //   dataSet: 'contractTracers',
+    //   statusText: projection && contactTracingStatusText(projection)
+    // }
+  ];
+
   return (
     <>
       {!projection ? (
@@ -164,117 +221,10 @@ const ChartsHolder = (props: {
               isMobile={isMobile}
             />
             <MainContentInner>
-              <ChartHeaderWrapper>
-                <ChartHeader ref={rtRangeRef}>
-                  {getMetricName(Metric.CASE_GROWTH_RATE)}
-                </ChartHeader>
-                {!isMobile && rtRangeData && (
-                  <ShareButtons
-                    chartIdentifier={Metric.CASE_GROWTH_RATE}
-                    {...shareButtonProps}
-                  />
-                )}
-              </ChartHeaderWrapper>
-              <ChartLocationName>{projection.locationName}</ChartLocationName>
-              <ChartDescription>
-                {caseGrowthStatusText(projection)}
-              </ChartDescription>
-              {isMobile && rtRangeData && (
-                <ShareButtons
-                  chartIdentifier={Metric.CASE_GROWTH_RATE}
-                  {...shareButtonProps}
-                />
-              )}
-              {rtRangeData && (
-                <>
-                  <ChartRt columnData={projection.getDataset('rtRange')} />
-                  <Disclaimer metricName={Metric.CASE_GROWTH_RATE} />
-                </>
-              )}
-              <ChartHeaderWrapper>
-                <ChartHeader ref={testPositiveRef}>
-                  {getMetricName(Metric.POSITIVE_TESTS)}
-                </ChartHeader>
-                {!isMobile && testPositiveData && (
-                  <ShareButtons
-                    chartIdentifier={Metric.POSITIVE_TESTS}
-                    {...shareButtonProps}
-                  />
-                )}
-              </ChartHeaderWrapper>
-              <ChartLocationName>{projection.locationName}</ChartLocationName>
-              <ChartDescription>
-                {positiveTestsStatusText(projection)}
-              </ChartDescription>
-              {isMobile && testPositiveData && (
-                <ShareButtons
-                  chartIdentifier={Metric.POSITIVE_TESTS}
-                  {...shareButtonProps}
-                />
-              )}
-              {testPositiveData && (
-                <>
-                  <ChartPositiveTestRate columnData={testPositiveData} />
-                  <Disclaimer metricName={Metric.POSITIVE_TESTS} />
-                </>
-              )}
-              <ChartHeaderWrapper>
-                <ChartHeader ref={icuUtilizationRef}>
-                  {getMetricName(Metric.HOSPITAL_USAGE)}
-                  <BetaTag>Beta</BetaTag>
-                </ChartHeader>
-                {!isMobile && icuUtilizationData && (
-                  <ShareButtons
-                    chartIdentifier={Metric.HOSPITAL_USAGE}
-                    {...shareButtonProps}
-                  />
-                )}
-              </ChartHeaderWrapper>
-              <ChartLocationName>{projection.locationName}</ChartLocationName>
-              <ChartDescription>
-                {hospitalOccupancyStatusText(projection)}
-              </ChartDescription>
-              {isMobile && icuUtilizationData && (
-                <ShareButtons
-                  chartIdentifier={Metric.HOSPITAL_USAGE}
-                  {...shareButtonProps}
-                />
-              )}
-              {icuUtilizationData && (
-                <>
-                  <ChartICUHeadroom columnData={icuUtilizationData} />
-                  <Disclaimer metricName={Metric.HOSPITAL_USAGE} />
-                </>
-              )}
-              <ChartHeaderWrapper>
-                <ChartHeader ref={contactTracingRef}>
-                  {getMetricName(Metric.CONTACT_TRACING)}
-                  <BetaTag>Beta</BetaTag>
-                </ChartHeader>
-                {!isMobile && contactTracingData && (
-                  <ShareButtons
-                    chartIdentifier={Metric.CONTACT_TRACING}
-                    {...shareButtonProps}
-                  />
-                )}
-              </ChartHeaderWrapper>
-              <ChartLocationName>{projection.locationName}</ChartLocationName>
-              <ChartDescription>
-                {contactTracingStatusText(projection)}
-              </ChartDescription>
-              {isMobile && contactTracingData && (
-                <ShareButtons
-                  chartIdentifier={Metric.CONTACT_TRACING}
-                  {...shareButtonProps}
-                />
-              )}
-              {/* TODO: Use contact tracing data here */}
-              {contactTracingData && (
-                <>
-                  <ChartContactTracing columnData={contactTracingData} />
-                  <Disclaimer metricName={Metric.CONTACT_TRACING} />
-                </>
-              )}
+              {chartDataForMap.map(chartData => (
+                <ChartContent {...chartData} />
+              ))}
+
               <ChartHeaderWrapper>
                 <ChartHeader ref={futureProjectionsRef}>
                   Future Hospitalization (both ICU and non-ICU) Projections
