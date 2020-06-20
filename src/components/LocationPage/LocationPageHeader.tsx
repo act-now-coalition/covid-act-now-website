@@ -20,7 +20,7 @@ import {
   RiskLevelGraphicMobile,
   RiskLevelGraphicDesktop,
   Triangle,
-} from 'components/LocationPage/NewLocationPageHeader.style';
+} from 'components/LocationPage/LocationPageHeader.style';
 import { useEmbed } from 'common/utils/hooks';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { Level } from 'common/level';
@@ -69,8 +69,7 @@ const LocationPageHeading = (props: { projections: Projections }) => {
 
 const noop = () => {};
 
-//TODO(chelsi) delete all old header code + rename this as LocationPageHeader
-const NewLocationPageHeader = (props: {
+const LocationPageHeader = (props: {
   projections: Projections;
   condensed?: Boolean;
   stats: { [key: string]: number | null };
@@ -196,4 +195,4 @@ const NewLocationPageHeader = (props: {
   );
 };
 
-export default NewLocationPageHeader;
+export default LocationPageHeader;
