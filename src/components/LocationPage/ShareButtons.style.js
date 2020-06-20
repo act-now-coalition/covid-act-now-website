@@ -83,6 +83,10 @@ export const SocialShareButton = styled.div`
     width: 80px;
     height: 56px;
   }
+
+  button {
+    align-items: center;
+  }
 `;
 
 export const CopyLinkButton = styled.div`
@@ -108,6 +112,8 @@ export const CopyLinkButton = styled.div`
 export const ClickAwayWrapper = styled.div`
   @media (min-width: 600px) {
     margin-top: -24px;
+    width: fit-content;
+    margin-left: auto;
   }
 `;
 
