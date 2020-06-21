@@ -15,7 +15,7 @@ import { Projection } from 'common/models/Projection';
 import Disclaimer from 'components/Disclaimer/Disclaimer';
 import ClaimStateBlock from 'components/ClaimStateBlock/ClaimStateBlock';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
-import NewLocationPageHeader from 'components/LocationPage/NewLocationPageHeader';
+import LocationPageHeader from 'components/LocationPage/LocationPageHeader';
 import Outcomes from 'components/Outcomes/Outcomes';
 import ShareButtons from 'components/LocationPage/ShareButtons';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -209,7 +209,7 @@ const ChartsHolder = (props: {
       ) : (
         <>
           <ChartContentWrapper>
-            <NewLocationPageHeader
+            <LocationPageHeader
               projections={props.projections}
               stats={getChartSummarys(projection)}
               onRtRangeClick={() => scrollTo(rtRangeRef.current)}
