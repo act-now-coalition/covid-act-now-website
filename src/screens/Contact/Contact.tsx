@@ -130,7 +130,7 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
           <Typography variant="body1" component="p">
             You can contribute to our work{' '}
             <a
-              href="https://multiplier.org/projects/#"
+              href="https://www.gofundme.com/f/qtcuvy-covid-act-now"
               target="_blank"
               rel="noopener noreferrer"
             >
