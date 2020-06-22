@@ -1,42 +1,21 @@
-import React, { Fragment, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 
-import {
-  ChartContentWrapper,
-  MainContentInner,
-  ChartHeader,
-  ChartDescription,
-  ChartLocationName,
-  BetaTag,
-  ChartHeaderWrapper,
-} from './ChartsHolder.style';
+import { ChartContentWrapper, MainContentInner } from './ChartsHolder.style';
 import NoCountyDetail from './NoCountyDetail';
 import { Projections } from 'common/models/Projections';
 import { Projection } from 'common/models/Projection';
-import Disclaimer from 'components/Disclaimer/Disclaimer';
 import ClaimStateBlock from 'components/ClaimStateBlock/ClaimStateBlock';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import LocationPageHeader from 'components/LocationPage/LocationPageHeader';
-import Outcomes from 'components/Outcomes/Outcomes';
-import ShareButtons from 'components/LocationPage/ShareButtons';
+import ChartBlock from 'components/LocationPage/ChartBlock';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import {
-  ChartRt,
-  ChartPositiveTestRate,
-  ChartICUHeadroom,
-  ChartContactTracing,
-  ChartFutureHospitalization,
-} from 'components/Charts';
 import { caseGrowthStatusText } from 'common/metrics/case_growth';
 import { positiveTestsStatusText } from 'common/metrics/positive_rate';
 import { hospitalOccupancyStatusText } from 'common/metrics/hospitalizations';
 import { contactTracingStatusText } from 'common/metrics/contact_tracing';
-import { generateChartDescription } from 'common/metrics/future_projection';
-import { Metric, getMetricName } from 'common/metric';
+import { Metric } from 'common/metric';
 import { COLORS } from 'common';
-import { formatUtcDate } from 'common/utils';
-
-import ChartContent from 'components/LocationPage/ChartContent';
 
 // Occasionally we need to disable projections for states due to temporary bugs.
 const FUTURE_PROJECTIONS_DISABLED_STATES: string[] = ['HI'];
@@ -144,15 +123,15 @@ const ChartsHolder = (props: {
     FUTURE_PROJECTIONS_DISABLED_STATES.includes(props.stateId) &&
     !props.countyId;
 
-  const chartDataForMap = [
+  const chartPropsForMap = [
     {
       chartRef: rtRangeRef,
       isMobile,
       data: rtRangeData,
       projection,
-      shareButtonProps: shareButtonProps,
+      shareButtonProps,
       metric: Metric.CASE_GROWTH_RATE,
-      dataSet: 'rtRange',
+      datasetName: 'rtRange',
       statusText: projection && caseGrowthStatusText(projection),
     },
     {
@@ -160,9 +139,9 @@ const ChartsHolder = (props: {
       isMobile,
       data: testPositiveData,
       projection,
-      shareButtonProps: shareButtonProps,
+      shareButtonProps,
       metric: Metric.POSITIVE_TESTS,
-      dataSet: 'testPositiveRate',
+      datasetName: 'testPositiveRate',
       statusText: projection && positiveTestsStatusText(projection),
     },
     {
@@ -170,9 +149,9 @@ const ChartsHolder = (props: {
       isMobile,
       data: icuUtilizationData,
       projection,
-      shareButtonProps: shareButtonProps,
+      shareButtonProps,
       metric: Metric.HOSPITAL_USAGE,
-      dataSet: 'icuUtilization',
+      datasetName: 'icuUtilization',
       statusText: projection && hospitalOccupancyStatusText(projection),
     },
     {
@@ -180,23 +159,23 @@ const ChartsHolder = (props: {
       isMobile,
       data: contactTracingData,
       projection,
-      shareButtonProps: shareButtonProps,
+      shareButtonProps,
       metric: Metric.CONTACT_TRACING,
-      dataSet: 'contractTracers',
+      datasetName: 'contractTracers',
       statusText: projection && contactTracingStatusText(projection),
     },
-    // {
-    //   chartRef: futureProjectionsRef,
-    //   futureProjectionsDisabled: futureProjectionsDisabled,
-    //   noInterventionProjection: noInterventionProjection,
-    //   isMobile,
-    //   data: contactTracingData,
-    //   projection,
-    //   shareButtonProps: shareButtonProps,
-    //   metric: Metric.CONTACT_TRACING,
-    //   dataSet: 'contractTracers',
-    //   statusText: projection && contactTracingStatusText(projection)
-    // }
+    {
+      chartRef: futureProjectionsRef,
+      futureProjectionsDisabled,
+      noInterventionProjection,
+      isMobile,
+      projection,
+      shareButtonProps,
+      metric: Metric.FUTURE_PROJECTIONS,
+      outcomesProjections,
+      projections: props.projections,
+      outcomesColors,
+    },
   ];
 
   return (
@@ -221,48 +200,9 @@ const ChartsHolder = (props: {
               isMobile={isMobile}
             />
             <MainContentInner>
-              {chartDataForMap.map(chartData => (
-                <ChartContent {...chartData} />
+              {chartPropsForMap.map(chartProps => (
+                <ChartBlock {...chartProps} />
               ))}
-
-              <ChartHeaderWrapper>
-                <ChartHeader ref={futureProjectionsRef}>
-                  Future Hospitalization (both ICU and non-ICU) Projections
-                </ChartHeader>
-                {!isMobile && !futureProjectionsDisabled && (
-                  <ShareButtons
-                    chartIdentifier={Metric.FUTURE_PROJECTIONS}
-                    {...shareButtonProps}
-                  />
-                )}
-              </ChartHeaderWrapper>
-              <ChartLocationName>{projection.locationName}</ChartLocationName>
-              {futureProjectionsDisabled ? (
-                'Future hospitalization projections are not currently available. Check back soon.'
-              ) : (
-                <Fragment>
-                  <ChartDescription>
-                    {generateChartDescription(
-                      projection,
-                      noInterventionProjection,
-                    )}
-                  </ChartDescription>
-                  {isMobile && (
-                    <ShareButtons
-                      chartIdentifier={Metric.FUTURE_PROJECTIONS}
-                      {...shareButtonProps}
-                    />
-                  )}
-                  <ChartFutureHospitalization projections={props.projections} />
-                  <Outcomes
-                    title={`Predicted outcomes by ${formatUtcDate(
-                      props.projections.projected.finalDate,
-                    )} (30 days from now)`}
-                    projections={outcomesProjections}
-                    colors={outcomesColors}
-                  />
-                </Fragment>
-              )}
             </MainContentInner>
             <ClaimStateBlock
               stateId={props.stateId}
