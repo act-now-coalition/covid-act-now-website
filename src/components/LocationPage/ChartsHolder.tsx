@@ -123,60 +123,56 @@ const ChartsHolder = (props: {
     FUTURE_PROJECTIONS_DISABLED_STATES.includes(props.stateId) &&
     !props.countyId;
 
-  const chartPropsForMap = [
-    {
-      chartRef: rtRangeRef,
-      isMobile,
-      data: rtRangeData,
-      projection,
-      shareButtonProps,
-      metric: Metric.CASE_GROWTH_RATE,
-      datasetName: 'rtRange',
-      statusText: projection && caseGrowthStatusText(projection),
-    },
-    {
-      chartRef: testPositiveRef,
-      isMobile,
-      data: testPositiveData,
-      projection,
-      shareButtonProps,
-      metric: Metric.POSITIVE_TESTS,
-      datasetName: 'testPositiveRate',
-      statusText: projection && positiveTestsStatusText(projection),
-    },
-    {
-      chartRef: icuUtilizationRef,
-      isMobile,
-      data: icuUtilizationData,
-      projection,
-      shareButtonProps,
-      metric: Metric.HOSPITAL_USAGE,
-      datasetName: 'icuUtilization',
-      statusText: projection && hospitalOccupancyStatusText(projection),
-    },
-    {
-      chartRef: contactTracingRef,
-      isMobile,
-      data: contactTracingData,
-      projection,
-      shareButtonProps,
-      metric: Metric.CONTACT_TRACING,
-      datasetName: 'contractTracers',
-      statusText: projection && contactTracingStatusText(projection),
-    },
-    {
-      chartRef: futureProjectionsRef,
-      futureProjectionsDisabled,
-      noInterventionProjection,
-      isMobile,
-      projection,
-      shareButtonProps,
-      metric: Metric.FUTURE_PROJECTIONS,
-      outcomesProjections,
-      projections: props.projections,
-      outcomesColors,
-    },
-  ];
+  const chartPropsForMap = projection
+    ? [
+        {
+          chartRef: rtRangeRef,
+          isMobile,
+          data: rtRangeData,
+          shareButtonProps,
+          metric: Metric.CASE_GROWTH_RATE,
+          datasetName: 'rtRange',
+          statusText: projection && caseGrowthStatusText(projection),
+        },
+        {
+          chartRef: testPositiveRef,
+          isMobile,
+          data: testPositiveData,
+          shareButtonProps,
+          metric: Metric.POSITIVE_TESTS,
+          datasetName: 'testPositiveRate',
+          statusText: projection && positiveTestsStatusText(projection),
+        },
+        {
+          chartRef: icuUtilizationRef,
+          isMobile,
+          data: icuUtilizationData,
+          shareButtonProps,
+          metric: Metric.HOSPITAL_USAGE,
+          datasetName: 'icuUtilization',
+          statusText: projection && hospitalOccupancyStatusText(projection),
+        },
+        {
+          chartRef: contactTracingRef,
+          isMobile,
+          data: contactTracingData,
+          shareButtonProps,
+          metric: Metric.CONTACT_TRACING,
+          datasetName: 'contractTracers',
+          statusText: projection && contactTracingStatusText(projection),
+        },
+        {
+          chartRef: futureProjectionsRef,
+          futureProjectionsDisabled,
+          isMobile,
+          shareButtonProps,
+          metric: Metric.FUTURE_PROJECTIONS,
+          outcomesProjections,
+          projections: props.projections,
+          outcomesColors,
+        },
+      ]
+    : [];
 
   return (
     <>
@@ -201,7 +197,12 @@ const ChartsHolder = (props: {
             />
             <MainContentInner>
               {chartPropsForMap.map(chartProps => (
-                <ChartBlock {...chartProps} />
+                <ChartBlock
+                  noInterventionProjection={noInterventionProjection}
+                  projection={projection}
+                  projections={props.projections}
+                  {...chartProps}
+                />
               ))}
             </MainContentInner>
             <ClaimStateBlock

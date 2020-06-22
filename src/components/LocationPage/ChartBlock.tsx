@@ -21,7 +21,6 @@ import {
 import { Metric, getMetricName } from 'common/metric';
 import { formatUtcDate } from 'common/utils';
 import { generateChartDescription } from 'common/metrics/future_projection';
-import { DatasetId } from 'common/models/Projection';
 
 function Chart(props: { getDatasetData: any; metric: number; data: any }) {
   return (
@@ -45,17 +44,17 @@ function Chart(props: { getDatasetData: any; metric: number; data: any }) {
 function ChartBlock(props: {
   chartRef: React.RefObject<HTMLDivElement>;
   isMobile: Boolean;
-  data?: any;
   shareButtonProps: { [key: string]: any };
   projection: Projection;
   metric: number;
-  datasetName: DatasetId;
-  statusText?: string;
+  datasetName?: any;
+  statusText?: string | null;
   futureProjectionsDisabled?: Boolean;
+  outcomesProjections?: { [key: string]: any };
+  outcomesColors?: string[];
   noInterventionProjection: Projection;
   projections: Projections;
-  outcomesProjections?: { [key: string]: any };
-  outcomesColors?: { [key: string]: string };
+  data?: any;
 }) {
   const showBetaTag =
     props.metric === Metric.HOSPITAL_USAGE ||
