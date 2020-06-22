@@ -55,9 +55,7 @@ const DEFAULT_UTILIZATION = 0.75;
  * value for the time being.
  * TODO: Revert this to use the API data once it's more valid
  */
-const CONTACT_TRACER_STATE_OVERRIDES: { [key: string]: number } = {
-  Kentucky: 287, // awaiting for TnT to match
-};
+const CONTACT_TRACER_STATE_OVERRIDES: { [key: string]: number } = {};
 
 /** Parameters that can be provided when constructing a Projection. */
 export interface ProjectionParameters {
