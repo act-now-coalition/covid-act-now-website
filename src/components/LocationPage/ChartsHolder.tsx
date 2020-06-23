@@ -10,15 +10,7 @@ import LocationPageHeader from 'components/LocationPage/LocationPageHeader';
 import ChartBlock from 'components/LocationPage/ChartBlock';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import { caseGrowthStatusText } from 'common/metrics/case_growth';
-import { positiveTestsStatusText } from 'common/metrics/positive_rate';
-import { hospitalOccupancyStatusText } from 'common/metrics/hospitalizations';
-import { contactTracingStatusText } from 'common/metrics/contact_tracing';
 import { Metric } from 'common/metric';
-import { COLORS } from 'common';
-
-// Occasionally we need to disable projections for states due to temporary bugs.
-const FUTURE_PROJECTIONS_DISABLED_STATES: string[] = ['HI'];
 
 // TODO(michael): figure out where this type declaration should live.
 type County = {
@@ -51,7 +43,6 @@ const ChartsHolder = (props: {
   countyId: string;
 }) => {
   const projection: Projection | null = props.projections.primary;
-  const noInterventionProjection: Projection = props.projections.baseline;
 
   const {
     rtRangeData,
@@ -67,6 +58,7 @@ const ChartsHolder = (props: {
   const futureProjectionsRef = useRef<HTMLDivElement>(null);
   const shareBlockRef = useRef<HTMLDivElement>(null);
 
+  // TODO (chelsi): follow up with Michael about moving this hook down
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
@@ -103,12 +95,6 @@ const ChartsHolder = (props: {
     };
   };
 
-  let outcomesProjections = [
-    props.projections.baseline,
-    props.projections.projected,
-  ];
-  let outcomesColors = [COLORS.LIMITED_ACTION, COLORS.PROJECTED];
-
   const shareButtonProps = {
     chartId: props.chartId,
     stateId: props.stateId,
@@ -119,10 +105,7 @@ const ChartsHolder = (props: {
     isMobile,
   };
 
-  const futureProjectionsDisabled =
-    FUTURE_PROJECTIONS_DISABLED_STATES.includes(props.stateId) &&
-    !props.countyId;
-
+  //TODO (chelsi): make it so we dont need to pre-generate props array (see comment in PR #970)
   const chartPropsForMap = projection
     ? [
         {
@@ -131,8 +114,6 @@ const ChartsHolder = (props: {
           data: rtRangeData,
           shareButtonProps,
           metric: Metric.CASE_GROWTH_RATE,
-          datasetName: 'rtRange',
-          statusText: projection && caseGrowthStatusText(projection),
         },
         {
           chartRef: testPositiveRef,
@@ -140,8 +121,6 @@ const ChartsHolder = (props: {
           data: testPositiveData,
           shareButtonProps,
           metric: Metric.POSITIVE_TESTS,
-          datasetName: 'testPositiveRate',
-          statusText: projection && positiveTestsStatusText(projection),
         },
         {
           chartRef: icuUtilizationRef,
@@ -149,8 +128,6 @@ const ChartsHolder = (props: {
           data: icuUtilizationData,
           shareButtonProps,
           metric: Metric.HOSPITAL_USAGE,
-          datasetName: 'icuUtilization',
-          statusText: projection && hospitalOccupancyStatusText(projection),
         },
         {
           chartRef: contactTracingRef,
@@ -158,18 +135,14 @@ const ChartsHolder = (props: {
           data: contactTracingData,
           shareButtonProps,
           metric: Metric.CONTACT_TRACING,
-          datasetName: 'contractTracers',
-          statusText: projection && contactTracingStatusText(projection),
         },
         {
           chartRef: futureProjectionsRef,
-          futureProjectionsDisabled,
           isMobile,
           shareButtonProps,
           metric: Metric.FUTURE_PROJECTIONS,
-          outcomesProjections,
           projections: props.projections,
-          outcomesColors,
+          countyId: props.countyId,
         },
       ]
     : [];
@@ -198,10 +171,9 @@ const ChartsHolder = (props: {
             <MainContentInner>
               {chartPropsForMap.map(chartProps => (
                 <ChartBlock
-                  noInterventionProjection={noInterventionProjection}
-                  projection={projection}
                   projections={props.projections}
                   {...chartProps}
+                  stateId={props.stateId}
                 />
               ))}
             </MainContentInner>

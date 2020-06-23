@@ -11,54 +11,46 @@ import { Projection } from 'common/models/Projection';
 import Disclaimer from 'components/Disclaimer/Disclaimer';
 import Outcomes from 'components/Outcomes/Outcomes';
 import ShareButtons from 'components/LocationPage/ShareButtons';
-import {
-  ChartRt,
-  ChartPositiveTestRate,
-  ChartICUHeadroom,
-  ChartContactTracing,
-  ChartFutureHospitalization,
-} from 'components/Charts';
-import { Metric, getMetricName } from 'common/metric';
+import { Metric, getMetricName, getMetricStatusText } from 'common/metric';
 import { formatUtcDate } from 'common/utils';
 import { generateChartDescription } from 'common/metrics/future_projection';
+import MetricChart from 'components/Charts/MetricChart';
+import { COLORS } from 'common';
 
-function Chart(props: { getDatasetData: any; metric: number; data: any }) {
-  return (
-    <Fragment>
-      {props.data && props.metric === Metric.CASE_GROWTH_RATE && (
-        <ChartRt columnData={props.getDatasetData} />
-      )}
-      {props.data && props.metric === Metric.POSITIVE_TESTS && (
-        <ChartPositiveTestRate columnData={props.data} />
-      )}
-      {props.data && props.metric === Metric.HOSPITAL_USAGE && (
-        <ChartICUHeadroom columnData={props.data} />
-      )}
-      {props.data && props.metric === Metric.CONTACT_TRACING && (
-        <ChartContactTracing columnData={props.data} />
-      )}
-    </Fragment>
-  );
-}
+//TODO (chelsi): further unify mapped charts with future projections chart
+//TODO (chelsi): clean out Outcomes component and only pass in what is still used
+//TODO (chelsi): add hasMetric() helper to Projections to get rid of the check for props.data
+
+// Occasionally we need to disable projections for states due to temporary bugs.
+const FUTURE_PROJECTIONS_DISABLED_STATES: string[] = ['HI'];
 
 function ChartBlock(props: {
   chartRef: React.RefObject<HTMLDivElement>;
   isMobile: Boolean;
   shareButtonProps: { [key: string]: any };
-  projection: Projection;
-  metric: number;
-  datasetName?: any;
-  statusText?: string | null;
-  futureProjectionsDisabled?: Boolean;
-  outcomesProjections?: { [key: string]: any };
-  outcomesColors?: string[];
-  noInterventionProjection: Projection;
+  metric: Metric;
   projections: Projections;
   data?: any;
+  stateId: string;
+  countyId?: string;
 }) {
+  const projection: Projection = props.projections.primary;
+  const noInterventionProjection = props.projections.baseline;
+
   const showBetaTag =
     props.metric === Metric.HOSPITAL_USAGE ||
     props.metric === Metric.CONTACT_TRACING;
+
+  let outcomesProjections = [
+    props.projections.baseline,
+    props.projections.projected,
+  ];
+
+  let outcomesColors = [COLORS.LIMITED_ACTION, COLORS.PROJECTED];
+
+  const futureProjectionsDisabled =
+    FUTURE_PROJECTIONS_DISABLED_STATES.includes(props.stateId) &&
+    !props.countyId;
 
   return (
     <Fragment>
@@ -76,8 +68,10 @@ function ChartBlock(props: {
               />
             )}
           </ChartHeaderWrapper>
-          <ChartLocationName>{props.projection.locationName}</ChartLocationName>
-          <ChartDescription>{props.statusText}</ChartDescription>
+          <ChartLocationName>{projection.locationName}</ChartLocationName>
+          <ChartDescription>
+            {getMetricStatusText(props.metric, projection)}
+          </ChartDescription>
           {props.isMobile && props.data && (
             <ShareButtons
               chartIdentifier={props.metric}
@@ -86,10 +80,9 @@ function ChartBlock(props: {
           )}
           {props.data && (
             <>
-              <Chart
-                data={props.data}
+              <MetricChart
                 metric={props.metric}
-                getDatasetData={props.projection.getDataset(props.datasetName)}
+                projections={props.projections}
               />
               <Disclaimer metricName={props.metric} />
             </>
@@ -102,23 +95,20 @@ function ChartBlock(props: {
             <ChartHeader ref={props.chartRef}>
               Future Hospitalization (both ICU and non-ICU) Projections
             </ChartHeader>
-            {!props.isMobile && !props.futureProjectionsDisabled && (
+            {!props.isMobile && !futureProjectionsDisabled && (
               <ShareButtons
                 chartIdentifier={props.metric}
                 {...props.shareButtonProps}
               />
             )}
           </ChartHeaderWrapper>
-          <ChartLocationName>{props.projection.locationName}</ChartLocationName>
-          {props.futureProjectionsDisabled ? (
+          <ChartLocationName>{projection.locationName}</ChartLocationName>
+          {futureProjectionsDisabled ? (
             'Future hospitalization projections are not currently available. Check back soon.'
           ) : (
             <Fragment>
               <ChartDescription>
-                {generateChartDescription(
-                  props.projection,
-                  props.noInterventionProjection,
-                )}
+                {generateChartDescription(projection, noInterventionProjection)}
               </ChartDescription>
               {props.isMobile && (
                 <ShareButtons
@@ -126,13 +116,16 @@ function ChartBlock(props: {
                   {...props.shareButtonProps}
                 />
               )}
-              <ChartFutureHospitalization projections={props.projections} />
+              <MetricChart
+                metric={props.metric}
+                projections={props.projections}
+              />
               <Outcomes
                 title={`Predicted outcomes by ${formatUtcDate(
                   props.projections.projected.finalDate,
                 )} (30 days from now)`}
-                projections={props.outcomesProjections}
-                colors={props.outcomesColors}
+                projections={outcomesProjections}
+                colors={outcomesColors}
               />
             </Fragment>
           )}
