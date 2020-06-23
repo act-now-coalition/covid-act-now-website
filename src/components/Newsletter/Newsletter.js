@@ -1,9 +1,11 @@
+import firebase from 'firebase';
 import React from 'react';
 import { StyledNewsletter, InputHolder } from './Newsletter.style';
 import Chip from '@material-ui/core/Chip';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import { getLocationNames } from 'common/locations';
+import { getFirebase } from 'common/firebase';
 
 class Newsletter extends React.Component {
   constructor() {
@@ -18,10 +20,14 @@ class Newsletter extends React.Component {
     this.handleSelectChange = this.handleSelectChange.bind(this);
   }
 
-  submitForm(e) {
+  async submitForm(e) {
     e.preventDefault();
     // can't submit the form without the email entered
     if (this.state.email) {
+      // TODO(michael): We can stop sending alert locations to Campaign Monitor
+      // once we've migrated everybody over to Firestore.
+      await this.subscribeToAlerts();
+
       window.gtag('event', 'subscribe', {
         event_category: 'engagement',
       });
@@ -44,6 +50,25 @@ class Newsletter extends React.Component {
           console.log(data);
         });
     }
+  }
+
+  async subscribeToAlerts() {
+    const email = this.emailInput.value;
+    const locations = this.alertsSelectionArray.map(
+      item => item.full_fips_code,
+    );
+    const db = getFirebase().firestore();
+    // Merge the locations with any existing ones since that's _probably_ what the user wants.
+    await db
+      .collection('alerts-subscriptions')
+      .doc(email)
+      .set(
+        {
+          locations: firebase.firestore.FieldValue.arrayUnion(...locations),
+          subscribedAt: firebase.firestore.FieldValue.serverTimestamp(),
+        },
+        { merge: true },
+      );
   }
 
   handleSelectChange = selectedOption => {
