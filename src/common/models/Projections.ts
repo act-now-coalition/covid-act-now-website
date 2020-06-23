@@ -2,10 +2,11 @@ import { Projection } from './Projection';
 import { INTERVENTIONS } from '../interventions';
 import { STATES } from '..';
 import { RegionSummaryWithTimeseriesMap } from 'api';
-import { Metric, getLevel } from 'common/metric';
+import { Metric, getLevel, ALL_VALUE_METRICS } from 'common/metric';
 import { Level } from 'common/level';
 import { LEVEL_COLOR } from 'common/colors';
 import { fail } from 'common/utils';
+import { LocationSummary, MetricSummary } from 'common/location_summaries';
 
 /**
  * The model for the complete set of projections and related information
@@ -77,6 +78,21 @@ export class Projections {
 
   get primary() {
     return this.projected;
+  }
+
+  get summary(): LocationSummary {
+    const metrics = {} as { [metric in Metric]: MetricSummary };
+    for (const metric of ALL_VALUE_METRICS) {
+      metrics[metric] = {
+        value: this.getMetricValue(metric),
+        level: this.getMetricLevel(metric),
+      };
+    }
+
+    return {
+      level: this.getAlarmLevel(),
+      metrics,
+    };
   }
 
   getMetricValue(metric: Metric): number | null {

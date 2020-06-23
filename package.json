@@ -62,7 +62,7 @@
     "prettier": "prettier --check '**/*.{css,scss,js,ts,tsx}'",
     "prettier-fix": "prettier --write '**/*.{css,scss,js,ts,tsx}'",
     "update-api-types": "ts-node-script scripts/update_api_types.ts",
-    "update-calculated-interventions": "ts-node-script -r tsconfig-paths/register scripts/calculated_interventions.ts",
+    "update-location-summaries": "ts-node-script -r tsconfig-paths/register scripts/update_location_summaries.ts",
     "create-lists-to-email": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/create_lists_to_email.ts",
     "generate-index-pages": "ts-node-script -r tsconfig-paths/register scripts/generate_index_pages.ts",
     "generate-share-images": "ts-node-script -r tsconfig-paths/register scripts/generate_share_images/index.ts",

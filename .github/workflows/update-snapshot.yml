@@ -33,7 +33,7 @@ jobs:
       # Update snapshot URL and regenerate map colors.
       - run: yarn install
       - run: 'echo "{ \"data_url\": \"https://data.covidactnow.org/snapshot/${{env.SNAPSHOT_ID}}/\" }" | python -mjson.tool > src/assets/data/data_url.json'
-      - run: yarn update-calculated-interventions
+      - run: yarn update-location-summaries
 
       # Generate Share Images and Upload to S3
       - run: yarn serve -l 3000 &
@@ -60,13 +60,13 @@ jobs:
           commit-message: |
             Update to data snapshot ${{env.SNAPSHOT_ID}}.
 
-            * Regenerate calculated interventions files.
+            * Regenerate summary files.
             * Point at updated share images.
           title: Update to data snapshot ${{env.SNAPSHOT_ID}}
           body: |
             Update to data snapshot ${{env.SNAPSHOT_ID}}.
 
-            * Regenerate calculated interventions files.
+            * Regenerate summary files.
             * Point at updated share images.
 
       - name: Slack notification
