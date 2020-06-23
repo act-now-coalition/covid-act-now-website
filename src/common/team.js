@@ -144,11 +144,6 @@ export default {
       link: 'https://www.linkedin.com/in/ckelly90/',
     },
     {
-      name: 'Claudia Meng',
-      title: 'Student at Yale University',
-      link: 'https://www.linkedin.com/in/claudia-meng/',
-    },
-    {
       name: 'Colleen Murphy',
       title: 'Freelance designer',
       link: 'https://www.linkedin.com/in/colleenmurphyco',
@@ -175,7 +170,7 @@ export default {
     },
     {
       name: 'Erin Kelly',
-      title: 'Student at Middlebury College',
+      title: 'Student, Middlebury College',
       link: 'https://www.linkedin.com/in/erin-kelly-643645179/',
     },
     {
@@ -220,7 +215,7 @@ export default {
     },
     {
       name: 'Michael Carlson',
-      title: 'Medical Student at Western University of Health Sciences',
+      title: 'Medical Student, Western University of Health Sciences',
       link: 'https://www.linkedin.com/in/michael-carlson-200995193/',
     },
     {
@@ -250,7 +245,7 @@ export default {
     },
     {
       name: 'Ryan Fuentes',
-      title: 'Student at Yale University',
+      title: 'Student, Yale University',
       link: 'https://www.linkedin.com/in/ryan-fuentes-0944301a7/',
     },
     {
@@ -274,11 +269,6 @@ export default {
       link: 'https://www.linkedin.com/in/stefan-turkheimer-06466a5/',
     },
     {
-      name: 'Steve Hassey',
-      title: 'Social Media Manager',
-      link: 'https://www.linkedin.com/in/steve-hassey-675b629b/',
-    },
-    {
       name: 'Susan Goldblatt',
       title: 'Ex-Google Software Engineer',
       link: 'https://www.linkedin.com/in/susan-goldblatt/',
@@ -290,18 +280,13 @@ export default {
     },
     {
       name: 'Will Pate',
-      title: 'Account Executive at Google',
-      link: 'https://www.linkedin.com/in/willpate/',
+      title: 'Campaign consultant',
+      link: 'https://www.linkedin.com/in/william-pate-b143a813b/',
     },
     {
       name: 'Youyoung Lee',
       title: 'Senior Manager, Media Partnerships at Reddit',
       link: 'https://www.linkedin.com/in/youyounglee',
-    },
-    {
-      name: 'Yvonne Hung',
-      title: 'Founder of Studio Nonymous',
-      link: 'https://www.linkedin.com/in/hungyvonne/',
     },
   ],
   teamAlumni: [
@@ -322,7 +307,7 @@ export default {
     },
     {
       name: 'Anna Blech',
-      title: 'Icahn School of Medicine at Mount Sinai',
+      title: 'Student, Icahn School of Medicine at Mount Sinai',
       link: 'https://www.linkedin.com/in/anna-blech-121277138',
     },
     {
@@ -346,10 +331,20 @@ export default {
       link: 'https://www.linkedin.com/in/cillianomongain/',
     },
     {
+      name: 'Claudia Meng',
+      title: 'Student, Yale University',
+      link: 'https://www.linkedin.com/in/claudia-meng/',
+    },
+    {
       name: 'Colin Carlson',
       title: 'Data Scientist',
       link:
         'https://twitter.com/wormmaps?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor',
+    },
+    {
+      name: 'Collin Jackson',
+      title: 'Staff Software Engineer at Google',
+      link: 'https://www.linkedin.com/in/collinjackson/',
     },
     {
       name: 'Dan Schlosser',
@@ -365,6 +360,11 @@ export default {
       name: 'Eric Carlson',
       title: 'Staff Data Scientist, Grand Rounds',
       link: 'https://www.linkedin.com/in/eric-c-carlson/',
+    },
+    {
+      name: 'Eric Schles',
+      title: 'Senior Data Scientist at PepsiCo',
+      link: 'https://www.linkedin.com/in/ericschles/',
     },
     {
       name: 'Eusden Shing',
@@ -412,11 +412,6 @@ export default {
       link: 'https://www.linkedin.com/in/asciimike/',
     },
     {
-      name: 'Myles Borins',
-      title: 'Staff Product Manager at Github',
-      link: 'https://www.linkedin.com/in/mylesborins/',
-    },
-    {
       name: 'Rachel RoseFigura',
       title: 'Software Engineer at Uber',
       link: 'https://www.linkedin.com/in/rachelrosefigura/',
@@ -457,6 +452,11 @@ export default {
       link: 'https://www.linkedin.com/in/takemoreaction/',
     },
     {
+      name: 'Steve Hassey',
+      title: 'Social Media Manager',
+      link: 'https://www.linkedin.com/in/steve-hassey-675b629b/',
+    },
+    {
       name: 'Trae Wallace',
       title: 'Head of Data at Talus Analytics',
       link: 'https://www.linkedin.com/in/traewallace/',
@@ -475,6 +475,11 @@ export default {
       name: 'Xinyu Zhang',
       title: 'Data Scientist at Grand Rounds',
       link: 'https://www.linkedin.com/in/xinyuzhang-cathy/',
+    },
+    {
+      name: 'Yvonne Hung',
+      title: 'Founder of Studio Nonymous',
+      link: 'https://www.linkedin.com/in/hungyvonne/',
     },
     {
       name: 'Zack Rosen',
