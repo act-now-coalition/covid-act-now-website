@@ -63,7 +63,7 @@ export function stateColor(stateCode) {
 
 export function countyColor(
   countyFipsCode,
-  defaultColor = COLOR_MAP.GRAY_LIGHT,
+  defaultColor = COLOR_MAP.GRAY.LIGHT,
 ) {
   const summary = countySummary(countyFipsCode);
   return summary ? LEVEL_COLOR[summary.level] : defaultColor;
