@@ -96,7 +96,7 @@ class Newsletter extends React.Component {
             aria-label="state"
             value={stateId || ''}
             id="fieldjrdtwi"
-            maxlength="200"
+            maxLength="200"
             name="cm-f-jrdtwi"
           />
           <input
@@ -117,7 +117,7 @@ class Newsletter extends React.Component {
               onChange={() => this.setState({ checked: !this.state.checked })}
               checked={this.state.checked}
             />
-            <label for="checkbox">
+            <label htmlFor="checkbox">
               {' '}
               Also send me <b>daily news</b> with the latest data and scientific
               findings on COVID{' '}
@@ -170,7 +170,7 @@ class Newsletter extends React.Component {
               autoComplete="Email"
               aria-label="Email"
               placeholder="Enter your email address"
-              class="js-cm-email-input qa-input-email"
+              className="js-cm-email-input qa-input-email"
               id="fieldEmail"
               maxlength="200"
               name="cm-yddtsd-yddtsd"
