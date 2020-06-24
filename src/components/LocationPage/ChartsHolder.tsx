@@ -171,6 +171,7 @@ const ChartsHolder = (props: {
             <MainContentInner>
               {chartPropsForMap.map(chartProps => (
                 <ChartBlock
+                  key={chartProps.metric}
                   projections={props.projections}
                   {...chartProps}
                   stateId={props.stateId}
