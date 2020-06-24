@@ -3,18 +3,13 @@ import '../../App.css'; /* optional for styling like the :hover pseudo-class */
 import { useHistory } from 'react-router-dom';
 import { REVERSED_STATES } from 'common';
 import { Level } from 'common/level';
-import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { Legend, LegendItem } from './Legend';
 import USACountyMap from './USACountyMap';
 import { MAP_FILTERS } from '../../screens/LocationPage/Enums/MapFilterEnums';
 import ReactTooltip from 'react-tooltip';
 import { MapInstructions, MobileLineBreak } from './Map.style';
-
-// TODO(@pablo): We might want to move this to LOCATION_SUMMARY_LEVELS
-const LEGEND_LOW = 'On track to contain COVID';
-const LEGEND_MEDIUM = 'Controlled disease growth';
-const LEGEND_MEDIUM_HIGH = 'At risk';
-const LEGEND_HIGH = 'Active or imminent outbreak';
+import { MAP_LEGEND } from 'common/metrics/location_summary';
+import * as StyleLegend from 'components/Map/Legend.style';
 
 function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
   const history = useHistory();
@@ -43,26 +38,30 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
     <div className="Map">
       {!hideLegend && (
         <Legend>
-          <LegendItem
-            key={'legend-4'}
-            title={LEGEND_HIGH}
-            color={LOCATION_SUMMARY_LEVELS[Level.HIGH].color}
-          />
-          <LegendItem
-            key={'legend-3'}
-            title={LEGEND_MEDIUM_HIGH}
-            color={LOCATION_SUMMARY_LEVELS[Level.MEDIUM_HIGH].color}
-          />
-          <LegendItem
-            key={'legend-2'}
-            title={LEGEND_MEDIUM}
-            color={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].color}
-          />
-          <LegendItem
-            key={'legend-1'}
-            title={LEGEND_LOW}
-            color={LOCATION_SUMMARY_LEVELS[Level.LOW].color}
-          />
+          <StyleLegend.LegendItemContainer key="legend-4">
+            <LegendItem
+              title={MAP_LEGEND[Level.HIGH].legend}
+              color={MAP_LEGEND[Level.HIGH].color}
+            />
+          </StyleLegend.LegendItemContainer>
+          <StyleLegend.LegendItemContainer key="legend-3">
+            <LegendItem
+              title={MAP_LEGEND[Level.MEDIUM_HIGH].legend}
+              color={MAP_LEGEND[Level.MEDIUM_HIGH].color}
+            />
+          </StyleLegend.LegendItemContainer>
+          <StyleLegend.LegendItemContainer key="legend-2">
+            <LegendItem
+              title={MAP_LEGEND[Level.MEDIUM].legend}
+              color={MAP_LEGEND[Level.MEDIUM].color}
+            />
+          </StyleLegend.LegendItemContainer>
+          <StyleLegend.LegendItemContainer key="legend-1">
+            <LegendItem
+              title={MAP_LEGEND[Level.LOW].legend}
+              color={MAP_LEGEND[Level.LOW].color}
+            />
+          </StyleLegend.LegendItemContainer>
         </Legend>
       )}
       <div className="us-state-map">

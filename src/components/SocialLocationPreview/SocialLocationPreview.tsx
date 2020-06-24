@@ -21,6 +21,7 @@ import Map from 'components/Map/Map';
 import { COLOR_MAP } from 'common/colors';
 import SummaryStats from 'components/SummaryStats/SummaryStats';
 import { Legend, LegendItem } from 'components/Map/Legend';
+import * as StyleLegend from 'components/Map/Legend.style';
 
 const SocialLocationPreview = (props: {
   projections?: Projections;
@@ -45,26 +46,30 @@ const SocialLocationPreview = (props: {
             <MapHeaderHeader>America’s COVID warning system</MapHeaderHeader>
             <HeaderSubhead>Risk levels</HeaderSubhead>
             <Legend condensed={true}>
-              <LegendItem
-                key={'legend-4'}
-                title={LOCATION_SUMMARY_LEVELS[Level.HIGH].name}
-                color={LOCATION_SUMMARY_LEVELS[Level.HIGH].color}
-              />
-              <LegendItem
-                key={'legend-3'}
-                title={LOCATION_SUMMARY_LEVELS[Level.MEDIUM_HIGH].name}
-                color={LOCATION_SUMMARY_LEVELS[Level.MEDIUM_HIGH].color}
-              />
-              <LegendItem
-                key={'legend-2'}
-                title={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].name}
-                color={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].color}
-              />
-              <LegendItem
-                key={'legend-1'}
-                title={LOCATION_SUMMARY_LEVELS[Level.LOW].name}
-                color={LOCATION_SUMMARY_LEVELS[Level.LOW].color}
-              />
+              <StyleLegend.LegendItemContainer key={'legend-4'}>
+                <LegendItem
+                  title={LOCATION_SUMMARY_LEVELS[Level.HIGH].name}
+                  color={LOCATION_SUMMARY_LEVELS[Level.HIGH].color}
+                />
+              </StyleLegend.LegendItemContainer>
+              <StyleLegend.LegendItemContainer key={'legend-3'}>
+                <LegendItem
+                  title={LOCATION_SUMMARY_LEVELS[Level.MEDIUM_HIGH].name}
+                  color={LOCATION_SUMMARY_LEVELS[Level.MEDIUM_HIGH].color}
+                />
+              </StyleLegend.LegendItemContainer>
+              <StyleLegend.LegendItemContainer key={'legend-2'}>
+                <LegendItem
+                  title={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].name}
+                  color={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].color}
+                />
+              </StyleLegend.LegendItemContainer>
+              <StyleLegend.LegendItemContainer key={'legend-1'}>
+                <LegendItem
+                  title={LOCATION_SUMMARY_LEVELS[Level.LOW].name}
+                  color={LOCATION_SUMMARY_LEVELS[Level.LOW].color}
+                />
+              </StyleLegend.LegendItemContainer>
             </Legend>
           </HeaderText>
         </PreviewHeader>

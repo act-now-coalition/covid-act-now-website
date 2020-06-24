@@ -18,6 +18,7 @@ import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import LocationPageHeader from 'components/LocationPage/LocationPageHeader';
 import Outcomes from 'components/Outcomes/Outcomes';
 import ShareButtons from 'components/LocationPage/ShareButtons';
+import LocationMap from 'components/LocationMap';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import {
@@ -40,7 +41,7 @@ import { formatUtcDate } from 'common/utils';
 const FUTURE_PROJECTIONS_DISABLED_STATES: string[] = ['HI'];
 
 // TODO(michael): figure out where this type declaration should live.
-type County = {
+export type County = {
   county: string;
   county_url_name: string;
   county_fips_code: string;
@@ -68,6 +69,8 @@ const ChartsHolder = (props: {
   county: County;
   chartId: string;
   countyId: string;
+  selectedCounty: County;
+  setSelectedCounty: (input: string) => {};
 }) => {
   const projection: Projection | null = props.projections.primary;
   const noInterventionProjection: Projection = props.projections.baseline;
@@ -164,6 +167,11 @@ const ChartsHolder = (props: {
               isMobile={isMobile}
             />
             <MainContentInner>
+              <LocationMap
+                stateId={props.stateId}
+                selectedCounty={props.selectedCounty}
+                setSelectedCounty={props.setSelectedCounty}
+              />
               <ChartHeaderWrapper>
                 <ChartHeader ref={rtRangeRef}>
                   {getMetricName(Metric.CASE_GROWTH_RATE)}

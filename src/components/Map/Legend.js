@@ -5,7 +5,6 @@ import {
   LegendTitle,
   LegendContainer,
   LegendItemHeader,
-  LegendItemContainer,
   LegendWrapper,
 } from './Legend.style';
 
@@ -22,14 +21,9 @@ export function Legend(props) {
   );
 }
 
-export function LegendItem(props) {
-  const { title, color, condensed } = props;
-  return (
-    <LegendItemContainer condensed={condensed}>
-      <LegendItemHeader>
-        <ColorBox color={color} />
-        {title}
-      </LegendItemHeader>
-    </LegendItemContainer>
-  );
-}
+export const LegendItem = ({ title, color }) => (
+  <LegendItemHeader>
+    <ColorBox color={color} />
+    {title}
+  </LegendItemHeader>
+);

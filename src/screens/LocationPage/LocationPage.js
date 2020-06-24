@@ -68,6 +68,8 @@ function LocationPage() {
           county={countyOption}
           chartId={chartId}
           countyId={countyId}
+          selectedCounty={selectedCounty}
+          setSelectedCounty={setSelectedCounty}
         />
         <MiniMap
           projections={projections}

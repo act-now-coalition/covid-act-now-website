@@ -1,5 +1,6 @@
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
+import { LEVEL_COLOR } from 'common/colors';
 
 // Note: These names are used on SocialLocationPreview
 const LOW_NAME = 'Low';
@@ -7,6 +8,29 @@ const MEDIUM_NAME = 'Medium';
 const MEDIUM_HIGH_NAME = 'High';
 const HIGH_NAME = 'Critical';
 const UNKNOWN = 'Unknown';
+
+export const MAP_LEGEND = {
+  [Level.LOW]: {
+    color: LEVEL_COLOR[Level.LOW],
+    legend: 'On track to contain COVID',
+  },
+  [Level.MEDIUM]: {
+    color: LEVEL_COLOR[Level.MEDIUM],
+    legend: 'Controlled disease growth',
+  },
+  [Level.MEDIUM_HIGH]: {
+    color: LEVEL_COLOR[Level.MEDIUM_HIGH],
+    legend: 'At risk',
+  },
+  [Level.HIGH]: {
+    color: LEVEL_COLOR[Level.HIGH],
+    legend: 'Active or imminent outbreak',
+  },
+  [Level.UNKNOWN]: {
+    color: LEVEL_COLOR[Level.UNKNOWN],
+    legend: 'Unknown',
+  },
+};
 
 export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
   [Level.LOW]: {
