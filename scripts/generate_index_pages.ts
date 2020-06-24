@@ -18,9 +18,11 @@ import * as urls from '../src/common/urls';
 
 // We don't care about the values here, but this is a cheap way to determine all
 // of the counties we have any data for and are therefore share-able.
-import CalculatedCountyInterventionJSON from '../src/assets/data/calculated_county_interventions.json';
+import { LocationSummariesByFIPS } from '../src/common/location_summaries';
 import { ALL_METRICS, getMetricName } from '../src/common/metric';
-const COUNTIES = Object.keys(CalculatedCountyInterventionJSON);
+const COUNTIES = Object.keys(LocationSummariesByFIPS).filter(
+  fips => fips.length === 5,
+);
 
 const BLACKLISTED_COUNTIES = [
   '11001', // Washington, DC - We treat it as a state, not a county.

@@ -1,43 +1,16 @@
-import React, { Fragment, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 
-import {
-  ChartContentWrapper,
-  MainContentInner,
-  ChartHeader,
-  ChartDescription,
-  ChartLocationName,
-  BetaTag,
-  ChartHeaderWrapper,
-} from './ChartsHolder.style';
+import { ChartContentWrapper, MainContentInner } from './ChartsHolder.style';
 import NoCountyDetail from './NoCountyDetail';
 import { Projections } from 'common/models/Projections';
 import { Projection } from 'common/models/Projection';
-import Disclaimer from 'components/Disclaimer/Disclaimer';
 import ClaimStateBlock from 'components/ClaimStateBlock/ClaimStateBlock';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import LocationPageHeader from 'components/LocationPage/LocationPageHeader';
-import Outcomes from 'components/Outcomes/Outcomes';
-import ShareButtons from 'components/LocationPage/ShareButtons';
+import ChartBlock from 'components/LocationPage/ChartBlock';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import {
-  ChartRt,
-  ChartPositiveTestRate,
-  ChartICUHeadroom,
-  ChartContactTracing,
-  ChartFutureHospitalization,
-} from 'components/Charts';
-import { caseGrowthStatusText } from 'common/metrics/case_growth';
-import { positiveTestsStatusText } from 'common/metrics/positive_rate';
-import { hospitalOccupancyStatusText } from 'common/metrics/hospitalizations';
-import { contactTracingStatusText } from 'common/metrics/contact_tracing';
-import { generateChartDescription } from 'common/metrics/future_projection';
-import { Metric, getMetricName } from 'common/metric';
-import { COLORS } from 'common';
-import { formatUtcDate } from 'common/utils';
-
-// Occasionally we need to disable projections for states due to temporary bugs.
-const FUTURE_PROJECTIONS_DISABLED_STATES: string[] = ['HI'];
+import { Metric } from 'common/metric';
 
 // TODO(michael): figure out where this type declaration should live.
 type County = {
@@ -70,7 +43,6 @@ const ChartsHolder = (props: {
   countyId: string;
 }) => {
   const projection: Projection | null = props.projections.primary;
-  const noInterventionProjection: Projection = props.projections.baseline;
 
   const {
     rtRangeData,
@@ -86,6 +58,7 @@ const ChartsHolder = (props: {
   const futureProjectionsRef = useRef<HTMLDivElement>(null);
   const shareBlockRef = useRef<HTMLDivElement>(null);
 
+  // TODO (chelsi): follow up with Michael about moving this hook down
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
@@ -122,12 +95,6 @@ const ChartsHolder = (props: {
     };
   };
 
-  let outcomesProjections = [
-    props.projections.baseline,
-    props.projections.projected,
-  ];
-  let outcomesColors = [COLORS.LIMITED_ACTION, COLORS.PROJECTED];
-
   const shareButtonProps = {
     chartId: props.chartId,
     stateId: props.stateId,
@@ -138,9 +105,47 @@ const ChartsHolder = (props: {
     isMobile,
   };
 
-  const futureProjectionsDisabled =
-    FUTURE_PROJECTIONS_DISABLED_STATES.includes(props.stateId) &&
-    !props.countyId;
+  //TODO (chelsi): make it so we dont need to pre-generate props array (see comment in PR #970)
+  const chartPropsForMap = projection
+    ? [
+        {
+          chartRef: rtRangeRef,
+          isMobile,
+          data: rtRangeData,
+          shareButtonProps,
+          metric: Metric.CASE_GROWTH_RATE,
+        },
+        {
+          chartRef: testPositiveRef,
+          isMobile,
+          data: testPositiveData,
+          shareButtonProps,
+          metric: Metric.POSITIVE_TESTS,
+        },
+        {
+          chartRef: icuUtilizationRef,
+          isMobile,
+          data: icuUtilizationData,
+          shareButtonProps,
+          metric: Metric.HOSPITAL_USAGE,
+        },
+        {
+          chartRef: contactTracingRef,
+          isMobile,
+          data: contactTracingData,
+          shareButtonProps,
+          metric: Metric.CONTACT_TRACING,
+        },
+        {
+          chartRef: futureProjectionsRef,
+          isMobile,
+          shareButtonProps,
+          metric: Metric.FUTURE_PROJECTIONS,
+          projections: props.projections,
+          countyId: props.countyId,
+        },
+      ]
+    : [];
 
   return (
     <>
@@ -164,155 +169,14 @@ const ChartsHolder = (props: {
               isMobile={isMobile}
             />
             <MainContentInner>
-              <ChartHeaderWrapper>
-                <ChartHeader ref={rtRangeRef}>
-                  {getMetricName(Metric.CASE_GROWTH_RATE)}
-                </ChartHeader>
-                {!isMobile && rtRangeData && (
-                  <ShareButtons
-                    chartIdentifier={Metric.CASE_GROWTH_RATE}
-                    {...shareButtonProps}
-                  />
-                )}
-              </ChartHeaderWrapper>
-              <ChartLocationName>{projection.locationName}</ChartLocationName>
-              <ChartDescription>
-                {caseGrowthStatusText(projection)}
-              </ChartDescription>
-              {isMobile && rtRangeData && (
-                <ShareButtons
-                  chartIdentifier={Metric.CASE_GROWTH_RATE}
-                  {...shareButtonProps}
+              {chartPropsForMap.map(chartProps => (
+                <ChartBlock
+                  key={chartProps.metric}
+                  projections={props.projections}
+                  {...chartProps}
+                  stateId={props.stateId}
                 />
-              )}
-              {rtRangeData && (
-                <>
-                  <ChartRt columnData={projection.getDataset('rtRange')} />
-                  <Disclaimer metricName={Metric.CASE_GROWTH_RATE} />
-                </>
-              )}
-              <ChartHeaderWrapper>
-                <ChartHeader ref={testPositiveRef}>
-                  {getMetricName(Metric.POSITIVE_TESTS)}
-                </ChartHeader>
-                {!isMobile && testPositiveData && (
-                  <ShareButtons
-                    chartIdentifier={Metric.POSITIVE_TESTS}
-                    {...shareButtonProps}
-                  />
-                )}
-              </ChartHeaderWrapper>
-              <ChartLocationName>{projection.locationName}</ChartLocationName>
-              <ChartDescription>
-                {positiveTestsStatusText(projection)}
-              </ChartDescription>
-              {isMobile && testPositiveData && (
-                <ShareButtons
-                  chartIdentifier={Metric.POSITIVE_TESTS}
-                  {...shareButtonProps}
-                />
-              )}
-              {testPositiveData && (
-                <>
-                  <ChartPositiveTestRate columnData={testPositiveData} />
-                  <Disclaimer metricName={Metric.POSITIVE_TESTS} />
-                </>
-              )}
-              <ChartHeaderWrapper>
-                <ChartHeader ref={icuUtilizationRef}>
-                  {getMetricName(Metric.HOSPITAL_USAGE)}
-                  <BetaTag>Beta</BetaTag>
-                </ChartHeader>
-                {!isMobile && icuUtilizationData && (
-                  <ShareButtons
-                    chartIdentifier={Metric.HOSPITAL_USAGE}
-                    {...shareButtonProps}
-                  />
-                )}
-              </ChartHeaderWrapper>
-              <ChartLocationName>{projection.locationName}</ChartLocationName>
-              <ChartDescription>
-                {hospitalOccupancyStatusText(projection)}
-              </ChartDescription>
-              {isMobile && icuUtilizationData && (
-                <ShareButtons
-                  chartIdentifier={Metric.HOSPITAL_USAGE}
-                  {...shareButtonProps}
-                />
-              )}
-              {icuUtilizationData && (
-                <>
-                  <ChartICUHeadroom columnData={icuUtilizationData} />
-                  <Disclaimer metricName={Metric.HOSPITAL_USAGE} />
-                </>
-              )}
-              <ChartHeaderWrapper>
-                <ChartHeader ref={contactTracingRef}>
-                  {getMetricName(Metric.CONTACT_TRACING)}
-                  <BetaTag>Beta</BetaTag>
-                </ChartHeader>
-                {!isMobile && contactTracingData && (
-                  <ShareButtons
-                    chartIdentifier={Metric.CONTACT_TRACING}
-                    {...shareButtonProps}
-                  />
-                )}
-              </ChartHeaderWrapper>
-              <ChartLocationName>{projection.locationName}</ChartLocationName>
-              <ChartDescription>
-                {contactTracingStatusText(projection)}
-              </ChartDescription>
-              {isMobile && contactTracingData && (
-                <ShareButtons
-                  chartIdentifier={Metric.CONTACT_TRACING}
-                  {...shareButtonProps}
-                />
-              )}
-              {/* TODO: Use contact tracing data here */}
-              {contactTracingData && (
-                <>
-                  <ChartContactTracing columnData={contactTracingData} />
-                  <Disclaimer metricName={Metric.CONTACT_TRACING} />
-                </>
-              )}
-              <ChartHeaderWrapper>
-                <ChartHeader ref={futureProjectionsRef}>
-                  Future Hospitalization (both ICU and non-ICU) Projections
-                </ChartHeader>
-                {!isMobile && !futureProjectionsDisabled && (
-                  <ShareButtons
-                    chartIdentifier={Metric.FUTURE_PROJECTIONS}
-                    {...shareButtonProps}
-                  />
-                )}
-              </ChartHeaderWrapper>
-              <ChartLocationName>{projection.locationName}</ChartLocationName>
-              {futureProjectionsDisabled ? (
-                'Future hospitalization projections are not currently available. Check back soon.'
-              ) : (
-                <Fragment>
-                  <ChartDescription>
-                    {generateChartDescription(
-                      projection,
-                      noInterventionProjection,
-                    )}
-                  </ChartDescription>
-                  {isMobile && (
-                    <ShareButtons
-                      chartIdentifier={Metric.FUTURE_PROJECTIONS}
-                      {...shareButtonProps}
-                    />
-                  )}
-                  <ChartFutureHospitalization projections={props.projections} />
-                  <Outcomes
-                    title={`Predicted outcomes by ${formatUtcDate(
-                      props.projections.projected.finalDate,
-                    )} (30 days from now)`}
-                    projections={outcomesProjections}
-                    colors={outcomesColors}
-                  />
-                </Fragment>
-              )}
+              ))}
             </MainContentInner>
             <ClaimStateBlock
               stateId={props.stateId}
