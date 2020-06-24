@@ -3,6 +3,7 @@ import * as TestRates from 'common/metrics/positive_rate';
 import * as Hospitalizations from 'common/metrics/hospitalizations';
 import * as ContactTracing from 'common/metrics/contact_tracing';
 import * as FutureProjections from 'common/metrics/future_projection';
+import { Projection } from 'common/models/Projection';
 
 import { Level, LevelInfo } from 'common/level';
 import { assert } from './utils';
@@ -82,6 +83,20 @@ const METRIC_TO_DISCLAIMER: { [metricName: number]: string } = {
   [Metric.CONTACT_TRACING]: ContactTracing.CONTACT_TRACING_DISCLAIMER,
 };
 
-export function getMetricDisclaimer(metric: number) {
+export function getMetricDisclaimer(metric: Metric) {
   return METRIC_TO_DISCLAIMER[metric];
+}
+
+export function getMetricStatusText(metric: Metric, projection: Projection) {
+  const METRIC_TO_STATUS_TEXT: { [metricName: number]: string } = {
+    [Metric.CASE_GROWTH_RATE]: CaseGrowth.caseGrowthStatusText(projection),
+    [Metric.POSITIVE_TESTS]: TestRates.positiveTestsStatusText(projection),
+    [Metric.HOSPITAL_USAGE]: Hospitalizations.hospitalOccupancyStatusText(
+      projection,
+    ),
+    [Metric.CONTACT_TRACING]: ContactTracing.contactTracingStatusText(
+      projection,
+    ),
+  };
+  return METRIC_TO_STATUS_TEXT[metric];
 }
