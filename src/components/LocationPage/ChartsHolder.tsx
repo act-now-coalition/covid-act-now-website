@@ -217,7 +217,8 @@ export function getChartData(
       : projection.getDataset('testPositiveRate');
 
   const icuUtilizationData =
-    projection?.currentIcuUtilization == null
+    projection?.currentIcuUtilization == null ||
+    projection?.icuNearCapacityOverride
       ? null
       : projection.getDataset('icuUtilization');
 

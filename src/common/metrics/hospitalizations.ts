@@ -72,7 +72,9 @@ export function hospitalOccupancyStatusText(projection: Projection) {
   const totalICUCapacity = projection.totalICUCapacity;
   const nonCovidPatients = Math.floor(projection.nonCovidPatients);
 
-  if (
+  if (projection.icuNearCapacityOverride) {
+    return 'While no government reported data is currently available, news reports suggest that ICUs are at or near capacity.';
+  } else if (
     currentIcuUtilization === null ||
     currentCovidICUPatients === null ||
     totalICUCapacity === null
