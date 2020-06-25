@@ -46,7 +46,7 @@ function generateSendData(usersToEmail: string[], alertForLocation: Alert) : Ema
         "data": {
             "change": (alertForLocation.newLevel < alertForLocation.oldLevel) ? "DECREASED": "INCREASED",
             "location_name": alertForLocation.locationName,
-            "img_url": `${base_url}/therm-green-yellow-lightmode.png`,
+            "img_url": `${base_url}/therm-${alertForLocation.newLevel}-${alertForLocation.oldLevel}.png`,
             "last_updated": alertForLocation.lastUpdated,
             "location_url": alertForLocation.locationURL,
         },
