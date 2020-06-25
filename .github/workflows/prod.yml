@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: '12.x'
       - run: yarn install
-      - run: yarn build
+      - run: yarn build:prod
       - uses: jakejarvis/s3-sync-action@master
         with:
           args: --acl public-read --follow-symlinks --delete
