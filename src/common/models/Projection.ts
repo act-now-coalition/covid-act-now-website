@@ -105,6 +105,7 @@ export class Projection {
   readonly typicallyFreeICUCapacity: number | null;
   readonly currentCovidICUPatients: number | null;
   readonly typicalICUUtilization: number;
+  readonly icuNearCapacityOverride: boolean;
   readonly currentCumulativeDeaths: number | null;
   readonly currentCumulativeCases: number | null;
   readonly currentContactTracerMetric: number | null;
@@ -194,13 +195,18 @@ export class Projection {
       lastUpdated,
     );
 
-    // We sometimes need to disable the ICU metric for locations due to bad data, etc.
-    // TODO(https://trello.com/c/CPcYKmdo/): Reenable once we get to the bottom of
-    // Montgomery, AL issue.
-    const disableIcu = summaryWithTimeseries.fips === '01101';
-    this.icuUtilization = disableIcu
-      ? [null]
+    // We sometimes need to override the ICU metric for locations due to bad data, etc.
+    // TODO(https://trello.com/c/CPcYKmdo/): Review once we have better estimates for
+    // these counties
+    const overrideIcu =
+      [
+        '01101', // Montgomery, AL
+        '48201', // Harris, TX
+      ].indexOf(this.fips) > -1;
+    this.icuUtilization = overrideIcu
+      ? actualTimeseries.map(row => 0.9) // 90% utilized
       : this.calcICUHeadroom(this.actualTimeseries, timeseries, lastUpdated);
+    this.icuNearCapacityOverride = overrideIcu;
 
     this.contractTracers = this.calcContactTracers(this.actualTimeseries);
 

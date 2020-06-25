@@ -32,7 +32,7 @@ async function main() {
   // We also store the historical summaries for email alerts purposes.
   const snapshotSummaryFile = path.join(
     __dirname,
-    'alerts',
+    'alert_emails',
     'summaries',
     `${currentSnapshot()}.json`,
   );
