@@ -1,67 +1,57 @@
 /**
- * Generates the daily alert file. Given two snapshots, finds differences in the
- * overall threat level and each metric and generates a summary file.
+ * Generates the daily alerts file based on the provided snapshot. The "base"
+ * snapshot to compare against will be retrieved from Firestore.
  *
- * Run via: yarn generate-daily-alerts [old_snapshot new_snapshot]
+ * Run via: yarn generate-daily-alerts <new_snapshot>
  *
- * If no snapshots provided, uses the master snapshot and the current branch's
- * snapshot.
- *
- * Generates a file alerts/<old_snapshot>-<new_snapshot>.json containing an
- * a map of { <fips>: Alert } (See the Alert interface below for schema).
+ * Generates a file alerts.json containing a map of { <fips>: Alert } (see
+ * Alert in interfaces.ts)
  */
 
 import fs from 'fs-extra';
 import path from 'path';
-import {
-  fetchAllStateProjections,
-  fetchAllCountyProjections,
-} from '../../src/common/utils/model';
-import { ProjectionsSet } from '../../src/common/models/ProjectionsSet';
-import { Projections } from '../../src/common/models/Projections';
-import {
-  fetchMasterSnapshotNumber,
-  snapshotFromUrl,
-  snapshotUrl,
-} from '../../src/common/utils/model';
-import { SNAPSHOT_URL } from '../../src/api';
+import { fetchMasterSnapshotNumber } from '../../src/common/utils/model';
 import { Alert } from './interfaces';
-import { Metric, ALL_METRICS } from '../../src/common/metric';
+import {
+  Metric,
+  ALL_METRICS,
+  ALL_VALUE_METRICS,
+} from '../../src/common/metric';
 import moment from 'moment';
+import { getFirestore } from './firestore';
+import { SummariesMap } from '../../src/common/location_summaries';
+import {
+  getLocationNameForFips,
+  getLocationUrlForFips,
+} from '../../src/common/locations';
 
-const outputFolder = path.join(__dirname, 'alerts');
-
-// Disable counties; mostly useful for faster testing / debugging.
-const STATES_ONLY = false;
+const summariesFolder = path.join(__dirname, 'summaries');
+const outputFile = path.join(__dirname, 'alerts.json');
 
 async function main() {
-  const { oldSnap, newSnap } = await parseArgs();
+  const { newSnap } = await parseArgs();
+  const oldSnap = await getLastSnapshotNumber();
 
-  console.log('Fetching projections from snapshots...');
-  const projectionsSet = ProjectionsSet.fromProjections(
-    await fetchAllProjections(snapshotUrl(oldSnap)),
-    await fetchAllProjections(snapshotUrl(newSnap)),
+  const oldSummaries: SummariesMap = await fs.readJSON(
+    path.join(summariesFolder, `${oldSnap}.json`),
+  );
+  const newSummaries: SummariesMap = await fs.readJSON(
+    path.join(summariesFolder, `${newSnap}.json`),
   );
 
   const alerts: { [fips: string]: Alert } = {};
-  for (const pair of projectionsSet.pairs) {
-    const oldLevel = pair.left.getAlarmLevel();
-    const newLevel = pair.right.getAlarmLevel();
-    const locationName = pair.locationName;
-    const locationURL = pair.locationURL;
-    const lastUpdated = moment.utc().format("MM/DD/YYYY"); // This might not be accurate, grab from the pair? idk
-    const changedMetrics = [];
-    for (const metric of ALL_METRICS) {
-      if (metric !== Metric.FUTURE_PROJECTIONS) {
-        const oldLevel = pair.left.getMetricLevel(metric);
-        const newLevel = pair.right.getMetricLevel(metric);
-        if (oldLevel !== newLevel) {
-          changedMetrics.push({ metric, oldLevel, newLevel });
-        }
-      }
+  for (const fips in newSummaries) {
+    const newSummary = newSummaries[fips];
+    const oldSummary = oldSummaries[fips];
+    if (!oldSummary) {
+      continue;
     }
+    const oldLevel = oldSummary.level;
+    const newLevel = newSummary.level;
+    const locationName = getLocationNameForFips(fips);
+    const locationURL = getLocationUrlForFips(fips);
+    const lastUpdated = moment.utc().format('MM/DD/YYYY'); // This might not be accurate, grab from the pair? idk
     if (oldLevel !== newLevel) {
-      const fips = pair.fips;
       alerts[fips] = {
         fips,
         locationName,
@@ -69,52 +59,43 @@ async function main() {
         lastUpdated,
         oldLevel,
         newLevel,
-        changedMetrics,
       };
     }
   }
 
-  await fs.ensureDir(outputFolder);
-  const file = path.join(outputFolder, `${oldSnap}-${newSnap}.json`);
-  await fs.writeFile(file, JSON.stringify(alerts));
+  await fs.writeFile(outputFile, JSON.stringify(alerts));
 
-  console.log(`Done. Generated ${file}`);
+  console.log(`Done. Generated ${outputFile}`);
 }
 
-async function parseArgs(): Promise<{ oldSnap: number; newSnap: number }> {
+async function parseArgs(): Promise<{ newSnap: number }> {
   const args = process.argv.slice(2);
-  if (args.length === 2) {
-    const oldSnap = parseInt(args[0]);
-    const newSnap = parseInt(args[1]);
-    if (Number.isNaN(oldSnap) || Number.isNaN(newSnap)) {
+  if (args.length === 1) {
+    const newSnap = parseInt(args[0]);
+    if (Number.isNaN(newSnap)) {
       exitWithUsage();
     }
-    return { oldSnap, newSnap };
-  } else if (args.length === 0) {
-    // no args
-    const oldSnap = snapshotFromUrl(SNAPSHOT_URL);
-    const newSnap = await fetchMasterSnapshotNumber();
-    return { oldSnap, newSnap };
+    return { newSnap };
   } else {
     exitWithUsage();
   }
 }
 
 function exitWithUsage(): never {
-  console.log('Usage: yarn generate-daily-alerts [oldSnap newSnap]');
+  console.log('Usage: yarn generate-daily-alerts <new_snapshot>');
   process.exit(-1);
 }
 
-async function fetchAllProjections(
-  snapshotUrl: string,
-): Promise<Projections[]> {
-  const state = await fetchAllStateProjections(snapshotUrl);
-  if (STATES_ONLY) {
-    return state;
+async function getLastSnapshotNumber(): Promise<number> {
+  let alertsInfo = await getFirestore().doc('info/alerts').get();
+  let lastSnapshot = alertsInfo.get('lastSnapshot');
+  if (lastSnapshot) {
+    console.info(`Last alerts snapshot: ${lastSnapshot}`);
   } else {
-    const county = await fetchAllCountyProjections(snapshotUrl);
-    return county.concat(state);
+    lastSnapshot = await fetchMasterSnapshotNumber();
+    console.info(`No last alerts snapshot found. Using ${lastSnapshot}`);
   }
+  return lastSnapshot;
 }
 
 main().catch(e => {
