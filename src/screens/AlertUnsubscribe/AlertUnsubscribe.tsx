@@ -1,47 +1,35 @@
-import React, { useState } from 'react';
-// import { fail } from 'common/utils';
-// import Newsletter from 'components/Newsletter/Newsletter';
-// import Autocomplete from '@material-ui/lab/Autocomplete';
-// import TextField from '@material-ui/core/TextField';
-// import Chip from '@material-ui/core/Chip';
-// import { assert } from 'common/utils';
+import React, { useState, useEffect, Fragment } from 'react';
+import firebase from 'firebase';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
+import Chip from '@material-ui/core/Chip';
 import { getFirebase } from 'common/firebase';
 import {
   Wrapper,
   UnsubscribeHeader,
-  UnsubscribeAllButton,
+  UpdateAlertsButton,
+  UnsubscribeButton,
+  BodyCopy,
+  UpdatePreferencesFormWrapper,
 } from 'screens/AlertUnsubscribe/AlertUnsubscribe.style';
 import { getLocationNames } from 'common/locations';
+// TODO: error handling, fix 'any' types
 
-// unsubscribe button in email redirects to:
-// let url = new URL('https://covidactnow.org/alert_unsubscribe');
-// url.searchParams.append('email', //users email)
-//arrives on https://covidactnow.org/alert_unsubscribe/?email=chelsiasulin@gmail.com
-
-/*
-1. Get email from query string
-2. Get email's subscribed locations from firestore
-3. Prefill locations input (alertsSelectionArray) with subscribed locations
-
-4. If user choses to update locations and not 'unsubscribe
-   from all', set email's location key with new values
-
-5. If user unsubscribes from all alerts, delete their email document
-
-*/
-
-//TODO(chelsi)- handle no email more elegantly
-//TODO(chelsi)- fix 'any' types
+const unsubscribedCopy =
+  '[Placeholder copy] You are now unsubscribed and will no longer receive alerts.';
+const resubscribedCopy =
+  '[Placeholder copy] Your location preferences have been updated.';
 
 const AlertUnsubscribe = () => {
   const params = new URLSearchParams(window.location.search);
   const email = params.get('email') || '';
-
-  const autocompleteOptions = getLocationNames();
-  console.log('autocompleteOptions', autocompleteOptions);
+  const locations: any = getLocationNames();
 
   const [alertsSelectionArray, setAlertsSelectionArray] = useState([]);
-  const [alertSignUps, setAlertSignUps] = useState('');
+  const [alertsSelectionList, setAlertsSelectionList] = useState('');
+  const [selectedLocations, setSelectedLocations] = useState([] as any);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formSubmittedCopy, setFormSubmittedCopy] = useState('');
 
   async function getSubscribedLocations() {
     const db = getFirebase().firestore();
@@ -50,17 +38,33 @@ const AlertUnsubscribe = () => {
       .doc(email)
       .get()
       .then(function (doc) {
-        console.log('data', doc.data());
         const data = doc.data() || {};
-        const fipsArr = data.locations || []; // ["53033", "53", "17031", "06"]
+        const fipsArr = data.locations || [];
         setAlertsSelectionArray(fipsArr);
-        console.log('fipsArr', fipsArr);
-        const strings = fipsArr.join(','); // "53033,53,17031,06"
-        console.log('strings', strings);
+        const fipsStringsList = fipsArr.join(',');
+        setAlertsSelectionList(fipsStringsList);
       });
   }
 
-  getSubscribedLocations();
+  useEffect(() => {
+    function onPageload() {
+      getSubscribedLocations();
+      const defaultValues = [] as any;
+      alertsSelectionArray.forEach((fips: string) => {
+        const subscribedLocation = locations.filter(
+          (location: any) => fips === location.full_fips_code,
+        );
+        defaultValues.push(subscribedLocation[0]);
+        setSelectedLocations(defaultValues);
+      });
+    }
+    onPageload();
+  }, [
+    alertsSelectionArray,
+    alertsSelectionArray.length,
+    getSubscribedLocations,
+    locations,
+  ]);
 
   async function unsubscribeFromAll() {
     window.gtag('event', 'alertsUnsubscribe', {
@@ -68,89 +72,90 @@ const AlertUnsubscribe = () => {
     });
     const db = getFirebase().firestore();
     await db.collection('alerts-subscriptions').doc(email).delete();
+    setFormSubmittedCopy(unsubscribedCopy);
+    setFormSubmitted(true);
   }
 
-  //get list of fips
-  //convert to locations
-  //set as alertsSelectionArray
+  function handleSelectChange(selectedLocation: any) {
+    setSelectedLocations(selectedLocation);
+    console.log('selectedLocations', selectedLocations);
+  }
 
-  //   async function getSubscribedLocations () {
-  //     const db = getFirebase().firestore();
-  //     const emailDoc = db.collection('alert-subscriptions').doc(email)
-
-  //     await db.collection('alert-subscriptions').doc(email)
-
-  //   }
-
-  //   async function updateSubscribedLocations() {
-
-  //   }
-
-  //sets selected option as alertsSelectionArray (using setAlertsSelectionArray)
-  //creates alertSignUps, comma-separated list of fips of locations in alertsSelectionArray
-  //does this every time a new location is added to alertsSelectionArray
-  //TODO: fix 'any' types
-  function handleSelectChange(selectedOption: any) {
-    setAlertsSelectionArray(selectedOption);
-    const fipsList = alertsSelectionArray
-      .map((item: any) => item.full_fips_code)
-      .join(',');
-    setAlertSignUps(fipsList);
-    console.log('alertSignUps', alertSignUps);
+  async function subscribeToAlerts() {
+    const locations = selectedLocations.map((item: any) => item.full_fips_code);
+    const db = getFirebase().firestore();
+    await db.collection('alerts-subscriptions').doc(email).set({
+      locations: locations,
+      subscribedAt: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+    setFormSubmittedCopy(resubscribedCopy);
+    setFormSubmitted(true);
   }
 
   return (
     <Wrapper>
-      <UnsubscribeHeader>COVID Alert Preferences</UnsubscribeHeader>
-      {alertsSelectionArray.map(elem => {
-        return <UnsubscribeHeader>{elem}</UnsubscribeHeader>;
-      })}
-      {/* <div>
-       <input
-            hidden
-            aria-label="alert_list_csv"
-            id="fieldjrdtwy"
-            maxLength={200}
-            name="cm-f-jrdtwy"
-            onChange={value => {}}
-            value={alertSignUps}
-          />
-          <Autocomplete
-            multiple
-            id="alert-locations"
-            // defaultValue={this.defaultValues}
-            getOptionSelected={(option, value) =>
-              option.full_fips_code === value.full_fips_code
-            }
-            onChange={(event, newValue) => {
+      {!formSubmitted && (
+        <Fragment>
+          <UnsubscribeHeader>
+            COVID Alert Preferences Header Copy
+          </UnsubscribeHeader>
+          <BodyCopy>
+            Copy about option to update your alert preferences
+          </BodyCopy>
+          <UpdatePreferencesFormWrapper>
+            <input
+              hidden
+              aria-label="alert_list_csv"
+              id="fieldjrdtwy"
+              maxLength={200}
+              name="cm-f-jrdtwy"
+              onChange={value => {}}
+              value={alertsSelectionList}
+            />
+            <Autocomplete
+              fullWidth
+              multiple
+              id="alert-locations"
+              value={selectedLocations}
+              getOptionSelected={(option, value) =>
+                option.full_fips_code === value.full_fips_code
+              }
+              onChange={(event, newValue) => {
                 handleSelectChange(newValue);
-            }}
-            options={autocompleteOptions}
-            getOptionLabel={option =>
-              option.county
-                ? `${option.county}, ${option.state_code}`
-                : option.state
-            }
-            renderTags={(tagValue, getTagProps) =>
-              tagValue.map((option, index) => (
-                <Chip
-                  label={
-                    option.county
-                      ? `${option.county}, ${option.state_code}`
-                      : option.state
-                  }
-                  {...getTagProps({ index })}
-                />
-              ))
-            }
-            renderInput={params => (
-              <TextField {...params} placeholder="Enter alert locations" />
-            )}
-          />
-       </div> */}
-      <UnsubscribeAllButton onClick={unsubscribeFromAll}>
-        Unsubscribe from all alerts
-      </UnsubscribeAllButton>
+              }}
+              options={locations}
+              getOptionLabel={option =>
+                option.county
+                  ? `${option.county}, ${option.state_code}`
+                  : option.state
+              }
+              renderTags={(tagValue, getTagProps) =>
+                tagValue.map((option, index) => (
+                  <Chip
+                    label={
+                      option.county
+                        ? `${option.county}, ${option.state_code}`
+                        : option.state
+                    }
+                    {...getTagProps({ index })}
+                  />
+                ))
+              }
+              renderInput={params => (
+                <TextField {...params} placeholder="Enter alert locations" />
+              )}
+            />
+            <UpdateAlertsButton type="submit" onClick={subscribeToAlerts}>
+              Update alerts
+            </UpdateAlertsButton>
+          </UpdatePreferencesFormWrapper>
+          <BodyCopy>Copy about option to unsubscribe from all alerts</BodyCopy>
+          <UnsubscribeButton onClick={unsubscribeFromAll}>
+            Unsubscribe from all alerts
+          </UnsubscribeButton>
+        </Fragment>
+      )}
+      {formSubmitted && <BodyCopy>{formSubmittedCopy}</BodyCopy>}
     </Wrapper>
   );
 };

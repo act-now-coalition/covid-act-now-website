@@ -85,8 +85,6 @@ class Newsletter extends React.Component {
   }
 
   render() {
-    console.log('alert signups:', this.state.alertSignUps);
-    console.log('alertsSelectionArray', this.alertsSelectionArray);
     const { stateId, county } = this.props;
     this.defaultValues = this.autocompleteOptions.filter(location => {
       const matching_state =
