@@ -1,8 +1,10 @@
 //@ts-ignore createsend has no types and throws an error
 import createsend from 'createsend-node';
+import firebase from 'firebase';
 import fs from 'fs-extra';
 import path from 'path';
 import { Alert } from './interfaces';
+import { getFirebase } from 'common/firebase';
 
 interface EmailSendData {
     To: string[] | null,
@@ -60,68 +62,58 @@ function generateSendData(usersToEmail: string[], alertForLocation: Alert) : Ema
  *
  * Takes in a file with {[fips: string]: {...data}} and file like {[fips: string]: [emails]}
  *
- * You can run via `yarn send-email fipsToAlertFilename usersToEmailFilename [test]`
-
+ * You can run via `yarn send-email fipsToAlertFilename currentSnapshot`
  */
 (async () => {
     const outputFolder = path.join(__dirname);
     await fs.ensureDir(outputFolder);
 
-    const { fipsToAlertFilename, usersToEmailFilename } = await parseArgs();
+    const { fipsToAlertFilename, currentSnapshot } = await parseArgs();
     const alertPath = path.join(outputFolder, fipsToAlertFilename);
-    const usersToEmailPath = path.join(outputFolder, usersToEmailFilename);
 
     const rawdata = fs.readFileSync(alertPath, "utf8");
     const locationsWithAlerts: { [fips: string]: Alert } = JSON.parse(rawdata);
 
-    const usersRawData = fs.readFileSync(usersToEmailPath, "utf8");
-    const usersToEmail: { [fips: string]: Array<string> } = JSON.parse(usersRawData);
 
     // TODO: maybe oauth here and add secrets into github.
     const auth = { apiKey: process.env.CREATE_SEND_TOKEN };
     const api: any = new createsend(auth);
-    const results_array: SendEmailResult[] = [];
     const err_results: CampaignMonitorError[] = []
-    Object.entries(usersToEmail).map(async ([fips, userList]) => {
-        const testHTML = `<html> Test Alert Email for ${fips}, ${locationsWithAlerts[fips].locationName} went from ${locationsWithAlerts[fips].oldLevel} to ${locationsWithAlerts[fips].newLevel}</html>`;
-        const testText = "Test Email, Please Ignore";
-        await sendEmail(api, generateSendData(userList, locationsWithAlerts[fips]))
-            .then(result => {
-                console.log(result)
-                results_array.push(result);
-            }).catch(err => {
-                console.log(err);
-                err_results.push(err)
+
+    const db = getFirebase().firestore();
+    Object.keys(locationsWithAlerts).map(async (fips) => {
+        db.collection(`snapshots/${currentSnapshot}/locations/${fips}/emails/`)
+            .where("sentAt", "==", null).get().then(querySnapshot => {
+                querySnapshot.forEach(async doc => {
+                    await sendEmail(api, generateSendData([doc.id], locationsWithAlerts[fips]))
+                        .then(async result => {
+                            console.log(result)
+                            await db.collection(`snapshots/${currentSnapshot}/locations/${fips}/emails/`).doc(doc.id).set({sentAt: firebase.firestore.FieldValue.serverTimestamp()})
+                        }).catch(err => {
+                            console.log(err);
+                            err_results.push(err) // more elegantly handle the errors here?
+                        });
+                })
             });
+        });
 
-    })
-
-    // write a file of an email to write
-    const file = path.join(outputFolder, `${(new Date()).toISOString()}-email-output.json`);
-    let resultWriteUp = `Emails sent successfully: ${results_array.filter(result => result.Status === 'Accepted').length}`;
-    resultWriteUp += `Total Emails: ${results_array.length}`
-    await fs.writeFile(file, resultWriteUp);
-    console.log(`Done. Generated ${file}`);
+    console.log(`Done.`);
 
 })();
 
-async function parseArgs(): Promise<{ fipsToAlertFilename: string, usersToEmailFilename: string }> {
+async function parseArgs(): Promise<{ fipsToAlertFilename: string, currentSnapshot: string }> {
     const args = process.argv.slice(2);
     if (args.length == 2) {
         const fipsToAlertFilename = args[0];
-        const usersToEmailFilename = args[1];
-        return { fipsToAlertFilename, usersToEmailFilename };
-        // } else if (args.length == 3){
-        //     const fipsToAlertFilename = args[0];
-        //     const usersToEmailFilename = args[1];
+        const currentSnapshot = args[1];
+        return { fipsToAlertFilename, currentSnapshot };
     } else {
         exitWithUsage();
     }
 }
 
-// yarn send-emails alerts/495-497.json users-to-email.json
 
 function exitWithUsage(): never {
-    console.log('Usage: yarn send-emails fipsToAlertFilename usersToEmailFilename [test]');
+    console.log('Usage: yarn send-emails fipsToAlertFilename currentSnapshot');
     process.exit(-1);
 }
