@@ -4,8 +4,5 @@ service cloud.firestore {
     match /alerts-subscriptions/{email} {
       allow write;
     }
-    match /snapshots/{snapshot_id}/locations/{fips}/emails/{email} {
-      allow write;
-    }
   }
 }

@@ -3,7 +3,7 @@ import firebase from 'firebase';
 import fs from 'fs-extra';
 import path from 'path';
 import { Alert } from './interfaces';
-import { getFirebase } from 'common/firebase';
+import { getFirestore } from './firestore';
 import { exit } from 'process';
 
 /**
@@ -26,17 +26,18 @@ import { exit } from 'process';
     const rawdata = fs.readFileSync(alertPath, "utf8");
     const locationsWithAlerts: { [fips: string]: Alert } = JSON.parse(rawdata);
 
-    const db = getFirebase().firestore();
+    const db = getFirestore();
     Object.keys(locationsWithAlerts).forEach(async (fips: string) => {
         console.log("fips", fips)
         db.collection('alerts-subscriptions').where("locations", "array-contains", fips).get()
-            .then(querySnapshot => {
-                querySnapshot.forEach(async doc => {
-                    await db.collection('snapshots').doc(`${currentSnapshot}/locations/${fips}/emails/${doc.id}`).set({
+            .then( (querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    db.collection('snapshots').doc(`${currentSnapshot}/locations/${fips}/emails/${doc.id}`).set({
                         sentAt:null,
                     });
                 });
-            }).catch((err) => {console.log(err)});
+                return;
+            }).catch((err: any) => {console.log(err)});
     });
 
     console.log(`Done. Wrote users to firestore`);

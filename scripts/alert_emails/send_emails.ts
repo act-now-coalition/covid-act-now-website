@@ -1,10 +1,10 @@
 //@ts-ignore createsend has no types and throws an error
 import createsend from 'createsend-node';
-import firebase from 'firebase';
+import admin from 'firebase-admin';
 import fs from 'fs-extra';
 import path from 'path';
 import { Alert } from './interfaces';
-import { getFirebase } from 'common/firebase';
+import { getFirestore } from './firestore';
 
 interface EmailSendData {
     To: string[] | null,
@@ -48,6 +48,7 @@ function generateSendData(usersToEmail: string[], alertForLocation: Alert) : Ema
         "data": {
             "change": (alertForLocation.newLevel < alertForLocation.oldLevel) ? "DECREASED": "INCREASED",
             "location_name": alertForLocation.locationName,
+            "img_alt": `Image depecting that the state went from from state ${alertForLocation.oldLevel} to ${alertForLocation.newLevel}`,
             "img_url": `${base_url}/therm-${alertForLocation.newLevel}-${alertForLocation.oldLevel}.png`,
             "last_updated": alertForLocation.lastUpdated,
             "location_url": alertForLocation.locationURL,
@@ -62,7 +63,7 @@ function generateSendData(usersToEmail: string[], alertForLocation: Alert) : Ema
  *
  * Takes in a file with {[fips: string]: {...data}} and file like {[fips: string]: [emails]}
  *
- * You can run via `yarn send-email fipsToAlertFilename currentSnapshot`
+ * You can run via `yarn send-emails fipsToAlertFilename currentSnapshot`
  */
 (async () => {
     const outputFolder = path.join(__dirname);
@@ -80,7 +81,7 @@ function generateSendData(usersToEmail: string[], alertForLocation: Alert) : Ema
     const api: any = new createsend(auth);
     const err_results: CampaignMonitorError[] = []
 
-    const db = getFirebase().firestore();
+    const db = getFirestore();
     Object.keys(locationsWithAlerts).map(async (fips) => {
         db.collection(`snapshots/${currentSnapshot}/locations/${fips}/emails/`)
             .where("sentAt", "==", null).get().then(querySnapshot => {
@@ -88,7 +89,10 @@ function generateSendData(usersToEmail: string[], alertForLocation: Alert) : Ema
                     await sendEmail(api, generateSendData([doc.id], locationsWithAlerts[fips]))
                         .then(async result => {
                             console.log(result)
-                            await db.collection(`snapshots/${currentSnapshot}/locations/${fips}/emails/`).doc(doc.id).set({sentAt: firebase.firestore.FieldValue.serverTimestamp()})
+                            await db.collection(`snapshots/${currentSnapshot}/locations/${fips}/emails/`).doc(doc.id)
+                            .set({
+                                sentAt: admin.firestore.FieldValue.serverTimestamp()
+                            })
                         }).catch(err => {
                             console.log(err);
                             err_results.push(err) // more elegantly handle the errors here?
