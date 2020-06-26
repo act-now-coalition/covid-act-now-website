@@ -67,6 +67,7 @@ function locationNameFromMatch(
   if (!countyData) {
     // if invalid county entered in URL, redirect to homepage
     window.location.href = '/';
+    return;
   }
 
   const county = countyData.county;
