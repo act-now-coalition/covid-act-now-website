@@ -1,3 +1,12 @@
+<!-- This file is taken from a template of campaign monitor. It sends the emails for email alerts. In order to update
+    the email we send for alerts:
+    1) Edit this email and check it out in the local host
+    2) update the template in campaign monitor https://covidactnow.createsend.com/triggered/workflow/777b239e-697b-4143-88d3-804a2d33b955.
+    (it might be a good idea to use a different template and doing a local test send with another template)
+    3) Send some test emails to your phone and look in dark mode (it makes things look different)
+General notes:
+1) this file is pretty messy and it was grabbed from gmail. Ideally we'd re-write our own email
+2) we could also switch to using our own templating system and sending raw html (which ould take out the hassle of step 2 above) -->
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--[if IE]><html xmlns="http://www.w3.org/1999/xhtml" class="ie"><![endif]-->
@@ -8,7 +17,7 @@
 <!--[if !mso]><!--><meta http-equiv=" X-UA-Compatible" content="IE=Dedge">
         <!--<![endif]-->
         <meta name="viewport" content="width=device-width">
-        <style type==ext/css">
+        <style type="text/css">
             @media only screen and (min-width: 620px) {
                 .wrapper {
                     min-width: 600px !important
@@ -433,10 +442,10 @@
             }
 
             @media only screen and (-webkit-min-device-pixel-ratio: 2),
-            only screen and=in--moz-device-pixel-ratio: 2),
-            only screen and (-o-min-device-pixel-rat=: 2/1),
+            only screen and (min-moz-device-pixel-ratio: 2),
+            only screen and (-o-min-device-pixel-ratio: 2/1),
             only screen and (min-device-pixel-ratio: 2),
-            only screen and (min=esolution: 192dpi),
+            only screen and (min-resolution: 192dpi),
             only screen and (min-resolution: 2dppx) {
                 .fblike {
                     background-image: url(http://i7.cmail19.com/static/eb/master/13-the-blueprint-3/images/fblike@2x.png) !important;
@@ -682,7 +691,7 @@
 <![endif]-->
     <!--[if !mso]><!-->
 
-    <body class="full-padding" style="margin: 0 auto;padding: 0;-webkit-text-s=e-adjust: 100%;">
+    <body class="full-padding" style="margin: 0 auto;padding: 0;-webkit-text-size-adjust: 100%;">
         <!--<![endif]-->
         <table class="wrapper" style="border-collapse: collapse;table-layout: fixed;min-width: 320px;width:
             100%;background-color: #ededf1;" cellpadding="0" cellspacing="0" role="presentation">
@@ -711,7 +720,7 @@
                                 </div>
                             </div>
                             <div class="header" style="Margin: 0 auto;max-width: 600px;min-width: 320px; width:
-                                320px;width: calc(28000% - 67400px);" id="emb-email=eader-container">
+                                320px;width: calc(28000% - 67400px);" id="emb-email-header-container">
                                 <!--[if (mso)|(IE)]><table align="center" class="header" cellpadding="0" cellspacing="0" role="presentation"><tr><td style="width: 600px"><![endif]-->
                                 <div class="logo emb-logo-margin-box" style="font-size: 26px;line-height:
                                     32px;Margin-top: 6px;Margin-bottom: 20px;color: #c3ced9;font-family:
@@ -741,7 +750,7 @@
                                                 <h3 class="size-11" style="Margin-top: 0;Margin-bottom:
                                                     12px;font-style: normal;font-weight: normal;color:
                                                     #1b1c1c;font-size: 11px;line-height: 19px;font-family: droid
-                                                    sans,apple sd gothic neo,segoe ui,dejavu sans=rebuchet
+                                                    sans,apple sd gothic neo,segoe ui,dejavu sans-trebuchet
                                                     ms,sans-serif;text-align: center;" lang="x-size-11"><span
                                                         class="font-droid-sans"><span style="color:#858c94">COVID
                                                             ALERT FOR</span>
@@ -844,7 +853,7 @@
                                         left;">
 
                                         <div style="Margin-left: 20px;Margin-right:
-                                            20px;Margin-top:$px;Margin-bottom: 24px;">
+                                            20px;Margin-top:4px;Margin-bottom: 24px;">
                                             <div style="mso-line-height-rule: exactly;line-height:
                                                 20px;font-size: 1px;"> </div>
                                         </div>
@@ -882,7 +891,7 @@
                                         left;">
 
                                         <div style="Margin-left: 20px;Margin-right:
-                                            20px;Margin-top:$px;Margin-bottom: 24px;">
+                                            20px;Margin-top:4px;Margin-bottom: 24px;">
                                             <div style="mso-line-height-rule: exactly;line-height:
                                                 20px;font-size: 1px;"> </div>
                                         </div>
@@ -899,7 +908,7 @@
                             <div role="contentinfo">
                                 <div class="layout email-footer stack" style="Margin: 0 auto;max-width:
                                     600px;min-width: 320px; width: 320px;width: calc(28000% -
-                                    167400px=overflow-wrap: break-word;word-wrap: break-word;word-break:
+                                    167400px; overflow-wrap: break-word;word-wrap: break-word;word-break:
                                     break-word;">
                                     <div class="layout__inner" style="border-collapse: collapsed; diplay:
                                         table;width: 100%;">
@@ -954,7 +963,7 @@
         </div>
         <!--[if (mso)|(IE)]></td><td style="width: 200px;" valign="top" class="w160"><![endif]-->
         <div class="column narrow" style="text-align: left;font-size: 12px;line-height: 19px;color:
-    #1b1c1c;font-family: Ubuntu,sans-serif;Flo=: left;max-width: 320px;min-width: 200px; width: 320px;width:
+    #1b1c1c;font-family: Ubuntu,sans-serif;Flow: left;max-width: 320px;min-width: 200px; width: 320px;width:
     calc(72200p=- 12000%);">
             <div style="Margin-left: 20px;Margin-right: 20px;Margin-top=10px;Margin-bottom: 10px;">
 
@@ -963,9 +972,9 @@
         <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
         </div>
         </div>
-        <div class="layout one-col email-footer" style="Margin: 0 auto;=x-width: 600px;min-width: 320px; width:
-    320px;width: calc(28000% - 167400=);overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;=
-      <div class=" layout__inner" style="border-collapse: collapse;d=play: table;width: 100%;">
+        <div class="layout one-col email-footer" style="Margin: 0 auto;max-width: 600px;min-width: 320px; width:
+    320px;width: calc(28000% - 167400=);overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;">
+      <div class=" layout__inner" style="border-collapse: collapse;display: table;width: 100%;">
             <!--[if (mso)|(IE)]><table align="center" cellpadding="0" cellspacing="0" role="presentation"><tr class="layout-email-footer"><td style="width: 600px;" class="w560"><![endif]-->
             <div class="column" style="text-align: left;font-size: 12px=ine-height: 19px;color: #1b1c1c;font-family:
         Ubuntu,sans-serif;">
