@@ -368,7 +368,7 @@ export default {
     },
     {
       name: 'Eusden Shing',
-      title: 'Former Head of Product of Pinterest',
+      title: 'Former Head of Search Products at Pinterest',
       link: 'https://www.linkedin.com/in/eusden/',
     },
     {
