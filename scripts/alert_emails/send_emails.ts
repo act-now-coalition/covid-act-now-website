@@ -95,7 +95,7 @@ function generateSendData(usersToEmail: string[], alertForLocation: Alert) : Ema
                             })
                         }).catch(err => {
                             console.log(err);
-                            err_results.push(err) // more elegantly handle the errors here?
+                            process.exit(-1);
                         });
                 })
             });

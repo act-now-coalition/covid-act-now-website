@@ -28,7 +28,6 @@ import { exit } from 'process';
 
     const db = getFirestore();
     Object.keys(locationsWithAlerts).forEach(async (fips: string) => {
-        console.log("fips", fips)
         db.collection('alerts-subscriptions').where("locations", "array-contains", fips).get()
             .then( (querySnapshot) => {
                 querySnapshot.forEach((doc) => {
