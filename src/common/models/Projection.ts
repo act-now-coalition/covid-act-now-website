@@ -198,11 +198,11 @@ export class Projection {
     // We sometimes need to override the ICU metric for locations due to bad data, etc.
     // TODO(https://trello.com/c/CPcYKmdo/): Review once we have better estimates for
     // these counties
-    const overrideIcu =
-      [
-        '01101', // Montgomery, AL
-        '48201', // Harris, TX
-      ].indexOf(this.fips) > -1;
+    const overrideIcu = false;
+    // [
+    //   // '01101', // Montgomery, AL
+    //   // '48201', // Harris, TX
+    // ].indexOf(this.fips) > -1;
     this.icuUtilization = overrideIcu
       ? actualTimeseries.map(row => 0.9) // 90% utilized
       : this.calcICUHeadroom(this.actualTimeseries, timeseries, lastUpdated);
