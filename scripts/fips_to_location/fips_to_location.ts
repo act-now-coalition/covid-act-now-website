@@ -32,6 +32,3 @@ testWriteToFile().catch(e => {
   console.error(e);
   process.exit(-1);
 });
-
-//`${location.state}`
-//`${location.county}, ${location.state}`
