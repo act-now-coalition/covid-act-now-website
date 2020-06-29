@@ -68,4 +68,4 @@ jobs:
           STATUS: ${{job.status}}
         uses: Ilshidur/action-slack@fb92a78
         with:
-          args: [${{env.FIREBASE_ENV}}] Successfully sent alerts emails.
+          args: '[${{env.FIREBASE_ENV}}] Successfully sent alerts emails.'
