@@ -13,7 +13,6 @@ import {
   UpdatePreferencesFormWrapper,
 } from 'screens/AlertUnsubscribe/AlertUnsubscribe.style';
 import { getLocationNames } from 'common/locations';
-// TODO: check if we still need alertsSelectionList for campaign monitor purposes, delete if not
 
 const unsubscribedCopy =
   'You are now unsubscribed and will no longer receive alerts.';
@@ -25,7 +24,6 @@ const AlertUnsubscribe = () => {
   const params = new URLSearchParams(window.location.search);
   const email = params.get('email') || '';
 
-  const [alertsSelectionList, setAlertsSelectionList] = useState('');
   const [selectedLocations, setSelectedLocations] = useState([] as any);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formSubmittedCopy, setFormSubmittedCopy] = useState('');
@@ -42,8 +40,6 @@ const AlertUnsubscribe = () => {
         .then(function (doc) {
           const data = doc.data() || {};
           fipsArr = data.locations || [];
-          const fipsStringsList = fipsArr.join(',');
-          setAlertsSelectionList(fipsStringsList);
         });
 
       const defaultValues = [] as any;
@@ -101,7 +97,6 @@ const AlertUnsubscribe = () => {
               maxLength={200}
               name="cm-f-jrdtwy"
               onChange={value => {}}
-              value={alertsSelectionList}
             />
             <Autocomplete
               fullWidth
