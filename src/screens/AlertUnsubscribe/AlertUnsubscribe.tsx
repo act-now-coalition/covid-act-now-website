@@ -16,9 +16,8 @@ import { getLocationNames } from 'common/locations';
 // TODO: check if we still need alertsSelectionList for campaign monitor purposes, delete if not
 
 const unsubscribedCopy =
-  '[Placeholder copy] You are now unsubscribed and will no longer receive alerts.';
-const resubscribedCopy =
-  '[Placeholder copy] Your location preferences have been updated.';
+  'You are now unsubscribed and will no longer receive alerts.';
+const resubscribedCopy = 'Your COVID alert preferences have been updated.';
 
 const locations: any = getLocationNames();
 
@@ -91,11 +90,9 @@ const AlertUnsubscribe = () => {
       {!formSubmitted && (
         <Fragment>
           <UnsubscribeHeader>
-            COVID Alert Preferences Header Copy
+            Update your COVID Alert Preferences
           </UnsubscribeHeader>
-          <BodyCopy>
-            Copy about option to update your alert preferences
-          </BodyCopy>
+          <BodyCopy>To update your preferences:</BodyCopy>
           <UpdatePreferencesFormWrapper>
             <input
               hidden
@@ -140,12 +137,12 @@ const AlertUnsubscribe = () => {
               )}
             />
             <UpdateAlertsButton type="submit" onClick={subscribeToAlerts}>
-              Update alerts
+              Update Preferences
             </UpdateAlertsButton>
           </UpdatePreferencesFormWrapper>
-          <BodyCopy>Copy about option to unsubscribe from all alerts</BodyCopy>
+          <BodyCopy>To unsubscribe from all COVID alerts:</BodyCopy>
           <UnsubscribeButton onClick={unsubscribeFromAll}>
-            Unsubscribe from all alerts
+            Unsubscribe
           </UnsubscribeButton>
         </Fragment>
       )}

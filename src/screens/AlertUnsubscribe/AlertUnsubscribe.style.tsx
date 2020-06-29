@@ -5,7 +5,7 @@ import { COLOR_MAP } from 'common/colors';
 export const Wrapper = styled(Box)`
   max-width: 700px;
   width: 100%;
-  margin: 100px auto 125px;
+  margin: 80px auto 100px;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
@@ -13,6 +13,8 @@ export const Wrapper = styled(Box)`
 
   @media (min-width: 600px) {
     align-items: center;
+    margin: 100px auto 125px;
+    min-height: 50vh;
   }
 `;
 
@@ -21,6 +23,7 @@ export const UnsubscribeHeader = styled(Typography)`
   font-size: 2rem;
   margin-bottom: 2.5rem;
   font-weight: 700;
+  line-height: 1.2;
 `;
 
 const Button = css`
@@ -67,7 +70,8 @@ export const UnsubscribeButton = styled.button`
 export const BodyCopy = styled(Typography)`
   font-family: Roboto;
   font-size: 1.1rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1.75rem;
+  line-height: 1.4;
 `;
 
 export const UpdatePreferencesFormWrapper = styled(Box)`
