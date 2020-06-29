@@ -58,8 +58,8 @@ function generateSendData(usersToEmail: string[], alertForLocation: Alert) : Ema
     }
 }
 
-async function setLastSnapshotNumber(snapshot: string) {
-    await getFirestore().doc('info/alerts').set({
+async function setLastSnapshotNumber(firestore: FirebaseFirestore.Firestore, snapshot: string) {
+    await firestore.doc('info/alerts').set({
         lastSnapshot: snapshot
     });
     console.log(`Set lastsnapshot to be ${snapshot}`)
@@ -94,10 +94,10 @@ async function setLastSnapshotNumber(snapshot: string) {
     const locationsWithEmails: {[fips: string]: number} = {}
 
     const db = getFirestore();
-    Object.keys(locationsWithAlerts).map(async (fips) => {
-        db.collection(`snapshots/${currentSnapshot}/locations/${fips}/emails/`)
-            .where("sentAt", "==", null).get().then(querySnapshot => {
-                querySnapshot.forEach(async doc => {
+    for (const fips of Object.keys(locationsWithAlerts)) {
+        await db.collection(`snapshots/${currentSnapshot}/locations/${fips}/emails/`)
+            .where("sentAt", "==", null).get().then(async querySnapshot => {
+                for (const doc of querySnapshot.docs) {
                     await sendEmail(api, generateSendData([doc.id], locationsWithAlerts[fips]), dryRun)
                         .then(async result => {
                             emailSent += 1;
@@ -112,13 +112,13 @@ async function setLastSnapshotNumber(snapshot: string) {
                             console.log(err);
                             process.exit(-1);
                         });
-                })
+                }
             });
-        });
-    console.log(`Total Emails to be sent: ${emailSent}. Total locations with emails ${locationsWithEmails}. Unique Email addresses ${Object.keys(locationsWithEmails).length}`)
+    }
+    console.log(`Total Emails to be sent: ${emailSent}. Total locations with emails ${Object.keys(locationsWithEmails).length}. Unique Email addresses ${Object.keys(locationsWithEmails).length}`)
 
     if (!dryRun) {
-        setLastSnapshotNumber(currentSnapshot);
+        setLastSnapshotNumber(db, currentSnapshot);
     }
     console.log(`Done.`);
 
