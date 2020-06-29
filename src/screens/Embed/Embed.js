@@ -28,8 +28,9 @@ import {
   EmbedHeader,
   EmbedSubheader,
 } from './Embed.style';
+import SocialLocationPreview from 'components/SocialLocationPreview/SocialLocationPreview';
 
-export default function Embed() {
+function LocationEmbed() {
   const { stateId: _location, countyId, countyFipsId } = useParams();
 
   const lastUpdatedDate = useModelLastUpdatedDate() || new Date();
@@ -132,4 +133,18 @@ export default function Embed() {
       </EmbedWrapper>
     </EmbedContainer>
   );
+}
+
+export default function Embed(props) {
+  const { isNational } = props;
+
+  if (isNational) {
+    return (
+      <EmbedContainer>
+        <SocialLocationPreview border />
+      </EmbedContainer>
+    );
+  }
+
+  return <LocationEmbed />;
 }

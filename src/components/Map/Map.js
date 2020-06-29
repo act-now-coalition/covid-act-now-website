@@ -11,10 +11,6 @@ import ReactTooltip from 'react-tooltip';
 import { MapInstructions, MobileLineBreak } from './Map.style';
 
 // TODO(@pablo): We might want to move this to LOCATION_SUMMARY_LEVELS
-const LEGEND_LOW = 'On track to contain COVID';
-const LEGEND_MEDIUM = 'Controlled disease growth';
-const LEGEND_MEDIUM_HIGH = 'At risk';
-const LEGEND_HIGH = 'Active or imminent outbreak';
 
 function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
   const history = useHistory();
@@ -45,22 +41,22 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
         <Legend>
           <LegendItem
             key={'legend-4'}
-            title={LEGEND_HIGH}
+            title={LOCATION_SUMMARY_LEVELS[Level.HIGH].summary}
             color={LOCATION_SUMMARY_LEVELS[Level.HIGH].color}
           />
           <LegendItem
             key={'legend-3'}
-            title={LEGEND_MEDIUM_HIGH}
+            title={LOCATION_SUMMARY_LEVELS[Level.MEDIUM_HIGH].summary}
             color={LOCATION_SUMMARY_LEVELS[Level.MEDIUM_HIGH].color}
           />
           <LegendItem
             key={'legend-2'}
-            title={LEGEND_MEDIUM}
+            title={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].summary}
             color={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].color}
           />
           <LegendItem
             key={'legend-1'}
-            title={LEGEND_LOW}
+            title={LOCATION_SUMMARY_LEVELS[Level.LOW].summary}
             color={LOCATION_SUMMARY_LEVELS[Level.LOW].color}
           />
         </Legend>

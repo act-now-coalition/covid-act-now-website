@@ -31,24 +31,18 @@ import {
 import { STATES } from 'common';
 
 const ShareBlock = ({
-  condensed,
   stateId,
   countyName,
   shareQuote,
   shareURL,
-  shareInstruction,
-  newsletterInstruction,
   onClickEmbed,
   projections,
   stats,
 }: {
-  condensed?: boolean;
   stateId?: string;
   countyName?: String;
   shareQuote?: string;
   shareURL?: string;
-  shareInstruction?: string;
-  newsletterInstruction?: string;
   onClickEmbed?: any;
   projections?: Projections;
   stats?: { [key: string]: number | null };
@@ -179,13 +173,7 @@ const ShareBlock = ({
                 </StyledShareButton>
               </ShareButtonContainer>
               <EmbedPrompt>
-                {isMatchingProjectionsRoute ? (
-                  <>
-                    Or <span onClick={onClickEmbed}>embed on your website</span>
-                  </>
-                ) : (
-                  <>&nbsp;</>
-                )}
+                Or <span onClick={onClickEmbed}>embed on your website</span>
               </EmbedPrompt>
             </SocialTextArea>
           </SocialTextAreaWrapper>

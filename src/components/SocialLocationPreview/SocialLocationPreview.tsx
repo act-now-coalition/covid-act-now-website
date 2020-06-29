@@ -5,6 +5,7 @@ import { useModelLastUpdatedDate } from 'common/utils/model';
 import {
   Wrapper,
   PreviewHeader,
+  USMapPreviewHeader,
   HeaderText,
   HeaderHeader,
   MapHeaderHeader,
@@ -25,6 +26,7 @@ import { Legend, LegendItem } from 'components/Map/Legend';
 const SocialLocationPreview = (props: {
   projections?: Projections;
   stats?: { [key: string]: number | null };
+  border?: Boolean;
 }) => {
   const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
   const lastUpdatedDateString =
@@ -32,8 +34,9 @@ const SocialLocationPreview = (props: {
 
   if (!props.projections || !props.stats) {
     return (
-      <Wrapper hasMap={true}>
-        <PreviewHeader>
+      <Wrapper border={props.border}>
+        <USMapPreviewHeader>
+          <MapHeaderHeader>America’s COVID warning system</MapHeaderHeader>
           <MapWrapper>
             <Map
               hideLegend={true}
@@ -42,32 +45,30 @@ const SocialLocationPreview = (props: {
             />
           </MapWrapper>
           <HeaderText>
-            <MapHeaderHeader>America’s COVID warning system</MapHeaderHeader>
-            <HeaderSubhead>Risk levels</HeaderSubhead>
             <Legend condensed={true}>
               <LegendItem
                 key={'legend-4'}
-                title={LOCATION_SUMMARY_LEVELS[Level.HIGH].name}
+                title={LOCATION_SUMMARY_LEVELS[Level.HIGH].summary}
                 color={LOCATION_SUMMARY_LEVELS[Level.HIGH].color}
               />
               <LegendItem
                 key={'legend-3'}
-                title={LOCATION_SUMMARY_LEVELS[Level.MEDIUM_HIGH].name}
+                title={LOCATION_SUMMARY_LEVELS[Level.MEDIUM_HIGH].summary}
                 color={LOCATION_SUMMARY_LEVELS[Level.MEDIUM_HIGH].color}
               />
               <LegendItem
                 key={'legend-2'}
-                title={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].name}
+                title={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].summary}
                 color={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].color}
               />
               <LegendItem
                 key={'legend-1'}
-                title={LOCATION_SUMMARY_LEVELS[Level.LOW].name}
+                title={LOCATION_SUMMARY_LEVELS[Level.LOW].summary}
                 color={LOCATION_SUMMARY_LEVELS[Level.LOW].color}
               />
             </Legend>
           </HeaderText>
-        </PreviewHeader>
+        </USMapPreviewHeader>
         <PreviewFooter>
           <FooterText>Last Updated {lastUpdatedDateString}</FooterText>
           <FooterText>covidactnow.org</FooterText>

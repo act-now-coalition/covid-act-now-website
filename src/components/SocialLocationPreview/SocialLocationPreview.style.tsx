@@ -2,8 +2,13 @@ import styled, { css } from 'styled-components';
 import palette from 'assets/theme/palette';
 import Typography from '@material-ui/core/Typography';
 
-export const Wrapper = styled.div<{ hasMap?: Boolean }>`
-  box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.2);
+export const Wrapper = styled.div<{
+  noShadow?: Boolean;
+  border?: Boolean;
+}>`
+  box-shadow: ${props =>
+    props.border ? 'none' : '0px 12px 40px rgba(0, 0, 0, 0.2)'};
+  border: ${props => (props.border ? `2px solid ${palette.divider}` : 'none')};
   border-radius: 4px;
   color: black;
   background-color: ${palette.white};
@@ -23,6 +28,14 @@ export const PreviewHeaderStyles = css`
 
 export const PreviewHeader = styled.div`
   ${PreviewHeaderStyles}
+`;
+
+export const USMapPreviewHeader = styled.div`
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const MapWrapper = styled.div`

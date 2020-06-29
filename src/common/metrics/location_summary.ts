@@ -8,11 +8,17 @@ const MEDIUM_HIGH_NAME = 'High';
 const HIGH_NAME = 'Critical';
 const UNKNOWN = 'Unknown';
 
+const LEGEND_SUMMARY_LOW = 'On track to contain COVID';
+const LEGEND_SUMMARY_MEDIUM = 'Controlled disease growth';
+const LEGEND_SUMMARY_MEDIUM_HIGH = 'At risk';
+const LEGEND_SUMMARY_HIGH = 'Active or imminent outbreak';
+
 export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
   [Level.LOW]: {
     level: Level.LOW,
     upperLimit: 0,
     name: LOW_NAME,
+    summary: LEGEND_SUMMARY_LOW,
     color: COLOR_MAP.GREEN.BASE,
     detail: locationName =>
       `${locationName} is on track to contain COVID. Cases are steadily decreasing and ${locationName}’s COVID preparedness meets or exceeds international standards.`,
@@ -21,6 +27,7 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     level: Level.MEDIUM,
     upperLimit: 0,
     name: MEDIUM_NAME,
+    summary: LEGEND_SUMMARY_MEDIUM,
     color: COLOR_MAP.ORANGE.BASE,
     detail: locationName =>
       `COVID in ${locationName} is spreading in a slow and controlled fashion, and ${locationName}’s COVID preparedness meets international standards. If this trend continues, ${locationName} may eventually achieve herd immunity, though this may take years.`,
@@ -29,6 +36,7 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     level: Level.MEDIUM_HIGH,
     upperLimit: 0,
     name: MEDIUM_HIGH_NAME,
+    summary: LEGEND_SUMMARY_MEDIUM_HIGH,
     color: COLOR_MAP.ORANGE_DARK.BASE,
     detail: locationName =>
       `${locationName} is at risk of an outbreak. COVID cases are either increasing at a rate likely to overwhelm hospitals and/or the state’s COVID preparedness is well below international standards.`,
@@ -37,6 +45,7 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     level: Level.HIGH,
     upperLimit: 0,
     name: HIGH_NAME,
+    summary: LEGEND_SUMMARY_HIGH,
     color: COLOR_MAP.RED.BASE,
     detail: locationName =>
       `${locationName} is either actively experiencing an outbreak or is at extreme risk. COVID cases are exponentially growing and/or ${locationName}’s COVID preparedness is dangerously below international standards.`,
@@ -45,6 +54,7 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     level: Level.UNKNOWN,
     upperLimit: 0,
     name: UNKNOWN,
+    summary: UNKNOWN,
     color: COLOR_MAP.GRAY.BASE,
     detail: locationName => 'We don’t have enough data to assess COVID risk.',
   },
