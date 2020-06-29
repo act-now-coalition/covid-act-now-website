@@ -45,7 +45,7 @@ exit_with_usage () {
 execute () {
   curl -H "Authorization: token $GITHUB_TOKEN" \
       --request POST \
-      --data "{\"event_type\": \"send-alert-emails\", \"client_payload\": { \"firebase_env\": \"${FIREBASE_ENV}\", \"snapshot_id\": \"${SNAPSHOT_ID}\" \"send_emails\": \"${SEND_EMAILS}\" } }" \
+      --data "{\"event_type\": \"send-alert-emails\", \"client_payload\": { \"firebase_env\": \"${FIREBASE_ENV}\", \"snapshot_id\": \"${SNAPSHOT_ID}\", \"send_emails\": \"${SEND_EMAILS}\" } }" \
       https://api.github.com/repos/covid-projections/covid-projections/dispatches
 
   echo "Alerts sending requested. Go to https://github.com/covid-projections/covid-projections/actions to monitor progress."
