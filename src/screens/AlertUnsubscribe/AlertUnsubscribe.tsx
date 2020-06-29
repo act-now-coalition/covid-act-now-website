@@ -25,7 +25,6 @@ const AlertUnsubscribe = () => {
   const email = params.get('email') || '';
 
   const [selectedLocations, setSelectedLocations] = useState([] as any);
-  const [formSubmitted, setFormSubmitted] = useState(false);
   const [formSubmittedCopy, setFormSubmittedCopy] = useState('');
 
   useEffect(() => {
@@ -63,7 +62,6 @@ const AlertUnsubscribe = () => {
     const db = getFirebase().firestore();
     await db.collection('alerts-subscriptions').doc(email).delete();
     setFormSubmittedCopy(unsubscribedCopy);
-    setFormSubmitted(true);
   }
 
   function handleSelectChange(selectedLocation: any) {
@@ -78,26 +76,17 @@ const AlertUnsubscribe = () => {
       subscribedAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
     setFormSubmittedCopy(resubscribedCopy);
-    setFormSubmitted(true);
   }
 
   return (
     <Wrapper>
-      {!formSubmitted && (
+      {!formSubmittedCopy && (
         <Fragment>
           <UnsubscribeHeader>
             Update your COVID Alert Preferences
           </UnsubscribeHeader>
           <BodyCopy>To update your preferences:</BodyCopy>
           <UpdatePreferencesFormWrapper>
-            <input
-              hidden
-              aria-label="alert_list_csv"
-              id="fieldjrdtwy"
-              maxLength={200}
-              name="cm-f-jrdtwy"
-              onChange={value => {}}
-            />
             <Autocomplete
               fullWidth
               multiple
@@ -141,7 +130,7 @@ const AlertUnsubscribe = () => {
           </UnsubscribeButton>
         </Fragment>
       )}
-      {formSubmitted && <BodyCopy>{formSubmittedCopy}</BodyCopy>}
+      {formSubmittedCopy && <BodyCopy>{formSubmittedCopy}</BodyCopy>}
     </Wrapper>
   );
 };
