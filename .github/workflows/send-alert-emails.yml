@@ -53,7 +53,7 @@ jobs:
       - name: Send emails via campaign monitor
         run: yarn send-emails alerts.json ${{ env.SNAPSHOT_ID }} ${{env.SEND_EMAILS}}
         env:
-          CREATE_SEND_TOKEN: ${ secrets.CREATE_SEND_TOKEN }}
+          CREATE_SEND_TOKEN: ${{ secrets.CREATE_SEND_TOKEN }}
           SMART_EMAIL_ID: ${{ secrets.SMART_EMAIL_ID }} # Delete this once we generate the HTML locally
 
       # Slack notifications.
