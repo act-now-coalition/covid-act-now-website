@@ -50,7 +50,7 @@ jobs:
       # Generate / send emails.
       - run: yarn generate-daily-alerts ${{ env.SNAPSHOT_ID }}
       - run: yarn create-lists-to-email alerts.json ${{ env.SNAPSHOT_ID }}
-      - name: Send emails via sendgrid
+      - name: Send emails via campaign monitor
         run: yarn send-emails alerts.json ${{ env.SNAPSHOT_ID }} ${{env.SEND_EMAILS}}
         env:
           CREATE_SEND_TOKEN: ${ secrets.CREATE_SEND_TOKEN }}
