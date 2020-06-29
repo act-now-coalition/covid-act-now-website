@@ -201,6 +201,7 @@ export class Projection {
     const overrideIcu =
       [
         '01101', // Montgomery, AL
+        '48201', // Harris, TX
       ].indexOf(this.fips) > -1;
     this.icuUtilization = overrideIcu
       ? actualTimeseries.map(row => 0.9) // 90% utilized
