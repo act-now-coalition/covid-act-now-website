@@ -1,6 +1,7 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import { Box, Grid, Typography, Paper, Button } from '@material-ui/core';
 import { COLORS } from 'common';
+import { EMBED_WIDTH, EMBED_HEIGHT } from './EmbedEnums';
 import {
   PreviewFooterStyles,
   PreviewHeaderStyles,
@@ -23,8 +24,8 @@ export const EmbedContainer = styled(Paper)`
   justify-content: center;
   overflow: hidden;
   border-radius: 4px;
-  height: 370px;
-  width: 350px;
+  height: ${props => props.height || `${EMBED_HEIGHT}px`};
+  height: ${props => props.width || `${EMBED_WIDTH}px`};
   box-shadow: none;
 `;
 

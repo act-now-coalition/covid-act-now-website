@@ -22,8 +22,8 @@ import { useEmbed } from 'common/utils/hooks';
 export default function EmbedPreview({ open, onClose, county }) {
   const {
     isEmbed,
-    EMBED_HEIGHT,
-    EMBED_WIDTH,
+    getEmbedHeight,
+    getEmbedWidth,
     getIframePath,
     getJsCodeSnippet,
     getIframeCodeSnippet,
@@ -91,8 +91,8 @@ export default function EmbedPreview({ open, onClose, county }) {
                   <iframe
                     src={iFramePath}
                     title="Embed Preview"
-                    width={EMBED_WIDTH}
-                    height={EMBED_HEIGHT}
+                    width={getEmbedWidth(countyFipsCode)}
+                    height={getEmbedHeight(countyFipsCode)}
                     frameBorder="0"
                   ></iframe>
                 </Grid>

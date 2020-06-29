@@ -17,6 +17,7 @@ import {
   HeaderText,
   AlarmLevel,
 } from 'components/SocialLocationPreview/SocialLocationPreview.style';
+import { US_MAP_EMBED_HEIGHT, US_MAP_EMBED_WIDTH } from './EmbedEnums';
 import {
   EmbedContainer,
   EmbedWrapper,
@@ -140,7 +141,7 @@ export default function Embed(props) {
 
   if (isNational) {
     return (
-      <EmbedContainer>
+      <EmbedContainer height={US_MAP_EMBED_HEIGHT} width={US_MAP_EMBED_WIDTH}>
         <SocialLocationPreview border />
       </EmbedContainer>
     );

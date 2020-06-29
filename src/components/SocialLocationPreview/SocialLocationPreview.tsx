@@ -8,6 +8,7 @@ import {
   USMapPreviewHeader,
   HeaderText,
   HeaderHeader,
+  USMapHeaderText,
   MapHeaderHeader,
   HeaderSubhead,
   AlarmLevel,
@@ -44,7 +45,7 @@ const SocialLocationPreview = (props: {
               setMobileMenuOpen={function () {}}
             />
           </MapWrapper>
-          <HeaderText>
+          <USMapHeaderText>
             <Legend condensed={true}>
               <LegendItem
                 key={'legend-4'}
@@ -67,7 +68,7 @@ const SocialLocationPreview = (props: {
                 color={LOCATION_SUMMARY_LEVELS[Level.LOW].color}
               />
             </Legend>
-          </HeaderText>
+          </USMapHeaderText>
         </USMapPreviewHeader>
         <PreviewFooter>
           <FooterText>Last Updated {lastUpdatedDateString}</FooterText>

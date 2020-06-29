@@ -36,11 +36,12 @@ export const USMapPreviewHeader = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 `;
 
 export const MapWrapper = styled.div`
-  flex: 1;
-  margin: 0 1rem -1.5rem -0.5rem;
+  width: 100%;
+  height: 230px;
 `;
 
 export const PreviewBody = styled.div`
@@ -71,6 +72,10 @@ export const FooterText = styled(Typography)`
 
 export const HeaderText = styled.div`
   flex: 1;
+`;
+
+export const USMapHeaderText = styled.div`
+  width: 100%;
 `;
 
 export const AlarmLevel = styled.div`
