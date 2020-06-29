@@ -50,7 +50,11 @@ jobs:
       # Generate / send emails.
       - run: yarn generate-daily-alerts ${{ env.SNAPSHOT_ID }}
       - run: yarn create-lists-to-email alerts.json ${{ env.SNAPSHOT_ID }}
-      - run: yarn send-emails alerts.json ${{ env.SNAPSHOT_ID }} ${{env.SEND_EMAILS}}
+      - name: Send emails via sendgrid
+        run: yarn send-emails alerts.json ${{ env.SNAPSHOT_ID }} ${{env.SEND_EMAILS}}
+        env:
+          CREATE_SEND_TOKEN: ${ secrets.CREATE_SEND_TOKEN }}
+          SMART_EMAIL_ID: ${{ secrets.SMART_EMAIL_ID }} # Delete this once we generate the HTML locally
 
       # Slack notifications.
       - name: Slack notification
