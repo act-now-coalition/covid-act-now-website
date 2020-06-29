@@ -1,5 +1,7 @@
 //@ts-ignore createsend has no types and throws an error
 import createsend from 'createsend-node';
+import * as Handlebars from "handlebars";
+
 import admin from 'firebase-admin';
 import fs from 'fs-extra';
 import path from 'path';
@@ -7,12 +9,19 @@ import { Alert } from './interfaces';
 import { getFirestore } from './firestore';
 
 interface EmailSendData {
+    Subject: string,
+    From: string,
+    ReplyTo: string | null,
     To: string[] | null,
     CC: string[] | null,
     BCC: string[] | null,
-    smartEmailID: string,
+    Html: string,
+    Text: string,
     Attachments: { [key: string]: string }[] | null,
-    data: { [key: string]: any } | null,
+    TrackOpens: boolean,
+    TrackClicks: boolean,
+    InlineCSS: boolean,
+    Group: string | null,
     AddRecipientsToList: string | null,
 }
 
@@ -27,11 +36,14 @@ interface CampaignMonitorError {
     Message: string
 }
 
+const alertTemplate = Handlebars.compile(fs.readFileSync(path.join(__dirname,'raw_html.html'),'utf8'));
+
+
 async function sendEmail(
     api: any, data: EmailSendData, dryRun: boolean): Promise<SendEmailResult> {
     return new Promise((resolve, reject) => {
         if (dryRun) {return resolve({MessageID: "none", Recipient: "none", Status: "dry run"});}
-        api.transactional.sendSmartEmail(data, (err: any, result: any) => {
+        api.transactional.sendClassicEmail(data, (err: any, result: any) => {
             if (err) { console.log(err); reject(err); }
             resolve(result);
         });
@@ -40,21 +52,31 @@ async function sendEmail(
 
 function generateSendData(usersToEmail: string[], alertForLocation: Alert) : EmailSendData {
     const base_url = "https://data.covidactnow.org/thermometer_screenshot"
+    const html = alertTemplate({
+        "change": (alertForLocation.newLevel < alertForLocation.oldLevel) ? "DECREASED": "INCREASED",
+        "location_name": alertForLocation.locationName,
+        "img_alt": `Image depecting that the state went from from state ${alertForLocation.oldLevel} to ${alertForLocation.newLevel}`,
+        "img_url": `${base_url}/therm-${alertForLocation.newLevel}-${alertForLocation.oldLevel}.png`,
+        "last_updated": alertForLocation.lastUpdated,
+        "location_url": alertForLocation.locationURL,
+    });
+    const subject = `Alert for ${alertForLocation.locationName}`;
+
     return {
+        "Subject": subject,
         "To": usersToEmail,
         "CC": null,
         "BCC": null,
         "Attachments": null,
-        "smartEmailID": `${process.env.SMART_EMAIL_ID}`,
-        "data": {
-            "change": (alertForLocation.newLevel < alertForLocation.oldLevel) ? "DECREASED": "INCREASED",
-            "location_name": alertForLocation.locationName,
-            "img_alt": `Image depecting that the state went from from state ${alertForLocation.oldLevel} to ${alertForLocation.newLevel}`,
-            "img_url": `${base_url}/therm-${alertForLocation.newLevel}-${alertForLocation.oldLevel}.png`,
-            "last_updated": alertForLocation.lastUpdated,
-            "location_url": alertForLocation.locationURL,
-        },
+        "Html": html,
+        "Text": html,
         "AddRecipientsToList": null,
+        "From": "Covid Act Now <noreply@covidactnow.org>",
+        "ReplyTo": null,
+        "TrackOpens": true,
+        "TrackClicks": true,
+        "InlineCSS": true,
+        "Group": null,
     }
 }
 
@@ -104,10 +126,10 @@ async function setLastSnapshotNumber(firestore: FirebaseFirestore.Firestore, sna
                             uniqueEmailAddress[doc.id] = (uniqueEmailAddress[doc.id] || 0) + 1;
                             locationsWithEmails[fips] = (locationsWithEmails[fips] || 0) + 1;
                             if (dryRun) return;
-                            await db.collection(`snapshots/${currentSnapshot}/locations/${fips}/emails/`).doc(doc.id)
-                            .set({
-                                sentAt: admin.firestore.FieldValue.serverTimestamp()
-                            })
+                            // await db.collection(`snapshots/${currentSnapshot}/locations/${fips}/emails/`).doc(doc.id)
+                            // .set({
+                            //     sentAt: admin.firestore.FieldValue.serverTimestamp()
+                            // })
                         }).catch(err => {
                             console.log(err);
                             process.exit(-1);
