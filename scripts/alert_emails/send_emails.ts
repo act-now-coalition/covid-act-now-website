@@ -115,7 +115,7 @@ async function setLastSnapshotNumber(snapshot: string) {
                 })
             });
         });
-    console.log(`Total Emails to be sent: ${emailSent}. Total locations with emails ${locationsWithEmails}. Unique Email addresses ${Object(locationsWithEmails).keys.length}`)
+    console.log(`Total Emails to be sent: ${emailSent}. Total locations with emails ${locationsWithEmails}. Unique Email addresses ${Object.keys(locationsWithEmails).length}`)
 
     if (!dryRun) {
         setLastSnapshotNumber(currentSnapshot);
