@@ -85,7 +85,7 @@ const AlertUnsubscribe = () => {
           <UnsubscribeHeader>
             Update your COVID Alert Preferences
           </UnsubscribeHeader>
-          <BodyCopy>To update your preferences:</BodyCopy>
+          <BodyCopy>To update preferences for {email}:</BodyCopy>
           <UpdatePreferencesFormWrapper>
             <Autocomplete
               fullWidth
@@ -124,7 +124,7 @@ const AlertUnsubscribe = () => {
               Update Preferences
             </UpdateAlertsButton>
           </UpdatePreferencesFormWrapper>
-          <BodyCopy>To unsubscribe from all COVID alerts:</BodyCopy>
+          <BodyCopy>To unsubscribe {email} from all COVID alerts:</BodyCopy>
           <UnsubscribeButton onClick={unsubscribeFromAll}>
             Unsubscribe
           </UnsubscribeButton>

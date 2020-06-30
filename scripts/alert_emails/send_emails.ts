@@ -7,7 +7,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import { Alert } from './interfaces';
 import { getFirestore } from './firestore';
-import { LevelInfoMap } from '../../src/common/level';
+import { Level } from '../../src/common/level';
 
 interface EmailSendData {
     Subject: string,
@@ -37,7 +37,7 @@ interface CampaignMonitorError {
     Message: string
 }
 
-const alertTemplate = Handlebars.compile(fs.readFileSync(path.join(__dirname,'raw_html.html'),'utf8'));
+const alertTemplate = Handlebars.compile(fs.readFileSync(path.join(__dirname,'template.html'),'utf8'));
 
 
 async function sendEmail(
@@ -51,29 +51,29 @@ async function sendEmail(
     });
 }
 
-function generateSendData(usersToEmail: string[], alertForLocation: Alert) : EmailSendData {
+function generateSendData(userToEmail: string, alertForLocation: Alert) : EmailSendData {
     const base_url = "https://data.covidactnow.org/thermometer_screenshot"
     const html = alertTemplate({
         "change": (alertForLocation.newLevel < alertForLocation.oldLevel) ? "decreased": "increased",
         "location_name": alertForLocation.locationName,
-        "img_alt": `Image depecting that the state went from from state ${alertForLocation.oldLevel} to ${alertForLocation.newLevel}`,
+        "img_alt": `Image depecting that the state went from from state ${Level[alertForLocation.oldLevel]} to ${Level[alertForLocation.newLevel]}`,
         "img_url": `${base_url}/therm-${alertForLocation.newLevel}-${alertForLocation.oldLevel}.png`,
         "last_updated": alertForLocation.lastUpdated,
         "location_url": alertForLocation.locationURL,
-        "unsubscribe_link": "https://covidactnow.org/alert_unsubscribe", // would be nice to know dev/staging/prod
+        "unsubscribe_link": `https://covidactnow.org/alert_unsubscribe?email=${encodeURI(userToEmail)}`, // would be nice to know dev/staging/prod
     });
-    const subject = `Alert for ${alertForLocation.locationName}`;
+    const subject = `${alertForLocation.locationName}'s Threat Level Has Changed`;
 
     return {
         "Subject": subject,
-        "To": usersToEmail,
+        "To": [userToEmail],
         "CC": null,
         "BCC": null,
         "Attachments": null,
         "Html": html,
         "Text": html,
         "AddRecipientsToList": null,
-        "From": "Covid Act Now <noreply@covidactnow.org>",
+        "From": "Covid Act Now Alerts  <noreply@covidactnow.org>",
         "ReplyTo": null,
         "TrackOpens": true,
         "TrackClicks": true,
@@ -114,6 +114,7 @@ async function setLastSnapshotNumber(firestore: FirebaseFirestore.Firestore, sna
     const auth = { apiKey: process.env.CREATE_SEND_TOKEN };
     const api: any = new createsend(auth);
     let emailSent = 0;
+    let errorCount = 0;
     const uniqueEmailAddress: {[email: string]: number} = {}
     const locationsWithEmails: {[fips: string]: number} = {}
 
@@ -122,7 +123,7 @@ async function setLastSnapshotNumber(firestore: FirebaseFirestore.Firestore, sna
         await db.collection(`snapshots/${currentSnapshot}/locations/${fips}/emails/`)
             .where("sentAt", "==", null).get().then(async querySnapshot => {
                 for (const doc of querySnapshot.docs) {
-                    const userToEmail = sendAllToEmail? [sendAllToEmail]: [doc.id];
+                    const userToEmail = sendAllToEmail? sendAllToEmail: doc.id;
                     await sendEmail(api, generateSendData(userToEmail, locationsWithAlerts[fips]), dryRun)
                         .then(async result => {
                             emailSent += 1;
@@ -135,7 +136,7 @@ async function setLastSnapshotNumber(firestore: FirebaseFirestore.Firestore, sna
                             })
                         }).catch(err => {
                             console.log(err);
-                            process.exit(-1);
+                            errorCount += 1;
                         });
                 }
             });
@@ -144,6 +145,10 @@ async function setLastSnapshotNumber(firestore: FirebaseFirestore.Firestore, sna
 
     if (!dryRun) {
         setLastSnapshotNumber(db, currentSnapshot);
+        // If we aren't in a dry run but there's clearly some non trivial errors exit with error
+        if (emailSent < 1 || errorCount > 1) {
+            process.exit(-1);
+        }
     }
     console.log(`Done.`);
 
@@ -151,23 +156,15 @@ async function setLastSnapshotNumber(firestore: FirebaseFirestore.Firestore, sna
 
 async function parseArgs(): Promise<{ fipsToAlertFilename: string, currentSnapshot: string, dryRun: boolean, sendAllToEmail?: string}> {
     const args = process.argv.slice(2);
-    if (args.length == 2) {
-        const fipsToAlertFilename = args[0];
-        const currentSnapshot = args[1];
-        return { fipsToAlertFilename, currentSnapshot, dryRun: true };
-    } if (args.length == 3) {
-        const fipsToAlertFilename = args[0];
-        const currentSnapshot = args[1];
-        const isSend = args[2] === "true";
-        return { fipsToAlertFilename, currentSnapshot, dryRun: !isSend};
-    }  if (args.length == 4) {
-        const fipsToAlertFilename = args[0];
-        const currentSnapshot = args[1];
-        const isSend = args[2] === "true";
-        const sendAllToEmail = args[3]
-        return { fipsToAlertFilename, currentSnapshot, dryRun: !isSend, sendAllToEmail};
-    } else {
+
+    if (args.length < 2 || args.length > 4) {
         exitWithUsage();
+    } else {
+        const fipsToAlertFilename = args[0];
+        const currentSnapshot = args[1];
+        const isSend = (args[2] || "false") === "true";
+        const sendAllToEmail = args[3] || undefined;
+        return { fipsToAlertFilename, currentSnapshot, dryRun: !isSend, sendAllToEmail }
     }
 }
 
