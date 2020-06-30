@@ -7,6 +7,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import { Alert } from './interfaces';
 import { getFirestore } from './firestore';
+import { LevelInfoMap } from '../../src/common/level';
 
 interface EmailSendData {
     Subject: string,
@@ -43,7 +44,7 @@ async function sendEmail(
     api: any, data: EmailSendData, dryRun: boolean): Promise<SendEmailResult> {
     return new Promise((resolve, reject) => {
         if (dryRun) {return resolve({MessageID: "none", Recipient: "none", Status: "dry run"});}
-        api.transactional.sendClassicEmail(data, (err: any, result: any) => {
+        api.transactional.sendClassicEmail(data, (err: CampaignMonitorError, result: any) => {
             if (err) { console.log(err); reject(err); }
             resolve(result);
         });
@@ -53,12 +54,13 @@ async function sendEmail(
 function generateSendData(usersToEmail: string[], alertForLocation: Alert) : EmailSendData {
     const base_url = "https://data.covidactnow.org/thermometer_screenshot"
     const html = alertTemplate({
-        "change": (alertForLocation.newLevel < alertForLocation.oldLevel) ? "DECREASED": "INCREASED",
+        "change": (alertForLocation.newLevel < alertForLocation.oldLevel) ? "decreased": "increased",
         "location_name": alertForLocation.locationName,
         "img_alt": `Image depecting that the state went from from state ${alertForLocation.oldLevel} to ${alertForLocation.newLevel}`,
         "img_url": `${base_url}/therm-${alertForLocation.newLevel}-${alertForLocation.oldLevel}.png`,
         "last_updated": alertForLocation.lastUpdated,
         "location_url": alertForLocation.locationURL,
+        "unsubscribe_link": "https://covidactnow.org/alert_unsubscribe", // would be nice to know dev/staging/prod
     });
     const subject = `Alert for ${alertForLocation.locationName}`;
 
@@ -101,7 +103,7 @@ async function setLastSnapshotNumber(firestore: FirebaseFirestore.Firestore, sna
     const outputFolder = path.join(__dirname);
     await fs.ensureDir(outputFolder);
 
-    const { fipsToAlertFilename, currentSnapshot, dryRun } = await parseArgs();
+    const { fipsToAlertFilename, currentSnapshot, dryRun, sendAllToEmail} = await parseArgs();
     const alertPath = path.join(outputFolder, fipsToAlertFilename);
 
     const rawdata = fs.readFileSync(alertPath, "utf8");
@@ -120,7 +122,8 @@ async function setLastSnapshotNumber(firestore: FirebaseFirestore.Firestore, sna
         await db.collection(`snapshots/${currentSnapshot}/locations/${fips}/emails/`)
             .where("sentAt", "==", null).get().then(async querySnapshot => {
                 for (const doc of querySnapshot.docs) {
-                    await sendEmail(api, generateSendData([doc.id], locationsWithAlerts[fips]), dryRun)
+                    const userToEmail = sendAllToEmail? [sendAllToEmail]: [doc.id];
+                    await sendEmail(api, generateSendData(userToEmail, locationsWithAlerts[fips]), dryRun)
                         .then(async result => {
                             emailSent += 1;
                             uniqueEmailAddress[doc.id] = (uniqueEmailAddress[doc.id] || 0) + 1;
@@ -146,7 +149,7 @@ async function setLastSnapshotNumber(firestore: FirebaseFirestore.Firestore, sna
 
 })();
 
-async function parseArgs(): Promise<{ fipsToAlertFilename: string, currentSnapshot: string, dryRun: boolean }> {
+async function parseArgs(): Promise<{ fipsToAlertFilename: string, currentSnapshot: string, dryRun: boolean, sendAllToEmail?: string}> {
     const args = process.argv.slice(2);
     if (args.length == 2) {
         const fipsToAlertFilename = args[0];
@@ -157,6 +160,12 @@ async function parseArgs(): Promise<{ fipsToAlertFilename: string, currentSnapsh
         const currentSnapshot = args[1];
         const isSend = args[2] === "true";
         return { fipsToAlertFilename, currentSnapshot, dryRun: !isSend};
+    }  if (args.length == 4) {
+        const fipsToAlertFilename = args[0];
+        const currentSnapshot = args[1];
+        const isSend = args[2] === "true";
+        const sendAllToEmail = args[3]
+        return { fipsToAlertFilename, currentSnapshot, dryRun: !isSend, sendAllToEmail};
     } else {
         exitWithUsage();
     }
@@ -164,6 +173,6 @@ async function parseArgs(): Promise<{ fipsToAlertFilename: string, currentSnapsh
 
 
 function exitWithUsage(): never {
-    console.log('Usage: yarn send-emails fipsToAlertFilename currentSnapshot [send]');
+    console.log('Usage: yarn send-emails fipsToAlertFilename currentSnapshot [send] [sendAllToEmail]');
     process.exit(-1);
 }
