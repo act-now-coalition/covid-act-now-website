@@ -132,6 +132,9 @@ export class Projection {
   // Test Positive series as values between 0-1.
   private readonly testPositiveRate: Array<number | null>;
   private readonly contractTracers: Array<number | null>;
+  private readonly caseDensityCases: Array<number | null>;
+  private readonly caseDensityDeaths: Array<number | null>;
+  private readonly dailyDeaths: Array<number | null>;
 
   constructor(
     summaryWithTimeseries: RegionSummaryWithTimeseries,
@@ -180,6 +183,7 @@ export class Projection {
     this.dailyNegativeTests = this.deltasFromCumulatives(
       this.cumulativeNegativeTests,
     );
+    this.dailyDeaths = this.deltasFromCumulatives(this.cumulativeDeaths);
 
     this.rtRange = this.calcRtRange(timeseries);
     this.testPositiveRate = this.calcTestPositiveRate();
@@ -209,6 +213,9 @@ export class Projection {
     this.icuNearCapacityOverride = overrideIcu;
 
     this.contractTracers = this.calcContactTracers(this.actualTimeseries);
+
+    this.caseDensityCases = this.calcCaseDensityCases(this.actualTimeseries);
+    this.caseDensityDeaths = this.calcCaseDensityDeaths(this.actualTimeseries);
 
     this.fixZeros(this.hospitalizations);
     this.fixZeros(this.cumulativeDeaths);
@@ -470,6 +477,22 @@ export class Projection {
     return _.mean(lastWeekOfPositives);
   }
 
+  getWeeklyAverageDeathForDay(i?: number) {
+    const lastIndex = this.indexOfLastValue(this.dailyDeaths);
+    if (i === undefined) {
+      if (!lastIndex) return null;
+      i = lastIndex;
+    } else if (lastIndex === null || i > lastIndex) {
+      return null;
+    }
+    // Get last week of sane data (ignore negative values)
+    const lastWeekOfDeaths = _.filter(
+      this.dailyDeaths.slice(Math.max(0, i - 6), i + 1),
+      p => p !== null && p >= 0,
+    );
+    return _.mean(lastWeekOfDeaths);
+  }
+
   private calcContactTracers(
     actualTimeseries: Array<CANActualsTimeseriesRow | null>,
   ): Array<number | null> {
@@ -486,6 +509,44 @@ export class Projection {
           }
         }
 
+        return null;
+      },
+    );
+  }
+
+  private calcCaseDensityCases(
+    actualTimeseries: Array<CANActualsTimeseriesRow | null>,
+  ): Array<number | null> {
+    return actualTimeseries.map(
+      (row: CANActualsTimeseriesRow | null, i: number) => {
+        const weeklyAverage = this.getWeeklyAverageCaseForDay(i);
+        const totalPopulation = this.totalPopulation;
+        if (weeklyAverage) {
+          console.log(
+            'calc cases',
+            weeklyAverage / (totalPopulation * 0.00001),
+          );
+          return weeklyAverage / (totalPopulation * 0.00001);
+        }
+        return null;
+      },
+    );
+  }
+
+  private calcCaseDensityDeaths(
+    actualTimeseries: Array<CANActualsTimeseriesRow | null>,
+  ): Array<number | null> {
+    return actualTimeseries.map(
+      (row: CANActualsTimeseriesRow | null, i: number) => {
+        const weeklyAverage = this.getWeeklyAverageDeathForDay(i);
+        const totalPopulation = this.totalPopulation;
+        if (weeklyAverage) {
+          console.log(
+            'calc deaths',
+            weeklyAverage / (totalPopulation * 0.00001),
+          );
+          return weeklyAverage / (totalPopulation * 0.00001);
+        }
         return null;
       },
     );
