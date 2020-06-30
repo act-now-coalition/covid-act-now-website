@@ -62,7 +62,7 @@ function generateSendData(userToEmail: string, alertForLocation: Alert) : EmailS
         "location_url": alertForLocation.locationURL,
         "unsubscribe_link": `https://covidactnow.org/alert_unsubscribe?email=${encodeURI(userToEmail)}`, // would be nice to know dev/staging/prod
     });
-    const subject = `${alertForLocation.locationName}'s Threat Level Has Changed`;
+    const subject = `${alertForLocation.locationName}'s Risk Level Has Changed`;
 
     return {
         "Subject": subject,
@@ -74,7 +74,7 @@ function generateSendData(userToEmail: string, alertForLocation: Alert) : EmailS
         "Text": html,
         "AddRecipientsToList": null,
         "From": "Covid Act Now Alerts  <noreply@covidactnow.org>",
-        "ReplyTo": null,
+        "ReplyTo": "alerts-feedback@covidactnow.org",
         "TrackOpens": true,
         "TrackClicks": true,
         "InlineCSS": true,
@@ -130,6 +130,7 @@ async function setLastSnapshotNumber(firestore: FirebaseFirestore.Firestore, sna
                             uniqueEmailAddress[doc.id] = (uniqueEmailAddress[doc.id] || 0) + 1;
                             locationsWithEmails[fips] = (locationsWithEmails[fips] || 0) + 1;
                             if (dryRun) return;
+                            // Comment out this code if ou are developing locally
                             await db.collection(`snapshots/${currentSnapshot}/locations/${fips}/emails/`).doc(doc.id)
                             .set({
                                 sentAt: admin.firestore.FieldValue.serverTimestamp()
