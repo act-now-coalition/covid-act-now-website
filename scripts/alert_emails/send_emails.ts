@@ -129,10 +129,10 @@ async function setLastSnapshotNumber(firestore: FirebaseFirestore.Firestore, sna
                             uniqueEmailAddress[doc.id] = (uniqueEmailAddress[doc.id] || 0) + 1;
                             locationsWithEmails[fips] = (locationsWithEmails[fips] || 0) + 1;
                             if (dryRun) return;
-                            // await db.collection(`snapshots/${currentSnapshot}/locations/${fips}/emails/`).doc(doc.id)
-                            // .set({
-                            //     sentAt: admin.firestore.FieldValue.serverTimestamp()
-                            // })
+                            await db.collection(`snapshots/${currentSnapshot}/locations/${fips}/emails/`).doc(doc.id)
+                            .set({
+                                sentAt: admin.firestore.FieldValue.serverTimestamp()
+                            })
                         }).catch(err => {
                             console.log(err);
                             process.exit(-1);
