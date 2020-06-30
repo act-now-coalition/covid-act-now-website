@@ -41,7 +41,7 @@ const Disclaimer = ({ metricName }: { metricName: number }) => {
         )}
         {getMetricDisclaimer(metricName)} Learn more about{' '}
         <a
-          href="https://blog.covidactnow.org/modeling-metrics-critical-to-reopen-safely/"
+          href="https://docs.google.com/document/d/1cd_cEpNiIl1TzUJBvw9sHLbrbUZ2qCxgN32IqVLa3Do/edit"
           target="_blank"
           rel="noopener noreferrer"
         >
