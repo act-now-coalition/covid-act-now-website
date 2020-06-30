@@ -29,6 +29,7 @@
     "esm": "^3.2.25",
     "firebase": "^7.15.4",
     "googleapis": "^39.2.0",
+    "handlebars": "^4.7.6",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "pageres": "^5.2.0",

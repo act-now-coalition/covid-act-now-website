@@ -101,7 +101,9 @@ export function hospitalOccupancyStatusText(projection: Projection) {
     currentCovidICUPatients / (totalICUCapacity - nonCovidPatients);
 
   const textHasAbout = noStateOverride ? 'has about' : 'has';
-  const textWeEstimateThat = noStateOverride ? 'We estimate that' : '';
+  const textWeEstimateThat = noStateOverride
+    ? 'Based on best available data, we estimate that'
+    : '';
   const textWeEstimate = noStateOverride ? 'we estimate' : '';
 
   const textLevel = levelText(
