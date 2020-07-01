@@ -93,6 +93,8 @@ export interface RtRange {
   high: number;
 }
 
+const estimatedCaseFatalityRatio = 0.01; // 1% of cases expected to turn into deaths, used in calcCaseDensityByDeaths
+
 /**
  * Represents a single projection for a given state or county.  Contains a
  * time-series of things like hospitalizations, hospital capacity, infections, etc.
@@ -188,8 +190,8 @@ export class Projection {
       this.cumulativeNegativeTests,
     );
 
-    const cumulativeActualDeaths = actualTimeseries.map(
-      row => row?.cumulativeDeaths || null,
+    const cumulativeActualDeaths = this.smoothCumulatives(
+      actualTimeseries.map(row => row?.cumulativeDeaths || null),
     );
     this.dailyDeaths = this.deltasFromCumulatives(cumulativeActualDeaths);
 
@@ -522,7 +524,7 @@ export class Projection {
         this.dailyPositiveTests,
         i,
       );
-      if (weeklyAverage === null) {
+      if (totalPopulation === 0 || weeklyAverage === null) {
         caseDensityByCases.push(null);
       } else {
         const val = weeklyAverage / (totalPopulation / 100000);
@@ -537,10 +539,9 @@ export class Projection {
     const totalPopulation = this.totalPopulation;
     for (let i = 0; i < this.dates.length; i++) {
       const weeklyAverage = this.getWeeklyAverageForDay(this.dailyDeaths, i);
-      if (weeklyAverage === null) {
+      if (totalPopulation === 0 || weeklyAverage === null) {
         caseDensityByDeaths.push(null);
       } else {
-        const estimatedCaseFatalityRatio = 0.01; // 1% of cases expected to turn into deaths.
         const estimatedCases = weeklyAverage / estimatedCaseFatalityRatio;
         const val = estimatedCases / (totalPopulation / 100000);
         caseDensityByDeaths.push(val);
