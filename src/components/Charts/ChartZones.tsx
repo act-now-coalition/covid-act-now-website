@@ -47,6 +47,7 @@ const ChartZones = ({
   capY,
   getTooltipBody,
   getPointText,
+  yAxisTickFormat,
 }: {
   width: number;
   height: number;
@@ -59,6 +60,7 @@ const ChartZones = ({
   marginBottom?: number;
   marginLeft?: number;
   marginRight?: number;
+  yAxisTickFormat: (_: number) => string;
 }) => {
   const chartWidth = width - marginLeft - marginRight;
   const chartHeight = height - marginTop - marginBottom;
@@ -170,7 +172,7 @@ const ChartZones = ({
         hideAxisLine
         hideTicks
         hideZero
-        tickFormat={(num: number) => formatPercent(num, 0)}
+        tickFormat={yAxisTickFormat}
       />
     </ChartContainer>
   );
@@ -183,6 +185,7 @@ const ChartZoneAutosize = ({
   getTooltipBody,
   getPointText,
   height = 400,
+  yAxisTickFormat = (num: number) => formatPercent(num, 0),
 }: {
   columnData: Point[];
   zones: LevelInfoMap;
@@ -190,6 +193,7 @@ const ChartZoneAutosize = ({
   getTooltipBody: (valueY: number) => string;
   getPointText: (valueY: number) => string;
   height?: number;
+  yAxisTickFormat?: (_: number) => string;
 }) => (
   <Style.ChartContainer>
     <ParentSize>
@@ -202,6 +206,7 @@ const ChartZoneAutosize = ({
           capY={capY}
           getTooltipBody={getTooltipBody}
           getPointText={getPointText}
+          yAxisTickFormat={yAxisTickFormat}
         />
       )}
     </ParentSize>
