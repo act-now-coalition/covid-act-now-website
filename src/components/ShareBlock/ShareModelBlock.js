@@ -10,7 +10,7 @@ const ShareModelBlock = ({ stateId, county, projections, stats }) => {
   const { displayName, shareURL } = getUrlAndShareQuote({ stateId, county });
   const countyName = county && county.county;
   const shareQuote = `I'm keeping track of ${displayName}'s data and risk level with @CovidActNow. What does your community look like?`;
-  const [showEmbedPreviewModal, setShowEmbedPreviewModal] = useState(true);
+  const [showEmbedPreviewModal, setShowEmbedPreviewModal] = useState(false);
 
   return (
     <>

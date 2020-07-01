@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement, ComponentType } from 'react';
 import { Projections } from 'common/models/Projections';
 import { useModelLastUpdatedDate } from 'common/utils/model';
 
@@ -28,11 +28,17 @@ const SocialLocationPreview = (props: {
   projections?: Projections;
   stats?: { [key: string]: number | null };
   border?: Boolean;
+  linkToCAN?: Boolean;
+  Footer?: ComponentType;
 }) => {
   const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
   const lastUpdatedDateString =
     lastUpdatedDate !== null ? lastUpdatedDate.toLocaleDateString() : '';
-
+  const navigateToCAN = () => {
+    window.top.location.href = 'https://covidactnow.org/';
+    return false;
+  };
+  const Footer = props.Footer;
   if (!props.projections || !props.stats) {
     return (
       <Wrapper border={props.border}>
@@ -40,6 +46,7 @@ const SocialLocationPreview = (props: {
           <MapHeaderHeader>America’s COVID warning system</MapHeaderHeader>
           <MapWrapper>
             <Map
+              onClick={props.linkToCAN ? navigateToCAN : null}
               hideLegend={true}
               setMapOption={function () {}}
               setMobileMenuOpen={function () {}}
@@ -70,10 +77,14 @@ const SocialLocationPreview = (props: {
             </Legend>
           </USMapHeaderText>
         </USMapPreviewHeader>
-        <PreviewFooter>
-          <FooterText>Last Updated {lastUpdatedDateString}</FooterText>
-          <FooterText>covidactnow.org</FooterText>
-        </PreviewFooter>
+        {Footer ? (
+          <Footer />
+        ) : (
+          <PreviewFooter>
+            <FooterText>Last Updated {lastUpdatedDateString}</FooterText>
+            <FooterText>covidactnow.org</FooterText>
+          </PreviewFooter>
+        )}
       </Wrapper>
     );
   }

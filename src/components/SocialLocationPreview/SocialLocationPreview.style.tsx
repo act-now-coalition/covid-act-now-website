@@ -15,7 +15,6 @@ export const Wrapper = styled.div<{
   width: 100%;
   min-height: 10rem;
   overflow: hidden;
-  pointer-events: none;
 `;
 
 export const PreviewHeaderStyles = css`

@@ -12,7 +12,12 @@ import { MapInstructions, MobileLineBreak } from './Map.style';
 
 // TODO(@pablo): We might want to move this to LOCATION_SUMMARY_LEVELS
 
-function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
+function Map({
+  hideLegend = false,
+  setMobileMenuOpen,
+  setMapOption,
+  onClick = null,
+}) {
   const history = useHistory();
   const [content, setContent] = useState('');
 
@@ -21,7 +26,12 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
     history.push(page);
   };
 
-  const onClick = stateName => {
+  const handleClick = stateName => {
+    // externally provided click handler
+    if (onClick) {
+      return onClick(stateName);
+    }
+
     const stateCode = REVERSED_STATES[stateName];
 
     goToStatePage(`/us/${stateCode.toLowerCase()}`);
@@ -65,7 +75,7 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
         <USACountyMap
           condensed={hideLegend}
           setTooltipContent={setContent}
-          stateClickHandler={onClick}
+          stateClickHandler={handleClick}
         />
       </div>
       {!hideLegend && (

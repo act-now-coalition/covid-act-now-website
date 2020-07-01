@@ -34,10 +34,6 @@ import SocialLocationPreview from 'components/SocialLocationPreview/SocialLocati
 function LocationEmbed() {
   const { stateId: _location, countyId, countyFipsId } = useParams();
 
-  const lastUpdatedDate = useModelLastUpdatedDate() || new Date();
-  const lastUpdatedDateString =
-    lastUpdatedDate && lastUpdatedDate.toLocaleDateString();
-
   const [selectedCounty, setSelectedCounty] = useState(null);
   const [location, setLocation] = useState(null);
   useMemo(() => {
@@ -121,18 +117,28 @@ function LocationEmbed() {
             embedOnClickBaseURL={embedOnClickBaseURL}
           />
         </EmbedBody>
-        <EmbedFooterWrapper>
-          <LogoWrapper
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://www.covidactnow.org"
-          >
-            <LogoUrlLight height={15} />
-          </LogoWrapper>
-          <FooterDate>Last Updated {lastUpdatedDateString}</FooterDate>
-        </EmbedFooterWrapper>
+        <EmbedFooter />
       </EmbedWrapper>
     </EmbedContainer>
+  );
+}
+
+export function EmbedFooter() {
+  const lastUpdatedDate = useModelLastUpdatedDate() || new Date();
+  const lastUpdatedDateString =
+    lastUpdatedDate && lastUpdatedDate.toLocaleDateString();
+
+  return (
+    <EmbedFooterWrapper>
+      <LogoWrapper
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://www.covidactnow.org"
+      >
+        <LogoUrlLight height={15} />
+      </LogoWrapper>
+      <FooterDate>Last Updated {lastUpdatedDateString}</FooterDate>
+    </EmbedFooterWrapper>
   );
 }
 
@@ -142,7 +148,7 @@ export default function Embed(props) {
   if (isNational) {
     return (
       <EmbedContainer height={US_MAP_EMBED_HEIGHT} width={US_MAP_EMBED_WIDTH}>
-        <SocialLocationPreview border />
+        <SocialLocationPreview border linkToCAN Footer={EmbedFooter} />
       </EmbedContainer>
     );
   }
