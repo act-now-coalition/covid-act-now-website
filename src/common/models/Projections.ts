@@ -103,7 +103,7 @@ export class Projections {
       case Metric.CASE_GROWTH_RATE:
         return this.primary.rt;
       case Metric.HOSPITAL_USAGE:
-        return this.primary.currentIcuUtilization;
+        return this.primary.icuHeadroomInfo?.metricValue || null;
       case Metric.POSITIVE_TESTS:
         return this.primary.currentTestPositiveRate;
       case Metric.CONTACT_TRACING:
@@ -111,6 +111,14 @@ export class Projections {
       default:
         fail('Cannot get value of metric: ' + metric);
     }
+  }
+
+  getMetricValues(): { [metric in Metric]: number | null } {
+    const result = {} as { [metric in Metric]: number | null };
+    for (const metric of ALL_VALUE_METRICS) {
+      result[metric] = this.getMetricValue(metric);
+    }
+    return result;
   }
 
   getMetricLevel(metric: Metric): Level {

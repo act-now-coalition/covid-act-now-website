@@ -11,7 +11,6 @@ import {
 import { ScreenshotWrapper } from './ShareImage.style';
 import { formatLocalDate } from 'common/utils';
 import { findCountyByFips } from 'common/locations';
-import { Metric } from 'common/metric';
 
 // TODO(michael): Split this into HomeImage and LocationImage (with some shared code).
 
@@ -67,13 +66,7 @@ const LocationShareCard = ({ stateId, countyFipsId }: ShareCardProps) => {
   if (!projections) {
     return null;
   }
-  const projection = projections.primary;
-  const stats = {
-    [Metric.CASE_GROWTH_RATE]: projection.rt,
-    [Metric.HOSPITAL_USAGE]: projection.currentIcuUtilization,
-    [Metric.POSITIVE_TESTS]: projection.currentTestPositiveRate,
-    [Metric.CONTACT_TRACING]: projection.currentContactTracerMetric,
-  };
+  const stats = projections.getMetricValues();
 
   return <SocialLocationPreview projections={projections} stats={stats} />;
 };

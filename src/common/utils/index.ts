@@ -13,6 +13,11 @@ export function fail(msg?: string): never {
   throw new Error('INTERNAL ASSERTION FAILED: ' + msg);
 }
 
+export function nonNull<T>(value: T | null | undefined): T {
+  assert(value != null, 'value was null.');
+  return value;
+}
+
 export function assertStateId(id: string): asserts id is keyof typeof STATES {
   assert((STATES as any)[id], `${id} is not a valid state ID`);
 }

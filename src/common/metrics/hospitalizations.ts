@@ -4,6 +4,7 @@ import { levelText } from 'common/utils/chart';
 import { getLevel, Metric } from 'common/metric';
 import { formatPercent, formatInteger } from 'common/utils';
 import { Projection } from 'common/models/Projection';
+import { NonCovidPatientsMethod } from 'common/models/ICUHeadroom';
 
 export const METRIC_NAME = 'ICU headroom used';
 export const STATES_WITH_DATA_OVERRIDES = ['Nevada'];
@@ -67,44 +68,40 @@ export const HOSPITALIZATIONS_DISCLAIMER =
   ', a pandemic think tank, recommends that hospitals maintain enough ICU capacity to double the number of COVID patients hospitalized.';
 
 export function hospitalOccupancyStatusText(projection: Projection) {
-  const currentIcuUtilization = projection.currentIcuUtilization;
-  const currentCovidICUPatients = projection.currentCovidICUPatients;
-  const totalICUCapacity = projection.totalICUCapacity;
-  const nonCovidPatients = Math.floor(projection.nonCovidPatients);
+  const icu = projection.icuHeadroomInfo;
 
-  if (projection.icuNearCapacityOverride) {
-    return 'While no government-reported data is currently available, news reports suggest that ICUs are at or near capacity.';
-  } else if (
-    currentIcuUtilization === null ||
-    currentCovidICUPatients === null ||
-    totalICUCapacity === null
-  ) {
+  if (icu === null) {
     return 'No ICU occupancy data is available.';
+  } else if (icu.overrideInPlace) {
+    return 'While no government-reported data is currently available, news reports suggest that ICUs are at or near capacity.';
   }
-  const level = getLevel(Metric.HOSPITAL_USAGE, currentIcuUtilization);
+  const level = getLevel(Metric.HOSPITAL_USAGE, icu.metricValue);
 
   const location = projection.locationName;
 
-  const noStateOverride =
-    STATES_WITH_DATA_OVERRIDES.indexOf(projection.stateName) < 0 ||
-    !projection.hasActualData;
+  const totalICUBeds = formatInteger(icu.totalBeds);
 
-  const totalICUBeds = formatInteger(totalICUCapacity);
-
-  const nonCovidUsedBeds = formatInteger(nonCovidPatients);
+  const nonCovidUsedBeds = formatInteger(icu.nonCovidPatients);
   const nonCovidUsedBedsPercent = formatPercent(
-    nonCovidPatients / totalICUCapacity,
+    icu.nonCovidPatients / icu.totalBeds,
   );
-  const remainingICUBeds = formatInteger(totalICUCapacity - nonCovidPatients);
-  const covidICUPatients = formatInteger(currentCovidICUPatients);
-  const covidICUBeds =
-    currentCovidICUPatients / (totalICUCapacity - nonCovidPatients);
+  const remainingICUBeds = formatInteger(icu.totalBeds - icu.nonCovidPatients);
+  const covidICUPatients = formatInteger(icu.covidPatients);
+  const icuHeadroom =
+    icu.metricValue > 1 ? '>100%' : formatPercent(icu.metricValue);
 
-  const textHasAbout = noStateOverride ? 'has about' : 'has';
-  const textWeEstimateThat = noStateOverride
-    ? 'Based on best available data, we estimate that'
-    : '';
-  const textWeEstimate = noStateOverride ? 'we estimate' : '';
+  const textWeEstimateThatNonCovidPatients = (() => {
+    switch (icu.nonCovidPatientsMethod) {
+      case NonCovidPatientsMethod.ACTUAL:
+        return `${icu.nonCovidPatients}`;
+      case NonCovidPatientsMethod.ESTIMATED_FROM_TOTAL_ICU_ACTUAL:
+        return `we estimate that ${nonCovidUsedBeds}`;
+      case NonCovidPatientsMethod.ESTIMATED_FROM_TYPICAL_UTILIZATION:
+        return `we estimate that ${nonCovidUsedBedsPercent} (${nonCovidUsedBeds})`;
+    }
+  })();
+
+  const textWeEstimate = icu.covidPatientsIsActual ? '' : 'we estimate';
 
   const textLevel = levelText(
     level,
@@ -114,10 +111,8 @@ export function hospitalOccupancyStatusText(projection: Projection) {
     'This suggests hospitals cannot absorb a wave of new COVID infections without substantial surge capacity. Aggressive action urgently needed',
   );
 
-  return `${location} ${textHasAbout} ${totalICUBeds} ICU beds.
-    ${textWeEstimateThat} ${nonCovidUsedBedsPercent} (${nonCovidUsedBeds}) are currently occupied by non-COVID patients.
-    With ${remainingICUBeds} ICU beds remaining, ${textWeEstimate} ${covidICUPatients} are needed by COVID cases,
-    or ${
-      covidICUBeds > 1 ? '>100%' : formatPercent(covidICUBeds)
-    } of available beds. ${textLevel}.`;
+  return `${location} has about ${totalICUBeds} ICU beds. Based on best available data,
+    ${textWeEstimateThatNonCovidPatients} are currently occupied by non-COVID patients.
+    Of the ${remainingICUBeds} ICU beds remaining, ${textWeEstimate} ${covidICUPatients} are needed by COVID cases,
+    or ${icuHeadroom} of available beds. ${textLevel}.`;
 }
