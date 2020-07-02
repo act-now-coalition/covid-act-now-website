@@ -7,3 +7,4 @@ export { default as ChartContactTracing } from './ChartContactTracing';
 export { default as ChartFutureHospitalization } from './ChartFutureHospitalization';
 export { default as ChartPrevalence } from './ChartPrevalence';
 export { default as ChartPrevalenceDeaths } from './ChartPrevalenceDeaths';
+export { default as ChartCaseDensity } from './ChartCaseDensity';
