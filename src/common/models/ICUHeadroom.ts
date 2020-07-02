@@ -30,7 +30,7 @@ const ICU_DECOMP_FACTOR_STATE_OVERRIDES: { [key: string]: number } = {
   Alabama: 0.15,
   Arizona: 0.4,
   Delaware: 0.3,
-  'District of Columbia': 0.025,
+  'District of Columbia': 0.15,
   Georgia: 0.1,
   Mississippi: 0.12,
   Nevada: 0.25,
@@ -134,8 +134,8 @@ export function calcICUHeadroom(
 }
 
 /**
- * Calculates the number of covid ICU patients, as a series. Uses actuals if
- * available.
+ * Calculates the number of covid ICU patients, as a series. This is the
+ * numerator of the ICU Headroom metric.
  */
 function calcCovidICUPatientsSeries(
   dates: Array<Date>,
@@ -150,7 +150,7 @@ function calcCovidICUPatientsSeries(
     // Return actuals.
     return { isActual: true, series: actualCovidPatients };
   } else {
-    // Return Projections.
+    // Return projections.
     return {
       isActual: false,
       series: omitDataAfterDate(
@@ -164,7 +164,8 @@ function calcCovidICUPatientsSeries(
 
 /**
  * Calculates the number of non-covid ICU patients, as a series. Uses actuals
- * if available.
+ * if available. This is used in the denominator of the ICU Headroom metric,
+ * i.e. (totalBeds - nonCovidICUPatients)
  */
 function calcNonCovidICUPatientsSeries(
   stateName: string,
