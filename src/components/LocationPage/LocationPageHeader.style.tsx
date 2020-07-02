@@ -17,7 +17,7 @@ export const ColoredHeaderBanner = styled(Box)<{ hasStats?: Boolean }>`
   }
 `;
 
-export const HeaderContainer = styled(Box)<{
+export const Wrapper = styled(Box)<{
   condensed?: Boolean;
   headerTopMargin: number;
   headerBottomMargin: number;
@@ -32,15 +32,11 @@ export const HeaderContainer = styled(Box)<{
     align-items: stretch;
     justify-content: space-around;
     background-color: unset;
-    border-radius: 8px;
     box-shadow: none;
-    max-width: 900px;
+    max-width: 1040px;
     flex-direction: column;
     cursor: pointer;
-    margin-left: 1rem;
-    margin-right: 1rem;
-    margin-top: -380px;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.12);
+    margin: -380px 1rem 0 1rem;
 
     @media (min-width: 600px) {
       position: relative;
@@ -48,30 +44,37 @@ export const HeaderContainer = styled(Box)<{
       margin: ${props.headerTopMargin}px 1rem ${props.headerBottomMargin}px;
     }
 
-    @media (min-width: 932px) {
+    @media (min-width: 1060px) {
+      // margin: ${props.headerTopMargin}px auto ${props.headerBottomMargin}px;
       margin: ${props.headerTopMargin}px auto ${props.headerBottomMargin}px;
     }
     @media (min-width: 1350px) {
-      margin: ${props.headerTopMargin}px 445px ${props.headerBottomMargin}px auto;
+      // margin: ${props.headerTopMargin}px 445px ${props.headerBottomMargin}px auto;
+      margin: ${props.headerTopMargin}px 300px ${props.headerBottomMargin}px auto;
     }
     @media (min-width: 1750px) {
+      // margin: ${props.headerTopMargin}px auto ${props.headerBottomMargin}px;
       margin: ${props.headerTopMargin}px auto ${props.headerBottomMargin}px;
     }
   `}
 `;
 
+export const TopContainer = styled(Box)`
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  background-color: white;
+`;
+
 export const HeaderSection = styled(Box)`
-  background-color: #fbfbfb;
   display: flex;
   flex-direction: column;
   cursor: default;
 
-  &:first-child {
-    border-radius: 8px 8px 0 0;
+  &:nth-child(2) {
+    background-color: #fafafa;
   }
 
   &:last-child {
-    border-radius: 0 0 8px 8px;
     justify-content: space-between;
   }
 
@@ -86,7 +89,7 @@ export const LocationCopyWrapper = styled(Box)`
   margin: 1.5rem 1rem;
 
   @media (min-width: 600px) {
-    margin: 2.25rem 0.875rem 2.25rem 2.25rem;
+    margin: 2.5rem 0.875rem 2.5rem 2.25rem;
   }
 `;
 
@@ -123,11 +126,11 @@ export const HeaderSubtitle = styled(Typography)`
   }
 `;
 
-export const HeaderSubCopyWrapper = styled(Box)<{
+export const FooterContainer = styled(Box)<{
   isVerifiedState?: Boolean;
 }>`
   margin: ${({ isVerifiedState }) =>
-    isVerifiedState ? '.4rem 1rem 1rem;' : '1rem'};
+    isVerifiedState ? '.4rem .2rem 1rem .2rem;' : '1rem .2rem 1rem .2rem'};
 
   p {
     padding: 0;
@@ -139,10 +142,15 @@ export const HeaderSubCopyWrapper = styled(Box)<{
   }
 
   @media (min-width: 600px) {
+    max-width: 600px;
+    width: 100%;
     margin: ${({ isVerifiedState }) =>
-      isVerifiedState
-        ? '1.5rem 0.875rem 2rem 1.5rem'
-        : '1.5rem 0.875rem 1.5rem 1.5rem'};
+      isVerifiedState ? '.4rem 0 0 .2rem' : '.4rem 0 0 .2rem'};
+    cursor: auto;
+
+    a {
+      cursor: pointer;
+    }
 
     svg {
       transform: translateY(0.35rem);
@@ -155,63 +163,73 @@ export const HeaderSubCopy = styled(Typography)`
   font-size: 13px;
   line-height: 1.4;
   padding: 1.5rem 0 0.2rem;
-
-  a {
-    color: #828282;
-  }
+  font-family: Source Code Pro;
 
   svg {
     margin: 0 0.5rem 0 0;
     flex-shrink: 0;
   }
 
-  @media (min-width: 600px) {
-    font-size: 14px;
-  }
+  // @media (min-width: 600px) {
+  //   font-size: 14px;
+  // }
 `;
 
 export const ButtonsWrapper = styled(Box)`
   display: flex;
   flex-direction: row;
   width: 100%;
-  margin-right: 1.5rem;
+  // margin-right: 1.5rem;
   background-color: white;
   border-radius: 0 0 8px 8px;
+  justify-content: center;
+  margin-bottom: 1.5rem;
 
   @media (min-width: 600px) {
     width: fit-content;
     background-color: unset;
     border-radius: 0;
+    margin-bottom: 0;
+    margin-right: 1.5rem;
   }
 `;
 
 export const HeaderButton = styled(Box)`
-  height: 50px;
-  width: 50%;
-  font-size: 15px;
+  font-size: 13px;
   line-height: 1.2;
   cursor: pointer;
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  color: ${COLOR_MAP.BLUE};
   font-weight: 500;
   text-align: center;
-  margin: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-top: 1px solid ${COLORS.LIGHTGRAY};
+  border: 1px solid ${COLOR_MAP.GRAY.LIGHT};
+  border-radius: 4px;
+  text-transform: uppercase;
+  padding: 0.5rem 0.75rem;
+  letter-spacing: 0.02em;
 
   &:first-child {
-    border-right: 1px solid ${COLORS.LIGHTGRAY};
+    color: ${COLOR_MAP.BLUE};
+    margin-right: 1.25rem;
+  }
+
+  &:last-child {
+    color: ${COLOR_MAP.RED.BASE};
+  }
+
+  svg {
+    margin-right: 6px;
   }
 
   @media (min-width: 600px) {
-    border-top: none;
-    width: 75px;
-    height: 40px;
+    font-size: 14px;
+    padding: 0.75rem 1.75rem;
+    margin: auto;
 
     &:first-child {
-      border-right: none;
+      margin-right: 1.5rem;
     }
   }
 `;
@@ -229,60 +247,93 @@ export const LastUpdatedDate = styled.span<{
   }
 `;
 
-export const RiskLevelGraphicMobile = styled(Box)`
+export const SectionHalf = styled(Box)`
+  display: flex;
+  justify-content: space-between;
+
+  &:first-child {
+    margin: 2rem 1.6rem;
+  }
+
+  &:last-child {
+    margin: 0 1.6rem 2rem;
+  }
+
+  svg {
+    color: #bdbdbd;
+  }
+
   @media (min-width: 600px) {
-    display: none;
+    &:first-child {
+      flex: 3;
+      margin: 2rem 1.5rem 2rem 2.25rem;
+    }
+
+    &:last-child {
+      flex: 2;
+      margin: 2rem 2rem 2rem 0;
+    }
   }
 `;
 
-export const RiskLevelGraphicDesktop = styled(Box)`
-  display: none;
-
-  @media (min-width: 600px) {
-    display: flex;
-  }
-`;
-
-export const RiskLevelWrapper = styled(Box)`
+export const SectionColumn = styled(Box)<{ isUpdateCopy?: Boolean }>`
   display: flex;
   flex-direction: column;
-  width: 170px;
-  text-align: center;
-  align-items: center;
-  align-self: center;
-  margin: 1rem auto 0;
+  margin-left: 1.5rem;
 
   @media (min-width: 600px) {
-    margin: auto 2rem auto 0.875rem;
+    margin-left: ${({ isUpdateCopy }) => (isUpdateCopy ? '1rem' : '1.5rem')};
   }
 `;
 
-export const RiskLevelTitle = styled.span`
+export const ColumnTitle = styled(Typography)<{ isUpdateCopy?: Boolean }>`
+  font-family: Roboto;
+  font-size: ${({ isUpdateCopy }) => (isUpdateCopy ? '13px' : '12px')};
   text-transform: uppercase;
   color: #828282;
-  font-size: 14px;
-  line-height: 1.4;
-  font-family: 'Roboto';
-  margin-top: 0.5rem;
+  letter-spacing: 0.02rem;
+  margin-bottom: 0.5rem;
+
+  @media (min-width: 600px) {
+    margin-bottom: ${({ isUpdateCopy }) => (isUpdateCopy ? '.5rem' : '.75rem')};
+    font-size: 13px;
+  }
 `;
 
-export const RiskLevel = styled.span`
-  color: black;
-  font-family: 'Source Code Pro';
-  font-size: 14px;
-  line-height: 18px;
+export const Copy = styled(Typography)<{ isUpdateCopy?: Boolean }>`
+  font-family: Source Code Pro;
+  font-size: ${({ isUpdateCopy }) => (isUpdateCopy ? '13px' : '12px')};
+  line-height: 140%;
+  color: #4f4f4f;
+
+  strong {
+    color: black;
+  }
+
+  @media (min-width: 600px) {
+    font-size: 13px;
+  }
+`;
+
+export const LevelDescription = styled(Typography)`
+  font-family: Source Code Pro;
+  font-size: 16px;
+  line-height: 140%;
   font-weight: bold;
+  margin-bottom: 0.5rem;
+
+  @media (min-width: 600px) {
+    font-size: 18px;
+    margin-bottom: 0.75rem;
+  }
 `;
 
-export const RiskLevelThermometer = styled(Box)<{ alarmLevel: number }>`
-  height: 8px;
-  width: 128px;
-  margin-top: 0.5rem;
-  border-radius: 5px;
-  background: ${({ alarmLevel }) =>
-    alarmLevel === Level.UNKNOWN
-      ? '#e3e3e3'
-      : `linear-gradient(to right, ${COLOR_MAP.GREEN.BASE}, ${COLOR_MAP.GREEN.BASE} 25%, ${COLOR_MAP.ORANGE.BASE} 25%, ${COLOR_MAP.ORANGE.BASE} 50%, ${COLOR_MAP.ORANGE_DARK.BASE} 50%, ${COLOR_MAP.ORANGE_DARK.BASE} 75%, ${COLOR_MAP.RED.BASE} 75%)`};
+export const ThermometerContainer = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 20px;
+  margin: 0 auto;
 `;
 
 export const Triangle = styled(Box)<{ alarmLevel: number }>`
@@ -302,4 +353,25 @@ export const Triangle = styled(Box)<{ alarmLevel: number }>`
       : alarmLevel === Level.CRITICAL
       ? '96px'
       : '0'};
+  `
+
+export const ThermometerRow = styled(Box)<{
+  isCurrentLevel?: Boolean;
+  color: string;
+}>`
+  display: flex;
+  flex-direction: row;
+  border: ${({ isCurrentLevel }) => isCurrentLevel && `4px solid black`};
+  background-color: ${({ color }) => color};
+  height: 32px;
+  width: ${({ isCurrentLevel }) => (isCurrentLevel ? '24px' : '20px')};
+  align-self: center;
+
+  &:first-child {
+    border-radius: 99px 99px 0 0;
+  }
+
+  &:last-child {
+    border-radius: 0 0 99px 99px;
+  }
 `;

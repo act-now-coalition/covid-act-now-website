@@ -1,25 +1,26 @@
 import React, { Fragment } from 'react';
 import CheckIcon from '@material-ui/icons/Check';
-import SummaryStats from 'components/SummaryStats/SummaryStats';
+// import SummaryStats from 'components/SummaryStats/SummaryStats';
 import {
   ColoredHeaderBanner,
-  HeaderContainer,
+  Wrapper,
+  TopContainer,
+  FooterContainer,
   HeaderTitle,
   HeaderSection,
   HeaderSubCopy,
-  HeaderSubtitle,
+  // HeaderSubtitle,
   ButtonsWrapper,
   HeaderButton,
   LocationCopyWrapper,
-  HeaderSubCopyWrapper,
   LastUpdatedDate,
-  RiskLevelThermometer,
-  RiskLevelWrapper,
-  RiskLevelTitle,
-  RiskLevel,
-  RiskLevelGraphicMobile,
-  RiskLevelGraphicDesktop,
-  Triangle,
+  SectionHalf,
+  Copy,
+  ColumnTitle,
+  SectionColumn,
+  LevelDescription,
+  ThermometerContainer,
+  ThermometerRow,
 } from 'components/LocationPage/LocationPageHeader.style';
 import { useEmbed } from 'common/utils/hooks';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
@@ -30,19 +31,20 @@ import { STATES_WITH_DATA_OVERRIDES } from 'common/metrics/hospitalizations';
 import { Projections } from 'common/models/Projections';
 import { formatUtcDate } from 'common/utils';
 import { isNull } from 'util';
+import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
+import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
+import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import { LEVEL_COLOR } from 'common/colors';
 
-const RiskLevelGraphic = (props: {
-  projections: Projections;
-  alarmLevel: number;
-  levelName: string;
-}) => {
+const NewIndicatorCopy = () => {
   return (
-    <RiskLevelWrapper>
-      <RiskLevel>{props.levelName}</RiskLevel>
-      <RiskLevelThermometer alarmLevel={props.alarmLevel} />
-      <Triangle alarmLevel={props.alarmLevel} />
-      <RiskLevelTitle>Covid Risk Level</RiskLevelTitle>
-    </RiskLevelWrapper>
+    <Copy isUpdateCopy>
+      <strong>New key indicator added</strong>
+      <br />
+      We added NEW CASES PER DAY. That changed your threat level from yellow to
+      orange. <a href="/">Learn more</a>
+    </Copy>
   );
 };
 
@@ -110,6 +112,62 @@ const LocationPageHeader = (props: {
   const lastUpdatedDateString =
     lastUpdatedDate !== null ? formatUtcDate(lastUpdatedDate) : '';
 
+  console.log('alarmLevel', alarmLevel);
+
+  // const thermometerContent = [
+  //   {
+  //     level: Level.HIGH,
+  //     // text: 'Active outbreak or major gaps',
+  //     color: `${LEVEL_COLOR[Level.HIGH]}`,
+  //     // bgfill: 'rgba(255, 0, 52, 0.05)',
+  //   },
+  //   {
+  //     level: Level.MEDIUM_HIGH,
+  //     // text: 'Risk of second spike',
+  //     color: `${LEVEL_COLOR[Level.MEDIUM_HIGH]}`,
+  //     // bgfill: 'rgba(255, 150, 0, 0.05)',
+  //   },
+  //   {
+  //     level: Level.MEDIUM,
+  //     // text: 'On track for herd immunity',
+  //     color: `${LEVEL_COLOR[Level.MEDIUM]}`,
+  //     // bgfill: 'rgba(255, 201, 0, 0.05)',
+  //   },
+  //   {
+  //     level: Level.LOW,
+  //     // text: 'On track for containment',
+  //     color: `${LEVEL_COLOR[Level.LOW]}`,
+  //     // bgfill: 'rgba(0, 212, 116, 0.05)',
+  //   },
+  // ];
+
+  const thermometerContent = [
+    {
+      level: Level.CRITICAL,
+      // text: 'Active outbreak or major gaps',
+      color: `${LEVEL_COLOR[Level.CRITICAL]}`,
+      // bgfill: 'rgba(255, 0, 52, 0.05)',
+    },
+    {
+      level: Level.HIGH,
+      // text: 'Risk of second spike',
+      color: `${LEVEL_COLOR[Level.HIGH]}`,
+      // bgfill: 'rgba(255, 150, 0, 0.05)',
+    },
+    {
+      level: Level.MEDIUM,
+      // text: 'On track for herd immunity',
+      color: `${LEVEL_COLOR[Level.MEDIUM]}`,
+      // bgfill: 'rgba(255, 201, 0, 0.05)',
+    },
+    {
+      level: Level.LOW,
+      // text: 'On track for containment',
+      color: `${LEVEL_COLOR[Level.LOW]}`,
+      // bgfill: 'rgba(0, 212, 116, 0.05)',
+    },
+  ];
+
   const riskLevelGraphicProps = {
     alarmLevel,
     levelName: levelInfo.name,
@@ -119,12 +177,12 @@ const LocationPageHeader = (props: {
   return (
     <Fragment>
       <ColoredHeaderBanner bgcolor={fillColor} hasStats={hasStats} />
-      <HeaderContainer
+      <Wrapper
         condensed={props.condensed}
         headerTopMargin={headerTopMargin}
         headerBottomMargin={headerBottomMargin}
       >
-        <HeaderSection>
+{/*     <HeaderSection>
           <LocationCopyWrapper>
             <HeaderTitle isEmbed={isEmbed}>
               <LocationPageHeading projections={props.projections} />
@@ -199,6 +257,97 @@ const LocationPageHeader = (props: {
           </ButtonsWrapper>
         </HeaderSection>
       </HeaderContainer>
+ */}
+        <TopContainer>
+          <HeaderSection>
+            <LocationCopyWrapper>
+              <HeaderTitle isEmbed={isEmbed}>
+                <LocationPageHeading projections={props.projections} />
+              </HeaderTitle>
+            </LocationCopyWrapper>
+            <ButtonsWrapper>
+              <HeaderButton onClick={props.onHeaderShareClick || noop}>
+                <ShareOutlinedIcon />
+                Share
+              </HeaderButton>
+              <HeaderButton onClick={props.onHeaderSignupClick || noop}>
+                <NotificationsNoneIcon />
+                Receive alerts
+              </HeaderButton>
+            </ButtonsWrapper>
+          </HeaderSection>
+          <HeaderSection>
+            <SectionHalf>
+              <ThermometerContainer>
+                {thermometerContent.map((row, i) => {
+                  const isCurrentLevel = row.level === alarmLevel;
+                  return (
+                    <ThermometerRow
+                      color={row.color}
+                      isCurrentLevel={isCurrentLevel}
+                    />
+                  );
+                })}
+              </ThermometerContainer>
+              <SectionColumn>
+                <ColumnTitle>Covid threat level</ColumnTitle>
+                <LevelDescription>At risk of an outbreak</LevelDescription>
+                <Copy>{levelInfo.detail(locationName)}</Copy>
+              </SectionColumn>
+            </SectionHalf>
+            <SectionHalf>
+              <InfoOutlinedIcon />
+              <SectionColumn isUpdateCopy>
+                <ColumnTitle isUpdateCopy>Updates</ColumnTitle>
+                <NewIndicatorCopy />
+              </SectionColumn>
+            </SectionHalf>
+          </HeaderSection>
+          <LocationHeaderStats
+            stats={props.stats}
+            onRtRangeClick={props.onRtRangeClick}
+            onTestPositiveClick={props.onTestPositiveClick}
+            onIcuUtilizationClick={props.onIcuUtilizationClick}
+            onContactTracingClick={props.onContactTracingClick}
+            isMobile={props.isMobile}
+            isHeader={true}
+          />
+        </TopContainer>
+        <FooterContainer isVerifiedState={isVerifiedState}>
+          {props.projections.isCounty && !isEmbed && (
+            <HeaderSubCopy>
+              <span>Updated {lastUpdatedDateString} · </span>
+              <span>County data is currently in beta. </span>
+              <span>
+                Because counties don’t report hospitalizations, our forecasts
+                may not be as accurate. See something wrong?{' '}
+              </span>
+              <a
+                href="https://forms.gle/NPsLcFnrvfS1kqkn9"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Let us know
+              </a>
+              .
+            </HeaderSubCopy>
+          )}
+          {!props.projections.isCounty && !isEmbed && (
+            <HeaderSubCopy>
+              {verified && (
+                <Fragment>
+                  <CheckIcon htmlColor="#00D474" />
+                  <span>Government verified data</span>
+                  {!props.isMobile && <span> · </span>}
+                </Fragment>
+              )}
+              <LastUpdatedDate isVerifiedState={isVerifiedState}>
+                Updated {lastUpdatedDateString}
+              </LastUpdatedDate>
+            </HeaderSubCopy>
+          )}
+        </FooterContainer>
+      </Wrapper>
     </Fragment>
   );
 };

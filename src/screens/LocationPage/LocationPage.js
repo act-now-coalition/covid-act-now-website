@@ -69,7 +69,7 @@ function LocationPage() {
           chartId={chartId}
           countyId={countyId}
         />
-        <MiniMap
+        {/* <MiniMap
           projections={projections}
           stateId={stateId}
           selectedCounty={selectedCounty}
@@ -78,7 +78,7 @@ function LocationPage() {
           setMobileMenuOpen={setMobileMenuOpen}
           mapOption={mapOption}
           setMapOption={setMapOption}
-        />
+        /> */}
       </div>
     </div>
   );
