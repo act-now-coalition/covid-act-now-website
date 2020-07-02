@@ -80,7 +80,9 @@ export type DatasetId =
   | 'rtRange'
   | 'icuUtilization'
   | 'testPositiveRate'
-  | 'contractTracers';
+  | 'contractTracers'
+  | 'caseDensityByCases'
+  | 'caseDensityByDeaths';
 
 export interface RtRange {
   /** The actual Rt value. */
@@ -90,6 +92,8 @@ export interface RtRange {
   /** The upper-bound of the confidence interval. */
   high: number;
 }
+
+const estimatedCaseFatalityRatio = 0.01; // 1% of cases expected to turn into deaths, used in calcCaseDensityByDeaths
 
 /**
  * Represents a single projection for a given state or county.  Contains a
@@ -110,6 +114,9 @@ export class Projection {
   readonly currentCumulativeCases: number | null;
   readonly currentContactTracerMetric: number | null;
   readonly stateName: string;
+  readonly dailyPositiveTests: Array<number | null>;
+  readonly currentCaseDensityByCases: number | null;
+  readonly currentCaseDensityByDeaths: number | null;
 
   private readonly intervention: string;
   private readonly dates: Date[];
@@ -124,7 +131,6 @@ export class Projection {
   private readonly cumulativeInfected: Array<number | null>;
   private readonly cumulativePositiveTests: Array<number | null>;
   private readonly cumulativeNegativeTests: Array<number | null>;
-  private readonly dailyPositiveTests: Array<number | null>;
   private readonly dailyNegativeTests: Array<number | null>;
   private readonly rtRange: Array<RtRange | null>;
   // ICU Utilization series as values between 0-1 (or > 1 if over capacity).
@@ -132,6 +138,9 @@ export class Projection {
   // Test Positive series as values between 0-1.
   private readonly testPositiveRate: Array<number | null>;
   private readonly contractTracers: Array<number | null>;
+  private readonly caseDensityByCases: Array<number | null>;
+  private readonly caseDensityByDeaths: Array<number | null>;
+  private readonly dailyDeaths: Array<number | null>;
 
   constructor(
     summaryWithTimeseries: RegionSummaryWithTimeseries,
@@ -181,6 +190,11 @@ export class Projection {
       this.cumulativeNegativeTests,
     );
 
+    const cumulativeActualDeaths = this.smoothCumulatives(
+      actualTimeseries.map(row => row?.cumulativeDeaths || null),
+    );
+    this.dailyDeaths = this.deltasFromCumulatives(cumulativeActualDeaths);
+
     this.rtRange = this.calcRtRange(timeseries);
     this.testPositiveRate = this.calcTestPositiveRate();
 
@@ -209,6 +223,12 @@ export class Projection {
     this.icuNearCapacityOverride = overrideIcu;
 
     this.contractTracers = this.calcContactTracers(this.actualTimeseries);
+
+    this.caseDensityByCases = this.calcCaseDensityByCases();
+    this.caseDensityByDeaths = this.calcCaseDensityByDeaths();
+
+    this.currentCaseDensityByCases = this.lastValue(this.caseDensityByCases);
+    this.currentCaseDensityByDeaths = this.lastValue(this.caseDensityByDeaths);
 
     this.fixZeros(this.hospitalizations);
     this.fixZeros(this.cumulativeDeaths);
@@ -454,8 +474,9 @@ export class Projection {
    * to reporting weirdness), we skip that data point and may average fewer
    * than 7 days worth of data.
    */
-  getWeeklyAverageCaseForDay(i?: number) {
-    const lastIndex = this.indexOfLastValue(this.dailyPositiveTests);
+
+  getWeeklyAverageForDay(data: Array<number | null>, i?: number) {
+    const lastIndex = this.indexOfLastValue(data);
     if (i === undefined) {
       if (!lastIndex) return null;
       i = lastIndex;
@@ -464,7 +485,7 @@ export class Projection {
     }
     // Get last week of sane data (ignore negative values)
     const lastWeekOfPositives = _.filter(
-      this.dailyPositiveTests.slice(Math.max(0, i - 6), i + 1),
+      data.slice(Math.max(0, i - 6), i + 1),
       p => p !== null && p >= 0,
     );
     return _.mean(lastWeekOfPositives);
@@ -480,7 +501,11 @@ export class Projection {
           const contactTracers =
             CONTACT_TRACER_STATE_OVERRIDES[this.stateName] ||
             row.contactTracers;
-          const weeklyAverage = this.getWeeklyAverageCaseForDay(i);
+          const weeklyAverage = this.getWeeklyAverageForDay(
+            this.dailyPositiveTests,
+            i,
+          );
+
           if (weeklyAverage) {
             return contactTracers / (weeklyAverage * TRACERS_NEEDED_PER_CASE);
           }
@@ -489,6 +514,40 @@ export class Projection {
         return null;
       },
     );
+  }
+
+  private calcCaseDensityByCases(): Array<number | null> {
+    const caseDensityByCases = [];
+    const totalPopulation = this.totalPopulation;
+    for (let i = 0; i < this.dates.length; i++) {
+      const weeklyAverage = this.getWeeklyAverageForDay(
+        this.dailyPositiveTests,
+        i,
+      );
+      if (totalPopulation === 0 || weeklyAverage === null) {
+        caseDensityByCases.push(null);
+      } else {
+        const val = weeklyAverage / (totalPopulation / 100000);
+        caseDensityByCases.push(val);
+      }
+    }
+    return caseDensityByCases;
+  }
+
+  private calcCaseDensityByDeaths(): Array<number | null> {
+    const caseDensityByDeaths = [];
+    const totalPopulation = this.totalPopulation;
+    for (let i = 0; i < this.dates.length; i++) {
+      const weeklyAverage = this.getWeeklyAverageForDay(this.dailyDeaths, i);
+      if (totalPopulation === 0 || weeklyAverage === null) {
+        caseDensityByDeaths.push(null);
+      } else {
+        const estimatedCases = weeklyAverage / estimatedCaseFatalityRatio;
+        const val = estimatedCases / (totalPopulation / 100000);
+        caseDensityByDeaths.push(val);
+      }
+    }
+    return caseDensityByDeaths;
   }
 
   private calcRtRange(

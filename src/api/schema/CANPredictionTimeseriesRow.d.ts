@@ -46,6 +46,18 @@ export type Cumulativedeaths = number;
  */
 export type Cumulativeinfected = number;
 /**
+ * Number of current infections
+ */
+export type Currentinfected = number;
+/**
+ * Number of people currently susceptible
+ */
+export type Currentsusceptible = number;
+/**
+ * Number of people currently exposed
+ */
+export type Currentexposed = number;
+/**
  * Number of positive test results to date
  */
 export type Cumulativepositivetests = number;
@@ -66,6 +78,9 @@ export interface CANPredictionTimeseriesRow {
   RtIndicatorCI90: Rtindicatorci90;
   cumulativeDeaths: Cumulativedeaths;
   cumulativeInfected: Cumulativeinfected;
+  currentInfected: Currentinfected;
+  currentSusceptible: Currentsusceptible;
+  currentExposed: Currentexposed;
   cumulativePositiveTests: Cumulativepositivetests;
   cumulativeNegativeTests: Cumulativenegativetests;
 }

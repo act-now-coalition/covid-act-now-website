@@ -17,6 +17,10 @@ To send the emails via the github action run:
 `tools/send-alert-emails.sh <snapshot> <prod|staging|dev> true`
 
 ## Running the Alerts scripts manually
+### Signing up for the correct things
+1) You will need to be able to access the campaign monitor api key to send messages (so ask an admin to get access to it)
+2) You will also need to be able to access the firestore console so ask for aceess to that
+3) If you are testing locally, you can use the covidactnow-dev service account found here: https://docs.google.com/document/d/1YoZUzmy6rYXwO1VSMrHklcD7pdCCLaOkGG-1kLwZpsg/
 
 ### To manually generate the alerts diffing
 1) Update the `lastSnapshot` in firestore to be what you are diffing agaisnt [here](https://console.firebase.google.com/project/covidactnow-dev/database/firestore/data~2Finfo~2Falerts
@@ -41,8 +45,10 @@ In order to test out the emails and see what they look like:
 3) Once your local browers looks good comment out the lines in
 the send_emails.ts that writes the sent_at to firestore. (commented in the code)
 4) Run
-``` echo "{"11":{"fips":"11","locationName":"District of Columbia","locationURL":"https://covidactnow.org/us/dc/","lastUpdated":"06/26/2020","oldLevel":2,"newLevel":3}}
- > alerts.json` or generate the alerts.json via running the command `yarn generate-daily-alerts <new_snapshot>```
+```bash
+echo "{"11":{"fips":"11","locationName":"District of Columbia","locationURL":"https://covidactnow.org/us/dc/","lastUpdated":"06/26/2020","oldLevel":2,"newLevel":3}}
+ > alerts.json` or generate the alerts.json via running the command `yarn generate-daily-alerts <new_snapshot>
+ ```
 5) Update the firstore dev instance https://console.firebase.google.com/project/covidactnow-dev/database/firestore/data~2Fsnapshots~2F497~2Flocations~2F11~2Femails
 and add a document with your email as the id and field `sentAt` to be null
 6) Run the command `yarn send-emails alerts.json 497 true` to send the email to yourself

@@ -133,6 +133,14 @@ const LocationPageHeader = (props: {
               <RiskLevelGraphic {...riskLevelGraphicProps} />
             </RiskLevelGraphicMobile>
             <HeaderSubtitle>{levelInfo.detail(locationName)}</HeaderSubtitle>
+            <HeaderSubtitle>
+              We have made improvements to how we calculate the infection rate.
+              This change may affect the overall Risk Level.{' '}
+              <a href="https://blog.covidactnow.org/calculating-better-infection-growth-rates-rt-for-more-communities/">
+                Learn more
+              </a>
+              .{' '}
+            </HeaderSubtitle>
           </LocationCopyWrapper>
           <RiskLevelGraphicDesktop>
             <RiskLevelGraphic {...riskLevelGraphicProps} />
