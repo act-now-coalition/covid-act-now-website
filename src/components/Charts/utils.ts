@@ -48,8 +48,8 @@ export const getChartRegions = (
   {
     valueFrom: zones[Level.MEDIUM_HIGH].upperLimit,
     valueTo: maxY,
-    name: zones[Level.HIGH].name,
-    color: zones[Level.HIGH].color,
+    name: zones[Level.CRITICAL].name,
+    color: zones[Level.CRITICAL].color,
   },
 ];
 
@@ -69,7 +69,7 @@ export const getZoneByValue = (value: number, zones: LevelInfoMap) => {
     return zones[Level.MEDIUM_HIGH];
   }
 
-  return zones[Level.HIGH];
+  return zones[Level.CRITICAL];
 };
 
 export const computeTickPositions = (

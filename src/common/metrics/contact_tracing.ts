@@ -49,8 +49,8 @@ export const CONTACT_TRACING_LEVEL_INFO_MAP: LevelInfoMap = {
     color: COLOR_MAP.ORANGE.BASE,
     detail: () => SHORT_DESCRIPTION_MEDIUM_HIGH,
   },
-  [Level.HIGH]: {
-    level: Level.HIGH,
+  [Level.CRITICAL]: {
+    level: Level.CRITICAL,
     upperLimit: LIMIT_HIGH,
     name: HIGH_NAME,
     color: COLOR_MAP.GREEN.BASE,

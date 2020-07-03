@@ -18,7 +18,7 @@ const getIcon = function (levelInfo: LevelInfo, flipOrder?: Boolean) {
     case Level.MEDIUM_HIGH:
       if (flipOrder) return <TildeIcon textColor={levelInfo.color} />;
       return <ExclamationIcon textColor={levelInfo.color} />;
-    case Level.HIGH:
+    case Level.CRITICAL:
       if (flipOrder) return <CheckIcon textColor={levelInfo.color} />;
       return <ExclamationIcon textColor={levelInfo.color} />;
     case Level.UNKNOWN:

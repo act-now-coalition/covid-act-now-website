@@ -33,8 +33,8 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     detail: locationName =>
       `${locationName} is at risk of an outbreak. COVID cases are either increasing at a rate likely to overwhelm hospitals and/or the state’s COVID preparedness is well below international standards.`,
   },
-  [Level.HIGH]: {
-    level: Level.HIGH,
+  [Level.CRITICAL]: {
+    level: Level.CRITICAL,
     upperLimit: 0,
     name: HIGH_NAME,
     color: COLOR_MAP.RED.BASE,

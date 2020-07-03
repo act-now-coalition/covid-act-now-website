@@ -67,7 +67,7 @@ export function getLevel(metric: Metric, value: number | null): Level {
     Level.LOW,
     Level.MEDIUM,
     Level.MEDIUM_HIGH,
-    Level.HIGH,
+    Level.CRITICAL,
   ]) {
     if (value <= levelInfoMap[level].upperLimit) {
       return level;

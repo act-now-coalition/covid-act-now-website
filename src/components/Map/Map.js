@@ -46,7 +46,7 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
           <LegendItem
             key={'legend-4'}
             title={LEGEND_HIGH}
-            color={LOCATION_SUMMARY_LEVELS[Level.HIGH].color}
+            color={LOCATION_SUMMARY_LEVELS[Level.CRITICAL].color}
           />
           <LegendItem
             key={'legend-3'}

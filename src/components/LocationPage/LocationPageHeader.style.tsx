@@ -299,7 +299,7 @@ export const Triangle = styled(Box)<{ alarmLevel: number }>`
       ? '-32px'
       : alarmLevel === Level.MEDIUM_HIGH
       ? '32px'
-      : alarmLevel === Level.HIGH
+      : alarmLevel === Level.CRITICAL
       ? '96px'
       : '0'};
 `;

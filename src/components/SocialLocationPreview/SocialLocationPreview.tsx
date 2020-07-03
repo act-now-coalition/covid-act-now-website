@@ -47,8 +47,8 @@ const SocialLocationPreview = (props: {
             <Legend condensed={true}>
               <LegendItem
                 key={'legend-4'}
-                title={LOCATION_SUMMARY_LEVELS[Level.HIGH].name}
-                color={LOCATION_SUMMARY_LEVELS[Level.HIGH].color}
+                title={LOCATION_SUMMARY_LEVELS[Level.CRITICAL].name}
+                color={LOCATION_SUMMARY_LEVELS[Level.CRITICAL].color}
               />
               <LegendItem
                 key={'legend-3'}

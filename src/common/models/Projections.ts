@@ -147,10 +147,10 @@ export class Projections {
     const reverseList = [contact_tracing_level];
 
     if (
-      levelList.some(level => level === Level.HIGH) ||
+      levelList.some(level => level === Level.CRITICAL) ||
       reverseList.some(level => level === Level.LOW)
     ) {
-      return Level.HIGH;
+      return Level.CRITICAL;
     } else if (
       levelList.some(level => level === Level.MEDIUM_HIGH) ||
       reverseList.some(level => level === Level.MEDIUM)
