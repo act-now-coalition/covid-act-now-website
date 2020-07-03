@@ -16,7 +16,7 @@ export function levelText(
       return lowText;
     case Level.MEDIUM:
       return mediumText;
-    case Level.MEDIUM_HIGH:
+    case Level.HIGH:
       return mediumHighText;
     case Level.CRITICAL:
       return highText;

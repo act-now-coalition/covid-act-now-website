@@ -41,12 +41,12 @@ export const getChartRegions = (
   },
   {
     valueFrom: zones[Level.MEDIUM].upperLimit,
-    valueTo: zones[Level.MEDIUM_HIGH].upperLimit,
-    name: zones[Level.MEDIUM_HIGH].name,
-    color: zones[Level.MEDIUM_HIGH].color,
+    valueTo: zones[Level.HIGH].upperLimit,
+    name: zones[Level.HIGH].name,
+    color: zones[Level.HIGH].color,
   },
   {
-    valueFrom: zones[Level.MEDIUM_HIGH].upperLimit,
+    valueFrom: zones[Level.HIGH].upperLimit,
     valueTo: maxY,
     name: zones[Level.CRITICAL].name,
     color: zones[Level.CRITICAL].color,
@@ -65,8 +65,8 @@ export const getZoneByValue = (value: number, zones: LevelInfoMap) => {
     return zones[Level.MEDIUM];
   }
 
-  if (isBetween(zones[Level.MEDIUM], zones[Level.MEDIUM_HIGH], value)) {
-    return zones[Level.MEDIUM_HIGH];
+  if (isBetween(zones[Level.MEDIUM], zones[Level.HIGH], value)) {
+    return zones[Level.HIGH];
   }
 
   return zones[Level.CRITICAL];
@@ -77,13 +77,13 @@ export const computeTickPositions = (
   maxY: number,
   zones: LevelInfoMap,
 ) => {
-  const maxZones = zones[Level.MEDIUM_HIGH].upperLimit;
+  const maxZones = zones[Level.HIGH].upperLimit;
   const maxTick = maxY < maxZones ? 1.5 * maxZones : maxY;
   return [
     minY,
     zones[Level.LOW].upperLimit,
     zones[Level.MEDIUM].upperLimit,
-    zones[Level.MEDIUM_HIGH].upperLimit,
+    zones[Level.HIGH].upperLimit,
     maxTick,
   ];
 };

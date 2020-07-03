@@ -25,8 +25,8 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     detail: locationName =>
       `COVID in ${locationName} is spreading in a slow and controlled fashion, and ${locationName}’s COVID preparedness meets international standards. If this trend continues, ${locationName} may eventually achieve herd immunity, though this may take years.`,
   },
-  [Level.MEDIUM_HIGH]: {
-    level: Level.MEDIUM_HIGH,
+  [Level.HIGH]: {
+    level: Level.HIGH,
     upperLimit: 0,
     name: MEDIUM_HIGH_NAME,
     color: COLOR_MAP.ORANGE_DARK.BASE,

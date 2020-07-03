@@ -152,13 +152,13 @@ export class Projections {
     ) {
       return Level.CRITICAL;
     } else if (
-      levelList.some(level => level === Level.MEDIUM_HIGH) ||
+      levelList.some(level => level === Level.HIGH) ||
       reverseList.some(level => level === Level.MEDIUM)
     ) {
-      return Level.MEDIUM_HIGH;
+      return Level.HIGH;
     } else if (
       levelList.some(level => level === Level.MEDIUM) ||
-      reverseList.some(level => level === Level.MEDIUM_HIGH)
+      reverseList.some(level => level === Level.HIGH)
     ) {
       return Level.MEDIUM;
     } else if (
