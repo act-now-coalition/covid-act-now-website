@@ -75,8 +75,8 @@ function generateSendData(
   const html = alertTemplate({
     change:
       alertForLocation.newLevel < alertForLocation.oldLevel
-        ? 'decreased'
-        : 'increased',
+        ? 'risk decreased'
+        : 'risk increased',
     location_name: alertForLocation.locationName,
     img_alt: `Image depecting that the state went from from state ${
       Level[alertForLocation.oldLevel]
@@ -100,7 +100,7 @@ function generateSendData(
     Text: html,
     AddRecipientsToList: null,
     From: 'Covid Act Now Alerts  <noreply@covidactnow.org>',
-    ReplyTo: 'alerts-feedback@covidactnow.org',
+    ReplyTo: 'noreply@covidactnow.org',
     TrackOpens: true,
     TrackClicks: true,
     InlineCSS: true,
