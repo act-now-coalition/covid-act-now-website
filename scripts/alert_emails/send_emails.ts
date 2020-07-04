@@ -8,6 +8,7 @@ import path from 'path';
 import { Alert } from './interfaces';
 import { getFirestore } from './firestore';
 import { Level } from '../../src/common/level';
+import delay from 'delay';
 
 interface EmailSendData {
   Subject: string;
@@ -30,6 +31,7 @@ interface SendEmailResult {
   MessageID: string;
   Recipient: string;
   Status: string;
+  headers: { [key: string]: string };
 }
 
 interface CampaignMonitorError {
@@ -52,6 +54,7 @@ async function sendEmail(
         MessageID: 'none',
         Recipient: 'none',
         Status: 'dry run',
+        headers: {},
       });
     }
     api.transactional.sendClassicEmail(
@@ -171,6 +174,17 @@ async function setLastSnapshotNumber(
                 (uniqueEmailAddress[doc.id] || 0) + 1;
               locationsWithEmails[fips] = (locationsWithEmails[fips] || 0) + 1;
               if (dryRun) return;
+              const rateLimitRemaining = parseInt(
+                result.headers['x-ratelimit-remaining'],
+              );
+              if (rateLimitRemaining < 10) {
+                const rateLimitReset =
+                  parseInt(result.headers['x-ratelimit-reset']) + 15;
+                console.log(
+                  `Rate limit remaining: ${rateLimitRemaining}. Sleeping ${rateLimitReset} seconds.`,
+                );
+                await delay(rateLimitReset * 1000);
+              }
               // Comment out this code if ou are developing locally
               await db
                 .collection(
@@ -191,7 +205,7 @@ async function setLastSnapshotNumber(
   console.log(
     `Total Emails to be sent: ${emailSent}. Total locations with emails ${
       Object.keys(locationsWithEmails).length
-    }. Unique Email addresses ${Object.keys(locationsWithEmails).length}`,
+    }. Unique Email addresses ${Object.keys(uniqueEmailAddress).length}`,
   );
 
   if (!dryRun) {
