@@ -1,8 +1,8 @@
 export enum Level {
   LOW,
   MEDIUM,
-  MEDIUM_HIGH,
   HIGH,
+  CRITICAL,
   UNKNOWN,
 }
 
@@ -17,7 +17,7 @@ export interface LevelInfo {
 export interface LevelInfoMap {
   [Level.LOW]: LevelInfo;
   [Level.MEDIUM]: LevelInfo;
-  [Level.MEDIUM_HIGH]: LevelInfo;
   [Level.HIGH]: LevelInfo;
+  [Level.CRITICAL]: LevelInfo;
   [Level.UNKNOWN]: LevelInfo;
 }

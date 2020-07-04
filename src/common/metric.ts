@@ -63,12 +63,7 @@ export function getLevel(metric: Metric, value: number | null): Level {
   const levelInfoMap = ALL_METRICS_LEVEL_INFO_MAP[metric];
   // TODO(michael): Is there a typesafe way to enumerate enum values? :-/
   if (value === null) return Level.UNKNOWN;
-  for (const level of [
-    Level.LOW,
-    Level.MEDIUM,
-    Level.MEDIUM_HIGH,
-    Level.HIGH,
-  ]) {
+  for (const level of [Level.LOW, Level.MEDIUM, Level.HIGH, Level.CRITICAL]) {
     if (value <= levelInfoMap[level].upperLimit) {
       return level;
     }
