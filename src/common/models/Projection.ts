@@ -192,10 +192,10 @@ export class Projection {
       row => row && row.cumulativeInfected,
     );
     this.cumulativePositiveTests = this.smoothCumulatives(
-      timeseries.map(row => row && row.cumulativePositiveTests),
+      actualTimeseries.map(row => row && row.cumulativePositiveTests),
     );
     this.cumulativeNegativeTests = this.smoothCumulatives(
-      timeseries.map(row => row && row.cumulativeNegativeTests),
+      actualTimeseries.map(row => row && row.cumulativeNegativeTests),
     );
     this.dailyPositiveTests = this.deltasFromCumulatives(
       this.cumulativePositiveTests,
