@@ -90,7 +90,13 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
   const countyDataset = [];
 
   each(US_STATE_DATASET.state_county_map_dataset, (value, key) => {
-    countyDataset.push(...value.county_dataset);
+    const counties = value.county_dataset.filter(county => {
+      // Remove combined county names, and DC county, which we treat as a state.
+      return (
+        !county.county.includes(' / ') && county.full_fips_code !== '11001'
+      );
+    });
+    countyDataset.push(...counties);
   });
 
   const hasStateMatch = (option, inputValue) => {
@@ -163,11 +169,6 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
       if (inputValue.length > 2) {
         const countyMatches = chain(countyDataset)
           .filter(item => hasCountyMatch(item, inputValue))
-          .filter(item => {
-            // TODO this is a temporary filter
-            // to remove combined county name
-            return !item.county.includes(' / ');
-          })
           .map((item, index) => ({
             ...item,
             id: item.full_fips_code,

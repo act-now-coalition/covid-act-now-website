@@ -1,0 +1,74 @@
+name: Send Alert Emails.
+
+on:
+  repository_dispatch:
+    types: send-alert-emails
+
+env:
+  SNAPSHOT_ID: ${{ github.event.client_payload.snapshot_id }}
+  # Should be 'dev', 'staging', or 'prod'. Determines which Firebase project to use.
+  FIREBASE_ENV: ${{ github.event.client_payload.firebase_env }}
+  # 'true' or 'false' to indicuate whether we should send the emails or just run (true will send the emails)
+  SEND_EMAILS: ${{ github.event.client_payload.send_emails }}
+jobs:
+  update-data-snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      # Setup
+      - name: Verify snapshot provided
+        if: ${{ !env.SNAPSHOT_ID }}
+        run: 'echo "Missing client_payload parameter: snapshot_id" ; exit 1'
+      - name: Verify environment provided
+        if: ${{ !env.FIREBASE_ENV }}
+        run: 'echo "Missing client_payload parameter: firebase_env" ; exit 1'
+
+      - uses: actions/checkout@v2
+        with:
+          repository: covid-projections/covid-projections
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - run: yarn install
+
+      # Write appropriate service account file for FIREBASE_ENV.
+      - name: Write Dev Service Account
+        if: ${{ env.FIREBASE_ENV == 'dev' }}
+        run: echo "$SERVICE_ACCOUNT" > scripts/alert_emails/google-service-account.json
+        env:
+          SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_DEV }}
+      - name: Write Staging Service Account
+        if: ${{ env.FIREBASE_ENV == 'staging' }}
+        run: echo "$SERVICE_ACCOUNT" > scripts/alert_emails/google-service-account.json
+        env:
+          SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_STAGING }}
+      - name: Write Prod Service Account
+        if: ${{ env.FIREBASE_ENV == 'prod' }}
+        run: echo "$SERVICE_ACCOUNT" > scripts/alert_emails/google-service-account.json
+        env:
+          SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROD }}
+
+      # Generate / send emails.
+      - run: yarn generate-daily-alerts ${{ env.SNAPSHOT_ID }}
+      - run: yarn create-lists-to-email alerts.json ${{ env.SNAPSHOT_ID }}
+      - name: Send emails via campaign monitor
+        run: yarn send-emails alerts.json ${{ env.SNAPSHOT_ID }} ${{env.SEND_EMAILS}}
+        env:
+          CREATE_SEND_TOKEN: ${{ secrets.CREATE_SEND_TOKEN }}
+
+      # Slack notifications.
+      - name: Slack notification
+        if: job.status != 'success'
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          STATUS: ${{job.status}}
+        uses: Ilshidur/action-slack@fb92a78
+        with:
+          args: 'send-alert-emails failed: {{STATUS}}'
+      - name: Slack notification
+        if: job.status == 'success'
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          STATUS: ${{job.status}}
+        uses: Ilshidur/action-slack@fb92a78
+        with:
+          args: '[${{env.FIREBASE_ENV}}] Successfully sent alerts emails.'

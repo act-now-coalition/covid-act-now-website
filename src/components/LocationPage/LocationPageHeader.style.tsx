@@ -297,9 +297,9 @@ export const Triangle = styled(Box)<{ alarmLevel: number }>`
       ? '-96px'
       : alarmLevel === Level.MEDIUM
       ? '-32px'
-      : alarmLevel === Level.MEDIUM_HIGH
-      ? '32px'
       : alarmLevel === Level.HIGH
+      ? '32px'
+      : alarmLevel === Level.CRITICAL
       ? '96px'
       : '0'};
 `;

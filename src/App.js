@@ -20,6 +20,7 @@ import AllStates from 'screens/internal/AllStates/AllStates';
 import CompareSnapshots from 'screens/internal/CompareSnapshots/CompareSnapshots';
 import ExportImage from 'screens/internal/ShareImage/ChartExportImage';
 import ShareImage from 'screens/internal/ShareImage/ShareImage';
+import AlertUnsubscribe from 'screens/AlertUnsubscribe/AlertUnsubscribe';
 import AppBar from 'components/AppBar/AppBar';
 import Footer from 'components/Footer/Footer';
 import ScrollToTop from 'components/ScrollToTop';
@@ -37,6 +38,11 @@ export default function App() {
             <Switch>
               <Route exact path="/" component={HomePage} />
               <Route exact path="/alert_signup" component={HomePage} />
+              <Route
+                exact
+                path="/alert_unsubscribe"
+                component={AlertUnsubscribe}
+              />
 
               <Route exact path="/us/:stateId" component={LocationPage} />
               <Route

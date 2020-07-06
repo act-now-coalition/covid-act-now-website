@@ -32,6 +32,14 @@ export class ProjectionsPair {
     return rootMeanSquareDiff(leftDataset, rightDataset);
   }
 
+  get locationURL(): string {
+    const stateId = this.left.stateCode;
+    const county = this.left.county;
+    return `https://covidactnow.org/us/${stateId.toLowerCase()}${
+      county ? `/county/${county.county_url_name}` : ''
+    }`;
+  }
+
   get fips(): string {
     return this.left.fips;
   }
