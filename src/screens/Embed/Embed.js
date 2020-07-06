@@ -6,8 +6,6 @@ import '../../App.css'; /* optional for styling like the :hover pseudo-class */
 import { findCountyByFips } from 'common/locations';
 import { useProjections } from 'common/utils/model';
 import { useModelLastUpdatedDate } from 'common/utils/model';
-import { Projection } from 'common/models/Projection';
-import { Metric } from 'common/metric';
 import { Level } from 'common/level';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { COLOR_MAP } from 'common/colors';
@@ -61,20 +59,6 @@ export default function Embed() {
   }, [_location, countyId, countyFipsId]);
 
   const projections = useProjections(location, selectedCounty);
-
-  const getChartSummarys = (projection = Projection) => {
-    return {
-      [Metric.CASE_GROWTH_RATE]: projection.rt,
-      [Metric.HOSPITAL_USAGE]: projection.currentIcuUtilization,
-      [Metric.POSITIVE_TESTS]: projection.currentTestPositiveRate,
-      [Metric.CONTACT_TRACING]: projection.currentContactTracerMetric,
-    };
-  };
-
-  const projection = projections && projections.primary;
-
-  const stats = projection && getChartSummarys(projection);
-
   if (!projections) {
     return null;
   }
@@ -84,6 +68,7 @@ export default function Embed() {
     return <span>'No data available for county.'</span>;
   }
 
+  const stats = projections.getMetricValues();
   const alarmLevel = projections.getAlarmLevel();
   const levelInfo = LOCATION_SUMMARY_LEVELS[alarmLevel];
   const fillColor =
