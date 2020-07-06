@@ -39,15 +39,15 @@ export const CASE_GROWTH_RATE_LEVEL_INFO_MAP: LevelInfoMap = {
     color: COLOR_MAP.ORANGE.BASE,
     detail: () => SHORT_DESCRIPTION_MEDIUM,
   },
-  [Level.MEDIUM_HIGH]: {
-    level: Level.MEDIUM_HIGH,
+  [Level.HIGH]: {
+    level: Level.HIGH,
     upperLimit: LIMIT_MEDIUM_HIGH,
     name: MEDIUM_HIGH_NAME,
     color: COLOR_MAP.ORANGE_DARK.BASE,
     detail: () => SHORT_DESCRIPTION_MEDIUM_HIGH,
   },
-  [Level.HIGH]: {
-    level: Level.HIGH,
+  [Level.CRITICAL]: {
+    level: Level.CRITICAL,
     upperLimit: LIMIT_HIGH,
     name: HIGH_NAME,
     color: COLOR_MAP.RED.BASE,
