@@ -25,7 +25,7 @@ export const EmbedContainer = styled(Paper)`
   overflow: hidden;
   border-radius: 4px;
   height: ${props => props.height || `${EMBED_HEIGHT}px`};
-  height: ${props => props.width || `${EMBED_WIDTH}px`};
+  width: ${props => props.width || `${EMBED_WIDTH}px`};
   box-shadow: none;
 `;
 

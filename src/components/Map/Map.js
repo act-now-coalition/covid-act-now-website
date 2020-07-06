@@ -14,6 +14,8 @@ import { MapInstructions, MobileLineBreak } from './Map.style';
 
 function Map({
   hideLegend = false,
+  hideInstructions = false,
+  hideLegendTitle = false,
   setMobileMenuOpen,
   setMapOption,
   onClick = null,
@@ -48,7 +50,7 @@ function Map({
   return (
     <div className="Map">
       {!hideLegend && (
-        <Legend>
+        <Legend hideLegendTitle={hideLegendTitle}>
           <LegendItem
             key={'legend-4'}
             title={LOCATION_SUMMARY_LEVELS[Level.HIGH].summary}
@@ -78,7 +80,7 @@ function Map({
           stateClickHandler={handleClick}
         />
       </div>
-      {!hideLegend && (
+      {!hideInstructions && (
         <MapInstructions>
           <strong>Click a state</strong> to view risk details{' '}
           <MobileLineBreak /> and county info.

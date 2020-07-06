@@ -28,7 +28,7 @@ const SocialLocationPreview = (props: {
   projections?: Projections;
   stats?: { [key: string]: number | null };
   border?: Boolean;
-  linkToCAN?: Boolean;
+  isEmbed?: Boolean;
   Footer?: ComponentType;
 }) => {
   const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
@@ -39,43 +39,50 @@ const SocialLocationPreview = (props: {
     return false;
   };
   const Footer = props.Footer;
+  const isEmbed = props.isEmbed;
   if (!props.projections || !props.stats) {
     return (
       <Wrapper border={props.border}>
-        <USMapPreviewHeader>
-          <MapHeaderHeader>America’s COVID warning system</MapHeaderHeader>
+        <MapHeaderHeader>America’s COVID warning system</MapHeaderHeader>
+        <USMapPreviewHeader sideLegend={!isEmbed}>
           <MapWrapper>
             <Map
-              onClick={props.linkToCAN ? navigateToCAN : null}
-              hideLegend={true}
+              onClick={isEmbed ? navigateToCAN : null}
+              hideLegend={!isEmbed}
+              hideLegendTitle={true}
+              hideInstructions={true}
               setMapOption={function () {}}
               setMobileMenuOpen={function () {}}
             />
           </MapWrapper>
-          <USMapHeaderText>
-            <Legend condensed={true}>
-              <LegendItem
-                key={'legend-4'}
-                title={LOCATION_SUMMARY_LEVELS[Level.HIGH].summary}
-                color={LOCATION_SUMMARY_LEVELS[Level.HIGH].color}
-              />
-              <LegendItem
-                key={'legend-3'}
-                title={LOCATION_SUMMARY_LEVELS[Level.MEDIUM_HIGH].summary}
-                color={LOCATION_SUMMARY_LEVELS[Level.MEDIUM_HIGH].color}
-              />
-              <LegendItem
-                key={'legend-2'}
-                title={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].summary}
-                color={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].color}
-              />
-              <LegendItem
-                key={'legend-1'}
-                title={LOCATION_SUMMARY_LEVELS[Level.LOW].summary}
-                color={LOCATION_SUMMARY_LEVELS[Level.LOW].color}
-              />
-            </Legend>
-          </USMapHeaderText>
+          {isEmbed ? (
+            ''
+          ) : (
+            <USMapHeaderText>
+              <Legend condensed={true}>
+                <LegendItem
+                  key={'legend-4'}
+                  title={LOCATION_SUMMARY_LEVELS[Level.HIGH].name}
+                  color={LOCATION_SUMMARY_LEVELS[Level.HIGH].color}
+                />
+                <LegendItem
+                  key={'legend-3'}
+                  title={LOCATION_SUMMARY_LEVELS[Level.MEDIUM_HIGH].name}
+                  color={LOCATION_SUMMARY_LEVELS[Level.MEDIUM_HIGH].color}
+                />
+                <LegendItem
+                  key={'legend-2'}
+                  title={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].name}
+                  color={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].color}
+                />
+                <LegendItem
+                  key={'legend-1'}
+                  title={LOCATION_SUMMARY_LEVELS[Level.LOW].name}
+                  color={LOCATION_SUMMARY_LEVELS[Level.LOW].color}
+                />
+              </Legend>
+            </USMapHeaderText>
+          )}
         </USMapPreviewHeader>
         {Footer ? (
           <Footer />

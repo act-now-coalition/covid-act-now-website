@@ -148,7 +148,7 @@ export default function Embed(props) {
   if (isNational) {
     return (
       <EmbedContainer height={US_MAP_EMBED_HEIGHT} width={US_MAP_EMBED_WIDTH}>
-        <SocialLocationPreview border linkToCAN Footer={EmbedFooter} />
+        <SocialLocationPreview border isEmbed Footer={EmbedFooter} />
       </EmbedContainer>
     );
   }

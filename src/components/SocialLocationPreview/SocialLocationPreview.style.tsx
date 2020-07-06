@@ -29,18 +29,19 @@ export const PreviewHeader = styled.div`
   ${PreviewHeaderStyles}
 `;
 
-export const USMapPreviewHeader = styled.div`
+export const USMapPreviewHeader = styled.div<{ sideLegend: Boolean }>`
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   padding: 1.5rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: ${props => (props.sideLegend ? 'row' : 'column')};
   align-items: center;
   justify-content: center;
+  padding-bottom: 0px;
+  padding-top: ${props => (props.sideLegend ? '1.5rem' : '0')};
 `;
 
 export const MapWrapper = styled.div`
   width: 100%;
-  height: 230px;
 `;
 
 export const PreviewBody = styled.div`
@@ -75,6 +76,7 @@ export const HeaderText = styled.div`
 
 export const USMapHeaderText = styled.div`
   width: 100%;
+  flex: 1;
 `;
 
 export const AlarmLevel = styled.div`
@@ -100,8 +102,9 @@ export const HeaderHeader = styled(Typography)`
 export const MapHeaderHeader = styled(Typography)`
   font-size: 1rem;
   line-height: 1rem;
-  margin-bottom: 0.5rem;
   font-weight: 700;
+  margin-top: 1rem;
+  text-align: center;
 `;
 
 export const HeaderSubhead = styled(Typography)`
