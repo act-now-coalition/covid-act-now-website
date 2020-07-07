@@ -5,17 +5,11 @@
 
 import DataUrlJson from 'assets/data/data_url.json';
 import {
-  CovidActNowStateTimeseries,
-  Timeseries as CountyTimeseries,
-  Actualstimeseries as CountyActualTimeseries,
-  CovidActNowStatesTimeseries,
-} from './schema/CovidActNowStatesTimeseries';
-import {
-  CovidActNowCountyTimeseries,
-  Timeseries as StateTimeseries,
-  Actualstimeseries as StateActualTimeseries,
-  CovidActNowCountiesTimeseries,
-} from './schema/CovidActNowCountiesTimeseries';
+  CovidActNowAreaTimeseries,
+  Timeseries as AreaTimeseries,
+  Actualstimeseries as ActualTimeseries,
+} from './schema/CovidActNowAreaTimeseries';
+import { CovidActNowBulkTimeseries } from './schema/CovidActNowBulkTimeseries';
 import { INTERVENTIONS, REVERSED_STATES } from 'common';
 import {
   RegionAggregateDescriptor,
@@ -40,15 +34,13 @@ const ApiInterventions: { [intervention: string]: string } = {
 type InterventionKey = keyof typeof INTERVENTIONS;
 
 /** Represents timeseries for any kind of region. */
-export type Timeseries = CountyTimeseries | StateTimeseries;
+export type Timeseries = AreaTimeseries;
 
 /** Represents the actuals timeseries for any kind of region */
-export type ActualsTimeseries = CountyActualTimeseries | StateActualTimeseries;
+export type ActualsTimeseries = ActualTimeseries;
 
 /** Represents summary+timeseries for any kind of region. */
-export type RegionSummaryWithTimeseries =
-  | CovidActNowCountyTimeseries
-  | CovidActNowStateTimeseries;
+export type RegionSummaryWithTimeseries = CovidActNowAreaTimeseries;
 
 /** A mapping of interventions to the corresponding region summary+timeseries data. */
 export type RegionSummaryWithTimeseriesMap = {
@@ -61,9 +53,7 @@ export type RegionSummaryWithTimeseriesMap = {
 };
 
 /** Represents summary+timeseries data for all states or all counties. */
-type AggregateSummaryWithTimeseries =
-  | CovidActNowStatesTimeseries
-  | CovidActNowCountiesTimeseries;
+type AggregateSummaryWithTimeseries = CovidActNowBulkTimeseries;
 
 export interface SnapshotVersion {
   timestamp: string;
@@ -138,11 +128,11 @@ export class Api {
   ): Promise<RegionSummaryWithTimeseries | null> {
     const apiIntervention = ApiInterventions[intervention];
     if (region.isState()) {
-      return await this.fetchApiJson<CovidActNowStateTimeseries>(
+      return await this.fetchApiJson<CovidActNowAreaTimeseries>(
         `us/states/${region.stateId}.${apiIntervention}.timeseries.json`,
       );
     } else if (region.isCounty()) {
-      return await this.fetchApiJson<CovidActNowStateTimeseries>(
+      return await this.fetchApiJson<CovidActNowAreaTimeseries>(
         `us/counties/${region.countyFipsId}.${apiIntervention}.timeseries.json`,
       );
     } else {

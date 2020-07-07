@@ -2,8 +2,8 @@ import { nonNull } from 'common/utils';
 import {
   CANActualsTimeseriesRow,
   CANPredictionTimeseriesRow,
-  _Actuals,
-} from 'api/schema/CovidActNowStatesTimeseries';
+  Actuals,
+} from 'api/schema/CovidActNowAreaTimeseries';
 import { indexOfLastValue, hasRecentData, omitDataAfterDate } from './utils';
 
 // We sometimes need to override the ICU metric for locations due to bad data, etc.
@@ -73,7 +73,7 @@ export function calcICUHeadroom(
   dates: Array<Date>,
   actualTimeseries: Array<CANActualsTimeseriesRow | null>,
   timeseries: Array<CANPredictionTimeseriesRow | null>,
-  actuals: _Actuals,
+  actuals: Actuals,
   lastUpdated: Date,
 ): ICUHeadroomInfo | null {
   const overrideInPlace = ICU_HEADROOM_OVERRIDES.indexOf(fips) > -1;
@@ -172,7 +172,7 @@ function calcNonCovidICUPatientsSeries(
   dates: Array<Date>,
   actualTimeseries: Array<CANActualsTimeseriesRow | null>,
   timeseries: Array<CANPredictionTimeseriesRow | null>,
-  actuals: _Actuals,
+  actuals: Actuals,
 ): { series: Array<number | null>; method: NonCovidPatientsMethod } {
   const actualTotalPatients = actualTimeseries.map(
     row => row?.ICUBeds.currentUsageTotal || null,

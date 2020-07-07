@@ -9,7 +9,7 @@ import {
 import {
   CANPredictionTimeseriesRow,
   CANActualsTimeseriesRow,
-} from 'api/schema/CovidActNowStatesTimeseries';
+} from 'api/schema/CovidActNowAreaTimeseries';
 import { ICUHeadroomInfo, calcICUHeadroom } from './ICUHeadroom';
 import { lastValue, indexOfLastValue } from './utils';
 
