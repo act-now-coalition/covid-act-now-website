@@ -1,11 +1,13 @@
 import firebase from 'firebase';
 import React from 'react';
-import { StyledNewsletter, InputHolder } from './Newsletter.style';
+import { StyledNewsletter, InputHolder, InputError } from './Newsletter.style';
 import Chip from '@material-ui/core/Chip';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import { getLocationNames } from 'common/locations';
 import { getFirebase } from 'common/firebase';
+
+const EMAIL_REGEX = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
 class Newsletter extends React.Component {
   constructor() {
@@ -15,17 +17,15 @@ class Newsletter extends React.Component {
     this.alertsSelectionArray = [];
     this.defaultValues = [];
     this.autocompleteOptions = getLocationNames();
-    this.state = { checked: true, email: '' };
+    this.state = { checked: true, email: '', errorMessage: '' };
     this.submitForm = this.submitForm.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
   }
 
   async submitForm(e) {
     e.preventDefault();
-    // can't submit the form without the email entered
-    if (this.state.email) {
-      // TODO(michael): We can stop sending alert locations to Campaign Monitor
-      // once we've migrated everybody over to Firestore.
+    // can't submit the form without the email entered and email that is valid
+    if (this.state.email && EMAIL_REGEX.test(this.state.email)) {
       await this.subscribeToAlerts();
 
       window.gtag('event', 'subscribe', {
@@ -49,6 +49,8 @@ class Newsletter extends React.Component {
         .then(data => {
           console.log(data);
         });
+    } else {
+      this.setState({ errorMessage: 'Must supply a valid email address' });
     }
   }
 
@@ -62,7 +64,7 @@ class Newsletter extends React.Component {
       // Merge the locations with any existing ones since that's _probably_ what the user wants.
       await db
         .collection('alerts-subscriptions')
-        .doc(email)
+        .doc(email.toLocaleLowerCase())
         .set(
           {
             locations: firebase.firestore.FieldValue.arrayUnion(...locations),
@@ -79,8 +81,14 @@ class Newsletter extends React.Component {
 
   handleSetEmail = email => {
     // regex check the email
-    this.setState({ email })
-  }
+    if (email) {
+      this.setState({ email });
+    }
+
+    if (EMAIL_REGEX.test(email)) {
+      this.setState({ errorMessage: '' });
+    }
+  };
 
   componentDidMount() {
     this.handleSelectChange(this.defaultValues);
@@ -201,6 +209,9 @@ class Newsletter extends React.Component {
               Sign up
             </button>
           </InputHolder>
+          {this.state.errorMessage && (
+            <InputError>{this.state.errorMessage}</InputError>
+          )}
         </form>
         <script
           type="text/javascript"
