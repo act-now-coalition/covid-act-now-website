@@ -74,7 +74,12 @@ export default function App() {
               <Route path="/contact" component={Contact} />
               <Route path="/terms" component={Terms} />
               <Route path="/privacy" component={Privacy} />
-
+              {/* Embed routes */}
+              <Route
+                exact
+                path="/embed/us"
+                render={() => <Embed isNational />}
+              />
               <Route exact path="/embed/us/:stateId" component={Embed} />
               <Route
                 exact

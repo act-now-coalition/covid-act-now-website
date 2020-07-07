@@ -123,16 +123,29 @@
       iframe = document.createElement('iframe');
       href = 'https://covidactnow.org/embed/us/';
       var fips = widget.getAttribute('data-fips-id');
+      var stateId = widget.getAttribute('data-state-id');
       if (fips) {
         href += 'county/' + fips;
-      } else {
-        href += widget.getAttribute('data-state-id');
+      } else if (stateId) {
+        href += stateId;
       }
+
+      // duplicated in EmbedEnums.ts
+      var EMBED_WIDTH = 350; // in pixels
+      var EMBED_HEIGHT = 370; // in pixels
+      var US_MAP_EMBED_WIDTH = 400; // in pixels;
+      var US_MAP_EMBED_HEIGHT = 440; // in pixels;
+
       iframe.setAttribute('src', href);
-      iframe.setAttribute('width', '350');
-      iframe.setAttribute('height', '370');
       iframe.setAttribute('frameborder', '0');
-      // iframe.setAttribute('scrolling', 'no');
+
+      if (fips || stateId) {
+        iframe.setAttribute('width', EMBED_WIDTH);
+        iframe.setAttribute('height', EMBED_HEIGHT);
+      } else {
+        iframe.setAttribute('width', US_MAP_EMBED_WIDTH);
+        iframe.setAttribute('height', US_MAP_EMBED_HEIGHT);
+      }
 
       widget.parentNode.replaceChild(iframe, widget);
     }

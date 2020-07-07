@@ -3,7 +3,7 @@ import HomePageHeader from 'components/Header/HomePageHeader';
 import Map from 'components/Map/Map';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
-import ShareBlock from 'components/ShareBlock/ShareBlock';
+import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import CriteriaExplanation from './CriteriaExplanation/CriteriaExplanation';
 import { PartnerLogoGrid, PressLogoGrid } from 'components/LogoGrid/LogoGrid';
 import { useLocation } from 'react-router-dom';
@@ -59,7 +59,7 @@ export default function HomePage() {
             </Content>
           </PartnerSection>
           <div ref={shareBlockRef}>
-            <ShareBlock />
+            <ShareModelBlock />
           </div>
         </div>
       </main>

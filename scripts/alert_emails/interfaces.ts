@@ -1,5 +1,4 @@
 import { Level } from '../../src/common/level';
-import { Metric } from '../../src/common/metric';
 
 export interface Alert {
   fips: string;

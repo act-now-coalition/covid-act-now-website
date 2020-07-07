@@ -86,21 +86,12 @@ const ChartsHolder = (props: {
     scrollToChart();
   }, [props.chartId]);
 
-  const getChartSummarys = (projection: Projection) => {
-    return {
-      [Metric.CASE_GROWTH_RATE]: projection.rt,
-      [Metric.HOSPITAL_USAGE]: projection.currentIcuUtilization,
-      [Metric.POSITIVE_TESTS]: projection.currentTestPositiveRate,
-      [Metric.CONTACT_TRACING]: projection.currentContactTracerMetric,
-    };
-  };
-
   const shareButtonProps = {
     chartId: props.chartId,
     stateId: props.stateId,
     countyId: props.countyId,
     county: props.county,
-    stats: projection ? getChartSummarys(projection) : {},
+    stats: projection ? props.projections.getMetricValues() : {},
     projections: props.projections,
     isMobile,
   };
@@ -159,7 +150,7 @@ const ChartsHolder = (props: {
           <ChartContentWrapper>
             <LocationPageHeader
               projections={props.projections}
-              stats={getChartSummarys(projection)}
+              stats={props.projections.getMetricValues()}
               onRtRangeClick={() => scrollTo(rtRangeRef.current)}
               onTestPositiveClick={() => scrollTo(testPositiveRef.current)}
               onIcuUtilizationClick={() => scrollTo(icuUtilizationRef.current)}
@@ -184,7 +175,7 @@ const ChartsHolder = (props: {
             />
           </ChartContentWrapper>
           <div ref={shareBlockRef}>
-            <ShareModelBlock condensed={false} {...shareButtonProps} />
+            <ShareModelBlock {...shareButtonProps} />
           </div>
         </>
       )}
@@ -217,8 +208,8 @@ export function getChartData(
       : projection.getDataset('testPositiveRate');
 
   const icuUtilizationData =
-    projection?.currentIcuUtilization == null ||
-    projection?.icuNearCapacityOverride
+    projection?.icuHeadroomInfo == null ||
+    projection?.icuHeadroomInfo.overrideInPlace
       ? null
       : projection.getDataset('icuUtilization');
 
