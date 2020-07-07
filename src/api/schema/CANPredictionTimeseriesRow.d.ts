@@ -57,15 +57,10 @@ export type Currentsusceptible = number;
  * Number of people currently exposed
  */
 export type Currentexposed = number;
-/**
- * Number of positive test results to date
- */
-export type Cumulativepositivetests = number;
-/**
- * Number of negative test results to date
- */
-export type Cumulativenegativetests = number;
 
+/**
+ * Base model for API output.
+ */
 export interface CANPredictionTimeseriesRow {
   date: Date;
   hospitalBedsRequired: Hospitalbedsrequired;
@@ -81,6 +76,4 @@ export interface CANPredictionTimeseriesRow {
   currentInfected: Currentinfected;
   currentSusceptible: Currentsusceptible;
   currentExposed: Currentexposed;
-  cumulativePositiveTests: Cumulativepositivetests;
-  cumulativeNegativeTests: Cumulativenegativetests;
 }

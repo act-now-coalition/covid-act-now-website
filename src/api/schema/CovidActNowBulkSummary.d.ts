@@ -6,7 +6,7 @@
 
 export type Countryname = string;
 /**
- * Fips for State + County. Five character code
+ * Fips Code.  For state level data, 2 characters, for county level data, 5 characters.
  */
 export type Fips = string;
 /**
@@ -18,15 +18,23 @@ export type Lat = number;
  */
 export type Long = number;
 /**
+ * The state name
+ */
+export type Statename = string;
+/**
+ * The county name
+ */
+export type Countyname = string;
+/**
  * Date of latest data
  */
 export type Lastupdateddate = string;
 /**
  * Projection about total hospital bed utilization
  */
-export type Totalhospitalbeds = _ResourceUsageProjection;
+export type Totalhospitalbeds = ResourceUsageProjection;
 /**
- * Shortfall of resource needed at the peek utilization
+ * Shortfall of resource needed at the peak utilization
  */
 export type Peakshortfall = number;
 /**
@@ -40,7 +48,7 @@ export type Shortagestartdate = string;
 /**
  * Projection about ICU hospital bed utilization
  */
-export type Icubeds = _ResourceUsageProjection;
+export type Icubeds = ResourceUsageProjection;
 /**
  * Historical or Inferred Rt
  */
@@ -102,50 +110,60 @@ export type Contacttracers = number;
  */
 export type Population1 = number;
 /**
- * The state name
+ * Base model for API output.
  */
-export type Statename = string;
-/**
- * The county name
- */
-export type Countyname = string;
-export type CovidActNowCountiesAPI = CovidActNowCountySummary[];
+export type CovidActNowBulkSummary = CovidActNowAreaSummary[];
 
-export interface CovidActNowCountySummary {
+/**
+ * Base model for API output.
+ */
+export interface CovidActNowAreaSummary {
   countryName?: Countryname;
   fips: Fips;
   lat: Lat;
   long: Long;
-  lastUpdatedDate: Lastupdateddate;
-  projections: _Projections;
-  actuals: _Actuals;
-  population: Population1;
   stateName: Statename;
-  countyName: Countyname;
+  countyName?: Countyname;
+  lastUpdatedDate: Lastupdateddate;
+  projections: Projections;
+  actuals: Actuals;
+  population: Population1;
 }
-export interface _Projections {
+/**
+ * Base model for API output.
+ */
+export interface Projections {
   totalHospitalBeds: Totalhospitalbeds;
   ICUBeds: Icubeds;
   Rt: Rt;
   RtCI90: Rtci90;
 }
-export interface _ResourceUsageProjection {
+/**
+ * Base model for API output.
+ */
+export interface ResourceUsageProjection {
   peakShortfall: Peakshortfall;
   peakDate: Peakdate;
   shortageStartDate: Shortagestartdate;
 }
-export interface _Actuals {
+/**
+ * Base model for API output.
+ */
+export interface Actuals {
   population: Population;
   intervention: Intervention;
   cumulativeConfirmedCases: Cumulativeconfirmedcases;
   cumulativePositiveTests: Cumulativepositivetests;
   cumulativeNegativeTests: Cumulativenegativetests;
   cumulativeDeaths: Cumulativedeaths;
-  hospitalBeds: _ResourceUtilization;
-  ICUBeds: _ResourceUtilization;
+  hospitalBeds: ResourceUtilization;
+  ICUBeds: ResourceUtilization;
   contactTracers?: Contacttracers;
 }
-export interface _ResourceUtilization {
+/**
+ * Base model for API output.
+ */
+export interface ResourceUtilization {
   capacity: Capacity;
   totalCapacity: Totalcapacity;
   currentUsageCovid: Currentusagecovid;
