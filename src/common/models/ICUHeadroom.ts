@@ -112,7 +112,8 @@ export function calcICUHeadroom(
     if (
       covidPatients === null ||
       nonCovidPatients === null ||
-      totalBeds === 0
+      totalBeds === 0 ||
+      totalBeds === null
     ) {
       return null;
     } else {
