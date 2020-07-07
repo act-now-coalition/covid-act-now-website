@@ -1,4 +1,4 @@
-import React, { ReactElement, ComponentType } from 'react';
+import React, { ComponentType } from 'react';
 import { Projections } from 'common/models/Projections';
 import { useModelLastUpdatedDate } from 'common/utils/model';
 
