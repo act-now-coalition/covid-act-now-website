@@ -180,7 +180,7 @@ const ChartsHolder = (props: {
             />
           </ChartContentWrapper>
           <div ref={shareBlockRef}>
-            <ShareModelBlock condensed={false} {...shareButtonProps} />
+            <ShareModelBlock {...shareButtonProps} />
           </div>
         </>
       )}

@@ -1,8 +1,10 @@
 import { useLocation, useParams } from 'react-router-dom';
-
-// TODO: Mv to enums?
-const EMBED_WIDTH = 350;
-const EMBED_HEIGHT = 370;
+import {
+  EMBED_HEIGHT,
+  EMBED_WIDTH,
+  US_MAP_EMBED_HEIGHT,
+  US_MAP_EMBED_WIDTH,
+} from 'screens/Embed/EmbedEnums';
 
 export function useEmbed() {
   // Check if we're embedded in an iFrame
@@ -11,6 +13,12 @@ export function useEmbed() {
 
   const isEmbed = pathname.includes('/embed');
   const hostPath = window.location.origin;
+
+  const getEmbedHeight = (countyFipsCode: string | null) =>
+    !stateId && !countyFipsCode ? US_MAP_EMBED_HEIGHT : EMBED_HEIGHT;
+
+  const getEmbedWidth = (countyFipsCode: string | null) =>
+    !stateId && !countyFipsCode ? US_MAP_EMBED_WIDTH : EMBED_WIDTH;
 
   const getPath = (countyFipsCode: string) =>
     // Either "/us/county/:countyId" or "/us/:stateId"
@@ -23,8 +31,8 @@ export function useEmbed() {
     '<iframe ' +
     `src="${getIframePath(countyFipsCode)}" ` +
     'title="CoVid Act Now" ' +
-    `width="${EMBED_WIDTH}" ` +
-    `height="${EMBED_HEIGHT}" ` +
+    `width="${getEmbedWidth(countyFipsCode)}" ` +
+    `height="${getEmbedHeight(countyFipsCode)}" ` +
     'frameBorder="0" ' +
     'scrolling="no"' +
     '></iframe>';
@@ -44,6 +52,8 @@ export function useEmbed() {
     isEmbed,
     EMBED_WIDTH,
     EMBED_HEIGHT,
+    getEmbedWidth,
+    getEmbedHeight,
     getIframeCodeSnippet,
     getIframePath,
     getJsCodeSnippet,

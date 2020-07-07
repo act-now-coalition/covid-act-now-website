@@ -2,15 +2,19 @@ import styled, { css } from 'styled-components';
 import palette from 'assets/theme/palette';
 import Typography from '@material-ui/core/Typography';
 
-export const Wrapper = styled.div<{ hasMap?: Boolean }>`
-  box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.2);
+export const Wrapper = styled.div<{
+  noShadow?: Boolean;
+  border?: Boolean;
+}>`
+  box-shadow: ${props =>
+    props.border ? 'none' : '0px 12px 40px rgba(0, 0, 0, 0.2)'};
+  border: ${props => (props.border ? `2px solid ${palette.divider}` : 'none')};
   border-radius: 4px;
   color: black;
   background-color: ${palette.white};
   width: 100%;
   min-height: 10rem;
   overflow: hidden;
-  pointer-events: none;
 `;
 
 export const PreviewHeaderStyles = css`
@@ -25,9 +29,19 @@ export const PreviewHeader = styled.div`
   ${PreviewHeaderStyles}
 `;
 
+export const USMapPreviewHeader = styled.div<{ sideLegend: Boolean }>`
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: ${props => (props.sideLegend ? 'row' : 'column')};
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 0px;
+  padding-top: ${props => (props.sideLegend ? '1.5rem' : '0')};
+`;
+
 export const MapWrapper = styled.div`
-  flex: 1;
-  margin: 0 1rem -1.5rem -0.5rem;
+  width: 100%;
 `;
 
 export const PreviewBody = styled.div`
@@ -60,6 +74,11 @@ export const HeaderText = styled.div`
   flex: 1;
 `;
 
+export const USMapHeaderText = styled.div`
+  width: 100%;
+  flex: 1;
+`;
+
 export const AlarmLevel = styled.div`
   background-color: ${(props: any) => props.color || 'darkgray'};
   color: white;
@@ -83,8 +102,9 @@ export const HeaderHeader = styled(Typography)`
 export const MapHeaderHeader = styled(Typography)`
   font-size: 1rem;
   line-height: 1rem;
-  margin-bottom: 0.5rem;
   font-weight: 700;
+  margin-top: 1rem;
+  text-align: center;
 `;
 
 export const HeaderSubhead = styled(Typography)`

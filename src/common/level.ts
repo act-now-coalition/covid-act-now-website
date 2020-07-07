@@ -11,6 +11,7 @@ export interface LevelInfo {
   upperLimit: number;
   name: string;
   color: string;
+  summary?: string;
   detail(locationName?: string): string;
 }
 
