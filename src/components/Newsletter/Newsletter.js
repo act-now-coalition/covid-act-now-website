@@ -57,18 +57,20 @@ class Newsletter extends React.Component {
     const locations = this.alertsSelectionArray.map(
       item => item.full_fips_code,
     );
-    const db = getFirebase().firestore();
-    // Merge the locations with any existing ones since that's _probably_ what the user wants.
-    await db
-      .collection('alerts-subscriptions')
-      .doc(email)
-      .set(
-        {
-          locations: firebase.firestore.FieldValue.arrayUnion(...locations),
-          subscribedAt: firebase.firestore.FieldValue.serverTimestamp(),
-        },
-        { merge: true },
-      );
+    if (locations.length) {
+      const db = getFirebase().firestore();
+      // Merge the locations with any existing ones since that's _probably_ what the user wants.
+      await db
+        .collection('alerts-subscriptions')
+        .doc(email)
+        .set(
+          {
+            locations: firebase.firestore.FieldValue.arrayUnion(...locations),
+            subscribedAt: firebase.firestore.FieldValue.serverTimestamp(),
+          },
+          { merge: true },
+        );
+    }
   }
 
   handleSelectChange = selectedOption => {
