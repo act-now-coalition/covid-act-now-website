@@ -11,6 +11,7 @@ import ChartBlock from 'components/LocationPage/ChartBlock';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { Metric } from 'common/metric';
+import { ChartCaseDensity } from 'components/Charts';
 
 // TODO(michael): figure out where this type declaration should live.
 type County = {
@@ -169,6 +170,14 @@ const ChartsHolder = (props: {
               isMobile={isMobile}
             />
             <MainContentInner>
+              <h1>Case Density</h1>
+              <p>
+                Case density based on deaths, assuming a mortality rate of 1%
+                (uncertainty range calculated using 1.5% to 0.5%).
+              </p>
+              <ChartCaseDensity
+                columnData={projection.getDataset('caseDensityByDeaths')}
+              />
               {chartPropsForMap.map(chartProps => (
                 <ChartBlock
                   key={chartProps.metric}
