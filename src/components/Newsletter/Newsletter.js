@@ -15,7 +15,7 @@ class Newsletter extends React.Component {
     this.alertsSelectionArray = [];
     this.defaultValues = [];
     this.autocompleteOptions = getLocationNames();
-    this.state = { alertSignUps: '', checked: true, email: '' };
+    this.state = { checked: true, email: '' };
     this.submitForm = this.submitForm.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
   }
@@ -75,12 +75,12 @@ class Newsletter extends React.Component {
 
   handleSelectChange = selectedOption => {
     this.alertsSelectionArray = selectedOption;
-    this.setState({
-      alertSignUps: this.alertsSelectionArray
-        .map(item => item.full_fips_code)
-        .join(','),
-    });
   };
+
+  handleSetEmail = email => {
+    // regex check the email
+    this.setState({ email })
+  }
 
   componentDidMount() {
     this.handleSelectChange(this.defaultValues);
@@ -150,15 +150,6 @@ class Newsletter extends React.Component {
               findings on COVID{' '}
             </label>
           </InputHolder>
-          <input
-            hidden
-            aria-label="alert_list_csv"
-            id="fieldjrdtwy"
-            maxlength="200"
-            name="cm-f-jrdtwy"
-            onChange={value => {}}
-            value={this.state.alertSignUps}
-          />
           <Autocomplete
             multiple
             id="alert-locations"
@@ -202,8 +193,9 @@ class Newsletter extends React.Component {
               maxlength="200"
               name="cm-yddtsd-yddtsd"
               required=""
+              pattern="^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$"
               type="email"
-              onChange={e => this.setState({ email: e.target.value })}
+              onChange={e => this.handleSetEmail(e.target.value)}
             />
             <button type="submit" onClick={this.submitForm}>
               Sign up
