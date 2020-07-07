@@ -391,9 +391,7 @@ export class Projection {
     // TODO(michael): I don't like hardcoding "County" into the name. We should
     // probably delete this code and get the location name from somewhere other
     // than the API (or improve the API value).
-    return s.countyName
-      ? `${s.countyName} County, ${s.stateName}`
-      : s.stateName;
+    return s.countyName ? `${s.countyName}, ${s.stateName}` : s.stateName;
   }
 
   /**

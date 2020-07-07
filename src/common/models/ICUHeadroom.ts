@@ -109,7 +109,11 @@ export function calcICUHeadroom(
   const totalBeds = actuals.ICUBeds.totalCapacity;
   const metricSeries = covidPatientsResult.series.map((covidPatients, i) => {
     const nonCovidPatients = nonCovidPatientsResult.series[i];
-    if (covidPatients === null || nonCovidPatients === null) {
+    if (
+      covidPatients === null ||
+      nonCovidPatients === null ||
+      totalBeds === 0
+    ) {
       return null;
     } else {
       return covidPatients / (totalBeds - nonCovidPatients);
