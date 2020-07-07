@@ -90,6 +90,7 @@ function generateSendData(
     unsubscribe_link: `https://covidactnow.org/alert_unsubscribe?email=${encodeURI(
       userToEmail,
     )}`, // would be nice to know dev/staging/prod
+    feedback_subject_line: encodeURI(`[Alert Feedback] Alert for ${alertForLocation.locationName} on ${alertForLocation.lastUpdated}`),
   });
   const subject = `${alertForLocation.locationName}'s Risk Level Has Changed`;
 
