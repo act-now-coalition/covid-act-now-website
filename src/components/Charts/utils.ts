@@ -22,36 +22,43 @@ export interface Region {
   color: string;
 }
 
+const isNotEmpty = (region: Region) =>
+  Math.abs(region.valueFrom - region.valueTo) > 1e-3;
+
 export const getChartRegions = (
   minY: number,
   maxY: number,
   zones: LevelInfoMap,
-): Region[] => [
-  {
-    valueFrom: minY,
-    valueTo: zones[Level.LOW].upperLimit,
-    name: zones[Level.LOW].name,
-    color: zones[Level.LOW].color,
-  },
-  {
-    valueFrom: zones[Level.LOW].upperLimit,
-    valueTo: zones[Level.MEDIUM].upperLimit,
-    name: zones[Level.MEDIUM].name,
-    color: zones[Level.MEDIUM].color,
-  },
-  {
-    valueFrom: zones[Level.MEDIUM].upperLimit,
-    valueTo: zones[Level.HIGH].upperLimit,
-    name: zones[Level.HIGH].name,
-    color: zones[Level.HIGH].color,
-  },
-  {
-    valueFrom: zones[Level.HIGH].upperLimit,
-    valueTo: maxY,
-    name: zones[Level.CRITICAL].name,
-    color: zones[Level.CRITICAL].color,
-  },
-];
+): Region[] => {
+  const regions = [
+    {
+      valueFrom: minY,
+      valueTo: zones[Level.LOW].upperLimit,
+      name: zones[Level.LOW].name,
+      color: zones[Level.LOW].color,
+    },
+    {
+      valueFrom: zones[Level.LOW].upperLimit,
+      valueTo: zones[Level.MEDIUM].upperLimit,
+      name: zones[Level.MEDIUM].name,
+      color: zones[Level.MEDIUM].color,
+    },
+    {
+      valueFrom: zones[Level.MEDIUM].upperLimit,
+      valueTo: zones[Level.HIGH].upperLimit,
+      name: zones[Level.HIGH].name,
+      color: zones[Level.HIGH].color,
+    },
+    {
+      valueFrom: zones[Level.HIGH].upperLimit,
+      valueTo: maxY,
+      name: zones[Level.CRITICAL].name,
+      color: zones[Level.CRITICAL].color,
+    },
+  ];
+
+  return regions.filter(isNotEmpty);
+};
 
 const isBetween = (zoneLow: LevelInfo, zoneHigh: LevelInfo, value: number) =>
   zoneLow.upperLimit <= value && value < zoneHigh.upperLimit;
