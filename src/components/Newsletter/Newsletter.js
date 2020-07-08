@@ -7,7 +7,8 @@ import TextField from '@material-ui/core/TextField';
 import { getLocationNames } from 'common/locations';
 import { getFirebase } from 'common/firebase';
 
-const EMAIL_REGEX = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+// Taken from https://ui.dev/validate-email-address-javascript/
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 class Newsletter extends React.Component {
   constructor() {
@@ -80,7 +81,6 @@ class Newsletter extends React.Component {
   };
 
   handleSetEmail = email => {
-    // regex check the email
     if (email) {
       this.setState({ email });
     }
@@ -201,7 +201,6 @@ class Newsletter extends React.Component {
               maxlength="200"
               name="cm-yddtsd-yddtsd"
               required=""
-              pattern="^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$"
               type="email"
               onChange={e => this.handleSetEmail(e.target.value)}
             />
