@@ -82,7 +82,8 @@ export type DatasetId =
   | 'testPositiveRate'
   | 'contractTracers'
   | 'caseDensityByCases'
-  | 'caseDensityByDeaths';
+  | 'caseDensityByDeaths'
+  | 'caseDensityRange';
 
 export interface RtRange {
   /** The actual Rt value. */
@@ -93,8 +94,20 @@ export interface RtRange {
   high: number;
 }
 
-const estimatedCaseFatalityRatio = 0.01; // 1% of cases expected to turn into deaths, used in calcCaseDensityByDeaths
+export interface CaseDensityRange {
+  caseDensity: number;
+  low: number;
+  high: number;
+}
 
+/**
+ * We use use an estimated case fatality ratio of 1 % with lower and upper bounds
+ * of 0.5% and 1.5% respectively, used to calculate case density by deaths (main
+ * series and range).
+ */
+const CASE_FATALITY_RATIO_LOWER = 0.005;
+const CASE_FATALITY_RATIO_UPPER = 0.015;
+const CASE_FATALITY_RATIO = 0.01;
 /**
  * Represents a single projection for a given state or county.  Contains a
  * time-series of things like hospitalizations, hospital capacity, infections, etc.
@@ -140,6 +153,7 @@ export class Projection {
   private readonly contractTracers: Array<number | null>;
   private readonly caseDensityByCases: Array<number | null>;
   private readonly caseDensityByDeaths: Array<number | null>;
+  private readonly caseDensityRange: Array<CaseDensityRange | null>;
   private readonly dailyDeaths: Array<number | null>;
 
   constructor(
@@ -226,6 +240,7 @@ export class Projection {
 
     this.caseDensityByCases = this.calcCaseDensityByCases();
     this.caseDensityByDeaths = this.calcCaseDensityByDeaths();
+    this.caseDensityRange = this.calcCaseDensityRange();
 
     this.currentCaseDensityByCases = this.lastValue(this.caseDensityByCases);
     this.currentCaseDensityByDeaths = this.lastValue(this.caseDensityByDeaths);
@@ -542,12 +557,26 @@ export class Projection {
       if (totalPopulation === 0 || weeklyAverage === null) {
         caseDensityByDeaths.push(null);
       } else {
-        const estimatedCases = weeklyAverage / estimatedCaseFatalityRatio;
+        const estimatedCases = weeklyAverage / CASE_FATALITY_RATIO;
         const val = estimatedCases / (totalPopulation / 100000);
         caseDensityByDeaths.push(val);
       }
     }
     return caseDensityByDeaths;
+  }
+
+  private calcCaseDensityRange(): Array<CaseDensityRange | null> {
+    return this.caseDensityByDeaths.map((caseDensity, i) => {
+      return caseDensity === null
+        ? null
+        : {
+            caseDensity,
+            low:
+              (CASE_FATALITY_RATIO / CASE_FATALITY_RATIO_UPPER) * caseDensity,
+            high:
+              (CASE_FATALITY_RATIO / CASE_FATALITY_RATIO_LOWER) * caseDensity,
+          };
+    });
   }
 
   private calcRtRange(

@@ -171,12 +171,8 @@ const ChartsHolder = (props: {
             />
             <MainContentInner>
               <h1>Case Density</h1>
-              <p>
-                Case density based on deaths, assuming a mortality rate of 1%
-                (uncertainty range calculated using 1.5% to 0.5%).
-              </p>
               <ChartCaseDensity
-                columnData={projection.getDataset('caseDensityByDeaths')}
+                columnData={projection.getDataset('caseDensityRange')}
               />
               {chartPropsForMap.map(chartProps => (
                 <ChartBlock

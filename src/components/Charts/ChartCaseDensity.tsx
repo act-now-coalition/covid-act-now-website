@@ -28,34 +28,19 @@ import * as Style from './Charts.style';
 
 type Point = {
   x: number;
-  y: number;
+  y: any;
 };
 
 const getDate = (d: Point) => new Date(d.x);
-const getY = (d: Point) => d?.y;
+const getY = (d: Point) => d?.y?.caseDensity;
+const getAreaLow = (p: Point) => p?.y?.low;
+const getAreaHigh = (p: Point) => p?.y?.high;
 
-/**
- * Since the case density is already calculated with 1%, we need to scale
- * accordingly to calculate the case density with a different mortality
- * rate m%.
- *
- * case density (1%) = (7 day moving avg of deaths / 1%) / (population / 100k)
- *
- * case density (m%) = (7 day moving avg of deaths / m%) / (population / 100k)
- *       = (m% / 1%) * (7 day moving avg of deaths / m%) / (population / 100k)
- *       = (m% / 1%) * case density (1%)
- *
- * Note that the mortality ratio is inversely proportional to the estimated case
- * density.
- */
-const CPR = 1.0 / 100;
-const CPR_LOWER = 0.5 / 100;
-const CPR_UPPER = 1.5 / 100;
-
-const getAreaLow = (p: Point) => getY(p) * (CPR / CPR_UPPER);
-const getAreaHigh = (p: Point) => getY(p) * (CPR / CPR_LOWER);
-
-const hasData = (d: any) => isDate(getDate(d)) && Number.isFinite(getY(d));
+const hasData = (d: any) =>
+  isDate(getDate(d)) &&
+  Number.isFinite(getY(d)) &&
+  Number.isFinite(getAreaLow(d)) &&
+  Number.isFinite(getAreaHigh(d));
 
 const ChartCaseDensity: FunctionComponent<{
   columnData: Column[];
