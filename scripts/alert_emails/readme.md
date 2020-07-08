@@ -10,15 +10,20 @@ We use handlebars to generate the email and send it via CreateSend.
 
 ## Sending the Alerts via Github Actions
 
-A github action will run all of these steps on github for you. Run that via
+A github action will run all of these steps on github for you.
 
-To create a draft of the emails that will be sent run:
+You must first get the current snapshot to use (from the modeling team). Confirm the lastSnapshot field is
+correct in firestore at (info/elerts)[https://console.firebase.google.com/project/covidactnow-prod/database/firestore/data~2Finfo~2Falerts]. The github action should update the lastSnapshot field but if the job failed for some reason it won't get updated)
+
+Then create a draft of the emails that will be sent run:
 
 ```bash
 tools/send-alert-emails.sh <snapshot> <prod|staging|dev>
 ```
 
-To send the emails via the github action run:
+Go into firestore and check that the locations seem correct (make sure that locations have emails). Add yourself to a location go get the email (ie a document with your email and a sentAt value of null).
+
+Then send the emails via the github action run:
 
 ```bash
 tools/send-alert-emails.sh <snapshot> <prod|staging|dev> true
