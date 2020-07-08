@@ -24,6 +24,7 @@ import {
   getLocationNameForFips,
   getLocationUrlForFips,
 } from '../../src/common/locations';
+import { Level } from '../../src/common/level';
 
 const summariesFolder = path.join(__dirname, 'summaries');
 const outputFile = path.join(__dirname, 'alerts.json');
@@ -51,7 +52,7 @@ async function main() {
     const locationName = getLocationNameForFips(fips);
     const locationURL = getLocationUrlForFips(fips);
     const lastUpdated = moment.utc().format('MM/DD/YYYY'); // This might not be accurate, grab from the pair? idk
-    if (oldLevel !== newLevel) {
+    if (oldLevel !== newLevel && oldLevel !== Level.UNKNOWN && newLevel !== Level.UNKNOWN) {
       alerts[fips] = {
         fips,
         locationName,
