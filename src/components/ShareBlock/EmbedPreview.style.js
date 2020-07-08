@@ -25,6 +25,7 @@ export const EmbedPreviewExitButton = styled.div`
   justify-content: center;
   margin-right: 60px;
   margin-top: 25px;
+  background-color: white;
 
   :hover {
     color: ${palette.info.main};
