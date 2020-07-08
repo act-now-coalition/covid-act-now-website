@@ -1,5 +1,10 @@
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
+import { Projection } from 'common/models/Projection';
+
+export const METRIC_NAME = 'Case Density';
+
+export const CASE_DENSITY_DISCLAIMER = 'Case Density Disclaimer';
 
 export const CASE_DENSITY_LEVEL_INFO_MAP: LevelInfoMap = {
   [Level.LOW]: {
@@ -37,4 +42,8 @@ export const CASE_DENSITY_LEVEL_INFO_MAP: LevelInfoMap = {
     color: COLOR_MAP.GRAY.BASE,
     detail: () => 'Unknown',
   },
+};
+
+export const caseDensityStatusText = (projection: Projection) => {
+  return 'Case Density Status Text';
 };
