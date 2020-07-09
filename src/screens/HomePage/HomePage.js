@@ -5,15 +5,25 @@ import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import CriteriaExplanation from './CriteriaExplanation/CriteriaExplanation';
+import Announcements from './Announcements/Announcements';
 import { PartnerLogoGrid, PressLogoGrid } from 'components/LogoGrid/LogoGrid';
 import { useLocation } from 'react-router-dom';
+import HomePageThermometer from 'screens/HomePage/HomePageThermometer';
+import { GlobalSelector } from 'components/MapSelectors/MapSelectors';
+import { useHistory } from 'react-router-dom';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
 
 import {
   Content,
   FeaturedHeader,
   PartnerSection,
   PartnerHeader,
+  SearchBarThermometerWrapper,
+  SectionWrapper,
 } from './HomePage.style';
+
+import { SelectorWrapper } from 'components/Header/HomePageHeader.style';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
@@ -29,11 +39,28 @@ export default function HomePage() {
   const shareBlockRef = useRef(null);
   const location = useLocation();
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+
+  const history = useHistory();
+
   useEffect(() => {
     if (location.pathname.includes('alert_signup') && shareBlockRef.current) {
       scrollTo(shareBlockRef.current);
     }
   }, [location.pathname, shareBlockRef]);
+
+  const handleSelectChange = option => {
+    let route = `/us/${option.state_code.toLowerCase()}`;
+
+    if (option.county_url_name) {
+      route = `${route}/county/${option.county_url_name}`;
+    }
+
+    history.push(route);
+
+    window.scrollTo(0, 0);
+  };
 
   return (
     <>
@@ -47,8 +74,21 @@ export default function HomePage() {
       <main>
         <div className="App">
           <Content>
-            <CriteriaExplanation />
-            <Map />
+            <SearchBarThermometerWrapper>
+              <SelectorWrapper>
+                <GlobalSelector
+                  handleChange={handleSelectChange}
+                  extendRight={undefined}
+                />
+              </SelectorWrapper>
+              {!isMobile && <HomePageThermometer />}
+            </SearchBarThermometerWrapper>
+            <Map hideLegend />
+            {isMobile && <HomePageThermometer />}
+            <SectionWrapper>
+              <CriteriaExplanation />
+            </SectionWrapper>
+            <Announcements />
           </Content>
           <PartnerSection>
             <Content>

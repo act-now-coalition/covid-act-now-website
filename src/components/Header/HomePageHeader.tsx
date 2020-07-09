@@ -1,20 +1,22 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { GlobalSelector } from 'components/MapSelectors/MapSelectors';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
 
 import {
   Wrapper,
   Content,
   Disclaimer,
-  SelectorWrapper,
   HeaderSubCopy,
-  HighlightColor,
   HeaderTitle,
   HeaderSubCopyItem,
 } from './HomePageHeader.style';
 
 const HomePageHeader = () => {
   const history = useHistory();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
   // @ts-ignore TODO(aj): remove when converting MapSelectors
   const handleSelectChange = option => {
@@ -32,27 +34,16 @@ const HomePageHeader = () => {
   return (
     <Wrapper>
       <Content>
-        <HeaderTitle>
-          <HighlightColor>America’s COVID warning system</HighlightColor>
-        </HeaderTitle>
+        <HeaderTitle>America’s COVID Warning System</HeaderTitle>
         <div>
           <HeaderSubCopy color="inherit" component="p" variant="subtitle2">
-            <HeaderSubCopyItem hideOnMobile>
-              See COVID data and risk level for your community.
-              <br />
-            </HeaderSubCopyItem>
             <HeaderSubCopyItem>
-              All 50 states. 2,100+ counties.
+              We use <a href="/">5 key indicators</a> to determine risk levels{' '}
+              {!isMobile && <br />}
+              for <strong>50 states</strong> and <strong>2,100 counties</strong>
+              .
             </HeaderSubCopyItem>
           </HeaderSubCopy>
-
-          <SelectorWrapper>
-            <GlobalSelector
-              handleChange={handleSelectChange}
-              extendRight={undefined}
-            />
-          </SelectorWrapper>
-
           {false && (
             <Disclaimer>
               We also make projections for the country as a whole.{' '}
