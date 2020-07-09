@@ -37,7 +37,7 @@ export async function fetchAllStateProjections(
   ).fetchAggregatedSummaryWithTimeseriesMaps(RegionAggregateDescriptor.STATES);
   return all.map(summaryWithTimeseriesMap => {
     // We grab the state from an arbitrary intervention's summary data.
-    const stateName = summaryWithTimeseriesMap[INTERVENTIONS.LIMITED_ACTION]!
+    const stateName = summaryWithTimeseriesMap[INTERVENTIONS.PROJECTED]!
       .stateName;
     return new Projections(
       summaryWithTimeseriesMap,
@@ -57,9 +57,9 @@ export async function fetchAllCountyProjections(
   );
   return all.map(summaryWithTimeseriesMap => {
     // We grab the state / fips from an arbitrary intervention's summary data.
-    const stateName = summaryWithTimeseriesMap[INTERVENTIONS.LIMITED_ACTION]!
+    const stateName = summaryWithTimeseriesMap[INTERVENTIONS.PROJECTED]!
       .stateName;
-    const fips = summaryWithTimeseriesMap[INTERVENTIONS.LIMITED_ACTION]!.fips;
+    const fips = summaryWithTimeseriesMap[INTERVENTIONS.PROJECTED]!.fips;
     return new Projections(
       summaryWithTimeseriesMap,
       REVERSED_STATES[stateName],
