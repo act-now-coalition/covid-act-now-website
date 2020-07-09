@@ -23,8 +23,21 @@ export const EmbedPreviewExitButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-right: 60px;
+  margin-top: 25px;
+  background-color: white;
+
   :hover {
     color: ${palette.info.main};
+  }
+
+  @media (min-width: 410px) {
+    margin-right: 30px;
+    margin-top: 0;
+  }
+
+  @media (min-width: 600px) {
+    margin-right: 0;
   }
 `;
 export const CenteredModal = styled(Modal)`
