@@ -214,7 +214,7 @@ export class Projection {
     this.caseDensityRange = this.calcCaseDensityRange();
 
     this.currentCaseDensityByCases = lastValue(this.caseDensityByCases);
-    this.currentCaseDensityByDeaths = lastValue(this.caseDensityByDeaths);
+    this.currentCaseDensityByDeaths = lastValue(this.caseDensityByDeaths) || 0;
 
     this.fixZeros(this.hospitalizations);
     this.fixZeros(this.cumulativeDeaths);

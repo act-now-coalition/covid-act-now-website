@@ -32,7 +32,6 @@ export class Projections {
     this.countyName = null;
     this.baseline = null;
     this.isCounty = county != null;
-
     this.populateCounty(county);
     this.populateInterventions(summaryWithTimeseriesMap);
   }
@@ -61,7 +60,7 @@ export class Projections {
   }
 
   get fips(): string {
-    return this.primary.fips;
+    return this.primary?.fips || '';
   }
 
   get locationName(): string {
@@ -73,7 +72,7 @@ export class Projections {
   }
 
   get population(): number {
-    return this.primary.totalPopulation;
+    return this.primary?.totalPopulation || 0;
   }
 
   get primary() {
@@ -108,6 +107,8 @@ export class Projections {
         return this.primary.currentTestPositiveRate;
       case Metric.CONTACT_TRACING:
         return this.primary.currentContactTracerMetric;
+      case Metric.CASE_DENSITY:
+        return this.primary.currentCaseDensityByDeaths;
       default:
         fail('Cannot get value of metric: ' + metric);
     }
@@ -188,6 +189,7 @@ export class Projections {
     summaryWithTimeseriesMap: RegionSummaryWithTimeseriesMap,
   ) {
     for (const intervention in summaryWithTimeseriesMap) {
+      console.log(intervention);
       const summaryWithTimeseries = summaryWithTimeseriesMap[intervention];
       let projection = null;
       if (summaryWithTimeseries !== null) {
@@ -199,6 +201,7 @@ export class Projections {
       if (intervention === INTERVENTIONS.LIMITED_ACTION) {
         this.baseline = projection;
       } else if (intervention === INTERVENTIONS.PROJECTED) {
+        // @ts-ignore
         this.projected = projection;
       }
     }
