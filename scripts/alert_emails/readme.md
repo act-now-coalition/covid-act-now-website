@@ -12,22 +12,28 @@ We use handlebars to generate the email and send it via CreateSend.
 
 A github action will run all of these steps on github for you.
 
-You must first get the current snapshot to use (from the modeling team). Confirm the lastSnapshot field is
-correct in firestore at (info/elerts)[https://console.firebase.google.com/project/covidactnow-prod/database/firestore/data~2Finfo~2Falerts]. The github action should update the lastSnapshot field but if the job failed for some reason it won't get updated)
+The script should be run after a new snapshot has been pushed to the prod website, in order to notify users of changes. You can get the currently live snapshot from https://github.com/covid-projections/covid-projections/blob/master/src/assets/data/data_url.json
 
-Then create a draft of the emails that will be sent run:
+Confirm the lastSnapshot field is
+correct in firestore at (info/alerts)[https://console.firebase.google.com/project/covidactnow-prod/database/firestore/data~2Finfo~2Falerts]. The value of lastSnapshot should ideally be the previous snapshot from data_url.json (you can check what the previous snapshot was via the github file history). The github action should update the lastSnapshot field, but if the job failed for some reason it won't get updated. You can also check the snapshots collection in firestore to see what snapshots we've sent emails on prior.
+
+Then do a dry-run to generate the alert locations and affected emails, but not actually send the emails. It will create a snapshot specific collection in firestore with the locations to alert and the emails to be alerted at each of those locations:
 
 ```bash
 tools/send-alert-emails.sh <snapshot> <prod|staging|dev>
 ```
 
-Go into firestore and check that the locations seem correct (make sure that locations have emails). Add yourself to a location go get the email (ie a document with your email and a sentAt value of null).
+Go into firestore and check that the locations seem correct (make sure that locations have emails). You can also check the github action logs to see how many emails would be sent and how many email addresses would get emails.
+
+Before running the alerting emails, to ensure you receive an alert, you can add yourself to one of the locations scheduled to receive an alert by adding a document with your email and a sentAt value of null.
 
 Then send the emails via the github action run:
 
 ```bash
 tools/send-alert-emails.sh <snapshot> <prod|staging|dev> true
 ```
+
+You can check via campaign monitor that all the emails sent by going to the transactional email tab and clicking ungrouped emails (you should be able to view an example email and see the long list of receipents).
 
 ## Running the alerts scripts manually
 
