@@ -103,7 +103,7 @@ function ChartBlock(props: {
             )}
           </ChartHeaderWrapper>
           <ChartLocationName>{projection.locationName}</ChartLocationName>
-          {futureProjectionsDisabled ? (
+          {futureProjectionsDisabled || !noInterventionProjection ? (
             'Future hospitalization projections are not currently available. Check back soon.'
           ) : (
             <Fragment>

@@ -54,7 +54,7 @@ export default function MetricChart({
           columnData={projection.getDataset('contractTracers')}
         />
       )}
-      {metric === Metric.FUTURE_PROJECTIONS && (
+      {metric === Metric.FUTURE_PROJECTIONS && projections.baseline && (
         <ChartFutureHospitalization height={height} projections={projections} />
       )}
     </>

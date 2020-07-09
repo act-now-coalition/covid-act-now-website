@@ -205,7 +205,7 @@ export class Projection {
     this.fixZeros(this.cumulativeDeaths);
 
     const shortageStart =
-      summaryWithTimeseries.projections.totalHospitalBeds.shortageStartDate;
+      summaryWithTimeseries.projections?.totalHospitalBeds.shortageStartDate;
     this.dateOverwhelmed =
       shortageStart === null ? null : new Date(shortageStart);
     if (

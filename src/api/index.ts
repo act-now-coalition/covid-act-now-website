@@ -136,6 +136,7 @@ export class Api {
     region: RegionDescriptor,
     intervention: InterventionKey,
   ): Promise<RegionSummaryWithTimeseries | null> {
+    console.log(intervention);
     const apiIntervention = ApiInterventions[intervention];
     if (region.isState()) {
       return await this.fetchApiJson<CovidActNowStateTimeseries>(

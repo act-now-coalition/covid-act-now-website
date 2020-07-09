@@ -62,7 +62,6 @@ const ChartFutureHospitalization = ({
 
   const chartWidth = width - marginLeft - marginRight;
   const chartHeight = height - marginTop - marginBottom;
-
   const dataNoAction = projections.baseline.getDataset('hospitalizations');
   const dataNoActionFuture: Point[] = dataNoAction
     .filter(hasData)
