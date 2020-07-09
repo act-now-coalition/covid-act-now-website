@@ -16,7 +16,7 @@ const Outcomes = ({ projections, title, colors }) => {
           <div>Scenario</div>
           <div>Hospital Overload Date</div>
           <div>Population Infected (Cumulative)</div>
-          <div>Deaths</div>
+          <div>Additional Deaths</div>
         </OutcomesTableHeader>
         {projections.map((projection, idx) => {
           let rowLabel = projection.label;
