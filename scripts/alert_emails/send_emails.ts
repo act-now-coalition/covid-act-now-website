@@ -39,6 +39,9 @@ interface CampaignMonitorError {
   Message: string;
 }
 
+const CM_INVALID_EMAIL_MESSAGE = 'A valid recipient address is required';
+const CM_INVALID_EMAIL_ERROR_CODE = 1;
+
 const alertTemplate = Handlebars.compile(
   fs.readFileSync(path.join(__dirname, 'template.html'), 'utf8'),
 );
@@ -152,6 +155,7 @@ async function setLastSnapshotNumber(
   const api: any = new createsend(auth);
   let emailSent = 0;
   let errorCount = 0;
+  let invalidEmailCount = 0;
   const uniqueEmailAddress: { [email: string]: number } = {};
   const locationsWithEmails: { [fips: string]: number } = {};
 
@@ -186,7 +190,7 @@ async function setLastSnapshotNumber(
                 );
                 await delay(rateLimitReset * 1000);
               }
-              // Comment out this code if ou are developing locally
+              // Comment out this code if you are developing locally
               await db
                 .collection(
                   `snapshots/${currentSnapshot}/locations/${fips}/emails/`,
@@ -196,24 +200,33 @@ async function setLastSnapshotNumber(
                   sentAt: admin.firestore.FieldValue.serverTimestamp(),
                 });
             })
-            .catch(err => {
-              console.log(err);
-              errorCount += 1;
+            .catch(async (err: CampaignMonitorError) => {
+              // if the email is invalid, move the document to the invalid collection
+              if (err.Code === CM_INVALID_EMAIL_ERROR_CODE && err.Message === CM_INVALID_EMAIL_MESSAGE) {
+                invalidEmailCount += 1;
+                const currentData = (await db.collection("alerts-subscriptions").doc(doc.id).get()).data();
+                if (currentData) {
+                  await db.collection("invalid-alerts-subscriptions").doc(doc.id).set(currentData)
+                  await db.collection("alerts-subscriptions").doc(doc.id).delete();
+                }
+              } else {
+                errorCount += 1;
+              }
             });
         }
       });
   }
   console.log(
-    `Total Emails to be sent: ${emailSent}. Total locations with emails ${
+    `Total Emails to be sent: ${emailSent}. Total locations with emails: ${
       Object.keys(locationsWithEmails).length
-    }. Unique Email addresses ${Object.keys(uniqueEmailAddress).length}`,
+    }. Unique Email addresses: ${Object.keys(uniqueEmailAddress).length}. Invalid emails removed: ${invalidEmailCount}`,
   );
 
   if (!dryRun) {
     setLastSnapshotNumber(db, currentSnapshot);
     // If we aren't in a dry run but there's clearly some non trivial errors exit with error
     if (emailSent < 1 || errorCount > 1) {
-      console.log(`Error count: ${errorCount}. Emails sent: ${emailSent}.`);
+      console.log(`Error count: ${errorCount}. Emails sent: ${emailSent}. Invalid emails removed: ${invalidEmailCount}`);
       process.exit(-1);
     }
   }
