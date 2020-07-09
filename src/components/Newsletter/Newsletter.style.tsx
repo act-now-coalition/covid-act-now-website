@@ -6,10 +6,16 @@ export const InputHolder = styled.div`
   display: flex;
   flex-direction: row;
   padding-top: 1em;
-  padding-bottom: 1em;
   label {
     margin: 0 0 8px 8px;
   }
+`;
+
+export const InputError = styled.div`
+  font-size: 12px;
+  color: red;
+  padding-left: 0.5em;
+  padding-bottom: 1em;
 `;
 
 export const StyledNewsletter = styled.div`
