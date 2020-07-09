@@ -17,13 +17,14 @@ import {
 } from '../../src/common/utils/model';
 import { Projections } from '../../src/common/models/Projections';
 import { Metric, ALL_METRICS } from '../../src/common/metric';
+import os from 'os-utils';
 
 const BASE_URL = 'http://localhost:3000/internal/share-image';
 const CSS_SELECTOR = '.screenshot';
 const OUTPUT_DIR = path.join(__dirname, 'output');
 
 // How many screenshots to send to pageres at once.
-const PAGERES_BATCH_SIZE = 10;
+const PAGERES_BATCH_SIZE = 50;
 // How long (seconds) to wait for the expected div to render in the browser.
 const PAGERES_TIMEOUT = 90;
 // How many times to retry after any pageres failure.
@@ -114,16 +115,31 @@ const BLACKLISTED_COUNTIES = [
   // screenshots = screenshots.slice(0, 43);
 
   const batches = _.chunk(screenshots, PAGERES_BATCH_SIZE);
-  let screenshotsLeft = screenshots.length;
+  let screenshotsDone = 0;
+
+  const start = Date.now();
+  setInterval(() => {
+    os.cpuUsage(v => {
+      const minutes = (Date.now() - start) / 1000 / 60;
+      const spm = (screenshotsDone / minutes).toFixed(2);
+      console.log(`Screenshots left: ${screenshots.length - screenshotsDone}`);
+      console.log(`Avg Screenshots/min: ${spm}`);
+      console.log(
+        `CPU Usage (%): ${Math.floor(v * 100)} [total cores: ${os.cpuCount()}]`,
+      );
+      console.log(
+        `Memory Free: ${Math.floor(os.freemem())} / ${Math.floor(
+          os.totalmem(),
+        )}`,
+      );
+    });
+  }, 60000);
+
   for (const batch of batches) {
     let triesLeft = PAGERES_RETRIES + 1;
     let success = false;
     while (!success && triesLeft > 0) {
-      console.log(
-        `Screenshotting: ${batch
-          .map(s => s.url)
-          .join(', ')} [${screenshotsLeft} left]`,
-      );
+      console.log(`Screenshotting: ${batch.map(s => s.url).join(', ')}`);
       const pageres = new Pageres({ timeout: PAGERES_TIMEOUT }).dest(
         OUTPUT_DIR,
       );
@@ -138,7 +154,7 @@ const BLACKLISTED_COUNTIES = [
       try {
         await pageres.run();
         success = true;
-        screenshotsLeft -= batch.length;
+        screenshotsDone += batch.length;
       } catch (e) {
         triesLeft--;
         if (triesLeft > 0) {
