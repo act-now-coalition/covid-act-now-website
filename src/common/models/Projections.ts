@@ -181,7 +181,6 @@ export class Projections {
     summaryWithTimeseriesMap: RegionSummaryWithTimeseriesMap,
   ) {
     for (const intervention in summaryWithTimeseriesMap) {
-      console.log(intervention);
       const summaryWithTimeseries = summaryWithTimeseriesMap[intervention];
       let projection = null;
       if (summaryWithTimeseries !== null) {
@@ -193,7 +192,6 @@ export class Projections {
       if (intervention === INTERVENTIONS.LIMITED_ACTION) {
         this.baseline = projection;
       } else if (intervention === INTERVENTIONS.PROJECTED) {
-        // @ts-ignore
         this.projected = projection;
       }
     }
