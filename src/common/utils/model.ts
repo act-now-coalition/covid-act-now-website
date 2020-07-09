@@ -39,6 +39,7 @@ export async function fetchAllStateProjections(
     // We grab the state from an arbitrary intervention's summary data.
     const stateName = summaryWithTimeseriesMap[INTERVENTIONS.LIMITED_ACTION]!
       .stateName;
+
     return new Projections(
       summaryWithTimeseriesMap,
       REVERSED_STATES[stateName],
