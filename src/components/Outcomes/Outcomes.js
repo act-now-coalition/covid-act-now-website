@@ -56,7 +56,7 @@ const OutcomesRow = ({ projection, label, color }) => {
         )}
       </div>
 
-      <div>{formatNumber(projection.finalCumulativeDeaths-projection.cumulativeActualDeaths)}</div>
+      <div>{formatNumber(projection.finalAdditionalDeaths)}</div>
     </OutcomesTableRow>
   );
 };
