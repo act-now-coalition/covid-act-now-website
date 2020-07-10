@@ -109,7 +109,7 @@ export class Projections {
       case Metric.CONTACT_TRACING:
         return this.primary.currentContactTracerMetric;
       case Metric.CASE_DENSITY:
-        return 1; // TODO(michael): Pull in metric value.
+        return this.primary.currentCaseDensityByDeaths;
       default:
         fail('Cannot get value of metric: ' + metric);
     }
@@ -134,12 +134,14 @@ export class Projections {
     hospitalizations_level: Level;
     test_rate_level: Level;
     contact_tracing_level: Level;
+    case_density: Level;
   } {
     return {
       rt_level: this.getMetricLevel(Metric.CASE_GROWTH_RATE),
       hospitalizations_level: this.getMetricLevel(Metric.HOSPITAL_USAGE),
       test_rate_level: this.getMetricLevel(Metric.POSITIVE_TESTS),
       contact_tracing_level: this.getMetricLevel(Metric.CONTACT_TRACING),
+      case_density: this.getMetricLevel(Metric.CASE_DENSITY),
     };
   }
 
@@ -149,9 +151,15 @@ export class Projections {
       hospitalizations_level,
       test_rate_level,
       contact_tracing_level,
+      case_density,
     } = this.getLevels();
 
-    const levelList = [rt_level, hospitalizations_level, test_rate_level];
+    const levelList = [
+      rt_level,
+      hospitalizations_level,
+      test_rate_level,
+      case_density,
+    ];
 
     // contact tracing levels are reversed (i.e low is bad, high is good)
     const reverseList = [contact_tracing_level];
