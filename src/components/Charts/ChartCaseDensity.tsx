@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { isDate } from 'lodash';
 import { min as d3min, max as d3max } from 'd3-array';
-import { curveNatural } from '@vx/curve';
+// import { curveNatural } from '@vx/curve';
 import { GridRows } from '@vx/grid';
 import { scaleLinear, scaleTime } from '@vx/scale';
-import { Area } from '@vx/shape';
+// import { Area } from '@vx/shape';
 import { ParentSize } from '@vx/responsive';
 import { Column } from 'common/models/Projection';
 import { CASE_DENSITY_LEVEL_INFO_MAP } from 'common/metrics/case_density';
@@ -33,14 +33,7 @@ type Point = {
 
 const getDate = (d: Point) => new Date(d.x);
 const getY = (d: Point) => d?.y?.caseDensity;
-const getAreaLow = (p: Point) => p?.y?.low;
-const getAreaHigh = (p: Point) => p?.y?.high;
-
-const hasData = (d: any) =>
-  isDate(getDate(d)) &&
-  Number.isFinite(getY(d)) &&
-  Number.isFinite(getAreaLow(d)) &&
-  Number.isFinite(getAreaHigh(d));
+const hasData = (d: any) => isDate(getDate(d)) && Number.isFinite(getY(d));
 
 const ChartCaseDensity: FunctionComponent<{
   columnData: Column[];
@@ -93,21 +86,18 @@ const ChartCaseDensity: FunctionComponent<{
 
   const yTicks = computeTickPositions(yAxisMin, yAxisMax, zones);
 
-  const renderTooltip = (p: Point) => {
-    const yLow = formatDecimal(getAreaLow(p), 2);
-    const yHigh = formatDecimal(getAreaHigh(p), 2);
-    const y = formatDecimal(getY(p), 1);
-    return (
-      <Tooltip
-        left={marginLeft + getXCoord(p)}
-        top={marginTop + getYCoord(p)}
-        title={formatUtcDate(getDate(p), 'MMM D, YYYY')}
-      >
-        <TooltipStyle.Body>{`Case density ${y}/100k`}</TooltipStyle.Body>
-        <TooltipStyle.BodyMuted>{`[1.5%, 0.5%] = [${yLow}, ${yHigh}]`}</TooltipStyle.BodyMuted>
-      </Tooltip>
-    );
-  };
+  const renderTooltip = (p: Point) => (
+    <Tooltip
+      left={marginLeft + getXCoord(p)}
+      top={marginTop + getYCoord(p)}
+      title={formatUtcDate(getDate(p), 'MMM D, YYYY')}
+    >
+      <TooltipStyle.Body>{`Case density ${formatDecimal(
+        getY(p),
+        1,
+      )}/100k`}</TooltipStyle.Body>
+    </Tooltip>
+  );
   const renderMarker = (p: Point) => (
     <Style.CircleMarker
       cx={getXCoord(p)}
@@ -132,15 +122,6 @@ const ChartCaseDensity: FunctionComponent<{
       marginRight={marginRight}
     >
       <RectClipGroup width={chartWidth} height={chartHeight} topPadding={0}>
-        <Style.SeriesArea>
-          <Area
-            data={data}
-            x={getXCoord}
-            y0={(p: Point) => yScale(getAreaLow(p))}
-            y1={(p: Point) => yScale(getAreaHigh(p))}
-            curve={curveNatural}
-          />
-        </Style.SeriesArea>
         <LinePathRegion
           data={data}
           x={getXCoord}
