@@ -1,11 +1,14 @@
 import firebase from 'firebase';
 import React from 'react';
-import { StyledNewsletter, InputHolder } from './Newsletter.style';
+import { StyledNewsletter, InputHolder, InputError } from './Newsletter.style';
 import Chip from '@material-ui/core/Chip';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import { getLocationNames } from 'common/locations';
 import { getFirebase } from 'common/firebase';
+
+// Taken from https://ui.dev/validate-email-address-javascript/
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 class Newsletter extends React.Component {
   constructor() {
@@ -15,17 +18,15 @@ class Newsletter extends React.Component {
     this.alertsSelectionArray = [];
     this.defaultValues = [];
     this.autocompleteOptions = getLocationNames();
-    this.state = { alertSignUps: '', checked: true, email: '' };
+    this.state = { checked: true, email: '', errorMessage: '' };
     this.submitForm = this.submitForm.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
   }
 
   async submitForm(e) {
     e.preventDefault();
-    // can't submit the form without the email entered
-    if (this.state.email) {
-      // TODO(michael): We can stop sending alert locations to Campaign Monitor
-      // once we've migrated everybody over to Firestore.
+    // can't submit the form without the email entered and email that is valid
+    if (this.state.email && EMAIL_REGEX.test(this.state.email)) {
       await this.subscribeToAlerts();
 
       window.gtag('event', 'subscribe', {
@@ -49,6 +50,8 @@ class Newsletter extends React.Component {
         .then(data => {
           console.log(data);
         });
+    } else {
+      this.setState({ errorMessage: 'Must supply a valid email address' });
     }
   }
 
@@ -57,27 +60,34 @@ class Newsletter extends React.Component {
     const locations = this.alertsSelectionArray.map(
       item => item.full_fips_code,
     );
-    const db = getFirebase().firestore();
-    // Merge the locations with any existing ones since that's _probably_ what the user wants.
-    await db
-      .collection('alerts-subscriptions')
-      .doc(email)
-      .set(
-        {
-          locations: firebase.firestore.FieldValue.arrayUnion(...locations),
-          subscribedAt: firebase.firestore.FieldValue.serverTimestamp(),
-        },
-        { merge: true },
-      );
+    if (locations.length) {
+      const db = getFirebase().firestore();
+      // Merge the locations with any existing ones since that's _probably_ what the user wants.
+      await db
+        .collection('alerts-subscriptions')
+        .doc(email.toLocaleLowerCase())
+        .set(
+          {
+            locations: firebase.firestore.FieldValue.arrayUnion(...locations),
+            subscribedAt: firebase.firestore.FieldValue.serverTimestamp(),
+          },
+          { merge: true },
+        );
+    }
   }
 
   handleSelectChange = selectedOption => {
     this.alertsSelectionArray = selectedOption;
-    this.setState({
-      alertSignUps: this.alertsSelectionArray
-        .map(item => item.full_fips_code)
-        .join(','),
-    });
+  };
+
+  handleSetEmail = email => {
+    if (email) {
+      this.setState({ email });
+    }
+
+    if (EMAIL_REGEX.test(email)) {
+      this.setState({ errorMessage: '' });
+    }
   };
 
   componentDidMount() {
@@ -148,15 +158,6 @@ class Newsletter extends React.Component {
               findings on COVID{' '}
             </label>
           </InputHolder>
-          <input
-            hidden
-            aria-label="alert_list_csv"
-            id="fieldjrdtwy"
-            maxlength="200"
-            name="cm-f-jrdtwy"
-            onChange={value => {}}
-            value={this.state.alertSignUps}
-          />
           <Autocomplete
             multiple
             id="alert-locations"
@@ -201,12 +202,15 @@ class Newsletter extends React.Component {
               name="cm-yddtsd-yddtsd"
               required=""
               type="email"
-              onChange={e => this.setState({ email: e.target.value })}
+              onChange={e => this.handleSetEmail(e.target.value)}
             />
             <button type="submit" onClick={this.submitForm}>
               Sign up
             </button>
           </InputHolder>
+          {this.state.errorMessage && (
+            <InputError>{this.state.errorMessage}</InputError>
+          )}
         </form>
         <script
           type="text/javascript"

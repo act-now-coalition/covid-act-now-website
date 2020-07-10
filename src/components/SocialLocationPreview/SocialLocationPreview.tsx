@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { ComponentType } from 'react';
 import { Projections } from 'common/models/Projections';
 import { useModelLastUpdatedDate } from 'common/utils/model';
 
 import {
   Wrapper,
   PreviewHeader,
+  USMapPreviewHeader,
   HeaderText,
   HeaderHeader,
+  USMapHeaderText,
   MapHeaderHeader,
   HeaderSubhead,
   AlarmLevel,
@@ -25,53 +27,71 @@ import { Legend, LegendItem } from 'components/Map/Legend';
 const SocialLocationPreview = (props: {
   projections?: Projections;
   stats?: { [key: string]: number | null };
+  border?: Boolean;
+  isEmbed?: Boolean;
+  Footer?: ComponentType;
 }) => {
   const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
   const lastUpdatedDateString =
     lastUpdatedDate !== null ? lastUpdatedDate.toLocaleDateString() : '';
-
+  const navigateToCAN = () => {
+    window.top.location.href = 'https://covidactnow.org/';
+    return false;
+  };
+  const Footer = props.Footer;
+  const isEmbed = props.isEmbed;
   if (!props.projections || !props.stats) {
     return (
-      <Wrapper hasMap={true}>
-        <PreviewHeader>
+      <Wrapper border={props.border}>
+        <MapHeaderHeader>America’s COVID warning system</MapHeaderHeader>
+        <USMapPreviewHeader sideLegend={!isEmbed}>
           <MapWrapper>
             <Map
-              hideLegend={true}
+              onClick={isEmbed ? navigateToCAN : null}
+              hideLegend={!isEmbed}
+              hideLegendTitle={true}
+              hideInstructions={true}
               setMapOption={function () {}}
               setMobileMenuOpen={function () {}}
             />
           </MapWrapper>
-          <HeaderText>
-            <MapHeaderHeader>America’s COVID warning system</MapHeaderHeader>
-            <HeaderSubhead>Risk levels</HeaderSubhead>
-            <Legend condensed={true}>
-              <LegendItem
-                key={'legend-4'}
-                title={LOCATION_SUMMARY_LEVELS[Level.CRITICAL].name}
-                color={LOCATION_SUMMARY_LEVELS[Level.CRITICAL].color}
-              />
-              <LegendItem
-                key={'legend-3'}
-                title={LOCATION_SUMMARY_LEVELS[Level.HIGH].name}
-                color={LOCATION_SUMMARY_LEVELS[Level.HIGH].color}
-              />
-              <LegendItem
-                key={'legend-2'}
-                title={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].name}
-                color={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].color}
-              />
-              <LegendItem
-                key={'legend-1'}
-                title={LOCATION_SUMMARY_LEVELS[Level.LOW].name}
-                color={LOCATION_SUMMARY_LEVELS[Level.LOW].color}
-              />
-            </Legend>
-          </HeaderText>
-        </PreviewHeader>
-        <PreviewFooter>
-          <FooterText>Last Updated {lastUpdatedDateString}</FooterText>
-          <FooterText>covidactnow.org</FooterText>
-        </PreviewFooter>
+          {isEmbed ? (
+            ''
+          ) : (
+            <USMapHeaderText>
+              <Legend condensed={true}>
+                <LegendItem
+                  key={'legend-4'}
+                  title={LOCATION_SUMMARY_LEVELS[Level.CRITICAL].name}
+                  color={LOCATION_SUMMARY_LEVELS[Level.CRITICAL].color}
+                />
+                <LegendItem
+                  key={'legend-3'}
+                  title={LOCATION_SUMMARY_LEVELS[Level.HIGH].name}
+                  color={LOCATION_SUMMARY_LEVELS[Level.HIGH].color}
+                />
+                <LegendItem
+                  key={'legend-2'}
+                  title={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].name}
+                  color={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].color}
+                />
+                <LegendItem
+                  key={'legend-1'}
+                  title={LOCATION_SUMMARY_LEVELS[Level.LOW].name}
+                  color={LOCATION_SUMMARY_LEVELS[Level.LOW].color}
+                />
+              </Legend>
+            </USMapHeaderText>
+          )}
+        </USMapPreviewHeader>
+        {Footer ? (
+          <Footer />
+        ) : (
+          <PreviewFooter>
+            <FooterText>Last Updated {lastUpdatedDateString}</FooterText>
+            <FooterText>covidactnow.org</FooterText>
+          </PreviewFooter>
+        )}
       </Wrapper>
     );
   }

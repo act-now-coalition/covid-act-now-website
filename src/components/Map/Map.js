@@ -11,12 +11,15 @@ import ReactTooltip from 'react-tooltip';
 import { MapInstructions, MobileLineBreak } from './Map.style';
 
 // TODO(@pablo): We might want to move this to LOCATION_SUMMARY_LEVELS
-const LEGEND_LOW = 'On track to contain COVID';
-const LEGEND_MEDIUM = 'Controlled disease growth';
-const LEGEND_MEDIUM_HIGH = 'At risk';
-const LEGEND_HIGH = 'Active or imminent outbreak';
 
-function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
+function Map({
+  hideLegend = false,
+  hideInstructions = false,
+  hideLegendTitle = false,
+  setMobileMenuOpen,
+  setMapOption,
+  onClick = null,
+}) {
   const history = useHistory();
   const [content, setContent] = useState('');
 
@@ -25,7 +28,12 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
     history.push(page);
   };
 
-  const onClick = stateName => {
+  const handleClick = stateName => {
+    // externally provided click handler
+    if (onClick) {
+      return onClick(stateName);
+    }
+
     const stateCode = REVERSED_STATES[stateName];
 
     goToStatePage(`/us/${stateCode.toLowerCase()}`);
@@ -42,25 +50,25 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
   return (
     <div className="Map">
       {!hideLegend && (
-        <Legend>
+        <Legend hideLegendTitle={hideLegendTitle}>
           <LegendItem
             key={'legend-4'}
-            title={LEGEND_HIGH}
+            title={LOCATION_SUMMARY_LEVELS[Level.CRITICAL].summary}
             color={LOCATION_SUMMARY_LEVELS[Level.CRITICAL].color}
           />
           <LegendItem
             key={'legend-3'}
-            title={LEGEND_MEDIUM_HIGH}
+            title={LOCATION_SUMMARY_LEVELS[Level.HIGH].summary}
             color={LOCATION_SUMMARY_LEVELS[Level.HIGH].color}
           />
           <LegendItem
             key={'legend-2'}
-            title={LEGEND_MEDIUM}
+            title={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].summary}
             color={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].color}
           />
           <LegendItem
             key={'legend-1'}
-            title={LEGEND_LOW}
+            title={LOCATION_SUMMARY_LEVELS[Level.LOW].summary}
             color={LOCATION_SUMMARY_LEVELS[Level.LOW].color}
           />
         </Legend>
@@ -69,10 +77,10 @@ function Map({ hideLegend = false, setMobileMenuOpen, setMapOption }) {
         <USACountyMap
           condensed={hideLegend}
           setTooltipContent={setContent}
-          stateClickHandler={onClick}
+          stateClickHandler={handleClick}
         />
       </div>
-      {!hideLegend && (
+      {!hideInstructions && (
         <MapInstructions>
           <strong>Click a state</strong> to view risk details{' '}
           <MobileLineBreak /> and county info.

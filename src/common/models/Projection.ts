@@ -10,6 +10,8 @@ import {
   CANPredictionTimeseriesRow,
   CANActualsTimeseriesRow,
 } from 'api/schema/CovidActNowStatesTimeseries';
+import { ICUHeadroomInfo, calcICUHeadroom } from './ICUHeadroom';
+import { lastValue, indexOfLastValue } from './utils';
 
 /**
  * We truncate (or in the case of charts, switch to a dashed line) the last
@@ -28,25 +30,6 @@ export const PROJECTIONS_TRUNCATION_DAYS = 30;
  * The range we give here could be between 5-15 contact tracers per case.
  */
 export const TRACERS_NEEDED_PER_CASE = 5;
-
-/**
- * We subtract this "decomp" factor from the typical ICU Utilization rates we
- * get from the API to account for hospitals being able to decrease their utilization
- * (by cancelling elective surgeries, using surge capacity, etc.).
- */
-const ICU_DECOMP_FACTOR = 0.21;
-const ICU_DECOMP_FACTOR_STATE_OVERRIDES: { [key: string]: number } = {
-  Alabama: 0.15,
-  Arizona: 0,
-  Delaware: 0.3,
-  'District of Columbia': 0.025,
-  Georgia: 0.1,
-  Mississippi: 0.12,
-  Nevada: 0.25,
-  'Rhode Island': 0,
-};
-
-const DEFAULT_UTILIZATION = 0.75;
 
 /**
  * We override the contact tracing for specific states due to data inconsistincies.
@@ -118,11 +101,9 @@ export class Projection {
   readonly finalHospitalBeds: number;
   readonly fips: string;
   readonly dateOverwhelmed: Date | null;
-  readonly totalICUCapacity: number | null;
-  readonly typicallyFreeICUCapacity: number | null;
-  readonly currentCovidICUPatients: number | null;
-  readonly typicalICUUtilization: number;
-  readonly icuNearCapacityOverride: boolean;
+
+  readonly icuHeadroomInfo: ICUHeadroomInfo | null;
+
   readonly currentCumulativeDeaths: number | null;
   readonly currentCumulativeCases: number | null;
   readonly currentContactTracerMetric: number | null;
@@ -169,6 +150,8 @@ export class Projection {
       PROJECTIONS_TRUNCATION_DAYS,
     );
 
+    const actuals = summaryWithTimeseries.actuals;
+
     this.timeseries = timeseries;
     this.actualTimeseries = actualTimeseries;
     this.dates = dates;
@@ -178,7 +161,7 @@ export class Projection {
     this.stateName = summaryWithTimeseries.stateName;
     this.intervention = parameters.intervention;
     this.isCounty = parameters.isCounty;
-    this.totalPopulation = summaryWithTimeseries.actuals.population;
+    this.totalPopulation = actuals.population;
     this.fips = summaryWithTimeseries.fips;
 
     // Set up our series data exposed via getDataset().
@@ -192,10 +175,10 @@ export class Projection {
       row => row && row.cumulativeInfected,
     );
     this.cumulativePositiveTests = this.smoothCumulatives(
-      timeseries.map(row => row && row.cumulativePositiveTests),
+      actualTimeseries.map(row => row && row.cumulativePositiveTests),
     );
     this.cumulativeNegativeTests = this.smoothCumulatives(
-      timeseries.map(row => row && row.cumulativeNegativeTests),
+      actualTimeseries.map(row => row && row.cumulativeNegativeTests),
     );
     this.dailyPositiveTests = this.deltasFromCumulatives(
       this.cumulativePositiveTests,
@@ -212,29 +195,17 @@ export class Projection {
     this.rtRange = this.calcRtRange(timeseries);
     this.testPositiveRate = this.calcTestPositiveRate();
 
-    const ICUBeds = summaryWithTimeseries?.actuals?.ICUBeds;
-    this.totalICUCapacity = ICUBeds && ICUBeds.totalCapacity;
-    this.typicalICUUtilization =
-      ICUBeds?.typicalUsageRate || DEFAULT_UTILIZATION;
-    this.typicallyFreeICUCapacity =
-      ICUBeds && ICUBeds.capacity * (1 - ICUBeds.typicalUsageRate);
-    this.currentCovidICUPatients = this.calcCurrentCovidICUPatients(
+    this.icuHeadroomInfo = calcICUHeadroom(
+      this.stateName,
+      this.fips,
+      this.dates,
+      actualTimeseries,
       timeseries,
+      actuals,
       lastUpdated,
     );
-
-    // We sometimes need to override the ICU metric for locations due to bad data, etc.
-    // TODO(https://trello.com/c/CPcYKmdo/): Review once we have better estimates for
-    // these counties
-    const overrideIcu =
-      [
-        '01101', // Montgomery, AL
-        '48201', // Harris, TX
-      ].indexOf(this.fips) > -1;
-    this.icuUtilization = overrideIcu
-      ? actualTimeseries.map(row => 0.9) // 90% utilized
-      : this.calcICUHeadroom(this.actualTimeseries, timeseries, lastUpdated);
-    this.icuNearCapacityOverride = overrideIcu;
+    this.icuUtilization =
+      this.icuHeadroomInfo?.metricSeries || this.dates.map(date => null);
 
     this.contractTracers = this.calcContactTracers(this.actualTimeseries);
 
@@ -242,8 +213,8 @@ export class Projection {
     this.caseDensityByDeaths = this.calcCaseDensityByDeaths();
     this.caseDensityRange = this.calcCaseDensityRange();
 
-    this.currentCaseDensityByCases = this.lastValue(this.caseDensityByCases);
-    this.currentCaseDensityByDeaths = this.lastValue(this.caseDensityByDeaths);
+    this.currentCaseDensityByCases = lastValue(this.caseDensityByCases);
+    this.currentCaseDensityByDeaths = lastValue(this.caseDensityByDeaths);
 
     this.fixZeros(this.hospitalizations);
     this.fixZeros(this.cumulativeDeaths);
@@ -263,42 +234,15 @@ export class Projection {
       summaryWithTimeseries.actuals.cumulativeDeaths;
     this.currentCumulativeCases =
       summaryWithTimeseries.actuals.cumulativeConfirmedCases;
-    this.currentContactTracerMetric = this.lastValue(this.contractTracers);
+    this.currentContactTracerMetric = lastValue(this.contractTracers);
   }
 
   get currentContactTracers() {
     return (
       CONTACT_TRACER_STATE_OVERRIDES[this.stateName] ||
-      this.lastValue(
-        this.actualTimeseries.map(row => row && row.contactTracers),
-      ) ||
+      lastValue(this.actualTimeseries.map(row => row && row.contactTracers)) ||
       null
     );
-  }
-  /**
-   * If one of the most recent days has any data for all of:
-   *   - currentUsageCovid
-   *   - totalCapacity
-   *   - currentUsageTotal
-   * Then we want to use the actual timeseries for them
-   */
-  get hasActualData() {
-    // TODO(https://trello.com/c/qW1dJ1um/): Reenable actuals once we get Valorum
-    // data fixed?
-    /*
-    for (var i = 0; i < this.actualTimeseries.length; i++) {
-      const actual = this.actualTimeseries[i];
-      if (
-        actual &&
-        actual.ICUBeds.currentUsageCovid &&
-        actual.ICUBeds.totalCapacity &&
-        actual.ICUBeds.currentUsageTotal
-      ) {
-        return true;
-      }
-    }
-    */
-    return false;
   }
 
   get label() {
@@ -313,31 +257,6 @@ export class Projection {
     return this.cumulativeDeaths[this.cumulativeDeaths.length - 1];
   }
 
-  get nonCovidICUUtilization(): number {
-    if (this.stateName in ICU_DECOMP_FACTOR_STATE_OVERRIDES) {
-      return Math.max(
-        0,
-        this.typicalICUUtilization -
-          ICU_DECOMP_FACTOR_STATE_OVERRIDES[this.stateName],
-      );
-    } else {
-      return Math.max(0, this.typicalICUUtilization - ICU_DECOMP_FACTOR);
-    }
-  }
-
-  get nonCovidPatients() {
-    if (this.hasActualData) {
-      const latestCurrentUssage = this.lastValue(
-        this.actualTimeseries.map(row => row && row.ICUBeds.currentUsageTotal),
-      );
-      const latestUsageCovid = this.lastValue(
-        this.actualTimeseries.map(row => row && row.ICUBeds.currentUsageCovid),
-      );
-      return latestCurrentUssage! - latestUsageCovid!;
-    }
-    return this.totalICUCapacity! * this.nonCovidICUUtilization;
-  }
-
   /** Returns the date when projections end (should be 30 days out). */
   get finalDate(): Date {
     return this.dates[this.dates.length - 1];
@@ -348,7 +267,7 @@ export class Projection {
    * number in the prior week.
    */
   get weeklyNewCasesDelta(): number {
-    const i = this.indexOfLastValue(this.cumulativePositiveTests);
+    const i = indexOfLastValue(this.cumulativePositiveTests);
     if (i === null) {
       return 0;
     } else {
@@ -371,15 +290,11 @@ export class Projection {
       return null;
     }
 
-    return this.lastValue(this.testPositiveRate);
-  }
-
-  get currentIcuUtilization(): number | null {
-    return this.lastValue(this.icuUtilization);
+    return lastValue(this.testPositiveRate);
   }
 
   get rt(): number | null {
-    const lastIndex = this.indexOfLastValue(this.rtRange);
+    const lastIndex = indexOfLastValue(this.rtRange);
     if (lastIndex !== null && lastIndex >= RT_TRUNCATION_DAYS) {
       const range = this.rtRange[lastIndex - RT_TRUNCATION_DAYS];
       return range === null ? null : range.rt;
@@ -476,9 +391,7 @@ export class Projection {
     // TODO(michael): I don't like hardcoding "County" into the name. We should
     // probably delete this code and get the location name from somewhere other
     // than the API (or improve the API value).
-    return s.countyName
-      ? `${s.countyName} County, ${s.stateName}`
-      : s.stateName;
+    return s.countyName ? `${s.countyName}, ${s.stateName}` : s.stateName;
   }
 
   /**
@@ -491,7 +404,7 @@ export class Projection {
    */
 
   getWeeklyAverageForDay(data: Array<number | null>, i?: number) {
-    const lastIndex = this.indexOfLastValue(data);
+    const lastIndex = indexOfLastValue(data);
     if (i === undefined) {
       if (!lastIndex) return null;
       i = lastIndex;
@@ -674,97 +587,6 @@ export class Projection {
     return result;
   }
 
-  private calcICUHeadroom(
-    actualTimeseries: Array<CANActualsTimeseriesRow | null>,
-    timeseries: Array<CANPredictionTimeseriesRow | null>,
-    lastUpdated: Date,
-  ): Array<number | null> {
-    let icuUtilization;
-
-    if (this.hasActualData) {
-      icuUtilization = actualTimeseries.map(row => {
-        if (
-          row &&
-          row.ICUBeds.currentUsageCovid !== null &&
-          row.ICUBeds.totalCapacity !== null &&
-          row.ICUBeds.currentUsageTotal !== null
-        ) {
-          const nonCovidPatientsAtDate =
-            row.ICUBeds.currentUsageTotal - row.ICUBeds.currentUsageCovid;
-          if (row.ICUBeds.currentUsageCovid === 0) return 0;
-          const icuHeadroomUsed =
-            row.ICUBeds.currentUsageCovid /
-            (row.ICUBeds.totalCapacity - nonCovidPatientsAtDate);
-          // TODO: This metric needs to go to the chart eventually
-          return Math.min(1, icuHeadroomUsed);
-        } else {
-          return null;
-        }
-      });
-    } else {
-      icuUtilization = timeseries.map(row => {
-        if (
-          row &&
-          this.totalICUCapacity &&
-          this.totalICUCapacity > 0 &&
-          row.ICUBedsInUse !== null
-        ) {
-          const predictedNonCovidPatientsAtDate =
-            this.totalICUCapacity! * this.nonCovidICUUtilization;
-
-          const icuHeadroomUsed =
-            row.ICUBedsInUse /
-            (this.totalICUCapacity - predictedNonCovidPatientsAtDate);
-          // TODO: This metric needs to go to the chart eventually
-          return Math.min(1, icuHeadroomUsed);
-        } else {
-          return null;
-        }
-      });
-    }
-    // Strip off the future projections.
-    // TODO(michael): I'm worried about an off-by-one here. I _think_ we usually
-    // update our projections using yesterday's data. So we want to strip
-    // everything >= lastUpdatedDate. But since the ICU data is all estimates, I
-    // can't really validate that's correct.
-    return this.omitDataAtOrAfterDate(icuUtilization, lastUpdated);
-  }
-
-  private calcCurrentCovidICUPatients(
-    timeseries: Array<CANPredictionTimeseriesRow | null>,
-    lastUpdated: Date,
-  ): number | null {
-    /** This is specifically current icu patients with covid */
-    let icuPatients;
-    if (this.hasActualData) {
-      icuPatients = this.omitDataAtOrAfterDate(
-        this.actualTimeseries.map(row => row && row.ICUBeds.currentUsageCovid),
-        lastUpdated,
-      );
-    } else {
-      icuPatients = this.omitDataAtOrAfterDate(
-        timeseries.map(row => row && row.ICUBedsInUse),
-        lastUpdated,
-      );
-    }
-
-    return this.lastValue(icuPatients);
-  }
-
-  /**
-   * Replaces all values at or after (>=) the specified date with nulls. Keeps data for
-   * dates before (<) the specified date as-is.
-   */
-  private omitDataAtOrAfterDate<T>(
-    data: Array<T | null> | Array<T>,
-    cutoffDate: Date,
-  ): Array<T | null> {
-    return this.dates.map((date, idx) => {
-      const value = data[idx];
-      return date < cutoffDate ? value : null;
-    });
-  }
-
   // TODO: Due to
   // https://github.com/covid-projections/covid-data-model/issues/315 there may
   // be an erroneous "zero" data point ~today. We detect these and just average
@@ -781,20 +603,6 @@ export class Projection {
         data[i] = (data[i - 1]! + data[i + 1]!) / 2;
       }
     }
-  }
-
-  private indexOfLastValue<T>(data: Array<T | null>): number | null {
-    for (let i = data.length - 1; i >= 0; i--) {
-      if (data[i] !== null && data[i] !== undefined) {
-        return i;
-      }
-    }
-    return null;
-  }
-
-  private lastValue<T>(data: Array<T | null>): T | null {
-    const i = this.indexOfLastValue(data);
-    return i === null ? null : data[i]!;
   }
 
   private interpolateNullGaps(data: Array<number | null>, maxGap: number) {
