@@ -242,15 +242,11 @@ export class Projection {
     return this.cumulativeDeaths[this.cumulativeDeaths.length - 1];
   }
 
-  get cumulativeActualDeaths() {
-    return cumulativeActualDeaths[cumulativeActualDeaths.length];
-  }
-
   get finalAdditionalDeaths() {
-    newvar =
+    additionalProjectedDeaths =
       this.cumulativeDeaths[this.cumulativeDeaths.length - 1] -
-      this.dailyDeaths[this.dailyDeaths.length - 1];
-    return newvar;
+      cumulativeActualDeaths;
+    return additionalProjectedDeaths;
   }
 
   /** Returns the date when projections end (should be 30 days out). */
