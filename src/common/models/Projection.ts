@@ -245,8 +245,10 @@ export class Projection {
   }
 
   get finalAdditionalDeaths() {
-    let projectedCumulativeDeaths: number = this.cumulativeDeaths[this.cumulativeDeaths.length - 1] || 0;
-    let currentCumulativeDeaths: number = this.cumulativeActualDeaths[this.cumulativeActualDeaths.length-1] || 0;
+    let projectedCumulativeDeaths: number =
+      this.cumulativeDeaths[this.cumulativeDeaths.length - 1] || 0;
+    let currentCumulativeDeaths: number =
+      this.cumulativeActualDeaths[this.cumulativeActualDeaths.length - 1] || 0;
     return projectedCumulativeDeaths - currentCumulativeDeaths;
   }
 
