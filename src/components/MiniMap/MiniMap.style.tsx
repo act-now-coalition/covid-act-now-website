@@ -1,104 +1,77 @@
 import styled from 'styled-components';
 import palette from 'assets/theme/palette';
 
-export const MapWrapper = styled.div<{ visible: boolean }>`
-  display: ${props => (props.visible ? 'block' : 'none')};
-  width: 100%;
-`;
+const mapWidth = 300;
+const mapHeight = 280;
+const tabHeight = 70;
+const selectedTabBorder = 3;
+const selectedTabColor = '#00BFEA';
 
-export const CountyMapAltWrapper = styled.div<{ visible: boolean }>`
-  display: ${props => (props.visible ? 'block' : 'none')};
-  width: 100%;
-`;
-
-export const MapContentInner = styled.div`
-  .Map {
-    width: 100%;
-  }
-
-  border-top: 1px solid #e3e3e3;
-  padding-top: 1rem;
-  margin-top: 1rem;
-  margin-left: -1rem;
-  margin-right: -1rem;
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
-
-  @media (min-width: 1200px) {
-    display: flex;
-    height: inherit;
-    align-items: flex-start;
-  }
-`;
-
-export const MapContentWrapper = styled.div<{ mobileMenuOpen: boolean }>`
-  z-index: 800;
-  display: ${props => (props.mobileMenuOpen ? 'block' : 'none')};
-  height: inherit;
+export const Container = styled.div<{ mobileMenuOpen: boolean }>`
+  display: ${props => (props.mobileMenuOpen ? 'flex' : 'none')};
+  flex-direction: column;
   position: fixed;
   top: calc(85px + 65px);
-  left: 0;
-  right: 0;
   bottom: 0;
-  background: white;
-  padding: 0 1rem 1rem;
+  right: 0;
+  width: 100%;
+  height: inherit;
+  background-color: ${palette.white};
+  border-radius: 4px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+
+  @media (min-width: 321px) {
+    z-index: 901;
+    width: ${mapWidth}px;
+    height: calc(${mapHeight}px + ${tabHeight}px);
+    right: 16px;
+  }
 
   @media (min-width: 700px) {
-    z-index: 901;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    width: 400px;
-    height: 400px;
     top: calc(85px + 65px + 16px);
-    right: 16px;
-    left: auto;
-    bottom: auto;
-    border-radius: 4px;
   }
 
   @media (min-width: 1350px) {
-    display: block;
-    top: 81px;
-    right: 16px;
-    height: 400px;
-    left: auto;
-    bottom: auto;
-    width: 400px;
-    padding: 0 1rem 1rem;
+    display: flex;
+    top: 94px;
   }
 `;
 
-export const MapMenuMobileWrapper = styled.div`
-  width: 100%;
-  margin-top: 1rem;
-  background: #f2f2f2;
-  border-radius: 4px;
-  padding: 0.25rem;
+export const Tabs = styled.div`
+  flex-grow: 0;
+  height: ${tabHeight}px;
   display: flex;
+  justify-content: space-around;
   align-items: stretch;
+  border-bottom: 1px solid ${palette.lightGray};
 `;
 
-export const MapMenuWrapper = styled.div`
-  flex: 0 0 524px;
-  background: #f2f2f2;
-  border-radius: 4px;
-  padding: 0.25rem;
-  display: flex;
-  align-items: stretch;
-`;
-
-export const MapMenuItem = styled.div<{ selected: boolean }>`
-  flex: 1;
-  height: inherit;
-  font-weight: 600;
-  color: ${props => (props.selected ? palette.secondary.main : 'inherit')};
-  background: ${props => (props.selected ? 'white' : 'transparent')};
-  box-shadow: ${props =>
-    props.selected ? '0px 2px 2px rgba(0, 0, 0, 0.16)' : 'none'};
+export const TabItem = styled.div<{ selected?: boolean }>`
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  line-height: ${tabHeight}px;
+  border-bottom: ${props =>
+    props.selected
+      ? `solid ${selectedTabBorder}px ${selectedTabColor}`
+      : 'none'};
   cursor: pointer;
-  border-radius: 4px;
-  padding: 0.5rem;
-  text-align: center;
+  color: ${props => (props.selected ? palette.black : '#828282')};
+`;
+
+export const MapContainer = styled.div`
+  flex-grow: 1;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
+`;
+
+// The default aspect-ratio for the state and US maps is 800x600, so we
+// can use the width to calculate the height of the map container, which
+// makes it possible to center it vertically.
+export const StateMapContainer = styled.div`
+  width: ${mapWidth}px;
+  height: ${0.75 * mapWidth}px;
 `;
