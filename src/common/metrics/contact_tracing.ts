@@ -14,11 +14,6 @@ const SHORT_DESCRIPTION_MEDIUM_HIGH =
 const SHORT_DESCRIPTION_HIGH = 'Enough tracing to help contain COVID';
 const SHORT_DESCRIPTION_UNKNOWN = 'Insufficient data to assess';
 
-const LIMIT_LOW = 0.07;
-const LIMIT_MEDIUM = 0.2;
-const LIMIT_MEDIUM_HIGH = 0.9;
-const LIMIT_HIGH = Infinity;
-
 const LOW_NAME = 'Critical';
 const MEDIUM_NAME = 'Low';
 const MEDIUM_HIGH_NAME = 'Medium';
@@ -30,28 +25,31 @@ export const REVERSE_ORDER = true;
 export const CONTACT_TRACING_LEVEL_INFO_MAP: LevelInfoMap = {
   [Level.LOW]: {
     level: Level.LOW,
-    upperLimit: LIMIT_LOW,
+    // NOTE: Setting the upperLimit to 0 means we will not grade anybody as
+    // Level.LOW ("Critical" on the website). The lowest grade you can get is
+    // Level.MEDIUM.
+    upperLimit: 0,
     name: LOW_NAME,
     color: COLOR_MAP.RED.BASE,
     detail: () => SHORT_DESCRIPTION_LOW,
   },
   [Level.MEDIUM]: {
     level: Level.MEDIUM,
-    upperLimit: LIMIT_MEDIUM,
+    upperLimit: 0.1,
     name: MEDIUM_NAME,
     color: COLOR_MAP.ORANGE_DARK.BASE,
     detail: () => SHORT_DESCRIPTION_MEDIUM,
   },
   [Level.HIGH]: {
     level: Level.HIGH,
-    upperLimit: LIMIT_MEDIUM_HIGH,
+    upperLimit: 0.9,
     name: MEDIUM_HIGH_NAME,
     color: COLOR_MAP.ORANGE.BASE,
     detail: () => SHORT_DESCRIPTION_MEDIUM_HIGH,
   },
   [Level.CRITICAL]: {
     level: Level.CRITICAL,
-    upperLimit: LIMIT_HIGH,
+    upperLimit: Infinity,
     name: HIGH_NAME,
     color: COLOR_MAP.GREEN.BASE,
     detail: () => SHORT_DESCRIPTION_HIGH,
@@ -88,7 +86,7 @@ export function contactTracingStatusText(projection: Projection) {
   const numNeededTracers = formatInteger(
     currentWeeklyAverage * TRACERS_NEEDED_PER_CASE,
   );
-  const overview = `Per best available data, ${location} has ${numTracers} contact tracers. With an average of ${weeklyAverage} new daily cases, 
+  const overview = `Per best available data, ${location} has ${numTracers} contact tracers. With an average of ${weeklyAverage} new daily cases,
     we estimate ${location} needs ${numNeededTracers} contact tracing staff to trace all new cases in 48 hours, before too many other people are infected.`;
 
   const contactTracingRate = levelText(
