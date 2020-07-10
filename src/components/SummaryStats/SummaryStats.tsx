@@ -9,7 +9,6 @@ import {
   StatValueText,
   StatTextWrapper,
   StatValueWrapper,
-  // BetaTag,
 } from './SummaryStats.style';
 import SignalStatus from 'components/SignalStatus/SignalStatus';
 import { formatDecimal, formatPercent } from 'common/utils';
@@ -17,6 +16,8 @@ import { fail } from 'assert';
 import { isNull } from 'util';
 import * as urls from 'common/urls';
 import StatTag from 'components/SummaryStats/StatTag';
+
+//TODO (Chelsi) - remove dupication: extract 'LocationHeaderStats' and 'SummaryStats' into a single separate component
 
 const SummaryStat = ({
   chartType,
@@ -85,7 +86,6 @@ const SummaryStat = ({
           <>
             <StatValueText condensed={condensed} isEmbed={isEmbed}>
               {formatValueForChart(chartType, value)}
-              {/* {!condensed && beta && !isMobile && <BetaTag>Beta</BetaTag>} */}
               {!condensed && beta && !isMobile && <StatTag beta />}
             </StatValueText>
           </>

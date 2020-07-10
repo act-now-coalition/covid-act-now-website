@@ -22,6 +22,8 @@ import { fail } from 'assert';
 import { isNull } from 'util';
 import * as urls from 'common/urls';
 
+//TODO (Chelsi) - remove dupication: extract 'LocationHeaderStats' and 'SummaryStats' into a single separate component
+
 const StatValue = (props: {
   iconColor: string;
   condensed?: Boolean;
@@ -98,7 +100,9 @@ const SummaryStat = ({
     if (value === null) {
       return 'Unknown';
     }
-    if (chartType === Metric.CASE_GROWTH_RATE) {
+    if (chartType === Metric.CASE_DENSITY) {
+      return value.toFixed(1).toString();
+    } else if (chartType === Metric.CASE_GROWTH_RATE) {
       return formatDecimal(value);
     } else if (chartType === Metric.HOSPITAL_USAGE) {
       return formatPercent(value);
@@ -111,8 +115,6 @@ const SummaryStat = ({
   };
 
   const statValue = formatValueForChart(chartType, value);
-  console.log('statValue', statValue);
-  console.log('type', typeof statValue);
 
   return (
     <SummaryStatWrapper
@@ -129,15 +131,8 @@ const SummaryStat = ({
           statusUnknown={statusUnknown}
         >
           {getMetricName(chartType)}{' '}
-          {/* {!condensed && isMobile && (
-            <StatTag
-              isHeader={isHeader}
-              beta={beta}
-              newIndicator={newIndicator}
-            />
-          )} */}
         </StatNameText>
-        {!condensed && !isMobile && (
+        {!condensed && !isMobile && !statusUnknown && (
           <StatValue
             value={statValue}
             iconColor={levelInfo.color}
@@ -157,7 +152,7 @@ const SummaryStat = ({
           />
         )}
       </StatTextWrapper>
-      {!condensed && isMobile && (
+      {!condensed && isMobile && !statusUnknown && (
         <StatValueWrapper condensed={condensed}>
           <StatValue
             value={statValue}
@@ -173,14 +168,6 @@ const SummaryStat = ({
             beta={beta}
             newIndicator={newIndicator}
           />
-          {/* {value == null ? null : (
-                <>
-                  <StatValueText condensed={condensed} isEmbed={isEmbed}>
-                    {formatValueForChart(chartType, value)}
-                    {!condensed && !isMobile && returnTag()}
-                  </StatValueText>
-                </>
-              )} */}
         </StatValueWrapper>
       )}
     </SummaryStatWrapper>
@@ -222,8 +209,8 @@ const LocationHeaderStats = (props: {
         >
           <SummaryStat
             onClick={props.onRtRangeClick || noop}
-            chartType={Metric.CASE_GROWTH_RATE}
-            value={props.stats[Metric.CASE_GROWTH_RATE] as number}
+            chartType={Metric.CASE_DENSITY}
+            value={props.stats[Metric.CASE_DENSITY] as number}
             {...sharedStatProps}
             newIndicator={true}
           />

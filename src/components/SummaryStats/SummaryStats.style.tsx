@@ -71,7 +71,6 @@ export const SummaryStatWrapper = styled(Box)<{
 
     @media (min-width: 600px) {
       border-bottom: 1px solid ${palette.lightGray};
-      // border-top: 1px solid ${palette.lightGray};
       margin: 0;
       padding: ${props.isHeader ? '2rem 0 2rem 2rem' : '1.5rem 1.25rem'};
       flex-direction: column;

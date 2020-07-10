@@ -5,6 +5,7 @@ import palette from 'assets/theme/palette';
 import { COLORS } from 'common';
 import { COLOR_MAP } from 'common/colors';
 import { Level } from 'common/level';
+import { LEVEL_COLOR } from 'common/colors';
 
 export const ColoredHeaderBanner = styled(Box)<{ hasStats?: Boolean }>`
   display: flex;
@@ -17,6 +18,7 @@ export const ColoredHeaderBanner = styled(Box)<{ hasStats?: Boolean }>`
   }
 `;
 
+//TODO(Chelsi): edit max-width and margins to make header scale properly with new minimap dimensions
 export const Wrapper = styled(Box)<{
   condensed?: Boolean;
   headerTopMargin: number;
@@ -33,7 +35,8 @@ export const Wrapper = styled(Box)<{
     justify-content: space-around;
     background-color: unset;
     box-shadow: none;
-    max-width: 1040px;
+    // max-width: 1040px;
+    max-width: 1000px;
     flex-direction: column;
     cursor: pointer;
     margin: -380px 1rem 0 1rem;
@@ -45,15 +48,14 @@ export const Wrapper = styled(Box)<{
     }
 
     @media (min-width: 1060px) {
-      // margin: ${props.headerTopMargin}px auto ${props.headerBottomMargin}px;
       margin: ${props.headerTopMargin}px auto ${props.headerBottomMargin}px;
     }
     @media (min-width: 1350px) {
-      // margin: ${props.headerTopMargin}px 445px ${props.headerBottomMargin}px auto;
-      margin: ${props.headerTopMargin}px 300px ${props.headerBottomMargin}px auto;
+      // margin: ${props.headerTopMargin}px 330px ${props.headerBottomMargin}px auto;
+      margin: ${props.headerTopMargin}px 350px ${props.headerBottomMargin}px auto;
     }
+
     @media (min-width: 1750px) {
-      // margin: ${props.headerTopMargin}px auto ${props.headerBottomMargin}px;
       margin: ${props.headerTopMargin}px auto ${props.headerBottomMargin}px;
     }
   `}
@@ -169,17 +171,12 @@ export const HeaderSubCopy = styled(Typography)`
     margin: 0 0.5rem 0 0;
     flex-shrink: 0;
   }
-
-  // @media (min-width: 600px) {
-  //   font-size: 14px;
-  // }
 `;
 
 export const ButtonsWrapper = styled(Box)`
   display: flex;
   flex-direction: row;
   width: 100%;
-  // margin-right: 1.5rem;
   background-color: white;
   border-radius: 0 0 8px 8px;
   justify-content: center;
@@ -249,7 +246,6 @@ export const LastUpdatedDate = styled.span<{
 
 export const SectionHalf = styled(Box)`
   display: flex;
-  justify-content: space-between;
 
   &:first-child {
     margin: 2rem 1.6rem;
@@ -333,7 +329,6 @@ export const ThermometerContainer = styled(Box)`
   flex-direction: column;
   width: 100%;
   max-width: 20px;
-  margin: 0 auto;
 `;
 
 export const Triangle = styled(Box)<{ alarmLevel: number }>`
@@ -353,16 +348,18 @@ export const Triangle = styled(Box)<{ alarmLevel: number }>`
       : alarmLevel === Level.CRITICAL
       ? '96px'
       : '0'};
-  `
+`;
 
 export const ThermometerRow = styled(Box)<{
   isCurrentLevel?: Boolean;
   color: string;
+  thresholdUnknown?: Boolean;
 }>`
   display: flex;
   flex-direction: row;
   border: ${({ isCurrentLevel }) => isCurrentLevel && `4px solid black`};
-  background-color: ${({ color }) => color};
+  background-color: ${({ color, thresholdUnknown }) =>
+    thresholdUnknown ? LEVEL_COLOR[Level.UNKNOWN] : color};
   height: 32px;
   width: ${({ isCurrentLevel }) => (isCurrentLevel ? '24px' : '20px')};
   align-self: center;

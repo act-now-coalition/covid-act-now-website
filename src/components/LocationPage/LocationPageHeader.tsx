@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import CheckIcon from '@material-ui/icons/Check';
-// import SummaryStats from 'components/SummaryStats/SummaryStats';
 import {
   ColoredHeaderBanner,
   Wrapper,
@@ -9,7 +8,6 @@ import {
   HeaderTitle,
   HeaderSection,
   HeaderSubCopy,
-  // HeaderSubtitle,
   ButtonsWrapper,
   HeaderButton,
   LocationCopyWrapper,
@@ -71,6 +69,8 @@ const LocationPageHeading = (props: { projections: Projections }) => {
 
 const noop = () => {};
 
+// TODO (Chelsi): find out which piece of text goes in LevelDescription
+
 const LocationPageHeader = (props: {
   projections: Projections;
   condensed?: Boolean;
@@ -112,67 +112,26 @@ const LocationPageHeader = (props: {
   const lastUpdatedDateString =
     lastUpdatedDate !== null ? formatUtcDate(lastUpdatedDate) : '';
 
-  console.log('alarmLevel', alarmLevel);
-
-  // const thermometerContent = [
-  //   {
-  //     level: Level.HIGH,
-  //     // text: 'Active outbreak or major gaps',
-  //     color: `${LEVEL_COLOR[Level.HIGH]}`,
-  //     // bgfill: 'rgba(255, 0, 52, 0.05)',
-  //   },
-  //   {
-  //     level: Level.MEDIUM_HIGH,
-  //     // text: 'Risk of second spike',
-  //     color: `${LEVEL_COLOR[Level.MEDIUM_HIGH]}`,
-  //     // bgfill: 'rgba(255, 150, 0, 0.05)',
-  //   },
-  //   {
-  //     level: Level.MEDIUM,
-  //     // text: 'On track for herd immunity',
-  //     color: `${LEVEL_COLOR[Level.MEDIUM]}`,
-  //     // bgfill: 'rgba(255, 201, 0, 0.05)',
-  //   },
-  //   {
-  //     level: Level.LOW,
-  //     // text: 'On track for containment',
-  //     color: `${LEVEL_COLOR[Level.LOW]}`,
-  //     // bgfill: 'rgba(0, 212, 116, 0.05)',
-  //   },
-  // ];
+  const thresholdUnknown = alarmLevel === Level.UNKNOWN;
 
   const thermometerContent = [
     {
       level: Level.CRITICAL,
-      // text: 'Active outbreak or major gaps',
       color: `${LEVEL_COLOR[Level.CRITICAL]}`,
-      // bgfill: 'rgba(255, 0, 52, 0.05)',
     },
     {
       level: Level.HIGH,
-      // text: 'Risk of second spike',
       color: `${LEVEL_COLOR[Level.HIGH]}`,
-      // bgfill: 'rgba(255, 150, 0, 0.05)',
     },
     {
       level: Level.MEDIUM,
-      // text: 'On track for herd immunity',
       color: `${LEVEL_COLOR[Level.MEDIUM]}`,
-      // bgfill: 'rgba(255, 201, 0, 0.05)',
     },
     {
       level: Level.LOW,
-      // text: 'On track for containment',
       color: `${LEVEL_COLOR[Level.LOW]}`,
-      // bgfill: 'rgba(0, 212, 116, 0.05)',
     },
   ];
-
-  const riskLevelGraphicProps = {
-    alarmLevel,
-    levelName: levelInfo.name,
-    projections: props.projections,
-  };
 
   return (
     <Fragment>
@@ -182,82 +141,6 @@ const LocationPageHeader = (props: {
         headerTopMargin={headerTopMargin}
         headerBottomMargin={headerBottomMargin}
       >
-{/*     <HeaderSection>
-          <LocationCopyWrapper>
-            <HeaderTitle isEmbed={isEmbed}>
-              <LocationPageHeading projections={props.projections} />
-            </HeaderTitle>
-            <RiskLevelGraphicMobile>
-              <RiskLevelGraphic {...riskLevelGraphicProps} />
-            </RiskLevelGraphicMobile>
-            <HeaderSubtitle>{levelInfo.detail(locationName)}</HeaderSubtitle>
-            <HeaderSubtitle>
-              We have made improvements to how we calculate the infection rate.
-              This change may affect the overall Risk Level.{' '}
-              <a href="https://blog.covidactnow.org/calculating-better-infection-growth-rates-rt-for-more-communities/">
-                Learn more
-              </a>
-              .{' '}
-            </HeaderSubtitle>
-          </LocationCopyWrapper>
-          <RiskLevelGraphicDesktop>
-            <RiskLevelGraphic {...riskLevelGraphicProps} />
-          </RiskLevelGraphicDesktop>
-        </HeaderSection>
-        <SummaryStats
-          stats={props.stats}
-          onRtRangeClick={props.onRtRangeClick}
-          onTestPositiveClick={props.onTestPositiveClick}
-          onIcuUtilizationClick={props.onIcuUtilizationClick}
-          onContactTracingClick={props.onContactTracingClick}
-          isMobile={props.isMobile}
-          isHeader={true}
-        />
-        <HeaderSection>
-          <HeaderSubCopyWrapper isVerifiedState={isVerifiedState}>
-            {props.projections.isCounty && !isEmbed && (
-              <HeaderSubCopy>
-                <span>Updated {lastUpdatedDateString} · </span>
-                <span>County data is currently in beta. </span>
-                <span>
-                  Because counties don’t report hospitalizations, our forecasts
-                  may not be as accurate. See something wrong?{' '}
-                </span>
-                <a
-                  href="https://forms.gle/NPsLcFnrvfS1kqkn9"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Please let us know
-                </a>
-                .
-              </HeaderSubCopy>
-            )}
-            {!props.projections.isCounty && !isEmbed && (
-              <HeaderSubCopy>
-                {verified && (
-                  <Fragment>
-                    <CheckIcon htmlColor="#00D474" />
-                    <span>Government verified data · </span>
-                  </Fragment>
-                )}
-                <LastUpdatedDate isVerifiedState={isVerifiedState}>
-                  Updated {lastUpdatedDateString}
-                </LastUpdatedDate>
-              </HeaderSubCopy>
-            )}
-          </HeaderSubCopyWrapper>
-          <ButtonsWrapper>
-            <HeaderButton onClick={props.onHeaderShareClick || noop}>
-              Share
-            </HeaderButton>
-            <HeaderButton onClick={props.onHeaderSignupClick || noop}>
-              Get alerts
-            </HeaderButton>
-          </ButtonsWrapper>
-        </HeaderSection>
-      </HeaderContainer>
- */}
         <TopContainer>
           <HeaderSection>
             <LocationCopyWrapper>
@@ -284,6 +167,7 @@ const LocationPageHeader = (props: {
                   return (
                     <ThermometerRow
                       color={row.color}
+                      thresholdUnknown={thresholdUnknown}
                       isCurrentLevel={isCurrentLevel}
                     />
                   );
@@ -291,7 +175,7 @@ const LocationPageHeader = (props: {
               </ThermometerContainer>
               <SectionColumn>
                 <ColumnTitle>Covid threat level</ColumnTitle>
-                <LevelDescription>At risk of an outbreak</LevelDescription>
+                <LevelDescription>{levelInfo.summary}</LevelDescription>
                 <Copy>{levelInfo.detail(locationName)}</Copy>
               </SectionColumn>
             </SectionHalf>
