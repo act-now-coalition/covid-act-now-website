@@ -108,6 +108,8 @@ export class Projections {
         return this.primary.currentTestPositiveRate;
       case Metric.CONTACT_TRACING:
         return this.primary.currentContactTracerMetric;
+      case Metric.CASE_DENSITY:
+        return 1; // TODO(michael): Pull in metric value.
       default:
         fail('Cannot get value of metric: ' + metric);
     }
