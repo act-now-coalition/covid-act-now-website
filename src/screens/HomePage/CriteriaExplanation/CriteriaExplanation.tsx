@@ -16,7 +16,7 @@ const CriteriaExplanation = () => {
           <Kicker>Indicator 1</Kicker>
           <CriterionHeader>Are COVID cases decreasing?</CriterionHeader>
           <CriterionDescription>
-            Is the number of infections and deaths going down?{' '}
+            Is the number of infections going down?{' '}
           </CriterionDescription>
         </Criterion>
         <Criterion>
