@@ -122,6 +122,11 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
                 Data Modelers
               </Typography>
             </li>
+            <li>
+              <Typography variant="body1" component="p">
+                ...and more!
+              </Typography>
+            </li>
           </ul>
 
           <SectionHeader variant="h4" component="h4" id="donate">
