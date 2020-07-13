@@ -2482,6 +2482,13 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.10.61.tgz#d299136ce54bcaf1abaa4a487f9e4bedf6b0d393"
   integrity sha512-l+zSbvT8TPRaCxL1l9cwHCb0tSqGAGcjPJFItGGYat5oCTiq1uQQKYg5m7AF1mgnEBzFXGLJ2LRmNjtreRX76Q==
 
+"@types/os-utils@^0.0.0":
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/@types/os-utils/-/os-utils-0.0.0.tgz#27524d0df5907131040b06d6c306f35dddbe58be"
+  integrity sha512-f5FUhVZLJIOQRDgaKLPB+s2RuNlxbLX/ffhy2vOiw0Lf+AA5iuK+ISDhhvoirCjjjR7T2l2/dZ7pVgnZ/FWLKQ==
+  dependencies:
+    "@types/node" "*"
+
 "@types/parse-json@^4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@types/parse-json/-/parse-json-4.0.0.tgz#2f8bb441434d163b35fb8ffdccd7138927ffb8c0"
@@ -11354,6 +11361,11 @@ os-tmpdir@~1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/os-tmpdir/-/os-tmpdir-1.0.2.tgz#bbe67406c79aa85c5cfec766fe5734555dfa1274"
   integrity sha1-u+Z0BseaqFxc/sdm/lc0VV36EnQ=
+
+os-utils@^0.0.14:
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/os-utils/-/os-utils-0.0.14.tgz#29e511697b1982b8c627722175fe39797ef64156"
+  integrity sha1-KeURaXsZgrjGJ3Ihdf45eX72QVY=
 
 ospath@1.2.2:
   version "1.2.2"
