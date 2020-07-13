@@ -11,6 +11,8 @@ import {
   ViewAllLink,
 } from './Announcements.style';
 
+//TODO(Chelsi): replace ReadMoreButton's href with blog post
+
 const Announcements = () => {
   return (
     <Wrapper>
@@ -29,8 +31,12 @@ const Announcements = () => {
         mollit anim id est laborum.
       </AnnouncementBodyCopy>
       <ButtonsContainer>
-        <ReadMoreButton>Read more</ReadMoreButton>
-        <ViewAllLink href="/">View all announcements</ViewAllLink>
+        <ReadMoreButton href="https://blog.covidactnow.org/" target="_blank">
+          Read more
+        </ReadMoreButton>
+        <ViewAllLink href="https://blog.covidactnow.org/" target="_blank">
+          View all announcements
+        </ViewAllLink>
       </ButtonsContainer>
     </Wrapper>
   );

@@ -50,6 +50,12 @@ export const HeaderSubCopy = styled(Typography)<{ component?: string }>`
   }
 `;
 
+export const ClickableCopy = styled.span`
+  color: ${COLOR_MAP.BLUE};
+  text-decoration: underline;
+  cursor: pointer;
+`;
+
 export const HeaderSubCopyItem = styled.span<{ hideOnMobile?: boolean }>`
   display: ${props => (props.hideOnMobile ? 'none' : 'unset')};
   font-family: Roboto;
@@ -59,10 +65,6 @@ export const HeaderSubCopyItem = styled.span<{ hideOnMobile?: boolean }>`
     display: unset;
     font-size: 19px;
     line-height: 140%;
-  }
-
-  a {
-    color: ${COLOR_MAP.BLUE};
   }
 
   strong {

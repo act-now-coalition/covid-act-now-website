@@ -2,8 +2,7 @@ import React from 'react';
 import {
   Wrapper,
   Criterion,
-  MobileKicker,
-  DesktopKicker,
+  KickerContent,
   CriterionHeader,
   CriterionDescription,
   CriteriaList,
@@ -14,17 +13,28 @@ import {
 } from './CriteriaExplanation.style';
 import { BetaTag } from 'components/LocationPage/ChartsHolder.style';
 
-const CriteriaExplanation = () => {
+const Kicker = (props: {
+  number: string;
+  title: string;
+  isMobile: Boolean;
+}) => {
+  const kickerText = props.isMobile ? props.number : props.title;
+
+  return (
+    <KickerWrapper>
+      <KickerContent>{kickerText}</KickerContent>
+    </KickerWrapper>
+  );
+};
+
+const CriteriaExplanation = (props: { isMobile: Boolean }) => {
   return (
     <Wrapper>
       <ListHeader>How we determine risk levels</ListHeader>
       <ListSubheader>Key indicators</ListSubheader>
       <CriteriaList>
         <Criterion>
-          <KickerWrapper>
-            <MobileKicker>1</MobileKicker>
-            <DesktopKicker>Indicator 1</DesktopKicker>
-          </KickerWrapper>
+          <Kicker isMobile={props.isMobile} title="Indicator 1" number="1" />
           <Content>
             <CriterionHeader>[New infections per capita]</CriterionHeader>
             <CriterionDescription>
@@ -34,10 +44,7 @@ const CriteriaExplanation = () => {
           </Content>
         </Criterion>
         <Criterion>
-          <KickerWrapper>
-            <MobileKicker>2</MobileKicker>
-            <DesktopKicker>Indicator 2</DesktopKicker>
-          </KickerWrapper>
+          <Kicker isMobile={props.isMobile} title="Indicator 2" number="2" />
           <Content>
             <CriterionHeader>Are COVID cases decreasing?</CriterionHeader>
             <CriterionDescription>
@@ -46,10 +53,7 @@ const CriteriaExplanation = () => {
           </Content>
         </Criterion>
         <Criterion>
-          <KickerWrapper>
-            <MobileKicker>3</MobileKicker>
-            <DesktopKicker>Indicator 3</DesktopKicker>
-          </KickerWrapper>
+          <Kicker isMobile={props.isMobile} title="Indicator 3" number="3" />
           <Content>
             <CriterionHeader>Are we testing enough?</CriterionHeader>
             <CriterionDescription>
@@ -58,10 +62,7 @@ const CriteriaExplanation = () => {
           </Content>
         </Criterion>
         <Criterion>
-          <KickerWrapper>
-            <MobileKicker>4</MobileKicker>
-            <DesktopKicker>Indicator 4</DesktopKicker>
-          </KickerWrapper>
+          <Kicker isMobile={props.isMobile} title="Indicator 4" number="4" />
           <Content>
             <CriterionHeader>Are our hospitals ready?</CriterionHeader>
             <CriterionDescription>
@@ -71,10 +72,7 @@ const CriteriaExplanation = () => {
           </Content>
         </Criterion>
         <Criterion>
-          <KickerWrapper>
-            <MobileKicker>5</MobileKicker>
-            <DesktopKicker>Indicator 5</DesktopKicker>
-          </KickerWrapper>
+          <Kicker isMobile={props.isMobile} title="Indicator 5" number="5" />
           <Content>
             <CriterionHeader>Are we tracing fast enough?</CriterionHeader>
             <CriterionDescription>

@@ -67,7 +67,7 @@ export const ButtonsContainer = styled(Box)`
   }
 `;
 
-export const ReadMoreButton = styled(Box)`
+export const ReadMoreButton = styled.a`
   border-radius: 4px;
   background-color: #e0e0e0;
   color: white;
@@ -78,6 +78,7 @@ export const ReadMoreButton = styled(Box)`
   padding: 1rem 2rem;
   width: 160px;
   margin-bottom: 1.5rem;
+  text-decoration: none;
 
   @media (min-width: 600px) {
     margin-bottom: 0;

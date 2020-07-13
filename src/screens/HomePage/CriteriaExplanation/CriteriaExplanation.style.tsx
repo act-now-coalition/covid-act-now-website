@@ -58,7 +58,7 @@ export const KickerWrapper = styled(Box)`
   width: fit-content;
 `;
 
-export const MobileKicker = styled.span`
+export const KickerContent = styled.span`
   color: ${palette.secondary.main};
   font-weight: 700;
   text-transform: uppercase;
@@ -72,20 +72,15 @@ export const MobileKicker = styled.span`
   margin-right: 1.25rem;
 
   @media (min-width: 600px) {
-    display: none;
-  }
-`;
-
-export const DesktopKicker = styled(Typography)`
-  display: none;
-
-  @media (min-width: 600px) {
     display: flex;
     font-size: 13px;
-    color: ${palette.secondary.main};
-    font-weight: 700;
-    text-transform: uppercase;
     margin-bottom: 0.75rem;
+    border: none;
+    width: unset;
+    height: unset;
+    padding: 0;
+    margin-right: 0;
+    font-weight: 500;
   }
 `;
 

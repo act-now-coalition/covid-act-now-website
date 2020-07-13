@@ -25,16 +25,6 @@ import {
 
 import { SelectorWrapper } from 'components/Header/HomePageHeader.style';
 
-// TODO: 180 is rough accounting for the navbar and searchbar;
-// could make these constants so we don't have to manually update
-const scrollTo = (div, offset = 80) =>
-  div &&
-  window.scrollTo({
-    left: 0,
-    top: div.offsetTop + offset,
-    behavior: 'smooth',
-  });
-
 export default function HomePage() {
   const shareBlockRef = useRef(null);
   const location = useLocation();
@@ -44,12 +34,23 @@ export default function HomePage() {
 
   const history = useHistory();
 
+  const indicatorsRef = useRef(null);
+
+  const scrollTo = div =>
+    div &&
+    window.scrollTo({
+      left: 0,
+      top: div.offsetTop - 48,
+      behavior: 'smooth',
+    });
+
   useEffect(() => {
     if (location.pathname.includes('alert_signup') && shareBlockRef.current) {
       scrollTo(shareBlockRef.current);
     }
   }, [location.pathname, shareBlockRef]);
 
+  // @ts-ignore TODO(aj): remove when converting MapSelectors
   const handleSelectChange = option => {
     let route = `/us/${option.state_code.toLowerCase()}`;
 
@@ -70,7 +71,9 @@ export default function HomePage() {
         pageTitle={undefined}
         pageDescription="Real-time modeling and metrics to understand where we stand against COVID. 50 states. 2,100+ counties. Click the map to dive in"
       />
-      <HomePageHeader />
+      <HomePageHeader
+        indicatorsLinkOnClick={() => scrollTo(indicatorsRef.current)}
+      />
       <main>
         <div className="App">
           <Content>
@@ -85,8 +88,8 @@ export default function HomePage() {
             </SearchBarThermometerWrapper>
             <Map hideLegend />
             {isMobile && <HomePageThermometer />}
-            <SectionWrapper>
-              <CriteriaExplanation />
+            <SectionWrapper ref={indicatorsRef}>
+              <CriteriaExplanation isMobile={isMobile} />
             </SectionWrapper>
             <Announcements />
           </Content>
