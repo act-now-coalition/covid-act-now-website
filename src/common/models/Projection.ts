@@ -114,6 +114,7 @@ export class Projection {
   readonly currentCumulativeCases: number | null;
   readonly currentContactTracerMetric: number | null;
   readonly stateName: string;
+  readonly currentCaseDensity: number | null;
   readonly currentCaseDensityByCases: number | null;
   readonly currentCaseDensityByDeaths: number | null;
 
@@ -223,6 +224,9 @@ export class Projection {
 
     this.currentCaseDensityByCases = lastValue(this.caseDensityByCases);
     this.currentCaseDensityByDeaths = lastValue(this.caseDensityByDeaths);
+    this.currentCaseDensity = lastValue(
+      this.caseDensityRange.map(range => range && range.caseDensity),
+    );
 
     this.fixZeros(this.hospitalizations);
     this.fixZeros(this.cumulativeDeaths);

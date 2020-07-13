@@ -120,7 +120,7 @@ export class Projections {
       case Metric.CONTACT_TRACING:
         return this.primary.currentContactTracerMetric;
       case Metric.CASE_DENSITY:
-        return this.primary.currentCaseDensityByDeaths;
+        return this.primary.currentCaseDensity;
       default:
         fail('Cannot get value of metric: ' + metric);
     }
