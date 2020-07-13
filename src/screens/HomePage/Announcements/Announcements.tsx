@@ -31,10 +31,18 @@ const Announcements = () => {
         mollit anim id est laborum.
       </AnnouncementBodyCopy>
       <ButtonsContainer>
-        <ReadMoreButton href="https://blog.covidactnow.org/" target="_blank">
+        <ReadMoreButton
+          href="https://blog.covidactnow.org/"
+          target="_blank"
+          rel="noopener"
+        >
           Read more
         </ReadMoreButton>
-        <ViewAllLink href="https://blog.covidactnow.org/" target="_blank">
+        <ViewAllLink
+          href="https://blog.covidactnow.org/"
+          target="_blank"
+          rel="noopener"
+        >
           View all announcements
         </ViewAllLink>
       </ButtonsContainer>
