@@ -166,11 +166,9 @@ const LocationPageHeader = (props: {
                   may not be as accurate. See something wrong?{' '}
                 </span>
                 <a
-                  href="https://forms.gle/NPsLcFnrvfS1kqkn9"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="mailto:feedback@covidactnow.org?Subject=[Website%20Feedback]"
                 >
-                  Please let us know
+                  Email us.
                 </a>
                 .
               </HeaderSubCopy>
