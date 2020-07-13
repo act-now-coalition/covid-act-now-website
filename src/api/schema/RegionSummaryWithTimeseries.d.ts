@@ -6,7 +6,7 @@
 
 export type Countryname = string;
 /**
- * Fips for State + County. Five character code
+ * Fips Code.  For state level data, 2 characters, for county level data, 5 characters.
  */
 export type Fips = string;
 /**
@@ -18,15 +18,23 @@ export type Lat = number;
  */
 export type Long = number;
 /**
+ * The state name
+ */
+export type Statename = string;
+/**
+ * The county name
+ */
+export type Countyname = string;
+/**
  * Date of latest data
  */
 export type Lastupdateddate = string;
 /**
  * Projection about total hospital bed utilization
  */
-export type Totalhospitalbeds = _ResourceUsageProjection;
+export type Totalhospitalbeds = ResourceUsageProjection;
 /**
- * Shortfall of resource needed at the peek utilization
+ * Shortfall of resource needed at the peak utilization
  */
 export type Peakshortfall = number;
 /**
@@ -40,7 +48,7 @@ export type Shortagestartdate = string;
 /**
  * Projection about ICU hospital bed utilization
  */
-export type Icubeds = _ResourceUsageProjection;
+export type Icubeds = ResourceUsageProjection;
 /**
  * Historical or Inferred Rt
  */
@@ -50,7 +58,7 @@ export type Rt = number;
  */
 export type Rtci90 = number;
 /**
- * Total population in geographic area [*deprecated*: refer to summary for this]
+ * Total population in geographic region [*deprecated*: refer to summary for this]
  */
 export type Population = number;
 /**
@@ -98,17 +106,9 @@ export type Typicalusagerate = number;
  */
 export type Contacttracers = number;
 /**
- * Total Population in geographic area.
+ * Total Population in geographic region.
  */
 export type Population1 = number;
-/**
- * The state name
- */
-export type Statename = string;
-/**
- * The county name
- */
-export type Countyname = string;
 export type Date = string;
 /**
  * Number of hospital beds projected to be in-use or that were actually in use (if in the past)
@@ -162,17 +162,9 @@ export type Currentsusceptible = number;
  * Number of people currently exposed
  */
 export type Currentexposed = number;
+export type Timeseries = PredictionTimeseriesRow[];
 /**
- * Number of positive test results to date
- */
-export type Cumulativepositivetests1 = number;
-/**
- * Number of negative test results to date
- */
-export type Cumulativenegativetests1 = number;
-export type Timeseries = CANPredictionTimeseriesRow[];
-/**
- * Total population in geographic area [*deprecated*: refer to summary for this]
+ * Total population in geographic region [*deprecated*: refer to summary for this]
  */
 export type Population2 = number;
 /**
@@ -186,11 +178,11 @@ export type Cumulativeconfirmedcases1 = number;
 /**
  * Number of positive test results to date
  */
-export type Cumulativepositivetests2 = number;
+export type Cumulativepositivetests1 = number;
 /**
  * Number of negative test results to date
  */
-export type Cumulativenegativetests2 = number;
+export type Cumulativenegativetests1 = number;
 /**
  * Number of deaths so far
  */
@@ -200,53 +192,70 @@ export type Cumulativedeaths2 = number;
  */
 export type Contacttracers1 = number;
 export type Date1 = string;
-export type Actualstimeseries = CANActualsTimeseriesRow[];
-export type CovidActNowCountiesTimeseries = CovidActNowCountyTimeseries[];
+export type Actualstimeseries = ActualsTimeseriesRow[];
 
-export interface CovidActNowCountyTimeseries {
+/**
+ * Base model for API output.
+ */
+export interface RegionSummaryWithTimeseries {
   countryName?: Countryname;
   fips: Fips;
   lat: Lat;
   long: Long;
-  lastUpdatedDate: Lastupdateddate;
-  projections: _Projections;
-  actuals: _Actuals;
-  population: Population1;
   stateName: Statename;
-  countyName: Countyname;
+  countyName?: Countyname;
+  lastUpdatedDate: Lastupdateddate;
+  projections: Projections;
+  actuals: Actuals;
+  population: Population1;
   timeseries: Timeseries;
   actualsTimeseries: Actualstimeseries;
 }
-export interface _Projections {
+/**
+ * Base model for API output.
+ */
+export interface Projections {
   totalHospitalBeds: Totalhospitalbeds;
   ICUBeds: Icubeds;
   Rt: Rt;
   RtCI90: Rtci90;
 }
-export interface _ResourceUsageProjection {
+/**
+ * Base model for API output.
+ */
+export interface ResourceUsageProjection {
   peakShortfall: Peakshortfall;
   peakDate: Peakdate;
   shortageStartDate: Shortagestartdate;
 }
-export interface _Actuals {
+/**
+ * Base model for API output.
+ */
+export interface Actuals {
   population: Population;
   intervention: Intervention;
   cumulativeConfirmedCases: Cumulativeconfirmedcases;
   cumulativePositiveTests: Cumulativepositivetests;
   cumulativeNegativeTests: Cumulativenegativetests;
   cumulativeDeaths: Cumulativedeaths;
-  hospitalBeds: _ResourceUtilization;
-  ICUBeds: _ResourceUtilization;
+  hospitalBeds: ResourceUtilization;
+  ICUBeds: ResourceUtilization;
   contactTracers?: Contacttracers;
 }
-export interface _ResourceUtilization {
+/**
+ * Base model for API output.
+ */
+export interface ResourceUtilization {
   capacity: Capacity;
   totalCapacity: Totalcapacity;
   currentUsageCovid: Currentusagecovid;
   currentUsageTotal: Currentusagetotal;
   typicalUsageRate: Typicalusagerate;
 }
-export interface CANPredictionTimeseriesRow {
+/**
+ * Base model for API output.
+ */
+export interface PredictionTimeseriesRow {
   date: Date;
   hospitalBedsRequired: Hospitalbedsrequired;
   hospitalBedCapacity: Hospitalbedcapacity;
@@ -261,18 +270,19 @@ export interface CANPredictionTimeseriesRow {
   currentInfected: Currentinfected;
   currentSusceptible: Currentsusceptible;
   currentExposed: Currentexposed;
-  cumulativePositiveTests: Cumulativepositivetests1;
-  cumulativeNegativeTests: Cumulativenegativetests1;
 }
-export interface CANActualsTimeseriesRow {
+/**
+ * Base model for API output.
+ */
+export interface ActualsTimeseriesRow {
   population: Population2;
   intervention: Intervention1;
   cumulativeConfirmedCases: Cumulativeconfirmedcases1;
-  cumulativePositiveTests: Cumulativepositivetests2;
-  cumulativeNegativeTests: Cumulativenegativetests2;
+  cumulativePositiveTests: Cumulativepositivetests1;
+  cumulativeNegativeTests: Cumulativenegativetests1;
   cumulativeDeaths: Cumulativedeaths2;
-  hospitalBeds: _ResourceUtilization;
-  ICUBeds: _ResourceUtilization;
+  hospitalBeds: ResourceUtilization;
+  ICUBeds: ResourceUtilization;
   contactTracers?: Contacttracers1;
   date: Date1;
 }
