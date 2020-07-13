@@ -1,15 +1,13 @@
 import _ from 'lodash';
 import moment from 'moment';
 
+import { ActualsTimeseries } from 'api';
 import {
+  PredictionTimeseriesRow,
+  ActualsTimeseriesRow,
   RegionSummaryWithTimeseries,
   Timeseries,
-  ActualsTimeseries,
-} from 'api';
-import {
-  CANPredictionTimeseriesRow,
-  CANActualsTimeseriesRow,
-} from 'api/schema/CovidActNowStatesTimeseries';
+} from 'api/schema/RegionSummaryWithTimeseries';
 import { ICUHeadroomInfo, calcICUHeadroom } from './ICUHeadroom';
 import { lastValue, indexOfLastValue } from './utils';
 import { assert } from 'common/utils';
@@ -125,8 +123,8 @@ export class Projection {
   // NOTE: These are used dynamically by getColumn()
   private readonly hospitalizations: Array<number | null>;
   private readonly beds: Array<number | null>;
-  private readonly timeseries: Array<CANPredictionTimeseriesRow | null>;
-  private readonly actualTimeseries: Array<CANActualsTimeseriesRow | null>;
+  private readonly timeseries: Array<PredictionTimeseriesRow | null>;
+  private readonly actualTimeseries: Array<ActualsTimeseriesRow | null>;
   private readonly cumulativeDeaths: Array<number | null>;
   private readonly cumulativeInfected: Array<number | null>;
   private readonly cumulativePositiveTests: Array<number | null>;
@@ -326,9 +324,9 @@ export class Projection {
    */
   private makeDateDictionary(ts: Timeseries | ActualsTimeseries) {
     const dict: {
-      [date: string]: CANPredictionTimeseriesRow | CANActualsTimeseriesRow;
+      [date: string]: PredictionTimeseriesRow | ActualsTimeseriesRow;
     } = {};
-    ts.forEach((row: CANPredictionTimeseriesRow | CANActualsTimeseriesRow) => {
+    ts.forEach((row: PredictionTimeseriesRow | ActualsTimeseriesRow) => {
       const ts_date = moment.utc(row.date).toString();
       dict[ts_date] = row;
     });
@@ -364,8 +362,8 @@ export class Projection {
       latestDate = moment.utc(_.last(actualsTimeseriesRaw)!.date);
     }
 
-    const timeseries: Array<CANPredictionTimeseriesRow | null> = [];
-    const actualsTimeseries: Array<CANActualsTimeseriesRow | null> = [];
+    const timeseries: Array<PredictionTimeseriesRow | null> = [];
+    const actualsTimeseries: Array<ActualsTimeseriesRow | null> = [];
     const dates: Date[] = [];
 
     const timeseriesDictionary = this.makeDateDictionary(timeseriesRaw);
@@ -377,10 +375,10 @@ export class Projection {
     while (currDate.diff(latestDate) <= 0) {
       const timeseriesRowForDate = timeseriesDictionary[
         currDate.toString()
-      ] as CANPredictionTimeseriesRow;
+      ] as PredictionTimeseriesRow;
       const actualsTimeseriesrowForDate = actualsTimeseriesDictionary[
         currDate.toString()
-      ] as CANActualsTimeseriesRow;
+      ] as ActualsTimeseriesRow;
 
       timeseries.push(timeseriesRowForDate || null);
       actualsTimeseries.push(actualsTimeseriesrowForDate || null);
@@ -410,7 +408,7 @@ export class Projection {
   }
 
   private calcContactTracers(
-    actualTimeseries: Array<CANActualsTimeseriesRow | null>,
+    actualTimeseries: Array<ActualsTimeseriesRow | null>,
   ): Array<number | null> {
     return actualTimeseries.map((row, i) => {
       if (row && row.contactTracers) {
@@ -474,7 +472,7 @@ export class Projection {
   }
 
   private calcRtRange(
-    timeseries: Array<CANPredictionTimeseriesRow | null>,
+    timeseries: Array<PredictionTimeseriesRow | null>,
   ): Array<RtRange | null> {
     const rtSeriesRaw = timeseries.map(row => row && row.RtIndicator);
     const rtCiSeriesRaw = timeseries.map(row => row && row.RtIndicatorCI90);
