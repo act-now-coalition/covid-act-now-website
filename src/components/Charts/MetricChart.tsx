@@ -6,6 +6,7 @@ import {
   ChartICUHeadroom,
   ChartContactTracing,
   ChartFutureHospitalization,
+  ChartCaseDensity,
 } from 'components/Charts';
 import { Metric } from 'common/metric';
 
@@ -34,6 +35,12 @@ export default function MetricChart({
         <ChartRt
           height={height}
           columnData={projection.getDataset('rtRange')}
+        />
+      )}
+      {metric === Metric.CASE_DENSITY && (
+        <ChartCaseDensity
+          height={height}
+          columnData={projection.getDataset('caseDensityRange')}
         />
       )}
       {metric === Metric.POSITIVE_TESTS && (
