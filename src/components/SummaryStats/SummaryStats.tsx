@@ -63,6 +63,8 @@ const SummaryStat = ({
       return formatPercent(value, 1);
     } else if (chartType === Metric.CONTACT_TRACING) {
       return formatPercent(value, 0);
+    } else if (chartType === Metric.CASE_DENSITY) {
+      return formatDecimal(value, 1);
     }
     fail('Invalid Chart Type');
   };
@@ -130,6 +132,12 @@ const SummaryStats = (props: {
     <>
       {hasStats && (
         <SummaryStatsWrapper condensed={props.condensed}>
+          <SummaryStat
+            onClick={props.onRtRangeClick || noop}
+            chartType={Metric.CASE_DENSITY}
+            value={props.stats[Metric.CASE_DENSITY] as number}
+            {...sharedStatProps}
+          />
           <SummaryStat
             onClick={props.onRtRangeClick || noop}
             chartType={Metric.CASE_GROWTH_RATE}
