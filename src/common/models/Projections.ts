@@ -154,6 +154,11 @@ export class Projections {
       case_density,
     } = this.getLevels();
 
+    // If case density is low, it overrides other metrics.
+    if (case_density === Level.LOW) {
+      return Level.LOW;
+    }
+
     const levelList = [
       rt_level,
       hospitalizations_level,
