@@ -1,22 +1,23 @@
 import React, { FunctionComponent } from 'react';
+import moment from 'moment';
 import { isDate } from 'lodash';
 import { min as d3min, max as d3max } from 'd3-array';
-import { curveNatural } from '@vx/curve';
 import { GridRows } from '@vx/grid';
 import { scaleLinear, scaleTime } from '@vx/scale';
-import { Area } from '@vx/shape';
 import { ParentSize } from '@vx/responsive';
 import { Column } from 'common/models/Projection';
 import { CASE_DENSITY_LEVEL_INFO_MAP } from 'common/metrics/case_density';
 import { LevelInfoMap } from 'common/level';
 import { formatUtcDate, formatDecimal } from 'common/utils';
 import { AxisBottom, AxisLeft } from './Axis';
+import BoxedAnnotation from './BoxedAnnotation';
 import ChartContainer from './ChartContainer';
 import RectClipGroup from './RectClipGroup';
 import ZoneAnnotation from './ZoneAnnotation';
 import Tooltip from './Tooltip';
 import LinePathRegion from './LinePathRegion';
 import * as TooltipStyle from './Tooltip.style';
+import * as Style from './Charts.style';
 import {
   computeTickPositions,
   getChartRegions,
@@ -24,7 +25,6 @@ import {
   last,
   getAxisLimits,
 } from './utils';
-import * as Style from './Charts.style';
 
 type Point = {
   x: number;
@@ -33,14 +33,7 @@ type Point = {
 
 const getDate = (d: Point) => new Date(d.x);
 const getY = (d: Point) => d?.y?.caseDensity;
-const getAreaLow = (p: Point) => p?.y?.low;
-const getAreaHigh = (p: Point) => p?.y?.high;
-
-const hasData = (d: any) =>
-  isDate(getDate(d)) &&
-  Number.isFinite(getY(d)) &&
-  Number.isFinite(getAreaLow(d)) &&
-  Number.isFinite(getAreaHigh(d));
+const hasData = (d: any) => isDate(getDate(d)) && Number.isFinite(getY(d));
 
 const ChartCaseDensity: FunctionComponent<{
   columnData: Column[];
@@ -59,7 +52,7 @@ const ChartCaseDensity: FunctionComponent<{
   marginTop = 5,
   marginBottom = 40,
   marginLeft = 40,
-  marginRight = 90,
+  marginRight = 5,
 }) => {
   const chartWidth = width - marginLeft - marginRight;
   const chartHeight = height - marginTop - marginBottom;
@@ -68,7 +61,7 @@ const ChartCaseDensity: FunctionComponent<{
 
   const dates = data.map(getDate);
   const minDate = d3min(dates) || new Date('2020-01-01');
-  const maxDate = d3max(dates) || new Date();
+  const maxDate = moment().add(2, 'weeks').toDate();
 
   const xScale = scaleTime({
     domain: [minDate, maxDate],
@@ -93,21 +86,17 @@ const ChartCaseDensity: FunctionComponent<{
 
   const yTicks = computeTickPositions(yAxisMin, yAxisMax, zones);
 
-  const renderTooltip = (p: Point) => {
-    const yLow = formatDecimal(getAreaLow(p), 2);
-    const yHigh = formatDecimal(getAreaHigh(p), 2);
-    const y = formatDecimal(getY(p), 1);
-    return (
-      <Tooltip
-        left={marginLeft + getXCoord(p)}
-        top={marginTop + getYCoord(p)}
-        title={formatUtcDate(getDate(p), 'MMM D, YYYY')}
-      >
-        <TooltipStyle.Body>{`Case density ${y}/100k`}</TooltipStyle.Body>
-        <TooltipStyle.BodyMuted>{`[1.5%, 0.5%] = [${yLow}, ${yHigh}]`}</TooltipStyle.BodyMuted>
-      </Tooltip>
-    );
-  };
+  const renderTooltip = (p: Point) => (
+    <Tooltip
+      left={marginLeft + getXCoord(p)}
+      top={marginTop + getYCoord(p)}
+      title={formatUtcDate(getDate(p), 'MMM D, YYYY')}
+    >
+      <TooltipStyle.Body>
+        {`Case density ${formatDecimal(getY(p), 1)}/100k`}
+      </TooltipStyle.Body>
+    </Tooltip>
+  );
   const renderMarker = (p: Point) => (
     <Style.CircleMarker
       cx={getXCoord(p)}
@@ -132,15 +121,6 @@ const ChartCaseDensity: FunctionComponent<{
       marginRight={marginRight}
     >
       <RectClipGroup width={chartWidth} height={chartHeight} topPadding={0}>
-        <Style.SeriesArea>
-          <Area
-            data={data}
-            x={getXCoord}
-            y0={(p: Point) => yScale(getAreaLow(p))}
-            y1={(p: Point) => yScale(getAreaHigh(p))}
-            curve={curveNatural}
-          />
-        </Style.SeriesArea>
         <LinePathRegion
           data={data}
           x={getXCoord}
@@ -152,13 +132,20 @@ const ChartCaseDensity: FunctionComponent<{
         <Style.LineGrid>
           <GridRows width={chartWidth} scale={yScale} tickValues={yTicks} />
         </Style.LineGrid>
+        <Style.TextAnnotation>
+          <BoxedAnnotation
+            x={getXCoord(lastPoint) + 30}
+            y={getYCoord(lastPoint)}
+            text={formatDecimal(getY(lastPoint), 1)}
+          />
+        </Style.TextAnnotation>
       </RectClipGroup>
       {regions.map((region, i) => (
         <ZoneAnnotation
           color={region.color}
           name={region.name}
           isActive={activeZone.name === region.name}
-          x={chartWidth + 70}
+          x={xScale(maxDate) - 10}
           y={yScale(0.5 * (region.valueFrom + region.valueTo))}
         />
       ))}

@@ -1,10 +1,9 @@
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
-import { Projection } from 'common/models/Projection';
+import { Projection, CASE_FATALITY_RATIO } from 'common/models/Projection';
+import { formatInteger, formatPercent } from 'common/utils';
 
 export const METRIC_NAME = 'Case Density';
-
-export const CASE_DENSITY_DISCLAIMER = 'Case Density Disclaimer';
 
 export const CASE_DENSITY_LEVEL_INFO_MAP: LevelInfoMap = {
   [Level.LOW]: {
@@ -43,6 +42,14 @@ export const CASE_DENSITY_LEVEL_INFO_MAP: LevelInfoMap = {
     detail: () => 'Unknown',
   },
 };
+
+const casesPerDeath = formatInteger(1 / CASE_FATALITY_RATIO);
+const caseFatalityRatioPercent = formatPercent(CASE_FATALITY_RATIO, 0);
+
+export const CASE_DENSITY_DISCLAIMER = `We estimate ${casesPerDeath} cases 
+for every reported death (${caseFatalityRatioPercent} infection fatality 
+rate). Note that this will not match reported cases in many states, as 
+testing is only detecting a small number of actual cases.`;
 
 export const caseDensityStatusText = (projection: Projection) => {
   return 'Case Density Status Text';

@@ -90,7 +90,7 @@ export interface CaseDensityRange {
  */
 const CASE_FATALITY_RATIO_LOWER = 0.005;
 const CASE_FATALITY_RATIO_UPPER = 0.015;
-const CASE_FATALITY_RATIO = 0.01;
+export const CASE_FATALITY_RATIO = 0.01;
 /**
  * Represents a single projection for a given state or county.  Contains a
  * time-series of things like hospitalizations, hospital capacity, infections, etc.
