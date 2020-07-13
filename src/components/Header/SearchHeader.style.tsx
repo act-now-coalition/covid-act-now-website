@@ -21,6 +21,7 @@ export const Content = styled.div`
   margin: 0 auto;
 `;
 
+//TODO(Chelsi): edit max-width and margins to make header scale properly with new minimap dimensions
 export const SelectorWrapper = styled.div<{ isNarrowMobile: Boolean }>`
   flex: 1;
   margin-right: 0;
@@ -30,8 +31,8 @@ export const SelectorWrapper = styled.div<{ isNarrowMobile: Boolean }>`
     margin: 0 auto;
 
     @media (min-width: 1350px) {
-      max-width: 900px;
-      margin: 0 445px 0 auto;
+      max-width: 1000px;
+      margin: 0 350px 0 auto;
       position: relative;
     }
 
