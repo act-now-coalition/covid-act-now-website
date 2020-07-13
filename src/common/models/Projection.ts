@@ -108,7 +108,6 @@ export class Projection {
   readonly currentCumulativeCases: number | null;
   readonly currentContactTracerMetric: number | null;
   readonly stateName: string;
-  readonly dailyPositiveTests: Array<number | null>;
   readonly currentCaseDensityByCases: number | null;
   readonly currentCaseDensityByDeaths: number | null;
 
@@ -125,7 +124,8 @@ export class Projection {
   private readonly cumulativeInfected: Array<number | null>;
   private readonly cumulativePositiveTests: Array<number | null>;
   private readonly cumulativeNegativeTests: Array<number | null>;
-  private readonly dailyNegativeTests: Array<number | null>;
+  private readonly smoothedDailyNegativeTests: Array<number | null>;
+  private readonly smoothedDailyPositiveTests: Array<number | null>;
   private readonly rtRange: Array<RtRange | null>;
   // ICU Utilization series as values between 0-1 (or > 1 if over capacity).
   private readonly icuUtilization: Array<number | null>;
@@ -135,7 +135,7 @@ export class Projection {
   private readonly caseDensityByCases: Array<number | null>;
   private readonly caseDensityByDeaths: Array<number | null>;
   private readonly caseDensityRange: Array<CaseDensityRange | null>;
-  private readonly dailyDeaths: Array<number | null>;
+  private readonly smoothedDailyDeaths: Array<number | null>;
 
   constructor(
     summaryWithTimeseries: RegionSummaryWithTimeseries,
@@ -180,17 +180,19 @@ export class Projection {
     this.cumulativeNegativeTests = this.smoothCumulatives(
       actualTimeseries.map(row => row && row.cumulativeNegativeTests),
     );
-    this.dailyPositiveTests = this.deltasFromCumulatives(
-      this.cumulativePositiveTests,
+    this.smoothedDailyPositiveTests = this.smoothWithRollingAverage(
+      this.deltasFromCumulatives(this.cumulativePositiveTests),
     );
-    this.dailyNegativeTests = this.deltasFromCumulatives(
-      this.cumulativeNegativeTests,
+    this.smoothedDailyNegativeTests = this.smoothWithRollingAverage(
+      this.deltasFromCumulatives(this.cumulativeNegativeTests),
     );
 
     const cumulativeActualDeaths = this.smoothCumulatives(
       actualTimeseries.map(row => row?.cumulativeDeaths || null),
     );
-    this.dailyDeaths = this.deltasFromCumulatives(cumulativeActualDeaths);
+    this.smoothedDailyDeaths = this.smoothWithRollingAverage(
+      this.deltasFromCumulatives(cumulativeActualDeaths),
+    );
 
     this.rtRange = this.calcRtRange(timeseries);
     this.testPositiveRate = this.calcTestPositiveRate();
@@ -245,6 +247,15 @@ export class Projection {
     );
   }
 
+  // TODO(michael): We should really pre-compute currentContactTracers and
+  // currentDailyAverageCases and make sure we're pulling all of the data from
+  // the same day, to make sure it matches the graph.
+  get currentDailyAverageCases() {
+    // TODO(michael): We conflate "positive tests" and "cases" throughout this
+    // code. Is that okay? Can they diverge?
+    return lastValue(this.smoothedDailyPositiveTests);
+  }
+
   get label() {
     return this.intervention;
   }
@@ -260,26 +271,6 @@ export class Projection {
   /** Returns the date when projections end (should be 30 days out). */
   get finalDate(): Date {
     return this.dates[this.dates.length - 1];
-  }
-
-  /**
-   * Returns the delta between the number of new cases in the past week and the
-   * number in the prior week.
-   */
-  get weeklyNewCasesDelta(): number {
-    const i = indexOfLastValue(this.cumulativePositiveTests);
-    if (i === null) {
-      return 0;
-    } else {
-      // NOTE: If i < 14 we'll be taking advantage of JS letting us do negative
-      // array indexes. :-)
-      const cumulativeToday = this.cumulativePositiveTests[i] || 0;
-      const cumulative7daysAgo = this.cumulativePositiveTests[i - 7] || 0;
-      const cumulative14daysAgo = this.cumulativePositiveTests[i - 14] || 0;
-      const thisWeek = cumulativeToday - cumulative7daysAgo;
-      const lastWeek = cumulative7daysAgo - cumulative14daysAgo;
-      return thisWeek - lastWeek;
-    }
   }
 
   get currentTestPositiveRate(): number | null {
@@ -394,88 +385,44 @@ export class Projection {
     return s.countyName ? `${s.countyName}, ${s.stateName}` : s.stateName;
   }
 
-  /**
-   * Gets the cases/day on day i, by averaging the trailing week of cases/day
-   * data.
-   *
-   * Note: In the case of a data point with negative cases/day (can happen due
-   * to reporting weirdness), we skip that data point and may average fewer
-   * than 7 days worth of data.
-   */
-
-  getWeeklyAverageForDay(data: Array<number | null>, i?: number) {
-    const lastIndex = indexOfLastValue(data);
-    if (i === undefined) {
-      if (!lastIndex) return null;
-      i = lastIndex;
-    } else if (lastIndex === null || i > lastIndex) {
-      return null;
-    }
-    // Get last week of sane data (ignore negative values)
-    const lastWeekOfPositives = _.filter(
-      data.slice(Math.max(0, i - 6), i + 1),
-      p => p !== null && p >= 0,
-    );
-    return _.mean(lastWeekOfPositives);
-  }
-
   private calcContactTracers(
     actualTimeseries: Array<CANActualsTimeseriesRow | null>,
   ): Array<number | null> {
-    // use date.getWeek() to get the week number
-    return actualTimeseries.map(
-      (row: CANActualsTimeseriesRow | null, i: number) => {
-        if (row && row.contactTracers) {
-          const contactTracers =
-            CONTACT_TRACER_STATE_OVERRIDES[this.stateName] ||
-            row.contactTracers;
-          const weeklyAverage = this.getWeeklyAverageForDay(
-            this.dailyPositiveTests,
-            i,
-          );
-
-          if (weeklyAverage) {
-            return contactTracers / (weeklyAverage * TRACERS_NEEDED_PER_CASE);
-          }
+    return actualTimeseries.map((row, i) => {
+      if (row && row.contactTracers) {
+        const contactTracers =
+          CONTACT_TRACER_STATE_OVERRIDES[this.stateName] || row.contactTracers;
+        const cases = this.smoothedDailyPositiveTests[i];
+        if (cases) {
+          return contactTracers / (cases * TRACERS_NEEDED_PER_CASE);
         }
+      }
 
-        return null;
-      },
-    );
+      return null;
+    });
   }
 
   private calcCaseDensityByCases(): Array<number | null> {
-    const caseDensityByCases = [];
     const totalPopulation = this.totalPopulation;
-    for (let i = 0; i < this.dates.length; i++) {
-      const weeklyAverage = this.getWeeklyAverageForDay(
-        this.dailyPositiveTests,
-        i,
-      );
-      if (totalPopulation === 0 || weeklyAverage === null) {
-        caseDensityByCases.push(null);
+    return this.smoothedDailyPositiveTests.map(cases => {
+      if (totalPopulation === 0 || cases === null) {
+        return null;
       } else {
-        const val = weeklyAverage / (totalPopulation / 100000);
-        caseDensityByCases.push(val);
+        return cases / (totalPopulation / 100000);
       }
-    }
-    return caseDensityByCases;
+    });
   }
 
   private calcCaseDensityByDeaths(): Array<number | null> {
-    const caseDensityByDeaths = [];
     const totalPopulation = this.totalPopulation;
-    for (let i = 0; i < this.dates.length; i++) {
-      const weeklyAverage = this.getWeeklyAverageForDay(this.dailyDeaths, i);
-      if (totalPopulation === 0 || weeklyAverage === null) {
-        caseDensityByDeaths.push(null);
+    return this.smoothedDailyDeaths.map(deaths => {
+      if (totalPopulation === 0 || deaths === null) {
+        return null;
       } else {
-        const estimatedCases = weeklyAverage / CASE_FATALITY_RATIO;
-        const val = estimatedCases / (totalPopulation / 100000);
-        caseDensityByDeaths.push(val);
+        const estimatedCases = deaths / CASE_FATALITY_RATIO;
+        return estimatedCases / (totalPopulation / 100000);
       }
-    }
-    return caseDensityByDeaths;
+    });
   }
 
   private calcCaseDensityRange(): Array<CaseDensityRange | null> {
@@ -520,30 +467,25 @@ export class Projection {
   }
 
   private calcTestPositiveRate(): Array<number | null> {
-    const dailyPositives = this.smoothWithRollingAverage(
-      this.dailyPositiveTests,
-    );
-    const dailyNegatives = this.smoothWithRollingAverage(
-      this.dailyNegativeTests,
-    );
-
     let numTailPositivesWithoutNegatives = 0;
-    const testPositiveRate = dailyPositives.map((dailyPositive, idx) => {
-      const positive = dailyPositive;
-      const negative = dailyNegatives[idx];
-      // If there are no negatives (but there are positives), then this is
-      // likely the last data point, else it would have gotten smoothed, and
-      // it's probably a reporting lag issue. So just return null.
-      if (negative !== null && positive !== null && negative > 0) {
-        numTailPositivesWithoutNegatives = 0;
-        return positive / (negative + positive);
-      } else {
-        if (positive !== null && (negative === null || negative === 0)) {
-          numTailPositivesWithoutNegatives += 1;
+    const testPositiveRate = this.smoothedDailyPositiveTests.map(
+      (dailyPositive, idx) => {
+        const positive = dailyPositive;
+        const negative = this.smoothedDailyNegativeTests[idx];
+        // If there are no negatives (but there are positives), then this is
+        // likely the last data point, else it would have gotten smoothed, and
+        // it's probably a reporting lag issue. So just return null.
+        if (negative !== null && positive !== null && negative > 0) {
+          numTailPositivesWithoutNegatives = 0;
+          return positive / (negative + positive);
+        } else {
+          if (positive !== null && (negative === null || negative === 0)) {
+            numTailPositivesWithoutNegatives += 1;
+          }
+          return null;
         }
-        return null;
-      }
-    });
+      },
+    );
 
     // if we've stopped getting testing data more than a week ago, don't report a metric
     if (numTailPositivesWithoutNegatives > 7 /* one week */) {
@@ -712,6 +654,12 @@ export class Projection {
     let sum = 0;
     let count = 0;
     for (let i = 0; i < data.length; i++) {
+      const oldValue = i < days ? null : data[i - days];
+      if (oldValue !== null) {
+        sum -= oldValue;
+        count--;
+      }
+
       const newValue = data[i];
       if (newValue !== null) {
         sum += newValue;
@@ -719,12 +667,6 @@ export class Projection {
         result.push(sum / count);
       } else {
         result.push(null);
-      }
-
-      const oldValue = i < days ? null : data[i - days];
-      if (oldValue !== null) {
-        sum -= oldValue;
-        count--;
       }
     }
     return result;

@@ -65,9 +65,7 @@ export const CONTACT_TRACING_LEVEL_INFO_MAP: LevelInfoMap = {
 
 export function contactTracingStatusText(projection: Projection) {
   const currentContactTracers = projection.currentContactTracers;
-  const weeklyAverageResult = projection.getWeeklyAverageForDay(
-    projection.dailyPositiveTests,
-  );
+  const weeklyAverageResult = projection.currentDailyAverageCases;
   const currentWeeklyAverage =
     weeklyAverageResult && Math.round(weeklyAverageResult);
   const currentContactTracingMetric = projection.currentContactTracerMetric;
