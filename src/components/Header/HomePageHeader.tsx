@@ -52,7 +52,6 @@ const HomePageHeader = () => {
               extendRight={undefined}
             />
           </SelectorWrapper>
-
           {false && (
             <Disclaimer>
               We also make projections for the country as a whole.{' '}

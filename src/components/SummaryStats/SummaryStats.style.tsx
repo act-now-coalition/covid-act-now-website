@@ -22,10 +22,12 @@ export const SummaryStatsWrapper = styled(Box)<{
     max-width: 1040px;
     flex-direction: column;
     cursor: pointer;
+    margin: 1rem 0;
 
     @media (min-width: 600px) {
       flex-direction: row;
       position: relative;
+      margin: 0 1rem;
     }
   `}
 `;
@@ -61,31 +63,23 @@ export const SummaryStatWrapper = styled(Box)<{
     display: flex;
     flex: 1;
     flex-direction: row;
-    padding: ${props.isHeader ? '2rem 1.25rem 0' : '1.85rem 1rem'};
+    padding: ${props.isHeader ? '1rem 1.25rem' : '1.85rem 1rem'};
     align-items: stretch;
     border-bottom: ${!props.isHeader && `1px solid ${palette.lightGray}`};
-
-    &:last-child {
-      padding-bottom: ${props.isHeader && '2rem'};
-    }
 
     @media (min-width: 600px) {
       border-bottom: 1px solid ${palette.lightGray};
       margin: 0;
-      padding: ${props.isHeader ? '2rem 0 2rem 2rem' : '1.5rem 1.25rem'};
       flex-direction: column;
       align-items: center;
       max-width: 20%;
+      padding: ${props.isHeader ? '2rem 1rem' : '1.5rem 1.25rem'};
+      align-items: ${props.isHeader ? 'center' : 'unset'};
 
       &:not(:last-child) {
         border-right: ${
           props.isHeader ? 'none' : `1px solid ${palette.divider}`
         };
-      }
-
-      &:last-child {
-        padding-right: ${props.isHeader && '1.9rem'};
-        padding-bottom: ${props.isHeader && '2rem'};
       }
     }
   `}
