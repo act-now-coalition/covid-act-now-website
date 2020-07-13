@@ -142,6 +142,7 @@ const ChartCaseDensity: FunctionComponent<{
       </RectClipGroup>
       {regions.map((region, i) => (
         <ZoneAnnotation
+          key={`zone-annotation-${i}`}
           color={region.color}
           name={region.name}
           isActive={activeZone.name === region.name}
