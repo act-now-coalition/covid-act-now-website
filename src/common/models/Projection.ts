@@ -12,6 +12,7 @@ import {
 } from 'api/schema/CovidActNowStatesTimeseries';
 import { ICUHeadroomInfo, calcICUHeadroom } from './ICUHeadroom';
 import { lastValue, indexOfLastValue } from './utils';
+import { assert } from 'common/utils';
 
 /**
  * We truncate (or in the case of charts, switch to a dashed line) the last
@@ -193,7 +194,7 @@ export class Projection {
     );
 
     const cumulativeActualDeaths = this.smoothCumulatives(
-      actualTimeseries.map(row => row?.cumulativeDeaths || null),
+      actualTimeseries.map(row => row && row.cumulativeDeaths),
     );
     this.smoothedDailyDeaths = this.smoothWithRollingAverage(
       this.deltasFromCumulatives(cumulativeActualDeaths),
@@ -227,7 +228,8 @@ export class Projection {
     this.fixZeros(this.cumulativeDeaths);
 
     const shortageStart =
-      summaryWithTimeseries.projections.totalHospitalBeds.shortageStartDate;
+      summaryWithTimeseries.projections?.totalHospitalBeds?.shortageStartDate ||
+      null;
     this.dateOverwhelmed =
       shortageStart === null ? null : new Date(shortageStart);
     if (
@@ -299,6 +301,10 @@ export class Projection {
     }
   }
 
+  get hasHospitalProjections(): boolean {
+    return lastValue(this.hospitalizations) !== null;
+  }
+
   private getColumn(columnName: string): Column[] {
     return this.dates.map((date, idx) => ({
       x: date.getTime(),
@@ -338,22 +344,29 @@ export class Projection {
     summaryWithTimeseries: RegionSummaryWithTimeseries,
     futureDaysToInclude: number,
   ) {
-    const earliestDate = moment.min(
-      summaryWithTimeseries.timeseries.map(row => moment.utc(row.date)),
+    const timeseriesRaw = summaryWithTimeseries.timeseries;
+    const actualsTimeseriesRaw = summaryWithTimeseries.actualsTimeseries;
+    assert(
+      actualsTimeseriesRaw.length > 0,
+      `FIPS ${this.fips} missing actuals timeseries!`,
     );
-    const latestDate = moment.max(
-      summaryWithTimeseries.timeseries.map(row => moment.utc(row.date)),
-    );
+    let earliestDate, latestDate;
+    // If we have projections, we use that time range; else we use the actuals.
+    if (timeseriesRaw.length > 0) {
+      earliestDate = moment.utc(_.first(timeseriesRaw)!.date);
+      latestDate = moment.utc(_.last(timeseriesRaw)!.date);
+    } else {
+      earliestDate = moment.utc(_.first(actualsTimeseriesRaw)!.date);
+      latestDate = moment.utc(_.last(actualsTimeseriesRaw)!.date);
+    }
 
     const timeseries: Array<CANPredictionTimeseriesRow | null> = [];
     const actualsTimeseries: Array<CANActualsTimeseriesRow | null> = [];
     const dates: Date[] = [];
 
-    const timeseriesDictionary = this.makeDateDictionary(
-      summaryWithTimeseries.timeseries,
-    );
+    const timeseriesDictionary = this.makeDateDictionary(timeseriesRaw);
     const actualsTimeseriesDictionary = this.makeDateDictionary(
-      summaryWithTimeseries.actualsTimeseries,
+      actualsTimeseriesRaw,
     );
 
     let currDate = earliestDate.clone();
@@ -375,7 +388,9 @@ export class Projection {
 
     // only keep futureDaysToInclude days ahead of today
     const now = new Date();
-    const days = dates.findIndex(date => date > now) + futureDaysToInclude;
+    const todayIndex = dates.findIndex(date => date > now);
+    const days =
+      todayIndex >= 0 ? todayIndex + futureDaysToInclude : dates.length;
     return {
       timeseries: timeseries.slice(0, days),
       actualTimeseries: actualsTimeseries.slice(0, days),
