@@ -95,6 +95,17 @@ export class Projections {
     };
   }
 
+  hasMetric(metric: Metric): boolean {
+    if (metric === Metric.FUTURE_PROJECTIONS) {
+      return (
+        this.baseline?.hasHospitalProjections &&
+        this.projected.hasHospitalProjections
+      );
+    } else {
+      return this.getMetricValue(metric) !== null;
+    }
+  }
+
   getMetricValue(metric: Metric): number | null {
     if (!this.primary) {
       return null;

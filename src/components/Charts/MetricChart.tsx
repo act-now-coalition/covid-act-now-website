@@ -21,11 +21,7 @@ export default function MetricChart({
   height?: number;
 }) {
   const projection = projections.primary;
-  if (
-    projection === null ||
-    (metric !== Metric.FUTURE_PROJECTIONS &&
-      projections.getMetricValue(metric) === null)
-  ) {
+  if (projection === null || !projections.hasMetric(metric)) {
     return null;
   }
   return (

@@ -19,7 +19,7 @@ import { COLORS } from 'common';
 
 //TODO (chelsi): further unify mapped charts with future projections chart
 //TODO (chelsi): clean out Outcomes component and only pass in what is still used
-//TODO (chelsi): add hasMetric() helper to Projections to get rid of the check for props.data
+//TODO (chelsi): Use Projections.hasMetric() helper to get rid of the check for props.data
 
 // Occasionally we need to disable projections for states due to temporary bugs.
 const FUTURE_PROJECTIONS_DISABLED_STATES: string[] = ['HI'];
@@ -51,6 +51,9 @@ function ChartBlock(props: {
   const futureProjectionsDisabled =
     FUTURE_PROJECTIONS_DISABLED_STATES.includes(props.stateId) &&
     !props.countyId;
+  const haveFutureProjections =
+    !futureProjectionsDisabled &&
+    props.projections.hasMetric(Metric.FUTURE_PROJECTIONS);
 
   return (
     <Fragment>
@@ -95,7 +98,7 @@ function ChartBlock(props: {
             <ChartHeader ref={props.chartRef}>
               Future Hospitalization (both ICU and non-ICU) Projections
             </ChartHeader>
-            {!props.isMobile && !futureProjectionsDisabled && (
+            {!props.isMobile && haveFutureProjections && (
               <ShareButtons
                 chartIdentifier={props.metric}
                 {...props.shareButtonProps}
@@ -103,8 +106,8 @@ function ChartBlock(props: {
             )}
           </ChartHeaderWrapper>
           <ChartLocationName>{projection.locationName}</ChartLocationName>
-          {futureProjectionsDisabled ? (
-            'Future hospitalization projections are not currently available. Check back soon.'
+          {!haveFutureProjections ? (
+            'Future hospitalization projections are not available.'
           ) : (
             <Fragment>
               <ChartDescription>
