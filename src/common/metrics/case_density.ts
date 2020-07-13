@@ -1,7 +1,9 @@
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
 import { Projection, CASE_FATALITY_RATIO } from 'common/models/Projection';
-import { formatInteger, formatPercent } from 'common/utils';
+import { formatInteger, formatPercent, formatDecimal } from 'common/utils';
+import { levelText } from 'common/utils/chart';
+import { getLevel, Metric } from 'common/metric';
 
 export const METRIC_NAME = 'Case Density';
 
@@ -52,5 +54,31 @@ rate). Note that this will not match reported cases in many states, as
 testing is only detecting a small number of actual cases.`;
 
 export const caseDensityStatusText = (projection: Projection) => {
-  return 'Case Density Status Text';
+  const { currentCaseDensityByDeaths, locationName } = projection;
+
+  if (currentCaseDensityByDeaths === null) {
+    return `Not enough case data is available to generate ${METRIC_NAME.toLowerCase()}.`;
+  }
+
+  const level = getLevel(Metric.CASE_DENSITY, currentCaseDensityByDeaths);
+  const dailyCases = formatDecimal(currentCaseDensityByDeaths, 1);
+  // TODO(pablo): Move this calculation to Projection.ts
+  const dailyDeaths = formatDecimal(
+    CASE_FATALITY_RATIO * currentCaseDensityByDeaths,
+    2,
+  );
+
+  const statusText1 = `Over the last week, ${locationName} has reported
+   ${dailyCases} new cases and ${dailyDeaths} new deaths per day
+    for every 100,000 residents.`;
+
+  const statusText2 = levelText(
+    level,
+    `If these rates continue, we estimate less than 1% of ${locationName}’s population will be infected in the next year.`,
+    `If these rates continue, we estimate less than 1-10% of ${locationName}’s population will be infected in the next year.`,
+    `If these rates continue, we estimate less than 10-50% of ${locationName}’s population will be infected in the next year. Caution is warranted.`,
+    `If these rates continue, we estimate less than >50% of ${locationName}’s population will be infected in the next year. Aggressive action urgently needed.`,
+  );
+
+  return `${statusText1} ${statusText2}`;
 };
