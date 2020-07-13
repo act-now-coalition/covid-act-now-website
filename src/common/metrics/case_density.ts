@@ -62,11 +62,7 @@ export const caseDensityStatusText = (projection: Projection) => {
 
   const level = getLevel(Metric.CASE_DENSITY, currentCaseDensityByDeaths);
   const dailyCases = formatDecimal(currentCaseDensityByDeaths, 1);
-  // TODO(pablo): Move this calculation to Projection.ts
-  const dailyDeaths = formatDecimal(
-    CASE_FATALITY_RATIO * currentCaseDensityByDeaths,
-    2,
-  );
+  const dailyDeaths = formatDecimal(projection.currentDailyDeaths || 0, 2);
 
   const statusText1 = `Over the last week, ${locationName} has reported
    ${dailyCases} new cases and ${dailyDeaths} new deaths per day

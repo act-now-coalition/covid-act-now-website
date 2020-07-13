@@ -115,6 +115,7 @@ export class Projection {
   readonly currentCaseDensity: number | null;
   readonly currentCaseDensityByCases: number | null;
   readonly currentCaseDensityByDeaths: number | null;
+  readonly currentDailyDeaths: number | null;
 
   private readonly intervention: string;
   private readonly dates: Date[];
@@ -225,6 +226,10 @@ export class Projection {
     this.currentCaseDensity = lastValue(
       this.caseDensityRange.map(range => range && range.caseDensity),
     );
+    this.currentDailyDeaths =
+      this.currentCaseDensityByDeaths === null
+        ? null
+        : CASE_FATALITY_RATIO * this.currentCaseDensityByDeaths;
 
     this.fixZeros(this.hospitalizations);
     this.fixZeros(this.cumulativeDeaths);
