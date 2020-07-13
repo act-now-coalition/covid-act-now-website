@@ -57,16 +57,44 @@ export type Currentsusceptible = number;
  * Number of people currently exposed
  */
 export type Currentexposed = number;
+export type Countryname = string;
 /**
- * Number of positive test results to date
+ * The state name
  */
-export type Cumulativepositivetests = number;
+export type Statename = string;
 /**
- * Number of negative test results to date
+ * The county name
  */
-export type Cumulativenegativetests = number;
+export type Countyname = string;
+/**
+ * Name of high-level intervention in-place
+ */
+export type Intervention = string;
+/**
+ * Fips for State + County. Five character code
+ */
+export type Fips = string;
+/**
+ * Latitude of point within the state or county
+ */
+export type Lat = number;
+/**
+ * Longitude of point within the state or county
+ */
+export type Long = number;
+/**
+ * Date of latest data
+ */
+export type Lastupdateddate = string;
+/**
+ * Base model for API output.
+ */
+export type AggregateFlattenedTimeseries = PredictionTimeseriesRowWithHeader[];
 
-export interface CANPredictionTimeseriesRow {
+/**
+ * Base model for API output.
+ */
+export interface PredictionTimeseriesRowWithHeader {
   date: Date;
   hospitalBedsRequired: Hospitalbedsrequired;
   hospitalBedCapacity: Hospitalbedcapacity;
@@ -81,6 +109,12 @@ export interface CANPredictionTimeseriesRow {
   currentInfected: Currentinfected;
   currentSusceptible: Currentsusceptible;
   currentExposed: Currentexposed;
-  cumulativePositiveTests: Cumulativepositivetests;
-  cumulativeNegativeTests: Cumulativenegativetests;
+  countryName?: Countryname;
+  stateName: Statename;
+  countyName: Countyname;
+  intervention: Intervention;
+  fips: Fips;
+  lat: Lat;
+  long: Long;
+  lastUpdatedDate: Lastupdateddate;
 }

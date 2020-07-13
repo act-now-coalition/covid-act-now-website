@@ -1,10 +1,15 @@
 import { nonNull } from 'common/utils';
 import {
-  CANActualsTimeseriesRow,
-  CANPredictionTimeseriesRow,
-  _Actuals,
-} from 'api/schema/CovidActNowStatesTimeseries';
-import { indexOfLastValue, hasRecentData, omitDataAfterDate } from './utils';
+  ActualsTimeseriesRow,
+  PredictionTimeseriesRow,
+  Actuals,
+} from 'api/schema/RegionSummaryWithTimeseries';
+import {
+  indexOfLastValue,
+  hasRecentData,
+  omitDataAfterDate,
+  lastValue,
+} from './utils';
 
 // We sometimes need to override the ICU metric for locations due to bad data, etc.
 // TODO(https://trello.com/c/CPcYKmdo/): Review once we have better estimates for
@@ -71,9 +76,9 @@ export function calcICUHeadroom(
   stateName: string,
   fips: string,
   dates: Array<Date>,
-  actualTimeseries: Array<CANActualsTimeseriesRow | null>,
-  timeseries: Array<CANPredictionTimeseriesRow | null>,
-  actuals: _Actuals,
+  actualTimeseries: Array<ActualsTimeseriesRow | null>,
+  timeseries: Array<PredictionTimeseriesRow | null>,
+  actuals: Actuals,
   lastUpdated: Date,
 ): ICUHeadroomInfo | null {
   const overrideInPlace = ICU_HEADROOM_OVERRIDES.indexOf(fips) > -1;
@@ -98,17 +103,22 @@ export function calcICUHeadroom(
     lastUpdated,
   );
 
+  const finalTotalBeds =
+    lastValue(actualTimeseries.map(r => r?.ICUBeds.capacity)) ||
+    actuals.ICUBeds.totalCapacity;
+
   const nonCovidPatientsResult = calcNonCovidICUPatientsSeries(
     stateName,
     dates,
     actualTimeseries,
     timeseries,
     actuals,
+    finalTotalBeds,
   );
 
-  const totalBeds = actuals.ICUBeds.totalCapacity;
   const metricSeries = covidPatientsResult.series.map((covidPatients, i) => {
     const nonCovidPatients = nonCovidPatientsResult.series[i];
+    const totalBeds = actualTimeseries[i]?.ICUBeds.capacity || finalTotalBeds;
     if (
       covidPatients === null ||
       nonCovidPatients === null ||
@@ -129,7 +139,7 @@ export function calcICUHeadroom(
       metricSeries,
       metricValue: nonNull(metricSeries[i]),
       overrideInPlace,
-      totalBeds,
+      totalBeds: finalTotalBeds,
       covidPatients: nonNull(covidPatientsResult.series[i]),
       covidPatientsIsActual: covidPatientsResult.isActual,
       nonCovidPatients: nonNull(nonCovidPatientsResult.series[i]),
@@ -144,8 +154,8 @@ export function calcICUHeadroom(
  */
 function calcCovidICUPatientsSeries(
   dates: Array<Date>,
-  actualTimeseries: Array<CANActualsTimeseriesRow | null>,
-  timeseries: Array<CANPredictionTimeseriesRow | null>,
+  actualTimeseries: Array<ActualsTimeseriesRow | null>,
+  timeseries: Array<PredictionTimeseriesRow | null>,
   lastUpdated: Date,
 ): { isActual: boolean; series: Array<number | null> } {
   const actualCovidPatients = actualTimeseries.map(
@@ -175,9 +185,10 @@ function calcCovidICUPatientsSeries(
 function calcNonCovidICUPatientsSeries(
   stateName: string,
   dates: Array<Date>,
-  actualTimeseries: Array<CANActualsTimeseriesRow | null>,
-  timeseries: Array<CANPredictionTimeseriesRow | null>,
-  actuals: _Actuals,
+  actualTimeseries: Array<ActualsTimeseriesRow | null>,
+  timeseries: Array<PredictionTimeseriesRow | null>,
+  actuals: Actuals,
+  totalBeds: number,
 ): { series: Array<number | null>; method: NonCovidPatientsMethod } {
   const actualTotalPatients = actualTimeseries.map(
     row => row?.ICUBeds.currentUsageTotal || null,
@@ -225,9 +236,7 @@ function calcNonCovidICUPatientsSeries(
       0,
       typicalICUUtilization - decompFactor,
     );
-    const nonCovidPatients = Math.floor(
-      actuals.ICUBeds.totalCapacity * nonCovidUtilization,
-    );
+    const nonCovidPatients = Math.floor(totalBeds * nonCovidUtilization);
     return {
       series: actualTimeseries.map(row => nonCovidPatients),
       method: NonCovidPatientsMethod.ESTIMATED_FROM_TYPICAL_UTILIZATION,

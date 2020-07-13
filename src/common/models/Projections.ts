@@ -95,6 +95,17 @@ export class Projections {
     };
   }
 
+  hasMetric(metric: Metric): boolean {
+    if (metric === Metric.FUTURE_PROJECTIONS) {
+      return (
+        this.baseline?.hasHospitalProjections &&
+        this.projected.hasHospitalProjections
+      );
+    } else {
+      return this.getMetricValue(metric) !== null;
+    }
+  }
+
   getMetricValue(metric: Metric): number | null {
     if (!this.primary) {
       return null;
@@ -108,6 +119,8 @@ export class Projections {
         return this.primary.currentTestPositiveRate;
       case Metric.CONTACT_TRACING:
         return this.primary.currentContactTracerMetric;
+      case Metric.CASE_DENSITY:
+        return this.primary.currentCaseDensity;
       default:
         fail('Cannot get value of metric: ' + metric);
     }
@@ -132,12 +145,14 @@ export class Projections {
     hospitalizations_level: Level;
     test_rate_level: Level;
     contact_tracing_level: Level;
+    case_density: Level;
   } {
     return {
       rt_level: this.getMetricLevel(Metric.CASE_GROWTH_RATE),
       hospitalizations_level: this.getMetricLevel(Metric.HOSPITAL_USAGE),
       test_rate_level: this.getMetricLevel(Metric.POSITIVE_TESTS),
       contact_tracing_level: this.getMetricLevel(Metric.CONTACT_TRACING),
+      case_density: this.getMetricLevel(Metric.CASE_DENSITY),
     };
   }
 
@@ -147,9 +162,20 @@ export class Projections {
       hospitalizations_level,
       test_rate_level,
       contact_tracing_level,
+      case_density,
     } = this.getLevels();
 
-    const levelList = [rt_level, hospitalizations_level, test_rate_level];
+    // If case density is low, it overrides other metrics.
+    if (case_density === Level.LOW) {
+      return Level.LOW;
+    }
+
+    const levelList = [
+      rt_level,
+      hospitalizations_level,
+      test_rate_level,
+      case_density,
+    ];
 
     // contact tracing levels are reversed (i.e low is bad, high is good)
     const reverseList = [contact_tracing_level];

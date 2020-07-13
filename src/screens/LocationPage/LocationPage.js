@@ -5,7 +5,7 @@ import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset
 import { MAP_FILTERS } from './Enums/MapFilterEnums';
 import SearchHeader from 'components/Header/SearchHeader';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
-import MiniMap from 'components/MiniMap/MiniMap';
+import MiniMap from 'components/MiniMap';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ChartsHolder from 'components/LocationPage/ChartsHolder';
 import { LoadingScreen } from './LocationPage.style';

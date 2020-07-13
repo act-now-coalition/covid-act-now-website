@@ -4,53 +4,8 @@
  * DO NOT MODIFY IT BY HAND. Run 'yarn update-api-types' to regenerate.
  */
 
-export type Countryname = string;
 /**
- * Fips for State + County. Five character code
- */
-export type Fips = string;
-/**
- * Latitude of point within the state or county
- */
-export type Lat = number;
-/**
- * Longitude of point within the state or county
- */
-export type Long = number;
-/**
- * Date of latest data
- */
-export type Lastupdateddate = string;
-/**
- * Projection about total hospital bed utilization
- */
-export type Totalhospitalbeds = _ResourceUsageProjection;
-/**
- * Shortfall of resource needed at the peek utilization
- */
-export type Peakshortfall = number;
-/**
- * Date of peak resource utilization
- */
-export type Peakdate = string;
-/**
- * Date when resource shortage begins
- */
-export type Shortagestartdate = string;
-/**
- * Projection about ICU hospital bed utilization
- */
-export type Icubeds = _ResourceUsageProjection;
-/**
- * Historical or Inferred Rt
- */
-export type Rt = number;
-/**
- * Rt standard deviation
- */
-export type Rtci90 = number;
-/**
- * Total population in geographic area [*deprecated*: refer to summary for this]
+ * Total population in geographic region [*deprecated*: refer to summary for this]
  */
 export type Population = number;
 /**
@@ -97,44 +52,27 @@ export type Typicalusagerate = number;
  * # of Contact Tracers
  */
 export type Contacttracers = number;
-/**
- * Total Population in geographic area.
- */
-export type Population1 = number;
+export type Date = string;
 
-export interface CovidActNowAreaSummary {
-  countryName?: Countryname;
-  fips: Fips;
-  lat: Lat;
-  long: Long;
-  lastUpdatedDate: Lastupdateddate;
-  projections: _Projections;
-  actuals: _Actuals;
-  population: Population1;
-}
-export interface _Projections {
-  totalHospitalBeds: Totalhospitalbeds;
-  ICUBeds: Icubeds;
-  Rt: Rt;
-  RtCI90: Rtci90;
-}
-export interface _ResourceUsageProjection {
-  peakShortfall: Peakshortfall;
-  peakDate: Peakdate;
-  shortageStartDate: Shortagestartdate;
-}
-export interface _Actuals {
+/**
+ * Base model for API output.
+ */
+export interface ActualsTimeseriesRow {
   population: Population;
   intervention: Intervention;
   cumulativeConfirmedCases: Cumulativeconfirmedcases;
   cumulativePositiveTests: Cumulativepositivetests;
   cumulativeNegativeTests: Cumulativenegativetests;
   cumulativeDeaths: Cumulativedeaths;
-  hospitalBeds: _ResourceUtilization;
-  ICUBeds: _ResourceUtilization;
+  hospitalBeds: ResourceUtilization;
+  ICUBeds: ResourceUtilization;
   contactTracers?: Contacttracers;
+  date: Date;
 }
-export interface _ResourceUtilization {
+/**
+ * Base model for API output.
+ */
+export interface ResourceUtilization {
   capacity: Capacity;
   totalCapacity: Totalcapacity;
   currentUsageCovid: Currentusagecovid;

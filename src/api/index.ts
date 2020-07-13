@@ -5,17 +5,10 @@
 
 import DataUrlJson from 'assets/data/data_url.json';
 import {
-  CovidActNowStateTimeseries,
-  Timeseries as CountyTimeseries,
-  Actualstimeseries as CountyActualTimeseries,
-  CovidActNowStatesTimeseries,
-} from './schema/CovidActNowStatesTimeseries';
-import {
-  CovidActNowCountyTimeseries,
-  Timeseries as StateTimeseries,
-  Actualstimeseries as StateActualTimeseries,
-  CovidActNowCountiesTimeseries,
-} from './schema/CovidActNowCountiesTimeseries';
+  RegionSummaryWithTimeseries,
+  Actualstimeseries,
+} from './schema/RegionSummaryWithTimeseries';
+import { AggregateRegionSummaryWithTimeseries } from './schema/AggregateRegionSummaryWithTimeseries';
 import { INTERVENTIONS, REVERSED_STATES } from 'common';
 import {
   RegionAggregateDescriptor,
@@ -39,16 +32,8 @@ const ApiInterventions: { [intervention: string]: string } = {
 // consolidate these different intervention types.
 type InterventionKey = keyof typeof INTERVENTIONS;
 
-/** Represents timeseries for any kind of region. */
-export type Timeseries = CountyTimeseries | StateTimeseries;
-
 /** Represents the actuals timeseries for any kind of region */
-export type ActualsTimeseries = CountyActualTimeseries | StateActualTimeseries;
-
-/** Represents summary+timeseries for any kind of region. */
-export type RegionSummaryWithTimeseries =
-  | CovidActNowCountyTimeseries
-  | CovidActNowStateTimeseries;
+export type ActualsTimeseries = Actualstimeseries;
 
 /** A mapping of interventions to the corresponding region summary+timeseries data. */
 export type RegionSummaryWithTimeseriesMap = {
@@ -59,11 +44,6 @@ export type RegionSummaryWithTimeseriesMap = {
    */
   [intervention: string]: RegionSummaryWithTimeseries | null;
 };
-
-/** Represents summary+timeseries data for all states or all counties. */
-type AggregateSummaryWithTimeseries =
-  | CovidActNowStatesTimeseries
-  | CovidActNowCountiesTimeseries;
 
 export interface SnapshotVersion {
   timestamp: string;
@@ -92,7 +72,7 @@ export class Api {
     await Promise.all(
       Object.keys(ApiInterventions).map(async intervention => {
         const apiIntervention = ApiInterventions[intervention];
-        let all = await this.fetchApiJson<AggregateSummaryWithTimeseries>(
+        let all = await this.fetchApiJson<AggregateRegionSummaryWithTimeseries>(
           `us/${regionAggregate}.${apiIntervention}.timeseries.json`,
         );
         assert(all != null, 'Failed to load timeseries');
@@ -138,11 +118,11 @@ export class Api {
   ): Promise<RegionSummaryWithTimeseries | null> {
     const apiIntervention = ApiInterventions[intervention];
     if (region.isState()) {
-      return await this.fetchApiJson<CovidActNowStateTimeseries>(
+      return await this.fetchApiJson<RegionSummaryWithTimeseries>(
         `us/states/${region.stateId}.${apiIntervention}.timeseries.json`,
       );
     } else if (region.isCounty()) {
-      return await this.fetchApiJson<CovidActNowStateTimeseries>(
+      return await this.fetchApiJson<RegionSummaryWithTimeseries>(
         `us/counties/${region.countyFipsId}.${apiIntervention}.timeseries.json`,
       );
     } else {
