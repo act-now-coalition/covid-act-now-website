@@ -4,11 +4,12 @@ import styled from 'styled-components';
  * The "homepage" share card isn't as tall as the location share card, so we
  * have to adapt the css styles.
  */
+
 export const ShareCardWrapper = styled.div<{ isHomePage?: boolean }>`
   margin: 50px auto;
   width: 400px;
   height: 262px;
-  transform: scale(${props => (props.isHomePage ? 2.25 : 1.75)});
+  transform: scale(1.75);
   transform-origin: top center;
 `;
 
