@@ -29,7 +29,7 @@ export const CASE_DENSITY_LEVEL_INFO_MAP: LevelInfoMap = {
   },
   [Level.CRITICAL]: {
     level: Level.CRITICAL,
-    upperLimit: 100,
+    upperLimit: Infinity,
     name: 'Critical',
     color: COLOR_MAP.RED.BASE,
     detail: () => 'Critical',

@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 import { isDate } from 'lodash';
 import { min as d3min, max as d3max } from 'd3-array';
+import { curveMonotoneX } from '@vx/curve';
 import { GridRows } from '@vx/grid';
 import { scaleLinear, scaleTime } from '@vx/scale';
 import { ParentSize } from '@vx/responsive';
@@ -38,6 +39,7 @@ const hasData = (d: any) => isDate(getDate(d)) && Number.isFinite(getY(d));
 const ChartCaseDensity: FunctionComponent<{
   columnData: Column[];
   zones: LevelInfoMap;
+  capY?: number;
   width: number;
   height: number;
   marginTop?: number;
@@ -47,6 +49,7 @@ const ChartCaseDensity: FunctionComponent<{
 }> = ({
   columnData,
   zones,
+  capY = 100,
   width,
   height,
   marginTop = 5,
@@ -70,7 +73,7 @@ const ChartCaseDensity: FunctionComponent<{
 
   const yDataMax = d3max(data, getY) || 100;
   const yAxisLimits = getAxisLimits(0, yDataMax, zones);
-  const [yAxisMin, yAxisMax] = [-9, yAxisLimits[1]];
+  const [yAxisMin, yAxisMax] = [-9, Math.min(yAxisLimits[1], capY)];
 
   const yScale = scaleLinear({
     domain: [yAxisMin, yAxisMax],
@@ -78,7 +81,7 @@ const ChartCaseDensity: FunctionComponent<{
   });
 
   const getXCoord = (p: Point) => xScale(getDate(p));
-  const getYCoord = (p: Point) => yScale(getY(p));
+  const getYCoord = (p: Point) => yScale(Math.min(getY(p), capY));
 
   const regions = getChartRegions(yAxisMin, yAxisMax, zones);
   const lastPoint = last(data);
@@ -120,7 +123,7 @@ const ChartCaseDensity: FunctionComponent<{
       marginLeft={marginLeft}
       marginRight={marginRight}
     >
-      <RectClipGroup width={chartWidth} height={chartHeight} topPadding={0}>
+      <RectClipGroup width={chartWidth} height={chartHeight} topPadding={5}>
         <LinePathRegion
           data={data}
           x={getXCoord}
@@ -128,6 +131,7 @@ const ChartCaseDensity: FunctionComponent<{
           regions={regions}
           width={chartWidth}
           yScale={yScale}
+          curve={curveMonotoneX}
         />
         <Style.LineGrid>
           <GridRows width={chartWidth} scale={yScale} tickValues={yTicks} />
