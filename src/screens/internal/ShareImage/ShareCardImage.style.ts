@@ -8,7 +8,7 @@ export const ShareCardWrapper = styled.div<{ isHomePage?: boolean }>`
   margin: 50px auto;
   width: 400px;
   height: 262px;
-  transform: scale(${props => (props.isHomePage ? 2.25 : 1.75)});
+  transform: scale(${props => (props.isHomePage ? 2.25 : 1.55)});
   transform-origin: top center;
 `;
 
