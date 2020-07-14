@@ -1,12 +1,11 @@
 import React from 'react';
-import moment from 'moment';
 import { isDate } from 'lodash';
 import { min as d3min, max as d3max } from 'd3-array';
 import { curveLinear } from '@vx/curve';
 import { GridRows } from '@vx/grid';
 import { Group } from '@vx/group';
 import { ParentSize } from '@vx/responsive';
-import { scaleLinear, scaleTime } from '@vx/scale';
+import { scaleLinear } from '@vx/scale';
 import { Column } from 'common/models/Projection';
 import { assert, formatUtcDate, formatPercent } from 'common/utils';
 import { LevelInfoMap } from 'common/level';
@@ -25,6 +24,7 @@ import {
   last,
   getAxisLimits,
   getZoneByValue,
+  getZonesTimeScale,
 } from './utils';
 
 type Point = Omit<Column, 'y'> & {
@@ -67,13 +67,10 @@ const ChartZones = ({
   const dates: Date[] = columnData.map(getDate).filter(isDate);
 
   const minDate = d3min(dates);
-  const maxDate = moment().add(2, 'weeks').toDate();
+  const maxDate = new Date();
   assert(minDate !== undefined, 'Data must not be empty');
 
-  const xScale = scaleTime({
-    domain: [minDate, maxDate],
-    range: [0, chartWidth],
-  });
+  const xScale = getZonesTimeScale(minDate, maxDate, 0, chartWidth);
 
   const yDataMin = 0;
   const yDataMax = d3max(data, getY);
@@ -147,7 +144,7 @@ const ChartZones = ({
               color={region.color}
               name={region.name}
               isActive={lastPointZone.name === region.name}
-              x={xScale(maxDate) - 10}
+              x={chartWidth - 10}
               y={yScale(0.5 * (region.valueFrom + region.valueTo))}
             />
           </Group>
@@ -158,8 +155,8 @@ const ChartZones = ({
       </Style.LineGrid>
       <Style.TextAnnotation>
         <BoxedAnnotation
-          x={getXCoord(lastPoint) + 30}
-          y={getYCoord(lastPoint)}
+          x={getXCoord(lastPoint)}
+          y={getYCoord(lastPoint) - 15}
           text={getPointText(lastPointY)}
         />
       </Style.TextAnnotation>
