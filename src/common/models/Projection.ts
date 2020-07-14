@@ -227,9 +227,9 @@ export class Projection {
       this.caseDensityRange.map(range => range && range.caseDensity),
     );
     this.currentDailyDeaths =
-      this.currentCaseDensityByDeaths === null
+      this.currentCaseDensity === null
         ? null
-        : CASE_FATALITY_RATIO * this.currentCaseDensityByDeaths;
+        : CASE_FATALITY_RATIO * this.currentCaseDensity;
 
     this.fixZeros(this.hospitalizations);
     this.fixZeros(this.cumulativeDeaths);

@@ -54,19 +54,19 @@ rate). Note that this will not match reported cases in many states, as
 testing is only detecting a small number of actual cases.`;
 
 export const caseDensityStatusText = (projection: Projection) => {
-  const { currentCaseDensityByDeaths, locationName } = projection;
+  const { currentCaseDensity, currentDailyDeaths, locationName } = projection;
 
-  if (currentCaseDensityByDeaths === null) {
+  if (currentCaseDensity === null || currentDailyDeaths === null) {
     return `Not enough case data is available to generate ${METRIC_NAME.toLowerCase()}.`;
   }
 
-  const level = getLevel(Metric.CASE_DENSITY, currentCaseDensityByDeaths);
-  const dailyCases = formatDecimal(currentCaseDensityByDeaths, 1);
-  const dailyDeaths = formatDecimal(projection.currentDailyDeaths || 0, 2);
+  const level = getLevel(Metric.CASE_DENSITY, currentCaseDensity);
+  const dailyCases = formatDecimal(currentCaseDensity, 1);
+  const dailyDeaths = formatDecimal(currentDailyDeaths, 2);
 
   const statusText1 = `Over the last week, ${locationName} has reported
-   ${dailyCases} new cases and ${dailyDeaths} new deaths per day
-    for every 100,000 residents.`;
+   ${dailyCases} new cases and ${dailyDeaths} new deaths per day for every
+    100,000 residents.`;
 
   const statusText2 = levelText(
     level,
