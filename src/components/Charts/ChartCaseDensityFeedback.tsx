@@ -76,7 +76,7 @@ const ChartCaseDensity: FunctionComponent<{
 
   const yDataMax = d3max(data1, getY) || 100;
   const yAxisLimits = getAxisLimits(0, yDataMax, zones);
-  const [yAxisMin, yAxisMax] = [-9, Math.min(yAxisLimits[1], capY)];
+  const [yAxisMin, yAxisMax] = [-9, yAxisLimits[1]];
 
   const yScale = scaleLinear({
     domain: [yAxisMin, yAxisMax],
@@ -84,7 +84,7 @@ const ChartCaseDensity: FunctionComponent<{
   });
 
   const getXCoord = (p: Point) => xScale(getDate(p));
-  const getYCoord = (p: Point) => yScale(Math.min(getY(p), capY));
+  const getYCoord = (p: Point) => yScale(getY(p));
 
   const regions = getChartRegions(yAxisMin, yAxisMax, zones);
   const lastPoint = last(data1);
