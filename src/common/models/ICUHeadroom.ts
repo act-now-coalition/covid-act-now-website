@@ -1,9 +1,9 @@
 import { nonNull } from 'common/utils';
 import {
-  CANActualsTimeseriesRow,
-  CANPredictionTimeseriesRow,
-  _Actuals,
-} from 'api/schema/CovidActNowStatesTimeseries';
+  ActualsTimeseriesRow,
+  PredictionTimeseriesRow,
+  Actuals,
+} from 'api/schema/RegionSummaryWithTimeseries';
 import {
   indexOfLastValue,
   hasRecentData,
@@ -76,9 +76,9 @@ export function calcICUHeadroom(
   stateName: string,
   fips: string,
   dates: Array<Date>,
-  actualTimeseries: Array<CANActualsTimeseriesRow | null>,
-  timeseries: Array<CANPredictionTimeseriesRow | null>,
-  actuals: _Actuals,
+  actualTimeseries: Array<ActualsTimeseriesRow | null>,
+  timeseries: Array<PredictionTimeseriesRow | null>,
+  actuals: Actuals,
   lastUpdated: Date,
 ): ICUHeadroomInfo | null {
   const overrideInPlace = ICU_HEADROOM_OVERRIDES.indexOf(fips) > -1;
@@ -154,8 +154,8 @@ export function calcICUHeadroom(
  */
 function calcCovidICUPatientsSeries(
   dates: Array<Date>,
-  actualTimeseries: Array<CANActualsTimeseriesRow | null>,
-  timeseries: Array<CANPredictionTimeseriesRow | null>,
+  actualTimeseries: Array<ActualsTimeseriesRow | null>,
+  timeseries: Array<PredictionTimeseriesRow | null>,
   lastUpdated: Date,
 ): { isActual: boolean; series: Array<number | null> } {
   const actualCovidPatients = actualTimeseries.map(
@@ -185,9 +185,9 @@ function calcCovidICUPatientsSeries(
 function calcNonCovidICUPatientsSeries(
   stateName: string,
   dates: Array<Date>,
-  actualTimeseries: Array<CANActualsTimeseriesRow | null>,
-  timeseries: Array<CANPredictionTimeseriesRow | null>,
-  actuals: _Actuals,
+  actualTimeseries: Array<ActualsTimeseriesRow | null>,
+  timeseries: Array<PredictionTimeseriesRow | null>,
+  actuals: Actuals,
   totalBeds: number,
 ): { series: Array<number | null>; method: NonCovidPatientsMethod } {
   const actualTotalPatients = actualTimeseries.map(
