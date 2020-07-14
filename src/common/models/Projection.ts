@@ -458,7 +458,7 @@ export class Projection {
 
       const caseDensityByCases = this.caseDensityByCases[i];
       const caseDensity = _.max(
-        [caseDensityByDeaths, caseDensityByCases].filter(cd => cd !== null),
+        [caseDensityByCases, caseDensityByCases].filter(cd => cd !== null),
       );
 
       return caseDensity == null
