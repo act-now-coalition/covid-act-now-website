@@ -1,14 +1,15 @@
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
+import { COLOR_MAP } from 'common/colors';
 
 export const Wrapper = styled.div`
   margin: 0;
   padding: 1.5rem 1rem;
-  background-color: #f2f2f2;
+  background-color: white;
   text-align: center;
 
   @media (min-width: 600px) {
-    padding: 4rem 2rem 3rem;
+    padding: 4rem 2rem 2rem;
   }
 `;
 
@@ -17,19 +18,18 @@ export const Content = styled.div`
   margin: 0 auto;
 `;
 
-export const HighlightColor = styled.span`
-  color: #00d07d;
-`;
-
 export const HeaderTitle = styled(Typography)<{ component?: string }>`
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 700;
   line-height: 2.3rem;
-  margin-bottom: 0.5rem;
+  color: black;
+  max-width: 300px;
+  margin: 0 auto 1rem;
 
-  @media (max-width: 599px) {
-    font-size: 1.75rem;
-    line-height: 2rem;
+  @media (min-width: 600px) {
+    font-size: 3rem;
+    line-height: 1.2;
+    max-width: unset;
   }
 `;
 
@@ -37,22 +37,38 @@ export const HeaderSubCopy = styled(Typography)<{ component?: string }>`
   font-size: 1rem;
   line-height: 1.6rem;
   margin: 0 auto 1rem;
-  max-width: 560px;
   color: rgba(0, 0, 0, 0.7);
+  max-width: 300px;
 
   a {
     color: inherit;
   }
 
   @media (min-width: 600px) {
-    margin-bottom: 2rem;
+    margin-bottom: 0;
+    max-width: 560px;
   }
+`;
+
+export const ClickableCopy = styled.span`
+  color: ${COLOR_MAP.BLUE};
+  text-decoration: underline;
+  cursor: pointer;
 `;
 
 export const HeaderSubCopyItem = styled.span<{ hideOnMobile?: boolean }>`
   display: ${props => (props.hideOnMobile ? 'none' : 'unset')};
+  font-family: Roboto;
+  color: #4f4f4f;
+
   @media (min-width: 600px) {
     display: unset;
+    font-size: 19px;
+    line-height: 140%;
+  }
+
+  strong {
+    color: black;
   }
 `;
 
@@ -68,4 +84,13 @@ export const Disclaimer = styled.div`
 export const SelectorWrapper = styled.div`
   margin-bottom: 0rem;
   position: relative;
+
+  display: flex;
+  flex: 1;
+  margin: 0 1rem 1rem;
+
+  @media (min-width: 600px) {
+    margin: 0;
+    max-width: 300px;
+  }
 `;
