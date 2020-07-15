@@ -15,7 +15,7 @@ export const AxisBottom = (props: SharedAxisProps<Date>) => {
   const [dateStart, dateStop] = props.scale.domain();
   const [minPx, maxPx] = props.scale.range() as number[];
   const isSmallDevice = maxPx - minPx < 600;
-  const dateFormat = isSmallDevice ? 'MMMM' : 'MMM DD';
+  const dateFormat = isSmallDevice ? 'MMM' : 'MMM DD';
 
   const tickValues = isSmallDevice
     ? timeMonth.range(dateStart, dateStop, 1)

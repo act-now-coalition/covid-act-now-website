@@ -1,12 +1,11 @@
 import React from 'react';
-import moment from 'moment';
 import { isDate } from 'lodash';
 import { min as d3min, max as d3max } from 'd3-array';
 import { curveNatural } from '@vx/curve';
 import { GridRows } from '@vx/grid';
 import { Group } from '@vx/group';
 import { ParentSize } from '@vx/responsive';
-import { scaleLinear, scaleTime } from '@vx/scale';
+import { scaleLinear } from '@vx/scale';
 import { Area } from '@vx/shape';
 import { Column, RtRange, RT_TRUNCATION_DAYS } from 'common/models/Projection';
 import { CASE_GROWTH_RATE_LEVEL_INFO_MAP as zones } from 'common/metrics/case_growth';
@@ -27,6 +26,7 @@ import {
   getZoneByValue,
   last,
   getAxisLimits,
+  getZonesTimeScale,
 } from './utils';
 
 type PointRt = Omit<Column, 'y'> & {
@@ -68,16 +68,13 @@ const ChartRt = ({
   const dates: Date[] = columnData.map(getDate).filter(isDate);
 
   const minDate = d3min(dates) || new Date('2020-01-01');
-  const maxDate = moment().add(2, 'weeks').toDate();
+  const currDate = new Date();
 
   const yDataMin = 0;
   const yDataMax = d3max(data, getRt) || 1;
   const [yAxisMin, yAxisMax] = getAxisLimits(yDataMin, yDataMax, zones);
 
-  const xScale = scaleTime({
-    domain: [minDate, maxDate],
-    range: [0, chartWidth],
-  });
+  const xScale = getZonesTimeScale(minDate, currDate, 0, chartWidth);
 
   const yScale = scaleLinear({
     domain: [yAxisMin, yAxisMax],
@@ -180,7 +177,7 @@ const ChartRt = ({
               color={region.color}
               name={region.name}
               isActive={truncationZone.name === region.name}
-              x={xScale(maxDate) - 10}
+              x={chartWidth - 10}
               y={yScale(0.5 * (region.valueFrom + region.valueTo))}
             />
           </Group>
