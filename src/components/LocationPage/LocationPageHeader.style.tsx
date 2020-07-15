@@ -7,14 +7,14 @@ import { COLOR_MAP } from 'common/colors';
 import { Level } from 'common/level';
 import { LEVEL_COLOR } from 'common/colors';
 
-export const ColoredHeaderBanner = styled(Box)<{ hasStats?: Boolean }>`
+export const ColoredHeaderBanner = styled(Box)`
   display: flex;
   flex-direction: column;
   height: 400px;
   background-color: ${props => props.bgcolor || COLORS.LIGHTGRAY};
 
   @media (min-width: 600px) {
-    height: ${({ hasStats }) => (!hasStats ? '318px' : '380px')};
+    height: 250px;
   }
 `;
 
@@ -35,7 +35,6 @@ export const Wrapper = styled(Box)<{
     justify-content: space-around;
     background-color: unset;
     box-shadow: none;
-    // max-width: 1040px;
     max-width: 1000px;
     flex-direction: column;
     cursor: pointer;
@@ -51,7 +50,6 @@ export const Wrapper = styled(Box)<{
       margin: ${props.headerTopMargin}px auto ${props.headerBottomMargin}px;
     }
     @media (min-width: 1350px) {
-      // margin: ${props.headerTopMargin}px 330px ${props.headerBottomMargin}px auto;
       margin: ${props.headerTopMargin}px 350px ${props.headerBottomMargin}px auto;
     }
 
@@ -128,14 +126,12 @@ export const HeaderSubtitle = styled(Typography)`
   }
 `;
 
-export const FooterContainer = styled(Box)<{
-  isVerifiedState?: Boolean;
-}>`
-  margin: ${({ isVerifiedState }) =>
-    isVerifiedState ? '.4rem .2rem 1rem .2rem;' : '1rem .2rem 1rem .2rem'};
+export const FooterContainer = styled(Box)`
+  margin: 0.8rem 0.3rem 0.8rem;
 
   p {
     padding: 0;
+    max-width: 600px;
   }
 
   svg {
@@ -144,11 +140,11 @@ export const FooterContainer = styled(Box)<{
   }
 
   @media (min-width: 600px) {
-    max-width: 600px;
     width: 100%;
-    margin: ${({ isVerifiedState }) =>
-      isVerifiedState ? '.4rem 0 0 .2rem' : '.4rem 0 0 .2rem'};
+    margin: 1.5rem 0 0.5rem 0.2rem;
     cursor: auto;
+    max-width: 900px;
+    align-self: center;
 
     a {
       cursor: pointer;
@@ -157,6 +153,14 @@ export const FooterContainer = styled(Box)<{
     svg {
       transform: translateY(0.35rem);
     }
+  }
+
+  @media (min-width: 1350px) {
+    align-self: flex-start;
+  }
+
+  @media (min-width: 1750px) {
+    align-self: center;
   }
 `;
 
@@ -209,15 +213,30 @@ export const HeaderButton = styled(Box)`
 
   &:first-child {
     color: ${COLOR_MAP.BLUE};
-    margin-right: 1.25rem;
+    margin-right: 0.5rem;
+
+    &:hover {
+      border: 1px solid ${COLOR_MAP.BLUE};
+    }
   }
 
   &:last-child {
     color: ${COLOR_MAP.RED.BASE};
+
+    &:hover {
+      border: 1px solid ${COLOR_MAP.RED.BASE};
+    }
   }
 
   svg {
     margin-right: 6px;
+  }
+
+  // iphone 6/7/8/x and up:
+  @media (min-width: 375px) {
+    &:first-child {
+      margin-right: 1.2rem;
+    }
   }
 
   @media (min-width: 600px) {
@@ -308,6 +327,7 @@ export const Copy = styled(Typography)<{ isUpdateCopy?: Boolean }>`
 
   @media (min-width: 600px) {
     font-size: 13px;
+    max-width: 440px;
   }
 `;
 

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Typography, Box } from '@material-ui/core';
 import { COLOR_MAP } from 'common/colors';
 
@@ -38,7 +38,7 @@ export const AnnouncementIntro = styled(Typography)`
 `;
 
 export const Date = styled(Typography)`
-  font-family: Roboto;
+  font-family: Source Code Pro;
   font-size: 13px;
   line-height: 16px;
   letter-spacing: 0.01em;
@@ -52,33 +52,48 @@ export const AnnouncementBodyCopy = styled(Typography)`
   font-size: 14px;
   line-height: 16px;
   letter-spacing: 0.01em;
-  margin-bottom: 2.5rem;
-  color: #4f4f4f;
+  margin-bottom: 1.5rem;
+  color: #828282;
   line-height: 140%;
+
+  @media (min-width: 600px) {
+    margin-bottom: 2.5rem;
+  }
 `;
 
 export const ButtonsContainer = styled(Box)`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 
   @media (min-width: 600px) {
     flex-direction: row;
+    align-items: center;
   }
 `;
 
-export const ReadMoreButton = styled.a`
-  border-radius: 4px;
-  background-color: #e0e0e0;
-  color: white;
+const SharedButtonStyles = css`
   font-family: Roboto;
-  font-weight: bold;
-  font-size: 16px;
-  text-align: center;
-  padding: 1rem 2rem;
+  font-size: 14px;
+  line-height: 1.4;
+  color: ${COLOR_MAP.BLUE};
+  display: flex;
+`;
+
+export const ReadMoreButton = styled.a`
+  ${SharedButtonStyles}
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+  font-weight: 500;
+  justify-content: center;
+  padding: 0.75rem 0;
   width: 160px;
   margin-bottom: 1.5rem;
   text-decoration: none;
+
+  &:hover {
+    border: 1px solid ${COLOR_MAP.BLUE};
+  }
 
   @media (min-width: 600px) {
     margin-bottom: 0;
@@ -86,13 +101,9 @@ export const ReadMoreButton = styled.a`
 `;
 
 export const ViewAllLink = styled.a`
-  font-family: Roboto;
-  font-size: 15px;
-  color: ${COLOR_MAP.BLUE};
-  display: flex;
-  align-self: center;
+  ${SharedButtonStyles}
 
   @media (min-width: 600px) {
-    margin-left: 1.75rem;
+    margin-left: 2rem;
   }
 `;

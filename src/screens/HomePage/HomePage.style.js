@@ -7,7 +7,7 @@ export const SearchBarThermometerWrapper = styled(Box)`
   justify-content: center;
 
   @media (min-width: 600px) {
-    margin-bottom: -2.5rem;
+    margin: 0 1rem -2rem;
   }
 `;
 
@@ -24,7 +24,7 @@ export const PartnerHeader = styled(Typography)`
   font-size: 1rem;
   padding-top: 2.5rem;
   margin-top: 2.5rem;
-  color: rgba(0, 0, 0, 0.7);
+  color: #828282;
   letter-spacing: 0.08em;
   border-top: 1px solid ${palette.lightGray};
   font-weight: 500;
@@ -36,7 +36,7 @@ export const PartnerHeader = styled(Typography)`
 export const FeaturedHeader = styled(Typography)`
   font-size: 1rem;
   margin-top: 4rem;
-  color: rgba(0, 0, 0, 0.7);
+  color: #828282;
   letter-spacing: 0.08em;
   font-weight: 500;
   text-align: center;

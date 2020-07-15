@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 export const USMapWrapper = styled.div`
   position: relative;
   padding-bottom: 70%;
-  top: ${props => (props.condensed ? '-16px' : '-45px')};
+  top: ${props => (props.condensed ? '-40px' : '-45px')};
   width: 100%;
 
   @media (max-width: 600px) {
@@ -37,6 +37,7 @@ export const MapInstructions = styled(Typography)`
   text-align: center;
   margin: 1rem 1rem 2.5rem;
   font-size: 0.875rem;
+  color: #828282;
 `;
 
 export const MobileLineBreak = styled.br`

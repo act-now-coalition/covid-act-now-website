@@ -101,7 +101,7 @@ export const CriterionDescription = styled(Typography)`
   font-family: Roboto;
   font-size: 14px;
   line-height: 140%;
-  color: #4f4f4f;
+  color: #828282;
   margin-bottom: 0.25rem;
 
   @media (min-width: 600px) {

@@ -132,7 +132,7 @@ const SummaryStat = ({
         >
           {getMetricName(chartType)}{' '}
         </StatNameText>
-        {!condensed && !isMobile && !statusUnknown && (
+        {!condensed && !isMobile && (
           <StatValue
             value={statValue}
             iconColor={levelInfo.color}
@@ -152,7 +152,7 @@ const SummaryStat = ({
           />
         )}
       </StatTextWrapper>
-      {!condensed && isMobile && !statusUnknown && (
+      {!condensed && isMobile && (
         <StatValueWrapper condensed={condensed}>
           <StatValue
             value={statValue}

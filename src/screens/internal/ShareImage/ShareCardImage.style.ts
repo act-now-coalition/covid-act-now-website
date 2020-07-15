@@ -5,15 +5,15 @@ import styled from 'styled-components';
  * have to adapt the css styles.
  */
 export const ShareCardWrapper = styled.div<{ isHomePage?: boolean }>`
-  margin: 50px auto;
+  margin: ${props => (props.isHomePage ? '50px auto' : '35px auto')};
   width: 400px;
   height: 262px;
   transform: scale(${props => (props.isHomePage ? 2.25 : 1.75)});
   transform-origin: top center;
 `;
 
-export const TitleWrapper = styled.div`
-  margin-top: 68px;
+export const TitleWrapper = styled.div<{ isHomePage?: Boolean }>`
+  margin-top: ${props => (props.isHomePage ? '68px' : '35px')};
   height: 48px;
   line-height: 48px;
   font-size: 48px;

@@ -87,8 +87,9 @@ const LocationPageHeader = (props: {
     (val: number | null) => !isNull(val),
   ).length;
 
-  const headerTopMargin = !hasStats ? -270 : -330;
-  const headerBottomMargin = !hasStats ? 100 : 0;
+  //TODO (chelsi): get rid of this use of 'magic' numbers
+  const headerTopMargin = !hasStats ? -202 : -218;
+  const headerBottomMargin = !hasStats ? 0 : 0;
 
   const locationName =
     props.projections.countyName || props.projections.stateName;
@@ -135,7 +136,7 @@ const LocationPageHeader = (props: {
 
   return (
     <Fragment>
-      <ColoredHeaderBanner bgcolor={fillColor} hasStats={hasStats} />
+      <ColoredHeaderBanner bgcolor={fillColor} />
       <Wrapper
         condensed={props.condensed}
         headerTopMargin={headerTopMargin}
@@ -197,7 +198,7 @@ const LocationPageHeader = (props: {
             isHeader={true}
           />
         </TopContainer>
-        <FooterContainer isVerifiedState={isVerifiedState}>
+        <FooterContainer>
           {props.projections.isCounty && !isEmbed && (
             <HeaderSubCopy>
               <span>Updated {lastUpdatedDateString} · </span>
