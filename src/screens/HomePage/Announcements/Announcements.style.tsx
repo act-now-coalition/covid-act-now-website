@@ -16,7 +16,7 @@ export const AnnouncementsSectionHeader = styled(Typography)`
   font-size: 14px;
   letter-spacing: 0.01em;
   text-transform: uppercase;
-  color: #828282;
+  color: ${COLOR_MAP.GRAYBODYCOPY};
   margin-bottom: 0.75rem;
 `;
 
@@ -38,7 +38,7 @@ export const Date = styled(Typography)`
   line-height: 16px;
   letter-spacing: 0.01em;
   text-transform: uppercase;
-  color: #828282;
+  color: ${COLOR_MAP.GRAYBODYCOPY};
   margin-bottom: 1rem;
 `;
 
@@ -48,7 +48,7 @@ export const AnnouncementBodyCopy = styled(Typography)`
   line-height: 160%;
   letter-spacing: 0.01em;
   margin-bottom: 1.5rem;
-  color: #828282;
+  color: ${COLOR_MAP.GRAYBODYCOPY};
 `;
 
 export const ButtonsContainer = styled(Box)`

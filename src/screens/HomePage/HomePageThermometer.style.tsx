@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Typography, Box } from '@material-ui/core';
 import { Level } from 'common/level';
+import { COLOR_MAP } from 'common/colors';
 
 export const Content = styled(Box)`
   display: flex;
@@ -53,7 +54,7 @@ export const RowCopy = styled(Typography)`
   font-weight: normal;
   font-size: 15px;
   line-height: 140%;
-  color: #828282;
+  color: ${COLOR_MAP.GRAYBODYCOPY};
   line-height: 1.8rem;
   margin-left: 1rem;
 `;

@@ -230,7 +230,8 @@ export const BetaTag = styled.span<{ isHeader?: Boolean }>`
   background-color: ${({ isHeader }) =>
     isHeader ? 'none' : `${palette.info.main}`};
   border: ${({ isHeader }) => isHeader && `1px solid ${COLOR_MAP.GRAY.LIGHT}`};
-  color: ${({ isHeader }) => (isHeader ? '#4f4f4f' : 'white')};
+  color: ${({ isHeader }) =>
+    isHeader ? `${COLOR_MAP.GRAYBODYCOPY}` : 'white'};
   transform: ${({ isHeader }) => (isHeader ? 'none' : 'translateY(-0.15rem)')};
   margin-top: ${({ isHeader }) => (isHeader ? '.5rem' : 'none')};
 
@@ -276,7 +277,7 @@ export const ValueWrapper = styled(Box)<{ iconColor: string }>`
 export const PrevalenceMeasure = styled(Typography)`
   font-family: Roboto;
   font-size: 12px;
-  color: #828282;
+  color: ${COLOR_MAP.GRAYBODYCOPY};
   line-height: 1.1;
   margin-left: 0.5rem;
   margin-top: 0.25rem;

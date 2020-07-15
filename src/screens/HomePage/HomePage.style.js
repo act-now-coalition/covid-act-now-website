@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Typography, Box } from '@material-ui/core';
 import palette from 'assets/theme/palette';
+import { COLOR_MAP } from 'common/colors';
 
 export const SearchBarThermometerWrapper = styled(Box)`
   display: flex;
@@ -30,7 +31,7 @@ export const PartnerHeader = styled(Typography)`
   font-size: 14px;
   letter-spacing: 0.01em;
   text-transform: uppercase;
-  color: #828282;
+  color: ${COLOR_MAP.GRAYBODYCOPY};
 `;
 
 export const FeaturedHeader = styled(Typography)`
@@ -42,7 +43,7 @@ export const FeaturedHeader = styled(Typography)`
   font-size: 14px;
   letter-spacing: 0.01em;
   text-transform: uppercase;
-  color: #828282;
+  color: ${COLOR_MAP.GRAYBODYCOPY};
 `;
 
 export const SectionWrapper = styled(Box)`

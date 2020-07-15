@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import palette from 'assets/theme/palette';
+import { COLOR_MAP } from 'common/colors';
 
 const mapWidth = 300;
 const mapHeight = 280;
@@ -58,7 +59,8 @@ export const TabItem = styled.div<{ selected?: boolean }>`
       ? `solid ${selectedTabBorder}px ${selectedTabColor}`
       : 'none'};
   cursor: pointer;
-  color: ${props => (props.selected ? palette.black : '#828282')};
+  color: ${props =>
+    props.selected ? palette.black : `${COLOR_MAP.GRAYBODYCOPY}`};
 `;
 
 export const MapContainer = styled.div`

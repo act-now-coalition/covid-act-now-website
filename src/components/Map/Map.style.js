@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
+import { COLOR_MAP } from 'common/colors';
 
 export const USMapWrapper = styled.div`
   position: relative;
@@ -38,7 +39,7 @@ export const MapInstructions = styled(Typography)`
   margin: ${props =>
     props.isMiniMap ? '-1rem 1rem 1rem 1rem' : '1rem 1rem 2.5rem'};
   font-size: 0.875rem;
-  color: #828282;
+  color: ${COLOR_MAP.GRAYBODYCOPY};
 `;
 
 export const MobileLineBreak = styled.br`

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Typography, Box } from '@material-ui/core';
 import palette from 'assets/theme/palette';
 import { BetaTag } from 'components/LocationPage/ChartsHolder.style';
+import { COLOR_MAP } from 'common/colors';
 
 export const CriteriaList = styled.div`
   display: flex;
@@ -101,7 +102,7 @@ export const CriterionDescription = styled(Typography)`
   font-family: Roboto;
   font-size: 14px;
   line-height: 140%;
-  color: #828282;
+  color: ${COLOR_MAP.GRAYBODYCOPY};
   margin-bottom: 0.25rem;
 
   @media (min-width: 600px) {
@@ -116,7 +117,7 @@ export const ListHeader = styled(Typography)`
   text-align: center;
   letter-spacing: 0.01em;
   text-transform: uppercase;
-  color: #828282;
+  color: ${COLOR_MAP.GRAYBODYCOPY};
   margin-bottom: 0.5rem;
 `;
 

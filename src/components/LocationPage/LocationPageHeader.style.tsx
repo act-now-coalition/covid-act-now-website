@@ -117,7 +117,7 @@ export const HeaderTitle = styled(Typography)<{
 export const HeaderSubtitle = styled(Typography)`
   font-size: 15px;
   line-height: 1.4;
-  color: #4f4f4f;
+  color: ${COLOR_MAP.GRAYBODYCOPY};
   margin-top: 1.2rem;
 
   @media (min-width: 600px) {
@@ -165,7 +165,7 @@ export const FooterContainer = styled(Box)`
 `;
 
 export const HeaderSubCopy = styled(Typography)`
-  color: #828282;
+  color: ${COLOR_MAP.GRAYBODYCOPY};
   font-size: 13px;
   line-height: 1.4;
   padding: 1.5rem 0 0.2rem;
@@ -305,7 +305,7 @@ export const ColumnTitle = styled(Typography)<{ isUpdateCopy?: Boolean }>`
   font-family: Roboto;
   font-size: ${({ isUpdateCopy }) => (isUpdateCopy ? '13px' : '12px')};
   text-transform: uppercase;
-  color: #828282;
+  color: ${COLOR_MAP.GRAYBODYCOPY};
   letter-spacing: 0.02rem;
   margin-bottom: 0.5rem;
 
@@ -319,7 +319,7 @@ export const Copy = styled(Typography)<{ isUpdateCopy?: Boolean }>`
   font-family: Source Code Pro;
   font-size: ${({ isUpdateCopy }) => (isUpdateCopy ? '13px' : '12px')};
   line-height: 140%;
-  color: #4f4f4f;
+  color: ${COLOR_MAP.GRAYBODYCOPY};
 
   strong {
     color: black;
