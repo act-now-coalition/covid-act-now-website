@@ -18,22 +18,17 @@ export const AnnouncementsSectionHeader = styled(Typography)`
   text-transform: uppercase;
   color: #828282;
   margin-bottom: 0.75rem;
-
-  @media (min-width: 600px) {
-    font-size: 15px;
-  }
 `;
 
 export const AnnouncementIntro = styled(Typography)`
   font-family: Roboto;
   font-weight: 900;
   font-size: 24px;
-  line-height: 140%;
+  line-height: 120%;
   margin-bottom: 1rem;
 
   @media (min-width: 600px) {
-    font-size: 32px;
-    line-height: 140%;
+    font-size: 28px;
   }
 `;
 
@@ -44,21 +39,16 @@ export const Date = styled(Typography)`
   letter-spacing: 0.01em;
   text-transform: uppercase;
   color: #828282;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
 `;
 
 export const AnnouncementBodyCopy = styled(Typography)`
   font-family: Roboto;
   font-size: 14px;
-  line-height: 16px;
+  line-height: 160%;
   letter-spacing: 0.01em;
   margin-bottom: 1.5rem;
   color: #828282;
-  line-height: 140%;
-
-  @media (min-width: 600px) {
-    margin-bottom: 2.5rem;
-  }
 `;
 
 export const ButtonsContainer = styled(Box)`

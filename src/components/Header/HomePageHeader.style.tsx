@@ -38,7 +38,6 @@ export const HeaderSubCopy = styled(Typography)<{ component?: string }>`
   font-size: 1rem;
   line-height: 1.6rem;
   margin: 0 auto 0.5rem;
-  color: rgba(0, 0, 0, 0.7);
   max-width: 300px;
 
   a {

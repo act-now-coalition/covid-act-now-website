@@ -7,7 +7,7 @@ export const SearchBarThermometerWrapper = styled(Box)`
   justify-content: center;
 
   @media (min-width: 600px) {
-    margin: 0 1rem -2rem;
+    margin: 0 1rem -3.5rem;
   }
 `;
 
@@ -21,27 +21,28 @@ export const PartnerSection = styled.div`
 `;
 
 export const PartnerHeader = styled(Typography)`
-  font-size: 1rem;
   padding-top: 2.5rem;
   margin-top: 2.5rem;
-  color: #828282;
-  letter-spacing: 0.08em;
   border-top: 1px solid ${palette.lightGray};
-  font-weight: 500;
   text-align: center;
-  text-transform: uppercase;
   margin-bottom: 1rem;
+  font-family: Roboto;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: #828282;
 `;
 
 export const FeaturedHeader = styled(Typography)`
   font-size: 1rem;
   margin-top: 4rem;
-  color: #828282;
-  letter-spacing: 0.08em;
-  font-weight: 500;
   text-align: center;
-  text-transform: uppercase;
   margin-bottom: 1rem;
+  font-family: Roboto;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: #828282;
 `;
 
 export const SectionWrapper = styled(Box)`

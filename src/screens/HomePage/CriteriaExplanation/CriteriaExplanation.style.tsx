@@ -118,11 +118,6 @@ export const ListHeader = styled(Typography)`
   text-transform: uppercase;
   color: #828282;
   margin-bottom: 0.5rem;
-
-  @media (min-width: 600px) {
-    font-size: 15px;
-    line-height: 18px;
-  }
 `;
 
 export const ListSubheader = styled(Typography)`
