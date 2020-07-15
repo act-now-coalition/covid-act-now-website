@@ -84,7 +84,7 @@ function generateSendData(
         ? 'risk decreased'
         : 'risk increased',
     location_name: alertForLocation.locationName,
-    img_alt: `Image depecting that the state went from from state ${
+    img_alt: `Image depicting that the state went from from state ${
       Level[alertForLocation.oldLevel]
     } to ${Level[alertForLocation.newLevel]}`,
     img_url: `${base_url}/therm-${alertForLocation.newLevel}-${alertForLocation.oldLevel}.png`,
@@ -93,7 +93,9 @@ function generateSendData(
     unsubscribe_link: `https://covidactnow.org/alert_unsubscribe?email=${encodeURI(
       userToEmail,
     )}`, // would be nice to know dev/staging/prod
-    feedback_subject_line: encodeURI(`[Alert Feedback] Alert for ${alertForLocation.locationName} on ${alertForLocation.lastUpdated}`),
+    feedback_subject_line: encodeURI(
+      `[Alert Feedback] Alert for ${alertForLocation.locationName} on ${alertForLocation.lastUpdated}`,
+    ),
   });
   const subject = `${alertForLocation.locationName}'s Risk Level Has Changed`;
 
@@ -202,12 +204,23 @@ async function setLastSnapshotNumber(
             })
             .catch(async (err: CampaignMonitorError) => {
               // if the email is invalid, move the document to the invalid collection
-              if (err.Code === CM_INVALID_EMAIL_ERROR_CODE && err.Message === CM_INVALID_EMAIL_MESSAGE) {
+              if (
+                err.Code === CM_INVALID_EMAIL_ERROR_CODE &&
+                err.Message === CM_INVALID_EMAIL_MESSAGE
+              ) {
                 invalidEmailCount += 1;
-                const currentData = (await db.collection("alerts-subscriptions").doc(doc.id).get()).data();
+                const currentData = (
+                  await db.collection('alerts-subscriptions').doc(doc.id).get()
+                ).data();
                 if (currentData) {
-                  await db.collection("invalid-alerts-subscriptions").doc(doc.id).set(currentData)
-                  await db.collection("alerts-subscriptions").doc(doc.id).delete();
+                  await db
+                    .collection('invalid-alerts-subscriptions')
+                    .doc(doc.id)
+                    .set(currentData);
+                  await db
+                    .collection('alerts-subscriptions')
+                    .doc(doc.id)
+                    .delete();
                 }
               } else {
                 errorCount += 1;
@@ -219,14 +232,18 @@ async function setLastSnapshotNumber(
   console.log(
     `Total Emails to be sent: ${emailSent}. Total locations with emails: ${
       Object.keys(locationsWithEmails).length
-    }. Unique Email addresses: ${Object.keys(uniqueEmailAddress).length}. Invalid emails removed: ${invalidEmailCount}`,
+    }. Unique Email addresses: ${
+      Object.keys(uniqueEmailAddress).length
+    }. Invalid emails removed: ${invalidEmailCount}`,
   );
 
   if (!dryRun) {
     setLastSnapshotNumber(db, currentSnapshot);
     // If we aren't in a dry run but there's clearly some non trivial errors exit with error
     if (emailSent < 1 || errorCount > 1) {
-      console.log(`Error count: ${errorCount}. Emails sent: ${emailSent}. Invalid emails removed: ${invalidEmailCount}`);
+      console.log(
+        `Error count: ${errorCount}. Emails sent: ${emailSent}. Invalid emails removed: ${invalidEmailCount}`,
+      );
       process.exit(-1);
     }
   }

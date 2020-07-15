@@ -12,17 +12,18 @@ import fs from 'fs-extra';
 import path from 'path';
 
 const SCHEMA_FILES = [
-  'CANPredictionAPI.json',
-  'CANPredictionAPIRow.json',
-  'CANPredictionTimeseriesRow.json',
-  'CovidActNowAreaSummary.json',
-  'CovidActNowCountiesAPI.json',
-  'CovidActNowCountiesSummary.json',
-  'CovidActNowCountiesTimeseries.json',
-  'CovidActNowStatesAPI.json',
-  'CovidActNowStatesSummary.json',
-  'CovidActNowStatesTimeseries.json',
-  'StateCaseSummary.json',
+  'Actuals.json',
+  'ActualsTimeseriesRow.json',
+  'AggregateFlattenedTimeseries.json',
+  'AggregateRegionSummary.json',
+  'AggregateRegionSummaryWithTimeseries.json',
+  'PredictionTimeseriesRow.json',
+  'PredictionTimeseriesRowWithHeader.json',
+  'Projections.json',
+  'RegionSummary.json',
+  'RegionSummaryWithTimeseries.json',
+  'ResourceUsageProjection.json',
+  'ResourceUtilization.json',
 ];
 
 const BANNER_COMMENT = `
