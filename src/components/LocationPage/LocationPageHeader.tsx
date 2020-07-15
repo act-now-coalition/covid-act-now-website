@@ -165,12 +165,8 @@ const LocationPageHeader = (props: {
                   Because counties don’t report hospitalizations, our forecasts
                   may not be as accurate. See something wrong?{' '}
                 </span>
-                <a
-                  href="https://forms.gle/NPsLcFnrvfS1kqkn9"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Please let us know
+                <a href="mailto:feedback@covidactnow.org?Subject=[Website%20Feedback]">
+                  Email us
                 </a>
                 .
               </HeaderSubCopy>
