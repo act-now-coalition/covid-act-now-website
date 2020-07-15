@@ -1,10 +1,8 @@
 //@ts-ignore createsend has no types and throws an error
-import firebase from 'firebase';
 import fs from 'fs-extra';
 import path from 'path';
 import { Alert } from './interfaces';
 import { getFirestore } from './firestore';
-import { exit } from 'process';
 
 /**
  * Takes a list of fips to alert on and a list of users who want to get alert
