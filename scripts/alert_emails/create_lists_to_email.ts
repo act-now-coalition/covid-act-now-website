@@ -1,9 +1,8 @@
 import _ from 'lodash';
 import fs from 'fs-extra';
 import path from 'path';
+import { GrpcStatus as FirestoreErrorCode } from '@google-cloud/firestore';
 import { getFirestore } from './firestore';
-
-const ERROR_CODE_ALREADY_EXISTS = 6;
 
 function exitWithUsage(): never {
   console.log('Usage: yarn create-lists-to-email alerts.json snapshotId');
@@ -32,15 +31,15 @@ const isValidEmail = (email: string): boolean => EMAIL_REGEX.test(email);
  *
  *   $ yarn create-lists-to-email alerts.json snapshotId
  */
-const updateSnapshotEmails = async (
+async function updateSnapshotEmails(
   alertsFileName: string,
   snapshotId: string,
-) => {
+) {
   const db = getFirestore();
   const alertsByLocation = readAlertsFile(alertsFileName);
   const fipsList = Object.keys(alertsByLocation);
 
-  fipsList.forEach(async (fips: string) => {
+  for (const fips in fipsList) {
     const emailQuerySnapshot = await db
       .collection('alerts-subscriptions')
       .where('locations', 'array-contains', fips)
@@ -49,7 +48,7 @@ const updateSnapshotEmails = async (
     // Remove invalid and repeated emails for the location from the list
     const emailList = _.uniq(
       emailQuerySnapshot.docs
-        .map((emailDoc: { id: string }) => emailDoc.id)
+        .map(emailDoc => emailDoc.id)
         .filter(isValidEmail)
         .map(_.toLower),
     );
@@ -65,7 +64,7 @@ const updateSnapshotEmails = async (
           } catch (updateError) {
             // We don't want to overwrite existing emails for a location to avoid
             // double-sending alerts, in case this is a re-run of the send-alert-emails
-            if (updateError.code !== ERROR_CODE_ALREADY_EXISTS) {
+            if (updateError.code !== FirestoreErrorCode.ALREADY_EXISTS) {
               throw updateError;
             }
           }
@@ -75,10 +74,10 @@ const updateSnapshotEmails = async (
       console.error(`Error updating emails for location ${fips}`, err);
       process.exit(1);
     }
-  });
+  }
 
   console.info(`Done. Updated the emails for ${fipsList.length} locations.`);
-};
+}
 
 const main = async () => {
   const args = process.argv.slice(2);
