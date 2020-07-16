@@ -246,7 +246,7 @@ export class Projection {
     let projectedCumulativeDeaths: number =
       this.cumulativeDeaths[this.cumulativeDeaths.length - 1] || 0;
     let currentCumulativeDeaths: number =
-      this.cumulativeActualDeaths[this.cumulativeActualDeaths.length - 1] || 0;
+      lastValue(this.cumulativeActualDeaths) || 0;
     return projectedCumulativeDeaths - currentCumulativeDeaths;
   }
 
