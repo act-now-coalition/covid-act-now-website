@@ -71,9 +71,9 @@ export const caseDensityStatusText = (projection: Projection) => {
   const statusText2 = levelText(
     level,
     `If these rates continue, we estimate less than 1% of ${locationName}’s population will be infected in the next year.`,
-    `If these rates continue, we estimate less than 1-10% of ${locationName}’s population will be infected in the next year.`,
-    `If these rates continue, we estimate less than 10-50% of ${locationName}’s population will be infected in the next year. Caution is warranted.`,
-    `If these rates continue, we estimate less than >50% of ${locationName}’s population will be infected in the next year. Aggressive action urgently needed.`,
+    `If these rates continue, we estimate that 1-10% of ${locationName}’s population will be infected in the next year.`,
+    `If these rates continue, we estimate that 10-50% of ${locationName}’s population will be infected in the next year. Caution is warranted.`,
+    `If these rates continue, we estimate more than 50% of ${locationName}’s population will be infected in the next year. Aggressive action urgently needed.`,
   );
 
   return `${statusText1} ${statusText2}`;
