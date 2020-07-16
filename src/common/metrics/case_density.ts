@@ -53,7 +53,7 @@ for every reported death (${caseFatalityRatioPercent} infection fatality
 rate). Note that this will not match reported cases in many states, as 
 testing is only detecting a small number of actual cases.`;
 
-export const caseDensityStatusText = (projection: Projection) => {
+export function caseDensityStatusText(projection: Projection) {
   const { currentCaseDensity, currentDailyDeaths, locationName } = projection;
 
   if (currentCaseDensity === null || currentDailyDeaths === null) {
@@ -62,7 +62,7 @@ export const caseDensityStatusText = (projection: Projection) => {
 
   const level = getLevel(Metric.CASE_DENSITY, currentCaseDensity);
   const dailyCases = formatDecimal(currentCaseDensity, 1);
-  const dailyDeaths = formatDecimal(currentDailyDeaths, 2);
+  const dailyDeaths = formatDecimal(currentDailyDeaths, 1);
 
   const statusText1 = `Over the last week, ${locationName} has reported
    ${dailyCases} new cases and ${dailyDeaths} new deaths per day for every
@@ -77,4 +77,4 @@ export const caseDensityStatusText = (projection: Projection) => {
   );
 
   return `${statusText1} ${statusText2}`;
-};
+}
