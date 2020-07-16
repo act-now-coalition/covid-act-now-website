@@ -22,7 +22,7 @@ export const CASE_DENSITY_LEVEL_INFO_MAP: LevelInfoMap = {
   },
   [Level.HIGH]: {
     level: Level.HIGH,
-    upperLimit: 25,
+    upperLimit: 50,
     name: 'High',
     color: COLOR_MAP.ORANGE_DARK.BASE,
     detail: () => 'High',
