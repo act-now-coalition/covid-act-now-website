@@ -24,9 +24,10 @@ export const HeaderTitle = styled(Typography)<{ component?: string }>`
   line-height: 2.3rem;
   color: black;
   max-width: 300px;
-  margin: 0 auto 1rem;
+  margin: 1.2rem auto 1.5rem;
 
   @media (min-width: 600px) {
+    margin: 1rem auto 1rem;
     font-size: 3rem;
     line-height: 1.2;
     max-width: unset;
@@ -36,8 +37,7 @@ export const HeaderTitle = styled(Typography)<{ component?: string }>`
 export const HeaderSubCopy = styled(Typography)<{ component?: string }>`
   font-size: 1rem;
   line-height: 1.6rem;
-  margin: 0 auto 1rem;
-  color: rgba(0, 0, 0, 0.7);
+  margin: 0 auto 0.5rem;
   max-width: 300px;
 
   a {
@@ -56,19 +56,14 @@ export const ClickableCopy = styled.span`
   cursor: pointer;
 `;
 
-export const HeaderSubCopyItem = styled.span<{ hideOnMobile?: boolean }>`
-  display: ${props => (props.hideOnMobile ? 'none' : 'unset')};
+export const HeaderSubCopyItem = styled.span`
   font-family: Roboto;
-  color: #4f4f4f;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
 
   @media (min-width: 600px) {
     display: unset;
     font-size: 19px;
     line-height: 140%;
-  }
-
-  strong {
-    color: black;
   }
 `;
 

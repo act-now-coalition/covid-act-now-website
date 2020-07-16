@@ -36,7 +36,7 @@ const Announcements = () => {
           target="_blank"
           rel="noopener"
         >
-          Read more
+          Continue reading
         </ReadMoreButton>
         <ViewAllLink
           href="https://blog.covidactnow.org/"
