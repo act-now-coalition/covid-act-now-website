@@ -457,9 +457,10 @@ export class Projection {
       // const caseDensityByDeathsHigh = (CASE_FATALITY_RATIO / CASE_FATALITY_RATIO_LOWER) * caseDensityByDeaths;
 
       const caseDensityByCases = this.caseDensityByCases[i];
-      const caseDensity = _.max(
-        [caseDensityByDeaths, caseDensityByCases].filter(cd => cd !== null),
-      );
+      // const caseDensity = _.max(
+      //   [caseDensityByDeaths, caseDensityByCases].filter(cd => cd !== null),
+      // );
+      const caseDensity = caseDensityByCases;
 
       return caseDensity == null
         ? null
