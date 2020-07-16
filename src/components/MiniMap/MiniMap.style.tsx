@@ -60,7 +60,7 @@ export const TabItem = styled.div<{ selected?: boolean }>`
       : 'none'};
   cursor: pointer;
   color: ${props =>
-    props.selected ? palette.black : `${COLOR_MAP.GRAYBODYCOPY}`};
+    props.selected ? palette.black : `${COLOR_MAP.GRAY_BODY_COPY}`};
 `;
 
 export const MapContainer = styled.div`

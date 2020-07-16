@@ -58,7 +58,7 @@ export const ClickableCopy = styled.span`
 
 export const HeaderSubCopyItem = styled.span`
   font-family: Roboto;
-  color: ${COLOR_MAP.GRAYBODYCOPY};
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
 
   @media (min-width: 600px) {
     display: unset;

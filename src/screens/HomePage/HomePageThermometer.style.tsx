@@ -54,7 +54,7 @@ export const RowCopy = styled(Typography)`
   font-weight: normal;
   font-size: 15px;
   line-height: 140%;
-  color: ${COLOR_MAP.GRAYBODYCOPY};
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
   line-height: 1.8rem;
   margin-left: 1rem;
 `;

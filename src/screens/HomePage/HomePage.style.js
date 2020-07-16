@@ -31,7 +31,7 @@ export const PartnerHeader = styled(Typography)`
   font-size: 14px;
   letter-spacing: 0.01em;
   text-transform: uppercase;
-  color: ${COLOR_MAP.GRAYBODYCOPY};
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
 `;
 
 export const FeaturedHeader = styled(Typography)`
@@ -43,7 +43,7 @@ export const FeaturedHeader = styled(Typography)`
   font-size: 14px;
   letter-spacing: 0.01em;
   text-transform: uppercase;
-  color: ${COLOR_MAP.GRAYBODYCOPY};
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
 `;
 
 export const SectionWrapper = styled(Box)`

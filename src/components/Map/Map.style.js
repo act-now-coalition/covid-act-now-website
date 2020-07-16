@@ -39,7 +39,7 @@ export const MapInstructions = styled(Typography)`
   margin: ${props =>
     props.isMiniMap ? '-1rem 1rem 1rem 1rem' : '1rem 1rem 2.5rem'};
   font-size: 0.875rem;
-  color: ${COLOR_MAP.GRAYBODYCOPY};
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
 `;
 
 export const MobileLineBreak = styled.br`

@@ -102,7 +102,7 @@ export const CriterionDescription = styled(Typography)`
   font-family: Roboto;
   font-size: 14px;
   line-height: 140%;
-  color: ${COLOR_MAP.GRAYBODYCOPY};
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
   margin-bottom: 0.25rem;
 
   @media (min-width: 600px) {
@@ -117,7 +117,7 @@ export const ListHeader = styled(Typography)`
   text-align: center;
   letter-spacing: 0.01em;
   text-transform: uppercase;
-  color: ${COLOR_MAP.GRAYBODYCOPY};
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
   margin-bottom: 0.5rem;
 `;
 
