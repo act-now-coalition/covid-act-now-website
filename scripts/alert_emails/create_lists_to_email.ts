@@ -39,7 +39,7 @@ async function updateSnapshotEmails(
   const alertsByLocation = readAlertsFile(alertsFileName);
   const fipsList = Object.keys(alertsByLocation);
 
-  for (const fips in fipsList) {
+  for (const fips of fipsList) {
     const emailQuerySnapshot = await db
       .collection('alerts-subscriptions')
       .where('locations', 'array-contains', fips)
