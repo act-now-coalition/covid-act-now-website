@@ -48,13 +48,13 @@ const UpdateCaseDensity: FunctionComponent<{ projections: Projections }> = ({
       ? ''
       : `That changed your threat level from ${levelName(
           previousLevel,
-        )} to ${levelName(currentLevel)}.`;
+        )} to ${levelName(currentLevel)}. `;
   return (
     <Copy isUpdateCopy>
       <strong>New key indicator added</strong>
       <br />
-      {`We added ${CASE_DENSITY_METRIC_NAME}. ${changedLevelCopy}`}{' '}
-      <a href="/">Learn more</a>.
+      {`We added ${CASE_DENSITY_METRIC_NAME}. ${changedLevelCopy}`}
+      <a href="/">Learn more</a>
     </Copy>
   );
 };
