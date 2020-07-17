@@ -51,8 +51,13 @@ async function main() {
     const newLevel = newSummary.level;
     const locationName = getLocationNameForFips(fips);
     const locationURL = getLocationUrlForFips(fips);
-    const lastUpdated = moment.utc().format('MM/DD/YYYY'); // This might not be accurate, grab from the pair? idk
-    if (oldLevel !== newLevel && oldLevel !== Level.UNKNOWN && newLevel !== Level.UNKNOWN) {
+    // Use today's date (roughly in the Pacific timezone).
+    const lastUpdated = moment.utc().subtract(8, 'hours').format('MM/DD/YYYY');
+    if (
+      oldLevel !== newLevel &&
+      oldLevel !== Level.UNKNOWN &&
+      newLevel !== Level.UNKNOWN
+    ) {
       alerts[fips] = {
         fips,
         locationName,
