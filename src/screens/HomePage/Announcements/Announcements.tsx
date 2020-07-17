@@ -18,7 +18,7 @@ const Announcements = () => {
     <Wrapper>
       <AnnouncementsSectionHeader>Announcements</AnnouncementsSectionHeader>
       <AnnouncementIntro>
-        Introducing our newest key indicator, “New infections per capita”
+        Introducing our newest key indicator, “Case density”
       </AnnouncementIntro>
       <Date>Tuesday, July 1, 2020</Date>
       <AnnouncementBodyCopy>

@@ -1,9 +1,9 @@
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
-import { Projection, CASE_FATALITY_RATIO } from 'common/models/Projection';
-import { formatInteger, formatPercent, formatDecimal } from 'common/utils';
+import { Projection } from 'common/models/Projection';
 import { levelText } from 'common/utils/chart';
 import { getLevel, Metric } from 'common/metric';
+import { formatDecimal } from 'common/utils';
 
 export const METRIC_NAME = 'Case Density';
 
@@ -13,45 +13,39 @@ export const CASE_DENSITY_LEVEL_INFO_MAP: LevelInfoMap = {
     upperLimit: 1,
     name: 'Low',
     color: COLOR_MAP.GREEN.BASE,
-    detail: () => 'Low',
+    detail: () => 'COVID is being effectively contained',
   },
   [Level.MEDIUM]: {
     level: Level.MEDIUM,
     upperLimit: 10,
     name: 'Medium',
     color: COLOR_MAP.ORANGE.BASE,
-    detail: () => 'Medium',
+    detail: () => 'COVID is spreading in a controlled fashion',
   },
   [Level.HIGH]: {
     level: Level.HIGH,
     upperLimit: 25,
     name: 'High',
     color: COLOR_MAP.ORANGE_DARK.BASE,
-    detail: () => 'High',
+    detail: () => 'Broad uncontrolled COVID spread',
   },
   [Level.CRITICAL]: {
     level: Level.CRITICAL,
     upperLimit: Infinity,
     name: 'Critical',
     color: COLOR_MAP.RED.BASE,
-    detail: () => 'Critical',
+    detail: () => 'An active outbreak',
   },
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,
     upperLimit: 0,
     name: 'Unknown',
     color: COLOR_MAP.GRAY.BASE,
-    detail: () => 'Unknown',
+    detail: () => 'Insufficient data to assess',
   },
 };
 
-const casesPerDeath = formatInteger(1 / CASE_FATALITY_RATIO);
-const caseFatalityRatioPercent = formatPercent(CASE_FATALITY_RATIO, 0);
-
-export const CASE_DENSITY_DISCLAIMER = `We estimate ${casesPerDeath} cases 
-for every reported death (${caseFatalityRatioPercent} infection fatality 
-rate). Note that this will not match reported cases in many states, as 
-testing is only detecting a small number of actual cases.`;
+export const CASE_DENSITY_DISCLAIMER = `Note that the number of persons infected is substantially higher than the number of confirmed cases. In many states, as testing is only detecting a small number of actual cases.`;
 
 export function caseDensityStatusText(projection: Projection) {
   const { currentCaseDensity, currentDailyDeaths, locationName } = projection;
@@ -62,18 +56,17 @@ export function caseDensityStatusText(projection: Projection) {
 
   const level = getLevel(Metric.CASE_DENSITY, currentCaseDensity);
   const dailyCases = formatDecimal(currentCaseDensity, 1);
-  const dailyDeaths = formatDecimal(currentDailyDeaths, 1);
 
   const statusText1 = `Over the last week, ${locationName} has reported
-   ${dailyCases} new cases and ${dailyDeaths} new deaths per day for every
+   ${dailyCases} new confirmed cases per day for every
     100,000 residents.`;
 
   const statusText2 = levelText(
     level,
     `If these rates continue, we estimate less than 1% of ${locationName}’s population will be infected in the next year.`,
-    `If these rates continue, we estimate that 1-10% of ${locationName}’s population will be infected in the next year.`,
-    `If these rates continue, we estimate that 10-50% of ${locationName}’s population will be infected in the next year. Caution is warranted.`,
-    `If these rates continue, we estimate more than 50% of ${locationName}’s population will be infected in the next year. Aggressive action urgently needed.`,
+    `If these rates continue, we estimate less than 1-10% of ${locationName}’s population will be infected in the next year.`,
+    `If these rates continue, we estimate less than 10-25% of ${locationName}’s population will be infected in the next year. Caution is warranted.`,
+    `If these rates continue, we estimate more than >25% of ${locationName}’s population will be infected in the next year. Aggressive action urgently needed.`,
   );
 
   return `${statusText1} ${statusText2}`;
