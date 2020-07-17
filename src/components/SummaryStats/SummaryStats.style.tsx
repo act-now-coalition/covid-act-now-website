@@ -68,7 +68,7 @@ export const SummaryStatWrapper = styled(Box)<{
     border-bottom: ${!props.isHeader && `1px solid ${palette.lightGray}`};
 
     @media (min-width: 600px) {
-      border-bottom: 1px solid ${palette.lightGray};
+      border-bottom: ${!props.isHeader && `1px solid ${palette.lightGray}`};
       margin: 0;
       flex-direction: column;
       align-items: center;
@@ -198,11 +198,17 @@ export const StatValueText = styled(Typography)<{
 
     @media (min-width: 600px) {
       text-align: left;
-      font-size: ${props.statusUnknown ? '1rem' : '1.875rem'};
+      font-size: ${
+        !props.isHeader ? '1.875rem' : props.statusUnknown ? '.9rem' : '1.55rem'
+      };
       line-height: ${props.isHeader ? '1.4' : '3.5rem'};
       margin-bottom: ${props.isHeader ? '0' : '0.5rem'};
       display: flex;
       flex-direction: column;
+    }
+
+    @media (min-width: 932px) {
+      font-size: ${props.statusUnknown ? '1rem' : '1.875rem'};
     }
   `}
 `;
@@ -224,7 +230,8 @@ export const BetaTag = styled.span<{ isHeader?: Boolean }>`
   background-color: ${({ isHeader }) =>
     isHeader ? 'none' : `${palette.info.main}`};
   border: ${({ isHeader }) => isHeader && `1px solid ${COLOR_MAP.GRAY.LIGHT}`};
-  color: ${({ isHeader }) => (isHeader ? '#4f4f4f' : 'white')};
+  color: ${({ isHeader }) =>
+    isHeader ? `${COLOR_MAP.GRAY_BODY_COPY}` : 'white'};
   transform: ${({ isHeader }) => (isHeader ? 'none' : 'translateY(-0.15rem)')};
   margin-top: ${({ isHeader }) => (isHeader ? '.5rem' : 'none')};
 
@@ -257,8 +264,12 @@ export const ValueWrapper = styled(Box)<{ iconColor: string }>`
     color: ${({ iconColor }) => iconColor};
 
     @media (min-width: 600px) {
-      margin-right: 0.75rem;
+      margin-right: 0.55rem;
       font-size: 1.15rem;
+    }
+
+    @media (min-width: 932px) {
+      margin-right: 0.75rem;
     }
   }
 `;
@@ -266,7 +277,7 @@ export const ValueWrapper = styled(Box)<{ iconColor: string }>`
 export const PrevalenceMeasure = styled(Typography)`
   font-family: Roboto;
   font-size: 12px;
-  color: #828282;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
   line-height: 1.1;
   margin-left: 0.5rem;
   margin-top: 0.25rem;

@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 import { Typography, Box } from '@material-ui/core';
 import palette from 'assets/theme/palette';
+import { COLOR_MAP } from 'common/colors';
 
 export const SearchBarThermometerWrapper = styled(Box)`
   display: flex;
   justify-content: center;
 
   @media (min-width: 600px) {
-    margin-bottom: -2.5rem;
+    margin: 0 1rem -3.5rem;
   }
 `;
 
@@ -21,27 +22,28 @@ export const PartnerSection = styled.div`
 `;
 
 export const PartnerHeader = styled(Typography)`
-  font-size: 1rem;
   padding-top: 2.5rem;
   margin-top: 2.5rem;
-  color: rgba(0, 0, 0, 0.7);
-  letter-spacing: 0.08em;
   border-top: 1px solid ${palette.lightGray};
-  font-weight: 500;
   text-align: center;
-  text-transform: uppercase;
   margin-bottom: 1rem;
+  font-family: Roboto;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
 `;
 
 export const FeaturedHeader = styled(Typography)`
   font-size: 1rem;
   margin-top: 4rem;
-  color: rgba(0, 0, 0, 0.7);
-  letter-spacing: 0.08em;
-  font-weight: 500;
   text-align: center;
-  text-transform: uppercase;
   margin-bottom: 1rem;
+  font-family: Roboto;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
 `;
 
 export const SectionWrapper = styled(Box)`

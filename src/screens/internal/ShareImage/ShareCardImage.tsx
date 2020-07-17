@@ -23,7 +23,7 @@ const ShareCardImage = () => {
   const isHomePage = !stateId && !countyFipsId;
   return (
     <ScreenshotWrapper className={'screenshot'}>
-      <Header />
+      <Header isHomePage={isHomePage} />
       <ShareCardWrapper isHomePage={isHomePage}>
         <ShareCard stateId={stateId} countyFipsId={countyFipsId} />
       </ShareCardWrapper>
@@ -36,10 +36,12 @@ interface ShareCardProps {
   countyFipsId?: string;
 }
 
-const Header = () => {
+const Header = (props: { isHomePage?: Boolean }) => {
   return (
     <>
-      <TitleWrapper>Real-time COVID metrics</TitleWrapper>
+      <TitleWrapper isHomePage={props.isHomePage}>
+        Real-time COVID metrics
+      </TitleWrapper>
       <LastUpdatedWrapper>
         Updated {formatLocalDate(new Date())}
       </LastUpdatedWrapper>

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, FunctionComponent } from 'react';
 import CheckIcon from '@material-ui/icons/Check';
 import {
   ColoredHeaderBanner,
@@ -34,14 +34,27 @@ import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
 import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import { LEVEL_COLOR } from 'common/colors';
+import { METRIC_NAME as CASE_DENSITY_METRIC_NAME } from 'common/metrics/case_density';
 
-const NewIndicatorCopy = () => {
+const UpdateCaseDensity: FunctionComponent<{ projections: Projections }> = ({
+  projections,
+}) => {
+  const levelName = (level: Level) => LOCATION_SUMMARY_LEVELS[level].name;
+  const previousLevel = projections.getAlarmLevelWithoutCaseDensity();
+  const currentLevel = projections.getAlarmLevel();
+
+  const changedLevelCopy =
+    previousLevel === currentLevel
+      ? ''
+      : `That changed your threat level from ${levelName(
+          previousLevel,
+        )} to ${levelName(currentLevel)}.`;
   return (
     <Copy isUpdateCopy>
       <strong>New key indicator added</strong>
       <br />
-      We added NEW CASES PER DAY. That changed your threat level from yellow to
-      orange. <a href="/">Learn more</a>
+      {`We added ${CASE_DENSITY_METRIC_NAME}. ${changedLevelCopy}`}{' '}
+      <a href="/">Learn more</a>.
     </Copy>
   );
 };
@@ -87,8 +100,9 @@ const LocationPageHeader = (props: {
     (val: number | null) => !isNull(val),
   ).length;
 
-  const headerTopMargin = !hasStats ? -270 : -330;
-  const headerBottomMargin = !hasStats ? 100 : 0;
+  //TODO (chelsi): get rid of this use of 'magic' numbers
+  const headerTopMargin = !hasStats ? -202 : -218;
+  const headerBottomMargin = !hasStats ? 0 : 0;
 
   const locationName =
     props.projections.countyName || props.projections.stateName;
@@ -135,7 +149,7 @@ const LocationPageHeader = (props: {
 
   return (
     <Fragment>
-      <ColoredHeaderBanner bgcolor={fillColor} hasStats={hasStats} />
+      <ColoredHeaderBanner bgcolor={fillColor} />
       <Wrapper
         condensed={props.condensed}
         headerTopMargin={headerTopMargin}
@@ -183,7 +197,7 @@ const LocationPageHeader = (props: {
               <InfoOutlinedIcon />
               <SectionColumn isUpdateCopy>
                 <ColumnTitle isUpdateCopy>Updates</ColumnTitle>
-                <NewIndicatorCopy />
+                <UpdateCaseDensity projections={props.projections} />
               </SectionColumn>
             </SectionHalf>
           </HeaderSection>
@@ -197,7 +211,7 @@ const LocationPageHeader = (props: {
             isHeader={true}
           />
         </TopContainer>
-        <FooterContainer isVerifiedState={isVerifiedState}>
+        <FooterContainer>
           {props.projections.isCounty && !isEmbed && (
             <HeaderSubCopy>
               <span>Updated {lastUpdatedDateString} · </span>
