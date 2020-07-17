@@ -1,10 +1,9 @@
 import React, { FunctionComponent } from 'react';
-import moment from 'moment';
 import { isDate } from 'lodash';
 import { min as d3min, max as d3max } from 'd3-array';
 import { curveMonotoneX } from '@vx/curve';
 import { GridRows } from '@vx/grid';
-import { scaleLinear, scaleTime } from '@vx/scale';
+import { scaleLinear } from '@vx/scale';
 import { ParentSize } from '@vx/responsive';
 import { Column } from 'common/models/Projection';
 import { CASE_DENSITY_LEVEL_INFO_MAP } from 'common/metrics/case_density';
@@ -25,6 +24,7 @@ import {
   getZoneByValue,
   last,
   getAxisLimits,
+  getZonesTimeScale,
 } from './utils';
 
 type Point = {
@@ -64,12 +64,8 @@ const ChartCaseDensity: FunctionComponent<{
 
   const dates = data.map(getDate);
   const minDate = d3min(dates) || new Date('2020-01-01');
-  const maxDate = moment().add(2, 'weeks').toDate();
-
-  const xScale = scaleTime({
-    domain: [minDate, maxDate],
-    range: [0, chartWidth],
-  });
+  const currDate = new Date();
+  const xScale = getZonesTimeScale(minDate, currDate, 0, chartWidth);
 
   const yDataMax = d3max(data, getY) || 100;
   const yAxisLimits = getAxisLimits(0, yDataMax, zones);
@@ -150,7 +146,7 @@ const ChartCaseDensity: FunctionComponent<{
           color={region.color}
           name={region.name}
           isActive={activeZone.name === region.name}
-          x={xScale(maxDate) - 10}
+          x={chartWidth - 10}
           y={yScale(0.5 * (region.valueFrom + region.valueTo))}
         />
       ))}
