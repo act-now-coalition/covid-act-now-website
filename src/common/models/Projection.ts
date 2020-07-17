@@ -128,10 +128,9 @@ export class Projection {
   private readonly actualTimeseries: Array<ActualsTimeseriesRow | null>;
   private readonly cumulativeDeaths: Array<number | null>;
   private readonly cumulativeInfected: Array<number | null>;
-  private readonly cumulativePositiveTests: Array<number | null>;
-  private readonly cumulativeNegativeTests: Array<number | null>;
   private readonly smoothedDailyNegativeTests: Array<number | null>;
   private readonly smoothedDailyPositiveTests: Array<number | null>;
+  private readonly smoothedDailyCases: Array<number | null>;
   private readonly rtRange: Array<RtRange | null>;
   // ICU Utilization series as values between 0-1 (or > 1 if over capacity).
   private readonly icuUtilization: Array<number | null>;
@@ -180,17 +179,24 @@ export class Projection {
     this.cumulativeInfected = timeseries.map(
       row => row && row.cumulativeInfected,
     );
-    this.cumulativePositiveTests = this.smoothCumulatives(
+    const cumulativePositiveTests = this.smoothCumulatives(
       actualTimeseries.map(row => row && row.cumulativePositiveTests),
     );
-    this.cumulativeNegativeTests = this.smoothCumulatives(
+    const cumulativeNegativeTests = this.smoothCumulatives(
       actualTimeseries.map(row => row && row.cumulativeNegativeTests),
     );
     this.smoothedDailyPositiveTests = this.smoothWithRollingAverage(
-      this.deltasFromCumulatives(this.cumulativePositiveTests),
+      this.deltasFromCumulatives(cumulativePositiveTests),
     );
     this.smoothedDailyNegativeTests = this.smoothWithRollingAverage(
-      this.deltasFromCumulatives(this.cumulativeNegativeTests),
+      this.deltasFromCumulatives(cumulativeNegativeTests),
+    );
+
+    const cumulativeConfirmedCases = this.smoothCumulatives(
+      actualTimeseries.map(row => row && row.cumulativeConfirmedCases),
+    );
+    this.smoothedDailyCases = this.smoothWithRollingAverage(
+      this.deltasFromCumulatives(cumulativeConfirmedCases),
     );
 
     const cumulativeActualDeaths = this.smoothCumulatives(
@@ -262,9 +268,7 @@ export class Projection {
   // currentDailyAverageCases and make sure we're pulling all of the data from
   // the same day, to make sure it matches the graph.
   get currentDailyAverageCases() {
-    // TODO(michael): We conflate "positive tests" and "cases" throughout this
-    // code. Is that okay? Can they diverge?
-    return lastValue(this.smoothedDailyPositiveTests);
+    return lastValue(this.smoothedDailyCases);
   }
 
   get label() {
@@ -416,7 +420,7 @@ export class Projection {
       if (row && row.contactTracers) {
         const contactTracers =
           CONTACT_TRACER_STATE_OVERRIDES[this.stateName] || row.contactTracers;
-        const cases = this.smoothedDailyPositiveTests[i];
+        const cases = this.smoothedDailyCases[i];
         if (cases) {
           return contactTracers / (cases * TRACERS_NEEDED_PER_CASE);
         }
@@ -428,7 +432,7 @@ export class Projection {
 
   private calcCaseDensityByCases(): Array<number | null> {
     const totalPopulation = this.totalPopulation;
-    return this.smoothedDailyPositiveTests.map(cases => {
+    return this.smoothedDailyCases.map(cases => {
       if (totalPopulation === 0 || cases === null) {
         return null;
       } else {
