@@ -29,9 +29,13 @@ export const ShareInstructionHeader = styled(Typography)`
     line-height: 2.25rem;
   }
 `;
-export const ShareInstructionBody = styled(Typography)`
+
+export const ShareInstructionBody = styled(Typography)<{
+  alertsInstructions?: boolean;
+}>`
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: ${({ alertsInstructions }) =>
+    alertsInstructions ? '.25rem' : '1rem'};
   line-height: 1.6rem;
   color: inherit;
 `;
@@ -43,7 +47,10 @@ export const ShareRow = styled.div<{ newsletter?: Boolean }>`
   padding: 4.5rem 1rem;
 
   @media (min-width: 600px) {
-    padding: 6rem 1rem;
+    padding: ${({ newsletter }) =>
+      newsletter ? '5rem 1rem 4rem' : '6rem 1rem'};
+    max-height: 500px;
+    overflow: hidden;
   }
 `;
 
@@ -75,7 +82,6 @@ export const ShareRowContentArea = styled.div<{
 export const NewsletterMockupWrapper = styled.div`
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
-  box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.05);
   margin: -1rem 0 -6rem;
 
   @media (max-width: 599px) {

@@ -86,7 +86,7 @@ const ShareBlock = ({
           </NewsletterMockupWrapper>
           <NewsletterTextArea>
             <ShareInstructionHeader>Email Alerts</ShareInstructionHeader>
-            <ShareInstructionBody>
+            <ShareInstructionBody alertsInstructions={true}>
               We'll email you when your state or county sees a significant
               change in one of their metrics or overall threat score.
             </ShareInstructionBody>

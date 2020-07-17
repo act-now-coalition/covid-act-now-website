@@ -1,13 +1,18 @@
 import styled from 'styled-components';
 import palette from 'assets/theme/palette';
+import { COLOR_MAP } from 'common/colors';
 
-export const InputHolder = styled.div`
+export const InputHolder = styled.div<{ errMessageOpen?: boolean }>`
   align-items: baseline;
   display: flex;
   flex-direction: row;
-  padding-top: 1em;
+  padding-top: 0.5rem;
   label {
     margin: 0 0 8px 8px;
+  }
+
+  &:last-child {
+    padding-top: ${({ errMessageOpen }) => (errMessageOpen ? '0' : '24px')};
   }
 `;
 
@@ -15,7 +20,6 @@ export const InputError = styled.div`
   font-size: 12px;
   color: red;
   padding-left: 0.5em;
-  padding-bottom: 1em;
 `;
 
 export const StyledNewsletter = styled.div`
@@ -30,13 +34,24 @@ export const StyledNewsletter = styled.div`
       line-height: 2rem;
       height: 3.25rem;
       outline: 0;
-      border: 1px solid rgba(0, 0, 0, 0.12);
+      border: 1px solid ${COLOR_MAP.GRAY.BASE};
+      border-right: none;
       border-top-left-radius: 4px;
       border-bottom-left-radius: 4px;
       appearance: none;
       font-size: 0.875rem;
       box-sizing: border-box;
       font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+
+      ::placeholder {
+        color: #828282;
+        font-size: 15px;
+      }
+
+      &:hover {
+        border: 1px solid black;
+        border-right: none;
+      }
 
       &[hidden] {
         display: none;
@@ -57,7 +72,7 @@ export const StyledNewsletter = styled.div`
       appearance: none;
       font-size: 0.875rem;
       padding: 0.25rem 1.25rem;
-      line-height: 2rem;
+      line-height: 1rem;
       text-transform: uppercase;
       transition: 0.3s ease background-color;
       background-color: ${palette.info.main};
