@@ -15,7 +15,7 @@ A github action will run all of these steps on github for you.
 The script should be run after a new snapshot has been pushed to the prod website, in order to notify users of changes. You can get the currently live snapshot from https://github.com/covid-projections/covid-projections/blob/master/src/assets/data/data_url.json
 
 Confirm the lastSnapshot field is
-correct in firestore at (info/alerts)[https://console.firebase.google.com/project/covidactnow-prod/database/firestore/data~2Finfo~2Falerts]. The value of lastSnapshot should ideally be the previous snapshot from data_url.json (you can check what the previous snapshot was via the github file history). The github action should update the lastSnapshot field, but if the job failed for some reason it won't get updated. You can also check the snapshots collection in firestore to see what snapshots we've sent emails on prior.
+correct in firestore at (info/alerts)[https://console.firebase.google.com/project/covidactnow-prod/database/firestore/data~2Finfo~2Falerts]. The value of lastSnapshot should be the last snapshot we sent emails for (the script updates it on completion). You can verify it's set correctly by checking the snapshots collection in firestore to see what snapshots we've sent emails on prior.
 
 Then do a dry-run to generate the alert locations and affected emails, but not actually send the emails. It will create a snapshot specific collection in firestore with the locations to alert and the emails to be alerted at each of those locations:
 

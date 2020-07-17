@@ -3,7 +3,6 @@ import { ChartContentWrapper, MainContentInner } from './ChartsHolder.style';
 import NoCountyDetail from './NoCountyDetail';
 import { Projections } from 'common/models/Projections';
 import { Projection } from 'common/models/Projection';
-import ClaimStateBlock from 'components/ClaimStateBlock/ClaimStateBlock';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import LocationPageHeader from 'components/LocationPage/LocationPageHeader';
 import ChartBlock from 'components/LocationPage/ChartBlock';
@@ -179,10 +178,6 @@ const ChartsHolder = (props: {
                 />
               ))}
             </MainContentInner>
-            <ClaimStateBlock
-              stateId={props.stateId}
-              countyId={props.county?.county_url_name}
-            />
           </ChartContentWrapper>
           <div ref={shareBlockRef}>
             <ShareModelBlock {...shareButtonProps} />

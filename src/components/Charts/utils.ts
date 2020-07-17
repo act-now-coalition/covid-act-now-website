@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import moment from 'moment';
+import { scaleTime } from '@vx/scale';
 import { LevelInfoMap, Level, LevelInfo } from 'common/level';
 
 export const last = (list: any[]) => list[list.length - 1];
@@ -104,4 +105,25 @@ export const getAxisLimits = (
   const minTickPosition = _.min(tickPositions) || minY;
   const maxTickPosition = _.max(tickPositions) || maxY;
   return roundAxisLimits(minTickPosition, maxTickPosition);
+};
+
+/**
+ * Creates a time scale using the given parameters and adjusts it
+ * to make the labels fit without overlapping the data.
+ */
+export const getZonesTimeScale = (
+  minDate: Date,
+  maxDate: Date,
+  minX: number,
+  maxX: number,
+  zoneLabelsWidth = 80,
+) => {
+  const xScale = scaleTime({
+    domain: [minDate, maxDate],
+    range: [minX, maxX - zoneLabelsWidth],
+  });
+  // Calculates the date that corresponds
+  const endDate = xScale.invert(maxX);
+  xScale.domain([minDate, endDate]).range([0, maxX]);
+  return xScale;
 };
