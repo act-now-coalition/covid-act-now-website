@@ -205,6 +205,48 @@ export class Projections {
     }
   }
 
+  // TODO(pablo): Remove this method once the prevalence metric is no longer
+  // an 'update'. This is only used to show the level before and after the
+  // introduction of the prevalence metric for locations where the overall
+  // level changed.
+  getAlarmLevelWithoutCaseDensity() {
+    const {
+      rt_level,
+      hospitalizations_level,
+      test_rate_level,
+      contact_tracing_level,
+    } = this.getLevels();
+
+    const levelList = [rt_level, hospitalizations_level, test_rate_level];
+
+    // contact tracing levels are reversed (i.e low is bad, high is good)
+    const reverseList = [contact_tracing_level];
+
+    if (
+      levelList.some(level => level === Level.CRITICAL) ||
+      reverseList.some(level => level === Level.LOW)
+    ) {
+      return Level.CRITICAL;
+    } else if (
+      levelList.some(level => level === Level.HIGH) ||
+      reverseList.some(level => level === Level.MEDIUM)
+    ) {
+      return Level.HIGH;
+    } else if (
+      levelList.some(level => level === Level.MEDIUM) ||
+      reverseList.some(level => level === Level.HIGH)
+    ) {
+      return Level.MEDIUM;
+    } else if (
+      levelList.some(level => level === Level.UNKNOWN) ||
+      reverseList.some(level => level === Level.UNKNOWN)
+    ) {
+      return Level.UNKNOWN;
+    } else {
+      return Level.LOW;
+    }
+  }
+
   getAlarmLevelColor() {
     const level = this.getAlarmLevel();
     return LEVEL_COLOR[level];
