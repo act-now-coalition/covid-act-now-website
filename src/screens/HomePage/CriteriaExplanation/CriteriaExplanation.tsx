@@ -36,9 +36,9 @@ const CriteriaExplanation = (props: { isMobile: Boolean }) => {
         <Criterion>
           <Kicker isMobile={props.isMobile} title="Indicator 1" number="1" />
           <Content>
-            <CriterionHeader>[New infections per capita]</CriterionHeader>
+            <CriterionHeader>How widespread is COVID?</CriterionHeader>
             <CriterionDescription>
-              [How many new infections are occuring daily?]{' '}
+              How many new cases are confirmed daily?
             </CriterionDescription>
             <BetaTag>New Indicator</BetaTag>
           </Content>
@@ -46,7 +46,7 @@ const CriteriaExplanation = (props: { isMobile: Boolean }) => {
         <Criterion>
           <Kicker isMobile={props.isMobile} title="Indicator 2" number="2" />
           <Content>
-            <CriterionHeader>Are COVID cases decreasing?</CriterionHeader>
+            <CriterionHeader>How many COVID cases are there?</CriterionHeader>
             <CriterionDescription>
               Is the number of infections and deaths going down?{' '}
             </CriterionDescription>
