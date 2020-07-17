@@ -454,27 +454,11 @@ export class Projection {
   }
 
   private calcCaseDensityRange(): Array<CaseDensityRange | null> {
-    return this.caseDensityByDeaths.map((caseDensityByDeaths, i) => {
-      // TODO: We were intending to calculate a low/high range for
-      // caseDensityByDeath, based on a range of CFRs, but this doesn't work when
-      // we merge with caseDensityByCases which has no range. So for now,
-      // we are punting.
-      // const caseDensityByDeathsLow = (CASE_FATALITY_RATIO / CASE_FATALITY_RATIO_UPPER) * caseDensityByDeaths;
-      // const caseDensityByDeathsHigh = (CASE_FATALITY_RATIO / CASE_FATALITY_RATIO_LOWER) * caseDensityByDeaths;
-
-      const caseDensityByCases = this.caseDensityByCases[i];
-      const caseDensity = _.max(
-        [caseDensityByDeaths, caseDensityByCases].filter(cd => cd !== null),
-      );
-
-      return caseDensity == null
+    return this.caseDensityByCases.map(caseDensity =>
+      caseDensity === null
         ? null
-        : {
-            caseDensity,
-            low: caseDensity,
-            high: caseDensity,
-          };
-    });
+        : { caseDensity, low: caseDensity, high: caseDensity },
+    );
   }
 
   private calcRtRange(
