@@ -1,7 +1,9 @@
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
 import { Projection, CASE_FATALITY_RATIO } from 'common/models/Projection';
-import { formatInteger, formatPercent } from 'common/utils';
+import { formatInteger, formatPercent, formatDecimal } from 'common/utils';
+import { levelText } from 'common/utils/chart';
+import { getLevel, Metric } from 'common/metric';
 
 export const METRIC_NAME = 'Case Density';
 
@@ -51,6 +53,28 @@ for every reported death (${caseFatalityRatioPercent} infection fatality
 rate). Note that this will not match reported cases in many states, as 
 testing is only detecting a small number of actual cases.`;
 
-export const caseDensityStatusText = (projection: Projection) => {
-  return 'Case Density Status Text';
-};
+export function caseDensityStatusText(projection: Projection) {
+  const { currentCaseDensity, currentDailyDeaths, locationName } = projection;
+
+  if (currentCaseDensity === null || currentDailyDeaths === null) {
+    return `Not enough case data is available to generate ${METRIC_NAME.toLowerCase()}.`;
+  }
+
+  const level = getLevel(Metric.CASE_DENSITY, currentCaseDensity);
+  const dailyCases = formatDecimal(currentCaseDensity, 1);
+  const dailyDeaths = formatDecimal(currentDailyDeaths, 1);
+
+  const statusText1 = `Over the last week, ${locationName} has reported
+   ${dailyCases} new cases and ${dailyDeaths} new deaths per day for every
+    100,000 residents.`;
+
+  const statusText2 = levelText(
+    level,
+    `If these rates continue, we estimate less than 1% of ${locationName}’s population will be infected in the next year.`,
+    `If these rates continue, we estimate that 1-10% of ${locationName}’s population will be infected in the next year.`,
+    `If these rates continue, we estimate that 10-50% of ${locationName}’s population will be infected in the next year. Caution is warranted.`,
+    `If these rates continue, we estimate more than 50% of ${locationName}’s population will be infected in the next year. Aggressive action urgently needed.`,
+  );
+
+  return `${statusText1} ${statusText2}`;
+}

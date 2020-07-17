@@ -115,6 +115,7 @@ export class Projection {
   readonly currentCaseDensity: number | null;
   readonly currentCaseDensityByCases: number | null;
   readonly currentCaseDensityByDeaths: number | null;
+  readonly currentDailyDeaths: number | null;
 
   private readonly intervention: string;
   private readonly dates: Date[];
@@ -225,6 +226,7 @@ export class Projection {
     this.currentCaseDensity = lastValue(
       this.caseDensityRange.map(range => range && range.caseDensity),
     );
+    this.currentDailyDeaths = lastValue(this.smoothedDailyDeaths);
 
     this.fixZeros(this.hospitalizations);
     this.fixZeros(this.cumulativeDeaths);
