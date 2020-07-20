@@ -160,6 +160,7 @@ const ChartsHolder = (props: {
             <LocationPageHeader
               projections={props.projections}
               stats={props.projections.getMetricValues()}
+              onCaseDensityClick={() => scrollTo(caseDensityRef.current)}
               onRtRangeClick={() => scrollTo(rtRangeRef.current)}
               onTestPositiveClick={() => scrollTo(testPositiveRef.current)}
               onIcuUtilizationClick={() => scrollTo(icuUtilizationRef.current)}
