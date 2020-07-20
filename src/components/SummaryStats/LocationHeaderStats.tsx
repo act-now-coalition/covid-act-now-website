@@ -180,6 +180,7 @@ const LocationHeaderStats = (props: {
   stats: { [key: string]: number | null };
   condensed?: Boolean;
   isEmbed?: Boolean;
+  onCaseDensityClick?: () => void;
   onRtRangeClick?: () => void;
   onTestPositiveClick?: () => void;
   onIcuUtilizationClick?: () => void;
@@ -208,7 +209,7 @@ const LocationHeaderStats = (props: {
           condensed={props.condensed}
         >
           <SummaryStat
-            onClick={props.onRtRangeClick || noop}
+            onClick={props.onCaseDensityClick || noop}
             chartType={Metric.CASE_DENSITY}
             value={props.stats[Metric.CASE_DENSITY] as number}
             {...sharedStatProps}

@@ -94,6 +94,7 @@ const LocationPageHeader = (props: {
   onContactTracingClick?: () => void;
   onHeaderShareClick: () => void;
   onHeaderSignupClick: () => void;
+  onCaseDensityClick: () => void;
   isMobile?: Boolean;
 }) => {
   const hasStats = !!Object.values(props.stats).filter(
@@ -203,6 +204,7 @@ const LocationPageHeader = (props: {
           </HeaderSection>
           <LocationHeaderStats
             stats={props.stats}
+            onCaseDensityClick={props.onCaseDensityClick}
             onRtRangeClick={props.onRtRangeClick}
             onTestPositiveClick={props.onTestPositiveClick}
             onIcuUtilizationClick={props.onIcuUtilizationClick}
