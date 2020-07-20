@@ -140,7 +140,7 @@ class Newsletter extends React.Component {
             readOnly
             aria-label="county"
             id="fieldjrdtwd"
-            maxlength="200"
+            maxLength="200"
             name="cm-f-jrdtwd"
             value={county || ''}
           />
@@ -176,7 +176,7 @@ class Newsletter extends React.Component {
               <TextField
                 variant="outlined"
                 {...params}
-                placeholder="+ Add states or counties"
+                placeholder="+ Add alert locations"
               />
             )}
           />
@@ -188,7 +188,7 @@ class Newsletter extends React.Component {
               placeholder="Enter your email address"
               className="js-cm-email-input qa-input-email"
               id="fieldEmail"
-              maxlength="200"
+              maxLength="200"
               name="cm-yddtsd-yddtsd"
               required=""
               type="email"
@@ -211,9 +211,8 @@ class Newsletter extends React.Component {
               checked={this.state.checked}
             />
             <label htmlFor="checkbox">
-              {' '}
               Also send me <b>daily news</b> with the latest data and scientific
-              findings on COVID{' '}
+              findings on COVID
             </label>
           </InputHolder>
         </form>

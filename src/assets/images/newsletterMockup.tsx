@@ -12,7 +12,7 @@ const NewsletterMockup = () => {
       <g filter="url(#filter0_d)">
         <rect x="32" y="28" width="296" height="560" rx="8" fill="white" />
       </g>
-      <g clip-path="url(#clip0)">
+      <g clipPath="url(#clip0)">
         <rect
           width="161"
           height="128"
@@ -27,7 +27,7 @@ const NewsletterMockup = () => {
           d="M107.293 263.293L101.707 257.707C101.077 257.077 100 257.523 100 258.414L100 269.586C100 270.477 101.077 270.923 101.707 270.293L107.293 264.707C107.683 264.317 107.683 263.683 107.293 263.293Z"
           fill="#E0E0E0"
         />
-        <g clip-path="url(#clip1)">
+        <g clipPath="url(#clip1)">
           <path
             d="M129 280L129 306C129 309.314 126.314 312 123 312C119.686 312 117 309.314 117 306L117 280L129 280Z"
             fill="#00D474"
@@ -101,9 +101,9 @@ const NewsletterMockup = () => {
           width="360"
           height="624"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"

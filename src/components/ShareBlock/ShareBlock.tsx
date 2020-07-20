@@ -77,7 +77,7 @@ const ShareBlock = ({
 
   return (
     <ShareContainer>
-      <ShareRow newsletter={true}>
+      <ShareRow newsletter>
         <ShareRowContentArea
           isMatchingProjectionsRoute={isMatchingProjectionsRoute !== null}
         >
@@ -86,7 +86,7 @@ const ShareBlock = ({
           </NewsletterMockupWrapper>
           <NewsletterTextArea>
             <ShareInstructionHeader>Email Alerts</ShareInstructionHeader>
-            <ShareInstructionBody alertsInstructions={true}>
+            <ShareInstructionBody alertsInstructions>
               We'll email you when your state or county sees a significant
               change in one of their metrics or overall threat score.
             </ShareInstructionBody>

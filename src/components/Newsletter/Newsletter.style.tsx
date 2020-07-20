@@ -32,7 +32,7 @@ export const StyledNewsletter = styled.div`
       display: block;
       padding: 0.25rem 0.75rem;
       line-height: 2rem;
-      height: 3.25rem;
+      height: 3.5rem;
       outline: 0;
       border: 1px solid ${COLOR_MAP.GRAY.BASE};
       border-right: none;
@@ -63,7 +63,7 @@ export const StyledNewsletter = styled.div`
       display: block;
       appearance: none;
       box-sizing: border-box;
-      height: 3.25rem;
+      height: 3.5rem;
       flex-shrink: 0;
       flex: 1;
       outline: 0;
