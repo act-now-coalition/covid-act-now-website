@@ -1,38 +1,12 @@
 //@ts-ignore createsend has no types and throws an error
-import createsend from 'createsend-node';
 import * as Handlebars from 'handlebars';
-
 import admin from 'firebase-admin';
 import fs from 'fs-extra';
 import path from 'path';
 import { Alert } from './interfaces';
 import { getFirestore } from './firestore';
 import { Level } from '../../src/common/level';
-import delay from 'delay';
-
-interface EmailSendData {
-  Subject: string;
-  From: string;
-  ReplyTo: string | null;
-  To: string[] | null;
-  CC: string[] | null;
-  BCC: string[] | null;
-  Html: string;
-  Text: string;
-  Attachments: { [key: string]: string }[] | null;
-  TrackOpens: boolean;
-  TrackClicks: boolean;
-  InlineCSS: boolean;
-  Group: string | null;
-  AddRecipientsToList: string | null;
-}
-
-interface SendEmailResult {
-  MessageID: string;
-  Recipient: string;
-  Status: string;
-  headers: { [key: string]: string };
-}
+import CreateSend, { EmailSendData } from './createsend';
 
 interface CampaignMonitorError {
   Code: number;
@@ -45,33 +19,6 @@ const CM_INVALID_EMAIL_ERROR_CODE = 1;
 const alertTemplate = Handlebars.compile(
   fs.readFileSync(path.join(__dirname, 'template.html'), 'utf8'),
 );
-
-async function sendEmail(
-  api: any,
-  data: EmailSendData,
-  dryRun: boolean,
-): Promise<SendEmailResult> {
-  return new Promise((resolve, reject) => {
-    if (dryRun) {
-      return resolve({
-        MessageID: 'none',
-        Recipient: 'none',
-        Status: 'dry run',
-        headers: {},
-      });
-    }
-    api.transactional.sendClassicEmail(
-      data,
-      (err: CampaignMonitorError, result: any) => {
-        if (err) {
-          console.log(err);
-          reject(err);
-        }
-        resolve(result);
-      },
-    );
-  });
-}
 
 function generateSendData(
   userToEmail: string,
@@ -108,12 +55,13 @@ function generateSendData(
     Html: html,
     Text: html,
     AddRecipientsToList: null,
-    From: 'Covid Act Now Alerts  <noreply@covidactnow.org>',
+    From: 'Covid Act Now Alerts <noreply@covidactnow.org>',
     ReplyTo: 'noreply@covidactnow.org',
     TrackOpens: true,
     TrackClicks: true,
     InlineCSS: true,
-    Group: null,
+    Group: 'Alert Email',
+    ConsentToTrack: 'Unchanged',
   };
 }
 
@@ -153,8 +101,7 @@ async function setLastSnapshotNumber(
   const locationsWithAlerts: { [fips: string]: Alert } = JSON.parse(rawdata);
 
   // TODO: maybe oauth here and add secrets into github.
-  const auth = { apiKey: process.env.CREATE_SEND_TOKEN };
-  const api: any = new createsend(auth);
+  const createSend = new CreateSend(process.env.CREATE_SEND_TOKEN);
   let emailSent = 0;
   let errorCount = 0;
   let invalidEmailCount = 0;
@@ -170,28 +117,16 @@ async function setLastSnapshotNumber(
       .then(async querySnapshot => {
         for (const doc of querySnapshot.docs) {
           const userToEmail = sendAllToEmail ? sendAllToEmail : doc.id;
-          await sendEmail(
-            api,
-            generateSendData(userToEmail, locationsWithAlerts[fips]),
-            dryRun,
-          )
+          const locationAlert = locationsWithAlerts[fips];
+          const emailData = generateSendData(userToEmail, locationAlert);
+          await createSend
+            .sendClassicEmail(emailData)
             .then(async result => {
               emailSent += 1;
               uniqueEmailAddress[doc.id] =
                 (uniqueEmailAddress[doc.id] || 0) + 1;
               locationsWithEmails[fips] = (locationsWithEmails[fips] || 0) + 1;
               if (dryRun) return;
-              const rateLimitRemaining = parseInt(
-                result.headers['x-ratelimit-remaining'],
-              );
-              if (rateLimitRemaining < 10) {
-                const rateLimitReset =
-                  parseInt(result.headers['x-ratelimit-reset']) + 15;
-                console.log(
-                  `Rate limit remaining: ${rateLimitRemaining}. Sleeping ${rateLimitReset} seconds.`,
-                );
-                await delay(rateLimitReset * 1000);
-              }
               // Comment out this code if you are developing locally
               await db
                 .collection(

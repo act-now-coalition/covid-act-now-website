@@ -21,7 +21,6 @@
     "@vx/tooltip": "^0.0.196",
     "@vx/voronoi": "^0.0.196",
     "bluebird": "^3.7.2",
-    "createsend-node": "^0.8.2",
     "csv-parse": "^4.8.8",
     "d3-array": "^2.4.0",
     "d3-time": "^1.1.0",
@@ -33,8 +32,6 @@
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "pageres": "^5.2.0",
-    "patch-package": "^6.2.2",
-    "postinstall-postinstall": "^2.1.0",
     "query-string": "^6.11.1",
     "react": "^16.13.0",
     "react-copy-to-clipboard": "^5.0.2",
@@ -51,7 +48,6 @@
     "tar": "^6.0.1"
   },
   "scripts": {
-    "postinstall": "patch-package",
     "start": "cross-env TSC_COMPILE_ON_ERROR=false react-scripts -r @cypress/instrument-cra start",
     "build": "react-scripts build",
     "build:staging": "cross-env REACT_APP_ENVIRONMENT=staging yarn build && yarn generate-index-pages",
