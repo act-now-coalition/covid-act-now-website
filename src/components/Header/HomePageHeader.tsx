@@ -30,8 +30,8 @@ const HomePageHeader = (props: { indicatorsLinkOnClick: () => void }) => {
                 5 key indicators
               </ClickableCopy>{' '}
               to determine risk levels {!isMobile && <br />}
-              for <strong>50 states</strong> and <strong>2,100 counties</strong>
-              .
+              for <strong>50 states</strong> and{' '}
+              <strong>3,000+ counties</strong>.
             </HeaderSubCopyItem>
           </HeaderSubCopy>
           {false && (

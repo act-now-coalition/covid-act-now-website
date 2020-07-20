@@ -39,5 +39,5 @@ export default function makeChartShareQuote(
     }
     return `Assuming current trends and interventions continue, ${displayName}'s hospitals are unlikely to become overloaded in the next 3 months, according to @CovidActNow. See the chart: `;
   }
-  return `I'm keeping track of ${displayName}'s data and risk level with @CovidActNow. What does your community look like?`;
+  return `I'm keeping track of ${displayName}'s COVID data and risk level with @CovidActNow. What does your community look like?`;
 }

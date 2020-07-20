@@ -36,7 +36,7 @@ const CriteriaExplanation = (props: { isMobile: Boolean }) => {
         <Criterion>
           <Kicker isMobile={props.isMobile} title="Indicator 1" number="1" />
           <Content>
-            <CriterionHeader>How widespread is COVID?</CriterionHeader>
+            <CriterionHeader>New Cases per 100k</CriterionHeader>
             <CriterionDescription>
               How many new cases are confirmed daily?
             </CriterionDescription>
@@ -46,7 +46,7 @@ const CriteriaExplanation = (props: { isMobile: Boolean }) => {
         <Criterion>
           <Kicker isMobile={props.isMobile} title="Indicator 2" number="2" />
           <Content>
-            <CriterionHeader>How many COVID cases are there?</CriterionHeader>
+            <CriterionHeader>Infection Rate</CriterionHeader>
             <CriterionDescription>
               Is the number of infections and deaths going down?{' '}
             </CriterionDescription>
@@ -55,7 +55,7 @@ const CriteriaExplanation = (props: { isMobile: Boolean }) => {
         <Criterion>
           <Kicker isMobile={props.isMobile} title="Indicator 3" number="3" />
           <Content>
-            <CriterionHeader>Are we testing enough?</CriterionHeader>
+            <CriterionHeader>Test Positivity</CriterionHeader>
             <CriterionDescription>
               Is COVID testing widespread enough to identify new cases?
             </CriterionDescription>
@@ -64,7 +64,7 @@ const CriteriaExplanation = (props: { isMobile: Boolean }) => {
         <Criterion>
           <Kicker isMobile={props.isMobile} title="Indicator 4" number="4" />
           <Content>
-            <CriterionHeader>Are our hospitals ready?</CriterionHeader>
+            <CriterionHeader>ICU Headroom</CriterionHeader>
             <CriterionDescription>
               Do hospitals have capacity to treat a surge of COVID
               hospitalizations?
@@ -74,7 +74,7 @@ const CriteriaExplanation = (props: { isMobile: Boolean }) => {
         <Criterion>
           <Kicker isMobile={props.isMobile} title="Indicator 5" number="5" />
           <Content>
-            <CriterionHeader>Are we tracing fast enough?</CriterionHeader>
+            <CriterionHeader>Contacts Traced</CriterionHeader>
             <CriterionDescription>
               Are we finding and isolating most new cases before COVID spreads?
             </CriterionDescription>
