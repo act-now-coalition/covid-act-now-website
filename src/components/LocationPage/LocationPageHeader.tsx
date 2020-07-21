@@ -53,7 +53,7 @@ const UpdateCaseDensity: FunctionComponent<{ projections: Projections }> = ({
     <Copy isUpdateCopy>
       <strong>New key indicator added</strong>
       <br />
-      {`We added ${CASE_DENSITY_METRIC_NAME}. ${changedLevelCopy}`}
+      {`We added ${CASE_DENSITY_METRIC_NAME.toLowerCase()}. ${changedLevelCopy}`}
       <a href="/">Learn more</a>
     </Copy>
   );
