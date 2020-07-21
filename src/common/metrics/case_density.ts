@@ -63,7 +63,7 @@ export function caseDensityStatusText(projection: Projection) {
 
   const statusText2 = levelText(
     level,
-    `As context, if these rates were to continue, less than 2% of ${locationName}’s population would be infected in the next year *.`,
+    `As context, if these rates were to continue, less than 2% of ${locationName}’s population would be infected in the next year.`,
     `As context, if these rates were to continue, less than 20% of ${locationName}’s population would be infected in the next year.`,
     `As context, if these rates were to continue, less than 50% of ${locationName}’s population would be infected in the next year.`,
     `As context, if these rates were to continue, more than 50% of ${locationName}’s population would be infected in the next year.`,

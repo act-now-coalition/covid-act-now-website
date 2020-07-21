@@ -22,21 +22,21 @@ const Disclaimer = ({ metricName }: { metricName: number }) => {
         {metricName === Metric.CASE_DENSITY && (
           <Fragment>
             <span>
-              In most locations, not every infected person is tested. Therefore,
-              the number of actual infections is almost always higher than the
-              number of confirmed cases.
-            </span>
-            <br />
-            <span>
               Our risk levels for daily new cases are based on the “Key Metrics
               for Covid Suppression” by Harvard Global Health Institute and
               others.
-            </span>
-            <br />
-            <span>
+              <br />
               When estimating the number of people who will become infected in
-              the course of a year, we rely on CDC’s estimate that confirmed
-              cases represent as few as 10% of overall infections.
+              the course of a year, we rely on the{' '}
+              <a
+                href="https://www.globalhealthnow.org/2020-06/us-cases-10x-higher-reported"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                CDC’s estimate
+              </a>{' '}
+              that confirmed cases represent as few as 10% of overall
+              infections.
             </span>
           </Fragment>
         )}
