@@ -69,7 +69,7 @@ export default function HomePage() {
       <AppMetaTags
         canonicalUrl="/"
         pageTitle={undefined}
-        pageDescription="Real-time modeling and metrics to understand where we stand against COVID. 50 states. 2,100+ counties. Click the map to dive in"
+        pageDescription="Real-time modeling and metrics to understand where we stand against COVID. 50 states. 3,000+ counties. Click the map to dive in"
       />
       <HomePageHeader
         indicatorsLinkOnClick={() => scrollTo(indicatorsRef.current)}
