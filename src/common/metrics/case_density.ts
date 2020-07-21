@@ -45,7 +45,7 @@ export const CASE_DENSITY_LEVEL_INFO_MAP: LevelInfoMap = {
   },
 };
 
-export const CASE_DENSITY_DISCLAIMER = `In most locations, not every infected person is tested. Therefore, the number of actual infections is almost always higher than the number of confirmed cases. Our risk levels for daily new cases are based on the “Key Metrics for Covid Suppression” by Harvard Global Health Institute and others. When estimating the number of people who will become infected in the course of a year, we rely on CDC’s estimate that confirmed cases represent as few as 10% of overall infections.`;
+export const CASE_DENSITY_DISCLAIMER = '';
 
 export function caseDensityStatusText(projection: Projection) {
   const { currentCaseDensity, currentDailyDeaths, locationName } = projection;
