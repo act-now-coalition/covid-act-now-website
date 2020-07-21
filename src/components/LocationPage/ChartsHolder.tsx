@@ -58,7 +58,6 @@ const ChartsHolder = (props: {
   const shareBlockRef = useRef<HTMLDivElement>(null);
   const caseDensityRef = useRef<HTMLDivElement>(null);
 
-  // TODO (chelsi): follow up with Michael about moving this hook down
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 

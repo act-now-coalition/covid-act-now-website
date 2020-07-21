@@ -82,8 +82,6 @@ const LocationPageHeading = (props: { projections: Projections }) => {
 
 const noop = () => {};
 
-// TODO (Chelsi): find out which piece of text goes in LevelDescription
-
 const LocationPageHeader = (props: {
   projections: Projections;
   condensed?: Boolean;

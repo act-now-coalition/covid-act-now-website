@@ -18,7 +18,6 @@ export const ColoredHeaderBanner = styled(Box)`
   }
 `;
 
-//TODO(Chelsi): edit max-width and margins to make header scale properly with new minimap dimensions
 export const Wrapper = styled(Box)<{
   condensed?: Boolean;
   headerTopMargin: number;
