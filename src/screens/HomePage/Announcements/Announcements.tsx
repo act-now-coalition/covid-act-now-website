@@ -18,14 +18,14 @@ const Announcements = () => {
     <Wrapper>
       <AnnouncementsSectionHeader>Announcements</AnnouncementsSectionHeader>
       <AnnouncementIntro>
-        Introducing our newest key indicator, “Daily New Cases Per 100K
-        Population.”
+        Introducing our newest key indicator, “Daily New Cases Per 100k
+        Population”.
       </AnnouncementIntro>
-      <Date>Tuesday, July 1, 2020</Date>
+      <Date>Tuesday, July 21, 2020</Date>
       <AnnouncementBodyCopy>
         Today, we are excited to announce a fifth metric added to our COVID
-        warning system: daily new cases per 100K population. The technical,
-        epidemiological term is “case incidence.”
+        warning system: daily new cases per 100k population. The technical,
+        epidemiological term is “case incidence”.
       </AnnouncementBodyCopy>
       <ButtonsContainer>
         <ReadMoreButton
