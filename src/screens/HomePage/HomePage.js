@@ -25,6 +25,8 @@ import {
 
 import { SelectorWrapper } from 'components/Header/HomePageHeader.style';
 
+import CompareMain from 'components/Compare/CompareMain';
+
 export default function HomePage() {
   const shareBlockRef = useRef(null);
   const location = useLocation();
@@ -88,6 +90,7 @@ export default function HomePage() {
             </SearchBarThermometerWrapper>
             <Map hideLegend />
             {isMobile && <HomePageThermometer />}
+            <CompareMain locationsViewable={5} isHomepage />
             <SectionWrapper ref={indicatorsRef}>
               <CriteriaExplanation isMobile={isMobile} />
             </SectionWrapper>

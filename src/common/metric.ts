@@ -5,9 +5,10 @@ import * as ContactTracing from 'common/metrics/contact_tracing';
 import * as FutureProjections from 'common/metrics/future_projection';
 import * as CaseDensity from 'common/metrics/case_density';
 import { Projection } from 'common/models/Projection';
-
+import { formatDecimal, formatPercent } from 'common/utils';
 import { Level, LevelInfo } from 'common/level';
 import { assert } from './utils';
+import { fail } from 'assert';
 
 export enum Metric {
   CASE_GROWTH_RATE,
@@ -109,3 +110,24 @@ export function getMetricStatusText(metric: Metric, projection: Projection) {
   };
   return METRIC_TO_STATUS_TEXT[metric];
 }
+
+export const formatValue = (
+  chartType: Metric,
+  value: number | null,
+): string => {
+  if (value === null) {
+    return 'Unknown';
+  }
+  if (chartType === Metric.CASE_DENSITY) {
+    return value.toFixed(1).toString();
+  } else if (chartType === Metric.CASE_GROWTH_RATE) {
+    return formatDecimal(value);
+  } else if (chartType === Metric.HOSPITAL_USAGE) {
+    return formatPercent(value);
+  } else if (chartType === Metric.POSITIVE_TESTS) {
+    return formatPercent(value, 1);
+  } else if (chartType === Metric.CONTACT_TRACING) {
+    return formatPercent(value, 0);
+  }
+  fail('Invalid Chart Type');
+};

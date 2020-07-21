@@ -1,0 +1,106 @@
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { SummaryForCompare } from 'components/Compare/CompareTable';
+import { MetricCell, Row } from 'components/Compare/Compare.style';
+import { Metric, formatValue } from 'common/metric';
+import { Level } from 'common/level';
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+
+function cellValue(metric: any, metricType: Metric) {
+  if (metric === null || metric === undefined) {
+    return 'Unknown';
+  }
+  return formatValue(metricType, metric.value);
+}
+
+const CompareTableRow = (props: {
+  location: SummaryForCompare;
+  index: number;
+  sorter: any;
+}) => {
+  const { location, index, sorter } = props;
+
+  //TODO(Chelsi): fix the else?
+  function getLevel(metricIndex: Metric): Level {
+    const metricInfo = location.metricsInfo.metrics[metricIndex];
+    if (metricInfo) {
+      return metricInfo.level;
+    }
+    return 4;
+  }
+
+  const history = useHistory();
+
+  const goToLocationPage = (page: string) => {
+    window.scrollTo(0, 0);
+    history.push(page);
+  };
+
+  const handleLocationClick = () => {
+    return goToLocationPage(
+      `/us/${location.locationInfo.state_code.toLowerCase()}${
+        location.locationInfo.county_url_name
+          ? `/county/${location.locationInfo.county_url_name.toLowerCase()}`
+          : ''
+      }`,
+    );
+  };
+
+  const locationName = location.locationInfo.county
+    ? location.locationInfo.county
+    : location.locationInfo.state;
+
+  return (
+    <Row index={index}>
+      <MetricCell
+        onClick={handleLocationClick}
+        iconColor={location.metricsInfo.level}
+      >
+        <FiberManualRecordIcon />
+        {locationName}
+      </MetricCell>
+      <MetricCell
+        sorter={sorter}
+        metric={Metric.CASE_DENSITY}
+        iconColor={getLevel(Metric.CASE_DENSITY)}
+      >
+        <FiberManualRecordIcon />
+        {cellValue(location.metricsInfo.metrics[5], Metric.CASE_DENSITY)}
+      </MetricCell>
+      <MetricCell
+        sorter={sorter}
+        metric={Metric.CASE_GROWTH_RATE}
+        iconColor={getLevel(Metric.CASE_GROWTH_RATE)}
+      >
+        <FiberManualRecordIcon />
+        {cellValue(location.metricsInfo.metrics[0], Metric.CASE_GROWTH_RATE)}
+      </MetricCell>
+      <MetricCell
+        sorter={sorter}
+        metric={Metric.POSITIVE_TESTS}
+        iconColor={getLevel(Metric.POSITIVE_TESTS)}
+      >
+        <FiberManualRecordIcon />
+        {cellValue(location.metricsInfo.metrics[1], Metric.POSITIVE_TESTS)}
+      </MetricCell>
+      <MetricCell
+        sorter={sorter}
+        metric={Metric.HOSPITAL_USAGE}
+        iconColor={getLevel(Metric.HOSPITAL_USAGE)}
+      >
+        <FiberManualRecordIcon />
+        {cellValue(location.metricsInfo.metrics[2], Metric.HOSPITAL_USAGE)}
+      </MetricCell>
+      <MetricCell
+        sorter={sorter}
+        metric={Metric.CONTACT_TRACING}
+        iconColor={getLevel(Metric.CONTACT_TRACING)}
+      >
+        <FiberManualRecordIcon />
+        {cellValue(location.metricsInfo.metrics[3], Metric.CONTACT_TRACING)}
+      </MetricCell>
+    </Row>
+  );
+};
+
+export default CompareTableRow;

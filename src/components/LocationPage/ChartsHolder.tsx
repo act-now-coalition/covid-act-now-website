@@ -9,6 +9,7 @@ import ChartBlock from 'components/LocationPage/ChartBlock';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { Metric } from 'common/metric';
+import CompareMain from 'components/Compare/CompareMain';
 
 // TODO(michael): figure out where this type declaration should live.
 type County = {
@@ -168,6 +169,13 @@ const ChartsHolder = (props: {
               onHeaderShareClick={() => scrollTo(shareBlockRef.current, -372)}
               onHeaderSignupClick={() => scrollTo(shareBlockRef.current)}
               isMobile={isMobile}
+            />
+            <CompareMain
+              stateId={props.stateId}
+              stateName={props.projections.stateName}
+              county={props.county}
+              locationsViewable={5}
+              isLocationPage
             />
             <MainContentInner>
               {chartPropsForMap.map(chartProps => (

@@ -22,7 +22,19 @@ export interface County {
   population: number;
 }
 
-export function getLocationNames() {
+export interface Location {
+  county?: string;
+  county_url_name?: string;
+  county_fips_code?: string;
+  state_fips_code: string;
+  full_fips_code?: string;
+  cities?: string[];
+  population: number;
+  state_code: string;
+  state: string;
+}
+
+export function getLocationNames(): Location[] {
   const locations = US_STATE_DATASET.state_dataset.map(state => {
     return {
       ...state,
