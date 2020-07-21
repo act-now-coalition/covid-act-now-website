@@ -36,7 +36,7 @@ const CriteriaExplanation = (props: { isMobile: Boolean }) => {
         <Criterion>
           <Kicker isMobile={props.isMobile} title="Indicator 1" number="1" />
           <Content>
-            <CriterionHeader>New Cases per 100k</CriterionHeader>
+            <CriterionHeader>Daily new cases</CriterionHeader>
             <CriterionDescription>
               How many new cases are confirmed daily?
             </CriterionDescription>

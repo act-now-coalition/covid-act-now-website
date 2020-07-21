@@ -18,10 +18,10 @@ const Announcements = () => {
     <Wrapper>
       <AnnouncementsSectionHeader>Announcements</AnnouncementsSectionHeader>
       <AnnouncementIntro>
-        Introducing our newest key indicator, “Daily New Cases Per 100k
-        Population”.
+        Introducing our newest key indicator, “Daily New Cases Per 100K
+        Population”
       </AnnouncementIntro>
-      <Date>Tuesday, July 21, 2020</Date>
+      <Date>Wednesday, July 22, 2020</Date>
       <AnnouncementBodyCopy>
         Today, we are excited to announce a fifth metric added to our COVID
         warning system: daily new cases per 100k population. The technical,
@@ -29,7 +29,7 @@ const Announcements = () => {
       </AnnouncementBodyCopy>
       <ButtonsContainer>
         <ReadMoreButton
-          href="https://blog.covidactnow.org/"
+          href="https://docs.google.com/document/d/15w80AaHsSK1EmqYFKwnaR9kTArQI2_tuQ-rcLWJG0-w/edit#"
           target="_blank"
           rel="noopener"
         >
