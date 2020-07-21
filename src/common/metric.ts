@@ -34,7 +34,7 @@ const METRIC_TO_NAME = {
   [Metric.HOSPITAL_USAGE]: Hospitalizations.METRIC_NAME,
   [Metric.CONTACT_TRACING]: ContactTracing.METRIC_NAME,
   [Metric.FUTURE_PROJECTIONS]: FutureProjections.METRIC_NAME,
-  [Metric.CASE_DENSITY]: CaseDensity.METRIC_NAME,
+  [Metric.CASE_DENSITY]: 'Daily new cases',
 };
 
 export function getMetricName(metric: Metric) {
