@@ -55,13 +55,18 @@ function ChartBlock(props: {
     !futureProjectionsDisabled &&
     props.projections.hasMetric(Metric.FUTURE_PROJECTIONS);
 
+  const chartHeader =
+    props.metric === Metric.CASE_DENSITY
+      ? `${getMetricName(props.metric)} per 100k population`
+      : `${getMetricName(props.metric)}`;
+
   return (
     <Fragment>
       {props.metric !== Metric.FUTURE_PROJECTIONS && (
         <Fragment>
           <ChartHeaderWrapper>
             <ChartHeader ref={props.chartRef}>
-              {getMetricName(props.metric)}
+              {chartHeader}
               {showBetaTag && <BetaTag>Beta</BetaTag>}
             </ChartHeader>
             {!props.isMobile && props.data && (

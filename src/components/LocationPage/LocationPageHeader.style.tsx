@@ -126,7 +126,7 @@ export const HeaderSubtitle = styled(Typography)`
 `;
 
 export const FooterContainer = styled(Box)`
-  margin: 0.8rem 0.3rem 0.8rem;
+  margin: 0.8rem 0.3rem 0;
 
   p {
     padding: 0;
