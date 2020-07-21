@@ -89,13 +89,7 @@ export class Api {
         }
       }),
     );
-
-    // TODO(michael): Filter out any locations without LIMITED_ACTION
-    // intervention since that means they don't have hospital projections, which
-    // we don't support yet.
-    return Object.values(merged).filter(
-      map => map[INTERVENTIONS.LIMITED_ACTION] != null,
-    );
+    return Object.values(merged);
   }
 
   /**
@@ -114,16 +108,7 @@ export class Api {
         );
       }),
     );
-
-    // TODO(michael): Filter out any locations without LIMITED_ACTION
-    // intervention since that means they don't have hospital projections, which
-    // we don't support yet.
-    return result[INTERVENTIONS.LIMITED_ACTION]
-      ? result
-      : {
-          [INTERVENTIONS.LIMITED_ACTION]: null,
-          [INTERVENTIONS.PROJECTED]: null,
-        };
+    return result;
   }
 
   /** Fetches the summary+timeseries for a region and a single intervention. */

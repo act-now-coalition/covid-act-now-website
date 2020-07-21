@@ -19,6 +19,27 @@ const Disclaimer = ({ metricName }: { metricName: number }) => {
         >
           <span>Last updated {lastUpdatedDateString}.</span>
         </LightTooltip>{' '}
+        {metricName === Metric.CASE_DENSITY && (
+          <Fragment>
+            <span>
+              Our risk levels for daily new cases are based on the “Key Metrics
+              for Covid Suppression” by Harvard Global Health Institute and
+              others.
+              <br />
+              When estimating the number of people who will become infected in
+              the course of a year, we rely on the{' '}
+              <a
+                href="https://www.globalhealthnow.org/2020-06/us-cases-10x-higher-reported"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                CDC’s estimate
+              </a>{' '}
+              that confirmed cases represent as few as 10% of overall
+              infections.
+            </span>
+          </Fragment>
+        )}
         {metricName === Metric.CONTACT_TRACING && (
           <Fragment>
             <a

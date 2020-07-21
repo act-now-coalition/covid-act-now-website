@@ -1,5 +1,4 @@
 import React, { useRef, useEffect } from 'react';
-
 import { ChartContentWrapper, MainContentInner } from './ChartsHolder.style';
 import NoCountyDetail from './NoCountyDetail';
 import { Projections } from 'common/models/Projections';
@@ -48,6 +47,7 @@ const ChartsHolder = (props: {
     testPositiveData,
     icuUtilizationData,
     contactTracingData,
+    caseDensityData,
   } = getChartData(projection);
 
   const rtRangeRef = useRef<HTMLDivElement>(null);
@@ -56,13 +56,13 @@ const ChartsHolder = (props: {
   const contactTracingRef = useRef<HTMLDivElement>(null);
   const futureProjectionsRef = useRef<HTMLDivElement>(null);
   const shareBlockRef = useRef<HTMLDivElement>(null);
+  const caseDensityRef = useRef<HTMLDivElement>(null);
 
-  // TODO (chelsi): follow up with Michael about moving this hook down
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
   useEffect(() => {
-    const chartIdentifiers = ['0', '1', '2', '3', '4'];
+    const chartIdentifiers = ['0', '1', '2', '3', '4', '5'];
     const scrollToChart = () => {
       const timeoutId = setTimeout(() => {
         if (props.chartId && !chartIdentifiers.includes(props.chartId)) return;
@@ -77,6 +77,8 @@ const ChartsHolder = (props: {
             scrollTo(contactTracingRef.current);
           if (props.chartId === '4' && futureProjectionsRef.current)
             scrollTo(futureProjectionsRef.current);
+          if (props.chartId === '5' && caseDensityRef.current)
+            scrollTo(caseDensityRef.current);
         }
       }, 200);
       return () => clearTimeout(timeoutId);
@@ -98,6 +100,13 @@ const ChartsHolder = (props: {
   //TODO (chelsi): make it so we dont need to pre-generate props array (see comment in PR #970)
   const chartPropsForMap = projection
     ? [
+        {
+          chartRef: caseDensityRef,
+          isMobile,
+          data: caseDensityData,
+          shareButtonProps,
+          metric: Metric.CASE_DENSITY,
+        },
         {
           chartRef: rtRangeRef,
           isMobile,
@@ -150,6 +159,7 @@ const ChartsHolder = (props: {
             <LocationPageHeader
               projections={props.projections}
               stats={props.projections.getMetricValues()}
+              onCaseDensityClick={() => scrollTo(caseDensityRef.current)}
               onRtRangeClick={() => scrollTo(rtRangeRef.current)}
               onTestPositiveClick={() => scrollTo(testPositiveRef.current)}
               onIcuUtilizationClick={() => scrollTo(icuUtilizationRef.current)}
@@ -186,6 +196,7 @@ export function getChartData(
   testPositiveData: any;
   icuUtilizationData: any;
   contactTracingData: any;
+  caseDensityData: any;
 } {
   const rtRangeData =
     projection?.rt == null
@@ -213,11 +224,17 @@ export function getChartData(
       ? null
       : projection.getDataset('contractTracers');
 
+  const caseDensityData =
+    projection?.currentCaseDensityByDeaths == null
+      ? null
+      : projection.getDataset('caseDensityRange');
+
   return {
     rtRangeData,
     testPositiveData,
     icuUtilizationData,
     contactTracingData,
+    caseDensityData,
   };
 }
 
