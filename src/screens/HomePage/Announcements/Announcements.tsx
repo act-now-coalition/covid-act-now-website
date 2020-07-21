@@ -21,7 +21,7 @@ const Announcements = () => {
         Introducing our newest key indicator, “Daily New Cases Per 100K
         Population”
       </AnnouncementIntro>
-      <Date>Wednesday, July 22, 2020</Date>
+      <Date>Tuesday, July 21, 2020</Date>
       <AnnouncementBodyCopy>
         Today, we are excited to announce a fifth metric added to our COVID
         warning system: daily new cases per 100k population. The technical,
