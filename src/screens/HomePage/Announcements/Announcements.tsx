@@ -19,7 +19,7 @@ const Announcements = () => {
         Introducing our newest key indicator, “Daily New Cases Per 100K
         Population”
       </AnnouncementIntro>
-      <Date>Tuesday, July 21, 2020</Date>
+      <Date>Wednesday, July 22, 2020</Date>
       <AnnouncementBodyCopy>
         Today, we are adding an important fifth metric to our COVID warning
         system: “daily new cases per 100K population.” The addition of this
@@ -28,7 +28,7 @@ const Announcements = () => {
       </AnnouncementBodyCopy>
       <ButtonsContainer>
         <ReadMoreButton
-          href="https://docs.google.com/document/d/15w80AaHsSK1EmqYFKwnaR9kTArQI2_tuQ-rcLWJG0-w/edit#"
+          href="https://blog.covidactnow.org/"
           target="_blank"
           rel="noopener"
         >
