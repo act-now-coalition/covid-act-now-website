@@ -23,9 +23,10 @@ const Announcements = () => {
       </AnnouncementIntro>
       <Date>Tuesday, July 21, 2020</Date>
       <AnnouncementBodyCopy>
-        Today, we are excited to announce a fifth metric added to our COVID
-        warning system: daily new cases per 100k population. The technical,
-        epidemiological term is “case incidence”.
+        Today, we are adding an important fifth metric to our COVID warning
+        system: “daily new cases per 100K population.” The addition of this
+        metric rounds out our warning system by incorporating a measure of how
+        much COVID there is in each community today.
       </AnnouncementBodyCopy>
       <ButtonsContainer>
         <ReadMoreButton
