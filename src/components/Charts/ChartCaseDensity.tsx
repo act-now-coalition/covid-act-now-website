@@ -92,7 +92,7 @@ const ChartCaseDensity: FunctionComponent<{
       title={formatUtcDate(getDate(p), 'MMM D, YYYY')}
     >
       <TooltipStyle.Body>
-        {`Case density ${formatDecimal(getY(p), 1)}/100k`}
+        {`Daily new cases ${formatDecimal(getY(p), 1)}/100k`}
       </TooltipStyle.Body>
     </Tooltip>
   );
