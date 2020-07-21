@@ -8,6 +8,7 @@ import {
 } from 'screens/HomePage/HomePageThermometer.style';
 import { Level } from 'common/level';
 import { LEVEL_COLOR } from 'common/colors';
+import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 
 const ThermometerRow = (props: {
   text: string;
@@ -26,22 +27,22 @@ const HomePageThermometer = () => {
   const thermometerContent = [
     {
       level: Level.CRITICAL,
-      text: 'Active outbreak or major gaps',
+      text: `${LOCATION_SUMMARY_LEVELS[Level.CRITICAL].summary}`,
       levelColor: `${LEVEL_COLOR[Level.CRITICAL]}`,
     },
     {
       level: Level.HIGH,
-      text: 'Risk of second spike',
+      text: `${LOCATION_SUMMARY_LEVELS[Level.HIGH].summary}`,
       levelColor: `${LEVEL_COLOR[Level.HIGH]}`,
     },
     {
       level: Level.MEDIUM,
-      text: 'On track for herd immunity',
+      text: `${LOCATION_SUMMARY_LEVELS[Level.MEDIUM].summary}`,
       levelColor: `${LEVEL_COLOR[Level.MEDIUM]}`,
     },
     {
       level: Level.LOW,
-      text: 'On track for containment',
+      text: `${LOCATION_SUMMARY_LEVELS[Level.LOW].summary}`,
       levelColor: `${LEVEL_COLOR[Level.LOW]}`,
     },
   ];
