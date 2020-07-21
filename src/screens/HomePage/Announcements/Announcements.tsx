@@ -11,8 +11,6 @@ import {
   ViewAllLink,
 } from './Announcements.style';
 
-//TODO(Chelsi): replace ReadMoreButton's href with blog post
-
 const Announcements = () => {
   return (
     <Wrapper>
