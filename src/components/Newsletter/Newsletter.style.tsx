@@ -9,10 +9,11 @@ export const InputHolder = styled.div<{ errMessageOpen?: boolean }>`
   padding-top: 0.5rem;
   label {
     margin: 0 0 8px 8px;
+    color: #4f4f4f;
   }
 
   &:last-child {
-    padding-top: ${({ errMessageOpen }) => (errMessageOpen ? '0' : '24px')};
+    padding-top: ${({ errMessageOpen }) => (errMessageOpen ? '6px' : '30px')};
   }
 `;
 

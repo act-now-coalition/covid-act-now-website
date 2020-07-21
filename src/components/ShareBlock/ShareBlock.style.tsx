@@ -16,9 +16,12 @@ export const ShareContainer = styled.div`
   }
 `;
 
-export const ShareInstructionHeader = styled(Typography)`
+export const ShareInstructionHeader = styled(Typography)<{
+  alertsInstructions?: boolean;
+}>`
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: ${({ alertsInstructions }) =>
+    alertsInstructions ? '1.25rem' : '1rem'};
   font-size: 1.75rem;
   font-weight: 700;
   line-height: 2rem;
@@ -35,7 +38,7 @@ export const ShareInstructionBody = styled(Typography)<{
 }>`
   margin-top: 0;
   margin-bottom: ${({ alertsInstructions }) =>
-    alertsInstructions ? '.25rem' : '1rem'};
+    alertsInstructions ? '1.5rem' : '1rem'};
   line-height: 1.6rem;
   color: inherit;
 `;
