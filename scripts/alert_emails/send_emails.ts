@@ -1,14 +1,12 @@
 //@ts-ignore createsend has no types and throws an error
 import createsend from 'createsend-node';
-import * as Handlebars from 'handlebars';
-
 import admin from 'firebase-admin';
+import delay from 'delay';
 import fs from 'fs-extra';
 import path from 'path';
 import { Alert } from './interfaces';
 import { getFirestore } from './firestore';
-import { Level } from '../../src/common/level';
-import delay from 'delay';
+import { generateAlertEmailData } from './utils';
 
 interface EmailSendData {
   Subject: string;
@@ -42,10 +40,6 @@ interface CampaignMonitorError {
 const CM_INVALID_EMAIL_MESSAGE = 'A valid recipient address is required';
 const CM_INVALID_EMAIL_ERROR_CODE = 1;
 
-const alertTemplate = Handlebars.compile(
-  fs.readFileSync(path.join(__dirname, 'template.html'), 'utf8'),
-);
-
 async function sendEmail(
   api: any,
   data: EmailSendData,
@@ -71,50 +65,6 @@ async function sendEmail(
       },
     );
   });
-}
-
-function generateSendData(
-  userToEmail: string,
-  alertForLocation: Alert,
-): EmailSendData {
-  const base_url = 'https://data.covidactnow.org/thermometer_screenshot';
-  const html = alertTemplate({
-    change:
-      alertForLocation.newLevel < alertForLocation.oldLevel
-        ? 'risk decreased'
-        : 'risk increased',
-    location_name: alertForLocation.locationName,
-    img_alt: `Image depicting that the state went from from state ${
-      Level[alertForLocation.oldLevel]
-    } to ${Level[alertForLocation.newLevel]}`,
-    img_url: `${base_url}/therm-${alertForLocation.newLevel}-${alertForLocation.oldLevel}.png`,
-    last_updated: alertForLocation.lastUpdated,
-    location_url: alertForLocation.locationURL,
-    unsubscribe_link: `https://covidactnow.org/alert_unsubscribe?email=${encodeURI(
-      userToEmail,
-    )}`, // would be nice to know dev/staging/prod
-    feedback_subject_line: encodeURI(
-      `[Alert Feedback] Alert for ${alertForLocation.locationName} on ${alertForLocation.lastUpdated}`,
-    ),
-  });
-  const subject = `${alertForLocation.locationName}'s Risk Level Has Changed`;
-
-  return {
-    Subject: subject,
-    To: [userToEmail],
-    CC: null,
-    BCC: null,
-    Attachments: null,
-    Html: html,
-    Text: html,
-    AddRecipientsToList: null,
-    From: 'Covid Act Now Alerts  <noreply@covidactnow.org>',
-    ReplyTo: 'noreply@covidactnow.org',
-    TrackOpens: true,
-    TrackClicks: true,
-    InlineCSS: true,
-    Group: null,
-  };
 }
 
 async function setLastSnapshotNumber(
@@ -163,6 +113,7 @@ async function setLastSnapshotNumber(
 
   const db = getFirestore();
   for (const fips of Object.keys(locationsWithAlerts)) {
+    const locationAlert = locationsWithAlerts[fips];
     await db
       .collection(`snapshots/${currentSnapshot}/locations/${fips}/emails/`)
       .where('sentAt', '==', null)
@@ -170,11 +121,10 @@ async function setLastSnapshotNumber(
       .then(async querySnapshot => {
         for (const doc of querySnapshot.docs) {
           const userToEmail = sendAllToEmail ? sendAllToEmail : doc.id;
-          await sendEmail(
-            api,
-            generateSendData(userToEmail, locationsWithAlerts[fips]),
-            dryRun,
-          )
+
+          const emailData = generateAlertEmailData(userToEmail, locationAlert);
+
+          await sendEmail(api, emailData, dryRun)
             .then(async result => {
               emailSent += 1;
               uniqueEmailAddress[doc.id] =

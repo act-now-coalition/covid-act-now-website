@@ -23,7 +23,7 @@ export interface AlertEmailTemplateData {
   feedback_subject_line: string;
 }
 
-const generateAlertEmailContent = (data: AlertEmailTemplateData) =>
+const generateAlertEmailContent = (data: AlertEmailTemplateData): string =>
   emailTemplate(data);
 
 export const getSubjectLine = (locationAlert: Alert) =>
