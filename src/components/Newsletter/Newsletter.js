@@ -108,6 +108,7 @@ class Newsletter extends React.Component {
       }
       return matching_state || matching_county;
     });
+    const errMessageOpen = this.state.errorMessage.length > 0;
 
     return (
       <StyledNewsletter>
@@ -139,25 +140,10 @@ class Newsletter extends React.Component {
             readOnly
             aria-label="county"
             id="fieldjrdtwd"
-            maxlength="200"
+            maxLength="200"
             name="cm-f-jrdtwd"
             value={county || ''}
           />
-          <InputHolder>
-            <input
-              type="checkbox"
-              value="wurhhh"
-              id="wurhhh"
-              name="cm-ol-wurhhh"
-              onChange={() => this.setState({ checked: !this.state.checked })}
-              checked={this.state.checked}
-            />
-            <label htmlFor="checkbox">
-              {' '}
-              Also send me <b>daily news</b> with the latest data and scientific
-              findings on COVID{' '}
-            </label>
-          </InputHolder>
           <Autocomplete
             multiple
             id="alert-locations"
@@ -187,7 +173,11 @@ class Newsletter extends React.Component {
               ))
             }
             renderInput={params => (
-              <TextField {...params} placeholder="Enter alert locations" />
+              <TextField
+                variant="outlined"
+                {...params}
+                placeholder="+ Add alert locations"
+              />
             )}
           />
           <InputHolder>
@@ -198,7 +188,7 @@ class Newsletter extends React.Component {
               placeholder="Enter your email address"
               className="js-cm-email-input qa-input-email"
               id="fieldEmail"
-              maxlength="200"
+              maxLength="200"
               name="cm-yddtsd-yddtsd"
               required=""
               type="email"
@@ -211,6 +201,20 @@ class Newsletter extends React.Component {
           {this.state.errorMessage && (
             <InputError>{this.state.errorMessage}</InputError>
           )}
+          <InputHolder errMessageOpen={errMessageOpen}>
+            <input
+              type="checkbox"
+              value="wurhhh"
+              id="wurhhh"
+              name="cm-ol-wurhhh"
+              onChange={() => this.setState({ checked: !this.state.checked })}
+              checked={this.state.checked}
+            />
+            <label htmlFor="checkbox">
+              Also send me <b>daily news</b> with the latest data and scientific
+              findings on COVID
+            </label>
+          </InputHolder>
         </form>
         <script
           type="text/javascript"

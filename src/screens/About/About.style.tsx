@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { COLORS } from 'common';
 import { TeamList } from 'screens/About/About';
+import { COLOR_MAP } from 'common/colors';
 
 export const Wrapper = styled.div`
   background-color: white;
@@ -27,10 +28,11 @@ export const TextContent = styled.div`
 
 export const ActiveAlumniButtonContainer = styled.div`
   display: flex;
-  width: 150px;
-  border: 1px solid black;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+  width: 180px;
+  border: 1px solid #e0e0e0;
   margin-bottom: 2rem;
+  border-radius: 4px;
+  font-size: 15px;
 `;
 
 export const ActiveAlumniButton = styled.div<{
@@ -42,16 +44,26 @@ export const ActiveAlumniButton = styled.div<{
   cursor: pointer;
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   padding: 0.1rem;
+  color: #828282;
+  line-height: 1;
+  padding: 14px 0 12px;
 
   &:first-child {
-    border-right: 1px solid black;
-    background-color: ${({ teamList }) =>
-      teamList === TeamList.Active && 'rgba(59,188,230,.5)'};
+    border-right: 1px solid #e0e0e0;
+    border-bottom: ${({ teamList }) =>
+      teamList === TeamList.Active && `2px solid ${COLOR_MAP.GREEN.BASE}`};
+    border-bottom-left-radius: ${({ teamList }) =>
+      teamList === TeamList.Active && `3px`};
+    color: ${({ teamList }) => teamList === TeamList.Active && `black`};
+    font-weight: ${({ teamList }) => teamList === TeamList.Active && `bold`};
   }
 
   &:last-child {
-    border-right: 1px solid black;
-    background-color: ${({ teamList }) =>
-      teamList === TeamList.Alumni && 'rgba(59,188,230,.5)'};
+    border-bottom: ${({ teamList }) =>
+      teamList === TeamList.Alumni && `2px solid ${COLOR_MAP.GREEN.BASE}`};
+    border-bottom-right-radius: ${({ teamList }) =>
+      teamList === TeamList.Alumni && `3px`};
+    color: ${({ teamList }) => teamList === TeamList.Alumni && `black`};
+    font-weight: ${({ teamList }) => teamList === TeamList.Alumni && `bold`};
   }
 `;
