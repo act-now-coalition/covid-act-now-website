@@ -5,7 +5,7 @@ import { levelText } from 'common/utils/chart';
 import { getLevel, Metric } from 'common/metric';
 import { formatDecimal } from 'common/utils';
 
-export const METRIC_NAME = 'Case Density';
+export const METRIC_NAME = 'Daily new cases per 100k population';
 
 export const CASE_DENSITY_LEVEL_INFO_MAP: LevelInfoMap = {
   [Level.LOW]: {
@@ -20,21 +20,21 @@ export const CASE_DENSITY_LEVEL_INFO_MAP: LevelInfoMap = {
     upperLimit: 10,
     name: 'Medium',
     color: COLOR_MAP.ORANGE.BASE,
-    detail: () => 'COVID is spreading in a controlled fashion',
+    detail: () => 'COVID not contained, but at low levels',
   },
   [Level.HIGH]: {
     level: Level.HIGH,
     upperLimit: 25,
     name: 'High',
     color: COLOR_MAP.ORANGE_DARK.BASE,
-    detail: () => 'Broad uncontrolled COVID spread',
+    detail: () => 'Very large number of new cases',
   },
   [Level.CRITICAL]: {
     level: Level.CRITICAL,
     upperLimit: Infinity,
     name: 'Critical',
     color: COLOR_MAP.RED.BASE,
-    detail: () => 'An active outbreak',
+    detail: () => 'Dangerous number of new cases',
   },
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,
@@ -45,7 +45,7 @@ export const CASE_DENSITY_LEVEL_INFO_MAP: LevelInfoMap = {
   },
 };
 
-export const CASE_DENSITY_DISCLAIMER = `Note that the number of persons infected is substantially higher than the number of confirmed cases. In many states, as testing is only detecting a small number of actual cases.`;
+export const CASE_DENSITY_DISCLAIMER = '';
 
 export function caseDensityStatusText(projection: Projection) {
   const { currentCaseDensity, currentDailyDeaths, locationName } = projection;
@@ -57,16 +57,16 @@ export function caseDensityStatusText(projection: Projection) {
   const level = getLevel(Metric.CASE_DENSITY, currentCaseDensity);
   const dailyCases = formatDecimal(currentCaseDensity, 1);
 
-  const statusText1 = `Over the last week, ${locationName} has reported
+  const statusText1 = `Over the last week, ${locationName} has averaged
    ${dailyCases} new confirmed cases per day for every
     100,000 residents.`;
 
   const statusText2 = levelText(
     level,
-    `If these rates continue, we estimate less than 1% of ${locationName}’s population will be infected in the next year.`,
-    `If these rates continue, we estimate less than 1-10% of ${locationName}’s population will be infected in the next year.`,
-    `If these rates continue, we estimate less than 10-25% of ${locationName}’s population will be infected in the next year. Caution is warranted.`,
-    `If these rates continue, we estimate more than >25% of ${locationName}’s population will be infected in the next year. Aggressive action urgently needed.`,
+    `As context, if these rates were to continue, less than 2% of ${locationName}’s population would be infected in the next year.`,
+    `As context, if these rates were to continue, less than 20% of ${locationName}’s population would be infected in the next year.`,
+    `As context, if these rates were to continue, less than 50% of ${locationName}’s population would be infected in the next year.`,
+    `As context, if these rates were to continue, more than 50% of ${locationName}’s population would be infected in the next year.`,
   );
 
   return `${statusText1} ${statusText2}`;
