@@ -43,7 +43,7 @@ export const SummaryStatWrapper = styled(Box)<{
     display: flex;
     align-items: center;
     cursor: pointer;
-    padding: ${props.isEmbed && '15px 16px'};
+    padding: ${props.isEmbed && '14px 12px'};
     margin-bottom:  ${!props.isEmbed && '0.75rem'};
 
     &:last-child {
@@ -101,7 +101,7 @@ export const StatNameText = styled(Typography)<{
     text-transform: uppercase;
     text-align: left;
     color: rgba(0, 0, 0, 0.7);
-    margin-right: 1rem;
+    margin-right: ${props.isEmbed ? '.75rem' : '1rem'};
   `
       : `
     font-weight: 600;
@@ -121,13 +121,16 @@ export const StatNameText = styled(Typography)<{
   `}
 `;
 
-export const StatTextWrapper = styled.div<{ isHeader?: Boolean }>`
+export const StatTextWrapper = styled.div<{
+  isHeader?: Boolean;
+  isEmbed?: Boolean;
+}>`
   display: flex;
   flex-direction: ${({ isHeader }) => (isHeader ? 'column' : 'row')};
   justify-content: flex-start;
   text-align: left;
   flex: 1;
-  margin-right: 1.5rem;
+  margin-right: ${({ isEmbed }) => (isEmbed ? '.75rem' : '1.5rem')};
 
   @media (min-width: 600px) {
     text-align: ${({ isHeader }) => (isHeader ? 'left' : 'center')};

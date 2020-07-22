@@ -74,7 +74,7 @@ const SummaryStat = ({
       condensed={condensed}
       isEmbed={isEmbed}
     >
-      <StatTextWrapper>
+      <StatTextWrapper isEmbed={isEmbed}>
         <StatNameText condensed={condensed} isEmbed={isEmbed}>
           {getMetricName(chartType)}{' '}
           {!condensed && beta && isMobile && (
