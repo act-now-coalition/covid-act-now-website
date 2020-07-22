@@ -23,7 +23,11 @@ const Disclaimer = ({ metricName }: { metricName: number }) => {
           <Fragment>
             <span>
               Our risk levels for daily new cases are based on the{' '}
-              <a href="https://ethics.harvard.edu/files/center-for-ethics/files/key_metrics_and_indicators_v4.pdf">
+              <a
+                href="https://ethics.harvard.edu/files/center-for-ethics/files/key_metrics_and_indicators_v4.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 “Key Metrics for Covid Suppression”
               </a>{' '}
               by Harvard Global Health Institute and others.
