@@ -9,7 +9,7 @@ const HIGH_NAME = 'Critical';
 const UNKNOWN = 'Unknown';
 
 const LEGEND_SUMMARY_LOW = 'On track to contain COVID';
-const LEGEND_SUMMARY_MEDIUM = 'Controlled disease growth';
+const LEGEND_SUMMARY_MEDIUM = 'Slow disease growth';
 const LEGEND_SUMMARY_MEDIUM_HIGH = 'At risk';
 const LEGEND_SUMMARY_HIGH = 'Active or imminent outbreak';
 
@@ -39,7 +39,7 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     summary: LEGEND_SUMMARY_MEDIUM_HIGH,
     color: COLOR_MAP.ORANGE_DARK.BASE,
     detail: locationName =>
-      `${locationName} is at risk of an outbreak. COVID cases are either increasing at a rate likely to overwhelm hospitals and/or the state’s COVID preparedness is well below international standards.`,
+      `${locationName} is at risk of an outbreak. COVID cases are either increasing at a rate likely to overwhelm hospitals and/or the state’s COVID preparedness is below international standards.`,
   },
   [Level.CRITICAL]: {
     level: Level.CRITICAL,
@@ -48,7 +48,7 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     summary: LEGEND_SUMMARY_HIGH,
     color: COLOR_MAP.RED.BASE,
     detail: locationName =>
-      `${locationName} is either actively experiencing an outbreak or is at extreme risk. COVID cases are exponentially growing and/or ${locationName}’s COVID preparedness is dangerously below international standards.`,
+      `${locationName} is either actively experiencing an outbreak or is at extreme risk. COVID cases are exponentially growing and/or ${locationName}’s COVID preparedness is significantly below international standards.`,
   },
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,
