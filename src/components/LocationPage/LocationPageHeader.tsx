@@ -54,7 +54,11 @@ const UpdateCaseDensity: FunctionComponent<{ projections: Projections }> = ({
       <strong>New key indicator added</strong>
       <br />
       {`We added ${CASE_DENSITY_METRIC_NAME.toLowerCase()}. ${changedLevelCopy}`}
-      <a href="https://blog.covidactnow.org/new-daily-covid-cases/">
+      <a
+        href="https://blog.covidactnow.org/new-daily-covid-cases/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         Learn more
       </a>
     </Copy>
