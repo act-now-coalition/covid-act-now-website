@@ -48,7 +48,7 @@ const CriteriaExplanation = (props: { isMobile: Boolean }) => {
           <Content>
             <CriterionHeader>Infection Rate</CriterionHeader>
             <CriterionDescription>
-              Are the number of infections going down?{' '}
+              Is the number of infections going down?{' '}
             </CriterionDescription>
           </Content>
         </Criterion>
