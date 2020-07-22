@@ -3,6 +3,7 @@ import * as TestRates from 'common/metrics/positive_rate';
 import * as Hospitalizations from 'common/metrics/hospitalizations';
 import * as ContactTracing from 'common/metrics/contact_tracing';
 import * as FutureProjections from 'common/metrics/future_projection';
+import * as CaseDensity from 'common/metrics/case_density';
 import { Projection } from 'common/models/Projection';
 
 import { Level, LevelInfo } from 'common/level';
@@ -14,6 +15,7 @@ export enum Metric {
   HOSPITAL_USAGE,
   CONTACT_TRACING,
   FUTURE_PROJECTIONS,
+  CASE_DENSITY,
 }
 
 // Not sure if there's a better way to enumerate all enum values? :-(
@@ -32,10 +34,19 @@ const METRIC_TO_NAME = {
   [Metric.HOSPITAL_USAGE]: Hospitalizations.METRIC_NAME,
   [Metric.CONTACT_TRACING]: ContactTracing.METRIC_NAME,
   [Metric.FUTURE_PROJECTIONS]: FutureProjections.METRIC_NAME,
+  [Metric.CASE_DENSITY]: 'Daily new cases',
 };
 
 export function getMetricName(metric: Metric) {
   return METRIC_TO_NAME[metric];
+}
+
+export function getMetricNameExtended(metric: Metric) {
+  if (metric === Metric.CASE_DENSITY) {
+    return `${METRIC_TO_NAME[metric]} per 100k population`;
+  } else {
+    return METRIC_TO_NAME[metric];
+  }
 }
 
 const ALL_METRICS_LEVEL_INFO_MAP = {
@@ -44,6 +55,7 @@ const ALL_METRICS_LEVEL_INFO_MAP = {
   [Metric.HOSPITAL_USAGE]: Hospitalizations.HOSPITAL_USAGE_LEVEL_INFO_MAP,
   [Metric.CONTACT_TRACING]: ContactTracing.CONTACT_TRACING_LEVEL_INFO_MAP,
   [Metric.FUTURE_PROJECTIONS]: null, // Future Projections doesn't have levels.
+  [Metric.CASE_DENSITY]: CaseDensity.CASE_DENSITY_LEVEL_INFO_MAP,
 };
 
 export function getLevelInfo(metric: Metric, value: number | null): LevelInfo {
@@ -76,6 +88,7 @@ const METRIC_TO_DISCLAIMER: { [metricName: number]: string } = {
   [Metric.POSITIVE_TESTS]: TestRates.POSITIVE_RATE_DISCLAIMER,
   [Metric.HOSPITAL_USAGE]: Hospitalizations.HOSPITALIZATIONS_DISCLAIMER,
   [Metric.CONTACT_TRACING]: ContactTracing.CONTACT_TRACING_DISCLAIMER,
+  [Metric.CASE_DENSITY]: CaseDensity.CASE_DENSITY_DISCLAIMER,
 };
 
 export function getMetricDisclaimer(metric: Metric) {
@@ -92,6 +105,7 @@ export function getMetricStatusText(metric: Metric, projection: Projection) {
     [Metric.CONTACT_TRACING]: ContactTracing.contactTracingStatusText(
       projection,
     ),
+    [Metric.CASE_DENSITY]: CaseDensity.caseDensityStatusText(projection),
   };
   return METRIC_TO_STATUS_TEXT[metric];
 }

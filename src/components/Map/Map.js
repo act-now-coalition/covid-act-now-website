@@ -19,6 +19,7 @@ function Map({
   setMobileMenuOpen,
   setMapOption,
   onClick = null,
+  isMiniMap = false,
 }) {
   const history = useHistory();
   const [content, setContent] = useState('');
@@ -81,7 +82,7 @@ function Map({
         />
       </div>
       {!hideInstructions && (
-        <MapInstructions>
+        <MapInstructions isMiniMap={isMiniMap}>
           <strong>Click a state</strong> to view risk details{' '}
           <MobileLineBreak /> and county info.
         </MapInstructions>

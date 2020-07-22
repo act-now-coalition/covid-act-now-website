@@ -33,6 +33,7 @@ export const COLOR_MAP = {
     DARK: '#0A3D31',
   },
   BLUE: '#3BBCE6',
+  GRAY_BODY_COPY: '#4f4f4f',
   GRAY: {
     BASE: '#CCCCCC',
     LIGHT: '#E3E3E3',

@@ -36,6 +36,8 @@ export enum TeamList {
   Alumni,
 }
 
+//TODO (chelsi): consolidate ActiveAlumniButtons into a single tab component and remove duplicate styles
+
 const About = ({ children }: { children: React.ReactNode }) => {
   const [teamList, setTeamList] = useState(TeamList.Active);
   const teamToShow =

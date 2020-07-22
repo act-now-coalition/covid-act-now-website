@@ -11,7 +11,7 @@ env:
   # 'true' or 'false' to indicuate whether we should send the emails or just run (true will send the emails)
   SEND_EMAILS: ${{ github.event.client_payload.send_emails }}
 jobs:
-  update-data-snapshot:
+  send-alert-emails:
     runs-on: ubuntu-latest
     steps:
       # Setup

@@ -95,6 +95,17 @@ export class Projections {
     };
   }
 
+  hasMetric(metric: Metric): boolean {
+    if (metric === Metric.FUTURE_PROJECTIONS) {
+      return (
+        this.baseline?.hasHospitalProjections &&
+        this.projected.hasHospitalProjections
+      );
+    } else {
+      return this.getMetricValue(metric) !== null;
+    }
+  }
+
   getMetricValue(metric: Metric): number | null {
     if (!this.primary) {
       return null;
@@ -108,6 +119,8 @@ export class Projections {
         return this.primary.currentTestPositiveRate;
       case Metric.CONTACT_TRACING:
         return this.primary.currentContactTracerMetric;
+      case Metric.CASE_DENSITY:
+        return this.primary.currentCaseDensity;
       default:
         fail('Cannot get value of metric: ' + metric);
     }
@@ -132,16 +145,71 @@ export class Projections {
     hospitalizations_level: Level;
     test_rate_level: Level;
     contact_tracing_level: Level;
+    case_density: Level;
   } {
     return {
       rt_level: this.getMetricLevel(Metric.CASE_GROWTH_RATE),
       hospitalizations_level: this.getMetricLevel(Metric.HOSPITAL_USAGE),
       test_rate_level: this.getMetricLevel(Metric.POSITIVE_TESTS),
       contact_tracing_level: this.getMetricLevel(Metric.CONTACT_TRACING),
+      case_density: this.getMetricLevel(Metric.CASE_DENSITY),
     };
   }
 
   getAlarmLevel(): Level {
+    const {
+      rt_level,
+      hospitalizations_level,
+      test_rate_level,
+      contact_tracing_level,
+      case_density,
+    } = this.getLevels();
+
+    // If case density is low, it overrides other metrics.
+    if (case_density === Level.LOW) {
+      return Level.LOW;
+    }
+
+    const levelList = [
+      rt_level,
+      hospitalizations_level,
+      test_rate_level,
+      case_density,
+    ];
+
+    // contact tracing levels are reversed (i.e low is bad, high is good)
+    const reverseList = [contact_tracing_level];
+
+    if (
+      levelList.some(level => level === Level.CRITICAL) ||
+      reverseList.some(level => level === Level.LOW)
+    ) {
+      return Level.CRITICAL;
+    } else if (
+      levelList.some(level => level === Level.HIGH) ||
+      reverseList.some(level => level === Level.MEDIUM)
+    ) {
+      return Level.HIGH;
+    } else if (
+      levelList.some(level => level === Level.MEDIUM) ||
+      reverseList.some(level => level === Level.HIGH)
+    ) {
+      return Level.MEDIUM;
+    } else if (
+      levelList.some(level => level === Level.UNKNOWN) ||
+      reverseList.some(level => level === Level.UNKNOWN)
+    ) {
+      return Level.UNKNOWN;
+    } else {
+      return Level.LOW;
+    }
+  }
+
+  // TODO(pablo): Remove this method once the prevalence metric is no longer
+  // an 'update'. This is only used to show the level before and after the
+  // introduction of the prevalence metric for locations where the overall
+  // level changed.
+  getAlarmLevelWithoutCaseDensity() {
     const {
       rt_level,
       hospitalizations_level,
