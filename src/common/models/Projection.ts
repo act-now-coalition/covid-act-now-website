@@ -205,7 +205,7 @@ export class Projection {
       actualTimeseries.map(row => row && row.cumulativeDeaths),
     );
     this.smoothedDailyDeaths = this.smoothWithRollingAverage(
-      this.deltasFromCumulatives(cumulativeActualDeaths),
+      this.deltasFromCumulatives(this.cumulativeActualDeaths),
     );
 
     this.rtRange = this.calcRtRange(timeseries);
