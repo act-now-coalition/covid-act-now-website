@@ -28,7 +28,7 @@ const Announcements = () => {
       </AnnouncementBodyCopy>
       <ButtonsContainer>
         <ReadMoreButton
-          href="https://blog.covidactnow.org/"
+          href="https://blog.covidactnow.org/new-daily-covid-cases"
           target="_blank"
           rel="noopener"
         >
