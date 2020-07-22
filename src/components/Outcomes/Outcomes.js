@@ -68,7 +68,7 @@ const formatNumber = num => {
     return '500-1000';
   } else if (num > 0) {
     return '<500';
-  }else {
+  } else {
     return 0;
   }
 };
