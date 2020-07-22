@@ -333,7 +333,9 @@ function ProjectionsCompare({
   return (
     <div style={{ marginLeft: '40px' }}>
       <hr />
-      <h2>{pair.locationName}</h2>
+      <h2>
+        {pair.locationName} ({pair.fips})
+      </h2>
       <Grid container spacing={8}>
         <Grid item xs={6}>
           <ProjectionsChart metric={metric} projections={pair.left} />
