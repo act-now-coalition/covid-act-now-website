@@ -1,8 +1,12 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Box, Typography } from '@material-ui/core';
 import palette from 'assets/theme/palette';
+import { COLOR_MAP } from 'common/colors';
 
-export const SummaryStatsWrapper = styled(Box)<{ condensed?: Boolean }>`
+export const SummaryStatsWrapper = styled(Box)<{
+  condensed?: Boolean;
+  isHeader?: Boolean;
+}>`
   ${props =>
     props.condensed
       ? `
@@ -12,19 +16,18 @@ export const SummaryStatsWrapper = styled(Box)<{ condensed?: Boolean }>`
     display: flex;
     align-items: stretch;
     justify-content: space-around;
-    background-color: white;
+    background-color: ${props.isHeader ? 'none' : 'white'};
     border-radius: 0;
     box-shadow: none;
-    max-width: 900px;
+    max-width: 1040px;
     flex-direction: column;
     cursor: pointer;
+    margin: 1rem 0;
 
     @media (min-width: 600px) {
-      background-color: ${palette.lightGray};
-
       flex-direction: row;
-      background-color: white;
       position: relative;
+      margin: 0 1rem;
     }
   `}
 `;
@@ -32,6 +35,7 @@ export const SummaryStatsWrapper = styled(Box)<{ condensed?: Boolean }>`
 export const SummaryStatWrapper = styled(Box)<{
   condensed?: Boolean;
   isEmbed?: Boolean;
+  isHeader?: Boolean;
 }>`
   ${props =>
     props.condensed
@@ -39,7 +43,7 @@ export const SummaryStatWrapper = styled(Box)<{
     display: flex;
     align-items: center;
     cursor: pointer;
-    padding: ${props.isEmbed && '15px 16px'};
+    padding: ${props.isEmbed && '14px 12px'};
     margin-bottom:  ${!props.isEmbed && '0.75rem'};
 
     &:last-child {
@@ -59,25 +63,23 @@ export const SummaryStatWrapper = styled(Box)<{
     display: flex;
     flex: 1;
     flex-direction: row;
-    padding: 1.85rem 1rem;
+    padding: ${props.isHeader ? '1rem 1.25rem' : '1.85rem 1rem'};
     align-items: stretch;
-    border-bottom: 1px solid ${palette.lightGray};
-
-    &:first-child {
-      border-top: 1px solid ${palette.lightGray};
-    }
+    border-bottom: ${!props.isHeader && `1px solid ${palette.lightGray}`};
 
     @media (min-width: 600px) {
-      border-bottom: 1px solid ${palette.lightGray};
-      border-top: 1px solid ${palette.lightGray};
+      border-bottom: ${!props.isHeader && `1px solid ${palette.lightGray}`};
       margin: 0;
-      padding: 1.5rem 1.25rem;
       flex-direction: column;
       align-items: center;
-      max-width: 25%;
+      max-width: 20%;
+      padding: ${props.isHeader ? '2rem 1rem' : '1.5rem 1.25rem'};
+      align-items: ${props.isHeader ? 'center' : 'unset'};
 
       &:not(:last-child) {
-        border-right: 1px solid ${palette.divider};
+        border-right: ${
+          props.isHeader ? 'none' : `1px solid ${palette.divider}`
+        };
       }
     }
   `}
@@ -86,6 +88,8 @@ export const SummaryStatWrapper = styled(Box)<{
 export const StatNameText = styled(Typography)<{
   condensed?: Boolean;
   isEmbed?: Boolean;
+  isHeader?: Boolean;
+  statusUnknown?: Boolean;
 }>`
   ${props =>
     props.condensed
@@ -97,7 +101,7 @@ export const StatNameText = styled(Typography)<{
     text-transform: uppercase;
     text-align: left;
     color: rgba(0, 0, 0, 0.7);
-    margin-right: 1rem;
+    margin-right: ${props.isEmbed ? '.75rem' : '1rem'};
   `
       : `
     font-weight: 600;
@@ -105,28 +109,35 @@ export const StatNameText = styled(Typography)<{
 
     text-transform: uppercase;
     font-size: 14px;
-    line-height: 1.4;
+    line-height: ${props.isHeader ? '1' : '1.4'};
 
     @media (min-width: 600px) {
       min-height: 0;
       font-size: 1rem;
+      margin-bottom: ${
+        !props.isHeader ? 0 : props.statusUnknown ? '16px' : '9px'
+      }
     }
   `}
 `;
 
-export const StatTextWrapper = styled.div`
+export const StatTextWrapper = styled.div<{
+  isHeader?: Boolean;
+  isEmbed?: Boolean;
+}>`
   display: flex;
-  flex-direction: column;
+  flex-direction: ${({ isHeader }) => (isHeader ? 'column' : 'row')};
   justify-content: flex-start;
   text-align: left;
   flex: 1;
-  margin-right: 1.5rem;
+  margin-right: ${({ isEmbed }) => (isEmbed ? '.75rem' : '1.5rem')};
 
   @media (min-width: 600px) {
-    text-align: center;
+    text-align: ${({ isHeader }) => (isHeader ? 'left' : 'center')};
     margin-right: 0;
   }
 `;
+
 export const StatValueWrapper = styled.div<{ condensed?: Boolean }>`
   ${props =>
     props.condensed
@@ -164,7 +175,9 @@ export const StatDetailText = styled(Typography)`
 
 export const StatValueText = styled(Typography)<{
   condensed?: Boolean;
+  statusUnknown?: Boolean;
   isEmbed?: Boolean;
+  isHeader?: Boolean;
 }>`
   font-family: 'Source Code Pro', Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -178,31 +191,97 @@ export const StatValueText = styled(Typography)<{
     text-align: right;
   `
       : `
-    font-size: 1.5rem;
+    font-size: ${props.isHeader ? '1.4rem' : '1.5rem'};
+    font-size: ${
+      !props.isHeader ? '1.5rem' : props.statusUnknown ? '.95rem' : '1.4rem'
+    };
     line-height: 1.125rem;
-    margin-bottom: 0.35rem;
+    margin-bottom: ${props.isHeader ? '0' : '0.35rem'};
+
 
     @media (min-width: 600px) {
       text-align: left;
-      font-size: 1.875rem;
-      line-height: 3.5rem;
-      margin-bottom: 0.5rem;
+      font-size: ${
+        !props.isHeader ? '1.875rem' : props.statusUnknown ? '.9rem' : '1.55rem'
+      };
+      line-height: ${props.isHeader ? '1.4' : '3.5rem'};
+      margin-bottom: ${props.isHeader ? '0' : '0.5rem'};
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (min-width: 932px) {
+      font-size: ${props.statusUnknown ? '1rem' : '1.875rem'};
     }
   `}
 `;
 
-export const BetaTag = styled.span<{ isHeader?: Boolean }>`
-  margin-left: ${({ isHeader }) => (isHeader ? '.8rem' : '1rem')};
+const SharedTagStyles = css`
   border-radius: 5px;
   display: inline-block;
-  background-color: ${palette.info.main};
-  color: white;
-  font-size: 0.675rem;
-  padding: 0 0.75rem;
-  transform: translateY(-0.15rem);
-  line-height: 1.35rem;
+  font-size: 11px;
+  padding: 3px 6px;
+  line-height: 14px;
+  width: fit-content;
+  font-family: Source Code Pro;
+  font-weight: bold;
+`;
+
+export const BetaTag = styled.span<{ isHeader?: Boolean }>`
+  ${SharedTagStyles};
+  margin-left: ${({ isHeader }) => (isHeader ? 0 : '1rem')};
+  background-color: ${({ isHeader }) =>
+    isHeader ? 'none' : `${palette.info.main}`};
+  border: ${({ isHeader }) => isHeader && `1px solid ${COLOR_MAP.GRAY.LIGHT}`};
+  color: ${({ isHeader }) =>
+    isHeader ? `${COLOR_MAP.GRAY_BODY_COPY}` : 'white'};
+  transform: ${({ isHeader }) => (isHeader ? 'none' : 'translateY(-0.15rem)')};
+  margin-top: ${({ isHeader }) => (isHeader ? '.5rem' : 'none')};
 
   @media (min-width: 600px) {
-    transform: translateY(-0.45rem);
+    transform: ${({ isHeader }) =>
+      isHeader ? 'none' : 'translateY(-0.45rem)'};
+    margin-top: ${({ isHeader }) => (isHeader ? '.75rem' : 'none')};
   }
+`;
+
+export const NewIndicatorTag = styled.span<{ isHeader?: Boolean }>`
+  ${SharedTagStyles};
+  margin-left: 0;
+  background-color: ${COLOR_MAP.BLUE};
+  color: white;
+  margin-top: ${({ isHeader }) => (isHeader ? '.5rem' : 'none')};
+
+  @media (min-width: 600px) {
+    margin-top: ${({ isHeader }) => (isHeader ? '.75rem' : 'none')};
+  }
+`;
+
+export const ValueWrapper = styled(Box)<{ iconColor: string }>`
+  display: flex;
+  align-items: center;
+
+  svg {
+    font-size: 0.75rem;
+    margin-right: 0.5rem;
+    color: ${({ iconColor }) => iconColor};
+
+    @media (min-width: 600px) {
+      margin-right: 0.55rem;
+      font-size: 1.15rem;
+    }
+
+    @media (min-width: 932px) {
+      margin-right: 0.75rem;
+    }
+  }
+`;
+
+export const PrevalenceMeasure = styled(Typography)`
+  font-family: Roboto;
+  font-size: 12px;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+  line-height: 1.1;
+  margin-left: 0.5rem;
+  margin-top: 0.25rem;
 `;

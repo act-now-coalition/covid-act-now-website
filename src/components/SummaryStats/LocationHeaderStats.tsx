@@ -1,6 +1,8 @@
 import React from 'react';
 import { Metric } from 'common/metric';
 import { getMetricName, getLevelInfo } from 'common/metric';
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+
 import {
   SummaryStatsWrapper,
   SummaryStatWrapper,
@@ -9,15 +11,51 @@ import {
   StatValueText,
   StatTextWrapper,
   StatValueWrapper,
+  ValueWrapper,
+  PrevalenceMeasure,
 } from './SummaryStats.style';
-import SignalStatus from 'components/SignalStatus/SignalStatus';
+
+import StatTag from 'components/SummaryStats/StatTag';
+
 import { formatDecimal, formatPercent } from 'common/utils';
 import { fail } from 'assert';
 import { isNull } from 'util';
 import * as urls from 'common/urls';
-import StatTag from 'components/SummaryStats/StatTag';
 
 //TODO (Chelsi) - remove dupication: extract 'LocationHeaderStats' and 'SummaryStats' into a single separate component
+
+const StatValue = (props: {
+  iconColor: string;
+  condensed?: Boolean;
+  isEmbed?: Boolean;
+  isMobile?: Boolean;
+  isHeader?: Boolean;
+  embedOnClickBaseURL?: string;
+  statusUnknown?: Boolean;
+  value: string;
+  newIndicator?: Boolean;
+}) => {
+  return (
+    <ValueWrapper iconColor={props.iconColor}>
+      <FiberManualRecordIcon />
+      <StatValueText
+        condensed={props.condensed}
+        isEmbed={props.isEmbed}
+        statusUnknown={props.statusUnknown}
+        isHeader={props.isHeader}
+      >
+        {props.value}
+      </StatValueText>
+      {props.newIndicator && (
+        <PrevalenceMeasure>
+          PER
+          <br />
+          100K
+        </PrevalenceMeasure>
+      )}
+    </ValueWrapper>
+  );
+};
 
 const SummaryStat = ({
   chartType,
@@ -30,6 +68,7 @@ const SummaryStat = ({
   isHeader,
   isEmbed,
   embedOnClickBaseURL,
+  newIndicator,
 }: {
   chartType: Metric;
   value: number;
@@ -41,21 +80,29 @@ const SummaryStat = ({
   isHeader?: Boolean;
   isEmbed?: Boolean;
   embedOnClickBaseURL?: string;
+  newIndicator?: Boolean;
 }) => {
   const levelInfo = getLevelInfo(chartType, value);
+
   const embedOnClick = () => {
     const url = urls.addSharingId(`${embedOnClickBaseURL}/chart/${chartType}`);
     window.open(url, '_blank');
   };
+
   const finalOnClick = isEmbed ? embedOnClick : onClick;
+
+  const statusUnknown = value === null;
+
   const formatValueForChart = (
     chartType: Metric,
     value: number | null,
   ): string => {
     if (value === null) {
-      return '-';
+      return 'Unknown';
     }
-    if (chartType === Metric.CASE_GROWTH_RATE) {
+    if (chartType === Metric.CASE_DENSITY) {
+      return value.toFixed(1).toString();
+    } else if (chartType === Metric.CASE_GROWTH_RATE) {
       return formatDecimal(value);
     } else if (chartType === Metric.HOSPITAL_USAGE) {
       return formatPercent(value);
@@ -63,52 +110,77 @@ const SummaryStat = ({
       return formatPercent(value, 1);
     } else if (chartType === Metric.CONTACT_TRACING) {
       return formatPercent(value, 0);
-    } else if (chartType === Metric.CASE_DENSITY) {
-      return formatDecimal(value, 1);
     }
     fail('Invalid Chart Type');
   };
+
+  const statValue = formatValueForChart(chartType, value);
+
   return (
     <SummaryStatWrapper
       onClick={finalOnClick}
       condensed={condensed}
       isEmbed={isEmbed}
+      isHeader={isHeader}
     >
-      <StatTextWrapper isEmbed={isEmbed}>
-        <StatNameText condensed={condensed} isEmbed={isEmbed}>
-          {getMetricName(chartType)}{' '}
-          {!condensed && beta && isMobile && (
-            <StatTag beta isHeader={isHeader} />
-          )}
-        </StatNameText>
-        {!condensed && <StatDetailText>{levelInfo.detail()}</StatDetailText>}
-      </StatTextWrapper>
-      <StatValueWrapper condensed={condensed}>
-        {value == null ? null : (
-          <>
-            <StatValueText condensed={condensed} isEmbed={isEmbed}>
-              {formatValueForChart(chartType, value)}
-              {!condensed && beta && !isMobile && <StatTag beta />}
-            </StatValueText>
-          </>
-        )}
-        <SignalStatus
-          levelInfo={levelInfo}
+      <StatTextWrapper isHeader={isHeader}>
+        <StatNameText
           condensed={condensed}
-          flipOrder={flipSignalStatusOrder}
           isEmbed={isEmbed}
-        />
-      </StatValueWrapper>
+          isHeader={true}
+          statusUnknown={statusUnknown}
+        >
+          {getMetricName(chartType)}{' '}
+        </StatNameText>
+        {!condensed && !isMobile && (
+          <StatValue
+            value={statValue}
+            iconColor={levelInfo.color}
+            condensed={condensed}
+            isEmbed={isEmbed}
+            statusUnknown={statusUnknown}
+            isHeader={isHeader}
+            newIndicator={newIndicator}
+          />
+        )}
+        {!condensed && <StatDetailText>{levelInfo.detail()}</StatDetailText>}
+        {!condensed && !isMobile && (
+          <StatTag
+            isHeader={isHeader}
+            beta={beta}
+            newIndicator={newIndicator}
+          />
+        )}
+      </StatTextWrapper>
+      {!condensed && isMobile && (
+        <StatValueWrapper condensed={condensed}>
+          <StatValue
+            value={statValue}
+            iconColor={levelInfo.color}
+            condensed={condensed}
+            isEmbed={isEmbed}
+            statusUnknown={statusUnknown}
+            isHeader={isHeader}
+            newIndicator={newIndicator}
+          />
+          <StatTag
+            isHeader={isHeader}
+            beta={beta}
+            newIndicator={newIndicator}
+          />
+        </StatValueWrapper>
+      )}
     </SummaryStatWrapper>
   );
 };
 
 const noop = () => {};
 
-const SummaryStats = (props: {
+const LocationHeaderStats = (props: {
   stats: { [key: string]: number | null };
   condensed?: Boolean;
   isEmbed?: Boolean;
+  onCaseDensityClick?: () => void;
   onRtRangeClick?: () => void;
   onTestPositiveClick?: () => void;
   onIcuUtilizationClick?: () => void;
@@ -120,6 +192,7 @@ const SummaryStats = (props: {
   const hasStats = !!Object.values(props.stats).filter(
     (val: number | null) => !isNull(val),
   ).length;
+
   const sharedStatProps = {
     isMobile: props.isMobile,
     condensed: props.condensed,
@@ -131,12 +204,16 @@ const SummaryStats = (props: {
   return (
     <>
       {hasStats && (
-        <SummaryStatsWrapper condensed={props.condensed}>
+        <SummaryStatsWrapper
+          isHeader={props.isHeader}
+          condensed={props.condensed}
+        >
           <SummaryStat
-            onClick={props.onRtRangeClick || noop}
+            onClick={props.onCaseDensityClick || noop}
             chartType={Metric.CASE_DENSITY}
             value={props.stats[Metric.CASE_DENSITY] as number}
             {...sharedStatProps}
+            newIndicator={true}
           />
           <SummaryStat
             onClick={props.onRtRangeClick || noop}
@@ -171,4 +248,4 @@ const SummaryStats = (props: {
   );
 };
 
-export default SummaryStats;
+export default LocationHeaderStats;

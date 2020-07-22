@@ -14,7 +14,7 @@ import {
 import LogoUrlLight from 'assets/images/logoUrlLight';
 import { Projections } from 'common/models/Projections';
 import { MetricChart } from '../../../components/Charts';
-import { getMetricName, ALL_METRICS } from 'common/metric';
+import { ALL_METRICS, getMetricNameExtended } from 'common/metric';
 import { Metric } from 'common/metric';
 import { findCountyByFips } from 'common/locations';
 import { useProjections, useModelLastUpdatedDate } from 'common/utils/model';
@@ -53,7 +53,7 @@ const ExportChartImage = () => {
       <Content>
         <Headers>
           <Location>{projection.locationName}</Location>
-          <MetricName>{getMetricName(metric)}</MetricName>
+          <MetricName>{getMetricNameExtended(metric)}</MetricName>
           <LastUpdated>Last updated {formatUtcDate(lastUpdated)} </LastUpdated>
         </Headers>
         <LogoHolder>

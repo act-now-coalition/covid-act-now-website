@@ -14,7 +14,7 @@ import LogoDark from 'assets/images/logoDark';
 import { chartDarkMode } from 'assets/theme/palette';
 import { Projections } from 'common/models/Projections';
 import { MetricChart } from '../../../components/Charts';
-import { getMetricName, ALL_METRICS } from 'common/metric';
+import { ALL_METRICS, getMetricNameExtended } from 'common/metric';
 import { Metric } from 'common/metric';
 import { findCountyByFips } from 'common/locations';
 import { useProjections } from 'common/utils/model';
@@ -46,7 +46,7 @@ export default function ChartShareImage() {
     <ScreenshotWrapper className={'screenshot'}>
       <Wrapper>
         <Headers>
-          <Title>{getMetricName(metric)}</Title>
+          <Title>{getMetricNameExtended(metric)}</Title>
           <Subtitle>{projection.locationName}</Subtitle>
           <LogoHolder>
             <LogoDark height={35} />

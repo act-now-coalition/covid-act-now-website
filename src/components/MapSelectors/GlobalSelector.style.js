@@ -4,6 +4,7 @@ const BORDER_COLOR = 'rgba(0,0,0,0.12)';
 
 export const StyledDropDownWrapper = styled.div`
   height: 3.5rem;
+  width: 100%;
 
   @media (min-width: 1350px) {
     height: 4rem;
@@ -18,18 +19,12 @@ export const StyledMenu = styled.ul`
   position: absolute;
   left: 0;
   right: 0;
-  width: auto;
   max-height: 400px;
   overflow-y: auto;
   list-style: none;
   border: ${props => (props.isOpen ? '1px solid ' + BORDER_COLOR : 'none')};
   border-top: none;
   border-radius: 0 0 4px 4px;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
-
-  @media (min-width: 600px) {
-    right: 0;
-  }
 
   @media (min-width: 1350px) {
     margin-top: 4rem;
@@ -64,9 +59,10 @@ export const StyledInputWrapper = styled.div`
   left: 0;
   right: 0;
   position: ${props => (props.isOpen ? 'absolute' : 'relative')};
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   height: 3.5rem;
+  width: 100%;
+  margin: auto 0;
 
   @media (min-width: 1350px) {
     height: 4rem;
@@ -75,7 +71,7 @@ export const StyledInputWrapper = styled.div`
 
 export const StyledInput = styled.input`
   border-radius: ${props => (props.isOpen ? '4px 4px 0 0' : '4px')};
-  font-size: 1rem;
+  font-size: 14px;
   line-height: 1.5rem;
   border: none;
   width: 100%;
@@ -93,7 +89,7 @@ export const StyledInputIcon = styled.div`
   flex: 0 0 48px;
   margin: 0 4px;
 
-  @media (min-width: 1350px) {
-    margin: 0 8px;
+  @media (min-width: 600px) {
+    margin: 0 0 0 8px;
   }
 `;

@@ -24,7 +24,7 @@ import {
   ModelComparisonsContainer,
   ModelSelectorContainer,
 } from './CompareSnapshots.style';
-import { Metric, getMetricName } from 'common/metric';
+import { Metric, getMetricName, ALL_METRICS } from 'common/metric';
 import { Projections } from 'common/models/Projections';
 import { ProjectionsSet } from 'common/models/ProjectionsSet';
 import { SortType, ProjectionsPair } from 'common/models/ProjectionsPair';
@@ -235,13 +235,7 @@ function CompareSnapshotsInner({ masterSnapshot }: { masterSnapshot: number }) {
         <FormControl style={{ width: '12rem', marginLeft: '1rem' }}>
           <InputLabel focused={false}>Metric:</InputLabel>
           <Select value={metric} onChange={changeMetric}>
-            {[
-              Metric.CASE_GROWTH_RATE,
-              Metric.POSITIVE_TESTS,
-              Metric.HOSPITAL_USAGE,
-              Metric.CONTACT_TRACING,
-              Metric.FUTURE_PROJECTIONS,
-            ].map(metric => (
+            {ALL_METRICS.map(metric => (
               <MenuItem key={metric} value={metric}>
                 {getMetricName(metric)}
               </MenuItem>
