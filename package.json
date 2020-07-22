@@ -53,9 +53,9 @@
   "scripts": {
     "postinstall": "patch-package",
     "start": "cross-env TSC_COMPILE_ON_ERROR=false react-scripts -r @cypress/instrument-cra start",
-    "build": "react-scripts build && yarn generate-index-pages",
-    "build:staging": "cross-env REACT_APP_ENVIRONMENT=staging yarn build",
-    "build:prod": "cross-env REACT_APP_ENVIRONMENT=prod yarn build",
+    "build": "react-scripts build",
+    "build:staging": "cross-env REACT_APP_ENVIRONMENT=staging yarn build && yarn generate-index-pages",
+    "build:prod": "cross-env REACT_APP_ENVIRONMENT=prod yarn build && yarn generate-index-pages",
     "serve": "react-scripts build && serve -s build",
     "eject": "react-scripts eject",
     "test": "start-server-and-test start http://localhost:3000 cy.open",
