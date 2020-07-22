@@ -1,7 +1,7 @@
 //@ts-ignore createsend has no types and throws an error
+import _ from 'lodash';
 import createsend from 'createsend-node';
 import * as Handlebars from 'handlebars';
-
 import admin from 'firebase-admin';
 import fs from 'fs-extra';
 import path from 'path';
@@ -41,6 +41,12 @@ interface CampaignMonitorError {
 
 const CM_INVALID_EMAIL_MESSAGE = 'A valid recipient address is required';
 const CM_INVALID_EMAIL_ERROR_CODE = 1;
+
+const BATCH_SIZE = 20;
+
+const isInvalidEmail = err =>
+  err.Code === CM_INVALID_EMAIL_ERROR_CODE &&
+  err.Message === CM_INVALID_EMAIL_MESSAGE;
 
 const alertTemplate = Handlebars.compile(
   fs.readFileSync(path.join(__dirname, 'template.html'), 'utf8'),
@@ -162,73 +168,95 @@ async function setLastSnapshotNumber(
   const locationsWithEmails: { [fips: string]: number } = {};
 
   const db = getFirestore();
-  for (const fips of Object.keys(locationsWithAlerts)) {
-    await db
+  const locations = Object.keys(locationsWithAlerts);
+
+  const fetchSubscriptionsForLocation = async (fips: string) => {
+    const querySnapshot = await db
       .collection(`snapshots/${currentSnapshot}/locations/${fips}/emails/`)
       .where('sentAt', '==', null)
-      .get()
-      .then(async querySnapshot => {
-        for (const doc of querySnapshot.docs) {
-          const userToEmail = sendAllToEmail ? sendAllToEmail : doc.id;
-          await sendEmail(
-            api,
-            generateSendData(userToEmail, locationsWithAlerts[fips]),
-            dryRun,
-          )
-            .then(async result => {
-              emailSent += 1;
-              uniqueEmailAddress[doc.id] =
-                (uniqueEmailAddress[doc.id] || 0) + 1;
-              locationsWithEmails[fips] = (locationsWithEmails[fips] || 0) + 1;
-              if (dryRun) return;
-              const rateLimitRemaining = parseInt(
-                result.headers['x-ratelimit-remaining'],
-              );
-              if (rateLimitRemaining < 10) {
-                const rateLimitReset =
-                  parseInt(result.headers['x-ratelimit-reset']) + 15;
-                console.log(
-                  `Rate limit remaining: ${rateLimitRemaining}. Sleeping ${rateLimitReset} seconds.`,
-                );
-                await delay(rateLimitReset * 1000);
-              }
-              // Comment out this code if you are developing locally
-              await db
-                .collection(
-                  `snapshots/${currentSnapshot}/locations/${fips}/emails/`,
-                )
-                .doc(doc.id)
-                .set({
-                  sentAt: admin.firestore.FieldValue.serverTimestamp(),
-                });
-            })
-            .catch(async (err: CampaignMonitorError) => {
-              // if the email is invalid, move the document to the invalid collection
-              if (
-                err.Code === CM_INVALID_EMAIL_ERROR_CODE &&
-                err.Message === CM_INVALID_EMAIL_MESSAGE
-              ) {
-                invalidEmailCount += 1;
-                const currentData = (
-                  await db.collection('alerts-subscriptions').doc(doc.id).get()
-                ).data();
-                if (currentData) {
-                  await db
-                    .collection('invalid-alerts-subscriptions')
-                    .doc(doc.id)
-                    .set(currentData);
-                  await db
-                    .collection('alerts-subscriptions')
-                    .doc(doc.id)
-                    .delete();
-                }
-              } else {
-                errorCount += 1;
-              }
-            });
-        }
-      });
+      .get();
+    return querySnapshot.docs.map(emailDoc => emailDoc.id);
+  };
+
+  async function onInvalidEmail(email: string) {
+    invalidEmailCount += 1;
+    const querySnapshot = await db
+      .collection('alerts-subscriptions')
+      .doc(email)
+      .get();
+    const currentData = querySnapshot.data();
+    if (currentData) {
+      await db
+        .collection('invalid-alerts-subscriptions')
+        .doc(email)
+        .set(currentData);
+      await db.collection('alerts-subscriptions').doc(email).delete();
+    }
   }
+
+  async function onEmailSent(email: string, fips: string) {
+    emailSent += 1;
+    uniqueEmailAddress[email] = (uniqueEmailAddress[email] || 0) + 1;
+    locationsWithEmails[fips] = (locationsWithEmails[fips] || 0) + 1;
+    // comment out this code if you are developing locally
+    return db
+      .collection(`snapshots/${currentSnapshot}/locations/${fips}/emails/`)
+      .doc(email)
+      .set({ sentAt: admin.firestore.FieldValue.serverTimestamp() });
+  }
+
+  async function sendAlertEmail(email: string, fips: string) {
+    const locationAlert = locationsWithAlerts[fips];
+    const sendData = generateSendData(email, locationAlert);
+
+    try {
+      const response = await sendEmail(api, sendData, dryRun);
+      await onEmailSent(email, fips);
+      return response;
+    } catch (err) {
+      if (isInvalidEmail(err)) {
+        await onInvalidEmail(email);
+      } else {
+        errorCount += 1;
+      }
+    }
+  }
+
+  async function sendEmailBatch(emails: string[], fips: string) {
+    if (emails.length === 0) {
+      return;
+    }
+
+    const [firstEmail, ...remainingEmails] = emails;
+    const pilotReq = await sendAlertEmail(firstEmail, fips);
+
+    const rateLimitRemaining = parseInt(pilotReq.headers['x-ratelimit-limit']);
+    const rateLimitResetSec =
+      parseInt(pilotReq.headers['x-ratelimit-reset']) + 15;
+
+    if (rateLimitRemaining < remainingEmails.length + 10) {
+      console.log(
+        `Rate limit remaining: ${rateLimitRemaining}. Sleeping ${rateLimitResetSec} seconds.`,
+      );
+      await delay(rateLimitResetSec * 1000);
+    }
+
+    await Promise.all(
+      remainingEmails.map(email => {
+        return sendAlertEmail(email, fips);
+      }),
+    );
+  }
+
+  for (const fips of locations) {
+    const emails = await fetchSubscriptionsForLocation(fips);
+    const emailBatches = _.chunk(emails, BATCH_SIZE);
+
+    for (const emailBatch of emailBatches) {
+      await sendEmailBatch(emailBatch, fips);
+    }
+  }
+
   console.log(
     `Total Emails to be sent: ${emailSent}. Total locations with emails: ${
       Object.keys(locationsWithEmails).length
@@ -244,7 +272,7 @@ async function setLastSnapshotNumber(
       console.log(
         `Error count: ${errorCount}. Emails sent: ${emailSent}. Invalid emails removed: ${invalidEmailCount}`,
       );
-      process.exit(-1);
+      process.exit(1);
     }
   }
   console.log(`Done.`);
@@ -278,5 +306,5 @@ function exitWithUsage(): never {
   console.log(
     'Usage: yarn send-emails fipsToAlertFilename currentSnapshot [send] [sendAllToEmail]',
   );
-  process.exit(-1);
+  process.exit(1);
 }
