@@ -51,7 +51,9 @@ const InnerContent = props => {
       2: 'hospital_usage',
       3: 'contact_tracing',
       4: 'future_projections',
+      5: 'case_incidence',
     };
+
     const chartType = chartDownloadType[chartIdentifier];
     const location = countyId
       ? `${countyId}_${stateId.toLowerCase()}`
