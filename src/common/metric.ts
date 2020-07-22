@@ -41,6 +41,14 @@ export function getMetricName(metric: Metric) {
   return METRIC_TO_NAME[metric];
 }
 
+export function getMetricNameExtended(metric: Metric) {
+  if (metric === Metric.CASE_DENSITY) {
+    return `${METRIC_TO_NAME[metric]} per 100k population`;
+  } else {
+    return METRIC_TO_NAME[metric];
+  }
+}
+
 const ALL_METRICS_LEVEL_INFO_MAP = {
   [Metric.CASE_GROWTH_RATE]: CaseGrowth.CASE_GROWTH_RATE_LEVEL_INFO_MAP,
   [Metric.POSITIVE_TESTS]: TestRates.POSITIVE_TESTS_LEVEL_INFO_MAP,
