@@ -42,7 +42,7 @@ export default function makeChartShareQuote(
     return `${displayName} is seeing ${formatDecimal(
       stats[5],
       1,
-    )} new cases per day per 100k people, according to @CovidActNow. See the chart: `;
+    )} daily new cases per 100k population, according to @CovidActNow. See the chart: `;
   }
   return `I'm keeping track of ${displayName}'s COVID data and risk level with @CovidActNow. What does your community look like?`;
 }
