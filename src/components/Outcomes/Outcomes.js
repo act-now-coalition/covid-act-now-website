@@ -16,7 +16,7 @@ const Outcomes = ({ projections, title, colors }) => {
           <div>Scenario</div>
           <div>Hospital Overload Date</div>
           <div>Population Infected (Cumulative)</div>
-          <div>Additional Deaths</div>
+          <div>Deaths (within the next 30 days)</div>
         </OutcomesTableHeader>
         {projections.map((projection, idx) => {
           let rowLabel = projection.label;
@@ -64,9 +64,11 @@ const OutcomesRow = ({ projection, label, color }) => {
 const formatNumber = num => {
   if (num > 1000) {
     return (Math.round(num / 1000) * 1000).toLocaleString();
+  } else if (num > 499) {
+    return '500-1000';
   } else if (num > 0) {
-    return '<1000';
-  } else {
+    return '<500';
+  }else {
     return 0;
   }
 };
