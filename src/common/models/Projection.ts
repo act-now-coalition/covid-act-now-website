@@ -117,6 +117,8 @@ export class Projection {
   readonly currentCaseDensityByDeaths: number | null;
   readonly currentDailyDeaths: number | null;
 
+  private readonly cumulativeActualDeaths: Array<number | null>;
+
   private readonly intervention: string;
   private readonly dates: Date[];
   private readonly isCounty: boolean;
@@ -199,11 +201,11 @@ export class Projection {
       this.deltasFromCumulatives(cumulativeConfirmedCases),
     );
 
-    const cumulativeActualDeaths = this.smoothCumulatives(
+    this.cumulativeActualDeaths = this.smoothCumulatives(
       actualTimeseries.map(row => row && row.cumulativeDeaths),
     );
     this.smoothedDailyDeaths = this.smoothWithRollingAverage(
-      this.deltasFromCumulatives(cumulativeActualDeaths),
+      this.deltasFromCumulatives(this.cumulativeActualDeaths),
     );
 
     this.rtRange = this.calcRtRange(timeseries);
@@ -281,6 +283,14 @@ export class Projection {
 
   get finalCumulativeDeaths() {
     return this.cumulativeDeaths[this.cumulativeDeaths.length - 1];
+  }
+
+  get finalAdditionalDeaths() {
+    let projectedCumulativeDeaths: number =
+      this.cumulativeDeaths[this.cumulativeDeaths.length - 1] || 0;
+    let currentCumulativeDeaths: number =
+      lastValue(this.cumulativeActualDeaths) || 0;
+    return projectedCumulativeDeaths - currentCumulativeDeaths;
   }
 
   /** Returns the date when projections end (should be 30 days out). */
