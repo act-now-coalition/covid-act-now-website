@@ -46,7 +46,7 @@ function LocationPage() {
 
   const actionTitle =
     'Real-time modeling and metrics to understand where we stand against COVID.';
-  const actionDescription = `Real-time modeling and metrics to understand where we stand against COVID. 50 states. 2,100+ counties. Click the map to dive in.`;
+  const actionDescription = `Real-time modeling and metrics to understand where we stand against COVID. 50 states. 3,000+ counties. Click the map to dive in.`;
 
   return (
     <div>

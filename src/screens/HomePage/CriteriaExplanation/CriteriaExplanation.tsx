@@ -2,44 +2,83 @@ import React from 'react';
 import {
   Wrapper,
   Criterion,
-  Kicker,
+  KickerContent,
   CriterionHeader,
   CriterionDescription,
   CriteriaList,
+  ListHeader,
+  ListSubheader,
+  Content,
+  KickerWrapper,
 } from './CriteriaExplanation.style';
+import { BetaTag } from 'components/LocationPage/ChartsHolder.style';
 
-const CriteriaExplanation = () => {
+const Kicker = (props: {
+  number: string;
+  title: string;
+  isMobile: Boolean;
+}) => {
+  const kickerText = props.isMobile ? props.number : props.title;
+
+  return (
+    <KickerWrapper>
+      <KickerContent>{kickerText}</KickerContent>
+    </KickerWrapper>
+  );
+};
+
+const CriteriaExplanation = (props: { isMobile: Boolean }) => {
   return (
     <Wrapper>
+      <ListHeader>How we determine risk levels</ListHeader>
+      <ListSubheader>Key indicators</ListSubheader>
       <CriteriaList>
         <Criterion>
-          <Kicker>Indicator 1</Kicker>
-          <CriterionHeader>Are COVID cases decreasing?</CriterionHeader>
-          <CriterionDescription>
-            Is the number of infections going down?{' '}
-          </CriterionDescription>
+          <Kicker isMobile={props.isMobile} title="Indicator 1" number="1" />
+          <Content>
+            <CriterionHeader>Daily new cases</CriterionHeader>
+            <CriterionDescription>
+              How many new cases are confirmed daily?
+            </CriterionDescription>
+            <BetaTag>New Indicator</BetaTag>
+          </Content>
         </Criterion>
         <Criterion>
-          <Kicker>Indicator 2</Kicker>
-          <CriterionHeader>Are we testing enough?</CriterionHeader>
-          <CriterionDescription>
-            Is COVID testing widespread enough to identify new cases?
-          </CriterionDescription>
+          <Kicker isMobile={props.isMobile} title="Indicator 2" number="2" />
+          <Content>
+            <CriterionHeader>Infection Rate</CriterionHeader>
+            <CriterionDescription>
+              Is the number of infections going down?{' '}
+            </CriterionDescription>
+          </Content>
         </Criterion>
         <Criterion>
-          <Kicker>Indicator 3</Kicker>
-          <CriterionHeader>Are our hospitals ready?</CriterionHeader>
-          <CriterionDescription>
-            Do hospitals have capacity to treat a surge of COVID
-            hospitalizations?
-          </CriterionDescription>
+          <Kicker isMobile={props.isMobile} title="Indicator 3" number="3" />
+          <Content>
+            <CriterionHeader>Test Positivity</CriterionHeader>
+            <CriterionDescription>
+              Is COVID testing widespread enough to identify new cases?
+            </CriterionDescription>
+          </Content>
         </Criterion>
         <Criterion>
-          <Kicker>Indicator 4</Kicker>
-          <CriterionHeader>Are we tracing fast enough?</CriterionHeader>
-          <CriterionDescription>
-            Are we finding and isolating most new cases before COVID spreads?
-          </CriterionDescription>
+          <Kicker isMobile={props.isMobile} title="Indicator 4" number="4" />
+          <Content>
+            <CriterionHeader>ICU Headroom</CriterionHeader>
+            <CriterionDescription>
+              Do hospitals have capacity to treat a surge of COVID
+              hospitalizations?
+            </CriterionDescription>
+          </Content>
+        </Criterion>
+        <Criterion>
+          <Kicker isMobile={props.isMobile} title="Indicator 5" number="5" />
+          <Content>
+            <CriterionHeader>Contacts Traced</CriterionHeader>
+            <CriterionDescription>
+              Are we finding and isolating most new cases before COVID spreads?
+            </CriterionDescription>
+          </Content>
         </Criterion>
       </CriteriaList>
     </Wrapper>

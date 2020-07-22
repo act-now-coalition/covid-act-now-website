@@ -61,9 +61,11 @@ export const ChartHeader = styled.div`
   font-weight: 700;
   font-size: 1.5rem;
   max-width: 440px;
+  line-height: 1.1;
 
   @media (min-width: 800px) {
     max-width: unset;
+    line-height: 1;
   }
 `;
 
