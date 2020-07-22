@@ -7,7 +7,7 @@ import { scaleLinear } from '@vx/scale';
 import { ParentSize } from '@vx/responsive';
 import { Column } from 'common/models/Projection';
 import { CASE_DENSITY_LEVEL_INFO_MAP } from 'common/metrics/case_density';
-import { LevelInfoMap } from 'common/level';
+import { LevelInfoMap, Level } from 'common/level';
 import { formatUtcDate, formatDecimal } from 'common/utils';
 import { AxisBottom, AxisLeft } from './Axis';
 import BoxedAnnotation from './BoxedAnnotation';
@@ -62,6 +62,9 @@ const ChartCaseDensity: FunctionComponent<{
 
   const data: Point[] = columnData.filter(hasData);
 
+  const lastPoint = last(data);
+  const activeZone = getZoneByValue(getY(lastPoint), zones);
+
   const dates = data.map(getDate);
   const minDate = d3min(dates) || new Date('2020-01-01');
   const currDate = new Date();
@@ -69,7 +72,12 @@ const ChartCaseDensity: FunctionComponent<{
 
   const yDataMax = d3max(data, getY) || 100;
   const yAxisLimits = getAxisLimits(0, yDataMax, zones);
-  const [yAxisMin, yAxisMax] = [-9, Math.min(yAxisLimits[1], capY)];
+
+  // Adjusts the min y-axis to make the Low label fit only if
+  // the current level is Low
+  const isLow = activeZone.level === Level.LOW;
+  const yAxisMin = isLow ? -9 : 0;
+  const yAxisMax = Math.min(yAxisLimits[1], capY);
 
   const yScale = scaleLinear({
     domain: [yAxisMin, yAxisMax],
@@ -80,10 +88,10 @@ const ChartCaseDensity: FunctionComponent<{
   const getYCoord = (p: Point) => yScale(Math.min(getY(p), capY));
 
   const regions = getChartRegions(yAxisMin, yAxisMax, zones);
-  const lastPoint = last(data);
-  const activeZone = getZoneByValue(getY(lastPoint), zones);
-
   const yTicks = computeTickPositions(yAxisMin, yAxisMax, zones);
+
+  // Hide the Low label if the current level is Medium or higher
+  const regionLabels = isLow ? regions : regions.slice(Level.MEDIUM);
 
   const renderTooltip = (p: Point) => (
     <Tooltip
@@ -140,7 +148,7 @@ const ChartCaseDensity: FunctionComponent<{
           />
         </Style.TextAnnotation>
       </RectClipGroup>
-      {regions.map((region, i) => (
+      {regionLabels.map((region, i) => (
         <ZoneAnnotation
           key={`zone-annotation-${i}`}
           color={region.color}
