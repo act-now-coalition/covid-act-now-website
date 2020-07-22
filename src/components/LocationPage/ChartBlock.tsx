@@ -11,7 +11,11 @@ import { Projection } from 'common/models/Projection';
 import Disclaimer from 'components/Disclaimer/Disclaimer';
 import Outcomes from 'components/Outcomes/Outcomes';
 import ShareButtons from 'components/LocationPage/ShareButtons';
-import { Metric, getMetricName, getMetricStatusText } from 'common/metric';
+import {
+  Metric,
+  getMetricNameExtended,
+  getMetricStatusText,
+} from 'common/metric';
 import { formatUtcDate } from 'common/utils';
 import { generateChartDescription } from 'common/metrics/future_projection';
 import MetricChart from 'components/Charts/MetricChart';
@@ -55,18 +59,13 @@ function ChartBlock(props: {
     !futureProjectionsDisabled &&
     props.projections.hasMetric(Metric.FUTURE_PROJECTIONS);
 
-  const chartHeader =
-    props.metric === Metric.CASE_DENSITY
-      ? `${getMetricName(props.metric)} per 100k population`
-      : `${getMetricName(props.metric)}`;
-
   return (
     <Fragment>
       {props.metric !== Metric.FUTURE_PROJECTIONS && (
         <Fragment>
           <ChartHeaderWrapper>
             <ChartHeader ref={props.chartRef}>
-              {chartHeader}
+              {getMetricNameExtended(props.metric)}
               {showBetaTag && <BetaTag>Beta</BetaTag>}
             </ChartHeader>
             {!props.isMobile && props.data && (
