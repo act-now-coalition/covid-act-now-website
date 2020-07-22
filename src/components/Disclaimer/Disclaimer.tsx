@@ -22,9 +22,15 @@ const Disclaimer = ({ metricName }: { metricName: number }) => {
         {metricName === Metric.CASE_DENSITY && (
           <Fragment>
             <span>
-              Our risk levels for daily new cases are based on the “Key Metrics
-              for Covid Suppression” by Harvard Global Health Institute and
-              others.
+              Our risk levels for daily new cases are based on the{' '}
+              <a
+                href="https://ethics.harvard.edu/files/center-for-ethics/files/key_metrics_and_indicators_v4.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                “Key Metrics for Covid Suppression”
+              </a>{' '}
+              by Harvard Global Health Institute and others.
               <br />
               When estimating the number of people who will become infected in
               the course of a year, we rely on the{' '}

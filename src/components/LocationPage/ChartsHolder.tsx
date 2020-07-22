@@ -146,6 +146,7 @@ const ChartsHolder = (props: {
       ]
     : [];
 
+  // TODO(pablo): Create separate refs for signup and share
   return (
     <>
       {!projection ? (
@@ -164,7 +165,7 @@ const ChartsHolder = (props: {
               onTestPositiveClick={() => scrollTo(testPositiveRef.current)}
               onIcuUtilizationClick={() => scrollTo(icuUtilizationRef.current)}
               onContactTracingClick={() => scrollTo(contactTracingRef.current)}
-              onHeaderShareClick={() => scrollTo(shareBlockRef.current, -215)}
+              onHeaderShareClick={() => scrollTo(shareBlockRef.current, -372)}
               onHeaderSignupClick={() => scrollTo(shareBlockRef.current)}
               isMobile={isMobile}
             />
