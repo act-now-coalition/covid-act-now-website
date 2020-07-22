@@ -28,7 +28,11 @@ import { Metric, getMetricName, ALL_METRICS } from 'common/metric';
 import { Projections } from 'common/models/Projections';
 import { ProjectionsSet } from 'common/models/ProjectionsSet';
 import { SortType, ProjectionsPair } from 'common/models/ProjectionsPair';
-import { topCountiesByPopulation } from 'common/locations';
+import {
+  topCountiesByPopulation,
+  findCountyByFips,
+  County,
+} from 'common/locations';
 import { SNAPSHOT_URL, SnapshotVersion, Api } from 'api';
 import moment from 'moment';
 
@@ -46,6 +50,7 @@ enum Locations {
   STATES,
   TOP_COUNTIES_BY_POPULATION,
   TOP_COUNTIES_BY_DIFF,
+  TOM_AND_CHRIS_COUNTIES,
 }
 
 const COUNTIES_LIMIT = 100;
@@ -230,6 +235,9 @@ function CompareSnapshotsInner({ masterSnapshot }: { masterSnapshot: number }) {
             <MenuItem value={Locations.TOP_COUNTIES_BY_DIFF}>
               Top {COUNTIES_LIMIT} Counties (by Diff) [SLOW!!!]
             </MenuItem>
+            <MenuItem value={Locations.TOM_AND_CHRIS_COUNTIES}>
+              Tom &amp; Chris Counties
+            </MenuItem>
           </Select>
         </FormControl>
         <FormControl style={{ width: '12rem', marginLeft: '1rem' }}>
@@ -398,6 +406,12 @@ function fetchAllProjections(
         fetchProjections(county.state_code, county, snapshotUrl),
       ),
     );
+  } else if (locations === Locations.TOM_AND_CHRIS_COUNTIES) {
+    return Promise.all(
+      tomChrisCounties().map(county =>
+        fetchProjections(county.state_code, county, snapshotUrl),
+      ),
+    );
   } else {
     fail(`Unknown locations: ${locations}`);
   }
@@ -433,6 +447,49 @@ export function useSnapshotVersion(
   }, [snapshot]);
 
   return version;
+}
+
+function tomChrisCounties(): County[] {
+  const fips = [
+    '02013',
+    '02016',
+    '02020',
+    '02050',
+    '02068',
+    '02070',
+    '02100',
+    '02158',
+    '02170',
+    '02180',
+    '02185',
+    '02188',
+    '02261',
+    '02275',
+    '10001',
+    '10005',
+    '26001',
+    '26013',
+    '26033',
+    '26049',
+    '26077',
+    '26093',
+    '26095',
+    '26103',
+    '26121',
+    '26131',
+    '26145',
+    '26153',
+    '31009',
+    '31017',
+    '31075',
+    '31091',
+    '31117',
+    '31135',
+    '31183',
+    '47067',
+    '47137',
+  ];
+  return fips.map(findCountyByFips);
 }
 
 export default CompareSnapshots;
