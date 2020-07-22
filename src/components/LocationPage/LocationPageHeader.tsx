@@ -46,7 +46,7 @@ const UpdateCaseDensity: FunctionComponent<{ projections: Projections }> = ({
   const changedLevelCopy =
     previousLevel === currentLevel
       ? ''
-      : `That changed your threat level from ${levelName(
+      : `That changed the threat level from ${levelName(
           previousLevel,
         )} to ${levelName(currentLevel)}. `;
   return (
@@ -54,7 +54,9 @@ const UpdateCaseDensity: FunctionComponent<{ projections: Projections }> = ({
       <strong>New key indicator added</strong>
       <br />
       {`We added ${CASE_DENSITY_METRIC_NAME.toLowerCase()}. ${changedLevelCopy}`}
-      <a href="/">Learn more</a>
+      <a href="https://blog.covidactnow.org/new-daily-covid-cases/">
+        Learn more
+      </a>
     </Copy>
   );
 };
