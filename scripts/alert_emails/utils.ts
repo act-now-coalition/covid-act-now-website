@@ -73,7 +73,7 @@ export function generateAlertEmailData(
     TrackOpens: true,
     TrackClicks: true,
     InlineCSS: true,
-    Group: null,
+    Group: 'Alert Email',
     ConsentToTrack: 'Unchanged',
   };
 }
