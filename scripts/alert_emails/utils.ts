@@ -36,7 +36,7 @@ function generateAlertEmailContent(
   } = locationAlert;
 
   const data: AlertTemplateData = {
-    change: newLevel < oldLevel ? 'risk decreased' : 'risk increased',
+    change: 'new risk score',
     location_name: locationName,
     img_alt: `Image depicting that ${locationName} went from from level ${Level[oldLevel]} to ${Level[newLevel]}`,
     img_url: `${thermometerBaseURL}/therm-${newLevel}-${oldLevel}.png`,
