@@ -37,6 +37,7 @@ async function main(emailAddress: string) {
 function printUsage() {
   console.log('yarn send-test-email user@email.com');
 }
+
 function parseArgs() {
   const args = process.argv.slice(2);
   if (args.length !== 1) {

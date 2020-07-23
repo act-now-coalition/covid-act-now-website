@@ -34,6 +34,12 @@ export interface CampaignMonitorError {
   Message: string;
 }
 
+export interface CampaignMonitorMessageSent {
+  Status: string;
+  Recipient: string;
+  MessageID: string;
+}
+
 class CampaignMonitor {
   private api: AxiosInstance;
 
@@ -55,18 +61,20 @@ class CampaignMonitor {
     });
   }
 
-  async sendClassicEmail(data: EmailSendData): Promise<AxiosResponse> {
+  async sendClassicEmail(
+    data: EmailSendData,
+  ): Promise<AxiosResponse<CampaignMonitorMessageSent[]>> {
     const res = await this.api.post('transactional/classicEmail/send', data);
     const { status, headers } = res;
 
     const rateLimitResetSec = parseInt(headers['x-ratelimit-reset'], 10) + 15;
     const rateLimitRemaining = parseInt(headers['x-ratelimit-remaining'], 10);
 
-    if (isStatusOK(status) && rateLimitRemaining < 10) {
+    if (isStatusOK(status) && rateLimitRemaining < 50) {
       await delay(rateLimitResetSec * 1000);
     }
 
-    if (isRateLimitExceeded(res.status)) {
+    if (isRateLimitExceeded(status)) {
       await delay(rateLimitResetSec * 1000);
       return this.sendClassicEmail(data);
     }

@@ -36,9 +36,10 @@ function generateAlertEmailContent(
   } = locationAlert;
 
   const data: AlertTemplateData = {
+    // TODO(pablo): change it back to risk increased / risk decreased after the case incidence send
     change: 'new risk score',
     location_name: locationName,
-    img_alt: `Image depicting that ${locationName} went from from level ${Level[oldLevel]} to ${Level[newLevel]}`,
+    img_alt: `Image depicting that ${locationName} went from level ${Level[oldLevel]} to ${Level[newLevel]}`,
     img_url: `${thermometerBaseURL}/therm-${newLevel}-${oldLevel}.png`,
     last_updated: lastUpdated,
     location_url: locationURL,

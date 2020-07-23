@@ -56,7 +56,6 @@ async function setLastSnapshotNumber(
   const alertPath = path.join(__dirname, fipsToAlertFilename);
   const alertsByLocation = readAlerts(alertPath);
 
-  // TODO: maybe oauth here and add secrets into github.
   let emailSent = 0;
   let errorCount = 0;
   let invalidEmailCount = 0;
@@ -92,37 +91,42 @@ async function setLastSnapshotNumber(
     }
   }
 
-  async function onEmailSent(email: string, fips: string) {
+  function updateSentEmailCounters(email: string, fips: string) {
     emailSent += 1;
     uniqueEmailAddress[email] = (uniqueEmailAddress[email] || 0) + 1;
     locationsWithEmails[fips] = (locationsWithEmails[fips] || 0) + 1;
-    // comment out this code if you are developing locally
+  }
+
+  async function onEmailSent(email: string, fips: string) {
+    updateSentEmailCounters(email, fips);
     return db
       .collection(`snapshots/${currentSnapshot}/locations/${fips}/emails/`)
       .doc(email)
       .set({ sentAt: admin.firestore.FieldValue.serverTimestamp() });
   }
 
-  async function sendAlertEmail(email: string, fips: string) {
+  async function sendAlertEmail(
+    email: string,
+    fips: string,
+  ): Promise<undefined> {
     const locationAlert = alertsByLocation[fips];
     const sendData = generateAlertEmailData(email, locationAlert);
+
     if (dryRun) {
-      await onEmailSent(email, fips);
+      updateSentEmailCounters(email, fips);
       return;
     }
 
     try {
-      const response = await createSend.sendClassicEmail(sendData);
+      await createSend.sendClassicEmail(sendData);
       await onEmailSent(email, fips);
-      return response;
     } catch (err) {
       if (isInvalidEmailError(err)) {
         await onInvalidEmail(email);
-        return;
+      } else {
+        console.error(`Error sending email ${email}, ${fips}.`, err);
+        errorCount += 1;
       }
-      console.error(`Error sending email ${email}, ${fips}.`, err);
-      errorCount += 1;
-      return;
     }
   }
 
