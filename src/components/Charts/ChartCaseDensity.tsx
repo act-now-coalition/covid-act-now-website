@@ -76,7 +76,7 @@ const ChartCaseDensity: FunctionComponent<{
   // Adjusts the min y-axis to make the Low label fit only if
   // the current level is Low
   const isLow = activeZone.level === Level.LOW;
-  const yAxisMin = isLow ? -9 : 0;
+  const yAxisMin = isLow ? -6 : 0;
   const yAxisMax = Math.min(yAxisLimits[1], capY);
 
   const yScale = scaleLinear({
