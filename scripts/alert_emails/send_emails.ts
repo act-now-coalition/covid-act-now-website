@@ -106,6 +106,10 @@ async function setLastSnapshotNumber(
   async function sendAlertEmail(email: string, fips: string) {
     const locationAlert = alertsByLocation[fips];
     const sendData = generateAlertEmailData(email, locationAlert);
+    if (dryRun) {
+      await onEmailSent(email, fips);
+      return;
+    }
 
     try {
       const response = await createSend.sendClassicEmail(sendData);
