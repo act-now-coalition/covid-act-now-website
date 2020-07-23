@@ -1,31 +1,10 @@
 //@ts-ignore createsend has no types and throws an error
 import _ from 'lodash';
-import createsend from 'createsend-node';
-import * as Handlebars from 'handlebars';
 import admin from 'firebase-admin';
-import fs from 'fs-extra';
 import path from 'path';
-import { Alert } from './interfaces';
 import { getFirestore } from './firestore';
-import { Level } from '../../src/common/level';
-import delay from 'delay';
-
-interface EmailSendData {
-  Subject: string;
-  From: string;
-  ReplyTo: string | null;
-  To: string[] | null;
-  CC: string[] | null;
-  BCC: string[] | null;
-  Html: string;
-  Text: string;
-  Attachments: { [key: string]: string }[] | null;
-  TrackOpens: boolean;
-  TrackClicks: boolean;
-  InlineCSS: boolean;
-  Group: string | null;
-  AddRecipientsToList: string | null;
-}
+import CampaignMonitor, { CampaignMonitorError } from './campaign-monitor';
+import { generateAlertEmailData, readAlerts } from './utils';
 
 interface SendEmailResult {
   MessageID: string;
@@ -34,93 +13,16 @@ interface SendEmailResult {
   headers: { [key: string]: string };
 }
 
-interface CampaignMonitorError {
-  Code: number;
-  Message: string;
-}
-
 const CM_INVALID_EMAIL_MESSAGE = 'A valid recipient address is required';
 const CM_INVALID_EMAIL_ERROR_CODE = 1;
 
 const BATCH_SIZE = 20;
 
-const isInvalidEmail = err =>
-  err.Code === CM_INVALID_EMAIL_ERROR_CODE &&
-  err.Message === CM_INVALID_EMAIL_MESSAGE;
-
-const alertTemplate = Handlebars.compile(
-  fs.readFileSync(path.join(__dirname, 'template.html'), 'utf8'),
-);
-
-async function sendEmail(
-  api: any,
-  data: EmailSendData,
-  dryRun: boolean,
-): Promise<SendEmailResult> {
-  return new Promise((resolve, reject) => {
-    if (dryRun) {
-      return resolve({
-        MessageID: 'none',
-        Recipient: 'none',
-        Status: 'dry run',
-        headers: {},
-      });
-    }
-    api.transactional.sendClassicEmail(
-      data,
-      (err: CampaignMonitorError, result: any) => {
-        if (err) {
-          console.log(err);
-          reject(err);
-        }
-        resolve(result);
-      },
-    );
-  });
-}
-
-function generateSendData(
-  userToEmail: string,
-  alertForLocation: Alert,
-): EmailSendData {
-  const base_url = 'https://data.covidactnow.org/thermometer_screenshot';
-  const html = alertTemplate({
-    change:
-      alertForLocation.newLevel < alertForLocation.oldLevel
-        ? 'risk decreased'
-        : 'risk increased',
-    location_name: alertForLocation.locationName,
-    img_alt: `Image depicting that the state went from from state ${
-      Level[alertForLocation.oldLevel]
-    } to ${Level[alertForLocation.newLevel]}`,
-    img_url: `${base_url}/therm-${alertForLocation.newLevel}-${alertForLocation.oldLevel}.png`,
-    last_updated: alertForLocation.lastUpdated,
-    location_url: alertForLocation.locationURL,
-    unsubscribe_link: `https://covidactnow.org/alert_unsubscribe?email=${encodeURI(
-      userToEmail,
-    )}`, // would be nice to know dev/staging/prod
-    feedback_subject_line: encodeURI(
-      `[Alert Feedback] Alert for ${alertForLocation.locationName} on ${alertForLocation.lastUpdated}`,
-    ),
-  });
-  const subject = `${alertForLocation.locationName}'s Risk Level Has Changed`;
-
-  return {
-    Subject: subject,
-    To: [userToEmail],
-    CC: null,
-    BCC: null,
-    Attachments: null,
-    Html: html,
-    Text: html,
-    AddRecipientsToList: null,
-    From: 'Covid Act Now Alerts  <noreply@covidactnow.org>',
-    ReplyTo: 'noreply@covidactnow.org',
-    TrackOpens: true,
-    TrackClicks: true,
-    InlineCSS: true,
-    Group: null,
-  };
+function isInvalidEmailError(err: CampaignMonitorError) {
+  return (
+    err.Code === CM_INVALID_EMAIL_ERROR_CODE &&
+    err.Message === CM_INVALID_EMAIL_MESSAGE
+  );
 }
 
 async function setLastSnapshotNumber(
@@ -144,39 +46,35 @@ async function setLastSnapshotNumber(
  * You can run via `yarn send-emails fipsToAlertFilename currentSnapshot [send]`
  */
 (async () => {
-  const outputFolder = path.join(__dirname);
-  await fs.ensureDir(outputFolder);
-
   const {
     fipsToAlertFilename,
     currentSnapshot,
     dryRun,
     sendAllToEmail,
   } = await parseArgs();
-  const alertPath = path.join(outputFolder, fipsToAlertFilename);
 
-  const rawdata = fs.readFileSync(alertPath, 'utf8');
-  const locationsWithAlerts: { [fips: string]: Alert } = JSON.parse(rawdata);
+  const alertPath = path.join(__dirname, fipsToAlertFilename);
+  const alertsByLocation = readAlerts(alertPath);
 
   // TODO: maybe oauth here and add secrets into github.
-  const auth = { apiKey: process.env.CREATE_SEND_TOKEN };
-  const api: any = new createsend(auth);
   let emailSent = 0;
   let errorCount = 0;
   let invalidEmailCount = 0;
   const uniqueEmailAddress: { [email: string]: number } = {};
   const locationsWithEmails: { [fips: string]: number } = {};
 
-  const db = getFirestore();
-  const locations = Object.keys(locationsWithAlerts);
+  const createSend = new CampaignMonitor(process.env.CREATE_SEND_TOKEN);
 
-  const fetchSubscriptionsForLocation = async (fips: string) => {
+  const db = getFirestore();
+  const locations = Object.keys(alertsByLocation);
+
+  async function fetchSubscriptionsForLocation(fips: string) {
     const querySnapshot = await db
       .collection(`snapshots/${currentSnapshot}/locations/${fips}/emails/`)
       .where('sentAt', '==', null)
       .get();
     return querySnapshot.docs.map(emailDoc => emailDoc.id);
-  };
+  }
 
   async function onInvalidEmail(email: string) {
     invalidEmailCount += 1;
@@ -206,59 +104,42 @@ async function setLastSnapshotNumber(
   }
 
   async function sendAlertEmail(email: string, fips: string) {
-    const locationAlert = locationsWithAlerts[fips];
-    const sendData = generateSendData(email, locationAlert);
+    const locationAlert = alertsByLocation[fips];
+    const sendData = generateAlertEmailData(email, locationAlert);
 
     try {
-      const response = await sendEmail(api, sendData, dryRun);
+      const response = await createSend.sendClassicEmail(sendData);
       await onEmailSent(email, fips);
       return response;
     } catch (err) {
-      if (isInvalidEmail(err)) {
+      if (isInvalidEmailError(err)) {
         await onInvalidEmail(email);
-      } else {
-        errorCount += 1;
+        return;
       }
+      console.error(`Error sending email ${email}, ${fips}.`, err);
+      errorCount += 1;
+      return;
     }
   }
 
-  async function sendEmailBatch(emails: string[], fips: string) {
-    if (emails.length === 0) {
-      return;
-    }
-
-    const [firstEmail, ...remainingEmails] = emails;
-    const pilotReq = await sendAlertEmail(firstEmail, fips);
-
-    const rateLimitRemaining = parseInt(pilotReq.headers['x-ratelimit-limit']);
-    const rateLimitResetSec =
-      parseInt(pilotReq.headers['x-ratelimit-reset']) + 15;
-
-    if (rateLimitRemaining < remainingEmails.length + 10) {
-      console.log(
-        `Rate limit remaining: ${rateLimitRemaining}. Sleeping ${rateLimitResetSec} seconds.`,
-      );
-      await delay(rateLimitResetSec * 1000);
-    }
-
+  const emailFipsTuples = _.flatten(
     await Promise.all(
-      remainingEmails.map(email => {
-        return sendAlertEmail(email, fips);
+      locations.map(async fips => {
+        const emails = await fetchSubscriptionsForLocation(fips);
+        return emails.map(email => [email, fips]);
       }),
+    ),
+  );
+
+  const emailBatches = _.chunk(emailFipsTuples, BATCH_SIZE);
+  for (const batch of emailBatches) {
+    await Promise.all(
+      batch.map(([email, fips]) => sendAlertEmail(email, fips)),
     );
   }
 
-  for (const fips of locations) {
-    const emails = await fetchSubscriptionsForLocation(fips);
-    const emailBatches = _.chunk(emails, BATCH_SIZE);
-
-    for (const emailBatch of emailBatches) {
-      await sendEmailBatch(emailBatch, fips);
-    }
-  }
-
   console.log(
-    `Total Emails to be sent: ${emailSent}. Total locations with emails: ${
+    `Total Emails to be sent: ${emailSent}.) Total locations with emails: ${
       Object.keys(locationsWithEmails).length
     }. Unique Email addresses: ${
       Object.keys(uniqueEmailAddress).length
