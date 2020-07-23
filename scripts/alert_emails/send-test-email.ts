@@ -1,3 +1,14 @@
+/**
+ * Send an alert email to a single email address, using the locationAlert
+ * data hardcoded below. Make sure that the CREATE_SEND_TOKEN
+ * environment variable is set before sending the email.
+ *
+ * Example:
+ *
+ *    $ export CREATE_SEND_TOKEN=<token here>
+ *    $ yarn send-test-email pablo@covidactnow.org
+ */
+
 import CampaignMonitor from './campaign-monitor';
 import { Alert } from './interfaces';
 import { generateAlertEmailData } from './utils';
