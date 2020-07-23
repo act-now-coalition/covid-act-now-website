@@ -16,12 +16,26 @@ async function main(emailAddress: string) {
   const data = generateAlertEmailData(emailAddress, locationAlert);
   try {
     await cm.sendClassicEmail(data);
+    console.info(`Email sent to ${emailAddress}.`);
   } catch (err) {
     console.error(err);
     process.exit(1);
   }
 }
 
+function printUsage() {
+  console.log('yarn send-test-email user@email.com');
+}
+function parseArgs() {
+  const args = process.argv.slice(2);
+  if (args.length !== 1) {
+    printUsage();
+    process.exit(1);
+  }
+  return args[0];
+}
+
 if (require.main === module) {
-  main('pnavarrc@gmail.com');
+  const emailAddress = parseArgs();
+  main(emailAddress);
 }
