@@ -44,20 +44,13 @@ async function main() {
   for (const fips in newSummaries) {
     const newSummary = newSummaries[fips];
     const oldSummary = oldSummaries[fips];
-    if (!oldSummary) {
-      continue;
-    }
-    const oldLevel = oldSummary.level;
+    const oldLevel = oldSummary ? oldSummary.level : Level.UNKNOWN;
     const newLevel = newSummary.level;
     const locationName = getLocationNameForFips(fips);
     const locationURL = getLocationUrlForFips(fips);
     // Use today's date (roughly in the Pacific timezone).
     const lastUpdated = moment.utc().subtract(8, 'hours').format('MM/DD/YYYY');
-    if (
-      oldLevel !== newLevel &&
-      oldLevel !== Level.UNKNOWN &&
-      newLevel !== Level.UNKNOWN
-    ) {
+    if (oldLevel !== newLevel && newLevel !== Level.UNKNOWN) {
       alerts[fips] = {
         fips,
         locationName,
