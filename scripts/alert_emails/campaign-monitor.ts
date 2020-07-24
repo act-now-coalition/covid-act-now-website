@@ -1,15 +1,5 @@
-import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import axios, { AxiosInstance } from 'axios';
 import delay from 'delay';
-
-const STATUS_RATE_LIMIT = 429;
-
-function isStatusOK(status: number) {
-  return 200 <= status && status < 300;
-}
-
-function isRateLimitExceeded(status: number) {
-  return status === STATUS_RATE_LIMIT;
-}
 
 export interface EmailSendData {
   Subject: string;
@@ -29,15 +19,22 @@ export interface EmailSendData {
   ConsentToTrack: string;
 }
 
-export interface CampaignMonitorError {
-  Code: number;
-  Message: string;
-}
-
 export interface CampaignMonitorMessageSent {
   Status: string;
   Recipient: string;
   MessageID: string;
+}
+
+function isStatusOK(status: number) {
+  return 200 <= status && status < 300;
+}
+
+function isRateLimitExceeded(status: number) {
+  return status === 429;
+}
+
+export function isInvalidEmailError(error: any) {
+  return error?.response?.data?.Code === 1;
 }
 
 class CampaignMonitor {
@@ -62,14 +59,14 @@ class CampaignMonitor {
   }
 
   async sendClassicEmail(
-    data: EmailSendData,
+    sendData: EmailSendData,
   ): Promise<CampaignMonitorMessageSent[]> {
-    const res = await this.api.post<CampaignMonitorMessageSent[]>(
+    const response = await this.api.post<CampaignMonitorMessageSent[]>(
       'transactional/classicEmail/send',
-      data,
+      sendData,
     );
-    const { status, headers } = res;
 
+    const { status, headers } = response;
     const rateLimitResetSec = parseInt(headers['x-ratelimit-reset'], 10) + 15;
     const rateLimitRemaining = parseInt(headers['x-ratelimit-remaining'], 10);
 
@@ -79,10 +76,10 @@ class CampaignMonitor {
 
     if (isRateLimitExceeded(status)) {
       await delay(rateLimitResetSec * 1000);
-      return this.sendClassicEmail(data);
+      return this.sendClassicEmail(sendData);
     }
 
-    return res.data;
+    return response.data;
   }
 }
 
