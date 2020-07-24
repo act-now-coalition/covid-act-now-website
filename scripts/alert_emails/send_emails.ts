@@ -16,8 +16,7 @@ interface SendEmailResult {
 const CM_INVALID_EMAIL_MESSAGE = 'A valid recipient address is required';
 const CM_INVALID_EMAIL_ERROR_CODE = 1;
 
-// TODO(michael): Put back to 20.
-const BATCH_SIZE = 3;
+const BATCH_SIZE = 20;
 
 function isInvalidEmailError(err: CampaignMonitorError) {
   return (
