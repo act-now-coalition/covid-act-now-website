@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import axios, { AxiosInstance } from 'axios';
 import delay from 'delay';
 
 export interface EmailSendData {
@@ -19,24 +19,10 @@ export interface EmailSendData {
   ConsentToTrack: string;
 }
 
-export interface CampaignMonitorError {
-  Code: number;
-  Message: string;
-}
-
 export interface CampaignMonitorMessageSent {
   Status: string;
   Recipient: string;
   MessageID: string;
-}
-
-class CampaignMonitorException implements CampaignMonitorError {
-  Code: number;
-  Message: string;
-  constructor(code: number, message: string) {
-    this.Code = code;
-    this.Message = message;
-  }
 }
 
 function isStatusOK(status: number) {
@@ -47,11 +33,8 @@ function isRateLimitExceeded(status: number) {
   return status === 429;
 }
 
-export function isInvalidEmailError(error: CampaignMonitorError) {
-  return (
-    error.Code === 1 &&
-    error.Message === 'A valid recipient address is required'
-  );
+export function isInvalidEmailError(error: any) {
+  return error?.response?.data?.Code === 1;
 }
 
 class CampaignMonitor {
@@ -78,16 +61,10 @@ class CampaignMonitor {
   async sendClassicEmail(
     sendData: EmailSendData,
   ): Promise<CampaignMonitorMessageSent[]> {
-    let response: AxiosResponse<CampaignMonitorMessageSent[]>;
-    try {
-      response = await this.api.post<CampaignMonitorMessageSent[]>(
-        'transactional/classicEmail/send',
-        sendData,
-      );
-    } catch (err) {
-      const { Code, Message } = err.response.data;
-      throw new CampaignMonitorException(Code, Message);
-    }
+    const response = await this.api.post<CampaignMonitorMessageSent[]>(
+      'transactional/classicEmail/send',
+      sendData,
+    );
 
     const { status, headers } = response;
     const rateLimitResetSec = parseInt(headers['x-ratelimit-reset'], 10) + 15;
