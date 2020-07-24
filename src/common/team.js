@@ -279,6 +279,11 @@ export default {
       link: 'https://www.linkedin.com/in/tomdbrown/',
     },
     {
+      name: 'Tom MacMullen',
+      title: 'Strategic Partnerships Manager',
+      link: 'https://www.linkedin.com/in/tom-macmullen-a3a60b150/',
+    },
+    {
       name: 'Will Pate',
       title: 'Campaign consultant',
       link: 'https://www.linkedin.com/in/william-pate-b143a813b/',
