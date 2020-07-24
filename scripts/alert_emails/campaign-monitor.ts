@@ -1,16 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import delay from 'delay';
 
-const STATUS_RATE_LIMIT = 429;
-
-function isStatusOK(status: number) {
-  return 200 <= status && status < 300;
-}
-
-function isRateLimitExceeded(status: number) {
-  return status === STATUS_RATE_LIMIT;
-}
-
 export interface EmailSendData {
   Subject: string;
   From: string;
@@ -40,6 +30,30 @@ export interface CampaignMonitorMessageSent {
   MessageID: string;
 }
 
+class CampaignMonitorException {
+  Code: number;
+  Message: string;
+  constructor(code: number, message: string) {
+    this.Code = code;
+    this.Message = message;
+  }
+}
+
+function isStatusOK(status: number) {
+  return 200 <= status && status < 300;
+}
+
+function isRateLimitExceeded(status: number) {
+  return status === 429;
+}
+
+export function isInvalidEmailError(error: CampaignMonitorException) {
+  return (
+    error.Code === 1 &&
+    error.Message === 'A valid recipient address is required'
+  );
+}
+
 class CampaignMonitor {
   private api: AxiosInstance;
 
@@ -62,14 +76,20 @@ class CampaignMonitor {
   }
 
   async sendClassicEmail(
-    data: EmailSendData,
+    sendData: EmailSendData,
   ): Promise<CampaignMonitorMessageSent[]> {
-    const res = await this.api.post<CampaignMonitorMessageSent[]>(
-      'transactional/classicEmail/send',
-      data,
-    );
-    const { status, headers } = res;
+    let response: AxiosResponse<CampaignMonitorMessageSent[]>;
+    try {
+      response = await this.api.post<CampaignMonitorMessageSent[]>(
+        'transactional/classicEmail/send',
+        sendData,
+      );
+    } catch (err) {
+      const { Code, Message } = err.response.data;
+      throw new CampaignMonitorException(Code, Message);
+    }
 
+    const { status, headers } = response;
     const rateLimitResetSec = parseInt(headers['x-ratelimit-reset'], 10) + 15;
     const rateLimitRemaining = parseInt(headers['x-ratelimit-remaining'], 10);
 
@@ -79,10 +99,10 @@ class CampaignMonitor {
 
     if (isRateLimitExceeded(status)) {
       await delay(rateLimitResetSec * 1000);
-      return this.sendClassicEmail(data);
+      return this.sendClassicEmail(sendData);
     }
 
-    return res.data;
+    return response.data;
   }
 }
 

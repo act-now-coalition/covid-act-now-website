@@ -1,28 +1,17 @@
-//@ts-ignore createsend has no types and throws an error
 import _ from 'lodash';
 import admin from 'firebase-admin';
 import path from 'path';
 import { getFirestore } from './firestore';
-import CampaignMonitor, { CampaignMonitorError } from './campaign-monitor';
+import CampaignMonitor, { isInvalidEmailError } from './campaign-monitor';
 import { generateAlertEmailData, readAlerts } from './utils';
+
+const BATCH_SIZE = 20;
 
 interface SendEmailResult {
   MessageID: string;
   Recipient: string;
   Status: string;
   headers: { [key: string]: string };
-}
-
-const CM_INVALID_EMAIL_MESSAGE = 'A valid recipient address is required';
-const CM_INVALID_EMAIL_ERROR_CODE = 1;
-
-const BATCH_SIZE = 20;
-
-function isInvalidEmailError(err: CampaignMonitorError) {
-  return (
-    err.Code === CM_INVALID_EMAIL_ERROR_CODE &&
-    err.Message === CM_INVALID_EMAIL_MESSAGE
-  );
 }
 
 async function setLastSnapshotNumber(

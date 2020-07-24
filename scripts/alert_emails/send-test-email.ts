@@ -29,6 +29,11 @@ async function main(emailAddress: string) {
     await cm.sendClassicEmail(data);
     console.info(`Email sent to ${emailAddress}.`);
   } catch (err) {
+    if (err.Code === 1) {
+      console.log('invalid email');
+      process.exit(1);
+    }
+
     console.error(err);
     process.exit(1);
   }
