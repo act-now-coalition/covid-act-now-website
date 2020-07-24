@@ -63,8 +63,11 @@ class CampaignMonitor {
 
   async sendClassicEmail(
     data: EmailSendData,
-  ): Promise<AxiosResponse<CampaignMonitorMessageSent[]>> {
-    const res = await this.api.post('transactional/classicEmail/send', data);
+  ): Promise<CampaignMonitorMessageSent[]> {
+    const res = await this.api.post<CampaignMonitorMessageSent[]>(
+      'transactional/classicEmail/send',
+      data,
+    );
     const { status, headers } = res;
 
     const rateLimitResetSec = parseInt(headers['x-ratelimit-reset'], 10) + 15;
@@ -79,7 +82,7 @@ class CampaignMonitor {
       return this.sendClassicEmail(data);
     }
 
-    return res;
+    return res.data;
   }
 }
 

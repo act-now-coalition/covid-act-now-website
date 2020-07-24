@@ -105,10 +105,7 @@ async function setLastSnapshotNumber(
       .set({ sentAt: admin.firestore.FieldValue.serverTimestamp() });
   }
 
-  async function sendAlertEmail(
-    email: string,
-    fips: string,
-  ): Promise<undefined> {
+  async function sendAlertEmail(email: string, fips: string): Promise<void> {
     const locationAlert = alertsByLocation[fips];
     const sendData = generateAlertEmailData(email, locationAlert);
 
