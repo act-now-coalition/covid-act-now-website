@@ -60,7 +60,7 @@ async function setLastSnapshotNumber(
     const currentData = querySnapshot.data();
     if (currentData) {
       await db
-        .collection('invalid-alerts-subscriptions')
+        .collection('invalid-alert-subscriptions')
         .doc(email)
         .set(currentData);
       await db.collection('alerts-subscriptions').doc(email).delete();
