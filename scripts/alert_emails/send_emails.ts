@@ -7,13 +7,6 @@ import { generateAlertEmailData, readAlerts } from './utils';
 
 const BATCH_SIZE = 20;
 
-interface SendEmailResult {
-  MessageID: string;
-  Recipient: string;
-  Status: string;
-  headers: { [key: string]: string };
-}
-
 async function setLastSnapshotNumber(
   firestore: FirebaseFirestore.Firestore,
   snapshot: string,
@@ -35,13 +28,7 @@ async function setLastSnapshotNumber(
  * You can run via `yarn send-emails fipsToAlertFilename currentSnapshot [send]`
  */
 (async () => {
-  const {
-    fipsToAlertFilename,
-    currentSnapshot,
-    dryRun,
-    sendAllToEmail,
-  } = await parseArgs();
-
+  const { fipsToAlertFilename, currentSnapshot, dryRun } = await parseArgs();
   const alertPath = path.join(__dirname, fipsToAlertFilename);
   const alertsByLocation = readAlerts(alertPath);
 
@@ -132,13 +119,14 @@ async function setLastSnapshotNumber(
     );
   }
 
-  console.log(
-    `Total Emails to be sent: ${emailSent}.) Total locations with emails: ${
-      Object.keys(locationsWithEmails).length
-    }. Unique Email addresses: ${
-      Object.keys(uniqueEmailAddress).length
-    }. Invalid emails removed: ${invalidEmailCount}`,
+  console.info(`Total emails to be sent: ${emailSent}.`);
+  console.info(
+    `Total locations with emails: ${Object.keys(locationsWithEmails).length}.`,
   );
+  console.info(
+    `Unique Email addresses: ${Object.keys(uniqueEmailAddress).length}.`,
+  );
+  console.info(`Invalid emails removed: ${invalidEmailCount}.`);
 
   if (!dryRun) {
     setLastSnapshotNumber(db, currentSnapshot);
@@ -150,7 +138,7 @@ async function setLastSnapshotNumber(
       process.exit(1);
     }
   }
-  console.log(`Done.`);
+  console.info(`Done.`);
 })();
 
 async function parseArgs(): Promise<{
@@ -160,26 +148,23 @@ async function parseArgs(): Promise<{
   sendAllToEmail?: string;
 }> {
   const args = process.argv.slice(2);
-
-  if (args.length < 2 || args.length > 4) {
+  if (args.length < 2 || args.length > 3) {
     exitWithUsage();
   } else {
     const fipsToAlertFilename = args[0];
     const currentSnapshot = args[1];
     const isSend = (args[2] || 'false') === 'true';
-    const sendAllToEmail = args[3] || undefined;
     return {
       fipsToAlertFilename,
       currentSnapshot,
       dryRun: !isSend,
-      sendAllToEmail,
     };
   }
 }
 
 function exitWithUsage(): never {
   console.log(
-    'Usage: yarn send-emails fipsToAlertFilename currentSnapshot [send] [sendAllToEmail]',
+    'Usage: yarn send-emails fipsToAlertFilename currentSnapshot [send]',
   );
   process.exit(1);
 }

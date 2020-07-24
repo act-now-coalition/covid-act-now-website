@@ -9,7 +9,7 @@
  *    $ yarn send-test-email pablo@covidactnow.org
  */
 
-import CampaignMonitor from './campaign-monitor';
+import CampaignMonitor, { isInvalidEmailError } from './campaign-monitor';
 import { Alert } from './interfaces';
 import { generateAlertEmailData } from './utils';
 
@@ -29,12 +29,11 @@ async function main(emailAddress: string) {
     await cm.sendClassicEmail(data);
     console.info(`Email sent to ${emailAddress}.`);
   } catch (err) {
-    if (err.Code === 1) {
-      console.log('invalid email');
-      process.exit(1);
+    if (isInvalidEmailError(err)) {
+      console.log(`Invalid email: "${emailAddress}"`);
+    } else {
+      console.error(`Error sending email to "${emailAddress}"`, err);
     }
-
-    console.error(err);
     process.exit(1);
   }
 }

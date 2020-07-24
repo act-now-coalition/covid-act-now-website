@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 import delay from 'delay';
 
 export interface EmailSendData {
@@ -30,7 +30,7 @@ export interface CampaignMonitorMessageSent {
   MessageID: string;
 }
 
-class CampaignMonitorException {
+class CampaignMonitorException implements CampaignMonitorError {
   Code: number;
   Message: string;
   constructor(code: number, message: string) {
@@ -47,7 +47,7 @@ function isRateLimitExceeded(status: number) {
   return status === 429;
 }
 
-export function isInvalidEmailError(error: CampaignMonitorException) {
+export function isInvalidEmailError(error: CampaignMonitorError) {
   return (
     error.Code === 1 &&
     error.Message === 'A valid recipient address is required'
