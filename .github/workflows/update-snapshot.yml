@@ -85,13 +85,14 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           STATUS: ${{job.status}}
-          SLACK_CHANNEL: ${{ env.DEPLOY_SLACK_CHANNEL }}
+          SLACK_CHANNEL: test-dev-alerts   # ${{ env.DEPLOY_SLACK_CHANNEL }}
         uses: Ilshidur/action-slack@fb92a78
         with:
           args: |
-            PR to update the website to snapshot ${{env.SNAPSHOT_ID}} (with updated map colors and share images) is available.
-            PR: https://github.com/covid-projections/covid-projections/pull/${{env.PULL_REQUEST_NUMBER}}
-            Preview: https://covid-projections-git-bump-snapshot-${{env.RUN_ID}}.covidactnow.now.sh/
-            Compare: https://covid-projections-git-bump-snapshot-${{env.RUN_ID}}.covidactnow.now.sh/compare/
-            Compare-csv: https://data.covidactnow.org/snapshot/${{env.SNAPSHOT_ID}}/qa/compared.csv
-            Raw Data QA: https://data.covidactnow.org/snapshot/${{env.SNAPSHOT_ID}}/RAW_QA/outputreport.txt
+            Testing slack channel PR change
+            # PR to update the website to snapshot ${{env.SNAPSHOT_ID}} (with updated map colors and share images) is available.
+            # PR: https://github.com/covid-projections/covid-projections/pull/${{env.PULL_REQUEST_NUMBER}}
+            # Preview: https://covid-projections-git-bump-snapshot-${{env.RUN_ID}}.covidactnow.now.sh/
+            # Compare: https://covid-projections-git-bump-snapshot-${{env.RUN_ID}}.covidactnow.now.sh/compare/
+            # Compare-csv: https://data.covidactnow.org/snapshot/${{env.SNAPSHOT_ID}}/qa/compared.csv
+            # Raw Data QA: https://data.covidactnow.org/snapshot/${{env.SNAPSHOT_ID}}/RAW_QA/outputreport.txt
