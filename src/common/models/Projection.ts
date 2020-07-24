@@ -208,7 +208,9 @@ export class Projection {
       this.deltasFromCumulatives(this.cumulativeActualDeaths),
     );
 
-    this.rtRange = this.calcRtRange(timeseries);
+    // TODO(https://trello.com/c/sackaas1): Reenable CT counties.
+    const disableRt = this.isCounty && this.stateName === 'Connecticut';
+    this.rtRange = disableRt ? [null] : this.calcRtRange(timeseries);
     this.testPositiveRate = this.calcTestPositiveRate();
 
     this.icuHeadroomInfo = calcICUHeadroom(
