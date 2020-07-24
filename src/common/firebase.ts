@@ -1,4 +1,4 @@
-import firebase from 'firebase/app';
+import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 import { Environment, getEnvironment } from './utils/environment';
 
@@ -40,3 +40,5 @@ export function getFirebase(): firebase.app.App {
   }
   return firebaseApp;
 }
+
+export { firebase };
