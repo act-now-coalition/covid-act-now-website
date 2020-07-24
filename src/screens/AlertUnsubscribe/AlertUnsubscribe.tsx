@@ -1,9 +1,8 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import firebase from 'firebase';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import Chip from '@material-ui/core/Chip';
-import { getFirebase } from 'common/firebase';
+import { getFirebase, firebase } from 'common/firebase';
 import {
   Wrapper,
   UnsubscribeHeader,

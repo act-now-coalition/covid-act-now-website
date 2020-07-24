@@ -1,11 +1,10 @@
-import firebase from 'firebase';
 import React from 'react';
 import { StyledNewsletter, InputHolder, InputError } from './Newsletter.style';
 import Chip from '@material-ui/core/Chip';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import { getLocationNames } from 'common/locations';
-import { getFirebase } from 'common/firebase';
+import { getFirebase, firebase } from 'common/firebase';
 
 // Taken from https://ui.dev/validate-email-address-javascript/
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
