@@ -1,12 +1,19 @@
 import path from 'path';
 import fs from 'fs-extra';
 import * as Handlebars from 'handlebars';
+import moment from 'moment';
 import { Alert } from './interfaces';
 import { Level } from '../../src/common/level';
+
+export const ALERT_EMAIL_GROUP = 'Alert Email';
 
 const thermometerBaseURL =
   'https://data.covidactnow.org/thermometer_screenshot';
 const unsubscribeURL = 'https://covidactnow.org/alert_unsubscribe';
+
+export function toISO8601(date: Date): string {
+  return moment(date).format('YYYY-MM-DD');
+}
 
 const alertTemplate = Handlebars.compile(
   fs.readFileSync(path.join(__dirname, 'template.html'), 'utf8'),
@@ -74,7 +81,7 @@ export function generateAlertEmailData(
     TrackOpens: true,
     TrackClicks: true,
     InlineCSS: true,
-    Group: 'Alert Email',
+    Group: ALERT_EMAIL_GROUP,
     ConsentToTrack: 'Unchanged',
   };
 }

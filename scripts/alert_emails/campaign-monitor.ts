@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 import delay from 'delay';
+import { toISO8601 } from './utils';
 
 export interface EmailSendData {
   Subject: string;
@@ -23,6 +24,13 @@ export interface CampaignMonitorMessageSent {
   Status: string;
   Recipient: string;
   MessageID: string;
+}
+
+export interface CampaignMonitorStats {
+  Sent: number;
+  Bounces: number;
+  Opened: number;
+  Clicked: number;
 }
 
 function isStatusOK(status: number) {
@@ -80,6 +88,20 @@ class CampaignMonitor {
     }
 
     return response.data;
+  }
+
+  async fetchTransactionalStats(
+    group: string,
+    from: Date,
+    to: Date,
+  ): Promise<CampaignMonitorStats> {
+    const params = {
+      group,
+      from: toISO8601(from),
+      to: toISO8601(to),
+    };
+    const res = await this.api.get(`transactional/statistics`, { params });
+    return res.data;
   }
 }
 
