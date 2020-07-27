@@ -56,7 +56,12 @@ const SearchHeader = ({
       <Wrapper>
         <Content>
           <MenuBarWrapper>
-            <SelectorWrapper isNarrowMobile={isNarrowMobile}>
+            <SelectorWrapper
+              onClick={() => {
+                setMobileMenuOpen(false);
+              }}
+              isNarrowMobile={isNarrowMobile}
+            >
               <GlobalSelector
                 extendRight={true}
                 handleChange={handleSelectChange}
