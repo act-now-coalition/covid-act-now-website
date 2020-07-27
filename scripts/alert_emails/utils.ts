@@ -36,8 +36,7 @@ function generateAlertEmailContent(
   } = locationAlert;
 
   const data: AlertTemplateData = {
-    // TODO(pablo): change it back to risk increased / risk decreased after the case incidence send
-    change: 'new risk score',
+    change: changeText(oldLevel, newLevel),
     location_name: locationName,
     img_alt: `Image depicting that ${locationName} went from level ${Level[oldLevel]} to ${Level[newLevel]}`,
     img_url: `${thermometerBaseURL}/therm-${newLevel}-${oldLevel}.png`,
@@ -50,6 +49,16 @@ function generateAlertEmailContent(
   };
 
   return alertTemplate(data);
+}
+
+function changeText(oldLevel: Level, newLevel: Level) {
+  if (oldLevel === Level.UNKNOWN) {
+    return 'new risk score';
+  } else if (oldLevel < newLevel) {
+    return 'risk increased';
+  } else {
+    return 'risk decreased';
+  }
 }
 
 export function generateAlertEmailData(
