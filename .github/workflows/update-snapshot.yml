@@ -11,7 +11,6 @@ env:
   SNAPSHOT_ID: 234 # ${{ github.event.client_payload.snapshot_id }}
   # Used in the shared images URL and in the PR branch.
   RUN_ID: 2456  #${{ github.event.client_payload.snapshot_id }}-${{github.run_number}}
-  DEPLOY_SLACK_CHANNEL: test-dev-alerts
 
 jobs:
   update-data-snapshot:
@@ -74,18 +73,16 @@ jobs:
       - name: Slack notification
         if: job.status != 'success'
         env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_DAILY_DEPLOYS }}
           STATUS: ${{job.status}}
-          SLACK_CHANNEL: ${{ env.DEPLOY_SLACK_CHANNEL }}
         uses: Ilshidur/action-slack@fb92a78
         with:
           args: 'update-snapshot failed: {{STATUS}}'
       - name: Slack notification
         if: job.status == 'success'
         env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_DAILY_DEPLOYS }}
           STATUS: ${{job.status}}
-          SLACK_CHANNEL: test-dev-alerts   # ${{ env.DEPLOY_SLACK_CHANNEL }}
         uses: Ilshidur/action-slack@fb92a78
         with:
           args: |
