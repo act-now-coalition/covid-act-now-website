@@ -133,13 +133,14 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
             Donate
           </SectionHeader>
           <Typography variant="body1" component="p">
-            You can contribute to our work{' '}
+            We are a registered 501c3 non-profit. You can help us keep the
+            lights on by making{' '}
             <a
               href="https://www.gofundme.com/f/qtcuvy-covid-act-now"
               target="_blank"
               rel="noopener noreferrer"
             >
-              here
+              a 100% tax-dedudicble donation to our GoFundMe
             </a>
             , or{' '}
             <a
@@ -147,9 +148,9 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              drop a line
+              emailing us
             </a>{' '}
-            if you’re interested in making a grant.
+            if you’re a foundation interested in making a grant.
           </Typography>
         </StapledSidebar>
       </Content>
