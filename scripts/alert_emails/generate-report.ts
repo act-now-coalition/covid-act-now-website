@@ -4,8 +4,7 @@ import CampaignMonitor from './campaign-monitor';
 import { getFirestore } from './firestore';
 import { ALERT_EMAIL_GROUP, toISO8601 } from './utils';
 import fipsByStateCode from '../what-the-fips/2018-census-fips-codes.json';
-import STATES from '../../src/common/us_states';
-import { findStateFipsCode, findStateByFips } from '../../src/common/locations';
+import { findStateByFips, getAllStateFips } from '../../src/common/locations';
 
 interface StateFipsMap {
   [stateCode: string]: {
@@ -22,12 +21,6 @@ interface StateEmailStats {
   emailCountCounties: number;
 }
 
-function getStatesFips() {
-  return Object.keys(STATES).map(stateCode => {
-    return findStateFipsCode(stateCode);
-  });
-}
-
 async function generateAlertEmailReport() {
   // TODO: Confirm, what is the best way to measure engagement stats?
   const dateFrom = moment().subtract(1, 'week').toDate();
@@ -35,7 +28,7 @@ async function generateAlertEmailReport() {
   const engagementStats = await fetchEngagementStats(dateFrom, dateTo);
 
   const db = getFirestore();
-  const fipsStates = getStatesFips();
+  const fipsStates = getAllStateFips();
   const subscriptionStats = await Promise.all(
     fipsStates.map(stateFips => fetchStateSubscriptionStats(db, stateFips)),
   );
@@ -66,9 +59,9 @@ async function fetchStateSubscriptionStats(
 
   // TODO(pablo): Is there a way to assign the type to the import directly?
   const countyFipsByStateCode: StateFipsMap = fipsByStateCode;
-  const fipsCounties = _.keys(countyFipsByStateCode[code]);
+  const fipsCounties = Object.keys(countyFipsByStateCode[code]);
   const emailsByCounty = await Promise.all(
-    fipsCounties.map(async fipsCounty =>
+    fipsCounties.map(fipsCounty =>
       fetchSubscriptionCountByFips(db, fipsCounty),
     ),
   );

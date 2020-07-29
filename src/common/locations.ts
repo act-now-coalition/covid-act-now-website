@@ -1,6 +1,7 @@
 /** Helpers for dealing with the State / Counties dataset. */
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 import { each, sortBy, takeRight } from 'lodash';
+import STATES from './us_states';
 import { assert } from './utils';
 
 // TODO(michael): Move more common code here.
@@ -115,4 +116,10 @@ export function topCountiesByPopulation(limit: number): County[] {
     sortBy(allCounties, c => c.population),
     limit,
   );
+}
+
+export function getAllStateFips() {
+  return Object.keys(STATES).map(stateCode => {
+    return findStateFipsCode(stateCode);
+  });
 }
