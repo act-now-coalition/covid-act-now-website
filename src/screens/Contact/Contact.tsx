@@ -133,7 +133,8 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
             Donate
           </SectionHeader>
           <Typography variant="body1" component="p">
-            We are a registered 501c3 non-profit. You can help us keep the lights on by making {' '}
+            We are a registered 501c3 non-profit. You can help us keep the
+            lights on by making{' '}
             <a
               href="https://www.gofundme.com/f/qtcuvy-covid-act-now"
               target="_blank"
