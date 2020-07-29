@@ -195,7 +195,9 @@ export class Projection {
     );
 
     const cumulativeConfirmedCases = this.smoothCumulatives(
-      actualTimeseries.map(row => row && row.cumulativeConfirmedCases),
+      this.fillLeadingNullsWithZeros(
+        actualTimeseries.map(row => row && row.cumulativeConfirmedCases),
+      ),
     );
     this.smoothedDailyCases = this.smoothWithRollingAverage(
       this.deltasFromCumulatives(cumulativeConfirmedCases),
@@ -379,6 +381,8 @@ export class Projection {
       earliestDate = moment.utc(_.first(actualsTimeseriesRaw)!.date);
       latestDate = moment.utc(_.last(actualsTimeseriesRaw)!.date);
     }
+
+    earliestDate = moment.max(earliestDate, moment.utc('2020-03-01'));
 
     const timeseries: Array<PredictionTimeseriesRow | null> = [];
     const actualsTimeseries: Array<ActualsTimeseriesRow | null> = [];
@@ -632,11 +636,15 @@ export class Projection {
    *
    * Any `0` / `null` data points at the beginning or end of the data are not
    * considered a gap.
+   *
+   * TODO(michael): We might want to impose a maximum gap size (e.g. 10 days)
+   * to avoid papering over too much missing data.
    */
   private findGapsInCumulatives(
     data: Array<number | null>,
   ): Array<{ start: number; end: number }> {
     let lastValidValueIndex: number | null = null;
+    let lastValidValue = -1;
     const gaps = [];
     for (let i = 0; i < data.length; i++) {
       const value = data[i];
@@ -645,11 +653,16 @@ export class Projection {
         value !== null &&
         (lastValidValueIndex === null || value !== data[lastValidValueIndex]);
       if (isValid) {
-        if (lastValidValueIndex !== null && lastValidValueIndex !== i - 1) {
+        if (
+          lastValidValueIndex !== null &&
+          lastValidValueIndex !== i - 1 &&
+          value !== lastValidValue + 1
+        ) {
           // we found a gap!
           gaps.push({ start: lastValidValueIndex, end: i });
         }
         lastValidValueIndex = i;
+        lastValidValue = value!;
       }
     }
     return gaps;
@@ -678,6 +691,19 @@ export class Projection {
       }
     }
     return gaps;
+  }
+
+  private fillLeadingNullsWithZeros(data: Array<number | null>) {
+    let nonZeroIndex = _.findIndex(data, v => v !== null);
+    const result = [];
+    for (let i = 0; i < data.length; i++) {
+      if (i < nonZeroIndex) {
+        result[i] = 0;
+      } else {
+        result[i] = data[i];
+      }
+    }
+    return result;
   }
 
   private smoothWithRollingAverage(
