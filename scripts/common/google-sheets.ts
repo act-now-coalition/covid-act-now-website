@@ -1,9 +1,10 @@
 import path from 'path';
+import _ from 'lodash';
 import { google, sheets_v4 } from 'googleapis';
 
 const spreadsheetId = '1cs3Wyh8Gda0H18_-x5RYp7AJ3FwB-I1ewAQTBWEk1YY';
 
-class GoogleSpreadsheet {
+class GoogleSheets {
   // path to the google service account file
   keyFile: string;
   sheets: sheets_v4.Sheets;
@@ -30,23 +31,36 @@ class GoogleSpreadsheet {
   }
 
   async appendRows(spreadsheetId: string, range: string, rows: any) {
-    // TODO(pablo): Authenticate if needed
-    const res = await this.sheets.spreadsheets.values.get({
+    const auth = await google.auth.getClient({
+      keyFile: this.keyFile,
+      scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+    });
+    const request = {
       spreadsheetId,
       range,
-    });
-    console.log(res.data.values);
+      valueInputOption: 'USER_ENTERED',
+      insertDataOption: 'INSERT_ROWS',
+      resource: {
+        majorDimension: 'ROWS',
+        values: _.flatten(rows),
+      },
+      auth,
+    };
+
+    await this.sheets.spreadsheets.values.append(request);
   }
 }
+
+export default GoogleSheets;
 
 async function main() {
   const keyFilePath = path.join(
     __dirname,
     '../alert_emails/google-service-account.json',
   );
-  const gs = new GoogleSpreadsheet(keyFilePath);
+  const gs = new GoogleSheets(keyFilePath);
   await gs.authenticate();
-  await gs.appendRows(spreadsheetId, 'A1:D4', [[1, 2, 3]]);
+  await gs.appendRows(spreadsheetId, 'A1:D4', [[11, 21, 31]]);
 }
 
 if (require.main === module) {
