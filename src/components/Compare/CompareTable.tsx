@@ -45,6 +45,8 @@ const CompareTable = (props: {
   const [sorter, setSorter] = useState(5);
   const [sortDescending, setSortDescending] = useState(true);
 
+  // const [sortAlph, setSortAlph] = useState(false)
+
   const orderedMetrics = [
     Metric.CASE_DENSITY,
     Metric.CASE_GROWTH_RATE,
@@ -81,6 +83,13 @@ const CompareTable = (props: {
         fail('No county fips');
       }
     });
+
+  const currentCounty: any = props.county
+    ? {
+        locationInfo: props.county,
+        metricsInfo: countySummary(props.county.full_fips_code),
+      }
+    : {};
 
   const locationsArr = props.isHomepage ? statesArr : countiesArr;
 
@@ -127,6 +136,14 @@ const CompareTable = (props: {
     ? 'Compare to other counties'
     : 'Compare counties';
 
+  function sortAlphabetically() {
+    countiesArr.sort((a: any, b: any) => {
+      const countyA = a.locationInfo.county.toUpperCase();
+      const countyB = b.locationInfo.county.toUpperCase();
+      return countyA < countyB ? -1 : countyA > countyB ? 1 : 0;
+    });
+  }
+
   return (
     <Wrapper isModal={props.isModal}>
       {!props.isModal && <Header>{headerCopy}</Header>}
@@ -154,6 +171,13 @@ const CompareTable = (props: {
           </Row>
         </TableHeadContainer>
         <TableBody>
+          {props.county && props.isModal && (
+            <CompareTableRow
+              isCurrentCounty
+              location={currentCounty}
+              sorter={sorter}
+            />
+          )}
           {locationsArr &&
             locationsArr
               .slice(0, finalLocationsViewable)

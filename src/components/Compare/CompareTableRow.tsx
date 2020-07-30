@@ -15,10 +15,11 @@ function cellValue(metric: any, metricType: Metric) {
 
 const CompareTableRow = (props: {
   location: SummaryForCompare;
-  index: number;
+  index?: number;
   sorter: any;
+  isCurrentCounty?: Boolean;
 }) => {
-  const { location, index, sorter } = props;
+  const { location, index, sorter, isCurrentCounty } = props;
 
   //TODO(Chelsi): fix the else?
   function getLevel(metricIndex: Metric): Level {
@@ -32,8 +33,13 @@ const CompareTableRow = (props: {
   const history = useHistory();
 
   const goToLocationPage = (page: string) => {
-    window.scrollTo(0, 0);
-    history.push(page);
+    //clicking current county when in modal wasn't triggering refresh/modal close, so:
+    if (window.location.pathname === page) {
+      window.location.reload();
+    } else {
+      window.scrollTo(0, 0);
+      history.push(page);
+    }
   };
 
   const handleLocationClick = () => {
@@ -51,7 +57,7 @@ const CompareTableRow = (props: {
     : location.locationInfo.state;
 
   return (
-    <Row index={index}>
+    <Row index={index} isCurrentCounty={isCurrentCounty}>
       <MetricCell
         onClick={handleLocationClick}
         iconColor={location.metricsInfo.level}

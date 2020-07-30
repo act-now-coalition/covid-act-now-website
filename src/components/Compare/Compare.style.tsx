@@ -65,16 +65,6 @@ export const TableHeadContainer = styled(TableHead)<{ isModal?: Boolean }>`
   }
 `;
 
-export const Row = styled(TableRow)<{ index?: number; tableHeader?: Boolean }>`
-  background-color: ${({ index, tableHeader }) =>
-    tableHeader ? 'white' : index && index % 2 ? 'white' : '#fafafa'};
-  border-bottom: none;
-
-  th {
-    border-bottom: none;
-  }
-`;
-
 export const MetricCell = styled.td<{
   countyName?: Boolean;
   iconColor?: Level;
@@ -106,6 +96,26 @@ export const MetricCell = styled.td<{
     font-size: 0.75rem;
     color: ${({ iconColor }) =>
       iconColor !== undefined && `${LEVEL_COLOR[iconColor]}`};
+  }
+`;
+
+export const Row = styled(TableRow)<{
+  index?: number;
+  tableHeader?: Boolean;
+  isCurrentCounty?: Boolean;
+}>`
+  background-color: ${({ index, tableHeader }) =>
+    tableHeader ? 'white' : index && index % 2 ? 'white' : '#fafafa'};
+  background-color: ${({ isCurrentCounty }) => isCurrentCounty && '#FFEFD6'};
+  border-bottom: none;
+
+  th {
+    border-bottom: none;
+  }
+
+  ${MetricCell} {
+    border-bottom: ${({ isCurrentCounty }) =>
+      isCurrentCounty && '2px solid #CEBFAC'};
   }
 `;
 
