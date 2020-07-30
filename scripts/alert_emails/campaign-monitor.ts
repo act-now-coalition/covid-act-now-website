@@ -99,8 +99,9 @@ class CampaignMonitor {
       group,
       from: toISO8601(from),
       to: toISO8601(to),
+      timezone: 'UTC',
     };
-    const res = await this.api.get(`transactional/statistics`, { params });
+    const res = await this.api.get('transactional/statistics', { params });
     return res.data;
   }
 }

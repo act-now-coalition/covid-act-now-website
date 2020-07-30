@@ -8,29 +8,14 @@ import fipsByStateCode from '../what-the-fips/2018-census-fips-codes.json';
 import { findStateByFips, getAllStateFips } from '../../src/common/locations';
 import GoogleSheets from '../common/google-sheets';
 
+const REPORT_SPREADSHEET_ID = '1cs3Wyh8Gda0H18_-x5RYp7AJ3FwB-I1ewAQTBWEk1YY';
+
 interface StateFipsMap {
   [stateCode: string]: {
     [countyFips: string]: string;
   };
 }
 
-interface StateEmailStats {
-  fips: string;
-  code: string;
-  name: string;
-  population: number;
-  emailCountState: number;
-  emailCountCounties: number;
-}
-
-function safeDivide(a: any, b: any) {
-  if (!_.isNumber(a) || !_.isNumber(b)) {
-    return null;
-  }
-  return b > 0 ? a / b : null;
-}
-
-const spreadsheetId = '1cs3Wyh8Gda0H18_-x5RYp7AJ3FwB-I1ewAQTBWEk1YY';
 const keyFile = path.join(
   __dirname,
   '../alert_emails/google-service-account.json',
@@ -42,10 +27,10 @@ async function generateAlertEmailReport() {
   await gsheets.authenticate();
 
   // TODO: Confirm, what is the best way to measure engagement stats?
-  const dateTo = moment().subtract(0, 'day').toDate();
-  const dateFrom = moment(dateTo).subtract(1, 'day').toDate();
+  const dateFrom = new Date('2020-07-24'); // initial send
+  const dateTo = moment(dateFrom).add(8, 'day').toDate();
   const engagementStats = await fetchEngagementStats(dateFrom, dateTo);
-  await gsheets.appendRows(spreadsheetId, 'Engagement!A2:I2', [
+  await gsheets.appendRows(REPORT_SPREADSHEET_ID, 'data_engagement!A2:IE', [
     [engagementStats],
   ]);
 
@@ -53,7 +38,7 @@ async function generateAlertEmailReport() {
   const subscriptionStats = await Promise.all(
     fipsStates.map(stateFips => fetchStateSubscriptionStats(db, stateFips)),
   );
-  await gsheets.appendRows(spreadsheetId, 'Subscriptions!A2:H2', [
+  await gsheets.appendRows(REPORT_SPREADSHEET_ID, 'data_locations!A2:F2', [
     subscriptionStats,
   ]);
 }
@@ -65,17 +50,7 @@ async function fetchEngagementStats(from: Date, to: Date) {
     from,
     to,
   );
-  return [
-    toISO8601(from),
-    toISO8601(to),
-    Sent,
-    safeDivide(Opened, Sent),
-    safeDivide(Clicked, Sent),
-    safeDivide(Bounces, Sent),
-    Opened,
-    Clicked,
-    Bounces,
-  ];
+  return [toISO8601(to), Sent, Opened, Clicked, Bounces];
 }
 
 async function fetchStateSubscriptionStats(
@@ -97,8 +72,6 @@ async function fetchStateSubscriptionStats(
   const emailCountCounties = _.sum(emailsByCounty);
   return [
     toISO8601(new Date()),
-    `'${fips}`,
-    code,
     name,
     population,
     emailCountState,
