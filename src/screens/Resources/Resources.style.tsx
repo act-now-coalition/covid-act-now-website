@@ -24,6 +24,10 @@ export const GetStartedBox = styled.div`
   background-color: rgba(242, 242, 242, 0.4);
   padding: 24px;
   margin-bottom: 24px;
+
+  h3 {
+    margin-top: 0;
+  }
 `;
 
 export const GetStartedList = styled.ol`

@@ -55,15 +55,15 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
             COVID Response Simulator
           </SectionHeader>
           <Typography variant="body1" component="p">
-            The COVID Response Simulator is a localized, customizable version of
-            the public Covid Act Now (CAN) model. With it, you can take a
-            powerful{' '}
+            The COVID Response Simulator is a customizable spreadsheet that
+            provides modeling for every US state and county. With it, you can
+            take an{' '}
             <ExternalLink href="https://en.wikipedia.org/wiki/Compartmental_models_in_epidemiology#The_SEIR_model">
               SEIR epidemiology model
             </ExternalLink>{' '}
-            and customize it for your county to help plan your response to
-            COVID. The inputs and assumptions in the simulator are modifiable
-            and can be changed to reflect your local realities.
+            and tailor it to your location to help plan your COVID response. The
+            inputs and assumptions in the simulator are modifiable and can be
+            changed to reflect your local realities.
           </Typography>
           <Typography variant="body1" component="p">
             In addition, you can project the impact of specific
