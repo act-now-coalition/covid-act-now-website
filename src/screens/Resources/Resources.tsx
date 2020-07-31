@@ -8,7 +8,14 @@ import StapledSidebar, {
 } from 'components/StapledSidebar/StapledSidebar';
 import ExternalLink from 'components/ExternalLink';
 
-import { Wrapper, Content, Header } from './Resources.style';
+import {
+  Wrapper,
+  Content,
+  Header,
+  GetStartedBox,
+  GetStartedList,
+  SimulatorTab,
+} from './Resources.style';
 
 const sidebar = (
   <React.Fragment>
@@ -41,7 +48,7 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
         <StapledSidebar sidebar={sidebar}>
           <SectionHeader
             variant="h4"
-            component="h4"
+            component="h2"
             id="covid-response-simulator"
           >
             COVID Response Simulator
@@ -66,31 +73,44 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
             including estimated case numbers and hospitalizations.
           </Typography>
 
+          <GetStartedBox>
+            <Typography variant="h5" component="h3">
+              Get started
+            </Typography>
+            <GetStartedList>
+              <li>
+                <Typography variant="body1" component="p">
+                  Before you begin, please take a few minutes to watch a{' '}
+                  <ExternalLink href="https://youtu.be/xiI_kC8hGTA">
+                    short tutorial
+                  </ExternalLink>{' '}
+                  on how to use the simulator.
+                </Typography>
+              </li>
+              <li>
+                <Typography variant="body1" component="p">
+                  Click on{' '}
+                  <ExternalLink href="https://docs.google.com/spreadsheets/u/3/d/1PTBTp8z49IXexkV02wacWLoyv1A2GtlVFYVqI4APPR8/copy#gid=1190280212">
+                    this link
+                  </ExternalLink>{' '}
+                  to create a copy of the simulator for your use. You’ll be
+                  prompted to make a copy so that you can work in your own
+                  document.
+                </Typography>
+              </li>
+              <li>
+                <Typography variant="body1" component="p">
+                  Review the information in the first tab in{' '}
+                  <SimulatorTab color="#ff9900">Orange</SimulatorTab> labeled
+                  “About”. Then continue onward to the second tab in{' '}
+                  <SimulatorTab color="#00d07d">Green</SimulatorTab> labeled
+                  “Location and Inputs Setup”.
+                </Typography>
+              </li>
+            </GetStartedList>
+          </GetStartedBox>
+
           <Typography variant="body1" component="p">
-            <h4>Get started</h4>
-            <ol>
-              <li>
-                Before you begin, please take a few minutes to watch a{' '}
-                <ExternalLink href="https://youtu.be/xiI_kC8hGTA">
-                  short tutorial
-                </ExternalLink>{' '}
-                on how to use the simulator.
-              </li>
-              <li>
-                Click on{' '}
-                <ExternalLink href="https://docs.google.com/spreadsheets/u/3/d/1PTBTp8z49IXexkV02wacWLoyv1A2GtlVFYVqI4APPR8/copy#gid=1190280212">
-                  this link
-                </ExternalLink>{' '}
-                to create a copy of the simulator for your use. You’ll be
-                prompted to make a copy so that you can work in your own
-                document.
-              </li>
-              <li>
-                Review the information in the first tab in Orange labeled
-                “About”. Then continue onward to the second tab in Green labeled
-                “Location and inputs setup”.
-              </li>
-            </ol>
             <i>
               If you have any questions about our model or the data we use,
               reach out to us at{' '}
@@ -104,7 +124,8 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
               .{' '}
             </i>
           </Typography>
-          <SectionHeader variant="h4" component="h4" id="model">
+
+          <SectionHeader variant="h4" component="h2" id="model">
             SEIR Epidemiology Model
           </SectionHeader>
           <Typography variant="body1" component="p">
@@ -118,7 +139,7 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
             </a>
             .
           </Typography>
-          <SectionHeader variant="h4" component="h4" id="api">
+          <SectionHeader variant="h4" component="h2" id="api">
             API
           </SectionHeader>
           <Typography variant="body1" component="p">
@@ -208,7 +229,7 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
             </a>
             .
           </Typography>
-          <SectionHeader variant="h4" component="h4" id="csv-files">
+          <SectionHeader variant="h4" component="h2" id="csv-files">
             CSV Files
           </SectionHeader>
           <Typography variant="body1" component="p">
@@ -223,7 +244,7 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
             for full details on how to import our data into Excel or Google
             Sheets.
           </Typography>
-          <SectionHeader variant="h4" component="h4" id="embed">
+          <SectionHeader variant="h4" component="h2" id="embed">
             Embed
           </SectionHeader>
           <Typography variant="body1" component="p">

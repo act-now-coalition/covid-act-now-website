@@ -19,3 +19,25 @@ export const Content = styled.div`
 export const Header = styled.div`
   background-color: ${COLORS.LIGHTGRAY};
 `;
+
+export const GetStartedBox = styled.div`
+  background-color: rgba(242, 242, 242, 0.4);
+  padding: 24px;
+  margin-bottom: 24px;
+`;
+
+export const GetStartedList = styled.ol`
+  padding-inline-start: 24px;
+  margin-block-end: 0;
+  li {
+    margin-bottom: 24px;
+  }
+  li:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+export const SimulatorTab = styled.span<{ color: string }>`
+  font-weight: bold;
+  color: ${props => props.color};
+`;
