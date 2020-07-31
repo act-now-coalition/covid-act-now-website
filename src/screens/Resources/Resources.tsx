@@ -7,6 +7,7 @@ import StapledSidebar, {
   SectionHeader,
 } from 'components/StapledSidebar/StapledSidebar';
 import ExternalLink from 'components/ExternalLink';
+import { COLOR_MAP } from 'common/colors';
 
 import {
   Wrapper,
@@ -101,10 +102,14 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
               <li>
                 <Typography variant="body1" component="p">
                   Review the information in the first tab in{' '}
-                  <SimulatorTab color="#ff9900">Orange</SimulatorTab> labeled
-                  “About”. Then continue onward to the second tab in{' '}
-                  <SimulatorTab color="#00d07d">Green</SimulatorTab> labeled
-                  “Location and Inputs Setup”.
+                  <SimulatorTab color={COLOR_MAP.ORANGE_DARK.BASE}>
+                    Orange
+                  </SimulatorTab>{' '}
+                  labeled “About”. Then continue onward to the second tab in{' '}
+                  <SimulatorTab color={COLOR_MAP.GREEN.BASE}>
+                    Green
+                  </SimulatorTab>{' '}
+                  labeled “Location and Inputs Setup”.
                 </Typography>
               </li>
             </GetStartedList>
