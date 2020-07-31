@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { TableHead, TableCell, TableRow, Table } from '@material-ui/core';
-import { COLOR_MAP, LEVEL_COLOR } from 'common/colors';
+import {
+  COLOR_MAP,
+  LEVEL_COLOR,
+  LEVEL_COLOR_CONTACT_TRACING,
+} from 'common/colors';
 import { Metric } from 'common/metric';
 import { Level } from 'common/level';
 
@@ -54,10 +58,11 @@ export const TableHeadContainer = styled(TableHead)<{ isModal?: Boolean }>`
   ${Cell} {
     cursor: pointer;
     vertical-align: bottom;
-    line-height: 1.2rem;
+    line-height: 1.1rem;
     padding: 1rem 1rem 0.8rem;
     background-color: ${({ isModal }) => isModal && 'black'};
     color: ${({ isModal }) => isModal && 'white'};
+    border-bottom: ${({ isModal }) => !isModal && '2px solid #f2f2f2'};
 
     &:nth-child(2) {
       border-left: ${({ isModal }) => !isModal && '2px solid #f2f2f2'};
@@ -76,7 +81,6 @@ export const MetricCell = styled.td<{
   padding-bottom: 0.75rem;
 
   &:first-child {
-    font-weight: 500;
     cursor: pointer;
   }
 
@@ -96,6 +100,19 @@ export const MetricCell = styled.td<{
     font-size: 0.75rem;
     color: ${({ iconColor }) =>
       iconColor !== undefined && `${LEVEL_COLOR[iconColor]}`};
+  }
+
+  span {
+    font-family: Source Code Pro;
+    color: ${COLOR_MAP.GRAY_BODY_COPY};
+    margin-right: 0.875rem;
+  }
+
+  &:last-child {
+    svg {
+      color: ${({ iconColor }) =>
+        iconColor !== undefined && `${LEVEL_COLOR_CONTACT_TRACING[iconColor]}`};
+    }
   }
 `;
 
@@ -125,14 +142,18 @@ export const ArrowContainer = styled.div<{
   metric?: Metric;
   arrowColorSelected: string;
   arrowColorNotSelected: string;
+  sortOverallRisk: Boolean;
+  isLocationHeader?: Boolean;
 }>`
   color: #bdbdbd;
   display: flex;
   font-family: Roboto;
   font-size: 0.875rem;
+  transform: translatex(-0.3rem);
+  margin-top: 0.25rem;
 
   span {
-    margin-left: 0.25rem;
+    margin: auto 0 auto 0.25rem;
   }
 
   svg {
@@ -143,20 +164,29 @@ export const ArrowContainer = styled.div<{
         metric,
         arrowColorSelected,
         arrowColorNotSelected,
+        sortOverallRisk,
+        isLocationHeader,
       }) =>
-        !sortDescending && sorter === metric
+        sortOverallRisk && isLocationHeader && !sortDescending
+          ? `${arrowColorSelected}`
+          : !sortOverallRisk && !sortDescending && sorter === metric
           ? `${arrowColorSelected}`
           : `${arrowColorNotSelected}`};
     }
-    &:last-child {
+    &:nth-child(2) {
+      transform: translatex(-0.1rem);
       color: ${({
         sortDescending,
         sorter,
         metric,
         arrowColorSelected,
         arrowColorNotSelected,
+        sortOverallRisk,
+        isLocationHeader,
       }) =>
-        sortDescending && sorter === metric
+        sortOverallRisk && isLocationHeader && sortDescending
+          ? `${arrowColorSelected}`
+          : !sortOverallRisk && sortDescending && sorter === metric
           ? `${arrowColorSelected}`
           : `${arrowColorNotSelected}`};
     }
@@ -169,6 +199,7 @@ export const Footer = styled.div`
 
   span {
     margin-right: 1.875rem;
+    color: ${COLOR_MAP.GRAY_BODY_COPY};
   }
 `;
 

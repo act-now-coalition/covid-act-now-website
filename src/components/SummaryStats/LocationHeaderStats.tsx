@@ -90,7 +90,7 @@ const SummaryStat = ({
 
   const statusUnknown = value === null;
 
-  const statValue = formatValue(chartType, value);
+  const statValue = formatValue(chartType, value, 'Unknown');
 
   return (
     <SummaryStatWrapper

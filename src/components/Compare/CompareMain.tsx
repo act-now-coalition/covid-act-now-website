@@ -24,7 +24,7 @@ const CompareMain = (props: {
         stateName={props.stateName}
         county={props.county}
         setShowModal={setShowModal}
-        locationsViewable={5}
+        locationsViewable={props.locationsViewable}
         isLocationPage={props.isLocationPage}
         isHomepage={props.isHomepage}
       />

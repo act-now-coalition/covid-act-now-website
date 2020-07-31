@@ -12,6 +12,8 @@ const HeaderCell = (props: {
   metricInMap: any;
   arrowColorSelected: string;
   arrowColorNotSelected: string;
+  setSortOverallRisk: any;
+  sortOverallRisk: Boolean;
 }) => {
   const {
     sorter,
@@ -21,17 +23,39 @@ const HeaderCell = (props: {
     metricInMap,
     arrowColorSelected,
     arrowColorNotSelected,
+    setSortOverallRisk,
+    sortOverallRisk,
   } = props;
 
+  function cellTitleOnClick() {
+    if (sorter !== metricInMap) {
+      setSortDescending(true);
+    } else {
+      setSortDescending(!sortDescending);
+    }
+  }
+
   return (
-    <Cell onClick={() => setSorter(metricInMap)}>
-      {getMetricNameExtended(metricInMap)}
+    <Cell
+      onClick={() => {
+        setSortOverallRisk(false);
+        setSorter(metricInMap);
+      }}
+    >
+      <span
+        onClick={() => {
+          cellTitleOnClick();
+        }}
+      >
+        {getMetricNameExtended(metricInMap)}
+      </span>
       <ArrowContainer
         metric={metricInMap}
         sortDescending={sortDescending}
         sorter={sorter}
         arrowColorSelected={arrowColorSelected}
         arrowColorNotSelected={arrowColorNotSelected}
+        sortOverallRisk={sortOverallRisk}
       >
         <ExpandLessIcon onClick={() => setSortDescending(false)} />
         <ExpandMoreIcon onClick={() => setSortDescending(true)} />

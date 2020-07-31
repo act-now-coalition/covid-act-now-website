@@ -10,12 +10,12 @@ function cellValue(metric: any, metricType: Metric) {
   if (metric === null || metric === undefined) {
     return 'Unknown';
   }
-  return formatValue(metricType, metric.value);
+  return formatValue(metricType, metric.value, '?');
 }
 
 const CompareTableRow = (props: {
   location: SummaryForCompare;
-  index?: number;
+  index: number;
   sorter: any;
   isCurrentCounty?: Boolean;
 }) => {
@@ -62,6 +62,7 @@ const CompareTableRow = (props: {
         onClick={handleLocationClick}
         iconColor={location.metricsInfo.level}
       >
+        <span>{index + 1}</span>
         <FiberManualRecordIcon />
         {locationName}
       </MetricCell>

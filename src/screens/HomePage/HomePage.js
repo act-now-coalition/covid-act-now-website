@@ -90,7 +90,7 @@ export default function HomePage() {
             </SearchBarThermometerWrapper>
             <Map hideLegend />
             {isMobile && <HomePageThermometer />}
-            <CompareMain locationsViewable={5} isHomepage />
+            <CompareMain locationsViewable={25} isHomepage />
             <SectionWrapper ref={indicatorsRef}>
               <CriteriaExplanation isMobile={isMobile} />
             </SectionWrapper>

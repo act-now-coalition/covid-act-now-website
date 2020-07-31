@@ -114,9 +114,10 @@ export function getMetricStatusText(metric: Metric, projection: Projection) {
 export const formatValue = (
   chartType: Metric,
   value: number | null,
+  nullValueCopy: string,
 ): string => {
   if (value === null) {
-    return 'Unknown';
+    return nullValueCopy;
   }
   if (chartType === Metric.CASE_DENSITY) {
     return value.toFixed(1).toString();
