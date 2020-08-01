@@ -1,8 +1,4 @@
-import path from 'path';
-import _ from 'lodash';
 import { google, sheets_v4 } from 'googleapis';
-
-const spreadsheetId = '1cs3Wyh8Gda0H18_-x5RYp7AJ3FwB-I1ewAQTBWEk1YY';
 
 class GoogleSheets {
   // path to the google service account file
@@ -15,54 +11,45 @@ class GoogleSheets {
     this.sheets = google.sheets({ version: 'v4' });
   }
 
-  async authenticate() {
-    if (this.isAuthenticated()) {
-      return;
-    }
-    const auth = await google.auth.getClient({
+  async getAuth() {
+    return google.auth.getClient({
       keyFile: this.keyFile,
       scopes: ['https://www.googleapis.com/auth/spreadsheets'],
     });
-    this.sheets = google.sheets({ version: 'v4', auth });
   }
 
-  private isAuthenticated(): boolean {
-    return this.sheets.context._options.auth !== null;
-  }
-
-  async appendRows(spreadsheetId: string, range: string, rows: any) {
-    const auth = await google.auth.getClient({
-      keyFile: this.keyFile,
-      scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+  async clearRows(spreadsheetId: string, range: string) {
+    const auth = await this.getAuth();
+    await this.sheets.spreadsheets.values.clear({
+      spreadsheetId,
+      range,
+      auth,
     });
-    const request = {
+  }
+
+  async appendRows<T>(spreadsheetId: string, range: string, values: T[][]) {
+    const auth = await this.getAuth();
+    const appendRequest = {
       spreadsheetId,
       range,
       valueInputOption: 'USER_ENTERED',
       insertDataOption: 'INSERT_ROWS',
       resource: {
         majorDimension: 'ROWS',
-        values: _.flatten(rows),
+        range,
+        values,
       },
       auth,
     };
+    await this.sheets.spreadsheets.values.append(appendRequest);
+  }
 
-    await this.sheets.spreadsheets.values.append(request);
+  async clearAndAppend<T>(spreadsheetId: string, range: string, values: T[][]) {
+    await this.clearRows(spreadsheetId, range);
+    await this.appendRows(spreadsheetId, range, values);
   }
 }
 
 export default GoogleSheets;
 
-async function main() {
-  const keyFilePath = path.join(
-    __dirname,
-    '../alert_emails/google-service-account.json',
-  );
-  const gs = new GoogleSheets(keyFilePath);
-  await gs.authenticate();
-  await gs.appendRows(spreadsheetId, 'A1:D4', [[11, 21, 31]]);
-}
-
-if (require.main === module) {
-  main();
-}
+export type Cell = string | number;

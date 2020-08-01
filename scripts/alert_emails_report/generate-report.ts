@@ -2,95 +2,117 @@ import path from 'path';
 import _ from 'lodash';
 import moment from 'moment';
 import CampaignMonitor from '../alert_emails/campaign-monitor';
-import { getFirestore } from '../alert_emails/firestore';
+import {
+  getFirestore,
+  fetchAllAlertSubscriptions,
+} from '../alert_emails/firestore';
 import { ALERT_EMAIL_GROUP, toISO8601 } from '../alert_emails/utils';
-import fipsByStateCode from '../what-the-fips/2018-census-fips-codes.json';
-import { findStateByFips, getAllStateFips } from '../../src/common/locations';
-import GoogleSheets from '../common/google-sheets';
+import GoogleSheets, { Cell } from '../common/google-sheets';
+import {
+  getLocationNameForFips,
+  findCountyByFips,
+  isStateFips,
+} from '../../src/common/locations';
 
-const REPORT_SPREADSHEET_ID = '1cs3Wyh8Gda0H18_-x5RYp7AJ3FwB-I1ewAQTBWEk1YY';
-
-interface StateFipsMap {
-  [stateCode: string]: {
-    [countyFips: string]: string;
-  };
-}
+const SPREADSHEET_ID = '1cs3Wyh8Gda0H18_-x5RYp7AJ3FwB-I1ewAQTBWEk1YY';
+const REPORT_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}`;
 
 const keyFile = path.join(
   __dirname,
   '../alert_emails/google-service-account.json',
 );
 
-async function generateAlertEmailReport() {
+interface FipsCount {
+  fips: string;
+  count: number;
+}
+
+async function main() {
+  try {
+    await updateSubscriptionsByLocation();
+  } catch (err) {
+    console.error('Error updating subscription stats', err);
+  }
+
+  try {
+    await updateEngagementStats();
+  } catch (err) {
+    console.error('Error updating engagement stats', err);
+  }
+
+  console.info('Done.');
+  console.info(`Check the report: ${REPORT_URL}`);
+  process.exit(0);
+}
+
+async function updateSubscriptionsByLocation() {
   const db = getFirestore();
   const gsheets = new GoogleSheets(keyFile);
-  await gsheets.authenticate();
 
-  // TODO: Confirm, what is the best way to measure engagement stats?
-  const dateFrom = new Date('2020-07-24'); // initial send
-  const dateTo = moment(dateFrom).add(8, 'day').toDate();
-  const engagementStats = await fetchEngagementStats(dateFrom, dateTo);
-  await gsheets.appendRows(REPORT_SPREADSHEET_ID, 'data_engagement!A2:IE', [
-    [engagementStats],
-  ]);
+  const subscriptions = await fetchAllAlertSubscriptions(db);
+  const groupedByFips = _.groupBy(subscriptions, fipsEmail => fipsEmail.fips);
+  const countByFips = _.map(groupedByFips, (items, fips) => {
+    return { fips, count: items.length };
+  });
 
-  const fipsStates = getAllStateFips();
-  const subscriptionStats = await Promise.all(
-    fipsStates.map(stateFips => fetchStateSubscriptionStats(db, stateFips)),
+  const [stateCounts, countyCounts] = _.partition(countByFips, ({ fips }) =>
+    isStateFips(fips),
   );
-  await gsheets.appendRows(REPORT_SPREADSHEET_ID, 'data_locations!A2:F2', [
-    subscriptionStats,
-  ]);
+  const countyStats = formatCountyStats(countyCounts);
+  const stateStats = formatStateStats(stateCounts);
+
+  const countyRange = 'subscriptions by county!A2:D';
+  await gsheets.clearAndAppend(SPREADSHEET_ID, countyRange, countyStats);
+
+  const stateRange = 'subscriptions by state!A2:B';
+  await gsheets.clearAndAppend(SPREADSHEET_ID, stateRange, stateStats);
 }
 
-async function fetchEngagementStats(from: Date, to: Date) {
+function formatStateStats(stats: FipsCount[]): Cell[][] {
+  const data = stats.map(({ fips, count }) => [
+    getLocationNameForFips(fips),
+    count,
+  ]);
+  return _.sortBy(data, item => item[0]);
+}
+
+function formatCountyStats(stats: FipsCount[]): Cell[][] {
+  const data = stats.map(({ fips, count }) => {
+    const county = findCountyByFips(fips);
+    const fipsCode = `'${fips}`;
+    const countyName: string = county?.county
+      ? county?.county
+      : 'Unknown county';
+    const stateCode: string = county?.state_code ? county?.state_code : '-';
+    return [fipsCode, countyName, stateCode, count];
+  });
+  return _.sortBy(data, item => item[0]);
+}
+
+async function updateEngagementStats() {
+  const dateTo = new Date();
+  const dateFrom = moment().subtract(7, 'day').toDate();
+  const gsheets = new GoogleSheets(keyFile);
+  const range = 'data_engagement!A2:F';
+  const rows = await fetchEngagementStats(dateFrom, dateTo);
+  await gsheets.appendRows(SPREADSHEET_ID, range, rows);
+}
+
+async function fetchEngagementStats(from: Date, to: Date): Promise<Cell[][]> {
   const cm = new CampaignMonitor(process.env.CREATE_SEND_TOKEN);
-  const { Sent, Opened, Clicked, Bounces } = await cm.fetchTransactionalStats(
-    ALERT_EMAIL_GROUP,
-    from,
-    to,
-  );
-  return [toISO8601(to), Sent, Opened, Clicked, Bounces];
-}
-
-async function fetchStateSubscriptionStats(
-  db: FirebaseFirestore.Firestore,
-  fips: string,
-): Promise<any[]> {
-  const emailCountState = await fetchSubscriptionCountByFips(db, fips);
-  const { state_code: code, state: name, population } = findStateByFips(fips);
-
-  // TODO(pablo): Is there a way to assign the type to the import directly?
-  const countyFipsByStateCode: StateFipsMap = fipsByStateCode;
-  const fipsCounties = Object.keys(countyFipsByStateCode[code]);
-  const emailsByCounty = await Promise.all(
-    fipsCounties.map(fipsCounty =>
-      fetchSubscriptionCountByFips(db, fipsCounty),
-    ),
-  );
-
-  const emailCountCounties = _.sum(emailsByCounty);
+  const stats = await cm.fetchTransactionalStats(ALERT_EMAIL_GROUP, from, to);
   return [
-    toISO8601(new Date()),
-    name,
-    population,
-    emailCountState,
-    emailCountCounties,
-    emailCountState + emailCountCounties,
+    [
+      toISO8601(from),
+      toISO8601(to),
+      stats.Sent,
+      stats.Opened,
+      stats.Clicked,
+      stats.Bounces,
+    ],
   ];
 }
 
-async function fetchSubscriptionCountByFips(
-  db: FirebaseFirestore.Firestore,
-  fips: string,
-) {
-  const querySnapshot = await db
-    .collection('alerts-subscriptions')
-    .where('locations', 'array-contains', fips)
-    .get();
-  return querySnapshot.size;
-}
-
 if (require.main === module) {
-  generateAlertEmailReport();
+  main();
 }
