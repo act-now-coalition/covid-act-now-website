@@ -67,14 +67,6 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
             inputs and assumptions in the simulator are modifiable and can be
             changed to reflect your local realities.
           </Typography>
-          <ImageContainer>
-            <picture>
-              <img
-                src={imgReponseSimulatorUrl}
-                alt="Two screenshots showing a Google sheet. In the first tab we see where you can input your information, and in the second tab you can see the resulting graph and table that is exported."
-              />
-            </picture>
-          </ImageContainer>
           <Typography variant="body1" component="p">
             In addition, you can project the impact of specific
             Non-Pharmaceutical Interventions (NPIs) for your county, such as
@@ -83,6 +75,14 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
             graphs illustrating COVID forecasts with and without these NPIs,
             including estimated case numbers and hospitalizations.
           </Typography>
+          <ImageContainer>
+            <picture>
+              <img
+                src={imgReponseSimulatorUrl}
+                alt="Two screenshots showing a Google sheet. In the first tab we see where you can input your information, and in the second tab you can see the resulting graph and table that is exported."
+              />
+            </picture>
+          </ImageContainer>
 
           <GetStartedBox>
             <Typography variant="h5" component="h3">
