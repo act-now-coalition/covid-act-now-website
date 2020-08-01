@@ -118,12 +118,6 @@ export function topCountiesByPopulation(limit: number): County[] {
   );
 }
 
-export function getAllStateFips() {
-  return Object.keys(STATES).map(stateCode => {
-    return findStateFipsCode(stateCode);
-  });
-}
-
 export function isStateFips(fips: string) {
   return fips.length === 2;
 }
