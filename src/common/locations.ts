@@ -32,11 +32,9 @@ export function getLocationNames() {
 
   each(US_STATE_DATASET.state_county_map_dataset, (value, key) => {
     locations.push(
-      ...value.county_dataset
-        .filter(county => !county.county.includes('/'))
-        .map(county => {
-          return { ...county, state: county.state_code };
-        }),
+      ...value.county_dataset.map(county => {
+        return { ...county, state: county.state_code };
+      }),
     );
   });
 
@@ -104,11 +102,7 @@ export function topCountiesByPopulation(limit: number): County[] {
   const statesData = US_STATE_DATASET.state_county_map_dataset as any;
   for (const state in statesData) {
     const countiesData = statesData[state].county_dataset;
-    for (const county of countiesData) {
-      if (!county.county.includes('/')) {
-        allCounties.push(county);
-      }
-    }
+    allCounties.push(...countiesData);
   }
 
   return takeRight(

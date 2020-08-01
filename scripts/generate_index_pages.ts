@@ -235,10 +235,6 @@ function findCountyByFips(fips: string) {
     for (const state in statesData) {
       const countiesData = statesData[state].county_dataset;
       for (const county of countiesData) {
-        // TODO(michael): Just remove these combined counties from the dataset?
-        if (county.county.includes('/')) {
-          continue;
-        }
         fipsLookup[county.full_fips_code] = county;
       }
     }
