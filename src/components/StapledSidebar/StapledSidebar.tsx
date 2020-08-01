@@ -114,20 +114,11 @@ export default class StapledSidebar extends React.Component<
       this.setState({ inRAF: true });
       window.requestAnimationFrame(() => {
         if (lastYOffset >= lastWrapperBottom - offset - lastStapleHeight) {
-          this.setState({
-            stapledBottom: true,
-            stapledTop: false,
-          });
+          this.setState({ stapledBottom: true, stapledTop: false });
         } else if (lastYOffset >= lastWrapperOffset - offset) {
-          this.setState({
-            stapledBottom: false,
-            stapledTop: true,
-          });
+          this.setState({ stapledBottom: false, stapledTop: true });
         } else {
-          this.setState({
-            stapledBottom: false,
-            stapledTop: false,
-          });
+          this.setState({ stapledBottom: false, stapledTop: false });
         }
         this.setState({ inRAF: false });
       });
