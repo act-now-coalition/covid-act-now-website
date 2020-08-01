@@ -33,6 +33,11 @@ export interface CampaignMonitorStats {
   Clicked: number;
 }
 
+export interface CampaignMonitorGroup {
+  Group: string;
+  CreatedAt: string;
+}
+
 function isStatusOK(status: number) {
   return 200 <= status && status < 300;
 }
@@ -102,6 +107,11 @@ class CampaignMonitor {
       timezone: 'UTC',
     };
     const res = await this.api.get('transactional/statistics', { params });
+    return res.data;
+  }
+
+  async fetchTransactionalGroups(): Promise<CampaignMonitorGroup[]> {
+    const res = await this.api.get('transactional/classicEmail/groups');
     return res.data;
   }
 }

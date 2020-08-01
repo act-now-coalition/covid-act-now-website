@@ -5,7 +5,7 @@ import moment from 'moment';
 import { Alert } from './interfaces';
 import { Level } from '../../src/common/level';
 
-export const ALERT_EMAIL_GROUP = 'Alert Email';
+export const ALERT_EMAIL_GROUP_PREFIX = 'Alert Email';
 
 const thermometerBaseURL =
   'https://data.covidactnow.org/thermometer_screenshot';
@@ -81,7 +81,7 @@ export function generateAlertEmailData(
     TrackOpens: true,
     TrackClicks: true,
     InlineCSS: true,
-    Group: ALERT_EMAIL_GROUP,
+    Group: `${ALERT_EMAIL_GROUP_PREFIX} - ${toISO8601(new Date())}`,
     ConsentToTrack: 'Unchanged',
   };
 }

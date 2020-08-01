@@ -1,18 +1,20 @@
 import path from 'path';
 import _ from 'lodash';
 import moment from 'moment';
-import CampaignMonitor from '../alert_emails/campaign-monitor';
+import CampaignMonitor, {
+  CampaignMonitorStats,
+} from '../alert_emails/campaign-monitor';
 import {
   getFirestore,
   fetchAllAlertSubscriptions,
 } from '../alert_emails/firestore';
-import { ALERT_EMAIL_GROUP, toISO8601 } from '../alert_emails/utils';
 import GoogleSheets, { Cell } from '../common/google-sheets';
 import {
   getLocationNameForFips,
   findCountyByFips,
   isStateFips,
 } from '../../src/common/locations';
+import { ALERT_EMAIL_GROUP_PREFIX } from '../alert_emails/utils';
 
 const SPREADSHEET_ID = '1cs3Wyh8Gda0H18_-x5RYp7AJ3FwB-I1ewAQTBWEk1YY';
 const REPORT_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}`;
@@ -95,22 +97,36 @@ async function updateEngagementStats() {
   const gsheets = new GoogleSheets(keyFile);
   const range = 'data_engagement!A2:F';
   const rows = await fetchEngagementStats(dateFrom, dateTo);
-  await gsheets.appendRows(SPREADSHEET_ID, range, rows);
+  await gsheets.clearAndAppend(SPREADSHEET_ID, range, rows);
 }
 
 async function fetchEngagementStats(from: Date, to: Date): Promise<Cell[][]> {
   const cm = new CampaignMonitor(process.env.CREATE_SEND_TOKEN);
-  const stats = await cm.fetchTransactionalStats(ALERT_EMAIL_GROUP, from, to);
-  return [
-    [
-      toISO8601(from),
-      toISO8601(to),
-      stats.Sent,
-      stats.Opened,
-      stats.Clicked,
-      stats.Bounces,
-    ],
-  ];
+  const dateFrom = new Date('2020-07-23');
+  const dateTo = new Date();
+  const groups = await cm.fetchTransactionalGroups();
+
+  const alertGroupNames = groups
+    .filter(group => group.Group.startsWith(ALERT_EMAIL_GROUP_PREFIX))
+    .map(group => group.Group)
+    .sort();
+
+  const stats = Promise.all(
+    alertGroupNames.map(async (groupName: string) => {
+      const groupStats = await cm.fetchTransactionalStats(
+        groupName,
+        dateFrom,
+        dateTo,
+      );
+      return formatGroupStats(groupName, groupStats);
+    }),
+  );
+
+  return stats;
+}
+
+function formatGroupStats(groupName: string, stats: CampaignMonitorStats) {
+  return [groupName, stats.Sent, stats.Opened, stats.Clicked, stats.Bounces];
 }
 
 if (require.main === module) {
