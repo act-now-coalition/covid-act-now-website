@@ -111,7 +111,7 @@ async function fetchEngagementStats(from: Date, to: Date): Promise<Cell[][]> {
     .map(group => group.Group)
     .sort();
 
-  const stats = Promise.all(
+  const stats = await Promise.all(
     alertGroupNames.map(async (groupName: string) => {
       const groupStats = await cm.fetchTransactionalStats(
         groupName,
