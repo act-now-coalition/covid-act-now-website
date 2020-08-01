@@ -8,6 +8,7 @@ import StapledSidebar, {
 } from 'components/StapledSidebar/StapledSidebar';
 import ExternalLink from 'components/ExternalLink';
 import { COLOR_MAP } from 'common/colors';
+import imgReponseSimulatorUrl from 'assets/images/response-simulator-screenshot.png';
 
 import {
   Wrapper,
@@ -16,6 +17,7 @@ import {
   GetStartedBox,
   GetStartedList,
   SimulatorTab,
+  ImageContainer,
 } from './Resources.style';
 
 const sidebar = (
@@ -65,6 +67,14 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
             inputs and assumptions in the simulator are modifiable and can be
             changed to reflect your local realities.
           </Typography>
+          <ImageContainer>
+            <picture>
+              <img
+                src={imgReponseSimulatorUrl}
+                alt="Two screenshots showing a Google sheet. In the first tab we see where you can input your information, and in the second tab you can see the resulting graph and table that is exported."
+              />
+            </picture>
+          </ImageContainer>
           <Typography variant="body1" component="p">
             In addition, you can project the impact of specific
             Non-Pharmaceutical Interventions (NPIs) for your county, such as

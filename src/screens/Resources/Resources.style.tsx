@@ -45,3 +45,10 @@ export const SimulatorTab = styled.span<{ color: string }>`
   font-weight: bold;
   color: ${props => props.color};
 `;
+
+export const ImageContainer = styled.div`
+  img {
+    width: 100%;
+  }
+  margin-bottom: 24px;
+`;
