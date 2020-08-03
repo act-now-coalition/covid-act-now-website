@@ -6,11 +6,25 @@ import StapledSidebar, {
   SidebarLink,
   SectionHeader,
 } from 'components/StapledSidebar/StapledSidebar';
+import ExternalLink from 'components/ExternalLink';
+import { COLOR_MAP } from 'common/colors';
+import imgReponseSimulatorUrl from 'assets/images/response-simulator-screenshot.png';
 
-import { Wrapper, Content, Header } from './Resources.style';
+import {
+  Wrapper,
+  Content,
+  Header,
+  GetStartedBox,
+  GetStartedList,
+  SimulatorTab,
+  ImageContainer,
+} from './Resources.style';
 
 const sidebar = (
   <React.Fragment>
+    <SidebarLink href="#covid-response-simulator">
+      COVID Response Simulator
+    </SidebarLink>
     <SidebarLink href="#model">SEIR Epidemiology Model</SidebarLink>
     <SidebarLink href="#api">API</SidebarLink>
     <SidebarLink href="#csv-files">CSV Files</SidebarLink>
@@ -35,7 +49,98 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
       </Header>
       <Content>
         <StapledSidebar sidebar={sidebar}>
-          <SectionHeader variant="h4" component="h4" id="model">
+          <SectionHeader
+            variant="h4"
+            component="h2"
+            id="covid-response-simulator"
+          >
+            COVID Response Simulator
+          </SectionHeader>
+          <Typography variant="body1" component="p">
+            The COVID Response Simulator is a customizable spreadsheet that
+            provides modeling for every US state and county. With it, you can
+            take an{' '}
+            <ExternalLink href="https://en.wikipedia.org/wiki/Compartmental_models_in_epidemiology#The_SEIR_model">
+              SEIR epidemiology model
+            </ExternalLink>{' '}
+            and tailor it to your location to help plan your COVID response. The
+            inputs and assumptions in the simulator are modifiable and can be
+            changed to reflect your local realities.
+          </Typography>
+          <Typography variant="body1" component="p">
+            In addition, you can project the impact of specific
+            Non-Pharmaceutical Interventions (NPIs) for your county, such as
+            closing schools, restricting business activities, and canceling
+            large events. Based on your inputs, the simulator generates data and
+            graphs illustrating COVID forecasts with and without these NPIs,
+            including estimated case numbers and hospitalizations.
+          </Typography>
+          <ImageContainer>
+            <picture>
+              <img
+                src={imgReponseSimulatorUrl}
+                alt="Two screenshots showing a Google sheet. In the first tab we see where you can input your information, and in the second tab you can see the resulting graph and table that is exported."
+              />
+            </picture>
+          </ImageContainer>
+
+          <GetStartedBox>
+            <Typography variant="h5" component="h3">
+              Get started
+            </Typography>
+            <GetStartedList>
+              <li>
+                <Typography variant="body1" component="p">
+                  Before you begin, please take a few minutes to watch a{' '}
+                  <ExternalLink href="https://youtu.be/xiI_kC8hGTA">
+                    short tutorial
+                  </ExternalLink>{' '}
+                  on how to use the simulator.
+                </Typography>
+              </li>
+              <li>
+                <Typography variant="body1" component="p">
+                  Click on{' '}
+                  <ExternalLink href="https://docs.google.com/spreadsheets/u/3/d/1PTBTp8z49IXexkV02wacWLoyv1A2GtlVFYVqI4APPR8/copy#gid=1190280212">
+                    this link
+                  </ExternalLink>{' '}
+                  to create a copy of the simulator for your use. You’ll be
+                  prompted to make a copy so that you can work in your own
+                  document.
+                </Typography>
+              </li>
+              <li>
+                <Typography variant="body1" component="p">
+                  Review the information in the first tab in{' '}
+                  <SimulatorTab color={COLOR_MAP.ORANGE_DARK.BASE}>
+                    Orange
+                  </SimulatorTab>{' '}
+                  labeled “About”. Then continue onward to the second tab in{' '}
+                  <SimulatorTab color={COLOR_MAP.GREEN.BASE}>
+                    Green
+                  </SimulatorTab>{' '}
+                  labeled “Location and Inputs Setup”.
+                </Typography>
+              </li>
+            </GetStartedList>
+          </GetStartedBox>
+
+          <Typography variant="body1" component="p">
+            <i>
+              If you have any questions about our model or the data we use,
+              reach out to us at{' '}
+              <ExternalLink href="mailto:info@covidactnow.org">
+                info@covidactnow.org
+              </ExternalLink>
+              . You can also learn more on our{' '}
+              <ExternalLink href="https://www.youtube.com/channel/UChs298932BKWanjwWLVUO4w">
+                YouTube channel
+              </ExternalLink>
+              .{' '}
+            </i>
+          </Typography>
+
+          <SectionHeader variant="h4" component="h2" id="model">
             SEIR Epidemiology Model
           </SectionHeader>
           <Typography variant="body1" component="p">
@@ -49,11 +154,9 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
             </a>
             .
           </Typography>
-
-          <SectionHeader variant="h4" component="h4" id="api">
+          <SectionHeader variant="h4" component="h2" id="api">
             API
           </SectionHeader>
-
           <Typography variant="body1" component="p">
             We launched the{' '}
             <a
@@ -141,8 +244,7 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
             </a>
             .
           </Typography>
-
-          <SectionHeader variant="h4" component="h4" id="csv-files">
+          <SectionHeader variant="h4" component="h2" id="csv-files">
             CSV Files
           </SectionHeader>
           <Typography variant="body1" component="p">
@@ -157,8 +259,7 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
             for full details on how to import our data into Excel or Google
             Sheets.
           </Typography>
-
-          <SectionHeader variant="h4" component="h4" id="embed">
+          <SectionHeader variant="h4" component="h2" id="embed">
             Embed
           </SectionHeader>
           <Typography variant="body1" component="p">
