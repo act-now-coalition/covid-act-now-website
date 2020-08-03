@@ -7,6 +7,7 @@ import StapledSidebar, {
   SectionHeader,
 } from 'components/StapledSidebar/StapledSidebar';
 import ExternalLink from 'components/ExternalLink';
+import ImageModal from 'components/ImageModal';
 import { COLOR_MAP } from 'common/colors';
 import imgReponseSimulatorUrl from 'assets/images/response-simulator-screenshot.png';
 
@@ -75,14 +76,16 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
             graphs illustrating COVID forecasts with and without these NPIs,
             including estimated case numbers and hospitalizations.
           </Typography>
-          <ImageContainer>
-            <picture>
-              <img
-                src={imgReponseSimulatorUrl}
-                alt="Two screenshots showing a Google sheet. In the first tab we see where you can input your information, and in the second tab you can see the resulting graph and table that is exported."
-              />
-            </picture>
-          </ImageContainer>
+          <ImageModal>
+            <ImageContainer>
+              <picture>
+                <img
+                  src={imgReponseSimulatorUrl}
+                  alt="Two screenshots showing a Google sheet. In the first tab we see where you can input your information, and in the second tab you can see the resulting graph and table that is exported."
+                />
+              </picture>
+            </ImageContainer>
+          </ImageModal>
 
           <GetStartedBox>
             <Typography variant="h5" component="h3">
