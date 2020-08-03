@@ -114,10 +114,6 @@ async function readSearchData() {
     const counties = stateCounties[state]['county_dataset'];
     for (const countyData of counties) {
       const { full_fips_code, county } = countyData;
-      // Ignore combined counties, to match https://github.com/covid-projections/covid-projections/blob/1b0ba5aa826a00e6b5fc436a9129049b82679331/src/components/MapSelectors/GlobalSelector.js#L152
-      if (county.includes('/')) {
-        continue;
-      }
       record(result, state, full_fips_code, county);
     }
   }
