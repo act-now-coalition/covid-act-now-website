@@ -74,6 +74,11 @@ export default function App() {
               <Route path="/contact" component={Contact} />
               <Route path="/terms" component={Terms} />
               <Route path="/privacy" component={Privacy} />
+              {/* Custom URL for sharing the COVID Response Simulator */}
+              <Route path="/response-simulator">
+                <Redirect to="resources#covid-response-simulator" />
+              </Route>
+
               {/* Embed routes */}
               <Route
                 exact
