@@ -16,8 +16,13 @@ import {
 } from '../../src/common/locations';
 import { ALERT_EMAIL_GROUP_PREFIX } from '../alert_emails/utils';
 
-const SPREADSHEET_ID = '1cs3Wyh8Gda0H18_-x5RYp7AJ3FwB-I1ewAQTBWEk1YY';
-const REPORT_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}`;
+function getSpreadsheetId(): string {
+  if (process.env.SPREADSHEET_ID) {
+    return 'process.env.SPREADSHEET_ID';
+  } else {
+    return '1M-GXVtFrv5NK1_Gceu8ynkK3OsHjD3GEQY4vaG0lDaA';
+  }
+}
 
 const keyFile = path.join(
   __dirname,
@@ -42,14 +47,18 @@ async function main() {
     console.error('Error updating engagement stats', err);
   }
 
+  const spreadsheetId = getSpreadsheetId();
+  const reportUrl = `https://docs.google.com/spreadsheets/d/${spreadsheetId}`;
+
   console.info('Done.');
-  console.info(`Check the report: ${REPORT_URL}`);
+  console.info(`Check the report: ${reportUrl}`);
   process.exit(0);
 }
 
 async function updateSubscriptionsByLocation() {
   const db = getFirestore();
   const gsheets = new GoogleSheets(keyFile);
+  const spreadsheetId = getSpreadsheetId();
 
   const subscriptions = await fetchAllAlertSubscriptions(db);
   const groupedByFips = _.groupBy(subscriptions, fipsEmail => fipsEmail.fips);
@@ -63,11 +72,12 @@ async function updateSubscriptionsByLocation() {
   const countyStats = formatCountyStats(countyCounts);
   const stateStats = formatStateStats(stateCounts);
 
-  const countyRange = 'subscriptions by county!A2:D';
-  await gsheets.clearAndAppend(SPREADSHEET_ID, countyRange, countyStats);
-
-  const stateRange = 'subscriptions by state!A2:B';
-  await gsheets.clearAndAppend(SPREADSHEET_ID, stateRange, stateStats);
+  await gsheets.clearAndAppend(
+    spreadsheetId,
+    'data-counties!A2:D',
+    countyStats,
+  );
+  await gsheets.clearAndAppend(spreadsheetId, 'data-states!A2:B', stateStats);
 }
 
 function formatStateStats(stats: FipsCount[]): Cell[][] {
@@ -92,12 +102,12 @@ function formatCountyStats(stats: FipsCount[]): Cell[][] {
 }
 
 async function updateEngagementStats() {
+  const spreadsheetId = getSpreadsheetId();
   const dateTo = new Date();
   const dateFrom = moment().subtract(7, 'day').toDate();
   const gsheets = new GoogleSheets(keyFile);
-  const range = 'data_engagement!A2:F';
   const rows = await fetchEngagementStats(dateFrom, dateTo);
-  await gsheets.clearAndAppend(SPREADSHEET_ID, range, rows);
+  await gsheets.clearAndAppend(spreadsheetId, 'data-emails!A2:F', rows);
 }
 
 async function fetchEngagementStats(from: Date, to: Date): Promise<Cell[][]> {
