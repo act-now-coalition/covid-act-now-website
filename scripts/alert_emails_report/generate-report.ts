@@ -29,6 +29,11 @@ const keyFile = path.join(
   '../alert_emails/google-service-account.json',
 );
 
+//
+const RANGE_STATES = 'data-states!A2:B';
+const RANGE_COUNTIES = 'data-counties!A2:D';
+const RANGE_EMAILS = 'data-emails!A2:F';
+
 interface FipsCount {
   fips: string;
   count: number;
@@ -41,8 +46,8 @@ async function main() {
     console.error('Error updating subscription stats', err);
   }
 
+  await updateEngagementStats();
   try {
-    await updateEngagementStats();
   } catch (err) {
     console.error('Error updating engagement stats', err);
   }
@@ -72,12 +77,8 @@ async function updateSubscriptionsByLocation() {
   const countyStats = formatCountyStats(countyCounts);
   const stateStats = formatStateStats(stateCounts);
 
-  await gsheets.clearAndAppend(
-    spreadsheetId,
-    'data-counties!A2:D',
-    countyStats,
-  );
-  await gsheets.clearAndAppend(spreadsheetId, 'data-states!A2:B', stateStats);
+  await gsheets.clearAndAppend(spreadsheetId, RANGE_COUNTIES, countyStats);
+  await gsheets.clearAndAppend(spreadsheetId, RANGE_STATES, stateStats);
 }
 
 function formatStateStats(stats: FipsCount[]): Cell[][] {
@@ -103,17 +104,13 @@ function formatCountyStats(stats: FipsCount[]): Cell[][] {
 
 async function updateEngagementStats() {
   const spreadsheetId = getSpreadsheetId();
-  const dateTo = new Date();
-  const dateFrom = moment().subtract(7, 'day').toDate();
   const gsheets = new GoogleSheets(keyFile);
-  const rows = await fetchEngagementStats(dateFrom, dateTo);
-  await gsheets.clearAndAppend(spreadsheetId, 'data-emails!A2:F', rows);
+  const rows = await fetchEngagementStats();
+  await gsheets.clearAndAppend(spreadsheetId, RANGE_EMAILS, rows);
 }
 
-async function fetchEngagementStats(from: Date, to: Date): Promise<Cell[][]> {
+async function fetchEngagementStats(): Promise<Cell[][]> {
   const cm = new CampaignMonitor(process.env.CREATE_SEND_TOKEN);
-  const dateFrom = new Date('2020-07-23');
-  const dateTo = new Date();
   const groups = await cm.fetchTransactionalGroups();
 
   const alertGroupNames = groups
@@ -123,11 +120,7 @@ async function fetchEngagementStats(from: Date, to: Date): Promise<Cell[][]> {
 
   const stats = await Promise.all(
     alertGroupNames.map(async (groupName: string) => {
-      const groupStats = await cm.fetchTransactionalStats(
-        groupName,
-        dateFrom,
-        dateTo,
-      );
+      const groupStats = await cm.fetchTransactionalStats(groupName);
       return formatGroupStats(groupName, groupStats);
     }),
   );
@@ -140,5 +133,8 @@ function formatGroupStats(groupName: string, stats: CampaignMonitorStats) {
 }
 
 if (require.main === module) {
-  main();
+  main().catch(err => {
+    console.error(err);
+    process.exit(1);
+  });
 }

@@ -95,17 +95,8 @@ class CampaignMonitor {
     return response.data;
   }
 
-  async fetchTransactionalStats(
-    group: string,
-    from: Date,
-    to: Date,
-  ): Promise<CampaignMonitorStats> {
-    const params = {
-      group,
-      from: toISO8601(from),
-      to: toISO8601(to),
-      timezone: 'UTC',
-    };
+  async fetchTransactionalStats(group: string): Promise<CampaignMonitorStats> {
+    const params = { group, timezone: 'UTC' };
     const res = await this.api.get('transactional/statistics', { params });
     return res.data;
   }

@@ -2,7 +2,7 @@ import admin from 'firebase-admin';
 import fs from 'fs';
 import path from 'path';
 
-const ALERTS_SUBSCRIPTIONS = 'alerts-subscriptions';
+const ALERTS_SUBSCRIPTIONS_COLLECTION = 'alerts-subscriptions';
 
 export function getFirestore(): FirebaseFirestore.Firestore {
   // NOTE: An appropriate service account key should automatically exist when
@@ -40,7 +40,7 @@ export async function fetchAllAlertSubscriptions(
 ): Promise<FipsEmail[]> {
   return new Promise(function (resolve, reject) {
     const subscriptions: FipsEmail[] = [];
-    db.collection(ALERTS_SUBSCRIPTIONS)
+    db.collection(ALERTS_SUBSCRIPTIONS_COLLECTION)
       .stream()
       .on('data', emailDoc => {
         const { locations } = emailDoc.data();
