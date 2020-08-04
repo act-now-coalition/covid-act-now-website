@@ -57,23 +57,40 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
             COVID Response Simulator
           </SectionHeader>
           <Typography variant="body1" component="p">
-            The COVID Response Simulator is a customizable spreadsheet that
-            provides modeling for every US state and county. With it, you can
-            take an{' '}
+            The COVID Response Simulator is a localized, customizable version of
+            the public Covid Act Now (CAN) model. With it, you can take a
+            powerful{' '}
             <ExternalLink href="https://en.wikipedia.org/wiki/Compartmental_models_in_epidemiology#The_SEIR_model">
               SEIR epidemiology model
             </ExternalLink>{' '}
-            and tailor it to your location to help plan your COVID response. The
-            inputs and assumptions in the simulator are modifiable and can be
-            changed to reflect your local realities.
+            and customize it for your county to help plan your response to
+            COVID. The inputs and assumptions in the simulator are modifiable
+            and can be changed to reflect your local realities.
           </Typography>
           <Typography variant="body1" component="p">
             In addition, you can project the impact of specific
-            Non-Pharmaceutical Interventions (NPIs) for your county, such as
-            closing schools, restricting business activities, and canceling
-            large events. Based on your inputs, the simulator generates data and
-            graphs illustrating COVID forecasts with and without these NPIs,
-            including estimated case numbers and hospitalizations.
+            Non-Pharmaceutical Interventions (NPIs) by adjusting customizable
+            levels of public compliance and closure for:
+          </Typography>
+          <ul>
+            <li>Schools and universities</li>
+            <li>Large events</li>
+            <li>Bars and restaurants</li>
+            <li>Offices and factories</li>
+            <li>Houses of worship</li>
+            <li>Personal care </li>
+            <li>Nonessential retail</li>
+            <li>Essential retail</li>
+            <li>Entertainment</li>
+            <li>Outdoor recreation</li>
+          </ul>
+          <Typography variant="body1" component="p">
+            You’ll also be able to simulate the impact of different levels of
+            compliance with mask mandates and shelter-in-place orders, as well
+            as modify the demographic distribution of your county’s population.
+            Based on your inputs, the simulator generates data and graphs
+            illustrating COVID forecasts with and without these NPIs, including
+            estimated case numbers and hospitalizations.
           </Typography>
           <ImageContainer>
             <picture>
@@ -83,7 +100,6 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
               />
             </picture>
           </ImageContainer>
-
           <GetStartedBox>
             <Typography variant="h5" component="h3">
               Get started
@@ -91,11 +107,17 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
             <GetStartedList>
               <li>
                 <Typography variant="body1" component="p">
-                  Before you begin, please take a few minutes to watch a{' '}
-                  <ExternalLink href="https://youtu.be/xiI_kC8hGTA">
-                    short tutorial
+                  Before you begin, you can watch a full tutorial (30 minutes)
+                  on the simulator{' '}
+                  <ExternalLink href="https://youtu.be/6lYf9ry1DWE">
+                    here
                   </ExternalLink>{' '}
-                  on how to use the simulator.
+                  or a shorter tutorial (10 minutes) on how to use the simulator
+                  specifically for modeling NPIs{' '}
+                  <ExternalLink href="https://youtu.be/xiI_kC8hGTA">
+                    here
+                  </ExternalLink>
+                  .
                 </Typography>
               </li>
               <li>
@@ -124,7 +146,6 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
               </li>
             </GetStartedList>
           </GetStartedBox>
-
           <Typography variant="body1" component="p">
             <i>
               If you have any questions about our model or the data we use,
@@ -139,7 +160,6 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
               .{' '}
             </i>
           </Typography>
-
           <SectionHeader variant="h4" component="h2" id="model">
             SEIR Epidemiology Model
           </SectionHeader>
