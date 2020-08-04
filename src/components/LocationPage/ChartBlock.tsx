@@ -20,6 +20,7 @@ import { formatUtcDate } from 'common/utils';
 import { generateChartDescription } from 'common/metrics/future_projection';
 import MetricChart from 'components/Charts/MetricChart';
 import { COLORS } from 'common';
+import { IndicatorStatus } from 'components/Indicator';
 
 //TODO (chelsi): further unify mapped charts with future projections chart
 //TODO (chelsi): clean out Outcomes component and only pass in what is still used
@@ -77,7 +78,8 @@ function ChartBlock(props: {
           </ChartHeaderWrapper>
           <ChartLocationName>{projection.locationName}</ChartLocationName>
           <ChartDescription>
-            {getMetricStatusText(props.metric, projection)}
+            <IndicatorStatus metric={props.metric} projection={projection} />
+            {/* {getMetricStatusText(props.metric, projection)} */}
           </ChartDescription>
           {props.isMobile && props.data && (
             <ShareButtons
