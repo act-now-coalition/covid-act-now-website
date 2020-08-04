@@ -96,16 +96,18 @@ export function getMetricDisclaimer(metric: Metric) {
 }
 
 export function getMetricStatusText(metric: Metric, projection: Projection) {
-  const METRIC_TO_STATUS_TEXT: { [metricName: number]: string } = {
-    [Metric.CASE_GROWTH_RATE]: CaseGrowth.caseGrowthStatusText(projection),
-    [Metric.POSITIVE_TESTS]: TestRates.positiveTestsStatusText(projection),
-    [Metric.HOSPITAL_USAGE]: Hospitalizations.hospitalOccupancyStatusText(
-      projection,
-    ),
-    [Metric.CONTACT_TRACING]: ContactTracing.contactTracingStatusText(
-      projection,
-    ),
-    [Metric.CASE_DENSITY]: CaseDensity.caseDensityStatusText(projection),
-  };
-  return METRIC_TO_STATUS_TEXT[metric];
+  switch (metric) {
+    case Metric.CASE_GROWTH_RATE:
+      return CaseGrowth.renderStatusText(projection);
+    case Metric.POSITIVE_TESTS:
+      return TestRates.renderStatusText(projection);
+    case Metric.HOSPITAL_USAGE:
+      return Hospitalizations.renderStatusText(projection);
+    case Metric.CONTACT_TRACING:
+      return ContactTracing.renderStatusText(projection);
+    case Metric.CASE_DENSITY:
+      return CaseDensity.renderStatusText(projection);
+    default:
+      return null;
+  }
 }

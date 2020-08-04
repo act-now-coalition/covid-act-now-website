@@ -1,3 +1,4 @@
+import React, { Fragment } from 'react';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
 import { levelText } from 'common/utils/chart';
@@ -66,10 +67,10 @@ export const POSITIVE_TESTS_LEVEL_INFO_MAP: LevelInfoMap = {
 export const POSITIVE_RATE_DISCLAIMER =
   'The World Health Organization recommends a positive test rate of less than 10%. The countries most successful in containing COVID have rates of 3% or less. We calculate the rate as a 7-day trailing average.';
 
-export function positiveTestsStatusText(projection: Projection) {
+export function renderStatusText(projection: Projection) {
   const testPositiveRate = projection.currentTestPositiveRate;
   if (testPositiveRate === null) {
-    return 'No testing data is available.';
+    return <Fragment>No testing data is available.</Fragment>;
   }
   const level = getLevel(Metric.POSITIVE_TESTS, testPositiveRate);
   const lowSizableLarge = levelText(
@@ -98,5 +99,10 @@ export function positiveTestsStatusText(projection: Projection) {
     `At these levels, it is hard to know how fast COVID is actually spreading, and there is very high risk of being surprised by a wave of disease. More testing urgently needed`,
   );
 
-  return `A ${lowSizableLarge} percentage (${percentage}) of COVID tests were positive, ${testingBroadlyText}. ${textForecast}.`;
+  return (
+    <Fragment>
+      {`A ${lowSizableLarge} percentage (${percentage}) of COVID tests were
+        positive, ${testingBroadlyText}. ${textForecast}.`}
+    </Fragment>
+  );
 }

@@ -1,3 +1,4 @@
+import React, { Fragment } from 'react';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
 import { levelText } from 'common/utils/chart';
@@ -63,7 +64,7 @@ export const CONTACT_TRACING_LEVEL_INFO_MAP: LevelInfoMap = {
   },
 };
 
-export function contactTracingStatusText(projection: Projection) {
+export function renderStatusText(projection: Projection): React.ReactElement {
   const currentContactTracers = projection.currentContactTracers;
   const weeklyAverageResult = projection.currentDailyAverageCases;
   const currentWeeklyAverage =
@@ -74,7 +75,7 @@ export function contactTracingStatusText(projection: Projection) {
     currentContactTracers === null ||
     currentWeeklyAverage === null
   ) {
-    return 'No contact tracing data is available.';
+    return <Fragment>No contact tracing data is available.</Fragment>;
   }
   const location = projection.locationName;
   const level = getLevel(Metric.CONTACT_TRACING, currentContactTracingMetric);
@@ -84,8 +85,6 @@ export function contactTracingStatusText(projection: Projection) {
   const numNeededTracers = formatInteger(
     currentWeeklyAverage * TRACERS_NEEDED_PER_CASE,
   );
-  const overview = `Per best available data, ${location} has ${numTracers} contact tracers. With an average of ${weeklyAverage} new daily cases,
-    we estimate ${location} needs ${numNeededTracers} contact tracing staff to trace all new cases in 48 hours, before too many other people are infected.`;
 
   const contactTracingRate = levelText(
     level,
@@ -103,9 +102,16 @@ export function contactTracingStatusText(projection: Projection) {
     'When this level of tracing is coupled with widely available testing, COVID can be contained without resorting to lockdowns.',
   );
 
-  const details = `This means that ${location} is likely able to trace ${contactTracingRate} of new COVID infections in 48 hours. ${outcomesAtLevel}`;
-
-  return `${overview} ${details}`;
+  return (
+    <Fragment>
+      {`Per best available data, ${location} has ${numTracers} contact 
+      tracers. With an average of ${weeklyAverage} new daily cases,
+      we estimate ${location} needs ${numNeededTracers} contact tracing 
+      staff to trace all new cases in 48 hours, before too many other people
+      are infected. This means that ${location} is likely able to trace 
+      ${contactTracingRate} of new COVID infections in 48 hours. ${outcomesAtLevel}`}
+    </Fragment>
+  );
 }
 
 export const CONTACT_TRACING_DISCLAIMER = `that at least 90% of contacts for each new case must be traced within 48 hours in order to contain COVID. Experts estimate that tracing each new case within 48 hours requires an average of ${TRACERS_NEEDED_PER_CASE} contact tracers per new case, as well as fast testing.`;
