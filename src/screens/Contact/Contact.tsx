@@ -48,11 +48,6 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
       </Header>
       <Content>
         <StapledSidebar sidebar={sidebar}>
-          <SectionHeader variant="body1" component="p">
-            See our <a href="/about#faq">FAQ here</a>. If you have more
-            questions, please reach out to us at the email addresses below.
-          </SectionHeader>
-
           <SectionHeader variant="h4" component="h2" id="general">
             General Questions
           </SectionHeader>
@@ -78,9 +73,9 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
             .
           </Paragraph>
           <Paragraph>
-            For customized modeling, see our COVID Response Simulator{' '}
+            For customized modeling, see our{' '}
             <ExternalLink href="https://covidactnow.org/resources">
-              here
+              COVID Response Simulator
             </ExternalLink>
             .
           </Paragraph>
@@ -114,9 +109,9 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
             <ListItem>JavaScript/React, Python engineers</ListItem>
             <ListItem>Epidemiologists</ListItem>
             <ListItem>Data Modelers</ListItem>
+            <ListItem>User Support Representatives</ListItem>
             <ListItem>Product Managers</ListItem>
             <ListItem>Social Media Managers</ListItem>
-            <ListItem>User Support Representatives</ListItem>
             <ListItem>...and more!</ListItem>
           </ul>
           <Paragraph>
@@ -161,7 +156,7 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
             We are a registered 501c3 non-profit. You can help us keep the
             lights on by making{' '}
             <ExternalLink href="https://www.gofundme.com/f/qtcuvy-covid-act-now">
-              a 100% tax-dedudicble donation to our GoFundMe
+              a 100% tax-deductible donation to our GoFundMe
             </ExternalLink>
             , or{' '}
             <ExternalLink href="mailto:info@covidactnow.org">
