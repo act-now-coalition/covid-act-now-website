@@ -63,7 +63,7 @@ export function formatLocalDate(date: Date, format: string = 'LL'): string {
  * adds commas for thousands, millions, etc.
  */
 export function formatInteger(num: number): string {
-  return num.toLocaleString();
+  return Math.round(num).toLocaleString();
 }
 
 /**
