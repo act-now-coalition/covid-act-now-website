@@ -174,7 +174,7 @@ const ChartsHolder = (props: {
               stateId={props.stateId}
               stateName={props.projections.stateName}
               county={props.county}
-              locationsViewable={7}
+              locationsViewable={10}
               isLocationPage
             />
             <MainContentInner>

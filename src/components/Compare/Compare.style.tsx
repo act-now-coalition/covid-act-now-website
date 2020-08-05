@@ -13,11 +13,11 @@ export const Wrapper = styled.div<{ isModal?: Boolean }>`
   width: 100%;
   margin: ${({ isModal }) => (isModal ? '0 auto' : '3rem auto')};
   background: white;
-  max-height: 100vh;
+  max-height: ${({ isModal }) => isModal && '100vh'};
   overflow-y: scroll;
 
   @media (min-width: 600px) {
-    max-height: ${({ isModal }) => (isModal ? '90vh' : 'unset')};
+    max-height: ${({ isModal }) => (isModal ? '80vh' : 'unset')};
   }
 
   @media (min-width: 1060px) {
@@ -52,11 +52,12 @@ export const StyledTable = styled(Table)<{ isModal?: Boolean }>`
   border: ${({ isModal }) => !isModal && '1px solid #f2f2f2'};
 `;
 
-export const Cell = styled(TableCell)``;
+export const Cell = styled(TableCell)<{ locationHeaderCell?: Boolean }>`
+  cursor: ${({ locationHeaderCell }) => !locationHeaderCell && 'pointer'};
+`;
 
 export const TableHeadContainer = styled(TableHead)<{ isModal?: Boolean }>`
   ${Cell} {
-    cursor: pointer;
     vertical-align: bottom;
     line-height: 1.1rem;
     padding: 1rem 1rem 0.8rem;
@@ -82,6 +83,9 @@ export const MetricCell = styled.td<{
 
   &:first-child {
     cursor: pointer;
+    &:hover {
+      color: ${COLOR_MAP.BLUE};
+    }
   }
 
   &:nth-child(2) {
@@ -105,7 +109,7 @@ export const MetricCell = styled.td<{
   span {
     font-family: Source Code Pro;
     color: ${COLOR_MAP.GRAY_BODY_COPY};
-    margin-right: 0.875rem;
+    margin-right: 0.75rem;
   }
 
   &:last-child {
@@ -118,11 +122,10 @@ export const MetricCell = styled.td<{
 
 export const Row = styled(TableRow)<{
   index?: number;
-  tableHeader?: Boolean;
   isCurrentCounty?: Boolean;
 }>`
-  background-color: ${({ index, tableHeader }) =>
-    tableHeader ? 'white' : index && index % 2 ? 'white' : '#fafafa'};
+  background-color: ${({ index }) =>
+    !index ? 'white' : index && index % 2 ? 'white' : '#fafafa'};
   background-color: ${({ isCurrentCounty }) => isCurrentCounty && '#FFEFD6'};
   border-bottom: none;
 
@@ -142,7 +145,6 @@ export const ArrowContainer = styled.div<{
   metric?: Metric;
   arrowColorSelected: string;
   arrowColorNotSelected: string;
-  sortOverallRisk: Boolean;
   isLocationHeader?: Boolean;
 }>`
   color: #bdbdbd;
@@ -164,12 +166,11 @@ export const ArrowContainer = styled.div<{
         metric,
         arrowColorSelected,
         arrowColorNotSelected,
-        sortOverallRisk,
         isLocationHeader,
       }) =>
-        sortOverallRisk && isLocationHeader && !sortDescending
+        isLocationHeader && !sortDescending
           ? `${arrowColorSelected}`
-          : !sortOverallRisk && !sortDescending && sorter === metric
+          : !sortDescending && sorter === metric
           ? `${arrowColorSelected}`
           : `${arrowColorNotSelected}`};
     }
@@ -181,14 +182,17 @@ export const ArrowContainer = styled.div<{
         metric,
         arrowColorSelected,
         arrowColorNotSelected,
-        sortOverallRisk,
         isLocationHeader,
       }) =>
-        sortOverallRisk && isLocationHeader && sortDescending
+        isLocationHeader && sortDescending
           ? `${arrowColorSelected}`
-          : !sortOverallRisk && sortDescending && sorter === metric
+          : sortDescending && sorter === metric
           ? `${arrowColorSelected}`
           : `${arrowColorNotSelected}`};
+    }
+
+    &:hover {
+      color: black;
     }
   }
 `;

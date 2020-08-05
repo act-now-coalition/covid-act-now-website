@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { TableBody } from '@material-ui/core';
 import {
   Wrapper,
   StyledTable,
-  ArrowContainer,
   TableHeadContainer,
   Row,
   Cell,
@@ -13,27 +12,28 @@ import {
 } from 'components/Compare/Compare.style';
 import CompareTableRow from 'components/Compare/CompareTableRow';
 import HeaderCell from 'components/Compare/HeaderCell';
-import { getLocationNames, Location } from 'common/locations';
-import {
-  stateSummary,
-  countySummary,
-  LocationSummary,
-} from 'common/location_summaries';
+import { Location } from 'common/locations';
+import { countySummary, LocationSummary } from 'common/location_summaries';
 import { Metric } from 'common/metric';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { COLOR_MAP } from 'common/colors';
-import { fail } from 'common/utils';
-
-const locations: any = getLocationNames();
+import { sortBy, findIndex } from 'lodash';
+import { getStatesArr, getCountiesArr } from 'common/utils/compare';
 
 export interface SummaryForCompare {
   locationInfo: Location;
   metricsInfo: LocationSummary;
 }
 
+const scrollTo = (div: null | HTMLDivElement) =>
+  div &&
+  window.scrollTo({
+    left: 0,
+    top: div.offsetTop - 75,
+    behavior: 'smooth',
+  });
+
 const CompareTable = (props: {
-  stateId?: string;
+  stateId: string;
   stateName?: string;
   county?: any | null;
   setShowModal: any;
@@ -44,8 +44,6 @@ const CompareTable = (props: {
 }) => {
   const [sorter, setSorter] = useState(5);
   const [sortDescending, setSortDescending] = useState(true);
-  const [sortOverallRisk, setSortOverallRisk] = useState(false);
-  const [currentCountyIndex, setCurrentCountyIndex] = useState(0);
 
   const orderedMetrics = [
     Metric.CASE_DENSITY,
@@ -55,34 +53,8 @@ const CompareTable = (props: {
     Metric.CONTACT_TRACING,
   ];
 
-  const statesArr = locations
-    .filter((location: Location) => !location.county)
-    .map((stateInfo: Location) => {
-      if (stateInfo.state_code) {
-        return {
-          locationInfo: stateInfo,
-          metricsInfo: stateSummary(stateInfo.state_code),
-        };
-      } else {
-        fail('No state code');
-      }
-    });
-
-  const countiesArr = locations
-    .filter(
-      (location: Location) =>
-        location.county && location.state_code === props.stateId,
-    )
-    .map((countyInfo: Location) => {
-      if (countyInfo.full_fips_code) {
-        return {
-          locationInfo: countyInfo,
-          metricsInfo: countySummary(countyInfo.full_fips_code),
-        };
-      } else {
-        fail('No county fips');
-      }
-    });
+  const statesArr = getStatesArr();
+  const countiesArr = getCountiesArr(props.stateId);
 
   const currentCounty: any = props.county
     ? {
@@ -95,46 +67,28 @@ const CompareTable = (props: {
     ? currentCounty.locationInfo.full_fips_code
     : 0;
 
-  useEffect(() => {
-    if (props.county) {
-      countiesArr.forEach((county: any, i: number) => {
-        if (
-          county.locationInfo.full_fips_code &&
-          county.locationInfo.full_fips_code === currentCountyFips
-        ) {
-          setCurrentCountyIndex(i);
-        }
-      });
-    }
-  }, [sorter, sortDescending, props.county, countiesArr, currentCountyFips]);
-
   const locationsArr = props.isHomepage ? statesArr : countiesArr;
 
-  locationsArr.sort((a: any, b: any) => {
-    if (a.metricsInfo.metrics && b.metricsInfo.metrics) {
-      if (
-        a.metricsInfo.metrics[sorter].value >
-        b.metricsInfo.metrics[sorter].value
-      ) {
-        return 1;
-      } else {
-        return -1;
-      }
-    }
-  });
-
-  if (sortOverallRisk) {
-    sortByOverallRisk();
-  }
-
-  if (sortDescending) {
-    locationsArr.reverse();
-  }
-
-  const [locationsViewable, setLocationsViewable] = useState(
-    props.locationsViewable || locationsArr.length,
+  const sortedLocationsArr = sortBy(
+    locationsArr,
+    location => location.metricsInfo.metrics[sorter].value,
   );
 
+  if (sortDescending) {
+    sortedLocationsArr.reverse();
+  }
+
+  const currentCountyRank = findIndex(
+    sortedLocationsArr,
+    (location: SummaryForCompare) =>
+      location.locationInfo.full_fips_code === currentCountyFips,
+  );
+
+  const [locationsViewable, setLocationsViewable] = useState(
+    props.locationsViewable || sortedLocationsArr.length,
+  );
+
+  //TODO (chelsi): make this a theme-
   const arrowColorSelected = props.isModal ? 'white' : 'black';
   const arrowColorNotSelected = props.isModal
     ? `${COLOR_MAP.GRAY_BODY_COPY}`
@@ -145,15 +99,32 @@ const CompareTable = (props: {
     sorter,
     arrowColorSelected,
     arrowColorNotSelected,
-    sortOverallRisk,
+  };
+
+  const tableRef = useRef<HTMLDivElement>(null);
+
+  const scrollToTable = () => {
+    if (tableRef.current) {
+      scrollTo(tableRef.current);
+    }
+  };
+
+  // delay allows page to scroll back up to the table header before collpasing to 10 rows
+  // makes table collpasing look smoother
+  const viewLess = () => {
+    const timeoutId = setTimeout(() => {
+      setLocationsViewable(10);
+    }, 400);
+    return () => clearTimeout(timeoutId);
   };
 
   const viewAllOnClick = () => {
     if (props.isHomepage) {
-      if (locationsViewable === locationsArr.length) {
-        setLocationsViewable(25);
+      if (locationsViewable === sortedLocationsArr.length) {
+        scrollToTable();
+        viewLess();
       } else {
-        setLocationsViewable(locationsArr.length);
+        setLocationsViewable(sortedLocationsArr.length);
       }
     } else {
       props.setShowModal(true);
@@ -168,52 +139,21 @@ const CompareTable = (props: {
     ? 'Compare to other counties'
     : 'Compare counties';
 
-  function alph(a: SummaryForCompare, b: SummaryForCompare) {
-    const aToCompare = a.locationInfo.county
-      ? a.locationInfo.county.toUpperCase()
-      : a.locationInfo.state_code;
-    const bToCompare = b.locationInfo.county
-      ? b.locationInfo.county.toUpperCase()
-      : b.locationInfo.state_code;
-    if (sortDescending) {
-      return aToCompare > bToCompare ? -1 : aToCompare < bToCompare ? 1 : 0;
-    } else {
-      return aToCompare < bToCompare ? -1 : aToCompare > bToCompare ? 1 : 0;
-    }
-  }
-
-  function sortByOverallRisk() {
-    locationsArr.sort((a: any, b: any) => {
-      if (a.metricsInfo.level > b.metricsInfo.level) {
-        return 1;
-      }
-      if (a.metricsInfo.level < b.metricsInfo.level) {
-        return -1;
-      } else {
-        return alph(a, b);
-      }
-    });
-  }
+  // checks if there are less counties than the default amount shown (10):
+  const amountDisplayed =
+    props.locationsViewable &&
+    sortedLocationsArr.length < props.locationsViewable
+      ? sortedLocationsArr.length
+      : props.locationsViewable;
 
   return (
-    <Wrapper isModal={props.isModal}>
+    <Wrapper isModal={props.isModal} ref={tableRef}>
       {!props.isModal && <Header>{headerCopy}</Header>}
       <StyledTable isModal={props.isModal} stickyHeader={useStickyHeader}>
         <TableHeadContainer isModal={props.isModal}>
-          <Row tableHeader={true}>
-            <Cell onClick={() => setSortOverallRisk(true)}>
-              <span
-                onClick={() => {
-                  setSortDescending(!sortDescending);
-                }}
-              >
-                {props.isHomepage ? 'State' : 'County'}
-              </span>
-              <ArrowContainer {...arrowContainerProps} isLocationHeader>
-                <ExpandLessIcon onClick={() => setSortDescending(false)} />
-                <ExpandMoreIcon onClick={() => setSortDescending(true)} />
-                <span>OVERALL RISK LEVEL</span>
-              </ArrowContainer>
+          <Row>
+            <Cell locationHeaderCell={true}>
+              <span>{props.isHomepage ? 'State' : 'County'}</span>
             </Cell>
             {orderedMetrics.map((metricInMap: any, i: number) => {
               return (
@@ -222,7 +162,6 @@ const CompareTable = (props: {
                   setSorter={setSorter}
                   setSortDescending={setSortDescending}
                   {...arrowContainerProps}
-                  setSortOverallRisk={setSortOverallRisk}
                 />
               );
             })}
@@ -234,11 +173,11 @@ const CompareTable = (props: {
               isCurrentCounty
               location={currentCounty}
               sorter={sorter}
-              index={currentCountyIndex}
+              index={currentCountyRank}
             />
           )}
-          {locationsArr &&
-            locationsArr
+          {sortedLocationsArr &&
+            sortedLocationsArr
               .slice(0, locationsViewable)
               .map((location: any, i: number) => {
                 if (
@@ -260,14 +199,14 @@ const CompareTable = (props: {
       {!props.isModal && (
         <Footer>
           <span>
-            {props.isHomepage && locationsViewable === locationsArr.length
+            {props.isHomepage && locationsViewable === sortedLocationsArr.length
               ? ''
-              : `Displaying 1-${props.locationsViewable}`}
+              : `Displaying 1-${amountDisplayed} of ${sortedLocationsArr.length}`}
           </span>
           <ViewAllLink onClick={viewAllOnClick}>
             {!props.isHomepage
-              ? `View all counties in ${props.stateName} (${locationsArr.length})`
-              : locationsViewable === locationsArr.length
+              ? `View all counties in ${props.stateName}`
+              : locationsViewable === sortedLocationsArr.length
               ? 'View less'
               : 'View all states'}
           </ViewAllLink>

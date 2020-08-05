@@ -4,11 +4,11 @@ import { Modal } from '@material-ui/core';
 import ModalCompare from 'components/Compare/ModalCompare';
 
 const CompareMain = (props: {
-  stateId?: string;
+  stateId: string;
   stateName?: string;
   county: any | null;
   isModal?: Boolean;
-  locationsViewable?: number;
+  locationsViewable: number;
   isLocationPage?: Boolean;
   isHomepage?: Boolean;
 }) => {

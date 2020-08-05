@@ -52,9 +52,11 @@ const CompareTableRow = (props: {
     );
   };
 
-  const locationName = location.locationInfo.county
-    ? location.locationInfo.county
-    : location.locationInfo.state;
+  const locationName = !location.locationInfo.county
+    ? location.locationInfo.state
+    : location.locationInfo.county.includes('Parish')
+    ? location.locationInfo.county.replace('Parish', 'Par.')
+    : location.locationInfo.county.replace('County', 'Co.');
 
   return (
     <Row index={index} isCurrentCounty={isCurrentCounty}>

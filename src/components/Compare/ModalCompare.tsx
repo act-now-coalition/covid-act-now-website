@@ -5,7 +5,7 @@ import CloseIcon from '@material-ui/icons/Close';
 
 //TODO(chelsi) - remove ? from stateName and stateId
 const ModalCompare = (props: {
-  stateId?: string;
+  stateId: string;
   stateName?: string;
   county: any | null;
   setShowModal: any;
