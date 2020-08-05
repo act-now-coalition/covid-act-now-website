@@ -95,12 +95,6 @@ export function getMetricDisclaimer(metric: Metric) {
   return METRIC_TO_DISCLAIMER[metric];
 }
 
-// CASE_GROWTH_RATE,
-// POSITIVE_TESTS,
-// HOSPITAL_USAGE,
-// CONTACT_TRACING,
-// FUTURE_PROJECTIONS,
-// CASE_DENSITY,
 const metricDefinitions: { [metric in Metric]: MetricDefinition } = {
   [Metric.CASE_GROWTH_RATE]: CaseGrowth.metricCaseGrowth,
   [Metric.POSITIVE_TESTS]: TestRates.metricPositiveTestRate,
