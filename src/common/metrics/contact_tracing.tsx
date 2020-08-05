@@ -70,19 +70,23 @@ export const CONTACT_TRACING_LEVEL_INFO_MAP: LevelInfoMap = {
 };
 
 export function renderStatus(projection: Projection): React.ReactElement {
-  const { currentContactTracers, locationName } = projection;
-  const weeklyAverageResult = projection.currentDailyAverageCases;
+  const {
+    currentContactTracers,
+    currentContactTracerMetric,
+    locationName,
+    currentDailyAverageCases,
+  } = projection;
+
   const currentWeeklyAverage =
-    weeklyAverageResult && Math.round(weeklyAverageResult);
-  const currentContactTracingMetric = projection.currentContactTracerMetric;
+    currentDailyAverageCases && Math.round(currentDailyAverageCases);
+
   if (
-    currentContactTracingMetric === null ||
+    currentContactTracerMetric === null ||
     currentContactTracers === null ||
     currentWeeklyAverage === null
   ) {
     return <Fragment>No contact tracing data is available.</Fragment>;
   }
-  const level = getLevel(Metric.CONTACT_TRACING, currentContactTracingMetric);
 
   const numTracers = formatInteger(currentContactTracers);
   const weeklyAverage = formatInteger(currentWeeklyAverage);
@@ -90,12 +94,13 @@ export function renderStatus(projection: Projection): React.ReactElement {
     currentWeeklyAverage * TRACERS_NEEDED_PER_CASE,
   );
 
+  const level = getLevel(Metric.CONTACT_TRACING, currentContactTracerMetric);
   const contactTracingRate = levelText(
     level,
-    `only ${formatPercent(currentContactTracingMetric)}`,
-    `only ${formatPercent(currentContactTracingMetric)}`,
-    `${formatPercent(currentContactTracingMetric)}`,
-    `${formatPercent(currentContactTracingMetric)}`,
+    `only ${formatPercent(currentContactTracerMetric)}`,
+    `only ${formatPercent(currentContactTracerMetric)}`,
+    `${formatPercent(currentContactTracerMetric)}`,
+    `${formatPercent(currentContactTracerMetric)}`,
   );
 
   const outcomesAtLevel = levelText(

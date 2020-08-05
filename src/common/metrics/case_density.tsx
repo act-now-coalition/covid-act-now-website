@@ -53,8 +53,17 @@ export const CASE_DENSITY_LEVEL_INFO_MAP: LevelInfoMap = {
 export const CASE_DENSITY_DISCLAIMER = '';
 
 export function renderStatus(projection: Projection): React.ReactElement {
-  const { locationName, currentCaseDensity, totalPopulation } = projection;
-  if (currentCaseDensity === null || totalPopulation === null) {
+  const {
+    locationName,
+    currentCaseDensity,
+    totalPopulation,
+    currentDailyAverageCases,
+  } = projection;
+  if (
+    currentCaseDensity === null ||
+    totalPopulation === null ||
+    currentDailyAverageCases === null
+  ) {
     return (
       <Fragment>
         Not enough case data is available to generate{' '}
@@ -64,26 +73,25 @@ export function renderStatus(projection: Projection): React.ReactElement {
   }
 
   const ESTIMATE_FACTOR = 5;
-
-  const dailyCasesPer100k = currentCaseDensity;
-  const yearlyCasesPer100k = dailyCasesPer100k * 365;
-  const yearlyEstimatedInfectionsPer100k = ESTIMATE_FACTOR * yearlyCasesPer100k;
-  const estimatedPercentOfPopulationInfectedYear = Math.min(
+  const newCasesPerDay = currentDailyAverageCases;
+  const newCasesPerYear = 365 * newCasesPerDay;
+  const estimatedNewInfectionsPerYear = ESTIMATE_FACTOR * newCasesPerYear;
+  const estimatedPercentageNewInfectedPerYear = Math.min(
     1,
-    (100e3 * yearlyEstimatedInfectionsPer100k) / totalPopulation,
+    estimatedNewInfectionsPerYear / totalPopulation,
   );
 
   return (
     <Fragment>
       Over the last week, {locationName} has averaged{' '}
-      {formatDecimal(dailyCasesPer100k, 1)} new confirmed cases per day for
-      every 100,000 residents. Over the next year this translates to{' '}
-      {formatInteger(yearlyCasesPer100k)} cases and an{' '}
+      {formatDecimal(currentCaseDensity, 1)} new confirmed cases per day for
+      every 100,000 residents. Over the next year, this translates to{' '}
+      {formatInteger(newCasesPerYear)} cases and an{' '}
       <ExternalLink href="https://www.globalhealthnow.org/2020-06/us-cases-10x-higher-reported">
         estimated
       </ExternalLink>{' '}
-      {formatInteger(yearlyEstimatedInfectionsPer100k)} infections (
-      {formatPercent(estimatedPercentOfPopulationInfectedYear, 1)} of the
+      {formatInteger(estimatedNewInfectionsPerYear)} infections (
+      {formatPercent(estimatedPercentageNewInfectedPerYear, 1)} of the
       population).
     </Fragment>
   );

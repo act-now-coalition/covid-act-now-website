@@ -88,10 +88,7 @@ export function renderStatus(projection: Projection): React.ReactElement {
     );
   }
 
-  const level = getLevel(Metric.HOSPITAL_USAGE, icu.metricValue);
-
   const totalICUBeds = formatInteger(icu.totalBeds);
-
   const nonCovidUsedBeds = formatInteger(icu.nonCovidPatients);
   const nonCovidUsedBedsPercent = formatPercent(
     icu.nonCovidPatients / icu.totalBeds,
@@ -114,6 +111,7 @@ export function renderStatus(projection: Projection): React.ReactElement {
 
   const textWeEstimate = icu.covidPatientsIsActual ? '' : 'we estimate';
 
+  const level = getLevel(Metric.HOSPITAL_USAGE, icu.metricValue);
   const textLevel = levelText(
     level,
     'This suggests there is likely enough capacity to absorb a wave of new COVID infections',

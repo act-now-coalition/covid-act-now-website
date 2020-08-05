@@ -72,8 +72,8 @@ export const CASE_GROWTH_DISCLAIMER =
   'Each data point is a 14-day weighted average. We present the most recent seven days of data as a dashed line, as data is often revised by states several days after reporting.';
 
 export function renderStatus(projection: Projection): React.ReactElement {
-  const { locationName } = projection;
-  const rt = projection.rt!;
+  const { locationName, rt } = projection;
+
   if (rt === null) {
     return (
       <Fragment>
@@ -81,8 +81,8 @@ export function renderStatus(projection: Projection): React.ReactElement {
       </Fragment>
     );
   }
+
   const level = getLevel(Metric.CASE_GROWTH_RATE, rt);
-  const additionalPeople = formatDecimal(rt);
   const epidemiologyReasoning = levelText(
     level,
     `Because each person is infecting less than one other person, the total number of current cases in ${locationName} is shrinking.`,
@@ -94,7 +94,7 @@ export function renderStatus(projection: Projection): React.ReactElement {
   return (
     <Fragment>
       On average, each person in {locationName} with COVID is infecting
-      {additionalPeople} other people. {epidemiologyReasoning}
+      {formatDecimal(rt)} other people. {epidemiologyReasoning}
     </Fragment>
   );
 }
