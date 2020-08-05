@@ -5,6 +5,11 @@ import { levelText } from 'common/utils/chart';
 import { getLevel, Metric } from 'common/metric';
 import { formatPercent, formatInteger } from 'common/utils';
 import { Projection, TRACERS_NEEDED_PER_CASE } from 'common/models/Projection';
+import { MetricDefinition } from './interfaces';
+
+export const metricContactTracing: MetricDefinition = {
+  renderStatus,
+};
 
 export const METRIC_NAME = 'Contacts traced';
 
@@ -64,8 +69,8 @@ export const CONTACT_TRACING_LEVEL_INFO_MAP: LevelInfoMap = {
   },
 };
 
-export function renderStatusText(projection: Projection): React.ReactElement {
-  const currentContactTracers = projection.currentContactTracers;
+export function renderStatus(projection: Projection): React.ReactElement {
+  const { currentContactTracers, locationName } = projection;
   const weeklyAverageResult = projection.currentDailyAverageCases;
   const currentWeeklyAverage =
     weeklyAverageResult && Math.round(weeklyAverageResult);
@@ -77,7 +82,6 @@ export function renderStatusText(projection: Projection): React.ReactElement {
   ) {
     return <Fragment>No contact tracing data is available.</Fragment>;
   }
-  const location = projection.locationName;
   const level = getLevel(Metric.CONTACT_TRACING, currentContactTracingMetric);
 
   const numTracers = formatInteger(currentContactTracers);
@@ -96,20 +100,21 @@ export function renderStatusText(projection: Projection): React.ReactElement {
 
   const outcomesAtLevel = levelText(
     level,
-    `These low levels of tracing suggest there may be an active outbreak underway in ${location}, or almost no tracing capacity exists. Aggressive action urgently needed.`,
-    `These low levels of tracing suggest there may be an active outbreak underway in ${location}, or that little tracing capacity exists. Strong caution warranted.`,
-    `At these lower levels of tracing, it is unlikely ${location} will be able to successfully identify and isolate sources of disease spread fast enough to prevent new outbreaks.`,
+    `These low levels of tracing suggest there may be an active outbreak underway in ${locationName}, or almost no tracing capacity exists. Aggressive action urgently needed.`,
+    `These low levels of tracing suggest there may be an active outbreak underway in ${locationName}, or that little tracing capacity exists. Strong caution warranted.`,
+    `At these lower levels of tracing, it is unlikely ${locationName} will be able to successfully identify and isolate sources of disease spread fast enough to prevent new outbreaks.`,
     'When this level of tracing is coupled with widely available testing, COVID can be contained without resorting to lockdowns.',
   );
 
   return (
     <Fragment>
-      {`Per best available data, ${location} has ${numTracers} contact 
-      tracers. With an average of ${weeklyAverage} new daily cases,
-      we estimate ${location} needs ${numNeededTracers} contact tracing 
-      staff to trace all new cases in 48 hours, before too many other people
-      are infected. This means that ${location} is likely able to trace 
-      ${contactTracingRate} of new COVID infections in 48 hours. ${outcomesAtLevel}`}
+      Per best available data, {locationName} has ${numTracers} contact tracers.
+      With an average of {weeklyAverage} new daily cases, we estimate{' '}
+      {locationName} needs {numNeededTracers} contact tracing staff to trace all
+      new cases in 48 hours, before too many other people are infected. This
+      means that {locationName} is likely able to trace
+      {contactTracingRate} of new COVID infections in 48 hours.{' '}
+      {outcomesAtLevel}
     </Fragment>
   );
 }

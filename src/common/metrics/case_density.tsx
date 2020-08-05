@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
 import { Projection } from 'common/models/Projection';
-import { getLevel, Metric } from 'common/metric';
 import { formatDecimal, formatPercent, formatInteger } from 'common/utils';
 import ExternalLink from 'components/ExternalLink';
+import { MetricDefinition } from './interfaces';
+
+export const metricCaseIncidence: MetricDefinition = {
+  renderStatus,
+};
 
 export const METRIC_NAME = 'Daily new cases per 100k population';
 
@@ -48,54 +52,39 @@ export const CASE_DENSITY_LEVEL_INFO_MAP: LevelInfoMap = {
 
 export const CASE_DENSITY_DISCLAIMER = '';
 
-export function renderStatusText(projection: Projection): React.ReactElement {
-  const {
-    locationName,
-    currentCaseDensity,
-    currentDailyDeaths,
-    totalPopulation,
-  } = projection;
-  if (
-    currentCaseDensity === null ||
-    currentDailyDeaths === null ||
-    totalPopulation === null
-  ) {
+export function renderStatus(projection: Projection): React.ReactElement {
+  const { locationName, currentCaseDensity, totalPopulation } = projection;
+  if (currentCaseDensity === null || totalPopulation === null) {
     return (
-      <React.Fragment>
-        {`Not enough case data is available to generate ${METRIC_NAME.toLowerCase()}.`}
-      </React.Fragment>
+      <Fragment>
+        Not enough case data is available to generate{' '}
+        {METRIC_NAME.toLowerCase()}.
+      </Fragment>
     );
   }
-  const dailyCases = formatDecimal(currentCaseDensity, 1);
-  const level = getLevel(Metric.CASE_DENSITY, currentCaseDensity);
 
-  const levelFactor = {
-    [Level.LOW]: 1,
-    [Level.MEDIUM]: 10,
-    [Level.HIGH]: 20,
-    [Level.CRITICAL]: 100,
-    [Level.UNKNOWN]: 0,
-  };
+  const ESTIMATE_FACTOR = 5;
 
-  const casesPerYear = currentCaseDensity * 356 * levelFactor[level];
-  const casesPerYearText = formatInteger(casesPerYear);
-  const estimatedCasesPerYear = casesPerYear * 5;
-  const estimatedCasesPerYearText = formatInteger(estimatedCasesPerYear);
-  const percentOfPopulation = Math.min(
+  const dailyCasesPer100k = currentCaseDensity;
+  const yearlyCasesPer100k = dailyCasesPer100k * 365;
+  const yearlyEstimatedInfectionsPer100k = ESTIMATE_FACTOR * yearlyCasesPer100k;
+  const estimatedPercentOfPopulationInfectedYear = Math.min(
     1,
-    estimatedCasesPerYear / totalPopulation,
+    (100e3 * yearlyEstimatedInfectionsPer100k) / totalPopulation,
   );
-  const percentOfPopulationText = formatPercent(percentOfPopulation, 1);
 
   return (
-    <React.Fragment>
-      {`Over the last week, ${locationName} has averaged ${dailyCases} new
-        confirmed cases per day for every 100,000 residents. Over the next 
-        year this translates to ${casesPerYearText} cases and an`}{' '}
+    <Fragment>
+      Over the last week, {locationName} has averaged{' '}
+      {formatDecimal(dailyCasesPer100k, 1)} new confirmed cases per day for
+      every 100,000 residents. Over the next year this translates to{' '}
+      {formatInteger(yearlyCasesPer100k)} cases and an{' '}
       <ExternalLink href="https://www.globalhealthnow.org/2020-06/us-cases-10x-higher-reported">
         estimated
       </ExternalLink>{' '}
-      {`${estimatedCasesPerYearText} infections (${percentOfPopulationText} of the population).`}
-    </React.Fragment>
+      {formatInteger(yearlyEstimatedInfectionsPer100k)} infections (
+      {formatPercent(estimatedPercentOfPopulationInfectedYear, 1)} of the
+      population).
+    </Fragment>
   );
 }

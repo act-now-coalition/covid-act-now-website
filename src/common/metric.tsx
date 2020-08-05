@@ -5,9 +5,8 @@ import * as ContactTracing from 'common/metrics/contact_tracing';
 import * as FutureProjections from 'common/metrics/future_projection';
 import * as CaseDensity from 'common/metrics/case_density';
 import { Projection } from 'common/models/Projection';
-
 import { Level, LevelInfo } from 'common/level';
-import { assert } from './utils';
+import { fail, assert } from 'common/utils';
 
 export enum Metric {
   CASE_GROWTH_RATE,
@@ -98,16 +97,16 @@ export function getMetricDisclaimer(metric: Metric) {
 export function getMetricStatusText(metric: Metric, projection: Projection) {
   switch (metric) {
     case Metric.CASE_GROWTH_RATE:
-      return CaseGrowth.renderStatusText(projection);
+      return CaseGrowth.renderStatus(projection);
     case Metric.POSITIVE_TESTS:
-      return TestRates.renderStatusText(projection);
+      return TestRates.renderStatus(projection);
     case Metric.HOSPITAL_USAGE:
-      return Hospitalizations.renderStatusText(projection);
+      return Hospitalizations.renderStatus(projection);
     case Metric.CONTACT_TRACING:
-      return ContactTracing.renderStatusText(projection);
+      return ContactTracing.renderStatus(projection);
     case Metric.CASE_DENSITY:
-      return CaseDensity.renderStatusText(projection);
+      return CaseDensity.renderStatus(projection);
     default:
-      return null;
+      return fail('unknown metric');
   }
 }

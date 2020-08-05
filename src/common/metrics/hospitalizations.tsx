@@ -6,6 +6,11 @@ import { getLevel, Metric } from 'common/metric';
 import { formatPercent, formatInteger } from 'common/utils';
 import { Projection } from 'common/models/Projection';
 import { NonCovidPatientsMethod } from 'common/models/ICUHeadroom';
+import { MetricDefinition } from './interfaces';
+
+export const metricICUHeadroom: MetricDefinition = {
+  renderStatus,
+};
 
 export const METRIC_NAME = 'ICU headroom used';
 export const STATES_WITH_DATA_OVERRIDES = ['Nevada'];
@@ -68,8 +73,9 @@ export const HOSPITAL_USAGE_LEVEL_INFO_MAP: LevelInfoMap = {
 export const HOSPITALIZATIONS_DISCLAIMER =
   ', a pandemic think tank, recommends that hospitals maintain enough ICU capacity to double the number of COVID patients hospitalized.';
 
-export function renderStatusText(projection: Projection): React.ReactElement {
+export function renderStatus(projection: Projection): React.ReactElement {
   const icu = projection.icuHeadroomInfo;
+  const { locationName } = projection;
 
   if (icu === null) {
     return <Fragment>No ICU occupancy data is available.</Fragment>;
@@ -83,8 +89,6 @@ export function renderStatusText(projection: Projection): React.ReactElement {
   }
 
   const level = getLevel(Metric.HOSPITAL_USAGE, icu.metricValue);
-
-  const location = projection.locationName;
 
   const totalICUBeds = formatInteger(icu.totalBeds);
 
@@ -120,11 +124,11 @@ export function renderStatusText(projection: Projection): React.ReactElement {
 
   return (
     <Fragment>
-      {`${location} has about ${totalICUBeds} ICU beds. Based on best available 
-      data, ${textWeEstimateThatNonCovidPatients} are currently occupied by 
-      non-COVID patients. Of the ${remainingICUBeds} ICU beds remaining, 
-      ${textWeEstimate} ${covidICUPatients} are needed by COVID cases, or ${icuHeadroom} 
-      of available beds. ${textLevel}.`}
+      {locationName} has about {totalICUBeds} ICU beds. Based on best available
+      data, {textWeEstimateThatNonCovidPatients} are currently occupied by
+      non-COVID patients. Of the {remainingICUBeds} ICU beds remaining,{' '}
+      {textWeEstimate} {covidICUPatients} are needed by COVID cases, or{' '}
+      {icuHeadroom} of available beds. {textLevel}.
     </Fragment>
   );
 }
