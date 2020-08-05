@@ -65,7 +65,7 @@ export type DatasetId =
   | 'contractTracers'
   | 'caseDensityByCases'
   | 'caseDensityByDeaths'
-  | 'caseDensityRange';
+  | 'caseDensity';
 
 export interface RtRange {
   /** The actual Rt value. */
@@ -141,7 +141,7 @@ export class Projection {
   private readonly contractTracers: Array<number | null>;
   private readonly caseDensityByCases: Array<number | null>;
   private readonly caseDensityByDeaths: Array<number | null>;
-  private readonly caseDensityRange: Array<CaseDensityRange | null>;
+  private readonly caseDensity: Array<number | null>;
   private readonly smoothedDailyDeaths: Array<number | null>;
 
   constructor(
@@ -231,13 +231,11 @@ export class Projection {
 
     this.caseDensityByCases = this.calcCaseDensityByCases();
     this.caseDensityByDeaths = this.calcCaseDensityByDeaths();
-    this.caseDensityRange = this.calcCaseDensityRange();
+    this.caseDensity = this.calcCaseDensity();
 
     this.currentCaseDensityByCases = lastValue(this.caseDensityByCases);
     this.currentCaseDensityByDeaths = lastValue(this.caseDensityByDeaths);
-    this.currentCaseDensity = lastValue(
-      this.caseDensityRange.map(range => range && range.caseDensity),
-    );
+    this.currentCaseDensity = lastValue(this.caseDensity);
     this.currentDailyDeaths = lastValue(this.smoothedDailyDeaths);
 
     this.fixZeros(this.hospitalizations);
@@ -469,12 +467,8 @@ export class Projection {
     });
   }
 
-  private calcCaseDensityRange(): Array<CaseDensityRange | null> {
-    return this.caseDensityByCases.map(caseDensity =>
-      caseDensity === null
-        ? null
-        : { caseDensity, low: caseDensity, high: caseDensity },
-    );
+  private calcCaseDensity(): Array<number | null> {
+    return this.caseDensityByCases;
   }
 
   private calcRtRange(

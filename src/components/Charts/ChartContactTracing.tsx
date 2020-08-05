@@ -6,10 +6,10 @@ import { formatPercent } from 'common/utils';
 
 const CAP_Y = 1;
 
-const getPointText = (valueY: number) => formatPercent(valueY, 0);
+const formatValue = (value: number) => formatPercent(value, 0);
 
 const getTooltipBody = (valueY: number) =>
-  `Contacts traced ${getPointText(valueY)}`;
+  `Contacts traced ${formatValue(valueY)}`;
 
 const ChartContactTracing = ({
   columnData,
@@ -24,7 +24,8 @@ const ChartContactTracing = ({
     capY={CAP_Y}
     zones={CONTACT_TRACING_LEVEL_INFO_MAP}
     getTooltipBody={getTooltipBody}
-    getPointText={getPointText}
+    getPointText={formatValue}
+    yTickFormat={formatValue}
   />
 );
 

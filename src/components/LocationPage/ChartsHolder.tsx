@@ -228,7 +228,7 @@ export function getChartData(
   const caseDensityData =
     projection?.currentCaseDensityByDeaths == null
       ? null
-      : projection.getDataset('caseDensityRange');
+      : projection.getDataset('caseDensity');
 
   return {
     rtRangeData,

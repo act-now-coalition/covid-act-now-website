@@ -7,7 +7,7 @@ import { Group } from '@vx/group';
 import { ParentSize } from '@vx/responsive';
 import { scaleLinear } from '@vx/scale';
 import { Column } from 'common/models/Projection';
-import { assert, formatUtcDate, formatPercent } from 'common/utils';
+import { assert, formatUtcDate } from 'common/utils';
 import { LevelInfoMap } from 'common/level';
 import RectClipGroup from './RectClipGroup';
 import { AxisBottom, AxisLeft } from './Axis';
@@ -47,6 +47,7 @@ const ChartZones = ({
   capY,
   getTooltipBody,
   getPointText,
+  yTickFormat,
 }: {
   width: number;
   height: number;
@@ -59,6 +60,7 @@ const ChartZones = ({
   marginBottom?: number;
   marginLeft?: number;
   marginRight?: number;
+  yTickFormat: (value: number) => string;
 }) => {
   const chartWidth = width - marginLeft - marginRight;
   const chartHeight = height - marginTop - marginBottom;
@@ -167,7 +169,7 @@ const ChartZones = ({
         hideAxisLine
         hideTicks
         hideZero
-        tickFormat={(num: number) => formatPercent(num, 0)}
+        tickFormat={yTickFormat}
       />
     </ChartContainer>
   );
@@ -180,6 +182,7 @@ const ChartZoneAutosize = ({
   getTooltipBody,
   getPointText,
   height = 400,
+  yTickFormat,
 }: {
   columnData: Point[];
   zones: LevelInfoMap;
@@ -187,6 +190,7 @@ const ChartZoneAutosize = ({
   getTooltipBody: (valueY: number) => string;
   getPointText: (valueY: number) => string;
   height?: number;
+  yTickFormat: (value: number) => string;
 }) => (
   <Style.ChartContainer>
     <ParentSize>
@@ -199,6 +203,7 @@ const ChartZoneAutosize = ({
           capY={capY}
           getTooltipBody={getTooltipBody}
           getPointText={getPointText}
+          yTickFormat={yTickFormat}
         />
       )}
     </ParentSize>

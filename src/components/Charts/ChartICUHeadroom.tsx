@@ -6,12 +6,12 @@ import { formatPercent } from 'common/utils';
 
 const CAP_Y = 1;
 
-const getPointText = (valueY: number) => formatPercent(valueY, 0);
+const formatValue = (valueY: number) => formatPercent(valueY, 0);
 
 const getTooltipBody = (valueY: number) =>
   valueY > CAP_Y
-    ? `ICU headroom used > ${getPointText(CAP_Y)}`
-    : `ICU headroom used ${getPointText(valueY)}`;
+    ? `ICU headroom used > ${formatValue(CAP_Y)}`
+    : `ICU headroom used ${formatValue(valueY)}`;
 
 const ChartICUHeadroom = ({
   columnData,
@@ -26,7 +26,8 @@ const ChartICUHeadroom = ({
     capY={CAP_Y}
     zones={HOSPITAL_USAGE_LEVEL_INFO_MAP}
     getTooltipBody={getTooltipBody}
-    getPointText={getPointText}
+    getPointText={formatValue}
+    yTickFormat={formatValue}
   />
 );
 
