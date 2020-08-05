@@ -1,22 +1,35 @@
+import React, { Fragment } from 'react';
 import { formatUtcDate } from 'common/utils';
 import { Projection } from 'common/models/Projection';
+import { Projections } from 'common/models/Projections';
+import { MetricDefinition } from './interfaces';
+
+export const metricFutureProjection: MetricDefinition = {
+  renderStatus,
+};
 
 export const METRIC_NAME = 'Future hospitalization projections';
 
-export function generateChartDescription(
-  projection: Projection,
-  noInterventionProjection: Projection,
-) {
+export function renderStatus(projections: Projections) {
+  const projection: Projection = projections.primary;
+  const noInterventionProjection = projections.baseline;
+  const { locationName } = projection;
   // TODO(sgoldblatt): figure out how to get people number data from projection
   if (projection.dateOverwhelmed) {
     if (projection.dateOverwhelmed < new Date()) {
-      return `Our projections suggest hospitals in ${projection.locationName} are overloaded.`;
+      return (
+        <Fragment>
+          Our projections suggest hospitals in {locationName} are overloaded.
+        </Fragment>
+      );
     }
-    return `Assuming current trends and interventions continue, ${
-      projection.locationName
-    } hospitals are projected to become overloaded on ${formatUtcDate(
-      projection.dateOverwhelmed,
-    )}. Exercise caution.`;
+    return (
+      <Fragment>
+        Assuming current trends and interventions continue, {locationName}{' '}
+        hospitals are projected to become overloaded on{' '}
+        {formatUtcDate(projection.dateOverwhelmed)}. Exercise caution.
+      </Fragment>
+    );
   } else {
     const noInterventionDate = noInterventionProjection.dateOverwhelmed;
     const restrictionsLiftedText = noInterventionDate
@@ -26,8 +39,11 @@ export function generateChartDescription(
       : `However, any reopening should happen in a slow and phased fashion.`;
 
     return (
-      `Assuming current trends and interventions continue, ${projection.locationName} hospitals are unlikely to become overloaded in the next 30 days. ` +
-      `${restrictionsLiftedText}`
+      <Fragment>
+        Assuming current trends and interventions continue, {locationName}{' '}
+        hospitals are unlikely to become overloaded in the next 30 days.{' '}
+        {restrictionsLiftedText}
+      </Fragment>
     );
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Projection } from 'common/models/Projection';
+import { Projections } from 'common/models/Projections';
 
 export interface MetricDefinition {
-  renderStatus: (projection: Projection) => React.ReactElement;
+  renderStatus: (projections: Projections) => React.ReactElement;
 }

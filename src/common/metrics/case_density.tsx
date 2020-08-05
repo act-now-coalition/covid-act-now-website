@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
-import { Projection } from 'common/models/Projection';
+import { Projections } from 'common/models/Projections';
 import { formatDecimal, formatPercent, formatInteger } from 'common/utils';
 import ExternalLink from 'components/ExternalLink';
 import { MetricDefinition } from './interfaces';
@@ -52,13 +52,13 @@ export const CASE_DENSITY_LEVEL_INFO_MAP: LevelInfoMap = {
 
 export const CASE_DENSITY_DISCLAIMER = '';
 
-export function renderStatus(projection: Projection): React.ReactElement {
+export function renderStatus(projections: Projections): React.ReactElement {
   const {
     locationName,
     currentCaseDensity,
     totalPopulation,
     currentDailyAverageCases,
-  } = projection;
+  } = projections.primary;
   if (
     currentCaseDensity === null ||
     totalPopulation === null ||

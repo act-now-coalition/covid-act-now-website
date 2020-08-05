@@ -4,7 +4,7 @@ import { Level, LevelInfoMap } from 'common/level';
 import { getLevel, Metric } from 'common/metric';
 import { levelText } from 'common/utils/chart';
 import { formatDecimal } from 'common/utils';
-import { Projection } from 'common/models/Projection';
+import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
 
 export const metricCaseGrowth: MetricDefinition = {
@@ -71,8 +71,8 @@ export const CASE_GROWTH_RATE_LEVEL_INFO_MAP: LevelInfoMap = {
 export const CASE_GROWTH_DISCLAIMER =
   'Each data point is a 14-day weighted average. We present the most recent seven days of data as a dashed line, as data is often revised by states several days after reporting.';
 
-export function renderStatus(projection: Projection): React.ReactElement {
-  const { locationName, rt } = projection;
+export function renderStatus(projections: Projections): React.ReactElement {
+  const { locationName, rt } = projections.primary;
 
   if (rt === null) {
     return (

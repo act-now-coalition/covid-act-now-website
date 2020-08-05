@@ -4,9 +4,10 @@ import * as Hospitalizations from 'common/metrics/hospitalizations';
 import * as ContactTracing from 'common/metrics/contact_tracing';
 import * as FutureProjections from 'common/metrics/future_projection';
 import * as CaseDensity from 'common/metrics/case_density';
-import { Projection } from 'common/models/Projection';
+import { Projections } from 'common/models/Projections';
 import { Level, LevelInfo } from 'common/level';
 import { fail, assert } from 'common/utils';
+import { MetricDefinition } from './metrics/interfaces';
 
 export enum Metric {
   CASE_GROWTH_RATE,
@@ -94,19 +95,26 @@ export function getMetricDisclaimer(metric: Metric) {
   return METRIC_TO_DISCLAIMER[metric];
 }
 
-export function getMetricStatusText(metric: Metric, projection: Projection) {
-  switch (metric) {
-    case Metric.CASE_GROWTH_RATE:
-      return CaseGrowth.renderStatus(projection);
-    case Metric.POSITIVE_TESTS:
-      return TestRates.renderStatus(projection);
-    case Metric.HOSPITAL_USAGE:
-      return Hospitalizations.renderStatus(projection);
-    case Metric.CONTACT_TRACING:
-      return ContactTracing.renderStatus(projection);
-    case Metric.CASE_DENSITY:
-      return CaseDensity.renderStatus(projection);
-    default:
-      return fail('unknown metric');
+// CASE_GROWTH_RATE,
+// POSITIVE_TESTS,
+// HOSPITAL_USAGE,
+// CONTACT_TRACING,
+// FUTURE_PROJECTIONS,
+// CASE_DENSITY,
+const metricDefinitions: { [metric in Metric]: MetricDefinition } = {
+  [Metric.CASE_GROWTH_RATE]: CaseGrowth.metricCaseGrowth,
+  [Metric.POSITIVE_TESTS]: TestRates.metricPositiveTestRate,
+  [Metric.HOSPITAL_USAGE]: Hospitalizations.metricICUHeadroom,
+  [Metric.CONTACT_TRACING]: ContactTracing.metricContactTracing,
+  [Metric.FUTURE_PROJECTIONS]: FutureProjections.metricFutureProjection,
+  [Metric.CASE_DENSITY]: CaseDensity.metricCaseIncidence,
+};
+
+export function getMetricStatusText(metric: Metric, projections: Projections) {
+  if (!(metric in metricDefinitions)) {
+    fail('unknown metric');
   }
+
+  const metricDefinition = metricDefinitions[metric];
+  return metricDefinition.renderStatus(projections);
 }

@@ -4,7 +4,7 @@ import { Level, LevelInfoMap } from 'common/level';
 import { levelText } from 'common/utils/chart';
 import { getLevel, Metric } from 'common/metric';
 import { formatPercent, formatInteger } from 'common/utils';
-import { Projection } from 'common/models/Projection';
+import { Projections } from 'common/models/Projections';
 import { NonCovidPatientsMethod } from 'common/models/ICUHeadroom';
 import { MetricDefinition } from './interfaces';
 
@@ -73,9 +73,9 @@ export const HOSPITAL_USAGE_LEVEL_INFO_MAP: LevelInfoMap = {
 export const HOSPITALIZATIONS_DISCLAIMER =
   ', a pandemic think tank, recommends that hospitals maintain enough ICU capacity to double the number of COVID patients hospitalized.';
 
-export function renderStatus(projection: Projection): React.ReactElement {
-  const icu = projection.icuHeadroomInfo;
-  const { locationName } = projection;
+export function renderStatus(projections: Projections): React.ReactElement {
+  const icu = projections.primary.icuHeadroomInfo;
+  const { locationName } = projections.primary;
 
   if (icu === null) {
     return <Fragment>No ICU occupancy data is available.</Fragment>;

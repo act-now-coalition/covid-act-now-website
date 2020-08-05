@@ -17,7 +17,7 @@ import {
   getMetricStatusText,
 } from 'common/metric';
 import { formatUtcDate } from 'common/utils';
-import { generateChartDescription } from 'common/metrics/future_projection';
+import { metricFutureProjection } from 'common/metrics/future_projection';
 import MetricChart from 'components/Charts/MetricChart';
 import { COLORS } from 'common';
 
@@ -39,7 +39,6 @@ function ChartBlock(props: {
   countyId?: string;
 }) {
   const projection: Projection = props.projections.primary;
-  const noInterventionProjection = props.projections.baseline;
 
   const showBetaTag =
     props.metric === Metric.HOSPITAL_USAGE ||
@@ -77,7 +76,7 @@ function ChartBlock(props: {
           </ChartHeaderWrapper>
           <ChartLocationName>{projection.locationName}</ChartLocationName>
           <ChartDescription>
-            {getMetricStatusText(props.metric, projection)}
+            {getMetricStatusText(props.metric, props.projections)}
           </ChartDescription>
           {props.isMobile && props.data && (
             <ShareButtons
@@ -115,7 +114,7 @@ function ChartBlock(props: {
           ) : (
             <Fragment>
               <ChartDescription>
-                {generateChartDescription(projection, noInterventionProjection)}
+                {metricFutureProjection.renderStatus(props.projections)}
               </ChartDescription>
               {props.isMobile && (
                 <ShareButtons

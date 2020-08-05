@@ -4,7 +4,8 @@ import { Level, LevelInfoMap } from 'common/level';
 import { levelText } from 'common/utils/chart';
 import { getLevel, Metric } from 'common/metric';
 import { formatPercent, formatInteger } from 'common/utils';
-import { Projection, TRACERS_NEEDED_PER_CASE } from 'common/models/Projection';
+import { Projections } from 'common/models/Projections';
+import { TRACERS_NEEDED_PER_CASE } from 'common/models/Projection';
 import { MetricDefinition } from './interfaces';
 
 export const metricContactTracing: MetricDefinition = {
@@ -69,13 +70,13 @@ export const CONTACT_TRACING_LEVEL_INFO_MAP: LevelInfoMap = {
   },
 };
 
-export function renderStatus(projection: Projection): React.ReactElement {
+export function renderStatus(projections: Projections): React.ReactElement {
   const {
     currentContactTracers,
     currentContactTracerMetric,
     locationName,
     currentDailyAverageCases,
-  } = projection;
+  } = projections.primary;
 
   const currentWeeklyAverage =
     currentDailyAverageCases && Math.round(currentDailyAverageCases);
