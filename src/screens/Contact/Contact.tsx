@@ -98,7 +98,7 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
             Covid Act Now is a multidisciplinary team of technologists,
             epidemiologists, health experts, and public policy leaders working
             to provide disease intelligence and data analysis on COVID in the
-            U.S. Want to join us?
+            U.S. Want to join us?{' '}
             <ExternalLink href="https://docs.google.com/forms/d/e/1FAIpQLSfQkdwXsbDbwLHhWwBD6wzNiw54_0P6A60r8hujP3qnaxxFkA/viewform">
               Let us know
             </ExternalLink>
