@@ -113,13 +113,12 @@ export function renderStatus(projection: Projection): React.ReactElement {
 
   return (
     <Fragment>
-      Per best available data, {locationName} has ${numTracers} contact tracers.
+      Per best available data, {locationName} has {numTracers} contact tracers.
       With an average of {weeklyAverage} new daily cases, we estimate{' '}
       {locationName} needs {numNeededTracers} contact tracing staff to trace all
       new cases in 48 hours, before too many other people are infected. This
-      means that {locationName} is likely able to trace
-      {contactTracingRate} of new COVID infections in 48 hours.{' '}
-      {outcomesAtLevel}
+      means that {locationName} is likely able to trace {contactTracingRate} of
+      new COVID infections in 48 hours. {outcomesAtLevel}
     </Fragment>
   );
 }

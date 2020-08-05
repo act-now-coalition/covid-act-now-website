@@ -93,7 +93,7 @@ export function renderStatus(projection: Projection): React.ReactElement {
 
   return (
     <Fragment>
-      On average, each person in {locationName} with COVID is infecting
+      On average, each person in {locationName} with COVID is infecting{' '}
       {formatDecimal(rt)} other people. {epidemiologyReasoning}
     </Fragment>
   );

@@ -73,12 +73,11 @@ export const POSITIVE_RATE_DISCLAIMER =
   'The World Health Organization recommends a positive test rate of less than 10%. The countries most successful in containing COVID have rates of 3% or less. We calculate the rate as a 7-day trailing average.';
 
 export function renderStatus(projection: Projection) {
-  const testPositiveRate = projection.currentTestPositiveRate;
-  const { locationName } = projection;
-  if (testPositiveRate === null) {
+  const { currentTestPositiveRate, locationName } = projection;
+  if (currentTestPositiveRate === null) {
     return <Fragment>No testing data is available.</Fragment>;
   }
-  const level = getLevel(Metric.POSITIVE_TESTS, testPositiveRate);
+  const level = getLevel(Metric.POSITIVE_TESTS, currentTestPositiveRate);
   const lowSizableLarge = levelText(
     level,
     'low',
@@ -86,7 +85,7 @@ export function renderStatus(projection: Projection) {
     'relatively high',
     'relatively high',
   );
-  const percentage = formatPercent(testPositiveRate, 1);
+  const percentage = formatPercent(currentTestPositiveRate, 1);
 
   const testingBroadlyText = levelText(
     level,
