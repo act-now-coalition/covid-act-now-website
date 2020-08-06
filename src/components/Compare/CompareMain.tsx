@@ -28,6 +28,7 @@ const CompareMain = (props: {
         isHomepage={props.isHomepage}
         locations={props.locations}
         currentCounty={props.currentCounty}
+        isModal={false}
       />
       <Modal open={showModal} onClose={handleCloseModal}>
         <ModalCompare

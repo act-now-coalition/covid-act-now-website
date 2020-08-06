@@ -15,13 +15,14 @@ import CompareTableRow from 'components/Compare/CompareTableRow';
 import HeaderCell from 'components/Compare/HeaderCell';
 import { Metric } from 'common/metric';
 import { COLOR_MAP } from 'common/colors';
+import LocationTable from './LocationTable';
 import { SummaryForCompare } from 'common/utils/compare';
 
 const CompareTable = (props: {
   stateName?: string;
   county?: any | null;
   setShowModal: any;
-  isModal?: Boolean;
+  isModal: boolean;
   locationsViewable?: number;
   isHomepage?: Boolean;
   locations: any;
@@ -97,57 +98,26 @@ const CompareTable = (props: {
       ? sortedLocationsArr.length
       : props.locationsViewable;
 
+  const firstHeaderName = props.isHomepage ? 'State' : 'County';
+
+  const sortedLocations = sortedLocationsArr
+    .slice(0, locationsViewable)
+    .filter(location => location.metricsInfo !== null);
+
   return (
     <Wrapper isModal={props.isModal}>
       {!props.isModal && <Header>{headerCopy}</Header>}
-      <StyledTable isModal={props.isModal} stickyHeader={useStickyHeader}>
-        <TableHeadContainer isModal={props.isModal}>
-          <Row>
-            <Cell locationHeaderCell={true}>
-              <span>{props.isHomepage ? 'State' : 'County'}</span>
-            </Cell>
-            {orderedMetrics.map((metricInMap: any, i: number) => {
-              return (
-                <HeaderCell
-                  metricInMap={metricInMap}
-                  setSorter={setSorter}
-                  setSortDescending={setSortDescending}
-                  {...arrowContainerProps}
-                  isModal={props.isModal}
-                />
-              );
-            })}
-          </Row>
-        </TableHeadContainer>
-        <TableBody>
-          {props.county && (
-            <CompareTableRow
-              isCurrentCounty
-              location={currentCounty}
-              sorter={sorter}
-              index={currentCountyRank}
-            />
-          )}
-          {sortedLocationsArr &&
-            sortedLocationsArr
-              .slice(0, locationsViewable)
-              .map((location: any, i: number) => {
-                if (
-                  location.metricsInfo === null ||
-                  location.metricsInfo === null
-                ) {
-                  return;
-                }
-                return (
-                  <CompareTableRow
-                    sorter={sorter}
-                    location={location}
-                    index={i}
-                  />
-                );
-              })}
-        </TableBody>
-      </StyledTable>
+      <LocationTable
+        firstHeaderName={firstHeaderName}
+        setSorter={setSorter}
+        setSortDescending={setSortDescending}
+        metrics={orderedMetrics}
+        isModal={props.isModal}
+        {...arrowContainerProps}
+        pinnedLocation={props.county ? currentCounty : null}
+        pinnedLocationRank={currentCountyRank}
+        sortedLocations={sortedLocations}
+      />
       {!props.isModal && (
         <Footer>
           <span>
