@@ -19,7 +19,6 @@ export const Wrapper = styled.div<{ isModal?: Boolean }>`
   margin: ${({ isModal }) => (isModal ? '0 auto' : '1rem auto')};
   background: white;
   max-height: ${({ isModal }) => isModal && '100vh'};
-  overflow-y: scroll;
 
   @media (min-width: 600px) {
     margin: ${({ isModal }) => (isModal ? '0 auto' : '3rem auto')};

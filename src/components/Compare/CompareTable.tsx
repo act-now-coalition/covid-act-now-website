@@ -15,6 +15,7 @@ import CompareTableRow from 'components/Compare/CompareTableRow';
 import HeaderCell from 'components/Compare/HeaderCell';
 import { Metric } from 'common/metric';
 import { COLOR_MAP } from 'common/colors';
+import LocationTable from './LocationTable';
 
 export interface SummaryForCompare {
   locationInfo: Location;
@@ -25,7 +26,7 @@ const CompareTable = (props: {
   stateName?: string;
   county?: any | null;
   setShowModal: any;
-  isModal?: Boolean;
+  isModal: boolean;
   locationsViewable?: number;
   isHomepage?: Boolean;
   locations: any;
@@ -101,6 +102,12 @@ const CompareTable = (props: {
       ? sortedLocationsArr.length
       : props.locationsViewable;
 
+  const firstHeaderName = props.isHomepage ? 'State' : 'County';
+
+  const sortedLocations = sortedLocationsArr
+    .slice(0, locationsViewable)
+    .filter(location => location.metricsInfo !== null);
+
   return (
     <Wrapper isModal={props.isModal}>
       {!props.isModal && <Header>{headerCopy}</Header>}
@@ -152,6 +159,18 @@ const CompareTable = (props: {
               })}
         </TableBody>
       </StyledTable>
+      {/* Replace StyledTable with LocationTable */}
+      {/* <LocationTable
+        firstHeaderName={firstHeaderName}
+        setSorter={setSorter}
+        setSortDescending={setSortDescending}
+        metrics={orderedMetrics}
+        isModal={props.isModal}
+        {...arrowContainerProps}
+        pinnedLocation={props.county ? currentCounty : null}
+        pinnedLocationRank={currentCountyRank}
+        sortedLocations={sortedLocations}
+      /> */}
       {!props.isModal && (
         <Footer>
           <span>
