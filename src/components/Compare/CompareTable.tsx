@@ -1,18 +1,11 @@
 import React, { useState } from 'react';
-import { TableBody } from '@material-ui/core';
 import { sortBy, findIndex, partition } from 'lodash';
 import {
   Wrapper,
-  StyledTable,
-  TableHeadContainer,
-  Row,
-  Cell,
   Footer,
   ViewAllLink,
   Header,
 } from 'components/Compare/Compare.style';
-import CompareTableRow from 'components/Compare/CompareTableRow';
-import HeaderCell from 'components/Compare/HeaderCell';
 import { Metric } from 'common/metric';
 import { COLOR_MAP } from 'common/colors';
 import LocationTable from './LocationTable';
@@ -82,8 +75,6 @@ const CompareTable = (props: {
     arrowColorSelected,
     arrowColorNotSelected,
   };
-
-  const useStickyHeader = props.isModal ? true : false;
 
   const headerCopy = props.isHomepage
     ? 'Compare states'
