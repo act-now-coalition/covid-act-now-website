@@ -94,10 +94,12 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
           </Typography>
           <ImageContainer>
             <picture>
-              <img
-                src={imgReponseSimulatorUrl}
-                alt="Two screenshots showing a Google sheet. In the first tab we see where you can input your information, and in the second tab you can see the resulting graph and table that is exported."
-              />
+              <a href={imgReponseSimulatorUrl}>
+                <img
+                  src={imgReponseSimulatorUrl}
+                  alt="Two screenshots showing a Google sheet. In the first tab we see where you can input your information, and in the second tab you can see the resulting graph and table that is exported."
+                />
+              </a>
             </picture>
           </ImageContainer>
           <GetStartedBox>
