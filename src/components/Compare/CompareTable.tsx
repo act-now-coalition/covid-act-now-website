@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import { sortBy, findIndex, partition } from 'lodash';
 import {
   Wrapper,
   Footer,
   ViewAllLink,
   Header,
+  UnknownsDisclaimer,
 } from 'components/Compare/Compare.style';
 import { Metric } from 'common/metric';
 import { COLOR_MAP } from 'common/colors';
@@ -110,18 +111,27 @@ const CompareTable = (props: {
         sortedLocations={sortedLocations}
       />
       {!props.isModal && (
-        <Footer>
-          <span>
-            {props.isHomepage && locationsViewable === sortedLocationsArr.length
-              ? ''
-              : `Displaying 1-${amountDisplayed} of ${sortedLocationsArr.length}`}
-          </span>
-          <ViewAllLink onClick={() => props.setShowModal(true)}>
-            {!props.isHomepage
-              ? `View all counties in ${props.stateName}`
-              : 'View all states'}
-          </ViewAllLink>
-        </Footer>
+        <Fragment>
+          <Footer>
+            <span>
+              {props.isHomepage &&
+              locationsViewable === sortedLocationsArr.length
+                ? ''
+                : `Displaying 1-${amountDisplayed} of ${sortedLocationsArr.length}`}
+            </span>
+            <ViewAllLink onClick={() => props.setShowModal(true)}>
+              {!props.isHomepage
+                ? `View all counties in ${props.stateName}`
+                : 'View all states'}
+            </ViewAllLink>
+          </Footer>
+          {!props.isHomepage && (
+            <UnknownsDisclaimer>
+              {props.stateName} only reports contact tracing and positive test
+              rate at the state level.
+            </UnknownsDisclaimer>
+          )}
+        </Fragment>
       )}
     </Wrapper>
   );
