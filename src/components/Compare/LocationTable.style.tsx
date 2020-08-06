@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { TableHead, TableCell, TableRow, Table } from '@material-ui/core';
+import { TableHead } from '@material-ui/core';
 import { Cell } from './Compare.style';
 
 export const Container = styled.div`

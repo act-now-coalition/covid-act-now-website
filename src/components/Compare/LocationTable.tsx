@@ -1,4 +1,5 @@
 import React from 'react';
+import { isNumber } from 'lodash';
 import { Table, TableBody } from '@material-ui/core';
 import * as Styles from './LocationTable.style';
 import HeaderCell from './HeaderCell';
@@ -6,7 +7,7 @@ import * as CompareStyles from './Compare.style';
 import CompareTableRow from 'components/Compare/CompareTableRow';
 import { ParentSize } from '@vx/responsive';
 
-const LocationTableHeader: React.FunctionComponent<{
+const LocationTableHead: React.FunctionComponent<{
   setSorter: any;
   setSortDescending: any;
   sortDescending: any;
@@ -66,7 +67,7 @@ const PinnedRow: React.FunctionComponent<{
   </Table>
 );
 
-const LocationTableHead: React.FunctionComponent<{
+const LocationTableBody: React.FunctionComponent<{
   sortedLocations: any[];
   sorter: any;
 }> = ({ sortedLocations, sorter }) => (
@@ -118,7 +119,7 @@ const LocationTable: React.FunctionComponent<{
 }) => (
   <Styles.Container>
     <Styles.Header>
-      <LocationTableHeader
+      <LocationTableHead
         setSorter={setSorter}
         setSortDescending={setSortDescending}
         sortDescending={sortDescending}
@@ -129,7 +130,7 @@ const LocationTable: React.FunctionComponent<{
         metrics={metrics}
         isModal={isModal}
       />
-      {pinnedLocation && pinnedLocationRank && (
+      {pinnedLocation && isNumber(pinnedLocationRank) && (
         <PinnedRow
           location={pinnedLocation}
           locationRank={pinnedLocationRank}
@@ -138,7 +139,7 @@ const LocationTable: React.FunctionComponent<{
       )}
     </Styles.Header>
     <Styles.Body>
-      <LocationTableHead sorter={sorter} sortedLocations={sortedLocations} />
+      <LocationTableBody sorter={sorter} sortedLocations={sortedLocations} />
     </Styles.Body>
   </Styles.Container>
 );

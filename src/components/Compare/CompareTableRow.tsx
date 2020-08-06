@@ -17,7 +17,7 @@ const CompareTableRow = (props: {
   location: SummaryForCompare;
   index: number;
   sorter: any;
-  isCurrentCounty?: Boolean;
+  isCurrentCounty?: boolean;
 }) => {
   const { location, index, sorter, isCurrentCounty } = props;
 

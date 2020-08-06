@@ -107,56 +107,7 @@ const CompareTable = (props: {
   return (
     <Wrapper isModal={props.isModal}>
       {!props.isModal && <Header>{headerCopy}</Header>}
-      <StyledTable isModal={props.isModal} stickyHeader={useStickyHeader}>
-        <TableHeadContainer isModal={props.isModal}>
-          <Row>
-            <Cell locationHeaderCell={true}>
-              <span>{props.isHomepage ? 'State' : 'County'}</span>
-            </Cell>
-            {orderedMetrics.map((metricInMap: any, i: number) => {
-              return (
-                <HeaderCell
-                  metricInMap={metricInMap}
-                  setSorter={setSorter}
-                  setSortDescending={setSortDescending}
-                  {...arrowContainerProps}
-                  isModal={props.isModal}
-                />
-              );
-            })}
-          </Row>
-        </TableHeadContainer>
-        <TableBody>
-          {props.county && (
-            <CompareTableRow
-              isCurrentCounty
-              location={currentCounty}
-              sorter={sorter}
-              index={currentCountyRank}
-            />
-          )}
-          {sortedLocationsArr &&
-            sortedLocationsArr
-              .slice(0, locationsViewable)
-              .map((location: any, i: number) => {
-                if (
-                  location.metricsInfo === null ||
-                  location.metricsInfo === null
-                ) {
-                  return;
-                }
-                return (
-                  <CompareTableRow
-                    sorter={sorter}
-                    location={location}
-                    index={i}
-                  />
-                );
-              })}
-        </TableBody>
-      </StyledTable>
-      {/* Replace StyledTable with LocationTable */}
-      {/* <LocationTable
+      <LocationTable
         firstHeaderName={firstHeaderName}
         setSorter={setSorter}
         setSortDescending={setSortDescending}
@@ -166,7 +117,7 @@ const CompareTable = (props: {
         pinnedLocation={props.county ? currentCounty : null}
         pinnedLocationRank={currentCountyRank}
         sortedLocations={sortedLocations}
-      /> */}
+      />
       {!props.isModal && (
         <Footer>
           <span>
