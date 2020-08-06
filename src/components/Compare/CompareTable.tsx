@@ -15,7 +15,11 @@ import CompareTableRow from 'components/Compare/CompareTableRow';
 import HeaderCell from 'components/Compare/HeaderCell';
 import { Metric } from 'common/metric';
 import { COLOR_MAP } from 'common/colors';
-import { SummaryForCompare } from 'common/utils/compare';
+
+export interface SummaryForCompare {
+  locationInfo: Location;
+  metricsInfo: LocationSummary;
+}
 
 const CompareTable = (props: {
   stateName?: string;
