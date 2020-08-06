@@ -179,11 +179,9 @@ const ChartsHolder = (props: {
               isMobile={isMobile}
             />
             <CompareMain
-              stateId={props.stateId}
               stateName={props.projections.stateName}
               county={props.county}
               locationsViewable={10}
-              isLocationPage
               locations={locationsForCompare}
               currentCounty={currentCountyForCompare}
             />

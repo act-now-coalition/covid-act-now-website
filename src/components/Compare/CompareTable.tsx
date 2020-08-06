@@ -18,13 +18,11 @@ import { COLOR_MAP } from 'common/colors';
 import { SummaryForCompare } from 'common/utils/compare';
 
 const CompareTable = (props: {
-  stateId: string;
   stateName?: string;
   county?: any | null;
   setShowModal: any;
   isModal?: Boolean;
   locationsViewable?: number;
-  isLocationPage?: Boolean;
   isHomepage?: Boolean;
   locations: any;
   currentCounty?: any;
