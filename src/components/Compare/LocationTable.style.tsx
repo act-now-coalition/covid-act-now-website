@@ -3,24 +3,33 @@ import { TableHead } from '@material-ui/core';
 import { Cell } from './Compare.style';
 import { COLORS } from 'common';
 
+const minTableWidth = '630px';
+
 export const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   max-height: 80vh;
   min-height: 0;
+  width: 100%;
+  overflow-x: scroll;
 `;
 
 export const Body = styled.div`
   flex: 1 1 auto;
   min-height: 0;
-  overflow: scroll;
+  overflow-y: scroll;
+  min-width: ${minTableWidth};
 `;
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  width: 100%;
+  overflow-x: scroll;
+`;
 
 export const Head = styled.div`
   flex: 0 0 auto;
   min-height: 0;
+  min-width: ${minTableWidth};
 `;
 
 export const TableContainer = styled.div<{ isModal: boolean }>`
