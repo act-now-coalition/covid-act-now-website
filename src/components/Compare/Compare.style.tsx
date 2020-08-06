@@ -60,6 +60,8 @@ export const StyledTable = styled(Table)<{ isModal?: Boolean }>`
 
 export const Cell = styled(TableCell)<{ locationHeaderCell?: Boolean }>`
   cursor: ${({ locationHeaderCell }) => !locationHeaderCell && 'pointer'};
+  text-transform: uppercase;
+  font-size: 0.9rem;
 `;
 
 export const TableHeadContainer = styled(TableHead)<{ isModal?: Boolean }>`
@@ -164,7 +166,7 @@ export const ArrowContainer = styled.div<{
   display: flex;
   font-family: Roboto;
   font-size: 0.875rem;
-  transform: translatex(-0.3rem);
+  transform: translate(-0.3rem, 0.15rem);
   margin-top: 0.25rem;
 
   span {
