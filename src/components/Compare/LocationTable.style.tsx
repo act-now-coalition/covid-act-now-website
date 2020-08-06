@@ -6,23 +6,21 @@ import { COLORS } from 'common';
 export const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 400px;
+  max-height: 80vh;
+  min-height: 0;
 `;
 
-export const ModalBody = styled.div`
-  flex: 1 0 auto;
+export const Body = styled.div`
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: scroll;
 `;
 
 export const Container = styled.div``;
 
 export const Head = styled.div`
   flex: 0 0 auto;
-`;
-
-export const Body = styled.div``;
-
-export const ScrollContainer = styled.div`
-  overflow: scroll;
+  min-height: 0;
 `;
 
 export const TableContainer = styled.div<{ isModal: boolean }>`

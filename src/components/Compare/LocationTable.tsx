@@ -5,7 +5,6 @@ import * as Styles from './LocationTable.style';
 import HeaderCell from './HeaderCell';
 import * as CompareStyles from './Compare.style';
 import CompareTableRow from 'components/Compare/CompareTableRow';
-import { ParentSize } from '@vx/responsive';
 
 const LocationTableHead: React.FunctionComponent<{
   setSorter: any;
@@ -81,19 +80,6 @@ const LocationTableBody: React.FunctionComponent<{
   </Table>
 );
 
-const LocationTableBodyScroll: React.FunctionComponent<{
-  sortedLocations: any[];
-  sorter: any;
-}> = ({ sortedLocations, sorter }) => (
-  <ParentSize>
-    {({ height }) => (
-      <Styles.ScrollContainer style={{ height }}>
-        <LocationTableBody sortedLocations={sortedLocations} sorter={sorter} />
-      </Styles.ScrollContainer>
-    )}
-  </ParentSize>
-);
-
 /**
  * NOTE (pablo): Material UI tables have some limitations regarding some
  * behaviours we need. In particular, we can't have more than one element
@@ -133,9 +119,6 @@ const LocationTable: React.FunctionComponent<{
   sortedLocations,
 }) => {
   const Container = isModal ? Styles.ModalContainer : Styles.Container;
-  const Body = isModal ? Styles.ModalBody : Styles.Body;
-  const BodyTable = isModal ? LocationTableBodyScroll : LocationTableBody;
-
   return (
     <Styles.TableContainer isModal={isModal}>
       <Container>
@@ -159,9 +142,12 @@ const LocationTable: React.FunctionComponent<{
             />
           )}
         </Styles.Head>
-        <Body>
-          <BodyTable sorter={sorter} sortedLocations={sortedLocations} />
-        </Body>
+        <Styles.Body>
+          <LocationTableBody
+            sorter={sorter}
+            sortedLocations={sortedLocations}
+          />
+        </Styles.Body>
       </Container>
     </Styles.TableContainer>
   );
