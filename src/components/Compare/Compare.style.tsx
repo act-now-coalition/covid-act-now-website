@@ -5,6 +5,7 @@ import { COLOR_MAP, LEVEL_COLOR } from 'common/colors';
 import { COLORS } from 'common';
 import { Metric } from 'common/metric';
 import { Level } from 'common/level';
+import { DisclaimerWrapper } from 'components/Disclaimer/Disclaimer.style';
 
 const LEVEL_COLOR_CONTACT_TRACING = {
   [Level.LOW]: COLOR_MAP.RED.BASE,
@@ -50,6 +51,14 @@ export const Wrapper = styled.div<{ isModal?: Boolean; isHomepage?: Boolean }>`
       &:not(:first-child) {
         width: 15%;
       }
+    }
+  }
+
+  ${DisclaimerWrapper} {
+    margin: 0 0rem 1.5rem;
+
+    @media (max-width: 900px) {
+      margin: 0 1rem 1.5rem;
     }
   }
 `;
