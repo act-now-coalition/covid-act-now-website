@@ -133,7 +133,7 @@ export const Row = styled(TableRow)<{
   isCurrentCounty?: Boolean;
 }>`
   background-color: ${({ index }) =>
-    !isNumber(index) ? 'white' : index % 2 === 0 ? 'white' : '#fafafa'};
+    !isNumber(index) ? 'white' : index % 2 === 0 ? '#fafafa' : 'white'};
   background-color: ${({ isCurrentCounty }) => isCurrentCounty && '#FFEFD6'};
   border-bottom: none;
 
@@ -212,7 +212,7 @@ export const ArrowContainer = styled.div<{
 
 export const Footer = styled.div`
   display: flex;
-  padding: 1.5rem 1rem;
+  padding: 1.25rem 1rem;
 
   span {
     margin-right: 1.875rem;
@@ -258,4 +258,10 @@ export const ModalHeader = styled.div<{ isHomepage?: Boolean }>`
     cursor: pointer;
     font-size: 1.75rem;
   }
+`;
+
+export const UnknownsDisclaimer = styled.div`
+  background-color: #fafafa;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+  padding: 1rem;
 `;
