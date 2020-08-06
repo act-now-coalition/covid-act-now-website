@@ -136,31 +136,33 @@ const LocationTable: React.FunctionComponent<{
   const BodyTable = isModal ? LocationTableBodyScroll : LocationTableBody;
 
   return (
-    <Container>
-      <Styles.Head>
-        <LocationTableHead
-          setSorter={setSorter}
-          setSortDescending={setSortDescending}
-          sortDescending={sortDescending}
-          sorter={sorter}
-          arrowColorSelected={arrowColorSelected}
-          arrowColorNotSelected={arrowColorNotSelected}
-          firstHeaderName={firstHeaderName}
-          metrics={metrics}
-          isModal={isModal}
-        />
-        {pinnedLocation && isNumber(pinnedLocationRank) && (
-          <PinnedRow
-            location={pinnedLocation}
-            locationRank={pinnedLocationRank}
+    <Styles.TableContainer isModal={isModal}>
+      <Container>
+        <Styles.Head>
+          <LocationTableHead
+            setSorter={setSorter}
+            setSortDescending={setSortDescending}
+            sortDescending={sortDescending}
             sorter={sorter}
+            arrowColorSelected={arrowColorSelected}
+            arrowColorNotSelected={arrowColorNotSelected}
+            firstHeaderName={firstHeaderName}
+            metrics={metrics}
+            isModal={isModal}
           />
-        )}
-      </Styles.Head>
-      <Body>
-        <BodyTable sorter={sorter} sortedLocations={sortedLocations} />
-      </Body>
-    </Container>
+          {pinnedLocation && isNumber(pinnedLocationRank) && (
+            <PinnedRow
+              location={pinnedLocation}
+              locationRank={pinnedLocationRank}
+              sorter={sorter}
+            />
+          )}
+        </Styles.Head>
+        <Body>
+          <BodyTable sorter={sorter} sortedLocations={sortedLocations} />
+        </Body>
+      </Container>
+    </Styles.TableContainer>
   );
 };
 
