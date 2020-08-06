@@ -12,6 +12,7 @@ const HeaderCell = (props: {
   metricInMap: any;
   arrowColorSelected: string;
   arrowColorNotSelected: string;
+  isModal?: Boolean;
 }) => {
   const {
     sorter,
@@ -21,6 +22,7 @@ const HeaderCell = (props: {
     metricInMap,
     arrowColorSelected,
     arrowColorNotSelected,
+    isModal,
   } = props;
 
   function cellOnClick() {
@@ -45,6 +47,7 @@ const HeaderCell = (props: {
         sorter={sorter}
         arrowColorSelected={arrowColorSelected}
         arrowColorNotSelected={arrowColorNotSelected}
+        isModal={isModal}
       >
         <ExpandLessIcon onClick={() => setSortDescending(false)} />
         <ExpandMoreIcon onClick={() => setSortDescending(true)} />

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TableBody } from '@material-ui/core';
 import {
   Wrapper,
@@ -16,21 +16,13 @@ import { Location } from 'common/locations';
 import { countySummary, LocationSummary } from 'common/location_summaries';
 import { Metric } from 'common/metric';
 import { COLOR_MAP } from 'common/colors';
-import { sortBy, findIndex } from 'lodash';
+import { sortBy, findIndex, partition } from 'lodash';
 import { getStatesArr, getCountiesArr } from 'common/utils/compare';
 
 export interface SummaryForCompare {
   locationInfo: Location;
   metricsInfo: LocationSummary;
 }
-
-const scrollTo = (div: null | HTMLDivElement) =>
-  div &&
-  window.scrollTo({
-    left: 0,
-    top: div.offsetTop - 75,
-    behavior: 'smooth',
-  });
 
 const CompareTable = (props: {
   stateId: string;
@@ -69,13 +61,20 @@ const CompareTable = (props: {
 
   const locationsArr = props.isHomepage ? statesArr : countiesArr;
 
-  const sortedLocationsArr = sortBy(
+  const partitionedLocations = partition(
     locationsArr,
+    location => location.metricsInfo.metrics[sorter].value !== null,
+  );
+  const sortedLocationsWithValue = sortBy(
+    partitionedLocations[0],
     location => location.metricsInfo.metrics[sorter].value,
   );
+  const locationsWithNull = partitionedLocations[1];
+  let sortedLocationsArr = sortedLocationsWithValue.concat(locationsWithNull);
 
   if (sortDescending) {
-    sortedLocationsArr.reverse();
+    sortedLocationsWithValue.reverse();
+    sortedLocationsArr = sortedLocationsWithValue.concat(locationsWithNull);
   }
 
   const currentCountyRank = findIndex(
@@ -84,9 +83,8 @@ const CompareTable = (props: {
       location.locationInfo.full_fips_code === currentCountyFips,
   );
 
-  const [locationsViewable, setLocationsViewable] = useState(
-    props.locationsViewable || sortedLocationsArr.length,
-  );
+  const locationsViewable =
+    props.locationsViewable || sortedLocationsArr.length;
 
   //TODO (chelsi): make this a theme-
   const arrowColorSelected = props.isModal ? 'white' : 'black';
@@ -99,36 +97,6 @@ const CompareTable = (props: {
     sorter,
     arrowColorSelected,
     arrowColorNotSelected,
-  };
-
-  const tableRef = useRef<HTMLDivElement>(null);
-
-  const scrollToTable = () => {
-    if (tableRef.current) {
-      scrollTo(tableRef.current);
-    }
-  };
-
-  // delay allows page to scroll back up to the table header before collpasing to 10 rows
-  // makes table collpasing look smoother
-  const viewLess = () => {
-    const timeoutId = setTimeout(() => {
-      setLocationsViewable(10);
-    }, 400);
-    return () => clearTimeout(timeoutId);
-  };
-
-  const viewAllOnClick = () => {
-    if (props.isHomepage) {
-      if (locationsViewable === sortedLocationsArr.length) {
-        scrollToTable();
-        viewLess();
-      } else {
-        setLocationsViewable(sortedLocationsArr.length);
-      }
-    } else {
-      props.setShowModal(true);
-    }
   };
 
   const useStickyHeader = props.isModal ? true : false;
@@ -147,7 +115,7 @@ const CompareTable = (props: {
       : props.locationsViewable;
 
   return (
-    <Wrapper isModal={props.isModal} ref={tableRef}>
+    <Wrapper isModal={props.isModal}>
       {!props.isModal && <Header>{headerCopy}</Header>}
       <StyledTable isModal={props.isModal} stickyHeader={useStickyHeader}>
         <TableHeadContainer isModal={props.isModal}>
@@ -162,6 +130,7 @@ const CompareTable = (props: {
                   setSorter={setSorter}
                   setSortDescending={setSortDescending}
                   {...arrowContainerProps}
+                  isModal={props.isModal}
                 />
               );
             })}
@@ -203,11 +172,9 @@ const CompareTable = (props: {
               ? ''
               : `Displaying 1-${amountDisplayed} of ${sortedLocationsArr.length}`}
           </span>
-          <ViewAllLink onClick={viewAllOnClick}>
+          <ViewAllLink onClick={() => props.setShowModal(true)}>
             {!props.isHomepage
               ? `View all counties in ${props.stateName}`
-              : locationsViewable === sortedLocationsArr.length
-              ? 'View less'
               : 'View all states'}
           </ViewAllLink>
         </Footer>

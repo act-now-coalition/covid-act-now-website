@@ -9,6 +9,7 @@ import { formatDecimal, formatPercent } from 'common/utils';
 import { Level, LevelInfo } from 'common/level';
 import { assert } from './utils';
 import { fail } from 'assert';
+import { isNumber } from 'lodash';
 
 export enum Metric {
   CASE_GROWTH_RATE,
@@ -116,11 +117,11 @@ export const formatValue = (
   value: number | null,
   nullValueCopy: string,
 ): string => {
-  if (value === null) {
+  if (!isNumber(value)) {
     return nullValueCopy;
   }
   if (chartType === Metric.CASE_DENSITY) {
-    return value.toFixed(1).toString();
+    return formatDecimal(value, 1);
   } else if (chartType === Metric.CASE_GROWTH_RATE) {
     return formatDecimal(value);
   } else if (chartType === Metric.HOSPITAL_USAGE) {
