@@ -1,12 +1,17 @@
 import styled from 'styled-components';
 import { TableHead, TableCell, TableRow, Table } from '@material-ui/core';
-import {
-  COLOR_MAP,
-  LEVEL_COLOR,
-  LEVEL_COLOR_CONTACT_TRACING,
-} from 'common/colors';
+import { COLOR_MAP, LEVEL_COLOR } from 'common/colors';
+import { COLORS } from 'common';
 import { Metric } from 'common/metric';
 import { Level } from 'common/level';
+
+const LEVEL_COLOR_CONTACT_TRACING = {
+  [Level.LOW]: COLOR_MAP.RED.BASE,
+  [Level.MEDIUM]: COLOR_MAP.ORANGE_DARK.BASE,
+  [Level.HIGH]: COLOR_MAP.ORANGE.BASE,
+  [Level.CRITICAL]: COLOR_MAP.GREEN.BASE,
+  [Level.UNKNOWN]: COLOR_MAP.GRAY.BASE,
+};
 
 export const Wrapper = styled.div<{ isModal?: Boolean }>`
   max-width: 900px;
@@ -50,7 +55,7 @@ export const Wrapper = styled.div<{ isModal?: Boolean }>`
 `;
 
 export const StyledTable = styled(Table)<{ isModal?: Boolean }>`
-  border: ${({ isModal }) => !isModal && '1px solid #f2f2f2'};
+  border: ${({ isModal }) => !isModal && `1px solid ${COLORS.LIGHTGRAY}`};
 `;
 
 export const Cell = styled(TableCell)<{ locationHeaderCell?: Boolean }>`
@@ -64,10 +69,12 @@ export const TableHeadContainer = styled(TableHead)<{ isModal?: Boolean }>`
     padding: 1rem 1rem 0.8rem;
     background-color: ${({ isModal }) => isModal && 'black'};
     color: ${({ isModal }) => isModal && 'white'};
-    border-bottom: ${({ isModal }) => !isModal && '2px solid #f2f2f2'};
+    border-bottom: ${({ isModal }) =>
+      !isModal && `2px solid ${COLORS.LIGHTGRAY}`};
 
     &:nth-child(2) {
-      border-left: ${({ isModal }) => !isModal && '2px solid #f2f2f2'};
+      border-left: ${({ isModal }) =>
+        !isModal && `2px solid ${COLORS.LIGHTGRAY}`};
     }
   }
 `;
@@ -81,16 +88,16 @@ export const MetricCell = styled.td<{
   text-align: left;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
+  cursor: pointer;
 
   &:first-child {
-    cursor: pointer;
     &:hover {
       color: ${COLOR_MAP.BLUE};
     }
   }
 
   &:nth-child(2) {
-    border-left: 2px solid #f2f2f2;
+    border-left: 2px solid ${COLORS.LIGHTGRAY};
   }
 
   &:not(:first-child) {
@@ -137,6 +144,10 @@ export const Row = styled(TableRow)<{
   ${MetricCell} {
     border-bottom: ${({ isCurrentCounty }) =>
       isCurrentCounty && '2px solid #CEBFAC'};
+  }
+
+  &:hover {
+    color: ${COLOR_MAP.BLUE};
   }
 `;
 

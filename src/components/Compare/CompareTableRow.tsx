@@ -59,11 +59,12 @@ const CompareTableRow = (props: {
     : location.locationInfo.county.replace('County', 'Co.');
 
   return (
-    <Row index={index} isCurrentCounty={isCurrentCounty}>
-      <MetricCell
-        onClick={handleLocationClick}
-        iconColor={location.metricsInfo.level}
-      >
+    <Row
+      index={index}
+      isCurrentCounty={isCurrentCounty}
+      onClick={handleLocationClick}
+    >
+      <MetricCell iconColor={location.metricsInfo.level}>
         <span>{index + 1}</span>
         <FiberManualRecordIcon />
         {locationName}
