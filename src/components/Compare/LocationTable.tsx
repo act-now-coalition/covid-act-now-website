@@ -71,25 +71,39 @@ const LocationTableBody: React.FunctionComponent<{
   sortedLocations: any[];
   sorter: any;
 }> = ({ sortedLocations, sorter }) => (
+  <Table>
+    <TableBody>
+      {sortedLocations.map((location, rank) => (
+        <CompareTableRow sorter={sorter} location={location} index={rank} />
+      ))}
+    </TableBody>
+  </Table>
+);
+
+const LocationTableBodyScroll: React.FunctionComponent<{
+  sortedLocations: any[];
+  sorter: any;
+}> = ({ sortedLocations, sorter }) => (
   <ParentSize>
     {({ height }) => (
       <Styles.ScrollContainer style={{ height }}>
-        <Table>
-          <TableBody>
-            {sortedLocations.map((location, rank) => (
-              <CompareTableRow
-                sorter={sorter}
-                location={location}
-                index={rank}
-              />
-            ))}
-          </TableBody>
-        </Table>
+        <LocationTableBody sortedLocations={sortedLocations} sorter={sorter} />
       </Styles.ScrollContainer>
     )}
   </ParentSize>
 );
 
+/**
+ * NOTE (pablo): Material UI tables have some limitations regarding some
+ * behaviours we need. In particular, we can't have more than one element
+ * pinned to the top, which is what we need to pin the current location
+ * in the top row.
+ *
+ * This implementation is a hack and uses 3 tables. This can create some
+ * accessibility issues (screen readers might have trouble reading the
+ * table as a single unit). We might want to explore some other solutions
+ * (maybe other libraries) at some point.
+ */
 const LocationTable: React.FunctionComponent<{
   setSorter: any;
   setSortDescending: any;
@@ -116,32 +130,40 @@ const LocationTable: React.FunctionComponent<{
   pinnedLocation,
   pinnedLocationRank,
   sortedLocations,
-}) => (
-  <Styles.Container>
-    <Styles.Header>
-      <LocationTableHead
-        setSorter={setSorter}
-        setSortDescending={setSortDescending}
-        sortDescending={sortDescending}
-        sorter={sorter}
-        arrowColorSelected={arrowColorSelected}
-        arrowColorNotSelected={arrowColorNotSelected}
-        firstHeaderName={firstHeaderName}
-        metrics={metrics}
-        isModal={isModal}
-      />
-      {pinnedLocation && isNumber(pinnedLocationRank) && (
-        <PinnedRow
-          location={pinnedLocation}
-          locationRank={pinnedLocationRank}
-          sorter={sorter}
-        />
-      )}
-    </Styles.Header>
-    <Styles.Body>
-      <LocationTableBody sorter={sorter} sortedLocations={sortedLocations} />
-    </Styles.Body>
-  </Styles.Container>
-);
+}) => {
+  const Container = isModal ? Styles.ModalContainer : Styles.Container;
+  const Body = isModal ? Styles.ModalBody : Styles.Body;
+  const BodyTable = isModal ? LocationTableBodyScroll : LocationTableBody;
+
+  return (
+    <Styles.TableContainer isModal={isModal}>
+      <Container>
+        <Styles.Head>
+          <LocationTableHead
+            setSorter={setSorter}
+            setSortDescending={setSortDescending}
+            sortDescending={sortDescending}
+            sorter={sorter}
+            arrowColorSelected={arrowColorSelected}
+            arrowColorNotSelected={arrowColorNotSelected}
+            firstHeaderName={firstHeaderName}
+            metrics={metrics}
+            isModal={isModal}
+          />
+          {pinnedLocation && isNumber(pinnedLocationRank) && (
+            <PinnedRow
+              location={pinnedLocation}
+              locationRank={pinnedLocationRank}
+              sorter={sorter}
+            />
+          )}
+        </Styles.Head>
+        <Body>
+          <BodyTable sorter={sorter} sortedLocations={sortedLocations} />
+        </Body>
+      </Container>
+    </Styles.TableContainer>
+  );
+};
 
 export default LocationTable;

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { isNumber } from 'lodash';
 import { TableHead, TableCell, TableRow, Table } from '@material-ui/core';
 import { COLOR_MAP, LEVEL_COLOR } from 'common/colors';
 import { COLORS } from 'common';
@@ -132,7 +133,7 @@ export const Row = styled(TableRow)<{
   isCurrentCounty?: Boolean;
 }>`
   background-color: ${({ index }) =>
-    !index ? 'white' : index && index % 2 ? 'white' : '#fafafa'};
+    !isNumber(index) ? 'white' : index % 2 === 0 ? 'white' : '#fafafa'};
   background-color: ${({ isCurrentCounty }) => isCurrentCounty && '#FFEFD6'};
   border-bottom: none;
 
