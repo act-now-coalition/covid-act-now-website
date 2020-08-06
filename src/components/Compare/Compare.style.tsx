@@ -172,7 +172,7 @@ export const ArrowContainer = styled.div<{
   }
 
   svg {
-    &:first-child {
+    &:nth-child(2) {
       color: ${({
         sortDescending,
         sorter,
@@ -187,7 +187,7 @@ export const ArrowContainer = styled.div<{
           ? `${arrowColorSelected}`
           : `${arrowColorNotSelected}`};
     }
-    &:nth-child(2) {
+    &:first-child {
       transform: translatex(-0.1rem);
       color: ${({
         sortDescending,

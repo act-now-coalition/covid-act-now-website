@@ -43,6 +43,7 @@ const LocationTableHead: React.FunctionComponent<{
             arrowColorNotSelected={arrowColorNotSelected}
             setSorter={setSorter}
             setSortDescending={setSortDescending}
+            isModal={isModal}
           />
         ))}
       </CompareStyles.Row>

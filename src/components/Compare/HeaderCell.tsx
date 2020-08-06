@@ -49,8 +49,8 @@ const HeaderCell = (props: {
         arrowColorNotSelected={arrowColorNotSelected}
         isModal={isModal}
       >
-        <ExpandLessIcon onClick={() => setSortDescending(false)} />
         <ExpandMoreIcon onClick={() => setSortDescending(true)} />
+        <ExpandLessIcon onClick={() => setSortDescending(false)} />
       </ArrowContainer>
     </Cell>
   );
