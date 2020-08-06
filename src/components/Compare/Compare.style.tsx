@@ -89,8 +89,10 @@ export const MetricCell = styled.td<{
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   cursor: pointer;
+  min-width: 100px;
 
   &:first-child {
+    min-width: 130px;
     &:hover {
       color: ${COLOR_MAP.BLUE};
     }
