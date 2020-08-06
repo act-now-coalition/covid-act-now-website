@@ -276,3 +276,5 @@ export const UnknownsDisclaimer = styled.div`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   padding: 1rem;
 `;
+
+export const DivForRef = styled.div``;

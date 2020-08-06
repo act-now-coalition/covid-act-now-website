@@ -19,13 +19,25 @@ const ModalCompare = (props: {
   isHomepage?: Boolean;
   locations: SummaryForCompare[];
   currentCounty?: any;
+  handleCloseModal: () => void;
 }) => {
+  window.addEventListener(
+    'keydown',
+    function (e) {
+      if (e.key === ('Escape' || 'Esc')) {
+        props.handleCloseModal();
+      }
+      e.preventDefault();
+    },
+    true,
+  );
+
   return (
     <Fragment>
       <BodyScrollLock />
       <ModalHeader isHomepage={props.isHomepage}>
         {props.isHomepage ? 'States' : `${props.stateName} counties`}
-        <CloseIcon onClick={() => props.setShowModal(false)} />
+        <CloseIcon onClick={() => props.handleCloseModal()} />
       </ModalHeader>
       <CompareTable
         stateName={props.stateName}
