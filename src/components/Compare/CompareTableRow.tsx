@@ -1,10 +1,10 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { SummaryForCompare } from 'components/Compare/CompareTable';
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import { MetricCell, Row } from 'components/Compare/Compare.style';
 import { Metric, formatValue } from 'common/metric';
+import { SummaryForCompare } from 'common/utils/compare';
 import { Level } from 'common/level';
-import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
 function cellValue(metric: any, metricType: Metric) {
   if (metric === null || metric === undefined) {

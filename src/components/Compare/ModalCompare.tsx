@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import CompareTable from 'components/Compare/CompareTable';
 import { ModalHeader } from 'components/Compare/Compare.style';
 import CloseIcon from '@material-ui/icons/Close';
+import { SummaryForCompare } from 'common/utils/compare';
 
 //TODO(chelsi) - remove ? from stateName and stateId
 const ModalCompare = (props: {
@@ -11,6 +12,8 @@ const ModalCompare = (props: {
   setShowModal: any;
   isLocationPage?: Boolean;
   isHomepage?: Boolean;
+  locations: SummaryForCompare[];
+  currentCounty?: any;
 }) => {
   return (
     <Fragment>
@@ -26,6 +29,8 @@ const ModalCompare = (props: {
         isModal
         isLocationPage={props.isLocationPage}
         isHomepage={props.isHomepage}
+        locations={props.locations}
+        currentCounty={props.currentCounty}
       />
     </Fragment>
   );

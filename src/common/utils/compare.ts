@@ -1,6 +1,12 @@
 import { getLocationNames, Location } from 'common/locations';
 import { stateSummary, countySummary } from 'common/location_summaries';
 import { fail } from 'common/utils';
+import { LocationSummary } from 'common/location_summaries';
+
+export interface SummaryForCompare {
+  locationInfo: Location;
+  metricsInfo: LocationSummary;
+}
 
 const locations: any = getLocationNames();
 

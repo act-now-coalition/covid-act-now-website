@@ -1,7 +1,8 @@
 import React, { useState, Fragment } from 'react';
-import CompareTable from 'components/Compare/CompareTable';
 import { Modal } from '@material-ui/core';
+import CompareTable from 'components/Compare/CompareTable';
 import ModalCompare from 'components/Compare/ModalCompare';
+import { SummaryForCompare } from 'common/utils/compare';
 
 const CompareMain = (props: {
   stateId: string;
@@ -11,6 +12,8 @@ const CompareMain = (props: {
   locationsViewable: number;
   isLocationPage?: Boolean;
   isHomepage?: Boolean;
+  locations: SummaryForCompare[];
+  currentCounty?: any;
 }) => {
   const [showModal, setShowModal] = useState(false);
   const handleCloseModal = () => {
@@ -27,6 +30,8 @@ const CompareMain = (props: {
         locationsViewable={props.locationsViewable}
         isLocationPage={props.isLocationPage}
         isHomepage={props.isHomepage}
+        locations={props.locations}
+        currentCounty={props.currentCounty}
       />
       <Modal open={showModal} onClose={handleCloseModal}>
         <ModalCompare
@@ -36,6 +41,8 @@ const CompareMain = (props: {
           setShowModal={setShowModal}
           isLocationPage={props.isLocationPage}
           isHomepage={props.isHomepage}
+          locations={props.locations}
+          currentCounty={props.currentCounty}
         />
       </Modal>
     </Fragment>

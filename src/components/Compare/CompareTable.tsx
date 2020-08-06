@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { TableBody } from '@material-ui/core';
+import { sortBy, findIndex, partition } from 'lodash';
 import {
   Wrapper,
   StyledTable,
@@ -12,17 +13,9 @@ import {
 } from 'components/Compare/Compare.style';
 import CompareTableRow from 'components/Compare/CompareTableRow';
 import HeaderCell from 'components/Compare/HeaderCell';
-import { Location } from 'common/locations';
-import { countySummary, LocationSummary } from 'common/location_summaries';
 import { Metric } from 'common/metric';
 import { COLOR_MAP } from 'common/colors';
-import { sortBy, findIndex, partition } from 'lodash';
-import { getStatesArr, getCountiesArr } from 'common/utils/compare';
-
-export interface SummaryForCompare {
-  locationInfo: Location;
-  metricsInfo: LocationSummary;
-}
+import { SummaryForCompare } from 'common/utils/compare';
 
 const CompareTable = (props: {
   stateId: string;
@@ -33,6 +26,8 @@ const CompareTable = (props: {
   locationsViewable?: number;
   isLocationPage?: Boolean;
   isHomepage?: Boolean;
+  locations: any;
+  currentCounty?: any;
 }) => {
   const [sorter, setSorter] = useState(5);
   const [sortDescending, setSortDescending] = useState(true);
@@ -45,24 +40,14 @@ const CompareTable = (props: {
     Metric.CONTACT_TRACING,
   ];
 
-  const statesArr = getStatesArr();
-  const countiesArr = getCountiesArr(props.stateId);
+  const currentCounty = props.county && props.currentCounty;
 
-  const currentCounty: any = props.county
-    ? {
-        locationInfo: props.county,
-        metricsInfo: countySummary(props.county.full_fips_code),
-      }
-    : {};
-
-  const currentCountyFips = props.county
+  const currentCountyFips = currentCounty
     ? currentCounty.locationInfo.full_fips_code
     : 0;
 
-  const locationsArr = props.isHomepage ? statesArr : countiesArr;
-
   const partitionedLocations = partition(
-    locationsArr,
+    props.locations,
     location => location.metricsInfo.metrics[sorter].value !== null,
   );
   const sortedLocationsWithValue = sortBy(
