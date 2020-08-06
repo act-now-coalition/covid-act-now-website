@@ -5,6 +5,7 @@ import { COLOR_MAP, LEVEL_COLOR } from 'common/colors';
 import { COLORS } from 'common';
 import { Metric } from 'common/metric';
 import { Level } from 'common/level';
+import { DisclaimerWrapper } from 'components/Disclaimer/Disclaimer.style';
 
 const LEVEL_COLOR_CONTACT_TRACING = {
   [Level.LOW]: COLOR_MAP.RED.BASE,
@@ -52,6 +53,14 @@ export const Wrapper = styled.div<{ isModal?: Boolean; isHomepage?: Boolean }>`
       }
     }
   }
+
+  ${DisclaimerWrapper} {
+    margin: 0 0rem 1.5rem;
+
+    @media (max-width: 900px) {
+      margin: 0 1rem 1.5rem;
+    }
+  }
 `;
 
 export const StyledTable = styled(Table)<{ isModal?: Boolean }>`
@@ -60,6 +69,8 @@ export const StyledTable = styled(Table)<{ isModal?: Boolean }>`
 
 export const Cell = styled(TableCell)<{ locationHeaderCell?: Boolean }>`
   cursor: ${({ locationHeaderCell }) => !locationHeaderCell && 'pointer'};
+  text-transform: uppercase;
+  font-size: 0.9rem;
 `;
 
 export const TableHeadContainer = styled(TableHead)<{ isModal?: Boolean }>`
@@ -166,7 +177,7 @@ export const ArrowContainer = styled.div<{
   display: flex;
   font-family: Roboto;
   font-size: 0.875rem;
-  transform: translatex(-0.3rem);
+  transform: translate(-0.3rem, 0.15rem);
   margin-top: 0.25rem;
 
   span {

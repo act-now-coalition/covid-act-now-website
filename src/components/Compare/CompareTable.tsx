@@ -7,6 +7,11 @@ import {
   Header,
   UnknownsDisclaimer,
 } from 'components/Compare/Compare.style';
+import {
+  DisclaimerWrapper,
+  DisclaimerBody,
+} from 'components/Disclaimer/Disclaimer.style';
+
 import { Metric } from 'common/metric';
 import { COLOR_MAP } from 'common/colors';
 import LocationTable from './LocationTable';
@@ -126,10 +131,12 @@ const CompareTable = (props: {
             </ViewAllLink>
           </Footer>
           {!props.isHomepage && (
-            <UnknownsDisclaimer>
-              {props.stateName} only reports contact tracing and positive test
-              rate at the state level.
-            </UnknownsDisclaimer>
+            <DisclaimerWrapper>
+              <DisclaimerBody>
+                {props.stateName} only reports contact tracing and positive test
+                rate at the state level.
+              </DisclaimerBody>
+            </DisclaimerWrapper>
           )}
         </Fragment>
       )}
