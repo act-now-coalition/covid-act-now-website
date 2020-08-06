@@ -16,11 +16,7 @@ import HeaderCell from 'components/Compare/HeaderCell';
 import { Metric } from 'common/metric';
 import { COLOR_MAP } from 'common/colors';
 import LocationTable from './LocationTable';
-
-export interface SummaryForCompare {
-  locationInfo: Location;
-  metricsInfo: LocationSummary;
-}
+import { SummaryForCompare } from 'common/utils/compare';
 
 const CompareTable = (props: {
   stateName?: string;
