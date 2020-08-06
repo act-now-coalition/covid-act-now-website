@@ -23,7 +23,7 @@ const ModalCompare = (props: {
   return (
     <Fragment>
       <BodyScrollLock />
-      <ModalHeader>
+      <ModalHeader isHomepage={props.isHomepage}>
         {props.isHomepage ? 'States' : `${props.stateName} counties`}
         <CloseIcon onClick={() => props.setShowModal(false)} />
       </ModalHeader>

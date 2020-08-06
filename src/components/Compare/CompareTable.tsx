@@ -96,7 +96,7 @@ const CompareTable = (props: {
     .filter(location => location.metricsInfo !== null);
 
   return (
-    <Wrapper isModal={props.isModal}>
+    <Wrapper isModal={props.isModal} isHomepage={props.isHomepage}>
       {!props.isModal && <Header>{headerCopy}</Header>}
       <LocationTable
         firstHeaderName={firstHeaderName}

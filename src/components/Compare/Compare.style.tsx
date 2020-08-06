@@ -14,8 +14,8 @@ const LEVEL_COLOR_CONTACT_TRACING = {
   [Level.UNKNOWN]: COLOR_MAP.GRAY.BASE,
 };
 
-export const Wrapper = styled.div<{ isModal?: Boolean }>`
-  max-width: 900px;
+export const Wrapper = styled.div<{ isModal?: Boolean; isHomepage?: Boolean }>`
+  max-width: ${({ isHomepage }) => (isHomepage ? '1000px' : '900px')};
   width: 100%;
   margin: ${({ isModal }) => (isModal ? '0 auto' : '1rem auto')};
   background: white;
@@ -235,7 +235,7 @@ export const Header = styled.div`
   font-size: 1.5rem;
 `;
 
-export const ModalHeader = styled.div`
+export const ModalHeader = styled.div<{ isHomepage?: Boolean }>`
   background-color: black;
   color: white;
   font-family: Roboto;
@@ -245,7 +245,7 @@ export const ModalHeader = styled.div`
   padding: 1rem 1rem 1rem 1.25rem;
   font-weight: bold;
   align-items: center;
-  max-width: 900px;
+  max-width: ${({ isHomepage }) => (isHomepage ? '1000px' : '900px')};
   width: 100%;
   margin: 0 auto;
 
