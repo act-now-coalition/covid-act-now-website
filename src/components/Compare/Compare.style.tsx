@@ -7,6 +7,9 @@ import { Metric } from 'common/metric';
 import { Level } from 'common/level';
 import { DisclaimerWrapper } from 'components/Disclaimer/Disclaimer.style';
 
+export const locationNameCellWidth = 145;
+export const metricCellWidth = 120;
+
 const LEVEL_COLOR_CONTACT_TRACING = {
   [Level.LOW]: COLOR_MAP.RED.BASE,
   [Level.MEDIUM]: COLOR_MAP.ORANGE_DARK.BASE,
@@ -46,10 +49,12 @@ export const Wrapper = styled.div<{ isModal?: Boolean; isHomepage?: Boolean }>`
     td {
       &:first-child {
         width: 25%;
+        min-width: ${locationNameCellWidth}px;
       }
 
       &:not(:first-child) {
         width: 15%;
+        min-width: ${metricCellWidth}px;
       }
     }
   }
@@ -100,10 +105,9 @@ export const MetricCell = styled.td<{
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   cursor: pointer;
-  min-width: 100px;
 
   &:first-child {
-    min-width: 130px;
+    min-width: ${locationNameCellWidth}px;
     &:hover {
       color: ${COLOR_MAP.BLUE};
     }
@@ -114,6 +118,7 @@ export const MetricCell = styled.td<{
   }
 
   &:not(:first-child) {
+    min-width: ${metricCellWidth}px;
     font-family: Source Code Pro;
     color: ${({ sorter, metric }) =>
       sorter === metric ? 'black' : `${COLOR_MAP.GRAY_BODY_COPY}`};

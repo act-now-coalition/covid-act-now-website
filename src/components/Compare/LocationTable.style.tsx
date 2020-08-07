@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 import { TableHead } from '@material-ui/core';
-import { Cell } from './Compare.style';
+import { Cell, locationNameCellWidth, metricCellWidth } from './Compare.style';
 import { COLORS } from 'common';
 
-const minTableWidth = '630px';
+const minTableWidth = locationNameCellWidth + 5 * metricCellWidth;
 
 export const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
-  max-height: 80vh;
+  max-height: 100vh;
   min-height: 0;
   width: 100%;
   overflow-x: scroll;
@@ -18,7 +18,7 @@ export const Body = styled.div`
   flex: 1 1 auto;
   min-height: 0;
   overflow-y: scroll;
-  min-width: ${minTableWidth};
+  min-width: ${minTableWidth}px;
 `;
 
 export const Container = styled.div`
@@ -29,7 +29,7 @@ export const Container = styled.div`
 export const Head = styled.div`
   flex: 0 0 auto;
   min-height: 0;
-  min-width: ${minTableWidth};
+  min-width: ${minTableWidth}px;
 `;
 
 export const TableContainer = styled.div<{ isModal: boolean }>`
