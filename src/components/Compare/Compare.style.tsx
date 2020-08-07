@@ -278,10 +278,4 @@ export const ModalHeader = styled.div<{ isHomepage?: Boolean }>`
   }
 `;
 
-export const UnknownsDisclaimer = styled.div`
-  background-color: #fafafa;
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
-  padding: 1rem;
-`;
-
 export const DivForRef = styled.div``;

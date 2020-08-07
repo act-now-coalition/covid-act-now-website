@@ -5,7 +5,6 @@ import {
   Footer,
   ViewAllLink,
   Header,
-  UnknownsDisclaimer,
 } from 'components/Compare/Compare.style';
 import {
   DisclaimerWrapper,
