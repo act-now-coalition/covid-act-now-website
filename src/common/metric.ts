@@ -12,6 +12,10 @@ import { fail } from 'assert';
 import { isNumber } from 'lodash';
 
 export enum Metric {
+  // NOTE: Always add new metrics to the end (don't reorder). For better or
+  // worse, the metric number is encoded in URLs and in our persisted summaries
+  // files (used by /internal/compare/), etc. So reordering them would break
+  // things.
   CASE_GROWTH_RATE,
   POSITIVE_TESTS,
   HOSPITAL_USAGE,
@@ -20,10 +24,14 @@ export enum Metric {
   CASE_DENSITY,
 }
 
-// Not sure if there's a better way to enumerate all enum values? :-(
-export const ALL_METRICS = Object.values(Metric).filter(
-  v => typeof v === 'number',
-) as Metric[];
+export const ALL_METRICS = [
+  Metric.CASE_DENSITY,
+  Metric.CASE_GROWTH_RATE,
+  Metric.POSITIVE_TESTS,
+  Metric.HOSPITAL_USAGE,
+  Metric.CONTACT_TRACING,
+  Metric.FUTURE_PROJECTIONS,
+];
 
 // Future Projections has a graph but not a value.
 export const ALL_VALUE_METRICS = ALL_METRICS.filter(

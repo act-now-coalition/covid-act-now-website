@@ -4,8 +4,8 @@ import path from 'path';
 import {
   fetchAllStateProjections,
   fetchAllCountyProjections,
-  currentSnapshot,
 } from '../src/common/utils/model';
+import { currentSnapshot } from '../src/common/utils/snapshots';
 import { LocationSummary } from '../src/common/location_summaries';
 
 async function main() {

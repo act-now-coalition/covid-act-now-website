@@ -353,8 +353,7 @@ export class Projection {
       [date: string]: PredictionTimeseriesRow | ActualsTimeseriesRow;
     } = {};
     ts.forEach((row: PredictionTimeseriesRow | ActualsTimeseriesRow) => {
-      const ts_date = moment.utc(row.date).toString();
-      dict[ts_date] = row;
+      dict[row.date] = row;
     });
     return dict;
   }
@@ -401,11 +400,12 @@ export class Projection {
 
     let currDate = earliestDate.clone();
     while (currDate.diff(latestDate) <= 0) {
+      const ts = currDate.format('YYYY-MM-DD');
       const timeseriesRowForDate = timeseriesDictionary[
-        currDate.toString()
+        ts
       ] as PredictionTimeseriesRow;
       const actualsTimeseriesrowForDate = actualsTimeseriesDictionary[
-        currDate.toString()
+        ts
       ] as ActualsTimeseriesRow;
 
       timeseries.push(timeseriesRowForDate || null);
