@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowContainer, Cell } from 'components/Compare/Compare.style';
-import { getMetricNameExtended } from 'common/metric';
+import { getMetricNameForCompare } from 'common/metric';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
@@ -40,7 +40,7 @@ const HeaderCell = (props: {
         cellOnClick();
       }}
     >
-      <span>{getMetricNameExtended(metricInMap)}</span>
+      <span>{getMetricNameForCompare(metricInMap)}</span>
       <ArrowContainer
         metric={metricInMap}
         sortDescending={sortDescending}

@@ -12,6 +12,10 @@ export const ModalContainer = styled.div`
   min-height: 0;
   width: 100%;
   overflow-x: scroll;
+
+  @media (min-width: 600px) {
+    max-height: 80vh;
+  }
 `;
 
 export const Body = styled.div`

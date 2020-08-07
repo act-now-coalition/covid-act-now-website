@@ -133,3 +133,12 @@ export const formatValue = (
   }
   fail('Invalid Chart Type');
 };
+
+//TODO (chelsi)- consolidate getMetricName functions
+export function getMetricNameForCompare(metric: Metric) {
+  if (metric === Metric.CASE_DENSITY) {
+    return `${METRIC_TO_NAME[metric]} per 100k`;
+  } else {
+    return METRIC_TO_NAME[metric];
+  }
+}
