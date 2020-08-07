@@ -181,7 +181,7 @@ const ChartsHolder = (props: {
             <CompareMain
               stateName={props.projections.stateName}
               county={props.county}
-              locationsViewable={10}
+              locationsViewable={6}
               locations={locationsForCompare}
               currentCounty={currentCountyForCompare}
             />
