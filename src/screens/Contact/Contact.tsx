@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import ShareBlock from 'components/ShareBlock/ShareBlock';
 import Typography from '@material-ui/core/Typography';
@@ -7,6 +7,7 @@ import StapledSidebar, {
   SectionHeader,
 } from 'components/StapledSidebar/StapledSidebar';
 import { Wrapper, Content, Header } from './Contact.style';
+import ExternalLink from 'components/ExternalLink';
 
 const sidebar = (
   <React.Fragment>
@@ -16,6 +17,18 @@ const sidebar = (
     <SidebarLink href="#join-us">Join Us</SidebarLink>
     <SidebarLink href="#donate">Donate</SidebarLink>
   </React.Fragment>
+);
+
+const Paragraph: FunctionComponent = ({ children }) => (
+  <Typography variant="body1" component="p">
+    {children}
+  </Typography>
+);
+
+const ListItem: FunctionComponent = ({ children }) => (
+  <li>
+    <Paragraph>{children}</Paragraph>
+  </li>
 );
 
 const Contact = ({ children }: { children: React.ReactNode }) => {
@@ -35,123 +48,122 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
       </Header>
       <Content>
         <StapledSidebar sidebar={sidebar}>
-          <SectionHeader variant="body1" component="p">
-            See our <a href="/about#faq">FAQ here</a>. If you have more
-            questions, please reach out to us at the email addresses below.
-          </SectionHeader>
-          <SectionHeader variant="h4" component="h4" id="general">
+          <SectionHeader variant="h4" component="h2" id="general">
             General Questions
           </SectionHeader>
-          <Typography variant="body1" component="p">
-            Email{' '}
-            <a
-              href="mailto:info@covidactnow.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              info@covidactnow.org
-            </a>
-            .
-          </Typography>
 
-          <SectionHeader variant="h4" component="h4" id="governments">
+          <Paragraph>
+            Email{' '}
+            <ExternalLink href="mailto:info@covidactnow.org">
+              info@covidactnow.org
+            </ExternalLink>
+            .
+          </Paragraph>
+
+          <SectionHeader variant="h4" component="h2" id="governments">
             Governments
           </SectionHeader>
-          <Typography variant="body1" component="p">
-            Are you with a state or local government? Reach out to us at{' '}
-            <a
-              href="mailto:gov@covidactnow.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+          <Paragraph>
+            Are you with a state or local government? Our goal is to provide you
+            with data, modeling, and analysis to manage your response to COVID.
+            Reach out to us at{' '}
+            <ExternalLink href="mailto:gov@covidactnow.org">
               gov@covidactnow.org
-            </a>
+            </ExternalLink>
             .
-          </Typography>
-          <Typography variant="body1" component="p">
-            Our goal is to provide you with data, modeling, and analysis to help
-            your government manage its response to COVID. Our model is only as
-            good as its data. If you have different or higher quality data, we
-            can work together to ingest that data into the model and create
-            better, more accurate COVID projections to help your government plan
-            its response.
-          </Typography>
+          </Paragraph>
+          <Paragraph>
+            For customized modeling, see our{' '}
+            <ExternalLink href="https://covidactnow.org/resources">
+              COVID Response Simulator
+            </ExternalLink>
+            .
+          </Paragraph>
 
-          <SectionHeader variant="h4" component="h4" id="press">
+          <SectionHeader variant="h4" component="h2" id="press">
             Press
           </SectionHeader>
-          <Typography variant="body1" component="p">
+          <Paragraph>
             Reach out to us at{' '}
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="mailto:press@covidactnow.org"
-            >
+            <ExternalLink href="mailto:press@covidactnow.org">
               press@covidactnow.org
-            </a>
+            </ExternalLink>
             .
-          </Typography>
+          </Paragraph>
 
-          <SectionHeader variant="h4" component="h4" id="join-us">
+          <SectionHeader variant="h4" component="h2" id="join-us">
             Join us!
           </SectionHeader>
-          <Typography variant="body1" component="p">
-            Do you want to join the Covid Act Now team?{' '}
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://docs.google.com/forms/d/e/1FAIpQLSfQkdwXsbDbwLHhWwBD6wzNiw54_0P6A60r8hujP3qnaxxFkA/viewform"
-            >
+          <Paragraph>
+            Covid Act Now is a multidisciplinary team of technologists,
+            epidemiologists, health experts, and public policy leaders working
+            to provide disease intelligence and data analysis on COVID in the
+            U.S. Want to join us?{' '}
+            <ExternalLink href="https://docs.google.com/forms/d/e/1FAIpQLSfQkdwXsbDbwLHhWwBD6wzNiw54_0P6A60r8hujP3qnaxxFkA/viewform">
               Let us know
-            </a>
-            . Right now, we need:
-          </Typography>
+            </ExternalLink>
+            . Some roles that we need:
+          </Paragraph>
           <ul>
-            <li>
-              <Typography variant="body1" component="p">
-                JavaScript/React, Python engineers
-              </Typography>
-            </li>
-            <li>
-              <Typography variant="body1" component="p">
-                Epidemiologists
-              </Typography>
-            </li>
-            <li>
-              <Typography variant="body1" component="p">
-                Data Modelers
-              </Typography>
-            </li>
-            <li>
-              <Typography variant="body1" component="p">
-                ...and more!
-              </Typography>
-            </li>
+            <ListItem>UI/UX Designers</ListItem>
+            <ListItem>JavaScript/React, Python engineers</ListItem>
+            <ListItem>Epidemiologists</ListItem>
+            <ListItem>Data Modelers</ListItem>
+            <ListItem>User Support Representatives</ListItem>
+            <ListItem>Product Managers</ListItem>
+            <ListItem>Social Media Managers</ListItem>
+            <ListItem>...and more!</ListItem>
+          </ul>
+          <Paragraph>
+            Want to intern with us?{' '}
+            <ExternalLink href="https://docs.google.com/forms/d/1rvM5StysnTrhJxXhIdvbTmDvpJKKrfEFl2fQfDt-86Y/viewform?ts=5f248b67&edit_requested=true">
+              Let us know
+            </ExternalLink>
+            . We're currently offering full-time internships (volunteer):
+          </Paragraph>
+          <ul>
+            <ListItem>
+              <ExternalLink href="https://docs.google.com/document/d/1_4P0lM1k2pGRXSNGVe_p8TcmdMdaIug5lZeIK-3zU24/edit?ts=5f2488d3#">
+                Strategy & Operations
+              </ExternalLink>
+            </ListItem>
+            <ListItem>
+              <ExternalLink href="https://docs.google.com/document/d/1HJJ8-W87Z1dGVK1JZF3cDNVyBHSq-Z1MYVoVL4ofZj0/edit#">
+                User Support Representative
+              </ExternalLink>
+            </ListItem>
+            <ListItem>
+              <ExternalLink href="https://docs.google.com/document/d/1UyDFQW3uraR-Zl5jAdz2SMfdwduTXDj3w_om8kdci1U/edit?usp=drive_web&ouid=101469664908591780676">
+                Content Writing
+              </ExternalLink>
+            </ListItem>
+            <ListItem>
+              <ExternalLink href="https://docs.google.com/document/d/1rjvjCu168WIVn5S2lFWxl_9d5Ve5nhY4kX6VizPhCd4/edit#">
+                Video Editing
+              </ExternalLink>
+            </ListItem>
+            <ListItem>
+              <ExternalLink href="https://docs.google.com/document/d/1JWAahMLQA-ZyZ-4yvWBBhemQTOmBt5uvFfVZLgzFJUU/edit">
+                Epidemiological Modeling
+              </ExternalLink>
+            </ListItem>
           </ul>
 
-          <SectionHeader variant="h4" component="h4" id="donate">
+          <SectionHeader variant="h4" component="h2" id="donate">
             Donate
           </SectionHeader>
-          <Typography variant="body1" component="p">
+          <Paragraph>
             We are a registered 501c3 non-profit. You can help us keep the
             lights on by making{' '}
-            <a
-              href="https://www.gofundme.com/f/qtcuvy-covid-act-now"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              a 100% tax-dedudicble donation to our GoFundMe
-            </a>
+            <ExternalLink href="https://www.gofundme.com/f/qtcuvy-covid-act-now">
+              a 100% tax-deductible donation to our GoFundMe
+            </ExternalLink>
             , or{' '}
-            <a
-              href="mailto:info@covidactnow.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <ExternalLink href="mailto:info@covidactnow.org">
               emailing us
-            </a>{' '}
+            </ExternalLink>{' '}
             if you’re a foundation interested in making a grant.
-          </Typography>
+          </Paragraph>
         </StapledSidebar>
       </Content>
       <ShareBlock />

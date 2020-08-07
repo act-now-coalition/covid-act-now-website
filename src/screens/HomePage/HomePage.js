@@ -13,7 +13,7 @@ import { GlobalSelector } from 'components/MapSelectors/MapSelectors';
 import { useHistory } from 'react-router-dom';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-
+import { getStatesArr } from 'common/utils/compare';
 import {
   Content,
   FeaturedHeader,
@@ -22,8 +22,8 @@ import {
   SearchBarThermometerWrapper,
   SectionWrapper,
 } from './HomePage.style';
-
 import { SelectorWrapper } from 'components/Header/HomePageHeader.style';
+import CompareMain from 'components/Compare/CompareMain';
 
 export default function HomePage() {
   const shareBlockRef = useRef(null);
@@ -63,6 +63,8 @@ export default function HomePage() {
     window.scrollTo(0, 0);
   };
 
+  const locationsForCompare = getStatesArr();
+
   return (
     <>
       <EnsureSharingIdInUrl />
@@ -88,6 +90,11 @@ export default function HomePage() {
             </SearchBarThermometerWrapper>
             <Map hideLegend />
             {isMobile && <HomePageThermometer />}
+            <CompareMain
+              locationsViewable={6}
+              isHomepage
+              locations={locationsForCompare}
+            />
             <SectionWrapper ref={indicatorsRef}>
               <CriteriaExplanation isMobile={isMobile} />
             </SectionWrapper>
