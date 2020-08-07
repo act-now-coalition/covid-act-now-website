@@ -133,8 +133,7 @@ const CompareTable = (props: {
           {!props.isHomepage && (
             <DisclaimerWrapper>
               <DisclaimerBody>
-                {props.stateName} only reports contact tracing and positive test
-                rate at the state level.
+                Most states only report contact tracing at the state level.
               </DisclaimerBody>
             </DisclaimerWrapper>
           )}

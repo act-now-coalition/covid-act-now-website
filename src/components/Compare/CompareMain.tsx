@@ -16,7 +16,7 @@ const CompareMain = (props: {
 }) => {
   const tableRef = useRef<HTMLDivElement>(null);
 
-  const scrollOffset = props.isHomepage ? 75 : 180;
+  const scrollOffset = props.isHomepage ? 75 : 165;
   const scrollTo = (div: null | HTMLDivElement) =>
     div &&
     window.scrollTo({

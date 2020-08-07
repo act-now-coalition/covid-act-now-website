@@ -8,7 +8,7 @@ const minTableWidth = locationNameCellWidth + 5 * metricCellWidth;
 export const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
-  max-height: 100vh;
+  max-height: calc(100vh - 60px);
   min-height: 0;
   width: 100%;
   overflow-x: scroll;
