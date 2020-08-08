@@ -535,7 +535,7 @@ export class Projection {
   /**
    * Given a series of cumulative values, convert it to a series of deltas.
    *
-   * Always returns null for the first value to avoid an arbitrarily large
+   * Always returns null for the first delta to avoid an arbitrarily large
    * delta (that may represent a bunch of historical data).
    *
    * Nulls are skipped, emitting null as the delta and keeping track of the
@@ -544,23 +544,23 @@ export class Projection {
   private deltasFromCumulatives(
     cumulatives: Array<number | null>,
   ): Array<number | null> {
-    let lastNonNull = 0;
-    const result: Array<number | null> = [null];
-    for (let i = 1; i < cumulatives.length; i++) {
+    let lastValue: number | null = null;
+    const result: Array<number | null> = [];
+    for (let i = 0; i < cumulatives.length; i++) {
       const current = cumulatives[i];
       if (current === null) {
         result.push(null);
       } else {
-        if (current - lastNonNull < 0) {
+        if (lastValue === null || current - lastValue < 0) {
           // Sometimes series have a "correction" that resets the count
           // backwards. We treat that as a 'null' delta. Note: They could also
           // have a correction in the opposite direction, forcing an unusually
           // high delta, but we don't have a way to detect / handle that. :-(
           result.push(null);
         } else {
-          result.push(current - lastNonNull);
+          result.push(current - lastValue);
         }
-        lastNonNull = current;
+        lastValue = current;
       }
     }
     return result;
