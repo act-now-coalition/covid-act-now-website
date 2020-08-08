@@ -190,8 +190,15 @@ export class Projection {
     this.smoothedDailyPositiveTests = this.smoothWithRollingAverage(
       this.deltasFromCumulatives(cumulativePositiveTests),
     );
+    // Locations sometimes fail to report negative tests for several days while
+    // continuing to report positives, leaving a string of 0 deltas at the tail
+    // of the negatives series. Rather than average these 0's into the rolling
+    // average, which will cause the test positive rate to skyrocket, we just
+    // truncate them and don't report test positive data for the last few days.
     this.smoothedDailyNegativeTests = this.smoothWithRollingAverage(
       this.deltasFromCumulatives(cumulativeNegativeTests),
+      /*days=*/ 7,
+      /*includeTrailingZeros=*/ false,
     );
 
     const cumulativeConfirmedCases = this.smoothCumulatives(
@@ -708,10 +715,18 @@ export class Projection {
   private smoothWithRollingAverage(
     data: Array<number | null>,
     days = 7,
+    includeTrailingZeros = true,
   ): Array<number | null> {
     const result = [];
     let sum = 0;
     let count = 0;
+    let lastValidIndex = data.length - 1;
+    if (!includeTrailingZeros) {
+      lastValidIndex = _.findLastIndex(
+        data,
+        value => value !== null && value !== 0,
+      );
+    }
     for (let i = 0; i < data.length; i++) {
       const oldValue = i < days ? null : data[i - days];
       if (oldValue !== null) {
@@ -720,7 +735,7 @@ export class Projection {
       }
 
       const newValue = data[i];
-      if (newValue !== null) {
+      if (newValue !== null && i <= lastValidIndex) {
         sum += newValue;
         count++;
         result.push(sum / count);
