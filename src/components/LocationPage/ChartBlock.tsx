@@ -17,7 +17,7 @@ import {
   getMetricStatusText,
 } from 'common/metric';
 import { formatUtcDate } from 'common/utils';
-import { metricFutureProjection } from 'common/metrics/future_projection';
+import { FutureProjectionsMetric } from 'common/metrics/future_projection';
 import MetricChart from 'components/Charts/MetricChart';
 import { COLORS } from 'common';
 
@@ -114,7 +114,7 @@ function ChartBlock(props: {
           ) : (
             <Fragment>
               <ChartDescription>
-                {metricFutureProjection.renderStatus(props.projections)}
+                {FutureProjectionsMetric.renderStatus(props.projections)}
               </ChartDescription>
               {props.isMobile && (
                 <ShareButtons

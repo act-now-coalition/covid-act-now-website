@@ -7,7 +7,7 @@ import { formatDecimal } from 'common/utils';
 import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
 
-export const metricCaseGrowth: MetricDefinition = {
+export const CaseGrowthMetric: MetricDefinition = {
   renderStatus,
 };
 

@@ -96,12 +96,12 @@ export function getMetricDisclaimer(metric: Metric) {
 }
 
 const metricDefinitions: { [metric in Metric]: MetricDefinition } = {
-  [Metric.CASE_GROWTH_RATE]: CaseGrowth.metricCaseGrowth,
-  [Metric.POSITIVE_TESTS]: TestRates.metricPositiveTestRate,
-  [Metric.HOSPITAL_USAGE]: Hospitalizations.metricICUHeadroom,
-  [Metric.CONTACT_TRACING]: ContactTracing.metricContactTracing,
-  [Metric.FUTURE_PROJECTIONS]: FutureProjections.metricFutureProjection,
-  [Metric.CASE_DENSITY]: CaseDensity.metricCaseIncidence,
+  [Metric.CASE_GROWTH_RATE]: CaseGrowth.CaseGrowthMetric,
+  [Metric.POSITIVE_TESTS]: TestRates.PositiveTestRateMetric,
+  [Metric.HOSPITAL_USAGE]: Hospitalizations.ICUHeadroomMetric,
+  [Metric.CONTACT_TRACING]: ContactTracing.ContactTracingMetric,
+  [Metric.FUTURE_PROJECTIONS]: FutureProjections.FutureProjectionsMetric,
+  [Metric.CASE_DENSITY]: CaseDensity.CaseIncidenceMetric,
 };
 
 export function getMetricStatusText(metric: Metric, projections: Projections) {

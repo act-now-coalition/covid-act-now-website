@@ -4,7 +4,7 @@ import { Projection } from 'common/models/Projection';
 import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
 
-export const metricFutureProjection: MetricDefinition = {
+export const FutureProjectionsMetric: MetricDefinition = {
   renderStatus,
 };
 

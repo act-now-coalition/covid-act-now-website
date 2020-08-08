@@ -8,7 +8,7 @@ import { Projections } from 'common/models/Projections';
 import { TRACERS_NEEDED_PER_CASE } from 'common/models/Projection';
 import { MetricDefinition } from './interfaces';
 
-export const metricContactTracing: MetricDefinition = {
+export const ContactTracingMetric: MetricDefinition = {
   renderStatus,
 };
 

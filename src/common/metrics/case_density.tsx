@@ -6,7 +6,7 @@ import { formatDecimal, formatPercent, formatInteger } from 'common/utils';
 import ExternalLink from 'components/ExternalLink';
 import { MetricDefinition } from './interfaces';
 
-export const metricCaseIncidence: MetricDefinition = {
+export const CaseIncidenceMetric: MetricDefinition = {
   renderStatus,
 };
 

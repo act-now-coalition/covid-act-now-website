@@ -7,7 +7,7 @@ import { formatPercent } from 'common/utils';
 import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
 
-export const metricPositiveTestRate: MetricDefinition = {
+export const PositiveTestRateMetric: MetricDefinition = {
   renderStatus,
 };
 

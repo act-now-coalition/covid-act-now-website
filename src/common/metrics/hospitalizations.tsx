@@ -8,7 +8,7 @@ import { Projections } from 'common/models/Projections';
 import { NonCovidPatientsMethod } from 'common/models/ICUHeadroom';
 import { MetricDefinition } from './interfaces';
 
-export const metricICUHeadroom: MetricDefinition = {
+export const ICUHeadroomMetric: MetricDefinition = {
   renderStatus,
 };
 
