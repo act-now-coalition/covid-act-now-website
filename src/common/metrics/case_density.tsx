@@ -2,7 +2,12 @@ import React, { Fragment } from 'react';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
 import { Projections } from 'common/models/Projections';
-import { formatDecimal, formatPercent, formatInteger } from 'common/utils';
+import {
+  formatDecimal,
+  formatPercent,
+  formatInteger,
+  formatEstimate,
+} from 'common/utils';
 import ExternalLink from 'components/ExternalLink';
 import { MetricDefinition } from './interfaces';
 
@@ -84,13 +89,14 @@ export function renderStatus(projections: Projections): React.ReactElement {
   return (
     <Fragment>
       Over the last week, {locationName} has averaged{' '}
-      {formatDecimal(currentCaseDensity, 1)} new confirmed cases per day for
-      every 100,000 residents. Over the next year, this translates to{' '}
-      {formatInteger(newCasesPerYear)} cases and an{' '}
+      {formatInteger(newCasesPerDay)} new confirmed cases per day (
+      <b>{formatDecimal(currentCaseDensity, 1)}</b> for every 100,000
+      residents). Over the next year, this translates to around{' '}
+      {formatEstimate(newCasesPerYear)} cases and an{' '}
       <ExternalLink href="https://www.globalhealthnow.org/2020-06/us-cases-10x-higher-reported">
         estimated
       </ExternalLink>{' '}
-      {formatInteger(estimatedNewInfectionsPerYear)} infections (
+      {formatEstimate(estimatedNewInfectionsPerYear)} infections (
       {formatPercent(estimatedPercentageNewInfectedPerYear, 1)} of the
       population).
     </Fragment>
