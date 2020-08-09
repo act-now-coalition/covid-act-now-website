@@ -14,7 +14,7 @@ import {
 import { Metric } from 'common/metric';
 import { COLOR_MAP } from 'common/colors';
 import LocationTable from './LocationTable';
-import { SummaryForCompare, RankedLocationSummary } from 'common/utils/compare';
+import { SummaryForCompare, RankedLocationSummary, getDisclaimerCopy } from 'common/utils/compare';
 
 const CompareTable = (props: {
   stateName?: string;
@@ -136,7 +136,7 @@ const CompareTable = (props: {
           {!props.isHomepage && (
             <DisclaimerWrapper>
               <DisclaimerBody>
-                Most states only report contact tracing at the state level.
+                {getDisclaimerCopy(props.locations, props.stateName)}
               </DisclaimerBody>
             </DisclaimerWrapper>
           )}
