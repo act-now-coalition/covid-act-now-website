@@ -77,10 +77,11 @@ export function renderStatus(projections: Projections): React.ReactElement {
     );
   }
 
-  const ESTIMATE_FACTOR = 5;
+  const ESTIMATED_INFECTIONS_FACTOR = 5;
   const newCasesPerDay = currentDailyAverageCases;
   const newCasesPerYear = 365 * newCasesPerDay;
-  const estimatedNewInfectionsPerYear = ESTIMATE_FACTOR * newCasesPerYear;
+  const estimatedNewInfectionsPerYear =
+    ESTIMATED_INFECTIONS_FACTOR * newCasesPerYear;
   const estimatedPercentageNewInfectedPerYear = Math.min(
     1,
     estimatedNewInfectionsPerYear / totalPopulation,
