@@ -1,9 +1,15 @@
+import React, { Fragment } from 'react';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
 import { getLevel, Metric } from 'common/metric';
 import { levelText } from 'common/utils/chart';
 import { formatDecimal } from 'common/utils';
-import { Projection } from 'common/models/Projection';
+import { Projections } from 'common/models/Projections';
+import { MetricDefinition } from './interfaces';
+
+export const CaseGrowthMetric: MetricDefinition = {
+  renderStatus,
+};
 
 export const METRIC_NAME = 'Infection rate';
 
@@ -65,22 +71,30 @@ export const CASE_GROWTH_RATE_LEVEL_INFO_MAP: LevelInfoMap = {
 export const CASE_GROWTH_DISCLAIMER =
   'Each data point is a 14-day weighted average. We present the most recent seven days of data as a dashed line, as data is often revised by states several days after reporting.';
 
-export function caseGrowthStatusText(projection: Projection) {
-  const rt = projection.rt!;
-  if (rt === null) {
-    return 'Not enough case data is available to generate infection growth rate.';
-  }
-  const level = getLevel(Metric.CASE_GROWTH_RATE, rt);
-  const additionalPeople = formatDecimal(rt);
-  const infectionRate = `On average, each person in ${projection.locationName} with COVID is infecting ${additionalPeople} other people.`;
+export function renderStatus(projections: Projections): React.ReactElement {
+  const { locationName, rt } = projections.primary;
 
+  if (rt === null) {
+    return (
+      <Fragment>
+        Not enough case data is available to generate infection growth rate.
+      </Fragment>
+    );
+  }
+
+  const level = getLevel(Metric.CASE_GROWTH_RATE, rt);
   const epidemiologyReasoning = levelText(
     level,
-    `Because each person is infecting less than one other person, the total number of current cases in ${projection.locationName} is shrinking.`,
+    `Because each person is infecting less than one other person, the total number of current cases in ${locationName} is shrinking.`,
     `Because this number is around 1.0, it means that COVID continues to spread, but in a slow and controlled fashion.`,
-    `As such, the total number of active cases in ${projection.locationName} is growing at an unsustainable rate. If this trend continues, the hospital system may become overloaded. Caution is warranted.`,
-    `As such, the total number of current cases in ${projection.locationName} is exploding, putting the hospital system at risk. Aggressive action urgently needed.`,
+    `As such, the total number of active cases in ${locationName} is growing at an unsustainable rate. If this trend continues, the hospital system may become overloaded. Caution is warranted.`,
+    `As such, the total number of current cases in ${locationName} is exploding, putting the hospital system at risk. Aggressive action urgently needed.`,
   );
 
-  return `${infectionRate} ${epidemiologyReasoning}`;
+  return (
+    <Fragment>
+      On average, each person in {locationName} with COVID is infecting{' '}
+      {formatDecimal(rt)} other people. {epidemiologyReasoning}
+    </Fragment>
+  );
 }

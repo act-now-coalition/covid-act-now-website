@@ -1,10 +1,16 @@
+import React, { Fragment } from 'react';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
 import { levelText } from 'common/utils/chart';
 import { getLevel, Metric } from 'common/metric';
 import { formatPercent, formatInteger } from 'common/utils';
-import { Projection } from 'common/models/Projection';
+import { Projections } from 'common/models/Projections';
 import { NonCovidPatientsMethod } from 'common/models/ICUHeadroom';
+import { MetricDefinition } from './interfaces';
+
+export const ICUHeadroomMetric: MetricDefinition = {
+  renderStatus,
+};
 
 export const METRIC_NAME = 'ICU headroom used';
 export const STATES_WITH_DATA_OVERRIDES = ['Nevada'];
@@ -67,20 +73,22 @@ export const HOSPITAL_USAGE_LEVEL_INFO_MAP: LevelInfoMap = {
 export const HOSPITALIZATIONS_DISCLAIMER =
   ', a pandemic think tank, recommends that hospitals maintain enough ICU capacity to double the number of COVID patients hospitalized.';
 
-export function hospitalOccupancyStatusText(projection: Projection) {
-  const icu = projection.icuHeadroomInfo;
+export function renderStatus(projections: Projections): React.ReactElement {
+  const icu = projections.primary.icuHeadroomInfo;
+  const { locationName } = projections.primary;
 
   if (icu === null) {
-    return 'No ICU occupancy data is available.';
+    return <Fragment>No ICU occupancy data is available.</Fragment>;
   } else if (icu.overrideInPlace) {
-    return 'While no government-reported data is currently available, news reports suggest that ICUs are at or near capacity.';
+    return (
+      <Fragment>
+        While no government-reported data is currently available, news reports
+        suggest that ICUs are at or near capacity.
+      </Fragment>
+    );
   }
-  const level = getLevel(Metric.HOSPITAL_USAGE, icu.metricValue);
-
-  const location = projection.locationName;
 
   const totalICUBeds = formatInteger(icu.totalBeds);
-
   const nonCovidUsedBeds = formatInteger(icu.nonCovidPatients);
   const nonCovidUsedBedsPercent = formatPercent(
     icu.nonCovidPatients / icu.totalBeds,
@@ -103,6 +111,7 @@ export function hospitalOccupancyStatusText(projection: Projection) {
 
   const textWeEstimate = icu.covidPatientsIsActual ? '' : 'we estimate';
 
+  const level = getLevel(Metric.HOSPITAL_USAGE, icu.metricValue);
   const textLevel = levelText(
     level,
     'This suggests there is likely enough capacity to absorb a wave of new COVID infections',
@@ -111,8 +120,13 @@ export function hospitalOccupancyStatusText(projection: Projection) {
     'This suggests hospitals cannot absorb a wave of new COVID infections without substantial surge capacity. Aggressive action urgently needed',
   );
 
-  return `${location} has about ${totalICUBeds} ICU beds. Based on best available data,
-    ${textWeEstimateThatNonCovidPatients} are currently occupied by non-COVID patients.
-    Of the ${remainingICUBeds} ICU beds remaining, ${textWeEstimate} ${covidICUPatients} are needed by COVID cases,
-    or ${icuHeadroom} of available beds. ${textLevel}.`;
+  return (
+    <Fragment>
+      {locationName} has about {totalICUBeds} ICU beds. Based on best available
+      data, {textWeEstimateThatNonCovidPatients} are currently occupied by
+      non-COVID patients. Of the {remainingICUBeds} ICU beds remaining,{' '}
+      {textWeEstimate} {covidICUPatients} are needed by COVID cases, or{' '}
+      {icuHeadroom} of available beds. {textLevel}.
+    </Fragment>
+  );
 }

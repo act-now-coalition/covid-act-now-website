@@ -4,11 +4,11 @@ import * as Hospitalizations from 'common/metrics/hospitalizations';
 import * as ContactTracing from 'common/metrics/contact_tracing';
 import * as FutureProjections from 'common/metrics/future_projection';
 import * as CaseDensity from 'common/metrics/case_density';
-import { Projection } from 'common/models/Projection';
-import { formatDecimal, formatPercent } from 'common/utils';
+import { Projections } from 'common/models/Projections';
 import { Level, LevelInfo } from 'common/level';
-import { assert } from './utils';
-import { fail } from 'assert';
+import { fail, assert } from 'common/utils';
+import { MetricDefinition } from './metrics/interfaces';
+import { formatDecimal, formatPercent } from 'common/utils';
 import { isNumber } from 'lodash';
 
 export enum Metric {
@@ -105,19 +105,22 @@ export function getMetricDisclaimer(metric: Metric) {
   return METRIC_TO_DISCLAIMER[metric];
 }
 
-export function getMetricStatusText(metric: Metric, projection: Projection) {
-  const METRIC_TO_STATUS_TEXT: { [metricName: number]: string } = {
-    [Metric.CASE_GROWTH_RATE]: CaseGrowth.caseGrowthStatusText(projection),
-    [Metric.POSITIVE_TESTS]: TestRates.positiveTestsStatusText(projection),
-    [Metric.HOSPITAL_USAGE]: Hospitalizations.hospitalOccupancyStatusText(
-      projection,
-    ),
-    [Metric.CONTACT_TRACING]: ContactTracing.contactTracingStatusText(
-      projection,
-    ),
-    [Metric.CASE_DENSITY]: CaseDensity.caseDensityStatusText(projection),
-  };
-  return METRIC_TO_STATUS_TEXT[metric];
+const metricDefinitions: { [metric in Metric]: MetricDefinition } = {
+  [Metric.CASE_GROWTH_RATE]: CaseGrowth.CaseGrowthMetric,
+  [Metric.POSITIVE_TESTS]: TestRates.PositiveTestRateMetric,
+  [Metric.HOSPITAL_USAGE]: Hospitalizations.ICUHeadroomMetric,
+  [Metric.CONTACT_TRACING]: ContactTracing.ContactTracingMetric,
+  [Metric.FUTURE_PROJECTIONS]: FutureProjections.FutureProjectionsMetric,
+  [Metric.CASE_DENSITY]: CaseDensity.CaseIncidenceMetric,
+};
+
+export function getMetricStatusText(metric: Metric, projections: Projections) {
+  if (!(metric in metricDefinitions)) {
+    fail('unknown metric');
+  }
+
+  const metricDefinition = metricDefinitions[metric];
+  return metricDefinition.renderStatus(projections);
 }
 
 export const formatValue = (

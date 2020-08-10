@@ -1,9 +1,15 @@
+import React, { Fragment } from 'react';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
 import { levelText } from 'common/utils/chart';
 import { getLevel, Metric } from 'common/metric';
 import { formatPercent } from 'common/utils';
-import { Projection } from 'common/models/Projection';
+import { Projections } from 'common/models/Projections';
+import { MetricDefinition } from './interfaces';
+
+export const PositiveTestRateMetric: MetricDefinition = {
+  renderStatus,
+};
 
 export const METRIC_NAME = 'Positive test rate';
 
@@ -66,12 +72,12 @@ export const POSITIVE_TESTS_LEVEL_INFO_MAP: LevelInfoMap = {
 export const POSITIVE_RATE_DISCLAIMER =
   'The World Health Organization recommends a positive test rate of less than 10%. The countries most successful in containing COVID have rates of 3% or less. We calculate the rate as a 7-day trailing average.';
 
-export function positiveTestsStatusText(projection: Projection) {
-  const testPositiveRate = projection.currentTestPositiveRate;
-  if (testPositiveRate === null) {
-    return 'No testing data is available.';
+export function renderStatus(projections: Projections) {
+  const { currentTestPositiveRate, locationName } = projections.primary;
+  if (currentTestPositiveRate === null) {
+    return <Fragment>No testing data is available.</Fragment>;
   }
-  const level = getLevel(Metric.POSITIVE_TESTS, testPositiveRate);
+  const level = getLevel(Metric.POSITIVE_TESTS, currentTestPositiveRate);
   const lowSizableLarge = levelText(
     level,
     'low',
@@ -79,15 +85,14 @@ export function positiveTestsStatusText(projection: Projection) {
     'relatively high',
     'relatively high',
   );
-  const percentage = formatPercent(testPositiveRate, 1);
+  const percentage = formatPercent(currentTestPositiveRate, 1);
 
-  const location = projection.locationName;
   const testingBroadlyText = levelText(
     level,
-    `which suggests enough widespread, aggressive testing in ${location} to detect most new cases`,
-    `meaning that ${location}’s testing meets WHO minimums but needs to be further expanded to detect most new cases`,
-    `which indicates that testing in ${location} is limited and that most cases may go undetected`,
-    `which indicates that testing in ${location} is limited and that most cases likely go undetected`,
+    `which suggests enough widespread, aggressive testing in ${locationName} to detect most new cases`,
+    `meaning that ${locationName}’s testing meets WHO minimums but needs to be further expanded to detect most new cases`,
+    `which indicates that testing in ${locationName} is limited and that most cases may go undetected`,
+    `which indicates that testing in ${locationName} is limited and that most cases likely go undetected`,
   );
 
   const textForecast = levelText(
@@ -98,5 +103,10 @@ export function positiveTestsStatusText(projection: Projection) {
     `At these levels, it is hard to know how fast COVID is actually spreading, and there is very high risk of being surprised by a wave of disease. More testing urgently needed`,
   );
 
-  return `A ${lowSizableLarge} percentage (${percentage}) of COVID tests were positive, ${testingBroadlyText}. ${textForecast}.`;
+  return (
+    <Fragment>
+      A {lowSizableLarge} percentage ({percentage}) of COVID tests were
+      positive, {testingBroadlyText}. {textForecast}.
+    </Fragment>
+  );
 }

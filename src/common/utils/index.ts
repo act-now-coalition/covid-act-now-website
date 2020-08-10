@@ -63,7 +63,7 @@ export function formatLocalDate(date: Date, format: string = 'LL'): string {
  * adds commas for thousands, millions, etc.
  */
 export function formatInteger(num: number): string {
-  return num.toLocaleString();
+  return Math.round(num).toLocaleString();
 }
 
 /**
@@ -83,3 +83,17 @@ export const formatDecimal = (num: number, places = 2): string =>
  */
 export const formatPercent = (num: number, places = 0): string =>
   `${formatDecimal(100 * Math.min(1, num), places)}%`;
+
+/**
+ * Returns a formatted number, rounding to keep the specified number
+ * of significant digits. Example:
+ *
+ *   formatEstimate(123456, 2)     // 120,000
+ *   formatEstimate(123456, 3)     // 123,000
+ */
+export function formatEstimate(value: number, significantDigits = 2): string {
+  if (value <= 0) {
+    return formatInteger(value);
+  }
+  return formatInteger(Number(value.toPrecision(significantDigits)));
+}
