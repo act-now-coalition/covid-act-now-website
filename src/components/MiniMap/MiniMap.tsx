@@ -46,7 +46,8 @@ const MiniMap: FunctionComponent<MiniMapProperties> = ({
     history.push(route);
   };
 
-  const showState = stateId !== MAP_FILTERS.DC;
+  const showState = (stateId !== MAP_FILTERS.DC && stateId !== MAP_FILTERS.PR);
+
   const { stateName } = projections;
 
   const onSelectCounty = (fullFips: string) => {
