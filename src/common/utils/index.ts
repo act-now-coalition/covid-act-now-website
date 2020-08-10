@@ -95,8 +95,5 @@ export function formatEstimate(value: number, significantDigits = 2): string {
   if (value <= 0) {
     return formatInteger(value);
   }
-  const numDigits = Math.floor(Math.log10(value));
-  const precision = Math.max(0, numDigits - significantDigits + 1);
-  const rounded = _.round(value, -1 * precision);
-  return formatInteger(rounded);
+  return formatInteger(Number(value.toPrecision(significantDigits)));
 }
