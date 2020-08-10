@@ -68,7 +68,6 @@ const LocationTableBody: React.FunctionComponent<{
   currentLocationRank?: number;
 }> = ({ sortedLocations, sorter, currentLocationRank }) => (
   <Table>
-    {console.log(sortedLocations, currentLocationRank)}
     <TableBody>
       {sortedLocations.map(location => (
         <CompareTableRow
@@ -132,7 +131,7 @@ const LocationTable: React.FunctionComponent<{
   return (
     <Styles.TableContainer isModal={isModal}>
       <Container>
-        <Styles.Head>
+        <Styles.Head isModal={isModal}>
           <LocationTableHead
             setSorter={setSorter}
             setSortDescending={setSortDescending}

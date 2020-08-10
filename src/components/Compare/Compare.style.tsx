@@ -159,11 +159,6 @@ export const Row = styled(TableRow)<{
     border-bottom: none;
   }
 
-  ${MetricCell} {
-    border-bottom: ${({ isCurrentCounty }) =>
-      isCurrentCounty && '2px solid #CEBFAC'};
-  }
-
   &:hover {
     color: ${COLOR_MAP.BLUE};
   }
