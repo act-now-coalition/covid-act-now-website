@@ -8,6 +8,11 @@ import HeaderCell from './HeaderCell';
 import * as Styles from './LocationTable.style';
 import * as CompareStyles from './Compare.style';
 
+interface RankedLocation {
+  rank: number;
+  location: SummaryForCompare;
+}
+
 const LocationTableHead: React.FunctionComponent<{
   setSorter: React.Dispatch<React.SetStateAction<number>>;
   setSortDescending: React.Dispatch<React.SetStateAction<boolean>>;
@@ -70,13 +75,19 @@ const PinnedRow: React.FunctionComponent<{
 );
 
 const LocationTableBody: React.FunctionComponent<{
-  sortedLocations: any[];
+  sortedLocations: RankedLocation[];
   sorter: number;
-}> = ({ sortedLocations, sorter }) => (
+  currentLocationRank?: number;
+}> = ({ sortedLocations, sorter, currentLocationRank }) => (
   <Table>
     <TableBody>
-      {sortedLocations.map((location, rank) => (
-        <CompareTableRow sorter={sorter} location={location} index={rank} />
+      {sortedLocations.map(rankedLocation => (
+        <CompareTableRow
+          sorter={sorter}
+          location={rankedLocation.location}
+          index={rankedLocation.rank}
+          isCurrentCounty={rankedLocation.rank === currentLocationRank}
+        />
       ))}
     </TableBody>
   </Table>
@@ -106,6 +117,7 @@ const LocationTable: React.FunctionComponent<{
   pinnedLocation?: SummaryForCompare;
   pinnedLocationRank?: number;
   sortedLocations: SummaryForCompare[];
+  numLocations: number;
 }> = ({
   setSorter,
   setSortDescending,
@@ -119,8 +131,29 @@ const LocationTable: React.FunctionComponent<{
   pinnedLocation,
   pinnedLocationRank,
   sortedLocations,
+  numLocations,
 }) => {
   const Container = isModal ? Styles.ModalContainer : Styles.Container;
+
+  // TODO (pablo): Pass the rank from the component above
+  const rankedLocations: RankedLocation[] = sortedLocations.map(
+    (location, rank) => ({ rank, location }),
+  );
+
+  const showBottom =
+    pinnedLocation && pinnedLocationRank && pinnedLocationRank >= numLocations;
+
+  const numLocationsMain = showBottom ? numLocations - 1 : numLocations;
+
+  const visibleLocations: RankedLocation[] = isModal
+    ? rankedLocations
+    : rankedLocations.slice(0, numLocationsMain);
+
+  const currentLocation =
+    pinnedLocation && pinnedLocationRank
+      ? { rank: pinnedLocationRank, location: pinnedLocation }
+      : null;
+
   return (
     <Styles.TableContainer isModal={isModal}>
       <Container>
@@ -136,7 +169,7 @@ const LocationTable: React.FunctionComponent<{
             metrics={metrics}
             isModal={isModal}
           />
-          {pinnedLocation && isNumber(pinnedLocationRank) && (
+          {isModal && pinnedLocation && isNumber(pinnedLocationRank) && (
             <PinnedRow
               location={pinnedLocation}
               locationRank={pinnedLocationRank}
@@ -147,9 +180,19 @@ const LocationTable: React.FunctionComponent<{
         <Styles.Body>
           <LocationTableBody
             sorter={sorter}
-            sortedLocations={sortedLocations}
+            sortedLocations={visibleLocations}
+            currentLocationRank={pinnedLocationRank}
           />
         </Styles.Body>
+        {currentLocation && showBottom && (
+          <Styles.Body>
+            <LocationTableBody
+              sorter={sorter}
+              sortedLocations={[currentLocation]}
+              currentLocationRank={currentLocation.rank}
+            />
+          </Styles.Body>
+        )}
       </Container>
     </Styles.TableContainer>
   );

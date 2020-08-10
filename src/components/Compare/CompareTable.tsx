@@ -96,9 +96,9 @@ const CompareTable = (props: {
 
   const firstHeaderName = props.isHomepage ? 'State' : 'County';
 
-  const sortedLocations = sortedLocationsArr
-    .slice(0, locationsViewable)
-    .filter(location => location.metricsInfo !== null);
+  const sortedLocations: SummaryForCompare[] = sortedLocationsArr.filter(
+    location => location.metricsInfo !== null,
+  );
 
   return (
     <Wrapper isModal={props.isModal} isHomepage={props.isHomepage}>
@@ -113,6 +113,7 @@ const CompareTable = (props: {
         pinnedLocation={props.county ? currentCounty : null}
         pinnedLocationRank={currentCountyRank}
         sortedLocations={sortedLocations}
+        numLocations={locationsViewable}
       />
       {!props.isModal && (
         <Fragment>
