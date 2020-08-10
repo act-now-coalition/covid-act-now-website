@@ -9,9 +9,9 @@ import {
 } from '../alert_emails/firestore';
 import GoogleSheets, { Cell } from '../common/google-sheets';
 import {
-  getLocationNameForFips,
   findCountyByFips,
   isStateFips,
+  findStateByFips,
 } from '../../src/common/locations';
 import { ALERT_EMAIL_GROUP_PREFIX } from '../alert_emails/utils';
 
@@ -28,9 +28,8 @@ const keyFile = path.join(
   '../alert_emails/google-service-account.json',
 );
 
-//
-const RANGE_STATES = 'data-states!A2:B';
-const RANGE_COUNTIES = 'data-counties!A2:D';
+const RANGE_STATES = 'data-states!A2:D';
+const RANGE_COUNTIES = 'data-counties!A2:E';
 const RANGE_EMAILS = 'data-emails!A2:F';
 
 interface FipsCount {
@@ -81,10 +80,10 @@ async function updateSubscriptionsByLocation() {
 }
 
 function formatStateStats(stats: FipsCount[]): Cell[][] {
-  const data = stats.map(({ fips, count }) => [
-    getLocationNameForFips(fips),
-    count,
-  ]);
+  const data = stats.map(({ fips, count }) => {
+    const state = findStateByFips(fips);
+    return [state?.state_code, state?.state, state?.population, count];
+  });
   return _.sortBy(data, item => item[0]);
 }
 
@@ -95,7 +94,7 @@ function formatCountyStats(stats: FipsCount[]): Cell[][] {
     const fipsCode = `'${fips}`;
     const countyName: string = county?.county || 'Unknown county';
     const stateCode: string = county?.state_code || '-';
-    return [fipsCode, countyName, stateCode, count];
+    return [fipsCode, countyName, stateCode, county?.population, count];
   });
   return _.sortBy(data, item => item[0]);
 }
