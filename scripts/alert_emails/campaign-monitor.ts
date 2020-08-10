@@ -1,6 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
 import delay from 'delay';
-import { toISO8601 } from './utils';
 
 export interface EmailSendData {
   Subject: string;

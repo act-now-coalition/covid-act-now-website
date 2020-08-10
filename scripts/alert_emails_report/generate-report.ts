@@ -1,6 +1,5 @@
 import path from 'path';
 import _ from 'lodash';
-import moment from 'moment';
 import CampaignMonitor, {
   CampaignMonitorStats,
 } from '../alert_emails/campaign-monitor';
@@ -92,11 +91,10 @@ function formatStateStats(stats: FipsCount[]): Cell[][] {
 function formatCountyStats(stats: FipsCount[]): Cell[][] {
   const data = stats.map(({ fips, count }) => {
     const county = findCountyByFips(fips);
+    // The ' prefix forces the value to be interpreted as text by Google Sheets
     const fipsCode = `'${fips}`;
-    const countyName: string = county?.county
-      ? county?.county
-      : 'Unknown county';
-    const stateCode: string = county?.state_code ? county?.state_code : '-';
+    const countyName: string = county?.county || 'Unknown county';
+    const stateCode: string = county?.state_code || '-';
     return [fipsCode, countyName, stateCode, count];
   });
   return _.sortBy(data, item => item[0]);
