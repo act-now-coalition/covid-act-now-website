@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import { MetricCell, Row } from 'components/Compare/Compare.style';
 import { Metric, formatValue } from 'common/metric';
-import { SummaryForCompare } from 'common/utils/compare';
+import { RankedLocationSummary } from 'common/utils/compare';
 import { Level } from 'common/level';
 
 function cellValue(metric: any, metricType: Metric) {
@@ -14,12 +14,11 @@ function cellValue(metric: any, metricType: Metric) {
 }
 
 const CompareTableRow = (props: {
-  location: SummaryForCompare;
-  index: number;
-  sorter: any;
+  location: RankedLocationSummary;
+  sorter: number;
   isCurrentCounty?: boolean;
 }) => {
-  const { location, index, sorter, isCurrentCounty } = props;
+  const { location, sorter, isCurrentCounty } = props;
 
   //TODO(Chelsi): fix the else?
   function getLevel(metricIndex: Metric): Level {
@@ -60,12 +59,12 @@ const CompareTableRow = (props: {
 
   return (
     <Row
-      index={index}
+      index={location.rank}
       isCurrentCounty={isCurrentCounty}
       onClick={handleLocationClick}
     >
       <MetricCell iconColor={location.metricsInfo.level}>
-        <span>{index + 1}</span>
+        <span>{location.rank}</span>
         <FiberManualRecordIcon />
         {locationName}
       </MetricCell>
