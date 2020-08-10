@@ -29,7 +29,10 @@ const SearchHeader = ({
 
   // @ts-ignore TODO(aj): remove when converting MapSelectors
   const handleSelectChange = option => {
-    if (option.state_code === MAP_FILTERS.DC) {
+    if (
+      option.state_code === MAP_FILTERS.DC ||
+      option.state_code === MAP_FILTERS.PR
+    ) {
       setMapOption(MAP_FILTERS.NATIONAL);
     }
 
