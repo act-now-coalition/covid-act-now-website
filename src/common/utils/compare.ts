@@ -9,7 +9,7 @@ export interface SummaryForCompare {
 
 const locations: any = getLocationNames();
 
-export function getStatesArr() {
+export function getStatesArr(): SummaryForCompare[] {
   return locations
     .filter((location: Location) => !location.county)
     .map((stateInfo: Location) => {
@@ -20,7 +20,7 @@ export function getStatesArr() {
     });
 }
 
-export function getCountiesArr(stateId: string) {
+export function getCountiesArr(stateId: string): SummaryForCompare[] {
   return locations
     .filter(
       (location: Location) =>

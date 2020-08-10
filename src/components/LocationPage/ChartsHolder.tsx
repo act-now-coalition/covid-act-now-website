@@ -150,7 +150,7 @@ const ChartsHolder = (props: {
     : [];
 
   const locationsForCompare = getCountiesArr(props.stateId);
-  const currentCountyForCompare: any = props.county && {
+  const currentCountyForCompare = props.county && {
     locationInfo: props.county,
     metricsInfo: countySummary(props.county.full_fips_code),
   };
