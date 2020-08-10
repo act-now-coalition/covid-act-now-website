@@ -1,20 +1,22 @@
 import React from 'react';
 import { isNumber } from 'lodash';
 import { Table, TableBody } from '@material-ui/core';
-import * as Styles from './LocationTable.style';
+import { Metric } from 'common/metric';
+import { SummaryForCompare } from 'common/utils/compare';
+import CompareTableRow from './CompareTableRow';
 import HeaderCell from './HeaderCell';
+import * as Styles from './LocationTable.style';
 import * as CompareStyles from './Compare.style';
-import CompareTableRow from 'components/Compare/CompareTableRow';
 
 const LocationTableHead: React.FunctionComponent<{
-  setSorter: any;
-  setSortDescending: any;
-  sortDescending: any;
-  sorter: any;
+  setSorter: React.Dispatch<React.SetStateAction<number>>;
+  setSortDescending: React.Dispatch<React.SetStateAction<boolean>>;
+  sortDescending: boolean;
+  sorter: number;
   arrowColorSelected: string;
   arrowColorNotSelected: string;
   firstHeaderName: string;
-  metrics: any[];
+  metrics: Metric[];
   isModal: boolean;
 }> = ({
   setSorter,
@@ -51,8 +53,8 @@ const LocationTableHead: React.FunctionComponent<{
 );
 
 const PinnedRow: React.FunctionComponent<{
-  location: any;
-  sorter: any;
+  location: SummaryForCompare;
+  sorter: number;
   locationRank: number;
 }> = ({ location, sorter, locationRank }) => (
   <Table key="table-pinned-location">
@@ -69,7 +71,7 @@ const PinnedRow: React.FunctionComponent<{
 
 const LocationTableBody: React.FunctionComponent<{
   sortedLocations: any[];
-  sorter: any;
+  sorter: number;
 }> = ({ sortedLocations, sorter }) => (
   <Table>
     <TableBody>
@@ -92,18 +94,18 @@ const LocationTableBody: React.FunctionComponent<{
  * (maybe other libraries) at some point.
  */
 const LocationTable: React.FunctionComponent<{
-  setSorter: any;
-  setSortDescending: any;
-  sortDescending: any;
-  sorter: any;
+  setSorter: React.Dispatch<React.SetStateAction<number>>;
+  setSortDescending: React.Dispatch<React.SetStateAction<boolean>>;
+  sortDescending: boolean;
+  sorter: number;
   arrowColorSelected: string;
   arrowColorNotSelected: string;
   firstHeaderName: string;
-  metrics: any[];
+  metrics: Metric[];
   isModal: boolean;
-  pinnedLocation?: any;
+  pinnedLocation?: SummaryForCompare;
   pinnedLocationRank?: number;
-  sortedLocations: any[];
+  sortedLocations: SummaryForCompare[];
 }> = ({
   setSorter,
   setSortDescending,
