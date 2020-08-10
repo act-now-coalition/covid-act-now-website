@@ -235,6 +235,12 @@
       "population": 12801989
     },
     {
+      "state_code": "PR",
+      "state": "Puerto Rico",
+      "state_fips_code": "72",
+      "population": 31
+    },
+    {
       "state_code": "RI",
       "state": "Rhode Island",
       "state_fips_code": "44",
