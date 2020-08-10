@@ -190,8 +190,15 @@ export class Projection {
     this.smoothedDailyPositiveTests = this.smoothWithRollingAverage(
       this.deltasFromCumulatives(cumulativePositiveTests),
     );
+    // Locations sometimes fail to report negative tests for several days while
+    // continuing to report positives, leaving a string of 0 deltas at the tail
+    // of the negatives series. Rather than average these 0's into the rolling
+    // average, which will cause the test positive rate to skyrocket, we just
+    // truncate them and don't report test positive data for the last few days.
     this.smoothedDailyNegativeTests = this.smoothWithRollingAverage(
       this.deltasFromCumulatives(cumulativeNegativeTests),
+      /*days=*/ 7,
+      /*includeTrailingZeros=*/ false,
     );
 
     const cumulativeConfirmedCases = this.smoothCumulatives(
@@ -210,8 +217,7 @@ export class Projection {
       this.deltasFromCumulatives(this.cumulativeActualDeaths),
     );
 
-    // TODO(https://trello.com/c/sackaas1): Reenable CT counties.
-    const disableRt = this.isCounty && this.stateName === 'Connecticut';
+    const disableRt = false;
     this.rtRange = disableRt ? [null] : this.calcRtRange(timeseries);
     this.testPositiveRate = this.calcTestPositiveRate();
 
@@ -347,8 +353,7 @@ export class Projection {
       [date: string]: PredictionTimeseriesRow | ActualsTimeseriesRow;
     } = {};
     ts.forEach((row: PredictionTimeseriesRow | ActualsTimeseriesRow) => {
-      const ts_date = moment.utc(row.date).toString();
-      dict[ts_date] = row;
+      dict[row.date] = row;
     });
     return dict;
   }
@@ -395,11 +400,12 @@ export class Projection {
 
     let currDate = earliestDate.clone();
     while (currDate.diff(latestDate) <= 0) {
+      const ts = currDate.format('YYYY-MM-DD');
       const timeseriesRowForDate = timeseriesDictionary[
-        currDate.toString()
+        ts
       ] as PredictionTimeseriesRow;
       const actualsTimeseriesrowForDate = actualsTimeseriesDictionary[
-        currDate.toString()
+        ts
       ] as ActualsTimeseriesRow;
 
       timeseries.push(timeseriesRowForDate || null);
@@ -536,7 +542,7 @@ export class Projection {
   /**
    * Given a series of cumulative values, convert it to a series of deltas.
    *
-   * Always returns null for the first value to avoid an arbitrarily large
+   * Always returns null for the first delta to avoid an arbitrarily large
    * delta (that may represent a bunch of historical data).
    *
    * Nulls are skipped, emitting null as the delta and keeping track of the
@@ -545,23 +551,23 @@ export class Projection {
   private deltasFromCumulatives(
     cumulatives: Array<number | null>,
   ): Array<number | null> {
-    let lastNonNull = 0;
-    const result: Array<number | null> = [null];
-    for (let i = 1; i < cumulatives.length; i++) {
+    let lastValue: number | null = null;
+    const result: Array<number | null> = [];
+    for (let i = 0; i < cumulatives.length; i++) {
       const current = cumulatives[i];
       if (current === null) {
         result.push(null);
       } else {
-        if (current - lastNonNull < 0) {
+        if (lastValue === null || current - lastValue < 0) {
           // Sometimes series have a "correction" that resets the count
           // backwards. We treat that as a 'null' delta. Note: They could also
           // have a correction in the opposite direction, forcing an unusually
           // high delta, but we don't have a way to detect / handle that. :-(
           result.push(null);
         } else {
-          result.push(current - lastNonNull);
+          result.push(current - lastValue);
         }
-        lastNonNull = current;
+        lastValue = current;
       }
     }
     return result;
@@ -709,10 +715,18 @@ export class Projection {
   private smoothWithRollingAverage(
     data: Array<number | null>,
     days = 7,
+    includeTrailingZeros = true,
   ): Array<number | null> {
     const result = [];
     let sum = 0;
     let count = 0;
+    let lastValidIndex = data.length - 1;
+    if (!includeTrailingZeros) {
+      lastValidIndex = _.findLastIndex(
+        data,
+        value => value !== null && value !== 0,
+      );
+    }
     for (let i = 0; i < data.length; i++) {
       const oldValue = i < days ? null : data[i - days];
       if (oldValue !== null) {
@@ -721,7 +735,7 @@ export class Projection {
       }
 
       const newValue = data[i];
-      if (newValue !== null) {
+      if (newValue !== null && i <= lastValidIndex) {
         sum += newValue;
         count++;
         result.push(sum / count);

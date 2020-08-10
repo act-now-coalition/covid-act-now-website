@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { useLocation } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import FormControl from '@material-ui/core/FormControl';
@@ -9,15 +9,12 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import * as QueryString from 'query-string';
-import { assert, fail } from 'common/utils';
+import { assert, fail, formatInteger } from 'common/utils';
 import { MetricChart } from 'components/Charts';
 import {
   fetchAllStateProjections,
   fetchAllCountyProjections,
   fetchProjections,
-  snapshotFromUrl,
-  snapshotUrl,
-  fetchMasterSnapshotNumber,
 } from 'common/utils/model';
 import {
   Wrapper,
@@ -28,9 +25,16 @@ import { Metric, getMetricName, ALL_METRICS } from 'common/metric';
 import { Projections } from 'common/models/Projections';
 import { ProjectionsSet } from 'common/models/ProjectionsSet';
 import { SortType, ProjectionsPair } from 'common/models/ProjectionsPair';
-import { topCountiesByPopulation } from 'common/locations';
+import { topCountiesByPopulation, County, allCounties } from 'common/locations';
 import { SNAPSHOT_URL, SnapshotVersion, Api } from 'api';
 import moment from 'moment';
+import { Level } from 'common/level';
+import { fetchSummaries } from 'common/location_summaries';
+import {
+  snapshotFromUrl,
+  fetchMasterSnapshotNumber,
+  snapshotUrl,
+} from 'common/utils/snapshots';
 
 // TODO(michael): Compare page improvements:
 // * Virtualize the list so that it's not so awful slow. NOTE: I previously
@@ -40,15 +44,19 @@ import moment from 'moment';
 // * Show the diff value (the RMSD of the series or the delta between metric values).
 // * Automatically find the latest snapshot (probably by just incrementing the
 //   snapshot number until it 404s)
-// * Show snapshot metadata (the version.json file).
 
 enum Locations {
+  STATES_AND_INTERESTING_COUNTIES,
   STATES,
   TOP_COUNTIES_BY_POPULATION,
   TOP_COUNTIES_BY_DIFF,
 }
 
 const COUNTIES_LIMIT = 100;
+
+// For "interesting" counties, we take the 30 top diffs of the counties with > 500k population.
+const INTERESTING_POPULATION = 500000;
+const INTERESTING_TOP_DIFFS = 30;
 
 export function CompareSnapshots() {
   const masterSnapshot = useMasterSnapshot();
@@ -86,24 +94,27 @@ function CompareSnapshotsInner({ masterSnapshot }: { masterSnapshot: number }) {
   );
 
   const [sortType, setSortType] = useState<SortType>(
-    getParamValue(params, 'sort', SortType.SERIES_DIFF),
+    getParamValue(params, 'sort', SortType.METRIC_DIFF),
   );
   const [metric, setMetric] = useState(
-    getParamValue(params, 'metric', Metric.CASE_GROWTH_RATE),
+    getParamValue(params, 'metric', Metric.CASE_DENSITY),
   );
   const [locations, setLocations] = useState(
-    getParamValue(params, 'locations', Locations.STATES),
+    getParamValue(
+      params,
+      'locations',
+      Locations.STATES_AND_INTERESTING_COUNTIES,
+    ),
   );
 
   // Load models for all states or counties.
-  const leftProjections: Projections[] | null = useAllProjections(
-    snapshotUrl(leftSnapshot),
+  let { projectionsSet, loadingText } = useProjectionsSet(
+    leftSnapshot,
+    rightSnapshot,
     locations,
+    metric,
   );
-  const rightProjections: Projections[] | null = useAllProjections(
-    snapshotUrl(rightSnapshot),
-    locations,
-  );
+  projectionsSet = projectionsSet.sortBy(sortType, metric);
 
   const leftVersion = useSnapshotVersion(leftSnapshot);
   const rightVersion = useSnapshotVersion(rightSnapshot);
@@ -167,26 +178,6 @@ function CompareSnapshotsInner({ masterSnapshot }: { masterSnapshot: number }) {
     setQueryParams({ locations });
   };
 
-  let projectionsSet = new ProjectionsSet([]);
-  if (leftProjections && rightProjections) {
-    projectionsSet = ProjectionsSet.fromProjections(
-      leftProjections,
-      rightProjections,
-    );
-
-    if (locations === Locations.TOP_COUNTIES_BY_DIFF) {
-      projectionsSet = projectionsSet.top(COUNTIES_LIMIT, sortType, metric);
-    } else if (locations === Locations.TOP_COUNTIES_BY_POPULATION) {
-      projectionsSet = projectionsSet.top(
-        COUNTIES_LIMIT,
-        SortType.POPULATION,
-        metric,
-      );
-    }
-
-    projectionsSet = projectionsSet.sortBy(sortType, metric);
-  }
-
   return (
     <Wrapper>
       <ModelSelectorContainer>
@@ -220,15 +211,18 @@ function CompareSnapshotsInner({ masterSnapshot }: { masterSnapshot: number }) {
             }}
           />
         </FormControl>
-        <FormControl style={{ width: '12rem', marginLeft: '1rem' }}>
+        <FormControl style={{ width: '14rem', marginLeft: '1rem' }}>
           <InputLabel focused={false}>Show:</InputLabel>
           <Select value={locations} onChange={changeLocations}>
+            <MenuItem value={Locations.STATES_AND_INTERESTING_COUNTIES}>
+              States & Interesting Counties
+            </MenuItem>
             <MenuItem value={Locations.STATES}>States</MenuItem>
             <MenuItem value={Locations.TOP_COUNTIES_BY_POPULATION}>
               Top {COUNTIES_LIMIT} Counties (by Population)
             </MenuItem>
             <MenuItem value={Locations.TOP_COUNTIES_BY_DIFF}>
-              Top {COUNTIES_LIMIT} Counties (by Diff) [SLOW!!!]
+              Top {COUNTIES_LIMIT} Counties (by Diff)
             </MenuItem>
           </Select>
         </FormControl>
@@ -264,7 +258,11 @@ function CompareSnapshotsInner({ masterSnapshot }: { masterSnapshot: number }) {
         </Grid>
       </Grid>
 
-      <ComparisonList metric={metric} projectionsSet={projectionsSet} />
+      <ComparisonList
+        metric={metric}
+        projectionsSet={projectionsSet}
+        loadingText={loadingText}
+      />
     </Wrapper>
   );
 }
@@ -294,12 +292,14 @@ const VersionInfo = function ({
 const ComparisonList = function ({
   metric,
   projectionsSet,
+  loadingText,
 }: {
   metric: Metric;
   projectionsSet: ProjectionsSet;
+  loadingText: string;
 }) {
   if (projectionsSet.isEmpty) {
-    return <h1>Loading...</h1>;
+    return <h1>{loadingText}</h1>;
   }
 
   return (
@@ -322,20 +322,51 @@ function ProjectionsCompare({
   metric: Metric;
   pair: ProjectionsPair;
 }) {
+  const localUrl = pair.locationURL.replace(/^.*covidactnow\.org/, '');
   return (
-    <div style={{ marginLeft: '40px' }}>
+    <>
       <hr />
-      <h2>{pair.locationName}</h2>
-      <Grid container spacing={8}>
-        <Grid item xs={6}>
-          <ProjectionsChart metric={metric} projections={pair.left} />
+      <div style={{ marginLeft: '40px' }}>
+        <h2>
+          {pair.locationName}:{' '}
+          <small>
+            <ProjectionsGradeChange pair={pair} /> | population{' '}
+            {formatInteger(pair.population)} | fips {pair.fips} |{' '}
+            <a href={pair.locationURL}>prod</a> <a href={localUrl}>local</a>
+          </small>
+        </h2>
+        <br />
+        <Grid container spacing={8}>
+          <Grid item xs={6}>
+            <ProjectionsChart metric={metric} projections={pair.left} />
+          </Grid>
+          <Grid item xs={6}>
+            <ProjectionsChart metric={metric} projections={pair.right} />
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <ProjectionsChart metric={metric} projections={pair.right} />
-        </Grid>
-      </Grid>
-    </div>
+      </div>
+    </>
   );
+}
+
+function ProjectionsGradeChange({ pair }: { pair: ProjectionsPair }) {
+  if (pair.left.getAlarmLevel() !== pair.right.getAlarmLevel()) {
+    return (
+      <Fragment>
+        <ProjectionsGrade projections={pair.left} />
+        ➔
+        <ProjectionsGrade projections={pair.right} />
+      </Fragment>
+    );
+  } else {
+    return <ProjectionsGrade projections={pair.left} />;
+  }
+}
+
+function ProjectionsGrade({ projections }: { projections: Projections }) {
+  const color = projections.getAlarmLevelColor();
+  const level = Level[projections.getAlarmLevel()];
+  return <span style={{ color }}>{level}</span>;
 }
 
 const ProjectionsChart = React.memo(function ProjectionsChart({
@@ -360,47 +391,181 @@ function useMasterSnapshot(): number | null {
   return snapshot;
 }
 
-function useAllProjections(
-  snapshotUrl: string,
+function useProjectionsSet(
+  leftSnapshot: number,
+  rightSnapshot: number,
   locations: Locations,
-): Projections[] | null {
-  const [allProjections, setAllProjections] = useState<Projections[] | null>(
-    null,
+  metric: Metric,
+): {
+  projectionsSet: ProjectionsSet;
+  loadingText: string;
+} {
+  const [projectionsSet, setProjectionsSet] = useState<ProjectionsSet>(
+    new ProjectionsSet([]),
   );
+  const [loadingText, setLoadingText] = useState('Loading...');
 
   useEffect(() => {
-    setAllProjections(null);
+    setLoadingText('Loading...');
+    setProjectionsSet(new ProjectionsSet([]));
 
     async function fetchData() {
-      const projections = await fetchAllProjections(snapshotUrl, locations);
-      setAllProjections(projections);
-    }
-    if (snapshotUrl !== undefined) {
-      fetchData();
-    }
-  }, [snapshotUrl, locations]);
+      if (locations === Locations.STATES) {
+        setProjectionsSet(
+          ProjectionsSet.fromProjections(
+            await fetchAllStateProjections(snapshotUrl(leftSnapshot)),
+            await fetchAllStateProjections(snapshotUrl(rightSnapshot)),
+          ),
+        );
+      } else if (locations === Locations.TOP_COUNTIES_BY_POPULATION) {
+        const topCounties = topCountiesByPopulation(COUNTIES_LIMIT);
+        setProjectionsSet(
+          ProjectionsSet.fromProjections(
+            await fetchCountyProjections(leftSnapshot, topCounties),
+            await fetchCountyProjections(rightSnapshot, topCounties),
+          ),
+        );
+      } else if (locations === Locations.TOP_COUNTIES_BY_DIFF) {
+        const countyDiffs = await fetchCountyDiffs(
+          leftSnapshot,
+          rightSnapshot,
+          metric,
+        );
+        if (countyDiffs !== null) {
+          const topCounties = _.takeRight(
+            countyDiffs.sort((a, b) => a.diff - b.diff),
+            COUNTIES_LIMIT,
+          ).map(cd => cd.county);
+          setProjectionsSet(
+            ProjectionsSet.fromProjections(
+              await fetchCountyProjections(leftSnapshot, topCounties),
+              await fetchCountyProjections(rightSnapshot, topCounties),
+            ),
+          );
+        } else {
+          // Couldn't load summary files. Just fetch all county projections and take the top diffs (slow).
+          setLoadingText(
+            'Loading (slow due to no pre-generated summary file in https://github.com/covid-projections/covid-projections/tree/develop/scripts/alert_emails/summaries)...',
+          );
+          setProjectionsSet(
+            ProjectionsSet.fromProjections(
+              await fetchAllCountyProjections(snapshotUrl(leftSnapshot)),
+              await fetchAllCountyProjections(snapshotUrl(rightSnapshot)),
+            ).top(COUNTIES_LIMIT, SortType.METRIC_DIFF, metric),
+          );
+        }
+      } else if (locations === Locations.STATES_AND_INTERESTING_COUNTIES) {
+        const interestingCounties = await fetchInterestingCounties(
+          leftSnapshot,
+          rightSnapshot,
+          metric,
+        );
+        if (interestingCounties === null) {
+          // Couldn't load summary files. Just fetch all county projections and take the top diffs (slow).
+          setLoadingText(
+            `Can't load "States & Interesting Counties" since there's no pre-generated summary file in https://github.com/covid-projections/covid-projections/tree/develop/scripts/alert_emails/summaries...`,
+          );
+        } else {
+          // Start with the states.
+          let leftProjections = await fetchAllStateProjections(
+            snapshotUrl(leftSnapshot),
+          );
+          let rightProjections = await fetchAllStateProjections(
+            snapshotUrl(rightSnapshot),
+          );
 
-  return allProjections;
+          leftProjections = leftProjections.concat(
+            await fetchCountyProjections(leftSnapshot, interestingCounties),
+          );
+          rightProjections = rightProjections.concat(
+            await fetchCountyProjections(rightSnapshot, interestingCounties),
+          );
+          setProjectionsSet(
+            ProjectionsSet.fromProjections(leftProjections, rightProjections),
+          );
+        }
+      } else {
+        fail('Unknown locations selection.');
+      }
+    }
+
+    fetchData();
+  }, [leftSnapshot, rightSnapshot, locations, metric]);
+
+  return { projectionsSet, loadingText };
 }
 
-function fetchAllProjections(
-  snapshotUrl: string,
-  locations: Locations,
-): Promise<Projections[]> {
-  if (locations === Locations.STATES) {
-    return fetchAllStateProjections(snapshotUrl);
-  } else if (locations === Locations.TOP_COUNTIES_BY_DIFF) {
-    return fetchAllCountyProjections(snapshotUrl);
-  } else if (locations === Locations.TOP_COUNTIES_BY_POPULATION) {
-    const topCounties = topCountiesByPopulation(COUNTIES_LIMIT);
-    return Promise.all(
-      topCounties.map(county =>
-        fetchProjections(county.state_code, county, snapshotUrl),
-      ),
-    );
-  } else {
-    fail(`Unknown locations: ${locations}`);
+async function fetchInterestingCounties(
+  leftSnapshot: number,
+  rightSnapshot: number,
+  metric: Metric,
+): Promise<County[] | null> {
+  if (metric === Metric.FUTURE_PROJECTIONS) {
+    return topCountiesByPopulation(INTERESTING_TOP_DIFFS);
   }
+
+  const countyDiffs = await fetchCountyDiffs(
+    leftSnapshot,
+    rightSnapshot,
+    metric,
+  );
+  if (countyDiffs === null) {
+    return null;
+  }
+  // Find the interesting counties.
+  return _.takeRight(
+    countyDiffs
+      .filter(
+        cd =>
+          cd.county.population >= INTERESTING_POPULATION ||
+          cd.diff >= ProjectionsPair.MISSING_METRIC_DIFF,
+      )
+      .sort((a, b) => a.diff - b.diff),
+    INTERESTING_TOP_DIFFS,
+  ).map(cd => cd.county);
+}
+
+function fetchCountyProjections(
+  snapshotNumber: number,
+  list: County[],
+): Promise<Projections[]> {
+  return Promise.all(
+    list.map(county =>
+      fetchProjections(county.state_code, county, snapshotUrl(snapshotNumber)),
+    ),
+  );
+}
+
+async function fetchCountyDiffs(
+  leftSnapshot: number,
+  rightSnapshot: number,
+  metric: Metric,
+): Promise<Array<{ county: County; diff: number }> | null> {
+  const leftSummaries = await fetchSummaries(leftSnapshot).catch(e => null);
+  const rightSummaries = await fetchSummaries(rightSnapshot).catch(e => null);
+  if (leftSummaries === null || rightSummaries === null) {
+    return null;
+  }
+
+  const fipsList = _.union(
+    Object.keys(leftSummaries),
+    Object.keys(rightSummaries),
+  ).filter(fips => fips.length === 5);
+  const diffs: { [fips: string]: number } = {};
+  for (const fips of fipsList) {
+    const left = leftSummaries[fips]?.metrics?.[metric]?.value,
+      right = rightSummaries[fips]?.metrics?.[metric]?.value;
+    const leftValue = left == null ? null : left;
+    const rightValue = right == null ? null : right;
+    diffs[fips] = ProjectionsPair.metricValueDiff(leftValue, rightValue);
+  }
+
+  return allCounties()
+    .filter(c => c.full_fips_code in diffs)
+    .map(c => ({
+      county: c,
+      diff: diffs[c.full_fips_code],
+    }));
 }
 
 function getParamValue(

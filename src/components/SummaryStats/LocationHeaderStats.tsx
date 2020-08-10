@@ -1,6 +1,6 @@
 import React from 'react';
 import { Metric } from 'common/metric';
-import { getMetricName, getLevelInfo } from 'common/metric';
+import { getMetricName, getLevelInfo, formatValue } from 'common/metric';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
 import {
@@ -16,9 +16,6 @@ import {
 } from './SummaryStats.style';
 
 import StatTag from 'components/SummaryStats/StatTag';
-
-import { formatDecimal, formatPercent } from 'common/utils';
-import { fail } from 'assert';
 import { isNull } from 'util';
 import * as urls from 'common/urls';
 
@@ -93,28 +90,7 @@ const SummaryStat = ({
 
   const statusUnknown = value === null;
 
-  const formatValueForChart = (
-    chartType: Metric,
-    value: number | null,
-  ): string => {
-    if (value === null) {
-      return 'Unknown';
-    }
-    if (chartType === Metric.CASE_DENSITY) {
-      return value.toFixed(1).toString();
-    } else if (chartType === Metric.CASE_GROWTH_RATE) {
-      return formatDecimal(value);
-    } else if (chartType === Metric.HOSPITAL_USAGE) {
-      return formatPercent(value);
-    } else if (chartType === Metric.POSITIVE_TESTS) {
-      return formatPercent(value, 1);
-    } else if (chartType === Metric.CONTACT_TRACING) {
-      return formatPercent(value, 0);
-    }
-    fail('Invalid Chart Type');
-  };
-
-  const statValue = formatValueForChart(chartType, value);
+  const statValue = formatValue(chartType, value, 'Unknown');
 
   return (
     <SummaryStatWrapper

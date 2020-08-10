@@ -69,6 +69,9 @@ jobs:
             * Regenerate summary files.
             * Point at updated share images.
 
+      - name: Wait for Preview URL to be live
+        run: npx wait-on -t 120000 https://covid-projections-git-bump-snapshot-${{env.RUN_ID}}.covidactnow.now.sh/compare/ || echo 'Preview URL failed to load.'
+
       - name: Slack notification
         if: job.status != 'success'
         env:
@@ -89,5 +92,3 @@ jobs:
             PR: https://github.com/covid-projections/covid-projections/pull/${{env.PULL_REQUEST_NUMBER}}
             Preview: https://covid-projections-git-bump-snapshot-${{env.RUN_ID}}.covidactnow.now.sh/
             Compare: https://covid-projections-git-bump-snapshot-${{env.RUN_ID}}.covidactnow.now.sh/compare/
-            Compare-csv: https://data.covidactnow.org/snapshot/${{env.SNAPSHOT_ID}}/qa/compared.csv
-            Raw Data QA: https://data.covidactnow.org/snapshot/${{env.SNAPSHOT_ID}}/RAW_QA/outputreport.txt

@@ -13,14 +13,24 @@ export enum SortType {
 
 /** A pair of left/right projections (e.g. from two different snapshots) */
 export class ProjectionsPair {
+  static MISSING_METRIC_DIFF = 9999;
+
   constructor(public left: Projections, public right: Projections) {}
 
   metricDiff(metric: Metric): number {
     const leftMetric = getMetricValue(this.left, metric);
     const rightMetric = getMetricValue(this.right, metric);
+    return ProjectionsPair.metricValueDiff(leftMetric, rightMetric);
+  }
 
-    if (leftMetric === null || rightMetric === null) {
-      return leftMetric === null && rightMetric === null ? 0 : 9999;
+  static metricValueDiff(
+    leftMetric: number | null,
+    rightMetric: number | null,
+  ) {
+    if (leftMetric === null) {
+      return rightMetric === null ? 0 : this.MISSING_METRIC_DIFF;
+    } else if (rightMetric === null) {
+      return leftMetric === null ? 0 : this.MISSING_METRIC_DIFF + 1;
     } else {
       return Math.abs(leftMetric - rightMetric);
     }
@@ -73,6 +83,8 @@ export class ProjectionsPair {
 
 function getDataset(projection: Projection, metric: Metric): Column[] {
   switch (metric) {
+    case Metric.CASE_DENSITY:
+      return projection.getDataset('caseDensityByCases');
     case Metric.CASE_GROWTH_RATE:
       return projection
         .getDataset('rtRange')
