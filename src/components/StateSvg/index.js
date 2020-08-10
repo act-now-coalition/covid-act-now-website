@@ -37,7 +37,7 @@ import OH from './Ohio';
 import OK from './Oklahoma';
 import OR from './Oregon';
 import PA from './Pennsylvania';
-import PR from "./PuertoRico";
+import PR from './PuertoRico';
 import RI from './RhodeIsland';
 import SC from './SouthCarolina';
 import SD from './SouthDakota';
