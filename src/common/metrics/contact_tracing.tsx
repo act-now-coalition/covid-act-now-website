@@ -1,9 +1,16 @@
+import React, { Fragment } from 'react';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
 import { levelText } from 'common/utils/chart';
 import { getLevel, Metric } from 'common/metric';
 import { formatPercent, formatInteger } from 'common/utils';
-import { Projection, TRACERS_NEEDED_PER_CASE } from 'common/models/Projection';
+import { Projections } from 'common/models/Projections';
+import { TRACERS_NEEDED_PER_CASE } from 'common/models/Projection';
+import { MetricDefinition } from './interfaces';
+
+export const ContactTracingMetric: MetricDefinition = {
+  renderStatus,
+};
 
 export const METRIC_NAME = 'Contacts traced';
 
@@ -63,49 +70,58 @@ export const CONTACT_TRACING_LEVEL_INFO_MAP: LevelInfoMap = {
   },
 };
 
-export function contactTracingStatusText(projection: Projection) {
-  const currentContactTracers = projection.currentContactTracers;
-  const weeklyAverageResult = projection.currentDailyAverageCases;
+export function renderStatus(projections: Projections): React.ReactElement {
+  const {
+    currentContactTracers,
+    currentContactTracerMetric,
+    locationName,
+    currentDailyAverageCases,
+  } = projections.primary;
+
   const currentWeeklyAverage =
-    weeklyAverageResult && Math.round(weeklyAverageResult);
-  const currentContactTracingMetric = projection.currentContactTracerMetric;
+    currentDailyAverageCases && Math.round(currentDailyAverageCases);
+
   if (
-    currentContactTracingMetric === null ||
+    currentContactTracerMetric === null ||
     currentContactTracers === null ||
     currentWeeklyAverage === null
   ) {
-    return 'No contact tracing data is available.';
+    return <Fragment>No contact tracing data is available.</Fragment>;
   }
-  const location = projection.locationName;
-  const level = getLevel(Metric.CONTACT_TRACING, currentContactTracingMetric);
 
   const numTracers = formatInteger(currentContactTracers);
   const weeklyAverage = formatInteger(currentWeeklyAverage);
   const numNeededTracers = formatInteger(
     currentWeeklyAverage * TRACERS_NEEDED_PER_CASE,
   );
-  const overview = `Per best available data, ${location} has ${numTracers} contact tracers. With an average of ${weeklyAverage} new daily cases,
-    we estimate ${location} needs ${numNeededTracers} contact tracing staff to trace all new cases in 48 hours, before too many other people are infected.`;
 
+  const level = getLevel(Metric.CONTACT_TRACING, currentContactTracerMetric);
   const contactTracingRate = levelText(
     level,
-    `only ${formatPercent(currentContactTracingMetric)}`,
-    `only ${formatPercent(currentContactTracingMetric)}`,
-    `${formatPercent(currentContactTracingMetric)}`,
-    `${formatPercent(currentContactTracingMetric)}`,
+    `only ${formatPercent(currentContactTracerMetric)}`,
+    `only ${formatPercent(currentContactTracerMetric)}`,
+    `${formatPercent(currentContactTracerMetric)}`,
+    `${formatPercent(currentContactTracerMetric)}`,
   );
 
   const outcomesAtLevel = levelText(
     level,
-    `These low levels of tracing suggest there may be an active outbreak underway in ${location}, or almost no tracing capacity exists. Aggressive action urgently needed.`,
-    `These low levels of tracing suggest there may be an active outbreak underway in ${location}, or that little tracing capacity exists. Strong caution warranted.`,
-    `At these lower levels of tracing, it is unlikely ${location} will be able to successfully identify and isolate sources of disease spread fast enough to prevent new outbreaks.`,
+    `These low levels of tracing suggest there may be an active outbreak underway in ${locationName}, or almost no tracing capacity exists. Aggressive action urgently needed.`,
+    `These low levels of tracing suggest there may be an active outbreak underway in ${locationName}, or that little tracing capacity exists. Strong caution warranted.`,
+    `At these lower levels of tracing, it is unlikely ${locationName} will be able to successfully identify and isolate sources of disease spread fast enough to prevent new outbreaks.`,
     'When this level of tracing is coupled with widely available testing, COVID can be contained without resorting to lockdowns.',
   );
 
-  const details = `This means that ${location} is likely able to trace ${contactTracingRate} of new COVID infections in 48 hours. ${outcomesAtLevel}`;
-
-  return `${overview} ${details}`;
+  return (
+    <Fragment>
+      Per best available data, {locationName} has {numTracers} contact tracers.
+      With an average of {weeklyAverage} new daily cases, we estimate{' '}
+      {locationName} needs {numNeededTracers} contact tracing staff to trace all
+      new cases in 48 hours, before too many other people are infected. This
+      means that {locationName} is likely able to trace {contactTracingRate} of
+      new COVID infections in 48 hours. {outcomesAtLevel}
+    </Fragment>
+  );
 }
 
 export const CONTACT_TRACING_DISCLAIMER = `that at least 90% of contacts for each new case must be traced within 48 hours in order to contain COVID. Experts estimate that tracing each new case within 48 hours requires an average of ${TRACERS_NEEDED_PER_CASE} contact tracers per new case, as well as fast testing.`;
