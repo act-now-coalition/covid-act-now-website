@@ -6,9 +6,11 @@ import { levelText } from 'common/utils/chart';
 import { formatDecimal } from 'common/utils';
 import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
+import ExternalLink from 'components/ExternalLink';
 
 export const CaseGrowthMetric: MetricDefinition = {
   renderStatus,
+  renderDisclaimer,
 };
 
 export const METRIC_NAME = 'Infection rate';
@@ -95,6 +97,24 @@ export function renderStatus(projections: Projections): React.ReactElement {
     <Fragment>
       On average, each person in {locationName} with COVID is infecting{' '}
       {formatDecimal(rt)} other people. {epidemiologyReasoning}
+    </Fragment>
+  );
+}
+
+function renderDisclaimer(): React.ReactElement {
+  return (
+    <Fragment>
+      Each data point is a 14-day weighted average. We present the most recent
+      seven days of data as a dashed line, as data is often revised by states
+      several days after reporting. Learn more about{' '}
+      <ExternalLink href="https://docs.google.com/document/d/1cd_cEpNiIl1TzUJBvw9sHLbrbUZ2qCxgN32IqVLa3Do/edit">
+        our methodology
+      </ExternalLink>{' '}
+      and{' '}
+      <ExternalLink href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit">
+        our data sources
+      </ExternalLink>
+      .
     </Fragment>
   );
 }
