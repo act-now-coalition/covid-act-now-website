@@ -37,6 +37,10 @@ const CompareMain = (props: {
     return () => clearTimeout(timeoutId);
   };
 
+  if (props.locations.length === 0) {
+    return null;
+  }
+
   return (
     <Fragment>
       <DivForRef ref={tableRef}>
