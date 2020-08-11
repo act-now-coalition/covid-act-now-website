@@ -15,6 +15,7 @@ import {
 } from '../../src/common/locations';
 import { ALERT_EMAIL_GROUP_PREFIX } from '../alert_emails/utils';
 
+// TODO: Set the correct spreadsheet ID in the workflow file
 function getSpreadsheetId(): string {
   if (process.env.SPREADSHEET_ID) {
     return 'process.env.SPREADSHEET_ID';
@@ -25,7 +26,7 @@ function getSpreadsheetId(): string {
 
 const keyFile = path.join(
   __dirname,
-  '../alert_emails/google-service-account.json',
+  '../common/google-sheets/google-service-account.json',
 );
 
 const RANGE_STATES = 'data-states!A2:D';
