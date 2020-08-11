@@ -167,14 +167,6 @@ const LocationPageHeader = (props: {
                 <Copy>{levelInfo.detail(locationName)}</Copy>
               </SectionColumn>
             </SectionHalf>
-            {/* TODO: Re-add this if we have new updates in the future.
-            <SectionHalf>
-              <InfoOutlinedIcon />
-              <SectionColumn isUpdateCopy>
-                <ColumnTitle isUpdateCopy>Updates</ColumnTitle>
-              </SectionColumn>
-            </SectionHalf>
-            */}
           </HeaderSection>
           <LocationHeaderStats
             stats={props.stats}

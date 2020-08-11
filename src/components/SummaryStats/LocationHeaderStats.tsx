@@ -189,7 +189,6 @@ const LocationHeaderStats = (props: {
             chartType={Metric.CASE_DENSITY}
             value={props.stats[Metric.CASE_DENSITY] as number}
             {...sharedStatProps}
-            newIndicator={true}
           />
           <SummaryStat
             onClick={props.onRtRangeClick || noop}
