@@ -51,17 +51,6 @@ const LocationTableHead: React.FunctionComponent<{
   </Table>
 );
 
-const PinnedRow: React.FunctionComponent<{
-  location: RankedLocationSummary;
-  sorter: number;
-}> = ({ location, sorter }) => (
-  <Table key="table-pinned-location">
-    <TableBody>
-      <CompareTableRow location={location} sorter={sorter} isCurrentCounty />
-    </TableBody>
-  </Table>
-);
-
 const LocationTableBody: React.FunctionComponent<{
   sortedLocations: RankedLocationSummary[];
   sorter: number;
@@ -121,9 +110,7 @@ const LocationTable: React.FunctionComponent<{
   const Container = isModal ? Styles.ModalContainer : Styles.Container;
 
   const showBottom = pinnedLocation && pinnedLocation.rank >= numLocations;
-
   const numLocationsMain = showBottom ? numLocations - 1 : numLocations;
-
   const visibleLocations = isModal
     ? sortedLocations
     : sortedLocations.slice(0, numLocationsMain);
@@ -144,7 +131,15 @@ const LocationTable: React.FunctionComponent<{
             isModal={isModal}
           />
           {isModal && pinnedLocation && (
-            <PinnedRow location={pinnedLocation} sorter={sorter} />
+            <Table key="table-pinned-location">
+              <TableBody>
+                <CompareTableRow
+                  location={pinnedLocation}
+                  sorter={sorter}
+                  isCurrentCounty
+                />
+              </TableBody>
+            </Table>
           )}
         </Styles.Head>
         <Styles.Body>
