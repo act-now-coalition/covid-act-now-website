@@ -4,6 +4,7 @@ import { Cell, locationNameCellWidth, metricCellWidth } from './Compare.style';
 import { COLORS } from 'common';
 
 const minTableWidth = locationNameCellWidth + 5 * metricCellWidth;
+const pinnedBorderColor = '#CEBFAC';
 
 export const ModalContainer = styled.div`
   display: flex;
@@ -30,10 +31,18 @@ export const Container = styled.div`
   overflow-x: auto;
 `;
 
-export const Head = styled.div`
+const PinnedTop = `
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  z-index: 0;
+  position: relative;
+  border-bottom: 1px solid ${pinnedBorderColor};
+`;
+
+export const Head = styled.div<{ isModal: boolean }>`
   flex: 0 0 auto;
   min-height: 0;
   min-width: ${minTableWidth}px;
+  ${props => (props.isModal ? PinnedTop : '')}
 `;
 
 export const TableContainer = styled.div<{ isModal: boolean }>`

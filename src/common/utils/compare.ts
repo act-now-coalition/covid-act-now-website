@@ -6,6 +6,9 @@ export interface SummaryForCompare {
   locationInfo: Location;
   metricsInfo: LocationSummary;
 }
+export interface RankedLocationSummary extends SummaryForCompare {
+  rank: number;
+}
 
 const locations: any = getLocationNames();
 

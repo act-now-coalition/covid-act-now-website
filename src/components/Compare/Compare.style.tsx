@@ -148,7 +148,7 @@ export const MetricCell = styled.td<{
 
 export const Row = styled(TableRow)<{
   index?: number;
-  isCurrentCounty?: Boolean;
+  isCurrentCounty?: boolean;
 }>`
   background-color: ${({ index }) =>
     !isNumber(index) ? 'white' : index % 2 === 0 ? '#fafafa' : 'white'};
@@ -157,11 +157,6 @@ export const Row = styled(TableRow)<{
 
   th {
     border-bottom: none;
-  }
-
-  ${MetricCell} {
-    border-bottom: ${({ isCurrentCounty }) =>
-      isCurrentCounty && '2px solid #CEBFAC'};
   }
 
   &:hover {
