@@ -5,7 +5,6 @@ import { COLOR_MAP, LEVEL_COLOR } from 'common/colors';
 import { COLORS } from 'common';
 import { Metric } from 'common/metric';
 import { Level } from 'common/level';
-import { DisclaimerWrapper } from 'components/Disclaimer/Disclaimer.style';
 
 export const locationNameCellWidth = 145;
 export const metricCellWidth = 120;
@@ -56,14 +55,6 @@ export const Wrapper = styled.div<{ isModal?: Boolean; isHomepage?: Boolean }>`
         width: 15%;
         min-width: ${metricCellWidth}px;
       }
-    }
-  }
-
-  ${DisclaimerWrapper} {
-    margin: 0 0rem 1.5rem;
-
-    @media (max-width: 900px) {
-      margin: 0 1rem 1.5rem;
     }
   }
 `;
@@ -223,13 +214,36 @@ export const ArrowContainer = styled.div<{
   }
 `;
 
-export const Footer = styled.div`
+export const Footer = styled.div<{ isCounty: any }>`
   display: flex;
-  padding: 1.25rem 1rem;
+  padding: 1.25rem 0.75rem;
+  flex-direction: column;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+  font-size: 0.875rem;
 
   span {
-    margin-right: 1.875rem;
-    color: ${COLOR_MAP.GRAY_BODY_COPY};
+    margin-right: 1rem;
+  }
+
+  div {
+    &:first-child {
+      display: flex;
+      justify-content: ${({ isCounty }) =>
+        isCounty ? 'center' : 'flex-start'};
+      flex-wrap: wrap;
+    }
+  }
+
+  //740px is when disclaimer is about to overlap with state name:
+  @media (min-width: 740px) {
+    flex-direction: row;
+
+    div {
+      &:first-child {
+        justify-content: unset;
+        flex-wrap: nowrap;
+      }
+    }
   }
 `;
 
@@ -238,6 +252,32 @@ export const ViewAllLink = styled.div`
   color: ${COLOR_MAP.BLUE};
   font-weight: 500;
   cursor: pointer;
+`;
+
+export const DisclaimerWrapper = styled.div`
+  background: #fafafa;
+  max-width: 345px;
+  padding: 0.75rem;
+  line-height: 1.4;
+  margin: 1rem 1.25rem 0;
+  display: flex;
+  align-self: center;
+
+  span {
+    color: rgba(0, 0, 0, 0.7);
+  }
+
+  a {
+    color: ${COLOR_MAP.BLUE};
+    text-decoration: none;
+  }
+
+  //740px is when disclaimer is about to overlap with state name:
+  @media (min-width: 740px) {
+    margin: -0.25rem 0 0 auto;
+    width: 100%;
+    align-self: unset;
+  }
 `;
 
 export const Header = styled.div`

@@ -29,7 +29,7 @@ const LocationTableHead: React.FunctionComponent<{
   isModal,
 }) => (
   <Table key="table-header">
-    <Styles.TableHeadContainer isModal={isModal}>
+    <CompareStyles.TableHeadContainer isModal={isModal}>
       <CompareStyles.Row>
         <CompareStyles.Cell locationHeaderCell>
           {firstHeaderName}
@@ -47,18 +47,7 @@ const LocationTableHead: React.FunctionComponent<{
           />
         ))}
       </CompareStyles.Row>
-    </Styles.TableHeadContainer>
-  </Table>
-);
-
-const PinnedRow: React.FunctionComponent<{
-  location: RankedLocationSummary;
-  sorter: number;
-}> = ({ location, sorter }) => (
-  <Table key="table-pinned-location">
-    <TableBody>
-      <CompareTableRow location={location} sorter={sorter} isCurrentCounty />
-    </TableBody>
+    </CompareStyles.TableHeadContainer>
   </Table>
 );
 
@@ -121,15 +110,13 @@ const LocationTable: React.FunctionComponent<{
   const Container = isModal ? Styles.ModalContainer : Styles.Container;
 
   const showBottom = pinnedLocation && pinnedLocation.rank >= numLocations;
-
   const numLocationsMain = showBottom ? numLocations - 1 : numLocations;
-
   const visibleLocations = isModal
     ? sortedLocations
     : sortedLocations.slice(0, numLocationsMain);
 
   return (
-    <Styles.TableContainer isModal={isModal}>
+    <CompareStyles.StyledTable isModal={isModal}>
       <Container>
         <Styles.Head isModal={isModal}>
           <LocationTableHead
@@ -144,7 +131,15 @@ const LocationTable: React.FunctionComponent<{
             isModal={isModal}
           />
           {isModal && pinnedLocation && (
-            <PinnedRow location={pinnedLocation} sorter={sorter} />
+            <Table key="table-pinned-location">
+              <TableBody>
+                <CompareTableRow
+                  location={pinnedLocation}
+                  sorter={sorter}
+                  isCurrentCounty
+                />
+              </TableBody>
+            </Table>
           )}
         </Styles.Head>
         <Styles.Body>
@@ -164,7 +159,7 @@ const LocationTable: React.FunctionComponent<{
           </Styles.Body>
         )}
       </Container>
-    </Styles.TableContainer>
+    </CompareStyles.StyledTable>
   );
 };
 

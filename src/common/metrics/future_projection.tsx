@@ -6,6 +6,7 @@ import { MetricDefinition } from './interfaces';
 
 export const FutureProjectionsMetric: MetricDefinition = {
   renderStatus,
+  renderDisclaimer,
 };
 
 export const METRIC_NAME = 'Future hospitalization projections';
@@ -46,4 +47,8 @@ export function renderStatus(projections: Projections) {
       </Fragment>
     );
   }
+}
+
+function renderDisclaimer(): React.ReactElement {
+  return <Fragment></Fragment>;
 }
