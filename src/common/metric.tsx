@@ -93,18 +93,6 @@ export function getLevel(metric: Metric, value: number | null): Level {
   return Level.UNKNOWN;
 }
 
-const METRIC_TO_DISCLAIMER: { [metricName: number]: string } = {
-  [Metric.CASE_GROWTH_RATE]: CaseGrowth.CASE_GROWTH_DISCLAIMER,
-  [Metric.POSITIVE_TESTS]: TestRates.POSITIVE_RATE_DISCLAIMER,
-  [Metric.HOSPITAL_USAGE]: Hospitalizations.HOSPITALIZATIONS_DISCLAIMER,
-  [Metric.CONTACT_TRACING]: ContactTracing.CONTACT_TRACING_DISCLAIMER,
-  [Metric.CASE_DENSITY]: CaseDensity.CASE_DENSITY_DISCLAIMER,
-};
-
-export function getMetricDisclaimer(metric: Metric) {
-  return METRIC_TO_DISCLAIMER[metric];
-}
-
 const metricDefinitions: { [metric in Metric]: MetricDefinition } = {
   [Metric.CASE_GROWTH_RATE]: CaseGrowth.CaseGrowthMetric,
   [Metric.POSITIVE_TESTS]: TestRates.PositiveTestRateMetric,
@@ -114,12 +102,20 @@ const metricDefinitions: { [metric in Metric]: MetricDefinition } = {
   [Metric.CASE_DENSITY]: CaseDensity.CaseIncidenceMetric,
 };
 
-export function getMetricStatusText(metric: Metric, projections: Projections) {
+function getMetricDefinition(metric: Metric) {
   if (!(metric in metricDefinitions)) {
     fail('unknown metric');
   }
+  return metricDefinitions[metric];
+}
 
-  const metricDefinition = metricDefinitions[metric];
+export function getMetricDisclaimer(metric: Metric) {
+  const metricDefinition = getMetricDefinition(metric);
+  return metricDefinition.renderDisclaimer();
+}
+
+export function getMetricStatusText(metric: Metric, projections: Projections) {
+  const metricDefinition = getMetricDefinition(metric);
   return metricDefinition.renderStatus(projections);
 }
 
