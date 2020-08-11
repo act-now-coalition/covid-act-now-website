@@ -72,7 +72,9 @@
     "generate-share-images": "ts-node-script -r tsconfig-paths/register scripts/generate_share_images/index.ts",
     "generate-daily-alerts": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/generate_daily_alerts.ts",
     "send-emails": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/send_emails.ts",
-    "send-test-email": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/send-test-email.ts"
+    "send-test-email": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/send-test-email.ts",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "lint-staged": {
     "{src,scripts}/**/*.{css,scss,js,ts,tsx}": [
@@ -97,8 +99,15 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.11.1",
     "@cypress/code-coverage": "^1.14.0",
     "@cypress/instrument-cra": "^1.1.0",
+    "@storybook/addon-actions": "^6.0.2",
+    "@storybook/addon-essentials": "^6.0.2",
+    "@storybook/addon-links": "^6.0.2",
+    "@storybook/node-logger": "^6.0.2",
+    "@storybook/preset-create-react-app": "^3.1.4",
+    "@storybook/react": "^6.0.2",
     "@testing-library/jest-dom": "^4.2.4",
     "@types/d3-fetch": "^1.1.5",
     "@types/d3-scale": "^2.2.0",
@@ -119,6 +128,7 @@
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
     "axios": "^0.19.2",
+    "babel-loader": "^8.1.0",
     "cross-env": "^7.0.2",
     "cypress": "^4.2.0",
     "delay": "^4.3.0",
@@ -137,6 +147,7 @@
     "os-utils": "^0.0.14",
     "prettier": "2.0.2",
     "puppeteer": "^3.0.4",
+    "react-is": "^16.13.1",
     "serve": "^11.3.0",
     "start-server-and-test": "^1.10.11",
     "ts-node": "^8.9.0",
