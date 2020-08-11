@@ -4,12 +4,18 @@ import * as Hospitalizations from 'common/metrics/hospitalizations';
 import * as ContactTracing from 'common/metrics/contact_tracing';
 import * as FutureProjections from 'common/metrics/future_projection';
 import * as CaseDensity from 'common/metrics/case_density';
-import { Projection } from 'common/models/Projection';
-
+import { Projections } from 'common/models/Projections';
 import { Level, LevelInfo } from 'common/level';
-import { assert } from './utils';
+import { fail, assert } from 'common/utils';
+import { MetricDefinition } from './metrics/interfaces';
+import { formatDecimal, formatPercent } from 'common/utils';
+import { isNumber } from 'lodash';
 
 export enum Metric {
+  // NOTE: Always add new metrics to the end (don't reorder). For better or
+  // worse, the metric number is encoded in URLs and in our persisted summaries
+  // files (used by /internal/compare/), etc. So reordering them would break
+  // things.
   CASE_GROWTH_RATE,
   POSITIVE_TESTS,
   HOSPITAL_USAGE,
@@ -18,10 +24,14 @@ export enum Metric {
   CASE_DENSITY,
 }
 
-// Not sure if there's a better way to enumerate all enum values? :-(
-export const ALL_METRICS = Object.values(Metric).filter(
-  v => typeof v === 'number',
-) as Metric[];
+export const ALL_METRICS = [
+  Metric.CASE_DENSITY,
+  Metric.CASE_GROWTH_RATE,
+  Metric.POSITIVE_TESTS,
+  Metric.HOSPITAL_USAGE,
+  Metric.CONTACT_TRACING,
+  Metric.FUTURE_PROJECTIONS,
+];
 
 // Future Projections has a graph but not a value.
 export const ALL_VALUE_METRICS = ALL_METRICS.filter(
@@ -95,17 +105,51 @@ export function getMetricDisclaimer(metric: Metric) {
   return METRIC_TO_DISCLAIMER[metric];
 }
 
-export function getMetricStatusText(metric: Metric, projection: Projection) {
-  const METRIC_TO_STATUS_TEXT: { [metricName: number]: string } = {
-    [Metric.CASE_GROWTH_RATE]: CaseGrowth.caseGrowthStatusText(projection),
-    [Metric.POSITIVE_TESTS]: TestRates.positiveTestsStatusText(projection),
-    [Metric.HOSPITAL_USAGE]: Hospitalizations.hospitalOccupancyStatusText(
-      projection,
-    ),
-    [Metric.CONTACT_TRACING]: ContactTracing.contactTracingStatusText(
-      projection,
-    ),
-    [Metric.CASE_DENSITY]: CaseDensity.caseDensityStatusText(projection),
-  };
-  return METRIC_TO_STATUS_TEXT[metric];
+const metricDefinitions: { [metric in Metric]: MetricDefinition } = {
+  [Metric.CASE_GROWTH_RATE]: CaseGrowth.CaseGrowthMetric,
+  [Metric.POSITIVE_TESTS]: TestRates.PositiveTestRateMetric,
+  [Metric.HOSPITAL_USAGE]: Hospitalizations.ICUHeadroomMetric,
+  [Metric.CONTACT_TRACING]: ContactTracing.ContactTracingMetric,
+  [Metric.FUTURE_PROJECTIONS]: FutureProjections.FutureProjectionsMetric,
+  [Metric.CASE_DENSITY]: CaseDensity.CaseIncidenceMetric,
+};
+
+export function getMetricStatusText(metric: Metric, projections: Projections) {
+  if (!(metric in metricDefinitions)) {
+    fail('unknown metric');
+  }
+
+  const metricDefinition = metricDefinitions[metric];
+  return metricDefinition.renderStatus(projections);
+}
+
+export const formatValue = (
+  chartType: Metric,
+  value: number | null,
+  nullValueCopy: string,
+): string => {
+  if (!isNumber(value)) {
+    return nullValueCopy;
+  }
+  if (chartType === Metric.CASE_DENSITY) {
+    return formatDecimal(value, 1);
+  } else if (chartType === Metric.CASE_GROWTH_RATE) {
+    return formatDecimal(value);
+  } else if (chartType === Metric.HOSPITAL_USAGE) {
+    return formatPercent(value);
+  } else if (chartType === Metric.POSITIVE_TESTS) {
+    return formatPercent(value, 1);
+  } else if (chartType === Metric.CONTACT_TRACING) {
+    return formatPercent(value, 0);
+  }
+  fail('Invalid Chart Type');
+};
+
+//TODO (chelsi)- consolidate getMetricName functions
+export function getMetricNameForCompare(metric: Metric) {
+  if (metric === Metric.CASE_DENSITY) {
+    return `${METRIC_TO_NAME[metric]} per 100k`;
+  } else {
+    return METRIC_TO_NAME[metric];
+  }
 }

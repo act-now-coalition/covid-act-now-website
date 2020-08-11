@@ -10,13 +10,8 @@
 
 import fs from 'fs-extra';
 import path from 'path';
-import { fetchMasterSnapshotNumber } from '../../src/common/utils/model';
+import { fetchMasterSnapshotNumber } from '../../src/common/utils/snapshots';
 import { Alert } from './interfaces';
-import {
-  Metric,
-  ALL_METRICS,
-  ALL_VALUE_METRICS,
-} from '../../src/common/metric';
 import moment from 'moment';
 import { getFirestore } from './firestore';
 import { SummariesMap } from '../../src/common/location_summaries';

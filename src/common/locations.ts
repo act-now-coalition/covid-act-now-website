@@ -22,7 +22,19 @@ export interface County {
   population: number;
 }
 
-export function getLocationNames() {
+export interface Location {
+  county?: string;
+  county_url_name?: string;
+  county_fips_code?: string;
+  state_fips_code: string;
+  full_fips_code?: string;
+  cities?: string[];
+  population: number;
+  state_code: string;
+  state: string;
+}
+
+export function getLocationNames(): Location[] {
   const locations = US_STATE_DATASET.state_dataset.map(state => {
     return {
       ...state,
@@ -97,16 +109,21 @@ export function getLocationUrlForFips(fips: string): string {
   }
 }
 
-export function topCountiesByPopulation(limit: number): County[] {
-  const allCounties = [];
-  const statesData = US_STATE_DATASET.state_county_map_dataset as any;
-  for (const state in statesData) {
-    const countiesData = statesData[state].county_dataset;
-    allCounties.push(...countiesData);
+const allCountiesCache: County[] = [];
+export function allCounties(): County[] {
+  if (allCountiesCache.length === 0) {
+    const statesData = US_STATE_DATASET.state_county_map_dataset as any;
+    for (const state in statesData) {
+      const countiesData = statesData[state].county_dataset;
+      allCountiesCache.push(...countiesData);
+    }
   }
+  return allCountiesCache;
+}
 
+export function topCountiesByPopulation(limit: number): County[] {
   return takeRight(
-    sortBy(allCounties, c => c.population),
+    sortBy(allCounties(), c => c.population),
     limit,
   );
 }
