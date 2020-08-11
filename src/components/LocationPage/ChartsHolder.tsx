@@ -60,7 +60,6 @@ const ChartsHolder = (props: {
   const testPositiveRef = useRef<HTMLDivElement>(null);
   const icuUtilizationRef = useRef<HTMLDivElement>(null);
   const contactTracingRef = useRef<HTMLDivElement>(null);
-  const futureProjectionsRef = useRef<HTMLDivElement>(null);
   const shareBlockRef = useRef<HTMLDivElement>(null);
   const caseDensityRef = useRef<HTMLDivElement>(null);
 
@@ -81,8 +80,6 @@ const ChartsHolder = (props: {
             scrollTo(icuUtilizationRef.current);
           if (props.chartId === '3' && contactTracingRef.current)
             scrollTo(contactTracingRef.current);
-          if (props.chartId === '4' && futureProjectionsRef.current)
-            scrollTo(futureProjectionsRef.current);
           if (props.chartId === '5' && caseDensityRef.current)
             scrollTo(caseDensityRef.current);
         }

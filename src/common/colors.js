@@ -5,8 +5,7 @@ import { stateSummary, countySummary } from './location_summaries';
 
 export default {
   LIGHTGRAY: '#f2f2f2',
-  // Future projections
-  HOSPITALIZATIONS: 'black',
+  // Outcomes
   PROJECTED: '#3bbce6',
   LIMITED_ACTION: '#fc374d',
 };

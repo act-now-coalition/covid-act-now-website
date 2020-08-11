@@ -5,7 +5,6 @@ import {
   ChartPositiveTestRate,
   ChartICUHeadroom,
   ChartContactTracing,
-  ChartFutureHospitalization,
   ChartCaseDensity,
 } from 'components/Charts';
 import { Metric } from 'common/metric';
@@ -56,9 +55,6 @@ export default function MetricChart({
           height={height}
           columnData={projection.getDataset('contractTracers')}
         />
-      )}
-      {metric === Metric.FUTURE_PROJECTIONS && (
-        <ChartFutureHospitalization height={height} projections={projections} />
       )}
     </>
   );
