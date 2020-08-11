@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import CompareTable from 'components/Compare/CompareTable';
 import { ModalHeader } from 'components/Compare/Compare.style';
@@ -21,16 +21,21 @@ const ModalCompare = (props: {
   currentCounty?: any;
   handleCloseModal: () => void;
 }) => {
-  window.addEventListener(
-    'keydown',
-    function (e) {
-      if (e.key === ('Escape' || 'Esc')) {
-        props.handleCloseModal();
+  const { handleCloseModal } = props;
+
+  useEffect(() => {
+    const handleEsc = (e: any) => {
+      if (e.keyCode === 27) {
+        handleCloseModal();
       }
-      e.preventDefault();
-    },
-    true,
-  );
+    };
+
+    window.addEventListener('keydown', handleEsc);
+
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+    };
+  }, [handleCloseModal]);
 
   return (
     <Fragment>
