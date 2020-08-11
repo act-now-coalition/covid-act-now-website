@@ -14,7 +14,7 @@ import {
 import { Metric } from 'common/metric';
 import { COLOR_MAP } from 'common/colors';
 import LocationTable from './LocationTable';
-import { SummaryForCompare } from 'common/utils/compare';
+import { SummaryForCompare, RankedLocationSummary } from 'common/utils/compare';
 
 const CompareTable = (props: {
   stateName?: string;
@@ -96,9 +96,13 @@ const CompareTable = (props: {
 
   const firstHeaderName = props.isHomepage ? 'State' : 'County';
 
-  const sortedLocations = sortedLocationsArr
-    .slice(0, locationsViewable)
-    .filter(location => location.metricsInfo !== null);
+  const sortedLocations: RankedLocationSummary[] = sortedLocationsArr
+    .filter(location => location.metricsInfo !== null)
+    .map((summary, i) => ({ rank: i + 1, ...summary }));
+
+  const currentLocation = props.county
+    ? { rank: currentCountyRank + 1, ...currentCounty }
+    : null;
 
   return (
     <Wrapper isModal={props.isModal} isHomepage={props.isHomepage}>
@@ -110,9 +114,9 @@ const CompareTable = (props: {
         metrics={orderedMetrics}
         isModal={props.isModal}
         {...arrowContainerProps}
-        pinnedLocation={props.county ? currentCounty : null}
-        pinnedLocationRank={currentCountyRank}
+        pinnedLocation={currentLocation}
         sortedLocations={sortedLocations}
+        numLocations={locationsViewable}
       />
       {!props.isModal && (
         <Fragment>
