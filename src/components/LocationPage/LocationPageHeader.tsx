@@ -1,4 +1,4 @@
-import React, { Fragment, FunctionComponent } from 'react';
+import React, { Fragment } from 'react';
 import CheckIcon from '@material-ui/icons/Check';
 import {
   ColoredHeaderBanner,
@@ -32,38 +32,7 @@ import { isNull } from 'util';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
 import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import { LEVEL_COLOR } from 'common/colors';
-import { METRIC_NAME as CASE_DENSITY_METRIC_NAME } from 'common/metrics/case_density';
-
-const UpdateCaseDensity: FunctionComponent<{ projections: Projections }> = ({
-  projections,
-}) => {
-  const levelName = (level: Level) => LOCATION_SUMMARY_LEVELS[level].name;
-  const previousLevel = projections.getAlarmLevelWithoutCaseDensity();
-  const currentLevel = projections.getAlarmLevel();
-
-  const changedLevelCopy =
-    previousLevel === currentLevel
-      ? ''
-      : `That changed the threat level from ${levelName(
-          previousLevel,
-        )} to ${levelName(currentLevel)}. `;
-  return (
-    <Copy isUpdateCopy>
-      <strong>New key indicator added</strong>
-      <br />
-      {`We added ${CASE_DENSITY_METRIC_NAME.toLowerCase()}. ${changedLevelCopy}`}
-      <a
-        href="https://blog.covidactnow.org/new-daily-covid-cases/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn more
-      </a>
-    </Copy>
-  );
-};
 
 const LocationPageHeading = (props: { projections: Projections }) => {
   const { isEmbed } = useEmbed();
@@ -196,13 +165,6 @@ const LocationPageHeader = (props: {
                 <ColumnTitle>Covid threat level</ColumnTitle>
                 <LevelDescription>{levelInfo.summary}</LevelDescription>
                 <Copy>{levelInfo.detail(locationName)}</Copy>
-              </SectionColumn>
-            </SectionHalf>
-            <SectionHalf>
-              <InfoOutlinedIcon />
-              <SectionColumn isUpdateCopy>
-                <ColumnTitle isUpdateCopy>Updates</ColumnTitle>
-                <UpdateCaseDensity projections={props.projections} />
               </SectionColumn>
             </SectionHalf>
           </HeaderSection>
