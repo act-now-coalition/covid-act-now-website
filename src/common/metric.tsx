@@ -20,7 +20,7 @@ export enum Metric {
   POSITIVE_TESTS,
   HOSPITAL_USAGE,
   CONTACT_TRACING,
-  FUTURE_PROJECTIONS,
+  FUTURE_PROJECTIONS, // no longer used but we leave it to preserve the numbering.
   CASE_DENSITY,
 }
 
@@ -30,7 +30,6 @@ export const ALL_METRICS = [
   Metric.POSITIVE_TESTS,
   Metric.HOSPITAL_USAGE,
   Metric.CONTACT_TRACING,
-  Metric.FUTURE_PROJECTIONS,
 ];
 
 // Future Projections has a graph but not a value.

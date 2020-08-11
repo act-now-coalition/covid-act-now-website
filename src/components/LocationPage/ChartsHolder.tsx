@@ -12,6 +12,9 @@ import { Metric } from 'common/metric';
 import CompareMain from 'components/Compare/CompareMain';
 import { getCountiesArr } from 'common/utils/compare';
 import { countySummary } from 'common/location_summaries';
+import Outcomes from 'components/Outcomes/Outcomes';
+import { COLORS } from 'common';
+import { formatUtcDate } from 'common/utils';
 
 // TODO(michael): figure out where this type declaration should live.
 type County = {
@@ -138,14 +141,6 @@ const ChartsHolder = (props: {
           shareButtonProps,
           metric: Metric.CONTACT_TRACING,
         },
-        {
-          chartRef: futureProjectionsRef,
-          isMobile,
-          shareButtonProps,
-          metric: Metric.FUTURE_PROJECTIONS,
-          projections: props.projections,
-          countyId: props.countyId,
-        },
       ]
     : [];
 
@@ -154,6 +149,13 @@ const ChartsHolder = (props: {
     locationInfo: props.county,
     metricsInfo: countySummary(props.county.full_fips_code),
   };
+
+  let outcomesProjections = [
+    props.projections.baseline,
+    props.projections.projected,
+  ];
+
+  let outcomesColors = [COLORS.LIMITED_ACTION, COLORS.PROJECTED];
 
   // TODO(pablo): Create separate refs for signup and share
   return (
@@ -194,6 +196,14 @@ const ChartsHolder = (props: {
                   stateId={props.stateId}
                 />
               ))}
+
+              <Outcomes
+                title={`Predicted outcomes by ${formatUtcDate(
+                  props.projections.projected.finalDate,
+                )} (30 days from now)`}
+                projections={outcomesProjections}
+                colors={outcomesColors}
+              />
             </MainContentInner>
           </ChartContentWrapper>
           <div ref={shareBlockRef}>
