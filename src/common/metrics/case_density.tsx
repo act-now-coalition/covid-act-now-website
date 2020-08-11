@@ -13,6 +13,7 @@ import { MetricDefinition } from './interfaces';
 
 export const CaseIncidenceMetric: MetricDefinition = {
   renderStatus,
+  renderDisclaimer,
 };
 
 export const METRIC_NAME = 'Daily new cases per 100k population';
@@ -100,6 +101,34 @@ export function renderStatus(projections: Projections): React.ReactElement {
       {formatEstimate(estimatedNewInfectionsPerYear)} infections (
       {formatPercent(estimatedPercentageNewInfectedPerYear, 1)} of the
       population).
+    </Fragment>
+  );
+}
+
+function renderDisclaimer(): React.ReactElement {
+  return (
+    <Fragment>
+      Our risk levels for daily new cases are based on the{' '}
+      <ExternalLink href="https://ethics.harvard.edu/files/center-for-ethics/files/key_metrics_and_indicators_v4.pdf">
+        “Key Metrics for Covid Suppression”
+      </ExternalLink>{' '}
+      by Harvard Global Health Institute and others.
+      <br />
+      When estimating the number of people who will become infected in the
+      course of a year, we rely on the{' '}
+      <ExternalLink href="https://www.globalhealthnow.org/2020-06/us-cases-10x-higher-reported">
+        CDC’s estimate
+      </ExternalLink>{' '}
+      that confirmed cases represent as few as 10% of overall infections. Learn
+      more about{' '}
+      <ExternalLink href="https://docs.google.com/document/d/1cd_cEpNiIl1TzUJBvw9sHLbrbUZ2qCxgN32IqVLa3Do/edit">
+        our methodology
+      </ExternalLink>{' '}
+      and{' '}
+      <ExternalLink href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit">
+        our data sources
+      </ExternalLink>
+      .
     </Fragment>
   );
 }

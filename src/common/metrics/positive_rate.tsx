@@ -6,9 +6,11 @@ import { getLevel, Metric } from 'common/metric';
 import { formatPercent } from 'common/utils';
 import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
+import ExternalLink from 'components/ExternalLink';
 
 export const PositiveTestRateMetric: MetricDefinition = {
   renderStatus,
+  renderDisclaimer,
 };
 
 export const METRIC_NAME = 'Positive test rate';
@@ -107,6 +109,24 @@ export function renderStatus(projections: Projections) {
     <Fragment>
       A {lowSizableLarge} percentage ({percentage}) of COVID tests were
       positive, {testingBroadlyText}. {textForecast}.
+    </Fragment>
+  );
+}
+
+function renderDisclaimer(): React.ReactElement {
+  return (
+    <Fragment>
+      The World Health Organization recommends a positive test rate of less than
+      10%. The countries most successful in containing COVID have rates of 3% or
+      less. We calculate the rate as a 7-day trailing average. Learn more about{' '}
+      <ExternalLink href="https://docs.google.com/document/d/1cd_cEpNiIl1TzUJBvw9sHLbrbUZ2qCxgN32IqVLa3Do/edit">
+        our methodology
+      </ExternalLink>{' '}
+      and{' '}
+      <ExternalLink href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit">
+        our data sources
+      </ExternalLink>
+      .
     </Fragment>
   );
 }

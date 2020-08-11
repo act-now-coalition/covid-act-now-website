@@ -7,9 +7,11 @@ import { formatPercent, formatInteger } from 'common/utils';
 import { Projections } from 'common/models/Projections';
 import { TRACERS_NEEDED_PER_CASE } from 'common/models/Projection';
 import { MetricDefinition } from './interfaces';
+import ExternalLink from 'components/ExternalLink';
 
 export const ContactTracingMetric: MetricDefinition = {
   renderStatus,
+  renderDisclaimer,
 };
 
 export const METRIC_NAME = 'Contacts traced';
@@ -120,6 +122,32 @@ export function renderStatus(projections: Projections): React.ReactElement {
       new cases in 48 hours, before too many other people are infected. This
       means that {locationName} is likely able to trace {contactTracingRate} of
       new COVID infections in 48 hours. {outcomesAtLevel}
+    </Fragment>
+  );
+}
+
+function renderDisclaimer(): React.ReactElement {
+  return (
+    <Fragment>
+      <ExternalLink href="https://covidlocal.org/assets/documents/COVID%20Local%20Metrics%20overview.pdf">
+        Experts recommend
+      </ExternalLink>{' '}
+      that at least 90% of contacts for each new case must be traced within 48
+      hours in order to contain COVID. Experts estimate that tracing each new
+      case within 48 hours requires an average of {TRACERS_NEEDED_PER_CASE}{' '}
+      contact tracers per new case, as well as fast testing. Learn more about{' '}
+      <ExternalLink href="https://docs.google.com/document/d/1cd_cEpNiIl1TzUJBvw9sHLbrbUZ2qCxgN32IqVLa3Do/edit">
+        our methodology
+      </ExternalLink>{' '}
+      and{' '}
+      <ExternalLink href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit">
+        our data sources
+      </ExternalLink>{' '}
+      (for contact tracing data, we partner with{' '}
+      <ExternalLink href="https://testandtrace.com/">
+        testandtrace.com
+      </ExternalLink>
+      ).
     </Fragment>
   );
 }
