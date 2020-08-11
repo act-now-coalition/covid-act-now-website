@@ -48,10 +48,12 @@ export function fetchAllStateProjections(snapshotUrl: string | null = null) {
       const stateName = summaryWithTimeseriesMap[INTERVENTIONS.PROJECTED]!
         .stateName;
 
-      return new Projections(
-        summaryWithTimeseriesMap,
-        REVERSED_STATES[stateName],
-      );
+      const stateCode = REVERSED_STATES[stateName] || 'Unknown';
+      if (stateCode === 'Unknown') {
+        console.warn('Unknown state:', stateName);
+      }
+
+      return new Projections(summaryWithTimeseriesMap, stateCode);
     });
   }
   const key = snapshotUrl || 'null';
@@ -72,10 +74,14 @@ export function fetchAllCountyProjections(snapshotUrl: string | null = null) {
       // We grab the state / fips from the projected intervention's summary data.
       const stateName = summaryWithTimeseriesMap[INTERVENTIONS.PROJECTED]!
         .stateName;
+      const stateCode = REVERSED_STATES[stateName] || 'Unknown';
+      if (stateCode === 'Unknown') {
+        console.warn('Unknown state:', stateName);
+      }
       const fips = summaryWithTimeseriesMap[INTERVENTIONS.PROJECTED]!.fips;
       return new Projections(
         summaryWithTimeseriesMap,
-        REVERSED_STATES[stateName],
+        stateCode,
         findCountyByFips(fips),
       );
     });
