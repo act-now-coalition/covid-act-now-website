@@ -12,7 +12,7 @@ const HeaderCell = (props: {
   metricInMap: any;
   arrowColorSelected: string;
   arrowColorNotSelected: string;
-  isModal?: Boolean;
+  isModal: Boolean;
 }) => {
   const {
     sorter,
@@ -39,6 +39,9 @@ const HeaderCell = (props: {
       onClick={() => {
         cellOnClick();
       }}
+      sorter={sorter}
+      metricInMap={metricInMap}
+      isModal={isModal}
     >
       <span>{getMetricNameForCompare(metricInMap)}</span>
       <ArrowContainer

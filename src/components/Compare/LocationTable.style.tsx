@@ -9,7 +9,7 @@ const pinnedBorderColor = '#CEBFAC';
 export const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
-  max-height: calc(100vh - 60px);
+  max-height: calc(100vh - 3.75rem);
   min-height: 0;
   width: 100%;
   overflow-x: auto;

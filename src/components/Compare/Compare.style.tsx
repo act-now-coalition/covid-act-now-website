@@ -5,6 +5,7 @@ import { COLOR_MAP, LEVEL_COLOR } from 'common/colors';
 import { COLORS } from 'common';
 import { Metric } from 'common/metric';
 import { Level } from 'common/level';
+import { ChartLocationName } from 'components/LocationPage/ChartsHolder.style';
 
 export const locationNameCellWidth = 145;
 export const metricCellWidth = 120;
@@ -57,16 +58,37 @@ export const Wrapper = styled.div<{ isModal?: Boolean; isHomepage?: Boolean }>`
       }
     }
   }
+
+  ${ChartLocationName} {
+    margin: 0.25rem 0;
+  }
 `;
 
 export const StyledTable = styled(Table)<{ isModal?: Boolean }>`
   border: ${({ isModal }) => !isModal && `1px solid ${COLORS.LIGHTGRAY}`};
 `;
 
-export const Cell = styled(TableCell)<{ locationHeaderCell?: Boolean }>`
+// TODO (Chelsi): turn this background-color situation into a theme asap
+export const Cell = styled(TableCell)<{
+  locationHeaderCell?: Boolean;
+  sorter?: any;
+  metricInMap?: Metric;
+  isModal: Boolean;
+}>`
   cursor: ${({ locationHeaderCell }) => !locationHeaderCell && 'pointer'};
   text-transform: uppercase;
   font-size: 0.9rem;
+  background-color: ${({ locationHeaderCell, sorter, metricInMap }) =>
+    !locationHeaderCell && sorter === metricInMap && 'rgba(0,0,0,0.02)'};
+  background-color: ${({ locationHeaderCell, sorter, metricInMap, isModal }) =>
+    isModal && !locationHeaderCell && sorter === metricInMap && 'black'};
+  background-color: ${({ locationHeaderCell, sorter, metricInMap, isModal }) =>
+    isModal &&
+    !locationHeaderCell &&
+    sorter !== metricInMap &&
+    `${COLOR_MAP.GRAY_BODY_COPY}`};
+  background-color: ${({ locationHeaderCell, isModal }) =>
+    isModal && locationHeaderCell && `${COLOR_MAP.GRAY_BODY_COPY}`};
 `;
 
 export const TableHeadContainer = styled(TableHead)<{ isModal?: Boolean }>`
@@ -74,7 +96,6 @@ export const TableHeadContainer = styled(TableHead)<{ isModal?: Boolean }>`
     vertical-align: bottom;
     line-height: 1.1rem;
     padding: 1rem 1rem 0.8rem;
-    background-color: ${({ isModal }) => isModal && 'black'};
     color: ${({ isModal }) => isModal && 'white'};
     border-bottom: ${({ isModal }) =>
       !isModal && `2px solid ${COLORS.LIGHTGRAY}`};
@@ -114,6 +135,8 @@ export const MetricCell = styled.td<{
     color: ${({ sorter, metric }) =>
       sorter === metric ? 'black' : `${COLOR_MAP.GRAY_BODY_COPY}`};
     font-weight: ${({ sorter, metric }) => sorter === metric && '600'};
+    background-color: ${({ sorter, metric }) =>
+      sorter === metric && 'rgba(0,0,0,0.02)'};
   }
 
   svg {
@@ -137,12 +160,21 @@ export const MetricCell = styled.td<{
   }
 `;
 
+export const MetricValue = styled.span`
+  width: 48px;
+  display: inline-block;
+  text-align: right;
+`;
+
 export const Row = styled(TableRow)<{
   index?: number;
   isCurrentCounty?: boolean;
+  isModal?: boolean;
 }>`
   background-color: ${({ index }) =>
     !isNumber(index) ? 'white' : index % 2 === 0 ? '#fafafa' : 'white'};
+  background-color: ${({ isModal }) =>
+    isModal && `${COLOR_MAP.GRAY_BODY_COPY}`};
   background-color: ${({ isCurrentCounty }) => isCurrentCounty && '#FFEFD6'};
   border-bottom: none;
 
@@ -168,7 +200,7 @@ export const ArrowContainer = styled.div<{
   display: flex;
   font-family: Roboto;
   font-size: 0.875rem;
-  transform: translate(-0.3rem, 0.15rem);
+  transform: translate(-0.25rem, 0.15rem);
   margin-top: 0.25rem;
 
   span {
@@ -280,16 +312,21 @@ export const DisclaimerWrapper = styled.div`
   }
 `;
 
+export const HeaderWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem;
+`;
+
 export const Header = styled.div`
   display: flex;
-  padding: 0.75rem;
   font-family: Roboto;
   font-weight: bold;
   font-size: 1.5rem;
 `;
 
 export const ModalHeader = styled.div<{ isHomepage?: Boolean }>`
-  background-color: black;
+  background-color: ${COLOR_MAP.GRAY_BODY_COPY};
   color: white;
   font-family: Roboto;
   font-size: 1.5rem;
@@ -301,6 +338,7 @@ export const ModalHeader = styled.div<{ isHomepage?: Boolean }>`
   max-width: ${({ isHomepage }) => (isHomepage ? '1000px' : '900px')};
   width: 100%;
   margin: 0 auto;
+  height: 3.75rem;
 
   @media (min-width: 600px) {
     margin: 1rem auto 0;
@@ -310,7 +348,13 @@ export const ModalHeader = styled.div<{ isHomepage?: Boolean }>`
     color: white;
     cursor: pointer;
     font-size: 1.75rem;
+    margin-left: auto;
   }
 `;
 
 export const DivForRef = styled.div``;
+
+export const StateName = styled.div`
+  font-size: 1rem;
+  line-height: 1.4;
+`;
