@@ -25,6 +25,18 @@ export interface CampaignMonitorMessageSent {
   MessageID: string;
 }
 
+export interface CampaignMonitorStats {
+  Sent: number;
+  Bounces: number;
+  Opened: number;
+  Clicked: number;
+}
+
+export interface CampaignMonitorGroup {
+  Group: string;
+  CreatedAt: string;
+}
+
 function isStatusOK(status: number) {
   return 200 <= status && status < 300;
 }
@@ -80,6 +92,17 @@ class CampaignMonitor {
     }
 
     return response.data;
+  }
+
+  async fetchTransactionalStats(group: string): Promise<CampaignMonitorStats> {
+    const params = { group, timezone: 'UTC' };
+    const res = await this.api.get('transactional/statistics', { params });
+    return res.data;
+  }
+
+  async fetchTransactionalGroups(): Promise<CampaignMonitorGroup[]> {
+    const res = await this.api.get('transactional/classicEmail/groups');
+    return res.data;
   }
 }
 
