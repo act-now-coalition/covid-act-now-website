@@ -15,10 +15,9 @@ import {
 } from '../../src/common/locations';
 import { ALERT_EMAIL_GROUP_PREFIX } from '../alert_emails/utils';
 
-// TODO: Set the correct spreadsheet ID in the workflow file
 function getSpreadsheetId(): string {
   if (process.env.SPREADSHEET_ID) {
-    return 'process.env.SPREADSHEET_ID';
+    return process.env.SPREADSHEET_ID;
   } else {
     return '1M-GXVtFrv5NK1_Gceu8ynkK3OsHjD3GEQY4vaG0lDaA';
   }
