@@ -12,6 +12,7 @@ import { Metric } from 'common/metric';
 import CompareMain from 'components/Compare/CompareMain';
 import { getCountiesArr } from 'common/utils/compare';
 import { countySummary } from 'common/location_summaries';
+import Explore from 'components/Explore';
 
 // TODO(michael): figure out where this type declaration should live.
 type County = {
@@ -194,6 +195,9 @@ const ChartsHolder = (props: {
                   stateId={props.stateId}
                 />
               ))}
+            </MainContentInner>
+            <MainContentInner>
+              <Explore />
             </MainContentInner>
           </ChartContentWrapper>
           <div ref={shareBlockRef}>
