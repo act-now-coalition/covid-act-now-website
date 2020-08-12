@@ -22,7 +22,7 @@ export const Wrapper = styled.div<{ isModal?: Boolean; isHomepage?: Boolean }>`
   max-width: ${({ isHomepage }) => (isHomepage ? '1000px' : '900px')};
   width: 100%;
   margin: ${({ isModal }) => (isModal ? '0 auto' : '1rem auto')};
-  background: white;
+  background: ${({ isModal }) => isModal && `${COLOR_MAP.GRAY_BODY_COPY}`};
   max-height: ${({ isModal }) => isModal && '100vh'};
 
   @media (min-width: 600px) {
@@ -89,6 +89,8 @@ export const Cell = styled(TableCell)<{
     `${COLOR_MAP.GRAY_BODY_COPY}`};
   background-color: ${({ locationHeaderCell, isModal }) =>
     isModal && locationHeaderCell && `${COLOR_MAP.GRAY_BODY_COPY}`};
+  border-radius: ${({ locationHeaderCell, sorter, metricInMap, isModal }) =>
+    isModal && !locationHeaderCell && sorter === metricInMap && '4px 4px 0 0'};
 `;
 
 export const TableHeadContainer = styled(TableHead)<{ isModal?: Boolean }>`
@@ -160,19 +162,25 @@ export const MetricCell = styled.td<{
   }
 `;
 
-export const MetricValue = styled.span`
+export const MetricValue = styled.span<{ valueUnknown: boolean }>`
   width: 48px;
   display: inline-block;
   text-align: right;
+  opacity: ${({ valueUnknown }) => valueUnknown && '.5'};
 `;
 
 export const Row = styled(TableRow)<{
   index?: number;
   isCurrentCounty?: boolean;
   isModal?: boolean;
+  headerRowBackground?: string;
 }>`
-  background-color: ${({ index }) =>
-    !isNumber(index) ? 'white' : index % 2 === 0 ? '#fafafa' : 'white'};
+  background-color: ${({ index, headerRowBackground }) =>
+    !isNumber(index)
+      ? `${headerRowBackground}`
+      : index % 2 === 0
+      ? '#fafafa'
+      : 'white'};
   background-color: ${({ isModal }) =>
     isModal && `${COLOR_MAP.GRAY_BODY_COPY}`};
   background-color: ${({ isCurrentCounty }) => isCurrentCounty && '#FFEFD6'};
@@ -355,6 +363,6 @@ export const ModalHeader = styled.div<{ isHomepage?: Boolean }>`
 export const DivForRef = styled.div``;
 
 export const StateName = styled.div`
-  font-size: 1rem;
+  font-size: 0.9rem;
   line-height: 1.4;
 `;

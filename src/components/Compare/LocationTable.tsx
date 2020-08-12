@@ -6,6 +6,7 @@ import CompareTableRow from './CompareTableRow';
 import HeaderCell from './HeaderCell';
 import * as Styles from './LocationTable.style';
 import * as CompareStyles from './Compare.style';
+import { COLOR_MAP } from 'common/colors';
 
 const LocationTableHead: React.FunctionComponent<{
   setSorter: React.Dispatch<React.SetStateAction<number>>;
@@ -32,7 +33,9 @@ const LocationTableHead: React.FunctionComponent<{
 }) => (
   <Table key="table-header">
     <CompareStyles.TableHeadContainer isModal={isModal}>
-      <CompareStyles.Row>
+      <CompareStyles.Row
+        headerRowBackground={isModal ? `${COLOR_MAP.GRAY_BODY_COPY}` : 'white'}
+      >
         <CompareStyles.Cell locationHeaderCell isModal={isModal}>
           {isModal && (
             <CompareStyles.StateName>{stateName}</CompareStyles.StateName>
@@ -125,7 +128,7 @@ const LocationTable: React.FunctionComponent<{
   return (
     <Styles.TableContainer isModal={isModal}>
       <Container>
-        <Styles.Head isModal={isModal}>
+        <Styles.Head isModal={isModal} pinnedLocation={pinnedLocation}>
           <LocationTableHead
             setSorter={setSorter}
             setSortDescending={setSortDescending}

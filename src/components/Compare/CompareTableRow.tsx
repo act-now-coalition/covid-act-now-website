@@ -11,7 +11,7 @@ function cellValue(metric: any, metricType: Metric) {
   if (metric === null || metric === undefined) {
     return 'Unknown';
   }
-  return formatValue(metricType, metric.value, '?');
+  return formatValue(metricType, metric.value, '---');
 }
 
 const CompareTableRow = (props: {
@@ -71,18 +71,25 @@ const CompareTableRow = (props: {
         <FiberManualRecordIcon />
         {locationName}
       </MetricCell>
-      {orderedMetrics.map((metric: Metric) => (
-        <MetricCell
-          sorter={sorter}
-          metric={metric}
-          iconColor={getLevel(metric)}
-        >
-          <FiberManualRecordIcon />
-          <MetricValue>
-            {cellValue(location.metricsInfo.metrics[metric], metric)}
-          </MetricValue>
-        </MetricCell>
-      ))}
+      {orderedMetrics.map((metric: Metric) => {
+        const metricForValue = location.metricsInfo.metrics[metric];
+        const valueUnknown =
+          metricForValue && metricForValue.level === Level.UNKNOWN
+            ? true
+            : false;
+        return (
+          <MetricCell
+            sorter={sorter}
+            metric={metric}
+            iconColor={getLevel(metric)}
+          >
+            <FiberManualRecordIcon />
+            <MetricValue valueUnknown={valueUnknown}>
+              {cellValue(metricForValue, metric)}
+            </MetricValue>
+          </MetricCell>
+        );
+      })}
     </Row>
   );
 };
