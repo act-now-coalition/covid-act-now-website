@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs-extra';
 import moment from 'moment';
 import * as Handlebars from 'handlebars';
+import moment from 'moment';
 import { Alert } from './interfaces';
 import { Level } from '../../src/common/level';
 
