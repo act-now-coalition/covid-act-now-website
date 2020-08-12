@@ -4,7 +4,7 @@ on:
   push:
   schedule:
     # 12:00 GMT = 05:00 PDT
-    cron: '0 12 * * *'
+    - cron: '0 12 * * *'
 
 jobs:
   alert-email-report:
