@@ -11,7 +11,6 @@ import {
   Content,
   KickerWrapper,
 } from './CriteriaExplanation.style';
-import { BetaTag } from 'components/LocationPage/ChartsHolder.style';
 
 const Kicker = (props: {
   number: string;
@@ -40,7 +39,6 @@ const CriteriaExplanation = (props: { isMobile: Boolean }) => {
             <CriterionDescription>
               How many new cases are confirmed daily?
             </CriterionDescription>
-            <BetaTag>New Indicator</BetaTag>
           </Content>
         </Criterion>
         <Criterion>

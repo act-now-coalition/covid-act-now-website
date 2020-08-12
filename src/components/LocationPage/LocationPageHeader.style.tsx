@@ -265,6 +265,10 @@ export const LastUpdatedDate = styled.span<{
 export const SectionHalf = styled(Box)`
   display: flex;
 
+  &:first-child:last-child {
+    margin: 2rem 1.6rem;
+  }
+
   &:first-child {
     margin: 2rem 1.6rem;
   }
