@@ -31,7 +31,7 @@ const LocationTableHead: React.FunctionComponent<{
   stateName,
 }) => (
   <Table key="table-header">
-    <Styles.TableHeadContainer isModal={isModal}>
+    <CompareStyles.TableHeadContainer isModal={isModal}>
       <CompareStyles.Row>
         <CompareStyles.Cell locationHeaderCell isModal={isModal}>
           {isModal && (
@@ -52,7 +52,7 @@ const LocationTableHead: React.FunctionComponent<{
           />
         ))}
       </CompareStyles.Row>
-    </Styles.TableHeadContainer>
+    </CompareStyles.TableHeadContainer>
   </Table>
 );
 

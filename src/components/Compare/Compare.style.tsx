@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { isNumber } from 'lodash';
-import { TableHead, TableCell, TableRow, Table } from '@material-ui/core';
+import { TableHead, TableCell, TableRow } from '@material-ui/core';
 import { COLOR_MAP, LEVEL_COLOR } from 'common/colors';
 import { COLORS } from 'common';
 import { Metric } from 'common/metric';
@@ -64,7 +64,7 @@ export const Wrapper = styled.div<{ isModal?: Boolean; isHomepage?: Boolean }>`
   }
 `;
 
-export const StyledTable = styled(Table)<{ isModal?: Boolean }>`
+export const StyledTable = styled.div<{ isModal?: Boolean }>`
   border: ${({ isModal }) => !isModal && `1px solid ${COLORS.LIGHTGRAY}`};
 `;
 
