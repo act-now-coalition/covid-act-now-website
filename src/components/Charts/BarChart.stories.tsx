@@ -27,26 +27,28 @@ export const Simple = () => {
     { x: new Date('2020-08-07'), y: 6 },
   ];
 
-  const getX = (p: Point) => p.x;
-  const getY = (p: Point) => p.y;
+  const getX = (p: Point): Date => p.x;
+  const getY = (p: Point): number => p.y;
 
+  const dates: Date[] = data.map(getX);
   const xScale = scaleBand<Date>({
     rangeRound: [0, width],
-    domain: data.map(getX),
+    domain: dates,
     padding: 0.2,
   });
 
+  const maxYValue = d3max(data, getY) || 1;
   const yScale = scaleLinear<number>({
     rangeRound: [0, height],
-    domain: [d3max(data, getY), 0],
+    domain: [maxYValue, 0],
   });
 
   return (
     <svg width={width} height={height}>
-      <BarChart
+      <BarChart<Point>
         data={data}
-        x={p => xScale(getX(p))}
-        y={p => yScale(getY(p))}
+        x={(p: Point) => xScale(getX(p))}
+        y={(p: Point) => yScale(getY(p))}
         barWidth={xScale.bandwidth()}
         yMin={0}
         yMax={height}
