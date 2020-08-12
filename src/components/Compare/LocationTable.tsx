@@ -6,6 +6,7 @@ import CompareTableRow from './CompareTableRow';
 import HeaderCell from './HeaderCell';
 import * as Styles from './LocationTable.style';
 import * as CompareStyles from './Compare.style';
+import { COLOR_MAP } from 'common/colors';
 
 const LocationTableHead: React.FunctionComponent<{
   setSorter: React.Dispatch<React.SetStateAction<number>>;
@@ -17,6 +18,7 @@ const LocationTableHead: React.FunctionComponent<{
   firstHeaderName: string;
   metrics: Metric[];
   isModal: boolean;
+  stateName?: string;
 }> = ({
   setSorter,
   setSortDescending,
@@ -27,11 +29,17 @@ const LocationTableHead: React.FunctionComponent<{
   firstHeaderName,
   metrics,
   isModal,
+  stateName,
 }) => (
   <Table key="table-header">
-    <Styles.TableHeadContainer isModal={isModal}>
-      <CompareStyles.Row>
-        <CompareStyles.Cell locationHeaderCell>
+    <CompareStyles.TableHeadContainer isModal={isModal}>
+      <CompareStyles.Row
+        headerRowBackground={isModal ? `${COLOR_MAP.GRAY_BODY_COPY}` : 'white'}
+      >
+        <CompareStyles.Cell locationHeaderCell isModal={isModal}>
+          {isModal && (
+            <CompareStyles.StateName>{stateName}</CompareStyles.StateName>
+          )}
           {firstHeaderName}
         </CompareStyles.Cell>
         {metrics.map(metric => (
@@ -47,7 +55,7 @@ const LocationTableHead: React.FunctionComponent<{
           />
         ))}
       </CompareStyles.Row>
-    </Styles.TableHeadContainer>
+    </CompareStyles.TableHeadContainer>
   </Table>
 );
 
@@ -93,6 +101,7 @@ const LocationTable: React.FunctionComponent<{
   pinnedLocation?: RankedLocationSummary;
   sortedLocations: RankedLocationSummary[];
   numLocations: number;
+  stateName?: string;
 }> = ({
   setSorter,
   setSortDescending,
@@ -106,6 +115,7 @@ const LocationTable: React.FunctionComponent<{
   pinnedLocation,
   sortedLocations,
   numLocations,
+  stateName,
 }) => {
   const Container = isModal ? Styles.ModalContainer : Styles.Container;
 
@@ -118,7 +128,7 @@ const LocationTable: React.FunctionComponent<{
   return (
     <Styles.TableContainer isModal={isModal}>
       <Container>
-        <Styles.Head isModal={isModal}>
+        <Styles.Head isModal={isModal} pinnedLocation={pinnedLocation}>
           <LocationTableHead
             setSorter={setSorter}
             setSortDescending={setSortDescending}
@@ -129,6 +139,7 @@ const LocationTable: React.FunctionComponent<{
             firstHeaderName={firstHeaderName}
             metrics={metrics}
             isModal={isModal}
+            stateName={stateName}
           />
           {isModal && pinnedLocation && (
             <Table key="table-pinned-location">
@@ -137,6 +148,7 @@ const LocationTable: React.FunctionComponent<{
                   location={pinnedLocation}
                   sorter={sorter}
                   isCurrentCounty
+                  isModal={isModal}
                 />
               </TableBody>
             </Table>
