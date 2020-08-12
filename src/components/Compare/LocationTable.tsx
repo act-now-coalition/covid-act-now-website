@@ -29,7 +29,7 @@ const LocationTableHead: React.FunctionComponent<{
   isModal,
 }) => (
   <Table key="table-header">
-    <CompareStyles.TableHeadContainer isModal={isModal}>
+    <Styles.TableHeadContainer isModal={isModal}>
       <CompareStyles.Row>
         <CompareStyles.Cell locationHeaderCell>
           {firstHeaderName}
@@ -47,7 +47,7 @@ const LocationTableHead: React.FunctionComponent<{
           />
         ))}
       </CompareStyles.Row>
-    </CompareStyles.TableHeadContainer>
+    </Styles.TableHeadContainer>
   </Table>
 );
 
@@ -116,7 +116,7 @@ const LocationTable: React.FunctionComponent<{
     : sortedLocations.slice(0, numLocationsMain);
 
   return (
-    <CompareStyles.StyledTable isModal={isModal}>
+    <Styles.TableContainer isModal={isModal}>
       <Container>
         <Styles.Head isModal={isModal}>
           <LocationTableHead
@@ -159,7 +159,7 @@ const LocationTable: React.FunctionComponent<{
           </Styles.Body>
         )}
       </Container>
-    </CompareStyles.StyledTable>
+    </Styles.TableContainer>
   );
 };
 
