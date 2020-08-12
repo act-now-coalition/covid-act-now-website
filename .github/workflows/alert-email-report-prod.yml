@@ -1,7 +1,6 @@
 name: Generate Alert Email Report
 
 on:
-  push:
   schedule:
     # 12:00 GMT = 05:00 PDT
     - cron: '0 12 * * *'
@@ -37,4 +36,4 @@ jobs:
           STATUS: ${{job.status}}
         uses: Ilshidur/action-slack@fb92a78
         with:
-          args: 'update-source-data finished with status: {{STATUS}}.  See report: https://docs.google.com/spreadsheets/d/12JRyyAo6Thn4nCDf8nmdAU9CTVeJhjMRjMuK6vxfJbM/edit#gid=0'
+          args: 'Email Alerts Report finished with status: {{STATUS}}.  See report: https://docs.google.com/spreadsheets/d/12JRyyAo6Thn4nCDf8nmdAU9CTVeJhjMRjMuK6vxfJbM/edit#gid=0'
