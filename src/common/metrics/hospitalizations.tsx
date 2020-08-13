@@ -9,12 +9,16 @@ import { NonCovidPatientsMethod } from 'common/models/ICUHeadroom';
 import { MetricDefinition } from './interfaces';
 import ExternalLink from '../../components/ExternalLink';
 
+export const METRIC_NAME = 'ICU headroom used';
+
 export const ICUHeadroomMetric: MetricDefinition = {
   renderStatus,
   renderDisclaimer,
+  metricName: METRIC_NAME,
+  extendedMetricName: METRIC_NAME,
+  metricNameForCompare: METRIC_NAME,
 };
 
-export const METRIC_NAME = 'ICU headroom used';
 export const STATES_WITH_DATA_OVERRIDES = ['Nevada'];
 
 const SHORT_DESCRIPTION_LOW = 'Can likely handle a new wave of COVID';
