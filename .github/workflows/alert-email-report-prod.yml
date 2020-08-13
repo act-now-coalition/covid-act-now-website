@@ -1,0 +1,39 @@
+name: Generate Alert Email Report
+
+on:
+  schedule:
+    # 12:00 GMT = 05:00 PDT
+    - cron: '0 12 * * *'
+
+jobs:
+  alert-email-report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: covid-projections/covid-projections
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - run: yarn install
+      - name: Write Firebase Service Account
+        run: echo "$SERVICE_ACCOUNT" > scripts/alert_emails/google-service-account.json
+        env:
+          SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROD }}
+      - name: Write Spreadsheet Service Account
+        run: echo "$SERVICE_ACCOUNT" > scripts/common/google-sheets/google-service-account.json
+        env:
+          SERVICE_ACCOUNT: ${{ secrets.ALERTS_REPORT_SPREADSHEET_SERVICE_ACCOUNT }}
+      - name: update email alert report
+        run: yarn report-alert-emails
+        env:
+          SPREADSHEET_ID: '12JRyyAo6Thn4nCDf8nmdAU9CTVeJhjMRjMuK6vxfJbM'
+          CREATE_SEND_TOKEN: ${{ secrets.CREATE_SEND_TOKEN }}
+      - name: Slack notification
+        if: always() # Pick up events even if the job fails or is canceled.
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_DEV_ALERTS }}
+          STATUS: ${{job.status}}
+        uses: Ilshidur/action-slack@fb92a78
+        with:
+          args: 'Email Alerts Report finished with status: {{STATUS}}.  See report: https://docs.google.com/spreadsheets/d/12JRyyAo6Thn4nCDf8nmdAU9CTVeJhjMRjMuK6vxfJbM/edit#gid=0'

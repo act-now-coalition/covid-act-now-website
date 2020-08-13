@@ -7,9 +7,11 @@ import { formatPercent, formatInteger } from 'common/utils';
 import { Projections } from 'common/models/Projections';
 import { NonCovidPatientsMethod } from 'common/models/ICUHeadroom';
 import { MetricDefinition } from './interfaces';
+import ExternalLink from '../../components/ExternalLink';
 
 export const ICUHeadroomMetric: MetricDefinition = {
   renderStatus,
+  renderDisclaimer,
 };
 
 export const METRIC_NAME = 'ICU headroom used';
@@ -127,6 +129,27 @@ export function renderStatus(projections: Projections): React.ReactElement {
       non-COVID patients. Of the {remainingICUBeds} ICU beds remaining,{' '}
       {textWeEstimate} {covidICUPatients} are needed by COVID cases, or{' '}
       {icuHeadroom} of available beds. {textLevel}.
+    </Fragment>
+  );
+}
+
+function renderDisclaimer(): React.ReactElement {
+  return (
+    <Fragment>
+      <ExternalLink href="https://preventepidemics.org/wp-content/uploads/2020/04/COV020_WhenHowTightenFaucet_v3.pdf">
+        Resolve to Save Lives
+      </ExternalLink>
+      , a pandemic think tank, recommends that hospitals maintain enough ICU
+      capacity to double the number of COVID patients hospitalized. Learn more
+      about{' '}
+      <ExternalLink href="https://docs.google.com/document/d/1cd_cEpNiIl1TzUJBvw9sHLbrbUZ2qCxgN32IqVLa3Do/edit">
+        our methodology
+      </ExternalLink>{' '}
+      and{' '}
+      <ExternalLink href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit">
+        our data sources
+      </ExternalLink>
+      .
     </Fragment>
   );
 }

@@ -5,7 +5,7 @@ import {
   RegionAggregateDescriptor,
   RegionDescriptor,
 } from './RegionDescriptor';
-import { Api } from 'api';
+import { Api, RegionSummaryWithTimeseriesMap } from 'api';
 import { findCountyByFips } from 'common/locations';
 import moment from 'moment';
 
@@ -43,16 +43,17 @@ export function fetchAllStateProjections(snapshotUrl: string | null = null) {
     ).fetchAggregatedSummaryWithTimeseriesMaps(
       RegionAggregateDescriptor.STATES,
     );
-    return all.map(summaryWithTimeseriesMap => {
-      // We grab the state from the projected intervention's summary data.
-      const stateName = summaryWithTimeseriesMap[INTERVENTIONS.PROJECTED]!
-        .stateName;
-
-      return new Projections(
-        summaryWithTimeseriesMap,
-        REVERSED_STATES[stateName],
-      );
-    });
+    return all
+      .filter(
+        summaryWithTimeseriesMap =>
+          stateCode(summaryWithTimeseriesMap) !== undefined,
+      )
+      .map(summaryWithTimeseriesMap => {
+        return new Projections(
+          summaryWithTimeseriesMap,
+          stateCode(summaryWithTimeseriesMap)!,
+        );
+      });
   }
   const key = snapshotUrl || 'null';
   cachedStatesProjections[key] = cachedStatesProjections[key] || fetch();
@@ -68,17 +69,19 @@ export function fetchAllCountyProjections(snapshotUrl: string | null = null) {
     ).fetchAggregatedSummaryWithTimeseriesMaps(
       RegionAggregateDescriptor.COUNTIES,
     );
-    return all.map(summaryWithTimeseriesMap => {
-      // We grab the state / fips from the projected intervention's summary data.
-      const stateName = summaryWithTimeseriesMap[INTERVENTIONS.PROJECTED]!
-        .stateName;
-      const fips = summaryWithTimeseriesMap[INTERVENTIONS.PROJECTED]!.fips;
-      return new Projections(
-        summaryWithTimeseriesMap,
-        REVERSED_STATES[stateName],
-        findCountyByFips(fips),
-      );
-    });
+    return all
+      .filter(
+        summaryWithTimeseriesMap =>
+          stateCode(summaryWithTimeseriesMap) !== undefined,
+      )
+      .map(summaryWithTimeseriesMap => {
+        const fips = summaryWithTimeseriesMap[INTERVENTIONS.PROJECTED]!.fips;
+        return new Projections(
+          summaryWithTimeseriesMap,
+          stateCode(summaryWithTimeseriesMap)!,
+          findCountyByFips(fips),
+        );
+      });
   }
   const key = snapshotUrl || 'null';
   cachedCountiesProjections[key] = cachedCountiesProjections[key] || fetch();
@@ -110,4 +113,18 @@ export function useModelLastUpdatedDate() {
   }, []);
 
   return lastUpdated;
+}
+
+// Helper to get the state code from an API RegionSummaryWithTimeseriesMap.
+function stateCode(
+  summaryWithTimeseriesMap: RegionSummaryWithTimeseriesMap,
+): string | undefined {
+  // We grab the state / fips from the projected intervention's summary data.
+  const stateName = summaryWithTimeseriesMap[INTERVENTIONS.PROJECTED]!
+    .stateName;
+  const stateCode = REVERSED_STATES[stateName];
+  if (!stateCode) {
+    console.warn('Unknown state:', stateName);
+  }
+  return stateCode;
 }

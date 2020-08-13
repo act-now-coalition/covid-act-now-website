@@ -22,7 +22,7 @@ const SocialButtons = props => {
   const url = shareURL || 'https://covidactnow.org/';
   const quote =
     shareQuote ||
-    '@CovidActNow has real-time COVID data and risk levels for all communities across the country. What does yours look like?';
+    'I’m keeping track of the latest COVID data and risk levels with @CovidActNow. What does your community look like?';
   const hashtag = 'COVIDActNow';
 
   const [copyLinkButtonTextA, setCopyLinkButtonTextA] = useState('Copy');

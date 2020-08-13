@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { isNumber } from 'lodash';
-import { TableHead, TableCell, TableRow, Table } from '@material-ui/core';
+import { TableHead, TableCell, TableRow } from '@material-ui/core';
 import { COLOR_MAP, LEVEL_COLOR } from 'common/colors';
 import { COLORS } from 'common';
 import { Metric } from 'common/metric';
 import { Level } from 'common/level';
-import { DisclaimerWrapper } from 'components/Disclaimer/Disclaimer.style';
+import { ChartLocationName } from 'components/LocationPage/ChartsHolder.style';
 
 export const locationNameCellWidth = 145;
 export const metricCellWidth = 120;
@@ -22,7 +22,7 @@ export const Wrapper = styled.div<{ isModal?: Boolean; isHomepage?: Boolean }>`
   max-width: ${({ isHomepage }) => (isHomepage ? '1000px' : '900px')};
   width: 100%;
   margin: ${({ isModal }) => (isModal ? '0 auto' : '1rem auto')};
-  background: white;
+  background: ${({ isModal }) => isModal && `${COLOR_MAP.GRAY_BODY_COPY}`};
   max-height: ${({ isModal }) => isModal && '100vh'};
 
   @media (min-width: 600px) {
@@ -59,23 +59,38 @@ export const Wrapper = styled.div<{ isModal?: Boolean; isHomepage?: Boolean }>`
     }
   }
 
-  ${DisclaimerWrapper} {
-    margin: 0 0rem 1.5rem;
-
-    @media (max-width: 900px) {
-      margin: 0 1rem 1.5rem;
-    }
+  ${ChartLocationName} {
+    margin: 0.25rem 0;
   }
 `;
 
-export const StyledTable = styled(Table)<{ isModal?: Boolean }>`
+export const StyledTable = styled.div<{ isModal?: Boolean }>`
   border: ${({ isModal }) => !isModal && `1px solid ${COLORS.LIGHTGRAY}`};
 `;
 
-export const Cell = styled(TableCell)<{ locationHeaderCell?: Boolean }>`
+// TODO (Chelsi): turn this background-color situation into a theme asap
+export const Cell = styled(TableCell)<{
+  locationHeaderCell?: Boolean;
+  sorter?: any;
+  metricInMap?: Metric;
+  isModal: Boolean;
+}>`
   cursor: ${({ locationHeaderCell }) => !locationHeaderCell && 'pointer'};
   text-transform: uppercase;
   font-size: 0.9rem;
+  background-color: ${({ locationHeaderCell, sorter, metricInMap }) =>
+    !locationHeaderCell && sorter === metricInMap && 'rgba(0,0,0,0.02)'};
+  background-color: ${({ locationHeaderCell, sorter, metricInMap, isModal }) =>
+    isModal && !locationHeaderCell && sorter === metricInMap && 'black'};
+  background-color: ${({ locationHeaderCell, sorter, metricInMap, isModal }) =>
+    isModal &&
+    !locationHeaderCell &&
+    sorter !== metricInMap &&
+    `${COLOR_MAP.GRAY_BODY_COPY}`};
+  background-color: ${({ locationHeaderCell, isModal }) =>
+    isModal && locationHeaderCell && `${COLOR_MAP.GRAY_BODY_COPY}`};
+  border-radius: ${({ locationHeaderCell, sorter, metricInMap, isModal }) =>
+    isModal && !locationHeaderCell && sorter === metricInMap && '4px 4px 0 0'};
 `;
 
 export const TableHeadContainer = styled(TableHead)<{ isModal?: Boolean }>`
@@ -83,7 +98,6 @@ export const TableHeadContainer = styled(TableHead)<{ isModal?: Boolean }>`
     vertical-align: bottom;
     line-height: 1.1rem;
     padding: 1rem 1rem 0.8rem;
-    background-color: ${({ isModal }) => isModal && 'black'};
     color: ${({ isModal }) => isModal && 'white'};
     border-bottom: ${({ isModal }) =>
       !isModal && `2px solid ${COLORS.LIGHTGRAY}`};
@@ -123,6 +137,8 @@ export const MetricCell = styled.td<{
     color: ${({ sorter, metric }) =>
       sorter === metric ? 'black' : `${COLOR_MAP.GRAY_BODY_COPY}`};
     font-weight: ${({ sorter, metric }) => sorter === metric && '600'};
+    background-color: ${({ sorter, metric }) =>
+      sorter === metric && 'rgba(0,0,0,0.02)'};
   }
 
   svg {
@@ -146,12 +162,27 @@ export const MetricCell = styled.td<{
   }
 `;
 
+export const MetricValue = styled.span<{ valueUnknown: boolean }>`
+  width: 48px;
+  display: inline-block;
+  text-align: right;
+  opacity: ${({ valueUnknown }) => valueUnknown && '.5'};
+`;
+
 export const Row = styled(TableRow)<{
   index?: number;
   isCurrentCounty?: boolean;
+  isModal?: boolean;
+  headerRowBackground?: string;
 }>`
-  background-color: ${({ index }) =>
-    !isNumber(index) ? 'white' : index % 2 === 0 ? '#fafafa' : 'white'};
+  background-color: ${({ index, headerRowBackground }) =>
+    !isNumber(index)
+      ? `${headerRowBackground}`
+      : index % 2 === 0
+      ? '#fafafa'
+      : 'white'};
+  background-color: ${({ isModal }) =>
+    isModal && `${COLOR_MAP.GRAY_BODY_COPY}`};
   background-color: ${({ isCurrentCounty }) => isCurrentCounty && '#FFEFD6'};
   border-bottom: none;
 
@@ -177,7 +208,7 @@ export const ArrowContainer = styled.div<{
   display: flex;
   font-family: Roboto;
   font-size: 0.875rem;
-  transform: translate(-0.3rem, 0.15rem);
+  transform: translate(-0.25rem, 0.15rem);
   margin-top: 0.25rem;
 
   span {
@@ -223,13 +254,36 @@ export const ArrowContainer = styled.div<{
   }
 `;
 
-export const Footer = styled.div`
+export const Footer = styled.div<{ isCounty: any }>`
   display: flex;
-  padding: 1.25rem 1rem;
+  padding: 1.25rem 0.75rem;
+  flex-direction: column;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+  font-size: 0.875rem;
 
   span {
-    margin-right: 1.875rem;
-    color: ${COLOR_MAP.GRAY_BODY_COPY};
+    margin-right: 1rem;
+  }
+
+  div {
+    &:first-child {
+      display: flex;
+      justify-content: ${({ isCounty }) =>
+        isCounty ? 'center' : 'flex-start'};
+      flex-wrap: wrap;
+    }
+  }
+
+  //740px is when disclaimer is about to overlap with state name:
+  @media (min-width: 740px) {
+    flex-direction: row;
+
+    div {
+      &:first-child {
+        justify-content: unset;
+        flex-wrap: nowrap;
+      }
+    }
   }
 `;
 
@@ -240,16 +294,47 @@ export const ViewAllLink = styled.div`
   cursor: pointer;
 `;
 
+export const DisclaimerWrapper = styled.div`
+  background: #fafafa;
+  max-width: 345px;
+  padding: 0.75rem;
+  line-height: 1.4;
+  margin: 1rem 1.25rem 0;
+  display: flex;
+  align-self: center;
+
+  span {
+    color: rgba(0, 0, 0, 0.7);
+  }
+
+  a {
+    color: ${COLOR_MAP.BLUE};
+    text-decoration: none;
+  }
+
+  //740px is when disclaimer is about to overlap with state name:
+  @media (min-width: 740px) {
+    margin: -0.25rem 0 0 auto;
+    width: 100%;
+    align-self: unset;
+  }
+`;
+
+export const HeaderWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem;
+`;
+
 export const Header = styled.div`
   display: flex;
-  padding: 0.75rem;
   font-family: Roboto;
   font-weight: bold;
   font-size: 1.5rem;
 `;
 
 export const ModalHeader = styled.div<{ isHomepage?: Boolean }>`
-  background-color: black;
+  background-color: ${COLOR_MAP.GRAY_BODY_COPY};
   color: white;
   font-family: Roboto;
   font-size: 1.5rem;
@@ -261,6 +346,7 @@ export const ModalHeader = styled.div<{ isHomepage?: Boolean }>`
   max-width: ${({ isHomepage }) => (isHomepage ? '1000px' : '900px')};
   width: 100%;
   margin: 0 auto;
+  height: 3.75rem;
 
   @media (min-width: 600px) {
     margin: 1rem auto 0;
@@ -270,7 +356,13 @@ export const ModalHeader = styled.div<{ isHomepage?: Boolean }>`
     color: white;
     cursor: pointer;
     font-size: 1.75rem;
+    margin-left: auto;
   }
 `;
 
 export const DivForRef = styled.div``;
+
+export const StateName = styled.div`
+  font-size: 0.9rem;
+  line-height: 1.4;
+`;

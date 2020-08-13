@@ -4,17 +4,23 @@ import {
   Wrapper,
   Footer,
   ViewAllLink,
+  HeaderWrapper,
   Header,
-} from 'components/Compare/Compare.style';
-import {
   DisclaimerWrapper,
-  DisclaimerBody,
-} from 'components/Disclaimer/Disclaimer.style';
-
+} from 'components/Compare/Compare.style';
 import { Metric } from 'common/metric';
 import { COLOR_MAP } from 'common/colors';
 import LocationTable from './LocationTable';
 import { SummaryForCompare, RankedLocationSummary } from 'common/utils/compare';
+import { ChartLocationName } from 'components/LocationPage/ChartsHolder.style';
+
+export const orderedMetrics = [
+  Metric.CASE_DENSITY,
+  Metric.CASE_GROWTH_RATE,
+  Metric.POSITIVE_TESTS,
+  Metric.HOSPITAL_USAGE,
+  Metric.CONTACT_TRACING,
+];
 
 const CompareTable = (props: {
   stateName?: string;
@@ -28,14 +34,6 @@ const CompareTable = (props: {
 }) => {
   const [sorter, setSorter] = useState(5);
   const [sortDescending, setSortDescending] = useState(true);
-
-  const orderedMetrics = [
-    Metric.CASE_DENSITY,
-    Metric.CASE_GROWTH_RATE,
-    Metric.POSITIVE_TESTS,
-    Metric.HOSPITAL_USAGE,
-    Metric.CONTACT_TRACING,
-  ];
 
   const currentCounty = props.county && props.currentCounty;
 
@@ -71,7 +69,7 @@ const CompareTable = (props: {
   //TODO (chelsi): make this a theme-
   const arrowColorSelected = props.isModal ? 'white' : 'black';
   const arrowColorNotSelected = props.isModal
-    ? `${COLOR_MAP.GRAY_BODY_COPY}`
+    ? '#828282'
     : `${COLOR_MAP.GRAY.BASE}`;
 
   const arrowContainerProps = {
@@ -82,10 +80,8 @@ const CompareTable = (props: {
   };
 
   const headerCopy = props.isHomepage
-    ? 'Compare states'
-    : props.county
-    ? 'Compare to other counties'
-    : 'Compare counties';
+    ? 'States comparison'
+    : 'Counties comparison';
 
   // checks if there are less counties than the default amount shown (10):
   const amountDisplayed =
@@ -94,7 +90,11 @@ const CompareTable = (props: {
       ? sortedLocationsArr.length
       : props.locationsViewable;
 
-  const firstHeaderName = props.isHomepage ? 'State' : 'County';
+  const firstHeaderName = props.isHomepage
+    ? 'State'
+    : props.isModal
+    ? 'Counties'
+    : 'County';
 
   const sortedLocations: RankedLocationSummary[] = sortedLocationsArr
     .filter(location => location.metricsInfo !== null)
@@ -104,9 +104,22 @@ const CompareTable = (props: {
     ? { rank: currentCountyRank + 1, ...currentCounty }
     : null;
 
+  const disclaimerRedirect =
+    currentCounty &&
+    `/us/${currentCounty.locationInfo.state_code.toLowerCase()}/chart/${
+      Metric.CONTACT_TRACING
+    }`;
+
   return (
     <Wrapper isModal={props.isModal} isHomepage={props.isHomepage}>
-      {!props.isModal && <Header>{headerCopy}</Header>}
+      {!props.isModal && (
+        <HeaderWrapper>
+          <Header>{headerCopy}</Header>
+          {props.stateName && (
+            <ChartLocationName>{props.stateName}</ChartLocationName>
+          )}
+        </HeaderWrapper>
+      )}
       <LocationTable
         firstHeaderName={firstHeaderName}
         setSorter={setSorter}
@@ -117,29 +130,41 @@ const CompareTable = (props: {
         pinnedLocation={currentLocation}
         sortedLocations={sortedLocations}
         numLocations={locationsViewable}
+        stateName={props.stateName}
       />
       {!props.isModal && (
         <Fragment>
-          <Footer>
-            <span>
-              {props.isHomepage &&
-              locationsViewable === sortedLocationsArr.length
-                ? ''
-                : `Displaying 1-${amountDisplayed} of ${sortedLocationsArr.length}`}
-            </span>
-            <ViewAllLink onClick={() => props.setShowModal(true)}>
-              {!props.isHomepage
-                ? `View all counties in ${props.stateName}`
-                : 'View all states'}
-            </ViewAllLink>
+          <Footer isCounty={props.county}>
+            <div>
+              {locationsViewable !== sortedLocationsArr.length && (
+                <span>
+                  Displaying <strong>{amountDisplayed}</strong> of{' '}
+                  <strong>{sortedLocationsArr.length}</strong>{' '}
+                </span>
+              )}
+              <ViewAllLink onClick={() => props.setShowModal(true)}>
+                {!props.isHomepage
+                  ? `View all counties in ${props.stateName}`
+                  : 'View all states'}
+              </ViewAllLink>
+            </div>
+            {props.county && (
+              <DisclaimerWrapper>
+                <span>
+                  Most states report contact tracing at the state-level only.
+                  View {props.stateName}'s{' '}
+                  <a
+                    href={disclaimerRedirect}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    contact tracing{' '}
+                  </a>
+                  data.
+                </span>
+              </DisclaimerWrapper>
+            )}
           </Footer>
-          {!props.isHomepage && (
-            <DisclaimerWrapper>
-              <DisclaimerBody>
-                Most states only report contact tracing at the state level.
-              </DisclaimerBody>
-            </DisclaimerWrapper>
-          )}
         </Fragment>
       )}
     </Wrapper>
