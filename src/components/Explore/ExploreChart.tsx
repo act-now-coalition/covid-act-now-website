@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { scaleTime, scaleLinear, scaleBand } from '@vx/scale';
+import { Grid } from '@vx/grid';
 import { Group } from '@vx/group';
 import { AxisLeft } from '@vx/axis';
 import { Column } from 'common/models/Projection';
@@ -9,6 +10,7 @@ import RectClipGroup from 'components/Charts/RectClipGroup';
 import { Series, ChartType } from './interfaces';
 import SeriesChart from './SeriesChart';
 import { getMinBy, getMaxBy } from './utils';
+import * as Styles from './Explore.style';
 
 const getDate = (d: Column) => new Date(d.x);
 const getY = (d: Column) => d.y;
@@ -76,6 +78,14 @@ const ExploreChart: FunctionComponent<{
         </RectClipGroup>
       </Group>
       <Group key="axes" top={marginTop} left={marginLeft}>
+        <Styles.GridLines>
+          <Grid
+            xScale={timeScale}
+            yScale={yScale}
+            width={innerWidth}
+            height={innerHeight}
+          />
+        </Styles.GridLines>
         <ChartStyle.Axis>
           <AxisLeft scale={yScale} />
         </ChartStyle.Axis>

@@ -79,3 +79,11 @@ export const BarsSeries = styled.g`
     fill-opacity: 0.2;
   }
 `;
+
+export const GridLines = styled.g`
+  line {
+    stroke: #e0e0e0;
+    stroke-width: 1px;
+    stroke-dasharray: 5, 5;
+  }
+`;
