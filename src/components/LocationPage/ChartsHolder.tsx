@@ -197,7 +197,7 @@ const ChartsHolder = (props: {
               ))}
             </MainContentInner>
             <MainContentInner>
-              <Explore />
+              <Explore projection={props.projections.baseline} />
             </MainContentInner>
           </ChartContentWrapper>
           <div ref={shareBlockRef}>
