@@ -10,7 +10,8 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent, condensed }) => {
   const getFillColor = geo => {
     if (geo.id.length <= 2) {
       const stateCode = REVERSED_STATES[geo.properties.name];
-      return stateCode && stateColor(stateCode);
+      // TODO(pablo): Remove special handling once we have summaries for Puerto Rico
+      return stateCode && stateCode === 'PR' ? '#888' : stateColor(stateCode);
     } else {
       return countyColor(geo.id);
     }
@@ -28,13 +29,13 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent, condensed }) => {
           <Geographies geography={STATES_JSON}>
             {({ geographies }) =>
               geographies.map(geo => {
-                return (
+                const { name } = geo.properties;
+                return REVERSED_STATES[name] ? (
                   <Geography
                     key={geo.rsmKey}
                     geography={geo}
-                    onClick={() => stateClickHandler(geo.properties.name)}
+                    onClick={() => stateClickHandler(name)}
                     onMouseEnter={() => {
-                      const { name } = geo.properties;
                       setTooltipContent(name);
                     }}
                     onMouseLeave={() => {
@@ -42,7 +43,7 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent, condensed }) => {
                     }}
                     fill={getFillColor(geo)}
                   />
-                );
+                ) : null;
               })
             }
           </Geographies>
