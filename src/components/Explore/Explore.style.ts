@@ -39,6 +39,8 @@ export const Tabs = styled(MuiTabs)`
     /* TODO(pablo): Get from theme */
     background-color: ${lightBlue};
   }
+
+  border-bottom: solid 1px ${theme.palette.grey[300]};
 `;
 
 export const Tab = styled(MuiTab)`
