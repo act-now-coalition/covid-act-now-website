@@ -5,34 +5,20 @@ import ExploreTabs from './ExploreTabs';
 import ExploreChart from './ExploreChart';
 import * as Styles from './Explore.style';
 import { ParentSize } from '@vx/responsive';
-import { ChartType, Series } from './interfaces';
-
-// TODO(pablo): Create enums and unify with metrics
-const tabLabels = [
-  'Cases',
-  'Deaths',
-  'Hospitalizations',
-  'ICU Hospitalizations',
-];
+import { ExploreMetric } from './interfaces';
+import { getMetricLabels, getSeries } from './utils';
 
 const Explore: React.FunctionComponent<{ projection: Projection }> = ({
   projection,
 }) => {
-  const [tabIndex, setTabIndex] = useState(1);
+  const [currentMetric, setCurrentMetric] = useState(ExploreMetric.CASES);
 
-  const onChangeTab = (event: React.ChangeEvent<{}>, newTabIndex: number) => {
-    setTabIndex(newTabIndex);
+  const onChangeTab = (event: React.ChangeEvent<{}>, newMetric: number) => {
+    setCurrentMetric(newMetric);
   };
 
-  const rawData: Series = {
-    data: projection.getDataset('cumulativeDeaths'),
-    type: ChartType.LINE,
-  };
-
-  const smoothedData: Series = {
-    data: projection.getDataset('cumulativeDeaths'),
-    type: ChartType.BAR,
-  };
+  const metricLabels = getMetricLabels();
+  const series = getSeries(currentMetric, projection);
 
   return (
     <Styles.Container>
@@ -45,18 +31,14 @@ const Explore: React.FunctionComponent<{ projection: Projection }> = ({
         </Styles.Subtitle>
       </Styles.Header>
       <ExploreTabs
-        activeTabIndex={tabIndex}
-        labels={tabLabels}
+        activeTabIndex={currentMetric}
+        labels={metricLabels}
         onChangeTab={onChangeTab}
       />
       <Styles.ChartContainer>
         <ParentSize>
           {({ width }) => (
-            <ExploreChart
-              series={[rawData, smoothedData]}
-              width={width}
-              height={400}
-            />
+            <ExploreChart series={series} width={width} height={400} />
           )}
         </ParentSize>
       </Styles.ChartContainer>
