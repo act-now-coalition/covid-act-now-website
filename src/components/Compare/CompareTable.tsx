@@ -34,6 +34,7 @@ const CompareTable = (props: {
 }) => {
   const [sorter, setSorter] = useState(5);
   const [sortDescending, setSortDescending] = useState(true);
+  const [sortByPopulation, setSortByPopulation] = useState(false);
 
   const currentCounty = props.county && props.currentCounty;
 
@@ -52,9 +53,24 @@ const CompareTable = (props: {
   const locationsWithNull = partitionedLocations[1];
   let sortedLocationsArr = sortedLocationsWithValue.concat(locationsWithNull);
 
+  const populationSort = () => {
+    return sortBy(
+      props.locations,
+      location => location.locationInfo.population,
+    );
+  };
+
+  if (sortByPopulation) {
+    sortedLocationsArr = populationSort();
+  }
+
   if (sortDescending) {
-    sortedLocationsWithValue.reverse();
-    sortedLocationsArr = sortedLocationsWithValue.concat(locationsWithNull);
+    if (sortByPopulation) {
+      sortedLocationsArr.reverse();
+    } else {
+      sortedLocationsWithValue.reverse();
+      sortedLocationsArr = sortedLocationsWithValue.concat(locationsWithNull);
+    }
   }
 
   const currentCountyRank = findIndex(
@@ -131,6 +147,8 @@ const CompareTable = (props: {
         sortedLocations={sortedLocations}
         numLocations={locationsViewable}
         stateName={props.stateName}
+        setSortByPopulation={setSortByPopulation}
+        sortByPopulation={sortByPopulation}
       />
       {!props.isModal && (
         <Fragment>

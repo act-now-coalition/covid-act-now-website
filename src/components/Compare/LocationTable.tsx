@@ -7,6 +7,8 @@ import HeaderCell from './HeaderCell';
 import * as Styles from './LocationTable.style';
 import * as CompareStyles from './Compare.style';
 import { COLOR_MAP } from 'common/colors';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const LocationTableHead: React.FunctionComponent<{
   setSorter: React.Dispatch<React.SetStateAction<number>>;
@@ -19,6 +21,8 @@ const LocationTableHead: React.FunctionComponent<{
   metrics: Metric[];
   isModal: boolean;
   stateName?: string;
+  setSortByPopulation: React.Dispatch<React.SetStateAction<boolean>>;
+  sortByPopulation: boolean;
 }> = ({
   setSorter,
   setSortDescending,
@@ -30,40 +34,74 @@ const LocationTableHead: React.FunctionComponent<{
   metrics,
   isModal,
   stateName,
-}) => (
-  <Table key="table-header">
-    <CompareStyles.TableHeadContainer isModal={isModal}>
-      <CompareStyles.Row
-        headerRowBackground={isModal ? `${COLOR_MAP.GRAY_BODY_COPY}` : 'white'}
-      >
-        <CompareStyles.Cell locationHeaderCell isModal={isModal}>
-          {isModal && (
-            <CompareStyles.StateName>{stateName}</CompareStyles.StateName>
-          )}
-          {firstHeaderName}
-        </CompareStyles.Cell>
-        {metrics.map(metric => (
-          <HeaderCell
-            metricInMap={metric}
-            sorter={sorter}
-            sortDescending={sortDescending}
+  setSortByPopulation,
+  sortByPopulation,
+}) => {
+  const onPopulationClick = () => {
+    if (sortByPopulation) {
+      setSortDescending(!sortDescending);
+    } else {
+      setSortByPopulation(true);
+      setSortDescending(true);
+    }
+  };
+
+  return (
+    <Table key="table-header">
+      <CompareStyles.TableHeadContainer isModal={isModal}>
+        <CompareStyles.Row
+          headerRowBackground={
+            isModal ? `${COLOR_MAP.GRAY_BODY_COPY}` : 'white'
+          }
+        >
+          <CompareStyles.LocationHeaderCell
+            isModal={isModal}
+            onClick={onPopulationClick}
+            sortByPopulation={sortByPopulation}
             arrowColorSelected={arrowColorSelected}
             arrowColorNotSelected={arrowColorNotSelected}
-            setSorter={setSorter}
-            setSortDescending={setSortDescending}
-            isModal={isModal}
-          />
-        ))}
-      </CompareStyles.Row>
-    </CompareStyles.TableHeadContainer>
-  </Table>
-);
+            sortDescending={sortDescending}
+          >
+            {isModal && (
+              <CompareStyles.StateName>{stateName}</CompareStyles.StateName>
+            )}
+            {firstHeaderName}
+            <br />
+            <span>population</span>
+            <CompareStyles.ArrowContainer
+              arrowColorNotSelected={arrowColorNotSelected}
+              isModal={isModal}
+            >
+              <ExpandMoreIcon onClick={() => setSortDescending(true)} />
+              <ExpandLessIcon onClick={() => setSortDescending(false)} />
+            </CompareStyles.ArrowContainer>
+          </CompareStyles.LocationHeaderCell>
+          {metrics.map(metric => (
+            <HeaderCell
+              metricInMap={metric}
+              sorter={sorter}
+              sortDescending={sortDescending}
+              arrowColorSelected={arrowColorSelected}
+              arrowColorNotSelected={arrowColorNotSelected}
+              setSorter={setSorter}
+              setSortDescending={setSortDescending}
+              isModal={isModal}
+              setSortByPopulation={setSortByPopulation}
+              sortByPopulation={sortByPopulation}
+            />
+          ))}
+        </CompareStyles.Row>
+      </CompareStyles.TableHeadContainer>
+    </Table>
+  );
+};
 
 const LocationTableBody: React.FunctionComponent<{
   sortedLocations: RankedLocationSummary[];
   sorter: number;
   currentLocationRank?: number;
-}> = ({ sortedLocations, sorter, currentLocationRank }) => (
+  sortByPopulation: boolean;
+}> = ({ sortedLocations, sorter, currentLocationRank, sortByPopulation }) => (
   <Table>
     <TableBody>
       {sortedLocations.map(location => (
@@ -71,6 +109,7 @@ const LocationTableBody: React.FunctionComponent<{
           sorter={sorter}
           location={location}
           isCurrentCounty={location.rank === currentLocationRank}
+          sortByPopulation={sortByPopulation}
         />
       ))}
     </TableBody>
@@ -102,6 +141,8 @@ const LocationTable: React.FunctionComponent<{
   sortedLocations: RankedLocationSummary[];
   numLocations: number;
   stateName?: string;
+  setSortByPopulation: React.Dispatch<React.SetStateAction<boolean>>;
+  sortByPopulation: boolean;
 }> = ({
   setSorter,
   setSortDescending,
@@ -116,6 +157,8 @@ const LocationTable: React.FunctionComponent<{
   sortedLocations,
   numLocations,
   stateName,
+  setSortByPopulation,
+  sortByPopulation,
 }) => {
   const Container = isModal ? Styles.ModalContainer : Styles.Container;
 
@@ -140,6 +183,8 @@ const LocationTable: React.FunctionComponent<{
             metrics={metrics}
             isModal={isModal}
             stateName={stateName}
+            setSortByPopulation={setSortByPopulation}
+            sortByPopulation={sortByPopulation}
           />
           {isModal && pinnedLocation && (
             <Table key="table-pinned-location">
@@ -149,6 +194,7 @@ const LocationTable: React.FunctionComponent<{
                   sorter={sorter}
                   isCurrentCounty
                   isModal={isModal}
+                  sortByPopulation={sortByPopulation}
                 />
               </TableBody>
             </Table>
@@ -159,6 +205,7 @@ const LocationTable: React.FunctionComponent<{
             sorter={sorter}
             sortedLocations={visibleLocations}
             currentLocationRank={pinnedLocation?.rank}
+            sortByPopulation={sortByPopulation}
           />
         </Styles.Body>
         {pinnedLocation && showBottom && (
@@ -167,6 +214,7 @@ const LocationTable: React.FunctionComponent<{
               sorter={sorter}
               sortedLocations={[pinnedLocation]}
               currentLocationRank={pinnedLocation?.rank}
+              sortByPopulation={sortByPopulation}
             />
           </Styles.Body>
         )}

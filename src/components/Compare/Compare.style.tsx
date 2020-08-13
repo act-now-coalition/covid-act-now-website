@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { isNumber } from 'lodash';
 import { TableHead, TableCell, TableRow } from '@material-ui/core';
 import { COLOR_MAP, LEVEL_COLOR } from 'common/colors';
@@ -7,8 +7,8 @@ import { Metric } from 'common/metric';
 import { Level } from 'common/level';
 import { ChartLocationName } from 'components/LocationPage/ChartsHolder.style';
 
-export const locationNameCellWidth = 145;
-export const metricCellWidth = 120;
+export const locationNameCellWidth = 170;
+export const metricCellWidth = 115;
 
 const LEVEL_COLOR_CONTACT_TRACING = {
   [Level.LOW]: COLOR_MAP.RED.BASE,
@@ -68,33 +68,127 @@ export const StyledTable = styled.div<{ isModal?: Boolean }>`
   border: ${({ isModal }) => !isModal && `1px solid ${COLORS.LIGHTGRAY}`};
 `;
 
-// TODO (Chelsi): turn this background-color situation into a theme asap
-export const Cell = styled(TableCell)<{
-  locationHeaderCell?: Boolean;
-  sorter?: any;
-  metricInMap?: Metric;
-  isModal: Boolean;
+export const ArrowContainer = styled.div<{
+  arrowColorNotSelected: string;
+  isModal?: Boolean;
 }>`
-  cursor: ${({ locationHeaderCell }) => !locationHeaderCell && 'pointer'};
+  color: #bdbdbd;
+  display: flex;
+  font-family: Roboto;
+  font-size: 0.875rem;
+  transform: translate(-0.25rem, 0.15rem);
+  margin-top: 0.25rem;
+
+  span {
+    margin: auto 0 auto 0.25rem;
+  }
+
+  svg {
+    color: ${({ arrowColorNotSelected }) => arrowColorNotSelected};
+
+    &:hover {
+      color: ${({ isModal }) => (isModal ? 'white' : 'black')};
+    }
+  }
+`;
+
+export const CellStyles = css`
+  cursor: pointer;
   text-transform: uppercase;
   font-size: 0.9rem;
-  background-color: ${({ locationHeaderCell, sorter, metricInMap }) =>
-    !locationHeaderCell && sorter === metricInMap && 'rgba(0,0,0,0.02)'};
-  background-color: ${({ locationHeaderCell, sorter, metricInMap, isModal }) =>
-    isModal && !locationHeaderCell && sorter === metricInMap && 'black'};
-  background-color: ${({ locationHeaderCell, sorter, metricInMap, isModal }) =>
-    isModal &&
-    !locationHeaderCell &&
-    sorter !== metricInMap &&
-    `${COLOR_MAP.GRAY_BODY_COPY}`};
-  background-color: ${({ locationHeaderCell, isModal }) =>
-    isModal && locationHeaderCell && `${COLOR_MAP.GRAY_BODY_COPY}`};
-  border-radius: ${({ locationHeaderCell, sorter, metricInMap, isModal }) =>
-    isModal && !locationHeaderCell && sorter === metricInMap && '4px 4px 0 0'};
+`;
+
+// TODO (Chelsi): turn this background-color situation into a theme asap:
+export const LocationHeaderCell = styled(TableCell)<{
+  isModal: Boolean;
+  sortByPopulation: boolean;
+  arrowColorSelected: string;
+  arrowColorNotSelected: string;
+  sortDescending: boolean;
+}>`
+  ${CellStyles}
+
+  background-color: ${({ sortByPopulation }) =>
+    sortByPopulation && 'rgba(0,0,0,0.02)'};
+  background-color: ${({ isModal }) =>
+    isModal && `${COLOR_MAP.GRAY_BODY_COPY}`};
+  background-color: ${({ sortByPopulation, isModal }) =>
+    isModal && sortByPopulation && 'black'};
+  border-radius: ${({ isModal, sortByPopulation }) =>
+    isModal && sortByPopulation && '4px 4px 0 0'};
+
+  ${ArrowContainer} {
+    svg{
+      &:first-child {
+        transform: translatex(-0.1rem);
+        color: ${({ arrowColorSelected, sortDescending, sortByPopulation }) =>
+          sortDescending && sortByPopulation && `${arrowColorSelected}`};
+      }
+      &:nth-child(2) {
+        color: ${({ arrowColorSelected, sortDescending, sortByPopulation }) =>
+          !sortDescending && sortByPopulation && `${arrowColorSelected}`};
+      }
+    }
+  }
+
+  span{
+    color: ${COLOR_MAP.GRAY.DARK};
+    font-weight: normal;
+  }
+`;
+
+// TODO (Chelsi): turn this background-color situation into a theme asap:
+export const MetricHeaderCell = styled(TableCell)<{
+  isModal: Boolean;
+  sortByPopulation: boolean;
+  arrowColorSelected: string;
+  sortDescending: boolean;
+  isSelectedMetric: boolean;
+}>`
+  ${CellStyles}
+
+  background-color: ${({ isSelectedMetric, sortByPopulation }) =>
+    !sortByPopulation && isSelectedMetric && 'rgba(0,0,0,0.02)'};
+  background-color: ${({ isSelectedMetric, isModal, sortByPopulation }) =>
+    isModal && isSelectedMetric && !sortByPopulation && 'black'};
+  background-color: ${({ isSelectedMetric, isModal }) =>
+    isModal && !isSelectedMetric && `${COLOR_MAP.GRAY_BODY_COPY}`};
+  border-radius: ${({ isModal, sortByPopulation, isSelectedMetric }) =>
+    isModal && !sortByPopulation && isSelectedMetric && '4px 4px 0 0'};
+
+    ${ArrowContainer} {
+      svg{
+        &:first-child {
+          transform: translatex(-0.1rem);
+          color: ${({
+            arrowColorSelected,
+            sortDescending,
+            sortByPopulation,
+            isSelectedMetric,
+          }) =>
+            sortDescending &&
+            !sortByPopulation &&
+            isSelectedMetric &&
+            `${arrowColorSelected}`};
+        }
+        &:nth-child(2) {
+          color: ${({
+            arrowColorSelected,
+            sortDescending,
+            sortByPopulation,
+            isSelectedMetric,
+          }) =>
+            !sortDescending &&
+            !sortByPopulation &&
+            isSelectedMetric &&
+            `${arrowColorSelected}`};
+        }
+      }
+    }
 `;
 
 export const TableHeadContainer = styled(TableHead)<{ isModal?: Boolean }>`
-  ${Cell} {
+  ${MetricHeaderCell}, ${LocationHeaderCell} {
     vertical-align: bottom;
     line-height: 1.1rem;
     padding: 1rem 1rem 0.8rem;
@@ -114,6 +208,7 @@ export const MetricCell = styled.td<{
   iconColor?: Level;
   sorter?: any;
   metric?: Metric;
+  sortByPopulation: boolean;
 }>`
   text-align: left;
   padding-top: 0.75rem;
@@ -122,9 +217,10 @@ export const MetricCell = styled.td<{
 
   &:first-child {
     min-width: ${locationNameCellWidth}px;
-    &:hover {
-      color: ${COLOR_MAP.BLUE};
-    }
+    background-color: ${({ sortByPopulation }) =>
+      sortByPopulation && 'rgba(0,0,0,0.02)'};
+    font-weight: 500;
+    line-height: 1.2;
   }
 
   &:nth-child(2) {
@@ -137,8 +233,8 @@ export const MetricCell = styled.td<{
     color: ${({ sorter, metric }) =>
       sorter === metric ? 'black' : `${COLOR_MAP.GRAY_BODY_COPY}`};
     font-weight: ${({ sorter, metric }) => sorter === metric && '600'};
-    background-color: ${({ sorter, metric }) =>
-      sorter === metric && 'rgba(0,0,0,0.02)'};
+    background-color: ${({ sorter, metric, sortByPopulation }) =>
+      !sortByPopulation && sorter === metric && 'rgba(0,0,0,0.02)'};
   }
 
   svg {
@@ -158,6 +254,14 @@ export const MetricCell = styled.td<{
     svg {
       color: ${({ iconColor }) =>
         iconColor !== undefined && `${LEVEL_COLOR_CONTACT_TRACING[iconColor]}`};
+    }
+  }
+
+  div {
+    display: inline-block;
+
+    &:first-child {
+      vertical-align: top;
     }
   }
 `;
@@ -192,65 +296,6 @@ export const Row = styled(TableRow)<{
 
   &:hover {
     color: ${COLOR_MAP.BLUE};
-  }
-`;
-
-export const ArrowContainer = styled.div<{
-  sortDescending: Boolean;
-  sorter?: Metric;
-  metric?: Metric;
-  arrowColorSelected: string;
-  arrowColorNotSelected: string;
-  isLocationHeader?: Boolean;
-  isModal?: Boolean;
-}>`
-  color: #bdbdbd;
-  display: flex;
-  font-family: Roboto;
-  font-size: 0.875rem;
-  transform: translate(-0.25rem, 0.15rem);
-  margin-top: 0.25rem;
-
-  span {
-    margin: auto 0 auto 0.25rem;
-  }
-
-  svg {
-    &:nth-child(2) {
-      color: ${({
-        sortDescending,
-        sorter,
-        metric,
-        arrowColorSelected,
-        arrowColorNotSelected,
-        isLocationHeader,
-      }) =>
-        isLocationHeader && !sortDescending
-          ? `${arrowColorSelected}`
-          : !sortDescending && sorter === metric
-          ? `${arrowColorSelected}`
-          : `${arrowColorNotSelected}`};
-    }
-    &:first-child {
-      transform: translatex(-0.1rem);
-      color: ${({
-        sortDescending,
-        sorter,
-        metric,
-        arrowColorSelected,
-        arrowColorNotSelected,
-        isLocationHeader,
-      }) =>
-        isLocationHeader && sortDescending
-          ? `${arrowColorSelected}`
-          : sortDescending && sorter === metric
-          ? `${arrowColorSelected}`
-          : `${arrowColorNotSelected}`};
-    }
-
-    &:hover {
-      color: ${({ isModal }) => (isModal ? 'white' : 'black')};
-    }
   }
 `;
 
@@ -364,5 +409,10 @@ export const DivForRef = styled.div``;
 
 export const StateName = styled.div`
   font-size: 0.9rem;
-  line-height: 1.4;
+  line-height: 1.2;
+`;
+
+export const Population = styled.span`
+  font-family: Source Code Pro;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
 `;

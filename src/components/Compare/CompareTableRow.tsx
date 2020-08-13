@@ -1,7 +1,12 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
-import { MetricCell, Row, MetricValue } from 'components/Compare/Compare.style';
+import {
+  MetricCell,
+  Row,
+  MetricValue,
+  Population,
+} from 'components/Compare/Compare.style';
 import { Metric, formatValue } from 'common/metric';
 import { RankedLocationSummary } from 'common/utils/compare';
 import { Level } from 'common/level';
@@ -19,8 +24,15 @@ const CompareTableRow = (props: {
   sorter: number;
   isCurrentCounty?: boolean;
   isModal?: boolean;
+  sortByPopulation: boolean;
 }) => {
-  const { location, sorter, isCurrentCounty, isModal } = props;
+  const {
+    location,
+    sorter,
+    isCurrentCounty,
+    isModal,
+    sortByPopulation,
+  } = props;
 
   //TODO(Chelsi): fix the else?
   function getLevel(metricIndex: Metric): Level {
@@ -66,10 +78,21 @@ const CompareTableRow = (props: {
       onClick={handleLocationClick}
       isModal={isModal}
     >
-      <MetricCell iconColor={location.metricsInfo.level}>
-        <span>{location.rank}</span>
-        <FiberManualRecordIcon />
-        {locationName}
+      <MetricCell
+        iconColor={location.metricsInfo.level}
+        sortByPopulation={sortByPopulation}
+      >
+        <div>
+          <span>{location.rank}</span>
+          <FiberManualRecordIcon />
+        </div>
+        <div>
+          {locationName}
+          <br />
+          <Population>
+            {location.locationInfo.population.toLocaleString()}
+          </Population>
+        </div>
       </MetricCell>
       {orderedMetrics.map((metric: Metric) => {
         const metricForValue = location.metricsInfo.metrics[metric];
@@ -82,6 +105,7 @@ const CompareTableRow = (props: {
             sorter={sorter}
             metric={metric}
             iconColor={getLevel(metric)}
+            sortByPopulation={sortByPopulation}
           >
             <FiberManualRecordIcon />
             <MetricValue valueUnknown={valueUnknown}>
