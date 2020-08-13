@@ -10,8 +10,7 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent, condensed }) => {
   const getFillColor = geo => {
     if (geo.id.length <= 2) {
       const stateCode = REVERSED_STATES[geo.properties.name];
-      // TODO(pablo): Remove special handling once we have summaries for Puerto Rico
-      return stateCode && stateCode === 'PR' ? '#888' : stateColor(stateCode);
+      return stateCode && stateColor(stateCode);
     } else {
       return countyColor(geo.id);
     }
