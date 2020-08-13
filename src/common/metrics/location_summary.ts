@@ -10,7 +10,7 @@ const UNKNOWN = 'Unknown';
 
 const LEGEND_SUMMARY_LOW = 'On track to contain COVID';
 const LEGEND_SUMMARY_MEDIUM = 'Slow disease growth';
-const LEGEND_SUMMARY_MEDIUM_HIGH = 'At risk';
+const LEGEND_SUMMARY_MEDIUM_HIGH = 'At risk of outbreak';
 const LEGEND_SUMMARY_HIGH = 'Active or imminent outbreak';
 
 export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {

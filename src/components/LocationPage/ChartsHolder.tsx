@@ -58,7 +58,6 @@ const ChartsHolder = (props: {
   const testPositiveRef = useRef<HTMLDivElement>(null);
   const icuUtilizationRef = useRef<HTMLDivElement>(null);
   const contactTracingRef = useRef<HTMLDivElement>(null);
-  const futureProjectionsRef = useRef<HTMLDivElement>(null);
   const shareBlockRef = useRef<HTMLDivElement>(null);
   const caseDensityRef = useRef<HTMLDivElement>(null);
 
@@ -79,8 +78,6 @@ const ChartsHolder = (props: {
             scrollTo(icuUtilizationRef.current);
           if (props.chartId === '3' && contactTracingRef.current)
             scrollTo(contactTracingRef.current);
-          if (props.chartId === '4' && futureProjectionsRef.current)
-            scrollTo(futureProjectionsRef.current);
           if (props.chartId === '5' && caseDensityRef.current)
             scrollTo(caseDensityRef.current);
         }
@@ -139,14 +136,6 @@ const ChartsHolder = (props: {
           shareButtonProps,
           metric: Metric.CONTACT_TRACING,
         },
-        {
-          chartRef: futureProjectionsRef,
-          isMobile,
-          shareButtonProps,
-          metric: Metric.FUTURE_PROJECTIONS,
-          projections: props.projections,
-          countyId: props.countyId,
-        },
       ]
     : [];
 
@@ -195,6 +184,15 @@ const ChartsHolder = (props: {
                   stateId={props.stateId}
                 />
               ))}
+
+              <p>
+                <b>Looking for our future hospitalization projections?</b>{' '}
+                <a href="https://blog.covidactnow.org/covid-hospitalization-projections-sunset/">
+                  We're no longer including them here
+                </a>
+                . If you have questions,{' '}
+                <a href="mailto:info@covidactnow.org">let us know</a>.
+              </p>
             </MainContentInner>
             <MainContentInner>
               <Explore projection={props.projections.baseline} />

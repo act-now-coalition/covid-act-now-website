@@ -41,7 +41,6 @@ const ModalCompare = (props: {
     <Fragment>
       <BodyScrollLock />
       <ModalHeader isHomepage={props.isHomepage}>
-        {props.isHomepage ? 'States' : `${props.stateName} counties`}
         <CloseIcon onClick={() => props.handleCloseModal()} />
       </ModalHeader>
       <CompareTable
