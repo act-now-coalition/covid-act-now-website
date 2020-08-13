@@ -1,15 +1,15 @@
 import React, { FunctionComponent } from 'react';
+import moment from 'moment';
 import { scaleTime, scaleLinear, scaleBand } from '@vx/scale';
-import { Grid } from '@vx/grid';
+import { GridRows, GridColumns } from '@vx/grid';
 import { Group } from '@vx/group';
-import { AxisLeft } from '@vx/axis';
+import { AxisLeft, AxisBottom } from '@vx/axis';
 import { Column } from 'common/models/Projection';
-import { AxisBottom } from 'components/Charts/Axis';
 import * as ChartStyle from 'components/Charts/Charts.style';
 import RectClipGroup from 'components/Charts/RectClipGroup';
 import { Series, ChartType } from './interfaces';
 import SeriesChart from './SeriesChart';
-import { getMinBy, getMaxBy } from './utils';
+import { getMaxBy, getTimeAxisTicks } from './utils';
 import * as Styles from './Explore.style';
 
 const getDate = (d: Column) => new Date(d.x);
@@ -32,8 +32,8 @@ const ExploreChart: FunctionComponent<{
   marginLeft = 50,
   marginRight = 10,
 }) => {
-  const minX = getMinBy<Date>(series, getDate, new Date('2020-03-01'));
-  const maxX = getMaxBy<Date>(series, getDate, new Date());
+  const minX = new Date('2020-03-01');
+  const maxX = new Date();
   const maxY = getMaxBy<number>(series, getY, 1);
 
   const innerWidth = width - marginLeft - marginRight;
@@ -43,6 +43,7 @@ const ExploreChart: FunctionComponent<{
     domain: [minX, maxX],
     range: [0, innerWidth],
   });
+  const timeTicks = getTimeAxisTicks(minX, maxX);
 
   const yScale = scaleLinear({
     domain: [0, maxY],
@@ -79,17 +80,20 @@ const ExploreChart: FunctionComponent<{
       </Group>
       <Group key="axes" top={marginTop} left={marginLeft}>
         <Styles.GridLines>
-          <Grid
-            xScale={timeScale}
-            yScale={yScale}
-            width={innerWidth}
-            height={innerHeight}
-          />
+          <GridColumns<Date> scale={timeScale} height={innerHeight} />
+          <GridRows<number> scale={yScale} width={innerWidth} />
         </Styles.GridLines>
         <ChartStyle.Axis>
           <AxisLeft scale={yScale} />
         </ChartStyle.Axis>
-        <AxisBottom top={innerHeight} scale={timeScale} />
+        <ChartStyle.Axis>
+          <AxisBottom
+            top={innerHeight}
+            scale={timeScale}
+            tickValues={timeTicks}
+            tickFormat={(date: Date) => moment(date).format('MMMM D')}
+          />
+        </ChartStyle.Axis>
       </Group>
     </svg>
   );
