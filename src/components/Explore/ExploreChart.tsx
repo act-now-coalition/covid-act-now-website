@@ -9,7 +9,7 @@ import * as ChartStyle from 'components/Charts/Charts.style';
 import RectClipGroup from 'components/Charts/RectClipGroup';
 import { Series, ChartType } from './interfaces';
 import SeriesChart from './SeriesChart';
-import { getMinBy, getMaxBy } from './utils';
+import { getMaxBy } from './utils';
 import * as Styles from './Explore.style';
 
 const getDate = (d: Column) => new Date(d.x);
@@ -32,8 +32,8 @@ const ExploreChart: FunctionComponent<{
   marginLeft = 50,
   marginRight = 10,
 }) => {
-  const minX = getMinBy<Date>(series, getDate, new Date('2020-03-01'));
-  const maxX = getMaxBy<Date>(series, getDate, new Date());
+  const minX = new Date('2020-03-01');
+  const maxX = new Date();
   const maxY = getMaxBy<number>(series, getY, 1);
 
   const innerWidth = width - marginLeft - marginRight;
