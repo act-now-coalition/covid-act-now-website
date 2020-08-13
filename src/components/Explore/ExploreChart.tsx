@@ -1,4 +1,6 @@
 import React, { FunctionComponent } from 'react';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
 import moment from 'moment';
 import { scaleTime, scaleLinear, scaleBand } from '@vx/scale';
 import { GridRows, GridColumns } from '@vx/grid';
@@ -44,6 +46,10 @@ const ExploreChart: FunctionComponent<{
     range: [0, innerWidth],
   });
   const timeTicks = getTimeAxisTicks(minX, maxX);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const timeTickFormat = isMobile ? 'MMM' : 'MMMM D';
 
   const yScale = scaleLinear({
     domain: [0, maxY],
@@ -91,7 +97,7 @@ const ExploreChart: FunctionComponent<{
             top={innerHeight}
             scale={timeScale}
             tickValues={timeTicks}
-            tickFormat={(date: Date) => moment(date).format('MMMM D')}
+            tickFormat={(date: Date) => moment(date).format(timeTickFormat)}
           />
         </ChartStyle.Axis>
       </Group>
