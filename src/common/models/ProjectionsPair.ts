@@ -18,8 +18,8 @@ export class ProjectionsPair {
   constructor(public left: Projections, public right: Projections) {}
 
   metricDiff(metric: Metric): number {
-    const leftMetric = getMetricValue(this.left, metric);
-    const rightMetric = getMetricValue(this.right, metric);
+    const leftMetric = this.left.getMetricValue(metric);
+    const rightMetric = this.right.getMetricValue(metric);
     return ProjectionsPair.metricValueDiff(leftMetric, rightMetric);
   }
 
@@ -95,10 +95,6 @@ function getDataset(projection: Projection, metric: Metric): Column[] {
       return projection.getDataset('icuUtilization');
     case Metric.CONTACT_TRACING:
       return projection.getDataset('contractTracers');
-    case Metric.FUTURE_PROJECTIONS:
-      return projection
-        .getDataset('hospitalizations')
-        .map(({ x, y }) => ({ x, y: y / projection.finalHospitalBeds }));
     default:
       fail('Unknown metric: ' + metric);
   }
@@ -162,12 +158,4 @@ function trimDatasetsToMatch(left: Column[], right: Column[]) {
     left.slice(leftStartIndex, leftEndIndex + 1),
     right.slice(rightStartIndex, rightEndIndex + 1),
   ];
-}
-
-function getMetricValue(projections: Projections, metric: Metric) {
-  if (metric === Metric.FUTURE_PROJECTIONS) {
-    return projections.primary.finalCumulativeDeaths / projections.population;
-  } else {
-    return projections.getMetricValue(metric);
-  }
 }

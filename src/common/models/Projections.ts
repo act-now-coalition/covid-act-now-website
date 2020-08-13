@@ -2,7 +2,7 @@ import { Projection } from './Projection';
 import { INTERVENTIONS } from '../interventions';
 import { STATES } from '..';
 import { RegionSummaryWithTimeseriesMap } from 'api';
-import { Metric, getLevel, ALL_VALUE_METRICS } from 'common/metric';
+import { Metric, getLevel, ALL_METRICS } from 'common/metric';
 import { Level } from 'common/level';
 import { LEVEL_COLOR } from 'common/colors';
 import { fail } from 'common/utils';
@@ -82,7 +82,7 @@ export class Projections {
 
   get summary(): LocationSummary {
     const metrics = {} as { [metric in Metric]: MetricSummary };
-    for (const metric of ALL_VALUE_METRICS) {
+    for (const metric of ALL_METRICS) {
       metrics[metric] = {
         value: this.getMetricValue(metric),
         level: this.getMetricLevel(metric),
@@ -96,14 +96,7 @@ export class Projections {
   }
 
   hasMetric(metric: Metric): boolean {
-    if (metric === Metric.FUTURE_PROJECTIONS) {
-      return (
-        this.baseline?.hasHospitalProjections &&
-        this.projected.hasHospitalProjections
-      );
-    } else {
-      return this.getMetricValue(metric) !== null;
-    }
+    return this.getMetricValue(metric) !== null;
   }
 
   getMetricValue(metric: Metric): number | null {
@@ -128,7 +121,7 @@ export class Projections {
 
   getMetricValues(): { [metric in Metric]: number | null } {
     const result = {} as { [metric in Metric]: number | null };
-    for (const metric of ALL_VALUE_METRICS) {
+    for (const metric of ALL_METRICS) {
       result[metric] = this.getMetricValue(metric);
     }
     return result;

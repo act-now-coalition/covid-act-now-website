@@ -500,10 +500,6 @@ async function fetchInterestingCounties(
   rightSnapshot: number,
   metric: Metric,
 ): Promise<County[] | null> {
-  if (metric === Metric.FUTURE_PROJECTIONS) {
-    return topCountiesByPopulation(INTERESTING_TOP_DIFFS);
-  }
-
   const countyDiffs = await fetchCountyDiffs(
     leftSnapshot,
     rightSnapshot,
