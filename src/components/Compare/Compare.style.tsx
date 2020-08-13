@@ -316,11 +316,9 @@ export const Row = styled(TableRow)<{
   &:hover {
     color: ${({ headerRowBackground }) =>
       !headerRowBackground && `${COLOR_MAP.BLUE}`};
-    color: ${({ headerRowBackground }) => !headerRowBackground && 'underline'};
     ${MetricCell} {
       span {
         color: ${COLOR_MAP.BLUE};
-        text-decoration: underline;
       }
     }
   }
