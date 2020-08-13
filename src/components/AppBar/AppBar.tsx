@@ -133,7 +133,7 @@ const _AppBar = () => {
   const hashtag = 'COVIDActNow';
   const locationShareTitle = `I'm keeping track of ${locationName}'s COVID data and risk level with @CovidActNow. What does your community look like?`;
   const defaultShareTitle =
-    '@CovidActNow has real-time COVID data and risk levels for all communities across the country. What does yours look like?';
+    'I’m keeping track of the latest COVID data and risk levels with @CovidActNow. What does your community look like?';
 
   const shareTitle = locationName ? locationShareTitle : defaultShareTitle;
 

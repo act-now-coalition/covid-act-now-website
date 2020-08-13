@@ -101,7 +101,7 @@ export function getLocationNameForFips(fips: string): string {
 }
 
 export function getLocationUrlForFips(fips: string): string {
-  if (fips.length === 2) {
+  if (isStateFips(fips)) {
     const state = findStateByFips(fips);
     return `https://covidactnow.org/us/${state.state_code.toLowerCase()}/`;
   } else {
@@ -129,4 +129,8 @@ export function topCountiesByPopulation(limit: number): County[] {
     sortBy(allCounties(), c => c.population),
     limit,
   );
+}
+
+export function isStateFips(fips: string) {
+  return fips.length === 2;
 }

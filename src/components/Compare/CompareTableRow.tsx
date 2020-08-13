@@ -1,24 +1,26 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
-import { MetricCell, Row } from 'components/Compare/Compare.style';
+import { MetricCell, Row, MetricValue } from 'components/Compare/Compare.style';
 import { Metric, formatValue } from 'common/metric';
 import { RankedLocationSummary } from 'common/utils/compare';
 import { Level } from 'common/level';
+import { orderedMetrics } from 'components/Compare/CompareTable';
 
 function cellValue(metric: any, metricType: Metric) {
   if (metric === null || metric === undefined) {
     return 'Unknown';
   }
-  return formatValue(metricType, metric.value, '?');
+  return formatValue(metricType, metric.value, '---');
 }
 
 const CompareTableRow = (props: {
   location: RankedLocationSummary;
   sorter: number;
   isCurrentCounty?: boolean;
+  isModal?: boolean;
 }) => {
-  const { location, sorter, isCurrentCounty } = props;
+  const { location, sorter, isCurrentCounty, isModal } = props;
 
   //TODO(Chelsi): fix the else?
   function getLevel(metricIndex: Metric): Level {
@@ -62,52 +64,32 @@ const CompareTableRow = (props: {
       index={location.rank}
       isCurrentCounty={isCurrentCounty}
       onClick={handleLocationClick}
+      isModal={isModal}
     >
       <MetricCell iconColor={location.metricsInfo.level}>
         <span>{location.rank}</span>
         <FiberManualRecordIcon />
         {locationName}
       </MetricCell>
-      <MetricCell
-        sorter={sorter}
-        metric={Metric.CASE_DENSITY}
-        iconColor={getLevel(Metric.CASE_DENSITY)}
-      >
-        <FiberManualRecordIcon />
-        {cellValue(location.metricsInfo.metrics[5], Metric.CASE_DENSITY)}
-      </MetricCell>
-      <MetricCell
-        sorter={sorter}
-        metric={Metric.CASE_GROWTH_RATE}
-        iconColor={getLevel(Metric.CASE_GROWTH_RATE)}
-      >
-        <FiberManualRecordIcon />
-        {cellValue(location.metricsInfo.metrics[0], Metric.CASE_GROWTH_RATE)}
-      </MetricCell>
-      <MetricCell
-        sorter={sorter}
-        metric={Metric.POSITIVE_TESTS}
-        iconColor={getLevel(Metric.POSITIVE_TESTS)}
-      >
-        <FiberManualRecordIcon />
-        {cellValue(location.metricsInfo.metrics[1], Metric.POSITIVE_TESTS)}
-      </MetricCell>
-      <MetricCell
-        sorter={sorter}
-        metric={Metric.HOSPITAL_USAGE}
-        iconColor={getLevel(Metric.HOSPITAL_USAGE)}
-      >
-        <FiberManualRecordIcon />
-        {cellValue(location.metricsInfo.metrics[2], Metric.HOSPITAL_USAGE)}
-      </MetricCell>
-      <MetricCell
-        sorter={sorter}
-        metric={Metric.CONTACT_TRACING}
-        iconColor={getLevel(Metric.CONTACT_TRACING)}
-      >
-        <FiberManualRecordIcon />
-        {cellValue(location.metricsInfo.metrics[3], Metric.CONTACT_TRACING)}
-      </MetricCell>
+      {orderedMetrics.map((metric: Metric) => {
+        const metricForValue = location.metricsInfo.metrics[metric];
+        const valueUnknown =
+          metricForValue && metricForValue.level === Level.UNKNOWN
+            ? true
+            : false;
+        return (
+          <MetricCell
+            sorter={sorter}
+            metric={metric}
+            iconColor={getLevel(metric)}
+          >
+            <FiberManualRecordIcon />
+            <MetricValue valueUnknown={valueUnknown}>
+              {cellValue(metricForValue, metric)}
+            </MetricValue>
+          </MetricCell>
+        );
+      })}
     </Row>
   );
 };

@@ -27,7 +27,7 @@
     "downshift": "^5.0.5",
     "esm": "^3.2.25",
     "firebase": "^7.15.4",
-    "googleapis": "^39.2.0",
+    "googleapis": "^57.0.0",
     "handlebars": "^4.7.6",
     "lodash": "^4.17.19",
     "moment": "^2.24.0",
@@ -72,7 +72,8 @@
     "generate-share-images": "ts-node-script -r tsconfig-paths/register scripts/generate_share_images/index.ts",
     "generate-daily-alerts": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/generate_daily_alerts.ts",
     "send-emails": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/send_emails.ts",
-    "send-test-email": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/send-test-email.ts"
+    "send-test-email": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/send-test-email.ts",
+    "report-alert-emails": "ts-node-script -r tsconfig-paths/register scripts/alert_emails_report/generate-report.ts"
   },
   "lint-staged": {
     "{src,scripts}/**/*.{css,scss,js,ts,tsx}": [
