@@ -45,7 +45,7 @@ export function getLocationNames(): Location[] {
   each(US_STATE_DATASET.state_county_map_dataset, (value, key) => {
     if (value.county_dataset.length === 0) {
       return null;
-    };
+    }
     locations.push(
       ...value.county_dataset.map(county => {
         return { ...county, state: county.state_code };
