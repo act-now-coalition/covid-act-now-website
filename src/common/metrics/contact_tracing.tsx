@@ -147,7 +147,13 @@ function renderDisclaimer(): React.ReactElement {
       <ExternalLink href="https://testandtrace.com/">
         testandtrace.com
       </ExternalLink>
-      ).
+      ). Learn about recent{' '}
+      <ExternalLink href="https://blog.covidactnow.org/changes-to-how-we-assess-contact-tracing/">
+        changes to how we assess contact tracing
+      </ExternalLink>
+      . We know that measuring contact tracing capacity solely by the number of
+      staff is not reliable, and we are working on a more accurate metric to
+      assess contact tracing capacity.
     </Fragment>
   );
 }
