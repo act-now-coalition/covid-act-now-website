@@ -1,16 +1,17 @@
 import React, { FunctionComponent } from 'react';
 import moment from 'moment';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
 import { scaleTime, scaleLinear } from '@vx/scale';
-import { Grid } from '@vx/grid';
+import { GridRows, GridColumns } from '@vx/grid';
 import { Group } from '@vx/group';
-import { AxisLeft } from '@vx/axis';
+import { AxisLeft, AxisBottom } from '@vx/axis';
 import { Column } from 'common/models/Projection';
-import { AxisBottom } from 'components/Charts/Axis';
 import * as ChartStyle from 'components/Charts/Charts.style';
 import RectClipGroup from 'components/Charts/RectClipGroup';
 import { Series } from './interfaces';
 import SeriesChart from './SeriesChart';
-import { getMaxBy } from './utils';
+import { getMaxBy, getTimeAxisTicks } from './utils';
 import * as Styles from './Explore.style';
 
 const getDate = (d: Column) => new Date(d.x);
@@ -45,6 +46,11 @@ const ExploreChart: FunctionComponent<{
     domain: [minX, maxX],
     range: [0, innerWidth],
   });
+  const timeTicks = getTimeAxisTicks(minX, maxX);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const timeTickFormat = isMobile ? 'MMM' : 'MMMM D';
 
   const yScale = scaleLinear({
     domain: [0, maxY],
@@ -72,17 +78,20 @@ const ExploreChart: FunctionComponent<{
       </Group>
       <Group key="axes" top={marginTop} left={marginLeft}>
         <Styles.GridLines>
-          <Grid
-            xScale={timeScale}
-            yScale={yScale}
-            width={innerWidth}
-            height={innerHeight}
-          />
+          <GridColumns<Date> scale={timeScale} height={innerHeight} />
+          <GridRows<number> scale={yScale} width={innerWidth} />
         </Styles.GridLines>
         <ChartStyle.Axis>
           <AxisLeft scale={yScale} />
         </ChartStyle.Axis>
-        <AxisBottom top={innerHeight} scale={timeScale} />
+        <ChartStyle.Axis>
+          <AxisBottom
+            top={innerHeight}
+            scale={timeScale}
+            tickValues={timeTicks}
+            tickFormat={(date: Date) => moment(date).format(timeTickFormat)}
+          />
+        </ChartStyle.Axis>
       </Group>
     </svg>
   );
