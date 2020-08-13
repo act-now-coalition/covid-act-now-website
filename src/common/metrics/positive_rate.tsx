@@ -8,12 +8,15 @@ import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
 import ExternalLink from 'components/ExternalLink';
 
+export const METRIC_NAME = 'Positive test rate';
+
 export const PositiveTestRateMetric: MetricDefinition = {
   renderStatus,
   renderDisclaimer,
+  metricName: METRIC_NAME,
+  extendedMetricName: METRIC_NAME,
+  metricNameForCompare: METRIC_NAME,
 };
-
-export const METRIC_NAME = 'Positive test rate';
 
 const LOW_NAME = 'Low';
 const MEDIUM_NAME = 'Medium';

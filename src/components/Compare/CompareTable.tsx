@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from 'react';
-import { sortBy, findIndex, partition } from 'lodash';
+import { sortBy, findIndex, partition, reverse } from 'lodash';
 import {
   Wrapper,
   Footer,
@@ -28,12 +28,13 @@ const CompareTable = (props: {
   setShowModal: any;
   isModal: boolean;
   locationsViewable?: number;
-  isHomepage?: Boolean;
+  isHomepage?: boolean;
   locations: any;
   currentCounty?: any;
 }) => {
   const [sorter, setSorter] = useState(5);
   const [sortDescending, setSortDescending] = useState(true);
+  const [sortByPopulation, setSortByPopulation] = useState(false);
 
   const currentCounty = props.county && props.currentCounty;
 
@@ -41,20 +42,32 @@ const CompareTable = (props: {
     ? currentCounty.locationInfo.full_fips_code
     : 0;
 
-  const partitionedLocations = partition(
-    props.locations,
-    location => location.metricsInfo.metrics[sorter].value !== null,
-  );
-  const sortedLocationsWithValue = sortBy(
-    partitionedLocations[0],
-    location => location.metricsInfo.metrics[sorter].value,
-  );
-  const locationsWithNull = partitionedLocations[1];
-  let sortedLocationsArr = sortedLocationsWithValue.concat(locationsWithNull);
+  function sortLocationsBy(
+    locations: SummaryForCompare[],
+    getValue: (location: SummaryForCompare) => number | undefined,
+  ) {
+    const [locationsWithValue, locationsWithoutValue] = partition(
+      locations,
+      getValue,
+    );
+    const sortedLocationsAsc = sortBy(locationsWithValue, getValue);
+    const sortedLocations = sortDescending
+      ? reverse(sortedLocationsAsc)
+      : sortedLocationsAsc;
+    return [...sortedLocations, ...locationsWithoutValue];
+  }
 
-  if (sortDescending) {
-    sortedLocationsWithValue.reverse();
-    sortedLocationsArr = sortedLocationsWithValue.concat(locationsWithNull);
+  const getPopulation = (location: SummaryForCompare) =>
+    location?.locationInfo?.population;
+  const getMetricValue = (location: any) =>
+    location.metricsInfo.metrics[sorter].value;
+
+  let sortedLocationsArr = props.locations;
+
+  if (sortByPopulation) {
+    sortedLocationsArr = sortLocationsBy(props.locations, getPopulation);
+  } else {
+    sortedLocationsArr = sortLocationsBy(props.locations, getMetricValue);
   }
 
   const currentCountyRank = findIndex(
@@ -97,8 +110,8 @@ const CompareTable = (props: {
     : 'County';
 
   const sortedLocations: RankedLocationSummary[] = sortedLocationsArr
-    .filter(location => location.metricsInfo !== null)
-    .map((summary, i) => ({ rank: i + 1, ...summary }));
+    .filter((location: SummaryForCompare) => location.metricsInfo !== null)
+    .map((summary: SummaryForCompare, i: any) => ({ rank: i + 1, ...summary }));
 
   const currentLocation = props.county
     ? { rank: currentCountyRank + 1, ...currentCounty }
@@ -131,6 +144,9 @@ const CompareTable = (props: {
         sortedLocations={sortedLocations}
         numLocations={locationsViewable}
         stateName={props.stateName}
+        setSortByPopulation={setSortByPopulation}
+        sortByPopulation={sortByPopulation}
+        isHomepage={props.isHomepage}
       />
       {!props.isModal && (
         <Fragment>

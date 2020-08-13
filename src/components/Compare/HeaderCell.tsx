@@ -1,5 +1,8 @@
 import React from 'react';
-import { ArrowContainer, Cell } from 'components/Compare/Compare.style';
+import {
+  ArrowContainer,
+  MetricHeaderCell,
+} from 'components/Compare/Compare.style';
 import { getMetricNameForCompare } from 'common/metric';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -13,6 +16,8 @@ const HeaderCell = (props: {
   arrowColorSelected: string;
   arrowColorNotSelected: string;
   isModal: Boolean;
+  setSortByPopulation: React.Dispatch<React.SetStateAction<boolean>>;
+  sortByPopulation: boolean;
 }) => {
   const {
     sorter,
@@ -23,9 +28,14 @@ const HeaderCell = (props: {
     arrowColorSelected,
     arrowColorNotSelected,
     isModal,
+    setSortByPopulation,
+    sortByPopulation,
   } = props;
 
   function cellOnClick() {
+    if (sortByPopulation) {
+      setSortByPopulation(false);
+    }
     if (sorter === metricInMap) {
       setSortDescending(!sortDescending);
     } else {
@@ -34,28 +44,28 @@ const HeaderCell = (props: {
     }
   }
 
+  const isSelectedMetric = sorter === metricInMap;
+
   return (
-    <Cell
+    <MetricHeaderCell
       onClick={() => {
         cellOnClick();
       }}
-      sorter={sorter}
-      metricInMap={metricInMap}
       isModal={isModal}
+      sortByPopulation={sortByPopulation}
+      arrowColorSelected={arrowColorSelected}
+      sortDescending={sortDescending}
+      isSelectedMetric={isSelectedMetric}
     >
       <span>{getMetricNameForCompare(metricInMap)}</span>
       <ArrowContainer
-        metric={metricInMap}
-        sortDescending={sortDescending}
-        sorter={sorter}
-        arrowColorSelected={arrowColorSelected}
         arrowColorNotSelected={arrowColorNotSelected}
         isModal={isModal}
       >
         <ExpandMoreIcon onClick={() => setSortDescending(true)} />
         <ExpandLessIcon onClick={() => setSortDescending(false)} />
       </ArrowContainer>
-    </Cell>
+    </MetricHeaderCell>
   );
 };
 

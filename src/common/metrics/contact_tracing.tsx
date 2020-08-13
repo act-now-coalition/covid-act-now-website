@@ -9,12 +9,15 @@ import { TRACERS_NEEDED_PER_CASE } from 'common/models/Projection';
 import { MetricDefinition } from './interfaces';
 import ExternalLink from 'components/ExternalLink';
 
+export const METRIC_NAME = 'Tracers hired';
+
 export const ContactTracingMetric: MetricDefinition = {
   renderStatus,
   renderDisclaimer,
+  metricName: METRIC_NAME,
+  extendedMetricName: METRIC_NAME,
+  metricNameForCompare: METRIC_NAME,
 };
-
-export const METRIC_NAME = 'Tracers hired';
 
 const SHORT_DESCRIPTION_LOW = ''; // LOW is unused.
 const SHORT_DESCRIPTION_MEDIUM = 'Too many cases and too few tracers hired';
