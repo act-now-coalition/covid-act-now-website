@@ -233,13 +233,13 @@ export class Projection {
     );
 
     this.rawHospitalizations = actualTimeseries.map(
-      row => row && row?.hospitalBeds?.currentUsageCovid,
+      row => row && row.hospitalBeds.currentUsageCovid,
     );
     this.smoothedHospitalizations = this.smoothWithRollingAverage(
       this.rawHospitalizations,
     );
     this.rawICUHospitalizations = actualTimeseries.map(
-      row => row && row?.ICUBeds?.currentUsageCovid,
+      row => row && row.ICUBeds.currentUsageCovid,
     );
     this.smoothedICUHospitalizations = this.smoothWithRollingAverage(
       this.rawICUHospitalizations,
