@@ -82,7 +82,7 @@ export const BarsSeries = styled.g`
 
 export const GridLines = styled.g`
   line {
-    stroke: #e0e0e0;
+    stroke: ${theme.palette.grey[300]};
     stroke-width: 1px;
     stroke-dasharray: 5, 5;
   }
