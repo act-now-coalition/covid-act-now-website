@@ -28,7 +28,7 @@ const CompareTable = (props: {
   setShowModal: any;
   isModal: boolean;
   locationsViewable?: number;
-  isHomepage?: Boolean;
+  isHomepage?: boolean;
   locations: any;
   currentCounty?: any;
 }) => {
@@ -149,6 +149,7 @@ const CompareTable = (props: {
         stateName={props.stateName}
         setSortByPopulation={setSortByPopulation}
         sortByPopulation={sortByPopulation}
+        isHomepage={props.isHomepage}
       />
       {!props.isModal && (
         <Fragment>

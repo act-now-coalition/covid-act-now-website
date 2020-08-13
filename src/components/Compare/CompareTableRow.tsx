@@ -11,6 +11,7 @@ import { Metric, formatValue } from 'common/metric';
 import { RankedLocationSummary } from 'common/utils/compare';
 import { Level } from 'common/level';
 import { orderedMetrics } from 'components/Compare/CompareTable';
+import { formatEstimate } from 'common/utils';
 
 function cellValue(metric: any, metricType: Metric) {
   if (metric === null || metric === undefined) {
@@ -25,6 +26,7 @@ const CompareTableRow = (props: {
   isCurrentCounty?: boolean;
   isModal?: boolean;
   sortByPopulation: boolean;
+  isHomepage?: boolean;
 }) => {
   const {
     location,
@@ -32,6 +34,7 @@ const CompareTableRow = (props: {
     isCurrentCounty,
     isModal,
     sortByPopulation,
+    isHomepage,
   } = props;
 
   //TODO(Chelsi): fix the else?
@@ -71,9 +74,7 @@ const CompareTableRow = (props: {
     ? location.locationInfo.county.replace('Parish', 'Par.')
     : location.locationInfo.county.replace('County', 'Co.');
 
-  const roundedPopulation = (
-    Math.round(location.locationInfo.population / 100) * 100
-  ).toLocaleString();
+  const populationRoundTo = isHomepage ? 3 : 2;
 
   return (
     <Row
@@ -93,7 +94,12 @@ const CompareTableRow = (props: {
         <div>
           {locationName}
           <br />
-          <Population>{roundedPopulation}</Population>
+          <Population>
+            {formatEstimate(
+              location.locationInfo.population,
+              populationRoundTo,
+            )}
+          </Population>
         </div>
       </MetricCell>
       {orderedMetrics.map((metric: Metric) => {

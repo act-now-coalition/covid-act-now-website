@@ -16,7 +16,7 @@ const ModalCompare = (props: {
   stateName?: string;
   county: any | null;
   setShowModal: any;
-  isHomepage?: Boolean;
+  isHomepage?: boolean;
   locations: SummaryForCompare[];
   currentCounty?: any;
   handleCloseModal: () => void;

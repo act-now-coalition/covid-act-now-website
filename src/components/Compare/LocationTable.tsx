@@ -101,7 +101,14 @@ const LocationTableBody: React.FunctionComponent<{
   sorter: number;
   currentLocationRank?: number;
   sortByPopulation: boolean;
-}> = ({ sortedLocations, sorter, currentLocationRank, sortByPopulation }) => (
+  isHomepage?: boolean;
+}> = ({
+  sortedLocations,
+  sorter,
+  currentLocationRank,
+  sortByPopulation,
+  isHomepage,
+}) => (
   <Table>
     <TableBody>
       {sortedLocations.map(location => (
@@ -110,6 +117,7 @@ const LocationTableBody: React.FunctionComponent<{
           location={location}
           isCurrentCounty={location.rank === currentLocationRank}
           sortByPopulation={sortByPopulation}
+          isHomepage={isHomepage}
         />
       ))}
     </TableBody>
@@ -143,6 +151,7 @@ const LocationTable: React.FunctionComponent<{
   stateName?: string;
   setSortByPopulation: React.Dispatch<React.SetStateAction<boolean>>;
   sortByPopulation: boolean;
+  isHomepage?: boolean;
 }> = ({
   setSorter,
   setSortDescending,
@@ -159,6 +168,7 @@ const LocationTable: React.FunctionComponent<{
   stateName,
   setSortByPopulation,
   sortByPopulation,
+  isHomepage,
 }) => {
   const Container = isModal ? Styles.ModalContainer : Styles.Container;
 
@@ -206,6 +216,7 @@ const LocationTable: React.FunctionComponent<{
             sortedLocations={visibleLocations}
             currentLocationRank={pinnedLocation?.rank}
             sortByPopulation={sortByPopulation}
+            isHomepage={isHomepage}
           />
         </Styles.Body>
         {pinnedLocation && showBottom && (

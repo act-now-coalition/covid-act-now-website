@@ -91,7 +91,7 @@ export default function HomePage() {
             <Map hideLegend />
             {isMobile && <HomePageThermometer />}
             <CompareMain
-              locationsViewable={10}
+              locationsViewable={8}
               isHomepage
               locations={locationsForCompare}
             />

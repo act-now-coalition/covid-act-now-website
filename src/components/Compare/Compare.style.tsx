@@ -13,8 +13,8 @@ import { ChartLocationName } from 'components/LocationPage/ChartsHolder.style';
 
 // TODO (Chelsi): consolidate into a theme:
 
-export const locationNameCellWidth = 170;
-export const metricCellWidth = 115;
+export const locationNameCellWidth = 195;
+export const metricCellWidth = 110;
 
 const getMetricHeaderBackground = (
   sortByPopulation: boolean,
@@ -30,7 +30,7 @@ const getMetricHeaderBackground = (
   }
 };
 
-export const Wrapper = styled.div<{ isModal?: Boolean; isHomepage?: Boolean }>`
+export const Wrapper = styled.div<{ isModal?: Boolean; isHomepage?: boolean }>`
   max-width: ${({ isHomepage }) => (isHomepage ? '1000px' : '900px')};
   width: 100%;
   margin: ${({ isModal }) => (isModal ? '0 auto' : '1rem auto')};
@@ -60,12 +60,12 @@ export const Wrapper = styled.div<{ isModal?: Boolean; isHomepage?: Boolean }>`
     th,
     td {
       &:first-child {
-        width: 25%;
+        width: 27.5%;
         min-width: ${locationNameCellWidth}px;
       }
 
       &:not(:first-child) {
-        width: 15%;
+        width: 14.5%;
         min-width: ${metricCellWidth}px;
       }
     }
@@ -235,6 +235,10 @@ export const MetricCell = styled.td<{
       sortByPopulation && 'rgba(0,0,0,0.02)'};
     font-weight: 500;
     line-height: 1.2;
+
+    span {
+      color: ${COLOR_MAP.GRAY.DARK};
+    }
   }
 
   &:nth-child(2) {
@@ -246,7 +250,8 @@ export const MetricCell = styled.td<{
     font-family: Source Code Pro;
     color: ${({ sorter, metric }) =>
       sorter === metric ? 'black' : `${COLOR_MAP.GRAY_BODY_COPY}`};
-    font-weight: ${({ sorter, metric }) => sorter === metric && '600'};
+    font-weight: ${({ sorter, metric, sortByPopulation }) =>
+      !sortByPopulation && sorter === metric && '600'};
     background-color: ${({ sorter, metric, sortByPopulation }) =>
       !sortByPopulation && sorter === metric && 'rgba(0,0,0,0.02)'};
   }
@@ -400,7 +405,7 @@ export const Header = styled.div`
   font-size: 1.5rem;
 `;
 
-export const ModalHeader = styled.div<{ isHomepage?: Boolean }>`
+export const ModalHeader = styled.div<{ isHomepage?: boolean }>`
   background-color: ${COLOR_MAP.GRAY_BODY_COPY};
   color: white;
   font-family: Roboto;
@@ -436,5 +441,5 @@ export const StateName = styled.div`
 
 export const Population = styled.span`
   font-family: Source Code Pro;
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
+  font-size: 0.875rem;
 `;
