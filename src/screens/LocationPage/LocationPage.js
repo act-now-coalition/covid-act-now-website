@@ -17,7 +17,7 @@ function LocationPage() {
   stateId = stateId.toUpperCase();
 
   const [mapOption, setMapOption] = useState(
-    stateId === MAP_FILTERS.DC || stateId === MAP_FILTERS.PR
+    stateId === MAP_FILTERS.DC
       ? MAP_FILTERS.NATIONAL
       : MAP_FILTERS.STATE,
   );
