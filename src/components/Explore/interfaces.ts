@@ -9,3 +9,10 @@ export interface Series {
   data: Column[];
   type: ChartType;
 }
+
+export enum ExploreMetric {
+  CASES,
+  DEATHS,
+  HOSPITALIZATIONS,
+  ICU_HOSPITALIZATIONS,
+}
