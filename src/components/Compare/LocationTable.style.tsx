@@ -22,7 +22,7 @@ export const ModalContainer = styled.div`
 export const Body = styled.div`
   flex: 1 1 auto;
   min-height: 0;
-  overflow-y: scroll;
+  overflow-y: auto;
   min-width: ${minTableWidth}px;
 `;
 
