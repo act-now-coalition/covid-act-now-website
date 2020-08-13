@@ -74,7 +74,8 @@ const CriteriaExplanation = (props: { isMobile: Boolean }) => {
           <Content>
             <CriterionHeader>Contacts Traced</CriterionHeader>
             <CriterionDescription>
-              Are we finding and isolating most new cases before COVID spreads?
+              Are we hiring enough contact tracers given the number of new
+              cases?
             </CriterionDescription>
           </Content>
         </Criterion>
