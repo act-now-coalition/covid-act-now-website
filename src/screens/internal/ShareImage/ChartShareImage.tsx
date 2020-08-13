@@ -62,11 +62,7 @@ export default function ChartShareImage() {
             <MetricChart
               metric={metric}
               projections={projections}
-              height={
-                metric === Metric.FUTURE_PROJECTIONS
-                  ? chartHeight - 55
-                  : chartHeight
-              }
+              height={chartHeight}
             />
           </ChartWrapper>
         </ThemeProvider>

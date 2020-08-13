@@ -47,6 +47,7 @@ const MiniMap: FunctionComponent<MiniMapProperties> = ({
   };
 
   const showState = stateId !== MAP_FILTERS.DC;
+
   const { stateName } = projections;
 
   const onSelectCounty = (fullFips: string) => {
