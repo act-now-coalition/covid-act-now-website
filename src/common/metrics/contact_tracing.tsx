@@ -9,7 +9,7 @@ import { TRACERS_NEEDED_PER_CASE } from 'common/models/Projection';
 import { MetricDefinition } from './interfaces';
 import ExternalLink from 'components/ExternalLink';
 
-export const METRIC_NAME = 'Contacts traced';
+export const METRIC_NAME = 'Tracers hired';
 
 export const ContactTracingMetric: MetricDefinition = {
   renderStatus,
@@ -19,11 +19,12 @@ export const ContactTracingMetric: MetricDefinition = {
   metricNameForCompare: METRIC_NAME,
 };
 
-const SHORT_DESCRIPTION_LOW = 'Too many cases and too little tracing';
-const SHORT_DESCRIPTION_MEDIUM = 'Too many cases and too little tracing';
+const SHORT_DESCRIPTION_LOW = ''; // LOW is unused.
+const SHORT_DESCRIPTION_MEDIUM = 'Too many cases and too few tracers hired';
 const SHORT_DESCRIPTION_MEDIUM_HIGH =
-  'Insufficient tracing to stop the spread of COVID';
-const SHORT_DESCRIPTION_HIGH = 'Enough tracing to help contain COVID';
+  'Insufficient tracers, even if the program is run effectively';
+const SHORT_DESCRIPTION_HIGH =
+  'Enough tracers, if the program is run effectively';
 const SHORT_DESCRIPTION_UNKNOWN = 'Insufficient data to assess';
 
 const LOW_NAME = 'Critical';
@@ -111,20 +112,19 @@ export function renderStatus(projections: Projections): React.ReactElement {
 
   const outcomesAtLevel = levelText(
     level,
-    `These low levels of tracing suggest there may be an active outbreak underway in ${locationName}, or almost no tracing capacity exists. Aggressive action urgently needed.`,
-    `These low levels of tracing suggest there may be an active outbreak underway in ${locationName}, or that little tracing capacity exists. Strong caution warranted.`,
-    `At these lower levels of tracing, it is unlikely ${locationName} will be able to successfully identify and isolate sources of disease spread fast enough to prevent new outbreaks.`,
-    'When this level of tracing is coupled with widely available testing, COVID can be contained without resorting to lockdowns.',
+    ``, // LOW is unused
+    `With insufficient contact tracing staff, ${locationName} is unlikely to be able to successfully identify and isolate sources of disease spread fast enough to prevent new outbreaks.`,
+    `With insufficient contact tracing staff, ${locationName} is unlikely to be able to successfully identify and isolate sources of disease spread fast enough to prevent new outbreaks.`,
+    `Sufficient staff alone does not guarantee successful contact tracing. ${locationName} will need to ensure the contact tracing program is run effectively and that testing with short test result turnaround time is widely available.`,
   );
 
   return (
     <Fragment>
-      Per best available data, {locationName} has {numTracers} contact tracers.
-      With an average of {weeklyAverage} new daily cases, we estimate{' '}
-      {locationName} needs {numNeededTracers} contact tracing staff to trace all
-      new cases in 48 hours, before too many other people are infected. This
-      means that {locationName} is likely able to trace {contactTracingRate} of
-      new COVID infections in 48 hours. {outcomesAtLevel}
+      With {weeklyAverage} new daily cases on average, {locationName} needs an
+      estimated {numNeededTracers} contact tracers on staff to trace each new
+      case to a known case within 48 hours of detection. Per our best available
+      data, {locationName} has {numTracers} contact tracers, fulfilling{' '}
+      {contactTracingRate} of this staffing requirement. {outcomesAtLevel}
     </Fragment>
   );
 }
@@ -150,7 +150,13 @@ function renderDisclaimer(): React.ReactElement {
       <ExternalLink href="https://testandtrace.com/">
         testandtrace.com
       </ExternalLink>
-      ).
+      ). Learn about recent{' '}
+      <ExternalLink href="https://blog.covidactnow.org/changes-to-how-we-assess-contact-tracing/">
+        changes to how we assess contact tracing
+      </ExternalLink>
+      . We know that measuring contact tracing capacity solely by the number of
+      staff is not reliable, and we are working on a more accurate metric to
+      assess contact tracing capacity.
     </Fragment>
   );
 }

@@ -50,7 +50,6 @@ const InnerContent = props => {
       1: 'positive_test_rate',
       2: 'hospital_usage',
       3: 'contact_tracing',
-      4: 'future_projections',
       5: 'case_incidence',
     };
 

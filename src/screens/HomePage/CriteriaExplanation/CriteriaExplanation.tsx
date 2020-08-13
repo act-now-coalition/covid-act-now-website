@@ -72,9 +72,10 @@ const CriteriaExplanation = (props: { isMobile: Boolean }) => {
         <Criterion>
           <Kicker isMobile={props.isMobile} title="Indicator 5" number="5" />
           <Content>
-            <CriterionHeader>Contacts Traced</CriterionHeader>
+            <CriterionHeader>Tracers Hired</CriterionHeader>
             <CriterionDescription>
-              Are we finding and isolating most new cases before COVID spreads?
+              Are we hiring enough contact tracers given the number of new
+              cases?
             </CriterionDescription>
           </Content>
         </Criterion>
