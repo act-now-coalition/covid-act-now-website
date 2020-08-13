@@ -185,8 +185,11 @@ const ChartsHolder = (props: {
               ))}
 
               <p>
-                <b>Looking for our future hospitalization projections?</b> We've
-                recently <a href="#">removed them</a>. If you have questions,{' '}
+                <b>Looking for our future hospitalization projections?</b>{' '}
+                <a href="https://blog.covidactnow.org/covid-hospitalization-projections-sunset/">
+                  We're no longer including them here
+                </a>
+                . If you have questions,{' '}
                 <a href="mailto:info@covidactnow.org">let us know</a>.
               </p>
             </MainContentInner>
