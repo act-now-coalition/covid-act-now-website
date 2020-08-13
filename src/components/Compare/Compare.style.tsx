@@ -1,21 +1,33 @@
 import styled, { css } from 'styled-components';
 import { isNumber } from 'lodash';
 import { TableHead, TableCell, TableRow } from '@material-ui/core';
-import { COLOR_MAP, LEVEL_COLOR } from 'common/colors';
+import {
+  COLOR_MAP,
+  LEVEL_COLOR,
+  LEVEL_COLOR_CONTACT_TRACING,
+} from 'common/colors';
 import { COLORS } from 'common';
 import { Metric } from 'common/metric';
 import { Level } from 'common/level';
 import { ChartLocationName } from 'components/LocationPage/ChartsHolder.style';
 
+// TODO (Chelsi): consolidate into a theme:
+
 export const locationNameCellWidth = 170;
 export const metricCellWidth = 115;
 
-const LEVEL_COLOR_CONTACT_TRACING = {
-  [Level.LOW]: COLOR_MAP.RED.BASE,
-  [Level.MEDIUM]: COLOR_MAP.ORANGE_DARK.BASE,
-  [Level.HIGH]: COLOR_MAP.ORANGE.BASE,
-  [Level.CRITICAL]: COLOR_MAP.GREEN.BASE,
-  [Level.UNKNOWN]: COLOR_MAP.GRAY.BASE,
+const getMetricHeaderBackground = (
+  sortByPopulation: boolean,
+  isModal: Boolean,
+  isSelectedMetric: boolean,
+) => {
+  if (isModal) {
+    if (isSelectedMetric && !sortByPopulation) return 'black';
+    return `${COLOR_MAP.GRAY_BODY_COPY}`;
+  } else {
+    if (isSelectedMetric && !sortByPopulation) return 'rgba(0,0,0,0.02)';
+    return 'white';
+  }
 };
 
 export const Wrapper = styled.div<{ isModal?: Boolean; isHomepage?: Boolean }>`
@@ -98,7 +110,6 @@ export const CellStyles = css`
   font-size: 0.9rem;
 `;
 
-// TODO (Chelsi): turn this background-color situation into a theme asap:
 export const LocationHeaderCell = styled(TableCell)<{
   isModal: Boolean;
   sortByPopulation: boolean;
@@ -108,12 +119,15 @@ export const LocationHeaderCell = styled(TableCell)<{
 }>`
   ${CellStyles}
 
-  background-color: ${({ sortByPopulation }) =>
-    sortByPopulation && 'rgba(0,0,0,0.02)'};
-  background-color: ${({ isModal }) =>
-    isModal && `${COLOR_MAP.GRAY_BODY_COPY}`};
-  background-color: ${({ sortByPopulation, isModal }) =>
-    isModal && sortByPopulation && 'black'};
+  background-color: ${({ isModal, sortByPopulation }) =>
+    isModal && sortByPopulation
+      ? 'black'
+      : isModal
+      ? `${COLOR_MAP.GRAY_BODY_COPY}`
+      : sortByPopulation
+      ? 'rgba(0,0,0,0.02)'
+      : 'white'};
+
   border-radius: ${({ isModal, sortByPopulation }) =>
     isModal && sortByPopulation && '4px 4px 0 0'};
 
@@ -137,7 +151,6 @@ export const LocationHeaderCell = styled(TableCell)<{
   }
 `;
 
-// TODO (Chelsi): turn this background-color situation into a theme asap:
 export const MetricHeaderCell = styled(TableCell)<{
   isModal: Boolean;
   sortByPopulation: boolean;
@@ -147,14 +160,15 @@ export const MetricHeaderCell = styled(TableCell)<{
 }>`
   ${CellStyles}
 
-  background-color: ${({ isSelectedMetric, sortByPopulation }) =>
-    !sortByPopulation && isSelectedMetric && 'rgba(0,0,0,0.02)'};
-  background-color: ${({ isSelectedMetric, isModal, sortByPopulation }) =>
-    isModal && isSelectedMetric && !sortByPopulation && 'black'};
-  background-color: ${({ isSelectedMetric, isModal }) =>
-    isModal && !isSelectedMetric && `${COLOR_MAP.GRAY_BODY_COPY}`};
+
   border-radius: ${({ isModal, sortByPopulation, isSelectedMetric }) =>
     isModal && !sortByPopulation && isSelectedMetric && '4px 4px 0 0'};
+  background-color: ${props =>
+    getMetricHeaderBackground(
+      props.sortByPopulation,
+      props.isModal,
+      props.isSelectedMetric,
+    )};
 
     ${ArrowContainer} {
       svg{
@@ -295,7 +309,15 @@ export const Row = styled(TableRow)<{
   }
 
   &:hover {
-    color: ${COLOR_MAP.BLUE};
+    color: ${({ headerRowBackground }) =>
+      !headerRowBackground && `${COLOR_MAP.BLUE}`};
+    color: ${({ headerRowBackground }) => !headerRowBackground && 'underline'};
+    ${MetricCell} {
+      span {
+        color: ${COLOR_MAP.BLUE};
+        text-decoration: underline;
+      }
+    }
   }
 `;
 

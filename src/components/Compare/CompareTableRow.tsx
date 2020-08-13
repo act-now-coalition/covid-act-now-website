@@ -71,6 +71,10 @@ const CompareTableRow = (props: {
     ? location.locationInfo.county.replace('Parish', 'Par.')
     : location.locationInfo.county.replace('County', 'Co.');
 
+  const roundedPopulation = (
+    Math.round(location.locationInfo.population / 100) * 100
+  ).toLocaleString();
+
   return (
     <Row
       index={location.rank}
@@ -89,9 +93,7 @@ const CompareTableRow = (props: {
         <div>
           {locationName}
           <br />
-          <Population>
-            {location.locationInfo.population.toLocaleString()}
-          </Population>
+          <Population>{roundedPopulation}</Population>
         </div>
       </MetricCell>
       {orderedMetrics.map((metric: Metric) => {
