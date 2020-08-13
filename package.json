@@ -27,6 +27,7 @@
     "downshift": "^5.0.5",
     "esm": "^3.2.25",
     "firebase": "^7.15.4",
+    "geo-albers-usa-territories": "^0.0.2",
     "googleapis": "^57.0.0",
     "handlebars": "^4.7.6",
     "lodash": "^4.17.19",

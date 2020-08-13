@@ -1,13 +1,9 @@
 import React from 'react';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import { countyColor, stateColor } from 'common/colors';
-// import COUNTIES_JSON from './data/counties-10m.json';
+import { geoAlbersUsaTerritories } from 'geo-albers-usa-territories';
 import STATES_JSON from './data/states-10m.json';
-import {
-  USMapWrapper,
-  // USCountyMapWrapper,
-  USStateMapWrapper,
-} from './Map.style';
+import { USMapWrapper, USStateMapWrapper } from './Map.style';
 import { REVERSED_STATES } from 'common';
 
 const USACountyMap = ({ stateClickHandler, setTooltipContent, condensed }) => {
@@ -20,11 +16,15 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent, condensed }) => {
     }
   };
 
+  const projection = geoAlbersUsaTerritories()
+    .scale(1000)
+    .translate([400, 300]);
+
   return (
     <USMapWrapper condensed={condensed}>
       {/** Map with shaded background colors for states. */}
       <USStateMapWrapper>
-        <ComposableMap data-tip="" projection="geoAlbersUsa" stroke={'white'}>
+        <ComposableMap data-tip="" projection={projection} stroke="white">
           <Geographies geography={STATES_JSON}>
             {({ geographies }) =>
               geographies.map(geo => {
@@ -53,24 +53,3 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent, condensed }) => {
 };
 
 export default USACountyMap;
-
-// TODO(igor): clean up once we know what we want
-//  fill={getFillColor(geo.id)}
-/*<USCountyMapWrapper>
-  <ComposableMap projection="geoAlbersUsa">
-    <Geographies geography={COUNTIES_JSON}>
-      {({ geographies }) =>
-        geographies.map(geo => {
-          return (
-            <Geography
-              key={geo.rsmKey}
-              geography={geo}
-              stroke={'rgba(255,255,255,0.05)'}
-              fill={'transparent'}
-            />
-          );
-        })
-      }
-    </Geographies>
-  </ComposableMap>
-</USCountyMapWrapper>;*/
