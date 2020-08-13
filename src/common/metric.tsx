@@ -31,26 +31,6 @@ export const ALL_METRICS = [
   Metric.CONTACT_TRACING,
 ];
 
-const METRIC_TO_NAME = {
-  [Metric.CASE_GROWTH_RATE]: CaseGrowth.METRIC_NAME,
-  [Metric.POSITIVE_TESTS]: TestRates.METRIC_NAME,
-  [Metric.HOSPITAL_USAGE]: Hospitalizations.METRIC_NAME,
-  [Metric.CONTACT_TRACING]: ContactTracing.METRIC_NAME,
-  [Metric.CASE_DENSITY]: 'Daily new cases',
-};
-
-export function getMetricName(metric: Metric) {
-  return METRIC_TO_NAME[metric];
-}
-
-export function getMetricNameExtended(metric: Metric) {
-  if (metric === Metric.CASE_DENSITY) {
-    return `${METRIC_TO_NAME[metric]} per 100k population`;
-  } else {
-    return METRIC_TO_NAME[metric];
-  }
-}
-
 const ALL_METRICS_LEVEL_INFO_MAP = {
   [Metric.CASE_GROWTH_RATE]: CaseGrowth.CASE_GROWTH_RATE_LEVEL_INFO_MAP,
   [Metric.POSITIVE_TESTS]: TestRates.POSITIVE_TESTS_LEVEL_INFO_MAP,
@@ -101,6 +81,21 @@ export function getMetricStatusText(metric: Metric, projections: Projections) {
   return metricDefinition.renderStatus(projections);
 }
 
+export function getMetricName(metric: Metric) {
+  const metricDefinition = getMetricDefinition(metric);
+  return metricDefinition.metricName;
+}
+
+export function getMetricNameExtended(metric: Metric) {
+  const metricDefinition = getMetricDefinition(metric);
+  return metricDefinition.extendedMetricName;
+}
+
+export function getMetricNameForCompare(metric: Metric) {
+  const metricDefinition = getMetricDefinition(metric);
+  return metricDefinition.metricNameForCompare;
+}
+
 export const formatValue = (
   chartType: Metric,
   value: number | null,
@@ -122,12 +117,3 @@ export const formatValue = (
   }
   fail('Invalid Chart Type');
 };
-
-//TODO (chelsi)- consolidate getMetricName functions
-export function getMetricNameForCompare(metric: Metric) {
-  if (metric === Metric.CASE_DENSITY) {
-    return `${METRIC_TO_NAME[metric]} per 100k`;
-  } else {
-    return METRIC_TO_NAME[metric];
-  }
-}

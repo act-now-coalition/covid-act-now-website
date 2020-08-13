@@ -8,12 +8,15 @@ import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
 import ExternalLink from 'components/ExternalLink';
 
+export const METRIC_NAME = 'Infection rate';
+
 export const CaseGrowthMetric: MetricDefinition = {
   renderStatus,
   renderDisclaimer,
+  metricName: METRIC_NAME,
+  extendedMetricName: METRIC_NAME,
+  metricNameForCompare: METRIC_NAME,
 };
-
-export const METRIC_NAME = 'Infection rate';
 
 const SHORT_DESCRIPTION_LOW = 'Active cases are decreasing';
 const SHORT_DESCRIPTION_MEDIUM = 'COVID is still spreading, but slowly';
