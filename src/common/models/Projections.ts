@@ -1,28 +1,29 @@
 import { Projection } from './Projection';
-import { INTERVENTIONS } from '../interventions';
 import { STATES } from '..';
-import { RegionSummaryWithTimeseriesMap } from 'api';
 import { Metric, getLevel, ALL_METRICS } from 'common/metric';
 import { Level } from 'common/level';
 import { LEVEL_COLOR } from 'common/colors';
-import { fail } from 'common/utils';
+import { fail, assert } from 'common/utils';
 import { LocationSummary, MetricSummary } from 'common/location_summaries';
+import { RegionSummaryWithTimeseries } from 'api/schema/RegionSummaryWithTimeseries';
 
 /**
- * The model for the complete set of projections and related information
- * (eg. current intervention) for a given location (state or county).
+ * The complete set of data / metrics and related information for a given
+ * location (state or county).
+ *
+ * TODO(michael): Rename / restructure this and the Projection class now that
+ * we're not focused on projections and there's only 1.
  */
 export class Projections {
   stateCode: string;
   stateName: string;
   county: any;
   countyName: string | null;
-  baseline: any;
-  projected: any;
+  primary: Projection;
   isCounty: boolean;
 
   constructor(
-    summaryWithTimeseriesMap: RegionSummaryWithTimeseriesMap,
+    summaryWithTimeseries: RegionSummaryWithTimeseries,
     stateCode: string,
     county?: any,
   ) {
@@ -30,11 +31,12 @@ export class Projections {
     this.stateName = (STATES as any)[this.stateCode];
     this.county = null;
     this.countyName = null;
-    this.baseline = null;
     this.isCounty = county != null;
+    this.primary = new Projection(summaryWithTimeseries, {
+      isCounty: this.isCounty,
+    });
 
     this.populateCounty(county);
-    this.populateInterventions(summaryWithTimeseriesMap);
   }
 
   populateCounty(county: any) {
@@ -76,10 +78,6 @@ export class Projections {
     return this.primary.totalPopulation;
   }
 
-  get primary() {
-    return this.projected;
-  }
-
   get summary(): LocationSummary {
     const metrics = {} as { [metric in Metric]: MetricSummary };
     for (const metric of ALL_METRICS) {
@@ -100,9 +98,6 @@ export class Projections {
   }
 
   getMetricValue(metric: Metric): number | null {
-    if (!this.primary) {
-      return null;
-    }
     switch (metric) {
       case Metric.CASE_GROWTH_RATE:
         return this.primary.rt;
@@ -198,70 +193,8 @@ export class Projections {
     }
   }
 
-  // TODO(pablo): Remove this method once the prevalence metric is no longer
-  // an 'update'. This is only used to show the level before and after the
-  // introduction of the prevalence metric for locations where the overall
-  // level changed.
-  getAlarmLevelWithoutCaseDensity() {
-    const {
-      rt_level,
-      hospitalizations_level,
-      test_rate_level,
-      contact_tracing_level,
-    } = this.getLevels();
-
-    const levelList = [rt_level, hospitalizations_level, test_rate_level];
-
-    // contact tracing levels are reversed (i.e low is bad, high is good)
-    const reverseList = [contact_tracing_level];
-
-    if (
-      levelList.some(level => level === Level.CRITICAL) ||
-      reverseList.some(level => level === Level.LOW)
-    ) {
-      return Level.CRITICAL;
-    } else if (
-      levelList.some(level => level === Level.HIGH) ||
-      reverseList.some(level => level === Level.MEDIUM)
-    ) {
-      return Level.HIGH;
-    } else if (
-      levelList.some(level => level === Level.MEDIUM) ||
-      reverseList.some(level => level === Level.HIGH)
-    ) {
-      return Level.MEDIUM;
-    } else if (
-      levelList.some(level => level === Level.UNKNOWN) ||
-      reverseList.some(level => level === Level.UNKNOWN)
-    ) {
-      return Level.UNKNOWN;
-    } else {
-      return Level.LOW;
-    }
-  }
-
   getAlarmLevelColor() {
     const level = this.getAlarmLevel();
     return LEVEL_COLOR[level];
-  }
-
-  populateInterventions(
-    summaryWithTimeseriesMap: RegionSummaryWithTimeseriesMap,
-  ) {
-    for (const intervention in summaryWithTimeseriesMap) {
-      const summaryWithTimeseries = summaryWithTimeseriesMap[intervention];
-      let projection = null;
-      if (summaryWithTimeseries !== null) {
-        projection = new Projection(summaryWithTimeseries, {
-          intervention: intervention,
-          isCounty: this.isCounty,
-        });
-      }
-      if (intervention === INTERVENTIONS.LIMITED_ACTION) {
-        this.baseline = projection;
-      } else if (intervention === INTERVENTIONS.PROJECTED) {
-        this.projected = projection;
-      }
-    }
   }
 }

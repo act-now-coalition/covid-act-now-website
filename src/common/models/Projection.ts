@@ -41,7 +41,6 @@ const CONTACT_TRACER_STATE_OVERRIDES: { [key: string]: number } = {};
 
 /** Parameters that can be provided when constructing a Projection. */
 export interface ProjectionParameters {
-  intervention: string;
   isCounty: boolean;
 }
 
@@ -119,7 +118,6 @@ export class Projection {
 
   private readonly cumulativeActualDeaths: Array<number | null>;
 
-  private readonly intervention: string;
   private readonly dates: Date[];
   private readonly isCounty: boolean;
 
@@ -166,7 +164,6 @@ export class Projection {
     const lastUpdated = new Date(summaryWithTimeseries.lastUpdatedDate);
     this.locationName = this.getLocationName(summaryWithTimeseries);
     this.stateName = summaryWithTimeseries.stateName;
-    this.intervention = parameters.intervention;
     this.isCounty = parameters.isCounty;
     this.totalPopulation = actuals.population;
     this.fips = summaryWithTimeseries.fips;
@@ -281,10 +278,6 @@ export class Projection {
   // the same day, to make sure it matches the graph.
   get currentDailyAverageCases() {
     return lastValue(this.smoothedDailyCases);
-  }
-
-  get label() {
-    return this.intervention;
   }
 
   get finalCumulativeInfected() {
