@@ -1,24 +1,36 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { isNumber } from 'lodash';
 import { TableHead, TableCell, TableRow } from '@material-ui/core';
-import { COLOR_MAP, LEVEL_COLOR } from 'common/colors';
+import {
+  COLOR_MAP,
+  LEVEL_COLOR,
+  LEVEL_COLOR_CONTACT_TRACING,
+} from 'common/colors';
 import { COLORS } from 'common';
 import { Metric } from 'common/metric';
 import { Level } from 'common/level';
 import { ChartLocationName } from 'components/LocationPage/ChartsHolder.style';
 
-export const locationNameCellWidth = 145;
-export const metricCellWidth = 120;
+// TODO (Chelsi): consolidate into a theme:
 
-const LEVEL_COLOR_CONTACT_TRACING = {
-  [Level.LOW]: COLOR_MAP.RED.BASE,
-  [Level.MEDIUM]: COLOR_MAP.ORANGE_DARK.BASE,
-  [Level.HIGH]: COLOR_MAP.ORANGE.BASE,
-  [Level.CRITICAL]: COLOR_MAP.GREEN.BASE,
-  [Level.UNKNOWN]: COLOR_MAP.GRAY.BASE,
+export const locationNameCellWidth = 195;
+export const metricCellWidth = 110;
+
+const getMetricHeaderBackground = (
+  sortByPopulation: boolean,
+  isModal: Boolean,
+  isSelectedMetric: boolean,
+) => {
+  if (isModal) {
+    if (isSelectedMetric && !sortByPopulation) return 'black';
+    return `${COLOR_MAP.GRAY_BODY_COPY}`;
+  } else {
+    if (isSelectedMetric && !sortByPopulation) return 'rgba(0,0,0,0.02)';
+    return 'white';
+  }
 };
 
-export const Wrapper = styled.div<{ isModal?: Boolean; isHomepage?: Boolean }>`
+export const Wrapper = styled.div<{ isModal?: Boolean; isHomepage?: boolean }>`
   max-width: ${({ isHomepage }) => (isHomepage ? '1000px' : '900px')};
   width: 100%;
   margin: ${({ isModal }) => (isModal ? '0 auto' : '1rem auto')};
@@ -48,12 +60,12 @@ export const Wrapper = styled.div<{ isModal?: Boolean; isHomepage?: Boolean }>`
     th,
     td {
       &:first-child {
-        width: 25%;
+        width: 27.5%;
         min-width: ${locationNameCellWidth}px;
       }
 
       &:not(:first-child) {
-        width: 15%;
+        width: 14.5%;
         min-width: ${metricCellWidth}px;
       }
     }
@@ -68,33 +80,129 @@ export const StyledTable = styled.div<{ isModal?: Boolean }>`
   border: ${({ isModal }) => !isModal && `1px solid ${COLORS.LIGHTGRAY}`};
 `;
 
-// TODO (Chelsi): turn this background-color situation into a theme asap
-export const Cell = styled(TableCell)<{
-  locationHeaderCell?: Boolean;
-  sorter?: any;
-  metricInMap?: Metric;
-  isModal: Boolean;
+export const ArrowContainer = styled.div<{
+  arrowColorNotSelected: string;
+  isModal?: Boolean;
 }>`
-  cursor: ${({ locationHeaderCell }) => !locationHeaderCell && 'pointer'};
+  color: #bdbdbd;
+  display: flex;
+  font-family: Roboto;
+  font-size: 0.875rem;
+  transform: translate(-0.25rem, 0.15rem);
+  margin-top: 0.25rem;
+
+  span {
+    margin: auto 0 auto 0.25rem;
+  }
+
+  svg {
+    color: ${({ arrowColorNotSelected }) => arrowColorNotSelected};
+
+    &:hover {
+      color: ${({ isModal }) => (isModal ? 'white' : 'black')};
+    }
+  }
+`;
+
+export const CellStyles = css`
+  cursor: pointer;
   text-transform: uppercase;
   font-size: 0.9rem;
-  background-color: ${({ locationHeaderCell, sorter, metricInMap }) =>
-    !locationHeaderCell && sorter === metricInMap && 'rgba(0,0,0,0.02)'};
-  background-color: ${({ locationHeaderCell, sorter, metricInMap, isModal }) =>
-    isModal && !locationHeaderCell && sorter === metricInMap && 'black'};
-  background-color: ${({ locationHeaderCell, sorter, metricInMap, isModal }) =>
-    isModal &&
-    !locationHeaderCell &&
-    sorter !== metricInMap &&
-    `${COLOR_MAP.GRAY_BODY_COPY}`};
-  background-color: ${({ locationHeaderCell, isModal }) =>
-    isModal && locationHeaderCell && `${COLOR_MAP.GRAY_BODY_COPY}`};
-  border-radius: ${({ locationHeaderCell, sorter, metricInMap, isModal }) =>
-    isModal && !locationHeaderCell && sorter === metricInMap && '4px 4px 0 0'};
+`;
+
+export const LocationHeaderCell = styled(TableCell)<{
+  isModal: Boolean;
+  sortByPopulation: boolean;
+  arrowColorSelected: string;
+  arrowColorNotSelected: string;
+  sortDescending: boolean;
+}>`
+  ${CellStyles}
+
+  background-color: ${({ isModal, sortByPopulation }) =>
+    isModal && sortByPopulation
+      ? 'black'
+      : isModal
+      ? `${COLOR_MAP.GRAY_BODY_COPY}`
+      : sortByPopulation
+      ? 'rgba(0,0,0,0.02)'
+      : 'white'};
+
+  border-radius: ${({ isModal, sortByPopulation }) =>
+    isModal && sortByPopulation && '4px 4px 0 0'};
+
+  ${ArrowContainer} {
+    svg{
+      &:first-child {
+        transform: translatex(-0.1rem);
+        color: ${({ arrowColorSelected, sortDescending, sortByPopulation }) =>
+          sortDescending && sortByPopulation && `${arrowColorSelected}`};
+      }
+      &:nth-child(2) {
+        color: ${({ arrowColorSelected, sortDescending, sortByPopulation }) =>
+          !sortDescending && sortByPopulation && `${arrowColorSelected}`};
+      }
+    }
+  }
+
+  span{
+    color: ${COLOR_MAP.GRAY.DARK};
+    font-weight: normal;
+  }
+`;
+
+export const MetricHeaderCell = styled(TableCell)<{
+  isModal: Boolean;
+  sortByPopulation: boolean;
+  arrowColorSelected: string;
+  sortDescending: boolean;
+  isSelectedMetric: boolean;
+}>`
+  ${CellStyles}
+
+
+  border-radius: ${({ isModal, sortByPopulation, isSelectedMetric }) =>
+    isModal && !sortByPopulation && isSelectedMetric && '4px 4px 0 0'};
+  background-color: ${props =>
+    getMetricHeaderBackground(
+      props.sortByPopulation,
+      props.isModal,
+      props.isSelectedMetric,
+    )};
+
+    ${ArrowContainer} {
+      svg{
+        &:first-child {
+          transform: translatex(-0.1rem);
+          color: ${({
+            arrowColorSelected,
+            sortDescending,
+            sortByPopulation,
+            isSelectedMetric,
+          }) =>
+            sortDescending &&
+            !sortByPopulation &&
+            isSelectedMetric &&
+            `${arrowColorSelected}`};
+        }
+        &:nth-child(2) {
+          color: ${({
+            arrowColorSelected,
+            sortDescending,
+            sortByPopulation,
+            isSelectedMetric,
+          }) =>
+            !sortDescending &&
+            !sortByPopulation &&
+            isSelectedMetric &&
+            `${arrowColorSelected}`};
+        }
+      }
+    }
 `;
 
 export const TableHeadContainer = styled(TableHead)<{ isModal?: Boolean }>`
-  ${Cell} {
+  ${MetricHeaderCell}, ${LocationHeaderCell} {
     vertical-align: bottom;
     line-height: 1.1rem;
     padding: 1rem 1rem 0.8rem;
@@ -114,6 +222,7 @@ export const MetricCell = styled.td<{
   iconColor?: Level;
   sorter?: any;
   metric?: Metric;
+  sortByPopulation: boolean;
 }>`
   text-align: left;
   padding-top: 0.75rem;
@@ -122,8 +231,13 @@ export const MetricCell = styled.td<{
 
   &:first-child {
     min-width: ${locationNameCellWidth}px;
-    &:hover {
-      color: ${COLOR_MAP.BLUE};
+    background-color: ${({ sortByPopulation }) =>
+      sortByPopulation && 'rgba(0,0,0,0.02)'};
+    font-weight: 500;
+    line-height: 1.2;
+
+    span {
+      color: ${COLOR_MAP.GRAY.DARK};
     }
   }
 
@@ -136,9 +250,10 @@ export const MetricCell = styled.td<{
     font-family: Source Code Pro;
     color: ${({ sorter, metric }) =>
       sorter === metric ? 'black' : `${COLOR_MAP.GRAY_BODY_COPY}`};
-    font-weight: ${({ sorter, metric }) => sorter === metric && '600'};
-    background-color: ${({ sorter, metric }) =>
-      sorter === metric && 'rgba(0,0,0,0.02)'};
+    font-weight: ${({ sorter, metric, sortByPopulation }) =>
+      !sortByPopulation && sorter === metric && '600'};
+    background-color: ${({ sorter, metric, sortByPopulation }) =>
+      !sortByPopulation && sorter === metric && 'rgba(0,0,0,0.02)'};
   }
 
   svg {
@@ -158,6 +273,14 @@ export const MetricCell = styled.td<{
     svg {
       color: ${({ iconColor }) =>
         iconColor !== undefined && `${LEVEL_COLOR_CONTACT_TRACING[iconColor]}`};
+    }
+  }
+
+  div {
+    display: inline-block;
+
+    &:first-child {
+      vertical-align: top;
     }
   }
 `;
@@ -191,65 +314,12 @@ export const Row = styled(TableRow)<{
   }
 
   &:hover {
-    color: ${COLOR_MAP.BLUE};
-  }
-`;
-
-export const ArrowContainer = styled.div<{
-  sortDescending: Boolean;
-  sorter?: Metric;
-  metric?: Metric;
-  arrowColorSelected: string;
-  arrowColorNotSelected: string;
-  isLocationHeader?: Boolean;
-  isModal?: Boolean;
-}>`
-  color: #bdbdbd;
-  display: flex;
-  font-family: Roboto;
-  font-size: 0.875rem;
-  transform: translate(-0.25rem, 0.15rem);
-  margin-top: 0.25rem;
-
-  span {
-    margin: auto 0 auto 0.25rem;
-  }
-
-  svg {
-    &:nth-child(2) {
-      color: ${({
-        sortDescending,
-        sorter,
-        metric,
-        arrowColorSelected,
-        arrowColorNotSelected,
-        isLocationHeader,
-      }) =>
-        isLocationHeader && !sortDescending
-          ? `${arrowColorSelected}`
-          : !sortDescending && sorter === metric
-          ? `${arrowColorSelected}`
-          : `${arrowColorNotSelected}`};
-    }
-    &:first-child {
-      transform: translatex(-0.1rem);
-      color: ${({
-        sortDescending,
-        sorter,
-        metric,
-        arrowColorSelected,
-        arrowColorNotSelected,
-        isLocationHeader,
-      }) =>
-        isLocationHeader && sortDescending
-          ? `${arrowColorSelected}`
-          : sortDescending && sorter === metric
-          ? `${arrowColorSelected}`
-          : `${arrowColorNotSelected}`};
-    }
-
-    &:hover {
-      color: ${({ isModal }) => (isModal ? 'white' : 'black')};
+    color: ${({ headerRowBackground }) =>
+      !headerRowBackground && `${COLOR_MAP.BLUE}`};
+    ${MetricCell} {
+      span {
+        color: ${COLOR_MAP.BLUE};
+      }
     }
   }
 `;
@@ -333,7 +403,7 @@ export const Header = styled.div`
   font-size: 1.5rem;
 `;
 
-export const ModalHeader = styled.div<{ isHomepage?: Boolean }>`
+export const ModalHeader = styled.div<{ isHomepage?: boolean }>`
   background-color: ${COLOR_MAP.GRAY_BODY_COPY};
   color: white;
   font-family: Roboto;
@@ -364,5 +434,10 @@ export const DivForRef = styled.div``;
 
 export const StateName = styled.div`
   font-size: 0.9rem;
-  line-height: 1.4;
+  line-height: 1.2;
+`;
+
+export const Population = styled.span`
+  font-family: Source Code Pro;
+  font-size: 0.875rem;
 `;
