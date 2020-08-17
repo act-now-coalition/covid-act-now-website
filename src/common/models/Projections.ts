@@ -3,7 +3,7 @@ import { STATES } from '..';
 import { Metric, getLevel, ALL_METRICS } from 'common/metric';
 import { Level } from 'common/level';
 import { LEVEL_COLOR } from 'common/colors';
-import { fail, assert } from 'common/utils';
+import { fail } from 'common/utils';
 import { LocationSummary, MetricSummary } from 'common/location_summaries';
 import { RegionSummaryWithTimeseries } from 'api/schema/RegionSummaryWithTimeseries';
 
