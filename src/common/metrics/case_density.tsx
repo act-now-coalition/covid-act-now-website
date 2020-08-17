@@ -11,12 +11,15 @@ import {
 import ExternalLink from 'components/ExternalLink';
 import { MetricDefinition } from './interfaces';
 
+export const METRIC_NAME = 'Daily new cases per 100k population';
+
 export const CaseIncidenceMetric: MetricDefinition = {
   renderStatus,
   renderDisclaimer,
+  metricName: 'Daily new cases',
+  extendedMetricName: 'Daily new cases per 100k population',
+  metricNameForCompare: `Daily new cases per 100k`,
 };
-
-export const METRIC_NAME = 'Daily new cases per 100k population';
 
 export const CASE_DENSITY_LEVEL_INFO_MAP: LevelInfoMap = {
   [Level.LOW]: {

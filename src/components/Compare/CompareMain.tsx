@@ -10,7 +10,7 @@ const CompareMain = (props: {
   county: any | null;
   isModal?: Boolean;
   locationsViewable: number;
-  isHomepage?: Boolean;
+  isHomepage?: boolean;
   locations: SummaryForCompare[];
   currentCounty?: any;
 }) => {

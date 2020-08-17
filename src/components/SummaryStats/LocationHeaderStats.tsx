@@ -31,6 +31,7 @@ const StatValue = (props: {
   statusUnknown?: Boolean;
   value: string;
   newIndicator?: Boolean;
+  metric: Metric;
 }) => {
   return (
     <ValueWrapper iconColor={props.iconColor}>
@@ -43,7 +44,7 @@ const StatValue = (props: {
       >
         {props.value}
       </StatValueText>
-      {props.newIndicator && (
+      {props.metric === Metric.CASE_DENSITY && (
         <PrevalenceMeasure>
           PER
           <br />
@@ -117,6 +118,7 @@ const SummaryStat = ({
             statusUnknown={statusUnknown}
             isHeader={isHeader}
             newIndicator={newIndicator}
+            metric={chartType}
           />
         )}
         {!condensed && <StatDetailText>{levelInfo.detail()}</StatDetailText>}
@@ -138,6 +140,7 @@ const SummaryStat = ({
             statusUnknown={statusUnknown}
             isHeader={isHeader}
             newIndicator={newIndicator}
+            metric={chartType}
           />
           <StatTag
             isHeader={isHeader}
