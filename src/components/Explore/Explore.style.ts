@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import Box from '@material-ui/core/Box';
+
 import MuiTab from '@material-ui/core/Tab';
 import MuiTabs from '@material-ui/core/Tabs';
 import theme from 'assets/theme';
@@ -8,18 +10,15 @@ function palette(props: any) {
   return props.theme.palette.chart;
 }
 
-// TODO(pablo): Get from theme
 const lightBlue = '#00BFEA';
 
 export const Container = styled.div`
-  /* TODO(pablo): Get from theme */
-  margin-bottom: 20px;
+  margin-bottom: ${theme.spacing(4)}px;
 `;
 
 // Header
 export const Header = styled.div`
-  /* TODO(pablo): Use spacing from the theme */
-  margin-bottom: 40px;
+  margin-bottom: ${theme.spacing(4) + theme.spacing(2)}px;
 `;
 
 export const Subtitle = styled.div`
@@ -36,7 +35,6 @@ export const Subtitle = styled.div`
 
 export const Tabs = styled(MuiTabs)`
   .MuiTabs-indicator {
-    /* TODO(pablo): Get from theme */
     background-color: ${lightBlue};
   }
 
@@ -58,12 +56,43 @@ export const Tab = styled(MuiTab)`
   }
 `;
 
-export const ChartContainer = styled.div`
-  /* TODO (pablo): Get from theme */
-  margin-top: 30px;
+// CHART CONTROLS
+export const ChartControlsContainer = styled.div`
+  margin: ${theme.spacing(1)}px 0;
 `;
 
-// Chart
+export const LegendContainer = styled(Box)`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+`;
+
+export const LegendItem = styled(Box)`
+  flex-shrink: 1;
+  flex-grow: 0;
+  margin-right: ${theme.spacing(1)}px;
+  &:last-child {
+    margin-right: 0;
+  }
+`;
+
+export const LegendItemMarker = styled.span`
+  padding: 0 ${theme.spacing(1)}px;
+`;
+
+export const LegendItemLabel = styled.span`
+  /* TODO(pablo): Get from theme */
+  font-family: Source Code Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 16px;
+`;
+
+export const ChartContainer = styled.div`
+  margin-top: ${theme.spacing(4)}px;
+`;
+
 export const MainSeriesLine = styled.g`
   line,
   path {
