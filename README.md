@@ -1,5 +1,5 @@
 # Covid Act Now
-
+ 
 This is the code repository for https://covidactnow.org/ - a tool providing public leaders and health officials data to help answer the question: "how can the US reopen safely?"
 
 ## How to use this tool
