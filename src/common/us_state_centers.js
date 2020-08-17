@@ -270,6 +270,7 @@ export default {
     StateCode: 'PR',
     Latitude: 18.2208,
     Longitude: -66.5901,
+    scale: 14000,
   },
   RI: {
     'Province/State': 'Rhode Island',
