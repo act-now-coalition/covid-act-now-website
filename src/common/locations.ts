@@ -2,6 +2,15 @@
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 import { each, sortBy, takeRight } from 'lodash';
 import { assert } from './utils';
+import countyAdjacency from './data/county_adjacency.json';
+
+interface AdjacencyData {
+  [fips: string]: {
+    adjacent_counties: string[];
+  };
+}
+
+const ADJACENT_COUNTIES: AdjacencyData = countyAdjacency.counties;
 
 // TODO(michael): Move more common code here.
 export interface State {
@@ -43,6 +52,9 @@ export function getLocationNames(): Location[] {
   });
 
   each(US_STATE_DATASET.state_county_map_dataset, (value, key) => {
+    if (value.county_dataset.length === 0) {
+      return null;
+    }
     locations.push(
       ...value.county_dataset.map(county => {
         return { ...county, state: county.state_code };
@@ -130,4 +142,9 @@ export function topCountiesByPopulation(limit: number): County[] {
 
 export function isStateFips(fips: string) {
   return fips.length === 2;
+}
+
+export function getAdjacentCounties(fips: string): string[] {
+  assert(fips in ADJACENT_COUNTIES, `${fips} not found in adjacency list.`);
+  return ADJACENT_COUNTIES[fips].adjacent_counties;
 }

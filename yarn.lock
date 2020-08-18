@@ -7541,6 +7541,11 @@ gensync@^1.0.0-beta.1:
   resolved "https://registry.yarnpkg.com/gensync/-/gensync-1.0.0-beta.1.tgz#58f4361ff987e5ff6e1e7a210827aa371eaac269"
   integrity sha512-r8EC6NO1sngH/zdD9fiRDLdcgnbayXah+mLgManTaIZJqEC1MZstmnox8KpnI2/fxQwrp5OpCOYWLp4rBl4Jcg==
 
+geo-albers-usa-territories@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/geo-albers-usa-territories/-/geo-albers-usa-territories-0.0.2.tgz#1cebee479ed5fb6cffb55ad8b096b2fbce438066"
+  integrity sha512-oWZKx2I7l/zngdwikpXUnvMb74e+YSLrZFTKdfsYZ3FF/s5gdl3JBUumzCkHhZoUnEbMQgiJaIRb3cj3fyDhog==
+
 get-assigned-identifiers@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/get-assigned-identifiers/-/get-assigned-identifiers-1.2.0.tgz#6dbf411de648cbaf8d9169ebb0d2d576191e2ff1"
