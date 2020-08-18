@@ -38,6 +38,7 @@ export default {
   OK: 'Oklahoma',
   OR: 'Oregon',
   PA: 'Pennsylvania',
+  PR: 'Puerto Rico',
   RI: 'Rhode Island',
   SC: 'South Carolina',
   SD: 'South Dakota',
