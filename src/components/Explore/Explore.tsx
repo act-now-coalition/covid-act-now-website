@@ -1,5 +1,7 @@
 import React, { useState, FunctionComponent } from 'react';
 import Typography from '@material-ui/core/Typography';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
 import { ParentSize } from '@vx/responsive';
 import { Projection } from 'common/models/Projection';
 import ExploreTabs from './ExploreTabs';
@@ -13,6 +15,8 @@ const Explore: React.FunctionComponent<{ projection: Projection }> = ({
   projection,
 }) => {
   const [currentMetric, setCurrentMetric] = useState(ExploreMetric.CASES);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const onChangeTab = (event: React.ChangeEvent<{}>, newMetric: number) => {
     setCurrentMetric(newMetric);
@@ -42,7 +46,12 @@ const Explore: React.FunctionComponent<{ projection: Projection }> = ({
       <Styles.ChartContainer>
         <ParentSize>
           {({ width }) => (
-            <ExploreChart series={series} width={width} height={400} />
+            <ExploreChart
+              series={series}
+              isMobile={isMobile}
+              width={width}
+              height={400}
+            />
           )}
         </ParentSize>
       </Styles.ChartContainer>

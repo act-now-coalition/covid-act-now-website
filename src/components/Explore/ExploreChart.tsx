@@ -1,7 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import moment from 'moment';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useTheme } from '@material-ui/core/styles';
 import { scaleTime, scaleLinear } from '@vx/scale';
 import { GridRows, GridColumns } from '@vx/grid';
 import { Group } from '@vx/group';
@@ -16,11 +14,14 @@ import * as Styles from './Explore.style';
 
 const getDate = (d: Column) => new Date(d.x);
 const getY = (d: Column) => d.y;
+const daysBetween = (dateFrom: Date, dateTo: Date) =>
+  moment(dateTo).diff(dateFrom, 'days');
 
 const ExploreChart: FunctionComponent<{
   width: number;
   height: number;
   series: Series[];
+  isMobile: boolean;
   marginTop?: number;
   marginBottom?: number;
   marginLeft?: number;
@@ -29,27 +30,25 @@ const ExploreChart: FunctionComponent<{
   width,
   height,
   series,
+  isMobile,
   marginTop = 10,
   marginBottom = 30,
   marginLeft = 50,
   marginRight = 10,
 }) => {
-  const minX = new Date('2020-03-01');
-  const maxX = new Date();
-  const numDays = moment(maxX).diff(minX, 'days');
+  const dateFrom = new Date('2020-03-01');
+  const dateTo = new Date();
+  const numDays = daysBetween(dateFrom, dateTo);
   const maxY = getMaxBy<number>(series, getY, 1);
 
   const innerWidth = width - marginLeft - marginRight;
   const innerHeight = height - marginTop - marginBottom;
 
   const timeScale = scaleTime({
-    domain: [minX, maxX],
+    domain: [dateFrom, dateTo],
     range: [0, innerWidth],
   });
-  const timeTicks = getTimeAxisTicks(minX, maxX);
-
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const timeTicks = getTimeAxisTicks(dateFrom, dateTo);
   const timeTickFormat = isMobile ? 'MMM' : 'MMMM D';
 
   const yScale = scaleLinear({
@@ -61,7 +60,11 @@ const ExploreChart: FunctionComponent<{
 
   return (
     <svg width={width} height={height}>
-      <Group key="main-chart" top={marginTop} left={marginLeft}>
+      <Group key="chart-container" top={marginTop} left={marginLeft}>
+        <Styles.GridLines>
+          <GridColumns<Date> scale={timeScale} height={innerHeight} />
+          <GridRows<number> scale={yScale} width={innerWidth} />
+        </Styles.GridLines>
         <RectClipGroup width={innerWidth} height={innerHeight}>
           {series.map((serie, i) => (
             <SeriesChart
@@ -75,16 +78,8 @@ const ExploreChart: FunctionComponent<{
             />
           ))}
         </RectClipGroup>
-      </Group>
-      <Group key="axes" top={marginTop} left={marginLeft}>
-        <Styles.GridLines>
-          <GridColumns<Date> scale={timeScale} height={innerHeight} />
-          <GridRows<number> scale={yScale} width={innerWidth} />
-        </Styles.GridLines>
         <ChartStyle.Axis>
           <AxisLeft scale={yScale} />
-        </ChartStyle.Axis>
-        <ChartStyle.Axis>
           <AxisBottom
             top={innerHeight}
             scale={timeScale}
