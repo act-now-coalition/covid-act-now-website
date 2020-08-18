@@ -235,6 +235,12 @@
       "population": 12801989
     },
     {
+      "state_code": "PR",
+      "state": "Puerto Rico",
+      "state_fips_code": "72",
+      "population": 3193694
+    },
+    {
       "state_code": "RI",
       "state": "Rhode Island",
       "state_fips_code": "44",
@@ -63613,6 +63619,875 @@
         }
       ]
     },
+    "PR": {
+      "dataset": [
+        {
+          "counties": [
+            "Adjuntas Municipio",
+            "Aguada Municipio",
+            "Aguadilla Municipio",
+            "Aguas Buenas Municipio",
+            "Aibonito Municipio",
+            "Añasco Municipio",
+            "Arecibo Municipio",
+            "Arroyo Municipio",
+            "Barceloneta Municipio",
+            "Barranquitas Municipio",
+            "Bayamón Municipio",
+            "Cabo Rojo Municipio",
+            "Caguas Municipio",
+            "Camuy Municipio",
+            "Canóvanas Municipio",
+            "Carolina Municipio",
+            "Cataño Municipio",
+            "Cayey Municipio",
+            "Ceiba Municipio",
+            "Ciales Municipio",
+            "Cidra Municipio",
+            "Coamo Municipio",
+            "Comerío Municipio",
+            "Corozal Municipio",
+            "Culebra Municipio",
+            "Dorado Municipio",
+            "Fajardo Municipio",
+            "Florida Municipio",
+            "Guánica Municipio",
+            "Guayama Municipio",
+            "Guayanilla Municipio",
+            "Guaynabo Municipio",
+            "Gurabo Municipio",
+            "Hatillo Municipio",
+            "Hormigueros Municipio",
+            "Humacao Municipio",
+            "Isabela Municipio",
+            "Jayuya Municipio",
+            "Juana Díaz Municipio",
+            "Juncos Municipio",
+            "Lajas Municipio",
+            "Lares Municipio",
+            "Las Marías Municipio",
+            "Las Piedras Municipio",
+            "Loíza Municipio",
+            "Luquillo Municipio",
+            "Manatí Municipio",
+            "Maricao Municipio",
+            "Maunabo Municipio",
+            "Mayagüez Municipio",
+            "Moca Municipio",
+            "Morovis Municipio",
+            "Naguabo Municipio",
+            "Naranjito Municipio",
+            "Orocovis Municipio",
+            "Patillas Municipio",
+            "Peñuelas Municipio",
+            "Ponce Municipio",
+            "Quebradillas Municipio",
+            "Rincón Municipio",
+            "Río Grande Municipio",
+            "Sabana Grande Municipio",
+            "Salinas Municipio",
+            "San Germán Municipio",
+            "San Juan Municipio",
+            "San Lorenzo Municipio",
+            "San Sebastián Municipio",
+            "Santa Isabel Municipio",
+            "Toa Alta Municipio",
+            "Toa Baja Municipio",
+            "Trujillo Alto Municipio",
+            "Utuado Municipio",
+            "Vega Alta Municipio",
+            "Vega Baja Municipio",
+            "Vieques Municipio",
+            "Villalba Municipio",
+            "Yabucoa Municipio",
+            "Yauco Municipio"
+          ],
+          "population": 3193694
+        }
+      ],
+      "county_dataset": [
+        {
+          "county": "Adjuntas Municipio",
+          "county_url_name": "adjuntas_municipio",
+          "county_fips_code": "001",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72001",
+          "cities": [""],
+          "population": 17363
+        },
+        {
+          "county": "Aguada Municipio",
+          "county_url_name": "aguada_municipio",
+          "county_fips_code": "003",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72003",
+          "cities": [""],
+          "population": 36694
+        },
+        {
+          "county": "Aguadilla Municipio",
+          "county_url_name": "aguadilla_municipio",
+          "county_fips_code": "005",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72005",
+          "cities": [""],
+          "population": 50265
+        },
+        {
+          "county": "Aguas Buenas Municipio",
+          "county_url_name": "aguas_buenas_municipio",
+          "county_fips_code": "007",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72007",
+          "cities": [""],
+          "population": 24814
+        },
+        {
+          "county": "Aibonito Municipio",
+          "county_url_name": "aibonito_municipio",
+          "county_fips_code": "009",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72009",
+          "cities": [""],
+          "population": 22108
+        },
+        {
+          "county": "A\u00f1asco Municipio",
+          "county_url_name": "anasco_municipio",
+          "county_fips_code": "011",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72011",
+          "cities": [""],
+          "population": 26161
+        },
+        {
+          "county": "Arecibo Municipio",
+          "county_url_name": "arecibo_municipio",
+          "county_fips_code": "013",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72013",
+          "cities": [""],
+          "population": 81966
+        },
+        {
+          "county": "Arroyo Municipio",
+          "county_url_name": "arroyo_municipio",
+          "county_fips_code": "015",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72015",
+          "cities": [""],
+          "population": 17238
+        },
+        {
+          "county": "Barceloneta Municipio",
+          "county_url_name": "barceloneta_municipio",
+          "county_fips_code": "017",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72017",
+          "cities": [""],
+          "population": 23727
+        },
+        {
+          "county": "Barranquitas Municipio",
+          "county_url_name": "barranquitas_municipio",
+          "county_fips_code": "019",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72019",
+          "cities": [""],
+          "population": 27725
+        },
+        {
+          "county": "Bayam\u00f3n Municipio",
+          "county_url_name": "bayamon_municipio",
+          "county_fips_code": "021",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72021",
+          "cities": [""],
+          "population": 169269
+        },
+        {
+          "county": "Cabo Rojo Municipio",
+          "county_url_name": "cabo_rojo_municipio",
+          "county_fips_code": "023",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72023",
+          "cities": [""],
+          "population": 47515
+        },
+        {
+          "county": "Caguas Municipio",
+          "county_url_name": "caguas_municipio",
+          "county_fips_code": "025",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72025",
+          "cities": [""],
+          "population": 124606
+        },
+        {
+          "county": "Camuy Municipio",
+          "county_url_name": "camuy_municipio",
+          "county_fips_code": "027",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72027",
+          "cities": [""],
+          "population": 30504
+        },
+        {
+          "county": "Can\u00f3vanas Municipio",
+          "county_url_name": "canovanas_municipio",
+          "county_fips_code": "029",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72029",
+          "cities": [""],
+          "population": 44674
+        },
+        {
+          "county": "Carolina Municipio",
+          "county_url_name": "carolina_municipio",
+          "county_fips_code": "031",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72031",
+          "cities": [""],
+          "population": 146984
+        },
+        {
+          "county": "Cata\u00f1o Municipio",
+          "county_url_name": "catano_municipio",
+          "county_fips_code": "033",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72033",
+          "cities": [""],
+          "population": 23121
+        },
+        {
+          "county": "Cayey Municipio",
+          "county_url_name": "cayey_municipio",
+          "county_fips_code": "035",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72035",
+          "cities": [""],
+          "population": 42409
+        },
+        {
+          "county": "Ceiba Municipio",
+          "county_url_name": "ceiba_municipio",
+          "county_fips_code": "037",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72037",
+          "cities": [""],
+          "population": 10904
+        },
+        {
+          "county": "Ciales Municipio",
+          "county_url_name": "ciales_municipio",
+          "county_fips_code": "039",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72039",
+          "cities": [""],
+          "population": 15808
+        },
+        {
+          "county": "Cidra Municipio",
+          "county_url_name": "cidra_municipio",
+          "county_fips_code": "041",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72041",
+          "cities": [""],
+          "population": 38307
+        },
+        {
+          "county": "Coamo Municipio",
+          "county_url_name": "coamo_municipio",
+          "county_fips_code": "043",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72043",
+          "cities": [""],
+          "population": 38336
+        },
+        {
+          "county": "Comer\u00edo Municipio",
+          "county_url_name": "comerio_municipio",
+          "county_fips_code": "045",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72045",
+          "cities": [""],
+          "population": 18648
+        },
+        {
+          "county": "Corozal Municipio",
+          "county_url_name": "corozal_municipio",
+          "county_fips_code": "047",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72047",
+          "cities": [""],
+          "population": 32293
+        },
+        {
+          "county": "Culebra Municipio",
+          "county_url_name": "culebra_municipio",
+          "county_fips_code": "049",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72049",
+          "cities": [""],
+          "population": 1714
+        },
+        {
+          "county": "Dorado Municipio",
+          "county_url_name": "dorado_municipio",
+          "county_fips_code": "051",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72051",
+          "cities": [""],
+          "population": 36141
+        },
+        {
+          "county": "Fajardo Municipio",
+          "county_url_name": "fajardo_municipio",
+          "county_fips_code": "053",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72053",
+          "cities": [""],
+          "population": 29454
+        },
+        {
+          "county": "Florida Municipio",
+          "county_url_name": "florida_municipio",
+          "county_fips_code": "054",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72054",
+          "cities": [""],
+          "population": 11317
+        },
+        {
+          "county": "Gu\u00e1nica Municipio",
+          "county_url_name": "guanica_municipio",
+          "county_fips_code": "055",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72055",
+          "cities": [""],
+          "population": 15383
+        },
+        {
+          "county": "Guayama Municipio",
+          "county_url_name": "guayama_municipio",
+          "county_fips_code": "057",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72057",
+          "cities": [""],
+          "population": 39465
+        },
+        {
+          "county": "Guayanilla Municipio",
+          "county_url_name": "guayanilla_municipio",
+          "county_fips_code": "059",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72059",
+          "cities": [""],
+          "population": 17623
+        },
+        {
+          "county": "Guaynabo Municipio",
+          "county_url_name": "guaynabo_municipio",
+          "county_fips_code": "061",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72061",
+          "cities": [""],
+          "population": 83728
+        },
+        {
+          "county": "Gurabo Municipio",
+          "county_url_name": "gurabo_municipio",
+          "county_fips_code": "063",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72063",
+          "cities": [""],
+          "population": 47093
+        },
+        {
+          "county": "Hatillo Municipio",
+          "county_url_name": "hatillo_municipio",
+          "county_fips_code": "065",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72065",
+          "cities": [""],
+          "population": 39218
+        },
+        {
+          "county": "Hormigueros Municipio",
+          "county_url_name": "hormigueros_municipio",
+          "county_fips_code": "067",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72067",
+          "cities": [""],
+          "population": 15518
+        },
+        {
+          "county": "Humacao Municipio",
+          "county_url_name": "humacao_municipio",
+          "county_fips_code": "069",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72069",
+          "cities": [""],
+          "population": 50653
+        },
+        {
+          "county": "Isabela Municipio",
+          "county_url_name": "isabela_municipio",
+          "county_fips_code": "071",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72071",
+          "cities": [""],
+          "population": 40423
+        },
+        {
+          "county": "Jayuya Municipio",
+          "county_url_name": "jayuya_municipio",
+          "county_fips_code": "073",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72073",
+          "cities": [""],
+          "population": 13891
+        },
+        {
+          "county": "Juana D\u00edaz Municipio",
+          "county_url_name": "juana_diaz_municipio",
+          "county_fips_code": "075",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72075",
+          "cities": [""],
+          "population": 44679
+        },
+        {
+          "county": "Juncos Municipio",
+          "county_url_name": "juncos_municipio",
+          "county_fips_code": "077",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72077",
+          "cities": [""],
+          "population": 38155
+        },
+        {
+          "county": "Lajas Municipio",
+          "county_url_name": "lajas_municipio",
+          "county_fips_code": "079",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72079",
+          "cities": [""],
+          "population": 22010
+        },
+        {
+          "county": "Lares Municipio",
+          "county_url_name": "lares_municipio",
+          "county_fips_code": "081",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72081",
+          "cities": [""],
+          "population": 24276
+        },
+        {
+          "county": "Las Mar\u00edas Municipio",
+          "county_url_name": "las_marias_municipio",
+          "county_fips_code": "083",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72083",
+          "cities": [""],
+          "population": 7927
+        },
+        {
+          "county": "Las Piedras Municipio",
+          "county_url_name": "las_piedras_municipio",
+          "county_fips_code": "085",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72085",
+          "cities": [""],
+          "population": 37007
+        },
+        {
+          "county": "Lo\u00edza Municipio",
+          "county_url_name": "loiza_municipio",
+          "county_fips_code": "087",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72087",
+          "cities": [""],
+          "population": 24553
+        },
+        {
+          "county": "Luquillo Municipio",
+          "county_url_name": "luquillo_municipio",
+          "county_fips_code": "089",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72089",
+          "cities": [""],
+          "population": 17665
+        },
+        {
+          "county": "Manat\u00ed Municipio",
+          "county_url_name": "manati_municipio",
+          "county_fips_code": "091",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72091",
+          "cities": [""],
+          "population": 37287
+        },
+        {
+          "county": "Maricao Municipio",
+          "county_url_name": "maricao_municipio",
+          "county_fips_code": "093",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72093",
+          "cities": [""],
+          "population": 5430
+        },
+        {
+          "county": "Maunabo Municipio",
+          "county_url_name": "maunabo_municipio",
+          "county_fips_code": "095",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72095",
+          "cities": [""],
+          "population": 10321
+        },
+        {
+          "county": "Mayag\u00fcez Municipio",
+          "county_url_name": "mayaguez_municipio",
+          "county_fips_code": "097",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72097",
+          "cities": [""],
+          "population": 71530
+        },
+        {
+          "county": "Moca Municipio",
+          "county_url_name": "moca_municipio",
+          "county_fips_code": "099",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72099",
+          "cities": [""],
+          "population": 34891
+        },
+        {
+          "county": "Morovis Municipio",
+          "county_url_name": "morovis_municipio",
+          "county_fips_code": "101",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72101",
+          "cities": [""],
+          "population": 30335
+        },
+        {
+          "county": "Naguabo Municipio",
+          "county_url_name": "naguabo_municipio",
+          "county_fips_code": "103",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72103",
+          "cities": [""],
+          "population": 25761
+        },
+        {
+          "county": "Naranjito Municipio",
+          "county_url_name": "naranjito_municipio",
+          "county_fips_code": "105",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72105",
+          "cities": [""],
+          "population": 27349
+        },
+        {
+          "county": "Orocovis Municipio",
+          "county_url_name": "orocovis_municipio",
+          "county_fips_code": "107",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72107",
+          "cities": [""],
+          "population": 20220
+        },
+        {
+          "county": "Patillas Municipio",
+          "county_url_name": "patillas_municipio",
+          "county_fips_code": "109",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72109",
+          "cities": [""],
+          "population": 16211
+        },
+        {
+          "county": "Pe\u00f1uelas Municipio",
+          "county_url_name": "penuelas_municipio",
+          "county_fips_code": "111",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72111",
+          "cities": [""],
+          "population": 19249
+        },
+        {
+          "county": "Ponce Municipio",
+          "county_url_name": "ponce_municipio",
+          "county_fips_code": "113",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72113",
+          "cities": [""],
+          "population": 131881
+        },
+        {
+          "county": "Quebradillas Municipio",
+          "county_url_name": "quebradillas_municipio",
+          "county_fips_code": "115",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72115",
+          "cities": [""],
+          "population": 22918
+        },
+        {
+          "county": "Rinc\u00f3n Municipio",
+          "county_url_name": "rincon_municipio",
+          "county_fips_code": "117",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72117",
+          "cities": [""],
+          "population": 13656
+        },
+        {
+          "county": "R\u00edo Grande Municipio",
+          "county_url_name": "rio_grande_municipio",
+          "county_fips_code": "119",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72119",
+          "cities": [""],
+          "population": 48025
+        },
+        {
+          "county": "Sabana Grande Municipio",
+          "county_url_name": "sabana_grande_municipio",
+          "county_fips_code": "121",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72121",
+          "cities": [""],
+          "population": 21712
+        },
+        {
+          "county": "Salinas Municipio",
+          "county_url_name": "salinas_municipio",
+          "county_fips_code": "123",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72123",
+          "cities": [""],
+          "population": 27128
+        },
+        {
+          "county": "San Germ\u00e1n Municipio",
+          "county_url_name": "san_german_municipio",
+          "county_fips_code": "125",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72125",
+          "cities": [""],
+          "population": 30227
+        },
+        {
+          "county": "San Juan Municipio",
+          "county_url_name": "san_juan_municipio",
+          "county_fips_code": "127",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72127",
+          "cities": [""],
+          "population": 318441
+        },
+        {
+          "county": "San Lorenzo Municipio",
+          "county_url_name": "san_lorenzo_municipio",
+          "county_fips_code": "129",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72129",
+          "cities": [""],
+          "population": 35989
+        },
+        {
+          "county": "San Sebasti\u00e1n Municipio",
+          "county_url_name": "san_sebastian_municipio",
+          "county_fips_code": "131",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72131",
+          "cities": [""],
+          "population": 35528
+        },
+        {
+          "county": "Santa Isabel Municipio",
+          "county_url_name": "santa_isabel_municipio",
+          "county_fips_code": "133",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72133",
+          "cities": [""],
+          "population": 21209
+        },
+        {
+          "county": "Toa Alta Municipio",
+          "county_url_name": "toa_alta_municipio",
+          "county_fips_code": "135",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72135",
+          "cities": [""],
+          "population": 72025
+        },
+        {
+          "county": "Toa Baja Municipio",
+          "county_url_name": "toa_baja_municipio",
+          "county_fips_code": "137",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72137",
+          "cities": [""],
+          "population": 74271
+        },
+        {
+          "county": "Trujillo Alto Municipio",
+          "county_url_name": "trujillo_alto_municipio",
+          "county_fips_code": "139",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72139",
+          "cities": [""],
+          "population": 63674
+        },
+        {
+          "county": "Utuado Municipio",
+          "county_url_name": "utuado_municipio",
+          "county_fips_code": "141",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72141",
+          "cities": [""],
+          "population": 27395
+        },
+        {
+          "county": "Vega Alta Municipio",
+          "county_url_name": "vega_alta_municipio",
+          "county_fips_code": "143",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72143",
+          "cities": [""],
+          "population": 36061
+        },
+        {
+          "county": "Vega Baja Municipio",
+          "county_url_name": "vega_baja_municipio",
+          "county_fips_code": "145",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72145",
+          "cities": [""],
+          "population": 50023
+        },
+        {
+          "county": "Vieques Municipio",
+          "county_url_name": "vieques_municipio",
+          "county_fips_code": "147",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72147",
+          "cities": [""],
+          "population": 8386
+        },
+        {
+          "county": "Villalba Municipio",
+          "county_url_name": "villalba_municipio",
+          "county_fips_code": "149",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72149",
+          "cities": [""],
+          "population": 21372
+        },
+        {
+          "county": "Yabucoa Municipio",
+          "county_url_name": "yabucoa_municipio",
+          "county_fips_code": "151",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72151",
+          "cities": [""],
+          "population": 32282
+        },
+        {
+          "county": "Yauco Municipio",
+          "county_url_name": "yauco_municipio",
+          "county_fips_code": "153",
+          "state_fips_code": "72",
+          "state_code": "PR",
+          "full_fips_code": "72153",
+          "cities": [""],
+          "population": 33575
+        }
+      ]
+    },
     "RI": {
       "dataset": [
         {
@@ -75829,7 +76704,7 @@
           "state_fips_code": "51",
           "state_code": "VA",
           "full_fips_code": "51095",
-          "cities": [],
+          "cities": [""],
           "population": 76523
         }
       ]
