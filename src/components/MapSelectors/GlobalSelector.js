@@ -1,11 +1,12 @@
 import React from 'react';
-import { chain, each, map, some } from 'lodash';
+import { chain, each, map, some, filter } from 'lodash';
 import { useParams } from 'react-router-dom';
 import Downshift from 'downshift';
 import SearchIcon from '@material-ui/icons/Search';
 import ShortNumber from 'common/utils/ShortNumber';
 import StateCircleSvg from 'components/StateSvg/StateCircleSvg';
 import US_STATE_DATASET from './datasets/us_states_dataset_01_02_2020';
+import COUNTY_ZIPCODE_MAP from './datasets/county-zipcode';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import { stateColor, countyColor } from 'common/colors';
@@ -17,6 +18,7 @@ import {
   StyledInput,
   StyledInputIcon,
   StyledInputWrapper,
+  StyledZipcodeInCounty,
 } from './GlobalSelector.style';
 
 import {
@@ -69,7 +71,12 @@ const CountyItem = ({ dataset }) => {
       </div>
       <div>
         <div>
-          {dataset.county}, {dataset.state_code}
+          {dataset.county}, {dataset.state_code}{' '}
+          {dataset.matchedZipCodes !== undefined ? (
+            <StyledZipcodeInCounty>
+              contains zipcode {dataset.matchedZipCodes[0]}
+            </StyledZipcodeInCounty>
+          ) : null}
         </div>
         <StyledResultsMenuSubText>
           <span>
@@ -90,12 +97,17 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
   const countyDataset = [];
 
   each(US_STATE_DATASET.state_county_map_dataset, (value, key) => {
-    const counties = value.county_dataset.filter(county => {
-      // Remove combined county names, and DC county, which we treat as a state.
-      return (
-        !county.county.includes(' / ') && county.full_fips_code !== '11001'
-      );
-    });
+    const counties = value.county_dataset
+      .filter(county => {
+        // Remove combined county names, and DC county, which we treat as a state.
+        return (
+          !county.county.includes(' / ') && county.full_fips_code !== '11001'
+        );
+      })
+      .map(county => {
+        county.zip_codes = COUNTY_ZIPCODE_MAP[county.full_fips_code];
+        return county;
+      });
     countyDataset.push(...counties);
   });
 
@@ -120,7 +132,14 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
       option.county.toLowerCase().includes(inputValue.toLowerCase()) ||
       some(lowerCasedCities, lowerCasedCity =>
         lowerCasedCity.includes(inputValue.toLowerCase()),
-      )
+      ) ||
+      matchedZipCodesInCounty(option, inputValue).length > 0
+    );
+  };
+
+  const matchedZipCodesInCounty = (option, inputValue) => {
+    return filter(option.zip_codes, zip_code =>
+      zip_code.slice(0, inputValue.length).includes(inputValue),
     );
   };
 
@@ -174,6 +193,7 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
             id: item.full_fips_code,
             value: `${item.county}, ${item.state_code}`,
             type: 'COUNTY',
+            matchedZipCodes: matchedZipCodesInCounty(item, inputValue),
           }))
           .uniqBy('id')
           .sortBy('population')
