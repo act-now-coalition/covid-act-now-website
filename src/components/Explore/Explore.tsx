@@ -45,14 +45,16 @@ const Explore: React.FunctionComponent<{ projection: Projection }> = ({
       </Styles.ChartControlsContainer>
       <Styles.ChartContainer>
         <ParentSize>
-          {({ width }) => (
-            <ExploreChart
-              series={series}
-              isMobile={isMobile}
-              width={width}
-              height={400}
-            />
-          )}
+          {({ width }) =>
+            width < 10 ? null : (
+              <ExploreChart
+                series={series}
+                isMobile={isMobile}
+                width={width}
+                height={400}
+              />
+            )
+          }
         </ParentSize>
       </Styles.ChartContainer>
     </Styles.Container>

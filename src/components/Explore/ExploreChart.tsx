@@ -36,6 +36,10 @@ const ExploreChart: FunctionComponent<{
   marginLeft = 50,
   marginRight = 10,
 }) => {
+  if (width < 10) {
+    return null;
+  }
+
   const dateFrom = new Date('2020-03-01');
   const dateTo = new Date();
   const numDays = daysBetween(dateFrom, dateTo);
