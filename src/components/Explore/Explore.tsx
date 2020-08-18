@@ -16,7 +16,7 @@ const Explore: React.FunctionComponent<{ projection: Projection }> = ({
 }) => {
   const [currentMetric, setCurrentMetric] = useState(ExploreMetric.CASES);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const onChangeTab = (event: React.ChangeEvent<{}>, newMetric: number) => {
     setCurrentMetric(newMetric);
