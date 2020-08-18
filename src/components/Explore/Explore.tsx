@@ -1,12 +1,13 @@
 import React, { useState, FunctionComponent } from 'react';
 import Typography from '@material-ui/core/Typography';
+import { ParentSize } from '@vx/responsive';
 import { Projection } from 'common/models/Projection';
 import ExploreTabs from './ExploreTabs';
 import ExploreChart from './ExploreChart';
-import * as Styles from './Explore.style';
-import { ParentSize } from '@vx/responsive';
+import Legend from './Legend';
 import { ExploreMetric } from './interfaces';
 import { getMetricLabels, getSeries } from './utils';
+import * as Styles from './Explore.style';
 
 const Explore: React.FunctionComponent<{ projection: Projection }> = ({
   projection,
@@ -35,6 +36,9 @@ const Explore: React.FunctionComponent<{ projection: Projection }> = ({
         labels={metricLabels}
         onChangeTab={onChangeTab}
       />
+      <Styles.ChartControlsContainer>
+        <Legend series={series} />
+      </Styles.ChartControlsContainer>
       <Styles.ChartContainer>
         <ParentSize>
           {({ width }) => (

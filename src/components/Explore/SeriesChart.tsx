@@ -30,4 +30,34 @@ const SeriesChart: FunctionComponent<{
   }
 };
 
+export const LegendMarker: React.FC<{ type: ChartType }> = ({ type }) => {
+  // TODO(pablo): Transform into optional parameters
+  const width = 12;
+  const height = 12;
+  const barWidth = 4;
+  switch (type) {
+    case ChartType.LINE:
+      return (
+        <svg width={width} height={height}>
+          <Style.MainSeriesLine>
+            <line x1={0} y1={height / 2} x2={width} y2={height / 2} />
+          </Style.MainSeriesLine>
+        </svg>
+      );
+    case ChartType.BAR:
+      return (
+        <svg width={width} height={height}>
+          <Style.BarsSeries>
+            <rect
+              x={(width - barWidth) / 2}
+              y={0}
+              width={barWidth}
+              height={height}
+            />
+          </Style.BarsSeries>
+        </svg>
+      );
+  }
+};
+
 export default SeriesChart;

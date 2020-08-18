@@ -8,6 +8,7 @@ export enum ChartType {
 export interface Series {
   data: Column[];
   type: ChartType;
+  label: string;
 }
 
 export enum ExploreMetric {

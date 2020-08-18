@@ -54,14 +54,14 @@ export const exploreMetricData: {
     title: 'Cases',
     series: [
       {
-        label: 'smoothed',
-        datasetId: 'smoothedDailyCases',
-        type: ChartType.LINE,
-      },
-      {
-        label: 'raw',
+        label: 'Cases',
         datasetId: 'rawDailyCases',
         type: ChartType.BAR,
+      },
+      {
+        label: '7 Day Average',
+        datasetId: 'smoothedDailyCases',
+        type: ChartType.LINE,
       },
     ],
   },
@@ -69,14 +69,14 @@ export const exploreMetricData: {
     title: 'Deaths',
     series: [
       {
-        label: 'smoothed',
-        datasetId: 'smoothedDailyDeaths',
-        type: ChartType.LINE,
-      },
-      {
-        label: 'raw',
+        label: 'Deaths',
         datasetId: 'rawDailyDeaths',
         type: ChartType.BAR,
+      },
+      {
+        label: '7 Day Average',
+        datasetId: 'smoothedDailyDeaths',
+        type: ChartType.LINE,
       },
     ],
   },
@@ -84,14 +84,14 @@ export const exploreMetricData: {
     title: 'Hospitalizations',
     series: [
       {
-        label: 'smoothed',
-        datasetId: 'smoothedHospitalizations',
-        type: ChartType.LINE,
-      },
-      {
-        label: 'raw',
+        label: 'Hospitalizations',
         datasetId: 'rawHospitalizations',
         type: ChartType.BAR,
+      },
+      {
+        label: '7 Day Average',
+        datasetId: 'smoothedHospitalizations',
+        type: ChartType.LINE,
       },
     ],
   },
@@ -99,24 +99,28 @@ export const exploreMetricData: {
     title: 'ICU Hospitalizations',
     series: [
       {
-        label: 'smoothed',
-        datasetId: 'smoothedICUHospitalizations',
-        type: ChartType.LINE,
-      },
-      {
-        label: 'raw',
+        label: 'ICU Hospitalizations',
         datasetId: 'rawICUHospitalizations',
         type: ChartType.BAR,
+      },
+      {
+        label: '7 Day Average',
+        datasetId: 'smoothedICUHospitalizations',
+        type: ChartType.LINE,
       },
     ],
   },
 };
 
-export function getSeries(metric: ExploreMetric, projection: Projection) {
+export function getSeries(
+  metric: ExploreMetric,
+  projection: Projection,
+): Series[] {
   const metricDefinition = exploreMetricData[metric];
   return metricDefinition.series.map(item => ({
     data: projection.getDataset(item.datasetId),
     type: item.type,
+    label: item.label,
   }));
 }
 
