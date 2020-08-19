@@ -93,3 +93,9 @@ export const StyledInputIcon = styled.div`
     margin: 0 0 0 8px;
   }
 `;
+
+export const StyledZipcodeInCounty = styled.span`
+  color: rgba(0, 0, 0, 0.7);
+  font-style: italic;
+  display: inline-block;
+`;
