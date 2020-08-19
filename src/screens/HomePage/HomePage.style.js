@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Typography, Box } from '@material-ui/core';
 import palette from 'assets/theme/palette';
 import { COLOR_MAP } from 'common/colors';
+import theme from 'assets/theme';
 
 export const SearchBarThermometerWrapper = styled(Box)`
   display: flex;
@@ -48,4 +49,10 @@ export const FeaturedHeader = styled(Typography)`
 
 export const SectionWrapper = styled(Box)`
   margin-bottom: 2.5rem;
+`;
+
+export const BannerContainer = styled.div`
+  max-width: 1000px;
+  margin: 0 auto;
+  margin-top: ${theme.spacing(4)}px;
 `;
