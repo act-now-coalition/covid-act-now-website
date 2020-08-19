@@ -3,7 +3,6 @@ import Banner from './Banner';
 import { SurveyButton } from './Banner.style';
 
 const renderButton = () => (
-  // TODO(pablo): Update with the real link
   <SurveyButton
     href="https://can386399.typeform.com/to/fCLv9bzl#source=org"
     variant="contained"
