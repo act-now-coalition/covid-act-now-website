@@ -58,6 +58,8 @@ const CountyItem = ({ dataset }) => {
     stateColor(dataset.state_code),
   );
 
+  const hasZipcodeMatch =
+    dataset.matchedZipCodes !== undefined && dataset.matchedZipCodes.length > 0;
   return (
     <StyledResultsMenuOption hasData={dataset.hasData}>
       <div style={{ marginLeft: '0', marginRight: '.75rem' }}>
@@ -72,7 +74,7 @@ const CountyItem = ({ dataset }) => {
       <div>
         <div>
           {dataset.county}, {dataset.state_code}{' '}
-          {dataset.matchedZipCodes !== undefined ? (
+          {hasZipcodeMatch ? (
             <StyledZipcodeInCounty>
               contains zipcode {dataset.matchedZipCodes[0]}
             </StyledZipcodeInCounty>
