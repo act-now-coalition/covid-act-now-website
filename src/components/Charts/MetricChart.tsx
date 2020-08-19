@@ -20,10 +20,10 @@ export default function MetricChart({
   projections: Projections;
   height?: number;
 }) {
-  const projection = projections.primary;
-  if (projection === null || !projections.hasMetric(metric)) {
+  if (!projections.hasMetric(metric)) {
     return null;
   }
+  const projection = projections.primary;
   return (
     <>
       {metric === Metric.CASE_GROWTH_RATE && (
