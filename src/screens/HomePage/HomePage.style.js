@@ -3,6 +3,7 @@ import { Typography, Box } from '@material-ui/core';
 import palette from 'assets/theme/palette';
 import { COLOR_MAP } from 'common/colors';
 import theme from 'assets/theme';
+import { mobileBreakpoint } from 'assets/theme/sizes';
 
 export const SearchBarThermometerWrapper = styled(Box)`
   display: flex;
@@ -52,7 +53,10 @@ export const SectionWrapper = styled(Box)`
 `;
 
 export const BannerContainer = styled.div`
-  max-width: 1000px;
+  max-width: 800px;
   margin: 0 auto;
-  margin-top: ${theme.spacing(4)}px;
+
+  @media (min-width: ${mobileBreakpoint}) {
+    margin-top: ${theme.spacing(4)}px;
+  }
 `;
