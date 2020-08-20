@@ -142,6 +142,12 @@ export const DateMarker = styled.div`
   line-height: 140%;
 `;
 
+export const DotMarker = styled.circle`
+  fill: black;
+  stroke: white;
+  stroke-width: 4px;
+`;
+
 export const TooltipSubtitle = styled.div`
   text-transform: uppercase;
 

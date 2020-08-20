@@ -127,3 +127,10 @@ export function getSeries(
 export function getMetricLabels() {
   return sortedExploreMetrics.map(metric => exploreMetricData[metric].title);
 }
+
+export function findPointByDate(data: Column[], date: Date) {
+  const idx = data.findIndex(
+    p => new Date(p.x).toDateString() === date.toDateString(),
+  );
+  return data[idx];
+}
