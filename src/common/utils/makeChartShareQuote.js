@@ -1,5 +1,5 @@
 import { STATES } from 'common';
-import { formatUtcDate, formatDecimal, formatPercent } from 'common/utils';
+import { fail, formatDecimal, formatPercent } from 'common/utils';
 
 //TODO(chelsi): move this copy into individual metric files. remove need for hardcoded identifying numers
 export default function makeChartShareQuote(
@@ -32,12 +32,7 @@ export default function makeChartShareQuote(
       0,
     )} of COVID cases, according to @CovidActNow. See the chart: `;
   } else if (chartIdentifier === 4) {
-    if (projections && projections.baseline.dateOverwhelmed) {
-      return `If all restrictions were completely lifted today, ${displayName}'s hospitals would overload on ${formatUtcDate(
-        projections.baseline.dateOverwhelmed,
-      )}, according to @CovidActNow. See the chart: `;
-    }
-    return `Assuming current trends and interventions continue, ${displayName}'s hospitals are unlikely to become overloaded in the next 3 months, according to @CovidActNow. See the chart: `;
+    fail('Future projections chart was deprecated.');
   } else if (chartIdentifier === 5) {
     return `${displayName} is seeing ${formatDecimal(
       stats[5],

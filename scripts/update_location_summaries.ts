@@ -9,10 +9,6 @@ import { currentSnapshot } from '../src/common/utils/snapshots';
 import { LocationSummary } from '../src/common/location_summaries';
 
 async function main() {
-  // TODO(michael): This fetches all interventions for all regions, even though
-  // we only really need 1 intervention (and it doesn't matter which) to
-  // calculate the summary. But to fix this, we need to rework how
-  // Projections works (so it doesn't require all intervention data, etc.).
   const allStatesProjections = await fetchAllStateProjections();
   const allCountiesProjections = await fetchAllCountyProjections();
 

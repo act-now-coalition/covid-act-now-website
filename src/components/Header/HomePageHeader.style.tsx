@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
   text-align: center;
 
   @media (min-width: 600px) {
-    padding: 4rem 2rem 2rem;
+    padding: 2rem 2rem 2rem;
   }
 `;
 
@@ -24,7 +24,7 @@ export const HeaderTitle = styled(Typography)<{ component?: string }>`
   line-height: 2.3rem;
   color: black;
   max-width: 300px;
-  margin: 1.2rem auto 1.5rem;
+  margin: 0 auto 1.5rem;
 
   @media (min-width: 600px) {
     margin: 1rem auto 1rem;
