@@ -3,7 +3,8 @@
  *  1. counties adjacency list from the Census website
  *  2. county/fips/MSA list from the Dept. of Labor
  *
- * It generates a JSON file with the following structure:
+ * It generates a JSON file with the following structure (no msa_code property
+ * for fips that aren't part of an MSA):
  *
  *    {
  *      "counties": {
@@ -64,19 +65,17 @@ interface CountyItem {
 
 function parseFipsToMsa(): any {
   const msaFilePath = path.join(__dirname, 'fips_msa.txt');
-  const text = fs.readFileSync(msaFilePath, 'utf-8');
-  const countyGroups = readDelimitedFile(text);
+  const countyGroups = readDelimitedFile(msaFilePath);
   const fipsToMsaMap = _.fromPairs(countyGroups.map(getFipsMsa));
   return fipsToMsaMap;
 }
 
-function getFipsMsa(countyArr: any): any {
-  return [countyArr[0], countyArr[1]];
+function getFipsMsa(row: string[]): [string, string] {
+  return [row[0], row[1]];
 }
 
 function parseAdjacencyFile(filePath: string, delimiter = TAB): CountyItem[] {
-  const text = fs.readFileSync(filePath, 'utf-8');
-  const data = readDelimitedFile(text);
+  const data = readDelimitedFile(filePath);
   return data.map(row => ({
     countyName: row[0],
     countyFips: row[1],
@@ -85,7 +84,8 @@ function parseAdjacencyFile(filePath: string, delimiter = TAB): CountyItem[] {
   }));
 }
 
-function readDelimitedFile(text: string, delimiter = TAB) {
+function readDelimitedFile(filePath: string, delimiter = TAB) {
+  const text = fs.readFileSync(filePath, 'utf-8');
   return text.split(NEWLINE).map(line => line.split(delimiter));
 }
 
@@ -114,7 +114,10 @@ function parseCountyData(data: CountyItem[]): AdjacencyMap {
 
   fipsInMsaList.forEach(fips => {
     if (adjacencyMap[fips]) {
-      adjacencyMap[fips].msa_code = fipsToMsa[fips];
+      const hasMsaCode = fipsToMsa[fips] !== '0';
+      if (hasMsaCode) {
+        adjacencyMap[fips].msa_code = fipsToMsa[fips];
+      }
     }
   });
 
@@ -125,8 +128,11 @@ function main() {
   const filePath = path.join(__dirname, 'county_adjacency.txt');
   const data = parseAdjacencyFile(filePath);
   const adjacencyMap = parseCountyData(data);
-
-  const outputPath = path.join(__dirname, 'county_adjacency_msa.json');
+  const outputPath = path.join(
+    __dirname,
+    '../../src/common/data',
+    'county_adjacency_msa.json',
+  );
   const outputData = JSON.stringify({ counties: adjacencyMap }, null, 2);
   fs.writeFileSync(outputPath, outputData);
 }
