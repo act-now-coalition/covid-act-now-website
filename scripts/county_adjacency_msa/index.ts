@@ -62,33 +62,31 @@ interface CountyItem {
   adjacentCountyFips: string;
 }
 
-const REGEX_FIPS_MSA = /(\d{5})\t(\d{1,4}).*/;
-
 function parseFipsToMsa(): any {
   const msaFilePath = path.join(__dirname, 'fips_msa.txt');
   const text = fs.readFileSync(msaFilePath, 'utf-8');
-  const countyGroups = text.split(NEWLINE);
+  const countyGroups = readDelimitedFile(text);
   const fipsToMsaMap = _.fromPairs(countyGroups.map(getFipsMsa));
   return fipsToMsaMap;
 }
 
-function getFipsMsa(line: string): any {
-  const match = line.match(REGEX_FIPS_MSA);
-  if (!match) {
-    throw Error('no fips-msa match found');
-  }
-  return [match[1], match[2]];
+function getFipsMsa(countyArr: any): any {
+  return [countyArr[0], countyArr[1]];
 }
 
 function parseAdjacencyFile(filePath: string, delimiter = TAB): CountyItem[] {
   const text = fs.readFileSync(filePath, 'utf-8');
-  const data = text.split(NEWLINE).map(line => line.split(delimiter));
+  const data = readDelimitedFile(text);
   return data.map(row => ({
     countyName: row[0],
     countyFips: row[1],
     adjacentCountyName: row[2],
     adjacentCountyFips: row[3],
   }));
+}
+
+function readDelimitedFile(text: string, delimiter = TAB) {
+  return text.split(NEWLINE).map(line => line.split(delimiter));
 }
 
 function parseCountyData(data: CountyItem[]): AdjacencyMap {
@@ -128,7 +126,7 @@ function main() {
   const data = parseAdjacencyFile(filePath);
   const adjacencyMap = parseCountyData(data);
 
-  const outputPath = path.join(__dirname, 'county_adjacency.json');
+  const outputPath = path.join(__dirname, 'county_adjacency_msa.json');
   const outputData = JSON.stringify({ counties: adjacencyMap }, null, 2);
   fs.writeFileSync(outputPath, outputData);
 }
