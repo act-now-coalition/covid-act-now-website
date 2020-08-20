@@ -61,6 +61,11 @@ export const Body = styled.div`
   color: ${props => palette(props).tooltip.text};
 `;
 
+export const BodySmall = styled(Body)`
+  font-size: 11px;
+  color: ${props => palette(props).tooltip.textMuted};
+`;
+
 export const BodyMuted = styled(Body)`
   font-weight: 500;
   font-size: 11px;
