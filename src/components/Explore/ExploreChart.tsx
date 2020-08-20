@@ -135,6 +135,11 @@ const ExploreChart: React.FC<{
   const getXPosition = (d: Column) => dateScale(getDate(d)) || 0;
   const getYPosition = (d: Column) => yScale(getY(d));
 
+  // NOTE: This assumes that the series that is linked
+  // to the tooltip is the last one (which should, to make sure
+  // that is rendered on top).
+  const tooltipSeries = series[series.length - 1];
+
   return (
     <Styles.PositionRelative>
       <svg width={width} height={height}>
@@ -190,7 +195,7 @@ const ExploreChart: React.FC<{
           x={p => getXPosition(p) + marginLeft}
           y={p => getYPosition(p) + marginTop}
           date={tooltipData.date}
-          data={series[1].data}
+          data={tooltipSeries.data}
         />
       )}
       {tooltipOpen && tooltipData && (
