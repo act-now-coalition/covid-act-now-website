@@ -16,9 +16,9 @@ const renderButton = () => (
   </ExternalLink>
 );
 
-const MESSAGE = `We’re a team of volunteers working to provide you the most
- useful COVID information. Help us improve by taking a survey!
-`;
+const MESSAGE = `We’re a team of volunteers working to provide you with 
+ the most useful COVID information. Please help us improve by taking 
+ this short survey!`;
 
 const FeedbackSurveyBanner: React.FC = () => (
   <Banner message={MESSAGE} renderButton={renderButton} />
