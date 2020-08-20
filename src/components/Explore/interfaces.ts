@@ -9,6 +9,7 @@ export interface Series {
   data: Column[];
   type: ChartType;
   label: string;
+  tooltipLabel: string;
 }
 
 export enum ExploreMetric {

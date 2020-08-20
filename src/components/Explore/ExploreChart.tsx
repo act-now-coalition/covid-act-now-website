@@ -33,19 +33,25 @@ const DateMarker: React.FC<{ left: number; date: Date }> = ({ left, date }) => (
 
 const ExploreTooltip: React.FC<{
   date: Date;
-  data: Column[];
+  seriePosition: Series;
+  serieContent: Series;
   x: (d: Column) => number;
   y: (d: Column) => number;
-}> = ({ x, y, date, data }) => {
-  const point = findPointByDate(data, date);
+}> = ({ seriePosition, serieContent, x, y, date }) => {
+  const pointPosition = findPointByDate(seriePosition.data, date);
+  const pointContent = findPointByDate(serieContent.data, date);
   return (
     <Tooltip
-      top={y(point)}
-      left={x(point)}
+      top={y(pointPosition)}
+      left={x(pointPosition)}
       title={moment(date).format('MMM D, YYYY')}
     >
-      <Styles.TooltipSubtitle>confirmed cases</Styles.TooltipSubtitle>
-      <Styles.TooltipMetric>{formatInteger(point.y)}</Styles.TooltipMetric>
+      <Styles.TooltipSubtitle>
+        {serieContent.tooltipLabel}
+      </Styles.TooltipSubtitle>
+      <Styles.TooltipMetric>
+        {formatInteger(pointContent.y)}
+      </Styles.TooltipMetric>
       <Styles.TooltipLocation>in NY</Styles.TooltipLocation>
     </Tooltip>
   );
@@ -135,11 +141,6 @@ const ExploreChart: React.FC<{
   const getXPosition = (d: Column) => dateScale(getDate(d)) || 0;
   const getYPosition = (d: Column) => yScale(getY(d));
 
-  // NOTE: This assumes that the series that is linked
-  // to the tooltip is the last one (which should, to make sure
-  // that is rendered on top).
-  const tooltipSeries = series[series.length - 1];
-
   return (
     <Styles.PositionRelative>
       <svg width={width} height={height}>
@@ -195,7 +196,8 @@ const ExploreChart: React.FC<{
           x={p => getXPosition(p) + marginLeft}
           y={p => getYPosition(p) + marginTop}
           date={tooltipData.date}
-          data={tooltipSeries.data}
+          seriePosition={series[1]}
+          serieContent={series[0]}
         />
       )}
       {tooltipOpen && tooltipData && (
