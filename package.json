@@ -74,8 +74,7 @@
     "generate-daily-alerts": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/generate_daily_alerts.ts",
     "send-emails": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/send_emails.ts",
     "send-test-email": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/send-test-email.ts",
-    "report-alert-emails": "ts-node-script -r tsconfig-paths/register scripts/alert_emails_report/generate-report.ts",
-    "generate-fips-to-msa": "ts-node-script -r tsconfig-paths/register scripts/fips_to_msa/generate_fips_to_msa.ts"
+    "report-alert-emails": "ts-node-script -r tsconfig-paths/register scripts/alert_emails_report/generate-report.ts"
   },
   "lint-staged": {
     "{src,scripts}/**/*.{css,scss,js,ts,tsx}": [

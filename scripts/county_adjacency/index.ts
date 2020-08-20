@@ -1,6 +1,9 @@
 /**
- * This is a throwaway script to parse the counties adjacency list from the
- * Census website. It generates a JSON file with the following structure:
+ * This is a throwaway script to parse two lists:
+ *  1. counties adjacency list from the Census website
+ *  2. county/fips/MSA list from the Dept. of Labor
+ *
+ * It generates a JSON file with the following structure:
  *
  *    {
  *      "counties": {
@@ -9,13 +12,14 @@
  *            "10003",
  *            "10005",
  *            ...
- *          ]
+ *          ],
+ *          "msa_code": "2190"
  *        },
  *        ...
  *      }
  *    }
  *
- * The original file has a simple and consistent structure that allows us
+ * The original counties adjacency file has a simple and consistent structure that allows us
  * to parse it to generate the adjacency list. Here are some lines:
  *
  *     "Autauga County, AL"	01001	"Autauga County, AL"	01001
@@ -31,6 +35,9 @@
  *
  * The original `county_adjacency.txt` file can be downloaded from
  * https://www.census.gov/geographies/reference-files/2010/geo/county-adjacency.html
+ *
+ * The original 'fips_msa.txt' file can be found at:
+ * https://www.dol.gov/owcp/regs/feeschedule/fee/Effective_May_16_2004_County_and_State_FIPS.htm
  */
 import fs from 'fs-extra';
 import path from 'path';
@@ -41,6 +48,7 @@ const TAB = '\t';
 
 interface AdjacencyList {
   adjacent_counties: string[];
+  msa_code?: string;
 }
 
 interface AdjacencyMap {
@@ -52,6 +60,24 @@ interface CountyItem {
   countyFips: string;
   adjacentCountyName: string;
   adjacentCountyFips: string;
+}
+
+const REGEX_FIPS_MSA = /(\d{5})\t(\d{1,4}).*/;
+
+function parseFipsToMsa(): any {
+  const msaFilePath = path.join(__dirname, 'fips_msa.txt');
+  const text = fs.readFileSync(msaFilePath, 'utf-8');
+  const countyGroups = text.split(NEWLINE);
+  const fipsToMsaMap = _.fromPairs(countyGroups.map(getFipsMsa));
+  return fipsToMsaMap;
+}
+
+function getFipsMsa(line: string): any {
+  const match = line.match(REGEX_FIPS_MSA);
+  if (!match) {
+    throw Error('no fips-msa match found');
+  }
+  return [match[1], match[2]];
 }
 
 function parseAdjacencyFile(filePath: string, delimiter = TAB): CountyItem[] {
@@ -84,6 +110,16 @@ function parseCountyData(data: CountyItem[]): AdjacencyMap {
       );
     }
   }
+
+  const fipsToMsa = parseFipsToMsa();
+  const fipsInMsaList = Object.keys(fipsToMsa);
+
+  fipsInMsaList.forEach(fips => {
+    if (adjacencyMap[fips]) {
+      adjacencyMap[fips].msa_code = fipsToMsa[fips];
+    }
+  });
+
   return adjacencyMap;
 }
 
