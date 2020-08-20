@@ -37,7 +37,7 @@ export const ButtonContainer = styled(Grid)`
   justify-content: flex-end;
   align-items: center;
   margin-top: 0.5rem;
-  @media (min-width: ${mobileBreakpoint}) {
+  @media (min-width: 600px) {
     margin-top: 0;
   }
 `;

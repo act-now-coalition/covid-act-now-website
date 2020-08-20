@@ -8,11 +8,11 @@ const Banner: React.FC<{
 }> = ({ message, renderButton }) => {
   return (
     <Styles.MainContainer container spacing={1}>
-      <Grid item sm={renderButton ? 9 : 12}>
+      <Grid item sm md lg>
         {message}
       </Grid>
       {renderButton && (
-        <Styles.ButtonContainer item sm>
+        <Styles.ButtonContainer item sm={4} md={3} lg={2}>
           {renderButton()}
         </Styles.ButtonContainer>
       )}
