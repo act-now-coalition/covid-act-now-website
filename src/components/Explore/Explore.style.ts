@@ -125,6 +125,8 @@ export const GridLines = styled.g`
 
 export const DateMarker = styled.div`
   position: absolute;
+  bottom: 0;
+  transform: translate(-50%, 100%);
   /* TODO(pablo): Use theme */
   background-color: white;
   width: 140px;
@@ -138,4 +140,35 @@ export const DateMarker = styled.div`
   font-weight: 500;
   font-size: 12px;
   line-height: 140%;
+`;
+
+export const TooltipSubtitle = styled.div`
+  text-transform: uppercase;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 12px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #bdbdbd;
+`;
+
+export const TooltipMetric = styled.div`
+  font-family: Source Code Pro;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 19px;
+  color: #ffffff;
+`;
+
+export const TooltipLocation = styled.div`
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  color: #ffffff;
 `;

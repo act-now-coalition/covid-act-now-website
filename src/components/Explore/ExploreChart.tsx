@@ -6,7 +6,7 @@ import { Group } from '@vx/group';
 import { AxisLeft, AxisBottom } from '@vx/axis';
 import { Column } from 'common/models/Projection';
 import * as ChartStyle from 'components/Charts/Charts.style';
-import RectClipGroup from 'components/Charts/RectClipGroup';
+import { Tooltip, RectClipGroup } from 'components/Charts';
 import { Series } from './interfaces';
 import SeriesChart from './SeriesChart';
 import ChartOverlay from './ChartOverlay';
@@ -14,17 +14,23 @@ import { getMaxBy, getTimeAxisTicks } from './utils';
 import * as Styles from './Explore.style';
 import { useTooltip } from '@vx/tooltip';
 
+type TooltipData = {
+  date: Date;
+  x: number;
+};
+
 const getDate = (d: Column) => new Date(d.x);
 const getY = (d: Column) => d.y;
 const daysBetween = (dateFrom: Date, dateTo: Date) =>
   moment(dateTo).diff(dateFrom, 'days');
 
-const formatMarkerDate = (date: Date) => moment(date).fromNow();
+const formatDateTooltip = (date: Date) => moment(date).format('MMM D, YYYY');
 
-type TooltipData = {
-  date: Date;
-  x: number;
-};
+const DateMarker: React.FC<TooltipData> = ({ x, date }) => (
+  <Styles.DateMarker style={{ left: x }}>
+    {moment(date).fromNow()}
+  </Styles.DateMarker>
+);
 
 const ExploreChart: React.FC<{
   width: number;
@@ -74,26 +80,28 @@ const ExploreChart: React.FC<{
   >();
 
   const onMouseOver = useCallback(
-    (xSvg: number) => {
-      const x = xSvg - marginLeft;
+    (x: number) => {
       const date = dateScale.invert(x);
       showTooltip({
         tooltipData: { date, x },
       });
     },
-    [showTooltip, marginLeft, dateScale],
+    [showTooltip, dateScale],
   );
 
-  // TODO: Pass indexed series data
-
   const renderTooltip = useCallback(
-    ({ date, x }: TooltipData) => (
-      // TODO(pablo): remove magic number
-      <Styles.DateMarker style={{ top: innerHeight + 40, left: x }}>
-        {formatMarkerDate(date)}
-      </Styles.DateMarker>
-    ),
-    [innerHeight],
+    ({ date, x }: TooltipData) => {
+      return (
+        <React.Fragment>
+          <Tooltip top={marginTop} left={x} title={formatDateTooltip(date)}>
+            <Styles.TooltipSubtitle>confirmed cases</Styles.TooltipSubtitle>
+            <Styles.TooltipMetric>308,314</Styles.TooltipMetric>
+            <Styles.TooltipLocation>in NY</Styles.TooltipLocation>
+          </Tooltip>
+        </React.Fragment>
+      );
+    },
+    [marginTop],
   );
 
   const getXPosition = (d: Column) => dateScale(getDate(d)) || 0;
@@ -140,6 +148,9 @@ const ExploreChart: React.FC<{
         </Group>
       </svg>
       {tooltipOpen && tooltipData && renderTooltip(tooltipData)}
+      {tooltipOpen && tooltipData && (
+        <DateMarker x={tooltipData.x} date={tooltipData.date} />
+      )}
     </Styles.PositionRelative>
   );
 };
