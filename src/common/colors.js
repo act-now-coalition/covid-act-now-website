@@ -1,4 +1,3 @@
-import { INTERVENTIONS } from 'common/interventions';
 import { Level } from 'common/level';
 
 import { stateSummary, countySummary } from './location_summaries';
@@ -43,14 +42,6 @@ export const LEVEL_COLOR = {
   [Level.HIGH]: COLOR_MAP.ORANGE_DARK.BASE,
   [Level.CRITICAL]: COLOR_MAP.RED.BASE,
   [Level.UNKNOWN]: COLOR_MAP.GRAY.BASE,
-};
-
-export const INTERVENTION_COLOR_MAP = {
-  [INTERVENTIONS.LIMITED_ACTION]: COLOR_MAP.RED.BASE,
-  [INTERVENTIONS.SOCIAL_DISTANCING]: COLOR_MAP.ORANGE.BASE,
-  [INTERVENTIONS.SHELTER_IN_PLACE]: COLOR_MAP.GREEN.BASE,
-  [INTERVENTIONS.SHELTER_IN_PLACE_WORST_CASE]: COLOR_MAP.GREEN.DARK,
-  [INTERVENTIONS.PROJECTED]: COLOR_MAP.BLUE,
 };
 
 export function stateColor(stateCode) {

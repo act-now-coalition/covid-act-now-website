@@ -61,11 +61,6 @@ function LocationEmbed() {
     return null;
   }
 
-  const primary = projections.primary;
-  if (!primary) {
-    return <span>'No data available for county.'</span>;
-  }
-
   const stats = projections.getMetricValues();
   const alarmLevel = projections.getAlarmLevel();
   const levelInfo = LOCATION_SUMMARY_LEVELS[alarmLevel];

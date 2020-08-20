@@ -1,4 +1,5 @@
 import React from 'react';
+import ExternalLink from 'components/ExternalLink';
 
 import {
   AnnouncementsSectionHeader,
@@ -16,19 +17,23 @@ const Announcements = () => {
     <Wrapper>
       <AnnouncementsSectionHeader>Announcements</AnnouncementsSectionHeader>
       <AnnouncementIntro>
-        Introducing our newest key indicator, “Daily New Cases Per 100K
-        Population”
+        Introducing Puerto Rico COVID Risk Mapping to our U.S. Coverage
       </AnnouncementIntro>
-      <Date>Wednesday, July 22, 2020</Date>
+      <Date>Wednesday, August 19, 2020</Date>
       <AnnouncementBodyCopy>
-        Today, we are adding an important fifth metric to our COVID warning
-        system: “daily new cases per 100K population.” The addition of this
-        metric rounds out our warning system by incorporating a measure of how
-        much COVID there is in each community today.
+        We are happy to announce the launch of Puerto Rico in our U.S. Coverage
+        Map! We believe that this is an important development given that Puerto
+        Rico is a U.S. territory affected by American public policy—but until
+        now, there were no visualizations for county-level COVID data for Puerto
+        Rico.{' '}
+        <ExternalLink href="https://blog.covidactnow.org/introduciendo-puerto-rico-a-nuestro-mapa-de-intervenciones-para-estados-unidos">
+          Leer el anuncio en español
+        </ExternalLink>
+        .
       </AnnouncementBodyCopy>
       <ButtonsContainer>
         <ReadMoreButton
-          href="https://blog.covidactnow.org/new-daily-covid-cases"
+          href="https://blog.covidactnow.org/introducing-puerto-rico-covid-mapping-to-our-u-s-coverage"
           target="_blank"
           rel="noopener"
         >

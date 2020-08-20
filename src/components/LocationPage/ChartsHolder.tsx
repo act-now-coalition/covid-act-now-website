@@ -44,7 +44,7 @@ const ChartsHolder = (props: {
   chartId: string;
   countyId: string;
 }) => {
-  const projection: Projection | null = props.projections.primary;
+  const projection = props.projections.primary;
 
   const {
     rtRangeData,

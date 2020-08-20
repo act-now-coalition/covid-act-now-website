@@ -70,5 +70,5 @@ export GITHUB_TOKEN=<YOUR PERSONAL GITHUB TOKEN>
 Alternatively, if you don't care about regenerating the sharing images (which takes a long time), you can update the snapshot and map colors with:
 
 * Update src/assets/data/data_url.json to point at the new snapshot.
-* Run `yarn update-calculated-interventions`
+* Run `yarn update-location-summaries`
 * Check in the result.
