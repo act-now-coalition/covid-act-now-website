@@ -36,52 +36,65 @@ import fs from 'fs-extra';
 import path from 'path';
 import _ from 'lodash';
 
-// The main county line start with ", the adjacent counties start with tab (\t)
-const REGEX_COUNTY_GROUP = /\n"/;
-
-// County FIPS codes are a sequence of 5 digits
-const REGEX_FIPS_CODE = /\d{5}/;
+const NEWLINE = '\n';
+const TAB = '\t';
 
 interface AdjacencyList {
   adjacent_counties: string[];
 }
 
+interface AdjacencyMap {
+  [fips: string]: AdjacencyList;
+}
+
+interface CountyItem {
+  countyName: string;
+  countyFips: string;
+  adjacentCountyName: string;
+  adjacentCountyFips: string;
+}
+
+function parseAdjacencyFile(filePath: string, delimiter = TAB): CountyItem[] {
+  const text = fs.readFileSync(filePath, 'utf-8');
+  const data = text.split(NEWLINE).map(line => line.split(delimiter));
+  return data.map(row => ({
+    countyName: row[0],
+    countyFips: row[1],
+    adjacentCountyName: row[2],
+    adjacentCountyFips: row[3],
+  }));
+}
+
+function parseCountyData(data: CountyItem[]): AdjacencyMap {
+  const adjacencyMap: AdjacencyMap = {};
+
+  let currentCountyFips = '';
+  for (const row of data) {
+    currentCountyFips = row.countyFips ? row.countyFips : currentCountyFips;
+
+    if (!(currentCountyFips in adjacencyMap)) {
+      adjacencyMap[currentCountyFips] = {
+        adjacent_counties: [],
+      };
+    }
+
+    if (currentCountyFips !== row.adjacentCountyFips) {
+      adjacencyMap[currentCountyFips].adjacent_counties.push(
+        row.adjacentCountyFips,
+      );
+    }
+  }
+  return adjacencyMap;
+}
+
 function main() {
   const filePath = path.join(__dirname, 'county_adjacency.txt');
-  const text = fs.readFileSync(filePath, 'utf-8');
-
-  const countyGroups = _.split(text, REGEX_COUNTY_GROUP);
-  const adjacencyMap = _.fromPairs(countyGroups.map(parseCountyGroup));
+  const data = parseAdjacencyFile(filePath);
+  const adjacencyMap = parseCountyData(data);
 
   const outputPath = path.join(__dirname, 'county_adjacency.json');
   const outputData = JSON.stringify({ counties: adjacencyMap }, null, 2);
   fs.writeFileSync(outputPath, outputData);
-}
-
-/**
- * parseCountyGroup reads a "county group" in the adjacency file and
- * returns a Pair with the FIPS code of the main county as first element
- * and an object with the adjacent counties as second.
- *
- * Example: If we pass the first 6 lines of the file (see example above),
- * the function will return:
- *
- * ['01001', { adjacent_counties: ['01021', '01047', '01051', '01085', '01101'] }]
- */
-function parseCountyGroup(countyGroupText: string): [string, AdjacencyList] {
-  const [firstLine, ...remainingLines] = countyGroupText.split('\n');
-  return [
-    getFipsCode(firstLine),
-    { adjacent_counties: remainingLines.map(getFipsCode) },
-  ];
-}
-
-function getFipsCode(line: string): string {
-  const match = line.match(REGEX_FIPS_CODE);
-  if (!match) {
-    throw Error('no fips code found');
-  }
-  return match[0];
 }
 
 if (require.main === module) {
