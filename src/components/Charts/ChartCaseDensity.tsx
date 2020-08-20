@@ -100,13 +100,14 @@ const ChartCaseDensity: FunctionComponent<{
       left={marginLeft + getXCoord(p)}
       top={marginTop + getYCoord(p)}
       title={formatUtcDate(getDate(p), 'MMM D, YYYY')}
+      width={'150px'}
     >
-      <TooltipStyle.SubText>
-        {`Daily new cases`}
+      <TooltipStyle.Title>DAILY NEW CASES</TooltipStyle.Title>
+      <TooltipStyle.BodySmall>
         <div>{`${formatDecimal(getYNewCases(p), 1)} cases`}</div>
-      </TooltipStyle.SubText>
+      </TooltipStyle.BodySmall>
       <TooltipStyle.Body>
-        {`${formatDecimal(getYCaseDensity(p), 1)}/100k`}
+        {`${formatDecimal(getYCaseDensity(p), 1)} per 100k`}
       </TooltipStyle.Body>
     </Tooltip>
   );
