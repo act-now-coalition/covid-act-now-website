@@ -21,11 +21,9 @@ import {
   PartnerHeader,
   SearchBarThermometerWrapper,
   SectionWrapper,
-  BannerContainer,
 } from './HomePage.style';
 import { SelectorWrapper } from 'components/Header/HomePageHeader.style';
 import CompareMain from 'components/Compare/CompareMain';
-import { FeedbackSurveyBanner } from 'components/Banner';
 
 export default function HomePage() {
   const shareBlockRef = useRef(null);
@@ -75,9 +73,6 @@ export default function HomePage() {
         pageTitle={undefined}
         pageDescription="Real-time modeling and metrics to understand where we stand against COVID. 50 states. 3,000+ counties. Click the map to dive in"
       />
-      <BannerContainer>
-        <FeedbackSurveyBanner />
-      </BannerContainer>
       <HomePageHeader
         indicatorsLinkOnClick={() => scrollTo(indicatorsRef.current)}
       />
