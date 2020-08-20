@@ -2,7 +2,7 @@
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 import { each, sortBy, takeRight } from 'lodash';
 import { assert } from './utils';
-import countyAdjacency from './data/county_adjacency.json';
+import countyAdjacency from './data/county_adjacency_msa.json';
 
 interface AdjacencyData {
   [fips: string]: {

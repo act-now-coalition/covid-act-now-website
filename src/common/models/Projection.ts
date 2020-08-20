@@ -85,6 +85,7 @@ export interface RtRange {
 
 export interface CaseDensityRange {
   caseDensity: number;
+  newCases: number | null;
   low: number;
   high: number;
 }
@@ -501,10 +502,15 @@ export class Projection {
   }
 
   private calcCaseDensityRange(): Array<CaseDensityRange | null> {
-    return this.caseDensityByCases.map(caseDensity =>
+    return this.caseDensityByCases.map((caseDensity, indx, arr) =>
       caseDensity === null
         ? null
-        : { caseDensity, low: caseDensity, high: caseDensity },
+        : {
+            caseDensity: caseDensity,
+            newCases: this.smoothedDailyCases[indx],
+            low: caseDensity,
+            high: caseDensity,
+          },
     );
   }
 

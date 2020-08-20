@@ -33,8 +33,10 @@ type Point = {
 };
 
 const getDate = (d: Point) => new Date(d.x);
-const getY = (d: Point) => d?.y?.caseDensity;
-const hasData = (d: any) => isDate(getDate(d)) && Number.isFinite(getY(d));
+const getYCaseDensity = (d: Point) => d?.y?.caseDensity;
+const getYNewCases = (d: Point) => d?.y?.newCases;
+const hasData = (d: any) =>
+  isDate(getDate(d)) && Number.isFinite(getYCaseDensity(d));
 
 const ChartCaseDensity: FunctionComponent<{
   columnData: Column[];
@@ -63,14 +65,14 @@ const ChartCaseDensity: FunctionComponent<{
   const data: Point[] = columnData.filter(hasData);
 
   const lastPoint = last(data);
-  const activeZone = getZoneByValue(getY(lastPoint), zones);
+  const activeZone = getZoneByValue(getYCaseDensity(lastPoint), zones);
 
   const dates = data.map(getDate);
   const minDate = d3min(dates) || new Date('2020-01-01');
   const currDate = new Date();
   const xScale = getZonesTimeScale(minDate, currDate, 0, chartWidth);
 
-  const yDataMax = d3max(data, getY) || 100;
+  const yDataMax = d3max(data, getYCaseDensity) || 100;
   const yAxisLimits = getAxisLimits(0, yDataMax, zones);
 
   // Adjusts the min y-axis to make the Low label fit only if
@@ -85,7 +87,7 @@ const ChartCaseDensity: FunctionComponent<{
   });
 
   const getXCoord = (p: Point) => xScale(getDate(p));
-  const getYCoord = (p: Point) => yScale(Math.min(getY(p), capY));
+  const getYCoord = (p: Point) => yScale(Math.min(getYCaseDensity(p), capY));
 
   const regions = getChartRegions(yAxisMin, yAxisMax, zones);
   const yTicks = computeTickPositions(yAxisMin, yAxisMax, zones);
@@ -98,9 +100,14 @@ const ChartCaseDensity: FunctionComponent<{
       left={marginLeft + getXCoord(p)}
       top={marginTop + getYCoord(p)}
       title={formatUtcDate(getDate(p), 'MMM D, YYYY')}
+      width={'150px'}
     >
+      <TooltipStyle.Title>DAILY NEW CASES</TooltipStyle.Title>
+      <TooltipStyle.BodySmall>
+        <div>{`${formatDecimal(getYNewCases(p), 1)} cases`}</div>
+      </TooltipStyle.BodySmall>
       <TooltipStyle.Body>
-        {`Daily new cases ${formatDecimal(getY(p), 1)}/100k`}
+        {`${formatDecimal(getYCaseDensity(p), 1)} per 100k`}
       </TooltipStyle.Body>
     </Tooltip>
   );
@@ -109,7 +116,7 @@ const ChartCaseDensity: FunctionComponent<{
       cx={getXCoord(p)}
       cy={getYCoord(p)}
       r={6}
-      fill={getZoneByValue(getY(p), zones).color}
+      fill={getZoneByValue(getYCaseDensity(p), zones).color}
     />
   );
 
@@ -144,7 +151,7 @@ const ChartCaseDensity: FunctionComponent<{
           <BoxedAnnotation
             x={getXCoord(lastPoint) + 30}
             y={getYCoord(lastPoint)}
-            text={formatDecimal(getY(lastPoint), 1)}
+            text={formatDecimal(getYCaseDensity(lastPoint), 1)}
           />
         </Style.TextAnnotation>
       </RectClipGroup>
