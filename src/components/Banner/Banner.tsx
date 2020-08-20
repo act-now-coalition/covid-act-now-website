@@ -12,7 +12,7 @@ const Banner: React.FC<{
         {message}
       </Grid>
       {renderButton && (
-        <Styles.ButtonContainer item sm={4} md={3} lg={2}>
+        <Styles.ButtonContainer item sm={4} md={3} lg={3}>
           {renderButton()}
         </Styles.ButtonContainer>
       )}
