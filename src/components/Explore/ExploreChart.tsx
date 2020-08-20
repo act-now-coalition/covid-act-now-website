@@ -1,9 +1,11 @@
 import React, { useCallback, Fragment } from 'react';
 import moment from 'moment';
-import { scaleTime, scaleLinear } from '@vx/scale';
+import { AxisLeft, AxisBottom } from '@vx/axis';
 import { GridRows, GridColumns } from '@vx/grid';
 import { Group } from '@vx/group';
-import { AxisLeft, AxisBottom } from '@vx/axis';
+import { scaleTime, scaleLinear } from '@vx/scale';
+import { useTooltip } from '@vx/tooltip';
+import { formatInteger } from 'common/utils';
 import { Column } from 'common/models/Projection';
 import * as ChartStyle from 'components/Charts/Charts.style';
 import { Tooltip, RectClipGroup } from 'components/Charts';
@@ -12,13 +14,6 @@ import SeriesChart, { SeriesMarker } from './SeriesChart';
 import ChartOverlay from './ChartOverlay';
 import { getMaxBy, getTimeAxisTicks, findPointByDate } from './utils';
 import * as Styles from './Explore.style';
-import { useTooltip } from '@vx/tooltip';
-import { formatInteger } from 'common/utils';
-
-type TooltipData = {
-  date: Date;
-  x: number;
-};
 
 const getDate = (d: Column) => new Date(d.x);
 const getY = (d: Column) => d.y;
@@ -33,25 +28,21 @@ const DateMarker: React.FC<{ left: number; date: Date }> = ({ left, date }) => (
 
 const ExploreTooltip: React.FC<{
   date: Date;
-  seriePosition: Series;
-  serieContent: Series;
-  x: (d: Column) => number;
-  y: (d: Column) => number;
-}> = ({ seriePosition, serieContent, x, y, date }) => {
-  const pointPosition = findPointByDate(seriePosition.data, date);
-  const pointContent = findPointByDate(serieContent.data, date);
+  series: Series[];
+  left: (d: Column) => number;
+  top: (d: Column) => number;
+}> = ({ series, left, top, date }) => {
+  const [serieRaw, serieSmooth] = series;
+  const pointSmooth = findPointByDate(serieSmooth.data, date);
+  const pointRaw = findPointByDate(serieRaw.data, date);
   return (
     <Tooltip
-      top={y(pointPosition)}
-      left={x(pointPosition)}
+      top={top(pointSmooth)}
+      left={left(pointSmooth)}
       title={moment(date).format('MMM D, YYYY')}
     >
-      <Styles.TooltipSubtitle>
-        {serieContent.tooltipLabel}
-      </Styles.TooltipSubtitle>
-      <Styles.TooltipMetric>
-        {formatInteger(pointContent.y)}
-      </Styles.TooltipMetric>
+      <Styles.TooltipSubtitle>{serieRaw.tooltipLabel}</Styles.TooltipSubtitle>
+      <Styles.TooltipMetric>{formatInteger(pointRaw.y)}</Styles.TooltipMetric>
       <Styles.TooltipLocation>in NY</Styles.TooltipLocation>
     </Tooltip>
   );
@@ -115,24 +106,22 @@ const ExploreChart: React.FC<{
   const timeTicks = getTimeAxisTicks(dateFrom, dateTo);
   const timeTickFormat = isMobile ? 'MMM' : 'MMMM D';
   const xTickFormat = (date: Date) => moment(date).format(timeTickFormat);
+  const barWidth = 0.7 * (innerWidth / numDays);
 
   const yScale = scaleLinear({
     domain: [0, maxY],
     range: [innerHeight, 0],
   });
 
-  const barWidth = 0.7 * (innerWidth / numDays);
-
-  // TOOLTIP
-  const { tooltipOpen, tooltipData, hideTooltip, showTooltip } = useTooltip<
-    TooltipData
-  >();
+  const { tooltipOpen, tooltipData, hideTooltip, showTooltip } = useTooltip<{
+    date: Date;
+  }>();
 
   const onMouseOver = useCallback(
-    (x: number) => {
+    ({ x }: { x: number }) => {
       const date = dateScale.invert(x - marginLeft);
       showTooltip({
-        tooltipData: { date, x },
+        tooltipData: { date },
       });
     },
     [showTooltip, dateScale, marginLeft],
@@ -178,7 +167,6 @@ const ExploreChart: React.FC<{
             xScale={dateScale}
             onMouseOver={onMouseOver}
             onMouseLeave={hideTooltip}
-            barWidth={barWidth}
           />
           <ChartStyle.Axis>
             <AxisLeft scale={yScale} />
@@ -193,15 +181,17 @@ const ExploreChart: React.FC<{
       </svg>
       {tooltipOpen && tooltipData && (
         <ExploreTooltip
-          x={p => getXPosition(p) + marginLeft}
-          y={p => getYPosition(p) + marginTop}
+          left={p => getXPosition(p) + marginLeft}
+          top={p => getYPosition(p) + marginTop}
           date={tooltipData.date}
-          seriePosition={series[1]}
-          serieContent={series[0]}
+          series={series}
         />
       )}
       {tooltipOpen && tooltipData && (
-        <DateMarker left={tooltipData.x} date={tooltipData.date} />
+        <DateMarker
+          left={dateScale(tooltipData.date) + marginLeft}
+          date={tooltipData.date}
+        />
       )}
     </Styles.PositionRelative>
   );
