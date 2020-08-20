@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { Typography, Box } from '@material-ui/core';
 import palette from 'assets/theme/palette';
 import { COLOR_MAP } from 'common/colors';
-import theme from 'assets/theme';
 import { mobileBreakpoint } from 'assets/theme/sizes';
 
 export const SearchBarThermometerWrapper = styled(Box)`
@@ -57,6 +56,6 @@ export const BannerContainer = styled.div`
   margin: 0 auto;
 
   @media (min-width: ${mobileBreakpoint}) {
-    margin-top: ${theme.spacing(4)}px;
+    margin-top: 2rem;
   }
 `;

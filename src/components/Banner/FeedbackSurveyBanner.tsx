@@ -1,17 +1,19 @@
 import React from 'react';
 import Banner from './Banner';
 import { SurveyButton } from './Banner.style';
+import ExternalLink from '../ExternalLink';
 
 const renderButton = () => (
-  <SurveyButton
-    href="https://can386399.typeform.com/to/fCLv9bzl#source=org"
-    variant="contained"
-    color="primary"
-    disableRipple
-    disableFocusRipple
-  >
-    Take our survey
-  </SurveyButton>
+  <ExternalLink href="https://can386399.typeform.com/to/fCLv9bzl#source=org">
+    <SurveyButton
+      variant="contained"
+      color="primary"
+      disableRipple
+      disableFocusRipple
+    >
+      Take our survey
+    </SurveyButton>
+  </ExternalLink>
 );
 
 const MESSAGE = `We’re a team of volunteers working to provide you the most

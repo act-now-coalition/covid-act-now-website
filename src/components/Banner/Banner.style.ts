@@ -31,12 +31,20 @@ export const MainContainer = styled(Grid)`
   }
 `;
 
-export const SurveyButton = styled(MuiButton)`
-  &.MuiButton-containedPrimary {
-    color: ${colorButton};
+export const ButtonContainer = styled(Grid)`
+  text-align: center;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 0.5rem;
+  @media (min-width: ${mobileBreakpoint}) {
+    margin-top: 0;
   }
 `;
 
-export const ButtonContainer = styled(Grid)`
-  text-align: center;
+export const SurveyButton = styled(MuiButton)`
+  &.MuiButton-containedPrimary {
+    display: inline-block;
+    color: ${colorButton};
+  }
 `;
