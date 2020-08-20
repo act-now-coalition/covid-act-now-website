@@ -8,7 +8,7 @@ import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
 import ExternalLink from 'components/ExternalLink';
 
-export const METRIC_NAME = 'Infection rate';
+const METRIC_NAME = 'Infection rate';
 
 export const CaseGrowthMetric: MetricDefinition = {
   renderStatus,
@@ -73,10 +73,7 @@ export const CASE_GROWTH_RATE_LEVEL_INFO_MAP: LevelInfoMap = {
   },
 };
 
-export const CASE_GROWTH_DISCLAIMER =
-  'Each data point is a 14-day weighted average. We present the most recent seven days of data as a dashed line, as data is often revised by states several days after reporting.';
-
-export function renderStatus(projections: Projections): React.ReactElement {
+function renderStatus(projections: Projections): React.ReactElement {
   const { locationName, rt } = projections.primary;
 
   if (rt === null) {

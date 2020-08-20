@@ -8,7 +8,7 @@ import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
 import ExternalLink from 'components/ExternalLink';
 
-export const METRIC_NAME = 'Positive test rate';
+const METRIC_NAME = 'Positive test rate';
 
 export const PositiveTestRateMetric: MetricDefinition = {
   renderStatus,
@@ -74,10 +74,7 @@ export const POSITIVE_TESTS_LEVEL_INFO_MAP: LevelInfoMap = {
   },
 };
 
-export const POSITIVE_RATE_DISCLAIMER =
-  'The World Health Organization recommends a positive test rate of less than 10%. The countries most successful in containing COVID have rates of 3% or less. We calculate the rate as a 7-day trailing average.';
-
-export function renderStatus(projections: Projections) {
+function renderStatus(projections: Projections) {
   const { currentTestPositiveRate, locationName } = projections.primary;
   if (currentTestPositiveRate === null) {
     return <Fragment>No testing data is available.</Fragment>;
