@@ -93,6 +93,10 @@ export const ChartContainer = styled.div`
   margin-top: ${theme.spacing(4)}px;
 `;
 
+export const PositionRelative = styled.div`
+  position: relative;
+`;
+
 export const MainSeriesLine = styled.g`
   line,
   path {
@@ -117,4 +121,60 @@ export const GridLines = styled.g`
     stroke-width: 1px;
     stroke-dasharray: 5, 5;
   }
+`;
+
+export const DateMarker = styled.div`
+  position: absolute;
+  bottom: 0;
+  transform: translate(-50%, 100%);
+  /* TODO(pablo): Use theme */
+  background-color: white;
+  width: 140px;
+  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  padding: ${theme.spacing(1) / 2}px ${theme.spacing(2)}px;
+
+  text-align: center;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 140%;
+`;
+
+export const DotMarker = styled.circle`
+  fill: black;
+  stroke: white;
+  stroke-width: 4px;
+`;
+
+export const TooltipSubtitle = styled.div`
+  text-transform: uppercase;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 12px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #bdbdbd;
+`;
+
+export const TooltipMetric = styled.div`
+  font-family: Source Code Pro;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 19px;
+  color: #ffffff;
+`;
+
+export const TooltipLocation = styled.div`
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  color: #ffffff;
 `;

@@ -6,12 +6,12 @@ import { LegendMarker } from './SeriesChart';
 const Legend: React.FC<{ series: Series[] }> = ({ series }) => {
   return (
     <Styles.LegendContainer>
-      {series.map((serie, i) => (
+      {series.map(({ type, label }, i) => (
         <Styles.LegendItem key={`legend-item-${i}`}>
           <Styles.LegendItemMarker>
-            <LegendMarker type={serie.type} />
+            <LegendMarker type={type} />
           </Styles.LegendItemMarker>
-          <Styles.LegendItemLabel>{serie.label}</Styles.LegendItemLabel>
+          <Styles.LegendItemLabel>{label}</Styles.LegendItemLabel>
         </Styles.LegendItem>
       ))}
     </Styles.LegendContainer>

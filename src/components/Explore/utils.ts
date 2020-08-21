@@ -10,7 +10,7 @@ export function getMaxBy<T>(
   getValue: (d: Column) => T,
   defaultValue: T,
 ): T {
-  const maxValue = _max(series.map(serie => _max(serie.data.map(getValue))));
+  const maxValue = _max(series.map(({ data }) => _max(data.map(getValue))));
   return maxValue || defaultValue;
 }
 
@@ -38,6 +38,7 @@ const sortedExploreMetrics = [
 
 interface SerieDescription {
   label: string;
+  tooltipLabel: string;
   datasetId: DatasetId;
   type: ChartType;
 }
@@ -55,11 +56,13 @@ export const exploreMetricData: {
     series: [
       {
         label: 'Cases',
+        tooltipLabel: 'Confirmed cases',
         datasetId: 'rawDailyCases',
         type: ChartType.BAR,
       },
       {
         label: '7 Day Average',
+        tooltipLabel: 'Confirmed cases',
         datasetId: 'smoothedDailyCases',
         type: ChartType.LINE,
       },
@@ -70,11 +73,13 @@ export const exploreMetricData: {
     series: [
       {
         label: 'Deaths',
+        tooltipLabel: 'Deaths',
         datasetId: 'rawDailyDeaths',
         type: ChartType.BAR,
       },
       {
         label: '7 Day Average',
+        tooltipLabel: 'Deaths',
         datasetId: 'smoothedDailyDeaths',
         type: ChartType.LINE,
       },
@@ -85,11 +90,13 @@ export const exploreMetricData: {
     series: [
       {
         label: 'Hospitalizations',
+        tooltipLabel: 'Hospitalizations',
         datasetId: 'rawHospitalizations',
         type: ChartType.BAR,
       },
       {
         label: '7 Day Average',
+        tooltipLabel: 'Hospitalizations',
         datasetId: 'smoothedHospitalizations',
         type: ChartType.LINE,
       },
@@ -100,11 +107,13 @@ export const exploreMetricData: {
     series: [
       {
         label: 'ICU Hospitalizations',
+        tooltipLabel: 'ICU Hospitalizations',
         datasetId: 'rawICUHospitalizations',
         type: ChartType.BAR,
       },
       {
         label: '7 Day Average',
+        tooltipLabel: 'ICU Hospitalizations',
         datasetId: 'smoothedICUHospitalizations',
         type: ChartType.LINE,
       },
@@ -121,9 +130,17 @@ export function getSeries(
     data: projection.getDataset(item.datasetId),
     type: item.type,
     label: item.label,
+    tooltipLabel: item.tooltipLabel,
   }));
 }
 
 export function getMetricLabels() {
   return sortedExploreMetrics.map(metric => exploreMetricData[metric].title);
+}
+
+export function findPointByDate(data: Column[], date: Date): Column | null {
+  const idx = data.findIndex(
+    p => new Date(p.x).toDateString() === date.toDateString(),
+  );
+  return idx >= 0 ? data[idx] : null;
 }

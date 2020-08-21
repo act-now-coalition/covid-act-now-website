@@ -5,3 +5,5 @@ export { default as ChartPositiveTestRate } from './ChartPositiveTestRate';
 export { default as ChartICUHeadroom } from './ChartICUHeadroom';
 export { default as ChartContactTracing } from './ChartContactTracing';
 export { default as ChartCaseDensity } from './ChartCaseDensity';
+export { default as Tooltip } from './Tooltip';
+export { default as RectClipGroup } from './RectClipGroup';
