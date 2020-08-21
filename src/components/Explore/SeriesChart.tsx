@@ -71,6 +71,9 @@ export const SeriesMarker: React.FC<{
   barWidth: number;
 }> = ({ type, data, date, x, y, yMax, barWidth }) => {
   const point = findPointByDate(data, date);
+  if (!point) {
+    return null;
+  }
   switch (type) {
     case ChartType.LINE:
       return <Styles.DotMarker cx={x(point)} cy={y(point)} r={6} />;

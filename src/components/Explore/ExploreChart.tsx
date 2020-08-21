@@ -36,7 +36,8 @@ const ExploreTooltip: React.FC<{
   const [seriesRaw, seriesSmooth] = series;
   const pointSmooth = findPointByDate(seriesSmooth.data, date);
   const pointRaw = findPointByDate(seriesRaw.data, date);
-  return (
+
+  return pointSmooth && pointRaw ? (
     <Tooltip
       top={top(pointSmooth)}
       left={left(pointSmooth)}
@@ -46,10 +47,16 @@ const ExploreTooltip: React.FC<{
       <Styles.TooltipMetric>{formatInteger(pointRaw.y)}</Styles.TooltipMetric>
       <Styles.TooltipLocation>{subtext}</Styles.TooltipLocation>
     </Tooltip>
-  );
+  ) : null;
 };
 
-const DataMarkers: React.FC<{
+/**
+ * This component renders the highlighted data on mouse over. Note that we don't
+ * actually highlight existing elements in the SVG, we render the markers on top
+ * of them, which is more performant and flexible, as just highlighting is not
+ * always enough.
+ */
+const DataHoverMarkers: React.FC<{
   series: Series[];
   date: Date;
   x: (d: Column) => number;
@@ -153,7 +160,7 @@ const ExploreChart: React.FC<{
             ))}
           </RectClipGroup>
           {tooltipOpen && tooltipData && (
-            <DataMarkers
+            <DataHoverMarkers
               x={getXPosition}
               y={getYPosition}
               yMax={innerHeight}

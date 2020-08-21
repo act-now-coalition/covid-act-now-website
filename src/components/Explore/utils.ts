@@ -138,9 +138,9 @@ export function getMetricLabels() {
   return sortedExploreMetrics.map(metric => exploreMetricData[metric].title);
 }
 
-export function findPointByDate(data: Column[], date: Date) {
+export function findPointByDate(data: Column[], date: Date): Column | null {
   const idx = data.findIndex(
     p => new Date(p.x).toDateString() === date.toDateString(),
   );
-  return data[idx];
+  return idx >= 0 ? data[idx] : null;
 }
