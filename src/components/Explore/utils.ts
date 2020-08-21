@@ -10,7 +10,7 @@ export function getMaxBy<T>(
   getValue: (d: Column) => T,
   defaultValue: T,
 ): T {
-  const maxValue = _max(series.map(serie => _max(serie.data.map(getValue))));
+  const maxValue = _max(series.map(({ data }) => _max(data.map(getValue))));
   return maxValue || defaultValue;
 }
 

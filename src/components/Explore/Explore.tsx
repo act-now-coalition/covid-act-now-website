@@ -44,6 +44,7 @@ const Explore: React.FunctionComponent<{ projection: Projection }> = ({
         <Legend series={series} />
       </Styles.ChartControlsContainer>
       <Styles.ChartContainer>
+        {/* The width is set to zero while the parent div is rendering */}
         <ParentSize>
           {({ width }) =>
             width < 10 ? null : (

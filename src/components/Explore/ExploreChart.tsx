@@ -31,19 +31,20 @@ const ExploreTooltip: React.FC<{
   series: Series[];
   left: (d: Column) => number;
   top: (d: Column) => number;
-}> = ({ series, left, top, date }) => {
-  const [serieRaw, serieSmooth] = series;
-  const pointSmooth = findPointByDate(serieSmooth.data, date);
-  const pointRaw = findPointByDate(serieRaw.data, date);
+  subtext: string;
+}> = ({ series, left, top, date, subtext }) => {
+  const [seriesRaw, seriesSmooth] = series;
+  const pointSmooth = findPointByDate(seriesSmooth.data, date);
+  const pointRaw = findPointByDate(seriesRaw.data, date);
   return (
     <Tooltip
       top={top(pointSmooth)}
       left={left(pointSmooth)}
       title={moment(date).format('MMM D, YYYY')}
     >
-      <Styles.TooltipSubtitle>{serieRaw.tooltipLabel}</Styles.TooltipSubtitle>
+      <Styles.TooltipSubtitle>{seriesRaw.tooltipLabel}</Styles.TooltipSubtitle>
       <Styles.TooltipMetric>{formatInteger(pointRaw.y)}</Styles.TooltipMetric>
-      <Styles.TooltipLocation>in NY</Styles.TooltipLocation>
+      <Styles.TooltipLocation>{subtext}</Styles.TooltipLocation>
     </Tooltip>
   );
 };
@@ -57,11 +58,11 @@ const DataMarkers: React.FC<{
   barWidth: number;
 }> = ({ series, x, y, date, yMax, barWidth }) => (
   <Fragment>
-    {series.map(serie => (
+    {series.map(({ label, type, data }) => (
       <SeriesMarker
-        key={`serie-marker-${serie.label}`}
-        type={serie.type}
-        data={serie.data}
+        key={`series-marker-${label}`}
+        type={type}
+        data={data}
         x={x}
         y={y}
         date={date}
@@ -139,13 +140,13 @@ const ExploreChart: React.FC<{
             <GridRows<number> scale={yScale} width={innerWidth} />
           </Styles.GridLines>
           <RectClipGroup width={innerWidth} height={innerHeight}>
-            {series.map(serie => (
+            {series.map(({ label, data, type }) => (
               <SeriesChart
-                key={`series-chart-${serie.label}`}
-                data={serie.data}
+                key={`series-chart-${label}`}
+                data={data}
                 x={getXPosition}
                 y={getYPosition}
-                type={serie.type}
+                type={type}
                 yMax={innerHeight}
                 barWidth={barWidth}
               />
@@ -185,6 +186,8 @@ const ExploreChart: React.FC<{
           top={p => getYPosition(p) + marginTop}
           date={tooltipData.date}
           series={series}
+          // TODO(pablo): Pass the string as props from the Explore component
+          subtext="in NY"
         />
       )}
       {tooltipOpen && tooltipData && (
