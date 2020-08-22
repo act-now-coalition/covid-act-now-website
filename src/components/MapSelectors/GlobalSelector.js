@@ -235,10 +235,24 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
     }
   };
 
+  const escapeKeyStateReducer = (state, changes) => {
+    console.log(changes);
+
+    switch (changes.type) {
+      case Downshift.stateChangeTypes.keyDownEscape:
+        return {
+          isOpen: false,
+        };
+      default:
+        return changes;
+    }
+  };
+
   return (
     <Downshift
       onChange={selection => handleChange(selection)}
       itemToString={item => (item ? item.value : '')}
+      stateReducer={escapeKeyStateReducer}
     >
       {({
         getInputProps,
