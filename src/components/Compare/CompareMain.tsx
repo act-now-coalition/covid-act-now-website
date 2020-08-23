@@ -4,6 +4,7 @@ import CompareTable from 'components/Compare/CompareTable';
 import ModalCompare from 'components/Compare/ModalCompare';
 import { DivForRef } from 'components/Compare/Compare.style';
 import { SummaryForCompare } from 'common/utils/compare';
+import { MetroFilter, GeoScopeFilter } from 'common/utils/compare';
 
 const CompareMain = (props: {
   stateName?: string;
@@ -13,9 +14,16 @@ const CompareMain = (props: {
   isHomepage?: boolean;
   locations: SummaryForCompare[];
   currentCounty?: any;
+  viewAllCounties?: boolean;
+  setViewAllCounties?: React.Dispatch<React.SetStateAction<boolean>>;
+  viewMoreCopy: string;
+  setCountyTypeToView: React.Dispatch<React.SetStateAction<MetroFilter>>;
+  countyTypeToView: MetroFilter;
+  geoScope?: GeoScopeFilter;
+  setGeoScope?: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
+  stateId?: string;
 }) => {
   const tableRef = useRef<HTMLDivElement>(null);
-
   const scrollOffset = props.isHomepage ? 75 : 165;
   const scrollTo = (div: null | HTMLDivElement) =>
     div &&
@@ -24,6 +32,8 @@ const CompareMain = (props: {
       top: div.offsetTop - scrollOffset,
       behavior: 'smooth',
     });
+
+  // TODO (chelsi) filter-related WIP - setViewAllCounties to false?:
 
   // short delay is needed to make scrollTo work
   const [showModal, setShowModal] = useState(false);
@@ -41,30 +51,34 @@ const CompareMain = (props: {
     return null;
   }
 
+  const sharedProps = {
+    stateName: props.stateName,
+    county: props.county,
+    setShowModal: setShowModal,
+    isHomepage: props.isHomepage,
+    locations: props.locations,
+    currentCounty: props.currentCounty,
+    viewAllCounties: props.viewAllCounties,
+    countyTypeToView: props.countyTypeToView,
+    setCountyTypeToView: props.setCountyTypeToView,
+    setViewAllCounties: props.setViewAllCounties,
+    geoScope: props.geoScope,
+    setGeoScope: props.setGeoScope,
+    stateId: props.stateId,
+  };
+
   return (
     <Fragment>
       <DivForRef ref={tableRef}>
         <CompareTable
-          stateName={props.stateName}
-          county={props.county}
-          setShowModal={setShowModal}
+          {...sharedProps}
           locationsViewable={props.locationsViewable}
-          isHomepage={props.isHomepage}
-          locations={props.locations}
-          currentCounty={props.currentCounty}
           isModal={false}
+          viewMoreCopy={props.viewMoreCopy}
         />
       </DivForRef>
       <Modal open={showModal} onClose={handleCloseModal}>
-        <ModalCompare
-          stateName={props.stateName}
-          county={props.county}
-          setShowModal={setShowModal}
-          isHomepage={props.isHomepage}
-          locations={props.locations}
-          currentCounty={props.currentCounty}
-          handleCloseModal={handleCloseModal}
-        />
+        <ModalCompare {...sharedProps} handleCloseModal={handleCloseModal} />
       </Modal>
     </Fragment>
   );

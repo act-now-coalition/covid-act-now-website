@@ -8,9 +8,12 @@ import {
   Population,
 } from 'components/Compare/Compare.style';
 import { Metric, formatValue } from 'common/metric';
-import { RankedLocationSummary } from 'common/utils/compare';
+import {
+  RankedLocationSummary,
+  orderedMetrics,
+  getColumnLocationName,
+} from 'common/utils/compare';
 import { Level } from 'common/level';
-import { orderedMetrics } from 'components/Compare/CompareTable';
 import { formatEstimate } from 'common/utils';
 
 function cellValue(metric: any, metricType: Metric) {
@@ -68,11 +71,7 @@ const CompareTableRow = (props: {
     );
   };
 
-  const locationName = !location.locationInfo.county
-    ? location.locationInfo.state
-    : location.locationInfo.county.includes('Parish')
-    ? location.locationInfo.county.replace('Parish', 'Par.')
-    : location.locationInfo.county.replace('County', 'Co.');
+  const locationName = getColumnLocationName(location.locationInfo);
 
   const populationRoundTo = isHomepage ? 3 : 2;
 

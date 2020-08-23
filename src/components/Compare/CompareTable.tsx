@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import { sortBy, findIndex, partition, reverse } from 'lodash';
 import {
   Wrapper,
@@ -8,19 +8,19 @@ import {
   Header,
   DisclaimerWrapper,
 } from 'components/Compare/Compare.style';
+import LocationTable from './LocationTable';
+import { ChartLocationName } from 'components/LocationPage/ChartsHolder.style';
+import Filters from 'components/Compare/Filters';
+import {
+  SummaryForCompare,
+  RankedLocationSummary,
+  MetroFilter,
+  orderedMetrics,
+  GeoScopeFilter,
+  getAbbreviatedCounty,
+} from 'common/utils/compare';
 import { Metric } from 'common/metric';
 import { COLOR_MAP } from 'common/colors';
-import LocationTable from './LocationTable';
-import { SummaryForCompare, RankedLocationSummary } from 'common/utils/compare';
-import { ChartLocationName } from 'components/LocationPage/ChartsHolder.style';
-
-export const orderedMetrics = [
-  Metric.CASE_DENSITY,
-  Metric.CASE_GROWTH_RATE,
-  Metric.POSITIVE_TESTS,
-  Metric.HOSPITAL_USAGE,
-  Metric.CONTACT_TRACING,
-];
 
 const CompareTable = (props: {
   stateName?: string;
@@ -31,7 +31,16 @@ const CompareTable = (props: {
   isHomepage?: boolean;
   locations: any;
   currentCounty?: any;
+  viewAllCounties?: boolean;
+  setViewAllCounties?: React.Dispatch<React.SetStateAction<boolean>>;
+  viewMoreCopy?: string;
+  setCountyTypeToView: React.Dispatch<React.SetStateAction<MetroFilter>>;
+  countyTypeToView: MetroFilter;
+  geoScope?: GeoScopeFilter;
+  setGeoScope?: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
+  stateId?: string;
 }) => {
+  const { setViewAllCounties } = props;
   const [sorter, setSorter] = useState(5);
   const [sortDescending, setSortDescending] = useState(true);
   const [sortByPopulation, setSortByPopulation] = useState(false);
@@ -92,10 +101,6 @@ const CompareTable = (props: {
     arrowColorNotSelected,
   };
 
-  const headerCopy = props.isHomepage
-    ? 'States comparison'
-    : 'Counties comparison';
-
   // checks if there are less counties than the default amount shown (10):
   const amountDisplayed =
     props.locationsViewable &&
@@ -103,10 +108,11 @@ const CompareTable = (props: {
       ? sortedLocationsArr.length
       : props.locationsViewable;
 
-  const firstHeaderName = props.isHomepage
-    ? 'State'
+  const firstColumnHeaderHomepage = props.viewAllCounties ? 'County' : 'State';
+  const firstColumnHeader = props.isHomepage
+    ? firstColumnHeaderHomepage
     : props.isModal
-    ? 'Counties'
+    ? `Counties (${sortedLocationsArr.length})`
     : 'County';
 
   const sortedLocations: RankedLocationSummary[] = sortedLocationsArr
@@ -123,18 +129,48 @@ const CompareTable = (props: {
       Metric.CONTACT_TRACING
     }`;
 
+  // TODO (chelsi) filter-related WIP:
+  // necessary? :
+  useEffect(() => {
+    if (setViewAllCounties) {
+      setViewAllCounties(false);
+    }
+  }, [setViewAllCounties]);
+
+  const compareSubheader = props.county
+    ? `${getAbbreviatedCounty(props.county.county)}, ${
+        props.stateId
+      } to other counties`
+    : `Counties in ${props.stateName}`;
+
   return (
     <Wrapper isModal={props.isModal} isHomepage={props.isHomepage}>
       {!props.isModal && (
-        <HeaderWrapper>
-          <Header>{headerCopy}</Header>
-          {props.stateName && (
-            <ChartLocationName>{props.stateName}</ChartLocationName>
-          )}
-        </HeaderWrapper>
+        <Fragment>
+          <div>
+            <HeaderWrapper>
+              <Header isHomepage={props.isHomepage}>Compare</Header>
+              {props.stateName && (
+                <ChartLocationName>{compareSubheader}</ChartLocationName>
+              )}
+            </HeaderWrapper>
+            <Filters
+              isHomepage={props.isHomepage}
+              countyTypeToView={props.countyTypeToView}
+              setCountyTypeToView={props.setCountyTypeToView}
+              viewAllCounties={props.viewAllCounties}
+              setViewAllCounties={setViewAllCounties}
+              stateId={props.stateId}
+              county={props.county}
+              geoScope={props.geoScope}
+              setGeoScope={props.setGeoScope}
+              isModal={props.isModal}
+            />
+          </div>
+        </Fragment>
       )}
       <LocationTable
-        firstHeaderName={firstHeaderName}
+        firstColumnHeader={firstColumnHeader}
         setSorter={setSorter}
         setSortDescending={setSortDescending}
         metrics={orderedMetrics}
@@ -147,6 +183,8 @@ const CompareTable = (props: {
         setSortByPopulation={setSortByPopulation}
         sortByPopulation={sortByPopulation}
         isHomepage={props.isHomepage}
+        viewAllCounties={props.viewAllCounties}
+        geoScope={props.geoScope}
       />
       {!props.isModal && (
         <Fragment>
@@ -159,9 +197,7 @@ const CompareTable = (props: {
                 </span>
               )}
               <ViewAllLink onClick={() => props.setShowModal(true)}>
-                {!props.isHomepage
-                  ? `View all counties in ${props.stateName}`
-                  : 'View all states'}
+                {props.viewMoreCopy}
               </ViewAllLink>
             </div>
             {props.county && (

@@ -3,7 +3,12 @@ import { createGlobalStyle } from 'styled-components';
 import CompareTable from 'components/Compare/CompareTable';
 import { ModalHeader } from 'components/Compare/Compare.style';
 import CloseIcon from '@material-ui/icons/Close';
-import { SummaryForCompare } from 'common/utils/compare';
+import {
+  SummaryForCompare,
+  MetroFilter,
+  GeoScopeFilter,
+} from 'common/utils/compare';
+import Filters from 'components/Compare/Filters';
 
 const BodyScrollLock = createGlobalStyle`
   body {
@@ -20,6 +25,13 @@ const ModalCompare = (props: {
   locations: SummaryForCompare[];
   currentCounty?: any;
   handleCloseModal: () => void;
+  viewAllCounties?: boolean;
+  setCountyTypeToView: React.Dispatch<React.SetStateAction<MetroFilter>>;
+  countyTypeToView: MetroFilter;
+  setViewAllCounties?: React.Dispatch<React.SetStateAction<boolean>>;
+  geoScope?: GeoScopeFilter;
+  setGeoScope?: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
+  stateId?: string;
 }) => {
   const { handleCloseModal } = props;
 
@@ -41,6 +53,18 @@ const ModalCompare = (props: {
     <Fragment>
       <BodyScrollLock />
       <ModalHeader isHomepage={props.isHomepage}>
+        <Filters
+          isHomepage={props.isHomepage}
+          countyTypeToView={props.countyTypeToView}
+          setCountyTypeToView={props.setCountyTypeToView}
+          viewAllCounties={props.viewAllCounties}
+          setViewAllCounties={props.setViewAllCounties}
+          stateId={props.stateId}
+          county={props.county}
+          geoScope={props.geoScope}
+          setGeoScope={props.setGeoScope}
+          isModal
+        />
         <CloseIcon onClick={() => props.handleCloseModal()} />
       </ModalHeader>
       <CompareTable
@@ -51,6 +75,13 @@ const ModalCompare = (props: {
         isHomepage={props.isHomepage}
         locations={props.locations}
         currentCounty={props.currentCounty}
+        viewAllCounties={props.viewAllCounties}
+        countyTypeToView={props.countyTypeToView}
+        setCountyTypeToView={props.setCountyTypeToView}
+        setViewAllCounties={props.setViewAllCounties}
+        geoScope={props.geoScope}
+        setGeoScope={props.setGeoScope}
+        stateId={props.stateId}
       />
     </Fragment>
   );

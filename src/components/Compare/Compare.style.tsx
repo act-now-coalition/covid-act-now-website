@@ -396,27 +396,24 @@ export const HeaderWrapper = styled.div`
   padding: 0.75rem;
 `;
 
-export const Header = styled.div`
+export const Header = styled.div<{ isHomepage?: boolean }>`
   display: flex;
   font-family: Roboto;
   font-weight: bold;
   font-size: 1.5rem;
+  margin: ${({ isHomepage }) => isHomepage && '0 auto'};
 `;
 
 export const ModalHeader = styled.div<{ isHomepage?: boolean }>`
   background-color: ${COLOR_MAP.GRAY_BODY_COPY};
   color: white;
-  font-family: Roboto;
-  font-size: 1.5rem;
   display: flex;
   justify-content: space-between;
   padding: 1rem 1rem 1rem 1.25rem;
-  font-weight: bold;
   align-items: center;
   max-width: ${({ isHomepage }) => (isHomepage ? '1000px' : '900px')};
   width: 100%;
   margin: 0 auto;
-  height: 3.75rem;
 
   @media (min-width: 600px) {
     margin: 1rem auto 0;
@@ -426,7 +423,7 @@ export const ModalHeader = styled.div<{ isHomepage?: boolean }>`
     color: white;
     cursor: pointer;
     font-size: 1.75rem;
-    margin-left: auto;
+    margin-bottom: auto;
   }
 `;
 

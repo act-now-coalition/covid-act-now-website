@@ -6,10 +6,11 @@ import { RankedLocationSummary } from 'common/utils/compare';
 const minTableWidth = locationNameCellWidth + 5 * metricCellWidth;
 const pinnedBorderColor = '#CEBFAC';
 
+//159px is the header-height
 export const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
-  max-height: calc(100vh - 3.75rem);
+  max-height: calc(100vh - 159px);
   min-height: 0;
   width: 100%;
   overflow-x: auto;
