@@ -139,6 +139,10 @@ export const exploreMetricData: {
   },
 };
 
+export const EXPLORE_CHART_IDS = Object.values(exploreMetricData).map(
+  metric => metric.chartId,
+);
+
 export function getSeries(
   metric: ExploreMetric,
   projection: Projection,

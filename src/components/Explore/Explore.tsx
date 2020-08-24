@@ -8,13 +8,16 @@ import ExploreTabs from './ExploreTabs';
 import ExploreChart from './ExploreChart';
 import Legend from './Legend';
 import { ExploreMetric } from './interfaces';
-import { getMetricLabels, getSeries } from './utils';
+import { getMetricLabels, getSeries, getMetricByChartId } from './utils';
 import * as Styles from './Explore.style';
 
-const Explore: React.FunctionComponent<{ projection: Projection }> = ({
-  projection,
-}) => {
-  const [currentMetric, setCurrentMetric] = useState(ExploreMetric.CASES);
+const Explore: React.FunctionComponent<{
+  projection: Projection;
+  chartId?: string;
+}> = ({ projection, chartId }) => {
+  const [currentMetric, setCurrentMetric] = useState(
+    (chartId && getMetricByChartId(chartId)) || ExploreMetric.CASES,
+  );
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 

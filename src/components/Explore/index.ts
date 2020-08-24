@@ -6,6 +6,7 @@ import {
   EXPLORE_METRICS,
   getMetricByChartId,
   getChartIdByMetric,
+  EXPLORE_CHART_IDS,
 } from 'components/Explore/utils';
 import ExploreChart from './ExploreChart';
 
@@ -17,5 +18,6 @@ export {
   getMetricByChartId,
   EXPLORE_METRICS,
   ExploreMetric,
-  getChartIdByMetric as getChartId,
+  getChartIdByMetric,
+  EXPLORE_CHART_IDS,
 };
