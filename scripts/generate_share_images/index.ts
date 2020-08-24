@@ -16,7 +16,8 @@ import {
   fetchAllCountyProjections,
 } from '../../src/common/utils/model';
 import { Projections } from '../../src/common/models/Projections';
-import { Metric, ALL_METRICS } from '../../src/common/metric';
+import { ALL_METRICS } from '../../src/common/metric';
+import { EXPLORE_METRICS } from '../../src/components/Explore';
 import os from 'os-utils';
 
 const BASE_URL = 'http://localhost:3000/internal/share-image';
@@ -94,6 +95,16 @@ const BLACKLISTED_COUNTIES = [
         });
       }
     }
+
+    // Explore share images
+    for (const exploreMetric of EXPLORE_METRICS) {
+      const shareUrl = urlJoin(relativeUrl, `/explore/${exploreMetric}`);
+      screenshots.push({
+        url: shareUrl,
+        filename: shareUrl,
+        outputSize: SHARE_OUTPUT_SIZE,
+      });
+    }
   }
 
   for (const stateProjections of allStatesProjections) {
@@ -137,9 +148,9 @@ const BLACKLISTED_COUNTIES = [
     let success = false;
     while (!success && triesLeft > 0) {
       console.log(`Screenshotting: ${batch.map(s => s.url).join(', ')}`);
-      const pageres = new Pageres({ timeout: PAGERES_TIMEOUT }).dest(
-        OUTPUT_DIR,
-      );
+      const pageres = new Pageres({
+        timeout: PAGERES_TIMEOUT,
+      }).dest(OUTPUT_DIR);
       for (const s of batch) {
         await fs.ensureDir(path.join(OUTPUT_DIR, s.filename, '..'));
         pageres.src(urlJoin(BASE_URL, s.url), [s.outputSize], {
