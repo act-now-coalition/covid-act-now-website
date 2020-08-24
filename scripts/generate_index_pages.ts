@@ -20,6 +20,10 @@ import * as urls from '../src/common/urls';
 // of the counties we have any data for and are therefore share-able.
 import { LocationSummariesByFIPS } from '../src/common/location_summaries';
 import { ALL_METRICS, getMetricName } from '../src/common/metric';
+import {
+  EXPLORE_METRICS,
+  getTitle as getExploreMetricTitle,
+} from '../src/components/Explore';
 const COUNTIES = Object.keys(LocationSummariesByFIPS).filter(
   fips => fips.length === 5,
 );
@@ -109,6 +113,47 @@ async function buildLocationPages(
         chartCanonicalUrl,
         locationName,
         getMetricName(metric),
+      ),
+    );
+  }
+
+  for (const metric of ALL_METRICS) {
+    const chartPage = path.join(relativeSiteUrl, `/chart/${metric}/index.html`);
+    const chartCanonicalUrl = urls.addSharingId(
+      urlJoin(canonicalUrlBase, `/chart/${metric}`),
+    );
+    const chartImageUrl = builder.fullImageUrl(
+      urlJoin(relativeImageUrl, `/chart/${metric}.png`),
+    );
+    await builder.writeTemplatedPage(
+      chartPage,
+      chartPageTags(
+        chartImageUrl,
+        chartCanonicalUrl,
+        locationName,
+        getMetricName(metric),
+      ),
+    );
+  }
+
+  for (const exploreMetric of EXPLORE_METRICS) {
+    const chartPage = path.join(
+      relativeSiteUrl,
+      `/explore/${exploreMetric}/index.html`,
+    );
+    const chartCanonicalUrl = urls.addSharingId(
+      urlJoin(canonicalUrlBase, `/explore/${exploreMetric}`),
+    );
+    const chartImageUrl = builder.fullImageUrl(
+      urlJoin(relativeImageUrl, `/explore/${exploreMetric}.png`),
+    );
+    await builder.writeTemplatedPage(
+      chartPage,
+      chartPageTags(
+        chartImageUrl,
+        chartCanonicalUrl,
+        locationName,
+        getExploreMetricTitle(exploreMetric),
       ),
     );
   }
