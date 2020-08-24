@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { isUndefined } from 'lodash';
 import { useParams } from 'react-router-dom';
 import { ParentSize } from '@vx/responsive';
 import {
@@ -41,7 +42,7 @@ const ExploreChartExportImage = () => {
   const projection = projections.primary as Projection;
   const metric = getMetricByChartId(chartId);
 
-  if (!metric) {
+  if (isUndefined(metric)) {
     return <h1>Unknown explore chart: {chartId}!</h1>;
   }
 

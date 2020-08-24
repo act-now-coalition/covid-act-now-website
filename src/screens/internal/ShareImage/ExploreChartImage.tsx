@@ -1,4 +1,6 @@
 import React, { useContext, useState } from 'react';
+import { isUndefined } from 'lodash';
+
 import { ThemeProvider, ThemeContext } from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { useProjections } from 'common/utils/model';
@@ -41,7 +43,7 @@ const ExploreChartImage = () => {
   const projection = projections.primary as Projection;
   const metric = getMetricByChartId(chartId);
 
-  if (!metric) {
+  if (isUndefined(metric)) {
     return <h1>Unknown explore chart: {chartId}!</h1>;
   }
 
