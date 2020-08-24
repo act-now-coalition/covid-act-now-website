@@ -11,8 +11,6 @@ import {
 import ExternalLink from 'components/ExternalLink';
 import { MetricDefinition } from './interfaces';
 
-export const METRIC_NAME = 'Daily new cases per 100k population';
-
 export const CaseIncidenceMetric: MetricDefinition = {
   renderStatus,
   renderDisclaimer,
@@ -59,9 +57,7 @@ export const CASE_DENSITY_LEVEL_INFO_MAP: LevelInfoMap = {
   },
 };
 
-export const CASE_DENSITY_DISCLAIMER = '';
-
-export function renderStatus(projections: Projections): React.ReactElement {
+function renderStatus(projections: Projections): React.ReactElement {
   const {
     locationName,
     currentCaseDensity,
@@ -76,7 +72,7 @@ export function renderStatus(projections: Projections): React.ReactElement {
     return (
       <Fragment>
         Not enough case data is available to generate{' '}
-        {METRIC_NAME.toLowerCase()}.
+        {CaseIncidenceMetric.extendedMetricName.toLowerCase()}.
       </Fragment>
     );
   }
