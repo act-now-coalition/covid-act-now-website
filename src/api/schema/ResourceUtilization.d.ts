@@ -26,7 +26,7 @@ export type Currentusagetotal = number;
 export type Typicalusagerate = number;
 
 /**
- * Base model for API output.
+ * Utilization of hospital resources.
  */
 export interface ResourceUtilization {
   capacity: Capacity;

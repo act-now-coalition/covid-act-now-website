@@ -50,11 +50,11 @@ export type Shortagestartdate = string;
  */
 export type Icubeds = ResourceUsageProjection;
 /**
- * Historical or Inferred Rt
+ * Inferred Rt
  */
 export type Rt = number;
 /**
- * Rt standard deviation
+ * Rt 90th percentile confidence interval upper endpoint.
  */
 export type Rtci90 = number;
 /**
@@ -106,12 +106,24 @@ export type Typicalusagerate = number;
  */
 export type Contacttracers = number;
 /**
+ * Region level metrics
+ */
+export type Metrics1 = Metrics;
+/**
+ * Ratio of people who test positive calculated using a 7 day rolling average.
+ */
+export type Testpositivity = number;
+/**
+ * The number of cases per 100k population calculated using a 7 day rolling average.
+ */
+export type Casedensity = number;
+/**
  * Total Population in geographic region.
  */
 export type Population1 = number;
 
 /**
- * Base model for API output.
+ * Summary of actual and prediction data for a single region.
  */
 export interface RegionSummary {
   countryName?: Countryname;
@@ -123,10 +135,11 @@ export interface RegionSummary {
   lastUpdatedDate: Lastupdateddate;
   projections: Projections;
   actuals: Actuals;
+  metrics?: Metrics1;
   population: Population1;
 }
 /**
- * Base model for API output.
+ * Summary of projection data.
  */
 export interface Projections {
   totalHospitalBeds: Totalhospitalbeds;
@@ -135,7 +148,7 @@ export interface Projections {
   RtCI90: Rtci90;
 }
 /**
- * Base model for API output.
+ * Resource usage projection data.
  */
 export interface ResourceUsageProjection {
   peakShortfall: Peakshortfall;
@@ -143,7 +156,7 @@ export interface ResourceUsageProjection {
   shortageStartDate: Shortagestartdate;
 }
 /**
- * Base model for API output.
+ * Known actuals data.
  */
 export interface Actuals {
   population: Population;
@@ -157,7 +170,7 @@ export interface Actuals {
   contactTracers?: Contacttracers;
 }
 /**
- * Base model for API output.
+ * Utilization of hospital resources.
  */
 export interface ResourceUtilization {
   capacity: Capacity;
@@ -165,4 +178,11 @@ export interface ResourceUtilization {
   currentUsageCovid: Currentusagecovid;
   currentUsageTotal: Currentusagetotal;
   typicalUsageRate: Typicalusagerate;
+}
+/**
+ * Calculated metrics data based on known actuals.
+ */
+export interface Metrics {
+  testPositivity: Testpositivity;
+  caseDensity: Casedensity;
 }

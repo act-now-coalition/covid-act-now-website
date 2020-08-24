@@ -55,7 +55,7 @@ export type Contacttracers = number;
 export type Date = string;
 
 /**
- * Base model for API output.
+ * Actual data for a specific day.
  */
 export interface ActualsTimeseriesRow {
   population: Population;
@@ -70,7 +70,7 @@ export interface ActualsTimeseriesRow {
   date: Date;
 }
 /**
- * Base model for API output.
+ * Utilization of hospital resources.
  */
 export interface ResourceUtilization {
   capacity: Capacity;
