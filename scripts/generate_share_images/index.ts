@@ -99,10 +99,16 @@ const BLACKLISTED_COUNTIES = [
     // Explore share images
     for (const exploreMetric of EXPLORE_METRICS) {
       const shareUrl = urlJoin(relativeUrl, `/explore/${exploreMetric}`);
+      const exportUrl = urlJoin(shareUrl, '/export');
       screenshots.push({
         url: shareUrl,
         filename: shareUrl,
         outputSize: SHARE_OUTPUT_SIZE,
+      });
+      screenshots.push({
+        url: exportUrl,
+        filename: exportUrl,
+        outputSize: EXPORT_OUTPUT_SIZE,
       });
     }
   }
