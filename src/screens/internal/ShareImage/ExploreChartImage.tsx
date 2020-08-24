@@ -13,8 +13,7 @@ import {
   ExploreChart,
   getSeries,
   getTitle,
-  EXPLORE_METRICS,
-  ExploreMetric,
+  getMetricByChartId,
 } from 'components/Explore';
 import {
   ChartWrapper,
@@ -27,7 +26,7 @@ import {
 
 const ExploreChartImage = () => {
   const theme = useContext(ThemeContext);
-  let { stateId, countyFipsId, metric: metricString } = useParams();
+  let { stateId, countyFipsId, chartId } = useParams();
 
   let projections: Projections | undefined;
   const [countyOption] = useState(
@@ -40,10 +39,10 @@ const ExploreChartImage = () => {
   }
 
   const projection = projections.primary as Projection;
-  const metric = parseInt(metricString) as ExploreMetric;
+  const metric = getMetricByChartId(chartId);
 
-  if (isNaN(metric) || !EXPLORE_METRICS.includes(metric)) {
-    return <h1>Unknown metric: {metricString}!</h1>;
+  if (!metric) {
+    return <h1>Unknown explore chart: {chartId}!</h1>;
   }
 
   return (

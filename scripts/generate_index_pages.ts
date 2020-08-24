@@ -23,6 +23,7 @@ import { ALL_METRICS, getMetricName } from '../src/common/metric';
 import {
   EXPLORE_METRICS,
   getTitle as getExploreMetricTitle,
+  getChartIdByMetric,
 } from '../src/components/Explore';
 const COUNTIES = Object.keys(LocationSummariesByFIPS).filter(
   fips => fips.length === 5,
@@ -137,15 +138,16 @@ async function buildLocationPages(
   }
 
   for (const exploreMetric of EXPLORE_METRICS) {
+    const chartId = getChartIdByMetric(exploreMetric);
     const chartPage = path.join(
       relativeSiteUrl,
-      `/explore/${exploreMetric}/index.html`,
+      `/explore/${chartId}/index.html`,
     );
     const chartCanonicalUrl = urls.addSharingId(
-      urlJoin(canonicalUrlBase, `/explore/${exploreMetric}`),
+      urlJoin(canonicalUrlBase, `/explore/${chartId}`),
     );
     const chartImageUrl = builder.fullImageUrl(
-      urlJoin(relativeImageUrl, `/explore/${exploreMetric}.png`),
+      urlJoin(relativeImageUrl, `/explore/${chartId}.png`),
     );
     await builder.writeTemplatedPage(
       chartPage,

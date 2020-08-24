@@ -22,12 +22,11 @@ import {
   ExploreChart,
   getSeries,
   getTitle,
-  EXPLORE_METRICS,
-  ExploreMetric,
+  getMetricByChartId,
 } from 'components/Explore';
 
 const ExploreChartExportImage = () => {
-  let { stateId, countyFipsId, metric: metricString } = useParams();
+  let { stateId, countyFipsId, chartId } = useParams();
   const lastUpdated = useModelLastUpdatedDate();
 
   let projections: Projections | undefined;
@@ -40,10 +39,10 @@ const ExploreChartExportImage = () => {
     return null;
   }
   const projection = projections.primary as Projection;
+  const metric = getMetricByChartId(chartId);
 
-  const metric = parseInt(metricString) as ExploreMetric;
-  if (isNaN(metric) || !EXPLORE_METRICS.includes(metric)) {
-    return <h1>Unknown metric: {metricString}!</h1>;
+  if (!metric) {
+    return <h1>Unknown explore chart: {chartId}!</h1>;
   }
 
   const chartHeight = 415;

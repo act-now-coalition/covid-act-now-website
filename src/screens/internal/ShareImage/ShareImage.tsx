@@ -42,22 +42,22 @@ export default function ShareImage({ match }: RouteComponentProps<{}>) {
       />
       <Route
         exact
-        path={`${match.path}states/:stateId/explore/:metric`}
+        path={`${match.path}states/:stateId/explore/:chartId`}
         component={ExploreChartImage}
       />
       <Route
         exact
-        path={`${match.path}counties/:countyFipsId/explore/:metric`}
+        path={`${match.path}counties/:countyFipsId/explore/:chartId`}
         component={ExploreChartImage}
       />
       <Route
         exact
-        path={`${match.path}counties/:countyFipsId/explore/:metric/export`}
+        path={`${match.path}counties/:countyFipsId/explore/:chartId/export`}
         component={ExploreChartExportImage}
       />
       <Route
         exact
-        path={`${match.path}states/:stateId/explore/:metric/export`}
+        path={`${match.path}states/:stateId/explore/:chartId/export`}
         component={ExploreChartExportImage}
       />
       <Route path="/*">Bad Share Image URL.</Route>
