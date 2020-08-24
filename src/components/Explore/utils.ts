@@ -29,7 +29,7 @@ export enum ExploreMetric {
   ICU_HOSPITALIZATIONS,
 }
 
-const sortedExploreMetrics = [
+export const EXPLORE_METRICS = [
   ExploreMetric.CASES,
   ExploreMetric.DEATHS,
   ExploreMetric.HOSPITALIZATIONS,
@@ -134,8 +134,12 @@ export function getSeries(
   }));
 }
 
+export function getTitle(metric: ExploreMetric) {
+  return exploreMetricData[metric].title;
+}
+
 export function getMetricLabels() {
-  return sortedExploreMetrics.map(metric => exploreMetricData[metric].title);
+  return EXPLORE_METRICS.map(metric => exploreMetricData[metric].title);
 }
 
 export function findPointByDate(data: Column[], date: Date): Column | null {

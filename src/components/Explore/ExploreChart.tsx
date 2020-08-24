@@ -142,10 +142,10 @@ const ExploreChart: React.FC<{
     <Styles.PositionRelative>
       <svg width={width} height={height}>
         <Group key="chart-container" top={marginTop} left={marginLeft}>
-          <Styles.GridLines>
+          <ChartStyle.LineGrid>
             <GridColumns<Date> scale={dateScale} height={innerHeight} />
             <GridRows<number> scale={yScale} width={innerWidth} />
-          </Styles.GridLines>
+          </ChartStyle.LineGrid>
           <RectClipGroup width={innerWidth} height={innerHeight}>
             {series.map(({ label, data, type }) => (
               <SeriesChart
