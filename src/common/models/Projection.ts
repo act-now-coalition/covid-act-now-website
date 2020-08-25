@@ -7,6 +7,9 @@ import {
   ActualsTimeseriesRow,
   RegionSummaryWithTimeseries,
   Timeseries,
+  MetricsTimeseriesRow,
+  Metrics,
+  Metricstimeseries,
 } from 'api/schema/RegionSummaryWithTimeseries';
 import { ICUHeadroomInfo, calcICUHeadroom } from './ICUHeadroom';
 import { lastValue, indexOfLastValue } from './utils';
@@ -150,6 +153,7 @@ export class Projection {
     const {
       timeseries,
       actualTimeseries,
+      metricsTimeseries,
       dates,
     } = this.getAlignedTimeseriesAndDates(
       summaryWithTimeseries,
@@ -217,7 +221,9 @@ export class Projection {
 
     const disableRt = false;
     this.rtRange = disableRt ? [null] : this.calcRtRange(timeseries);
-    this.testPositiveRate = this.calcTestPositiveRate();
+    this.testPositiveRate = metricsTimeseries.map(row =>
+      row ? row.testPositivity : null,
+    );
 
     this.icuHeadroomInfo = calcICUHeadroom(
       this.stateName,
@@ -233,7 +239,9 @@ export class Projection {
 
     this.contractTracers = this.calcContactTracers(this.actualTimeseries);
 
-    this.caseDensityByCases = this.calcCaseDensityByCases();
+    this.caseDensityByCases = metricsTimeseries.map(row =>
+      row ? row.caseDensity : null,
+    );
     this.caseDensityByDeaths = this.calcCaseDensityByDeaths();
     this.caseDensityRange = this.calcCaseDensityRange();
 
@@ -342,13 +350,25 @@ export class Projection {
    * based off the date. Eventually would be nice to use this around instead of the
    * two list scenario we have going right now.
    */
-  private makeDateDictionary(ts: Timeseries | ActualsTimeseries) {
+  private makeDateDictionary(
+    ts: Timeseries | ActualsTimeseries | Metricstimeseries,
+  ) {
     const dict: {
-      [date: string]: PredictionTimeseriesRow | ActualsTimeseriesRow;
+      [date: string]:
+        | PredictionTimeseriesRow
+        | ActualsTimeseriesRow
+        | MetricsTimeseriesRow;
     } = {};
-    ts.forEach((row: PredictionTimeseriesRow | ActualsTimeseriesRow) => {
-      dict[row.date] = row;
-    });
+    ts.forEach(
+      (
+        row:
+          | PredictionTimeseriesRow
+          | ActualsTimeseriesRow
+          | MetricsTimeseriesRow,
+      ) => {
+        dict[row.date] = row;
+      },
+    );
     return dict;
   }
 
@@ -367,6 +387,7 @@ export class Projection {
   ) {
     const timeseriesRaw = summaryWithTimeseries.timeseries;
     const actualsTimeseriesRaw = summaryWithTimeseries.actualsTimeseries;
+    const metricsTimeseriesRaw = summaryWithTimeseries.metricsTimeseries;
     assert(
       actualsTimeseriesRaw.length > 0,
       `FIPS ${this.fips} missing actuals timeseries!`,
@@ -385,11 +406,15 @@ export class Projection {
 
     const timeseries: Array<PredictionTimeseriesRow | null> = [];
     const actualsTimeseries: Array<ActualsTimeseriesRow | null> = [];
+    const metricsTimeseries: Array<MetricsTimeseriesRow | null> = [];
     const dates: Date[] = [];
 
     const timeseriesDictionary = this.makeDateDictionary(timeseriesRaw);
     const actualsTimeseriesDictionary = this.makeDateDictionary(
       actualsTimeseriesRaw,
+    );
+    const metricsTimeseriesDictionary = this.makeDateDictionary(
+      metricsTimeseriesRaw,
     );
 
     let currDate = earliestDate.clone();
@@ -401,9 +426,12 @@ export class Projection {
       const actualsTimeseriesrowForDate = actualsTimeseriesDictionary[
         ts
       ] as ActualsTimeseriesRow;
-
+      const metricsTimeseriesRowForDate = metricsTimeseriesDictionary[
+        ts
+      ] as MetricsTimeseriesRow;
       timeseries.push(timeseriesRowForDate || null);
       actualsTimeseries.push(actualsTimeseriesrowForDate || null);
+      metricsTimeseries.push(metricsTimeseriesRowForDate || null);
       dates.push(currDate.toDate());
 
       // increment the date by one
@@ -418,6 +446,7 @@ export class Projection {
     return {
       timeseries: timeseries.slice(0, days),
       actualTimeseries: actualsTimeseries.slice(0, days),
+      metricsTimeseries: metricsTimeseries.slice(0, days),
       dates: dates.slice(0, days),
     };
   }
