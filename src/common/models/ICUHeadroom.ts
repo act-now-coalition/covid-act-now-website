@@ -14,10 +14,7 @@ import {
 // We sometimes need to override the ICU metric for locations due to bad data, etc.
 // TODO(https://trello.com/c/CPcYKmdo/): Review once we have better estimates for
 // these counties
-const ICU_HEADROOM_OVERRIDES = [
-  '01101', // Montgomery, AL
-  '48201', // Harris, TX
-];
+const ICU_HEADROOM_OVERRIDES: Array<string> = [];
 
 /**
  * Default utilization to use (before decomp) if there isn't a location-specific
