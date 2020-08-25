@@ -9,7 +9,7 @@ import {
 import ReactTooltip from 'react-tooltip';
 import STATE_CENTERS from '../../common/us_state_centers';
 import { countyColor } from 'common/colors';
-import { getCounty } from 'common/locations';
+import { findCountyByFips } from 'common/locations';
 import { CountyMapWrapper, CountyMapLayerWrapper } from './CountyMap.style';
 
 const CountyMap = ({ selectedCounty, setSelectedCounty }) => {
@@ -55,7 +55,7 @@ const CountyMap = ({ selectedCounty, setSelectedCounty }) => {
           const isSelected =
             selectedCounty && selectedCounty.full_fips_code === geoFullFips;
 
-          const county = getCounty(stateId, geoFullFips);
+          const county = findCountyByFips(geoFullFips);
 
           return (
             <Link
