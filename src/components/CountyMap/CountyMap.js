@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import {
   ComposableMap,
   Geographies,
@@ -9,6 +9,7 @@ import {
 import ReactTooltip from 'react-tooltip';
 import STATE_CENTERS from '../../common/us_state_centers';
 import { countyColor } from 'common/colors';
+import { getCounty } from 'common/locations';
 import { CountyMapWrapper, CountyMapLayerWrapper } from './CountyMap.style';
 
 const CountyMap = ({ selectedCounty, setSelectedCounty }) => {
@@ -17,6 +18,10 @@ const CountyMap = ({ selectedCounty, setSelectedCounty }) => {
   const state = STATE_CENTERS[stateId];
   const counties = require(`./countyTopoJson/${stateId}.json`);
   const [content, setContent] = useState('');
+
+  const onMouseLeave = () => {
+    setContent('');
+  };
 
   return (
     <CountyMapWrapper>
@@ -46,39 +51,47 @@ const CountyMap = ({ selectedCounty, setSelectedCounty }) => {
         state={state}
         counties={counties}
         geographyFactory={geo => {
+          const geoFullFips = geo.properties.GEOID;
           const isSelected =
-            selectedCounty &&
-            selectedCounty.full_fips_code === geo.properties.GEOID;
+            selectedCounty && selectedCounty.full_fips_code === geoFullFips;
+
+          const county = getCounty(stateId, geoFullFips);
+
           return (
-            <Geography
-              key={geo.rsmKey}
-              geography={geo}
-              // The fill is only used for hover
-              fill={'white'}
-              fillOpacity={0}
-              // The stroke is only used for selection.
-              strokeOpacity={isSelected ? 1 : 0}
-              stroke={'black'}
-              strokeWidth={3}
-              onMouseEnter={() => {
-                const { NAME } = geo.properties;
-                setContent(NAME);
-              }}
-              onMouseLeave={() => {
-                setContent('');
-              }}
-              onClick={() => setSelectedCounty(geo.properties.GEOID)}
-              style={{
-                cursor: 'pointer',
-                hover: {
-                  fillOpacity: '0.5',
-                  outline: 'none',
-                },
-                pressed: {
-                  outline: 'none',
-                },
-              }}
-            />
+            <Link
+              key={geoFullFips}
+              to={`/us/${stateId.toLowerCase()}/county/${
+                county.county_url_name
+              }`}
+            >
+              <Geography
+                key={geo.rsmKey}
+                geography={geo}
+                // The fill is only used for hover
+                fill={'white'}
+                fillOpacity={0}
+                // The stroke is only used for selection.
+                strokeOpacity={isSelected ? 1 : 0}
+                stroke={'black'}
+                strokeWidth={3}
+                onMouseEnter={() => {
+                  const { NAME } = geo.properties;
+                  setContent(NAME);
+                }}
+                onMouseLeave={onMouseLeave}
+                onClick={() => setSelectedCounty(geoFullFips)}
+                style={{
+                  cursor: 'pointer',
+                  hover: {
+                    fillOpacity: '0.5',
+                    outline: 'none',
+                  },
+                  pressed: {
+                    outline: 'none',
+                  },
+                }}
+              />
+            </Link>
           );
         }}
       />

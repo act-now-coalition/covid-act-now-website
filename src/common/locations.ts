@@ -1,6 +1,6 @@
 /** Helpers for dealing with the State / Counties dataset. */
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
-import { each, sortBy, takeRight } from 'lodash';
+import { each, sortBy, takeRight, find as _find } from 'lodash';
 import { assert } from './utils';
 import countyAdjacency from './data/county_adjacency_msa.json';
 
@@ -147,4 +147,12 @@ export function isStateFips(fips: string) {
 export function getAdjacentCounties(fips: string): string[] {
   assert(fips in ADJACENT_COUNTIES, `${fips} not found in adjacency list.`);
   return ADJACENT_COUNTIES[fips].adjacent_counties;
+}
+
+export function getCounty(stateId: string, fullFips: string) {
+  return _find(
+    // @ts-ignore: US_STATE_DATASET is .js, but this is valid
+    US_STATE_DATASET.state_county_map_dataset[stateId].county_dataset,
+    ['full_fips_code', fullFips],
+  );
 }
