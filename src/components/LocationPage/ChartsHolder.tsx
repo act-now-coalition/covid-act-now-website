@@ -12,7 +12,7 @@ import { Metric } from 'common/metric';
 import CompareMain from 'components/Compare/CompareMain';
 import { getCountiesArr } from 'common/utils/compare';
 import { countySummary } from 'common/location_summaries';
-import Explore from 'components/Explore';
+import Explore, { EXPLORE_CHART_IDS } from 'components/Explore';
 
 // TODO(michael): figure out where this type declaration should live.
 type County = {
@@ -44,6 +44,7 @@ const ChartsHolder = (props: {
   chartId: string;
   countyId: string;
 }) => {
+  const { chartId } = props;
   const projection = props.projections.primary;
 
   const {
@@ -60,33 +61,37 @@ const ChartsHolder = (props: {
   const contactTracingRef = useRef<HTMLDivElement>(null);
   const shareBlockRef = useRef<HTMLDivElement>(null);
   const caseDensityRef = useRef<HTMLDivElement>(null);
+  const exploreChartRef = useRef<HTMLDivElement>(null);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
   useEffect(() => {
-    const chartIdentifiers = ['0', '1', '2', '3', '4', '5'];
     const scrollToChart = () => {
       const timeoutId = setTimeout(() => {
-        if (props.chartId && !chartIdentifiers.includes(props.chartId)) return;
-        else {
-          if (props.chartId === '0' && rtRangeRef.current)
+        if (chartId && EXPLORE_CHART_IDS.includes(chartId)) {
+          scrollTo(exploreChartRef.current);
+        } else {
+          if (chartId === '0' && rtRangeRef.current)
             scrollTo(rtRangeRef.current);
-          if (props.chartId === '1' && testPositiveRef.current)
+          if (chartId === '1' && testPositiveRef.current)
             scrollTo(testPositiveRef.current);
-          if (props.chartId === '2' && icuUtilizationRef.current)
+          if (chartId === '2' && icuUtilizationRef.current)
             scrollTo(icuUtilizationRef.current);
-          if (props.chartId === '3' && contactTracingRef.current)
+          if (chartId === '3' && contactTracingRef.current)
             scrollTo(contactTracingRef.current);
-          if (props.chartId === '5' && caseDensityRef.current)
+          if (chartId === '5' && caseDensityRef.current) {
             scrollTo(caseDensityRef.current);
+          } else {
+            return;
+          }
         }
       }, 200);
       return () => clearTimeout(timeoutId);
     };
 
     scrollToChart();
-  }, [props.chartId]);
+  }, [chartId]);
 
   const shareButtonProps = {
     chartId: props.chartId,
@@ -194,8 +199,11 @@ const ChartsHolder = (props: {
                 <a href="mailto:info@covidactnow.org">let us know</a>.
               </p>
             </MainContentInner>
-            <MainContentInner>
-              <Explore projection={props.projections.primary} />
+            <MainContentInner ref={exploreChartRef}>
+              <Explore
+                projection={props.projections.primary}
+                chartId={chartId}
+              />
             </MainContentInner>
           </ChartContentWrapper>
           <div ref={shareBlockRef}>

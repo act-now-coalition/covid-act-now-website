@@ -29,12 +29,25 @@ export enum ExploreMetric {
   ICU_HOSPITALIZATIONS,
 }
 
-const sortedExploreMetrics = [
+export const EXPLORE_METRICS = [
   ExploreMetric.CASES,
   ExploreMetric.DEATHS,
   ExploreMetric.HOSPITALIZATIONS,
   ExploreMetric.ICU_HOSPITALIZATIONS,
 ];
+
+export function getMetricByChartId(chartId: string): ExploreMetric | undefined {
+  switch (chartId) {
+    case 'cases':
+      return ExploreMetric.CASES;
+    case 'deaths':
+      return ExploreMetric.DEATHS;
+    case 'hospitalizations':
+      return ExploreMetric.HOSPITALIZATIONS;
+    case 'icu-hospitalizations':
+      return ExploreMetric.ICU_HOSPITALIZATIONS;
+  }
+}
 
 interface SerieDescription {
   label: string;
@@ -45,6 +58,7 @@ interface SerieDescription {
 
 interface ExploreMetricDescription {
   title: string;
+  chartId: string;
   series: SerieDescription[];
 }
 
@@ -53,6 +67,7 @@ export const exploreMetricData: {
 } = {
   [ExploreMetric.CASES]: {
     title: 'Cases',
+    chartId: 'cases',
     series: [
       {
         label: 'Cases',
@@ -70,6 +85,7 @@ export const exploreMetricData: {
   },
   [ExploreMetric.DEATHS]: {
     title: 'Deaths',
+    chartId: 'deaths',
     series: [
       {
         label: 'Deaths',
@@ -87,6 +103,7 @@ export const exploreMetricData: {
   },
   [ExploreMetric.HOSPITALIZATIONS]: {
     title: 'Hospitalizations',
+    chartId: 'hospitalizations',
     series: [
       {
         label: 'Hospitalizations',
@@ -104,6 +121,7 @@ export const exploreMetricData: {
   },
   [ExploreMetric.ICU_HOSPITALIZATIONS]: {
     title: 'ICU Hospitalizations',
+    chartId: 'icu-hospitalizations',
     series: [
       {
         label: 'ICU Hospitalizations',
@@ -121,6 +139,10 @@ export const exploreMetricData: {
   },
 };
 
+export const EXPLORE_CHART_IDS = Object.values(exploreMetricData).map(
+  metric => metric.chartId,
+);
+
 export function getSeries(
   metric: ExploreMetric,
   projection: Projection,
@@ -134,8 +156,16 @@ export function getSeries(
   }));
 }
 
+export function getTitle(metric: ExploreMetric) {
+  return exploreMetricData[metric].title;
+}
+
+export function getChartIdByMetric(metric: ExploreMetric) {
+  return exploreMetricData[metric].chartId;
+}
+
 export function getMetricLabels() {
-  return sortedExploreMetrics.map(metric => exploreMetricData[metric].title);
+  return EXPLORE_METRICS.map(metric => exploreMetricData[metric].title);
 }
 
 export function findPointByDate(data: Column[], date: Date): Column | null {
