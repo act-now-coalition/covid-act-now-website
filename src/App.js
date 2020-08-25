@@ -113,7 +113,7 @@ export default function App() {
                * track users through the survey, as well as their source.
                */}
               <Route
-                path="feedback-survery"
+                path="/feedback-survery"
                 component={() => <RedirectToFeedbackSurvey source="social" />}
               />
 
