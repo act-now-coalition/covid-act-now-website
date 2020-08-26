@@ -9,7 +9,7 @@ import { TRACERS_NEEDED_PER_CASE } from 'common/models/Projection';
 import { MetricDefinition } from './interfaces';
 import ExternalLink from 'components/ExternalLink';
 
-export const METRIC_NAME = 'Tracers hired';
+const METRIC_NAME = 'Tracers hired';
 
 export const ContactTracingMetric: MetricDefinition = {
   renderStatus,
@@ -76,7 +76,7 @@ export const CONTACT_TRACING_LEVEL_INFO_MAP: LevelInfoMap = {
   },
 };
 
-export function renderStatus(projections: Projections): React.ReactElement {
+function renderStatus(projections: Projections): React.ReactElement {
   const {
     currentContactTracers,
     currentContactTracerMetric,
@@ -160,5 +160,3 @@ function renderDisclaimer(): React.ReactElement {
     </Fragment>
   );
 }
-
-export const CONTACT_TRACING_DISCLAIMER = `that at least 90% of contacts for each new case must be traced within 48 hours in order to contain COVID. Experts estimate that tracing each new case within 48 hours requires an average of ${TRACERS_NEEDED_PER_CASE} contact tracers per new case, as well as fast testing.`;
