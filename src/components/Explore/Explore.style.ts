@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Box from '@material-ui/core/Box';
-
+import Typography from '@material-ui/core/Typography';
 import MuiTab from '@material-ui/core/Tab';
 import MuiTabs from '@material-ui/core/Tabs';
 import theme from 'assets/theme';
@@ -16,9 +16,13 @@ export const Container = styled.div`
   margin-bottom: ${theme.spacing(4)}px;
 `;
 
-// Header
 export const Header = styled.div`
   margin-bottom: ${theme.spacing(4) + theme.spacing(2)}px;
+`;
+
+export const Heading = styled(Typography)`
+  margin-top: 0;
+  margin-bottom: 0;
 `;
 
 export const Subtitle = styled.div`

@@ -4,6 +4,7 @@ import { Series } from './interfaces';
 import { Column } from 'common/models/Projection';
 import { Projection, DatasetId } from 'common/models/Projection';
 import { ChartType } from './interfaces';
+import { share_image_url } from 'assets/data/share_images_url.json';
 
 export function getMaxBy<T>(
   series: Series[],
@@ -173,4 +174,25 @@ export function findPointByDate(data: Column[], date: Date): Column | null {
     p => new Date(p.x).toDateString() === date.toDateString(),
   );
   return idx >= 0 ? data[idx] : null;
+}
+
+export function getImageFilename(fips: string, metric: ExploreMetric) {
+  // TODO(pablo): Get the state/county name and include it in the name
+  const chartId = getChartIdByMetric(metric);
+  const downloadDate = moment().format('YYYY-MM-DD');
+  return `${fips}-${chartId}-${downloadDate}.png`;
+}
+
+export function getExportImageUrl(fips: string, metric: ExploreMetric) {
+  const chartId = getChartIdByMetric(metric);
+  return `${share_image_url}explore/${chartId}/export.png`;
+}
+
+export function getChartUrl(fips: string, metric: ExploreMetric) {
+  const chartId = getChartIdByMetric(metric);
+  return `${share_image_url}explore/${chartId}/index.html`;
+}
+
+export function getSocialQuote(fips: string, metric: ExploreMetric) {
+  return 'PLACEHOLDER';
 }
