@@ -9,6 +9,7 @@
     "@types/d3-array": "^2.0.0",
     "@types/d3-shape": "^1.3.2",
     "@types/d3-time": "^1.0.10",
+    "@types/uuid": "^8.3.0",
     "@vx/axis": "^0.0.196",
     "@vx/clip-path": "^0.0.196",
     "@vx/curve": "^0.0.196",
@@ -47,7 +48,8 @@
     "react-tooltip": "^4.1.2",
     "sharp": "^0.25.2",
     "styled-components": "^5.0.1",
-    "tar": "^6.0.1"
+    "tar": "^6.0.1",
+    "uuid": "^8.3.0"
   },
   "scripts": {
     "start": "cross-env TSC_COMPILE_ON_ERROR=false react-scripts -r @cypress/instrument-cra start",
