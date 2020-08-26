@@ -7,7 +7,7 @@ import ExternalLink from 'components/ExternalLink';
 const FEEDBACK_SURVEY_URL = 'https://can386399.typeform.com/to/fCLv9bzl';
 
 export function getFeedbackSurveyUrl(source: string) {
-  return `${FEEDBACK_SURVEY_URL}#source=${source}&${uuidv4()}`;
+  return `${FEEDBACK_SURVEY_URL}#source=${source}&id=${uuidv4()}`;
 }
 
 const renderButton = () => (
