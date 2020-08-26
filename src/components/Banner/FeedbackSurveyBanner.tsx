@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Banner from './Banner';
 import { SurveyButton } from './Banner.style';
@@ -30,14 +30,5 @@ const MESSAGE = `We’re a team of volunteers working to provide you with
 const FeedbackSurveyBanner: React.FC = () => (
   <Banner message={MESSAGE} renderButton={renderButton} />
 );
-
-export const RedirectToFeedbackSurvey: React.FC<{ source: string }> = ({
-  source,
-}) => {
-  useEffect(() => {
-    window.location.href = getFeedbackSurveyUrl(source);
-  }, [source]);
-  return null;
-};
 
 export default FeedbackSurveyBanner;
