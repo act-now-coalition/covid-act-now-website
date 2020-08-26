@@ -1,5 +1,7 @@
 import Banner from './Banner';
-import FeedbackSurveyBanner from './FeedbackSurveyBanner';
+import FeedbackSurveyBanner, {
+  RedirectToFeedbackSurvey,
+} from './FeedbackSurveyBanner';
 
 export default Banner;
-export { FeedbackSurveyBanner };
+export { FeedbackSurveyBanner, RedirectToFeedbackSurvey };
