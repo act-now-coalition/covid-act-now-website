@@ -23,7 +23,7 @@ const getMetricHeaderBackground = (
 ) => {
   if (isModal) {
     if (isSelectedMetric && !sortByPopulation) return 'black';
-    return '`${COLOR_MAP.GRAY_BODY_COPY}`';
+    return `${COLOR_MAP.GRAY_BODY_COPY}`;
   } else {
     if (isSelectedMetric && !sortByPopulation) return `${COLOR_MAP.BLUE}`;
     return 'white';
@@ -85,7 +85,6 @@ export const ArrowContainer = styled.div<{
   font-size: 0.875rem;
   transform: translate(-0.25rem, 0.15rem);
   margin-top: 0.25rem;
-  flex-direction: column;
   display: flex;
 
   span {
@@ -132,7 +131,7 @@ export const LocationHeaderCell = styled(TableCell)<{
   ${ArrowContainer} {
     svg{
       &:nth-child(2){
-        transform: translatey(-0.3rem);
+        transform: translatex(-0.1rem);
         color: ${({ arrowColorSelected, sortDescending, sortByPopulation }) =>
           sortDescending && sortByPopulation && `${arrowColorSelected}`};
       }
@@ -176,7 +175,7 @@ export const MetricHeaderCell = styled(TableCell)<{
     ${ArrowContainer} {
       svg{
         &:nth-child(2) {
-          transform: translatey(-0.3rem);
+          transform: translatex(-0.1rem);
           color: ${({
             arrowColorSelected,
             sortDescending,
@@ -208,7 +207,10 @@ export const MetricHeaderCell = styled(TableCell)<{
             sortByPopulation,
             isSelectedMetric,
           }) =>
-            !sortDescending && !sortByPopulation && isSelectedMetric && 'red'};
+            !sortDescending &&
+            !sortByPopulation &&
+            isSelectedMetric &&
+            `${arrowColorSelected}`};
           }
         }
       }

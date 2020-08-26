@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { ChartContentWrapper, MainContentInner } from './ChartsHolder.style';
 import NoCountyDetail from './NoCountyDetail';
 import { Projections } from 'common/models/Projections';
@@ -10,14 +10,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { Metric } from 'common/metric';
 import CompareMain from 'components/Compare/CompareMain';
-import {
-  getNeighboringCounties,
-  getLocationPageCountiesSelection,
-  getAllCountiesSelection,
-  getLocationPageViewMoreCopy,
-} from 'common/utils/compare';
 import { countySummary } from 'common/location_summaries';
-import { MetroFilter, GeoScopeFilter } from 'common/utils/compare';
 
 // TODO(michael): figure out where this type declaration should live.
 type County = {
@@ -149,26 +142,6 @@ const ChartsHolder = (props: {
     metricsInfo: countySummary(props.county.full_fips_code),
   };
 
-  const [countyTypeToView, setCountyTypeToView] = useState(MetroFilter.ALL);
-  const [geoScope, setGeoScope] = useState(GeoScopeFilter.STATE);
-
-  function getLocationsForCompare() {
-    if (geoScope === GeoScopeFilter.NEARBY) {
-      return getNeighboringCounties(props.county.full_fips_code);
-    } else if (geoScope === GeoScopeFilter.STATE) {
-      return getLocationPageCountiesSelection(countyTypeToView, props.stateId);
-    } else {
-      return getAllCountiesSelection(countyTypeToView);
-    }
-  }
-
-  const viewMoreCopy = getLocationPageViewMoreCopy(
-    geoScope,
-    countyTypeToView,
-    props.projections.stateName,
-  );
-  const locationsForCompare = getLocationsForCompare();
-
   // TODO(pablo): Create separate refs for signup and share
   return (
     <>
@@ -196,13 +169,7 @@ const ChartsHolder = (props: {
               stateName={props.projections.stateName}
               county={props.county}
               locationsViewable={6}
-              locations={locationsForCompare}
               currentCounty={currentCountyForCompare}
-              viewMoreCopy={viewMoreCopy}
-              countyTypeToView={countyTypeToView}
-              setCountyTypeToView={setCountyTypeToView}
-              geoScope={geoScope}
-              setGeoScope={setGeoScope}
               stateId={props.stateId}
             />
             <MainContentInner>

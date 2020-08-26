@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { locationNameCellWidth, metricCellWidth } from './Compare.style';
-import { COLORS } from 'common';
 import { RankedLocationSummary } from 'common/utils/compare';
 
 const minTableWidth = locationNameCellWidth + 5 * metricCellWidth;

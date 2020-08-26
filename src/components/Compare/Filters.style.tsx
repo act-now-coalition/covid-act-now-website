@@ -92,7 +92,10 @@ export const MetroMenuButton = styled(Button)<{
 }>`
   align-items: flex-start;
   text-transform: none;
-  border: 1px solid #e0e0e0;
+  border: ${({ disabled, isModal }) =>
+    disabled && isModal
+      ? `1px solid ${COLOR_MAP.GRAY.DARK}`
+      : '1px solid #e0e0e0'};
   width: 200px;
   border-radius: ${({ isOpen }) => (isOpen ? '4px 4px 0 0' : '4px')};
   font-family: Roboto;
@@ -108,6 +111,8 @@ export const MetroMenuButton = styled(Button)<{
     flex-direction: row;
     white-space: nowrap;
     justify-content: space-between;
+    color: ${({ disabled, isModal }) =>
+      disabled && isModal && `${COLOR_MAP.GRAY.DARK}`};
 
     &:first-child {
       color: ${({ disabled, isModal }) =>
@@ -138,6 +143,8 @@ export const MetroMenuButton = styled(Button)<{
   svg {
     margin: auto 0 auto 0.2rem;
     transform: translatex(0.2rem);
+    color: ${({ disabled, isModal }) =>
+      disabled && isModal && `${COLOR_MAP.GRAY.DARK}`};
   }
 
   @media (min-width: 600px) {
@@ -172,6 +179,6 @@ export const SwitchGrid = styled(Grid)<{
   }
 `;
 
-export const MetroMenuPopper = styled(Popper)<{ isModal: boolean }>`
-  z-index: ${({ isModal }) => isModal && '1000'};
+export const MetroMenuPopper = styled(Popper)`
+  z-index: 10;
 `;

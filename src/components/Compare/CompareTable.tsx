@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import { sortBy, findIndex, partition, reverse, isNumber } from 'lodash';
 import {
   Wrapper,
@@ -39,11 +39,26 @@ const CompareTable = (props: {
   geoScope?: GeoScopeFilter;
   setGeoScope?: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
   stateId?: string;
+  sorter: number;
+  setSorter: React.Dispatch<React.SetStateAction<number>>;
+  sortDescending: boolean;
+  setSortDescending: React.Dispatch<React.SetStateAction<boolean>>;
+  sortByPopulation: boolean;
+  setSortByPopulation: React.Dispatch<React.SetStateAction<boolean>>;
+  sliderValue: GeoScopeFilter;
+  setSliderValue: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
 }) => {
+  const {
+    sorter,
+    setSorter,
+    sortDescending,
+    setSortDescending,
+    sortByPopulation,
+    setSortByPopulation,
+    sliderValue,
+    setSliderValue,
+  } = props;
   const { setViewAllCounties } = props;
-  const [sorter, setSorter] = useState(5);
-  const [sortDescending, setSortDescending] = useState(true);
-  const [sortByPopulation, setSortByPopulation] = useState(false);
 
   const currentCounty = props.county && props.currentCounty;
 
@@ -129,14 +144,6 @@ const CompareTable = (props: {
       Metric.CONTACT_TRACING
     }`;
 
-  // TODO (chelsi) filter-related WIP:
-  // necessary? :
-  useEffect(() => {
-    if (setViewAllCounties) {
-      setViewAllCounties(false);
-    }
-  }, [setViewAllCounties]);
-
   const compareSubheader = props.county
     ? `${getAbbreviatedCounty(props.county.county)}, ${
         props.stateId
@@ -165,6 +172,8 @@ const CompareTable = (props: {
               geoScope={props.geoScope}
               setGeoScope={props.setGeoScope}
               isModal={props.isModal}
+              sliderValue={sliderValue}
+              setSliderValue={setSliderValue}
             />
           </div>
         </Fragment>

@@ -32,6 +32,14 @@ const ModalCompare = (props: {
   geoScope?: GeoScopeFilter;
   setGeoScope?: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
   stateId?: string;
+  sorter: number;
+  setSorter: React.Dispatch<React.SetStateAction<number>>;
+  sortDescending: boolean;
+  setSortDescending: React.Dispatch<React.SetStateAction<boolean>>;
+  sortByPopulation: boolean;
+  setSortByPopulation: React.Dispatch<React.SetStateAction<boolean>>;
+  sliderValue: GeoScopeFilter;
+  setSliderValue: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
 }) => {
   const { handleCloseModal } = props;
 
@@ -64,6 +72,8 @@ const ModalCompare = (props: {
           geoScope={props.geoScope}
           setGeoScope={props.setGeoScope}
           isModal
+          sliderValue={props.sliderValue}
+          setSliderValue={props.setSliderValue}
         />
         <CloseIcon onClick={() => props.handleCloseModal()} />
       </ModalHeader>
@@ -82,6 +92,14 @@ const ModalCompare = (props: {
         geoScope={props.geoScope}
         setGeoScope={props.setGeoScope}
         stateId={props.stateId}
+        sorter={props.sorter}
+        setSorter={props.setSorter}
+        sortDescending={props.sortDescending}
+        setSortDescending={props.setSortDescending}
+        sortByPopulation={props.sortByPopulation}
+        setSortByPopulation={props.setSortByPopulation}
+        sliderValue={props.sliderValue}
+        setSliderValue={props.setSliderValue}
       />
     </Fragment>
   );

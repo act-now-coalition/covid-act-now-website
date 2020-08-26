@@ -57,6 +57,7 @@ const HeaderCell = (props: {
       sortDescending={sortDescending}
       isSelectedMetric={isSelectedMetric}
     >
+      <span>{getMetricNameForCompare(metricInMap)}</span>
       <ArrowContainer
         arrowColorNotSelected={arrowColorNotSelected}
         isModal={isModal}
@@ -64,14 +65,6 @@ const HeaderCell = (props: {
         <ExpandLessIcon onClick={() => setSortDescending(false)} />
         <ExpandMoreIcon onClick={() => setSortDescending(true)} />
       </ArrowContainer>
-      <span>{getMetricNameForCompare(metricInMap)}</span>
-      {/* <ArrowContainer
-        arrowColorNotSelected={arrowColorNotSelected}
-        isModal={isModal}
-      >
-        <ExpandLessIcon onClick={() => setSortDescending(false)} />
-        <ExpandMoreIcon onClick={() => setSortDescending(true)} />
-      </ArrowContainer> */}
     </MetricHeaderCell>
   );
 };

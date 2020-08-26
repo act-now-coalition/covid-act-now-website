@@ -3,24 +3,25 @@ import { Modal } from '@material-ui/core';
 import CompareTable from 'components/Compare/CompareTable';
 import ModalCompare from 'components/Compare/ModalCompare';
 import { DivForRef } from 'components/Compare/Compare.style';
-import { SummaryForCompare } from 'common/utils/compare';
-import { MetroFilter, GeoScopeFilter } from 'common/utils/compare';
+import {
+  getAllStates,
+  getAllCountiesSelection,
+  getHomePageViewMoreCopy,
+  getNeighboringCounties,
+  getLocationPageCountiesSelection,
+  getLocationPageViewMoreCopy,
+  MetroFilter,
+  GeoScopeFilter,
+} from 'common/utils/compare';
 
+// TODO (chelsi) filter-related WIP - setViewAllCounties to false?:
 const CompareMain = (props: {
   stateName?: string;
   county: any | null;
   isModal?: Boolean;
   locationsViewable: number;
   isHomepage?: boolean;
-  locations: SummaryForCompare[];
   currentCounty?: any;
-  viewAllCounties?: boolean;
-  setViewAllCounties?: React.Dispatch<React.SetStateAction<boolean>>;
-  viewMoreCopy: string;
-  setCountyTypeToView: React.Dispatch<React.SetStateAction<MetroFilter>>;
-  countyTypeToView: MetroFilter;
-  geoScope?: GeoScopeFilter;
-  setGeoScope?: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
   stateId?: string;
 }) => {
   const tableRef = useRef<HTMLDivElement>(null);
@@ -33,9 +34,49 @@ const CompareMain = (props: {
       behavior: 'smooth',
     });
 
-  // TODO (chelsi) filter-related WIP - setViewAllCounties to false?:
+  const [sorter, setSorter] = useState(5);
+  const [sortDescending, setSortDescending] = useState(true);
+  const [sortByPopulation, setSortByPopulation] = useState(false);
+  const [countyTypeToView, setCountyTypeToView] = useState(MetroFilter.ALL);
 
-  // short delay is needed to make scrollTo work
+  // For homepage:
+  const [viewAllCounties, setViewAllCounties] = useState(false);
+
+  const homepageLocationsForCompare = viewAllCounties
+    ? getAllCountiesSelection(countyTypeToView)
+    : getAllStates();
+
+  const homepageViewMoreCopy = getHomePageViewMoreCopy(
+    viewAllCounties,
+    countyTypeToView,
+  );
+
+  // For location page:
+  const [geoScope, setGeoScope] = useState(GeoScopeFilter.STATE);
+
+  function getLocationPageLocations() {
+    if (geoScope === GeoScopeFilter.NEARBY) {
+      return getNeighboringCounties(props.county.full_fips_code);
+    } else if (geoScope === GeoScopeFilter.STATE && props.stateId) {
+      return getLocationPageCountiesSelection(countyTypeToView, props.stateId);
+    } else {
+      return getAllCountiesSelection(countyTypeToView);
+    }
+  }
+
+  const locationPageViewMoreCopy =
+    props.stateName &&
+    getLocationPageViewMoreCopy(geoScope, countyTypeToView, props.stateName);
+  const locationPageLocationsForCompare = getLocationPageLocations();
+
+  const locations = props.isHomepage
+    ? homepageLocationsForCompare
+    : locationPageLocationsForCompare;
+  const viewMoreCopy = props.isHomepage
+    ? homepageViewMoreCopy
+    : locationPageViewMoreCopy;
+
+  // Note (Chelsi): short delay is needed to make scrollTo work
   const [showModal, setShowModal] = useState(false);
   const handleCloseModal = () => {
     setShowModal(false);
@@ -47,7 +88,16 @@ const CompareMain = (props: {
     return () => clearTimeout(timeoutId);
   };
 
-  if (props.locations.length === 0) {
+  // For filters:
+  const scopeValueMap = {
+    [GeoScopeFilter.NEARBY]: 0,
+    [GeoScopeFilter.STATE]: 50,
+    [GeoScopeFilter.COUNTRY]: 99,
+  };
+  const defaultSliderValue = scopeValueMap[geoScope];
+  const [sliderValue, setSliderValue] = useState(defaultSliderValue);
+
+  if (locations.length === 0) {
     return null;
   }
 
@@ -56,15 +106,23 @@ const CompareMain = (props: {
     county: props.county,
     setShowModal: setShowModal,
     isHomepage: props.isHomepage,
-    locations: props.locations,
+    locations: locations,
     currentCounty: props.currentCounty,
-    viewAllCounties: props.viewAllCounties,
-    countyTypeToView: props.countyTypeToView,
-    setCountyTypeToView: props.setCountyTypeToView,
-    setViewAllCounties: props.setViewAllCounties,
-    geoScope: props.geoScope,
-    setGeoScope: props.setGeoScope,
+    viewAllCounties: viewAllCounties,
+    countyTypeToView: countyTypeToView,
+    setCountyTypeToView: setCountyTypeToView,
+    setViewAllCounties: setViewAllCounties,
+    geoScope: geoScope,
+    setGeoScope: setGeoScope,
     stateId: props.stateId,
+    sorter: sorter,
+    setSorter: setSorter,
+    sortDescending: sortDescending,
+    setSortDescending: setSortDescending,
+    sortByPopulation: sortByPopulation,
+    setSortByPopulation: setSortByPopulation,
+    sliderValue: sliderValue,
+    setSliderValue: setSliderValue,
   };
 
   return (
@@ -74,7 +132,7 @@ const CompareMain = (props: {
           {...sharedProps}
           locationsViewable={props.locationsViewable}
           isModal={false}
-          viewMoreCopy={props.viewMoreCopy}
+          viewMoreCopy={viewMoreCopy}
         />
       </DivForRef>
       <Modal open={showModal} onClose={handleCloseModal}>

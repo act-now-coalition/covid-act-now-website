@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import HomePageHeader from 'components/Header/HomePageHeader';
 import Map from 'components/Map/Map';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
@@ -13,12 +13,6 @@ import { GlobalSelector } from 'components/MapSelectors/MapSelectors';
 import { useHistory } from 'react-router-dom';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import {
-  getAllStates,
-  getAllCountiesSelection,
-  MetroFilter,
-  getHomePageViewMoreCopy,
-} from 'common/utils/compare';
 import {
   Content,
   FeaturedHeader,
@@ -70,18 +64,6 @@ export default function HomePage() {
     window.scrollTo(0, 0);
   };
 
-  const [viewAllCounties, setViewAllCounties] = useState(false);
-  const [countyTypeToView, setCountyTypeToView] = useState(MetroFilter.ALL);
-
-  const locationsForCompare = viewAllCounties
-    ? getAllCountiesSelection(countyTypeToView)
-    : getAllStates();
-
-  const viewMoreCopy = getHomePageViewMoreCopy(
-    viewAllCounties,
-    countyTypeToView,
-  );
-
   return (
     <>
       <EnsureSharingIdInUrl />
@@ -110,16 +92,7 @@ export default function HomePage() {
             </SearchBarThermometerWrapper>
             <Map hideLegend />
             {isMobile && <HomePageThermometer />}
-            <CompareMain
-              locationsViewable={8}
-              isHomepage
-              locations={locationsForCompare}
-              viewAllCounties={viewAllCounties}
-              setViewAllCounties={setViewAllCounties}
-              viewMoreCopy={viewMoreCopy}
-              countyTypeToView={countyTypeToView}
-              setCountyTypeToView={setCountyTypeToView}
-            />
+            <CompareMain locationsViewable={8} isHomepage />
             <SectionWrapper ref={indicatorsRef}>
               <CriteriaExplanation isMobile={isMobile} />
             </SectionWrapper>

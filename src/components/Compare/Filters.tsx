@@ -1,5 +1,4 @@
-import React, { Fragment, useState, useRef } from 'react';
-import { toString } from 'lodash';
+import React, { Fragment, useRef } from 'react';
 import {
   Switch,
   Grid,
@@ -37,9 +36,10 @@ const Filters = (props: {
   geoScope?: GeoScopeFilter;
   setGeoScope?: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
   isModal: boolean;
+  sliderValue: GeoScopeFilter;
+  setSliderValue: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
 }) => {
-  const defaultSliderValue = 50;
-  const [sliderValue, setSliderValue] = useState(defaultSliderValue);
+  const { sliderValue, setSliderValue } = props;
 
   const disableMetroMenu = props.isHomepage
     ? !props.viewAllCounties
@@ -98,9 +98,9 @@ const Filters = (props: {
   };
 
   const sliderHandleChange = (event: any, value: any) => {
-    setSliderValue(value);
     if (props.setGeoScope) {
-      props.setGeoScope(valueMap[toString(value)]);
+      setSliderValue(value);
+      props.setGeoScope(valueMap[value]);
     }
   };
 
@@ -159,7 +159,7 @@ const Filters = (props: {
           <SliderContainer>
             <GeoSlider
               onChange={sliderHandleChange}
-              defaultValue={defaultSliderValue}
+              value={sliderValue}
               step={null}
               marks={marks}
               track={false}
@@ -189,7 +189,6 @@ const Filters = (props: {
           role={undefined}
           transition
           disablePortal
-          isModal={props.isModal}
         >
           {({ TransitionProps, placement }) => (
             <Grow
