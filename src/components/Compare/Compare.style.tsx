@@ -23,9 +23,9 @@ const getMetricHeaderBackground = (
 ) => {
   if (isModal) {
     if (isSelectedMetric && !sortByPopulation) return 'black';
-    return `${COLOR_MAP.GRAY_BODY_COPY}`;
+    return '`${COLOR_MAP.GRAY_BODY_COPY}`';
   } else {
-    if (isSelectedMetric && !sortByPopulation) return 'rgba(0,0,0,0.02)';
+    if (isSelectedMetric && !sortByPopulation) return `${COLOR_MAP.BLUE}`;
     return 'white';
   }
 };
@@ -76,20 +76,17 @@ export const Wrapper = styled.div<{ isModal?: Boolean; isHomepage?: boolean }>`
   }
 `;
 
-export const StyledTable = styled.div<{ isModal?: Boolean }>`
-  border: ${({ isModal }) => !isModal && `1px solid ${COLORS.LIGHTGRAY}`};
-`;
-
 export const ArrowContainer = styled.div<{
   arrowColorNotSelected: string;
   isModal?: Boolean;
 }>`
   color: #bdbdbd;
-  display: flex;
   font-family: Roboto;
   font-size: 0.875rem;
   transform: translate(-0.25rem, 0.15rem);
   margin-top: 0.25rem;
+  flex-direction: column;
+  display: flex;
 
   span {
     margin: auto 0 auto 0.25rem;
@@ -125,20 +122,21 @@ export const LocationHeaderCell = styled(TableCell)<{
       : isModal
       ? `${COLOR_MAP.GRAY_BODY_COPY}`
       : sortByPopulation
-      ? 'rgba(0,0,0,0.02)'
+      ? `${COLOR_MAP.BLUE}`
       : 'white'};
 
-  border-radius: ${({ isModal, sortByPopulation }) =>
-    isModal && sortByPopulation && '4px 4px 0 0'};
+  border-radius: ${({ sortByPopulation }) => sortByPopulation && '4px 4px 0 0'};
+  color: ${({ isModal, sortByPopulation }) =>
+    !isModal && sortByPopulation && 'white'};
 
   ${ArrowContainer} {
     svg{
-      &:first-child {
-        transform: translatex(-0.1rem);
+      &:nth-child(2){
+        transform: translatey(-0.3rem);
         color: ${({ arrowColorSelected, sortDescending, sortByPopulation }) =>
           sortDescending && sortByPopulation && `${arrowColorSelected}`};
       }
-      &:nth-child(2) {
+      &:first-child {
         color: ${({ arrowColorSelected, sortDescending, sortByPopulation }) =>
           !sortDescending && sortByPopulation && `${arrowColorSelected}`};
       }
@@ -148,6 +146,9 @@ export const LocationHeaderCell = styled(TableCell)<{
   span{
     color: ${COLOR_MAP.GRAY.DARK};
     font-weight: normal;
+    color: ${({ isModal, sortByPopulation }) =>
+      !isModal && sortByPopulation ? 'white' : `${COLOR_MAP.GRAY.DARK}`};
+
   }
 `;
 
@@ -161,19 +162,21 @@ export const MetricHeaderCell = styled(TableCell)<{
   ${CellStyles}
 
 
-  border-radius: ${({ isModal, sortByPopulation, isSelectedMetric }) =>
-    isModal && !sortByPopulation && isSelectedMetric && '4px 4px 0 0'};
+  border-radius: ${({ sortByPopulation, isSelectedMetric }) =>
+    !sortByPopulation && isSelectedMetric && '4px 4px 0 0'};
   background-color: ${props =>
     getMetricHeaderBackground(
       props.sortByPopulation,
       props.isModal,
       props.isSelectedMetric,
     )};
+    color: ${({ sortByPopulation, isSelectedMetric }) =>
+      !sortByPopulation && isSelectedMetric && 'white'};
 
     ${ArrowContainer} {
       svg{
-        &:first-child {
-          transform: translatex(-0.1rem);
+        &:nth-child(2) {
+          transform: translatey(-0.3rem);
           color: ${({
             arrowColorSelected,
             sortDescending,
@@ -185,7 +188,7 @@ export const MetricHeaderCell = styled(TableCell)<{
             isSelectedMetric &&
             `${arrowColorSelected}`};
         }
-        &:nth-child(2) {
+        &:first-child {
           color: ${({
             arrowColorSelected,
             sortDescending,
@@ -196,6 +199,17 @@ export const MetricHeaderCell = styled(TableCell)<{
             !sortByPopulation &&
             isSelectedMetric &&
             `${arrowColorSelected}`};
+        }
+        &:hover{
+          &:first-child{
+          color: ${({
+            arrowColorSelected,
+            sortDescending,
+            sortByPopulation,
+            isSelectedMetric,
+          }) =>
+            !sortDescending && !sortByPopulation && isSelectedMetric && 'red'};
+          }
         }
       }
     }
@@ -209,11 +223,6 @@ export const TableHeadContainer = styled(TableHead)<{ isModal?: Boolean }>`
     color: ${({ isModal }) => isModal && 'white'};
     border-bottom: ${({ isModal }) =>
       !isModal && `2px solid ${COLORS.LIGHTGRAY}`};
-
-    &:nth-child(2) {
-      border-left: ${({ isModal }) =>
-        !isModal && `2px solid ${COLORS.LIGHTGRAY}`};
-    }
   }
 `;
 
@@ -239,10 +248,6 @@ export const MetricCell = styled.td<{
     span {
       color: ${COLOR_MAP.GRAY.DARK};
     }
-  }
-
-  &:nth-child(2) {
-    border-left: 2px solid ${COLORS.LIGHTGRAY};
   }
 
   &:not(:first-child) {
@@ -437,4 +442,9 @@ export const StateName = styled.div`
 export const Population = styled.span`
   font-family: Source Code Pro;
   font-size: 0.875rem;
+`;
+
+export const StateCode = styled.span`
+  font-family: Roboto;
+  letter-spacing: -0.05rem;
 `;

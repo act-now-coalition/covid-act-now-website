@@ -1,5 +1,5 @@
 import React, { useState, Fragment, useEffect } from 'react';
-import { sortBy, findIndex, partition, reverse } from 'lodash';
+import { sortBy, findIndex, partition, reverse, isNumber } from 'lodash';
 import {
   Wrapper,
   Footer,
@@ -57,7 +57,7 @@ const CompareTable = (props: {
   ) {
     const [locationsWithValue, locationsWithoutValue] = partition(
       locations,
-      getValue,
+      location => isNumber(getValue(location)),
     );
     const sortedLocationsAsc = sortBy(locationsWithValue, getValue);
     const sortedLocations = sortDescending
@@ -89,7 +89,7 @@ const CompareTable = (props: {
     props.locationsViewable || sortedLocationsArr.length;
 
   //TODO (chelsi): make this a theme-
-  const arrowColorSelected = props.isModal ? 'white' : 'black';
+  const arrowColorSelected = 'white';
   const arrowColorNotSelected = props.isModal
     ? '#828282'
     : `${COLOR_MAP.GRAY.BASE}`;
@@ -190,12 +190,10 @@ const CompareTable = (props: {
         <Fragment>
           <Footer isCounty={props.county}>
             <div>
-              {locationsViewable !== sortedLocationsArr.length && (
-                <span>
-                  Displaying <strong>{amountDisplayed}</strong> of{' '}
-                  <strong>{sortedLocationsArr.length}</strong>{' '}
-                </span>
-              )}
+              <span>
+                Displaying <strong>{amountDisplayed}</strong> of{' '}
+                <strong>{sortedLocationsArr.length}</strong>{' '}
+              </span>
               <ViewAllLink onClick={() => props.setShowModal(true)}>
                 {props.viewMoreCopy}
               </ViewAllLink>

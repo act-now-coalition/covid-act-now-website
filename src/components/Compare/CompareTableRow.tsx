@@ -6,6 +6,7 @@ import {
   Row,
   MetricValue,
   Population,
+  StateCode,
 } from 'components/Compare/Compare.style';
 import { Metric, formatValue } from 'common/metric';
 import {
@@ -30,6 +31,7 @@ const CompareTableRow = (props: {
   isModal?: boolean;
   sortByPopulation: boolean;
   isHomepage?: boolean;
+  allCountiesView: boolean;
 }) => {
   const {
     location,
@@ -38,6 +40,7 @@ const CompareTableRow = (props: {
     isModal,
     sortByPopulation,
     isHomepage,
+    allCountiesView,
   } = props;
 
   //TODO(Chelsi): fix the else?
@@ -92,6 +95,9 @@ const CompareTableRow = (props: {
         </div>
         <div>
           {locationName}
+          {allCountiesView && (
+            <StateCode>({location.locationInfo.state_code})</StateCode>
+          )}
           <br />
           <Population>
             {formatEstimate(

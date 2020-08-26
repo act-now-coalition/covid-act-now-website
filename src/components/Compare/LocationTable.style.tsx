@@ -49,6 +49,4 @@ export const Head = styled.div<{
   ${props => (props.isModal && props.pinnedLocation ? PinnedTop : '')}
 `;
 
-export const TableContainer = styled.div<{ isModal: boolean }>`
-  border: ${({ isModal }) => !isModal && `1px solid ${COLORS.LIGHTGRAY}`};
-`;
+export const TableContainer = styled.div<{ isModal: boolean }>``;
