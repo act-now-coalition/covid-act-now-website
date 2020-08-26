@@ -43,87 +43,94 @@ function getLocationObj(locationInfo: Location) {
   }
 }
 
+function isCounty(location: Location) {
+  return location.county;
+}
+
+function isState(location: Location) {
+  return !location.county;
+}
+
+function isCountyOfState(location: Location, stateId: string) {
+  return location.state_code === stateId;
+}
+
+function isMetroCounty(location: Location) {
+  return location.full_fips_code && getCountyMsaCode(location.full_fips_code);
+}
+
+function isNonMetroCounty(location: Location) {
+  return location.full_fips_code && !getCountyMsaCode(location.full_fips_code);
+}
+
 export function getAllStates(): SummaryForCompare[] {
-  return locations
-    .filter((location: Location) => !location.county)
-    .map(getLocationObj);
+  return locations.filter(isState).map(getLocationObj);
 }
 
 export function getAllCounties(): SummaryForCompare[] {
-  return locations
-    .filter((location: Location) => location.county)
-    .map(getLocationObj);
+  return locations.filter(isCounty).map(getLocationObj);
 }
 
 export function getAllCountiesOfState(stateId: string): SummaryForCompare[] {
   return locations
-    .filter(
-      (location: Location) =>
-        location.county && location.state_code === stateId,
-    )
+    .filter(isCounty)
+    .filter((location: Location) => isCountyOfState(location, stateId))
     .map(getLocationObj);
 }
 
-// TODO (chelsi) filter-related WIP:
-// consolidate location and national MSA utils?
 export function getAllMetroCounties(): SummaryForCompare[] {
   return locations
-    .filter(
-      (location: Location) =>
-        location.county &&
-        location.full_fips_code &&
-        getCountyMsaCode(location.full_fips_code),
-    )
+    .filter(isCounty)
+    .filter((location: Location) => isMetroCounty(location))
     .map(getLocationObj);
 }
 
 export function getAllNonMetroCounties(): SummaryForCompare[] {
   return locations
-    .filter(
-      (location: Location) =>
-        location.county &&
-        location.full_fips_code &&
-        !getCountyMsaCode(location.full_fips_code),
-    )
-    .map(getLocationObj);
-}
-
-export function getNeighboringCounties(
-  countyFips: string,
-): SummaryForCompare[] {
-  const neighboringCountiesFips = getAdjacentCounties(countyFips);
-  return locations
-    .filter(
-      (location: Location) =>
-        location.full_fips_code &&
-        location.full_fips_code !== countyFips &&
-        neighboringCountiesFips.includes(location.full_fips_code),
-    )
+    .filter(isCounty)
+    .filter((location: Location) => isNonMetroCounty(location))
     .map(getLocationObj);
 }
 
 export function getStateMetroCounties(stateId: string): SummaryForCompare[] {
   return locations
-    .filter(
-      (location: Location) =>
-        location.county &&
-        location.full_fips_code &&
-        location.state_code === stateId &&
-        getCountyMsaCode(location.full_fips_code),
-    )
+    .filter(isCounty)
+    .filter((location: Location) => isCountyOfState(location, stateId))
+    .filter((location: Location) => isMetroCounty(location))
     .map(getLocationObj);
 }
 
 export function getStateNonMetroCounties(stateId: string): SummaryForCompare[] {
   return locations
-    .filter(
-      (location: Location) =>
-        location.county &&
-        location.full_fips_code &&
-        location.state_code === stateId &&
-        !getCountyMsaCode(location.full_fips_code),
-    )
+    .filter(isCounty)
+    .filter((location: Location) => isCountyOfState(location, stateId))
+    .filter((location: Location) => isNonMetroCounty(location))
     .map(getLocationObj);
+}
+
+function getCountyObj(countyFips: string) {
+  return locations
+    .filter(isCounty)
+    .filter((location: Location) => location.full_fips_code === countyFips)
+    .map(getLocationObj);
+}
+
+function isNeighboringCounty(location: Location, countyFips: string) {
+  const neighboringCountiesFips = getAdjacentCounties(countyFips);
+  return (
+    location.full_fips_code &&
+    neighboringCountiesFips.includes(location.full_fips_code)
+  );
+}
+
+export function getNeighboringCounties(
+  countyFips: string,
+): SummaryForCompare[] {
+  const adjacentCounties = locations
+    .filter((location: Location) => isNeighboringCounty(location, countyFips))
+    .map(getLocationObj);
+  const currentCounty = getCountyObj(countyFips);
+  return [...adjacentCounties, ...currentCounty];
 }
 
 export enum MetroFilter {
@@ -156,12 +163,6 @@ export function getAllCountiesSelection(countyTypeToView: MetroFilter) {
   }
 }
 
-export enum GeoScopeFilter {
-  NEARBY,
-  STATE,
-  COUNTRY,
-}
-
 export function getLocationPageCountiesSelection(
   countyTypeToView: MetroFilter,
   stateId: string,
@@ -186,6 +187,12 @@ export function getColumnLocationName(location: Location) {
 export function getAbbreviatedCounty(county: string) {
   if (county.includes('Parish')) return county.replace('Parish', 'Par.');
   else return county.replace('County', 'Co.');
+}
+
+export enum GeoScopeFilter {
+  NEARBY,
+  STATE,
+  COUNTRY,
 }
 
 const metroFooterCopy = {
