@@ -235,10 +235,26 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
     }
   };
 
+  /*
+   * Downshift uses this state reducer function to close the menu when the escape key is pressed
+   * and executes default behavior for all other events.
+   */
+  const escapeKeyStateReducer = (state, changes) => {
+    switch (changes.type) {
+      case Downshift.stateChangeTypes.keyDownEscape:
+        return {
+          isOpen: false,
+        };
+      default:
+        return changes;
+    }
+  };
+
   return (
     <Downshift
       onChange={selection => handleChange(selection)}
       itemToString={item => (item ? item.value : '')}
+      stateReducer={escapeKeyStateReducer}
     >
       {({
         getInputProps,

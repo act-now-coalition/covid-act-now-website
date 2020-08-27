@@ -1,5 +1,7 @@
 import Banner from './Banner';
-import FeedbackSurveyBanner from './FeedbackSurveyBanner';
+import FeedbackSurveyBanner, {
+  getFeedbackSurveyUrl,
+} from './FeedbackSurveyBanner';
 
 export default Banner;
-export { FeedbackSurveyBanner };
+export { FeedbackSurveyBanner, getFeedbackSurveyUrl };

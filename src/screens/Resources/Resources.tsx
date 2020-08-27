@@ -20,6 +20,9 @@ import {
   ImageContainer,
 } from './Resources.style';
 
+export const COVID_RESPONSE_SIMULATOR_URL =
+  'https://docs.google.com/spreadsheets/u/3/d/1PTBTp8z49IXexkV02wacWLoyv1A2GtlVFYVqI4APPR8/copy#gid=1190280212';
+
 const sidebar = (
   <React.Fragment>
     <SidebarLink href="#covid-response-simulator">
@@ -56,6 +59,13 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
           >
             COVID Response Simulator
           </SectionHeader>
+          <Typography variant="body1" component="p">
+            Try it{' '}
+            <ExternalLink href="/covid-response-simulator-redirect">
+              here
+            </ExternalLink>
+            .
+          </Typography>
           <Typography variant="body1" component="p">
             The COVID Response Simulator is a localized, spreadsheet version of
             the public Covid Act Now (CAN) model. With it, you can take a
@@ -125,7 +135,7 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
               <li>
                 <Typography variant="body1" component="p">
                   Click on{' '}
-                  <ExternalLink href="https://docs.google.com/spreadsheets/u/3/d/1PTBTp8z49IXexkV02wacWLoyv1A2GtlVFYVqI4APPR8/copy#gid=1190280212">
+                  <ExternalLink href="/covid-response-simulator-redirect">
                     this link
                   </ExternalLink>{' '}
                   to create a copy of the simulator for your use. You’ll be

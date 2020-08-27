@@ -11,7 +11,9 @@ import LocationPage from 'screens/LocationPage/LocationPage';
 import HomePage from 'screens/HomePage/HomePage';
 import About from 'screens/About/About';
 // import ComingSoon from 'screens/ComingSoon/ComingSoon';
-import Resources from 'screens/Resources/Resources';
+import Resources, {
+  COVID_RESPONSE_SIMULATOR_URL,
+} from 'screens/Resources/Resources';
 import Contact from 'screens/Contact/Contact';
 import Terms from 'screens/Terms/Terms';
 import Privacy from 'screens/Terms/Privacy';
@@ -25,6 +27,8 @@ import AppBar from 'components/AppBar/AppBar';
 import Footer from 'components/Footer/Footer';
 import ScrollToTop from 'components/ScrollToTop';
 import theme from 'assets/theme';
+import { getFeedbackSurveyUrl } from 'components/Banner';
+import ExternalRedirect from 'components/ExternalRedirect';
 
 export default function App() {
   return (
@@ -106,6 +110,32 @@ export default function App() {
               <Route path="/contact">
                 <Redirect to="/faq" />
               </Route>
+              {/**
+               * This endpoint is to share the feedback survey link in social
+               * media. We redirec them to Typeform with URL parameters to
+               * track users through the survey, as well as their source.
+               */}
+              <Route
+                path="/feedback-survey"
+                component={() => (
+                  <ExternalRedirect url={getFeedbackSurveyUrl('social')} />
+                )}
+              />
+
+              {/**
+               * This endpoint is to be able to track clicks to the COVID
+               * Response Simulator on the resources page. The user will be briefly
+               * redirected to COVID_RESPONSE_SIMULATOR_REDIRECT_URL and then
+               * to the spreadsheet. The number of visits to the redirect URL
+               * will correspond to the number of clicks to the COVID Response
+               * Simulator.
+               */}
+              <Route
+                path="/covid-response-simulator-redirect"
+                component={() => (
+                  <ExternalRedirect url={COVID_RESPONSE_SIMULATOR_URL} />
+                )}
+              />
 
               {/** Internal endpoint that shows all the state charts. */}
               <Route path="/all">

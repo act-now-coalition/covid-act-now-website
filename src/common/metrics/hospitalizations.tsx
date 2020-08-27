@@ -9,7 +9,7 @@ import { NonCovidPatientsMethod } from 'common/models/ICUHeadroom';
 import { MetricDefinition } from './interfaces';
 import ExternalLink from '../../components/ExternalLink';
 
-export const METRIC_NAME = 'ICU headroom used';
+const METRIC_NAME = 'ICU headroom used';
 
 export const ICUHeadroomMetric: MetricDefinition = {
   renderStatus,
@@ -76,10 +76,7 @@ export const HOSPITAL_USAGE_LEVEL_INFO_MAP: LevelInfoMap = {
   },
 };
 
-export const HOSPITALIZATIONS_DISCLAIMER =
-  ', a pandemic think tank, recommends that hospitals maintain enough ICU capacity to double the number of COVID patients hospitalized.';
-
-export function renderStatus(projections: Projections): React.ReactElement {
+function renderStatus(projections: Projections): React.ReactElement {
   const icu = projections.primary.icuHeadroomInfo;
   const { locationName } = projections.primary;
 
