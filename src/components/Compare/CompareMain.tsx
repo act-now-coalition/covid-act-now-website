@@ -14,7 +14,6 @@ import {
   GeoScopeFilter,
 } from 'common/utils/compare';
 
-// TODO (chelsi) filter-related WIP - setViewAllCounties to false?:
 const CompareMain = (props: {
   stateName?: string;
   county: any | null;

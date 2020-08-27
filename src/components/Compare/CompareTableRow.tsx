@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useHistory } from 'react-router-dom';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import {
@@ -6,7 +6,7 @@ import {
   Row,
   MetricValue,
   Population,
-  StateCode,
+  CountySuffix,
 } from 'components/Compare/Compare.style';
 import { Metric, formatValue } from 'common/metric';
 import {
@@ -43,7 +43,6 @@ const CompareTableRow = (props: {
     allCountiesView,
   } = props;
 
-  //TODO(Chelsi): fix the else?
   function getLevel(metricIndex: Metric): Level {
     const metricInfo = location.metricsInfo.metrics[metricIndex];
     if (metricInfo) {
@@ -94,9 +93,10 @@ const CompareTableRow = (props: {
           <FiberManualRecordIcon />
         </div>
         <div>
-          {locationName}
+          {locationName[0]}{' '}
+          {locationName[1] && <CountySuffix>{locationName[1]}</CountySuffix>}
           {allCountiesView && (
-            <StateCode>({location.locationInfo.state_code})</StateCode>
+            <Fragment>{location.locationInfo.state_code}</Fragment>
           )}
           <br />
           <Population>

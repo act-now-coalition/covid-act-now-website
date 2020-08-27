@@ -149,7 +149,6 @@ export function getFilterLabel(filter: MetroFilter) {
   return FILTER_LABEL[filter];
 }
 
-// For homepage:
 export function getAllCountiesSelection(countyTypeToView: MetroFilter) {
   switch (countyTypeToView) {
     case MetroFilter.ALL:
@@ -179,16 +178,6 @@ export function getLocationPageCountiesSelection(
   }
 }
 
-export function getColumnLocationName(location: Location) {
-  if (!location.county) return location.state;
-  else return getAbbreviatedCounty(location.county);
-}
-
-export function getAbbreviatedCounty(county: string) {
-  if (county.includes('Parish')) return county.replace('Parish', 'Par.');
-  else return county.replace('County', 'Co.');
-}
-
 export enum GeoScopeFilter {
   NEARBY,
   STATE,
@@ -207,7 +196,7 @@ export function getLocationPageViewMoreCopy(
   stateName: string,
 ) {
   if (geoscope === GeoScopeFilter.COUNTRY) {
-    return `View top 50 ${metroPrefixCopy[countyTypeToView]} counties`;
+    return `View top 100 ${metroPrefixCopy[countyTypeToView]} counties`;
   } else if (geoscope === GeoScopeFilter.NEARBY) {
     return 'View all nearby counties';
   } else {
@@ -220,5 +209,34 @@ export function getHomePageViewMoreCopy(
   countyTypeToView: MetroFilter,
 ) {
   if (!viewAllCounties) return 'View all states';
-  else return `View top 50 ${metroPrefixCopy[countyTypeToView]} counties`;
+  else return `View top 100 ${metroPrefixCopy[countyTypeToView]} counties`;
+}
+
+// For formatting and abbreviating location names:
+
+export function getAbbreviatedCounty(county: string) {
+  if (county.includes('Parish')) return county.replace('Parish', 'Par.');
+  if (county.includes('Borough')) return county.replace('Borough', 'Bor.');
+  if (county.includes('Census Area'))
+    return county.replace('Census Area', 'C.A.');
+  if (county.includes('Municipality'))
+    return county.replace('Municipality', 'Mun.');
+  if (county.includes('Municipio')) return county.replace('Municipio', 'Mun.');
+  else return county.replace('County', 'Co.');
+}
+
+function splitCountyName(countyName: string) {
+  const splitCounty = countyName.split(' ');
+  const suffix = splitCounty.pop();
+  const withoutSuffix = splitCounty;
+  return [withoutSuffix.join(' '), suffix];
+}
+
+export function getColumnLocationName(location: Location) {
+  if (!location.county) {
+    return [location.state];
+  } else {
+    const countyWithAbbreviatedSuffix = getAbbreviatedCounty(location.county);
+    return splitCountyName(countyWithAbbreviatedSuffix);
+  }
 }

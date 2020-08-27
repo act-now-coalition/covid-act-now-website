@@ -169,7 +169,6 @@ export const MetricHeaderCell = styled(TableCell)<{
 }>`
   ${CellStyles}
 
-
   border-radius: ${({ sortByPopulation, isSelectedMetric }) =>
     !sortByPopulation && isSelectedMetric && '4px 4px 0 0'};
   background-color: ${props =>
@@ -226,6 +225,16 @@ export const TableHeadContainer = styled(TableHead)<{ isModal?: Boolean }>`
     border-bottom: ${({ isModal }) =>
       !isModal && `2px solid ${COLORS.LIGHTGRAY}`};
   }
+`;
+
+export const Population = styled.span`
+  font-family: Source Code Pro;
+  font-size: 0.875rem;
+`;
+
+export const CountySuffix = styled.div`
+  font-weight: normal;
+  margin-right: 0.25rem;
 `;
 
 export const MetricCell = styled.td<{
@@ -439,14 +448,4 @@ export const DivForRef = styled.div``;
 export const StateName = styled.div`
   font-size: 0.9rem;
   line-height: 1.2;
-`;
-
-export const Population = styled.span`
-  font-family: Source Code Pro;
-  font-size: 0.875rem;
-`;
-
-export const StateCode = styled.span`
-  font-family: Roboto;
-  letter-spacing: -0.05rem;
 `;

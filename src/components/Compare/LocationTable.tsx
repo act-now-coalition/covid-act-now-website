@@ -197,7 +197,7 @@ const LocationTable: React.FunctionComponent<{
   const visibleLocations = !isModal
     ? sortedLocations.slice(0, numLocationsMain)
     : allCountiesView
-    ? sortedLocations.slice(0, 50)
+    ? sortedLocations.slice(0, 100)
     : sortedLocations;
 
   return (

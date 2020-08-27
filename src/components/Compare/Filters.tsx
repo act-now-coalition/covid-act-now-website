@@ -95,8 +95,6 @@ const Filters = (props: {
     }
   };
 
-  // TODO (chelsi) filter-related WIP:
-  // fix the 'any'
   const valueMap: any = {
     0: GeoScopeFilter.NEARBY,
     50: GeoScopeFilter.STATE,
@@ -150,8 +148,7 @@ const Filters = (props: {
               <Switch
                 checked={props.viewAllCounties}
                 onChange={switchHandleChange}
-                // TODO (chelsi) filter-related WIP:
-                value="checked" // need this?
+                value="checked"
                 size="small"
                 disableRipple
               />
