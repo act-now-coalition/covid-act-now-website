@@ -111,14 +111,14 @@ const LocationTableBody: React.FunctionComponent<{
   currentLocationRank?: number;
   sortByPopulation: boolean;
   isHomepage?: boolean;
-  allCountiesView: boolean;
+  showStateCode: boolean;
 }> = ({
   sortedLocations,
   sorter,
   currentLocationRank,
   sortByPopulation,
   isHomepage,
-  allCountiesView,
+  showStateCode,
 }) => (
   <Table>
     <TableBody>
@@ -129,7 +129,7 @@ const LocationTableBody: React.FunctionComponent<{
           isCurrentCounty={location.rank === currentLocationRank}
           sortByPopulation={sortByPopulation}
           isHomepage={isHomepage}
-          allCountiesView={allCountiesView}
+          showStateCode={showStateCode}
         />
       ))}
     </TableBody>
@@ -200,6 +200,8 @@ const LocationTable: React.FunctionComponent<{
     ? sortedLocations.slice(0, 100)
     : sortedLocations;
 
+  const showStateCode = allCountiesView || geoScope === GeoScopeFilter.NEARBY;
+
   return (
     <Styles.TableContainer isModal={isModal}>
       <Container>
@@ -229,7 +231,7 @@ const LocationTable: React.FunctionComponent<{
                   isCurrentCounty
                   isModal={isModal}
                   sortByPopulation={sortByPopulation}
-                  allCountiesView={allCountiesView}
+                  showStateCode={showStateCode}
                 />
               </TableBody>
             </Table>
@@ -242,7 +244,7 @@ const LocationTable: React.FunctionComponent<{
             currentLocationRank={pinnedLocation?.rank}
             sortByPopulation={sortByPopulation}
             isHomepage={isHomepage}
-            allCountiesView={allCountiesView}
+            showStateCode={showStateCode}
           />
         </Styles.Body>
         {pinnedLocation && showBottom && (
@@ -252,7 +254,7 @@ const LocationTable: React.FunctionComponent<{
               sortedLocations={[pinnedLocation]}
               currentLocationRank={pinnedLocation?.rank}
               sortByPopulation={sortByPopulation}
-              allCountiesView={allCountiesView}
+              showStateCode={showStateCode}
             />
           </Styles.Body>
         )}

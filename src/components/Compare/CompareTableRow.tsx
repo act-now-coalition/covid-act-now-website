@@ -31,7 +31,7 @@ const CompareTableRow = (props: {
   isModal?: boolean;
   sortByPopulation: boolean;
   isHomepage?: boolean;
-  allCountiesView: boolean;
+  showStateCode: boolean;
 }) => {
   const {
     location,
@@ -40,7 +40,7 @@ const CompareTableRow = (props: {
     isModal,
     sortByPopulation,
     isHomepage,
-    allCountiesView,
+    showStateCode,
   } = props;
 
   function getLevel(metricIndex: Metric): Level {
@@ -95,7 +95,7 @@ const CompareTableRow = (props: {
         <div>
           {locationName[0]}{' '}
           {locationName[1] && <CountySuffix>{locationName[1]}</CountySuffix>}
-          {allCountiesView && (
+          {showStateCode && (
             <Fragment>{location.locationInfo.state_code}</Fragment>
           )}
           <br />
