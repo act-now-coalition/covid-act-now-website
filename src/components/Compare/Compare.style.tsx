@@ -130,14 +130,23 @@ export const LocationHeaderCell = styled(TableCell)<{
 
   ${ArrowContainer} {
     svg{
+      &:first-child {
+        color: ${({ arrowColorSelected, sortByPopulation }) =>
+          sortByPopulation && `${arrowColorSelected}`};
+        opacity: ${({ sortDescending, sortByPopulation }) =>
+          sortDescending && sortByPopulation && '.5'};
+      }
       &:nth-child(2){
         transform: translatex(-0.1rem);
-        color: ${({ arrowColorSelected, sortDescending, sortByPopulation }) =>
-          sortDescending && sortByPopulation && `${arrowColorSelected}`};
+        color: ${({ arrowColorSelected, sortByPopulation }) =>
+          sortByPopulation && `${arrowColorSelected}`};
+        opacity: ${({ sortDescending, sortByPopulation }) =>
+          !sortDescending && sortByPopulation && '.5'};
       }
-      &:first-child {
-        color: ${({ arrowColorSelected, sortDescending, sortByPopulation }) =>
-          !sortDescending && sortByPopulation && `${arrowColorSelected}`};
+      &:hover{
+        color: ${({ arrowColorSelected, sortByPopulation }) =>
+          sortByPopulation && `${arrowColorSelected}`};
+        opacity: 1;
       }
     }
   }
@@ -178,40 +187,31 @@ export const MetricHeaderCell = styled(TableCell)<{
           transform: translatex(-0.1rem);
           color: ${({
             arrowColorSelected,
-            sortDescending,
             sortByPopulation,
             isSelectedMetric,
           }) =>
-            sortDescending &&
-            !sortByPopulation &&
-            isSelectedMetric &&
-            `${arrowColorSelected}`};
+            !sortByPopulation && isSelectedMetric && `${arrowColorSelected}`};
+          opacity: ${({ sortDescending, sortByPopulation, isSelectedMetric }) =>
+            !sortDescending && !sortByPopulation && isSelectedMetric && '.5'};
         }
         &:first-child {
           color: ${({
             arrowColorSelected,
-            sortDescending,
             sortByPopulation,
             isSelectedMetric,
           }) =>
-            !sortDescending &&
-            !sortByPopulation &&
-            isSelectedMetric &&
-            `${arrowColorSelected}`};
+            !sortByPopulation && isSelectedMetric && `${arrowColorSelected}`};
+          opacity: ${({ sortDescending, sortByPopulation, isSelectedMetric }) =>
+            sortDescending && !sortByPopulation && isSelectedMetric && '.5'};
         }
         &:hover{
-          &:first-child{
           color: ${({
             arrowColorSelected,
-            sortDescending,
             sortByPopulation,
             isSelectedMetric,
           }) =>
-            !sortDescending &&
-            !sortByPopulation &&
-            isSelectedMetric &&
-            `${arrowColorSelected}`};
-          }
+            !sortByPopulation && isSelectedMetric && `${arrowColorSelected}`};
+            opacity: 1;
         }
       }
     }

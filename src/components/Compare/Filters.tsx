@@ -1,4 +1,4 @@
-import React, { Fragment, useRef } from 'react';
+import React, { Fragment, useRef, useEffect } from 'react';
 import {
   Switch,
   Grid,
@@ -39,11 +39,17 @@ const Filters = (props: {
   sliderValue: GeoScopeFilter;
   setSliderValue: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
 }) => {
-  const { sliderValue, setSliderValue } = props;
+  const { sliderValue, setSliderValue, setCountyTypeToView } = props;
 
   const disableMetroMenu = props.isHomepage
     ? !props.viewAllCounties
     : sliderValue === 0;
+
+  useEffect(() => {
+    if (disableMetroMenu) {
+      setCountyTypeToView(MetroFilter.ALL);
+    }
+  }, [disableMetroMenu, setCountyTypeToView]);
 
   const typeFiltersForMap = [
     {
@@ -116,7 +122,7 @@ const Filters = (props: {
   };
 
   const metroMenuItemOnClick = (filterType: MetroFilter, event: any) => {
-    props.setCountyTypeToView(filterType);
+    setCountyTypeToView(filterType);
     setOpen(false);
   };
 

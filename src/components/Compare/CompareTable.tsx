@@ -18,6 +18,7 @@ import {
   orderedMetrics,
   GeoScopeFilter,
   getAbbreviatedCounty,
+  metroPrefixCopy,
 } from 'common/utils/compare';
 import { Metric } from 'common/metric';
 import { COLOR_MAP } from 'common/colors';
@@ -123,12 +124,16 @@ const CompareTable = (props: {
       ? sortedLocationsArr.length
       : props.locationsViewable;
 
-  const firstColumnHeaderHomepage = props.viewAllCounties ? 'County' : 'State';
+  const firstColumnHeaderHomepage = props.viewAllCounties
+    ? `${metroPrefixCopy[props.countyTypeToView]} County`
+    : 'State';
   const firstColumnHeader = props.isHomepage
     ? firstColumnHeaderHomepage
     : props.isModal
-    ? `Counties (${sortedLocationsArr.length})`
-    : 'County';
+    ? `${metroPrefixCopy[props.countyTypeToView]} Counties (${
+        sortedLocationsArr.length
+      })`
+    : `${metroPrefixCopy[props.countyTypeToView]} County`;
 
   const sortedLocations: RankedLocationSummary[] = sortedLocationsArr
     .filter((location: SummaryForCompare) => location.metricsInfo !== null)

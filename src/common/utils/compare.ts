@@ -195,7 +195,7 @@ export enum GeoScopeFilter {
   COUNTRY,
 }
 
-const metroFooterCopy = {
+export const metroPrefixCopy = {
   [MetroFilter.ALL]: '',
   [MetroFilter.METRO]: 'metro',
   [MetroFilter.NON_METRO]: 'non-metro',
@@ -207,11 +207,11 @@ export function getLocationPageViewMoreCopy(
   stateName: string,
 ) {
   if (geoscope === GeoScopeFilter.COUNTRY) {
-    return `View top 50 ${metroFooterCopy[countyTypeToView]} counties`;
+    return `View top 50 ${metroPrefixCopy[countyTypeToView]} counties`;
   } else if (geoscope === GeoScopeFilter.NEARBY) {
     return 'View all nearby counties';
   } else {
-    return `View all ${metroFooterCopy[countyTypeToView]} counties in ${stateName}`;
+    return `View all ${metroPrefixCopy[countyTypeToView]} counties in ${stateName}`;
   }
 }
 
@@ -220,5 +220,5 @@ export function getHomePageViewMoreCopy(
   countyTypeToView: MetroFilter,
 ) {
   if (!viewAllCounties) return 'View all states';
-  else return `View top 50 ${metroFooterCopy[countyTypeToView]} counties`;
+  else return `View top 50 ${metroPrefixCopy[countyTypeToView]} counties`;
 }
