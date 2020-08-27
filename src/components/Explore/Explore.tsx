@@ -27,6 +27,7 @@ const Explore: React.FunctionComponent<{
 
   const metricLabels = getMetricLabels();
   const series = getSeries(currentMetric, projection);
+  const { locationName } = projection;
 
   return (
     <Styles.Container>
@@ -56,6 +57,7 @@ const Explore: React.FunctionComponent<{
                 isMobile={isMobile}
                 width={width}
                 height={400}
+                tooltipSubtext={`in ${locationName}`}
               />
             )
           }

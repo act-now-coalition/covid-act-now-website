@@ -85,6 +85,7 @@ const ExploreChart: React.FC<{
   height: number;
   series: Series[];
   isMobile: boolean;
+  tooltipSubtext?: string;
   marginTop?: number;
   marginBottom?: number;
   marginLeft?: number;
@@ -94,6 +95,7 @@ const ExploreChart: React.FC<{
   height,
   series,
   isMobile,
+  tooltipSubtext = '',
   marginTop = 10,
   marginBottom = 30,
   marginLeft = 50,
@@ -193,8 +195,7 @@ const ExploreChart: React.FC<{
           top={p => getYPosition(p) + marginTop}
           date={tooltipData.date}
           series={series}
-          // TODO(pablo): Pass the string as props from the Explore component
-          subtext="in NY"
+          subtext={tooltipSubtext}
         />
       )}
       {tooltipOpen && tooltipData && (
