@@ -63,7 +63,8 @@ const DataHoverMarkers: React.FC<{
   y: (d: Column) => number;
   yMax: number;
   barWidth: number;
-}> = ({ series, x, y, date, yMax, barWidth }) => (
+  barOpacityHover?: number;
+}> = ({ series, x, y, date, yMax, barWidth, barOpacityHover }) => (
   <Fragment>
     {series.map(({ label, type, data }) => (
       <SeriesMarker
@@ -75,6 +76,7 @@ const DataHoverMarkers: React.FC<{
         date={date}
         yMax={yMax}
         barWidth={barWidth}
+        barOpacityHover={barOpacityHover}
       />
     ))}
   </Fragment>
@@ -89,6 +91,8 @@ const ExploreChart: React.FC<{
   marginBottom?: number;
   marginLeft?: number;
   marginRight?: number;
+  barOpacity?: number;
+  barOpacityHover?: number;
 }> = ({
   width,
   height,
@@ -98,6 +102,8 @@ const ExploreChart: React.FC<{
   marginBottom = 30,
   marginLeft = 50,
   marginRight = 10,
+  barOpacity,
+  barOpacityHover,
 }) => {
   const dateFrom = new Date('2020-03-01');
   const dateTo = new Date();
@@ -156,6 +162,7 @@ const ExploreChart: React.FC<{
                 type={type}
                 yMax={innerHeight}
                 barWidth={barWidth}
+                barOpacity={barOpacity}
               />
             ))}
           </RectClipGroup>
@@ -167,6 +174,7 @@ const ExploreChart: React.FC<{
               barWidth={barWidth}
               series={series}
               date={tooltipData.date}
+              barOpacityHover={barOpacityHover}
             />
           )}
           <ChartOverlay
