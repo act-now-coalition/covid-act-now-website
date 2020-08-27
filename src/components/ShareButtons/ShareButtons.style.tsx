@@ -39,6 +39,11 @@ export const SocialButton = styled(Button)`
   color: rgba(0, 0, 0, 0.7);
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   font-weight: normal;
+
+  @media (min-width: 600px) {
+    width: 80px;
+    height: 56px;
+  }
 `;
 
 export const SocialShareButton = styled.div`
