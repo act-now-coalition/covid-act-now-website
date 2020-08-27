@@ -14,6 +14,7 @@ import SeriesChart, { SeriesMarker } from './SeriesChart';
 import ChartOverlay from './ChartOverlay';
 import { getMaxBy, getTimeAxisTicks, findPointByDate } from './utils';
 import * as Styles from './Explore.style';
+import { COLOR_MAP } from 'common/colors';
 
 const getDate = (d: Column) => new Date(d.x);
 const getY = (d: Column) => d.y;
@@ -144,11 +145,14 @@ const ExploreChart: React.FC<{
   const getXPosition = (d: Column) => dateScale(getDate(d)) || 0;
   const getYPosition = (d: Column) => yScale(getY(d));
 
+  // Note(Chelsi): !barOpacity makes sure change isn't applied to share image chart:
+  const axisGridColor = !barOpacity ? `${COLOR_MAP.GRAY_EXPLORE_CHART}` : '';
+
   return (
     <Styles.PositionRelative>
       <svg width={width} height={height}>
         <Group key="chart-container" top={marginTop} left={marginLeft}>
-          <ChartStyle.LineGrid>
+          <ChartStyle.LineGrid exploreStroke={axisGridColor}>
             <GridColumns<Date> scale={dateScale} height={innerHeight} />
             <GridRows<number> scale={yScale} width={innerWidth} />
           </ChartStyle.LineGrid>
@@ -184,7 +188,7 @@ const ExploreChart: React.FC<{
             onMouseOver={onMouseOver}
             onMouseLeave={hideTooltip}
           />
-          <ChartStyle.Axis>
+          <ChartStyle.Axis exploreStroke={axisGridColor}>
             <AxisLeft scale={yScale} />
             <AxisBottom
               top={innerHeight}
