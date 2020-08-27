@@ -5,7 +5,10 @@ import { Column } from 'common/models/Projection';
 import { Projection, DatasetId } from 'common/models/Projection';
 import { ChartType } from './interfaces';
 import { share_image_url } from 'assets/data/share_images_url.json';
-import { getLocationNameForFips } from 'common/locations';
+import {
+  getLocationNameForFips,
+  getLocationUrlForFips,
+} from 'common/locations';
 
 export function getMaxBy<T>(
   series: Series[],
@@ -199,9 +202,21 @@ export function getExportImageUrl(fips: string, metric: ExploreMetric) {
 
 export function getChartUrl(fips: string, metric: ExploreMetric) {
   const chartId = getChartIdByMetric(metric);
-  return `${share_image_url}explore/${chartId}/index.html`;
+  const locationUrl = getLocationUrlForFips(fips);
+  return `${locationUrl}/explore/${chartId}`;
 }
 
 export function getSocialQuote(fips: string, metric: ExploreMetric) {
-  return 'PLACEHOLDER';
+  const locationName = getLocationNameForFips(fips);
+  switch (metric) {
+    case ExploreMetric.CASES:
+      return `${locationName}’s daily cases, according to @CovidActNow. See the chart: `;
+    case ExploreMetric.DEATHS:
+      return `${locationName}’s daily deaths, according to @CovidActNow. See the chart: `;
+    case ExploreMetric.HOSPITALIZATIONS:
+      return `${locationName}’s hospitalizations, according to @CovidActNow. See the chart: `;
+    case ExploreMetric.ICU_HOSPITALIZATIONS:
+      return `${locationName}’s ICU hospitalizations, according to @CovidActNow. See the chart: `;
+  }
+  return '';
 }

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
-import { COLOR_MAP } from 'common/colors';
 import theme from 'assets/theme';
 import palette from 'assets/theme/palette';
 import { StyledShareButtonStyles } from 'components/ShareBlock/ShareBlock.style';

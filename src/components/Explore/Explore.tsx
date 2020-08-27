@@ -41,27 +41,26 @@ const Explore: React.FunctionComponent<{
 
   return (
     <Styles.Container>
-      <Styles.Header>
-        <Grid container>
-          <Grid item xs={6}>
-            <Styles.Heading variant="h4">Trends</Styles.Heading>
-          </Grid>
-          <Grid item xs={6}>
-            <Styles.ShareBlock>
-              <ShareImageButtonGroup
-                imageUrl={getExportImageUrl(fips, currentMetric)}
-                imageFilename={getImageFilename(fips, currentMetric)}
-                url={getChartUrl(fips, currentMetric)}
-                quote={getSocialQuote(fips, currentMetric)}
-                hashtags={['COVIDActNow']}
-              />
-            </Styles.ShareBlock>
-          </Grid>
+      <Grid container spacing={1}>
+        <Grid item sm={6} xs={12}>
+          <Styles.Heading variant="h4">Trends</Styles.Heading>
+          <Styles.Subtitle>
+            cases since march 1st in {locationName}
+          </Styles.Subtitle>
         </Grid>
-        <Styles.Subtitle>
-          cases since march 1st in {locationName}
-        </Styles.Subtitle>
-      </Styles.Header>
+        <Grid item sm={6} xs={12}>
+          <Styles.ShareBlock>
+            <ShareImageButtonGroup
+              imageUrl={getExportImageUrl(fips, currentMetric)}
+              imageFilename={getImageFilename(fips, currentMetric)}
+              url={getChartUrl(fips, currentMetric)}
+              quote={getSocialQuote(fips, currentMetric)}
+              hashtags={['COVIDActNow']}
+            />
+          </Styles.ShareBlock>
+        </Grid>
+      </Grid>
+
       <ExploreTabs
         activeTabIndex={currentMetric}
         labels={metricLabels}

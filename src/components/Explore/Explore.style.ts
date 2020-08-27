@@ -16,7 +16,7 @@ export const Container = styled.div`
 `;
 
 export const Header = styled.div`
-  margin-bottom: ${theme.spacing(4) + theme.spacing(2)}px;
+  margin-bottom: ${theme.spacing(2)}px;
 `;
 
 export const Heading = styled(Typography)`
