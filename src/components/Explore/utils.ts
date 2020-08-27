@@ -1,5 +1,10 @@
 import moment from 'moment';
-import { max as _max, range as _range } from 'lodash';
+import {
+  max as _max,
+  range as _range,
+  deburr as _deburr,
+  words as _words,
+} from 'lodash';
 import { Series } from './interfaces';
 import { Column } from 'common/models/Projection';
 import { Projection, DatasetId } from 'common/models/Projection';
@@ -182,7 +187,7 @@ export function findPointByDate(data: Column[], date: Date): Column | null {
 }
 
 function sanitizeLocationName(name: string) {
-  return name.replace(/,\.\s/, '-').toLowerCase();
+  return _words(_deburr(name)).join('-').toLowerCase();
 }
 
 export function getImageFilename(fips: string, metric: ExploreMetric) {
