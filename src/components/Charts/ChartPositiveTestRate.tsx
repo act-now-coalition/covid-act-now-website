@@ -12,8 +12,16 @@ const getPointText = (valueY: number) => formatPercent(valueY, 1);
 // values over the cap (it shows > 40%)
 const getTooltipContent = (valueY: number) =>
   valueY > CAP_Y
-    ? { subtitle: `Positive Tests > `, body: `${formatPercent(CAP_Y, 0)}` }
-    : { subtitle: `Positive Tests `, body: `${getPointText(valueY)}` };
+    ? {
+        subtitle: `Positive Test Rate >`,
+        body: `${formatPercent(CAP_Y, 0)}`,
+        width: '125px',
+      }
+    : {
+        subtitle: `Positive Test Rate`,
+        body: `${getPointText(valueY)}`,
+        width: '125px',
+      };
 
 const ChartPositiveTests = ({
   columnData,

@@ -58,7 +58,9 @@ const ChartZones = ({
   columnData: Point[];
   zones: LevelInfoMap;
   capY: number;
-  getTooltipContent: (valueY: number) => { body: string; subtitle: string };
+  getTooltipContent: (
+    valueY: number,
+  ) => { body: string; subtitle: string; width: string };
   getPointText: (valueY: number) => string;
   marginTop?: number;
   marginBottom?: number;
@@ -113,7 +115,7 @@ const ChartZones = ({
       left={marginLeft + getXCoord(d)}
       title={formatUtcDate(getDate(d), 'MMM D, YYYY')}
       subtitle={getTooltipContent(getY(d)).subtitle}
-      width="150px"
+      width={getTooltipContent(getY(d)).width}
     >
       <TooltipStyle.Body>{getTooltipContent(getY(d)).body}</TooltipStyle.Body>
     </Tooltip>
@@ -191,7 +193,9 @@ const ChartZoneAutosize = ({
   columnData: Point[];
   zones: LevelInfoMap;
   capY: number;
-  getTooltipContent: (valueY: number) => { body: string; subtitle: string };
+  getTooltipContent: (
+    valueY: number,
+  ) => { body: string; subtitle: string; width: string };
   getPointText: (valueY: number) => string;
   height?: number;
 }) => (

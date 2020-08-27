@@ -9,7 +9,11 @@ const CAP_Y = 1;
 const getPointText = (valueY: number) => formatPercent(valueY, 0);
 
 const getTooltipContent = (valueY: number) => {
-  return { subtitle: 'Tracers hired', body: `${getPointText(valueY)}` };
+  return {
+    subtitle: 'Tracers hired',
+    body: `${getPointText(valueY)}`,
+    width: 'auto',
+  };
 };
 
 const ChartContactTracing = ({

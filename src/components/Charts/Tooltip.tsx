@@ -20,7 +20,7 @@ const Tooltip = ({
 }) => (
   <StyleTooltip.TooltipArrowDown style={{ top, left, width: width }}>
     {title && <StyleTooltip.Title>{title}</StyleTooltip.Title>}
-    {subtitle && <StyleTooltip.Title>{subtitle}</StyleTooltip.Title>}
+    {subtitle && <StyleTooltip.Subtitle>{subtitle}</StyleTooltip.Subtitle>}
     {children}
     {subtext && <StyleTooltip.SubText>{subtext}</StyleTooltip.SubText>}
   </StyleTooltip.TooltipArrowDown>
