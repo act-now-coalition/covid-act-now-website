@@ -8,6 +8,7 @@ import { share_image_url } from 'assets/data/share_images_url.json';
 import {
   getLocationNameForFips,
   getLocationUrlForFips,
+  isStateFips,
 } from 'common/locations';
 
 export function getMaxBy<T>(
@@ -181,11 +182,7 @@ export function findPointByDate(data: Column[], date: Date): Column | null {
 }
 
 function sanitizeLocationName(name: string) {
-  return name
-    .replaceAll(', ', '-')
-    .replaceAll('. ', '-')
-    .replaceAll(' ', '-')
-    .toLowerCase();
+  return name.replace(/,\.\s/, '-').toLowerCase();
 }
 
 export function getImageFilename(fips: string, metric: ExploreMetric) {
@@ -203,7 +200,10 @@ export function getExportImageUrl(fips: string, metric: ExploreMetric) {
 export function getChartUrl(fips: string, metric: ExploreMetric) {
   const chartId = getChartIdByMetric(metric);
   const locationUrl = getLocationUrlForFips(fips);
-  return `${locationUrl}/explore/${chartId}`;
+  const isState = isStateFips(fips);
+  return isState
+    ? `${locationUrl}explore/${chartId}`
+    : `${locationUrl}/explore/${chartId}`;
 }
 
 export function getSocialQuote(fips: string, metric: ExploreMetric) {
