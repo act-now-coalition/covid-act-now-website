@@ -5,6 +5,7 @@ import { Column } from 'common/models/Projection';
 import { Projection, DatasetId } from 'common/models/Projection';
 import { ChartType } from './interfaces';
 import { share_image_url } from 'assets/data/share_images_url.json';
+import { getLocationNameForFips } from 'common/locations';
 
 export function getMaxBy<T>(
   series: Series[],
@@ -176,11 +177,19 @@ export function findPointByDate(data: Column[], date: Date): Column | null {
   return idx >= 0 ? data[idx] : null;
 }
 
+function sanitizeLocationName(name: string) {
+  return name
+    .replaceAll(', ', '-')
+    .replaceAll('. ', '-')
+    .replaceAll(' ', '-')
+    .toLowerCase();
+}
+
 export function getImageFilename(fips: string, metric: ExploreMetric) {
-  // TODO(pablo): Get the state/county name and include it in the name
+  const locationName = getLocationNameForFips(fips) || '';
   const chartId = getChartIdByMetric(metric);
   const downloadDate = moment().format('YYYY-MM-DD');
-  return `${fips}-${chartId}-${downloadDate}.png`;
+  return `${sanitizeLocationName(locationName)}-${chartId}-${downloadDate}.png`;
 }
 
 export function getExportImageUrl(fips: string, metric: ExploreMetric) {
