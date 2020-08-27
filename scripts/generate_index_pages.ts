@@ -118,25 +118,6 @@ async function buildLocationPages(
     );
   }
 
-  for (const metric of ALL_METRICS) {
-    const chartPage = path.join(relativeSiteUrl, `/chart/${metric}/index.html`);
-    const chartCanonicalUrl = urls.addSharingId(
-      urlJoin(canonicalUrlBase, `/chart/${metric}`),
-    );
-    const chartImageUrl = builder.fullImageUrl(
-      urlJoin(relativeImageUrl, `/chart/${metric}.png`),
-    );
-    await builder.writeTemplatedPage(
-      chartPage,
-      chartPageTags(
-        chartImageUrl,
-        chartCanonicalUrl,
-        locationName,
-        getMetricName(metric),
-      ),
-    );
-  }
-
   for (const exploreMetric of EXPLORE_METRICS) {
     const chartId = getChartIdByMetric(exploreMetric);
     const chartPage = path.join(
