@@ -108,10 +108,18 @@ export const MainSeriesLine = styled.g`
   }
 `;
 
-export const BarsSeries = styled.g`
+export const BarsSeries = styled.g<{
+  barOpacity?: number;
+  barOpacityHover?: number;
+}>`
   rect {
     fill: ${props => (props.stroke ? props.stroke : palette(props).foreground)};
-    fill-opacity: 0.2;
+    fill-opacity: ${({ barOpacity, barOpacityHover }) =>
+      !barOpacity && !barOpacityHover
+        ? '0.2'
+        : barOpacity
+        ? barOpacity
+        : barOpacityHover};
   }
 `;
 
