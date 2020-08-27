@@ -49,6 +49,10 @@ export const SocialShareButton = styled.div`
   width: 60px;
   height: 42px;
 
+  &:last-child {
+    border-right: none;
+  }
+
   @media (min-width: 600px) {
     width: 80px;
     height: 56px;
