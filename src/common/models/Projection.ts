@@ -338,7 +338,30 @@ export class Projection {
     // Corona Data Scraper is pulling in bogus test data for Washoe County.
     // Just disable for now.
     // TODO(michael): Plumb FIPS in here so this is less fragile.
-    if (this.locationName === 'Washoe County, Nevada') {
+    if (this.stateName === 'Masa') {
+      return null;
+    }
+
+    const blacklistFips = [
+      '25001',
+      '25003',
+      '25005',
+      '25007',
+      '25009',
+      '25011',
+      '25013',
+      '25015',
+      '25017',
+      '25019',
+      '25021',
+      '25023',
+      '25025',
+      '25027',
+      '48113',
+      '48215',
+    ];
+
+    if (blacklistFips.indexOf(this.fips) > -1) {
       return null;
     }
 
