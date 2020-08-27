@@ -43,17 +43,19 @@ const Explore: React.FunctionComponent<{
     <Styles.Container>
       <Styles.Header>
         <Grid container>
-          <Grid item xs={8}>
+          <Grid item xs={6}>
             <Styles.Heading variant="h4">Trends</Styles.Heading>
           </Grid>
-          <Grid item xs={4}>
-            <ShareImageButtonGroup
-              imageUrl={getExportImageUrl(fips, currentMetric)}
-              imageFilename={getImageFilename(fips, currentMetric)}
-              url={getChartUrl(fips, currentMetric)}
-              quote={getSocialQuote(fips, currentMetric)}
-              hashtags={['COVIDActNow']}
-            />
+          <Grid item xs={6}>
+            <Styles.ShareBlock>
+              <ShareImageButtonGroup
+                imageUrl={getExportImageUrl(fips, currentMetric)}
+                imageFilename={getImageFilename(fips, currentMetric)}
+                url={getChartUrl(fips, currentMetric)}
+                quote={getSocialQuote(fips, currentMetric)}
+                hashtags={['COVIDActNow']}
+              />
+            </Styles.ShareBlock>
           </Grid>
         </Grid>
         <Styles.Subtitle>
