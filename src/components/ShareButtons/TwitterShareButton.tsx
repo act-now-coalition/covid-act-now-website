@@ -8,10 +8,11 @@ export const TwitterShareButton: React.FC<{
   url: string;
   quote: string;
   hashtags?: string[];
-}> = ({ url, quote, hashtags }) => (
+  socialIconSize: number;
+}> = ({ url, quote, hashtags, socialIconSize }) => (
   <SocialShareButton variant="contained" color={COLOR_TWITTER} disableElevation>
     <ReactShare.TwitterShareButton url={url} hashtags={hashtags} title={quote}>
-      <ReactShare.TwitterIcon size={40} round={false} fill="auto" />
+      <ReactShare.TwitterIcon size={socialIconSize} round={false} fill="auto" />
     </ReactShare.TwitterShareButton>
   </SocialShareButton>
 );
