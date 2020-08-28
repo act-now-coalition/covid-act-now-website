@@ -110,13 +110,37 @@ export type Contacttracers = number;
  */
 export type Metrics1 = Metrics;
 /**
- * Ratio of people who test positive calculated using a 7 day rolling average.
+ * Ratio of people who test positive calculated using a 7-day rolling average.
  */
-export type Testpositivity = number;
+export type Testpositivityratio = number;
 /**
- * The number of cases per 100k population calculated using a 7 day rolling average.
+ * The number of cases per 100k population calculated using a 7-day rolling average.
  */
 export type Casedensity = number;
+/**
+ * Ratio of currently hired tracers to estimated tracers needed based on 7-day daily case average.
+ */
+export type Contacttracercapacityratio = number;
+/**
+ * R_t, or the estimated number of infections arising from a typical case.
+ */
+export type Infectionrate = number;
+/**
+ * 90th percentile confidence interval upper endpoint of the infection rate.
+ */
+export type Infectionrateci90 = number;
+export type Icuheadroomratio = number;
+/**
+ * Method used to determine number of current ICU patients with covid.
+ */
+export type Currenticucovidmethod = 'actual' | 'estimated';
+/**
+ * Method used to determine number of current ICU patients without covid.
+ */
+export type Currenticunoncovidmethod =
+  | 'actual'
+  | 'estimated_from_typical_utilization'
+  | 'estimated_from_total_icu_actual';
 /**
  * Total Population in geographic region.
  */
@@ -206,13 +230,26 @@ export type Contacttracers1 = number;
 export type Date1 = string;
 export type Actualstimeseries = ActualsTimeseriesRow[];
 /**
- * Ratio of people who test positive calculated using a 7 day rolling average.
+ * Ratio of people who test positive calculated using a 7-day rolling average.
  */
-export type Testpositivity1 = number;
+export type Testpositivityratio1 = number;
 /**
- * The number of cases per 100k population calculated using a 7 day rolling average.
+ * The number of cases per 100k population calculated using a 7-day rolling average.
  */
 export type Casedensity1 = number;
+/**
+ * Ratio of currently hired tracers to estimated tracers needed based on 7-day daily case average.
+ */
+export type Contacttracercapacityratio1 = number;
+/**
+ * R_t, or the estimated number of infections arising from a typical case.
+ */
+export type Infectionrate1 = number;
+/**
+ * 90th percentile confidence interval upper endpoint of the infection rate.
+ */
+export type Infectionrateci901 = number;
+export type Icuheadroomratio1 = number;
 export type Date2 = string;
 export type Metricstimeseries = MetricsTimeseriesRow[];
 /**
@@ -284,8 +321,20 @@ export interface ResourceUtilization {
  * Calculated metrics data based on known actuals.
  */
 export interface Metrics {
-  testPositivity: Testpositivity;
+  testPositivityRatio: Testpositivityratio;
   caseDensity: Casedensity;
+  contactTracerCapacityRatio: Contacttracercapacityratio;
+  infectionRate: Infectionrate;
+  infectionRateCI90: Infectionrateci90;
+  icuHeadroomRatio: Icuheadroomratio;
+  icuHeadroomDetails?: ICUHeadroomMetricDetails;
+}
+/**
+ * Details about how the ICU Headroom Metric was calculated.
+ */
+export interface ICUHeadroomMetricDetails {
+  currentIcuCovidMethod: Currenticucovidmethod;
+  currentIcuNonCovidMethod: Currenticunoncovidmethod;
 }
 /**
  * Prediction data for a single day.
@@ -322,10 +371,15 @@ export interface ActualsTimeseriesRow {
   date: Date1;
 }
 /**
- * Calculated metrics data based on known actuals.
+ * Metrics data for a single day.
  */
 export interface MetricsTimeseriesRow {
-  testPositivity: Testpositivity1;
+  testPositivityRatio: Testpositivityratio1;
   caseDensity: Casedensity1;
+  contactTracerCapacityRatio: Contacttracercapacityratio1;
+  infectionRate: Infectionrate1;
+  infectionRateCI90: Infectionrateci901;
+  icuHeadroomRatio: Icuheadroomratio1;
+  icuHeadroomDetails?: ICUHeadroomMetricDetails;
   date: Date2;
 }

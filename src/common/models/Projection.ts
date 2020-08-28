@@ -8,7 +8,6 @@ import {
   RegionSummaryWithTimeseries,
   Timeseries,
   MetricsTimeseriesRow,
-  Metrics,
   Metricstimeseries,
 } from 'api/schema/RegionSummaryWithTimeseries';
 import { ICUHeadroomInfo, calcICUHeadroom } from './ICUHeadroom';
@@ -57,7 +56,6 @@ export interface Column {
 // These names must match exactly the field in `Projection` that stores the
 // data. See `getColumn()`.
 export type DatasetId =
-  | 'hospitalizations'
   | 'beds'
   | 'cumulativeDeaths'
   | 'cumulativeInfected'
@@ -126,14 +124,11 @@ export class Projection {
   private readonly isCounty: boolean;
 
   // NOTE: These are used dynamically by getColumn()
-  private readonly hospitalizations: Array<number | null>;
   private readonly beds: Array<number | null>;
   private readonly timeseries: Array<PredictionTimeseriesRow | null>;
   private readonly actualTimeseries: Array<ActualsTimeseriesRow | null>;
   private readonly cumulativeDeaths: Array<number | null>;
   private readonly cumulativeInfected: Array<number | null>;
-  private readonly smoothedDailyNegativeTests: Array<number | null>;
-  private readonly smoothedDailyPositiveTests: Array<number | null>;
   private readonly smoothedDailyCases: Array<number | null>;
   private readonly rtRange: Array<RtRange | null>;
   // ICU Utilization series as values between 0-1 (or > 1 if over capacity).
@@ -160,13 +155,13 @@ export class Projection {
       PROJECTIONS_TRUNCATION_DAYS,
     );
 
+    const metrics = summaryWithTimeseries.metrics;
     const actuals = summaryWithTimeseries.actuals;
 
     this.timeseries = timeseries;
     this.actualTimeseries = actualTimeseries;
     this.dates = dates;
 
-    const lastUpdated = new Date(summaryWithTimeseries.lastUpdatedDate);
     this.locationName = this.getLocationName(summaryWithTimeseries);
     this.stateName = summaryWithTimeseries.stateName;
     this.isCounty = parameters.isCounty;
@@ -174,33 +169,11 @@ export class Projection {
     this.fips = summaryWithTimeseries.fips;
 
     // Set up our series data exposed via getDataset().
-    this.hospitalizations = timeseries.map(
-      row => row && row.hospitalBedsRequired,
-    );
     this.beds = timeseries.map(row => row && row.hospitalBedCapacity);
     this.finalHospitalBeds = this.beds[this.beds.length - 1]!;
     this.cumulativeDeaths = timeseries.map(row => row && row.cumulativeDeaths);
     this.cumulativeInfected = timeseries.map(
       row => row && row.cumulativeInfected,
-    );
-    const cumulativePositiveTests = this.smoothCumulatives(
-      actualTimeseries.map(row => row && row.cumulativePositiveTests),
-    );
-    const cumulativeNegativeTests = this.smoothCumulatives(
-      actualTimeseries.map(row => row && row.cumulativeNegativeTests),
-    );
-    this.smoothedDailyPositiveTests = this.smoothWithRollingAverage(
-      this.deltasFromCumulatives(cumulativePositiveTests),
-    );
-    // Locations sometimes fail to report negative tests for several days while
-    // continuing to report positives, leaving a string of 0 deltas at the tail
-    // of the negatives series. Rather than average these 0's into the rolling
-    // average, which will cause the test positive rate to skyrocket, we just
-    // truncate them and don't report test positive data for the last few days.
-    this.smoothedDailyNegativeTests = this.smoothWithRollingAverage(
-      this.deltasFromCumulatives(cumulativeNegativeTests),
-      /*days=*/ 7,
-      /*includeTrailingZeros=*/ false,
     );
 
     const cumulativeConfirmedCases = this.smoothCumulatives(
@@ -220,24 +193,24 @@ export class Projection {
     );
 
     const disableRt = false;
-    this.rtRange = disableRt ? [null] : this.calcRtRange(timeseries);
+    this.rtRange = disableRt ? [null] : this.calcRtRange(metricsTimeseries);
     this.testPositiveRate = metricsTimeseries.map(row =>
-      row ? row.testPositivity : null,
+      row ? row.testPositivityRatio : null,
     );
 
     this.icuHeadroomInfo = calcICUHeadroom(
-      this.stateName,
       this.fips,
-      this.dates,
       actualTimeseries,
-      timeseries,
+      metricsTimeseries,
+      metrics,
       actuals,
-      lastUpdated,
     );
     this.icuUtilization =
       this.icuHeadroomInfo?.metricSeries || this.dates.map(date => null);
 
-    this.contractTracers = this.calcContactTracers(this.actualTimeseries);
+    this.contractTracers = metricsTimeseries.map(row =>
+      row ? row.contactTracerCapacityRatio : null,
+    );
 
     this.caseDensityByCases = metricsTimeseries.map(row =>
       row ? row.caseDensity : null,
@@ -247,12 +220,9 @@ export class Projection {
 
     this.currentCaseDensityByCases = lastValue(this.caseDensityByCases);
     this.currentCaseDensityByDeaths = lastValue(this.caseDensityByDeaths);
-    this.currentCaseDensity = lastValue(
-      this.caseDensityRange.map(range => range && range.caseDensity),
-    );
+    this.currentCaseDensity = metrics?.caseDensity || null;
     this.currentDailyDeaths = lastValue(this.smoothedDailyDeaths);
 
-    this.fixZeros(this.hospitalizations);
     this.fixZeros(this.cumulativeDeaths);
 
     const shortageStart =
@@ -271,7 +241,8 @@ export class Projection {
       summaryWithTimeseries.actuals.cumulativeDeaths;
     this.currentCumulativeCases =
       summaryWithTimeseries.actuals.cumulativeConfirmedCases;
-    this.currentContactTracerMetric = lastValue(this.contractTracers);
+    this.currentContactTracerMetric =
+      metrics?.contactTracerCapacityRatio || null;
   }
 
   get currentContactTracers() {
@@ -352,10 +323,6 @@ export class Projection {
     } else {
       return null;
     }
-  }
-
-  get hasHospitalProjections(): boolean {
-    return lastValue(this.hospitalizations) !== null;
   }
 
   private getColumn(columnName: string): Column[] {
@@ -481,34 +448,6 @@ export class Projection {
     return s.countyName ? `${s.countyName}, ${s.stateName}` : s.stateName;
   }
 
-  private calcContactTracers(
-    actualTimeseries: Array<ActualsTimeseriesRow | null>,
-  ): Array<number | null> {
-    return actualTimeseries.map((row, i) => {
-      if (row && row.contactTracers) {
-        const contactTracers =
-          CONTACT_TRACER_STATE_OVERRIDES[this.stateName] || row.contactTracers;
-        const cases = this.smoothedDailyCases[i];
-        if (cases) {
-          return contactTracers / (cases * TRACERS_NEEDED_PER_CASE);
-        }
-      }
-
-      return null;
-    });
-  }
-
-  private calcCaseDensityByCases(): Array<number | null> {
-    const totalPopulation = this.totalPopulation;
-    return this.smoothedDailyCases.map(cases => {
-      if (totalPopulation === 0 || cases === null) {
-        return null;
-      } else {
-        return cases / (totalPopulation / 100000);
-      }
-    });
-  }
-
   private calcCaseDensityByDeaths(): Array<number | null> {
     const totalPopulation = this.totalPopulation;
     return this.smoothedDailyDeaths.map(deaths => {
@@ -535,10 +474,10 @@ export class Projection {
   }
 
   private calcRtRange(
-    timeseries: Array<PredictionTimeseriesRow | null>,
+    timeseries: Array<MetricsTimeseriesRow | null>,
   ): Array<RtRange | null> {
-    const rtSeriesRaw = timeseries.map(row => row && row.RtIndicator);
-    const rtCiSeriesRaw = timeseries.map(row => row && row.RtIndicatorCI90);
+    const rtSeriesRaw = timeseries.map(row => row && row.infectionRate);
+    const rtCiSeriesRaw = timeseries.map(row => row && row.infectionRateCI90);
 
     // This hides small gaps (less than 2 data points) in the rt series to make
     // it more visually appealing without making up large amounts of data.
@@ -559,35 +498,6 @@ export class Projection {
         return null;
       }
     });
-  }
-
-  private calcTestPositiveRate(): Array<number | null> {
-    let numTailPositivesWithoutNegatives = 0;
-    const testPositiveRate = this.smoothedDailyPositiveTests.map(
-      (dailyPositive, idx) => {
-        const positive = dailyPositive;
-        const negative = this.smoothedDailyNegativeTests[idx];
-        // If there are no negatives (but there are positives), then this is
-        // likely the last data point, else it would have gotten smoothed, and
-        // it's probably a reporting lag issue. So just return null.
-        if (negative !== null && positive !== null && negative > 0) {
-          numTailPositivesWithoutNegatives = 0;
-          return positive / (negative + positive);
-        } else {
-          if (positive !== null && (negative === null || negative === 0)) {
-            numTailPositivesWithoutNegatives += 1;
-          }
-          return null;
-        }
-      },
-    );
-
-    // if we've stopped getting testing data more than a week ago, don't report a metric
-    if (numTailPositivesWithoutNegatives > 7 /* one week */) {
-      return [];
-    } else {
-      return testPositiveRate;
-    }
   }
 
   /**

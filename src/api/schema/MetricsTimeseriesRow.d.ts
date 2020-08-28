@@ -5,20 +5,56 @@
  */
 
 /**
- * Ratio of people who test positive calculated using a 7 day rolling average.
+ * Ratio of people who test positive calculated using a 7-day rolling average.
  */
-export type Testpositivity = number;
+export type Testpositivityratio = number;
 /**
- * The number of cases per 100k population calculated using a 7 day rolling average.
+ * The number of cases per 100k population calculated using a 7-day rolling average.
  */
 export type Casedensity = number;
+/**
+ * Ratio of currently hired tracers to estimated tracers needed based on 7-day daily case average.
+ */
+export type Contacttracercapacityratio = number;
+/**
+ * R_t, or the estimated number of infections arising from a typical case.
+ */
+export type Infectionrate = number;
+/**
+ * 90th percentile confidence interval upper endpoint of the infection rate.
+ */
+export type Infectionrateci90 = number;
+export type Icuheadroomratio = number;
+/**
+ * Method used to determine number of current ICU patients with covid.
+ */
+export type Currenticucovidmethod = 'actual' | 'estimated';
+/**
+ * Method used to determine number of current ICU patients without covid.
+ */
+export type Currenticunoncovidmethod =
+  | 'actual'
+  | 'estimated_from_typical_utilization'
+  | 'estimated_from_total_icu_actual';
 export type Date = string;
 
 /**
- * Calculated metrics data based on known actuals.
+ * Metrics data for a single day.
  */
 export interface MetricsTimeseriesRow {
-  testPositivity: Testpositivity;
+  testPositivityRatio: Testpositivityratio;
   caseDensity: Casedensity;
+  contactTracerCapacityRatio: Contacttracercapacityratio;
+  infectionRate: Infectionrate;
+  infectionRateCI90: Infectionrateci90;
+  icuHeadroomRatio: Icuheadroomratio;
+  icuHeadroomDetails?: ICUHeadroomMetricDetails;
   date: Date;
+}
+/**
+ * Details about how the ICU Headroom Metric was calculated.
+ */
+export interface ICUHeadroomMetricDetails {
+  currentIcuCovidMethod: Currenticucovidmethod;
+  currentIcuNonCovidMethod: Currenticunoncovidmethod;
 }
