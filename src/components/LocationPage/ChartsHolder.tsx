@@ -196,7 +196,6 @@ const ChartsHolder = (props: {
                 chartId={chartId}
               />
             </MainContentInner>
-
             <MainContentInner>
               <p>
                 <b>Looking for our future hospitalization projections?</b>{' '}

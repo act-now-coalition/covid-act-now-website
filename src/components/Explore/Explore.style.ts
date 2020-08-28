@@ -13,7 +13,7 @@ function palette(props: any) {
 }
 
 export const Container = styled.div`
-  margin-bottom: ${theme.spacing(4)}px;
+  margin: ${theme.spacing(4)}px 0;
 `;
 
 export const Header = styled.div`
@@ -43,6 +43,7 @@ export const Subtitle = styled.div`
 `;
 
 export const Tabs = styled(MuiTabs)`
+  margin-top: ${theme.spacing(2)}px;
   .MuiTabs-indicator {
     background-color: ${colorPalette.lightBlue};
   }
