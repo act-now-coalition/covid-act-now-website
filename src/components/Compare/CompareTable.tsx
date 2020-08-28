@@ -158,30 +158,28 @@ const CompareTable = (props: {
   return (
     <Wrapper isModal={props.isModal} isHomepage={props.isHomepage}>
       {!props.isModal && (
-        <Fragment>
-          <div>
-            <HeaderWrapper>
-              <Header isHomepage={props.isHomepage}>Compare</Header>
-              {props.stateName && (
-                <ChartLocationName>{compareSubheader}</ChartLocationName>
-              )}
-            </HeaderWrapper>
-            <Filters
-              isHomepage={props.isHomepage}
-              countyTypeToView={props.countyTypeToView}
-              setCountyTypeToView={props.setCountyTypeToView}
-              viewAllCounties={props.viewAllCounties}
-              setViewAllCounties={setViewAllCounties}
-              stateId={props.stateId}
-              county={props.county}
-              geoScope={props.geoScope}
-              setGeoScope={props.setGeoScope}
-              isModal={props.isModal}
-              sliderValue={sliderValue}
-              setSliderValue={setSliderValue}
-            />
-          </div>
-        </Fragment>
+        <div>
+          <HeaderWrapper>
+            <Header centered={props.isHomepage}>Compare</Header>
+            {props.stateName && (
+              <ChartLocationName>{compareSubheader}</ChartLocationName>
+            )}
+          </HeaderWrapper>
+          <Filters
+            isHomepage={props.isHomepage}
+            countyTypeToView={props.countyTypeToView}
+            setCountyTypeToView={props.setCountyTypeToView}
+            viewAllCounties={props.viewAllCounties}
+            setViewAllCounties={setViewAllCounties}
+            stateId={props.stateId}
+            county={props.county}
+            geoScope={props.geoScope}
+            setGeoScope={props.setGeoScope}
+            isModal={props.isModal}
+            sliderValue={sliderValue}
+            setSliderValue={setSliderValue}
+          />
+        </div>
       )}
       <LocationTable
         firstColumnHeader={firstColumnHeader}
@@ -201,35 +199,33 @@ const CompareTable = (props: {
         geoScope={props.geoScope}
       />
       {!props.isModal && (
-        <Fragment>
-          <Footer isCounty={props.county}>
-            <div>
+        <Footer isCounty={props.county}>
+          <div>
+            <span>
+              Displaying <strong>{amountDisplayed}</strong> of{' '}
+              <strong>{sortedLocationsArr.length}</strong>{' '}
+            </span>
+            <ViewAllLink onClick={() => props.setShowModal(true)}>
+              {props.viewMoreCopy}
+            </ViewAllLink>
+          </div>
+          {props.county && (
+            <DisclaimerWrapper>
               <span>
-                Displaying <strong>{amountDisplayed}</strong> of{' '}
-                <strong>{sortedLocationsArr.length}</strong>{' '}
+                Most states report contact tracing at the state-level only. View{' '}
+                {props.stateName}'s{' '}
+                <a
+                  href={disclaimerRedirect}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  contact tracing{' '}
+                </a>
+                data.
               </span>
-              <ViewAllLink onClick={() => props.setShowModal(true)}>
-                {props.viewMoreCopy}
-              </ViewAllLink>
-            </div>
-            {props.county && (
-              <DisclaimerWrapper>
-                <span>
-                  Most states report contact tracing at the state-level only.
-                  View {props.stateName}'s{' '}
-                  <a
-                    href={disclaimerRedirect}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    contact tracing{' '}
-                  </a>
-                  data.
-                </span>
-              </DisclaimerWrapper>
-            )}
-          </Footer>
-        </Fragment>
+            </DisclaimerWrapper>
+          )}
+        </Footer>
       )}
     </Wrapper>
   );

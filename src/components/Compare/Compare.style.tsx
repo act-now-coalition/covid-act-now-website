@@ -412,15 +412,15 @@ export const HeaderWrapper = styled.div`
   padding: 0.75rem;
 `;
 
-export const Header = styled.div<{ isHomepage?: boolean }>`
+export const Header = styled.div<{ centered?: boolean }>`
   display: flex;
   font-family: Roboto;
   font-weight: bold;
   font-size: 1.5rem;
-  margin: ${({ isHomepage }) => isHomepage && '0 auto'};
+  margin: ${({ centered }) => centered && '0 auto'};
 
   @media (min-width: 600px) {
-    font-size: ${({ isHomepage }) => (isHomepage ? '2rem' : '1.5rem')};
+    font-size: ${({ centered }) => (centered ? '2rem' : '1.5rem')};
   }
 `;
 

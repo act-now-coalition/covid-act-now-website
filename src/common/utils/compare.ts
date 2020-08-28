@@ -60,7 +60,7 @@ function isMetroCounty(location: Location) {
 }
 
 function isNonMetroCounty(location: Location) {
-  return location.full_fips_code && !getCountyMsaCode(location.full_fips_code);
+  return !isMetroCounty(location);
 }
 
 export function getAllStates(): SummaryForCompare[] {
@@ -79,16 +79,13 @@ export function getAllCountiesOfState(stateId: string): SummaryForCompare[] {
 }
 
 export function getAllMetroCounties(): SummaryForCompare[] {
-  return locations
-    .filter(isCounty)
-    .filter((location: Location) => isMetroCounty(location))
-    .map(getLocationObj);
+  return locations.filter(isCounty).filter(isMetroCounty).map(getLocationObj);
 }
 
 export function getAllNonMetroCounties(): SummaryForCompare[] {
   return locations
     .filter(isCounty)
-    .filter((location: Location) => isNonMetroCounty(location))
+    .filter(isNonMetroCounty)
     .map(getLocationObj);
 }
 
@@ -96,7 +93,7 @@ export function getStateMetroCounties(stateId: string): SummaryForCompare[] {
   return locations
     .filter(isCounty)
     .filter((location: Location) => isCountyOfState(location, stateId))
-    .filter((location: Location) => isMetroCounty(location))
+    .filter(isMetroCounty)
     .map(getLocationObj);
 }
 
@@ -104,7 +101,7 @@ export function getStateNonMetroCounties(stateId: string): SummaryForCompare[] {
   return locations
     .filter(isCounty)
     .filter((location: Location) => isCountyOfState(location, stateId))
-    .filter((location: Location) => isNonMetroCounty(location))
+    .filter(isNonMetroCounty)
     .map(getLocationObj);
 }
 
