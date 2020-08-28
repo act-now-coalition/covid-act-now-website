@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import Box from '@material-ui/core/Box';
-
 import MuiTab from '@material-ui/core/Tab';
 import MuiTabs from '@material-ui/core/Tabs';
 import theme from 'assets/theme';
+import { charts } from 'components/Charts/Charts.style';
 
 /** Gets the chart palette based on the current theme. */
 function palette(props: any) {
@@ -128,6 +128,16 @@ export const GridLines = styled.g`
     stroke: ${theme.palette.grey[300]};
     stroke-width: 1px;
     stroke-dasharray: 5, 5;
+  }
+`;
+
+export const TodayLabel = styled.g`
+  text {
+    font-family: ${charts.fontFamily};
+    font-weight: 500;
+    font-size: 12px;
+    fill: #4f4f4f;
+    text-anchor: middle;
   }
 `;
 

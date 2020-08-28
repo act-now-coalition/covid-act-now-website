@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { max as _max, range as _range } from 'lodash';
+import { max as _max, range as _range, isNumber, dropRightWhile } from 'lodash';
 import { Series } from './interfaces';
 import { Column } from 'common/models/Projection';
 import { Projection, DatasetId } from 'common/models/Projection';
@@ -143,13 +143,19 @@ export const EXPLORE_CHART_IDS = Object.values(exploreMetricData).map(
   metric => metric.chartId,
 );
 
+const hasValue = (point: Column) => isNumber(point.y);
+
+function cleanSeries(data: Column[]) {
+  return dropRightWhile(data, point => !hasValue(point));
+}
+
 export function getSeries(
   metric: ExploreMetric,
   projection: Projection,
 ): Series[] {
   const metricDefinition = exploreMetricData[metric];
   return metricDefinition.series.map(item => ({
-    data: projection.getDataset(item.datasetId),
+    data: cleanSeries(projection.getDataset(item.datasetId)),
     type: item.type,
     label: item.label,
     tooltipLabel: item.tooltipLabel,

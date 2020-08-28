@@ -2,6 +2,7 @@ import React, { useCallback, Fragment } from 'react';
 import moment from 'moment';
 import { AxisLeft, AxisBottom } from '@vx/axis';
 import { GridRows, GridColumns } from '@vx/grid';
+import { Line } from '@vx/shape';
 import { Group } from '@vx/group';
 import { scaleTime, scaleLinear } from '@vx/scale';
 import { useTooltip } from '@vx/tooltip';
@@ -109,7 +110,8 @@ const ExploreChart: React.FC<{
   barOpacityHover,
 }) => {
   const dateFrom = new Date('2020-03-01');
-  const dateTo = new Date();
+  const today = new Date();
+  const dateTo = moment(today).add(5, 'days').toDate();
   const numDays = daysBetween(dateFrom, dateTo);
   const maxY = getMaxBy<number>(series, getY, 1);
 
@@ -121,9 +123,10 @@ const ExploreChart: React.FC<{
     range: [0, innerWidth],
   });
   const timeTicks = getTimeAxisTicks(dateFrom, dateTo);
+  const xTicks = timeTicks.slice(0, timeTicks.length - 1);
   const timeTickFormat = isMobile ? 'MMM' : 'MMMM D';
   const xTickFormat = (date: Date) => moment(date).format(timeTickFormat);
-  const barWidth = 0.7 * (innerWidth / numDays);
+  const barWidth = 0.8 * (innerWidth / numDays);
 
   const yScale = scaleLinear({
     domain: [0, maxY],
@@ -172,6 +175,20 @@ const ExploreChart: React.FC<{
               />
             ))}
           </RectClipGroup>
+          {/* Today marker */}
+          <ChartStyle.LineGrid exploreStroke={axisGridColor}>
+            <Line
+              x1={dateScale(today)}
+              x2={dateScale(today)}
+              y1={0}
+              y2={innerHeight}
+            />
+          </ChartStyle.LineGrid>
+          <Styles.TodayLabel>
+            <text x={dateScale(today)} y={innerHeight} dy={21}>
+              Today
+            </text>
+          </Styles.TodayLabel>
           {tooltipOpen && tooltipData && (
             <DataHoverMarkers
               x={getXPosition}
@@ -195,7 +212,7 @@ const ExploreChart: React.FC<{
             <AxisBottom
               top={innerHeight}
               scale={dateScale}
-              tickValues={timeTicks}
+              tickValues={xTicks}
               tickFormat={xTickFormat}
             />
           </ChartStyle.Axis>
