@@ -34,6 +34,7 @@ export default {
   black,
   white,
   lightGray,
+  lightBlue: '#3BBCE6',
   primary: {
     contrastText: black,
     dark: white,

@@ -64,7 +64,15 @@ export type DatasetId =
   | 'contractTracers'
   | 'caseDensityByCases'
   | 'caseDensityByDeaths'
-  | 'caseDensityRange';
+  | 'caseDensityRange'
+  | 'smoothedDailyCases'
+  | 'smoothedDailyDeaths'
+  | 'rawDailyCases'
+  | 'rawDailyDeaths'
+  | 'rawHospitalizations'
+  | 'smoothedHospitalizations'
+  | 'rawICUHospitalizations'
+  | 'smoothedICUHospitalizations';
 
 export interface RtRange {
   /** The actual Rt value. */
@@ -143,6 +151,13 @@ export class Projection {
   private readonly caseDensityRange: Array<CaseDensityRange | null>;
   private readonly smoothedDailyDeaths: Array<number | null>;
 
+  private readonly rawDailyCases: Array<number | null>;
+  private readonly rawDailyDeaths: Array<number | null>;
+  private readonly rawHospitalizations: Array<number | null>;
+  private readonly smoothedHospitalizations: Array<number | null>;
+  private readonly rawICUHospitalizations: Array<number | null>;
+  private readonly smoothedICUHospitalizations: Array<number | null>;
+
   constructor(
     summaryWithTimeseries: RegionSummaryWithTimeseries,
     parameters: ProjectionParameters,
@@ -199,20 +214,37 @@ export class Projection {
       /*includeTrailingZeros=*/ false,
     );
 
-    const cumulativeConfirmedCases = this.smoothCumulatives(
+    this.rawDailyCases = this.deltasFromCumulatives(
       this.fillLeadingNullsWithZeros(
         actualTimeseries.map(row => row && row.cumulativeConfirmedCases),
       ),
     );
-    this.smoothedDailyCases = this.smoothWithRollingAverage(
-      this.deltasFromCumulatives(cumulativeConfirmedCases),
+    this.smoothedDailyCases = this.smoothWithRollingAverage(this.rawDailyCases);
+
+    this.rawDailyDeaths = this.deltasFromCumulatives(
+      this.fillLeadingNullsWithZeros(
+        actualTimeseries.map(row => row && row.cumulativeDeaths),
+      ),
+    );
+    this.smoothedDailyDeaths = this.smoothWithRollingAverage(
+      this.rawDailyDeaths,
+    );
+
+    this.rawHospitalizations = actualTimeseries.map(
+      row => row && row.hospitalBeds.currentUsageCovid,
+    );
+    this.smoothedHospitalizations = this.smoothWithRollingAverage(
+      this.rawHospitalizations,
+    );
+    this.rawICUHospitalizations = actualTimeseries.map(
+      row => row && row.ICUBeds.currentUsageCovid,
+    );
+    this.smoothedICUHospitalizations = this.smoothWithRollingAverage(
+      this.rawICUHospitalizations,
     );
 
     this.cumulativeActualDeaths = this.smoothCumulatives(
       actualTimeseries.map(row => row && row.cumulativeDeaths),
-    );
-    this.smoothedDailyDeaths = this.smoothWithRollingAverage(
-      this.deltasFromCumulatives(this.cumulativeActualDeaths),
     );
 
     const disableRt = false;
