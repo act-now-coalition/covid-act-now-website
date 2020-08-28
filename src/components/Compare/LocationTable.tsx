@@ -188,6 +188,9 @@ const LocationTable: React.FunctionComponent<{
 }) => {
   const Container = isModal ? Styles.ModalContainer : Styles.Container;
 
+  const modalHeaderOffset = isHomepage ? 110 : pinnedLocation ? 189 : 159;
+  const finalHeaderOffset = isModal ? modalHeaderOffset : 0;
+
   const showBottom = pinnedLocation && pinnedLocation.rank >= numLocations;
   const numLocationsMain = showBottom ? numLocations - 1 : numLocations;
 
@@ -204,7 +207,7 @@ const LocationTable: React.FunctionComponent<{
 
   return (
     <Styles.TableContainer isModal={isModal}>
-      <Container>
+      <Container finalHeaderOffset={finalHeaderOffset}>
         <Styles.Head isModal={isModal} pinnedLocation={pinnedLocation}>
           <LocationTableHead
             setSorter={setSorter}

@@ -418,6 +418,10 @@ export const Header = styled.div<{ isHomepage?: boolean }>`
   font-weight: bold;
   font-size: 1.5rem;
   margin: ${({ isHomepage }) => isHomepage && '0 auto'};
+
+  @media (min-width: 600px) {
+    font-size: ${({ isHomepage }) => (isHomepage ? '2rem' : '1.5rem')};
+  }
 `;
 
 export const ModalHeader = styled.div<{ isHomepage?: boolean }>`

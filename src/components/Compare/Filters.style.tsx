@@ -32,7 +32,9 @@ export const Container = styled.div<{ isModal: boolean; isHomepage?: boolean }>`
 
 export const SliderContainer = styled.div`
   width: 200px;
-  margin-left: 1.5rem;
+  @media (min-width: 600px) {
+    margin-left: 1.5rem;
+  }
 `;
 
 export const GeoSlider = styled(Slider)<{

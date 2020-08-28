@@ -140,9 +140,9 @@ export enum MetroFilter {
 }
 
 export const FILTER_LABEL = {
-  [MetroFilter.ALL]: 'Metro & Non-metro',
-  [MetroFilter.METRO]: 'Metro only',
-  [MetroFilter.NON_METRO]: 'Non-metro only',
+  [MetroFilter.ALL]: 'Urban & Rural',
+  [MetroFilter.METRO]: 'Urban only',
+  [MetroFilter.NON_METRO]: 'Rural only',
 };
 
 export function getFilterLabel(filter: MetroFilter) {
@@ -186,8 +186,8 @@ export enum GeoScopeFilter {
 
 export const metroPrefixCopy = {
   [MetroFilter.ALL]: '',
-  [MetroFilter.METRO]: 'metro',
-  [MetroFilter.NON_METRO]: 'non-metro',
+  [MetroFilter.METRO]: 'urban',
+  [MetroFilter.NON_METRO]: 'rural',
 };
 
 export function getLocationPageViewMoreCopy(

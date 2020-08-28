@@ -6,10 +6,11 @@ const minTableWidth = locationNameCellWidth + 5 * metricCellWidth;
 const pinnedBorderColor = '#CEBFAC';
 
 //159px is the header-height
-export const ModalContainer = styled.div`
+export const ModalContainer = styled.div<{ finalHeaderOffset: number }>`
   display: flex;
   flex-direction: column;
-  max-height: calc(100vh - 159px);
+  max-height: ${({ finalHeaderOffset }) =>
+    `calc(100vh - ${finalHeaderOffset}px)`};
   min-height: 0;
   width: 100%;
   overflow-x: auto;
@@ -26,7 +27,7 @@ export const Body = styled.div`
   min-width: ${minTableWidth}px;
 `;
 
-export const Container = styled.div`
+export const Container = styled.div<{ finalHeaderOffset: number }>`
   width: 100%;
   overflow-x: auto;
 `;
