@@ -104,7 +104,7 @@ const ExploreChart: React.FC<{
   tooltipSubtext = '',
   marginTop = 10,
   marginBottom = 30,
-  marginLeft = 50,
+  marginLeft = 60,
   marginRight = 10,
   barOpacity,
   barOpacityHover,
