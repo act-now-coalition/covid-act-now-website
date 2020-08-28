@@ -123,6 +123,7 @@ const ExploreChart: React.FC<{
     range: [0, innerWidth],
   });
   const timeTicks = getTimeAxisTicks(dateFrom, dateTo);
+  // We remove the last tick to make room for the Today marker
   const xTicks = timeTicks.slice(0, timeTicks.length - 1);
   const timeTickFormat = isMobile ? 'MMM' : 'MMMM D';
   const xTickFormat = (date: Date) => moment(date).format(timeTickFormat);
