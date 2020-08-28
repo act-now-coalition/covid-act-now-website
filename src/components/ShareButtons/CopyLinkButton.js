@@ -1,10 +1,8 @@
 import React, { Fragment, useState } from 'react';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { SocialButton, SocialShareButton } from './ShareButtons.style';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-const CopyLinkButton: React.FC<{
-  url: string;
-}> = ({ url }) => {
+const CopyLinkButton = ({ url }) => {
   const [copiedLink, setCopiedLink] = useState(false);
   return (
     <CopyToClipboard text={url} onCopy={() => setCopiedLink(true)}>
