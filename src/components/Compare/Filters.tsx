@@ -6,7 +6,10 @@ import {
   MenuList,
   MenuItem,
   ClickAwayListener,
+  useMediaQuery,
 } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
+
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {
@@ -125,6 +128,8 @@ const Filters = (props: {
   };
 
   const isStatePage = !props.isHomepage && !props.county;
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
   const gridOnClick = (on: boolean) => {
     props.setViewAllCounties && props.setViewAllCounties(on);
@@ -175,6 +180,7 @@ const Filters = (props: {
           ref={anchorRef}
           onClick={handleMenuToggle}
           disabled={disableMetroMenu}
+          isMobile={isMobile}
           disableRipple
           isOpen={open}
           isStatePage={isStatePage}

@@ -11,7 +11,7 @@ import { useTheme } from '@material-ui/core/styles';
 import { Metric } from 'common/metric';
 import CompareMain from 'components/Compare/CompareMain';
 import { countySummary } from 'common/location_summaries';
-import Explore, { EXPLORE_CHART_IDS } from 'components/Explore';
+import { EXPLORE_CHART_IDS } from 'components/Explore';
 
 // TODO(michael): figure out where this type declaration should live.
 type County = {
@@ -188,22 +188,12 @@ const ChartsHolder = (props: {
                 />
               ))}
             </MainContentInner>
-            <MainContentInner ref={exploreChartRef}>
+            {/* <MainContentInner ref={exploreChartRef}>
               <Explore
                 projection={props.projections.primary}
                 chartId={chartId}
               />
-            </MainContentInner>
-            <MainContentInner>
-              <p>
-                <b>Looking for our future hospitalization projections?</b>{' '}
-                <a href="https://blog.covidactnow.org/covid-hospitalization-projections-sunset/">
-                  We're no longer including them here
-                </a>
-                . If you have questions,{' '}
-                <a href="mailto:info@covidactnow.org">let us know</a>.
-              </p>
-            </MainContentInner>
+            </MainContentInner> */}
           </ChartContentWrapper>
           <div ref={shareBlockRef}>
             <ShareModelBlock {...shareButtonProps} />
