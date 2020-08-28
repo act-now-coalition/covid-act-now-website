@@ -137,9 +137,9 @@ export enum MetroFilter {
 }
 
 export const FILTER_LABEL = {
-  [MetroFilter.ALL]: 'Urban & Rural',
-  [MetroFilter.METRO]: 'Urban only',
-  [MetroFilter.NON_METRO]: 'Rural only',
+  [MetroFilter.ALL]: 'Metro & Non-metro',
+  [MetroFilter.METRO]: 'Metro only',
+  [MetroFilter.NON_METRO]: 'Non-metro only',
 };
 
 export function getFilterLabel(filter: MetroFilter) {

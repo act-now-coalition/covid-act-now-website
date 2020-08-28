@@ -91,9 +91,12 @@ export const MetroMenuButton = styled(Button)<{
   isStatePage?: boolean;
   disabled: boolean;
   isModal: boolean;
+  isMobile: boolean;
 }>`
   align-items: flex-start;
   text-transform: none;
+  display: ${({ disabled, isMobile }) =>
+    disabled && isMobile ? 'none' : 'block'};
   border: ${({ disabled, isModal }) =>
     disabled && isModal
       ? `1px solid ${COLOR_MAP.GRAY.DARK}`
