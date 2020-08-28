@@ -71,6 +71,8 @@ const ExploreChartImage = () => {
                   width={width}
                   height={225}
                   isMobile={false}
+                  barOpacity={0.4}
+                  barOpacityHover={0.8}
                 />
               )}
             </ParentSize>

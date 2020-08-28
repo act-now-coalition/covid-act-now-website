@@ -14,6 +14,7 @@ import SeriesChart, { SeriesMarker } from './SeriesChart';
 import ChartOverlay from './ChartOverlay';
 import { getMaxBy, getTimeAxisTicks, findPointByDate } from './utils';
 import * as Styles from './Explore.style';
+import { COLOR_MAP } from 'common/colors';
 
 const getDate = (d: Column) => new Date(d.x);
 const getY = (d: Column) => d.y;
@@ -63,7 +64,8 @@ const DataHoverMarkers: React.FC<{
   y: (d: Column) => number;
   yMax: number;
   barWidth: number;
-}> = ({ series, x, y, date, yMax, barWidth }) => (
+  barOpacityHover?: number;
+}> = ({ series, x, y, date, yMax, barWidth, barOpacityHover }) => (
   <Fragment>
     {series.map(({ label, type, data }) => (
       <SeriesMarker
@@ -75,6 +77,7 @@ const DataHoverMarkers: React.FC<{
         date={date}
         yMax={yMax}
         barWidth={barWidth}
+        barOpacityHover={barOpacityHover}
       />
     ))}
   </Fragment>
@@ -85,19 +88,25 @@ const ExploreChart: React.FC<{
   height: number;
   series: Series[];
   isMobile: boolean;
+  tooltipSubtext?: string;
   marginTop?: number;
   marginBottom?: number;
   marginLeft?: number;
   marginRight?: number;
+  barOpacity?: number;
+  barOpacityHover?: number;
 }> = ({
   width,
   height,
   series,
   isMobile,
+  tooltipSubtext = '',
   marginTop = 10,
   marginBottom = 30,
   marginLeft = 50,
   marginRight = 10,
+  barOpacity,
+  barOpacityHover,
 }) => {
   const dateFrom = new Date('2020-03-01');
   const dateTo = new Date();
@@ -138,11 +147,14 @@ const ExploreChart: React.FC<{
   const getXPosition = (d: Column) => dateScale(getDate(d)) || 0;
   const getYPosition = (d: Column) => yScale(getY(d));
 
+  // Note(Chelsi): !barOpacity makes sure change isn't applied to share image chart:
+  const axisGridColor = !barOpacity ? `${COLOR_MAP.GRAY_EXPLORE_CHART}` : '';
+
   return (
     <Styles.PositionRelative>
       <svg width={width} height={height}>
         <Group key="chart-container" top={marginTop} left={marginLeft}>
-          <ChartStyle.LineGrid>
+          <ChartStyle.LineGrid exploreStroke={axisGridColor}>
             <GridColumns<Date> scale={dateScale} height={innerHeight} />
             <GridRows<number> scale={yScale} width={innerWidth} />
           </ChartStyle.LineGrid>
@@ -156,6 +168,7 @@ const ExploreChart: React.FC<{
                 type={type}
                 yMax={innerHeight}
                 barWidth={barWidth}
+                barOpacity={barOpacity}
               />
             ))}
           </RectClipGroup>
@@ -167,6 +180,7 @@ const ExploreChart: React.FC<{
               barWidth={barWidth}
               series={series}
               date={tooltipData.date}
+              barOpacityHover={barOpacityHover}
             />
           )}
           <ChartOverlay
@@ -176,7 +190,7 @@ const ExploreChart: React.FC<{
             onMouseOver={onMouseOver}
             onMouseLeave={hideTooltip}
           />
-          <ChartStyle.Axis>
+          <ChartStyle.Axis exploreStroke={axisGridColor}>
             <AxisLeft scale={yScale} />
             <AxisBottom
               top={innerHeight}
@@ -193,8 +207,7 @@ const ExploreChart: React.FC<{
           top={p => getYPosition(p) + marginTop}
           date={tooltipData.date}
           series={series}
-          // TODO(pablo): Pass the string as props from the Explore component
-          subtext="in NY"
+          subtext={tooltipSubtext}
         />
       )}
       {tooltipOpen && tooltipData && (

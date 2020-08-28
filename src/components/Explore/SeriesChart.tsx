@@ -14,7 +14,8 @@ const SeriesChart: FunctionComponent<{
   y: (d: Column) => number;
   yMax: number;
   barWidth: number;
-}> = ({ type, data, x, y, yMax, barWidth }) => {
+  barOpacity?: number;
+}> = ({ type, data, x, y, yMax, barWidth, barOpacity }) => {
   switch (type) {
     case ChartType.LINE:
       return (
@@ -24,7 +25,7 @@ const SeriesChart: FunctionComponent<{
       );
     case ChartType.BAR:
       return (
-        <Styles.BarsSeries>
+        <Styles.BarsSeries barOpacity={barOpacity}>
           <BarChart data={data} x={x} y={y} yMax={yMax} barWidth={barWidth} />
         </Styles.BarsSeries>
       );
@@ -69,7 +70,8 @@ export const SeriesMarker: React.FC<{
   y: (d: Column) => number;
   yMax: number;
   barWidth: number;
-}> = ({ type, data, date, x, y, yMax, barWidth }) => {
+  barOpacityHover?: number;
+}> = ({ type, data, date, x, y, yMax, barWidth, barOpacityHover }) => {
   const point = findPointByDate(data, date);
   if (!point) {
     return null;
@@ -79,7 +81,7 @@ export const SeriesMarker: React.FC<{
       return <Styles.DotMarker cx={x(point)} cy={y(point)} r={6} />;
     case ChartType.BAR:
       return (
-        <Styles.BarsSeries>
+        <Styles.BarsSeries barOpacityHover={barOpacityHover}>
           <BarChart
             data={[point]}
             x={x}

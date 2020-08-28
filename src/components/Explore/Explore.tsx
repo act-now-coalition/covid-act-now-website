@@ -79,6 +79,7 @@ const Explore: React.FunctionComponent<{
                 isMobile={isMobile}
                 width={width}
                 height={400}
+                tooltipSubtext={`in ${locationName}`}
               />
             )
           }
