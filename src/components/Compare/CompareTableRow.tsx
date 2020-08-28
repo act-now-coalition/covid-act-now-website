@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useHistory } from 'react-router-dom';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import {
@@ -6,11 +6,15 @@ import {
   Row,
   MetricValue,
   Population,
+  CountySuffix,
 } from 'components/Compare/Compare.style';
 import { Metric, formatValue } from 'common/metric';
-import { RankedLocationSummary } from 'common/utils/compare';
+import {
+  RankedLocationSummary,
+  orderedMetrics,
+  getColumnLocationName,
+} from 'common/utils/compare';
 import { Level } from 'common/level';
-import { orderedMetrics } from 'components/Compare/CompareTable';
 import { formatEstimate } from 'common/utils';
 
 function cellValue(metric: any, metricType: Metric) {
@@ -27,6 +31,7 @@ const CompareTableRow = (props: {
   isModal?: boolean;
   sortByPopulation: boolean;
   isHomepage?: boolean;
+  showStateCode: boolean;
 }) => {
   const {
     location,
@@ -35,9 +40,9 @@ const CompareTableRow = (props: {
     isModal,
     sortByPopulation,
     isHomepage,
+    showStateCode,
   } = props;
 
-  //TODO(Chelsi): fix the else?
   function getLevel(metricIndex: Metric): Level {
     const metricInfo = location.metricsInfo.metrics[metricIndex];
     if (metricInfo) {
@@ -68,11 +73,7 @@ const CompareTableRow = (props: {
     );
   };
 
-  const locationName = !location.locationInfo.county
-    ? location.locationInfo.state
-    : location.locationInfo.county.includes('Parish')
-    ? location.locationInfo.county.replace('Parish', 'Par.')
-    : location.locationInfo.county.replace('County', 'Co.');
+  const locationName = getColumnLocationName(location.locationInfo);
 
   const populationRoundTo = isHomepage ? 3 : 2;
 
@@ -92,7 +93,11 @@ const CompareTableRow = (props: {
           <FiberManualRecordIcon />
         </div>
         <div>
-          {locationName}
+          {locationName[0]}{' '}
+          {locationName[1] && <CountySuffix>{locationName[1]}</CountySuffix>}
+          {showStateCode && (
+            <Fragment>{location.locationInfo.state_code}</Fragment>
+          )}
           <br />
           <Population>
             {formatEstimate(

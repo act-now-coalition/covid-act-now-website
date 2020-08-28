@@ -10,7 +10,6 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { Metric } from 'common/metric';
 import CompareMain from 'components/Compare/CompareMain';
-import { getCountiesArr } from 'common/utils/compare';
 import { countySummary } from 'common/location_summaries';
 
 // TODO(michael): figure out where this type declaration should live.
@@ -138,7 +137,6 @@ const ChartsHolder = (props: {
       ]
     : [];
 
-  const locationsForCompare = getCountiesArr(props.stateId);
   const currentCountyForCompare = props.county && {
     locationInfo: props.county,
     metricsInfo: countySummary(props.county.full_fips_code),
@@ -171,8 +169,8 @@ const ChartsHolder = (props: {
               stateName={props.projections.stateName}
               county={props.county}
               locationsViewable={6}
-              locations={locationsForCompare}
               currentCounty={currentCountyForCompare}
+              stateId={props.stateId}
             />
             <MainContentInner>
               {chartPropsForMap.map(chartProps => (

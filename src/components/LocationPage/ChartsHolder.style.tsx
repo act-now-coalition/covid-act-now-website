@@ -72,9 +72,9 @@ export const ChartHeader = styled.div`
 export const ChartLocationName = styled(Typography)`
   margin-bottom: 0.625rem;
   font-weight: normal;
-  font-size: 0.875rem;
+  font-size: 13px;
   line-height: 1.125rem;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
   color: rgba(0, 0, 0, 0.7);
   opacity: 0.7;
