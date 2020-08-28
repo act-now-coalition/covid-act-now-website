@@ -10,10 +10,18 @@ const getPointText = (valueY: number) => formatPercent(valueY, 1);
 
 // It shows one decimal point for tooltip values, except for
 // values over the cap (it shows > 40%)
-const getTooltipBody = (valueY: number) =>
+const getTooltipContent = (valueY: number) =>
   valueY > CAP_Y
-    ? `Positive Tests > ${formatPercent(CAP_Y, 0)}`
-    : `Positive Tests ${getPointText(valueY)}`;
+    ? {
+        subtitle: `Positive Test Rate >`,
+        body: `${formatPercent(CAP_Y, 0)}`,
+        width: '125px',
+      }
+    : {
+        subtitle: `Positive Test Rate`,
+        body: `${getPointText(valueY)}`,
+        width: '125px',
+      };
 
 const ChartPositiveTests = ({
   columnData,
@@ -27,7 +35,7 @@ const ChartPositiveTests = ({
     columnData={columnData}
     capY={CAP_Y}
     zones={POSITIVE_TESTS_LEVEL_INFO_MAP}
-    getTooltipBody={getTooltipBody}
+    getTooltipContent={getTooltipContent}
     getPointText={getPointText}
   />
 );

@@ -107,10 +107,12 @@ const ChartRt = ({
         left={marginLeft + getXCoord(d)}
         top={marginTop + getYCoord(d)}
         title={formatUtcDate(getDate(d), 'MMM D, YYYY')}
+        subtitle="Infection rate"
         subtext={isConfirmed ? undefined : 'Data might change'}
+        width="150px"
       >
         <TooltipStyle.Body>
-          {`Infection rate ${isConfirmed ? '' : '~'}${rt}`}
+          {`${isConfirmed ? '' : '~'}${rt}`}
         </TooltipStyle.Body>
         <TooltipStyle.BodyMuted>{`90% CI  [${rtLow}, ${rtHigh}]`}</TooltipStyle.BodyMuted>
       </Tooltip>
