@@ -1,24 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
-import { countyColor, stateColor } from 'common/colors';
+import { colorFromLocationSummary } from 'common/colors';
 import { geoAlbersUsaTerritories } from 'geo-albers-usa-territories';
 import STATES_JSON from './data/states-10m.json';
 import { USMapWrapper, USStateMapWrapper } from './Map.style';
 import { REVERSED_STATES } from 'common';
+import { useSummaries } from 'common/location_summaries';
 
 function getStateCode(stateName) {
   return REVERSED_STATES[stateName];
 }
 
 const USACountyMap = ({ stateClickHandler, setTooltipContent, condensed }) => {
+  const locationSummaries = useSummaries();
+  if (!locationSummaries) {
+    return null;
+  }
+
   const getFillColor = geo => {
-    if (geo.id.length <= 2) {
-      const stateCode = getStateCode(geo.properties.name);
-      return stateCode && stateColor(stateCode);
-    } else {
-      return countyColor(geo.id);
-    }
+    const summary = locationSummaries[geo.id] || null;
+    return colorFromLocationSummary(summary);
   };
 
   const projection = geoAlbersUsaTerritories()

@@ -1,3 +1,4 @@
+import * as QueryString from 'query-string';
 import { assert } from 'common/utils';
 import DataUrlJson from 'assets/data/data_url.json';
 
@@ -24,4 +25,27 @@ export function snapshotUrl(snapshotNum: string | number) {
 
 export function currentSnapshot(): number {
   return snapshotFromUrl(SNAPSHOT_URL);
+}
+
+/** Checks for ?snapshot=xyz in the querystring and returns it as a number. */
+export function getSnapshotOverride(): number | null {
+  if (typeof window !== 'undefined') {
+    const search = window?.location?.search;
+    if (search !== undefined) {
+      const params = QueryString.parse(search);
+      if ('snapshot' in params) {
+        const snapshot = Number(params['snapshot']);
+        if (snapshot !== Number.NaN && snapshot !== 0) {
+          return snapshot;
+        }
+      }
+    }
+  }
+  return null;
+}
+
+/** Checks for ?snapshot=xyz in the querystring and returns the corresponding snapshot URL. */
+export function getSnapshotUrlOverride(): string | null {
+  const override = getSnapshotOverride();
+  return override === null ? null : snapshotUrl(override);
 }

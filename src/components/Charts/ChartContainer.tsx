@@ -4,6 +4,7 @@ import { Group } from '@vx/group';
 import { useTooltip } from '@vx/tooltip';
 import HoverOverlay from './HoverOverlay';
 import * as Style from './Charts.style';
+import { ScreenshotReady } from 'components/Screenshot';
 
 const ChartContainer = <T extends unknown>({
   width,
@@ -69,6 +70,7 @@ const ChartContainer = <T extends unknown>({
           />
         </Group>
       </svg>
+      {width > 0 && <ScreenshotReady />}
       {tooltipOpen && tooltipData && renderTooltip(tooltipData)}
     </Style.PositionRelative>
   );

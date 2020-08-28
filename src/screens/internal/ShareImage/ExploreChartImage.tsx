@@ -25,6 +25,7 @@ import {
   Subtitle,
   Title,
 } from './ChartShareImage.style';
+import { SCREENSHOT_CLASS } from 'components/Screenshot';
 
 const ExploreChartImage = () => {
   const theme = useContext(ThemeContext);
@@ -48,7 +49,7 @@ const ExploreChartImage = () => {
   }
 
   return (
-    <ScreenshotWrapper className={'screenshot'}>
+    <ScreenshotWrapper className={SCREENSHOT_CLASS}>
       <Wrapper>
         <Headers>
           <Title>{getTitle(metric)}</Title>
