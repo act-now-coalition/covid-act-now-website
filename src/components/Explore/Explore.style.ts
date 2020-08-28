@@ -5,6 +5,7 @@ import MuiTab from '@material-ui/core/Tab';
 import MuiTabs from '@material-ui/core/Tabs';
 import theme from 'assets/theme';
 import colorPalette from 'assets/theme/palette';
+import { charts } from 'components/Charts/Charts.style';
 
 /** Gets the chart palette based on the current theme. */
 function palette(props: any) {
@@ -12,7 +13,7 @@ function palette(props: any) {
 }
 
 export const Container = styled.div`
-  margin-bottom: ${theme.spacing(4)}px;
+  margin: ${theme.spacing(4)}px 0;
 `;
 
 export const Header = styled.div`
@@ -42,6 +43,7 @@ export const Subtitle = styled.div`
 `;
 
 export const Tabs = styled(MuiTabs)`
+  margin-top: ${theme.spacing(2)}px;
   .MuiTabs-indicator {
     background-color: ${colorPalette.lightBlue};
   }
@@ -66,13 +68,13 @@ export const Tab = styled(MuiTab)`
 
 // CHART CONTROLS
 export const ChartControlsContainer = styled.div`
-  margin: ${theme.spacing(1)}px 0;
+  margin: ${theme.spacing(2)}px auto;
 `;
 
 export const LegendContainer = styled(Box)`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
 `;
 
 export const LegendItem = styled(Box)`
@@ -136,6 +138,16 @@ export const GridLines = styled.g`
     stroke: ${theme.palette.grey[300]};
     stroke-width: 1px;
     stroke-dasharray: 5, 5;
+  }
+`;
+
+export const TodayLabel = styled.g`
+  text {
+    font-family: ${charts.fontFamily};
+    font-weight: 500;
+    font-size: 12px;
+    fill: #4f4f4f;
+    text-anchor: middle;
   }
 `;
 

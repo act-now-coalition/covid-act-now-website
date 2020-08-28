@@ -1,10 +1,5 @@
 import moment from 'moment';
-import {
-  max as _max,
-  range as _range,
-  deburr as _deburr,
-  words as _words,
-} from 'lodash';
+import { max, range, deburr, words, isNumber, dropRightWhile } from 'lodash';
 import { Series } from './interfaces';
 import { Column } from 'common/models/Projection';
 import { Projection, DatasetId } from 'common/models/Projection';
@@ -21,14 +16,14 @@ export function getMaxBy<T>(
   getValue: (d: Column) => T,
   defaultValue: T,
 ): T {
-  const maxValue = _max(series.map(({ data }) => _max(data.map(getValue))));
+  const maxValue = max(series.map(({ data }) => max(data.map(getValue))));
   return maxValue || defaultValue;
 }
 
 export function getTimeAxisTicks(from: Date, to: Date) {
   const dateFrom = moment(from).startOf('month').toDate();
   const numMonths = moment(to).diff(dateFrom, 'months');
-  return _range(1, numMonths + 1).map(i =>
+  return range(1, numMonths + 1).map(i =>
     moment(dateFrom).add(i, 'month').toDate(),
   );
 }
@@ -154,13 +149,19 @@ export const EXPLORE_CHART_IDS = Object.values(exploreMetricData).map(
   metric => metric.chartId,
 );
 
+const hasValue = (point: Column) => isNumber(point.y);
+
+function cleanSeries(data: Column[]) {
+  return dropRightWhile(data, point => !hasValue(point));
+}
+
 export function getSeries(
   metric: ExploreMetric,
   projection: Projection,
 ): Series[] {
   const metricDefinition = exploreMetricData[metric];
   return metricDefinition.series.map(item => ({
-    data: projection.getDataset(item.datasetId),
+    data: cleanSeries(projection.getDataset(item.datasetId)),
     type: item.type,
     label: item.label,
     tooltipLabel: item.tooltipLabel,
@@ -187,7 +188,7 @@ export function findPointByDate(data: Column[], date: Date): Column | null {
 }
 
 function sanitizeLocationName(name: string) {
-  return _words(_deburr(name)).join('-').toLowerCase();
+  return words(deburr(name)).join('-').toLowerCase();
 }
 
 export function getImageFilename(fips: string, metric: ExploreMetric) {

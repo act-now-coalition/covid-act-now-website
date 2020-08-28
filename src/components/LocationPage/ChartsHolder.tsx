@@ -189,7 +189,14 @@ const ChartsHolder = (props: {
                   stateId={props.stateId}
                 />
               ))}
-
+            </MainContentInner>
+            <MainContentInner ref={exploreChartRef}>
+              <Explore
+                projection={props.projections.primary}
+                chartId={chartId}
+              />
+            </MainContentInner>
+            <MainContentInner>
               <p>
                 <b>Looking for our future hospitalization projections?</b>{' '}
                 <a href="https://blog.covidactnow.org/covid-hospitalization-projections-sunset/">
@@ -198,12 +205,6 @@ const ChartsHolder = (props: {
                 . If you have questions,{' '}
                 <a href="mailto:info@covidactnow.org">let us know</a>.
               </p>
-            </MainContentInner>
-            <MainContentInner ref={exploreChartRef}>
-              <Explore
-                projection={props.projections.primary}
-                chartId={chartId}
-              />
             </MainContentInner>
           </ChartContentWrapper>
           <div ref={shareBlockRef}>
