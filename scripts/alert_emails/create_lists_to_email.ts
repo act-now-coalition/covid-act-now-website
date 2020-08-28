@@ -4,6 +4,10 @@ import path from 'path';
 import { GrpcStatus as FirestoreErrorCode } from '@google-cloud/firestore';
 import { getFirestore } from './firestore';
 
+const blacklistFips = [
+  '44007', // Aug 28
+];
+
 function exitWithUsage(): never {
   console.log('Usage: yarn create-lists-to-email alerts.json snapshotId');
   process.exit(1);
@@ -37,7 +41,9 @@ async function updateSnapshotEmails(
 ) {
   const db = getFirestore();
   const alertsByLocation = readAlertsFile(alertsFileName);
-  const fipsList = Object.keys(alertsByLocation);
+  const fipsList = Object.keys(alertsByLocation).filter(
+    fips => !blacklistFips.includes(fips),
+  );
 
   for (const fips of fipsList) {
     const emailQuerySnapshot = await db
