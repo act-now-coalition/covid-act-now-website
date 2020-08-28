@@ -7,14 +7,19 @@ const COLOR_LINKEDIN = '#007fb1';
 export const LinkedinShareButton: React.FC<{
   url: string;
   quote: string;
-}> = ({ url, quote }) => (
+  socialIconSize: number;
+}> = ({ url, quote, socialIconSize }) => (
   <SocialShareButton
     variant="contained"
     color={COLOR_LINKEDIN}
     disableElevation
   >
     <ReactShare.LinkedinShareButton url={url} title={quote}>
-      <ReactShare.LinkedinIcon size={40} round={false} fill="auto" />
+      <ReactShare.LinkedinIcon
+        size={socialIconSize}
+        round={false}
+        fill="auto"
+      />
     </ReactShare.LinkedinShareButton>
   </SocialShareButton>
 );

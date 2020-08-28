@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import { ClickAwayListener } from '@material-ui/core';
+import { ClickAwayListener, useMediaQuery } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
 import { downloadImage } from './utils';
 import FacebookShareButton from './FacebookShareButton';
 import TwitterShareButton from './TwitterShareButton';
@@ -19,6 +20,16 @@ const ShareImageButtons: React.FC<{
   const hideSocialButtons = () => {
     const timeoutId = setTimeout(() => setShowSocialButtons(false), 1500);
     return () => clearTimeout(timeoutId);
+  };
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const socialIconSize = isMobile ? 40 : 50;
+
+  const sharedProps = {
+    url,
+    quote,
+    socialIconSize,
   };
 
   return (
@@ -47,9 +58,9 @@ const ShareImageButtons: React.FC<{
         </ButtonGroup>
         {showSocialButtons && (
           <SocialButtonsContainer onClick={hideSocialButtons}>
-            <FacebookShareButton url={url} quote={quote} />
-            <TwitterShareButton url={url} quote={quote} hashtags={hashtags} />
-            <LinkedinShareButton url={url} quote={quote} />
+            <FacebookShareButton {...sharedProps} />
+            <TwitterShareButton {...sharedProps} hashtags={hashtags} />
+            <LinkedinShareButton {...sharedProps} />
             <CopyLinkButton url={url} />
           </SocialButtonsContainer>
         )}
