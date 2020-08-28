@@ -1,9 +1,22 @@
 import moment from 'moment';
-import { max as _max, range as _range, isNumber, dropRightWhile } from 'lodash';
+import {
+  max as _max,
+  range as _range,
+  deburr as _deburr,
+  words as _words,
+  isNumber,
+  dropRightWhile,
+} from 'lodash';
 import { Series } from './interfaces';
 import { Column } from 'common/models/Projection';
 import { Projection, DatasetId } from 'common/models/Projection';
 import { ChartType } from './interfaces';
+import { share_image_url } from 'assets/data/share_images_url.json';
+import {
+  getLocationNameForFips,
+  getLocationUrlForFips,
+  isStateFips,
+} from 'common/locations';
 
 export function getMaxBy<T>(
   series: Series[],
@@ -179,4 +192,44 @@ export function findPointByDate(data: Column[], date: Date): Column | null {
     p => new Date(p.x).toDateString() === date.toDateString(),
   );
   return idx >= 0 ? data[idx] : null;
+}
+
+function sanitizeLocationName(name: string) {
+  return _words(_deburr(name)).join('-').toLowerCase();
+}
+
+export function getImageFilename(fips: string, metric: ExploreMetric) {
+  const locationName = getLocationNameForFips(fips) || '';
+  const chartId = getChartIdByMetric(metric);
+  const downloadDate = moment().format('YYYY-MM-DD');
+  return `${sanitizeLocationName(locationName)}-${chartId}-${downloadDate}.png`;
+}
+
+export function getExportImageUrl(fips: string, metric: ExploreMetric) {
+  const chartId = getChartIdByMetric(metric);
+  return `${share_image_url}explore/${chartId}/export.png`;
+}
+
+export function getChartUrl(fips: string, metric: ExploreMetric) {
+  const chartId = getChartIdByMetric(metric);
+  const locationUrl = getLocationUrlForFips(fips);
+  const isState = isStateFips(fips);
+  return isState
+    ? `${locationUrl}explore/${chartId}`
+    : `${locationUrl}/explore/${chartId}`;
+}
+
+export function getSocialQuote(fips: string, metric: ExploreMetric) {
+  const locationName = getLocationNameForFips(fips);
+  switch (metric) {
+    case ExploreMetric.CASES:
+      return `${locationName}’s daily cases, according to @CovidActNow. See the chart: `;
+    case ExploreMetric.DEATHS:
+      return `${locationName}’s daily deaths, according to @CovidActNow. See the chart: `;
+    case ExploreMetric.HOSPITALIZATIONS:
+      return `${locationName}’s hospitalizations, according to @CovidActNow. See the chart: `;
+    case ExploreMetric.ICU_HOSPITALIZATIONS:
+      return `${locationName}’s ICU hospitalizations, according to @CovidActNow. See the chart: `;
+  }
+  return '';
 }

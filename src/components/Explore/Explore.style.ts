@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
 import MuiTab from '@material-ui/core/Tab';
 import MuiTabs from '@material-ui/core/Tabs';
 import theme from 'assets/theme';
+import colorPalette from 'assets/theme/palette';
 import { charts } from 'components/Charts/Charts.style';
 
 /** Gets the chart palette based on the current theme. */
@@ -10,15 +12,22 @@ function palette(props: any) {
   return props.theme.palette.chart;
 }
 
-const lightBlue = '#00BFEA';
-
 export const Container = styled.div`
   margin-bottom: ${theme.spacing(4)}px;
 `;
 
-// Header
 export const Header = styled.div`
-  margin-bottom: ${theme.spacing(4) + theme.spacing(2)}px;
+  margin-bottom: ${theme.spacing(2)}px;
+`;
+
+export const Heading = styled(Typography)`
+  margin-top: 0;
+  margin-bottom: 0;
+`;
+
+export const ShareBlock = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `;
 
 export const Subtitle = styled.div`
@@ -35,7 +44,7 @@ export const Subtitle = styled.div`
 
 export const Tabs = styled(MuiTabs)`
   .MuiTabs-indicator {
-    background-color: ${lightBlue};
+    background-color: ${colorPalette.lightBlue};
   }
 
   border-bottom: solid 1px ${theme.palette.grey[300]};

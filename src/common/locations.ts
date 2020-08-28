@@ -110,6 +110,8 @@ export function getLocationNameForFips(fips: string): string {
 }
 
 export function getLocationUrlForFips(fips: string): string {
+  // TODO(pablo): Make sure that these urls are uniform, here, the state
+  // URL ends on / but not the county one
   if (isStateFips(fips)) {
     const state = findStateByFips(fips);
     return `https://covidactnow.org/us/${state.state_code.toLowerCase()}/`;

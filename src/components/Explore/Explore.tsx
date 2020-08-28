@@ -1,14 +1,24 @@
 import React, { useState, FunctionComponent } from 'react';
-import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { ParentSize } from '@vx/responsive';
 import { Projection } from 'common/models/Projection';
+import ShareImageButtonGroup from 'components/ShareButtons';
 import ExploreTabs from './ExploreTabs';
 import ExploreChart from './ExploreChart';
 import Legend from './Legend';
 import { ExploreMetric } from './interfaces';
-import { getMetricLabels, getSeries, getMetricByChartId } from './utils';
+
+import {
+  getMetricLabels,
+  getSeries,
+  getMetricByChartId,
+  getImageFilename,
+  getExportImageUrl,
+  getChartUrl,
+  getSocialQuote,
+} from './utils';
 import * as Styles from './Explore.style';
 
 const Explore: React.FunctionComponent<{
@@ -27,18 +37,30 @@ const Explore: React.FunctionComponent<{
 
   const metricLabels = getMetricLabels();
   const series = getSeries(currentMetric, projection);
-  const { locationName } = projection;
+  const { locationName, fips } = projection;
 
   return (
     <Styles.Container>
-      <Styles.Header>
-        <Typography variant="h4" component="h2">
-          Trends
-        </Typography>
-        <Styles.Subtitle>
-          cases since march 1st in {projection.locationName}
-        </Styles.Subtitle>
-      </Styles.Header>
+      <Grid container spacing={1}>
+        <Grid item sm={6} xs={12}>
+          <Styles.Heading variant="h4">Trends</Styles.Heading>
+          <Styles.Subtitle>
+            cases since march 1st in {locationName}
+          </Styles.Subtitle>
+        </Grid>
+        <Grid item sm={6} xs={12}>
+          <Styles.ShareBlock>
+            <ShareImageButtonGroup
+              imageUrl={getExportImageUrl(fips, currentMetric)}
+              imageFilename={getImageFilename(fips, currentMetric)}
+              url={getChartUrl(fips, currentMetric)}
+              quote={getSocialQuote(fips, currentMetric)}
+              hashtags={['COVIDActNow']}
+            />
+          </Styles.ShareBlock>
+        </Grid>
+      </Grid>
+
       <ExploreTabs
         activeTabIndex={currentMetric}
         labels={metricLabels}
