@@ -67,13 +67,13 @@ export const Tab = styled(MuiTab)`
 
 // CHART CONTROLS
 export const ChartControlsContainer = styled.div`
-  margin: ${theme.spacing(1)}px 0;
+  margin: ${theme.spacing(2)}px auto;
 `;
 
 export const LegendContainer = styled(Box)`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
 `;
 
 export const LegendItem = styled(Box)`

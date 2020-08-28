@@ -60,7 +60,6 @@ const Explore: React.FunctionComponent<{
           </Styles.ShareBlock>
         </Grid>
       </Grid>
-
       <ExploreTabs
         activeTabIndex={currentMetric}
         labels={metricLabels}
