@@ -194,16 +194,6 @@ const ChartsHolder = (props: {
                 chartId={chartId}
               />
             </MainContentInner>
-            <MainContentInner>
-              <p>
-                <b>Looking for our future hospitalization projections?</b>{' '}
-                <a href="https://blog.covidactnow.org/covid-hospitalization-projections-sunset/">
-                  We're no longer including them here
-                </a>
-                . If you have questions,{' '}
-                <a href="mailto:info@covidactnow.org">let us know</a>.
-              </p>
-            </MainContentInner>
           </ChartContentWrapper>
           <div ref={shareBlockRef}>
             <ShareModelBlock {...shareButtonProps} />
