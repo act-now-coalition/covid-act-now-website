@@ -3,6 +3,7 @@ import * as StyleTooltip from './Tooltip.style';
 
 const Tooltip = ({
   title,
+  subtitle,
   left,
   top,
   children,
@@ -12,12 +13,14 @@ const Tooltip = ({
   left: number;
   top: number;
   title?: string;
+  subtitle?: string;
   children?: React.ReactNode;
   subtext?: string;
   width?: string;
 }) => (
   <StyleTooltip.TooltipArrowDown style={{ top, left, width: width }}>
     {title && <StyleTooltip.Title>{title}</StyleTooltip.Title>}
+    {subtitle && <StyleTooltip.Subtitle>{subtitle}</StyleTooltip.Subtitle>}
     {children}
     {subtext && <StyleTooltip.SubText>{subtext}</StyleTooltip.SubText>}
   </StyleTooltip.TooltipArrowDown>

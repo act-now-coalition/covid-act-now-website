@@ -54,7 +54,6 @@ export default function App() {
                 path="/us/:stateId/county/:countyId"
                 component={LocationPage}
               />
-
               <Route
                 exact
                 path="/us/:stateId/chart/:chartId"
@@ -62,7 +61,17 @@ export default function App() {
               />
               <Route
                 exact
+                path="/us/:stateId/explore/:chartId"
+                component={LocationPage}
+              />
+              <Route
+                exact
                 path="/us/:stateId/county/:countyId/chart/:chartId"
+                component={LocationPage}
+              />
+              <Route
+                exact
+                path="/us/:stateId/county/:countyId/explore/:chartId"
                 component={LocationPage}
               />
               {/* /state/ routes are deprecated but still supported. */}

@@ -1,15 +1,16 @@
 import styled from 'styled-components';
 import { locationNameCellWidth, metricCellWidth } from './Compare.style';
-import { COLORS } from 'common';
 import { RankedLocationSummary } from 'common/utils/compare';
 
 const minTableWidth = locationNameCellWidth + 5 * metricCellWidth;
 const pinnedBorderColor = '#CEBFAC';
 
-export const ModalContainer = styled.div`
+//159px is the header-height
+export const ModalContainer = styled.div<{ finalHeaderOffset: number }>`
   display: flex;
   flex-direction: column;
-  max-height: calc(100vh - 3.75rem);
+  max-height: ${({ finalHeaderOffset }) =>
+    `calc(100vh - ${finalHeaderOffset}px)`};
   min-height: 0;
   width: 100%;
   overflow-x: auto;
@@ -26,7 +27,7 @@ export const Body = styled.div`
   min-width: ${minTableWidth}px;
 `;
 
-export const Container = styled.div`
+export const Container = styled.div<{ finalHeaderOffset: number }>`
   width: 100%;
   overflow-x: auto;
 `;
@@ -48,6 +49,4 @@ export const Head = styled.div<{
   ${props => (props.isModal && props.pinnedLocation ? PinnedTop : '')}
 `;
 
-export const TableContainer = styled.div<{ isModal: boolean }>`
-  border: ${({ isModal }) => !isModal && `1px solid ${COLORS.LIGHTGRAY}`};
-`;
+export const TableContainer = styled.div<{ isModal: boolean }>``;

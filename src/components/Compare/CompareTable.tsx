@@ -1,5 +1,5 @@
-import React, { useState, Fragment } from 'react';
-import { sortBy, findIndex, partition, reverse } from 'lodash';
+import React from 'react';
+import { sortBy, findIndex, partition, reverse, isNumber } from 'lodash';
 import {
   Wrapper,
   Footer,
@@ -8,19 +8,20 @@ import {
   Header,
   DisclaimerWrapper,
 } from 'components/Compare/Compare.style';
+import LocationTable from './LocationTable';
+import { ChartLocationName } from 'components/LocationPage/ChartsHolder.style';
+import Filters from 'components/Compare/Filters';
+import {
+  SummaryForCompare,
+  RankedLocationSummary,
+  MetroFilter,
+  orderedMetrics,
+  GeoScopeFilter,
+  getAbbreviatedCounty,
+  metroPrefixCopy,
+} from 'common/utils/compare';
 import { Metric } from 'common/metric';
 import { COLOR_MAP } from 'common/colors';
-import LocationTable from './LocationTable';
-import { SummaryForCompare, RankedLocationSummary } from 'common/utils/compare';
-import { ChartLocationName } from 'components/LocationPage/ChartsHolder.style';
-
-export const orderedMetrics = [
-  Metric.CASE_DENSITY,
-  Metric.CASE_GROWTH_RATE,
-  Metric.POSITIVE_TESTS,
-  Metric.HOSPITAL_USAGE,
-  Metric.CONTACT_TRACING,
-];
 
 const CompareTable = (props: {
   stateName?: string;
@@ -31,10 +32,34 @@ const CompareTable = (props: {
   isHomepage?: boolean;
   locations: any;
   currentCounty?: any;
+  viewAllCounties?: boolean;
+  setViewAllCounties?: React.Dispatch<React.SetStateAction<boolean>>;
+  viewMoreCopy?: string;
+  setCountyTypeToView: React.Dispatch<React.SetStateAction<MetroFilter>>;
+  countyTypeToView: MetroFilter;
+  geoScope?: GeoScopeFilter;
+  setGeoScope?: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
+  stateId?: string;
+  sorter: number;
+  setSorter: React.Dispatch<React.SetStateAction<number>>;
+  sortDescending: boolean;
+  setSortDescending: React.Dispatch<React.SetStateAction<boolean>>;
+  sortByPopulation: boolean;
+  setSortByPopulation: React.Dispatch<React.SetStateAction<boolean>>;
+  sliderValue: GeoScopeFilter;
+  setSliderValue: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
 }) => {
-  const [sorter, setSorter] = useState(5);
-  const [sortDescending, setSortDescending] = useState(true);
-  const [sortByPopulation, setSortByPopulation] = useState(false);
+  const {
+    sorter,
+    setSorter,
+    sortDescending,
+    setSortDescending,
+    sortByPopulation,
+    setSortByPopulation,
+    sliderValue,
+    setSliderValue,
+  } = props;
+  const { setViewAllCounties } = props;
 
   const currentCounty = props.county && props.currentCounty;
 
@@ -48,7 +73,7 @@ const CompareTable = (props: {
   ) {
     const [locationsWithValue, locationsWithoutValue] = partition(
       locations,
-      getValue,
+      location => isNumber(getValue(location)),
     );
     const sortedLocationsAsc = sortBy(locationsWithValue, getValue);
     const sortedLocations = sortDescending
@@ -80,7 +105,7 @@ const CompareTable = (props: {
     props.locationsViewable || sortedLocationsArr.length;
 
   //TODO (chelsi): make this a theme-
-  const arrowColorSelected = props.isModal ? 'white' : 'black';
+  const arrowColorSelected = 'white';
   const arrowColorNotSelected = props.isModal
     ? '#828282'
     : `${COLOR_MAP.GRAY.BASE}`;
@@ -92,10 +117,6 @@ const CompareTable = (props: {
     arrowColorNotSelected,
   };
 
-  const headerCopy = props.isHomepage
-    ? 'States comparison'
-    : 'Counties comparison';
-
   // checks if there are less counties than the default amount shown (10):
   const amountDisplayed =
     props.locationsViewable &&
@@ -103,11 +124,16 @@ const CompareTable = (props: {
       ? sortedLocationsArr.length
       : props.locationsViewable;
 
-  const firstHeaderName = props.isHomepage
-    ? 'State'
+  const firstColumnHeaderHomepage = props.viewAllCounties
+    ? `${metroPrefixCopy[props.countyTypeToView]} County`
+    : 'State';
+  const firstColumnHeader = props.isHomepage
+    ? firstColumnHeaderHomepage
     : props.isModal
-    ? 'Counties'
-    : 'County';
+    ? `${metroPrefixCopy[props.countyTypeToView]} Counties (${
+        sortedLocationsArr.length
+      })`
+    : `${metroPrefixCopy[props.countyTypeToView]} County`;
 
   const sortedLocations: RankedLocationSummary[] = sortedLocationsArr
     .filter((location: SummaryForCompare) => location.metricsInfo !== null)
@@ -123,18 +149,40 @@ const CompareTable = (props: {
       Metric.CONTACT_TRACING
     }`;
 
+  const compareSubheader = props.county
+    ? `${getAbbreviatedCounty(props.county.county)}, ${
+        props.stateId
+      } to other counties`
+    : `Counties in ${props.stateName}`;
+
   return (
     <Wrapper isModal={props.isModal} isHomepage={props.isHomepage}>
       {!props.isModal && (
-        <HeaderWrapper>
-          <Header>{headerCopy}</Header>
-          {props.stateName && (
-            <ChartLocationName>{props.stateName}</ChartLocationName>
-          )}
-        </HeaderWrapper>
+        <div>
+          <HeaderWrapper>
+            <Header centered={props.isHomepage}>Compare</Header>
+            {props.stateName && (
+              <ChartLocationName>{compareSubheader}</ChartLocationName>
+            )}
+          </HeaderWrapper>
+          <Filters
+            isHomepage={props.isHomepage}
+            countyTypeToView={props.countyTypeToView}
+            setCountyTypeToView={props.setCountyTypeToView}
+            viewAllCounties={props.viewAllCounties}
+            setViewAllCounties={setViewAllCounties}
+            stateId={props.stateId}
+            county={props.county}
+            geoScope={props.geoScope}
+            setGeoScope={props.setGeoScope}
+            isModal={props.isModal}
+            sliderValue={sliderValue}
+            setSliderValue={setSliderValue}
+          />
+        </div>
       )}
       <LocationTable
-        firstHeaderName={firstHeaderName}
+        firstColumnHeader={firstColumnHeader}
         setSorter={setSorter}
         setSortDescending={setSortDescending}
         metrics={orderedMetrics}
@@ -147,41 +195,37 @@ const CompareTable = (props: {
         setSortByPopulation={setSortByPopulation}
         sortByPopulation={sortByPopulation}
         isHomepage={props.isHomepage}
+        viewAllCounties={props.viewAllCounties}
+        geoScope={props.geoScope}
       />
       {!props.isModal && (
-        <Fragment>
-          <Footer isCounty={props.county}>
-            <div>
-              {locationsViewable !== sortedLocationsArr.length && (
-                <span>
-                  Displaying <strong>{amountDisplayed}</strong> of{' '}
-                  <strong>{sortedLocationsArr.length}</strong>{' '}
-                </span>
-              )}
-              <ViewAllLink onClick={() => props.setShowModal(true)}>
-                {!props.isHomepage
-                  ? `View all counties in ${props.stateName}`
-                  : 'View all states'}
-              </ViewAllLink>
-            </div>
-            {props.county && (
-              <DisclaimerWrapper>
-                <span>
-                  Most states report contact tracing at the state-level only.
-                  View {props.stateName}'s{' '}
-                  <a
-                    href={disclaimerRedirect}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    contact tracing{' '}
-                  </a>
-                  data.
-                </span>
-              </DisclaimerWrapper>
-            )}
-          </Footer>
-        </Fragment>
+        <Footer isCounty={props.county}>
+          <div>
+            <span>
+              Displaying <strong>{amountDisplayed}</strong> of{' '}
+              <strong>{sortedLocationsArr.length}</strong>{' '}
+            </span>
+            <ViewAllLink onClick={() => props.setShowModal(true)}>
+              {props.viewMoreCopy}
+            </ViewAllLink>
+          </div>
+          {props.county && (
+            <DisclaimerWrapper>
+              <span>
+                Most states report contact tracing at the state-level only. View{' '}
+                {props.stateName}'s{' '}
+                <a
+                  href={disclaimerRedirect}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  contact tracing{' '}
+                </a>
+                data.
+              </span>
+            </DisclaimerWrapper>
+          )}
+        </Footer>
       )}
     </Wrapper>
   );

@@ -11,7 +11,7 @@ function getStateCode(stateName) {
   return REVERSED_STATES[stateName];
 }
 
-const USACountyMap = ({ setTooltipContent, condensed }) => {
+const USACountyMap = ({ stateClickHandler, setTooltipContent, condensed }) => {
   const getFillColor = geo => {
     if (geo.id.length <= 2) {
       const stateCode = getStateCode(geo.properties.name);
@@ -48,6 +48,7 @@ const USACountyMap = ({ setTooltipContent, condensed }) => {
                         setTooltipContent(name);
                       }}
                       onMouseLeave={onMouseLeave}
+                      onClick={() => stateClickHandler(name)}
                       fill={getFillColor(geo)}
                       stroke="white"
                     />

@@ -29,6 +29,7 @@ export const COLOR_MAP = {
   },
   BLUE: '#3BBCE6',
   GRAY_BODY_COPY: '#4f4f4f',
+  GRAY_EXPLORE_CHART: '#e0e0e0',
   GRAY: {
     BASE: '#CCCCCC',
     LIGHT: '#E3E3E3',

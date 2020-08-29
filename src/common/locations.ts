@@ -1,16 +1,17 @@
 /** Helpers for dealing with the State / Counties dataset. */
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
-import { each, sortBy, takeRight } from 'lodash';
+import { each, sortBy, takeRight, has } from 'lodash';
 import { assert } from './utils';
-import countyAdjacency from './data/county_adjacency_msa.json';
+import countyAdjacencyMsa from './data/county_adjacency_msa.json';
 
 interface AdjacencyData {
   [fips: string]: {
     adjacent_counties: string[];
+    msa_code?: string;
   };
 }
 
-const ADJACENT_COUNTIES: AdjacencyData = countyAdjacency.counties;
+const ADJACENT_COUNTIES: AdjacencyData = countyAdjacencyMsa.counties;
 
 // TODO(michael): Move more common code here.
 export interface State {
@@ -110,6 +111,8 @@ export function getLocationNameForFips(fips: string): string {
 }
 
 export function getLocationUrlForFips(fips: string): string {
+  // TODO(pablo): Make sure that these urls are uniform, here, the state
+  // URL ends on / but not the county one
   if (isStateFips(fips)) {
     const state = findStateByFips(fips);
     return `https://covidactnow.org/us/${state.state_code.toLowerCase()}/`;
@@ -147,4 +150,10 @@ export function isStateFips(fips: string) {
 export function getAdjacentCounties(fips: string): string[] {
   assert(fips in ADJACENT_COUNTIES, `${fips} not found in adjacency list.`);
   return ADJACENT_COUNTIES[fips].adjacent_counties;
+}
+
+export function getCountyMsaCode(fips: string): string | undefined {
+  if (has(ADJACENT_COUNTIES, fips)) {
+    return ADJACENT_COUNTIES[fips].msa_code;
+  }
 }

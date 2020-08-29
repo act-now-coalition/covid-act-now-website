@@ -52,6 +52,10 @@ export const Title = styled.div`
   margin-bottom: 8px;
 `;
 
+export const Subtitle = styled(Title)`
+  margin-bottom: 0;
+`;
+
 export const Body = styled.div`
   font-family: Source Code Pro;
   font-style: normal;
@@ -62,8 +66,10 @@ export const Body = styled.div`
 `;
 
 export const BodySmall = styled(Body)`
+  font-family: Roboto;
+  margin-top: 4px;
+  font-weight: normal;
   font-size: 11px;
-  color: ${props => palette(props).tooltip.textMuted};
 `;
 
 export const BodyMuted = styled(Body)`
