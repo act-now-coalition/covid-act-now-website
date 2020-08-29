@@ -183,8 +183,8 @@ export enum GeoScopeFilter {
 
 export const metroPrefixCopy = {
   [MetroFilter.ALL]: '',
-  [MetroFilter.METRO]: 'urban',
-  [MetroFilter.NON_METRO]: 'rural',
+  [MetroFilter.METRO]: 'metro',
+  [MetroFilter.NON_METRO]: 'non-metro',
 };
 
 export function getLocationPageViewMoreCopy(
