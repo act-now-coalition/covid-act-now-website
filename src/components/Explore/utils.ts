@@ -227,26 +227,28 @@ export function getSocialQuote(fips: string, metric: ExploreMetric) {
   return '';
 }
 
-function pluralize(num: number, singular: string, plural: string) {
-  return num === 1 ? singular : plural;
-}
+const pluralize = (num: number, singular: string, plural: string) =>
+  num === 1 ? singular : plural;
 
 const pluralizeWeeks = (num: number) => pluralize(num, 'week', 'weeks');
 const pluralizeDays = (num: number) => pluralize(num, 'day', 'days');
 
+/**
+ * Returns the relative time between two dates in days and weeks, for example:
+ * today, 1 day ago, 5 days ago, 3 weeks and 2 days ago, 5 weeks ago, etc.
+ */
 export function weeksAgo(dateFrom: Date, dateTo: Date) {
-  const numDays = moment(dateTo).diff(dateFrom, 'days');
-  const numWeeks = Math.floor(numDays / 7);
-  const reminderDays = numDays % 7;
+  const totalDays = moment(dateTo).diff(dateFrom, 'days');
+  const totalWeeks = Math.floor(totalDays / 7);
+  const numDays = totalDays % 7;
 
-  if (numDays < 7) {
-    return numDays === 0 ? 'today' : `${numDays} ${pluralizeDays(numDays)} ago`;
+  if (totalDays < 7) {
+    return totalDays === 0
+      ? 'today'
+      : `${totalDays} ${pluralizeDays(totalDays)} ago`;
   } else {
-    const weeksAgo = `${numWeeks} ${pluralizeWeeks(numWeeks)}`;
-    const daysAgo =
-      reminderDays > 0
-        ? `, ${reminderDays} ${pluralizeDays(reminderDays)}`
-        : '';
+    const weeksAgo = `${totalWeeks} ${pluralizeWeeks(totalWeeks)}`;
+    const daysAgo = numDays > 0 ? `, ${numDays} ${pluralizeDays(numDays)}` : '';
     return `${weeksAgo} ${daysAgo} ago`;
   }
 }
