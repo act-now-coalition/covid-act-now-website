@@ -157,7 +157,7 @@ export const DateMarker = styled.div`
   transform: translate(-50%, 100%);
   /* TODO(pablo): Use theme */
   background-color: white;
-  width: 140px;
+  width: 180px;
   box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.15);
   border-radius: 20px;
   padding: ${theme.spacing(1) / 2}px ${theme.spacing(2)}px;

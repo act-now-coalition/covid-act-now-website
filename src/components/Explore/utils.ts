@@ -226,3 +226,27 @@ export function getSocialQuote(fips: string, metric: ExploreMetric) {
   }
   return '';
 }
+
+function pluralize(num: number, singular: string, plural: string) {
+  return num === 1 ? singular : plural;
+}
+
+const pluralizeWeeks = (num: number) => pluralize(num, 'week', 'weeks');
+const pluralizeDays = (num: number) => pluralize(num, 'day', 'days');
+
+export function weeksAgo(dateFrom: Date, dateTo: Date) {
+  const numDays = moment(dateTo).diff(dateFrom, 'days');
+  const numWeeks = Math.floor(numDays / 7);
+  const reminderDays = numDays % 7;
+
+  if (numDays < 7) {
+    return numDays === 0 ? 'today' : `${numDays} ${pluralizeDays(numDays)} ago`;
+  } else {
+    const weeksAgo = `${numWeeks} ${pluralizeWeeks(numWeeks)}`;
+    const daysAgo =
+      reminderDays > 0
+        ? `, ${reminderDays} ${pluralizeDays(reminderDays)}`
+        : '';
+    return `${weeksAgo} ${daysAgo} ago`;
+  }
+}
