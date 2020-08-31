@@ -10,7 +10,7 @@ console.log('dynamic_web_content cold start.');
 export const dynamicWebContentHandler = express();
 
 // Middleware router for /share/{snapshotId}-{shareId}/... requests that parses out the params.
-const shareRouter = express.Router({mergeParams: true});
+const shareRouter = express.Router({ mergeParams: true });
 dynamicWebContentHandler.use('/share/:snapshotId-:shareId/', shareRouter);
 
 /**
@@ -27,26 +27,35 @@ shareRouter.get(/\/(.*)\.png/, (req, res) => {
     sharePath = '';
   }
 
-  const baseUrl = req.hostname === 'localhost' ? 'http://localhost:3000/' : 'https://covidactnow.org/';
+  const baseUrl =
+    req.hostname === 'localhost'
+      ? 'http://localhost:3000/'
+      : 'https://covidactnow.org/';
   const url = `${baseUrl}internal/share-image/${sharePath}?snapshot=${snapshotId}`;
 
   console.log(`Generating screenshot for ${url}`);
-  takeScreenshot(url).then((file: string) => {
-    console.log('screenshot generated.');
+  takeScreenshot(url)
+    .then((file: string) => {
+      console.log('screenshot generated.');
 
-    // Normally we let the CDN and the browser cache for 24hrs, but you can
-    // override this with the ?no-cache query param (useful for testing or for
-    // the scheduled ping that tries to keep functions warm).
-    if (req.query['no-cache'] === undefined) {
-      console.log('Setting cache-control header.');
-      res.header('cache-control', 'public, max-age=86400');
-    }
+      // Normally we let the CDN and the browser cache for 24hrs, but you can
+      // override this with the ?no-cache query param (useful for testing or for
+      // the scheduled ping that tries to keep functions warm).
+      if (req.query['no-cache'] === undefined) {
+        console.log('Setting cache-control header.');
+        res.header('cache-control', 'public, max-age=86400');
+      }
 
-    res.sendFile(file);
-  }).catch((error) => {
-    // Assign a random ID so we can find the error in the logs if necessary.
-    const errorId = Math.random().toString(36).substr(2, 10);
-    console.error('Error', errorId, error);
-    res.status(500).send(`<html>Image temporarily not available. Try again later.<br/>Error Id: ${errorId}<br />${error}</html>`);
-  });
+      res.sendFile(file);
+    })
+    .catch(error => {
+      // Assign a random ID so we can find the error in the logs if necessary.
+      const errorId = Math.random().toString(36).substr(2, 10);
+      console.error('Error', errorId, error);
+      res
+        .status(500)
+        .send(
+          `<html>Image temporarily not available. Try again later.<br/>Error Id: ${errorId}<br />${error}</html>`,
+        );
+    });
 });

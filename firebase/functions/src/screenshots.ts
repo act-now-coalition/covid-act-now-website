@@ -14,16 +14,18 @@ let browserPromise: Promise<puppeteer.Browser> | null = null;
 async function getBrowser(): Promise<puppeteer.Browser> {
   if (!browserPromise) {
     console.log('Launching browser...');
-    browserPromise = puppeteer.launch({
-      defaultViewport: {
-        width: BROWSER_WIDTH,
-        height: BROWSER_HEIGHT,
-      },
-      headless: true,
-    }).then(browser => {
-      console.log('Browser started.');
-      return browser;
-    });
+    browserPromise = puppeteer
+      .launch({
+        defaultViewport: {
+          width: BROWSER_WIDTH,
+          height: BROWSER_HEIGHT,
+        },
+        headless: true,
+      })
+      .then(browser => {
+        console.log('Browser started.');
+        return browser;
+      });
   }
   return browserPromise;
 }
@@ -44,13 +46,13 @@ export async function takeScreenshot(url: string): Promise<string> {
 
   console.log('Waiting for "screenshot-ready" div.');
   await tab.waitForSelector('.screenshot-ready', {
-    timeout: TIMEOUT
+    timeout: TIMEOUT,
   });
 
   console.log('Capturing screenshot.');
-  const file = path.join(os.tmpdir(), 'temp.png')
+  const file = path.join(os.tmpdir(), 'temp.png');
   await element.screenshot({
-    path: file
+    path: file,
   });
   console.log('Screenshot done.');
 
