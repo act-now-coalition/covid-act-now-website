@@ -16,6 +16,7 @@ import ChartOverlay from './ChartOverlay';
 import { getMaxBy, getTimeAxisTicks, findPointByDate } from './utils';
 import * as Styles from './Explore.style';
 import { COLOR_MAP } from 'common/colors';
+import { ScreenshotReady } from 'components/Screenshot';
 
 const getDate = (d: Column) => new Date(d.x);
 const getY = (d: Column) => d.y;
@@ -234,6 +235,7 @@ const ExploreChart: React.FC<{
           date={tooltipData.date}
         />
       )}
+      {width > 0 && <ScreenshotReady />}
     </Styles.PositionRelative>
   );
 };

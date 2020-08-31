@@ -19,6 +19,7 @@ import { Metric } from 'common/metric';
 import { findCountyByFips } from 'common/locations';
 import { useProjections } from 'common/utils/model';
 import { Projection } from 'common/models/Projection';
+import { SCREENSHOT_CLASS } from 'components/Screenshot';
 
 export default function ChartShareImage() {
   let { stateId, countyFipsId, metric: metricString } = useParams();
@@ -43,7 +44,7 @@ export default function ChartShareImage() {
   const chartHeight = 225;
 
   return (
-    <ScreenshotWrapper className={'screenshot'}>
+    <ScreenshotWrapper className={SCREENSHOT_CLASS}>
       <Wrapper>
         <Headers>
           <Title>{getMetricNameExtended(metric)}</Title>

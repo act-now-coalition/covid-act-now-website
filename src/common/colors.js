@@ -45,9 +45,16 @@ export const LEVEL_COLOR = {
   [Level.UNKNOWN]: COLOR_MAP.GRAY.BASE,
 };
 
+export function colorFromLocationSummary(
+  summary,
+  defaultColor = COLOR_MAP.GRAY_LIGHT,
+) {
+  return summary ? LEVEL_COLOR[summary.level] : defaultColor;
+}
+
 export function stateColor(stateCode) {
   const summary = stateSummary(stateCode);
-  return summary ? LEVEL_COLOR[summary.level] : COLOR_MAP.GRAY.LIGHT;
+  return colorFromLocationSummary(summary);
 }
 
 export function countyColor(
@@ -55,7 +62,7 @@ export function countyColor(
   defaultColor = COLOR_MAP.GRAY.LIGHT,
 ) {
   const summary = countySummary(countyFipsCode);
-  return summary ? LEVEL_COLOR[summary.level] : defaultColor;
+  return colorFromLocationSummary(summary, defaultColor);
 }
 
 export const LEVEL_COLOR_CONTACT_TRACING = {

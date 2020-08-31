@@ -11,6 +11,7 @@ import {
 import { ScreenshotWrapper } from './ShareImage.style';
 import { formatLocalDate } from 'common/utils';
 import { findCountyByFips } from 'common/locations';
+import { ScreenshotReady, SCREENSHOT_CLASS } from 'components/Screenshot';
 
 // TODO(michael): Split this into HomeImage and LocationImage (with some shared code).
 
@@ -22,7 +23,7 @@ const ShareCardImage = () => {
   const { stateId, countyFipsId } = useParams();
   const isHomePage = !stateId && !countyFipsId;
   return (
-    <ScreenshotWrapper className={'screenshot'}>
+    <ScreenshotWrapper className={SCREENSHOT_CLASS}>
       <Header isHomePage={isHomePage} />
       <ShareCardWrapper isHomePage={isHomePage}>
         <ShareCard stateId={stateId} countyFipsId={countyFipsId} />
@@ -70,7 +71,12 @@ const LocationShareCard = ({ stateId, countyFipsId }: ShareCardProps) => {
   }
   const stats = projections.getMetricValues();
 
-  return <SocialLocationPreview projections={projections} stats={stats} />;
+  return (
+    <>
+      <ScreenshotReady />
+      <SocialLocationPreview projections={projections} stats={stats} />
+    </>
+  );
 };
 
 export default ShareCardImage;
