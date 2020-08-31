@@ -7,6 +7,7 @@ import STATES_JSON from './data/states-10m.json';
 import { USMapWrapper, USStateMapWrapper } from './Map.style';
 import { REVERSED_STATES } from 'common';
 import { useSummaries } from 'common/location_summaries';
+import { ScreenshotReady } from 'components/Screenshot';
 
 function getStateCode(stateName) {
   return REVERSED_STATES[stateName];
@@ -61,6 +62,7 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent, condensed }) => {
           </Geographies>
         </ComposableMap>
       </USStateMapWrapper>
+      <ScreenshotReady />
     </USMapWrapper>
   );
 };
