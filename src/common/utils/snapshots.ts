@@ -32,12 +32,10 @@ export function getSnapshotOverride(): number | null {
   if (typeof window !== 'undefined') {
     const search = window?.location?.search;
     if (search !== undefined) {
-      const params = QueryString.parse(search);
-      if ('snapshot' in params) {
-        const snapshot = Number(params['snapshot']);
-        if (snapshot !== Number.NaN && snapshot !== 0) {
-          return snapshot;
-        }
+      const params = QueryString.parse(search, { parseNumbers: true });
+      const snapshot = params['snapshot'];
+      if (typeof snapshot === 'number' && snapshot > 0) {
+        return snapshot;
       }
     }
   }
