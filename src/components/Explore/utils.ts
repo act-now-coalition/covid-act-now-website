@@ -1,4 +1,5 @@
 import moment from 'moment';
+import urlJoin from 'url-join';
 import { max, range, deburr, words, isNumber, dropRightWhile } from 'lodash';
 import { Series } from './interfaces';
 import { Column } from 'common/models/Projection';
@@ -9,6 +10,7 @@ import {
   getLocationNameForFips,
   getLocationUrlForFips,
   isStateFips,
+  findStateByFips,
 } from 'common/locations';
 
 export function getMaxBy<T>(
@@ -198,9 +200,24 @@ export function getImageFilename(fips: string, metric: ExploreMetric) {
   return `${sanitizeLocationName(locationName)}-${chartId}-${downloadDate}.png`;
 }
 
+function getRelativeUrl(fips: string) {
+  if (isStateFips(fips)) {
+    const { state_code } = findStateByFips(fips);
+    return `states/${state_code.toLowerCase()}`;
+  } else {
+    return `counties/${fips}`;
+  }
+}
+
+/**
+ * Generates the URL of the export images for the given fips code and chart.
+ * It needs to be consistent with the path on the share image generation
+ * script in `scripts/generate_share_images/index.ts`
+ */
 export function getExportImageUrl(fips: string, metric: ExploreMetric) {
   const chartId = getChartIdByMetric(metric);
-  return `${share_image_url}explore/${chartId}/export.png`;
+  const relativeUrl = getRelativeUrl(fips);
+  return urlJoin(share_image_url, relativeUrl, `explore/${chartId}/export.png`);
 }
 
 export function getChartUrl(fips: string, metric: ExploreMetric) {
