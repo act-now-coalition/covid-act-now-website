@@ -20,6 +20,7 @@ import { findCountyByFips } from 'common/locations';
 import { useProjections, useModelLastUpdatedDate } from 'common/utils/model';
 import { Projection } from 'common/models/Projection';
 import { formatUtcDate } from 'common/utils';
+import { SCREENSHOT_CLASS } from 'components/Screenshot';
 
 const ExportChartImage = () => {
   let { stateId, countyFipsId, metric: metricString } = useParams();
@@ -49,7 +50,7 @@ const ExportChartImage = () => {
   }
 
   return (
-    <ScreenshotWrapper className={'screenshot'}>
+    <ScreenshotWrapper className={SCREENSHOT_CLASS}>
       <Content>
         <Headers>
           <Location>{projection.locationName}</Location>

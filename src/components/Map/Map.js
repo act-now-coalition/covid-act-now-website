@@ -9,6 +9,7 @@ import USACountyMap from './USACountyMap';
 import { MAP_FILTERS } from '../../screens/LocationPage/Enums/MapFilterEnums';
 import ReactTooltip from 'react-tooltip';
 import { MapInstructions, MobileLineBreak } from './Map.style';
+import { ScreenshotReady } from 'components/Screenshot';
 
 // TODO(@pablo): We might want to move this to LOCATION_SUMMARY_LEVELS
 
@@ -88,6 +89,7 @@ function Map({
         </MapInstructions>
       )}
       <ReactTooltip>{content}</ReactTooltip>
+      <ScreenshotReady />
     </div>
   );
 }
