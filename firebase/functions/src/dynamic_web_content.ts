@@ -1,4 +1,6 @@
-import * as express from 'express';
+import express from 'express';
+import urlJoin from 'url-join';
+import { v4 as uuidv4 } from 'uuid';
 import { takeScreenshot } from './screenshots';
 
 // For performance analysis, it's useful to know when the script is loaded from scratch.
@@ -21,6 +23,7 @@ dynamicWebContentHandler.use('/share/:snapshotId-:shareId/', shareRouter);
 shareRouter.get(/\/(.*)\.png/, (req, res) => {
   const snapshotId = req.params['snapshotId'];
 
+  // Extract the share image path via the 0th regex capture group.
   let sharePath = req.params[0];
   if (sharePath === 'home') {
     // home.png is generated from the root /internal/share-image/ URL.
@@ -31,7 +34,12 @@ shareRouter.get(/\/(.*)\.png/, (req, res) => {
     req.hostname === 'localhost'
       ? 'http://localhost:3000/'
       : 'https://covidactnow.org/';
-  const url = `${baseUrl}internal/share-image/${sharePath}?snapshot=${snapshotId}`;
+  const url = urlJoin(
+    baseUrl,
+    '/internal/share-image/',
+    sharePath,
+    `?snapshot=${snapshotId}`,
+  );
 
   console.log(`Generating screenshot for ${url}`);
   takeScreenshot(url)
@@ -41,6 +49,7 @@ shareRouter.get(/\/(.*)\.png/, (req, res) => {
       // Normally we let the CDN and the browser cache for 24hrs, but you can
       // override this with the ?no-cache query param (useful for testing or for
       // the scheduled ping that tries to keep functions warm).
+      // TODO(michael): Consider moving this to middleware (but how do we avoid caching errors?)
       if (req.query['no-cache'] === undefined) {
         console.log('Setting cache-control header.');
         res.header('cache-control', 'public, max-age=86400');
@@ -50,7 +59,7 @@ shareRouter.get(/\/(.*)\.png/, (req, res) => {
     })
     .catch(error => {
       // Assign a random ID so we can find the error in the logs if necessary.
-      const errorId = Math.random().toString(36).substr(2, 10);
+      const errorId = uuidv4();
       console.error('Error', errorId, error);
       res
         .status(500)

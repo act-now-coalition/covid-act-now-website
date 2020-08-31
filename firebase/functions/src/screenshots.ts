@@ -1,6 +1,6 @@
 import * as path from 'path';
 import * as os from 'os';
-import * as puppeteer from 'puppeteer';
+import puppeteer from 'puppeteer';
 
 const BROWSER_WIDTH = 2800;
 const BROWSER_HEIGHT = 1575;
@@ -36,7 +36,7 @@ export async function takeScreenshot(url: string): Promise<string> {
   console.log('Opening tab.');
   const tab = await browser.newPage();
 
-  console.log('Going to URL.');
+  console.log(`Going to URL, ${url}`);
   await tab.goto(url);
 
   console.log('Waiting for "screenshot" div.');
@@ -50,6 +50,8 @@ export async function takeScreenshot(url: string): Promise<string> {
   });
 
   console.log('Capturing screenshot.');
+  // NOTE: We just always overwrite temp.png which is fine, since there can only be one
+  // instance running at once.
   const file = path.join(os.tmpdir(), 'temp.png');
   await element.screenshot({
     path: file,

@@ -1,3 +1,5 @@
+# Firebase Usage
+
 We use Firebase for various features:
 
 * Alert Signups use Cloud Firestore for storing subscription info as well as
@@ -5,19 +7,29 @@ We use Firebase for various features:
 * We use Firebase Hosting with Firebase Functions for generating share / export
   images dynamically on-demand.
 
-# Deploying
+## Installing Firebase CLI
+Run `yarn global add firebase-tools` or `npm install -g firebase-tools` to
+install the Firebase CLI globally.
+
+## Deploying
 To deploy everything (Firestore rules / indexes, Hosting, Functions) to the
 dev environment (covidactnow-dev), run:
 
+```
 firebase -P dev deploy
+```
 
 To deploy to the staging environment (covidactnow-staging), run:
+```
 firebase -P staging deploy
+```
 
 To deploy to the prod environment (covidactnow-prod), run:
+```
 firebase -P prod deploy
+```
 
-# Testing Hosting / Functions
+## Testing Hosting / Functions
 To test hosting / functions locally:
 
 ```

@@ -1,5 +1,5 @@
 import * as functions from 'firebase-functions';
-import * as firestore from '@google-cloud/firestore';
+import firestore from '@google-cloud/firestore';
 import * as https from 'https';
 import { dynamicWebContentHandler } from './dynamic_web_content';
 
@@ -51,8 +51,10 @@ exports.dynamicWebContent = functions
 exports.scheduledScreenshotRequest = functions.pubsub
   .schedule('every 4 minutes')
   .onRun(context => {
+    // Fetch an arbitrary share image (CA case growth). Note snapshot id "0"
+    // will just use the current snapshot, which is fine.
     const options = {
-      hostname: projectId + '.web.app',
+      hostname: `${projectId}.web.app`,
       port: 443,
       path: '/share/0-123/states/ca/chart/0/export.png?no-cache=true',
       method: 'GET',
