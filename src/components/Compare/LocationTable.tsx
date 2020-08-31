@@ -189,7 +189,13 @@ const LocationTable: React.FunctionComponent<{
   const Container = isModal ? Styles.ModalContainer : Styles.Container;
 
   // Seemingly random numbers are the heights of each modal header
-  const modalHeaderOffset = isHomepage ? 159 : pinnedLocation ? 193 : 110;
+  const homepageOffset = viewAllCounties ? 159 : 73;
+  const locationPageOffset = geoScope === GeoScopeFilter.NEARBY ? 107 : 198;
+  const modalHeaderOffset = isHomepage
+    ? homepageOffset
+    : pinnedLocation
+    ? locationPageOffset
+    : 110;
   const finalHeaderOffset = isModal ? modalHeaderOffset : 0;
 
   const showBottom = pinnedLocation && pinnedLocation.rank >= numLocations;
