@@ -226,3 +226,29 @@ export function getSocialQuote(fips: string, metric: ExploreMetric) {
   }
   return '';
 }
+
+const pluralize = (num: number, singular: string, plural: string) =>
+  num === 1 ? singular : plural;
+
+const pluralizeWeeks = (num: number) => pluralize(num, 'week', 'weeks');
+const pluralizeDays = (num: number) => pluralize(num, 'day', 'days');
+
+/**
+ * Returns the relative time between two dates in days and weeks, for example:
+ * today, 1 day ago, 5 days ago, 3 weeks and 2 days ago, 5 weeks ago, etc.
+ */
+export function weeksAgo(dateFrom: Date, dateTo: Date) {
+  const totalDays = moment(dateTo).diff(dateFrom, 'days');
+  const totalWeeks = Math.floor(totalDays / 7);
+  const numDays = totalDays % 7;
+
+  if (totalDays < 7) {
+    return totalDays === 0
+      ? 'today'
+      : `${totalDays} ${pluralizeDays(totalDays)} ago`;
+  } else {
+    const weeksAgo = `${totalWeeks} ${pluralizeWeeks(totalWeeks)}`;
+    const daysAgo = numDays > 0 ? `, ${numDays} ${pluralizeDays(numDays)}` : '';
+    return `${weeksAgo} ${daysAgo} ago`;
+  }
+}

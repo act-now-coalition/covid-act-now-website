@@ -13,7 +13,7 @@ import { Tooltip, RectClipGroup } from 'components/Charts';
 import { Series } from './interfaces';
 import SeriesChart, { SeriesMarker } from './SeriesChart';
 import ChartOverlay from './ChartOverlay';
-import { getMaxBy, getTimeAxisTicks, findPointByDate } from './utils';
+import { getMaxBy, getTimeAxisTicks, findPointByDate, weeksAgo } from './utils';
 import * as Styles from './Explore.style';
 import { COLOR_MAP } from 'common/colors';
 
@@ -22,11 +22,14 @@ const getY = (d: Column) => d.y;
 const daysBetween = (dateFrom: Date, dateTo: Date) =>
   moment(dateTo).diff(dateFrom, 'days');
 
-const DateMarker: React.FC<{ left: number; date: Date }> = ({ left, date }) => (
-  <Styles.DateMarker style={{ left }}>
-    {moment(date).fromNow()}
-  </Styles.DateMarker>
-);
+const DateMarker: React.FC<{ left: number; date: Date }> = ({ left, date }) => {
+  // Do not show the date marker for dates in the future
+  return new Date() < date ? null : (
+    <Styles.DateMarker style={{ left }}>
+      {weeksAgo(date, new Date())}
+    </Styles.DateMarker>
+  );
+};
 
 const ExploreTooltip: React.FC<{
   date: Date;
