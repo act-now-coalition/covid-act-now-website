@@ -27,6 +27,7 @@ import AppBar from 'components/AppBar/AppBar';
 import Footer from 'components/Footer/Footer';
 import ScrollToTop from 'components/ScrollToTop';
 import theme from 'assets/theme';
+import { getFeedbackSurveyUrl } from 'components/Banner';
 import ExternalRedirect from 'components/ExternalRedirect';
 
 export default function App() {
@@ -118,6 +119,17 @@ export default function App() {
               <Route path="/contact">
                 <Redirect to="/faq" />
               </Route>
+              {/**
+               * This endpoint is to share the feedback survey link in social
+               * media. We redirec them to Typeform with URL parameters to
+               * track users through the survey, as well as their source.
+               */}
+              <Route
+                path="/feedback-survey"
+                component={() => (
+                  <ExternalRedirect url={getFeedbackSurveyUrl('social')} />
+                )}
+              />
 
               {/**
                * This endpoint is to be able to track clicks to the COVID
