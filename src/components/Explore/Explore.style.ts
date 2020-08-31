@@ -195,14 +195,15 @@ export const TooltipMetric = styled.div`
   font-weight: bold;
   font-size: 15px;
   line-height: 19px;
-  color: #ffffff;
+  color: ${colorPalette.white};
 `;
 
 export const TooltipLocation = styled.div`
+  margin-top: ${theme.spacing(1) / 2}px;
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
   font-size: 11px;
   line-height: 13px;
-  color: #ffffff;
+  color: ${colorPalette.white};
 `;
