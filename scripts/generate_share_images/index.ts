@@ -17,10 +17,10 @@ import {
 } from '../../src/common/utils/model';
 import { Projections } from '../../src/common/models/Projections';
 import { ALL_METRICS } from '../../src/common/metric';
-// import {
-//   EXPLORE_METRICS,
-//   getChartIdByMetric,
-// } from '../../src/components/Explore';
+import {
+  EXPLORE_METRICS,
+  getChartIdByMetric,
+} from '../../src/components/Explore';
 import os from 'os-utils';
 
 const BASE_URL = 'http://localhost:3000/internal/share-image';
@@ -100,21 +100,21 @@ const BLACKLISTED_COUNTIES = [
     }
 
     // Explore share images
-    //   for (const exploreMetric of EXPLORE_METRICS) {
-    //     const chartId = getChartIdByMetric(exploreMetric);
-    //     const shareUrl = urlJoin(relativeUrl, `/explore/${chartId}`);
-    //     const exportUrl = urlJoin(shareUrl, '/export');
-    //     screenshots.push({
-    //       url: shareUrl,
-    //       filename: shareUrl,
-    //       outputSize: SHARE_OUTPUT_SIZE,
-    //     });
-    //     screenshots.push({
-    //       url: exportUrl,
-    //       filename: exportUrl,
-    //       outputSize: EXPORT_OUTPUT_SIZE,
-    //     });
-    //   }
+    for (const exploreMetric of EXPLORE_METRICS) {
+      const chartId = getChartIdByMetric(exploreMetric);
+      const shareUrl = urlJoin(relativeUrl, `/explore/${chartId}`);
+      const exportUrl = urlJoin(shareUrl, '/export');
+      screenshots.push({
+        url: shareUrl,
+        filename: shareUrl,
+        outputSize: SHARE_OUTPUT_SIZE,
+      });
+      screenshots.push({
+        url: exportUrl,
+        filename: exportUrl,
+        outputSize: EXPORT_OUTPUT_SIZE,
+      });
+    }
   }
 
   for (const stateProjections of allStatesProjections) {
