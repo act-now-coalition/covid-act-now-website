@@ -12,18 +12,18 @@ async function main() {
   const allStatesProjections = await fetchAllStateProjections();
   const allCountiesProjections = await fetchAllCountyProjections();
 
-  const summaries = {} as { [fips: string]: LocationSummary };
+  const summaries = {} as { [fips: string]: any };
 
   for (const stateProjections of allStatesProjections) {
-    summaries[stateProjections.fips] = stateProjections.summary;
+    summaries[stateProjections.fips] = stateProjections.datasets;
   }
 
   for (const countyProjections of allCountiesProjections) {
-    summaries[countyProjections.fips] = countyProjections.summary;
+    summaries[countyProjections.fips] = countyProjections.datasets;
   }
 
   const outputFolder = path.join(__dirname, '..', 'src', 'assets', 'data');
-  await fs.writeJson(`${outputFolder}/summaries.json`, summaries);
+  await fs.writeJson(`datasets.json`, summaries);
 
   // We also store the historical summaries for email alerts purposes.
   const snapshotSummaryFile = path.join(

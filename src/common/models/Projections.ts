@@ -1,4 +1,4 @@
-import { Projection } from './Projection';
+import { Projection, DatasetId } from './Projection';
 import { STATES } from '..';
 import { Metric, getLevel, ALL_METRICS } from 'common/metric';
 import { Level } from 'common/level';
@@ -6,6 +6,7 @@ import { LEVEL_COLOR } from 'common/colors';
 import { fail } from 'common/utils';
 import { LocationSummary, MetricSummary } from 'common/location_summaries';
 import { RegionSummaryWithTimeseries } from 'api/schema/RegionSummaryWithTimeseries';
+import moment from 'moment';
 
 /**
  * The complete set of data / metrics and related information for a given
@@ -39,6 +40,34 @@ export class Projections {
     this.populateCounty(county);
   }
 
+  get datasets(): any {
+    const datasets: DatasetId[] = [
+      'rtRange',
+      'icuUtilization',
+      'testPositiveRate',
+      'contractTracers',
+      'caseDensityByCases',
+    ];
+    const data = datasets.reduce((all, datasetId) => {
+      // @ts-ignore
+      const ds = this.primary.getDataset(datasetId);
+      const ds2 = ds.map(data => {
+        const { x, ...other } = data;
+        return {
+          x: moment.utc(x).format('YYYY-MM-DD'),
+          ...other,
+        };
+      });
+      // @ts-ignore
+      all[datasetId] = ds2;
+      return all;
+    }, {});
+
+    return {
+      fips: this.fips,
+      data,
+    };
+  }
   populateCounty(county: any) {
     if (!county) {
       return;
