@@ -93,6 +93,7 @@ const states = {
   Wyoming: 'WY',
   'District of Columbia': 'DC',
   'Puerto Rico': 'PR',
+  'Northern Mariana Islands': 'MP',
 };
 
 function stateAbbreviation(name) {

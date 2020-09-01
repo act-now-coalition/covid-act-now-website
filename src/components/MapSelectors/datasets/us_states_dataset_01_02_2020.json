@@ -151,6 +151,12 @@
       "population": 6137428
     },
     {
+      "state_code": "MP",
+      "state": "Northern Mariana Islands",
+      "state_fips_code": "69",
+      "population": 53883
+    },
+    {
       "state_code": "MS",
       "state": "Mississippi",
       "state_fips_code": "28",
@@ -48019,6 +48025,62 @@
             "Tryon"
           ],
           "population": 494
+        }
+      ]
+    },
+    "MP": {
+      "dataset": [
+        {
+          "counties": [
+            "Northern Islands Municipality",
+            "Rota Municipality",
+            "Saipan Municipality",
+            "Tinian Municipality"
+          ],
+          "population": 12
+        }
+      ],
+      "county_dataset": [
+        {
+          "county": "Northern Islands Municipality",
+          "county_url_name": "northern_islands_municipality",
+          "county_fips_code": "085",
+          "state_fips_code": "69",
+          "state_code": "MP",
+          "full_fips_code": "69085",
+          "cities": [""],
+          "population": 53883
+        },
+        {
+          "county": "Rota Municipality",
+          "county_url_name": "rota_municipality",
+          "county_fips_code": "100",
+          "state_fips_code": "69",
+          "state_code": "MP",
+          "full_fips_code": "69100",
+          "cities": [""],
+          "population": 2527
+        },
+
+        {
+          "county": "Saipan Municipality",
+          "county_url_name": "saipan_municipality",
+          "county_fips_code": "110",
+          "state_fips_code": "69",
+          "state_code": "MP",
+          "full_fips_code": "69110",
+          "cities": [""],
+          "population": 48220
+        },
+        {
+          "county": "Tinian Municipality",
+          "county_url_name": "tianian_municipality",
+          "county_fips_code": "120",
+          "state_fips_code": "69",
+          "state_code": "MP",
+          "full_fips_code": "69120",
+          "cities": [""],
+          "population": 3136
         }
       ]
     },
