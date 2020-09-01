@@ -79,7 +79,7 @@
     "report-alert-emails": "ts-node-script -r tsconfig-paths/register scripts/alert_emails_report/generate-report.ts"
   },
   "lint-staged": {
-    "{src,scripts}/**/*.{css,scss,js,ts,tsx}": [
+    "{src,scripts,firebase/functions/src,}/**/*.{css,scss,js,ts,tsx}": [
       "eslint --fix"
     ]
   },
