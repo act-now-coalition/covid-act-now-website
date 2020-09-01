@@ -15,12 +15,9 @@ function getStateCode(stateName) {
 
 const USACountyMap = ({ stateClickHandler, setTooltipContent, condensed }) => {
   const locationSummaries = useSummaries();
-  if (!locationSummaries) {
-    return null;
-  }
 
   const getFillColor = geo => {
-    const summary = locationSummaries[geo.id] || null;
+    const summary = (locationSummaries && locationSummaries[geo.id]) || null;
     return colorFromLocationSummary(summary);
   };
 
@@ -62,7 +59,7 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent, condensed }) => {
           </Geographies>
         </ComposableMap>
       </USStateMapWrapper>
-      <ScreenshotReady />
+      {locationSummaries && <ScreenshotReady />}
     </USMapWrapper>
   );
 };

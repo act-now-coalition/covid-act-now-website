@@ -1,4 +1,5 @@
 import React, { useState, FunctionComponent } from 'react';
+import { some } from 'lodash';
 import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
@@ -9,6 +10,7 @@ import ExploreTabs from './ExploreTabs';
 import ExploreChart from './ExploreChart';
 import Legend from './Legend';
 import { ExploreMetric } from './interfaces';
+import EmptyChart from './EmptyChart';
 
 import {
   getMetricLabels,
@@ -20,6 +22,7 @@ import {
   getSocialQuote,
 } from './utils';
 import * as Styles from './Explore.style';
+import ExternalLink from '../ExternalLink';
 
 const Explore: React.FunctionComponent<{
   projection: Projection;
@@ -38,6 +41,8 @@ const Explore: React.FunctionComponent<{
   const metricLabels = getMetricLabels();
   const series = getSeries(currentMetric, projection);
   const { locationName, fips } = projection;
+
+  const hasData = some(series, ({ data }) => data.length > 0);
 
   return (
     <Styles.Container>
@@ -68,11 +73,11 @@ const Explore: React.FunctionComponent<{
       <Styles.ChartControlsContainer>
         <Legend series={series} />
       </Styles.ChartControlsContainer>
-      <Styles.ChartContainer>
-        {/* The width is set to zero while the parent div is rendering */}
-        <ParentSize>
-          {({ width }) =>
-            width < 10 ? null : (
+      {hasData ? (
+        <Styles.ChartContainer>
+          {/* The width is set to zero while the parent div is rendering */}
+          <ParentSize>
+            {({ width }) => (
               <ExploreChart
                 series={series}
                 isMobile={isMobile}
@@ -80,10 +85,25 @@ const Explore: React.FunctionComponent<{
                 height={400}
                 tooltipSubtext={`in ${locationName}`}
               />
-            )
-          }
-        </ParentSize>
-      </Styles.ChartContainer>
+            )}
+          </ParentSize>
+        </Styles.ChartContainer>
+      ) : (
+        <EmptyChart height={400}>
+          <p>
+            We don't have {metricLabels[currentMetric]} data for {locationName}.
+            Learn more about{' '}
+            <ExternalLink href="https://docs.google.com/document/d/1cd_cEpNiIl1TzUJBvw9sHLbrbUZ2qCxgN32IqVLa3Do/edit">
+              our methodology
+            </ExternalLink>{' '}
+            and our{' '}
+            <ExternalLink href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit">
+              our data sources
+            </ExternalLink>
+            .
+          </p>
+        </EmptyChart>
+      )}
     </Styles.Container>
   );
 };
