@@ -79,13 +79,13 @@ export const exploreMetricData: {
     series: [
       {
         label: 'Cases',
-        tooltipLabel: '7-day avg. cases',
+        tooltipLabel: 'cases',
         datasetId: 'rawDailyCases',
         type: ChartType.BAR,
       },
       {
         label: '7 Day Average',
-        tooltipLabel: '7-day avg. cases',
+        tooltipLabel: 'cases',
         datasetId: 'smoothedDailyCases',
         type: ChartType.LINE,
       },

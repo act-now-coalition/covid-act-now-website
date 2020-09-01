@@ -45,18 +45,17 @@ const ExploreTooltip: React.FC<{
 
   return pointSmooth && pointRaw ? (
     <Tooltip
-      width={'150px'}
+      width={'180px'}
       top={top(pointSmooth)}
       left={left(pointSmooth)}
       title={moment(date).format('MMM D, YYYY')}
     >
-      <Styles.TooltipSubtitle>{seriesRaw.tooltipLabel}</Styles.TooltipSubtitle>
-      <Styles.TooltipMetric>
-        {formatInteger(pointSmooth.y)}
-      </Styles.TooltipMetric>
       <Styles.TooltipSubtitle>
-        {`${formatInteger(pointRaw.y)} cases`}
+        {`${seriesRaw.tooltipLabel}: ${formatInteger(pointRaw.y)} `}
       </Styles.TooltipSubtitle>
+      <Styles.TooltipMetric>
+        {`7-day avg. ${formatInteger(pointSmooth.y)}`}
+      </Styles.TooltipMetric>
       <Styles.TooltipLocation>{subtext}</Styles.TooltipLocation>
     </Tooltip>
   ) : null;

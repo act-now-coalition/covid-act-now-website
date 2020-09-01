@@ -202,6 +202,7 @@ export const TooltipSubtitle = styled.div`
 `;
 
 export const TooltipMetric = styled.div`
+  text-transform: uppercase;
   font-family: Source Code Pro;
   font-style: normal;
   font-weight: bold;
