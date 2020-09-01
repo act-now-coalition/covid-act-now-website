@@ -1,6 +1,14 @@
 import moment from 'moment';
 import urlJoin from 'url-join';
-import { max, range, deburr, words, isNumber, dropRightWhile } from 'lodash';
+import {
+  max,
+  range,
+  deburr,
+  words,
+  isNumber,
+  dropRightWhile,
+  dropWhile,
+} from 'lodash';
 import { Series } from './interfaces';
 import { Column } from 'common/models/Projection';
 import { Projection, DatasetId } from 'common/models/Projection';
@@ -151,10 +159,13 @@ export const EXPLORE_CHART_IDS = Object.values(exploreMetricData).map(
   metric => metric.chartId,
 );
 
-const hasValue = (point: Column) => isNumber(point.y);
+const missingValue = (point: Column) => !isNumber(point.y);
 
+/**
+ * Remove points without y values at the begining and end of the series
+ */
 function cleanSeries(data: Column[]) {
-  return dropRightWhile(data, point => !hasValue(point));
+  return dropWhile(dropRightWhile(data, missingValue), missingValue);
 }
 
 export function getSeries(
