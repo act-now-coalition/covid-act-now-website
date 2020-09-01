@@ -50,7 +50,11 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.CONTENT_AWS_SECRET_ACCESS_KEY }}
           SOURCE_DIR: scripts/generate_share_images/output
           DEST_DIR: share/${{env.RUN_ID}}
-      - run: 'echo "{ \"share_image_url\": \"https://content.covidactnow.org/share/${{env.RUN_ID}}/\" }" | python -mjson.tool > src/assets/data/share_images_url.json'
+
+      # TODO: We have switched to dynamic images served via Firebase Hosting.  Remove all of the
+      # image generation / S3 upload / content.covidactnow.org stuff once we're 100% confident.
+      # - run: 'echo "{ \"share_image_url\": \"https://content.covidactnow.org/share/${{env.RUN_ID}}/\" }" | python -mjson.tool > src/assets/data/share_images_url.json'
+      - run: 'echo "{ \"share_image_url\": \"https://covidactnow-prod.web.app/share/${{env.RUN_ID}}/\" }" | python -mjson.tool > src/assets/data/share_images_url.json'
 
       # Generate Pull Request
       - name: Create Pull Request
