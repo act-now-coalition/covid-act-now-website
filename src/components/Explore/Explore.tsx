@@ -5,6 +5,11 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { ParentSize } from '@vx/responsive';
 import { Projection } from 'common/models/Projection';
+import { useModelLastUpdatedDate } from 'common/utils/model';
+import {
+  DisclaimerWrapper,
+  DisclaimerBody,
+} from 'components/Disclaimer/Disclaimer.style';
 import ShareImageButtonGroup from 'components/ShareButtons';
 import ExploreTabs from './ExploreTabs';
 import ExploreChart from './ExploreChart';
@@ -43,6 +48,10 @@ const Explore: React.FunctionComponent<{
   const { locationName, fips } = projection;
 
   const hasData = some(series, ({ data }) => data.length > 0);
+
+  const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
+  const lastUpdatedDateString =
+    lastUpdatedDate !== null ? lastUpdatedDate.toLocaleDateString() : '';
 
   return (
     <Styles.Container>
@@ -104,6 +113,19 @@ const Explore: React.FunctionComponent<{
           </p>
         </EmptyChart>
       )}
+      <DisclaimerWrapper>
+        <DisclaimerBody>
+          Last updated {lastUpdatedDateString}. Learn more about{' '}
+          <ExternalLink href="https://docs.google.com/document/d/1cd_cEpNiIl1TzUJBvw9sHLbrbUZ2qCxgN32IqVLa3Do/edit">
+            our methodology
+          </ExternalLink>{' '}
+          and{' '}
+          <ExternalLink href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit">
+            our data sources
+          </ExternalLink>
+          .
+        </DisclaimerBody>
+      </DisclaimerWrapper>
     </Styles.Container>
   );
 };

@@ -103,6 +103,7 @@ export const LegendItemLabel = styled.span`
 
 export const ChartContainer = styled.div`
   margin-top: ${theme.spacing(4)}px;
+  margin-bottom: ${theme.spacing(3)}px;
 `;
 
 export const PositionRelative = styled.div`
