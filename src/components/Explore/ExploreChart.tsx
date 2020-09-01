@@ -165,7 +165,7 @@ const ExploreChart: React.FC<{
   const axisGridColor = !barOpacity ? `${COLOR_MAP.GRAY_EXPLORE_CHART}` : '';
 
   return (
-    <Styles.PositionRelative>
+    <Styles.PositionRelative style={{ height }}>
       <svg width={width} height={height}>
         <Group key="chart-container" top={marginTop} left={marginLeft}>
           <ChartStyle.LineGrid exploreStroke={axisGridColor}>

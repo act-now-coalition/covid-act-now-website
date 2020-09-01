@@ -99,12 +99,15 @@ export const LegendItemLabel = styled.span`
   line-height: 16px;
 `;
 
+// CHARTS
+
 export const ChartContainer = styled.div`
   margin-top: ${theme.spacing(4)}px;
 `;
 
 export const PositionRelative = styled.div`
   position: relative;
+  margin: 0;
 `;
 
 export const MainSeriesLine = styled.g`
@@ -139,6 +142,15 @@ export const GridLines = styled.g`
     stroke-width: 1px;
     stroke-dasharray: 5, 5;
   }
+`;
+
+export const EmptyChart = styled(ChartContainer)`
+  /* Super centered: https://web.dev/one-line-layouts */
+  display: grid;
+  place-items: center;
+  background-color: ${colorPalette.lightGray};
+  padding: ${theme.spacing(3)}px;
+  text-align: center;
 `;
 
 export const TodayLabel = styled.g`
