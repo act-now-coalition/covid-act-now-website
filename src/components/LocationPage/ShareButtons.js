@@ -74,11 +74,13 @@ const InnerContent = props => {
   function downloadChartOnClick(url) {
     const filename =
       makeDownloadFilename(chartIdentifier) || `CovidActNow_${downloadDate}`;
+    document.body.style.cursor = 'wait';
     fetch(url)
       .then(response => response.blob())
       .then(blob => {
         let blobUrl = window.URL.createObjectURL(blob);
         downloadChart(blobUrl, filename);
+        document.body.style.cursor = 'default';
       })
       .catch(error => console.error(error));
   }
