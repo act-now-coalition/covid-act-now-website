@@ -162,7 +162,12 @@ export const EXPLORE_CHART_IDS = Object.values(exploreMetricData).map(
 const missingValue = (point: Column) => !isNumber(point.y);
 
 /**
- * Remove points without y values at the begining and end of the series
+ * Remove points without y values at the begining and end of the series.
+ *
+ * TODO(pablo): Ideally, we would like to remove segments that are missing
+ * values in the middle of the series too, but that will require changing
+ * the implementation of the charts to handle segments instead of a continuous
+ * series.
  */
 function cleanSeries(data: Column[]) {
   return dropWhile(dropRightWhile(data, missingValue), missingValue);

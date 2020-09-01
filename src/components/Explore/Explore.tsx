@@ -116,10 +116,6 @@ const Explore: React.FunctionComponent<{
       <DisclaimerWrapper>
         <DisclaimerBody>
           Last updated {lastUpdatedDateString}. Learn more about{' '}
-          <ExternalLink href="https://docs.google.com/document/d/1cd_cEpNiIl1TzUJBvw9sHLbrbUZ2qCxgN32IqVLa3Do/edit">
-            our methodology
-          </ExternalLink>{' '}
-          and{' '}
           <ExternalLink href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit">
             our data sources
           </ExternalLink>
