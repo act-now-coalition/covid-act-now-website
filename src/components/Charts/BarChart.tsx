@@ -25,7 +25,7 @@ const BarChart = <T extends unknown>({
         return (
           <Bar
             key={`bar-${i}`}
-            x={x0}
+            x={x0 - barWidth / 2}
             y={y0}
             width={barWidth}
             height={yMax - y0}
