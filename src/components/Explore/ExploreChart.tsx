@@ -13,7 +13,7 @@ import { Tooltip, RectClipGroup } from 'components/Charts';
 import { Series } from './interfaces';
 import SeriesChart, { SeriesMarker } from './SeriesChart';
 import ChartOverlay from './ChartOverlay';
-import { getMaxBy, getTimeAxisTicks, findPointByDate } from './utils';
+import { getMaxBy, getTimeAxisTicks, findPointByDate, weeksAgo } from './utils';
 import * as Styles from './Explore.style';
 import { COLOR_MAP } from 'common/colors';
 import { ScreenshotReady } from 'components/Screenshot';
@@ -23,11 +23,14 @@ const getY = (d: Column) => d.y;
 const daysBetween = (dateFrom: Date, dateTo: Date) =>
   moment(dateTo).diff(dateFrom, 'days');
 
-const DateMarker: React.FC<{ left: number; date: Date }> = ({ left, date }) => (
-  <Styles.DateMarker style={{ left }}>
-    {moment(date).fromNow()}
-  </Styles.DateMarker>
-);
+const DateMarker: React.FC<{ left: number; date: Date }> = ({ left, date }) => {
+  // Do not show the date marker for dates in the future
+  return new Date() < date ? null : (
+    <Styles.DateMarker style={{ left }}>
+      {weeksAgo(date, new Date())}
+    </Styles.DateMarker>
+  );
+};
 
 const ExploreTooltip: React.FC<{
   date: Date;
@@ -42,12 +45,17 @@ const ExploreTooltip: React.FC<{
 
   return pointSmooth && pointRaw ? (
     <Tooltip
+      width={'180px'}
       top={top(pointSmooth)}
       left={left(pointSmooth)}
       title={moment(date).format('MMM D, YYYY')}
     >
-      <Styles.TooltipSubtitle>{seriesRaw.tooltipLabel}</Styles.TooltipSubtitle>
-      <Styles.TooltipMetric>{formatInteger(pointRaw.y)}</Styles.TooltipMetric>
+      <Styles.TooltipSubtitle>
+        {`${seriesRaw.tooltipLabel}: ${formatInteger(pointRaw.y)} `}
+      </Styles.TooltipSubtitle>
+      <Styles.TooltipMetric>
+        {`7-day avg. ${formatInteger(pointSmooth.y)}`}
+      </Styles.TooltipMetric>
       <Styles.TooltipLocation>{subtext}</Styles.TooltipLocation>
     </Tooltip>
   ) : null;
@@ -156,7 +164,7 @@ const ExploreChart: React.FC<{
   const axisGridColor = !barOpacity ? `${COLOR_MAP.GRAY_EXPLORE_CHART}` : '';
 
   return (
-    <Styles.PositionRelative>
+    <Styles.PositionRelative style={{ height }}>
       <svg width={width} height={height}>
         <Group key="chart-container" top={marginTop} left={marginLeft}>
           <ChartStyle.LineGrid exploreStroke={axisGridColor}>
