@@ -51,10 +51,12 @@ const ExploreTooltip: React.FC<{
       title={moment(date).format('MMM D, YYYY')}
     >
       <Styles.TooltipSubtitle>{seriesRaw.tooltipLabel}</Styles.TooltipSubtitle>
-      <Styles.TooltipMetric>{formatInteger(pointRaw.y)}</Styles.TooltipMetric>
-      <Styles.TooltipSubtitle>{`avg ${formatInteger(
-        pointSmooth.y,
-      )}`}</Styles.TooltipSubtitle>
+      <Styles.TooltipMetric>
+        {formatInteger(pointSmooth.y)}
+      </Styles.TooltipMetric>
+      <Styles.TooltipSubtitle>
+        {`${formatInteger(pointRaw.y)} cases`}
+      </Styles.TooltipSubtitle>
       <Styles.TooltipLocation>{subtext}</Styles.TooltipLocation>
     </Tooltip>
   ) : null;
