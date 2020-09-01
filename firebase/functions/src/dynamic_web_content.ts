@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import urlJoin from 'url-join';
 import { v4 as uuidv4 } from 'uuid';
 import { takeScreenshot } from './screenshots';
@@ -10,6 +11,10 @@ console.log('dynamic_web_content cold start.');
  * Main express instance that will handle all of our "dynamic" web requests.
  */
 export const dynamicWebContentHandler = express();
+
+// Enable CORS requests. This is necessary for our export image downloading code
+// to work.
+dynamicWebContentHandler.use(cors({ origin: true }));
 
 // Middleware router for /share/{snapshotId}-{shareId}/... requests that parses out the params.
 const shareRouter = express.Router({ mergeParams: true });
