@@ -69,6 +69,12 @@ export const Wrapper = styled.div<{ isModal?: Boolean; isHomepage?: boolean }>`
         min-width: ${metricCellWidth}px;
       }
     }
+
+    a {
+      display: table;
+      color: black;
+      width: 100%;
+    }
   }
 
   ${ChartLocationName} {

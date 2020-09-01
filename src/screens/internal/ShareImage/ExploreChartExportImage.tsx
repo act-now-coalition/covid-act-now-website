@@ -25,6 +25,7 @@ import {
   getTitle,
   getMetricByChartId,
 } from 'components/Explore';
+import { SCREENSHOT_CLASS } from 'components/Screenshot';
 
 const ExploreChartExportImage = () => {
   let { stateId, countyFipsId, chartId } = useParams();
@@ -54,7 +55,7 @@ const ExploreChartExportImage = () => {
   }
 
   return (
-    <ScreenshotWrapper className={'screenshot'}>
+    <ScreenshotWrapper className={SCREENSHOT_CLASS}>
       <Content>
         <Headers>
           <Location>{projection.locationName}</Location>

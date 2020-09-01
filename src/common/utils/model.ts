@@ -10,6 +10,7 @@ import { findCountyByFips } from 'common/locations';
 import moment from 'moment';
 import { RegionSummaryWithTimeseries } from 'api/schema/RegionSummaryWithTimeseries';
 import { assert } from '.';
+import { getSnapshotUrlOverride } from './snapshots';
 
 const cachedProjections: { [key: string]: Promise<Projections> } = {};
 export function fetchProjections(
@@ -17,6 +18,7 @@ export function fetchProjections(
   countyInfo: any = null,
   snapshotUrl: string | null = null,
 ) {
+  snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
   let region: RegionDescriptor;
   if (countyInfo) {
     region = RegionDescriptor.forCounty(countyInfo.full_fips_code);
@@ -43,6 +45,7 @@ export function fetchProjections(
 /** Returns an array of `Projections` instances for all states. */
 const cachedStatesProjections: { [key: string]: Promise<Projections[]> } = {};
 export function fetchAllStateProjections(snapshotUrl: string | null = null) {
+  snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
   async function fetch() {
     const all = await new Api(snapshotUrl).fetchAggregatedSummaryWithTimeseries(
       RegionAggregateDescriptor.STATES,
@@ -66,6 +69,7 @@ export function fetchAllStateProjections(snapshotUrl: string | null = null) {
 /** Returns an array of `Projections` instances for all counties. */
 const cachedCountiesProjections: { [key: string]: Promise<Projections[]> } = {};
 export function fetchAllCountyProjections(snapshotUrl: string | null = null) {
+  snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
   async function fetch() {
     const all = await new Api(snapshotUrl).fetchAggregatedSummaryWithTimeseries(
       RegionAggregateDescriptor.COUNTIES,
