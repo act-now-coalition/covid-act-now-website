@@ -1,5 +1,14 @@
 import moment from 'moment';
-import { max, range, deburr, words, isNumber, dropRightWhile } from 'lodash';
+import urlJoin from 'url-join';
+import {
+  max,
+  range,
+  deburr,
+  words,
+  isNumber,
+  dropRightWhile,
+  dropWhile,
+} from 'lodash';
 import { Series } from './interfaces';
 import { Column } from 'common/models/Projection';
 import { Projection, DatasetId } from 'common/models/Projection';
@@ -9,6 +18,7 @@ import {
   getLocationNameForFips,
   getLocationUrlForFips,
   isStateFips,
+  findStateByFips,
 } from 'common/locations';
 
 export function getMaxBy<T>(
@@ -77,13 +87,13 @@ export const exploreMetricData: {
     series: [
       {
         label: 'Cases',
-        tooltipLabel: 'Confirmed cases',
+        tooltipLabel: 'cases',
         datasetId: 'rawDailyCases',
         type: ChartType.BAR,
       },
       {
         label: '7 Day Average',
-        tooltipLabel: 'Confirmed cases',
+        tooltipLabel: 'cases',
         datasetId: 'smoothedDailyCases',
         type: ChartType.LINE,
       },
@@ -149,10 +159,18 @@ export const EXPLORE_CHART_IDS = Object.values(exploreMetricData).map(
   metric => metric.chartId,
 );
 
-const hasValue = (point: Column) => isNumber(point.y);
+const missingValue = (point: Column) => !isNumber(point.y);
 
+/**
+ * Remove points without y values at the begining and end of the series.
+ *
+ * TODO(pablo): Ideally, we would like to remove segments that are missing
+ * values in the middle of the series too, but that will require changing
+ * the implementation of the charts to handle segments instead of a continuous
+ * series.
+ */
 function cleanSeries(data: Column[]) {
-  return dropRightWhile(data, point => !hasValue(point));
+  return dropWhile(dropRightWhile(data, missingValue), missingValue);
 }
 
 export function getSeries(
@@ -198,9 +216,24 @@ export function getImageFilename(fips: string, metric: ExploreMetric) {
   return `${sanitizeLocationName(locationName)}-${chartId}-${downloadDate}.png`;
 }
 
+function getRelativeUrl(fips: string) {
+  if (isStateFips(fips)) {
+    const { state_code } = findStateByFips(fips);
+    return `states/${state_code.toLowerCase()}`;
+  } else {
+    return `counties/${fips}`;
+  }
+}
+
+/**
+ * Generates the URL of the export images for the given fips code and chart.
+ * It needs to be consistent with the path on the share image generation
+ * script in `scripts/generate_share_images/index.ts`
+ */
 export function getExportImageUrl(fips: string, metric: ExploreMetric) {
   const chartId = getChartIdByMetric(metric);
-  return `${share_image_url}explore/${chartId}/export.png`;
+  const relativeUrl = getRelativeUrl(fips);
+  return urlJoin(share_image_url, relativeUrl, `explore/${chartId}/export.png`);
 }
 
 export function getChartUrl(fips: string, metric: ExploreMetric) {
@@ -225,4 +258,30 @@ export function getSocialQuote(fips: string, metric: ExploreMetric) {
       return `${locationName}’s ICU hospitalizations, according to @CovidActNow. See the chart: `;
   }
   return '';
+}
+
+const pluralize = (num: number, singular: string, plural: string) =>
+  num === 1 ? singular : plural;
+
+const pluralizeWeeks = (num: number) => pluralize(num, 'week', 'weeks');
+const pluralizeDays = (num: number) => pluralize(num, 'day', 'days');
+
+/**
+ * Returns the relative time between two dates in days and weeks, for example:
+ * today, 1 day ago, 5 days ago, 3 weeks and 2 days ago, 5 weeks ago, etc.
+ */
+export function weeksAgo(dateFrom: Date, dateTo: Date) {
+  const totalDays = moment(dateTo).diff(dateFrom, 'days');
+  const totalWeeks = Math.floor(totalDays / 7);
+  const numDays = totalDays % 7;
+
+  if (totalDays < 7) {
+    return totalDays === 0
+      ? 'today'
+      : `${totalDays} ${pluralizeDays(totalDays)} ago`;
+  } else {
+    const weeksAgo = `${totalWeeks} ${pluralizeWeeks(totalWeeks)}`;
+    const daysAgo = numDays > 0 ? `, ${numDays} ${pluralizeDays(numDays)}` : '';
+    return `${weeksAgo} ${daysAgo} ago`;
+  }
 }
