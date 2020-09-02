@@ -422,10 +422,13 @@ export class Projection {
   ) {
     const timeseriesRaw = summaryWithTimeseries.timeseries;
     const actualsTimeseriesRaw = summaryWithTimeseries.actualsTimeseries;
-    assert(
-      actualsTimeseriesRaw.length > 0,
-      `FIPS ${this.fips} missing actuals timeseries!`,
-    );
+    if (actualsTimeseriesRaw.length === 0) {
+      return {
+        timeseries: [],
+        actualTimeseries: [],
+        dates: [],
+      };
+    }
     let earliestDate, latestDate;
     // If we have projections, we use that time range; else we use the actuals.
     if (timeseriesRaw.length > 0) {
