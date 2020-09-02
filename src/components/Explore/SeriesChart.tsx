@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { curveCardinalOpen } from '@vx/curve';
+import { curveCardinal } from '@vx/curve';
 import { LinePath } from '@vx/shape';
 import * as Styles from './Explore.style';
 import { ChartType } from './interfaces';
@@ -20,7 +20,7 @@ const SeriesChart: FunctionComponent<{
     case ChartType.LINE:
       return (
         <Styles.MainSeriesLine>
-          <LinePath data={data} x={x} y={y} curve={curveCardinalOpen} />
+          <LinePath data={data} x={x} y={y} curve={curveCardinal} />
         </Styles.MainSeriesLine>
       );
     case ChartType.BAR:

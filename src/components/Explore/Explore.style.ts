@@ -99,12 +99,16 @@ export const LegendItemLabel = styled.span`
   line-height: 16px;
 `;
 
+// CHARTS
+
 export const ChartContainer = styled.div`
   margin-top: ${theme.spacing(4)}px;
+  margin-bottom: ${theme.spacing(3)}px;
 `;
 
 export const PositionRelative = styled.div`
   position: relative;
+  margin: 0;
 `;
 
 export const MainSeriesLine = styled.g`
@@ -141,6 +145,15 @@ export const GridLines = styled.g`
   }
 `;
 
+export const EmptyChart = styled(ChartContainer)`
+  /* Super centered: https://web.dev/one-line-layouts */
+  display: grid;
+  place-items: center;
+  background-color: ${colorPalette.lightGray};
+  padding: ${theme.spacing(3)}px;
+  text-align: center;
+`;
+
 export const TodayLabel = styled.g`
   text {
     font-family: ${charts.fontFamily};
@@ -157,7 +170,7 @@ export const DateMarker = styled.div`
   transform: translate(-50%, 100%);
   /* TODO(pablo): Use theme */
   background-color: white;
-  width: 140px;
+  width: 180px;
   box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.15);
   border-radius: 20px;
   padding: ${theme.spacing(1) / 2}px ${theme.spacing(2)}px;
@@ -190,19 +203,21 @@ export const TooltipSubtitle = styled.div`
 `;
 
 export const TooltipMetric = styled.div`
+  text-transform: uppercase;
   font-family: Source Code Pro;
   font-style: normal;
   font-weight: bold;
   font-size: 15px;
   line-height: 19px;
-  color: #ffffff;
+  color: ${colorPalette.white};
 `;
 
 export const TooltipLocation = styled.div`
+  margin-top: ${theme.spacing(1) / 2}px;
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
   font-size: 11px;
   line-height: 13px;
-  color: #ffffff;
+  color: ${colorPalette.white};
 `;
