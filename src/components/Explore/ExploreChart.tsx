@@ -1,12 +1,13 @@
 import React, { useCallback, Fragment } from 'react';
 import moment from 'moment';
+import { isNumber } from 'lodash';
 import { AxisLeft, AxisBottom } from '@vx/axis';
 import { GridRows, GridColumns } from '@vx/grid';
 import { Line } from '@vx/shape';
 import { Group } from '@vx/group';
 import { scaleTime, scaleLinear } from '@vx/scale';
 import { useTooltip } from '@vx/tooltip';
-import { formatInteger } from 'common/utils';
+import { formatInteger, formatDecimal } from 'common/utils';
 import { Column } from 'common/models/Projection';
 import * as ChartStyle from 'components/Charts/Charts.style';
 import { Tooltip, RectClipGroup } from 'components/Charts';
@@ -51,11 +52,14 @@ const ExploreTooltip: React.FC<{
       title={moment(date).format('MMM D, YYYY')}
     >
       <Styles.TooltipSubtitle>
-        {`${seriesRaw.tooltipLabel}: ${formatInteger(pointRaw.y)} `}
+        {`${seriesRaw.tooltipLabel}: ${
+          isNumber(pointRaw.y) ? formatInteger(pointRaw.y) : '-'
+        }`}
       </Styles.TooltipSubtitle>
       <Styles.TooltipMetric>
-        {`7-day avg. ${formatInteger(pointSmooth.y)}`}
+        {isNumber(pointSmooth.y) ? formatDecimal(pointSmooth.y, 1) : '-'}
       </Styles.TooltipMetric>
+      <Styles.TooltipSubtitle>7-day avg.</Styles.TooltipSubtitle>
       <Styles.TooltipLocation>{subtext}</Styles.TooltipLocation>
     </Tooltip>
   ) : null;
