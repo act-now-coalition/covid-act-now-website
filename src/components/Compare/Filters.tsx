@@ -67,10 +67,6 @@ const Filters = (props: {
       label: getFilterLabel(MetroFilter.ALL),
       type: MetroFilter.ALL,
     },
-    {
-      label: getFilterLabel(MetroFilter.COLLEGE),
-      type: MetroFilter.COLLEGE,
-    },
   ];
 
   const GeoFilterLabels = {

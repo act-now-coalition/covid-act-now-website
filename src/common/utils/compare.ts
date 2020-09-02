@@ -64,7 +64,7 @@ function isNonMetroCounty(location: Location) {
   return !isMetroCounty(location);
 }
 
-function isCollegeCounty(location: Location) {
+export function isCollegeCounty(location: Location) {
   return (
     location.full_fips_code &&
     (getColleges(location.full_fips_code) || []).length > 0
@@ -86,10 +86,6 @@ export function getAllCountiesOfState(stateId: string): SummaryForCompare[] {
     .map(getLocationObj);
 }
 
-export function getAllCollegeCounties(): SummaryForCompare[] {
-  return locations.filter(isCollegeCounty).map(getLocationObj);
-}
-
 export function getAllMetroCounties(): SummaryForCompare[] {
   return locations.filter(isCounty).filter(isMetroCounty).map(getLocationObj);
 }
@@ -98,16 +94,6 @@ export function getAllNonMetroCounties(): SummaryForCompare[] {
   return locations
     .filter(isCounty)
     .filter(isNonMetroCounty)
-    .map(getLocationObj);
-}
-
-export function getAllCollegeCountiesOfState(
-  stateId: string,
-): SummaryForCompare[] {
-  return locations
-    .filter(isCounty)
-    .filter((location: Location) => isCountyOfState(location, stateId))
-    .filter(isCollegeCounty)
     .map(getLocationObj);
 }
 
@@ -156,14 +142,12 @@ export enum MetroFilter {
   ALL,
   METRO,
   NON_METRO,
-  COLLEGE,
 }
 
 export const FILTER_LABEL = {
   [MetroFilter.ALL]: 'Metro & Non-metro',
   [MetroFilter.METRO]: 'Metro only',
   [MetroFilter.NON_METRO]: 'Non-metro only',
-  [MetroFilter.COLLEGE]: 'Counties with Colleges',
 };
 
 export function getFilterLabel(filter: MetroFilter) {
@@ -178,8 +162,6 @@ export function getAllCountiesSelection(countyTypeToView: MetroFilter) {
       return getAllMetroCounties();
     case MetroFilter.NON_METRO:
       return getAllNonMetroCounties();
-    case MetroFilter.COLLEGE:
-      return getAllCollegeCounties();
     default:
       return getAllCounties();
   }
@@ -196,8 +178,6 @@ export function getLocationPageCountiesSelection(
       return getStateMetroCounties(stateId);
     case MetroFilter.NON_METRO:
       return getStateNonMetroCounties(stateId);
-    case MetroFilter.COLLEGE:
-      return getAllCollegeCountiesOfState(stateId);
     default:
       return getAllCountiesOfState(stateId);
   }
@@ -213,7 +193,6 @@ export const metroPrefixCopy = {
   [MetroFilter.ALL]: '',
   [MetroFilter.METRO]: 'metro',
   [MetroFilter.NON_METRO]: 'non-metro',
-  [MetroFilter.COLLEGE]: 'college',
 };
 
 export function getLocationPageViewMoreCopy(

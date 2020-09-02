@@ -238,6 +238,8 @@ export const Population = styled.span`
   font-size: 0.875rem;
 `;
 
+export const LocationInfoWrapper = styled.div``;
+
 export const CountySuffix = styled.div`
   font-weight: normal;
   margin-right: 0.25rem;
@@ -291,6 +293,15 @@ export const MetricCell = styled.td<{
     margin-right: 0.75rem;
   }
 
+  ${Population} {
+    margin-right: 0.5rem;
+  }
+
+  ${LocationInfoWrapper} {
+    display: flex;
+    align-items: center;
+  }
+
   &:last-child {
     svg {
       color: ${({ iconColor }) =>
@@ -312,6 +323,15 @@ export const MetricValue = styled.span<{ valueUnknown: boolean }>`
   display: inline-block;
   text-align: right;
   opacity: ${({ valueUnknown }) => valueUnknown && '.5'};
+`;
+
+export const Tag = styled.div`
+  border-radius: 5px;
+  font-size: 0.875rem;
+  padding: 0.2rem 0.35rem;
+  font-weight: bold;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+  background: ${COLORS.LIGHTGRAY};
 `;
 
 export const Row = styled(TableRow)<{
@@ -339,7 +359,8 @@ export const Row = styled(TableRow)<{
     color: ${({ headerRowBackground }) =>
       !headerRowBackground && `${COLOR_MAP.BLUE}`};
     ${MetricCell} {
-      span {
+      span,
+      ${Tag} {
         color: ${COLOR_MAP.BLUE};
       }
     }
