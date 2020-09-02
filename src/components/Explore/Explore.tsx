@@ -10,6 +10,7 @@ import {
   DisclaimerWrapper,
   DisclaimerBody,
 } from 'components/Disclaimer/Disclaimer.style';
+import ExternalLink from 'components/ExternalLink';
 import ShareImageButtonGroup from 'components/ShareButtons';
 import ExploreTabs from './ExploreTabs';
 import ExploreChart from './ExploreChart';
@@ -27,7 +28,6 @@ import {
   getSocialQuote,
 } from './utils';
 import * as Styles from './Explore.style';
-import ExternalLink from '../ExternalLink';
 
 const Explore: React.FunctionComponent<{
   projection: Projection;
