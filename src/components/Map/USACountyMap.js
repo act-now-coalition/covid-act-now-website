@@ -10,8 +10,25 @@ import { useSummaries } from 'common/location_summaries';
 import { ScreenshotReady } from 'components/Screenshot';
 
 function getStateCode(stateName) {
+  // hacky, name defined slightly differently in normal reversed states file.
+  if (stateName === 'Commonwealth of the Northern Mariana Islands') {
+    return 'MP';
+  }
   return REVERSED_STATES[stateName];
 }
+
+const MarianaIslands = ({ x, y, fill, scale, onMouseEnter, onMouseLeave }) => {
+  return (
+    <g
+      transform={`translate(${x}, ${y}) scale(${scale})`}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
+      <rect width="20" height="20" fill={fill} />
+      <text transform="translate(25, 15)">CNMI</text>
+    </g>
+  );
+};
 
 const USACountyMap = ({ stateClickHandler, setTooltipContent, condensed }) => {
   const locationSummaries = useSummaries();
@@ -39,6 +56,25 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent, condensed }) => {
               geographies.map(geo => {
                 const { name } = geo.properties;
                 const stateCode = getStateCode(name);
+
+                if (stateCode === 'MP') {
+                  return (
+                    <Link key={stateCode} to={`/us/${stateCode.toLowerCase()}`}>
+                      <MarianaIslands
+                        x={440}
+                        y={515}
+                        scale={0.8}
+                        key={geo.rsmKey}
+                        onMouseEnter={() => {
+                          setTooltipContent(name);
+                        }}
+                        onMouseLeave={onMouseLeave}
+                        onClick={() => stateClickHandler(name)}
+                        fill={getFillColor(geo)}
+                      />
+                    </Link>
+                  );
+                }
                 return stateCode ? (
                   <Link key={stateCode} to={`/us/${stateCode.toLowerCase()}`}>
                     <Geography
