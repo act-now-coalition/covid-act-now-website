@@ -1,23 +1,22 @@
 import React, { useCallback, Fragment } from 'react';
 import moment from 'moment';
-import { isNumber } from 'lodash';
 import { AxisLeft, AxisBottom } from '@vx/axis';
 import { GridRows, GridColumns } from '@vx/grid';
 import { Line } from '@vx/shape';
 import { Group } from '@vx/group';
 import { scaleTime, scaleLinear } from '@vx/scale';
 import { useTooltip } from '@vx/tooltip';
-import { formatInteger, formatDecimal } from 'common/utils';
 import { Column } from 'common/models/Projection';
 import * as ChartStyle from 'components/Charts/Charts.style';
-import { Tooltip, RectClipGroup } from 'components/Charts';
+import { RectClipGroup } from 'components/Charts';
 import { Series } from './interfaces';
 import SeriesChart, { SeriesMarker } from './SeriesChart';
 import ChartOverlay from './ChartOverlay';
-import { getMaxBy, getTimeAxisTicks, findPointByDate, weeksAgo } from './utils';
+import { getMaxBy, getTimeAxisTicks, weeksAgo } from './utils';
 import * as Styles from './Explore.style';
 import { COLOR_MAP } from 'common/colors';
 import { ScreenshotReady } from 'components/Screenshot';
+import { SingleLocationTooltip } from './ExploreTooltips';
 
 const getDate = (d: Column) => new Date(d.x);
 const getY = (d: Column) => d.y;
@@ -31,41 +30,6 @@ const DateMarker: React.FC<{ left: number; date: Date }> = ({ left, date }) => {
       {weeksAgo(date, new Date())}
     </Styles.DateMarker>
   );
-};
-
-const ExploreTooltip: React.FC<{
-  date: Date;
-  series: Series[];
-  left: (d: Column) => number;
-  top: (d: Column) => number;
-  subtext: string;
-}> = ({ series, left, top, date, subtext }) => {
-  if (series.length < 2) {
-    return null;
-  }
-  const [seriesRaw, seriesSmooth] = series;
-  const pointSmooth = findPointByDate(seriesSmooth.data, date);
-  const pointRaw = findPointByDate(seriesRaw.data, date);
-
-  return pointSmooth && pointRaw ? (
-    <Tooltip
-      width={'180px'}
-      top={top(pointSmooth)}
-      left={left(pointSmooth)}
-      title={moment(date).format('MMM D, YYYY')}
-    >
-      <Styles.TooltipSubtitle>
-        {`${seriesRaw.tooltipLabel}: ${
-          isNumber(pointRaw.y) ? formatInteger(pointRaw.y) : '-'
-        }`}
-      </Styles.TooltipSubtitle>
-      <Styles.TooltipMetric>
-        {isNumber(pointSmooth.y) ? formatDecimal(pointSmooth.y, 1) : '-'}
-      </Styles.TooltipMetric>
-      <Styles.TooltipSubtitle>7-day avg.</Styles.TooltipSubtitle>
-      <Styles.TooltipLocation>{subtext}</Styles.TooltipLocation>
-    </Tooltip>
-  ) : null;
 };
 
 /**
@@ -250,7 +214,7 @@ const ExploreChart: React.FC<{
         </Group>
       </svg>
       {tooltipOpen && tooltipData && (
-        <ExploreTooltip
+        <SingleLocationTooltip
           left={p => getXPosition(p) + marginLeft}
           top={p => getYPosition(p) + marginTop}
           date={tooltipData.date}
