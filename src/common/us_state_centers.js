@@ -148,6 +148,13 @@ export default {
     Longitude: -76.8021,
     scale: 8000,
   },
+  MP: {
+    'Province/State': 'Northern Mariana Islands',
+    StateCode: 'MP',
+    Latitude: 17.2557,
+    Longitude: 145.7839,
+    scale: 5000,
+  },
   MA: {
     'Province/State': 'Massachusetts',
     StateCode: 'MA',
