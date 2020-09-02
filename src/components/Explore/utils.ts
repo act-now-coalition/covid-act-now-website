@@ -298,7 +298,16 @@ export function getLocationLabel(location: Location) {
 }
 
 export function getLocationNames(locations: Location[]) {
-  return locations.map(getLocationLabel).join(', ');
+  if (locations.length === 1) {
+    return getLocationLabel(locations[0]);
+  }
+
+  const lastLocation = locations[locations.length - 1];
+  const otherLocations = locations.slice(0, locations.length - 1);
+
+  return `${otherLocations
+    .map(getLocationLabel)
+    .join(', ')} and ${getLocationLabel(lastLocation)}.`;
 }
 
 const isCounty = (location: Location) => location.county;
