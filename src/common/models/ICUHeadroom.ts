@@ -79,6 +79,11 @@ export function calcICUHeadroom(
   actuals: Actuals,
   lastUpdated: Date,
 ): ICUHeadroomInfo | null {
+  // TODO(https://trello.com/c/B6Z1kW8o/): Fix Tennessee Hospitalization data.
+  if (fips.length > 2 && fips.slice(0, 2) == '47') {
+    return null;
+  }
+
   const overrideInPlace = ICU_HEADROOM_OVERRIDES.indexOf(fips) > -1;
   if (overrideInPlace) {
     return {
