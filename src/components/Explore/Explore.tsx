@@ -10,6 +10,7 @@ import {
   DisclaimerWrapper,
   DisclaimerBody,
 } from 'components/Disclaimer/Disclaimer.style';
+import ExternalLink from 'components/ExternalLink';
 import ShareImageButtonGroup from 'components/ShareButtons';
 import ExploreTabs from './ExploreTabs';
 import ExploreChart from './ExploreChart';
@@ -27,7 +28,6 @@ import {
   getSocialQuote,
 } from './utils';
 import * as Styles from './Explore.style';
-import ExternalLink from '../ExternalLink';
 
 const Explore: React.FunctionComponent<{
   projection: Projection;
@@ -44,6 +44,8 @@ const Explore: React.FunctionComponent<{
   };
 
   const metricLabels = getMetricLabels();
+  const currentMetricName = metricLabels[currentMetric];
+
   const series = getSeries(currentMetric, projection);
   const { locationName, fips } = projection;
 
@@ -59,7 +61,7 @@ const Explore: React.FunctionComponent<{
         <Grid item sm={6} xs={12}>
           <Styles.Heading variant="h4">Trends</Styles.Heading>
           <Styles.Subtitle>
-            cases since march 1st in {locationName}
+            {currentMetricName} since march 1st in {locationName}
           </Styles.Subtitle>
         </Grid>
         <Grid item sm={6} xs={12}>
@@ -100,8 +102,8 @@ const Explore: React.FunctionComponent<{
       ) : (
         <EmptyChart height={400}>
           <p>
-            We don't have {metricLabels[currentMetric]} data for {locationName}.
-            Learn more about{' '}
+            We don't have {currentMetricName} data for {locationName}. Learn
+            more about{' '}
             <ExternalLink href="https://docs.google.com/document/d/1cd_cEpNiIl1TzUJBvw9sHLbrbUZ2qCxgN32IqVLa3Do/edit">
               our methodology
             </ExternalLink>{' '}
