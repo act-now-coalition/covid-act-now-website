@@ -16,6 +16,7 @@ import * as Styles from './Explore.style';
 import { COLOR_MAP } from 'common/colors';
 import { ScreenshotReady } from 'components/Screenshot';
 import { SingleLocationTooltip } from './ExploreTooltips';
+import SeriesTooltipOverlayX from './SeriesTooltipOverlay';
 
 const getDate = (d: Column) => new Date(d.x);
 const getY = (d: Column) => d.y;
