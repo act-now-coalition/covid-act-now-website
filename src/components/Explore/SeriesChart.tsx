@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { curveCardinal } from '@vx/curve';
 import { LinePath } from '@vx/shape';
 import * as Styles from './Explore.style';
-import { ChartType } from './interfaces';
+import { ChartType, ChartParams } from './interfaces';
 import { Column } from 'common/models/Projection';
 import BarChart from 'components/Charts/BarChart';
 import { findPointByDate } from './utils';
@@ -15,11 +15,12 @@ const SeriesChart: FunctionComponent<{
   yMax: number;
   barWidth: number;
   barOpacity?: number;
-}> = ({ type, data, x, y, yMax, barWidth, barOpacity }) => {
+  chartParams?: ChartParams;
+}> = ({ type, data, x, y, yMax, barWidth, barOpacity, chartParams }) => {
   switch (type) {
     case ChartType.LINE:
       return (
-        <Styles.MainSeriesLine>
+        <Styles.MainSeriesLine stroke={chartParams?.stroke || '#000'}>
           <LinePath data={data} x={x} y={y} curve={curveCardinal} />
         </Styles.MainSeriesLine>
       );
@@ -32,7 +33,10 @@ const SeriesChart: FunctionComponent<{
   }
 };
 
-export const LegendMarker: React.FC<{ type: ChartType }> = ({ type }) => {
+export const LegendMarker: React.FC<{
+  type: ChartType;
+  params?: ChartParams;
+}> = ({ type, params }) => {
   // TODO(pablo): Transform into optional parameters
   const width = 12;
   const height = 12;
@@ -41,7 +45,7 @@ export const LegendMarker: React.FC<{ type: ChartType }> = ({ type }) => {
     case ChartType.LINE:
       return (
         <svg width={width} height={height}>
-          <Styles.MainSeriesLine>
+          <Styles.MainSeriesLine stroke={params?.stroke || '#000'}>
             <line x1={0} y1={height / 2} x2={width} y2={height / 2} />
           </Styles.MainSeriesLine>
         </svg>
