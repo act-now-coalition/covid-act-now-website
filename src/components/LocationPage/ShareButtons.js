@@ -8,7 +8,7 @@ import {
   ClickAwayWrapper,
   SocialButtonsWrapper,
 } from './ShareButtons.style';
-import { ClickAwayListener } from '@material-ui/core';
+import { ClickAwayListener, CircularProgress } from '@material-ui/core';
 import makeChartShareQuote from 'common/utils/makeChartShareQuote';
 import ShareImageUrlJSON from 'assets/data/share_images_url.json';
 import * as urls from 'common/urls';
@@ -26,6 +26,7 @@ const InnerContent = props => {
   } = props;
 
   const [showShareIcons, setShowShareIcons] = useState(false);
+  const [saveInProgress, setSaveInProgress] = useState(false);
 
   // Delay allows the user to briefly see copy-link button text change when clicked
   const hideSocialButtons = () => {
@@ -74,11 +75,13 @@ const InnerContent = props => {
   function downloadChartOnClick(url) {
     const filename =
       makeDownloadFilename(chartIdentifier) || `CovidActNow_${downloadDate}`;
+    setSaveInProgress(true);
     fetch(url)
       .then(response => response.blob())
       .then(blob => {
         let blobUrl = window.URL.createObjectURL(blob);
         downloadChart(blobUrl, filename);
+        setSaveInProgress(false);
       })
       .catch(error => console.error(error));
   }
@@ -93,7 +96,11 @@ const InnerContent = props => {
               downloadChartOnClick(downloadLink);
             }}
           >
-            Save
+            {saveInProgress ? (
+              <CircularProgress color="lightBlue" size={25} />
+            ) : (
+              'Save'
+            )}
           </SaveOrShareButton>
           <SaveOrShareButton
             isLast
