@@ -3,10 +3,9 @@ import { sortBy, findIndex, partition, reverse, isNumber } from 'lodash';
 import {
   Wrapper,
   Footer,
-  ViewAllLink,
+  FooterLink,
   HeaderWrapper,
   Header,
-  DisclaimerWrapper,
 } from 'components/Compare/Compare.style';
 import LocationTable from './LocationTable';
 import { ChartLocationName } from 'components/LocationPage/ChartsHolder.style';
@@ -20,7 +19,6 @@ import {
   getAbbreviatedCounty,
   metroPrefixCopy,
 } from 'common/utils/compare';
-import { Metric } from 'common/metric';
 import { COLOR_MAP } from 'common/colors';
 
 const CompareTable = (props: {
@@ -48,6 +46,7 @@ const CompareTable = (props: {
   setSortByPopulation: React.Dispatch<React.SetStateAction<boolean>>;
   sliderValue: GeoScopeFilter;
   setSliderValue: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
+  setShowFaqModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const {
     sorter,
@@ -143,12 +142,6 @@ const CompareTable = (props: {
     ? { rank: currentCountyRank + 1, ...currentCounty }
     : null;
 
-  const disclaimerRedirect =
-    currentCounty &&
-    `/us/${currentCounty.locationInfo.state_code.toLowerCase()}/chart/${
-      Metric.CONTACT_TRACING
-    }`;
-
   const compareSubheader = props.county
     ? `${getAbbreviatedCounty(props.county.county)}, ${
         props.stateId
@@ -205,26 +198,13 @@ const CompareTable = (props: {
               Displaying <strong>{amountDisplayed}</strong> of{' '}
               <strong>{sortedLocationsArr.length}</strong>{' '}
             </span>
-            <ViewAllLink onClick={() => props.setShowModal(true)}>
+            <FooterLink onClick={() => props.setShowModal(true)}>
               {props.viewMoreCopy}
-            </ViewAllLink>
+            </FooterLink>
           </div>
-          {props.county && (
-            <DisclaimerWrapper>
-              <span>
-                Most states report contact tracing at the state-level only. View{' '}
-                {props.stateName}'s{' '}
-                <a
-                  href={disclaimerRedirect}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  contact tracing{' '}
-                </a>
-                data.
-              </span>
-            </DisclaimerWrapper>
-          )}
+          <FooterLink onClick={() => props.setShowFaqModal(true)}>
+            More info
+          </FooterLink>
         </Footer>
       )}
     </Wrapper>

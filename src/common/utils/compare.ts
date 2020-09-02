@@ -64,13 +64,6 @@ function isNonMetroCounty(location: Location) {
   return !isMetroCounty(location);
 }
 
-export function isCollegeCounty(location: Location) {
-  return (
-    location.full_fips_code &&
-    (getColleges(location.full_fips_code) || []).length > 0
-  );
-}
-
 export function getAllStates(): SummaryForCompare[] {
   return locations.filter(isState).map(getLocationObj);
 }
@@ -244,4 +237,38 @@ export function getColumnLocationName(location: Location) {
     const countyWithAbbreviatedSuffix = getAbbreviatedCounty(location.county);
     return splitCountyName(countyWithAbbreviatedSuffix);
   }
+}
+
+// For college tag:
+
+export function isCollegeCounty(location: Location) {
+  return (
+    location.full_fips_code &&
+    (getColleges(location.full_fips_code) || []).length > 0
+  );
+}
+
+export function getSummedEnrollment(location: Location) {
+  return (
+    location.full_fips_code &&
+    isCollegeCounty(location) &&
+    getColleges(location.full_fips_code).reduce(
+      (acc, current) => acc + current.ft_enroll,
+      0,
+    )
+  );
+}
+
+export function isCollegeCountyWithThreshold(location: Location) {
+  const threshold = 0.05;
+  const ftEntrollment = getSummedEnrollment(location);
+  const countyPopulation = location.population;
+  return ftEntrollment && ftEntrollment / countyPopulation > threshold;
+}
+
+export function getAllCollegeCountiesAboveThreshold(): SummaryForCompare[] {
+  const allCounties = getAllCounties();
+  return allCounties.filter((location: SummaryForCompare) =>
+    isCollegeCountyWithThreshold(location.locationInfo),
+  );
 }
