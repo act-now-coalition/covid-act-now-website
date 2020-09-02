@@ -230,13 +230,9 @@ export class Projection {
       this.rawDailyDeaths,
     );
 
-    // TODO(https://trello.com/c/B6Z1kW8o/): Fix Tennessee Hospitalization data.
-    const hospitalizationsDisabled =
-      this.fips.length > 2 && this.fips.slice(0, 2) === '47';
-
-    this.rawHospitalizations = hospitalizationsDisabled
-      ? []
-      : actualTimeseries.map(row => row && row.hospitalBeds.currentUsageCovid);
+    this.rawHospitalizations = actualTimeseries.map(
+      row => row && row.hospitalBeds.currentUsageCovid,
+    );
     this.smoothedHospitalizations = this.smoothWithRollingAverage(
       this.rawHospitalizations,
     );
