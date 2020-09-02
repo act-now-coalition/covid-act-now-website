@@ -1,45 +1,12 @@
 import React, { useState } from 'react';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Button } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 import { Modal } from '@material-ui/core';
 import { Location } from 'common/locations';
-import { getLocationLabel } from './utils';
 import * as Styles from './LocationSelector.style';
-
-const getFips = (location: Location) =>
-  location.full_fips_code || location.state_fips_code;
-
-const getOptionSelected = (option: Location, value: Location) =>
-  getFips(option) === getFips(value);
-
-const AutocompleteLocations: React.FC<{
-  locations: Location[];
-  selectedLocations: Location[];
-  onChangeLocations: (
-    event: React.ChangeEvent<{}>,
-    newLocations: Location[],
-  ) => void;
-}> = ({ locations, onChangeLocations, selectedLocations }) => (
-  <Autocomplete
-    multiple
-    options={locations}
-    getOptionLabel={getLocationLabel}
-    onChange={onChangeLocations}
-    getOptionSelected={getOptionSelected}
-    value={selectedLocations}
-    renderInput={params => (
-      <TextField
-        variant="outlined"
-        {...params}
-        placeholder="Compare states or counties"
-      />
-    )}
-  />
-);
+import AutocompleteLocations from 'components/AutocompleteLocations';
 
 const LocationSelector: React.FC<{
   locations: Location[];

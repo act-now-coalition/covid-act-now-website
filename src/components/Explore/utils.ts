@@ -19,6 +19,11 @@ import { Projection, DatasetId } from 'common/models/Projection';
 import { ChartType } from './interfaces';
 import { share_image_url } from 'assets/data/share_images_url.json';
 import {
+  isState,
+  isCounty,
+  belongsToState,
+} from 'components/AutocompleteLocations';
+import {
   getLocationNameForFips,
   getLocationUrlForFips,
   isStateFips,
@@ -309,11 +314,6 @@ export function getLocationNames(locations: Location[]) {
     .map(getLocationLabel)
     .join(', ')} and ${getLocationLabel(lastLocation)}.`;
 }
-
-const isCounty = (location: Location) => location.county;
-const isState = (location: Location) => !isCounty(location);
-const belongsToState = (location: Location, stateFips: string) =>
-  location.state_fips_code === stateFips;
 
 export function getAutocompleteLocations(locationFips: string) {
   const currentLocation = findLocationForFips(locationFips);
