@@ -40,6 +40,9 @@ const ExploreTooltip: React.FC<{
   top: (d: Column) => number;
   subtext: string;
 }> = ({ series, left, top, date, subtext }) => {
+  if (series.length < 2) {
+    return null;
+  }
   const [seriesRaw, seriesSmooth] = series;
   const pointSmooth = findPointByDate(seriesSmooth.data, date);
   const pointRaw = findPointByDate(seriesRaw.data, date);
@@ -109,6 +112,7 @@ const ExploreChart: React.FC<{
   marginRight?: number;
   barOpacity?: number;
   barOpacityHover?: number;
+  showLabels?: boolean;
 }> = ({
   width,
   height,
@@ -121,6 +125,7 @@ const ExploreChart: React.FC<{
   marginRight = 10,
   barOpacity,
   barOpacityHover,
+  showLabels = false,
 }) => {
   const dateFrom = new Date('2020-03-01');
   const today = new Date();
@@ -176,7 +181,7 @@ const ExploreChart: React.FC<{
             <GridRows<number> scale={yScale} width={innerWidth} />
           </ChartStyle.LineGrid>
           <RectClipGroup width={innerWidth} height={innerHeight}>
-            {series.map(({ label, data, type }) => (
+            {series.map(({ label, data, type, params }) => (
               <SeriesChart
                 key={`series-chart-${label}`}
                 data={data}
@@ -186,6 +191,7 @@ const ExploreChart: React.FC<{
                 yMax={innerHeight}
                 barWidth={barWidth}
                 barOpacity={barOpacity}
+                chartParams={params}
               />
             ))}
           </RectClipGroup>
@@ -198,6 +204,17 @@ const ExploreChart: React.FC<{
               y2={innerHeight}
             />
           </ChartStyle.LineGrid>
+          {showLabels &&
+            series.map(({ label, data, params }) => (
+              <Styles.LineLabel
+                key={`label-${label}`}
+                x={innerWidth}
+                y={getYPosition(data[data.length - 1])}
+                fill={params?.stroke || '#000'}
+              >
+                {label}
+              </Styles.LineLabel>
+            ))}
           <Styles.TodayLabel>
             <text x={dateScale(today)} y={innerHeight} dy={21}>
               Today

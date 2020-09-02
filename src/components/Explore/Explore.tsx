@@ -1,4 +1,4 @@
-import React, { useState, FunctionComponent } from 'react';
+import React, { useState, useEffect, useMemo, FunctionComponent } from 'react';
 import { some, uniq } from 'lodash';
 import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -16,12 +16,11 @@ import ShareImageButtonGroup from 'components/ShareButtons';
 import ExploreTabs from './ExploreTabs';
 import ExploreChart from './ExploreChart';
 import Legend from './Legend';
-import { ExploreMetric } from './interfaces';
+import { ExploreMetric, Series } from './interfaces';
 import EmptyChart from './EmptyChart';
 import LocationSelector from './LocationSelector';
 import {
   getMetricLabels,
-  getSeries,
   getMetricByChartId,
   getImageFilename,
   getExportImageUrl,
@@ -29,6 +28,7 @@ import {
   getSocialQuote,
   getLocationNames,
   getAutocompleteLocations,
+  getChartSeries,
 } from './utils';
 import * as Styles from './Explore.style';
 
@@ -49,9 +49,14 @@ const Explore: React.FunctionComponent<{
   };
 
   const metricLabels = getMetricLabels();
+  const currentMetricName = metricLabels[currentMetric];
 
-  const currentLocation = findLocationForFips(fips);
-  const autocompleteLocations = getAutocompleteLocations(fips);
+  const [chartSeries, setChartSeries] = useState<Series[]>([]);
+
+  const currentLocation = useMemo(() => findLocationForFips(fips), [fips]);
+  const autocompleteLocations = useMemo(() => getAutocompleteLocations(fips), [
+    fips,
+  ]);
 
   const [selectedLocations, setSelectedLocations] = useState<Location[]>([
     currentLocation,
@@ -61,15 +66,18 @@ const Explore: React.FunctionComponent<{
     // make sure that the current location is always selected
     setSelectedLocations(uniq([currentLocation, ...newLocations]));
   };
-  const currentMetricName = metricLabels[currentMetric];
 
-  const series = getSeries(currentMetric, projection);
-
-  const hasData = some(series, ({ data }) => data.length > 0);
+  useEffect(() => {
+    const fetchSeries = () => getChartSeries(currentMetric, selectedLocations);
+    fetchSeries().then(series => setChartSeries(series));
+  }, [selectedLocations, currentMetric]);
 
   const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
   const lastUpdatedDateString =
     lastUpdatedDate !== null ? lastUpdatedDate.toLocaleDateString() : '';
+
+  const hasData = some(chartSeries, ({ data }) => data.length > 0);
+  const showMultipleLocations = selectedLocations.length > 1;
 
   return (
     <Styles.Container>
@@ -107,9 +115,11 @@ const Explore: React.FunctionComponent<{
               onChangeSelectedLocations={onChangeSelectedLocations}
             />
           </Grid>
-          <Grid key="legend" item sm xs={12}>
-            <Legend series={series} />
-          </Grid>
+          {showMultipleLocations ? null : (
+            <Grid key="legend" item sm xs={12}>
+              <Legend series={chartSeries} />
+            </Grid>
+          )}
         </Grid>
       </Styles.ChartControlsContainer>
       {hasData ? (
@@ -118,11 +128,13 @@ const Explore: React.FunctionComponent<{
           <ParentSize>
             {({ width }) => (
               <ExploreChart
-                series={series}
+                series={chartSeries}
                 isMobile={isMobile}
-                width={width}
+                width={Math.max(100, width)}
                 height={400}
                 tooltipSubtext={`in ${locationName}`}
+                showLabels={showMultipleLocations}
+                marginRight={showMultipleLocations ? 100 : 10}
               />
             )}
           </ParentSize>
