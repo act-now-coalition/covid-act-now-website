@@ -1,5 +1,5 @@
 import React, { useState, FunctionComponent } from 'react';
-import { some } from 'lodash';
+import { some, uniq } from 'lodash';
 import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
@@ -58,7 +58,8 @@ const Explore: React.FunctionComponent<{
   ]);
 
   const onChangeSelectedLocations = (newLocations: Location[]) => {
-    setSelectedLocations(newLocations);
+    // make sure that the current location is always selected
+    setSelectedLocations(uniq([currentLocation, ...newLocations]));
   };
   const currentMetricName = metricLabels[currentMetric];
 
