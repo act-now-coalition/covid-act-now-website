@@ -61,8 +61,8 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent, condensed }) => {
                   return (
                     <Link key={stateCode} to={`/us/${stateCode.toLowerCase()}`}>
                       <MarianaIslands
-                        x={440}
-                        y={515}
+                        x={40}
+                        y={395}
                         scale={0.8}
                         key={geo.rsmKey}
                         onMouseEnter={() => {
