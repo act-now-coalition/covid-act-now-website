@@ -126,17 +126,21 @@ const Explore: React.FunctionComponent<{
         <Styles.ChartContainer>
           {/* The width is set to zero while the parent div is rendering */}
           <ParentSize>
-            {({ width }) => (
-              <ExploreChart
-                series={chartSeries}
-                isMobile={isMobile}
-                width={Math.max(100, width)}
-                height={400}
-                tooltipSubtext={`in ${locationName}`}
-                showLabels={showMultipleLocations}
-                marginRight={showMultipleLocations ? 100 : 10}
-              />
-            )}
+            {({ width }) =>
+              width > 0 ? (
+                <ExploreChart
+                  series={chartSeries}
+                  isMobile={isMobile}
+                  width={width}
+                  height={400}
+                  tooltipSubtext={`in ${locationName}`}
+                  showLabels={showMultipleLocations}
+                  marginRight={showMultipleLocations ? 100 : 10}
+                />
+              ) : (
+                <div style={{ height: 400 }} />
+              )
+            }
           </ParentSize>
         </Styles.ChartContainer>
       ) : (
