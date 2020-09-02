@@ -157,3 +157,7 @@ export function getCountyMsaCode(fips: string): string | undefined {
     return ADJACENT_COUNTIES[fips].msa_code;
   }
 }
+
+export function findLocationForFips(fips: string): Location {
+  return isStateFips(fips) ? findStateByFips(fips) : findCountyByFips(fips);
+}

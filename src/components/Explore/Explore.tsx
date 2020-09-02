@@ -6,17 +6,19 @@ import { useTheme } from '@material-ui/core/styles';
 import { ParentSize } from '@vx/responsive';
 import { Projection } from 'common/models/Projection';
 import { useModelLastUpdatedDate } from 'common/utils/model';
+import { findLocationForFips, Location } from 'common/locations';
 import {
   DisclaimerWrapper,
   DisclaimerBody,
 } from 'components/Disclaimer/Disclaimer.style';
+import ExternalLink from 'components/ExternalLink';
 import ShareImageButtonGroup from 'components/ShareButtons';
 import ExploreTabs from './ExploreTabs';
 import ExploreChart from './ExploreChart';
 import Legend from './Legend';
 import { ExploreMetric } from './interfaces';
 import EmptyChart from './EmptyChart';
-
+import LocationSelector from './LocationSelector';
 import {
   getMetricLabels,
   getSeries,
@@ -25,27 +27,41 @@ import {
   getExportImageUrl,
   getChartUrl,
   getSocialQuote,
+  getLocationNames,
+  getAutocompleteLocations,
 } from './utils';
 import * as Styles from './Explore.style';
-import ExternalLink from '../ExternalLink';
 
 const Explore: React.FunctionComponent<{
   projection: Projection;
   chartId?: string;
 }> = ({ projection, chartId }) => {
+  const { locationName, fips } = projection;
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   const [currentMetric, setCurrentMetric] = useState(
     (chartId && getMetricByChartId(chartId)) || ExploreMetric.CASES,
   );
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const onChangeTab = (event: React.ChangeEvent<{}>, newMetric: number) => {
     setCurrentMetric(newMetric);
   };
 
   const metricLabels = getMetricLabels();
+
+  const currentLocation = findLocationForFips(fips);
+  const autocompleteLocations = getAutocompleteLocations(fips);
+
+  const [selectedLocations, setSelectedLocations] = useState<Location[]>([
+    currentLocation,
+  ]);
+
+  const onChangeSelectedLocations = (newLocations: Location[]) => {
+    setSelectedLocations(newLocations);
+  };
+
   const series = getSeries(currentMetric, projection);
-  const { locationName, fips } = projection;
 
   const hasData = some(series, ({ data }) => data.length > 0);
 
@@ -59,7 +75,7 @@ const Explore: React.FunctionComponent<{
         <Grid item sm={6} xs={12}>
           <Styles.Heading variant="h4">Trends</Styles.Heading>
           <Styles.Subtitle>
-            cases since march 1st in {locationName}
+            cases since march 1st in {getLocationNames(selectedLocations)}
           </Styles.Subtitle>
         </Grid>
         <Grid item sm={6} xs={12}>
@@ -80,7 +96,18 @@ const Explore: React.FunctionComponent<{
         onChangeTab={onChangeTab}
       />
       <Styles.ChartControlsContainer>
-        <Legend series={series} />
+        <Grid container spacing={1}>
+          <Grid key="location-selector" item sm={6} xs={6}>
+            <LocationSelector
+              locations={autocompleteLocations}
+              selectedLocations={selectedLocations}
+              onChangeSelectedLocations={onChangeSelectedLocations}
+            />
+          </Grid>
+          <Grid key="legend" item sm xs={12}>
+            <Legend series={series} />
+          </Grid>
+        </Grid>
       </Styles.ChartControlsContainer>
       {hasData ? (
         <Styles.ChartContainer>

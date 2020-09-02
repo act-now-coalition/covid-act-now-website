@@ -10,6 +10,10 @@ import {
   dropWhile,
 } from 'lodash';
 import { Series } from './interfaces';
+import {
+  findLocationForFips,
+  getLocationNames as getAllLocations,
+} from 'common/locations';
 import { Column } from 'common/models/Projection';
 import { Projection, DatasetId } from 'common/models/Projection';
 import { ChartType } from './interfaces';
@@ -19,6 +23,7 @@ import {
   getLocationUrlForFips,
   isStateFips,
   findStateByFips,
+  Location,
 } from 'common/locations';
 
 export function getMaxBy<T>(
@@ -284,4 +289,30 @@ export function weeksAgo(dateFrom: Date, dateTo: Date) {
     const daysAgo = numDays > 0 ? `, ${numDays} ${pluralizeDays(numDays)}` : '';
     return `${weeksAgo} ${daysAgo} ago`;
   }
+}
+
+export function getLocationLabel(location: Location) {
+  return location.county
+    ? `${location.county}, ${location.state_code}`
+    : location.state;
+}
+
+export function getLocationNames(locations: Location[]) {
+  return locations.map(getLocationLabel).join(', ');
+}
+
+const isCounty = (location: Location) => location.county;
+const isState = (location: Location) => !isCounty(location);
+const belongsToState = (location: Location, stateFips: string) =>
+  location.state_fips_code === stateFips;
+
+export function getAutocompleteLocations(locationFips: string) {
+  const currentLocation = findLocationForFips(locationFips);
+  const stateFips = currentLocation.state_fips_code;
+  const allLocations = getAllLocations();
+  return isState(currentLocation)
+    ? allLocations.filter(isState)
+    : allLocations
+        .filter(isCounty)
+        .filter(location => belongsToState(location, stateFips));
 }
