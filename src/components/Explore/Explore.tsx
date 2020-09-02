@@ -35,7 +35,8 @@ import * as Styles from './Explore.style';
 const Explore: React.FunctionComponent<{
   projection: Projection;
   chartId?: string;
-}> = ({ projection, chartId }) => {
+  height?: number;
+}> = ({ projection, chartId, height = 400 }) => {
   const { locationName, fips } = projection;
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -124,7 +125,10 @@ const Explore: React.FunctionComponent<{
       </Styles.ChartControlsContainer>
       {hasData ? (
         <Styles.ChartContainer>
-          {/* The width is set to zero while the parent div is rendering */}
+          {/**
+           * The width is set to zero while the parent div is rendering, the
+           * placeholder div below prevents the page from jumping.
+           */}
           <ParentSize>
             {({ width }) =>
               width > 0 ? (
@@ -132,32 +136,23 @@ const Explore: React.FunctionComponent<{
                   series={chartSeries}
                   isMobile={isMobile}
                   width={width}
-                  height={400}
+                  height={height}
                   tooltipSubtext={`in ${locationName}`}
                   showLabels={showMultipleLocations}
                   marginRight={showMultipleLocations ? 100 : 10}
                 />
               ) : (
-                <div style={{ height: 400 }} />
+                <div style={{ height }} />
               )
             }
           </ParentSize>
         </Styles.ChartContainer>
       ) : (
-        <EmptyChart height={400}>
-          <p>
-            We don't have {currentMetricName} data for {locationName}. Learn
-            more about{' '}
-            <ExternalLink href="https://docs.google.com/document/d/1cd_cEpNiIl1TzUJBvw9sHLbrbUZ2qCxgN32IqVLa3Do/edit">
-              our methodology
-            </ExternalLink>{' '}
-            and our{' '}
-            <ExternalLink href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit">
-              our data sources
-            </ExternalLink>
-            .
-          </p>
-        </EmptyChart>
+        <EmptyChart
+          height={height}
+          metricName={currentMetricName}
+          locationName={locationName}
+        />
       )}
       <DisclaimerWrapper>
         <DisclaimerBody>

@@ -2,7 +2,7 @@ import React from 'react';
 import { localPoint } from '@vx/event';
 import { Group } from '@vx/group';
 import { useTooltip } from '@vx/tooltip';
-import HoverOverlay from './HoverOverlay';
+import TooltipOverlayXY from './TooltipOverlayXY';
 import * as Style from './Charts.style';
 import { ScreenshotReady } from 'components/Screenshot';
 
@@ -59,7 +59,7 @@ const ChartContainer = <T extends unknown>({
         <Group left={marginLeft} top={marginTop}>
           {children}
           {tooltipOpen && tooltipData && renderMarker(tooltipData)}
-          <HoverOverlay<T>
+          <TooltipOverlayXY<T>
             width={chartWidth}
             height={chartHeight}
             data={data}

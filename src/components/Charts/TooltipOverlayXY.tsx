@@ -2,7 +2,17 @@ import React, { useMemo } from 'react';
 import { Group } from '@vx/group';
 import { voronoi, VoronoiPolygon } from '@vx/voronoi';
 
-const HoverOverlay = <T extends unknown>({
+/**
+ * `TooltipOverlayXY` divides the area given by `width` and `height`
+ * into regions such that each region is the set of points in the
+ * region closer to each point in `data`. This is useful for knowing
+ * the closest point in the dataset to the point hovered/clicked
+ * by the user, so we can show the tooltip even if they are not
+ * the point exactly.
+ *
+ * See https://en.wikipedia.org/wiki/Voronoi_diagram
+ */
+const TooltipOverlayXY = <T extends unknown>({
   data,
   x,
   y,
@@ -42,4 +52,4 @@ const HoverOverlay = <T extends unknown>({
   );
 };
 
-export default HoverOverlay;
+export default TooltipOverlayXY;

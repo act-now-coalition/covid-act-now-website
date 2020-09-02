@@ -8,10 +8,9 @@ import { scaleTime, scaleLinear } from '@vx/scale';
 import { useTooltip } from '@vx/tooltip';
 import { Column } from 'common/models/Projection';
 import * as ChartStyle from 'components/Charts/Charts.style';
-import { RectClipGroup } from 'components/Charts';
+import { RectClipGroup, TooltipOverlayX } from 'components/Charts';
 import { Series } from './interfaces';
 import SeriesChart, { SeriesMarker } from './SeriesChart';
-import ChartOverlay from './ChartOverlay';
 import { getMaxBy, getTimeAxisTicks, weeksAgo } from './utils';
 import * as Styles from './Explore.style';
 import { COLOR_MAP } from 'common/colors';
@@ -195,10 +194,9 @@ const ExploreChart: React.FC<{
               barOpacityHover={barOpacityHover}
             />
           )}
-          <ChartOverlay
+          <TooltipOverlayX
             width={innerWidth}
             height={innerHeight}
-            xScale={dateScale}
             onMouseOver={onMouseOver}
             onMouseLeave={hideTooltip}
           />

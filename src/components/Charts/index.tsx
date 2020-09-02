@@ -7,3 +7,5 @@ export { default as ChartContactTracing } from './ChartContactTracing';
 export { default as ChartCaseDensity } from './ChartCaseDensity';
 export { default as Tooltip } from './Tooltip';
 export { default as RectClipGroup } from './RectClipGroup';
+export { default as TooltipOverlayX } from './TooltipOverlayX';
+export { default as TooltipOverlayXY } from './TooltipOverlayXY';
