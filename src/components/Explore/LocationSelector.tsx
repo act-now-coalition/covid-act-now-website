@@ -39,7 +39,7 @@ const LocationSelector: React.FC<{
       >
         Compare
       </Button>
-      {modalOpen ? (
+      {modalOpen && (
         <Modal open={modalOpen} onClose={closeModal}>
           <Styles.ModalContainer>
             <Styles.ModalHeader>
@@ -63,7 +63,7 @@ const LocationSelector: React.FC<{
             </Styles.ModalBody>
           </Styles.ModalContainer>
         </Modal>
-      ) : null}
+      )}
     </React.Fragment>
   ) : (
     <AutocompleteLocations
