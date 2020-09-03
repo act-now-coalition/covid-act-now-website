@@ -392,7 +392,7 @@ export function getChartSeries(
           getAveragedSeriesForMetric(
             metric,
             projections.primary,
-            SERIES_COLORS[i % 10],
+            SERIES_COLORS[i % SERIES_COLORS.length],
           ),
         );
       }),
