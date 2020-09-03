@@ -40,16 +40,14 @@ const Explore: React.FunctionComponent<{
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const [currentMetric, setCurrentMetric] = useState(
-    (chartId && getMetricByChartId(chartId)) || ExploreMetric.CASES,
-  );
+  const defaultMetric =
+    (chartId && getMetricByChartId(chartId)) || ExploreMetric.CASES;
+  const [currentMetric, setCurrentMetric] = useState(defaultMetric);
 
   const onChangeTab = (newMetric: number) => setCurrentMetric(newMetric);
 
   const metricLabels = getMetricLabels();
   const currentMetricName = metricLabels[currentMetric];
-
-  const [chartSeries, setChartSeries] = useState<Series[]>([]);
 
   const currentLocation = useMemo(() => findLocationForFips(fips), [fips]);
   const autocompleteLocations = useMemo(() => getAutocompleteLocations(fips), [
@@ -65,6 +63,13 @@ const Explore: React.FunctionComponent<{
     setSelectedLocations(uniq([currentLocation, ...newLocations]));
   };
 
+  // Resets the state when navigating locations
+  useEffect(() => {
+    setSelectedLocations([currentLocation]);
+    setCurrentMetric(defaultMetric);
+  }, [currentLocation, defaultMetric]);
+
+  const [chartSeries, setChartSeries] = useState<Series[]>([]);
   useEffect(() => {
     const fetchSeries = () => getChartSeries(currentMetric, selectedLocations);
     fetchSeries().then(series => setChartSeries(series));
