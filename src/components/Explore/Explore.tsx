@@ -44,7 +44,7 @@ const Explore: React.FunctionComponent<{
   const [currentMetric, setCurrentMetric] = useState(
     (chartId && getMetricByChartId(chartId)) || ExploreMetric.CASES,
   );
-  const [normalizeData, setNormalizeData] = useState(false);
+  const [normalizeData, setNormalizeData] = useState(true);
 
   const onChangeTab = (newMetric: number) => setCurrentMetric(newMetric);
 
@@ -84,7 +84,9 @@ const Explore: React.FunctionComponent<{
     <Styles.Container>
       <Grid container spacing={1}>
         <Grid item sm={9} xs={12}>
-          <Styles.Heading variant="h4">Trends</Styles.Heading>
+          <Styles.Heading variant="h4" id="trends">
+            Trends
+          </Styles.Heading>
           <Styles.Subtitle>
             {currentMetricName} {normalizeData ? 'per 100k population' : ''}{' '}
             since march 1st in {getLocationNames(selectedLocations)}
