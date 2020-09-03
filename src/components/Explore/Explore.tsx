@@ -3,7 +3,6 @@ import { some, uniq } from 'lodash';
 import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import { useTheme } from '@material-ui/core/styles';
 import { ParentSize } from '@vx/responsive';
 import { Projection } from 'common/models/Projection';
@@ -126,7 +125,7 @@ const Explore: React.FunctionComponent<{
             <Grid key="legend" item sm xs={12}>
               <FormControlLabel
                 control={
-                  <Checkbox
+                  <Styles.NormalizeCheckbox
                     checked={normalizeData}
                     onChange={() => {
                       setNormalizeData(!normalizeData);

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Box from '@material-ui/core/Box';
+import MuiCheckbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
 import MuiTab from '@material-ui/core/Tab';
 import MuiTabs from '@material-ui/core/Tabs';
@@ -69,6 +70,12 @@ export const Tab = styled(MuiTab)`
 // CHART CONTROLS
 export const ChartControlsContainer = styled.div`
   margin: ${theme.spacing(2)}px auto;
+`;
+
+export const NormalizeCheckbox = styled(MuiCheckbox)`
+  &.Mui-checked {
+    color: black;
+  }
 `;
 
 export const LegendContainer = styled(Box)`
