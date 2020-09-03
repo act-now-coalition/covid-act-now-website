@@ -53,7 +53,7 @@ const CriteriaExplanation = (props: { isMobile: Boolean }) => {
         <Criterion>
           <Kicker isMobile={props.isMobile} title="Indicator 3" number="3" />
           <Content>
-            <CriterionHeader>Test Positivity</CriterionHeader>
+            <CriterionHeader>Positive Test Rate</CriterionHeader>
             <CriterionDescription>
               Is COVID testing widespread enough to identify new cases?
             </CriterionDescription>
@@ -62,7 +62,7 @@ const CriteriaExplanation = (props: { isMobile: Boolean }) => {
         <Criterion>
           <Kicker isMobile={props.isMobile} title="Indicator 4" number="4" />
           <Content>
-            <CriterionHeader>ICU Headroom</CriterionHeader>
+            <CriterionHeader>ICU Headroom Used</CriterionHeader>
             <CriterionDescription>
               Do hospitals have capacity to treat a surge of COVID
               hospitalizations?
