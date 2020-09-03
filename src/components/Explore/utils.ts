@@ -1,35 +1,33 @@
 import moment from 'moment';
 import urlJoin from 'url-join';
 import {
-  max,
-  range,
   deburr,
-  words,
-  isNumber,
   dropRightWhile,
   dropWhile,
+  flatten,
+  isNumber,
+  max,
+  range,
+  words,
 } from 'lodash';
-import { Series } from './interfaces';
+import { fetchProjections } from 'common/utils/model';
+import { Column, Projection, DatasetId } from 'common/models/Projection';
 import {
   findLocationForFips,
   getLocationNames as getAllLocations,
-} from 'common/locations';
-import { Column } from 'common/models/Projection';
-import { Projection, DatasetId } from 'common/models/Projection';
-import { ChartType } from './interfaces';
-import { share_image_url } from 'assets/data/share_images_url.json';
-import {
-  isState,
-  isCounty,
-  belongsToState,
-} from 'components/AutocompleteLocations';
-import {
   getLocationNameForFips,
   getLocationUrlForFips,
   isStateFips,
   findStateByFips,
   Location,
 } from 'common/locations';
+import { share_image_url } from 'assets/data/share_images_url.json';
+import { ChartType, Series } from './interfaces';
+import {
+  isState,
+  isCounty,
+  belongsToState,
+} from 'components/AutocompleteLocations';
 
 export function getMaxBy<T>(
   series: Series[],
@@ -72,6 +70,19 @@ export function getMetricByChartId(chartId: string): ExploreMetric | undefined {
       return ExploreMetric.HOSPITALIZATIONS;
     case 'icu-hospitalizations':
       return ExploreMetric.ICU_HOSPITALIZATIONS;
+  }
+}
+
+function getDatasetIdByMetric(metric: ExploreMetric): DatasetId {
+  switch (metric) {
+    case ExploreMetric.CASES:
+      return 'smoothedDailyCases';
+    case ExploreMetric.DEATHS:
+      return 'smoothedDailyDeaths';
+    case ExploreMetric.HOSPITALIZATIONS:
+      return 'smoothedHospitalizations';
+    case ExploreMetric.ICU_HOSPITALIZATIONS:
+      return 'smoothedICUHospitalizations';
   }
 }
 
@@ -324,4 +335,56 @@ export function getAutocompleteLocations(locationFips: string) {
     : allLocations
         .filter(isCounty)
         .filter(location => belongsToState(location, stateFips));
+}
+
+const SERIES_COLORS = [
+  '#1f77b4',
+  '#ff7f0e',
+  '#2ca02c',
+  '#d62728',
+  '#9467bd',
+  '#8c564b',
+  '#e377c2',
+  '#7f7f7f',
+  '#bcbd22',
+  '#17becf',
+];
+
+function getSmoothedSeries(
+  metric: ExploreMetric,
+  projection: Projection,
+  color: string,
+): Series {
+  const datasetId = getDatasetIdByMetric(metric);
+  const location = findLocationForFips(projection.fips);
+  return {
+    data: cleanSeries(projection.getDataset(datasetId)),
+    type: ChartType.LINE,
+    params: {
+      stroke: color,
+    },
+    label: getLocationLabel(location),
+    tooltipLabel: '',
+  };
+}
+
+const getCountyForLocation = (location: Location) =>
+  isCounty(location) ? location : undefined;
+
+export function getChartSeries(metric: ExploreMetric, locations: Location[]) {
+  if (locations.length === 1) {
+    return fetchProjections(
+      locations[0].state_code,
+      getCountyForLocation(locations[0]),
+    ).then(projections => getSeries(metric, projections.primary));
+  } else {
+    return Promise.all(
+      locations.map((location, i) => {
+        const county = getCountyForLocation(location);
+        return fetchProjections(location.state_code, county).then(projections =>
+          getSmoothedSeries(metric, projections.primary, SERIES_COLORS[i % 10]),
+        );
+      }),
+    ).then(series => flatten(series));
+  }
 }

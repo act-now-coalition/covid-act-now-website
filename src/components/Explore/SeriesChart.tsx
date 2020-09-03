@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { curveCardinal } from '@vx/curve';
 import { LinePath } from '@vx/shape';
 import * as Styles from './Explore.style';
-import { ChartType } from './interfaces';
+import { ChartType, ChartParams } from './interfaces';
 import { Column } from 'common/models/Projection';
 import BarChart from 'components/Charts/BarChart';
 import { findPointByDate } from './utils';
@@ -15,17 +15,18 @@ const SeriesChart: FunctionComponent<{
   yMax: number;
   barWidth: number;
   barOpacity?: number;
-}> = ({ type, data, x, y, yMax, barWidth, barOpacity }) => {
+  params?: ChartParams;
+}> = ({ type, data, x, y, yMax, barWidth, barOpacity, params }) => {
   switch (type) {
     case ChartType.LINE:
       return (
-        <Styles.MainSeriesLine>
+        <Styles.MainSeriesLine {...params}>
           <LinePath data={data} x={x} y={y} curve={curveCardinal} />
         </Styles.MainSeriesLine>
       );
     case ChartType.BAR:
       return (
-        <Styles.BarsSeries barOpacity={barOpacity}>
+        <Styles.BarsSeries barOpacity={barOpacity} {...params}>
           <BarChart data={data} x={x} y={y} yMax={yMax} barWidth={barWidth} />
         </Styles.BarsSeries>
       );

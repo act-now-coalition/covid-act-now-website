@@ -5,11 +5,16 @@ export enum ChartType {
   BAR,
 }
 
+export interface ChartParams {
+  stroke?: string;
+}
+
 export interface Series {
   data: Column[];
   type: ChartType;
   label: string;
   tooltipLabel: string;
+  params?: ChartParams;
 }
 
 export enum ExploreMetric {
