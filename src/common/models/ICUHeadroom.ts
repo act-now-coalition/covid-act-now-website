@@ -41,6 +41,20 @@ export enum NonCovidPatientsMethod {
   ESTIMATED_FROM_TOTAL_ICU_ACTUAL,
 }
 
+const parseNonCovidPatientsMethod = (
+  method: string,
+): NonCovidPatientsMethod => {
+  switch (method) {
+    case 'actual':
+      return NonCovidPatientsMethod.ACTUAL;
+    case 'estimated_from_typical_utilization':
+      return NonCovidPatientsMethod.ESTIMATED_FROM_TYPICAL_UTILIZATION;
+    case 'estimated_from_total_icu_actual':
+      return NonCovidPatientsMethod.ESTIMATED_FROM_TOTAL_ICU_ACTUAL;
+    default:
+      return NonCovidPatientsMethod.ACTUAL;
+  }
+};
 /** Calculates all of the information pertaining to the ICU Headroom metric. */
 export function calcICUHeadroom(
   fips: string,
@@ -54,6 +68,10 @@ export function calcICUHeadroom(
     return null;
   }
 
+  const icuHeadroomDetails = metrics.icuHeadroomDetails;
+  if (!icuHeadroomDetails) {
+    return null;
+  }
   const overrideInPlace = ICU_HEADROOM_OVERRIDES.indexOf(fips) > -1;
   if (overrideInPlace) {
     return {
@@ -80,10 +98,12 @@ export function calcICUHeadroom(
     metricValue: metrics.icuHeadroomRatio,
     overrideInPlace,
     totalBeds: finalTotalBeds,
-    covidPatients: 10,
+    covidPatients: icuHeadroomDetails.currentIcuCovid,
     covidPatientsIsActual:
-      metrics.icuHeadroomDetails?.currentIcuCovidMethod == 'actual',
-    nonCovidPatients: 12,
-    nonCovidPatientsMethod: 1,
+      icuHeadroomDetails.currentIcuCovidMethod === 'actual',
+    nonCovidPatients: icuHeadroomDetails.currentIcuNonCovid,
+    nonCovidPatientsMethod: parseNonCovidPatientsMethod(
+      icuHeadroomDetails.currentIcuNonCovidMethod,
+    ),
   };
 }

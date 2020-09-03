@@ -234,13 +234,17 @@ export class Projection {
       row ? row.testPositivityRatio : null,
     );
 
-    this.icuHeadroomInfo = calcICUHeadroom(
-      this.fips,
-      actualTimeseries,
-      metricsTimeseries,
-      metrics,
-      actuals,
-    );
+    if (metrics) {
+      this.icuHeadroomInfo = calcICUHeadroom(
+        this.fips,
+        actualTimeseries,
+        metricsTimeseries,
+        metrics,
+        actuals,
+      );
+    } else {
+      this.icuHeadroomInfo = null;
+    }
     this.icuUtilization =
       this.icuHeadroomInfo?.metricSeries || this.dates.map(date => null);
 
