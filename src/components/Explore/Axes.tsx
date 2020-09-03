@@ -8,20 +8,11 @@ import { getTimeAxisTicks } from './utils';
 const Axes: React.FC<{
   height: number;
   dateScale: ScaleTime<number, number>;
-  dateFrom: Date;
-  dateTo: Date;
   yScale: ScaleLinear<number, number>;
   strokeColor: string;
   isMobile: boolean;
-}> = ({
-  height,
-  dateScale,
-  dateFrom,
-  dateTo,
-  yScale,
-  strokeColor,
-  isMobile,
-}) => {
+}> = ({ height, dateScale, yScale, strokeColor, isMobile }) => {
+  const [dateFrom, dateTo] = dateScale.domain();
   const timeTicks = getTimeAxisTicks(dateFrom, dateTo);
   // We remove the last tick to make room for the Today marker
   const xTicks = timeTicks.slice(0, timeTicks.length - 1);

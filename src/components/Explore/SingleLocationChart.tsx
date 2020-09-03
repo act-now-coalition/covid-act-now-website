@@ -109,7 +109,7 @@ const ExploreChart: React.FC<{
   marginTop = 10,
   marginBottom = 30,
   marginLeft = 60,
-  marginRight = 10,
+  marginRight = 20,
   barOpacity,
   barOpacityHover,
 }) => {
@@ -168,8 +168,6 @@ const ExploreChart: React.FC<{
           <Axes
             height={innerHeight}
             dateScale={dateScale}
-            dateFrom={dateFrom}
-            dateTo={dateTo}
             yScale={yScale}
             isMobile={isMobile}
             strokeColor={axisGridColor}

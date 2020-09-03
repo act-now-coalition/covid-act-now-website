@@ -178,7 +178,6 @@ export const LineLabel = styled.text`
   font-weight: 500;
   font-size: 11px;
   dominant-baseline: middle;
-  dx: 5px;
 `;
 
 export const DateMarker = styled.div`
