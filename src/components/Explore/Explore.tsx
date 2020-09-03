@@ -40,13 +40,11 @@ const Explore: React.FunctionComponent<{
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const initialMetric =
-    (chartId && getMetricByChartId(chartId)) || ExploreMetric.CASES;
-  const [currentMetric, setCurrentMetric] = useState(initialMetric);
+  const [currentMetric, setCurrentMetric] = useState(
+    (chartId && getMetricByChartId(chartId)) || ExploreMetric.CASES,
+  );
 
-  const onChangeTab = (newMetric: number) => {
-    setCurrentMetric(newMetric);
-  };
+  const onChangeTab = (newMetric: number) => setCurrentMetric(newMetric);
 
   const metricLabels = getMetricLabels();
   const currentMetricName = metricLabels[currentMetric];
