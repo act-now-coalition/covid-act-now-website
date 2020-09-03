@@ -1,5 +1,7 @@
 import React from 'react';
 import { sortBy, findIndex, partition, reverse, isNumber } from 'lodash';
+import { useTheme } from '@material-ui/core/styles';
+import { useMediaQuery } from '@material-ui/core';
 import {
   Wrapper,
   Footer,
@@ -148,6 +150,11 @@ const CompareTable = (props: {
       } to other counties`
     : `Counties in ${props.stateName}`;
 
+  const theme = useTheme();
+  // hard-coded 700 because MUI mobile breakpoint of 600 was too small
+  const isMobile = useMediaQuery(theme.breakpoints.down(700));
+  const faqLinkCopy = isMobile ? 'FAQ' : 'Frequently Asked Questions';
+
   return (
     <Wrapper isModal={props.isModal} isHomepage={props.isHomepage}>
       {!props.isModal && (
@@ -203,7 +210,7 @@ const CompareTable = (props: {
             </FooterLink>
           </div>
           <FooterLink onClick={() => props.setShowFaqModal(true)}>
-            More info
+            {faqLinkCopy}
           </FooterLink>
         </Footer>
       )}

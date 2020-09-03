@@ -54,12 +54,18 @@ const ModalFaq = (props: { handleCloseModal: () => void }) => {
           </Answer>
           <Question>How are “college” counties defined?</Question>
           <Answer>
-            We wanted to highlight counties where the college population could
-            be impacting the local COVID dynamics. Counties in which typical
-            full-time student enrollment accounts for at least 5% of the total
-            county population are labeled as “College” counties. Note that these
-            colleges may or may not currently have in-person classes /
-            activities.
+            We want to highlight counties where the college population may be
+            impacting the local COVID dynamics.
+            <br />
+            <br />
+            Counties in which typical full-time student enrollment accounts for
+            at least 5% of the total county population are labeled as “College”
+            counties. This labels 334 counties as “College” counties
+            (approximately 10% of all counties).
+            <br />
+            <br />
+            Note that these colleges may or may not currently have in-person
+            classes / activities.
           </Answer>
           <Question>Why do some counties have missing data?</Question>
           <Answer>
