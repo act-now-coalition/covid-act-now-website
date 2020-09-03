@@ -30,6 +30,7 @@ import DonationBanner from 'components/Banner/DonationBanner';
 export default function HomePage() {
   const shareBlockRef = useRef(null);
   const location = useLocation();
+  const scrollToCompare = location.pathname.endsWith('/compare');
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
@@ -93,7 +94,11 @@ export default function HomePage() {
             </SearchBarThermometerWrapper>
             <Map hideLegend />
             {isMobile && <HomePageThermometer />}
-            <CompareMain locationsViewable={8} isHomepage />
+            <CompareMain
+              locationsViewable={8}
+              isHomepage
+              autoScroll={scrollToCompare}
+            />
             <SectionWrapper ref={indicatorsRef}>
               <CriteriaExplanation isMobile={isMobile} />
             </SectionWrapper>

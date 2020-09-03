@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useRef } from 'react';
+import React, { useState, Fragment, useRef, useEffect } from 'react';
 import { Modal } from '@material-ui/core';
 import CompareTable from 'components/Compare/CompareTable';
 import ModalCompare from 'components/Compare/ModalCompare';
@@ -26,6 +26,7 @@ const CompareMain = (props: {
   isHomepage?: boolean;
   currentCounty?: any;
   stateId?: string;
+  autoScroll?: boolean;
 }) => {
   const tableRef = useRef<HTMLDivElement>(null);
   const scrollOffset = props.isHomepage ? 75 : 165;
@@ -79,19 +80,29 @@ const CompareMain = (props: {
     ? homepageViewMoreCopy
     : locationPageViewMoreCopy;
 
-  // Note (Chelsi): short delay is needed to make scrollTo work
+  const scrollToCompare = () => {
+    // Note (Chelsi): short delay is needed to make scrollTo work
+    return setTimeout(() => {
+      if (tableRef.current) {
+        scrollTo(tableRef.current);
+      }
+    }, 250);
+  };
+
   const [showModal, setShowModal] = useState(false);
   const [showFaqModal, setShowFaqModal] = useState(false);
   const handleCloseModal = () => {
     setShowFaqModal(false);
     setShowModal(false);
-    const timeoutId = setTimeout(() => {
-      if (tableRef.current) {
-        scrollTo(tableRef.current);
-      }
-    }, 250);
-    return () => clearTimeout(timeoutId);
+    scrollToCompare();
   };
+
+  useEffect(() => {
+    if (props.autoScroll) {
+      const timeoutId = scrollToCompare();
+      return () => clearTimeout(timeoutId);
+    }
+  });
 
   // For filters:
   const scopeValueMap = {
