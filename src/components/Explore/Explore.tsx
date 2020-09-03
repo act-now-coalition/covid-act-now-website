@@ -44,7 +44,7 @@ const Explore: React.FunctionComponent<{
     (chartId && getMetricByChartId(chartId)) || ExploreMetric.CASES;
   const [currentMetric, setCurrentMetric] = useState(initialMetric);
 
-  const onChangeTab = (event: React.ChangeEvent<{}>, newMetric: number) => {
+  const onChangeTab = (newMetric: number) => {
     setCurrentMetric(newMetric);
   };
 

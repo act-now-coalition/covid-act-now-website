@@ -5,6 +5,9 @@ import { AxisLeft, AxisBottom } from '@vx/axis';
 import * as ChartStyle from 'components/Charts/Charts.style';
 import { getTimeAxisTicks } from './utils';
 
+const xTickFormat = (date: Date, isMobile: boolean) =>
+  moment(date).format(isMobile ? 'MMM' : 'MMMM D');
+
 const Axes: React.FC<{
   height: number;
   dateScale: ScaleTime<number, number>;
@@ -16,8 +19,6 @@ const Axes: React.FC<{
   const timeTicks = getTimeAxisTicks(dateFrom, dateTo);
   // We remove the last tick to make room for the Today marker
   const xTicks = timeTicks.slice(0, timeTicks.length - 1);
-  const timeTickFormat = isMobile ? 'MMM' : 'MMMM D';
-  const xTickFormat = (date: Date) => moment(date).format(timeTickFormat);
   return (
     <ChartStyle.Axis exploreStroke={strokeColor}>
       <AxisLeft scale={yScale} />
@@ -25,7 +26,7 @@ const Axes: React.FC<{
         top={height}
         scale={dateScale}
         tickValues={xTicks}
-        tickFormat={xTickFormat}
+        tickFormat={date => xTickFormat(date, isMobile)}
       />
     </ChartStyle.Axis>
   );

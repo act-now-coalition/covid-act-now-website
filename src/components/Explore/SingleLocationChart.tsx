@@ -208,7 +208,7 @@ const ExploreChart: React.FC<{
             height={innerHeight}
             xScale={dateScale}
             onMouseOver={onMouseOver}
-            onMouseLeave={hideTooltip}
+            onMouseOut={hideTooltip}
           />
         </Group>
       </svg>

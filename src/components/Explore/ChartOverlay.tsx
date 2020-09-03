@@ -14,8 +14,8 @@ const ChartOverlay: React.FC<{
   height: number;
   xScale: ScaleTime<number, number>;
   onMouseOver: ({ x, y }: { x: number; y: number }) => void;
-  onMouseLeave: () => void;
-}> = ({ width, height, onMouseOver, onMouseLeave }) => {
+  onMouseOut: () => void;
+}> = ({ width, height, onMouseOver, onMouseOut: onMouseLeave }) => {
   const onMouseMove = (event: React.MouseEvent<SVGRectElement, MouseEvent>) => {
     const { x, y } = localPoint(event) || { x: 0, y: 0 };
     onMouseOver({ x, y });
