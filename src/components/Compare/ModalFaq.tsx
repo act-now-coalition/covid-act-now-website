@@ -31,6 +31,7 @@ const ModalFaq = (props: { handleCloseModal: () => void }) => {
             You can think of this as urban or rural, but just keep in mind that
             isn’t exact.
             <br />
+            <br />
             We follow US Census definitions. A Metro Statistical Area (MSA)
             consists of one or more counties that contain a city of 50,000 or
             more inhabitants. We define “metro counties” as counties belonging
@@ -38,13 +39,11 @@ const ModalFaq = (props: { handleCloseModal: () => void }) => {
           </Answer>
           <Question>How are counties “with college” defined?</Question>
           <Answer>
-            You can think of this as urban or rural, but just keep in mind that
-            isn’t exact.
-            <br />
-            We follow US Census definitions. A Metro Statistical Area (MSA)
-            consists of one or more counties that contain a city of 50,000 or
-            more inhabitants. We define “metro counties” as counties belonging
-            to MSAs; “non metro counties” as counties not within an MSA.
+            We wanted to highlight counties where college populations
+            significantly contribute to the local COVID dynamics. Counties with
+            the "college" label are defined as counties in which full-time
+            student enrollment accounts for at least 5% of the total county
+            population.
           </Answer>
           <Question>Why do some counties have missing data?</Question>
           <Answer>
