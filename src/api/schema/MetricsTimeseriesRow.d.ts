@@ -26,9 +26,17 @@ export type Infectionrate = number;
 export type Infectionrateci90 = number;
 export type Icuheadroomratio = number;
 /**
+ * Current number of covid patients in icu.
+ */
+export type Currenticucovid = number;
+/**
  * Method used to determine number of current ICU patients with covid.
  */
 export type Currenticucovidmethod = 'actual' | 'estimated';
+/**
+ * Current number of covid patients in icu.
+ */
+export type Currenticunoncovid = number;
 /**
  * Method used to determine number of current ICU patients without covid.
  */
@@ -55,6 +63,8 @@ export interface MetricsTimeseriesRow {
  * Details about how the ICU Headroom Metric was calculated.
  */
 export interface ICUHeadroomMetricDetails {
+  currentIcuCovid: Currenticucovid;
   currentIcuCovidMethod: Currenticucovidmethod;
+  currentIcuNonCovid: Currenticunoncovid;
   currentIcuNonCovidMethod: Currenticunoncovidmethod;
 }
