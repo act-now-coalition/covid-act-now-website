@@ -2,43 +2,44 @@ import React, { FunctionComponent } from 'react';
 import { curveCardinal } from '@vx/curve';
 import { LinePath } from '@vx/shape';
 import * as Styles from './Explore.style';
-import { ChartType } from './interfaces';
+import { SeriesType, SeriesParams } from './interfaces';
 import { Column } from 'common/models/Projection';
 import BarChart from 'components/Charts/BarChart';
 import { findPointByDate } from './utils';
 
-const SeriesChart: FunctionComponent<{
-  type: ChartType;
+const ChartSeries: FunctionComponent<{
+  type: SeriesType;
   data: Column[];
   x: (d: Column) => number;
   y: (d: Column) => number;
   yMax: number;
   barWidth: number;
   barOpacity?: number;
-}> = ({ type, data, x, y, yMax, barWidth, barOpacity }) => {
+  params?: SeriesParams;
+}> = ({ type, data, x, y, yMax, barWidth, barOpacity, params }) => {
   switch (type) {
-    case ChartType.LINE:
+    case SeriesType.LINE:
       return (
-        <Styles.MainSeriesLine>
+        <Styles.MainSeriesLine {...params}>
           <LinePath data={data} x={x} y={y} curve={curveCardinal} />
         </Styles.MainSeriesLine>
       );
-    case ChartType.BAR:
+    case SeriesType.BAR:
       return (
-        <Styles.BarsSeries barOpacity={barOpacity}>
+        <Styles.BarsSeries barOpacity={barOpacity} {...params}>
           <BarChart data={data} x={x} y={y} yMax={yMax} barWidth={barWidth} />
         </Styles.BarsSeries>
       );
   }
 };
 
-export const LegendMarker: React.FC<{ type: ChartType }> = ({ type }) => {
+export const LegendMarker: React.FC<{ type: SeriesType }> = ({ type }) => {
   // TODO(pablo): Transform into optional parameters
   const width = 12;
   const height = 12;
   const barWidth = 4;
   switch (type) {
-    case ChartType.LINE:
+    case SeriesType.LINE:
       return (
         <svg width={width} height={height}>
           <Styles.MainSeriesLine>
@@ -46,7 +47,7 @@ export const LegendMarker: React.FC<{ type: ChartType }> = ({ type }) => {
           </Styles.MainSeriesLine>
         </svg>
       );
-    case ChartType.BAR:
+    case SeriesType.BAR:
       return (
         <svg width={width} height={height}>
           <Styles.BarsSeries>
@@ -63,7 +64,7 @@ export const LegendMarker: React.FC<{ type: ChartType }> = ({ type }) => {
 };
 
 export const SeriesMarker: React.FC<{
-  type: ChartType;
+  type: SeriesType;
   data: Column[];
   date: Date;
   x: (d: Column) => number;
@@ -77,9 +78,9 @@ export const SeriesMarker: React.FC<{
     return null;
   }
   switch (type) {
-    case ChartType.LINE:
+    case SeriesType.LINE:
       return <Styles.DotMarker cx={x(point)} cy={y(point)} r={6} />;
-    case ChartType.BAR:
+    case SeriesType.BAR:
       return (
         <Styles.BarsSeries barOpacityHover={barOpacityHover}>
           <BarChart
@@ -94,4 +95,4 @@ export const SeriesMarker: React.FC<{
   }
 };
 
-export default SeriesChart;
+export default ChartSeries;

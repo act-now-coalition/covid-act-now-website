@@ -1,4 +1,4 @@
-import React, { useState, FunctionComponent } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { some, uniq } from 'lodash';
 import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -16,12 +16,11 @@ import ShareImageButtonGroup from 'components/ShareButtons';
 import ExploreTabs from './ExploreTabs';
 import ExploreChart from './ExploreChart';
 import Legend from './Legend';
-import { ExploreMetric } from './interfaces';
+import { ExploreMetric, Series } from './interfaces';
 import EmptyChart from './EmptyChart';
 import LocationSelector from './LocationSelector';
 import {
   getMetricLabels,
-  getSeries,
   getMetricByChartId,
   getImageFilename,
   getExportImageUrl,
@@ -29,6 +28,7 @@ import {
   getSocialQuote,
   getLocationNames,
   getAutocompleteLocations,
+  getChartSeries,
 } from './utils';
 import * as Styles from './Explore.style';
 
@@ -40,18 +40,23 @@ const Explore: React.FunctionComponent<{
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const [currentMetric, setCurrentMetric] = useState(
-    (chartId && getMetricByChartId(chartId)) || ExploreMetric.CASES,
-  );
+  const initialMetric =
+    (chartId && getMetricByChartId(chartId)) || ExploreMetric.CASES;
+  const [currentMetric, setCurrentMetric] = useState(initialMetric);
 
   const onChangeTab = (event: React.ChangeEvent<{}>, newMetric: number) => {
     setCurrentMetric(newMetric);
   };
 
   const metricLabels = getMetricLabels();
+  const currentMetricName = metricLabels[currentMetric];
 
-  const currentLocation = findLocationForFips(fips);
-  const autocompleteLocations = getAutocompleteLocations(fips);
+  const [chartSeries, setChartSeries] = useState<Series[]>([]);
+
+  const currentLocation = useMemo(() => findLocationForFips(fips), [fips]);
+  const autocompleteLocations = useMemo(() => getAutocompleteLocations(fips), [
+    fips,
+  ]);
 
   const [selectedLocations, setSelectedLocations] = useState<Location[]>([
     currentLocation,
@@ -61,11 +66,14 @@ const Explore: React.FunctionComponent<{
     // make sure that the current location is always selected
     setSelectedLocations(uniq([currentLocation, ...newLocations]));
   };
-  const currentMetricName = metricLabels[currentMetric];
 
-  const series = getSeries(currentMetric, projection);
+  useEffect(() => {
+    const fetchSeries = () => getChartSeries(currentMetric, selectedLocations);
+    fetchSeries().then(series => setChartSeries(series));
+  }, [selectedLocations, currentMetric]);
 
-  const hasData = some(series, ({ data }) => data.length > 0);
+  const hasData = some(chartSeries, ({ data }) => data.length > 0);
+  const hasMultipleLocations = selectedLocations.length > 1;
 
   const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
   const lastUpdatedDateString =
@@ -107,41 +115,43 @@ const Explore: React.FunctionComponent<{
               onChangeSelectedLocations={onChangeSelectedLocations}
             />
           </Grid>
-          <Grid key="legend" item sm xs={12}>
-            <Legend series={series} />
-          </Grid>
+          {!hasMultipleLocations && (
+            <Grid key="legend" item sm xs={12}>
+              <Legend series={chartSeries} />
+            </Grid>
+          )}
         </Grid>
       </Styles.ChartControlsContainer>
       {hasData ? (
         <Styles.ChartContainer>
-          {/* The width is set to zero while the parent div is rendering */}
+          {/**
+           * The width is set to zero while the parent div is rendering, the
+           * placeholder div below prevents the page from jumping.
+           */}
           <ParentSize>
-            {({ width }) => (
-              <ExploreChart
-                series={series}
-                isMobile={isMobile}
-                width={width}
-                height={400}
-                tooltipSubtext={`in ${locationName}`}
-              />
-            )}
+            {({ width }) =>
+              width > 0 ? (
+                <ExploreChart
+                  series={chartSeries}
+                  isMobile={isMobile}
+                  width={width}
+                  height={400}
+                  tooltipSubtext={`in ${locationName}`}
+                  showLabels={hasMultipleLocations}
+                  marginRight={hasMultipleLocations ? 100 : 10}
+                />
+              ) : (
+                <div style={{ height: 400 }} />
+              )
+            }
           </ParentSize>
         </Styles.ChartContainer>
       ) : (
-        <EmptyChart height={400}>
-          <p>
-            We don't have {currentMetricName} data for {locationName}. Learn
-            more about{' '}
-            <ExternalLink href="https://docs.google.com/document/d/1cd_cEpNiIl1TzUJBvw9sHLbrbUZ2qCxgN32IqVLa3Do/edit">
-              our methodology
-            </ExternalLink>{' '}
-            and our{' '}
-            <ExternalLink href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit">
-              our data sources
-            </ExternalLink>
-            .
-          </p>
-        </EmptyChart>
+        <EmptyChart
+          height={400}
+          metricName={currentMetricName}
+          locationName={locationName}
+        />
       )}
       <DisclaimerWrapper>
         <DisclaimerBody>

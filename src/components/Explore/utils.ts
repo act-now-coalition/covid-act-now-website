@@ -1,35 +1,34 @@
 import moment from 'moment';
 import urlJoin from 'url-join';
 import {
-  max,
-  range,
   deburr,
-  words,
-  isNumber,
   dropRightWhile,
   dropWhile,
+  flatten,
+  isNumber,
+  max,
+  range,
+  words,
 } from 'lodash';
-import { Series } from './interfaces';
+import { schemeCategory10 } from 'd3-scale-chromatic';
+import { fetchProjections } from 'common/utils/model';
+import { Column, Projection, DatasetId } from 'common/models/Projection';
 import {
   findLocationForFips,
   getLocationNames as getAllLocations,
-} from 'common/locations';
-import { Column } from 'common/models/Projection';
-import { Projection, DatasetId } from 'common/models/Projection';
-import { ChartType } from './interfaces';
-import { share_image_url } from 'assets/data/share_images_url.json';
-import {
-  isState,
-  isCounty,
-  belongsToState,
-} from 'components/AutocompleteLocations';
-import {
   getLocationNameForFips,
   getLocationUrlForFips,
   isStateFips,
   findStateByFips,
   Location,
 } from 'common/locations';
+import { share_image_url } from 'assets/data/share_images_url.json';
+import { SeriesType, Series } from './interfaces';
+import {
+  isState,
+  isCounty,
+  belongsToState,
+} from 'components/AutocompleteLocations';
 
 export function getMaxBy<T>(
   series: Series[],
@@ -75,11 +74,24 @@ export function getMetricByChartId(chartId: string): ExploreMetric | undefined {
   }
 }
 
+function getDatasetIdByMetric(metric: ExploreMetric): DatasetId {
+  switch (metric) {
+    case ExploreMetric.CASES:
+      return 'smoothedDailyCases';
+    case ExploreMetric.DEATHS:
+      return 'smoothedDailyDeaths';
+    case ExploreMetric.HOSPITALIZATIONS:
+      return 'smoothedHospitalizations';
+    case ExploreMetric.ICU_HOSPITALIZATIONS:
+      return 'smoothedICUHospitalizations';
+  }
+}
+
 interface SerieDescription {
   label: string;
   tooltipLabel: string;
   datasetId: DatasetId;
-  type: ChartType;
+  type: SeriesType;
 }
 
 interface ExploreMetricDescription {
@@ -99,13 +111,13 @@ export const exploreMetricData: {
         label: 'Cases',
         tooltipLabel: 'cases',
         datasetId: 'rawDailyCases',
-        type: ChartType.BAR,
+        type: SeriesType.BAR,
       },
       {
         label: '7 Day Average',
         tooltipLabel: 'cases',
         datasetId: 'smoothedDailyCases',
-        type: ChartType.LINE,
+        type: SeriesType.LINE,
       },
     ],
   },
@@ -117,13 +129,13 @@ export const exploreMetricData: {
         label: 'Deaths',
         tooltipLabel: 'Deaths',
         datasetId: 'rawDailyDeaths',
-        type: ChartType.BAR,
+        type: SeriesType.BAR,
       },
       {
         label: '7 Day Average',
         tooltipLabel: 'Deaths',
         datasetId: 'smoothedDailyDeaths',
-        type: ChartType.LINE,
+        type: SeriesType.LINE,
       },
     ],
   },
@@ -135,13 +147,13 @@ export const exploreMetricData: {
         label: 'Hospitalizations',
         tooltipLabel: 'Hospitalizations',
         datasetId: 'rawHospitalizations',
-        type: ChartType.BAR,
+        type: SeriesType.BAR,
       },
       {
         label: '7 Day Average',
         tooltipLabel: 'Hospitalizations',
         datasetId: 'smoothedHospitalizations',
-        type: ChartType.LINE,
+        type: SeriesType.LINE,
       },
     ],
   },
@@ -153,13 +165,13 @@ export const exploreMetricData: {
         label: 'ICU Hospitalizations',
         tooltipLabel: 'ICU Hospitalizations',
         datasetId: 'rawICUHospitalizations',
-        type: ChartType.BAR,
+        type: SeriesType.BAR,
       },
       {
         label: '7 Day Average',
         tooltipLabel: 'ICU Hospitalizations',
         datasetId: 'smoothedICUHospitalizations',
-        type: ChartType.LINE,
+        type: SeriesType.LINE,
       },
     ],
   },
@@ -183,7 +195,12 @@ function cleanSeries(data: Column[]) {
   return dropWhile(dropRightWhile(data, missingValue), missingValue);
 }
 
-export function getSeries(
+/**
+ * Returns both the raw and smoothed series for the given metric and
+ * projection. It's used for the single-location Explore chart, which
+ * represents the raw data with bars and smoothed data with a line.
+ */
+export function getAllSeriesForMetric(
   metric: ExploreMetric,
   projection: Projection,
 ): Series[] {
@@ -194,6 +211,29 @@ export function getSeries(
     label: item.label,
     tooltipLabel: item.tooltipLabel,
   }));
+}
+
+/**
+ * Returns the smoothed series for a given metric and projection. It's
+ * used for the multiple-locations Explore chart. It receives a color
+ * so we can differentiate the lines in the chart
+ */
+function getAveragedSeriesForMetric(
+  metric: ExploreMetric,
+  projection: Projection,
+  color: string,
+): Series {
+  const datasetId = getDatasetIdByMetric(metric);
+  const location = findLocationForFips(projection.fips);
+  return {
+    data: cleanSeries(projection.getDataset(datasetId)),
+    type: SeriesType.LINE,
+    params: {
+      stroke: color,
+    },
+    label: getLocationLabel(location),
+    tooltipLabel: '',
+  };
 }
 
 export function getTitle(metric: ExploreMetric) {
@@ -324,4 +364,38 @@ export function getAutocompleteLocations(locationFips: string) {
     : allLocations
         .filter(isCounty)
         .filter(location => belongsToState(location, stateFips));
+}
+
+/**
+ * An array of 10 colors designed for categorical data. See
+ * https://github.com/d3/d3-scale-chromatic for additional options
+ */
+const SERIES_COLORS = schemeCategory10;
+
+const getCountyForLocation = (location: Location) =>
+  isCounty(location) ? location : undefined;
+
+export function getChartSeries(
+  metric: ExploreMetric,
+  locations: Location[],
+): Promise<Series[]> {
+  if (locations.length === 1) {
+    return fetchProjections(
+      locations[0].state_code,
+      getCountyForLocation(locations[0]),
+    ).then(projections => getAllSeriesForMetric(metric, projections.primary));
+  } else {
+    return Promise.all(
+      locations.map((location, i) => {
+        const county = getCountyForLocation(location);
+        return fetchProjections(location.state_code, county).then(projections =>
+          getAveragedSeriesForMetric(
+            metric,
+            projections.primary,
+            SERIES_COLORS[i % SERIES_COLORS.length],
+          ),
+        );
+      }),
+    ).then(series => flatten(series));
+  }
 }
