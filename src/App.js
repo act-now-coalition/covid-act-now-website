@@ -42,6 +42,8 @@ export default function App() {
             <Switch>
               <Route exact path="/" component={HomePage} />
               <Route exact path="/alert_signup" component={HomePage} />
+              <Route exact path="/compare" component={HomePage} />
+
               <Route
                 exact
                 path="/alert_unsubscribe"
@@ -66,12 +68,22 @@ export default function App() {
               />
               <Route
                 exact
+                path="/us/:stateId/compare"
+                component={LocationPage}
+              />
+              <Route
+                exact
                 path="/us/:stateId/county/:countyId/chart/:chartId"
                 component={LocationPage}
               />
               <Route
                 exact
                 path="/us/:stateId/county/:countyId/explore/:chartId"
+                component={LocationPage}
+              />
+              <Route
+                exact
+                path="/us/:stateId/county/:countyId/compare"
                 component={LocationPage}
               />
               {/* /state/ routes are deprecated but still supported. */}
