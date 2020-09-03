@@ -9,6 +9,7 @@ export const Wrapper = styled.div`
   margin: 1.5rem;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   padding: 1rem;
+  max-height: 90vh;
 
   @media (min-width: 600px) {
     padding: 1.5rem;
@@ -24,8 +25,8 @@ export const Wrapper = styled.div`
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  max-height: 80vh;
   overflow-y: auto;
+  max-height: 100%;
 `;
 
 export const Header = styled(Typography)`
