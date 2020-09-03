@@ -3,28 +3,29 @@ import moment from 'moment';
 import { isNumber } from 'lodash';
 import { AxisLeft, AxisBottom } from '@vx/axis';
 import { GridRows, GridColumns } from '@vx/grid';
-import { Line } from '@vx/shape';
 import { Group } from '@vx/group';
 import { scaleTime, scaleLinear } from '@vx/scale';
 import { useTooltip } from '@vx/tooltip';
-import { formatInteger, formatDecimal } from 'common/utils';
+import { formatDecimal } from 'common/utils';
 import { Column } from 'common/models/Projection';
 import * as ChartStyle from 'components/Charts/Charts.style';
 import { Tooltip, RectClipGroup } from 'components/Charts';
 import { Series } from './interfaces';
 import ChartSeries, { SeriesMarker } from './SeriesChart';
-import ChartOverlay from './ChartOverlay';
-import { getMaxBy, getTimeAxisTicks, findPointByDate, weeksAgo } from './utils';
+import { getMaxBy, getTimeAxisTicks, weeksAgo } from './utils';
 import * as Styles from './Explore.style';
 import { COLOR_MAP } from 'common/colors';
 import { ScreenshotReady } from 'components/Screenshot';
 import TodayMarker from './TodayMarker';
+import SeriesTooltipOverlay, { HoverPointInfo } from './SeriesTooltipOverlay';
+import { Line } from '@vx/shape';
 
 const getDate = (d: Column) => new Date(d.x);
 const getY = (d: Column) => d.y;
 const daysBetween = (dateFrom: Date, dateTo: Date) =>
   moment(dateTo).diff(dateFrom, 'days');
 
+// TODO: Move to its own component
 const DateMarker: React.FC<{ left: number; date: Date }> = ({ left, date }) => {
   // Do not show the date marker for dates in the future
   return new Date() < date ? null : (
@@ -34,69 +35,82 @@ const DateMarker: React.FC<{ left: number; date: Date }> = ({ left, date }) => {
   );
 };
 
-const ExploreTooltip: React.FC<{
-  date: Date;
-  series: Series[];
-  left: (d: Column) => number;
-  top: (d: Column) => number;
-  subtext: string;
-}> = ({ series, left, top, date, subtext }) => {
-  const [seriesRaw, seriesSmooth] = series;
-  const pointSmooth = findPointByDate(seriesSmooth.data, date);
-  const pointRaw = findPointByDate(seriesRaw.data, date);
+function getSeriesOpacity(
+  currentSeriesIndex: number,
+  tooltipOpen: boolean,
+  tooltipData?: HoverPointInfo,
+) {
+  if (tooltipOpen && tooltipData) {
+    return tooltipData.seriesIndex === currentSeriesIndex ? 1 : 0.3;
+  } else {
+    return 1;
+  }
+}
 
-  return pointSmooth && pointRaw ? (
+const PointTooltip: React.FC<{
+  top: number;
+  left: number;
+  series: Series[];
+  pointInfo: HoverPointInfo;
+}> = ({ top, left, series, pointInfo }) => {
+  const { seriesIndex } = pointInfo;
+  const currentSeries = isNumber(seriesIndex) ? series[seriesIndex] : null;
+  return (
     <Tooltip
       width={'180px'}
-      top={top(pointSmooth)}
-      left={left(pointSmooth)}
-      title={moment(date).format('MMM D, YYYY')}
+      top={top}
+      left={left}
+      title={moment(pointInfo.x).format('MMM D, YYYY')}
     >
       <Styles.TooltipSubtitle>
-        {`${seriesRaw.tooltipLabel}: ${
-          isNumber(pointRaw.y) ? formatInteger(pointRaw.y) : '-'
-        }`}
+        {currentSeries && currentSeries.tooltipLabel}
       </Styles.TooltipSubtitle>
       <Styles.TooltipMetric>
-        {isNumber(pointSmooth.y) ? formatDecimal(pointSmooth.y, 1) : '-'}
+        {isNumber(pointInfo.y) ? formatDecimal(pointInfo.y, 1) : '-'}
       </Styles.TooltipMetric>
-      <Styles.TooltipSubtitle>7-day avg.</Styles.TooltipSubtitle>
-      <Styles.TooltipLocation>{subtext}</Styles.TooltipLocation>
+      <Styles.TooltipLocation>
+        {currentSeries && `in ${currentSeries.label}`}
+      </Styles.TooltipLocation>
     </Tooltip>
-  ) : null;
+  );
 };
 
-/**
- * This component renders the highlighted data on mouse over. Note that we don't
- * actually highlight existing elements in the SVG, we render the markers on top
- * of them, which is more performant and flexible, as just highlighting is not
- * always enough.
- */
-const DataHoverMarkers: React.FC<{
+const HoverDataMarker: React.FC<{
   series: Series[];
-  date: Date;
-  x: (d: Column) => number;
-  y: (d: Column) => number;
-  yMax: number;
-  barWidth: number;
-  barOpacityHover?: number;
-}> = ({ series, x, y, date, yMax, barWidth, barOpacityHover }) => (
-  <Fragment>
-    {series.map(({ label, type, data }) => (
-      <SeriesMarker
-        key={`series-marker-${label}`}
-        type={type}
-        data={data}
-        x={x}
-        y={y}
-        date={date}
-        yMax={yMax}
-        barWidth={barWidth}
-        barOpacityHover={barOpacityHover}
-      />
-    ))}
-  </Fragment>
-);
+  pointInfo: HoverPointInfo;
+  x: (p: Column) => number;
+  y: (p: Column) => number;
+  height: number;
+}> = ({ series, pointInfo, height, x, y }) => {
+  const { seriesIndex, pointIndex } = pointInfo;
+  const currentSeries = isNumber(seriesIndex) ? series[seriesIndex] : null;
+  const currentPoint =
+    isNumber(pointIndex) && currentSeries
+      ? currentSeries.data[pointIndex]
+      : null;
+  const x0 = x(pointInfo);
+  return (
+    <Fragment>
+      <Styles.TrackerLine>
+        <Line x1={x0} x2={x0} y1={0} y2={height} />
+      </Styles.TrackerLine>
+      {currentSeries && currentPoint && (
+        <SeriesMarker
+          key="series-marker"
+          type={currentSeries.type}
+          data={[currentPoint]}
+          x={x}
+          y={y}
+          date={new Date(currentPoint.x)}
+          yMax={height}
+          barWidth={0}
+          barOpacityHover={0}
+          params={{ fill: currentSeries?.params?.fill }}
+        />
+      )}
+    </Fragment>
+  );
+};
 
 const ExploreChart: React.FC<{
   width: number;
@@ -110,7 +124,6 @@ const ExploreChart: React.FC<{
   marginRight?: number;
   barOpacity?: number;
   barOpacityHover?: number;
-  showLabels?: boolean;
 }> = ({
   width,
   height,
@@ -120,14 +133,13 @@ const ExploreChart: React.FC<{
   marginTop = 10,
   marginBottom = 30,
   marginLeft = 60,
-  marginRight = 10,
+  marginRight = 100,
   barOpacity,
   barOpacityHover,
-  showLabels = false,
 }) => {
   const dateFrom = new Date('2020-03-01');
   const today = new Date();
-  const dateTo = moment(today).add(5, 'days').toDate();
+  const dateTo = today;
   const numDays = daysBetween(dateFrom, dateTo);
   const maxY = getMaxBy<number>(series, getY, 1);
 
@@ -150,19 +162,16 @@ const ExploreChart: React.FC<{
     range: [innerHeight, 0],
   });
 
-  // const { tooltipOpen, tooltipData, hideTooltip, showTooltip } = useTooltip<{
-  //   date: Date;
-  // }>();
+  const { tooltipOpen, tooltipData, hideTooltip, showTooltip } = useTooltip<
+    HoverPointInfo
+  >();
 
-  // const onMouseOver = useCallback(
-  //   ({ x }: { x: number }) => {
-  //     const date = dateScale.invert(x - marginLeft);
-  //     showTooltip({
-  //       tooltipData: { date },
-  //     });
-  //   },
-  //   [showTooltip, dateScale, marginLeft],
-  // );
+  const onMouseOver = useCallback(
+    (pointInfo: HoverPointInfo) => {
+      showTooltip({ tooltipData: pointInfo });
+    },
+    [showTooltip],
+  );
 
   const getXPosition = (d: Column) => dateScale(getDate(d)) || 0;
   const getYPosition = (d: Column) => yScale(getY(d));
@@ -179,36 +188,62 @@ const ExploreChart: React.FC<{
             <GridRows<number> scale={yScale} width={innerWidth} />
           </ChartStyle.LineGrid>
           <RectClipGroup width={innerWidth} height={innerHeight}>
-            {series.map(({ label, data, type, params }) => (
-              <ChartSeries
-                key={`series-chart-${label}`}
-                data={data}
-                x={getXPosition}
-                y={getYPosition}
-                type={type}
-                yMax={innerHeight}
-                barWidth={barWidth}
-                barOpacity={barOpacity}
-                params={params}
-              />
-            ))}
+            {series.map(({ label, data, type, params }, i) => {
+              const seriesParams = {
+                ...params,
+                strokeOpacity: getSeriesOpacity(i, tooltipOpen, tooltipData),
+              };
+              return (
+                <ChartSeries
+                  key={`series-chart-${label}`}
+                  data={data}
+                  x={getXPosition}
+                  y={getYPosition}
+                  type={type}
+                  yMax={innerHeight}
+                  barWidth={barWidth}
+                  barOpacity={barOpacity}
+                  params={seriesParams}
+                />
+              );
+            })}
           </RectClipGroup>
-          {showLabels &&
-            series.map(({ label, data, params }) => (
-              <Styles.LineLabel
-                key={`label-${label}`}
-                x={innerWidth}
-                y={getYPosition(data[data.length - 1])}
-                fill={params?.stroke || '#000'}
-              >
-                {label}
-              </Styles.LineLabel>
-            ))}
           <TodayMarker
             height={innerHeight}
             dateScale={dateScale}
             strokeColor={axisGridColor}
           />
+          {tooltipOpen && tooltipData && (
+            <HoverDataMarker
+              series={series}
+              pointInfo={tooltipData}
+              x={getXPosition}
+              y={getYPosition}
+              height={innerHeight}
+            />
+          )}
+          <SeriesTooltipOverlay
+            series={series}
+            width={innerWidth}
+            height={innerHeight}
+            x={getXPosition}
+            y={getYPosition}
+            onMouseOver={onMouseOver}
+            onMouseOut={hideTooltip}
+          />
+          {series.map(({ label, data, params }, i) => {
+            return (
+              <Styles.LineLabel
+                key={`label-${label}`}
+                x={innerWidth}
+                y={getYPosition(data[data.length - 1])}
+                fill={params?.stroke || '#000'}
+                fillOpacity={getSeriesOpacity(i, tooltipOpen, tooltipData)}
+              >
+                {label}
+              </Styles.LineLabel>
+            );
+          })}
           <ChartStyle.Axis exploreStroke={axisGridColor}>
             <AxisLeft scale={yScale} />
             <AxisBottom
@@ -221,6 +256,20 @@ const ExploreChart: React.FC<{
         </Group>
       </svg>
       {width > 0 && <ScreenshotReady />}
+      {tooltipOpen && tooltipData && (
+        <Fragment>
+          <PointTooltip
+            series={series}
+            pointInfo={tooltipData}
+            left={getXPosition(tooltipData) + marginLeft}
+            top={getYPosition(tooltipData) + marginTop}
+          />
+          <DateMarker
+            left={getXPosition(tooltipData) + marginLeft}
+            date={new Date(tooltipData.x)}
+          />
+        </Fragment>
+      )}
     </Styles.PositionRelative>
   );
 };

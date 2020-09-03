@@ -230,9 +230,10 @@ function getAveragedSeriesForMetric(
     type: SeriesType.LINE,
     params: {
       stroke: color,
+      fill: color,
     },
     label: getLocationLabel(location),
-    tooltipLabel: '',
+    tooltipLabel: exploreMetricData[metric].title,
   };
 }
 

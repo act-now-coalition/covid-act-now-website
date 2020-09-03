@@ -145,6 +145,14 @@ export const GridLines = styled.g`
   }
 `;
 
+export const TrackerLine = styled.g`
+  line {
+    stroke: #000;
+    stroke-width: 2px;
+    stroke-dasharray: 3, 3;
+  }
+`;
+
 export const EmptyChart = styled(ChartContainer)`
   /* Super centered: https://web.dev/one-line-layouts */
   display: grid;
@@ -193,8 +201,8 @@ export const DateMarker = styled.div`
 `;
 
 export const DotMarker = styled.circle`
-  fill: black;
-  stroke: white;
+  fill: ${props => props.fill || 'black'};
+  stroke: ${props => props.stroke || 'white'};
   stroke-width: 4px;
 `;
 

@@ -109,7 +109,6 @@ const ExploreChart: React.FC<{
   marginRight?: number;
   barOpacity?: number;
   barOpacityHover?: number;
-  showLabels?: boolean;
 }> = ({
   width,
   height,
@@ -122,7 +121,6 @@ const ExploreChart: React.FC<{
   marginRight = 10,
   barOpacity,
   barOpacityHover,
-  showLabels = false,
 }) => {
   const dateFrom = new Date('2020-03-01');
   const today = new Date();
@@ -197,18 +195,6 @@ const ExploreChart: React.FC<{
             dateScale={dateScale}
             strokeColor={axisGridColor}
           />
-          {showLabels &&
-            series.map(({ label, data, params }) => (
-              <Styles.LineLabel
-                key={`label-${label}`}
-                x={innerWidth}
-                y={getYPosition(data[data.length - 1])}
-                fill={params?.stroke || '#000'}
-              >
-                {label}
-              </Styles.LineLabel>
-            ))}
-
           {tooltipOpen && tooltipData && (
             <DataHoverMarkers
               x={getXPosition}

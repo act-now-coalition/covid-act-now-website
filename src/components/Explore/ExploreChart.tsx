@@ -16,7 +16,6 @@ const ExploreChart: React.FC<{
   marginRight?: number;
   barOpacity?: number;
   barOpacityHover?: number;
-  showLabels?: boolean;
 }> = ({ hasMultipleLocations, ...otherProps }) =>
   hasMultipleLocations ? (
     <MultipleLocationsChart {...otherProps} />

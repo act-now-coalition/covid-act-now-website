@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
 import { flatten } from 'lodash';
 import { voronoi, VoronoiPolygon } from '@vx/voronoi';
+import { Group } from '@vx/group';
 import { Series } from './interfaces';
 import { Column } from 'common/models/Projection';
-
-interface HoverPointInfo {
+export interface HoverPointInfo {
   x: number;
   y: number;
   seriesIndex: number;
@@ -24,7 +24,9 @@ const SeriesTooltipOverlay: React.FC<{
   height: number;
   x: (p: Column) => number;
   y: (p: Column) => number;
-}> = ({ series, width, height, x, y }) => {
+  onMouseOver: (pointInfo: HoverPointInfo) => void;
+  onMouseOut: () => void;
+}> = ({ series, width, height, x, y, onMouseOver, onMouseOut }) => {
   const hoverPoints = getHoverPoints(series);
   const hoverPolygons = useMemo(() => {
     const voronoiDiagram = voronoi<HoverPointInfo>({ x, y, width, height })(
@@ -33,16 +35,17 @@ const SeriesTooltipOverlay: React.FC<{
     return voronoiDiagram.polygons();
   }, [hoverPoints, width, height, x, y]);
   return (
-    <g>
+    <Group>
       {hoverPolygons.map((polygon, i) => (
         <VoronoiPolygon
           key={`hover-polygon-${i}`}
           polygon={polygon}
-          fillOpacity={0.1}
-          stroke="white"
+          fillOpacity={0}
+          onMouseEnter={e => onMouseOver(polygon.data)}
+          onMouseOut={onMouseOut}
         />
       ))}
-    </g>
+    </Group>
   );
 };
 
