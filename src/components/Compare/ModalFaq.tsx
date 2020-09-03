@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import {
   Wrapper,
@@ -19,6 +19,20 @@ const BodyScrollLock = createGlobalStyle`
 `;
 
 const ModalFaq = (props: { handleCloseModal: () => void }) => {
+  useEffect(() => {
+    const handleEsc = (e: any) => {
+      if (e.keyCode === 27) {
+        props.handleCloseModal();
+      }
+    };
+
+    window.addEventListener('keydown', handleEsc);
+
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+    };
+  }, [props, props.handleCloseModal]);
+
   return (
     <Fragment>
       <BodyScrollLock />
