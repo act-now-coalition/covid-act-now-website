@@ -16,11 +16,22 @@ const ExploreChart: React.FC<{
   marginRight?: number;
   barOpacity?: number;
   barOpacityHover?: number;
-}> = ({ hasMultipleLocations, ...otherProps }) =>
+}> = ({
+  hasMultipleLocations,
+  barOpacity,
+  barOpacityHover,
+  tooltipSubtext,
+  ...otherProps
+}) =>
   hasMultipleLocations ? (
     <MultipleLocationsChart {...otherProps} />
   ) : (
-    <SingleLocationChart {...otherProps} />
+    <SingleLocationChart
+      barOpacity={barOpacity}
+      barOpacityHover={barOpacityHover}
+      tooltipSubtext={tooltipSubtext}
+      {...otherProps}
+    />
   );
 
 export default ExploreChart;

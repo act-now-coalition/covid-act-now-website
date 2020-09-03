@@ -1,39 +1,30 @@
 import React, { useCallback, Fragment } from 'react';
 import moment from 'moment';
 import { isNumber } from 'lodash';
-import { AxisLeft, AxisBottom } from '@vx/axis';
-import { GridRows, GridColumns } from '@vx/grid';
 import { Group } from '@vx/group';
 import { scaleTime, scaleLinear } from '@vx/scale';
 import { useTooltip } from '@vx/tooltip';
 import { formatInteger, formatDecimal } from 'common/utils';
 import { Column } from 'common/models/Projection';
-import * as ChartStyle from 'components/Charts/Charts.style';
 import { Tooltip, RectClipGroup } from 'components/Charts';
 import { Series } from './interfaces';
 import ChartSeries, { SeriesMarker } from './SeriesChart';
 import ChartOverlay from './ChartOverlay';
-import { getMaxBy, getTimeAxisTicks, findPointByDate, weeksAgo } from './utils';
+import { getMaxBy, findPointByDate } from './utils';
 import * as Styles from './Explore.style';
 import { COLOR_MAP } from 'common/colors';
 import { ScreenshotReady } from 'components/Screenshot';
 import TodayMarker from './TodayMarker';
+import DateMarker from './DateMarker';
+import GridLines from './GridLines';
+import Axes from './Axes';
 
 const getDate = (d: Column) => new Date(d.x);
 const getY = (d: Column) => d.y;
 const daysBetween = (dateFrom: Date, dateTo: Date) =>
   moment(dateTo).diff(dateFrom, 'days');
 
-const DateMarker: React.FC<{ left: number; date: Date }> = ({ left, date }) => {
-  // Do not show the date marker for dates in the future
-  return new Date() < date ? null : (
-    <Styles.DateMarker style={{ left }}>
-      {weeksAgo(date, new Date())}
-    </Styles.DateMarker>
-  );
-};
-
-const ExploreTooltip: React.FC<{
+const SingleLocationTooltip: React.FC<{
   date: Date;
   series: Series[];
   left: (d: Column) => number;
@@ -124,7 +115,7 @@ const ExploreChart: React.FC<{
 }) => {
   const dateFrom = new Date('2020-03-01');
   const today = new Date();
-  const dateTo = moment(today).add(5, 'days').toDate();
+  const dateTo = today;
   const numDays = daysBetween(dateFrom, dateTo);
   const maxY = getMaxBy<number>(series, getY, 1);
 
@@ -135,11 +126,7 @@ const ExploreChart: React.FC<{
     domain: [dateFrom, dateTo],
     range: [0, innerWidth],
   });
-  const timeTicks = getTimeAxisTicks(dateFrom, dateTo);
-  // We remove the last tick to make room for the Today marker
-  const xTicks = timeTicks.slice(0, timeTicks.length - 1);
-  const timeTickFormat = isMobile ? 'MMM' : 'MMMM D';
-  const xTickFormat = (date: Date) => moment(date).format(timeTickFormat);
+
   const barWidth = 0.8 * (innerWidth / numDays);
 
   const yScale = scaleLinear({
@@ -171,10 +158,27 @@ const ExploreChart: React.FC<{
     <Styles.PositionRelative style={{ height }}>
       <svg width={width} height={height}>
         <Group key="chart-container" top={marginTop} left={marginLeft}>
-          <ChartStyle.LineGrid exploreStroke={axisGridColor}>
-            <GridColumns<Date> scale={dateScale} height={innerHeight} />
-            <GridRows<number> scale={yScale} width={innerWidth} />
-          </ChartStyle.LineGrid>
+          <GridLines
+            width={innerWidth}
+            height={innerHeight}
+            strokeColor={axisGridColor}
+            dateScale={dateScale}
+            yScale={yScale}
+          />
+          <Axes
+            height={innerHeight}
+            dateScale={dateScale}
+            dateFrom={dateFrom}
+            dateTo={dateTo}
+            yScale={yScale}
+            isMobile={isMobile}
+            strokeColor={axisGridColor}
+          />
+          <TodayMarker
+            height={innerHeight}
+            dateScale={dateScale}
+            strokeColor={axisGridColor}
+          />
           <RectClipGroup width={innerWidth} height={innerHeight}>
             {series.map(({ label, data, type, params }) => (
               <ChartSeries
@@ -190,11 +194,6 @@ const ExploreChart: React.FC<{
               />
             ))}
           </RectClipGroup>
-          <TodayMarker
-            height={innerHeight}
-            dateScale={dateScale}
-            strokeColor={axisGridColor}
-          />
           {tooltipOpen && tooltipData && (
             <DataHoverMarkers
               x={getXPosition}
@@ -213,31 +212,22 @@ const ExploreChart: React.FC<{
             onMouseOver={onMouseOver}
             onMouseLeave={hideTooltip}
           />
-          <ChartStyle.Axis exploreStroke={axisGridColor}>
-            <AxisLeft scale={yScale} />
-            <AxisBottom
-              top={innerHeight}
-              scale={dateScale}
-              tickValues={xTicks}
-              tickFormat={xTickFormat}
-            />
-          </ChartStyle.Axis>
         </Group>
       </svg>
       {tooltipOpen && tooltipData && (
-        <ExploreTooltip
-          left={p => getXPosition(p) + marginLeft}
-          top={p => getYPosition(p) + marginTop}
-          date={tooltipData.date}
-          series={series}
-          subtext={tooltipSubtext}
-        />
-      )}
-      {tooltipOpen && tooltipData && (
-        <DateMarker
-          left={dateScale(tooltipData.date) + marginLeft}
-          date={tooltipData.date}
-        />
+        <Fragment>
+          <SingleLocationTooltip
+            left={p => getXPosition(p) + marginLeft}
+            top={p => getYPosition(p) + marginTop}
+            date={tooltipData.date}
+            series={series}
+            subtext={tooltipSubtext}
+          />
+          <DateMarker
+            left={dateScale(tooltipData.date) + marginLeft}
+            date={tooltipData.date}
+          />
+        </Fragment>
       )}
       {width > 0 && <ScreenshotReady />}
     </Styles.PositionRelative>
