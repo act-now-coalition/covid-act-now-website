@@ -367,9 +367,8 @@ export function getAutocompleteLocations(locationFips: string) {
 }
 
 /**
- * An array of 12 colors paired by hue (light, dark).
- *
- * https://github.com/d3/d3-scale-chromatic#schemePaired
+ * An array of 10 colors designed for categorical data. See
+ * https://github.com/d3/d3-scale-chromatic for additional options
  */
 const SERIES_COLORS = schemeCategory10;
 
