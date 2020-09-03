@@ -12,7 +12,7 @@ import { Column } from 'common/models/Projection';
 import * as ChartStyle from 'components/Charts/Charts.style';
 import { Tooltip, RectClipGroup } from 'components/Charts';
 import { Series } from './interfaces';
-import SeriesChart, { SeriesMarker } from './SeriesChart';
+import ChartSeries, { SeriesMarker } from './SeriesChart';
 import ChartOverlay from './ChartOverlay';
 import { getMaxBy, getTimeAxisTicks, findPointByDate, weeksAgo } from './utils';
 import * as Styles from './Explore.style';
@@ -179,7 +179,7 @@ const ExploreChart: React.FC<{
           </ChartStyle.LineGrid>
           <RectClipGroup width={innerWidth} height={innerHeight}>
             {series.map(({ label, data, type, params }) => (
-              <SeriesChart
+              <ChartSeries
                 key={`series-chart-${label}`}
                 data={data}
                 x={getXPosition}

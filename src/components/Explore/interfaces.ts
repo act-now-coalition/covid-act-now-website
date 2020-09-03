@@ -1,20 +1,20 @@
 import { Column } from 'common/models/Projection';
 
-export enum ChartType {
+export enum SeriesType {
   LINE,
   BAR,
 }
 
-export interface ChartParams {
+export interface SeriesParams {
   stroke?: string;
 }
 
 export interface Series {
   data: Column[];
-  type: ChartType;
+  type: SeriesType;
   label: string;
   tooltipLabel: string;
-  params?: ChartParams;
+  params?: SeriesParams;
 }
 
 export enum ExploreMetric {

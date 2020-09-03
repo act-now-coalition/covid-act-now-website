@@ -10,6 +10,7 @@ import {
   range,
   words,
 } from 'lodash';
+import { schemeCategory10 } from 'd3-scale-chromatic';
 import { fetchProjections } from 'common/utils/model';
 import { Column, Projection, DatasetId } from 'common/models/Projection';
 import {
@@ -22,7 +23,7 @@ import {
   Location,
 } from 'common/locations';
 import { share_image_url } from 'assets/data/share_images_url.json';
-import { ChartType, Series } from './interfaces';
+import { SeriesType, Series } from './interfaces';
 import {
   isState,
   isCounty,
@@ -90,7 +91,7 @@ interface SerieDescription {
   label: string;
   tooltipLabel: string;
   datasetId: DatasetId;
-  type: ChartType;
+  type: SeriesType;
 }
 
 interface ExploreMetricDescription {
@@ -110,13 +111,13 @@ export const exploreMetricData: {
         label: 'Cases',
         tooltipLabel: 'cases',
         datasetId: 'rawDailyCases',
-        type: ChartType.BAR,
+        type: SeriesType.BAR,
       },
       {
         label: '7 Day Average',
         tooltipLabel: 'cases',
         datasetId: 'smoothedDailyCases',
-        type: ChartType.LINE,
+        type: SeriesType.LINE,
       },
     ],
   },
@@ -128,13 +129,13 @@ export const exploreMetricData: {
         label: 'Deaths',
         tooltipLabel: 'Deaths',
         datasetId: 'rawDailyDeaths',
-        type: ChartType.BAR,
+        type: SeriesType.BAR,
       },
       {
         label: '7 Day Average',
         tooltipLabel: 'Deaths',
         datasetId: 'smoothedDailyDeaths',
-        type: ChartType.LINE,
+        type: SeriesType.LINE,
       },
     ],
   },
@@ -146,13 +147,13 @@ export const exploreMetricData: {
         label: 'Hospitalizations',
         tooltipLabel: 'Hospitalizations',
         datasetId: 'rawHospitalizations',
-        type: ChartType.BAR,
+        type: SeriesType.BAR,
       },
       {
         label: '7 Day Average',
         tooltipLabel: 'Hospitalizations',
         datasetId: 'smoothedHospitalizations',
-        type: ChartType.LINE,
+        type: SeriesType.LINE,
       },
     ],
   },
@@ -164,13 +165,13 @@ export const exploreMetricData: {
         label: 'ICU Hospitalizations',
         tooltipLabel: 'ICU Hospitalizations',
         datasetId: 'rawICUHospitalizations',
-        type: ChartType.BAR,
+        type: SeriesType.BAR,
       },
       {
         label: '7 Day Average',
         tooltipLabel: 'ICU Hospitalizations',
         datasetId: 'smoothedICUHospitalizations',
-        type: ChartType.LINE,
+        type: SeriesType.LINE,
       },
     ],
   },
@@ -194,7 +195,12 @@ function cleanSeries(data: Column[]) {
   return dropWhile(dropRightWhile(data, missingValue), missingValue);
 }
 
-export function getSeries(
+/**
+ * Returns both the raw and smoothed series for the given metric and
+ * projection. It's used for the single-location Explore chart, which
+ * represents the raw data with bars and smoothed data with a line.
+ */
+export function getAllSeriesForMetric(
   metric: ExploreMetric,
   projection: Projection,
 ): Series[] {
@@ -205,6 +211,29 @@ export function getSeries(
     label: item.label,
     tooltipLabel: item.tooltipLabel,
   }));
+}
+
+/**
+ * Returns the smoothed series for a given metric and projection. It's
+ * used for the multiple-locations Explore chart. It receives a color
+ * so we can differentiate the lines in the chart
+ */
+function getAveragedSeriesForMetric(
+  metric: ExploreMetric,
+  projection: Projection,
+  color: string,
+): Series {
+  const datasetId = getDatasetIdByMetric(metric);
+  const location = findLocationForFips(projection.fips);
+  return {
+    data: cleanSeries(projection.getDataset(datasetId)),
+    type: SeriesType.LINE,
+    params: {
+      stroke: color,
+    },
+    label: getLocationLabel(location),
+    tooltipLabel: '',
+  };
 }
 
 export function getTitle(metric: ExploreMetric) {
@@ -337,52 +366,35 @@ export function getAutocompleteLocations(locationFips: string) {
         .filter(location => belongsToState(location, stateFips));
 }
 
-const SERIES_COLORS = [
-  '#1f77b4',
-  '#ff7f0e',
-  '#2ca02c',
-  '#d62728',
-  '#9467bd',
-  '#8c564b',
-  '#e377c2',
-  '#7f7f7f',
-  '#bcbd22',
-  '#17becf',
-];
-
-function getSmoothedSeries(
-  metric: ExploreMetric,
-  projection: Projection,
-  color: string,
-): Series {
-  const datasetId = getDatasetIdByMetric(metric);
-  const location = findLocationForFips(projection.fips);
-  return {
-    data: cleanSeries(projection.getDataset(datasetId)),
-    type: ChartType.LINE,
-    params: {
-      stroke: color,
-    },
-    label: getLocationLabel(location),
-    tooltipLabel: '',
-  };
-}
+/**
+ * An array of 12 colors paired by hue (light, dark).
+ *
+ * https://github.com/d3/d3-scale-chromatic#schemePaired
+ */
+const SERIES_COLORS = schemeCategory10;
 
 const getCountyForLocation = (location: Location) =>
   isCounty(location) ? location : undefined;
 
-export function getChartSeries(metric: ExploreMetric, locations: Location[]) {
+export function getChartSeries(
+  metric: ExploreMetric,
+  locations: Location[],
+): Promise<Series[]> {
   if (locations.length === 1) {
     return fetchProjections(
       locations[0].state_code,
       getCountyForLocation(locations[0]),
-    ).then(projections => getSeries(metric, projections.primary));
+    ).then(projections => getAllSeriesForMetric(metric, projections.primary));
   } else {
     return Promise.all(
       locations.map((location, i) => {
         const county = getCountyForLocation(location);
         return fetchProjections(location.state_code, county).then(projections =>
-          getSmoothedSeries(metric, projections.primary, SERIES_COLORS[i % 10]),
+          getAveragedSeriesForMetric(
+            metric,
+            projections.primary,
+            SERIES_COLORS[i % 10],
+          ),
         );
       }),
     ).then(series => flatten(series));
