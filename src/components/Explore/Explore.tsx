@@ -95,6 +95,7 @@ const Explore: React.FunctionComponent<{
               url={getChartUrl(fips, currentMetric)}
               quote={getSocialQuote(fips, currentMetric)}
               hashtags={['COVIDActNow']}
+              disabled={hasMultipleLocations}
             />
           </Styles.ShareBlock>
         </Grid>
