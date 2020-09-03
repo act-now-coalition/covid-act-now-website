@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, TableBody } from '@material-ui/core';
 import { Metric } from 'common/metric';
-import { RankedLocationSummary } from 'common/utils/compare';
+import { RankedLocationSummary, GeoScopeFilter } from 'common/utils/compare';
 import CompareTableRow from './CompareTableRow';
 import HeaderCell from './HeaderCell';
 import * as Styles from './LocationTable.style';
@@ -17,12 +17,14 @@ const LocationTableHead: React.FunctionComponent<{
   sorter: number;
   arrowColorSelected: string;
   arrowColorNotSelected: string;
-  firstHeaderName: string;
+  firstColumnHeader: string;
   metrics: Metric[];
   isModal: boolean;
   stateName?: string;
   setSortByPopulation: React.Dispatch<React.SetStateAction<boolean>>;
   sortByPopulation: boolean;
+  allCountiesView: boolean;
+  isHomepage?: boolean;
 }> = ({
   setSorter,
   setSortDescending,
@@ -30,12 +32,14 @@ const LocationTableHead: React.FunctionComponent<{
   sorter,
   arrowColorSelected,
   arrowColorNotSelected,
-  firstHeaderName,
+  firstColumnHeader,
   metrics,
   isModal,
   stateName,
   setSortByPopulation,
   sortByPopulation,
+  allCountiesView,
+  isHomepage,
 }) => {
   const onPopulationClick = () => {
     if (sortByPopulation) {
@@ -45,6 +49,9 @@ const LocationTableHead: React.FunctionComponent<{
       setSortDescending(true);
     }
   };
+
+  const modalLocationColumnHeader =
+    allCountiesView && !isHomepage ? 'USA' : stateName && `${stateName}`;
 
   return (
     <Table key="table-header">
@@ -63,17 +70,19 @@ const LocationTableHead: React.FunctionComponent<{
             sortDescending={sortDescending}
           >
             {isModal && (
-              <CompareStyles.StateName>{stateName}</CompareStyles.StateName>
+              <CompareStyles.StateName>
+                {modalLocationColumnHeader}
+              </CompareStyles.StateName>
             )}
-            {firstHeaderName}
+            {firstColumnHeader}
             <br />
             <span>population</span>
             <CompareStyles.ArrowContainer
               arrowColorNotSelected={arrowColorNotSelected}
               isModal={isModal}
             >
-              <ExpandMoreIcon onClick={() => setSortDescending(true)} />
               <ExpandLessIcon onClick={() => setSortDescending(false)} />
+              <ExpandMoreIcon onClick={() => setSortDescending(true)} />
             </CompareStyles.ArrowContainer>
           </CompareStyles.LocationHeaderCell>
           {metrics.map(metric => (
@@ -102,12 +111,14 @@ const LocationTableBody: React.FunctionComponent<{
   currentLocationRank?: number;
   sortByPopulation: boolean;
   isHomepage?: boolean;
+  showStateCode: boolean;
 }> = ({
   sortedLocations,
   sorter,
   currentLocationRank,
   sortByPopulation,
   isHomepage,
+  showStateCode,
 }) => (
   <Table>
     <TableBody>
@@ -118,6 +129,7 @@ const LocationTableBody: React.FunctionComponent<{
           isCurrentCounty={location.rank === currentLocationRank}
           sortByPopulation={sortByPopulation}
           isHomepage={isHomepage}
+          showStateCode={showStateCode}
         />
       ))}
     </TableBody>
@@ -142,7 +154,7 @@ const LocationTable: React.FunctionComponent<{
   sorter: number;
   arrowColorSelected: string;
   arrowColorNotSelected: string;
-  firstHeaderName: string;
+  firstColumnHeader: string;
   metrics: Metric[];
   isModal: boolean;
   pinnedLocation?: RankedLocationSummary;
@@ -152,6 +164,8 @@ const LocationTable: React.FunctionComponent<{
   setSortByPopulation: React.Dispatch<React.SetStateAction<boolean>>;
   sortByPopulation: boolean;
   isHomepage?: boolean;
+  viewAllCounties?: boolean;
+  geoScope?: GeoScopeFilter;
 }> = ({
   setSorter,
   setSortDescending,
@@ -159,7 +173,7 @@ const LocationTable: React.FunctionComponent<{
   sorter,
   arrowColorSelected,
   arrowColorNotSelected,
-  firstHeaderName,
+  firstColumnHeader,
   metrics,
   isModal,
   pinnedLocation,
@@ -169,18 +183,38 @@ const LocationTable: React.FunctionComponent<{
   setSortByPopulation,
   sortByPopulation,
   isHomepage,
+  viewAllCounties,
+  geoScope,
 }) => {
   const Container = isModal ? Styles.ModalContainer : Styles.Container;
 
+  // Seemingly random numbers are the heights of each modal header
+  const homepageOffset = viewAllCounties ? 159 : 73;
+  const locationPageOffset = geoScope === GeoScopeFilter.NEARBY ? 107 : 198;
+  const modalHeaderOffset = isHomepage
+    ? homepageOffset
+    : pinnedLocation
+    ? locationPageOffset
+    : 110;
+  const finalHeaderOffset = isModal ? modalHeaderOffset : 0;
+
   const showBottom = pinnedLocation && pinnedLocation.rank >= numLocations;
   const numLocationsMain = showBottom ? numLocations - 1 : numLocations;
-  const visibleLocations = isModal
-    ? sortedLocations
-    : sortedLocations.slice(0, numLocationsMain);
+
+  const allCountiesView =
+    viewAllCounties || geoScope === GeoScopeFilter.COUNTRY;
+
+  const visibleLocations = !isModal
+    ? sortedLocations.slice(0, numLocationsMain)
+    : allCountiesView
+    ? sortedLocations.slice(0, 100)
+    : sortedLocations;
+
+  const showStateCode = allCountiesView || geoScope === GeoScopeFilter.NEARBY;
 
   return (
     <Styles.TableContainer isModal={isModal}>
-      <Container>
+      <Container finalHeaderOffset={finalHeaderOffset}>
         <Styles.Head isModal={isModal} pinnedLocation={pinnedLocation}>
           <LocationTableHead
             setSorter={setSorter}
@@ -189,12 +223,14 @@ const LocationTable: React.FunctionComponent<{
             sorter={sorter}
             arrowColorSelected={arrowColorSelected}
             arrowColorNotSelected={arrowColorNotSelected}
-            firstHeaderName={firstHeaderName}
+            firstColumnHeader={firstColumnHeader}
             metrics={metrics}
             isModal={isModal}
             stateName={stateName}
             setSortByPopulation={setSortByPopulation}
             sortByPopulation={sortByPopulation}
+            allCountiesView={allCountiesView}
+            isHomepage={isHomepage}
           />
           {isModal && pinnedLocation && (
             <Table key="table-pinned-location">
@@ -205,6 +241,7 @@ const LocationTable: React.FunctionComponent<{
                   isCurrentCounty
                   isModal={isModal}
                   sortByPopulation={sortByPopulation}
+                  showStateCode={showStateCode}
                 />
               </TableBody>
             </Table>
@@ -217,6 +254,7 @@ const LocationTable: React.FunctionComponent<{
             currentLocationRank={pinnedLocation?.rank}
             sortByPopulation={sortByPopulation}
             isHomepage={isHomepage}
+            showStateCode={showStateCode}
           />
         </Styles.Body>
         {pinnedLocation && showBottom && (
@@ -226,6 +264,7 @@ const LocationTable: React.FunctionComponent<{
               sortedLocations={[pinnedLocation]}
               currentLocationRank={pinnedLocation?.rank}
               sortByPopulation={sortByPopulation}
+              showStateCode={showStateCode}
             />
           </Styles.Body>
         )}

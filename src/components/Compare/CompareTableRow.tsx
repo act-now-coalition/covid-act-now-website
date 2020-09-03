@@ -1,16 +1,20 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import {
   MetricCell,
   Row,
   MetricValue,
   Population,
+  CountySuffix,
 } from 'components/Compare/Compare.style';
 import { Metric, formatValue } from 'common/metric';
-import { RankedLocationSummary } from 'common/utils/compare';
+import {
+  RankedLocationSummary,
+  orderedMetrics,
+  getColumnLocationName,
+} from 'common/utils/compare';
 import { Level } from 'common/level';
-import { orderedMetrics } from 'components/Compare/CompareTable';
 import { formatEstimate } from 'common/utils';
 
 function cellValue(metric: any, metricType: Metric) {
@@ -27,6 +31,7 @@ const CompareTableRow = (props: {
   isModal?: boolean;
   sortByPopulation: boolean;
   isHomepage?: boolean;
+  showStateCode: boolean;
 }) => {
   const {
     location,
@@ -35,9 +40,9 @@ const CompareTableRow = (props: {
     isModal,
     sortByPopulation,
     isHomepage,
+    showStateCode,
   } = props;
 
-  //TODO(Chelsi): fix the else?
   function getLevel(metricIndex: Metric): Level {
     const metricInfo = location.metricsInfo.metrics[metricIndex];
     if (metricInfo) {
@@ -46,83 +51,68 @@ const CompareTableRow = (props: {
     return 4;
   }
 
-  const history = useHistory();
+  const locationLink = `/us/${location.locationInfo.state_code.toLowerCase()}${
+    location.locationInfo.county_url_name
+      ? `/county/${location.locationInfo.county_url_name.toLowerCase()}`
+      : ''
+  }`;
 
-  const goToLocationPage = (page: string) => {
-    //clicking current county when in modal wasn't triggering refresh/modal close, so:
-    if (window.location.pathname === page) {
-      window.location.reload();
-    } else {
-      window.scrollTo(0, 0);
-      history.push(page);
-    }
-  };
-
-  const handleLocationClick = () => {
-    return goToLocationPage(
-      `/us/${location.locationInfo.state_code.toLowerCase()}${
-        location.locationInfo.county_url_name
-          ? `/county/${location.locationInfo.county_url_name.toLowerCase()}`
-          : ''
-      }`,
-    );
-  };
-
-  const locationName = !location.locationInfo.county
-    ? location.locationInfo.state
-    : location.locationInfo.county.includes('Parish')
-    ? location.locationInfo.county.replace('Parish', 'Par.')
-    : location.locationInfo.county.replace('County', 'Co.');
+  const locationName = getColumnLocationName(location.locationInfo);
 
   const populationRoundTo = isHomepage ? 3 : 2;
 
   return (
-    <Row
-      index={location.rank}
-      isCurrentCounty={isCurrentCounty}
-      onClick={handleLocationClick}
-      isModal={isModal}
-    >
-      <MetricCell
-        iconColor={location.metricsInfo.level}
-        sortByPopulation={sortByPopulation}
+    <Link to={locationLink}>
+      <Row
+        index={location.rank}
+        isCurrentCounty={isCurrentCounty}
+        isModal={isModal}
       >
-        <div>
-          <span>{location.rank}</span>
-          <FiberManualRecordIcon />
-        </div>
-        <div>
-          {locationName}
-          <br />
-          <Population>
-            {formatEstimate(
-              location.locationInfo.population,
-              populationRoundTo,
-            )}
-          </Population>
-        </div>
-      </MetricCell>
-      {orderedMetrics.map((metric: Metric) => {
-        const metricForValue = location.metricsInfo.metrics[metric];
-        const valueUnknown =
-          metricForValue && metricForValue.level === Level.UNKNOWN
-            ? true
-            : false;
-        return (
-          <MetricCell
-            sorter={sorter}
-            metric={metric}
-            iconColor={getLevel(metric)}
-            sortByPopulation={sortByPopulation}
-          >
+        <MetricCell
+          iconColor={location.metricsInfo.level}
+          sortByPopulation={sortByPopulation}
+        >
+          <div>
+            <span>{location.rank}</span>
             <FiberManualRecordIcon />
-            <MetricValue valueUnknown={valueUnknown}>
-              {cellValue(metricForValue, metric)}
-            </MetricValue>
-          </MetricCell>
-        );
-      })}
-    </Row>
+          </div>
+          <div>
+            {locationName[0]}{' '}
+            {locationName[1] && <CountySuffix>{locationName[1]}</CountySuffix>}
+            {showStateCode && (
+              <Fragment>{location.locationInfo.state_code}</Fragment>
+            )}
+            <br />
+            <Population>
+              {formatEstimate(
+                location.locationInfo.population,
+                populationRoundTo,
+              )}
+            </Population>
+          </div>
+        </MetricCell>
+        {orderedMetrics.map((metric: Metric) => {
+          const metricForValue = location.metricsInfo.metrics[metric];
+          const valueUnknown =
+            metricForValue && metricForValue.level === Level.UNKNOWN
+              ? true
+              : false;
+          return (
+            <MetricCell
+              sorter={sorter}
+              metric={metric}
+              iconColor={getLevel(metric)}
+              sortByPopulation={sortByPopulation}
+            >
+              <FiberManualRecordIcon />
+              <MetricValue valueUnknown={valueUnknown}>
+                {cellValue(metricForValue, metric)}
+              </MetricValue>
+            </MetricCell>
+          );
+        })}
+      </Row>
+    </Link>
   );
 };
 

@@ -13,19 +13,19 @@ import { GlobalSelector } from 'components/MapSelectors/MapSelectors';
 import { useHistory } from 'react-router-dom';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import { getStatesArr } from 'common/utils/compare';
 import {
+  BannerContainer,
   Content,
   FeaturedHeader,
   PartnerSection,
   PartnerHeader,
   SearchBarThermometerWrapper,
   SectionWrapper,
-  BannerContainer,
 } from './HomePage.style';
 import { SelectorWrapper } from 'components/Header/HomePageHeader.style';
+
 import CompareMain from 'components/Compare/CompareMain';
-import { FeedbackSurveyBanner } from 'components/Banner';
+import DonationBanner from 'components/Banner/DonationBanner';
 
 export default function HomePage() {
   const shareBlockRef = useRef(null);
@@ -65,8 +65,6 @@ export default function HomePage() {
     window.scrollTo(0, 0);
   };
 
-  const locationsForCompare = getStatesArr();
-
   return (
     <>
       <EnsureSharingIdInUrl />
@@ -76,7 +74,7 @@ export default function HomePage() {
         pageDescription="Real-time modeling and metrics to understand where we stand against COVID. 50 states. 3,000+ counties. Click the map to dive in"
       />
       <BannerContainer>
-        <FeedbackSurveyBanner />
+        <DonationBanner />
       </BannerContainer>
       <HomePageHeader
         indicatorsLinkOnClick={() => scrollTo(indicatorsRef.current)}
@@ -95,11 +93,7 @@ export default function HomePage() {
             </SearchBarThermometerWrapper>
             <Map hideLegend />
             {isMobile && <HomePageThermometer />}
-            <CompareMain
-              locationsViewable={8}
-              isHomepage
-              locations={locationsForCompare}
-            />
+            <CompareMain locationsViewable={8} isHomepage />
             <SectionWrapper ref={indicatorsRef}>
               <CriteriaExplanation isMobile={isMobile} />
             </SectionWrapper>

@@ -2,7 +2,7 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     match /alerts-subscriptions/{email} {
-      allow write;
+      allow read, write;
     }
   }
 }

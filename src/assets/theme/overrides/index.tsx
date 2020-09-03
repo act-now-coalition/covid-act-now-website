@@ -4,6 +4,8 @@ import MuiPaper from './MuiPaper';
 import MuiTableCell from './MuiTableCell';
 import MuiTableHead from './MuiTableHead';
 import MuiAutocomplete from './MuiAutocomplete';
+import MuiSwitch from './MuiSwitch';
+import MuiSlider from './MuiSlider';
 
 export default {
   MuiButton,
@@ -12,4 +14,6 @@ export default {
   MuiTableCell,
   MuiTableHead,
   MuiAutocomplete,
+  MuiSwitch,
+  MuiSlider,
 };

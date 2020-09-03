@@ -31,6 +31,11 @@ type Point = Omit<Column, 'y'> & {
   y: number;
 };
 
+type ToolTipContent = {
+  subtitle: string;
+  body: string;
+};
+
 const getDate = (d: Point) => new Date(d.x);
 const getY = (d: Point) => d.y;
 const hasData = (d: any) => isDate(getDate(d)) && Number.isFinite(getY(d));
@@ -45,7 +50,7 @@ const ChartZones = ({
   marginLeft = 40,
   marginRight = 5,
   capY,
-  getTooltipBody,
+  getTooltipContent,
   getPointText,
 }: {
   width: number;
@@ -53,7 +58,9 @@ const ChartZones = ({
   columnData: Point[];
   zones: LevelInfoMap;
   capY: number;
-  getTooltipBody: (valueY: number) => string;
+  getTooltipContent: (
+    valueY: number,
+  ) => { body: string; subtitle: string; width: string };
   getPointText: (valueY: number) => string;
   marginTop?: number;
   marginBottom?: number;
@@ -107,8 +114,10 @@ const ChartZones = ({
       top={marginTop + getYCoord(d)}
       left={marginLeft + getXCoord(d)}
       title={formatUtcDate(getDate(d), 'MMM D, YYYY')}
+      subtitle={getTooltipContent(getY(d)).subtitle}
+      width={getTooltipContent(getY(d)).width}
     >
-      <TooltipStyle.Body>{getTooltipBody(getY(d))}</TooltipStyle.Body>
+      <TooltipStyle.Body>{getTooltipContent(getY(d)).body}</TooltipStyle.Body>
     </Tooltip>
   );
 
@@ -177,14 +186,16 @@ const ChartZoneAutosize = ({
   columnData,
   zones,
   capY,
-  getTooltipBody,
+  getTooltipContent,
   getPointText,
   height = 400,
 }: {
   columnData: Point[];
   zones: LevelInfoMap;
   capY: number;
-  getTooltipBody: (valueY: number) => string;
+  getTooltipContent: (
+    valueY: number,
+  ) => { body: string; subtitle: string; width: string };
   getPointText: (valueY: number) => string;
   height?: number;
 }) => (
@@ -197,7 +208,7 @@ const ChartZoneAutosize = ({
           columnData={columnData}
           zones={zones}
           capY={capY}
-          getTooltipBody={getTooltipBody}
+          getTooltipContent={getTooltipContent}
           getPointText={getPointText}
         />
       )}
