@@ -106,8 +106,10 @@ export function calcICUHeadroom(
     lastUpdated,
   );
 
+  // Use capacity from the timeseries if it's within the last 7 days, else use the
+  // non-timeseries value.
   const finalTotalBeds =
-    lastValue(actualTimeseries.map(r => r?.ICUBeds.capacity)) ||
+    lastValue(actualTimeseries.map(r => r?.ICUBeds.capacity).slice(-7)) ||
     actuals.ICUBeds.totalCapacity;
 
   const nonCovidPatientsResult = calcNonCovidICUPatientsSeries(
