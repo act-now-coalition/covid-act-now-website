@@ -75,6 +75,7 @@ const ExploreChartExportImage = () => {
                 width={width}
                 height={chartHeight}
                 isMobile={false}
+                hasMultipleLocations={false}
               />
             )}
           </ParentSize>

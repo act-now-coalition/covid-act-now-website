@@ -139,6 +139,7 @@ const Explore: React.FunctionComponent<{
                   tooltipSubtext={`in ${locationName}`}
                   showLabels={hasMultipleLocations}
                   marginRight={hasMultipleLocations ? 100 : 10}
+                  hasMultipleLocations={hasMultipleLocations}
                 />
               ) : (
                 <div style={{ height: 400 }} />
