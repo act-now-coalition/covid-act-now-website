@@ -4,6 +4,7 @@ import {
   Location,
   getAdjacentCounties,
   getCountyMsaCode,
+  getColleges,
 } from 'common/locations';
 import { stateSummary, countySummary } from 'common/location_summaries';
 import { LocationSummary } from 'common/location_summaries';
@@ -236,4 +237,24 @@ export function getColumnLocationName(location: Location) {
     const countyWithAbbreviatedSuffix = getAbbreviatedCounty(location.county);
     return splitCountyName(countyWithAbbreviatedSuffix);
   }
+}
+
+// For college tag:
+
+function getSummedEnrollment(location: Location) {
+  return (
+    location.full_fips_code &&
+    getColleges(location.full_fips_code).length > 0 &&
+    getColleges(location.full_fips_code).reduce(
+      (acc, current) => acc + current.ft_enroll,
+      0,
+    )
+  );
+}
+
+export function isCollegeCounty(location: Location) {
+  const threshold = 0.05;
+  const ftEnrollment = getSummedEnrollment(location);
+  const countyPopulation = location.population;
+  return ftEnrollment && ftEnrollment / countyPopulation > threshold;
 }

@@ -2,7 +2,11 @@ import React, { useState, Fragment, useRef } from 'react';
 import { Modal } from '@material-ui/core';
 import CompareTable from 'components/Compare/CompareTable';
 import ModalCompare from 'components/Compare/ModalCompare';
-import { DivForRef } from 'components/Compare/Compare.style';
+import ModalFaq from 'components/Compare/ModalFaq';
+import {
+  DivForRef,
+  CenteredContentModal,
+} from 'components/Compare/Compare.style';
 import {
   getAllStates,
   getAllCountiesSelection,
@@ -77,7 +81,9 @@ const CompareMain = (props: {
 
   // Note (Chelsi): short delay is needed to make scrollTo work
   const [showModal, setShowModal] = useState(false);
+  const [showFaqModal, setShowFaqModal] = useState(false);
   const handleCloseModal = () => {
+    setShowFaqModal(false);
     setShowModal(false);
     const timeoutId = setTimeout(() => {
       if (tableRef.current) {
@@ -122,6 +128,7 @@ const CompareMain = (props: {
     setSortByPopulation,
     sliderValue,
     setSliderValue,
+    setShowFaqModal,
   };
 
   return (
@@ -137,6 +144,9 @@ const CompareMain = (props: {
       <Modal open={showModal} onClose={handleCloseModal}>
         <ModalCompare {...sharedProps} handleCloseModal={handleCloseModal} />
       </Modal>
+      <CenteredContentModal open={showFaqModal} onClose={handleCloseModal}>
+        <ModalFaq handleCloseModal={handleCloseModal} />
+      </CenteredContentModal>
     </Fragment>
   );
 };
