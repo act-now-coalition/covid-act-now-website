@@ -460,7 +460,7 @@ const Privacy = ({ children }: { children: React.ReactNode }) => {
           or used in this way. You can opt out of receiving targeted ads from
           members of the Network Advertising Initiative ("<b>NAI</b>") on the
           NAI's{' '}
-          <a href="https://www.networkadvertising.org/managing/opt_out.asp">
+          <a href="http://www.networkadvertising.org/managing/opt_out.asp">
             website
           </a>
           .
