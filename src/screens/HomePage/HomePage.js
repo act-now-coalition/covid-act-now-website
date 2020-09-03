@@ -14,6 +14,7 @@ import { useHistory } from 'react-router-dom';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import {
+  BannerContainer,
   Content,
   FeaturedHeader,
   PartnerSection,
@@ -22,7 +23,9 @@ import {
   SectionWrapper,
 } from './HomePage.style';
 import { SelectorWrapper } from 'components/Header/HomePageHeader.style';
+
 import CompareMain from 'components/Compare/CompareMain';
+import DonationBanner from 'components/Banner/DonationBanner';
 
 export default function HomePage() {
   const shareBlockRef = useRef(null);
@@ -70,6 +73,9 @@ export default function HomePage() {
         pageTitle={undefined}
         pageDescription="Real-time modeling and metrics to understand where we stand against COVID. 50 states. 3,000+ counties. Click the map to dive in"
       />
+      <BannerContainer>
+        <DonationBanner />
+      </BannerContainer>
       <HomePageHeader
         indicatorsLinkOnClick={() => scrollTo(indicatorsRef.current)}
       />
