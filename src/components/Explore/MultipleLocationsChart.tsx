@@ -178,17 +178,19 @@ const ExploreChart: React.FC<{
             dateScale={dateScale}
             strokeColor={axisGridColor}
           />
-          {series.map(({ label, data, params }, i) => (
-            <Styles.LineLabel
-              key={`label-${label}`}
-              x={innerWidth + 5}
-              y={getYPosition(data[data.length - 1])}
-              fill={params?.stroke || '#000'}
-              fillOpacity={getSeriesOpacity(i, tooltipOpen, tooltipData)}
-            >
-              {label}
-            </Styles.LineLabel>
-          ))}
+          {series.map(({ label, data, params }, i) =>
+            data.length > 0 ? (
+              <Styles.LineLabel
+                key={`label-${label}`}
+                x={innerWidth + 5}
+                y={getYPosition(data[data.length - 1])}
+                fill={params?.stroke || '#000'}
+                fillOpacity={getSeriesOpacity(i, tooltipOpen, tooltipData)}
+              >
+                {label}
+              </Styles.LineLabel>
+            ) : null,
+          )}
           <RectClipGroup width={innerWidth} height={innerHeight}>
             {series.map(({ label, data, type, params }, i) => (
               <ChartSeries
