@@ -15,7 +15,7 @@ import {
   RankedLocationSummary,
   orderedMetrics,
   getColumnLocationName,
-  isCollegeCountyWithThreshold,
+  isCollegeCounty,
 } from 'common/utils/compare';
 import { Level } from 'common/level';
 import { formatEstimate } from 'common/utils';
@@ -64,7 +64,7 @@ const CompareTableRow = (props: {
 
   const populationRoundTo = isHomepage ? 3 : 2;
 
-  const collegeTag = isCollegeCountyWithThreshold(location.locationInfo);
+  const collegeTag = isCollegeCounty(location.locationInfo);
 
   return (
     <Link to={locationLink}>

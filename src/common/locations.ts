@@ -172,5 +172,5 @@ export function getCountyMsaCode(fips: string): string | undefined {
 }
 
 export function getColleges(fips: string): CollegeData[] {
-  return COLLEGES[fips];
+  return COLLEGES[fips] || [];
 }

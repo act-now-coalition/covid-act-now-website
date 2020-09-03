@@ -241,17 +241,10 @@ export function getColumnLocationName(location: Location) {
 
 // For college tag:
 
-export function isCollegeCounty(location: Location) {
+function getSummedEnrollment(location: Location) {
   return (
     location.full_fips_code &&
-    (getColleges(location.full_fips_code) || []).length > 0
-  );
-}
-
-export function getSummedEnrollment(location: Location) {
-  return (
-    location.full_fips_code &&
-    isCollegeCounty(location) &&
+    getColleges(location.full_fips_code).length > 0 &&
     getColleges(location.full_fips_code).reduce(
       (acc, current) => acc + current.ft_enroll,
       0,
@@ -259,16 +252,9 @@ export function getSummedEnrollment(location: Location) {
   );
 }
 
-export function isCollegeCountyWithThreshold(location: Location) {
+export function isCollegeCounty(location: Location) {
   const threshold = 0.05;
-  const ftEntrollment = getSummedEnrollment(location);
+  const ftEnrollment = getSummedEnrollment(location);
   const countyPopulation = location.population;
-  return ftEntrollment && ftEntrollment / countyPopulation > threshold;
-}
-
-export function getAllCollegeCountiesAboveThreshold(): SummaryForCompare[] {
-  const allCounties = getAllCounties();
-  return allCounties.filter((location: SummaryForCompare) =>
-    isCollegeCountyWithThreshold(location.locationInfo),
-  );
+  return ftEnrollment && ftEnrollment / countyPopulation > threshold;
 }

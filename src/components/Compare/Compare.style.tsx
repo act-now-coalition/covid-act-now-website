@@ -30,7 +30,7 @@ const getMetricHeaderBackground = (
   }
 };
 
-export const StyledModal = styled(Modal)`
+export const CenteredContentModal = styled(Modal)`
   display: flex;
   flex-direction: column;
   align-items: center;

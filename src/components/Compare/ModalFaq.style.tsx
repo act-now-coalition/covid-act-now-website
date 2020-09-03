@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
   padding: 1rem;
 
   @media (min-width: 600px) {
-    padding: 1rem 2rem;
+    padding: 1.5rem;
   }
 
   svg {

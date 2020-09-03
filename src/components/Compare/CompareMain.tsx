@@ -3,7 +3,10 @@ import { Modal } from '@material-ui/core';
 import CompareTable from 'components/Compare/CompareTable';
 import ModalCompare from 'components/Compare/ModalCompare';
 import ModalFaq from 'components/Compare/ModalFaq';
-import { DivForRef, StyledModal } from 'components/Compare/Compare.style';
+import {
+  DivForRef,
+  CenteredContentModal,
+} from 'components/Compare/Compare.style';
 import {
   getAllStates,
   getAllCountiesSelection,
@@ -138,21 +141,12 @@ const CompareMain = (props: {
           viewMoreCopy={viewMoreCopy}
         />
       </DivForRef>
-      <Modal
-        open={showModal}
-        onClose={handleCloseModal}
-        style={{
-          alignItems: 'center',
-          justifyContent: 'center',
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-      >
+      <Modal open={showModal} onClose={handleCloseModal}>
         <ModalCompare {...sharedProps} handleCloseModal={handleCloseModal} />
       </Modal>
-      <StyledModal open={showFaqModal} onClose={handleCloseModal}>
+      <CenteredContentModal open={showFaqModal} onClose={handleCloseModal}>
         <ModalFaq handleCloseModal={handleCloseModal} />
-      </StyledModal>
+      </CenteredContentModal>
     </Fragment>
   );
 };

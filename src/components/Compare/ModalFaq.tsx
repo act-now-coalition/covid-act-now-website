@@ -10,6 +10,7 @@ import {
 } from 'components/Compare/ModalFaq.style';
 import CloseIcon from '@material-ui/icons/Close';
 
+// Locks scroll behind modal:
 const BodyScrollLock = createGlobalStyle`
   body {
     height: 100vh;
@@ -23,9 +24,9 @@ const ModalFaq = (props: { handleCloseModal: () => void }) => {
       <BodyScrollLock />
       <Wrapper>
         <CloseIcon onClick={props.handleCloseModal} />
-        <Header>Compare table</Header>
-        <Subheader>Frequenlty asked questions</Subheader>
         <Content>
+          <Header>Compare table</Header>
+          <Subheader>Frequenlty asked questions</Subheader>
           <Question>How are “metro” and “non-metro” counties defined?</Question>
           <Answer>
             You can think of this as urban or rural, but just keep in mind that
@@ -37,13 +38,14 @@ const ModalFaq = (props: { handleCloseModal: () => void }) => {
             more inhabitants. We define “metro counties” as counties belonging
             to MSAs; “non metro counties” as counties not within an MSA.
           </Answer>
-          <Question>How are counties “with college” defined?</Question>
+          <Question>How are “college” counties defined?</Question>
           <Answer>
-            We wanted to highlight counties where college populations
-            significantly contribute to the local COVID dynamics. Counties with
-            the "college" label are defined as counties in which full-time
-            student enrollment accounts for at least 5% of the total county
-            population.
+            We wanted to highlight counties where the college population could
+            be impacting the local COVID dynamics. Counties in which typical
+            full-time student enrollment accounts for at least 5% of the total
+            county population are labeled as “College” counties. Note that these
+            colleges may or may not currently have in-person classes /
+            activities.
           </Answer>
           <Question>Why do some counties have missing data?</Question>
           <Answer>
