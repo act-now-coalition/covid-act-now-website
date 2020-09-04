@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { ChartContentWrapper, MainContentInner } from './ChartsHolder.style';
 import NoCountyDetail from './NoCountyDetail';
 import { Projections } from 'common/models/Projections';
@@ -45,6 +46,8 @@ const ChartsHolder = (props: {
 }) => {
   const { chartId } = props;
   const projection = props.projections.primary;
+  const location = useLocation();
+  const scrollToCompare = location.pathname.endsWith('/compare');
 
   const {
     rtRangeData,
@@ -177,6 +180,7 @@ const ChartsHolder = (props: {
               locationsViewable={6}
               currentCounty={currentCountyForCompare}
               stateId={props.stateId}
+              autoScroll={scrollToCompare}
             />
             <MainContentInner>
               {chartPropsForMap.map(chartProps => (
