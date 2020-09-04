@@ -63,11 +63,12 @@ export const StyledFooterBodyNav = styled.div`
     padding-top: 0.5rem;
   }
 
-  > span {
-    cursor: pointer;
+  > a {
     display: block;
     margin-bottom: 1rem;
     font-weight: bold;
+    text-decoration: none;
+    color: white;
 
     @media (min-width: 900px) {
       margin-bottom: 0;

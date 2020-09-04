@@ -1,9 +1,8 @@
 import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import Logo from 'assets/images/footerlogoDarkWithURL';
-import { useHistory, useLocation } from 'react-router-dom';
-
 import { useEmbed } from 'common/utils/hooks';
-
+import ExternalLink from 'components/ExternalLink';
 import FooterSocialLinks from './FooterSocialLinks';
 import {
   StyledFooter,
@@ -15,17 +14,8 @@ import {
 } from './Footer.style';
 
 const Footer = ({ children }: { children: React.ReactNode }) => {
-  const history = useHistory();
   const { pathname } = useLocation();
-
   const isMapPage = pathname.startsWith('/us') || pathname.startsWith('/state');
-
-  const goTo = (route: string) => {
-    history.push(route);
-
-    window.scrollTo(0, 0);
-  };
-
   const { isEmbed } = useEmbed();
 
   if (isEmbed) {
@@ -39,17 +29,13 @@ const Footer = ({ children }: { children: React.ReactNode }) => {
           <StyledFooterContent>
             <Logo />
             <StyledFooterBodyNav>
-              <span onClick={() => goTo('/')}>Map</span>
-              <span onClick={() => goTo('/about')}>About</span>
-              <span onClick={() => goTo('/resources')}>Resources</span>
-              <span
-                onClick={() => {
-                  window.location.href = 'https://blog.covidactnow.org';
-                }}
-              >
+              <Link to="/">Map</Link>
+              <Link to="/about">About</Link>
+              <Link to="/resources">Resources</Link>
+              <ExternalLink href="https://blog.covidactnow.org">
                 Blog
-              </span>
-              <span onClick={() => goTo('/contact')}>Contact Us</span>
+              </ExternalLink>
+              <Link to="/contact">Contact Us</Link>
             </StyledFooterBodyNav>
             <StyledFooterDivider />
             <StyledFooterBodyLinks>
@@ -57,9 +43,9 @@ const Footer = ({ children }: { children: React.ReactNode }) => {
             </StyledFooterBodyLinks>
             <StyledFooterDivider />
             <StyledFooterBodyLinks>
-              <span onClick={() => goTo('/contact')}>Contact</span>
+              <Link to="/contact">Contact</Link>
               {' ∙ '}
-              <span onClick={() => goTo('/terms')}>Terms</span>
+              <Link to="/terms">Terms</Link>
               {' ∙ '}
               <a href="mailto:press@covidactnow.org">Press</a>
             </StyledFooterBodyLinks>
