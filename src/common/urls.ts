@@ -1,5 +1,7 @@
 import ShareImageUrlJSON from 'assets/data/share_images_url.json';
+import * as QueryString from 'query-string';
 import { assert } from 'common/utils';
+import { County } from './locations';
 
 /**
  * We append a short unique string corresponding to the currently published
@@ -10,6 +12,50 @@ import { assert } from 'common/utils';
 const SHARING_ID_QUERY_PARAM = 's';
 const SHARING_ID = sharingId();
 const SHARING_ID_QUERYSTRING = `?${SHARING_ID_QUERY_PARAM}=${SHARING_ID}`;
+
+/**
+ * Generates the URL for the homepage or a (state / county) location page.
+ *
+ * Notes:
+ * - Does not include the sharing ID (?s=...)
+ * - Uses window.origin to determine the base URL, so it should match localhost / staging / prod / etc.
+ */
+function getPageBaseUrl(
+  stateId: string | undefined,
+  county: County | undefined,
+): string {
+  const origin = window.location.origin;
+  let shareURL = origin; // home page
+  if (stateId && county) {
+    // county page
+    shareURL = `${origin}/us/${stateId.toLowerCase()}/county/${
+      county.county_url_name
+    }`;
+  } else if (stateId) {
+    // state page
+    shareURL = `${origin}/us/${stateId.toLowerCase()}`;
+  }
+
+  return shareURL;
+}
+
+// TODO(michael): Move existing code over to use this method.
+export function getPageUrl(
+  stateId: string | undefined,
+  county: County | undefined,
+): string {
+  return addSharingId(getPageBaseUrl(stateId, county));
+}
+
+export function getComparePageUrl(
+  stateId: string | undefined,
+  county: County | undefined,
+  shareParams: { [key: string]: unknown },
+): string {
+  const url = getPageBaseUrl(stateId, county) + '/compare';
+  ensureSharingIdInQueryParams(shareParams);
+  return url + '?' + QueryString.stringify(shareParams);
+}
 
 /**
  * Adds unique sharing querystring to the URL.
