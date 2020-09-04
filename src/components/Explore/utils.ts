@@ -31,11 +31,11 @@ import {
 } from 'components/AutocompleteLocations';
 
 export function getMaxBy<T>(
-  series: Series[],
+  seriesList: Series[],
   getValue: (d: Column) => T,
   defaultValue: T,
 ): T {
-  const maxValue = max(series.map(({ data }) => max(data.map(getValue))));
+  const maxValue = max(seriesList.map(({ data }) => max(data.map(getValue))));
   return maxValue || defaultValue;
 }
 
@@ -97,7 +97,7 @@ interface SerieDescription {
 interface ExploreMetricDescription {
   title: string;
   chartId: string;
-  series: SerieDescription[];
+  seriesList: SerieDescription[];
 }
 
 export const exploreMetricData: {
@@ -106,7 +106,7 @@ export const exploreMetricData: {
   [ExploreMetric.CASES]: {
     title: 'Cases',
     chartId: 'cases',
-    series: [
+    seriesList: [
       {
         label: 'Cases',
         tooltipLabel: 'cases',
@@ -124,7 +124,7 @@ export const exploreMetricData: {
   [ExploreMetric.DEATHS]: {
     title: 'Deaths',
     chartId: 'deaths',
-    series: [
+    seriesList: [
       {
         label: 'Deaths',
         tooltipLabel: 'Deaths',
@@ -142,7 +142,7 @@ export const exploreMetricData: {
   [ExploreMetric.HOSPITALIZATIONS]: {
     title: 'Hospitalizations',
     chartId: 'hospitalizations',
-    series: [
+    seriesList: [
       {
         label: 'Hospitalizations',
         tooltipLabel: 'Hospitalizations',
@@ -160,7 +160,7 @@ export const exploreMetricData: {
   [ExploreMetric.ICU_HOSPITALIZATIONS]: {
     title: 'ICU Hospitalizations',
     chartId: 'icu-hospitalizations',
-    series: [
+    seriesList: [
       {
         label: 'ICU Hospitalizations',
         tooltipLabel: 'ICU Hospitalizations',
@@ -205,7 +205,7 @@ export function getAllSeriesForMetric(
   projection: Projection,
 ): Series[] {
   const metricDefinition = exploreMetricData[metric];
-  return metricDefinition.series.map(item => ({
+  return metricDefinition.seriesList.map(item => ({
     data: cleanSeries(projection.getDataset(item.datasetId)),
     type: item.type,
     label: item.label,
@@ -230,9 +230,10 @@ function getAveragedSeriesForMetric(
     type: SeriesType.LINE,
     params: {
       stroke: color,
+      fill: color,
     },
     label: getLocationLabel(location),
-    tooltipLabel: '',
+    tooltipLabel: exploreMetricData[metric].title,
   };
 }
 
@@ -396,6 +397,6 @@ export function getChartSeries(
           ),
         );
       }),
-    ).then(series => flatten(series));
+    ).then(flatten);
   }
 }

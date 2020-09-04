@@ -7,6 +7,8 @@ export enum SeriesType {
 
 export interface SeriesParams {
   stroke?: string;
+  fill?: string;
+  strokeOpacity?: number;
 }
 
 export interface Series {

@@ -40,18 +40,14 @@ const Explore: React.FunctionComponent<{
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const initialMetric =
+  const defaultMetric =
     (chartId && getMetricByChartId(chartId)) || ExploreMetric.CASES;
-  const [currentMetric, setCurrentMetric] = useState(initialMetric);
+  const [currentMetric, setCurrentMetric] = useState(defaultMetric);
 
-  const onChangeTab = (event: React.ChangeEvent<{}>, newMetric: number) => {
-    setCurrentMetric(newMetric);
-  };
+  const onChangeTab = (newMetric: number) => setCurrentMetric(newMetric);
 
   const metricLabels = getMetricLabels();
   const currentMetricName = metricLabels[currentMetric];
-
-  const [chartSeries, setChartSeries] = useState<Series[]>([]);
 
   const currentLocation = useMemo(() => findLocationForFips(fips), [fips]);
   const autocompleteLocations = useMemo(() => getAutocompleteLocations(fips), [
@@ -67,9 +63,16 @@ const Explore: React.FunctionComponent<{
     setSelectedLocations(uniq([currentLocation, ...newLocations]));
   };
 
+  // Resets the state when navigating locations
+  useEffect(() => {
+    setSelectedLocations([currentLocation]);
+    setCurrentMetric(defaultMetric);
+  }, [currentLocation, defaultMetric]);
+
+  const [chartSeries, setChartSeries] = useState<Series[]>([]);
   useEffect(() => {
     const fetchSeries = () => getChartSeries(currentMetric, selectedLocations);
-    fetchSeries().then(series => setChartSeries(series));
+    fetchSeries().then(seriesList => setChartSeries(seriesList));
   }, [selectedLocations, currentMetric]);
 
   const hasData = some(chartSeries, ({ data }) => data.length > 0);
@@ -117,7 +120,7 @@ const Explore: React.FunctionComponent<{
           </Grid>
           {!hasMultipleLocations && (
             <Grid key="legend" item sm xs={12}>
-              <Legend series={chartSeries} />
+              <Legend seriesList={chartSeries} />
             </Grid>
           )}
         </Grid>
@@ -132,13 +135,12 @@ const Explore: React.FunctionComponent<{
             {({ width }) =>
               width > 0 ? (
                 <ExploreChart
-                  series={chartSeries}
+                  seriesList={chartSeries}
                   isMobile={isMobile}
                   width={width}
                   height={400}
                   tooltipSubtext={`in ${locationName}`}
-                  showLabels={hasMultipleLocations}
-                  marginRight={hasMultipleLocations ? 100 : 10}
+                  hasMultipleLocations={hasMultipleLocations}
                 />
               ) : (
                 <div style={{ height: 400 }} />

@@ -72,17 +72,18 @@ export const SeriesMarker: React.FC<{
   yMax: number;
   barWidth: number;
   barOpacityHover?: number;
-}> = ({ type, data, date, x, y, yMax, barWidth, barOpacityHover }) => {
+  params?: SeriesParams;
+}> = ({ type, data, date, x, y, yMax, barWidth, barOpacityHover, params }) => {
   const point = findPointByDate(data, date);
   if (!point) {
     return null;
   }
   switch (type) {
     case SeriesType.LINE:
-      return <Styles.DotMarker cx={x(point)} cy={y(point)} r={6} />;
+      return <Styles.DotMarker cx={x(point)} cy={y(point)} r={6} {...params} />;
     case SeriesType.BAR:
       return (
-        <Styles.BarsSeries barOpacityHover={barOpacityHover}>
+        <Styles.BarsSeries barOpacityHover={barOpacityHover} {...params}>
           <BarChart
             data={[point]}
             x={x}
