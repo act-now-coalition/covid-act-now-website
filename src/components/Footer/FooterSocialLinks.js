@@ -8,13 +8,13 @@ const FooterSocialLinks = props => {
 
   return (
     <Fragment>
-      <a href="https://www.facebook.com/covidactnow">
+      <a href="https://www.facebook.com/covidactnow" title="Facebook">
         <FacebookIcon size={iconSize} borderRadius={10} />
       </a>
-      <a href="https://www.instagram.com/covidactnow/">
+      <a href="https://www.instagram.com/covidactnow/" title="Instagram">
         <InstagramIcon size={iconSize} />
       </a>
-      <a href="https://twitter.com/CovidActNow">
+      <a href="https://twitter.com/CovidActNow" title="Twitter">
         <TwitterIcon size={iconSize} borderRadius={10} />
       </a>
     </Fragment>
