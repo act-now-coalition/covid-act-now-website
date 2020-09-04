@@ -145,7 +145,7 @@ export const GridLines = styled.g`
   }
 `;
 
-export const TrackerLine = styled.g`
+export const HoverTrackerLine = styled.g`
   line {
     stroke: #000;
     stroke-width: 2px;

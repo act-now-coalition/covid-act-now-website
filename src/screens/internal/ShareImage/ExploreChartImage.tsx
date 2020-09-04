@@ -68,7 +68,7 @@ const ExploreChartImage = () => {
             <ParentSize>
               {({ width }) => (
                 <ExploreChart
-                  series={getSeries(metric, projection)}
+                  seriesList={getSeries(metric, projection)}
                   width={width}
                   height={225}
                   isMobile={false}

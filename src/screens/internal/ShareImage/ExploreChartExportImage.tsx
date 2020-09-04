@@ -71,7 +71,7 @@ const ExploreChartExportImage = () => {
           <ParentSize>
             {({ width }) => (
               <ExploreChart
-                series={getSeries(metric, projection)}
+                seriesList={getSeries(metric, projection)}
                 width={width}
                 height={chartHeight}
                 isMobile={false}

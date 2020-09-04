@@ -26,12 +26,12 @@ const daysBetween = (dateFrom: Date, dateTo: Date) =>
 
 const SingleLocationTooltip: React.FC<{
   date: Date;
-  series: Series[];
+  seriesList: Series[];
   left: (d: Column) => number;
   top: (d: Column) => number;
   subtext: string;
-}> = ({ series, left, top, date, subtext }) => {
-  const [seriesRaw, seriesSmooth] = series;
+}> = ({ seriesList, left, top, date, subtext }) => {
+  const [seriesRaw, seriesSmooth] = seriesList;
   const pointSmooth = findPointByDate(seriesSmooth.data, date);
   const pointRaw = findPointByDate(seriesRaw.data, date);
 
@@ -63,16 +63,16 @@ const SingleLocationTooltip: React.FC<{
  * always enough.
  */
 const DataHoverMarkers: React.FC<{
-  series: Series[];
+  seriesList: Series[];
   date: Date;
   x: (d: Column) => number;
   y: (d: Column) => number;
   yMax: number;
   barWidth: number;
   barOpacityHover?: number;
-}> = ({ series, x, y, date, yMax, barWidth, barOpacityHover }) => (
+}> = ({ seriesList, x, y, date, yMax, barWidth, barOpacityHover }) => (
   <Fragment>
-    {series.map(({ label, type, data }) => (
+    {seriesList.map(({ label, type, data }) => (
       <SeriesMarker
         key={`series-marker-${label}`}
         type={type}
@@ -88,10 +88,10 @@ const DataHoverMarkers: React.FC<{
   </Fragment>
 );
 
-const ExploreChart: React.FC<{
+const SingleLocationChart: React.FC<{
   width: number;
   height: number;
-  series: Series[];
+  seriesList: Series[];
   isMobile: boolean;
   tooltipSubtext?: string;
   marginTop?: number;
@@ -103,7 +103,7 @@ const ExploreChart: React.FC<{
 }> = ({
   width,
   height,
-  series,
+  seriesList,
   isMobile,
   tooltipSubtext = '',
   marginTop = 10,
@@ -117,7 +117,7 @@ const ExploreChart: React.FC<{
   const today = new Date();
   const dateTo = today;
   const numDays = daysBetween(dateFrom, dateTo);
-  const maxY = getMaxBy<number>(series, getY, 1);
+  const maxY = getMaxBy<number>(seriesList, getY, 1);
 
   const innerWidth = width - marginLeft - marginRight;
   const innerHeight = height - marginTop - marginBottom;
@@ -178,7 +178,7 @@ const ExploreChart: React.FC<{
             strokeColor={axisGridColor}
           />
           <RectClipGroup width={innerWidth} height={innerHeight}>
-            {series.map(({ label, data, type, params }) => (
+            {seriesList.map(({ label, data, type, params }) => (
               <ChartSeries
                 key={`series-chart-${label}`}
                 data={data}
@@ -198,7 +198,7 @@ const ExploreChart: React.FC<{
               y={getYPosition}
               yMax={innerHeight}
               barWidth={barWidth}
-              series={series}
+              seriesList={seriesList}
               date={tooltipData.date}
               barOpacityHover={barOpacityHover}
             />
@@ -218,7 +218,7 @@ const ExploreChart: React.FC<{
             left={p => getXPosition(p) + marginLeft}
             top={p => getYPosition(p) + marginTop}
             date={tooltipData.date}
-            series={series}
+            seriesList={seriesList}
             subtext={tooltipSubtext}
           />
           <DateMarker
@@ -232,4 +232,4 @@ const ExploreChart: React.FC<{
   );
 };
 
-export default ExploreChart;
+export default SingleLocationChart;

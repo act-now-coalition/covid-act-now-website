@@ -7,7 +7,7 @@ const ExploreChart: React.FC<{
   hasMultipleLocations: boolean;
   width: number;
   height: number;
-  series: Series[];
+  seriesList: Series[];
   isMobile: boolean;
   tooltipSubtext?: string;
   marginTop?: number;

@@ -4,6 +4,7 @@ import { voronoi, VoronoiPolygon } from '@vx/voronoi';
 import { Group } from '@vx/group';
 import { Series } from './interfaces';
 import { Column } from 'common/models/Projection';
+
 export interface HoverPointInfo {
   x: number;
   y: number;
@@ -19,15 +20,15 @@ export interface HoverPointInfo {
  * See https://en.wikipedia.org/wiki/Voronoi_diagram for more details.
  **/
 const SeriesTooltipOverlay: React.FC<{
-  series: Series[];
+  seriesList: Series[];
   width: number;
   height: number;
   x: (p: Column) => number;
   y: (p: Column) => number;
   onMouseOver: (pointInfo: HoverPointInfo) => void;
   onMouseOut: () => void;
-}> = ({ series, width, height, x, y, onMouseOver, onMouseOut }) => {
-  const hoverPoints = getHoverPoints(series);
+}> = ({ seriesList, width, height, x, y, onMouseOver, onMouseOut }) => {
+  const hoverPoints = getHoverPoints(seriesList);
   const hoverPolygons = useMemo(() => {
     const voronoiDiagram = voronoi<HoverPointInfo>({ x, y, width, height })(
       hoverPoints,
@@ -54,9 +55,9 @@ const SeriesTooltipOverlay: React.FC<{
  * the seriesIndex and pointIndex. This information will be useful in the
  * chart to render the tooltip and other hover markers.
  */
-function getHoverPoints(series: Series[]): HoverPointInfo[] {
+function getHoverPoints(seriesList: Series[]): HoverPointInfo[] {
   return flatten(
-    series.map(({ data }, seriesIndex) =>
+    seriesList.map(({ data }, seriesIndex) =>
       data.map((point, pointIndex) => ({ ...point, seriesIndex, pointIndex })),
     ),
   );

@@ -72,7 +72,7 @@ const Explore: React.FunctionComponent<{
   const [chartSeries, setChartSeries] = useState<Series[]>([]);
   useEffect(() => {
     const fetchSeries = () => getChartSeries(currentMetric, selectedLocations);
-    fetchSeries().then(series => setChartSeries(series));
+    fetchSeries().then(seriesList => setChartSeries(seriesList));
   }, [selectedLocations, currentMetric]);
 
   const hasData = some(chartSeries, ({ data }) => data.length > 0);
@@ -120,7 +120,7 @@ const Explore: React.FunctionComponent<{
           </Grid>
           {!hasMultipleLocations && (
             <Grid key="legend" item sm xs={12}>
-              <Legend series={chartSeries} />
+              <Legend seriesList={chartSeries} />
             </Grid>
           )}
         </Grid>
@@ -135,7 +135,7 @@ const Explore: React.FunctionComponent<{
             {({ width }) =>
               width > 0 ? (
                 <ExploreChart
-                  series={chartSeries}
+                  seriesList={chartSeries}
                   isMobile={isMobile}
                   width={width}
                   height={400}

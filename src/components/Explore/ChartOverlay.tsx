@@ -7,7 +7,7 @@ import { ScaleTime } from 'd3-scale';
  * the points (0, 0) to (width, height). It calls `onMouseOver` passing
  * the (x, y) coordinates of the point relative to its container SVG element.
  *
- * It calls `onMouseLeave` when the cursor leaves the hovering rectangle.
+ * It calls `onMouseOut` when the cursor leaves the hovering rectangle.
  */
 const ChartOverlay: React.FC<{
   width: number;

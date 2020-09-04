@@ -28,19 +28,19 @@ function getSeriesOpacity(
   tooltipOpen: boolean,
   tooltipData?: HoverPointInfo,
 ) {
-  if (tooltipOpen && tooltipData) {
-    return tooltipData.seriesIndex === currentSeriesIndex ? 1 : 0.3;
-  } else {
-    return 1;
-  }
+  return tooltipOpen &&
+    tooltipData &&
+    tooltipData.seriesIndex === currentSeriesIndex
+    ? 0.3
+    : 1;
 }
 
 const MultipleLocationsTooltip: React.FC<{
   top: number;
   left: number;
-  series: Series[];
+  seriesList: Series[];
   pointInfo: HoverPointInfo;
-}> = ({ top, left, series, pointInfo }) => {
+}> = ({ top, left, seriesList: series, pointInfo }) => {
   const { seriesIndex } = pointInfo;
   const currentSeries = isNumber(seriesIndex) ? series[seriesIndex] : null;
   return (
@@ -64,14 +64,14 @@ const MultipleLocationsTooltip: React.FC<{
 };
 
 const HoverDataMarker: React.FC<{
-  series: Series[];
+  seriesList: Series[];
   pointInfo: HoverPointInfo;
   x: (p: Column) => number;
   y: (p: Column) => number;
   height: number;
-}> = ({ series, pointInfo, height, x, y }) => {
+}> = ({ seriesList, pointInfo, height, x, y }) => {
   const { seriesIndex, pointIndex } = pointInfo;
-  const currentSeries = isNumber(seriesIndex) ? series[seriesIndex] : null;
+  const currentSeries = isNumber(seriesIndex) ? seriesList[seriesIndex] : null;
   const currentPoint =
     isNumber(pointIndex) && currentSeries
       ? currentSeries.data[pointIndex]
@@ -79,9 +79,9 @@ const HoverDataMarker: React.FC<{
   const x0 = x(pointInfo);
   return (
     <Fragment>
-      <Styles.TrackerLine>
+      <Styles.HoverTrackerLine>
         <Line x1={x0} x2={x0} y1={0} y2={height} />
-      </Styles.TrackerLine>
+      </Styles.HoverTrackerLine>
       {currentSeries && currentPoint && (
         <SeriesMarker
           key="series-marker"
@@ -100,10 +100,10 @@ const HoverDataMarker: React.FC<{
   );
 };
 
-const ExploreChart: React.FC<{
+const MultipleLocationsChart: React.FC<{
   width: number;
   height: number;
-  series: Series[];
+  seriesList: Series[];
   isMobile: boolean;
   marginTop?: number;
   marginBottom?: number;
@@ -113,7 +113,7 @@ const ExploreChart: React.FC<{
 }> = ({
   width,
   height,
-  series,
+  seriesList,
   isMobile,
   marginTop = 10,
   marginBottom = 30,
@@ -123,7 +123,7 @@ const ExploreChart: React.FC<{
 }) => {
   const dateFrom = new Date('2020-03-01');
   const dateTo = new Date();
-  const maxY = getMaxBy<number>(series, getY, 1);
+  const maxY = getMaxBy<number>(seriesList, getY, 1);
 
   const innerWidth = width - marginLeft - marginRight;
   const innerHeight = height - marginTop - marginBottom;
@@ -178,7 +178,7 @@ const ExploreChart: React.FC<{
             dateScale={dateScale}
             strokeColor={axisGridColor}
           />
-          {series.map(({ label, data, params }, i) =>
+          {seriesList.map(({ label, data, params }, i) =>
             data.length > 0 ? (
               <Styles.LineLabel
                 key={`label-${label}`}
@@ -192,7 +192,7 @@ const ExploreChart: React.FC<{
             ) : null,
           )}
           <RectClipGroup width={innerWidth} height={innerHeight}>
-            {series.map(({ label, data, type, params }, i) => (
+            {seriesList.map(({ label, data, type, params }, i) => (
               <ChartSeries
                 key={`series-chart-${label}`}
                 data={data}
@@ -211,7 +211,7 @@ const ExploreChart: React.FC<{
           </RectClipGroup>
           {tooltipOpen && tooltipData && (
             <HoverDataMarker
-              series={series}
+              seriesList={seriesList}
               pointInfo={tooltipData}
               x={getXPosition}
               y={getYPosition}
@@ -219,7 +219,7 @@ const ExploreChart: React.FC<{
             />
           )}
           <SeriesTooltipOverlay
-            series={series}
+            seriesList={seriesList}
             width={innerWidth}
             height={innerHeight}
             x={getXPosition}
@@ -233,7 +233,7 @@ const ExploreChart: React.FC<{
       {tooltipOpen && tooltipData && (
         <Fragment>
           <MultipleLocationsTooltip
-            series={series}
+            seriesList={seriesList}
             pointInfo={tooltipData}
             left={getXPosition(tooltipData) + marginLeft}
             top={getYPosition(tooltipData) + marginTop}
@@ -248,4 +248,4 @@ const ExploreChart: React.FC<{
   );
 };
 
-export default ExploreChart;
+export default MultipleLocationsChart;
