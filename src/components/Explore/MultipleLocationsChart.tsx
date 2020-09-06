@@ -30,7 +30,7 @@ function getSeriesOpacity(
 ) {
   return tooltipOpen &&
     tooltipData &&
-    tooltipData.seriesIndex === currentSeriesIndex
+    tooltipData.seriesIndex !== currentSeriesIndex
     ? 0.3
     : 1;
 }
