@@ -213,6 +213,10 @@ export function getAllSeriesForMetric(
   }));
 }
 
+function scalePer100k(data: Column[], population: number) {
+  return data.map(({ x, y }) => ({ x, y: y / (population / 100000) }));
+}
+
 /**
  * Returns the smoothed series for a given metric and projection. It's
  * used for the multiple-locations Explore chart. It receives a color
@@ -222,18 +226,24 @@ function getAveragedSeriesForMetric(
   metric: ExploreMetric,
   projection: Projection,
   color: string,
+  normalizeData: boolean,
 ): Series {
+  const { fips, totalPopulation } = projection;
   const datasetId = getDatasetIdByMetric(metric);
-  const location = findLocationForFips(projection.fips);
+  const location = findLocationForFips(fips);
+  const data = cleanSeries(projection.getDataset(datasetId));
+  const metricName = exploreMetricData[metric].title;
   return {
-    data: cleanSeries(projection.getDataset(datasetId)),
+    data: normalizeData ? scalePer100k(data, totalPopulation) : data,
     type: SeriesType.LINE,
     params: {
       stroke: color,
       fill: color,
     },
     label: getLocationLabel(location),
-    tooltipLabel: exploreMetricData[metric].title,
+    tooltipLabel: normalizeData
+      ? `${metricName} per 100k population`
+      : metricName,
   };
 }
 
@@ -379,6 +389,7 @@ const getCountyForLocation = (location: Location) =>
 export function getChartSeries(
   metric: ExploreMetric,
   locations: Location[],
+  normalizeData: boolean,
 ): Promise<Series[]> {
   if (locations.length === 1) {
     return fetchProjections(
@@ -387,14 +398,15 @@ export function getChartSeries(
     ).then(projections => getAllSeriesForMetric(metric, projections.primary));
   } else {
     return Promise.all(
-      locations.map((location, i) => {
+      locations.map(async (location, i) => {
+        const { state_code } = location;
         const county = getCountyForLocation(location);
-        return fetchProjections(location.state_code, county).then(projections =>
-          getAveragedSeriesForMetric(
-            metric,
-            projections.primary,
-            SERIES_COLORS[i % SERIES_COLORS.length],
-          ),
+        const projections = await fetchProjections(state_code, county);
+        return getAveragedSeriesForMetric(
+          metric,
+          projections.primary,
+          SERIES_COLORS[i % SERIES_COLORS.length],
+          normalizeData,
         );
       }),
     ).then(flatten);

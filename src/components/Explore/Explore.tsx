@@ -31,6 +31,7 @@ import {
   getChartSeries,
 } from './utils';
 import * as Styles from './Explore.style';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const Explore: React.FunctionComponent<{
   projection: Projection;
@@ -43,6 +44,8 @@ const Explore: React.FunctionComponent<{
   const defaultMetric =
     (chartId && getMetricByChartId(chartId)) || ExploreMetric.CASES;
   const [currentMetric, setCurrentMetric] = useState(defaultMetric);
+
+  const [normalizeData, setNormalizeData] = useState(true);
 
   const onChangeTab = (newMetric: number) => setCurrentMetric(newMetric);
 
@@ -71,9 +74,10 @@ const Explore: React.FunctionComponent<{
 
   const [chartSeries, setChartSeries] = useState<Series[]>([]);
   useEffect(() => {
-    const fetchSeries = () => getChartSeries(currentMetric, selectedLocations);
-    fetchSeries().then(seriesList => setChartSeries(seriesList));
-  }, [selectedLocations, currentMetric]);
+    const fetchSeries = () =>
+      getChartSeries(currentMetric, selectedLocations, normalizeData);
+    fetchSeries().then(setChartSeries);
+  }, [selectedLocations, currentMetric, normalizeData]);
 
   const hasData = some(chartSeries, ({ data }) => data.length > 0);
   const hasMultipleLocations = selectedLocations.length > 1;
@@ -88,8 +92,8 @@ const Explore: React.FunctionComponent<{
         <Grid item sm={6} xs={12}>
           <Styles.Heading variant="h4">Trends</Styles.Heading>
           <Styles.Subtitle>
-            {currentMetricName} since march 1st in{' '}
-            {getLocationNames(selectedLocations)}
+            {currentMetricName} {normalizeData ? 'per 100k population' : ''}{' '}
+            since march 1st in {getLocationNames(selectedLocations)}
           </Styles.Subtitle>
         </Grid>
         <Grid item sm={6} xs={12}>
@@ -121,6 +125,24 @@ const Explore: React.FunctionComponent<{
           {!hasMultipleLocations && (
             <Grid key="legend" item sm xs={12}>
               <Legend seriesList={chartSeries} />
+            </Grid>
+          )}
+          {hasMultipleLocations && (
+            <Grid key="legend" item sm xs={12}>
+              <FormControlLabel
+                control={
+                  <Styles.NormalizeCheckbox
+                    checked={normalizeData}
+                    onChange={() => {
+                      setNormalizeData(!normalizeData);
+                    }}
+                    name="normalize data"
+                    disableRipple
+                    id="normalize-data-control"
+                  />
+                }
+                label="Normalize Data"
+              />
             </Grid>
           )}
         </Grid>
