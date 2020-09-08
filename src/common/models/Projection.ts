@@ -12,7 +12,7 @@ import {
   Metrics,
 } from 'api/schema/RegionSummaryWithTimeseries';
 import { ICUHeadroomInfo, calcICUHeadroom } from './ICUHeadroom';
-import { lastValue, indexOfLastValue } from './utils';
+import { lastValue } from './utils';
 import { assert } from 'common/utils';
 
 /**

@@ -1,7 +1,5 @@
-import { nonNull } from 'common/utils';
 import {
   ActualsTimeseriesRow,
-  PredictionTimeseriesRow,
   Actuals,
   MetricsTimeseriesRow,
   Metrics,
