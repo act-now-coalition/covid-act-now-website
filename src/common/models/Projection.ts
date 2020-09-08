@@ -261,9 +261,9 @@ export class Projection {
     this.caseDensityByDeaths = this.calcCaseDensityByDeaths();
     this.caseDensityRange = this.calcCaseDensityRange();
 
-    this.currentCaseDensityByCases = lastValue(this.caseDensityByCases);
+    this.currentCaseDensityByCases = metrics ? metrics!.caseDensity : null;
     this.currentCaseDensityByDeaths = lastValue(this.caseDensityByDeaths);
-    this.currentCaseDensity = metrics?.caseDensity || null;
+    this.currentCaseDensity = metrics ? metrics!.caseDensity : null;
     this.currentDailyDeaths = lastValue(this.smoothedDailyDeaths);
 
     this.fixZeros(this.cumulativeDeaths);
@@ -284,14 +284,15 @@ export class Projection {
       summaryWithTimeseries.actuals.cumulativeDeaths;
     this.currentCumulativeCases =
       summaryWithTimeseries.actuals.cumulativeConfirmedCases;
-    this.currentContactTracerMetric =
-      metrics?.contactTracerCapacityRatio || null;
+    this.currentContactTracerMetric = metrics
+      ? metrics!.contactTracerCapacityRatio
+      : null;
   }
 
   get currentContactTracers() {
     return (
       CONTACT_TRACER_STATE_OVERRIDES[this.stateName] ||
-      lastValue(this.actualTimeseries.map(row => row && row.contactTracers)) ||
+      this.metrics?.contactTracerCapacityRatio ||
       null
     );
   }
