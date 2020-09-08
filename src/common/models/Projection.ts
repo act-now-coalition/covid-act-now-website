@@ -9,6 +9,7 @@ import {
   Timeseries,
   MetricsTimeseriesRow,
   Metricstimeseries,
+  Metrics,
 } from 'api/schema/RegionSummaryWithTimeseries';
 import { ICUHeadroomInfo, calcICUHeadroom } from './ICUHeadroom';
 import { lastValue, indexOfLastValue } from './utils';
@@ -155,6 +156,7 @@ export class Projection {
   private readonly smoothedHospitalizations: Array<number | null>;
   private readonly rawICUHospitalizations: Array<number | null>;
   private readonly smoothedICUHospitalizations: Array<number | null>;
+  private readonly metrics: Metrics | null;
 
   constructor(
     summaryWithTimeseries: RegionSummaryWithTimeseries,
@@ -173,6 +175,7 @@ export class Projection {
     const metrics = summaryWithTimeseries.metrics;
     const actuals = summaryWithTimeseries.actuals;
 
+    this.metrics = metrics ? metrics : null;
     this.timeseries = timeseries;
     this.actualTimeseries = actualTimeseries;
     this.dates = dates;
@@ -352,17 +355,11 @@ export class Projection {
       return null;
     }
 
-    return lastValue(this.testPositiveRate);
+    return this.metrics ? this.metrics.testPositivityRatio : null;
   }
 
   get rt(): number | null {
-    const lastIndex = indexOfLastValue(this.rtRange);
-    if (lastIndex !== null && lastIndex >= RT_TRUNCATION_DAYS) {
-      const range = this.rtRange[lastIndex - RT_TRUNCATION_DAYS];
-      return range === null ? null : range.rt;
-    } else {
-      return null;
-    }
+    return this.metrics ? this.metrics.infectionRate : null;
   }
 
   private getColumn(columnName: string): Column[] {
