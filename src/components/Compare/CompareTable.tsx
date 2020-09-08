@@ -1,12 +1,13 @@
 import React from 'react';
 import { sortBy, findIndex, partition, reverse, isNumber } from 'lodash';
+import { useTheme } from '@material-ui/core/styles';
+import { useMediaQuery } from '@material-ui/core';
 import {
   Wrapper,
   Footer,
-  ViewAllLink,
+  FooterLink,
   HeaderWrapper,
   Header,
-  DisclaimerWrapper,
 } from 'components/Compare/Compare.style';
 import LocationTable from './LocationTable';
 import { ChartLocationName } from 'components/LocationPage/ChartsHolder.style';
@@ -20,7 +21,6 @@ import {
   getAbbreviatedCounty,
   metroPrefixCopy,
 } from 'common/utils/compare';
-import { Metric } from 'common/metric';
 import { COLOR_MAP } from 'common/colors';
 
 const CompareTable = (props: {
@@ -48,6 +48,7 @@ const CompareTable = (props: {
   setSortByPopulation: React.Dispatch<React.SetStateAction<boolean>>;
   sliderValue: GeoScopeFilter;
   setSliderValue: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
+  setShowFaqModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const {
     sorter,
@@ -143,17 +144,16 @@ const CompareTable = (props: {
     ? { rank: currentCountyRank + 1, ...currentCounty }
     : null;
 
-  const disclaimerRedirect =
-    currentCounty &&
-    `/us/${currentCounty.locationInfo.state_code.toLowerCase()}/chart/${
-      Metric.CONTACT_TRACING
-    }`;
-
   const compareSubheader = props.county
     ? `${getAbbreviatedCounty(props.county.county)}, ${
         props.stateId
       } to other counties`
     : `Counties in ${props.stateName}`;
+
+  const theme = useTheme();
+  // hard-coded 700 because MUI mobile breakpoint of 600 was too small
+  const isMobile = useMediaQuery(theme.breakpoints.down(700));
+  const faqLinkCopy = isMobile ? 'FAQ' : 'Frequently Asked Questions';
 
   return (
     <Wrapper isModal={props.isModal} isHomepage={props.isHomepage}>
@@ -205,26 +205,13 @@ const CompareTable = (props: {
               Displaying <strong>{amountDisplayed}</strong> of{' '}
               <strong>{sortedLocationsArr.length}</strong>{' '}
             </span>
-            <ViewAllLink onClick={() => props.setShowModal(true)}>
+            <FooterLink onClick={() => props.setShowModal(true)}>
               {props.viewMoreCopy}
-            </ViewAllLink>
+            </FooterLink>
           </div>
-          {props.county && (
-            <DisclaimerWrapper>
-              <span>
-                Most states report contact tracing at the state-level only. View{' '}
-                {props.stateName}'s{' '}
-                <a
-                  href={disclaimerRedirect}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  contact tracing{' '}
-                </a>
-                data.
-              </span>
-            </DisclaimerWrapper>
-          )}
+          <FooterLink onClick={() => props.setShowFaqModal(true)}>
+            {faqLinkCopy}
+          </FooterLink>
         </Footer>
       )}
     </Wrapper>

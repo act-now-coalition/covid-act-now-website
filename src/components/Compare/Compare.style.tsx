@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { isNumber } from 'lodash';
-import { TableHead, TableCell, TableRow } from '@material-ui/core';
+import { TableHead, TableCell, TableRow, Modal } from '@material-ui/core';
 import {
   COLOR_MAP,
   LEVEL_COLOR,
@@ -29,6 +29,13 @@ const getMetricHeaderBackground = (
     return 'white';
   }
 };
+
+export const CenteredContentModal = styled(Modal)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 
 export const Wrapper = styled.div<{ isModal?: Boolean; isHomepage?: boolean }>`
   max-width: ${({ isHomepage }) => (isHomepage ? '1000px' : '900px')};
@@ -238,6 +245,8 @@ export const Population = styled.span`
   font-size: 0.875rem;
 `;
 
+export const LocationInfoWrapper = styled.div``;
+
 export const CountySuffix = styled.div`
   font-weight: normal;
   margin-right: 0.25rem;
@@ -291,6 +300,15 @@ export const MetricCell = styled.td<{
     margin-right: 0.75rem;
   }
 
+  ${Population} {
+    margin-right: 0.5rem;
+  }
+
+  ${LocationInfoWrapper} {
+    display: flex;
+    align-items: center;
+  }
+
   &:last-child {
     svg {
       color: ${({ iconColor }) =>
@@ -312,6 +330,15 @@ export const MetricValue = styled.span<{ valueUnknown: boolean }>`
   display: inline-block;
   text-align: right;
   opacity: ${({ valueUnknown }) => valueUnknown && '.5'};
+`;
+
+export const Tag = styled.div`
+  border-radius: 5px;
+  font-size: 0.875rem;
+  padding: 0.2rem 0.35rem;
+  font-weight: bold;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+  background: ${COLORS.LIGHTGRAY};
 `;
 
 export const Row = styled(TableRow)<{
@@ -339,7 +366,8 @@ export const Row = styled(TableRow)<{
     color: ${({ headerRowBackground }) =>
       !headerRowBackground && `${COLOR_MAP.BLUE}`};
     ${MetricCell} {
-      span {
+      span,
+      ${Tag} {
         color: ${COLOR_MAP.BLUE};
       }
     }
@@ -349,9 +377,9 @@ export const Row = styled(TableRow)<{
 export const Footer = styled.div<{ isCounty: any }>`
   display: flex;
   padding: 1.25rem 0.75rem;
-  flex-direction: column;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   font-size: 0.875rem;
+  justify-content: space-between;
 
   span {
     margin-right: 1rem;
@@ -360,55 +388,29 @@ export const Footer = styled.div<{ isCounty: any }>`
   div {
     &:first-child {
       display: flex;
-      justify-content: ${({ isCounty }) =>
-        isCounty ? 'center' : 'flex-start'};
-      flex-wrap: wrap;
+      flex-direction: column;
     }
   }
 
-  //740px is when disclaimer is about to overlap with state name:
-  @media (min-width: 740px) {
-    flex-direction: row;
-
+  @media (min-width: 600px) {
     div {
       &:first-child {
-        justify-content: unset;
-        flex-wrap: nowrap;
+        flex-direction: row;
       }
     }
   }
 `;
 
-export const ViewAllLink = styled.div`
+export const FooterLink = styled.div`
   font-family: Roboto;
   color: ${COLOR_MAP.BLUE};
   font-weight: 500;
   cursor: pointer;
-`;
 
-export const DisclaimerWrapper = styled.div`
-  background: #fafafa;
-  max-width: 345px;
-  padding: 0.75rem;
-  line-height: 1.4;
-  margin: 1rem 1.25rem 0;
-  display: flex;
-  align-self: center;
-
-  span {
-    color: rgba(0, 0, 0, 0.7);
-  }
-
-  a {
-    color: ${COLOR_MAP.BLUE};
-    text-decoration: none;
-  }
-
-  //740px is when disclaimer is about to overlap with state name:
-  @media (min-width: 740px) {
-    margin: -0.25rem 0 0 auto;
-    width: 100%;
-    align-self: unset;
+  @media (min-width: 600px) {
+    &:last-child {
+      margin-left: auto;
+    }
   }
 `;
 

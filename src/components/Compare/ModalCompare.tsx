@@ -40,6 +40,7 @@ const ModalCompare = (props: {
   setSortByPopulation: React.Dispatch<React.SetStateAction<boolean>>;
   sliderValue: GeoScopeFilter;
   setSliderValue: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
+  setShowFaqModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const { handleCloseModal } = props;
 
@@ -100,6 +101,7 @@ const ModalCompare = (props: {
         setSortByPopulation={props.setSortByPopulation}
         sliderValue={props.sliderValue}
         setSliderValue={props.setSliderValue}
+        setShowFaqModal={props.setShowFaqModal}
       />
     </Fragment>
   );

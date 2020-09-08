@@ -3,6 +3,7 @@ import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset
 import { each, sortBy, takeRight, has } from 'lodash';
 import { assert } from './utils';
 import countyAdjacencyMsa from './data/county_adjacency_msa.json';
+import collegesByFips from './data/colleges_by_fips.json';
 
 interface AdjacencyData {
   [fips: string]: {
@@ -12,6 +13,18 @@ interface AdjacencyData {
 }
 
 const ADJACENT_COUNTIES: AdjacencyData = countyAdjacencyMsa.counties;
+
+interface CollegeData {
+  fips: string;
+  name: string;
+  ft_enroll: number;
+}
+
+interface CollegeMap {
+  [fips: string]: CollegeData[];
+}
+
+const COLLEGES: CollegeMap = collegesByFips;
 
 // TODO(michael): Move more common code here.
 export interface State {
@@ -156,4 +169,8 @@ export function getCountyMsaCode(fips: string): string | undefined {
   if (has(ADJACENT_COUNTIES, fips)) {
     return ADJACENT_COUNTIES[fips].msa_code;
   }
+}
+
+export function getColleges(fips: string): CollegeData[] {
+  return COLLEGES[fips] || [];
 }

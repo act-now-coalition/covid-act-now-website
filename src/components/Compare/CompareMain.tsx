@@ -1,8 +1,14 @@
-import React, { useState, Fragment, useRef } from 'react';
+import * as QueryString from 'query-string';
+import React, { useState, Fragment, useRef, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Modal } from '@material-ui/core';
 import CompareTable from 'components/Compare/CompareTable';
 import ModalCompare from 'components/Compare/ModalCompare';
-import { DivForRef } from 'components/Compare/Compare.style';
+import ModalFaq from 'components/Compare/ModalFaq';
+import {
+  DivForRef,
+  CenteredContentModal,
+} from 'components/Compare/Compare.style';
 import {
   getAllStates,
   getAllCountiesSelection,
@@ -13,6 +19,8 @@ import {
   MetroFilter,
   GeoScopeFilter,
 } from 'common/utils/compare';
+import { Metric } from 'common/metric';
+import * as urls from 'common/urls';
 
 const CompareMain = (props: {
   stateName?: string;
@@ -22,6 +30,7 @@ const CompareMain = (props: {
   isHomepage?: boolean;
   currentCounty?: any;
   stateId?: string;
+  autoScroll?: boolean;
 }) => {
   const tableRef = useRef<HTMLDivElement>(null);
   const scrollOffset = props.isHomepage ? 75 : 165;
@@ -33,13 +42,61 @@ const CompareMain = (props: {
       behavior: 'smooth',
     });
 
-  const [sorter, setSorter] = useState(5);
-  const [sortDescending, setSortDescending] = useState(true);
-  const [sortByPopulation, setSortByPopulation] = useState(false);
-  const [countyTypeToView, setCountyTypeToView] = useState(MetroFilter.ALL);
+  const location = useLocation();
+  const queryParams = QueryString.parse(location.search, {
+    parseBooleans: true,
+    parseNumbers: true,
+  });
 
+  // Looks up the named query param or returns the default value.
+  const getQueryParam = <T extends number | boolean | string>(
+    param: string,
+    defaultVal: T,
+  ): T => {
+    const val = queryParams[param];
+    // If the type doesn't match, it's either undefined or an unexpected value; so return the default.
+    if (typeof val !== typeof defaultVal) {
+      return defaultVal;
+    }
+    return val as T;
+  };
+
+  const [sorter, setSorter] = useState(
+    getQueryParam<Metric>('sorter', Metric.CASE_DENSITY),
+  );
+  const [sortDescending, setSortDescending] = useState(
+    getQueryParam<boolean>('sortDescending', true),
+  );
+  const [sortByPopulation, setSortByPopulation] = useState(
+    getQueryParam<boolean>('sortByPopulation', false),
+  );
+  const [countyTypeToView, setCountyTypeToView] = useState(
+    getQueryParam<MetroFilter>('countyTypeToView', MetroFilter.ALL),
+  );
   // For homepage:
-  const [viewAllCounties, setViewAllCounties] = useState(false);
+  const [viewAllCounties, setViewAllCounties] = useState(
+    getQueryParam<boolean>('viewAllCounties', false),
+  );
+  // For location page:
+  const [geoScope, setGeoScope] = useState(
+    getQueryParam<GeoScopeFilter>('geoScope', GeoScopeFilter.STATE),
+  );
+
+  const shareParams = {
+    sorter,
+    sortDescending,
+    sortByPopulation,
+    countyTypeToView,
+    viewAllCounties,
+    geoScope,
+  };
+
+  const shareUrl = urls.getComparePageUrl(
+    props.stateId,
+    props.county,
+    shareParams,
+  );
+  console.log('Share URL: ', shareUrl);
 
   const homepageLocationsForCompare = viewAllCounties
     ? getAllCountiesSelection(countyTypeToView)
@@ -49,9 +106,6 @@ const CompareMain = (props: {
     viewAllCounties,
     countyTypeToView,
   );
-
-  // For location page:
-  const [geoScope, setGeoScope] = useState(GeoScopeFilter.STATE);
 
   function getLocationPageLocations() {
     if (geoScope === GeoScopeFilter.NEARBY) {
@@ -75,17 +129,29 @@ const CompareMain = (props: {
     ? homepageViewMoreCopy
     : locationPageViewMoreCopy;
 
-  // Note (Chelsi): short delay is needed to make scrollTo work
-  const [showModal, setShowModal] = useState(false);
-  const handleCloseModal = () => {
-    setShowModal(false);
-    const timeoutId = setTimeout(() => {
+  const scrollToCompare = () => {
+    // Note (Chelsi): short delay is needed to make scrollTo work
+    return setTimeout(() => {
       if (tableRef.current) {
         scrollTo(tableRef.current);
       }
     }, 250);
-    return () => clearTimeout(timeoutId);
   };
+
+  const [showModal, setShowModal] = useState(false);
+  const [showFaqModal, setShowFaqModal] = useState(false);
+  const handleCloseModal = () => {
+    setShowFaqModal(false);
+    setShowModal(false);
+    scrollToCompare();
+  };
+
+  useEffect(() => {
+    if (props.autoScroll) {
+      const timeoutId = scrollToCompare();
+      return () => clearTimeout(timeoutId);
+    }
+  });
 
   // For filters:
   const scopeValueMap = {
@@ -122,6 +188,7 @@ const CompareMain = (props: {
     setSortByPopulation,
     sliderValue,
     setSliderValue,
+    setShowFaqModal,
   };
 
   return (
@@ -137,6 +204,9 @@ const CompareMain = (props: {
       <Modal open={showModal} onClose={handleCloseModal}>
         <ModalCompare {...sharedProps} handleCloseModal={handleCloseModal} />
       </Modal>
+      <CenteredContentModal open={showFaqModal} onClose={handleCloseModal}>
+        <ModalFaq handleCloseModal={handleCloseModal} />
+      </CenteredContentModal>
     </Fragment>
   );
 };
