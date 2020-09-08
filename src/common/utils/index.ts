@@ -72,11 +72,16 @@ export function formatInteger(num: number): string {
  *   formatDecimal(1.2345)    // 1.23
  *   formatDecimal(1.2345, 3) // 1.234
  */
-export const formatDecimal = (num: number, places = 2): string =>
-  num.toLocaleString(undefined, {
+export const formatDecimal = (num: number, places = 2): string => {
+  if (num === null) {
+    return '--';
+  }
+
+  return num.toLocaleString(undefined, {
     minimumFractionDigits: places,
     maximumFractionDigits: places,
   });
+};
 /**
  * Returns a percentage representation of a number.
  *
