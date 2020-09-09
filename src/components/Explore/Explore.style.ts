@@ -7,6 +7,7 @@ import MuiTabs from '@material-ui/core/Tabs';
 import theme from 'assets/theme';
 import colorPalette from 'assets/theme/palette';
 import { charts } from 'components/Charts/Charts.style';
+import { COLOR_MAP } from 'common/colors';
 
 /** Gets the chart palette based on the current theme. */
 function palette(props: any) {
@@ -72,7 +73,11 @@ export const ChartControlsContainer = styled.div`
   margin: ${theme.spacing(2)}px auto;
 `;
 
-export const NormalizeCheckbox = styled(MuiCheckbox)``;
+export const NormalizeCheckbox = styled(MuiCheckbox)`
+  span {
+    color: white;
+  }
+`;
 
 export const LegendContainer = styled(Box)`
   display: flex;
@@ -239,4 +244,16 @@ export const TooltipLocation = styled.div`
   font-size: 11px;
   line-height: 13px;
   color: ${colorPalette.white};
+`;
+
+export const NormalizeDataContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const NormalizeSubLabel = styled.div`
+  font-size: 0.75rem;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+  margin-left: 2rem;
+  margin-top: -0.75rem;
 `;

@@ -86,6 +86,12 @@ const Explore: React.FunctionComponent<{
   const lastUpdatedDateString =
     lastUpdatedDate !== null ? lastUpdatedDate.toLocaleDateString() : '';
 
+  const modalNormalizeCheckboxProps = {
+    hasMultipleLocations,
+    normalizeData,
+    setNormalizeData,
+  };
+
   return (
     <Styles.Container>
       <Grid container spacing={1}>
@@ -120,6 +126,7 @@ const Explore: React.FunctionComponent<{
               locations={autocompleteLocations}
               selectedLocations={selectedLocations}
               onChangeSelectedLocations={onChangeSelectedLocations}
+              {...modalNormalizeCheckboxProps}
             />
           </Grid>
           {!hasMultipleLocations && (
@@ -128,22 +135,27 @@ const Explore: React.FunctionComponent<{
             </Grid>
           )}
           {hasMultipleLocations && (
-            <Grid key="legend" item sm xs={12}>
-              <FormControlLabel
-                control={
-                  <Styles.NormalizeCheckbox
-                    checked={normalizeData}
-                    onChange={() => {
-                      setNormalizeData(!normalizeData);
-                    }}
-                    name="normalize data"
-                    disableRipple
-                    id="normalize-data-control"
-                  />
-                }
-                label="Normalize Data"
-              />
-            </Grid>
+            <Styles.NormalizeDataContainer>
+              <Grid key="legend" item sm xs={12}>
+                <FormControlLabel
+                  control={
+                    <Styles.NormalizeCheckbox
+                      checked={normalizeData}
+                      onChange={() => {
+                        setNormalizeData(!normalizeData);
+                      }}
+                      name="normalize data"
+                      disableRipple
+                      id="normalize-data-control"
+                    />
+                  }
+                  label="Normalize Data"
+                />
+              </Grid>
+              <Styles.NormalizeSubLabel>
+                Per 100k population
+              </Styles.NormalizeSubLabel>
+            </Styles.NormalizeDataContainer>
           )}
         </Grid>
       </Styles.ChartControlsContainer>

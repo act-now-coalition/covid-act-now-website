@@ -9,7 +9,7 @@ import { REVERSED_STATES } from 'common';
 import { useSummaries } from 'common/location_summaries';
 import { ScreenshotReady } from 'components/Screenshot';
 
-function getStateCode(stateName) {
+export function getStateCode(stateName) {
   return REVERSED_STATES[stateName];
 }
 

@@ -8,11 +8,28 @@ import { Location } from 'common/locations';
 import * as Styles from './LocationSelector.style';
 import AutocompleteLocations from 'components/AutocompleteLocations';
 
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import {
+  NormalizeCheckbox,
+  NormalizeDataContainer,
+  NormalizeSubLabel,
+} from './Explore.style';
+
 const LocationSelector: React.FC<{
   locations: Location[];
   selectedLocations: Location[];
   onChangeSelectedLocations: (newLocations: Location[]) => void;
-}> = ({ locations, selectedLocations, onChangeSelectedLocations }) => {
+  hasMultipleLocations: boolean;
+  normalizeData: boolean;
+  setNormalizeData: React.Dispatch<React.SetStateAction<boolean>>;
+}> = ({
+  locations,
+  selectedLocations,
+  onChangeSelectedLocations,
+  hasMultipleLocations,
+  normalizeData,
+  setNormalizeData,
+}) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
@@ -60,6 +77,27 @@ const LocationSelector: React.FC<{
                 onChangeLocations={onChangeLocations}
                 selectedLocations={selectedLocations}
               />
+              {hasMultipleLocations && (
+                <NormalizeDataContainer>
+                  <Grid key="legend" item sm xs={12}>
+                    <FormControlLabel
+                      control={
+                        <NormalizeCheckbox
+                          checked={normalizeData}
+                          onChange={() => {
+                            setNormalizeData(!normalizeData);
+                          }}
+                          name="normalize data"
+                          disableRipple
+                          id="normalize-data-control"
+                        />
+                      }
+                      label="Normalize Data"
+                    />
+                  </Grid>
+                  <NormalizeSubLabel>Per 100k population</NormalizeSubLabel>
+                </NormalizeDataContainer>
+              )}
             </Styles.ModalBody>
           </Styles.ModalContainer>
         </Modal>

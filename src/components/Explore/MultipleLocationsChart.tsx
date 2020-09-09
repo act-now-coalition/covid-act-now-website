@@ -19,6 +19,7 @@ import { Line } from '@vx/shape';
 import DateMarker from './DateMarker';
 import GridLines from './GridLines';
 import Axes from './Axes';
+import { getStateCode } from 'components/Map/USACountyMap';
 
 const getDate = (d: Column) => new Date(d.x);
 const getY = (d: Column) => d.y;
@@ -178,8 +179,11 @@ const MultipleLocationsChart: React.FC<{
             dateScale={dateScale}
             strokeColor={axisGridColor}
           />
-          {seriesList.map(({ label, data, params }, i) =>
-            data.length > 0 ? (
+          {seriesList.map(({ label, data, params }, i) => {
+            const locationLabel = !isMobile
+              ? label
+              : getStateCode(label) || label.slice(0, 3);
+            return data.length > 0 ? (
               <Styles.LineLabel
                 key={`label-${label}`}
                 x={innerWidth + 5}
@@ -187,10 +191,10 @@ const MultipleLocationsChart: React.FC<{
                 fill={params?.stroke || '#000'}
                 fillOpacity={getSeriesOpacity(i, tooltipOpen, tooltipData)}
               >
-                {label}
+                {locationLabel}
               </Styles.LineLabel>
-            ) : null,
-          )}
+            ) : null;
+          })}
           <RectClipGroup width={innerWidth} height={innerHeight}>
             {seriesList.map(({ label, data, type, params }, i) => (
               <ChartSeries
