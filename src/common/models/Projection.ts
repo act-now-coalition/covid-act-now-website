@@ -422,7 +422,12 @@ export class Projection {
     );
     let earliestDate, latestDate;
     // If we have projections, we use that time range; else we use the actuals.
-    if (timeseriesRaw.length > 0) {
+    // TODO(chris): Is there a reason that this was bound to the projections timeseries first?
+    // It cuts off some of the earlier dates
+    if (metricsTimeseriesRaw.length > 0) {
+      earliestDate = moment.utc(_.first(metricsTimeseriesRaw)!.date);
+      latestDate = moment.utc(_.last(metricsTimeseriesRaw)!.date);
+    } else if (timeseriesRaw.length > 0) {
       earliestDate = moment.utc(_.first(timeseriesRaw)!.date);
       latestDate = moment.utc(_.last(timeseriesRaw)!.date);
     } else {
