@@ -9,6 +9,8 @@ import {
   CountySuffix,
   Tag,
   LocationInfoWrapper,
+  LocationNameCell,
+  Rank,
 } from 'components/Compare/Compare.style';
 import { Metric, formatValue } from 'common/metric';
 import {
@@ -73,12 +75,12 @@ const CompareTableRow = (props: {
         isCurrentCounty={isCurrentCounty}
         isModal={isModal}
       >
-        <MetricCell
+        <LocationNameCell
           iconColor={location.metricsInfo.level}
           sortByPopulation={sortByPopulation}
         >
           <div>
-            <span>{location.rank}</span>
+            <Rank>{location.rank}</Rank>
             <FiberManualRecordIcon />
           </div>
           <div>
@@ -98,7 +100,7 @@ const CompareTableRow = (props: {
               {collegeTag && <Tag>College</Tag>}
             </LocationInfoWrapper>
           </div>
-        </MetricCell>
+        </LocationNameCell>
         {orderedMetrics.map((metric: Metric) => {
           const metricForValue = location.metricsInfo.metrics[metric];
           const valueUnknown =

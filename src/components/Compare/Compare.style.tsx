@@ -243,77 +243,57 @@ export const TableHeadContainer = styled(TableHead)<{ isModal?: Boolean }>`
 export const Population = styled.span`
   font-family: Source Code Pro;
   font-size: 0.875rem;
+  color: ${COLOR_MAP.GRAY.DARK};
+  font-family: Source Code Pro;
+  margin-right: 0.75rem;
+  margin-right: 0.5rem;
 `;
 
-export const LocationInfoWrapper = styled.div``;
+export const Rank = styled.span`
+  color: ${COLOR_MAP.GRAY.DARK};
+  font-family: Source Code Pro;
+  margin-right: 0.75rem;
+`;
 
-export const CountySuffix = styled.div`
+export const LocationInfoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const CountySuffix = styled.span`
   font-weight: normal;
   margin-right: 0.25rem;
 `;
 
-export const MetricCell = styled.td<{
+const SharedCellStyles = css`
+  text-align: left;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  cursor: pointer;
+
+  svg {
+    margin-right: 0.4rem;
+    font-size: 0.75rem;
+  }
+`;
+
+export const LocationNameCell = styled.td<{
   countyName?: Boolean;
   iconColor?: Level;
   sorter?: any;
   metric?: Metric;
   sortByPopulation: boolean;
 }>`
-  text-align: left;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  cursor: pointer;
-
-  &:first-child {
-    min-width: ${locationNameCellWidth}px;
-    background-color: ${({ sortByPopulation }) =>
-      sortByPopulation && 'rgba(0,0,0,0.02)'};
-    font-weight: 500;
-    line-height: 1.2;
-
-    span {
-      color: ${COLOR_MAP.GRAY.DARK};
-    }
-  }
-
-  &:not(:first-child) {
-    min-width: ${metricCellWidth}px;
-    font-family: Source Code Pro;
-    color: ${({ sorter, metric }) =>
-      sorter === metric ? 'black' : `${COLOR_MAP.GRAY_BODY_COPY}`};
-    font-weight: ${({ sorter, metric, sortByPopulation }) =>
-      !sortByPopulation && sorter === metric && '600'};
-    background-color: ${({ sorter, metric, sortByPopulation }) =>
-      !sortByPopulation && sorter === metric && 'rgba(0,0,0,0.02)'};
-  }
+  ${SharedCellStyles}
+  min-width: ${locationNameCellWidth}px;
+  background-color: ${({ sortByPopulation }) =>
+    sortByPopulation && 'rgba(0,0,0,0.02)'};
+  font-weight: 500;
+  line-height: 1.2;
 
   svg {
-    margin-right: 0.4rem;
-    font-size: 0.75rem;
     color: ${({ iconColor }) =>
       iconColor !== undefined && `${LEVEL_COLOR[iconColor]}`};
-  }
-
-  span {
-    font-family: Source Code Pro;
-    color: ${COLOR_MAP.GRAY_BODY_COPY};
-    margin-right: 0.75rem;
-  }
-
-  ${Population} {
-    margin-right: 0.5rem;
-  }
-
-  ${LocationInfoWrapper} {
-    display: flex;
-    align-items: center;
-  }
-
-  &:last-child {
-    svg {
-      color: ${({ iconColor }) =>
-        iconColor !== undefined && `${LEVEL_COLOR_CONTACT_TRACING[iconColor]}`};
-    }
   }
 
   div {
@@ -330,6 +310,38 @@ export const MetricValue = styled.span<{ valueUnknown: boolean }>`
   display: inline-block;
   text-align: right;
   opacity: ${({ valueUnknown }) => valueUnknown && '.5'};
+  font-family: Source Code Pro;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+  margin-right: 0.75rem;
+`;
+
+export const MetricCell = styled.td<{
+  countyName?: Boolean;
+  iconColor?: Level;
+  sorter?: any;
+  metric?: Metric;
+  sortByPopulation: boolean;
+}>`
+  ${SharedCellStyles}
+  min-width: ${metricCellWidth}px;
+  color: ${({ sorter, metric }) =>
+    sorter === metric ? 'black' : `${COLOR_MAP.GRAY_BODY_COPY}`};
+  font-weight: ${({ sorter, metric, sortByPopulation }) =>
+    !sortByPopulation && sorter === metric && '600'};
+  background-color: ${({ sorter, metric, sortByPopulation }) =>
+    !sortByPopulation && sorter === metric && 'rgba(0,0,0,0.02)'};
+
+  svg {
+    color: ${({ iconColor }) =>
+      iconColor !== undefined && `${LEVEL_COLOR[iconColor]}`};
+  }
+
+  &:last-child {
+    svg {
+      color: ${({ iconColor }) =>
+        iconColor !== undefined && `${LEVEL_COLOR_CONTACT_TRACING[iconColor]}`};
+    }
+  }
 `;
 
 export const Tag = styled.div`
