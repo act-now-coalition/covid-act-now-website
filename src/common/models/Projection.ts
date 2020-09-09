@@ -10,7 +10,6 @@ import {
 } from 'api/schema/RegionSummaryWithTimeseries';
 import { ICUHeadroomInfo, calcICUHeadroom } from './ICUHeadroom';
 import { lastValue, indexOfLastValue } from './utils';
-import { assert } from 'common/utils';
 
 /**
  * We truncate (or in the case of charts, switch to a dashed line) the last
