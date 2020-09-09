@@ -171,7 +171,7 @@ export class Projection {
     const metrics = summaryWithTimeseries.metrics;
     const actuals = summaryWithTimeseries.actuals;
 
-    this.metrics = metrics ? metrics : null;
+    this.metrics = metrics || null;
     this.timeseries = timeseries;
     this.actualTimeseries = actualTimeseries;
     this.dates = dates;
@@ -278,7 +278,7 @@ export class Projection {
     this.currentCumulativeCases =
       summaryWithTimeseries.actuals.cumulativeConfirmedCases;
     this.currentContactTracerMetric = metrics
-      ? metrics!.contactTracerCapacityRatio
+      ? metrics.contactTracerCapacityRatio
       : null;
   }
 
@@ -500,15 +500,8 @@ export class Projection {
   private calcRtRange(
     timeseries: Array<MetricsTimeseriesRow | null>,
   ): Array<RtRange | null> {
-    const rtSeriesRaw = timeseries.map(row => row && row.infectionRate);
-    const rtCiSeriesRaw = timeseries.map(row => row && row.infectionRateCI90);
-
-    // This hides small gaps (less than 2 data points) in the rt series to make
-    // it more visually appealing without making up large amounts of data.
-    // TODO(michael): Remove this if we fix it in the model / API.
-    // https://github.com/covid-projections/covid-data-model/issues/340
-    const rtSeries = this.interpolateNullGaps(rtSeriesRaw, /*maxGap=*/ 2);
-    const rtCiSeries = this.interpolateNullGaps(rtCiSeriesRaw, /*maxGap=*/ 2);
+    const rtSeries = timeseries.map(row => row && row.infectionRate);
+    const rtCiSeries = timeseries.map(row => row && row.infectionRateCI90);
 
     return rtSeries.map((rt, idx) => {
       const ci = rtCiSeries[idx];
