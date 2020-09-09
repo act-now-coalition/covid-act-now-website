@@ -92,7 +92,9 @@ export function calcICUHeadroom(
     actuals.ICUBeds.totalCapacity;
 
   return {
-    metricSeries: metricsTimeseries.map(row => row?.icuHeadroomRatio || null),
+    metricSeries: metricsTimeseries.map(row =>
+      row ? row.icuHeadroomRatio : null,
+    ),
     metricValue: metrics.icuHeadroomRatio,
     overrideInPlace,
     totalBeds: finalTotalBeds,

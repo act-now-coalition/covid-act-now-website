@@ -1,5 +1,4 @@
 import React from 'react';
-import ExternalLink from 'components/ExternalLink';
 
 import {
   AnnouncementsSectionHeader,
@@ -17,19 +16,17 @@ const Announcements = () => {
     <Wrapper>
       <AnnouncementsSectionHeader>Announcements</AnnouncementsSectionHeader>
       <AnnouncementIntro>
-        Introducing Puerto Rico COVID Risk Mapping to our U.S. Coverage
+        Introducing Northern Mariana Islands and Puerto Rico to our COVID Risk
+        Mapping
       </AnnouncementIntro>
-      <Date>Wednesday, August 19, 2020</Date>
+      <Date>WEDNESDAY, Sept 9, 2020</Date>
       <AnnouncementBodyCopy>
-        We are happy to announce the launch of Puerto Rico in our U.S. Coverage
-        Map! We believe that this is an important development given that Puerto
-        Rico is a U.S. territory affected by American public policy—but until
-        now, there were no visualizations for county-level COVID data for Puerto
-        Rico.{' '}
-        <ExternalLink href="https://blog.covidactnow.org/introduciendo-puerto-rico-a-nuestro-mapa-de-intervenciones-para-estados-unidos">
-          Leer el anuncio en español
-        </ExternalLink>
-        .
+        We are happy to announce the launch of two U.S. territories, the
+        Northern Mariana Islands and Puerto Rico, in our U.S. Coverage Map! We
+        believe that this is an important development, given that the Northern
+        Mariana Islands and Puerto Rico are U.S. territories affected by
+        American public policy and COVID. Until now, there were no
+        visualizations for county-level COVID data for either territory.
       </AnnouncementBodyCopy>
       <ButtonsContainer>
         <ReadMoreButton

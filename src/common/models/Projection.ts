@@ -12,8 +12,7 @@ import {
   Metrics,
 } from 'api/schema/RegionSummaryWithTimeseries';
 import { ICUHeadroomInfo, calcICUHeadroom } from './ICUHeadroom';
-import { lastValue } from './utils';
-import { assert } from 'common/utils';
+import { lastValue, indexOfLastValue } from './utils';
 
 /**
  * We truncate (or in the case of charts, switch to a dashed line) the last
@@ -409,10 +408,13 @@ export class Projection {
     const timeseriesRaw = summaryWithTimeseries.timeseries;
     const actualsTimeseriesRaw = summaryWithTimeseries.actualsTimeseries;
     const metricsTimeseriesRaw = summaryWithTimeseries.metricsTimeseries;
-    assert(
-      actualsTimeseriesRaw.length > 0,
-      `FIPS ${this.fips} missing actuals timeseries!`,
-    );
+    if (actualsTimeseriesRaw.length === 0) {
+      return {
+        timeseries: [],
+        actualTimeseries: [],
+        dates: [],
+      };
+    }
     let earliestDate, latestDate;
     // If we have projections, we use that time range; else we use the actuals.
     // TODO(chris): Is there a reason that this was bound to the projections timeseries first?
