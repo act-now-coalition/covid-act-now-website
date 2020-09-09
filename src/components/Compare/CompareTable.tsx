@@ -159,6 +159,7 @@ const CompareTable = (props: {
   // Disabling filters for Northern Mariana Islands because they don't have
   // any data on metro vs non-metro islands.  There may be more elegant solutions
   // that better handle any region without metro/non-metro regions.
+  // TODO(chris): https://trello.com/c/KdfFwRvf/430-handle-filters-in-compare-table-with-no-results-more-cleanly
   const disableFilters = stateId === 'MP';
 
   // Only showing the view more text when all locations are not available.
