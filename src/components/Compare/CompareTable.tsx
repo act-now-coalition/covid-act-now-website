@@ -244,9 +244,9 @@ const CompareTable = (props: {
             )}
           </div>
           <FooterLink onClick={() => props.setShowFaqModal(true)} isFaqLink>
-              FAQ
-              <HelpOutlineIcon />
-            </FooterLink>
+            FAQ
+            <HelpOutlineIcon />
+          </FooterLink>
         </Footer>
       )}
     </Wrapper>
