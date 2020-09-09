@@ -65,7 +65,6 @@ export type DatasetId =
   | 'testPositiveRate'
   | 'contractTracers'
   | 'caseDensityByCases'
-  | 'caseDensityByDeaths'
   | 'caseDensityRange'
   | 'smoothedDailyCases'
   | 'smoothedDailyDeaths'
@@ -123,8 +122,6 @@ export class Projection {
   readonly currentContactTracerMetric: number | null;
   readonly stateName: string;
   readonly currentCaseDensity: number | null;
-  readonly currentCaseDensityByCases: number | null;
-  readonly currentCaseDensityByDeaths: number | null;
   readonly currentDailyDeaths: number | null;
 
   private readonly cumulativeActualDeaths: Array<number | null>;
@@ -146,7 +143,6 @@ export class Projection {
   private readonly testPositiveRate: Array<number | null>;
   private readonly contractTracers: Array<number | null>;
   private readonly caseDensityByCases: Array<number | null>;
-  private readonly caseDensityByDeaths: Array<number | null>;
   private readonly caseDensityRange: Array<CaseDensityRange | null>;
   private readonly smoothedDailyDeaths: Array<number | null>;
 
@@ -258,12 +254,9 @@ export class Projection {
     this.caseDensityByCases = metricsTimeseries.map(row =>
       row ? row.caseDensity : null,
     );
-    this.caseDensityByDeaths = this.calcCaseDensityByDeaths();
     this.caseDensityRange = this.calcCaseDensityRange();
 
-    this.currentCaseDensityByCases = metrics ? metrics!.caseDensity : null;
-    this.currentCaseDensityByDeaths = lastValue(this.caseDensityByDeaths);
-    this.currentCaseDensity = metrics ? metrics!.caseDensity : null;
+    this.currentCaseDensity = metrics ? metrics.caseDensity : null;
     this.currentDailyDeaths = lastValue(this.smoothedDailyDeaths);
 
     this.fixZeros(this.cumulativeDeaths);
@@ -489,18 +482,6 @@ export class Projection {
     // probably delete this code and get the location name from somewhere other
     // than the API (or improve the API value).
     return s.countyName ? `${s.countyName}, ${s.stateName}` : s.stateName;
-  }
-
-  private calcCaseDensityByDeaths(): Array<number | null> {
-    const totalPopulation = this.totalPopulation;
-    return this.smoothedDailyDeaths.map(deaths => {
-      if (totalPopulation === 0 || deaths === null) {
-        return null;
-      } else {
-        const estimatedCases = deaths / CASE_FATALITY_RATIO;
-        return estimatedCases / (totalPopulation / 100000);
-      }
-    });
   }
 
   private calcCaseDensityRange(): Array<CaseDensityRange | null> {
