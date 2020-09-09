@@ -22,6 +22,7 @@ import MD from './Maryland';
 import MA from './Massachusetts';
 import MI from './Michigan';
 import MN from './Minnesota';
+import MP from './NorthernMarianaIslands';
 import MS from './Mississippi';
 import MO from './Missouri';
 import MT from './Montana';
@@ -76,6 +77,7 @@ export {
   MA,
   MI,
   MN,
+  MP,
   MS,
   MO,
   MT,

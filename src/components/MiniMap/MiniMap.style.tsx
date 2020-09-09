@@ -53,6 +53,10 @@ export const TabItem = styled.div<{ selected?: boolean }>`
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   text-transform: uppercase;
   font-weight: 500;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 200px;
+  white-space: nowrap;
   line-height: ${tabHeight}px;
   border-bottom: ${props =>
     props.selected

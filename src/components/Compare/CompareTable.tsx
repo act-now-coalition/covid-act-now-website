@@ -59,6 +59,7 @@ const CompareTable = (props: {
     setSortByPopulation,
     sliderValue,
     setSliderValue,
+    stateId,
   } = props;
   const { setViewAllCounties } = props;
 
@@ -155,6 +156,15 @@ const CompareTable = (props: {
   const isMobile = useMediaQuery(theme.breakpoints.down(700));
   const faqLinkCopy = isMobile ? 'FAQ' : 'Frequently Asked Questions';
 
+  // Disabling filters for Northern Mariana Islands because they don't have
+  // any data on metro vs non-metro islands.  There may be more elegant solutions
+  // that better handle any region without metro/non-metro regions.
+  // TODO(chris): https://trello.com/c/KdfFwRvf/430-handle-filters-in-compare-table-with-no-results-more-cleanly
+  const disableFilters = stateId === 'MP';
+
+  // Only showing the view more text when all locations are not available.
+  const showViewMore = amountDisplayed !== sortedLocationsArr.length;
+
   return (
     <Wrapper isModal={props.isModal} isHomepage={props.isHomepage}>
       {!props.isModal && (
@@ -165,20 +175,22 @@ const CompareTable = (props: {
               <ChartLocationName>{compareSubheader}</ChartLocationName>
             )}
           </HeaderWrapper>
-          <Filters
-            isHomepage={props.isHomepage}
-            countyTypeToView={props.countyTypeToView}
-            setCountyTypeToView={props.setCountyTypeToView}
-            viewAllCounties={props.viewAllCounties}
-            setViewAllCounties={setViewAllCounties}
-            stateId={props.stateId}
-            county={props.county}
-            geoScope={props.geoScope}
-            setGeoScope={props.setGeoScope}
-            isModal={props.isModal}
-            sliderValue={sliderValue}
-            setSliderValue={setSliderValue}
-          />
+          {!disableFilters && (
+            <Filters
+              isHomepage={props.isHomepage}
+              countyTypeToView={props.countyTypeToView}
+              setCountyTypeToView={props.setCountyTypeToView}
+              viewAllCounties={props.viewAllCounties}
+              setViewAllCounties={setViewAllCounties}
+              stateId={props.stateId}
+              county={props.county}
+              geoScope={props.geoScope}
+              setGeoScope={props.setGeoScope}
+              isModal={props.isModal}
+              sliderValue={sliderValue}
+              setSliderValue={setSliderValue}
+            />
+          )}
         </div>
       )}
       <LocationTable
@@ -205,9 +217,11 @@ const CompareTable = (props: {
               Displaying <strong>{amountDisplayed}</strong> of{' '}
               <strong>{sortedLocationsArr.length}</strong>{' '}
             </span>
-            <FooterLink onClick={() => props.setShowModal(true)}>
-              {props.viewMoreCopy}
-            </FooterLink>
+            {showViewMore && (
+              <FooterLink onClick={() => props.setShowModal(true)}>
+                {props.viewMoreCopy}
+              </FooterLink>
+            )}
           </div>
           <FooterLink onClick={() => props.setShowFaqModal(true)}>
             {faqLinkCopy}
