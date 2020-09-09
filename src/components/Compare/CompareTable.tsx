@@ -1,7 +1,5 @@
 import React from 'react';
 import { sortBy, findIndex, partition, reverse, isNumber } from 'lodash';
-import { useTheme } from '@material-ui/core/styles';
-import { useMediaQuery } from '@material-ui/core';
 import {
   Wrapper,
   Footer,
@@ -19,9 +17,12 @@ import {
   orderedMetrics,
   GeoScopeFilter,
   getAbbreviatedCounty,
-  metroPrefixCopy,
+  getShareQuote,
+  getMetroPrefixCopy,
 } from 'common/utils/compare';
 import { COLOR_MAP } from 'common/colors';
+import ShareImageButtons from 'components/ShareButtons/ShareButtonGroup';
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 
 const CompareTable = (props: {
   stateName?: string;
@@ -49,6 +50,7 @@ const CompareTable = (props: {
   sliderValue: GeoScopeFilter;
   setSliderValue: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
   setShowFaqModal: React.Dispatch<React.SetStateAction<boolean>>;
+  shareUrl: string;
 }) => {
   const {
     sorter,
@@ -127,15 +129,15 @@ const CompareTable = (props: {
       : props.locationsViewable;
 
   const firstColumnHeaderHomepage = props.viewAllCounties
-    ? `${metroPrefixCopy[props.countyTypeToView]} County`
+    ? `${getMetroPrefixCopy(props.countyTypeToView)} County`
     : 'State';
   const firstColumnHeader = props.isHomepage
     ? firstColumnHeaderHomepage
     : props.isModal
-    ? `${metroPrefixCopy[props.countyTypeToView]} Counties (${
+    ? `${getMetroPrefixCopy(props.countyTypeToView)} Counties (${
         sortedLocationsArr.length
       })`
-    : `${metroPrefixCopy[props.countyTypeToView]} County`;
+    : `${getMetroPrefixCopy(props.countyTypeToView)} County`;
 
   const sortedLocations: RankedLocationSummary[] = sortedLocationsArr
     .filter((location: SummaryForCompare) => location.metricsInfo !== null)
@@ -151,10 +153,18 @@ const CompareTable = (props: {
       } to other counties`
     : `Counties in ${props.stateName}`;
 
-  const theme = useTheme();
-  // hard-coded 700 because MUI mobile breakpoint of 600 was too small
-  const isMobile = useMediaQuery(theme.breakpoints.down(700));
-  const faqLinkCopy = isMobile ? 'FAQ' : 'Frequently Asked Questions';
+  const shareQuote = getShareQuote(
+    sorter,
+    props.countyTypeToView,
+    sliderValue,
+    sortedLocationsArr.length,
+    sortDescending,
+    currentLocation,
+    sortByPopulation,
+    props.isHomepage,
+    props.viewAllCounties,
+    props.stateName,
+  );
 
   // Disabling filters for Northern Mariana Islands because they don't have
   // any data on metro vs non-metro islands.  There may be more elegant solutions
@@ -170,7 +180,16 @@ const CompareTable = (props: {
       {!props.isModal && (
         <div>
           <HeaderWrapper>
-            <Header centered={props.isHomepage}>Compare</Header>
+            <Header isHomepage={props.isHomepage}>
+              Compare
+              <ShareImageButtons
+                imageUrl=""
+                imageFilename=""
+                url={props.shareUrl}
+                quote={shareQuote}
+                hashtags={['COVIDActNow']}
+              />
+            </Header>
             {props.stateName && (
               <ChartLocationName>{compareSubheader}</ChartLocationName>
             )}
@@ -223,9 +242,10 @@ const CompareTable = (props: {
               </FooterLink>
             )}
           </div>
-          <FooterLink onClick={() => props.setShowFaqModal(true)}>
-            {faqLinkCopy}
-          </FooterLink>
+          <FooterLink onClick={() => props.setShowFaqModal(true)} isFaqLink>
+              FAQ
+              <HelpOutlineIcon />
+            </FooterLink>
         </Footer>
       )}
     </Wrapper>

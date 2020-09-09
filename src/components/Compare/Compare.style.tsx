@@ -376,7 +376,7 @@ export const Row = styled(TableRow)<{
 
 export const Footer = styled.div<{ isCounty: any }>`
   display: flex;
-  padding: 1.25rem 0.75rem;
+  padding: 1.25rem 1rem;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   font-size: 0.875rem;
   justify-content: space-between;
@@ -399,36 +399,57 @@ export const Footer = styled.div<{ isCounty: any }>`
       }
     }
   }
+
+  @media (min-width: 932px) {
+    padding: 1.25rem 0;
+  }
 `;
 
-export const FooterLink = styled.div`
+export const FooterLink = styled.div<{ isFaqLink?: boolean }>`
   font-family: Roboto;
   color: ${COLOR_MAP.BLUE};
   font-weight: 500;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: fit-content;
+  background-color: ${({ isFaqLink }) => isFaqLink && '#f2f2f2'};
+  border-radius: ${({ isFaqLink }) => isFaqLink && '4px'};
+  padding: ${({ isFaqLink }) => isFaqLink && '.35rem .75rem'};
+  border: ${({ isFaqLink }) => isFaqLink && '1px solid #f2f2f2'};
+
+  &:hover {
+    background-color: ${({ isFaqLink }) => isFaqLink && 'white'};
+  }
 
   @media (min-width: 600px) {
     &:last-child {
       margin-left: auto;
     }
   }
+
+  svg {
+    font-size: 1.25rem;
+    margin-left: 0.4rem;
+  }
 `;
 
 export const HeaderWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0.75rem;
+  padding: 0.75rem 1rem;
 `;
 
-export const Header = styled.div<{ centered?: boolean }>`
+export const Header = styled.div<{ isHomepage?: boolean }>`
   display: flex;
   font-family: Roboto;
   font-weight: bold;
   font-size: 1.5rem;
-  margin: ${({ centered }) => centered && '0 auto'};
+  margin: 0;
+  justify-content: space-between;
 
   @media (min-width: 600px) {
-    font-size: ${({ centered }) => (centered ? '2rem' : '1.5rem')};
+    font-size: ${({ isHomepage }) => (isHomepage ? '2rem' : '1.5rem')};
   }
 `;
 

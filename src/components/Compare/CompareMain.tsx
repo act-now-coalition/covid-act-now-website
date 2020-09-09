@@ -189,6 +189,7 @@ const CompareMain = (props: {
     sliderValue,
     setSliderValue,
     setShowFaqModal,
+    shareUrl,
   };
 
   return (
@@ -199,10 +200,15 @@ const CompareMain = (props: {
           locationsViewable={props.locationsViewable}
           isModal={false}
           viewMoreCopy={viewMoreCopy}
+          shareUrl={shareUrl}
         />
       </DivForRef>
       <Modal open={showModal} onClose={handleCloseModal}>
-        <ModalCompare {...sharedProps} handleCloseModal={handleCloseModal} />
+        <ModalCompare
+          {...sharedProps}
+          handleCloseModal={handleCloseModal}
+          shareUrl={shareUrl}
+        />
       </Modal>
       <CenteredContentModal open={showFaqModal} onClose={handleCloseModal}>
         <ModalFaq handleCloseModal={handleCloseModal} />

@@ -8,7 +8,7 @@ import {
 } from 'common/locations';
 import { stateSummary, countySummary } from 'common/location_summaries';
 import { LocationSummary } from 'common/location_summaries';
-import { Metric } from 'common/metric';
+import { Metric, getMetricNameForCompare } from 'common/metric';
 
 export interface SummaryForCompare {
   locationInfo: Location;
@@ -182,11 +182,24 @@ export enum GeoScopeFilter {
   COUNTRY,
 }
 
-export const metroPrefixCopy = {
-  [MetroFilter.ALL]: '',
-  [MetroFilter.METRO]: 'metro',
-  [MetroFilter.NON_METRO]: 'non-metro',
+export const sliderValueMap: any = {
+  0: GeoScopeFilter.NEARBY,
+  50: GeoScopeFilter.STATE,
+  99: GeoScopeFilter.COUNTRY,
 };
+
+export function getMetroPrefixCopy(filter: MetroFilter, useAll?: boolean) {
+  if (filter === MetroFilter.METRO) {
+    return 'metro';
+  } else if (filter === MetroFilter.NON_METRO) {
+    return 'non-metro';
+  } else {
+    if (useAll) {
+      return 'all';
+    }
+    return '';
+  }
+}
 
 export function getLocationPageViewMoreCopy(
   geoscope: GeoScopeFilter,
@@ -194,11 +207,13 @@ export function getLocationPageViewMoreCopy(
   stateName: string,
 ) {
   if (geoscope === GeoScopeFilter.COUNTRY) {
-    return `View top 100 ${metroPrefixCopy[countyTypeToView]} counties`;
+    return `View top 100 ${getMetroPrefixCopy(countyTypeToView)} counties`;
   } else if (geoscope === GeoScopeFilter.NEARBY) {
     return 'View all nearby counties';
   } else {
-    return `View all ${metroPrefixCopy[countyTypeToView]} counties in ${stateName}`;
+    return `View all ${getMetroPrefixCopy(
+      countyTypeToView,
+    )} counties in ${stateName}`;
   }
 }
 
@@ -207,7 +222,7 @@ export function getHomePageViewMoreCopy(
   countyTypeToView: MetroFilter,
 ) {
   if (!viewAllCounties) return 'View all states';
-  else return `View top 100 ${metroPrefixCopy[countyTypeToView]} counties`;
+  else return `View top 100 ${getMetroPrefixCopy(countyTypeToView)} counties`;
 }
 
 // For formatting and abbreviating location names:
@@ -257,4 +272,79 @@ export function isCollegeCounty(location: Location) {
   const ftEnrollment = getSummedEnrollment(location);
   const countyPopulation = location.population;
   return ftEnrollment && ftEnrollment / countyPopulation > threshold;
+}
+
+// For sharing:
+
+export function getShareQuote(
+  sorter: Metric,
+  countyTypeToView: MetroFilter,
+  sliderValue: GeoScopeFilter,
+  totalLocations: number,
+  sortDescending: boolean,
+  currentLocation?: RankedLocationSummary,
+  sortByPopulation?: boolean,
+  isHomepage?: boolean,
+  viewAllCounties?: boolean,
+  stateName?: string,
+): string {
+  const sliderValueShareCopy: any = {
+    [GeoScopeFilter.NEARBY]: 'nearby',
+    [GeoScopeFilter.STATE]: stateName,
+    [GeoScopeFilter.COUNTRY]: 'USA',
+  };
+
+  const homepageShareCopy = `Compare all USA ${
+    viewAllCounties
+      ? `${getMetroPrefixCopy(countyTypeToView)} counties`
+      : 'states'
+  } by their local COVID metrics at CovidActNow.`;
+
+  const stateShareCopy = `Compare COVID metrics between ${getMetroPrefixCopy(
+    countyTypeToView,
+    true,
+  )} counties in ${stateName} with @CovidActNow.`;
+
+  const hasValidRank =
+    currentLocation &&
+    currentLocation.rank !== 0 &&
+    currentLocation.metricsInfo.metrics[sorter]?.value;
+
+  const ascendingCopy =
+    sorter && sorter === (Metric.HOSPITAL_USAGE || Metric.CONTACT_TRACING)
+      ? 'least'
+      : 'lowest';
+  const descendingCopy =
+    sorter && sorter === (Metric.HOSPITAL_USAGE || Metric.CONTACT_TRACING)
+      ? 'most'
+      : 'highest';
+
+  const countyShareCopy =
+    currentLocation &&
+    hasValidRank &&
+    `${currentLocation.locationInfo.county} ranks #${
+      currentLocation.rank
+    } out of ${totalLocations} total ${
+      sliderValueShareCopy[sliderValueMap[sliderValue]]
+    }${countyTypeToView === MetroFilter.ALL ? '' : ' '}${getMetroPrefixCopy(
+      countyTypeToView,
+    )} counties when sorted by ${
+      sortDescending ? descendingCopy : ascendingCopy
+    } ${
+      sortByPopulation
+        ? 'population'
+        : sorter === Metric.HOSPITAL_USAGE
+        ? getMetricNameForCompare(sorter)
+        : getMetricNameForCompare(sorter).toLowerCase()
+    }. See the chart at CovidActNow.`;
+
+  if (isHomepage) {
+    return homepageShareCopy;
+  } else if (!currentLocation && stateName) {
+    return stateShareCopy;
+  } else if (currentLocation) {
+    return countyShareCopy || stateShareCopy;
+  } else {
+    return stateShareCopy;
+  }
 }
