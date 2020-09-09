@@ -25,6 +25,7 @@ export default {
   MN: 'Minnesota',
   MS: 'Mississippi',
   MO: 'Missouri',
+  MP: 'Northern Mariana Islands',
   MT: 'Montana',
   NE: 'Nebraska',
   NV: 'Nevada',

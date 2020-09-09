@@ -13,6 +13,26 @@ function getStateCode(stateName) {
   return REVERSED_STATES[stateName];
 }
 
+/**
+ * SVG element to represent the Northern Mariana Islands on the USA Country Map as a
+ * box (with risk level color) + text.
+ *
+ * This is special cased from the normal map display. The mariana islands are
+ * small enough that simply showing the islands is not a UX that works.
+ */
+const MarianaIslands = ({ fill, onMouseEnter, onMouseLeave }) => {
+  return (
+    <g
+      transform="translate(40, 395) scale(0.8)"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
+      <rect width="20" height="20" fill={fill} />
+      <text transform="translate(25, 15)">CNMI</text>
+    </g>
+  );
+};
+
 const USACountyMap = ({ stateClickHandler, setTooltipContent, condensed }) => {
   const locationSummaries = useSummaries();
 
@@ -39,6 +59,24 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent, condensed }) => {
               geographies.map(geo => {
                 const { name } = geo.properties;
                 const stateCode = getStateCode(name);
+
+                // Using a custom SVG to place the northern mariana islands to increase
+                // accessibility due to the small size.
+                if (stateCode === 'MP') {
+                  return (
+                    <Link key={stateCode} to={`/us/${stateCode.toLowerCase()}`}>
+                      <MarianaIslands
+                        key={geo.rsmKey}
+                        onMouseEnter={() => {
+                          setTooltipContent(name);
+                        }}
+                        onMouseLeave={onMouseLeave}
+                        onClick={() => stateClickHandler(name)}
+                        fill={getFillColor(geo)}
+                      />
+                    </Link>
+                  );
+                }
                 return stateCode ? (
                   <Link key={stateCode} to={`/us/${stateCode.toLowerCase()}`}>
                     <Geography
