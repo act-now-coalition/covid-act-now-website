@@ -12,7 +12,7 @@ import {
   Metrics,
 } from 'api/schema/RegionSummaryWithTimeseries';
 import { ICUHeadroomInfo, calcICUHeadroom } from './ICUHeadroom';
-import { lastValue, indexOfLastValue } from './utils';
+import { lastValue } from './utils';
 
 /**
  * We truncate (or in the case of charts, switch to a dashed line) the last
@@ -412,6 +412,7 @@ export class Projection {
       return {
         timeseries: [],
         actualTimeseries: [],
+        metricsTimeseries: [],
         dates: [],
       };
     }
