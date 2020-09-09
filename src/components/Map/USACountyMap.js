@@ -60,6 +60,8 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent, condensed }) => {
                 const { name } = geo.properties;
                 const stateCode = getStateCode(name);
 
+                // Using a custom SVG to place the northern mariana islands to increase
+                // accessibility due to the small size.
                 if (stateCode === 'MP') {
                   return (
                     <Link key={stateCode} to={`/us/${stateCode.toLowerCase()}`}>
