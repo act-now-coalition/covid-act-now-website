@@ -153,7 +153,7 @@ const CompareMain = (props: {
     }
   });
 
-  // For filters:
+  // For filters (0, 50, and 99 are numerical values required by MUI Slider component):
   const scopeValueMap = {
     [GeoScopeFilter.NEARBY]: 0,
     [GeoScopeFilter.STATE]: 50,
@@ -200,15 +200,10 @@ const CompareMain = (props: {
           locationsViewable={props.locationsViewable}
           isModal={false}
           viewMoreCopy={viewMoreCopy}
-          shareUrl={shareUrl}
         />
       </DivForRef>
       <Modal open={showModal} onClose={handleCloseModal}>
-        <ModalCompare
-          {...sharedProps}
-          handleCloseModal={handleCloseModal}
-          shareUrl={shareUrl}
-        />
+        <ModalCompare {...sharedProps} handleCloseModal={handleCloseModal} />
       </Modal>
       <CenteredContentModal open={showFaqModal} onClose={handleCloseModal}>
         <ModalFaq handleCloseModal={handleCloseModal} />

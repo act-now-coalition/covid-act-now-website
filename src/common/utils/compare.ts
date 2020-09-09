@@ -9,6 +9,7 @@ import {
 import { stateSummary, countySummary } from 'common/location_summaries';
 import { LocationSummary } from 'common/location_summaries';
 import { Metric, getMetricNameForCompare } from 'common/metric';
+import { isNumber } from 'lodash';
 
 export interface SummaryForCompare {
   locationInfo: Location;
@@ -182,23 +183,15 @@ export enum GeoScopeFilter {
   COUNTRY,
 }
 
-export const sliderValueMap: any = {
-  0: GeoScopeFilter.NEARBY,
-  50: GeoScopeFilter.STATE,
-  99: GeoScopeFilter.COUNTRY,
-};
-
 export function getMetroPrefixCopy(filter: MetroFilter, useAll?: boolean) {
   if (filter === MetroFilter.METRO) {
     return 'metro';
   } else if (filter === MetroFilter.NON_METRO) {
     return 'non-metro';
-  } else {
-    if (useAll) {
-      return 'all';
-    }
-    return '';
+  } else if (useAll) {
+    return 'all';
   }
+  return '';
 }
 
 export function getLocationPageViewMoreCopy(
@@ -288,7 +281,7 @@ export function getShareQuote(
   viewAllCounties?: boolean,
   stateName?: string,
 ): string {
-  const sliderValueShareCopy: any = {
+  const geoScopeShareCopy: any = {
     [GeoScopeFilter.NEARBY]: 'nearby',
     [GeoScopeFilter.STATE]: stateName,
     [GeoScopeFilter.COUNTRY]: 'USA',
@@ -308,7 +301,7 @@ export function getShareQuote(
   const hasValidRank =
     currentLocation &&
     currentLocation.rank !== 0 &&
-    currentLocation.metricsInfo.metrics[sorter]?.value;
+    isNumber(currentLocation.metricsInfo.metrics[sorter]?.value);
 
   const ascendingCopy =
     sorter && sorter === (Metric.HOSPITAL_USAGE || Metric.CONTACT_TRACING)
@@ -324,11 +317,9 @@ export function getShareQuote(
     hasValidRank &&
     `${currentLocation.locationInfo.county} ranks #${
       currentLocation.rank
-    } out of ${totalLocations} total ${
-      sliderValueShareCopy[sliderValueMap[sliderValue]]
-    }${countyTypeToView === MetroFilter.ALL ? '' : ' '}${getMetroPrefixCopy(
-      countyTypeToView,
-    )} counties when sorted by ${
+    } out of ${totalLocations} total ${geoScopeShareCopy[sliderValue]}${
+      countyTypeToView === MetroFilter.ALL ? '' : ' '
+    }${getMetroPrefixCopy(countyTypeToView)} counties when sorted by ${
       sortDescending ? descendingCopy : ascendingCopy
     } ${
       sortByPopulation

@@ -23,6 +23,7 @@ import {
 import { COLOR_MAP } from 'common/colors';
 import ShareImageButtons from 'components/ShareButtons/ShareButtonGroup';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+import { sliderNumberToFilterMap } from 'components/Compare/Filters';
 
 const CompareTable = (props: {
   stateName?: string;
@@ -156,7 +157,7 @@ const CompareTable = (props: {
   const shareQuote = getShareQuote(
     sorter,
     props.countyTypeToView,
-    sliderValue,
+    sliderNumberToFilterMap[sliderValue],
     sortedLocationsArr.length,
     sortDescending,
     currentLocation,

@@ -16,7 +16,6 @@ import {
   MetroFilter,
   getFilterLabel,
   GeoScopeFilter,
-  sliderValueMap,
 } from 'common/utils/compare';
 import {
   Container,
@@ -28,6 +27,13 @@ import {
   MetroMenuPopper,
   SwitchLabel,
 } from 'components/Compare/Filters.style';
+
+// Maps each numerical slider value to its corresponding GeoScopeFilter
+export const sliderNumberToFilterMap: any = {
+  0: GeoScopeFilter.NEARBY,
+  50: GeoScopeFilter.STATE,
+  99: GeoScopeFilter.COUNTRY,
+};
 
 const Filters = (props: {
   isHomepage?: boolean;
@@ -102,7 +108,7 @@ const Filters = (props: {
   const sliderHandleChange = (event: any, value: any) => {
     if (props.setGeoScope) {
       setSliderValue(value);
-      props.setGeoScope(sliderValueMap[value]);
+      props.setGeoScope(sliderNumberToFilterMap[value]);
     }
   };
 
