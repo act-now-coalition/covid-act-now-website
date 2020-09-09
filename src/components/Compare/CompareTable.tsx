@@ -87,7 +87,7 @@ const CompareTable = (props: {
   const getPopulation = (location: SummaryForCompare) =>
     location?.locationInfo?.population;
   const getMetricValue = (location: any) =>
-    location?.metricsInfo?.metrics[sorter]?.value;
+    location.metricsInfo.metrics[sorter].value;
 
   let sortedLocationsArr = props.locations;
 
