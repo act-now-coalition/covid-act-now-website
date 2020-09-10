@@ -85,7 +85,11 @@ export const TableAutocompleteHeader = styled.div`
   }
 `;
 
-export const NormalizeCheckbox = styled(MuiCheckbox)``;
+export const NormalizeCheckbox = styled(MuiCheckbox)`
+  svg {
+    fill: ${COLOR_MAP.GRAY.DARK};
+  }
+`;
 
 export const LegendContainer = styled(Box)`
   display: flex;
