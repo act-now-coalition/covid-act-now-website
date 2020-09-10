@@ -127,7 +127,6 @@ export const LegendItemLabel = styled.span`
 
 // CHARTS
 
-// Todo(Chelsi): check if this was the intended fix:
 export const ChartContainer = styled.div<{ adjustContainerWidth?: boolean }>`
   margin-top: ${theme.spacing(4)}px;
   margin-bottom: ${theme.spacing(3)}px;

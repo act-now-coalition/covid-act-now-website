@@ -14,7 +14,6 @@ const LocationSelector: React.FC<{
   locations: Location[];
   selectedLocations: Location[];
   onChangeSelectedLocations: (newLocations: Location[]) => void;
-  hasMultipleLocations: boolean;
   normalizeData: boolean;
   setNormalizeData: React.Dispatch<React.SetStateAction<boolean>>;
   compareCopy: string;
@@ -22,13 +21,13 @@ const LocationSelector: React.FC<{
   locations,
   selectedLocations,
   onChangeSelectedLocations,
-  hasMultipleLocations,
   normalizeData,
   setNormalizeData,
   compareCopy,
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const hasMultipleLocations = selectedLocations.length > 1;
 
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -54,7 +53,11 @@ const LocationSelector: React.FC<{
         {compareCopy}
       </Styles.ModalOpenButton>
       {modalOpen && (
-        <Modal open={modalOpen} onClose={closeModal}>
+        <Modal
+          open={modalOpen}
+          onClose={closeModal}
+          style={{ touchAction: 'none' }}
+        >
           <Styles.ModalContainer>
             <Styles.ModalHeader>
               <Grid container>

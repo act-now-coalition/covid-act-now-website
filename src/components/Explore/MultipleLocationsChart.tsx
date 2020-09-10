@@ -19,7 +19,7 @@ import { Line } from '@vx/shape';
 import DateMarker from './DateMarker';
 import GridLines from './GridLines';
 import Axes from './Axes';
-import { getStateCode } from 'components/Map/USACountyMap';
+import { getStateCode } from 'common/locations';
 
 const getDate = (d: Column) => new Date(d.x);
 const getY = (d: Column) => d.y;
