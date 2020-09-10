@@ -1,7 +1,7 @@
 import ShareImageUrlJSON from 'assets/data/share_images_url.json';
-import * as QueryString from 'query-string';
 import { assert } from 'common/utils';
 import { County } from './locations';
+import urlJoin from 'url-join';
 
 /**
  * We append a short unique string corresponding to the currently published
@@ -39,6 +39,20 @@ function getPageBaseUrl(
   return shareURL;
 }
 
+function getShareImageBaseUrl(
+  stateId: string | undefined,
+  county: County | undefined,
+): string {
+  const imageBaseUrl = ShareImageUrlJSON.share_image_url;
+  if (county) {
+    return urlJoin(imageBaseUrl, 'counties', county.full_fips_code);
+  } else if (stateId) {
+    return urlJoin(imageBaseUrl, 'states', stateId);
+  } else {
+    return imageBaseUrl;
+  }
+}
+
 // TODO(michael): Move existing code over to use this method.
 export function getPageUrl(
   stateId: string | undefined,
@@ -50,11 +64,23 @@ export function getPageUrl(
 export function getComparePageUrl(
   stateId: string | undefined,
   county: County | undefined,
-  shareParams: { [key: string]: unknown },
+  sharingId: string,
 ): string {
-  const url = getPageBaseUrl(stateId, county) + '/compare';
-  ensureSharingIdInQueryParams(shareParams);
-  return url + '?' + QueryString.stringify(shareParams);
+  return addSharingId(
+    urlJoin(getPageBaseUrl(stateId, county), 'compare', sharingId),
+  );
+}
+
+export function getCompareShareImageUrl(
+  stateId: string | undefined,
+  county: County | undefined,
+  sharingId: string,
+): string {
+  return urlJoin(
+    getShareImageBaseUrl(stateId, county),
+    'compare',
+    `${sharingId}.png`,
+  );
 }
 
 /**

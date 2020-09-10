@@ -10,15 +10,25 @@ import CopyLinkButton from './CopyLinkButton';
 import { ShareButton, SocialButtonsContainer } from './ShareButtons.style';
 
 const ShareImageButtons: React.FC<{
-  imageUrl: string;
+  imageUrl: string | (() => Promise<string>);
   imageFilename: string;
-  url: string;
+  url: string | (() => Promise<string>);
   quote: string;
   hashtags: string[];
 }> = ({ imageUrl, imageFilename, url, quote, hashtags }) => {
-  const [showSocialButtons, setShowSocialButtons] = useState(false);
-  const hideSocialButtons = () => {
-    const timeoutId = setTimeout(() => setShowSocialButtons(false), 1500);
+  // Turn url / imageUrl into asynchronous getters if they aren't already.
+  const getUrl = typeof url === 'string' ? () => Promise.resolve(url) : url;
+  const getImageUrl =
+    typeof imageUrl === 'string' ? () => Promise.resolve(imageUrl) : imageUrl;
+
+  const [socialSharingProps, setSocialSharingProps] = useState<{
+    url: string;
+    quote: string;
+    socialIconSize: number;
+  } | null>(null);
+
+  const hideSocialButtons = (delay: number = 0) => {
+    const timeoutId = setTimeout(() => setSocialSharingProps(null), delay);
     return () => clearTimeout(timeoutId);
   };
 
@@ -26,20 +36,34 @@ const ShareImageButtons: React.FC<{
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
   const socialIconSize = isMobile ? 40 : 50;
 
-  const sharedProps = {
-    url,
-    quote,
-    socialIconSize,
+  const showSocialButtons = () => {
+    getUrl().then(url => {
+      setSocialSharingProps({
+        url,
+        quote,
+        socialIconSize,
+      });
+    });
+  };
+
+  const toggleSocialButtons = () => {
+    if (socialSharingProps) {
+      hideSocialButtons();
+    } else {
+      showSocialButtons();
+    }
   };
 
   return (
-    <ClickAwayListener onClickAway={() => setShowSocialButtons(false)}>
+    <ClickAwayListener onClickAway={() => hideSocialButtons()}>
       <div style={{ position: 'relative' }}>
         <ButtonGroup aria-label="share buttons" variant="outlined">
           <ShareButton
             onClick={() => {
-              setShowSocialButtons(false);
-              downloadImage(imageUrl, imageFilename);
+              hideSocialButtons();
+              getImageUrl().then(imageUrl =>
+                downloadImage(imageUrl, imageFilename),
+              );
             }}
             disableRipple
             disableFocusRipple
@@ -48,7 +72,7 @@ const ShareImageButtons: React.FC<{
             Save
           </ShareButton>
           <ShareButton
-            onClick={() => setShowSocialButtons(!showSocialButtons)}
+            onClick={toggleSocialButtons}
             disableRipple
             disableFocusRipple
             disableTouchRipple
@@ -56,12 +80,12 @@ const ShareImageButtons: React.FC<{
             Share
           </ShareButton>
         </ButtonGroup>
-        {showSocialButtons && (
-          <SocialButtonsContainer onClick={hideSocialButtons}>
-            <FacebookShareButton {...sharedProps} />
-            <TwitterShareButton {...sharedProps} hashtags={hashtags} />
-            <LinkedinShareButton {...sharedProps} />
-            <CopyLinkButton url={url} />
+        {socialSharingProps && (
+          <SocialButtonsContainer onClick={() => hideSocialButtons(1500)}>
+            <FacebookShareButton {...socialSharingProps} />
+            <TwitterShareButton {...socialSharingProps} hashtags={hashtags} />
+            <LinkedinShareButton {...socialSharingProps} />
+            <CopyLinkButton url={socialSharingProps.url} />
           </SocialButtonsContainer>
         )}
       </div>

@@ -42,7 +42,7 @@ export default function App() {
             <Switch>
               <Route exact path="/" component={HomePage} />
               <Route exact path="/alert_signup" component={HomePage} />
-              <Route exact path="/compare" component={HomePage} />
+              <Route exact path="/compare/:sharingId?" component={HomePage} />
 
               <Route
                 exact
@@ -68,7 +68,7 @@ export default function App() {
               />
               <Route
                 exact
-                path="/us/:stateId/compare"
+                path="/us/:stateId/compare/:sharingId?"
                 component={LocationPage}
               />
               <Route
@@ -83,7 +83,7 @@ export default function App() {
               />
               <Route
                 exact
-                path="/us/:stateId/county/:countyId/compare"
+                path="/us/:stateId/county/:countyId/compare/:sharingId?"
                 component={LocationPage}
               />
               {/* /state/ routes are deprecated but still supported. */}
@@ -165,9 +165,6 @@ export default function App() {
               <Route path="/internal/all" component={AllStates} />
 
               {/** Internal endpoint for comparing API snapshots. */}
-              <Route path="/compare">
-                <Redirect to="/internal/compare" />
-              </Route>
               <Route path="/internal/compare" component={CompareSnapshots} />
 
               {/** Internal endpoints we use to generate the content that we

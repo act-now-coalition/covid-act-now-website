@@ -41,7 +41,7 @@ const ModalCompare = (props: {
   sliderValue: GeoScopeFilter;
   setSliderValue: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
   setShowFaqModal: React.Dispatch<React.SetStateAction<boolean>>;
-  shareUrl: string;
+  createSharingId: () => Promise<string>;
 }) => {
   const { handleCloseModal } = props;
 
@@ -103,7 +103,7 @@ const ModalCompare = (props: {
         sliderValue={props.sliderValue}
         setSliderValue={props.setSliderValue}
         setShowFaqModal={props.setShowFaqModal}
-        shareUrl={props.shareUrl}
+        createSharingId={props.createSharingId}
       />
     </Fragment>
   );

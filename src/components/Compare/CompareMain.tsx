@@ -1,6 +1,11 @@
-import * as QueryString from 'query-string';
-import React, { useState, Fragment, useRef, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, {
+  useCallback,
+  useState,
+  Fragment,
+  useRef,
+  useEffect,
+} from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 import { Modal } from '@material-ui/core';
 import CompareTable from 'components/Compare/CompareTable';
 import ModalCompare from 'components/Compare/ModalCompare';
@@ -20,7 +25,18 @@ import {
   GeoScopeFilter,
 } from 'common/utils/compare';
 import { Metric } from 'common/metric';
-import * as urls from 'common/urls';
+import { getFirebase } from 'common/firebase';
+
+const firestore = getFirebase().firestore();
+const paramsCollection = firestore.collection('compare-shared-params');
+const nextIdDocRef = paramsCollection.doc('__nextId');
+
+// For filters (0, 50, and 99 are numerical values required by MUI Slider component):
+const scopeValueMap = {
+  [GeoScopeFilter.NEARBY]: 0,
+  [GeoScopeFilter.STATE]: 50,
+  [GeoScopeFilter.COUNTRY]: 99,
+};
 
 const CompareMain = (props: {
   stateName?: string;
@@ -30,73 +46,38 @@ const CompareMain = (props: {
   isHomepage?: boolean;
   currentCounty?: any;
   stateId?: string;
-  autoScroll?: boolean;
 }) => {
   const tableRef = useRef<HTMLDivElement>(null);
-  const scrollOffset = props.isHomepage ? 75 : 165;
-  const scrollTo = (div: null | HTMLDivElement) =>
-    div &&
-    window.scrollTo({
-      left: 0,
-      top: div.offsetTop - scrollOffset,
-      behavior: 'smooth',
-    });
+  const scrollToCompare = useCallback(() => {
+    const scrollOffset = props.isHomepage ? 75 : 165;
+    // Note (Chelsi): short delay is needed to make scrollTo work
+    return setTimeout(() => {
+      if (tableRef.current) {
+        window.scrollTo({
+          left: 0,
+          top: tableRef.current.offsetTop - scrollOffset,
+          behavior: 'smooth',
+        });
+      }
+    }, 250);
+  }, [props.isHomepage, tableRef]);
 
   const location = useLocation();
-  const queryParams = QueryString.parse(location.search, {
-    parseBooleans: true,
-    parseNumbers: true,
-  });
-
-  // Looks up the named query param or returns the default value.
-  const getQueryParam = <T extends number | boolean | string>(
-    param: string,
-    defaultVal: T,
-  ): T => {
-    const val = queryParams[param];
-    // If the type doesn't match, it's either undefined or an unexpected value; so return the default.
-    if (typeof val !== typeof defaultVal) {
-      return defaultVal;
+  useEffect(() => {
+    if (location.pathname.includes('/compare')) {
+      const timeoutId = scrollToCompare();
+      return () => clearTimeout(timeoutId);
     }
-    return val as T;
-  };
+  }, [location.pathname, scrollToCompare]);
 
-  const [sorter, setSorter] = useState(
-    getQueryParam<Metric>('sorter', Metric.CASE_DENSITY),
-  );
-  const [sortDescending, setSortDescending] = useState(
-    getQueryParam<boolean>('sortDescending', true),
-  );
-  const [sortByPopulation, setSortByPopulation] = useState(
-    getQueryParam<boolean>('sortByPopulation', false),
-  );
-  const [countyTypeToView, setCountyTypeToView] = useState(
-    getQueryParam<MetroFilter>('countyTypeToView', MetroFilter.ALL),
-  );
+  const [sorter, setSorter] = useState(Metric.CASE_DENSITY);
+  const [sortDescending, setSortDescending] = useState(true);
+  const [sortByPopulation, setSortByPopulation] = useState(false);
+  const [countyTypeToView, setCountyTypeToView] = useState(MetroFilter.ALL);
   // For homepage:
-  const [viewAllCounties, setViewAllCounties] = useState(
-    getQueryParam<boolean>('viewAllCounties', false),
-  );
+  const [viewAllCounties, setViewAllCounties] = useState(false);
   // For location page:
-  const [geoScope, setGeoScope] = useState(
-    getQueryParam<GeoScopeFilter>('geoScope', GeoScopeFilter.STATE),
-  );
-
-  const shareParams = {
-    sorter,
-    sortDescending,
-    sortByPopulation,
-    countyTypeToView,
-    viewAllCounties,
-    geoScope,
-  };
-
-  const shareUrl = urls.getComparePageUrl(
-    props.stateId,
-    props.county,
-    shareParams,
-  );
-  console.log('Share URL: ', shareUrl);
+  const [geoScope, setGeoScope] = useState(GeoScopeFilter.STATE);
 
   const homepageLocationsForCompare = viewAllCounties
     ? getAllCountiesSelection(countyTypeToView)
@@ -129,15 +110,6 @@ const CompareMain = (props: {
     ? homepageViewMoreCopy
     : locationPageViewMoreCopy;
 
-  const scrollToCompare = () => {
-    // Note (Chelsi): short delay is needed to make scrollTo work
-    return setTimeout(() => {
-      if (tableRef.current) {
-        scrollTo(tableRef.current);
-      }
-    }, 250);
-  };
-
   const [showModal, setShowModal] = useState(false);
   const [showFaqModal, setShowFaqModal] = useState(false);
   const handleCloseModal = () => {
@@ -146,21 +118,63 @@ const CompareMain = (props: {
     scrollToCompare();
   };
 
-  useEffect(() => {
-    if (props.autoScroll) {
-      const timeoutId = scrollToCompare();
-      return () => clearTimeout(timeoutId);
-    }
-  });
-
-  // For filters (0, 50, and 99 are numerical values required by MUI Slider component):
-  const scopeValueMap = {
-    [GeoScopeFilter.NEARBY]: 0,
-    [GeoScopeFilter.STATE]: 50,
-    [GeoScopeFilter.COUNTRY]: 99,
-  };
   const defaultSliderValue = scopeValueMap[geoScope];
   const [sliderValue, setSliderValue] = useState(defaultSliderValue);
+
+  // State needed to reconstruct the current sort / filters. Needs to be persisted
+  // when we generate sharing URLs, etc.
+  const uiState = {
+    sorter,
+    sortDescending,
+    sortByPopulation,
+    countyTypeToView,
+    viewAllCounties,
+    geoScope,
+  };
+
+  // createSharingId() stores the current share params to Firestore under a
+  // newly-assigned numeric ID and returns it. We cache the result so multiple
+  // calls don't generate extra IDs.
+  let createSharingIdPromise: Promise<string> | null = null;
+  const createSharingId = async () => {
+    if (!createSharingIdPromise) {
+      createSharingIdPromise = firestore.runTransaction(async txn => {
+        const nextIdDoc = await txn.get(nextIdDocRef);
+        const id = nextIdDoc.data()?.id || 0;
+
+        nextIdDocRef.set({ id: id + 1 });
+        paramsCollection.doc(`${id}`).set(uiState);
+
+        return `${id}`;
+      });
+    }
+
+    return createSharingIdPromise;
+  };
+
+  // Check for a /compare/{sharingId} in the URL and use it to repopulate the
+  // compare table if it's there.
+  const { sharingId } = useParams();
+  useEffect(() => {
+    async function fetchParamsFromFirestore(id: string) {
+      const doc = await paramsCollection.doc(id).get();
+      if (doc.exists) {
+        const params = doc.data() as any;
+        setSorter(params['sorter']);
+        setSortDescending(params['sortDescending']);
+        setSortByPopulation(params['sortByPopulation']);
+        setCountyTypeToView(params['countyTypeToView']);
+        setViewAllCounties(params['viewAllCounties']);
+        setGeoScope(params['geoScope']);
+        setSliderValue(scopeValueMap[params['geoScope'] as GeoScopeFilter]);
+      } else {
+        console.error('Invalid Sharing ID:', sharingId);
+      }
+    }
+    if (sharingId) {
+      fetchParamsFromFirestore(sharingId);
+    }
+  }, [sharingId]);
 
   if (locations.length === 0) {
     return null;
@@ -168,28 +182,23 @@ const CompareMain = (props: {
 
   const sharedProps = {
     stateName: props.stateName,
+    stateId: props.stateId,
     county: props.county,
     setShowModal,
     isHomepage: props.isHomepage,
     locations,
     currentCounty: props.currentCounty,
-    viewAllCounties,
-    countyTypeToView,
+    ...uiState,
     setCountyTypeToView,
     setViewAllCounties,
-    geoScope,
     setGeoScope,
-    stateId: props.stateId,
-    sorter,
     setSorter,
-    sortDescending,
     setSortDescending,
-    sortByPopulation,
     setSortByPopulation,
     sliderValue,
     setSliderValue,
     setShowFaqModal,
-    shareUrl,
+    createSharingId,
   };
 
   return (

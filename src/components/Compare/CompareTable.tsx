@@ -24,6 +24,7 @@ import { COLOR_MAP } from 'common/colors';
 import ShareImageButtons from 'components/ShareButtons/ShareButtonGroup';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import { sliderNumberToFilterMap } from 'components/Compare/Filters';
+import { getComparePageUrl, getCompareShareImageUrl } from 'common/urls';
 
 const CompareTable = (props: {
   stateName?: string;
@@ -51,7 +52,7 @@ const CompareTable = (props: {
   sliderValue: GeoScopeFilter;
   setSliderValue: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
   setShowFaqModal: React.Dispatch<React.SetStateAction<boolean>>;
-  shareUrl: string;
+  createSharingId: () => Promise<string>;
 }) => {
   const {
     sorter,
@@ -63,6 +64,7 @@ const CompareTable = (props: {
     sliderValue,
     setSliderValue,
     stateId,
+    county,
   } = props;
   const { setViewAllCounties } = props;
 
@@ -176,6 +178,15 @@ const CompareTable = (props: {
   // Only showing the view more text when all locations are not available.
   const showViewMore = amountDisplayed !== sortedLocationsArr.length;
 
+  const getShareUrl = () =>
+    props
+      .createSharingId()
+      .then(id => `${getComparePageUrl(stateId, county, id)}`);
+  const getDownloadImageUrl = () =>
+    props
+      .createSharingId()
+      .then(id => `${getCompareShareImageUrl(stateId, county, id)}`);
+
   return (
     <Wrapper isModal={props.isModal} isHomepage={props.isHomepage}>
       {!props.isModal && (
@@ -184,9 +195,9 @@ const CompareTable = (props: {
             <Header isHomepage={props.isHomepage}>
               Compare
               <ShareImageButtons
-                imageUrl=""
-                imageFilename=""
-                url={props.shareUrl}
+                imageUrl={getDownloadImageUrl}
+                imageFilename="CovidActNow-compare.png"
+                url={getShareUrl}
                 quote={shareQuote}
                 hashtags={['COVIDActNow']}
               />
