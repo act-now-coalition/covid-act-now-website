@@ -413,7 +413,7 @@ function useProjectionsSet(
       if (locations === Locations.STATES) {
         setProjectionsSet(
           ProjectionsSet.fromProjections(
-            await fetchAllStateProjections(snapshotUrl(leftSnapshot)),
+            await fetchAllStateProjections(snapshotUrl(leftSnapshot), false),
             await fetchAllStateProjections(snapshotUrl(rightSnapshot)),
           ),
         );
@@ -421,7 +421,7 @@ function useProjectionsSet(
         const topCounties = topCountiesByPopulation(COUNTIES_LIMIT);
         setProjectionsSet(
           ProjectionsSet.fromProjections(
-            await fetchCountyProjections(leftSnapshot, topCounties),
+            await fetchCountyProjections(leftSnapshot, topCounties, false),
             await fetchCountyProjections(rightSnapshot, topCounties),
           ),
         );
@@ -438,7 +438,7 @@ function useProjectionsSet(
           ).map(cd => cd.county);
           setProjectionsSet(
             ProjectionsSet.fromProjections(
-              await fetchCountyProjections(leftSnapshot, topCounties),
+              await fetchCountyProjections(leftSnapshot, topCounties, false),
               await fetchCountyProjections(rightSnapshot, topCounties),
             ),
           );
@@ -449,7 +449,7 @@ function useProjectionsSet(
           );
           setProjectionsSet(
             ProjectionsSet.fromProjections(
-              await fetchAllCountyProjections(snapshotUrl(leftSnapshot)),
+              await fetchAllCountyProjections(snapshotUrl(leftSnapshot), false),
               await fetchAllCountyProjections(snapshotUrl(rightSnapshot)),
             ).top(COUNTIES_LIMIT, SortType.METRIC_DIFF, metric),
           );
@@ -469,13 +469,18 @@ function useProjectionsSet(
           // Start with the states.
           let leftProjections = await fetchAllStateProjections(
             snapshotUrl(leftSnapshot),
+            false,
           );
           let rightProjections = await fetchAllStateProjections(
             snapshotUrl(rightSnapshot),
           );
 
           leftProjections = leftProjections.concat(
-            await fetchCountyProjections(leftSnapshot, interestingCounties),
+            await fetchCountyProjections(
+              leftSnapshot,
+              interestingCounties,
+              false,
+            ),
           );
           rightProjections = rightProjections.concat(
             await fetchCountyProjections(rightSnapshot, interestingCounties),
@@ -524,10 +529,16 @@ async function fetchInterestingCounties(
 function fetchCountyProjections(
   snapshotNumber: number,
   list: County[],
+  useMetrics: boolean = true,
 ): Promise<Projections[]> {
   return Promise.all(
     list.map(county =>
-      fetchProjections(county.state_code, county, snapshotUrl(snapshotNumber)),
+      fetchProjections(
+        county.state_code,
+        county,
+        snapshotUrl(snapshotNumber),
+        useMetrics,
+      ),
     ),
   );
 }

@@ -26,15 +26,20 @@ export class Projections {
     summaryWithTimeseries: RegionSummaryWithTimeseries,
     stateCode: string,
     county?: any,
+    useMetrics: boolean = true,
   ) {
     this.stateCode = stateCode.toUpperCase();
     this.stateName = (STATES as any)[this.stateCode];
     this.county = null;
     this.countyName = null;
     this.isCounty = county != null;
-    this.primary = new Projection(summaryWithTimeseries, {
-      isCounty: this.isCounty,
-    });
+    this.primary = new Projection(
+      summaryWithTimeseries,
+      {
+        isCounty: this.isCounty,
+      },
+      useMetrics,
+    );
 
     this.populateCounty(county);
   }

@@ -17,6 +17,7 @@ export function fetchProjections(
   stateId: string,
   countyInfo: any = null,
   snapshotUrl: string | null = null,
+  useMetrics: boolean = true,
 ) {
   snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
   let region: RegionDescriptor;
@@ -34,7 +35,12 @@ export function fetchProjections(
       summaryWithTimeseries != null,
       'Failed to fetch projections for ' + region,
     );
-    return new Projections(summaryWithTimeseries, stateId, countyInfo);
+    return new Projections(
+      summaryWithTimeseries,
+      stateId,
+      countyInfo,
+      useMetrics,
+    );
   }
 
   const key = snapshotUrl + '-' + region.toString();
@@ -44,7 +50,10 @@ export function fetchProjections(
 
 /** Returns an array of `Projections` instances for all states. */
 const cachedStatesProjections: { [key: string]: Promise<Projections[]> } = {};
-export function fetchAllStateProjections(snapshotUrl: string | null = null) {
+export function fetchAllStateProjections(
+  snapshotUrl: string | null = null,
+  useMetrics: boolean = true,
+) {
   snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
   async function fetch() {
     const all = await new Api(snapshotUrl).fetchAggregatedSummaryWithTimeseries(
@@ -58,17 +67,23 @@ export function fetchAllStateProjections(snapshotUrl: string | null = null) {
         return new Projections(
           summaryWithTimeseries,
           stateCode(summaryWithTimeseries)!,
+          null,
+          useMetrics,
         );
       });
   }
-  const key = snapshotUrl || 'null';
-  cachedStatesProjections[key] = cachedStatesProjections[key] || fetch();
-  return cachedStatesProjections[key];
+  return fetch();
+  // const key = snapshotUrl || 'null';
+  // cachedStatesProjections[key] = cachedStatesProjections[key] || fetch();
+  // return cachedStatesProjections[key];
 }
 
 /** Returns an array of `Projections` instances for all counties. */
 const cachedCountiesProjections: { [key: string]: Promise<Projections[]> } = {};
-export function fetchAllCountyProjections(snapshotUrl: string | null = null) {
+export function fetchAllCountyProjections(
+  snapshotUrl: string | null = null,
+  useMetrics: boolean = true,
+) {
   snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
   async function fetch() {
     const all = await new Api(snapshotUrl).fetchAggregatedSummaryWithTimeseries(
@@ -84,12 +99,14 @@ export function fetchAllCountyProjections(snapshotUrl: string | null = null) {
           summaryWithTimeseries,
           stateCode(summaryWithTimeseries)!,
           findCountyByFips(fips),
+          useMetrics,
         );
       });
   }
-  const key = snapshotUrl || 'null';
-  cachedCountiesProjections[key] = cachedCountiesProjections[key] || fetch();
-  return cachedCountiesProjections[key];
+  return fetch();
+  // const key = snapshotUrl || 'null';
+  // cachedCountiesProjections[key] = cachedCountiesProjections[key] || fetch();
+  // return cachedCountiesProjections[key];
 }
 
 export function useProjections(location: string, county = null) {

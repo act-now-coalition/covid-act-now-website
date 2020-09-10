@@ -293,12 +293,10 @@ export class Projection {
     }
 
     if (useMetrics) {
-      console.log('HI');
       this.caseDensityByCases = metricsTimeseries.map(row =>
         row ? row.caseDensity : null,
       );
     } else {
-      console.log('HO');
       this.caseDensityByCases = this.calcCaseDensityByCases();
     }
     this.caseDensityByDeaths = this.calcCaseDensityByDeaths();
