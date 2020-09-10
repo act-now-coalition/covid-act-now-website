@@ -64,22 +64,22 @@ export function getPageUrl(
 export function getComparePageUrl(
   stateId: string | undefined,
   county: County | undefined,
-  sharingId: string,
+  compareShareId: string,
 ): string {
   return addSharingId(
-    urlJoin(getPageBaseUrl(stateId, county), 'compare', sharingId),
+    urlJoin(getPageBaseUrl(stateId, county), 'compare', compareShareId),
   );
 }
 
 export function getCompareShareImageUrl(
   stateId: string | undefined,
   county: County | undefined,
-  sharingId: string,
+  compareShareId: string,
 ): string {
   return urlJoin(
     getShareImageBaseUrl(stateId, county),
     'compare',
-    `${sharingId}.png`,
+    `${compareShareId}.png`,
   );
 }
 

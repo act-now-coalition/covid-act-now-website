@@ -52,7 +52,7 @@ const CompareTable = (props: {
   sliderValue: GeoScopeFilter;
   setSliderValue: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
   setShowFaqModal: React.Dispatch<React.SetStateAction<boolean>>;
-  createSharingId: () => Promise<string>;
+  createCompareShareId: () => Promise<string>;
 }) => {
   const {
     sorter,
@@ -180,11 +180,11 @@ const CompareTable = (props: {
 
   const getShareUrl = () =>
     props
-      .createSharingId()
+      .createCompareShareId()
       .then(id => `${getComparePageUrl(stateId, county, id)}`);
   const getDownloadImageUrl = () =>
     props
-      .createSharingId()
+      .createCompareShareId()
       .then(id => `${getCompareShareImageUrl(stateId, county, id)}`);
 
   return (

@@ -132,13 +132,13 @@ const CompareMain = (props: {
     geoScope,
   };
 
-  // createSharingId() stores the current share params to Firestore under a
+  // createCompareShareId() stores the current share params to Firestore under a
   // newly-assigned numeric ID and returns it. We cache the result so multiple
   // calls don't generate extra IDs.
-  let createSharingIdPromise: Promise<string> | null = null;
-  const createSharingId = async () => {
-    if (!createSharingIdPromise) {
-      createSharingIdPromise = firestore.runTransaction(async txn => {
+  let createCompareShareIdPromise: Promise<string> | null = null;
+  const createCompareShareId = async () => {
+    if (!createCompareShareIdPromise) {
+      createCompareShareIdPromise = firestore.runTransaction(async txn => {
         const nextIdDoc = await txn.get(nextIdDocRef);
         const id = nextIdDoc.data()?.id || 0;
 
@@ -149,12 +149,12 @@ const CompareMain = (props: {
       });
     }
 
-    return createSharingIdPromise;
+    return createCompareShareIdPromise;
   };
 
-  // Check for a /compare/{sharingId} in the URL and use it to repopulate the
+  // Check for a /compare/{compareShareId} in the URL and use it to repopulate the
   // compare table if it's there.
-  const { sharingId } = useParams();
+  const { compareShareId } = useParams();
   useEffect(() => {
     async function fetchParamsFromFirestore(id: string) {
       const doc = await paramsCollection.doc(id).get();
@@ -168,13 +168,13 @@ const CompareMain = (props: {
         setGeoScope(params['geoScope']);
         setSliderValue(scopeValueMap[params['geoScope'] as GeoScopeFilter]);
       } else {
-        console.error('Invalid Sharing ID:', sharingId);
+        console.error('Invalid Sharing ID:', compareShareId);
       }
     }
-    if (sharingId) {
-      fetchParamsFromFirestore(sharingId);
+    if (compareShareId) {
+      fetchParamsFromFirestore(compareShareId);
     }
-  }, [sharingId]);
+  }, [compareShareId]);
 
   if (locations.length === 0) {
     return null;
@@ -198,7 +198,7 @@ const CompareMain = (props: {
     sliderValue,
     setSliderValue,
     setShowFaqModal,
-    createSharingId,
+    createCompareShareId,
   };
 
   return (

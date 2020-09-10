@@ -12,7 +12,7 @@ service cloud.firestore {
       allow write: if resource == null || request.resource.data.id == resource.data.id + 1;
     }
     // Each document stores a set of share params corresponding to a shared compare table.
-    match /compare-shared-params/{sharingId} {
+    match /compare-shared-params/{compareShareId} {
       allow read;
       // Can write only if it doesn't exist.
       allow write: if resource == null;
