@@ -87,14 +87,13 @@ export function calcICUHeadroom(
 
   // Use capacity from the timeseries if it's within the last 7 days, else use the
   // non-timeseries value.
+  // TODO(chris): https://trello.com/c/CUcjDdtt/435-add-total-icu-beds-to-icu-headroom-metadata-instead-of-calculating-on-website
   const finalTotalBeds =
     lastValue(actualTimeseries.map(r => r?.ICUBeds.capacity).slice(-7)) ||
     actuals.ICUBeds.totalCapacity;
 
   return {
-    metricSeries: metricsTimeseries.map(row =>
-      row ? row.icuHeadroomRatio : null,
-    ),
+    metricSeries: metricsTimeseries.map(row => row && row.icuHeadroomRatio),
     metricValue: metrics.icuHeadroomRatio,
     overrideInPlace,
     totalBeds: finalTotalBeds,

@@ -284,7 +284,7 @@ export class Projection {
   get currentContactTracers() {
     return (
       CONTACT_TRACER_STATE_OVERRIDES[this.stateName] ||
-      this.metrics?.contactTracerCapacityRatio ||
+      lastValue(this.actualTimeseries.map(row => row && row.contactTracers)) ||
       null
     );
   }
