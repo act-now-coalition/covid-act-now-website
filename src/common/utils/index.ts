@@ -74,7 +74,7 @@ export function formatInteger(num: number): string {
  */
 export const formatDecimal = (num: number, places = 2): string => {
   if (num === null) {
-    return '--';
+    return '-';
   }
 
   return num.toLocaleString(undefined, {
