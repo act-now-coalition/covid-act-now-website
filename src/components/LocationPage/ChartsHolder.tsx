@@ -245,7 +245,7 @@ export function getChartData(
       : projection.getDataset('contractTracers');
 
   const caseDensityData =
-    projection?.currentCaseDensityByDeaths == null
+    projection?.currentCaseDensity == null
       ? null
       : projection.getDataset('caseDensityRange');
 

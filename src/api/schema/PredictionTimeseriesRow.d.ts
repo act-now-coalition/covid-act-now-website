@@ -59,7 +59,7 @@ export type Currentsusceptible = number;
 export type Currentexposed = number;
 
 /**
- * Base model for API output.
+ * Prediction data for a single day.
  */
 export interface PredictionTimeseriesRow {
   date: Date;

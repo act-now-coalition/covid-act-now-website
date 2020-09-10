@@ -17,6 +17,8 @@ const SCHEMA_FILES = [
   'AggregateFlattenedTimeseries.json',
   'AggregateRegionSummary.json',
   'AggregateRegionSummaryWithTimeseries.json',
+  'Metrics.json',
+  'MetricsTimeseriesRow.json',
   'PredictionTimeseriesRow.json',
   'PredictionTimeseriesRowWithHeader.json',
   'Projections.json',

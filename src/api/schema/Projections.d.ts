@@ -25,16 +25,16 @@ export type Shortagestartdate = string;
  */
 export type Icubeds = ResourceUsageProjection;
 /**
- * Historical or Inferred Rt
+ * Inferred Rt
  */
 export type Rt = number;
 /**
- * Rt standard deviation
+ * Rt 90th percentile confidence interval upper endpoint.
  */
 export type Rtci90 = number;
 
 /**
- * Base model for API output.
+ * Summary of projection data.
  */
 export interface Projections {
   totalHospitalBeds: Totalhospitalbeds;
@@ -43,7 +43,7 @@ export interface Projections {
   RtCI90: Rtci90;
 }
 /**
- * Base model for API output.
+ * Resource usage projection data.
  */
 export interface ResourceUsageProjection {
   peakShortfall: Peakshortfall;

@@ -18,7 +18,7 @@ export type Peakdate = string;
 export type Shortagestartdate = string;
 
 /**
- * Base model for API output.
+ * Resource usage projection data.
  */
 export interface ResourceUsageProjection {
   peakShortfall: Peakshortfall;

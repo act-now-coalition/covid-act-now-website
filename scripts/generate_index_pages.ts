@@ -60,6 +60,7 @@ function locationPageTags(
     'twitter:image': fullImageUrl,
     'twitter:title': title,
     'twitter:description': description,
+    'twitter:site': '@CovidActNow',
   };
 }
 
