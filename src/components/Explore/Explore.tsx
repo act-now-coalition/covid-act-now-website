@@ -36,10 +36,12 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 const Explore: React.FunctionComponent<{
   projection: Projection;
   chartId?: string;
-}> = ({ projection, chartId }) => {
+  compareCopy: string;
+}> = ({ projection, chartId, compareCopy }) => {
   const { locationName, fips } = projection;
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobileXs = useMediaQuery(theme.breakpoints.down('xs'));
 
   const defaultMetric =
     (chartId && getMetricByChartId(chartId)) || ExploreMetric.CASES;
@@ -86,6 +88,12 @@ const Explore: React.FunctionComponent<{
   const lastUpdatedDateString =
     lastUpdatedDate !== null ? lastUpdatedDate.toLocaleDateString() : '';
 
+  const modalNormalizeCheckboxProps = {
+    hasMultipleLocations,
+    normalizeData,
+    setNormalizeData,
+  };
+
   return (
     <Styles.Container>
       <Grid container spacing={1}>
@@ -114,12 +122,17 @@ const Explore: React.FunctionComponent<{
         onChangeTab={onChangeTab}
       />
       <Styles.ChartControlsContainer>
+        <Styles.TableAutocompleteHeader>
+          {compareCopy}
+        </Styles.TableAutocompleteHeader>
         <Grid container spacing={1}>
           <Grid key="location-selector" item sm={6} xs={6}>
             <LocationSelector
               locations={autocompleteLocations}
               selectedLocations={selectedLocations}
               onChangeSelectedLocations={onChangeSelectedLocations}
+              {...modalNormalizeCheckboxProps}
+              compareCopy={compareCopy}
             />
           </Grid>
           {!hasMultipleLocations && (
@@ -128,27 +141,32 @@ const Explore: React.FunctionComponent<{
             </Grid>
           )}
           {hasMultipleLocations && (
-            <Grid key="legend" item sm xs={12}>
-              <FormControlLabel
-                control={
-                  <Styles.NormalizeCheckbox
-                    checked={normalizeData}
-                    onChange={() => {
-                      setNormalizeData(!normalizeData);
-                    }}
-                    name="normalize data"
-                    disableRipple
-                    id="normalize-data-control"
-                  />
-                }
-                label="Normalize Data"
-              />
-            </Grid>
+            <Styles.NormalizeDataContainer hideNormalizeControl={isMobileXs}>
+              <Grid key="legend" item sm xs={12}>
+                <FormControlLabel
+                  control={
+                    <Styles.NormalizeCheckbox
+                      checked={normalizeData}
+                      onChange={() => {
+                        setNormalizeData(!normalizeData);
+                      }}
+                      name="normalize data"
+                      disableRipple
+                      id="normalize-data-control"
+                    />
+                  }
+                  label="Normalize Data"
+                />
+                <Styles.NormalizeSubLabel>
+                  Per 100k population
+                </Styles.NormalizeSubLabel>
+              </Grid>
+            </Styles.NormalizeDataContainer>
           )}
         </Grid>
       </Styles.ChartControlsContainer>
       {hasData ? (
-        <Styles.ChartContainer>
+        <Styles.ChartContainer adjustContainerWidth={hasMultipleLocations}>
           {/**
            * The width is set to zero while the parent div is rendering, the
            * placeholder div below prevents the page from jumping.
@@ -163,6 +181,7 @@ const Explore: React.FunctionComponent<{
                   height={400}
                   tooltipSubtext={`in ${locationName}`}
                   hasMultipleLocations={hasMultipleLocations}
+                  isMobileXs={isMobileXs}
                 />
               ) : (
                 <div style={{ height: 400 }} />

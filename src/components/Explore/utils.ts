@@ -372,9 +372,8 @@ export function getAutocompleteLocations(locationFips: string) {
   const allLocations = getAllLocations();
   return isState(currentLocation)
     ? allLocations.filter(isState)
-    : allLocations
-        .filter(isCounty)
-        .filter(location => belongsToState(location, stateFips));
+    : allLocations.filter(isCounty);
+  // .filter(location => belongsToState(location, stateFips));
 }
 
 /**

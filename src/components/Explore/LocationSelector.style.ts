@@ -38,4 +38,11 @@ export const ModalBody = styled.div`
 export const DoneButton = styled(Button)`
   text-transform: none;
   color: ${palette.lightBlue};
+  min-width: fit-content;
+`;
+
+export const ModalOpenButton = styled(Button)`
+  white-space: nowrap;
+  width: fit-content;
+  margin-bottom: 0.5rem;
 `;

@@ -7,6 +7,7 @@ import MuiTabs from '@material-ui/core/Tabs';
 import theme from 'assets/theme';
 import colorPalette from 'assets/theme/palette';
 import { charts } from 'components/Charts/Charts.style';
+import { COLOR_MAP } from 'common/colors';
 
 /** Gets the chart palette based on the current theme. */
 function palette(props: any) {
@@ -72,12 +73,34 @@ export const ChartControlsContainer = styled.div`
   margin: ${theme.spacing(2)}px auto;
 `;
 
-export const NormalizeCheckbox = styled(MuiCheckbox)``;
+export const TableAutocompleteHeader = styled.div`
+  display: none;
+
+  @media (min-width: 600px) {
+    display: flex;
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: ${COLOR_MAP.GRAY_BODY_COPY};
+  }
+`;
+
+export const NormalizeCheckbox = styled(MuiCheckbox)`
+  svg {
+    fill: ${COLOR_MAP.GRAY.DARK};
+  }
+`;
 
 export const LegendContainer = styled(Box)`
   display: flex;
   flex-direction: row;
   justify-content: center;
+
+  @media (min-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 2rem;
+  }
 `;
 
 export const LegendItem = styled(Box)`
@@ -104,9 +127,17 @@ export const LegendItemLabel = styled.span`
 
 // CHARTS
 
-export const ChartContainer = styled.div`
+export const ChartContainer = styled.div<{ adjustContainerWidth?: boolean }>`
   margin-top: ${theme.spacing(4)}px;
   margin-bottom: ${theme.spacing(3)}px;
+  margin-left: ${({ adjustContainerWidth }) => adjustContainerWidth && '-1rem'};
+  margin-right: ${({ adjustContainerWidth }) =>
+    adjustContainerWidth && '-3rem'};
+
+  @media (min-width: 600px) {
+    margin-left: 0;
+    margin-right: 0;
+  }
 `;
 
 export const PositionRelative = styled.div`
@@ -239,4 +270,25 @@ export const TooltipLocation = styled.div`
   font-size: 11px;
   line-height: 13px;
   color: ${colorPalette.white};
+`;
+
+export const NormalizeDataContainer = styled.div<{
+  hideNormalizeControl?: boolean;
+}>`
+  display: flex;
+  flex-direction: column;
+  padding-top: 1.25rem;
+  display: ${({ hideNormalizeControl }) => hideNormalizeControl && 'none'};
+
+  @media (min-width: 600px) {
+    padding-top: 0;
+    margin-left: 2rem;
+  }
+`;
+
+export const NormalizeSubLabel = styled.div`
+  font-size: 0.75rem;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+  margin-left: 2rem;
+  transform: translateY(-0.75rem);
 `;
