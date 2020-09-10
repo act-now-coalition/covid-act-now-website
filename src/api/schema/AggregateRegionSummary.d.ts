@@ -50,11 +50,11 @@ export type Shortagestartdate = string;
  */
 export type Icubeds = ResourceUsageProjection;
 /**
- * Historical or Inferred Rt
+ * Inferred Rt
  */
 export type Rt = number;
 /**
- * Rt standard deviation
+ * Rt 90th percentile confidence interval upper endpoint.
  */
 export type Rtci90 = number;
 /**
@@ -106,16 +106,60 @@ export type Typicalusagerate = number;
  */
 export type Contacttracers = number;
 /**
+ * Region level metrics
+ */
+export type Metrics1 = Metrics;
+/**
+ * Ratio of people who test positive calculated using a 7-day rolling average.
+ */
+export type Testpositivityratio = number;
+/**
+ * The number of cases per 100k population calculated using a 7-day rolling average.
+ */
+export type Casedensity = number;
+/**
+ * Ratio of currently hired tracers to estimated tracers needed based on 7-day daily case average.
+ */
+export type Contacttracercapacityratio = number;
+/**
+ * R_t, or the estimated number of infections arising from a typical case.
+ */
+export type Infectionrate = number;
+/**
+ * 90th percentile confidence interval upper endpoint of the infection rate.
+ */
+export type Infectionrateci90 = number;
+export type Icuheadroomratio = number;
+/**
+ * Current number of covid patients in icu.
+ */
+export type Currenticucovid = number;
+/**
+ * Method used to determine number of current ICU patients with covid.
+ */
+export type Currenticucovidmethod = 'actual' | 'estimated';
+/**
+ * Current number of covid patients in icu.
+ */
+export type Currenticunoncovid = number;
+/**
+ * Method used to determine number of current ICU patients without covid.
+ */
+export type Currenticunoncovidmethod =
+  | 'actual'
+  | 'estimated_from_typical_utilization'
+  | 'estimated_from_total_icu_actual';
+/**
  * Total Population in geographic region.
  */
 export type Population1 = number;
 /**
- * Base model for API output.
+ * Summary data for multiple regions.
  */
 export type AggregateRegionSummary = RegionSummary[];
 
 /**
- * Base model for API output.
+ * Summary of actual and prediction data for a single region.
  */
 export interface RegionSummary {
   countryName?: Countryname;
@@ -127,10 +171,11 @@ export interface RegionSummary {
   lastUpdatedDate: Lastupdateddate;
   projections: Projections;
   actuals: Actuals;
+  metrics?: Metrics1;
   population: Population1;
 }
 /**
- * Base model for API output.
+ * Summary of projection data.
  */
 export interface Projections {
   totalHospitalBeds: Totalhospitalbeds;
@@ -139,7 +184,7 @@ export interface Projections {
   RtCI90: Rtci90;
 }
 /**
- * Base model for API output.
+ * Resource usage projection data.
  */
 export interface ResourceUsageProjection {
   peakShortfall: Peakshortfall;
@@ -147,7 +192,7 @@ export interface ResourceUsageProjection {
   shortageStartDate: Shortagestartdate;
 }
 /**
- * Base model for API output.
+ * Known actuals data.
  */
 export interface Actuals {
   population: Population;
@@ -161,7 +206,7 @@ export interface Actuals {
   contactTracers?: Contacttracers;
 }
 /**
- * Base model for API output.
+ * Utilization of hospital resources.
  */
 export interface ResourceUtilization {
   capacity: Capacity;
@@ -169,4 +214,25 @@ export interface ResourceUtilization {
   currentUsageCovid: Currentusagecovid;
   currentUsageTotal: Currentusagetotal;
   typicalUsageRate: Typicalusagerate;
+}
+/**
+ * Calculated metrics data based on known actuals.
+ */
+export interface Metrics {
+  testPositivityRatio: Testpositivityratio;
+  caseDensity: Casedensity;
+  contactTracerCapacityRatio: Contacttracercapacityratio;
+  infectionRate: Infectionrate;
+  infectionRateCI90: Infectionrateci90;
+  icuHeadroomRatio: Icuheadroomratio;
+  icuHeadroomDetails?: ICUHeadroomMetricDetails;
+}
+/**
+ * Details about how the ICU Headroom Metric was calculated.
+ */
+export interface ICUHeadroomMetricDetails {
+  currentIcuCovid: Currenticucovid;
+  currentIcuCovidMethod: Currenticucovidmethod;
+  currentIcuNonCovid: Currenticunoncovid;
+  currentIcuNonCovidMethod: Currenticunoncovidmethod;
 }

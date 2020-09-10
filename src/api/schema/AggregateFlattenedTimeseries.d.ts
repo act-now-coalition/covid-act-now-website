@@ -87,12 +87,12 @@ export type Long = number;
  */
 export type Lastupdateddate = string;
 /**
- * Base model for API output.
+ * Flattened prediction timeseries data for multiple regions.
  */
 export type AggregateFlattenedTimeseries = PredictionTimeseriesRowWithHeader[];
 
 /**
- * Base model for API output.
+ * Prediction timeseries row with location information.
  */
 export interface PredictionTimeseriesRowWithHeader {
   date: Date;
