@@ -123,9 +123,18 @@ export const LegendItemLabel = styled.span`
 
 // CHARTS
 
-export const ChartContainer = styled.div`
+// Todo(Chelsi): check if this was the intended fix:
+export const ChartContainer = styled.div<{ adjustContainerWidth?: boolean }>`
   margin-top: ${theme.spacing(4)}px;
   margin-bottom: ${theme.spacing(3)}px;
+  margin-left: ${({ adjustContainerWidth }) => adjustContainerWidth && '-1rem'};
+  margin-right: ${({ adjustContainerWidth }) =>
+    adjustContainerWidth && '-3rem'};
+
+  @media (min-width: 600px) {
+    margin-left: 0;
+    margin-right: 0;
+  }
 `;
 
 export const PositionRelative = styled.div`

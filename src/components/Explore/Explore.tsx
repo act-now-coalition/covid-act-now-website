@@ -166,7 +166,7 @@ const Explore: React.FunctionComponent<{
         </Grid>
       </Styles.ChartControlsContainer>
       {hasData ? (
-        <Styles.ChartContainer>
+        <Styles.ChartContainer adjustContainerWidth={hasMultipleLocations}>
           {/**
            * The width is set to zero while the parent div is rendering, the
            * placeholder div below prevents the page from jumping.
