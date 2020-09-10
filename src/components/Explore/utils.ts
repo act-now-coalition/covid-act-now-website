@@ -27,7 +27,7 @@ import { SeriesType, Series } from './interfaces';
 import {
   isState,
   isCounty,
-  belongsToState,
+  // belongsToState,
 } from 'components/AutocompleteLocations';
 
 export function getMaxBy<T>(
@@ -366,9 +366,11 @@ export function getLocationNames(locations: Location[]) {
     .join(', ')} and ${getLocationLabel(lastLocation)}.`;
 }
 
+// note (Chelsi): commenting out belongsToState filter
+// so we can compare all US counties:
 export function getAutocompleteLocations(locationFips: string) {
   const currentLocation = findLocationForFips(locationFips);
-  const stateFips = currentLocation.state_fips_code;
+  // const stateFips = currentLocation.state_fips_code;
   const allLocations = getAllLocations();
   return isState(currentLocation)
     ? allLocations.filter(isState)
