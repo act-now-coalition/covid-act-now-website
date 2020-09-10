@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { Button } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 import { Modal } from '@material-ui/core';
 import { Location } from 'common/locations';
@@ -9,11 +8,7 @@ import * as Styles from './LocationSelector.style';
 import AutocompleteLocations from 'components/AutocompleteLocations';
 
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import {
-  NormalizeCheckbox,
-  NormalizeDataContainer,
-  NormalizeSubLabel,
-} from './Explore.style';
+import * as ExploreStyles from './Explore.style';
 
 const LocationSelector: React.FC<{
   locations: Location[];
@@ -22,6 +17,7 @@ const LocationSelector: React.FC<{
   hasMultipleLocations: boolean;
   normalizeData: boolean;
   setNormalizeData: React.Dispatch<React.SetStateAction<boolean>>;
+  compareCopy: string;
 }> = ({
   locations,
   selectedLocations,
@@ -29,6 +25,7 @@ const LocationSelector: React.FC<{
   hasMultipleLocations,
   normalizeData,
   setNormalizeData,
+  compareCopy,
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
@@ -47,22 +44,22 @@ const LocationSelector: React.FC<{
 
   return isMobile ? (
     <React.Fragment>
-      <Button
+      <Styles.ModalOpenButton
         variant="outlined"
         disableRipple
         disableFocusRipple
         disableTouchRipple
         onClick={onClickButton}
       >
-        Compare
-      </Button>
+        {compareCopy}
+      </Styles.ModalOpenButton>
       {modalOpen && (
         <Modal open={modalOpen} onClose={closeModal}>
           <Styles.ModalContainer>
             <Styles.ModalHeader>
               <Grid container>
                 <Grid item xs={9}>
-                  <Styles.ModalTitle>Compare Locations</Styles.ModalTitle>
+                  <Styles.ModalTitle>{compareCopy}</Styles.ModalTitle>
                 </Grid>
                 <Grid item xs container justify="flex-end">
                   <Styles.DoneButton size="small" onClick={closeModal}>
@@ -78,11 +75,11 @@ const LocationSelector: React.FC<{
                 selectedLocations={selectedLocations}
               />
               {hasMultipleLocations && (
-                <NormalizeDataContainer>
+                <ExploreStyles.NormalizeDataContainer>
                   <Grid key="legend" item sm xs={12}>
                     <FormControlLabel
                       control={
-                        <NormalizeCheckbox
+                        <ExploreStyles.NormalizeCheckbox
                           checked={normalizeData}
                           onChange={() => {
                             setNormalizeData(!normalizeData);
@@ -95,8 +92,10 @@ const LocationSelector: React.FC<{
                       label="Normalize Data"
                     />
                   </Grid>
-                  <NormalizeSubLabel>Per 100k population</NormalizeSubLabel>
-                </NormalizeDataContainer>
+                  <ExploreStyles.NormalizeSubLabel>
+                    Per 100k population
+                  </ExploreStyles.NormalizeSubLabel>
+                </ExploreStyles.NormalizeDataContainer>
               )}
             </Styles.ModalBody>
           </Styles.ModalContainer>

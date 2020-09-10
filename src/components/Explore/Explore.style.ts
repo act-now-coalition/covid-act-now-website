@@ -73,16 +73,30 @@ export const ChartControlsContainer = styled.div`
   margin: ${theme.spacing(2)}px auto;
 `;
 
-export const NormalizeCheckbox = styled(MuiCheckbox)`
-  span {
-    color: white;
+export const TableAutocompleteHeader = styled.div`
+  display: none;
+
+  @media (min-width: 600px) {
+    display: flex;
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: ${COLOR_MAP.GRAY_BODY_COPY};
   }
 `;
+
+export const NormalizeCheckbox = styled(MuiCheckbox)``;
 
 export const LegendContainer = styled(Box)`
   display: flex;
   flex-direction: row;
   justify-content: center;
+
+  @media (min-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 2rem;
+  }
 `;
 
 export const LegendItem = styled(Box)`
@@ -246,14 +260,23 @@ export const TooltipLocation = styled.div`
   color: ${colorPalette.white};
 `;
 
-export const NormalizeDataContainer = styled.div`
+export const NormalizeDataContainer = styled.div<{
+  hideNormalizeControl?: boolean;
+}>`
   display: flex;
   flex-direction: column;
+  padding-top: 1.25rem;
+  display: ${({ hideNormalizeControl }) => hideNormalizeControl && 'none'};
+
+  @media (min-width: 600px) {
+    padding-top: 0;
+    margin-left: 2rem;
+  }
 `;
 
 export const NormalizeSubLabel = styled.div`
   font-size: 0.75rem;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   margin-left: 2rem;
-  margin-top: -0.75rem;
+  transform: translateY(-0.75rem);
 `;

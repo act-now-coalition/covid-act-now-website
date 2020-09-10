@@ -111,6 +111,7 @@ const MultipleLocationsChart: React.FC<{
   marginLeft?: number;
   marginRight?: number;
   barOpacity?: number;
+  isMobileXs?: boolean;
 }> = ({
   width,
   height,
@@ -121,6 +122,7 @@ const MultipleLocationsChart: React.FC<{
   marginLeft = 60,
   marginRight = 100,
   barOpacity,
+  isMobileXs,
 }) => {
   const dateFrom = new Date('2020-03-01');
   const dateTo = new Date();
@@ -180,7 +182,7 @@ const MultipleLocationsChart: React.FC<{
             strokeColor={axisGridColor}
           />
           {seriesList.map(({ label, data, params }, i) => {
-            const locationLabel = !isMobile
+            const locationLabel = !isMobileXs
               ? label
               : getStateCode(label) || label.slice(0, 3);
             return data.length > 0 ? (

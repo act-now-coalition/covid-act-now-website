@@ -32,11 +32,7 @@ const AutocompleteLocations: React.FC<{
     getOptionSelected={getOptionSelected}
     value={selectedLocations}
     renderInput={params => (
-      <TextField
-        variant="outlined"
-        {...params}
-        placeholder="Compare states or counties"
-      />
+      <TextField variant="outlined" {...params} placeholder="+ Add" />
     )}
   />
 );
