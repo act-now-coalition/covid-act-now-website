@@ -38,10 +38,10 @@ import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 const NewFeatureCopy = (props: { onNewUpdateClick: () => void }) => {
   return (
     <Copy isUpdateCopy>
-      <strong>New feature</strong>
-      <br />
-      Compare COVID trends of multiple states or counties in a single chart.{' '}
-      <span onClick={props.onNewUpdateClick || noop}>See the chart</span>
+      <strong>Explore COVID Trends!</strong> Compare raw case, death, and
+      hospitalization data across multiple states or counties in our new Trends
+      chart.{' '}
+      <span onClick={props.onNewUpdateClick || noop}>Check it out below</span>
     </Copy>
   );
 };
@@ -183,7 +183,7 @@ const LocationPageHeader = (props: {
             <SectionHalf>
               <InfoOutlinedIcon />
               <SectionColumn isUpdateCopy>
-                <ColumnTitle isUpdateCopy>Updates</ColumnTitle>
+                <ColumnTitle isUpdateCopy>New feature</ColumnTitle>
                 <NewFeatureCopy onNewUpdateClick={props.onNewUpdateClick} />
               </SectionColumn>
             </SectionHalf>
