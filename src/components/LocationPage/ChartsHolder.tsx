@@ -172,6 +172,7 @@ const ChartsHolder = (props: {
               onContactTracingClick={() => scrollTo(contactTracingRef.current)}
               onHeaderShareClick={() => scrollTo(shareBlockRef.current, -372)}
               onHeaderSignupClick={() => scrollTo(shareBlockRef.current)}
+              onNewUpdateClick={() => scrollTo(exploreChartRef.current)}
               isMobile={isMobile}
             />
             <CompareMain

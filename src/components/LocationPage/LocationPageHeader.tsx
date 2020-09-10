@@ -33,6 +33,18 @@ import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
 import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
 import { LEVEL_COLOR } from 'common/colors';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+
+const NewFeatureCopy = (props: { onNewUpdateClick: () => void }) => {
+  return (
+    <Copy isUpdateCopy>
+      <strong>New feature</strong>
+      <br />
+      Compare COVID trends of multiple states or counties in a single chart.{' '}
+      <span onClick={props.onNewUpdateClick || noop}>See the chart</span>
+    </Copy>
+  );
+};
 
 const LocationPageHeading = (props: { projections: Projections }) => {
   const { isEmbed } = useEmbed();
@@ -69,6 +81,7 @@ const LocationPageHeader = (props: {
   onHeaderSignupClick: () => void;
   onCaseDensityClick: () => void;
   isMobile?: Boolean;
+  onNewUpdateClick: () => void;
 }) => {
   const hasStats = !!Object.values(props.stats).filter(
     (val: number | null) => !isNull(val),
@@ -165,6 +178,13 @@ const LocationPageHeader = (props: {
                 <ColumnTitle>Covid threat level</ColumnTitle>
                 <LevelDescription>{levelInfo.summary}</LevelDescription>
                 <Copy>{levelInfo.detail(locationName)}</Copy>
+              </SectionColumn>
+            </SectionHalf>
+            <SectionHalf>
+              <InfoOutlinedIcon />
+              <SectionColumn isUpdateCopy>
+                <ColumnTitle isUpdateCopy>Updates</ColumnTitle>
+                <NewFeatureCopy onNewUpdateClick={props.onNewUpdateClick} />
               </SectionColumn>
             </SectionHalf>
           </HeaderSection>
