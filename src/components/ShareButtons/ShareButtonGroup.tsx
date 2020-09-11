@@ -15,7 +15,8 @@ const ShareImageButtons: React.FC<{
   url: string;
   quote: string;
   hashtags: string[];
-}> = ({ imageUrl, imageFilename, url, quote, hashtags }) => {
+  disabled?: boolean;
+}> = ({ imageUrl, imageFilename, url, quote, hashtags, disabled = false }) => {
   const [showSocialButtons, setShowSocialButtons] = useState(false);
   const hideSocialButtons = () => {
     const timeoutId = setTimeout(() => setShowSocialButtons(false), 1500);
@@ -44,6 +45,7 @@ const ShareImageButtons: React.FC<{
             disableRipple
             disableFocusRipple
             disableTouchRipple
+            disabled={disabled}
           >
             Save
           </ShareButton>
@@ -52,6 +54,7 @@ const ShareImageButtons: React.FC<{
             disableRipple
             disableFocusRipple
             disableTouchRipple
+            disabled={disabled}
           >
             Share
           </ShareButton>

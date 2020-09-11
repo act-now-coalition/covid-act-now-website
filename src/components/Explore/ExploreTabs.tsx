@@ -4,11 +4,11 @@ import { Tab, Tabs } from './Explore.style';
 const ExploreTabs: FunctionComponent<{
   activeTabIndex: number;
   labels: string[];
-  onChangeTab: (event: React.ChangeEvent<{}>, newTabIndex: number) => void;
+  onChangeTab: (newTabIndex: number) => void;
 }> = ({ activeTabIndex, labels, onChangeTab }) => (
   <Tabs
     value={activeTabIndex}
-    onChange={onChangeTab}
+    onChange={(event, tabIndex) => onChangeTab(tabIndex)}
     aria-label="Metrics Tabs"
     variant="scrollable"
   >

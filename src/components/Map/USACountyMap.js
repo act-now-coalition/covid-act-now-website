@@ -5,13 +5,9 @@ import { colorFromLocationSummary } from 'common/colors';
 import { geoAlbersUsaTerritories } from 'geo-albers-usa-territories';
 import STATES_JSON from './data/states-10m.json';
 import { USMapWrapper, USStateMapWrapper } from './Map.style';
-import { REVERSED_STATES } from 'common';
 import { useSummaries } from 'common/location_summaries';
 import { ScreenshotReady } from 'components/Screenshot';
-
-function getStateCode(stateName) {
-  return REVERSED_STATES[stateName];
-}
+import { getStateCode } from 'common/locations';
 
 /**
  * SVG element to represent the Northern Mariana Islands on the USA Country Map as a

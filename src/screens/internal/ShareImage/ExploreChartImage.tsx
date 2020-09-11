@@ -68,12 +68,13 @@ const ExploreChartImage = () => {
             <ParentSize>
               {({ width }) => (
                 <ExploreChart
-                  series={getSeries(metric, projection)}
+                  seriesList={getSeries(metric, projection)}
                   width={width}
                   height={225}
                   isMobile={false}
                   barOpacity={0.4}
                   barOpacityHover={0.8}
+                  hasMultipleLocations={false}
                 />
               )}
             </ParentSize>
