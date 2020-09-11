@@ -35,13 +35,21 @@ import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
 import { LEVEL_COLOR } from 'common/colors';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 
-const NewFeatureCopy = (props: { onNewUpdateClick: () => void }) => {
+const NewFeatureCopy = (props: {
+  locationName: string;
+  onNewUpdateClick: () => void;
+}) => {
   return (
     <Copy isUpdateCopy>
-      <strong>Explore COVID Trends!</strong> Compare raw case, death, and
-      hospitalization data across multiple states or counties in our new Trends
-      chart.{' '}
-      <span onClick={props.onNewUpdateClick || noop}>Check it out below</span>
+      <strong>Explore COVID Trends.</strong> View raw case, death, and
+      hospitalization data for {props.locationName} and compare it against other
+      locations in our new Trends chart.{' '}
+      <span
+        style={{ whiteSpace: 'nowrap' }}
+        onClick={props.onNewUpdateClick || noop}
+      >
+        See it below
+      </span>
     </Copy>
   );
 };
@@ -184,7 +192,10 @@ const LocationPageHeader = (props: {
               <InfoOutlinedIcon />
               <SectionColumn isUpdateCopy>
                 <ColumnTitle isUpdateCopy>New feature</ColumnTitle>
-                <NewFeatureCopy onNewUpdateClick={props.onNewUpdateClick} />
+                <NewFeatureCopy
+                  locationName={locationName}
+                  onNewUpdateClick={props.onNewUpdateClick}
+                />
               </SectionColumn>
             </SectionHalf>
           </HeaderSection>
