@@ -33,9 +33,9 @@ const Announcements = () => {
         </ExternalLink>{' '}
         and{' '}
         <ExternalLink href="https://blog.covidactnow.org/introducing-northern-mariana-islands-to-the-u-s-covid-coverage-map/">
-          Northern Mariana Islands'
+          Northern Mariana Islands' launch
         </ExternalLink>{' '}
-        launch.
+        .
       </AnnouncementBodyCopy>
       <ButtonsContainer>
         <ReadMoreButton
