@@ -30,17 +30,18 @@ function LocationPage() {
     );
   }
   const [selectedCounty, setSelectedCounty] = useState(countyOption);
-
   useMemo(() => {
     setSelectedCounty(countyOption);
   }, [countyOption]);
 
   const projections = useProjections(stateId, selectedCounty);
-
   // Projections haven't loaded yet
   // If a new county has just been selected, we may not have projections
   // for the new county loaded yet
-  if (!projections || projections.county !== selectedCounty) {
+  if (
+    !projections ||
+    projections.county?.full_fips_code !== selectedCounty?.full_fips_code
+  ) {
     return <LoadingScreen></LoadingScreen>;
   }
 
