@@ -1,32 +1,41 @@
 import moment from 'moment';
 import urlJoin from 'url-join';
 import {
-  max,
-  range,
   deburr,
-  words,
-  isNumber,
   dropRightWhile,
   dropWhile,
+  flatten,
+  isNumber,
+  max,
+  range,
+  words,
 } from 'lodash';
-import { Series } from './interfaces';
-import { Column } from 'common/models/Projection';
-import { Projection, DatasetId } from 'common/models/Projection';
-import { ChartType } from './interfaces';
-import { share_image_url } from 'assets/data/share_images_url.json';
+import { schemeCategory10 } from 'd3-scale-chromatic';
+import { fetchProjections } from 'common/utils/model';
+import { Column, Projection, DatasetId } from 'common/models/Projection';
 import {
+  findLocationForFips,
+  getLocationNames as getAllLocations,
   getLocationNameForFips,
   getLocationUrlForFips,
   isStateFips,
   findStateByFips,
+  Location,
 } from 'common/locations';
+import { share_image_url } from 'assets/data/share_images_url.json';
+import { SeriesType, Series } from './interfaces';
+import {
+  isState,
+  isCounty,
+  // belongsToState,
+} from 'components/AutocompleteLocations';
 
 export function getMaxBy<T>(
-  series: Series[],
+  seriesList: Series[],
   getValue: (d: Column) => T,
   defaultValue: T,
 ): T {
-  const maxValue = max(series.map(({ data }) => max(data.map(getValue))));
+  const maxValue = max(seriesList.map(({ data }) => max(data.map(getValue))));
   return maxValue || defaultValue;
 }
 
@@ -65,17 +74,30 @@ export function getMetricByChartId(chartId: string): ExploreMetric | undefined {
   }
 }
 
+function getDatasetIdByMetric(metric: ExploreMetric): DatasetId {
+  switch (metric) {
+    case ExploreMetric.CASES:
+      return 'smoothedDailyCases';
+    case ExploreMetric.DEATHS:
+      return 'smoothedDailyDeaths';
+    case ExploreMetric.HOSPITALIZATIONS:
+      return 'smoothedHospitalizations';
+    case ExploreMetric.ICU_HOSPITALIZATIONS:
+      return 'smoothedICUHospitalizations';
+  }
+}
+
 interface SerieDescription {
   label: string;
   tooltipLabel: string;
   datasetId: DatasetId;
-  type: ChartType;
+  type: SeriesType;
 }
 
 interface ExploreMetricDescription {
   title: string;
   chartId: string;
-  series: SerieDescription[];
+  seriesList: SerieDescription[];
 }
 
 export const exploreMetricData: {
@@ -84,72 +106,72 @@ export const exploreMetricData: {
   [ExploreMetric.CASES]: {
     title: 'Cases',
     chartId: 'cases',
-    series: [
+    seriesList: [
       {
         label: 'Cases',
         tooltipLabel: 'cases',
         datasetId: 'rawDailyCases',
-        type: ChartType.BAR,
+        type: SeriesType.BAR,
       },
       {
         label: '7 Day Average',
         tooltipLabel: 'cases',
         datasetId: 'smoothedDailyCases',
-        type: ChartType.LINE,
+        type: SeriesType.LINE,
       },
     ],
   },
   [ExploreMetric.DEATHS]: {
     title: 'Deaths',
     chartId: 'deaths',
-    series: [
+    seriesList: [
       {
         label: 'Deaths',
         tooltipLabel: 'Deaths',
         datasetId: 'rawDailyDeaths',
-        type: ChartType.BAR,
+        type: SeriesType.BAR,
       },
       {
         label: '7 Day Average',
         tooltipLabel: 'Deaths',
         datasetId: 'smoothedDailyDeaths',
-        type: ChartType.LINE,
+        type: SeriesType.LINE,
       },
     ],
   },
   [ExploreMetric.HOSPITALIZATIONS]: {
     title: 'Hospitalizations',
     chartId: 'hospitalizations',
-    series: [
+    seriesList: [
       {
         label: 'Hospitalizations',
         tooltipLabel: 'Hospitalizations',
         datasetId: 'rawHospitalizations',
-        type: ChartType.BAR,
+        type: SeriesType.BAR,
       },
       {
         label: '7 Day Average',
         tooltipLabel: 'Hospitalizations',
         datasetId: 'smoothedHospitalizations',
-        type: ChartType.LINE,
+        type: SeriesType.LINE,
       },
     ],
   },
   [ExploreMetric.ICU_HOSPITALIZATIONS]: {
     title: 'ICU Hospitalizations',
     chartId: 'icu-hospitalizations',
-    series: [
+    seriesList: [
       {
         label: 'ICU Hospitalizations',
         tooltipLabel: 'ICU Hospitalizations',
         datasetId: 'rawICUHospitalizations',
-        type: ChartType.BAR,
+        type: SeriesType.BAR,
       },
       {
         label: '7 Day Average',
         tooltipLabel: 'ICU Hospitalizations',
         datasetId: 'smoothedICUHospitalizations',
-        type: ChartType.LINE,
+        type: SeriesType.LINE,
       },
     ],
   },
@@ -173,17 +195,56 @@ function cleanSeries(data: Column[]) {
   return dropWhile(dropRightWhile(data, missingValue), missingValue);
 }
 
-export function getSeries(
+/**
+ * Returns both the raw and smoothed series for the given metric and
+ * projection. It's used for the single-location Explore chart, which
+ * represents the raw data with bars and smoothed data with a line.
+ */
+export function getAllSeriesForMetric(
   metric: ExploreMetric,
   projection: Projection,
 ): Series[] {
   const metricDefinition = exploreMetricData[metric];
-  return metricDefinition.series.map(item => ({
+  return metricDefinition.seriesList.map(item => ({
     data: cleanSeries(projection.getDataset(item.datasetId)),
     type: item.type,
     label: item.label,
     tooltipLabel: item.tooltipLabel,
   }));
+}
+
+function scalePer100k(data: Column[], population: number) {
+  return data.map(({ x, y }) => ({ x, y: y / (population / 100000) }));
+}
+
+/**
+ * Returns the smoothed series for a given metric and projection. It's
+ * used for the multiple-locations Explore chart. It receives a color
+ * so we can differentiate the lines in the chart
+ */
+function getAveragedSeriesForMetric(
+  metric: ExploreMetric,
+  projection: Projection,
+  color: string,
+  normalizeData: boolean,
+): Series {
+  const { fips, totalPopulation } = projection;
+  const datasetId = getDatasetIdByMetric(metric);
+  const location = findLocationForFips(fips);
+  const data = cleanSeries(projection.getDataset(datasetId));
+  const metricName = exploreMetricData[metric].title;
+  return {
+    data: normalizeData ? scalePer100k(data, totalPopulation) : data,
+    type: SeriesType.LINE,
+    params: {
+      stroke: color,
+      fill: color,
+    },
+    label: getLocationLabel(location),
+    tooltipLabel: normalizeData
+      ? `${metricName} per 100k population`
+      : metricName,
+  };
 }
 
 export function getTitle(metric: ExploreMetric) {
@@ -283,5 +344,72 @@ export function weeksAgo(dateFrom: Date, dateTo: Date) {
     const weeksAgo = `${totalWeeks} ${pluralizeWeeks(totalWeeks)}`;
     const daysAgo = numDays > 0 ? `, ${numDays} ${pluralizeDays(numDays)}` : '';
     return `${weeksAgo} ${daysAgo} ago`;
+  }
+}
+
+export function getLocationLabel(location: Location) {
+  return location.county
+    ? `${location.county}, ${location.state_code}`
+    : location.state;
+}
+
+export function getLocationNames(locations: Location[]) {
+  if (locations.length === 1) {
+    return getLocationLabel(locations[0]);
+  }
+
+  const lastLocation = locations[locations.length - 1];
+  const otherLocations = locations.slice(0, locations.length - 1);
+
+  return `${otherLocations
+    .map(getLocationLabel)
+    .join(', ')} and ${getLocationLabel(lastLocation)}.`;
+}
+
+// note (Chelsi): commenting out belongsToState filter
+// so we can compare all US counties:
+export function getAutocompleteLocations(locationFips: string) {
+  const currentLocation = findLocationForFips(locationFips);
+  // const stateFips = currentLocation.state_fips_code;
+  const allLocations = getAllLocations();
+  return isState(currentLocation)
+    ? allLocations.filter(isState)
+    : allLocations.filter(isCounty);
+  // .filter(location => belongsToState(location, stateFips));
+}
+
+/**
+ * An array of 10 colors designed for categorical data. See
+ * https://github.com/d3/d3-scale-chromatic for additional options
+ */
+const SERIES_COLORS = schemeCategory10;
+
+const getCountyForLocation = (location: Location) =>
+  isCounty(location) ? location : undefined;
+
+export function getChartSeries(
+  metric: ExploreMetric,
+  locations: Location[],
+  normalizeData: boolean,
+): Promise<Series[]> {
+  if (locations.length === 1) {
+    return fetchProjections(
+      locations[0].state_code,
+      getCountyForLocation(locations[0]),
+    ).then(projections => getAllSeriesForMetric(metric, projections.primary));
+  } else {
+    return Promise.all(
+      locations.map(async (location, i) => {
+        const { state_code } = location;
+        const county = getCountyForLocation(location);
+        const projections = await fetchProjections(state_code, county);
+        return getAveragedSeriesForMetric(
+          metric,
+          projections.primary,
+          SERIES_COLORS[i % SERIES_COLORS.length],
+          normalizeData,
+        );
+      }),
+    ).then(flatten);
   }
 }

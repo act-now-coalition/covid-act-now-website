@@ -328,6 +328,12 @@ export const Copy = styled(Typography)<{ isUpdateCopy?: Boolean }>`
     color: black;
   }
 
+  span {
+    color: ${COLOR_MAP.BLUE};
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
   @media (min-width: 600px) {
     font-size: 13px;
     max-width: 440px;

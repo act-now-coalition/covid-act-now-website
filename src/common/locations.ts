@@ -4,6 +4,7 @@ import { each, sortBy, takeRight, has } from 'lodash';
 import { assert } from './utils';
 import countyAdjacencyMsa from './data/county_adjacency_msa.json';
 import collegesByFips from './data/colleges_by_fips.json';
+import { REVERSED_STATES } from 'common';
 
 interface AdjacencyData {
   [fips: string]: {
@@ -171,6 +172,14 @@ export function getCountyMsaCode(fips: string): string | undefined {
   }
 }
 
+export function findLocationForFips(fips: string): Location {
+  return isStateFips(fips) ? findStateByFips(fips) : findCountyByFips(fips);
+}
+
 export function getColleges(fips: string): CollegeData[] {
   return COLLEGES[fips] || [];
+}
+
+export function getStateCode(stateName: string) {
+  return REVERSED_STATES[stateName];
 }
