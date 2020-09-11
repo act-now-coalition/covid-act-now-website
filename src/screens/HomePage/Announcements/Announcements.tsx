@@ -1,4 +1,5 @@
 import React from 'react';
+import ExternalLink from 'components/ExternalLink';
 
 import {
   AnnouncementsSectionHeader,
@@ -21,16 +22,24 @@ const Announcements = () => {
       </AnnouncementIntro>
       <Date>WEDNESDAY, Sept 9, 2020</Date>
       <AnnouncementBodyCopy>
-        We are happy to announce the launch of two U.S. territories, the
-        Northern Mariana Islands and Puerto Rico, in our U.S. Coverage Map! We
-        believe that this is an important development, given that the Northern
-        Mariana Islands and Puerto Rico are U.S. territories affected by
-        American public policy and COVID. Until now, there were no
-        visualizations for county-level COVID data for either territory.
+        We are happy to announce the launch of two U.S. territories, Northern
+        Mariana Islands and Puerto Rico, in our U.S. Coverage Map! We believe
+        that this is an important development given that U.S. territories are
+        affected by American public policy and COVID. Until now, there were no
+        visualizations for county-level COVID data for either territory. To
+        learn more read{' '}
+        <ExternalLink href="https://blog.covidactnow.org/introducing-puerto-rico-covid-mapping-to-our-u-s-coverage/">
+          Puerto Rico's launch
+        </ExternalLink>{' '}
+        and{' '}
+        <ExternalLink href="https://blog.covidactnow.org/introducing-northern-mariana-islands-to-the-u-s-covid-coverage-map/">
+          Northern Mariana Islands'
+        </ExternalLink>{' '}
+        launch.
       </AnnouncementBodyCopy>
       <ButtonsContainer>
         <ReadMoreButton
-          href="https://blog.covidactnow.org/introducing-puerto-rico-covid-mapping-to-our-u-s-coverage"
+          href="https://blog.covidactnow.org/introducing-northern-mariana-islands-to-the-u-s-covid-coverage-map/"
           target="_blank"
           rel="noopener"
         >
