@@ -1,37 +1,55 @@
 import React from 'react';
+import Grid from '@material-ui/core/Grid';
+import ExternalLink from 'components/ExternalLink';
 
-import {
-  StyledPartnerLogoGrid,
-  StyledPressLogoGrid,
-  Logo,
-  LogoWrapper,
-} from './LogoGrid.style';
+import { StyledPressLogoGrid, Logo, LogoWrapper } from './LogoGrid.style';
 
 export const PartnerLogoGrid = () => {
   return (
-    <StyledPartnerLogoGrid>
-      <a
-        href="https://ghss.georgetown.edu/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <Logo src="/images/ghss.png" />
-      </a>
-      <a
-        href="http://med.stanford.edu/cerc.html"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <Logo src="/images/cerc.jpg" style={{ transform: 'scale(1.1)' }} />
-      </a>
-      <a
-        href="https://grandrounds.com/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <Logo src="/images/grand-rounds.png" />
-      </a>
-    </StyledPartnerLogoGrid>
+    <Grid container spacing={1} alignItems="center" justify="center">
+      <Grid container item xs={12} sm={4} justify="center">
+        <Grid item>
+          <ExternalLink href="https://ghss.georgetown.edu/">
+            <Logo src="/images/ghss.png" alt="Georgetown University logo" />
+          </ExternalLink>
+        </Grid>
+      </Grid>
+      <Grid container item xs={12} sm={4} justify="center">
+        <Grid item>
+          <ExternalLink href="http://med.stanford.edu/cerc.html">
+            <Logo
+              src="/images/cerc.png"
+              style={{ transform: 'scale(1.1)' }}
+              alt="Stanford Medicine Clinical Excellence Research Center logo"
+            />
+          </ExternalLink>
+        </Grid>
+      </Grid>
+      <Grid container item xs={12} sm={4} justify="center">
+        <Grid item>
+          <ExternalLink href="https://grandrounds.com/">
+            <Logo src="/images/grand-rounds.png" alt="Grand Rounds logo" />
+          </ExternalLink>
+        </Grid>
+      </Grid>
+      <Grid container item xs={12} sm={4} justify="center">
+        <Grid item>
+          <ExternalLink href="https://globalhealth.harvard.edu/">
+            <Logo src="/images/harvard.png" />
+          </ExternalLink>
+        </Grid>
+      </Grid>
+      <Grid container item xs={12} sm={4} justify="center">
+        <Grid item>
+          <ExternalLink href="https://schmidtfutures.com">
+            <Logo
+              src="/images/schmidt-futures.png"
+              alt="Schmidt Futures logo"
+            />
+          </ExternalLink>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 };
 
@@ -39,13 +57,13 @@ export const PressLogoGrid = () => {
   return (
     <StyledPressLogoGrid>
       <LogoWrapper>
-        <Logo src="/images/press/nyt.png" />
+        <Logo src="/images/press/nyt.png" alt="New York Times logo" />
       </LogoWrapper>
       <LogoWrapper>
-        <Logo src="/images/press/wsj.png" />
+        <Logo src="/images/press/wsj.png" alt="The Wall Street Journal logo" />
       </LogoWrapper>
       <LogoWrapper>
-        <Logo src="/images/press/vox.png" />
+        <Logo src="/images/press/vox.png" alt="Vox logo" />
       </LogoWrapper>
     </StyledPressLogoGrid>
   );

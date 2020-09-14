@@ -88,7 +88,7 @@ export type Long = number;
 export type Lastupdateddate = string;
 
 /**
- * Base model for API output.
+ * Prediction timeseries row with location information.
  */
 export interface PredictionTimeseriesRowWithHeader {
   date: Date;

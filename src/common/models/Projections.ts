@@ -102,7 +102,9 @@ export class Projections {
       case Metric.CASE_GROWTH_RATE:
         return this.primary.rt;
       case Metric.HOSPITAL_USAGE:
-        return this.primary.icuHeadroomInfo?.metricValue || null;
+        return this.primary.icuHeadroomInfo
+          ? this.primary.icuHeadroomInfo.metricValue
+          : null;
       case Metric.POSITIVE_TESTS:
         return this.primary.currentTestPositiveRate;
       case Metric.CONTACT_TRACING:

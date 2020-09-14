@@ -1,7 +1,7 @@
 import Explore from './Explore';
 import { ExploreMetric } from 'components/Explore/interfaces';
 import {
-  getSeries,
+  getAllSeriesForMetric,
   getTitle,
   EXPLORE_METRICS,
   getMetricByChartId,
@@ -13,7 +13,7 @@ import ExploreChart from './ExploreChart';
 export default Explore;
 export {
   ExploreChart,
-  getSeries,
+  getAllSeriesForMetric as getSeries,
   getTitle,
   getMetricByChartId,
   EXPLORE_METRICS,

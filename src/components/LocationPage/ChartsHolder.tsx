@@ -142,6 +142,10 @@ const ChartsHolder = (props: {
       ]
     : [];
 
+  const exploreCompareCopy: string = props.county
+    ? 'Compare counties'
+    : 'Compare states';
+
   // TODO(pablo): Create separate refs for signup and share
   return (
     <>
@@ -163,6 +167,7 @@ const ChartsHolder = (props: {
               onContactTracingClick={() => scrollTo(contactTracingRef.current)}
               onHeaderShareClick={() => scrollTo(shareBlockRef.current, -372)}
               onHeaderSignupClick={() => scrollTo(shareBlockRef.current)}
+              onNewUpdateClick={() => scrollTo(exploreChartRef.current)}
               isMobile={isMobile}
             />
             <CompareMain
@@ -185,6 +190,7 @@ const ChartsHolder = (props: {
               <Explore
                 projection={props.projections.primary}
                 chartId={chartId}
+                compareCopy={exploreCompareCopy}
               />
             </MainContentInner>
           </ChartContentWrapper>
@@ -234,7 +240,7 @@ export function getChartData(
       : projection.getDataset('contractTracers');
 
   const caseDensityData =
-    projection?.currentCaseDensityByDeaths == null
+    projection?.currentCaseDensity == null
       ? null
       : projection.getDataset('caseDensityRange');
 

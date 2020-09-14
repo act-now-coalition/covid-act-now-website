@@ -15,7 +15,8 @@ const ShareImageButtons: React.FC<{
   url: string | (() => Promise<string>);
   quote: string;
   hashtags: string[];
-}> = ({ imageUrl, imageFilename, url, quote, hashtags }) => {
+  disabled?: boolean;
+}> = ({ imageUrl, imageFilename, url, quote, hashtags, disabled = false }) => {
   // Turn url / imageUrl into asynchronous getters if they aren't already.
   const getUrl = typeof url === 'string' ? () => Promise.resolve(url) : url;
   const getImageUrl =
@@ -68,6 +69,7 @@ const ShareImageButtons: React.FC<{
             disableRipple
             disableFocusRipple
             disableTouchRipple
+            disabled={disabled}
           >
             Save
           </ShareButton>
@@ -76,6 +78,7 @@ const ShareImageButtons: React.FC<{
             disableRipple
             disableFocusRipple
             disableTouchRipple
+            disabled={disabled}
           >
             Share
           </ShareButton>

@@ -102,13 +102,21 @@ const About = ({ children }: { children: React.ReactNode }) => {
             >
               Stanford University Clinical Excellence Research Center
             </a>
-            , and{' '}
+            ,{' '}
             <a
               href="https://grandrounds.com/"
               target="_blank"
               rel="noopener noreferrer"
             >
               Grand Rounds
+            </a>
+            , and{' '}
+            <a
+              href="https://globalhealth.harvard.edu/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Harvard Global Health Institute
             </a>
             .
           </Typography>

@@ -54,7 +54,7 @@ export type Typicalusagerate = number;
 export type Contacttracers = number;
 
 /**
- * Base model for API output.
+ * Known actuals data.
  */
 export interface Actuals {
   population: Population;
@@ -68,7 +68,7 @@ export interface Actuals {
   contactTracers?: Contacttracers;
 }
 /**
- * Base model for API output.
+ * Utilization of hospital resources.
  */
 export interface ResourceUtilization {
   capacity: Capacity;

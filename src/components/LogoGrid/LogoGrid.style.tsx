@@ -1,39 +1,13 @@
 import styled from 'styled-components';
-
-export const StyledPartnerLogoGrid = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin: 0 -0.5rem 1.5rem;
-  position: relative;
-
-  > a {
-    flex: 1;
-    margin: 0 0.5rem 1rem;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  @media (min-width: 900px) {
-    flex-direction: row;
-
-    > a {
-      margin-bottom: 0;
-    }
-  }
-`;
+import theme from 'assets/theme';
 
 export const Logo = styled.img`
   width: 100%;
-  max-width: 300px;
+  max-width: 216px;
+  margin: 0 auto;
 
-  @media (max-width: 900px) {
-    display: block;
-    margin: 0 auto;
-    float: none;
-    width: 100%;
+  @media (min-width: ${theme.breakpoints.down('sm')}) {
+    max-width: 240px;
   }
 `;
 
