@@ -1,4 +1,5 @@
 import React from 'react';
+import { remove } from 'lodash';
 import { Table, TableBody } from '@material-ui/core';
 import { Metric } from 'common/metric';
 import { RankedLocationSummary, GeoScopeFilter } from 'common/utils/compare';
@@ -204,11 +205,25 @@ const LocationTable: React.FunctionComponent<{
   const allCountiesView =
     viewAllCounties || geoScope === GeoScopeFilter.COUNTRY;
 
+  const currentLocationRank = pinnedLocation?.rank;
+
+  const hideInlineLocation = isModal && currentLocationRank === 1;
+
+  // In the modal, if the rank of the pinned-location-row is #1, we remove
+  // the location's inline row, so as to not have the location listed twice consecutively:
+  const removePinnedIfRankedFirst = (location: any) =>
+    location.locationInfo.full_fips_code !==
+    pinnedLocation?.locationInfo.full_fips_code;
+
+  const modalLocations = hideInlineLocation
+    ? remove(sortedLocations, removePinnedIfRankedFirst)
+    : sortedLocations;
+
   const visibleLocations = !isModal
     ? sortedLocations.slice(0, numLocationsMain)
     : allCountiesView
     ? sortedLocations.slice(0, 100)
-    : sortedLocations;
+    : modalLocations;
 
   const showStateCode = allCountiesView || geoScope === GeoScopeFilter.NEARBY;
 
@@ -251,7 +266,7 @@ const LocationTable: React.FunctionComponent<{
           <LocationTableBody
             sorter={sorter}
             sortedLocations={visibleLocations}
-            currentLocationRank={pinnedLocation?.rank}
+            currentLocationRank={currentLocationRank}
             sortByPopulation={sortByPopulation}
             isHomepage={isHomepage}
             showStateCode={showStateCode}
