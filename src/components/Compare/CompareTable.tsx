@@ -192,13 +192,15 @@ const CompareTable = (props: {
           <HeaderWrapper>
             <Header isHomepage={props.isHomepage}>
               Compare
-              <ShareImageButtons
-                imageUrl={getDownloadImageUrl}
-                imageFilename="CovidActNow-compare.png"
-                url={getShareUrl}
-                quote={shareQuote}
-                hashtags={['COVIDActNow']}
-              />
+              {false && (
+                <ShareImageButtons
+                  imageUrl={getDownloadImageUrl}
+                  imageFilename="CovidActNow-compare.png"
+                  url={getShareUrl}
+                  quote={shareQuote}
+                  hashtags={['COVIDActNow']}
+                />
+              )}
             </Header>
             {props.stateName && (
               <ChartLocationName>{compareSubheader}</ChartLocationName>
