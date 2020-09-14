@@ -29,6 +29,10 @@ const COUNTIES = Object.keys(LocationSummariesByFIPS).filter(
   fips => fips.length === 5,
 );
 
+// TODO(michael): We will need to increase this once people share 2000 tables
+// (or come up with a new strategy).
+const COMPARE_IDS_TO_GENERATE = 2000;
+
 const BLACKLISTED_COUNTIES = [
   '11001', // Washington, DC - We treat it as a state, not a county.
 ];
@@ -151,6 +155,17 @@ async function main() {
     '/index.html',
     homePageTags(builder.fullImageUrl('home.png')),
   );
+
+  for (let i = 1; i < COMPARE_IDS_TO_GENERATE; i++) {
+    // Minor hack: Just use the location page tags, but insert "your community"
+    // for the locationName since we don't know it.
+    const url = urls.addSharingId(`https://covidactnow.org/compare/${i}/`);
+    const imageUrl = builder.fullImageUrl(`/compare/${i}.png`);
+    await builder.writeTemplatedPage(
+      `/compare/${i}/index.html`,
+      locationPageTags(imageUrl, url, 'your community'),
+    );
+  }
 
   for (const stateCode in STATES) {
     const stateName = (STATES as any)[stateCode];

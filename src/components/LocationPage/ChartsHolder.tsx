@@ -1,5 +1,4 @@
 import React, { useRef, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import { ChartContentWrapper, MainContentInner } from './ChartsHolder.style';
 import NoCountyDetail from './NoCountyDetail';
 import { Projections } from 'common/models/Projections';
@@ -11,7 +10,6 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { Metric } from 'common/metric';
 import CompareMain from 'components/Compare/CompareMain';
-import { countySummary } from 'common/location_summaries';
 import Explore, { EXPLORE_CHART_IDS } from 'components/Explore';
 
 // TODO(michael): figure out where this type declaration should live.
@@ -46,8 +44,6 @@ const ChartsHolder = (props: {
 }) => {
   const { chartId } = props;
   const projection = props.projections.primary;
-  const location = useLocation();
-  const scrollToCompare = location.pathname.endsWith('/compare');
 
   const {
     rtRangeData,
@@ -146,11 +142,6 @@ const ChartsHolder = (props: {
       ]
     : [];
 
-  const currentCountyForCompare = props.county && {
-    locationInfo: props.county,
-    metricsInfo: countySummary(props.county.full_fips_code),
-  };
-
   // TODO(pablo): Create separate refs for signup and share
   return (
     <>
@@ -178,9 +169,7 @@ const ChartsHolder = (props: {
               stateName={props.projections.stateName}
               county={props.county}
               locationsViewable={6}
-              currentCounty={currentCountyForCompare}
               stateId={props.stateId}
-              autoScroll={scrollToCompare}
             />
             <MainContentInner>
               {chartPropsForMap.map(chartProps => (
