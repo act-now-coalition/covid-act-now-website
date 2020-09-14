@@ -31,6 +31,13 @@ export const PartnerLogoGrid = () => {
       >
         <Logo src="/images/grand-rounds.png" />
       </a>
+      <a
+        href="https://globalhealth.harvard.edu/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Logo src="/images/harvard.png" />
+      </a>
     </StyledPartnerLogoGrid>
   );
 };
