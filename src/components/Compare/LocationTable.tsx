@@ -257,7 +257,7 @@ const LocationTable: React.FunctionComponent<{
             showStateCode={showStateCode}
           />
         </Styles.Body>
-        {pinnedLocation && showBottom && (
+        {pinnedLocation && showBottom && !isModal && (
           <Styles.Body>
             <LocationTableBody
               sorter={sorter}
