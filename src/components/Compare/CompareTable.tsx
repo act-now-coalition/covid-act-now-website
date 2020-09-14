@@ -183,9 +183,7 @@ const CompareTable = (props: {
       .createCompareShareId()
       .then(id => `${getComparePageUrl(stateId, county, id)}`);
   const getDownloadImageUrl = () =>
-    props
-      .createCompareShareId()
-      .then(id => `${getCompareShareImageUrl(stateId, county, id)}`);
+    props.createCompareShareId().then(id => `${getCompareShareImageUrl(id)}`);
 
   return (
     <Wrapper isModal={props.isModal} isHomepage={props.isHomepage}>

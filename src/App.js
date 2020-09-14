@@ -29,6 +29,7 @@ import ScrollToTop from 'components/ScrollToTop';
 import theme from 'assets/theme';
 import { getFeedbackSurveyUrl } from 'components/Banner';
 import ExternalRedirect from 'components/ExternalRedirect';
+import HandleRedirectTo from 'components/HandleRedirectTo/HandleRedirectTo';
 
 export default function App() {
   return (
@@ -37,6 +38,7 @@ export default function App() {
         <StylesProvider injectFirst>
           <CssBaseline />
           <BrowserRouter>
+            <HandleRedirectTo />
             <ScrollToTop />
             <AppBar />
             <Switch>

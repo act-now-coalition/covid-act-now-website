@@ -2,6 +2,7 @@ import ShareImageUrlJSON from 'assets/data/share_images_url.json';
 import { assert } from 'common/utils';
 import { County } from './locations';
 import urlJoin from 'url-join';
+import * as QueryString from 'query-string';
 
 /**
  * We append a short unique string corresponding to the currently published
@@ -14,35 +15,31 @@ const SHARING_ID = sharingId();
 const SHARING_ID_QUERYSTRING = `?${SHARING_ID_QUERY_PARAM}=${SHARING_ID}`;
 
 /**
+ * Generates the path for the homepage or a (state / county) location page.
+ */
+function getPagePath(stateId?: string, county?: County): string {
+  if (stateId && county) {
+    // county page
+    return `/us/${stateId.toLowerCase()}/county/${county.county_url_name}`;
+  } else if (stateId) {
+    return `/us/${stateId.toLowerCase()}`;
+  }
+
+  return '/';
+}
+
+/**
  * Generates the URL for the homepage or a (state / county) location page.
  *
  * Notes:
  * - Does not include the sharing ID (?s=...)
  * - Uses window.origin to determine the base URL, so it should match localhost / staging / prod / etc.
  */
-function getPageBaseUrl(
-  stateId: string | undefined,
-  county: County | undefined,
-): string {
-  const origin = window.location.origin;
-  let shareURL = origin; // home page
-  if (stateId && county) {
-    // county page
-    shareURL = `${origin}/us/${stateId.toLowerCase()}/county/${
-      county.county_url_name
-    }`;
-  } else if (stateId) {
-    // state page
-    shareURL = `${origin}/us/${stateId.toLowerCase()}`;
-  }
-
-  return shareURL;
+function getPageBaseUrl(stateId?: string, county?: County): string {
+  return urlJoin(window.location.origin, getPagePath(stateId, county));
 }
 
-function getShareImageBaseUrl(
-  stateId: string | undefined,
-  county: County | undefined,
-): string {
+function getShareImageBaseUrl(stateId?: string, county?: County): string {
   const imageBaseUrl = ShareImageUrlJSON.share_image_url;
   if (county) {
     return urlJoin(imageBaseUrl, 'counties', county.full_fips_code);
@@ -66,21 +63,28 @@ export function getComparePageUrl(
   county: County | undefined,
   compareShareId: string,
 ): string {
-  return addSharingId(
-    urlJoin(getPageBaseUrl(stateId, county), 'compare', compareShareId),
-  );
+  // Shared Compare URLs are of the form https://covidactnow.org/compare/<id>
+  // in order to have predictable IDs (so we can pre-generate index.html pages
+  // with meta tags). But this routes to the homepage instead of the appropriate
+  // location page, so we add on a ?redirectTo= query param to redirect to the
+  // right place.
+
+  let url = urlJoin(getPageBaseUrl(), 'compare', compareShareId);
+  let params: { [key: string]: unknown } = {};
+  ensureSharingIdInQueryParams(params);
+  if (stateId) {
+    params['redirectTo'] = urlJoin(
+      getPagePath(stateId, county),
+      'compare',
+      compareShareId,
+    );
+  }
+
+  return urlJoin(url, '?' + QueryString.stringify(params));
 }
 
-export function getCompareShareImageUrl(
-  stateId: string | undefined,
-  county: County | undefined,
-  compareShareId: string,
-): string {
-  return urlJoin(
-    getShareImageBaseUrl(stateId, county),
-    'compare',
-    `${compareShareId}.png`,
-  );
+export function getCompareShareImageUrl(compareShareId: string): string {
+  return urlJoin(getShareImageBaseUrl(), 'compare', `${compareShareId}.png`);
 }
 
 /**
