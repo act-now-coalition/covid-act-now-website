@@ -26,6 +26,8 @@ import {
 } from 'common/utils/compare';
 import { Metric } from 'common/metric';
 import { getFirebase } from 'common/firebase';
+import { countySummary } from 'common/location_summaries';
+import { findCountyByFips } from 'common/locations';
 
 const firestore = getFirebase().firestore();
 const paramsCollection = firestore.collection('compare-shared-params');
@@ -44,7 +46,6 @@ const CompareMain = (props: {
   isModal?: Boolean;
   locationsViewable: number;
   isHomepage?: boolean;
-  currentCounty?: any;
   stateId?: string;
 }) => {
   const tableRef = useRef<HTMLDivElement>(null);
@@ -70,6 +71,15 @@ const CompareMain = (props: {
     }
   }, [location.pathname, scrollToCompare]);
 
+  // Store these as state variables so we can replace them with data read
+  // from Firestore when generating compare share images.
+  const [stateId, setStateId] = useState(props.stateId);
+  const [county, setCounty] = useState(props.county);
+  const currentCounty = county && {
+    locationInfo: county,
+    metricsInfo: countySummary(county.full_fips_code),
+  };
+
   const [sorter, setSorter] = useState(Metric.CASE_DENSITY);
   const [sortDescending, setSortDescending] = useState(true);
   const [sortByPopulation, setSortByPopulation] = useState(false);
@@ -90,9 +100,9 @@ const CompareMain = (props: {
 
   function getLocationPageLocations() {
     if (geoScope === GeoScopeFilter.NEARBY) {
-      return getNeighboringCounties(props.county.full_fips_code);
-    } else if (geoScope === GeoScopeFilter.STATE && props.stateId) {
-      return getLocationPageCountiesSelection(countyTypeToView, props.stateId);
+      return getNeighboringCounties(county.full_fips_code);
+    } else if (geoScope === GeoScopeFilter.STATE && stateId) {
+      return getLocationPageCountiesSelection(countyTypeToView, stateId);
     } else {
       return getAllCountiesSelection(countyTypeToView);
     }
@@ -103,10 +113,10 @@ const CompareMain = (props: {
     getLocationPageViewMoreCopy(geoScope, countyTypeToView, props.stateName);
   const locationPageLocationsForCompare = getLocationPageLocations();
 
-  const locations = props.isHomepage
+  const locations = !stateId
     ? homepageLocationsForCompare
     : locationPageLocationsForCompare;
-  const viewMoreCopy = props.isHomepage
+  const viewMoreCopy = !stateId
     ? homepageViewMoreCopy
     : locationPageViewMoreCopy;
 
@@ -143,7 +153,15 @@ const CompareMain = (props: {
         const id = nextIdDoc.data()?.id || 0;
 
         nextIdDocRef.set({ id: id + 1 });
-        paramsCollection.doc(`${id}`).set(uiState);
+
+        const params: firebase.firestore.DocumentData = { ...uiState };
+        if (stateId) {
+          params['stateId'] = stateId;
+        }
+        if (county) {
+          params['countyId'] = county.full_fips_code;
+        }
+        paramsCollection.doc(`${id}`).set(params);
 
         return `${id}`;
       });
@@ -158,8 +176,16 @@ const CompareMain = (props: {
   useEffect(() => {
     async function fetchParamsFromFirestore(id: string) {
       const doc = await paramsCollection.doc(id).get();
-      if (doc.exists) {
-        const params = doc.data() as any;
+      const params = doc.data();
+      if (params) {
+        const { stateId, countyId } = params;
+        if (stateId) {
+          setStateId(stateId);
+        }
+        if (countyId) {
+          setCounty(findCountyByFips(countyId));
+        }
+
         setSorter(params['sorter']);
         setSortDescending(params['sortDescending']);
         setSortByPopulation(params['sortByPopulation']);
@@ -182,12 +208,12 @@ const CompareMain = (props: {
 
   const sharedProps = {
     stateName: props.stateName,
-    stateId: props.stateId,
-    county: props.county,
+    stateId,
+    county,
     setShowModal,
     isHomepage: props.isHomepage,
     locations,
-    currentCounty: props.currentCounty,
+    currentCounty,
     ...uiState,
     setCountyTypeToView,
     setViewAllCounties,
