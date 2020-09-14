@@ -28,6 +28,7 @@ import { Metric } from 'common/metric';
 import { getFirebase } from 'common/firebase';
 import { countySummary } from 'common/location_summaries';
 import { findCountyByFips } from 'common/locations';
+import { ScreenshotReady } from 'components/Screenshot';
 
 const firestore = getFirebase().firestore();
 const paramsCollection = firestore.collection('compare-shared-params');
@@ -170,6 +171,8 @@ const CompareMain = (props: {
     return createCompareShareIdPromise;
   };
 
+  const [screenshotReady, setScreenshotReady] = useState(false);
+
   // Check for a /compare/{compareShareId} in the URL and use it to repopulate the
   // compare table if it's there.
   const { compareShareId } = useParams();
@@ -193,6 +196,9 @@ const CompareMain = (props: {
         setViewAllCounties(params['viewAllCounties']);
         setGeoScope(params['geoScope']);
         setSliderValue(scopeValueMap[params['geoScope'] as GeoScopeFilter]);
+
+        // Now that the UI is populated, we can capture the screenshot.
+        setScreenshotReady(true);
       } else {
         console.error('Invalid Sharing ID:', compareShareId);
       }
@@ -243,6 +249,7 @@ const CompareMain = (props: {
       <CenteredContentModal open={showFaqModal} onClose={handleCloseModal}>
         <ModalFaq handleCloseModal={handleCloseModal} />
       </CenteredContentModal>
+      {screenshotReady && <ScreenshotReady />}
     </Fragment>
   );
 };

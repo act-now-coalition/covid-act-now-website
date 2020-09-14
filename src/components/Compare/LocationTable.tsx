@@ -9,6 +9,7 @@ import * as CompareStyles from './Compare.style';
 import { COLOR_MAP } from 'common/colors';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { SCREENSHOT_CLASS } from 'components/Screenshot';
 
 const LocationTableHead: React.FunctionComponent<{
   setSorter: React.Dispatch<React.SetStateAction<number>>;
@@ -213,7 +214,7 @@ const LocationTable: React.FunctionComponent<{
   const showStateCode = allCountiesView || geoScope === GeoScopeFilter.NEARBY;
 
   return (
-    <Styles.TableContainer isModal={isModal}>
+    <Styles.TableContainer isModal={isModal} className={SCREENSHOT_CLASS}>
       <Container finalHeaderOffset={finalHeaderOffset}>
         <Styles.Head isModal={isModal} pinnedLocation={pinnedLocation}>
           <LocationTableHead
