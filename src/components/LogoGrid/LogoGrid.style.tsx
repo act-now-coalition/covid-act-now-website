@@ -1,9 +1,14 @@
 import styled from 'styled-components';
+import theme from 'assets/theme';
 
 export const Logo = styled.img`
   width: 100%;
-  max-width: 300px;
+  max-width: 216px;
   margin: 0 auto;
+
+  @media (min-width: ${theme.breakpoints.down('sm')}) {
+    max-width: 240px;
+  }
 `;
 
 export const StyledPressLogoGrid = styled.div`

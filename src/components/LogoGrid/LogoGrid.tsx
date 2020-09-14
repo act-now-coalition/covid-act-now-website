@@ -18,7 +18,7 @@ export const PartnerLogoGrid = () => {
         <Grid item>
           <ExternalLink href="http://med.stanford.edu/cerc.html">
             <Logo
-              src="/images/cerc.jpg"
+              src="/images/cerc.png"
               style={{ transform: 'scale(1.1)' }}
               alt="Stanford Medicine Clinical Excellence Research Center logo"
             />
