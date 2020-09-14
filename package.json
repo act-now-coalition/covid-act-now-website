@@ -20,6 +20,7 @@
     "@vx/responsive": "^0.0.196",
     "@vx/scale": "^0.0.196",
     "@vx/shape": "^0.0.196",
+    "@vx/text": "^0.0.199",
     "@vx/tooltip": "^0.0.196",
     "@vx/voronoi": "^0.0.196",
     "bluebird": "^3.7.2",
