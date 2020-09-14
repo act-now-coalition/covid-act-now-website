@@ -3,13 +3,7 @@ import styled from 'styled-components';
 export const Logo = styled.img`
   width: 100%;
   max-width: 300px;
-
-  @media (max-width: 900px) {
-    display: block;
-    margin: 0 auto;
-    float: none;
-    width: 100%;
-  }
+  margin: 0 auto;
 `;
 
 export const StyledPressLogoGrid = styled.div`
