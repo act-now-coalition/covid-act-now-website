@@ -130,22 +130,13 @@ const InnerContent = props => {
 };
 
 const ShareButtons = props => {
-  const {
-    stateId,
-    county,
-    stats,
-    projections,
-    isMobile,
-    countyId,
-    chartIdentifier,
-  } = props;
+  const { stateId, county, stats, isMobile, countyId, chartIdentifier } = props;
 
   const shareQuote = makeChartShareQuote(
     stateId,
     county,
     stats,
     chartIdentifier,
-    projections,
   );
 
   const shareBaseURL = `https://covidactnow.org/us/${stateId.toLowerCase()}${

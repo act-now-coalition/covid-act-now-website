@@ -4,5 +4,18 @@ service cloud.firestore {
     match /alerts-subscriptions/{email} {
       allow read, write;
     }
+
+    // Document for tracking the next ID to be used for sharing compare params.
+    match /compare-shared-params/__nextId {
+      allow read;
+      // Only allow increments.
+      allow write: if resource == null || request.resource.data.id == resource.data.id + 1;
+    }
+    // Each document stores a set of share params corresponding to a shared compare table.
+    match /compare-shared-params/{compareShareId} {
+      allow read;
+      // Can write only if it doesn't exist.
+      allow write: if resource == null;
+    }
   }
 }

@@ -29,6 +29,7 @@ import ScrollToTop from 'components/ScrollToTop';
 import theme from 'assets/theme';
 import { getFeedbackSurveyUrl } from 'components/Banner';
 import ExternalRedirect from 'components/ExternalRedirect';
+import HandleRedirectTo from 'components/HandleRedirectTo/HandleRedirectTo';
 
 export default function App() {
   return (
@@ -37,12 +38,17 @@ export default function App() {
         <StylesProvider injectFirst>
           <CssBaseline />
           <BrowserRouter>
+            <HandleRedirectTo />
             <ScrollToTop />
             <AppBar />
             <Switch>
               <Route exact path="/" component={HomePage} />
               <Route exact path="/alert_signup" component={HomePage} />
-              <Route exact path="/compare" component={HomePage} />
+              <Route
+                exact
+                path="/compare/:compareShareId?"
+                component={HomePage}
+              />
 
               <Route
                 exact
@@ -68,7 +74,7 @@ export default function App() {
               />
               <Route
                 exact
-                path="/us/:stateId/compare"
+                path="/us/:stateId/compare/:compareShareId?"
                 component={LocationPage}
               />
               <Route
@@ -83,7 +89,7 @@ export default function App() {
               />
               <Route
                 exact
-                path="/us/:stateId/county/:countyId/compare"
+                path="/us/:stateId/county/:countyId/compare/:compareShareId?"
                 component={LocationPage}
               />
               {/* /state/ routes are deprecated but still supported. */}
@@ -165,9 +171,6 @@ export default function App() {
               <Route path="/internal/all" component={AllStates} />
 
               {/** Internal endpoint for comparing API snapshots. */}
-              <Route path="/compare">
-                <Redirect to="/internal/compare" />
-              </Route>
               <Route path="/internal/compare" component={CompareSnapshots} />
 
               {/** Internal endpoints we use to generate the content that we

@@ -28,6 +28,13 @@ import {
   SwitchLabel,
 } from 'components/Compare/Filters.style';
 
+// Maps each numerical slider value to its corresponding GeoScopeFilter
+export const sliderNumberToFilterMap: any = {
+  0: GeoScopeFilter.NEARBY,
+  50: GeoScopeFilter.STATE,
+  99: GeoScopeFilter.COUNTRY,
+};
+
 const Filters = (props: {
   isHomepage?: boolean;
   setCountyTypeToView: React.Dispatch<React.SetStateAction<MetroFilter>>;
@@ -98,16 +105,10 @@ const Filters = (props: {
     }
   };
 
-  const valueMap: any = {
-    0: GeoScopeFilter.NEARBY,
-    50: GeoScopeFilter.STATE,
-    99: GeoScopeFilter.COUNTRY,
-  };
-
   const sliderHandleChange = (event: any, value: any) => {
     if (props.setGeoScope) {
       setSliderValue(value);
-      props.setGeoScope(valueMap[value]);
+      props.setGeoScope(sliderNumberToFilterMap[value]);
     }
   };
 

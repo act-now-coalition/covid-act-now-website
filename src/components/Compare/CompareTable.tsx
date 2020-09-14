@@ -1,7 +1,5 @@
 import React from 'react';
 import { sortBy, findIndex, partition, reverse, isNumber } from 'lodash';
-import { useTheme } from '@material-ui/core/styles';
-import { useMediaQuery } from '@material-ui/core';
 import {
   Wrapper,
   Footer,
@@ -19,9 +17,14 @@ import {
   orderedMetrics,
   GeoScopeFilter,
   getAbbreviatedCounty,
-  metroPrefixCopy,
+  getShareQuote,
+  getMetroPrefixCopy,
 } from 'common/utils/compare';
 import { COLOR_MAP } from 'common/colors';
+import ShareImageButtons from 'components/ShareButtons/ShareButtonGroup';
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+import { sliderNumberToFilterMap } from 'components/Compare/Filters';
+import { getComparePageUrl, getCompareShareImageUrl } from 'common/urls';
 
 const CompareTable = (props: {
   stateName?: string;
@@ -49,6 +52,7 @@ const CompareTable = (props: {
   sliderValue: GeoScopeFilter;
   setSliderValue: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
   setShowFaqModal: React.Dispatch<React.SetStateAction<boolean>>;
+  createCompareShareId: () => Promise<string>;
 }) => {
   const {
     sorter,
@@ -60,6 +64,7 @@ const CompareTable = (props: {
     sliderValue,
     setSliderValue,
     stateId,
+    county,
   } = props;
   const { setViewAllCounties } = props;
 
@@ -127,15 +132,15 @@ const CompareTable = (props: {
       : props.locationsViewable;
 
   const firstColumnHeaderHomepage = props.viewAllCounties
-    ? `${metroPrefixCopy[props.countyTypeToView]} County`
+    ? `${getMetroPrefixCopy(props.countyTypeToView)} County`
     : 'State';
   const firstColumnHeader = props.isHomepage
     ? firstColumnHeaderHomepage
     : props.isModal
-    ? `${metroPrefixCopy[props.countyTypeToView]} Counties (${
+    ? `${getMetroPrefixCopy(props.countyTypeToView)} Counties (${
         sortedLocationsArr.length
       })`
-    : `${metroPrefixCopy[props.countyTypeToView]} County`;
+    : `${getMetroPrefixCopy(props.countyTypeToView)} County`;
 
   const sortedLocations: RankedLocationSummary[] = sortedLocationsArr
     .filter((location: SummaryForCompare) => location.metricsInfo !== null)
@@ -151,10 +156,18 @@ const CompareTable = (props: {
       } to other counties`
     : `Counties in ${props.stateName}`;
 
-  const theme = useTheme();
-  // hard-coded 700 because MUI mobile breakpoint of 600 was too small
-  const isMobile = useMediaQuery(theme.breakpoints.down(700));
-  const faqLinkCopy = isMobile ? 'FAQ' : 'Frequently Asked Questions';
+  const shareQuote = getShareQuote(
+    sorter,
+    props.countyTypeToView,
+    sliderNumberToFilterMap[sliderValue],
+    sortedLocationsArr.length,
+    sortDescending,
+    currentLocation,
+    sortByPopulation,
+    props.isHomepage,
+    props.viewAllCounties,
+    props.stateName,
+  );
 
   // Disabling filters for Northern Mariana Islands because they don't have
   // any data on metro vs non-metro islands.  There may be more elegant solutions
@@ -165,12 +178,30 @@ const CompareTable = (props: {
   // Only showing the view more text when all locations are not available.
   const showViewMore = amountDisplayed !== sortedLocationsArr.length;
 
+  const getShareUrl = () =>
+    props
+      .createCompareShareId()
+      .then(id => `${getComparePageUrl(stateId, county, id)}`);
+  const getDownloadImageUrl = () =>
+    props.createCompareShareId().then(id => `${getCompareShareImageUrl(id)}`);
+
   return (
     <Wrapper isModal={props.isModal} isHomepage={props.isHomepage}>
       {!props.isModal && (
         <div>
           <HeaderWrapper>
-            <Header centered={props.isHomepage}>Compare</Header>
+            <Header isHomepage={props.isHomepage}>
+              Compare
+              {false && (
+                <ShareImageButtons
+                  imageUrl={getDownloadImageUrl}
+                  imageFilename="CovidActNow-compare.png"
+                  url={getShareUrl}
+                  quote={shareQuote}
+                  hashtags={['COVIDActNow']}
+                />
+              )}
+            </Header>
             {props.stateName && (
               <ChartLocationName>{compareSubheader}</ChartLocationName>
             )}
@@ -223,8 +254,9 @@ const CompareTable = (props: {
               </FooterLink>
             )}
           </div>
-          <FooterLink onClick={() => props.setShowFaqModal(true)}>
-            {faqLinkCopy}
+          <FooterLink onClick={() => props.setShowFaqModal(true)} isFaqLink>
+            FAQ
+            <HelpOutlineIcon />
           </FooterLink>
         </Footer>
       )}
