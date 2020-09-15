@@ -30,6 +30,7 @@ import theme from 'assets/theme';
 import { getFeedbackSurveyUrl } from 'components/Banner';
 import ExternalRedirect from 'components/ExternalRedirect';
 import HandleRedirectTo from 'components/HandleRedirectTo/HandleRedirectTo';
+import Donate from 'screens/Donate/Donate';
 
 export default function App() {
   return (
@@ -55,6 +56,7 @@ export default function App() {
                 path="/alert_unsubscribe"
                 component={AlertUnsubscribe}
               />
+              <Route exact path="/donate" component={Donate} />
 
               <Route exact path="/us/:stateId" component={LocationPage} />
               <Route
