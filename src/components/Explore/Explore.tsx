@@ -47,7 +47,7 @@ const Explore: React.FunctionComponent<{
     (chartId && getMetricByChartId(chartId)) || ExploreMetric.CASES;
   const [currentMetric, setCurrentMetric] = useState(defaultMetric);
 
-  const [normalizeData, setNormalizeData] = useState(true);
+  const [normalizeData, setNormalizeData] = useState(false);
 
   const onChangeTab = (newMetric: number) => setCurrentMetric(newMetric);
 
@@ -64,8 +64,18 @@ const Explore: React.FunctionComponent<{
   ]);
 
   const onChangeSelectedLocations = (newLocations: Location[]) => {
+    const changedLocations = uniq([currentLocation, ...newLocations]);
+
+    if (selectedLocations.length > 1 && changedLocations.length === 1) {
+      // if switching from multiple to a single location, disable normalization
+      setNormalizeData(false);
+    } else if (selectedLocations.length === 1 && changedLocations.length > 1) {
+      // if switching from single to multiple locations, enable normalization
+      setNormalizeData(true);
+    }
+
     // make sure that the current location is always selected
-    setSelectedLocations(uniq([currentLocation, ...newLocations]));
+    setSelectedLocations(changedLocations);
   };
 
   // Resets the state when navigating locations
