@@ -291,7 +291,7 @@ export function getShareQuote(
     viewAllCounties
       ? `${getMetroPrefixCopy(countyTypeToView)} counties`
       : 'states'
-  } by their local COVID metrics at CovidActNow.`;
+  } by their local COVID metrics with @CovidActNow.`;
 
   const stateShareCopy = `Compare COVID metrics between ${getMetroPrefixCopy(
     countyTypeToView,
@@ -327,7 +327,7 @@ export function getShareQuote(
         : sorter === Metric.HOSPITAL_USAGE
         ? getMetricNameForCompare(sorter)
         : getMetricNameForCompare(sorter).toLowerCase()
-    }. See the chart at CovidActNow.`;
+    }, according to @CovidActNow. See how your county compares.`;
 
   if (isHomepage) {
     return homepageShareCopy;

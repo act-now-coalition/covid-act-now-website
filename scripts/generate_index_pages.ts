@@ -156,7 +156,7 @@ async function main() {
     homePageTags(builder.fullImageUrl('home.png')),
   );
 
-  for (let i = 1; i < COMPARE_IDS_TO_GENERATE; i++) {
+  for (let i = 0; i < COMPARE_IDS_TO_GENERATE; i++) {
     // Minor hack: Just use the location page tags, but insert "your community"
     // for the locationName since we don't know it.
     const url = urls.addSharingId(`https://covidactnow.org/compare/${i}/`);
