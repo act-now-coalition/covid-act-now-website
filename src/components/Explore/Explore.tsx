@@ -3,6 +3,7 @@ import { some, uniq } from 'lodash';
 import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { ParentSize } from '@vx/responsive';
 import { Projection } from 'common/models/Projection';
 import { useModelLastUpdatedDate } from 'common/utils/model';
@@ -29,9 +30,9 @@ import {
   getLocationNames,
   getAutocompleteLocations,
   getChartSeries,
+  getMetricName,
 } from './utils';
 import * as Styles from './Explore.style';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const Explore: React.FunctionComponent<{
   projection: Projection;
@@ -52,7 +53,7 @@ const Explore: React.FunctionComponent<{
   const onChangeTab = (newMetric: number) => setCurrentMetric(newMetric);
 
   const metricLabels = getMetricLabels();
-  const currentMetricName = metricLabels[currentMetric];
+  const currentMetricName = getMetricName(currentMetric);
 
   const currentLocation = useMemo(() => findLocationForFips(fips), [fips]);
   const autocompleteLocations = useMemo(() => getAutocompleteLocations(fips), [

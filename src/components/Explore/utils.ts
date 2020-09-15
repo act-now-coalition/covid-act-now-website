@@ -96,6 +96,7 @@ interface SerieDescription {
 
 interface ExploreMetricDescription {
   title: string;
+  name: string;
   chartId: string;
   seriesList: SerieDescription[];
 }
@@ -105,6 +106,7 @@ export const exploreMetricData: {
 } = {
   [ExploreMetric.CASES]: {
     title: 'Cases',
+    name: 'Cases',
     chartId: 'cases',
     seriesList: [
       {
@@ -123,6 +125,7 @@ export const exploreMetricData: {
   },
   [ExploreMetric.DEATHS]: {
     title: 'Deaths',
+    name: 'Deaths',
     chartId: 'deaths',
     seriesList: [
       {
@@ -141,17 +144,18 @@ export const exploreMetricData: {
   },
   [ExploreMetric.HOSPITALIZATIONS]: {
     title: 'Hospitalizations',
+    name: 'COVID Hospitalizations',
     chartId: 'hospitalizations',
     seriesList: [
       {
-        label: 'Hospitalizations',
-        tooltipLabel: 'Hospitalizations',
+        label: 'COVID Hospitalizations',
+        tooltipLabel: 'COVID Hospitalizations',
         datasetId: 'rawHospitalizations',
         type: SeriesType.BAR,
       },
       {
         label: '7 Day Average',
-        tooltipLabel: 'Hospitalizations',
+        tooltipLabel: 'COVID Hospitalizations',
         datasetId: 'smoothedHospitalizations',
         type: SeriesType.LINE,
       },
@@ -159,17 +163,18 @@ export const exploreMetricData: {
   },
   [ExploreMetric.ICU_HOSPITALIZATIONS]: {
     title: 'ICU Hospitalizations',
+    name: 'COVID ICU Hospitalizations',
     chartId: 'icu-hospitalizations',
     seriesList: [
       {
-        label: 'ICU Hospitalizations',
-        tooltipLabel: 'ICU Hospitalizations',
+        label: 'COVID ICU Hospitalizations',
+        tooltipLabel: 'COVID ICU Hospitalizations',
         datasetId: 'rawICUHospitalizations',
         type: SeriesType.BAR,
       },
       {
         label: '7 Day Average',
-        tooltipLabel: 'ICU Hospitalizations',
+        tooltipLabel: 'COVID ICU Hospitalizations',
         datasetId: 'smoothedICUHospitalizations',
         type: SeriesType.LINE,
       },
@@ -232,7 +237,7 @@ function getAveragedSeriesForMetric(
   const datasetId = getDatasetIdByMetric(metric);
   const location = findLocationForFips(fips);
   const data = cleanSeries(projection.getDataset(datasetId));
-  const metricName = exploreMetricData[metric].title;
+  const metricName = getMetricName(metric);
   return {
     data: normalizeData ? scalePer100k(data, totalPopulation) : data,
     type: SeriesType.LINE,
@@ -251,12 +256,16 @@ export function getTitle(metric: ExploreMetric) {
   return exploreMetricData[metric].title;
 }
 
+export function getMetricName(metric: ExploreMetric) {
+  return exploreMetricData[metric].name;
+}
+
 export function getChartIdByMetric(metric: ExploreMetric) {
   return exploreMetricData[metric].chartId;
 }
 
 export function getMetricLabels() {
-  return EXPLORE_METRICS.map(metric => exploreMetricData[metric].title);
+  return EXPLORE_METRICS.map(getTitle);
 }
 
 export function findPointByDate(data: Column[], date: Date): Column | null {
