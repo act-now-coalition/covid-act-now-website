@@ -24,11 +24,8 @@ import {
 } from 'common/locations';
 import { share_image_url } from 'assets/data/share_images_url.json';
 import { SeriesType, Series } from './interfaces';
-import {
-  isState,
-  isCounty,
-  // belongsToState,
-} from 'components/AutocompleteLocations';
+import { isCounty } from 'components/AutocompleteLocations';
+import { getAbbreviatedCounty } from 'common/utils/compare';
 
 export function getMaxBy<T>(
   seriesList: Series[],
@@ -227,6 +224,7 @@ function getAveragedSeriesForMetric(
   projection: Projection,
   color: string,
   normalizeData: boolean,
+  shortLabels: boolean,
 ): Series {
   const { fips, totalPopulation } = projection;
   const datasetId = getDatasetIdByMetric(metric);
@@ -240,7 +238,9 @@ function getAveragedSeriesForMetric(
       stroke: color,
       fill: color,
     },
-    label: getLocationLabel(location),
+    label: shortLabels
+      ? getShortLocationLabel(location)
+      : getLocationLabel(location),
     tooltipLabel: normalizeData
       ? `${metricName} per 100k population`
       : metricName,
@@ -353,6 +353,12 @@ export function getLocationLabel(location: Location) {
     : location.state;
 }
 
+function getShortLocationLabel(location: Location) {
+  return location.county
+    ? getAbbreviatedCounty(`${location.county} ${location.state_code}`)
+    : location.state_code;
+}
+
 export function getLocationNames(locations: Location[]) {
   if (locations.length === 1) {
     return getLocationLabel(locations[0]);
@@ -366,16 +372,8 @@ export function getLocationNames(locations: Location[]) {
     .join(', ')} and ${getLocationLabel(lastLocation)}.`;
 }
 
-// note (Chelsi): commenting out belongsToState filter
-// so we can compare all US counties:
 export function getAutocompleteLocations(locationFips: string) {
-  const currentLocation = findLocationForFips(locationFips);
-  // const stateFips = currentLocation.state_fips_code;
-  const allLocations = getAllLocations();
-  return isState(currentLocation)
-    ? allLocations.filter(isState)
-    : allLocations.filter(isCounty);
-  // .filter(location => belongsToState(location, stateFips));
+  return getAllLocations();
 }
 
 /**
@@ -391,6 +389,7 @@ export function getChartSeries(
   metric: ExploreMetric,
   locations: Location[],
   normalizeData: boolean,
+  shortLabels: boolean,
 ): Promise<Series[]> {
   if (locations.length === 1) {
     return fetchProjections(
@@ -408,6 +407,7 @@ export function getChartSeries(
           projections.primary,
           SERIES_COLORS[i % SERIES_COLORS.length],
           normalizeData,
+          shortLabels,
         );
       }),
     ).then(flatten);

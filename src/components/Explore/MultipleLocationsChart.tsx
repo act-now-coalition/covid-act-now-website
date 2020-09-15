@@ -1,6 +1,7 @@
 import React, { useCallback, Fragment } from 'react';
 import moment from 'moment';
 import { isNumber } from 'lodash';
+import { Text } from '@vx/text';
 import { Group } from '@vx/group';
 import { scaleTime, scaleLinear } from '@vx/scale';
 import { useTooltip } from '@vx/tooltip';
@@ -19,7 +20,7 @@ import { Line } from '@vx/shape';
 import DateMarker from './DateMarker';
 import GridLines from './GridLines';
 import Axes from './Axes';
-import { getStateCode } from 'common/locations';
+// import { getStateCode } from 'common/locations';
 
 const getDate = (d: Column) => new Date(d.x);
 const getY = (d: Column) => d.y;
@@ -182,18 +183,20 @@ const MultipleLocationsChart: React.FC<{
             strokeColor={axisGridColor}
           />
           {seriesList.map(({ label, data, params }, i) => {
-            const locationLabel = !isMobileXs
-              ? label
-              : getStateCode(label) || label.slice(0, 3);
             return data.length > 0 ? (
               <Styles.LineLabel
                 key={`label-${label}`}
-                x={innerWidth + 5}
-                y={getYPosition(data[data.length - 1])}
                 fill={params?.stroke || '#000'}
                 fillOpacity={getSeriesOpacity(i, tooltipOpen, tooltipData)}
               >
-                {locationLabel}
+                <Text
+                  x={innerWidth + 2}
+                  y={getYPosition(data[data.length - 1])}
+                  width={marginRight - 10}
+                  verticalAnchor="middle"
+                >
+                  {label}
+                </Text>
               </Styles.LineLabel>
             ) : null;
           })}

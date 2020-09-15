@@ -77,9 +77,14 @@ const Explore: React.FunctionComponent<{
   const [chartSeries, setChartSeries] = useState<Series[]>([]);
   useEffect(() => {
     const fetchSeries = () =>
-      getChartSeries(currentMetric, selectedLocations, normalizeData);
+      getChartSeries(
+        currentMetric,
+        selectedLocations,
+        normalizeData,
+        isMobileXs,
+      );
     fetchSeries().then(setChartSeries);
-  }, [selectedLocations, currentMetric, normalizeData]);
+  }, [selectedLocations, currentMetric, normalizeData, isMobileXs]);
 
   const hasData = some(chartSeries, ({ data }) => data.length > 0);
   const hasMultipleLocations = selectedLocations.length > 1;

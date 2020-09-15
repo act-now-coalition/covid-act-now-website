@@ -206,12 +206,15 @@ export const TodayLabel = styled.g`
   }
 `;
 
-export const LineLabel = styled.text`
-  font-family: Source Code Pro;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 11px;
-  dominant-baseline: middle;
+export const LineLabel = styled.g`
+  text,
+  tspan {
+    font-family: Source Code Pro;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 11px;
+    /* dominant-baseline: middle; */
+  }
 `;
 
 export const DateMarker = styled.div`
