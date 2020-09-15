@@ -186,7 +186,6 @@ const ChartsHolder = (props: {
               <Explore
                 projection={props.projections.primary}
                 chartId={chartId}
-                compareCopy="Compare states or counties"
               />
             </MainContentInner>
           </ChartContentWrapper>
