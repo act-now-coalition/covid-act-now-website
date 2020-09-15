@@ -98,7 +98,7 @@ const Explore: React.FunctionComponent<{
     <Styles.Container>
       <Grid container spacing={1}>
         <Grid item sm={6} xs={12}>
-          <Styles.Heading variant="h4">Trends</Styles.Heading>
+          <Styles.Heading variant="h4">Raw data</Styles.Heading>
           <Styles.Subtitle>
             {currentMetricName} {normalizeData ? 'per 100k population' : ''} in{' '}
             {getLocationNames(selectedLocations)}
