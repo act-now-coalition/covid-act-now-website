@@ -243,77 +243,57 @@ export const TableHeadContainer = styled(TableHead)<{ isModal?: Boolean }>`
 export const Population = styled.span`
   font-family: Source Code Pro;
   font-size: 0.875rem;
+  color: ${COLOR_MAP.GRAY.DARK};
+  font-family: Source Code Pro;
+  margin-right: 0.75rem;
+  margin-right: 0.5rem;
 `;
 
-export const LocationInfoWrapper = styled.div``;
+export const Rank = styled.span`
+  color: ${COLOR_MAP.GRAY.DARK};
+  font-family: Source Code Pro;
+  margin-right: 0.75rem;
+`;
 
-export const CountySuffix = styled.div`
+export const LocationInfoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const CountySuffix = styled.span`
   font-weight: normal;
   margin-right: 0.25rem;
 `;
 
-export const MetricCell = styled.td<{
+const SharedCellStyles = css`
+  text-align: left;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  cursor: pointer;
+
+  svg {
+    margin-right: 0.4rem;
+    font-size: 0.75rem;
+  }
+`;
+
+export const LocationNameCell = styled.td<{
   countyName?: Boolean;
   iconColor?: Level;
   sorter?: any;
   metric?: Metric;
   sortByPopulation: boolean;
 }>`
-  text-align: left;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  cursor: pointer;
-
-  &:first-child {
-    min-width: ${locationNameCellWidth}px;
-    background-color: ${({ sortByPopulation }) =>
-      sortByPopulation && 'rgba(0,0,0,0.02)'};
-    font-weight: 500;
-    line-height: 1.2;
-
-    span {
-      color: ${COLOR_MAP.GRAY.DARK};
-    }
-  }
-
-  &:not(:first-child) {
-    min-width: ${metricCellWidth}px;
-    font-family: Source Code Pro;
-    color: ${({ sorter, metric }) =>
-      sorter === metric ? 'black' : `${COLOR_MAP.GRAY_BODY_COPY}`};
-    font-weight: ${({ sorter, metric, sortByPopulation }) =>
-      !sortByPopulation && sorter === metric && '600'};
-    background-color: ${({ sorter, metric, sortByPopulation }) =>
-      !sortByPopulation && sorter === metric && 'rgba(0,0,0,0.02)'};
-  }
+  ${SharedCellStyles}
+  min-width: ${locationNameCellWidth}px;
+  background-color: ${({ sortByPopulation }) =>
+    sortByPopulation && 'rgba(0,0,0,0.02)'};
+  font-weight: 500;
+  line-height: 1.2;
 
   svg {
-    margin-right: 0.4rem;
-    font-size: 0.75rem;
     color: ${({ iconColor }) =>
       iconColor !== undefined && `${LEVEL_COLOR[iconColor]}`};
-  }
-
-  span {
-    font-family: Source Code Pro;
-    color: ${COLOR_MAP.GRAY_BODY_COPY};
-    margin-right: 0.75rem;
-  }
-
-  ${Population} {
-    margin-right: 0.5rem;
-  }
-
-  ${LocationInfoWrapper} {
-    display: flex;
-    align-items: center;
-  }
-
-  &:last-child {
-    svg {
-      color: ${({ iconColor }) =>
-        iconColor !== undefined && `${LEVEL_COLOR_CONTACT_TRACING[iconColor]}`};
-    }
   }
 
   div {
@@ -330,6 +310,38 @@ export const MetricValue = styled.span<{ valueUnknown: boolean }>`
   display: inline-block;
   text-align: right;
   opacity: ${({ valueUnknown }) => valueUnknown && '.5'};
+  font-family: Source Code Pro;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+  margin-right: 0.75rem;
+`;
+
+export const MetricCell = styled.td<{
+  countyName?: Boolean;
+  iconColor?: Level;
+  sorter?: any;
+  metric?: Metric;
+  sortByPopulation: boolean;
+}>`
+  ${SharedCellStyles}
+  min-width: ${metricCellWidth}px;
+  color: ${({ sorter, metric }) =>
+    sorter === metric ? 'black' : `${COLOR_MAP.GRAY_BODY_COPY}`};
+  font-weight: ${({ sorter, metric, sortByPopulation }) =>
+    !sortByPopulation && sorter === metric && '600'};
+  background-color: ${({ sorter, metric, sortByPopulation }) =>
+    !sortByPopulation && sorter === metric && 'rgba(0,0,0,0.02)'};
+
+  svg {
+    color: ${({ iconColor }) =>
+      iconColor !== undefined && `${LEVEL_COLOR[iconColor]}`};
+  }
+
+  &:last-child {
+    svg {
+      color: ${({ iconColor }) =>
+        iconColor !== undefined && `${LEVEL_COLOR_CONTACT_TRACING[iconColor]}`};
+    }
+  }
 `;
 
 export const Tag = styled.div`
@@ -376,7 +388,7 @@ export const Row = styled(TableRow)<{
 
 export const Footer = styled.div<{ isCounty: any }>`
   display: flex;
-  padding: 1.25rem 0.75rem;
+  padding: 1.25rem 1rem;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   font-size: 0.875rem;
   justify-content: space-between;
@@ -399,36 +411,57 @@ export const Footer = styled.div<{ isCounty: any }>`
       }
     }
   }
+
+  @media (min-width: 932px) {
+    padding: 1.25rem 0;
+  }
 `;
 
-export const FooterLink = styled.div`
+export const FooterLink = styled.div<{ isFaqLink?: boolean }>`
   font-family: Roboto;
   color: ${COLOR_MAP.BLUE};
   font-weight: 500;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: fit-content;
+  background-color: ${({ isFaqLink }) => isFaqLink && '#f2f2f2'};
+  border-radius: ${({ isFaqLink }) => isFaqLink && '4px'};
+  padding: ${({ isFaqLink }) => isFaqLink && '.35rem .75rem'};
+  border: ${({ isFaqLink }) => isFaqLink && '1px solid #f2f2f2'};
+
+  &:hover {
+    background-color: ${({ isFaqLink }) => isFaqLink && 'white'};
+  }
 
   @media (min-width: 600px) {
     &:last-child {
       margin-left: auto;
     }
   }
+
+  svg {
+    font-size: 1.25rem;
+    margin-left: 0.4rem;
+  }
 `;
 
 export const HeaderWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0.75rem;
+  padding: 0.75rem 1rem;
 `;
 
-export const Header = styled.div<{ centered?: boolean }>`
+export const Header = styled.div<{ isHomepage?: boolean }>`
   display: flex;
   font-family: Roboto;
   font-weight: bold;
   font-size: 1.5rem;
-  margin: ${({ centered }) => centered && '0 auto'};
+  margin: 0;
+  justify-content: space-between;
 
   @media (min-width: 600px) {
-    font-size: ${({ centered }) => (centered ? '2rem' : '1.5rem')};
+    font-size: ${({ isHomepage }) => (isHomepage ? '2rem' : '1.5rem')};
   }
 `;
 

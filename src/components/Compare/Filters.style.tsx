@@ -18,10 +18,11 @@ const returnSliderLabelColor = (
 export const Container = styled.div<{ isModal: boolean; isHomepage?: boolean }>`
   display: flex;
   margin: ${({ isModal }) => isModal && '1rem auto 0'};
-  padding: ${({ isModal }) => (isModal ? '0 0 0 1.75rem' : '0.75rem')};
-  justify-content: ${({ isHomepage }) => isHomepage && 'center'};
+  padding: ${({ isModal }) => (isModal ? '0 0 0 1.75rem' : '0.75rem 1rem')};
+  justify-content: ${({ isHomepage, isModal }) =>
+    isHomepage && isModal && 'center'};
   flex-direction: column;
-  align-items: center;
+  align-items: ${({ isModal }) => isModal && 'center'};
 
   @media (min-width: 600px) {
     flex-direction: row;
@@ -32,6 +33,8 @@ export const Container = styled.div<{ isModal: boolean; isHomepage?: boolean }>`
 
 export const SliderContainer = styled.div`
   width: 200px;
+  margin-left: 1.75rem;
+
   @media (min-width: 600px) {
     margin-left: 1.5rem;
   }

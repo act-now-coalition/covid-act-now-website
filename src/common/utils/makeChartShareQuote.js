@@ -7,7 +7,6 @@ export default function makeChartShareQuote(
   county,
   stats = {},
   chartIdentifier,
-  projections,
 ) {
   const stateName = STATES[stateId];
   const countyName = county && county.county;
