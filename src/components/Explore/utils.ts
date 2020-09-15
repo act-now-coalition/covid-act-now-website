@@ -24,11 +24,7 @@ import {
 } from 'common/locations';
 import { share_image_url } from 'assets/data/share_images_url.json';
 import { SeriesType, Series } from './interfaces';
-import {
-  isState,
-  isCounty,
-  // belongsToState,
-} from 'components/AutocompleteLocations';
+import { isState, isCounty } from 'components/AutocompleteLocations';
 
 export function getMaxBy<T>(
   seriesList: Series[],
@@ -144,11 +140,11 @@ export const exploreMetricData: {
   },
   [ExploreMetric.HOSPITALIZATIONS]: {
     title: 'Hospitalizations',
-    name: 'COVID Hospitalizations',
+    name: 'Current COVID Hospitalizations',
     chartId: 'hospitalizations',
     seriesList: [
       {
-        label: 'COVID Hospitalizations',
+        label: 'Current COVID Hospitalizations',
         tooltipLabel: 'COVID Hospitalizations',
         datasetId: 'rawHospitalizations',
         type: SeriesType.BAR,
@@ -163,11 +159,11 @@ export const exploreMetricData: {
   },
   [ExploreMetric.ICU_HOSPITALIZATIONS]: {
     title: 'ICU Hospitalizations',
-    name: 'COVID ICU Hospitalizations',
+    name: 'Current COVID ICU Hospitalizations',
     chartId: 'icu-hospitalizations',
     seriesList: [
       {
-        label: 'COVID ICU Hospitalizations',
+        label: 'Current COVID ICU Hospitalizations',
         tooltipLabel: 'COVID ICU Hospitalizations',
         datasetId: 'rawICUHospitalizations',
         type: SeriesType.BAR,
@@ -237,7 +233,7 @@ function getAveragedSeriesForMetric(
   const datasetId = getDatasetIdByMetric(metric);
   const location = findLocationForFips(fips);
   const data = cleanSeries(projection.getDataset(datasetId));
-  const metricName = getMetricName(metric);
+  const metricName = exploreMetricData[metric].seriesList[0].tooltipLabel;
   return {
     data: normalizeData ? scalePer100k(data, totalPopulation) : data,
     type: SeriesType.LINE,
