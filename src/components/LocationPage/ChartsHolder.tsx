@@ -2,7 +2,6 @@ import React, { useRef, useEffect } from 'react';
 import { ChartContentWrapper, MainContentInner } from './ChartsHolder.style';
 import NoCountyDetail from './NoCountyDetail';
 import { Projections } from 'common/models/Projections';
-import { Projection } from 'common/models/Projection';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import LocationPageHeader from 'components/LocationPage/LocationPageHeader';
 import ChartBlock from 'components/LocationPage/ChartBlock';
@@ -23,7 +22,6 @@ const scrollTo = (div: null | HTMLDivElement, offset: number = 180) =>
     behavior: 'smooth',
   });
 
-//TODO(chelsi): implement a metricToShareButtons map to get rid of repeated instances of ShareButtons
 const ChartsHolder = (props: {
   projections: Projections;
   stateId: string;
@@ -93,21 +91,7 @@ const ChartsHolder = (props: {
             <LocationPageHeader
               projections={props.projections}
               stats={props.projections.getMetricValues()}
-              onCaseDensityClick={() =>
-                scrollTo(metricRefs[Metric.CASE_DENSITY].current)
-              }
-              onRtRangeClick={() =>
-                scrollTo(metricRefs[Metric.CASE_GROWTH_RATE].current)
-              }
-              onTestPositiveClick={() =>
-                scrollTo(metricRefs[Metric.POSITIVE_TESTS].current)
-              }
-              onIcuUtilizationClick={() =>
-                scrollTo(metricRefs[Metric.HOSPITAL_USAGE].current)
-              }
-              onContactTracingClick={() =>
-                scrollTo(metricRefs[Metric.CONTACT_TRACING].current)
-              }
+              onMetricClick={metric => scrollTo(metricRefs[metric].current)}
               onHeaderShareClick={() => scrollTo(shareBlockRef.current, -372)}
               onHeaderSignupClick={() => scrollTo(shareBlockRef.current)}
               onNewUpdateClick={() => scrollTo(exploreChartRef.current)}

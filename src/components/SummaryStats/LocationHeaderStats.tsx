@@ -1,5 +1,5 @@
 import React from 'react';
-import { Metric } from 'common/metric';
+import { Metric, ALL_METRICS } from 'common/metric';
 import { getMetricName, getLevelInfo, formatValue } from 'common/metric';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
@@ -61,7 +61,6 @@ const SummaryStat = ({
   onClick,
   beta,
   condensed,
-  flipSignalStatusOrder,
   isMobile,
   isHeader,
   isEmbed,
@@ -73,7 +72,6 @@ const SummaryStat = ({
   onClick: () => void;
   beta?: Boolean;
   condensed?: Boolean;
-  flipSignalStatusOrder?: Boolean;
   isMobile?: Boolean;
   isHeader?: Boolean;
   isEmbed?: Boolean;
@@ -153,17 +151,11 @@ const SummaryStat = ({
   );
 };
 
-const noop = () => {};
-
 const LocationHeaderStats = (props: {
   stats: { [key: string]: number | null };
   condensed?: Boolean;
   isEmbed?: Boolean;
-  onCaseDensityClick?: () => void;
-  onRtRangeClick?: () => void;
-  onTestPositiveClick?: () => void;
-  onIcuUtilizationClick?: () => void;
-  onContactTracingClick?: () => void;
+  onMetricClick?: (metric: Metric) => void;
   isMobile?: Boolean;
   isHeader?: Boolean;
   embedOnClickBaseURL?: string;
@@ -187,39 +179,17 @@ const LocationHeaderStats = (props: {
           isHeader={props.isHeader}
           condensed={props.condensed}
         >
-          <SummaryStat
-            onClick={props.onCaseDensityClick || noop}
-            chartType={Metric.CASE_DENSITY}
-            value={props.stats[Metric.CASE_DENSITY] as number}
-            {...sharedStatProps}
-          />
-          <SummaryStat
-            onClick={props.onRtRangeClick || noop}
-            chartType={Metric.CASE_GROWTH_RATE}
-            value={props.stats[Metric.CASE_GROWTH_RATE] as number}
-            {...sharedStatProps}
-          />
-          <SummaryStat
-            onClick={props.onTestPositiveClick || noop}
-            chartType={Metric.POSITIVE_TESTS}
-            value={props.stats[Metric.POSITIVE_TESTS] as number}
-            {...sharedStatProps}
-          />
-          <SummaryStat
-            onClick={props.onIcuUtilizationClick || noop}
-            chartType={Metric.HOSPITAL_USAGE}
-            beta={true}
-            value={props.stats[Metric.HOSPITAL_USAGE] as number}
-            {...sharedStatProps}
-          />
-          <SummaryStat
-            onClick={props.onContactTracingClick || noop}
-            chartType={Metric.CONTACT_TRACING}
-            beta={true}
-            value={props.stats[Metric.CONTACT_TRACING] as number}
-            flipSignalStatusOrder
-            {...sharedStatProps}
-          />
+          {ALL_METRICS.map(metric => (
+            <SummaryStat
+              onClick={() => props.onMetricClick && props.onMetricClick(metric)}
+              chartType={metric}
+              value={props.stats[metric] as number}
+              {...sharedStatProps}
+              beta={[Metric.HOSPITAL_USAGE, Metric.CONTACT_TRACING].includes(
+                metric,
+              )}
+            />
+          ))}
         </SummaryStatsWrapper>
       )}
     </>
