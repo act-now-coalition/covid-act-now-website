@@ -37,7 +37,7 @@ const SingleLocationTooltip: React.FC<{
 
   return pointSmooth && pointRaw ? (
     <Tooltip
-      width={'180px'}
+      width={'210px'}
       top={top(pointSmooth)}
       left={left(pointSmooth)}
       title={moment(date).format('MMM D, YYYY')}

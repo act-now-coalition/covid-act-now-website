@@ -46,7 +46,7 @@ const MultipleLocationsTooltip: React.FC<{
   const currentSeries = isNumber(seriesIndex) ? series[seriesIndex] : null;
   return (
     <Tooltip
-      width={'180px'}
+      width={'210px'}
       top={top}
       left={left}
       title={moment(pointInfo.x).format('MMM D, YYYY')}
