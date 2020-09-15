@@ -100,8 +100,8 @@ const Explore: React.FunctionComponent<{
         <Grid item sm={6} xs={12}>
           <Styles.Heading variant="h4">Trends</Styles.Heading>
           <Styles.Subtitle>
-            {currentMetricName} {normalizeData ? 'per 100k population' : ''}{' '}
-            since march 1st in {getLocationNames(selectedLocations)}
+            {currentMetricName} {normalizeData ? 'per 100k population' : ''} in{' '}
+            {getLocationNames(selectedLocations)}
           </Styles.Subtitle>
         </Grid>
         <Grid item sm={6} xs={12}>
