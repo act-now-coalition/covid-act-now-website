@@ -11,18 +11,7 @@ import { useTheme } from '@material-ui/core/styles';
 import { Metric } from 'common/metric';
 import CompareMain from 'components/Compare/CompareMain';
 import Explore, { EXPLORE_CHART_IDS } from 'components/Explore';
-
-// TODO(michael): figure out where this type declaration should live.
-type County = {
-  county: string;
-  county_url_name: string;
-  county_fips_code: string;
-  state_fips_code: string;
-  state_code: string;
-  full_fips_code: string;
-  cities: string[];
-  population: string;
-};
+import { County } from 'common/locations';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
