@@ -34,14 +34,6 @@ const ChartsHolder = (props: {
   const { chartId } = props;
   const projection = props.projections.primary;
 
-  const {
-    rtRangeData,
-    testPositiveData,
-    icuUtilizationData,
-    contactTracingData,
-    caseDensityData,
-  } = getChartData(projection);
-
   const rtRangeRef = useRef<HTMLDivElement>(null);
   const testPositiveRef = useRef<HTMLDivElement>(null);
   const icuUtilizationRef = useRef<HTMLDivElement>(null);
@@ -96,35 +88,30 @@ const ChartsHolder = (props: {
         {
           chartRef: caseDensityRef,
           isMobile,
-          data: caseDensityData,
           shareButtonProps,
           metric: Metric.CASE_DENSITY,
         },
         {
           chartRef: rtRangeRef,
           isMobile,
-          data: rtRangeData,
           shareButtonProps,
           metric: Metric.CASE_GROWTH_RATE,
         },
         {
           chartRef: testPositiveRef,
           isMobile,
-          data: testPositiveData,
           shareButtonProps,
           metric: Metric.POSITIVE_TESTS,
         },
         {
           chartRef: icuUtilizationRef,
           isMobile,
-          data: icuUtilizationData,
           shareButtonProps,
           metric: Metric.HOSPITAL_USAGE,
         },
         {
           chartRef: contactTracingRef,
           isMobile,
-          data: contactTracingData,
           shareButtonProps,
           metric: Metric.CONTACT_TRACING,
         },
@@ -191,55 +178,5 @@ const ChartsHolder = (props: {
     </>
   );
 };
-
-// Exported for use by AllStates.js.
-export function getChartData(
-  projection: Projection | null,
-): {
-  rtRangeData: any;
-  testPositiveData: any;
-  icuUtilizationData: any;
-  contactTracingData: any;
-  caseDensityData: any;
-} {
-  const rtRangeData =
-    projection?.rt == null
-      ? null
-      : projection.getDataset('rtRange').map(d => ({
-          x: d.x,
-          y: d.y?.rt,
-          low: d.y?.low,
-          hi: d.y?.high,
-        }));
-
-  const testPositiveData =
-    projection?.currentTestPositiveRate == null
-      ? null
-      : projection.getDataset('testPositiveRate');
-
-  const icuUtilizationData =
-    projection?.icuHeadroomInfo == null ||
-    projection?.icuHeadroomInfo.overrideInPlace
-      ? null
-      : projection.getDataset('icuUtilization');
-
-  const contactTracingData =
-    projection?.currentContactTracerMetric == null
-      ? null
-      : projection.getDataset('contractTracers');
-
-  const caseDensityData =
-    projection?.currentCaseDensity == null
-      ? null
-      : projection.getDataset('caseDensityRange');
-
-  return {
-    rtRangeData,
-    testPositiveData,
-    icuUtilizationData,
-    contactTracingData,
-    caseDensityData,
-  };
-}
 
 export default ChartsHolder;
