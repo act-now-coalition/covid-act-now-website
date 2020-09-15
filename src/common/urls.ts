@@ -80,7 +80,9 @@ export function getComparePageUrl(
     );
   }
 
-  return urlJoin(url, '?' + QueryString.stringify(params));
+  // NOTE: Trailing '/' is significant so we hit the index.html page with correct meta tags and
+  // so we don't get redirected and lose the query params.
+  return url + '/?' + QueryString.stringify(params);
 }
 
 export function getCompareShareImageUrl(compareShareId: string): string {
