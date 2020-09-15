@@ -26,7 +26,6 @@ function ChartBlock(props: {
   metric: Metric;
   projections: Projections;
   stateId: string;
-  countyId?: string;
 }) {
   const { projections, metric, isMobile } = props;
   const projection: Projection = projections.primary;

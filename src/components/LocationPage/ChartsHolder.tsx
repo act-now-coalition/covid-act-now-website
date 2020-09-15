@@ -8,7 +8,7 @@ import LocationPageHeader from 'components/LocationPage/LocationPageHeader';
 import ChartBlock from 'components/LocationPage/ChartBlock';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import { Metric } from 'common/metric';
+import { Metric, ALL_METRICS } from 'common/metric';
 import CompareMain from 'components/Compare/CompareMain';
 import Explore, { EXPLORE_CHART_IDS } from 'components/Explore';
 import { County } from 'common/locations';
@@ -34,12 +34,14 @@ const ChartsHolder = (props: {
   const { chartId } = props;
   const projection = props.projections.primary;
 
-  const rtRangeRef = useRef<HTMLDivElement>(null);
-  const testPositiveRef = useRef<HTMLDivElement>(null);
-  const icuUtilizationRef = useRef<HTMLDivElement>(null);
-  const contactTracingRef = useRef<HTMLDivElement>(null);
+  const metricRefs = {
+    [Metric.CASE_DENSITY]: useRef<HTMLDivElement>(null),
+    [Metric.CASE_GROWTH_RATE]: useRef<HTMLDivElement>(null),
+    [Metric.POSITIVE_TESTS]: useRef<HTMLDivElement>(null),
+    [Metric.HOSPITAL_USAGE]: useRef<HTMLDivElement>(null),
+    [Metric.CONTACT_TRACING]: useRef<HTMLDivElement>(null),
+  };
   const shareBlockRef = useRef<HTMLDivElement>(null);
-  const caseDensityRef = useRef<HTMLDivElement>(null);
   const exploreChartRef = useRef<HTMLDivElement>(null);
 
   const theme = useTheme();
@@ -50,19 +52,10 @@ const ChartsHolder = (props: {
       const timeoutId = setTimeout(() => {
         if (chartId && EXPLORE_CHART_IDS.includes(chartId)) {
           scrollTo(exploreChartRef.current);
-        } else {
-          if (chartId === '0' && rtRangeRef.current)
-            scrollTo(rtRangeRef.current);
-          if (chartId === '1' && testPositiveRef.current)
-            scrollTo(testPositiveRef.current);
-          if (chartId === '2' && icuUtilizationRef.current)
-            scrollTo(icuUtilizationRef.current);
-          if (chartId === '3' && contactTracingRef.current)
-            scrollTo(contactTracingRef.current);
-          if (chartId === '5' && caseDensityRef.current) {
-            scrollTo(caseDensityRef.current);
-          } else {
-            return;
+        } else if (chartId in metricRefs) {
+          const metricRef = metricRefs[(chartId as unknown) as Metric];
+          if (metricRef.current) {
+            scrollTo(metricRef.current);
           }
         }
       }, 200);
@@ -70,7 +63,7 @@ const ChartsHolder = (props: {
     };
 
     scrollToChart();
-  }, [chartId]);
+  }, [chartId, metricRefs]);
 
   const shareButtonProps = {
     chartId: props.chartId,
@@ -81,42 +74,6 @@ const ChartsHolder = (props: {
     projections: props.projections,
     isMobile,
   };
-
-  //TODO (chelsi): make it so we dont need to pre-generate props array (see comment in PR #970)
-  const chartPropsForMap = projection
-    ? [
-        {
-          chartRef: caseDensityRef,
-          isMobile,
-          shareButtonProps,
-          metric: Metric.CASE_DENSITY,
-        },
-        {
-          chartRef: rtRangeRef,
-          isMobile,
-          shareButtonProps,
-          metric: Metric.CASE_GROWTH_RATE,
-        },
-        {
-          chartRef: testPositiveRef,
-          isMobile,
-          shareButtonProps,
-          metric: Metric.POSITIVE_TESTS,
-        },
-        {
-          chartRef: icuUtilizationRef,
-          isMobile,
-          shareButtonProps,
-          metric: Metric.HOSPITAL_USAGE,
-        },
-        {
-          chartRef: contactTracingRef,
-          isMobile,
-          shareButtonProps,
-          metric: Metric.CONTACT_TRACING,
-        },
-      ]
-    : [];
 
   const exploreCompareCopy: string = props.county
     ? 'Compare counties'
@@ -136,11 +93,21 @@ const ChartsHolder = (props: {
             <LocationPageHeader
               projections={props.projections}
               stats={props.projections.getMetricValues()}
-              onCaseDensityClick={() => scrollTo(caseDensityRef.current)}
-              onRtRangeClick={() => scrollTo(rtRangeRef.current)}
-              onTestPositiveClick={() => scrollTo(testPositiveRef.current)}
-              onIcuUtilizationClick={() => scrollTo(icuUtilizationRef.current)}
-              onContactTracingClick={() => scrollTo(contactTracingRef.current)}
+              onCaseDensityClick={() =>
+                scrollTo(metricRefs[Metric.CASE_DENSITY].current)
+              }
+              onRtRangeClick={() =>
+                scrollTo(metricRefs[Metric.CASE_GROWTH_RATE].current)
+              }
+              onTestPositiveClick={() =>
+                scrollTo(metricRefs[Metric.POSITIVE_TESTS].current)
+              }
+              onIcuUtilizationClick={() =>
+                scrollTo(metricRefs[Metric.HOSPITAL_USAGE].current)
+              }
+              onContactTracingClick={() =>
+                scrollTo(metricRefs[Metric.CONTACT_TRACING].current)
+              }
               onHeaderShareClick={() => scrollTo(shareBlockRef.current, -372)}
               onHeaderSignupClick={() => scrollTo(shareBlockRef.current)}
               onNewUpdateClick={() => scrollTo(exploreChartRef.current)}
@@ -153,11 +120,14 @@ const ChartsHolder = (props: {
               stateId={props.stateId}
             />
             <MainContentInner>
-              {chartPropsForMap.map(chartProps => (
+              {ALL_METRICS.map(metric => (
                 <ChartBlock
-                  key={chartProps.metric}
+                  key={metric}
+                  metric={metric}
                   projections={props.projections}
-                  {...chartProps}
+                  chartRef={metricRefs[metric]}
+                  shareButtonProps={shareButtonProps}
+                  isMobile={isMobile}
                   stateId={props.stateId}
                 />
               ))}
