@@ -37,8 +37,7 @@ import * as Styles from './Explore.style';
 const Explore: React.FunctionComponent<{
   projection: Projection;
   chartId?: string;
-  compareCopy: string;
-}> = ({ projection, chartId, compareCopy }) => {
+}> = ({ projection, chartId }) => {
   const { locationName, fips } = projection;
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -135,7 +134,7 @@ const Explore: React.FunctionComponent<{
       />
       <Styles.ChartControlsContainer>
         <Styles.TableAutocompleteHeader>
-          {compareCopy}
+          Compare states or counties
         </Styles.TableAutocompleteHeader>
         <Grid container spacing={1}>
           <Grid key="location-selector" item sm={6} xs={6}>
@@ -144,7 +143,6 @@ const Explore: React.FunctionComponent<{
               selectedLocations={selectedLocations}
               onChangeSelectedLocations={onChangeSelectedLocations}
               {...modalNormalizeCheckboxProps}
-              compareCopy={compareCopy}
             />
           </Grid>
           {!hasMultipleLocations && (

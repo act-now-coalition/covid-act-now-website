@@ -73,10 +73,6 @@ const ChartsHolder = (props: {
     isMobile,
   };
 
-  const exploreCompareCopy: string = props.county
-    ? 'Compare counties'
-    : 'Compare states';
-
   // TODO(pablo): Create separate refs for signup and share
   return (
     <>
@@ -120,7 +116,6 @@ const ChartsHolder = (props: {
               <Explore
                 projection={props.projections.primary}
                 chartId={chartId}
-                compareCopy={exploreCompareCopy}
               />
             </MainContentInner>
           </ChartContentWrapper>

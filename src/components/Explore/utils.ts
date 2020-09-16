@@ -9,6 +9,7 @@ import {
   max,
   range,
   words,
+  partition,
 } from 'lodash';
 import { schemeCategory10 } from 'd3-scale-chromatic';
 import { fetchProjections } from 'common/utils/model';
@@ -24,7 +25,11 @@ import {
 } from 'common/locations';
 import { share_image_url } from 'assets/data/share_images_url.json';
 import { SeriesType, Series } from './interfaces';
-import { isState, isCounty } from 'components/AutocompleteLocations';
+import {
+  isState,
+  isCounty,
+  belongsToState,
+} from 'components/AutocompleteLocations';
 
 export function getMaxBy<T>(
   seriesList: Series[],
@@ -371,16 +376,23 @@ export function getLocationNames(locations: Location[]) {
     .join(', ')} and ${getLocationLabel(lastLocation)}.`;
 }
 
-// note (Chelsi): commenting out belongsToState filter
-// so we can compare all US counties:
+/**
+ * Returns a list of locations for the autocomplete component. We try to show
+ * the most relevant options first. For a state, we show states, counties in
+ * the state and then other counties. For a county, we show counties in the
+ * state, then states and then other counties.
+ */
 export function getAutocompleteLocations(locationFips: string) {
-  const currentLocation = findLocationForFips(locationFips);
-  // const stateFips = currentLocation.state_fips_code;
   const allLocations = getAllLocations();
-  return isState(currentLocation)
-    ? allLocations.filter(isState)
-    : allLocations.filter(isCounty);
-  // .filter(location => belongsToState(location, stateFips));
+  const currentLocation = findLocationForFips(locationFips);
+  const [states, allCounties] = partition(allLocations, isState);
+  const [stateCounties, otherCounties] = partition(allCounties, county =>
+    belongsToState(county, currentLocation.state_fips_code),
+  );
+
+  return isStateFips(locationFips)
+    ? [...states, ...stateCounties, ...otherCounties]
+    : [...stateCounties, ...states, ...otherCounties];
 }
 
 /**
