@@ -6,6 +6,19 @@ import ChartExportImage from './ChartExportImage';
 import ExploreChartImage from './ExploreChartImage';
 import ExploreChartExportImage from './ExploreChartExportImage';
 import CompareTableImage from './CompareTableImage';
+import { useSharedComponentParams } from 'common/sharing';
+
+function SharedComponentImage() {
+  const componentParams = useSharedComponentParams(undefined);
+  if (componentParams) {
+    switch (componentParams['componentName']) {
+      case 'compare':
+        return <CompareTableImage />;
+    }
+  }
+
+  return <>Could not find / read component sharing params</>;
+}
 
 export default function ShareImage({ match }: RouteComponentProps<{}>) {
   return (
@@ -69,11 +82,11 @@ export default function ShareImage({ match }: RouteComponentProps<{}>) {
         component={ExploreChartExportImage}
       />
 
-      {/* COMPARE TABLES */}
+      {/* SHARED COMPONENTS (Compare, Explore, etc.) */}
       <Route
         exact
-        path={`${match.path}compare/:compareShareId`}
-        component={CompareTableImage}
+        path={`${match.path}share/:sharedComponentId`}
+        component={SharedComponentImage}
       />
 
       {/* DEFAULT */}

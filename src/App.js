@@ -39,7 +39,6 @@ export default function App() {
         <StylesProvider injectFirst>
           <CssBaseline />
           <BrowserRouter>
-            <HandleRedirectTo />
             <ScrollToTop />
             <AppBar />
             <Switch>
@@ -47,7 +46,7 @@ export default function App() {
               <Route exact path="/alert_signup" component={HomePage} />
               <Route
                 exact
-                path="/compare/:compareShareId?"
+                path="/compare/:sharedComponentId?"
                 component={HomePage}
               />
 
@@ -76,7 +75,7 @@ export default function App() {
               />
               <Route
                 exact
-                path="/us/:stateId/compare/:compareShareId?"
+                path="/us/:stateId/compare/:sharedComponentId?"
                 component={LocationPage}
               />
               <Route
@@ -91,7 +90,7 @@ export default function App() {
               />
               <Route
                 exact
-                path="/us/:stateId/county/:countyId/compare/:compareShareId?"
+                path="/us/:stateId/county/:countyId/compare/:sharedComponentId?"
                 component={LocationPage}
               />
               {/* /state/ routes are deprecated but still supported. */}
@@ -184,6 +183,7 @@ export default function App() {
               exports images. */}
               <Route path="/internal/export-image/" component={ExportImage} />
 
+              <HandleRedirectTo />
               <Route path="/*">
                 <Redirect to="/" />
               </Route>

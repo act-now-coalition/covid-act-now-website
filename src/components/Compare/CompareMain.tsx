@@ -5,7 +5,7 @@ import React, {
   useRef,
   useEffect,
 } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Modal } from '@material-ui/core';
 import CompareTable from 'components/Compare/CompareTable';
 import ModalCompare from 'components/Compare/ModalCompare';
@@ -25,14 +25,13 @@ import {
   GeoScopeFilter,
 } from 'common/utils/compare';
 import { Metric } from 'common/metric';
-import { getFirebase } from 'common/firebase';
 import { countySummary } from 'common/location_summaries';
 import { findCountyByFips } from 'common/locations';
 import { ScreenshotReady } from 'components/Screenshot';
-
-const firestore = getFirebase().firestore();
-const paramsCollection = firestore.collection('compare-shared-params');
-const nextIdDocRef = paramsCollection.doc('__nextId');
+import {
+  storeSharedComponentParams,
+  useSharedComponentParams,
+} from 'common/sharing';
 
 // For filters (0, 50, and 99 are numerical values required by MUI Slider component):
 const scopeValueMap = {
@@ -72,8 +71,8 @@ const CompareMain = (props: {
     }
   }, [location.pathname, scrollToCompare]);
 
-  // Store these as state variables so we can replace them with data read
-  // from Firestore when generating compare share images.
+  // Store these as state variables so we can replace them with stored params
+  // when generating compare share images.
   const [stateId, setStateId] = useState(props.stateId);
   const [county, setCounty] = useState(props.county);
   const currentCounty = county && {
@@ -146,72 +145,41 @@ const CompareMain = (props: {
     countyTypeToView,
     viewAllCounties,
     geoScope,
+    stateId,
+    countyId: county?.full_fips_code,
   };
 
-  // createCompareShareId() stores the current share params to Firestore under a
-  // newly-assigned numeric ID and returns it. We cache the result so multiple
-  // calls don't generate extra IDs.
-  let createCompareShareIdPromise: Promise<string> | null = null;
   const createCompareShareId = async () => {
-    if (!createCompareShareIdPromise) {
-      createCompareShareIdPromise = firestore.runTransaction(async txn => {
-        const nextIdDoc = await txn.get(nextIdDocRef);
-        const id = nextIdDoc.data()?.id || 0;
-
-        nextIdDocRef.set({ id: id + 1 });
-
-        const params: firebase.firestore.DocumentData = { ...uiState };
-        if (stateId) {
-          params['stateId'] = stateId;
-        }
-        if (county) {
-          params['countyId'] = county.full_fips_code;
-        }
-        paramsCollection.doc(`${id}`).set(params);
-
-        return `${id}`;
-      });
-    }
-
-    return createCompareShareIdPromise;
+    return storeSharedComponentParams('compare', uiState);
   };
 
   const [screenshotReady, setScreenshotReady] = useState(false);
 
-  // Check for a /compare/{compareShareId} in the URL and use it to repopulate the
-  // compare table if it's there.
-  const { compareShareId } = useParams();
+  // Repopulate state from shared parameters if we're being rendered via a
+  // sharing URL.
+  const sharedParams = useSharedComponentParams('compare');
   useEffect(() => {
-    async function fetchParamsFromFirestore(id: string) {
-      const doc = await paramsCollection.doc(id).get();
-      const params = doc.data();
-      if (params) {
-        const { stateId, countyId } = params;
-        if (stateId) {
-          setStateId(stateId);
-        }
-        if (countyId) {
-          setCounty(findCountyByFips(countyId));
-        }
-
-        setSorter(params['sorter']);
-        setSortDescending(params['sortDescending']);
-        setSortByPopulation(params['sortByPopulation']);
-        setCountyTypeToView(params['countyTypeToView']);
-        setViewAllCounties(params['viewAllCounties']);
-        setGeoScope(params['geoScope']);
-        setSliderValue(scopeValueMap[params['geoScope'] as GeoScopeFilter]);
-
-        // Now that the UI is populated, we can capture the screenshot.
-        setScreenshotReady(true);
-      } else {
-        console.error('Invalid Sharing ID:', compareShareId);
+    if (sharedParams) {
+      const { stateId, countyId } = sharedParams;
+      if (stateId) {
+        setStateId(stateId);
       }
+      if (countyId) {
+        setCounty(findCountyByFips(countyId));
+      }
+
+      setSorter(sharedParams.sorter);
+      setSortDescending(sharedParams.sortDescending);
+      setSortByPopulation(sharedParams.sortByPopulation);
+      setCountyTypeToView(sharedParams.countyTypeToView);
+      setViewAllCounties(sharedParams.viewAllCounties);
+      setGeoScope(sharedParams.geoScope);
+      setSliderValue(scopeValueMap[sharedParams.geoScope as GeoScopeFilter]);
+
+      // Now that the UI is populated, we can capture the screenshot.
+      setScreenshotReady(true);
     }
-    if (compareShareId) {
-      fetchParamsFromFirestore(compareShareId);
-    }
-  }, [compareShareId]);
+  }, [sharedParams]);
 
   if (locations.length === 0) {
     return null;
