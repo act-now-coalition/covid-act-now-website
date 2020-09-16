@@ -6,8 +6,8 @@ import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import CriteriaExplanation from './CriteriaExplanation/CriteriaExplanation';
 import Announcements from './Announcements/Announcements';
-import { PartnerLogoGrid, PressLogoGrid } from 'components/LogoGrid/LogoGrid';
 import { useLocation } from 'react-router-dom';
+import PartnersSection from 'screens/HomePage/PartnersSection';
 import HomePageThermometer from 'screens/HomePage/HomePageThermometer';
 import { GlobalSelector } from 'components/MapSelectors/MapSelectors';
 import { useHistory } from 'react-router-dom';
@@ -15,9 +15,6 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import {
   Content,
-  FeaturedHeader,
-  PartnerSection,
-  PartnerHeader,
   SearchBarThermometerWrapper,
   SectionWrapper,
 } from './HomePage.style';
@@ -94,14 +91,7 @@ export default function HomePage() {
             </SectionWrapper>
             <Announcements />
           </Content>
-          <PartnerSection>
-            <Content>
-              <PartnerHeader>Our Partners</PartnerHeader>
-              <PartnerLogoGrid />
-              <FeaturedHeader>Featured In</FeaturedHeader>
-              <PressLogoGrid />
-            </Content>
-          </PartnerSection>
+          <PartnersSection />
           <div ref={shareBlockRef}>
             <ShareModelBlock />
           </div>

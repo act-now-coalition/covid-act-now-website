@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import theme from 'assets/theme';
 import MuiButton from '@material-ui/core/Button';
 import { mobileBreakpoint } from 'assets/theme/sizes';
+import { COLOR_MAP } from 'common/colors';
 
 const colorButton = '#00BFEA';
-const bannerBackgroundColor = '#5900ea';
+const bannerBackgroundColor = `${COLOR_MAP.PURPLE}`;
 
 export const MainContainer = styled(Grid)`
   background-color: ${bannerBackgroundColor};
