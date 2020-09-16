@@ -4,7 +4,7 @@ import { isNumber } from 'lodash';
 import { Group } from '@vx/group';
 import { scaleTime, scaleLinear } from '@vx/scale';
 import { useTooltip } from '@vx/tooltip';
-import { formatInteger, formatDecimal } from 'common/utils';
+import { formatInteger, formatDecimal, formatUtcDate } from 'common/utils';
 import { Column } from 'common/models/Projection';
 import { Tooltip, RectClipGroup } from 'components/Charts';
 import { Series } from './interfaces';
@@ -40,7 +40,7 @@ const SingleLocationTooltip: React.FC<{
       width={'210px'}
       top={top(pointSmooth)}
       left={left(pointSmooth)}
-      title={moment(date).format('MMM D, YYYY')}
+      title={formatUtcDate(new Date(pointSmooth.x), 'MMM D, YYYY')}
     >
       <Styles.TooltipSubtitle>
         {`${seriesRaw.tooltipLabel}: ${
