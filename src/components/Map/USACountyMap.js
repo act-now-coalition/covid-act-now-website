@@ -74,7 +74,11 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent, condensed }) => {
                   );
                 }
                 return stateCode ? (
-                  <Link key={stateCode} to={`/us/${stateCode.toLowerCase()}`}>
+                  <Link
+                    key={stateCode}
+                    to={`/us/${stateCode.toLowerCase()}`}
+                    aria-label={name}
+                  >
                     <Geography
                       key={geo.rsmKey}
                       geography={geo}
@@ -85,6 +89,7 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent, condensed }) => {
                       onClick={() => stateClickHandler(name)}
                       fill={getFillColor(geo)}
                       stroke="white"
+                      role="img"
                     />
                   </Link>
                 ) : null;
