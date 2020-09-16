@@ -34,6 +34,7 @@ import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
 import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
 import { LEVEL_COLOR } from 'common/colors';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import { Metric } from 'common/metric';
 
 const NewFeatureCopy = (props: {
   locationName: string;
@@ -81,13 +82,9 @@ const LocationPageHeader = (props: {
   projections: Projections;
   condensed?: Boolean;
   stats: { [key: string]: number | null };
-  onRtRangeClick?: () => void;
-  onTestPositiveClick?: () => void;
-  onIcuUtilizationClick?: () => void;
-  onContactTracingClick?: () => void;
+  onMetricClick: (metric: Metric) => void;
   onHeaderShareClick: () => void;
   onHeaderSignupClick: () => void;
-  onCaseDensityClick: () => void;
   isMobile?: Boolean;
   onNewUpdateClick: () => void;
 }) => {
@@ -201,11 +198,7 @@ const LocationPageHeader = (props: {
           </HeaderSection>
           <LocationHeaderStats
             stats={props.stats}
-            onCaseDensityClick={props.onCaseDensityClick}
-            onRtRangeClick={props.onRtRangeClick}
-            onTestPositiveClick={props.onTestPositiveClick}
-            onIcuUtilizationClick={props.onIcuUtilizationClick}
-            onContactTracingClick={props.onContactTracingClick}
+            onMetricClick={props.onMetricClick}
             isMobile={props.isMobile}
             isHeader={true}
           />

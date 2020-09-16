@@ -25,44 +25,38 @@ function ChartBlock(props: {
   shareButtonProps: { [key: string]: any };
   metric: Metric;
   projections: Projections;
-  data?: any;
   stateId: string;
-  countyId?: string;
 }) {
-  const projection: Projection = props.projections.primary;
+  const { projections, metric, isMobile } = props;
+  const projection: Projection = projections.primary;
 
   const showBetaTag =
-    props.metric === Metric.HOSPITAL_USAGE ||
-    props.metric === Metric.CONTACT_TRACING;
+    metric === Metric.HOSPITAL_USAGE || metric === Metric.CONTACT_TRACING;
+
+  const hasMetric = projections.hasMetric(metric);
 
   return (
     <Fragment>
       <ChartHeaderWrapper>
         <ChartHeader ref={props.chartRef}>
-          {getMetricNameExtended(props.metric)}
+          {getMetricNameExtended(metric)}
           {showBetaTag && <BetaTag>Beta</BetaTag>}
         </ChartHeader>
-        {!props.isMobile && props.data && (
-          <ShareButtons
-            chartIdentifier={props.metric}
-            {...props.shareButtonProps}
-          />
+        {hasMetric && !isMobile && (
+          <ShareButtons chartIdentifier={metric} {...props.shareButtonProps} />
         )}
       </ChartHeaderWrapper>
       <ChartLocationName>{projection.locationName}</ChartLocationName>
       <ChartDescription>
-        {getMetricStatusText(props.metric, props.projections)}
+        {getMetricStatusText(metric, projections)}
       </ChartDescription>
-      {props.isMobile && props.data && (
-        <ShareButtons
-          chartIdentifier={props.metric}
-          {...props.shareButtonProps}
-        />
+      {hasMetric && isMobile && (
+        <ShareButtons chartIdentifier={metric} {...props.shareButtonProps} />
       )}
-      {props.data && (
+      {hasMetric && (
         <>
-          <MetricChart metric={props.metric} projections={props.projections} />
-          <Disclaimer metricName={props.metric} />
+          <MetricChart metric={metric} projections={projections} />
+          <Disclaimer metricName={metric} />
         </>
       )}
     </Fragment>
