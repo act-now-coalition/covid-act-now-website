@@ -9,7 +9,7 @@ const Donate = () => {
     <Wrapper>
       <iframe
         title="Donation embed"
-        src="https://givebutter.com/embed/c/hjgW7y"
+        src="https://givebutter.com/embed/c/covidactnow"
         width="100%"
         height="100%"
         style={{ maxWidth: '601px' }}
