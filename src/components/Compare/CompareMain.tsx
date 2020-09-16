@@ -81,6 +81,11 @@ const CompareMain = (props: {
     metricsInfo: countySummary(county.full_fips_code),
   };
 
+  useEffect(() => {
+    setStateId(props.stateId);
+    setCounty(props.county);
+  }, [props.stateId, props.county]);
+
   const [sorter, setSorter] = useState(Metric.CASE_DENSITY);
   const [sortDescending, setSortDescending] = useState(true);
   const [sortByPopulation, setSortByPopulation] = useState(false);

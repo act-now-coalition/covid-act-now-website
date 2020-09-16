@@ -1,10 +1,9 @@
 import React, { useCallback, Fragment } from 'react';
-import moment from 'moment';
 import { isNumber } from 'lodash';
 import { Group } from '@vx/group';
 import { scaleTime, scaleLinear } from '@vx/scale';
 import { useTooltip } from '@vx/tooltip';
-import { formatDecimal } from 'common/utils';
+import { formatDecimal, formatUtcDate } from 'common/utils';
 import { Column } from 'common/models/Projection';
 import { Tooltip, RectClipGroup } from 'components/Charts';
 import { Series } from './interfaces';
@@ -49,7 +48,7 @@ const MultipleLocationsTooltip: React.FC<{
       width={'210px'}
       top={top}
       left={left}
-      title={moment(pointInfo.x).format('MMM D, YYYY')}
+      title={formatUtcDate(new Date(pointInfo.x), 'MMM D, YYYY')}
     >
       <Styles.TooltipSubtitle>
         {currentSeries && currentSeries.tooltipLabel}

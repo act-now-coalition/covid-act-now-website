@@ -16,14 +16,12 @@ const LocationSelector: React.FC<{
   onChangeSelectedLocations: (newLocations: Location[]) => void;
   normalizeData: boolean;
   setNormalizeData: React.Dispatch<React.SetStateAction<boolean>>;
-  compareCopy: string;
 }> = ({
   locations,
   selectedLocations,
   onChangeSelectedLocations,
   normalizeData,
   setNormalizeData,
-  compareCopy,
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
@@ -50,7 +48,7 @@ const LocationSelector: React.FC<{
         disableTouchRipple
         onClick={onClickButton}
       >
-        {compareCopy}
+        Compare states or counties
       </Styles.ModalOpenButton>
       {modalOpen && (
         <Modal
@@ -62,7 +60,9 @@ const LocationSelector: React.FC<{
             <Styles.ModalHeader>
               <Grid container>
                 <Grid item xs={9}>
-                  <Styles.ModalTitle>{compareCopy}</Styles.ModalTitle>
+                  <Styles.ModalTitle>
+                    Compare states or counties
+                  </Styles.ModalTitle>
                 </Grid>
                 <Grid item xs container justify="flex-end">
                   <Styles.DoneButton size="small" onClick={closeModal}>
