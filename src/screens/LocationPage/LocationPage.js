@@ -10,7 +10,7 @@ import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ChartsHolder from 'components/LocationPage/ChartsHolder';
 import { LoadingScreen } from './LocationPage.style';
 import { useProjections } from 'common/utils/model';
-import { getPageTitle, getPageDescription } from './utils';
+import { getPageTitle, getPageDescription, getCanonicalUrl } from './utils';
 
 function LocationPage() {
   let { stateId, countyId, chartId } = useParams();
@@ -48,12 +48,13 @@ function LocationPage() {
 
   const pageTitle = getPageTitle(projections);
   const pageDescription = getPageDescription(projections);
+  const canonicalUrl = getCanonicalUrl(projections.fips);
 
   return (
     <div>
       <EnsureSharingIdInUrl />
       <AppMetaTags
-        canonicalUrl={`/us/${stateId.toLowerCase()}`}
+        canonicalUrl={canonicalUrl}
         pageTitle={pageTitle}
         pageDescription={pageDescription}
       />
