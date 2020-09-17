@@ -180,7 +180,7 @@ const LocationPageHeader = (props: {
                 })}
               </ThermometerContainer>
               <SectionColumn>
-                <ColumnTitle>Covid threat level</ColumnTitle>
+                <ColumnTitle>Covid risk level</ColumnTitle>
                 <LevelDescription>{levelInfo.summary}</LevelDescription>
                 <Copy>{levelInfo.detail(locationName)}</Copy>
               </SectionColumn>
