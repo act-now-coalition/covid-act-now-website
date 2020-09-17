@@ -16,11 +16,11 @@ export const MainContainer = styled(Grid)`
   /* TODO(pablo): Get from theme */
   font-family: Roboto;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 700;
   line-height: 140%;
   color: #fff;
 
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
   justify-content: center;
   border-radius: 0;
@@ -28,14 +28,9 @@ export const MainContainer = styled(Grid)`
   @media (min-width: ${mobileBreakpoint}) {
     text-align: left;
     border-radius: ${theme.spacing(1)}px;
+    align-items: center;
+    font-weight: 500;
   }
-`;
-
-export const SubMessage = styled.div`
-  color: #fff;
-  font-size: 13px;
-  line-height: 15px;
-  margin-top: 0.5rem;
 `;
 
 export const ButtonContainer = styled(Grid)`

@@ -11,20 +11,15 @@ const renderDonationButton = () => (
       disableRipple
       disableFocusRipple
     >
-      Donate
+      Donate Now
     </SurveyButton>
   </Link>
 );
 
-const DONATION_MESSAGE = `Help serve communities with life-saving covid data.`;
-const DONATION_SUBMESSAGE =
-  'Your support helps public health officials receive free, local, and accessible data.';
+const DONATION_MESSAGE = `Help serve communities with life-saving COVID data`;
+
 export const DonationBanner: React.FC = () => (
-  <Banner
-    message={DONATION_MESSAGE}
-    subMessage={DONATION_SUBMESSAGE}
-    renderButton={renderDonationButton}
-  />
+  <Banner message={DONATION_MESSAGE} renderButton={renderDonationButton} />
 );
 
 export default DonationBanner;

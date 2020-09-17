@@ -3,7 +3,7 @@ import { COLOR_MAP } from 'common/colors';
 import { Grid } from '@material-ui/core';
 
 export const EmbedWrapper = styled.div`
-  height: 750px;
+  height: 800px;
   margin: 2rem auto;
   display: flex;
   justify-content: center;
@@ -25,6 +25,19 @@ export const BodyCopy = styled.p`
   ${BodyCopyStyles}
 `;
 
+export const GridItem = styled(Grid)`
+  padding: 1.5rem;
+
+  @media (min-width: 600px) {
+    &:first-child {
+      padding: 1rem 1.25rem 1rem 2.5rem;
+    }
+    &:nth-child(2) {
+      padding: 1rem 2.5rem 1rem 1.25rem;
+    }
+  }
+`;
+
 export const SectionHeader = styled.h2`
   font-size: 1.5rem;
   font-weight: bold;
@@ -39,21 +52,13 @@ export const ListHeader = styled.h3`
   line-height: 1.4;
 `;
 
-export const ListSection = styled.div`
+export const ListSection = styled.ul`
   &:not(:last-child) {
     margin-bottom: 1.5rem;
   }
 `;
 
 export const ContentSection = styled.div`
-  padding: 1rem 1.5rem;
-
-  &:first-child {
-    ${BodyCopy} {
-      margin-bottom: 0;
-    }
-  }
-
   li {
     ${BodyCopyStyles}
   }
@@ -63,18 +68,14 @@ export const ContentSection = styled.div`
   }
 
   a {
-    color: ${COLOR_MAP.PURPLE};
+    color: ${COLOR_MAP.BLUE};
     text-decoration: none;
     font-size: 15px;
   }
 
-  @media (min-width: 600px) {
-    padding: 1rem 1.25rem;
-
-    &:first-child {
-      ${BodyCopy} {
-        margin-bottom: 1rem;
-      }
+  &:first-child {
+    ${BodyCopy} {
+      margin-bottom: 3rem;
     }
   }
 `;

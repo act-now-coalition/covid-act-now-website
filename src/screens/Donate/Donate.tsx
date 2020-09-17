@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { Grid } from '@material-ui/core';
 import { Icon } from '@iconify/react';
 import testTube from '@iconify/icons-twemoji/test-tube';
 import loveLetter from '@iconify/icons-twemoji/love-letter';
@@ -13,6 +12,7 @@ import {
   ListHeader,
   BodyCopy,
   ListSection,
+  GridItem,
 } from 'screens/Donate/Donate.style';
 import PartnersSection from 'components/PartnersSection/PartnersSection';
 
@@ -62,7 +62,7 @@ const Donate = () => {
         <script src="https://givebutter.com/js/widget.js"></script>
       </EmbedWrapper>
       <ContentWrapper container justify="center">
-        <Grid item xs={12} sm={6}>
+        <GridItem item xs={12} sm={6}>
           <ContentSection>
             <Icon icon={loveLetter} />
             <SectionHeader>How your donation helps</SectionHeader>
@@ -84,8 +84,8 @@ const Donate = () => {
             </BodyCopy>
             <Link to="/about">Learn more about us</Link>
           </ContentSection>
-        </Grid>
-        <Grid item xs={12} sm={6}>
+        </GridItem>
+        <GridItem item xs={12} sm={6}>
           <ContentSection>
             <Icon icon={deliveryTruck} />
             <SectionHeader>Our roadmap</SectionHeader>
@@ -100,7 +100,7 @@ const Donate = () => {
               );
             })}
           </ContentSection>
-        </Grid>
+        </GridItem>
         <PartnersSection />
       </ContentWrapper>
     </Fragment>
