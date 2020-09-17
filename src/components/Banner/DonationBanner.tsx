@@ -16,10 +16,15 @@ const renderDonationButton = () => (
   </ExternalLink>
 );
 
-const DONATION_MESSAGE = `We are a tiny non-profit working relentlessly since March to bring you the most important COVID information. Help make our work sustainable by donating today.`;
-
+const DONATION_MESSAGE = `Help serve communities with life-saving covid data.`;
+const DONATION_SUBMESSAGE =
+  'Your support helps public health officials receive free, local, and accessible data.';
 export const DonationBanner: React.FC = () => (
-  <Banner message={DONATION_MESSAGE} renderButton={renderDonationButton} />
+  <Banner
+    message={DONATION_MESSAGE}
+    subMessage={DONATION_SUBMESSAGE}
+    renderButton={renderDonationButton}
+  />
 );
 
 export default DonationBanner;
