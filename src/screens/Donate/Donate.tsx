@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import { Grid } from '@material-ui/core';
 import { Icon } from '@iconify/react';
 import testTube from '@iconify/icons-twemoji/test-tube';
@@ -13,7 +14,7 @@ import {
   BodyCopy,
   ListSection,
 } from 'screens/Donate/Donate.style';
-import PartnersSection from 'screens/HomePage/PartnersSection';
+import PartnersSection from 'components/PartnersSection/PartnersSection';
 
 const roadmapListContent = [
   {
@@ -47,7 +48,7 @@ const Donate = () => {
     <Fragment>
       <EmbedWrapper>
         <iframe
-          title="Donation embed"
+          title="Donate to Covid Act Now on GiveButter"
           src="https://givebutter.com/embed/c/covidactnow"
           width="100%"
           height="100%"
@@ -81,9 +82,7 @@ const Donate = () => {
               can understand, rally behind and communicate, we can advance a
               more unified and more effective response to COVID in the U.S.
             </BodyCopy>
-            <a href="/about" target="_blank" rel="noopener noreferrer">
-              Learn more about us
-            </a>
+            <Link to="/about">Learn more about us</Link>
           </ContentSection>
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -92,10 +91,10 @@ const Donate = () => {
             <SectionHeader>Our roadmap</SectionHeader>
             {roadmapListContent.map((section, i) => {
               return (
-                <ListSection>
+                <ListSection key={section.header}>
                   <ListHeader>{section.header}</ListHeader>
-                  {section.listItems.map(listItem => {
-                    return <li>{listItem}</li>;
+                  {section.listItems.map((listItem, i) => {
+                    return <li key={`list-item-${i}`}>{listItem}</li>;
                   })}
                 </ListSection>
               );

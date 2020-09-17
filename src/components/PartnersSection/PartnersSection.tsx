@@ -5,7 +5,7 @@ import {
   FeaturedHeader,
   PartnerSection,
   PartnerHeader,
-} from './HomePage.style';
+} from 'screens/HomePage/HomePage.style';
 
 function PartnersSection() {
   return (

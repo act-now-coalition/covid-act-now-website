@@ -25,13 +25,13 @@ export const BodyCopy = styled.p`
   ${BodyCopyStyles}
 `;
 
-export const SectionHeader = styled.p`
+export const SectionHeader = styled.h2`
   font-size: 1.5rem;
   font-weight: bold;
   margin: 0.75rem 0 1.5rem;
 `;
 
-export const ListHeader = styled.p`
+export const ListHeader = styled.h3`
   font-size: 15px;
   text-transform: uppercase;
   font-weight: bold;

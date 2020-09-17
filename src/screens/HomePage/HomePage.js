@@ -7,7 +7,7 @@ import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import CriteriaExplanation from './CriteriaExplanation/CriteriaExplanation';
 import Announcements from './Announcements/Announcements';
 import { useLocation } from 'react-router-dom';
-import PartnersSection from 'screens/HomePage/PartnersSection';
+import PartnersSection from 'components/PartnersSection/PartnersSection';
 import HomePageThermometer from 'screens/HomePage/HomePageThermometer';
 import { GlobalSelector } from 'components/MapSelectors/MapSelectors';
 import { useHistory } from 'react-router-dom';
@@ -20,7 +20,7 @@ import {
   BannerContainer,
 } from './HomePage.style';
 import { SelectorWrapper } from 'components/Header/HomePageHeader.style';
-import DonationBanner from 'components/Banner/DonationBanner';
+import { DonationBanner } from 'components/Banner';
 import CompareMain from 'components/Compare/CompareMain';
 
 export default function HomePage() {
