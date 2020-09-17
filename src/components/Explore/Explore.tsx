@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { some, uniq } from 'lodash';
+import { some, uniq, max } from 'lodash';
 import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
@@ -31,6 +31,7 @@ import {
   getAutocompleteLocations,
   getChartSeries,
   getMetricName,
+  getSeriesLabel,
 } from './utils';
 import * as Styles from './Explore.style';
 
@@ -103,6 +104,18 @@ const Explore: React.FunctionComponent<{
     normalizeData,
     setNormalizeData,
   };
+
+  const seriesLabels = chartSeries.map(series =>
+    getSeriesLabel(series, isMobileXs),
+  );
+
+  const maxLabelLength = max(seriesLabels.map(label => label.length)) || 0;
+
+  const adjustedMarginRight = hasMultipleLocations
+    ? maxLabelLength > 2
+      ? 120
+      : 60
+    : 20;
 
   return (
     <Styles.Container>
@@ -192,6 +205,7 @@ const Explore: React.FunctionComponent<{
                   tooltipSubtext={`in ${locationName}`}
                   hasMultipleLocations={hasMultipleLocations}
                   isMobileXs={isMobileXs}
+                  marginRight={adjustedMarginRight}
                 />
               ) : (
                 <div style={{ height: 400 }} />

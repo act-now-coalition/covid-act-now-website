@@ -15,6 +15,7 @@ export interface Series {
   data: Column[];
   type: SeriesType;
   label: string;
+  shortLabel: string;
   tooltipLabel: string;
   params?: SeriesParams;
 }

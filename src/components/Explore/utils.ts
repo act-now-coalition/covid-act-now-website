@@ -30,6 +30,7 @@ import {
   isCounty,
   belongsToState,
 } from 'components/AutocompleteLocations';
+import { getAbbreviatedCounty } from '../../common/utils/compare';
 
 export function getMaxBy<T>(
   seriesList: Series[],
@@ -215,6 +216,7 @@ export function getAllSeriesForMetric(
     data: cleanSeries(projection.getDataset(item.datasetId)),
     type: item.type,
     label: item.label,
+    shortLabel: item.label,
     tooltipLabel: item.tooltipLabel,
   }));
 }
@@ -247,6 +249,7 @@ function getAveragedSeriesForMetric(
       fill: color,
     },
     label: getLocationLabel(location),
+    shortLabel: getShortLocationLabel(location),
     tooltipLabel: normalizeData
       ? `${metricName} per 100k population`
       : metricName,
@@ -358,9 +361,25 @@ export function weeksAgo(dateFrom: Date, dateTo: Date) {
 }
 
 export function getLocationLabel(location: Location) {
-  return location.county
-    ? `${location.county}, ${location.state_code}`
-    : location.state;
+  const { county: countyName, state_code, state: stateName } = location;
+  const stateCode = state_code.toUpperCase();
+  return countyName
+    ? `${getAbbreviatedCounty(countyName)} ${stateCode}`
+    : stateName;
+}
+
+function truncateCountyName(countyName: string) {
+  return countyName.length < 8
+    ? countyName
+    : `${countyName.slice(0, 7).trim()}…`;
+}
+
+function getShortLocationLabel(location: Location) {
+  const { county: countyName, state_code } = location;
+  const stateCode = state_code.toUpperCase();
+  return countyName
+    ? `${truncateCountyName(getAbbreviatedCounty(countyName))} ${stateCode}`
+    : stateCode;
 }
 
 export function getLocationNames(locations: Location[]) {
@@ -429,4 +448,8 @@ export function getChartSeries(
       }),
     ).then(flatten);
   }
+}
+
+export function getSeriesLabel(series: Series, isMobile: boolean) {
+  return isMobile ? series.shortLabel : series.label;
 }
