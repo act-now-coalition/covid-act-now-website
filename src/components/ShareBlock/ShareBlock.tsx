@@ -90,7 +90,7 @@ const ShareBlock = ({
             </ShareInstructionHeader>
             <ShareInstructionBody alertsInstructions>
               We'll email you when your state or county sees a significant
-              change in one of their metrics and overall threat score.
+              change in one of their metrics and overall risk score.
             </ShareInstructionBody>
             <Newsletter county={countyName} stateId={stateId} />
           </NewsletterTextArea>
