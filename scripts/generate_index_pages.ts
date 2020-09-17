@@ -56,7 +56,7 @@ function locationPageTags(
   const title = `America’s COVID warning system`;
   const description = `Covid Act Now has real-time COVID data and risk level for your community. See how ${locationName} is doing at covidactnow.org.`;
   return {
-    'og:url': canonicalUrl,
+    //  'og:url': canonicalUrl,
     'og:image:url': fullImageUrl,
     'og:title': title,
     'og:description': description,
@@ -76,7 +76,7 @@ function chartPageTags(
   const title = `${locationName}: ${metricName}`;
   const description = `Covid Act Now has real-time COVID data and risk level for your community. See how ${locationName} is doing at covidactnow.org.`;
   return {
-    'og:url': canonicalUrl,
+    //'og:url': canonicalUrl,
     'og:image:url': fullImageUrl,
     'og:title': title,
     'og:description': description,
