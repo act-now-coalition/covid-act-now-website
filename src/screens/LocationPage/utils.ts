@@ -9,7 +9,7 @@ function getLocationName(fipsCode: string) {
   const { county: countyName, state_code: stateCode } = location;
   const locationName = location.county
     ? `${countyName}, ${stateName} (${stateCode})`
-    : `${stateName}, (${stateCode})`;
+    : `${stateName} (${stateCode})`;
   return locationName;
 }
 
