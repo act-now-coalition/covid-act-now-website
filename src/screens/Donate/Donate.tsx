@@ -54,6 +54,7 @@ const Donate = () => {
           style={{ maxWidth: '601px' }}
           name="givebutter"
           frameBorder="0"
+          scrolling="auto"
           seamless
           data-allowPaymentRequest
         ></iframe>

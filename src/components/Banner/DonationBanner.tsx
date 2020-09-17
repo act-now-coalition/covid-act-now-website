@@ -1,10 +1,10 @@
 import React from 'react';
 import Banner from './Banner';
 import { SurveyButton } from './Banner.style';
-import ExternalLink from 'components/ExternalLink';
+import { Link } from 'react-router-dom';
 
 const renderDonationButton = () => (
-  <ExternalLink href="https://bit.ly/2F2fCRD">
+  <Link to="/donate">
     <SurveyButton
       variant="contained"
       color="primary"
@@ -13,7 +13,7 @@ const renderDonationButton = () => (
     >
       Donate
     </SurveyButton>
-  </ExternalLink>
+  </Link>
 );
 
 const DONATION_MESSAGE = `Help serve communities with life-saving covid data.`;
