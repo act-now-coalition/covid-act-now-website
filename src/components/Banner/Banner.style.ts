@@ -24,11 +24,15 @@ export const MainContainer = styled(Grid)`
   text-align: center;
   justify-content: center;
   border-radius: 0;
+  align-items: center;
+
+  @media (min-width: 600px) {
+    text-align: left;
+  }
 
   @media (min-width: ${mobileBreakpoint}) {
-    text-align: left;
+    text-align: center;
     border-radius: ${theme.spacing(1)}px;
-    align-items: center;
     font-weight: 500;
   }
 `;

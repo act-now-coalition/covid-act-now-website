@@ -91,12 +91,14 @@ const Donate = () => {
             <SectionHeader>Our roadmap</SectionHeader>
             {roadmapListContent.map((section, i) => {
               return (
-                <ListSection key={section.header}>
+                <Fragment>
                   <ListHeader>{section.header}</ListHeader>
-                  {section.listItems.map((listItem, i) => {
-                    return <li key={`list-item-${i}`}>{listItem}</li>;
-                  })}
-                </ListSection>
+                  <ListSection key={section.header}>
+                    {section.listItems.map((listItem, i) => {
+                      return <li key={`list-item-${i}`}>{listItem}</li>;
+                    })}
+                  </ListSection>
+                </Fragment>
               );
             })}
           </ContentSection>
