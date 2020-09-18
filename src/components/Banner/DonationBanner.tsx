@@ -16,7 +16,7 @@ const renderDonationButton = () => (
   </Link>
 );
 
-const DONATION_MESSAGE = `Help serve communities with life-saving COVID data`;
+const DONATION_MESSAGE = `Help us continue serving communities with life-saving COVID data`;
 
 export const DonationBanner: React.FC = () => (
   <Banner message={DONATION_MESSAGE} renderButton={renderDonationButton} />

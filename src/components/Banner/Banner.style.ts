@@ -31,7 +31,6 @@ export const MainContainer = styled(Grid)`
   }
 
   @media (min-width: ${mobileBreakpoint}) {
-    text-align: center;
     border-radius: ${theme.spacing(1)}px;
     font-weight: 500;
   }
