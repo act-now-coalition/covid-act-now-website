@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import theme from 'assets/theme';
 import MuiButton from '@material-ui/core/Button';
 import { mobileBreakpoint } from 'assets/theme/sizes';
+import { COLOR_MAP } from 'common/colors';
 
-const colorButton = '#00BFEA';
-const bannerBackgroundColor = '#5900ea';
+const colorButton = `${COLOR_MAP.PURPLE}`;
+const bannerBackgroundColor = `${COLOR_MAP.PURPLE}`;
 
 export const MainContainer = styled(Grid)`
   background-color: ${bannerBackgroundColor};
@@ -15,19 +16,23 @@ export const MainContainer = styled(Grid)`
   /* TODO(pablo): Get from theme */
   font-family: Roboto;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 700;
   line-height: 140%;
   color: #fff;
 
-  font-size: 13px;
+  font-size: 18px;
   text-align: center;
   justify-content: center;
   border-radius: 0;
+  align-items: center;
+
+  @media (min-width: 600px) {
+    text-align: left;
+  }
 
   @media (min-width: ${mobileBreakpoint}) {
-    font-size: 15px;
-    text-align: left;
     border-radius: ${theme.spacing(1)}px;
+    font-weight: 500;
   }
 `;
 

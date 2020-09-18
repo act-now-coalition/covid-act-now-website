@@ -1,22 +1,22 @@
 import React from 'react';
 import Banner from './Banner';
 import { SurveyButton } from './Banner.style';
-import ExternalLink from 'components/ExternalLink';
+import { Link } from 'react-router-dom';
 
 const renderDonationButton = () => (
-  <ExternalLink href="https://bit.ly/2F2fCRD">
+  <Link to="/donate">
     <SurveyButton
       variant="contained"
       color="primary"
       disableRipple
       disableFocusRipple
     >
-      Donate
+      Donate Now
     </SurveyButton>
-  </ExternalLink>
+  </Link>
 );
 
-const DONATION_MESSAGE = `We are a tiny non-profit working relentlessly since March to bring you the most important COVID information. Help make our work sustainable by donating today.`;
+const DONATION_MESSAGE = `Help us continue serving communities with life-saving COVID data`;
 
 export const DonationBanner: React.FC = () => (
   <Banner message={DONATION_MESSAGE} renderButton={renderDonationButton} />

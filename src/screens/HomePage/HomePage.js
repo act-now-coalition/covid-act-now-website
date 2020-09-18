@@ -6,8 +6,8 @@ import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import CriteriaExplanation from './CriteriaExplanation/CriteriaExplanation';
 import Announcements from './Announcements/Announcements';
-import { PartnerLogoGrid, PressLogoGrid } from 'components/LogoGrid/LogoGrid';
 import { useLocation } from 'react-router-dom';
+import PartnersSection from 'components/PartnersSection/PartnersSection';
 import HomePageThermometer from 'screens/HomePage/HomePageThermometer';
 import { GlobalSelector } from 'components/MapSelectors/MapSelectors';
 import { useHistory } from 'react-router-dom';
@@ -15,14 +15,12 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import {
   Content,
-  FeaturedHeader,
-  PartnerSection,
-  PartnerHeader,
   SearchBarThermometerWrapper,
   SectionWrapper,
+  BannerContainer,
 } from './HomePage.style';
 import { SelectorWrapper } from 'components/Header/HomePageHeader.style';
-
+import { DonationBanner } from 'components/Banner';
 import CompareMain from 'components/Compare/CompareMain';
 
 export default function HomePage() {
@@ -71,6 +69,9 @@ export default function HomePage() {
         pageTitle="Covid Act Now - America’s COVID Warning System"
         pageDescription="Real-time modeling and metrics to understand where we stand against COVID. 50 states. 3,000+ counties. Click the map to dive in"
       />
+      <BannerContainer>
+        <DonationBanner />
+      </BannerContainer>
       <HomePageHeader
         indicatorsLinkOnClick={() => scrollTo(indicatorsRef.current)}
       />
@@ -94,14 +95,7 @@ export default function HomePage() {
             </SectionWrapper>
             <Announcements />
           </Content>
-          <PartnerSection>
-            <Content>
-              <PartnerHeader>Our Partners</PartnerHeader>
-              <PartnerLogoGrid />
-              <FeaturedHeader>Featured In</FeaturedHeader>
-              <PressLogoGrid />
-            </Content>
-          </PartnerSection>
+          <PartnersSection />
           <div ref={shareBlockRef}>
             <ShareModelBlock />
           </div>

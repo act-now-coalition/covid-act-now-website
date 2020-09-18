@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { some, uniq } from 'lodash';
+import { some, uniq, max } from 'lodash';
 import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
@@ -31,8 +31,36 @@ import {
   getAutocompleteLocations,
   getChartSeries,
   getMetricName,
+  getSeriesLabel,
 } from './utils';
 import * as Styles from './Explore.style';
+
+const MARGIN_SINGLE_LOCATION = 20;
+const MARGIN_STATE_CODE = 60;
+const MARGIN_COUNTY = 120;
+
+function getMarginRight(
+  showLabels: boolean,
+  shortLabels: boolean,
+  seriesList: Series[],
+) {
+  const maxLabelLength =
+    max(seriesList.map(series => getLabelLength(series, shortLabels))) || 0;
+
+  // We only show the labels when multiple locations are selected. If only
+  // states are selected, we only need space for the state code, if at least
+  // one county is selected, we need more space.
+  return showLabels
+    ? maxLabelLength > 2
+      ? MARGIN_COUNTY
+      : MARGIN_STATE_CODE
+    : MARGIN_SINGLE_LOCATION;
+}
+
+function getLabelLength(series: Series, shortLabel: boolean) {
+  const label = getSeriesLabel(series, shortLabel);
+  return label.length;
+}
 
 const Explore: React.FunctionComponent<{
   projection: Projection;
@@ -103,6 +131,11 @@ const Explore: React.FunctionComponent<{
     normalizeData,
     setNormalizeData,
   };
+
+  const marginRight = useMemo(
+    () => getMarginRight(hasMultipleLocations, isMobileXs, chartSeries),
+    [hasMultipleLocations, isMobileXs, chartSeries],
+  );
 
   return (
     <Styles.Container>
@@ -192,6 +225,7 @@ const Explore: React.FunctionComponent<{
                   tooltipSubtext={`in ${locationName}`}
                   hasMultipleLocations={hasMultipleLocations}
                   isMobileXs={isMobileXs}
+                  marginRight={marginRight}
                 />
               ) : (
                 <div style={{ height: 400 }} />
