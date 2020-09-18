@@ -8,7 +8,7 @@ import { Column } from 'common/models/Projection';
 import { Tooltip, RectClipGroup } from 'components/Charts';
 import { Series } from './interfaces';
 import ChartSeries, { SeriesMarker } from './SeriesChart';
-import { getMaxBy } from './utils';
+import { getMaxBy, getSeriesLabel } from './utils';
 import * as Styles from './Explore.style';
 import { COLOR_MAP } from 'common/colors';
 import { ScreenshotReady } from 'components/Screenshot';
@@ -18,7 +18,6 @@ import { Line } from '@vx/shape';
 import DateMarker from './DateMarker';
 import GridLines from './GridLines';
 import Axes from './Axes';
-import { getStateCode } from 'common/locations';
 
 const getDate = (d: Column) => new Date(d.x);
 const getY = (d: Column) => d.y;
@@ -121,7 +120,7 @@ const MultipleLocationsChart: React.FC<{
   marginLeft = 60,
   marginRight = 100,
   barOpacity,
-  isMobileXs,
+  isMobileXs = false,
 }) => {
   const dateFrom = new Date('2020-03-01');
   const dateTo = new Date();
@@ -180,19 +179,16 @@ const MultipleLocationsChart: React.FC<{
             dateScale={dateScale}
             strokeColor={axisGridColor}
           />
-          {seriesList.map(({ label, data, params }, i) => {
-            const locationLabel = !isMobileXs
-              ? label
-              : getStateCode(label) || label.slice(0, 3);
-            return data.length > 0 ? (
+          {seriesList.map((series, i) => {
+            return series.data.length > 0 ? (
               <Styles.LineLabel
-                key={`label-${label}`}
+                key={`label-${series.label}`}
                 x={innerWidth + 5}
-                y={getYPosition(data[data.length - 1])}
-                fill={params?.stroke || '#000'}
+                y={getYPosition(series.data[series.data.length - 1])}
+                fill={series.params?.stroke || '#000'}
                 fillOpacity={getSeriesOpacity(i, tooltipOpen, tooltipData)}
               >
-                {locationLabel}
+                {getSeriesLabel(series, isMobileXs)}
               </Styles.LineLabel>
             ) : null;
           })}
