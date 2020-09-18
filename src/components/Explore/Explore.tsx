@@ -35,6 +35,33 @@ import {
 } from './utils';
 import * as Styles from './Explore.style';
 
+const MARGIN_SINGLE_LOCATION = 20;
+const MARGIN_STATE_CODE = 60;
+const MARGIN_COUNTY = 120;
+
+function getMarginRight(
+  showLabels: boolean,
+  shortLabels: boolean,
+  seriesList: Series[],
+) {
+  const maxLabelLength =
+    max(seriesList.map(series => getLabelLength(series, shortLabels))) || 0;
+
+  // We only show the labels when multiple locations are selected. If only
+  // states are selected, we only need space for the state code, if at least
+  // one county is selected, we need more space.
+  return showLabels
+    ? maxLabelLength > 2
+      ? MARGIN_COUNTY
+      : MARGIN_STATE_CODE
+    : MARGIN_SINGLE_LOCATION;
+}
+
+function getLabelLength(series: Series, shortLabel: boolean) {
+  const label = getSeriesLabel(series, shortLabel);
+  return label.length;
+}
+
 const Explore: React.FunctionComponent<{
   projection: Projection;
   chartId?: string;
@@ -105,17 +132,10 @@ const Explore: React.FunctionComponent<{
     setNormalizeData,
   };
 
-  const seriesLabels = chartSeries.map(series =>
-    getSeriesLabel(series, isMobileXs),
+  const marginRight = useMemo(
+    () => getMarginRight(hasMultipleLocations, isMobileXs, chartSeries),
+    [hasMultipleLocations, isMobileXs, chartSeries],
   );
-
-  const maxLabelLength = max(seriesLabels.map(label => label.length)) || 0;
-
-  const adjustedMarginRight = hasMultipleLocations
-    ? maxLabelLength > 2
-      ? 120
-      : 60
-    : 20;
 
   return (
     <Styles.Container>
@@ -205,7 +225,7 @@ const Explore: React.FunctionComponent<{
                   tooltipSubtext={`in ${locationName}`}
                   hasMultipleLocations={hasMultipleLocations}
                   isMobileXs={isMobileXs}
-                  marginRight={adjustedMarginRight}
+                  marginRight={marginRight}
                 />
               ) : (
                 <div style={{ height: 400 }} />

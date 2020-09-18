@@ -369,17 +369,16 @@ export function getLocationLabel(location: Location) {
 }
 
 function truncateCountyName(countyName: string) {
-  return countyName.length < 8
+  return countyName.length <= 11
     ? countyName
-    : `${countyName.slice(0, 7).trim()}…`;
+    : `${countyName.slice(0, 11).trim()}…`;
 }
 
 function getShortLocationLabel(location: Location) {
   const { county: countyName, state_code } = location;
-  const stateCode = state_code.toUpperCase();
   return countyName
-    ? `${truncateCountyName(getAbbreviatedCounty(countyName))} ${stateCode}`
-    : stateCode;
+    ? `${truncateCountyName(getAbbreviatedCounty(countyName))}`
+    : state_code.toUpperCase();
 }
 
 export function getLocationNames(locations: Location[]) {
