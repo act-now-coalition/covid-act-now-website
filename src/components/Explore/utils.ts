@@ -18,7 +18,7 @@ import {
   findLocationForFips,
   getLocationNames as getAllLocations,
   getLocationNameForFips,
-  getLocationUrlForFips,
+  getRelativeUrlForFips,
   isStateFips,
   findStateByFips,
   Location,
@@ -304,19 +304,25 @@ function getRelativeUrl(fips: string) {
  * It needs to be consistent with the path on the share image generation
  * script in `scripts/generate_share_images/index.ts`
  */
-export function getExportImageUrl(fips: string, metric: ExploreMetric) {
-  const chartId = getChartIdByMetric(metric);
+export function getExportImageUrl(fips: string, sharedComponentId: string) {
   const relativeUrl = getRelativeUrl(fips);
-  return urlJoin(share_image_url, relativeUrl, `explore/${chartId}/export.png`);
+  return urlJoin(
+    share_image_url,
+    relativeUrl,
+    `share/${sharedComponentId}/export.png`,
+  );
 }
 
-export function getChartUrl(fips: string, metric: ExploreMetric) {
-  const chartId = getChartIdByMetric(metric);
-  const locationUrl = getLocationUrlForFips(fips);
-  const isState = isStateFips(fips);
-  return isState
-    ? `${locationUrl}explore/${chartId}`
-    : `${locationUrl}/explore/${chartId}`;
+export function getChartUrl(fips: string, sharedComponentId: string) {
+  const redirectTo = urlJoin(
+    getRelativeUrlForFips(fips),
+    'explore',
+    sharedComponentId,
+  );
+  const url = urlJoin(window.location.origin, 'share', sharedComponentId);
+  // NOTE: Trailing '/' is significant so we hit the index.html page with correct meta tags and
+  // so we don't get redirected and lose the query params.
+  return `${url}/?redirectTo=${encodeURIComponent(redirectTo)}`;
 }
 
 export function getSocialQuote(fips: string, metric: ExploreMetric) {

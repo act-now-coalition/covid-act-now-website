@@ -1,11 +1,16 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, {
+  useState,
+  useMemo,
+  useEffect,
+  useRef,
+  useCallback,
+} from 'react';
 import { some, uniq, max } from 'lodash';
 import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { ParentSize } from '@vx/responsive';
-import { Projection } from 'common/models/Projection';
 import { useModelLastUpdatedDate } from 'common/utils/model';
 import { findLocationForFips, Location } from 'common/locations';
 import {
@@ -32,8 +37,14 @@ import {
   getChartSeries,
   getMetricName,
   getSeriesLabel,
+  EXPLORE_CHART_IDS,
 } from './utils';
 import * as Styles from './Explore.style';
+import {
+  storeSharedComponentParams,
+  useSharedComponentParams,
+} from 'common/sharing';
+import { useLocation, useParams } from 'react-router-dom';
 
 const MARGIN_SINGLE_LOCATION = 20;
 const MARGIN_STATE_CODE = 60;
@@ -63,16 +74,19 @@ function getLabelLength(series: Series, shortLabel: boolean) {
 }
 
 const Explore: React.FunctionComponent<{
-  projection: Projection;
-  chartId?: string;
-}> = ({ projection, chartId }) => {
-  const { locationName, fips } = projection;
+  fips: string;
+}> = ({ fips }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isMobileXs = useMediaQuery(theme.breakpoints.down('xs'));
 
-  const defaultMetric =
-    (chartId && getMetricByChartId(chartId)) || ExploreMetric.CASES;
+  const { sharedComponentId } = useParams();
+  let defaultMetric = ExploreMetric.CASES;
+  // Originally we had share URLs like /explore/cases instead of
+  // /explore/<sharedComponentId> and so this code allows them to keep working.
+  if (sharedComponentId && EXPLORE_CHART_IDS.includes(sharedComponentId)) {
+    defaultMetric = getMetricByChartId(sharedComponentId)!;
+  }
   const [currentMetric, setCurrentMetric] = useState(defaultMetric);
 
   const [normalizeData, setNormalizeData] = useState(false);
@@ -106,6 +120,28 @@ const Explore: React.FunctionComponent<{
     setSelectedLocations(changedLocations);
   };
 
+  const exploreRef = useRef<HTMLDivElement>(null);
+  const scrollToExplore = useCallback(() => {
+    const scrollOffset = 180;
+    return setTimeout(() => {
+      if (exploreRef.current) {
+        window.scrollTo({
+          left: 0,
+          top: exploreRef.current.offsetTop - scrollOffset,
+          behavior: 'smooth',
+        });
+      }
+    }, 200);
+  }, [exploreRef]);
+
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname.includes('/explore')) {
+      const timeoutId = scrollToExplore();
+      return () => clearTimeout(timeoutId);
+    }
+  }, [location.pathname, scrollToExplore]);
+
   // Resets the state when navigating locations
   useEffect(() => {
     setSelectedLocations([currentLocation]);
@@ -137,8 +173,30 @@ const Explore: React.FunctionComponent<{
     [hasMultipleLocations, isMobileXs, chartSeries],
   );
 
+  const createSharedComponentId = async () => {
+    return storeSharedComponentParams('explore', {
+      currentMetric,
+      normalizeData,
+      selectedFips: selectedLocations.map(
+        location => location.full_fips_code || location.state_fips_code,
+      ),
+    });
+  };
+
+  const sharedParams = useSharedComponentParams('explore');
+  useEffect(() => {
+    if (sharedParams) {
+      setCurrentMetric(sharedParams.currentMetric);
+      setNormalizeData(sharedParams.normalizeData);
+      const locations = sharedParams.selectedFips.map((fips: string) =>
+        findLocationForFips(fips),
+      );
+      setSelectedLocations(locations);
+    }
+  }, [sharedParams]);
+
   return (
-    <Styles.Container>
+    <Styles.Container ref={exploreRef}>
       <Grid container spacing={1}>
         <Grid item sm={6} xs={12}>
           <Styles.Heading variant="h4">Trends</Styles.Heading>
@@ -150,12 +208,17 @@ const Explore: React.FunctionComponent<{
         <Grid item sm={6} xs={12}>
           <Styles.ShareBlock>
             <ShareImageButtonGroup
-              imageUrl={getExportImageUrl(fips, currentMetric)}
+              imageUrl={() =>
+                createSharedComponentId().then(id =>
+                  getExportImageUrl(fips, id),
+                )
+              }
               imageFilename={getImageFilename(fips, currentMetric)}
-              url={getChartUrl(fips, currentMetric)}
+              url={() =>
+                createSharedComponentId().then(id => getChartUrl(fips, id))
+              }
               quote={getSocialQuote(fips, currentMetric)}
               hashtags={['COVIDActNow']}
-              disabled={hasMultipleLocations}
             />
           </Styles.ShareBlock>
         </Grid>
@@ -222,7 +285,7 @@ const Explore: React.FunctionComponent<{
                   isMobile={isMobile}
                   width={width}
                   height={400}
-                  tooltipSubtext={`in ${locationName}`}
+                  tooltipSubtext={`in ${getLocationNames(selectedLocations)}`}
                   hasMultipleLocations={hasMultipleLocations}
                   isMobileXs={isMobileXs}
                   marginRight={marginRight}
@@ -237,7 +300,7 @@ const Explore: React.FunctionComponent<{
         <EmptyChart
           height={400}
           metricName={currentMetricName}
-          locationName={locationName}
+          locationName={getLocationNames(selectedLocations)}
         />
       )}
       <DisclaimerWrapper>

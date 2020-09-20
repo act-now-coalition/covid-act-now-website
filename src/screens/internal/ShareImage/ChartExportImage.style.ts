@@ -44,6 +44,16 @@ export const MetricName = styled.div`
   letter-spacing: -0.01em;
 `;
 
+export const ExploreTitle = styled.div`
+  margin-top: 10px;
+  text-transform: capitalize;
+  font-family: 'Roboto';
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 24px;
+  width: 900px;
+`;
+
 export const LastUpdated = styled.div`
   margin-top: 10px;
   font-family: 'Source Code Pro';
@@ -62,6 +72,11 @@ export const ChartWrapper = styled.div`
   span {
     font-family: 'Roboto' !important;
   }
+`;
+
+export const ExploreChartWrapper = styled(ChartWrapper)`
+  margin-left: 60px;
+  width: 1060px;
 `;
 
 export const LogoHolder = styled.div`

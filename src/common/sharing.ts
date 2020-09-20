@@ -84,19 +84,19 @@ async function fetchSharedComponentParams(
     const fetch = async () => {
       const doc = await collection.doc(sharedComponentId).get();
       const params = doc.data();
-      if (
-        !params ||
-        (componentName && params['componentName'] !== componentName)
-      ) {
-        return undefined;
-      }
       return params;
     };
     cachedParams = fetch();
     fetchedComponentParams[sharedComponentId] = cachedParams;
   }
 
-  return cachedParams;
+  const params = await cachedParams;
+  // Only return the params if they're for the requested component.
+  if (componentName && componentName !== params?.componentName) {
+    return undefined;
+  } else {
+    return params;
+  }
 }
 
 /**

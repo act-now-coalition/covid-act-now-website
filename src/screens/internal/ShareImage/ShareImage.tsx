@@ -8,12 +8,18 @@ import ExploreChartExportImage from './ExploreChartExportImage';
 import CompareTableImage from './CompareTableImage';
 import { useSharedComponentParams } from 'common/sharing';
 
-function SharedComponentImage() {
+function SharedComponentImage({ exportImage }: { exportImage: boolean }) {
   const componentParams = useSharedComponentParams(undefined);
   if (componentParams) {
     switch (componentParams['componentName']) {
       case 'compare':
         return <CompareTableImage />;
+      case 'explore':
+        return exportImage ? (
+          <ExploreChartExportImage componentParams={componentParams} />
+        ) : (
+          <ExploreChartImage componentParams={componentParams} />
+        );
     }
   }
 
@@ -88,6 +94,9 @@ export default function ShareImage({ match }: RouteComponentProps<{}>) {
         path={`${match.path}share/:sharedComponentId`}
         component={SharedComponentImage}
       />
+      <Route exact path={`${match.path}share/:sharedComponentId/export`}>
+        <SharedComponentImage exportImage={true} />
+      </Route>
 
       {/* DEFAULT */}
       <Route path="/*">Bad Share Image URL.</Route>

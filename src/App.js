@@ -70,7 +70,7 @@ export default function App() {
               />
               <Route
                 exact
-                path="/us/:stateId/explore/:chartId"
+                path="/us/:stateId/explore/:sharedComponentId?"
                 component={LocationPage}
               />
               <Route
@@ -85,7 +85,7 @@ export default function App() {
               />
               <Route
                 exact
-                path="/us/:stateId/county/:countyId/explore/:chartId"
+                path="/us/:stateId/county/:countyId/explore/:sharedComponentId?"
                 component={LocationPage}
               />
               <Route

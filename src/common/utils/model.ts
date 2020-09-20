@@ -6,7 +6,7 @@ import {
   RegionDescriptor,
 } from './RegionDescriptor';
 import { Api } from 'api';
-import { findCountyByFips } from 'common/locations';
+import { County, findCountyByFips } from 'common/locations';
 import moment from 'moment';
 import { RegionSummaryWithTimeseries } from 'api/schema/RegionSummaryWithTimeseries';
 import { assert } from '.';
@@ -92,7 +92,7 @@ export function fetchAllCountyProjections(snapshotUrl: string | null = null) {
   return cachedCountiesProjections[key];
 }
 
-export function useProjections(location: string, county = null) {
+export function useProjections(location: string, county?: County) {
   const [projections, setProjections] = useState<Projections>();
 
   useEffect(() => {

@@ -230,7 +230,7 @@ const MultipleLocationsChart: React.FC<{
           />
         </Group>
       </svg>
-      {width > 0 && <ScreenshotReady />}
+      {width > 0 && seriesList.length > 0 && <ScreenshotReady />}
       {tooltipOpen && tooltipData && (
         <Fragment>
           <MultipleLocationsTooltip
