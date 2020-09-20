@@ -17,10 +17,8 @@ import {
   Content,
   SearchBarThermometerWrapper,
   SectionWrapper,
-  BannerContainer,
 } from './HomePage.style';
 import { SelectorWrapper } from 'components/Header/HomePageHeader.style';
-import { DonationBanner } from 'components/Banner';
 import CompareMain from 'components/Compare/CompareMain';
 
 export default function HomePage() {
