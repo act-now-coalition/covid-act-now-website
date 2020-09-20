@@ -69,9 +69,6 @@ export default function HomePage() {
         pageTitle="Covid Act Now - America’s COVID Warning System"
         pageDescription="Real-time modeling and metrics to understand where we stand against COVID. 50 states. 3,000+ counties. Click the map to dive in"
       />
-      <BannerContainer>
-        <DonationBanner />
-      </BannerContainer>
       <HomePageHeader
         indicatorsLinkOnClick={() => scrollTo(indicatorsRef.current)}
       />
