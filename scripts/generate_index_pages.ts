@@ -15,23 +15,19 @@ import ShareImageUrlJSON from '../src/assets/data/share_images_url.json';
 import { STATES } from '../src/common';
 import { assert } from '../src/common/utils';
 import * as urls from '../src/common/urls';
+import { getNextSharedComponentId } from '../src/common/sharing';
 
 // We don't care about the values here, but this is a cheap way to determine all
 // of the counties we have any data for and are therefore share-able.
 import { LocationSummariesByFIPS } from '../src/common/location_summaries';
 import { ALL_METRICS, getMetricName } from '../src/common/metric';
-import {
-  EXPLORE_METRICS,
-  getTitle as getExploreMetricTitle,
-  getChartIdByMetric,
-} from '../src/components/Explore';
 const COUNTIES = Object.keys(LocationSummariesByFIPS).filter(
   fips => fips.length === 5,
 );
 
-// TODO(michael): We will need to increase this once people share 2000 tables
-// (or come up with a new strategy).
-const COMPARE_IDS_TO_GENERATE = 2000;
+// We pre-generate the next 2000 IDs each time we do a deploy which should be
+// sufficient unless we get more than 2000 shares/day.
+const SHARED_COMPONENT_IDS_TO_GENERATE = 2000;
 
 const BLACKLISTED_COUNTIES = [
   '11001', // Washington, DC - We treat it as a state, not a county.
@@ -121,29 +117,6 @@ async function buildLocationPages(
       ),
     );
   }
-
-  for (const exploreMetric of EXPLORE_METRICS) {
-    const chartId = getChartIdByMetric(exploreMetric);
-    const chartPage = path.join(
-      relativeSiteUrl,
-      `/explore/${chartId}/index.html`,
-    );
-    const chartCanonicalUrl = urls.addSharingId(
-      urlJoin(canonicalUrlBase, `/explore/${chartId}`),
-    );
-    const chartImageUrl = builder.fullImageUrl(
-      urlJoin(relativeImageUrl, `/explore/${chartId}.png`),
-    );
-    await builder.writeTemplatedPage(
-      chartPage,
-      chartPageTags(
-        chartImageUrl,
-        chartCanonicalUrl,
-        locationName,
-        getExploreMetricTitle(exploreMetric),
-      ),
-    );
-  }
 }
 
 async function main() {
@@ -156,13 +129,22 @@ async function main() {
     homePageTags(builder.fullImageUrl('home.png')),
   );
 
-  for (let i = 0; i < COMPARE_IDS_TO_GENERATE; i++) {
+  // Make sure we have at least SHARED_COMPONENT_IDS_TO_GENERATE index.html
+  // pages pre-generated for future-shared URLs. Note that since we don't wipe
+  // our hosted files between deploys, we will have overlap between deploys and
+  // likely won't end up with any gaps.
+  const nextId = await getNextSharedComponentId();
+  for (let i = nextId; i < nextId + SHARED_COMPONENT_IDS_TO_GENERATE; i++) {
+    // NOTE: This isn't a working URL (there's no /share/ route), but it doesn't
+    // matter. Only the Facebook Crawler will end up following this URL.
+    const url = urls.addSharingId(`https://covidactnow.org/share/${i}/`);
+
+    const imageUrl = builder.fullImageUrl(`/share/${i}.png`);
+
     // Minor hack: Just use the location page tags, but insert "your community"
-    // for the locationName since we don't know it.
-    const url = urls.addSharingId(`https://covidactnow.org/compare/${i}/`);
-    const imageUrl = builder.fullImageUrl(`/compare/${i}.png`);
+    // for the locationName since we don't know what it will be.
     await builder.writeTemplatedPage(
-      `/compare/${i}/index.html`,
+      `/share/${i}/index.html`,
       locationPageTags(imageUrl, url, 'your community'),
     );
   }

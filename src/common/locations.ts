@@ -124,17 +124,15 @@ export function getLocationNameForFips(fips: string): string {
   }
 }
 
-export function getLocationUrlForFips(fips: string): string {
-  // TODO(pablo): Make sure that these urls are uniform, here, the state
-  // URL ends on / but not the county one
+export function getRelativeUrlForFips(fips: string): string {
   if (isStateFips(fips)) {
     const state = findStateByFips(fips);
-    return `https://covidactnow.org/us/${state.state_code.toLowerCase()}/`;
+    return `/us/${state.state_code.toLowerCase()}/`;
   } else {
     const county = findCountyByFips(fips);
-    return `https://covidactnow.org/us/${county.state_code.toLowerCase()}/county/${
+    return `/us/${county.state_code.toLowerCase()}/county/${
       county.county_url_name
-    }`;
+    }/`;
   }
 }
 
