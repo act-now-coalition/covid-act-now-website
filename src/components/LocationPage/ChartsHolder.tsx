@@ -9,7 +9,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { Metric, ALL_METRICS } from 'common/metric';
 import CompareMain from 'components/Compare/CompareMain';
-import Explore, { EXPLORE_CHART_IDS } from 'components/Explore';
+import Explore from 'components/Explore';
 import { County } from 'common/locations';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
@@ -48,9 +48,7 @@ const ChartsHolder = (props: {
   useEffect(() => {
     const scrollToChart = () => {
       const timeoutId = setTimeout(() => {
-        if (chartId && EXPLORE_CHART_IDS.includes(chartId)) {
-          scrollTo(exploreChartRef.current);
-        } else if (chartId in metricRefs) {
+        if (chartId in metricRefs) {
           const metricRef = metricRefs[(chartId as unknown) as Metric];
           if (metricRef.current) {
             scrollTo(metricRef.current);
@@ -113,10 +111,7 @@ const ChartsHolder = (props: {
               ))}
             </MainContentInner>
             <MainContentInner ref={exploreChartRef}>
-              <Explore
-                projection={props.projections.primary}
-                chartId={chartId}
-              />
+              <Explore fips={props.projections.primary.fips} />
             </MainContentInner>
           </ChartContentWrapper>
           <div ref={shareBlockRef}>

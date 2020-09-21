@@ -1,65 +1,66 @@
-import React, { useState } from 'react';
-import { isUndefined } from 'lodash';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import { ParentSize } from '@vx/responsive';
 import {
   ScreenshotWrapper,
-  ChartWrapper,
   Content,
   Headers,
   LogoHolder,
-  Location,
-  MetricName,
   LastUpdated,
   Url,
+  ExploreTitle,
+  ExploreChartWrapper,
 } from './ChartExportImage.style';
 import LogoUrlLight from 'assets/images/logoUrlLight';
-import { Projections } from 'common/models/Projections';
-import { findCountyByFips } from 'common/locations';
-import { useProjections, useModelLastUpdatedDate } from 'common/utils/model';
-import { Projection } from 'common/models/Projection';
+import { findLocationForFips } from 'common/locations';
+import { useModelLastUpdatedDate } from 'common/utils/model';
 import { formatUtcDate } from 'common/utils';
-import {
-  ExploreChart,
-  getSeries,
-  getTitle,
-  getMetricByChartId,
-} from 'components/Explore';
+import { ExploreChart } from 'components/Explore';
 import { SCREENSHOT_CLASS } from 'components/Screenshot';
+import { Series } from 'components/Explore/interfaces';
+import {
+  getChartSeries,
+  getLocationNames,
+  getMetricName,
+} from 'components/Explore/utils';
 
-const ExploreChartExportImage = () => {
-  let { stateId, countyFipsId, chartId } = useParams();
-  const lastUpdated = useModelLastUpdatedDate();
+const ExploreChartExportImage = ({
+  componentParams,
+}: {
+  componentParams: any;
+}) => {
+  const lastUpdated = useModelLastUpdatedDate()!;
 
-  let projections: Projections | undefined;
-  const [countyOption] = useState(
-    countyFipsId && findCountyByFips(countyFipsId),
+  const currentMetric = componentParams.currentMetric;
+  const currentMetricName = getMetricName(currentMetric);
+  const normalizeData = componentParams.normalizeData;
+  const [selectedLocations] = useState(
+    componentParams.selectedFips.map((fips: string) =>
+      findLocationForFips(fips),
+    ),
   );
-  stateId = stateId || countyOption.state_code;
-  projections = useProjections(stateId, countyOption) as any;
-  if (!projections || !lastUpdated) {
-    return null;
-  }
-  const projection = projections.primary as Projection;
-  const metric = getMetricByChartId(chartId);
+  const [chartSeries, setChartSeries] = useState<Series[]>([]);
+  useEffect(() => {
+    const fetchSeries = () =>
+      getChartSeries(currentMetric, selectedLocations, normalizeData);
+    fetchSeries().then(setChartSeries);
+  }, [selectedLocations, currentMetric, normalizeData]);
 
-  if (isUndefined(metric)) {
-    return <h1>Unknown explore chart: {chartId}!</h1>;
+  if (chartSeries.length === 0) {
+    return null;
   }
 
   const chartHeight = 415;
 
-  let url = `https://covidactnow.org/us/${stateId}`;
-  if (countyOption) {
-    url += `/county/${countyOption.county_url_name}`;
-  }
+  const url = `https://covidactnow.org/`;
 
   return (
     <ScreenshotWrapper className={SCREENSHOT_CLASS}>
       <Content>
         <Headers>
-          <Location>{projection.locationName}</Location>
-          <MetricName>{getTitle(metric)}</MetricName>
+          <ExploreTitle>
+            {currentMetricName} {normalizeData ? 'per 100k population' : ''} in{' '}
+            {getLocationNames(selectedLocations)}
+          </ExploreTitle>
           <LastUpdated>Last updated {formatUtcDate(lastUpdated)} </LastUpdated>
         </Headers>
         <LogoHolder>
@@ -67,19 +68,19 @@ const ExploreChartExportImage = () => {
           <br />
           <LogoUrlLight height={15} />
         </LogoHolder>
-        <ChartWrapper>
+        <ExploreChartWrapper>
           <ParentSize>
             {({ width }) => (
               <ExploreChart
-                seriesList={getSeries(metric, projection)}
+                seriesList={chartSeries}
                 width={width}
                 height={chartHeight}
                 isMobile={false}
-                hasMultipleLocations={false}
+                hasMultipleLocations={selectedLocations.length > 1}
               />
             )}
           </ParentSize>
-        </ChartWrapper>
+        </ExploreChartWrapper>
         <Url>{url}</Url>
       </Content>
     </ScreenshotWrapper>

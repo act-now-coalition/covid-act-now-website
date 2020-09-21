@@ -20,6 +20,15 @@ export const Title = styled.div`
   font-size: 24px;
   line-height: 18px;
   text-transform: capitalize;
+  width: 400px;
+`;
+
+export const ExploreTitle = styled(Title)`
+  font-size: 18px;
+  line-height: 19px;
+  text-transform: capitalize;
+  height: 75px;
+  overflow: hidden;
 `;
 
 export const Subtitle = styled.div`
@@ -34,8 +43,9 @@ export const Subtitle = styled.div`
 `;
 
 export const ChartWrapper = styled.div`
-  margin-left: 60px;
-  margin-top: 25px;
+  position: absolute;
+  left: 60px;
+  top: 88px;
   width: 495px;
   height: 225px;
 
@@ -43,6 +53,11 @@ export const ChartWrapper = styled.div`
   span {
     font-family: 'Roboto' !important;
   }
+`;
+
+export const ExploreChartWrapper = styled(ChartWrapper)`
+  left: 20px;
+  width: 535px;
 `;
 
 export const LogoHolder = styled.div`

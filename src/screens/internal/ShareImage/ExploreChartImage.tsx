@@ -1,59 +1,53 @@
-import React, { useContext, useState } from 'react';
-import { isUndefined } from 'lodash';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { ThemeProvider, ThemeContext } from 'styled-components';
-import { useParams } from 'react-router-dom';
-import { useProjections } from 'common/utils/model';
 import { ParentSize } from '@vx/responsive';
 import LogoDark from 'assets/images/logoDark';
 import { chartDarkMode } from 'assets/theme/palette';
-import { findCountyByFips } from 'common/locations';
-import { Projections } from 'common/models/Projections';
-import { Projection } from 'common/models/Projection';
+import { findLocationForFips } from 'common/locations';
 import { ScreenshotWrapper } from './ShareImage.style';
+import { ExploreChart } from 'components/Explore';
 import {
-  ExploreChart,
-  getSeries,
-  getTitle,
-  getMetricByChartId,
-} from 'components/Explore';
-import {
-  ChartWrapper,
+  ExploreChartWrapper,
   Wrapper,
   Headers,
   LogoHolder,
-  Subtitle,
-  Title,
+  ExploreTitle,
 } from './ChartShareImage.style';
 import { SCREENSHOT_CLASS } from 'components/Screenshot';
+import {
+  getChartSeries,
+  getLocationNames,
+  getMetricName,
+} from 'components/Explore/utils';
+import { Series } from 'components/Explore/interfaces';
 
-const ExploreChartImage = () => {
+const ExploreChartImage = ({ componentParams }: { componentParams: any }) => {
   const theme = useContext(ThemeContext);
-  let { stateId, countyFipsId, chartId } = useParams();
 
-  let projections: Projections | undefined;
-  const [countyOption] = useState(
-    countyFipsId && findCountyByFips(countyFipsId),
+  const currentMetric = componentParams.currentMetric;
+  const currentMetricName = getMetricName(currentMetric);
+  const normalizeData = componentParams.normalizeData;
+  const [selectedLocations] = useState(
+    componentParams.selectedFips.map((fips: string) =>
+      findLocationForFips(fips),
+    ),
   );
-  stateId = stateId || countyOption.state_code;
-  projections = useProjections(stateId, countyOption) as any;
-  if (!projections) {
-    return null;
-  }
-
-  const projection = projections.primary as Projection;
-  const metric = getMetricByChartId(chartId);
-
-  if (isUndefined(metric)) {
-    return <h1>Unknown explore chart: {chartId}!</h1>;
-  }
+  const [chartSeries, setChartSeries] = useState<Series[]>([]);
+  useEffect(() => {
+    const fetchSeries = () =>
+      getChartSeries(currentMetric, selectedLocations, normalizeData);
+    fetchSeries().then(setChartSeries);
+  }, [selectedLocations, currentMetric, normalizeData]);
 
   return (
     <ScreenshotWrapper className={SCREENSHOT_CLASS}>
       <Wrapper>
         <Headers>
-          <Title>{getTitle(metric)}</Title>
-          <Subtitle>{projection.locationName}</Subtitle>
+          <ExploreTitle>
+            {currentMetricName} {normalizeData ? 'per 100k population' : ''} in{' '}
+            {getLocationNames(selectedLocations)}
+          </ExploreTitle>
           <LogoHolder>
             <LogoDark height={35} />
           </LogoHolder>
@@ -64,21 +58,21 @@ const ExploreChartImage = () => {
             palette: { ...theme.palette, chart: chartDarkMode },
           }}
         >
-          <ChartWrapper>
+          <ExploreChartWrapper>
             <ParentSize>
               {({ width }) => (
                 <ExploreChart
-                  seriesList={getSeries(metric, projection)}
+                  seriesList={chartSeries}
                   width={width}
                   height={225}
                   isMobile={false}
                   barOpacity={0.4}
                   barOpacityHover={0.8}
-                  hasMultipleLocations={false}
+                  hasMultipleLocations={selectedLocations.length > 1}
                 />
               )}
             </ParentSize>
-          </ChartWrapper>
+          </ExploreChartWrapper>
         </ThemeProvider>
       </Wrapper>
     </ScreenshotWrapper>

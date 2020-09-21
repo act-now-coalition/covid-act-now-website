@@ -69,16 +69,14 @@ export function getComparePageUrl(
   // location page, so we add on a ?redirectTo= query param to redirect to the
   // right place.
 
-  let url = urlJoin(getPageBaseUrl(), 'compare', compareShareId);
+  let url = urlJoin(getPageBaseUrl(), 'share', compareShareId);
   let params: { [key: string]: unknown } = {};
   ensureSharingIdInQueryParams(params);
-  if (stateId) {
-    params['redirectTo'] = urlJoin(
-      getPagePath(stateId, county),
-      'compare',
-      compareShareId,
-    );
-  }
+  params['redirectTo'] = urlJoin(
+    getPagePath(stateId, county),
+    'compare',
+    compareShareId,
+  );
 
   // NOTE: Trailing '/' is significant so we hit the index.html page with correct meta tags and
   // so we don't get redirected and lose the query params.
@@ -86,7 +84,7 @@ export function getComparePageUrl(
 }
 
 export function getCompareShareImageUrl(compareShareId: string): string {
-  return urlJoin(getShareImageBaseUrl(), 'compare', `${compareShareId}.png`);
+  return urlJoin(getShareImageBaseUrl(), 'share', `${compareShareId}.png`);
 }
 
 /**

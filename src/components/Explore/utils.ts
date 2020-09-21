@@ -18,9 +18,8 @@ import {
   findLocationForFips,
   getLocationNames as getAllLocations,
   getLocationNameForFips,
-  getLocationUrlForFips,
+  getRelativeUrlForFips,
   isStateFips,
-  findStateByFips,
   Location,
 } from 'common/locations';
 import { share_image_url } from 'assets/data/share_images_url.json';
@@ -290,33 +289,25 @@ export function getImageFilename(fips: string, metric: ExploreMetric) {
   return `${sanitizeLocationName(locationName)}-${chartId}-${downloadDate}.png`;
 }
 
-function getRelativeUrl(fips: string) {
-  if (isStateFips(fips)) {
-    const { state_code } = findStateByFips(fips);
-    return `states/${state_code.toLowerCase()}`;
-  } else {
-    return `counties/${fips}`;
-  }
-}
-
 /**
  * Generates the URL of the export images for the given fips code and chart.
  * It needs to be consistent with the path on the share image generation
  * script in `scripts/generate_share_images/index.ts`
  */
-export function getExportImageUrl(fips: string, metric: ExploreMetric) {
-  const chartId = getChartIdByMetric(metric);
-  const relativeUrl = getRelativeUrl(fips);
-  return urlJoin(share_image_url, relativeUrl, `explore/${chartId}/export.png`);
+export function getExportImageUrl(fips: string, sharedComponentId: string) {
+  return urlJoin(share_image_url, `share/${sharedComponentId}/export.png`);
 }
 
-export function getChartUrl(fips: string, metric: ExploreMetric) {
-  const chartId = getChartIdByMetric(metric);
-  const locationUrl = getLocationUrlForFips(fips);
-  const isState = isStateFips(fips);
-  return isState
-    ? `${locationUrl}explore/${chartId}`
-    : `${locationUrl}/explore/${chartId}`;
+export function getChartUrl(fips: string, sharedComponentId: string) {
+  const redirectTo = urlJoin(
+    getRelativeUrlForFips(fips),
+    'explore',
+    sharedComponentId,
+  );
+  const url = urlJoin(window.location.origin, 'share', sharedComponentId);
+  // NOTE: Trailing '/' is significant so we hit the index.html page with correct meta tags and
+  // so we don't get redirected and lose the query params.
+  return `${url}/?redirectTo=${encodeURIComponent(redirectTo)}`;
 }
 
 export function getSocialQuote(fips: string, metric: ExploreMetric) {

@@ -227,7 +227,7 @@ const SingleLocationChart: React.FC<{
           />
         </Fragment>
       )}
-      {width > 0 && <ScreenshotReady />}
+      {width > 0 && seriesList.length > 0 && <ScreenshotReady />}
     </Styles.PositionRelative>
   );
 };
