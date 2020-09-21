@@ -56,6 +56,7 @@ export const BannerContainer = styled.div`
 
   @media (min-width: ${mobileBreakpoint}) {
     margin-top: 2rem;
-    max-width: 640px;
+    // max-width: 640px;
+    max-width: 740px;
   }
 `;
