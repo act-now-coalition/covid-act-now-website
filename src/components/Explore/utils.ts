@@ -290,27 +290,13 @@ export function getImageFilename(fips: string, metric: ExploreMetric) {
   return `${sanitizeLocationName(locationName)}-${chartId}-${downloadDate}.png`;
 }
 
-function getRelativeUrl(fips: string) {
-  if (isStateFips(fips)) {
-    const { state_code } = findStateByFips(fips);
-    return `states/${state_code.toLowerCase()}`;
-  } else {
-    return `counties/${fips}`;
-  }
-}
-
 /**
  * Generates the URL of the export images for the given fips code and chart.
  * It needs to be consistent with the path on the share image generation
  * script in `scripts/generate_share_images/index.ts`
  */
 export function getExportImageUrl(fips: string, sharedComponentId: string) {
-  const relativeUrl = getRelativeUrl(fips);
-  return urlJoin(
-    share_image_url,
-    relativeUrl,
-    `share/${sharedComponentId}/export.png`,
-  );
+  return urlJoin(share_image_url, `share/${sharedComponentId}/export.png`);
 }
 
 export function getChartUrl(fips: string, sharedComponentId: string) {
