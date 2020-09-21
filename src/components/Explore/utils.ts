@@ -20,7 +20,6 @@ import {
   getLocationNameForFips,
   getRelativeUrlForFips,
   isStateFips,
-  findStateByFips,
   Location,
 } from 'common/locations';
 import { share_image_url } from 'assets/data/share_images_url.json';

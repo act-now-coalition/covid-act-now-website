@@ -2,6 +2,7 @@ import { getFirebase } from 'common/firebase';
 import { isEqual, pickBy } from 'lodash';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { assert } from './utils';
 
 const firestore = getFirebase().firestore();
 const collection = firestore.collection('shared-component-params');
@@ -9,7 +10,11 @@ const nextIdDocRef = collection.doc('__nextId');
 
 type Params = { [key: string]: any };
 
-type ComponentName = 'compare' | 'explore';
+export enum SharedComponent {
+  Any = 'any',
+  Compare = 'compare',
+  Explore = 'explore',
+}
 
 // A cache of component params that we have (or are) storing to Firestore. This
 // allows components to be a bit sloppy and call storeSharedComponentParams()
@@ -22,20 +27,22 @@ const storedComponentParams: Array<{
 
 /**
  * Stores the provided params to Firestore (and associates them with the
- * specific componentName).
+ * specified component).
  *
  * Returns an assigned component share ID that will correspond to the stored
  * params going forward.
  */
 export async function storeSharedComponentParams(
-  componentName: ComponentName,
+  component: SharedComponent,
   params: Params,
 ): Promise<string> {
-  // Add the componentName and filter out any undefined values, since Firestore
+  assert(component !== SharedComponent.Any, 'Must specify a valid component');
+
+  // Add the component name and filter out any undefined values, since Firestore
   // doesn't allow them to be written.
   params = pickBy(
     {
-      componentName,
+      component: component,
       ...params,
     },
     v => v !== undefined,
@@ -72,11 +79,10 @@ const fetchedComponentParams: {
 /**
  * Fetches previously stored component params for a particular component share ID.
  *
- * Returns the params if they match the specified componentName (or
- * componentName is undefined), else returns undefined.
+ * Returns the params if they match the specified component, else returns undefined.
  */
 async function fetchSharedComponentParams(
-  componentName: ComponentName | undefined,
+  component: SharedComponent,
   sharedComponentId: string,
 ): Promise<Params | undefined> {
   let cachedParams = fetchedComponentParams[sharedComponentId];
@@ -92,7 +98,7 @@ async function fetchSharedComponentParams(
 
   const params = await cachedParams;
   // Only return the params if they're for the requested component.
-  if (componentName && componentName !== params?.componentName) {
+  if (component !== SharedComponent.Any && component !== params?.component) {
     return undefined;
   } else {
     return params;
@@ -103,11 +109,10 @@ async function fetchSharedComponentParams(
  * React Hook to fetch and return the previously-stored component params for a
  * particular component share ID.
  *
- * Returns the params if they match the specified componentName (or
- * componentName is undefined), else returns undefined.
+ * Returns the params if they match the specified component, else returns undefined.
  */
 export function useSharedComponentParams(
-  componentName: ComponentName | undefined,
+  component: SharedComponent,
 ): Params | undefined {
   const { sharedComponentId } = useParams();
 
@@ -119,7 +124,7 @@ export function useSharedComponentParams(
     if (sharedComponentId) {
       const fetchParams = async () => {
         const params = await fetchSharedComponentParams(
-          componentName,
+          component,
           sharedComponentId,
         );
         if (params && !cancelled) {
@@ -131,7 +136,7 @@ export function useSharedComponentParams(
         cancelled = true;
       };
     }
-  }, [componentName, sharedComponentId]);
+  }, [component, sharedComponentId]);
   return componentParams;
 }
 

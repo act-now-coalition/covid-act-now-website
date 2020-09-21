@@ -41,6 +41,7 @@ import {
 } from './utils';
 import * as Styles from './Explore.style';
 import {
+  SharedComponent,
   storeSharedComponentParams,
   useSharedComponentParams,
 } from 'common/sharing';
@@ -174,7 +175,7 @@ const Explore: React.FunctionComponent<{
   );
 
   const createSharedComponentId = async () => {
-    return storeSharedComponentParams('explore', {
+    return storeSharedComponentParams(SharedComponent.Explore, {
       currentMetric,
       normalizeData,
       selectedFips: selectedLocations.map(
@@ -183,7 +184,7 @@ const Explore: React.FunctionComponent<{
     });
   };
 
-  const sharedParams = useSharedComponentParams('explore');
+  const sharedParams = useSharedComponentParams(SharedComponent.Explore);
   useEffect(() => {
     if (sharedParams) {
       setCurrentMetric(sharedParams.currentMetric);

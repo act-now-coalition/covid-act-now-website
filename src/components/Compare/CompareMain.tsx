@@ -29,6 +29,7 @@ import { countySummary } from 'common/location_summaries';
 import { findCountyByFips } from 'common/locations';
 import { ScreenshotReady } from 'components/Screenshot';
 import {
+  SharedComponent,
   storeSharedComponentParams,
   useSharedComponentParams,
 } from 'common/sharing';
@@ -150,14 +151,14 @@ const CompareMain = (props: {
   };
 
   const createCompareShareId = async () => {
-    return storeSharedComponentParams('compare', uiState);
+    return storeSharedComponentParams(SharedComponent.Compare, uiState);
   };
 
   const [screenshotReady, setScreenshotReady] = useState(false);
 
   // Repopulate state from shared parameters if we're being rendered via a
   // sharing URL.
-  const sharedParams = useSharedComponentParams('compare');
+  const sharedParams = useSharedComponentParams(SharedComponent.Compare);
   useEffect(() => {
     if (sharedParams) {
       const { stateId, countyId } = sharedParams;

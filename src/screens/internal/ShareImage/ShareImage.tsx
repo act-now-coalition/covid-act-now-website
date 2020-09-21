@@ -6,15 +6,15 @@ import ChartExportImage from './ChartExportImage';
 import ExploreChartImage from './ExploreChartImage';
 import ExploreChartExportImage from './ExploreChartExportImage';
 import CompareTableImage from './CompareTableImage';
-import { useSharedComponentParams } from 'common/sharing';
+import { SharedComponent, useSharedComponentParams } from 'common/sharing';
 
 function SharedComponentImage({ exportImage }: { exportImage: boolean }) {
-  const componentParams = useSharedComponentParams(undefined);
+  const componentParams = useSharedComponentParams(SharedComponent.Any);
   if (componentParams) {
-    switch (componentParams['componentName']) {
-      case 'compare':
+    switch (componentParams.component as SharedComponent) {
+      case SharedComponent.Compare:
         return <CompareTableImage />;
-      case 'explore':
+      case SharedComponent.Explore:
         return exportImage ? (
           <ExploreChartExportImage componentParams={componentParams} />
         ) : (
