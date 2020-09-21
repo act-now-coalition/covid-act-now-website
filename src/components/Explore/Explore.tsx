@@ -5,6 +5,7 @@ import React, {
   useRef,
   useCallback,
 } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 import { some, uniq, max } from 'lodash';
 import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -45,7 +46,11 @@ import {
   storeSharedComponentParams,
   useSharedComponentParams,
 } from 'common/sharing';
-import { useLocation, useParams } from 'react-router-dom';
+import {
+  trackSaveImage,
+  trackCopyLink,
+  EventCategory,
+} from 'common/utils/tracking';
 
 const MARGIN_SINGLE_LOCATION = 20;
 const MARGIN_STATE_CODE = 60;
@@ -196,6 +201,10 @@ const Explore: React.FunctionComponent<{
     }
   }, [sharedParams]);
 
+  const trackingLabel = hasMultipleLocations
+    ? `Multiple Locations`
+    : 'Single Location';
+
   return (
     <Styles.Container ref={exploreRef}>
       <Grid container spacing={1}>
@@ -220,6 +229,12 @@ const Explore: React.FunctionComponent<{
               }
               quote={getSocialQuote(fips, currentMetric)}
               hashtags={['COVIDActNow']}
+              onSaveImage={() => {
+                trackSaveImage(EventCategory.EXPLORE, trackingLabel);
+              }}
+              onCopyLink={() => {
+                trackCopyLink(EventCategory.EXPLORE, trackingLabel);
+              }}
             />
           </Styles.ShareBlock>
         </Grid>

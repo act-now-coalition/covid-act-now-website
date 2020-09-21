@@ -25,6 +25,11 @@ import ShareImageButtons from 'components/ShareButtons/ShareButtonGroup';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import { sliderNumberToFilterMap } from 'components/Compare/Filters';
 import { getComparePageUrl, getCompareShareImageUrl } from 'common/urls';
+import {
+  EventCategory,
+  trackCopyLink,
+  trackSaveImage,
+} from 'common/utils/tracking';
 
 const CompareTable = (props: {
   stateName?: string;
@@ -185,6 +190,9 @@ const CompareTable = (props: {
   const getDownloadImageUrl = () =>
     props.createCompareShareId().then(id => `${getCompareShareImageUrl(id)}`);
 
+  // TODO: What is the best way to label here?
+  const trackLabel = 'Compare';
+
   return (
     <Wrapper isModal={props.isModal} isHomepage={props.isHomepage}>
       {!props.isModal && (
@@ -198,6 +206,12 @@ const CompareTable = (props: {
                 url={getShareUrl}
                 quote={shareQuote}
                 hashtags={['COVIDActNow']}
+                onCopyLink={() =>
+                  trackCopyLink(EventCategory.COMPARE, trackLabel)
+                }
+                onSaveImage={() =>
+                  trackSaveImage(EventCategory.COMPARE, trackLabel)
+                }
               />
             </Header>
             {props.stateName && (

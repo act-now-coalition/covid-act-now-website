@@ -29,6 +29,7 @@ import {
   EmbedPrompt,
 } from './ShareBlock.style';
 import { STATES } from 'common';
+import trackEvent, { EventCategory, EventAction } from 'common/utils/tracking';
 
 const ShareBlock = ({
   stateId,
@@ -56,9 +57,7 @@ const ShareBlock = ({
   const hashtag = 'COVIDActNow';
 
   const trackShare = (target: string) => {
-    window.gtag('event', 'share', {
-      event_label: target,
-    });
+    trackEvent(EventCategory.ENGAGEMENT, EventAction.SHARE, target);
   };
 
   const isMatchingProjectionsRoute = matchPath<{
