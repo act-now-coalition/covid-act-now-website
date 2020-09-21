@@ -2,20 +2,19 @@ import React from 'react';
 import {
   BannerContainer,
   Section,
-  CopyContainer,
+  Header,
+  Body,
   ButtonContainer,
   MainButton,
   SecondaryButton,
-  Redirect,
 } from './VoteBanner.style';
-import { useTheme } from '@material-ui/core/styles';
-import { useMediaQuery } from '@material-ui/core';
+import ExternalLink from 'components/ExternalLink';
 
 const renderSecondaryButton = (redirect: string, cta: string, i: number) => {
   const Button = i === 0 ? MainButton : SecondaryButton;
 
   return (
-    <Redirect href={redirect} target="_blank" rel="noopener noreferrer">
+    <ExternalLink href={redirect} key={i}>
       <Button
         variant="contained"
         color="primary"
@@ -24,7 +23,7 @@ const renderSecondaryButton = (redirect: string, cta: string, i: number) => {
       >
         {cta}
       </Button>
-    </Redirect>
+    </ExternalLink>
   );
 };
 
@@ -44,31 +43,23 @@ const VoteBanner = () => {
     },
   ];
 
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
-
   return (
     <BannerContainer>
       <Section>
-        <CopyContainer>
-          <h1>Today is National Voter Registration Day!</h1>
-          <p>
+        <div>
+          <Header>Today is National Voter Registration Day!</Header>
+          <Body>
             We are proud to encourage all U.S. citizens 18 and older to make
             sure their voter registration is current and that you have all the
             info you need.
-          </p>
-        </CopyContainer>
+          </Body>
+        </div>
         <ButtonContainer>
           {buttonsForMap.map((button, i) =>
             renderSecondaryButton(button.redirect, button.cta, i),
           )}
         </ButtonContainer>
       </Section>
-      {!isMobile && (
-        <Section>
-          <img src="/images/misc/usa_flag.png" alt="american flag"></img>
-        </Section>
-      )}
     </BannerContainer>
   );
 };
