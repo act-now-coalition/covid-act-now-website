@@ -16,7 +16,18 @@ const ShareImageButtons: React.FC<{
   quote: string;
   hashtags: string[];
   disabled?: boolean;
-}> = ({ imageUrl, imageFilename, url, quote, hashtags, disabled = false }) => {
+  onSaveImage?: () => void;
+  onCopyLink?: () => void;
+}> = ({
+  imageUrl,
+  imageFilename,
+  url,
+  quote,
+  hashtags,
+  disabled = false,
+  onSaveImage = () => {},
+  onCopyLink = () => {},
+}) => {
   // Turn url / imageUrl into asynchronous getters if they aren't already.
   const getUrl = typeof url === 'string' ? () => Promise.resolve(url) : url;
   const getImageUrl =
@@ -65,6 +76,7 @@ const ShareImageButtons: React.FC<{
               getImageUrl().then(imageUrl =>
                 downloadImage(imageUrl, imageFilename),
               );
+              onSaveImage();
             }}
             disableRipple
             disableFocusRipple
@@ -88,7 +100,10 @@ const ShareImageButtons: React.FC<{
             <FacebookShareButton {...socialSharingProps} />
             <TwitterShareButton {...socialSharingProps} hashtags={hashtags} />
             <LinkedinShareButton {...socialSharingProps} />
-            <CopyLinkButton url={socialSharingProps.url} />
+            <CopyLinkButton
+              url={socialSharingProps.url}
+              onCopyLink={onCopyLink}
+            />
           </SocialButtonsContainer>
         )}
       </div>

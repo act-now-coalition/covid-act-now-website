@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import _ from 'lodash';
+import { find } from 'lodash';
 import {
   useHistory,
   useLocation,
@@ -31,6 +31,7 @@ import { STATES } from 'common';
 import { Location } from 'history';
 import US_STATE_DATASET from '../MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 import * as urls from 'common/urls';
+import { trackShare } from 'common/utils/tracking';
 
 const Panels = ['/', '/about', '/resources', '/blog', '/contact'];
 
@@ -58,7 +59,7 @@ function locationNameFromMatch(
     return state;
   }
 
-  const countyData = _.find(
+  const countyData = find(
     // @ts-ignore TODO(aj): Fix this when features/typescript3 merges
     US_STATE_DATASET.state_county_map_dataset[stateId].county_dataset,
     ['county_url_name', countyId],
@@ -136,12 +137,6 @@ const _AppBar = () => {
     'I’m keeping track of the latest COVID data and risk levels with @CovidActNow. What does your community look like?';
 
   const shareTitle = locationName ? locationShareTitle : defaultShareTitle;
-
-  const trackShare = (target: string) => {
-    window.gtag('event', 'share', {
-      event_label: target,
-    });
-  };
 
   // Track GA pageview whenever a route is pushed.
   history.listen(location => {
