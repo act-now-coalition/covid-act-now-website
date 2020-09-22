@@ -12,6 +12,7 @@ export enum EventCategory {
   COMPARE = 'compare',
   EXPLORE = 'explore',
   ENGAGEMENT = 'engagement',
+  VOTE_2020 = 'vote2020',
 }
 
 /**
@@ -27,6 +28,7 @@ export enum EventAction {
   SHARE = 'share',
   SAVE_IMAGE = 'save image',
   COPY_LINK = 'copy link',
+  CLICK_LINK = 'click link',
 }
 
 /**
@@ -61,4 +63,11 @@ export function trackCopyLink(category: EventCategory, label: string) {
  */
 export function trackShare(label: string) {
   trackEvent(EventCategory.ENGAGEMENT, EventAction.SHARE, label);
+}
+
+/**
+ * All 2020 election related link clicks
+ */
+export function trackVoteClick(label: string) {
+  trackEvent(EventCategory.VOTE_2020, EventAction.CLICK_LINK, label);
 }
