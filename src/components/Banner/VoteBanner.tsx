@@ -49,7 +49,7 @@ const VoteBanner = () => {
       trackLabel: 'Check registration',
     },
     {
-      redirect: 'https://www.vote.org/absentee-ballot/',
+      redirect: 'https://www.vote.org/absentee-voting-rules/',
       cta: 'View mail-in info',
       trackLabel: 'Mail-in',
     },
@@ -63,7 +63,7 @@ const VoteBanner = () => {
           <Body>
             We are proud to encourage all U.S. citizens 18 and older to make
             sure their voter registration is current and that you have all the
-            info you need.
+            information you need.
           </Body>
         </div>
         <ButtonContainer>
