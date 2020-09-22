@@ -212,22 +212,20 @@ const Explore: React.FunctionComponent<{
           <Styles.Heading variant="h4">Trends</Styles.Heading>
           <Styles.Subtitle>
             {currentMetricName} {normalizeData ? 'per 100k population' : ''} in{' '}
-            {getLocationNames(selectedLocations)}
+            {getLocationNames(selectedLocations)}.
           </Styles.Subtitle>
         </Grid>
         <Grid item sm={6} xs={12}>
           <Styles.ShareBlock>
             <ShareImageButtonGroup
               imageUrl={() =>
-                createSharedComponentId().then(id =>
-                  getExportImageUrl(fips, id),
-                )
+                createSharedComponentId().then(id => getExportImageUrl(id))
               }
               imageFilename={getImageFilename(fips, currentMetric)}
               url={() =>
                 createSharedComponentId().then(id => getChartUrl(fips, id))
               }
-              quote={getSocialQuote(fips, currentMetric)}
+              quote={getSocialQuote(selectedLocations, currentMetric)}
               hashtags={['COVIDActNow']}
               onSaveImage={() => {
                 trackSaveImage(EventCategory.EXPLORE, trackingLabel);
