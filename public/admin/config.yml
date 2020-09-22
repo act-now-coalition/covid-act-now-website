@@ -1,0 +1,36 @@
+backend:
+  name: github
+  repo: covid-projections/covid-projections
+  branch: casulin/add-netlify
+
+media_folder: "public/images_cms"
+public_folder: "/images_cms"
+
+collections:
+  - name: 'about'
+    label: 'About'
+    format: 'json'
+    description: 'About page content'
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    files:
+      - name: 'About'
+        label: 'About page content'
+        file: 'src/cms-content/about/about-page.json'
+        fields:
+          - { label: 'Intro: Header', name: 'introHeader', widget: 'string' }
+          - { label: 'Intro: Content', name: 'introContent', widget: 'markdown' }
+          - { label: 'Partners: Header', name: 'partnersHeader', widget: 'string' }
+          - label: 'Partners: Content'
+            name: 'partnersContent'
+            widget: 'list'
+            fields:
+              - { label: 'Section copy', name: 'copy', widget: 'markdown'}
+              - label: 'Logos'
+                name: 'logos'
+                widget: 'list'
+                fields:
+                  - { label: 'Image', name: 'image', widget: 'image'}
+                  - { label: 'Url', name: 'url', widget: 'string'}
+                  - { label: 'Alt text', name: 'altText', widget: 'string'}
