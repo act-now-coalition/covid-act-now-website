@@ -1,11 +1,20 @@
 /** Helpers for dealing with the State / Counties dataset. */
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
-import { each, sortBy, takeRight, has } from 'lodash';
 import urlJoin from 'url-join';
+import {
+  each,
+  sortBy,
+  takeRight,
+  has,
+  partition,
+  isUndefined,
+  toLower,
+} from 'lodash';
 import { assert } from './utils';
 import countyAdjacencyMsa from './data/county_adjacency_msa.json';
 import collegesByFips from './data/colleges_by_fips.json';
 import { REVERSED_STATES } from 'common';
+import { isCounty } from '../components/AutocompleteLocations';
 
 interface AdjacencyData {
   [fips: string]: {
@@ -187,4 +196,39 @@ export function getColleges(fips: string): CollegeData[] {
 
 export function getStateCode(stateName: string) {
   return REVERSED_STATES[stateName];
+}
+
+const ALL_LOCATIONS = getLocationNames();
+const [COUNTIES, STATES] = partition(ALL_LOCATIONS, isCounty);
+
+export function getStateByUrlName(stateUrlName: string): Location | undefined {
+  return STATES.find(
+    state =>
+      toLower(state.state_url_name) === toLower(stateUrlName) ||
+      toLower(state.state_code) === toLower(stateUrlName),
+  );
+}
+
+export function getCountyByUrlName(
+  countyUrlName: string,
+): Location | undefined {
+  return COUNTIES.find(
+    county => toLower(county.county_url_name) === toLower(countyUrlName),
+  );
+}
+
+export function getLocationByUrlParams(
+  stateUrlName: string,
+  countyUrlName?: string,
+): Location | undefined {
+  const location = countyUrlName
+    ? getCountyByUrlName(countyUrlName)
+    : getStateByUrlName(stateUrlName);
+
+  assert(
+    isUndefined(location),
+    `Location for URL params '${stateUrlName}' and '${countyUrlName}' not found`,
+  );
+
+  return location;
 }

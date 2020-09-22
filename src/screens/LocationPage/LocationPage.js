@@ -1,7 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { find } from 'lodash';
 import { useParams } from 'react-router-dom';
-import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020';
 import { MAP_FILTERS } from './Enums/MapFilterEnums';
 import SearchHeader from 'components/Header/SearchHeader';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
@@ -11,31 +9,30 @@ import ChartsHolder from 'components/LocationPage/ChartsHolder';
 import { LoadingScreen } from './LocationPage.style';
 import { useProjections } from 'common/utils/model';
 import { getPageTitle, getPageDescription, getCanonicalUrl } from './utils';
+import { getCountyByUrlName, getStateByUrlName } from 'common/locations';
 
 function LocationPage() {
   let { stateId, countyId, chartId } = useParams();
+  console.log({ stateId, countyId, chartId });
+
+  const state = getStateByUrlName(stateId);
+  const countyOption = countyId && getCountyByUrlName(countyId);
+
   // TODO(igor): don't mix uppercase and lowercase in here
-  stateId = stateId.toUpperCase();
+  const stateCode = state.state_code.toUpperCase();
+  console.log({ stateCode });
 
   const [mapOption, setMapOption] = useState(
-    stateId === MAP_FILTERS.DC ? MAP_FILTERS.NATIONAL : MAP_FILTERS.STATE,
+    stateCode === MAP_FILTERS.DC ? MAP_FILTERS.NATIONAL : MAP_FILTERS.STATE,
   );
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  let countyOption = null;
-
-  if (countyId) {
-    countyOption = find(
-      US_STATE_DATASET.state_county_map_dataset[stateId].county_dataset,
-      ['county_url_name', countyId],
-    );
-  }
   const [selectedCounty, setSelectedCounty] = useState(countyOption);
   useMemo(() => {
     setSelectedCounty(countyOption);
   }, [countyOption]);
 
-  const projections = useProjections(stateId, selectedCounty);
+  const projections = useProjections(stateCode, selectedCounty);
   // Projections haven't loaded yet
   // If a new county has just been selected, we may not have projections
   // for the new county loaded yet
@@ -66,14 +63,14 @@ function LocationPage() {
         />
         <ChartsHolder
           projections={projections}
-          stateId={stateId}
+          stateId={stateCode}
           county={countyOption}
           chartId={chartId}
           countyId={countyId}
         />
         <MiniMap
           projections={projections}
-          stateId={stateId}
+          stateId={stateCode}
           selectedCounty={selectedCounty}
           setSelectedCounty={setSelectedCounty}
           mobileMenuOpen={mobileMenuOpen}
