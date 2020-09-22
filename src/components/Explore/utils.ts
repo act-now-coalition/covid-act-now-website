@@ -294,7 +294,7 @@ export function getImageFilename(fips: string, metric: ExploreMetric) {
  * It needs to be consistent with the path on the share image generation
  * script in `scripts/generate_share_images/index.ts`
  */
-export function getExportImageUrl(fips: string, sharedComponentId: string) {
+export function getExportImageUrl(sharedComponentId: string) {
   return urlJoin(share_image_url, `share/${sharedComponentId}/export.png`);
 }
 
@@ -310,17 +310,17 @@ export function getChartUrl(fips: string, sharedComponentId: string) {
   return `${url}/?redirectTo=${encodeURIComponent(redirectTo)}`;
 }
 
-export function getSocialQuote(fips: string, metric: ExploreMetric) {
-  const locationName = getLocationNameForFips(fips);
+export function getSocialQuote(locations: Location[], metric: ExploreMetric) {
+  const locationName = getLocationNames(locations, /*limit=*/ 5);
   switch (metric) {
     case ExploreMetric.CASES:
-      return `${locationName}’s daily cases, according to @CovidActNow. See the chart: `;
+      return `Daily cases in ${locationName}, according to @CovidActNow. See the chart: `;
     case ExploreMetric.DEATHS:
-      return `${locationName}’s daily deaths, according to @CovidActNow. See the chart: `;
+      return `Daily deaths in ${locationName}, according to @CovidActNow. See the chart: `;
     case ExploreMetric.HOSPITALIZATIONS:
-      return `${locationName}’s hospitalizations, according to @CovidActNow. See the chart: `;
+      return `Hospitalizations in ${locationName}, according to @CovidActNow. See the chart: `;
     case ExploreMetric.ICU_HOSPITALIZATIONS:
-      return `${locationName}’s ICU hospitalizations, according to @CovidActNow. See the chart: `;
+      return `ICU hospitalizations in ${locationName}, according to @CovidActNow. See the chart: `;
   }
   return '';
 }
@@ -372,17 +372,21 @@ function getShortLocationLabel(location: Location) {
     : state_code.toUpperCase();
 }
 
-export function getLocationNames(locations: Location[]) {
+export function getLocationNames(
+  locations: Location[],
+  limit = Number.POSITIVE_INFINITY,
+) {
   if (locations.length === 1) {
     return getLocationLabel(locations[0]);
   }
 
-  const lastLocation = locations[locations.length - 1];
-  const otherLocations = locations.slice(0, locations.length - 1);
+  const labels = locations.map(getLocationLabel);
+  const truncate = labels.length > limit;
+  const [firstLabels, lastLabel] = truncate
+    ? [labels.slice(0, limit), 'more']
+    : [labels.slice(0, labels.length - 1), labels[labels.length - 1]];
 
-  return `${otherLocations
-    .map(getLocationLabel)
-    .join(', ')} and ${getLocationLabel(lastLocation)}.`;
+  return `${firstLabels.join(', ')} and ${lastLabel}`;
 }
 
 /**
