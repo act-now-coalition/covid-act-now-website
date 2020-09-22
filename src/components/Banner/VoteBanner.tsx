@@ -9,8 +9,14 @@ import {
   SecondaryButton,
 } from './VoteBanner.style';
 import ExternalLink from 'components/ExternalLink';
+import { trackVoteClick } from 'common/utils/tracking';
 
-const renderSecondaryButton = (redirect: string, cta: string, i: number) => {
+const renderSecondaryButton = (
+  redirect: string,
+  cta: string,
+  trackLabel: string,
+  i: number,
+) => {
   const Button = i === 0 ? MainButton : SecondaryButton;
 
   return (
@@ -20,6 +26,9 @@ const renderSecondaryButton = (redirect: string, cta: string, i: number) => {
         color="primary"
         disableRipple
         disableFocusRipple
+        onClick={() => {
+          trackVoteClick(trackLabel);
+        }}
       >
         {cta}
       </Button>
@@ -32,14 +41,17 @@ const VoteBanner = () => {
     {
       redirect: 'https://www.vote.org/register-to-vote/',
       cta: 'Register To Vote',
+      trackLabel: 'Register',
     },
     {
       redirect: 'https://www.vote.org/am-i-registered-to-vote/',
       cta: 'Check registration status',
+      trackLabel: 'Check registration',
     },
     {
       redirect: 'https://www.vote.org/absentee-ballot/',
       cta: 'View mail-in info',
+      trackLabel: 'Mail-in',
     },
   ];
 
@@ -56,7 +68,12 @@ const VoteBanner = () => {
         </div>
         <ButtonContainer>
           {buttonsForMap.map((button, i) =>
-            renderSecondaryButton(button.redirect, button.cta, i),
+            renderSecondaryButton(
+              button.redirect,
+              button.cta,
+              button.trackLabel,
+              i,
+            ),
           )}
         </ButtonContainer>
       </Section>
