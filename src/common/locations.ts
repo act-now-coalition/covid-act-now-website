@@ -32,6 +32,7 @@ const COLLEGES: CollegeMap = collegesByFips;
 export interface State {
   state_code: string;
   state: string;
+  state_url_name: string;
   state_fips_code: string;
   population: number;
 }
@@ -57,10 +58,11 @@ export interface Location {
   population: number;
   state_code: string;
   state: string;
+  state_url_name?: string;
 }
 
 export function getLocationNames(): Location[] {
-  const locations = US_STATE_DATASET.state_dataset.map(state => {
+  const locations: Location[] = US_STATE_DATASET.state_dataset.map(state => {
     return {
       ...state,
       full_fips_code: state.state_fips_code,
