@@ -138,16 +138,6 @@ const _AppBar = () => {
 
   const shareTitle = locationName ? locationShareTitle : defaultShareTitle;
 
-  // Track GA pageview whenever a route is pushed.
-  history.listen(location => {
-    // window.gtag('config', 'G-HFCDC7K5G1', {
-    //   page_path: location.pathname,
-    // });
-    // window.gtag('config', 'UA-160622988-1', {
-    //   page_path: location.pathname,
-    // });
-  });
-
   return (
     <StyledAppBar position="sticky">
       <Wrapper>
