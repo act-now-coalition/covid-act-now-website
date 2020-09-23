@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { COLORS } from 'common';
 import { TeamList } from 'screens/About/About';
 import { COLOR_MAP } from 'common/colors';
+import ReactMarkdown from 'react-markdown';
 
 export const Wrapper = styled.div`
   background-color: white;
@@ -65,5 +66,16 @@ export const ActiveAlumniButton = styled.div<{
       teamList === TeamList.Alumni && `3px`};
     color: ${({ teamList }) => teamList === TeamList.Alumni && `black`};
     font-weight: ${({ teamList }) => teamList === TeamList.Alumni && `bold`};
+  }
+`;
+
+/**
+ * For CMS content
+ * Rich-text styles for blocks of markdown:
+ */
+
+export const BodyCopy = styled(ReactMarkdown)`
+  a {
+    color: ${COLOR_MAP.BLUE};
   }
 `;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import ShareBlock from 'components/ShareBlock/ShareBlock';
 import Typography from '@material-ui/core/Typography';
@@ -9,7 +9,7 @@ import StapledSidebar, {
 } from 'components/StapledSidebar/StapledSidebar';
 import TeamTable from './TeamTable/TeamTable';
 import HeadshotGrid, { HeadshotGrid2Up } from './HeadshotGrid/HeadshotGrid';
-import { PartnerLogoGrid } from 'components/LogoGrid/LogoGrid';
+import { LogoGridItem } from 'components/LogoGrid/LogoGrid';
 
 import {
   Wrapper,
@@ -17,7 +17,9 @@ import {
   Header,
   ActiveAlumniButtonContainer,
   ActiveAlumniButton,
+  BodyCopy,
 } from './About.style';
+import { PageType, getContentFile } from 'common/utils/netlify';
 
 const sidebar = (
   <React.Fragment>
@@ -42,6 +44,9 @@ const About = ({ children }: { children: React.ReactNode }) => {
   const [teamList, setTeamList] = useState(TeamList.Active);
   const teamToShow =
     teamList === TeamList.Alumni ? TEAM.teamAlumni : TEAM.teamActive;
+
+  const content = getContentFile(PageType.ABOUT);
+
   return (
     <Wrapper>
       <AppMetaTags
@@ -59,68 +64,27 @@ const About = ({ children }: { children: React.ReactNode }) => {
       <Content>
         <StapledSidebar sidebar={sidebar}>
           <SectionHeader variant="h4" component="h4" id="can">
-            Covid Act Now
+            {content.introHeader}
+          </SectionHeader>
+          <BodyCopy source={content.introContent} linkTarget="_blank" />
+          <SectionHeader variant="h4" component="h4" id="partners">
+            {content.partnersHeader}
           </SectionHeader>
 
-          <Typography variant="body1" component="p">
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://blog.covidactnow.org/covid-modeling-values/"
-            >
-              Guided by common values
-            </a>
-            , Covid Act Now is a multidisciplinary team of technologists,
-            epidemiologists, health experts, and public policy leaders working
-            to provide disease intelligence and data analysis on COVID in the
-            U.S.
-          </Typography>
-          <Typography variant="body1" component="p">
-            We published the first version of our model on March 20. Over 10
-            million Americans have used the model since. We’ve engaged with
-            dozens of federal, state, and local government officials, including
-            the U.S. military and White House, to assist with response planning.
-          </Typography>
-          <SectionHeader variant="h4" component="h4" id="partners">
-            Partners
-          </SectionHeader>
-          <Typography variant="body1" component="p">
-            We work in partnership with the{' '}
-            <a
-              href="https://ghss.georgetown.edu/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Georgetown University Center for Global Health Science and
-              Security
-            </a>
-            ,{' '}
-            <a
-              href="http://med.stanford.edu/cerc.html"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Stanford University Clinical Excellence Research Center
-            </a>
-            ,{' '}
-            <a
-              href="https://grandrounds.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Grand Rounds
-            </a>
-            , and{' '}
-            <a
-              href="https://globalhealth.harvard.edu/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Harvard Global Health Institute
-            </a>
-            .
-          </Typography>
-          <PartnerLogoGrid />
+          {content.partnersContent.map((section: any, i: number) => {
+            return (
+              <Fragment>
+                <BodyCopy source={section.copy} linkTarget="_blank" />
+                {section.logos.map((logo: any, i: number) => (
+                  <LogoGridItem
+                    image={logo.image}
+                    url={logo.url}
+                    altText={logo.altText}
+                  />
+                ))}
+              </Fragment>
+            );
+          })}
 
           <SectionHeader variant="h4" component="h4" id="founders">
             Founders
