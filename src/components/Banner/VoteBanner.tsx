@@ -9,7 +9,7 @@ import {
   SecondaryButton,
 } from './VoteBanner.style';
 import ExternalLink from 'components/ExternalLink';
-import { trackVoteClick } from 'common/utils/tracking';
+import { trackVoteClick } from 'components/Analytics';
 
 const renderSecondaryButton = (
   redirect: string,
