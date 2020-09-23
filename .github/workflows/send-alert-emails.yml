@@ -50,10 +50,11 @@ jobs:
       # Generate / send emails.
       - run: yarn generate-daily-alerts ${{ env.SNAPSHOT_ID }}
       - run: yarn create-lists-to-email alerts.json ${{ env.SNAPSHOT_ID }}
-      - name: Send emails via campaign monitor
+      - name: Send emails
         run: yarn send-emails alerts.json ${{ env.SNAPSHOT_ID }} ${{env.SEND_EMAILS}}
         env:
-          CREATE_SEND_TOKEN: ${{ secrets.CREATE_SEND_TOKEN }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       # Slack notifications.
       - name: Slack notification
