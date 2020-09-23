@@ -13,7 +13,7 @@ const pageTypeToFileMap = {
 };
 
 // Retrives page-specific json file:
-export function getContentFile(
+export function getPageContent(
   pageType: PageType,
 ): { [fieldName: string]: any } {
   return pageTypeToFileMap[pageType];

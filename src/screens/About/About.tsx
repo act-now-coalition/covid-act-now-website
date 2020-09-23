@@ -19,7 +19,7 @@ import {
   ActiveAlumniButton,
   BodyCopy,
 } from './About.style';
-import { PageType, getContentFile } from 'common/utils/netlify';
+import { PageType, getPageContent } from 'common/utils/netlify';
 
 const sidebar = (
   <React.Fragment>
@@ -45,7 +45,7 @@ const About = ({ children }: { children: React.ReactNode }) => {
   const teamToShow =
     teamList === TeamList.Alumni ? TEAM.teamAlumni : TEAM.teamActive;
 
-  const content = getContentFile(PageType.ABOUT);
+  const content = getPageContent(PageType.ABOUT);
 
   return (
     <Wrapper>
