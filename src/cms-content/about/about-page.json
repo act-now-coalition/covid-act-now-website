@@ -10,6 +10,16 @@
           "image": "/images_cms/ghss.png",
           "url": "https://ghss.georgetown.edu/",
           "altText": "Georgetown University logo"
+        },
+        {
+          "altText": "Stanford Medicine Clinical Excellence Research Center logo",
+          "url": "http://med.stanford.edu/cerc.html",
+          "image": "/images_cms/cerc-1.png"
+        },
+        {
+          "url": "https://globalhealth.harvard.edu/",
+          "altText": "Harvard Global Health Institute logo",
+          "image": "/images_cms/harvard.png"
         }
       ]
     },
@@ -20,6 +30,11 @@
           "url": "https://grandrounds.com/",
           "altText": "Grand Rounds logo",
           "image": "/images_cms/grand-rounds.png"
+        },
+        {
+          "url": "https://usafacts.org/",
+          "altText": "USA Facts logo",
+          "image": "/images_cms/usafacts.png"
         }
       ]
     },
