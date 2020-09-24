@@ -44,6 +44,8 @@ export enum EventAction {
   SAVE_IMAGE = 'save image',
   COPY_LINK = 'copy link',
   CLICK_LINK = 'click link',
+  SUBSCRIBE = 'subscribe',
+  ALERTS_UNSUBSCRIBE = 'alertsUnsubscribe',
 }
 
 /**
@@ -53,7 +55,7 @@ export enum EventAction {
 export function trackEvent(
   category: EventCategory,
   action: EventAction,
-  label: string,
+  label?: string,
   value?: number,
   nonInteraction?: boolean,
 ) {

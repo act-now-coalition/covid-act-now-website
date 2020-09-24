@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import theme from 'assets/theme';
+import Grid from '@material-ui/core/Grid';
 
 export const Logo = styled.img`
   width: 100%;
@@ -11,72 +12,23 @@ export const Logo = styled.img`
   }
 `;
 
-export const StyledPressLogoGrid = styled.div`
+export const PressLogoWrapper = styled(Grid)`
+  height: 3.5rem;
   display: flex;
-  align-items: center;
-  margin: 0 0 1.5rem;
-  position: relative;
-  flex-wrap: wrap;
 
-  > div {
-    flex: 1;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  @media (min-width: 900px) {
-    > div {
-      margin-bottom: 0;
-    }
-  }
-`;
-
-export const LogoWrapper = styled.div`
-  text-align: center;
-
-  &:first-child {
-    height: 4.75rem;
-    margin-right: 2rem;
-
-    > img {
-      float: right;
-      margin: 0;
-    }
-  }
-
-  &:last-child {
-    margin-left: 2rem;
-    height: 3rem;
-
-    > img {
-      float: left;
-      margin: 0;
-    }
-  }
-
-  > img {
+  img {
     object-fit: contain;
-    width: auto;
-    margin: 0 auto;
+    width: 100%;
+    margin: auto;
     max-width: 100%;
+    max-width: 240px;
     max-height: 100%;
+    margin: 0.5rem auto;
   }
 
-  @media (max-width: 899px) {
+  @media (min-width: ${theme.breakpoints.down('sm')}) {
     min-width: 34%;
     width: 100%;
-    margin-top: 2rem;
-
-    &:nth-child(2) {
-      order: 3;
-      max-width: 20rem;
-      margin: 2rem auto 0;
-    }
-
-    &:nth-child(3) {
-      order: 2;
-    }
+    margin-top: 2.5rem;
   }
 `;
