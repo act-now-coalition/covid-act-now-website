@@ -2,7 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import ExternalLink from 'components/ExternalLink';
 
-import { StyledPressLogoGrid, Logo, LogoWrapper } from './LogoGrid.style';
+import { Logo, PressLogoWrapper } from './LogoGrid.style';
 
 export const PartnerLogoGrid = () => {
   return (
@@ -54,17 +54,38 @@ export const PartnerLogoGrid = () => {
 };
 
 export const PressLogoGrid = () => {
+  const logos = [
+    {
+      src: '/images/press/nyt.png',
+      alt: 'New York Times logo',
+    },
+    {
+      src: '/images/press/wsj.png',
+      alt: 'The Wall Street Journal logo',
+    },
+    {
+      src: '/images/press/vox.png',
+      alt: 'Vox logo',
+    },
+    {
+      src: '/images/press/forbes.png',
+      alt: 'Forbes logo',
+    },
+    {
+      src: '/images/press/fastcompany.png',
+      alt: 'Fast Company logo',
+    },
+  ];
+
   return (
-    <StyledPressLogoGrid>
-      <LogoWrapper>
-        <Logo src="/images/press/nyt.png" alt="New York Times logo" />
-      </LogoWrapper>
-      <LogoWrapper>
-        <Logo src="/images/press/wsj.png" alt="The Wall Street Journal logo" />
-      </LogoWrapper>
-      <LogoWrapper>
-        <Logo src="/images/press/vox.png" alt="Vox logo" />
-      </LogoWrapper>
-    </StyledPressLogoGrid>
+    <Grid container spacing={1} alignItems="center" justify="center">
+      {logos.map((logo, i) => (
+        <Grid container item xs={12} sm={4} justify="center" key={logo.alt}>
+          <PressLogoWrapper item>
+            <Logo src={logo.src} alt={logo.alt} />
+          </PressLogoWrapper>
+        </Grid>
+      ))}
+    </Grid>
   );
 };
