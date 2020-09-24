@@ -1,6 +1,7 @@
 /** Helpers for dealing with the State / Counties dataset. */
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 import { each, sortBy, takeRight, has } from 'lodash';
+import urlJoin from 'url-join';
 import { assert } from './utils';
 import countyAdjacencyMsa from './data/county_adjacency_msa.json';
 import collegesByFips from './data/colleges_by_fips.json';
@@ -134,6 +135,10 @@ export function getRelativeUrlForFips(fips: string): string {
       county.county_url_name
     }/`;
   }
+}
+
+export function getLocationUrlForFips(fips: string): string {
+  return urlJoin('https://covidactnow.org', getRelativeUrlForFips(fips));
 }
 
 const allCountiesCache: County[] = [];
