@@ -56,24 +56,24 @@ export const PartnerLogoGrid = () => {
 export const PressLogoGrid = () => {
   const logos = [
     {
-      src: '/images/press/nyt.png',
-      alt: 'New York Times logo',
-    },
-    {
       src: '/images/press/wsj.png',
       alt: 'The Wall Street Journal logo',
     },
     {
-      src: '/images/press/vox.png',
-      alt: 'Vox logo',
+      src: '/images/press/fastcompany.png',
+      alt: 'Fast Company logo',
+    },
+    {
+      src: '/images/press/nyt.png',
+      alt: 'New York Times logo',
     },
     {
       src: '/images/press/forbes.png',
       alt: 'Forbes logo',
     },
     {
-      src: '/images/press/fastcompany.png',
-      alt: 'Fast Company logo',
+      src: '/images/press/vox.png',
+      alt: 'Vox logo',
     },
   ];
 

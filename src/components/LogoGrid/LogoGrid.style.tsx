@@ -18,7 +18,7 @@ export const PressLogoWrapper = styled(Grid)`
 
   img {
     object-fit: contain;
-    width: auto;
+    width: 100%;
     margin: auto;
     max-width: 100%;
     max-width: 240px;
