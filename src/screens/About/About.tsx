@@ -57,7 +57,7 @@ const About = ({ children }: { children: React.ReactNode }) => {
       <Header>
         <Content>
           <Typography variant="h3" component="h1">
-            About Covid Act Now
+            {content.pageHeader}
           </Typography>
         </Content>
       </Header>
