@@ -12,6 +12,7 @@ import {
   UpdatePreferencesFormWrapper,
 } from 'screens/AlertUnsubscribe/AlertUnsubscribe.style';
 import { getLocationNames } from 'common/locations';
+import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 
 const unsubscribedCopy =
   'You are now unsubscribed and will no longer receive alerts.';
@@ -55,9 +56,7 @@ const AlertUnsubscribe = () => {
   }, [email]);
 
   async function unsubscribeFromAll() {
-    window.gtag('event', 'alertsUnsubscribe', {
-      event_category: 'engagement',
-    });
+    trackEvent(EventCategory.ENGAGEMENT, EventAction.ALERTS_UNSUBSCRIBE);
     const db = getFirebase().firestore();
     await db.collection('alerts-subscriptions').doc(email).delete();
     setFormSubmittedCopy(unsubscribedCopy);
