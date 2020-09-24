@@ -87,8 +87,9 @@ const LocationTableHead: React.FunctionComponent<{
               <ExpandMoreIcon onClick={() => setSortDescending(true)} />
             </CompareStyles.ArrowContainer>
           </CompareStyles.LocationHeaderCell>
-          {metrics.map(metric => (
+          {metrics.map((metric, i) => (
             <HeaderCell
+              key={`header-cell-${i}`}
               metricInMap={metric}
               sorter={sorter}
               sortDescending={sortDescending}
@@ -124,8 +125,9 @@ const LocationTableBody: React.FunctionComponent<{
 }) => (
   <Table>
     <TableBody>
-      {sortedLocations.map(location => (
+      {sortedLocations.map((location, i) => (
         <CompareTableRow
+          key={`compare-table-row-${i}`}
           sorter={sorter}
           location={location}
           isCurrentCounty={location.rank === currentLocationRank}
