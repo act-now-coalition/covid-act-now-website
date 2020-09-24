@@ -1,81 +1,96 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 import { Grid } from '@material-ui/core';
 
-export const EmbedWrapper = styled.div`
-  height: 800px;
-  margin: 2rem auto;
+export const mobileBreakpoint = '800px';
+
+export const Container = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2.5rem;
+
+  @media (min-width: ${mobileBreakpoint}) {
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 0;
+  }
+
+  svg {
+    font-size: 4rem;
+  }
+`;
+
+/*
+ seemingly random heights are estimates of
+ how tall the iFrame is at each screen size
+ */
+export const EmbedWrapper = styled.div`
+  height: 760px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 1.5rem;
+
+  @media (min-width: ${mobileBreakpoint}) {
+    height: 700px;
+  }
+
+  @media (min-width: ${mobileBreakpoint}) {
+    height: 760px;
+    flex-direction: row-reverse;
+    justify-content: center;
+    padding: 0;
+    max-width: 420px;
+    margin: 2rem;
+    margin-right: 2.5rem;
+  }
 `;
 
 export const ContentWrapper = styled(Grid)`
-  max-width: 1000px;
-  margin: 0 auto;
-  width: unset;
+  margin: 0 1.5rem 1.5rem;
+  max-width: 560px;
+
+  @media (min-width: ${mobileBreakpoint}) {
+    margin: 2rem;
+    margin-left: 2.5rem;
+    max-width: 420px;
+  }
 `;
 
-const BodyCopyStyles = css`
+export const IntroWrapper = styled.div`
+  margin: 2rem 1.5rem 0.75rem;
+  max-width: 560px;
+
+  @media (min-width: ${mobileBreakpoint}) {
+    margin: 0;
+    max-width: unset;
+  }
+`;
+
+export const BodyCopy = styled.p`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   font-size: 15px;
   line-height: 1.4;
 `;
 
-export const BodyCopy = styled.p`
-  ${BodyCopyStyles}
-`;
+export const Header = styled.h1`
+  max-width: 600px;
+  line-height: 1.2;
+  margin: 0;
+  font-size: 1.75rem;
 
-export const GridItem = styled(Grid)`
-  padding: 1.5rem;
-
-  @media (min-width: 600px) {
-    &:first-child {
-      padding: 1rem 1.25rem 1rem 2.5rem;
-    }
-    &:nth-child(2) {
-      padding: 1rem 2.5rem 1rem 1.25rem;
-    }
+  @media (min-width: ${mobileBreakpoint}) {
+    width: fit-content;
+    margin: 1.25rem 0;
+    font-size: 2rem;
   }
 `;
 
 export const SectionHeader = styled.h2`
   font-size: 1.5rem;
   font-weight: bold;
-  margin: 0.75rem 0 1.5rem;
-`;
-
-export const ListHeader = styled.h3`
-  font-size: 15px;
-  text-transform: uppercase;
-  font-weight: bold;
-  margin: 0.5rem 0;
   line-height: 1.4;
-`;
-
-export const ListSection = styled.ul`
-  &:not(:last-child) {
-    margin-bottom: 1.5rem;
-  }
-`;
-
-export const ContentSection = styled.div`
-  li {
-    ${BodyCopyStyles}
-  }
-
-  svg {
-    font-size: 3.25rem;
-  }
-
-  a {
-    color: ${COLOR_MAP.BLUE};
-    text-decoration: none;
-    font-size: 15px;
-  }
-
-  &:first-child {
-    ${BodyCopy} {
-      margin-bottom: 3rem;
-    }
-  }
 `;
