@@ -29,7 +29,7 @@ import {
   EventCategory,
   trackCopyLink,
   trackSaveImage,
-} from 'common/utils/tracking';
+} from 'components/Analytics';
 
 const CompareTable = (props: {
   stateName?: string;

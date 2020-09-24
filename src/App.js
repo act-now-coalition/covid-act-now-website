@@ -10,7 +10,6 @@ import { ThemeProvider as ScThemeProvider } from 'styled-components';
 import LocationPage from 'screens/LocationPage/LocationPage';
 import HomePage from 'screens/HomePage/HomePage';
 import About from 'screens/About/About';
-// import ComingSoon from 'screens/ComingSoon/ComingSoon';
 import Resources, {
   COVID_RESPONSE_SIMULATOR_URL,
 } from 'screens/Resources/Resources';
@@ -31,6 +30,7 @@ import { getFeedbackSurveyUrl } from 'components/Banner';
 import ExternalRedirect from 'components/ExternalRedirect';
 import HandleRedirectTo from 'components/HandleRedirectTo/HandleRedirectTo';
 import Donate from 'screens/Donate/Donate';
+import PageviewTracker from 'components/Analytics';
 
 export default function App() {
   return (
@@ -39,6 +39,7 @@ export default function App() {
         <StylesProvider injectFirst>
           <CssBaseline />
           <BrowserRouter>
+            <PageviewTracker />
             <ScrollToTop />
             <AppBar />
             <Switch>

@@ -31,7 +31,7 @@ import { STATES } from 'common';
 import { Location } from 'history';
 import US_STATE_DATASET from '../MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 import * as urls from 'common/urls';
-import { trackShare } from 'common/utils/tracking';
+import { trackShare } from 'components/Analytics';
 
 const Panels = ['/', '/about', '/resources', '/blog', '/contact'];
 
@@ -137,16 +137,6 @@ const _AppBar = () => {
     'I’m keeping track of the latest COVID data and risk levels with @CovidActNow. What does your community look like?';
 
   const shareTitle = locationName ? locationShareTitle : defaultShareTitle;
-
-  // Track GA pageview whenever a route is pushed.
-  history.listen(location => {
-    window.gtag('config', 'G-HFCDC7K5G1', {
-      page_path: location.pathname,
-    });
-    window.gtag('config', 'UA-160622988-1', {
-      page_path: location.pathname,
-    });
-  });
 
   return (
     <StyledAppBar position="sticky">
