@@ -29,7 +29,7 @@ import {
   EmbedPrompt,
 } from './ShareBlock.style';
 import { STATES } from 'common';
-import trackEvent, { EventCategory, EventAction } from 'common/utils/tracking';
+import { trackShare } from 'components/Analytics';
 
 const ShareBlock = ({
   stateId,
@@ -55,10 +55,6 @@ const ShareBlock = ({
     shareQuote ||
     'I’m keeping track of the latest COVID data and risk levels with @CovidActNow. What does your community look like?';
   const hashtag = 'COVIDActNow';
-
-  const trackShare = (target: string) => {
-    trackEvent(EventCategory.ENGAGEMENT, EventAction.SHARE, target);
-  };
 
   const isMatchingProjectionsRoute = matchPath<{
     id: keyof typeof STATES;

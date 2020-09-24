@@ -50,7 +50,7 @@ import {
   trackSaveImage,
   trackCopyLink,
   EventCategory,
-} from 'common/utils/tracking';
+} from 'components/Analytics';
 
 const MARGIN_SINGLE_LOCATION = 20;
 const MARGIN_STATE_CODE = 60;

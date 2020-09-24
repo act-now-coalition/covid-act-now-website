@@ -1,9 +1,29 @@
+import ReactGA from 'react-ga';
+
+export interface Tracker {
+  trackingId: string;
+  name: string;
+}
+
 /**
- * Utility functions to track user interactions. Categories, actions and labels
- * are critical to generate meaningful reports in Google Analytics.
+ * In the early days of CAN, we used what we now call the "legacy" tracker, but
+ * it wasn't configured correctly, so we created a new 'property', which uses
+ * the same GA account, but collects hits separately (having two trackers won't
+ * duplicate events or page views).
  *
- * Read more: https://support.google.com/analytics/answer/1033068
+ * We are keeping the two trackers to be able to view high-level metrics since
+ * the beginning if we need to, but for day-to-day usage, we should look at
+ * the default tracker.
  */
+export const defaultTracker: Tracker = {
+  trackingId: 'UA-160622988-1',
+  name: 'default',
+};
+
+export const legacyTracker: Tracker = {
+  trackingId: 'G-HFCDC7K5G1',
+  name: 'legacy',
+};
 
 /**
  * Categories represent high-level groups of events in the application.
@@ -12,17 +32,12 @@ export enum EventCategory {
   COMPARE = 'compare',
   EXPLORE = 'explore',
   ENGAGEMENT = 'engagement',
-  VOTE_2020 = 'vote2020',
+  VOTE_2020 = 'vote',
 }
 
 /**
  * Actions represent something that the user does and that we want to track
  * and count.
- *
- * Ideally, it should not depend of the category to allow grouping
- * across categories. For example, we might want to know the number of
- * `save image` events across all the categories, and then drill-down by
- * category.
  */
 export enum EventAction {
   SHARE = 'share',
@@ -35,17 +50,14 @@ export enum EventAction {
  * An event represents a single user interaction. We must trigger a single
  * event per interaction to avoid double counting.
  */
-export default function trackEvent(
+export function trackEvent(
   category: EventCategory,
   action: EventAction,
   label: string,
   value?: number,
+  nonInteraction?: boolean,
 ) {
-  window.gtag('event', action, {
-    event_category: category,
-    event_label: label,
-    value,
-  });
+  ReactGA.event({ category, action, label, value, nonInteraction });
 }
 
 export function trackSaveImage(category: EventCategory, label: string) {
