@@ -19,6 +19,7 @@ collections:
         label: 'About page content'
         file: 'src/cms-content/about/about-page.json'
         fields:
+          - { label: 'Page Header', name: 'pageHeader', widget: 'string' }
           - { label: 'Intro: Header', name: 'introHeader', widget: 'string' }
           - { label: 'Intro: Content', name: 'introContent', widget: 'markdown' }
           - { label: 'Partners: Header', name: 'partnersHeader', widget: 'string' }
@@ -31,6 +32,6 @@ collections:
                 name: 'logos'
                 widget: 'list'
                 fields:
+                  - { label: 'Alt text', name: 'altText', widget: 'string'}
                   - { label: 'Image', name: 'image', widget: 'image'}
                   - { label: 'Url', name: 'url', widget: 'string'}
-                  - { label: 'Alt text', name: 'altText', widget: 'string'}
