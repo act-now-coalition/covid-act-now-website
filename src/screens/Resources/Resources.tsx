@@ -27,7 +27,7 @@ import {
  * message to the user.
  */
 export const COVID_RESPONSE_SIMULATOR_URL =
-  'https://docs.google.com/spreadsheets/u/3/d/1PTBTp8z49IXexkV02wacWLoyv1A2GtlVFYVqI4APPR8/copy#gid=1190280212';
+  'https://docs.google.com/spreadsheets/u/4/d/1vs-OjzBuE96sky-8CNJWLPWnXkJwsDKw5XBejYR5-uk/copy?usp=sharing';
 
 const sidebar = (
   <React.Fragment>
