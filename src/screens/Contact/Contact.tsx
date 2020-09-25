@@ -8,6 +8,7 @@ import StapledSidebar, {
 } from 'components/StapledSidebar/StapledSidebar';
 import { Wrapper, Content, Header } from './Contact.style';
 import ExternalLink from 'components/ExternalLink';
+import { Link } from 'react-router-dom';
 
 const sidebar = (
   <React.Fragment>
@@ -154,11 +155,8 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
           </SectionHeader>
           <Paragraph>
             We are a registered 501c3 non-profit. You can help us keep the
-            lights on by making{' '}
-            <ExternalLink href="https://www.gofundme.com/f/qtcuvy-covid-act-now">
-              a 100% tax-deductible donation to our GoFundMe
-            </ExternalLink>
-            , or{' '}
+            lights on by making a 100% tax-deductible donation{' '}
+            <Link to="/donate">here</Link>, or{' '}
             <ExternalLink href="mailto:info@covidactnow.org">
               emailing us
             </ExternalLink>{' '}

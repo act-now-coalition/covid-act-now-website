@@ -42,7 +42,7 @@ const roadmapListContent = [
     ],
   },
   {
-    sectionHeader: 'Spread truth and reason',
+    sectionHeader: 'Join the fight against COVID',
     copy: 'By keeping us online, you’re also:',
     listItems: [
       'Helping build a shared understand of COVID',
