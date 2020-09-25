@@ -44,6 +44,8 @@ export enum EventAction {
   SAVE_IMAGE = 'save image',
   COPY_LINK = 'copy link',
   CLICK_LINK = 'click link',
+  CLICK = 'click',
+  SELECT = 'select',
 }
 
 /**
