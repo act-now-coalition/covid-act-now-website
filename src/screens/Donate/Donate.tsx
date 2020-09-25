@@ -1,111 +1,87 @@
 import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import { Icon } from '@iconify/react';
-import testTube from '@iconify/icons-twemoji/test-tube';
 import loveLetter from '@iconify/icons-twemoji/love-letter';
-import deliveryTruck from '@iconify/icons-twemoji/delivery-truck';
+import { Icon } from '@iconify/react';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
 import {
-  EmbedWrapper,
+  Container,
   ContentWrapper,
   SectionHeader,
-  ContentSection,
-  ListHeader,
   BodyCopy,
-  ListSection,
-  GridItem,
+  Header,
+  IntroWrapper,
 } from 'screens/Donate/Donate.style';
-import PartnersSection from 'components/PartnersSection/PartnersSection';
+import GiveButterEmbed from 'screens/Donate/GiveButterEmbed';
+
+const Intro = () => {
+  return (
+    <IntroWrapper>
+      <Header>
+        Our data saves lives.
+        <br />
+        Donate to keep us online.
+      </Header>
+      <BodyCopy>
+        We are a tiny, independent non-profit (mostly of volunteers) working
+        relentlessly since March to bring you the most important COVID
+        information.
+      </BodyCopy>
+    </IntroWrapper>
+  );
+};
 
 const roadmapListContent = [
   {
-    header: 'Improve our data quality',
+    sectionHeader: 'Keep the data flowing',
+    copy:
+      'Our resources are running short. By donating you keep us online, so that we can continue:',
     listItems: [
-      'More accurate data',
-      'More transparency of data sources',
-      'Encourage states to adopt better contact tracing data practices',
+      'Improving data quality',
+      'Inspiring more action',
+      'Reaching more people',
     ],
   },
   {
-    header: 'Inspire more action',
+    sectionHeader: 'Join the fight against COVID',
+    copy: 'By keeping us online, you’re also:',
     listItems: [
-      'Localized recommendations for masking, schools, and businesses based on new daily cases and positivity rate',
-      'Localized masking compliance; illustrate impact of increasing compliance',
-      'Continually survey our audience to understand their biggest needs as they change',
-    ],
-  },
-  {
-    header: 'Expand our reach',
-    listItems: [
-      'More educational content so that more people can understand our Warning System',
-      'Closer relationships with high-risk and underserved communities',
-      'More tools for scientists and journalists to help uncover new trends and correlations',
+      'Helping build a shared understand of COVID',
+      'Joining our fight against misinformation',
+      'Leaving a legacy during this generation defining crisis',
     ],
   },
 ];
 
 const Donate = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down(800));
+
   return (
-    <Fragment>
-      <EmbedWrapper>
-        <iframe
-          title="Donate to Covid Act Now on GiveButter"
-          src="https://givebutter.com/embed/c/covidactnow"
-          width="100%"
-          height="100%"
-          style={{ maxWidth: '601px' }}
-          name="givebutter"
-          frameBorder="0"
-          scrolling="auto"
-          seamless
-          data-allowPaymentRequest
-        ></iframe>
-        <script src="https://givebutter.com/js/widget.js"></script>
-      </EmbedWrapper>
-      <ContentWrapper container justify="center">
-        <GridItem item xs={12} sm={6}>
-          <ContentSection>
+    <Container>
+      {isMobile && <Intro />}
+      <GiveButterEmbed />
+      <ContentWrapper>
+        {!isMobile && (
+          <Fragment>
             <Icon icon={loveLetter} />
-            <SectionHeader>How your donation helps</SectionHeader>
-            <BodyCopy>
-              We’re a tiny team working relentlessly to provide free, accessible
-              data to policy makers and the public. We need financial support to
-              pay for our infustructure costs, our small full-time staff, and
-              continue launching new features.
-            </BodyCopy>
-          </ContentSection>
-          <ContentSection>
-            <Icon icon={testTube} />
-            <SectionHeader>Our theory of change</SectionHeader>
-            <BodyCopy>
-              By providing clearer, more accessible, locally-relevant and
-              science-based guidance that the general public and decision-makers
-              can understand, rally behind and communicate, we can advance a
-              more unified and more effective response to COVID in the U.S.
-            </BodyCopy>
-            <Link to="/about">Learn more about us</Link>
-          </ContentSection>
-        </GridItem>
-        <GridItem item xs={12} sm={6}>
-          <ContentSection>
-            <Icon icon={deliveryTruck} />
-            <SectionHeader>Our roadmap</SectionHeader>
-            {roadmapListContent.map((section, i) => {
-              return (
-                <Fragment>
-                  <ListHeader>{section.header}</ListHeader>
-                  <ListSection key={section.header}>
-                    {section.listItems.map((listItem, i) => {
-                      return <li key={`list-item-${i}`}>{listItem}</li>;
-                    })}
-                  </ListSection>
-                </Fragment>
-              );
-            })}
-          </ContentSection>
-        </GridItem>
-        <PartnersSection />
+            <Intro />
+          </Fragment>
+        )}
+        {roadmapListContent.map((item: any, i: number) => (
+          <Fragment>
+            <SectionHeader>{item.sectionHeader}</SectionHeader>
+            <BodyCopy>{item.copy}</BodyCopy>
+            <ul>
+              {item.listItems.map((item: any, i: number) => (
+                <BodyCopy key={item} as="li">
+                  {item}
+                </BodyCopy>
+              ))}
+            </ul>
+          </Fragment>
+        ))}
       </ContentWrapper>
-    </Fragment>
+    </Container>
   );
 };
 
