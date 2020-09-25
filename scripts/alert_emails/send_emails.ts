@@ -112,8 +112,8 @@ async function setLastSnapshotNumber(
     ),
   );
 
-  // HACK: Only do first 50 batches for now, while we are validating the migration to AWS.
-  const emailBatches = _.chunk(emailFipsTuples, BATCH_SIZE).slice(0, 50);
+  // HACK: Only do first 25 batches for now (to send 500 emails), while we are validating the migration to AWS.
+  const emailBatches = _.chunk(emailFipsTuples, BATCH_SIZE).slice(0, 25);
   for (const batch of emailBatches) {
     await Promise.all(
       batch.map(([email, fips]) => sendAlertEmail(email, fips)),
