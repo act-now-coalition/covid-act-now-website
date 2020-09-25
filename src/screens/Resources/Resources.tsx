@@ -196,106 +196,37 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
             API
           </SectionHeader>
           <Typography variant="body1" component="p">
-            We launched the{' '}
-            <a
-              href="https://github.com/covid-projections/covid-data-model/blob/master/api/README.V1.md"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Covid Act Now API
-            </a>{' '}
-            to make the data that powers our model available to anyone, free of
-            charge, under a{' '}
-            <a
-              href="https://creativecommons.org/licenses/by/4.0/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Creative Commons 4.0 license
-            </a>
-            .
+            Looking for all the data that powers our site in a machine-readable
+            format? You can use our API, made for ease-of-use by those wishing
+            to programmatically ingest our data. To gain access, please use this{' '}
+            <ExternalLink href="https://apidocs.covidactnow.org/access">
+              registration form
+            </ExternalLink>{' '}
+            to generate your unique key.
+          </Typography>
+
+          <Typography variant="body1" component="p">
+            Note that our data is licensed under{' '}
+            <ExternalLink href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+              Creative Commons Attribution-NonCommercial-NoDerivatives 4.0
+              International
+            </ExternalLink>
+            . All commercial entities wishing to access our API should contact{' '}
+            <ExternalLink href="mailto:info@covidactnow.org">
+              info@covidactnow.org
+            </ExternalLink>{' '}
+            to acquire a commercial license. We define commercial users as any
+            individual or entity engaged in commercial activities, such as
+            selling goods or services. Our non-commercial users can freely
+            download, use, share, modify, or build upon our source code.
           </Typography>
           <Typography variant="body1" component="p">
-            Specifically, our API exposes:
-          </Typography>
-          <ul>
-            <li>
-              <Typography variant="body1" component="p">
-                <strong>Reported data:</strong> State and county level data for
-                confirmed cases, deaths, and hospital bed capacity. The data is
-                collected from{' '}
-                <a
-                  href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  a number of sources
-                </a>{' '}
-                and is updated daily.
-              </Typography>
-            </li>
-            <li>
-              <Typography variant="body1" component="p">
-                <strong>Forward projections:</strong> State- and county-level
-                projections for hospitalizations and deaths based on several
-                possible interventions. This data is generated from our model.
-              </Typography>
-            </li>
-          </ul>
-          <Typography variant="body1" component="p">
-            In the future, we intend to make more data available, including:
-          </Typography>
-          <ul>
-            <li>
-              <Typography variant="body1" component="p">
-                Additional file formats like shapefiles for GIS systems.
-              </Typography>
-            </li>
-            <li>
-              <Typography variant="body1" component="p">
-                Integrations with data visualization products, such as{' '}
-                <a
-                  href="https://www.tableau.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Tableau
-                </a>
-                .
-              </Typography>
-            </li>
-          </ul>
-          <Typography variant="body1" component="p">
-            In order to safely reopen the country and keep COVID in check, our
-            country must work together in an unprecedented fashion. We hope the
-            data we provide plays a small, positive role. Please use it, adapt
-            it, visualize it, and otherwise have at it!
-          </Typography>
-          <Typography variant="body1" component="p">
-            For more on the API{' '}
-            <a
-              href="https://blog.covidactnow.org/covid-act-now-api-intervention-model/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              see our blog post
-            </a>
-            .
-          </Typography>
-          <SectionHeader variant="h4" component="h2" id="csv-files">
-            CSV Files
-          </SectionHeader>
-          <Typography variant="body1" component="p">
-            If you prefer a spreadsheet to code, we have you covered. See our{' '}
-            <a
-              href="https://blog.covidactnow.org/export-covid-act-now-data-spreadsheet/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              blog post
-            </a>{' '}
-            for full details on how to import our data into Excel or Google
-            Sheets.
+            Please also note that V1.0 of our API will be deprecated on October
+            5, 2020. See our{' '}
+            <ExternalLink href="https://apidocs.covidactnow.org/migration">
+              documentation
+            </ExternalLink>{' '}
+            for migration instructions.
           </Typography>
           <SectionHeader variant="h4" component="h2" id="embed">
             Embed
