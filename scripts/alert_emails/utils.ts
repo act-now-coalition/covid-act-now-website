@@ -5,7 +5,7 @@ import * as Handlebars from 'handlebars';
 import { Alert } from './interfaces';
 import { Level } from '../../src/common/level';
 
-export const ALERT_EMAIL_GROUP_PREFIX = 'Alert Email';
+export const ALERT_EMAIL_GROUP_PREFIX = 'alert-email';
 
 const thermometerBaseURL =
   'https://data.covidactnow.org/thermometer_screenshot';
@@ -79,19 +79,10 @@ export function generateAlertEmailData(
   return {
     Subject: subjectLine,
     To: [emailAddress],
-    CC: null,
-    BCC: null,
-    Attachments: null,
     Html: htmlContent,
-    Text: htmlContent,
-    AddRecipientsToList: null,
     From: 'Covid Act Now Alerts <noreply@covidactnow.org>',
     ReplyTo: 'noreply@covidactnow.org',
-    TrackOpens: true,
-    TrackClicks: true,
-    InlineCSS: true,
-    Group: `${ALERT_EMAIL_GROUP_PREFIX} - ${toISO8601(new Date())}`,
-    ConsentToTrack: 'Unchanged',
+    Group: `${ALERT_EMAIL_GROUP_PREFIX}_${toISO8601(new Date())}`,
   };
 }
 
