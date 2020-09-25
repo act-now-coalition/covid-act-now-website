@@ -1,3 +1,5 @@
+// TODO(michael): This script no longer works since we switched to AWS Simple Email Service. :~(
+
 import path from 'path';
 import _ from 'lodash';
 import CampaignMonitor, {

@@ -1,12 +1,18 @@
 # Email Alerting
 
-The general process for email alerting is as follows
+CAN sends email alerts to subscribed users notifying them when states/counties change risk levels. These are automated via a github workflow (see .github/workflows/send-alert-emails.yml).
 
-1. Generate the locations that need to be alerted on
-2. Get the users who need to be sent alerts (and write them to firestore)
-3. Read the users from firestore and send them an email
+The workflow works by running the following 3 scripts:
+1. **generate_daily_alerts.ts** - Given a snapshot ID, it compares the alert
+   levels of states/counties against the last time alerts were sent and
+   generates an alerts.json file with the changes.
+2. **create_lists_to_email.ts** - Writes documents to Firestore indicating
+   all of the users for each location that need to be sent an email alert.
+3. **send_emails.ts** - Sends the actual emails to users, updating their
+   entry in Firestore after each one to indicate that it's complete.
 
-We use handlebars to generate the email and send it via CreateSend.
+We use handlebars to generate the email from template.html and then send it
+using AWS Simple Email Service.
 
 ## Sending the Alerts via Github Actions
 
@@ -27,20 +33,20 @@ Go into firestore and check that the locations seem correct (make sure that loca
 
 Before running the alerting emails, to ensure you receive an alert, you can add yourself to one of the locations scheduled to receive an alert by adding a document with your email and a sentAt value of null.
 
-Then send the emails via the github action run:
+Then to send the emails via the github action run:
 
 ```bash
 tools/send-alert-emails.sh <snapshot> <prod|staging|dev> true
 ```
 
-You can check via campaign monitor that all the emails sent by going to the transactional email tab and clicking ungrouped emails (you should be able to view an example email and see the long list of receipents).
+The github action should complete in 20 minutes or so and list the number of emails sent in the logs.
 
 ## Running the alerts scripts manually
 
 ### Signing up for the correct things
 
-1. You will need to be able to access the campaign monitor api key to send messages (so ask an admin to get access to it)
-2. You will also need to be able to access the firestore console so ask for aceess to that
+1. You will need to be able to use AWS Simple Email Service. There's an API key here: https://docs.google.com/document/d/1LJkCgikoTByi3xKF87f9nA6X2DwiMwa_FFk_CFa8Feo/edit
+2. You will also need to be able to access the firestore console so ask for access to that.
 3. If you are testing locally, you can use the covidactnow-dev service account found here: https://docs.google.com/document/d/1YoZUzmy6rYXwO1VSMrHklcD7pdCCLaOkGG-1kLwZpsg/
 
 ### To manually generate the alerts diffing
@@ -58,24 +64,10 @@ You can check via campaign monitor that all the emails sent by going to the tran
 1. If you have run the above steps and have users signed up for emails in the following locations you can run `yarn send-emails alerts.json 497 true <youremail>` which will send the emails to those users on dev.
 2. You can also passin an extra param `yarn send-emails alerts.json 497 true <youremail>` which will send all the emails to one email address for testing.
 
-## Testing Email HTMLs
+## Testing Email HTML
 
 In order to test out the emails and see what they look like:
 
-1. Open template.html in your local browser to get a good sense of
-2. Get the environment key from [campaign monitor](https://covidactnow.createsend.com/admin/account/apikeys)
-   (choose the top Covid Act Now from the list in the table) and run
-   `export CREATE_SEND_TOKEN=<api_token>`
-3. Once your local browers looks good comment out the lines in
-   the send_emails.ts that writes the sent_at to firestore. (commented in the code)
-4. Run
-
-   ```bash
-   echo "{"11":{"fips":"11","locationName":"District of Columbia","locationURL":"https://covidactnow.org/us/dc/","lastUpdated":"06/26/2020","oldLevel":2,"newLevel":3}" > alerts.json
-   ```
-
-   or generate the alerts.json via running the command `yarn generate-daily-alerts <new_snapshot>`
-
-5. Update the firstore dev instance https://console.firebase.google.com/project/covidactnow-dev/database/firestore/data~2Fsnapshots~2F497~2Flocations~2F11~2Femails
-   and add a document with your email as the id and field `sentAt` to be null
-6. Run the command `yarn send-emails alerts.json 497 true` to send the email to yourself
+1. Open template.html in your local browser to get a good sense of what it looks like.
+2. Set the environment variables for a valid AWS access key (see https://docs.google.com/document/d/1LJkCgikoTByi3xKF87f9nA6X2DwiMwa_FFk_CFa8Feo/edit).
+3. Run: `yarn send-test-email <your-email>`

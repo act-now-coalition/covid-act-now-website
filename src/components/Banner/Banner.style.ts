@@ -16,11 +16,11 @@ export const MainContainer = styled(Grid)`
   /* TODO(pablo): Get from theme */
   font-family: Roboto;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 140%;
   color: #fff;
 
-  font-size: 18px;
+  font-size: 14px;
   text-align: center;
   justify-content: center;
   border-radius: 0;
