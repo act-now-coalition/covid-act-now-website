@@ -155,8 +155,9 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
           </SectionHeader>
           <Paragraph>
             We are a registered 501c3 non-profit. You can help us keep the
-            lights on by making a 100% tax-deductible donation{' '}
-            <Link to="/donate">here</Link>, or{' '}
+            lights on by{' '}
+            <Link to="/donate">making a 100% tax-deductible donation here</Link>
+            , or{' '}
             <ExternalLink href="mailto:info@covidactnow.org">
               emailing us
             </ExternalLink>{' '}

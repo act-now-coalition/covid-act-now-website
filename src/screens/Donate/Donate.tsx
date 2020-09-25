@@ -73,7 +73,9 @@ const Donate = () => {
             <BodyCopy>{item.copy}</BodyCopy>
             <ul>
               {item.listItems.map((item: any, i: number) => (
-                <BodyCopy as="li">{item}</BodyCopy>
+                <BodyCopy key={item} as="li">
+                  {item}
+                </BodyCopy>
               ))}
             </ul>
           </Fragment>
