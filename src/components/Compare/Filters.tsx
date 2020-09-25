@@ -36,12 +36,6 @@ export const sliderNumberToFilterMap: { [val: number]: GeoScopeFilter } = {
   99: GeoScopeFilter.COUNTRY,
 };
 
-const trackingGeoScopeLabel = {
-  [GeoScopeFilter.NEARBY]: 'Nearby',
-  [GeoScopeFilter.STATE]: 'State',
-  [GeoScopeFilter.COUNTRY]: 'Country',
-};
-
 const Filters = (props: {
   isHomepage?: boolean;
   setCountyTypeToView: React.Dispatch<React.SetStateAction<MetroFilter>>;
@@ -123,7 +117,7 @@ const Filters = (props: {
       props.setGeoScope(sliderNumberToFilterMap[value]);
       trackCompareEvent(
         EventAction.SELECT,
-        `GeoScope: ${trackingGeoScopeLabel[sliderNumberToFilterMap[value]]}`,
+        `GeoScope: ${GeoScopeFilter[sliderNumberToFilterMap[value]]}`,
       );
     }
   };
