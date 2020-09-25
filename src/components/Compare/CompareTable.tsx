@@ -19,17 +19,14 @@ import {
   getAbbreviatedCounty,
   getShareQuote,
   getMetroPrefixCopy,
+  trackCompareEvent,
 } from 'common/utils/compare';
 import { COLOR_MAP } from 'common/colors';
 import ShareImageButtons from 'components/ShareButtons/ShareButtonGroup';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import { sliderNumberToFilterMap } from 'components/Compare/Filters';
 import { getComparePageUrl, getCompareShareImageUrl } from 'common/urls';
-import {
-  EventCategory,
-  trackCopyLink,
-  trackSaveImage,
-} from 'components/Analytics';
+import { EventAction } from 'components/Analytics';
 
 const CompareTable = (props: {
   stateName?: string;
@@ -207,10 +204,10 @@ const CompareTable = (props: {
                 quote={shareQuote}
                 hashtags={['COVIDActNow']}
                 onCopyLink={() =>
-                  trackCopyLink(EventCategory.COMPARE, trackLabel)
+                  trackCompareEvent(EventAction.COPY_LINK, trackLabel)
                 }
                 onSaveImage={() =>
-                  trackSaveImage(EventCategory.COMPARE, trackLabel)
+                  trackCompareEvent(EventAction.SAVE_IMAGE, trackLabel)
                 }
               />
             </Header>
