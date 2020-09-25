@@ -2,7 +2,7 @@ import _ from 'lodash';
 import admin from 'firebase-admin';
 import path from 'path';
 import { getFirestore } from './firestore';
-import CampaignMonitor, { isInvalidEmailError } from './campaign-monitor';
+import EmailService, { isInvalidEmailError } from './email-service';
 import { generateAlertEmailData, readAlerts } from './utils';
 
 const BATCH_SIZE = 20;
@@ -38,7 +38,7 @@ async function setLastSnapshotNumber(
   const uniqueEmailAddress: { [email: string]: number } = {};
   const locationsWithEmails: { [fips: string]: number } = {};
 
-  const createSend = new CampaignMonitor(process.env.CREATE_SEND_TOKEN);
+  const emailService = new EmailService();
 
   const db = getFirestore();
   const locations = Object.keys(alertsByLocation);
@@ -91,7 +91,7 @@ async function setLastSnapshotNumber(
     }
 
     try {
-      await createSend.sendClassicEmail(sendData);
+      await emailService.sendEmail(sendData);
       await onEmailSent(email, fips);
     } catch (err) {
       if (isInvalidEmailError(err)) {
@@ -112,7 +112,8 @@ async function setLastSnapshotNumber(
     ),
   );
 
-  const emailBatches = _.chunk(emailFipsTuples, BATCH_SIZE);
+  // HACK: Only do first 25 batches for now (to send 500 emails), while we are validating the migration to AWS.
+  const emailBatches = _.chunk(emailFipsTuples, BATCH_SIZE).slice(0, 25);
   for (const batch of emailBatches) {
     await Promise.all(
       batch.map(([email, fips]) => sendAlertEmail(email, fips)),

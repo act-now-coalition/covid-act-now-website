@@ -5,6 +5,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import { getLocationNames } from 'common/locations';
 import { getFirebase, firebase } from 'common/firebase';
+import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 
 // Taken from https://ui.dev/validate-email-address-javascript/
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -27,10 +28,7 @@ class Newsletter extends React.Component {
     // can't submit the form without the email entered and email that is valid
     if (this.state.email && EMAIL_REGEX.test(this.state.email)) {
       await this.subscribeToAlerts();
-
-      window.gtag('event', 'subscribe', {
-        event_category: 'engagement',
-      });
+      trackEvent(EventCategory.ENGAGEMENT, EventAction.SUBSCRIBE);
       let url = new URL('https://createsend.com/t/getsecuresubscribelink');
       url.searchParams.append('email', this.emailInput.value);
       url.searchParams.append('data', this.form.getAttribute('data-id'));

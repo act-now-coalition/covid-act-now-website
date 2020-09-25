@@ -17,29 +17,38 @@ const Announcements = () => {
     <Wrapper>
       <AnnouncementsSectionHeader>Announcements</AnnouncementsSectionHeader>
       <AnnouncementIntro>
-        Introducing Northern Mariana Islands and Puerto Rico to our COVID Risk
-        Mapping
+        Introducing v2 of the Covid Act Now API
       </AnnouncementIntro>
-      <Date>WEDNESDAY, Sept 9, 2020</Date>
+      <Date>THURSDAY, Sept 24, 2020</Date>
       <AnnouncementBodyCopy>
-        We are happy to announce the launch of two U.S. territories, Northern
-        Mariana Islands and Puerto Rico, in our U.S. Coverage Map! We believe
-        that this is an important development given that U.S. territories are
-        affected by American public policy and COVID. Until now, there were no
-        visualizations for county-level COVID data for either territory. To
-        learn more read{' '}
-        <ExternalLink href="https://blog.covidactnow.org/introducing-puerto-rico-covid-mapping-to-our-u-s-coverage/">
-          Puerto Rico's launch
+        We are excited to announce{' '}
+        <ExternalLink href="https://apidocs.covidactnow.org">
+          v2 of our API
+        </ExternalLink>
+        . It provides all of the same data that powers Covid Act Now, but now in
+        a machine-readable format, made for ease-of-use by those wishing to
+        programmatically ingest our data. To gain access, please use this{' '}
+        <ExternalLink href="https://apidocs.covidactnow.org/access">
+          registration form
         </ExternalLink>{' '}
-        and{' '}
-        <ExternalLink href="https://blog.covidactnow.org/introducing-northern-mariana-islands-to-the-u-s-covid-coverage-map/">
-          Northern Mariana Islands' launch
+        to generate your unique key.
+        <br />
+        <br />
+        Please note that daily updates to v1 of our API will end on 10/5/2020.
+        See our{' '}
+        <ExternalLink href="https://apidocs.covidactnow.org/migration">
+          documentation
+        </ExternalLink>{' '}
+        for migration instructions. For a customizable Google Spreadsheet
+        version of our model, see{' '}
+        <ExternalLink href="https://covidactnow.org/resources/">
+          here
         </ExternalLink>
         .
       </AnnouncementBodyCopy>
       <ButtonsContainer>
         <ReadMoreButton
-          href="https://blog.covidactnow.org/introducing-northern-mariana-islands-to-the-u-s-covid-coverage-map/"
+          href="https://apidocs.covidactnow.org/"
           target="_blank"
           rel="noopener"
         >

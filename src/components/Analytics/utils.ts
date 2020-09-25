@@ -46,6 +46,8 @@ export enum EventAction {
   CLICK_LINK = 'click link',
   CLICK = 'click',
   SELECT = 'select',
+  SUBSCRIBE = 'subscribe',
+  ALERTS_UNSUBSCRIBE = 'alertsUnsubscribe',
 }
 
 /**
@@ -55,7 +57,7 @@ export enum EventAction {
 export function trackEvent(
   category: EventCategory,
   action: EventAction,
-  label: string,
+  label?: string,
   value?: number,
   nonInteraction?: boolean,
 ) {

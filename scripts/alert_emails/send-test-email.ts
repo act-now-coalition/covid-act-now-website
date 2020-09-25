@@ -1,15 +1,14 @@
 /**
  * Send an alert email to a single email address, using the locationAlert
- * data hardcoded below. Make sure that the CREATE_SEND_TOKEN
- * environment variable is set before sending the email.
+ * data hardcoded below. Make sure that the AWS_ACCESS_KEY_ID and
+ * AWS_SECRET_ACCESS_KEY environment variables are set before sending the email.
  *
  * Example:
  *
- *    $ export CREATE_SEND_TOKEN=<token here>
  *    $ yarn send-test-email pablo@covidactnow.org
  */
 
-import CampaignMonitor, { isInvalidEmailError } from './campaign-monitor';
+import EmailService, { isInvalidEmailError } from './email-service';
 import { Alert } from './interfaces';
 import { generateAlertEmailData } from './utils';
 
@@ -23,10 +22,10 @@ const locationAlert: Alert = {
 };
 
 async function main(emailAddress: string) {
-  const cm = new CampaignMonitor(process.env.CREATE_SEND_TOKEN);
+  const emailService = new EmailService();
   const data = generateAlertEmailData(emailAddress, locationAlert);
   try {
-    await cm.sendClassicEmail(data);
+    await emailService.sendEmail(data);
     console.info(`Email sent to ${emailAddress}.`);
   } catch (err) {
     if (isInvalidEmailError(err)) {
