@@ -31,9 +31,12 @@ const Announcements = () => {
         <ExternalLink href="https://apidocs.covidactnow.org/access">
           registration form
         </ExternalLink>{' '}
-        to generate your unique key. Please note that daily updates to v1 of our
-        API will end on 10/5/2020. See our{' '}
-        <ExternalLink href="https://apidocs.covidactnow.org/migrate">
+        to generate your unique key.
+        <br />
+        <br />
+        Please note that daily updates to v1 of our API will end on 10/5/2020.
+        See our{' '}
+        <ExternalLink href="https://apidocs.covidactnow.org/migration">
           documentation
         </ExternalLink>{' '}
         for migration instructions. For a customizable Google Spreadsheet
