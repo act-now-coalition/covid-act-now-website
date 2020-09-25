@@ -46,15 +46,15 @@ import {
   storeSharedComponentParams,
   useSharedComponentParams,
 } from 'common/sharing';
-import {
-  trackSaveImage,
-  trackCopyLink,
-  EventCategory,
-} from 'components/Analytics';
+import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 
 const MARGIN_SINGLE_LOCATION = 20;
 const MARGIN_STATE_CODE = 60;
 const MARGIN_COUNTY = 120;
+
+function trackExploreEvent(action: EventAction, label: string, value?: number) {
+  trackEvent(EventCategory.EXPLORE, action, label, value);
+}
 
 function getMarginRight(
   showLabels: boolean,
@@ -85,6 +85,7 @@ const Explore: React.FunctionComponent<{
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isMobileXs = useMediaQuery(theme.breakpoints.down('xs'));
+  const metricLabels = getMetricLabels();
 
   const { sharedComponentId } = useParams();
   let defaultMetric = ExploreMetric.CASES;
@@ -97,9 +98,22 @@ const Explore: React.FunctionComponent<{
 
   const [normalizeData, setNormalizeData] = useState(false);
 
-  const onChangeTab = (newMetric: number) => setCurrentMetric(newMetric);
+  const onChangeTab = (newMetric: number) => {
+    const newMetricName = metricLabels[newMetric];
+    setCurrentMetric(newMetric);
+    trackExploreEvent(EventAction.SELECT, `Metric: ${newMetricName}`);
+  };
 
-  const metricLabels = getMetricLabels();
+  const onClickNormalize = () => {
+    const newNormalizeData = !normalizeData;
+    setNormalizeData(newNormalizeData);
+    trackExploreEvent(
+      EventAction.SELECT,
+      'Normalize Data',
+      newNormalizeData ? 1 : 0,
+    );
+  };
+
   const currentMetricName = getMetricName(currentMetric);
 
   const currentLocation = useMemo(() => findLocationForFips(fips), [fips]);
@@ -121,6 +135,12 @@ const Explore: React.FunctionComponent<{
       // if switching from single to multiple locations, enable normalization
       setNormalizeData(true);
     }
+
+    const eventLabel =
+      selectedLocations.length < newLocations.length
+        ? 'Adding Location'
+        : 'Removing Location';
+    trackExploreEvent(EventAction.SELECT, eventLabel, newLocations.length);
 
     // make sure that the current location is always selected
     setSelectedLocations(changedLocations);
@@ -228,10 +248,18 @@ const Explore: React.FunctionComponent<{
               quote={getSocialQuote(selectedLocations, currentMetric)}
               hashtags={['COVIDActNow']}
               onSaveImage={() => {
-                trackSaveImage(EventCategory.EXPLORE, trackingLabel);
+                trackExploreEvent(
+                  EventAction.SAVE_IMAGE,
+                  trackingLabel,
+                  selectedLocations.length,
+                );
               }}
               onCopyLink={() => {
-                trackCopyLink(EventCategory.EXPLORE, trackingLabel);
+                trackExploreEvent(
+                  EventAction.COPY_LINK,
+                  trackingLabel,
+                  selectedLocations.length,
+                );
               }}
             />
           </Styles.ShareBlock>
@@ -267,9 +295,7 @@ const Explore: React.FunctionComponent<{
                   control={
                     <Styles.NormalizeCheckbox
                       checked={normalizeData}
-                      onChange={() => {
-                        setNormalizeData(!normalizeData);
-                      }}
+                      onChange={onClickNormalize}
                       name="normalize data"
                       disableRipple
                       id="normalize-data-control"

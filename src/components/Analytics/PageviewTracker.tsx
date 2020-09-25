@@ -8,12 +8,10 @@ import { defaultTracker, legacyTracker } from './utils';
  * Initialize Google Analytics
  */
 function initializeGA() {
-  const options = { titleCase: false, debug: false };
-  ReactGA.initialize(defaultTracker.trackingId, options);
+  ReactGA.initialize(defaultTracker.trackingId);
   ReactGA.addTrackers([
     {
       trackingId: legacyTracker.trackingId,
-      ...options,
       gaOptions: { name: legacyTracker.name },
     },
   ]);

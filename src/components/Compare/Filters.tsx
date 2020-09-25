@@ -9,13 +9,13 @@ import {
   useMediaQuery,
 } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
-
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {
   MetroFilter,
   getFilterLabel,
   GeoScopeFilter,
+  trackCompareEvent,
 } from 'common/utils/compare';
 import {
   Container,
@@ -27,9 +27,10 @@ import {
   MetroMenuPopper,
   SwitchLabel,
 } from 'components/Compare/Filters.style';
+import { EventAction } from 'components/Analytics';
 
 // Maps each numerical slider value to its corresponding GeoScopeFilter
-export const sliderNumberToFilterMap: any = {
+export const sliderNumberToFilterMap: { [val: number]: GeoScopeFilter } = {
   0: GeoScopeFilter.NEARBY,
   50: GeoScopeFilter.STATE,
   99: GeoScopeFilter.COUNTRY,
@@ -101,7 +102,12 @@ const Filters = (props: {
 
   const switchHandleChange = () => {
     if (props.isHomepage && props.setViewAllCounties) {
-      props.setViewAllCounties(!props.viewAllCounties);
+      const newViewAllCounties = !props.viewAllCounties;
+      props.setViewAllCounties(newViewAllCounties);
+      trackCompareEvent(
+        EventAction.SELECT,
+        `Location Type: ${newViewAllCounties ? 'Counties' : 'States'}`,
+      );
     }
   };
 
@@ -109,6 +115,10 @@ const Filters = (props: {
     if (props.setGeoScope) {
       setSliderValue(value);
       props.setGeoScope(sliderNumberToFilterMap[value]);
+      trackCompareEvent(
+        EventAction.SELECT,
+        `GeoScope: ${GeoScopeFilter[sliderNumberToFilterMap[value]]}`,
+      );
     }
   };
 
@@ -125,6 +135,10 @@ const Filters = (props: {
 
   const metroMenuItemOnClick = (filterType: MetroFilter, event: any) => {
     setCountyTypeToView(filterType);
+    trackCompareEvent(
+      EventAction.SELECT,
+      `Metro Filter: ${getFilterLabel(filterType)}`,
+    );
     setOpen(false);
   };
 
@@ -214,6 +228,7 @@ const Filters = (props: {
                     {typeFiltersForMap.map(filter => {
                       return (
                         <MenuItem
+                          key={filter.type}
                           disableRipple
                           onClick={event =>
                             metroMenuItemOnClick(filter.type, event)

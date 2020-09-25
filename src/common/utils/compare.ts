@@ -10,6 +10,15 @@ import { stateSummary, countySummary } from 'common/location_summaries';
 import { LocationSummary } from 'common/location_summaries';
 import { Metric, getMetricNameForCompare } from 'common/metric';
 import { isNumber } from 'lodash';
+import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
+
+export function trackCompareEvent(
+  action: EventAction,
+  label: string,
+  value?: number,
+) {
+  trackEvent(EventCategory.COMPARE, action, label, value);
+}
 
 export interface SummaryForCompare {
   locationInfo: Location;
