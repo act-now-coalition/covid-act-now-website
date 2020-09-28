@@ -28,12 +28,18 @@ import {
   EmbedSubheader,
 } from './Embed.style';
 import SocialLocationPreview from 'components/SocialLocationPreview/SocialLocationPreview';
+import {
+  getCountyByUrlName,
+  getStateByUrlName,
+  getCanonicalUrl,
+} from 'common/locations';
 
 function LocationEmbed() {
   const { stateId: _location, countyId, countyFipsId } = useParams();
 
   const [selectedCounty, setSelectedCounty] = useState(null);
   const [location, setLocation] = useState(null);
+
   useMemo(() => {
     let state = null,
       county = null;
@@ -41,12 +47,10 @@ function LocationEmbed() {
       county = findCountyByFips(countyFipsId);
       state = county?.state_code;
     } else {
-      state = _location.toUpperCase();
+      const stateInfo = getStateByUrlName(_location);
+      state = stateInfo.state_code.toUpperCase();
       if (countyId) {
-        county = _.find(
-          US_STATE_DATASET.state_county_map_dataset[state].county_dataset,
-          ['county_url_name', countyId],
-        );
+        county = getCountyByUrlName(countyId);
       }
     }
 
@@ -67,12 +71,9 @@ function LocationEmbed() {
   const fillColor =
     alarmLevel !== Level.UNKNOWN ? levelInfo.color : COLOR_MAP.GRAY.LIGHT;
 
+  const canonicalUrl = getCanonicalUrl(projections.fips);
   const embedOnClickBaseURL = projections
-    ? `https://covidactnow.org/us/${location.toLowerCase()}${
-        projections.isCounty
-          ? `/county/${projections.county.county_url_name}`
-          : ''
-      }`
+    ? `https://covidactnow.org/us/${canonicalUrl}`
     : '';
 
   return (

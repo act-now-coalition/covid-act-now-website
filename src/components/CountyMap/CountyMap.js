@@ -57,7 +57,6 @@ const CountyMap = ({ selectedCounty, setSelectedCounty }) => {
         state={state}
         counties={counties}
         geographyFactory={geo => {
-          console.log('counties', geo.id, geo.properties.GEOID);
           const geoFullFips = geo.properties.GEOID;
           const isSelected =
             selectedCounty && selectedCounty.full_fips_code === geoFullFips;
