@@ -49,12 +49,12 @@ export type Currenticunoncovidmethod =
  * Calculated metrics data based on known actuals.
  */
 export interface Metrics {
-  testPositivityRatio: Testpositivityratio;
-  caseDensity: Casedensity;
-  contactTracerCapacityRatio: Contacttracercapacityratio;
-  infectionRate: Infectionrate;
-  infectionRateCI90: Infectionrateci90;
-  icuHeadroomRatio: Icuheadroomratio;
+  testPositivityRatio?: Testpositivityratio;
+  caseDensity?: Casedensity;
+  contactTracerCapacityRatio?: Contacttracercapacityratio;
+  infectionRate?: Infectionrate;
+  infectionRateCI90?: Infectionrateci90;
+  icuHeadroomRatio?: Icuheadroomratio;
   icuHeadroomDetails?: ICUHeadroomMetricDetails;
 }
 /**

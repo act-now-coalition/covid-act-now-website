@@ -4,72 +4,59 @@
  * DO NOT MODIFY IT BY HAND. Run 'yarn update-api-types' to regenerate.
  */
 
+/**
+ * Ratio of people who test positive calculated using a 7-day rolling average.
+ */
+export type Testpositivityratio = number;
+/**
+ * The number of cases per 100k population calculated using a 7-day rolling average.
+ */
+export type Casedensity = number;
+/**
+ * Ratio of currently hired tracers to estimated tracers needed based on 7-day daily case average.
+ */
+export type Contacttracercapacityratio = number;
+/**
+ * R_t, or the estimated number of infections arising from a typical case.
+ */
+export type Infectionrate = number;
+/**
+ * 90th percentile confidence interval upper endpoint of the infection rate.
+ */
+export type Infectionrateci90 = number;
+export type Icuheadroomratio = number;
+/**
+ * Current number of covid patients in icu.
+ */
+export type Currenticucovid = number;
+/**
+ * Method used to determine number of current ICU patients with covid.
+ */
+export type Currenticucovidmethod = 'actual' | 'estimated';
+/**
+ * Current number of covid patients in icu.
+ */
+export type Currenticunoncovid = number;
+/**
+ * Method used to determine number of current ICU patients without covid.
+ */
+export type Currenticunoncovidmethod =
+  | 'actual'
+  | 'estimated_from_typical_utilization'
+  | 'estimated_from_total_icu_actual';
+/**
+ * Date of timeseries data point
+ */
 export type Date = string;
-/**
- * Number of hospital beds projected to be in-use or that were actually in use (if in the past)
- */
-export type Hospitalbedsrequired = number;
-/**
- * Number of hospital beds projected to be in-use or actually in use (if in the past)
- */
-export type Hospitalbedcapacity = number;
-/**
- * Number of ICU beds projected to be in-use or that were actually in use (if in the past)
- */
-export type Icubedsinuse = number;
-/**
- * Number of ICU beds projected to be in-use or actually in use (if in the past)
- */
-export type Icubedcapacity = number;
-/**
- * Number of ventilators projected to be in-use.
- */
-export type Ventilatorsinuse = number;
-/**
- * Total ventilator capacity.
- */
-export type Ventilatorcapacity = number;
-/**
- * Historical or Inferred Rt
- */
-export type Rtindicator = number;
-/**
- * Rt standard deviation
- */
-export type Rtindicatorci90 = number;
-/**
- * Number of cumulative deaths
- */
-export type Cumulativedeaths = number;
-/**
- * Number of cumulative infections
- */
-export type Cumulativeinfected = number;
-/**
- * Number of current infections
- */
-export type Currentinfected = number;
-/**
- * Number of people currently susceptible
- */
-export type Currentsusceptible = number;
-/**
- * Number of people currently exposed
- */
-export type Currentexposed = number;
-export type Countryname = string;
+export type Country = string;
 /**
  * The state name
  */
-export type Statename = string;
+export type State = string;
 /**
  * The county name
  */
-export type Countyname = string;
-/**
- * Name of high-level intervention in-place
- */
-export type Intervention = string;
+export type County = string;
 /**
  * Fips for State + County. Five character code
  */
@@ -89,32 +76,34 @@ export type Lastupdateddate = string;
 /**
  * Flattened prediction timeseries data for multiple regions.
  */
-export type AggregateFlattenedTimeseries = PredictionTimeseriesRowWithHeader[];
+export type AggregateFlattenedTimeseries = MetricsTimeseriesRowWithHeader[];
 
 /**
  * Prediction timeseries row with location information.
  */
-export interface PredictionTimeseriesRowWithHeader {
+export interface MetricsTimeseriesRowWithHeader {
+  testPositivityRatio?: Testpositivityratio;
+  caseDensity?: Casedensity;
+  contactTracerCapacityRatio?: Contacttracercapacityratio;
+  infectionRate?: Infectionrate;
+  infectionRateCI90?: Infectionrateci90;
+  icuHeadroomRatio?: Icuheadroomratio;
+  icuHeadroomDetails?: ICUHeadroomMetricDetails;
   date: Date;
-  hospitalBedsRequired: Hospitalbedsrequired;
-  hospitalBedCapacity: Hospitalbedcapacity;
-  ICUBedsInUse: Icubedsinuse;
-  ICUBedCapacity: Icubedcapacity;
-  ventilatorsInUse: Ventilatorsinuse;
-  ventilatorCapacity: Ventilatorcapacity;
-  RtIndicator: Rtindicator;
-  RtIndicatorCI90: Rtindicatorci90;
-  cumulativeDeaths: Cumulativedeaths;
-  cumulativeInfected: Cumulativeinfected;
-  currentInfected: Currentinfected;
-  currentSusceptible: Currentsusceptible;
-  currentExposed: Currentexposed;
-  countryName?: Countryname;
-  stateName: Statename;
-  countyName: Countyname;
-  intervention: Intervention;
+  country?: Country;
+  state: State;
+  county?: County;
   fips: Fips;
-  lat: Lat;
-  long: Long;
+  lat?: Lat;
+  long?: Long;
   lastUpdatedDate: Lastupdateddate;
+}
+/**
+ * Details about how the ICU Headroom Metric was calculated.
+ */
+export interface ICUHeadroomMetricDetails {
+  currentIcuCovid: Currenticucovid;
+  currentIcuCovidMethod: Currenticucovidmethod;
+  currentIcuNonCovid: Currenticunoncovid;
+  currentIcuNonCovidMethod: Currenticunoncovidmethod;
 }

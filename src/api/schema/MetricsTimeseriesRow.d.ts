@@ -44,18 +44,21 @@ export type Currenticunoncovidmethod =
   | 'actual'
   | 'estimated_from_typical_utilization'
   | 'estimated_from_total_icu_actual';
+/**
+ * Date of timeseries data point
+ */
 export type Date = string;
 
 /**
- * Metrics data for a single day.
+ * Metrics data for a specific day.
  */
 export interface MetricsTimeseriesRow {
-  testPositivityRatio: Testpositivityratio;
-  caseDensity: Casedensity;
-  contactTracerCapacityRatio: Contacttracercapacityratio;
-  infectionRate: Infectionrate;
-  infectionRateCI90: Infectionrateci90;
-  icuHeadroomRatio: Icuheadroomratio;
+  testPositivityRatio?: Testpositivityratio;
+  caseDensity?: Casedensity;
+  contactTracerCapacityRatio?: Contacttracercapacityratio;
+  infectionRate?: Infectionrate;
+  infectionRateCI90?: Infectionrateci90;
+  icuHeadroomRatio?: Icuheadroomratio;
   icuHeadroomDetails?: ICUHeadroomMetricDetails;
   date: Date;
 }

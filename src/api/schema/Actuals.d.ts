@@ -5,75 +5,68 @@
  */
 
 /**
- * Total population in geographic region [*deprecated*: refer to summary for this]
+ * Cumulative number of confirmed or suspected cases
  */
-export type Population = number;
+export type Cases = number;
 /**
- * Name of high-level intervention in-place
+ * Cumulative number of deaths that are suspected or confirmed to have been caused by COVID-19
  */
-export type Intervention = string;
+export type Deaths = number;
 /**
- * Number of confirmed cases so far
+ * Cumulative positive test results to date
  */
-export type Cumulativeconfirmedcases = number;
+export type Positivetests = number;
 /**
- * Number of positive test results to date
+ * Cumulative negative test results to date
  */
-export type Cumulativepositivetests = number;
+export type Negativetests = number;
 /**
- * Number of negative test results to date
+ * Number of Contact Tracers
  */
-export type Cumulativenegativetests = number;
+export type Contacttracers = number;
 /**
- * Number of deaths so far
+ * Information about hospital bed utilization
  */
-export type Cumulativedeaths = number;
-/**
- * *deprecated*: Capacity for resource. In the case of ICUs, this refers to total capacity. For hospitalization this refers to free capacity for COVID patients. This value is calculated by (1 - typicalUsageRate) * totalCapacity * 2.07
- */
-export type Capacity = number;
+export type Hospitalbeds = HospitalResourceUtilization;
 /**
  * Total capacity for resource.
  */
-export type Totalcapacity = number;
-/**
- * Currently used capacity for resource by COVID
- */
-export type Currentusagecovid = number;
+export type Capacity = number;
 /**
  * Currently used capacity for resource by all patients (COVID + Non-COVID)
  */
 export type Currentusagetotal = number;
 /**
+ * Currently used capacity for resource by COVID
+ */
+export type Currentusagecovid = number;
+/**
  * Typical used capacity rate for resource. This excludes any COVID usage.
  */
 export type Typicalusagerate = number;
 /**
- * # of Contact Tracers
+ * Information about ICU bed utilization
  */
-export type Contacttracers = number;
+export type Icubeds = HospitalResourceUtilization;
 
 /**
  * Known actuals data.
  */
 export interface Actuals {
-  population: Population;
-  intervention: Intervention;
-  cumulativeConfirmedCases: Cumulativeconfirmedcases;
-  cumulativePositiveTests: Cumulativepositivetests;
-  cumulativeNegativeTests: Cumulativenegativetests;
-  cumulativeDeaths: Cumulativedeaths;
-  hospitalBeds: ResourceUtilization;
-  ICUBeds: ResourceUtilization;
+  cases?: Cases;
+  deaths?: Deaths;
+  positiveTests?: Positivetests;
+  negativeTests?: Negativetests;
   contactTracers?: Contacttracers;
+  hospitalBeds?: Hospitalbeds;
+  icuBeds?: Icubeds;
 }
 /**
- * Utilization of hospital resources.
+ * Base model for API output.
  */
-export interface ResourceUtilization {
-  capacity: Capacity;
-  totalCapacity: Totalcapacity;
-  currentUsageCovid: Currentusagecovid;
-  currentUsageTotal: Currentusagetotal;
-  typicalUsageRate: Typicalusagerate;
+export interface HospitalResourceUtilization {
+  capacity?: Capacity;
+  currentUsageTotal?: Currentusagetotal;
+  currentUsageCovid?: Currentusagecovid;
+  typicalUsageRate?: Typicalusagerate;
 }

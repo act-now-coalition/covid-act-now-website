@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import moment from 'moment';
 
+import STATES from 'common/us_states';
 import { ActualsTimeseries } from 'api';
 import {
   ActualsTimeseriesRow,
@@ -136,14 +137,13 @@ export class Projection {
   readonly locationName: string;
   readonly totalPopulation: number;
   readonly fips: string;
-  readonly dateOverwhelmed: Date | null;
 
   readonly icuHeadroomInfo: ICUHeadroomInfo | null;
 
   readonly currentCumulativeDeaths: number | null;
   readonly currentCumulativeCases: number | null;
   readonly currentContactTracerMetric: number | null;
-  readonly stateName: string;
+  readonly state: string;
   readonly currentCaseDensity: number | null;
   readonly currentDailyDeaths: number | null;
 
@@ -194,22 +194,22 @@ export class Projection {
     this.dates = dates;
 
     this.locationName = this.getLocationName(summaryWithTimeseries);
-    this.stateName = summaryWithTimeseries.stateName;
+    this.state = summaryWithTimeseries.state;
     this.isCounty = parameters.isCounty;
-    this.totalPopulation = actuals.population;
+    this.totalPopulation = summaryWithTimeseries.population;
     this.fips = summaryWithTimeseries.fips;
 
     // Set up our series data exposed via getDataset().
     this.rawDailyCases = this.deltasFromCumulatives(
       this.fillLeadingNullsWithZeros(
-        actualTimeseries.map(row => row && row.cumulativeConfirmedCases),
+        actualTimeseries.map(row => (row?.cases ? row.cases : null)),
       ),
     );
     this.smoothedDailyCases = this.smoothWithRollingAverage(this.rawDailyCases);
 
     this.rawDailyDeaths = this.deltasFromCumulatives(
       this.fillLeadingNullsWithZeros(
-        actualTimeseries.map(row => row && row.cumulativeDeaths),
+        actualTimeseries.map(row => (row?.deaths ? row.deaths : null)),
       ),
     );
     this.smoothedDailyDeaths = this.smoothWithRollingAverage(
@@ -222,25 +222,29 @@ export class Projection {
 
     this.rawHospitalizations = hospitalizationsDisabled
       ? []
-      : actualTimeseries.map(row => row && row.hospitalBeds.currentUsageCovid);
+      : actualTimeseries.map(row =>
+          row?.hospitalBeds?.currentUsageCovid
+            ? row.hospitalBeds.currentUsageCovid
+            : null,
+        );
     this.smoothedHospitalizations = this.smoothWithRollingAverage(
       this.rawHospitalizations,
     );
-    this.rawICUHospitalizations = actualTimeseries.map(
-      row => row && row.ICUBeds.currentUsageCovid,
+    this.rawICUHospitalizations = actualTimeseries.map(row =>
+      row?.icuBeds?.currentUsageCovid ? row.icuBeds.currentUsageCovid : null,
     );
     this.smoothedICUHospitalizations = this.smoothWithRollingAverage(
       this.rawICUHospitalizations,
     );
 
     this.cumulativeActualDeaths = this.smoothCumulatives(
-      actualTimeseries.map(row => row && row.cumulativeDeaths),
+      actualTimeseries.map(row => (row?.deaths ? row.deaths : null)),
     );
 
     const disableRt = false;
     this.rtRange = disableRt ? [null] : this.calcRtRange(metricsTimeseries);
     this.testPositiveRate = metricsTimeseries.map(row =>
-      row ? row.testPositivityRatio : null,
+      row?.testPositivityRatio ? row.testPositivityRatio : null,
     );
 
     if (metrics && !DISABLED_ICU.includes(this.fips)) {
@@ -258,45 +262,36 @@ export class Projection {
       this.icuHeadroomInfo?.metricSeries || this.dates.map(date => null);
 
     this.contractTracers = metricsTimeseries.map(row =>
-      row ? row.contactTracerCapacityRatio : null,
+      row?.contactTracerCapacityRatio ? row.contactTracerCapacityRatio : null,
     );
 
     this.caseDensityByCases = metricsTimeseries.map(row =>
-      row ? row.caseDensity : null,
+      row?.caseDensity ? row.caseDensity : null,
     );
     this.caseDensityRange = this.calcCaseDensityRange();
 
     this.currentCaseDensity =
-      metrics && !DISABLED_CASE_DENSITY.includes(this.fips)
+      metrics?.caseDensity && !DISABLED_CASE_DENSITY.includes(this.fips)
         ? metrics.caseDensity
         : null;
     this.currentDailyDeaths = lastValue(this.smoothedDailyDeaths);
 
-    const shortageStart =
-      summaryWithTimeseries.projections?.totalHospitalBeds?.shortageStartDate ||
-      null;
-    this.dateOverwhelmed =
-      shortageStart === null ? null : new Date(shortageStart);
-    if (
-      moment(this.dateOverwhelmed).diff(moment(), 'days') >
-      PROJECTIONS_TRUNCATION_DAYS
-    ) {
-      this.dateOverwhelmed = null;
-    }
-
-    this.currentCumulativeDeaths =
-      summaryWithTimeseries.actuals.cumulativeDeaths;
-    this.currentCumulativeCases =
-      summaryWithTimeseries.actuals.cumulativeConfirmedCases;
+    this.currentCumulativeDeaths = summaryWithTimeseries.actuals.deaths
+      ? summaryWithTimeseries.actuals.deaths
+      : null;
+    this.currentCumulativeCases = summaryWithTimeseries.actuals.cases
+      ? summaryWithTimeseries.actuals.cases
+      : null;
     this.currentContactTracerMetric =
-      metrics && !DISABLED_CONTACT_TRACING.includes(this.fips)
+      metrics?.contactTracerCapacityRatio &&
+      !DISABLED_CONTACT_TRACING.includes(this.fips)
         ? metrics.contactTracerCapacityRatio
         : null;
   }
 
   get currentContactTracers() {
     return (
-      CONTACT_TRACER_STATE_OVERRIDES[this.stateName] ||
+      CONTACT_TRACER_STATE_OVERRIDES[this.state] ||
       lastValue(this.actualTimeseries.map(row => row && row.contactTracers)) ||
       null
     );
@@ -319,7 +314,9 @@ export class Projection {
       return null;
     }
 
-    return this.metrics ? this.metrics.testPositivityRatio : null;
+    return this.metrics?.testPositivityRatio
+      ? this.metrics.testPositivityRatio
+      : null;
   }
 
   get rt(): number | null {
@@ -327,7 +324,7 @@ export class Projection {
       return null;
     }
 
-    return this.metrics ? this.metrics.infectionRate : null;
+    return this.metrics?.infectionRate ? this.metrics.infectionRate : null;
   }
 
   private getColumn(columnName: string): Column[] {
@@ -369,7 +366,7 @@ export class Projection {
     futureDaysToInclude: number,
   ) {
     const actualsTimeseriesRaw = summaryWithTimeseries.actualsTimeseries;
-    const metricsTimeseriesRaw = summaryWithTimeseries.metricsTimeseries;
+    const metricsTimeseriesRaw = summaryWithTimeseries.metricsTimeseries || [];
     if (actualsTimeseriesRaw.length === 0) {
       return {
         actualTimeseries: [],
@@ -435,7 +432,9 @@ export class Projection {
     // TODO(michael): I don't like hardcoding "County" into the name. We should
     // probably delete this code and get the location name from somewhere other
     // than the API (or improve the API value).
-    return s.countyName ? `${s.countyName}, ${s.stateName}` : s.stateName;
+    // TODO(chris): Fix state
+    // @ts-ignore
+    return s.county ? `${s.county}, ${STATES[s.state]}]` : STATES[s.state];
   }
 
   private calcCaseDensityRange(): Array<CaseDensityRange | null> {
@@ -454,8 +453,12 @@ export class Projection {
   private calcRtRange(
     timeseries: Array<MetricsTimeseriesRow | null>,
   ): Array<RtRange | null> {
-    const rtSeries = timeseries.map(row => row && row.infectionRate);
-    const rtCiSeries = timeseries.map(row => row && row.infectionRateCI90);
+    const rtSeries = timeseries.map(row =>
+      row?.infectionRate ? row.infectionRate : null,
+    );
+    const rtCiSeries = timeseries.map(row =>
+      row?.infectionRateCI90 ? row.infectionRateCI90 : null,
+    );
 
     return rtSeries.map((rt, idx) => {
       const ci = rtCiSeries[idx];

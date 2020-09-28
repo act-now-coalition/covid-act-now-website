@@ -4,11 +4,26 @@
  * DO NOT MODIFY IT BY HAND. Run 'yarn update-api-types' to regenerate.
  */
 
-export type Countryname = string;
 /**
  * Fips Code.  For state level data, 2 characters, for county level data, 5 characters.
  */
 export type Fips = string;
+/**
+ * 2-letter ISO-3166 Country code.
+ */
+export type Country = string;
+/**
+ * 2-letter ANSI state code.
+ */
+export type State = string;
+/**
+ * County name
+ */
+export type County = string;
+/**
+ * Level of region.
+ */
+export type Level = 'country' | 'state' | 'county';
 /**
  * Latitude of point within the state or county
  */
@@ -18,97 +33,9 @@ export type Lat = number;
  */
 export type Long = number;
 /**
- * The state name
- */
-export type Statename = string;
-/**
- * The county name
- */
-export type Countyname = string;
-/**
- * Date of latest data
- */
-export type Lastupdateddate = string;
-/**
- * Projection about total hospital bed utilization
- */
-export type Totalhospitalbeds = ResourceUsageProjection;
-/**
- * Shortfall of resource needed at the peak utilization
- */
-export type Peakshortfall = number;
-/**
- * Date of peak resource utilization
- */
-export type Peakdate = string;
-/**
- * Date when resource shortage begins
- */
-export type Shortagestartdate = string;
-/**
- * Projection about ICU hospital bed utilization
- */
-export type Icubeds = ResourceUsageProjection;
-/**
- * Inferred Rt
- */
-export type Rt = number;
-/**
- * Rt 90th percentile confidence interval upper endpoint.
- */
-export type Rtci90 = number;
-/**
- * Total population in geographic region [*deprecated*: refer to summary for this]
+ * Total Population in geographic region.
  */
 export type Population = number;
-/**
- * Name of high-level intervention in-place
- */
-export type Intervention = string;
-/**
- * Number of confirmed cases so far
- */
-export type Cumulativeconfirmedcases = number;
-/**
- * Number of positive test results to date
- */
-export type Cumulativepositivetests = number;
-/**
- * Number of negative test results to date
- */
-export type Cumulativenegativetests = number;
-/**
- * Number of deaths so far
- */
-export type Cumulativedeaths = number;
-/**
- * *deprecated*: Capacity for resource. In the case of ICUs, this refers to total capacity. For hospitalization this refers to free capacity for COVID patients. This value is calculated by (1 - typicalUsageRate) * totalCapacity * 2.07
- */
-export type Capacity = number;
-/**
- * Total capacity for resource.
- */
-export type Totalcapacity = number;
-/**
- * Currently used capacity for resource by COVID
- */
-export type Currentusagecovid = number;
-/**
- * Currently used capacity for resource by all patients (COVID + Non-COVID)
- */
-export type Currentusagetotal = number;
-/**
- * Typical used capacity rate for resource. This excludes any COVID usage.
- */
-export type Typicalusagerate = number;
-/**
- * # of Contact Tracers
- */
-export type Contacttracers = number;
-/**
- * Region level metrics
- */
-export type Metrics1 = Metrics;
 /**
  * Ratio of people who test positive calculated using a 7-day rolling average.
  */
@@ -150,9 +77,53 @@ export type Currenticunoncovidmethod =
   | 'estimated_from_typical_utilization'
   | 'estimated_from_total_icu_actual';
 /**
- * Total Population in geographic region.
+ * Cumulative number of confirmed or suspected cases
  */
-export type Population1 = number;
+export type Cases = number;
+/**
+ * Cumulative number of deaths that are suspected or confirmed to have been caused by COVID-19
+ */
+export type Deaths = number;
+/**
+ * Cumulative positive test results to date
+ */
+export type Positivetests = number;
+/**
+ * Cumulative negative test results to date
+ */
+export type Negativetests = number;
+/**
+ * Number of Contact Tracers
+ */
+export type Contacttracers = number;
+/**
+ * Information about hospital bed utilization
+ */
+export type Hospitalbeds = HospitalResourceUtilization;
+/**
+ * Total capacity for resource.
+ */
+export type Capacity = number;
+/**
+ * Currently used capacity for resource by all patients (COVID + Non-COVID)
+ */
+export type Currentusagetotal = number;
+/**
+ * Currently used capacity for resource by COVID
+ */
+export type Currentusagecovid = number;
+/**
+ * Typical used capacity rate for resource. This excludes any COVID usage.
+ */
+export type Typicalusagerate = number;
+/**
+ * Information about ICU bed utilization
+ */
+export type Icubeds = HospitalResourceUtilization;
+/**
+ * Date of latest data
+ */
+export type Lastupdateddate = string;
 /**
  * Summary data for multiple regions.
  */
@@ -162,69 +133,28 @@ export type AggregateRegionSummary = RegionSummary[];
  * Summary of actual and prediction data for a single region.
  */
 export interface RegionSummary {
-  countryName?: Countryname;
   fips: Fips;
-  lat: Lat;
-  long: Long;
-  stateName: Statename;
-  countyName?: Countyname;
-  lastUpdatedDate: Lastupdateddate;
-  projections: Projections;
-  actuals: Actuals;
-  metrics?: Metrics1;
-  population: Population1;
-}
-/**
- * Summary of projection data.
- */
-export interface Projections {
-  totalHospitalBeds: Totalhospitalbeds;
-  ICUBeds: Icubeds;
-  Rt: Rt;
-  RtCI90: Rtci90;
-}
-/**
- * Resource usage projection data.
- */
-export interface ResourceUsageProjection {
-  peakShortfall: Peakshortfall;
-  peakDate: Peakdate;
-  shortageStartDate: Shortagestartdate;
-}
-/**
- * Known actuals data.
- */
-export interface Actuals {
+  country: Country;
+  state: State;
+  county?: County;
+  level: Level;
+  lat?: Lat;
+  long?: Long;
   population: Population;
-  intervention: Intervention;
-  cumulativeConfirmedCases: Cumulativeconfirmedcases;
-  cumulativePositiveTests: Cumulativepositivetests;
-  cumulativeNegativeTests: Cumulativenegativetests;
-  cumulativeDeaths: Cumulativedeaths;
-  hospitalBeds: ResourceUtilization;
-  ICUBeds: ResourceUtilization;
-  contactTracers?: Contacttracers;
-}
-/**
- * Utilization of hospital resources.
- */
-export interface ResourceUtilization {
-  capacity: Capacity;
-  totalCapacity: Totalcapacity;
-  currentUsageCovid: Currentusagecovid;
-  currentUsageTotal: Currentusagetotal;
-  typicalUsageRate: Typicalusagerate;
+  metrics?: Metrics;
+  actuals: Actuals;
+  lastUpdatedDate: Lastupdateddate;
 }
 /**
  * Calculated metrics data based on known actuals.
  */
 export interface Metrics {
-  testPositivityRatio: Testpositivityratio;
-  caseDensity: Casedensity;
-  contactTracerCapacityRatio: Contacttracercapacityratio;
-  infectionRate: Infectionrate;
-  infectionRateCI90: Infectionrateci90;
-  icuHeadroomRatio: Icuheadroomratio;
+  testPositivityRatio?: Testpositivityratio;
+  caseDensity?: Casedensity;
+  contactTracerCapacityRatio?: Contacttracercapacityratio;
+  infectionRate?: Infectionrate;
+  infectionRateCI90?: Infectionrateci90;
+  icuHeadroomRatio?: Icuheadroomratio;
   icuHeadroomDetails?: ICUHeadroomMetricDetails;
 }
 /**
@@ -235,4 +165,25 @@ export interface ICUHeadroomMetricDetails {
   currentIcuCovidMethod: Currenticucovidmethod;
   currentIcuNonCovid: Currenticunoncovid;
   currentIcuNonCovidMethod: Currenticunoncovidmethod;
+}
+/**
+ * Known actuals data.
+ */
+export interface Actuals {
+  cases?: Cases;
+  deaths?: Deaths;
+  positiveTests?: Positivetests;
+  negativeTests?: Negativetests;
+  contactTracers?: Contacttracers;
+  hospitalBeds?: Hospitalbeds;
+  icuBeds?: Icubeds;
+}
+/**
+ * Base model for API output.
+ */
+export interface HospitalResourceUtilization {
+  capacity?: Capacity;
+  currentUsageTotal?: Currentusagetotal;
+  currentUsageCovid?: Currentusagecovid;
+  typicalUsageRate?: Typicalusagerate;
 }
