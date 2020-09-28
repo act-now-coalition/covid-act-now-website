@@ -77,7 +77,13 @@ export const POSITIVE_TESTS_LEVEL_INFO_MAP: LevelInfoMap = {
 function renderStatus(projections: Projections) {
   const { currentTestPositiveRate, locationName } = projections.primary;
   if (currentTestPositiveRate === null) {
-    return <Fragment>No testing data is available.</Fragment>;
+    return (
+      <Fragment>
+        Unable to generate{' '}
+        {PositiveTestRateMetric.extendedMetricName.toLowerCase()}. This could be
+        due to insufficient data.
+      </Fragment>
+    );
   }
   const level = getLevel(Metric.POSITIVE_TESTS, currentTestPositiveRate);
   const lowSizableLarge = levelText(
