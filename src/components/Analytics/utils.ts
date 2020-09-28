@@ -46,6 +46,7 @@ export enum EventAction {
   CLICK_LINK = 'click link',
   CLICK = 'click',
   SELECT = 'select',
+  OPEN_MODAL = 'open modal',
   SUBSCRIBE = 'subscribe',
   ALERTS_UNSUBSCRIBE = 'alertsUnsubscribe',
 }

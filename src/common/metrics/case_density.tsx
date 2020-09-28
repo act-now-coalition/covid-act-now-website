@@ -71,8 +71,9 @@ function renderStatus(projections: Projections): React.ReactElement {
   ) {
     return (
       <Fragment>
-        Not enough case data is available to generate{' '}
-        {CaseIncidenceMetric.extendedMetricName.toLowerCase()}.
+        Unable to generate{' '}
+        {CaseIncidenceMetric.extendedMetricName.toLowerCase()}. This could be
+        due to insufficient data.
       </Fragment>
     );
   }

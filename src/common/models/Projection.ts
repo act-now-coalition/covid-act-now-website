@@ -14,6 +14,36 @@ import {
 import { ICUHeadroomInfo, calcICUHeadroom } from './ICUHeadroom';
 import { lastValue } from './utils';
 
+const DISABLED_CASE_DENSITY: string[] = [
+  '48029', // https://trello.com/c/ulCnCcif/
+];
+
+const DISABLED_INFECTION_RATE: string[] = [];
+
+const DISABLED_TEST_POSITIVITY: string[] = [
+  '25001',
+  '25003',
+  '25005',
+  '25007',
+  '25009',
+  '25011',
+  '25013',
+  '25015',
+  '25017',
+  '25019',
+  '25021',
+  '25023',
+  '25025',
+  '25027',
+  '48113',
+  '48215',
+  '48201', // https://trello.com/c/tgxn6Wjp/
+];
+
+const DISABLED_ICU: string[] = [];
+
+const DISABLED_CONTACT_TRACING: string[] = [];
+
 /**
  * We truncate (or in the case of charts, switch to a dashed line) the last
  * seven days of r(t) data because it is susceptible to continued change as we
@@ -232,7 +262,7 @@ export class Projection {
       row ? row.testPositivityRatio : null,
     );
 
-    if (metrics) {
+    if (metrics && !DISABLED_ICU.includes(this.fips)) {
       this.icuHeadroomInfo = calcICUHeadroom(
         this.fips,
         actualTimeseries,
@@ -255,7 +285,10 @@ export class Projection {
     );
     this.caseDensityRange = this.calcCaseDensityRange();
 
-    this.currentCaseDensity = metrics ? metrics.caseDensity : null;
+    this.currentCaseDensity =
+      metrics && !DISABLED_CASE_DENSITY.includes(this.fips)
+        ? metrics.caseDensity
+        : null;
     this.currentDailyDeaths = lastValue(this.smoothedDailyDeaths);
 
     this.fixZeros(this.cumulativeDeaths);
@@ -276,9 +309,10 @@ export class Projection {
       summaryWithTimeseries.actuals.cumulativeDeaths;
     this.currentCumulativeCases =
       summaryWithTimeseries.actuals.cumulativeConfirmedCases;
-    this.currentContactTracerMetric = metrics
-      ? metrics.contactTracerCapacityRatio
-      : null;
+    this.currentContactTracerMetric =
+      metrics && !DISABLED_CONTACT_TRACING.includes(this.fips)
+        ? metrics.contactTracerCapacityRatio
+        : null;
   }
 
   get currentContactTracers() {
@@ -318,33 +352,7 @@ export class Projection {
   }
 
   get currentTestPositiveRate(): number | null {
-    // Corona Data Scraper is pulling in bogus test data for Washoe County.
-    // Just disable for now.
-    // TODO(michael): Plumb FIPS in here so this is less fragile.
-    if (this.stateName === 'Masa') {
-      return null;
-    }
-
-    const blacklistFips = [
-      '25001',
-      '25003',
-      '25005',
-      '25007',
-      '25009',
-      '25011',
-      '25013',
-      '25015',
-      '25017',
-      '25019',
-      '25021',
-      '25023',
-      '25025',
-      '25027',
-      '48113',
-      '48215',
-    ];
-
-    if (blacklistFips.indexOf(this.fips) > -1) {
+    if (DISABLED_TEST_POSITIVITY.includes(this.fips)) {
       return null;
     }
 
@@ -352,6 +360,10 @@ export class Projection {
   }
 
   get rt(): number | null {
+    if (DISABLED_INFECTION_RATE.includes(this.fips)) {
+      return null;
+    }
+
     return this.metrics ? this.metrics.infectionRate : null;
   }
 
