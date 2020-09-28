@@ -81,7 +81,12 @@ function renderStatus(projections: Projections): React.ReactElement {
   const { locationName } = projections.primary;
 
   if (icu === null) {
-    return <Fragment>No ICU occupancy data is available.</Fragment>;
+    return (
+      <Fragment>
+        Unable to generate {ICUHeadroomMetric.extendedMetricName}. This could be
+        due to insufficient data.
+      </Fragment>
+    );
   } else if (icu.overrideInPlace) {
     return (
       <Fragment>
