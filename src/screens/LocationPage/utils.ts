@@ -25,11 +25,3 @@ export function getPageDescription(projections: Projections): string {
   const locationName = getLocationName(projections.fips);
   return `${dateToday} Risk Level: ${levelInfo.detail(locationName)}`;
 }
-
-export function getCanonicalUrl(fipsCode: string) {
-  const location = findLocationForFips(fipsCode);
-  const { county, state_url_name } = location;
-  return county
-    ? `us/${state_url_name}/county/${location.county_url_name}`
-    : `us/${state_url_name}`;
-}

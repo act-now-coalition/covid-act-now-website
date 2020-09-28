@@ -8,8 +8,12 @@ import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ChartsHolder from 'components/LocationPage/ChartsHolder';
 import { LoadingScreen } from './LocationPage.style';
 import { useProjections } from 'common/utils/model';
-import { getPageTitle, getPageDescription, getCanonicalUrl } from './utils';
-import { getCountyByUrlName, getStateByUrlName } from 'common/locations';
+import { getPageTitle, getPageDescription } from './utils';
+import {
+  getCountyByUrlName,
+  getStateByUrlName,
+  getCanonicalUrl,
+} from 'common/locations';
 
 function LocationPage() {
   let { stateId, countyId, chartId } = useParams();

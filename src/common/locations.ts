@@ -111,6 +111,13 @@ export function findCountyByFips(fips: string) {
   return undefined;
 }
 
+export function isValidState(fips: string): boolean {
+  const state = US_STATE_DATASET.state_dataset.find(
+    state => state.state_fips_code === fips,
+  );
+  return !!state;
+}
+
 export function findStateByFips(fips: string): State {
   const state = US_STATE_DATASET.state_dataset.find(
     state => state.state_fips_code === fips,
@@ -231,4 +238,14 @@ export function getLocationByUrlParams(
   );
 
   return location;
+}
+
+export function getCanonicalUrl(fipsCode: string) {
+  const { state_fips_code, county, county_url_name } = findLocationForFips(
+    fipsCode,
+  );
+  const { state_url_name } = findStateByFips(state_fips_code);
+  return county
+    ? `us/${state_url_name}/county/${county_url_name}`
+    : `us/${state_url_name}`;
 }
