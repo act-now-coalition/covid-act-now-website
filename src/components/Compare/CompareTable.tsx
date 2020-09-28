@@ -190,6 +190,16 @@ const CompareTable = (props: {
   // TODO: What is the best way to label here?
   const trackLabel = 'Compare';
 
+  const onClickShowAll = () => {
+    props.setShowModal(true);
+    trackCompareEvent(EventAction.OPEN_MODAL, 'Show All Locations');
+  };
+
+  const onClickFAQ = () => {
+    props.setShowFaqModal(true);
+    trackCompareEvent(EventAction.OPEN_MODAL, 'FAQ');
+  };
+
   return (
     <Wrapper isModal={props.isModal} isHomepage={props.isHomepage}>
       {!props.isModal && (
@@ -258,12 +268,12 @@ const CompareTable = (props: {
               <strong>{sortedLocationsArr.length}</strong>{' '}
             </span>
             {showViewMore && (
-              <FooterLink onClick={() => props.setShowModal(true)}>
+              <FooterLink onClick={onClickShowAll}>
                 {props.viewMoreCopy}
               </FooterLink>
             )}
           </div>
-          <FooterLink onClick={() => props.setShowFaqModal(true)} isFaqLink>
+          <FooterLink onClick={onClickFAQ} isFaqLink>
             FAQ
             <HelpOutlineIcon />
           </FooterLink>

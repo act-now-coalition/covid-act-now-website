@@ -11,6 +11,8 @@ import { COLOR_MAP } from 'common/colors';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { SCREENSHOT_CLASS } from 'components/Screenshot';
+import { trackCompareEvent } from 'common/utils/compare';
+import { EventAction } from 'components/Analytics';
 
 const LocationTableHead: React.FunctionComponent<{
   setSorter: React.Dispatch<React.SetStateAction<number>>;
@@ -45,10 +47,16 @@ const LocationTableHead: React.FunctionComponent<{
 }) => {
   const onPopulationClick = () => {
     if (sortByPopulation) {
-      setSortDescending(!sortDescending);
+      const updatedSortDescending = !sortDescending;
+      setSortDescending(updatedSortDescending);
+      trackCompareEvent(
+        EventAction.SELECT,
+        `Sort by: Population (${updatedSortDescending ? 'Desc' : 'Asc'})`,
+      );
     } else {
       setSortByPopulation(true);
       setSortDescending(true);
+      trackCompareEvent(EventAction.SELECT, 'Sort by: Population (Desc)');
     }
   };
 
