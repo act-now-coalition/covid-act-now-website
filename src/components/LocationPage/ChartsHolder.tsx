@@ -11,6 +11,7 @@ import { Metric, ALL_METRICS } from 'common/metric';
 import CompareMain from 'components/Compare/CompareMain';
 import Explore from 'components/Explore';
 import { County } from 'common/locations';
+import Recommend from 'components/Recommend';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
@@ -101,6 +102,7 @@ const ChartsHolder = (props: {
               locationsViewable={6}
               stateId={props.stateId}
             />
+            <Recommend />
             <MainContentInner>
               {ALL_METRICS.map(metric => (
                 <ChartBlock
