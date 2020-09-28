@@ -3,7 +3,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { COLORS } from 'common';
-
+import MuiButton from '@material-ui/core/Button';
+import { COLOR_MAP } from 'common/colors';
 import palette from 'assets/theme/palette';
 import { mobileBreakpoint } from 'assets/theme/sizes';
 
@@ -198,4 +199,24 @@ export const StyledMenu = styled.nav<{ open: boolean }>`
   }
 `;
 
-export const Content = styled.div``;
+export const StyledDonateButton = styled(MuiButton)`
+  color: white;
+  background-color: ${COLOR_MAP.PURPLE};
+  margin: auto 0;
+  display: inline-flex;
+
+  &:hover {
+    background-color: ${COLOR_MAP.PURPLE};
+  }
+
+  @media (min-width: ${mobileBreakpoint}) {
+    margin-left: 2rem;
+  }
+`;
+
+export const DonateButtonWrapper = styled.div`
+  a {
+    display: flex;
+    height: 100%;
+  }
+`;

@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { find } from 'lodash';
-import {
-  useHistory,
-  useLocation,
-  match as MatchType,
-  matchPath,
-} from 'react-router-dom';
+import { useHistory, useLocation, matchPath } from 'react-router-dom';
 import Logo from 'assets/images/logo';
 import { useEmbed } from 'common/utils/hooks';
 import MobileMenu from './MobileMenu';
@@ -19,60 +13,16 @@ import {
   StyledTab,
   StyledMobileMenu,
 } from './AppBar.style';
-
-import {
-  FacebookIcon,
-  FacebookShareButton,
-  TwitterShareButton,
-  TwitterIcon,
-} from 'react-share';
+import DonateButton from './DonateButton';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import { STATES } from 'common';
 import { Location } from 'history';
-import US_STATE_DATASET from '../MapSelectors/datasets/us_states_dataset_01_02_2020.json';
-import * as urls from 'common/urls';
-import { trackShare } from 'components/Analytics';
 
 const Panels = ['/', '/about', '/resources', '/blog', '/contact'];
 
 function getPanelIdxFromLocation(location: Location<any>) {
   let idx = Panels.indexOf(location.pathname);
   return idx === -1 ? false : idx;
-}
-
-function locationNameFromMatch(
-  match: MatchType<{ id: keyof typeof STATES; county?: string }> | null,
-) {
-  if (!match || !match.params) {
-    return '';
-  }
-
-  const stateId = match.params.id.toUpperCase() as keyof typeof STATES;
-  const state = STATES[stateId];
-  const countyId = match.params.county;
-  if (!state) {
-    // if invalid state entered in URL, redirect to homepage
-    window.location.href = '/';
-  }
-
-  if (!countyId) {
-    return state;
-  }
-
-  const countyData = find(
-    // @ts-ignore TODO(aj): Fix this when features/typescript3 merges
-    US_STATE_DATASET.state_county_map_dataset[stateId].county_dataset,
-    ['county_url_name', countyId],
-  );
-
-  if (!countyData) {
-    // if invalid county entered in URL, redirect to homepage
-    window.location.href = '/';
-    return;
-  }
-
-  const county = countyData.county;
-  return `${county}, ${state}`;
 }
 
 const _AppBar = () => {
@@ -111,7 +61,6 @@ const _AppBar = () => {
       strict: false,
     });
   }
-  const locationName = locationNameFromMatch(match);
   const goTo = (route: string) => (e: React.MouseEvent) => {
     e.preventDefault();
     setOpen(false);
@@ -127,16 +76,6 @@ const _AppBar = () => {
     setOpen(false);
     window.location.href = url;
   };
-
-  const shareURL = urls.addSharingId(
-    `https://covidactnow.org${match ? match.url : ''}`,
-  );
-  const hashtag = 'COVIDActNow';
-  const locationShareTitle = `I'm keeping track of ${locationName}'s COVID data and risk level with @CovidActNow. What does your community look like?`;
-  const defaultShareTitle =
-    'I’m keeping track of the latest COVID data and risk levels with @CovidActNow. What does your community look like?';
-
-  const shareTitle = locationName ? locationShareTitle : defaultShareTitle;
 
   return (
     <StyledAppBar position="sticky">
@@ -178,51 +117,10 @@ const _AppBar = () => {
               onClick={goTo('/contact')}
             />
           </StyledTabs>
-          <FacebookShareButton
-            url={shareURL}
-            quote={shareTitle}
-            beforeOnClick={() => {
-              trackShare('facebook');
-              return Promise.resolve();
-            }}
-            style={{
-              alignItems: 'center',
-              display: 'flex',
-              paddingLeft: 28,
-              paddingRight: 14,
-            }}
-          >
-            <FacebookIcon size={32} round={true} />
-          </FacebookShareButton>
-          <TwitterShareButton
-            url={shareURL}
-            title={shareTitle}
-            hashtags={[hashtag]}
-            beforeOnClick={() => {
-              trackShare('twitter');
-              return Promise.resolve();
-            }}
-            style={{ alignItems: 'center', display: 'flex' }}
-          >
-            <TwitterIcon size={32} round={true} />
-          </TwitterShareButton>
+          <DonateButton />
         </StyledDesktopMenu>
         <StyledMobileMenu>
-          <FacebookShareButton
-            url={shareURL}
-            title={shareTitle}
-            style={{ alignItems: 'center', display: 'flex', paddingRight: 8 }}
-          >
-            <FacebookIcon size={32} round={true} />
-          </FacebookShareButton>
-          <TwitterShareButton
-            url={shareURL}
-            title={shareTitle}
-            hashtags={[hashtag]}
-            style={{ alignItems: 'center', display: 'flex' }}
-          >
-            <TwitterIcon size={32} round={true} />
-          </TwitterShareButton>
+          <DonateButton />
           <Burger open={open} setOpen={setOpen} />
           <MobileMenu open={open} goTo={goTo} forwardTo={forwardTo} />
         </StyledMobileMenu>
