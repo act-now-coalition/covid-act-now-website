@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { find } from 'lodash';
-import {
-  useHistory,
-  useLocation,
-  match as MatchType,
-  matchPath,
-} from 'react-router-dom';
+import { useHistory, useLocation, matchPath } from 'react-router-dom';
 import Logo from 'assets/images/logo';
 import { useEmbed } from 'common/utils/hooks';
 import MobileMenu from './MobileMenu';
@@ -27,52 +21,39 @@ import {
   TwitterIcon,
 } from 'react-share';
 import ArrowBack from '@material-ui/icons/ArrowBack';
-import { STATES } from 'common';
 import { Location } from 'history';
-import US_STATE_DATASET from '../MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 import * as urls from 'common/urls';
 import { trackShare } from 'components/Analytics';
+import { getCountyByUrlName, getStateByUrlName } from 'common/locations';
 
 const Panels = ['/', '/about', '/resources', '/blog', '/contact'];
+
+interface LocationPageUrlParams {
+  id?: string;
+  county?: string;
+}
 
 function getPanelIdxFromLocation(location: Location<any>) {
   let idx = Panels.indexOf(location.pathname);
   return idx === -1 ? false : idx;
 }
 
-function locationNameFromMatch(
-  match: MatchType<{ id: keyof typeof STATES; county?: string }> | null,
-) {
-  if (!match || !match.params) {
+function locationNameFromUrlParams(stateId?: string, countyId?: string) {
+  if (!stateId) {
     return '';
   }
 
-  const stateId = match.params.id.toUpperCase() as keyof typeof STATES;
-  const state = STATES[stateId];
-  const countyId = match.params.county;
-  if (!state) {
-    // if invalid state entered in URL, redirect to homepage
-    window.location.href = '/';
+  const state = getStateByUrlName(stateId);
+  const countyOption = countyId && getCountyByUrlName(countyId);
+  const isValidLocation = state && !(countyId && !countyOption);
+
+  if (!isValidLocation) {
+    return '';
   }
 
-  if (!countyId) {
-    return state;
-  }
-
-  const countyData = find(
-    // @ts-ignore TODO(aj): Fix this when features/typescript3 merges
-    US_STATE_DATASET.state_county_map_dataset[stateId].county_dataset,
-    ['county_url_name', countyId],
-  );
-
-  if (!countyData) {
-    // if invalid county entered in URL, redirect to homepage
-    window.location.href = '/';
-    return;
-  }
-
-  const county = countyData.county;
-  return `${county}, ${state}`;
+  return state && countyId && countyOption
+    ? `${countyOption.county}, ${state?.state}`
+    : `${state?.state}`;
 }
 
 const _AppBar = () => {
@@ -95,23 +76,23 @@ const _AppBar = () => {
   // Don't show in iFrame
   if (isEmbed) return null;
 
-  let match = matchPath<{ id: keyof typeof STATES; county?: string }>(
-    locationPath.pathname,
-    {
-      path: ['/us/:id', '/us/:id/county/:county'],
-      exact: true,
-      strict: false,
-    },
-  );
+  let match = matchPath<LocationPageUrlParams>(locationPath.pathname, {
+    path: ['/us/:id', '/us/:id/county/:county'],
+    exact: true,
+    strict: false,
+  });
 
   if (!match) {
-    match = matchPath<{ id: keyof typeof STATES }>(locationPath.pathname, {
+    match = matchPath<LocationPageUrlParams>(locationPath.pathname, {
       path: '/states/:id',
       exact: true,
       strict: false,
     });
   }
-  const locationName = locationNameFromMatch(match);
+  const locationName =
+    match && match?.params?.id
+      ? locationNameFromUrlParams(match.params.id, match.params.county)
+      : '';
   const goTo = (route: string) => (e: React.MouseEvent) => {
     e.preventDefault();
     setOpen(false);

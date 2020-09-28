@@ -9,14 +9,16 @@ import {
 import ReactTooltip from 'react-tooltip';
 import STATE_CENTERS from '../../common/us_state_centers';
 import { countyColor } from 'common/colors';
-import { findCountyByFips } from 'common/locations';
+import { findCountyByFips, getStateByUrlName } from 'common/locations';
 import { CountyMapWrapper, CountyMapLayerWrapper } from './CountyMap.style';
 
 const CountyMap = ({ selectedCounty, setSelectedCounty }) => {
   let { stateId } = useParams();
-  stateId = stateId.toUpperCase();
-  const state = STATE_CENTERS[stateId];
-  const counties = require(`./countyTopoJson/${stateId}.json`);
+  const { state_code } = getStateByUrlName(stateId);
+  const stateCode = state_code.toUpperCase();
+
+  const state = STATE_CENTERS[stateCode];
+  const counties = require(`./countyTopoJson/${stateCode}.json`);
   const [content, setContent] = useState('');
 
   const onMouseLeave = () => {

@@ -13,14 +13,12 @@ import { getCountyByUrlName, getStateByUrlName } from 'common/locations';
 
 function LocationPage() {
   let { stateId, countyId, chartId } = useParams();
-  console.log({ stateId, countyId, chartId });
 
   const state = getStateByUrlName(stateId);
   const countyOption = countyId && getCountyByUrlName(countyId);
 
   // TODO(igor): don't mix uppercase and lowercase in here
   const stateCode = state.state_code.toUpperCase();
-  console.log({ stateCode });
 
   const [mapOption, setMapOption] = useState(
     stateCode === MAP_FILTERS.DC ? MAP_FILTERS.NATIONAL : MAP_FILTERS.STATE,
@@ -33,6 +31,7 @@ function LocationPage() {
   }, [countyOption]);
 
   const projections = useProjections(stateCode, selectedCounty);
+
   // Projections haven't loaded yet
   // If a new county has just been selected, we may not have projections
   // for the new county loaded yet
