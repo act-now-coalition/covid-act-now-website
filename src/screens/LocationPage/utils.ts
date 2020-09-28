@@ -28,9 +28,8 @@ export function getPageDescription(projections: Projections): string {
 
 export function getCanonicalUrl(fipsCode: string) {
   const location = findLocationForFips(fipsCode);
-  const { county, state_code } = location;
-  const stateId = state_code.toLowerCase();
+  const { county, state_url_name } = location;
   return county
-    ? `us/${stateId}/county/${location.county_url_name}`
-    : `us/${stateId}`;
+    ? `us/${state_url_name}/county/${location.county_url_name}`
+    : `us/${state_url_name}`;
 }
