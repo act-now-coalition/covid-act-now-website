@@ -17,6 +17,8 @@ import DonateButton from './DonateButton';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import { STATES } from 'common';
 import { Location } from 'history';
+import { useMediaQuery } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
 
 const Panels = ['/', '/about', '/resources', '/blog', '/contact'];
 
@@ -34,6 +36,8 @@ const _AppBar = () => {
   const locationPath = useLocation();
   const { isEmbed } = useEmbed();
 
+  const isLocationPage = location.pathname.includes('us');
+
   useEffect(() => {
     function handleLocationChange(location: Location<any>) {
       setPanelIdx(getPanelIdxFromLocation(location));
@@ -41,6 +45,11 @@ const _AppBar = () => {
     // https://github.com/ReactTraining/react-router/issues/3385#issuecomment-214758008
     return history.listen(handleLocationChange);
   }, [history]);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down(800));
+
+  const donateButtonProps = { isLocationPage, isMobile };
 
   // Don't show in iFrame
   if (isEmbed) return null;
@@ -117,10 +126,10 @@ const _AppBar = () => {
               onClick={goTo('/contact')}
             />
           </StyledTabs>
-          <DonateButton />
+          <DonateButton {...donateButtonProps} />
         </StyledDesktopMenu>
         <StyledMobileMenu>
-          <DonateButton />
+          <DonateButton {...donateButtonProps} />
           <Burger open={open} setOpen={setOpen} />
           <MobileMenu open={open} goTo={goTo} forwardTo={forwardTo} />
         </StyledMobileMenu>
