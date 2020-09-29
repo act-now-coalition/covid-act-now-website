@@ -65,6 +65,13 @@ export const PartnerLogoGrid = () => {
           </ExternalLink>
         </Grid>
       </Grid>
+      <Grid container item xs={12} sm={4} justify="center">
+        <Grid item>
+          <ExternalLink href="https://schmidtfutures.com">
+            <Logo src="/images_cms/usa_facts.png" alt="USA Facts logo" />
+          </ExternalLink>
+        </Grid>
+      </Grid>
     </Grid>
   );
 };
