@@ -10,6 +10,7 @@ import StapledSidebar, {
 import TeamTable from './TeamTable/TeamTable';
 import HeadshotGrid, { HeadshotGrid2Up } from './HeadshotGrid/HeadshotGrid';
 import { LogoGridItem } from 'components/LogoGrid/LogoGrid';
+import Grid from '@material-ui/core/Grid';
 
 import {
   Wrapper,
@@ -71,17 +72,25 @@ const About = ({ children }: { children: React.ReactNode }) => {
             {content.partnersHeader}
           </SectionHeader>
 
-          {content.partnersContent.map((section: any, i: number) => {
+          {content.partnersContent.map((section: any, idx: number) => {
             return (
-              <Fragment>
+              <Fragment key={idx}>
                 <BodyCopy source={section.copy} linkTarget="_blank" />
-                {section.logos.map((logo: any, i: number) => (
-                  <LogoGridItem
-                    image={logo.image}
-                    url={logo.url}
-                    altText={logo.altText}
-                  />
-                ))}
+                <Grid
+                  container
+                  spacing={1}
+                  alignItems="center"
+                  justify="center"
+                >
+                  {section.logos.map((logo: any, i: number) => (
+                    <LogoGridItem
+                      image={logo.image}
+                      url={logo.url}
+                      altText={logo.altText}
+                      key={logo.altText}
+                    />
+                  ))}
+                </Grid>
               </Fragment>
             );
           })}
