@@ -209,9 +209,14 @@ export function getStateByUrlName(stateUrlName: string): State | undefined {
   );
 }
 
-export function getCountyByUrlName(countyUrlName: string): County | undefined {
+export function getCountyByUrlName(
+  stateCode: string | undefined,
+  countyUrlName: string,
+): County | undefined {
   return COUNTIES.find(
-    county => toLower(county.county_url_name) === toLower(countyUrlName),
+    county =>
+      toLower(county.county_url_name) === toLower(countyUrlName) &&
+      toLower(county.state_code) === toLower(stateCode),
   );
 }
 
@@ -219,9 +224,11 @@ export function getLocationByUrlParams(
   stateUrlName: string,
   countyUrlName?: string,
 ): Location | undefined {
+  const stateInfo = getStateByUrlName(stateUrlName);
+
   const location = countyUrlName
-    ? getCountyByUrlName(countyUrlName)
-    : getStateByUrlName(stateUrlName);
+    ? getCountyByUrlName(stateInfo?.state_code, countyUrlName)
+    : stateInfo;
 
   assert(
     isUndefined(location),

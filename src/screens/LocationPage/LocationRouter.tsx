@@ -11,7 +11,8 @@ interface LocationPageUrlParams {
 const LocationRouter: React.FC = () => {
   let { stateId, countyId } = useParams<LocationPageUrlParams>();
   const state = getStateByUrlName(stateId);
-  const countyOption = countyId && getCountyByUrlName(countyId);
+  const countyOption =
+    countyId && getCountyByUrlName(state?.state_code, countyId);
 
   // The URL parameters don't correspond to a valid state or county, we
   // redirect the user to the homepage

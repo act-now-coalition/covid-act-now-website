@@ -44,7 +44,8 @@ function locationNameFromUrlParams(stateId?: string, countyId?: string) {
   }
 
   const state = getStateByUrlName(stateId);
-  const countyOption = countyId && getCountyByUrlName(countyId);
+  const countyOption =
+    countyId && getCountyByUrlName(state?.state_code, countyId);
   const isValidLocation = state && !(countyId && !countyOption);
 
   if (!isValidLocation) {
