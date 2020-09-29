@@ -144,15 +144,7 @@ export function getLocationNameForFips(fips: string): string {
 }
 
 export function getRelativeUrlForFips(fips: string): string {
-  if (isStateFips(fips)) {
-    const state = findStateByFips(fips);
-    return `/us/${state.state_code.toLowerCase()}/`;
-  } else {
-    const county = findCountyByFips(fips);
-    return `/us/${county.state_code.toLowerCase()}/county/${
-      county.county_url_name
-    }/`;
-  }
+  return `/${getCanonicalUrl(fips)}`;
 }
 
 export function getLocationUrlForFips(fips: string): string {

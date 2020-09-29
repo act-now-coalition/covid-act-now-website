@@ -1,7 +1,5 @@
-import _ from 'lodash';
 import React, { useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
-import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020';
 import '../../App.css'; /* optional for styling like the :hover pseudo-class */
 import { findCountyByFips } from 'common/locations';
 import { useProjections } from 'common/utils/model';
