@@ -17,6 +17,7 @@ import { DonateButtonWithFade, DonateButtonWithoutFade } from './DonateButton';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import { STATES } from 'common';
 import { Location } from 'history';
+import { includes } from 'lodash';
 
 const Panels = ['/', '/about', '/resources', '/blog', '/contact'];
 
@@ -34,7 +35,11 @@ const _AppBar = () => {
   const locationPath = useLocation();
   const { isEmbed } = useEmbed();
 
-  const isLocationPage = location.pathname.includes('us');
+  // Fade functionality for donate button only applies to homepage paths:
+  const pathsToHomepage = ['/', '/alert_signup', '/compare'];
+  const buttonWithFade =
+    includes(pathsToHomepage, location.pathname) &&
+    !location.pathname.includes('us');
 
   useEffect(() => {
     function handleLocationChange(location: Location<any>) {
@@ -49,9 +54,9 @@ const _AppBar = () => {
   where the donate button doesn't appear on load--it appears
   only once scrollY has passed 175px / banner is scrolled away
   */
-  const MobileDonateButtonComponent = isLocationPage
-    ? DonateButtonWithoutFade
-    : DonateButtonWithFade;
+  const MobileDonateButtonComponent = buttonWithFade
+    ? DonateButtonWithFade
+    : DonateButtonWithoutFade;
 
   // Don't show in iFrame
   if (isEmbed) return null;

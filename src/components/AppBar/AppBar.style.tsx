@@ -218,5 +218,6 @@ export const DonateButtonWrapper = styled.div`
   a {
     display: flex;
     height: 100%;
+    text-decoration: none;
   }
 `;
