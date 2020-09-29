@@ -290,7 +290,7 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
                   placeholder:
                     isNarrowMobile && extendRight
                       ? 'Search'
-                      : 'Search for your state or county',
+                      : 'Search for your state, county, or zip',
                 })}
               />
             </StyledInputWrapper>
