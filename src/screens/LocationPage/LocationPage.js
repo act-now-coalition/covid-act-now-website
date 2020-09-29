@@ -19,10 +19,9 @@ function LocationPage() {
   let { stateId, countyId, chartId } = useParams();
 
   const state = getStateByUrlName(stateId);
-  const countyOption = countyId && getCountyByUrlName(countyId);
-
   // TODO(igor): don't mix uppercase and lowercase in here
   const stateCode = state.state_code.toUpperCase();
+  const countyOption = countyId && getCountyByUrlName(stateCode, countyId);
 
   const [mapOption, setMapOption] = useState(
     stateCode === MAP_FILTERS.DC ? MAP_FILTERS.NATIONAL : MAP_FILTERS.STATE,
