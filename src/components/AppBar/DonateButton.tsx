@@ -25,31 +25,30 @@ const ButtonContent = () => {
   );
 };
 
-const DonateButton = (props: {
-  isLocationPage: boolean;
-  isMobile: boolean;
-}) => {
+/*
+Splits donate button into 2 separate components (with/without fade)
+so that the useScrollPosition hook is only called when necessary
+*/
+
+export const DonateButtonWithoutFade = (props: {}) => {
+  return (
+    <DonateButtonWrapper>
+      <ButtonContent />
+    </DonateButtonWrapper>
+  );
+};
+
+export const DonateButtonWithFade = () => {
   // uses https://www.npmjs.com/package/@react-hook/window-scroll :
   const scrollY = useScrollPosition(5);
   // 170 approximates the height of the donation banner:
   const isPassedBanner = scrollY > 170;
-  const noFadeDelay = props.isLocationPage || !props.isMobile;
-
-  /*
-  Fade functionality is only applied on mobile to the homepage
-  where the donate button doesnt appear on load (it appears
-  only once scrollY has passed 175px / banner is scrolled away)
-  */
-  const fadeIn = noFadeDelay || isPassedBanner;
-  const timeout = noFadeDelay ? 0 : 150;
 
   return (
-    <Fade in={fadeIn} timeout={timeout}>
+    <Fade in={isPassedBanner} timeout={150}>
       <DonateButtonWrapper>
         <ButtonContent />
       </DonateButtonWrapper>
     </Fade>
   );
 };
-
-export default DonateButton;

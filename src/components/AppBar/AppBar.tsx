@@ -13,12 +13,10 @@ import {
   StyledTab,
   StyledMobileMenu,
 } from './AppBar.style';
-import DonateButton from './DonateButton';
+import { DonateButtonWithFade, DonateButtonWithoutFade } from './DonateButton';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import { STATES } from 'common';
 import { Location } from 'history';
-import { useMediaQuery } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
 
 const Panels = ['/', '/about', '/resources', '/blog', '/contact'];
 
@@ -46,10 +44,14 @@ const _AppBar = () => {
     return history.listen(handleLocationChange);
   }, [history]);
 
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down(800));
-
-  const donateButtonProps = { isLocationPage, isMobile };
+  /*
+  Fade functionality is only applied to mobile homepage,
+  where the donate button doesn't appear on load--it appears
+  only once scrollY has passed 175px / banner is scrolled away
+  */
+  const MobileDonateButtonComponent = isLocationPage
+    ? DonateButtonWithoutFade
+    : DonateButtonWithFade;
 
   // Don't show in iFrame
   if (isEmbed) return null;
@@ -126,10 +128,10 @@ const _AppBar = () => {
               onClick={goTo('/contact')}
             />
           </StyledTabs>
-          <DonateButton {...donateButtonProps} />
+          <DonateButtonWithoutFade />
         </StyledDesktopMenu>
         <StyledMobileMenu>
-          <DonateButton {...donateButtonProps} />
+          <MobileDonateButtonComponent />
           <Burger open={open} setOpen={setOpen} />
           <MobileMenu open={open} goTo={goTo} forwardTo={forwardTo} />
         </StyledMobileMenu>
