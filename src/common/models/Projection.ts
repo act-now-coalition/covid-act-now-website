@@ -440,7 +440,7 @@ export class Projection {
   }
 
   private getLocationName(s: RegionSummaryWithTimeseries) {
-    const stateName = getStateName(s.state);
+    const stateName = getStateName(s.state) || '';
     return s.county ? `${s.county}, ${stateName}` : stateName;
   }
 
