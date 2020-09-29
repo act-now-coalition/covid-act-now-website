@@ -8,6 +8,7 @@ import theme from 'assets/theme';
 import colorPalette from 'assets/theme/palette';
 import { charts } from 'components/Charts/Charts.style';
 import { COLOR_MAP } from 'common/colors';
+import { brightenColor } from './utils';
 
 /** Gets the chart palette based on the current theme. */
 function palette(props: any) {
@@ -179,6 +180,18 @@ export const GridLines = styled.g`
   }
 `;
 
+export const Axis = styled.g`
+  text {
+    font-family: ${charts.fontFamily};
+    font-weight: 'medium';
+    font-size: 12px;
+    fill: ${props => palette(props).axis};
+  }
+  line {
+    stroke: ${props => '#e0e0e0'};
+  }
+`;
+
 export const HoverTrackerLine = styled.g`
   line {
     stroke: #000;
@@ -212,6 +225,22 @@ export const LineLabel = styled.text`
   font-weight: 500;
   font-size: 11px;
   dominant-baseline: middle;
+  fill: ${props =>
+    palette(props).isDarkMode
+      ? brightenColor(props.fill || '#000', 1)
+      : props.fill || '#000'};
+`;
+
+export const Grid = styled.g`
+  line,
+  path {
+    fill: none;
+    stroke: ${props =>
+      palette(props).isDarkMode ? palette(props).grid : '#e0e0e0'};
+    stroke-opacity: ${props => (palette(props).isDarkMode ? 0.6 : 1)};
+    stroke-dasharray: 4, 3;
+    stroke-width: 1px;
+  }
 `;
 
 export const DateMarker = styled.div`
