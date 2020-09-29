@@ -5,7 +5,7 @@ import {
   RegionDescriptor,
 } from './RegionDescriptor';
 import { Api } from 'api';
-import { County, findCountyByFips } from 'common/locations';
+import { County, findCountyByFips, getStateName } from 'common/locations';
 import moment from 'moment';
 import { assert } from '.';
 import { getSnapshotUrlOverride } from './snapshots';
@@ -48,12 +48,17 @@ export function fetchAllStateProjections(snapshotUrl: string | null = null) {
     const all = await new Api(snapshotUrl).fetchAggregatedSummaryWithTimeseries(
       RegionAggregateDescriptor.STATES,
     );
-    return all.map(summaryWithTimeseries => {
-      return new Projections(
-        summaryWithTimeseries,
-        summaryWithTimeseries.state,
-      );
-    });
+    return all
+      .filter(
+        summaryWithTimeseries =>
+          getStateName(summaryWithTimeseries.state) !== undefined,
+      )
+      .map(summaryWithTimeseries => {
+        return new Projections(
+          summaryWithTimeseries,
+          summaryWithTimeseries.state,
+        );
+      });
   }
   const key = snapshotUrl || 'null';
   cachedStatesProjections[key] = cachedStatesProjections[key] || fetch();
@@ -70,7 +75,8 @@ export function fetchAllCountyProjections(snapshotUrl: string | null = null) {
     );
     return all
       .filter(
-        summaryWithTimeseries => summaryWithTimeseries.state !== undefined,
+        summaryWithTimeseries =>
+          getStateName(summaryWithTimeseries.state) !== undefined,
       )
       .map(summaryWithTimeseries => {
         const fips = summaryWithTimeseries.fips;

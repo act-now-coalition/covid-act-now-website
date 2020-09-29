@@ -5,7 +5,7 @@ import urlJoin from 'url-join';
 import { assert } from './utils';
 import countyAdjacencyMsa from './data/county_adjacency_msa.json';
 import collegesByFips from './data/colleges_by_fips.json';
-import { REVERSED_STATES } from 'common';
+import { REVERSED_STATES, STATES } from 'common';
 
 interface AdjacencyData {
   [fips: string]: {
@@ -185,4 +185,8 @@ export function getColleges(fips: string): CollegeData[] {
 
 export function getStateCode(stateName: string) {
   return REVERSED_STATES[stateName];
+}
+
+export function getStateName(stateCode: string): string | undefined {
+  return (STATES as any)[stateCode];
 }

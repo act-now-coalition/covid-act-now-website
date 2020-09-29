@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import moment from 'moment';
 
-import STATES from 'common/us_states';
 import { ActualsTimeseries } from 'api';
 import {
   ActualsTimeseriesRow,
@@ -12,6 +11,7 @@ import {
 } from 'api/schema/RegionSummaryWithTimeseries';
 import { ICUHeadroomInfo, calcICUHeadroom } from './ICUHeadroom';
 import { lastValue } from './utils';
+import { getStateName } from 'common/locations';
 
 const DISABLED_CASE_DENSITY: string[] = [
   '48029', // https://trello.com/c/ulCnCcif/
@@ -143,7 +143,7 @@ export class Projection {
   readonly currentCumulativeDeaths: number | null;
   readonly currentCumulativeCases: number | null;
   readonly currentContactTracerMetric: number | null;
-  readonly state: string;
+  readonly stateCode: string;
   readonly currentCaseDensity: number | null;
   readonly currentDailyDeaths: number | null;
 
@@ -194,7 +194,7 @@ export class Projection {
     this.dates = dates;
 
     this.locationName = this.getLocationName(summaryWithTimeseries);
-    this.state = summaryWithTimeseries.state;
+    this.stateCode = summaryWithTimeseries.state;
     this.isCounty = parameters.isCounty;
     this.totalPopulation = summaryWithTimeseries.population;
     this.fips = summaryWithTimeseries.fips;
@@ -300,7 +300,7 @@ export class Projection {
 
   get currentContactTracers() {
     return (
-      CONTACT_TRACER_STATE_OVERRIDES[this.state] ||
+      CONTACT_TRACER_STATE_OVERRIDES[this.stateCode] ||
       lastValue(this.actualTimeseries.map(row => row && row.contactTracers)) ||
       null
     );
@@ -440,12 +440,8 @@ export class Projection {
   }
 
   private getLocationName(s: RegionSummaryWithTimeseries) {
-    // TODO(michael): I don't like hardcoding "County" into the name. We should
-    // probably delete this code and get the location name from somewhere other
-    // than the API (or improve the API value).
-    // TODO(chris): Fix state
-    // @ts-ignore
-    return s.county ? `${s.county}, ${STATES[s.state]}]` : STATES[s.state];
+    const stateName = getStateName(s.state);
+    return s.county ? `${s.county}, ${stateName}` : stateName;
   }
 
   private calcCaseDensityRange(): Array<CaseDensityRange | null> {
