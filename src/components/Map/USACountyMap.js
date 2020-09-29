@@ -11,7 +11,7 @@ import {
   getCanonicalUrl,
   getLocationNameForFips,
   getStateCode,
-  isValidStateByFips,
+  isStateFips,
 } from 'common/locations';
 
 /**
@@ -56,7 +56,7 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent, condensed }) => {
           <Geographies geography={STATES_JSON}>
             {({ geographies }) =>
               geographies
-                .filter(geo => isValidStateByFips(geo.id))
+                .filter(geo => isStateFips(geo.id))
                 .map(geo => {
                   const { name } = geo.properties;
                   const fipsCode = geo.id;

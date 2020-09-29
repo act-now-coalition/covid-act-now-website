@@ -1,15 +1,7 @@
 /** Helpers for dealing with the State / Counties dataset. */
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 import urlJoin from 'url-join';
-import {
-  each,
-  sortBy,
-  takeRight,
-  has,
-  partition,
-  isUndefined,
-  toLower,
-} from 'lodash';
+import { each, sortBy, takeRight, has, partition, toLower } from 'lodash';
 import { assert } from './utils';
 import countyAdjacencyMsa from './data/county_adjacency_msa.json';
 import collegesByFips from './data/colleges_by_fips.json';
@@ -110,17 +102,19 @@ export function findCountyByFips(fips: string) {
   return undefined;
 }
 
-export function isValidStateByFips(fips: string): boolean {
-  const state = US_STATE_DATASET.state_dataset.find(
+function _findStateByFips(fips: string): State | undefined {
+  return US_STATE_DATASET.state_dataset.find(
     state => state.state_fips_code === fips,
   );
+}
+
+export function isStateFips(fips: string): boolean {
+  const state = _findStateByFips(fips);
   return !!state;
 }
 
 export function findStateByFips(fips: string): State {
-  const state = US_STATE_DATASET.state_dataset.find(
-    state => state.state_fips_code === fips,
-  );
+  const state = _findStateByFips(fips);
   assert(state !== undefined, `Invalid fips: ${fips}`);
   return state;
 }
@@ -134,7 +128,7 @@ export function findStateFipsCode(stateCode: string): string {
 }
 
 export function getLocationNameForFips(fips: string): string {
-  if (fips.length === 2) {
+  if (isStateFips(fips)) {
     return findStateByFips(fips).state;
   } else {
     const county = findCountyByFips(fips);
@@ -167,10 +161,6 @@ export function topCountiesByPopulation(limit: number): County[] {
     sortBy(allCounties(), c => c.population),
     limit,
   );
-}
-
-export function isStateFips(fips: string) {
-  return fips.length === 2;
 }
 
 export function getAdjacentCounties(fips: string): string[] {
