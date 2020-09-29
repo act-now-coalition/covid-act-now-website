@@ -220,19 +220,6 @@ export function getCountyByUrlName(
   );
 }
 
-export function getLocationByUrlParams(
-  stateUrlName: string,
-  countyUrlName?: string,
-): Location | undefined {
-  const stateInfo = getStateByUrlName(stateUrlName);
-
-  const location = countyUrlName
-    ? getCountyByUrlName(stateInfo?.state_code, countyUrlName)
-    : stateInfo;
-
-  return location as Location;
-}
-
 export function getCanonicalUrl(fipsCode: string) {
   const { state_fips_code, county, county_url_name } = findLocationForFips(
     fipsCode,
