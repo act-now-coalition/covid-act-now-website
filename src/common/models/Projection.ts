@@ -223,7 +223,7 @@ export class Projection {
     this.rawHospitalizations = hospitalizationsDisabled
       ? []
       : actualTimeseries.map(row =>
-          row?.hospitalBeds?.currentUsageCovid
+          row?.hospitalBeds?.currentUsageCovid !== undefined
             ? row.hospitalBeds.currentUsageCovid
             : null,
         );
@@ -231,20 +231,24 @@ export class Projection {
       this.rawHospitalizations,
     );
     this.rawICUHospitalizations = actualTimeseries.map(row =>
-      row?.icuBeds?.currentUsageCovid ? row.icuBeds.currentUsageCovid : null,
+      row?.icuBeds?.currentUsageCovid !== undefined
+        ? row.icuBeds.currentUsageCovid
+        : null,
     );
     this.smoothedICUHospitalizations = this.smoothWithRollingAverage(
       this.rawICUHospitalizations,
     );
 
     this.cumulativeActualDeaths = this.smoothCumulatives(
-      actualTimeseries.map(row => (row?.deaths ? row.deaths : null)),
+      actualTimeseries.map(row =>
+        row?.deaths !== undefined ? row.deaths : null,
+      ),
     );
 
     const disableRt = false;
     this.rtRange = disableRt ? [null] : this.calcRtRange(metricsTimeseries);
     this.testPositiveRate = metricsTimeseries.map(row =>
-      row?.testPositivityRatio ? row.testPositivityRatio : null,
+      row?.testPositivityRatio !== undefined ? row.testPositivityRatio : null,
     );
 
     if (metrics && !DISABLED_ICU.includes(this.fips)) {
@@ -262,28 +266,33 @@ export class Projection {
       this.icuHeadroomInfo?.metricSeries || this.dates.map(date => null);
 
     this.contractTracers = metricsTimeseries.map(row =>
-      row?.contactTracerCapacityRatio ? row.contactTracerCapacityRatio : null,
+      row?.contactTracerCapacityRatio !== undefined
+        ? row.contactTracerCapacityRatio
+        : null,
     );
 
     this.caseDensityByCases = metricsTimeseries.map(row =>
-      row?.caseDensity ? row.caseDensity : null,
+      row?.caseDensity !== undefined ? row.caseDensity : null,
     );
     this.caseDensityRange = this.calcCaseDensityRange();
 
     this.currentCaseDensity =
-      metrics?.caseDensity && !DISABLED_CASE_DENSITY.includes(this.fips)
+      metrics?.caseDensity !== undefined &&
+      !DISABLED_CASE_DENSITY.includes(this.fips)
         ? metrics.caseDensity
         : null;
     this.currentDailyDeaths = lastValue(this.smoothedDailyDeaths);
 
-    this.currentCumulativeDeaths = summaryWithTimeseries.actuals.deaths
-      ? summaryWithTimeseries.actuals.deaths
-      : null;
-    this.currentCumulativeCases = summaryWithTimeseries.actuals.cases
-      ? summaryWithTimeseries.actuals.cases
-      : null;
+    this.currentCumulativeDeaths =
+      summaryWithTimeseries.actuals.deaths !== undefined
+        ? summaryWithTimeseries.actuals.deaths
+        : null;
+    this.currentCumulativeCases =
+      summaryWithTimeseries.actuals.cases !== undefined
+        ? summaryWithTimeseries.actuals.cases
+        : null;
     this.currentContactTracerMetric =
-      metrics?.contactTracerCapacityRatio &&
+      metrics?.contactTracerCapacityRatio !== undefined &&
       !DISABLED_CONTACT_TRACING.includes(this.fips)
         ? metrics.contactTracerCapacityRatio
         : null;
@@ -314,7 +323,7 @@ export class Projection {
       return null;
     }
 
-    return this.metrics?.testPositivityRatio
+    return this.metrics?.testPositivityRatio !== undefined
       ? this.metrics.testPositivityRatio
       : null;
   }
@@ -324,7 +333,9 @@ export class Projection {
       return null;
     }
 
-    return this.metrics?.infectionRate ? this.metrics.infectionRate : null;
+    return this.metrics?.infectionRate !== undefined
+      ? this.metrics.infectionRate
+      : null;
   }
 
   private getColumn(columnName: string): Column[] {
@@ -454,10 +465,10 @@ export class Projection {
     timeseries: Array<MetricsTimeseriesRow | null>,
   ): Array<RtRange | null> {
     const rtSeries = timeseries.map(row =>
-      row?.infectionRate ? row.infectionRate : null,
+      row?.infectionRate !== undefined ? row.infectionRate : null,
     );
     const rtCiSeries = timeseries.map(row =>
-      row?.infectionRateCI90 ? row.infectionRateCI90 : null,
+      row?.infectionRateCI90 !== undefined ? row.infectionRateCI90 : null,
     );
 
     return rtSeries.map((rt, idx) => {
