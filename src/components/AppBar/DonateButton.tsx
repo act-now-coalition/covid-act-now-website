@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { StyledDonateButton, DonateButtonWrapper } from './AppBar.style';
-import { trackClick } from 'components/Analytics';
+import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import useScrollPosition from '@react-hook/window-scroll';
 import { Fade } from '@material-ui/core';
 
@@ -16,7 +16,7 @@ const ButtonContent = () => {
         disableRipple
         disableFocusRipple
         onClick={() => {
-          trackClick(trackLabel);
+          trackEvent(EventCategory.DONATE, EventAction.CLICK, trackLabel);
         }}
       >
         Donate
@@ -40,7 +40,7 @@ export const DonateButtonWithoutFade = (props: {}) => {
 
 export const DonateButtonWithFade = () => {
   // uses https://www.npmjs.com/package/@react-hook/window-scroll :
-  const scrollY = useScrollPosition(5);
+  const scrollY = useScrollPosition();
   // 170 approximates the height of the donation banner:
   const isPassedBanner = scrollY > 170;
 

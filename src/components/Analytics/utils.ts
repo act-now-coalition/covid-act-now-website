@@ -89,7 +89,3 @@ export function trackShare(label: string) {
 export function trackVoteClick(label: string) {
   trackEvent(EventCategory.VOTE_2020, EventAction.CLICK_LINK, label);
 }
-
-export function trackClick(label: string) {
-  trackEvent(EventCategory.DONATE, EventAction.CLICK, label);
-}

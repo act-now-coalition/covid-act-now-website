@@ -7,7 +7,6 @@ import {
   trackCopyLink,
   trackShare,
   trackVoteClick,
-  trackClick,
 } from './utils';
 
 export default PageviewTracker;
@@ -20,5 +19,4 @@ export {
   trackCopyLink,
   trackShare,
   trackVoteClick,
-  trackClick,
 };
