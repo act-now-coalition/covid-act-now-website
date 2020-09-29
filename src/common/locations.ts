@@ -14,7 +14,6 @@ import { assert } from './utils';
 import countyAdjacencyMsa from './data/county_adjacency_msa.json';
 import collegesByFips from './data/colleges_by_fips.json';
 import { REVERSED_STATES } from 'common';
-import { isCounty } from '../components/AutocompleteLocations';
 
 interface AdjacencyData {
   [fips: string]: {
@@ -111,7 +110,7 @@ export function findCountyByFips(fips: string) {
   return undefined;
 }
 
-export function isValidState(fips: string): boolean {
+export function isValidStateByFips(fips: string): boolean {
   const state = US_STATE_DATASET.state_dataset.find(
     state => state.state_fips_code === fips,
   );
@@ -198,9 +197,11 @@ export function getStateCode(stateName: string) {
 }
 
 const ALL_LOCATIONS = getLocationNames();
-const [COUNTIES, STATES] = partition(ALL_LOCATIONS, isCounty);
+const locationsByType = partition(ALL_LOCATIONS, isCounty);
+const COUNTIES = locationsByType[0] as County[];
+const STATES = locationsByType[1] as State[];
 
-export function getStateByUrlName(stateUrlName: string): Location | undefined {
+export function getStateByUrlName(stateUrlName: string): State | undefined {
   return STATES.find(
     state =>
       toLower(state.state_url_name) === toLower(stateUrlName) ||
@@ -208,9 +209,7 @@ export function getStateByUrlName(stateUrlName: string): Location | undefined {
   );
 }
 
-export function getCountyByUrlName(
-  countyUrlName: string,
-): Location | undefined {
+export function getCountyByUrlName(countyUrlName: string): County | undefined {
   return COUNTIES.find(
     county => toLower(county.county_url_name) === toLower(countyUrlName),
   );
@@ -240,4 +239,16 @@ export function getCanonicalUrl(fipsCode: string) {
   return county
     ? `us/${state_url_name}/county/${county_url_name}`
     : `us/${state_url_name}`;
+}
+
+export function isCounty(location: Location) {
+  return location.county !== undefined;
+}
+
+export function isState(location: Location) {
+  return !isCounty(location);
+}
+
+export function belongsToState(location: Location, stateFips: string) {
+  return location.state_fips_code === stateFips;
 }

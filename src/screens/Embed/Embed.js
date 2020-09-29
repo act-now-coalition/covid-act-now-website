@@ -71,7 +71,7 @@ function LocationEmbed() {
 
   const canonicalUrl = getCanonicalUrl(projections.fips);
   const embedOnClickBaseURL = projections
-    ? `https://covidactnow.org/us/${canonicalUrl}`
+    ? `https://covidactnow.org/${canonicalUrl}`
     : '';
 
   return (

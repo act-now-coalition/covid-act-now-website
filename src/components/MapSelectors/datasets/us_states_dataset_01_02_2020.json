@@ -3,371 +3,371 @@
     {
       "state_code": "AK",
       "state": "Alaska",
-      "state_url_name": "alaska-ak",
+      "state_url_name": "alaska_ak",
       "state_fips_code": "02",
       "population": 731545
     },
     {
       "state_code": "AL",
       "state": "Alabama",
-      "state_url_name": "alabama-al",
+      "state_url_name": "alabama_al",
       "state_fips_code": "01",
       "population": 4903185
     },
     {
       "state_code": "AR",
       "state": "Arkansas",
-      "state_url_name": "arkansas-ar",
+      "state_url_name": "arkansas_ar",
       "state_fips_code": "05",
       "population": 3017825
     },
     {
       "state_code": "AZ",
       "state": "Arizona",
-      "state_url_name": "arizona-az",
+      "state_url_name": "arizona_az",
       "state_fips_code": "04",
       "population": 7278717
     },
     {
       "state_code": "CA",
       "state": "California",
-      "state_url_name": "california-ca",
+      "state_url_name": "california_ca",
       "state_fips_code": "06",
       "population": 39512223
     },
     {
       "state_code": "CO",
       "state": "Colorado",
-      "state_url_name": "colorado-co",
+      "state_url_name": "colorado_co",
       "state_fips_code": "08",
       "population": 5758736
     },
     {
       "state_code": "CT",
       "state": "Connecticut",
-      "state_url_name": "connecticut-ct",
+      "state_url_name": "connecticut_ct",
       "state_fips_code": "09",
       "population": 3565287
     },
     {
       "state_code": "DC",
       "state": "District of Columbia",
-      "state_url_name": "district-of-columbia-dc",
+      "state_url_name": "district_of_columbia_dc",
       "state_fips_code": "11",
       "population": 705749
     },
     {
       "state_code": "DE",
       "state": "Delaware",
-      "state_url_name": "delaware-de",
+      "state_url_name": "delaware_de",
       "state_fips_code": "10",
       "population": 973764
     },
     {
       "state_code": "FL",
       "state": "Florida",
-      "state_url_name": "florida-fl",
+      "state_url_name": "florida_fl",
       "state_fips_code": "12",
       "population": 21477737
     },
     {
       "state_code": "GA",
       "state": "Georgia",
-      "state_url_name": "georgia-ga",
+      "state_url_name": "georgia_ga",
       "state_fips_code": "13",
       "population": 10617423
     },
     {
       "state_code": "HI",
       "state": "Hawaii",
-      "state_url_name": "hawaii-hi",
+      "state_url_name": "hawaii_hi",
       "state_fips_code": "15",
       "population": 1415872
     },
     {
       "state_code": "IA",
       "state": "Iowa",
-      "state_url_name": "iowa-ia",
+      "state_url_name": "iowa_ia",
       "state_fips_code": "19",
       "population": 3155070
     },
     {
       "state_code": "ID",
       "state": "Idaho",
-      "state_url_name": "idaho-id",
+      "state_url_name": "idaho_id",
       "state_fips_code": "16",
       "population": 1787147
     },
     {
       "state_code": "IL",
       "state": "Illinois",
-      "state_url_name": "illinois-il",
+      "state_url_name": "illinois_il",
       "state_fips_code": "17",
       "population": 12671821
     },
     {
       "state_code": "IN",
       "state": "Indiana",
-      "state_url_name": "indiana-in",
+      "state_url_name": "indiana_in",
       "state_fips_code": "18",
       "population": 6732219
     },
     {
       "state_code": "KS",
       "state": "Kansas",
-      "state_url_name": "kansas-ks",
+      "state_url_name": "kansas_ks",
       "state_fips_code": "20",
       "population": 2913314
     },
     {
       "state_code": "KY",
       "state": "Kentucky",
-      "state_url_name": "kentucky-ky",
+      "state_url_name": "kentucky_ky",
       "state_fips_code": "21",
       "population": 4467673
     },
     {
       "state_code": "LA",
       "state": "Louisiana",
-      "state_url_name": "louisiana-la",
+      "state_url_name": "louisiana_la",
       "state_fips_code": "22",
       "population": 4648794
     },
     {
       "state_code": "MA",
       "state": "Massachusetts",
-      "state_url_name": "massachusetts-ma",
+      "state_url_name": "massachusetts_ma",
       "state_fips_code": "25",
       "population": 6949503
     },
     {
       "state_code": "MD",
       "state": "Maryland",
-      "state_url_name": "maryland-md",
+      "state_url_name": "maryland_md",
       "state_fips_code": "24",
       "population": 6045680
     },
     {
       "state_code": "ME",
       "state": "Maine",
-      "state_url_name": "maine-me",
+      "state_url_name": "maine_me",
       "state_fips_code": "23",
       "population": 1344212
     },
     {
       "state_code": "MI",
       "state": "Michigan",
-      "state_url_name": "michigan-mi",
+      "state_url_name": "michigan_mi",
       "state_fips_code": "26",
       "population": 9986857
     },
     {
       "state_code": "MN",
       "state": "Minnesota",
-      "state_url_name": "minnesota-mn",
+      "state_url_name": "minnesota_mn",
       "state_fips_code": "27",
       "population": 5639632
     },
     {
       "state_code": "MO",
       "state": "Missouri",
-      "state_url_name": "missouri-mo",
+      "state_url_name": "missouri_mo",
       "state_fips_code": "29",
       "population": 6137428
     },
     {
       "state_code": "MP",
       "state": "Northern Mariana Islands",
-      "state_url_name": "northern-mariana-islands-mp",
+      "state_url_name": "northern_mariana_islands_mp",
       "state_fips_code": "69",
       "population": 107766
     },
     {
       "state_code": "MS",
       "state": "Mississippi",
-      "state_url_name": "mississippi-ms",
+      "state_url_name": "mississippi_ms",
       "state_fips_code": "28",
       "population": 2976149
     },
     {
       "state_code": "MT",
       "state": "Montana",
-      "state_url_name": "montana-mt",
+      "state_url_name": "montana_mt",
       "state_fips_code": "30",
       "population": 1068778
     },
     {
       "state_code": "NC",
       "state": "North Carolina",
-      "state_url_name": "north-carolina-nc",
+      "state_url_name": "north_carolina_nc",
       "state_fips_code": "37",
       "population": 10488084
     },
     {
       "state_code": "ND",
       "state": "North Dakota",
-      "state_url_name": "north-dakota-nd",
+      "state_url_name": "north_dakota_nd",
       "state_fips_code": "38",
       "population": 762062
     },
     {
       "state_code": "NE",
       "state": "Nebraska",
-      "state_url_name": "nebraska-ne",
+      "state_url_name": "nebraska_ne",
       "state_fips_code": "31",
       "population": 1934408
     },
     {
       "state_code": "NH",
       "state": "New Hampshire",
-      "state_url_name": "new-hampshire-nh",
+      "state_url_name": "new_hampshire_nh",
       "state_fips_code": "33",
       "population": 1359711
     },
     {
       "state_code": "NJ",
       "state": "New Jersey",
-      "state_url_name": "new-jersey-nj",
+      "state_url_name": "new_jersey_nj",
       "state_fips_code": "34",
       "population": 8882190
     },
     {
       "state_code": "NM",
       "state": "New Mexico",
-      "state_url_name": "new-mexico-nm",
+      "state_url_name": "new_mexico_nm",
       "state_fips_code": "35",
       "population": 2096829
     },
     {
       "state_code": "NV",
       "state": "Nevada",
-      "state_url_name": "nevada-nv",
+      "state_url_name": "nevada_nv",
       "state_fips_code": "32",
       "population": 3080156
     },
     {
       "state_code": "NY",
       "state": "New York",
-      "state_url_name": "new-york-ny",
+      "state_url_name": "new_york_ny",
       "state_fips_code": "36",
       "population": 19453561
     },
     {
       "state_code": "OH",
       "state": "Ohio",
-      "state_url_name": "ohio-oh",
+      "state_url_name": "ohio_oh",
       "state_fips_code": "39",
       "population": 11689100
     },
     {
       "state_code": "OK",
       "state": "Oklahoma",
-      "state_url_name": "oklahoma-ok",
+      "state_url_name": "oklahoma_ok",
       "state_fips_code": "40",
       "population": 3956971
     },
     {
       "state_code": "OR",
       "state": "Oregon",
-      "state_url_name": "oregon-or",
+      "state_url_name": "oregon_or",
       "state_fips_code": "41",
       "population": 4217737
     },
     {
       "state_code": "PA",
       "state": "Pennsylvania",
-      "state_url_name": "pennsylvania-pa",
+      "state_url_name": "pennsylvania_pa",
       "state_fips_code": "42",
       "population": 12801989
     },
     {
       "state_code": "PR",
       "state": "Puerto Rico",
-      "state_url_name": "puerto-rico-pr",
+      "state_url_name": "puerto_rico_pr",
       "state_fips_code": "72",
       "population": 3193694
     },
     {
       "state_code": "RI",
       "state": "Rhode Island",
-      "state_url_name": "rhode-island-ri",
+      "state_url_name": "rhode_island_ri",
       "state_fips_code": "44",
       "population": 1059361
     },
     {
       "state_code": "SC",
       "state": "South Carolina",
-      "state_url_name": "south-carolina-sc",
+      "state_url_name": "south_carolina_sc",
       "state_fips_code": "45",
       "population": 5148714
     },
     {
       "state_code": "SD",
       "state": "South Dakota",
-      "state_url_name": "south-dakota-sd",
+      "state_url_name": "south_dakota_sd",
       "state_fips_code": "46",
       "population": 884659
     },
     {
       "state_code": "TN",
       "state": "Tennessee",
-      "state_url_name": "tennessee-tn",
+      "state_url_name": "tennessee_tn",
       "state_fips_code": "47",
       "population": 6833174
     },
     {
       "state_code": "TX",
       "state": "Texas",
-      "state_url_name": "texas-tx",
+      "state_url_name": "texas_tx",
       "state_fips_code": "48",
       "population": 28995881
     },
     {
       "state_code": "UT",
       "state": "Utah",
-      "state_url_name": "utah-ut",
+      "state_url_name": "utah_ut",
       "state_fips_code": "49",
       "population": 3205958
     },
     {
       "state_code": "VA",
       "state": "Virginia",
-      "state_url_name": "virginia-va",
+      "state_url_name": "virginia_va",
       "state_fips_code": "51",
       "population": 8535519
     },
     {
       "state_code": "VT",
       "state": "Vermont",
-      "state_url_name": "vermont-vt",
+      "state_url_name": "vermont_vt",
       "state_fips_code": "50",
       "population": 623989
     },
     {
       "state_code": "WA",
       "state": "Washington",
-      "state_url_name": "washington-wa",
+      "state_url_name": "washington_wa",
       "state_fips_code": "53",
       "population": 7614893
     },
     {
       "state_code": "WI",
       "state": "Wisconsin",
-      "state_url_name": "wisconsin-wi",
+      "state_url_name": "wisconsin_wi",
       "state_fips_code": "55",
       "population": 5822434
     },
     {
       "state_code": "WV",
       "state": "West Virginia",
-      "state_url_name": "west-virginia-wv",
+      "state_url_name": "west_virginia_wv",
       "state_fips_code": "54",
       "population": 1792065
     },
     {
       "state_code": "WY",
       "state": "Wyoming",
-      "state_url_name": "wyoming-wy",
+      "state_url_name": "wyoming_wy",
       "state_fips_code": "56",
       "population": 578759
     }
