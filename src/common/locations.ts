@@ -230,12 +230,7 @@ export function getLocationByUrlParams(
     ? getCountyByUrlName(stateInfo?.state_code, countyUrlName)
     : stateInfo;
 
-  assert(
-    isUndefined(location),
-    `Location for URL params '${stateUrlName}' and '${countyUrlName}' not found`,
-  );
-
-  return location;
+  return location as Location;
 }
 
 export function getCanonicalUrl(fipsCode: string) {
