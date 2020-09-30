@@ -188,7 +188,7 @@ export const Axis = styled.g`
     fill: ${props => palette(props).axis};
   }
   line {
-    stroke: ${props => '#e0e0e0'};
+    stroke: ${props => COLOR_MAP.GRAY_EXPLORE_CHART};
   }
 `;
 
@@ -236,7 +236,9 @@ export const Grid = styled.g`
   path {
     fill: none;
     stroke: ${props =>
-      palette(props).isDarkMode ? palette(props).grid : '#e0e0e0'};
+      palette(props).isDarkMode
+        ? palette(props).grid
+        : COLOR_MAP.GRAY_EXPLORE_CHART};
     stroke-opacity: ${props => (palette(props).isDarkMode ? 0.6 : 1)};
     stroke-dasharray: 4, 3;
     stroke-width: 1px;
