@@ -59,23 +59,6 @@ collections:
         label: Donate page content
         file: src/cms-content/donate/donate-page.json
         fields:
-          - label: Header Lines
-            name: headerLines
-            widget: list
-            fields:
-              - label: title
-              - name: title
-              - widget: string
           - label: Intro
             name: intro
             widget: markdown
-          - label: Sections
-            name: sections
-            widget: list
-            fields:
-              - label: Section Title
-                name: title
-                widget: string
-              - label: Section Copy
-                name: copy
-                widget: markdown
