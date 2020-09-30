@@ -429,6 +429,10 @@ export const FooterLink = styled.div<{ isFaqLink?: boolean }>`
   padding: ${({ isFaqLink }) => isFaqLink && '.35rem .75rem'};
   border: ${({ isFaqLink }) => isFaqLink && '1px solid #f2f2f2'};
 
+  &:hover {
+    background-color: ${({ isFaqLink }) => isFaqLink && '#fafafa'};
+  }
+
   @media (min-width: 600px) {
     &:last-child {
       margin-left: auto;
