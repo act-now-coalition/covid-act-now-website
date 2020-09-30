@@ -97,9 +97,7 @@ export function calcICUHeadroom(
   }
 
   return {
-    metricSeries: metricsTimeseries.map(row =>
-      row?.icuHeadroomRatio ? row.icuHeadroomRatio : null,
-    ),
+    metricSeries: metricsTimeseries.map(row => row && row.icuHeadroomRatio),
     metricValue: metrics.icuHeadroomRatio,
     overrideInPlace,
     totalBeds: finalTotalBeds,
