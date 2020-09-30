@@ -101,7 +101,7 @@ const CompareTableRow = (props: {
             </LocationInfoWrapper>
           </div>
         </LocationNameCell>
-        {orderedMetrics.map((metric: Metric) => {
+        {orderedMetrics.map((metric: Metric, i) => {
           const metricForValue = location.metricsInfo.metrics[metric];
           const valueUnknown =
             metricForValue && metricForValue.level === Level.UNKNOWN
@@ -109,6 +109,7 @@ const CompareTableRow = (props: {
               : false;
           return (
             <MetricCell
+              key={`metric-cell-${i}`}
               sorter={sorter}
               metric={metric}
               iconColor={getLevel(metric)}
