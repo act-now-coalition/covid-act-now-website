@@ -46,8 +46,8 @@ export const LineGrid = styled.g<{ exploreStroke?: string }>`
   line,
   path {
     fill: none;
-    stroke: ${props => props.exploreStroke || palette(props).grid};
-    stroke-opacity: ${({ exploreStroke }) => (exploreStroke ? '1' : '0.6')};
+    stroke: ${props => palette(props).grid};
+    stroke-opacity: 0.6;
     stroke-dasharray: 4, 3;
     stroke-width: 1px;
   }

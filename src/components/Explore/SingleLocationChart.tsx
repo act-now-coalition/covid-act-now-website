@@ -12,7 +12,6 @@ import ChartSeries, { SeriesMarker } from './SeriesChart';
 import ChartOverlay from './ChartOverlay';
 import { getMaxBy, findPointByDate } from './utils';
 import * as Styles from './Explore.style';
-import { COLOR_MAP } from 'common/colors';
 import { ScreenshotReady } from 'components/Screenshot';
 import TodayMarker from './TodayMarker';
 import DateMarker from './DateMarker';
@@ -151,9 +150,6 @@ const SingleLocationChart: React.FC<{
   const getXPosition = (d: Column) => dateScale(getDate(d)) || 0;
   const getYPosition = (d: Column) => yScale(getY(d));
 
-  // Note(Chelsi): !barOpacity makes sure change isn't applied to share image chart:
-  const axisGridColor = !barOpacity ? `${COLOR_MAP.GRAY_EXPLORE_CHART}` : '';
-
   return (
     <Styles.PositionRelative style={{ height }}>
       <svg width={width} height={height}>
@@ -161,22 +157,18 @@ const SingleLocationChart: React.FC<{
           <GridLines
             width={innerWidth}
             height={innerHeight}
-            strokeColor={axisGridColor}
             dateScale={dateScale}
             yScale={yScale}
+            numTicksRows={5}
           />
           <Axes
             height={innerHeight}
             dateScale={dateScale}
             yScale={yScale}
             isMobile={isMobile}
-            strokeColor={axisGridColor}
+            yNumTicks={5}
           />
-          <TodayMarker
-            height={innerHeight}
-            dateScale={dateScale}
-            strokeColor={axisGridColor}
-          />
+          <TodayMarker height={innerHeight} dateScale={dateScale} />
           <RectClipGroup width={innerWidth} height={innerHeight}>
             {seriesList.map(({ label, data, type, params }) => (
               <ChartSeries
