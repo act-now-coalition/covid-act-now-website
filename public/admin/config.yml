@@ -62,3 +62,12 @@ collections:
           - label: Intro
             name: intro
             widget: markdown
+          - label: Sections
+            name: sections
+            fields:
+              - label: Section Title
+                name: title
+                widget: string
+              - label: Section Copy
+                name: copy
+                widget: markdown
