@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import urlJoin from 'url-join';
 import {
   ScreenshotWrapper,
   ChartWrapper,
@@ -48,7 +49,10 @@ const ExportChartImage = () => {
   }
 
   const chartHeight = 415;
-  let url = `https://covidactnow.org/${getCanonicalUrl(projection.fips)}`;
+  let url = urlJoin(
+    'https://covidactnow.org/',
+    getCanonicalUrl(projection.fips),
+  );
 
   return (
     <ScreenshotWrapper className={SCREENSHOT_CLASS}>
