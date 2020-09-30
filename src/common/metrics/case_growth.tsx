@@ -79,7 +79,8 @@ function renderStatus(projections: Projections): React.ReactElement {
   if (rt === null) {
     return (
       <Fragment>
-        Not enough case data is available to generate infection growth rate.
+        Unable to generate {CaseGrowthMetric.extendedMetricName.toLowerCase()}.
+        This could be due to insufficient data.
       </Fragment>
     );
   }

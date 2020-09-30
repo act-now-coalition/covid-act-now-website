@@ -231,3 +231,22 @@ export function isState(location: Location) {
 export function belongsToState(location: Location, stateFips: string) {
   return location.state_fips_code === stateFips;
 }
+
+export function locationNameFromUrlParams(stateId?: string, countyId?: string) {
+  if (!stateId) {
+    return '';
+  }
+
+  const state = getStateByUrlName(stateId);
+  const countyOption =
+    countyId && getCountyByUrlName(state?.state_code, countyId);
+  const isValidLocation = state && !(countyId && !countyOption);
+
+  if (!isValidLocation) {
+    return '';
+  }
+
+  return state && countyId && countyOption
+    ? `${countyOption.county}, ${state?.state}`
+    : `${state?.state}`;
+}

@@ -33,6 +33,7 @@ export enum EventCategory {
   EXPLORE = 'explore',
   ENGAGEMENT = 'engagement',
   VOTE_2020 = 'vote',
+  DONATE = 'donate',
 }
 
 /**

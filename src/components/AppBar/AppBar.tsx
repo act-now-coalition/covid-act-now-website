@@ -13,18 +13,13 @@ import {
   StyledTab,
   StyledMobileMenu,
 } from './AppBar.style';
-
-import {
-  FacebookIcon,
-  FacebookShareButton,
-  TwitterShareButton,
-  TwitterIcon,
-} from 'react-share';
+import { DonateButtonWithFade, DonateButtonWithoutFade } from './DonateButton';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import { Location } from 'history';
-import * as urls from 'common/urls';
-import { trackShare } from 'components/Analytics';
-import { getCountyByUrlName, getStateByUrlName } from 'common/locations';
+// import * as urls from 'common/urls';
+// import { trackShare } from 'components/Analytics';
+// import { getCountyByUrlName, getStateByUrlName } from 'common/locations';
+import { includes } from 'lodash';
 
 const Panels = ['/', '/about', '/resources', '/blog', '/contact'];
 
@@ -38,25 +33,6 @@ function getPanelIdxFromLocation(location: Location<any>) {
   return idx === -1 ? false : idx;
 }
 
-function locationNameFromUrlParams(stateId?: string, countyId?: string) {
-  if (!stateId) {
-    return '';
-  }
-
-  const state = getStateByUrlName(stateId);
-  const countyOption =
-    countyId && getCountyByUrlName(state?.state_code, countyId);
-  const isValidLocation = state && !(countyId && !countyOption);
-
-  if (!isValidLocation) {
-    return '';
-  }
-
-  return state && countyId && countyOption
-    ? `${countyOption.county}, ${state?.state}`
-    : `${state?.state}`;
-}
-
 const _AppBar = () => {
   const history = useHistory();
   const location = useLocation();
@@ -66,6 +42,12 @@ const _AppBar = () => {
   const locationPath = useLocation();
   const { isEmbed } = useEmbed();
 
+  // Fade functionality for donate button only applies to homepage paths:
+  const pathsToHomepage = ['/', '/alert_signup', '/compare'];
+  const buttonWithFade =
+    includes(pathsToHomepage, location.pathname) &&
+    !location.pathname.includes('us');
+
   useEffect(() => {
     function handleLocationChange(location: Location<any>) {
       setPanelIdx(getPanelIdxFromLocation(location));
@@ -73,6 +55,15 @@ const _AppBar = () => {
     // https://github.com/ReactTraining/react-router/issues/3385#issuecomment-214758008
     return history.listen(handleLocationChange);
   }, [history]);
+
+  /*
+  Fade functionality is only applied to mobile homepage,
+  where the donate button doesn't appear on load--it appears
+  only once scrollY has passed 175px / banner is scrolled away
+  */
+  const MobileDonateButtonComponent = buttonWithFade
+    ? DonateButtonWithFade
+    : DonateButtonWithoutFade;
 
   // Don't show in iFrame
   if (isEmbed) return null;
@@ -90,10 +81,12 @@ const _AppBar = () => {
       strict: false,
     });
   }
-  const locationName =
-    match && match?.params?.id
-      ? locationNameFromUrlParams(match.params.id, match.params.county)
-      : '';
+  // TODO(pablo): Import locationNameFromUrlParams from common/utils once
+  // we restore sharing.
+  // const locationName =
+  //   match && match?.params?.id
+  //     ? locationNameFromUrlParams(match.params.id, match.params.county)
+  //     : '';
   const goTo = (route: string) => (e: React.MouseEvent) => {
     e.preventDefault();
     setOpen(false);
@@ -109,16 +102,6 @@ const _AppBar = () => {
     setOpen(false);
     window.location.href = url;
   };
-
-  const shareURL = urls.addSharingId(
-    `https://covidactnow.org${match ? match.url : ''}`,
-  );
-  const hashtag = 'COVIDActNow';
-  const locationShareTitle = `I'm keeping track of ${locationName}'s COVID data and risk level with @CovidActNow. What does your community look like?`;
-  const defaultShareTitle =
-    'I’m keeping track of the latest COVID data and risk levels with @CovidActNow. What does your community look like?';
-
-  const shareTitle = locationName ? locationShareTitle : defaultShareTitle;
 
   return (
     <StyledAppBar position="sticky">
@@ -160,51 +143,10 @@ const _AppBar = () => {
               onClick={goTo('/contact')}
             />
           </StyledTabs>
-          <FacebookShareButton
-            url={shareURL}
-            quote={shareTitle}
-            beforeOnClick={() => {
-              trackShare('facebook');
-              return Promise.resolve();
-            }}
-            style={{
-              alignItems: 'center',
-              display: 'flex',
-              paddingLeft: 28,
-              paddingRight: 14,
-            }}
-          >
-            <FacebookIcon size={32} round={true} />
-          </FacebookShareButton>
-          <TwitterShareButton
-            url={shareURL}
-            title={shareTitle}
-            hashtags={[hashtag]}
-            beforeOnClick={() => {
-              trackShare('twitter');
-              return Promise.resolve();
-            }}
-            style={{ alignItems: 'center', display: 'flex' }}
-          >
-            <TwitterIcon size={32} round={true} />
-          </TwitterShareButton>
+          <DonateButtonWithoutFade />
         </StyledDesktopMenu>
         <StyledMobileMenu>
-          <FacebookShareButton
-            url={shareURL}
-            title={shareTitle}
-            style={{ alignItems: 'center', display: 'flex', paddingRight: 8 }}
-          >
-            <FacebookIcon size={32} round={true} />
-          </FacebookShareButton>
-          <TwitterShareButton
-            url={shareURL}
-            title={shareTitle}
-            hashtags={[hashtag]}
-            style={{ alignItems: 'center', display: 'flex' }}
-          >
-            <TwitterIcon size={32} round={true} />
-          </TwitterShareButton>
+          <MobileDonateButtonComponent />
           <Burger open={open} setOpen={setOpen} />
           <MobileMenu open={open} goTo={goTo} forwardTo={forwardTo} />
         </StyledMobileMenu>

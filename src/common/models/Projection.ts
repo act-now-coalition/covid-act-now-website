@@ -3,16 +3,44 @@ import moment from 'moment';
 
 import { ActualsTimeseries } from 'api';
 import {
-  PredictionTimeseriesRow,
   ActualsTimeseriesRow,
   RegionSummaryWithTimeseries,
-  Timeseries,
   MetricsTimeseriesRow,
   Metricstimeseries,
   Metrics,
 } from 'api/schema/RegionSummaryWithTimeseries';
 import { ICUHeadroomInfo, calcICUHeadroom } from './ICUHeadroom';
 import { lastValue } from './utils';
+
+const DISABLED_CASE_DENSITY: string[] = [
+  '48029', // https://trello.com/c/ulCnCcif/
+];
+
+const DISABLED_INFECTION_RATE: string[] = [];
+
+const DISABLED_TEST_POSITIVITY: string[] = [
+  '25001',
+  '25003',
+  '25005',
+  '25007',
+  '25009',
+  '25011',
+  '25013',
+  '25015',
+  '25017',
+  '25019',
+  '25021',
+  '25023',
+  '25025',
+  '25027',
+  '48113',
+  '48215',
+  '48201', // https://trello.com/c/tgxn6Wjp/
+];
+
+const DISABLED_ICU: string[] = [];
+
+const DISABLED_CONTACT_TRACING: string[] = [];
 
 /**
  * We truncate (or in the case of charts, switch to a dashed line) the last
@@ -56,9 +84,6 @@ export interface Column {
 // These names must match exactly the field in `Projection` that stores the
 // data. See `getColumn()`.
 export type DatasetId =
-  | 'beds'
-  | 'cumulativeDeaths'
-  | 'cumulativeInfected'
   | 'rtRange'
   | 'icuUtilization'
   | 'testPositiveRate'
@@ -110,7 +135,6 @@ export const CASE_FATALITY_RATIO = 0.01;
 export class Projection {
   readonly locationName: string;
   readonly totalPopulation: number;
-  readonly finalHospitalBeds: number;
   readonly fips: string;
   readonly dateOverwhelmed: Date | null;
 
@@ -129,11 +153,7 @@ export class Projection {
   private readonly isCounty: boolean;
 
   // NOTE: These are used dynamically by getColumn()
-  private readonly beds: Array<number | null>;
-  private readonly timeseries: Array<PredictionTimeseriesRow | null>;
   private readonly actualTimeseries: Array<ActualsTimeseriesRow | null>;
-  private readonly cumulativeDeaths: Array<number | null>;
-  private readonly cumulativeInfected: Array<number | null>;
   private readonly smoothedDailyCases: Array<number | null>;
   private readonly rtRange: Array<RtRange | null>;
   // ICU Utilization series as values between 0-1 (or > 1 if over capacity).
@@ -158,7 +178,6 @@ export class Projection {
     parameters: ProjectionParameters,
   ) {
     const {
-      timeseries,
       actualTimeseries,
       metricsTimeseries,
       dates,
@@ -171,7 +190,6 @@ export class Projection {
     const actuals = summaryWithTimeseries.actuals;
 
     this.metrics = metrics || null;
-    this.timeseries = timeseries;
     this.actualTimeseries = actualTimeseries;
     this.dates = dates;
 
@@ -182,13 +200,6 @@ export class Projection {
     this.fips = summaryWithTimeseries.fips;
 
     // Set up our series data exposed via getDataset().
-    this.beds = timeseries.map(row => row && row.hospitalBedCapacity);
-    this.finalHospitalBeds = this.beds[this.beds.length - 1]!;
-    this.cumulativeDeaths = timeseries.map(row => row && row.cumulativeDeaths);
-    this.cumulativeInfected = timeseries.map(
-      row => row && row.cumulativeInfected,
-    );
-
     this.rawDailyCases = this.deltasFromCumulatives(
       this.fillLeadingNullsWithZeros(
         actualTimeseries.map(row => row && row.cumulativeConfirmedCases),
@@ -232,7 +243,7 @@ export class Projection {
       row ? row.testPositivityRatio : null,
     );
 
-    if (metrics) {
+    if (metrics && !DISABLED_ICU.includes(this.fips)) {
       this.icuHeadroomInfo = calcICUHeadroom(
         this.fips,
         actualTimeseries,
@@ -255,10 +266,11 @@ export class Projection {
     );
     this.caseDensityRange = this.calcCaseDensityRange();
 
-    this.currentCaseDensity = metrics ? metrics.caseDensity : null;
+    this.currentCaseDensity =
+      metrics && !DISABLED_CASE_DENSITY.includes(this.fips)
+        ? metrics.caseDensity
+        : null;
     this.currentDailyDeaths = lastValue(this.smoothedDailyDeaths);
-
-    this.fixZeros(this.cumulativeDeaths);
 
     const shortageStart =
       summaryWithTimeseries.projections?.totalHospitalBeds?.shortageStartDate ||
@@ -276,9 +288,10 @@ export class Projection {
       summaryWithTimeseries.actuals.cumulativeDeaths;
     this.currentCumulativeCases =
       summaryWithTimeseries.actuals.cumulativeConfirmedCases;
-    this.currentContactTracerMetric = metrics
-      ? metrics.contactTracerCapacityRatio
-      : null;
+    this.currentContactTracerMetric =
+      metrics && !DISABLED_CONTACT_TRACING.includes(this.fips)
+        ? metrics.contactTracerCapacityRatio
+        : null;
   }
 
   get currentContactTracers() {
@@ -296,55 +309,13 @@ export class Projection {
     return lastValue(this.smoothedDailyCases);
   }
 
-  get finalCumulativeInfected() {
-    return this.cumulativeInfected[this.cumulativeInfected.length - 1];
-  }
-
-  get finalCumulativeDeaths() {
-    return this.cumulativeDeaths[this.cumulativeDeaths.length - 1];
-  }
-
-  get finalAdditionalDeaths() {
-    let projectedCumulativeDeaths: number =
-      this.cumulativeDeaths[this.cumulativeDeaths.length - 1] || 0;
-    let currentCumulativeDeaths: number =
-      lastValue(this.cumulativeActualDeaths) || 0;
-    return projectedCumulativeDeaths - currentCumulativeDeaths;
-  }
-
   /** Returns the date when projections end (should be 30 days out). */
   get finalDate(): Date {
     return this.dates[this.dates.length - 1];
   }
 
   get currentTestPositiveRate(): number | null {
-    // Corona Data Scraper is pulling in bogus test data for Washoe County.
-    // Just disable for now.
-    // TODO(michael): Plumb FIPS in here so this is less fragile.
-    if (this.stateName === 'Masa') {
-      return null;
-    }
-
-    const blacklistFips = [
-      '25001',
-      '25003',
-      '25005',
-      '25007',
-      '25009',
-      '25011',
-      '25013',
-      '25015',
-      '25017',
-      '25019',
-      '25021',
-      '25023',
-      '25025',
-      '25027',
-      '48113',
-      '48215',
-    ];
-
-    if (blacklistFips.indexOf(this.fips) > -1) {
+    if (DISABLED_TEST_POSITIVITY.includes(this.fips)) {
       return null;
     }
 
@@ -352,6 +323,10 @@ export class Projection {
   }
 
   get rt(): number | null {
+    if (DISABLED_INFECTION_RATE.includes(this.fips)) {
+      return null;
+    }
+
     return this.metrics ? this.metrics.infectionRate : null;
   }
 
@@ -370,25 +345,13 @@ export class Projection {
    * based off the date. Eventually would be nice to use this around instead of the
    * two list scenario we have going right now.
    */
-  private makeDateDictionary(
-    ts: Timeseries | ActualsTimeseries | Metricstimeseries,
-  ) {
+  private makeDateDictionary(ts: ActualsTimeseries | Metricstimeseries) {
     const dict: {
-      [date: string]:
-        | PredictionTimeseriesRow
-        | ActualsTimeseriesRow
-        | MetricsTimeseriesRow;
+      [date: string]: ActualsTimeseriesRow | MetricsTimeseriesRow;
     } = {};
-    ts.forEach(
-      (
-        row:
-          | PredictionTimeseriesRow
-          | ActualsTimeseriesRow
-          | MetricsTimeseriesRow,
-      ) => {
-        dict[row.date] = row;
-      },
-    );
+    ts.forEach((row: ActualsTimeseriesRow | MetricsTimeseriesRow) => {
+      dict[row.date] = row;
+    });
     return dict;
   }
 
@@ -405,12 +368,10 @@ export class Projection {
     summaryWithTimeseries: RegionSummaryWithTimeseries,
     futureDaysToInclude: number,
   ) {
-    const timeseriesRaw = summaryWithTimeseries.timeseries;
     const actualsTimeseriesRaw = summaryWithTimeseries.actualsTimeseries;
     const metricsTimeseriesRaw = summaryWithTimeseries.metricsTimeseries;
     if (actualsTimeseriesRaw.length === 0) {
       return {
-        timeseries: [],
         actualTimeseries: [],
         metricsTimeseries: [],
         dates: [],
@@ -423,9 +384,6 @@ export class Projection {
     if (metricsTimeseriesRaw.length > 0) {
       earliestDate = moment.utc(_.first(metricsTimeseriesRaw)!.date);
       latestDate = moment.utc(_.last(metricsTimeseriesRaw)!.date);
-    } else if (timeseriesRaw.length > 0) {
-      earliestDate = moment.utc(_.first(timeseriesRaw)!.date);
-      latestDate = moment.utc(_.last(timeseriesRaw)!.date);
     } else {
       earliestDate = moment.utc(_.first(actualsTimeseriesRaw)!.date);
       latestDate = moment.utc(_.last(actualsTimeseriesRaw)!.date);
@@ -433,12 +391,10 @@ export class Projection {
 
     earliestDate = moment.max(earliestDate, moment.utc('2020-03-01'));
 
-    const timeseries: Array<PredictionTimeseriesRow | null> = [];
     const actualsTimeseries: Array<ActualsTimeseriesRow | null> = [];
     const metricsTimeseries: Array<MetricsTimeseriesRow | null> = [];
     const dates: Date[] = [];
 
-    const timeseriesDictionary = this.makeDateDictionary(timeseriesRaw);
     const actualsTimeseriesDictionary = this.makeDateDictionary(
       actualsTimeseriesRaw,
     );
@@ -449,16 +405,12 @@ export class Projection {
     let currDate = earliestDate.clone();
     while (currDate.diff(latestDate) <= 0) {
       const ts = currDate.format('YYYY-MM-DD');
-      const timeseriesRowForDate = timeseriesDictionary[
-        ts
-      ] as PredictionTimeseriesRow;
       const actualsTimeseriesrowForDate = actualsTimeseriesDictionary[
         ts
       ] as ActualsTimeseriesRow;
       const metricsTimeseriesRowForDate = metricsTimeseriesDictionary[
         ts
       ] as MetricsTimeseriesRow;
-      timeseries.push(timeseriesRowForDate || null);
       actualsTimeseries.push(actualsTimeseriesrowForDate || null);
       metricsTimeseries.push(metricsTimeseriesRowForDate || null);
       dates.push(currDate.toDate());
@@ -473,7 +425,6 @@ export class Projection {
     const days =
       todayIndex >= 0 ? todayIndex + futureDaysToInclude : dates.length;
     return {
-      timeseries: timeseries.slice(0, days),
       actualTimeseries: actualsTimeseries.slice(0, days),
       metricsTimeseries: metricsTimeseries.slice(0, days),
       dates: dates.slice(0, days),
