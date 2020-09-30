@@ -5,7 +5,7 @@ import { each, sortBy, takeRight, has, partition, toLower } from 'lodash';
 import { assert } from './utils';
 import countyAdjacencyMsa from './data/county_adjacency_msa.json';
 import collegesByFips from './data/colleges_by_fips.json';
-import { REVERSED_STATES, STATES } from 'common';
+import { REVERSED_STATES, STATES as STATES_MAP } from 'common';
 
 interface AdjacencyData {
   [fips: string]: {
@@ -187,7 +187,7 @@ export function getStateCode(stateName: string) {
 }
 
 export function getStateName(stateCode: string): string | undefined {
-  return (STATES as any)[stateCode];
+  return (STATES_MAP as any)[stateCode];
 }
 
 const ALL_LOCATIONS = getLocationNames();
