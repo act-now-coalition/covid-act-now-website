@@ -45,9 +45,9 @@ const roadmapListContent = [
     sectionHeader: 'Join the fight against COVID',
     copy: 'By keeping us online, you’re also:',
     listItems: [
-      'Helping build a shared understand of COVID',
+      'Helping build a shared understanding of COVID',
       'Joining our fight against misinformation',
-      'Leaving a legacy during this generation defining crisis',
+      'Leaving a legacy during this generation-defining crisis',
     ],
   },
 ];
