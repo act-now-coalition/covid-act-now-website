@@ -22,6 +22,7 @@ import {
 import { SelectorWrapper } from 'components/Header/HomePageHeader.style';
 import CompareMain from 'components/Compare/CompareMain';
 import { DonationBanner } from 'components/Banner/DonationBanner';
+import Explore from 'components/Explore';
 
 export default function HomePage() {
   const shareBlockRef = useRef(null);
@@ -90,6 +91,7 @@ export default function HomePage() {
             <Map hideLegend />
             {isMobile && <HomePageThermometer />}
             <CompareMain locationsViewable={8} isHomepage />
+            <Explore fips={'31'} />
             <SectionWrapper ref={indicatorsRef}>
               <CriteriaExplanation isMobile={isMobile} />
             </SectionWrapper>
