@@ -7,8 +7,8 @@ backend:
   branch: cms-content-entry
   base_url: https://api.netlify.com
 
-media_folder: "public/images_cms"
-public_folder: "/images_cms"
+media_folder: 'public/images_cms'
+public_folder: '/images_cms'
 
 collections:
   - name: 'about'
@@ -25,17 +25,53 @@ collections:
         fields:
           - { label: 'Page Header', name: 'pageHeader', widget: 'string' }
           - { label: 'Intro: Header', name: 'introHeader', widget: 'string' }
-          - { label: 'Intro: Content', name: 'introContent', widget: 'markdown' }
-          - { label: 'Partners: Header', name: 'partnersHeader', widget: 'string' }
+          - {
+              label: 'Intro: Content',
+              name: 'introContent',
+              widget: 'markdown',
+            }
+          - {
+              label: 'Partners: Header',
+              name: 'partnersHeader',
+              widget: 'string',
+            }
           - label: 'Partners: Content'
             name: 'partnersContent'
             widget: 'list'
             fields:
-              - { label: 'Section copy', name: 'copy', widget: 'markdown'}
+              - { label: 'Section copy', name: 'copy', widget: 'markdown' }
               - label: 'Logos'
                 name: 'logos'
                 widget: 'list'
                 fields:
-                  - { label: 'Alt text', name: 'altText', widget: 'string'}
-                  - { label: 'Image', name: 'image', widget: 'image'}
-                  - { label: 'Url', name: 'url', widget: 'string'}
+                  - { label: 'Alt text', name: 'altText', widget: 'string' }
+                  - { label: 'Image', name: 'image', widget: 'image' }
+                  - { label: 'Url', name: 'url', widget: 'string' }
+  - name: donate
+    label: Donate
+    format: json
+    description: Donate page content
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    files:
+      - name: Donate
+        label: Donate page content
+        file: src/cms-content/donate/donate-page.json
+        fields:
+          - label: Header Lines
+            name: headerLines
+            widget: list
+          - label: Intro
+            name: intro
+            widget: markdown
+          - label: Sections
+            name: sections
+            widget: list
+            fields:
+              - label: Section Title
+                name: title
+                widget: string
+              - label: Section Copy
+                name: copy
+                widget: markdown

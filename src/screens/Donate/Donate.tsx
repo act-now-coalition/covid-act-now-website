@@ -7,52 +7,31 @@ import {
   Container,
   ContentWrapper,
   SectionHeader,
-  BodyCopy,
   Header,
   IntroWrapper,
+  BodyCopy,
 } from 'screens/Donate/Donate.style';
 import GiveButterEmbed from 'screens/Donate/GiveButterEmbed';
+import { donateContent } from 'common/utils/netlify';
 
-const Intro = () => {
+const Intro: React.FC = () => {
+  const { headerLines } = donateContent;
   return (
     <IntroWrapper>
       <Header>
-        Our data saves lives.
-        <br />
-        Donate to keep us online.
+        {headerLines.map((line, i) => (
+          <Fragment key={i}>
+            {line}
+            {i < headerLines.length - 1 ? <br /> : ''}
+          </Fragment>
+        ))}
       </Header>
-      <BodyCopy>
-        We are a tiny, independent non-profit (mostly of volunteers) working
-        relentlessly since March to bring you the most important COVID
-        information.
-      </BodyCopy>
+      <BodyCopy source={donateContent.intro} />
     </IntroWrapper>
   );
 };
 
-const roadmapListContent = [
-  {
-    sectionHeader: 'Keep the data flowing',
-    copy:
-      'Our resources are running short. By donating you keep us online, so that we can continue:',
-    listItems: [
-      'Improving data quality',
-      'Inspiring more action',
-      'Reaching more people',
-    ],
-  },
-  {
-    sectionHeader: 'Join the fight against COVID',
-    copy: 'By keeping us online, you’re also:',
-    listItems: [
-      'Helping build a shared understanding of COVID',
-      'Joining our fight against misinformation',
-      'Leaving a legacy during this generation-defining crisis',
-    ],
-  },
-];
-
-const Donate = () => {
+const Donate: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down(800));
 
@@ -67,17 +46,10 @@ const Donate = () => {
             <Intro />
           </Fragment>
         )}
-        {roadmapListContent.map((item: any, i: number) => (
-          <Fragment>
-            <SectionHeader>{item.sectionHeader}</SectionHeader>
-            <BodyCopy>{item.copy}</BodyCopy>
-            <ul>
-              {item.listItems.map((item: any, i: number) => (
-                <BodyCopy key={item} as="li">
-                  {item}
-                </BodyCopy>
-              ))}
-            </ul>
+        {donateContent.sections.map((section, i) => (
+          <Fragment key={i}>
+            <SectionHeader>{section.title}</SectionHeader>
+            <BodyCopy source={section.copy} />
           </Fragment>
         ))}
       </ContentWrapper>
