@@ -64,6 +64,7 @@ collections:
             widget: markdown
           - label: Sections
             name: sections
+            widget: list
             fields:
               - label: Section Title
                 name: title
