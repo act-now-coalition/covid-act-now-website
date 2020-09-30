@@ -7,7 +7,12 @@ import STATES_JSON from './data/states-10m.json';
 import { USMapWrapper, USStateMapWrapper } from './Map.style';
 import { useSummaries } from 'common/location_summaries';
 import { ScreenshotReady } from 'components/Screenshot';
-import { getStateCode } from 'common/locations';
+import {
+  getCanonicalUrl,
+  getLocationNameForFips,
+  getStateCode,
+  isStateFips,
+} from 'common/locations';
 
 /**
  * SVG element to represent the Northern Mariana Islands on the USA Country Map as a
@@ -41,9 +46,7 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent, condensed }) => {
     .scale(1000)
     .translate([400, 300]);
 
-  const onMouseLeave = () => {
-    setTooltipContent('');
-  };
+  const onMouseLeave = () => setTooltipContent('');
 
   return (
     <USMapWrapper condensed={condensed}>
@@ -52,48 +55,53 @@ const USACountyMap = ({ stateClickHandler, setTooltipContent, condensed }) => {
         <ComposableMap data-tip="" projection={projection}>
           <Geographies geography={STATES_JSON}>
             {({ geographies }) =>
-              geographies.map(geo => {
-                const { name } = geo.properties;
-                const stateCode = getStateCode(name);
+              geographies
+                .filter(geo => isStateFips(geo.id))
+                .map(geo => {
+                  const { name } = geo.properties;
+                  const fipsCode = geo.id;
+                  const stateCode = getStateCode(name);
+                  const stateUrl = `/${getCanonicalUrl(fipsCode)}`;
+                  const locationName = getLocationNameForFips(fipsCode);
 
-                // Using a custom SVG to place the northern mariana islands to increase
-                // accessibility due to the small size.
-                if (stateCode === 'MP') {
-                  return (
-                    <Link key={stateCode} to={`/us/${stateCode.toLowerCase()}`}>
-                      <MarianaIslands
+                  // Using a custom SVG to place the northern mariana islands to increase
+                  // accessibility due to the small size.
+                  if (stateCode === 'MP') {
+                    return (
+                      <Link
+                        key={stateCode}
+                        to={stateUrl}
+                        aria-label={locationName}
+                      >
+                        <MarianaIslands
+                          key={geo.rsmKey}
+                          onMouseEnter={() => setTooltipContent(name)}
+                          onMouseLeave={onMouseLeave}
+                          onClick={() => stateClickHandler(name)}
+                          fill={getFillColor(geo)}
+                        />
+                      </Link>
+                    );
+                  }
+                  return stateCode ? (
+                    <Link
+                      key={stateCode}
+                      to={stateUrl}
+                      aria-label={locationName}
+                    >
+                      <Geography
                         key={geo.rsmKey}
-                        onMouseEnter={() => {
-                          setTooltipContent(name);
-                        }}
+                        geography={geo}
+                        onMouseEnter={() => setTooltipContent(name)}
                         onMouseLeave={onMouseLeave}
                         onClick={() => stateClickHandler(name)}
                         fill={getFillColor(geo)}
+                        stroke="white"
+                        role="img"
                       />
                     </Link>
-                  );
-                }
-                return stateCode ? (
-                  <Link
-                    key={stateCode}
-                    to={`/us/${stateCode.toLowerCase()}`}
-                    aria-label={name}
-                  >
-                    <Geography
-                      key={geo.rsmKey}
-                      geography={geo}
-                      onMouseEnter={() => {
-                        setTooltipContent(name);
-                      }}
-                      onMouseLeave={onMouseLeave}
-                      onClick={() => stateClickHandler(name)}
-                      fill={getFillColor(geo)}
-                      stroke="white"
-                      role="img"
-                    />
-                  </Link>
-                ) : null;
-              })
+                  ) : null;
+                })
             }
           </Geographies>
         </ComposableMap>

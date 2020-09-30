@@ -21,6 +21,7 @@ import {
 } from 'common/utils/compare';
 import { Level } from 'common/level';
 import { formatEstimate } from 'common/utils';
+import { getCanonicalUrl } from 'common/locations';
 
 function cellValue(metric: any, metricType: Metric) {
   if (metric === null || metric === undefined) {
@@ -56,11 +57,10 @@ const CompareTableRow = (props: {
     return 4;
   }
 
-  const locationLink = `/us/${location.locationInfo.state_code.toLowerCase()}${
-    location.locationInfo.county_url_name
-      ? `/county/${location.locationInfo.county_url_name.toLowerCase()}`
-      : ''
-  }`;
+  const fipsCode =
+    location?.locationInfo?.full_fips_code ||
+    location?.locationInfo.state_fips_code;
+  const locationLink = `/${getCanonicalUrl(fipsCode)}`;
 
   const locationName = getColumnLocationName(location.locationInfo);
 
@@ -101,7 +101,7 @@ const CompareTableRow = (props: {
             </LocationInfoWrapper>
           </div>
         </LocationNameCell>
-        {orderedMetrics.map((metric: Metric) => {
+        {orderedMetrics.map((metric: Metric, i) => {
           const metricForValue = location.metricsInfo.metrics[metric];
           const valueUnknown =
             metricForValue && metricForValue.level === Level.UNKNOWN
@@ -109,6 +109,7 @@ const CompareTableRow = (props: {
               : false;
           return (
             <MetricCell
+              key={`metric-cell-${i}`}
               sorter={sorter}
               metric={metric}
               iconColor={getLevel(metric)}
