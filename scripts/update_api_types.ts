@@ -34,7 +34,7 @@ const BANNER_COMMENT = `
 
 const OUTPUT_FOLDER = path.join(__dirname, '..', 'src', 'api', 'schema');
 const SCHEMAS_BASE_URL =
-  'https://github.com/covid-projections/covid-data-model/raw/d6703e96e84f450ffd4011ff72851841dd46404e/api/schemas_v2/';
+  'https://github.com/covid-projections/covid-data-model/raw/a3120848cd591f8e9e5d4d308eb990b864778d8b/api/schemas_v2/';
 
 (async () => {
   for (const file of SCHEMA_FILES) {

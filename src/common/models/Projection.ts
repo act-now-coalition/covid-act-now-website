@@ -185,7 +185,6 @@ export class Projection {
       summaryWithTimeseries,
       PROJECTIONS_TRUNCATION_DAYS,
     );
-
     const metrics = summaryWithTimeseries.metrics;
     const actuals = summaryWithTimeseries.actuals;
 
@@ -202,14 +201,14 @@ export class Projection {
     // Set up our series data exposed via getDataset().
     this.rawDailyCases = this.deltasFromCumulatives(
       this.fillLeadingNullsWithZeros(
-        actualTimeseries.map(row => (row?.cases ? row.cases : null)),
+        actualTimeseries.map(row => row && row.cases),
       ),
     );
     this.smoothedDailyCases = this.smoothWithRollingAverage(this.rawDailyCases);
 
     this.rawDailyDeaths = this.deltasFromCumulatives(
       this.fillLeadingNullsWithZeros(
-        actualTimeseries.map(row => (row?.deaths ? row.deaths : null)),
+        actualTimeseries.map(row => row && row.deaths),
       ),
     );
     this.smoothedDailyDeaths = this.smoothWithRollingAverage(
@@ -222,33 +221,25 @@ export class Projection {
 
     this.rawHospitalizations = hospitalizationsDisabled
       ? []
-      : actualTimeseries.map(row =>
-          row?.hospitalBeds?.currentUsageCovid !== undefined
-            ? row.hospitalBeds.currentUsageCovid
-            : null,
-        );
+      : actualTimeseries.map(row => row && row.hospitalBeds.currentUsageCovid);
     this.smoothedHospitalizations = this.smoothWithRollingAverage(
       this.rawHospitalizations,
     );
     this.rawICUHospitalizations = actualTimeseries.map(row =>
-      row?.icuBeds?.currentUsageCovid !== undefined
-        ? row.icuBeds.currentUsageCovid
-        : null,
+      row?.icuBeds ? row.icuBeds.currentUsageCovid : null,
     );
     this.smoothedICUHospitalizations = this.smoothWithRollingAverage(
       this.rawICUHospitalizations,
     );
 
     this.cumulativeActualDeaths = this.smoothCumulatives(
-      actualTimeseries.map(row =>
-        row?.deaths !== undefined ? row.deaths : null,
-      ),
+      actualTimeseries.map(row => row && row.deaths),
     );
 
     const disableRt = false;
     this.rtRange = disableRt ? [null] : this.calcRtRange(metricsTimeseries);
-    this.testPositiveRate = metricsTimeseries.map(row =>
-      row?.testPositivityRatio !== undefined ? row.testPositivityRatio : null,
+    this.testPositiveRate = metricsTimeseries.map(
+      row => row && row.testPositivityRatio,
     );
 
     if (metrics && !DISABLED_ICU.includes(this.fips)) {
@@ -265,35 +256,25 @@ export class Projection {
     this.icuUtilization =
       this.icuHeadroomInfo?.metricSeries || this.dates.map(date => null);
 
-    this.contractTracers = metricsTimeseries.map(row =>
-      row?.contactTracerCapacityRatio !== undefined
-        ? row.contactTracerCapacityRatio
-        : null,
+    this.contractTracers = metricsTimeseries.map(
+      row => row && row.contactTracerCapacityRatio,
     );
 
-    this.caseDensityByCases = metricsTimeseries.map(row =>
-      row?.caseDensity !== undefined ? row.caseDensity : null,
+    this.caseDensityByCases = metricsTimeseries.map(
+      row => row && row.caseDensity,
     );
     this.caseDensityRange = this.calcCaseDensityRange();
 
     this.currentCaseDensity =
-      metrics?.caseDensity !== undefined &&
-      !DISABLED_CASE_DENSITY.includes(this.fips)
+      metrics && !DISABLED_CASE_DENSITY.includes(this.fips)
         ? metrics.caseDensity
         : null;
     this.currentDailyDeaths = lastValue(this.smoothedDailyDeaths);
 
-    this.currentCumulativeDeaths =
-      summaryWithTimeseries.actuals.deaths !== undefined
-        ? summaryWithTimeseries.actuals.deaths
-        : null;
-    this.currentCumulativeCases =
-      summaryWithTimeseries.actuals.cases !== undefined
-        ? summaryWithTimeseries.actuals.cases
-        : null;
+    this.currentCumulativeDeaths = summaryWithTimeseries.actuals.deaths;
+    this.currentCumulativeCases = summaryWithTimeseries.actuals.cases;
     this.currentContactTracerMetric =
-      metrics?.contactTracerCapacityRatio !== undefined &&
-      !DISABLED_CONTACT_TRACING.includes(this.fips)
+      metrics && !DISABLED_CONTACT_TRACING.includes(this.fips)
         ? metrics.contactTracerCapacityRatio
         : null;
   }
@@ -323,9 +304,7 @@ export class Projection {
       return null;
     }
 
-    return this.metrics?.testPositivityRatio !== undefined
-      ? this.metrics.testPositivityRatio
-      : null;
+    return this.metrics && this.metrics.testPositivityRatio;
   }
 
   get rt(): number | null {
@@ -333,9 +312,7 @@ export class Projection {
       return null;
     }
 
-    return this.metrics?.infectionRate !== undefined
-      ? this.metrics.infectionRate
-      : null;
+    return this.metrics && this.metrics.infectionRate;
   }
 
   private getColumn(columnName: string): Column[] {
@@ -460,12 +437,8 @@ export class Projection {
   private calcRtRange(
     timeseries: Array<MetricsTimeseriesRow | null>,
   ): Array<RtRange | null> {
-    const rtSeries = timeseries.map(row =>
-      row?.infectionRate !== undefined ? row.infectionRate : null,
-    );
-    const rtCiSeries = timeseries.map(row =>
-      row?.infectionRateCI90 !== undefined ? row.infectionRateCI90 : null,
-    );
+    const rtSeries = timeseries.map(row => row && row.infectionRate);
+    const rtCiSeries = timeseries.map(row => row && row.infectionRateCI90);
 
     return rtSeries.map((rt, idx) => {
       const ci = rtCiSeries[idx];

@@ -7,26 +7,26 @@
 /**
  * Total capacity for resource.
  */
-export type Capacity = number;
+export type Capacity = number | null;
 /**
  * Currently used capacity for resource by all patients (COVID + Non-COVID)
  */
-export type Currentusagetotal = number;
+export type Currentusagetotal = number | null;
 /**
  * Currently used capacity for resource by COVID
  */
-export type Currentusagecovid = number;
+export type Currentusagecovid = number | null;
 /**
  * Typical used capacity rate for resource. This excludes any COVID usage.
  */
-export type Typicalusagerate = number;
+export type Typicalusagerate = number | null;
 
 /**
  * Base model for API output.
  */
 export interface HospitalResourceUtilization {
-  capacity?: Capacity;
-  currentUsageTotal?: Currentusagetotal;
-  currentUsageCovid?: Currentusagecovid;
-  typicalUsageRate?: Typicalusagerate;
+  capacity: Capacity;
+  currentUsageTotal: Currentusagetotal;
+  currentUsageCovid: Currentusagecovid;
+  typicalUsageRate: Typicalusagerate;
 }
