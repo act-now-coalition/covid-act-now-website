@@ -1,8 +1,5 @@
 {
-  "headerLines": [
-    "Our data saves lives.",
-    "Donate to keep us online."
-  ],
+  "headerLines": ["Our data saves lives.", "Donate to keep us online."],
   "intro": "We are a tiny, independent non-profit (mostly of volunteers) working relentlessly since March to bring you the most important COVID information.",
   "sections": [
     {
@@ -11,7 +8,7 @@
     },
     {
       "title": "Join the fight against COVID",
-      "copy": "By keeping us online, you’re also:\n- Helping build a shared understand of COVID\n- Joining our fight against misinformation\n- Leaving a legacy during this generation defining crisis"
+      "copy": "By keeping us online, you’re also:\n- Helping build a shared understanding of COVID\n- Joining our fight against misinformation\n- Leaving a legacy during this generation-defining crisis"
     }
   ]
 }
