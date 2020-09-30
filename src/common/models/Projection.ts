@@ -36,6 +36,7 @@ const DISABLED_TEST_POSITIVITY: string[] = [
   '48113',
   '48215',
   '48201', // https://trello.com/c/tgxn6Wjp/
+  '38', // TODO(https://trello.com/c/6ZPv7k9T/) Reenable North Dakota once we improve calculation.
 ];
 
 const DISABLED_ICU: string[] = [];

@@ -4,6 +4,22 @@ import ExternalLink from 'components/ExternalLink';
 
 import { Logo, PressLogoWrapper } from './LogoGrid.style';
 
+export const LogoGridItem = (props: {
+  image: string;
+  url: string;
+  altText: string;
+}) => {
+  return (
+    <Grid container item xs={12} sm={4} justify="center">
+      <Grid item>
+        <ExternalLink href={props.url}>
+          <Logo src={props.image} alt={props.altText} />
+        </ExternalLink>
+      </Grid>
+    </Grid>
+  );
+};
+
 export const PartnerLogoGrid = () => {
   return (
     <Grid container spacing={1} alignItems="center" justify="center">
@@ -46,6 +62,13 @@ export const PartnerLogoGrid = () => {
               src="/images/schmidt-futures.png"
               alt="Schmidt Futures logo"
             />
+          </ExternalLink>
+        </Grid>
+      </Grid>
+      <Grid container item xs={12} sm={4} justify="center">
+        <Grid item>
+          <ExternalLink href="https://usafacts.org/">
+            <Logo src="/images_cms/usa_facts.png" alt="USA Facts logo" />
           </ExternalLink>
         </Grid>
       </Grid>
