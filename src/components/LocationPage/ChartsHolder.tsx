@@ -111,7 +111,7 @@ const ChartsHolder = (props: {
               ))}
             </MainContentInner>
             <MainContentInner ref={exploreChartRef}>
-              <Explore fips={props.projections.primary.fips} />
+              <Explore fipsList={[props.projections.primary.fips]} />
             </MainContentInner>
           </ChartContentWrapper>
           <div ref={shareBlockRef}>

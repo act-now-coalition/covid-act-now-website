@@ -80,8 +80,8 @@ function getLabelLength(series: Series, shortLabel: boolean) {
 }
 
 const Explore: React.FunctionComponent<{
-  fips: string;
-}> = ({ fips }) => {
+  fipsList: string[];
+}> = ({ fipsList }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isMobileXs = useMediaQuery(theme.breakpoints.down('xs'));
@@ -116,17 +116,23 @@ const Explore: React.FunctionComponent<{
 
   const currentMetricName = getMetricName(currentMetric);
 
-  const currentLocation = useMemo(() => findLocationForFips(fips), [fips]);
-  const autocompleteLocations = useMemo(() => getAutocompleteLocations(fips), [
-    fips,
+  const currentLocations = useMemo(() => fipsList.map(findLocationForFips), [
+    fipsList,
   ]);
+  const autocompleteLocations = useMemo(
+    () => getAutocompleteLocations(fipsList[0]),
+    [fipsList],
+  );
 
-  const [selectedLocations, setSelectedLocations] = useState<Location[]>([
-    currentLocation,
-  ]);
+  const [selectedLocations, setSelectedLocations] = useState<Location[]>(
+    currentLocations,
+  );
 
   const onChangeSelectedLocations = (newLocations: Location[]) => {
-    const changedLocations = uniq([currentLocation, ...newLocations]);
+    if (newLocations.length === 0) {
+      return;
+    }
+    const changedLocations = uniq(newLocations);
 
     if (selectedLocations.length > 1 && changedLocations.length === 1) {
       // if switching from multiple to a single location, disable normalization
@@ -170,9 +176,9 @@ const Explore: React.FunctionComponent<{
 
   // Resets the state when navigating locations
   useEffect(() => {
-    setSelectedLocations([currentLocation]);
+    setSelectedLocations(currentLocations);
     setCurrentMetric(defaultMetric);
-  }, [currentLocation, defaultMetric]);
+  }, [currentLocations, defaultMetric]);
 
   const [chartSeries, setChartSeries] = useState<Series[]>([]);
   useEffect(() => {
@@ -241,9 +247,11 @@ const Explore: React.FunctionComponent<{
               imageUrl={() =>
                 createSharedComponentId().then(id => getExportImageUrl(id))
               }
-              imageFilename={getImageFilename(fips, currentMetric)}
+              imageFilename={getImageFilename(fipsList[0], currentMetric)}
               url={() =>
-                createSharedComponentId().then(id => getChartUrl(fips, id))
+                createSharedComponentId().then(id =>
+                  getChartUrl(fipsList[0], id),
+                )
               }
               quote={getSocialQuote(selectedLocations, currentMetric)}
               hashtags={['COVIDActNow']}
