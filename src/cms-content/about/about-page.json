@@ -1,0 +1,53 @@
+{
+  "introHeader": "Covid Act Now",
+  "introContent": "[Guided by common values](https://blog.covidactnow.org/covid-modeling-values/)—to be a truth-seeking, truthful and honest team player—Covid Act Now is volunteer-driven 501c3 non-profit, built by a multidisciplinary team of technologists, epidemiologists, public health experts, and public policy leaders. Our aim is to provide the best-available local-level disease intelligence and data analysis on COVID in the U.S.\n\nWe published the first version of our model on March 20, 2020. Since then, we’ve served millions of Americans and engaged with dozens of federal, state, and local governments, to enable data-driven COVID decisions.",
+  "partnersHeader": "Who We Work With",
+  "partnersContent": [
+    {
+      "copy": "Our university affiliates are the [Georgetown University Center for Global Health Science and Security](https://ghss.georgetown.edu/), [Stanford University Clinical Excellence Research Center](http://med.stanford.edu/cerc.html), and [Harvard Global Health Institute](https://globalhealth.harvard.edu/).",
+      "logos": [
+        {
+          "image": "/images_cms/ghss.png",
+          "url": "https://ghss.georgetown.edu/",
+          "altText": "Georgetown University logo"
+        },
+        {
+          "altText": "Stanford Medicine Clinical Excellence Research Center logo",
+          "url": "http://med.stanford.edu/cerc.html",
+          "image": "/images_cms/cerc-1.png"
+        },
+        {
+          "url": "https://globalhealth.harvard.edu/",
+          "altText": "Harvard Global Health Institute logo",
+          "image": "/images_cms/harvard.png"
+        }
+      ]
+    },
+    {
+      "copy": "Our modeling and data partners include [Grand Rounds](https://grandrounds.com/), a digital healthcare company committed to making healthcare simpler and more accessible while improving outcomes, and [USA Facts](https://usafacts.org/), an initiative launched by Steve Ballmer (former CEO of Microsoft) in 2017 to provide Americans with a single source for accurate, nonpartisan information about our country.",
+      "logos": [
+        {
+          "url": "https://grandrounds.com/",
+          "altText": "Grand Rounds logo",
+          "image": "/images_cms/grand-rounds.png"
+        },
+        {
+          "url": "https://usafacts.org/",
+          "altText": "USA Facts logo",
+          "image": "/images_cms/usa_facts.png"
+        }
+      ]
+    },
+    {
+      "copy": "We are a volunteer-driven 501c3 non-profit funded by [Schmidt Futures](https://schmidtfutures.com/), anonymous philanthropists and small donors. We appreciate any donations you’re able to make [here](https://covidactnow.org/donate).",
+      "logos": [
+        {
+          "url": "https://schmidtfutures.com",
+          "altText": "Schmidt Futures logo",
+          "image": "/images_cms/schmidt-futures.png"
+        }
+      ]
+    }
+  ],
+  "pageHeader": "About Covid Act Now"
+}

@@ -1,7 +1,7 @@
 /** Helpers for dealing with the State / Counties dataset. */
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
-import { each, sortBy, takeRight, has } from 'lodash';
 import urlJoin from 'url-join';
+import { each, sortBy, takeRight, has, partition, toLower } from 'lodash';
 import { assert } from './utils';
 import countyAdjacencyMsa from './data/county_adjacency_msa.json';
 import collegesByFips from './data/colleges_by_fips.json';
@@ -32,6 +32,7 @@ const COLLEGES: CollegeMap = collegesByFips;
 export interface State {
   state_code: string;
   state: string;
+  state_url_name: string;
   state_fips_code: string;
   population: number;
 }
@@ -57,10 +58,11 @@ export interface Location {
   population: number;
   state_code: string;
   state: string;
+  state_url_name?: string;
 }
 
 export function getLocationNames(): Location[] {
-  const locations = US_STATE_DATASET.state_dataset.map(state => {
+  const locations: Location[] = US_STATE_DATASET.state_dataset.map(state => {
     return {
       ...state,
       full_fips_code: state.state_fips_code,
@@ -100,10 +102,19 @@ export function findCountyByFips(fips: string) {
   return undefined;
 }
 
-export function findStateByFips(fips: string): State {
-  const state = US_STATE_DATASET.state_dataset.find(
+function _findStateByFips(fips: string): State | undefined {
+  return US_STATE_DATASET.state_dataset.find(
     state => state.state_fips_code === fips,
   );
+}
+
+export function isStateFips(fips: string): boolean {
+  const state = _findStateByFips(fips);
+  return !!state;
+}
+
+export function findStateByFips(fips: string): State {
+  const state = _findStateByFips(fips);
   assert(state !== undefined, `Invalid fips: ${fips}`);
   return state;
 }
@@ -117,7 +128,7 @@ export function findStateFipsCode(stateCode: string): string {
 }
 
 export function getLocationNameForFips(fips: string): string {
-  if (fips.length === 2) {
+  if (isStateFips(fips)) {
     return findStateByFips(fips).state;
   } else {
     const county = findCountyByFips(fips);
@@ -126,15 +137,7 @@ export function getLocationNameForFips(fips: string): string {
 }
 
 export function getRelativeUrlForFips(fips: string): string {
-  if (isStateFips(fips)) {
-    const state = findStateByFips(fips);
-    return `/us/${state.state_code.toLowerCase()}/`;
-  } else {
-    const county = findCountyByFips(fips);
-    return `/us/${county.state_code.toLowerCase()}/county/${
-      county.county_url_name
-    }/`;
-  }
+  return `/${getCanonicalUrl(fips)}`;
 }
 
 export function getLocationUrlForFips(fips: string): string {
@@ -158,10 +161,6 @@ export function topCountiesByPopulation(limit: number): County[] {
     sortBy(allCounties(), c => c.population),
     limit,
   );
-}
-
-export function isStateFips(fips: string) {
-  return fips.length === 2;
 }
 
 export function getAdjacentCounties(fips: string): string[] {
@@ -189,4 +188,69 @@ export function getStateCode(stateName: string) {
 
 export function getStateName(stateCode: string): string | undefined {
   return (STATES as any)[stateCode];
+}
+
+const ALL_LOCATIONS = getLocationNames();
+const locationsByType = partition(ALL_LOCATIONS, isCounty);
+const COUNTIES = locationsByType[0] as County[];
+const STATES = locationsByType[1] as State[];
+
+export function getStateByUrlName(stateUrlName: string): State | undefined {
+  return STATES.find(
+    state =>
+      toLower(state.state_url_name) === toLower(stateUrlName) ||
+      toLower(state.state_code) === toLower(stateUrlName),
+  );
+}
+
+export function getCountyByUrlName(
+  stateCode: string | undefined,
+  countyUrlName: string,
+): County | undefined {
+  return COUNTIES.find(
+    county =>
+      toLower(county.county_url_name) === toLower(countyUrlName) &&
+      toLower(county.state_code) === toLower(stateCode),
+  );
+}
+
+export function getCanonicalUrl(fipsCode: string) {
+  const { state_fips_code, county, county_url_name } = findLocationForFips(
+    fipsCode,
+  );
+  const { state_url_name } = findStateByFips(state_fips_code);
+  return county
+    ? `us/${state_url_name}/county/${county_url_name}`
+    : `us/${state_url_name}`;
+}
+
+export function isCounty(location: Location) {
+  return location.county !== undefined;
+}
+
+export function isState(location: Location) {
+  return !isCounty(location);
+}
+
+export function belongsToState(location: Location, stateFips: string) {
+  return location.state_fips_code === stateFips;
+}
+
+export function locationNameFromUrlParams(stateId?: string, countyId?: string) {
+  if (!stateId) {
+    return '';
+  }
+
+  const state = getStateByUrlName(stateId);
+  const countyOption =
+    countyId && getCountyByUrlName(state?.state_code, countyId);
+  const isValidLocation = state && !(countyId && !countyOption);
+
+  if (!isValidLocation) {
+    return '';
+  }
+
+  return state && countyId && countyOption
+    ? `${countyOption.county}, ${state?.state}`
+    : `${state?.state}`;
 }

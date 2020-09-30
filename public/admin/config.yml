@@ -1,0 +1,41 @@
+# This file controls the configuration of our Netlify CMS UI+content structure
+# 'branch' is the branch where all copy changes made in the CMS UI will be committed
+# Netlify CMS docs: https://www.netlifycms.org/docs/intro/
+backend:
+  name: github
+  repo: covid-projections/covid-projections
+  branch: casulin/add-netlify
+  base_url: https://api.netlify.com
+
+media_folder: "public/images_cms"
+public_folder: "/images_cms"
+
+collections:
+  - name: 'about'
+    label: 'About'
+    format: 'json'
+    description: 'About page content'
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    files:
+      - name: 'About'
+        label: 'About page content'
+        file: 'src/cms-content/about/about-page.json'
+        fields:
+          - { label: 'Page Header', name: 'pageHeader', widget: 'string' }
+          - { label: 'Intro: Header', name: 'introHeader', widget: 'string' }
+          - { label: 'Intro: Content', name: 'introContent', widget: 'markdown' }
+          - { label: 'Partners: Header', name: 'partnersHeader', widget: 'string' }
+          - label: 'Partners: Content'
+            name: 'partnersContent'
+            widget: 'list'
+            fields:
+              - { label: 'Section copy', name: 'copy', widget: 'markdown'}
+              - label: 'Logos'
+                name: 'logos'
+                widget: 'list'
+                fields:
+                  - { label: 'Alt text', name: 'altText', widget: 'string'}
+                  - { label: 'Image', name: 'image', widget: 'image'}
+                  - { label: 'Url', name: 'url', widget: 'string'}
