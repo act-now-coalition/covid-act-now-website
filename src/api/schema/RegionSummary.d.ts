@@ -151,7 +151,7 @@ export interface Metrics {
   infectionRate: Infectionrate;
   infectionRateCI90: Infectionrateci90;
   icuHeadroomRatio: Icuheadroomratio;
-  icuHeadroomDetails: ICUHeadroomMetricDetails | null;
+  icuHeadroomDetails?: ICUHeadroomMetricDetails;
 }
 /**
  * Details about how the ICU Headroom Metric was calculated.

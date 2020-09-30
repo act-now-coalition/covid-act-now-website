@@ -216,7 +216,7 @@ export interface Metrics {
   infectionRate: Infectionrate;
   infectionRateCI90: Infectionrateci90;
   icuHeadroomRatio: Icuheadroomratio;
-  icuHeadroomDetails: ICUHeadroomMetricDetails | null;
+  icuHeadroomDetails?: ICUHeadroomMetricDetails;
 }
 /**
  * Details about how the ICU Headroom Metric was calculated.
@@ -258,7 +258,7 @@ export interface MetricsTimeseriesRow {
   infectionRate: Infectionrate1;
   infectionRateCI90: Infectionrateci901;
   icuHeadroomRatio: Icuheadroomratio1;
-  icuHeadroomDetails: ICUHeadroomMetricDetails | null;
+  icuHeadroomDetails?: ICUHeadroomMetricDetails;
   date: Date;
 }
 /**

@@ -59,7 +59,7 @@ export interface MetricsTimeseriesRow {
   infectionRate: Infectionrate;
   infectionRateCI90: Infectionrateci90;
   icuHeadroomRatio: Icuheadroomratio;
-  icuHeadroomDetails: ICUHeadroomMetricDetails | null;
+  icuHeadroomDetails?: ICUHeadroomMetricDetails;
   date: Date;
 }
 /**
