@@ -159,12 +159,14 @@ const SingleLocationChart: React.FC<{
             height={innerHeight}
             dateScale={dateScale}
             yScale={yScale}
+            numTicksRows={5}
           />
           <Axes
             height={innerHeight}
             dateScale={dateScale}
             yScale={yScale}
             isMobile={isMobile}
+            yNumTicks={5}
           />
           <TodayMarker height={innerHeight} dateScale={dateScale} />
           <RectClipGroup width={innerWidth} height={innerHeight}>
