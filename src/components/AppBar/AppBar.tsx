@@ -15,11 +15,18 @@ import {
 } from './AppBar.style';
 import { DonateButtonWithFade, DonateButtonWithoutFade } from './DonateButton';
 import ArrowBack from '@material-ui/icons/ArrowBack';
-import { STATES } from 'common';
 import { Location } from 'history';
+// import * as urls from 'common/urls';
+// import { trackShare } from 'components/Analytics';
+// import { getCountyByUrlName, getStateByUrlName } from 'common/locations';
 import { includes } from 'lodash';
 
 const Panels = ['/', '/about', '/resources', '/blog', '/contact'];
+
+interface LocationPageUrlParams {
+  id?: string;
+  county?: string;
+}
 
 function getPanelIdxFromLocation(location: Location<any>) {
   let idx = Panels.indexOf(location.pathname);
@@ -61,22 +68,25 @@ const _AppBar = () => {
   // Don't show in iFrame
   if (isEmbed) return null;
 
-  let match = matchPath<{ id: keyof typeof STATES; county?: string }>(
-    locationPath.pathname,
-    {
-      path: ['/us/:id', '/us/:id/county/:county'],
-      exact: true,
-      strict: false,
-    },
-  );
+  let match = matchPath<LocationPageUrlParams>(locationPath.pathname, {
+    path: ['/us/:id', '/us/:id/county/:county'],
+    exact: true,
+    strict: false,
+  });
 
   if (!match) {
-    match = matchPath<{ id: keyof typeof STATES }>(locationPath.pathname, {
+    match = matchPath<LocationPageUrlParams>(locationPath.pathname, {
       path: '/states/:id',
       exact: true,
       strict: false,
     });
   }
+  // TODO(pablo): Import locationNameFromUrlParams from common/utils once
+  // we restore sharing.
+  // const locationName =
+  //   match && match?.params?.id
+  //     ? locationNameFromUrlParams(match.params.id, match.params.county)
+  //     : '';
   const goTo = (route: string) => (e: React.MouseEvent) => {
     e.preventDefault();
     setOpen(false);

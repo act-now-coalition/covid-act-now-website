@@ -249,7 +249,7 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
             live:
           </Typography>
           <iframe
-            src="https://covidactnow.org/embed/us/co"
+            src="https://covidactnow.org/embed/us/colorado-co"
             title="CoVid Act Now"
             width="350"
             height="700"

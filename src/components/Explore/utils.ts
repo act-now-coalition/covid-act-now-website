@@ -21,14 +21,12 @@ import {
   getRelativeUrlForFips,
   isStateFips,
   Location,
-} from 'common/locations';
-import { share_image_url } from 'assets/data/share_images_url.json';
-import { SeriesType, Series } from './interfaces';
-import {
   isState,
   isCounty,
   belongsToState,
-} from 'components/AutocompleteLocations';
+} from 'common/locations';
+import { share_image_url } from 'assets/data/share_images_url.json';
+import { SeriesType, Series } from './interfaces';
 import { getAbbreviatedCounty } from '../../common/utils/compare';
 
 export function getMaxBy<T>(
