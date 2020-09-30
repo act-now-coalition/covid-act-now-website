@@ -61,15 +61,6 @@ export const PROJECTIONS_TRUNCATION_DAYS = 30;
  */
 export const TRACERS_NEEDED_PER_CASE = 5;
 
-/**
- * We override the contact tracing for specific states due to data inconsistincies.
- * Ideally we would fix this in either the original data source or in the API level,
- * but for now, check if the state is in the dictionary and return the constant
- * value for the time being.
- * TODO: Revert this to use the API data once it's more valid
- */
-const CONTACT_TRACER_STATE_OVERRIDES: { [key: string]: number } = {};
-
 /** Parameters that can be provided when constructing a Projection. */
 export interface ProjectionParameters {
   isCounty: boolean;
@@ -280,10 +271,8 @@ export class Projection {
   }
 
   get currentContactTracers() {
-    return (
-      CONTACT_TRACER_STATE_OVERRIDES[this.stateCode] ||
-      lastValue(this.actualTimeseries.map(row => row && row.contactTracers)) ||
-      null
+    return lastValue(
+      this.actualTimeseries.map(row => row && row.contactTracers),
     );
   }
 
