@@ -1,5 +1,4 @@
-import { useLocation } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import * as QueryString from 'query-string';
 import { ensureSharingIdInQueryParams } from 'common/urls';
 

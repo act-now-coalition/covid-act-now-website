@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import urlJoin from 'url-join';
 import {
   ScreenshotWrapper,
   ChartWrapper,
@@ -21,6 +22,7 @@ import { useProjections, useModelLastUpdatedDate } from 'common/utils/model';
 import { Projection } from 'common/models/Projection';
 import { formatUtcDate } from 'common/utils';
 import { SCREENSHOT_CLASS } from 'components/Screenshot';
+import { getStateByUrlName, getCanonicalUrl } from 'common/locations';
 
 const ExportChartImage = () => {
   let { stateId, countyFipsId, metric: metricString } = useParams();
@@ -30,8 +32,12 @@ const ExportChartImage = () => {
   const [countyOption] = useState(
     countyFipsId && findCountyByFips(countyFipsId),
   );
-  stateId = stateId || countyOption.state_code;
-  projections = useProjections(stateId, countyOption) as any;
+
+  const stateInfo = getStateByUrlName(stateId);
+  const stateCode =
+    (stateInfo && stateInfo?.state_code) || countyOption.state_code;
+
+  projections = useProjections(stateCode, countyOption) as any;
   if (!projections || !lastUpdated) {
     return null;
   }
@@ -43,11 +49,10 @@ const ExportChartImage = () => {
   }
 
   const chartHeight = 415;
-
-  let url = `https://covidactnow.org/us/${stateId}`;
-  if (countyOption) {
-    url += `/county/${countyOption.county_url_name}`;
-  }
+  let url = urlJoin(
+    'https://covidactnow.org/',
+    getCanonicalUrl(projection.fips),
+  );
 
   return (
     <ScreenshotWrapper className={SCREENSHOT_CLASS}>

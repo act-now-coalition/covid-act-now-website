@@ -7,7 +7,7 @@ import {
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { ThemeProvider as ScThemeProvider } from 'styled-components';
 
-import LocationPage from 'screens/LocationPage/LocationPage';
+import LocationPage from 'screens/LocationPage';
 import HomePage from 'screens/HomePage/HomePage';
 import About from 'screens/About/About';
 import Resources, {

@@ -11,6 +11,7 @@ import {
   words,
   partition,
 } from 'lodash';
+import { color } from 'd3-color';
 import { schemeCategory10 } from 'd3-scale-chromatic';
 import { fetchProjections } from 'common/utils/model';
 import { Column, Projection, DatasetId } from 'common/models/Projection';
@@ -21,14 +22,12 @@ import {
   getRelativeUrlForFips,
   isStateFips,
   Location,
-} from 'common/locations';
-import { share_image_url } from 'assets/data/share_images_url.json';
-import { SeriesType, Series } from './interfaces';
-import {
   isState,
   isCounty,
   belongsToState,
-} from 'components/AutocompleteLocations';
+} from 'common/locations';
+import { share_image_url } from 'assets/data/share_images_url.json';
+import { SeriesType, Series } from './interfaces';
 import { getAbbreviatedCounty } from '../../common/utils/compare';
 
 export function getMaxBy<T>(
@@ -446,4 +445,14 @@ export function getChartSeries(
 
 export function getSeriesLabel(series: Series, isMobile: boolean) {
   return isMobile ? series.shortLabel : series.label;
+}
+
+/**
+ * The resulting color depends on the original color and the `amount` number,
+ * if the `amount` number is too high the resulting color will be white.
+ * https://github.com/d3/d3-color#color_brighter
+ */
+export function brightenColor(colorCode: string, amount = 1): string {
+  const colorObject = color(colorCode);
+  return colorObject ? colorObject.brighter(amount).hex() : colorCode;
 }

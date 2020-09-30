@@ -1,25 +1,24 @@
 import React, { Fragment } from 'react';
 import { Line } from '@vx/shape';
 import { ScaleTime } from 'd3-scale';
-import * as ChartStyle from 'components/Charts/Charts.style';
-import * as Styles from './Explore.style';
+// import * as ChartStyle from 'components/Charts/Charts.style';
+import { Grid as GridStyle, TodayLabel } from './Explore.style';
 
 const TodayMarker: React.FC<{
   dateScale: ScaleTime<number, number>;
   height: number;
-  strokeColor: string;
-}> = ({ dateScale, height, strokeColor }) => {
+}> = ({ dateScale, height }) => {
   const today = new Date();
   return (
     <Fragment>
-      <ChartStyle.LineGrid exploreStroke={strokeColor}>
+      <GridStyle>
         <Line x1={dateScale(today)} x2={dateScale(today)} y1={0} y2={height} />
-      </ChartStyle.LineGrid>
-      <Styles.TodayLabel>
+      </GridStyle>
+      <TodayLabel>
         <text x={dateScale(today)} y={height} dy={21}>
           Today
         </text>
-      </Styles.TodayLabel>
+      </TodayLabel>
     </Fragment>
   );
 };

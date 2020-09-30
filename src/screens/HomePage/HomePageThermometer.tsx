@@ -52,6 +52,7 @@ const HomePageThermometer = () => {
       <Title>Risk levels</Title>
       {thermometerContent.map((row, i) => (
         <ThermometerRow
+          key={`level-${i}`}
           text={row.text}
           levelColor={row.levelColor}
           rowLevel={row.level}
