@@ -81,7 +81,8 @@ function getLabelLength(series: Series, shortLabel: boolean) {
 
 const Explore: React.FunctionComponent<{
   fipsList: string[];
-}> = ({ fipsList }) => {
+  title?: string;
+}> = ({ fipsList, title = 'Trends' }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isMobileXs = useMediaQuery(theme.breakpoints.down('xs'));
@@ -235,7 +236,7 @@ const Explore: React.FunctionComponent<{
     <Styles.Container ref={exploreRef}>
       <Grid container spacing={1}>
         <Grid item sm={6} xs={12}>
-          <Styles.Heading variant="h4">Trends</Styles.Heading>
+          <Styles.Heading variant="h4">{title}</Styles.Heading>
           <Styles.Subtitle>
             {currentMetricName} {normalizeData ? 'per 100k population' : ''} in{' '}
             {getLocationNames(selectedLocations)}.

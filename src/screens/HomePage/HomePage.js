@@ -91,7 +91,10 @@ export default function HomePage() {
             <Map hideLegend />
             {isMobile && <HomePageThermometer />}
             <CompareMain locationsViewable={8} isHomepage />
-            <Explore fipsList={['31']} />
+            <Explore
+              title="Cases, Deaths and Hospitalizations"
+              fipsList={['31']}
+            />
             <SectionWrapper ref={indicatorsRef}>
               <CriteriaExplanation isMobile={isMobile} />
             </SectionWrapper>
