@@ -67,7 +67,7 @@ export const PartnerLogoGrid = () => {
       </Grid>
       <Grid container item xs={12} sm={4} justify="center">
         <Grid item>
-          <ExternalLink href="https://schmidtfutures.com">
+          <ExternalLink href="https://usafacts.org/">
             <Logo src="/images_cms/usa_facts.png" alt="USA Facts logo" />
           </ExternalLink>
         </Grid>
