@@ -97,7 +97,7 @@ const Explore: React.FunctionComponent<{
   }
   const [currentMetric, setCurrentMetric] = useState(defaultMetric);
 
-  const [normalizeData, setNormalizeData] = useState(false);
+  const [normalizeData, setNormalizeData] = useState(fipsList.length > 1);
 
   const onChangeTab = (newMetric: number) => {
     const newMetricName = metricLabels[newMetric];
