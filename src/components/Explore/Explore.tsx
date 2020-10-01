@@ -88,7 +88,7 @@ const Explore: React.FunctionComponent<{
   const isMobileXs = useMediaQuery(theme.breakpoints.down('xs'));
   const metricLabels = getMetricLabels();
 
-  const { sharedComponentId } = useParams();
+  const { sharedComponentId } = useParams<{ sharedComponentId?: string }>();
   let defaultMetric = ExploreMetric.CASES;
   // Originally we had share URLs like /explore/cases instead of
   // /explore/<sharedComponentId> and so this code allows them to keep working.

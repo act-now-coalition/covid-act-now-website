@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import HomePageHeader from 'components/Header/HomePageHeader';
 import Map from 'components/Map/Map';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
@@ -60,9 +60,10 @@ export default function HomePage() {
     }
 
     history.push(route);
-
     window.scrollTo(0, 0);
   };
+
+  const [initialFipsList] = useState(getRandomStateFipsList());
 
   return (
     <>
@@ -96,7 +97,7 @@ export default function HomePage() {
             <Section>
               <Explore
                 title="Cases, Deaths and Hospitalizations"
-                fipsList={getRandomStateFipsList()}
+                fipsList={initialFipsList}
               />
             </Section>
             <SectionWrapper ref={indicatorsRef}>
