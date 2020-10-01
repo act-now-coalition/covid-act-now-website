@@ -145,10 +145,10 @@ const Explore: React.FunctionComponent<{
     }
 
     const eventLabel =
-      selectedLocations.length < newLocations.length
+      selectedLocations.length < changedLocations.length
         ? 'Adding Location'
         : 'Removing Location';
-    trackExploreEvent(EventAction.SELECT, eventLabel, newLocations.length);
+    trackExploreEvent(EventAction.SELECT, eventLabel, changedLocations.length);
 
     // make sure that the current location is always selected
     setSelectedLocations(changedLocations);
