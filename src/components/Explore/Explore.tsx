@@ -24,7 +24,6 @@ import ExploreTabs from './ExploreTabs';
 import ExploreChart from './ExploreChart';
 import Legend from './Legend';
 import { ExploreMetric, Series } from './interfaces';
-import NoDataPanel from './NoDataPanel';
 import LocationSelector from './LocationSelector';
 import {
   getMetricLabels,
@@ -40,6 +39,8 @@ import {
   getSeriesLabel,
   EXPLORE_CHART_IDS,
   getSubtitle,
+  METHODOLOGY_URL,
+  DATA_SOURCES_URL,
 } from './utils';
 import * as Styles from './Explore.style';
 import {
@@ -47,8 +48,8 @@ import {
   storeSharedComponentParams,
   useSharedComponentParams,
 } from 'common/sharing';
+import { ScreenshotReady } from 'components/Screenshot';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
-import NoLocationPanel from './NoLocationPanel';
 
 const MARGIN_SINGLE_LOCATION = 20;
 const MARGIN_STATE_CODE = 60;
@@ -56,6 +57,16 @@ const MARGIN_COUNTY = 120;
 
 function trackExploreEvent(action: EventAction, label: string, value?: number) {
   trackEvent(EventCategory.EXPLORE, action, label, value);
+}
+
+function getNoDataCopy(metricName: string, locationNames: string) {
+  return (
+    <p>
+      We don't have {metricName} data for {locationNames}. Learn more about{' '}
+      <ExternalLink href={METHODOLOGY_URL}>our methodology</ExternalLink> and
+      our <ExternalLink href={DATA_SOURCES_URL}>our data sources</ExternalLink>.
+    </p>
+  );
 }
 
 function getMarginRight(
@@ -353,13 +364,19 @@ const Explore: React.FunctionComponent<{
         </Styles.ChartContainer>
       )}
       {selectedLocations.length > 0 && !hasData && (
-        <NoDataPanel
-          height={400}
-          metricName={currentMetricName}
-          locationName={getLocationNames(selectedLocations)}
-        />
+        <Styles.EmptyPanel style={{ height: 400 }}>
+          {getNoDataCopy(
+            currentMetricName,
+            getLocationNames(selectedLocations),
+          )}
+        </Styles.EmptyPanel>
       )}
-      {selectedLocations.length === 0 && <NoLocationPanel height={400} />}
+      {selectedLocations.length === 0 && (
+        <Styles.EmptyPanel style={{ height: 400 }}>
+          <p>Please select states or counties to explore trends.</p>
+          <ScreenshotReady />
+        </Styles.EmptyPanel>
+      )}
       <DisclaimerWrapper>
         <DisclaimerBody>
           Last updated {lastUpdatedDateString}. Learn more about{' '}

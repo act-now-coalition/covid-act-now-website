@@ -200,7 +200,7 @@ export const HoverTrackerLine = styled.g`
   }
 `;
 
-export const EmptyChart = styled(ChartContainer)`
+export const EmptyPanel = styled(ChartContainer)`
   /* Super centered: https://web.dev/one-line-layouts */
   display: grid;
   place-items: center;
