@@ -80,9 +80,9 @@ function getLabelLength(series: Series, shortLabel: boolean) {
 }
 
 const Explore: React.FunctionComponent<{
-  fipsList: string[];
+  initialFipsList: string[];
   title?: string;
-}> = ({ fipsList, title = 'Trends' }) => {
+}> = ({ initialFipsList, title = 'Trends' }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isMobileXs = useMediaQuery(theme.breakpoints.down('xs'));
@@ -97,7 +97,9 @@ const Explore: React.FunctionComponent<{
   }
   const [currentMetric, setCurrentMetric] = useState(defaultMetric);
 
-  const [normalizeData, setNormalizeData] = useState(fipsList.length > 1);
+  const [normalizeData, setNormalizeData] = useState(
+    initialFipsList.length > 1,
+  );
 
   const onChangeTab = (newMetric: number) => {
     const newMetricName = metricLabels[newMetric];
@@ -117,12 +119,10 @@ const Explore: React.FunctionComponent<{
 
   const currentMetricName = getMetricName(currentMetric);
 
-  const currentLocations = useMemo(() => fipsList.map(findLocationForFips), [
-    fipsList,
-  ]);
+  const currentLocations = initialFipsList.map(findLocationForFips);
   const autocompleteLocations = useMemo(
-    () => getAutocompleteLocations(fipsList[0]),
-    [fipsList],
+    () => getAutocompleteLocations(initialFipsList[0]),
+    [initialFipsList],
   );
 
   const [selectedLocations, setSelectedLocations] = useState<Location[]>(
@@ -175,7 +175,9 @@ const Explore: React.FunctionComponent<{
     }
   }, [location.pathname, scrollToExplore]);
 
-  // Resets the state when navigating locations
+  // We need to reset the selected locations and the default metric when
+  // the user clicks a location on the Compare table or on the mini map so
+  // they are not carried over to the new location page.
   useEffect(() => {
     setSelectedLocations(currentLocations);
     setCurrentMetric(defaultMetric);
@@ -248,10 +250,13 @@ const Explore: React.FunctionComponent<{
               imageUrl={() =>
                 createSharedComponentId().then(id => getExportImageUrl(id))
               }
-              imageFilename={getImageFilename(fipsList[0], currentMetric)}
+              imageFilename={getImageFilename(
+                initialFipsList[0],
+                currentMetric,
+              )}
               url={() =>
                 createSharedComponentId().then(id =>
-                  getChartUrl(fipsList[0], id),
+                  getChartUrl(initialFipsList[0], id),
                 )
               }
               quote={getSocialQuote(selectedLocations, currentMetric)}

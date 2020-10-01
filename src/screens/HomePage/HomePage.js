@@ -97,7 +97,7 @@ export default function HomePage() {
             <Section>
               <Explore
                 title="Cases, Deaths and Hospitalizations"
-                fipsList={initialFipsList}
+                initialFipsList={initialFipsList}
               />
             </Section>
             <SectionWrapper ref={indicatorsRef}>
