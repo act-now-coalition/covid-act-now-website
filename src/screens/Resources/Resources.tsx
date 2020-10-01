@@ -196,37 +196,42 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
             API
           </SectionHeader>
           <Typography variant="body1" component="p">
-            Looking for all the data that powers our site in a machine-readable
-            format? You can use our API, made for ease-of-use by those wishing
-            to programmatically ingest our data. To gain access, please use this{' '}
-            <ExternalLink href="https://apidocs.covidactnow.org/access">
-              registration form
-            </ExternalLink>{' '}
-            to generate your unique key.
-          </Typography>
-
-          <Typography variant="body1" component="p">
-            Note that our data is licensed under{' '}
-            <ExternalLink href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
-              Creative Commons Attribution-NonCommercial-NoDerivatives 4.0
-              International
+            Looking for all of the data that powers our website? With our{' '}
+            <ExternalLink href="https://apidocs.covidactnow.org">
+              API
             </ExternalLink>
-            . All commercial entities wishing to access our API should contact{' '}
-            <ExternalLink href="mailto:info@covidactnow.org">
-              info@covidactnow.org
-            </ExternalLink>{' '}
-            to acquire a commercial license. We define commercial users as any
-            individual or entity engaged in commercial activities, such as
-            selling goods or services. Our non-commercial users can freely
-            download, use, share, modify, or build upon our source code.
+            , you can access COVID data, including for 3000+ USA counties in a
+            machine readable format, made for programmatic consumption by other
+            websites, models, and tools.
           </Typography>
           <Typography variant="body1" component="p">
-            Please also note that V1.0 of our API will be deprecated on October
-            5, 2020. See our{' '}
-            <ExternalLink href="https://apidocs.covidactnow.org/migration">
-              documentation
-            </ExternalLink>{' '}
-            for migration instructions.
+            <ExternalLink href="https://apidocs.covidactnow.org/access">
+              Start using the Covid Act Now API
+            </ExternalLink>
+          </Typography>
+          <Typography variant="body1" component="p">
+            Notes:
+            <ul>
+              <li>
+                V1 of our API will be deprecated on October 5, 2020. See our{' '}
+                <ExternalLink href="https://apidocs.covidactnow.org/migration">
+                  migration instructions
+                </ExternalLink>{' '}
+                for more details.
+              </li>
+              <li>
+                Our API is licensed under{' '}
+                <ExternalLink href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  Creative Commons Attribution-NonCommercial-NoDerivatives 4.0
+                  International
+                </ExternalLink>
+                . Learn more about{' '}
+                <ExternalLink href="https://apidocs.covidactnow.org/#license">
+                  our license
+                </ExternalLink>{' '}
+                for both commercial and non-commercial users.
+              </li>
+            </ul>
           </Typography>
           <SectionHeader variant="h4" component="h2" id="embed">
             Embed
