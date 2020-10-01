@@ -119,7 +119,10 @@ const Explore: React.FunctionComponent<{
 
   const currentMetricName = getMetricName(currentMetric);
 
-  const currentLocations = initialFipsList.map(findLocationForFips);
+  const currentLocations = useMemo(
+    () => initialFipsList.map(findLocationForFips),
+    [initialFipsList],
+  );
   const autocompleteLocations = useMemo(
     () => getAutocompleteLocations(initialFipsList[0]),
     [initialFipsList],
