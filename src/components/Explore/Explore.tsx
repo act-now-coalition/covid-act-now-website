@@ -24,7 +24,7 @@ import ExploreTabs from './ExploreTabs';
 import ExploreChart from './ExploreChart';
 import Legend from './Legend';
 import { ExploreMetric, Series } from './interfaces';
-import EmptyChart from './EmptyChart';
+import NoDataPanel from './NoDataPanel';
 import LocationSelector from './LocationSelector';
 import {
   getMetricLabels,
@@ -39,6 +39,7 @@ import {
   getMetricName,
   getSeriesLabel,
   EXPLORE_CHART_IDS,
+  getSubtitle,
 } from './utils';
 import * as Styles from './Explore.style';
 import {
@@ -47,6 +48,7 @@ import {
   useSharedComponentParams,
 } from 'common/sharing';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
+import NoLocationPanel from './NoLocationPanel';
 
 const MARGIN_SINGLE_LOCATION = 20;
 const MARGIN_STATE_CODE = 60;
@@ -133,11 +135,7 @@ const Explore: React.FunctionComponent<{
   );
 
   const onChangeSelectedLocations = (newLocations: Location[]) => {
-    if (newLocations.length === 0) {
-      return;
-    }
     const changedLocations = uniq(newLocations);
-
     if (selectedLocations.length > 1 && changedLocations.length === 1) {
       // if switching from multiple to a single location, disable normalization
       setNormalizeData(false);
@@ -243,13 +241,13 @@ const Explore: React.FunctionComponent<{
         <Grid item sm={6} xs={12}>
           <Styles.Heading variant="h4">{title}</Styles.Heading>
           <Styles.Subtitle>
-            {currentMetricName} {normalizeData ? 'per 100k population' : ''} in{' '}
-            {getLocationNames(selectedLocations)}.
+            {getSubtitle(currentMetricName, normalizeData, selectedLocations)}
           </Styles.Subtitle>
         </Grid>
         <Grid item sm={6} xs={12}>
           <Styles.ShareBlock>
             <ShareImageButtonGroup
+              disabled={selectedLocations.length === 0 || !hasData}
               imageUrl={() =>
                 createSharedComponentId().then(id => getExportImageUrl(id))
               }
@@ -328,7 +326,7 @@ const Explore: React.FunctionComponent<{
           )}
         </Grid>
       </Styles.ChartControlsContainer>
-      {hasData ? (
+      {selectedLocations.length > 0 && hasData && (
         <Styles.ChartContainer adjustContainerWidth={hasMultipleLocations}>
           {/**
            * The width is set to zero while the parent div is rendering, the
@@ -353,13 +351,15 @@ const Explore: React.FunctionComponent<{
             }
           </ParentSize>
         </Styles.ChartContainer>
-      ) : (
-        <EmptyChart
+      )}
+      {selectedLocations.length > 0 && !hasData && (
+        <NoDataPanel
           height={400}
           metricName={currentMetricName}
           locationName={getLocationNames(selectedLocations)}
         />
       )}
+      {selectedLocations.length === 0 && <NoLocationPanel height={400} />}
       <DisclaimerWrapper>
         <DisclaimerBody>
           Last updated {lastUpdatedDateString}. Learn more about{' '}

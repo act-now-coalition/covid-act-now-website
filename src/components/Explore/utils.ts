@@ -378,7 +378,6 @@ export function getLocationNames(
   if (locations.length === 1) {
     return getLocationLabel(locations[0]);
   }
-
   const labels = locations.map(getLocationLabel);
   const truncate = labels.length > limit;
   const [firstLabels, lastLabel] = truncate
@@ -386,6 +385,17 @@ export function getLocationNames(
     : [labels.slice(0, labels.length - 1), labels[labels.length - 1]];
 
   return `${firstLabels.join(', ')} and ${lastLabel}`;
+}
+
+export function getSubtitle(
+  metricName: string,
+  normalizeData: boolean,
+  locations: Location[],
+) {
+  const textPer100k = normalizeData ? 'per 100k population' : '';
+  return locations.length === 0
+    ? 'Select states or counties to explore trends'
+    : `${metricName} ${textPer100k} in ${getLocationNames(locations)}`;
 }
 
 /**

@@ -7,7 +7,8 @@ const METHODOLOGY_URL =
   'https://docs.google.com/document/d/1cd_cEpNiIl1TzUJBvw9sHLbrbUZ2qCxgN32IqVLa3Do/edit';
 const DATA_SOURCES_URL =
   'https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit';
-const EmptyChart: React.FC<{
+
+const NoDataPanel: React.FC<{
   height: number;
   metricName: string;
   locationName: string;
@@ -22,4 +23,4 @@ const EmptyChart: React.FC<{
   </EmtpyChartStyle>
 );
 
-export default EmptyChart;
+export default NoDataPanel;
