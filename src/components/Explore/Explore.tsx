@@ -249,13 +249,10 @@ const Explore: React.FunctionComponent<{
   return (
     <Styles.Container ref={exploreRef}>
       <Grid container spacing={1}>
-        <Grid item sm={6} xs={12}>
+        <Grid item sm={9} xs={12}>
           <Styles.Heading variant="h4">{title}</Styles.Heading>
-          <Styles.Subtitle>
-            {getSubtitle(currentMetricName, normalizeData, selectedLocations)}
-          </Styles.Subtitle>
         </Grid>
-        <Grid item sm={6} xs={12}>
+        <Grid item sm xs={12}>
           <Styles.ShareBlock>
             <ShareImageButtonGroup
               disabled={selectedLocations.length === 0 || !hasData}
@@ -301,7 +298,7 @@ const Explore: React.FunctionComponent<{
           Compare states or counties
         </Styles.TableAutocompleteHeader>
         <Grid container spacing={1}>
-          <Grid key="location-selector" item sm={6} xs={6}>
+          <Grid key="location-selector" item sm={9} xs={12}>
             <LocationSelector
               locations={autocompleteLocations}
               selectedLocations={selectedLocations}
@@ -310,13 +307,13 @@ const Explore: React.FunctionComponent<{
             />
           </Grid>
           {!hasMultipleLocations && (
-            <Grid key="legend" item sm xs={12}>
+            <Grid key="legend" item sm={3} xs={12}>
               <Legend seriesList={chartSeries} />
             </Grid>
           )}
-          {hasMultipleLocations && (
-            <Styles.NormalizeDataContainer hideNormalizeControl={isMobileXs}>
-              <Grid key="legend" item sm xs={12}>
+          {hasMultipleLocations && !isMobileXs && (
+            <Grid key="legend" item sm={3} xs={12}>
+              <Styles.NormalizeDataContainer>
                 <FormControlLabel
                   control={
                     <Styles.NormalizeCheckbox
@@ -332,11 +329,14 @@ const Explore: React.FunctionComponent<{
                 <Styles.NormalizeSubLabel>
                   Per 100k population
                 </Styles.NormalizeSubLabel>
-              </Grid>
-            </Styles.NormalizeDataContainer>
+              </Styles.NormalizeDataContainer>
+            </Grid>
           )}
         </Grid>
       </Styles.ChartControlsContainer>
+      <Styles.Subtitle>
+        {getSubtitle(currentMetricName, normalizeData, selectedLocations)}
+      </Styles.Subtitle>
       {selectedLocations.length > 0 && hasData && (
         <Styles.ChartContainer adjustContainerWidth={hasMultipleLocations}>
           {/**

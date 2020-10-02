@@ -111,7 +111,10 @@ const ChartsHolder = (props: {
               ))}
             </MainContentInner>
             <MainContentInner ref={exploreChartRef}>
-              <Explore initialFipsList={[props.projections.primary.fips]} />
+              <Explore
+                initialFipsList={[props.projections.primary.fips]}
+                title="Cases, Deaths, and Hospitalizations"
+              />
             </MainContentInner>
           </ChartContentWrapper>
           <div ref={shareBlockRef}>

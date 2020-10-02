@@ -303,13 +303,8 @@ export const TooltipLocation = styled.div`
   color: ${colorPalette.white};
 `;
 
-export const NormalizeDataContainer = styled.div<{
-  hideNormalizeControl?: boolean;
-}>`
-  display: flex;
-  flex-direction: column;
+export const NormalizeDataContainer = styled.div`
   padding-top: 1.25rem;
-  display: ${({ hideNormalizeControl }) => hideNormalizeControl && 'none'};
 
   @media (min-width: 600px) {
     padding-top: 0;
