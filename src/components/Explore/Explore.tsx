@@ -24,7 +24,6 @@ import ExploreTabs from './ExploreTabs';
 import ExploreChart from './ExploreChart';
 import Legend from './Legend';
 import { ExploreMetric, Series } from './interfaces';
-import EmptyChart from './EmptyChart';
 import LocationSelector from './LocationSelector';
 import {
   getMetricLabels,
@@ -39,6 +38,9 @@ import {
   getMetricName,
   getSeriesLabel,
   EXPLORE_CHART_IDS,
+  getSubtitle,
+  METHODOLOGY_URL,
+  DATA_SOURCES_URL,
 } from './utils';
 import * as Styles from './Explore.style';
 import {
@@ -46,6 +48,7 @@ import {
   storeSharedComponentParams,
   useSharedComponentParams,
 } from 'common/sharing';
+import { ScreenshotReady } from 'components/Screenshot';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 
 const MARGIN_SINGLE_LOCATION = 20;
@@ -54,6 +57,16 @@ const MARGIN_COUNTY = 120;
 
 function trackExploreEvent(action: EventAction, label: string, value?: number) {
   trackEvent(EventCategory.EXPLORE, action, label, value);
+}
+
+function getNoDataCopy(metricName: string, locationNames: string) {
+  return (
+    <p>
+      We don't have {metricName} data for {locationNames}. Learn more about{' '}
+      <ExternalLink href={METHODOLOGY_URL}>our methodology</ExternalLink> and
+      our <ExternalLink href={DATA_SOURCES_URL}>our data sources</ExternalLink>.
+    </p>
+  );
 }
 
 function getMarginRight(
@@ -80,14 +93,15 @@ function getLabelLength(series: Series, shortLabel: boolean) {
 }
 
 const Explore: React.FunctionComponent<{
-  fips: string;
-}> = ({ fips }) => {
+  initialFipsList: string[];
+  title?: string;
+}> = ({ initialFipsList, title = 'Trends' }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isMobileXs = useMediaQuery(theme.breakpoints.down('xs'));
   const metricLabels = getMetricLabels();
 
-  const { sharedComponentId } = useParams();
+  const { sharedComponentId } = useParams<{ sharedComponentId?: string }>();
   let defaultMetric = ExploreMetric.CASES;
   // Originally we had share URLs like /explore/cases instead of
   // /explore/<sharedComponentId> and so this code allows them to keep working.
@@ -96,7 +110,9 @@ const Explore: React.FunctionComponent<{
   }
   const [currentMetric, setCurrentMetric] = useState(defaultMetric);
 
-  const [normalizeData, setNormalizeData] = useState(false);
+  const [normalizeData, setNormalizeData] = useState(
+    initialFipsList.length > 1,
+  );
 
   const onChangeTab = (newMetric: number) => {
     const newMetricName = metricLabels[newMetric];
@@ -116,18 +132,21 @@ const Explore: React.FunctionComponent<{
 
   const currentMetricName = getMetricName(currentMetric);
 
-  const currentLocation = useMemo(() => findLocationForFips(fips), [fips]);
-  const autocompleteLocations = useMemo(() => getAutocompleteLocations(fips), [
-    fips,
-  ]);
+  const currentLocations = useMemo(
+    () => initialFipsList.map(findLocationForFips),
+    [initialFipsList],
+  );
+  const autocompleteLocations = useMemo(
+    () => getAutocompleteLocations(initialFipsList[0]),
+    [initialFipsList],
+  );
 
-  const [selectedLocations, setSelectedLocations] = useState<Location[]>([
-    currentLocation,
-  ]);
+  const [selectedLocations, setSelectedLocations] = useState<Location[]>(
+    currentLocations,
+  );
 
   const onChangeSelectedLocations = (newLocations: Location[]) => {
-    const changedLocations = uniq([currentLocation, ...newLocations]);
-
+    const changedLocations = uniq(newLocations);
     if (selectedLocations.length > 1 && changedLocations.length === 1) {
       // if switching from multiple to a single location, disable normalization
       setNormalizeData(false);
@@ -137,10 +156,10 @@ const Explore: React.FunctionComponent<{
     }
 
     const eventLabel =
-      selectedLocations.length < newLocations.length
+      selectedLocations.length < changedLocations.length
         ? 'Adding Location'
         : 'Removing Location';
-    trackExploreEvent(EventAction.SELECT, eventLabel, newLocations.length);
+    trackExploreEvent(EventAction.SELECT, eventLabel, changedLocations.length);
 
     // make sure that the current location is always selected
     setSelectedLocations(changedLocations);
@@ -168,11 +187,13 @@ const Explore: React.FunctionComponent<{
     }
   }, [location.pathname, scrollToExplore]);
 
-  // Resets the state when navigating locations
+  // We need to reset the selected locations and the default metric when
+  // the user clicks a location on the Compare table or on the mini map so
+  // they are not carried over to the new location page.
   useEffect(() => {
-    setSelectedLocations([currentLocation]);
+    setSelectedLocations(currentLocations);
     setCurrentMetric(defaultMetric);
-  }, [currentLocation, defaultMetric]);
+  }, [currentLocations, defaultMetric]);
 
   const [chartSeries, setChartSeries] = useState<Series[]>([]);
   useEffect(() => {
@@ -228,22 +249,24 @@ const Explore: React.FunctionComponent<{
   return (
     <Styles.Container ref={exploreRef}>
       <Grid container spacing={1}>
-        <Grid item sm={6} xs={12}>
-          <Styles.Heading variant="h4">Trends</Styles.Heading>
-          <Styles.Subtitle>
-            {currentMetricName} {normalizeData ? 'per 100k population' : ''} in{' '}
-            {getLocationNames(selectedLocations)}.
-          </Styles.Subtitle>
+        <Grid item sm={9} xs={12}>
+          <Styles.Heading variant="h4">{title}</Styles.Heading>
         </Grid>
-        <Grid item sm={6} xs={12}>
+        <Grid item sm xs={12}>
           <Styles.ShareBlock>
             <ShareImageButtonGroup
+              disabled={selectedLocations.length === 0 || !hasData}
               imageUrl={() =>
                 createSharedComponentId().then(id => getExportImageUrl(id))
               }
-              imageFilename={getImageFilename(fips, currentMetric)}
+              imageFilename={getImageFilename(
+                initialFipsList[0],
+                currentMetric,
+              )}
               url={() =>
-                createSharedComponentId().then(id => getChartUrl(fips, id))
+                createSharedComponentId().then(id =>
+                  getChartUrl(initialFipsList[0], id),
+                )
               }
               quote={getSocialQuote(selectedLocations, currentMetric)}
               hashtags={['COVIDActNow']}
@@ -275,7 +298,7 @@ const Explore: React.FunctionComponent<{
           Compare states or counties
         </Styles.TableAutocompleteHeader>
         <Grid container spacing={1}>
-          <Grid key="location-selector" item sm={6} xs={6}>
+          <Grid key="location-selector" item sm={9} xs={12}>
             <LocationSelector
               locations={autocompleteLocations}
               selectedLocations={selectedLocations}
@@ -284,13 +307,13 @@ const Explore: React.FunctionComponent<{
             />
           </Grid>
           {!hasMultipleLocations && (
-            <Grid key="legend" item sm xs={12}>
+            <Grid key="legend" item sm={3} xs={12}>
               <Legend seriesList={chartSeries} />
             </Grid>
           )}
-          {hasMultipleLocations && (
-            <Styles.NormalizeDataContainer hideNormalizeControl={isMobileXs}>
-              <Grid key="legend" item sm xs={12}>
+          {hasMultipleLocations && !isMobileXs && (
+            <Grid key="legend" item sm={3} xs={12}>
+              <Styles.NormalizeDataContainer>
                 <FormControlLabel
                   control={
                     <Styles.NormalizeCheckbox
@@ -306,12 +329,15 @@ const Explore: React.FunctionComponent<{
                 <Styles.NormalizeSubLabel>
                   Per 100k population
                 </Styles.NormalizeSubLabel>
-              </Grid>
-            </Styles.NormalizeDataContainer>
+              </Styles.NormalizeDataContainer>
+            </Grid>
           )}
         </Grid>
       </Styles.ChartControlsContainer>
-      {hasData ? (
+      <Styles.Subtitle>
+        {getSubtitle(currentMetricName, normalizeData, selectedLocations)}
+      </Styles.Subtitle>
+      {selectedLocations.length > 0 && hasData && (
         <Styles.ChartContainer adjustContainerWidth={hasMultipleLocations}>
           {/**
            * The width is set to zero while the parent div is rendering, the
@@ -336,12 +362,20 @@ const Explore: React.FunctionComponent<{
             }
           </ParentSize>
         </Styles.ChartContainer>
-      ) : (
-        <EmptyChart
-          height={400}
-          metricName={currentMetricName}
-          locationName={getLocationNames(selectedLocations)}
-        />
+      )}
+      {selectedLocations.length > 0 && !hasData && (
+        <Styles.EmptyPanel style={{ height: 400 }}>
+          {getNoDataCopy(
+            currentMetricName,
+            getLocationNames(selectedLocations),
+          )}
+        </Styles.EmptyPanel>
+      )}
+      {selectedLocations.length === 0 && (
+        <Styles.EmptyPanel style={{ height: 400 }}>
+          <p>Please select states or counties to explore trends.</p>
+          <ScreenshotReady />
+        </Styles.EmptyPanel>
       )}
       <DisclaimerWrapper>
         <DisclaimerBody>
