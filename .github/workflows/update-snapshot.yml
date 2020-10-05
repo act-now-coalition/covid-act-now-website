@@ -13,7 +13,7 @@ env:
 
 jobs:
   update-data-snapshot:
-    runs-on: [self-hosted, cpu-optimized]
+    runs-on: ubuntu-latest
     steps:
       # Setup
       - name: Verify snapshot provided

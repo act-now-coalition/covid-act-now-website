@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 import { Grid } from '@material-ui/core';
+import { MarkdownBody } from 'components/Markdown';
 
 export const mobileBreakpoint = '800px';
 
@@ -27,15 +28,15 @@ export const Container = styled.div`
  how tall the iFrame is at each screen size
  */
 export const EmbedWrapper = styled.div`
-  height: 770px;
+  height: 840px;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 0 1.5rem;
 
-  @media (min-width: ${mobileBreakpoint}) {
-    height: 700px;
+  @media (min-width: 600px) {
+    height: 800px;
   }
 
   @media (min-width: ${mobileBreakpoint}) {
@@ -70,10 +71,13 @@ export const IntroWrapper = styled.div`
   }
 `;
 
-export const BodyCopy = styled.p`
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
-  font-size: 15px;
-  line-height: 1.4;
+export const BodyCopy = styled(MarkdownBody)`
+  p,
+  li {
+    color: ${COLOR_MAP.GRAY_BODY_COPY};
+    font-size: 15px;
+    line-height: 1.4;
+  }
 `;
 
 export const Header = styled.h1`

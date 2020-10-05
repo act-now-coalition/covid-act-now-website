@@ -61,6 +61,12 @@ export const EXPLORE_METRICS = [
   ExploreMetric.ICU_HOSPITALIZATIONS,
 ];
 
+export const METHODOLOGY_URL =
+  'https://docs.google.com/document/d/1cd_cEpNiIl1TzUJBvw9sHLbrbUZ2qCxgN32IqVLa3Do/edit';
+
+export const DATA_SOURCES_URL =
+  'https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit';
+
 export function getMetricByChartId(chartId: string): ExploreMetric | undefined {
   switch (chartId) {
     case 'cases':
@@ -378,7 +384,6 @@ export function getLocationNames(
   if (locations.length === 1) {
     return getLocationLabel(locations[0]);
   }
-
   const labels = locations.map(getLocationLabel);
   const truncate = labels.length > limit;
   const [firstLabels, lastLabel] = truncate
@@ -386,6 +391,17 @@ export function getLocationNames(
     : [labels.slice(0, labels.length - 1), labels[labels.length - 1]];
 
   return `${firstLabels.join(', ')} and ${lastLabel}`;
+}
+
+export function getSubtitle(
+  metricName: string,
+  normalizeData: boolean,
+  locations: Location[],
+) {
+  const textPer100k = normalizeData ? 'per 100k population' : '';
+  return locations.length === 0
+    ? 'Select states or counties to explore trends'
+    : `${metricName} ${textPer100k} in ${getLocationNames(locations)}`;
 }
 
 /**

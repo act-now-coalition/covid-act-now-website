@@ -193,7 +193,7 @@ export function getStateName(stateCode: string): string | undefined {
 const ALL_LOCATIONS = getLocationNames();
 const locationsByType = partition(ALL_LOCATIONS, isCounty);
 const COUNTIES = locationsByType[0] as County[];
-const STATES = locationsByType[1] as State[];
+export const STATES = locationsByType[1] as State[];
 
 export function getStateByUrlName(stateUrlName: string): State | undefined {
   return STATES.find(
