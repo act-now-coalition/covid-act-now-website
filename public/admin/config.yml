@@ -75,3 +75,121 @@ collections:
               - label: Section Copy
                 name: copy
                 widget: markdown
+  - name: recommendations
+    label: Recommendations
+    format: json
+    description: Recommendations content
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    files:
+      - name: Recommendations
+        label: Recommendations content
+        file: src/cms-content/recommendations/recommendations.json
+        fields:
+          - name: main
+            label: Main
+            widget: object
+            fields:
+              - {label: "Header", name: "header", widget: "string", default: true}
+              - label: Recommendations
+                name: recommendations
+                widget: object
+                collapsed: true
+                fields:
+                - label: Federal Task Force
+                  name: federalTaskForce
+                  widget: object
+                  collapsed: true
+                  fields:
+                    - label: Green
+                      name: green
+                      widget: list
+                      fields:
+                        - { label: Category, name: category, widget: string }
+                        - { label: Copy, name: copy, widget: markdown }
+                    - label: Yellow
+                      name: yellow
+                      widget: list
+                      fields:
+                        - { label: Category, name: category, widget: string }
+                        - { label: Copy, name: copy, widget: markdown }
+                    - label: Red
+                      name: red
+                      widget: list
+                      fields:
+                        - { label: Category, name: category, widget: string }
+                        - { label: Copy, name: copy, widget: markdown}
+                - label: Harvard
+                  name: harvard
+                  widget: object
+                  collapsed: true
+                  fields:
+                    - label: Green
+                      name: green
+                      widget: list
+                      fields:
+                        - { label: Category, name: category, widget: string }
+                        - { label: Copy, name: copy, widget: markdown }
+                    - label: Yellow
+                      name: yellow
+                      widget: list
+                      fields:
+                        - { label: Category, name: category, widget: string }
+                        - { label: Copy, name: copy, widget: markdown }
+                    - label: Orange
+                      name: orange
+                      widget: list
+                      fields:
+                        - { label: Category, name: category, widget: string }
+                        - { label: Copy, name: copy, widget: markdown }
+                    - label: Red
+                      name: red
+                      widget: list
+                      fields:
+                        - { label: Category, name: category, widget: string }
+                        - { label: Copy, name: copy, widget: markdown}
+              - label: Footer Item
+                name: footerItem
+                widget: list
+                fields:
+                  - {label: Item Header, name: itemHeader, widget: string }
+                  - {label: Item Body, name: itemBody, widget: markdown }
+              - label: Icons
+                name: icons
+                widget: list
+                fields:
+                  - { label: Category, name: category, widget: string }
+                  - {label: Alt text, name: altText, widget: string }
+                  - {label: Icon image, name: iconImage, widget: image }
+          - name: modal
+            label: Modal
+            widget: object
+            fields:
+              - {label: "Header", name: "header", widget: "string", default: true}
+              - label: Federal Task Force
+                name: federalTaskForce
+                widget: object
+                collapsed: true
+                fields:
+                - {label: Source Name, name: sourceName, widget: string}
+                - {label: Description, name: description, widget: markdown}
+                - label: Levels
+                  name: levels
+                  widget: list
+                  fields:
+                    - { label: Color, name: color, widget: string }
+                    - { label: Content, name: content, widget: markdown }
+              - label: Harvard
+                name: harvard
+                widget: object
+                collapsed: true
+                fields:
+                - {label: Source Name, name: sourceName, widget: string}
+                - {label: Description, name: description, widget: markdown}
+                - label: Levels
+                  name: levels
+                  widget: list
+                  fields:
+                    - { label: Color, name: color, widget: string }
+                    - { label: Content, name: content, widget: markdown }
