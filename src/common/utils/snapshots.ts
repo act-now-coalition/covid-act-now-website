@@ -14,7 +14,7 @@ export async function fetchMasterSnapshotNumber(): Promise<number> {
 
 export function snapshotFromUrl(url: string): number {
   assert(url, 'Empty URL provided');
-  const match = /(\d+)\/v2\/?$/.exec(url);
+  const match = /(\d+)\/(v2)?\/?$/.exec(url);
   assert(match, `${url} did not match snapshot URL regex.`);
   return parseInt(match[1]);
 }
