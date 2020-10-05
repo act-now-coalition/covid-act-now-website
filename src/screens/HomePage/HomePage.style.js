@@ -51,6 +51,16 @@ export const SectionWrapper = styled(Box)`
   margin-bottom: 2.5rem;
 `;
 
+export const Section = styled(Box)`
+  margin-bottom: 2.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  @media (min-width: ${mobileBreakpoint}) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+`;
+
 export const BannerContainer = styled.div`
   margin: 0 auto;
 
