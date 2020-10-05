@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useMemo } from 'react';
 import { ChartContentWrapper, MainContentInner } from './ChartsHolder.style';
 import NoCountyDetail from './NoCountyDetail';
 import { Projections } from 'common/models/Projections';
@@ -71,6 +71,10 @@ const ChartsHolder = (props: {
     isMobile,
   };
 
+  const initialFipsList = useMemo(() => {
+    return [props.projections.primary.fips];
+  }, [props.projections.primary.fips]);
+
   // TODO(pablo): Create separate refs for signup and share
   return (
     <>
@@ -112,7 +116,7 @@ const ChartsHolder = (props: {
             </MainContentInner>
             <MainContentInner ref={exploreChartRef}>
               <Explore
-                initialFipsList={[props.projections.primary.fips]}
+                initialFipsList={initialFipsList}
                 title="Cases, Deaths, and Hospitalizations"
               />
             </MainContentInner>
