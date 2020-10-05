@@ -200,7 +200,7 @@ export const HoverTrackerLine = styled.g`
   }
 `;
 
-export const EmptyChart = styled(ChartContainer)`
+export const EmptyPanel = styled(ChartContainer)`
   /* Super centered: https://web.dev/one-line-layouts */
   display: grid;
   place-items: center;
@@ -303,13 +303,8 @@ export const TooltipLocation = styled.div`
   color: ${colorPalette.white};
 `;
 
-export const NormalizeDataContainer = styled.div<{
-  hideNormalizeControl?: boolean;
-}>`
-  display: flex;
-  flex-direction: column;
+export const NormalizeDataContainer = styled.div`
   padding-top: 1.25rem;
-  display: ${({ hideNormalizeControl }) => hideNormalizeControl && 'none'};
 
   @media (min-width: 600px) {
     padding-top: 0;

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import HomePageHeader from 'components/Header/HomePageHeader';
 import Map from 'components/Map/Map';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
@@ -18,10 +18,13 @@ import {
   SearchBarThermometerWrapper,
   SectionWrapper,
   BannerContainer,
+  Section,
 } from './HomePage.style';
 import { SelectorWrapper } from 'components/Header/HomePageHeader.style';
 import CompareMain from 'components/Compare/CompareMain';
 import { DonationBanner } from 'components/Banner/DonationBanner';
+import Explore from 'components/Explore';
+import { getRandomStateFipsList } from './utils';
 
 export default function HomePage() {
   const shareBlockRef = useRef(null);
@@ -57,9 +60,10 @@ export default function HomePage() {
     }
 
     history.push(route);
-
     window.scrollTo(0, 0);
   };
+
+  const [initialFipsList] = useState(getRandomStateFipsList());
 
   return (
     <>
@@ -90,6 +94,12 @@ export default function HomePage() {
             <Map hideLegend />
             {isMobile && <HomePageThermometer />}
             <CompareMain locationsViewable={8} isHomepage />
+            <Section>
+              <Explore
+                title="Cases, Deaths and Hospitalizations"
+                initialFipsList={initialFipsList}
+              />
+            </Section>
             <SectionWrapper ref={indicatorsRef}>
               <CriteriaExplanation isMobile={isMobile} />
             </SectionWrapper>
