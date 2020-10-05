@@ -18,9 +18,6 @@ import fetch from 'node-fetch';
 
 export const SNAPSHOT_URL = DataUrlJson.data_url;
 
-// We always use the "observed" intervention (i.e. projected based on current trends).
-const INTERVENTION = 'OBSERVED_INTERVENTION';
-
 /** Represents the actuals timeseries for any kind of region */
 export type ActualsTimeseries = Actualstimeseries;
 
@@ -46,7 +43,7 @@ export class Api {
     regionAggregate: RegionAggregateDescriptor,
   ): Promise<RegionSummaryWithTimeseries[]> {
     const all = await this.fetchApiJson<AggregateRegionSummaryWithTimeseries>(
-      `us/${regionAggregate}.${INTERVENTION}.timeseries.json`,
+      `${regionAggregate}.timeseries.json`,
     );
     assert(all != null, 'Failed to load timeseries');
     return all;
@@ -60,11 +57,11 @@ export class Api {
   ): Promise<RegionSummaryWithTimeseries | null> {
     if (region.isState()) {
       return await this.fetchApiJson<RegionSummaryWithTimeseries>(
-        `us/states/${region.stateId}.${INTERVENTION}.timeseries.json`,
+        `state/${region.stateId}.timeseries.json`,
       );
     } else if (region.isCounty()) {
       return await this.fetchApiJson<RegionSummaryWithTimeseries>(
-        `us/counties/${region.countyFipsId}.${INTERVENTION}.timeseries.json`,
+        `county/${region.countyFipsId}.timeseries.json`,
       );
     } else {
       fail('Unknown region type: ' + region);
