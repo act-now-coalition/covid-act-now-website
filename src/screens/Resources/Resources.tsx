@@ -36,7 +36,6 @@ const sidebar = (
     </SidebarLink>
     <SidebarLink href="#model">SEIR Epidemiology Model</SidebarLink>
     <SidebarLink href="#api">API</SidebarLink>
-    <SidebarLink href="#csv-files">CSV Files</SidebarLink>
     <SidebarLink href="#embed">Embed</SidebarLink>
   </React.Fragment>
 );
