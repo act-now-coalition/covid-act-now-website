@@ -19,13 +19,9 @@ const SCHEMA_FILES = [
   'AggregateRegionSummaryWithTimeseries.json',
   'Metrics.json',
   'MetricsTimeseriesRow.json',
-  'PredictionTimeseriesRow.json',
-  'PredictionTimeseriesRowWithHeader.json',
-  'Projections.json',
   'RegionSummary.json',
   'RegionSummaryWithTimeseries.json',
-  'ResourceUsageProjection.json',
-  'ResourceUtilization.json',
+  'HospitalResourceUtilization.json',
 ];
 
 const BANNER_COMMENT = `
@@ -38,7 +34,7 @@ const BANNER_COMMENT = `
 
 const OUTPUT_FOLDER = path.join(__dirname, '..', 'src', 'api', 'schema');
 const SCHEMAS_BASE_URL =
-  'https://raw.githubusercontent.com/covid-projections/covid-data-model/master/api/schemas/';
+  'https://github.com/covid-projections/covid-data-model/raw/master/api/schemas_v2/';
 
 (async () => {
   for (const file of SCHEMA_FILES) {

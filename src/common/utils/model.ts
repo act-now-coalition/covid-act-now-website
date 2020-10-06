@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Projections } from '../models/Projections';
-import { REVERSED_STATES } from '..';
 import {
   RegionAggregateDescriptor,
   RegionDescriptor,
 } from './RegionDescriptor';
 import { Api } from 'api';
-import { County, findCountyByFips } from 'common/locations';
+import { County, findCountyByFips, getStateName } from 'common/locations';
 import moment from 'moment';
-import { RegionSummaryWithTimeseries } from 'api/schema/RegionSummaryWithTimeseries';
 import { assert } from '.';
 import { getSnapshotUrlOverride } from './snapshots';
 
@@ -52,12 +50,13 @@ export function fetchAllStateProjections(snapshotUrl: string | null = null) {
     );
     return all
       .filter(
-        summaryWithTimeseries => stateCode(summaryWithTimeseries) !== undefined,
+        summaryWithTimeseries =>
+          getStateName(summaryWithTimeseries.state) !== undefined,
       )
       .map(summaryWithTimeseries => {
         return new Projections(
           summaryWithTimeseries,
-          stateCode(summaryWithTimeseries)!,
+          summaryWithTimeseries.state,
         );
       });
   }
@@ -76,13 +75,14 @@ export function fetchAllCountyProjections(snapshotUrl: string | null = null) {
     );
     return all
       .filter(
-        summaryWithTimeseries => stateCode(summaryWithTimeseries) !== undefined,
+        summaryWithTimeseries =>
+          getStateName(summaryWithTimeseries.state) !== undefined,
       )
       .map(summaryWithTimeseries => {
         const fips = summaryWithTimeseries.fips;
         return new Projections(
           summaryWithTimeseries,
-          stateCode(summaryWithTimeseries)!,
+          summaryWithTimeseries.state,
           findCountyByFips(fips),
         );
       });
@@ -117,16 +117,4 @@ export function useModelLastUpdatedDate() {
   }, []);
 
   return lastUpdated;
-}
-
-// Helper to get the state code from an API RegionSummaryWithTimeseries.
-function stateCode(
-  summaryWithTimeseries: RegionSummaryWithTimeseries,
-): string | undefined {
-  const stateName = summaryWithTimeseries.stateName;
-  const stateCode = REVERSED_STATES[stateName];
-  if (!stateCode) {
-    console.warn('Unknown state:', stateName);
-  }
-  return stateCode;
 }
