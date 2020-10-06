@@ -97,12 +97,14 @@ collections:
             - { label: Category, name: category, widget: string}
             - { label: Level, name: level, widget: string}
             - { label: ID, name: id, widget: string}
-          - label: Footer Item
-            name: footerItem
-            widget: list
+          - label: Footer
+            name: footer
+            widget: object
+            collapsed: true
             fields:
-              - {label: Item Header, name: itemHeader, widget: string }
-              - {label: Item Body, name: itemBody, widget: markdown }
+              - {label: Modal button label, name: modalButtonLabel, widget: string }
+              - {label: Feedback button label, name: feedbackButtonLabel, widget: string }
+              - {label: Share text, name: shareText, widget: markdown}
           - label: Icons
             name: icons
             widget: list
