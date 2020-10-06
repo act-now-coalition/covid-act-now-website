@@ -87,7 +87,10 @@ collections:
         label: Recommendations content - Main
         file: src/cms-content/recommendations/recommendations-main.json
         fields:
-          - { label: 'Header', name: 'header', widget: 'string', default: true }
+          - label: Header
+            name: header
+            widget: string
+            default: true
           - label: Intro
             name: intro
             widget: markdown
