@@ -95,6 +95,7 @@ collections:
             - { label: Body, name: body, widget: markdown}
             - { label: Source, name: source, widget: string}
             - { label: Category, name: category, widget: string}
+            - { label: Level, name: level, widget: string}
             - { label: ID, name: id, widget: string}
           - label: Footer Item
             name: footerItem
