@@ -1,7 +1,12 @@
 import moment from 'moment';
-import { sum } from 'lodash';
+import { sum, isNumber } from 'lodash';
 import { Projection, Column } from 'common/models/Projection';
-import { Metric, getLevel } from 'common/metric';
+import {
+  Metric,
+  getLevel,
+  getMetricNameForCompare,
+  formatValue,
+} from 'common/metric';
 import { Level } from 'common/level';
 
 export enum FedLevel {
@@ -124,4 +129,34 @@ function getWeeklyNewCasesPer100k(projection: Projection): number | undefined {
 function isBetweenDates(point: Column, dateFrom: Date, dateTo: Date) {
   const date = new Date(point.x);
   return dateFrom <= date && date < dateTo;
+}
+
+/*
+ * Generates location+metric-specific section of intro blurb
+ */
+export function getDynamicIntroCopy(
+  locationName: string,
+  metricValues: { [metric in Metric]: number | null },
+): string {
+  const hasPosTestRate = isNumber(metricValues[Metric.POSITIVE_TESTS]);
+
+  const blurb = `according to ${locationName}'s ${getMetricNameForCompare(
+    Metric.CASE_DENSITY,
+  ).toLowerCase()} (${formatValue(
+    Metric.CASE_DENSITY,
+    metricValues[Metric.CASE_DENSITY],
+    '',
+  )}) ${
+    hasPosTestRate
+      ? `and ${getMetricNameForCompare(
+          Metric.POSITIVE_TESTS,
+        ).toLowerCase()} (${formatValue(
+          Metric.POSITIVE_TESTS,
+          metricValues[Metric.POSITIVE_TESTS],
+          '',
+        )}).`
+      : ''
+  }`;
+
+  return blurb;
 }
