@@ -91,9 +91,6 @@ collections:
             name: header
             widget: string
             default: true
-          - label: Intro
-            name: intro
-            widget: markdown
           - label: Recommendations
             name: recommendations
             widget: list
