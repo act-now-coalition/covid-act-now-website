@@ -25,6 +25,8 @@ enum Source {
 // Note: We need to change this interface to match the CMS data structure (or import it
 // from the CMS content directory). It's here just as a placeholder.
 export interface Recommendation {
+  id: string;
+  category: string;
   copy: string;
   source: Source;
   level: FedLevel | HarvardLevel;
