@@ -34,5 +34,12 @@
     "feedbackButtonLabel": "Leave feedback",
     "modalButtonLabel": "Sources & Methodology",
     "shareText": "Please share with policy makers, business owners, and any other decision makers, especially if these recommendations don’t match reality."
-  }
+  },
+  "icons": [
+    {
+      "category": "MASKS",
+      "altText": "Mask icon",
+      "iconImage": "/images_cms/recommend-mask.png"
+    }
+  ]
 }
