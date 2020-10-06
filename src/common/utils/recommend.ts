@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { sum, partition } from 'lodash';
+import { sum } from 'lodash';
 import { Projection, Column } from 'common/models/Projection';
 import { Metric, getLevel } from 'common/metric';
 import { Level } from 'common/level';
