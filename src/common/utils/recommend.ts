@@ -8,34 +8,12 @@ import {
   formatValue,
 } from 'common/metric';
 import { Level } from 'common/level';
-
-export enum FedLevel {
-  RED,
-  YELLOW,
-  GREEN,
-}
-
-export enum HarvardLevel {
-  RED,
-  ORANGE,
-  YELLOW,
-  GREEN,
-}
-
-enum Source {
-  FED,
-  HARVARD,
-}
-
-// Note: We need to change this interface to match the CMS data structure (or import it
-// from the CMS content directory). It's here just as a placeholder.
-export interface Recommendation {
-  id: string;
-  category: string;
-  copy: string;
-  source: Source;
-  level: FedLevel | HarvardLevel;
-}
+import {
+  FedLevel,
+  HarvardLevel,
+  Recommendation,
+  RecommendationSource,
+} from 'cms-content/recommendations';
 
 /**
  * TODO: Add the more nuanced levels for the Fed recommendations
@@ -48,12 +26,15 @@ export function getRecommendations(
   const harvardLevel = getHarvardLevel(projection);
 
   const fedRecommendations = recommendations
-    .filter(item => item.source === Source.FED)
+    .filter(item => item.source === RecommendationSource.FED)
     .filter(item => item.level === fedLevel);
 
   const harvardRecommendations = recommendations
-    .filter(item => item.source === Source.HARVARD)
+    .filter(item => item.source === RecommendationSource.HARVARD)
     .filter(item => item.level === harvardLevel);
+
+  // TODO (Pablo): Handle more granular recommendations that depend
+  // on specific values for positive test rates.
 
   return [...fedRecommendations, ...harvardRecommendations];
 }
@@ -66,16 +47,13 @@ export function getRecommendations(
  */
 export function getFedLevel(projection: Projection): FedLevel {
   const weeklyCasesPer100k = getWeeklyNewCasesPer100k(projection);
-  const positiveTestRate = projection.currentTestPositiveRate;
+  const positiveTestRate = getPositiveTestRate(projection);
 
-  if (
-    weeklyCasesPer100k === FedLevel.RED &&
-    positiveTestRate === FedLevel.RED
-  ) {
+  if (weeklyCasesPer100k > 100 && positiveTestRate > 10) {
     return FedLevel.RED;
   } else if (
-    weeklyCasesPer100k === FedLevel.YELLOW ||
-    positiveTestRate === FedLevel.YELLOW
+    (10 < weeklyCasesPer100k && weeklyCasesPer100k < 100) ||
+    (5 <= positiveTestRate && positiveTestRate <= 10)
   ) {
     return FedLevel.YELLOW;
   } else {
@@ -111,7 +89,7 @@ export function getHarvardLevel(projection: Projection): HarvardLevel {
  * The Fed Task Force document bases the risk levels on the total number of new
  * cases in a week per 100,000 population.
  */
-function getWeeklyNewCasesPer100k(projection: Projection): number | undefined {
+function getWeeklyNewCasesPer100k(projection: Projection): number {
   const { totalPopulation } = projection;
   const dateTo = moment().startOf('day').toDate();
   const dateFrom = moment(dateTo).subtract(1, 'week').toDate();
@@ -123,7 +101,12 @@ function getWeeklyNewCasesPer100k(projection: Projection): number | undefined {
   const weeklyNewCasesPer100k =
     sum(dailyNewCases) / (totalPopulation / 100_000);
 
-  return weeklyNewCasesPer100k;
+  return isNumber(weeklyNewCasesPer100k) ? weeklyNewCasesPer100k : 0;
+}
+
+function getPositiveTestRate(projection: Projection): number {
+  const positiveTestRate = projection.currentTestPositiveRate;
+  return isNumber(positiveTestRate) ? positiveTestRate : 0;
 }
 
 function isBetweenDates(point: Column, dateFrom: Date, dateTo: Date) {
