@@ -86,5 +86,9 @@ export interface RecommendationsModalContent {
   };
 }
 
+//TODO (chelsi): fix the any
+const allIcons: any[] = recommendationsMain.icons;
+
+export { allIcons as AllIcons };
 export { recommendationsMain as RecommendationsMainContent };
 export { recommendationsModal as RecommendationsModalContent };
