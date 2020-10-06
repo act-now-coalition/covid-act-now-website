@@ -67,9 +67,23 @@ export function calcICUHeadroom(
   }
 
   const icuHeadroomDetails = metrics.icuHeadroomDetails;
-  if (!icuHeadroomDetails) {
+  if (!icuHeadroomDetails || metrics.icuHeadroomRatio === null) {
     return null;
   }
+  // Use capacity from the timeseries if it's within the last 7 days, else use the
+  // non-timeseries value.
+  // TODO(chris): https://trello.com/c/CUcjDdtt/435-add-total-icu-beds-to-icu-headroom-metadata-instead-of-calculating-on-website
+  const finalTotalBeds =
+    lastValue(
+      actualTimeseries
+        .map(r => (r?.icuBeds ? r.icuBeds.capacity : null))
+        .slice(-7),
+    ) || actuals.icuBeds.capacity;
+
+  if (finalTotalBeds === null) {
+    return null;
+  }
+
   const overrideInPlace = ICU_HEADROOM_OVERRIDES.indexOf(fips) > -1;
   if (overrideInPlace) {
     return {
@@ -84,13 +98,6 @@ export function calcICUHeadroom(
       nonCovidPatientsMethod: NonCovidPatientsMethod.ACTUAL,
     };
   }
-
-  // Use capacity from the timeseries if it's within the last 7 days, else use the
-  // non-timeseries value.
-  // TODO(chris): https://trello.com/c/CUcjDdtt/435-add-total-icu-beds-to-icu-headroom-metadata-instead-of-calculating-on-website
-  const finalTotalBeds =
-    lastValue(actualTimeseries.map(r => r?.ICUBeds.capacity).slice(-7)) ||
-    actuals.ICUBeds.totalCapacity;
 
   return {
     metricSeries: metricsTimeseries.map(row => row && row.icuHeadroomRatio),

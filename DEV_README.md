@@ -53,7 +53,7 @@ yarn test
 
 ### Updating the Data Snapshot, Map Colors, and Share Images
 The website renders data that's read from an API data snapshot (e.g.
-https://data.covidactnow.org/snapshot/123/). Every day we update the website
+https://data.covidactnow.org/snapshot/123/v2/). Every day we update the website
 to point at the newest data snapshot. As part of this we also must update our
 map colors to reflect the new status of states / counties, and regenerate our
 sharing images to have the latest maps / metrics / charts, etc.
