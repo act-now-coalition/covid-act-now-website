@@ -81,7 +81,6 @@ export function getFedLevel(projection: Projection): FedLevel {
  * recommendations for schools and online learning.
  *
  * https://globalepidemics.org/wp-content/uploads/2020/07/pandemic_resilient_schools_briefing_72020.pdf
- * @param projection
  */
 export function getHarvardLevel(projection: Projection): HarvardLevel {
   const { currentCaseDensity } = projection;
