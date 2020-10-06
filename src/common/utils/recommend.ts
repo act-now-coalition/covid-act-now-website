@@ -131,16 +131,16 @@ function isBetweenDates(point: Column, dateFrom: Date, dateTo: Date) {
   return dateFrom <= date && date < dateTo;
 }
 
-// TODOS(Chelsi):
-// 1. get source names from CMS
-// 2. split up + extract non-dynamic peice of blurb (with source names) to style differently
-export function getIntroBlurb(
+/*
+ * Generates location+metric-specific section of intro blurb
+ */
+export function getDynamicIntroCopy(
   locationName: string,
   metricValues: { [metric in Metric]: number | null },
 ): string {
   const hasPosTestRate = isNumber(metricValues[Metric.POSITIVE_TESTS]);
 
-  const blurb = `These recommendations match the guidelines set by White House Coronavirus Task Force and Harvard Global Health Institute according to ${locationName}'s ${getMetricNameForCompare(
+  const blurb = `according to ${locationName}'s ${getMetricNameForCompare(
     Metric.CASE_DENSITY,
   ).toLowerCase()} (${formatValue(
     Metric.CASE_DENSITY,
