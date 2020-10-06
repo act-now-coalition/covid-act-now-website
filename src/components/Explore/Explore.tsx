@@ -256,18 +256,9 @@ const Explore: React.FunctionComponent<{
           <Styles.ShareBlock>
             <ShareImageButtonGroup
               disabled={selectedLocations.length === 0 || !hasData}
-              imageUrl={() =>
-                createSharedComponentId().then(id => getExportImageUrl(id))
-              }
-              imageFilename={getImageFilename(
-                initialFipsList[0],
-                currentMetric,
-              )}
-              url={() =>
-                createSharedComponentId().then(id =>
-                  getChartUrl(initialFipsList[0], id),
-                )
-              }
+              imageUrl={() => createSharedComponentId().then(getExportImageUrl)}
+              imageFilename={getImageFilename(selectedLocations, currentMetric)}
+              url={() => createSharedComponentId().then(getChartUrl)}
               quote={getSocialQuote(selectedLocations, currentMetric)}
               hashtags={['COVIDActNow']}
               onSaveImage={() => {

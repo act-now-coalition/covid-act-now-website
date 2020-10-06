@@ -19,7 +19,6 @@ import {
   findLocationForFips,
   getLocationNames as getAllLocations,
   getLocationNameForFips,
-  getRelativeUrlForFips,
   isStateFips,
   Location,
   isState,
@@ -287,11 +286,26 @@ function sanitizeLocationName(name: string) {
   return words(deburr(name)).join('-').toLowerCase();
 }
 
-export function getImageFilename(fips: string, metric: ExploreMetric) {
-  const locationName = getLocationNameForFips(fips) || '';
-  const chartId = getChartIdByMetric(metric);
+function getLocationFileName(location: Location) {
+  const fipsCode = location.full_fips_code || location.state_fips_code;
+  return sanitizeLocationName(getLocationNameForFips(fipsCode));
+}
+
+export function getImageFilename(locations: Location[], metric: ExploreMetric) {
   const downloadDate = moment().format('YYYY-MM-DD');
-  return `${sanitizeLocationName(locationName)}-${chartId}-${downloadDate}.png`;
+  const chartId = getChartIdByMetric(metric);
+  const fileNameSuffix = `${chartId}-${downloadDate}`;
+
+  switch (locations.length) {
+    case 0:
+      return `${fileNameSuffix}.png`;
+    case 1:
+    case 2:
+      const locationNames = locations.map(getLocationFileName).join('-');
+      return `${locationNames}-${fileNameSuffix}.png`;
+    default:
+      return `multiple-locations-${fileNameSuffix}.png`;
+  }
 }
 
 /**
@@ -303,9 +317,10 @@ export function getExportImageUrl(sharedComponentId: string) {
   return urlJoin(share_image_url, `share/${sharedComponentId}/export.png`);
 }
 
-export function getChartUrl(fips: string, sharedComponentId: string) {
+export function getChartUrl(sharedComponentId: string) {
+  const pathname = window.location.pathname;
   const redirectTo = urlJoin(
-    getRelativeUrlForFips(fips),
+    pathname.includes('us/') ? pathname : '/',
     'explore',
     sharedComponentId,
   );

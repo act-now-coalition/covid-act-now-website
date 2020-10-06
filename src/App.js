@@ -50,7 +50,11 @@ export default function App() {
                 path="/compare/:sharedComponentId?"
                 component={HomePage}
               />
-
+              <Route
+                exact
+                path="/explore/:sharedComponentId?"
+                component={HomePage}
+              />
               <Route
                 exact
                 path="/alert_unsubscribe"
