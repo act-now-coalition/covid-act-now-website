@@ -1,0 +1,38 @@
+{
+  "recommendations": [
+    {
+      "body": "**Masks** should always be worn indoors and required by law.",
+      "source": "FED",
+      "category": "MASKS",
+      "level": "YELLOW",
+      "id": "masks-indoors"
+    },
+    {
+      "body": "**Gatherings** should be limited to 10 people while utilizing social distancing and outdoor spaces.",
+      "source": "FED",
+      "category": "GATHERINGS",
+      "level": "GREEN",
+      "id": "gatherings-outdoors"
+    },
+    {
+      "body": "**Schools**: if sufficient pandemic resilient learning space exists: 1st priority: preK-5 and special education services for preK-8. 2nd priority: grades 6-8 and special education services for grades 9-12. 3rd priority: grades 9-12 on a hybrid schedule",
+      "source": "HARVARD",
+      "category": "SCHOOLS",
+      "level": "ORANGE",
+      "id": "schools-orange"
+    },
+    {
+      "body": "**Restaurants** should create outdoor dining opportunities and limit indoor dining to 25%. Customers should use take out or eat outdoors only if socially distanced.",
+      "source": "FED",
+      "category": "RESTAURANTS",
+      "level": "YELLOW",
+      "id": "restaurants-indoor-25-percent"
+    }
+  ],
+  "header": "Official Recommendations",
+  "footer": {
+    "feedbackButtonLabel": "Leave feedback",
+    "modalButtonLabel": "Sources & Methodology",
+    "shareText": "Please share with policy makers, business owners, and any other decision makers, especially if these recommendations don’t match reality."
+  }
+}
