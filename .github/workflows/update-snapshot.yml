@@ -32,7 +32,7 @@ jobs:
 
       # Update snapshot URL and regenerate map colors.
       - run: yarn install
-      - run: 'echo "{ \"data_url\": \"https://data.covidactnow.org/snapshot/${{env.SNAPSHOT_ID}}/\v2\/" }" | python -mjson.tool > src/assets/data/data_url.json'
+      - run: 'echo "{ \"data_url\": \"https://data.covidactnow.org/snapshot/${{env.SNAPSHOT_ID}}/v2/\" }" | python -mjson.tool > src/assets/data/data_url.json'
       - run: yarn update-location-summaries
 
       # TODO: We have switched to dynamic images served via Firebase Hosting.  Remove all of the
