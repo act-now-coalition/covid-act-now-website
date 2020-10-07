@@ -13,6 +13,8 @@ import {
 } from './Recommend.style';
 import { mainContent } from 'cms-content/recommendations';
 import { RecommendationWithIcon } from 'cms-content/recommendations';
+import RecommendModal from './RecommendModal';
+import Dialog, { useDialog } from 'components/Dialog';
 
 const { header, footer } = mainContent;
 
@@ -31,11 +33,15 @@ const Header = (props: { introCopy: string }) => {
   );
 };
 
-const Footer = () => {
+const Footer: React.FC<{ onClickOpenModal: () => void }> = ({
+  onClickOpenModal,
+}) => {
   return (
     <Fragment>
       <div>
-        <FooterLink>{footer.modalButtonLabel}</FooterLink>
+        <FooterLink onClick={onClickOpenModal}>
+          {footer.modalButtonLabel}
+        </FooterLink>
         <FooterLink>{footer.feedbackButtonLabel}</FooterLink>
       </div>
       <ShareText source={footer.shareText} />
@@ -49,12 +55,13 @@ const Recommend = (props: {
   recommendations: RecommendationWithIcon[];
 }) => {
   const { introCopy, recommendations } = props;
+  const [isDialogOpen, openDialog, closeDialog] = useDialog(false);
   return (
     <Wrapper>
       <Header introCopy={introCopy} />
       <RecommendationsContainer>
         {recommendations.map((recommendation, i) => (
-          <Fragment>
+          <Fragment key={`recommendation-${i}`}>
             <RecommendationWrapper index={i}>
               <Icon src="/images_cms/recommend-mask.png" />
               <RecommendationBody
@@ -64,7 +71,10 @@ const Recommend = (props: {
           </Fragment>
         ))}
       </RecommendationsContainer>
-      <Footer />
+      <Footer onClickOpenModal={openDialog} />
+      <Dialog open={isDialogOpen} closeDialog={closeDialog}>
+        <RecommendModal />
+      </Dialog>
     </Wrapper>
   );
 };
