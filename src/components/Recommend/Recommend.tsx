@@ -12,11 +12,14 @@ import {
   ShareText,
 } from './Recommend.style';
 import { mainContent } from 'cms-content/recommendations';
+import { RecommendationWithIcon } from 'cms-content/recommendations';
+
+const { header, footer } = mainContent;
 
 const Header = (props: { introCopy: string }) => {
   return (
     <Fragment>
-      <HeaderCopy>Official Recommendations</HeaderCopy>
+      <HeaderCopy>{header}</HeaderCopy>
       <LocationName>for harris county, tx</LocationName>
       <Intro>
         These recommendations match the guidelines set by{' '}
@@ -32,10 +35,10 @@ const Footer = () => {
   return (
     <Fragment>
       <div>
-        <FooterLink>{mainContent.footer.modalButtonLabel}</FooterLink>
-        <FooterLink>{mainContent.footer.feedbackButtonLabel}</FooterLink>
+        <FooterLink>{footer.modalButtonLabel}</FooterLink>
+        <FooterLink>{footer.feedbackButtonLabel}</FooterLink>
       </div>
-      <ShareText source={mainContent.footer.shareText} />
+      <ShareText source={footer.shareText} />
     </Fragment>
   );
 };
@@ -43,11 +46,9 @@ const Footer = () => {
 //TODO (chelsi): add in correct icon info when added to cms
 const Recommend = (props: {
   introCopy: string;
-  // recommendations: Recommendation[];
-  recommendations: any[];
+  recommendations: RecommendationWithIcon[];
 }) => {
   const { introCopy, recommendations } = props;
-  console.log('recommendations', props.recommendations);
   return (
     <Wrapper>
       <Header introCopy={introCopy} />

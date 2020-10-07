@@ -13,16 +13,19 @@ import {
   HarvardLevel,
   Recommendation,
   RecommendationSource,
+  RecommendIcon,
+  // RecommendationWithIcon,
 } from 'cms-content/recommendations';
-import { AllIcons } from 'cms-content/recommendations';
+import { allIcons } from 'cms-content/recommendations';
 
 /**
  * TODO: Add the more nuanced levels for the Fed recommendations
  */
+
+//TODO (Chelsi): fix the any
 export function getRecommendations(
   projection: Projection,
-  recommendations: any[],
-  // ): Recommendation[] {
+  recommendations: Recommendation[],
 ): any[] {
   const fedLevel = getFedLevel(projection);
   const harvardLevel = getHarvardLevel(projection);
@@ -148,10 +151,9 @@ export function getDynamicIntroCopy(
   return blurb;
 }
 
-//TODO (chelsi): fix the any
-function getIcon(recommendation: any) {
-  const correntIcon = AllIcons.filter(
-    (icon: any) => icon.category === recommendation.category,
+function getIcon(recommendation: Recommendation) {
+  const correntIcon = allIcons.filter(
+    (icon: RecommendIcon) => icon.category === recommendation.category,
   );
   return {
     recommendationInfo: recommendation,
