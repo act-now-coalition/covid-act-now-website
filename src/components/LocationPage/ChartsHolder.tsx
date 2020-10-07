@@ -16,7 +16,7 @@ import {
   getDynamicIntroCopy,
   getRecommendations,
 } from 'common/utils/recommend';
-import { RecommendationsMainContent } from 'cms-content/recommendations';
+import { mainContent } from 'cms-content/recommendations';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
@@ -88,7 +88,7 @@ const ChartsHolder = (props: {
 
   const recommendationsMainContent = getRecommendations(
     projection,
-    RecommendationsMainContent.recommendations,
+    mainContent.recommendations,
   );
 
   // TODO(pablo): Create separate refs for signup and share

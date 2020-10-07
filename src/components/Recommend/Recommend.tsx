@@ -11,7 +11,7 @@ import {
   FooterLink,
   ShareText,
 } from './Recommend.style';
-import { RecommendationsMainContent } from 'cms-content/recommendations';
+import { mainContent } from 'cms-content/recommendations';
 
 const Header = (props: { introCopy: string }) => {
   return (
@@ -32,14 +32,10 @@ const Footer = () => {
   return (
     <Fragment>
       <div>
-        <FooterLink>
-          {RecommendationsMainContent.footer.modalButtonLabel}
-        </FooterLink>
-        <FooterLink>
-          {RecommendationsMainContent.footer.feedbackButtonLabel}
-        </FooterLink>
+        <FooterLink>{mainContent.footer.modalButtonLabel}</FooterLink>
+        <FooterLink>{mainContent.footer.feedbackButtonLabel}</FooterLink>
       </div>
-      <ShareText source={RecommendationsMainContent.footer.shareText} />
+      <ShareText source={mainContent.footer.shareText} />
     </Fragment>
   );
 };
