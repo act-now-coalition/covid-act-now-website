@@ -121,6 +121,7 @@ const ChartsHolder = (props: {
               <Recommend
                 introCopy={recommendationsIntro}
                 recommendations={recommendationsMainContent}
+                locationName={projection.locationName}
               />
               {ALL_METRICS.map(metric => (
                 <ChartBlock

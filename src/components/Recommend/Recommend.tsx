@@ -10,21 +10,24 @@ import {
   Icon,
   FooterLink,
   ShareText,
+  FooterSection,
+  FooterWrapper,
 } from './Recommend.style';
 import { mainContent } from 'cms-content/recommendations';
 import { RecommendationWithIcon } from 'cms-content/recommendations';
 
 const { header, footer } = mainContent;
 
-const Header = (props: { introCopy: string }) => {
+const Header = (props: { introCopy: string; locationName: string }) => {
+  const { introCopy, locationName } = props;
   return (
     <Fragment>
       <HeaderCopy>{header}</HeaderCopy>
-      <LocationName>for harris county, tx</LocationName>
+      <LocationName>for {locationName}</LocationName>
       <Intro>
         These recommendations match the guidelines set by{' '}
         <strong>White House Coronavirus Task Force</strong> and{' '}
-        <strong>Harvard Global Health Institute</strong> {props.introCopy}{' '}
+        <strong>Harvard Global Health Institute</strong> {introCopy}{' '}
         <span>Learn more.</span>
       </Intro>
     </Fragment>
@@ -33,13 +36,15 @@ const Header = (props: { introCopy: string }) => {
 
 const Footer = () => {
   return (
-    <Fragment>
-      <div>
+    <FooterWrapper>
+      <FooterSection>
         <FooterLink>{footer.modalButtonLabel}</FooterLink>
         <FooterLink>{footer.feedbackButtonLabel}</FooterLink>
-      </div>
-      <ShareText source={footer.shareText} />
-    </Fragment>
+      </FooterSection>
+      <FooterSection>
+        <ShareText source={footer.shareText} />
+      </FooterSection>
+    </FooterWrapper>
   );
 };
 
@@ -47,11 +52,12 @@ const Footer = () => {
 const Recommend = (props: {
   introCopy: string;
   recommendations: RecommendationWithIcon[];
+  locationName: string;
 }) => {
-  const { introCopy, recommendations } = props;
+  const { introCopy, recommendations, locationName } = props;
   return (
     <Wrapper>
-      <Header introCopy={introCopy} />
+      <Header introCopy={introCopy} locationName={locationName} />
       <RecommendationsContainer>
         {recommendations.map((recommendation, i) => (
           <Fragment>

@@ -97,9 +97,27 @@ export const Icon = styled.img`
   margin-right: 1.25rem;
 `;
 
+export const FooterWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 600px) {
+    flex-direction: row-reverse;
+  }
+`;
+
 //TODO (chelsi)-make button and not div
 export const FooterLink = styled.div`
   ${FooterLinkStyles}
+  white-space: nowrap;
+
+  &:last-child {
+    margin-left: 1.5rem;
+  }
+`;
+
+export const FooterSection = styled.div`
+  display: flex;
 `;
 
 export const ShareText = styled(ReactMarkdown)`
