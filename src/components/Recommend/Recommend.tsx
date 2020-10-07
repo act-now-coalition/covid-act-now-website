@@ -10,11 +10,12 @@ import {
   Icon,
   FooterLink,
   ShareText,
-  FooterSection,
+  FooterHalf,
   FooterWrapper,
 } from './Recommend.style';
 import { mainContent } from 'cms-content/recommendations';
 import { RecommendationWithIcon } from 'cms-content/recommendations';
+import SmallShareButtons from 'components/SmallShareButtons';
 
 const { header, footer } = mainContent;
 
@@ -37,13 +38,14 @@ const Header = (props: { introCopy: string; locationName: string }) => {
 const Footer = () => {
   return (
     <FooterWrapper>
-      <FooterSection>
+      <FooterHalf>
         <FooterLink>{footer.modalButtonLabel}</FooterLink>
         <FooterLink>{footer.feedbackButtonLabel}</FooterLink>
-      </FooterSection>
-      <FooterSection>
+      </FooterHalf>
+      <FooterHalf>
+        <SmallShareButtons />
         <ShareText source={footer.shareText} />
-      </FooterSection>
+      </FooterHalf>
     </FooterWrapper>
   );
 };

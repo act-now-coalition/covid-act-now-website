@@ -47,7 +47,7 @@ export const SocialButton = styled(Button)`
 `;
 
 export const SocialShareButton = styled.div`
-  ${StyledShareButtonStyles}
+  ${StyledShareButtonStyles};
   border-right: 1px solid ${palette.lightGray};
   display: 'block';
   width: 60px;
