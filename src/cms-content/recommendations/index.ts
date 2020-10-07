@@ -61,7 +61,7 @@ interface FullHarvardLevel {
   content: Markdown;
 }
 
-export interface RecommendationMainContent {
+export interface RecommendationsMainContent {
   header: string;
   recommendations: Recommendation[];
   footer: {
@@ -86,5 +86,5 @@ export interface RecommendationsModalContent {
   };
 }
 
-export { recommendationsMain as RecommendationsMainContent };
-export { recommendationsModal as RecommendationsModalContent };
+export const mainContent = recommendationsMain as RecommendationsMainContent;
+export const modalContent = recommendationsModal as RecommendationsModalContent;
