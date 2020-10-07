@@ -36,7 +36,6 @@ const sidebar = (
     </SidebarLink>
     <SidebarLink href="#model">SEIR Epidemiology Model</SidebarLink>
     <SidebarLink href="#api">API</SidebarLink>
-    <SidebarLink href="#csv-files">CSV Files</SidebarLink>
     <SidebarLink href="#embed">Embed</SidebarLink>
   </React.Fragment>
 );
@@ -250,7 +249,7 @@ const Resources = ({ children }: { children: React.ReactNode }) => {
           </Typography>
           <iframe
             src="https://covidactnow.org/embed/us/colorado-co"
-            title="CoVid Act Now"
+            title="Covid Act Now"
             width="350"
             height="700"
             frameBorder="0"

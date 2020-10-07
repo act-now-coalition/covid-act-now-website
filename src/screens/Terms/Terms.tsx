@@ -55,7 +55,7 @@ const Terms = ({ children }: { children: React.ReactNode }) => {
           Website Terms of Use
         </Typography>
         <Typography variant="h6" component="h1" align="center">
-          Last updated: March 28, 2020
+          Last updated: October 1, 2020
         </Typography>
         <Typography variant="h5" component="h1">
           Acceptance of the Terms of Use
@@ -176,10 +176,10 @@ const Terms = ({ children }: { children: React.ReactNode }) => {
           officials to make fast decisions (the “<b>Purpose</b>”), subject to
           these Terms of Use and any third party licenses in the Material, we
           hereby grant you a license to use the Material under the terms of the
-          Creative Commons Attribution 4.0 International (CC BY 4.0) license in
-          connection with the Purpose. The full terms of the license are
-          available{' '}
-          <a href="https://creativecommons.org/licenses/by/4.0/legalcode">
+          Creative Commons Attribution-NonCommercial-NoDerivatives 4.0
+          International (CC BY-NC-ND 4.0) license in connection with the
+          Purpose. The full terms of the license are available{' '}
+          <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode">
             here
           </a>
           .
