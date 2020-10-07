@@ -86,5 +86,11 @@ export interface RecommendationsModalContent {
   };
 }
 
+export interface RecommendationWithIcon {
+  recommendationInfo: Recommendation;
+  iconInfo: RecommendIcon;
+}
+
+export const allIcons = recommendationsMain.icons as RecommendIcon[];
 export const mainContent = recommendationsMain as RecommendationsMainContent;
 export const modalContent = recommendationsModal as RecommendationsModalContent;

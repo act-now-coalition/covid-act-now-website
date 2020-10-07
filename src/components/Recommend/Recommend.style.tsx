@@ -1,4 +1,10 @@
 import styled from 'styled-components';
+import { COLOR_MAP } from 'common/colors';
+import { COLORS } from 'common';
+import { ChartLocationNameStyles } from 'components/LocationPage/ChartsHolder.style';
+import { Typography } from '@material-ui/core';
+import ReactMarkdown from 'react-markdown';
+import { FooterLinkStyles } from 'components/Compare/Compare.style';
 
 /*
 TODO (chelsi): these breakpoints and margins are the same as
@@ -26,9 +32,81 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const Header = styled.h2`
+export const HeaderCopy = styled.h2`
   font-weight: bold;
   font-size: 1.5rem;
   margin: 0;
-  padding: 0.75rem 1rem;
+`;
+
+export const LocationName = styled(Typography)`
+  ${ChartLocationNameStyles}
+  margin-bottom: 0;
+`;
+
+export const Intro = styled.p`
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+  max-width: 600px;
+
+  strong {
+    color: black;
+  }
+
+  span {
+    color: ${COLOR_MAP.BLUE};
+    cursor: pointer;
+  }
+`;
+
+export const RecommendationsContainer = styled.div`
+  border: 1px solid ${COLORS.LIGHTGRAY};
+  border-radius: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.5rem 0.25rem;
+
+  @media (min-width: 600px) {
+    padding: 0.75rem;
+  }
+`;
+
+export const RecommendationWrapper = styled.div<{ index: number }>`
+  display: flex;
+  align-items: flex-start;
+  padding: 0.75rem;
+
+  @media (min-width: 600px) {
+    flex: 1 1 50%;
+    padding: ${({ index }) =>
+      index % 2 ? '.75rem .75rem .75rem 1rem' : '.75rem 1rem .75rem .75rem'};
+  }
+`;
+
+export const RecommendationBody = styled(ReactMarkdown)`
+  p {
+    line-height: 1.4;
+    margin: 0;
+    color: ${COLOR_MAP.GRAY_BODY_COPY};
+  }
+
+  strong {
+    color: black;
+  }
+`;
+
+export const Icon = styled.img`
+  margin-right: 1.25rem;
+`;
+
+//TODO (chelsi)-make button and not div
+export const FooterLink = styled.div`
+  ${FooterLinkStyles}
+`;
+
+export const ShareText = styled(ReactMarkdown)`
+  p {
+    line-height: 1.4;
+    margin: 0;
+    color: ${COLOR_MAP.GRAY_BODY_COPY};
+    font-size: 13px;
+  }
 `;

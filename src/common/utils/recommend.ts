@@ -13,25 +13,32 @@ import {
   HarvardLevel,
   Recommendation,
   RecommendationSource,
+  RecommendIcon,
+  // RecommendationWithIcon,
 } from 'cms-content/recommendations';
+import { allIcons } from 'cms-content/recommendations';
 
 /**
  * TODO: Add the more nuanced levels for the Fed recommendations
  */
+
+//TODO (Chelsi): fix the any
 export function getRecommendations(
   projection: Projection,
   recommendations: Recommendation[],
-): Recommendation[] {
+): any[] {
   const fedLevel = getFedLevel(projection);
   const harvardLevel = getHarvardLevel(projection);
 
   const fedRecommendations = recommendations
     .filter(item => item.source === RecommendationSource.FED)
-    .filter(item => item.level === fedLevel);
+    .filter(item => item.level === fedLevel)
+    .map(getIcon);
 
   const harvardRecommendations = recommendations
     .filter(item => item.source === RecommendationSource.HARVARD)
-    .filter(item => item.level === harvardLevel);
+    .filter(item => item.level === harvardLevel)
+    .map(getIcon);
 
   // TODO (Pablo): Handle more granular recommendations that depend
   // on specific values for positive test rates.
@@ -142,4 +149,14 @@ export function getDynamicIntroCopy(
   }`;
 
   return blurb;
+}
+
+function getIcon(recommendation: Recommendation) {
+  const correntIcon = allIcons.filter(
+    (icon: RecommendIcon) => icon.category === recommendation.category,
+  );
+  return {
+    recommendationInfo: recommendation,
+    iconInfo: correntIcon,
+  };
 }

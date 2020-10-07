@@ -12,6 +12,11 @@ import CompareMain from 'components/Compare/CompareMain';
 import Explore from 'components/Explore';
 import { County } from 'common/locations';
 import Recommend from 'components/Recommend';
+import {
+  getDynamicIntroCopy,
+  getRecommendations,
+} from 'common/utils/recommend';
+import { mainContent } from 'cms-content/recommendations';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
@@ -76,6 +81,16 @@ const ChartsHolder = (props: {
     return [props.projections.primary.fips];
   }, [props.projections.primary.fips]);
 
+  const recommendationsIntro = getDynamicIntroCopy(
+    projection.locationName,
+    props.projections.getMetricValues(),
+  );
+
+  const recommendationsMainContent = getRecommendations(
+    projection,
+    mainContent.recommendations,
+  );
+
   // TODO(pablo): Create separate refs for signup and share
   return (
     <>
@@ -102,8 +117,11 @@ const ChartsHolder = (props: {
               locationsViewable={6}
               stateId={props.stateId}
             />
-            <Recommend />
             <MainContentInner>
+              <Recommend
+                introCopy={recommendationsIntro}
+                recommendations={recommendationsMainContent}
+              />
               {ALL_METRICS.map(metric => (
                 <ChartBlock
                   key={metric}

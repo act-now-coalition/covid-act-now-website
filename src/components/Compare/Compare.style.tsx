@@ -417,7 +417,7 @@ export const Footer = styled.div<{ isCounty: any }>`
   }
 `;
 
-export const FooterLink = styled.div`
+export const FooterLinkStyles = css`
   font-family: Roboto;
   color: ${COLOR_MAP.BLUE};
   font-weight: 500;
@@ -425,6 +425,11 @@ export const FooterLink = styled.div`
   display: flex;
   align-items: center;
   height: fit-content;
+  font-size: 14px;
+`;
+
+export const FooterLink = styled.div`
+  ${FooterLinkStyles}
 `;
 
 export const HeaderWrapper = styled.div`
