@@ -123,37 +123,37 @@
     {
       "category": "MASKS",
       "altText": "Mask icon",
-      "iconImage": "/images_cms/recommend-mask.png"
+      "iconImage": "/images_cms/mask_recommends_icon.svg"
     },
     {
       "category": "GATHERINGS",
       "altText": "Gatherings icon",
-      "iconImage": "/images_cms/recommend-mask.png"
+      "iconImage": "/images_cms/gathering_recommends_icon.svg"
     },
     {
       "category": "RESTAURANTS",
       "altText": "Restaurants icon",
-      "iconImage": "/images_cms/recommend-mask.png"
+      "iconImage": "/images_cms/restaurant_recommends_icon.svg"
     },
     {
       "category": "BARS",
       "altText": "Bars icon",
-      "iconImage": "/images_cms/recommend-mask.png"
+      "iconImage": "/images_cms/bar_recommends_icon.svg"
     },
     {
       "category": "MEDICAL_CONDITIONS",
       "altText": "Medical conditions icon",
-      "iconImage": "/images_cms/recommend-mask.png"
+      "iconImage": "/images_cms/mask_recommends_icon.svg"
     },
     {
       "category": "PUBLIC_INTERACTIONS",
       "altText": "Public Interactions icon",
-      "iconImage": "/images_cms/recommend-mask.png"
+      "iconImage": "/images_cms/mask_recommends_icon.svg"
     },
     {
       "category": "SCHOOLS",
       "altText": "Schools icon",
-      "iconImage": "/images_cms/recommend-mask.png"
+      "iconImage": "/images_cms/school_recommends_icon.svg"
     }
   ]
 }

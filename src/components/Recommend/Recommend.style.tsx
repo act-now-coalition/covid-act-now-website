@@ -74,14 +74,16 @@ export const RecommendationWrapper = styled.div<{ index: number }>`
   padding: 0.75rem;
 
   @media (min-width: 600px) {
-    flex: 1 1 50%;
+    width: 50%;
     padding: ${({ index }) =>
-      index % 2 ? '.75rem .75rem .75rem 1rem' : '.75rem 1rem .75rem .75rem'};
+      index % 2 ? '.5rem .5rem .5rem .8rem' : '.5rem .8rem .5rem .5rem'};
   }
 `;
 
 export const RecommendationBody = styled(ReactMarkdown)`
-  p {
+  p,
+  ul,
+  li {
     line-height: 1.4;
     margin: 0;
     color: ${COLOR_MAP.GRAY_BODY_COPY};

@@ -23,8 +23,12 @@ import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 const { header, footer } = mainContent;
 const { federalTaskForce, harvard } = modalContent;
 
-const Header = (props: { introCopy: string; locationName: string }) => {
-  const { introCopy, locationName } = props;
+const Header = (props: {
+  introCopy: string;
+  locationName: string;
+  onClickOpenModal: () => void;
+}) => {
+  const { introCopy, locationName, onClickOpenModal } = props;
   return (
     <Fragment>
       <HeaderCopy>{header}</HeaderCopy>
@@ -33,7 +37,7 @@ const Header = (props: { introCopy: string; locationName: string }) => {
         These recommendations match the guidelines set by{' '}
         <strong>{federalTaskForce.sourceName}</strong> and{' '}
         <strong>{harvard.sourceName}</strong> {introCopy}{' '}
-        <span>Learn more.</span>
+        <span onClick={onClickOpenModal}>Learn more.</span>
       </Intro>
     </Fragment>
   );
@@ -96,12 +100,19 @@ const Recommend = (props: {
 
   return (
     <Wrapper ref={recommendationsRef}>
-      <Header introCopy={introCopy} locationName={locationName} />
+      <Header
+        introCopy={introCopy}
+        locationName={locationName}
+        onClickOpenModal={openModalRecommendations}
+      />
       <RecommendationsContainer>
         {recommendations.map((recommendation, i) => (
           <Fragment key={`recommendation-${i}`}>
             <RecommendationWrapper index={i}>
-              <Icon src="/images_cms/recommend-mask.png" />
+              <Icon
+                src={recommendation.iconInfo.iconImage}
+                alt={recommendation.iconInfo.altText}
+              />
               <RecommendationBody
                 source={recommendation.recommendationInfo.body}
               />
