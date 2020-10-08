@@ -2,7 +2,7 @@
   "header": "Sources & Methodology",
   "federalTaskForce": {
     "sourceName": "White House Coronavirus Task Force",
-    "description": "According to documents obtained by the New York Times, the following recommendations and criteria are those that the Federal Task Force uses and provides to state and local governments.",
+    "description": "According to [documents obtained by the New York Times](https://www.nytimes.com/interactive/2020/07/28/us/states-report-virus-response-july-26.html), the following recommendations and criteria are those that the Federal Task Force uses and provides to state and local governments.",
     "levels": [
       {
         "color": "GREEN",
@@ -19,7 +19,7 @@
     ]
   },
   "harvard": {
-    "description": "Path to Zero & Schools: Achieving Pandemic Resilient Teaching and Learning Spaces is a framework that Harvard Global Health Institute uses to helps schools and districts devise plans based on the size of the outbreak in their community.",
+    "description": "[Path to Zero & Schools: Achieving Pandemic Resilient Teaching and Learning Spaces](https://globalepidemics.org/wp-content/uploads/2020/07/pandemic_resilient_schools_briefing_72020.pdf) is a framework that Harvard Global Health Institute uses to helps schools and districts devise plans based on the size of the outbreak in their community.",
     "sourceName": "Harvard Global Health Institute",
     "levels": [
       {
