@@ -254,3 +254,20 @@ export function locationNameFromUrlParams(stateId?: string, countyId?: string) {
     ? `${countyOption.county}, ${state?.state}`
     : `${state?.state}`;
 }
+
+export function findFipsByUrlParams(
+  stateUrlName?: string,
+  countyUrlName?: string,
+) {
+  if (!stateUrlName) {
+    return undefined;
+  } else {
+    const state = getStateByUrlName(stateUrlName);
+    const countyOption =
+      countyUrlName && getCountyByUrlName(state?.state_code, countyUrlName);
+
+    return countyOption && state
+      ? countyOption.full_fips_code
+      : state && state.state_fips_code;
+  }
+}
