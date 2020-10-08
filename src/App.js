@@ -71,6 +71,11 @@ export default function App() {
               />
               <Route
                 exact
+                path="/us/:stateId/recommendations"
+                component={LocationPage}
+              />
+              <Route
+                exact
                 path="/us/:stateId/explore/:sharedComponentId?"
                 component={LocationPage}
               />
@@ -82,6 +87,11 @@ export default function App() {
               <Route
                 exact
                 path="/us/:stateId/county/:countyId/chart/:chartId"
+                component={LocationPage}
+              />
+              <Route
+                exact
+                path="/us/:stateId/county/:countyId/recommendations"
                 component={LocationPage}
               />
               <Route

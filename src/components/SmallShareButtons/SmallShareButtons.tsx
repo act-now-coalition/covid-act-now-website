@@ -11,8 +11,9 @@ import { COLOR_MAP } from 'common/colors';
 import LinkIcon from '@material-ui/icons/Link';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-const SmallShareButtons = () => {
-  const url = 'https://covidactnow.org/';
+//TODO (Chelsi): Add in final share quote
+const SmallShareButtons = (props: { shareUrl: string }) => {
+  const url = props.shareUrl;
 
   const socialProps = {
     url,

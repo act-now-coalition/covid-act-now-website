@@ -35,7 +35,8 @@ const Header = (props: { introCopy: string; locationName: string }) => {
   );
 };
 
-const Footer = () => {
+const Footer = (props: { shareUrl: string }) => {
+  const { shareUrl } = props;
   return (
     <FooterWrapper>
       <FooterHalf>
@@ -43,7 +44,7 @@ const Footer = () => {
         <FooterLink>{footer.feedbackButtonLabel}</FooterLink>
       </FooterHalf>
       <FooterHalf>
-        <SmallShareButtons />
+        <SmallShareButtons shareUrl={shareUrl} />
         <ShareText source={footer.shareText} />
       </FooterHalf>
     </FooterWrapper>
@@ -55,10 +56,18 @@ const Recommend = (props: {
   introCopy: string;
   recommendations: RecommendationWithIcon[];
   locationName: string;
+  shareUrl: string;
+  recommendationsRef: React.RefObject<HTMLDivElement>;
 }) => {
-  const { introCopy, recommendations, locationName } = props;
+  const {
+    introCopy,
+    recommendations,
+    locationName,
+    shareUrl,
+    recommendationsRef,
+  } = props;
   return (
-    <Wrapper>
+    <Wrapper ref={recommendationsRef}>
       <Header introCopy={introCopy} locationName={locationName} />
       <RecommendationsContainer>
         {recommendations.map((recommendation, i) => (
@@ -72,7 +81,7 @@ const Recommend = (props: {
           </Fragment>
         ))}
       </RecommendationsContainer>
-      <Footer />
+      <Footer shareUrl={shareUrl} />
     </Wrapper>
   );
 };

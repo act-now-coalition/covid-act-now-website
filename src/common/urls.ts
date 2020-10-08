@@ -58,6 +58,19 @@ export function getPageUrl(
   return addSharingId(getPageBaseUrl(stateId, county));
 }
 
+/*
+  Generates URL for sharing CAN Recommends via
+  social/copy-link button in Recommends footer
+*/
+export function getRecommendationsShareUrl(
+  stateId: string | undefined,
+  county: County | undefined,
+): string {
+  return addSharingId(
+    urlJoin(getPageBaseUrl(stateId, county), 'recommendations'),
+  );
+}
+
 export function getComparePageUrl(
   stateId: string | undefined,
   county: County | undefined,

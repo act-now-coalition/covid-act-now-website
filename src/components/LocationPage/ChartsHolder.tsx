@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
 import { ChartContentWrapper, MainContentInner } from './ChartsHolder.style';
 import NoCountyDetail from './NoCountyDetail';
 import { Projections } from 'common/models/Projections';
@@ -17,6 +18,7 @@ import {
   getRecommendations,
 } from 'common/utils/recommend';
 import { mainContent } from 'cms-content/recommendations';
+import { getRecommendationsShareUrl } from 'common/urls';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
@@ -47,9 +49,13 @@ const ChartsHolder = (props: {
   };
   const shareBlockRef = useRef<HTMLDivElement>(null);
   const exploreChartRef = useRef<HTMLDivElement>(null);
+  const recommendationsRef = useRef<HTMLDivElement>(null);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+
+  const { pathname } = useLocation();
+  const isRecommendationsShareUrl = pathname.includes('recommendations');
 
   useEffect(() => {
     const scrollToChart = () => {
@@ -64,8 +70,20 @@ const ChartsHolder = (props: {
       return () => clearTimeout(timeoutId);
     };
 
+    const scrollToRecommendations = () => {
+      const timeoutId = setTimeout(() => {
+        if (isRecommendationsShareUrl) {
+          if (recommendationsRef.current) {
+            scrollTo(recommendationsRef.current);
+          }
+        }
+      }, 200);
+      return () => clearTimeout(timeoutId);
+    };
+
     scrollToChart();
-  }, [chartId, metricRefs]);
+    scrollToRecommendations();
+  }, [chartId, metricRefs, isRecommendationsShareUrl]);
 
   const shareButtonProps = {
     chartId: props.chartId,
@@ -89,6 +107,11 @@ const ChartsHolder = (props: {
   const recommendationsMainContent = getRecommendations(
     projection,
     mainContent.recommendations,
+  );
+
+  const recommendsShareUrl = getRecommendationsShareUrl(
+    props.stateId,
+    props.county,
   );
 
   // TODO(pablo): Create separate refs for signup and share
@@ -122,6 +145,8 @@ const ChartsHolder = (props: {
                 introCopy={recommendationsIntro}
                 recommendations={recommendationsMainContent}
                 locationName={projection.locationName}
+                shareUrl={recommendsShareUrl}
+                recommendationsRef={recommendationsRef}
               />
               {ALL_METRICS.map(metric => (
                 <ChartBlock
