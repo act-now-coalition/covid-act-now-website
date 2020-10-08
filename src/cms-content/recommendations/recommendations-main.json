@@ -41,6 +41,48 @@
       "category": "PUBLIC_INTERACTIONS",
       "source": "FED",
       "level": "YELLOW"
+    },
+    {
+      "body": "Reduce your public interactions and activities to 25% of your normal activity",
+      "id": "PUBLIC_INTERACTIONS_RED",
+      "category": "PUBLIC_INTERACTIONS",
+      "level": "RED",
+      "source": "FED"
+    },
+    {
+      "body": "Protect anyone with serious medical conditions at home by social distancing at home and using high levels of personal hygiene, including hand washing and cleaning surfaces",
+      "id": "MEDICAL_CONDITIONS_RED",
+      "level": "RED",
+      "category": "MEDICAL_CONDITIONS",
+      "source": "FED"
+    },
+    {
+      "body": "Use take out options or eat outdoors socially distanced",
+      "level": "RED",
+      "source": "FED",
+      "category": "RESTAURANTS",
+      "id": "RESTAURANTS_RED"
+    },
+    {
+      "body": "Do not go to bars, nightclubs, or gyms",
+      "id": "BARS_RED",
+      "level": "RED",
+      "category": "BARS",
+      "source": "FED"
+    },
+    {
+      "body": "Limit social gatherings to 10 people of fewer",
+      "source": "FED",
+      "category": "GATHERINGS",
+      "level": "RED",
+      "id": "GATHERINGS_RED"
+    },
+    {
+      "body": "Wear masks at all times outside the home and maintain physical distance",
+      "source": "FED",
+      "category": "MASKS",
+      "level": "YELLOW",
+      "id": "MASKS_YELLOW"
     }
   ],
   "header": "Official Recommendations",
