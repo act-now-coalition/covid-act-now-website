@@ -24,6 +24,7 @@ import {
   isState,
   isCounty,
   belongsToState,
+  getRelativeUrlForFips,
 } from 'common/locations';
 import { share_image_url } from 'assets/data/share_images_url.json';
 import { SeriesType, Series } from './interfaces';
@@ -317,10 +318,9 @@ export function getExportImageUrl(sharedComponentId: string) {
   return urlJoin(share_image_url, `share/${sharedComponentId}/export.png`);
 }
 
-export function getChartUrl(sharedComponentId: string) {
-  const pathname = window.location.pathname;
+export function getChartUrl(sharedComponentId: string, locationFips?: string) {
   const redirectTo = urlJoin(
-    pathname.includes('us/') ? pathname : '/',
+    locationFips ? getRelativeUrlForFips(locationFips) : '/',
     'explore',
     sharedComponentId,
   );

@@ -48,6 +48,7 @@ import {
   storeSharedComponentParams,
   useSharedComponentParams,
 } from 'common/sharing';
+import { findFipsByUrlParams } from 'common/locations';
 import { ScreenshotReady } from 'components/Screenshot';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 
@@ -101,7 +102,14 @@ const Explore: React.FunctionComponent<{
   const isMobileXs = useMediaQuery(theme.breakpoints.down('xs'));
   const metricLabels = getMetricLabels();
 
-  const { sharedComponentId } = useParams<{ sharedComponentId?: string }>();
+  const { sharedComponentId, stateId, countyId } = useParams<{
+    sharedComponentId?: string;
+    stateId?: string;
+    countyId?: string;
+  }>();
+
+  const locationFips = findFipsByUrlParams(stateId, countyId);
+
   let defaultMetric = ExploreMetric.CASES;
   // Originally we had share URLs like /explore/cases instead of
   // /explore/<sharedComponentId> and so this code allows them to keep working.
@@ -235,9 +243,7 @@ const Explore: React.FunctionComponent<{
     if (sharedParams) {
       setCurrentMetric(sharedParams.currentMetric);
       setNormalizeData(sharedParams.normalizeData);
-      const locations = sharedParams.selectedFips.map((fips: string) =>
-        findLocationForFips(fips),
-      );
+      const locations = sharedParams.selectedFips.map(findLocationForFips);
       setSelectedLocations(locations);
     }
   }, [sharedParams]);
@@ -258,7 +264,11 @@ const Explore: React.FunctionComponent<{
               disabled={selectedLocations.length === 0 || !hasData}
               imageUrl={() => createSharedComponentId().then(getExportImageUrl)}
               imageFilename={getImageFilename(selectedLocations, currentMetric)}
-              url={() => createSharedComponentId().then(getChartUrl)}
+              url={() =>
+                createSharedComponentId().then(sharingId =>
+                  getChartUrl(sharingId, locationFips),
+                )
+              }
               quote={getSocialQuote(selectedLocations, currentMetric)}
               hashtags={['COVIDActNow']}
               onSaveImage={() => {
