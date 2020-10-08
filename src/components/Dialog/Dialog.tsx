@@ -20,8 +20,13 @@ const Dialog: React.FC<DialogProps & { closeDialog: () => void }> = props => {
       <LockBodyScroll />
       <Style.Container>
         <Style.Header>
-          <IconButton aria-label="close" disableFocusRipple disableRipple>
-            <CloseIcon onClick={closeDialog} />
+          <IconButton
+            aria-label="close"
+            onClick={closeDialog}
+            disableFocusRipple
+            disableRipple
+          >
+            <CloseIcon />
           </IconButton>
         </Style.Header>
         <Style.Body>{children}</Style.Body>
