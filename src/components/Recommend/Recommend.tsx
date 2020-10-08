@@ -43,6 +43,8 @@ const Footer: React.FC<{
   shareUrl: string;
   shareQuote: string;
 }> = ({ onClickOpenModal, shareUrl, shareQuote }) => {
+  const trackLabel = 'recommendations';
+
   return (
     <FooterWrapper>
       <FooterHalf>
@@ -52,7 +54,11 @@ const Footer: React.FC<{
         <FooterLink>{footer.feedbackButtonLabel}</FooterLink>
       </FooterHalf>
       <FooterHalf>
-        <SmallShareButtons shareUrl={shareUrl} shareQuote={shareQuote} />
+        <SmallShareButtons
+          shareUrl={shareUrl}
+          shareQuote={shareQuote}
+          trackLabel={trackLabel}
+        />
         <ShareText source={footer.shareText} />
       </FooterHalf>
     </FooterWrapper>

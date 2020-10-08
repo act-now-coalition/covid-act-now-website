@@ -17,6 +17,11 @@ import {
   // RecommendationWithIcon,
 } from 'cms-content/recommendations';
 import { allIcons } from 'cms-content/recommendations';
+import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
+
+export function trackRecommendationsEvent(action: EventAction, label: string) {
+  trackEvent(EventCategory.RECOMMENDATIONS, action, label);
+}
 
 /**
  * TODO: Add the more nuanced levels for the Fed recommendations
