@@ -97,7 +97,12 @@ const Recommend = (props: {
         shareUrl={shareUrl}
         shareQuote={shareQuote}
       />
-      <Dialog open={isDialogOpen} closeDialog={closeDialog}>
+      <Dialog
+        open={isDialogOpen}
+        closeDialog={closeDialog}
+        fullWidth
+        maxWidth="md"
+      >
         <RecommendModal />
       </Dialog>
     </Wrapper>
