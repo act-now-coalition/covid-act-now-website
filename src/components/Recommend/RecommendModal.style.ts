@@ -3,6 +3,7 @@ import MuiTab from '@material-ui/core/Tab';
 import MuiTabs from '@material-ui/core/Tabs';
 import { MarkdownBody } from 'components/Markdown';
 import theme from 'assets/theme';
+import { COLOR_MAP } from 'common/colors';
 
 export const Title = styled.h1`
   font-family: Roboto;
@@ -32,11 +33,11 @@ export const SourceIntro = styled(MarkdownBody)`
   line-height: 23px;
   letter-spacing: 0em;
   text-align: left;
-  color: #4f4f4f;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
 `;
 
 export const LevelContainer = styled.div`
-  border: solid 1px #f2f2f2;
+  border: solid 1px ${COLOR_MAP.LIGHTGRAY};
   border-radius: 4px;
 `;
 
@@ -59,21 +60,21 @@ export const Tab = styled(MuiTab)`
 `;
 
 export const Tabs = styled(MuiTabs)`
-  background-color: rgba(242, 242, 242, 0.3);
+  background-color: ${COLOR_MAP.LIGHTGRAY};
 
   &.Indicator-Red .MuiTabs-indicator {
-    background-color: #ff0034;
+    background-color: ${COLOR_MAP.RED.BASE};
   }
 
   &.Indicator-Orange .MuiTabs-indicator {
-    background-color: #ff9600;
+    background-color: ${COLOR_MAP.ORANGE_DARK.BASE};
   }
 
   &.Indicator-Yellow .MuiTabs-indicator {
-    background-color: #ffc900;
+    background-color: ${COLOR_MAP.ORANGE.BASE};
   }
   &.Indicator-Green .MuiTabs-indicator {
-    background-color: #00d474;
+    background-color: ${COLOR_MAP.GREEN.BASE};
   }
 `;
 
