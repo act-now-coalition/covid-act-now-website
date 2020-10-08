@@ -83,6 +83,34 @@
       "category": "MASKS",
       "level": "YELLOW",
       "id": "MASKS_YELLOW"
+    },
+    {
+      "body": "Stay-at-home orders in place; all learning remote for all learners; districts, states, and federal government invests in remote learning.",
+      "source": "HARVARD",
+      "category": "SCHOOLS",
+      "level": "RED",
+      "id": "SCHOOLS_RED"
+    },
+    {
+      "body": "* 1st priority for re-opening: Grades preK-5 and in-person special education services at grade levels preK-8 open if conditions for pandemic resilient teaching and learning spaces can be achieved at scale; districts, states, and federal government invest in healthy buildings and healthy classrooms; in the absence of conditions for pandemic resilient teaching and learning spaces, schools continue with remote learning.\n* 2nd priority for re-opening: Grades 6-8 and in-person special education services at grade levels 9-12 open if conditions for pandemic resilient teaching and learning spaces can be achieved at scale; districts, states, and federal government invest in healthy buildings and healthy classrooms; in the absence of conditions for pandemic resilient teaching and learning spaces, schools continue with remote learning.\n* Not a priority for re-opening: Grades 9-12 maintain remote learning for all learners; districts, states, and federal government invest in remote learning.",
+      "source": "HARVARD",
+      "category": "SCHOOLS",
+      "level": "ORANGE",
+      "id": "SCHOOLS_ORANGE"
+    },
+    {
+      "body": "* 1st priority for re-opening: Grades preK-5 and in-person special education services at grade levels preK-8 open if conditions for pandemic resilient teaching and learning spaces can be achieved at scale; districts, states, and federal government invest in healthy buildings and healthy classrooms; in the absence of conditions for pandemic resilient teaching and learning spaces, schools continue with remote learning.\n* 2nd priority for re-opening: Grades 6-8 and in-person special education services at grade levels 9-12 open if conditions for pandemic resilient teaching and learning spaces can be achieved at scale; districts, states, and federal government invest in healthy buildings and healthy classrooms; in the absence of conditions for pandemic resilient teaching and learning spaces, schools continue with remote learning. In-person opportunities for special needs students at grade-levels preK-8 are also included.\n* 3rd priority for re-opening: If sufficient pandemic resilient learning space is available AFTER allocation to K-8, grades 9-12 open on a hybrid schedule, with only a subset of students on campus at any particular point of time to facilitate de-densification; districts, states, and federal government invest in healthy buildings and healthy classrooms AND in remote learning.",
+      "source": "HARVARD",
+      "category": "SCHOOLS",
+      "level": "YELLOW",
+      "id": "SCHOOLS_YELLOW"
+    },
+    {
+      "body": "All schools open if conditions for pandemic resilient teaching and learning spaces can be achieved at scale; districts, states, and federal government invest in healthy buildings and healthy classrooms",
+      "source": "HARVARD",
+      "category": "SCHOOLS",
+      "level": "GREEN",
+      "id": "SCHOOLS_GREEN"
     }
   ],
   "header": "Official Recommendations",
