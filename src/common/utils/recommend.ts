@@ -61,11 +61,11 @@ export function getFedLevel(projection: Projection): FedLevel {
   const weeklyCasesPer100k = getWeeklyNewCasesPer100k(projection);
   const positiveTestRate = getPositiveTestRate(projection);
 
-  if (weeklyCasesPer100k > 100 && positiveTestRate > 10) {
+  if (weeklyCasesPer100k > 100 && positiveTestRate > 0.1) {
     return FedLevel.RED;
   } else if (
     (10 < weeklyCasesPer100k && weeklyCasesPer100k < 100) ||
-    (5 <= positiveTestRate && positiveTestRate <= 10)
+    (0.05 <= positiveTestRate && positiveTestRate <= 0.1)
   ) {
     return FedLevel.YELLOW;
   } else {
@@ -106,12 +106,15 @@ function getWeeklyNewCasesPer100k(projection: Projection): number {
   const dateTo = moment().startOf('day').toDate();
   const dateFrom = moment(dateTo).subtract(1, 'week').toDate();
 
+  const getY = (point: Column) => point.y;
+
   const dailyNewCases = projection
     .getDataset('rawDailyCases')
+    .filter(point => isNumber(getY(point)))
     .filter(point => isBetweenDates(point, dateFrom, dateTo));
 
   const weeklyNewCasesPer100k =
-    sum(dailyNewCases) / (totalPopulation / 100_000);
+    sum(dailyNewCases.map(getY)) / (totalPopulation / 100_000);
 
   return isNumber(weeklyNewCasesPer100k) ? weeklyNewCasesPer100k : 0;
 }

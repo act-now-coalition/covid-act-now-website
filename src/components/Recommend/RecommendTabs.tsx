@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import * as Style from './RecommendModal.style';
 
 type Markdown = string;
