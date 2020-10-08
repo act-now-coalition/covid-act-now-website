@@ -18,6 +18,7 @@ import { RecommendationWithIcon } from 'cms-content/recommendations';
 import SmallShareButtons from 'components/SmallShareButtons';
 import RecommendModal from './RecommendModal';
 import Dialog, { useDialog } from 'components/Dialog';
+import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 
 const { header, footer } = mainContent;
 const { federalTaskForce, harvard } = modalContent;
@@ -83,6 +84,16 @@ const Recommend = (props: {
     recommendationsRef,
   } = props;
   const [isDialogOpen, openDialog, closeDialog] = useDialog(false);
+
+  const openModalRecommendations = () => {
+    openDialog();
+    trackEvent(
+      EventCategory.RECOMMENDATIONS,
+      EventAction.OPEN_MODAL,
+      'Methodology & Sources',
+    );
+  };
+
   return (
     <Wrapper ref={recommendationsRef}>
       <Header introCopy={introCopy} locationName={locationName} />
@@ -99,7 +110,7 @@ const Recommend = (props: {
         ))}
       </RecommendationsContainer>
       <Footer
-        onClickOpenModal={openDialog}
+        onClickOpenModal={openModalRecommendations}
         shareUrl={shareUrl}
         shareQuote={shareQuote}
       />
