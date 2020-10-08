@@ -14,7 +14,7 @@ import {
   Recommendation,
   RecommendationSource,
   RecommendIcon,
-  // RecommendationWithIcon,
+  RecommendationWithIcon,
 } from 'cms-content/recommendations';
 import { allIcons } from 'cms-content/recommendations';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
@@ -156,12 +156,12 @@ export function getDynamicIntroCopy(
   return blurb;
 }
 
-function getIcon(recommendation: Recommendation) {
-  const correntIcon = allIcons.filter(
+function getIcon(recommendation: Recommendation): RecommendationWithIcon {
+  const correspondingIcon = allIcons.filter(
     (icon: RecommendIcon) => icon.category === recommendation.category,
   );
   return {
     recommendationInfo: recommendation,
-    iconInfo: correntIcon,
+    iconInfo: correspondingIcon[0],
   };
 }

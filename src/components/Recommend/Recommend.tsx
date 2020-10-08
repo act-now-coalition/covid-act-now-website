@@ -94,6 +94,8 @@ const Recommend = (props: {
     );
   };
 
+  console.log('recommendations', recommendations);
+
   return (
     <Wrapper ref={recommendationsRef}>
       <Header introCopy={introCopy} locationName={locationName} />
@@ -101,7 +103,10 @@ const Recommend = (props: {
         {recommendations.map((recommendation, i) => (
           <Fragment key={`recommendation-${i}`}>
             <RecommendationWrapper index={i}>
-              <Icon src="/images_cms/recommend-mask.png" />
+              <Icon
+                src={recommendation.iconInfo.iconImage}
+                alt={recommendation.iconInfo.altText}
+              />
               <RecommendationBody
                 source={recommendation.recommendationInfo.body}
               />
