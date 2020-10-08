@@ -14,7 +14,8 @@ import { lastValue } from './utils';
 import { getStateName } from 'common/locations';
 
 const DISABLED_CASE_DENSITY: string[] = [
-  '48029', // https://trello.com/c/ulCnCcif/
+  '48121', // https://trello.com/c/tOxq8MG2/506-outlier-in-denton-county-tx
+  '29095', // https://trello.com/c/xAwGpc6I/503-outlier-in-jackson-county-mo
 ];
 
 const DISABLED_INFECTION_RATE: string[] = [];
