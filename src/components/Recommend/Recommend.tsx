@@ -72,7 +72,12 @@ const Recommend = (props: {
         ))}
       </RecommendationsContainer>
       <Footer onClickOpenModal={openDialog} />
-      <Dialog open={isDialogOpen} closeDialog={closeDialog}>
+      <Dialog
+        open={isDialogOpen}
+        closeDialog={closeDialog}
+        fullWidth
+        maxWidth="md"
+      >
         <RecommendModal />
       </Dialog>
     </Wrapper>
