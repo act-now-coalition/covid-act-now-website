@@ -16,7 +16,11 @@ const Dialog: React.FC<DialogProps & { closeDialog: () => void }> = props => {
   }
 
   return (
-    <MuiDialog onClose={dismissDialog} {...otherProps}>
+    <MuiDialog
+      onClose={dismissDialog}
+      {...otherProps}
+      PaperComponent={Style.StyledPaper}
+    >
       <LockBodyScroll />
       <Style.Container>
         <Style.Header>

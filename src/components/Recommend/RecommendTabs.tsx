@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import * as Style from './RecommendModal.style';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
 
 type Markdown = string;
 type Color = string;
@@ -17,6 +19,10 @@ const RecommendTabs: React.FC<{
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const currentLevel = levels[activeTabIndex];
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down(850));
+  const tabsVariant = isMobile ? 'scrollable' : 'standard';
+
   function onSelectTab(tabIndex: number) {
     onSelectLevel(levels[tabIndex]);
     setActiveTabIndex(tabIndex);
@@ -25,9 +31,10 @@ const RecommendTabs: React.FC<{
   return (
     <Style.LevelContainer>
       <Style.Tabs
+        centered
         value={activeTabIndex}
         aria-label="Level Tabs"
-        variant="scrollable"
+        variant={tabsVariant}
         onChange={(event, tabIndex) => onSelectTab(tabIndex)}
         className={`Indicator-${currentLevel.label}`}
       >
