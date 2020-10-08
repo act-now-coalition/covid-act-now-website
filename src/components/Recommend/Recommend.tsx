@@ -10,42 +10,52 @@ import {
   Icon,
   FooterLink,
   ShareText,
+  FooterHalf,
+  FooterWrapper,
 } from './Recommend.style';
-import { mainContent } from 'cms-content/recommendations';
+import { mainContent, modalContent } from 'cms-content/recommendations';
 import { RecommendationWithIcon } from 'cms-content/recommendations';
+import SmallShareButtons from 'components/SmallShareButtons';
 import RecommendModal from './RecommendModal';
 import Dialog, { useDialog } from 'components/Dialog';
 
 const { header, footer } = mainContent;
+const { federalTaskForce, harvard } = modalContent;
 
-const Header = (props: { introCopy: string }) => {
+const Header = (props: { introCopy: string; locationName: string }) => {
+  const { introCopy, locationName } = props;
   return (
     <Fragment>
       <HeaderCopy>{header}</HeaderCopy>
-      <LocationName>for harris county, tx</LocationName>
+      <LocationName>for {locationName}</LocationName>
       <Intro>
         These recommendations match the guidelines set by{' '}
-        <strong>White House Coronavirus Task Force</strong> and{' '}
-        <strong>Harvard Global Health Institute</strong> {props.introCopy}{' '}
+        <strong>{federalTaskForce.sourceName}</strong> and{' '}
+        <strong>{harvard.sourceName}</strong> {introCopy}{' '}
         <span>Learn more.</span>
       </Intro>
     </Fragment>
   );
 };
 
-const Footer: React.FC<{ onClickOpenModal: () => void }> = ({
-  onClickOpenModal,
-}) => {
+const Footer: React.FC<{
+  onClickOpenModal: () => void;
+  shareUrl: string;
+  shareQuote: string;
+}> = ({ onClickOpenModal, shareUrl, shareQuote }) => {
   return (
-    <Fragment>
-      <div>
+    <FooterWrapper>
+      <FooterHalf>
         <FooterLink onClick={onClickOpenModal}>
           {footer.modalButtonLabel}
         </FooterLink>
         <FooterLink>{footer.feedbackButtonLabel}</FooterLink>
-      </div>
-      <ShareText source={footer.shareText} />
-    </Fragment>
+      </FooterHalf>
+      <FooterHalf>
+        <SmallShareButtons shareUrl={shareUrl} shareQuote={shareQuote} />
+        <ShareText source={footer.shareText} />
+      </FooterHalf>
+    </FooterWrapper>
   );
 };
 
@@ -53,12 +63,23 @@ const Footer: React.FC<{ onClickOpenModal: () => void }> = ({
 const Recommend = (props: {
   introCopy: string;
   recommendations: RecommendationWithIcon[];
+  locationName: string;
+  shareUrl: string;
+  shareQuote: string;
+  recommendationsRef: React.RefObject<HTMLDivElement>;
 }) => {
-  const { introCopy, recommendations } = props;
+  const {
+    introCopy,
+    recommendations,
+    locationName,
+    shareUrl,
+    shareQuote,
+    recommendationsRef,
+  } = props;
   const [isDialogOpen, openDialog, closeDialog] = useDialog(false);
   return (
-    <Wrapper>
-      <Header introCopy={introCopy} />
+    <Wrapper ref={recommendationsRef}>
+      <Header introCopy={introCopy} locationName={locationName} />
       <RecommendationsContainer>
         {recommendations.map((recommendation, i) => (
           <Fragment key={`recommendation-${i}`}>
@@ -71,7 +92,11 @@ const Recommend = (props: {
           </Fragment>
         ))}
       </RecommendationsContainer>
-      <Footer onClickOpenModal={openDialog} />
+      <Footer
+        onClickOpenModal={openDialog}
+        shareUrl={shareUrl}
+        shareQuote={shareQuote}
+      />
       <Dialog
         open={isDialogOpen}
         closeDialog={closeDialog}

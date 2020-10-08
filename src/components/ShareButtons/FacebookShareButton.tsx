@@ -4,6 +4,22 @@ import { SocialShareButton } from './ShareButtons.style';
 
 const COLOR_FACEBOOK = '#3b5998';
 
+export const FacebookShareButtonInner: React.FC<{
+  url: string;
+  quote: string;
+  socialIconSize: number;
+}> = ({ url, quote, socialIconSize }) => {
+  return (
+    <ReactShare.FacebookShareButton url={url} quote={quote}>
+      <ReactShare.FacebookIcon
+        size={socialIconSize}
+        round={false}
+        fill="auto"
+      />
+    </ReactShare.FacebookShareButton>
+  );
+};
+
 export const FacebookShareButton: React.FC<{
   url: string;
   quote: string;
@@ -14,13 +30,11 @@ export const FacebookShareButton: React.FC<{
     color={COLOR_FACEBOOK}
     disableElevation
   >
-    <ReactShare.FacebookShareButton url={url} quote={quote}>
-      <ReactShare.FacebookIcon
-        size={socialIconSize}
-        round={false}
-        fill="auto"
-      />
-    </ReactShare.FacebookShareButton>
+    <FacebookShareButtonInner
+      url={url}
+      quote={quote}
+      socialIconSize={socialIconSize}
+    />
   </SocialShareButton>
 );
 

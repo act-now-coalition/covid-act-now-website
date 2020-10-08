@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
-import { COLORS } from 'common';
 import { ChartLocationNameStyles } from 'components/LocationPage/ChartsHolder.style';
 import { Typography } from '@material-ui/core';
 import ReactMarkdown from 'react-markdown';
@@ -58,7 +57,7 @@ export const Intro = styled.p`
 `;
 
 export const RecommendationsContainer = styled.div`
-  border: 1px solid ${COLORS.LIGHTGRAY};
+  border: 1px solid ${COLOR_MAP.GRAY.LIGHT};
   border-radius: 4px;
   display: flex;
   flex-wrap: wrap;
@@ -97,15 +96,51 @@ export const Icon = styled.img`
   margin-right: 1.25rem;
 `;
 
+export const FooterWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.25rem;
+
+  @media (min-width: 600px) {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+`;
+
+export const FooterHalf = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:last-child {
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+
+  @media (min-width: 600px) {
+    align-items: flex-start;
+
+    &:last-child {
+      margin-top: 0;
+    }
+  }
+`;
+
 //TODO (chelsi)-make button and not div
 export const FooterLink = styled.div`
   ${FooterLinkStyles}
+  white-space: nowrap;
+
+  &:last-child {
+    margin-left: 1.5rem;
+  }
 `;
 
 export const ShareText = styled(ReactMarkdown)`
+  max-width: 350px;
+
   p {
     line-height: 1.4;
-    margin: 0;
     color: ${COLOR_MAP.GRAY_BODY_COPY};
     font-size: 13px;
   }
