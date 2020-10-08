@@ -1,32 +1,46 @@
 {
   "recommendations": [
     {
-      "body": "**Masks** should always be worn indoors and required by law.",
+      "body": "Wear masks at all times outside the home and maintain physical distance",
       "source": "FED",
       "category": "MASKS",
       "level": "YELLOW",
-      "id": "masks-indoors"
+      "id": "MASKS_YELLOW"
     },
     {
-      "body": "**Gatherings** should be limited to 10 people while utilizing social distancing and outdoor spaces.",
+      "body": "Limit social gatherings to 25 people of fewer",
       "source": "FED",
       "category": "GATHERINGS",
-      "level": "GREEN",
-      "id": "gatherings-outdoors"
+      "level": "YELLOW",
+      "id": "GATHERINGS_YELLOW"
     },
     {
-      "body": "**Schools**: if sufficient pandemic resilient learning space exists: 1st priority: preK-5 and special education services for preK-8. 2nd priority: grades 6-8 and special education services for grades 9-12. 3rd priority: grades 9-12 on a hybrid schedule",
-      "source": "HARVARD",
-      "category": "SCHOOLS",
-      "level": "ORANGE",
-      "id": "schools-orange"
+      "body": "Do not go to bars, nightclubs",
+      "id": "BARS_YELLOW",
+      "level": "YELLOW",
+      "category": "BARS",
+      "source": "FED"
     },
     {
-      "body": "**Restaurants** should create outdoor dining opportunities and limit indoor dining to 25%. Customers should use take out or eat outdoors only if socially distanced.",
+      "body": "Use takeout, outdoor dinning or indoor dinning when strict social distancing can be maintained",
       "source": "FED",
       "category": "RESTAURANTS",
       "level": "YELLOW",
-      "id": "restaurants-indoor-25-percent"
+      "id": "RESTAURANTS_YELLOW"
+    },
+    {
+      "body": "Protect anyone with serious medical conditions at home by social distancing at home and using high levels of personal hygiene",
+      "id": "MEDICAL_CONDITIONS_YELLOW",
+      "category": "MEDICAL_CONDITIONS",
+      "source": "FED",
+      "level": "YELLOW"
+    },
+    {
+      "body": "Reduce your public interactions and activities to 50% of your normal activity",
+      "id": "PUBLIC_INTERACTIONS_YELLOW",
+      "category": "PUBLIC_INTERACTIONS",
+      "source": "FED",
+      "level": "YELLOW"
     }
   ],
   "header": "Official Recommendations",
