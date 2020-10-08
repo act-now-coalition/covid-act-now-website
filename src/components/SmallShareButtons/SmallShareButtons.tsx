@@ -12,12 +12,12 @@ import LinkIcon from '@material-ui/icons/Link';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 //TODO (Chelsi): Add in final share quote
-const SmallShareButtons = (props: { shareUrl: string }) => {
-  const url = props.shareUrl;
+const SmallShareButtons = (props: { shareUrl: string; shareQuote: string }) => {
+  const { shareUrl, shareQuote } = props;
 
   const socialProps = {
-    url,
-    quote: '',
+    url: shareUrl,
+    quote: shareQuote,
     socialIconSize: 30,
   };
 
@@ -29,7 +29,7 @@ const SmallShareButtons = (props: { shareUrl: string }) => {
       <ShareButtonContainer color={COLOR_MAP.BLUE}>
         <TwitterShareButtonInner {...socialProps} />
       </ShareButtonContainer>
-      <CopyToClipboard text={url}>
+      <CopyToClipboard text={shareUrl}>
         <ShareButtonContainer color={COLOR_MAP.BLUE}>
           <LinkIcon />
         </ShareButtonContainer>

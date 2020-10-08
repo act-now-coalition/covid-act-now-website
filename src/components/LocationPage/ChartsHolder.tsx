@@ -110,9 +110,9 @@ const ChartsHolder = (props: {
   );
 
   const recommendsShareUrl = getRecommendationsShareUrl(
-    props.stateId,
-    props.county,
+    props.projections.primary.fips,
   );
+  const recommendsShareQuote = '';
 
   // TODO(pablo): Create separate refs for signup and share
   return (
@@ -146,6 +146,7 @@ const ChartsHolder = (props: {
                 recommendations={recommendationsMainContent}
                 locationName={projection.locationName}
                 shareUrl={recommendsShareUrl}
+                shareQuote={recommendsShareQuote}
                 recommendationsRef={recommendationsRef}
               />
               {ALL_METRICS.map(metric => (
@@ -167,7 +168,7 @@ const ChartsHolder = (props: {
               />
             </MainContentInner>
           </ChartContentWrapper>
-          <div ref={shareBlockRef}>
+          <div ref={shareBlockRef} id="recommendationsTest">
             <ShareModelBlock {...shareButtonProps} />
           </div>
         </>

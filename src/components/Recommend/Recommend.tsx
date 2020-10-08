@@ -13,13 +13,14 @@ import {
   FooterHalf,
   FooterWrapper,
 } from './Recommend.style';
-import { mainContent } from 'cms-content/recommendations';
+import { mainContent, modalContent } from 'cms-content/recommendations';
 import { RecommendationWithIcon } from 'cms-content/recommendations';
 import SmallShareButtons from 'components/SmallShareButtons';
 import RecommendModal from './RecommendModal';
 import Dialog, { useDialog } from 'components/Dialog';
 
 const { header, footer } = mainContent;
+const { federalTaskForce, harvard } = modalContent;
 
 const Header = (props: { introCopy: string; locationName: string }) => {
   const { introCopy, locationName } = props;
@@ -29,18 +30,19 @@ const Header = (props: { introCopy: string; locationName: string }) => {
       <LocationName>for {locationName}</LocationName>
       <Intro>
         These recommendations match the guidelines set by{' '}
-        <strong>White House Coronavirus Task Force</strong> and{' '}
-        <strong>Harvard Global Health Institute</strong> {introCopy}{' '}
+        <strong>{federalTaskForce.sourceName}</strong> and{' '}
+        <strong>{harvard.sourceName}</strong> {introCopy}{' '}
         <span>Learn more.</span>
       </Intro>
     </Fragment>
   );
 };
 
-const Footer: React.FC<{ onClickOpenModal: () => void; shareUrl: string }> = ({
-  onClickOpenModal,
-  shareUrl,
-}) => {
+const Footer: React.FC<{
+  onClickOpenModal: () => void;
+  shareUrl: string;
+  shareQuote: string;
+}> = ({ onClickOpenModal, shareUrl, shareQuote }) => {
   return (
     <FooterWrapper>
       <FooterHalf>
@@ -50,7 +52,7 @@ const Footer: React.FC<{ onClickOpenModal: () => void; shareUrl: string }> = ({
         <FooterLink>{footer.feedbackButtonLabel}</FooterLink>
       </FooterHalf>
       <FooterHalf>
-        <SmallShareButtons shareUrl={shareUrl} />
+        <SmallShareButtons shareUrl={shareUrl} shareQuote={shareQuote} />
         <ShareText source={footer.shareText} />
       </FooterHalf>
     </FooterWrapper>
@@ -63,6 +65,7 @@ const Recommend = (props: {
   recommendations: RecommendationWithIcon[];
   locationName: string;
   shareUrl: string;
+  shareQuote: string;
   recommendationsRef: React.RefObject<HTMLDivElement>;
 }) => {
   const {
@@ -70,9 +73,9 @@ const Recommend = (props: {
     recommendations,
     locationName,
     shareUrl,
+    shareQuote,
     recommendationsRef,
   } = props;
-  // const { introCopy, recommendations } = props;
   const [isDialogOpen, openDialog, closeDialog] = useDialog(false);
   return (
     <Wrapper ref={recommendationsRef}>
@@ -89,7 +92,11 @@ const Recommend = (props: {
           </Fragment>
         ))}
       </RecommendationsContainer>
-      <Footer onClickOpenModal={openDialog} shareUrl={shareUrl} />
+      <Footer
+        onClickOpenModal={openDialog}
+        shareUrl={shareUrl}
+        shareQuote={shareQuote}
+      />
       <Dialog open={isDialogOpen} closeDialog={closeDialog}>
         <RecommendModal />
       </Dialog>
