@@ -16,6 +16,8 @@ import {
 import { mainContent } from 'cms-content/recommendations';
 import { RecommendationWithIcon } from 'cms-content/recommendations';
 import SmallShareButtons from 'components/SmallShareButtons';
+import RecommendModal from './RecommendModal';
+import Dialog, { useDialog } from 'components/Dialog';
 
 const { header, footer } = mainContent;
 
@@ -35,12 +37,16 @@ const Header = (props: { introCopy: string; locationName: string }) => {
   );
 };
 
-const Footer = (props: { shareUrl: string }) => {
-  const { shareUrl } = props;
+const Footer: React.FC<{ onClickOpenModal: () => void; shareUrl: string }> = ({
+  onClickOpenModal,
+  shareUrl,
+}) => {
   return (
     <FooterWrapper>
       <FooterHalf>
-        <FooterLink>{footer.modalButtonLabel}</FooterLink>
+        <FooterLink onClick={onClickOpenModal}>
+          {footer.modalButtonLabel}
+        </FooterLink>
         <FooterLink>{footer.feedbackButtonLabel}</FooterLink>
       </FooterHalf>
       <FooterHalf>
@@ -66,12 +72,14 @@ const Recommend = (props: {
     shareUrl,
     recommendationsRef,
   } = props;
+  // const { introCopy, recommendations } = props;
+  const [isDialogOpen, openDialog, closeDialog] = useDialog(false);
   return (
     <Wrapper ref={recommendationsRef}>
       <Header introCopy={introCopy} locationName={locationName} />
       <RecommendationsContainer>
         {recommendations.map((recommendation, i) => (
-          <Fragment>
+          <Fragment key={`recommendation-${i}`}>
             <RecommendationWrapper index={i}>
               <Icon src="/images_cms/recommend-mask.png" />
               <RecommendationBody
@@ -81,7 +89,10 @@ const Recommend = (props: {
           </Fragment>
         ))}
       </RecommendationsContainer>
-      <Footer shareUrl={shareUrl} />
+      <Footer onClickOpenModal={openDialog} shareUrl={shareUrl} />
+      <Dialog open={isDialogOpen} closeDialog={closeDialog}>
+        <RecommendModal />
+      </Dialog>
     </Wrapper>
   );
 };
