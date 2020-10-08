@@ -81,8 +81,8 @@
       "body": "Wear masks at all times outside the home and maintain physical distance",
       "source": "FED",
       "category": "MASKS",
-      "level": "YELLOW",
-      "id": "MASKS_YELLOW"
+      "level": "RED",
+      "id": "MASKS_RED"
     },
     {
       "body": "Stay-at-home orders in place; all learning remote for all learners; districts, states, and federal government invests in remote learning.",
@@ -123,6 +123,36 @@
     {
       "category": "MASKS",
       "altText": "Mask icon",
+      "iconImage": "/images_cms/recommend-mask.png"
+    },
+    {
+      "category": "GATHERINGS",
+      "altText": "Gatherings icon",
+      "iconImage": "/images_cms/recommend-mask.png"
+    },
+    {
+      "category": "RESTAURANTS",
+      "altText": "Restaurants icon",
+      "iconImage": "/images_cms/recommend-mask.png"
+    },
+    {
+      "category": "BARS",
+      "altText": "Bars icon",
+      "iconImage": "/images_cms/recommend-mask.png"
+    },
+    {
+      "category": "MEDICAL_CONDITIONS",
+      "altText": "Medical conditions icon",
+      "iconImage": "/images_cms/recommend-mask.png"
+    },
+    {
+      "category": "PUBLIC_INTERACTIONS",
+      "altText": "Public Interactions icon",
+      "iconImage": "/images_cms/recommend-mask.png"
+    },
+    {
+      "category": "SCHOOLS",
+      "altText": "Schools icon",
       "iconImage": "/images_cms/recommend-mask.png"
     }
   ]
