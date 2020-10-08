@@ -27,13 +27,8 @@ const SmallShareButtons = (props: {
     socialIconSize: 30,
   };
 
-  const trackRecommendationsShare = () => {
-    trackRecommendationsEvent(EventAction.SHARE, trackLabel);
-  };
-
-  const shareButtonProps = {
-    color: COLOR_MAP.BLUE,
-    onClick: trackRecommendationsShare,
+  const trackRecommendationsShare = (shareTrackLabel: string) => {
+    trackRecommendationsEvent(EventAction.SHARE, shareTrackLabel);
   };
 
   const onCopyLink = () => {
@@ -42,10 +37,16 @@ const SmallShareButtons = (props: {
 
   return (
     <ButtonsWrapper>
-      <ShareButtonContainer {...shareButtonProps}>
+      <ShareButtonContainer
+        color={COLOR_MAP.BLUE}
+        onClick={() => trackRecommendationsShare('facebook')}
+      >
         <FacebookShareButtonInner {...socialProps} />
       </ShareButtonContainer>
-      <ShareButtonContainer {...shareButtonProps}>
+      <ShareButtonContainer
+        color={COLOR_MAP.BLUE}
+        onClick={() => trackRecommendationsShare('twitter')}
+      >
         <TwitterShareButtonInner {...socialProps} />
       </ShareButtonContainer>
       <CopyToClipboard
