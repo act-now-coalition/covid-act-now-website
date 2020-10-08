@@ -1,32 +1,116 @@
 {
   "recommendations": [
     {
-      "body": "**Masks** should always be worn indoors and required by law.",
+      "body": "Wear masks at all times outside the home and maintain physical distance",
       "source": "FED",
       "category": "MASKS",
       "level": "YELLOW",
-      "id": "masks-indoors"
+      "id": "MASKS_YELLOW"
     },
     {
-      "body": "**Gatherings** should be limited to 10 people while utilizing social distancing and outdoor spaces.",
+      "body": "Limit social gatherings to 25 people of fewer",
       "source": "FED",
       "category": "GATHERINGS",
-      "level": "GREEN",
-      "id": "gatherings-outdoors"
+      "level": "YELLOW",
+      "id": "GATHERINGS_YELLOW"
     },
     {
-      "body": "**Schools**: if sufficient pandemic resilient learning space exists: 1st priority: preK-5 and special education services for preK-8. 2nd priority: grades 6-8 and special education services for grades 9-12. 3rd priority: grades 9-12 on a hybrid schedule",
-      "source": "HARVARD",
-      "category": "SCHOOLS",
-      "level": "ORANGE",
-      "id": "schools-orange"
+      "body": "Do not go to bars, nightclubs",
+      "id": "BARS_YELLOW",
+      "level": "YELLOW",
+      "category": "BARS",
+      "source": "FED"
     },
     {
-      "body": "**Restaurants** should create outdoor dining opportunities and limit indoor dining to 25%. Customers should use take out or eat outdoors only if socially distanced.",
+      "body": "Use takeout, outdoor dinning or indoor dinning when strict social distancing can be maintained",
       "source": "FED",
       "category": "RESTAURANTS",
       "level": "YELLOW",
-      "id": "restaurants-indoor-25-percent"
+      "id": "RESTAURANTS_YELLOW"
+    },
+    {
+      "body": "Protect anyone with serious medical conditions at home by social distancing at home and using high levels of personal hygiene",
+      "id": "MEDICAL_CONDITIONS_YELLOW",
+      "category": "MEDICAL_CONDITIONS",
+      "source": "FED",
+      "level": "YELLOW"
+    },
+    {
+      "body": "Reduce your public interactions and activities to 50% of your normal activity",
+      "id": "PUBLIC_INTERACTIONS_YELLOW",
+      "category": "PUBLIC_INTERACTIONS",
+      "source": "FED",
+      "level": "YELLOW"
+    },
+    {
+      "body": "Reduce your public interactions and activities to 25% of your normal activity",
+      "id": "PUBLIC_INTERACTIONS_RED",
+      "category": "PUBLIC_INTERACTIONS",
+      "level": "RED",
+      "source": "FED"
+    },
+    {
+      "body": "Protect anyone with serious medical conditions at home by social distancing at home and using high levels of personal hygiene, including hand washing and cleaning surfaces",
+      "id": "MEDICAL_CONDITIONS_RED",
+      "level": "RED",
+      "category": "MEDICAL_CONDITIONS",
+      "source": "FED"
+    },
+    {
+      "body": "Use take out options or eat outdoors socially distanced",
+      "level": "RED",
+      "source": "FED",
+      "category": "RESTAURANTS",
+      "id": "RESTAURANTS_RED"
+    },
+    {
+      "body": "Do not go to bars, nightclubs, or gyms",
+      "id": "BARS_RED",
+      "level": "RED",
+      "category": "BARS",
+      "source": "FED"
+    },
+    {
+      "body": "Limit social gatherings to 10 people of fewer",
+      "source": "FED",
+      "category": "GATHERINGS",
+      "level": "RED",
+      "id": "GATHERINGS_RED"
+    },
+    {
+      "body": "Wear masks at all times outside the home and maintain physical distance",
+      "source": "FED",
+      "category": "MASKS",
+      "level": "RED",
+      "id": "MASKS_RED"
+    },
+    {
+      "body": "Stay-at-home orders in place; all learning remote for all learners; districts, states, and federal government invests in remote learning.",
+      "source": "HARVARD",
+      "category": "SCHOOLS",
+      "level": "RED",
+      "id": "SCHOOLS_RED"
+    },
+    {
+      "body": "* 1st priority for re-opening: Grades preK-5 and in-person special education services at grade levels preK-8 open if conditions for pandemic resilient teaching and learning spaces can be achieved at scale; districts, states, and federal government invest in healthy buildings and healthy classrooms; in the absence of conditions for pandemic resilient teaching and learning spaces, schools continue with remote learning.\n* 2nd priority for re-opening: Grades 6-8 and in-person special education services at grade levels 9-12 open if conditions for pandemic resilient teaching and learning spaces can be achieved at scale; districts, states, and federal government invest in healthy buildings and healthy classrooms; in the absence of conditions for pandemic resilient teaching and learning spaces, schools continue with remote learning.\n* Not a priority for re-opening: Grades 9-12 maintain remote learning for all learners; districts, states, and federal government invest in remote learning.",
+      "source": "HARVARD",
+      "category": "SCHOOLS",
+      "level": "ORANGE",
+      "id": "SCHOOLS_ORANGE"
+    },
+    {
+      "body": "* 1st priority for re-opening: Grades preK-5 and in-person special education services at grade levels preK-8 open if conditions for pandemic resilient teaching and learning spaces can be achieved at scale; districts, states, and federal government invest in healthy buildings and healthy classrooms; in the absence of conditions for pandemic resilient teaching and learning spaces, schools continue with remote learning.\n* 2nd priority for re-opening: Grades 6-8 and in-person special education services at grade levels 9-12 open if conditions for pandemic resilient teaching and learning spaces can be achieved at scale; districts, states, and federal government invest in healthy buildings and healthy classrooms; in the absence of conditions for pandemic resilient teaching and learning spaces, schools continue with remote learning. In-person opportunities for special needs students at grade-levels preK-8 are also included.\n* 3rd priority for re-opening: If sufficient pandemic resilient learning space is available AFTER allocation to K-8, grades 9-12 open on a hybrid schedule, with only a subset of students on campus at any particular point of time to facilitate de-densification; districts, states, and federal government invest in healthy buildings and healthy classrooms AND in remote learning.",
+      "source": "HARVARD",
+      "category": "SCHOOLS",
+      "level": "YELLOW",
+      "id": "SCHOOLS_YELLOW"
+    },
+    {
+      "body": "All schools open if conditions for pandemic resilient teaching and learning spaces can be achieved at scale; districts, states, and federal government invest in healthy buildings and healthy classrooms",
+      "source": "HARVARD",
+      "category": "SCHOOLS",
+      "level": "GREEN",
+      "id": "SCHOOLS_GREEN"
     }
   ],
   "header": "Official Recommendations",
@@ -39,6 +123,36 @@
     {
       "category": "MASKS",
       "altText": "Mask icon",
+      "iconImage": "/images_cms/recommend-mask.png"
+    },
+    {
+      "category": "GATHERINGS",
+      "altText": "Gatherings icon",
+      "iconImage": "/images_cms/recommend-mask.png"
+    },
+    {
+      "category": "RESTAURANTS",
+      "altText": "Restaurants icon",
+      "iconImage": "/images_cms/recommend-mask.png"
+    },
+    {
+      "category": "BARS",
+      "altText": "Bars icon",
+      "iconImage": "/images_cms/recommend-mask.png"
+    },
+    {
+      "category": "MEDICAL_CONDITIONS",
+      "altText": "Medical conditions icon",
+      "iconImage": "/images_cms/recommend-mask.png"
+    },
+    {
+      "category": "PUBLIC_INTERACTIONS",
+      "altText": "Public Interactions icon",
+      "iconImage": "/images_cms/recommend-mask.png"
+    },
+    {
+      "category": "SCHOOLS",
+      "altText": "Schools icon",
       "iconImage": "/images_cms/recommend-mask.png"
     }
   ]

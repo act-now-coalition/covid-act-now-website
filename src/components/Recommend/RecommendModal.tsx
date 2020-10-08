@@ -45,7 +45,7 @@ const harvardLevels = [
   {
     color: 'red',
     label: 'Red',
-    body: harvard.levels[2].content,
+    body: harvard.levels[3].content,
   },
 ];
 
