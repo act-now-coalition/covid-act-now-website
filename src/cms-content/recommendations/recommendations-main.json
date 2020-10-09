@@ -69,6 +69,34 @@
       "source": "FED",
       "level": "YELLOW",
       "id": "GATHERINGS_YELLOW"
+    },
+    {
+      "source": "HARVARD",
+      "category": "SCHOOLS",
+      "level": "RED",
+      "id": "SCHOOLS_RED",
+      "body": "**Schools:** Enable remote learning for all students. All government levels should invest in remote learning."
+    },
+    {
+      "body": "**Schools:** If sufficient [pandemic resilient learning space](http://link) exists, phase re-opening: 1st priority: preK-5 and special education services for preK-8. 2nd priority: grades 6-8 and special education services for grades 9-12.",
+      "source": "HARVARD",
+      "category": "SCHOOLS",
+      "level": "ORANGE",
+      "id": "SCHOOLS_ORANGE"
+    },
+    {
+      "source": "HARVARD",
+      "category": "SCHOOLS",
+      "level": "YELLOW",
+      "id": "SCHOOLS_YELLOW",
+      "body": "**Schools:** If sufficient [pandemic resilient learning space](http://link) exists, phase re-opening: 1st priority: preK-5 and special education services for preK-8. 2nd priority: grades 6-8 and special education services for grades 9-12. 3rd priority: grades 9-12 on a hybrid schedule."
+    },
+    {
+      "body": "**Schools:** In person education is safe only if conditions for pandemic resilient learning spaces are in place.",
+      "source": "HARVARD",
+      "category": "SCHOOLS",
+      "level": "GREEN",
+      "id": "SCHOOLS_GREEN"
     }
   ],
   "header": "Official Recommendations",
