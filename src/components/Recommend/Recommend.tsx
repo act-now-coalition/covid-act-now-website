@@ -45,9 +45,10 @@ const Header = (props: {
 
 const Footer: React.FC<{
   onClickOpenModal: () => void;
+  onClickOpenFeedbackModal: () => void;
   shareUrl: string;
   shareQuote: string;
-}> = ({ onClickOpenModal, shareUrl, shareQuote }) => {
+}> = ({ onClickOpenModal, onClickOpenFeedbackModal, shareUrl, shareQuote }) => {
   const trackLabel = 'recommendations';
 
   return (
@@ -56,7 +57,9 @@ const Footer: React.FC<{
         <FooterLink onClick={onClickOpenModal}>
           {footer.modalButtonLabel}
         </FooterLink>
-        <FooterLink>{footer.feedbackButtonLabel}</FooterLink>
+        <FooterLink onClick={onClickOpenFeedbackModal}>
+          {footer.feedbackButtonLabel}
+        </FooterLink>
       </FooterHalf>
       <FooterHalf>
         <SmallShareButtons
@@ -88,6 +91,11 @@ const Recommend = (props: {
     recommendationsRef,
   } = props;
   const [isDialogOpen, openDialog, closeDialog] = useDialog(false);
+  const [
+    isFeedbackDialogOpen,
+    openFeedbackDialog,
+    closeFeedbackDialog,
+  ] = useDialog(false);
 
   const openModalRecommendations = () => {
     openDialog();
@@ -95,6 +103,15 @@ const Recommend = (props: {
       EventCategory.RECOMMENDATIONS,
       EventAction.OPEN_MODAL,
       'Methodology & Sources',
+    );
+  };
+
+  const openModalFeedback = () => {
+    openFeedbackDialog();
+    trackEvent(
+      EventCategory.RECOMMENDATIONS,
+      EventAction.OPEN_MODAL,
+      'Feedback Form',
     );
   };
 
@@ -122,6 +139,7 @@ const Recommend = (props: {
       </RecommendationsContainer>
       <Footer
         onClickOpenModal={openModalRecommendations}
+        onClickOpenFeedbackModal={openModalFeedback}
         shareUrl={shareUrl}
         shareQuote={shareQuote}
       />
@@ -132,6 +150,15 @@ const Recommend = (props: {
         maxWidth="md"
       >
         <RecommendModal />
+      </Dialog>
+      <Dialog
+        open={isFeedbackDialogOpen}
+        closeDialog={closeFeedbackDialog}
+        fullWidth
+        maxWidth="md"
+      >
+        {/* TODO: Add the embed form here */}
+        Feedback
       </Dialog>
     </Wrapper>
   );
