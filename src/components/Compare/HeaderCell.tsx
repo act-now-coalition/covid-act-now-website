@@ -75,7 +75,7 @@ const HeaderCell = (props: {
       sortByPopulation={sortByPopulation}
       arrowColorSelected={arrowColorSelected}
       sortDescending={sortDescending}
-      isSelectedMetric={isSelectedMetric}
+      $isSelectedMetric={isSelectedMetric}
     >
       <span>{metricName}</span>
       <ArrowContainer

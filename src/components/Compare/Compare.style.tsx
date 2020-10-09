@@ -19,13 +19,13 @@ export const metricCellWidth = 110;
 const getMetricHeaderBackground = (
   sortByPopulation: boolean,
   isModal: Boolean,
-  isSelectedMetric: boolean,
+  $isSelectedMetric: boolean,
 ) => {
   if (isModal) {
-    if (isSelectedMetric && !sortByPopulation) return 'black';
+    if ($isSelectedMetric && !sortByPopulation) return 'black';
     return `${COLOR_MAP.GRAY_BODY_COPY}`;
   } else {
-    if (isSelectedMetric && !sortByPopulation) return `${COLOR_MAP.BLUE}`;
+    if ($isSelectedMetric && !sortByPopulation) return `${COLOR_MAP.BLUE}`;
     return 'white';
   }
 };
@@ -178,19 +178,21 @@ export const MetricHeaderCell = styled(TableCell)<{
   sortByPopulation: boolean;
   arrowColorSelected: string;
   sortDescending: boolean;
-  isSelectedMetric: boolean;
+  $isSelectedMetric: boolean;
 }>`
   ${CellStyles}
 
-  border-radius: ${({ sortByPopulation, isSelectedMetric }) =>
-    !sortByPopulation && isSelectedMetric && '4px 4px 0 0'};
+  border-radius: ${({
+    sortByPopulation,
+    $isSelectedMetric: isSelectedMetric,
+  }) => !sortByPopulation && isSelectedMetric && '4px 4px 0 0'};
   background-color: ${props =>
     getMetricHeaderBackground(
       props.sortByPopulation,
       props.isModal,
-      props.isSelectedMetric,
+      props.$isSelectedMetric,
     )};
-    color: ${({ sortByPopulation, isSelectedMetric }) =>
+    color: ${({ sortByPopulation, $isSelectedMetric: isSelectedMetric }) =>
       !sortByPopulation && isSelectedMetric && 'white'};
 
     ${ArrowContainer} {
@@ -200,27 +202,35 @@ export const MetricHeaderCell = styled(TableCell)<{
           color: ${({
             arrowColorSelected,
             sortByPopulation,
-            isSelectedMetric,
+            $isSelectedMetric: isSelectedMetric,
           }) =>
             !sortByPopulation && isSelectedMetric && `${arrowColorSelected}`};
-          opacity: ${({ sortDescending, sortByPopulation, isSelectedMetric }) =>
+          opacity: ${({
+            sortDescending,
+            sortByPopulation,
+            $isSelectedMetric: isSelectedMetric,
+          }) =>
             !sortDescending && !sortByPopulation && isSelectedMetric && '.5'};
         }
         &:first-child {
           color: ${({
             arrowColorSelected,
             sortByPopulation,
-            isSelectedMetric,
+            $isSelectedMetric: isSelectedMetric,
           }) =>
             !sortByPopulation && isSelectedMetric && `${arrowColorSelected}`};
-          opacity: ${({ sortDescending, sortByPopulation, isSelectedMetric }) =>
+          opacity: ${({
+            sortDescending,
+            sortByPopulation,
+            $isSelectedMetric: isSelectedMetric,
+          }) =>
             sortDescending && !sortByPopulation && isSelectedMetric && '.5'};
         }
         &:hover{
           color: ${({
             arrowColorSelected,
             sortByPopulation,
-            isSelectedMetric,
+            $isSelectedMetric: isSelectedMetric,
           }) =>
             !sortByPopulation && isSelectedMetric && `${arrowColorSelected}`};
             opacity: 1;
