@@ -27,6 +27,34 @@
       "category": "GYMS",
       "level": "YELLOW",
       "id": "GYMS_YELLOW"
+    },
+    {
+      "body": "**Restaurants** should max at 25% capacity and create outdoor dining opportunities. Customers should use take out or eat outdoors socially distanced.",
+      "source": "FED",
+      "category": "RESTAURANTS",
+      "level": "RED",
+      "id": "RESTAURANTS_RED"
+    },
+    {
+      "category": "RESTAURANTS",
+      "id": "RESTAURANTS_YELLOW",
+      "level": "YELLOW",
+      "source": "FED",
+      "body": "**Restaurants** should create outdoor dining opportunities. Customers should use take out, outdoor dining, or indoor dining when strict social distancing can be maintained."
+    },
+    {
+      "category": "MASKS",
+      "level": "RED",
+      "id": "MASKS_RED",
+      "source": "FED",
+      "body": "**Masks** should be worn by everyone outside their home, and be required for all workers in retail, personal services, assisted living."
+    },
+    {
+      "category": "MASKS",
+      "level": "YELLOW",
+      "id": "MASKS_YELLOW",
+      "source": "FED",
+      "body": "**Masks** should be worn by everyone outside their home, and be required for all workers in retail, personal services, assisted living."
     }
   ],
   "header": "Official Recommendations",
