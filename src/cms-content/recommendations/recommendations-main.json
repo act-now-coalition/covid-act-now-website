@@ -55,6 +55,20 @@
       "id": "MASKS_YELLOW",
       "source": "FED",
       "body": "**Masks** should be worn by everyone outside their home, and be required for all workers in retail, personal services, assisted living."
+    },
+    {
+      "body": "**Gatherings** should be limited to 10 people and physical distance should be maintained.",
+      "source": "FED",
+      "category": "GATHERINGS",
+      "level": "RED",
+      "id": "GATHERINGS_RED"
+    },
+    {
+      "body": "**Gatherings** should be limited to 25 people and physical distance should be maintained.",
+      "category": "GATHERINGS",
+      "source": "FED",
+      "level": "YELLOW",
+      "id": "GATHERINGS_YELLOW"
     }
   ],
   "header": "Official Recommendations",
