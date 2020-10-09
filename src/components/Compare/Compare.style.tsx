@@ -357,11 +357,11 @@ export const Row = styled(TableRow)<{
   index?: number;
   $isCurrentCounty?: boolean;
   isModal?: boolean;
-  headerRowBackground?: string;
+  $headerRowBackground?: string;
 }>`
-  background-color: ${({ index, headerRowBackground }) =>
+  background-color: ${({ index, $headerRowBackground }) =>
     !isNumber(index)
-      ? `${headerRowBackground}`
+      ? `${$headerRowBackground}`
       : index % 2 === 0
       ? '#fafafa'
       : 'white'};
@@ -375,8 +375,8 @@ export const Row = styled(TableRow)<{
   }
 
   &:hover {
-    color: ${({ headerRowBackground }) =>
-      !headerRowBackground && `${COLOR_MAP.BLUE}`};
+    color: ${({ $headerRowBackground }) =>
+      !$headerRowBackground && `${COLOR_MAP.BLUE}`};
     ${MetricCell} {
       span,
       ${Tag} {

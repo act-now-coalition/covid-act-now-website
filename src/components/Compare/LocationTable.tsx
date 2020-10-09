@@ -67,7 +67,7 @@ const LocationTableHead: React.FunctionComponent<{
     <Table key="table-header">
       <CompareStyles.TableHeadContainer isModal={isModal}>
         <CompareStyles.Row
-          headerRowBackground={
+          $headerRowBackground={
             isModal ? `${COLOR_MAP.GRAY_BODY_COPY}` : 'white'
           }
         >
