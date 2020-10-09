@@ -39,8 +39,8 @@ export const RowContainer = styled(Box)`
   width: fit-content;
 `;
 
-export const RowColor = styled(Box)<{ levelColor: string; rowLevel: Level }>`
-  background-color: ${({ levelColor }) => levelColor};
+export const RowColor = styled(Box)<{ $levelColor: string; rowLevel: Level }>`
+  background-color: ${props => props.$levelColor};
   width: 20px;
   border-radius: ${({ rowLevel }) =>
     rowLevel === Level.CRITICAL
