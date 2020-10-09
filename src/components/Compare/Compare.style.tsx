@@ -17,15 +17,15 @@ export const locationNameCellWidth = 195;
 export const metricCellWidth = 110;
 
 const getMetricHeaderBackground = (
-  sortByPopulation: boolean,
+  $sortByPopulation: boolean,
   isModal: Boolean,
   $isSelectedMetric: boolean,
 ) => {
   if (isModal) {
-    if ($isSelectedMetric && !sortByPopulation) return 'black';
+    if ($isSelectedMetric && !$sortByPopulation) return 'black';
     return `${COLOR_MAP.GRAY_BODY_COPY}`;
   } else {
-    if ($isSelectedMetric && !sortByPopulation) return `${COLOR_MAP.BLUE}`;
+    if ($isSelectedMetric && !$sortByPopulation) return `${COLOR_MAP.BLUE}`;
     return 'white';
   }
 };
@@ -37,7 +37,7 @@ export const CenteredContentModal = styled(Modal)`
   justify-content: center;
 `;
 
-export const Wrapper = styled.div<{ isModal?: Boolean; isHomepage?: boolean }>`
+export const Wrapper = styled.div<{ isModal?: boolean; isHomepage?: boolean }>`
   max-width: ${({ isHomepage }) => (isHomepage ? '1000px' : '900px')};
   width: 100%;
   margin: ${({ isModal }) => (isModal ? '0 auto' : '1rem auto')};
@@ -90,7 +90,7 @@ export const Wrapper = styled.div<{ isModal?: Boolean; isHomepage?: boolean }>`
 `;
 
 export const ArrowContainer = styled.div<{
-  arrowColorNotSelected: string;
+  $arrowColorNotSelected: string;
   isModal?: Boolean;
 }>`
   color: #bdbdbd;
@@ -105,7 +105,7 @@ export const ArrowContainer = styled.div<{
   }
 
   svg {
-    color: ${({ arrowColorNotSelected }) => arrowColorNotSelected};
+    color: ${({ $arrowColorNotSelected }) => $arrowColorNotSelected};
 
     &:hover {
       color: ${({ isModal }) => (isModal ? 'white' : 'black')};
@@ -121,44 +121,45 @@ export const CellStyles = css`
 
 export const LocationHeaderCell = styled(TableCell)<{
   isModal: Boolean;
-  sortByPopulation: boolean;
-  arrowColorSelected: string;
-  arrowColorNotSelected: string;
-  sortDescending: boolean;
+  $sortByPopulation: boolean;
+  $arrowColorSelected: string;
+  $arrowColorNotSelected: string;
+  $sortDescending: boolean;
 }>`
   ${CellStyles}
 
-  background-color: ${({ isModal, sortByPopulation }) =>
-    isModal && sortByPopulation
+  background-color: ${({ isModal, $sortByPopulation }) =>
+    isModal && $sortByPopulation
       ? 'black'
       : isModal
       ? `${COLOR_MAP.GRAY_BODY_COPY}`
-      : sortByPopulation
+      : $sortByPopulation
       ? `${COLOR_MAP.BLUE}`
       : 'white'};
 
-  border-radius: ${({ sortByPopulation }) => sortByPopulation && '4px 4px 0 0'};
-  color: ${({ isModal, sortByPopulation }) =>
-    !isModal && sortByPopulation && 'white'};
+  border-radius: ${({ $sortByPopulation }) =>
+    $sortByPopulation && '4px 4px 0 0'};
+  color: ${({ isModal, $sortByPopulation }) =>
+    !isModal && $sortByPopulation && 'white'};
 
   ${ArrowContainer} {
     svg{
       &:first-child {
-        color: ${({ arrowColorSelected, sortByPopulation }) =>
-          sortByPopulation && `${arrowColorSelected}`};
-        opacity: ${({ sortDescending, sortByPopulation }) =>
-          sortDescending && sortByPopulation && '.5'};
+        color: ${({ $arrowColorSelected, $sortByPopulation }) =>
+          $sortByPopulation && `${$arrowColorSelected}`};
+        opacity: ${({ $sortDescending, $sortByPopulation }) =>
+          $sortDescending && $sortByPopulation && '.5'};
       }
       &:nth-child(2){
         transform: translatex(-0.1rem);
-        color: ${({ arrowColorSelected, sortByPopulation }) =>
-          sortByPopulation && `${arrowColorSelected}`};
-        opacity: ${({ sortDescending, sortByPopulation }) =>
-          !sortDescending && sortByPopulation && '.5'};
+        color: ${({ $arrowColorSelected, $sortByPopulation }) =>
+          $sortByPopulation && `${$arrowColorSelected}`};
+        opacity: ${({ $sortDescending, $sortByPopulation }) =>
+          !$sortDescending && $sortByPopulation && '.5'};
       }
       &:hover{
-        color: ${({ arrowColorSelected, sortByPopulation }) =>
-          sortByPopulation && `${arrowColorSelected}`};
+        color: ${({ $arrowColorSelected, $sortByPopulation }) =>
+          $sortByPopulation && `${$arrowColorSelected}`};
         opacity: 1;
       }
     }
@@ -167,72 +168,79 @@ export const LocationHeaderCell = styled(TableCell)<{
   span{
     color: ${COLOR_MAP.GRAY.DARK};
     font-weight: normal;
-    color: ${({ isModal, sortByPopulation }) =>
-      !isModal && sortByPopulation ? 'white' : `${COLOR_MAP.GRAY.DARK}`};
+    color: ${({ isModal, $sortByPopulation }) =>
+      !isModal && $sortByPopulation ? 'white' : `${COLOR_MAP.GRAY.DARK}`};
 
   }
 `;
 
 export const MetricHeaderCell = styled(TableCell)<{
   isModal: Boolean;
-  sortByPopulation: boolean;
-  arrowColorSelected: string;
-  sortDescending: boolean;
+  $sortByPopulation: boolean;
+  $arrowColorSelected: string;
+  $sortDescending: boolean;
   $isSelectedMetric: boolean;
 }>`
   ${CellStyles}
 
-  border-radius: ${({
-    sortByPopulation,
-    $isSelectedMetric: isSelectedMetric,
-  }) => !sortByPopulation && isSelectedMetric && '4px 4px 0 0'};
+  border-radius: ${({ $sortByPopulation, $isSelectedMetric }) =>
+    !$sortByPopulation && $isSelectedMetric && '4px 4px 0 0'};
   background-color: ${props =>
     getMetricHeaderBackground(
-      props.sortByPopulation,
+      props.$sortByPopulation,
       props.isModal,
       props.$isSelectedMetric,
     )};
-    color: ${({ sortByPopulation, $isSelectedMetric: isSelectedMetric }) =>
-      !sortByPopulation && isSelectedMetric && 'white'};
+    color: ${({ $sortByPopulation, $isSelectedMetric }) =>
+      !$sortByPopulation && $isSelectedMetric && 'white'};
 
     ${ArrowContainer} {
       svg{
         &:nth-child(2) {
           transform: translatex(-0.1rem);
           color: ${({
-            arrowColorSelected,
-            sortByPopulation,
-            $isSelectedMetric: isSelectedMetric,
+            $arrowColorSelected,
+            $sortByPopulation,
+            $isSelectedMetric,
           }) =>
-            !sortByPopulation && isSelectedMetric && `${arrowColorSelected}`};
+            !$sortByPopulation &&
+            $isSelectedMetric &&
+            `${$arrowColorSelected}`};
           opacity: ${({
-            sortDescending,
-            sortByPopulation,
-            $isSelectedMetric: isSelectedMetric,
+            $sortDescending,
+            $sortByPopulation,
+            $isSelectedMetric,
           }) =>
-            !sortDescending && !sortByPopulation && isSelectedMetric && '.5'};
+            !$sortDescending &&
+            !$sortByPopulation &&
+            $isSelectedMetric &&
+            '.5'};
         }
         &:first-child {
           color: ${({
-            arrowColorSelected,
-            sortByPopulation,
-            $isSelectedMetric: isSelectedMetric,
+            $arrowColorSelected,
+            $sortByPopulation,
+            $isSelectedMetric,
           }) =>
-            !sortByPopulation && isSelectedMetric && `${arrowColorSelected}`};
+            !$sortByPopulation &&
+            $isSelectedMetric &&
+            `${$arrowColorSelected}`};
           opacity: ${({
-            sortDescending,
-            sortByPopulation,
-            $isSelectedMetric: isSelectedMetric,
+            $sortDescending,
+            $sortByPopulation,
+            $isSelectedMetric,
           }) =>
-            sortDescending && !sortByPopulation && isSelectedMetric && '.5'};
+            $sortDescending && !$sortByPopulation && $isSelectedMetric && '.5'};
         }
         &:hover{
           color: ${({
-            arrowColorSelected,
-            sortByPopulation,
-            $isSelectedMetric: isSelectedMetric,
+            $arrowColorSelected,
+            $sortByPopulation,
+            $isSelectedMetric,
           }) =>
-            !sortByPopulation && isSelectedMetric && `${arrowColorSelected}`};
+            !$sortByPopulation &&
+            $isSelectedMetric &&
+            `${$arrowColorSelected}`};
             opacity: 1;
         }
       }

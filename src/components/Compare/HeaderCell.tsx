@@ -72,14 +72,14 @@ const HeaderCell = (props: {
     <MetricHeaderCell
       onClick={cellOnClick}
       isModal={isModal}
-      sortByPopulation={sortByPopulation}
-      arrowColorSelected={arrowColorSelected}
-      sortDescending={sortDescending}
+      $sortByPopulation={sortByPopulation}
+      $arrowColorSelected={arrowColorSelected}
+      $sortDescending={sortDescending}
       $isSelectedMetric={isSelectedMetric}
     >
       <span>{metricName}</span>
       <ArrowContainer
-        arrowColorNotSelected={arrowColorNotSelected}
+        $arrowColorNotSelected={arrowColorNotSelected}
         isModal={isModal}
       >
         <ExpandLessIcon onClick={() => onClickSortArrow(false)} />

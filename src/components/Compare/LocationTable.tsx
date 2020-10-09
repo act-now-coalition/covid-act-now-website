@@ -74,10 +74,10 @@ const LocationTableHead: React.FunctionComponent<{
           <CompareStyles.LocationHeaderCell
             isModal={isModal}
             onClick={onPopulationClick}
-            sortByPopulation={sortByPopulation}
-            arrowColorSelected={arrowColorSelected}
-            arrowColorNotSelected={arrowColorNotSelected}
-            sortDescending={sortDescending}
+            $sortByPopulation={sortByPopulation}
+            $arrowColorSelected={arrowColorSelected}
+            $arrowColorNotSelected={arrowColorNotSelected}
+            $sortDescending={sortDescending}
           >
             {isModal && (
               <CompareStyles.StateName>
@@ -88,7 +88,7 @@ const LocationTableHead: React.FunctionComponent<{
             <br />
             <span>population</span>
             <CompareStyles.ArrowContainer
-              arrowColorNotSelected={arrowColorNotSelected}
+              $arrowColorNotSelected={arrowColorNotSelected}
               isModal={isModal}
             >
               <ExpandLessIcon onClick={() => setSortDescending(false)} />
