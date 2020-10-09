@@ -355,7 +355,7 @@ export const Tag = styled.div`
 
 export const Row = styled(TableRow)<{
   index?: number;
-  isCurrentCounty?: boolean;
+  $isCurrentCounty?: boolean;
   isModal?: boolean;
   headerRowBackground?: string;
 }>`
@@ -367,7 +367,7 @@ export const Row = styled(TableRow)<{
       : 'white'};
   background-color: ${({ isModal }) =>
     isModal && `${COLOR_MAP.GRAY_BODY_COPY}`};
-  background-color: ${({ isCurrentCounty }) => isCurrentCounty && '#FFEFD6'};
+  background-color: ${({ $isCurrentCounty }) => $isCurrentCounty && '#FFEFD6'};
   border-bottom: none;
 
   th {

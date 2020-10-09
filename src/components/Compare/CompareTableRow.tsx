@@ -72,7 +72,7 @@ const CompareTableRow = (props: {
     <Link to={locationLink}>
       <Row
         index={location.rank}
-        isCurrentCounty={isCurrentCounty}
+        $isCurrentCounty={isCurrentCounty}
         isModal={isModal}
       >
         <LocationNameCell

@@ -17,11 +17,11 @@ export const ShareContainer = styled.div`
 `;
 
 export const ShareInstructionHeader = styled(Typography)<{
-  alertsInstructions?: boolean;
+  $alertsInstructions?: boolean;
 }>`
   margin-top: 0;
-  margin-bottom: ${({ alertsInstructions }) =>
-    alertsInstructions ? '1.25rem' : '1rem'};
+  margin-bottom: ${({ $alertsInstructions }) =>
+    $alertsInstructions ? '1.25rem' : '1rem'};
   font-size: 1.75rem;
   font-weight: 700;
   line-height: 2rem;
@@ -34,11 +34,11 @@ export const ShareInstructionHeader = styled(Typography)<{
 `;
 
 export const ShareInstructionBody = styled(Typography)<{
-  alertsInstructions?: boolean;
+  $alertsInstructions?: boolean;
 }>`
   margin-top: 0;
-  margin-bottom: ${({ alertsInstructions }) =>
-    alertsInstructions ? '1.5rem' : '1rem'};
+  margin-bottom: ${({ $alertsInstructions }) =>
+    $alertsInstructions ? '1.5rem' : '1rem'};
   line-height: 1.6rem;
   color: inherit;
 `;
