@@ -65,14 +65,14 @@ const LocationTableHead: React.FunctionComponent<{
 
   return (
     <Table key="table-header">
-      <CompareStyles.TableHeadContainer isModal={isModal}>
+      <CompareStyles.TableHeadContainer $isModal={isModal}>
         <CompareStyles.Row
           $headerRowBackground={
             isModal ? `${COLOR_MAP.GRAY_BODY_COPY}` : 'white'
           }
         >
           <CompareStyles.LocationHeaderCell
-            isModal={isModal}
+            $isModal={isModal}
             onClick={onPopulationClick}
             $sortByPopulation={sortByPopulation}
             $arrowColorSelected={arrowColorSelected}
@@ -89,7 +89,7 @@ const LocationTableHead: React.FunctionComponent<{
             <span>population</span>
             <CompareStyles.ArrowContainer
               $arrowColorNotSelected={arrowColorNotSelected}
-              isModal={isModal}
+              $isModal={isModal}
             >
               <ExpandLessIcon onClick={() => setSortDescending(false)} />
               <ExpandMoreIcon onClick={() => setSortDescending(true)} />
@@ -239,9 +239,9 @@ const LocationTable: React.FunctionComponent<{
   const showStateCode = allCountiesView || geoScope === GeoScopeFilter.NEARBY;
 
   return (
-    <Styles.TableContainer isModal={isModal} className={SCREENSHOT_CLASS}>
+    <Styles.TableContainer $isModal={isModal} className={SCREENSHOT_CLASS}>
       <Container finalHeaderOffset={finalHeaderOffset}>
-        <Styles.Head isModal={isModal} pinnedLocation={pinnedLocation}>
+        <Styles.Head $isModal={isModal} $pinnedLocation={pinnedLocation}>
           <LocationTableHead
             setSorter={setSorter}
             setSortDescending={setSortDescending}

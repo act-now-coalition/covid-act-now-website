@@ -22,7 +22,7 @@ const HeaderCell = (props: {
   metricInMap: any;
   arrowColorSelected: string;
   arrowColorNotSelected: string;
-  isModal: Boolean;
+  isModal: boolean;
   setSortByPopulation: React.Dispatch<React.SetStateAction<boolean>>;
   sortByPopulation: boolean;
 }) => {
@@ -71,7 +71,7 @@ const HeaderCell = (props: {
   return (
     <MetricHeaderCell
       onClick={cellOnClick}
-      isModal={isModal}
+      $isModal={isModal}
       $sortByPopulation={sortByPopulation}
       $arrowColorSelected={arrowColorSelected}
       $sortDescending={sortDescending}
@@ -80,7 +80,7 @@ const HeaderCell = (props: {
       <span>{metricName}</span>
       <ArrowContainer
         $arrowColorNotSelected={arrowColorNotSelected}
-        isModal={isModal}
+        $isModal={isModal}
       >
         <ExpandLessIcon onClick={() => onClickSortArrow(false)} />
         <ExpandMoreIcon onClick={() => onClickSortArrow(true)} />

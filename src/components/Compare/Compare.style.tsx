@@ -18,10 +18,10 @@ export const metricCellWidth = 110;
 
 const getMetricHeaderBackground = (
   $sortByPopulation: boolean,
-  isModal: Boolean,
+  $isModal: boolean,
   $isSelectedMetric: boolean,
 ) => {
-  if (isModal) {
+  if ($isModal) {
     if ($isSelectedMetric && !$sortByPopulation) return 'black';
     return `${COLOR_MAP.GRAY_BODY_COPY}`;
   } else {
@@ -37,28 +37,31 @@ export const CenteredContentModal = styled(Modal)`
   justify-content: center;
 `;
 
-export const Wrapper = styled.div<{ isModal?: boolean; isHomepage?: boolean }>`
-  max-width: ${({ isHomepage }) => (isHomepage ? '1000px' : '900px')};
+export const Wrapper = styled.div<{
+  $isModal?: boolean;
+  $isHomepage?: boolean;
+}>`
+  max-width: ${({ $isHomepage }) => ($isHomepage ? '1000px' : '900px')};
   width: 100%;
-  margin: ${({ isModal }) => (isModal ? '0 auto' : '1rem auto')};
-  background: ${({ isModal }) => isModal && `${COLOR_MAP.GRAY_BODY_COPY}`};
-  max-height: ${({ isModal }) => isModal && '100vh'};
+  margin: ${({ $isModal }) => ($isModal ? '0 auto' : '1rem auto')};
+  background: ${({ $isModal }) => $isModal && `${COLOR_MAP.GRAY_BODY_COPY}`};
+  max-height: ${({ $isModal }) => $isModal && '100vh'};
 
   @media (min-width: 600px) {
-    margin: ${({ isModal }) => (isModal ? '0 auto' : '3rem auto')};
-    max-height: ${({ isModal }) => (isModal ? '80vh' : 'unset')};
+    margin: ${({ $isModal }) => ($isModal ? '0 auto' : '3rem auto')};
+    max-height: ${({ $isModal }) => ($isModal ? '80vh' : 'unset')};
   }
 
   @media (min-width: 1060px) {
-    margin: ${({ isModal }) => (isModal ? '0 auto' : '3rem auto 2rem')};
+    margin: ${({ $isModal }) => ($isModal ? '0 auto' : '3rem auto 2rem')};
   }
 
   @media (min-width: 1350px) {
-    margin: ${({ isModal }) => (isModal ? '0 auto' : '3rem 445px 2rem auto')};
+    margin: ${({ $isModal }) => ($isModal ? '0 auto' : '3rem 445px 2rem auto')};
   }
 
   @media (min-width: 1750px) {
-    margin: ${({ isModal }) => (isModal ? '0 auto' : '3rem auto 2rem')};
+    margin: ${({ $isModal }) => ($isModal ? '0 auto' : '3rem auto 2rem')};
   }
 
   table {
@@ -91,7 +94,7 @@ export const Wrapper = styled.div<{ isModal?: boolean; isHomepage?: boolean }>`
 
 export const ArrowContainer = styled.div<{
   $arrowColorNotSelected: string;
-  isModal?: Boolean;
+  $isModal?: boolean;
 }>`
   color: #bdbdbd;
   font-family: Roboto;
@@ -108,7 +111,7 @@ export const ArrowContainer = styled.div<{
     color: ${({ $arrowColorNotSelected }) => $arrowColorNotSelected};
 
     &:hover {
-      color: ${({ isModal }) => (isModal ? 'white' : 'black')};
+      color: ${({ $isModal }) => ($isModal ? 'white' : 'black')};
     }
   }
 `;
@@ -120,7 +123,7 @@ export const CellStyles = css`
 `;
 
 export const LocationHeaderCell = styled(TableCell)<{
-  isModal: Boolean;
+  $isModal: boolean;
   $sortByPopulation: boolean;
   $arrowColorSelected: string;
   $arrowColorNotSelected: string;
@@ -128,10 +131,10 @@ export const LocationHeaderCell = styled(TableCell)<{
 }>`
   ${CellStyles}
 
-  background-color: ${({ isModal, $sortByPopulation }) =>
-    isModal && $sortByPopulation
+  background-color: ${({ $isModal, $sortByPopulation }) =>
+    $isModal && $sortByPopulation
       ? 'black'
-      : isModal
+      : $isModal
       ? `${COLOR_MAP.GRAY_BODY_COPY}`
       : $sortByPopulation
       ? `${COLOR_MAP.BLUE}`
@@ -139,8 +142,8 @@ export const LocationHeaderCell = styled(TableCell)<{
 
   border-radius: ${({ $sortByPopulation }) =>
     $sortByPopulation && '4px 4px 0 0'};
-  color: ${({ isModal, $sortByPopulation }) =>
-    !isModal && $sortByPopulation && 'white'};
+  color: ${({ $isModal, $sortByPopulation }) =>
+    !$isModal && $sortByPopulation && 'white'};
 
   ${ArrowContainer} {
     svg{
@@ -168,14 +171,14 @@ export const LocationHeaderCell = styled(TableCell)<{
   span{
     color: ${COLOR_MAP.GRAY.DARK};
     font-weight: normal;
-    color: ${({ isModal, $sortByPopulation }) =>
-      !isModal && $sortByPopulation ? 'white' : `${COLOR_MAP.GRAY.DARK}`};
+    color: ${({ $isModal, $sortByPopulation }) =>
+      !$isModal && $sortByPopulation ? 'white' : `${COLOR_MAP.GRAY.DARK}`};
 
   }
 `;
 
 export const MetricHeaderCell = styled(TableCell)<{
-  isModal: Boolean;
+  $isModal: boolean;
   $sortByPopulation: boolean;
   $arrowColorSelected: string;
   $sortDescending: boolean;
@@ -188,7 +191,7 @@ export const MetricHeaderCell = styled(TableCell)<{
   background-color: ${props =>
     getMetricHeaderBackground(
       props.$sortByPopulation,
-      props.isModal,
+      props.$isModal,
       props.$isSelectedMetric,
     )};
     color: ${({ $sortByPopulation, $isSelectedMetric }) =>
@@ -247,14 +250,14 @@ export const MetricHeaderCell = styled(TableCell)<{
     }
 `;
 
-export const TableHeadContainer = styled(TableHead)<{ isModal?: Boolean }>`
+export const TableHeadContainer = styled(TableHead)<{ $isModal?: boolean }>`
   ${MetricHeaderCell}, ${LocationHeaderCell} {
     vertical-align: bottom;
     line-height: 1.1rem;
     padding: 1rem 1rem 0.8rem;
-    color: ${({ isModal }) => isModal && 'white'};
-    border-bottom: ${({ isModal }) =>
-      !isModal && `2px solid ${COLORS.LIGHTGRAY}`};
+    color: ${({ $isModal }) => $isModal && 'white'};
+    border-bottom: ${({ $isModal }) =>
+      !$isModal && `2px solid ${COLORS.LIGHTGRAY}`};
   }
 `;
 
@@ -374,7 +377,7 @@ export const Tag = styled.div`
 export const Row = styled(TableRow)<{
   index?: number;
   $isCurrentCounty?: boolean;
-  isModal?: boolean;
+  $isModal?: boolean;
   $headerRowBackground?: string;
 }>`
   background-color: ${({ index, $headerRowBackground }) =>
@@ -383,8 +386,8 @@ export const Row = styled(TableRow)<{
       : index % 2 === 0
       ? '#fafafa'
       : 'white'};
-  background-color: ${({ isModal }) =>
-    isModal && `${COLOR_MAP.GRAY_BODY_COPY}`};
+  background-color: ${({ $isModal }) =>
+    $isModal && `${COLOR_MAP.GRAY_BODY_COPY}`};
   background-color: ${({ $isCurrentCounty }) => $isCurrentCounty && '#FFEFD6'};
   border-bottom: none;
 

@@ -112,34 +112,21 @@ const _AppBar = () => {
         </Left>
         <StyledDesktopMenu value={false}>
           <StyledTabs value={panelIdx}>
-            <StyledTab
-              label="Map"
-              value={0}
-              disableRipple
-              onClick={goTo('/')}
-            />
-            <StyledTab
-              label="About"
-              value={1}
-              disableRipple
-              onClick={goTo('/about')}
-            />
+            <StyledTab label="Map" value={0} onClick={goTo('/')} />
+            <StyledTab label="About" value={1} onClick={goTo('/about')} />
             <StyledTab
               label="Resources"
               value={2}
-              disableRipple
               onClick={goTo('/resources')}
             />
             <StyledTab
               label="Blog"
               value={3}
-              disableRipple
               onClick={forwardTo('https://blog.covidactnow.org')}
             />
             <StyledTab
               label="Contact Us"
               value={4}
-              disableRipple
               onClick={goTo('/contact')}
             />
           </StyledTabs>

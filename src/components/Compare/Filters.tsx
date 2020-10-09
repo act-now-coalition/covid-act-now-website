@@ -152,14 +152,14 @@ const Filters = (props: {
 
   return (
     <Fragment>
-      <Container isModal={props.isModal} isHomepage={props.isHomepage}>
+      <Container $isModal={props.isModal} $isHomepage={props.isHomepage}>
         {props.isHomepage && (
           <SwitchGrid
             container
             alignItems="center"
             spacing={1}
-            viewAllCounties={props.viewAllCounties}
-            isModal={props.isModal}
+            $viewAllCounties={props.viewAllCounties}
+            $isModal={props.isModal}
           >
             <SwitchLabel onClick={() => gridOnClick(false)} item>
               States
@@ -186,7 +186,7 @@ const Filters = (props: {
               step={null}
               marks={marks}
               track={false}
-              isModal={props.isModal}
+              $isModal={props.isModal}
               geoScope={props.geoScope}
             />
           </SliderContainer>
@@ -195,11 +195,11 @@ const Filters = (props: {
           ref={anchorRef}
           onClick={handleMenuToggle}
           disabled={disableMetroMenu}
-          isMobile={isMobile}
+          $isMobile={isMobile}
           disableRipple
-          isOpen={open}
-          isStatePage={isStatePage}
-          isModal={props.isModal}
+          $isOpen={open}
+          $isStatePage={isStatePage}
+          $isModal={props.isModal}
         >
           <div>
             <span>Counties</span>

@@ -17,7 +17,7 @@ const ThermometerRow = (props: {
 }) => {
   return (
     <RowContainer>
-      <RowColor $levelColor={props.levelColor} rowLevel={props.rowLevel} />
+      <RowColor $levelColor={props.levelColor} $rowLevel={props.rowLevel} />
       <RowCopy>{props.text}</RowCopy>
     </RowContainer>
   );

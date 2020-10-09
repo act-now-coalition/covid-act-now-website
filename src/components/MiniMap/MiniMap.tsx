@@ -62,7 +62,7 @@ const MiniMap: FunctionComponent<MiniMapProperties> = ({
             hideLegend={true}
             setMapOption={setMapOption}
             setMobileMenuOpen={setMobileMenuOpen}
-            isMiniMap={true}
+            isMiniMap
           />
         )}
         {/* State Map */}

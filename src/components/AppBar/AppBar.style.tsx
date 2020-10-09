@@ -75,7 +75,7 @@ export const StyledTabs = styled(Tabs)`
   min-height: 32px;
 `;
 
-export const StyledTab = styled(Tab)`
+export const StyledTab = styled(Tab).attrs(props => ({ disableRipple: true }))`
   min-width: 36px;
   min-height: 32px;
   margin-left: 15px;

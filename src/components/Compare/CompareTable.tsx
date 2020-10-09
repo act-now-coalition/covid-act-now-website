@@ -201,7 +201,7 @@ const CompareTable = (props: {
   };
 
   return (
-    <Wrapper isModal={props.isModal} isHomepage={props.isHomepage}>
+    <Wrapper $isModal={props.isModal} $isHomepage={props.isHomepage}>
       {!props.isModal && (
         <div>
           <HeaderWrapper>
