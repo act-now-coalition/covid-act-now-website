@@ -127,14 +127,9 @@
       "iconImage": "/images_cms/bar_recommends_icon.svg"
     },
     {
-      "category": "MEDICAL_CONDITIONS",
-      "altText": "Medical conditions icon",
-      "iconImage": "/images_cms/mask_recommends_icon.svg"
-    },
-    {
-      "category": "PUBLIC_INTERACTIONS",
-      "altText": "Public Interactions icon",
-      "iconImage": "/images_cms/mask_recommends_icon.svg"
+      "category": "GYMS",
+      "altText": "Gyms icon",
+      "iconImage": "/images_cms/gym_recommends_icon.svg"
     },
     {
       "category": "SCHOOLS",
