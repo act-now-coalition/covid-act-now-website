@@ -55,7 +55,7 @@ const Terms = ({ children }: { children: React.ReactNode }) => {
           Website Terms of Use
         </Typography>
         <Typography variant="h6" component="h1" align="center">
-          Last updated: October 1, 2020
+          Last updated: October 9, 2020
         </Typography>
         <Typography variant="h5" component="h1">
           Acceptance of the Terms of Use
