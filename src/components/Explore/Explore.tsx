@@ -51,6 +51,7 @@ import {
 import { findFipsByUrlParams } from 'common/locations';
 import { ScreenshotReady } from 'components/Screenshot';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
+import { IndigenousDataCheckbox } from 'components/IndigenousPopulationsFeature';
 
 const MARGIN_SINGLE_LOCATION = 20;
 const MARGIN_STATE_CODE = 60;
@@ -96,7 +97,14 @@ function getLabelLength(series: Series, shortLabel: boolean) {
 const Explore: React.FunctionComponent<{
   initialFipsList: string[];
   title?: string;
-}> = ({ initialFipsList, title = 'Trends' }) => {
+  setChartIndigenous?: React.Dispatch<React.SetStateAction<boolean>>;
+  chartIndigenous?: boolean;
+}> = ({
+  initialFipsList,
+  title = 'Trends',
+  setChartIndigenous,
+  chartIndigenous,
+}) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isMobileXs = useMediaQuery(theme.breakpoints.down('xs'));
@@ -293,6 +301,10 @@ const Explore: React.FunctionComponent<{
         activeTabIndex={currentMetric}
         labels={metricLabels}
         onChangeTab={onChangeTab}
+      />
+      <IndigenousDataCheckbox
+        chartIndigenous={chartIndigenous}
+        setChartIndigenous={setChartIndigenous}
       />
       <Styles.ChartControlsContainer>
         <Styles.TableAutocompleteHeader>
