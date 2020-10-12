@@ -204,7 +204,6 @@ const Explore: React.FunctionComponent<{
   }, [currentLocations, defaultMetric]);
 
   const [chartSeries, setChartSeries] = useState<Series[]>([]);
-  console.log(chartSeries);
   useEffect(() => {
     const fetchSeries = () =>
       getChartSeries(currentMetric, selectedLocations, normalizeData);

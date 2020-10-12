@@ -24,7 +24,7 @@ import { SelectorWrapper } from 'components/Header/HomePageHeader.style';
 import CompareMain from 'components/Compare/CompareMain';
 import { DonationBanner } from 'components/Banner/DonationBanner';
 import Explore from 'components/Explore';
-import { getRandomStateFipsList } from './utils';
+//import { getRandomStateFipsList } from './utils';
 
 export default function HomePage() {
   const shareBlockRef = useRef(null);
@@ -63,7 +63,8 @@ export default function HomePage() {
     window.scrollTo(0, 0);
   };
 
-  const [initialFipsList] = useState(getRandomStateFipsList());
+  //const [initialFipsList] = useState(getRandomStateFipsList());
+  const [initialFipsList] = useState(['00001', '00002']);
 
   return (
     <>
