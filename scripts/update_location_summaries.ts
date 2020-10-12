@@ -104,12 +104,12 @@ function aggregate(allProjections: Projections[]) {
       );
       for (let i = 0; i < data.length; i++) {
         const y = data[i].y;
-        if (aggregatedSeries[i] === undefined) {
-          aggregatedSeries[i] = 0;
-        }
-        // TODO(michael): Is keeping aggregate data where some components have gaps, okay?
-        if (y !== null) {
+        // TODO(michael): Is keeping aggregate data where some components have gaps okay?
+        if (y !== null && y > 0) {
           dates[i] = data[i].x;
+          if (aggregatedSeries[i] === undefined) {
+            aggregatedSeries[i] = 0;
+          }
           aggregatedSeries[i] += y;
         }
       }
