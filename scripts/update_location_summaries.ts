@@ -90,8 +90,8 @@ const AGGREGATED_DATASETS: DatasetId[] = [
 ];
 
 function aggregate(allProjections: Projections[]) {
-  const population = _.sumBy(allProjections, p => p.population);
-  const dates = [];
+  const totalPopulation = _.sumBy(allProjections, p => p.population);
+  const dates: number[] = [];
   let aggregatedDatasets: { [key: string]: Array<number | null> } = {};
   for (const datasetId of AGGREGATED_DATASETS) {
     const aggregatedSeries = [];
@@ -104,14 +104,12 @@ function aggregate(allProjections: Projections[]) {
       );
       for (let i = 0; i < data.length; i++) {
         const y = data[i].y;
-        if (i >= aggregatedSeries.length) {
-          dates[i] = data[i].x;
+        if (aggregatedSeries[i] === undefined) {
           aggregatedSeries[i] = 0;
         }
-        // TODO(michael): if any series has a gap, we will keep it as a gap. Is that okay?
-        if (y === null) {
-          aggregatedSeries[i] = null;
-        } else if (aggregatedSeries[i] !== null) {
+        // TODO(michael): Is keeping aggregate data where some components have gaps, okay?
+        if (y !== null) {
+          dates[i] = data[i].x;
           aggregatedSeries[i] += y;
         }
       }
@@ -120,7 +118,7 @@ function aggregate(allProjections: Projections[]) {
   }
 
   return {
-    population,
+    totalPopulation,
     dates,
     ...aggregatedDatasets,
   };
@@ -131,8 +129,10 @@ async function buildAggregations(
   allCountiesProjections: Projections[],
 ) {
   const aggregations = {
-    US: aggregate(allStatesProjections),
-    INDIGENOUS: aggregate(
+    // US
+    '00001': aggregate(allStatesProjections),
+    // Native American Majority Counties
+    '00002': aggregate(
       allCountiesProjections.filter(p => INDIGENOUS_FIPS.includes(p.fips)),
     ),
   };
