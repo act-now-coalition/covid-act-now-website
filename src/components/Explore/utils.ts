@@ -399,10 +399,14 @@ function truncateCountyName(countyName: string) {
 }
 
 function getShortLocationLabel(location: Location) {
-  const { county: countyName, state_code } = location;
-  return countyName
-    ? `${truncateCountyName(getAbbreviatedCounty(countyName))}`
-    : state_code.toUpperCase();
+  if (location.full_fips_code && location.full_fips_code.startsWith('00')) {
+    return location.state_code;
+  } else {
+    const { county: countyName, state_code } = location;
+    return countyName
+      ? `${truncateCountyName(getAbbreviatedCounty(countyName))}`
+      : state_code.toUpperCase();
+  }
 }
 
 export function getLocationNames(
@@ -470,14 +474,18 @@ class AggregatedProjection implements ProjectionLike {
   }
 
   getDataset(datasetId: DatasetId): Column[] {
-    let data: Column[] = [];
-    for (let i = 0; i < this.aggregation.dates.length; i++) {
-      data.push({
-        x: this.aggregation.dates[i],
-        y: this.aggregation[datasetId][i],
-      });
+    if (this.aggregation[datasetId]) {
+      let data: Column[] = [];
+      for (let i = 0; i < this.aggregation.dates.length; i++) {
+        data.push({
+          x: this.aggregation.dates[i],
+          y: this.aggregation[datasetId][i],
+        });
+      }
+      return data;
+    } else {
+      return [];
     }
-    return data;
   }
 }
 

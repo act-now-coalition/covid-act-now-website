@@ -83,10 +83,12 @@ const AGGREGATED_DATASETS: DatasetId[] = [
   'smoothedDailyCases',
   'rawDailyDeaths',
   'smoothedDailyDeaths',
+  /*
   'rawHospitalizations',
   'smoothedHospitalizations',
   'rawICUHospitalizations',
   'smoothedICUHospitalizations',
+  */
 ];
 
 function aggregate(allProjections: Projections[]) {
