@@ -16,6 +16,7 @@ import Recommend from 'components/Recommend';
 import {
   getDynamicIntroCopy,
   getRecommendations,
+  getShareQuote,
 } from 'common/utils/recommend';
 import { mainContent } from 'cms-content/recommendations';
 import { getRecommendationsShareUrl } from 'common/urls';
@@ -112,7 +113,12 @@ const ChartsHolder = (props: {
   const recommendsShareUrl = getRecommendationsShareUrl(
     props.projections.primary.fips,
   );
-  const recommendsShareQuote = '';
+
+  const alarmLevel = props.projections.getAlarmLevel();
+  const recommendsShareQuote = getShareQuote(
+    props.projections.locationName,
+    alarmLevel,
+  );
 
   // TODO(pablo): Create separate refs for signup and share
   return (

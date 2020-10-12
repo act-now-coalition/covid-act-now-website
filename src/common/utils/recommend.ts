@@ -18,6 +18,7 @@ import {
 } from 'cms-content/recommendations';
 import { allIcons } from 'cms-content/recommendations';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
+import { getAbbreviatedCounty } from 'common/utils/compare';
 
 export function trackRecommendationsEvent(action: EventAction, label: string) {
   trackEvent(EventCategory.RECOMMENDATIONS, action, label);
@@ -167,4 +168,23 @@ function getIcon(recommendation: Recommendation): RecommendationWithIcon {
     recommendationInfo: recommendation,
     iconInfo: correspondingIcon[0],
   };
+}
+
+/*
+  Keeping recommends share quote copy seperate
+  from text in location_summary.ts
+*/
+export const summaryByLevel = {
+  [Level.LOW]: 'is on track to contain COVID',
+  [Level.MEDIUM]: 'is spreading in a slow and controlled fashion',
+  [Level.HIGH]: 'is at risk of an outbreak',
+  [Level.CRITICAL]:
+    'is either actively experiencing an outbreak or is at extreme risk',
+  [Level.UNKNOWN]: '', // ** What do we want here? **
+};
+
+export function getShareQuote(locationName: string, alarmLevel: Level): string {
+  return `According to @CovidActNow, ${getAbbreviatedCounty(locationName)} ${
+    summaryByLevel[alarmLevel]
+  }. These are White House Coronavirus Task Force’s and Harvard Global Health Institute’s official recommendations:`;
 }
