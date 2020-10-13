@@ -6,7 +6,7 @@ import React, {
   useCallback,
 } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import { some, uniq, max } from 'lodash';
+import { some, uniq, max, initial } from 'lodash';
 import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
@@ -96,14 +96,14 @@ function getLabelLength(series: Series, shortLabel: boolean) {
 
 const Explore: React.FunctionComponent<{
   initialFipsList: string[];
+  initialChartIndigenousPopulations?: boolean;
   title?: string;
   setChartIndigenous?: React.Dispatch<React.SetStateAction<boolean>>;
   chartIndigenous?: boolean;
 }> = ({
   initialFipsList,
+  initialChartIndigenousPopulations,
   title = 'Trends',
-  setChartIndigenous,
-  chartIndigenous,
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -148,17 +148,24 @@ const Explore: React.FunctionComponent<{
 
   const currentMetricName = getMetricName(currentMetric);
 
-  const currentLocations = useMemo(
+  const initialLocations = useMemo(
     () => initialFipsList.map(findLocationForFips),
     [initialFipsList],
+  );
+  const indigeneousPopulationsLocations = useMemo(
+    () => ['00001', '00002'].map(findLocationForFips),
+    [],
   );
   const autocompleteLocations = useMemo(
     () => getAutocompleteLocations(initialFipsList[0]),
     [initialFipsList],
   );
 
+  const [chartIndigenous, setChartIndigenous] = useState(
+    initialChartIndigenousPopulations || false,
+  );
   const [selectedLocations, setSelectedLocations] = useState<Location[]>(
-    currentLocations,
+    chartIndigenous ? indigeneousPopulationsLocations : initialLocations,
   );
 
   const onChangeSelectedLocations = (newLocations: Location[]) => {
@@ -180,6 +187,16 @@ const Explore: React.FunctionComponent<{
     // make sure that the current location is always selected
     setSelectedLocations(changedLocations);
   };
+
+  useEffect(() => {
+    if (chartIndigenous) {
+      setSelectedLocations(indigeneousPopulationsLocations);
+      setNormalizeData(true);
+    } else {
+      setSelectedLocations(initialLocations);
+      setNormalizeData(initialLocations.length > 1);
+    }
+  }, [chartIndigenous, indigeneousPopulationsLocations, initialLocations]);
 
   const exploreRef = useRef<HTMLDivElement>(null);
   const scrollToExplore = useCallback(() => {
@@ -207,9 +224,20 @@ const Explore: React.FunctionComponent<{
   // the user clicks a location on the Compare table or on the mini map so
   // they are not carried over to the new location page.
   useEffect(() => {
-    setSelectedLocations(currentLocations);
+    if (initialChartIndigenousPopulations) {
+      setSelectedLocations(indigeneousPopulationsLocations);
+      setNormalizeData(true);
+    } else {
+      setSelectedLocations(initialLocations);
+      setNormalizeData(initialLocations.length > 1);
+    }
     setCurrentMetric(defaultMetric);
-  }, [currentLocations, defaultMetric]);
+  }, [
+    initialLocations,
+    initialChartIndigenousPopulations,
+    defaultMetric,
+    indigeneousPopulationsLocations,
+  ]);
 
   const [chartSeries, setChartSeries] = useState<Series[]>([]);
   useEffect(() => {

@@ -63,15 +63,6 @@ export default function HomePage() {
     window.scrollTo(0, 0);
   };
 
-  // TODO(Chelsi) : add same to location page
-
-  const [
-    chartIndigenousPopulationsData,
-    setChartIndigenousPopulationsData,
-  ] = useState(true);
-  // const fipsToChart = chartIndigenousPopulationsData ? ** : getRandomStateFipsList()
-  // const [initialFipsList] = useState(fipsToChart);
-
   const [initialFipsList] = useState(getRandomStateFipsList());
 
   return (
@@ -107,8 +98,7 @@ export default function HomePage() {
               <Explore
                 title="Cases, Deaths and Hospitalizations"
                 initialFipsList={initialFipsList}
-                chartIndigenous={chartIndigenousPopulationsData}
-                setChartIndigenous={setChartIndigenousPopulationsData}
+                initialChartIndigenousPopulations={true}
               />
             </Section>
             <SectionWrapper ref={indicatorsRef}>
