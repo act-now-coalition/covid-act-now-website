@@ -4,6 +4,7 @@ import MuiTabs from '@material-ui/core/Tabs';
 import { MarkdownBody } from 'components/Markdown';
 import theme from 'assets/theme';
 import { COLOR_MAP } from 'common/colors';
+import { COLORS } from 'common';
 
 export const Title = styled.h1`
   font-family: Roboto;
@@ -37,7 +38,7 @@ export const SourceIntro = styled(MarkdownBody)`
 `;
 
 export const LevelContainer = styled.div`
-  border: solid 1px ${COLOR_MAP.LIGHTGRAY};
+  border: solid 1px ${COLORS.LIGHTGRAY};
   border-radius: 4px;
 `;
 
@@ -60,7 +61,7 @@ export const Tab = styled(MuiTab)`
 `;
 
 export const Tabs = styled(MuiTabs)`
-  background-color: ${COLOR_MAP.LIGHTGRAY};
+  background-color: ${COLORS.LIGHTGRAY};
 
   &.Indicator-Red .MuiTabs-indicator {
     background-color: ${COLOR_MAP.RED.BASE};
@@ -80,5 +81,4 @@ export const Tabs = styled(MuiTabs)`
 
 export const LevelDescription = styled(MarkdownBody)`
   padding: ${theme.spacing(3)}px;
-  font-style: italic;
 `;
