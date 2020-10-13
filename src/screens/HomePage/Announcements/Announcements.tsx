@@ -12,46 +12,28 @@ import {
   ViewAllLink,
 } from './Announcements.style';
 
+// TODO (Chelsi)- add blog post link
 const Announcements = () => {
   return (
     <Wrapper>
       <AnnouncementsSectionHeader>Announcements</AnnouncementsSectionHeader>
       <AnnouncementIntro>
-        Introducing v2 of the Covid Act Now API
+        Using CAN to understand the impact of COVID on Native American
+        communities
       </AnnouncementIntro>
-      <Date>THURSDAY, Sept 24, 2020</Date>
+      <Date>MONDAY, Oct 12, 2020</Date>
       <AnnouncementBodyCopy>
-        We are excited to announce{' '}
-        <ExternalLink href="https://apidocs.covidactnow.org">
-          v2 of our API
-        </ExternalLink>
-        . It provides all of the same data that powers Covid Act Now, but now in
-        a machine-readable format, made for ease-of-use by those wishing to
-        programmatically ingest our data. To gain access, please use this{' '}
-        <ExternalLink href="https://apidocs.covidactnow.org/access">
-          registration form
-        </ExternalLink>{' '}
-        to generate your unique key.
+        In light of Indigenous Peoples’ Day, our team has added a tool to help
+        you visualize the impact of COVID on majority Native American counties.
         <br />
         <br />
-        Please note that daily updates to v1 of our API will end on 10/5/2020.
-        See our{' '}
         <ExternalLink href="https://apidocs.covidactnow.org/migration">
-          documentation
+          Click here
         </ExternalLink>{' '}
-        for migration instructions. For a customizable Google Spreadsheet
-        version of our model, see{' '}
-        <ExternalLink href="https://covidactnow.org/resources/">
-          here
-        </ExternalLink>
-        .
+        to see some of the trends that our team observed using this tool.
       </AnnouncementBodyCopy>
       <ButtonsContainer>
-        <ReadMoreButton
-          href="https://apidocs.covidactnow.org/"
-          target="_blank"
-          rel="noopener"
-        >
+        <ReadMoreButton href="/" target="_blank" rel="noopener">
           Continue reading
         </ReadMoreButton>
         <ViewAllLink
