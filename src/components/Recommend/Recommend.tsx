@@ -20,6 +20,7 @@ import RecommendModal from './RecommendModal';
 import Dialog, { useDialog } from 'components/Dialog';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import { LinkButton } from 'components/Button';
+import FeedbackForm from './FeedbackForm';
 
 const { header, footer } = mainContent;
 const { federalTaskForce, harvard } = modalContent;
@@ -153,13 +154,12 @@ const Recommend = (props: {
         <RecommendModal />
       </Dialog>
       <Dialog
-        open={isFeedbackDialogOpen}
         closeDialog={closeFeedbackDialog}
+        open={isFeedbackDialogOpen}
         fullWidth
         maxWidth="md"
       >
-        {/* TODO: Add the embed form here */}
-        Feedback
+        <FeedbackForm typeformUrl="https://can386399.typeform.com/to/WSPYSGPe" />
       </Dialog>
     </Wrapper>
   );
