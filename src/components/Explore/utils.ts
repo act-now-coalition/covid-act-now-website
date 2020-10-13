@@ -32,7 +32,7 @@ import { SeriesType, Series } from './interfaces';
 import { getAbbreviatedCounty } from '../../common/utils/compare';
 import AggregationsJSON from 'assets/data/aggregations.json';
 
-/** Common interface to represent real Projection objects as well as aggregated projections . */
+/** Common interface to represent real Projection objects as well as aggregated projections. */
 interface ProjectionLike {
   getDataset(datasetId: DatasetId): Column[];
   fips: string;
