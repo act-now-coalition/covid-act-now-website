@@ -39,7 +39,6 @@ const LearnMoreModal = (props: { onClose: any }) => {
     };
   }, [onClose]);
 
-  // TODO (Chelsi): add link to blog post
   return (
     <Fragment>
       <BodyScrollLock />

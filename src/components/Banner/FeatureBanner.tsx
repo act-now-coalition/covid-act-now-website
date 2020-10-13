@@ -3,7 +3,6 @@ import { FeatureBannerButton } from './Banner.style';
 import * as Styles from './Banner.style';
 import ExternalLink from 'components/ExternalLink';
 
-// TODO (Chelsi): set blog post link as href of 'View our observations' button
 const Buttons = (props: { scrollTo: any }) => {
   return (
     <Fragment>

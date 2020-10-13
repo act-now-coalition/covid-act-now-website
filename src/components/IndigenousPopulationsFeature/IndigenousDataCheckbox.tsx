@@ -44,7 +44,6 @@ const IndigenousDataCheckbox = (props: {
     }
   };
 
-  // TODO (Chelsi): add link to blog post
   return (
     <Container ref={checkboxRef}>
       <CheckboxWrapper>
