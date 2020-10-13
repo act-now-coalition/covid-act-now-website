@@ -45675,7 +45675,7 @@
             "Saipan Municipality",
             "Tinian Municipality"
           ],
-          "population": 107766
+          "population": 53605
         }
       ],
       "county_dataset": [
@@ -45687,7 +45687,7 @@
           "state_code": "MP",
           "full_fips_code": "69085",
           "cities": [""],
-          "population": 53883
+          "population": 5
         },
         {
           "county": "Rota Municipality",
@@ -45697,7 +45697,7 @@
           "state_code": "MP",
           "full_fips_code": "69100",
           "cities": [""],
-          "population": 2527
+          "population": 2500
         },
 
         {
@@ -45708,7 +45708,7 @@
           "state_code": "MP",
           "full_fips_code": "69110",
           "cities": [""],
-          "population": 48220
+          "population": 48000
         },
         {
           "county": "Tinian Municipality",
@@ -45718,7 +45718,7 @@
           "state_code": "MP",
           "full_fips_code": "69120",
           "cities": [""],
-          "population": 3136
+          "population": 3100
         }
       ]
     },
