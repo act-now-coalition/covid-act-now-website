@@ -4,6 +4,7 @@ import FeedbackSurveyBanner, {
 } from './FeedbackSurveyBanner';
 import DonationBanner from './DonationBanner';
 import VoteBanner from './VoteBanner';
+import FeatureBanner from './FeatureBanner';
 
 export default Banner;
 export {
@@ -11,4 +12,5 @@ export {
   getFeedbackSurveyUrl,
   DonationBanner,
   VoteBanner,
+  FeatureBanner,
 };
