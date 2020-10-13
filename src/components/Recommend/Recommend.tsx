@@ -19,6 +19,7 @@ import SmallShareButtons from 'components/SmallShareButtons';
 import RecommendModal from './RecommendModal';
 import Dialog, { useDialog } from 'components/Dialog';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
+import { LinkButton } from 'components/Button';
 
 const { header, footer } = mainContent;
 const { federalTaskForce, harvard } = modalContent;
@@ -37,7 +38,7 @@ const Header = (props: {
         These recommendations match the guidelines set by{' '}
         <strong>{federalTaskForce.sourceName}</strong> and{' '}
         <strong>{harvard.sourceName}</strong> {introCopy}{' '}
-        <span onClick={onClickOpenModal}>Learn more.</span>
+        <LinkButton onClick={onClickOpenModal}>Learn more.</LinkButton>
       </Intro>
     </Fragment>
   );

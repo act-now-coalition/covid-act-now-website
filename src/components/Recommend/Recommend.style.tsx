@@ -4,6 +4,7 @@ import { ChartLocationNameStyles } from 'components/LocationPage/ChartsHolder.st
 import { Typography } from '@material-ui/core';
 import ReactMarkdown from 'react-markdown';
 import { FooterLinkStyles } from 'components/Compare/Compare.style';
+import { LinkButton } from 'components/Button';
 
 /*
 TODO (chelsi): these breakpoints and margins are the same as
@@ -128,8 +129,7 @@ export const FooterHalf = styled.div`
   }
 `;
 
-//TODO (chelsi)-make button and not div
-export const FooterLink = styled.div`
+export const FooterLink = styled(LinkButton)`
   ${FooterLinkStyles}
   white-space: nowrap;
 
