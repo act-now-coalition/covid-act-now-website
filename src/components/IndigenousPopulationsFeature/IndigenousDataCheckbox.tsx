@@ -44,7 +44,7 @@ const IndigenousDataCheckbox = (props: {
     }
   };
 
-  // TODO (Chelsi): add link to blog post, add checkbox name+ID
+  // TODO (Chelsi): add link to blog post
   return (
     <Container ref={checkboxRef}>
       <CheckboxWrapper>
@@ -52,8 +52,8 @@ const IndigenousDataCheckbox = (props: {
           disableRipple
           checked={chartIndigenous}
           onChange={onClickChartIndigenous}
-          name=""
-          id=""
+          name="Chart Indigenous Populations"
+          id="Chart Indigenous Populations"
         />
       </CheckboxWrapper>
       <CopyContainer>

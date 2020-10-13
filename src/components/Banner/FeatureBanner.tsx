@@ -3,9 +3,8 @@ import { FeatureBannerButton } from './Banner.style';
 import * as Styles from './Banner.style';
 import ExternalLink from 'components/ExternalLink';
 
-// TODO (Chelsi) : plug in 'View Chart' button once merged with branch with scrollTo
-// set blog post link as href of 'View our observations' button
-export const renderButtons = () => {
+// TODO (Chelsi): set blog post link as href of 'View our observations' button
+const Buttons = (props: { scrollTo: any }) => {
   return (
     <Fragment>
       <FeatureBannerButton
@@ -13,6 +12,7 @@ export const renderButtons = () => {
         color="primary"
         disableRipple
         disableFocusRipple
+        onClick={() => props.scrollTo()}
       >
         View chart
       </FeatureBannerButton>
@@ -31,23 +31,24 @@ export const renderButtons = () => {
 };
 
 const FeatureBannerInner: React.FC<{
-  renderButton?: () => React.ReactElement;
-}> = ({ renderButton }) => {
+  scrollTo: any;
+}> = ({ scrollTo }) => {
   return (
     <Styles.FeatureBannerContainer container spacing={1}>
       <Styles.MessageContainer item sm md lg>
-        For <strong>Indigenous Peoples’ Day</strong>, See COVID data for
+        For <strong>Indigenous Peoples’ Day</strong>, see COVID data for
         majority Native American communities.
       </Styles.MessageContainer>
-      {renderButton && (
-        <Styles.ButtonContainer>{renderButton()}</Styles.ButtonContainer>
-      )}
+      <Styles.ButtonContainer>
+        <Buttons scrollTo={scrollTo} />
+      </Styles.ButtonContainer>
     </Styles.FeatureBannerContainer>
   );
 };
 
-const FeatureBanner = () => {
-  return <FeatureBannerInner renderButton={renderButtons} />;
+// TODO (Chelsi) fix the anys
+const FeatureBanner = (props: { scrollTo: any }) => {
+  return <FeatureBannerInner scrollTo={props.scrollTo} />;
 };
 
 export default FeatureBanner;
