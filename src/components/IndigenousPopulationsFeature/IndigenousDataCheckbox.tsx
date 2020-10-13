@@ -66,7 +66,10 @@ const IndigenousDataCheckbox = (props: {
         all counties that are “Native American majority counties“ (NAMC) to the
         entire USA for two metrics: Cases and Deaths. Learn more about{' '}
         <span onClick={() => setShowModal(true)}>our methodology</span> or view{' '}
-        <ExternalLink href="/">our observations</ExternalLink>.
+        <ExternalLink href="https://blog.covidactnow.org/covid-native-american-counties/">
+          our observations
+        </ExternalLink>
+        .
       </CopyContainer>
       <CenteredContentModal open={showModal} onClose={handleCloseModal}>
         <LearnMoreModal onClose={handleCloseModal} />

@@ -54,10 +54,15 @@ const LearnMoreModal = (props: { onClose: any }) => {
           </ExternalLink>
           . This represents approximately 10% of the total Native American
           population. This is due to a{' '}
-          <ExternalLink href="/">large reporting gap in race</ExternalLink>.
+          <ExternalLink href="https://blog.covidactnow.org/covid-native-american-counties/">
+            large reporting gap in race
+          </ExternalLink>
+          .
           <ul>
             <li>
-              <ExternalLink href="/">View our observations</ExternalLink>
+              <ExternalLink href="https://blog.covidactnow.org/covid-native-american-counties/">
+                View our observations
+              </ExternalLink>
             </li>
             <li onClick={onClose}>Return to chart</li>
           </ul>

@@ -16,7 +16,7 @@ const Buttons = (props: { scrollTo: any }) => {
       >
         View chart
       </FeatureBannerButton>
-      <ExternalLink href="/">
+      <ExternalLink href="https://blog.covidactnow.org/covid-native-american-counties/">
         <FeatureBannerButton
           variant="contained"
           color="primary"
