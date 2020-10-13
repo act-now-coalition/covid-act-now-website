@@ -45,7 +45,7 @@ const LearnMoreModal = (props: { onClose: any }) => {
       <BodyScrollLock />
       <Wrapper>
         <CloseIcon onClick={onClose} />
-        <Header>Native American majority populations</Header>
+        <Header>Native American majority counties</Header>
         <BodyCopy>
           We aggregated case and death figures among counties whose populations
           are over 50% Native American according to the{' '}

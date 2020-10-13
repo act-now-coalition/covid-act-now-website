@@ -28,9 +28,9 @@ export const AGGREGATED_LOCATIONS: Location[] = [
   {
     state_fips_code: '00',
     full_fips_code: '00002',
-    state: 'Native American Majority Population',
+    state: 'Native American Majority Counties',
     population: 314704,
-    state_code: 'NAMP',
+    state_code: 'NAMC',
   },
 ];
 

@@ -63,8 +63,8 @@ const IndigenousDataCheckbox = (props: {
         </strong>
         <br />
         Created on Indigenous Peoples’ Day, this feature allows you to compare
-        all counties that are “Native American majority populations“ (NAMP) to
-        the entire USA for two metrics: Cases and Deaths. Learn more about{' '}
+        all counties that are “Native American majority counties“ (NAMC) to the
+        entire USA for two metrics: Cases and Deaths. Learn more about{' '}
         <span onClick={() => setShowModal(true)}>our methodology</span> or view{' '}
         <ExternalLink href="/">our observations</ExternalLink>.
       </CopyContainer>
