@@ -98,8 +98,6 @@ const Explore: React.FunctionComponent<{
   initialFipsList: string[];
   initialChartIndigenousPopulations?: boolean;
   title?: string;
-  setChartIndigenous?: React.Dispatch<React.SetStateAction<boolean>>;
-  chartIndigenous?: boolean;
 }> = ({
   initialFipsList,
   initialChartIndigenousPopulations,
