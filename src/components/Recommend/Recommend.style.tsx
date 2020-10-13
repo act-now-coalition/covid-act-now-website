@@ -129,7 +129,6 @@ export const FooterHalf = styled.div`
   }
 `;
 
-//TODO (chelsi)-make button and not div
 export const FooterLink = styled(LinkButton)`
   ${FooterLinkStyles}
   white-space: nowrap;
