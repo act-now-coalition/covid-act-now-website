@@ -28,7 +28,7 @@ export const Container = styled.div`
  how tall the iFrame is at each screen size
  */
 export const EmbedWrapper = styled.div`
-  height: 840px;
+  height: 880px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -36,7 +36,7 @@ export const EmbedWrapper = styled.div`
   padding: 0 1.5rem;
 
   @media (min-width: 600px) {
-    height: 800px;
+    height: 840px;
   }
 
   @media (min-width: ${mobileBreakpoint}) {

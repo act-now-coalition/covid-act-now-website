@@ -22,7 +22,7 @@ import {
 } from './HomePage.style';
 import { SelectorWrapper } from 'components/Header/HomePageHeader.style';
 import CompareMain from 'components/Compare/CompareMain';
-import { DonationBanner } from 'components/Banner/DonationBanner';
+import { FeatureBanner } from 'components/Banner';
 import Explore from 'components/Explore';
 import { getRandomStateFipsList } from './utils';
 
@@ -65,6 +65,21 @@ export default function HomePage() {
 
   const [initialFipsList] = useState(getRandomStateFipsList());
 
+  const exploreSectionRef = useRef(null);
+
+  // TODO (Chelsi): stop repeating this so much. Put somewhere central.
+  const scrollToExploreSection = () => {
+    return setTimeout(() => {
+      if (exploreSectionRef.current) {
+        window.scrollTo({
+          left: 0,
+          top: exploreSectionRef.current.offsetTop - 75,
+          behavior: 'smooth',
+        });
+      }
+    }, 250);
+  };
+
   return (
     <>
       <EnsureSharingIdInUrl />
@@ -74,7 +89,7 @@ export default function HomePage() {
         pageDescription="Real-time modeling and metrics to understand where we stand against COVID. 50 states. 3,000+ counties. Click the map to dive in"
       />
       <BannerContainer>
-        <DonationBanner />
+        <FeatureBanner scrollTo={scrollToExploreSection} />
       </BannerContainer>
       <HomePageHeader
         indicatorsLinkOnClick={() => scrollTo(indicatorsRef.current)}
@@ -94,10 +109,11 @@ export default function HomePage() {
             <Map hideLegend />
             {isMobile && <HomePageThermometer />}
             <CompareMain locationsViewable={8} isHomepage />
-            <Section>
+            <Section ref={exploreSectionRef}>
               <Explore
                 title="Cases, Deaths and Hospitalizations"
                 initialFipsList={initialFipsList}
+                initialChartIndigenousPopulations={true}
               />
             </Section>
             <SectionWrapper ref={indicatorsRef}>
