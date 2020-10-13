@@ -40,6 +40,7 @@ export const CopyContainer = styled.div`
 
   ${NewIndicatorTag} {
     color: white;
+    cursor: default;
   }
 `;
 
