@@ -180,11 +180,15 @@ export const summaryByLevel = {
   [Level.HIGH]: 'is at risk of an outbreak',
   [Level.CRITICAL]:
     'is either actively experiencing an outbreak or is at extreme risk',
-  [Level.UNKNOWN]: '', // ** What do we want here? **
 };
 
 export function getShareQuote(locationName: string, alarmLevel: Level): string {
-  return `According to @CovidActNow, ${getAbbreviatedCounty(locationName)} ${
-    summaryByLevel[alarmLevel]
-  }. These are White House Coronavirus Task Force’s and Harvard Global Health Institute’s official recommendations:`;
+  const locationNameWithAbbreviation = getAbbreviatedCounty(locationName);
+
+  const unknownShareQuote = `These are White House Coronavirus Task Force’s and Harvard Global Health Institute’s official COVID recommendations for ${locationNameWithAbbreviation}:`;
+
+  if (alarmLevel === Level.UNKNOWN) {
+    return unknownShareQuote;
+  }
+  return `According to @CovidActNow, ${locationNameWithAbbreviation} ${summaryByLevel[alarmLevel]}. These are White House Coronavirus Task Force’s and Harvard Global Health Institute’s official recommendations:`;
 }
