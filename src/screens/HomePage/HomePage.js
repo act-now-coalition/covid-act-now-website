@@ -22,7 +22,7 @@ import {
 } from './HomePage.style';
 import { SelectorWrapper } from 'components/Header/HomePageHeader.style';
 import CompareMain from 'components/Compare/CompareMain';
-import { DonationBanner } from 'components/Banner/DonationBanner';
+import { FeatureBanner } from 'components/Banner';
 import Explore from 'components/Explore';
 import { getRandomStateFipsList } from './utils';
 
@@ -74,7 +74,7 @@ export default function HomePage() {
         pageDescription="Real-time modeling and metrics to understand where we stand against COVID. 50 states. 3,000+ counties. Click the map to dive in"
       />
       <BannerContainer>
-        <DonationBanner />
+        <FeatureBanner />
       </BannerContainer>
       <HomePageHeader
         indicatorsLinkOnClick={() => scrollTo(indicatorsRef.current)}
