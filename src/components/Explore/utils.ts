@@ -14,7 +14,7 @@ import {
 import { color } from 'd3-color';
 import { schemeCategory10 } from 'd3-scale-chromatic';
 import { fetchProjections } from 'common/utils/model';
-import { Column, Projection, DatasetId } from 'common/models/Projection';
+import { Column, DatasetId } from 'common/models/Projection';
 import {
   findLocationForFips,
   getLocationNames as getAllLocations,
@@ -25,10 +25,19 @@ import {
   isCounty,
   belongsToState,
   getRelativeUrlForFips,
+  AGGREGATED_LOCATIONS,
 } from 'common/locations';
 import { share_image_url } from 'assets/data/share_images_url.json';
 import { SeriesType, Series } from './interfaces';
 import { getAbbreviatedCounty } from '../../common/utils/compare';
+import AggregationsJSON from 'assets/data/aggregations.json';
+
+/** Common interface to represent real Projection objects as well as aggregated projections . */
+interface ProjectionLike {
+  getDataset(datasetId: DatasetId): Column[];
+  fips: string;
+  totalPopulation: number;
+}
 
 export function getMaxBy<T>(
   seriesList: Series[],
@@ -213,7 +222,7 @@ function cleanSeries(data: Column[]) {
  */
 export function getAllSeriesForMetric(
   metric: ExploreMetric,
-  projection: Projection,
+  projection: ProjectionLike,
 ): Series[] {
   const metricDefinition = exploreMetricData[metric];
   return metricDefinition.seriesList.map(item => ({
@@ -236,7 +245,7 @@ function scalePer100k(data: Column[], population: number) {
  */
 function getAveragedSeriesForMetric(
   metric: ExploreMetric,
-  projection: Projection,
+  projection: ProjectionLike,
   color: string,
   normalizeData: boolean,
 ): Series {
@@ -289,6 +298,10 @@ function sanitizeLocationName(name: string) {
 
 function getLocationFileName(location: Location) {
   const fipsCode = location.full_fips_code || location.state_fips_code;
+  if (fipsCode in AGGREGATED_LOCATIONS) {
+    // TODO(michael): Fix any.
+    return sanitizeLocationName((AGGREGATED_LOCATIONS as any)[fipsCode].state);
+  }
   return sanitizeLocationName(getLocationNameForFips(fipsCode));
 }
 
@@ -386,10 +399,14 @@ function truncateCountyName(countyName: string) {
 }
 
 function getShortLocationLabel(location: Location) {
-  const { county: countyName, state_code } = location;
-  return countyName
-    ? `${truncateCountyName(getAbbreviatedCounty(countyName))}`
-    : state_code.toUpperCase();
+  if (location.full_fips_code && location.full_fips_code.startsWith('00')) {
+    return location.state_code;
+  } else {
+    const { county: countyName, state_code } = location;
+    return countyName
+      ? `${truncateCountyName(getAbbreviatedCounty(countyName))}`
+      : state_code.toUpperCase();
+  }
 }
 
 export function getLocationNames(
@@ -433,9 +450,10 @@ export function getAutocompleteLocations(locationFips: string) {
     belongsToState(county, currentLocation.state_fips_code),
   );
 
+  // TODO(michael): Where should aggregations go in the list?
   return isStateFips(locationFips)
-    ? [...states, ...stateCounties, ...otherCounties]
-    : [...stateCounties, ...states, ...otherCounties];
+    ? [...AGGREGATED_LOCATIONS, ...states, ...stateCounties, ...otherCounties]
+    : [...AGGREGATED_LOCATIONS, ...stateCounties, ...states, ...otherCounties];
 }
 
 /**
@@ -447,25 +465,67 @@ const SERIES_COLORS = schemeCategory10;
 const getCountyForLocation = (location: Location) =>
   isCounty(location) ? location : undefined;
 
+class AggregatedProjection implements ProjectionLike {
+  totalPopulation: number;
+
+  // TODO(michael): Fix any.
+  constructor(readonly fips: string, private aggregation: any) {
+    this.totalPopulation = aggregation.totalPopulation;
+  }
+
+  getDataset(datasetId: DatasetId): Column[] {
+    if (this.aggregation[datasetId]) {
+      let data: Column[] = [];
+      for (let i = 0; i < this.aggregation.dates.length; i++) {
+        data.push({
+          x: this.aggregation.dates[i],
+          y: this.aggregation[datasetId][i],
+        });
+      }
+      return data;
+    } else {
+      return [];
+    }
+  }
+}
+
+async function getProjectionForLocation(
+  location: Location,
+): Promise<ProjectionLike> {
+  const fullFips = location.full_fips_code;
+  if (fullFips && fullFips in AggregationsJSON) {
+    // This is a special aggregate location.
+    // TODO(michael): Fix any.
+    console.log('returning aggregated data.');
+    return new AggregatedProjection(
+      fullFips,
+      (AggregationsJSON as any)[fullFips],
+    );
+  } else {
+    const projections = await fetchProjections(
+      location.state_code,
+      getCountyForLocation(location),
+    );
+    return projections.primary;
+  }
+}
+
 export function getChartSeries(
   metric: ExploreMetric,
   locations: Location[],
   normalizeData: boolean,
 ): Promise<Series[]> {
   if (locations.length === 1) {
-    return fetchProjections(
-      locations[0].state_code,
-      getCountyForLocation(locations[0]),
-    ).then(projections => getAllSeriesForMetric(metric, projections.primary));
+    return getProjectionForLocation(locations[0]).then(projection =>
+      getAllSeriesForMetric(metric, projection),
+    );
   } else {
     return Promise.all(
       locations.map(async (location, i) => {
-        const { state_code } = location;
-        const county = getCountyForLocation(location);
-        const projections = await fetchProjections(state_code, county);
+        const projection = await getProjectionForLocation(location);
         return getAveragedSeriesForMetric(
           metric,
-          projections.primary,
+          projection,
           SERIES_COLORS[i % SERIES_COLORS.length],
           normalizeData,
         );

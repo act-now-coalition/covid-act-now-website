@@ -16,6 +16,24 @@ interface AdjacencyData {
 
 const ADJACENT_COUNTIES: AdjacencyData = countyAdjacencyMsa.counties;
 
+/** Aggregations supported by the Explore chart. */
+export const AGGREGATED_LOCATIONS: Location[] = [
+  {
+    state_fips_code: '00',
+    full_fips_code: '00001',
+    state: 'USA',
+    population: 331486822,
+    state_code: 'USA',
+  },
+  {
+    state_fips_code: '00',
+    full_fips_code: '00002',
+    state: 'Native American Majority Counties',
+    population: 314704,
+    state_code: 'NAMC',
+  },
+];
+
 interface CollegeData {
   fips: string;
   name: string;
@@ -128,6 +146,11 @@ export function findStateFipsCode(stateCode: string): string {
 }
 
 export function getLocationNameForFips(fips: string): string {
+  if (fips.startsWith('00')) {
+    return (
+      AGGREGATED_LOCATIONS.find(l => l.full_fips_code === fips)?.state || ''
+    );
+  }
   if (isStateFips(fips)) {
     return findStateByFips(fips).state;
   } else {
@@ -175,7 +198,11 @@ export function getCountyMsaCode(fips: string): string | undefined {
 }
 
 export function findLocationForFips(fips: string): Location {
-  return isStateFips(fips) ? findStateByFips(fips) : findCountyByFips(fips);
+  return fips.startsWith('00')
+    ? AGGREGATED_LOCATIONS.find(l => l.full_fips_code === fips)
+    : isStateFips(fips)
+    ? findStateByFips(fips)
+    : findCountyByFips(fips);
 }
 
 export function getColleges(fips: string): CollegeData[] {
