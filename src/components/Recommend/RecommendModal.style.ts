@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import MuiTab from '@material-ui/core/Tab';
 import MuiTabs from '@material-ui/core/Tabs';
-import { MarkdownBody } from 'components/Markdown';
+import { MarkdownContent } from 'components/Markdown';
 import theme from 'assets/theme';
 import { COLOR_MAP } from 'common/colors';
 import { COLORS } from 'common';
@@ -39,7 +39,7 @@ export const SourceTitle = styled.h2`
   text-align: left;
 `;
 
-export const SourceIntro = styled(MarkdownBody)`
+export const SourceIntro = styled(MarkdownContent)`
   font-family: Roboto;
   font-size: 15px;
   font-style: normal;
@@ -92,7 +92,7 @@ export const Tabs = styled(MuiTabs)`
   }
 `;
 
-export const LevelDescription = styled(MarkdownBody)`
+export const LevelDescription = styled(MarkdownContent)`
   padding: ${theme.spacing(3)}px;
   height: 450px;
   overflow-y: auto;
