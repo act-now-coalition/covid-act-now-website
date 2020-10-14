@@ -19,10 +19,6 @@ export const ButtonContainer = styled(Grid).attrs(props => ({
   text-align: right;
 `;
 
-export const TitleContainer = styled(Grid)<{ $fullScreen: boolean }>`
-  padding-left: ${({ $fullScreen }) => ($fullScreen ? theme.spacing(2) : 0)}px;
-`;
-
 export const StyledPaper = styled(Paper)`
   max-height: 900px;
   height: 95%;

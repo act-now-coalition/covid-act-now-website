@@ -69,35 +69,39 @@ const RecommendModalBody: React.FC = () => {
   return (
     <React.Fragment>
       <Hidden smUp>
-        {sources.map((source, i) => (
-          <p key={`link-${i}`}>
-            <Style.ContentLink href={`#${source.linkLabel}`}>
-              {source.sourceName}
-            </Style.ContentLink>
-          </p>
-        ))}
+        <Style.ModalContents>
+          {sources.map((source, i) => (
+            <Style.ContentItem key={`link-${i}`}>
+              <Style.ContentLink href={`#${source.linkLabel}`}>
+                {source.sourceName}
+              </Style.ContentLink>
+            </Style.ContentItem>
+          ))}
+        </Style.ModalContents>
       </Hidden>
-      {sources.map((source, i) => (
-        <Style.SourceContainer key={`source-${i}`}>
-          <Grid item sm={6} xs={12} key="intro">
-            <Style.SourceTitle id={`${source.linkLabel}`}>
-              {source.sourceName}
-            </Style.SourceTitle>
-            <Style.SourceIntro
-              source={source.description}
-              linkTarget="_blank"
-            />
-          </Grid>
-          <Grid item sm={6} xs={12} key="levels">
-            <SourceTabs
-              levels={source.levels}
-              onSelectLevel={(level: SourceLevel) =>
-                onSelectLevel(level, source.trackLabel)
-              }
-            />
-          </Grid>
-        </Style.SourceContainer>
-      ))}
+      <div>
+        {sources.map((source, i) => (
+          <Style.SourceContainer key={`source-${i}`}>
+            <Grid item sm={6} xs={12} key="intro">
+              <Style.SourceTitle id={`${source.linkLabel}`}>
+                {source.sourceName}
+              </Style.SourceTitle>
+              <Style.SourceIntro
+                source={source.description}
+                linkTarget="_blank"
+              />
+            </Grid>
+            <Grid item sm={6} xs={12} key="levels">
+              <SourceTabs
+                levels={source.levels}
+                onSelectLevel={(level: SourceLevel) =>
+                  onSelectLevel(level, source.trackLabel)
+                }
+              />
+            </Grid>
+          </Style.SourceContainer>
+        ))}
+      </div>
     </React.Fragment>
   );
 };

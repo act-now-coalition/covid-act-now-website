@@ -34,15 +34,9 @@ const DialogTitle: React.FC<DialogTitleProps> = props => {
           <ButtonCloseBox onClickClose={onClickClose} />
         </Hidden>
         {renderHeader && (
-          <Style.TitleContainer
-            key="header-content"
-            $fullScreen={fullScreen}
-            item
-            sm={10}
-            xs={12}
-          >
+          <Grid key="header-content" item sm={10} xs={12}>
             {renderHeader()}
-          </Style.TitleContainer>
+          </Grid>
         )}
         <Hidden key="close-button-desktop" xsDown>
           <ButtonCloseBox onClickClose={onClickClose} />

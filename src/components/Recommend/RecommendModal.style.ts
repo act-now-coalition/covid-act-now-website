@@ -16,6 +16,7 @@ export const Title = styled.h1`
   letter-spacing: 0em;
   text-align: left;
   margin-bottom: ${theme.spacing(1) / 2}px;
+  padding-left: ${theme.spacing(2)}px;
 `;
 
 export const Subtitle = styled.div`
@@ -117,4 +118,17 @@ export const ContentLink = styled.a`
   letter-spacing: 0em;
   text-align: left;
   color: #00bfea;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+export const ModalContents = styled.div`
+  border-bottom: solid 1px #f2f2f2;
+  padding-bottom: ${theme.spacing(2)}px;
+`;
+
+export const ContentItem = styled.div`
+  padding: ${theme.spacing(1) / 2}px 0;
 `;
