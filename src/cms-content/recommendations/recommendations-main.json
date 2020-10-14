@@ -47,14 +47,14 @@
       "level": "RED",
       "id": "MASKS_RED",
       "source": "FED",
-      "body": "**Masks** should be worn by everyone outside their home, and be required for all workers in retail, personal services, assisted living."
+      "body": "**Masks** should be mandated and worn by everyone outside their home."
     },
     {
       "category": "MASKS",
       "level": "YELLOW",
       "id": "MASKS_YELLOW",
       "source": "FED",
-      "body": "**Masks** should be worn by everyone outside their home, and be required for all workers in retail, personal services, assisted living."
+      "body": "**Masks** should be mandated in all indoor spaces and worn by everyone outside their home."
     },
     {
       "body": "**Gatherings** should be limited to 10 people and physical distance should be maintained.",
@@ -64,7 +64,7 @@
       "id": "GATHERINGS_RED"
     },
     {
-      "body": "**Gatherings** should be limited to 25 people and physical distance should be maintained.",
+      "body": "**Gatherings** should be limited to 25 people and physical distance should be maintained. (CDC also recommends [gatherings be outdoors](https://www.cdc.gov/coronavirus/2019-ncov/daily-life-coping/deciding-to-go-out.html).)",
       "category": "GATHERINGS",
       "source": "FED",
       "level": "YELLOW",
@@ -78,7 +78,7 @@
       "body": "**Schools:** Enable remote learning for all students. All government levels should invest in remote learning."
     },
     {
-      "body": "**Schools:** If sufficient [pandemic resilient learning space](https://globalepidemics.org/wp-content/uploads/2020/07/pandemic_resilient_schools_briefing_72020.pdf) exists, phase re-opening: 1st priority: preK-5 and special education services for preK-8. 2nd priority: grades 6-8 and special education services for grades 9-12.",
+      "body": "**Schools:** If [safe learning spaces](https://globalepidemics.org/wp-content/uploads/2020/07/pandemic_resilient_schools_briefing_72020.pdf) exist, phase re-opening: 1st priority: preK-5 and special education services for preK-8. 2nd priority: grades 6-8 and special education services for grades 9-12.",
       "source": "HARVARD",
       "category": "SCHOOLS",
       "level": "ORANGE",
@@ -89,10 +89,10 @@
       "category": "SCHOOLS",
       "level": "YELLOW",
       "id": "SCHOOLS_YELLOW",
-      "body": "**Schools:** If sufficient [pandemic resilient learning space](https://globalepidemics.org/wp-content/uploads/2020/07/pandemic_resilient_schools_briefing_72020.pdf) exists, phase re-opening: 1st priority: preK-5 and special education services for preK-8. 2nd priority: grades 6-8 and special education services for grades 9-12. 3rd priority: grades 9-12 on a hybrid schedule."
+      "body": "**Schools:** If [safe learning spaces](https://globalepidemics.org/wp-content/uploads/2020/07/pandemic_resilient_schools_briefing_72020.pdf) exist, phase re-opening: 1st priority: preK-5 and special education services for preK-8. 2nd priority: grades 6-8 and special education services for grades 9-12. 3rd priority: grades 9-12 on a hybrid schedule."
     },
     {
-      "body": "**Schools:** In person education is safe only if conditions for [pandemic resilient learning spaces](https://globalepidemics.org/wp-content/uploads/2020/07/pandemic_resilient_schools_briefing_72020.pdf) are in place.",
+      "body": "**Schools:** In person education is appropriate only if conditions for [safe learning spaces](https://globalepidemics.org/wp-content/uploads/2020/07/pandemic_resilient_schools_briefing_72020.pdf) are in place.",
       "source": "HARVARD",
       "category": "SCHOOLS",
       "level": "GREEN",
@@ -106,7 +106,7 @@
       "id": "MASKS_GREEN"
     }
   ],
-  "header": "Recommended Actions",
+  "header": "Recommended actions",
   "footer": {
     "feedbackButtonLabel": "Leave feedback",
     "modalButtonLabel": "Sources & Methodology",
