@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
-import { useMediaQuery } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
+import { Hidden } from '@material-ui/core';
 import {
   Wrapper,
   HeaderCopy,
@@ -51,14 +50,9 @@ const Footer: React.FC<{
   onClickOpenModal: () => void;
   shareUrl: string;
   shareQuote: string;
-}> = ({ onClickOpenModal, shareUrl, shareQuote }) => {
+  feedbackFormUrl: string;
+}> = ({ onClickOpenModal, shareUrl, shareQuote, feedbackFormUrl }) => {
   const trackLabel = 'recommendations';
-
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
-
-  const feedbackFormLink =
-    'https://can386399.typeform.com/to/WSPYSGPe#source=can&id=xxxxx&fips=xxxxx';
 
   return (
     <FooterWrapper>
@@ -66,11 +60,11 @@ const Footer: React.FC<{
         <FooterLink onClick={onClickOpenModal}>
           {footer.modalButtonLabel}
         </FooterLink>
-        {!isMobile && (
-          <ExternalLink href={feedbackFormLink}>
+        <Hidden xsDown>
+          <ExternalLink href={feedbackFormUrl}>
             <FooterLink>{footer.feedbackButtonLabel}</FooterLink>
           </ExternalLink>
-        )}
+        </Hidden>
       </FooterHalf>
       <FooterHalf>
         <SmallShareButtons
@@ -92,6 +86,7 @@ const Recommend = (props: {
   shareUrl: string;
   shareQuote: string;
   recommendationsRef: React.RefObject<HTMLDivElement>;
+  feedbackFormUrl: string;
 }) => {
   const {
     introCopy,
@@ -100,6 +95,7 @@ const Recommend = (props: {
     shareUrl,
     shareQuote,
     recommendationsRef,
+    feedbackFormUrl,
   } = props;
   const [isDialogOpen, openDialog, closeDialog] = useDialog(false);
 
@@ -138,6 +134,7 @@ const Recommend = (props: {
         onClickOpenModal={openModalRecommendations}
         shareUrl={shareUrl}
         shareQuote={shareQuote}
+        feedbackFormUrl={feedbackFormUrl}
       />
       <Dialog
         open={isDialogOpen}
