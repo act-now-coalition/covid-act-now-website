@@ -14,6 +14,19 @@ export const Title = styled.h1`
   line-height: 28px;
   letter-spacing: 0em;
   text-align: left;
+  margin-bottom: ${theme.spacing(1) / 2}px;
+`;
+
+export const Subtitle = styled.div`
+  font-family: Roboto;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #828282;
+  text-transform: uppercase;
 `;
 
 export const SourceTitle = styled.h2`

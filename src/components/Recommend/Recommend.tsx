@@ -21,6 +21,7 @@ import RecommendModal from './RecommendModal';
 import Dialog, { useDialog } from 'components/Dialog';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import { LinkButton } from 'components/Button';
+import * as ModalStyle from './RecommendModal.style';
 import ExternalLink from 'components/ExternalLink';
 
 const { header, footer } = mainContent;
@@ -88,6 +89,10 @@ const Footer: React.FC<{
   );
 };
 
+const renderModalTitle = () => (
+  <ModalStyle.Title>{modalContent.header}</ModalStyle.Title>
+);
+
 //TODO (chelsi): add in correct icon info when added to cms
 const Recommend = (props: {
   introCopy: string;
@@ -151,6 +156,7 @@ const Recommend = (props: {
         closeDialog={closeDialog}
         fullWidth
         maxWidth="md"
+        renderHeader={renderModalTitle}
       >
         <RecommendModal />
       </Dialog>

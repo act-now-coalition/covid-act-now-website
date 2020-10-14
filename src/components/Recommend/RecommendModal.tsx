@@ -58,7 +58,6 @@ const RecommendModalBody: React.FC = () => {
 
   return (
     <React.Fragment>
-      <Style.Title>{modalContent.header}</Style.Title>
       <Grid container spacing={2}>
         <Grid key="fed" item sm={6} xs={12}>
           <Style.SourceTitle>{federalTaskForce.sourceName}</Style.SourceTitle>
