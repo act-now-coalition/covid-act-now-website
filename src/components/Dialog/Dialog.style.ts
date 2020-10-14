@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import MuiIconButton from '@material-ui/core/IconButton';
 import theme from 'assets/theme';
 
 const getPadding = (fullScreen: boolean) =>
@@ -26,4 +27,13 @@ export const StyledPaper = styled(Paper)`
   max-height: 900px;
   height: 95%;
   max-width: 860px;
+`;
+
+export const IconButton = styled(MuiIconButton).attrs(props => ({
+  disableFocusRipple: true,
+  disableRipple: true,
+}))`
+  &:focus {
+    outline: rgb(0, 95, 204) 1px auto;
+  }
 `;

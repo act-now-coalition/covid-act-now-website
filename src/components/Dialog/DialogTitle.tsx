@@ -1,6 +1,5 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Hidden from '@material-ui/core/Hidden';
 import { DialogTitleProps as MuiDialogTitleProps } from '@material-ui/core/DialogTitle';
@@ -16,14 +15,9 @@ const ButtonCloseBox: React.FC<{ onClickClose: () => void }> = ({
   onClickClose,
 }) => (
   <Style.ButtonContainer sm={2} xs={12}>
-    <IconButton
-      aria-label="close"
-      onClick={onClickClose}
-      disableFocusRipple
-      disableRipple
-    >
+    <Style.IconButton aria-label="close" onClick={onClickClose}>
       <CloseIcon />
-    </IconButton>
+    </Style.IconButton>
   </Style.ButtonContainer>
 );
 
