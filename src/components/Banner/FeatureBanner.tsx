@@ -16,7 +16,7 @@ const Buttons = (props: { scrollTo: any }) => {
           trackEvent(
             EventCategory.INDIGENOUS_PEOPLES_DAY,
             EventAction.CLICK,
-            'View chart',
+            'Banner: View chart',
           );
           props.scrollTo();
         }}
