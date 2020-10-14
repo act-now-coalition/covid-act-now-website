@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { FeatureBannerButton } from './Banner.style';
 import * as Styles from './Banner.style';
 import ExternalLink from 'components/ExternalLink';
+import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 
 const Buttons = (props: { scrollTo: any }) => {
   return (
@@ -11,11 +12,18 @@ const Buttons = (props: { scrollTo: any }) => {
         color="primary"
         disableRipple
         disableFocusRipple
-        onClick={() => props.scrollTo()}
+        onClick={() => {
+          trackEvent(
+            EventCategory.INDIGENOUS_PEOPLES_DAY,
+            EventAction.CLICK,
+            'View chart',
+          );
+          props.scrollTo();
+        }}
       >
         View chart
       </FeatureBannerButton>
-      <ExternalLink href="https://blog.covidactnow.org/covid-native-american-counties/">
+      <ExternalLink href="https://blog.covidactnow.org/covid-native-american-counties">
         <FeatureBannerButton
           variant="contained"
           color="primary"
