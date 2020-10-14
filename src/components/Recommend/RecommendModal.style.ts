@@ -34,6 +34,9 @@ export const SourceContainer = styled(Grid).attrs(props => ({
   container: true,
 }))`
   margin-top: ${2 * theme.spacing(4)}px;
+  &:first-child {
+    margin-top: ${theme.spacing(2)}px;
+  }
 `;
 
 export const SourceTitle = styled.h2`
