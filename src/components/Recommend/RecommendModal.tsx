@@ -61,7 +61,10 @@ const RecommendModalBody: React.FC = () => {
       <Grid container spacing={2}>
         <Grid key="fed" item sm={6} xs={12}>
           <Style.SourceTitle>{federalTaskForce.sourceName}</Style.SourceTitle>
-          <Style.SourceIntro source={federalTaskForce.description} />
+          <Style.SourceIntro
+            source={federalTaskForce.description}
+            linkTarget="_blank"
+          />
           <SourceTabs
             levels={fedLevels}
             onSelectLevel={(level: SourceLevel) =>
@@ -71,7 +74,7 @@ const RecommendModalBody: React.FC = () => {
         </Grid>
         <Grid key="harvard" item sm={6} xs={12}>
           <h3>{harvard.sourceName}</h3>
-          <Style.SourceIntro source={harvard.description} />
+          <Style.SourceIntro source={harvard.description} linkTarget="_blank" />
           <SourceTabs
             levels={harvardLevels}
             onSelectLevel={(level: SourceLevel) =>

@@ -13,13 +13,29 @@ import { ICUHeadroomInfo, calcICUHeadroom } from './ICUHeadroom';
 import { lastValue } from './utils';
 import { getStateName } from 'common/locations';
 
+/** Stores a list of FIPS or FIPS regex patterns to disable. */
+class DisabledFips {
+  constructor(private fipsPatterns: (string | RegExp)[]) {}
+
+  includes(fips: string): boolean {
+    return _.some(this.fipsPatterns, pattern => {
+      if (typeof pattern === 'string') {
+        return pattern === fips;
+      } else {
+        return pattern.test(fips);
+      }
+    });
+  }
+}
+
 const DISABLED_CASE_DENSITY: string[] = [
-  '48029', // https://trello.com/c/ulCnCcif/
+  '48121', // https://trello.com/c/tOxq8MG2/506-outlier-in-denton-county-tx
+  '29095', // https://trello.com/c/xAwGpc6I/503-outlier-in-jackson-county-mo
 ];
 
-const DISABLED_INFECTION_RATE: string[] = [];
+const DISABLED_INFECTION_RATE = new DisabledFips([]);
 
-const DISABLED_TEST_POSITIVITY: string[] = [
+const DISABLED_TEST_POSITIVITY = new DisabledFips([
   '25001',
   '25003',
   '25005',
@@ -38,11 +54,13 @@ const DISABLED_TEST_POSITIVITY: string[] = [
   '48215',
   '48201', // https://trello.com/c/tgxn6Wjp/
   '38', // TODO(https://trello.com/c/6ZPv7k9T/) Reenable North Dakota once we improve calculation.
-];
 
-const DISABLED_ICU: string[] = [];
+  /^29...$/, // TODO(https://trello.com/c/9BiL64Y6/493): Missouri data is always 100%. :|
+]);
 
-const DISABLED_CONTACT_TRACING: string[] = [];
+const DISABLED_ICU = new DisabledFips([]);
+
+const DISABLED_CONTACT_TRACING = new DisabledFips([]);
 
 /**
  * We truncate (or in the case of charts, switch to a dashed line) the last

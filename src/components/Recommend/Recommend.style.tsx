@@ -120,6 +120,10 @@ export const FooterHalf = styled.div`
     margin-top: 1rem;
   }
 
+  a {
+    text-decoration: none;
+  }
+
   @media (min-width: 600px) {
     align-items: flex-start;
 
@@ -133,8 +137,10 @@ export const FooterLink = styled(LinkButton)`
   ${FooterLinkStyles}
   white-space: nowrap;
 
-  &:last-child {
-    margin-left: 1.5rem;
+  @media (min-width: 600px) {
+    &:last-child {
+      margin-left: 1.5rem;
+    }
   }
 `;
 
