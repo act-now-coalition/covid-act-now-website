@@ -81,4 +81,6 @@ export const Tabs = styled(MuiTabs)`
 
 export const LevelDescription = styled(MarkdownBody)`
   padding: ${theme.spacing(3)}px;
+  height: 450px;
+  overflow-y: auto;
 `;

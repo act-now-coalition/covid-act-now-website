@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
+import { COLOR_MAP } from 'common/colors';
 
 /**
  * Button that looks like a link.
@@ -25,5 +26,11 @@ export const LinkButton = styled(Button).attrs(props => ({
 
   &:focus {
     outline: rgb(0, 95, 204) 1px auto;
+  }
+
+  &:hover {
+    background-color: transparent;
+    text-decoration: underline;
+    color: ${COLOR_MAP.BLUE};
   }
 `;

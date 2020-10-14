@@ -50,7 +50,7 @@ const RecommendTabs: React.FC<{
           />
         ))}
       </Style.Tabs>
-      <Style.LevelDescription source={currentLevel.body} />
+      <Style.LevelDescription source={currentLevel.body} linkTarget="_blank" />
     </Style.LevelContainer>
   );
 };
