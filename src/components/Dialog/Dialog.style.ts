@@ -14,7 +14,6 @@ export const DialogTitle = styled(MuiDialogTitle)<{ $fullScreen: boolean }>`
 `;
 
 export const ButtonContainer = styled(Grid).attrs(props => ({
-  justify: 'flex-end',
   item: true,
 }))`
   text-align: right;
