@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import MuiTab from '@material-ui/core/Tab';
 import MuiTabs from '@material-ui/core/Tabs';
 import { MarkdownBody } from 'components/Markdown';
+import Grid from '@material-ui/core/Grid';
 import theme from 'assets/theme';
 import { COLOR_MAP } from 'common/colors';
 import { COLORS } from 'common';
@@ -27,6 +28,12 @@ export const Subtitle = styled.div`
   text-align: left;
   color: #828282;
   text-transform: uppercase;
+`;
+
+export const SourceContainer = styled(Grid).attrs(props => ({
+  container: true,
+}))`
+  margin-top: ${2 * theme.spacing(4)}px;
 `;
 
 export const SourceTitle = styled.h2`
@@ -94,6 +101,17 @@ export const Tabs = styled(MuiTabs)`
 
 export const LevelDescription = styled(MarkdownBody)`
   padding: ${theme.spacing(3)}px;
-  height: 450px;
+  height: 260px;
   overflow-y: auto;
+`;
+
+export const ContentLink = styled.a`
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #00bfea;
 `;
