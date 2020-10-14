@@ -120,6 +120,8 @@ const ChartsHolder = (props: {
     alarmLevel,
   );
 
+  const showRecommendations = !props.county;
+
   // TODO(pablo): Create separate refs for signup and share
   return (
     <>
@@ -147,14 +149,16 @@ const ChartsHolder = (props: {
               stateId={props.stateId}
             />
             <MainContentInner>
-              <Recommend
-                introCopy={recommendationsIntro}
-                recommendations={recommendationsMainContent}
-                locationName={projection.locationName}
-                shareUrl={recommendsShareUrl}
-                shareQuote={recommendsShareQuote}
-                recommendationsRef={recommendationsRef}
-              />
+              {showRecommendations && (
+                <Recommend
+                  introCopy={recommendationsIntro}
+                  recommendations={recommendationsMainContent}
+                  locationName={projection.locationName}
+                  shareUrl={recommendsShareUrl}
+                  shareQuote={recommendsShareQuote}
+                  recommendationsRef={recommendationsRef}
+                />
+              )}
               {ALL_METRICS.map(metric => (
                 <ChartBlock
                   key={metric}

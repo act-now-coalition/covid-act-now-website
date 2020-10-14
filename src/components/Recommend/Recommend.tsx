@@ -1,4 +1,6 @@
 import React, { Fragment } from 'react';
+import { useMediaQuery } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
 import {
   Wrapper,
   HeaderCopy,
@@ -20,6 +22,7 @@ import RecommendModal from './RecommendModal';
 import Dialog, { useDialog } from 'components/Dialog';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import { LinkButton } from 'components/Button';
+import ExternalLink from 'components/ExternalLink';
 
 const { header, footer } = mainContent;
 const { federalTaskForce, harvard } = modalContent;
@@ -46,11 +49,16 @@ const Header = (props: {
 
 const Footer: React.FC<{
   onClickOpenModal: () => void;
-  onClickOpenFeedbackModal: () => void;
   shareUrl: string;
   shareQuote: string;
-}> = ({ onClickOpenModal, onClickOpenFeedbackModal, shareUrl, shareQuote }) => {
+}> = ({ onClickOpenModal, shareUrl, shareQuote }) => {
   const trackLabel = 'recommendations';
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+
+  const feedbackFormLink =
+    'https://can386399.typeform.com/to/WSPYSGPe#source=can&id=xxxxx&fips=xxxxx';
 
   return (
     <FooterWrapper>
@@ -58,9 +66,11 @@ const Footer: React.FC<{
         <FooterLink onClick={onClickOpenModal}>
           {footer.modalButtonLabel}
         </FooterLink>
-        <FooterLink onClick={onClickOpenFeedbackModal}>
-          {footer.feedbackButtonLabel}
-        </FooterLink>
+        {!isMobile && (
+          <ExternalLink href={feedbackFormLink}>
+            <FooterLink>{footer.feedbackButtonLabel}</FooterLink>
+          </ExternalLink>
+        )}
       </FooterHalf>
       <FooterHalf>
         <SmallShareButtons
@@ -92,11 +102,6 @@ const Recommend = (props: {
     recommendationsRef,
   } = props;
   const [isDialogOpen, openDialog, closeDialog] = useDialog(false);
-  const [
-    isFeedbackDialogOpen,
-    openFeedbackDialog,
-    closeFeedbackDialog,
-  ] = useDialog(false);
 
   const openModalRecommendations = () => {
     openDialog();
@@ -104,15 +109,6 @@ const Recommend = (props: {
       EventCategory.RECOMMENDATIONS,
       EventAction.OPEN_MODAL,
       'Methodology & Sources',
-    );
-  };
-
-  const openModalFeedback = () => {
-    openFeedbackDialog();
-    trackEvent(
-      EventCategory.RECOMMENDATIONS,
-      EventAction.OPEN_MODAL,
-      'Feedback Form',
     );
   };
 
@@ -140,7 +136,6 @@ const Recommend = (props: {
       </RecommendationsContainer>
       <Footer
         onClickOpenModal={openModalRecommendations}
-        onClickOpenFeedbackModal={openModalFeedback}
         shareUrl={shareUrl}
         shareQuote={shareQuote}
       />
@@ -151,15 +146,6 @@ const Recommend = (props: {
         maxWidth="md"
       >
         <RecommendModal />
-      </Dialog>
-      <Dialog
-        open={isFeedbackDialogOpen}
-        closeDialog={closeFeedbackDialog}
-        fullWidth
-        maxWidth="md"
-      >
-        {/* TODO: Add the embed form here */}
-        Feedback
       </Dialog>
     </Wrapper>
   );
