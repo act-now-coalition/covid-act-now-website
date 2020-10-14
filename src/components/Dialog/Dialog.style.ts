@@ -10,6 +10,7 @@ const getPadding = (fullScreen: boolean) =>
 
 export const DialogTitle = styled(MuiDialogTitle)<{ $fullScreen: boolean }>`
   padding: ${({ $fullScreen }) => getPadding($fullScreen)}px;
+  padding-left: ${theme.spacing(3)}px;
 `;
 
 export const ButtonContainer = styled(Grid).attrs(props => ({

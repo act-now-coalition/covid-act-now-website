@@ -16,7 +16,6 @@ export const Title = styled.h1`
   letter-spacing: 0em;
   text-align: left;
   margin-bottom: ${theme.spacing(1) / 2}px;
-  padding-left: ${theme.spacing(2)}px;
 `;
 
 export const Subtitle = styled.div`
