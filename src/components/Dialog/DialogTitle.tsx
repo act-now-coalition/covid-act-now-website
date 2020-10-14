@@ -15,7 +15,7 @@ const ButtonCloseBox: React.FC<{ onClickClose: () => void }> = ({
   onClickClose,
 }) => (
   <Style.ButtonContainer sm={2} xs={12}>
-    <Style.IconButton aria-label="close" onClick={onClickClose}>
+    <Style.IconButton aria-label="close" onClick={onClickClose} size="small">
       <CloseIcon />
     </Style.IconButton>
   </Style.ButtonContainer>

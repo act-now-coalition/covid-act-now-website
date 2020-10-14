@@ -90,7 +90,10 @@ const Footer: React.FC<{
 };
 
 const renderModalTitle = () => (
-  <ModalStyle.Title>{modalContent.header}</ModalStyle.Title>
+  <Fragment>
+    <ModalStyle.Title>{modalContent.header}</ModalStyle.Title>
+    <ModalStyle.Subtitle>for official recommendations</ModalStyle.Subtitle>
+  </Fragment>
 );
 
 //TODO (chelsi): add in correct icon info when added to cms
