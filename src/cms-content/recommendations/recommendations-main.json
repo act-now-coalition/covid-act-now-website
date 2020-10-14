@@ -29,7 +29,7 @@
       "id": "GYMS_YELLOW"
     },
     {
-      "body": "​​**Restaurants** should max at 25% capacity. Local governments should assist in expanding outdoor dining opportunities. Customers should use take-out or eat outdoors socially distanced.",
+      "body": "​​**Restaurants** should max at 25% capacity. Local governments must assist in expanding outdoor dining opportunities. Customers should use take-out or eat outdoors socially distanced.",
       "source": "FED",
       "category": "RESTAURANTS",
       "level": "RED",
@@ -40,7 +40,7 @@
       "id": "RESTAURANTS_YELLOW",
       "level": "YELLOW",
       "source": "FED",
-      "body": "**Restaurants** should create outdoor dining opportunities. Customers should use take-out, outdoor dining, or indoor dining when strict social distancing can be maintained."
+      "body": "**Restaurants** should create outdoor dining opportunities, with the assistance of local governments. Customers should use take-out, outdoor dining, or indoor dining when strict social distancing can be maintained."
     },
     {
       "category": "MASKS",
