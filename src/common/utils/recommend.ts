@@ -98,6 +98,18 @@ export function getHarvardLevel(projection: Projection): HarvardLevel {
   }
 }
 
+// Note (Chelsi)- might not be using this. Delete if so
+export function getModalCopyWithLevel(
+  projection: Projection,
+  locationName: string,
+) {
+  return `${locationName} falls within the Federal Task Force's ${getFedLevel(
+    projection,
+  )} level and Harvard Global Health Institute's ${getHarvardLevel(
+    projection,
+  )} level.`;
+}
+
 /**
  * The Fed Task Force document bases the risk levels on the total number of new
  * cases in a week per 100,000 population.
@@ -139,23 +151,23 @@ export function getDynamicIntroCopy(
 ): string {
   const hasPosTestRate = isNumber(metricValues[Metric.POSITIVE_TESTS]);
 
-  const blurb = `according to ${locationName}'s ${getMetricNameForCompare(
+  const blurb = `Based on ${locationName}'s ${getMetricNameForCompare(
     Metric.CASE_DENSITY,
   ).toLowerCase()} (${formatValue(
     Metric.CASE_DENSITY,
     metricValues[Metric.CASE_DENSITY],
     '',
-  )}) ${
+  )})${
     hasPosTestRate
-      ? `and ${getMetricNameForCompare(
+      ? ` and ${getMetricNameForCompare(
           Metric.POSITIVE_TESTS,
         ).toLowerCase()} (${formatValue(
           Metric.POSITIVE_TESTS,
           metricValues[Metric.POSITIVE_TESTS],
           '',
-        )}).`
+        )})`
       : ''
-  }`;
+  }, people in ${locationName} are advised to adhere to the following recommendations.`;
 
   return blurb;
 }
