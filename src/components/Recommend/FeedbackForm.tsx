@@ -20,7 +20,11 @@ const FeedbackForm: React.FC<{ typeformUrl: string }> = ({ typeformUrl }) => {
     }
   }, [typeformRef, typeformUrl]);
 
-  return <div ref={typeformRef} style={{ height: '100vh', width: '100%' }} />;
+  return (
+    <div>
+      <div ref={typeformRef} style={{ height: '100vh', width: '100%' }} />
+    </div>
+  );
 };
 
 export default FeedbackForm;

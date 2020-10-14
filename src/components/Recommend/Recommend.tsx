@@ -21,6 +21,7 @@ import Dialog, { useDialog } from 'components/Dialog';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import { LinkButton } from 'components/Button';
 import FeedbackForm from './FeedbackForm';
+import * as ModalStyle from './RecommendModal.style';
 
 const { header, footer } = mainContent;
 const { federalTaskForce, harvard } = modalContent;
@@ -74,6 +75,17 @@ const Footer: React.FC<{
     </FooterWrapper>
   );
 };
+
+const renderModalTitle = () => (
+  <ModalStyle.Title>{modalContent.header}</ModalStyle.Title>
+);
+
+const renderFeedbackTitle = () => (
+  <Fragment>
+    <ModalStyle.Title>Leave feedback</ModalStyle.Title>
+    <ModalStyle.Subtitle>For official recommendations</ModalStyle.Subtitle>
+  </Fragment>
+);
 
 //TODO (chelsi): add in correct icon info when added to cms
 const Recommend = (props: {
@@ -150,6 +162,7 @@ const Recommend = (props: {
         closeDialog={closeDialog}
         fullWidth
         maxWidth="md"
+        renderHeader={renderModalTitle}
       >
         <RecommendModal />
       </Dialog>
@@ -158,6 +171,7 @@ const Recommend = (props: {
         open={isFeedbackDialogOpen}
         fullWidth
         maxWidth="md"
+        renderHeader={renderFeedbackTitle}
       >
         <FeedbackForm typeformUrl="https://can386399.typeform.com/to/WSPYSGPe" />
       </Dialog>

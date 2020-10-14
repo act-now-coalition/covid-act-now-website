@@ -1,14 +1,26 @@
 import React from 'react';
-import MuiDialog, { DialogProps } from '@material-ui/core/Dialog';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
+import MuiDialog, {
+  DialogProps as MuiDialogProps,
+} from '@material-ui/core/Dialog';
 import LockBodyScroll from './LockBodyScroll';
+import MuiDialogContent from '@material-ui/core/DialogContent';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
 import * as Style from './Dialog.style';
+import DialogTitle from './DialogTitle';
 
 type CloseReason = 'backdropClick' | 'escapeKeyDown';
 
-const Dialog: React.FC<DialogProps & { closeDialog: () => void }> = props => {
-  const { children, onClose, closeDialog, ...otherProps } = props;
+export interface DialogProps extends MuiDialogProps {
+  closeDialog: () => void;
+  renderHeader?: () => React.ReactElement;
+}
+
+const Dialog: React.FC<DialogProps> = props => {
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const { renderHeader, children, onClose, closeDialog, ...otherProps } = props;
 
   function dismissDialog(event: {}, closeReason: CloseReason) {
     onClose && onClose({}, closeReason);
@@ -18,23 +30,17 @@ const Dialog: React.FC<DialogProps & { closeDialog: () => void }> = props => {
   return (
     <MuiDialog
       onClose={dismissDialog}
-      {...otherProps}
       PaperComponent={Style.StyledPaper}
+      fullScreen={fullScreen}
+      {...otherProps}
     >
       <LockBodyScroll />
-      <Style.Container>
-        <Style.Header>
-          <IconButton
-            aria-label="close"
-            onClick={closeDialog}
-            disableFocusRipple
-            disableRipple
-          >
-            <CloseIcon />
-          </IconButton>
-        </Style.Header>
-        <Style.Body>{children}</Style.Body>
-      </Style.Container>
+      <DialogTitle
+        onClickClose={closeDialog}
+        renderHeader={renderHeader}
+        fullScreen={fullScreen}
+      />
+      <MuiDialogContent>{children}</MuiDialogContent>
     </MuiDialog>
   );
 };
