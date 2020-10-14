@@ -54,6 +54,14 @@ const Footer: React.FC<{
 }> = ({ onClickOpenModal, shareUrl, shareQuote, feedbackFormUrl }) => {
   const trackLabel = 'recommendations';
 
+  const feedbackOnClick = () => {
+    trackEvent(
+      EventCategory.RECOMMENDATIONS,
+      EventAction.CLICK_LINK,
+      'Feedback Form',
+    );
+  };
+
   return (
     <FooterWrapper>
       <FooterHalf>
@@ -62,7 +70,9 @@ const Footer: React.FC<{
         </FooterLink>
         <Hidden xsDown>
           <ExternalLink href={feedbackFormUrl}>
-            <FooterLink>{footer.feedbackButtonLabel}</FooterLink>
+            <FooterLink onClick={feedbackOnClick}>
+              {footer.feedbackButtonLabel}
+            </FooterLink>
           </ExternalLink>
         </Hidden>
       </FooterHalf>
