@@ -58,9 +58,13 @@ export function getRecommendations(
  *
  * https://www.nytimes.com/interactive/2020/07/28/us/states-report-virus-response-july-26.html
  */
-export function getFedLevel(projection: Projection): FedLevel {
+export function getFedLevel(projection: Projection): FedLevel | undefined {
   const weeklyCasesPer100k = getWeeklyNewCasesPer100k(projection);
   const positiveTestRate = getPositiveTestRate(projection);
+
+  if (!isNumber(weeklyCasesPer100k) || !isNumber(positiveTestRate)) {
+    return undefined;
+  }
 
   if (weeklyCasesPer100k > 100 && positiveTestRate > 0.1) {
     return FedLevel.RED;
@@ -114,7 +118,7 @@ export function getModalCopyWithLevel(
  * The Fed Task Force document bases the risk levels on the total number of new
  * cases in a week per 100,000 population.
  */
-function getWeeklyNewCasesPer100k(projection: Projection): number {
+function getWeeklyNewCasesPer100k(projection: Projection): number | null {
   const { totalPopulation } = projection;
   const dateTo = moment().startOf('day').toDate();
   const dateFrom = moment(dateTo).subtract(1, 'week').toDate();
@@ -129,12 +133,11 @@ function getWeeklyNewCasesPer100k(projection: Projection): number {
   const weeklyNewCasesPer100k =
     sum(dailyNewCases.map(getY)) / (totalPopulation / 100_000);
 
-  return isNumber(weeklyNewCasesPer100k) ? weeklyNewCasesPer100k : 0;
+  return isNumber(weeklyNewCasesPer100k) ? weeklyNewCasesPer100k : null;
 }
 
-function getPositiveTestRate(projection: Projection): number {
-  const positiveTestRate = projection.currentTestPositiveRate;
-  return isNumber(positiveTestRate) ? positiveTestRate : 0;
+function getPositiveTestRate(projection: Projection) {
+  return projection.currentTestPositiveRate;
 }
 
 function isBetweenDates(point: Column, dateFrom: Date, dateTo: Date) {
