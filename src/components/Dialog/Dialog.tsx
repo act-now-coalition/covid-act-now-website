@@ -3,7 +3,6 @@ import MuiDialog, {
   DialogProps as MuiDialogProps,
 } from '@material-ui/core/Dialog';
 import LockBodyScroll from './LockBodyScroll';
-import MuiDialogContent from '@material-ui/core/DialogContent';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import * as Style from './Dialog.style';
@@ -36,7 +35,7 @@ const Dialog: React.FC<DialogProps> = props => {
     >
       <LockBodyScroll />
       <DialogTitle onClickClose={closeDialog} renderHeader={renderHeader} />
-      <MuiDialogContent>{children}</MuiDialogContent>
+      <Style.StyledMuiDialogContent>{children}</Style.StyledMuiDialogContent>
     </MuiDialog>
   );
 };

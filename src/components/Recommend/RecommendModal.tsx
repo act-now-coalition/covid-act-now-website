@@ -120,11 +120,9 @@ const RecommendModalBody: React.FC<{
                   {source.sourceName}
                 </Style.SourceTitle>
                 <Style.SourceIntro
-                  // source={source.description}
                   source={descriptionWithLocationCopy}
                   linkTarget="_blank"
                 />
-                {/* <span>{' '}{modalLocationCopy}</span> */}
               </Style.SourceCopyContainer>
               <Grid item sm={6} xs={12} key="levels">
                 <SourceTabs

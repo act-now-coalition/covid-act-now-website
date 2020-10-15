@@ -35,12 +35,6 @@ export const Subtitle = styled.div`
   text-transform: uppercase;
 `;
 
-export const LocationDescription = styled.p`
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
-  font-size: 0.9rem;
-  line-height: 1.4;
-`;
-
 export const SourceContainer = styled(Grid).attrs(props => ({
   container: true,
 }))`
@@ -116,8 +110,11 @@ export const Tabs = styled(MuiTabs)`
 
 export const LevelDescription = styled(MarkdownContent)`
   padding: ${theme.spacing(3)}px;
-  height: 260px;
-  overflow-y: auto;
+
+  @media (min-width: 600px) {
+    height: 260px;
+    overflow-y: auto;
+  }
 `;
 
 export const ContentLink = styled.a`
