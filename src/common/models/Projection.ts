@@ -488,8 +488,8 @@ export class Projection {
         } else {
           result.push(current - lastValue);
         }
-        lastValue = current;
       }
+      lastValue = current;
     }
     return result;
   }
