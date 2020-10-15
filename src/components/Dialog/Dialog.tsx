@@ -35,11 +35,7 @@ const Dialog: React.FC<DialogProps> = props => {
       {...otherProps}
     >
       <LockBodyScroll />
-      <DialogTitle
-        onClickClose={closeDialog}
-        renderHeader={renderHeader}
-        fullScreen={fullScreen}
-      />
+      <DialogTitle onClickClose={closeDialog} renderHeader={renderHeader} />
       <MuiDialogContent>{children}</MuiDialogContent>
     </MuiDialog>
   );

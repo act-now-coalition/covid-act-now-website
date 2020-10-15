@@ -8,7 +8,6 @@ import * as Style from './Dialog.style';
 export interface DialogTitleProps extends MuiDialogTitleProps {
   renderHeader?: () => React.ReactElement;
   onClickClose: () => void;
-  fullScreen: boolean;
 }
 
 const ButtonCloseBox: React.FC<{ onClickClose: () => void }> = ({
@@ -22,13 +21,9 @@ const ButtonCloseBox: React.FC<{ onClickClose: () => void }> = ({
 );
 
 const DialogTitle: React.FC<DialogTitleProps> = props => {
-  const { onClickClose, renderHeader, fullScreen, ...otherProps } = props;
+  const { onClickClose, renderHeader, ...otherProps } = props;
   return (
-    <Style.DialogTitle
-      disableTypography
-      $fullScreen={fullScreen}
-      {...otherProps}
-    >
+    <Style.DialogTitle disableTypography {...otherProps}>
       <Grid container spacing={1}>
         <Hidden key="close-button-mobile" smUp>
           <ButtonCloseBox onClickClose={onClickClose} />
