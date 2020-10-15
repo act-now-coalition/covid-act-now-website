@@ -6,13 +6,25 @@ import {
   fetchAllStateProjections,
   fetchAllCountyProjections,
 } from '../src/common/utils/model';
-import { currentSnapshot } from '../src/common/utils/snapshots';
-import { LocationSummary } from '../src/common/location_summaries';
+import {
+  currentSnapshot,
+  fetchMasterSnapshotNumber,
+  snapshotFromUrl,
+  SNAPSHOT_URL,
+} from '../src/common/utils/snapshots';
+import {
+  LocationSummariesByFIPS,
+  LocationSummary,
+  SummariesMap,
+} from '../src/common/location_summaries';
 import { Projections } from '../src/common/models/Projections';
 import { DatasetId } from '../src/common/models/Projection';
 import { assert } from '../src/common/utils';
+import { getLocationNames, isState } from '../src/common/locations';
+import { Level } from '../src/common/level';
 
 const OUTPUT_FOLDER = path.join(__dirname, '..', 'src', 'assets', 'data');
+const SUMMARIES_FOLDER = path.join(__dirname, 'alert_emails/summaries');
 
 // Via https://en.wikipedia.org/wiki/List_of_U.S._counties_with_Native_American_majority_populations
 const INDIGENOUS_FIPS = [
@@ -49,6 +61,7 @@ async function main() {
   const allCountiesProjections = await fetchAllCountyProjections();
   buildSummaries(allStatesProjections, allCountiesProjections);
   buildAggregations(allStatesProjections, allCountiesProjections);
+  buildSlackSummary();
   console.log('done');
 }
 
@@ -140,6 +153,42 @@ async function buildAggregations(
   };
 
   await fs.writeJson(`${OUTPUT_FOLDER}/aggregations.json`, aggregations);
+}
+
+async function buildSlackSummary() {
+  const masterSnapshot = await fetchMasterSnapshotNumber();
+  const oldSummaries: SummariesMap = await fs.readJSON(
+    path.join(SUMMARIES_FOLDER, `${masterSnapshot}.json`),
+  );
+  const newSnapshot = snapshotFromUrl(SNAPSHOT_URL);
+  const newSummaries: SummariesMap = await fs.readJSON(
+    path.join(SUMMARIES_FOLDER, `${newSnapshot}.json`),
+  );
+
+  const stateLocations = getLocationNames().filter(l => isState(l));
+  const better = [],
+    worse = [];
+  for (const state of stateLocations) {
+    const oldLevel = oldSummaries[state.state_fips_code].level;
+    const newLevel = newSummaries[state.state_fips_code].level;
+    const changeString = `${state.state} (${Level[oldLevel]} => ${Level[newLevel]})`;
+    if (newLevel > oldLevel) {
+      worse.push(changeString);
+    } else if (newLevel < oldLevel) {
+      better.push(changeString);
+    }
+  }
+  const summaryLines = [];
+  if (better.length > 0) {
+    summaryLines.push(`States doing better: ${better.join(', ')}`);
+  }
+  if (worse.length > 0) {
+    summaryLines.push(`States doing worse: ${worse.join(', ')}`);
+  }
+
+  const dest = path.join(__dirname, 'slack-summary.txt');
+  // separate lines with %0A so the github action set-output parses the newlines.
+  await fs.writeFile(dest, summaryLines.join('%0A'));
 }
 
 main().catch(e => {
