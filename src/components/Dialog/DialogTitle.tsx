@@ -15,7 +15,7 @@ const ButtonCloseBox: React.FC<{ onClickClose: () => void }> = ({
   onClickClose,
 }) => (
   <Style.ButtonContainer sm={2} xs={12}>
-    <Style.IconButton aria-label="close" onClick={onClickClose}>
+    <Style.IconButton aria-label="close" onClick={onClickClose} size="small">
       <CloseIcon />
     </Style.IconButton>
   </Style.ButtonContainer>
@@ -34,15 +34,9 @@ const DialogTitle: React.FC<DialogTitleProps> = props => {
           <ButtonCloseBox onClickClose={onClickClose} />
         </Hidden>
         {renderHeader && (
-          <Style.TitleContainer
-            key="header-content"
-            $fullScreen={fullScreen}
-            item
-            sm={10}
-            xs={12}
-          >
+          <Grid key="header-content" item sm={10} xs={12}>
             {renderHeader()}
-          </Style.TitleContainer>
+          </Grid>
         )}
         <Hidden key="close-button-desktop" xsDown>
           <ButtonCloseBox onClickClose={onClickClose} />
