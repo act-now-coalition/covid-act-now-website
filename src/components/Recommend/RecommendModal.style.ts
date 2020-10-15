@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import MuiTab from '@material-ui/core/Tab';
 import MuiTabs from '@material-ui/core/Tabs';
-import { MarkdownBody } from 'components/Markdown';
+import Grid from '@material-ui/core/Grid';
+import { MarkdownContent } from 'components/Markdown';
 import theme from 'assets/theme';
 import { COLOR_MAP } from 'common/colors';
 import { COLORS } from 'common';
@@ -29,6 +30,15 @@ export const Subtitle = styled.div`
   text-transform: uppercase;
 `;
 
+export const SourceContainer = styled(Grid).attrs(props => ({
+  container: true,
+}))`
+  margin-top: ${2 * theme.spacing(4)}px;
+  &:first-child {
+    margin-top: ${theme.spacing(2)}px;
+  }
+`;
+
 export const SourceTitle = styled.h2`
   font-family: Roboto;
   font-size: 18px;
@@ -37,9 +47,10 @@ export const SourceTitle = styled.h2`
   line-height: 21px;
   letter-spacing: 0em;
   text-align: left;
+  margin-top: 0;
 `;
 
-export const SourceIntro = styled(MarkdownBody)`
+export const SourceIntro = styled(MarkdownContent)`
   font-family: Roboto;
   font-size: 15px;
   font-style: normal;
@@ -92,8 +103,32 @@ export const Tabs = styled(MuiTabs)`
   }
 `;
 
-export const LevelDescription = styled(MarkdownBody)`
+export const LevelDescription = styled(MarkdownContent)`
   padding: ${theme.spacing(3)}px;
-  height: 450px;
+  height: 260px;
   overflow-y: auto;
+`;
+
+export const ContentLink = styled.a`
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: ${COLOR_MAP.BLUE};
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+export const ModalContents = styled.div`
+  border-bottom: solid 1px ${COLORS.LIGHTGRAY};
+  padding-bottom: ${theme.spacing(2)}px;
+`;
+
+export const ContentItem = styled.div`
+  padding: ${theme.spacing(1) / 2}px 0;
 `;

@@ -9,6 +9,7 @@ import LearnMoreModal from './LearnMoreModal';
 import { CenteredContentModal } from 'components/Compare/Compare.style';
 import ExternalLink from 'components/ExternalLink';
 import StatTag from 'components/SummaryStats/StatTag';
+import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 
 const IndigenousDataCheckbox = (props: {
   chartIndigenous?: boolean;
@@ -41,7 +42,22 @@ const IndigenousDataCheckbox = (props: {
     if (setChartIndigenous) {
       const newChartIndigenous = !chartIndigenous;
       setChartIndigenous(newChartIndigenous);
+      trackEvent(
+        EventCategory.INDIGENOUS_PEOPLES_DAY,
+        EventAction.SELECT,
+        `Select Native American Counties`,
+        newChartIndigenous ? 1 : 0,
+      );
     }
+  };
+
+  const onClickMethodology = () => {
+    setShowModal(true);
+    trackEvent(
+      EventCategory.INDIGENOUS_PEOPLES_DAY,
+      EventAction.OPEN_MODAL,
+      'Methodology',
+    );
   };
 
   return (
@@ -64,7 +80,7 @@ const IndigenousDataCheckbox = (props: {
         Created on Indigenous Peoples’ Day, this feature allows you to compare
         all counties that are “Native American majority counties“ (NAMC) to the
         entire USA for two metrics: Cases and Deaths. Learn more about{' '}
-        <span onClick={() => setShowModal(true)}>our methodology</span> or view{' '}
+        <span onClick={onClickMethodology}>our methodology</span> or view{' '}
         <ExternalLink href="https://blog.covidactnow.org/covid-native-american-counties/">
           our observations
         </ExternalLink>
