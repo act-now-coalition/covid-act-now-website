@@ -18,6 +18,8 @@ import {
   getDynamicIntroCopy,
   getRecommendations,
   getShareQuote,
+  getFedLevel,
+  getHarvardLevel,
 } from 'common/utils/recommend';
 import { mainContent } from 'cms-content/recommendations';
 import { getRecommendationsShareUrl } from 'common/urls';
@@ -162,6 +164,8 @@ const ChartsHolder = (props: {
                   shareQuote={recommendsShareQuote}
                   recommendationsRef={recommendationsRef}
                   feedbackFormUrl={recommendationsFeedbackForm}
+                  fedLevel={getFedLevel(props.projections.primary)}
+                  harvardLevel={getHarvardLevel(props.projections.primary)}
                 />
               )}
               {ALL_METRICS.map(metric => (

@@ -4,6 +4,7 @@ import { modalContent } from 'cms-content/recommendations';
 import * as Style from './RecommendModal.style';
 import SourceTabs, { SourceLevel } from './RecommendTabs';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
+import { FedLevel, HarvardLevel } from 'cms-content/recommendations';
 import Hidden from '@material-ui/core/Hidden';
 
 const { federalTaskForce, harvard } = modalContent;
@@ -60,7 +61,23 @@ const sources = [
   },
 ];
 
-const RecommendModalBody: React.FC = () => {
+const fedTabIndex = {
+  [FedLevel.GREEN]: 0,
+  [FedLevel.YELLOW]: 1,
+  [FedLevel.RED]: 2,
+};
+
+const harvardTabIndex = {
+  [HarvardLevel.GREEN]: 0,
+  [HarvardLevel.YELLOW]: 1,
+  [HarvardLevel.ORANGE]: 2,
+  [HarvardLevel.RED]: 3,
+};
+
+const RecommendModalBody: React.FC<{
+  fedLevel: FedLevel | null;
+  harvardLevel: HarvardLevel | null;
+}> = ({ fedLevel, harvardLevel }) => {
   function onSelectLevel(level: SourceLevel, source: string) {
     const trackLabel = `${source}: ${level.label}`;
     trackEvent(EventCategory.RECOMMENDATIONS, EventAction.SELECT, trackLabel);
@@ -96,6 +113,15 @@ const RecommendModalBody: React.FC = () => {
                 levels={source.levels}
                 onSelectLevel={(level: SourceLevel) =>
                   onSelectLevel(level, source.trackLabel)
+                }
+                initialLevel={
+                  i === 0
+                    ? fedLevel
+                      ? fedTabIndex[fedLevel]
+                      : 0
+                    : harvardLevel
+                    ? harvardTabIndex[harvardLevel]
+                    : 0
                 }
               />
             </Grid>

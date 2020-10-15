@@ -14,8 +14,13 @@ import {
   FooterHalf,
   FooterWrapper,
 } from './Recommend.style';
-import { mainContent, modalContent } from 'cms-content/recommendations';
-import { RecommendationWithIcon } from 'cms-content/recommendations';
+import {
+  RecommendationWithIcon,
+  mainContent,
+  modalContent,
+  FedLevel,
+  HarvardLevel,
+} from 'cms-content/recommendations';
 import SmallShareButtons from 'components/SmallShareButtons';
 import RecommendModal from './RecommendModal';
 import Dialog, { useDialog } from 'components/Dialog';
@@ -116,6 +121,8 @@ const Recommend = (props: {
   shareQuote: string;
   recommendationsRef: React.RefObject<HTMLDivElement>;
   feedbackFormUrl: string;
+  fedLevel: FedLevel | null;
+  harvardLevel: HarvardLevel | null;
 }) => {
   const {
     introCopy,
@@ -125,6 +132,8 @@ const Recommend = (props: {
     shareQuote,
     recommendationsRef,
     feedbackFormUrl,
+    fedLevel,
+    harvardLevel,
   } = props;
   const [isDialogOpen, openDialog, closeDialog] = useDialog(false);
 
@@ -172,7 +181,7 @@ const Recommend = (props: {
         maxWidth="md"
         renderHeader={renderModalTitle}
       >
-        <RecommendModal />
+        <RecommendModal fedLevel={fedLevel} harvardLevel={harvardLevel} />
       </Dialog>
     </Wrapper>
   );
