@@ -20,6 +20,8 @@ import {
   getShareQuote,
   getFedLevel,
   getHarvardLevel,
+  getModalCopyWithFedLevel,
+  getModalCopyWithHarvardLevel,
 } from 'common/utils/recommend';
 import { mainContent } from 'cms-content/recommendations';
 import { getRecommendationsShareUrl } from 'common/urls';
@@ -128,6 +130,19 @@ const ChartsHolder = (props: {
     projection.fips
   }`;
 
+  // TODO(Chelsi): make these 2 functions less redundant?
+  const recommendationsFedModalCopy = getModalCopyWithFedLevel(
+    projection,
+    projection.locationName,
+    props.projections.getMetricValues(),
+  );
+
+  const recommendationsHarvardModalCopy = getModalCopyWithHarvardLevel(
+    projection,
+    projection.locationName,
+    props.projections.getMetricValues(),
+  );
+
   // TODO(pablo): Create separate refs for signup and share
   return (
     <>
@@ -166,6 +181,8 @@ const ChartsHolder = (props: {
                   feedbackFormUrl={recommendationsFeedbackForm}
                   fedLevel={getFedLevel(props.projections.primary)}
                   harvardLevel={getHarvardLevel(props.projections.primary)}
+                  harvardModalLocationCopy={recommendationsHarvardModalCopy}
+                  fedModalLocationCopy={recommendationsFedModalCopy}
                 />
               )}
               {ALL_METRICS.map(metric => (

@@ -110,8 +110,11 @@ export const Tabs = styled(MuiTabs)`
 
 export const LevelDescription = styled(MarkdownContent)`
   padding: ${theme.spacing(3)}px;
-  height: 260px;
-  overflow-y: auto;
+
+  @media (min-width: 600px) {
+    height: 260px;
+    overflow-y: auto;
+  }
 `;
 
 export const ContentLink = styled.a`

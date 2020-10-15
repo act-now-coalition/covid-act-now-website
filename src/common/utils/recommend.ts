@@ -123,16 +123,56 @@ export function getHarvardLevel(projection: Projection): HarvardLevel {
   }
 }
 
-// Note (Chelsi)- might not be using this. Delete if so
-export function getModalCopyWithLevel(
+function getSharedLocationMetricCopy(
+  metricValues: { [metric in Metric]: number | null },
+  projection: Projection,
+): string {
+  const hasPositiveTest = isNumber(getPositiveTestRate(projection));
+
+  return `with ${formatValue(
+    Metric.CASE_DENSITY,
+    metricValues[Metric.CASE_DENSITY],
+    '',
+  )} ${getMetricNameForCompare(Metric.CASE_DENSITY).toLowerCase()}${
+    hasPositiveTest
+      ? ` and ${formatValue(
+          Metric.POSITIVE_TESTS,
+          metricValues[Metric.POSITIVE_TESTS],
+          '',
+        )} ${getMetricNameForCompare(Metric.POSITIVE_TESTS).toLowerCase()}`
+      : ''
+  }.`;
+}
+
+export function getModalCopyWithFedLevel(
   projection: Projection,
   locationName: string,
-) {
-  return `${locationName} falls within the Federal Task Force's ${getFedLevel(
+  metricValues: { [metric in Metric]: number | null },
+): string {
+  const hasPositiveTest = isNumber(getPositiveTestRate(projection));
+  return `${
+    hasPositiveTest
+      ? `${locationName} is in its ${getFedLevel(
+          projection,
+        )?.toLowerCase()} zone ${getSharedLocationMetricCopy(
+          metricValues,
+          projection,
+        )}`
+      : ''
+  }`;
+}
+
+export function getModalCopyWithHarvardLevel(
+  projection: Projection,
+  locationName: string,
+  metricValues: { [metric in Metric]: number | null },
+): string {
+  return `${locationName} is in its ${getHarvardLevel(
     projection,
-  )} level and Harvard Global Health Institute's ${getHarvardLevel(
+  ).toLowerCase()} zone ${getSharedLocationMetricCopy(
+    metricValues,
     projection,
-  )} level.`;
+  )}`;
 }
 
 /**

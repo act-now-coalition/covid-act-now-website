@@ -29,6 +29,7 @@ import { LinkButton } from 'components/Button';
 import { trackRecommendationsEvent } from 'common/utils/recommend';
 import * as ModalStyle from './RecommendModal.style';
 import ExternalLink from 'components/ExternalLink';
+import { sortBy } from 'lodash';
 
 const { header, footer } = mainContent;
 const { federalTaskForce, harvard } = modalContent;
@@ -123,6 +124,8 @@ const Recommend = (props: {
   feedbackFormUrl: string;
   fedLevel: FedLevel | null;
   harvardLevel: HarvardLevel | null;
+  harvardModalLocationCopy: string;
+  fedModalLocationCopy: string;
 }) => {
   const {
     introCopy,
@@ -134,6 +137,8 @@ const Recommend = (props: {
     feedbackFormUrl,
     fedLevel,
     harvardLevel,
+    harvardModalLocationCopy,
+    fedModalLocationCopy,
   } = props;
   const [isDialogOpen, openDialog, closeDialog] = useDialog(false);
 
@@ -146,6 +151,13 @@ const Recommend = (props: {
     );
   };
 
+  const getRecommendationLength = (recommendation: any) =>
+    recommendation.recommendationInfo.body.length;
+  const recommendationsSortedByLength = sortBy(
+    recommendations,
+    getRecommendationLength,
+  );
+
   return (
     <Wrapper ref={recommendationsRef}>
       <Header
@@ -154,7 +166,7 @@ const Recommend = (props: {
         onClickOpenModal={openModalRecommendations}
       />
       <RecommendationsContainer>
-        {recommendations.map((recommendation, i) => (
+        {recommendationsSortedByLength.map((recommendation, i) => (
           <Fragment key={`recommendation-${i}`}>
             <RecommendationWrapper index={i}>
               <Icon
@@ -181,7 +193,12 @@ const Recommend = (props: {
         maxWidth="md"
         renderHeader={renderModalTitle}
       >
-        <RecommendModal fedLevel={fedLevel} harvardLevel={harvardLevel} />
+        <RecommendModal
+          fedLevel={fedLevel}
+          harvardLevel={harvardLevel}
+          fedModalLocationCopy={fedModalLocationCopy}
+          harvardModalLocationCopy={harvardModalLocationCopy}
+        />
       </Dialog>
     </Wrapper>
   );
