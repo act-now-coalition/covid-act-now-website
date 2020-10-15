@@ -77,7 +77,8 @@ const harvardTabIndex = {
 const RecommendModalBody: React.FC<{
   fedLevel: FedLevel | null;
   harvardLevel: HarvardLevel | null;
-}> = ({ fedLevel, harvardLevel }) => {
+  modalLocationCopy: string;
+}> = ({ fedLevel, harvardLevel, modalLocationCopy }) => {
   function onSelectLevel(level: SourceLevel, source: string) {
     const trackLabel = `${source}: ${level.label}`;
     trackEvent(EventCategory.RECOMMENDATIONS, EventAction.SELECT, trackLabel);
@@ -96,6 +97,7 @@ const RecommendModalBody: React.FC<{
           ))}
         </Style.ModalContents>
       </Hidden>
+      <Style.LocationDescription>{modalLocationCopy}</Style.LocationDescription>
       <div>
         {sources.map((source, i) => (
           <Style.SourceContainer key={`source-${i}`}>

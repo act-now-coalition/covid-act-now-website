@@ -128,11 +128,12 @@ export function getModalCopyWithLevel(
   projection: Projection,
   locationName: string,
 ) {
-  return `${locationName} falls within the Federal Task Force's ${getFedLevel(
-    projection,
-  )} level and Harvard Global Health Institute's ${getHarvardLevel(
-    projection,
-  )} level.`;
+  const hasPositiveTest = isNumber(getPositiveTestRate(projection));
+  return `${locationName} falls within ${
+    hasPositiveTest
+      ? `the Federal Task Force's ${getFedLevel(projection)} zone and `
+      : ''
+  }Harvard Global Health Institute's ${getHarvardLevel(projection)} zone.`;
 }
 
 /**
