@@ -47,6 +47,7 @@ export const SourceTitle = styled.h2`
   line-height: 21px;
   letter-spacing: 0em;
   text-align: left;
+  margin-top: 0;
 `;
 
 export const SourceIntro = styled(MarkdownBody)`
@@ -116,7 +117,7 @@ export const ContentLink = styled.a`
   line-height: 28px;
   letter-spacing: 0em;
   text-align: left;
-  color: #00bfea;
+  color: ${COLOR_MAP.BLUE};
   text-decoration: none;
   &:hover {
     text-decoration: underline;
@@ -124,7 +125,7 @@ export const ContentLink = styled.a`
 `;
 
 export const ModalContents = styled.div`
-  border-bottom: solid 1px #f2f2f2;
+  border-bottom: solid 1px ${COLORS.LIGHTGRAY};
   padding-bottom: ${theme.spacing(2)}px;
 `;
 

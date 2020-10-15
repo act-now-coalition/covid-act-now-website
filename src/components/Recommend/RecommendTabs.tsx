@@ -31,7 +31,7 @@ const RecommendTabs: React.FC<{
   return (
     <Style.LevelContainer>
       <Style.Tabs
-        centered={isMobile ? false : true}
+        centered={!isMobile}
         value={activeTabIndex}
         aria-label="Level Tabs"
         variant={tabsVariant}
