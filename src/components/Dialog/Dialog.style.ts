@@ -3,14 +3,9 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiIconButton from '@material-ui/core/IconButton';
-import theme from 'assets/theme';
 
-const getPadding = (fullScreen: boolean) =>
-  fullScreen ? theme.spacing(1) : theme.spacing(3);
-
-export const DialogTitle = styled(MuiDialogTitle)<{ $fullScreen: boolean }>`
-  padding: ${({ $fullScreen }) => getPadding($fullScreen)}px;
-  padding-left: ${theme.spacing(3)}px;
+export const DialogTitle = styled(MuiDialogTitle)`
+  padding: 1rem 1rem 1.5rem 1.5rem;
 `;
 
 export const ButtonContainer = styled(Grid).attrs(props => ({
@@ -20,9 +15,12 @@ export const ButtonContainer = styled(Grid).attrs(props => ({
 `;
 
 export const StyledPaper = styled(Paper)`
-  max-height: 835px;
-  height: 95%;
-  max-width: 860px;
+  @media (min-width: 600px) {
+    max-height: 835px;
+    height: 95%;
+    max-width: 860px;
+    width: 95%;
+  }
 `;
 
 export const IconButton = styled(MuiIconButton).attrs(props => ({
