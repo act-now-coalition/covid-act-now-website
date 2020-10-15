@@ -4,7 +4,7 @@ import { modalContent } from 'cms-content/recommendations';
 import * as Style from './RecommendModal.style';
 import SourceTabs, { SourceLevel } from './RecommendTabs';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
-
+import { FedLevel, HarvardLevel } from 'cms-content/recommendations';
 const { federalTaskForce, harvard } = modalContent;
 
 // TODO: Update the CMS structure to include a hex color for the tabs and
@@ -50,7 +50,23 @@ const harvardLevels = [
   },
 ];
 
-const RecommendModalBody: React.FC = () => {
+const fedTabIndex = {
+  [FedLevel.GREEN]: 0,
+  [FedLevel.YELLOW]: 1,
+  [FedLevel.RED]: 2,
+};
+
+const harvardTabIndex = {
+  [HarvardLevel.GREEN]: 0,
+  [HarvardLevel.YELLOW]: 1,
+  [HarvardLevel.ORANGE]: 2,
+  [HarvardLevel.RED]: 3,
+};
+
+const RecommendModalBody: React.FC<{
+  fedLevel: FedLevel | null;
+  harvardLevel: HarvardLevel | null;
+}> = ({ fedLevel, harvardLevel }) => {
   function onSelectLevel(level: SourceLevel, source: string) {
     const trackLabel = `${source}: ${level.label}`;
     trackEvent(EventCategory.RECOMMENDATIONS, EventAction.SELECT, trackLabel);
@@ -70,6 +86,7 @@ const RecommendModalBody: React.FC = () => {
             onSelectLevel={(level: SourceLevel) =>
               onSelectLevel(level, 'Fed Task Force')
             }
+            initialLevel={fedLevel ? fedTabIndex[fedLevel] : 0}
           />
         </Grid>
         <Grid key="harvard" item sm={6} xs={12}>
@@ -80,6 +97,7 @@ const RecommendModalBody: React.FC = () => {
             onSelectLevel={(level: SourceLevel) =>
               onSelectLevel(level, 'Harvard')
             }
+            initialLevel={harvardLevel ? harvardTabIndex[harvardLevel] : 0}
           />
         </Grid>
       </Grid>

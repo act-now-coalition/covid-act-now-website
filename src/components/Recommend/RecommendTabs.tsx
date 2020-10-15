@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import * as Style from './RecommendModal.style';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
+import { FedLevel, HarvardLevel } from 'cms-content/recommendations';
 
 type Markdown = string;
 type Color = string;
@@ -15,8 +16,9 @@ export interface SourceLevel {
 const RecommendTabs: React.FC<{
   levels: SourceLevel[];
   onSelectLevel: (level: SourceLevel) => void;
-}> = ({ levels, onSelectLevel }) => {
-  const [activeTabIndex, setActiveTabIndex] = useState(0);
+  initialLevel: number;
+}> = ({ levels, onSelectLevel, initialLevel }) => {
+  const [activeTabIndex, setActiveTabIndex] = useState<number>(initialLevel);
   const currentLevel = levels[activeTabIndex];
 
   const theme = useTheme();
