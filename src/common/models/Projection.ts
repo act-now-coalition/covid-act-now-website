@@ -52,7 +52,6 @@ const DISABLED_TEST_POSITIVITY = new DisabledFips([
   '25027',
   '48113',
   '48215',
-  '48201', // https://trello.com/c/tgxn6Wjp/
 
   /^29...$/, // TODO(https://trello.com/c/9BiL64Y6/493): Missouri data is always 100%. :|
 ]);
