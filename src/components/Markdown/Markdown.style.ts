@@ -7,3 +7,8 @@ export const MarkdownBody = styled(ReactMarkdown)`
     color: ${COLOR_MAP.BLUE};
   }
 `;
+
+export const MarkdownLink = styled.a.attrs(props => ({
+  rel: 'noopener noreferrer',
+  target: '_blank',
+}))``;
