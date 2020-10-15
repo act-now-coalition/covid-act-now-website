@@ -21,11 +21,22 @@ import RecommendModal from './RecommendModal';
 import Dialog, { useDialog } from 'components/Dialog';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import { LinkButton } from 'components/Button';
+import { trackRecommendationsEvent } from 'common/utils/recommend';
 import * as ModalStyle from './RecommendModal.style';
 import ExternalLink from 'components/ExternalLink';
 
 const { header, footer } = mainContent;
 const { federalTaskForce, harvard } = modalContent;
+
+const trackShareFacebook = () =>
+  trackRecommendationsEvent(EventAction.SHARE, 'facebook');
+
+const trackShareTwitter = () =>
+  trackRecommendationsEvent(EventAction.SHARE, 'twitter');
+
+const trackCopyLink = () => {
+  trackRecommendationsEvent(EventAction.COPY_LINK, 'recommendations');
+};
 
 const Header = (props: {
   introCopy: string;
@@ -52,9 +63,7 @@ const Footer: React.FC<{
   shareUrl: string;
   shareQuote: string;
   feedbackFormUrl: string;
-}> = ({ onClickOpenModal, shareUrl, shareQuote, feedbackFormUrl }) => {
-  const trackLabel = 'recommendations';
-
+}> = ({ onClickOpenModal, feedbackFormUrl, shareUrl, shareQuote }) => {
   const feedbackOnClick = () => {
     trackEvent(
       EventCategory.RECOMMENDATIONS,
@@ -81,7 +90,9 @@ const Footer: React.FC<{
         <SmallShareButtons
           shareUrl={shareUrl}
           shareQuote={shareQuote}
-          trackLabel={trackLabel}
+          onCopyLink={trackCopyLink}
+          onShareOnFacebook={trackShareFacebook}
+          onShareOnTwitter={trackShareTwitter}
         />
         <ShareText source={footer.shareText} />
       </FooterHalf>

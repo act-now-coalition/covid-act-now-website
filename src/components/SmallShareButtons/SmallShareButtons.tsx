@@ -10,51 +10,35 @@ import {
 import { COLOR_MAP } from 'common/colors';
 import LinkIcon from '@material-ui/icons/Link';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { trackRecommendationsEvent } from 'common/utils/recommend';
-import { EventAction } from 'components/Analytics';
 
-//TODO (Chelsi): Add in final share quote
-const SmallShareButtons = (props: {
+const SmallShareButtons: React.FC<{
   shareUrl: string;
   shareQuote: string;
-  trackLabel: string;
+  onCopyLink: () => void;
+  onShareOnFacebook: () => void;
+  onShareOnTwitter: () => void;
+}> = ({
+  shareUrl,
+  shareQuote,
+  onCopyLink,
+  onShareOnFacebook,
+  onShareOnTwitter,
 }) => {
-  const { shareUrl, shareQuote, trackLabel } = props;
-
   const socialProps = {
     url: shareUrl,
     quote: shareQuote,
     socialIconSize: 30,
   };
 
-  const trackRecommendationsShare = (shareTrackLabel: string) => {
-    trackRecommendationsEvent(EventAction.SHARE, shareTrackLabel);
-  };
-
-  const onCopyLink = () => {
-    trackRecommendationsEvent(EventAction.COPY_LINK, trackLabel);
-  };
-
   return (
     <ButtonsWrapper>
-      <ShareButtonContainer
-        color={COLOR_MAP.BLUE}
-        onClick={() => trackRecommendationsShare('facebook')}
-      >
+      <ShareButtonContainer color={COLOR_MAP.BLUE} onClick={onShareOnFacebook}>
         <FacebookShareButtonInner {...socialProps} />
       </ShareButtonContainer>
-      <ShareButtonContainer
-        color={COLOR_MAP.BLUE}
-        onClick={() => trackRecommendationsShare('twitter')}
-      >
+      <ShareButtonContainer color={COLOR_MAP.BLUE} onClick={onShareOnTwitter}>
         <TwitterShareButtonInner {...socialProps} />
       </ShareButtonContainer>
-      <CopyToClipboard
-        text={shareUrl}
-        onCopy={() => {
-          onCopyLink();
-        }}
-      >
+      <CopyToClipboard text={shareUrl} onCopy={onCopyLink}>
         <ShareButtonContainer color={COLOR_MAP.BLUE}>
           <LinkIcon />
         </ShareButtonContainer>
