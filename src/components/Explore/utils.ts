@@ -2,8 +2,6 @@ import moment from 'moment';
 import urlJoin from 'url-join';
 import {
   deburr,
-  dropRightWhile,
-  dropWhile,
   flatten,
   isNumber,
   max,
@@ -201,8 +199,6 @@ export const EXPLORE_CHART_IDS = Object.values(exploreMetricData).map(
   metric => metric.chartId,
 );
 
-const missingValue = (point: Column) => !isNumber(point.y);
-
 /**
  * Remove points without y values at the begining and end of the series.
  *
@@ -212,7 +208,7 @@ const missingValue = (point: Column) => !isNumber(point.y);
  * series.
  */
 function cleanSeries(data: Column[]) {
-  return dropWhile(dropRightWhile(data, missingValue), missingValue);
+  return data.filter(point => isNumber(point.y));
 }
 
 /**
