@@ -38,7 +38,11 @@ export function getRecommendations(
 
   const fedRecommendations = recommendations
     .filter(item => item.source === RecommendationSource.FED)
-    .filter(item => item.level === fedLevel)
+    .filter(item => {
+      // if we don't have a Fed level, we return the recommendations for
+      // the green level
+      return fedLevel ? item.level === fedLevel : item.level === FedLevel.GREEN;
+    })
     .map(getIcon);
 
   const harvardRecommendations = recommendations
