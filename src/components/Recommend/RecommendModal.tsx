@@ -82,7 +82,7 @@ const RecommendModalBody: React.FC = () => {
       <div>
         {sources.map((source, i) => (
           <Style.SourceContainer key={`source-${i}`}>
-            <Grid item sm={6} xs={12} key="intro">
+            <Style.SourceCopyContainer item sm={6} xs={12} key="intro">
               <Style.SourceTitle id={`${source.linkLabel}`}>
                 {source.sourceName}
               </Style.SourceTitle>
@@ -90,7 +90,7 @@ const RecommendModalBody: React.FC = () => {
                 source={source.description}
                 linkTarget="_blank"
               />
-            </Grid>
+            </Style.SourceCopyContainer>
             <Grid item sm={6} xs={12} key="levels">
               <SourceTabs
                 levels={source.levels}

@@ -20,7 +20,7 @@ export const ButtonContainer = styled(Grid).attrs(props => ({
 `;
 
 export const StyledPaper = styled(Paper)`
-  max-height: 900px;
+  max-height: 835px;
   height: 95%;
   max-width: 860px;
 `;

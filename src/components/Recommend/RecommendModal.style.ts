@@ -33,7 +33,7 @@ export const Subtitle = styled.div`
 export const SourceContainer = styled(Grid).attrs(props => ({
   container: true,
 }))`
-  margin-top: ${2 * theme.spacing(4)}px;
+  margin-top: ${2 * theme.spacing(3)}px;
   &:first-child {
     margin-top: ${theme.spacing(2)}px;
   }
@@ -114,7 +114,7 @@ export const ContentLink = styled.a`
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 28px;
+  line-height: 1;
   letter-spacing: 0em;
   text-align: left;
   color: ${COLOR_MAP.BLUE};
@@ -131,4 +131,10 @@ export const ModalContents = styled.div`
 
 export const ContentItem = styled.div`
   padding: ${theme.spacing(1) / 2}px 0;
+`;
+
+export const SourceCopyContainer = styled(Grid)`
+  @media (min-width: 600px) {
+    padding-right: ${theme.spacing(2)}px;
+  }
 `;
