@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 import { ChartContentWrapper, MainContentInner } from './ChartsHolder.style';
 import NoCountyDetail from './NoCountyDetail';
 import { Projections } from 'common/models/Projections';
@@ -120,6 +121,11 @@ const ChartsHolder = (props: {
     alarmLevel,
   );
 
+  const showRecommendations = !props.county;
+  const recommendationsFeedbackForm = `https://can386399.typeform.com/to/WSPYSGPe#source=can&id=${uuidv4()}&fips=${
+    projection.fips
+  }`;
+
   // TODO(pablo): Create separate refs for signup and share
   return (
     <>
@@ -147,14 +153,17 @@ const ChartsHolder = (props: {
               stateId={props.stateId}
             />
             <MainContentInner>
-              <Recommend
-                introCopy={recommendationsIntro}
-                recommendations={recommendationsMainContent}
-                locationName={projection.locationName}
-                shareUrl={recommendsShareUrl}
-                shareQuote={recommendsShareQuote}
-                recommendationsRef={recommendationsRef}
-              />
+              {showRecommendations && (
+                <Recommend
+                  introCopy={recommendationsIntro}
+                  recommendations={recommendationsMainContent}
+                  locationName={projection.locationName}
+                  shareUrl={recommendsShareUrl}
+                  shareQuote={recommendsShareQuote}
+                  recommendationsRef={recommendationsRef}
+                  feedbackFormUrl={recommendationsFeedbackForm}
+                />
+              )}
               {ALL_METRICS.map(metric => (
                 <ChartBlock
                   key={metric}

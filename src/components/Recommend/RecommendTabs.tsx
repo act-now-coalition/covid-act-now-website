@@ -31,7 +31,7 @@ const RecommendTabs: React.FC<{
   return (
     <Style.LevelContainer>
       <Style.Tabs
-        centered
+        centered={!isMobile}
         value={activeTabIndex}
         aria-label="Level Tabs"
         variant={tabsVariant}
@@ -50,7 +50,7 @@ const RecommendTabs: React.FC<{
           />
         ))}
       </Style.Tabs>
-      <Style.LevelDescription source={currentLevel.body} />
+      <Style.LevelDescription source={currentLevel.body} linkTarget="_blank" />
     </Style.LevelContainer>
   );
 };

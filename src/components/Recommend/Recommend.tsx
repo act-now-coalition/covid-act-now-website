@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Hidden } from '@material-ui/core';
 import {
   Wrapper,
   HeaderCopy,
@@ -21,6 +22,8 @@ import Dialog, { useDialog } from 'components/Dialog';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import { LinkButton } from 'components/Button';
 import { trackRecommendationsEvent } from 'common/utils/recommend';
+import * as ModalStyle from './RecommendModal.style';
+import ExternalLink from 'components/ExternalLink';
 
 const { header, footer } = mainContent;
 const { federalTaskForce, harvard } = modalContent;
@@ -48,8 +51,8 @@ const Header = (props: {
       <Intro>
         These recommendations match the guidelines set by{' '}
         <strong>{federalTaskForce.sourceName}</strong> and{' '}
-        <strong>{harvard.sourceName}</strong> {introCopy}{' '}
-        <LinkButton onClick={onClickOpenModal}>Learn more.</LinkButton>
+        <strong>{harvard.sourceName}</strong>. {introCopy}{' '}
+        <LinkButton onClick={onClickOpenModal}>Learn more</LinkButton>.
       </Intro>
     </Fragment>
   );
@@ -57,19 +60,31 @@ const Header = (props: {
 
 const Footer: React.FC<{
   onClickOpenModal: () => void;
-  onClickOpenFeedbackModal: () => void;
   shareUrl: string;
   shareQuote: string;
-}> = ({ onClickOpenModal, onClickOpenFeedbackModal, shareUrl, shareQuote }) => {
+  feedbackFormUrl: string;
+}> = ({ onClickOpenModal, feedbackFormUrl, shareUrl, shareQuote }) => {
+  const feedbackOnClick = () => {
+    trackEvent(
+      EventCategory.RECOMMENDATIONS,
+      EventAction.CLICK_LINK,
+      'Feedback Form',
+    );
+  };
+
   return (
     <FooterWrapper>
       <FooterHalf>
         <FooterLink onClick={onClickOpenModal}>
           {footer.modalButtonLabel}
         </FooterLink>
-        <FooterLink onClick={onClickOpenFeedbackModal}>
-          {footer.feedbackButtonLabel}
-        </FooterLink>
+        <Hidden xsDown>
+          <ExternalLink href={feedbackFormUrl}>
+            <FooterLink onClick={feedbackOnClick}>
+              {footer.feedbackButtonLabel}
+            </FooterLink>
+          </ExternalLink>
+        </Hidden>
       </FooterHalf>
       <FooterHalf>
         <SmallShareButtons
@@ -85,6 +100,13 @@ const Footer: React.FC<{
   );
 };
 
+const renderModalTitle = () => (
+  <Fragment>
+    <ModalStyle.Title>{modalContent.header}</ModalStyle.Title>
+    <ModalStyle.Subtitle>for official recommendations</ModalStyle.Subtitle>
+  </Fragment>
+);
+
 //TODO (chelsi): add in correct icon info when added to cms
 const Recommend = (props: {
   introCopy: string;
@@ -93,6 +115,7 @@ const Recommend = (props: {
   shareUrl: string;
   shareQuote: string;
   recommendationsRef: React.RefObject<HTMLDivElement>;
+  feedbackFormUrl: string;
 }) => {
   const {
     introCopy,
@@ -101,13 +124,9 @@ const Recommend = (props: {
     shareUrl,
     shareQuote,
     recommendationsRef,
+    feedbackFormUrl,
   } = props;
   const [isDialogOpen, openDialog, closeDialog] = useDialog(false);
-  const [
-    isFeedbackDialogOpen,
-    openFeedbackDialog,
-    closeFeedbackDialog,
-  ] = useDialog(false);
 
   const openModalRecommendations = () => {
     openDialog();
@@ -115,15 +134,6 @@ const Recommend = (props: {
       EventCategory.RECOMMENDATIONS,
       EventAction.OPEN_MODAL,
       'Methodology & Sources',
-    );
-  };
-
-  const openModalFeedback = () => {
-    openFeedbackDialog();
-    trackEvent(
-      EventCategory.RECOMMENDATIONS,
-      EventAction.OPEN_MODAL,
-      'Feedback Form',
     );
   };
 
@@ -151,26 +161,18 @@ const Recommend = (props: {
       </RecommendationsContainer>
       <Footer
         onClickOpenModal={openModalRecommendations}
-        onClickOpenFeedbackModal={openModalFeedback}
         shareUrl={shareUrl}
         shareQuote={shareQuote}
+        feedbackFormUrl={feedbackFormUrl}
       />
       <Dialog
         open={isDialogOpen}
         closeDialog={closeDialog}
         fullWidth
         maxWidth="md"
+        renderHeader={renderModalTitle}
       >
         <RecommendModal />
-      </Dialog>
-      <Dialog
-        open={isFeedbackDialogOpen}
-        closeDialog={closeFeedbackDialog}
-        fullWidth
-        maxWidth="md"
-      >
-        {/* TODO: Add the embed form here */}
-        Feedback
       </Dialog>
     </Wrapper>
   );
