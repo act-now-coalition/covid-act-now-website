@@ -4,7 +4,7 @@ import { SurveyButton } from './Banner.style';
 import { Link } from 'react-router-dom';
 
 const renderDonationButton = () => (
-  <Link to="/donate">
+  <Link to="/donate" id="donate-homepage-banner">
     <SurveyButton
       variant="contained"
       color="primary"
