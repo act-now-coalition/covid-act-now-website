@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { sum, isNumber } from 'lodash';
+import { sum, isNumber, reject } from 'lodash';
 import { Projection, Column } from 'common/models/Projection';
 import {
   Metric,
@@ -28,6 +28,8 @@ export function trackRecommendationsEvent(action: EventAction, label: string) {
  * TODO: Add the more nuanced levels for the Fed recommendations
  */
 
+const YELLOW_RECOMMENDATION_EXCEPTIONS = ['GYMS_YELLOW', 'BARS_YELLOW'];
+
 //TODO (Chelsi): fix the any
 export function getRecommendations(
   projection: Projection,
@@ -35,25 +37,34 @@ export function getRecommendations(
 ): any[] {
   const fedLevel = getFedLevel(projection);
   const harvardLevel = getHarvardLevel(projection);
+  const positiveTestRate = getPositiveTestRate(projection);
 
-  const fedRecommendations = recommendations
+  let fedRecommendations = recommendations
     .filter(item => item.source === RecommendationSource.FED)
-    .filter(item => {
-      // if we don't have a Fed level, we return the recommendations for
-      // the green level
-      return fedLevel ? item.level === fedLevel : item.level === FedLevel.GREEN;
-    })
-    .map(getIcon);
+    .filter(item => item.level === fedLevel);
+
+  /**
+   * Some Fed recommendations in the Yellow level only apply when the positive
+   * test rate is over 3% - we filter those out when that's the case.
+   */
+  const isLowYellowLevel =
+    isNumber(fedLevel) &&
+    fedLevel === FedLevel.YELLOW &&
+    isNumber(positiveTestRate) &&
+    positiveTestRate < 3 / 100;
+
+  // Limit gyms to 25% occupancy and close bars until percent positive rates are under 3%
+  fedRecommendations = reject(
+    fedRecommendations,
+    item =>
+      isLowYellowLevel && YELLOW_RECOMMENDATION_EXCEPTIONS.includes(item.id),
+  );
 
   const harvardRecommendations = recommendations
     .filter(item => item.source === RecommendationSource.HARVARD)
-    .filter(item => item.level === harvardLevel)
-    .map(getIcon);
+    .filter(item => item.level === harvardLevel);
 
-  // TODO (Pablo): Handle more granular recommendations that depend
-  // on specific values for positive test rates.
-
-  return [...fedRecommendations, ...harvardRecommendations];
+  return [...fedRecommendations, ...harvardRecommendations].map(getIcon);
 }
 
 /**
