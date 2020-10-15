@@ -20,7 +20,8 @@ import {
   getShareQuote,
   getFedLevel,
   getHarvardLevel,
-  getModalCopyWithLevel,
+  getModalCopyWithFedLevel,
+  getModalCopyWithHarvardLevel,
 } from 'common/utils/recommend';
 import { mainContent } from 'cms-content/recommendations';
 import { getRecommendationsShareUrl } from 'common/urls';
@@ -128,9 +129,18 @@ const ChartsHolder = (props: {
   const recommendationsFeedbackForm = `https://can386399.typeform.com/to/WSPYSGPe#source=can&id=${uuidv4()}&fips=${
     projection.fips
   }`;
-  const recommendationsModalCopy = getModalCopyWithLevel(
+
+  // TODO(Chelsi): make these 2 functions less redundant?
+  const recommendationsFedModalCopy = getModalCopyWithFedLevel(
     projection,
     projection.locationName,
+    props.projections.getMetricValues(),
+  );
+
+  const recommendationsHarvardModalCopy = getModalCopyWithHarvardLevel(
+    projection,
+    projection.locationName,
+    props.projections.getMetricValues(),
   );
 
   // TODO(pablo): Create separate refs for signup and share
@@ -171,7 +181,8 @@ const ChartsHolder = (props: {
                   feedbackFormUrl={recommendationsFeedbackForm}
                   fedLevel={getFedLevel(props.projections.primary)}
                   harvardLevel={getHarvardLevel(props.projections.primary)}
-                  modalLocationCopy={recommendationsModalCopy}
+                  harvardModalLocationCopy={recommendationsHarvardModalCopy}
+                  fedModalLocationCopy={recommendationsFedModalCopy}
                 />
               )}
               {ALL_METRICS.map(metric => (

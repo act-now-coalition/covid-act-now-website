@@ -123,7 +123,8 @@ const Recommend = (props: {
   feedbackFormUrl: string;
   fedLevel: FedLevel | null;
   harvardLevel: HarvardLevel | null;
-  modalLocationCopy: string;
+  harvardModalLocationCopy: string;
+  fedModalLocationCopy: string;
 }) => {
   const {
     introCopy,
@@ -135,7 +136,8 @@ const Recommend = (props: {
     feedbackFormUrl,
     fedLevel,
     harvardLevel,
-    modalLocationCopy,
+    harvardModalLocationCopy,
+    fedModalLocationCopy,
   } = props;
   const [isDialogOpen, openDialog, closeDialog] = useDialog(false);
 
@@ -186,7 +188,8 @@ const Recommend = (props: {
         <RecommendModal
           fedLevel={fedLevel}
           harvardLevel={harvardLevel}
-          modalLocationCopy={modalLocationCopy}
+          fedModalLocationCopy={fedModalLocationCopy}
+          harvardModalLocationCopy={harvardModalLocationCopy}
         />
       </Dialog>
     </Wrapper>

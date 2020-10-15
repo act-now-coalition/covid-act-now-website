@@ -77,8 +77,14 @@ const harvardTabIndex = {
 const RecommendModalBody: React.FC<{
   fedLevel: FedLevel | null;
   harvardLevel: HarvardLevel | null;
-  modalLocationCopy: string;
-}> = ({ fedLevel, harvardLevel, modalLocationCopy }) => {
+  fedModalLocationCopy: string;
+  harvardModalLocationCopy: string;
+}> = ({
+  fedLevel,
+  harvardLevel,
+  fedModalLocationCopy,
+  harvardModalLocationCopy,
+}) => {
   function onSelectLevel(level: SourceLevel, source: string) {
     const trackLabel = `${source}: ${level.label}`;
     trackEvent(EventCategory.RECOMMENDATIONS, EventAction.SELECT, trackLabel);
@@ -97,38 +103,49 @@ const RecommendModalBody: React.FC<{
           ))}
         </Style.ModalContents>
       </Hidden>
-      <Style.LocationDescription>{modalLocationCopy}</Style.LocationDescription>
       <div>
-        {sources.map((source, i) => (
-          <Style.SourceContainer key={`source-${i}`}>
-            <Style.SourceCopyContainer item sm={6} xs={12} key="intro">
-              <Style.SourceTitle id={`${source.linkLabel}`}>
-                {source.sourceName}
-              </Style.SourceTitle>
-              <Style.SourceIntro
-                source={source.description}
-                linkTarget="_blank"
-              />
-            </Style.SourceCopyContainer>
-            <Grid item sm={6} xs={12} key="levels">
-              <SourceTabs
-                levels={source.levels}
-                onSelectLevel={(level: SourceLevel) =>
-                  onSelectLevel(level, source.trackLabel)
-                }
-                initialLevel={
-                  i === 0
-                    ? fedLevel
-                      ? fedTabIndex[fedLevel]
+        {sources.map((source, i) => {
+          const locationCopyToUse =
+            source.sourceName === 'White House Coronavirus Task Force'
+              ? fedModalLocationCopy
+              : harvardModalLocationCopy;
+          const descriptionWithLocationCopy = `${
+            source.description
+          }${' '}${locationCopyToUse}`;
+
+          return (
+            <Style.SourceContainer key={`source-${i}`}>
+              <Style.SourceCopyContainer item sm={6} xs={12} key="intro">
+                <Style.SourceTitle id={`${source.linkLabel}`}>
+                  {source.sourceName}
+                </Style.SourceTitle>
+                <Style.SourceIntro
+                  // source={source.description}
+                  source={descriptionWithLocationCopy}
+                  linkTarget="_blank"
+                />
+                {/* <span>{' '}{modalLocationCopy}</span> */}
+              </Style.SourceCopyContainer>
+              <Grid item sm={6} xs={12} key="levels">
+                <SourceTabs
+                  levels={source.levels}
+                  onSelectLevel={(level: SourceLevel) =>
+                    onSelectLevel(level, source.trackLabel)
+                  }
+                  initialLevel={
+                    i === 0
+                      ? fedLevel
+                        ? fedTabIndex[fedLevel]
+                        : 0
+                      : harvardLevel
+                      ? harvardTabIndex[harvardLevel]
                       : 0
-                    : harvardLevel
-                    ? harvardTabIndex[harvardLevel]
-                    : 0
-                }
-              />
-            </Grid>
-          </Style.SourceContainer>
-        ))}
+                  }
+                />
+              </Grid>
+            </Style.SourceContainer>
+          );
+        })}
       </div>
     </React.Fragment>
   );
