@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { sum, isNumber, reject } from 'lodash';
+import { sum, isNumber, reject, isNull } from 'lodash';
 import { Projection, Column } from 'common/models/Projection';
 import {
   Metric,
@@ -39,9 +39,18 @@ export function getRecommendations(
   const harvardLevel = getHarvardLevel(projection);
   const positiveTestRate = getPositiveTestRate(projection);
 
+  const harvardRecommendations = recommendations
+    .filter(item => item.source === RecommendationSource.HARVARD)
+    .filter(item => item.level === harvardLevel);
+
   let fedRecommendations = recommendations
     .filter(item => item.source === RecommendationSource.FED)
-    .filter(item => item.level === fedLevel);
+    .filter(item => {
+      // If the fedLevel is null, we return recommendations for the Green levels
+      return isNull(fedLevel)
+        ? item.level === FedLevel.GREEN
+        : item.level === fedLevel;
+    });
 
   /**
    * Some Fed recommendations in the Yellow level only apply when the positive
@@ -54,17 +63,14 @@ export function getRecommendations(
     positiveTestRate < 3 / 100;
 
   // Limit gyms to 25% occupancy and close bars until percent positive rates are under 3%
-  fedRecommendations = reject(
-    fedRecommendations,
-    item =>
-      isLowYellowLevel && YELLOW_RECOMMENDATION_EXCEPTIONS.includes(item.id),
-  );
+  if (isLowYellowLevel) {
+    fedRecommendations = reject(fedRecommendations, item =>
+      YELLOW_RECOMMENDATION_EXCEPTIONS.includes(item.id),
+    );
+  }
 
-  const harvardRecommendations = recommendations
-    .filter(item => item.source === RecommendationSource.HARVARD)
-    .filter(item => item.level === harvardLevel);
-
-  return [...fedRecommendations, ...harvardRecommendations].map(getIcon);
+  const allRecommendations = [...fedRecommendations, ...harvardRecommendations];
+  return allRecommendations.map(getIcon);
 }
 
 /**
@@ -73,12 +79,12 @@ export function getRecommendations(
  *
  * https://www.nytimes.com/interactive/2020/07/28/us/states-report-virus-response-july-26.html
  */
-export function getFedLevel(projection: Projection): FedLevel | undefined {
+export function getFedLevel(projection: Projection): FedLevel | null {
   const weeklyCasesPer100k = getWeeklyNewCasesPer100k(projection);
   const positiveTestRate = getPositiveTestRate(projection);
 
   if (!isNumber(weeklyCasesPer100k) || !isNumber(positiveTestRate)) {
-    return undefined;
+    return null;
   }
 
   if (weeklyCasesPer100k > 100 && positiveTestRate > 0.1) {
