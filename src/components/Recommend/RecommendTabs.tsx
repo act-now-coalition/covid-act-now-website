@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import * as Style from './RecommendModal.style';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import { FedLevel, HarvardLevel } from 'cms-content/recommendations';
 
 type Markdown = string;
 type Color = string;
