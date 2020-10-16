@@ -4,7 +4,7 @@
 backend:
   name: github
   repo: covid-projections/covid-projections
-  branch: cms-content-entry
+  branch: casulin/can-recommend
   base_url: https://api.netlify.com
 
 media_folder: 'public/images_cms'
@@ -75,3 +75,82 @@ collections:
               - label: Section Copy
                 name: copy
                 widget: markdown
+  - name: recommendations
+    label: Recommendations
+    format: json
+    description: Recommendations content
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    files:
+      - name: Recommendations-Main
+        label: Recommendations content - Main
+        file: src/cms-content/recommendations/recommendations-main.json
+        fields:
+          - label: Header
+            name: header
+            widget: string
+            default: true
+          - label: Recommendations
+            name: recommendations
+            widget: list
+            fields:
+              - { label: Body, name: body, widget: markdown }
+              - { label: Source, name: source, widget: string }
+              - { label: Category, name: category, widget: string }
+              - { label: Level, name: level, widget: string }
+              - { label: ID, name: id, widget: string }
+          - label: Footer
+            name: footer
+            widget: object
+            collapsed: true
+            fields:
+              - {
+                  label: Modal button label,
+                  name: modalButtonLabel,
+                  widget: string,
+                }
+              - {
+                  label: Feedback button label,
+                  name: feedbackButtonLabel,
+                  widget: string,
+                }
+              - { label: Share text, name: shareText, widget: markdown }
+          - label: Icons
+            name: icons
+            widget: list
+            fields:
+              - { label: Category, name: category, widget: string }
+              - { label: Alt text, name: altText, widget: string }
+              - { label: Icon image, name: iconImage, widget: image }
+      - name: Recommendations-Modal
+        label: Recommendations content - Modal
+        file: src/cms-content/recommendations/recommendations-modal.json
+        fields:
+          - { label: 'Header', name: 'header', widget: 'string', default: true }
+          - label: Section - Federal Task Force
+            name: federalTaskForce
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Source Name, name: sourceName, widget: string }
+              - { label: Description, name: description, widget: markdown }
+              - label: Levels
+                name: levels
+                widget: list
+                fields:
+                  - { label: Color, name: color, widget: string }
+                  - { label: Content, name: content, widget: markdown }
+          - label: Section - Harvard
+            name: harvard
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Source Name, name: sourceName, widget: string }
+              - { label: Description, name: description, widget: markdown }
+              - label: Levels
+                name: levels
+                widget: list
+                fields:
+                  - { label: Color, name: color, widget: string }
+                  - { label: Content, name: content, widget: markdown }

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import palette from 'assets/theme/palette';
 import { Typography } from '@material-ui/core';
 
@@ -69,7 +69,7 @@ export const ChartHeader = styled.div`
   }
 `;
 
-export const ChartLocationName = styled(Typography)`
+export const ChartLocationNameStyles = css`
   margin-bottom: 0.625rem;
   font-weight: normal;
   font-size: 13px;
@@ -78,6 +78,10 @@ export const ChartLocationName = styled(Typography)`
   text-transform: uppercase;
   color: rgba(0, 0, 0, 0.7);
   opacity: 0.7;
+`;
+
+export const ChartLocationName = styled(Typography)`
+  ${ChartLocationNameStyles}
 `;
 
 export const ChartDescription = styled(Typography)`
