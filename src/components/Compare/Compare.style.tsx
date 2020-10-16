@@ -417,7 +417,7 @@ export const Footer = styled.div<{ isCounty: any }>`
   }
 `;
 
-export const FooterLink = styled.div<{ isFaqLink?: boolean }>`
+export const FooterLinkStyles = css`
   font-family: Roboto;
   color: ${COLOR_MAP.BLUE};
   font-weight: 500;
@@ -425,24 +425,11 @@ export const FooterLink = styled.div<{ isFaqLink?: boolean }>`
   display: flex;
   align-items: center;
   height: fit-content;
-  border-radius: ${({ isFaqLink }) => isFaqLink && '4px'};
-  padding: ${({ isFaqLink }) => isFaqLink && '.35rem .75rem'};
-  border: ${({ isFaqLink }) => isFaqLink && '1px solid #f2f2f2'};
+  font-size: 14px;
+`;
 
-  &:hover {
-    background-color: ${({ isFaqLink }) => isFaqLink && '#fafafa'};
-  }
-
-  @media (min-width: 600px) {
-    &:last-child {
-      margin-left: auto;
-    }
-  }
-
-  svg {
-    font-size: 1.25rem;
-    margin-right: 0.4rem;
-  }
+export const FooterLink = styled.div`
+  ${FooterLinkStyles}
 `;
 
 export const HeaderWrapper = styled.div`

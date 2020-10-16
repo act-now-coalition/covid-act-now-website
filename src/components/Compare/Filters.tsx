@@ -1,7 +1,5 @@
 import React, { Fragment, useRef, useEffect } from 'react';
 import {
-  Switch,
-  Grid,
   Grow,
   MenuList,
   MenuItem,
@@ -23,11 +21,10 @@ import {
   GeoSlider,
   DropdownContainer,
   MetroMenuButton,
-  SwitchGrid,
   MetroMenuPopper,
-  SwitchLabel,
 } from 'components/Compare/Filters.style';
 import { EventAction } from 'components/Analytics';
+import { SwitchComponent } from 'components/SharedComponents';
 
 // Maps each numerical slider value to its corresponding GeoScopeFilter
 export const sliderNumberToFilterMap: { [val: number]: GeoScopeFilter } = {
@@ -150,34 +147,19 @@ const Filters = (props: {
     props.setViewAllCounties && props.setViewAllCounties(on);
   };
 
+  const switchProps = {
+    leftLabel: 'States',
+    rightLabel: 'Counties',
+    checkedValue: props.viewAllCounties,
+    onChange: switchHandleChange,
+    gridOnClick,
+    isModal: props.isModal,
+  };
+
   return (
     <Fragment>
       <Container isModal={props.isModal} isHomepage={props.isHomepage}>
-        {props.isHomepage && (
-          <SwitchGrid
-            container
-            alignItems="center"
-            spacing={1}
-            viewAllCounties={props.viewAllCounties}
-            isModal={props.isModal}
-          >
-            <SwitchLabel onClick={() => gridOnClick(false)} item>
-              States
-            </SwitchLabel>
-            <Grid item>
-              <Switch
-                checked={props.viewAllCounties}
-                onChange={switchHandleChange}
-                value="checked"
-                size="small"
-                disableRipple
-              />
-            </Grid>
-            <SwitchLabel onClick={() => gridOnClick(true)} item>
-              Counties
-            </SwitchLabel>
-          </SwitchGrid>
-        )}
+        {props.isHomepage && <SwitchComponent {...switchProps} />}
         {props.county && (
           <SliderContainer>
             <GeoSlider

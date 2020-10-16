@@ -23,10 +23,10 @@ import {
 } from 'common/utils/compare';
 import { COLOR_MAP } from 'common/colors';
 import ShareImageButtons from 'components/ShareButtons/ShareButtonGroup';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import { sliderNumberToFilterMap } from 'components/Compare/Filters';
 import { getComparePageUrl, getCompareShareImageUrl } from 'common/urls';
 import { EventAction } from 'components/Analytics';
+import { MoreInfoButton } from 'components/SharedComponents';
 
 const CompareTable = (props: {
   stateName?: string;
@@ -273,10 +273,7 @@ const CompareTable = (props: {
               </FooterLink>
             )}
           </div>
-          <FooterLink onClick={onClickFAQ} isFaqLink>
-            <InfoOutlinedIcon />
-            More info
-          </FooterLink>
+          <MoreInfoButton onClick={onClickFAQ} />
         </Footer>
       )}
     </Wrapper>
