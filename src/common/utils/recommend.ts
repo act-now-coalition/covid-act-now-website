@@ -126,41 +126,31 @@ export function getHarvardLevel(projection: Projection): HarvardLevel {
   }
 }
 
-function getSharedLocationMetricCopy(
-  metricValues: { [metric in Metric]: number | null },
-  projection: Projection,
-): string {
-  const hasPositiveTest = isNumber(getPositiveTestRate(projection));
-  const numCasesPerWeek = getWeeklyNewCasesPer100k(projection);
-  const numCasesperWeekText = formatDecimal(numCasesPerWeek || 0, 1);
-
-  return `with ${numCasesperWeekText} ${casesPerWeekMetricName}${
-    hasPositiveTest
-      ? ` and ${formatValue(
-          Metric.POSITIVE_TESTS,
-          metricValues[Metric.POSITIVE_TESTS],
-          '',
-        )} ${getMetricNameForCompare(Metric.POSITIVE_TESTS).toLowerCase()}`
-      : ''
-  }.`;
-}
-
 export function getModalCopyWithFedLevel(
   projection: Projection,
   locationName: string,
   metricValues: { [metric in Metric]: number | null },
 ): string {
   const hasPositiveTest = isNumber(getPositiveTestRate(projection));
-  return `${
-    hasPositiveTest
-      ? `${locationName} is in its ${getFedLevel(
-          projection,
-        )?.toLowerCase()} zone ${getSharedLocationMetricCopy(
-          metricValues,
-          projection,
-        )}`
-      : ''
-  }`;
+  const numCasesPerWeek = getWeeklyNewCasesPer100k(projection);
+  const numCasesperWeekText = formatDecimal(numCasesPerWeek || 0, 1);
+  const positiveTestRate = formatValue(
+    Metric.POSITIVE_TESTS,
+    metricValues[Metric.POSITIVE_TESTS],
+    '',
+  );
+  const positiveTestRateMetricName = getMetricNameForCompare(
+    Metric.POSITIVE_TESTS,
+  ).toLowerCase();
+
+  const fedLevel = getFedLevel(projection)?.toLowerCase();
+
+  if (!hasPositiveTest) {
+    return '';
+  } else {
+    return `${locationName} is in its ${fedLevel} zone with ${numCasesperWeekText} ${casesPerWeekMetricName}
+      and ${positiveTestRate} ${positiveTestRateMetricName}`;
+  }
 }
 
 export function getModalCopyWithHarvardLevel(
@@ -168,12 +158,31 @@ export function getModalCopyWithHarvardLevel(
   locationName: string,
   metricValues: { [metric in Metric]: number | null },
 ): string {
-  return `${locationName} is in its ${getHarvardLevel(
-    projection,
-  ).toLowerCase()} zone ${getSharedLocationMetricCopy(
-    metricValues,
-    projection,
-  )}`;
+  const harvardLevel = getHarvardLevel(projection).toLowerCase();
+  const hasPositiveTest = isNumber(getPositiveTestRate(projection));
+
+  const dailyNewCasesPer100k = formatValue(
+    Metric.CASE_DENSITY,
+    metricValues[Metric.CASE_DENSITY],
+    '',
+  );
+  const newCasesMetricName = getMetricNameForCompare(
+    Metric.CASE_DENSITY,
+  ).toLowerCase();
+  const positiveTestRate = formatValue(
+    Metric.POSITIVE_TESTS,
+    metricValues[Metric.POSITIVE_TESTS],
+    '',
+  );
+  const positiveTestRateMetricName = getMetricNameForCompare(
+    Metric.POSITIVE_TESTS,
+  ).toLowerCase();
+
+  return `${locationName} is in its ${harvardLevel} zone with ${dailyNewCasesPer100k} ${newCasesMetricName} ${
+    hasPositiveTest
+      ? ` and ${positiveTestRate} ${positiveTestRateMetricName}`
+      : ''
+  }`;
 }
 
 /**
