@@ -149,7 +149,7 @@ export function getModalCopyWithFedLevel(
     return '';
   } else {
     return `${locationName} is in its ${fedLevel} zone with ${numCasesperWeekText} ${casesPerWeekMetricName}
-      and ${positiveTestRate} ${positiveTestRateMetricName}`;
+      and ${positiveTestRate} ${positiveTestRateMetricName}.`;
   }
 }
 
@@ -178,11 +178,11 @@ export function getModalCopyWithHarvardLevel(
     Metric.POSITIVE_TESTS,
   ).toLowerCase();
 
-  return `${locationName} is in its ${harvardLevel} zone with ${dailyNewCasesPer100k} ${newCasesMetricName} ${
+  return `${locationName} is in its ${harvardLevel} zone with ${dailyNewCasesPer100k} ${newCasesMetricName}${
     hasPositiveTest
       ? ` and ${positiveTestRate} ${positiveTestRateMetricName}`
       : ''
-  }`;
+  }.`;
 }
 
 /**
