@@ -7,7 +7,7 @@ const Banner: React.FC<{
   renderButton?: () => React.ReactElement;
 }> = ({ message, renderButton }) => {
   return (
-    <Styles.FeatureBannerContainer container spacing={1}>
+    <Styles.MainContainer container spacing={1}>
       <Grid item sm md lg>
         {message}
       </Grid>
@@ -16,7 +16,7 @@ const Banner: React.FC<{
           {renderButton()}
         </Styles.ButtonContainer>
       )}
-    </Styles.FeatureBannerContainer>
+    </Styles.MainContainer>
   );
 };
 
