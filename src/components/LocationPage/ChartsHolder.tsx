@@ -106,7 +106,7 @@ const ChartsHolder = (props: {
   }, [props.projections.primary.fips]);
 
   const recommendationsIntro = getDynamicIntroCopy(
-    projection.locationName,
+    projection,
     props.projections.getMetricValues(),
   );
 

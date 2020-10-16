@@ -19,6 +19,7 @@ import {
 import { allIcons } from 'cms-content/recommendations';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import { getAbbreviatedCounty } from 'common/utils/compare';
+import { formatDecimal } from '.';
 
 export function trackRecommendationsEvent(action: EventAction, label: string) {
   trackEvent(EventCategory.RECOMMENDATIONS, action, label);
@@ -129,11 +130,14 @@ function getSharedLocationMetricCopy(
 ): string {
   const hasPositiveTest = isNumber(getPositiveTestRate(projection));
 
-  return `with ${formatValue(
+  const caseIncidence = formatValue(
     Metric.CASE_DENSITY,
     metricValues[Metric.CASE_DENSITY],
     '',
-  )} ${getMetricNameForCompare(Metric.CASE_DENSITY).toLowerCase()}${
+  );
+  const metricName = getMetricNameForCompare(Metric.CASE_DENSITY).toLowerCase();
+
+  return `with ${caseIncidence} ${metricName}${
     hasPositiveTest
       ? ` and ${formatValue(
           Metric.POSITIVE_TESTS,
@@ -210,18 +214,17 @@ function isBetweenDates(point: Column, dateFrom: Date, dateTo: Date) {
  * Generates location+metric-specific section of intro blurb
  */
 export function getDynamicIntroCopy(
-  locationName: string,
+  projection: Projection,
   metricValues: { [metric in Metric]: number | null },
 ): string {
+  const { locationName } = projection;
   const hasPosTestRate = isNumber(metricValues[Metric.POSITIVE_TESTS]);
 
-  const blurb = `Based on ${locationName}'s ${getMetricNameForCompare(
-    Metric.CASE_DENSITY,
-  ).toLowerCase()} (${formatValue(
-    Metric.CASE_DENSITY,
-    metricValues[Metric.CASE_DENSITY],
-    '',
-  )})${
+  const casesPerWeekMetricName = 'new cases per 100k in the last 7 days';
+  const numCasesPerWeek = getWeeklyNewCasesPer100k(projection);
+  const numCasesPerWeekText = formatDecimal(numCasesPerWeek || 0, 1);
+
+  const blurb = `Based on ${locationName}'s ${casesPerWeekMetricName} (${numCasesPerWeekText})${
     hasPosTestRate
       ? ` and ${getMetricNameForCompare(
           Metric.POSITIVE_TESTS,
