@@ -25,6 +25,8 @@ export function trackRecommendationsEvent(action: EventAction, label: string) {
   trackEvent(EventCategory.RECOMMENDATIONS, action, label);
 }
 
+const casesPerWeekMetricName = 'new cases per 100k in the last 7 days';
+
 /**
  * TODO: Add the more nuanced levels for the Fed recommendations
  */
@@ -129,15 +131,9 @@ function getSharedLocationMetricCopy(
   projection: Projection,
 ): string {
   const hasPositiveTest = isNumber(getPositiveTestRate(projection));
+  const numCasesPerWeek = getWeeklyNewCasesPer100k(projection);
 
-  const caseIncidence = formatValue(
-    Metric.CASE_DENSITY,
-    metricValues[Metric.CASE_DENSITY],
-    '',
-  );
-  const metricName = getMetricNameForCompare(Metric.CASE_DENSITY).toLowerCase();
-
-  return `with ${caseIncidence} ${metricName}${
+  return `with ${numCasesPerWeek} ${casesPerWeekMetricName}${
     hasPositiveTest
       ? ` and ${formatValue(
           Metric.POSITIVE_TESTS,
@@ -220,7 +216,6 @@ export function getDynamicIntroCopy(
   const { locationName } = projection;
   const hasPosTestRate = isNumber(metricValues[Metric.POSITIVE_TESTS]);
 
-  const casesPerWeekMetricName = 'new cases per 100k in the last 7 days';
   const numCasesPerWeek = getWeeklyNewCasesPer100k(projection);
   const numCasesPerWeekText = formatDecimal(numCasesPerWeek || 0, 1);
 
