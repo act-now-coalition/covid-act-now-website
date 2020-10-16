@@ -19,10 +19,13 @@ import {
 import { allIcons } from 'cms-content/recommendations';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import { getAbbreviatedCounty } from 'common/utils/compare';
+import { formatDecimal } from '.';
 
 export function trackRecommendationsEvent(action: EventAction, label: string) {
   trackEvent(EventCategory.RECOMMENDATIONS, action, label);
 }
+
+const casesPerWeekMetricName = 'new cases per 100k in the last 7 days';
 
 /**
  * TODO: Add the more nuanced levels for the Fed recommendations
@@ -123,43 +126,31 @@ export function getHarvardLevel(projection: Projection): HarvardLevel {
   }
 }
 
-function getSharedLocationMetricCopy(
-  metricValues: { [metric in Metric]: number | null },
-  projection: Projection,
-): string {
-  const hasPositiveTest = isNumber(getPositiveTestRate(projection));
-
-  return `with ${formatValue(
-    Metric.CASE_DENSITY,
-    metricValues[Metric.CASE_DENSITY],
-    '',
-  )} ${getMetricNameForCompare(Metric.CASE_DENSITY).toLowerCase()}${
-    hasPositiveTest
-      ? ` and ${formatValue(
-          Metric.POSITIVE_TESTS,
-          metricValues[Metric.POSITIVE_TESTS],
-          '',
-        )} ${getMetricNameForCompare(Metric.POSITIVE_TESTS).toLowerCase()}`
-      : ''
-  }.`;
-}
-
 export function getModalCopyWithFedLevel(
   projection: Projection,
   locationName: string,
   metricValues: { [metric in Metric]: number | null },
 ): string {
   const hasPositiveTest = isNumber(getPositiveTestRate(projection));
-  return `${
-    hasPositiveTest
-      ? `${locationName} is in its ${getFedLevel(
-          projection,
-        )?.toLowerCase()} zone ${getSharedLocationMetricCopy(
-          metricValues,
-          projection,
-        )}`
-      : ''
-  }`;
+  const numCasesPerWeek = getWeeklyNewCasesPer100k(projection);
+  const numCasesperWeekText = formatDecimal(numCasesPerWeek || 0, 1);
+  const positiveTestRate = formatValue(
+    Metric.POSITIVE_TESTS,
+    metricValues[Metric.POSITIVE_TESTS],
+    '',
+  );
+  const positiveTestRateMetricName = getMetricNameForCompare(
+    Metric.POSITIVE_TESTS,
+  ).toLowerCase();
+
+  const fedLevel = getFedLevel(projection)?.toLowerCase();
+
+  if (!hasPositiveTest) {
+    return '';
+  } else {
+    return `${locationName} is in its ${fedLevel} zone with ${numCasesperWeekText} ${casesPerWeekMetricName}
+      and ${positiveTestRate} ${positiveTestRateMetricName}`;
+  }
 }
 
 export function getModalCopyWithHarvardLevel(
@@ -167,12 +158,31 @@ export function getModalCopyWithHarvardLevel(
   locationName: string,
   metricValues: { [metric in Metric]: number | null },
 ): string {
-  return `${locationName} is in its ${getHarvardLevel(
-    projection,
-  ).toLowerCase()} zone ${getSharedLocationMetricCopy(
-    metricValues,
-    projection,
-  )}`;
+  const harvardLevel = getHarvardLevel(projection).toLowerCase();
+  const hasPositiveTest = isNumber(getPositiveTestRate(projection));
+
+  const dailyNewCasesPer100k = formatValue(
+    Metric.CASE_DENSITY,
+    metricValues[Metric.CASE_DENSITY],
+    '',
+  );
+  const newCasesMetricName = getMetricNameForCompare(
+    Metric.CASE_DENSITY,
+  ).toLowerCase();
+  const positiveTestRate = formatValue(
+    Metric.POSITIVE_TESTS,
+    metricValues[Metric.POSITIVE_TESTS],
+    '',
+  );
+  const positiveTestRateMetricName = getMetricNameForCompare(
+    Metric.POSITIVE_TESTS,
+  ).toLowerCase();
+
+  return `${locationName} is in its ${harvardLevel} zone with ${dailyNewCasesPer100k} ${newCasesMetricName} ${
+    hasPositiveTest
+      ? ` and ${positiveTestRate} ${positiveTestRateMetricName}`
+      : ''
+  }`;
 }
 
 /**
@@ -210,18 +220,16 @@ function isBetweenDates(point: Column, dateFrom: Date, dateTo: Date) {
  * Generates location+metric-specific section of intro blurb
  */
 export function getDynamicIntroCopy(
-  locationName: string,
+  projection: Projection,
   metricValues: { [metric in Metric]: number | null },
 ): string {
+  const { locationName } = projection;
   const hasPosTestRate = isNumber(metricValues[Metric.POSITIVE_TESTS]);
 
-  const blurb = `Based on ${locationName}'s ${getMetricNameForCompare(
-    Metric.CASE_DENSITY,
-  ).toLowerCase()} (${formatValue(
-    Metric.CASE_DENSITY,
-    metricValues[Metric.CASE_DENSITY],
-    '',
-  )})${
+  const numCasesPerWeek = getWeeklyNewCasesPer100k(projection);
+  const numCasesPerWeekText = formatDecimal(numCasesPerWeek || 0, 1);
+
+  const blurb = `Based on ${locationName}'s ${casesPerWeekMetricName} (${numCasesPerWeekText})${
     hasPosTestRate
       ? ` and ${getMetricNameForCompare(
           Metric.POSITIVE_TESTS,
