@@ -22,7 +22,7 @@ import {
 } from './HomePage.style';
 import { SelectorWrapper } from 'components/Header/HomePageHeader.style';
 import CompareMain from 'components/Compare/CompareMain';
-import { FeatureBanner } from 'components/Banner';
+import { DonationBanner } from 'components/Banner';
 import Explore from 'components/Explore';
 import { getRandomStateFipsList } from './utils';
 
@@ -67,19 +67,6 @@ export default function HomePage() {
 
   const exploreSectionRef = useRef(null);
 
-  // TODO (Chelsi): stop repeating this so much. Put somewhere central.
-  const scrollToExploreSection = () => {
-    return setTimeout(() => {
-      if (exploreSectionRef.current) {
-        window.scrollTo({
-          left: 0,
-          top: exploreSectionRef.current.offsetTop - 75,
-          behavior: 'smooth',
-        });
-      }
-    }, 250);
-  };
-
   return (
     <>
       <EnsureSharingIdInUrl />
@@ -89,7 +76,7 @@ export default function HomePage() {
         pageDescription="Real-time modeling and metrics to understand where we stand against COVID. 50 states. 3,000+ counties. Click the map to dive in"
       />
       <BannerContainer>
-        <FeatureBanner scrollTo={scrollToExploreSection} />
+        <DonationBanner />
       </BannerContainer>
       <HomePageHeader
         indicatorsLinkOnClick={() => scrollTo(indicatorsRef.current)}
