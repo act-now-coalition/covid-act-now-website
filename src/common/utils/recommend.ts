@@ -132,8 +132,9 @@ function getSharedLocationMetricCopy(
 ): string {
   const hasPositiveTest = isNumber(getPositiveTestRate(projection));
   const numCasesPerWeek = getWeeklyNewCasesPer100k(projection);
+  const numCasesperWeekText = formatDecimal(numCasesPerWeek || 0, 1);
 
-  return `with ${numCasesPerWeek} ${casesPerWeekMetricName}${
+  return `with ${numCasesperWeekText} ${casesPerWeekMetricName}${
     hasPositiveTest
       ? ` and ${formatValue(
           Metric.POSITIVE_TESTS,
