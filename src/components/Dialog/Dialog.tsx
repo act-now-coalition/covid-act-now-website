@@ -7,6 +7,8 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import * as Style from './Dialog.style';
 import DialogTitle from './DialogTitle';
+import { DialogTitleProps as MuiDialogTitleProps } from '@material-ui/core/DialogTitle';
+import CloseIcon from '@material-ui/icons/Close';
 
 type CloseReason = 'backdropClick' | 'escapeKeyDown';
 
@@ -14,6 +16,21 @@ export interface DialogProps extends MuiDialogProps {
   closeDialog: () => void;
   renderHeader?: () => React.ReactElement;
 }
+
+export interface DialogTitleProps extends MuiDialogTitleProps {
+  renderHeader?: () => React.ReactElement;
+  onClickClose: () => void;
+}
+
+const ButtonCloseBox: React.FC<{ onClickClose: () => void }> = ({
+  onClickClose,
+}) => (
+  <Style.ButtonContainer>
+    <Style.IconButton aria-label="close" onClick={onClickClose} size="small">
+      <CloseIcon />
+    </Style.IconButton>
+  </Style.ButtonContainer>
+);
 
 const Dialog: React.FC<DialogProps> = props => {
   const theme = useTheme();
@@ -34,8 +51,11 @@ const Dialog: React.FC<DialogProps> = props => {
       {...otherProps}
     >
       <LockBodyScroll />
-      <DialogTitle onClickClose={closeDialog} renderHeader={renderHeader} />
-      <Style.StyledMuiDialogContent>{children}</Style.StyledMuiDialogContent>
+      <ButtonCloseBox onClickClose={closeDialog} />
+      <Style.StyledMuiDialogContent>
+        <DialogTitle onClickClose={closeDialog} renderHeader={renderHeader} />
+        {children}
+      </Style.StyledMuiDialogContent>
     </MuiDialog>
   );
 };
