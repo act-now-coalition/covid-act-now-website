@@ -3,6 +3,15 @@
     {
       "disclaimerCopy": "test test",
       "stateCode": "NY"
+    },
+    {
+      "stateCode": "CT",
+      "countyFips": [
+        {
+          "fips": "09001"
+        }
+      ],
+      "disclaimerCopy": "county disclaimer test"
     }
   ]
 }
