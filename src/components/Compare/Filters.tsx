@@ -158,7 +158,7 @@ const Filters = (props: {
 
   return (
     <Fragment>
-      <Container isModal={props.isModal} isHomepage={props.isHomepage}>
+      <Container $isModal={props.isModal} $isHomepage={props.isHomepage}>
         {props.isHomepage && <SwitchComponent {...switchProps} />}
         {props.county && (
           <SliderContainer>
@@ -168,7 +168,7 @@ const Filters = (props: {
               step={null}
               marks={marks}
               track={false}
-              isModal={props.isModal}
+              $isModal={props.isModal}
               geoScope={props.geoScope}
             />
           </SliderContainer>
@@ -177,11 +177,11 @@ const Filters = (props: {
           ref={anchorRef}
           onClick={handleMenuToggle}
           disabled={disableMetroMenu}
-          isMobile={isMobile}
+          $isMobile={isMobile}
           disableRipple
-          isOpen={open}
-          isStatePage={isStatePage}
-          isModal={props.isModal}
+          $isOpen={open}
+          $isStatePage={isStatePage}
+          $isModal={props.isModal}
         >
           <div>
             <span>Counties</span>

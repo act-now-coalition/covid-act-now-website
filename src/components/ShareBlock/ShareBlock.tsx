@@ -80,10 +80,10 @@ const ShareBlock = ({
             <NewsletterMockup />
           </NewsletterMockupWrapper>
           <NewsletterTextArea>
-            <ShareInstructionHeader alertsInstructions>
+            <ShareInstructionHeader $alertsInstructions>
               Receive Alerts
             </ShareInstructionHeader>
-            <ShareInstructionBody alertsInstructions>
+            <ShareInstructionBody $alertsInstructions>
               We'll email you when your state or county sees a significant
               change in one of their metrics and overall risk score.
             </ShareInstructionBody>

@@ -82,7 +82,7 @@ function Map({
         />
       </div>
       {!hideInstructions && (
-        <MapInstructions isMiniMap={isMiniMap}>
+        <MapInstructions $isMiniMap={isMiniMap}>
           <strong>Click a state</strong> to view risk details{' '}
           <MobileLineBreak /> and county info.
         </MapInstructions>

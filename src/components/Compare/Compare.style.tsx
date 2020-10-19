@@ -17,15 +17,15 @@ export const locationNameCellWidth = 195;
 export const metricCellWidth = 110;
 
 const getMetricHeaderBackground = (
-  sortByPopulation: boolean,
-  isModal: Boolean,
-  isSelectedMetric: boolean,
+  $sortByPopulation: boolean,
+  $isModal: boolean,
+  $isSelectedMetric: boolean,
 ) => {
-  if (isModal) {
-    if (isSelectedMetric && !sortByPopulation) return 'black';
+  if ($isModal) {
+    if ($isSelectedMetric && !$sortByPopulation) return 'black';
     return `${COLOR_MAP.GRAY_BODY_COPY}`;
   } else {
-    if (isSelectedMetric && !sortByPopulation) return `${COLOR_MAP.BLUE}`;
+    if ($isSelectedMetric && !$sortByPopulation) return `${COLOR_MAP.BLUE}`;
     return 'white';
   }
 };
@@ -37,28 +37,31 @@ export const CenteredContentModal = styled(Modal)`
   justify-content: center;
 `;
 
-export const Wrapper = styled.div<{ isModal?: Boolean; isHomepage?: boolean }>`
-  max-width: ${({ isHomepage }) => (isHomepage ? '1000px' : '900px')};
+export const Wrapper = styled.div<{
+  $isModal?: boolean;
+  $isHomepage?: boolean;
+}>`
+  max-width: ${({ $isHomepage }) => ($isHomepage ? '1000px' : '900px')};
   width: 100%;
-  margin: ${({ isModal }) => (isModal ? '0 auto' : '1rem auto')};
-  background: ${({ isModal }) => isModal && `${COLOR_MAP.GRAY_BODY_COPY}`};
-  max-height: ${({ isModal }) => isModal && '100vh'};
+  margin: ${({ $isModal }) => ($isModal ? '0 auto' : '1rem auto')};
+  background: ${({ $isModal }) => $isModal && `${COLOR_MAP.GRAY_BODY_COPY}`};
+  max-height: ${({ $isModal }) => $isModal && '100vh'};
 
   @media (min-width: 600px) {
-    margin: ${({ isModal }) => (isModal ? '0 auto' : '3rem auto')};
-    max-height: ${({ isModal }) => (isModal ? '80vh' : 'unset')};
+    margin: ${({ $isModal }) => ($isModal ? '0 auto' : '3rem auto')};
+    max-height: ${({ $isModal }) => ($isModal ? '80vh' : 'unset')};
   }
 
   @media (min-width: 1060px) {
-    margin: ${({ isModal }) => (isModal ? '0 auto' : '3rem auto 2rem')};
+    margin: ${({ $isModal }) => ($isModal ? '0 auto' : '3rem auto 2rem')};
   }
 
   @media (min-width: 1350px) {
-    margin: ${({ isModal }) => (isModal ? '0 auto' : '3rem 445px 2rem auto')};
+    margin: ${({ $isModal }) => ($isModal ? '0 auto' : '3rem 445px 2rem auto')};
   }
 
   @media (min-width: 1750px) {
-    margin: ${({ isModal }) => (isModal ? '0 auto' : '3rem auto 2rem')};
+    margin: ${({ $isModal }) => ($isModal ? '0 auto' : '3rem auto 2rem')};
   }
 
   table {
@@ -90,8 +93,8 @@ export const Wrapper = styled.div<{ isModal?: Boolean; isHomepage?: boolean }>`
 `;
 
 export const ArrowContainer = styled.div<{
-  arrowColorNotSelected: string;
-  isModal?: Boolean;
+  $arrowColorNotSelected: string;
+  $isModal?: boolean;
 }>`
   color: #bdbdbd;
   font-family: Roboto;
@@ -105,10 +108,10 @@ export const ArrowContainer = styled.div<{
   }
 
   svg {
-    color: ${({ arrowColorNotSelected }) => arrowColorNotSelected};
+    color: ${({ $arrowColorNotSelected }) => $arrowColorNotSelected};
 
     &:hover {
-      color: ${({ isModal }) => (isModal ? 'white' : 'black')};
+      color: ${({ $isModal }) => ($isModal ? 'white' : 'black')};
     }
   }
 `;
@@ -120,45 +123,46 @@ export const CellStyles = css`
 `;
 
 export const LocationHeaderCell = styled(TableCell)<{
-  isModal: Boolean;
-  sortByPopulation: boolean;
-  arrowColorSelected: string;
-  arrowColorNotSelected: string;
-  sortDescending: boolean;
+  $isModal: boolean;
+  $sortByPopulation: boolean;
+  $arrowColorSelected: string;
+  $arrowColorNotSelected: string;
+  $sortDescending: boolean;
 }>`
   ${CellStyles}
 
-  background-color: ${({ isModal, sortByPopulation }) =>
-    isModal && sortByPopulation
+  background-color: ${({ $isModal, $sortByPopulation }) =>
+    $isModal && $sortByPopulation
       ? 'black'
-      : isModal
+      : $isModal
       ? `${COLOR_MAP.GRAY_BODY_COPY}`
-      : sortByPopulation
+      : $sortByPopulation
       ? `${COLOR_MAP.BLUE}`
       : 'white'};
 
-  border-radius: ${({ sortByPopulation }) => sortByPopulation && '4px 4px 0 0'};
-  color: ${({ isModal, sortByPopulation }) =>
-    !isModal && sortByPopulation && 'white'};
+  border-radius: ${({ $sortByPopulation }) =>
+    $sortByPopulation && '4px 4px 0 0'};
+  color: ${({ $isModal, $sortByPopulation }) =>
+    !$isModal && $sortByPopulation && 'white'};
 
   ${ArrowContainer} {
     svg{
       &:first-child {
-        color: ${({ arrowColorSelected, sortByPopulation }) =>
-          sortByPopulation && `${arrowColorSelected}`};
-        opacity: ${({ sortDescending, sortByPopulation }) =>
-          sortDescending && sortByPopulation && '.5'};
+        color: ${({ $arrowColorSelected, $sortByPopulation }) =>
+          $sortByPopulation && `${$arrowColorSelected}`};
+        opacity: ${({ $sortDescending, $sortByPopulation }) =>
+          $sortDescending && $sortByPopulation && '.5'};
       }
       &:nth-child(2){
         transform: translatex(-0.1rem);
-        color: ${({ arrowColorSelected, sortByPopulation }) =>
-          sortByPopulation && `${arrowColorSelected}`};
-        opacity: ${({ sortDescending, sortByPopulation }) =>
-          !sortDescending && sortByPopulation && '.5'};
+        color: ${({ $arrowColorSelected, $sortByPopulation }) =>
+          $sortByPopulation && `${$arrowColorSelected}`};
+        opacity: ${({ $sortDescending, $sortByPopulation }) =>
+          !$sortDescending && $sortByPopulation && '.5'};
       }
       &:hover{
-        color: ${({ arrowColorSelected, sortByPopulation }) =>
-          sortByPopulation && `${arrowColorSelected}`};
+        color: ${({ $arrowColorSelected, $sortByPopulation }) =>
+          $sortByPopulation && `${$arrowColorSelected}`};
         opacity: 1;
       }
     }
@@ -167,76 +171,93 @@ export const LocationHeaderCell = styled(TableCell)<{
   span{
     color: ${COLOR_MAP.GRAY.DARK};
     font-weight: normal;
-    color: ${({ isModal, sortByPopulation }) =>
-      !isModal && sortByPopulation ? 'white' : `${COLOR_MAP.GRAY.DARK}`};
+    color: ${({ $isModal, $sortByPopulation }) =>
+      !$isModal && $sortByPopulation ? 'white' : `${COLOR_MAP.GRAY.DARK}`};
 
   }
 `;
 
 export const MetricHeaderCell = styled(TableCell)<{
-  isModal: Boolean;
-  sortByPopulation: boolean;
-  arrowColorSelected: string;
-  sortDescending: boolean;
-  isSelectedMetric: boolean;
+  $isModal: boolean;
+  $sortByPopulation: boolean;
+  $arrowColorSelected: string;
+  $sortDescending: boolean;
+  $isSelectedMetric: boolean;
 }>`
   ${CellStyles}
 
-  border-radius: ${({ sortByPopulation, isSelectedMetric }) =>
-    !sortByPopulation && isSelectedMetric && '4px 4px 0 0'};
+  border-radius: ${({ $sortByPopulation, $isSelectedMetric }) =>
+    !$sortByPopulation && $isSelectedMetric && '4px 4px 0 0'};
   background-color: ${props =>
     getMetricHeaderBackground(
-      props.sortByPopulation,
-      props.isModal,
-      props.isSelectedMetric,
+      props.$sortByPopulation,
+      props.$isModal,
+      props.$isSelectedMetric,
     )};
-    color: ${({ sortByPopulation, isSelectedMetric }) =>
-      !sortByPopulation && isSelectedMetric && 'white'};
+    color: ${({ $sortByPopulation, $isSelectedMetric }) =>
+      !$sortByPopulation && $isSelectedMetric && 'white'};
 
     ${ArrowContainer} {
       svg{
         &:nth-child(2) {
           transform: translatex(-0.1rem);
           color: ${({
-            arrowColorSelected,
-            sortByPopulation,
-            isSelectedMetric,
+            $arrowColorSelected,
+            $sortByPopulation,
+            $isSelectedMetric,
           }) =>
-            !sortByPopulation && isSelectedMetric && `${arrowColorSelected}`};
-          opacity: ${({ sortDescending, sortByPopulation, isSelectedMetric }) =>
-            !sortDescending && !sortByPopulation && isSelectedMetric && '.5'};
+            !$sortByPopulation &&
+            $isSelectedMetric &&
+            `${$arrowColorSelected}`};
+          opacity: ${({
+            $sortDescending,
+            $sortByPopulation,
+            $isSelectedMetric,
+          }) =>
+            !$sortDescending &&
+            !$sortByPopulation &&
+            $isSelectedMetric &&
+            '.5'};
         }
         &:first-child {
           color: ${({
-            arrowColorSelected,
-            sortByPopulation,
-            isSelectedMetric,
+            $arrowColorSelected,
+            $sortByPopulation,
+            $isSelectedMetric,
           }) =>
-            !sortByPopulation && isSelectedMetric && `${arrowColorSelected}`};
-          opacity: ${({ sortDescending, sortByPopulation, isSelectedMetric }) =>
-            sortDescending && !sortByPopulation && isSelectedMetric && '.5'};
+            !$sortByPopulation &&
+            $isSelectedMetric &&
+            `${$arrowColorSelected}`};
+          opacity: ${({
+            $sortDescending,
+            $sortByPopulation,
+            $isSelectedMetric,
+          }) =>
+            $sortDescending && !$sortByPopulation && $isSelectedMetric && '.5'};
         }
         &:hover{
           color: ${({
-            arrowColorSelected,
-            sortByPopulation,
-            isSelectedMetric,
+            $arrowColorSelected,
+            $sortByPopulation,
+            $isSelectedMetric,
           }) =>
-            !sortByPopulation && isSelectedMetric && `${arrowColorSelected}`};
+            !$sortByPopulation &&
+            $isSelectedMetric &&
+            `${$arrowColorSelected}`};
             opacity: 1;
         }
       }
     }
 `;
 
-export const TableHeadContainer = styled(TableHead)<{ isModal?: Boolean }>`
+export const TableHeadContainer = styled(TableHead)<{ $isModal?: boolean }>`
   ${MetricHeaderCell}, ${LocationHeaderCell} {
     vertical-align: bottom;
     line-height: 1.1rem;
     padding: 1rem 1rem 0.8rem;
-    color: ${({ isModal }) => isModal && 'white'};
-    border-bottom: ${({ isModal }) =>
-      !isModal && `2px solid ${COLORS.LIGHTGRAY}`};
+    color: ${({ $isModal }) => $isModal && 'white'};
+    border-bottom: ${({ $isModal }) =>
+      !$isModal && `2px solid ${COLORS.LIGHTGRAY}`};
   }
 `;
 
@@ -355,19 +376,19 @@ export const Tag = styled.div`
 
 export const Row = styled(TableRow)<{
   index?: number;
-  isCurrentCounty?: boolean;
-  isModal?: boolean;
-  headerRowBackground?: string;
+  $isCurrentCounty?: boolean;
+  $isModal?: boolean;
+  $headerRowBackground?: string;
 }>`
-  background-color: ${({ index, headerRowBackground }) =>
+  background-color: ${({ index, $headerRowBackground }) =>
     !isNumber(index)
-      ? `${headerRowBackground}`
+      ? `${$headerRowBackground}`
       : index % 2 === 0
       ? '#fafafa'
       : 'white'};
-  background-color: ${({ isModal }) =>
-    isModal && `${COLOR_MAP.GRAY_BODY_COPY}`};
-  background-color: ${({ isCurrentCounty }) => isCurrentCounty && '#FFEFD6'};
+  background-color: ${({ $isModal }) =>
+    $isModal && `${COLOR_MAP.GRAY_BODY_COPY}`};
+  background-color: ${({ $isCurrentCounty }) => $isCurrentCounty && '#FFEFD6'};
   border-bottom: none;
 
   th {
@@ -375,8 +396,8 @@ export const Row = styled(TableRow)<{
   }
 
   &:hover {
-    color: ${({ headerRowBackground }) =>
-      !headerRowBackground && `${COLOR_MAP.BLUE}`};
+    color: ${({ $headerRowBackground }) =>
+      !$headerRowBackground && `${COLOR_MAP.BLUE}`};
     ${MetricCell} {
       span,
       ${Tag} {

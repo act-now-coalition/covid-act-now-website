@@ -37,7 +37,7 @@ export const USStateMapWrapper = styled.div`
 export const MapInstructions = styled(Typography)`
   text-align: center;
   margin: ${props =>
-    props.isMiniMap ? '-1rem 1rem 1rem 1rem' : '1rem 1rem 2.5rem'};
+    props.$isMiniMap ? '-1rem 1rem 1rem 1rem' : '1rem 1rem 2.5rem'};
   font-size: 0.875rem;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
 `;

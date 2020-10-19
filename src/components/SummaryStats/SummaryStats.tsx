@@ -34,12 +34,12 @@ const SummaryStat = ({
   chartType: Metric;
   value: number;
   onClick: () => void;
-  beta?: Boolean;
-  condensed?: Boolean;
-  flipSignalStatusOrder?: Boolean;
-  isMobile?: Boolean;
-  isHeader?: Boolean;
-  isEmbed?: Boolean;
+  beta?: boolean;
+  condensed?: boolean;
+  flipSignalStatusOrder?: boolean;
+  isMobile?: boolean;
+  isHeader?: boolean;
+  isEmbed?: boolean;
   embedOnClickBaseURL?: string;
 }) => {
   const levelInfo = getLevelInfo(chartType, value);
@@ -107,14 +107,14 @@ const noop = () => {};
 
 const SummaryStats = (props: {
   stats: { [key: string]: number | null };
-  condensed?: Boolean;
-  isEmbed?: Boolean;
+  condensed?: boolean;
+  isEmbed?: boolean;
   onRtRangeClick?: () => void;
   onTestPositiveClick?: () => void;
   onIcuUtilizationClick?: () => void;
   onContactTracingClick?: () => void;
-  isMobile?: Boolean;
-  isHeader?: Boolean;
+  isMobile?: boolean;
+  isHeader?: boolean;
   embedOnClickBaseURL?: string;
 }) => {
   const hasStats = !!Object.values(props.stats).filter(

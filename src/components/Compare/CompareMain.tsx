@@ -44,7 +44,7 @@ const scopeValueMap = {
 const CompareMain = (props: {
   stateName?: string;
   county: any | null;
-  isModal?: Boolean;
+  isModal?: boolean;
   locationsViewable: number;
   isHomepage?: boolean;
   stateId?: string;
