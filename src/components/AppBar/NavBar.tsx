@@ -5,15 +5,17 @@ import Hidden from '@material-ui/core/Hidden';
 import * as Style from './NavBar.style';
 import { DonateButtonWithoutFade, DonateButtonWithFade } from './DonateButton';
 import MobileMenu from './MobileMenu';
-import { StyledMobileMenu } from './AppBar.style';
+import { StyledMobileMenu, Left } from './AppBar.style';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
+import ArrowBack from '@material-ui/icons/ArrowBack';
+
+const isLocationPage = (pathname: string) => pathname.includes('/us');
 
 const isHomeOrLocationPage = (pathname: string) =>
-  pathname === '/' ||
-  pathname.includes('/us') ||
-  ['/alert_signup', '/compare'].includes(pathname);
+  ['/', '/alert_signup', '/compare'].includes(pathname) ||
+  isLocationPage(pathname);
 
 const NavBar: React.FC = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -31,6 +33,9 @@ const NavBar: React.FC = () => {
   return (
     <Style.AppBar position="sticky" color="transparent" elevation={0}>
       <Style.Toolbar>
+        <Style.BackLink to="/">
+          {isLocationPage(pathname) && <ArrowBack />}
+        </Style.BackLink>
         <Link to="/">
           <Logo />
         </Link>

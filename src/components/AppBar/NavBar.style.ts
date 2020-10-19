@@ -45,3 +45,12 @@ export const TabLink = styled.a`
 export const Spacer = styled.div`
   flex-grow: 1;
 `;
+
+export const BackLink = styled(_NavLink)`
+  margin-right: ${theme.spacing(2)}px;
+  color: black;
+  svg {
+    width: 32px;
+    height: 32px;
+  }
+`;
