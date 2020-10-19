@@ -29,8 +29,8 @@ class DisabledFips {
 }
 
 const DISABLED_CASE_DENSITY: string[] = [
-  '48121', // https://trello.com/c/tOxq8MG2/506-outlier-in-denton-county-tx
   '29095', // https://trello.com/c/xAwGpc6I/503-outlier-in-jackson-county-mo
+  '48029', // https://trello.com/c/qscxlxgR/517-outlier-in-bexar-county-tx-disabled-metric
 ];
 
 const DISABLED_INFECTION_RATE = new DisabledFips([]);
