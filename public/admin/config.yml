@@ -162,6 +162,23 @@ collections:
     editor:
       preview: true
     files:
+      - name: Learn-Landing
+        label: 'Learn: Landing page'
+        file: src/cms-content/learn/learn-landing.json
+        fields:
+          - label: Header
+            name: header
+            widget: string
+            default: true
+          - label: Sections
+            name: sections
+            widget: list
+            fields:
+              - { label: Section title, name: sectionTitle, widget: string }
+              - { label: Section ID, name: sectionId, widget: string }
+              - { label: Description, name: description, widget: markdown }
+              - { label: Button CTA, name: buttonCta, widget: string }
+              - { label: Button redirect, name: buttonRedirect, widget: text }
       - name: Learn-Glossary
         label: 'Learn: Glossary'
         file: src/cms-content/learn/learn-glossary.json
@@ -192,7 +209,8 @@ collections:
             name: sections
             widget: list
             fields:
-              - { label: Section Title, name: sectionTitle, widget: string }
+              - { label: Section title, name: sectionTitle, widget: string }
+              - { label: Section ID, name: sectionId, widget: string }
               - label: Questions
                 name: questions
                 widget: list
