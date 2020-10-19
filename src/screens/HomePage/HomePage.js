@@ -22,7 +22,7 @@ import {
 } from './HomePage.style';
 import { SelectorWrapper } from 'components/Header/HomePageHeader.style';
 import CompareMain from 'components/Compare/CompareMain';
-import { DonationBanner } from 'components/Banner/DonationBanner';
+import { DonationBanner } from 'components/Banner';
 import Explore from 'components/Explore';
 import { getRandomStateFipsList } from './utils';
 
@@ -65,6 +65,8 @@ export default function HomePage() {
 
   const [initialFipsList] = useState(getRandomStateFipsList());
 
+  const exploreSectionRef = useRef(null);
+
   return (
     <>
       <EnsureSharingIdInUrl />
@@ -94,10 +96,11 @@ export default function HomePage() {
             <Map hideLegend />
             {isMobile && <HomePageThermometer />}
             <CompareMain locationsViewable={8} isHomepage />
-            <Section>
+            <Section ref={exploreSectionRef}>
               <Explore
                 title="Cases, Deaths and Hospitalizations"
                 initialFipsList={initialFipsList}
+                initialChartIndigenousPopulations={true}
               />
             </Section>
             <SectionWrapper ref={indicatorsRef}>

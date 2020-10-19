@@ -168,8 +168,8 @@ export const SwitchLabel = styled(Grid)`
 `;
 
 export const SwitchGrid = styled(Grid)<{
-  $viewAllCounties?: boolean;
-  $isModal: boolean;
+  $viewAllCounties: boolean;
+  $isModal?: boolean;
 }>`
   width: fit-content;
   cursor: pointer;

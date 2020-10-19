@@ -1,0 +1,147 @@
+{
+  "recommendations": [
+    {
+      "source": "FED",
+      "category": "BARS",
+      "level": "RED",
+      "id": "BARS_RED",
+      "body": "**Bars** should be avoided and required to close."
+    },
+    {
+      "source": "FED",
+      "category": "BARS",
+      "level": "YELLOW",
+      "id": "BARS_YELLOW",
+      "body": "**Bars** should be avoided and required to close."
+    },
+    {
+      "body": "**Gyms** should be avoided and required to close.",
+      "source": "FED",
+      "category": "GYMS",
+      "level": "RED",
+      "id": "GYMS_RED"
+    },
+    {
+      "body": "**Gyms** should max at 25% capacity.",
+      "source": "FED",
+      "category": "GYMS",
+      "level": "YELLOW",
+      "id": "GYMS_YELLOW"
+    },
+    {
+      "body": "​​**Restaurants** should max at 25% capacity. Local governments must assist in expanding outdoor dining opportunities. Customers should use take-out or eat outdoors socially distanced.",
+      "source": "FED",
+      "category": "RESTAURANTS",
+      "level": "RED",
+      "id": "RESTAURANTS_RED"
+    },
+    {
+      "category": "RESTAURANTS",
+      "id": "RESTAURANTS_YELLOW",
+      "level": "YELLOW",
+      "source": "FED",
+      "body": "**Restaurants** should create outdoor dining opportunities, with the assistance of local governments. Customers should use take-out, outdoor dining, or indoor dining when strict social distancing can be maintained."
+    },
+    {
+      "category": "MASKS",
+      "level": "RED",
+      "id": "MASKS_RED",
+      "source": "FED",
+      "body": "**Masks** should be mandated and worn by everyone outside their home."
+    },
+    {
+      "category": "MASKS",
+      "level": "YELLOW",
+      "id": "MASKS_YELLOW",
+      "source": "FED",
+      "body": "**Masks** should be mandated in all indoor spaces and worn by everyone outside their home."
+    },
+    {
+      "body": "**Gatherings** should be limited to 10 people and physical distance should be maintained. The CDC also recommends that [gatherings take place outdoors](https://www.cdc.gov/coronavirus/2019-ncov/daily-life-coping/deciding-to-go-out.html).",
+      "source": "FED",
+      "category": "GATHERINGS",
+      "level": "RED",
+      "id": "GATHERINGS_RED"
+    },
+    {
+      "body": "**Gatherings** should be limited to 25 people and physical distance should be maintained. The CDC also recommends that [gatherings take place outdoors](https://www.cdc.gov/coronavirus/2019-ncov/daily-life-coping/deciding-to-go-out.html).",
+      "category": "GATHERINGS",
+      "source": "FED",
+      "level": "YELLOW",
+      "id": "GATHERINGS_YELLOW"
+    },
+    {
+      "source": "HARVARD",
+      "category": "SCHOOLS",
+      "level": "RED",
+      "id": "SCHOOLS_RED",
+      "body": "**Schools:** Enable remote learning for all students. All government levels should invest in remote learning."
+    },
+    {
+      "body": "**Schools:** If [safe learning spaces](https://globalepidemics.org/wp-content/uploads/2020/07/pandemic_resilient_schools_briefing_72020.pdf) exist, phase re-opening: 1st priority: preK-5 and special education services for preK-8. 2nd priority: grades 6-8 and special education services for grades 9-12.",
+      "source": "HARVARD",
+      "category": "SCHOOLS",
+      "level": "ORANGE",
+      "id": "SCHOOLS_ORANGE"
+    },
+    {
+      "source": "HARVARD",
+      "category": "SCHOOLS",
+      "level": "YELLOW",
+      "id": "SCHOOLS_YELLOW",
+      "body": "**Schools:** If [safe learning spaces](https://globalepidemics.org/wp-content/uploads/2020/07/pandemic_resilient_schools_briefing_72020.pdf) exist, phase re-opening: 1st priority: preK-5 and special education services for preK-8. 2nd priority: grades 6-8 and special education services for grades 9-12. 3rd priority: grades 9-12 on a hybrid schedule."
+    },
+    {
+      "body": "**Schools:** In person education is appropriate only if conditions for [safe learning spaces](https://globalepidemics.org/wp-content/uploads/2020/07/pandemic_resilient_schools_briefing_72020.pdf) are in place.",
+      "source": "HARVARD",
+      "category": "SCHOOLS",
+      "level": "GREEN",
+      "id": "SCHOOLS_GREEN"
+    },
+    {
+      "body": "**Masks** should be worn outside of the home, according to [CDC guidelines](https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/cloth-face-cover-guidance.html), to continue reducing the spread of COVID.",
+      "source": "FED",
+      "category": "MASKS",
+      "level": "GREEN",
+      "id": "MASKS_GREEN"
+    }
+  ],
+  "header": "Recommended actions",
+  "footer": {
+    "feedbackButtonLabel": "Leave feedback",
+    "modalButtonLabel": "Sources & Methodology",
+    "shareText": "Please share with policy makers, business owners, and any other decision makers, especially if these recommendations don’t match reality."
+  },
+  "icons": [
+    {
+      "category": "MASKS",
+      "altText": "Mask icon",
+      "iconImage": "/images_cms/mask_recommends_icon.svg"
+    },
+    {
+      "category": "GATHERINGS",
+      "altText": "Gatherings icon",
+      "iconImage": "/images_cms/gathering_recommends_icon.svg"
+    },
+    {
+      "category": "RESTAURANTS",
+      "altText": "Restaurants icon",
+      "iconImage": "/images_cms/restaurant_recommends_icon.svg"
+    },
+    {
+      "category": "BARS",
+      "altText": "Bars icon",
+      "iconImage": "/images_cms/bar_recommends_icon.svg"
+    },
+    {
+      "category": "GYMS",
+      "altText": "Gyms icon",
+      "iconImage": "/images_cms/gym_recommends_icon.svg"
+    },
+    {
+      "category": "SCHOOLS",
+      "altText": "Schools icon",
+      "iconImage": "/images_cms/school_recommends_icon.svg"
+    }
+  ]
+}

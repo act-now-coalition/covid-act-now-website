@@ -23,10 +23,10 @@ import {
 } from 'common/utils/compare';
 import { COLOR_MAP } from 'common/colors';
 import ShareImageButtons from 'components/ShareButtons/ShareButtonGroup';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import { sliderNumberToFilterMap } from 'components/Compare/Filters';
 import { getComparePageUrl, getCompareShareImageUrl } from 'common/urls';
 import { EventAction } from 'components/Analytics';
+import { MoreInfoButton } from 'components/SharedComponents';
 
 const CompareTable = (props: {
   stateName?: string;
@@ -93,8 +93,14 @@ const CompareTable = (props: {
 
   const getPopulation = (location: SummaryForCompare) =>
     location?.locationInfo?.population;
-  const getMetricValue = (location: any) =>
-    location.metricsInfo.metrics[sorter].value;
+  const getMetricValue = (location: any) => {
+    // TODO(https://trello.com/c/x0G7LZ91): Not sure if this check should be necessary,
+    // but we seem to be missing projections for Northern Islands Municipality, MP right now.
+    if (!location.metricsInfo) {
+      return null;
+    }
+    return location.metricsInfo.metrics[sorter].value;
+  };
 
   let sortedLocationsArr = props.locations;
 
@@ -273,10 +279,7 @@ const CompareTable = (props: {
               </FooterLink>
             )}
           </div>
-          <FooterLink onClick={onClickFAQ} isFaqLink>
-            <InfoOutlinedIcon />
-            More info
-          </FooterLink>
+          <MoreInfoButton onClick={onClickFAQ} />
         </Footer>
       )}
     </Wrapper>

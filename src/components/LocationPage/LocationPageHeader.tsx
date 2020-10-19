@@ -187,13 +187,24 @@ const LocationPageHeader = (props: {
             </SectionHalf>
             <SectionHalf>
               <InfoOutlinedIcon />
-              <SectionColumn isUpdateCopy>
-                <ColumnTitle isUpdateCopy>New feature</ColumnTitle>
-                <NewFeatureCopy
-                  locationName={locationName}
-                  onNewUpdateClick={props.onNewUpdateClick}
-                />
-              </SectionColumn>
+              {props.projections.isCounty ? (
+                <SectionColumn isUpdateCopy>
+                  <ColumnTitle isUpdateCopy>New feature</ColumnTitle>
+                  <NewFeatureCopy
+                    locationName={locationName}
+                    onNewUpdateClick={props.onNewUpdateClick}
+                  />
+                </SectionColumn>
+              ) : (
+                <SectionColumn isUpdateCopy>
+                  <ColumnTitle isUpdateCopy>Update</ColumnTitle>
+                  <Copy isUpdateCopy={true}>
+                    As of October 14th, we have switched to using data from the
+                    U.S. Department of Health & Human Services to calculate
+                    Positive Test Rate for most states.
+                  </Copy>
+                </SectionColumn>
+              )}
             </SectionHalf>
           </HeaderSection>
           <LocationHeaderStats

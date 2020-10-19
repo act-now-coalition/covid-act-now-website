@@ -1,6 +1,5 @@
 import React from 'react';
 import { DisclaimerWrapper, DisclaimerBody } from './Disclaimer.style';
-import LightTooltip from 'components/LightTooltip/LightTooltip';
 import { useModelLastUpdatedDate } from 'common/utils/model';
 import { getMetricDisclaimer } from 'common/metric';
 
@@ -11,13 +10,7 @@ const Disclaimer = ({ metricName }: { metricName: number }) => {
   return (
     <DisclaimerWrapper>
       <DisclaimerBody>
-        <LightTooltip
-          title="Currently we aggregate data over 4 day intervals to smooth out inconsistencies in the source data. We’re working on improving this now."
-          placement="bottom"
-        >
-          <span>Last updated {lastUpdatedDateString}.</span>
-        </LightTooltip>{' '}
-        {getMetricDisclaimer(metricName)}
+        Last updated {lastUpdatedDateString}. {getMetricDisclaimer(metricName)}
       </DisclaimerBody>
     </DisclaimerWrapper>
   );

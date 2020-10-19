@@ -4,6 +4,17 @@ import { SocialShareButton } from './ShareButtons.style';
 
 const COLOR_TWITTER = '#00acee';
 
+export const TwitterShareButtonInner: React.FC<{
+  url: string;
+  quote: string;
+  hashtags?: string[];
+  socialIconSize: number;
+}> = ({ url, quote, hashtags, socialIconSize }) => (
+  <ReactShare.TwitterShareButton url={url} hashtags={hashtags} title={quote}>
+    <ReactShare.TwitterIcon size={socialIconSize} round={false} fill="auto" />
+  </ReactShare.TwitterShareButton>
+);
+
 export const TwitterShareButton: React.FC<{
   url: string;
   quote: string;
@@ -11,9 +22,12 @@ export const TwitterShareButton: React.FC<{
   socialIconSize: number;
 }> = ({ url, quote, hashtags, socialIconSize }) => (
   <SocialShareButton variant="contained" color={COLOR_TWITTER} disableElevation>
-    <ReactShare.TwitterShareButton url={url} hashtags={hashtags} title={quote}>
-      <ReactShare.TwitterIcon size={socialIconSize} round={false} fill="auto" />
-    </ReactShare.TwitterShareButton>
+    <TwitterShareButtonInner
+      url={url}
+      quote={quote}
+      hashtags={hashtags}
+      socialIconSize={socialIconSize}
+    />
   </SocialShareButton>
 );
 

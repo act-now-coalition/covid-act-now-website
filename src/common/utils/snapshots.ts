@@ -1,4 +1,5 @@
 import * as QueryString from 'query-string';
+import fetch from 'node-fetch';
 import { assert } from 'common/utils';
 import DataUrlJson from 'assets/data/data_url.json';
 

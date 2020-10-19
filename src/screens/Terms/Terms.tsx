@@ -55,7 +55,7 @@ const Terms = ({ children }: { children: React.ReactNode }) => {
           Website Terms of Use
         </Typography>
         <Typography variant="h6" component="h1" align="center">
-          Last updated: October 1, 2020
+          Last updated: October 9, 2020
         </Typography>
         <Typography variant="h5" component="h1">
           Acceptance of the Terms of Use
@@ -172,17 +172,22 @@ const Terms = ({ children }: { children: React.ReactNode }) => {
         </Typography>
         <Typography variant="body1" component="p">
           In the interest of promoting the wide dissemination of information and
-          data presently available and to enable public leaders and health
-          officials to make fast decisions (the “<b>Purpose</b>”), subject to
-          these Terms of Use and any third party licenses in the Material, we
-          hereby grant you a license to use the Material under the terms of the
-          Creative Commons Attribution-NonCommercial-NoDerivatives 4.0
-          International (CC BY-NC-ND 4.0) license in connection with the
-          Purpose. The full terms of the license are available{' '}
+          data presently available and to enable private individuals to make
+          fast decisions (the “Purpose”), subject to these Terms of Use and any
+          third party licenses in the Material, we hereby grant you a license to
+          use the Material under the terms of the Creative Commons
+          Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND
+          4.0) license in connection with the Purpose, provided that your use of
+          the Material is not in connection with any Commercial Activity as
+          defined herein. For the purposes of these terms, "Commercial Activity"
+          means any activity, private or otherwise, that is: (i) for the purpose
+          of generating revenue, (ii) is in connection with any commercial
+          activities (including any income-generating or revenue-generating
+          activities), (iii) or is otherwise used in support of a commercial
+          function. The full terms of the license are available{' '}
           <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode">
             here
           </a>
-          .
         </Typography>
         <Typography variant="body1" component="p">
           If you print, copy, modify, download or otherwise use or provide any

@@ -1,0 +1,43 @@
+{
+  "header": "Sources & Methodology",
+  "federalTaskForce": {
+    "sourceName": "White House Coronavirus Task Force",
+    "description": "According to [documents obtained by the New York Times](https://www.nytimes.com/interactive/2020/07/28/us/states-report-virus-response-july-26.html), the following recommendations and criteria are those that the Federal Task Force uses and provides to state and local governments.",
+    "levels": [
+      {
+        "color": "GREEN",
+        "content": "No specific recommendations provided for White House Coronavirus Task Force's \"Green Zone\"."
+      },
+      {
+        "color": "YELLOW",
+        "content": "**Criteria**\n\nNew cases between 10-100 per 100,000 population in the last 7 days, and a diagnostic test positivity result between 5-10%. Or one of those two conditions, and one condition qualifying as being in the “Red Zone”.\n\n**Recommendations**\n\nFor policy makers:\n\n*Limit gyms to 25% occupancy and close bars until percent positive rates are under 3; create outdoor dining opportunities with pedestrian areas.*\n\n*Limit social gatherings to 25 people or fewer.*\n\n*Institute routine weekly testing of all workers in assisted living and long-term care facilities. Require masks for all staff and prohibit visitors.*\n\n*Ensure that all business retailers and personal services require masks and can safely social distance.*\n\nFor everyone else:\n\n*Wear a mask at all times outside the home and maintain physical distance.*\n\n*Limit social gatherings to 25 people or fewer.*\n\n*Do not go to bars or nightclubs.*\n\n*Use take-out, outdoor dining, or indoor dining when strict social distancing can be maintained.*"
+      },
+      {
+        "color": "RED",
+        "content": "**Criteria**\n\nNew cases above 100 per 100,000 population in the last 7 days, and a diagnostic test positivity result above 10%.\n\n**Recommendations**\n\nFor policy makers:\n\n*Close bars and gyms, and create outdoor dining opportunities with pedestrian areas.*\n\n*Limit social gatherings to 10 people or fewer.*\n\n*Institute routine weekly testing of all workers in assisted living and long-term care facilities. Require masks for all staff and prohibit visitors.*\n\n*Ensure that all business retailers and personal services require masks and can safely social distance.*\n\nFor everyone else:\n\n*Wear a mask at all times outside the home and maintain physical distance.*\n\n*Limit social gatherings to 10 people or fewer.*\n\n*Do not go to bars, nightclubs, or gyms.*\n\n*Use take-out or eat outdoors socially distanced.*\n\n*Reduce your public interactions and activities to 25% of your normal activity.*"
+      }
+    ]
+  },
+  "harvard": {
+    "description": "[Path to Zero & Schools: Achieving Pandemic Resilient Teaching and Learning Spaces](https://globalepidemics.org/wp-content/uploads/2020/07/pandemic_resilient_schools_briefing_72020.pdf) is a framework that Harvard Global Health Institute uses to helps schools and districts devise plans based on the size of the outbreak in their community.",
+    "sourceName": "Harvard Global Health Institute",
+    "levels": [
+      {
+        "color": "GREEN",
+        "content": "**Criteria**\n\nFewer than 1 daily new case per 100,000 population.\n\n**Recommendations**\n\nIn person education is appropriate only if conditions for [safe learning spaces](https://globalepidemics.org/wp-content/uploads/2020/07/pandemic_resilient_schools_briefing_72020.pdf) are in place."
+      },
+      {
+        "color": "YELLOW",
+        "content": "**Criteria**\n\nBetween 1 and 10 daily new cases per 100,000 population.\n\n**Recommendations**\n\nIf [safe learning spaces](https://globalepidemics.org/wp-content/uploads/2020/07/pandemic_resilient_schools_briefing_72020.pdf) exist, phase re-opening:\n\n1st priority: preK-5 and special education services for preK-8.\n\n2nd priority: grades 6-8 and special education services for grades 9-12.\n\n3rd priority: grades 9-12 on a hybrid schedule."
+      },
+      {
+        "color": "ORANGE",
+        "content": "**Criteria**\n\nBetween 10-25 daily new cases per 100,000 population.\n\n**Recommendations**\n\nIf [safe learning spaces](https://globalepidemics.org/wp-content/uploads/2020/07/pandemic_resilient_schools_briefing_72020.pdf) exist, phase re-opening:\n\n1st priority: preK-5 and special education services for preK-8.\n\n2nd priority: grades 6-8 and special education services for grades 9-12."
+      },
+      {
+        "color": "RED",
+        "content": "**Criteria**\n\nMore than 25 daily new cases per 100,000 population.\n\n**Recommendations**\n\nEnable remote learning for all students. All government levels should invest in remote learning."
+      }
+    ]
+  }
+}
