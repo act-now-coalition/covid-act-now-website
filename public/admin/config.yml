@@ -163,7 +163,7 @@ collections:
       preview: true
     files:
       - name: Learn-Landing
-        label: 'Learn: Landing page'
+        label: 'Landing page'
         file: src/cms-content/learn/learn-landing.json
         fields:
           - label: Header
@@ -196,6 +196,7 @@ collections:
             widget: list
             fields:
               - { label: Term, name: term, widget: string }
+              - { label: Term ID, name: termId, widget: string }
               - { label: Definition, name: definition, widget: markdown }
       - name: Learn-Faq
         label: 'Learn: FAQ'
