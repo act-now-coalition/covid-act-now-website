@@ -4,7 +4,7 @@
 backend:
   name: github
   repo: covid-projections/covid-projections
-  branch: casulin/can-recommend
+  branch: cms-content-entry
   base_url: https://api.netlify.com
 
 media_folder: 'public/images_cms'
@@ -84,7 +84,7 @@ collections:
       preview: true
     files:
       - name: Recommendations-Main
-        label: Recommendations content - Main
+        label: 'Recommendations: Main'
         file: src/cms-content/recommendations/recommendations-main.json
         fields:
           - label: Header
@@ -124,7 +124,7 @@ collections:
               - { label: Alt text, name: altText, widget: string }
               - { label: Icon image, name: iconImage, widget: image }
       - name: Recommendations-Modal
-        label: Recommendations content - Modal
+        label: 'Recommendations: Modal'
         file: src/cms-content/recommendations/recommendations-modal.json
         fields:
           - { label: 'Header', name: 'header', widget: 'string', default: true }
@@ -154,3 +154,67 @@ collections:
                 fields:
                   - { label: Color, name: color, widget: string }
                   - { label: Content, name: content, widget: markdown }
+  - name: learn
+    label: Learn
+    format: json
+    description: Learn content
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    files:
+      - name: Learn-Landing
+        label: 'Landing page'
+        file: src/cms-content/learn/learn-landing.json
+        fields:
+          - label: Header
+            name: header
+            widget: string
+            default: true
+          - label: Sections
+            name: sections
+            widget: list
+            fields:
+              - { label: Section title, name: sectionTitle, widget: string }
+              - { label: Section ID, name: sectionId, widget: string }
+              - { label: Description, name: description, widget: markdown }
+              - { label: Button CTA, name: buttonCta, widget: string }
+              - { label: Button redirect, name: buttonRedirect, widget: text }
+      - name: Learn-Glossary
+        label: 'Learn: Glossary'
+        file: src/cms-content/learn/learn-glossary.json
+        fields:
+          - label: Header
+            name: header
+            widget: string
+            default: true
+          - label: Intro
+            name: intro
+            widget: markdown
+            default: true
+          - label: Terms
+            name: terms
+            widget: list
+            fields:
+              - { label: Term, name: term, widget: string }
+              - { label: Term ID, name: termId, widget: string }
+              - { label: Definition, name: definition, widget: markdown }
+      - name: Learn-Faq
+        label: 'Learn: FAQ'
+        file: src/cms-content/learn/learn-faq.json
+        fields:
+          - label: Header
+            name: header
+            widget: string
+            default: true
+          - label: Sections
+            name: sections
+            widget: list
+            fields:
+              - { label: Section title, name: sectionTitle, widget: string }
+              - { label: Section ID, name: sectionId, widget: string }
+              - label: Questions
+                name: questions
+                widget: list
+                fields:
+                  - { label: Question, name: question, widget: text }
+                  - { label: Answer, name: answer, widget: markdown }
