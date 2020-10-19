@@ -23,14 +23,14 @@ import * as urls from 'common/urls';
 
 const StatValue = (props: {
   iconColor: string;
-  condensed?: Boolean;
-  isEmbed?: Boolean;
-  isMobile?: Boolean;
-  isHeader?: Boolean;
+  condensed?: boolean;
+  isEmbed?: boolean;
+  isMobile?: boolean;
+  isHeader?: boolean;
   embedOnClickBaseURL?: string;
-  statusUnknown?: Boolean;
+  statusUnknown?: boolean;
   value: string;
-  newIndicator?: Boolean;
+  newIndicator?: boolean;
   metric: Metric;
 }) => {
   return (
@@ -70,13 +70,13 @@ const SummaryStat = ({
   chartType: Metric;
   value: number;
   onClick: () => void;
-  beta?: Boolean;
-  condensed?: Boolean;
-  isMobile?: Boolean;
-  isHeader?: Boolean;
-  isEmbed?: Boolean;
+  beta?: boolean;
+  condensed?: boolean;
+  isMobile?: boolean;
+  isHeader?: boolean;
+  isEmbed?: boolean;
   embedOnClickBaseURL?: string;
-  newIndicator?: Boolean;
+  newIndicator?: boolean;
 }) => {
   const levelInfo = getLevelInfo(chartType, value);
 
@@ -153,11 +153,11 @@ const SummaryStat = ({
 
 const LocationHeaderStats = (props: {
   stats: { [key: string]: number | null };
-  condensed?: Boolean;
-  isEmbed?: Boolean;
+  condensed?: boolean;
+  isEmbed?: boolean;
   onMetricClick?: (metric: Metric) => void;
-  isMobile?: Boolean;
-  isHeader?: Boolean;
+  isMobile?: boolean;
+  isHeader?: boolean;
   embedOnClickBaseURL?: string;
 }) => {
   const hasStats = !!Object.values(props.stats).filter(

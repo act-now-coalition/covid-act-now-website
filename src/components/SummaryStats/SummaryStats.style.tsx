@@ -227,33 +227,35 @@ const SharedTagStyles = css`
   font-weight: bold;
 `;
 
-export const BetaTag = styled.span<{ isHeader?: Boolean }>`
+export const BetaTag = styled.span<{ $isHeader?: boolean }>`
   ${SharedTagStyles};
-  margin-left: ${({ isHeader }) => (isHeader ? 0 : '1rem')};
-  background-color: ${({ isHeader }) =>
-    isHeader ? 'none' : `${palette.info.main}`};
-  border: ${({ isHeader }) => isHeader && `1px solid ${COLOR_MAP.GRAY.LIGHT}`};
-  color: ${({ isHeader }) =>
-    isHeader ? `${COLOR_MAP.GRAY_BODY_COPY}` : 'white'};
-  transform: ${({ isHeader }) => (isHeader ? 'none' : 'translateY(-0.15rem)')};
-  margin-top: ${({ isHeader }) => (isHeader ? '.5rem' : 'none')};
+  margin-left: ${({ $isHeader }) => ($isHeader ? 0 : '1rem')};
+  background-color: ${({ $isHeader }) =>
+    $isHeader ? 'none' : `${palette.info.main}`};
+  border: ${({ $isHeader }) =>
+    $isHeader && `1px solid ${COLOR_MAP.GRAY.LIGHT}`};
+  color: ${({ $isHeader }) =>
+    $isHeader ? `${COLOR_MAP.GRAY_BODY_COPY}` : 'white'};
+  transform: ${({ $isHeader }) =>
+    $isHeader ? 'none' : 'translateY(-0.15rem)'};
+  margin-top: ${({ $isHeader }) => ($isHeader ? '.5rem' : 'none')};
 
   @media (min-width: 600px) {
-    transform: ${({ isHeader }) =>
-      isHeader ? 'none' : 'translateY(-0.45rem)'};
-    margin-top: ${({ isHeader }) => (isHeader ? '.75rem' : 'none')};
+    transform: ${({ $isHeader }) =>
+      $isHeader ? 'none' : 'translateY(-0.45rem)'};
+    margin-top: ${({ $isHeader }) => ($isHeader ? '.75rem' : 'none')};
   }
 `;
 
-export const NewIndicatorTag = styled.span<{ isHeader?: Boolean }>`
+export const NewIndicatorTag = styled.span<{ $isHeader?: boolean }>`
   ${SharedTagStyles};
   margin-left: 0;
   background-color: ${COLOR_MAP.BLUE};
   color: white;
-  margin-top: ${({ isHeader }) => (isHeader ? '.5rem' : 'none')};
+  margin-top: ${({ $isHeader }) => ($isHeader ? '.5rem' : 'none')};
 
   @media (min-width: 600px) {
-    margin-top: ${({ isHeader }) => (isHeader ? '.75rem' : 'none')};
+    margin-top: ${({ $isHeader }) => ($isHeader ? '.75rem' : 'none')};
   }
 `;
 

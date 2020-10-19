@@ -5,29 +5,32 @@ import { GeoScopeFilter } from 'common/utils/compare';
 
 const returnSliderLabelColor = (
   filter: GeoScopeFilter,
-  isModal: boolean,
+  $isModal: boolean,
   geoScope?: GeoScopeFilter,
 ) => {
-  if (!isModal) {
+  if (!$isModal) {
     if (geoScope === filter) return 'black';
     return `${COLOR_MAP.GRAY_BODY_COPY}`;
   }
   return 'white';
 };
 
-export const Container = styled.div<{ isModal: boolean; isHomepage?: boolean }>`
+export const Container = styled.div<{
+  $isModal: boolean;
+  $isHomepage?: boolean;
+}>`
   display: flex;
-  margin: ${({ isModal }) => isModal && '1rem auto 0'};
-  padding: ${({ isModal }) => (isModal ? '0 0 0 1.75rem' : '0.75rem 1rem')};
-  justify-content: ${({ isHomepage, isModal }) =>
-    isHomepage && isModal && 'center'};
+  margin: ${({ $isModal }) => $isModal && '1rem auto 0'};
+  padding: ${({ $isModal }) => ($isModal ? '0 0 0 1.75rem' : '0.75rem 1rem')};
+  justify-content: ${({ $isHomepage, $isModal }) =>
+    $isHomepage && $isModal && 'center'};
   flex-direction: column;
-  align-items: ${({ isModal }) => isModal && 'center'};
+  align-items: ${({ $isModal }) => $isModal && 'center'};
 
   @media (min-width: 600px) {
     flex-direction: row;
     align-items: unset;
-    margin: ${({ isModal }) => isModal && '0 auto'};
+    margin: ${({ $isModal }) => $isModal && '0 auto'};
   }
 `;
 
@@ -41,7 +44,7 @@ export const SliderContainer = styled.div`
 `;
 
 export const GeoSlider = styled(Slider)<{
-  isModal: boolean;
+  $isModal: boolean;
   geoScope?: GeoScopeFilter;
 }>`
   color: ${COLOR_MAP.BLUE};
@@ -52,7 +55,7 @@ export const GeoSlider = styled(Slider)<{
       color: ${props =>
         returnSliderLabelColor(
           GeoScopeFilter.NEARBY,
-          props.isModal,
+          props.$isModal,
           props.geoScope,
         )};
       font-weight: ${({ geoScope }) =>
@@ -62,7 +65,7 @@ export const GeoSlider = styled(Slider)<{
       color: ${props =>
         returnSliderLabelColor(
           GeoScopeFilter.STATE,
-          props.isModal,
+          props.$isModal,
           props.geoScope,
         )};
       font-weight: ${({ geoScope }) =>
@@ -72,7 +75,7 @@ export const GeoSlider = styled(Slider)<{
       color: ${props =>
         returnSliderLabelColor(
           GeoScopeFilter.COUNTRY,
-          props.isModal,
+          props.$isModal,
           props.geoScope,
         )};
       font-weight: ${({ geoScope }) =>
@@ -90,24 +93,24 @@ export const DropdownContainer = styled.div`
 `;
 
 export const MetroMenuButton = styled(Button)<{
-  isOpen: boolean;
-  isStatePage?: boolean;
+  $isOpen: boolean;
+  $isStatePage?: boolean;
   disabled: boolean;
-  isModal: boolean;
-  isMobile: boolean;
+  $isModal: boolean;
+  $isMobile: boolean;
 }>`
   align-items: flex-start;
   text-transform: none;
-  display: ${({ disabled, isMobile }) =>
-    disabled && isMobile ? 'none' : 'block'};
-  border: ${({ disabled, isModal }) =>
-    disabled && isModal
+  display: ${({ disabled, $isMobile }) =>
+    disabled && $isMobile ? 'none' : 'block'};
+  border: ${({ disabled, $isModal }) =>
+    disabled && $isModal
       ? `1px solid ${COLOR_MAP.GRAY.DARK}`
       : '1px solid #e0e0e0'};
   width: 200px;
-  border-radius: ${({ isOpen }) => (isOpen ? '4px 4px 0 0' : '4px')};
+  border-radius: ${({ $isOpen }) => ($isOpen ? '4px 4px 0 0' : '4px')};
   font-family: Roboto;
-  margin: ${({ isStatePage }) => !isStatePage && '1rem 0 .5rem'};
+  margin: ${({ $isStatePage }) => !$isStatePage && '1rem 0 .5rem'};
   padding: 0.375rem 0.75rem;
 
   &:hover {
@@ -119,20 +122,20 @@ export const MetroMenuButton = styled(Button)<{
     flex-direction: row;
     white-space: nowrap;
     justify-content: space-between;
-    color: ${({ disabled, isModal }) =>
-      disabled && isModal && `${COLOR_MAP.GRAY.DARK}`};
+    color: ${({ disabled, $isModal }) =>
+      disabled && $isModal && `${COLOR_MAP.GRAY.DARK}`};
 
     &:first-child {
-      color: ${({ disabled, isModal }) =>
-        !disabled && !isModal && `${COLOR_MAP.GRAY_BODY_COPY}`};
-      color: ${({ disabled, isModal }) => !disabled && isModal && 'white'};
+      color: ${({ disabled, $isModal }) =>
+        !disabled && !$isModal && `${COLOR_MAP.GRAY_BODY_COPY}`};
+      color: ${({ disabled, $isModal }) => !disabled && $isModal && 'white'};
       font-size: 0.8rem;
       font-weight: normal;
     }
 
     &:nth-child(2) {
-      color: ${({ disabled, isModal }) => !disabled && isModal && 'white'};
-      color: ${({ disabled, isModal }) => !disabled && !isModal && 'black'};
+      color: ${({ disabled, $isModal }) => !disabled && $isModal && 'white'};
+      color: ${({ disabled, $isModal }) => !disabled && !$isModal && 'black'};
       font-weight: 500;
       font-size: 0.95rem;
     }
@@ -151,12 +154,12 @@ export const MetroMenuButton = styled(Button)<{
   svg {
     margin: auto 0 auto 0.2rem;
     transform: translatex(0.2rem);
-    color: ${({ disabled, isModal }) =>
-      disabled && isModal && `${COLOR_MAP.GRAY.DARK}`};
+    color: ${({ disabled, $isModal }) =>
+      disabled && $isModal && `${COLOR_MAP.GRAY.DARK}`};
   }
 
   @media (min-width: 600px) {
-    margin: ${({ isStatePage }) => !isStatePage && '0 0 0 3.75rem'};
+    margin: ${({ $isStatePage }) => !$isStatePage && '0 0 0 3.75rem'};
   }
 `;
 
@@ -165,24 +168,24 @@ export const SwitchLabel = styled(Grid)`
 `;
 
 export const SwitchGrid = styled(Grid)<{
-  viewAllCounties: boolean | undefined;
-  isModal?: boolean;
+  $viewAllCounties: boolean;
+  $isModal?: boolean;
 }>`
   width: fit-content;
   cursor: pointer;
 
   ${SwitchLabel} {
     &:first-child {
-      color: ${({ viewAllCounties }) =>
-        viewAllCounties ? `${COLOR_MAP.GRAY_BODY_COPY}` : 'black'};
-      color: ${({ isModal }) => isModal && 'white'};
-      font-weight: ${({ viewAllCounties }) => !viewAllCounties && 'bold'};
+      color: ${({ $viewAllCounties }) =>
+        $viewAllCounties ? `${COLOR_MAP.GRAY_BODY_COPY}` : 'black'};
+      color: ${({ $isModal }) => $isModal && 'white'};
+      font-weight: ${({ $viewAllCounties }) => !$viewAllCounties && 'bold'};
     }
     &:last-child {
-      color: ${({ viewAllCounties }) =>
-        !viewAllCounties ? `${COLOR_MAP.GRAY_BODY_COPY}` : 'black'};
-      color: ${({ isModal }) => isModal && 'white'};
-      font-weight: ${({ viewAllCounties }) => viewAllCounties && 'bold'};
+      color: ${({ $viewAllCounties }) =>
+        !$viewAllCounties ? `${COLOR_MAP.GRAY_BODY_COPY}` : 'black'};
+      color: ${({ $isModal }) => $isModal && 'white'};
+      font-weight: ${({ $viewAllCounties }) => $viewAllCounties && 'bold'};
     }
   }
 `;

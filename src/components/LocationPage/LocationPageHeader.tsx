@@ -80,12 +80,12 @@ const noop = () => {};
 
 const LocationPageHeader = (props: {
   projections: Projections;
-  condensed?: Boolean;
+  condensed?: boolean;
   stats: { [key: string]: number | null };
   onMetricClick: (metric: Metric) => void;
   onHeaderShareClick: () => void;
   onHeaderSignupClick: () => void;
-  isMobile?: Boolean;
+  isMobile?: boolean;
   onNewUpdateClick: () => void;
 }) => {
   const hasStats = !!Object.values(props.stats).filter(

@@ -40,13 +40,13 @@ const PinnedTop = `
 `;
 
 export const Head = styled.div<{
-  isModal: boolean;
-  pinnedLocation?: RankedLocationSummary;
+  $isModal: boolean;
+  $pinnedLocation?: RankedLocationSummary;
 }>`
   flex: 0 0 auto;
   min-height: 0;
   min-width: ${minTableWidth}px;
-  ${props => (props.isModal && props.pinnedLocation ? PinnedTop : '')}
+  ${props => (props.$isModal && props.$pinnedLocation ? PinnedTop : '')}
 `;
 
-export const TableContainer = styled.div<{ isModal: boolean }>``;
+export const TableContainer = styled.div<{ $isModal: boolean }>``;
