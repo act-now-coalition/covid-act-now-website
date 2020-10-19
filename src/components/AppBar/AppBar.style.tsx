@@ -120,6 +120,7 @@ export const StyledBurger = styled.button<{ open: boolean }>`
   cursor: pointer;
   padding: 0;
   z-index: 10;
+  align-self: center;
 
   &:focus {
     outline: none;
@@ -168,12 +169,13 @@ export const StyledMenu = styled.nav<{ open: boolean }>`
   background: #f2f2f2;
   border-top: 1px solid #e3e3e3;
   transform: ${({ open }) => (open ? 'translateY(64px)' : 'translateY(-100%)')};
-  height: 100vh;
+  /* height: 100vh; */
   text-align: left;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
+  z-index: 1;
 
   a {
     cursor: pointer;

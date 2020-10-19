@@ -5,40 +5,34 @@ import FAQIcon from 'assets/images/faqIconTwoTone';
 import BlogIcon from 'assets/images/blogIconTwoTone';
 import palette from 'assets/theme/palette';
 
-const MobileMenu = ({
+import { Link } from 'react-router-dom';
+
+const MobileMenu: React.FC<{ open: boolean; closeMenu: () => void }> = ({
   open,
-  goTo,
-  forwardTo,
-}: {
-  open: boolean;
-  goTo: (route: string) => (e: React.MouseEvent) => void;
-  forwardTo: (route: string) => (e: React.MouseEvent) => void;
+  closeMenu,
 }) => {
   return (
     <StyledMenu open={open}>
-      <a onClick={goTo('/')} href="/">
+      <Link to="/" onClick={closeMenu}>
         <MapIcon color={palette.secondary.main} />
         <span>Map</span>
-      </a>
-      <a onClick={goTo('/about')} href="/about">
+      </Link>
+      <Link to="/about" onClick={closeMenu}>
         <FAQIcon color={palette.secondary.main} />
         <span>About</span>
-      </a>
-      <a onClick={goTo('/resources')} href="/resources">
+      </Link>
+      <Link to="/resources" onClick={closeMenu}>
         <FAQIcon color={palette.secondary.main} />
         <span>Resources</span>
-      </a>
-      <a
-        onClick={forwardTo('https://blog.covidactnow.org')}
-        href="https://blog.covidactnow.org"
-      >
+      </Link>
+      <a href="https://blog.covidactnow.org" onClick={closeMenu}>
         <BlogIcon color={palette.secondary.main} />
         <span>Blog</span>
       </a>
-      <a onClick={goTo('/contact')} href="/contact">
+      <Link to="/contact" onClick={closeMenu}>
         <FAQIcon color={palette.secondary.main} />
         <span>Contact Us</span>
-      </a>
+      </Link>
     </StyledMenu>
   );
 };

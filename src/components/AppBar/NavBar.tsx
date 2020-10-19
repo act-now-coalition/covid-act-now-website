@@ -1,47 +1,78 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useMemo } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import Logo from 'assets/images/logo';
+import Hidden from '@material-ui/core/Hidden';
 import * as Style from './NavBar.style';
+import { DonateButtonWithoutFade, DonateButtonWithFade } from './DonateButton';
+import MobileMenu from './MobileMenu';
+import { StyledMobileMenu } from './AppBar.style';
+import MenuIcon from '@material-ui/icons/Menu';
+import CloseIcon from '@material-ui/icons/Close';
+import IconButton from '@material-ui/core/IconButton';
 
-const navigationLinks = [
-  {
-    to: '/',
-    label: 'Map',
-  },
-  {
-    to: '/about',
-    label: 'About',
-  },
-  {
-    to: '/resources',
-    label: 'Resources',
-  },
-  {
-    to: '/blog',
-    label: 'Blog',
-  },
-  {
-    to: '/contact',
-    label: 'Contact Us',
-  },
-];
+const isHomeOrLocationPage = (pathname: string) =>
+  pathname === '/' ||
+  pathname.includes('/us') ||
+  ['/alert_signup', '/compare'].includes(pathname);
 
 const NavBar: React.FC = () => {
+  const [isMenuOpen, setMenuOpen] = useState(false);
+  const closeMenu = () => setMenuOpen(false);
+
+  // We only fade the donate button on the home page on mobile, where the donate
+  // button doesn't appear until the banner is scrolled away.
+  const { pathname } = useLocation();
+  const MobileDonateButton = useMemo(() => {
+    return isHomeOrLocationPage(pathname)
+      ? DonateButtonWithFade
+      : DonateButtonWithoutFade;
+  }, [pathname]);
+
   return (
-    <Style.AppBar position="static" color="transparent" elevation={0}>
+    <Style.AppBar position="sticky" color="transparent" elevation={0}>
       <Style.Toolbar>
         <Link to="/">
           <Logo />
         </Link>
-        {/* space */}
         <Style.Spacer />
-        {navigationLinks.map(({ to, label }) => (
-          <Style.NavLink to={to} key={to} activeClassName="active">
-            {label}
+        <Hidden smDown>
+          <Style.NavLink
+            to="/"
+            key="map"
+            activeClassName="active"
+            isActive={(match, { pathname }) => isHomeOrLocationPage(pathname)}
+          >
+            Map
           </Style.NavLink>
-        ))}
-        {/* Donate */}
-        {/* Mobile */}
+          <Style.NavLink to="/about" key="about" activeClassName="active">
+            About
+          </Style.NavLink>
+          <Style.NavLink
+            to="/resources"
+            key="resources"
+            activeClassName="active"
+          >
+            Resources
+          </Style.NavLink>
+          <Style.TabLink href="https://blog.covidactnow.org" key="blog">
+            Blog
+          </Style.TabLink>
+          <Style.NavLink to="/contact" key="contact" activeClassName="active">
+            Contact Us
+          </Style.NavLink>
+          <DonateButtonWithoutFade />
+        </Hidden>
+        {/* Mobile Menu */}
+        <Hidden mdUp>
+          <StyledMobileMenu>
+            <MobileDonateButton />
+            <IconButton onClick={() => setMenuOpen(!isMenuOpen)}>
+              {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
+            </IconButton>
+            {/* <Burger open={isMenuOpen} setOpen={setMenuOpen} /> */}
+          </StyledMobileMenu>
+          <MobileMenu open={isMenuOpen} closeMenu={closeMenu} />
+        </Hidden>
       </Style.Toolbar>
     </Style.AppBar>
   );

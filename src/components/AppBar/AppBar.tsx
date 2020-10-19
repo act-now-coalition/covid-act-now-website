@@ -135,7 +135,7 @@ const _AppBar = () => {
         <StyledMobileMenu>
           <MobileDonateButtonComponent />
           <Burger open={open} setOpen={setOpen} />
-          <MobileMenu open={open} goTo={goTo} forwardTo={forwardTo} />
+          {/* <MobileMenu open={open} goTo={goTo} forwardTo={forwardTo} /> */}
         </StyledMobileMenu>
       </Wrapper>
     </StyledAppBar>
