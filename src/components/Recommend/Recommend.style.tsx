@@ -97,6 +97,7 @@ export const RecommendationBody = styled(ReactMarkdown)`
 
 export const Icon = styled.img`
   margin-right: 1.25rem;
+  min-width: 2rem;
 `;
 
 export const FooterWrapper = styled.div`
