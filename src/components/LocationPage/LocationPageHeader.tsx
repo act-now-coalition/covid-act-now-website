@@ -35,6 +35,7 @@ import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
 import { LEVEL_COLOR } from 'common/colors';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import { Metric } from 'common/metric';
+import { Disclaimer } from 'cms-content/data-disclaimers';
 
 const NewFeatureCopy = (props: {
   locationName: string;
@@ -87,6 +88,7 @@ const LocationPageHeader = (props: {
   onHeaderSignupClick: () => void;
   isMobile?: boolean;
   onNewUpdateClick: () => void;
+  dataDisclaimers: Disclaimer[];
 }) => {
   const hasStats = !!Object.values(props.stats).filter(
     (val: number | null) => !isNull(val),
@@ -183,6 +185,12 @@ const LocationPageHeader = (props: {
                 <ColumnTitle>Covid risk level</ColumnTitle>
                 <LevelDescription>{levelInfo.summary}</LevelDescription>
                 <Copy>{levelInfo.detail(locationName)}</Copy>
+
+                {/* For testing: */}
+                <br />
+                {props.dataDisclaimers.map((disclaimer: any, i: number) => (
+                  <div>{disclaimer.disclaimerCopy}</div>
+                ))}
               </SectionColumn>
             </SectionHalf>
             <SectionHalf>

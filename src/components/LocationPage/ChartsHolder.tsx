@@ -25,6 +25,7 @@ import {
 } from 'common/utils/recommend';
 import { mainContent } from 'cms-content/recommendations';
 import { getRecommendationsShareUrl } from 'common/urls';
+import { getDataDisclaimers } from 'common/utils/netlify';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
@@ -45,6 +46,12 @@ const ChartsHolder = (props: {
 }) => {
   const { chartId } = props;
   const projection = props.projections.primary;
+
+  const dataDisclaimers = getDataDisclaimers(
+    projection.fips,
+    props.stateId,
+    props.countyId,
+  );
 
   const metricRefs = {
     [Metric.CASE_DENSITY]: useRef<HTMLDivElement>(null),
@@ -162,6 +169,7 @@ const ChartsHolder = (props: {
               onHeaderSignupClick={() => scrollTo(shareBlockRef.current)}
               onNewUpdateClick={() => scrollTo(exploreChartRef.current)}
               isMobile={isMobile}
+              dataDisclaimers={dataDisclaimers}
             />
             <CompareMain
               stateName={props.projections.stateName}

@@ -4,7 +4,7 @@
 backend:
   name: github
   repo: covid-projections/covid-projections
-  branch: cms-content-entry
+  branch: casulin/cms-disclaimer
   base_url: https://api.netlify.com
 
 media_folder: 'public/images_cms'
@@ -218,3 +218,22 @@ collections:
                 fields:
                   - { label: Question, name: question, widget: text }
                   - { label: Answer, name: answer, widget: markdown }
+  - name: data-disclaimers
+    label: Data disclaimers
+    format: json
+    description: Data disclaimers
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    files:
+      - name: Disclaimers
+        label: Disclaimers
+        file: src/cms-content/data-disclaimers/disclaimers.json
+        fields:
+          - label: Disclaimers
+            name: disclaimers
+            widget: list
+            fields:
+              - { label: Disclaimer copy, name: disclaimerCopy, widget: markdown}
+              - { label: State codes, name: stateCodes, widget: string, required: false}
+              - { label: Fips codes, name: fipsCodes, widget: string, required: false}
