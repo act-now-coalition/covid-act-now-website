@@ -84,7 +84,7 @@ collections:
       preview: true
     files:
       - name: Recommendations-Main
-        label: 'Recommendations: Main'
+        label: 'Main'
         file: src/cms-content/recommendations/recommendations-main.json
         fields:
           - label: Header
@@ -124,7 +124,7 @@ collections:
               - { label: Alt text, name: altText, widget: string }
               - { label: Icon image, name: iconImage, widget: image }
       - name: Recommendations-Modal
-        label: 'Recommendations: Modal'
+        label: 'Modal'
         file: src/cms-content/recommendations/recommendations-modal.json
         fields:
           - { label: 'Header', name: 'header', widget: 'string', default: true }
@@ -180,7 +180,7 @@ collections:
               - { label: Button CTA, name: buttonCta, widget: string }
               - { label: Button redirect, name: buttonRedirect, widget: text }
       - name: Learn-Glossary
-        label: 'Learn: Glossary'
+        label: 'Glossary'
         file: src/cms-content/learn/learn-glossary.json
         fields:
           - label: Header
@@ -199,7 +199,7 @@ collections:
               - { label: Term ID, name: termId, widget: string }
               - { label: Definition, name: definition, widget: markdown }
       - name: Learn-Faq
-        label: 'Learn: FAQ'
+        label: 'FAQ'
         file: src/cms-content/learn/learn-faq.json
         fields:
           - label: Header
@@ -218,22 +218,31 @@ collections:
                 fields:
                   - { label: Question, name: question, widget: text }
                   - { label: Answer, name: answer, widget: markdown }
-  - name: data-disclaimers
-    label: Data disclaimers
+  - name: Disclaimers
+    label: Disclaimers
     format: json
     description: Data disclaimers
     slug: '{{slug}}'
     editor:
       preview: true
     files:
-      - name: Disclaimers
-        label: Disclaimers
-        file: src/cms-content/data-disclaimers/disclaimers.json
+      - name: State-wide-disclaimers
+        label: State-wide (ie. all counties within a state/states)
+        file: src/cms-content/data-disclaimers/state-wide-disclaimers.json
         fields:
           - label: Disclaimers
             name: disclaimers
             widget: list
             fields:
               - { label: Disclaimer copy, name: disclaimerCopy, widget: markdown}
-              - { label: State codes, name: stateCodes, widget: string, required: false}
-              - { label: Fips codes, name: fipsCodes, widget: string, required: false}
+              - { label: State codes, name: stateCodes, widget: string}
+      - name: Page-specific-disclaimers
+        label: Page specific (ie. a specific state page and/or county page)
+        file: src/cms-content/data-disclaimers/page-specific-disclaimers.json
+        fields:
+          - label: Disclaimers
+            name: disclaimers
+            widget: list
+            fields:
+              - { label: Disclaimer copy, name: disclaimerCopy, widget: markdown}
+              - { label: Fips codes, name: fipsCodes, widget: string}
