@@ -5,7 +5,7 @@ import Hidden from '@material-ui/core/Hidden';
 import * as Style from './NavBar.style';
 import { DonateButtonWithoutFade, DonateButtonWithFade } from './DonateButton';
 import MobileMenu from './MobileMenu';
-import { StyledMobileMenu, Left } from './AppBar.style';
+import { StyledMobileMenu } from './AppBar.style';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
@@ -67,14 +67,12 @@ const NavBar: React.FC = () => {
           </Style.NavLink>
           <DonateButtonWithoutFade />
         </Hidden>
-        {/* Mobile Menu */}
         <Hidden mdUp>
           <StyledMobileMenu>
             <MobileDonateButton />
             <IconButton onClick={() => setMenuOpen(!isMenuOpen)}>
               {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
             </IconButton>
-            {/* <Burger open={isMenuOpen} setOpen={setMenuOpen} /> */}
           </StyledMobileMenu>
           <MobileMenu open={isMenuOpen} closeMenu={closeMenu} />
         </Hidden>
