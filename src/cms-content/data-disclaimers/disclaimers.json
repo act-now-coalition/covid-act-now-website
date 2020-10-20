@@ -1,3 +1,47 @@
 {
-  "disclaimers": []
+  "disclaimers": [
+    {
+      "disclaimerCopy": "disclaimer for harris county, tx",
+      "fipsCodes": [
+        {
+          "fips": "48201"
+        }
+      ]
+    },
+    {
+      "disclaimerCopy": "disclaimer for all counties in new york and connecticut",
+      "stateCodes": [
+        {
+          "stateCode": "NY"
+        },
+        {
+          "stateCode": "CT"
+        }
+      ]
+    },
+    {
+      "disclaimerCopy": "disclaimer for california state page (no county pages)",
+      "fipsCodes": [
+        {
+          "fips": "06"
+        }
+      ]
+    },
+    {
+      "disclaimerCopy": "disclaimer for all new jersey counties, connecticut state page, and harris county, tx",
+      "fipsCodes": [
+        {
+          "fips": "06"
+        },
+        {
+          "fips": "48201"
+        }
+      ],
+      "stateCodes": [
+        {
+          "stateCode": "NJ"
+        }
+      ]
+    }
+  ]
 }
