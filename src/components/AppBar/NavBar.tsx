@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from 'assets/images/logo';
 import Hidden from '@material-ui/core/Hidden';
-import * as Style from './NavBar.style';
-import { DonateButtonWithoutFade, DonateButtonWithFade } from './DonateButton';
-import MobileMenu from './MobileMenu';
-import { StyledMobileMenu } from './AppBar.style';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import ArrowBack from '@material-ui/icons/ArrowBack';
+import * as Style from './NavBar.style';
+import MobileMenu from './MobileMenu';
+import { DonateButtonWithoutFade, DonateButtonWithFade } from './DonateButton';
 
 const isLocationPage = (pathname: string) => pathname.includes('/us');
 
@@ -65,12 +64,12 @@ const NavBar: React.FC = () => {
           <DonateButtonWithoutFade />
         </Hidden>
         <Hidden mdUp>
-          <StyledMobileMenu>
+          <Style.StyledMobileMenu>
             <MobileDonateButton />
             <IconButton onClick={() => setMenuOpen(!isMenuOpen)}>
               {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
             </IconButton>
-          </StyledMobileMenu>
+          </Style.StyledMobileMenu>
           <MobileMenu open={isMenuOpen} closeMenu={closeMenu} />
         </Hidden>
       </Style.Toolbar>

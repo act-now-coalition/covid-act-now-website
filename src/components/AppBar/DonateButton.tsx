@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { StyledDonateButton, DonateButtonWrapper } from './AppBar.style';
-import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import useScrollPosition from '@react-hook/window-scroll';
 import { Fade } from '@material-ui/core';
+import { StyledDonateButton, DonateButtonWrapper } from './DonateButton.style';
+import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 
 const ButtonContent = () => {
   const trackLabel = 'AppBar donate button';

@@ -4,12 +4,22 @@ import MuiToolbar from '@material-ui/core/Toolbar';
 import { NavLink as _NavLink } from 'react-router-dom';
 import theme from 'assets/theme';
 import palette from 'assets/theme/palette';
-
 import { COLOR_MAP } from 'common/colors';
+import { mobileBreakpoint } from 'assets/theme/sizes';
 
 export const AppBar = styled(MuiAppBar)`
   border-bottom: solid 1px ${COLOR_MAP.LIGHTGRAY};
   background-color: white;
+`;
+
+export const StyledMobileMenu = styled.nav`
+  display: inherit;
+  @media (min-width: ${mobileBreakpoint}) {
+    display: none;
+  }
+  @media print {
+    display: none;
+  }
 `;
 
 export const Toolbar = styled(MuiToolbar)`
@@ -52,5 +62,43 @@ export const BackLink = styled(_NavLink)`
   svg {
     width: 32px;
     height: 32px;
+  }
+`;
+
+export const StyledMenu = styled.nav<{ open: boolean }>`
+  display: flex;
+  flex-direction: column;
+  background: #f2f2f2;
+  border-top: 1px solid #e3e3e3;
+  transform: ${({ open }) => (open ? 'translateY(64px)' : 'translateY(-100%)')};
+  /* height: 100vh; */
+  text-align: left;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+
+  a {
+    cursor: pointer;
+    font-size: 1rem;
+    color: ${palette.black};
+    text-decoration: none;
+    font-weight: bold;
+    padding: 2rem 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    background: white;
+
+    &:hover,
+    &:active {
+      background: #f2f2f2;
+    }
+
+    display: flex;
+    align-items: center;
+
+    svg {
+      margin-right: 1rem;
+    }
   }
 `;

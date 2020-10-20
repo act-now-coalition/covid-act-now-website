@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledMenu } from './AppBar.style';
+import { StyledMenu } from './NavBar.style';
 import MapIcon from 'assets/images/mapIconTwoTone';
 import FAQIcon from 'assets/images/faqIconTwoTone';
 import BlogIcon from 'assets/images/blogIconTwoTone';
