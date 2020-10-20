@@ -1,20 +1,20 @@
 {
   "disclaimers": [
     {
-      "disclaimerCopy": "disclaimer for harris county, tx and fairfield county, ct",
+      "disclaimerCopy": "Disclaimer for Harris county, TX + Fairfield county, CT",
       "fipsCodes": "48201,09001"
     },
     {
-      "disclaimerCopy": "disclaimer for all counties in new york and connecticut",
-      "stateCodes": "NY,CT"
+      "disclaimerCopy": "Disclaimer for all NY + PA counties",
+      "stateCodes": "NY,PA"
     },
     {
-      "disclaimerCopy": "disclaimer for california state page (no county pages)",
+      "disclaimerCopy": "Disclaimer for CA state page",
       "fipsCodes": "06"
     },
     {
-      "disclaimerCopy": "disclaimer for all new jersey counties, connecticut state page, and harris county, tx",
-      "fipsCodes": "06,48201",
+      "disclaimerCopy": "Disclaimer for all NJ counties + AZ state page",
+      "fipsCodes": "04",
       "stateCodes": "NJ"
     }
   ]
