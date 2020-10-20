@@ -1,0 +1,12 @@
+{
+  "disclaimers": [
+    {
+      "disclaimerCopy": "Disclaimer for Harris County, TX and Philadelphia County, PA",
+      "fipsCodes": "48201,42101"
+    },
+    {
+      "disclaimerCopy": "Disclaimer for CA state page",
+      "fipsCodes": "06"
+    }
+  ]
+}
