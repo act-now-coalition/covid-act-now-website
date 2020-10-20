@@ -1,8 +1,8 @@
 {
   "disclaimers": [
     {
-      "disclaimerCopy": "disclaimer for harris county, tx",
-      "fipsCodes": "48201"
+      "disclaimerCopy": "disclaimer for harris county, tx and fairfield county, ct",
+      "fipsCodes": "48201,09001"
     },
     {
       "disclaimerCopy": "disclaimer for all counties in new york and connecticut",
