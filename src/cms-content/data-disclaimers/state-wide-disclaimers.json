@@ -1,3 +1,8 @@
 {
-  "disclaimers": []
+  "disclaimers": [
+    {
+      "disclaimerCopy": "Disclaimer for all NY and CT counties",
+      "stateCodes": "NY,CT"
+    }
+  ]
 }
