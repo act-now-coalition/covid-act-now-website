@@ -6,7 +6,11 @@
 // export content directly from their index.ts files
 import aboutPageContent from 'cms-content/about/about-page.json';
 import donateContent, { DonatePageContent } from 'cms-content/donate';
-import dataDisclaimers, { Disclaimer } from 'cms-content/data-disclaimers';
+import {
+  stateWideDisclaimers,
+  pageSpecificDisclaimers,
+  Disclaimer,
+} from 'cms-content/data-disclaimers';
 
 export enum PageType {
   ABOUT,
@@ -28,21 +32,23 @@ export function getPageContent(
 export type { DonatePageContent };
 export { donateContent };
 
-// TODO (Chelsi): clean up if keeping?
 export function getDataDisclaimers(
   fips: string,
   stateCode: string,
   countyId?: string,
 ): Disclaimer[] {
-  const disclaimersContent = dataDisclaimers.disclaimers;
+  const stateWideDisclaimersContent = stateWideDisclaimers.disclaimers;
+  const pageSpecificDisclaimersContent = pageSpecificDisclaimers.disclaimers;
   if (countyId) {
-    return disclaimersContent.filter(
-      disclaimer =>
-        disclaimer.stateCodes?.split(',').includes(stateCode) ||
-        disclaimer.fipsCodes?.split(',').includes(fips),
+    const stateWide = stateWideDisclaimersContent.filter(disclaimer =>
+      disclaimer.stateCodes.split(',').includes(stateCode),
     );
+    const pageSpecific = pageSpecificDisclaimersContent.filter(disclaimer =>
+      disclaimer.fipsCodes.split(',').includes(fips),
+    );
+    return [...stateWide, ...pageSpecific];
   }
-  return disclaimersContent.filter(disclaimer =>
-    disclaimer.fipsCodes?.split(',').includes(fips),
+  return pageSpecificDisclaimersContent.filter(disclaimer =>
+    disclaimer.fipsCodes.split(',').includes(fips),
   );
 }

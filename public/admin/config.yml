@@ -227,7 +227,7 @@ collections:
       preview: true
     files:
       - name: State-wide-disclaimers
-        label: State-wide (ie. all counties within a state/states)
+        label: State-wide disclaimers (ie. all counties within a state/states)
         file: src/cms-content/data-disclaimers/state-wide-disclaimers.json
         fields:
           - label: Disclaimers
@@ -237,7 +237,7 @@ collections:
               - { label: Disclaimer copy, name: disclaimerCopy, widget: markdown}
               - { label: State codes, name: stateCodes, widget: string}
       - name: Page-specific-disclaimers
-        label: Page specific (ie. a specific state page and/or county page)
+        label: Page specific disclaimers (ie. a specific state page and/or county page)
         file: src/cms-content/data-disclaimers/page-specific-disclaimers.json
         fields:
           - label: Disclaimers
