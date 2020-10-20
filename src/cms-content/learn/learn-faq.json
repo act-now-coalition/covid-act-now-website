@@ -61,7 +61,7 @@
           "answer": "State reporting practices differ. In most states, the test results are reported where individuals are tested, not where they live. Florida, however, distinguishes between residents and non-residents in the statistics it publishes."
         },
         {
-          "question": "Does CAN's positive test rate metric show PCR or PCR and Serology test results?",
+          "question": "Does CAN's positive test rate metric show PCR or PCR and Serology test results?\n",
           "answer": "We get our state testing data from [The Covid Tracking Project,](https://covidtracking.com/) which aggregates the data from the states’ dashboards. No state should mix the results of diagnostic tests (including PCR tests and antigen tests) with the results of antibody tests. Serology tests looking for COVID antibodies can identify individuals who have had the virus at some point in the past, but they should not be used to diagnose an active COVID infection, according to the Food and Drug Administration’s [Coronavirus Testing Basics](https://www.fda.gov/consumers/consumer-updates/coronavirus-testing-basics). Some states, at various times, have included both diagnostic and antibody tests in their reports. We make every possible effort to obtain data that is not corrupted, but ultimately we must work with the data that is available."
         },
         {
