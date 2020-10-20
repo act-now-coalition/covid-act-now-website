@@ -6,8 +6,7 @@
 // export content directly from their index.ts files
 import aboutPageContent from 'cms-content/about/about-page.json';
 import donateContent, { DonatePageContent } from 'cms-content/donate';
-import dataDisclaimers from 'cms-content/data-disclaimers';
-import { Disclaimer } from 'cms-content/data-disclaimers';
+import dataDisclaimers, { Disclaimer } from 'cms-content/data-disclaimers';
 
 export enum PageType {
   ABOUT,
