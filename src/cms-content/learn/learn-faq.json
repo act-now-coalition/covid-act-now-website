@@ -2,7 +2,25 @@
   "sections": [
     {
       "sectionTitle": "Transmission",
-      "sectionId": "transmission"
+      "sectionId": "transmission",
+      "questions": [
+        {
+          "question": "How is the coronavirus transmitted?\n",
+          "answer": "Evidence suggests that COVID spreads mainly from person to person, primarily through respiratory droplets that are released when a person sneezes, coughs, or talks. These droplets are propelled through the air and can land in the noses and mouths of people, especially those in close proximity (six feet or less), according to the [Centers for Disease Control](https://www.cdc.gov/coronavirus/2019-ncov/faq.html) (CDC) and [World Health Organization](https://www.who.int/emergencies/diseases/novel-coronavirus-2019/question-and-answers-hub/q-a-detail/q-a-how-is-covid-19-transmitted?gclid=Cj0KCQjwqrb7BRDlARIsACwGad6u8LD7qnGFt5oFPYI4ngBzLUHYz2-9DZ_b4fruyio4ekVFoQR7l7YaAsm3EALw_wcB) (WHO). [Research](https://www.pnas.org/content/117/26/14857) supported by the CDC also suggests that COVID may spread through aerosol, or airborne, transmission. This is similar to transmission by droplets except that the amounts of fluid are much smaller and can linger in the air for a much longer time and infect people further than six feet away."
+        },
+        {
+          "question": "How long does the virus live on surfaces?",
+          "answer": "The virus can live from several hours to several days on surfaces, depending on the type of material (cardboard, plastic, etc.). Even so, the CDC says that COVID is not transmitted easily through surfaces and spreads mainly from person-to-person. If you are concerned about surface contamination, you can find details on appropriate cleaning and sanitizing protocols from the CDC [here](https://www.cdc.gov/coronavirus/2019-ncov/community/pdf/Reopening_America_Guidance.pdf#:~:text=Coronaviruses%20on%20surfaces%20and%20objects,and%20dirt%20from%20surfaces.)."
+        },
+        {
+          "question": "Which individuals are most vulnerable to COVID?",
+          "answer": "Anyone who has been exposed to COVID is at risk of contracting the disease, and people of all ages have experienced hospitalization and death. Some people, however, are at greater risk. Elderly individuals, particularly those 85 or older, and people with certain underlying medical conditions are at higher risk of serious illness, according to the CDC. (Click [here](https://www.cdc.gov/coronavirus/2019-ncov/need-extra-precautions/people-at-increased-risk.html) for information from the CDC about people at increased risk.)"
+        },
+        {
+          "question": "Which demographic groups are most likely to become infected with COVID, to become seriously ill, or to die from the virus?",
+          "answer": "Data from the CDC show that race and ethnicity, similar to age, are risk factors for COVID. In fact, the rates of COVID cases, hospitalizations and deaths among Blacks, Hispanic and Latino persons, and American Indians and Native Alaskans are much higher than for white people, according to the agency’s calculation of [COVID-19 Hospitalization and Death by Race/Ethnicity](https://www.cdc.gov/coronavirus/2019-ncov/covid-data/investigations-discovery/hospitalization-death-by-race-ethnicity.html) (updated August 18, 2020). Some data show an even higher mortality rate among certain ethnic and racial groups than the CDC data. The [APM Research Lab](https://www.apmresearchlab.org/covid/deaths-by-race) finds that death rates are more than three times higher for Blacks, Latinos, and Indigenous people than for white people (update September 15)."
+        }
+      ]
     }
   ],
   "header": "FAQ"
