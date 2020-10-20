@@ -42,9 +42,7 @@ const NavBar: React.FC = () => {
             to="/"
             key="map"
             activeClassName="active"
-            isActive={(match, { pathname }) =>
-              isHomePage(pathname) || isLocationPage(pathname)
-            }
+            isActive={(match, { pathname }) => isHomePage(pathname)}
           >
             Map
           </Style.NavLink>
