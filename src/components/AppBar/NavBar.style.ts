@@ -2,9 +2,12 @@ import styled, { css } from 'styled-components';
 import MuiAppBar from '@material-ui/core/AppBar';
 import MuiToolbar from '@material-ui/core/Toolbar';
 import { NavLink as _NavLink } from 'react-router-dom';
+import MuiMenuIcon from '@material-ui/icons/Menu';
+import MuiCloseIcon from '@material-ui/icons/Close';
 import theme from 'assets/theme';
 import palette from 'assets/theme/palette';
 import { COLOR_MAP } from 'common/colors';
+import { mobileBreakpoint } from 'assets/theme/sizes';
 
 export const AppBar = styled(MuiAppBar)`
   border-bottom: solid 1px ${COLOR_MAP.LIGHTGRAY};
@@ -97,4 +100,28 @@ export const StyledMenu = styled.nav<{ open: boolean }>`
       margin-right: 1rem;
     }
   }
+`;
+
+export const MobileOnly = styled.div`
+  display: flex;
+  align-items: center;
+  @media (min-width: ${mobileBreakpoint}) {
+    display: none;
+  }
+`;
+
+export const DesktopOnly = styled.div`
+  display: none;
+  @media (min-width: ${mobileBreakpoint}) {
+    display: flex;
+    align-items: center;
+  }
+`;
+
+export const CloseIcon = styled(MuiCloseIcon)`
+  color: #000;
+`;
+
+export const MenuIcon = styled(MuiMenuIcon)`
+  color: #000;
 `;
