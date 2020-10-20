@@ -13,9 +13,8 @@ import ArrowBack from '@material-ui/icons/ArrowBack';
 
 const isLocationPage = (pathname: string) => pathname.includes('/us');
 
-const isHomeOrLocationPage = (pathname: string) =>
-  ['/', '/alert_signup', '/compare'].includes(pathname) ||
-  isLocationPage(pathname);
+const isHomePage = (pathname: string) =>
+  ['/', '/alert_signup', '/compare'].includes(pathname);
 
 const NavBar: React.FC = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -24,7 +23,7 @@ const NavBar: React.FC = () => {
   // We only fade the donate button on the home page on mobile, where the donate
   // button doesn't appear until the banner is scrolled away.
   const { pathname } = useLocation();
-  const MobileDonateButton = isHomeOrLocationPage(pathname)
+  const MobileDonateButton = isHomePage(pathname)
     ? DonateButtonWithFade
     : DonateButtonWithoutFade;
 
@@ -43,7 +42,9 @@ const NavBar: React.FC = () => {
             to="/"
             key="map"
             activeClassName="active"
-            isActive={(match, { pathname }) => isHomeOrLocationPage(pathname)}
+            isActive={(match, { pathname }) =>
+              isHomePage(pathname) || isLocationPage(pathname)
+            }
           >
             Map
           </Style.NavLink>
