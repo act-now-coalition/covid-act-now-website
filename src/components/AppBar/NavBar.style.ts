@@ -4,6 +4,8 @@ import MuiToolbar from '@material-ui/core/Toolbar';
 import { NavLink as _NavLink } from 'react-router-dom';
 import MuiMenuIcon from '@material-ui/icons/Menu';
 import MuiCloseIcon from '@material-ui/icons/Close';
+import MuiIconButton from '@material-ui/core/IconButton';
+
 import theme from 'assets/theme';
 import palette from 'assets/theme/palette';
 import { COLOR_MAP } from 'common/colors';
@@ -115,6 +117,16 @@ export const DesktopOnly = styled.div`
   @media (min-width: ${mobileBreakpoint}) {
     display: flex;
     align-items: center;
+  }
+`;
+
+export const IconButton = styled(MuiIconButton).attrs(props => ({
+  disableRipple: true,
+  disableElevation: true,
+  disableFocusRipple: true,
+}))`
+  &:focus {
+    outline: rgb(0, 95, 204) 1px auto;
   }
 `;
 

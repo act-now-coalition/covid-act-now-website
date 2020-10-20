@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from 'assets/images/logo';
-import IconButton from '@material-ui/core/IconButton';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import * as Style from './NavBar.style';
 import MobileMenu from './MobileMenu';
@@ -65,9 +64,12 @@ const NavBar: React.FC = () => {
         <Style.MobileOnly>
           <Style.StyledMobileMenu>
             <MobileDonateButton />
-            <IconButton onClick={() => setMenuOpen(!isMenuOpen)} edge="end">
+            <Style.IconButton
+              onClick={() => setMenuOpen(!isMenuOpen)}
+              edge="end"
+            >
               {isMenuOpen ? <Style.CloseIcon /> : <Style.MenuIcon />}
-            </IconButton>
+            </Style.IconButton>
           </Style.StyledMobileMenu>
           <MobileMenu open={isMenuOpen} closeMenu={closeMenu} />
         </Style.MobileOnly>
