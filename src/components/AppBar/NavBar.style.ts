@@ -5,7 +5,6 @@ import { NavLink as _NavLink } from 'react-router-dom';
 import theme from 'assets/theme';
 import palette from 'assets/theme/palette';
 import { COLOR_MAP } from 'common/colors';
-import { mobileBreakpoint } from 'assets/theme/sizes';
 
 export const AppBar = styled(MuiAppBar)`
   border-bottom: solid 1px ${COLOR_MAP.LIGHTGRAY};
@@ -14,9 +13,6 @@ export const AppBar = styled(MuiAppBar)`
 
 export const StyledMobileMenu = styled.nav`
   display: inherit;
-  @media (min-width: ${mobileBreakpoint}) {
-    display: none;
-  }
   @media print {
     display: none;
   }
