@@ -29,10 +29,12 @@ const NavBar: React.FC = () => {
   return (
     <Style.AppBar position="sticky" color="transparent" elevation={0}>
       <Style.Toolbar>
-        <Style.BackLink to="/">
-          {isLocationPage(pathname) && <ArrowBack />}
-        </Style.BackLink>
-        <Link to="/">
+        {isLocationPage(pathname) && (
+          <Style.BackLink to="/">
+            <ArrowBack />
+          </Style.BackLink>
+        )}
+        <Link to="/" style={{ display: 'inline-flex' }}>
           <Logo />
         </Link>
         <Style.Spacer />
