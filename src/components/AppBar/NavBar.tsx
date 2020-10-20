@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from 'assets/images/logo';
 import Hidden from '@material-ui/core/Hidden';
@@ -24,11 +24,9 @@ const NavBar: React.FC = () => {
   // We only fade the donate button on the home page on mobile, where the donate
   // button doesn't appear until the banner is scrolled away.
   const { pathname } = useLocation();
-  const MobileDonateButton = useMemo(() => {
-    return isHomeOrLocationPage(pathname)
-      ? DonateButtonWithFade
-      : DonateButtonWithoutFade;
-  }, [pathname]);
+  const MobileDonateButton = isHomeOrLocationPage(pathname)
+    ? DonateButtonWithFade
+    : DonateButtonWithoutFade;
 
   return (
     <Style.AppBar position="sticky" color="transparent" elevation={0}>
