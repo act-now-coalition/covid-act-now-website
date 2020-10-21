@@ -131,9 +131,11 @@ export const LegendItemLabel = styled.span`
 export const ChartContainer = styled.div<{ adjustContainerWidth?: boolean }>`
   margin-top: ${theme.spacing(4)}px;
   margin-bottom: ${theme.spacing(3)}px;
-  margin-left: ${({ adjustContainerWidth }) => adjustContainerWidth && '-1rem'};
-  margin-right: ${({ adjustContainerWidth }) =>
-    adjustContainerWidth && '-3rem'};
+
+  // We add negative margins on mobile to make more space for the chart to
+  // counteract the margins of the main container element in the page
+  margin-left: ${-1 * theme.spacing(2)}px;
+  margin-right: ${-1 * theme.spacing(2)}px;
 
   @media (min-width: 600px) {
     margin-left: 0;

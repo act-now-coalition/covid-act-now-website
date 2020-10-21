@@ -83,7 +83,7 @@ function getMarginRight(
   // states are selected, we only need space for the state code, if at least
   // one county is selected, we need more space.
   return showLabels
-    ? maxLabelLength > 2
+    ? maxLabelLength > 4
       ? MARGIN_COUNTY
       : MARGIN_STATE_CODE
     : MARGIN_SINGLE_LOCATION;
