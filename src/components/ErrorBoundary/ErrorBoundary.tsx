@@ -16,7 +16,10 @@ const errorHandler = (error: Error, info: { componentStack: string }) => {
  * crashing.
  */
 
-type ErrorBoundaryProps = Omit<ReactErrorBoundaryProps, 'FallbackComponent'>;
+export type ErrorBoundaryProps = Omit<
+  ReactErrorBoundaryProps,
+  'FallbackComponent'
+>;
 
 const ErrorBoundary: React.FC<ErrorBoundaryProps> = props => {
   const { children, ...otherProps } = props;
