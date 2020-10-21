@@ -22,7 +22,8 @@ import CompareSnapshots from 'screens/internal/CompareSnapshots/CompareSnapshots
 import ExportImage from 'screens/internal/ShareImage/ChartExportImage';
 import ShareImage from 'screens/internal/ShareImage/ShareImage';
 import AlertUnsubscribe from 'screens/AlertUnsubscribe/AlertUnsubscribe';
-import AppBar from 'components/AppBar/AppBar';
+// import AppBar from 'components/AppBar/AppBar';
+import NavBar from 'components/AppBar';
 import Footer from 'components/Footer/Footer';
 import ScrollToTop from 'components/ScrollToTop';
 import theme from 'assets/theme';
@@ -41,7 +42,7 @@ export default function App() {
           <BrowserRouter>
             <PageviewTracker />
             <ScrollToTop />
-            <AppBar />
+            <NavBar />
             <Switch>
               <Route exact path="/" component={HomePage} />
               <Route exact path="/alert_signup" component={HomePage} />

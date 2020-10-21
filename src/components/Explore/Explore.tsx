@@ -61,6 +61,10 @@ function trackExploreEvent(action: EventAction, label: string, value?: number) {
   trackEvent(EventCategory.EXPLORE, action, label, value);
 }
 
+function trackShare(label: string, value?: number) {
+  trackExploreEvent(EventAction.SHARE, label, value);
+}
+
 function getNoDataCopy(metricName: string, locationNames: string) {
   return (
     <p>
@@ -83,7 +87,7 @@ function getMarginRight(
   // states are selected, we only need space for the state code, if at least
   // one county is selected, we need more space.
   return showLabels
-    ? maxLabelLength > 2
+    ? maxLabelLength > 4
       ? MARGIN_COUNTY
       : MARGIN_STATE_CODE
     : MARGIN_SINGLE_LOCATION;
@@ -285,6 +289,7 @@ const Explore: React.FunctionComponent<{
   const trackingLabel = hasMultipleLocations
     ? `Multiple Locations`
     : 'Single Location';
+  const numLocations = selectedLocations.length;
 
   return (
     <Styles.Container ref={exploreRef}>
@@ -319,6 +324,15 @@ const Explore: React.FunctionComponent<{
                   selectedLocations.length,
                 );
               }}
+              onShareOnFacebook={() =>
+                trackShare(`Facebook: ${trackingLabel}`, numLocations)
+              }
+              onShareOnTwitter={() =>
+                trackShare(`Twitter: ${trackingLabel}`, numLocations)
+              }
+              onShareOnLinkedin={() =>
+                trackShare(`Linkedin: ${trackingLabel}`, numLocations)
+              }
             />
           </Styles.ShareBlock>
         </Grid>
@@ -377,7 +391,7 @@ const Explore: React.FunctionComponent<{
         {getSubtitle(currentMetricName, normalizeData, selectedLocations)}
       </Styles.Subtitle>
       {selectedLocations.length > 0 && hasData && (
-        <Styles.ChartContainer adjustContainerWidth={hasMultipleLocations}>
+        <Styles.ChartContainer>
           {/**
            * The width is set to zero while the parent div is rendering, the
            * placeholder div below prevents the page from jumping.

@@ -18,6 +18,9 @@ const ShareImageButtons: React.FC<{
   disabled?: boolean;
   onSaveImage?: () => void;
   onCopyLink?: () => void;
+  onShareOnFacebook: () => void;
+  onShareOnTwitter: () => void;
+  onShareOnLinkedin: () => void;
 }> = ({
   imageUrl,
   imageFilename,
@@ -25,6 +28,9 @@ const ShareImageButtons: React.FC<{
   quote,
   hashtags,
   disabled = false,
+  onShareOnFacebook,
+  onShareOnTwitter,
+  onShareOnLinkedin,
   onSaveImage = () => {},
   onCopyLink = () => {},
 }) => {
@@ -78,28 +84,29 @@ const ShareImageButtons: React.FC<{
               );
               onSaveImage();
             }}
-            disableRipple
-            disableFocusRipple
-            disableTouchRipple
             disabled={disabled}
           >
             Save
           </ShareButton>
-          <ShareButton
-            onClick={toggleSocialButtons}
-            disableRipple
-            disableFocusRipple
-            disableTouchRipple
-            disabled={disabled}
-          >
+          <ShareButton onClick={toggleSocialButtons} disabled={disabled}>
             Share
           </ShareButton>
         </ButtonGroup>
         {socialSharingProps && (
           <SocialButtonsContainer onClick={() => hideSocialButtons(1500)}>
-            <FacebookShareButton {...socialSharingProps} />
-            <TwitterShareButton {...socialSharingProps} hashtags={hashtags} />
-            <LinkedinShareButton {...socialSharingProps} />
+            <FacebookShareButton
+              onClickShare={onShareOnFacebook}
+              {...socialSharingProps}
+            />
+            <TwitterShareButton
+              onClickShare={onShareOnTwitter}
+              {...socialSharingProps}
+              hashtags={hashtags}
+            />
+            <LinkedinShareButton
+              onClickShare={onShareOnLinkedin}
+              {...socialSharingProps}
+            />
             <CopyLinkButton
               url={socialSharingProps.url}
               onCopyLink={onCopyLink}

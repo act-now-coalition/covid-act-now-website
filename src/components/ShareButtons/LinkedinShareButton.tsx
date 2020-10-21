@@ -8,11 +8,12 @@ export const LinkedinShareButton: React.FC<{
   url: string;
   quote: string;
   socialIconSize: number;
-}> = ({ url, quote, socialIconSize }) => (
+  onClickShare: () => void;
+}> = ({ url, quote, socialIconSize, onClickShare }) => (
   <SocialShareButton
     variant="contained"
     color={COLOR_LINKEDIN}
-    disableElevation
+    onClick={onClickShare}
   >
     <ReactShare.LinkedinShareButton url={url} title={quote}>
       <ReactShare.LinkedinIcon
