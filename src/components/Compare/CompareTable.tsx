@@ -231,6 +231,9 @@ const CompareTable = (props: {
                     `Facebook: ${trackLabel}`,
                   )
                 }
+                onShareOnTwitter={() =>
+                  trackCompareEvent(EventAction.SHARE, `Twitter: ${trackLabel}`)
+                }
               />
             </Header>
             {props.stateName && (

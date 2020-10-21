@@ -4,7 +4,11 @@ import theme from 'assets/theme';
 import palette from 'assets/theme/palette';
 import { StyledShareButtonStyles } from 'components/ShareBlock/ShareBlock.style';
 
-export const ShareButton = styled(Button)`
+export const ShareButton = styled(Button).attrs(props => ({
+  disableRipple: true,
+  disableFocusRipple: true,
+  disableTouchRipple: true,
+}))`
   border-color: ${palette.lightGray};
   color: ${palette.lightBlue};
   text-transform: none;

@@ -326,6 +326,13 @@ const Explore: React.FunctionComponent<{
                   selectedLocations.length,
                 )
               }
+              onShareOnTwitter={() =>
+                trackExploreEvent(
+                  EventAction.SHARE,
+                  `Twitter: ${trackingLabel}`,
+                  selectedLocations.length,
+                )
+              }
             />
           </Styles.ShareBlock>
         </Grid>
