@@ -1,16 +1,9 @@
 import React from 'react';
 import {
   ErrorBoundary as ReactErrorBoundary,
-  ErrorBoundaryProps,
+  ErrorBoundaryProps as ReactErrorBoundaryProps,
 } from 'react-error-boundary';
-import ErrorFallback from './Fallback';
-
-export const Kabong: React.FC = () => {
-  const onClick = () => {
-    throw new Error('Boom');
-  };
-  return <button onClick={onClick}>Boom</button>;
-};
+import Fallback from './Fallback';
 
 const errorHandler = (error: Error, info: { componentStack: string }) => {
   // TODO: Send error info to Sentry
@@ -22,11 +15,14 @@ const errorHandler = (error: Error, info: { componentStack: string }) => {
  * tree, logs the errors and display a fallback UI, preventing the app from
  * crashing.
  */
+
+type ErrorBoundaryProps = Omit<ReactErrorBoundaryProps, 'FallbackComponent'>;
+
 const ErrorBoundary: React.FC<ErrorBoundaryProps> = props => {
   const { children, ...otherProps } = props;
   return (
     <ReactErrorBoundary
-      FallbackComponent={ErrorFallback}
+      FallbackComponent={Fallback}
       onError={errorHandler}
       {...otherProps}
     >

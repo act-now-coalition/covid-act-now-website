@@ -26,21 +26,12 @@ import {
 import { mainContent } from 'cms-content/recommendations';
 import { getRecommendationsShareUrl } from 'common/urls';
 
-import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
+import ErrorBoundary from 'components/ErrorBoundary';
 
 function Bomb() {
   throw new Error('💥 CABOOM 💥');
   return null;
 }
-
-const ErrorFallback: React.FC<FallbackProps> = ({ error }) => {
-  return (
-    <div role="alert">
-      <p>Something went wrong:</p>
-      <pre>{error?.message}</pre>
-    </div>
-  );
-};
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
@@ -179,7 +170,7 @@ const ChartsHolder = (props: {
               onNewUpdateClick={() => scrollTo(exploreChartRef.current)}
               isMobile={isMobile}
             />
-            <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <ErrorBoundary>
               <Bomb />
             </ErrorBoundary>
             <CompareMain
