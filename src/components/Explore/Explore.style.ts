@@ -128,7 +128,7 @@ export const LegendItemLabel = styled.span`
 
 // CHARTS
 
-export const ChartContainer = styled.div<{ adjustContainerWidth?: boolean }>`
+export const ChartContainer = styled.div`
   margin-top: ${theme.spacing(4)}px;
   margin-bottom: ${theme.spacing(3)}px;
 

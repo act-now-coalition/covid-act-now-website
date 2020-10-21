@@ -377,7 +377,7 @@ const Explore: React.FunctionComponent<{
         {getSubtitle(currentMetricName, normalizeData, selectedLocations)}
       </Styles.Subtitle>
       {selectedLocations.length > 0 && hasData && (
-        <Styles.ChartContainer adjustContainerWidth={hasMultipleLocations}>
+        <Styles.ChartContainer>
           {/**
            * The width is set to zero while the parent div is rendering, the
            * placeholder div below prevents the page from jumping.
