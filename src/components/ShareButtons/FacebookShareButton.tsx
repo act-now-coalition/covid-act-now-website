@@ -29,7 +29,6 @@ export const FacebookShareButton: React.FC<{
   <SocialShareButton
     variant="contained"
     color={COLOR_FACEBOOK}
-    disableElevation
     onClick={onClickShare}
   >
     <FacebookShareButtonInner

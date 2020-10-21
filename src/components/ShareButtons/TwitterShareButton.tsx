@@ -25,7 +25,6 @@ export const TwitterShareButton: React.FC<{
   <SocialShareButton
     variant="contained"
     color={COLOR_TWITTER}
-    disableElevation
     onClick={onClickShare}
   >
     <TwitterShareButtonInner

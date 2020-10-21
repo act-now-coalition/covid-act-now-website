@@ -33,7 +33,9 @@ export const SocialButtonsContainer = styled.div`
   width: fit-content;
 `;
 
-export const SocialButton = styled(Button)`
+export const SocialButton = styled(Button).attrs(props => ({
+  disableElevation: true,
+}))`
   width: 60px;
   height: 42px;
   text-transform: none;

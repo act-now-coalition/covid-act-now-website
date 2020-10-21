@@ -20,6 +20,7 @@ const ShareImageButtons: React.FC<{
   onCopyLink?: () => void;
   onShareOnFacebook: () => void;
   onShareOnTwitter: () => void;
+  onShareOnLinkedin: () => void;
 }> = ({
   imageUrl,
   imageFilename,
@@ -29,6 +30,7 @@ const ShareImageButtons: React.FC<{
   disabled = false,
   onShareOnFacebook,
   onShareOnTwitter,
+  onShareOnLinkedin,
   onSaveImage = () => {},
   onCopyLink = () => {},
 }) => {
@@ -101,7 +103,10 @@ const ShareImageButtons: React.FC<{
               {...socialSharingProps}
               hashtags={hashtags}
             />
-            <LinkedinShareButton {...socialSharingProps} />
+            <LinkedinShareButton
+              onClickShare={onShareOnLinkedin}
+              {...socialSharingProps}
+            />
             <CopyLinkButton
               url={socialSharingProps.url}
               onCopyLink={onCopyLink}
