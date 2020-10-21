@@ -319,6 +319,13 @@ const Explore: React.FunctionComponent<{
                   selectedLocations.length,
                 );
               }}
+              onShareOnFacebook={() =>
+                trackExploreEvent(
+                  EventAction.SHARE,
+                  `Facebook: ${trackingLabel}`,
+                  selectedLocations.length,
+                )
+              }
             />
           </Styles.ShareBlock>
         </Grid>

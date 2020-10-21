@@ -225,6 +225,12 @@ const CompareTable = (props: {
                 onSaveImage={() =>
                   trackCompareEvent(EventAction.SAVE_IMAGE, trackLabel)
                 }
+                onShareOnFacebook={() =>
+                  trackCompareEvent(
+                    EventAction.SHARE,
+                    `Facebook: ${trackLabel}`,
+                  )
+                }
               />
             </Header>
             {props.stateName && (

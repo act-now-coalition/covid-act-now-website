@@ -24,11 +24,13 @@ export const FacebookShareButton: React.FC<{
   url: string;
   quote: string;
   socialIconSize: number;
-}> = ({ url, quote, socialIconSize }) => (
+  onClickShare: () => void;
+}> = ({ url, quote, socialIconSize, onClickShare }) => (
   <SocialShareButton
     variant="contained"
     color={COLOR_FACEBOOK}
     disableElevation
+    onClick={onClickShare}
   >
     <FacebookShareButtonInner
       url={url}
