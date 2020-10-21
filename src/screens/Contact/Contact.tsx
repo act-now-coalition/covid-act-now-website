@@ -116,40 +116,12 @@ const Contact = ({ children }: { children: React.ReactNode }) => {
             <ListItem>...and more!</ListItem>
           </ul>
           <Paragraph>
-            Want to intern with us?{' '}
-            <ExternalLink href="https://docs.google.com/forms/d/1rvM5StysnTrhJxXhIdvbTmDvpJKKrfEFl2fQfDt-86Y/viewform?ts=5f248b67&edit_requested=true">
-              Let us know
-            </ExternalLink>
-            . We're currently offering full-time internships (volunteer):
+            Want to volunteer with us?{' '}
+            <ExternalLink href="https://www.linkedin.com/company/covid-act-now/jobs/?viewAsMember=true">
+              Visit our LinkedIn page
+            </ExternalLink>{' '}
+            to see what positions are currently available.
           </Paragraph>
-          <ul>
-            <ListItem>
-              <ExternalLink href="https://docs.google.com/document/d/1_4P0lM1k2pGRXSNGVe_p8TcmdMdaIug5lZeIK-3zU24/edit?ts=5f2488d3#">
-                Strategy & Operations
-              </ExternalLink>
-            </ListItem>
-            <ListItem>
-              <ExternalLink href="https://docs.google.com/document/d/1HJJ8-W87Z1dGVK1JZF3cDNVyBHSq-Z1MYVoVL4ofZj0/edit#">
-                User Support Representative
-              </ExternalLink>
-            </ListItem>
-            <ListItem>
-              <ExternalLink href="https://docs.google.com/document/d/1UyDFQW3uraR-Zl5jAdz2SMfdwduTXDj3w_om8kdci1U/edit?usp=drive_web&ouid=101469664908591780676">
-                Content Writing
-              </ExternalLink>
-            </ListItem>
-            <ListItem>
-              <ExternalLink href="https://docs.google.com/document/d/1rjvjCu168WIVn5S2lFWxl_9d5Ve5nhY4kX6VizPhCd4/edit#">
-                Video Editing
-              </ExternalLink>
-            </ListItem>
-            <ListItem>
-              <ExternalLink href="https://docs.google.com/document/d/1JWAahMLQA-ZyZ-4yvWBBhemQTOmBt5uvFfVZLgzFJUU/edit">
-                Epidemiological Modeling
-              </ExternalLink>
-            </ListItem>
-          </ul>
-
           <SectionHeader variant="h4" component="h2" id="donate">
             Donate
           </SectionHeader>
