@@ -83,7 +83,7 @@ function getMarginRight(
   // states are selected, we only need space for the state code, if at least
   // one county is selected, we need more space.
   return showLabels
-    ? maxLabelLength > 2
+    ? maxLabelLength > 4
       ? MARGIN_COUNTY
       : MARGIN_STATE_CODE
     : MARGIN_SINGLE_LOCATION;
@@ -377,7 +377,7 @@ const Explore: React.FunctionComponent<{
         {getSubtitle(currentMetricName, normalizeData, selectedLocations)}
       </Styles.Subtitle>
       {selectedLocations.length > 0 && hasData && (
-        <Styles.ChartContainer adjustContainerWidth={hasMultipleLocations}>
+        <Styles.ChartContainer>
           {/**
            * The width is set to zero while the parent div is rendering, the
            * placeholder div below prevents the page from jumping.
