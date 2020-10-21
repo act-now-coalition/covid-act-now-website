@@ -25,6 +25,8 @@ import {
 } from 'common/utils/recommend';
 import { mainContent } from 'cms-content/recommendations';
 import { getRecommendationsShareUrl } from 'common/urls';
+import ErrorBoundary, { Kabong } from '../ErrorBoundary/ErrorBoundary';
+import { ErrorBoundary as ReactErrorBoundary } from 'react-error-boundary';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
@@ -163,12 +165,21 @@ const ChartsHolder = (props: {
               onNewUpdateClick={() => scrollTo(exploreChartRef.current)}
               isMobile={isMobile}
             />
+            <ReactErrorBoundary
+              FallbackComponent={() => (
+                <div style={{ border: 'solid 1px red' }}>Error</div>
+              )}
+            >
+              <div>Hi</div>
+              <Kabong />
+            </ReactErrorBoundary>
             <CompareMain
               stateName={props.projections.stateName}
               county={props.county}
               locationsViewable={6}
               stateId={props.stateId}
             />
+
             <MainContentInner>
               {showRecommendations && (
                 <Recommend

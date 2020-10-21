@@ -5,8 +5,16 @@ import {
 } from 'react-error-boundary';
 import ErrorFallback from './Fallback';
 
+export const Kabong: React.FC = () => {
+  const onClick = () => {
+    throw new Error('Boom');
+  };
+  return <button onClick={onClick}>Boom</button>;
+};
+
 const errorHandler = (error: Error, info: { componentStack: string }) => {
   // TODO: Send error info to Sentry
+  console.log('Error');
 };
 
 /**
