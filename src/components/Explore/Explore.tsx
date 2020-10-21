@@ -61,6 +61,10 @@ function trackExploreEvent(action: EventAction, label: string, value?: number) {
   trackEvent(EventCategory.EXPLORE, action, label, value);
 }
 
+function trackShare(label: string, value?: number) {
+  trackExploreEvent(EventAction.SHARE, label, value);
+}
+
 function getNoDataCopy(metricName: string, locationNames: string) {
   return (
     <p>
@@ -285,6 +289,7 @@ const Explore: React.FunctionComponent<{
   const trackingLabel = hasMultipleLocations
     ? `Multiple Locations`
     : 'Single Location';
+  const numLocations = selectedLocations.length;
 
   return (
     <Styles.Container ref={exploreRef}>
@@ -319,6 +324,15 @@ const Explore: React.FunctionComponent<{
                   selectedLocations.length,
                 );
               }}
+              onShareOnFacebook={() =>
+                trackShare(`Facebook: ${trackingLabel}`, numLocations)
+              }
+              onShareOnTwitter={() =>
+                trackShare(`Twitter: ${trackingLabel}`, numLocations)
+              }
+              onShareOnLinkedin={() =>
+                trackShare(`Linkedin: ${trackingLabel}`, numLocations)
+              }
             />
           </Styles.ShareBlock>
         </Grid>

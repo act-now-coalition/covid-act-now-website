@@ -28,6 +28,10 @@ import { getComparePageUrl, getCompareShareImageUrl } from 'common/urls';
 import { EventAction } from 'components/Analytics';
 import { MoreInfoButton } from 'components/SharedComponents';
 
+function trackShare(label: string) {
+  trackCompareEvent(EventAction.SHARE, label);
+}
+
 const CompareTable = (props: {
   stateName?: string;
   county?: any | null;
@@ -225,6 +229,9 @@ const CompareTable = (props: {
                 onSaveImage={() =>
                   trackCompareEvent(EventAction.SAVE_IMAGE, trackLabel)
                 }
+                onShareOnFacebook={() => trackShare(`Facebook: ${trackLabel}`)}
+                onShareOnTwitter={() => trackShare(`Twitter: ${trackLabel}`)}
+                onShareOnLinkedin={() => trackShare(`Linkedin: ${trackLabel}`)}
               />
             </Header>
             {props.stateName && (
