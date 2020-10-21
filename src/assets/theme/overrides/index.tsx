@@ -6,6 +6,8 @@ import MuiTableHead from './MuiTableHead';
 import MuiAutocomplete from './MuiAutocomplete';
 import MuiSwitch from './MuiSwitch';
 import MuiSlider from './MuiSlider';
+import MuiAccordion from './MuiAccordion';
+import MuiAccordionSummary from './MuiAccordionSummary';
 
 export default {
   MuiButton,
@@ -16,4 +18,6 @@ export default {
   MuiAutocomplete,
   MuiSwitch,
   MuiSlider,
+  MuiAccordion,
+  MuiAccordionSummary,
 };
