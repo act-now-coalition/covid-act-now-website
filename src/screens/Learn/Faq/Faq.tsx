@@ -2,10 +2,7 @@ import React from 'react';
 import Breadcrumbs, { BreadcrumbItem } from 'components/Breadcrumbs';
 import { faqContent, Section } from 'cms-content/learn';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
-import TableOfContents, {
-  Item,
-  SideTableOfContents,
-} from 'components/TableOfContents';
+import TableOfContents, { Item } from 'components/TableOfContents';
 import FaqSection from './FaqSection';
 import * as Style from './Faq.style';
 
@@ -46,11 +43,6 @@ const Faq = () => {
           <FaqSection key={section.sectionId} content={section} />
         ))}
       </Style.PageContent>
-      <Style.DesktopOnly>
-        <Style.Sidebar>
-          <SideTableOfContents items={getSectionItems(faqSections)} />
-        </Style.Sidebar>
-      </Style.DesktopOnly>
     </Style.PageContainer>
   );
 };
