@@ -111,6 +111,31 @@
       "term": "Disease incidence",
       "termId": "disease-incidence",
       "definition": "Disease incidence is a measure of new confirmed COVID cases per day. It answers the question: “how many new COVID infections were reported in my area?” Incidence is important because it provides a snapshot of the state of COVID in a given community. Disease prevalence is another term you may have read in the news or online. Disease prevalence is not the same as disease incidence. While incidence refers to the number of new confirmed cases on a given day, prevalence refers to the total number of infections which are currently active on a given day."
+    },
+    {
+      "term": "Drive-thru testing",
+      "termId": "drive-thru-testing",
+      "definition": "A form of COVID [testing](#testing) in which people make an appointment at a testing facility, drive to the testing facility, and then receive either a professionally administered or self-administered test, most often a [PCR test](#pcr-test). Drive through testing allows for improved safety and efficiency in COVID testing. The person being tested never has to leave their car, reducing their potential to [expose](#exposed) someone to COVID or to be exposed to COVID. Fewer staffing is needed, and the nurses, medical assistants, and staff at the testing site are decked out with [PPE](#ppe): gloves, masks, face shields, and gowns. The in-and-out nature allows more people to be tested in a shorter period of time. Often, drive through testing sites will also have a walk-up option for people who do not have access to a car."
+    },
+    {
+      "term": "Epidemic",
+      "termId": "epidemic",
+      "definition": "An epidemic is an [outbreak](#outbreak) of a disease that spreads very quickly and affects many people. During an epidemic, the disease is actively spreading. COVID is referred to as a [pandemic](#pandemic), which falls into the category of an epidemic, but describes an epidemic with significant geographic spread."
+    },
+    {
+      "term": "Epidemiologist",
+      "definition": "An epidemiologist is a “Disease Detective” who searches for the root cause of a disease, identifies those who are at risk, and determines how to control its spread. These experts are some of the cornerstones of public health and have been highly involved in fighting the [COVID](#covid-19) pandemic.",
+      "termId": "epidemiologist"
+    },
+    {
+      "term": "Exposed",
+      "termId": "exposed",
+      "definition": "Exposure generally refers to the condition of being subjected to something, in this case to a [virus](#virus). If a person has come into contact with someone who has COVID, they have been exposed to COVID. They are considered exposed regardless of whether or not the person they came into contact with presents with COVID symptoms. People who have been exposed may eventually become [infected](#infected), which is why it is important to [quarantine](#quarantine) if you have been exposed to someone with COVID. [Contact tracing](#contact-tracing) is vital to identify potentially exposed people and encourage them to get tested and quarantine."
+    },
+    {
+      "term": "Face mask",
+      "termId": "face-mask",
+      "definition": "A face mask is used to prevent the spread of an [infection](#infection) \\[hyper link to infection definition] or illness by covering one’s nose and mouth. In line with [CDC](https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/cloth-face-cover-guidance.html) and [WHO](https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/when-and-how-to-use-masks) guidelines, there is a body of research that suggests everyone should wear a mask to protect themselves and others from COVID. COVID can spread between people interacting in close proximity, even among those who are asymptomatic\\[hyper link to asymptomatic definition] or presymptomatic\\[hyper link to presymptomatic definition], so wearing a mask can give you an added layer of protection. Since there is currently no vaccine for COVID, masks are a very important precautionary measure that everyone can take. The material used to make face masks can vary widely, but the [CDC recommends](https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/diy-cloth-face-coverings.html) that the public wear simple cloth face coverings in public to slow virus spread."
     }
   ]
 }
