@@ -120,7 +120,7 @@
     {
       "term": "Epidemic",
       "termId": "epidemic",
-      "definition": "An epidemic is an [outbreak](#outbreak) of a disease that spreads very quickly and affects many people. During an epidemic, the disease is actively spreading. COVID is referred to as a [pandemic](#pandemic), which falls into the category of an epidemic, but describes an epidemic with significant geographic spread."
+      "definition": "An epidemic is an [outbreak](#outbreak) of a disease that spreads very quickly and affects many people. During an epidemic, the disease is actively spreading. COVID is referred to as a [pandemic](#pandemic), which is an epidemic occurring over a wide geographic area, often across continents and even worldwide."
     },
     {
       "term": "Epidemiologist",
