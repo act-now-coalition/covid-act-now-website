@@ -32,7 +32,7 @@ const Faq = () => {
         <Style.MobileOnly>
           <TableOfContents items={getSectionItems(faqSections)} />
         </Style.MobileOnly>
-        {faqSections.map((section: Section, i: number) => (
+        {faqSections.map((section: Section) => (
           <FaqSection key={section.sectionId} content={section} />
         ))}
       </Style.PageContent>

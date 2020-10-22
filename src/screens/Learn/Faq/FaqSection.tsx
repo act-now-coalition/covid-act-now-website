@@ -15,7 +15,11 @@ const FaqSection = (props: { content: Section }) => {
         {sectionTitle}
       </SectionHeader>
       {questions.map((item: Question, i: number) => (
-        <StyledAccordion summaryText={item.question} detailText={item.answer} />
+        <StyledAccordion
+          key={`accordion-question-${i}`}
+          summaryText={item.question}
+          detailText={item.answer}
+        />
       ))}
     </Fragment>
   );
