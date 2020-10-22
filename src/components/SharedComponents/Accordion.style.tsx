@@ -17,6 +17,7 @@ export const StyledAccordionSummary = styled(AccordionSummary)`
   line-height: 1.4;
   padding-left: 0;
   padding-right: 0;
+  align-items: flex-start;
 `;
 
 export const MarkdownBody = styled(MarkdownContent)`
