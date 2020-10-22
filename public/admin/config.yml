@@ -206,6 +206,10 @@ collections:
             name: header
             widget: string
             default: true
+          - label: Intro
+            name: intro
+            widget: markdown
+            default: true
           - label: Sections
             name: sections
             widget: list
