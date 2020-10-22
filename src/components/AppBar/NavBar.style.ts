@@ -122,7 +122,6 @@ export const DesktopOnly = styled.div`
 
 export const IconButton = styled(MuiIconButton).attrs(props => ({
   disableRipple: true,
-  disableElevation: true,
   disableFocusRipple: true,
 }))`
   &:focus {
