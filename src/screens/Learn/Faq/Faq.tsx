@@ -1,11 +1,19 @@
 import React, { Fragment } from 'react';
 import { Wrapper, PageHeader } from './Faq.style';
 import FaqSection from './FaqSection';
-import { faqContent } from 'cms-content/learn';
+import { faqContent, Section } from 'cms-content/learn';
+import TableOfContents, { Item } from 'components/TableOfContents';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 
 const faqHeader = faqContent.header;
 const faqSections = faqContent.sections;
+
+function getSectionItems(sections: Section[]): Item[] {
+  return sections.map(section => ({
+    id: section.sectionId,
+    title: section.sectionTitle,
+  }));
+}
 
 const Faq = () => {
   return (
@@ -18,9 +26,9 @@ const Faq = () => {
       />
       <Wrapper>
         <PageHeader>{faqHeader}</PageHeader>
-        <p>*** insert table of contents ***</p>
-        {faqSections.map((section: any, i: number) => (
-          <FaqSection content={section} />
+        <TableOfContents items={getSectionItems(faqSections)} />
+        {faqSections.map((section: Section, i: number) => (
+          <FaqSection key={section.sectionId} content={section} />
         ))}
       </Wrapper>
     </Fragment>
