@@ -110,8 +110,8 @@ export default function App() {
                 path="/us/:stateId/county/:countyId/compare/:sharedComponentId?"
                 component={LocationPage}
               />
-              {/* (Chelsi:) REMOVE / just for the sake of learn dev: */}
-              <Route exact path="/learn" component={Faq} />
+              {/* Learn routes (edit possibly?) */}
+              <Route exact path="/faq" component={Faq} />
               {/* /state/ routes are deprecated but still supported. */}
               <Route exact path="/state/:stateId" component={LocationPage} />
               <Route
