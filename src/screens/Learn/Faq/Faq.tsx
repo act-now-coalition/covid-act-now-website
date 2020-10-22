@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Breadcrumbs, { BreadcrumbItem } from 'components/Breadcrumbs';
 import { faqContent, Section } from 'cms-content/learn';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
@@ -37,11 +36,7 @@ const Faq = () => {
       />
       <Style.PageContent>
         <Style.BreadcrumbsContainer>
-          <Breadcrumbs pathItems={breadcrumbItems}>
-            <Link to="/">Home</Link>
-            <Link to="/learn">Learn</Link>
-            <Link to="/faq">FAQ</Link>
-          </Breadcrumbs>
+          <Breadcrumbs pathItems={breadcrumbItems} />
         </Style.BreadcrumbsContainer>
         <Style.PageHeader>{faqHeader}</Style.PageHeader>
         <Style.MobileOnly>
