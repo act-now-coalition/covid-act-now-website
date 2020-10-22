@@ -5,7 +5,6 @@ import { COLOR_MAP } from 'common/colors';
 export const Container = styled.nav`
   font-family: Roboto;
   font-weight: 400;
-  line-height: 200%;
 
   ul {
     list-style-type: none;
@@ -14,13 +13,15 @@ export const Container = styled.nav`
     margin-inline-start: 0;
     margin-inline-end: 0;
     padding-inline-start: 0;
+
+    li {
+      margin-bottom: ${theme.spacing(3)}px;
+    }
   }
 
   a {
     font-size: 16px;
     font-weight: 700;
-    line-height: 19px;
-    text-align: left;
     color: #000;
     text-decoration: none;
 

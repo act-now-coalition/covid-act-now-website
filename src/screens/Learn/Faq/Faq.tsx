@@ -1,5 +1,4 @@
-import React, { Fragment } from 'react';
-import { Wrapper, PageHeader } from './Faq.style';
+import React from 'react';
 import FaqSection from './FaqSection';
 import { faqContent, Section } from 'cms-content/learn';
 import TableOfContents, {
@@ -7,6 +6,7 @@ import TableOfContents, {
   SideTableOfContents,
 } from 'components/TableOfContents';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
+import * as Style from './Faq.style';
 
 const faqHeader = faqContent.header;
 const faqSections = faqContent.sections;
@@ -20,22 +20,28 @@ function getSectionItems(sections: Section[]): Item[] {
 
 const Faq = () => {
   return (
-    <Fragment>
+    <Style.PageContainer>
       {/* TODO: Review the page metatags with the team */}
       <AppMetaTags
         canonicalUrl="/learn"
         pageTitle="Frequently Asked Questions"
         pageDescription="Frequently Asked Questions"
       />
-      <Wrapper>
-        <PageHeader>{faqHeader}</PageHeader>
-        <SideTableOfContents items={getSectionItems(faqSections)} />
-        <TableOfContents items={getSectionItems(faqSections)} />
+      <Style.PageContent>
+        <Style.PageHeader>{faqHeader}</Style.PageHeader>
+        <Style.MobileOnly>
+          <TableOfContents items={getSectionItems(faqSections)} />
+        </Style.MobileOnly>
         {faqSections.map((section: Section, i: number) => (
           <FaqSection key={section.sectionId} content={section} />
         ))}
-      </Wrapper>
-    </Fragment>
+      </Style.PageContent>
+      <Style.DesktopOnly>
+        <Style.Sidebar>
+          <SideTableOfContents items={getSectionItems(faqSections)} />
+        </Style.Sidebar>
+      </Style.DesktopOnly>
+    </Style.PageContainer>
   );
 };
 
