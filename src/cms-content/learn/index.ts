@@ -1,4 +1,5 @@
 import faq from './learn-faq.json';
+import { sanitizeID } from './utils';
 
 type Markdown = string;
 
@@ -21,4 +22,20 @@ export interface FaqContent {
   sections: Section[];
 }
 
-export const faqContent = faq as FaqContent;
+function sanitizeSection(section: Section): Section {
+  const { sectionId, ...other } = section;
+  return {
+    sectionId: sanitizeID(sectionId),
+    ...other,
+  };
+}
+
+function sanitizeFaq(faq: FaqContent) {
+  const { sections, ...other } = faq;
+  return {
+    sections: sections.map(sanitizeSection),
+    ...other,
+  };
+}
+
+export const faqContent = sanitizeFaq(faq) as FaqContent;
