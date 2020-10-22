@@ -7,13 +7,21 @@ export interface Item {
   title: string;
 }
 
+const scrollWithOffset = (element: HTMLElement) => {
+  const yCoordinate = element.getBoundingClientRect().top + window.pageYOffset;
+  const yOffset = -80;
+  window.scrollTo({ top: yCoordinate + yOffset, behavior: 'smooth' });
+};
+
 const TableOfContents: React.FC<{ items: Item[] }> = ({ items }) => {
   return (
     <Style.Container>
       <ul>
         {items.map(({ title, id }) => (
           <li key={id}>
-            <HashLink to={`#${id}`}>{title}</HashLink>
+            <HashLink to={`#${id}`} scroll={scrollWithOffset}>
+              {title}
+            </HashLink>
           </li>
         ))}
       </ul>
