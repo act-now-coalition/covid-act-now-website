@@ -8,7 +8,10 @@ export interface Item {
   title: string;
 }
 
-const TableOfContents: React.FC<{ items: Item[] }> = ({ items }) => {
+const TableOfContents: React.FC<{
+  items: Item[];
+  onClickItem: (id: string) => void;
+}> = ({ items, onClickItem }) => {
   return (
     <Style.Container>
       <ul>
@@ -17,6 +20,7 @@ const TableOfContents: React.FC<{ items: Item[] }> = ({ items }) => {
             <HashLink
               to={`#${id}`}
               scroll={element => scrollWithOffset(element, -80)}
+              onClick={() => onClickItem(id)}
             >
               {title}
             </HashLink>

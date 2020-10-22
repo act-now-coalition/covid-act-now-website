@@ -5,6 +5,11 @@ import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import TableOfContents, { Item } from 'components/TableOfContents';
 import FaqSection from './FaqSection';
 import * as Style from './Faq.style';
+import {
+  EventAction,
+  EventCategory,
+  trackEvent,
+} from '../../../components/Analytics';
 
 const faqHeader = faqContent.header;
 const faqSections = faqContent.sections;
@@ -22,6 +27,10 @@ const breadcrumbItems: BreadcrumbItem[] = [
   { to: '/faq', label: 'FAQ' },
 ];
 
+const onClickLink = (linkID: string) => {
+  trackEvent(EventCategory.FAQ, EventAction.CLICK_LINK, linkID);
+};
+
 const Faq = () => {
   return (
     <Style.PageContainer>
@@ -36,9 +45,10 @@ const Faq = () => {
           <Breadcrumbs pathItems={breadcrumbItems} />
         </Style.BreadcrumbsContainer>
         <Style.PageHeader>{faqHeader}</Style.PageHeader>
-        <Style.MobileOnly>
-          <TableOfContents items={getSectionItems(faqSections)} />
-        </Style.MobileOnly>
+        <TableOfContents
+          items={getSectionItems(faqSections)}
+          onClickItem={onClickLink}
+        />
         {faqSections.map((section: Section) => (
           <FaqSection key={section.sectionId} content={section} />
         ))}
