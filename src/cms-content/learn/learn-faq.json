@@ -61,7 +61,7 @@
           "answer": "State reporting practices differ. In most states, the test results are reported where individuals are tested, not where they live. Florida, however, distinguishes between residents and non-residents in the statistics it publishes."
         },
         {
-          "question": "Does CAN's positive test rate metric show only PCR test results, or PCR and Serology test results?\n",
+          "question": "Does CAN's positive test rate metric show only PCR test results, or PCR and serology test results?\n",
           "answer": "We get our state testing data from [The Covid Tracking Project,](https://covidtracking.com/) which aggregates the data from the states’ dashboards. No state should mix the results of diagnostic tests (including PCR tests and antigen tests) with the results of antibody tests. Serology tests looking for COVID antibodies can identify individuals who have had the virus at some point in the past, but they should not be used to diagnose an active COVID infection, according to the Food and Drug Administration’s [Coronavirus Testing Basics](https://www.fda.gov/consumers/consumer-updates/coronavirus-testing-basics). Some states, at various times, have included both diagnostic and antibody tests in their reports. We make every possible effort to obtain data that is not corrupted, but ultimately we must work with the data that is available."
         },
         {
@@ -105,7 +105,7 @@
       "sectionId": "how can I help?",
       "questions": [
         {
-          "question": "Are masks helpful in reducing the spread of coronavirus?\n",
+          "question": "Do masks help stop the spread of COVID?\n",
           "answer": "Yes! Masks are extremely helpful in reducing the spread of coronavirus. They help to protect you and those around you. We recommend that you wear a mask covering your mouth and nose. This recommendation follows advice from the [CDC](https://www.cdc.gov/media/releases/2020/p0714-americans-to-wear-masks.html) and [WHO](https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/when-and-how-to-use-masks), and there is a body of research, including from the [National Academy of Sciences](https://www.pnas.org/content/117/26/14857), that suggests everyone should wear a mask. We know that the virus can spread between people interacting in close proximity, even if no one is exhibiting any symptoms, and wearing a mask gives you an added layer of protection. If there were a medication that dramatically reduced your chances of giving or getting COVID, would you take that medication? In practical terms, a mask is such a medication."
         },
         {
