@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import { mobileBreakpoint } from 'assets/theme/sizes';
+import theme from 'assets/theme';
 
 export const PageContainer = styled.div`
   display: flex;
   max-width: ${mobileBreakpoint};
-  margin: 4rem auto;
+  margin: ${theme.spacing(3)}px auto ${theme.spacing(4)}px auto;
 `;
 
 export const PageContent = styled.main`
@@ -39,4 +40,8 @@ export const DesktopOnly = styled.div`
   @media (min-width: ${mobileBreakpoint}) {
     display: flex;
   }
+`;
+
+export const BreadcrumbsContainer = styled.div`
+  margin-bottom: ${theme.spacing(4)}px;
 `;
