@@ -27,7 +27,7 @@ const Faq = () => {
       <Wrapper>
         <PageHeader>{faqHeader}</PageHeader>
         <TableOfContents items={getSectionItems(faqSections)} />
-        {faqSections.map((section: Section, i: number) => (
+        {faqSections.map((section: Section) => (
           <FaqSection key={section.sectionId} content={section} />
         ))}
       </Wrapper>

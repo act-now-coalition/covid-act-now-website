@@ -7,7 +7,7 @@ type Markdown = string;
   For FAQ:
 */
 export interface Question {
-  question: Markdown;
+  question: string;
   answer: Markdown;
 }
 
