@@ -1,11 +1,12 @@
 import React from 'react';
-import FaqSection from './FaqSection';
+import Breadcrumbs, { BreadcrumbItem } from 'components/Breadcrumbs';
 import { faqContent, Section } from 'cms-content/learn';
+import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import TableOfContents, {
   Item,
   SideTableOfContents,
 } from 'components/TableOfContents';
-import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
+import FaqSection from './FaqSection';
 import * as Style from './Faq.style';
 
 const faqHeader = faqContent.header;
@@ -18,6 +19,12 @@ function getSectionItems(sections: Section[]): Item[] {
   }));
 }
 
+const breadcrumbItems: BreadcrumbItem[] = [
+  { to: '/', label: 'Home' },
+  { to: '/learn', label: 'Learn' },
+  { to: '/faq', label: 'FAQ' },
+];
+
 const Faq = () => {
   return (
     <Style.PageContainer>
@@ -28,6 +35,9 @@ const Faq = () => {
         pageDescription="Frequently Asked Questions"
       />
       <Style.PageContent>
+        <Style.BreadcrumbsContainer>
+          <Breadcrumbs pathItems={breadcrumbItems} />
+        </Style.BreadcrumbsContainer>
         <Style.PageHeader>{faqHeader}</Style.PageHeader>
         <Style.MobileOnly>
           <TableOfContents items={getSectionItems(faqSections)} />
