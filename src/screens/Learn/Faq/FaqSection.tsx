@@ -3,10 +3,11 @@ import { StyledAccordion } from 'components/SharedComponents';
 import { SectionHeader } from './Faq.style';
 import { Section, Question } from 'cms-content/learn';
 import { Anchor } from 'components/TableOfContents';
-import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
+// import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
 
 function trackExpandQuestion(question: string) {
-  trackEvent(EventCategory.FAQ, EventAction.EXPAND, question);
+  // TODO: Use question IDs or labels instead of the text of the question
+  // trackEvent(EventCategory.FAQ, EventAction.EXPAND, question);
 }
 
 const FaqSection = (props: { content: Section }) => {
