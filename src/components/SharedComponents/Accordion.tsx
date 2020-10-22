@@ -10,11 +10,18 @@ import {
 const StyledAccordion = (props: {
   summaryText: string;
   detailText: string;
+  onExpand?: (summaryText: string) => void;
 }) => {
-  const { summaryText, detailText } = props;
+  const { summaryText, detailText, onExpand } = props;
+
+  const onChange = (event: React.ChangeEvent<{}>, expanded: boolean) => {
+    if (expanded && onExpand) {
+      onExpand(summaryText);
+    }
+  };
 
   return (
-    <StyledMuiAccordion>
+    <StyledMuiAccordion onChange={onChange}>
       <StyledAccordionSummary expandIcon={<ExpandMoreIcon />}>
         {summaryText}
       </StyledAccordionSummary>

@@ -3,6 +3,11 @@ import { StyledAccordion } from 'components/SharedComponents';
 import { SectionHeader } from './Faq.style';
 import { Section, Question } from 'cms-content/learn';
 import { Anchor } from 'components/TableOfContents';
+import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
+
+function trackExpandQuestion(question: string) {
+  trackEvent(EventCategory.FAQ, EventAction.EXPAND, question);
+}
 
 const FaqSection = (props: { content: Section }) => {
   const { content } = props;
@@ -19,6 +24,7 @@ const FaqSection = (props: { content: Section }) => {
           key={`accordion-question-${i}`}
           summaryText={item.question}
           detailText={item.answer}
+          onExpand={trackExpandQuestion}
         />
       ))}
     </Fragment>

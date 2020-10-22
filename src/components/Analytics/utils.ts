@@ -36,6 +36,7 @@ export enum EventCategory {
   DONATE = 'donate',
   RECOMMENDATIONS = 'recommendations',
   INDIGENOUS_PEOPLES_DAY = 'indigenous peoples day',
+  FAQ = 'frequently asked questions',
 }
 
 /**
@@ -49,6 +50,7 @@ export enum EventAction {
   CLICK_LINK = 'click link',
   CLICK = 'click',
   SELECT = 'select',
+  EXPAND = 'expand',
   OPEN_MODAL = 'open modal',
   SUBSCRIBE = 'subscribe',
   ALERTS_UNSUBSCRIBE = 'alertsUnsubscribe',
