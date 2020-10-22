@@ -6,6 +6,111 @@
       "term": "Antibodies",
       "termId": "antibodies",
       "definition": "Antibodies are proteins produced by the immune system to protect against foreign substances, such as viruses and bacteria. You may have heard a lot about antibodies in the news, because they can indicate whether someone has been infected with COVID. When a person is infected with a [pathogen](#pathogen) such as SARS-CoV-2, the virus responsible for COVID, their body produces antibodies to help eliminate it. [Serology blood tests](#serology-test) look for antibodies to determine whether someone has been infected with COVID in the past. Serology tests are not very useful in detecting current cases of COVID, because it can take 1-3 weeks for the body to make antibodies after being infected. [It is still unknown](https://www.cdc.gov/coronavirus/2019-ncov/lab/resources/antibody-tests-guidelines.html) whether people with antibodies are protected from reinfection."
+    },
+    {
+      "term": "Antibody test",
+      "termId": "antibody-test",
+      "definition": "An antibody test, also known as a [serology test](#serology-test), is one of the many types of COVID tests. An antibody test looks for [antibodies](#antibodies) against COVID in the blood to determine if someone has been infected in the past, regardless of whether or not they presented with symptoms, as COVID can be [asymptomatic](#asymptomatic). This test does not identify active COVID infections, which is in contrast to PCR tests and antigen\\[hyper link to antigen test] tests. Antibody tests can be useful for tracking the spread of disease, understanding human [immunity](#immune) to the disease, and possibly prioritizing who should be vaccinated in the future. It is [not yet known](https://www.cdc.gov/coronavirus/2019-ncov/lab/resources/antibody-tests-guidelines.html) if people who have recovered from COVID and have antibodies are protected from getting reinfected."
+    },
+    {
+      "term": "Antigen test",
+      "termId": "antigen-test",
+      "definition": "An antigen test is one of many types of COVID tests. Like a [PCR test](#pcr-test), an antigen test identifies people who are currently infected with COVID. It looks for proteins of the virus in someone’s nose and throat secretions using the same technology as the rapid strep test you would take at your doctor’s office. An antigen test is very different from an [antibody test](#antibody-test), also referred to as a [serology test](#serology-test), which only helps identify people who have been infected with COVID in the past. Antigen tests can provide test results in minutes, unlike PCR tests which require between several hours and several days to process results in a lab. Due to their lower cost and quick result turnaround, antigen tests could be used to screen people in environments such as hospitals, workplaces, or schools, where it is important to quickly identify active infection. There is, however, concern about the accuracy of antigen testing, which is only around [85% (as compared to 95%](https://cnnphilippines.com/news/2020/3/31/FDA-rapid-test-kits-85-95-percent-accurate-COVID.html?fbclid=IwAR2qh1yRFYX_ob6iHfgAopdGrXtaAP8bhpG2v_rmEHu5F_XUD8lXm6BBVvU) for PCR tests). While positive test results are relatively reliable, negative test results should be confirmed with a negative result from a PCR test. In other words, if an antigen test result is positive, the patient is almost certainly infected. But if an antigen test result is negative, that does not necessarily mean the person is negative for COVID because there are a significant number of false negatives."
+    },
+    {
+      "term": "Asymptomatic",
+      "termId": "asymptomatic",
+      "definition": "An asymptomatic person is positive for the virus but never shows signs or symptoms of the infection. Testing can show asymptomatic infection. The fact that COVID can be asymptomatic means we do not always know if a person has COVID, and therefore the virus can be transmitted unknowingly. Asymptomatic transmission is one of the reasons COVID is so dangerous, as opposed to SARS, which was more deadly in infected individuals, but always symptomatic. Researchers are very unsure how many COVID cases are transmitted asymptomatically, but estimates range between [six and 41%](https://www.who.int/news-room/commentaries/detail/transmission-of-sars-cov-2-implications-for-infection-prevention-precautions) of cases. Some people with asymptomatic infection may actually be [presymptomatic](#presymptomatic), and develop symptoms later on."
+    },
+    {
+      "term": "Asymptomatic spread",
+      "termId": "asymptomatic-spread",
+      "definition": "Asymptomatic spread refers to the [transmission](#transmission) of a virus from an infected individual with no symptoms to an uninfected individual. People infected with COVID can be [asymptomatic](#asymptomatic) and therefore unaware of their ability to transmit the virus. Asymptomatic spread is one of the reasons why COVID is so dangerous. Researchers are unsure how many COVID cases fit into this category, but the World Health Organization estimates that between [six% and 41%](https://www.who.int/news-room/commentaries/detail/transmission-of-sars-cov-2-implications-for-infection-prevention-precautions) of cases are asymptomatic."
+    },
+    {
+      "term": "Case density",
+      "termId": "case-density",
+      "definition": "Case density is a measure of the number of COVID cases divided by the number of people (per capita) in a given community. Case density can refer to new cases over, say, the last 14 days or it can refer to total cases since the onset of the pandemic. The word “density” means that the case counts are expressed as a per-capita value."
+    },
+    {
+      "term": "Cluster event",
+      "termId": "cluster-event",
+      "definition": "A cluster is a group of cases, usually at least 10 positive cases, tied to the same place at the same time. With COVID-19, large clusters result from [super spreading events](#superspreader) such as conferences, [choir practices](https://www.cdc.gov/mmwr/volumes/69/wr/mm6919e6.htm), funerals, and cruises. For example, in early February, 77 out of 95 of Massachusetts COVID cases could be attributed to one [biotech conference](https://www.wbur.org/commonhealth/2020/03/12/coronavirus-outbreak-biogen-conference-superspreading) in Cambridge."
+    },
+    {
+      "term": "Community spread",
+      "termId": "community-spread",
+      "definition": "Also referred to as “community transmission,” community spread refers to disease spread among people in a community without clear identification of when a person was [exposed](#exposed) or how the virus was [transmitted](#transmission) to them. In February, the [CDC identified](https://www.cdc.gov/media/releases/2020/s0226-Covid-19-spread.html) a COVID patient in California who had no relevant travel history or known exposure to a patient with COVID. This discovery marked the first known instance of community spread in the United States."
+    },
+    {
+      "term": "Comorbidity",
+      "termId": "comorbidity",
+      "definition": "Comorbidity is the simultaneous presence of two or more diseases or conditions in a patient. For example, a patient with diagnoses of diabetes and chronic kidney disease is considered to have comorbidities. Sometimes, the presence of comorbidities can lead to worsened prognosis, and this appears to be the case when someone is diagnosed with COVID. According to [current research](https://www.cdc.gov/coronavirus/2019-ncov/need-extra-precautions/people-with-medical-conditions.html), conditions which are comorbid with COVID include diabetes, COPD, obesity, compromised immune systems, and certain heart conditions. Other conditions that may increase risk of severe illness from COVID include asthma, cystic fibrosis, and pregnancy."
+    },
+    {
+      "term": "Confidence interval",
+      "termId": "confidence-interval",
+      "definition": "A confidence interval is used to express the degree of certainty of a statistic. It is a range of values that is likely to encompass the true value. For example, Covid Act Now reports  a statistic called [infection growth rate](#infection-growth-rate), also known as [R(t)](#rt). For each R(t) value, we also report a 90% confidence interval (CI). For example, if R(t) is 1.17 and has a 90% CI between 1.07 and 1.27, that result would be written as 90% CI \\[1.07, 1.27]. These numbers denote that there is a 90% chance that the true average infection growth rate calculated for that day is between 1.07 and 1.27."
+    },
+    {
+      "definition": "A confirmed case, in the context of COVID reporting, is an individual who received a [PCR Test](#pcr-test) or [Antigen Test](#antigen-test) where the test result came back positive. This positive result indicates that the individual was actively infected with the [SARS-CoV-2](#sars-cov-2) virus at the time of the test. Cases can also be classified as \"possible\" or \"probable\" if identified without laboratory test results. The reporting of COVID cases normally refers to confirmed cases unless otherwise noted. The number of new cases per day, also referred to as [\"disease incidence\"](#incidence), is often plotted for each day over a period of time to show how the daily new cases are trending: up, down, or steady.",
+      "term": "Confirmed case",
+      "termId": "confirmed-case "
+    },
+    {
+      "term": "Contact tracing",
+      "termId": "contact-tracing",
+      "definition": "Contact tracing is the process of tracing all of the people with whom a newly confirmed COVID patient has come into contact, in order to identify and notify people who may have been exposed to the virus. When contacts are efficiently traced and encouraged to quarantine, further [transmission](#transmission) can be prevented. Contact tracing is essential if we want to slow the spread of COVID without universal [quarantine](#quarantine) or full shut-down. It is especially critical due to the fact that people can spread COVID even if they are [presymptomatic](#presymptomatic) or [asymptomatic](#asymptomatic). [South Korea](https://www.businessinsider.com/south-korea-contact-tracing-helped-control-nightclub-outbreak-2020-5)’s robust contact tracing and testing efforts allowed the country to control COVID efficiently and effectively without a strict lock-down. If a resident tested positive or was even suspected of coming into contact with an infected person, their contacts were quickly notified, tested, and encouraged to quarantine."
+    },
+    {
+      "term": "Containment",
+      "termId": "containment",
+      "definition": "Containment refers to drastically reducing the spread of disease from infected to uninfected individuals. In contrast to [mitigation](#mitigation), which aims to slow the spread of COVID, containment aims to reduce COVID spread to zero or near zero. Currently, the United States’ response to COVID is primarily focused on mitigation with some containment efforts -- the goal is to mitigate the spread of COVID through public health education like CDC guidelines. In order to achieve successful containment in the United States, there would need to be widespread, high quality rapid testing in addition to measures like isolation, contact tracing, and [quarantine](#quarantine). A containment strategy was very successful in countries such as [South Korea](https://academic.oup.com/jtm/article/27/3/taaa039/5804843)."
+    },
+    {
+      "term": "Coronavirus",
+      "termId": "coronavirus",
+      "definition": "Coronavirus is the name for a family, or category, of [viruses](#virus) that includes the new [SARS-CoV-2](SARS-CoV-2) coronavirus that causes [COVID](#covid-19). There are [hundreds of coronaviruses](https://www.niaid.nih.gov/diseases-conditions/coronaviruses) in animals. They typically are not transmitted to humans, but in rare instances, such as with the SARS epidemic and COVID pandemic, a coronavirus can pass from an animal to a human. Coronaviruses cause a broad range of [symptoms](https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/symptoms.html) including cough, shortness of breath, diarrhea, and fever."
+    },
+    {
+      "term": "COVID-19",
+      "termId": "covid-19",
+      "definition": "A confirmed case, in the context of COVID reporting, is an individual who received a [PCR Test](#pcr-test) or [Antigen Test](#antigen-test) where the test result came back positive. This positive result indicates that the individual was actively infected with the [SARS-CoV-2](#sars-cov-2) virus at the time of the test. Cases can also be classified as \"possible\" or \"probable\" if identified without laboratory test results. The reporting of COVID cases normally refers to confirmed cases unless otherwise noted. The number of new cases per day, also referred to as \"[disease incidence](#disease-incidence)\", is often plotted for each day over a period of time to show how the daily new cases are trending: up, down, or steady."
+    },
+    {
+      "term": "Crisis standards of care (CSC)",
+      "termId": "crisis-standards-of-care",
+      "definition": "Crisis standards of care (CSC) refers to when a hospital or healthcare system is so overwhelmed that it is impossible to provide the standard level of care. The COVID-19 pandemic has overwhelmed health care systems across the United States, and many hospitals have to operate with limited equipment, PPE, staffing, and beds. “[Flattening the Curve](#flattening-the-curve)” is a method of slowing the spread of COVID to prevent hospitals from having to invoke crisis standards of care. Crisis standards of care often coincide with a shift from patient-centered practice, which focuses on providing the best care for a patient, to public-focused practice, which involves making decisions on patient care within a larger understanding of limited resources and collective good. An example of this is the reallocation or in some cases [sharing](https://www.nytimes.com/2020/03/26/health/coronavirus-ventilator-sharing.html) of ventilators among severely ill COVID patients. [Guidelines](https://www.nursingworld.org/~496044/globalassets/practiceandpolicy/work-environment/health--safety/coronavirus/crisis-standards-of-care.pdf) have been published to help health workers and institutions navigate crisis standards of care as ethically as possible."
+    },
+    {
+      "term": "Daily new cases",
+      "termId": "daily-new-cases",
+      "definition": "Daily new cases, also known as [disease incidence](#disease-incidence) in epidemiology, is the number of new COVID cases per day per unit of population. Covid Act Now reports “daily new cases” per 100,000 people in states and counties. This metric answers the question: “How many new infections are in my area each day?” Because we can’t test our entire population, we don’t know how many total cases are in a given population. Measuring daily new cases gives us a way to gauge new COVID cases without having to test an entire population."
+    },
+    {
+      "term": "Data",
+      "termId": "data",
+      "definition": "Data refer to quantitative bits of information or knowledge that are collected, measured, reported, and analyzed. They can be visualized using graphs or analysis tools. Data are malleable, and the process of representing, interpreting, and inferring a bigger picture from raw data constantly evolves. Collecting and analyzing COVID data is vital for understanding the state of COVID and navigating reopening decisions. [Covid Act Now](https://covidactnow.org/?s=647107) is a pandemic data platform, which acknowledges the ever-changing natures of COVID and COVID data, and chooses data sources that are accurate, credible, timely, and available. These data are then shared through user-friendly, relevant metrics and models in order to create an understanding of COVID and, ultimately, save lives."
+    },
+    {
+      "definition": "Data smoothing refers to the process of using different statistical techniques in order to make a pattern or trend in the data more clear and visible. This process is especially important when data collection is inconsistent or convoluted, as is often the case with COVID data. Reporting agencies often skip reporting days and catch up later. These jumps represent “noise” in reporting rather than actual characteristics of the disease. We need to smooth out that reporting “noise” to better convey what is actually happening with COVID spread in a population. Two examples of these techniques are (1) removing outliers (data points that differ significantly from the other observations) from a set of data, and (2) calculating the average of the data points.",
+      "term": "Data smoothing",
+      "termId": "data-smoothing"
+    },
+    {
+      "term": "Demographics",
+      "termId": "demographics",
+      "definition": "Demographics refer to data about the characteristics of a population, such as the age, gender, income, race, education level, language, or religion of the people within a group. Analyzing the demographics of a population is an important part of understanding how COVID is affecting certain communities. The COVID pandemic has highlighted health disparities along [racial](https://covidtracking.com/race), ethnic, and economic lines in the United States. For example, Black and Latinx people are much more likely than others to be infected with COVID and to die from the disease. Although data is still sparse, we know Indigenous people and other people of color are also infected at much higher rates. The full explanations for these disparities are still being researched, but the differences are exacerbated by lower levels of health insurance coverage, distrust in the healthcare system due to a long history of discrimination in the medical field, and higher rates of underlying health conditions. There are efforts to create [tools](http://healthpolicy.ucla.edu/health-profiles/Pages/COVID-19Dashboard.aspx) that better collect and understand the demographics of COVID data."
+    },
+    {
+      "term": "Disease prevalence",
+      "termId": "disease-prevalence",
+      "definition": "Disease prevalence is a measure of the total number of cases in a community with a currently active COVID infection. It answers the question: “how many COVID infections are currently present in my area?” Disease prevalence is not the same as [disease incidence](#disease-incidence), which looks at the number of new cases in a specific time period. Disease prevalence is an indicator of the actual risk of encountering an infected individual in a community. To know the true prevalence, you would need to test the entire population (or a widespread randomized sample) every day, using a highly-accurate test. Therefore, Covid Act Now looks at disease incidence, or daily new cases per 100,000 people, to get an accurate estimation of COVID in a community."
+    },
+    {
+      "term": "Disease incidence",
+      "termId": "disease-incidence",
+      "definition": "Disease incidence is a measure of new confirmed COVID cases per day. It answers the question: “how many new COVID infections were reported in my area?” Incidence is important because it provides a snapshot of the state of COVID in a given community. Disease prevalence is another term you may have read in the news or online. Disease prevalence is not the same as disease incidence. While incidence refers to the number of new confirmed cases on a given day, prevalence refers to the total number of infections which are currently active on a given day."
     }
   ]
 }
