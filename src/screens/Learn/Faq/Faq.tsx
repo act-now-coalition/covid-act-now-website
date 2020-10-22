@@ -2,7 +2,7 @@ import React from 'react';
 import { Wrapper, PageHeader } from './Faq.style';
 import FaqSection from './FaqSection';
 import { faqContent, Section } from 'cms-content/learn';
-import TableOfContents, { Item } from 'components/TableOfContents';
+import { Item, SideTableOfContents } from 'components/TableOfContents';
 
 const faqHeader = faqContent.header;
 const faqSections = faqContent.sections;
@@ -18,7 +18,7 @@ const Faq = () => {
   return (
     <Wrapper>
       <PageHeader>{faqHeader}</PageHeader>
-      <TableOfContents items={getSectionItems(faqSections)} />
+      <SideTableOfContents items={getSectionItems(faqSections)} />
       {faqSections.map((section: Section) => (
         <FaqSection key={section.sectionId} content={section} />
       ))}
