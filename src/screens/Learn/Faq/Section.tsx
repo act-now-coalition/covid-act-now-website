@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 import { StyledAccordion } from 'components/SharedComponents';
 import { SectionHeader } from './Faq.style';
-import { Section, Question } from 'cms-content/learn';
+import { FaqSection, Question } from 'cms-content/learn';
 import { Anchor } from 'components/TableOfContents';
 
-const FaqSection = (props: { content: Section }) => {
+const Section = (props: { content: FaqSection }) => {
   const { content } = props;
   const { sectionTitle, questions } = content;
 
@@ -25,4 +25,4 @@ const FaqSection = (props: { content: Section }) => {
   );
 };
 
-export default FaqSection;
+export default Section;

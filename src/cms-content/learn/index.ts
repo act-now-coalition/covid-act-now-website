@@ -11,7 +11,7 @@ export interface Question {
   answer: Markdown;
 }
 
-export interface Section {
+export interface FaqSection {
   sectionTitle: string;
   sectionId: string;
   questions: Question[];
@@ -19,10 +19,10 @@ export interface Section {
 
 export interface FaqContent {
   header: string;
-  sections: Section[];
+  sections: FaqSection[];
 }
 
-function sanitizeSection(section: Section): Section {
+function sanitizeSection(section: FaqSection): FaqSection {
   const { sectionId, ...other } = section;
   return {
     sectionId: sanitizeID(sectionId),
@@ -39,3 +39,36 @@ function sanitizeFaq(faq: FaqContent) {
 }
 
 export const faqContent = sanitizeFaq(faq) as FaqContent;
+
+/*
+  For Glossary:
+*/
+
+export interface Term {
+  term: string;
+  termId: string;
+  definition: Markdown;
+}
+
+export interface GlossaryContent {
+  header: string;
+  intro: Markdown;
+  sections: Term[];
+}
+
+/*
+  For Landing page:
+*/
+
+export interface LandingSection {
+  sectionTitle: string;
+  sectionId: string;
+  description: Markdown;
+  buttonCta: string;
+  buttonRedirect: string;
+}
+
+export interface LandingContent {
+  header: string;
+  sections: LandingSection[];
+}
