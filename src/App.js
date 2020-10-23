@@ -32,9 +32,7 @@ import ExternalRedirect from 'components/ExternalRedirect';
 import HandleRedirectTo from 'components/HandleRedirectTo/HandleRedirectTo';
 import Donate from 'screens/Donate/Donate';
 import PageviewTracker from 'components/Analytics';
-import Faq from 'screens/Learn/Faq';
-import Glossary from 'screens/Learn/Glossary';
-import Landing from 'screens/Learn/Landing';
+import { Faq, Glossary, Landing } from 'screens/Learn';
 
 export default function App() {
   return (
@@ -112,7 +110,6 @@ export default function App() {
                 path="/us/:stateId/county/:countyId/compare/:sharedComponentId?"
                 component={LocationPage}
               />
-              {/* Learn routes (edit possibly?) */}
               <Route exact path="/learn" component={Landing} />
               <Route exact path="/faq" component={Faq} />
               <Route exact path="/glossary" component={Glossary} />

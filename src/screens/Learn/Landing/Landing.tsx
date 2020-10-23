@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import {
-  Wrapper,
+  PageContainer,
   PageHeader,
   SectionHeader,
   MarkdownBodyCopy,
@@ -48,7 +48,7 @@ const Landing = () => {
         pageTitle="COVID-19 Educational content - America's COVID warning system - Covid Act Now" //edit these
         pageDescription="Find trusted information about Coronavirus (2019-nCoV). Make informed decisions to stop the disease for you and your community."
       />
-      <Wrapper>
+      <PageContainer>
         <PageHeader>{header}</PageHeader>
         <TableOfContents items={getSectionItems(sections)} />
         {sections.map((section: LandingSection) => (
@@ -65,7 +65,7 @@ const Landing = () => {
             />
           </Fragment>
         ))}
-      </Wrapper>
+      </PageContainer>
     </Fragment>
   );
 };

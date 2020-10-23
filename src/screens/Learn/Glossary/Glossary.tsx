@@ -1,38 +1,50 @@
-import React, { Fragment } from 'react';
-import { Wrapper, PageHeader, PageIntroParagraph } from '../Learn.style';
+import React from 'react';
+import {
+  PageContainer,
+  PageHeader,
+  PageIntro,
+  PageContent,
+  BreadcrumbsContainer,
+} from '../Learn.style';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import { StyledAccordion } from 'components/SharedComponents';
+import { glossaryContent, Term } from 'cms-content/learn';
+import Breadcrumbs from 'components/Breadcrumbs';
+import { BreadcrumbItem } from 'components/Breadcrumbs';
+
+const glossaryHeader = glossaryContent.header;
+const glossaryIntro = glossaryContent.intro;
+const glossaryTerms = glossaryContent.terms;
+
+export const breadcrumbItems: BreadcrumbItem[] = [
+  { to: '/learn', label: 'Learn' },
+  { to: '/glossary', label: 'Glossary' },
+];
 
 const Glossary = () => {
-  // stand-in content:
-  const header = 'Glossary';
-  const terms = [
-    { term: 'term 1', termId: 'id 1', defintion: 'definition 1' },
-    { term: 'term 2', termId: 'id 2', defintion: 'definition 2' },
-    { term: 'term 3', termId: 'id 3', defintion: 'definition 3' },
-  ];
-  const intro =
-    'We have compiled a simple glossary of essential COVID-related terms, which we will continue to update and expand.';
-
   return (
-    <Fragment>
+    <PageContainer>
       <AppMetaTags
         canonicalUrl="/glossary"
         pageTitle="COVID-19 Glossary & Key terms - America's COVID warning system - Covid Act Now"
         pageDescription="Find trusted information about Coronavirus (2019-nCoV). Make informed decisions to stop the disease for you and your community."
       />
-      <Wrapper>
-        <PageHeader>{header}</PageHeader>
-        <PageIntroParagraph>{intro}</PageIntroParagraph>
-        {terms.map(item => (
-          <StyledAccordion
-            key={item.termId}
-            summaryText={item.term}
-            detailText={item.defintion}
-          />
+      <PageContent>
+        <BreadcrumbsContainer>
+          <Breadcrumbs pathItems={breadcrumbItems} />
+        </BreadcrumbsContainer>
+        <PageHeader>{glossaryHeader}</PageHeader>
+        <PageIntro>{glossaryIntro}</PageIntro>
+        {glossaryTerms.map((item: Term) => (
+          <div id={item.termId} key={item.termId}>
+            <StyledAccordion
+              summaryText={item.term}
+              detailText={item.definition}
+            />
+          </div>
         ))}
-      </Wrapper>
-    </Fragment>
+      </PageContent>
+    </PageContainer>
   );
 };
 

@@ -4,6 +4,7 @@ import { MarkdownContent } from 'components/Markdown';
 import theme from 'assets/theme';
 
 export const mobileBreakpoint = '600px';
+
 /*
   Styles that are shared between Learn pages:
 */
@@ -14,10 +15,9 @@ export const BodyCopyStyles = css`
   letter-spacing: 1;
 `;
 
-export const Wrapper = styled.div`
+export const PageContainer = styled.div`
   max-width: 800px;
   width: 100%;
-  padding: 0 1rem;
   margin: 2rem auto 3.5rem;
 
   @media (min-width: ${mobileBreakpoint}) {
@@ -25,12 +25,22 @@ export const Wrapper = styled.div`
   }
 `;
 
+export const PageContent = styled.main`
+  flex: 1 1 0;
+  padding: 1rem;
+`;
+
 export const PageHeader = styled.h1`
   margin-bottom: 1.75rem;
 `;
 
-export const PageIntroParagraph = styled.p`
+export const PageIntro = styled.p`
   ${BodyCopyStyles};
+  margin-bottom: 1.5rem;
+
+  @media (min-width: ${mobileBreakpoint}) {
+    margin-bottom: 3rem;
+  }
 `;
 
 export const SectionHeader = styled.h2`
@@ -44,4 +54,8 @@ export const MarkdownBodyCopy = styled(MarkdownContent)`
   p {
     ${BodyCopyStyles}
   }
+`;
+
+export const BreadcrumbsContainer = styled.div`
+  margin-bottom: ${theme.spacing(4)}px;
 `;

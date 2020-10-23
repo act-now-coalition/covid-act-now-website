@@ -1,14 +1,22 @@
 import React from 'react';
-import { Wrapper, PageHeader } from '../Learn.style';
+import {
+  PageContainer,
+  PageHeader,
+  PageContent,
+  BreadcrumbsContainer,
+  PageIntro,
+} from '../Learn.style';
 import Section from './Section';
 import { faqContent, FaqSection } from 'cms-content/learn';
 import TableOfContents, { Item } from 'components/TableOfContents';
-import Breadcrumbs, { BreadcrumbItem } from 'components/Breadcrumbs';
+import Breadcrumbs from 'components/Breadcrumbs';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import * as Style from './Faq.style';
+import { BreadcrumbItem } from 'components/Breadcrumbs';
 
 const faqHeader = faqContent.header;
 const faqSections = faqContent.sections;
+const faqIntro = 'intro intro intro intro intro intro intro intro';
 
 function getSectionItems(sections: FaqSection[]): Item[] {
   return sections.map(section => ({
@@ -17,33 +25,33 @@ function getSectionItems(sections: FaqSection[]): Item[] {
   }));
 }
 
-const breadcrumbItems: BreadcrumbItem[] = [
-  { to: '/', label: 'Home' },
+export const breadcrumbItems: BreadcrumbItem[] = [
   { to: '/learn', label: 'Learn' },
   { to: '/faq', label: 'FAQ' },
 ];
 
 const Faq = () => {
   return (
-    <Wrapper>
+    <PageContainer>
       <AppMetaTags
         canonicalUrl="/faq"
         pageTitle="COVID-19 FAQ - America's COVID warning system - Covid Act Now"
         pageDescription="Find trusted answers to some of the most Frequently Asked Questions about Coronavirus (2019-nCoV). Make informed decisions to stop the disease for you and your community."
       />
-      <Style.PageContent>
-        <Style.BreadcrumbsContainer>
+      <PageContent>
+        <BreadcrumbsContainer>
           <Breadcrumbs pathItems={breadcrumbItems} />
-        </Style.BreadcrumbsContainer>
+        </BreadcrumbsContainer>
         <PageHeader>{faqHeader}</PageHeader>
+        <PageIntro>{faqIntro}</PageIntro>
         <Style.MobileOnly>
           <TableOfContents items={getSectionItems(faqSections)} />
         </Style.MobileOnly>
         {faqSections.map((section: FaqSection) => (
           <Section key={section.sectionId} content={section} />
         ))}
-      </Style.PageContent>
-    </Wrapper>
+      </PageContent>
+    </PageContainer>
   );
 };
 
