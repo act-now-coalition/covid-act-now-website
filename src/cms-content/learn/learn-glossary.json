@@ -208,11 +208,6 @@
       "definition": "Inference is the process of drawing conclusions based on evidence. In terms of COVID data modeling, an inference model may use actual data to infer something about the state of COVID in a particular population. Covid Act Now’s U.S. SEIR Interventions Model has “[inference projections](https://blog.covidactnow.org/inference-projections-for-states/),” which use actual numbers of cases, hospitalizations, and deaths in each state to infer the current rate of virus spread in that state. Models are not perfect, and they rely heavily on the quality and accuracy of the data that goes into them. Covid Act Now’s SEIR model won’t tell us exactly how COVID will evolve, but it helps us predict the trends in COVID hospitalizations within certain scenarios, and allows for people to prepare accordingly."
     },
     {
-      "term": "Intensive care unit (ICU) ",
-      "termId": "intensive-care-unit-(icu)",
-      "definition": "The intensive care unit (ICU) is the part of a hospital reserved for people who are very sick. Each bed is equipped with special equipment that regular hospital beds don’t have, and usually have one or two dedicated nurses to monitor each patient. The availability of an ICU bed may make the difference between life and death for some people infected by COVID. ICU Headroom is one of Covid Act Now’s main metrics for understanding COVID, as measuring and predicting ICU capacity gives a picture of whether hospitals can handle an increased load of new COVID cases without having to resort to [crisis standards of care]([#crisis-standards-of-care])."
-    },
-    {
       "term": "Isolation",
       "termId": "isolation",
       "definition": "Isolation reduces the spread of the virus by keeping people with active infections physically separated from others. Hospitals commonly isolate sick patients to prevent the spread of disease. When hospitals become overrun, it becomes much more difficult to isolate properly, and infections can therefore spread at a higher rate. Self-isolation, social distancing, and mask wearing help to “flatten the curve”\\[#flattening-the-curve] for COVID. These interventions slow COVID spread and help prevent hospitals and healthcare systems from getting completely overwhelmed. These efforts protect the public from exposure to COVID and slow the [infection growth rate]([#infection-growth-rate])."
@@ -251,26 +246,6 @@
       "term": "Pandemic",
       "termId": "pandemic",
       "definition": "A pandemic is an [epidemic](\\[#epidemic]) that has spread across international borders, affecting a large number of people. Pandemics usually happen when a virus is spread easily to people with no previous immunity. COVID, declared a global pandemic by the [World Health Organization](https://www.who.int/emergencies/diseases/novel-coronavirus-2019?gclid=EAIaIQobChMI6tPOt5jD6gIVUvDACh3qsgo9EAAYASAAEgIp7_D_BwE) (WHO) March 11, 2020, is the first known pandemic caused by a new coronavirus."
-    },
-    {
-      "term": "Pathogen",
-      "termId": "pathogen",
-      "definition": "A pathogen is an infectious agent, such as a [virus](\\[#virus]), that causes disease. [SARS-CoV-2](\\[#sars-cov-2]) is the pathogen that causes COVID. Just as the human immunodeficiency virus (HIV) causes acquired immunodeficiency syndrome (AIDS), SARS-CoV-2 causes [COVID](\\[#covid-19]) (also known as COVID-19)."
-    },
-    {
-      "term": "Peak",
-      "termId": "peak",
-      "definition": "A peak is the highest number of COVID cases in a country, state, or county, after which the rate of infection begins to slow. Peaks can be a prolonged period of time rather than a single day, and are best understood as the worst period of an [epidemic](\\[#epidemic]) or [pandemic](\\[#pandemic]). [Experts](https://www.hopkinsmedicine.org/health/conditions-and-diseases/coronavirus/first-and-second-waves-of-coronavirus) believe the U.S. is still experiencing its first [wave](\\[#wave]) of COVID cases and has not yet reached its first wave peak. There is no official definition of when one wave ends and another begins, but waves can generally be identified by a peak in daily new cases followed by a substantial, sustained reduction in that metric."
-    },
-    {
-      "term": "Personal protective equipment (PPE)",
-      "termId": "personal-protective-equipment-(ppe)",
-      "definition": "PPE is specialized equipment, including gloves, gowns, aprons, masks, respirators, goggles, and face shields, worn for protection against infectious materials such as [viruses](\\[#virus]). PPE is necessary in hospitals, but also in businesses that decide to reopen, such as restaurants, factories, or entertainment venues, in order to protect staff, patients, and patrons. Due to the continued growth of COVID, hospital systems across the nation have been experiencing [PPE shortages](https://www.fda.gov/medical-devices/personal-protective-equipment-infection-control/faqs-shortages-surgical-masks-and-gowns-during-covid-19-pandemic). As an individual, you can use cloth face coverings rather than medical grade face masks such as [N95 respirators](\\[#n95-respirator]) in order to ensure that healthcare professionals have access to this PPE."
-    },
-    {
-      "term": "Polymerase chain reaction (PCR) test",
-      "termId": "polymerase-chain-reaction-(pcr)-test",
-      "definition": "PCR tests look for the virus in the respiratory tract to determine if someone is actively infected with COVID. This type of test, usually performed with a nose or throat swab, is vital to identifying active cases and is used to determine [test positivity]([test-positivity]). A PCR test is very different from an [antibody test]([#antibody-test]), also referred to as a [serology test]([serology-test]), which only helps identify people who have been infected with COVID in the past. PCR tests are currently used to find the majority of active COVID infections."
     }
   ]
 }
