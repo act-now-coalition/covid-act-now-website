@@ -75,7 +75,7 @@
     {
       "term": "COVID-19",
       "termId": "covid-19",
-      "definition": "A confirmed case, in the context of COVID reporting, is an individual who received a [PCR Test](#pcr-test) or [Antigen Test](#antigen-test) where the test result came back positive. This positive result indicates that the individual was actively infected with the [SARS-CoV-2](#sars-cov-2) virus at the time of the test. Cases can also be classified as \"possible\" or \"probable\" if identified without laboratory test results. The reporting of COVID cases normally refers to confirmed cases unless otherwise noted. The number of new cases per day, also referred to as \"[disease incidence](#disease-incidence)\", is often plotted for each day over a period of time to show how the daily new cases are trending: up, down, or steady."
+      "definition": "We refer to COVID-19 as simply COVID. Either way, a confirmed case, in the context of COVID reporting, is an individual who received a [PCR Test](#pcr-test) or [Antigen Test](#antigen-test) where the test result came back positive. This positive result indicates that the individual was actively infected with the [SARS-CoV-2](#sars-cov-2) virus at the time of the test. Cases can also be classified as \"possible\" or \"probable\" if identified without laboratory test results. The reporting of COVID cases normally refers to confirmed cases unless otherwise noted. The number of new cases per day, also referred to as \"[disease incidence](#disease-incidence)\", is often plotted for each day over a period of time to show how the daily new cases are trending: up, down, or steady."
     },
     {
       "term": "Crisis standards of care (CSC)",
