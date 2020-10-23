@@ -29,7 +29,6 @@ class DisabledFips {
 }
 
 const DISABLED_CASE_DENSITY: string[] = [
-  '29095', // https://trello.com/c/xAwGpc6I/503-outlier-in-jackson-county-mo
   '48029', // https://trello.com/c/qscxlxgR/517-outlier-in-bexar-county-tx-disabled-metric
 ];
 
