@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment, useState } from 'react';
 import {
   ButtonsWrapper,
   ShareButtonContainer,
@@ -7,6 +7,7 @@ import {
   FacebookShareButtonInner,
   TwitterShareButtonInner,
 } from 'components/ShareButtons';
+import Snackbar from '@material-ui/core/Snackbar';
 import { COLOR_MAP } from 'common/colors';
 import LinkIcon from '@material-ui/icons/Link';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
@@ -30,20 +31,38 @@ const SmallShareButtons: React.FC<{
     socialIconSize: 30,
   };
 
+  const [showLinkCopied, setShowLinkCopied] = useState(false);
+  const handleCopyLink = () => {
+    onCopyLink();
+    setShowLinkCopied(true);
+  };
+
   return (
-    <ButtonsWrapper>
-      <ShareButtonContainer color={COLOR_MAP.BLUE} onClick={onShareOnFacebook}>
-        <FacebookShareButtonInner {...socialProps} />
-      </ShareButtonContainer>
-      <ShareButtonContainer color={COLOR_MAP.BLUE} onClick={onShareOnTwitter}>
-        <TwitterShareButtonInner {...socialProps} />
-      </ShareButtonContainer>
-      <CopyToClipboard text={shareUrl} onCopy={onCopyLink}>
-        <ShareButtonContainer color={COLOR_MAP.BLUE}>
-          <LinkIcon />
+    <Fragment>
+      <ButtonsWrapper>
+        <ShareButtonContainer
+          color={COLOR_MAP.BLUE}
+          onClick={onShareOnFacebook}
+        >
+          <FacebookShareButtonInner {...socialProps} />
         </ShareButtonContainer>
-      </CopyToClipboard>
-    </ButtonsWrapper>
+        <ShareButtonContainer color={COLOR_MAP.BLUE} onClick={onShareOnTwitter}>
+          <TwitterShareButtonInner {...socialProps} />
+        </ShareButtonContainer>
+        <CopyToClipboard text={shareUrl} onCopy={handleCopyLink}>
+          <ShareButtonContainer color={COLOR_MAP.BLUE}>
+            <LinkIcon />
+          </ShareButtonContainer>
+        </CopyToClipboard>
+      </ButtonsWrapper>
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        open={showLinkCopied}
+        autoHideDuration={2000}
+        onClose={() => setShowLinkCopied(false)}
+        message="Link copied"
+      />
+    </Fragment>
   );
 };
 
