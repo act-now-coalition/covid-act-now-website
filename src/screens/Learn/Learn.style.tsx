@@ -2,8 +2,7 @@ import styled, { css } from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 import { MarkdownContent } from 'components/Markdown';
 import theme from 'assets/theme';
-
-export const mobileBreakpoint = '600px';
+import { materialSMBreakpoint } from 'assets/theme/sizes';
 
 /*
   Styles that are shared between Learn pages:
@@ -20,7 +19,7 @@ export const PageContainer = styled.div`
   width: 100%;
   margin: 2rem auto 3.5rem;
 
-  @media (min-width: ${mobileBreakpoint}) {
+  @media (min-width: ${materialSMBreakpoint}) {
     margin: 3.5rem auto;
   }
 `;
@@ -38,7 +37,7 @@ export const PageIntro = styled.p`
   ${BodyCopyStyles};
   margin-bottom: 1.5rem;
 
-  @media (min-width: ${mobileBreakpoint}) {
+  @media (min-width: ${materialSMBreakpoint}) {
     margin-bottom: 3rem;
   }
 `;

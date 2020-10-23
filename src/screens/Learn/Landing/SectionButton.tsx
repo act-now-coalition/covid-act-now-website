@@ -20,9 +20,7 @@ const SectionButton = (props: {
 
   return (
     <StyledLink to={props.redirect}>
-      <ButtonComponent theme={props.theme} disableRipple>
-        {props.cta}
-      </ButtonComponent>
+      <ButtonComponent disableRipple>{props.cta}</ButtonComponent>
     </StyledLink>
   );
 };

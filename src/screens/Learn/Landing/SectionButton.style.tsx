@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 import MuiButton from '@material-ui/core/Button';
 import { COLOR_MAP } from 'common/colors';
-import { ButtonTheme } from './SectionButton';
 import { Link } from 'react-router-dom';
 
 export const StyledLink = styled(Link)`
@@ -15,7 +14,7 @@ const SharedButtonStyles = css`
   color: inherit;
 `;
 
-export const GreenButton = styled(MuiButton)<{ theme: ButtonTheme }>`
+export const GreenButton = styled(MuiButton)`
   ${SharedButtonStyles};
   color: white;
   background-color: ${COLOR_MAP.GREEN.BASE};
@@ -27,7 +26,7 @@ export const GreenButton = styled(MuiButton)<{ theme: ButtonTheme }>`
   }
 `;
 
-export const WhiteButton = styled(MuiButton)<{ theme: ButtonTheme }>`
+export const WhiteButton = styled(MuiButton)`
   ${SharedButtonStyles};
   color: ${COLOR_MAP.GREEN.BASE};
   border: 1px solid ${COLOR_MAP.GRAY_EXPLORE_CHART};

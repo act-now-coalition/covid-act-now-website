@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import {
   PageContainer,
   PageHeader,
@@ -11,6 +11,7 @@ import { StyledAccordion } from 'components/SharedComponents';
 import { glossaryContent, Term } from 'cms-content/learn';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { BreadcrumbItem } from 'components/Breadcrumbs';
+import { Anchor } from 'components/TableOfContents';
 
 const glossaryHeader = glossaryContent.header;
 const glossaryIntro = glossaryContent.intro;
@@ -36,12 +37,13 @@ const Glossary = () => {
         <PageHeader>{glossaryHeader}</PageHeader>
         <PageIntro>{glossaryIntro}</PageIntro>
         {glossaryTerms.map((item: Term) => (
-          <div id={item.termId} key={item.termId}>
+          <Fragment key={item.termId}>
+            <Anchor id={item.termId} />
             <StyledAccordion
               summaryText={item.term}
               detailText={item.definition}
             />
-          </div>
+          </Fragment>
         ))}
       </PageContent>
     </PageContainer>
