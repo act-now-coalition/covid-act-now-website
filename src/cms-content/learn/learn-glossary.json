@@ -251,6 +251,26 @@
       "term": "Pandemic",
       "termId": "pandemic",
       "definition": "A pandemic is an [epidemic](\\[#epidemic]) that has spread across international borders, affecting a large number of people. Pandemics usually happen when a virus is spread easily to people with no previous immunity. COVID, declared a global pandemic by the [World Health Organization](https://www.who.int/emergencies/diseases/novel-coronavirus-2019?gclid=EAIaIQobChMI6tPOt5jD6gIVUvDACh3qsgo9EAAYASAAEgIp7_D_BwE) (WHO) March 11, 2020, is the first known pandemic caused by a new coronavirus."
+    },
+    {
+      "term": "Pathogen",
+      "termId": "pathogen",
+      "definition": "A pathogen is an infectious agent, such as a [virus](\\[#virus]), that causes disease. [SARS-CoV-2](\\[#sars-cov-2]) is the pathogen that causes COVID. Just as the human immunodeficiency virus (HIV) causes acquired immunodeficiency syndrome (AIDS), SARS-CoV-2 causes [COVID](\\[#covid-19]) (also known as COVID-19)."
+    },
+    {
+      "term": "Peak",
+      "termId": "peak",
+      "definition": "A peak is the highest number of COVID cases in a country, state, or county, after which the rate of infection begins to slow. Peaks can be a prolonged period of time rather than a single day, and are best understood as the worst period of an [epidemic](\\[#epidemic]) or [pandemic](\\[#pandemic]). [Experts](https://www.hopkinsmedicine.org/health/conditions-and-diseases/coronavirus/first-and-second-waves-of-coronavirus) believe the U.S. is still experiencing its first [wave](\\[#wave]) of COVID cases and has not yet reached its first wave peak. There is no official definition of when one wave ends and another begins, but waves can generally be identified by a peak in daily new cases followed by a substantial, sustained reduction in that metric."
+    },
+    {
+      "term": "Personal protective equipment (PPE)",
+      "termId": "personal-protective-equipment-(ppe)",
+      "definition": "PPE is specialized equipment, including gloves, gowns, aprons, masks, respirators, goggles, and face shields, worn for protection against infectious materials such as [viruses](\\[#virus]). PPE is necessary in hospitals, but also in businesses that decide to reopen, such as restaurants, factories, or entertainment venues, in order to protect staff, patients, and patrons. Due to the continued growth of COVID, hospital systems across the nation have been experiencing [PPE shortages](https://www.fda.gov/medical-devices/personal-protective-equipment-infection-control/faqs-shortages-surgical-masks-and-gowns-during-covid-19-pandemic). As an individual, you can use cloth face coverings rather than medical grade face masks such as [N95 respirators](\\[#n95-respirator]) in order to ensure that healthcare professionals have access to this PPE."
+    },
+    {
+      "term": "Polymerase chain reaction (PCR) test",
+      "termId": "polymerase-chain-reaction-(pcr)-test",
+      "definition": "PCR tests look for the virus in the respiratory tract to determine if someone is actively infected with COVID. This type of test, usually performed with a nose or throat swab, is vital to identifying active cases and is used to determine [test positivity]([test-positivity]). A PCR test is very different from an [antibody test]([#antibody-test]), also referred to as a [serology test]([serology-test]), which only helps identify people who have been infected with COVID in the past. PCR tests are currently used to find the majority of active COVID infections."
     }
   ]
 }
