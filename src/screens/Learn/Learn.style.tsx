@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 import { MarkdownContent } from 'components/Markdown';
+import theme from 'assets/theme';
 
 export const mobileBreakpoint = '600px';
 /*

@@ -1,25 +1,22 @@
 import React from 'react';
-import { HashLink } from 'react-router-hash-link';
-import * as Style from './TableOfContents.style';
+import { NavHashLink } from 'react-router-hash-link';
+import { Item } from './TableOfContents';
+import * as Style from './SideTableOfContents.style';
 import { scrollWithOffset } from './utils';
 
-export interface Item {
-  id: string;
-  title: string;
-}
-
-const TableOfContents: React.FC<{ items: Item[] }> = ({ items }) => {
+const SideTableOfContents: React.FC<{ items: Item[] }> = ({ items }) => {
   return (
     <Style.Container>
       <ul>
         {items.map(({ title, id }) => (
           <li key={id}>
-            <HashLink
+            <NavHashLink
               to={`#${id}`}
               scroll={element => scrollWithOffset(element, -80)}
+              activeClassName="active"
             >
               {title}
-            </HashLink>
+            </NavHashLink>
           </li>
         ))}
       </ul>
@@ -27,4 +24,4 @@ const TableOfContents: React.FC<{ items: Item[] }> = ({ items }) => {
   );
 };
 
-export default TableOfContents;
+export default SideTableOfContents;
