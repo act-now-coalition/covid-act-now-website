@@ -1,11 +1,11 @@
 {
   "header": "Glossary",
-  "intro": "We have compiled a simple glossary of essential COVID-related terms, which we will continue to update and expand. If you have any questions or would like us to include a term that you don't see, please email us at **[info@covidactnow.org](mailto:info@covidactnow.org).**",
+  "intro": "Here is a simple glossary of essential COVID-related terms, which we will continue to update and expand. If you have any questions or would like us to include a term that you don't see, please email us at **[info@covidactnow.org](mailto:info@covidactnow.org).**",
   "terms": [
     {
       "term": "Antibodies",
       "termId": "antibodies",
-      "definition": "Antibodies are proteins produced by the immune system to protect against foreign substances, such as viruses and bacteria. You may have heard a lot about antibodies in the news, because they can indicate whether someone has been infected with COVID. When a person is infected with a [pathogen](#pathogen) such as SARS-CoV-2, the virus responsible for COVID, their body produces antibodies to help eliminate it. [Serology blood tests](#serology-test) look for antibodies to determine whether someone has been infected with COVID in the past. Serology tests are not very useful in detecting current cases of COVID, because it can take 1-3 weeks for the body to make antibodies after being infected. [It is still unknown](https://www.cdc.gov/coronavirus/2019-ncov/lab/resources/antibody-tests-guidelines.html) whether people with antibodies are protected from reinfection."
+      "definition": "Antibodies are proteins produced by the immune system to protect against foreign substances, such as viruses and bacteria. You may have heard a lot about antibodies in the news, because they can indicate whether someone has been infected with COVID. When a person is infected with a [pathogen](#pathogen) such as SARS-CoV-2, the virus responsible for COVID, their body produces antibodies to help eliminate it. [Serology blood tests](#serology-test) look for antibodies to determine whether someone has been infected with COVID in the past. Serology tests are not very useful in detecting current cases of COVID, because it can take one to three weeks for the body to make antibodies after being infected. [It is still unknown](https://www.cdc.gov/coronavirus/2019-ncov/lab/resources/antibody-tests-guidelines.html) whether people with antibodies are protected from reinfection."
     },
     {
       "term": "Antibody test",
