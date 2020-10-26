@@ -5,7 +5,6 @@ import { NavLink as _NavLink } from 'react-router-dom';
 import MuiMenuIcon from '@material-ui/icons/Menu';
 import MuiCloseIcon from '@material-ui/icons/Close';
 import MuiIconButton from '@material-ui/core/IconButton';
-
 import theme from 'assets/theme';
 import palette from 'assets/theme/palette';
 import { COLOR_MAP } from 'common/colors';
@@ -45,7 +44,9 @@ export const TabStyle = css`
   }
 `;
 
-export const NavLink = styled(_NavLink)`
+export const NavLink = styled(_NavLink).attrs(props => ({
+  activeClassName: 'active',
+}))`
   ${TabStyle}
 `;
 

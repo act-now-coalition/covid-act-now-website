@@ -41,7 +41,6 @@ const NavBar: React.FC = () => {
           <Style.NavLink
             to="/"
             key="map"
-            activeClassName="active"
             isActive={(match, { pathname }) => isHomePage(pathname)}
           >
             Map
@@ -49,25 +48,20 @@ const NavBar: React.FC = () => {
           <Style.NavLink
             to="/learn"
             key="learn"
-            activeClassName="active"
             isActive={(match, { pathname }) => isLearnPage(pathname)}
           >
             Learn
           </Style.NavLink>
-          <Style.NavLink
-            to="/resources"
-            key="resources"
-            activeClassName="active"
-          >
+          <Style.NavLink to="/resources" key="resources">
             Resources
           </Style.NavLink>
           <Style.TabLink href="https://blog.covidactnow.org" key="blog">
             Blog
           </Style.TabLink>
-          <Style.NavLink to="/about" key="about" activeClassName="active">
+          <Style.NavLink to="/about" key="about">
             About
           </Style.NavLink>
-          <Style.NavLink to="/contact" key="contact" activeClassName="active">
+          <Style.NavLink to="/contact" key="contact">
             Contact Us
           </Style.NavLink>
           <DonateButtonWithoutFade />
