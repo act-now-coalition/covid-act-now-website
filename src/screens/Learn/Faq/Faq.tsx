@@ -13,6 +13,7 @@ import Breadcrumbs from 'components/Breadcrumbs';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import * as Style from './Faq.style';
 import { BreadcrumbItem } from 'components/Breadcrumbs';
+import { formatNumericalDate } from 'common/utils';
 
 const faqHeader = faqContent.header;
 const faqSections = faqContent.sections;
@@ -30,13 +31,15 @@ export const breadcrumbItems: BreadcrumbItem[] = [
   { to: '/faq', label: 'FAQ' },
 ];
 
+const date = formatNumericalDate(new Date());
+
 const Faq = () => {
   return (
     <PageContainer>
       <AppMetaTags
         canonicalUrl="/faq"
-        pageTitle="COVID-19 FAQ - America's COVID warning system - Covid Act Now"
-        pageDescription="Find trusted answers to some of the most Frequently Asked Questions about Coronavirus (2019-nCoV). Make informed decisions to stop the disease for you and your community."
+        pageTitle="COVID-19 FAQ - Covid Act Now"
+        pageDescription={`${date} Find trusted answers to the most Frequently Asked Questions (FAQs) about the novel Coronavirus. Make informed decisions to stop the disease for you and your community.`}
       />
       <PageContent>
         <BreadcrumbsContainer>

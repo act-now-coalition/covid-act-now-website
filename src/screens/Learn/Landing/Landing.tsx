@@ -10,6 +10,7 @@ import SectionButton, { ButtonTheme } from './SectionButton';
 import TableOfContents, { Item } from 'components/TableOfContents';
 import { Anchor } from 'components/TableOfContents';
 import { LandingSection } from 'cms-content/learn';
+import { formatNumericalDate } from 'common/utils';
 
 const Landing = () => {
   //stand-in content:
@@ -41,12 +42,14 @@ const Landing = () => {
     }));
   }
 
+  const date = formatNumericalDate(new Date());
+
   return (
     <Fragment>
       <AppMetaTags
         canonicalUrl="/learn"
-        pageTitle="COVID-19 Educational content - America's COVID warning system - Covid Act Now" //edit these
-        pageDescription="Find trusted information about Coronavirus (2019-nCoV). Make informed decisions to stop the disease for you and your community."
+        pageTitle="COVID-19 Essential Information & Resources - Covid Act Now"
+        pageDescription={`${date} Find recent and trusted information & resources about the novel Coronavirus (2019-nCoV). Learn about Symptoms, Tests, Risks, and more. Backed by medical experts. Make informed decisions to stop the disease for you and your community.`}
       />
       <PageContainer>
         <PageHeader>{header}</PageHeader>

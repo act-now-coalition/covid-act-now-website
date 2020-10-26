@@ -12,6 +12,7 @@ import { glossaryContent, Term } from 'cms-content/learn';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { BreadcrumbItem } from 'components/Breadcrumbs';
 import { Anchor } from 'components/TableOfContents';
+import { formatNumericalDate } from 'common/utils';
 
 const glossaryHeader = glossaryContent.header;
 const glossaryIntro = glossaryContent.intro;
@@ -22,13 +23,15 @@ export const breadcrumbItems: BreadcrumbItem[] = [
   { to: '/glossary', label: 'Glossary' },
 ];
 
+const date = formatNumericalDate(new Date());
+
 const Glossary = () => {
   return (
     <PageContainer>
       <AppMetaTags
         canonicalUrl="/glossary"
-        pageTitle="COVID-19 Glossary & Key terms - America's COVID warning system - Covid Act Now"
-        pageDescription="Find trusted information about Coronavirus (2019-nCoV). Make informed decisions to stop the disease for you and your community."
+        pageTitle="Glossary of COVID-19 Terminology - Covid Act Now"
+        pageDescription={`${date} Find clear definitions of the vocabulary and key terms of the novel Coronavirus (2019-nCoV). Understand the COVID terminology and make informed decisions to stop the pandemic.`}
       />
       <PageContent>
         <BreadcrumbsContainer>
