@@ -5,6 +5,7 @@ import ArrowBack from '@material-ui/icons/ArrowBack';
 import * as Style from './NavBar.style';
 import MobileMenu from './MobileMenu';
 import { DonateButtonWithoutFade, DonateButtonWithFade } from './DonateButton';
+import { useEmbed } from 'common/utils/hooks';
 
 const isLocationPage = (pathname: string) => pathname.includes('/us');
 
@@ -15,12 +16,18 @@ const NavBar: React.FC = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const closeMenu = () => setMenuOpen(false);
 
+  const { isEmbed } = useEmbed();
+
   // We only fade the donate button on the home page on mobile, where the donate
   // button doesn't appear until the banner is scrolled away.
   const { pathname } = useLocation();
   const MobileDonateButton = isHomePage(pathname)
     ? DonateButtonWithFade
     : DonateButtonWithoutFade;
+
+  if (isEmbed) {
+    return null;
+  }
 
   return (
     <Style.AppBar position="sticky" color="transparent" elevation={0}>
