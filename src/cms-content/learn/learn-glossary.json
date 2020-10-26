@@ -215,7 +215,7 @@
     {
       "term": "Mitigation",
       "termId": "mitigation",
-      "definition": "Mitigation refers to lessening the impact of or slowing the spread of COVID. Mitigation is important because it helps [flatten the curve](\\[#flattening-the-curve]), which spreads cases over a greater amount of time and prevents the healthcare system from becoming overwhelmed. In theory, the goal of mitigation is not [herd immunity]([#herd-immunity].). Mitigation strategies include [non-pharmaceutical interventions](\\[#npis]) (NPI) like limiting travel, social distancing, and mask wearing. Currently, the United States’ response to COVID is primarily focused on mitigation — as opposed to [containment](\\[#containment]) or [suppression](\\[#suppression]) — in that the goal appears to be slowing the spread of COVID through public health education like CDC guidelines."
+      "definition": "Mitigation refers to lessening the impact of or slowing the spread of COVID. Mitigation is important because it helps [flatten the curve]([#flattening-the-curve]), which spreads cases over a greater amount of time and prevents the healthcare system from becoming overwhelmed. In theory, the goal of mitigation is not [herd immunity]([#herd-immunity].). Mitigation strategies include [non-pharmaceutical interventions](#npi) (NPI) like limiting travel, social distancing, and mask wearing. Currently, the United States’ response to COVID is primarily focused on mitigation — as opposed to [containment]([#containment]) or [suppression]([#suppression]) — in that the goal appears to be slowing the spread of COVID through public health education like CDC guidelines."
     },
     {
       "term": "Nowcasting",
@@ -224,7 +224,7 @@
     },
     {
       "term": "Non-pharmaceutical intervention (NPI)",
-      "termId": "non-pharmaceutical-intervention-(npi)",
+      "termId": "npi",
       "definition": "Non-pharmaceutical interventions (NPIs) are actions outside of pharmaceutical interventions, such as vaccines and medicine, that help slow the spread of illness. Also known as community [mitigation](\\[#mitigation]) strategies, NPIs are vital in slowing COVID spread, since there is currently no vaccine for the virus. The [CDC outlines](https://www.cdc.gov/nonpharmaceutical-interventions/index.html) examples of individual, community, and environmental NPIs that can be used in your home, your workplace, your schools, and your social groups. These include wearing masks, washing your hands, staying home when you do not feel well, social distancing, and avoiding crowded indoor spaces."
     },
     {
