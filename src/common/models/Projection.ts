@@ -29,32 +29,12 @@ class DisabledFips {
 }
 
 const DISABLED_CASE_DENSITY: string[] = [
-  '29095', // https://trello.com/c/xAwGpc6I/503-outlier-in-jackson-county-mo
   '48029', // https://trello.com/c/qscxlxgR/517-outlier-in-bexar-county-tx-disabled-metric
 ];
 
 const DISABLED_INFECTION_RATE = new DisabledFips([]);
 
-const DISABLED_TEST_POSITIVITY = new DisabledFips([
-  '25001',
-  '25003',
-  '25005',
-  '25007',
-  '25009',
-  '25011',
-  '25013',
-  '25015',
-  '25017',
-  '25019',
-  '25021',
-  '25023',
-  '25025',
-  '25027',
-  '48113',
-  '48215',
-
-  /^29...$/, // TODO(https://trello.com/c/9BiL64Y6/493): Missouri data is always 100%. :|
-]);
+const DISABLED_TEST_POSITIVITY = new DisabledFips(['48113', '48215']);
 
 const DISABLED_ICU = new DisabledFips([]);
 

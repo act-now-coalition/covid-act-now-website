@@ -170,6 +170,10 @@ collections:
             name: header
             widget: string
             default: true
+          - label: Intro
+            name: intro
+            widget: markdown
+            default: true
           - label: Sections
             name: sections
             widget: list
@@ -179,6 +183,14 @@ collections:
               - { label: Description, name: description, widget: markdown }
               - { label: Button CTA, name: buttonCta, widget: string }
               - { label: Button redirect, name: buttonRedirect, widget: text }
+          - label: Metadata title
+            name: metadataTitle
+            widget: text
+            default: true
+          - label: Metadata description
+            name: metadataDescription
+            widget: text
+            default: true
       - name: Learn-Glossary
         label: 'Glossary'
         file: src/cms-content/learn/learn-glossary.json
@@ -198,6 +210,14 @@ collections:
               - { label: Term, name: term, widget: string }
               - { label: Term ID, name: termId, widget: string }
               - { label: Definition, name: definition, widget: markdown }
+          - label: Metadata title
+            name: metadataTitle
+            widget: text
+            default: true
+          - label: Metadata description
+            name: metadataDescription
+            widget: text
+            default: true
       - name: Learn-Faq
         label: 'FAQ'
         file: src/cms-content/learn/learn-faq.json
@@ -222,6 +242,14 @@ collections:
                 fields:
                   - { label: Question, name: question, widget: text }
                   - { label: Answer, name: answer, widget: markdown }
+          - label: Metadata title
+            name: metadataTitle
+            widget: text
+            default: true
+          - label: Metadata description
+            name: metadataDescription
+            widget: text
+            default: true
       - name: Footer
         label: 'Footer'
         file: src/cms-content/learn/footer.json

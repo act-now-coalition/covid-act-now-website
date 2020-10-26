@@ -90,12 +90,16 @@ export function getFedLevel(projection: Projection): FedLevel | null {
     return null;
   }
 
-  if (weeklyCasesPer100k > 100 && positiveTestRate > 0.1) {
+  const redPosTest = positiveTestRate > 0.1;
+  const redCases = weeklyCasesPer100k > 100;
+  const yellowPosTest = 0.05 < positiveTestRate && positiveTestRate <= 0.1;
+  const yellowCases = 10 < weeklyCasesPer100k && weeklyCasesPer100k <= 100;
+
+  if (redPosTest && redCases) {
     return FedLevel.RED;
-  } else if (
-    (10 < weeklyCasesPer100k && weeklyCasesPer100k < 100) ||
-    (0.05 <= positiveTestRate && positiveTestRate <= 0.1)
-  ) {
+  } else if ((redPosTest || redCases) && (yellowPosTest || yellowCases)) {
+    return FedLevel.YELLOW;
+  } else if (yellowPosTest && yellowCases) {
     return FedLevel.YELLOW;
   } else {
     return FedLevel.GREEN;
