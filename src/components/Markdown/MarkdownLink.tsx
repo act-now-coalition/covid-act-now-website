@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { HashLink } from 'react-router-hash-link';
+import { scrollWithOffset } from 'components/TableOfContents';
 
 function isValidURL(href: string): boolean {
   let isValid = false;
@@ -36,7 +37,9 @@ const MarkdownLink: React.FC<{
   }
 
   return isInternalLink(href) ? (
-    <HashLink to={href}>{children}</HashLink>
+    <HashLink to={href} scroll={element => scrollWithOffset(element, -80)}>
+      {children}
+    </HashLink>
   ) : (
     <a href={href} target="_blank" rel="noopener noreferrer">
       {children}
