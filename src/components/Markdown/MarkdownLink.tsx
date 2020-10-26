@@ -24,7 +24,8 @@ function isInternalLink(href: string) {
 /**
  * Custom hyperlink for Markdown content. If the link is external, open it on
  * a new tab. If the link is internal, use the HashLink component to render
- * it in the current page.
+ * it in the current page. If the link is invalid, we just render the text of
+ * the link.
  */
 const MarkdownLink: React.FC<{
   href: string;
