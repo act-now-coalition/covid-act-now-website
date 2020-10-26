@@ -158,11 +158,15 @@
     "os-utils": "^0.0.14",
     "prettier": "2.0.2",
     "puppeteer": "^3.0.4",
+    "remark": "^13.0.0",
+    "remark-parse": "^9.0.0",
     "serve": "^11.3.0",
     "start-server-and-test": "^1.10.11",
     "ts-node": "^8.9.0",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^3.8.3",
+    "unified": "^9.2.0",
+    "unist-util-visit": "^2.0.3",
     "url-join": "^4.0.1"
   }
 }
