@@ -9,7 +9,7 @@ import MuiIconButton from '@material-ui/core/IconButton';
 import theme from 'assets/theme';
 import palette from 'assets/theme/palette';
 import { COLOR_MAP } from 'common/colors';
-import { mobileBreakpoint } from 'assets/theme/sizes';
+import { mobileBreakpoint, smallPhoneBreakpoint } from 'assets/theme/sizes';
 
 export const AppBar = styled(MuiAppBar)`
   border-bottom: solid 1px ${COLOR_MAP.LIGHTGRAY};
@@ -86,7 +86,7 @@ export const StyledMenu = styled.nav<{ open: boolean }>`
     color: ${palette.black};
     text-decoration: none;
     font-weight: bold;
-    padding: 2rem 1rem;
+    padding: 1.75rem 1rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
     background: white;
 
@@ -100,6 +100,14 @@ export const StyledMenu = styled.nav<{ open: boolean }>`
 
     svg {
       margin-right: 1rem;
+    }
+  }
+
+  // Mobile menu was larger than an iPhone5 screen (320px wide)
+  // Dropping the padding for screens up until that width
+  @media (min-width: ${smallPhoneBreakpoint}) {
+    a {
+      padding: 2rem 1rem;
     }
   }
 `;
