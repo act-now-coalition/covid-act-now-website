@@ -17,10 +17,6 @@ const MobileMenu: React.FC<{ open: boolean; closeMenu: () => void }> = ({
         <MapIcon color={palette.secondary.main} />
         <span>Map</span>
       </Link>
-      <Link to="/about" onClick={closeMenu}>
-        <FAQIcon color={palette.secondary.main} />
-        <span>About</span>
-      </Link>
       <Link to="/learn" onClick={closeMenu}>
         <FAQIcon color={palette.secondary.main} />
         <span>Learn</span>
@@ -33,6 +29,10 @@ const MobileMenu: React.FC<{ open: boolean; closeMenu: () => void }> = ({
         <BlogIcon color={palette.secondary.main} />
         <span>Blog</span>
       </a>
+      <Link to="/about" onClick={closeMenu}>
+        <FAQIcon color={palette.secondary.main} />
+        <span>About</span>
+      </Link>
       <Link to="/contact" onClick={closeMenu}>
         <FAQIcon color={palette.secondary.main} />
         <span>Contact Us</span>
