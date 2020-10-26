@@ -1,4 +1,6 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { sortBy, without } from 'lodash';
 import {
   PageContainer,
   PageHeader,
@@ -23,6 +25,24 @@ export const breadcrumbItems: BreadcrumbItem[] = [
 ];
 
 const Glossary = () => {
+  const [expandedItems, setExpandedItems] = useState<string[]>([]);
+  const { hash } = useLocation();
+
+  function onChangeExpandedTerm(termId: string, expanded: boolean) {
+    const newExpandedItems = expanded
+      ? [...expandedItems, termId]
+      : without(expandedItems, termId);
+    setExpandedItems(sortBy(newExpandedItems));
+  }
+
+  function isExpanded(termId: string) {
+    // Always expand the term in the URL hash
+    return (
+      expandedItems.includes(termId) ||
+      (hash.length > 0 && `#${termId}` === hash)
+    );
+  }
+
   return (
     <PageContainer>
       <AppMetaTags
@@ -42,6 +62,10 @@ const Glossary = () => {
             <StyledAccordion
               summaryText={item.term}
               detailText={item.definition}
+              expanded={isExpanded(item.termId)}
+              onChange={(event: {}, expanded) =>
+                onChangeExpandedTerm(item.termId, expanded)
+              }
             />
           </Fragment>
         ))}
