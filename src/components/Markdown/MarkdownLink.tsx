@@ -1,31 +1,7 @@
 import React, { Fragment } from 'react';
 import { HashLink } from 'react-router-hash-link';
 import { scrollWithOffset } from 'components/TableOfContents';
-
-function isValidURL(href: string): boolean {
-  let isValid = false;
-  try {
-    new URL(href);
-    isValid = true;
-  } catch {
-    isValid = false;
-  }
-  return isValid;
-}
-
-/**
- * If the href parameter doesn't have a hostname, then the href parameter
- * corresponds to an internal URL such as `/faq` or `/glossary#superspreader`
- */
-function isInternalLink(href: string) {
-  const url = new URL(href);
-  return url.hostname.length === 0;
-}
-
-function isMailtoLink(href: string) {
-  const url = new URL(href);
-  return url.protocol === 'mailto:';
-}
+import { isValidURL, isInternalLink } from './utils';
 
 /**
  * Custom hyperlink for Markdown content. If the link is external, open it on
@@ -37,12 +13,9 @@ const MarkdownLink: React.FC<{
   href: string;
   children: React.ReactNode;
 }> = ({ href, children }) => {
+  // If the href parameter is not a valid URL, renders the body as regular text
   if (!isValidURL(href)) {
     return <Fragment>{children}</Fragment>;
-  }
-
-  if (isMailtoLink(href)) {
-    return <a href={href}>{children}</a>;
   }
 
   return isInternalLink(href) ? (
