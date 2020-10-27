@@ -363,6 +363,11 @@
       "definition": "Suppression generally refers to the process of keeping infected people from spreading disease, but more specifically refers to reducing the [R(t)](#rt) of a disease to less than 1.0. Suppression is often used interchangeably with [containment](#containment). An R(t) below 1 indicates a decline in COVID spread. Currently, the United States’ response to COVID is primarily focused on [mitigation](#mitigation) -- as opposed to [containment](#containment) or suppression - in that the goal appears to be slowing the spread of COVID through public health education (like CDC guidelines). In order to achieve successful suppression of COVID in the United States, there would need to be widespread, high quality, rapid testing in addition to measures like isolation, contact tracing, and [quarantine](#quarantine). A suppression strategy is recommended as the most efficient path to recover from COVID and avoid future lockdowns."
     },
     {
+      "term": "Surge",
+      "termId": "surge",
+      "definition": "A surge occurs when there is a sudden, sharp increase in the amount of cases that can grow to [overwhelm medical facilities](#surge-capacity). While a surge can refer to localized cases within a certain area, the term is also often used interchangeably with a [wave](#wave). However, surges only describe case growth while waves encompass the surge and subsequent sustained decrease in cases."
+    },
+    {
       "term": "Surge capacity",
       "termId": "surge-capacity",
       "definition": "Surge capacity represents a health facility’s ability to evaluate and care for a sudden increase in the number of patients beyond the normal operating capacity. To calculate surge capacity, we must take into account the number of hospital beds, staff, equipment, and medical supplies currently available. By determining hospitals' current and projected capacity level, Covid Act Now attempts to help hospitals evaluate whether they will have the ability to handle an increased load of new COVID cases without having to resort to [crisis standards of care](#crisis-standards-of-care)."
@@ -400,7 +405,7 @@
     {
       "term": "Wave",
       "termId": "wave",
-      "definition": "During a [pandemic](#pandemic), a “wave” is a phenomenon in which there is a period of increased case growth which [peaks](#peak) and is followed by a substantial, sustained reduction in cases. COVID cases seem to come in waves: first wave, second wave, and so on. There is no official definition of when one wave ends and another begins, and COVID has peaked in different states at different times. [Data suggests](https://www.nytimes.com/interactive/2020/10/15/us/coronavirus-cases-us-surge.html) the U.S. on the whole experienced its first peak mid April, second peak in mid July, and is now entering its third wave of cases."
+      "definition": "During a [pandemic](#pandemic), a “wave” is a phenomenon in which there is a period of increased case growth which [peaks](#peak) and is followed by a substantial, sustained reduction in cases. COVID cases seem to come in waves: first wave, second wave, and so on. There is no official definition of when one wave ends and another begins, and COVID has peaked in different states at different times. [Data suggests](https://www.nytimes.com/interactive/2020/10/15/us/coronavirus-cases-us-surge.html) the U.S. on the whole experienced its first peak mid April, second peak in mid July, and is now entering its third wave of cases. The term wave is often used alongside or interchangeably with [surge](#surge), which describes the increase in cases seen before and during the peak of a wave."
     }
   ],
   "metadataTitle": "Glossary of COVID-19 Terminology - Covid Act Now",
