@@ -11,7 +11,7 @@ import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import SectionButton, { ButtonTheme } from './SectionButton';
 // import TableOfContents, { Item } from 'components/TableOfContents';
 import { Anchor } from 'components/TableOfContents';
-import { formatNumericalDate } from 'common/utils';
+import { formatMetatagDate } from 'common/utils';
 import { LandingSection, landingPageContent } from 'cms-content/learn';
 
 /*
@@ -34,11 +34,7 @@ const Landing = () => {
   //   }));
   // }
 
-  const date = formatNumericalDate(new Date());
-
-  const description = `${date} ${metadataDescription}`;
-  console.log('metadataTitle', metadataTitle);
-  console.log('description', description);
+  const date = formatMetatagDate();
 
   return (
     <PageContainer>
