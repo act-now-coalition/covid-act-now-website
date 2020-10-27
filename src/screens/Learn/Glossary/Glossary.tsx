@@ -14,19 +14,26 @@ import { glossaryContent, Term } from 'cms-content/learn';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { BreadcrumbItem } from 'components/Breadcrumbs';
 import { Anchor } from 'components/TableOfContents';
-
-const glossaryHeader = glossaryContent.header;
-const glossaryIntro = glossaryContent.intro;
-const glossaryTerms = glossaryContent.terms;
-
-export const breadcrumbItems: BreadcrumbItem[] = [
-  { to: '/learn', label: 'Learn' },
-  { to: '/glossary', label: 'Glossary' },
-];
+import { formatNumericalDate } from 'common/utils';
 
 const Glossary = () => {
+  const {
+    header,
+    intro,
+    terms,
+    metadataTitle,
+    metadataDescription,
+  } = glossaryContent;
+
+  const date = formatNumericalDate(new Date());
+
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const { hash } = useLocation();
+
+  const breadcrumbItems: BreadcrumbItem[] = [
+    { to: '/learn', label: 'Learn' },
+    { to: '/glossary', label: 'Glossary' },
+  ];
 
   function onChangeExpandedTerm(termId: string, expanded: boolean) {
     const newExpandedItems = expanded
@@ -47,16 +54,16 @@ const Glossary = () => {
     <PageContainer>
       <AppMetaTags
         canonicalUrl="/glossary"
-        pageTitle="COVID-19 Glossary & Key terms - America's COVID warning system - Covid Act Now"
-        pageDescription="Find trusted information about Coronavirus (2019-nCoV). Make informed decisions to stop the disease for you and your community."
+        pageTitle={metadataTitle}
+        pageDescription={`${date} ${metadataDescription}`}
       />
       <PageContent>
         <BreadcrumbsContainer>
           <Breadcrumbs pathItems={breadcrumbItems} />
         </BreadcrumbsContainer>
-        <PageHeader>{glossaryHeader}</PageHeader>
-        <PageIntro source={glossaryIntro} />
-        {glossaryTerms.map((item: Term) => (
+        <PageHeader>{header}</PageHeader>
+        <PageIntro source={intro} />
+        {terms.map((item: Term) => (
           <Fragment key={item.termId}>
             <Anchor id={item.termId} />
             <StyledAccordion

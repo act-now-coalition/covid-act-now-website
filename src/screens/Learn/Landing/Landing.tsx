@@ -9,33 +9,48 @@ import {
 } from '../Learn.style';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import SectionButton, { ButtonTheme } from './SectionButton';
-import TableOfContents, { Item } from 'components/TableOfContents';
+// import TableOfContents, { Item } from 'components/TableOfContents';
 import { Anchor } from 'components/TableOfContents';
+import { formatNumericalDate } from 'common/utils';
 import { LandingSection, landingPageContent } from 'cms-content/learn';
 
-const header = landingPageContent.header;
-const intro = landingPageContent.intro;
-const sections = landingPageContent.sections;
+/*
+  Commenting out all things related to the table of contents, since we only have 2 items as of now.
+*/
 
 const Landing = () => {
-  function getSectionItems(sections: LandingSection[]): Item[] {
-    return sections.map(section => ({
-      id: section.sectionId,
-      title: section.sectionTitle,
-    }));
-  }
+  const {
+    header,
+    intro,
+    sections,
+    metadataTitle,
+    metadataDescription,
+  } = landingPageContent;
+
+  // function getSectionItems(sections: LandingSection[]): Item[] {
+  //   return sections.map(section => ({
+  //     id: section.sectionId,
+  //     title: section.sectionTitle,
+  //   }));
+  // }
+
+  const date = formatNumericalDate(new Date());
+
+  const description = `${date} ${metadataDescription}`;
+  console.log('metadataTitle', metadataTitle);
+  console.log('description', description);
 
   return (
     <PageContainer>
       <AppMetaTags
         canonicalUrl="/learn"
-        pageTitle="COVID-19 Educational content - America's COVID warning system - Covid Act Now" //edit these
-        pageDescription="Find trusted information about Coronavirus (2019-nCoV). Make informed decisions to stop the disease for you and your community."
+        pageTitle={metadataTitle}
+        pageDescription={`${date} ${metadataDescription}`}
       />
       <PageContent>
         <PageHeader>{header}</PageHeader>
         <PageIntro source={intro} />
-        <TableOfContents items={getSectionItems(sections)} />
+        {/* <TableOfContents items={getSectionItems(sections)} /> */}
         {sections.map((section: LandingSection) => (
           <Fragment key={section.sectionId}>
             <SectionHeader>
