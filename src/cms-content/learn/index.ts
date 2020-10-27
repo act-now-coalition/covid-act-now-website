@@ -1,5 +1,6 @@
 import faq from './learn-faq.json';
 import glossary from './learn-glossary.json';
+import landing from './learn-landing.json';
 import { sanitizeID } from './utils';
 
 type Markdown = string;
@@ -20,6 +21,7 @@ export interface FaqSection {
 
 export interface FaqContent {
   header: string;
+  intro: Markdown;
   sections: FaqSection[];
 }
 
@@ -90,5 +92,8 @@ export interface LandingSection {
 
 export interface LandingContent {
   header: string;
+  intro: Markdown;
   sections: LandingSection[];
 }
+
+export const landingPageContent = landing as LandingContent;

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactMarkdown, { ReactMarkdownProps } from 'react-markdown';
-import { MarkdownLink } from './Markdown.style';
+import MarkdownLink from './MarkdownLink';
 
 /**
  * Custom renderers for each Markdown node type. Useful to override the

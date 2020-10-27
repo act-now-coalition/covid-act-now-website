@@ -17,7 +17,7 @@ import { formatNumericalDate } from 'common/utils';
 
 const faqHeader = faqContent.header;
 const faqSections = faqContent.sections;
-const faqIntro = 'intro intro intro intro intro intro intro intro';
+const faqIntro = faqContent.intro;
 
 function getSectionItems(sections: FaqSection[]): Item[] {
   return sections.map(section => ({
@@ -46,7 +46,7 @@ const Faq = () => {
           <Breadcrumbs pathItems={breadcrumbItems} />
         </BreadcrumbsContainer>
         <PageHeader>{faqHeader}</PageHeader>
-        <PageIntro>{faqIntro}</PageIntro>
+        <PageIntro source={faqIntro} />
         <Style.MobileOnly>
           <TableOfContents items={getSectionItems(faqSections)} />
         </Style.MobileOnly>
