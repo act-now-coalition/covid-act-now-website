@@ -234,7 +234,7 @@
     },
     {
       "term": "N95 respirator ",
-      "termId": "N95-respirator",
+      "termId": "n95-respirator",
       "definition": "An N95 respirator is a mask that filters out [95% of particles](https://www.cdc.gov/niosh/npptl/topics/respirators/disp_part/default.html) in the air. It forms a tight seal around the nose and mouth, and is [recommended for healthcare professionals](https://www.cdc.gov/niosh/topics/hcwcontrols/recommendedguidanceextuse.html). To slow the spread of COVID, the public can wear simple cloth [face masks](#face-mask). COVID can spread between people interacting in close proximity, even among those who are [asymptomatic](#asymptomatic) or [presymptomatic](#presymptomatic-spread), so wearing a mask can be very effective in limiting this spread."
     },
     {
@@ -260,7 +260,7 @@
     {
       "term": "Personal Protective Equipment (PPE) ",
       "termId": "ppe",
-      "definition": "PPE is specialized equipment, including gloves, gowns, aprons, masks, respirators, goggles, and face shields, worn for protection against infectious materials such as [viruses](#virus). PPE is necessary in hospitals, but also in businesses that decide to reopen, such as restaurants, factories, or entertainment venues, in order to protect staff, patients, and patrons. Due to the continued growth of COVID, hospital systems across the nation have been experiencing [PPE shortages](https://www.fda.gov/medical-devices/personal-protective-equipment-infection-control/faqs-shortages-surgical-masks-and-gowns-during-covid-19-pandemic). As an individual, you can use cloth face coverings rather than medical grade face masks such as [N95 respirators](#N95-respirator) in order to ensure that healthcare professionals have access to this PPE."
+      "definition": "PPE is specialized equipment, including gloves, gowns, aprons, masks, respirators, goggles, and face shields, worn for protection against infectious materials such as [viruses](#virus). PPE is necessary in hospitals, but also in businesses that decide to reopen, such as restaurants, factories, or entertainment venues, in order to protect staff, patients, and patrons. Due to the continued growth of COVID, hospital systems across the nation have been experiencing [PPE shortages](https://www.fda.gov/medical-devices/personal-protective-equipment-infection-control/faqs-shortages-surgical-masks-and-gowns-during-covid-19-pandemic). As an individual, you can use cloth face coverings rather than medical grade face masks such as [N95 respirators](#n95-respirator) in order to ensure that healthcare professionals have access to this PPE."
     },
     {
       "term": "Polymerase Chain Reaction (PCR) test ",
