@@ -28,4 +28,8 @@ export const MarkdownBody = styled(MarkdownContent)`
     line-height: 1.4;
     margin: 0;
   }
+
+  a {
+    color: ${COLOR_MAP.BLUE};
+  }
 `;
