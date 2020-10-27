@@ -7,14 +7,14 @@
     {
       "sectionTitle": "Glossary",
       "sectionId": "glossary",
-      "description": "R0 vs R(t) vs Infection rate: we have compiled a simple glossary of essential COVID-related terms, which we will continue to update and expand.",
+      "description": "R0 vs R(t) vs Infection rate: We have compiled a simple glossary of essential COVID-related terms, which we will continue to update and expand.",
       "buttonCta": "View glossary",
       "buttonRedirect": "/glossary"
     },
     {
       "sectionTitle": "FAQ",
       "sectionId": "faq",
-      "description": "We’ve received tons of questions from our users ranging from How do I talk to people who behave in ways I disagree with? to What types of masks work better than others?. Here, we address 40+ of our top questions like those.",
+      "description": "We’ve received tons of questions from our users ranging from \"how do I talk to people who behave in ways I disagree with?\" to \"what types of masks work better than others?\" Here, we address more than 40 of our top questions.",
       "buttonCta": "View FAQ",
       "buttonRedirect": "/faq"
     }
