@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 import { MarkdownContent } from 'components/Markdown';
 import theme from 'assets/theme';
-import { materialSMBreakpoint } from 'assets/theme/sizes';
+import { materialSMBreakpoint, mobileBreakpoint } from 'assets/theme/sizes';
 
 /*
   Styles that are shared between Learn pages:
@@ -17,21 +17,26 @@ export const BodyCopyStyles = css`
 export const PageContainer = styled.div`
   max-width: 800px;
   width: 100%;
-  margin: 2rem auto 3.5rem;
+  margin: 2rem auto;
+  min-height: 65vh;
 
-  @media (min-width: ${materialSMBreakpoint}) {
+  @media (min-width: ${mobileBreakpoint}) {
     margin: 3.5rem auto;
-    min-height: 65vh;
   }
 `;
 
 export const PageContent = styled.main`
   flex: 1 1 0;
-  padding: 1rem;
+  padding: 0 1.25rem;
 `;
 
 export const PageHeader = styled.h1`
-  margin-bottom: 1.75rem;
+  margin: 1rem 0;
+  line-height: 1;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    margin: 0 0 2rem;
+  }
 `;
 
 export const PageIntro = styled(MarkdownContent)`
