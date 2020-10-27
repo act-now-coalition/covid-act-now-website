@@ -23,6 +23,8 @@ export interface FaqContent {
   header: string;
   intro: Markdown;
   sections: FaqSection[];
+  metadataTitle: string;
+  metadataDescription: string;
 }
 
 function sanitizeSection(section: FaqSection): FaqSection {
@@ -57,6 +59,8 @@ export interface GlossaryContent {
   header: string;
   intro: Markdown;
   terms: Term[];
+  metadataTitle: string;
+  metadataDescription: string;
 }
 
 // (Chelsi): make these sanitize functions reusable between learn pages?
@@ -94,6 +98,8 @@ export interface LandingContent {
   header: string;
   intro: Markdown;
   sections: LandingSection[];
+  metadataTitle: string;
+  metadataDescription: string;
 }
 
 export const landingPageContent = landing as LandingContent;
