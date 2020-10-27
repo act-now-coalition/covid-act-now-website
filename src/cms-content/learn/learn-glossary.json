@@ -225,27 +225,27 @@
     {
       "term": "Non-pharmaceutical intervention (NPI)",
       "termId": "npi",
-      "definition": "Non-pharmaceutical interventions (NPIs) are actions outside of pharmaceutical interventions, such as vaccines and medicine, that help slow the spread of illness. Also known as community [mitigation](\\[#mitigation]) strategies, NPIs are vital in slowing COVID spread, since there is currently no vaccine for the virus. The [CDC outlines](https://www.cdc.gov/nonpharmaceutical-interventions/index.html) examples of individual, community, and environmental NPIs that can be used in your home, your workplace, your schools, and your social groups. These include wearing masks, washing your hands, staying home when you do not feel well, social distancing, and avoiding crowded indoor spaces."
+      "definition": "Non-pharmaceutical interventions (NPIs) are actions outside of pharmaceutical interventions, such as vaccines and medicine, that help slow the spread of illness. Also known as community [mitigation](#mitigation) strategies, NPIs are vital in slowing COVID spread, since there is currently no vaccine for the virus. The [CDC outlines](https://www.cdc.gov/nonpharmaceutical-interventions/index.html) examples of individual, community, and environmental NPIs that can be used in your home, your workplace, your schools, and your social groups. These include wearing masks, washing your hands, staying home when you do not feel well, social distancing, and avoiding crowded indoor spaces."
     },
     {
       "term": "Novel coronavirus",
       "termId": "novel-coronavirus",
-      "definition": "A novel coronavirus is a novel, or new, strain of [coronavirus](\\[#coronavirus]) that has not been previously identified in humans. [SARS-CoV-2](\\[#sars-cov-2]), the virus that causes [COVID](\\[#covid-19]) (also known as COVID-19), is a novel coronavirus that was identified in Wuhan, China in 2019."
+      "definition": "A novel coronavirus is a novel, or new, strain of [coronavirus](#coronavirus) that has not been previously identified in humans. [SARS-CoV-2](#sars-cov-2), the virus that causes [COVID](#covid-19) (also known as COVID-19), is a novel coronavirus that was identified in Wuhan, China in 2019."
     },
     {
       "term": "N95 respirator ",
       "termId": "N95-respirator",
-      "definition": "An N95 respirator is a mask that filters out [95% of particles](https://www.cdc.gov/niosh/npptl/topics/respirators/disp_part/default.html) in the air. It forms a tight seal around the nose and mouth, and is [recommended for healthcare professionals](https://www.cdc.gov/niosh/topics/hcwcontrols/recommendedguidanceextuse.html). To slow the spread of COVID, the public can wear simple cloth [face masks](\\[#face-mask]). COVID can spread between people interacting in close proximity, even among those who are [asymptomatic](\\[#asymptomatic]) or [presymptomatic](\\[#presymptomatic]), so wearing a mask can be very effective in limiting this spread."
+      "definition": "An N95 respirator is a mask that filters out [95% of particles](https://www.cdc.gov/niosh/npptl/topics/respirators/disp_part/default.html) in the air. It forms a tight seal around the nose and mouth, and is [recommended for healthcare professionals](https://www.cdc.gov/niosh/topics/hcwcontrols/recommendedguidanceextuse.html). To slow the spread of COVID, the public can wear simple cloth [face masks](#face-mask). COVID can spread between people interacting in close proximity, even among those who are [asymptomatic](#asymptomatic) or [presymptomatic](#presymptomatic-spread), so wearing a mask can be very effective in limiting this spread."
     },
     {
       "term": "Outbreak",
       "termId": "outbreak",
-      "definition": "An outbreak is a sudden rise in the number of cases past expected levels within a community. Outbreaks are similar to [epidemics](\\[#epidemic]), but centered within a more localized geographical region. Disease outbreaks are caused by [community spread](\\[#community-spread]) and are often exacerbated by large [superspreading events](\\[#super-spreading-event]) in which one or a small number of infected people infect an unusually large number of people."
+      "definition": "An outbreak is a sudden rise in the number of cases past expected levels within a community. Outbreaks are similar to [epidemics](#epidemic), but centered within a more localized geographical region. Disease outbreaks are caused by [community spread](#community-spread) and are often exacerbated by large [superspreading events](#superspreading-event) in which one or a small number of infected people infect an unusually large number of people."
     },
     {
       "term": "Pandemic",
       "termId": "pandemic",
-      "definition": "A pandemic is an [epidemic](\\[#epidemic]) that has spread across international borders, affecting a large number of people. Pandemics usually happen when a virus is spread easily to people with no previous immunity. COVID, declared a global pandemic by the [World Health Organization](https://www.who.int/emergencies/diseases/novel-coronavirus-2019?gclid=EAIaIQobChMI6tPOt5jD6gIVUvDACh3qsgo9EAAYASAAEgIp7_D_BwE) (WHO) March 11, 2020, is the first known pandemic caused by a new coronavirus."
+      "definition": "A pandemic is an [epidemic](#epidemic) that has spread across international borders, affecting a large number of people. Pandemics usually happen when a virus is spread easily to people with no previous immunity. COVID, declared a global pandemic by the [World Health Organization](https://www.who.int/emergencies/diseases/novel-coronavirus-2019?gclid=EAIaIQobChMI6tPOt5jD6gIVUvDACh3qsgo9EAAYASAAEgIp7_D_BwE) (WHO) March 11, 2020, is the first known pandemic caused by a new coronavirus."
     },
     {
       "term": "Pathogen",
@@ -260,7 +260,7 @@
     {
       "term": "Personal Protective Equipment (PPE) ",
       "termId": "ppe",
-      "definition": "PPE is specialized equipment, including gloves, gowns, aprons, masks, respirators, goggles, and face shields, worn for protection against infectious materials such as [viruses](#virus). PPE is necessary in hospitals, but also in businesses that decide to reopen, such as restaurants, factories, or entertainment venues, in order to protect staff, patients, and patrons. Due to the continued growth of COVID, hospital systems across the nation have been experiencing [PPE shortages](https://www.fda.gov/medical-devices/personal-protective-equipment-infection-control/faqs-shortages-surgical-masks-and-gowns-during-covid-19-pandemic). As an individual, you can use cloth face coverings rather than medical grade face masks such as [N95 respirators](#N95) in order to ensure that healthcare professionals have access to this PPE."
+      "definition": "PPE is specialized equipment, including gloves, gowns, aprons, masks, respirators, goggles, and face shields, worn for protection against infectious materials such as [viruses](#virus). PPE is necessary in hospitals, but also in businesses that decide to reopen, such as restaurants, factories, or entertainment venues, in order to protect staff, patients, and patrons. Due to the continued growth of COVID, hospital systems across the nation have been experiencing [PPE shortages](https://www.fda.gov/medical-devices/personal-protective-equipment-infection-control/faqs-shortages-surgical-masks-and-gowns-during-covid-19-pandemic). As an individual, you can use cloth face coverings rather than medical grade face masks such as [N95 respirators](#N95-respirator) in order to ensure that healthcare professionals have access to this PPE."
     },
     {
       "term": "Polymerase Chain Reaction (PCR) test ",
@@ -315,7 +315,7 @@
     {
       "term": "SEIR model",
       "termId": "seir-model",
-      "definition": "An SEIR model is a specific kind of model that [](#epidemiologist)epidemiologists, who study disease, use to understand how a disease will evolve in a population over time. Covid Act Now’s model is an SEIR model which [forecasts](#forecasting) COVID by categorizing how people in a population will evolve across various states. These states include “[susceptible](#susceptible),” “[exposed](#exposed),” “[infected](#infection),” ”[recovered](#recovered),” and “deceased.”  The model [forecasts](#forecasting) people’s progression through those states [using many different data inputs](https://www.youtube.com/watch?v=Lcx2a1jXISc&t=5s) – including cases, hospitalizations, deaths, and demographics – in conjunction with assumptions based on, for example, how the disease has evolved over time in other countries and how much of an impact certain interventions like social distancing could have. Simply put, the SEIR model can help us predict the trend in COVID hospitalizations within certain scenarios. This predictive ability allows states and counties to prepare for when their hospitals may become overwhelmed by COVID patients."
+      "definition": "An SEIR model is a specific kind of model that [](#epidemiologist)epidemiologists, who study disease, use to understand how a disease will evolve in a population over time. Covid Act Now’s model is an SEIR model which [forecasts](#forecasting) COVID by categorizing how people in a population will evolve across various states. These states include “[susceptible](#susceptible),” “[exposed](#exposed),” “[infected](#infection),” ”recovered,” and “deceased.”  The model [forecasts](#forecasting) people’s progression through those states [using many different data inputs](https://www.youtube.com/watch?v=Lcx2a1jXISc&t=5s) – including cases, hospitalizations, deaths, and demographics – in conjunction with assumptions based on, for example, how the disease has evolved over time in other countries and how much of an impact certain interventions like social distancing could have. Simply put, the SEIR model can help us predict the trend in COVID hospitalizations within certain scenarios. This predictive ability allows states and counties to prepare for when their hospitals may become overwhelmed by COVID patients."
     },
     {
       "term": "Sensitivity (testing)",
