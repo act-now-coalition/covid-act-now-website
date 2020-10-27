@@ -23,7 +23,7 @@ const StyledAccordion: React.FC<StyledAccordionProps> = ({
         {summaryText}
       </StyledAccordionSummary>
       <AccordionDetails>
-        <MarkdownBody>{detailText}</MarkdownBody>
+        <MarkdownBody source={detailText} />
       </AccordionDetails>
     </StyledMuiAccordion>
   );
