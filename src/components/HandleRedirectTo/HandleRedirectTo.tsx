@@ -1,6 +1,6 @@
-import { useLocation } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useLocation } from 'react-router-dom';
 import * as QueryString from 'query-string';
+import React from 'react';
 
 /**
  * Component that detects the presence of a ?redirectTo=... query param and
@@ -9,11 +9,10 @@ import * as QueryString from 'query-string';
  */
 export default function HandleRedirectTo() {
   const location = useLocation();
-  const history = useHistory();
   const params = QueryString.parse(location.search);
   const redirectTo = params['redirectTo'] as string;
   if (redirectTo) {
-    history.replace(redirectTo);
+    return <Redirect to={redirectTo} />;
   }
 
   return null;

@@ -199,11 +199,18 @@ export default function App() {
               exports images. */}
               <Route path="/internal/export-image/" component={ExportImage} />
 
-              <HandleRedirectTo />
+              {/** Handle bad paths by redirecting to the root homepage. */}
               <Route path="/*">
                 <Redirect to="/" />
               </Route>
             </Switch>
+
+            {/**
+             * NOTE: This needs to go after the Switch statement so that it overrides the
+             * "Handle bad paths" logic above.
+             */}
+            <HandleRedirectTo />
+
             <Footer />
           </BrowserRouter>
         </StylesProvider>
