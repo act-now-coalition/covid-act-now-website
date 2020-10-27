@@ -1,12 +1,14 @@
 import React from 'react';
 import { EmbedWrapper } from 'screens/Donate/Donate.style';
 
-const GiveButterEmbed = () => {
+const GiveButterEmbed: React.FC<{ campaignUrl: string }> = ({
+  campaignUrl,
+}) => {
   return (
     <EmbedWrapper>
       <iframe
         title="Donate to Covid Act Now on GiveButter"
-        src="https://givebutter.com/embed/c/covidactnow"
+        src={campaignUrl}
         width="100%"
         height="100%"
         style={{ maxWidth: '601px' }}

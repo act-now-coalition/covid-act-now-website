@@ -5,7 +5,7 @@ import {
 } from 'react-optimize';
 
 export enum ExperimentID {
-  DONATE_COPY_OCT27 = 'D1PEuXIuQ6KS9VEGeTC19w',
+  DONATE_OCT27 = 'D1PEuXIuQ6KS9VEGeTC19w',
 }
 
 export type ExperimentProps = Omit<OptimizeExperimentProps, 'id'> & {

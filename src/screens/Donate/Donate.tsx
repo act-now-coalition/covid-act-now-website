@@ -13,6 +13,12 @@ import {
 } from 'screens/Donate/Donate.style';
 import GiveButterEmbed from 'screens/Donate/GiveButterEmbed';
 import { donateContent } from 'common/utils/netlify';
+import {
+  Experiment,
+  Variant,
+  ExperimentID,
+  VariantID,
+} from 'components/Experiment';
 
 const Intro: React.FC = () => {
   const { headerLines } = donateContent;
@@ -38,7 +44,14 @@ const Donate: React.FC = () => {
   return (
     <Container>
       {isMobile && <Intro />}
-      <GiveButterEmbed />
+      <Experiment id={ExperimentID.DONATE_OCT27}>
+        <Variant id={VariantID.A}>
+          <GiveButterEmbed campaignUrl="https://givebutter.com/embed/c/donate-nov-2020" />
+        </Variant>
+        <Variant id={VariantID.B}>
+          <GiveButterEmbed campaignUrl="https://givebutter.com/embed/c/donate-nov-2020-b" />
+        </Variant>
+      </Experiment>
       <ContentWrapper>
         {!isMobile && (
           <Fragment>
