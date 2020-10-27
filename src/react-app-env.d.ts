@@ -33,3 +33,24 @@ declare module 'react-copy-to-clipboard' {
 
   export class CopyToClipboard extends React.Component<CopyToClipboard.Props> {}
 }
+
+// https://github.com/hudovisk/react-optimize/blob/master/src/index.d.ts
+declare module 'react-optimize' {
+  import { ComponentType, ReactNode } from 'react';
+  interface ExperimentProps {
+    children: ReactNode;
+    id: string;
+    loader?: ReactNode;
+    timeout?: number;
+    asMtvExperiment?: boolean;
+    indexSectionPosition?: string | number;
+  }
+
+  const Experiment: ComponentType<ExperimentProps>;
+
+  interface VariantProps {
+    children: ReactNode;
+    id: string;
+  }
+  const Variant: ComponentType<VariantProps>;
+}
