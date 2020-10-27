@@ -7,7 +7,7 @@
     {
       "sectionTitle": "Glossary",
       "sectionId": "glossary",
-      "description": "R0 vs R(t) vs Infection rate: We have compiled a simple glossary of essential COVID-related terms, which we will continue to update and expand.",
+      "description": "R₀ vs R(t) vs Infection rate: We have compiled a simple glossary of essential COVID-related terms, which we will continue to update and expand.",
       "buttonCta": "View glossary",
       "buttonRedirect": "/glossary"
     },
