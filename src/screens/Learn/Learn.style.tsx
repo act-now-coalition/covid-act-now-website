@@ -21,6 +21,7 @@ export const PageContainer = styled.div`
 
   @media (min-width: ${materialSMBreakpoint}) {
     margin: 3.5rem auto;
+    min-height: 65vh;
   }
 `;
 
@@ -33,8 +34,12 @@ export const PageHeader = styled.h1`
   margin-bottom: 1.75rem;
 `;
 
-export const PageIntro = styled.p`
-  ${BodyCopyStyles};
+export const PageIntro = styled(MarkdownContent)`
+  p,
+  ul,
+  li {
+    ${BodyCopyStyles}
+  }
   margin-bottom: 1.5rem;
 
   @media (min-width: ${materialSMBreakpoint}) {
@@ -50,7 +55,9 @@ export const SectionHeader = styled.h2`
 `;
 
 export const MarkdownBodyCopy = styled(MarkdownContent)`
-  p {
+  p,
+  ul,
+  li {
     ${BodyCopyStyles}
   }
 `;

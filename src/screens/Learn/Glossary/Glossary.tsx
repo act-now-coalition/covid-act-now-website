@@ -4,9 +4,9 @@ import { sortBy, without } from 'lodash';
 import {
   PageContainer,
   PageHeader,
-  PageIntro,
   PageContent,
   BreadcrumbsContainer,
+  PageIntro,
 } from '../Learn.style';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import { StyledAccordion } from 'components/SharedComponents';
@@ -55,7 +55,7 @@ const Glossary = () => {
           <Breadcrumbs pathItems={breadcrumbItems} />
         </BreadcrumbsContainer>
         <PageHeader>{glossaryHeader}</PageHeader>
-        <PageIntro>{glossaryIntro}</PageIntro>
+        <PageIntro source={glossaryIntro} />
         {glossaryTerms.map((item: Term) => (
           <Fragment key={item.termId}>
             <Anchor id={item.termId} />
