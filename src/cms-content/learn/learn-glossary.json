@@ -1,6 +1,6 @@
 {
   "header": "Glossary",
-  "intro": "Here you can find clear definitions of the vocabulary of the novel coronavirus (2019-nCoV). If you have any questions or would like us to include a term that you don't see, please email us at **[info@covidactnow.org](mailto:info@covidactnow.org).**",
+  "intro": "Here you can find clear definitions of the vocabulary of the novel coronavirus (2019-nCoV). If you have any questions or would like us to include a term that you don't see, please email us at [info@covidactnow.org](mailto:info@covidactnow.org).",
   "terms": [
     {
       "term": "Antibodies",
@@ -10,7 +10,7 @@
     {
       "term": "Antibody test",
       "termId": "antibody-test",
-      "definition": "An antibody test, also known as a [serology test](#serology-test), is one of the many types of COVID tests. An antibody test looks for [antibodies](#antibodies) against COVID in the blood to determine if someone has been infected in the past, regardless of whether or not they presented with symptoms, as COVID can be [asymptomatic](#asymptomatic). This test does not identify active COVID infections, which is in contrast to PCR tests and [antigen]([#antigen-test]) tests. Antibody tests can be useful for tracking the spread of disease, understanding human [immunity](#immunity) to the disease, and possibly prioritizing who should be vaccinated in the future. It is [not yet known](https://www.cdc.gov/coronavirus/2019-ncov/lab/resources/antibody-tests-guidelines.html) if people who have recovered from COVID and have antibodies are protected from getting reinfected."
+      "definition": "An antibody test, also known as a [serology test](#serology-test), is one of the many types of COVID tests. An antibody test looks for [antibodies](#antibodies) against COVID in the blood to determine if someone has been infected in the past, regardless of whether or not they presented with symptoms, as COVID can be [asymptomatic](#asymptomatic). This test does not identify active COVID infections, which is in contrast to PCR tests and [antigen](#antigen-test) tests. Antibody tests can be useful for tracking the spread of disease, understanding human [immunity](#immunity) to the disease, and possibly prioritizing who should be vaccinated in the future. It is [not yet known](https://www.cdc.gov/coronavirus/2019-ncov/lab/resources/antibody-tests-guidelines.html) if people who have recovered from COVID and have antibodies are protected from getting reinfected."
     },
     {
       "term": "Antigen test",
@@ -220,32 +220,32 @@
     {
       "term": "Nowcasting",
       "termId": "nowcasting",
-      "definition": "Nowcasting monitors the current state and trajectory of a disease. In the case of COVID, nowcasting provides an understanding of how COVID is evolving right now and in the near future. Covid Act Now’s five metrics — [daily new cases](#daily-new-cases), [infection rate]([#infection-growth-rate]), [test positivity]([#test-positivity]), [tracers hired]([#contact-tracing]), and [ICU headroom used]([#icu-headroom-used]) — are nowcasting tools that capture how your community is doing in the fight against COVID."
+      "definition": "Nowcasting monitors the current state and trajectory of a disease. In the case of COVID, nowcasting provides an understanding of how COVID is evolving right now and in the near future. Covid Act Now’s five metrics — [daily new cases](#daily-new-cases), [infection rate](#infection-growth-rate), [test positivity](#test-positivity), [tracers hired](#contact-tracing), and [ICU headroom used](#icu-headroom) — are nowcasting tools that capture how your community is doing in the fight against COVID."
     },
     {
       "term": "Non-pharmaceutical intervention (NPI)",
       "termId": "npi",
-      "definition": "Non-pharmaceutical interventions (NPIs) are actions outside of pharmaceutical interventions, such as vaccines and medicine, that help slow the spread of illness. Also known as community [mitigation](\\[#mitigation]) strategies, NPIs are vital in slowing COVID spread, since there is currently no vaccine for the virus. The [CDC outlines](https://www.cdc.gov/nonpharmaceutical-interventions/index.html) examples of individual, community, and environmental NPIs that can be used in your home, your workplace, your schools, and your social groups. These include wearing masks, washing your hands, staying home when you do not feel well, social distancing, and avoiding crowded indoor spaces."
+      "definition": "Non-pharmaceutical interventions (NPIs) are actions outside of pharmaceutical interventions, such as vaccines and medicine, that help slow the spread of illness. Also known as community [mitigation](#mitigation) strategies, NPIs are vital in slowing COVID spread, since there is currently no vaccine for the virus. The [CDC outlines](https://www.cdc.gov/nonpharmaceutical-interventions/index.html) examples of individual, community, and environmental NPIs that can be used in your home, your workplace, your schools, and your social groups. These include wearing masks, washing your hands, staying home when you do not feel well, social distancing, and avoiding crowded indoor spaces."
     },
     {
       "term": "Novel coronavirus",
       "termId": "novel-coronavirus",
-      "definition": "A novel coronavirus is a novel, or new, strain of [coronavirus](\\[#coronavirus]) that has not been previously identified in humans. [SARS-CoV-2](\\[#sars-cov-2]), the virus that causes [COVID](\\[#covid-19]) (also known as COVID-19), is a novel coronavirus that was identified in Wuhan, China in 2019."
+      "definition": "A novel coronavirus is a novel, or new, strain of [coronavirus](#coronavirus) that has not been previously identified in humans. [SARS-CoV-2](#sars-cov-2), the virus that causes [COVID](#covid-19) (also known as COVID-19), is a novel coronavirus that was identified in Wuhan, China in 2019."
     },
     {
       "term": "N95 respirator ",
-      "termId": "N95-respirator",
-      "definition": "An N95 respirator is a mask that filters out [95% of particles](https://www.cdc.gov/niosh/npptl/topics/respirators/disp_part/default.html) in the air. It forms a tight seal around the nose and mouth, and is [recommended for healthcare professionals](https://www.cdc.gov/niosh/topics/hcwcontrols/recommendedguidanceextuse.html). To slow the spread of COVID, the public can wear simple cloth [face masks](\\[#face-mask]). COVID can spread between people interacting in close proximity, even among those who are [asymptomatic](\\[#asymptomatic]) or [presymptomatic](\\[#presymptomatic]), so wearing a mask can be very effective in limiting this spread."
+      "termId": "n-95-respirator",
+      "definition": "An N95 respirator is a mask that filters out [95% of particles](https://www.cdc.gov/niosh/npptl/topics/respirators/disp_part/default.html) in the air. It forms a tight seal around the nose and mouth, and is [recommended for healthcare professionals](https://www.cdc.gov/niosh/topics/hcwcontrols/recommendedguidanceextuse.html). To slow the spread of COVID, the public can wear simple cloth [face masks](#face-mask). COVID can spread between people interacting in close proximity, even among those who are [asymptomatic](#asymptomatic) or [presymptomatic](#presymptomatic-spread), so wearing a mask can be very effective in limiting this spread."
     },
     {
       "term": "Outbreak",
       "termId": "outbreak",
-      "definition": "An outbreak is a sudden rise in the number of cases past expected levels within a community. Outbreaks are similar to [epidemics](\\[#epidemic]), but centered within a more localized geographical region. Disease outbreaks are caused by [community spread](\\[#community-spread]) and are often exacerbated by large [superspreading events](\\[#super-spreading-event]) in which one or a small number of infected people infect an unusually large number of people."
+      "definition": "An outbreak is a sudden rise in the number of cases past expected levels within a community. Outbreaks are similar to [epidemics](#epidemic), but centered within a more localized geographical region. Disease outbreaks are caused by [community spread](#community-spread) and are often exacerbated by large [superspreading events](#superspreading-event) in which one or a small number of infected people infect an unusually large number of people."
     },
     {
       "term": "Pandemic",
       "termId": "pandemic",
-      "definition": "A pandemic is an [epidemic](\\[#epidemic]) that has spread across international borders, affecting a large number of people. Pandemics usually happen when a virus is spread easily to people with no previous immunity. COVID, declared a global pandemic by the [World Health Organization](https://www.who.int/emergencies/diseases/novel-coronavirus-2019?gclid=EAIaIQobChMI6tPOt5jD6gIVUvDACh3qsgo9EAAYASAAEgIp7_D_BwE) (WHO) March 11, 2020, is the first known pandemic caused by a new coronavirus."
+      "definition": "A pandemic is an [epidemic](#epidemic) that has spread across international borders, affecting a large number of people. Pandemics usually happen when a virus is spread easily to people with no previous immunity. COVID, declared a global pandemic by the [World Health Organization](https://www.who.int/emergencies/diseases/novel-coronavirus-2019?gclid=EAIaIQobChMI6tPOt5jD6gIVUvDACh3qsgo9EAAYASAAEgIp7_D_BwE) (WHO) March 11, 2020, is the first known pandemic caused by a new coronavirus."
     },
     {
       "term": "Pathogen",
@@ -260,7 +260,7 @@
     {
       "term": "Personal Protective Equipment (PPE) ",
       "termId": "ppe",
-      "definition": "PPE is specialized equipment, including gloves, gowns, aprons, masks, respirators, goggles, and face shields, worn for protection against infectious materials such as [viruses](#virus). PPE is necessary in hospitals, but also in businesses that decide to reopen, such as restaurants, factories, or entertainment venues, in order to protect staff, patients, and patrons. Due to the continued growth of COVID, hospital systems across the nation have been experiencing [PPE shortages](https://www.fda.gov/medical-devices/personal-protective-equipment-infection-control/faqs-shortages-surgical-masks-and-gowns-during-covid-19-pandemic). As an individual, you can use cloth face coverings rather than medical grade face masks such as [N95 respirators](#N95) in order to ensure that healthcare professionals have access to this PPE."
+      "definition": "PPE is specialized equipment, including gloves, gowns, aprons, masks, respirators, goggles, and face shields, worn for protection against infectious materials such as [viruses](#virus). PPE is necessary in hospitals, but also in businesses that decide to reopen, such as restaurants, factories, or entertainment venues, in order to protect staff, patients, and patrons. Due to the continued growth of COVID, hospital systems across the nation have been experiencing [PPE shortages](https://www.fda.gov/medical-devices/personal-protective-equipment-infection-control/faqs-shortages-surgical-masks-and-gowns-during-covid-19-pandemic). As an individual, you can use cloth face coverings rather than medical grade face masks such as [N95 respirators](#n-95-respirator) in order to ensure that healthcare professionals have access to this PPE."
     },
     {
       "term": "Polymerase Chain Reaction (PCR) test ",
@@ -315,7 +315,7 @@
     {
       "term": "SEIR model",
       "termId": "seir-model",
-      "definition": "An SEIR model is a specific kind of model that [](#epidemiologist)epidemiologists, who study disease, use to understand how a disease will evolve in a population over time. Covid Act Now’s model is an SEIR model which [forecasts](#forecasting) COVID by categorizing how people in a population will evolve across various states. These states include “[susceptible](#susceptible),” “[exposed](#exposed),” “[infected](#infection),” ”[recovered](#recovered),” and “deceased.”  The model [forecasts](#forecasting) people’s progression through those states [using many different data inputs](https://www.youtube.com/watch?v=Lcx2a1jXISc&t=5s) – including cases, hospitalizations, deaths, and demographics – in conjunction with assumptions based on, for example, how the disease has evolved over time in other countries and how much of an impact certain interventions like social distancing could have. Simply put, the SEIR model can help us predict the trend in COVID hospitalizations within certain scenarios. This predictive ability allows states and counties to prepare for when their hospitals may become overwhelmed by COVID patients."
+      "definition": "An SEIR model is a specific kind of model that [](#epidemiologist)epidemiologists, who study disease, use to understand how a disease will evolve in a population over time. Covid Act Now’s model is an SEIR model which [forecasts](#forecasting) COVID by categorizing how people in a population will evolve across various states. These states include “[susceptible](#susceptible),” “[exposed](#exposed),” “[infected](#infection),” ”recovered,” and “deceased.”  The model [forecasts](#forecasting) people’s progression through those states [using many different data inputs](https://www.youtube.com/watch?v=Lcx2a1jXISc&t=5s) – including cases, hospitalizations, deaths, and demographics – in conjunction with assumptions based on, for example, how the disease has evolved over time in other countries and how much of an impact certain interventions like social distancing could have. Simply put, the SEIR model can help us predict the trend in COVID hospitalizations within certain scenarios. This predictive ability allows states and counties to prepare for when their hospitals may become overwhelmed by COVID patients."
     },
     {
       "term": "Sensitivity (testing)",
@@ -325,12 +325,12 @@
     {
       "term": "Serial interval",
       "termId": "serial-interval",
-      "definition": "A virus’ serial interval or serial period represents the time between when an infected person first shows symptoms, and when the person they next infect first shows symptoms. While research is still developing, the average serial interval for COVID is thought to be about [four days](https://wwwnc.cdc.gov/eid/article/26/6/20-0357_article). This statistic means that there is an average of four days between when someone with COVID shows symptoms and when someone they infect with COVID shows symptoms. The serial period is around the same average number of days as COVID’s [incubation period](#incubation-period), which is the time between someone getting [infected](#infection) with COVID and the oncoming of their symptoms. The overlap of these two time intervals indicates that [presymptomatic](#presymptomatic) transmission of COVID plays a key role in COVID spread. People can spread COVID before they know they have the virus."
+      "definition": "A virus’ serial interval or serial period represents the time between when an infected person first shows symptoms, and when the person they next infect first shows symptoms. While research is still developing, the average serial interval for COVID is thought to be about [four days](https://wwwnc.cdc.gov/eid/article/26/6/20-0357_article). This statistic means that there is an average of four days between when someone with COVID shows symptoms and when someone they infect with COVID shows symptoms. The serial period is around the same average number of days as COVID’s [incubation period](#incubation-period), which is the time between someone getting [infected](#infection) with COVID and the oncoming of their symptoms. The overlap of these two time intervals indicates that [presymptomatic](#presymptomatic-spread) transmission of COVID plays a key role in COVID spread. People can spread COVID before they know they have the virus."
     },
     {
       "term": "Serology test",
       "termId": "serology-test",
-      "definition": "A serology test, also known as an [antibody test](#antibody-test), is one of many types of COVID tests. A serology test looks for [antibodies](#antibodies) against COVID in the blood to determine whether someone has been infected in the past, regardless of whether the infected person presented with symptoms, as COVID can be [asymptomatic](#asymptomatic). This test does not identify whether a person is actively infected with COVID, in contrast to [PCR tests](#pcr-test) and [antigen tests](#antigen-test). Serology tests can be useful for tracking the spread of disease, understanding human [immunity](#immune) to the disease, and possibly prioritizing who should be vaccinated in the future. It is [not yet known](https://www.who.int/news-room/commentaries/detail/immunity-passports-in-the-context-of-covid-19) if people who have recovered from COVID and have antibodies are protected from getting reinfected."
+      "definition": "A serology test, also known as an [antibody test](#antibody-test), is one of many types of COVID tests. A serology test looks for [antibodies](#antibodies) against COVID in the blood to determine whether someone has been infected in the past, regardless of whether the infected person presented with symptoms, as COVID can be [asymptomatic](#asymptomatic). This test does not identify whether a person is actively infected with COVID, in contrast to [PCR tests](#pcr-test) and [antigen tests](#antigen-test). Serology tests can be useful for tracking the spread of disease, understanding human [immunity](#immunity) to the disease, and possibly prioritizing who should be vaccinated in the future. It is [not yet known](https://www.who.int/news-room/commentaries/detail/immunity-passports-in-the-context-of-covid-19) if people who have recovered from COVID and have antibodies are protected from getting reinfected."
     },
     {
       "term": "Social distancing",
@@ -385,7 +385,7 @@
     {
       "term": "Transmission",
       "termId": "transmission",
-      "definition": "Transmission is how a virus spreads from one person to another. For COVID, researchers think the [virus](#virus) is transmitted through virus particles which spread from an infected person’s mouth or nose onto another person’s eyes, mouth, or nose. COVID can spread between people interacting in close proximity, even among those who are [asymptomatic](#asymptomatic) or [presymptomatic](#presymptomatic). The existence of asymptomatic spread makes social distancing and wearing a face mask essential. The [CDC recommends](https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/diy-cloth-face-coverings.html) that people wear a covering over their mouth and nose to protect themselves and others from COVID."
+      "definition": "Transmission is how a virus spreads from one person to another. For COVID, researchers think the [virus](#virus) is transmitted through virus particles which spread from an infected person’s mouth or nose onto another person’s eyes, mouth, or nose. COVID can spread between people interacting in close proximity, even among those who are [asymptomatic](#asymptomatic) or [presymptomatic](#presymptomatic-spread). The existence of asymptomatic spread makes social distancing and wearing a face mask essential. The [CDC recommends](https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/diy-cloth-face-coverings.html) that people wear a covering over their mouth and nose to protect themselves and others from COVID."
     },
     {
       "term": "Vaccine",
@@ -395,7 +395,7 @@
     {
       "term": "Ventillator",
       "termId": "ventillator",
-      "definition": "A ventilator is a machine that helps patients breathe when they cannot do so on their own. People whose lungs are severely damaged by COVID may use a ventilator because they cannot get enough oxygen on their own. While ventilators allow lungs to heal, they are not in and of themselves a treatment. Intensive Care Unit (ICU) beds are equipped with ventilators, which may save the lives of the sickest COVID patients. [ICU Headroom](icu-headroom) is one of Covid Act Now’s main metrics for understanding the state of COVID in a region, since measuring and predicting ICU capacity gives a picture of whether hospitals can handle an increased load of new COVID cases without having to resort to [crisis standards of care](#crisis-standards-of-care)."
+      "definition": "A ventilator is a machine that helps patients breathe when they cannot do so on their own. People whose lungs are severely damaged by COVID may use a ventilator because they cannot get enough oxygen on their own. While ventilators allow lungs to heal, they are not in and of themselves a treatment. Intensive Care Unit (ICU) beds are equipped with ventilators, which may save the lives of the sickest COVID patients. [ICU Headroom](#icu-headroom) is one of Covid Act Now’s main metrics for understanding the state of COVID in a region, since measuring and predicting ICU capacity gives a picture of whether hospitals can handle an increased load of new COVID cases without having to resort to [crisis standards of care](#crisis-standards-of-care)."
     },
     {
       "term": "Virus",
