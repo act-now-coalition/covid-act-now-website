@@ -13,7 +13,7 @@ import Breadcrumbs from 'components/Breadcrumbs';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import * as Style from './Faq.style';
 import { BreadcrumbItem } from 'components/Breadcrumbs';
-import { formatNumericalDate } from 'common/utils';
+import { formatMetatagDate } from 'common/utils';
 
 const Faq = () => {
   const {
@@ -23,7 +23,7 @@ const Faq = () => {
     metadataTitle,
     metadataDescription,
   } = faqContent;
-  const date = formatNumericalDate(new Date());
+  const date = formatMetatagDate();
 
   function getSectionItems(sections: FaqSection[]): Item[] {
     return sections.map(section => ({

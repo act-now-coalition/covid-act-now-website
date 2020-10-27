@@ -59,11 +59,11 @@ export function formatLocalDate(date: Date, format: string = 'LL'): string {
 }
 
 /**
- * Returns a local timezone date formatted as a string with dashes, ie: 10-26-2020
+ * Returns a date formatted for meta tag descriptions, ie: Oct 26, 2020
  */
 
-export function formatNumericalDate(date: Date): string {
-  return moment(date).format('MM-DD-YYYY');
+export function formatMetatagDate(): string {
+  return moment().format('MMM DD, YYYY');
 }
 
 /**

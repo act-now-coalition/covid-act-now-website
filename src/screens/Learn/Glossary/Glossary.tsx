@@ -14,7 +14,7 @@ import { glossaryContent, Term } from 'cms-content/learn';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { BreadcrumbItem } from 'components/Breadcrumbs';
 import { Anchor } from 'components/TableOfContents';
-import { formatNumericalDate } from 'common/utils';
+import { formatMetatagDate } from 'common/utils';
 
 const Glossary = () => {
   const {
@@ -25,7 +25,7 @@ const Glossary = () => {
     metadataDescription,
   } = glossaryContent;
 
-  const date = formatNumericalDate(new Date());
+  const date = formatMetatagDate();
 
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const { hash } = useLocation();
