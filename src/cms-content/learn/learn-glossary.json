@@ -220,7 +220,7 @@
     {
       "term": "Nowcasting",
       "termId": "nowcasting",
-      "definition": "Nowcasting monitors the current state and trajectory of a disease. In the case of COVID, nowcasting provides an understanding of how COVID is evolving right now and in the near future. Covid Act Now’s five metrics — [daily new cases](#daily-new-cases), [infection rate]([#infection-growth-rate]), [test positivity]([#test-positivity]), [tracers hired]([#contact-tracing]), and [ICU headroom used]([#icu-headroom-used]) — are nowcasting tools that capture how your community is doing in the fight against COVID."
+      "definition": "Nowcasting monitors the current state and trajectory of a disease. In the case of COVID, nowcasting provides an understanding of how COVID is evolving right now and in the near future. Covid Act Now’s five metrics — [daily new cases](#daily-new-cases), [infection rate](##infection-growth-rate), [test positivity](#test-positivity), [tracers hired](#contact-tracing), and [ICU headroom used](#icu-headroom) — are nowcasting tools that capture how your community is doing in the fight against COVID."
     },
     {
       "term": "Non-pharmaceutical intervention (NPI)",
