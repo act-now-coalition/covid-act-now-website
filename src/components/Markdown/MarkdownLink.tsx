@@ -22,6 +22,11 @@ function isInternalLink(href: string) {
   return url.hostname.length === 0;
 }
 
+function isMailtoLink(href: string) {
+  const url = new URL(href);
+  return url.protocol === 'mailto:';
+}
+
 /**
  * Custom hyperlink for Markdown content. If the link is external, open it on
  * a new tab. If the link is internal, use the HashLink component to render
@@ -34,6 +39,10 @@ const MarkdownLink: React.FC<{
 }> = ({ href, children }) => {
   if (!isValidURL(href)) {
     return <Fragment>{children}</Fragment>;
+  }
+
+  if (isMailtoLink(href)) {
+    return <a href={href}>{children}</a>;
   }
 
   return isInternalLink(href) ? (
