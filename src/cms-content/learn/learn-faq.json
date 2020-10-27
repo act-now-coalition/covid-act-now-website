@@ -36,7 +36,7 @@
         },
         {
           "question": "How common is it to have COVID but not have any symptoms?",
-          "answer": "Many individuals infected with COVID are [asymptomatic](/glossary#asymptomatic) (that is, they do not have symptoms of the virus). When people do not know that they are ill, they do not take precautions. In much the same way, people who are “pre-symptomatic” – that is, they will eventually develop symptoms ‒ may unknowingly spread the disease to others before they realize that they are ill. The [CDC estimates](https://www.cdc.gov/coronavirus/2019-ncov/hcp/planning-scenarios.html) that 40 percent of COVID cases are asymptomatic."
+          "answer": "Many individuals infected with COVID are [asymptomatic](/glossary#asymptomatic) (that is, they do not have symptoms of the virus). When people do not know that they are ill, they do not take precautions. In much the same way, people who are “[presymptomatic](/glossary#presymptomatic-spread)” – that is, they will eventually develop symptoms ‒ may unknowingly spread the disease to others before they realize that they are ill. The [CDC estimates](https://www.cdc.gov/coronavirus/2019-ncov/hcp/planning-scenarios.html) that 40 percent of COVID cases are [asymptomatic](/glossary#asymptomatic)."
         },
         {
           "question": "What is counted as a COVID death?",
@@ -54,7 +54,7 @@
         },
         {
           "question": "Why is a low positive test rate a good sign?\n",
-          "answer": "Many people infected with COVID are [pre-symptomatic](/glossary#presymptomatic-spread) or [asymptomatic](#asymptomatic), making it difficult to know how widespread the disease is in a community. If there is ample testing being done, including of individuals who have no reason to believe that they have the virus, then many negative test results will be received, leading to a low [test positivity rate](/glossary#test-positivity). This is an indication that adequate testing is being done in an area and that there are not a lot of undetected cases in the community. (See our [blog](https://blog.covidactnow.org/test-positivity-explained/) for more information on test positivity rates)."
+          "answer": "Many people infected with COVID are [presymptomatic](/glossary#presymptomatic-spread) or [asymptomatic](/glossary#asymptomatic), making it difficult to know how widespread the disease is in a community. If there is ample testing being done, including of individuals who have no reason to believe that they have the virus, then many negative test results will be received, leading to a low [test positivity rate](/glossary#test-positivity). This is an indication that adequate testing is being done in an area and that there are not a lot of undetected cases in the community. (See our [blog](https://blog.covidactnow.org/test-positivity-explained/) for more information on test positivity rates)."
         },
         {
           "question": "When tests are conducted, where do the results get counted?",
