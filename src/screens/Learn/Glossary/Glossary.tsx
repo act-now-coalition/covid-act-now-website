@@ -15,6 +15,7 @@ import Breadcrumbs from 'components/Breadcrumbs';
 import { BreadcrumbItem } from 'components/Breadcrumbs';
 import { Anchor } from 'components/TableOfContents';
 import { formatMetatagDate } from 'common/utils';
+import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 
 const Glossary = () => {
   const {
@@ -36,6 +37,11 @@ const Glossary = () => {
   ];
 
   function onChangeExpandedTerm(termId: string, expanded: boolean) {
+    if (expanded) {
+      // Only track when users open the accordion
+      trackEvent(EventCategory.GLOSSARY, EventAction.EXPAND, `Term: ${termId}`);
+    }
+
     const newExpandedItems = expanded
       ? [...expandedItems, termId]
       : without(expandedItems, termId);
@@ -70,7 +76,7 @@ const Glossary = () => {
               summaryText={item.term}
               detailText={item.definition}
               expanded={isExpanded(item.termId)}
-              onChange={(event: {}, expanded) =>
+              onChange={(event: {}, expanded: boolean) =>
                 onChangeExpandedTerm(item.termId, expanded)
               }
             />
