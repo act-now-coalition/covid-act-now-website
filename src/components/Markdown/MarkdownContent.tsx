@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactMarkdown, { ReactMarkdownProps } from 'react-markdown';
-import { MarkdownLink } from './Markdown.style';
+import MarkdownLink from './MarkdownLink';
+import ErrorBoundary from 'components/ErrorBoundary';
 
 /**
  * Custom renderers for each Markdown node type. Useful to override the
@@ -13,7 +14,11 @@ const customRenderers = {
 };
 
 const MarkdownContent: React.FC<ReactMarkdownProps> = props => {
-  return <ReactMarkdown renderers={customRenderers} {...props} />;
+  return (
+    <ErrorBoundary>
+      <ReactMarkdown renderers={customRenderers} {...props} />
+    </ErrorBoundary>
+  );
 };
 
 export default MarkdownContent;

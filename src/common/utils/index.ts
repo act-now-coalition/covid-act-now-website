@@ -59,6 +59,14 @@ export function formatLocalDate(date: Date, format: string = 'LL'): string {
 }
 
 /**
+ * Returns a date formatted for meta tag descriptions, ie: Oct 26, 2020
+ */
+
+export function formatMetatagDate(): string {
+  return moment().format('MMM DD, YYYY');
+}
+
+/**
  * Returns a language-sensitive representation of an integer. For US, it
  * adds commas for thousands, millions, etc.
  */

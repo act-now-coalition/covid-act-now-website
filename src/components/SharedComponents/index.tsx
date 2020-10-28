@@ -7,5 +7,6 @@ them separate for future use, so...
 
 import SwitchComponent from './SwitchComponent';
 import MoreInfoButton from './MoreInfoButton';
+import StyledAccordion from './Accordion';
 
-export { SwitchComponent, MoreInfoButton };
+export { SwitchComponent, MoreInfoButton, StyledAccordion };
