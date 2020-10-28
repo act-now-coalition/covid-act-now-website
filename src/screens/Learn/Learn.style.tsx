@@ -12,6 +12,12 @@ export const BodyCopyStyles = css`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   line-height: 1.4;
   letter-spacing: 1;
+
+  p {
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
 `;
 
 export const PageContainer = styled.div`
