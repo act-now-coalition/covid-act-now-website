@@ -150,7 +150,7 @@
     {
       "term": "Flattening the curve",
       "termId": "flattening-the-curve",
-      "definition": "Flattening the curve is a method of slowing the transmission of the COVID virus to prevent a surge in cases and deaths and to reduce the burden on the healthcare system. By taking actions such as social distancing\\[#social-distancing], wearing masks, and staying home when you feel sick, you can do your part to flatten the curve. COVID [transmission](#transmission) will be slowed, spreading cases out over more time so that our healthcare system can handle cases better and give more people the care they need. The “curve” refers to the curves in an epidemiological chart of projected COVID cases that demonstrate the spread of the virus with and without protective measures. With protective measures, the peaks in the curve will be less steep, as cases will increase less dramatically over the same period of time."
+      "definition": "Flattening the curve is a method of slowing the transmission of the COVID virus to prevent a surge in cases and deaths and to reduce the burden on the healthcare system. By taking actions such as [social distancing](#social-distancing), wearing masks, and staying home when you feel sick, you can do your part to flatten the curve. COVID [transmission](#transmission) will be slowed, spreading cases out over more time so that our healthcare system can handle cases better and give more people the care they need. The “curve” refers to the curves in an epidemiological chart of projected COVID cases that demonstrate the spread of the virus with and without protective measures. With protective measures, the peaks in the curve will be less steep, as cases will increase less dramatically over the same period of time."
     },
     {
       "term": "Forecasting",
@@ -210,7 +210,7 @@
     {
       "term": "Isolation",
       "termId": "isolation",
-      "definition": "Isolation reduces the spread of the virus by keeping people with active infections physically separated from others. Hospitals commonly isolate sick patients to prevent the spread of disease. When hospitals become overrun, it becomes much more difficult to isolate properly, and infections can therefore spread at a higher rate. Self-isolation, social distancing, and mask wearing help to “flatten the curve”\\[#flattening-the-curve] for COVID. These interventions slow COVID spread and help prevent hospitals and healthcare systems from getting completely overwhelmed. These efforts protect the public from exposure to COVID and slow the [infection growth rate](#infection-growth-rate)."
+      "definition": "Isolation reduces the spread of the virus by keeping people with active infections physically separated from others. Hospitals commonly isolate sick patients to prevent the spread of disease. When hospitals become overrun, it becomes much more difficult to isolate properly, and infections can therefore spread at a higher rate. Self-isolation, social distancing, and mask wearing help to [“flatten the curve”](#flattening-the-curve) for COVID. These interventions slow COVID spread and help prevent hospitals and healthcare systems from getting completely overwhelmed. These efforts protect the public from exposure to COVID and slow the [infection growth rate](#infection-growth-rate)."
     },
     {
       "term": "Mitigation",
