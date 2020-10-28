@@ -27,6 +27,9 @@ export const MarkdownBody = styled(MarkdownContent)`
     font-size: 1rem;
     line-height: 1.4;
     margin: 0;
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
   }
 
   a {
