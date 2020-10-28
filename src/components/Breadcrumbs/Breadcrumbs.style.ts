@@ -1,16 +1,22 @@
 import styled from 'styled-components';
-import MuiBreadcrumbs from '@material-ui/core/Breadcrumbs';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { COLOR_MAP } from 'common/colors';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
-export const Breadcrumbs = styled(MuiBreadcrumbs)``;
-
-export const BreadcrumbLink = styled(NavLink)`
-  color: #000;
+export const BreadcrumbLink = styled(Link)`
+  color: ${COLOR_MAP.BLUE};
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
 
-  &.active {
-    color: ${COLOR_MAP.GREEN.BASE};
-    font-weight: bold;
+  a {
+    display: block;
   }
+`;
+
+export const ArrowBackIcon = styled(ArrowBackIosIcon)`
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+  display: block;
+  width: 16px;
+  height: 16px;
 `;
