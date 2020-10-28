@@ -17,14 +17,14 @@ import {
   Content,
   SearchBarThermometerWrapper,
   SectionWrapper,
-  BannerContainer,
   Section,
+  ElectionCountdownContainer,
 } from './HomePage.style';
 import { SelectorWrapper } from 'components/Header/HomePageHeader.style';
 import CompareMain from 'components/Compare/CompareMain';
-import { DonationBanner } from 'components/Banner';
 import Explore from 'components/Explore';
 import { getRandomStateFipsList } from './utils';
+import ElectionCountdown from 'components/ElectionCountdown';
 
 export default function HomePage() {
   const shareBlockRef = useRef(null);
@@ -75,9 +75,9 @@ export default function HomePage() {
         pageTitle="Covid Act Now - America’s COVID Warning System"
         pageDescription="Real-time modeling and metrics to understand where we stand against COVID. 50 states. 3,000+ counties. Click the map to dive in"
       />
-      <BannerContainer>
-        <DonationBanner />
-      </BannerContainer>
+      <ElectionCountdownContainer>
+        <ElectionCountdown />
+      </ElectionCountdownContainer>
       <HomePageHeader
         indicatorsLinkOnClick={() => scrollTo(indicatorsRef.current)}
       />
