@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Accordion, AccordionSummary } from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { MarkdownContent } from 'components/Markdown';
 import { COLOR_MAP } from 'common/colors';
 
@@ -35,4 +36,8 @@ export const MarkdownBody = styled(MarkdownContent)`
   a {
     color: ${COLOR_MAP.BLUE};
   }
+`;
+
+export const ExpandIcon = styled(ExpandMoreIcon)`
+  color: ${COLOR_MAP.GRAY_ICON};
 `;
