@@ -9,6 +9,7 @@ import colorPalette from 'assets/theme/palette';
 import { charts } from 'components/Charts/Charts.style';
 import { COLOR_MAP } from 'common/colors';
 import { brightenColor } from './utils';
+import MuiMyLocationIcon from '@material-ui/icons/MyLocation';
 
 /** Gets the chart palette based on the current theme. */
 function palette(props: any) {
@@ -319,4 +320,8 @@ export const NormalizeSubLabel = styled.div`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   margin-left: 2rem;
   transform: translateY(-0.75rem);
+`;
+
+export const MyLocationIcon = styled(MuiMyLocationIcon)`
+  color: #bdbdbd;
 `;

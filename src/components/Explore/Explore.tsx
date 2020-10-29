@@ -11,6 +11,8 @@ import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { IconButton } from '@material-ui/core';
+import Tooltip from '@material-ui/core/Tooltip';
 import { ParentSize } from '@vx/responsive';
 import { useModelLastUpdatedDate } from 'common/utils/model';
 import { findLocationForFips, Location } from 'common/locations';
@@ -52,6 +54,7 @@ import { findFipsByUrlParams } from 'common/locations';
 import { ScreenshotReady } from 'components/Screenshot';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 import { IndigenousDataCheckbox } from 'components/IndigenousPopulationsFeature';
+import { getCurrentLocation, getState } from 'common/utils/geolocation';
 
 const MARGIN_SINGLE_LOCATION = 20;
 const MARGIN_STATE_CODE = 60;
@@ -286,6 +289,15 @@ const Explore: React.FunctionComponent<{
     }
   }, [sharedParams]);
 
+  const onClickGeolocation = () => {
+    console.log('geolocating...');
+    getCurrentLocation(position => {
+      console.log(position);
+      console.log(getState({ latitude: 0, longitude: 0 }));
+      // update the state
+    });
+  };
+
   const trackingLabel = hasMultipleLocations
     ? `Multiple Locations`
     : 'Single Location';
@@ -351,13 +363,20 @@ const Explore: React.FunctionComponent<{
           Compare states or counties
         </Styles.TableAutocompleteHeader>
         <Grid container spacing={1}>
-          <Grid key="location-selector" item sm={9} xs={12}>
+          <Grid key="location-selector" item sm={8} xs={12}>
             <LocationSelector
               locations={autocompleteLocations}
               selectedLocations={selectedLocations}
               onChangeSelectedLocations={onChangeSelectedLocations}
               {...modalNormalizeCheckboxProps}
             />
+          </Grid>
+          <Grid key="geolocation">
+            <Tooltip title="Compare your current location" placement="top">
+              <IconButton onClick={onClickGeolocation}>
+                <Styles.MyLocationIcon />
+              </IconButton>
+            </Tooltip>
           </Grid>
           {!hasMultipleLocations && (
             <Grid key="legend" item sm={3} xs={12}>
