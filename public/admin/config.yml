@@ -342,5 +342,6 @@ collections:
                       label: Tags,
                       name: tags,
                       widget: list,
+                      required: false,
                       hint: 'Optional tags for the case study. Separate with commas. (ex: api, embed, etc)',
                     }
