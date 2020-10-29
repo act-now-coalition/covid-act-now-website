@@ -44,7 +44,6 @@ const CountdownContent = (props: {
   const linkProps = {
     target: '_blank',
     rel: 'noopener noreferrer',
-    onClick: () => trackVoteClick('election-countdown'),
   };
 
   return (
@@ -65,12 +64,14 @@ const CountdownContent = (props: {
         <BannerSection>
           <StyledLink
             {...linkProps}
+            onClick={() => trackVoteClick('Mail-in deadlines')}
             href="https://www.vote.org/absentee-ballot-deadlines/"
           >
             Mail-in deadlines
           </StyledLink>
           <StyledLink
             {...linkProps}
+            onClick={() => trackVoteClick('Early voting')}
             href="https://www.vote.org/early-voting-calendar/"
           >
             Early voting dates
