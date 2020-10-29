@@ -124,7 +124,7 @@ export interface CaseStudy {
 export interface CaseStudyCategory {
   header: string;
   categoryId: string;
-  caseStudies: CaseStudy[];
+  caseStudies?: CaseStudy[];
 }
 
 export interface CaseStudiesContent {

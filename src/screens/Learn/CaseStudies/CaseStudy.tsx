@@ -9,6 +9,11 @@ const CaseStudy: React.FC = () => {
   let { caseStudyId } = useParams<{ caseStudyId: string }>();
 
   const caseStudy = caseStudiesById[caseStudyId];
+
+  if (!caseStudy) {
+    return null;
+  }
+
   const { header, body, author, tags } = caseStudy;
 
   return (

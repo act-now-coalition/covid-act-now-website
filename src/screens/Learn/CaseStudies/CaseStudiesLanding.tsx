@@ -17,15 +17,16 @@ const Landing: React.FC = () => {
         {categories.map(category => (
           <div key={category.categoryId}>
             <h2>{category.header}</h2>
-            {category.caseStudies.map(caseStudy => (
-              <Card key={caseStudy.caseStudyId}>
-                <CardContent>
-                  <h3>{caseStudy.shortTitle}</h3>
-                  <p>{caseStudy.summary}</p>
-                  <Link to={`${url}/${caseStudy.caseStudyId}`}>Go</Link>
-                </CardContent>
-              </Card>
-            ))}
+            {category?.caseStudies &&
+              category.caseStudies.map(caseStudy => (
+                <Card key={caseStudy.caseStudyId}>
+                  <CardContent>
+                    <h3>{caseStudy.shortTitle}</h3>
+                    <p>{caseStudy.summary}</p>
+                    <Link to={`${url}/${caseStudy.caseStudyId}`}>Go</Link>
+                  </CardContent>
+                </Card>
+              ))}
           </div>
         ))}
       </Style.PageContent>
