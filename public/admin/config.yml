@@ -259,10 +259,10 @@ collections:
         file: 'src/cms-content/learn/case-studies.json'
         label: Case Studies
         fields:
-          - label: Title
-            name: title
+          - label: Header
+            name: header
             widget: text
-            hint: Title for the case studies landing page
+            hint: Header for the case studies landing page
           - label: Intro
             name: intro
             widget: markdown
@@ -273,15 +273,15 @@ collections:
             fields:
               - {
                   label: Category Name,
-                  name: title,
+                  name: header,
                   widget: text,
                   hint: Name of the category,
                 }
               - {
-                  label: Anchor Link ID,
-                  name: anchorId,
+                  label: Category ID,
+                  name: categoryId,
                   widget: string,
-                  hint: 'String to use for anchor links (ex: public-health)',
+                  hint: 'All lowercase, divided by dashes if multi-word (ex: public-health)',
                 }
               - label: Case Studies
                 name: caseStudies
@@ -289,8 +289,8 @@ collections:
                 widget: list
                 fields:
                   - {
-                      label: Full Title,
-                      name: fullTitle,
+                      label: Header,
+                      name: header,
                       widget: text,
                       hint: Title for the case study page,
                     }
@@ -304,7 +304,7 @@ collections:
                       label: URL,
                       name: url,
                       widget: string,
-                      hint: 'URL segment for the case study. No spaces, separated by dashes (ex: ibm-melanie-curry)',
+                      hint: 'No spaces, separated by dashes (ex: ibm-melanie-curry)',
                     }
                   - {
                       label: Logo,
@@ -321,7 +321,7 @@ collections:
                     }
                   - {
                       label: Body,
-                      name: Body,
+                      name: body,
                       widget: markdown,
                       hint: Full content of the case study,
                     }
@@ -336,5 +336,5 @@ collections:
                       name: author,
                       minimal: true,
                       widget: markdown,
-                      hint: 'Name of the author (potentially a link to their online profile)',
+                      hint: 'Name of the author of the case study',
                     }

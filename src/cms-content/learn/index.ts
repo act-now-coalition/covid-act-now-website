@@ -103,3 +103,5 @@ export interface LandingContent {
 }
 
 export const landingPageContent = landing as LandingContent;
+
+// TODO: Import the Case Studies content and export it from here
