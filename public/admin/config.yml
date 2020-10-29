@@ -255,3 +255,85 @@ collections:
         file: src/cms-content/learn/footer.json
         fields:
           - { label: Body, name: body, widget: markdown, default: true }
+      - name: Case Studies
+        file: 'src/cms-content/learn/case-studies.json'
+        label: Case Studies
+        fields:
+          - label: Title
+            name: title
+            widget: text
+            hint: Title for the case studies landing page
+          - label: Intro
+            name: intro
+            widget: markdown
+            hint: Introduction for the case studies landing page
+          - label: Categories
+            name: categories
+            widget: list
+            fields:
+              - {
+                  label: Category Name,
+                  name: title,
+                  widget: text,
+                  hint: Name of the category,
+                }
+              - {
+                  label: Anchor Link ID,
+                  name: anchorId,
+                  widget: string,
+                  hint: 'String to use for anchor links (ex: public-health)',
+                }
+              - label: Case Studies
+                name: caseStudies
+                hint: Case studies for the category
+                widget: list
+                fields:
+                  - {
+                      label: Full Title,
+                      name: fullTitle,
+                      widget: text,
+                      hint: Title for the case study page,
+                    }
+                  - {
+                      label: Short Title,
+                      name: shortTitle,
+                      widget: text,
+                      hint: Short title for the case studies landing page,
+                    }
+                  - {
+                      label: URL,
+                      name: url,
+                      widget: string,
+                      hint: 'URL segment for the case study. No spaces, separated by dashes (ex: ibm-melanie-curry)',
+                    }
+                  - {
+                      label: Logo,
+                      name: logoUrl,
+                      widget: image,
+                      hint: Logo for the case studies page (400x280),
+                      allow_multiple: false,
+                    }
+                  - {
+                      label: Summary,
+                      name: summary,
+                      widget: markdown,
+                      hint: Summary to show on the case studies landing page,
+                    }
+                  - {
+                      label: Body,
+                      name: Body,
+                      widget: markdown,
+                      hint: Full content of the case study,
+                    }
+                  - {
+                      label: Tags,
+                      name: tags,
+                      widget: list,
+                      hint: 'Optional tags for the case study. Separate with commas. (ex: api, embed, etc)',
+                    }
+                  - {
+                      label: Author,
+                      name: author,
+                      widget: markdown,
+                      hint: 'Name of the author (potentially a link to their online profile)',
+                    }
