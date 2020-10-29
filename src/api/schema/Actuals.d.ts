@@ -48,6 +48,20 @@ export type Typicalusagerate = number | null;
  * Information about ICU bed utilization
  */
 export type Icubeds = HospitalResourceUtilization;
+/**
+ *
+ * New confirmed or suspected cases.
+ *
+ * New cases are a processed timeseries of cases - summing new cases may not equal
+ * the cumulative case count.
+ *
+ * Notable exceptions:
+ *  1. If a region does not report cases for a period of time, the first day
+ *     cases start reporting again will not be included. This day likely includes
+ *     multiple days worth of cases and can be misleading to the overall series.
+ *
+ */
+export type Newcases = number | null;
 
 /**
  * Known actuals data.
@@ -60,6 +74,7 @@ export interface Actuals {
   contactTracers: Contacttracers;
   hospitalBeds: Hospitalbeds;
   icuBeds: Icubeds;
+  newCases: Newcases;
 }
 /**
  * Base model for API output.
