@@ -1,26 +1,39 @@
 {
   "header": "Case Studies",
-  "intro": "Intro paragraph",
+  "intro": "We provide partners ranging from large commercial entities, like IBM, to small county health departments with clear, accurate, and up-to-date data. Learn more about how leaders in industry, public health, and government are using our data and tools to make better decisions to combat COVID.",
   "categories": [
     {
-      "header": "Public health",
-      "categoryId": "public-health",
+      "header": "Influencer",
+      "categoryId": "influencer",
       "caseStudies": [
         {
-          "body": "Dr. Christina Madison is a public health expert and healthcare media contributor located in Las Vegas, Nevada. A former president of the Nevada Public Health Association, Dr. Madison currently works as an associate professor of pharmacy practice at Roseman University of Health Sciences and is the CEO of the Public Health Pharmacist, a public health consulting firm.\n\n> quote text\n\nDr. **Madison** shares her knowledge on COVID risk with the media as well as state and local officials in order to impact COVID-related public health messaging, policy, and legislation. She is often approached by high-profile media outlets due to her clinical public health and infectious disease expertise and social media presence, and has been featured in over 50 on air TV appearances since the beginning of the pandemic.",
-          "logoUrl": "/images_cms/ghss.png",
-          "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel lectus nibh. Nam quis libero sed neque dapibus nisi.",
-          "author": "Author",
-          "logoAltText": "Logo alt",
+          "body": "*Dr. Christina Madison is a public health expert and healthcare media contributor located in Las Vegas, Nevada. A former president of the Nevada Public Health Association, Dr. Madison currently works as an associate professor of pharmacy practice at Roseman University of Health Sciences and is the CEO of the Public Health Pharmacist, a public health consulting firm.*\n\n*Dr. **Madison** shares her knowledge on COVID risk with the media as well as state and local officials in order to impact COVID-related public health messaging, policy, and legislation. She is often approached by high-profile media outlets due to her clinical public health and infectious disease expertise and social media presence, and has been featured in over 50 on air TV appearances since the beginning of the pandemic.*\n\n\n\n## What is the challenge?\n\nDr. Madison sees herself as a conduit for conveying local COVID information to public health workers, government officials, and the public. In her attempts to explain COVID to people without backgrounds in epidemiology, Dr. Madison often faces the challenge of finding accessible COVID data and models that are not overly technical, convoluted, or inconsistent.\n\n> Dr. Madison needs a resource for localized, data-driven COVID information that is evidence-based, county-specific, and digestible...\n\nTo combat widespread misinformation, Dr. Madison needs a resource for localized, data-driven COVID information that is evidence-based, county-specific, and digestible for both the general public as well as for local leaders that are in charge of COVID policies and COVID response planning.\n\n## How is Dr. Madison responding to COVID? \n\nDr. Madison was excited to discover Covid Act Now (CAN), because its COVID resources are accessible and digestible to a broad audience. With the help of CAN’s easy-to-understand map and graphics, Dr. Madison now has a powerful communication tool that she can use not only to convey critical information about the local COVID situation to concerned citizens, but also to impact and influence the public health messaging and policies of public health workers. \n\nShe has used CAN in multiple presentations including her work with the Pacific AIDS Education and Training Center HIV Learning Network (HIVLN), a free telehealth HIV mentoring, training, and consulting program for clinical care programs and clinicians across AZ, CA, HI, and NV. \n\n[EMBED TWEET}\n\nDr. Madison has also found these tools particularly useful during her Twitter and Instagram engagements, as well as during her air-time on local news stations like Fox News 5 Nevada where she used CAN’s warning system to discuss COVID spread across Nevada.",
+          "logoUrl": "/images_cms/the-public-health-pharmacist-logo.png",
+          "summary": "Here’s how a public health expert uses our warning system and content to promote clear information about COVID.",
+          "author": "Amanda Fassler",
+          "logoAltText": "The Public Health Pharmacist",
           "header": "Dr. Christina Madison, MPH, Public Health Expert in Las Vegas, Nevada",
           "caseStudyId": "dr-christina-madison",
-          "tags": [
-            "api",
-            "embed"
-          ],
-          "shortTitle": "Dr. Christina Madison"
+          "tags": [],
+          "shortTitle": "Dr. Christina Madison MPH"
         }
       ]
+    },
+    {
+      "header": "Department of Health",
+      "categoryId": "department-of-health"
+    },
+    {
+      "header": "Non-Profit",
+      "categoryId": "non-profit"
+    },
+    {
+      "header": "Commercial",
+      "categoryId": "commercial"
+    },
+    {
+      "header": "Policy Maker",
+      "categoryId": "policy-maker"
     }
   ]
 }
