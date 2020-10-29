@@ -16,7 +16,7 @@ export const BannerSection = styled.div`
   justify-content: center;
 
   &:first-child {
-    background-color: #fafafa;
+    background-color: ${COLOR_MAP.LIGHTGRAY_BG};
     flex-direction: column;
   }
 `;

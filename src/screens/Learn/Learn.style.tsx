@@ -61,8 +61,8 @@ export const BodyCopyStyles = css`
 `;
 
 const BlockquoteStyles = css`
-  background-color: #fafafa;
-  padding: 1.125rem;
+  background-color: ${COLOR_MAP.LIGHTGRAY_BG};
+  padding: ${theme.spacing(2)}px;
   display: inline-block;
   margin: 0.5rem 0;
   width: 100%;

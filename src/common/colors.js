@@ -38,6 +38,7 @@ export const COLOR_MAP = {
   GRAY_ICON: '#bdbdbd',
   PURPLE: '#5900EA',
   LIGHTGRAY: '#f2f2f2',
+  LIGHTGRAY_BG: '#fafafa',
 };
 
 export const LEVEL_COLOR = {
