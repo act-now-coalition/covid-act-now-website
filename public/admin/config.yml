@@ -301,10 +301,17 @@ collections:
                       hint: Short title for the case studies landing page,
                     }
                   - {
-                      label: URL,
-                      name: url,
+                      label: Author,
+                      name: author,
+                      minimal: true,
+                      widget: markdown,
+                      hint: 'Name of the author of the case study',
+                    }
+                  - {
+                      label: Case Study ID,
+                      name: caseStudyId,
                       widget: string,
-                      hint: 'No spaces, separated by dashes (ex: ibm-melanie-curry)',
+                      hint: 'Added to the URL, formatted with no spaces, separated by dashes (ex: ibm-melanie-curry)',
                     }
                   - {
                       label: Logo,
@@ -330,11 +337,4 @@ collections:
                       name: tags,
                       widget: list,
                       hint: 'Optional tags for the case study. Separate with commas. (ex: api, embed, etc)',
-                    }
-                  - {
-                      label: Author,
-                      name: author,
-                      minimal: true,
-                      widget: markdown,
-                      hint: 'Name of the author of the case study',
                     }

@@ -5,12 +5,12 @@ type Markdown = string;
 export interface CaseStudy {
   header: string;
   shortTitle: string;
-  url: string;
+  author: Markdown;
+  caseStudyId: string;
   logoUrl: string;
   summary: Markdown;
   body: Markdown;
   tags: string[];
-  author: Markdown;
 }
 
 export interface CaseStudyCategory {
