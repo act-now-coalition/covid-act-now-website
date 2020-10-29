@@ -1,6 +1,8 @@
+import { chain } from 'lodash';
 import faq from './learn-faq.json';
 import glossary from './learn-glossary.json';
 import landing from './learn-landing.json';
+import caseStudies from './learn-case-studies.json';
 import { sanitizeID } from './utils';
 
 type Markdown = string;
@@ -103,3 +105,40 @@ export interface LandingContent {
 }
 
 export const landingPageContent = landing as LandingContent;
+
+/**
+ * Case Studies
+ */
+export interface CaseStudy {
+  header: string;
+  shortTitle: string;
+  author: Markdown;
+  caseStudyId: string;
+  logoUrl: string;
+  logoAltText: string;
+  summary: Markdown;
+  body: Markdown;
+  tags: string[];
+}
+
+export interface CaseStudyCategory {
+  header: string;
+  categoryId: string;
+  caseStudies: CaseStudy[];
+}
+
+export interface CaseStudiesContent {
+  header: string;
+  intro: Markdown;
+  categories: CaseStudyCategory[];
+}
+
+// Case studies indexed by caseStudyId for easier access on the
+// individual case study route.
+export const caseStudiesById = chain(caseStudies.categories)
+  .map(category => category.caseStudies)
+  .flatten()
+  .keyBy('caseStudyId')
+  .value();
+
+export const caseStudiesContent = caseStudies as CaseStudiesContent;
