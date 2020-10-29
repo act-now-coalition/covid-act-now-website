@@ -48,7 +48,7 @@ const CountdownContent = (props: {
 
   return (
     <Fragment>
-      <FlagIcon src={flagIconPath} />
+      <FlagIcon src={flagIconPath} alt="American flag" />
       <Container>
         <BannerSection>
           <CountdownWrapper>
