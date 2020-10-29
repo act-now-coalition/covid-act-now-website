@@ -69,3 +69,11 @@ export const BannerContainer = styled.div`
     max-width: 710px;
   }
 `;
+
+export const ElectionCountdownContainer = styled.div`
+  margin: 1rem auto 0;
+
+  @media (min-width: ${mobileBreakpoint}) {
+    margin-top: 2rem;
+  }
+`;
