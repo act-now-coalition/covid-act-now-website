@@ -15,13 +15,6 @@ export const BannerSection = styled.div`
   align-items: center;
   justify-content: center;
 
-  a {
-    color: ${COLOR_MAP.BLUE};
-    text-decoration: none;
-    margin: 1.25rem 0.75rem;
-    font-weight: 500;
-  }
-
   &:first-child {
     background-color: #fafafa;
     flex-direction: column;
@@ -66,4 +59,13 @@ export const FlagIcon = styled.img`
   display: flex;
   margin: auto;
   margin-bottom: -1rem;
+  border-radius: 2px;
+  width: 60px;
+`;
+
+export const StyledLink = styled.a`
+  color: ${COLOR_MAP.BLUE};
+  text-decoration: none;
+  margin: 1.25rem 0.75rem;
+  font-weight: 500;
 `;

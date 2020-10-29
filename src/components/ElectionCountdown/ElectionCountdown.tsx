@@ -9,8 +9,9 @@ import {
   SubCopy,
   BannerSection,
   FlagIcon,
+  StyledLink,
 } from './ElectionCountdown.style';
-import ExternalLink from 'components/ExternalLink';
+import { trackVoteClick } from 'components/Analytics';
 
 const CountdownContent = (props: {
   days: number;
@@ -38,7 +39,13 @@ const CountdownContent = (props: {
     },
   ];
 
-  const flagIconPath = '/images/misc/american_flag_icon.png';
+  const flagIconPath = 'images/misc/flag_of_the_united_states.svg';
+
+  const linkProps = {
+    target: '_blank',
+    rel: 'noopener noreferrer',
+    onClick: () => trackVoteClick('election-countdown'),
+  };
 
   return (
     <Fragment>
@@ -47,7 +54,7 @@ const CountdownContent = (props: {
         <BannerSection>
           <CountdownWrapper>
             {countdownSections.map(section => (
-              <CountSection>
+              <CountSection key={section.measure}>
                 <Count>{section.amount}</Count>
                 <Measure>{section.measure}</Measure>
               </CountSection>
@@ -56,12 +63,18 @@ const CountdownContent = (props: {
           <SubCopy>Until election day! Please double check:</SubCopy>
         </BannerSection>
         <BannerSection>
-          <ExternalLink href="https://www.vote.org/absentee-ballot-deadlines/">
+          <StyledLink
+            {...linkProps}
+            href="https://www.vote.org/absentee-ballot-deadlines/"
+          >
             Mail-in deadlines
-          </ExternalLink>
-          <ExternalLink href="https://www.vote.org/early-voting-calendar/">
+          </StyledLink>
+          <StyledLink
+            {...linkProps}
+            href="https://www.vote.org/early-voting-calendar/"
+          >
             Early voting dates
-          </ExternalLink>
+          </StyledLink>
         </BannerSection>
       </Container>
     </Fragment>
