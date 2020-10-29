@@ -7,8 +7,8 @@ import {
   Content,
   Header,
   Subheader,
+  CloseIcon,
 } from 'components/Compare/ModalFaq.style';
-import CloseIcon from '@material-ui/icons/Close';
 
 // Locks scroll behind modal:
 const BodyScrollLock = createGlobalStyle`

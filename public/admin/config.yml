@@ -255,3 +255,93 @@ collections:
         file: src/cms-content/learn/footer.json
         fields:
           - { label: Body, name: body, widget: markdown, default: true }
+      - name: Case Studies
+        file: 'src/cms-content/learn/case-studies.json'
+        label: Case Studies
+        fields:
+          - label: Header
+            name: header
+            widget: text
+            hint: Header for the case studies landing page
+          - label: Intro
+            name: intro
+            widget: markdown
+            hint: Introduction for the case studies landing page
+          - label: Categories
+            name: categories
+            widget: list
+            fields:
+              - {
+                  label: Category Name,
+                  name: header,
+                  widget: text,
+                  hint: Name of the category,
+                }
+              - {
+                  label: Category ID,
+                  name: categoryId,
+                  widget: string,
+                  hint: 'All lowercase, divided by dashes if multi-word (ex: public-health)',
+                }
+              - label: Case Studies
+                name: caseStudies
+                hint: Case studies for the category
+                widget: list
+                fields:
+                  - {
+                      label: Header,
+                      name: header,
+                      widget: text,
+                      hint: Title for the case study page,
+                    }
+                  - {
+                      label: Short Title,
+                      name: shortTitle,
+                      widget: text,
+                      hint: Short title for the case studies landing page,
+                    }
+                  - {
+                      label: Author,
+                      name: author,
+                      minimal: true,
+                      widget: markdown,
+                      hint: 'Name of the author of the case study',
+                    }
+                  - {
+                      label: Case Study ID,
+                      name: caseStudyId,
+                      widget: string,
+                      hint: 'Added to the URL, formatted with no spaces, separated by dashes (ex: ibm-melanie-curry)',
+                    }
+                  - {
+                      label: Logo,
+                      name: logoUrl,
+                      widget: image,
+                      hint: Logo for the case studies page (400x280),
+                      allow_multiple: false,
+                    }
+                  - {
+                      label: Logo Alt Text,
+                      name: logoAltText,
+                      widget: string,
+                      hint: Alt-text for the logo,
+                    }
+                  - {
+                      label: Summary,
+                      name: summary,
+                      widget: markdown,
+                      hint: Summary to show on the case studies landing page,
+                    }
+                  - {
+                      label: Body,
+                      name: body,
+                      widget: markdown,
+                      hint: Full content of the case study,
+                    }
+                  - {
+                      label: Tags,
+                      name: tags,
+                      widget: list,
+                      required: false,
+                      hint: 'Optional tags for the case study. Separate with commas. (ex: api, embed, etc)',
+                    }

@@ -1,7 +1,7 @@
-import moment from 'moment';
 import { Projections } from 'common/models/Projections';
 import { findLocationForFips, findStateByFips } from 'common/locations';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
+import { formatMetatagDate } from 'common/utils';
 
 function getLocationName(fipsCode: string) {
   const location = findLocationForFips(fipsCode);
@@ -15,13 +15,13 @@ function getLocationName(fipsCode: string) {
 
 export function getPageTitle(projections: Projections): string {
   const locationName = getLocationName(projections.fips);
-  return `${locationName} - America’s COVID Warning System`;
+  return `${locationName} - COVID data and risk levels`;
 }
 
 export function getPageDescription(projections: Projections): string {
-  const dateToday = moment().format('MMM DD, YYYY');
+  const date = formatMetatagDate();
   const alarmLevel = projections.getAlarmLevel();
   const levelInfo = LOCATION_SUMMARY_LEVELS[alarmLevel];
   const locationName = getLocationName(projections.fips);
-  return `${dateToday} Risk Level: ${levelInfo.detail(locationName)}`;
+  return `${date} COVID RISK LEVEL: ${levelInfo.detail(locationName)}`;
 }

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 import { Typography } from '@material-ui/core';
+import MuiCloseIcon from '@material-ui/icons/Close';
 
 export const Wrapper = styled.div`
   background-color: white;
@@ -62,4 +63,8 @@ export const Answer = styled(Typography)`
   @media (min-width: 600px) {
     font-size: 1rem;
   }
+`;
+
+export const CloseIcon = styled(MuiCloseIcon)`
+  color: ${COLOR_MAP.GRAY_ICON};
 `;
