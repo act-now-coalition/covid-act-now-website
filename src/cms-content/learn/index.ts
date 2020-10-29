@@ -104,4 +104,28 @@ export interface LandingContent {
 
 export const landingPageContent = landing as LandingContent;
 
-// TODO: Import the Case Studies content and export it from here
+/**
+ * Case Studies
+ */
+export interface CaseStudy {
+  header: string;
+  shortTitle: string;
+  author: Markdown;
+  caseStudyId: string;
+  logoUrl: string;
+  summary: Markdown;
+  body: Markdown;
+  tags: string[];
+}
+
+export interface CaseStudyCategory {
+  header: string;
+  categoryId: string;
+  caseStudies: CaseStudy[];
+}
+
+export interface CaseStudiesContent {
+  header: string;
+  intro: Markdown;
+  categories: CaseStudyCategory[];
+}
