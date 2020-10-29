@@ -3,7 +3,7 @@ describe('/state/:id', () => {
     cy.visit('/us/ny');
     cy.title().should(
       'eq',
-      'New York (NY) - America’s COVID Warning System - Covid Act Now',
+      'New York (NY) - COVID data and risk levels - Covid Act Now',
     );
     cy.get('head meta[name="description"]')
       .should('have.attr', 'content')

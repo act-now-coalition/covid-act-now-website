@@ -1,10 +1,10 @@
 import React from 'react';
 import { AccordionDetails, AccordionProps } from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {
   StyledMuiAccordion,
   StyledAccordionSummary,
   MarkdownBody,
+  ExpandIcon,
 } from './Accordion.style';
 
 export interface StyledAccordionProps extends Omit<AccordionProps, 'children'> {
@@ -19,7 +19,7 @@ const StyledAccordion: React.FC<StyledAccordionProps> = ({
 }) => {
   return (
     <StyledMuiAccordion {...otherProps}>
-      <StyledAccordionSummary expandIcon={<ExpandMoreIcon />}>
+      <StyledAccordionSummary expandIcon={<ExpandIcon />}>
         {summaryText}
       </StyledAccordionSummary>
       <AccordionDetails>

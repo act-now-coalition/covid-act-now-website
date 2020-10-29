@@ -96,7 +96,7 @@ export const ArrowContainer = styled.div<{
   $arrowColorNotSelected: string;
   $isModal?: boolean;
 }>`
-  color: #bdbdbd;
+  color: ${COLOR_MAP.GRAY_ICON};
   font-family: Roboto;
   font-size: 0.875rem;
   transform: translate(-0.25rem, 0.15rem);

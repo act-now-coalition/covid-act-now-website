@@ -17,14 +17,21 @@ import {
   Content,
   SearchBarThermometerWrapper,
   SectionWrapper,
-  BannerContainer,
   Section,
+  ElectionCountdownContainer,
 } from './HomePage.style';
 import { SelectorWrapper } from 'components/Header/HomePageHeader.style';
 import CompareMain from 'components/Compare/CompareMain';
-import { DonationBanner } from 'components/Banner';
 import Explore from 'components/Explore';
+import { formatMetatagDate } from 'common/utils';
 import { getRandomStateFipsList } from './utils';
+import ElectionCountdown from 'components/ElectionCountdown';
+
+function getPageDescription() {
+  const date = formatMetatagDate();
+  return `${date} View new COVID cases, deaths, hospitalizations, and other important metrics to understand where the US stands against Coronavirus. 50 States. 3000+ Counties. Click the map to dive in.
+`;
+}
 
 export default function HomePage() {
   const shareBlockRef = useRef(null);
@@ -72,12 +79,12 @@ export default function HomePage() {
       <EnsureSharingIdInUrl />
       <AppMetaTags
         canonicalUrl="/"
-        pageTitle="Covid Act Now - America’s COVID Warning System"
-        pageDescription="Real-time modeling and metrics to understand where we stand against COVID. 50 states. 3,000+ counties. Click the map to dive in"
+        pageTitle="Realtime US COVID Risk Map by State and County"
+        pageDescription={getPageDescription()}
       />
-      <BannerContainer>
-        <DonationBanner />
-      </BannerContainer>
+      <ElectionCountdownContainer>
+        <ElectionCountdown />
+      </ElectionCountdownContainer>
       <HomePageHeader
         indicatorsLinkOnClick={() => scrollTo(indicatorsRef.current)}
       />

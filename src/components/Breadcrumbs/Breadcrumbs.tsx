@@ -1,5 +1,4 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 import * as Style from './Breadcrumbs.style';
 
 export interface BreadcrumbItem {
@@ -7,24 +6,14 @@ export interface BreadcrumbItem {
   label: string;
 }
 
-const Breadcrumbs: React.FC<{ pathItems: BreadcrumbItem[] }> = ({
-  pathItems,
-}) => {
-  const { pathname } = useLocation();
+const Breadcrumbs: React.FC<{ item: BreadcrumbItem }> = ({ item }) => {
   return (
-    <Style.Breadcrumbs>
-      {pathItems.map(({ to, label }) => (
-        <Style.BreadcrumbLink
-          to={to}
-          key={to}
-          activeClassName="active"
-          isActive={() => pathname === to}
-        >
-          {label}
-        </Style.BreadcrumbLink>
-      ))}
-    </Style.Breadcrumbs>
+    <nav aria-label="breadcrumbs">
+      <Style.BreadcrumbLink to={item.to}>
+        <Style.ArrowBackIcon fontSize="small" aria-hidden />
+        {item.label}
+      </Style.BreadcrumbLink>
+    </nav>
   );
 };
-
 export default Breadcrumbs;

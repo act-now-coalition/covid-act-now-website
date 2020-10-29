@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import MuiButton from '@material-ui/core/Button';
 import { COLOR_MAP } from 'common/colors';
 import { Link } from 'react-router-dom';
+import theme from 'assets/theme';
 
 export const StyledLink = styled(Link)`
   text-decoration: none;
@@ -12,6 +13,8 @@ const SharedButtonStyles = css`
   text-transform: none;
   text-decoration: none;
   color: inherit;
+  padding-left: ${1.5 * theme.spacing(1)}px;
+  padding-right: ${1.5 * theme.spacing(1)}px;
 `;
 
 export const GreenButton = styled(MuiButton)`
