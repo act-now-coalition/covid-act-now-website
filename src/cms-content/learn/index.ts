@@ -103,3 +103,30 @@ export interface LandingContent {
 }
 
 export const landingPageContent = landing as LandingContent;
+
+/**
+ * Case Studies
+ */
+export interface CaseStudy {
+  header: string;
+  shortTitle: string;
+  author: Markdown;
+  caseStudyId: string;
+  logoUrl: string;
+  logoAltText: string;
+  summary: Markdown;
+  body: Markdown;
+  tags: string[];
+}
+
+export interface CaseStudyCategory {
+  header: string;
+  categoryId: string;
+  caseStudies: CaseStudy[];
+}
+
+export interface CaseStudiesContent {
+  header: string;
+  intro: Markdown;
+  categories: CaseStudyCategory[];
+}
