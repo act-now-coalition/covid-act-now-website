@@ -12,7 +12,6 @@ import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import { StyledAccordion } from 'components/SharedComponents';
 import { glossaryContent, Term } from 'cms-content/learn';
 import Breadcrumbs from 'components/Breadcrumbs';
-import { BreadcrumbItem } from 'components/Breadcrumbs';
 import { Anchor } from 'components/TableOfContents';
 import { formatMetatagDate } from 'common/utils';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
@@ -30,11 +29,6 @@ const Glossary = () => {
 
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const { hash } = useLocation();
-
-  const breadcrumbItems: BreadcrumbItem[] = [
-    { to: '/learn', label: 'Learn' },
-    { to: '/glossary', label: 'Glossary' },
-  ];
 
   function onChangeExpandedTerm(termId: string, expanded: boolean) {
     if (expanded) {
@@ -65,7 +59,7 @@ const Glossary = () => {
       />
       <PageContent>
         <BreadcrumbsContainer>
-          <Breadcrumbs pathItems={breadcrumbItems} />
+          <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>
         <PageHeader>{header}</PageHeader>
         <PageIntro source={intro} />

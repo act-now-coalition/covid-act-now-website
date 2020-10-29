@@ -9,10 +9,9 @@ import {
 import Section from './Section';
 import { faqContent, FaqSection } from 'cms-content/learn';
 import TableOfContents, { Item } from 'components/TableOfContents';
-import Breadcrumbs from 'components/Breadcrumbs';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import * as Style from './Faq.style';
-import { BreadcrumbItem } from 'components/Breadcrumbs';
+import Breadcrumbs from 'components/Breadcrumbs';
 import { formatMetatagDate } from 'common/utils';
 
 const Faq = () => {
@@ -32,11 +31,6 @@ const Faq = () => {
     }));
   }
 
-  const breadcrumbItems: BreadcrumbItem[] = [
-    { to: '/learn', label: 'Learn' },
-    { to: '/faq', label: 'FAQ' },
-  ];
-
   return (
     <PageContainer>
       <AppMetaTags
@@ -46,7 +40,7 @@ const Faq = () => {
       />
       <PageContent>
         <BreadcrumbsContainer>
-          <Breadcrumbs pathItems={breadcrumbItems} />
+          <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>
         <PageHeader>{header}</PageHeader>
         <PageIntro source={intro} />
