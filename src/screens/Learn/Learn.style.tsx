@@ -8,18 +8,6 @@ import { materialSMBreakpoint, mobileBreakpoint } from 'assets/theme/sizes';
   Styles that are shared between Learn pages:
 */
 
-export const BodyCopyStyles = css`
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
-  line-height: 1.4;
-  letter-spacing: 1;
-
-  p {
-    &:not(:last-child) {
-      margin-bottom: 1rem;
-    }
-  }
-`;
-
 export const PageContainer = styled.div`
   max-width: 800px;
   width: 100%;
@@ -45,7 +33,50 @@ export const PageHeader = styled.h1`
   }
 `;
 
-export const PageIntro = styled(MarkdownContent)`
+export const SectionHeader = styled.h2`
+  font-weight: 900;
+  font-size: 1.5rem;
+  line-height: 1.25;
+  margin: 1.25rem 0;
+`;
+
+export const BreadcrumbsContainer = styled.div`
+  margin-bottom: ${theme.spacing(4)}px;
+`;
+
+/*
+  Markdown styles used throughout Learn
+*/
+
+export const BodyCopyStyles = css`
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+  line-height: 1.4;
+  letter-spacing: 1;
+
+  p {
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
+`;
+
+const BlockquoteStyles = css`
+  background-color: #fafafa;
+  padding: 1.125rem;
+  display: inline-block;
+  margin: 0.5rem 0;
+  width: 100%;
+
+  p {
+    color: ${COLOR_MAP.GREEN.BASE};
+    font-size: 1.125rem;
+    font-weight: 900;
+    line-height: 1.6;
+    margin: 0;
+  }
+`;
+
+export const PageIntroMarkdown = styled(MarkdownContent)`
   p,
   ul,
   li {
@@ -58,21 +89,14 @@ export const PageIntro = styled(MarkdownContent)`
   }
 `;
 
-export const SectionHeader = styled.h2`
-  font-weight: 900;
-  font-size: 1.5rem;
-  line-height: 1.25;
-  margin: 1.25rem 0;
-`;
-
-export const MarkdownBodyCopy = styled(MarkdownContent)`
+export const BodyCopyMarkdown = styled(MarkdownContent)`
   p,
   ul,
   li {
     ${BodyCopyStyles}
   }
-`;
 
-export const BreadcrumbsContainer = styled.div`
-  margin-bottom: ${theme.spacing(4)}px;
+  blockquote {
+    ${BlockquoteStyles}
+  }
 `;

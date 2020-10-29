@@ -4,7 +4,7 @@ import {
   PageHeader,
   PageContent,
   BreadcrumbsContainer,
-  PageIntro,
+  PageIntroMarkdown,
 } from '../Learn.style';
 import Section from './Section';
 import { faqContent, FaqSection } from 'cms-content/learn';
@@ -43,7 +43,7 @@ const Faq = () => {
           <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>
         <PageHeader>{header}</PageHeader>
-        <PageIntro source={intro} />
+        <PageIntroMarkdown source={intro} />
         <Style.MobileOnly>
           <TableOfContents items={getSectionItems(sections)} />
         </Style.MobileOnly>

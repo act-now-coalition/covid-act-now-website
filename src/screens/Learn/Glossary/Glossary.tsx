@@ -6,7 +6,7 @@ import {
   PageHeader,
   PageContent,
   BreadcrumbsContainer,
-  PageIntro,
+  PageIntroMarkdown,
 } from '../Learn.style';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import { StyledAccordion } from 'components/SharedComponents';
@@ -62,7 +62,7 @@ const Glossary = () => {
           <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>
         <PageHeader>{header}</PageHeader>
-        <PageIntro source={intro} />
+        <PageIntroMarkdown source={intro} />
         {terms.map((item: Term) => (
           <Fragment key={item.termId}>
             <Anchor id={item.termId} />

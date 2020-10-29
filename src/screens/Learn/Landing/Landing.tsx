@@ -4,8 +4,8 @@ import {
   PageContent,
   PageHeader,
   SectionHeader,
-  MarkdownBodyCopy,
-  PageIntro,
+  BodyCopyMarkdown,
+  PageIntroMarkdown,
 } from '../Learn.style';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import SectionButton, { ButtonTheme } from './SectionButton';
@@ -45,7 +45,7 @@ const Landing = () => {
       />
       <PageContent>
         <PageHeader>{header}</PageHeader>
-        <PageIntro source={intro} />
+        <PageIntroMarkdown source={intro} />
         {/* <TableOfContents items={getSectionItems(sections)} /> */}
         {sections.map((section: LandingSection) => (
           <Fragment key={section.sectionId}>
@@ -53,7 +53,7 @@ const Landing = () => {
               <Anchor id={section.sectionId} />
               {section.sectionTitle}
             </SectionHeader>
-            <MarkdownBodyCopy source={section.description} />
+            <BodyCopyMarkdown source={section.description} />
             <SectionButton
               cta={section.buttonCta}
               redirect={section.buttonRedirect}
