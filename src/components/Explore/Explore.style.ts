@@ -282,7 +282,7 @@ export const TooltipSubtitle = styled.div`
   line-height: 12px;
   letter-spacing: 0.03em;
   text-transform: uppercase;
-  color: #bdbdbd;
+  color: ${COLOR_MAP.GRAY_ICON};
 `;
 
 export const TooltipMetric = styled.div`

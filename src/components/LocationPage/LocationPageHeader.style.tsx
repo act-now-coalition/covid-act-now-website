@@ -278,7 +278,7 @@ export const SectionHalf = styled(Box)`
   }
 
   svg {
-    color: #bdbdbd;
+    color: ${COLOR_MAP.GRAY_ICON};
   }
 
   @media (min-width: 600px) {
