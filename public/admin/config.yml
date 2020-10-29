@@ -321,6 +321,12 @@ collections:
                       allow_multiple: false,
                     }
                   - {
+                      label: Logo Alt Text,
+                      name: logoAltText,
+                      widget: string,
+                      hint: Alt-text for the logo,
+                    }
+                  - {
                       label: Summary,
                       name: summary,
                       widget: markdown,

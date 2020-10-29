@@ -113,6 +113,7 @@ export interface CaseStudy {
   author: Markdown;
   caseStudyId: string;
   logoUrl: string;
+  logoAltText: string;
   summary: Markdown;
   body: Markdown;
   tags: string[];
