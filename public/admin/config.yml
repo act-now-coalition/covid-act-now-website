@@ -334,6 +334,7 @@ collections:
                   - {
                       label: Author,
                       name: author,
+                      minimal: true,
                       widget: markdown,
                       hint: 'Name of the author (potentially a link to their online profile)',
                     }
