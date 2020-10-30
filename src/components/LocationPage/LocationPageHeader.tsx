@@ -70,7 +70,7 @@ const LocationPageHeading = (props: { projections: Projections }) => {
       </a>
     </>
   ) : (
-    <strong>{props.projections.stateName}</strong>
+    <strong>{props.projections.locationName}</strong>
   );
 
   return <span>{displayName}</span>;
@@ -97,7 +97,7 @@ const LocationPageHeader = (props: {
   const headerBottomMargin = !hasStats ? 0 : 0;
 
   const locationName =
-    props.projections.countyName || props.projections.stateName;
+    props.projections.countyName || props.projections.locationName;
 
   const alarmLevel = props.projections.getAlarmLevel();
 

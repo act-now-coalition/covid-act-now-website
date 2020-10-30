@@ -22,12 +22,14 @@ export const AGGREGATED_LOCATIONS: Location[] = [
     state_fips_code: '00',
     full_fips_code: '00001',
     state: 'USA',
+    level: 'state',
     population: 331486822,
     state_code: 'USA',
   },
   {
     state_fips_code: '00',
     full_fips_code: '00002',
+    level: 'state',
     state: 'Native American Majority Counties',
     population: 314704,
     state_code: 'NAMC',
@@ -52,7 +54,9 @@ export interface State {
   state: string;
   state_url_name: string;
   state_fips_code: string;
+  full_fips_code: string;
   population: number;
+  level: string;
 }
 
 export interface County {
@@ -63,26 +67,47 @@ export interface County {
   state_code: string;
   full_fips_code: string;
   cities: string[];
+  level: string;
   population: number;
 }
 
+export interface CBSA {
+  location_id: string;
+  location_name: string;
+  location_url_name: string;
+  level: string;
+  state: string;
+  state_code: string;
+  state_fips_code: string;
+  full_fips_code: string;
+  population: number;
+  county_fips_codes: string[];
+}
+
 export interface Location {
+  location_id?: string;
+  location_name?: string;
+  location_url_name?: string;
   county?: string;
   county_url_name?: string;
   county_fips_code?: string;
   state_fips_code: string;
-  full_fips_code?: string;
+  full_fips_code: string;
+  county_fips_codes?: string[];
   cities?: string[];
   population: number;
   state_code: string;
   state: string;
   state_url_name?: string;
+
+  level: string;
 }
 
 export function getLocationNames(): Location[] {
   const locations: Location[] = US_STATE_DATASET.state_dataset.map(state => {
     return {
       ...state,
+      level: 'state',
       full_fips_code: state.state_fips_code,
     };
   });
@@ -93,9 +118,13 @@ export function getLocationNames(): Location[] {
     }
     locations.push(
       ...value.county_dataset.map(county => {
-        return { ...county, state: county.state_code };
+        return { ...county, state: county.state_code, level: 'county' };
       }),
     );
+  });
+
+  each(US_STATE_DATASET.cbsa_dataset, (value, key) => {
+    locations.push(value);
   });
 
   return locations;
@@ -121,9 +150,7 @@ export function findCountyByFips(fips: string) {
 }
 
 function _findStateByFips(fips: string): State | undefined {
-  return US_STATE_DATASET.state_dataset.find(
-    state => state.state_fips_code === fips,
-  );
+  return STATES.find(state => state.state_fips_code === fips);
 }
 
 export function isStateFips(fips: string): boolean {
@@ -198,11 +225,10 @@ export function getCountyMsaCode(fips: string): string | undefined {
 }
 
 export function findLocationForFips(fips: string): Location {
-  return fips.startsWith('00')
-    ? AGGREGATED_LOCATIONS.find(l => l.full_fips_code === fips)
-    : isStateFips(fips)
-    ? findStateByFips(fips)
-    : findCountyByFips(fips);
+  if (fips.startsWith('00')) {
+    return AGGREGATED_LOCATIONS.find(l => l.full_fips_code === fips)!;
+  }
+  return ALL_LOCATIONS.find(location => location.full_fips_code === fips)!;
 }
 
 export function getColleges(fips: string): CollegeData[] {
@@ -218,9 +244,15 @@ export function getStateName(stateCode: string): string | undefined {
 }
 
 const ALL_LOCATIONS = getLocationNames();
-const locationsByType = partition(ALL_LOCATIONS, isCounty);
-const COUNTIES = locationsByType[0] as County[];
-export const STATES = locationsByType[1] as State[];
+const COUNTIES = ALL_LOCATIONS.filter(location =>
+  isCounty(location),
+) as County[];
+const CBSAS = ALL_LOCATIONS.filter(
+  location => location.level === 'cbsa',
+) as CBSA[];
+export const STATES = ALL_LOCATIONS.filter(
+  location => location.level === 'state',
+) as State[];
 
 export function getStateByUrlName(stateUrlName: string): State | undefined {
   return STATES.find(
@@ -241,14 +273,31 @@ export function getCountyByUrlName(
   );
 }
 
-export function getCanonicalUrl(fipsCode: string) {
-  const { state_fips_code, county, county_url_name } = findLocationForFips(
-    fipsCode,
+export function getCbsaByUrlName(cbsaUrlName: string): CBSA | undefined {
+  return CBSAS.find(
+    cbsa => toLower(cbsa.location_url_name) === toLower(cbsaUrlName),
   );
+}
+
+export function getCanonicalUrl(fipsCode: string) {
+  const {
+    level,
+    state_fips_code,
+    county_url_name,
+    location_url_name,
+  } = findLocationForFips(fipsCode);
   const { state_url_name } = findStateByFips(state_fips_code);
-  return county
-    ? `us/${state_url_name}/county/${county_url_name}`
-    : `us/${state_url_name}`;
+
+  switch (level) {
+    case 'county':
+      return `us/${state_url_name}/county/${county_url_name}`;
+    case 'state':
+      return `us/${state_url_name}`;
+    case 'cbsa':
+      return `us/${state_url_name}/cbsa/${location_url_name}`;
+    default:
+      throw Error('');
+  }
 }
 
 export function isCounty(location: Location) {
@@ -257,6 +306,9 @@ export function isCounty(location: Location) {
 
 export function isState(location: Location) {
   return !isCounty(location);
+}
+export function isCbsa(location: Location) {
+  return location.level === 'cbsa';
 }
 
 export function belongsToState(location: Location, stateFips: string) {

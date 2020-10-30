@@ -30,9 +30,10 @@ export interface SnapshotVersion {
 export class Api {
   readonly snapshotUrl: string;
   constructor(dataUrl?: string | null) {
-    this.snapshotUrl = dataUrl || SNAPSHOT_URL;
-    // trim any trailing /
-    this.snapshotUrl = this.snapshotUrl.replace(/\/$/, '');
+    // this.snapshotUrl = dataUrl || SNAPSHOT_URL;
+    // // trim any trailing /
+    // this.snapshotUrl = this.snapshotUrl.replace(/\/$/, '');
+    this.snapshotUrl = 'http://localhost:8887';
   }
 
   /**
@@ -62,6 +63,10 @@ export class Api {
     } else if (region.isCounty()) {
       return await this.fetchApiJson<RegionSummaryWithTimeseries>(
         `county/${region.countyFipsId}.timeseries.json`,
+      );
+    } else if (region.isCbsa()) {
+      return await this.fetchApiJson<RegionSummaryWithTimeseries>(
+        `cbsa/${region.toString()}.timeseries.json`,
       );
     } else {
       fail('Unknown region type: ' + region);

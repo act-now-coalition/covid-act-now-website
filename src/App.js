@@ -72,6 +72,11 @@ export default function App() {
               />
               <Route
                 exact
+                path="/us/:stateId/cbsa/:cbsaId"
+                component={LocationPage}
+              />
+              <Route
+                exact
                 path="/us/:stateId/chart/:chartId"
                 component={LocationPage}
               />

@@ -130,6 +130,7 @@ export class Projection {
   readonly locationName: string;
   readonly totalPopulation: number;
   readonly fips: string;
+  readonly locationId: string;
 
   readonly icuHeadroomInfo: ICUHeadroomInfo | null;
 
@@ -190,6 +191,7 @@ export class Projection {
     this.isCounty = parameters.isCounty;
     this.totalPopulation = summaryWithTimeseries.population;
     this.fips = summaryWithTimeseries.fips;
+    this.locationId = summaryWithTimeseries.locationId;
 
     // Set up our series data exposed via getDataset().
     this.rawDailyCases = this.actualTimeseries.map(row => row && row.newCases);

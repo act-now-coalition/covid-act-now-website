@@ -25,7 +25,6 @@ function ChartBlock(props: {
   shareButtonProps: { [key: string]: any };
   metric: Metric;
   projections: Projections;
-  stateId: string;
 }) {
   const { projections, metric, isMobile } = props;
   const projection: Projection = projections.primary;

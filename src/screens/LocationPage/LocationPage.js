@@ -13,15 +13,17 @@ import {
   getCountyByUrlName,
   getStateByUrlName,
   getCanonicalUrl,
+  getCbsaByUrlName,
 } from 'common/locations';
 
 function LocationPage() {
-  let { stateId, countyId, chartId } = useParams();
+  let { stateId, countyId, cbsaId, chartId } = useParams();
 
   const state = getStateByUrlName(stateId);
   // TODO(igor): don't mix uppercase and lowercase in here
   const stateCode = state.state_code.toUpperCase();
   const countyOption = countyId && getCountyByUrlName(stateCode, countyId);
+  const cbsaLocation = getCbsaByUrlName(cbsaId);
 
   const [mapOption, setMapOption] = useState(
     stateCode === MAP_FILTERS.DC ? MAP_FILTERS.NATIONAL : MAP_FILTERS.STATE,
@@ -33,7 +35,7 @@ function LocationPage() {
     setSelectedCounty(countyOption);
   }, [countyOption]);
 
-  const projections = useProjections(stateCode, selectedCounty);
+  const projections = useProjections(stateCode, selectedCounty, cbsaLocation);
 
   // Projections haven't loaded yet
   // If a new county has just been selected, we may not have projections

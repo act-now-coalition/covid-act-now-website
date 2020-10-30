@@ -37,7 +37,7 @@ const ExportChartImage = () => {
   const stateCode =
     (stateInfo && stateInfo?.state_code) || countyOption.state_code;
 
-  projections = useProjections(stateCode, countyOption) as any;
+  projections = useProjections(stateCode, countyOption, undefined) as any;
   if (!projections || !lastUpdated) {
     return null;
   }

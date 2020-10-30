@@ -70,10 +70,15 @@ export class Projections {
   }
 
   get locationName(): string {
-    if (this.isCounty) {
-      return `${this.countyName}, ${this.stateCode}`;
-    } else {
-      return this.stateName;
+    switch (this.level) {
+      case 'county':
+        return `${this.countyName}, ${this.stateCode}`;
+      case 'state':
+        return this.stateName;
+      case 'cbsa':
+        return this.primary.locationId;
+      default:
+        throw Error('NOPE');
     }
   }
 

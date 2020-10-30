@@ -5,7 +5,7 @@ import {
   RegionDescriptor,
 } from './RegionDescriptor';
 import { Api } from 'api';
-import { County, findCountyByFips, getStateName } from 'common/locations';
+import { CBSA, County, findCountyByFips, getStateName } from 'common/locations';
 import moment from 'moment';
 import { assert } from '.';
 import { getSnapshotUrlOverride } from './snapshots';
@@ -15,11 +15,14 @@ export function fetchProjections(
   stateId: string,
   countyInfo: any = null,
   snapshotUrl: string | null = null,
+  cbsa?: CBSA,
 ) {
   snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
   let region: RegionDescriptor;
   if (countyInfo) {
     region = RegionDescriptor.forCounty(countyInfo.full_fips_code);
+  } else if (cbsa) {
+    region = RegionDescriptor.forCbsa(cbsa.location_id);
   } else {
     region = RegionDescriptor.forState(stateId);
   }
@@ -92,16 +95,16 @@ export function fetchAllCountyProjections(snapshotUrl: string | null = null) {
   return cachedCountiesProjections[key];
 }
 
-export function useProjections(location: string, county?: County) {
+export function useProjections(location: string, county?: County, cbsa?: CBSA) {
   const [projections, setProjections] = useState<Projections>();
 
   useEffect(() => {
     async function fetchData() {
-      const projections = await fetchProjections(location, county);
+      const projections = await fetchProjections(location, county, null, cbsa);
       setProjections(projections);
     }
     fetchData();
-  }, [location, county]);
+  }, [location, county, cbsa]);
 
   return projections;
 }

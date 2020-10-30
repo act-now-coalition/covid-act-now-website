@@ -101,9 +101,9 @@ const ChartsHolder = (props: {
     isMobile,
   };
 
-  const initialFipsList = useMemo(() => {
-    return [props.projections.primary.fips];
-  }, [props.projections.primary.fips]);
+  // const initialFipsList = useMemo(() => {
+  //   return [props.projections.primary.fips];
+  // }, [props.projections.primary.fips]);
 
   const recommendationsIntro = getDynamicIntroCopy(
     projection,
@@ -115,9 +115,11 @@ const ChartsHolder = (props: {
     mainContent.recommendations,
   );
 
-  const recommendsShareUrl = getRecommendationsShareUrl(
-    props.projections.primary.fips,
-  );
+  // needs fips for this.
+  const recommendsShareUrl = '';
+  // const recommendsShareUrl = getRecommendationsShareUrl(
+  //   props.projections.primary.fips,
+  // );
 
   const alarmLevel = props.projections.getAlarmLevel();
   const recommendsShareQuote = getShareQuote(
@@ -126,8 +128,8 @@ const ChartsHolder = (props: {
   );
 
   const showRecommendations = !props.county;
-  const recommendationsFeedbackForm = `https://can386399.typeform.com/to/WSPYSGPe#source=can&id=${uuidv4()}&fips=${
-    projection.fips
+  const recommendationsFeedbackForm = `https://can386399.typeform.com/to/WSPYSGPe#source=can&id=${uuidv4()}&locationId=${
+    projection.locationId
   }`;
 
   // TODO(Chelsi): make these 2 functions less redundant?
@@ -163,12 +165,14 @@ const ChartsHolder = (props: {
               onNewUpdateClick={() => scrollTo(exploreChartRef.current)}
               isMobile={isMobile}
             />
+            {/* 
             <CompareMain
               stateName={props.projections.stateName}
               county={props.county}
               locationsViewable={6}
               stateId={props.stateId}
             />
+            */}
             <MainContentInner>
               {showRecommendations && (
                 <Recommend
@@ -193,16 +197,15 @@ const ChartsHolder = (props: {
                   chartRef={metricRefs[metric]}
                   shareButtonProps={shareButtonProps}
                   isMobile={isMobile}
-                  stateId={props.stateId}
                 />
               ))}
             </MainContentInner>
-            <MainContentInner ref={exploreChartRef}>
+            {/* <MainContentInner ref={exploreChartRef}>
               <Explore
                 initialFipsList={initialFipsList}
                 title="Cases, Deaths, and Hospitalizations"
               />
-            </MainContentInner>
+            </MainContentInner> */}
           </ChartContentWrapper>
           <div ref={shareBlockRef} id="recommendationsTest">
             <ShareModelBlock {...shareButtonProps} />

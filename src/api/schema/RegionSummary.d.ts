@@ -23,7 +23,7 @@ export type County = string | null;
 /**
  * An enumeration.
  */
-export type AggregationLevel = 'country' | 'state' | 'county';
+export type AggregationLevel = 'country' | 'state' | 'county' | 'cbsa';
 /**
  * Latitude of point within the state or county
  */
