@@ -3,6 +3,7 @@ import {
   Actuals,
   MetricsTimeseriesRow,
   Metrics,
+  AggregationLevel,
 } from 'api/schema/RegionSummaryWithTimeseries';
 
 import { lastValue } from './utils';
@@ -60,9 +61,10 @@ export function calcICUHeadroom(
   metricsTimeseries: Array<MetricsTimeseriesRow | null>,
   metrics: Metrics,
   actuals: Actuals,
+  level: AggregationLevel,
 ): ICUHeadroomInfo | null {
   // TODO(https://trello.com/c/B6Z1kW8o/): Fix Tennessee Hospitalization data.
-  if (fips.length > 2 && fips.slice(0, 2) === '47') {
+  if (level === 'county' && fips.slice(0, 2) === '47') {
     return null;
   }
 

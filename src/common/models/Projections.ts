@@ -6,6 +6,7 @@ import { LEVEL_COLOR } from 'common/colors';
 import { fail } from 'common/utils';
 import { LocationSummary, MetricSummary } from 'common/location_summaries';
 import { RegionSummaryWithTimeseries } from 'api/schema/RegionSummaryWithTimeseries';
+import { AggregationLevel } from 'api/schema/RegionSummary';
 
 /**
  * The complete set of data / metrics and related information for a given
@@ -21,6 +22,7 @@ export class Projections {
   countyName: string | null;
   primary: Projection;
   isCounty: boolean;
+  level: AggregationLevel;
 
   constructor(
     summaryWithTimeseries: RegionSummaryWithTimeseries,
@@ -32,6 +34,7 @@ export class Projections {
     this.county = null;
     this.countyName = null;
     this.isCounty = county != null;
+    this.level = summaryWithTimeseries.level;
     this.primary = new Projection(summaryWithTimeseries, {
       isCounty: this.isCounty,
     });

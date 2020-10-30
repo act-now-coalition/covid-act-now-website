@@ -206,7 +206,7 @@ export class Projection {
 
     // TODO(https://trello.com/c/B6Z1kW8o/): Fix Tennessee Hospitalization data.
     const hospitalizationsDisabled =
-      this.fips.length > 2 && this.fips.slice(0, 2) === '47';
+      this.isCounty && this.fips.slice(0, 2) === '47';
 
     this.rawHospitalizations = hospitalizationsDisabled
       ? []
@@ -238,6 +238,7 @@ export class Projection {
         metricsTimeseries,
         metrics,
         actuals,
+        summaryWithTimeseries.level,
       );
     } else {
       this.icuHeadroomInfo = null;

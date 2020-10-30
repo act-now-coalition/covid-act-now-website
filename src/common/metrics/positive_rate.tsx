@@ -78,7 +78,11 @@ function renderStatus(projections: Projections) {
   const { currentTestPositiveRate, locationName } = projections.primary;
   if (currentTestPositiveRate === null) {
     const fips = projections.fips;
-    if ((fips.length > 2 && fips.startsWith('12')) || fips.startsWith('42')) {
+
+    if (
+      (projections.isCounty && fips.startsWith('12')) ||
+      fips.startsWith('42')
+    ) {
       return (
         <Fragment>
           {PositiveTestRateMetric.extendedMetricName} is currently unavailable
