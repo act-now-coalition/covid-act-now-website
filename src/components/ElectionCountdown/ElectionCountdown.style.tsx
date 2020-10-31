@@ -5,7 +5,7 @@ import { COLORS } from 'common';
 export const Container = styled.div`
   border: 1px solid ${COLORS.LIGHTGRAY};
   border-radius: 4px;
-  max-width: 340px;
+  max-width: 420px;
   width: 100%;
   margin: auto;
 `;
@@ -14,10 +14,21 @@ export const BannerSection = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 
   &:first-child {
     background-color: #fafafa;
-    flex-direction: column;
+  }
+
+  &:last-child {
+    padding: 0.5rem;
+  }
+
+  @media (min-width: 600px) {
+    &:last-child {
+      flex-direction: row;
+      padding: 0;
+    }
   }
 `;
 
@@ -50,9 +61,10 @@ export const Measure = styled.span`
 `;
 
 export const SubCopy = styled.p`
-  font-size: 15px;
+  font-size: 1rem;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   margin: 0.75rem 0 1rem;
+  font-weight: 500;
 `;
 
 export const FlagIcon = styled.img`
@@ -66,6 +78,10 @@ export const FlagIcon = styled.img`
 export const StyledLink = styled.a`
   color: ${COLOR_MAP.BLUE};
   text-decoration: none;
-  margin: 1.25rem 0.75rem;
+  margin: 0.5rem 0.75rem;
   font-weight: 500;
+
+  @media (min-width: 600px) {
+    margin: 1.25rem 0.75rem;
+  }
 `;
