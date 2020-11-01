@@ -14,7 +14,7 @@ const CaseStudy: React.FC = () => {
     return null;
   }
 
-  const { header, body, author, tags } = caseStudy;
+  const { header, body, author } = caseStudy;
 
   return (
     <Style.PageContainer>
@@ -24,13 +24,6 @@ const CaseStudy: React.FC = () => {
         />
         <h1>{header}</h1>
         <p>{author}</p>
-        <p>
-          {tags.map(tag => (
-            <span key={tag} style={{ marginRight: 5 }}>
-              {tag}
-            </span>
-          ))}
-        </p>
         <MarkdownContent source={body} />
       </Style.PageContent>
     </Style.PageContainer>
