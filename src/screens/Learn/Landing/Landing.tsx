@@ -6,6 +6,7 @@ import {
   SectionHeader,
   BodyCopyMarkdown,
   PageIntroMarkdown,
+  ButtonContainer,
 } from '../Learn.style';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import SectionButton, { ButtonTheme } from './SectionButton';
@@ -54,11 +55,13 @@ const Landing = () => {
               {section.sectionTitle}
             </SectionHeader>
             <BodyCopyMarkdown source={section.description} />
-            <SectionButton
-              cta={section.buttonCta}
-              redirect={section.buttonRedirect}
-              theme={ButtonTheme.WHITE}
-            />
+            <ButtonContainer>
+              <SectionButton
+                cta={section.buttonCta}
+                redirect={section.buttonRedirect}
+                theme={ButtonTheme.WHITE}
+              />
+            </ButtonContainer>
           </Fragment>
         ))}
       </PageContent>

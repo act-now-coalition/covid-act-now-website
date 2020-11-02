@@ -3,7 +3,7 @@ import { AccordionDetails, AccordionProps } from '@material-ui/core';
 import {
   StyledMuiAccordion,
   StyledAccordionSummary,
-  MarkdownBody,
+  AccordionMarkdownBody,
   ExpandIcon,
 } from './Accordion.style';
 
@@ -23,7 +23,7 @@ const StyledAccordion: React.FC<StyledAccordionProps> = ({
         {summaryText}
       </StyledAccordionSummary>
       <AccordionDetails>
-        <MarkdownBody source={detailText} />
+        <AccordionMarkdownBody source={detailText} />
       </AccordionDetails>
     </StyledMuiAccordion>
   );

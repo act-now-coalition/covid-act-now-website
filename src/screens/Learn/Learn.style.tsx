@@ -1,8 +1,11 @@
-import styled, { css } from 'styled-components';
-import { COLOR_MAP } from 'common/colors';
-import { MarkdownContent } from 'components/Markdown';
+import styled from 'styled-components';
+import {
+  MarkdownContent,
+  StylesH2,
+  StylesBlockQuoteHighlight,
+} from 'components/Markdown';
 import theme from 'assets/theme';
-import { materialSMBreakpoint, mobileBreakpoint } from 'assets/theme/sizes';
+import { mobileBreakpoint } from 'assets/theme/sizes';
 
 /*
   Styles that are shared between Learn pages:
@@ -25,78 +28,30 @@ export const PageContent = styled.main`
 `;
 
 export const PageHeader = styled.h1`
-  margin: 1rem 0;
-  line-height: 1;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    margin: 0 0 2rem;
-  }
+  margin: ${theme.spacing(1)}px 0 ${theme.spacing(3)}px 0;
+  line-height: 125%;
 `;
 
 export const SectionHeader = styled.h2`
-  font-weight: 900;
-  font-size: 1.5rem;
-  line-height: 1.25;
-  margin: 1.25rem 0;
+  ${StylesH2}
 `;
 
 export const BreadcrumbsContainer = styled.div`
-  margin-bottom: ${theme.spacing(4)}px;
+  margin-bottom: ${theme.spacing(2)}px;
 `;
 
+export const ButtonContainer = styled.div`
+  margin-top: ${theme.spacing(2)}px;
+  margin-bottom: ${theme.spacing(3)}px;
+`;
 /*
   Markdown styles used throughout Learn
 */
 
-export const BodyCopyStyles = css`
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
-  line-height: 1.4;
-  letter-spacing: 1;
-
-  p {
-    &:not(:last-child) {
-      margin-bottom: 1rem;
-    }
-  }
-`;
-
-const BlockquoteStyles = css`
-  background-color: ${COLOR_MAP.LIGHTGRAY_BG};
-  padding: ${theme.spacing(2)}px;
-  display: inline-block;
-  margin: 0.5rem 0;
-  width: 100%;
-
-  p {
-    color: ${COLOR_MAP.GREEN.BASE};
-    font-size: 1.125rem;
-    font-weight: 900;
-    line-height: 1.6;
-    margin: 0;
-  }
-`;
-
-export const PageIntroMarkdown = styled(MarkdownContent)`
-  p,
-  ul,
-  li {
-    ${BodyCopyStyles}
-  }
-  margin-bottom: 1.5rem;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    margin-bottom: 3rem;
-  }
-`;
+export const PageIntroMarkdown = styled(MarkdownContent)``;
 
 export const BodyCopyMarkdown = styled(MarkdownContent)`
-  p,
-  ul,
-  li {
-    ${BodyCopyStyles}
-  }
-
   blockquote {
-    ${BlockquoteStyles}
+    ${StylesBlockQuoteHighlight}
   }
 `;
