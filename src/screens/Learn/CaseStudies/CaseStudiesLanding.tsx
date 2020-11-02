@@ -1,41 +1,68 @@
-import React from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import React, { Fragment } from 'react';
+import { useRouteMatch } from 'react-router-dom';
 import { caseStudiesContent } from 'cms-content/learn';
-import * as Style from '../Learn.style';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import CaseStudyCard from './CaseStudyCard';
+import {
+  PageContainer,
+  PageHeader,
+  PageContent,
+  BreadcrumbsContainer,
+  PageIntroMarkdown,
+} from '../Learn.style';
+import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
+import Breadcrumbs from 'components/Breadcrumbs';
+import { formatMetatagDate } from 'common/utils';
+import Grid from '@material-ui/core/Grid';
+import { CardsContainer, CategoryHeader } from './CaseStudy.style';
 
 const { header, intro, categories } = caseStudiesContent;
 
 const Landing: React.FC = () => {
   let { url } = useRouteMatch();
+  const date = formatMetatagDate();
+
   return (
-    <Style.PageContainer>
-      <Style.PageContent>
-        <h1>{header}</h1>
-        <p>{intro}</p>
-        {categories.map(category => (
-          <div key={category.categoryId}>
-            <h2>{category.header}</h2>
-            {category?.caseStudies &&
-              category.caseStudies.map(caseStudy => (
-                <Card key={caseStudy.caseStudyId}>
-                  <CardContent>
-                    <h3>{caseStudy.shortTitle}</h3>
-                    <img
-                      height={28}
-                      src={caseStudy.logoUrl}
-                      alt={caseStudy.logoAltText}
+    <PageContainer>
+      <AppMetaTags
+        canonicalUrl="/case-studies"
+        pageTitle=""
+        pageDescription={`${date}`}
+      />
+      <PageContent>
+        <BreadcrumbsContainer>
+          <Breadcrumbs item={{ to: '/case-studies', label: 'Case Studies' }} />
+        </BreadcrumbsContainer>
+        <PageHeader>{header}</PageHeader>
+        <PageIntroMarkdown source={intro} />
+        {categories.map(category => {
+          const caseStudies = category.caseStudies || [];
+          return (
+            <Fragment key={category.categoryId}>
+              <CategoryHeader id={category.categoryId}>
+                {category.header}
+              </CategoryHeader>
+              <CardsContainer>
+                {caseStudies.map(caseStudy => (
+                  <Grid
+                    container
+                    item
+                    xs={12}
+                    sm={6}
+                    key={caseStudy.caseStudyId}
+                  >
+                    <CaseStudyCard
+                      key={caseStudy.caseStudyId}
+                      cardContent={caseStudy}
+                      url={url}
                     />
-                    <p>{caseStudy.summary}</p>
-                    <Link to={`${url}/${caseStudy.caseStudyId}`}>Go</Link>
-                  </CardContent>
-                </Card>
-              ))}
-          </div>
-        ))}
-      </Style.PageContent>
-    </Style.PageContainer>
+                  </Grid>
+                ))}
+              </CardsContainer>
+            </Fragment>
+          );
+        })}
+      </PageContent>
+    </PageContainer>
   );
 };
 export default Landing;
