@@ -6,6 +6,17 @@ import * as serviceWorker from './serviceWorker';
 import * as Sentry from '@sentry/react';
 
 Sentry.init({
+  // list of community compiled ignore errors + deny urls to help declutter sentry.
+  ignoreErrors: [
+    // Ignoring cancelled API requests.  We should improve error handling in
+    // src/api/index.ts, but cancelled error messages are crowding sentry.
+    'TypeError: cancelled',
+  ],
+  denyUrls: [
+    // Chrome extensions
+    /extensions\//i,
+    /^chrome:\/\//i,
+  ],
   dsn:
     'https://4e1fa0b7df4d490488847bcc7966712b@o378922.ingest.sentry.io/5444052',
 });

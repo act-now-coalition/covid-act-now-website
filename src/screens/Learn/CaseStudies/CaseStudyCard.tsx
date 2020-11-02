@@ -8,6 +8,7 @@ import {
   ArrowIcon,
 } from './CaseStudy.style';
 import { CaseStudy } from 'cms-content/learn';
+import { MarkdownContent } from 'components/Markdown';
 
 // replace <p> with markdown bodycopy component (will color text properly)
 // pull in logo
@@ -20,7 +21,7 @@ const CaseStudyCard = (props: { cardContent: CaseStudy; url: string }) => {
         <StyledCardContent>
           <CardHalf>
             <CardTitle>{shortTitle}</CardTitle>
-            <p>{summary}</p>
+            <MarkdownContent source={summary} />
           </CardHalf>
           <CardHalf>
             <ArrowIcon />

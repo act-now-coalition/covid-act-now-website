@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { caseStudiesById } from 'cms-content/learn';
 import * as Style from '../Learn.style';
+import { Logo } from './CaseStudy.style';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { BodyCopyMarkdown } from '../Learn.style';
 
@@ -14,23 +15,17 @@ const CaseStudy: React.FC = () => {
     return null;
   }
 
-  const { header, body, author, tags } = caseStudy;
+  const { header, body, author } = caseStudy;
 
   return (
     <Style.PageContainer>
       <Style.PageContent>
-        <Breadcrumbs
-          item={{ to: '/learn/case-studies', label: 'Case Studies' }}
-        />
-        <h1>{header}</h1>
-        <p>{author}</p>
-        <p>
-          {tags.map(tag => (
-            <span key={tag} style={{ marginRight: 5 }}>
-              {tag}
-            </span>
-          ))}
-        </p>
+        <Style.BreadcrumbsContainer>
+          <Breadcrumbs item={{ to: '/case-studies', label: 'Case Studies' }} />
+        </Style.BreadcrumbsContainer>
+        <Style.PageHeader>{header}</Style.PageHeader>
+        <Logo src={caseStudy.logoUrl} alt={caseStudy.logoAltText} />
+        <BodyCopyMarkdown source={author} />
         <BodyCopyMarkdown source={body} />
       </Style.PageContent>
     </Style.PageContainer>

@@ -29,6 +29,10 @@ export type AggregationLevel = 'country' | 'state' | 'county';
  */
 export type Lat = number | null;
 /**
+ * Location ID as defined here: https://github.com/covidatlas/li/blob/master/docs/reports-v1.md#general-notes
+ */
+export type Locationid = string;
+/**
  * Longitude of point within the state or county
  */
 export type Long = number | null;
@@ -77,6 +81,21 @@ export type NonCovidPatientsMethod =
   | 'estimated_from_typical_utilization'
   | 'estimated_from_total_icu_actual';
 /**
+ * Risk levels for region.
+ */
+export type Risklevels = RiskLevels;
+/**
+ * COVID Risk Level.
+ *
+ * ## Risk Level Definitions
+ *  *Low* - On track to contain COVID
+ *  *Medium* - Slow disease growth
+ *  *High* - At risk of outbreak
+ *  *Critical* - Active or imminent outbreak
+ *  *Unknown* - Risk unknown
+ */
+export type RiskLevel = 0 | 1 | 2 | 3 | 4;
+/**
  * Cumulative number of confirmed or suspected cases
  */
 export type Cases = number | null;
@@ -120,6 +139,20 @@ export type Typicalusagerate = number | null;
  * Information about ICU bed utilization
  */
 export type Icubeds = HospitalResourceUtilization;
+/**
+ *
+ * New confirmed or suspected cases.
+ *
+ * New cases are a processed timeseries of cases - summing new cases may not equal
+ * the cumulative case count.
+ *
+ * Notable exceptions:
+ *  1. If a region does not report cases for a period of time, the first day
+ *     cases start reporting again will not be included. This day likely includes
+ *     multiple days worth of cases and can be misleading to the overall series.
+ *
+ */
+export type Newcases = number | null;
 /**
  * Date of latest data
  */
@@ -179,6 +212,20 @@ export type Hospitalbeds1 = HospitalResourceUtilization;
  */
 export type Icubeds1 = HospitalResourceUtilization;
 /**
+ *
+ * New confirmed or suspected cases.
+ *
+ * New cases are a processed timeseries of cases - summing new cases may not equal
+ * the cumulative case count.
+ *
+ * Notable exceptions:
+ *  1. If a region does not report cases for a period of time, the first day
+ *     cases start reporting again will not be included. This day likely includes
+ *     multiple days worth of cases and can be misleading to the overall series.
+ *
+ */
+export type Newcases1 = number | null;
+/**
  * Date of timeseries data point
  */
 export type Date1 = string;
@@ -198,9 +245,11 @@ export interface RegionSummaryWithTimeseries {
   county: County;
   level: AggregationLevel;
   lat: Lat;
+  locationId: Locationid;
   long: Long;
   population: Population;
-  metrics: Metrics | null;
+  metrics: Metrics;
+  riskLevels: Risklevels;
   actuals: Actuals;
   lastUpdatedDate: Lastupdateddate;
   metricsTimeseries?: Metricstimeseries;
@@ -228,6 +277,17 @@ export interface ICUHeadroomMetricDetails {
   currentIcuNonCovidMethod: NonCovidPatientsMethod;
 }
 /**
+ * COVID risk levels for a region.
+ */
+export interface RiskLevels {
+  overall: RiskLevel;
+  testPositivityRatio: RiskLevel;
+  caseDensity: RiskLevel;
+  contactTracerCapacityRatio: RiskLevel;
+  infectionRate: RiskLevel;
+  icuHeadroomRatio: RiskLevel;
+}
+/**
  * Known actuals data.
  */
 export interface Actuals {
@@ -238,6 +298,7 @@ export interface Actuals {
   contactTracers: Contacttracers;
   hospitalBeds: Hospitalbeds;
   icuBeds: Icubeds;
+  newCases: Newcases;
 }
 /**
  * Base model for API output.
@@ -272,5 +333,6 @@ export interface ActualsTimeseriesRow {
   contactTracers: Contacttracers1;
   hospitalBeds: Hospitalbeds1;
   icuBeds: Icubeds1;
+  newCases: Newcases1;
   date: Date1;
 }

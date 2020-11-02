@@ -4,6 +4,8 @@ import { Card, CardContent, Grid } from '@material-ui/core';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { COLOR_MAP } from 'common/colors';
 import { COLORS } from 'common';
+import theme from 'assets/theme';
+import { StylesH2 } from 'components/Markdown';
 
 /*
  TODO (Chelsi): we're almost always removing the underline
@@ -16,18 +18,16 @@ export const StyledLink = styled(Link)`
 export const StyledCard = styled(Card)`
   box-shadow: none;
   border: 1px solid ${COLORS.LIGHTGRAY};
+  /* padding: ${theme.spacing(2)}px; */
+
   &:hover {
     border: 1px solid ${COLOR_MAP.GREEN.BASE};
   }
 `;
 
 export const StyledCardContent = styled(CardContent)`
-  padding: 0 1.25rem;
   display: flex;
-
-  &:last-child {
-    padding: 0 1.25rem;
-  }
+  padding: ${theme.spacing(2)}px;
 `;
 
 export const CardsWrapper = styled(Grid)`
@@ -36,7 +36,7 @@ export const CardsWrapper = styled(Grid)`
 `;
 
 export const CardTitle = styled.h3`
-  font-size: 1.25rem;
+  font-size: 15px;
   font-weight: 700;
   color: #000;
 `;
@@ -52,4 +52,24 @@ export const CardHalf = styled.div`
 export const ArrowIcon = styled(ArrowForwardIosIcon)`
   color: ${COLOR_MAP.GRAY_ICON};
   display: flex;
+`;
+
+export const Logo = styled.img.attrs(props => ({
+  height: '50px',
+}))``;
+
+export const CardsContainer = styled(Grid).attrs(props => ({
+  container: true,
+  spacing: 1,
+  alignItems: 'stretch',
+}))`
+  margin-bottom: ${theme.spacing(3)}px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+export const CategoryHeader = styled.h2`
+  ${StylesH2};
+  margin-bottom: ${theme.spacing(2)}px;
 `;
