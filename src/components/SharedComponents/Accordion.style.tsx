@@ -32,6 +32,11 @@ export const MarkdownBody = styled(MarkdownContent)`
   line-height: 22px;
 
   p {
+    line-height: 1.4;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
     margin: 0;
     &:not(:last-child) {
       margin-bottom: ${theme.spacing(3)}px;
