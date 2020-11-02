@@ -3,6 +3,7 @@ import { Accordion, AccordionSummary } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { MarkdownContent } from 'components/Markdown';
 import { COLOR_MAP } from 'common/colors';
+import theme from 'assets/theme';
 
 export const StyledMuiAccordion = styled(Accordion)`
   box-shadow: none;
@@ -13,7 +14,8 @@ export const StyledMuiAccordion = styled(Accordion)`
 `;
 
 export const StyledAccordionSummary = styled(AccordionSummary)`
-  color: ${COLOR_MAP.BLUE};
+  color: #000;
+  font-weight: 500;
   font-size: 1rem;
   line-height: 1.4;
   padding-left: 0;
@@ -23,13 +25,16 @@ export const StyledAccordionSummary = styled(AccordionSummary)`
 
 export const MarkdownBody = styled(MarkdownContent)`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
+  line-height: 1.4;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
 
   p {
-    font-size: 1rem;
-    line-height: 1.4;
     margin: 0;
     &:not(:last-child) {
-      margin-bottom: 1rem;
+      margin-bottom: ${theme.spacing(3)}px;
     }
   }
 
