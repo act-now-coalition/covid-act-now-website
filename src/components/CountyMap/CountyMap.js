@@ -16,10 +16,11 @@ import {
 } from 'common/locations';
 import { CountyMapWrapper, CountyMapLayerWrapper } from './CountyMap.style';
 
-const CountyMap = ({ selectedCounty, setSelectedCounty }) => {
+const CountyMap = ({ selectedCounty, setSelectedCounty, cbsaLocation }) => {
   let { stateId } = useParams();
   const { state_code } = getStateByUrlName(stateId);
   const stateCode = state_code.toUpperCase();
+  console.log(cbsaLocation);
 
   const state = STATE_CENTERS[stateCode];
   const counties = require(`./countyTopoJson/${stateCode}.json`);
@@ -59,7 +60,9 @@ const CountyMap = ({ selectedCounty, setSelectedCounty }) => {
         geographyFactory={geo => {
           const geoFullFips = geo.properties.GEOID;
           const isSelected =
-            selectedCounty && selectedCounty.full_fips_code === geoFullFips;
+            (selectedCounty && selectedCounty.full_fips_code === geoFullFips) ||
+            (cbsaLocation &&
+              cbsaLocation.county_fips_codes.includes(geoFullFips));
 
           return (
             <Link

@@ -4,11 +4,13 @@ import CountyMap from 'components/CountyMap/CountyMap';
 import { MAP_FILTERS } from 'screens/LocationPage/Enums/MapFilterEnums';
 import { Projections } from 'common/models/Projections';
 import * as Styles from './MiniMap.style';
+import { CBSA } from 'common/locations';
 
 interface MiniMapProperties {
   projections: Projections;
   stateId: string;
   selectedCounty: string;
+  cbsaLocation: CBSA;
   setSelectedCounty: (input: string) => {};
   mobileMenuOpen: boolean;
   setMobileMenuOpen: (input: boolean) => {};
@@ -24,6 +26,7 @@ const MiniMap: FunctionComponent<MiniMapProperties> = ({
   projections,
   stateId,
   selectedCounty,
+  cbsaLocation,
   setSelectedCounty,
   mobileMenuOpen,
   setMobileMenuOpen,
@@ -32,7 +35,7 @@ const MiniMap: FunctionComponent<MiniMapProperties> = ({
 }) => {
   const showState = stateId !== MAP_FILTERS.DC;
   const { stateName } = projections;
-
+  console.log(`HI ${cbsaLocation}`);
   const onSelectCounty = (fullFips: string) => {
     setMobileMenuOpen(false);
   };
@@ -70,6 +73,7 @@ const MiniMap: FunctionComponent<MiniMapProperties> = ({
           <Styles.StateMapContainer>
             <CountyMap
               selectedCounty={selectedCounty}
+              cbsaLocation={cbsaLocation}
               setSelectedCounty={onSelectCounty}
             />
           </Styles.StateMapContainer>

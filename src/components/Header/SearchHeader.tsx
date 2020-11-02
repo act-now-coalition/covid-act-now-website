@@ -39,6 +39,10 @@ const SearchHeader = ({
       route = `${route}/county/${option.county_url_name}`;
     }
 
+    if (option.level === 'cbsa') {
+      route = `${route}/cbsa/${option.location_url_name}`;
+    }
+
     history.push(route);
 
     window.scrollTo(0, 0);

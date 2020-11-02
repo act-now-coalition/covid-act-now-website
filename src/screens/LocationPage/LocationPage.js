@@ -77,6 +77,7 @@ function LocationPage() {
           stateId={stateCode}
           selectedCounty={selectedCounty}
           setSelectedCounty={setSelectedCounty}
+          cbsaLocation={cbsaLocation}
           mobileMenuOpen={mobileMenuOpen}
           setMobileMenuOpen={setMobileMenuOpen}
           mapOption={mapOption}

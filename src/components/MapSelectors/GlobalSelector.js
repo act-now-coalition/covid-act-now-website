@@ -52,6 +52,30 @@ const StateItem = ({ dataset }) => {
   );
 };
 
+const CbsaItem = ({ dataset }) => {
+  const fillColor = stateColor(dataset.state_code);
+
+  return (
+    <StyledResultsMenuOption hasData={true}>
+      <div style={{ marginLeft: '0', marginRight: '.75rem' }}>
+        <StyledState>
+          <StateCircleSvg
+            ratio={0.8}
+            fillColor={fillColor}
+            state={dataset.state_code}
+          />
+        </StyledState>
+      </div>
+      <div>
+        <div>{dataset.location_name}*</div>
+        <StyledResultsMenuSubText>
+          <span>{ShortNumber(dataset.population)} residents</span>
+        </StyledResultsMenuSubText>
+      </div>
+    </StyledResultsMenuOption>
+  );
+};
+
 const CountyItem = ({ dataset }) => {
   const fillColor = countyColor(
     dataset.full_fips_code,
@@ -97,6 +121,7 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
 
   const stateDataset = US_STATE_DATASET.state_dataset;
   const countyDataset = [];
+  const cbsaDataset = US_STATE_DATASET.cbsa_dataset;
 
   each(US_STATE_DATASET.state_county_map_dataset, (value, key) => {
     const counties = value.county_dataset
@@ -122,6 +147,14 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
         (option.state.toLowerCase().includes(cur.toLowerCase()) ||
           option.state_code.toLowerCase().includes(cur.toLowerCase())),
       true,
+    );
+  };
+
+  const hasCbsaMatch = (option, inputValue) => {
+    const cbsaName = option.location_name;
+    return (
+      option.location_name.toLowerCase().includes(inputValue.toLowerCase()) ||
+      option.state.toLowerCase().includes(inputValue.toLowerCase())
     );
   };
 
@@ -188,6 +221,23 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
       matchedItems.push(...stateMatches);
 
       if (inputValue.length > 2) {
+        const cbsaMatches = chain(cbsaDataset)
+          .filter(item => hasCbsaMatch(item, inputValue))
+          .map((item, index) => ({
+            ...item,
+            id: item.location_url_name,
+            value: item.location_name,
+            type: 'CBSA',
+          }))
+          .uniqBy('id')
+          .sortBy('population')
+          .reverse()
+          .slice(0, 50)
+          .value();
+        console.log(cbsaMatches);
+
+        matchedItems.push(...cbsaMatches);
+
         const countyMatches = chain(countyDataset)
           .filter(item => hasCountyMatch(item, inputValue))
           .map((item, index) => ({
@@ -231,6 +281,8 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
         return <StateItem dataset={item} />;
       case 'COUNTY':
         return <CountyItem dataset={item} />;
+      case 'CBSA':
+        return <CbsaItem dataset={item} />;
       default:
     }
   };
