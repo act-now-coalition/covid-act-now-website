@@ -25,7 +25,7 @@ const CaseStudy: React.FC = () => {
         </Style.BreadcrumbsContainer>
         <Style.PageHeader>{header}</Style.PageHeader>
         <Logo src={caseStudy.logoUrl} alt={caseStudy.logoAltText} />
-        <p>{author}</p>
+        <BodyCopyMarkdown source={author} />
         <BodyCopyMarkdown source={body} />
       </Style.PageContent>
     </Style.PageContainer>
