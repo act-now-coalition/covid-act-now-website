@@ -49,10 +49,15 @@ export const MarkdownBody = styled(ReactMarkdown)`
 
   /* Block elements */
   p,
-  ul,
-  li {
+  ul {
     ${StylesBody}
     ${StylesBlockElement}
+  }
+
+  li {
+    ${StylesBlockElement}
+    margin-top: ${theme.spacing(1)}px;
+    margin-bottom: ${theme.spacing(1)}px;
   }
 
   h2 {
