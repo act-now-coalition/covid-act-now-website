@@ -21,9 +21,7 @@ const CaseStudy: React.FC = () => {
     <Style.PageContainer>
       <Style.PageContent>
         <Style.BreadcrumbsContainer>
-          <Breadcrumbs
-            item={{ to: '/learn/case-studies', label: 'Case Studies' }}
-          />
+          <Breadcrumbs item={{ to: '/case-studies', label: 'Case Studies' }} />
         </Style.BreadcrumbsContainer>
         <Style.PageHeader>{header}</Style.PageHeader>
         <Logo src={caseStudy.logoUrl} alt={caseStudy.logoAltText} />

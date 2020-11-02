@@ -23,20 +23,11 @@ export const StyledAccordionSummary = styled(AccordionSummary)`
   align-items: flex-start;
 `;
 
-export const MarkdownBody = styled(MarkdownContent)`
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
-  line-height: 1.4;
-  font-family: Roboto;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 22px;
-
+export const AccordionMarkdownBody = styled(MarkdownContent)`
   p {
-    line-height: 1.4;
-    font-family: Roboto;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 22px;
+    color: ${COLOR_MAP.GRAY_BODY_COPY};
+    line-height: 1.6;
+    font-size: 16px;
     margin: 0;
     &:not(:last-child) {
       margin-bottom: ${theme.spacing(3)}px;

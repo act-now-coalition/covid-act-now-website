@@ -46,11 +46,9 @@ export const BreadcrumbsContainer = styled.div`
 
 export const BodyCopyStyles = css`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
-  line-height: 1.4;
-  font-family: Roboto;
-  font-size: 14px;
+  line-height: 1.6;
+  font-size: 16px;
   font-weight: 400;
-  line-height: 22px;
 
   p {
     &:not(:last-child) {
