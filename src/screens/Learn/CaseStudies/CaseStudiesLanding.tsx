@@ -1,36 +1,59 @@
 import React from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { useRouteMatch } from 'react-router-dom';
 import { caseStudiesContent } from 'cms-content/learn';
-import * as Style from '../Learn.style';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import CaseStudyCard from './CaseStudyCard';
+import {
+  PageContainer,
+  PageHeader,
+  PageContent,
+  BreadcrumbsContainer,
+  PageIntroMarkdown,
+} from '../Learn.style';
+import { CardsWrapper } from './CaseStudy.style';
+import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
+import Breadcrumbs from 'components/Breadcrumbs';
+import { formatMetatagDate } from 'common/utils';
+import Grid from '@material-ui/core/Grid';
+import { CaseStudy } from 'cms-content/learn';
 
 const { header, intro, categories } = caseStudiesContent;
 
 const Landing: React.FC = () => {
   let { url } = useRouteMatch();
+  const date = formatMetatagDate();
+
   return (
-    <Style.PageContainer>
-      <Style.PageContent>
-        <h1>{header}</h1>
-        <p>{intro}</p>
-        {categories.map(category => (
-          <div key={category.categoryId}>
-            <h2>{category.header}</h2>
-            {category?.caseStudies &&
-              category.caseStudies.map(caseStudy => (
-                <Card key={caseStudy.caseStudyId}>
-                  <CardContent>
-                    <h3>{caseStudy.shortTitle}</h3>
-                    <p>{caseStudy.summary}</p>
-                    <Link to={`${url}/${caseStudy.caseStudyId}`}>Go</Link>
-                  </CardContent>
-                </Card>
-              ))}
-          </div>
-        ))}
-      </Style.PageContent>
-    </Style.PageContainer>
+    <PageContainer>
+      <AppMetaTags
+        canonicalUrl="/learn/case-studies"
+        pageTitle=""
+        pageDescription={`${date}`}
+      />
+      <PageContent>
+        <BreadcrumbsContainer>
+          <Breadcrumbs
+            item={{ to: '/learn/case-studies', label: 'Case Studies' }}
+          />
+        </BreadcrumbsContainer>
+        <PageHeader>{header}</PageHeader>
+        <PageIntroMarkdown source={intro} />
+        <CardsWrapper container spacing={1}>
+          {categories.map(category => (
+            <Grid item md={6} xs={12}>
+              {category?.caseStudies &&
+                category.caseStudies.length &&
+                category.caseStudies.map((caseStudy: CaseStudy) => (
+                  <CaseStudyCard
+                    key={caseStudy.caseStudyId}
+                    cardContent={caseStudy}
+                    url={url}
+                  />
+                ))}
+            </Grid>
+          ))}
+        </CardsWrapper>
+      </PageContent>
+    </PageContainer>
   );
 };
 export default Landing;
