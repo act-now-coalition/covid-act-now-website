@@ -64,6 +64,11 @@ export const MarkdownBody = styled(ReactMarkdown)`
     ${StylesH2}
     color: #000;
   }
+
+  img {
+    max-width: 100%;
+  }
+
 `;
 
 export const MarkdownLink = styled.a.attrs(props => ({
