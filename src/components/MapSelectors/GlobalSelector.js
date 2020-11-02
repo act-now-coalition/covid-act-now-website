@@ -121,7 +121,9 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
 
   const stateDataset = US_STATE_DATASET.state_dataset;
   const countyDataset = [];
-  const cbsaDataset = US_STATE_DATASET.cbsa_dataset;
+  const cbsaDataset = US_STATE_DATASET.cbsa_dataset.filter(
+    item => item.county_fips_codes.length > 1,
+  );
 
   each(US_STATE_DATASET.state_county_map_dataset, (value, key) => {
     const counties = value.county_dataset
@@ -151,7 +153,6 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
   };
 
   const hasCbsaMatch = (option, inputValue) => {
-    const cbsaName = option.location_name;
     return (
       option.location_name.toLowerCase().includes(inputValue.toLowerCase()) ||
       option.state.toLowerCase().includes(inputValue.toLowerCase())
@@ -191,6 +192,24 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
     }
 
     if (location && !inputValue) {
+      const split = location.split('-');
+      const stateCode = split.length > 1 ? split[1] : split[0];
+      const cbsaMatches = chain(cbsaDataset)
+        .filter(item => item.state_code == stateCode.toUpperCase())
+        .map((item, index) => ({
+          ...item,
+          id: item.location_url_name,
+          value: item.location_name,
+          type: 'CBSA',
+        }))
+        .uniqBy('id')
+        .sortBy('population')
+        .reverse()
+        .slice(0, 50)
+        .value();
+
+      matchedItems.push(...cbsaMatches);
+
       const topCountiesByParamState = chain(countyDataset)
         .filter(item => item.state_code === location.toUpperCase())
         .map(item => ({
@@ -234,7 +253,6 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
           .reverse()
           .slice(0, 50)
           .value();
-        console.log(cbsaMatches);
 
         matchedItems.push(...cbsaMatches);
 
