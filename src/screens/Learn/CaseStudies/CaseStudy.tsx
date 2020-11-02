@@ -1,9 +1,9 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { caseStudiesById } from 'cms-content/learn';
-import { MarkdownContent } from 'components/Markdown';
 import * as Style from '../Learn.style';
 import Breadcrumbs from 'components/Breadcrumbs';
+import { BodyCopyMarkdown } from '../Learn.style';
 
 const CaseStudy: React.FC = () => {
   let { caseStudyId } = useParams<{ caseStudyId: string }>();
@@ -31,7 +31,7 @@ const CaseStudy: React.FC = () => {
             </span>
           ))}
         </p>
-        <MarkdownContent source={body} />
+        <BodyCopyMarkdown source={body} />
       </Style.PageContent>
     </Style.PageContainer>
   );

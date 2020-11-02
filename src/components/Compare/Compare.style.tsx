@@ -384,7 +384,7 @@ export const Row = styled(TableRow)<{
     !isNumber(index)
       ? `${$headerRowBackground}`
       : index % 2 === 0
-      ? '#fafafa'
+      ? `${COLOR_MAP.LIGHTGRAY_BG}`
       : 'white'};
   background-color: ${({ $isModal }) =>
     $isModal && `${COLOR_MAP.GRAY_BODY_COPY}`};
