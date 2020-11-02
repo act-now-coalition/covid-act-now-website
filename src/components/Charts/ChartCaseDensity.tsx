@@ -51,7 +51,7 @@ const ChartCaseDensity: FunctionComponent<{
 }> = ({
   columnData,
   zones,
-  capY = 100,
+  capY = 500,
   width,
   height,
   marginTop = 5,
