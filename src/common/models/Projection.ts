@@ -192,11 +192,7 @@ export class Projection {
     this.fips = summaryWithTimeseries.fips;
 
     // Set up our series data exposed via getDataset().
-    this.rawDailyCases = this.deltasFromCumulatives(
-      this.fillLeadingNullsWithZeros(
-        actualTimeseries.map(row => row && row.cases),
-      ),
-    );
+    this.rawDailyCases = this.actualTimeseries.map(row => row && row.newCases);
     this.smoothedDailyCases = this.smoothWithRollingAverage(this.rawDailyCases);
 
     this.rawDailyDeaths = this.deltasFromCumulatives(

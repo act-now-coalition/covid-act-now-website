@@ -59,22 +59,22 @@ const CountdownContent = (props: {
               </CountSection>
             ))}
           </CountdownWrapper>
-          <SubCopy>Until election day! Please double check:</SubCopy>
+          <SubCopy>until election day!</SubCopy>
         </BannerSection>
         <BannerSection>
           <StyledLink
             {...linkProps}
-            onClick={() => trackVoteClick('Mail-in deadlines')}
-            href="https://www.vote.org/absentee-ballot-deadlines/"
+            onClick={() => trackVoteClick('Polling place')}
+            href="https://www.vote.org/polling-place-locator/"
           >
-            Mail-in deadlines
+            Confirm your polling place
           </StyledLink>
           <StyledLink
             {...linkProps}
-            onClick={() => trackVoteClick('Early voting')}
-            href="https://www.vote.org/early-voting-calendar/"
+            onClick={() => trackVoteClick('Ballot dropbox')}
+            href="https://www.vote.org/dropbox-locator/"
           >
-            Early voting dates
+            Locate a ballot dropbox
           </StyledLink>
         </BannerSection>
       </Container>
