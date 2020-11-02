@@ -22,6 +22,11 @@ const Landing: React.FC = () => {
                 <Card key={caseStudy.caseStudyId}>
                   <CardContent>
                     <h3>{caseStudy.shortTitle}</h3>
+                    <img
+                      height={28}
+                      src={caseStudy.logoUrl}
+                      alt={caseStudy.logoAltText}
+                    />
                     <p>{caseStudy.summary}</p>
                     <Link to={`${url}/${caseStudy.caseStudyId}`}>Go</Link>
                   </CardContent>
