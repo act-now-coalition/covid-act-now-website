@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 import { MarkdownContent } from 'components/Markdown';
 import theme from 'assets/theme';
-import { materialSMBreakpoint, mobileBreakpoint } from 'assets/theme/sizes';
+import { mobileBreakpoint } from 'assets/theme/sizes';
 
 /*
   Styles that are shared between Learn pages:
@@ -25,23 +25,19 @@ export const PageContent = styled.main`
 `;
 
 export const PageHeader = styled.h1`
-  margin: 1rem 0;
-  line-height: 1;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    margin: 0 0 2rem;
-  }
+  margin: ${theme.spacing(1)}px 0 ${theme.spacing(3)}px 0;
+  line-height: 125%;
 `;
 
 export const SectionHeader = styled.h2`
   font-weight: 900;
   font-size: 1.5rem;
   line-height: 1.25;
-  margin: 1.25rem 0;
+  margin: ${theme.spacing(1)}px 0 ${theme.spacing(3)}px 0;
 `;
 
 export const BreadcrumbsContainer = styled.div`
-  margin-bottom: ${theme.spacing(4)}px;
+  margin-bottom: ${theme.spacing(2)}px;
 `;
 
 /*
@@ -51,11 +47,15 @@ export const BreadcrumbsContainer = styled.div`
 export const BodyCopyStyles = css`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   line-height: 1.4;
-  letter-spacing: 1;
+
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
 
   p {
     &:not(:last-child) {
-      margin-bottom: 1rem;
+      margin-bottom: ${theme.spacing(2)}px;
     }
   }
 `;
@@ -82,11 +82,7 @@ export const PageIntroMarkdown = styled(MarkdownContent)`
   li {
     ${BodyCopyStyles}
   }
-  margin-bottom: 1.5rem;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    margin-bottom: 3rem;
-  }
+  margin-bottom: ${theme.spacing(2)}px;
 `;
 
 export const BodyCopyMarkdown = styled(MarkdownContent)`
@@ -98,5 +94,13 @@ export const BodyCopyMarkdown = styled(MarkdownContent)`
 
   blockquote {
     ${BlockquoteStyles}
+  }
+
+  h2 {
+    margin-top: ${theme.spacing(1)}px;
+    margin-bottom: ${theme.spacing(3)}px;
+    font-size: 18px;
+    font-weight: 900;
+    line-height: 29px;
   }
 `;
