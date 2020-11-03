@@ -9,7 +9,7 @@ import {
   CardBody,
   CopyContainer,
   IconContainer,
-} from './CaseStudy.style';
+} from './CaseStudyCard.style';
 import { CaseStudy } from 'cms-content/learn';
 
 const CaseStudyCard = (props: { cardContent: CaseStudy; url: string }) => {

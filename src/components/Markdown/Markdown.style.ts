@@ -17,11 +17,17 @@ export const StylesBody = css`
 `;
 
 export const StylesH2 = css`
-  margin-top: ${theme.spacing(1)}px;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+  margin-top: ${theme.spacing(4)}px;
   margin-bottom: ${theme.spacing(3)}px;
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 900;
-  line-height: 29px;
+  line-height: 1.6;
+`;
+
+export const StylesH3 = css`
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+  font-size: 18px;
 `;
 
 export const StylesBlockQuoteHighlight = css`
@@ -74,6 +80,10 @@ export const StylesMarkdown = css`
   h2 {
     ${StylesH2}
     color: #000;
+  }
+
+  h3 {
+    ${StylesH3}
   }
 
   img {
