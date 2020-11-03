@@ -38,7 +38,7 @@ const twitterEmbedsByUrl: Dictionary<React.FC> = {
 };
 
 export function isTwitterEmbed(url: string) {
-  return Object.keys(twitterEmbedsByUrl);
+  return Object.keys(twitterEmbedsByUrl).includes(url);
 }
 
 const TweetEmbed: React.FC<{ statusUrl: string }> = ({ statusUrl }) => {
