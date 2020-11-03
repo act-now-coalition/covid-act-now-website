@@ -21,7 +21,6 @@ export const StyledCard = styled(Card)`
 
   &:hover {
     border: 1px solid ${COLOR_MAP.GREEN.BASE};
-
     /* Highlights the arrow icon on hover */
     svg {
       color: ${COLOR_MAP.GREEN.BASE};
@@ -32,11 +31,6 @@ export const StyledCard = styled(Card)`
 export const StyledCardContent = styled(CardContent)`
   display: flex;
   padding: ${theme.spacing(2)}px;
-`;
-
-export const CardsWrapper = styled(Grid)`
-  display: flex;
-  flex-wrap: wrap;
 `;
 
 export const CardsContainer = styled(Grid).attrs(props => ({
@@ -70,17 +64,21 @@ export const CardBody = styled(MarkdownContent)`
   }
 `;
 
-export const CardHalf = styled.div`
-  &:last-child {
-    display: flex;
-    align-items: center;
-    margin-left: 2rem;
-  }
+export const IconContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: ${theme.spacing(2)}px;
+`;
+
+export const CopyContainer = styled.div`
+  flex-direction: column;
 `;
 
 export const ArrowIcon = styled(ArrowForwardIosIcon)`
   color: ${COLOR_MAP.GRAY_ICON};
   display: flex;
+  width: ${theme.spacing(2)}px;
+  height: ${theme.spacing(2)}px;
 `;
 
 export const Logo = styled.img.attrs(props => ({

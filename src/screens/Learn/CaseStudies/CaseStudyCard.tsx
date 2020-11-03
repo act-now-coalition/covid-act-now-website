@@ -4,10 +4,11 @@ import {
   StyledCard,
   StyledCardContent,
   CardTitle,
-  CardHalf,
   ArrowIcon,
   CardLogo,
   CardBody,
+  CopyContainer,
+  IconContainer,
 } from './CaseStudy.style';
 import { CaseStudy } from 'cms-content/learn';
 
@@ -18,14 +19,14 @@ const CaseStudyCard = (props: { cardContent: CaseStudy; url: string }) => {
     <StyledCard>
       <StyledLink to={`${url}/${caseStudyId}`}>
         <StyledCardContent>
-          <CardHalf>
+          <CopyContainer>
             <CardLogo src={cardContent.logoUrl} alt={cardContent.logoAltText} />
             <CardTitle>{shortTitle}</CardTitle>
             <CardBody source={summary} />
-          </CardHalf>
-          <CardHalf>
+          </CopyContainer>
+          <IconContainer>
             <ArrowIcon />
-          </CardHalf>
+          </IconContainer>
         </StyledCardContent>
       </StyledLink>
     </StyledCard>
