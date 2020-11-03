@@ -2,8 +2,8 @@ import React from 'react';
 
 const MarianaIslands = () => (
   <svg
-    stroke-linecap="round"
-    stroke-linejoin="round"
+    strokeLinecap="round"
+    strokeLinejoin="round"
     baseProfile="tiny"
     version="1.2"
     viewBox="0 0 800 4365"
