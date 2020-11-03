@@ -6,12 +6,11 @@ import {
   CardTitle,
   CardHalf,
   ArrowIcon,
+  CardLogo,
+  CardBody,
 } from './CaseStudy.style';
 import { CaseStudy } from 'cms-content/learn';
-import { MarkdownContent } from 'components/Markdown';
 
-// replace <p> with markdown bodycopy component (will color text properly)
-// pull in logo
 const CaseStudyCard = (props: { cardContent: CaseStudy; url: string }) => {
   const { cardContent, url } = props;
   const { shortTitle, summary, caseStudyId } = cardContent;
@@ -20,8 +19,9 @@ const CaseStudyCard = (props: { cardContent: CaseStudy; url: string }) => {
       <StyledLink to={`${url}/${caseStudyId}`}>
         <StyledCardContent>
           <CardHalf>
+            <CardLogo src={cardContent.logoUrl} alt={cardContent.logoAltText} />
             <CardTitle>{shortTitle}</CardTitle>
-            <MarkdownContent source={summary} />
+            <CardBody source={summary} />
           </CardHalf>
           <CardHalf>
             <ArrowIcon />

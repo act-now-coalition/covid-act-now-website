@@ -48,7 +48,11 @@ export const ButtonContainer = styled.div`
   Markdown styles used throughout Learn
 */
 
-export const PageIntroMarkdown = styled(MarkdownContent)``;
+export const PageIntroMarkdown = styled(MarkdownContent)`
+  p::last-child {
+    margin-bottom: ${theme.spacing(4)}px;
+  }
+`;
 
 export const BodyCopyMarkdown = styled(MarkdownContent)`
   blockquote {
