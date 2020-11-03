@@ -1,10 +1,8 @@
 import React from 'react';
 import {
   PageContainer,
-  PageHeader,
   PageContent,
   BreadcrumbsContainer,
-  PageIntroMarkdown,
 } from '../Learn.style';
 import Section from './Section';
 import { faqContent, FaqSection } from 'cms-content/learn';
@@ -13,6 +11,7 @@ import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import * as Style from './Faq.style';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { formatMetatagDate } from 'common/utils';
+import { MarkdownContent, Heading1 } from 'components/Markdown';
 
 const Faq = () => {
   const {
@@ -42,8 +41,8 @@ const Faq = () => {
         <BreadcrumbsContainer>
           <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>
-        <PageHeader>{header}</PageHeader>
-        <PageIntroMarkdown source={intro} />
+        <Heading1>{header}</Heading1>
+        <MarkdownContent source={intro} />
         <Style.MobileOnly>
           <TableOfContents items={getSectionItems(sections)} />
         </Style.MobileOnly>

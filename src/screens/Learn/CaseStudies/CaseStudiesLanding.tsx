@@ -4,16 +4,15 @@ import { caseStudiesContent } from 'cms-content/learn';
 import CaseStudyCard from './CaseStudyCard';
 import {
   PageContainer,
-  PageHeader,
   PageContent,
   BreadcrumbsContainer,
-  PageIntroMarkdown,
 } from '../Learn.style';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { formatMetatagDate } from 'common/utils';
 import Grid from '@material-ui/core/Grid';
-import { CardsContainer, CategoryHeader } from './CaseStudy.style';
+import { CardsContainer } from './CaseStudy.style';
+import { MarkdownContent, Heading1, Heading2 } from 'components/Markdown';
 
 const { header, intro, categories } = caseStudiesContent;
 
@@ -30,17 +29,15 @@ const Landing: React.FC = () => {
       />
       <PageContent>
         <BreadcrumbsContainer>
-          <Breadcrumbs item={{ to: '/case-studies', label: 'Case Studies' }} />
+          <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>
-        <PageHeader>{header}</PageHeader>
-        <PageIntroMarkdown source={intro} />
+        <Heading1>{header}</Heading1>
+        <MarkdownContent source={intro} />
         {categories.map(category => {
           const caseStudies = category.caseStudies || [];
           return (
             <Fragment key={category.categoryId}>
-              <CategoryHeader id={category.categoryId}>
-                {category.header}
-              </CategoryHeader>
+              <Heading2 id={category.categoryId}>{category.header}</Heading2>
               <CardsContainer>
                 {caseStudies.map(caseStudy => (
                   <Grid

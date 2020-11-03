@@ -8,7 +8,7 @@ import { MarkdownBody } from './Markdown.style';
  * Custom renderers for each Markdown node type. Useful to override the
  * attributes or styling of the rendered element.
  *
- * https://github.com/remarkjs/react-markdown#node-types
+ * https://github.com/remarkjs/react-markdown#appendix-b-node-types
  */
 const customRenderers = {
   link: MarkdownLink,

@@ -1,19 +1,12 @@
 import React, { Fragment } from 'react';
-import {
-  PageContainer,
-  PageContent,
-  PageHeader,
-  SectionHeader,
-  BodyCopyMarkdown,
-  PageIntroMarkdown,
-  ButtonContainer,
-} from '../Learn.style';
+import { PageContainer, PageContent, ButtonContainer } from '../Learn.style';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import SectionButton, { ButtonTheme } from './SectionButton';
 // import TableOfContents, { Item } from 'components/TableOfContents';
 import { Anchor } from 'components/TableOfContents';
 import { formatMetatagDate } from 'common/utils';
 import { LandingSection, landingPageContent } from 'cms-content/learn';
+import { Heading1, Heading2, MarkdownContent } from 'components/Markdown';
 
 /*
   Commenting out all things related to the table of contents, since we only have 2 items as of now.
@@ -45,16 +38,16 @@ const Landing = () => {
         pageDescription={`${date} ${metadataDescription}`}
       />
       <PageContent>
-        <PageHeader>{header}</PageHeader>
-        <PageIntroMarkdown source={intro} />
+        <Heading1>{header}</Heading1>
+        <MarkdownContent source={intro} />
         {/* <TableOfContents items={getSectionItems(sections)} /> */}
         {sections.map((section: LandingSection) => (
           <Fragment key={section.sectionId}>
-            <SectionHeader>
+            <Heading2>
               <Anchor id={section.sectionId} />
               {section.sectionTitle}
-            </SectionHeader>
-            <BodyCopyMarkdown source={section.description} />
+            </Heading2>
+            <MarkdownContent source={section.description} />
             <ButtonContainer>
               <SectionButton
                 cta={section.buttonCta}
