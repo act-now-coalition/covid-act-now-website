@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import { HashLink } from 'react-router-hash-link';
 import { scrollWithOffset } from 'components/TableOfContents';
-import { isValidURL, isInternalLink } from './utils';
+import { isValidURL, isInternalLink, isEmbedTweetLink } from './utils';
+import TweetEmbed from './TweetEmbed';
 
 /**
  * Custom hyperlink for Markdown content. If the link is external, open it on
@@ -16,6 +17,10 @@ const MarkdownLink: React.FC<{
   // If the href parameter is not a valid URL, renders the body as regular text
   if (!isValidURL(href)) {
     return <Fragment>{children}</Fragment>;
+  }
+
+  if (isEmbedTweetLink(href)) {
+    return <TweetEmbed href={href} />;
   }
 
   return isInternalLink(href) ? (
