@@ -3,6 +3,7 @@ import MuiButton from '@material-ui/core/Button';
 import { COLOR_MAP } from 'common/colors';
 
 export const GradientWrapper = styled.div`
+  margin: 0.5rem;
   background: linear-gradient(88.3deg, #00bfea 1.19%, #ff0034 97.75%);
   padding: 3px;
   border-radius: 4px;
@@ -81,6 +82,7 @@ export const MainButton = styled(MuiButton)`
 export const SecondaryButton = styled(MuiButton)`
   ${SharedButtonStyles}
   color: ${COLOR_MAP.BLUE};
+  margin: 0 .25rem;
 
   &:hover {
     box-shadow: none;

@@ -24,6 +24,7 @@ const renderSecondaryButton = (
         color="primary"
         disableRipple
         disableFocusRipple
+        disableElevation
         onClick={() => {
           trackVoteClick(trackLabel);
         }}
@@ -46,11 +47,6 @@ const VoteBanner = () => {
       cta: 'Know your rights',
       trackLabel: 'Voter rights',
     },
-    // {
-    //   redirect: 'https://www.vote.org/voter-id-laws/',
-    //   cta: 'Check voter ID requirements',
-    //   trackLabel: 'Mail-in',
-    // },
   ];
 
   return (
@@ -60,7 +56,7 @@ const VoteBanner = () => {
           <div>
             <Header>Today is Election Day!</Header>
             <Body>
-              We are proud to encourage all eligable voters to make their voices
+              We are proud to encourage all eligible voters to make their voices
               heard. Here are some important resources:
             </Body>
           </div>
