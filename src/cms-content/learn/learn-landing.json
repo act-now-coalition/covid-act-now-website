@@ -17,6 +17,13 @@
       "description": "We’ve received tons of questions from our users ranging from \"how do I talk to people who behave in ways I disagree with?\" to \"what types of masks work better than others?\" Here we address more than 40 of our top questions.",
       "buttonCta": "View FAQ",
       "buttonRedirect": "/faq"
+    },
+    {
+      "sectionTitle": "Case Studies",
+      "sectionId": "case-studies",
+      "description": "Our data saves lives. We’ve worked with a variety of different of organizations from IBM to the California Department of Public Health to help people make informed, safer, and science-backed decisions. Learn how we helped them and many others.",
+      "buttonCta": "View case studies",
+      "buttonRedirect": "/case-studies"
     }
   ]
 }
