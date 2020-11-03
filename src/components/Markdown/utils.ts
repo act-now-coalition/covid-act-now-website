@@ -12,9 +12,3 @@ export function isValidURL(href: string): boolean {
   }
   return true;
 }
-
-export function isEmbedTweetLink(href: string) {
-  return href.startsWith(
-    'https://twitter.com/PublicHealthRx/status/1286762591520346113',
-  );
-}
