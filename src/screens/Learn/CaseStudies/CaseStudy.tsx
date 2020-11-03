@@ -43,13 +43,15 @@ const CaseStudy: React.FC = () => {
           <LearnMoreSection>
             <LearnMoreTitle>{`More ${studyCategory.header.toLowerCase()} studies`}</LearnMoreTitle>
             <LearnMoreBody>
-              {otherCaseStudies.map(study => (
-                <li key={study.caseStudyId}>
-                  <Link to={`/case-study/${study.caseStudyId}`}>
-                    {study.header}
-                  </Link>
-                </li>
-              ))}
+              <ul>
+                {otherCaseStudies.map(study => (
+                  <li key={study.caseStudyId}>
+                    <Link to={`/case-studies/${study.caseStudyId}`}>
+                      {study.header}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </LearnMoreBody>
           </LearnMoreSection>
         )}

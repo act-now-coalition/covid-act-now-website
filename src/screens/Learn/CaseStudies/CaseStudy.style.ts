@@ -5,7 +5,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { COLOR_MAP } from 'common/colors';
 import { COLORS } from 'common';
 import theme from 'assets/theme';
-import { StylesH2, StylesUl } from 'components/Markdown';
+import { StylesH2, StylesMarkdown } from 'components/Markdown';
 
 /*
  TODO (Chelsi): we're almost always removing the underline
@@ -86,8 +86,6 @@ export const LearnMoreTitle = styled.h2`
   ${StylesH2}
 `;
 
-export const LearnMoreBody = styled.p`
-  ul {
-    ${StylesUl};
-  }
+export const LearnMoreBody = styled.div`
+  ${StylesMarkdown}
 `;

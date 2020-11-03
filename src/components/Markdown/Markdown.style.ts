@@ -50,7 +50,7 @@ export const StylesUl = css`
   }
 `;
 
-export const MarkdownBody = styled(ReactMarkdown)`
+export const StylesMarkdown = css`
   ${StylesBody};
 
   /* Inline  */
@@ -79,6 +79,10 @@ export const MarkdownBody = styled(ReactMarkdown)`
   img {
     max-width: 100%;
   }
+`;
+
+export const MarkdownBody = styled(ReactMarkdown)`
+  ${StylesMarkdown}
 `;
 
 export const MarkdownLink = styled.a.attrs(props => ({
