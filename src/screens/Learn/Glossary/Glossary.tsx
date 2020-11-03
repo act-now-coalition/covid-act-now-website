@@ -3,10 +3,8 @@ import { useLocation } from 'react-router-dom';
 import { sortBy, without } from 'lodash';
 import {
   PageContainer,
-  PageHeader,
   PageContent,
   BreadcrumbsContainer,
-  PageIntroMarkdown,
 } from '../Learn.style';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import { StyledAccordion } from 'components/SharedComponents';
@@ -15,6 +13,7 @@ import Breadcrumbs from 'components/Breadcrumbs';
 import { Anchor } from 'components/TableOfContents';
 import { formatMetatagDate } from 'common/utils';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
+import { MarkdownContent, Heading1 } from 'components/Markdown';
 
 const Glossary = () => {
   const {
@@ -61,8 +60,8 @@ const Glossary = () => {
         <BreadcrumbsContainer>
           <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>
-        <PageHeader>{header}</PageHeader>
-        <PageIntroMarkdown source={intro} />
+        <Heading1>{header}</Heading1>
+        <MarkdownContent source={intro} />
         {terms.map((item: Term) => (
           <Fragment key={item.termId}>
             <Anchor id={item.termId} />

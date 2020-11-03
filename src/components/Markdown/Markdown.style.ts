@@ -3,92 +3,124 @@ import { COLOR_MAP } from 'common/colors';
 import ReactMarkdown from 'react-markdown';
 import theme from 'assets/theme';
 
-export const StylesBlockElement = css`
-  margin-bottom: ${theme.spacing(2)}px;
-  &:last-child {
-    margin-bottom: 0;
+const baseCss = css`
+  font-family: ${theme.typography.fontFamily};
+`;
+
+const paragraphCss = css`
+  ${baseCss}
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+  margin-top: ${theme.spacing(2)}px;
+  font-size: 16px;
+  &:first-of-type {
+    margin-top: 0;
   }
 `;
 
-export const StylesBody = css`
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
-  line-height: 1.6;
-  font-size: 16px;
+const heading1Css = css`
+  ${baseCss}
+  line-height: 1.25;
+  margin-bottom: ${1.5 * theme.spacing(1)}px;
 `;
 
-export const StylesH2 = css`
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
+const heading2Css = css`
+  ${baseCss}
+  font-weight: ${theme.typography.fontWeightMedium};
   margin-top: ${theme.spacing(4)}px;
-  margin-bottom: ${theme.spacing(3)}px;
+  margin-bottom: ${theme.spacing(1)}px;
   font-size: 22px;
-  font-weight: 900;
-  line-height: 1.6;
 `;
 
-export const StylesH3 = css`
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
+const heading3Css = css`
+  ${baseCss}
+  color: #000;
   font-size: 18px;
+  font-weight: ${theme.typography.fontWeightBold};
 `;
 
-export const StylesBlockQuoteHighlight = css`
+const blockquoteCss = css`
   background-color: ${COLOR_MAP.LIGHTGRAY_BG};
   padding: ${theme.spacing(2)}px;
   display: inline-block;
-  margin: 0.5rem 0;
+  margin: ${theme.spacing(1)}px 0;
   width: 100%;
   p {
     color: ${COLOR_MAP.GREEN.BASE};
-    font-size: 1.125rem;
+    font-size: 18px;
     font-weight: 900;
     line-height: 1.6;
     margin: 0;
   }
 `;
 
-export const StylesUl = css`
-  ${StylesBody};
-  ${StylesBlockElement};
+/**
+ * These components should be used to ensure that the styles applied to markdown
+ * blocks is also applied to elements outside markdown blocks.
+ */
 
-  li {
-    ${StylesBlockElement};
-    margin-top: ${theme.spacing(1)}px;
-    margin-bottom: ${theme.spacing(1)}px;
-  }
+export const Paragraph = styled.p`
+  ${paragraphCss}
+`;
+
+export const Heading1 = styled.h1`
+  ${heading1Css}
+`;
+
+export const Heading2 = styled.h2`
+  ${heading2Css}
+`;
+
+export const Heading3 = styled.h3`
+  ${heading3Css}
+`;
+
+export const Blockquote = styled.blockquote`
+  ${blockquoteCss}
 `;
 
 export const StylesMarkdown = css`
-  ${StylesBody};
-
-  /* Inline  */
-  a {
-    color: ${COLOR_MAP.BLUE};
-  }
-
-  /* Block elements */
-  p,
-  ul {
-    ${StylesBody}
-    ${StylesBlockElement}
-  }
-
-  li {
-    ${StylesBlockElement}
-    margin-top: ${theme.spacing(1)}px;
-    margin-bottom: ${theme.spacing(1)}px;
+  h1 {
+    ${heading1Css};
   }
 
   h2 {
-    ${StylesH2}
-    color: #000;
+    ${heading2Css};
   }
 
   h3 {
-    ${StylesH3}
+    ${heading3Css};
+  }
+
+  p {
+    ${paragraphCss};
+  }
+
+  li,
+  ol {
+    ${paragraphCss};
+    margin-top: ${theme.spacing(1)}px;
+    margin-bottom: ${theme.spacing(1)}px;
+    a {
+      color: ${COLOR_MAP.BLUE};
+    }
   }
 
   img {
     max-width: 100%;
   }
+
+  blockquote {
+    ${blockquoteCss};
+  }
+`;
+
+/**
+ * Sometimes, we need to apply markdown styles to a non-markdown component. In
+ * this case, we need to wrap the content with `MarkdownStyleContainer`, which
+ * includes the styles that we need.
+ */
+export const MarkdownStyleContainer = styled.div`
+  ${StylesMarkdown};
 `;
 
 export const MarkdownBody = styled(ReactMarkdown)`

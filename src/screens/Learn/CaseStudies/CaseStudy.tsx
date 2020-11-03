@@ -7,14 +7,14 @@ import {
   getMoreStudies,
 } from 'cms-content/learn';
 import * as Style from '../Learn.style';
-import {
-  Logo,
-  LearnMoreSection,
-  LearnMoreTitle,
-  LearnMoreBody,
-} from './CaseStudy.style';
+import { Logo, LearnMoreSection, Author } from './CaseStudy.style';
 import Breadcrumbs from 'components/Breadcrumbs';
-import { BodyCopyMarkdown } from '../Learn.style';
+import {
+  MarkdownContent,
+  Heading1,
+  Heading2,
+  MarkdownStyleContainer,
+} from 'components/Markdown';
 
 const CaseStudy: React.FC = () => {
   let { caseStudyId } = useParams<{ caseStudyId: string }>();
@@ -35,14 +35,14 @@ const CaseStudy: React.FC = () => {
         <Style.BreadcrumbsContainer>
           <Breadcrumbs item={{ to: '/case-studies', label: 'Case Studies' }} />
         </Style.BreadcrumbsContainer>
-        <Style.PageHeader>{header}</Style.PageHeader>
+        <Heading1>{header}</Heading1>
         <Logo src={caseStudy.logoUrl} alt={caseStudy.logoAltText} />
-        <BodyCopyMarkdown source={author} />
-        <BodyCopyMarkdown source={body} />
+        <Author source={author} />
+        <MarkdownContent source={body} />
         {studyCategory && otherCaseStudies.length > 0 && (
           <LearnMoreSection>
-            <LearnMoreTitle>{`More ${studyCategory.header.toLowerCase()} studies`}</LearnMoreTitle>
-            <LearnMoreBody>
+            <Heading2>{`More ${studyCategory.header.toLowerCase()} studies`}</Heading2>
+            <MarkdownStyleContainer>
               <ul>
                 {otherCaseStudies.map(study => (
                   <li key={study.caseStudyId}>
@@ -52,7 +52,7 @@ const CaseStudy: React.FC = () => {
                   </li>
                 ))}
               </ul>
-            </LearnMoreBody>
+            </MarkdownStyleContainer>
           </LearnMoreSection>
         )}
       </Style.PageContent>

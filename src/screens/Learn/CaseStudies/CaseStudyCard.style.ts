@@ -5,7 +5,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { COLOR_MAP } from 'common/colors';
 import { COLORS } from 'common';
 import theme from 'assets/theme';
-import { MarkdownContent, StylesH3 } from 'components/Markdown';
+import { MarkdownContent, Heading3 } from 'components/Markdown';
 
 /*
  TODO (Chelsi): we're almost always removing the underline
@@ -39,9 +39,7 @@ export const CardLogo = styled.img.attrs(props => ({
   margin-bottom: ${1.5 * theme.spacing(1)}px;
 `;
 
-export const CardTitle = styled.h3`
-  ${StylesH3}
-`;
+export const CardTitle = Heading3;
 
 export const CardBody = styled(MarkdownContent)``;
 
