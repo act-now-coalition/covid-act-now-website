@@ -18,7 +18,6 @@ import {
   SearchBarThermometerWrapper,
   SectionWrapper,
   Section,
-  ElectionCountdownContainer,
 } from './HomePage.style';
 import { SelectorWrapper } from 'components/Header/HomePageHeader.style';
 import CompareMain from 'components/Compare/CompareMain';
@@ -82,9 +81,7 @@ export default function HomePage() {
         pageTitle="Realtime US COVID Risk Map by State and County"
         pageDescription={getPageDescription()}
       />
-      <ElectionCountdownContainer>
-        <ElectionCountdown />
-      </ElectionCountdownContainer>
+      <ElectionCountdown />
       <HomePageHeader
         indicatorsLinkOnClick={() => scrollTo(indicatorsRef.current)}
       />

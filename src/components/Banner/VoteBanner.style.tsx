@@ -1,21 +1,21 @@
 import styled, { css } from 'styled-components';
 import MuiButton from '@material-ui/core/Button';
 import { COLOR_MAP } from 'common/colors';
-import { mobileBreakpoint } from 'assets/theme/sizes';
 
+export const GradientWrapper = styled.div`
+  margin: 0.5rem;
+  background: linear-gradient(88.3deg, #00bfea 1.19%, #ff0034 97.75%);
+  padding: 3px;
+  border-radius: 4px;
+`;
 export const BannerContainer = styled.div`
   padding: 1.5rem 1.5rem 1.25rem;
-  border-radius: 4px;
+  border-radius: 2px;
   text-align: center;
-  border-bottom: 1px solid #e0e0e0;
+  background: white;
 
   @media (min-width: 600px) {
-    text-align: left;
     padding: 1.5rem;
-  }
-
-  @media (min-width: ${mobileBreakpoint}) {
-    border: 1px solid #e0e0e0;
   }
 `;
 
@@ -34,19 +34,22 @@ export const Header = styled.h1`
   font-weight: bold;
   margin: 0;
   line-height: 1.25;
-  font-size: 1rem;
+  font-size: 1.25rem;
 `;
 
 export const Body = styled.p`
   line-height: 1.4;
   font-size: 1rem;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
+  max-width: 440px;
+  margin: 1rem auto;
 `;
 
 export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 
   a {
     text-decoration: none;
@@ -68,7 +71,7 @@ export const MainButton = styled(MuiButton)`
   ${SharedButtonStyles}
   background: linear-gradient(88.3deg, #00BFEA 1.19%, #FF0034 97.75%);
   color: white;
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 1.25rem;
   margin-bottom: 0.5rem;
 
   @media (min-width: 600px) {
@@ -79,6 +82,7 @@ export const MainButton = styled(MuiButton)`
 export const SecondaryButton = styled(MuiButton)`
   ${SharedButtonStyles}
   color: ${COLOR_MAP.BLUE};
+  margin: 0 .25rem;
 
   &:hover {
     box-shadow: none;
