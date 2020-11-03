@@ -1,4 +1,4 @@
-import { chain } from 'lodash';
+import { chain, keyBy, reject } from 'lodash';
 import faq from './learn-faq.json';
 import glossary from './learn-glossary.json';
 import landing from './learn-landing.json';
@@ -133,12 +133,37 @@ export interface CaseStudiesContent {
   categories: CaseStudyCategory[];
 }
 
-// Case studies indexed by caseStudyId for easier access on the
-// individual case study route.
-export const caseStudiesById = chain(caseStudies.categories)
+const allCaseStudies = chain(caseStudies.categories)
   .map(category => category.caseStudies)
   .flatten()
-  .keyBy('caseStudyId')
   .value();
+
+// Case studies indexed by caseStudyId for easier access on the
+// individual case study route.
+export const caseStudiesById = keyBy(allCaseStudies, 'caseStudyId');
+
+export function getCaseStudyCategory(
+  caseStudyId: string,
+): CaseStudyCategory | undefined {
+  const isTargetCaseStudy = (study: CaseStudy) =>
+    study.caseStudyId === caseStudyId;
+
+  return caseStudies.categories.find(category =>
+    category.caseStudies.find(isTargetCaseStudy),
+  );
+}
+
+export function getMoreStudies(caseStudyId: string): CaseStudy[] {
+  const category = getCaseStudyCategory(caseStudyId);
+  const isTargetCaseStudy = (study: CaseStudy) =>
+    study.caseStudyId === caseStudyId;
+
+  if (!category) {
+    return [];
+  } else {
+    const otherStudies = reject(category.caseStudies, isTargetCaseStudy);
+    return otherStudies.length > 0 ? otherStudies : [];
+  }
+}
 
 export const caseStudiesContent = caseStudies as CaseStudiesContent;

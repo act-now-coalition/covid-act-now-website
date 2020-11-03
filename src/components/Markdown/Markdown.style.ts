@@ -39,6 +39,17 @@ export const StylesBlockQuoteHighlight = css`
   }
 `;
 
+export const StylesUl = css`
+  ${StylesBody};
+  ${StylesBlockElement};
+
+  li {
+    ${StylesBlockElement};
+    margin-top: ${theme.spacing(1)}px;
+    margin-bottom: ${theme.spacing(1)}px;
+  }
+`;
+
 export const MarkdownBody = styled(ReactMarkdown)`
   ${StylesBody};
 
@@ -68,7 +79,6 @@ export const MarkdownBody = styled(ReactMarkdown)`
   img {
     max-width: 100%;
   }
-
 `;
 
 export const MarkdownLink = styled.a.attrs(props => ({

@@ -4,6 +4,7 @@ import {
   StylesBlockElement,
   StylesBlockQuoteHighlight,
   StylesH2,
+  StylesUl,
 } from './Markdown.style';
 import MarkdownContent from './MarkdownContent';
 
@@ -14,4 +15,5 @@ export {
   StylesBlockElement,
   StylesBlockQuoteHighlight,
   StylesH2,
+  StylesUl,
 };
