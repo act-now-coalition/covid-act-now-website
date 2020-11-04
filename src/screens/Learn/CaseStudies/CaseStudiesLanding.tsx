@@ -21,8 +21,8 @@ const Landing: React.FC = () => {
     <LearnPageContainer>
       <AppMetaTags
         canonicalUrl="/case-studies"
-        pageTitle=""
-        pageDescription={`${date}`}
+        pageTitle="Case Studies from Covid Act Now's Partners"
+        pageDescription={`${date} Learn how different people are using Covid Act Now's data to make decisions for themselves, their organizations, and their communities during COVID`}
       />
       <BreadcrumbsContainer>
         <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
