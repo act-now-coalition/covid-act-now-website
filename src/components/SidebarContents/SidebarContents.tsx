@@ -1,12 +1,16 @@
 import React, { Fragment } from 'react';
 import { useLocation } from 'react-router-dom';
-import ScrollSpy from 'react-scrollspy';
 import * as Styles from './SidebarContents.style';
 
 interface TocItem {
   label: string;
   to: string;
   items?: TocItem[];
+}
+
+function getHash(item: TocItem) {
+  const parts = item.to.split('#');
+  return parts.length > 1 ? parts[1] : '';
 }
 
 const SidebarContents: React.FC<{ items: TocItem[] }> = ({ items }) => {
@@ -25,7 +29,7 @@ const SidebarContents: React.FC<{ items: TocItem[] }> = ({ items }) => {
               </Styles.TopLevelLink>
               {topLevelItem.items && (
                 <Styles.InnerList
-                  items={topLevelItem.items.map(item => item.to.split('#')[1])}
+                  items={topLevelItem.items.map(getHash)}
                   currentClassName={disableScrollSpy ? '' : 'active'}
                 >
                   {topLevelItem.items.map(childItem => (
