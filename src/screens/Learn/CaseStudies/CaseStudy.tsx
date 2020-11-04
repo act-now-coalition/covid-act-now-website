@@ -5,6 +5,7 @@ import {
   caseStudiesById,
   getCaseStudyCategory,
   getMoreStudies,
+  learnPages,
 } from 'cms-content/learn';
 import * as Style from '../Learn.style';
 import { Logo, LearnMoreSection, Author } from './CaseStudy.style';
@@ -15,6 +16,7 @@ import {
   Heading2,
   MarkdownStyleContainer,
 } from 'components/Markdown';
+import SidebarContents from 'components/SidebarContents';
 
 const CaseStudy: React.FC = () => {
   let { caseStudyId } = useParams<{ caseStudyId: string }>();
@@ -56,6 +58,11 @@ const CaseStudy: React.FC = () => {
           </LearnMoreSection>
         )}
       </Style.PageContent>
+      <Style.PageSidebar>
+        <Style.Sticky>
+          <SidebarContents items={learnPages} />
+        </Style.Sticky>
+      </Style.PageSidebar>
     </Style.PageContainer>
   );
 };

@@ -167,3 +167,29 @@ export function getMoreStudies(caseStudyId: string): CaseStudy[] {
 }
 
 export const caseStudiesContent = caseStudies as CaseStudiesContent;
+
+interface TocItem {
+  label: string;
+  to: string;
+  items?: TocItem[];
+}
+
+export const learnPages: TocItem[] = [
+  { label: 'Glossary', to: '/glossary' },
+  {
+    label: 'FAQ',
+    to: '/faq',
+    items: faqContent.sections.map(section => ({
+      to: `/faq#${section.sectionId}`,
+      label: section.sectionTitle,
+    })),
+  },
+  {
+    label: 'Case Studies',
+    to: '/case-studies',
+    items: caseStudiesContent.categories.map(category => ({
+      to: `/case-studies#${category.categoryId}`,
+      label: category.header,
+    })),
+  },
+];

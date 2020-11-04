@@ -4,16 +4,19 @@ import { sortBy, without } from 'lodash';
 import {
   PageContainer,
   PageContent,
+  PageSidebar,
+  Sticky,
   BreadcrumbsContainer,
 } from '../Learn.style';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import { StyledAccordion } from 'components/SharedComponents';
-import { glossaryContent, Term } from 'cms-content/learn';
+import { glossaryContent, Term, learnPages } from 'cms-content/learn';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { Anchor } from 'components/TableOfContents';
 import { formatMetatagDate } from 'common/utils';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { MarkdownContent, Heading1 } from 'components/Markdown';
+import SidebarContents from 'components/SidebarContents';
 
 const Glossary = () => {
   const {
@@ -76,6 +79,11 @@ const Glossary = () => {
           </Fragment>
         ))}
       </PageContent>
+      <PageSidebar>
+        <Sticky>
+          <SidebarContents items={learnPages} />
+        </Sticky>
+      </PageSidebar>
     </PageContainer>
   );
 };

@@ -2,16 +2,19 @@ import React from 'react';
 import {
   PageContainer,
   PageContent,
+  PageSidebar,
+  Sticky,
   BreadcrumbsContainer,
 } from '../Learn.style';
 import Section from './Section';
-import { faqContent, FaqSection } from 'cms-content/learn';
+import { faqContent, FaqSection, learnPages } from 'cms-content/learn';
 import TableOfContents, { Item } from 'components/TableOfContents';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import * as Style from './Faq.style';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { formatMetatagDate } from 'common/utils';
 import { MarkdownContent, Heading1 } from 'components/Markdown';
+import SidebarContents from 'components/SidebarContents';
 
 const Faq = () => {
   const {
@@ -50,6 +53,11 @@ const Faq = () => {
           <Section key={section.sectionId} content={section} />
         ))}
       </PageContent>
+      <PageSidebar>
+        <Sticky>
+          <SidebarContents items={learnPages} />
+        </Sticky>
+      </PageSidebar>
     </PageContainer>
   );
 };
