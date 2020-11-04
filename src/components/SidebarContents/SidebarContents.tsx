@@ -9,7 +9,7 @@ interface TocItem {
 
 const SidebarContents: React.FC<{ items: TocItem[] }> = ({ items }) => {
   return (
-    <div>
+    <nav>
       <Styles.TopLevelList>
         {items.map(topLevelItem => (
           <li key={topLevelItem.to}>
@@ -32,7 +32,7 @@ const SidebarContents: React.FC<{ items: TocItem[] }> = ({ items }) => {
           </li>
         ))}
       </Styles.TopLevelList>
-    </div>
+    </nav>
   );
 };
 

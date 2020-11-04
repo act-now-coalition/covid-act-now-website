@@ -24,7 +24,7 @@ export const PageContent = styled.main`
   padding: 0 1.25rem;
 `;
 
-export const PageSidebar = styled.nav`
+export const PageSidebar = styled.div`
   flex: 1 0 auto;
   max-width: 240px;
   margin-left: ${theme.spacing(4)}px;
