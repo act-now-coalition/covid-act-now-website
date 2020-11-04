@@ -15,11 +15,6 @@ function getHash(item: TocItem) {
 
 const SidebarContents: React.FC<{ items: TocItem[] }> = ({ items }) => {
   const { hash, pathname } = useLocation();
-
-  /**
-   * Disable highlighting based on scroll position when the user is on
-   * a hash link or when the child item belongs to a different page
-   */
   return (
     <nav>
       <Styles.TopLevelList>
@@ -30,6 +25,7 @@ const SidebarContents: React.FC<{ items: TocItem[] }> = ({ items }) => {
                 {topLevelItem.label}
               </Styles.TopLevelLink>
               {topLevelItem.items && topLevelItem.to === pathname && (
+                // Disable scrollspy when the user navigates to a specific section
                 <Styles.InnerList
                   items={topLevelItem.items.map(getHash)}
                   currentClassName={hash ? '' : 'active'}
