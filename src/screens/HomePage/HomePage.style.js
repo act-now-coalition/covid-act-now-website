@@ -63,10 +63,10 @@ export const Section = styled(Box)`
 
 export const BannerContainer = styled.div`
   margin: 0 auto;
-  max-width: 600px;
 
   @media (min-width: ${mobileBreakpoint}) {
     margin-top: 2rem;
+    max-width: 710px;
   }
 `;
 
