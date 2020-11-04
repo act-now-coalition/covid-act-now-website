@@ -17,7 +17,6 @@ export const LearnMoreSection = styled.div`
 
 export const CardsContainer = styled(Grid).attrs(props => ({
   container: true,
-  spacing: 2,
   alignItems: 'stretch',
 }))`
   margin-bottom: ${theme.spacing(3)}px;
@@ -27,6 +26,8 @@ export const CardsContainer = styled(Grid).attrs(props => ({
 `;
 
 export const Author = styled(MarkdownContent)`
+  margin-bottom: 1.5rem;
+
   p {
     font-size: 14px;
   }

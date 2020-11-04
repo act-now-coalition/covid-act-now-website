@@ -25,9 +25,10 @@ export const PageContent = styled.main`
 `;
 
 export const PageSidebar = styled.div`
-  flex: 1 0 auto;
-  max-width: 240px;
+  flex: 1 1 auto;
+  min-width: 240px;
   margin-left: ${theme.spacing(4)}px;
+  margin-right: ${theme.spacing(1)}px;
 `;
 
 export const Sticky = styled.div`
@@ -58,5 +59,6 @@ export const DesktopOnly = styled.div`
   display: none;
   @media (min-width: ${mobileBreakpoint}) {
     display: flex;
+    min-width: fit-content;
   }
 `;
