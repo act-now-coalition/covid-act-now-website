@@ -19,6 +19,14 @@ export const StyledCard = styled(Card)`
   box-shadow: none;
   border: 1px solid ${COLORS.LIGHTGRAY};
 
+  p {
+    margin-bottom: 0;
+  }
+
+  h3 {
+    margin: 0.75rem 0;
+  }
+
   &:hover {
     border: 1px solid ${COLOR_MAP.GREEN.BASE};
     /* Highlights the arrow icon on hover */
@@ -30,12 +38,20 @@ export const StyledCard = styled(Card)`
 
 export const StyledCardContent = styled(CardContent)`
   display: flex;
-  padding: ${theme.spacing(2)}px;
+  padding: 1rem 1.25rem;
+
+  &:last-child {
+    padding-bottom: 1rem;
+  }
 `;
 
 export const CardLogo = styled.img.attrs(props => ({
   height: 28,
 }))`
+  max-height: 40px;
+  max-width: 90px;
+  height: auto;
+  width: auto;
   margin-bottom: ${1.5 * theme.spacing(1)}px;
 `;
 
