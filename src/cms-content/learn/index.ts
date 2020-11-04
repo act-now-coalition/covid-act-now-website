@@ -174,6 +174,7 @@ interface TocItem {
   items?: TocItem[];
 }
 
+// TODO (pablo): Should we have a short heading for categories?
 export const learnPages: TocItem[] = [
   { label: 'Glossary', to: '/glossary' },
   {
