@@ -29,6 +29,8 @@ const CaseStudy: React.FC = () => {
   const studyCategory = getCaseStudyCategory(caseStudyId);
   const otherCaseStudies = getMoreStudies(caseStudyId);
 
+  const fullAuthorText = `By ${author}`;
+
   return (
     <Style.PageContainer>
       <Style.PageContent>
@@ -37,7 +39,7 @@ const CaseStudy: React.FC = () => {
         </Style.BreadcrumbsContainer>
         <Heading1>{header}</Heading1>
         <Logo src={caseStudy.logoUrl} alt={caseStudy.logoAltText} />
-        <Author source={author} />
+        <Author source={fullAuthorText} />
         <MarkdownContent source={body} />
         {studyCategory && otherCaseStudies.length > 0 && (
           <LearnMoreSection>
