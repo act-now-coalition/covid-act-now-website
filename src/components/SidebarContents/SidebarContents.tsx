@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { useLocation } from 'react-router-dom';
 import * as Styles from './SidebarContents.style';
 
 interface TocItem {
@@ -7,7 +8,13 @@ interface TocItem {
   items?: TocItem[];
 }
 
+function getHash(item: TocItem) {
+  const parts = item.to.split('#');
+  return parts.length > 1 ? parts[1] : '';
+}
+
 const SidebarContents: React.FC<{ items: TocItem[] }> = ({ items }) => {
+  const { hash, pathname } = useLocation();
   return (
     <nav>
       <Styles.TopLevelList>
@@ -17,8 +24,12 @@ const SidebarContents: React.FC<{ items: TocItem[] }> = ({ items }) => {
               <Styles.TopLevelLink to={topLevelItem.to}>
                 {topLevelItem.label}
               </Styles.TopLevelLink>
-              {topLevelItem.items && (
-                <Styles.InnerList>
+              {topLevelItem.items && topLevelItem.to === pathname && (
+                // Disable scrollspy when the user navigates to a specific section
+                <Styles.InnerList
+                  items={topLevelItem.items.map(getHash)}
+                  currentClassName={hash ? '' : 'active'}
+                >
                   {topLevelItem.items.map(childItem => (
                     <li key={childItem.to}>
                       <Styles.InnerLevelLink to={childItem.to}>

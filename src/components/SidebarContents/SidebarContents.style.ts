@@ -4,6 +4,7 @@ import theme from 'assets/theme';
 import { COLOR_MAP } from 'common/colors';
 import { NavHashLink } from 'react-router-hash-link';
 import { scrollWithOffset } from 'components/TableOfContents';
+import ScrollSpy from 'react-scrollspy';
 
 const topBarHeight = 64;
 
@@ -12,6 +13,11 @@ const fontCss = css`
   font-size: 15px;
   font-weight: 400;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
+`;
+
+const activeCss = css`
+  font-weight: bold;
+  color: #000;
 `;
 
 export const TopLevelList = styled.ul`
@@ -34,8 +40,7 @@ export const TopLevelLink = styled(NavLink).attrs(props => ({
   padding-left: ${theme.spacing(3)}px;
   border-left: solid 3px transparent;
   &.active {
-    font-weight: bold;
-    color: #000;
+    ${activeCss}
     border-left: solid 3px ${COLOR_MAP.GREEN.BASE};
   }
 `;
@@ -47,17 +52,19 @@ export const InnerLevelLink = styled(NavHashLink).attrs(props => ({
   ${fontCss}
   text-decoration: none;
   &.active {
-    font-weight: bold;
-    color: #000;
+    ${activeCss}
   }
 `;
 
-export const InnerList = styled.ul`
+export const InnerList = styled(ScrollSpy)`
   ${fontCss}
   list-style-type: none;
   margin-top: ${theme.spacing(2)}px;
   padding-inline-start: ${theme.spacing(2) + theme.spacing(3)}px;
   li {
     margin-bottom: ${theme.spacing(2)}px;
+    &.active a {
+      ${activeCss}
+    }
   }
 `;
