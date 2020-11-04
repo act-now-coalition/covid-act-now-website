@@ -95,6 +95,7 @@ export type Icubeds = HospitalResourceUtilization;
  *  1. If a region does not report cases for a period of time, the first day
  *     cases start reporting again will not be included. This day likely includes
  *     multiple days worth of cases and can be misleading to the overall series.
+ *  2. Any days with negative new cases are removed.
  *
  */
 export type Newcases = number | null;
@@ -106,6 +107,15 @@ export type Metrics1 = Metrics;
  * Ratio of people who test positive calculated using a 7-day rolling average.
  */
 export type Testpositivityratio = number | null;
+/**
+ * Method used to determine test positivity ratio.
+ */
+export type TestPositivityRatioMethod =
+  | 'CMSTesting'
+  | 'HHSTesting'
+  | 'Valorum'
+  | 'covid_tracking'
+  | 'other';
 /**
  * The number of cases per 100k population calculated using a 7-day rolling average.
  */
@@ -189,12 +199,19 @@ export interface HospitalResourceUtilization {
  */
 export interface Metrics {
   testPositivityRatio: Testpositivityratio;
+  testPositivityRatioDetails?: TestPositivityRatioDetails;
   caseDensity: Casedensity;
   contactTracerCapacityRatio: Contacttracercapacityratio;
   infectionRate: Infectionrate;
   infectionRateCI90: Infectionrateci90;
   icuHeadroomRatio: Icuheadroomratio;
   icuHeadroomDetails?: ICUHeadroomMetricDetails;
+}
+/**
+ * Details about how the test positivity ratio was calculated.
+ */
+export interface TestPositivityRatioDetails {
+  source: TestPositivityRatioMethod;
 }
 /**
  * Details about how the ICU Headroom Metric was calculated.
