@@ -1,11 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { sortBy, without } from 'lodash';
-import {
-  PageContainer,
-  PageContent,
-  BreadcrumbsContainer,
-} from '../Learn.style';
+import { BreadcrumbsContainer } from '../Learn.style';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import { StyledAccordion } from 'components/SharedComponents';
 import { glossaryContent, Term } from 'cms-content/learn';
@@ -14,8 +10,9 @@ import { Anchor } from 'components/TableOfContents';
 import { formatMetatagDate } from 'common/utils';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { MarkdownContent, Heading1 } from 'components/Markdown';
+import LearnPageContainer from '../LearnPageContainer';
 
-const Glossary = () => {
+const Glossary: React.FC = () => {
   const {
     header,
     intro,
@@ -50,33 +47,31 @@ const Glossary = () => {
   }
 
   return (
-    <PageContainer>
+    <LearnPageContainer>
       <AppMetaTags
         canonicalUrl="/glossary"
         pageTitle={metadataTitle}
         pageDescription={`${date} ${metadataDescription}`}
       />
-      <PageContent>
-        <BreadcrumbsContainer>
-          <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
-        </BreadcrumbsContainer>
-        <Heading1>{header}</Heading1>
-        <MarkdownContent source={intro} />
-        {terms.map((item: Term) => (
-          <Fragment key={item.termId}>
-            <Anchor id={item.termId} />
-            <StyledAccordion
-              summaryText={item.term}
-              detailText={item.definition}
-              expanded={isExpanded(item.termId)}
-              onChange={(event: {}, expanded: boolean) =>
-                onChangeExpandedTerm(item.termId, expanded)
-              }
-            />
-          </Fragment>
-        ))}
-      </PageContent>
-    </PageContainer>
+      <BreadcrumbsContainer>
+        <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
+      </BreadcrumbsContainer>
+      <Heading1>{header}</Heading1>
+      <MarkdownContent source={intro} />
+      {terms.map((item: Term) => (
+        <Fragment key={item.termId}>
+          <Anchor id={item.termId} />
+          <StyledAccordion
+            summaryText={item.term}
+            detailText={item.definition}
+            expanded={isExpanded(item.termId)}
+            onChange={(event: {}, expanded: boolean) =>
+              onChangeExpandedTerm(item.termId, expanded)
+            }
+          />
+        </Fragment>
+      ))}
+    </LearnPageContainer>
   );
 };
 
