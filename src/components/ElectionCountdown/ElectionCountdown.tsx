@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import Countdown from 'react-countdown';
 import {
   Container,
@@ -12,14 +12,20 @@ import {
   StyledLink,
 } from './ElectionCountdown.style';
 import { trackVoteClick } from 'components/Analytics';
+import { VoteBanner } from 'components/Banner';
+import {
+  ElectionCountdownContainer,
+  BannerContainer,
+} from 'screens/HomePage/HomePage.style';
 
 const CountdownContent = (props: {
   days: number;
   hours: number;
   minutes: number;
   seconds: number;
+  completed: boolean;
 }) => {
-  const { days, hours, minutes, seconds } = props;
+  const { days, hours, minutes, seconds, completed } = props;
   const countdownSections = [
     {
       measure: 'days',
@@ -46,8 +52,15 @@ const CountdownContent = (props: {
     rel: 'noopener noreferrer',
   };
 
+  if (completed) {
+    return (
+      <BannerContainer>
+        <VoteBanner />
+      </BannerContainer>
+    );
+  }
   return (
-    <Fragment>
+    <ElectionCountdownContainer>
       <FlagIcon src={flagIconPath} alt="American flag" />
       <Container>
         <BannerSection>
@@ -78,7 +91,7 @@ const CountdownContent = (props: {
           </StyledLink>
         </BannerSection>
       </Container>
-    </Fragment>
+    </ElectionCountdownContainer>
   );
 };
 

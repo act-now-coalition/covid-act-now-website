@@ -18,14 +18,14 @@ import {
   SearchBarThermometerWrapper,
   SectionWrapper,
   Section,
-  ElectionCountdownContainer,
+  BannerContainer,
 } from './HomePage.style';
 import { SelectorWrapper } from 'components/Header/HomePageHeader.style';
 import CompareMain from 'components/Compare/CompareMain';
 import Explore from 'components/Explore';
 import { formatMetatagDate } from 'common/utils';
 import { getRandomStateFipsList } from './utils';
-import ElectionCountdown from 'components/ElectionCountdown';
+import { DonationBanner } from 'components/Banner';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -82,9 +82,9 @@ export default function HomePage() {
         pageTitle="Realtime US COVID Risk Map by State and County"
         pageDescription={getPageDescription()}
       />
-      <ElectionCountdownContainer>
-        <ElectionCountdown />
-      </ElectionCountdownContainer>
+      <BannerContainer>
+        <DonationBanner />
+      </BannerContainer>
       <HomePageHeader
         indicatorsLinkOnClick={() => scrollTo(indicatorsRef.current)}
       />
