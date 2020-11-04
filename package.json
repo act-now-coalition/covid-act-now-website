@@ -63,6 +63,7 @@
     "react-share": "^4.1.0",
     "react-simple-maps": "^1.0.0-beta.0",
     "react-tooltip": "^4.1.2",
+    "react-twitter-embed": "^3.0.3",
     "sharp": "^0.25.2",
     "styled-components": "^5.0.1",
     "tar": "^6.0.1",
