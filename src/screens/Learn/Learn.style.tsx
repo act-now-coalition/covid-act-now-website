@@ -26,7 +26,7 @@ export const PageContent = styled.main`
 
 export const PageSidebar = styled.nav`
   flex: 1 0 auto;
-  min-width: 240px;
+  max-width: 240px;
   margin-left: ${theme.spacing(4)}px;
 `;
 

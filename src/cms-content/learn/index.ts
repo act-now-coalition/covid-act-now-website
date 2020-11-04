@@ -189,7 +189,7 @@ export const learnPages: TocItem[] = [
     to: '/case-studies',
     items: caseStudiesContent.categories.map(category => ({
       to: `/case-studies#${category.categoryId}`,
-      label: category.header,
+      label: category.header.replace('Learn from ', ''),
     })),
   },
 ];

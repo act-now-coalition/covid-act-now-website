@@ -5,7 +5,6 @@ import {
   caseStudiesById,
   getCaseStudyCategory,
   getMoreStudies,
-  learnPages,
 } from 'cms-content/learn';
 import * as Style from '../Learn.style';
 import { Logo, LearnMoreSection, Author } from './CaseStudy.style';
@@ -16,7 +15,7 @@ import {
   Heading2,
   MarkdownStyleContainer,
 } from 'components/Markdown';
-import SidebarContents from 'components/SidebarContents';
+import LearnPageContainer from '../LearnPageContainer';
 
 const CaseStudy: React.FC = () => {
   let { caseStudyId } = useParams<{ caseStudyId: string }>();
@@ -32,38 +31,31 @@ const CaseStudy: React.FC = () => {
   const otherCaseStudies = getMoreStudies(caseStudyId);
 
   return (
-    <Style.PageContainer>
-      <Style.PageContent>
-        <Style.BreadcrumbsContainer>
-          <Breadcrumbs item={{ to: '/case-studies', label: 'Case Studies' }} />
-        </Style.BreadcrumbsContainer>
-        <Heading1>{header}</Heading1>
-        <Logo src={caseStudy.logoUrl} alt={caseStudy.logoAltText} />
-        <Author source={author} />
-        <MarkdownContent source={body} />
-        {studyCategory && otherCaseStudies.length > 0 && (
-          <LearnMoreSection>
-            <Heading2>{`More ${studyCategory.header.toLowerCase()} studies`}</Heading2>
-            <MarkdownStyleContainer>
-              <ul>
-                {otherCaseStudies.map(study => (
-                  <li key={study.caseStudyId}>
-                    <Link to={`/case-studies/${study.caseStudyId}`}>
-                      {study.header}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </MarkdownStyleContainer>
-          </LearnMoreSection>
-        )}
-      </Style.PageContent>
-      <Style.PageSidebar>
-        <Style.Sticky>
-          <SidebarContents items={learnPages} />
-        </Style.Sticky>
-      </Style.PageSidebar>
-    </Style.PageContainer>
+    <LearnPageContainer>
+      <Style.BreadcrumbsContainer>
+        <Breadcrumbs item={{ to: '/case-studies', label: 'Case Studies' }} />
+      </Style.BreadcrumbsContainer>
+      <Heading1>{header}</Heading1>
+      <Logo src={caseStudy.logoUrl} alt={caseStudy.logoAltText} />
+      <Author source={author} />
+      <MarkdownContent source={body} />
+      {studyCategory && otherCaseStudies.length > 0 && (
+        <LearnMoreSection>
+          <Heading2>{`More ${studyCategory.header.toLowerCase()} studies`}</Heading2>
+          <MarkdownStyleContainer>
+            <ul>
+              {otherCaseStudies.map(study => (
+                <li key={study.caseStudyId}>
+                  <Link to={`/case-studies/${study.caseStudyId}`}>
+                    {study.header}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </MarkdownStyleContainer>
+        </LearnMoreSection>
+      )}
+    </LearnPageContainer>
   );
 };
 
