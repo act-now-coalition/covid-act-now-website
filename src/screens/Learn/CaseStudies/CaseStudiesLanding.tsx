@@ -1,18 +1,21 @@
 import React, { Fragment } from 'react';
 import { useRouteMatch } from 'react-router-dom';
-import { caseStudiesContent } from 'cms-content/learn';
+import Grid from '@material-ui/core/Grid';
+import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
+import Breadcrumbs from 'components/Breadcrumbs';
+import { MarkdownContent, Heading1, Heading2 } from 'components/Markdown';
+import SidebarContents from 'components/SidebarContents';
+import { formatMetatagDate } from 'common/utils';
+import { caseStudiesContent, learnPages } from 'cms-content/learn';
 import CaseStudyCard from './CaseStudyCard';
 import {
   PageContainer,
   PageContent,
+  PageSidebar,
+  Sticky,
   BreadcrumbsContainer,
 } from '../Learn.style';
-import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
-import Breadcrumbs from 'components/Breadcrumbs';
-import { formatMetatagDate } from 'common/utils';
-import Grid from '@material-ui/core/Grid';
 import { CardsContainer } from './CaseStudy.style';
-import { MarkdownContent, Heading1, Heading2 } from 'components/Markdown';
 
 const { header, intro, categories } = caseStudiesContent;
 
@@ -59,6 +62,11 @@ const Landing: React.FC = () => {
           );
         })}
       </PageContent>
+      <PageSidebar>
+        <Sticky>
+          <SidebarContents items={learnPages} />
+        </Sticky>
+      </PageSidebar>
     </PageContainer>
   );
 };
