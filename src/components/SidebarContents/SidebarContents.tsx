@@ -20,10 +20,6 @@ const SidebarContents: React.FC<{ items: TocItem[] }> = ({ items }) => {
    * Disable highlighting based on scroll position when the user is on
    * a hash link or when the child item belongs to a different page
    */
-  function highlightItem(topLevelItem: TocItem): boolean {
-    return !hash && topLevelItem.to === pathname;
-  }
-
   return (
     <nav>
       <Styles.TopLevelList>
@@ -33,10 +29,10 @@ const SidebarContents: React.FC<{ items: TocItem[] }> = ({ items }) => {
               <Styles.TopLevelLink to={topLevelItem.to}>
                 {topLevelItem.label}
               </Styles.TopLevelLink>
-              {topLevelItem.items && (
+              {topLevelItem.items && topLevelItem.to === pathname && (
                 <Styles.InnerList
                   items={topLevelItem.items.map(getHash)}
-                  currentClassName={highlightItem(topLevelItem) ? 'active' : ''}
+                  currentClassName={hash ? '' : 'active'}
                 >
                   {topLevelItem.items.map(childItem => (
                     <li key={childItem.to}>
