@@ -36,7 +36,7 @@ const CaseStudy: React.FC = () => {
     <LearnPageContainer>
       <AppMetaTags
         canonicalUrl={`/case-studies/${caseStudyId}`}
-        pageTitle="Case Studies from Covid Act Now's Partners"
+        pageTitle={`Case Study: ${caseStudy.shortTitle}`}
         pageDescription={`${date} Learn how different people are using Covid Act Now's data to make decisions for themselves, their organizations, and their communities during COVID`}
       />
       <Style.BreadcrumbsContainer>
