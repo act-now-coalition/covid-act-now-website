@@ -13,12 +13,18 @@ import { formatMetatagDate } from 'common/utils';
 import Grid from '@material-ui/core/Grid';
 import { CardsContainer } from './CaseStudy.style';
 import { MarkdownContent, Heading1, Heading2 } from 'components/Markdown';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
 
 const { header, intro, categories } = caseStudiesContent;
 
 const Landing: React.FC = () => {
   let { url } = useRouteMatch();
   const date = formatMetatagDate();
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const cardGridSpacing = isMobile ? 2 : 3;
 
   return (
     <PageContainer>
@@ -38,7 +44,7 @@ const Landing: React.FC = () => {
           return (
             <Fragment key={category.categoryId}>
               <Heading2 id={category.categoryId}>{category.header}</Heading2>
-              <CardsContainer>
+              <CardsContainer spacing={cardGridSpacing}>
                 {caseStudies.map(caseStudy => (
                   <Grid
                     container

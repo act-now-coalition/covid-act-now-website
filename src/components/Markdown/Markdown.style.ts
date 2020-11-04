@@ -25,7 +25,7 @@ const heading1Css = css`
 
 const heading2Css = css`
   ${baseCss}
-  font-weight: ${theme.typography.fontWeightMedium};
+  font-weight: ${theme.typography.fontWeightBold};
   margin-top: ${theme.spacing(4)}px;
   margin-bottom: ${theme.spacing(1)}px;
   font-size: 22px;
