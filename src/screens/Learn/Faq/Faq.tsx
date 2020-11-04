@@ -1,16 +1,15 @@
 import React from 'react';
-import { BreadcrumbsContainer } from '../Learn.style';
+import { BreadcrumbsContainer, MobileOnly } from '../Learn.style';
 import Section from './Section';
 import { faqContent, FaqSection } from 'cms-content/learn';
 import TableOfContents, { Item } from 'components/TableOfContents';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
-import * as Style from './Faq.style';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { formatMetatagDate } from 'common/utils';
 import { MarkdownContent, Heading1 } from 'components/Markdown';
 import LearnPageContainer from '../LearnPageContainer';
 
-const Faq = () => {
+const Faq: React.FC = () => {
   const {
     header,
     intro,
@@ -39,9 +38,9 @@ const Faq = () => {
       </BreadcrumbsContainer>
       <Heading1>{header}</Heading1>
       <MarkdownContent source={intro} />
-      <Style.MobileOnly>
+      <MobileOnly>
         <TableOfContents items={getSectionItems(sections)} />
-      </Style.MobileOnly>
+      </MobileOnly>
       {sections.map((section: FaqSection) => (
         <Section key={section.sectionId} content={section} />
       ))}

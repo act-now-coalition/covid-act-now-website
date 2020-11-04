@@ -46,3 +46,17 @@ export const ButtonContainer = styled.div`
   margin-top: ${theme.spacing(2)}px;
   margin-bottom: ${theme.spacing(3)}px;
 `;
+
+export const MobileOnly = styled.div`
+  display: initial;
+  @media (min-width: ${mobileBreakpoint}) {
+    display: none;
+  }
+`;
+
+export const DesktopOnly = styled.div`
+  display: none;
+  @media (min-width: ${mobileBreakpoint}) {
+    display: flex;
+  }
+`;

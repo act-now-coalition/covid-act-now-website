@@ -12,7 +12,7 @@ import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { MarkdownContent, Heading1 } from 'components/Markdown';
 import LearnPageContainer from '../LearnPageContainer';
 
-const Glossary = () => {
+const Glossary: React.FC = () => {
   const {
     header,
     intro,
