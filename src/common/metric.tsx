@@ -71,9 +71,9 @@ function getMetricDefinition(metric: Metric) {
   return metricDefinitions[metric];
 }
 
-export function getMetricDisclaimer(metric: Metric) {
+export function getMetricDisclaimer(metric: Metric, projections: Projections) {
   const metricDefinition = getMetricDefinition(metric);
-  return metricDefinition.renderDisclaimer();
+  return metricDefinition.renderDisclaimer(projections);
 }
 
 export function getMetricStatusText(metric: Metric, projections: Projections) {
