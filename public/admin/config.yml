@@ -345,6 +345,14 @@ collections:
                       required: false,
                       hint: 'Optional tags for the case study. Separate with commas. (ex: api, embed, etc)',
                     }
+          - label: Metadata title
+            name: metadataTitle
+            widget: text
+            default: true
+          - label: Metadata description
+            name: metadataDescription
+            widget: text
+            default: true
       - name: Products
         label: 'Products'
         file: src/cms-content/learn/products.json
