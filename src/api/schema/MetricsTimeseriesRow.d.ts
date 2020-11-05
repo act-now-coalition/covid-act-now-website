@@ -9,6 +9,15 @@
  */
 export type Testpositivityratio = number | null;
 /**
+ * Method used to determine test positivity ratio.
+ */
+export type TestPositivityRatioMethod =
+  | 'CMSTesting'
+  | 'HHSTesting'
+  | 'Valorum'
+  | 'covid_tracking'
+  | 'other';
+/**
  * The number of cases per 100k population calculated using a 7-day rolling average.
  */
 export type Casedensity = number | null;
@@ -54,6 +63,7 @@ export type Date = string;
  */
 export interface MetricsTimeseriesRow {
   testPositivityRatio: Testpositivityratio;
+  testPositivityRatioDetails?: TestPositivityRatioDetails;
   caseDensity: Casedensity;
   contactTracerCapacityRatio: Contacttracercapacityratio;
   infectionRate: Infectionrate;
@@ -61,6 +71,12 @@ export interface MetricsTimeseriesRow {
   icuHeadroomRatio: Icuheadroomratio;
   icuHeadroomDetails?: ICUHeadroomMetricDetails;
   date: Date;
+}
+/**
+ * Details about how the test positivity ratio was calculated.
+ */
+export interface TestPositivityRatioDetails {
+  source: TestPositivityRatioMethod;
 }
 /**
  * Details about how the ICU Headroom Metric was calculated.

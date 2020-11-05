@@ -129,12 +129,27 @@ function renderStatus(projections: Projections) {
   );
 }
 
-function renderDisclaimer(): React.ReactElement {
+function renderDisclaimer(projections: Projections): React.ReactElement {
+  const usingCMSData =
+    projections.primary.testPositiveRateSource === 'CMSTesting';
   return (
     <Fragment>
       The World Health Organization recommends a positive test rate of less than
       10%. The countries most successful in containing COVID have rates of 3% or
-      less. We calculate the rate as a 7-day trailing average. Learn more about{' '}
+      less.{' '}
+      {usingCMSData ? (
+        <React.Fragment>
+          {METRIC_NAME} for {projections.locationName} comes from data
+          aggregated by the Centers for Medicare and Medicaid Services. It is
+          calculated as a 14-day trailing average and may take a week or more to
+          update.
+        </React.Fragment>
+      ) : (
+        <React.Fragment>
+          We calculate the rate as a 7-day trailing average.
+        </React.Fragment>
+      )}{' '}
+      Learn more about{' '}
       <ExternalLink href="https://docs.google.com/document/d/1cd_cEpNiIl1TzUJBvw9sHLbrbUZ2qCxgN32IqVLa3Do/edit">
         our methodology
       </ExternalLink>{' '}
