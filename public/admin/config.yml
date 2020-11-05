@@ -371,7 +371,7 @@ collections:
             fields:
               - { label: Section title, name: sectionTitle, widget: string, hint: 'Product name (ex. API)' }
               - { label: Section ID, name: sectionId, widget: string, hint: 'Section title in all lowercase, divided by dashes if multi-word (ex: response-simulator)' }
-              - { label: Section subtitle, name: sectionSubtitle, widget: string, hint: 'Short description underneath title' }
+              - { label: Section subtitle, name: sectionSubtitle, widget: text, hint: 'Short description underneath title' }
               - { label: Section description, name: sectionDescription, widget: markdown, hint: 'Longer product description' }
               - { label: Notes, name: notes, widget: markdown, required: false, hint: 'Optional section for product-related notes or announcements' }
               - label: Buttons

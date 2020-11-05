@@ -194,3 +194,27 @@ export const learnPages: TocItem[] = [
     })),
   },
 ];
+
+/**
+ * Products
+ */
+
+export interface LandingPageButton {
+  cta: string;
+  redirect: string;
+}
+
+export interface ProductsSection {
+  sectionTitle: string;
+  sectionId: string;
+  sectionSubtitle: string;
+  sectionDescription: Markdown;
+  notes?: Markdown;
+  buttons: LandingPageButton[];
+}
+
+export interface ProductsContent {
+  header: string;
+  intro: Markdown;
+  sections: ProductsSection[];
+}
