@@ -125,7 +125,6 @@ const ChartsHolder = (props: {
     alarmLevel,
   );
 
-  const showRecommendations = !props.county;
   const recommendationsFeedbackForm = `https://can386399.typeform.com/to/WSPYSGPe#source=can&id=${uuidv4()}&fips=${
     projection.fips
   }`;
@@ -170,21 +169,19 @@ const ChartsHolder = (props: {
               stateId={props.stateId}
             />
             <MainContentInner>
-              {showRecommendations && (
-                <Recommend
-                  introCopy={recommendationsIntro}
-                  recommendations={recommendationsMainContent}
-                  locationName={projection.locationName}
-                  shareUrl={recommendsShareUrl}
-                  shareQuote={recommendsShareQuote}
-                  recommendationsRef={recommendationsRef}
-                  feedbackFormUrl={recommendationsFeedbackForm}
-                  fedLevel={getFedLevel(props.projections.primary)}
-                  harvardLevel={getHarvardLevel(props.projections.primary)}
-                  harvardModalLocationCopy={recommendationsHarvardModalCopy}
-                  fedModalLocationCopy={recommendationsFedModalCopy}
-                />
-              )}
+              <Recommend
+                introCopy={recommendationsIntro}
+                recommendations={recommendationsMainContent}
+                locationName={projection.locationName}
+                shareUrl={recommendsShareUrl}
+                shareQuote={recommendsShareQuote}
+                recommendationsRef={recommendationsRef}
+                feedbackFormUrl={recommendationsFeedbackForm}
+                fedLevel={getFedLevel(props.projections.primary)}
+                harvardLevel={getHarvardLevel(props.projections.primary)}
+                harvardModalLocationCopy={recommendationsHarvardModalCopy}
+                fedModalLocationCopy={recommendationsFedModalCopy}
+              />
               {ALL_METRICS.map(metric => (
                 <ChartBlock
                   key={metric}
