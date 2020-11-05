@@ -13,7 +13,7 @@ export const MoreInfo = styled(MuiButton)`
   letter-spacing: 0;
 
   &:hover {
-    background-color: #fafafa;
+    background-color: ${COLOR_MAP.LIGHTGRAY_BG};
   }
 
   svg {

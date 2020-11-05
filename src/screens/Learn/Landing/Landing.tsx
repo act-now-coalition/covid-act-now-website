@@ -1,24 +1,14 @@
 import React, { Fragment } from 'react';
-import {
-  PageContainer,
-  PageContent,
-  PageHeader,
-  SectionHeader,
-  MarkdownBodyCopy,
-  PageIntro,
-} from '../Learn.style';
+import { ButtonContainer } from '../Learn.style';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import SectionButton, { ButtonTheme } from './SectionButton';
-// import TableOfContents, { Item } from 'components/TableOfContents';
 import { Anchor } from 'components/TableOfContents';
 import { formatMetatagDate } from 'common/utils';
 import { LandingSection, landingPageContent } from 'cms-content/learn';
+import { Heading1, Heading2, MarkdownContent } from 'components/Markdown';
+import LearnPageContainer from '../LearnPageContainer';
 
-/*
-  Commenting out all things related to the table of contents, since we only have 2 items as of now.
-*/
-
-const Landing = () => {
+const Landing: React.FC = () => {
   const {
     header,
     intro,
@@ -27,42 +17,34 @@ const Landing = () => {
     metadataDescription,
   } = landingPageContent;
 
-  // function getSectionItems(sections: LandingSection[]): Item[] {
-  //   return sections.map(section => ({
-  //     id: section.sectionId,
-  //     title: section.sectionTitle,
-  //   }));
-  // }
-
   const date = formatMetatagDate();
 
   return (
-    <PageContainer>
+    <LearnPageContainer>
       <AppMetaTags
         canonicalUrl="/learn"
         pageTitle={metadataTitle}
         pageDescription={`${date} ${metadataDescription}`}
       />
-      <PageContent>
-        <PageHeader>{header}</PageHeader>
-        <PageIntro source={intro} />
-        {/* <TableOfContents items={getSectionItems(sections)} /> */}
-        {sections.map((section: LandingSection) => (
-          <Fragment key={section.sectionId}>
-            <SectionHeader>
-              <Anchor id={section.sectionId} />
-              {section.sectionTitle}
-            </SectionHeader>
-            <MarkdownBodyCopy source={section.description} />
+      <Heading1>{header}</Heading1>
+      <MarkdownContent source={intro} />
+      {sections.map((section: LandingSection) => (
+        <Fragment key={section.sectionId}>
+          <Heading2>
+            <Anchor id={section.sectionId} />
+            {section.sectionTitle}
+          </Heading2>
+          <MarkdownContent source={section.description} />
+          <ButtonContainer>
             <SectionButton
               cta={section.buttonCta}
               redirect={section.buttonRedirect}
               theme={ButtonTheme.WHITE}
             />
-          </Fragment>
-        ))}
-      </PageContent>
-    </PageContainer>
+          </ButtonContainer>
+        </Fragment>
+      ))}
+    </LearnPageContainer>
   );
 };
 
