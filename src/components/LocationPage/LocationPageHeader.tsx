@@ -35,6 +35,7 @@ import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
 import { LEVEL_COLOR } from 'common/colors';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import { Metric } from 'common/metric';
+import ExternalLink from 'components/ExternalLink';
 
 const NewFeatureCopy = (props: {
   locationName: string;
@@ -139,6 +140,9 @@ const LocationPageHeader = (props: {
     },
   ];
 
+  const usingCMSData =
+    props.projections.primary.testPositiveRateSource === 'CMSTesting';
+
   return (
     <Fragment>
       <ColoredHeaderBanner bgcolor={fillColor} />
@@ -187,22 +191,27 @@ const LocationPageHeader = (props: {
             </SectionHalf>
             <SectionHalf>
               <InfoOutlinedIcon />
-              {props.projections.isCounty ? (
+              {usingCMSData ? (
+                <SectionColumn isUpdateCopy>
+                  <ColumnTitle isUpdateCopy>Update</ColumnTitle>
+                  <Copy isUpdateCopy={true}>
+                    As of November 4th, we are using positive test rate data for{' '}
+                    {locationName} from the U.S. Department of Health & Human
+                    Services as aggregated by the Centers for Medicare &
+                    Medicaid Services. See{' '}
+                    <ExternalLink href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit">
+                      our data sources
+                    </ExternalLink>{' '}
+                    for more info.
+                  </Copy>
+                </SectionColumn>
+              ) : (
                 <SectionColumn isUpdateCopy>
                   <ColumnTitle isUpdateCopy>New feature</ColumnTitle>
                   <NewFeatureCopy
                     locationName={locationName}
                     onNewUpdateClick={props.onNewUpdateClick}
                   />
-                </SectionColumn>
-              ) : (
-                <SectionColumn isUpdateCopy>
-                  <ColumnTitle isUpdateCopy>Update</ColumnTitle>
-                  <Copy isUpdateCopy={true}>
-                    As of October 14th, we have switched to using data from the
-                    U.S. Department of Health & Human Services to calculate
-                    Positive Test Rate for most states.
-                  </Copy>
                 </SectionColumn>
               )}
             </SectionHalf>
