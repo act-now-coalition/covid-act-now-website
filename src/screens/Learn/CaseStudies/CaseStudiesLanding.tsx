@@ -13,7 +13,13 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import LearnPageContainer from '../LearnPageContainer';
 
-const { header, intro, categories } = caseStudiesContent;
+const {
+  header,
+  intro,
+  categories,
+  metadataTitle,
+  metadataDescription,
+} = caseStudiesContent;
 
 const Landing: React.FC = () => {
   let { url } = useRouteMatch();
@@ -27,8 +33,8 @@ const Landing: React.FC = () => {
     <LearnPageContainer>
       <AppMetaTags
         canonicalUrl="/case-studies"
-        pageTitle="Case Studies from Covid Act Now's Partners"
-        pageDescription={`${date} Learn how different people are using Covid Act Now's data to make decisions for themselves, their organizations, and their communities during COVID`}
+        pageTitle={metadataTitle}
+        pageDescription={`${date} ${metadataDescription}`}
       />
       <BreadcrumbsContainer>
         <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
