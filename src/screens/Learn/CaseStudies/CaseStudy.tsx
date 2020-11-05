@@ -17,7 +17,12 @@ import {
 } from 'cms-content/learn';
 import * as Style from '../Learn.style';
 import LearnPageContainer from '../LearnPageContainer';
-import { Logo, LearnMoreSection, Author } from './CaseStudy.style';
+import {
+  Logo,
+  LogoContainer,
+  LearnMoreSection,
+  Author,
+} from './CaseStudy.style';
 
 const CaseStudy: React.FC = () => {
   let { caseStudyId } = useParams<{ caseStudyId: string }>();
@@ -45,7 +50,9 @@ const CaseStudy: React.FC = () => {
         <Breadcrumbs item={{ to: '/case-studies', label: 'Case Studies' }} />
       </Style.BreadcrumbsContainer>
       <Heading1>{header}</Heading1>
-      <Logo src={caseStudy.logoUrl} alt={caseStudy.logoAltText} />
+      <LogoContainer>
+        <Logo src={caseStudy.logoUrl} alt={caseStudy.logoAltText} />
+      </LogoContainer>
       <Author source={fullAuthorText} />
       <MarkdownContent source={body} />
       {studyCategory && otherCaseStudies.length > 0 && (

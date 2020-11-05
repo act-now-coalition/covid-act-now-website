@@ -24,7 +24,7 @@ const SidebarContents: React.FC<{ items: TocItem[] }> = ({ items }) => {
               <Styles.TopLevelLink to={topLevelItem.to}>
                 {topLevelItem.label}
               </Styles.TopLevelLink>
-              {topLevelItem.items && topLevelItem.to === pathname && (
+              {topLevelItem.items && pathname.startsWith(topLevelItem.to) && (
                 // Disable scrollspy when the user navigates to a specific section
                 <Styles.InnerList
                   items={topLevelItem.items.map(getHash)}

@@ -3,9 +3,18 @@ import { Grid } from '@material-ui/core';
 import theme from 'assets/theme';
 import { MarkdownContent } from 'components/Markdown';
 
-export const Logo = styled.img.attrs(props => ({
-  height: '50px',
-}))``;
+export const LogoContainer = styled.div`
+  max-height: 64px;
+  max-width: 160px;
+  margin: ${theme.spacing(3)}px 0;
+
+  img {
+    width: auto;
+    max-height: 64px;
+  }
+`;
+
+export const Logo = styled.img``;
 
 /**
  * More studies in the category and additional resources
