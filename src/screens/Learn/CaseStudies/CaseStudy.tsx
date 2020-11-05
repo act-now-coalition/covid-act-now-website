@@ -50,7 +50,7 @@ const CaseStudy: React.FC = () => {
       <MarkdownContent source={body} />
       {studyCategory && otherCaseStudies.length > 0 && (
         <LearnMoreSection>
-          <Heading2>{`More ${studyCategory.header.toLowerCase()} studies`}</Heading2>
+          <Heading2>Similar case studies</Heading2>
           <MarkdownStyleContainer>
             <ul>
               {otherCaseStudies.map(study => (
