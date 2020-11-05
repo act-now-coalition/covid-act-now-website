@@ -45,7 +45,7 @@ export const BreadcrumbsContainer = styled.div`
 
 export const ButtonContainer = styled.div`
   margin-top: ${theme.spacing(2)}px;
-  margin-bottom: ${theme.spacing(3)}px;
+  margin-bottom: ${theme.spacing(6)}px;
 `;
 
 export const MobileOnly = styled.div`
