@@ -14,7 +14,10 @@
           "logoAltText": "California Department of Public Health logo",
           "header": "California Department of Public Health launches CalCAT",
           "caseStudyId": "cdph-calcat",
-          "tags": ["model", "county-data"],
+          "tags": [
+            "model",
+            "county-data"
+          ],
           "shortTitle": "California Department of Public Health"
         },
         {
@@ -25,7 +28,9 @@
           "logoAltText": "Oklahoma state map",
           "header": "Epidemiologist with the Oklahoma State Department of Health",
           "caseStudyId": "melanie-curry",
-          "tags": ["content"],
+          "tags": [
+            "content"
+          ],
           "shortTitle": "Melanie Curry M.P.H."
         },
         {
@@ -36,7 +41,9 @@
           "logoAltText": "Harris county Texas state map",
           "header": "Kimberly Aguillard in Harris County, Texas",
           "caseStudyId": "kimberly-aguillard",
-          "tags": ["accessibility"],
+          "tags": [
+            "accessibility"
+          ],
           "shortTitle": "Kimberly Aguillard"
         }
       ]
@@ -53,7 +60,9 @@
           "logoAltText": "ibm logo",
           "header": "IBM in Support of the U.S. Department of Defense COVID Response",
           "caseStudyId": "ibm",
-          "tags": ["model"],
+          "tags": [
+            "model"
+          ],
           "shortTitle": "IBM"
         },
         {
@@ -62,9 +71,11 @@
           "summary": "This location intelligence company incorporates our API on its website to view COVID risk in different markets.",
           "author": "Tom MacMullen",
           "logoAltText": "beyond hq logo",
-          "header": "BeyondHQ adds CAN’s data and API to its banner of city metric filters",
+          "header": "BeyondHQ Adds CAN’s Data and API to its Banner of City Metric Filters",
           "caseStudyId": "beyondhq",
-          "tags": ["api"],
+          "tags": [
+            "api"
+          ],
           "shortTitle": "BeyondHQ"
         }
       ]
@@ -81,7 +92,9 @@
           "logoAltText": "steuben county logo",
           "header": "Jack Wheeler, Steuben County, NY",
           "caseStudyId": "steuben-county",
-          "tags": ["risk-assessment"],
+          "tags": [
+            "risk-assessment"
+          ],
           "shortTitle": "Jack Wheeler"
         }
       ]
@@ -98,7 +111,9 @@
           "logoAltText": "naco logo",
           "header": "National Association of Counties (NACo)",
           "caseStudyId": "naco",
-          "tags": ["crs"],
+          "tags": [
+            "crs"
+          ],
           "shortTitle": "National Association of Counties (NACo)"
         },
         {
@@ -109,7 +124,9 @@
           "logoAltText": "care connection for aging services logo",
           "header": "Deb Krieger, Care Connection for Aging Services",
           "caseStudyId": "deb-krieger",
-          "tags": ["risk-assessment"],
+          "tags": [
+            "risk-assessment"
+          ],
           "shortTitle": "Deb Krieger"
         }
       ]
@@ -126,7 +143,9 @@
           "logoAltText": "The Public Health Pharmacist logo",
           "header": "Christina Madison, Pharm.D., Public Health Expert in Las Vegas, Nevada",
           "caseStudyId": "christina-madison",
-          "tags": ["content"],
+          "tags": [
+            "content"
+          ],
           "shortTitle": "Christina Madison, Pharm.D. "
         },
         {
@@ -135,9 +154,12 @@
           "summary": "A consultant in South Florida uses our data to educate business owners, MBA students, and local community leaders.",
           "author": "Lindsay Craig",
           "logoAltText": "florida map",
-          "header": "Decision Science Educator From Nova Southeastern University, FL",
+          "header": "Decision Science Educator from Nova Southeastern University, Florida",
           "caseStudyId": "david-hinds",
-          "tags": ["county-data", "content"],
+          "tags": [
+            "county-data",
+            "content"
+          ],
           "shortTitle": "David Hinds, Ph.D."
         }
       ]
