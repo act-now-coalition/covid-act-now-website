@@ -34,12 +34,7 @@ const DISABLED_CASE_DENSITY: string[] = [
 
 const DISABLED_INFECTION_RATE = new DisabledFips([]);
 
-const DISABLED_TEST_POSITIVITY = new DisabledFips([
-  '48113',
-  '48215',
-  /12.../, // Disable Pennsylvania counties until we fix or migrate to CMS.
-  /42.../, // Disable Florida counties until we fix or migrate to CMS.
-]);
+const DISABLED_TEST_POSITIVITY = new DisabledFips(['48113', '48215']);
 
 const DISABLED_ICU = new DisabledFips([]);
 
