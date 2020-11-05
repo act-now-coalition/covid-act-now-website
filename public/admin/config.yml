@@ -90,7 +90,6 @@ collections:
           - label: Header
             name: header
             widget: string
-            default: true
           - label: Recommendations
             name: recommendations
             widget: list
@@ -127,7 +126,7 @@ collections:
         label: 'Modal'
         file: src/cms-content/recommendations/recommendations-modal.json
         fields:
-          - { label: 'Header', name: 'header', widget: 'string', default: true }
+          - { label: 'Header', name: 'header', widget: 'string' }
           - label: Section - Federal Task Force
             name: federalTaskForce
             widget: object
@@ -169,11 +168,9 @@ collections:
           - label: Header
             name: header
             widget: string
-            default: true
           - label: Intro
             name: intro
             widget: markdown
-            default: true
           - label: Sections
             name: sections
             widget: list
@@ -186,11 +183,9 @@ collections:
           - label: Metadata title
             name: metadataTitle
             widget: text
-            default: true
           - label: Metadata description
             name: metadataDescription
             widget: text
-            default: true
       - name: Learn-Glossary
         label: 'Glossary'
         file: src/cms-content/learn/learn-glossary.json
@@ -198,11 +193,9 @@ collections:
           - label: Header
             name: header
             widget: string
-            default: true
           - label: Intro
             name: intro
             widget: markdown
-            default: true
           - label: Terms
             name: terms
             widget: list
@@ -213,11 +206,9 @@ collections:
           - label: Metadata title
             name: metadataTitle
             widget: text
-            default: true
           - label: Metadata description
             name: metadataDescription
             widget: text
-            default: true
       - name: Learn-Faq
         label: 'FAQ'
         file: src/cms-content/learn/learn-faq.json
@@ -225,11 +216,9 @@ collections:
           - label: Header
             name: header
             widget: string
-            default: true
           - label: Intro
             name: intro
             widget: markdown
-            default: true
           - label: Sections
             name: sections
             widget: list
@@ -245,16 +234,14 @@ collections:
           - label: Metadata title
             name: metadataTitle
             widget: text
-            default: true
           - label: Metadata description
             name: metadataDescription
             widget: text
-            default: true
       - name: Footer
         label: 'Footer'
         file: src/cms-content/learn/footer.json
         fields:
-          - { label: Body, name: body, widget: markdown, default: true }
+          - { label: Body, name: body, widget: markdown }
       - name: Case Studies
         file: 'src/cms-content/learn/learn-case-studies.json'
         label: Case Studies
@@ -348,11 +335,9 @@ collections:
           - label: Metadata title
             name: metadataTitle
             widget: text
-            default: true
           - label: Metadata description
             name: metadataDescription
             widget: text
-            default: true
       - name: Products
         label: 'Products'
         file: src/cms-content/learn/products.json
@@ -360,11 +345,9 @@ collections:
           - label: Header
             name: header
             widget: string
-            default: true
           - label: Intro
             name: intro
             widget: markdown
-            default: true
           - label: Sections
             name: sections
             widget: list
@@ -383,8 +366,6 @@ collections:
           - label: Metadata title
             name: metadataTitle
             widget: text
-            default: true
           - label: Metadata description
             name: metadataDescription
             widget: text
-            default: true
