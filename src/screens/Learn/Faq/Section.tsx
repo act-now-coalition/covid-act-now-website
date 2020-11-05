@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import { StyledAccordion } from 'components/SharedComponents';
-import { SectionHeader } from '../Learn.style';
 import { FaqSection, Question } from 'cms-content/learn';
 import { Anchor } from 'components/TableOfContents';
+import { Heading2 } from 'components/Markdown';
 
 const Section = (props: { content: FaqSection }) => {
   const { content } = props;
@@ -10,10 +10,10 @@ const Section = (props: { content: FaqSection }) => {
 
   return (
     <Fragment>
-      <SectionHeader>
+      <Heading2>
         <Anchor id={content.sectionId} />
         {sectionTitle}
-      </SectionHeader>
+      </Heading2>
       {questions.map((item: Question, i: number) => (
         <StyledAccordion
           key={`accordion-question-${i}`}

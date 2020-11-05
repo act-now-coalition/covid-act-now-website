@@ -1,6 +1,8 @@
+import { chain, keyBy, reject } from 'lodash';
 import faq from './learn-faq.json';
 import glossary from './learn-glossary.json';
 import landing from './learn-landing.json';
+import caseStudies from './learn-case-studies.json';
 import { sanitizeID } from './utils';
 
 type Markdown = string;
@@ -122,7 +124,7 @@ export interface CaseStudy {
 export interface CaseStudyCategory {
   header: string;
   categoryId: string;
-  caseStudies: CaseStudy[];
+  caseStudies?: CaseStudy[];
 }
 
 export interface CaseStudiesContent {
@@ -130,3 +132,65 @@ export interface CaseStudiesContent {
   intro: Markdown;
   categories: CaseStudyCategory[];
 }
+
+const allCaseStudies = chain(caseStudies.categories)
+  .map(category => category.caseStudies)
+  .flatten()
+  .value();
+
+// Case studies indexed by caseStudyId for easier access on the
+// individual case study route.
+export const caseStudiesById = keyBy(allCaseStudies, 'caseStudyId');
+
+export function getCaseStudyCategory(
+  caseStudyId: string,
+): CaseStudyCategory | undefined {
+  const isTargetCaseStudy = (study: CaseStudy) =>
+    study.caseStudyId === caseStudyId;
+
+  return caseStudies.categories.find(category =>
+    category.caseStudies.find(isTargetCaseStudy),
+  );
+}
+
+export function getMoreStudies(caseStudyId: string): CaseStudy[] {
+  const category = getCaseStudyCategory(caseStudyId);
+  const isTargetCaseStudy = (study: CaseStudy) =>
+    study.caseStudyId === caseStudyId;
+
+  if (!category) {
+    return [];
+  } else {
+    const otherStudies = reject(category.caseStudies, isTargetCaseStudy);
+    return otherStudies.length > 0 ? otherStudies : [];
+  }
+}
+
+export const caseStudiesContent = caseStudies as CaseStudiesContent;
+
+interface TocItem {
+  label: string;
+  to: string;
+  items?: TocItem[];
+}
+
+// TODO (pablo): Should we have a short heading for categories?
+export const learnPages: TocItem[] = [
+  { label: 'Glossary', to: '/glossary' },
+  {
+    label: 'FAQ',
+    to: '/faq',
+    items: faqContent.sections.map(section => ({
+      to: `/faq#${section.sectionId}`,
+      label: section.sectionTitle,
+    })),
+  },
+  {
+    label: 'Case Studies',
+    to: '/case-studies',
+    items: caseStudiesContent.categories.map(category => ({
+      to: `/case-studies#${category.categoryId}`,
+      label: category.header.replace('Learn from ', ''),
+    })),
+  },
+];

@@ -13,8 +13,7 @@ const SharedButtonStyles = css`
   text-transform: none;
   text-decoration: none;
   color: inherit;
-  padding-left: ${1.5 * theme.spacing(1)}px;
-  padding-right: ${1.5 * theme.spacing(1)}px;
+  padding: ${0.5 * theme.spacing(1)}px ${theme.spacing(2)};
 `;
 
 export const GreenButton = styled(MuiButton)`

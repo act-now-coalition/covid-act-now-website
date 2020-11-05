@@ -70,7 +70,7 @@ export const HeaderSection = styled(Box)`
   cursor: default;
 
   &:nth-child(2) {
-    background-color: #fafafa;
+    background-color: ${COLOR_MAP.LIGHTGRAY_BG};
   }
 
   &:last-child {

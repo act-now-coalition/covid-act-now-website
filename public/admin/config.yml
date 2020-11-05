@@ -256,7 +256,7 @@ collections:
         fields:
           - { label: Body, name: body, widget: markdown, default: true }
       - name: Case Studies
-        file: 'src/cms-content/learn/case-studies.json'
+        file: 'src/cms-content/learn/learn-case-studies.json'
         label: Case Studies
         fields:
           - label: Header

@@ -1,27 +1,13 @@
-import styled, { css } from 'styled-components';
-import { COLOR_MAP } from 'common/colors';
-import { MarkdownContent } from 'components/Markdown';
+import styled from 'styled-components';
 import theme from 'assets/theme';
-import { materialSMBreakpoint, mobileBreakpoint } from 'assets/theme/sizes';
+import { mobileBreakpoint } from 'assets/theme/sizes';
 
-/*
-  Styles that are shared between Learn pages:
-*/
-
-export const BodyCopyStyles = css`
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
-  line-height: 1.4;
-  letter-spacing: 1;
-
-  p {
-    &:not(:last-child) {
-      margin-bottom: 1rem;
-    }
-  }
-`;
+/**
+ * Styles that are shared between Learn pages
+ */
 
 export const PageContainer = styled.div`
-  max-width: 800px;
+  max-width: ${theme.breakpoints.width('md')}px;
   width: 100%;
   margin: 2rem auto;
   min-height: 65vh;
@@ -29,50 +15,50 @@ export const PageContainer = styled.div`
   @media (min-width: ${mobileBreakpoint}) {
     margin: 3.5rem auto;
   }
+
+  display: flex;
 `;
 
 export const PageContent = styled.main`
-  flex: 1 1 0;
+  flex: 1 1 auto;
   padding: 0 1.25rem;
 `;
 
-export const PageHeader = styled.h1`
-  margin: 1rem 0;
-  line-height: 1;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    margin: 0 0 2rem;
-  }
+export const PageSidebar = styled.div`
+  flex: 1 1 auto;
+  min-width: 240px;
+  margin-left: ${theme.spacing(3) + theme.spacing(4)}px;
+  margin-right: ${theme.spacing(1)}px;
 `;
 
-export const PageIntro = styled(MarkdownContent)`
-  p,
-  ul,
-  li {
-    ${BodyCopyStyles}
-  }
-  margin-bottom: 1.5rem;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    margin-bottom: 3rem;
-  }
-`;
-
-export const SectionHeader = styled.h2`
-  font-weight: 900;
-  font-size: 1.5rem;
-  line-height: 1.25;
-  margin: 1.25rem 0;
-`;
-
-export const MarkdownBodyCopy = styled(MarkdownContent)`
-  p,
-  ul,
-  li {
-    ${BodyCopyStyles}
+export const Sticky = styled.div`
+  position: sticky;
+  top: calc(64px + 2rem); // top bar height + page margin
+  @media (min-width: ${mobileBreakpoint}) {
+    top: calc(64px + 3.5rem);
   }
 `;
 
 export const BreadcrumbsContainer = styled.div`
-  margin-bottom: ${theme.spacing(4)}px;
+  margin-bottom: ${theme.spacing(2)}px;
+`;
+
+export const ButtonContainer = styled.div`
+  margin-top: ${theme.spacing(2)}px;
+  margin-bottom: ${theme.spacing(6)}px;
+`;
+
+export const MobileOnly = styled.div`
+  display: initial;
+  @media (min-width: ${mobileBreakpoint}) {
+    display: none;
+  }
+`;
+
+export const DesktopOnly = styled.div`
+  display: none;
+  @media (min-width: ${mobileBreakpoint}) {
+    display: flex;
+    min-width: fit-content;
+  }
 `;

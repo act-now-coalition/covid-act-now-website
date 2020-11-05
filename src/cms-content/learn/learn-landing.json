@@ -17,6 +17,13 @@
       "description": "We’ve received tons of questions from our users ranging from \"how do I talk to people who behave in ways I disagree with?\" to \"what types of masks work better than others?\" Here we address more than 40 of our top questions.",
       "buttonCta": "View FAQ",
       "buttonRedirect": "/faq"
+    },
+    {
+      "sectionTitle": "Case Studies",
+      "sectionId": "case-studies",
+      "description": "We provide partners ranging from large commercial entities, like IBM, to small county health departments with clear, accurate, and up-to-date data. Learn more about how leaders in industry, public health, and government are using our data and tools to make better decisions to combat COVID.",
+      "buttonCta": "View case studies",
+      "buttonRedirect": "/case-studies"
     }
   ]
 }

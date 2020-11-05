@@ -1,20 +1,15 @@
 import React from 'react';
-import {
-  PageContainer,
-  PageHeader,
-  PageContent,
-  BreadcrumbsContainer,
-  PageIntro,
-} from '../Learn.style';
+import { BreadcrumbsContainer, MobileOnly } from '../Learn.style';
 import Section from './Section';
 import { faqContent, FaqSection } from 'cms-content/learn';
 import TableOfContents, { Item } from 'components/TableOfContents';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
-import * as Style from './Faq.style';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { formatMetatagDate } from 'common/utils';
+import { MarkdownContent, Heading1 } from 'components/Markdown';
+import LearnPageContainer from '../LearnPageContainer';
 
-const Faq = () => {
+const Faq: React.FC = () => {
   const {
     header,
     intro,
@@ -32,26 +27,24 @@ const Faq = () => {
   }
 
   return (
-    <PageContainer>
+    <LearnPageContainer>
       <AppMetaTags
         canonicalUrl="/faq"
         pageTitle={metadataTitle}
         pageDescription={`${date} ${metadataDescription}`}
       />
-      <PageContent>
-        <BreadcrumbsContainer>
-          <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
-        </BreadcrumbsContainer>
-        <PageHeader>{header}</PageHeader>
-        <PageIntro source={intro} />
-        <Style.MobileOnly>
-          <TableOfContents items={getSectionItems(sections)} />
-        </Style.MobileOnly>
-        {sections.map((section: FaqSection) => (
-          <Section key={section.sectionId} content={section} />
-        ))}
-      </PageContent>
-    </PageContainer>
+      <BreadcrumbsContainer>
+        <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
+      </BreadcrumbsContainer>
+      <Heading1>{header}</Heading1>
+      <MarkdownContent source={intro} />
+      <MobileOnly>
+        <TableOfContents items={getSectionItems(sections)} />
+      </MobileOnly>
+      {sections.map((section: FaqSection) => (
+        <Section key={section.sectionId} content={section} />
+      ))}
+    </LearnPageContainer>
   );
 };
 
