@@ -2,12 +2,12 @@ import styled from 'styled-components';
 import theme from 'assets/theme';
 import { mobileBreakpoint } from 'assets/theme/sizes';
 
-/*
-  Styles that are shared between Learn pages:
-*/
+/**
+ * Styles that are shared between Learn pages
+ */
 
 export const PageContainer = styled.div`
-  max-width: ${mobileBreakpoint};
+  max-width: ${theme.breakpoints.width('md')}px;
   width: 100%;
   margin: 2rem auto;
   min-height: 65vh;
