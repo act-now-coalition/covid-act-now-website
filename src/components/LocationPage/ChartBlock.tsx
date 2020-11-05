@@ -56,7 +56,7 @@ function ChartBlock(props: {
       {hasMetric && (
         <>
           <MetricChart metric={metric} projections={projections} />
-          <Disclaimer metricName={metric} />
+          <Disclaimer metricName={metric} projections={projections} />
         </>
       )}
     </Fragment>

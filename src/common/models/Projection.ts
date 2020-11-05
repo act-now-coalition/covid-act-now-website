@@ -294,6 +294,10 @@ export class Projection {
     return this.metrics && this.metrics.testPositivityRatio;
   }
 
+  get testPositiveRateSource(): string | null {
+    return this.metrics?.testPositivityRatioDetails?.source || null;
+  }
+
   get rt(): number | null {
     if (DISABLED_INFECTION_RATE.includes(this.fips)) {
       return null;
