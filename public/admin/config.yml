@@ -66,6 +66,8 @@ collections:
             name: intro
             widget: markdown
             default: ''
+            required: false
+            minimal: true
             hint: 'Page intro'
           - label: Sections
             name: sections
@@ -82,11 +84,6 @@ collections:
                   name: sectionId,
                   widget: string,
                   hint: 'Added to the URL, no spaces, separated with dashes (ex: general-questions)',
-                  pattern:
-                    [
-                      '([\w\-]+)',
-                      'lowercase only, no spaces, separated by dashes',
-                    ],
                 }
               - {
                   label: Section Body,
