@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 import { Grid } from '@material-ui/core';
 import { MarkdownBody } from 'components/Markdown';
+import theme from 'assets/theme';
 
 export const mobileBreakpoint = '800px';
 
@@ -77,6 +78,19 @@ export const BodyCopy = styled(MarkdownBody)`
     color: ${COLOR_MAP.GRAY_BODY_COPY};
     font-size: 15px;
     line-height: 1.4;
+  }
+
+  // TODO: This customizes the style for the address, is there a cleaner way?
+  blockquote {
+    background-color: white;
+    padding: 0;
+    margin: 0;
+    margin-left: ${2 * theme.spacing(4)}px;
+    p {
+      color: ${COLOR_MAP.GRAY_BODY_COPY};
+      font-size: 15px;
+      font-weight: normal;
+    }
   }
 `;
 
