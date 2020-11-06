@@ -131,6 +131,8 @@ export interface CaseStudiesContent {
   header: string;
   intro: Markdown;
   categories: CaseStudyCategory[];
+  metadataTitle: string;
+  metadataDescription: string;
 }
 
 const allCaseStudies = chain(caseStudies.categories)
