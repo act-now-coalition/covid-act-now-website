@@ -1,0 +1,10 @@
+{
+  "header": "Contact Us",
+  "sections": [
+    {
+      "header": "General Questions",
+      "sectionId": "general questions",
+      "body": "Email [info@covidactnow.org](mailto:info@covidactnow.org)."
+    }
+  ]
+}
