@@ -58,14 +58,42 @@ collections:
         label: Contact us page
         file: src/cms-content/contact/contact.json
         fields:
-          - label: Title
+          - label: Header
+            name: header
+            widget: text
+            hint: 'Page Header'
           - label: Intro
-          - label: Section
+            name: intro
+            widget: markdown
+            default: ''
+            hint: 'Page intro'
+          - label: Sections
+            name: sections
+            widget: list
             fields:
-              - { label: sectionId, name: sectionId }
-              - sectionId
-              - sectionHeader
-              - body
+              - {
+                  label: Section Header,
+                  name: header,
+                  widget: text,
+                  hint: 'Title of the section',
+                }
+              - {
+                  label: Section ID,
+                  name: sectionId,
+                  widget: string,
+                  hint: 'Added to the URL, no spaces, separated with dashes (ex: general-questions)',
+                  pattern:
+                    [
+                      '([\w\-]+)',
+                      'lowercase only, no spaces, separated by dashes',
+                    ],
+                }
+              - {
+                  label: Section Body,
+                  name: body,
+                  widget: markdown,
+                  hint: 'Full text of the section',
+                }
 
   - name: donate
     label: Donate
