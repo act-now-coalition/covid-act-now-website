@@ -23,6 +23,9 @@ import {
   LearnMoreSection,
   Author,
 } from './CaseStudy.style';
+import { caseStudiesContent } from 'cms-content/learn';
+
+const { metadataDescription } = caseStudiesContent;
 
 const CaseStudy: React.FC = () => {
   let { caseStudyId } = useParams<{ caseStudyId: string }>();
@@ -44,7 +47,7 @@ const CaseStudy: React.FC = () => {
       <AppMetaTags
         canonicalUrl={`/case-studies/${caseStudyId}`}
         pageTitle={`Case Study: ${caseStudy.shortTitle}`}
-        pageDescription={`${date} Learn how different people are using Covid Act Now's data to make decisions for themselves, their organizations, and their communities during COVID`}
+        pageDescription={`${date} ${metadataDescription}`}
       />
       <Style.BreadcrumbsContainer>
         <Breadcrumbs item={{ to: '/case-studies', label: 'Case Studies' }} />

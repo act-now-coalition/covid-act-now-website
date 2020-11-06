@@ -1,14 +1,14 @@
 {
-  "headerLines": ["Our data saves lives.", "Donate to keep us online."],
-  "intro": "We are a tiny, independent non-profit (mostly of volunteers) working relentlessly since March to bring you the most important COVID information.",
+  "headerLines": ["Help People Make Informed Decisions"],
+  "intro": "We are a small, independent nonprofit, powered almost entirely by volunteers. We have been working relentlessly since March to bring you and the policy makers in your county and state critical COVID data and information.",
   "sections": [
     {
-      "title": "Keep the data flowing",
-      "copy": "Our resources are running low. We need $25,000 per month to cover parts of our operating costs. By donating you keep us online, so that we can continue:\n\n* Improving data quality\n* Inspiring more action\n* Reaching more people"
+      "title": "Support our efforts to provide clear, accurate COVID data.",
+      "copy": "Our goal this month is to raise $25,000 to help cover basic operating costs. With your donation, we can:\n\n* Improve data quality\n* Fight misinformation\n* Reach more people\n* Inspire more action"
     },
     {
-      "title": "Join the fight against COVID",
-      "copy": "By keeping us online, you’re also:\n- Helping build a shared understanding of COVID\n- Joining our fight against misinformation\n- Leaving a legacy during this generation-defining crisis"
+      "title": "Act now. Donate now.",
+      "copy": "To join us in the fight against COVID, you can:\n\n* Donate online \n* Send a check payable to: **Act Now Coalition**\n\n> 340 S. Lemon Ave, #6683 \n\n>Walnut, CA 91789\n\n * Double your impact with an [employer match](https://build.org/matching-gifts/).\n\n* Recommend a grant from your donor-advised fund. Our EIN: 85-0613766. Our organization name may show up as “Act Now Coalition.”\n\nQuestions? Email [info@covidactnow.org](mailto:info@covidactnow.org)."
     }
   ]
 }
