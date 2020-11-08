@@ -13,21 +13,17 @@ interface ContactUsContent {
   sections: ContactUsSection[];
 }
 
-function sanitizeSection(section: ContactUsSection): ContactUsSection {
-  return {
-    sectionId: sanitizeID(section.sectionId),
-    header: section.header,
-    body: section.body,
-  };
-}
+const sanitizeSection = (section: ContactUsSection): ContactUsSection => ({
+  sectionId: sanitizeID(section.sectionId),
+  header: section.header,
+  body: section.body,
+});
 
-function sanitizeContent(content: ContactUsContent): ContactUsContent {
-  return {
-    header: content.header,
-    intro: content?.intro || '',
-    sections: content.sections.map(sanitizeSection),
-  };
-}
+const sanitizeContent = (content: ContactUsContent): ContactUsContent => ({
+  header: content.header,
+  intro: content?.intro || '',
+  sections: content.sections.map(sanitizeSection),
+});
 
 export const contactUsContent = sanitizeContent(content as ContactUsContent);
 
@@ -41,3 +37,19 @@ export const sidebarItems: TocItem[] = [
     })),
   },
 ];
+
+interface Page<T> {
+  pageTitle: string;
+  pageDescription: string;
+  canonicalUrl: string;
+  sidebarItems: TocItem[];
+  content: T;
+}
+
+export const ContactPage: Page<ContactUsContent> = {
+  pageTitle: 'Contact Us',
+  pageDescription: '',
+  canonicalUrl: '/contact',
+  sidebarItems,
+  content: contactUsContent,
+};
