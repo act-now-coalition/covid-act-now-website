@@ -389,7 +389,7 @@ collections:
             name: metadataDescription
             widget: text
       - label: 'Products: Landing page'
-        name: 'ProductsLanding'
+        name: productsLanding
         file: src/cms-content/learn/products-landing.json
         fields:
           - label: Header
@@ -440,7 +440,7 @@ collections:
             name: metadataDescription
             widget: text
       - label: 'Products: Full Pages'
-        name: 'ProductsFullPages'
+        name: ProductsFullPages
         file: src/cms-content/learn/products-full-pages.json
         fields:
           - label: Product
