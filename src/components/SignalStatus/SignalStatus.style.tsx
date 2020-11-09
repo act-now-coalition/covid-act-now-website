@@ -12,14 +12,13 @@ export const SignalStatusWrapper = styled(Box)<{
       monospace;
     font-weight: bold;
     font-size: ${props.isEmbed ? '13px' : '0.875rem'};
-    width: 4.5rem;
+    width: 5rem;
     margin-left: 1rem;
     line-height: 1.25rem;
     display: flex;
     align-items: center;
 
     svg {
-      width: 1rem;
       margin-right: 0.25rem;
     }
   `
