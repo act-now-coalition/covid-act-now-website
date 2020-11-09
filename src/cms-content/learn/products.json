@@ -1,0 +1,14 @@
+{
+  "header": "Products",
+  "productsList": [
+    {
+      "productName": "name",
+      "productId": "test-id",
+      "productSubtitle": "djfsldskjfl",
+      "productDescription": "asdfldslkj",
+      "notes": "sfksdjsjv"
+    }
+  ],
+  "metadataTitle": "fsdfsda",
+  "metadataDescription": "sdfsdafas"
+}
