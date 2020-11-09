@@ -1,7 +1,20 @@
 {
   "header": "Products",
-  "intro": "",
-  "productsList": [],
-  "metadataTitle": "title",
-  "metadataDescription": "description"
+  "intro": "Optional intro text (not currently included in the mocks, but here if we want to include one)",
+  "productsList": [
+    {
+      "productName": "API",
+      "productId": "api",
+      "productSubtitle": "Allows you to use our data",
+      "productDescription": "With our API, you can access COVID data, including for 3000+ USA counties in a machine readable format, made for programmatic consumption by other websites, models, and tools.\n\n> Notes\n>\n> V1 of our API will be deprecated on October 5, 2020. See our migration instructions. \n>\n> Our API is licensed under Creative Commons Attribution - NonCommercial - NoDerivatives 4.0 International. Learn more about our license for both commercial and non-commercial users.",
+      "buttons": [
+        {
+          "cta": "Get started with API",
+          "redirect": "/"
+        }
+      ]
+    }
+  ],
+  "metadataTitle": "Stand in metadata title",
+  "metadataDescription": "Stand in metadata description"
 }
