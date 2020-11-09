@@ -90,6 +90,12 @@ collections:
                   widget: markdown,
                   hint: 'Full text of the section',
                 }
+          - label: Metadata title
+            name: metadataTitle
+            widget: text
+          - label: Metadata description
+            name: metadataDescription
+            widget: text
 
   - name: donate
     label: Donate

@@ -11,6 +11,8 @@ interface ContactUsContent {
   header: string;
   intro?: Markdown;
   sections: ContactUsSection[];
+  metadataTitle: string;
+  metadataDescription: string;
 }
 
 const sanitizeSection = (section: ContactUsSection): ContactUsSection => ({
@@ -23,6 +25,8 @@ const sanitizeContent = (content: ContactUsContent): ContactUsContent => ({
   header: content.header,
   intro: content?.intro || '',
   sections: content.sections.map(sanitizeSection),
+  metadataDescription: content.metadataDescription,
+  metadataTitle: content.metadataDescription,
 });
 
 export const contactUsContent = sanitizeContent(content as ContactUsContent);
