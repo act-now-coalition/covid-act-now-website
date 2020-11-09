@@ -11,6 +11,10 @@
         {
           "cta": "Get started with API",
           "redirect": "/"
+        },
+        {
+          "cta": "API docs",
+          "redirect": "https://apidocs.covidactnow.org/migration"
         }
       ]
     }
