@@ -1,0 +1,18 @@
+{
+  "product": [
+    {
+      "productName": "API",
+      "productId": "api",
+      "productIntro": "Intro copy",
+      "metadataTitle": "Stand in metadata title",
+      "metadataDescription": "Stand in metadata description",
+      "sections": [
+        {
+          "sectionTitle": "Why our API",
+          "sectionId": "why-our-api",
+          "sectionBody": "Section body copy"
+        }
+      ]
+    }
+  ]
+}
