@@ -1,0 +1,24 @@
+{
+  "header": "Products",
+  "intro": "sdgdfgdsfg",
+  "productsList": [
+    {
+      "productName": "product test",
+      "productId": "product-test",
+      "productSubtitle": "adklsfjsics",
+      "productDescription": "akfsjfsljfl",
+      "buttons": [
+        {
+          "cta": "cta1",
+          "redirect": "/donate"
+        },
+        {
+          "cta": "cta2",
+          "redirect": "/donate"
+        }
+      ]
+    }
+  ],
+  "metadataTitle": "sfsfsaf",
+  "metadataDescription": "trvdvsac"
+}
