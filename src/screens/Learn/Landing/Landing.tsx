@@ -1,16 +1,16 @@
 import React, { Fragment } from 'react';
-import { ButtonContainer } from '../Learn.style';
+import { formatMetatagDate } from 'common/utils';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import { Heading1, Heading2, MarkdownContent } from 'components/Markdown';
 import PageContent from 'components/PageContent';
 import { Anchor } from 'components/TableOfContents';
-import SectionButton, { ButtonTheme } from './SectionButton';
-import { formatMetatagDate } from 'common/utils';
 import {
   LandingSection,
   landingPageContent,
   learnPages,
 } from 'cms-content/learn';
+import SectionButton, { ButtonTheme } from './SectionButton';
+import { ButtonContainer } from '../Learn.style';
 
 const Landing: React.FC = () => {
   const {

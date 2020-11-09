@@ -15,6 +15,7 @@ import {
   getCaseStudyCategory,
   getMoreStudies,
   learnPages,
+  caseStudiesContent,
 } from 'cms-content/learn';
 import * as Style from '../Learn.style';
 import {
@@ -23,7 +24,6 @@ import {
   LearnMoreSection,
   Author,
 } from './CaseStudy.style';
-import { caseStudiesContent } from 'cms-content/learn';
 
 const { metadataDescription } = caseStudiesContent;
 
