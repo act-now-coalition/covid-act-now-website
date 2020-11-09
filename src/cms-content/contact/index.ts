@@ -37,19 +37,3 @@ export const sidebarItems: TocItem[] = [
     })),
   },
 ];
-
-interface Page<T> {
-  pageTitle: string;
-  pageDescription: string;
-  canonicalUrl: string;
-  sidebarItems: TocItem[];
-  content: T;
-}
-
-export const ContactPage: Page<ContactUsContent> = {
-  pageTitle: 'Contact Us',
-  pageDescription: '',
-  canonicalUrl: '/contact',
-  sidebarItems,
-  content: contactUsContent,
-};
