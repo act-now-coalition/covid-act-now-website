@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { formatMetatagDate } from 'common/utils';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import Breadcrumbs from 'components/Breadcrumbs';
@@ -15,6 +14,7 @@ import {
   caseStudiesById,
   getCaseStudyCategory,
   getMoreStudies,
+  learnPages,
 } from 'cms-content/learn';
 import * as Style from '../Learn.style';
 import {
@@ -48,7 +48,7 @@ const CaseStudy: React.FC = () => {
         pageTitle={`Case Study: ${caseStudy.shortTitle}`}
         pageDescription={`${date} ${metadataDescription}`}
       />
-      <PageContent>
+      <PageContent sidebarItems={learnPages}>
         <Style.BreadcrumbsContainer>
           <Breadcrumbs item={{ to: '/case-studies', label: 'Case Studies' }} />
         </Style.BreadcrumbsContainer>
