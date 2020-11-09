@@ -2,6 +2,7 @@ import React from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import { Location } from 'common/locations';
+import { createFilterOptions } from '@material-ui/lab/useAutocomplete';
 
 function getLocationLabel(location: Location) {
   return location.county
@@ -31,6 +32,7 @@ const AutocompleteLocations: React.FC<{
     onChange={onChangeLocations}
     getOptionSelected={getOptionSelected}
     value={selectedLocations}
+    filterOptions={createFilterOptions({ matchFrom: 'start' })}
     renderInput={params => (
       <TextField variant="outlined" {...params} placeholder="+ Add" />
     )}

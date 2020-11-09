@@ -8,6 +8,7 @@ import {
   range,
   words,
   partition,
+  sortBy,
 } from 'lodash';
 import { color } from 'd3-color';
 import { schemeCategory10 } from 'd3-scale-chromatic';
@@ -446,10 +447,30 @@ export function getAutocompleteLocations(locationFips: string) {
     belongsToState(county, currentLocation.state_fips_code),
   );
 
+  const sortedStates = sortBy(states, location => location.state);
+  const sortedStateCounties = sortBy(
+    stateCounties,
+    location => location.county,
+  );
+  const sortedOtherCounties = sortBy(
+    otherCounties,
+    location => location.county,
+  );
+
   // TODO(michael): Where should aggregations go in the list?
   return isStateFips(locationFips)
-    ? [...AGGREGATED_LOCATIONS, ...states, ...stateCounties, ...otherCounties]
-    : [...AGGREGATED_LOCATIONS, ...stateCounties, ...states, ...otherCounties];
+    ? [
+        ...AGGREGATED_LOCATIONS,
+        ...sortedStates,
+        ...sortedStateCounties,
+        ...sortedOtherCounties,
+      ]
+    : [
+        ...AGGREGATED_LOCATIONS,
+        ...sortedStateCounties,
+        ...sortedStates,
+        ...sortedOtherCounties,
+      ];
 }
 
 /**
