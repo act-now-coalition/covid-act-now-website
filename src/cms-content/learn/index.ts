@@ -3,9 +3,7 @@ import faq from './learn-faq.json';
 import glossary from './learn-glossary.json';
 import landing from './learn-landing.json';
 import caseStudies from './learn-case-studies.json';
-import { sanitizeID } from './utils';
-
-type Markdown = string;
+import { sanitizeID, Markdown } from '../utils';
 
 /*
   Learn Landing page:
