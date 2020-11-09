@@ -388,9 +388,9 @@ collections:
           - label: Metadata description
             name: metadataDescription
             widget: text
-      - name: Products
-        label: 'Products'
-        file: src/cms-content/learn/products.json
+      - label: 'Products: Landing page'
+        name: 'ProductsLanding'
+        file: src/cms-content/learn/products-landing.json
         fields:
           - label: Header
             name: header
@@ -398,40 +398,34 @@ collections:
           - label: Intro
             name: intro
             widget: markdown
-          - label: Sections
-            name: sections
+            required: false
+          - label: Products List
+            name: productsList
             widget: list
             fields:
               - {
-                  label: Section title,
-                  name: sectionTitle,
+                  label: Product name,
+                  name: productName,
                   widget: string,
                   hint: 'Product name (ex. API)',
                 }
               - {
-                  label: Section ID,
-                  name: sectionId,
+                  label: Product ID,
+                  name: productId,
                   widget: string,
-                  hint: 'Section title in all lowercase, divided by dashes if multi-word (ex: response-simulator)',
+                  hint: 'Product name in all lowercase, divided by dashes if multi-word (ex: response-simulator)',
                 }
               - {
-                  label: Section subtitle,
-                  name: sectionSubtitle,
+                  label: Product subtitle,
+                  name: productSubtitle,
                   widget: text,
-                  hint: 'Short description underneath title',
+                  hint: 'Short few-words-long description underneath product name (ie. Allows you to forecast scenarios)',
                 }
               - {
-                  label: Section description,
-                  name: sectionDescription,
+                  label: Product description,
+                  name: productDescription,
                   widget: markdown,
                   hint: 'Longer product description',
-                }
-              - {
-                  label: Notes,
-                  name: notes,
-                  widget: markdown,
-                  required: false,
-                  hint: 'Optional section for product-related notes or announcements',
                 }
               - label: Buttons
                 name: buttons
@@ -445,3 +439,57 @@ collections:
           - label: Metadata description
             name: metadataDescription
             widget: text
+      - label: 'Products: Full Pages'
+        name: 'ProductsFullPages'
+        file: src/cms-content/learn/products-full-pages.json
+        fields:
+          - label: Product
+            name: product
+            widget: list
+            fields:
+              - {
+                  label: Product name,
+                  name: productName,
+                  widget: string,
+                  hint: 'Product name (ex. API)',
+                }
+              - {
+                  label: Product ID,
+                  name: productId,
+                  widget: string,
+                  hint: 'Must match ID used on products landing page, ie. product name all lowercase, separated by dashes if multi-work (ex. response-simulator)'
+                }
+              - {
+                  label: Product Intro,
+                  name: productIntro,
+                  widget: string,
+                  hint: 'Main intro before sections'
+                }
+              -
+                label: Sections
+                name: sections
+                widget: list
+                fields:
+                  - {
+                      label: Section title,
+                      name: sectionTitle,
+                      widget: string,
+                      hint: 'ex: Why our API'
+                    }
+                  - {
+                      label: Section ID,
+                      name: sectionId,
+                      widget: string,
+                      hint: 'Section title all lowercase, separated by dashes if multi-work (ex. why-our-api)'
+                    }
+                  - {
+                      label: Section Body,
+                      name: sectionBody,
+                      widget: markdown,
+                    }
+              - label: Metadata title
+                name: metadataTitle
+                widget: text
+              - label: Metadata description
+                name: metadataDescription
+                widget: text
