@@ -26,7 +26,7 @@ const sanitizeContent = (content: ContactUsContent): ContactUsContent => ({
   intro: content?.intro || '',
   sections: content.sections.map(sanitizeSection),
   metadataDescription: content.metadataDescription,
-  metadataTitle: content.metadataDescription,
+  metadataTitle: content.metadataTitle,
 });
 
 export const contactUsContent = sanitizeContent(content as ContactUsContent);
