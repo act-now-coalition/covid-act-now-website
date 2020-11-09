@@ -1,22 +1,22 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import { formatMetatagDate } from 'common/utils';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import Breadcrumbs from 'components/Breadcrumbs';
-import { formatMetatagDate } from 'common/utils';
 import {
   MarkdownContent,
   Heading1,
   Heading2,
   MarkdownStyleContainer,
 } from 'components/Markdown';
+import PageContent from 'components/PageContent';
 import {
   caseStudiesById,
   getCaseStudyCategory,
   getMoreStudies,
 } from 'cms-content/learn';
 import * as Style from '../Learn.style';
-import LearnPageContainer from '../LearnPageContainer';
 import {
   Logo,
   LogoContainer,
@@ -39,42 +39,43 @@ const CaseStudy: React.FC = () => {
   const { header, body, author } = caseStudy;
   const studyCategory = getCaseStudyCategory(caseStudyId);
   const otherCaseStudies = getMoreStudies(caseStudyId);
-
   const fullAuthorText = `By ${author}`;
 
   return (
-    <LearnPageContainer>
+    <Fragment>
       <AppMetaTags
         canonicalUrl={`/case-studies/${caseStudyId}`}
         pageTitle={`Case Study: ${caseStudy.shortTitle}`}
         pageDescription={`${date} ${metadataDescription}`}
       />
-      <Style.BreadcrumbsContainer>
-        <Breadcrumbs item={{ to: '/case-studies', label: 'Case Studies' }} />
-      </Style.BreadcrumbsContainer>
-      <Heading1>{header}</Heading1>
-      <LogoContainer>
-        <Logo src={caseStudy.logoUrl} alt={caseStudy.logoAltText} />
-      </LogoContainer>
-      <Author source={fullAuthorText} />
-      <MarkdownContent source={body} />
-      {studyCategory && otherCaseStudies.length > 0 && (
-        <LearnMoreSection>
-          <Heading2>Similar case studies</Heading2>
-          <MarkdownStyleContainer>
-            <ul>
-              {otherCaseStudies.map(study => (
-                <li key={study.caseStudyId}>
-                  <Link to={`/case-studies/${study.caseStudyId}`}>
-                    {study.header}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </MarkdownStyleContainer>
-        </LearnMoreSection>
-      )}
-    </LearnPageContainer>
+      <PageContent>
+        <Style.BreadcrumbsContainer>
+          <Breadcrumbs item={{ to: '/case-studies', label: 'Case Studies' }} />
+        </Style.BreadcrumbsContainer>
+        <Heading1>{header}</Heading1>
+        <LogoContainer>
+          <Logo src={caseStudy.logoUrl} alt={caseStudy.logoAltText} />
+        </LogoContainer>
+        <Author source={fullAuthorText} />
+        <MarkdownContent source={body} />
+        {studyCategory && otherCaseStudies.length > 0 && (
+          <LearnMoreSection>
+            <Heading2>Similar case studies</Heading2>
+            <MarkdownStyleContainer>
+              <ul>
+                {otherCaseStudies.map(study => (
+                  <li key={study.caseStudyId}>
+                    <Link to={`/case-studies/${study.caseStudyId}`}>
+                      {study.header}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </MarkdownStyleContainer>
+          </LearnMoreSection>
+        )}
+      </PageContent>
+    </Fragment>
   );
 };
 

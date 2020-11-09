@@ -1,13 +1,13 @@
 import React, { Fragment } from 'react';
-import { BreadcrumbsContainer, MobileOnly } from '../Learn.style';
-import Section from './Section';
-import { faqContent, FaqSection, learnPages } from 'cms-content/learn';
+import { formatMetatagDate } from 'common/utils';
 import TableOfContents, { Item } from 'components/TableOfContents';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import Breadcrumbs from 'components/Breadcrumbs';
-import { formatMetatagDate } from 'common/utils';
 import { MarkdownContent, Heading1 } from 'components/Markdown';
-import PageContent from 'components/PageContent';
+import PageContent, { MobileOnly } from 'components/PageContent';
+import { faqContent, FaqSection, learnPages } from 'cms-content/learn';
+import { BreadcrumbsContainer } from '../Learn.style';
+import Section from './Section';
 
 const Faq: React.FC = () => {
   const {
