@@ -462,7 +462,7 @@ collections:
               - {
                   label: Product Intro,
                   name: productIntro,
-                  widget: string,
+                  widget: markdown,
                   hint: 'Main intro before sections'
                 }
               -
