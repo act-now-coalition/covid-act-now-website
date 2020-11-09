@@ -32,7 +32,7 @@ const AutocompleteLocations: React.FC<{
     onChange={onChangeLocations}
     getOptionSelected={getOptionSelected}
     value={selectedLocations}
-    filterOptions={createFilterOptions({ matchFrom: 'start' })}
+    filterOptions={createFilterOptions({ matchFrom: 'start', trim: true })}
     renderInput={params => (
       <TextField variant="outlined" {...params} placeholder="+ Add" />
     )}
