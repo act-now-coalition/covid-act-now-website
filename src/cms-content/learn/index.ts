@@ -3,10 +3,32 @@ import faq from './learn-faq.json';
 import glossary from './learn-glossary.json';
 import landing from './learn-landing.json';
 import caseStudies from './learn-case-studies.json';
-import { Markdown, TocItem, sanitizeID } from '../utils';
+import { sanitizeID, Markdown, TocItem } from '../utils';
 
 /*
-  For FAQ:
+  Learn Landing page:
+*/
+
+export interface LandingSection {
+  sectionTitle: string;
+  sectionId: string;
+  description: Markdown;
+  buttonCta: string;
+  buttonRedirect: string;
+}
+
+export interface LandingContent {
+  header: string;
+  intro: Markdown;
+  sections: LandingSection[];
+  metadataTitle: string;
+  metadataDescription: string;
+}
+
+export const landingPageContent = landing as LandingContent;
+
+/*
+  FAQ:
 */
 export interface Question {
   question: string;
@@ -40,7 +62,7 @@ const sanitizeFaq = (faq: FaqContent): FaqContent => ({
 export const faqContent = sanitizeFaq(faq) as FaqContent;
 
 /*
-  For Glossary:
+  Glossary:
 */
 
 export interface Term {
@@ -70,31 +92,10 @@ const sanitizeGlossary = (glossary: GlossaryContent): GlossaryContent => ({
 
 export const glossaryContent = sanitizeGlossary(glossary) as GlossaryContent;
 
-/*
-  For Landing page:
-*/
-
-export interface LandingSection {
-  sectionTitle: string;
-  sectionId: string;
-  description: Markdown;
-  buttonCta: string;
-  buttonRedirect: string;
-}
-
-export interface LandingContent {
-  header: string;
-  intro: Markdown;
-  sections: LandingSection[];
-  metadataTitle: string;
-  metadataDescription: string;
-}
-
-export const landingPageContent = landing as LandingContent;
-
 /**
  * Case Studies
  */
+
 export interface CaseStudy {
   header: string;
   shortTitle: string;
@@ -178,25 +179,45 @@ export const learnPages: TocItem[] = [
 ];
 
 /**
- * Products
- */
+ * Products - landing page:
+ **/
 
 export interface LandingPageButton {
   cta: string;
   redirect: string;
 }
 
-export interface ProductsSection {
-  sectionTitle: string;
-  sectionId: string;
-  sectionSubtitle: string;
-  sectionDescription: Markdown;
-  notes?: Markdown;
+export interface ProductsLandingSection {
+  productName: string;
+  productId: string;
+  productSubtitle: string;
+  productDescription: Markdown;
   buttons: LandingPageButton[];
 }
 
-export interface ProductsContent {
+export interface ProductsLandingContent {
   header: string;
-  intro: Markdown;
-  sections: ProductsSection[];
+  intro?: Markdown;
+  productsList: ProductsLandingSection[];
+  metadataTitle: string;
+  metadataDescription: string;
+}
+
+/**
+ * Products - full pages:
+ **/
+
+export interface BodySection {
+  sectionTitle: string;
+  sectionId: string;
+  sectionBody: Markdown;
+}
+
+export interface ProductPageContent {
+  productName: string;
+  productId: string;
+  productIntro: Markdown;
+  sections: BodySection[];
+  metadataTitle: string;
+  metadataDescription: string;
 }
