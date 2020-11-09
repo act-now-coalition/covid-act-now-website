@@ -47,6 +47,56 @@ collections:
                   - { label: 'Alt text', name: 'altText', widget: 'string' }
                   - { label: 'Image', name: 'image', widget: 'image' }
                   - { label: 'Url', name: 'url', widget: 'string' }
+  - name: contact
+    label: Contact Us
+    format: json
+    description: Contact us page content
+    editor:
+      preview: true
+    files:
+      - name: contact
+        label: Contact us page
+        file: src/cms-content/contact/contact.json
+        fields:
+          - label: Header
+            name: header
+            widget: text
+            hint: 'Page Header'
+          - label: Intro
+            name: intro
+            widget: markdown
+            required: false
+            minimal: true
+            hint: 'Page intro'
+          - label: Sections
+            name: sections
+            widget: list
+            fields:
+              - {
+                  label: Section Header,
+                  name: header,
+                  widget: text,
+                  hint: 'Title of the section',
+                }
+              - {
+                  label: Section ID,
+                  name: sectionId,
+                  widget: string,
+                  hint: 'Added to the URL, no spaces, separated with dashes (ex: general-questions)',
+                }
+              - {
+                  label: Section Body,
+                  name: body,
+                  widget: markdown,
+                  hint: 'Full text of the section',
+                }
+          - label: Metadata title
+            name: metadataTitle
+            widget: text
+          - label: Metadata description
+            name: metadataDescription
+            widget: text
+
   - name: donate
     label: Donate
     format: json
@@ -352,11 +402,37 @@ collections:
             name: sections
             widget: list
             fields:
-              - { label: Section title, name: sectionTitle, widget: string, hint: 'Product name (ex. API)' }
-              - { label: Section ID, name: sectionId, widget: string, hint: 'Section title in all lowercase, divided by dashes if multi-word (ex: response-simulator)' }
-              - { label: Section subtitle, name: sectionSubtitle, widget: text, hint: 'Short description underneath title' }
-              - { label: Section description, name: sectionDescription, widget: markdown, hint: 'Longer product description' }
-              - { label: Notes, name: notes, widget: markdown, required: false, hint: 'Optional section for product-related notes or announcements' }
+              - {
+                  label: Section title,
+                  name: sectionTitle,
+                  widget: string,
+                  hint: 'Product name (ex. API)',
+                }
+              - {
+                  label: Section ID,
+                  name: sectionId,
+                  widget: string,
+                  hint: 'Section title in all lowercase, divided by dashes if multi-word (ex: response-simulator)',
+                }
+              - {
+                  label: Section subtitle,
+                  name: sectionSubtitle,
+                  widget: text,
+                  hint: 'Short description underneath title',
+                }
+              - {
+                  label: Section description,
+                  name: sectionDescription,
+                  widget: markdown,
+                  hint: 'Longer product description',
+                }
+              - {
+                  label: Notes,
+                  name: notes,
+                  widget: markdown,
+                  required: false,
+                  hint: 'Optional section for product-related notes or announcements',
+                }
               - label: Buttons
                 name: buttons
                 widget: list
