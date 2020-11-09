@@ -65,7 +65,6 @@ collections:
           - label: Intro
             name: intro
             widget: markdown
-            default: ''
             required: false
             minimal: true
             hint: 'Page intro'
