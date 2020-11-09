@@ -3,7 +3,7 @@ import faq from './learn-faq.json';
 import glossary from './learn-glossary.json';
 import landing from './learn-landing.json';
 import caseStudies from './learn-case-studies.json';
-import { sanitizeID, Markdown } from '../utils';
+import { sanitizeID, Markdown, TocItem } from '../utils';
 
 /*
   Learn Landing page:
@@ -49,21 +49,15 @@ export interface FaqContent {
   metadataDescription: string;
 }
 
-function sanitizeSection(section: FaqSection): FaqSection {
-  const { sectionId, ...other } = section;
-  return {
-    sectionId: sanitizeID(sectionId),
-    ...other,
-  };
-}
+const sanitizeSection = (section: FaqSection): FaqSection => ({
+  ...section,
+  sectionId: sanitizeID(section.sectionId),
+});
 
-function sanitizeFaq(faq: FaqContent) {
-  const { sections, ...other } = faq;
-  return {
-    sections: sections.map(sanitizeSection),
-    ...other,
-  };
-}
+const sanitizeFaq = (faq: FaqContent): FaqContent => ({
+  ...faq,
+  sections: faq.sections.map(sanitizeSection),
+});
 
 export const faqContent = sanitizeFaq(faq) as FaqContent;
 
@@ -86,21 +80,15 @@ export interface GlossaryContent {
 }
 
 // (Chelsi): make these sanitize functions reusable between learn pages?
-function sanitizeTerm(term: Term): Term {
-  const { termId, ...other } = term;
-  return {
-    termId: sanitizeID(termId),
-    ...other,
-  };
-}
+const sanitizeTerm = (term: Term): Term => ({
+  ...term,
+  termId: sanitizeID(term.termId),
+});
 
-function sanitizeGlossary(glossary: GlossaryContent) {
-  const { terms, ...other } = glossary;
-  return {
-    terms: terms.map(sanitizeTerm),
-    ...other,
-  };
-}
+const sanitizeGlossary = (glossary: GlossaryContent): GlossaryContent => ({
+  ...glossary,
+  terms: glossary.terms.map(sanitizeTerm),
+});
 
 export const glossaryContent = sanitizeGlossary(glossary) as GlossaryContent;
 
@@ -169,12 +157,6 @@ export function getMoreStudies(caseStudyId: string): CaseStudy[] {
 
 export const caseStudiesContent = caseStudies as CaseStudiesContent;
 
-interface TocItem {
-  label: string;
-  to: string;
-  items?: TocItem[];
-}
-
 // TODO (pablo): Should we have a short heading for categories?
 export const learnPages: TocItem[] = [
   { label: 'Glossary', to: '/glossary' },
@@ -191,7 +173,7 @@ export const learnPages: TocItem[] = [
     to: '/case-studies',
     items: caseStudiesContent.categories.map(category => ({
       to: `/case-studies#${category.categoryId}`,
-      label: category.header.replace('Learn from ', ''),
+      label: category.header,
     })),
   },
 ];
