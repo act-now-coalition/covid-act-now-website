@@ -32,7 +32,7 @@ import ExternalRedirect from 'components/ExternalRedirect';
 import HandleRedirectTo from 'components/HandleRedirectTo/HandleRedirectTo';
 import Donate from 'screens/Donate/Donate';
 import PageviewTracker from 'components/Analytics';
-import { Faq, Glossary, Landing, CaseStudies } from 'screens/Learn';
+import { Faq, Glossary, Landing, CaseStudies, Products } from 'screens/Learn';
 
 export default function App() {
   return (
@@ -114,6 +114,7 @@ export default function App() {
               <Route exact path="/faq" component={Faq} />
               <Route exact path="/glossary" component={Glossary} />
               <Route path="/case-studies" component={CaseStudies} />
+              <Route path="/products" component={Products} />
 
               {/* /state/ routes are deprecated but still supported. */}
               <Route exact path="/state/:stateId" component={LocationPage} />
