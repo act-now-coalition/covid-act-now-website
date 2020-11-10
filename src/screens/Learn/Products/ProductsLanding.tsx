@@ -5,7 +5,11 @@ import Breadcrumbs from 'components/Breadcrumbs';
 import PageContent from 'components/PageContent';
 import { MarkdownContent, Heading1, Heading2 } from 'components/Markdown';
 import { formatMetatagDate } from 'common/utils';
-import { learnPages, productsLandingContent } from 'cms-content/learn';
+import {
+  learnPages,
+  productsLandingContent,
+  ProductsLandingSection,
+} from 'cms-content/learn';
 import { BreadcrumbsContainer } from '../Learn.style';
 
 const {
@@ -33,7 +37,7 @@ const ProductsLanding = () => {
         </BreadcrumbsContainer>
         <Heading1>{header}</Heading1>
         <MarkdownContent source={intro} />
-        {productsList.map(product => (
+        {productsList.map((product: ProductsLandingSection) => (
           <Fragment key={product.productId}>
             <Heading2 id={product.productId}>{product.productName}</Heading2>
             <p>{product.productSubtitle}</p>

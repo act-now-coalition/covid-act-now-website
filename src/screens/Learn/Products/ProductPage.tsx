@@ -5,7 +5,11 @@ import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { MarkdownContent, Heading1, Heading2 } from 'components/Markdown';
 import PageContent from 'components/PageContent';
-import { learnPages, getProductPageContent } from 'cms-content/learn';
+import {
+  learnPages,
+  getProductPageContent,
+  BodySection,
+} from 'cms-content/learn';
 import { BreadcrumbsContainer } from '../Learn.style';
 
 const ProductPage: React.FC = () => {
@@ -38,7 +42,7 @@ const ProductPage: React.FC = () => {
         </BreadcrumbsContainer>
         <Heading1>{productName}</Heading1>
         <MarkdownContent source={productIntro} />
-        {sections.map(section => (
+        {sections.map((section: BodySection) => (
           <Fragment key={section.sectionId}>
             <Heading2>{section.sectionTitle}</Heading2>
             <MarkdownContent source={section.sectionBody} />

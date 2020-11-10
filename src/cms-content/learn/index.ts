@@ -212,7 +212,9 @@ export interface ProductPageContent {
 export const productPageContent = productPages as ProductPageContent;
 
 // Used to get full-page product content by product ID
-export function getProductPageContent(productLandingId: string) {
+export function getProductPageContent(
+  productLandingId: string,
+): ProductPage | undefined {
   return productPages.product.find(item => item.productId === productLandingId);
 }
 
