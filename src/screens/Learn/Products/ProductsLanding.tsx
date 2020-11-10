@@ -3,7 +3,7 @@ import { useRouteMatch, Link } from 'react-router-dom';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import Breadcrumbs from 'components/Breadcrumbs';
 import PageContent from 'components/PageContent';
-import { MarkdownContent, Heading1, Heading2 } from 'components/Markdown';
+import { Heading1, Heading2, MarkdownContent } from 'components/Markdown';
 import { formatMetatagDate } from 'common/utils';
 import {
   learnPages,
@@ -11,6 +11,7 @@ import {
   ProductsLandingSection,
 } from 'cms-content/learn';
 import { BreadcrumbsContainer } from '../Learn.style';
+import { MarkdownProduct } from './ProductsLanding.style';
 
 const {
   header,
@@ -41,7 +42,7 @@ const ProductsLanding = () => {
           <Fragment key={product.productId}>
             <Heading2 id={product.productId}>{product.productName}</Heading2>
             <p>{product.productSubtitle}</p>
-            <MarkdownContent source={product.productDescription} />
+            <MarkdownProduct source={product.productDescription} />
             <Link to={`${url}/${product.productId}`}>
               {product.buttons[0].cta}
             </Link>
