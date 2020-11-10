@@ -7,7 +7,7 @@ import { StyledAccordion } from 'components/SharedComponents';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { MarkdownContent, Heading1 } from 'components/Markdown';
 import PageContent from 'components/PageContent';
-import { glossaryContent, Term, learnPages } from 'cms-content/learn';
+import { glossaryContent, Term, sidebarItemsLearn } from 'cms-content/learn';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { Anchor } from 'components/TableOfContents';
 import { formatMetatagDate } from 'common/utils';
@@ -53,7 +53,7 @@ const Glossary: React.FC = () => {
         pageTitle={metadataTitle}
         pageDescription={`${date} ${metadataDescription}`}
       />
-      <PageContent sidebarItems={learnPages}>
+      <PageContent sidebarItems={sidebarItemsLearn}>
         <BreadcrumbsContainer>
           <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>

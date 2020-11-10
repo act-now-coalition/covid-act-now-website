@@ -7,7 +7,7 @@ import { Anchor } from 'components/TableOfContents';
 import {
   LandingSection,
   landingPageContent,
-  learnPages,
+  sidebarItemsLearn,
 } from 'cms-content/learn';
 import SectionButton, { ButtonTheme } from './SectionButton';
 import { ButtonContainer } from '../Learn.style';
@@ -30,7 +30,7 @@ const Landing: React.FC = () => {
         pageTitle={metadataTitle}
         pageDescription={`${date} ${metadataDescription}`}
       />
-      <PageContent sidebarItems={learnPages}>
+      <PageContent sidebarItems={sidebarItemsLearn}>
         <Heading1>{header}</Heading1>
         <MarkdownContent source={intro} />
         {sections.map((section: LandingSection) => (

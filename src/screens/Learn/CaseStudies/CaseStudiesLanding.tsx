@@ -8,7 +8,7 @@ import Breadcrumbs from 'components/Breadcrumbs';
 import PageContent from 'components/PageContent';
 import { MarkdownContent, Heading1, Heading2 } from 'components/Markdown';
 import { formatMetatagDate } from 'common/utils';
-import { caseStudiesContent, learnPages } from 'cms-content/learn';
+import { caseStudiesContent, sidebarItemsLearn } from 'cms-content/learn';
 import CaseStudyCard from './CaseStudyCard';
 import { BreadcrumbsContainer } from '../Learn.style';
 import { CardsContainer } from './CaseStudy.style';
@@ -36,7 +36,7 @@ const Landing: React.FC = () => {
         pageTitle={metadataTitle}
         pageDescription={`${date} ${metadataDescription}`}
       />
-      <PageContent sidebarItems={learnPages}>
+      <PageContent sidebarItems={sidebarItemsLearn}>
         <BreadcrumbsContainer>
           <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>

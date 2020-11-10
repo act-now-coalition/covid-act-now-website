@@ -5,7 +5,7 @@ import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { MarkdownContent, Heading1 } from 'components/Markdown';
 import PageContent, { MobileOnly } from 'components/PageContent';
-import { faqContent, FaqSection, learnPages } from 'cms-content/learn';
+import { faqContent, FaqSection, sidebarItemsLearn } from 'cms-content/learn';
 import { BreadcrumbsContainer } from '../Learn.style';
 import Section from './Section';
 
@@ -33,7 +33,7 @@ const Faq: React.FC = () => {
         pageTitle={metadataTitle}
         pageDescription={`${date} ${metadataDescription}`}
       />
-      <PageContent sidebarItems={learnPages}>
+      <PageContent sidebarItems={sidebarItemsLearn}>
         <BreadcrumbsContainer>
           <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>

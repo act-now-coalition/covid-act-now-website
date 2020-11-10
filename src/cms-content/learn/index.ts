@@ -1,4 +1,4 @@
-import { chain, keyBy, reject } from 'lodash';
+import { chain, keyBy, reject, omit } from 'lodash';
 import faq from './learn-faq.json';
 import glossary from './learn-glossary.json';
 import landing from './learn-landing.json';
@@ -157,8 +157,7 @@ export function getMoreStudies(caseStudyId: string): CaseStudy[] {
 
 export const caseStudiesContent = caseStudies as CaseStudiesContent;
 
-// TODO (pablo): Should we have a short heading for categories?
-export const learnPages: TocItem[] = [
+export const sidebarItemsLearn: TocItem[] = [
   { label: 'Glossary', to: '/glossary' },
   {
     label: 'FAQ',
@@ -177,6 +176,11 @@ export const learnPages: TocItem[] = [
     })),
   },
 ];
+
+// The hierarchy of sidebarItemsLearn doesn't make sense on the Case Study page
+export const sidebarItemsCaseStudy: TocItem[] = sidebarItemsLearn.map(
+  pageItem => omit(pageItem, 'items'),
+);
 
 /**
  * Products - landing page:
