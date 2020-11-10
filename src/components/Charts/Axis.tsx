@@ -18,8 +18,8 @@ export const AxisBottom = (props: SharedAxisProps<Date>) => {
   const dateFormat = isSmallDevice ? 'MMM' : 'MMM DD';
 
   const tickValues = isSmallDevice
-    ? timeMonth.range(dateStart, dateStop, 1)
-    : timeDay.range(dateStart, dateStop, 14);
+    ? timeMonth.range(dateStart, dateStop, 2)
+    : timeDay.range(dateStart, dateStop, 21);
 
   return (
     <Style.Axis>
