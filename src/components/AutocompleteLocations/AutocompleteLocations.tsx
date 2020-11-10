@@ -1,8 +1,13 @@
 import React from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import { createFilterOptions } from '@material-ui/lab/useAutocomplete';
 import TextField from '@material-ui/core/TextField';
 import { Location } from 'common/locations';
-import { createFilterOptions } from '@material-ui/lab/useAutocomplete';
+/**
+ * `createFilterOptions` creates a configuration object that defines how the
+ * user input will be matched against the options in the Autocomplete
+ * component. See material-ui/lab/useAutocomplete.js for additional options.
+ */
 
 function getLocationLabel(location: Location) {
   return location.county
@@ -24,19 +29,21 @@ const AutocompleteLocations: React.FC<{
     event: React.ChangeEvent<{}>,
     newLocations: Location[],
   ) => void;
-}> = ({ locations, onChangeLocations, selectedLocations }) => (
-  <Autocomplete
-    multiple
-    options={locations}
-    getOptionLabel={getLocationLabel}
-    onChange={onChangeLocations}
-    getOptionSelected={getOptionSelected}
-    value={selectedLocations}
-    filterOptions={createFilterOptions({ matchFrom: 'start', trim: true })}
-    renderInput={params => (
-      <TextField variant="outlined" {...params} placeholder="+ Add" />
-    )}
-  />
-);
+}> = ({ locations, onChangeLocations, selectedLocations }) => {
+  return (
+    <Autocomplete
+      multiple
+      options={locations}
+      getOptionLabel={getLocationLabel}
+      onChange={onChangeLocations}
+      getOptionSelected={getOptionSelected}
+      value={selectedLocations}
+      filterOptions={createFilterOptions({ matchFrom: 'start', trim: true })}
+      renderInput={params => (
+        <TextField variant="outlined" {...params} placeholder="+ Add" />
+      )}
+    />
+  );
+};
 
 export default AutocompleteLocations;
