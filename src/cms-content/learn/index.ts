@@ -3,89 +3,10 @@ import faq from './learn-faq.json';
 import glossary from './learn-glossary.json';
 import landing from './learn-landing.json';
 import caseStudies from './learn-case-studies.json';
-import { sanitizeID } from './utils';
-
-type Markdown = string;
+import { sanitizeID, Markdown, TocItem } from '../utils';
 
 /*
-  For FAQ:
-*/
-export interface Question {
-  question: string;
-  answer: Markdown;
-}
-
-export interface FaqSection {
-  sectionTitle: string;
-  sectionId: string;
-  questions: Question[];
-}
-
-export interface FaqContent {
-  header: string;
-  intro: Markdown;
-  sections: FaqSection[];
-  metadataTitle: string;
-  metadataDescription: string;
-}
-
-function sanitizeSection(section: FaqSection): FaqSection {
-  const { sectionId, ...other } = section;
-  return {
-    sectionId: sanitizeID(sectionId),
-    ...other,
-  };
-}
-
-function sanitizeFaq(faq: FaqContent) {
-  const { sections, ...other } = faq;
-  return {
-    sections: sections.map(sanitizeSection),
-    ...other,
-  };
-}
-
-export const faqContent = sanitizeFaq(faq) as FaqContent;
-
-/*
-  For Glossary:
-*/
-
-export interface Term {
-  term: string;
-  termId: string;
-  definition: Markdown;
-}
-
-export interface GlossaryContent {
-  header: string;
-  intro: Markdown;
-  terms: Term[];
-  metadataTitle: string;
-  metadataDescription: string;
-}
-
-// (Chelsi): make these sanitize functions reusable between learn pages?
-function sanitizeTerm(term: Term): Term {
-  const { termId, ...other } = term;
-  return {
-    termId: sanitizeID(termId),
-    ...other,
-  };
-}
-
-function sanitizeGlossary(glossary: GlossaryContent) {
-  const { terms, ...other } = glossary;
-  return {
-    terms: terms.map(sanitizeTerm),
-    ...other,
-  };
-}
-
-export const glossaryContent = sanitizeGlossary(glossary) as GlossaryContent;
-
-/*
-  For Landing page:
+  Learn Landing page:
 */
 
 export interface LandingSection {
@@ -106,9 +27,75 @@ export interface LandingContent {
 
 export const landingPageContent = landing as LandingContent;
 
+/*
+  FAQ:
+*/
+export interface Question {
+  question: string;
+  answer: Markdown;
+}
+
+export interface FaqSection {
+  sectionTitle: string;
+  sectionId: string;
+  questions: Question[];
+}
+
+export interface FaqContent {
+  header: string;
+  intro: Markdown;
+  sections: FaqSection[];
+  metadataTitle: string;
+  metadataDescription: string;
+}
+
+const sanitizeSection = (section: FaqSection): FaqSection => ({
+  ...section,
+  sectionId: sanitizeID(section.sectionId),
+});
+
+const sanitizeFaq = (faq: FaqContent): FaqContent => ({
+  ...faq,
+  sections: faq.sections.map(sanitizeSection),
+});
+
+export const faqContent = sanitizeFaq(faq) as FaqContent;
+
+/*
+  Glossary:
+*/
+
+export interface Term {
+  term: string;
+  termId: string;
+  definition: Markdown;
+}
+
+export interface GlossaryContent {
+  header: string;
+  intro: Markdown;
+  terms: Term[];
+  metadataTitle: string;
+  metadataDescription: string;
+}
+
+// (Chelsi): make these sanitize functions reusable between learn pages?
+const sanitizeTerm = (term: Term): Term => ({
+  ...term,
+  termId: sanitizeID(term.termId),
+});
+
+const sanitizeGlossary = (glossary: GlossaryContent): GlossaryContent => ({
+  ...glossary,
+  terms: glossary.terms.map(sanitizeTerm),
+});
+
+export const glossaryContent = sanitizeGlossary(glossary) as GlossaryContent;
+
 /**
  * Case Studies
  */
+
 export interface CaseStudy {
   header: string;
   shortTitle: string;
@@ -170,12 +157,6 @@ export function getMoreStudies(caseStudyId: string): CaseStudy[] {
 
 export const caseStudiesContent = caseStudies as CaseStudiesContent;
 
-interface TocItem {
-  label: string;
-  to: string;
-  items?: TocItem[];
-}
-
 // TODO (pablo): Should we have a short heading for categories?
 export const learnPages: TocItem[] = [
   { label: 'Glossary', to: '/glossary' },
@@ -192,31 +173,51 @@ export const learnPages: TocItem[] = [
     to: '/case-studies',
     items: caseStudiesContent.categories.map(category => ({
       to: `/case-studies#${category.categoryId}`,
-      label: category.header.replace('Learn from ', ''),
+      label: category.header,
     })),
   },
 ];
 
 /**
- * Products
- */
+ * Products - landing page:
+ **/
 
 export interface LandingPageButton {
   cta: string;
   redirect: string;
 }
 
-export interface ProductsSection {
-  sectionTitle: string;
-  sectionId: string;
-  sectionSubtitle: string;
-  sectionDescription: Markdown;
-  notes?: Markdown;
+export interface ProductsLandingSection {
+  productName: string;
+  productId: string;
+  productSubtitle: string;
+  productDescription: Markdown;
   buttons: LandingPageButton[];
 }
 
-export interface ProductsContent {
+export interface ProductsLandingContent {
   header: string;
-  intro: Markdown;
-  sections: ProductsSection[];
+  intro?: Markdown;
+  productsList: ProductsLandingSection[];
+  metadataTitle: string;
+  metadataDescription: string;
+}
+
+/**
+ * Products - full pages:
+ **/
+
+export interface BodySection {
+  sectionTitle: string;
+  sectionId: string;
+  sectionBody: Markdown;
+}
+
+export interface ProductPageContent {
+  productName: string;
+  productId: string;
+  productIntro: Markdown;
+  sections: BodySection[];
+  metadataTitle: string;
+  metadataDescription: string;
 }
