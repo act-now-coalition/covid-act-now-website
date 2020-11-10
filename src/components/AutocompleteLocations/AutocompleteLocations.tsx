@@ -6,7 +6,15 @@ import { Location } from 'common/locations';
 /**
  * `createFilterOptions` creates a configuration object that defines how the
  * user input will be matched against the options in the Autocomplete
- * component. See material-ui/lab/useAutocomplete.js for additional options.
+ * component.
+ *
+ * The input of the user will be compared with the output of `getOptionLabel`
+ * applied to each location. The option `matchFrom: 'start'` means that the
+ * beginning of the option label needs to match with the user input. For
+ * example, if the user types "king", "King County, TX" and "Kingfisher County, OR"
+ * will be a match (among others), but not "Rockingham County, NC".
+ *
+ * See material-ui/lab/useAutocomplete.js for additional options.
  */
 
 function getLocationLabel(location: Location) {
@@ -37,7 +45,7 @@ const AutocompleteLocations: React.FC<{
     onChange={onChangeLocations}
     getOptionSelected={getOptionSelected}
     value={selectedLocations}
-    filterOptions={createFilterOptions({ matchFrom: 'start', trim: true })}
+    filterOptions={createFilterOptions({ matchFrom: 'start' })}
     renderInput={params => (
       <TextField variant="outlined" {...params} placeholder="+ Add" />
     )}
