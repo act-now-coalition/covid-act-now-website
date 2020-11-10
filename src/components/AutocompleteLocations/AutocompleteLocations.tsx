@@ -29,21 +29,19 @@ const AutocompleteLocations: React.FC<{
     event: React.ChangeEvent<{}>,
     newLocations: Location[],
   ) => void;
-}> = ({ locations, onChangeLocations, selectedLocations }) => {
-  return (
-    <Autocomplete
-      multiple
-      options={locations}
-      getOptionLabel={getLocationLabel}
-      onChange={onChangeLocations}
-      getOptionSelected={getOptionSelected}
-      value={selectedLocations}
-      filterOptions={createFilterOptions({ matchFrom: 'start', trim: true })}
-      renderInput={params => (
-        <TextField variant="outlined" {...params} placeholder="+ Add" />
-      )}
-    />
-  );
-};
+}> = ({ locations, onChangeLocations, selectedLocations }) => (
+  <Autocomplete
+    multiple
+    options={locations}
+    getOptionLabel={getLocationLabel}
+    onChange={onChangeLocations}
+    getOptionSelected={getOptionSelected}
+    value={selectedLocations}
+    filterOptions={createFilterOptions({ matchFrom: 'start', trim: true })}
+    renderInput={params => (
+      <TextField variant="outlined" {...params} placeholder="+ Add" />
+    )}
+  />
+);
 
 export default AutocompleteLocations;
