@@ -12,7 +12,7 @@
           "summary": "California’s CalCAT tool uses our data to analyze current COVID spread and project the impact of policy interventions.",
           "author": "Mikayla O'Bryan",
           "logoAltText": "California Department of Public Health logo",
-          "header": "California Department of Public Health launches CalCAT",
+          "header": "California’s COVID Assessment Tool Integrates CAN Data",
           "caseStudyId": "cdph-calcat",
           "tags": [
             "model",
@@ -26,7 +26,7 @@
           "summary": "An epidemiologist with Oklahoma’s department of health relies on our data to keep officials and health workers informed.",
           "author": "Tom McMullen",
           "logoAltText": "Oklahoma state map",
-          "header": "Epidemiologist with the Oklahoma State Department of Health",
+          "header": "Oklahoma Epidemiologist Uses CAN’s Clear Visualizations",
           "caseStudyId": "melanie-curry",
           "tags": [
             "content"
@@ -39,7 +39,7 @@
           "summary": "A blind senior policy planner for a county health department cites our website for best practices in data accessibility.",
           "author": "Jillian Graver",
           "logoAltText": "Harris county Texas state map",
-          "header": "Kimberly Aguillard in Harris County, Texas",
+          "header": "Senior Policy Planner from Harris County, Texas Shares Web Accessibility Tips",
           "caseStudyId": "kimberly-aguillard",
           "tags": [
             "accessibility"
@@ -90,7 +90,7 @@
           "summary": "A county manager in New York depends on our data to create travel advisories for employees and inform local messaging.",
           "author": "Jordan Dunaway-Barlow",
           "logoAltText": "steuben county logo",
-          "header": "Jack Wheeler, Steuben County, New York",
+          "header": "County Manager Creates Advisories With CAN’s Data",
           "caseStudyId": "steuben-county",
           "tags": [
             "risk-assessment"
@@ -109,7 +109,7 @@
           "summary": "NACo uses our COVID Response Simulator to project the impact of non-pharmaceutical interventions on COVID’s spread.",
           "author": "Lexie Kaplan",
           "logoAltText": "naco logo",
-          "header": "National Association of Counties (NACo)",
+          "header": "National Association of Counties Uses CAN’s Model for COVID Planning",
           "caseStudyId": "naco",
           "tags": [
             "crs"
@@ -122,7 +122,7 @@
           "summary": "A nonprofit supporting seniors relies on our website to assess risk and implement policies to protect patrons and staff.",
           "author": "Jillian Graver",
           "logoAltText": "care connection for aging services logo",
-          "header": "Deb Krieger, Care Connection for Aging Services",
+          "header": "Care Connection for Aging Services Relies on CAN to Understand COVID Risk",
           "caseStudyId": "deb-krieger",
           "tags": [
             "risk-assessment"
@@ -141,7 +141,7 @@
           "summary": "Here’s how a public health expert uses our warning system and content to promote clear information about COVID.",
           "author": "Amanda Fassler",
           "logoAltText": "The Public Health Pharmacist logo",
-          "header": "Christina Madison, Pharm.D., Public Health Expert in Las Vegas, Nevada",
+          "header": "Las Vegas Public Health Expert Relies on CAN Data to Communicate With Public",
           "caseStudyId": "christina-madison",
           "tags": [
             "content"
@@ -154,7 +154,7 @@
           "summary": "A consultant in South Florida uses our data to educate business owners, MBA students, and local community leaders.",
           "author": "Lindsay Craig",
           "logoAltText": "florida map",
-          "header": "Decision Science Educator from Nova Southeastern University, Florida",
+          "header": "Decision Science Educator Uses CAN’s Data at Nova Southeastern University",
           "caseStudyId": "david-hinds",
           "tags": [
             "county-data",
