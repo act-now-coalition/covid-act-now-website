@@ -1,9 +1,9 @@
 {
   "product": [
     {
-      "productName": "API!!",
+      "productName": "API",
       "productId": "api",
-      "productIntro": "Intro copy",
+      "productIntro": "Real-time covid data intelligence at your fingertips\n\nThe only API that provides a comprehensive package of state and county-level COVID data sets. We aggregate and collect key COVID data across our nation's 50 states and 3,000 counties and return timeseries formatted in JSON or CSV. See below which data sets are available at the national, state, and county level!",
       "metadataTitle": "Stand in metadata title",
       "metadataDescription": "Stand in metadata description",
       "sections": [
