@@ -213,9 +213,7 @@ export const productPageContent = productPages as ProductPageContent;
 
 // Used to get full-page product content by product ID
 export function getProductPageContent(productLandingId: string) {
-  return productPages.product.filter(
-    item => item.productId === productLandingId,
-  );
+  return productPages.product.find(item => item.productId === productLandingId);
 }
 
 // TODO (pablo): Should we have a short heading for categories?

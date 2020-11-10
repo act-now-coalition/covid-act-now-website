@@ -5,11 +5,7 @@ import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { MarkdownContent, Heading1, Heading2 } from 'components/Markdown';
 import PageContent from 'components/PageContent';
-import {
-  learnPages,
-  getProductPageContent,
-  productPageContent,
-} from 'cms-content/learn';
+import { learnPages, getProductPageContent } from 'cms-content/learn';
 import { BreadcrumbsContainer } from '../Learn.style';
 
 const ProductPage: React.FC = () => {
@@ -17,7 +13,7 @@ const ProductPage: React.FC = () => {
   const date = formatMetatagDate();
   const pageContent = getProductPageContent(productId);
 
-  if (!productPageContent) {
+  if (!pageContent) {
     return null;
   }
 
@@ -27,7 +23,7 @@ const ProductPage: React.FC = () => {
     metadataTitle,
     metadataDescription,
     sections,
-  } = pageContent[0];
+  } = pageContent;
 
   return (
     <Fragment>
