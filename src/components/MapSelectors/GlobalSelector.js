@@ -20,13 +20,13 @@ import {
   StyledInputWrapper,
   StyledZipcodeInCounty,
 } from './GlobalSelector.style';
-
 import {
   StyledState,
   StyledCounty,
   StyledResultsMenuOption,
   StyledResultsMenuSubText,
 } from './MapSelectors.style';
+import { getStateByUrlName } from 'common/locations';
 
 const StateItem = ({ dataset }) => {
   const fillColor = stateColor(dataset.state_code);
@@ -158,8 +158,9 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
     }
 
     if (location && !inputValue) {
+      const { state_code } = getStateByUrlName(location);
       const topCountiesByParamState = chain(countyDataset)
-        .filter(item => item.state_code === location.toUpperCase())
+        .filter(item => item.state_code === state_code)
         .map(item => ({
           ...item,
           id: item.full_fips_code,
