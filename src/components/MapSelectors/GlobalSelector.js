@@ -158,8 +158,12 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
     }
 
     if (location && !inputValue) {
+      // the URL location param used to be the stateCode but now is stateName-stateCode
+      // so we now need to grab the stateCode from the end of the param to populate the search dropdown
+      // fixes bug: https://trello.com/c/TfH1UiqD/572-search-dropdown-doesnt-populate-with-state-counties-using-new-url-format
+      const stateCodeFromParam = location.slice(-2);
       const topCountiesByParamState = chain(countyDataset)
-        .filter(item => item.state_code === location.toUpperCase())
+        .filter(item => item.state_code === stateCodeFromParam.toUpperCase())
         .map(item => ({
           ...item,
           id: item.full_fips_code,
