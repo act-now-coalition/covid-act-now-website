@@ -70,8 +70,9 @@ export const Heading2 = styled.h2`
   ${heading2Css}
 `;
 
-export const Heading3 = styled.h3`
+export const Heading3 = styled.h3<{ centered?: boolean }>`
   ${heading3Css}
+  text-align: ${({ centered }) => centered && 'center'};
 `;
 
 export const Blockquote = styled.blockquote`

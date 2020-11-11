@@ -1,11 +1,17 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import ShareBlock from 'components/ShareBlock/ShareBlock';
-import { Heading1, Heading2, Heading3, Paragraph } from 'components/Markdown';
+import { Heading2, Heading3 } from 'components/Markdown';
 import Map from 'components/Map/Map';
 import CompareMain from 'components/Compare/CompareMain';
 import ExploreChart from 'components/Explore/ExploreChart';
-import { Placeholder, PageContent } from './National.style';
+import {
+  Placeholder,
+  PageContent,
+  Paragraph,
+  Header,
+  CopyContainer,
+} from './National.style';
 import { findLocationForFips } from 'common/locations';
 import { getChartSeries } from 'components/Explore/utils';
 import { ExploreMetric, Series } from 'components/Explore/interfaces';
@@ -34,11 +40,17 @@ const National: React.FC = () => {
     <Fragment>
       {/* Meta tags */}
       <PageContent>
-        <Heading1>COVID in the US</Heading1>
-        <Paragraph>Intro paragraph</Paragraph>
+        <CopyContainer>
+          <Header>COVID in the U.S.</Header>
+          <Paragraph>
+            As of November 3rd, 2020, approximately <span>1,234,567</span>{' '}
+            Americans have been infected with COVID-19. At least{' '}
+            <span>123,456</span> of those infected have died.
+          </Paragraph>
+        </CopyContainer>
         <Grid container spacing={2}>
           <Grid item sm={6} xs={12}>
-            <Heading3>Daily new cases</Heading3>
+            <Heading3 centered>Daily new cases</Heading3>
             <Placeholder>
               {seriesCases && (
                 <ParentSize>
@@ -59,7 +71,7 @@ const National: React.FC = () => {
             </Placeholder>
           </Grid>
           <Grid item sm={6} xs={12}>
-            <Heading3>Daily deaths</Heading3>
+            <Heading3 centered>Daily deaths</Heading3>
             <Placeholder>
               {seriesDeaths && (
                 <ParentSize>
