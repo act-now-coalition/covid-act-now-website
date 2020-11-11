@@ -14,9 +14,11 @@ export const Placeholder = styled.div`
 
 export const PageContent = styled.main`
   margin: 0 ${theme.spacing(2)}px;
+  margin-bottom: ${theme.spacing(4)}px;
 
   @media (min-width: ${mobileBreakpoint}) {
     max-width: ${mobileBreakpoint};
     margin: 0 auto;
+    margin-bottom: ${theme.spacing(4)}px;
   }
 `;
