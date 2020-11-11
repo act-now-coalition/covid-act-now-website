@@ -17,7 +17,7 @@
           "answer": "Anyone who has been [exposed](/glossary#exposed) to COVID is at risk of contracting the disease, and people of all ages have experienced hospitalization and death. Some people, however, are at greater risk. Elderly individuals, particularly those 85 or older, and people with certain underlying medical conditions are at [higher risk](/glossary#comorbidity) of serious illness, according to the CDC. (Click [here](https://www.cdc.gov/coronavirus/2019-ncov/need-extra-precautions/people-at-increased-risk.html) for information from the CDC about people at increased risk.)"
         },
         {
-          "question": "Which demographic groups are most likely to become infected with COVID, to become seriously ill, or to die from the virus?",
+          "question": "Which groups are at higher risk of contracting COVID and becoming seriously ill?",
           "answer": "Data from the CDC show that race and ethnicity, similar to age, are risk factors for COVID. In fact, the rates of COVID cases, hospitalizations and deaths among Blacks, Hispanic and Latino persons, and American Indians and Native Alaskans are much higher than for white people, according to the CDC’s calculation of [COVID-19 Hospitalization and Death by Race/Ethnicity](https://www.cdc.gov/coronavirus/2019-ncov/covid-data/investigations-discovery/hospitalization-death-by-race-ethnicity.html) (updated August 18, 2020). Some data show an even higher mortality rate among certain ethnic and racial groups than the CDC data. The [APM Research Lab](https://www.apmresearchlab.org/covid/deaths-by-race) finds that COVID death rates are more than three times higher for Blacks, Latinos, and Indigenous people than for white people (update September 15)."
         }
       ]
@@ -31,7 +31,7 @@
           "answer": "While some people recover quickly from COVID, others suffer debilitating, long-term symptoms, according to the [Mayo Clinic](https://www.mayoclinic.org/diseases-conditions/coronavirus/in-depth/coronavirus-long-term-effects/art-20490351). In Italy, which was one of the first countries to be hit hard by the disease, many survivors are still experiencing health problems after having COVID. In one [study](https://jamanetwork.com/journals/jama/fullarticle/2768351), more than 87 percent of individuals experienced one or more symptoms (most commonly fatigue and difficulty breathing) after recovery from COVID. Meanwhile, a German [study](https://jamanetwork.com/journals/jamacardiology/fullarticle/2768916) found that 78 of 100 recovered COVID patients continued to experience heart abnormalities months after [infection](/glossary#infection)."
         },
         {
-          "question": "When can I be sure that I no longer have COVID and won't pass it to others?",
+          "question": "How long are you contagious with COVID?",
           "answer": "According to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/hcp/disposition-in-home-patients.html), a person with COVID who has been [isolating](/glossary#quarantine) at home may stop isolating when (1) at least 10 days have passed since symptom onset; (2) at least 24 hours have passed fever-free without the use of fever-reducing medications; and (3) other symptoms have improved. Those “who never develop symptoms may discontinue isolation and other precautions 10 days after the date of their first positive” [PCR test](/glossary#pcr-test) for COVID."
         },
         {
@@ -99,7 +99,7 @@
           "answer": "For the time being, it is safest not to travel. In particular, travel by plane, which may require you to sit close to others for hours, and by cruise ship are particularly risky, according to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/travelers/faqs.html). If you must travel, look at the data on [our site](https://covidactnow.org/?s=768133) to compare the state and county risk levels where you will be. If you plan to fly, take time to research and assess the measures different airlines are taking to reduce risky behaviors and comply with local laws to contain the spread of COVID."
         },
         {
-          "question": "When should I get tested after a possible exposure to COVID? ",
+          "question": "How soon after a possible exposure to COVID should I get tested? ",
           "answer": "It’s important to get tested for COVID after any potential [exposure](/glossary#exposed) to the [virus](/glossary#virus), whether that’s through contact with a [confirmed case](/glossary#confirmed-case) or traveling in close company with strangers. Since COVID has a long [incubation period](/glossary#incubation-period), it may take a few days before [PCR tests](/glossary#pcr-test) detect a sufficient enough amount of the virus to report a positive result, leading to high rates of [false-negatives](/glossary#false-negative) during the first few days after exposure. While it’s always recommended to [quarantine](/glossary#quarantine) for 14 days, [experts recommend](https://medical.mit.edu/covid-19-updates/2020/07/when-should-i-be-tested) being tested 5-7 days after a probable exposure for the most accurate test results."
         }
       ]
