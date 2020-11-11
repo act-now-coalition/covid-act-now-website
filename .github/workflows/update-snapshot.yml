@@ -35,6 +35,19 @@ jobs:
       - run: 'echo "{ \"data_url\": \"https://data.covidactnow.org/snapshot/${{env.SNAPSHOT_ID}}/v2/\" }" | python -mjson.tool > src/assets/data/data_url.json'
       - run: yarn update-location-summaries
 
+      # Generate new county-history-data.json file (for animap project).
+      - run: yarn generate-county-history-data
+
+      # Deploy https://content.covidactnow.org/animap/county-history-data.json
+      - uses: jakejarvis/s3-sync-action@master
+        with:
+          args: '--acl public-read --follow-symlinks --delete'
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.CONTENT_AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.CONTENT_AWS_SECRET_ACCESS_KEY }}
+          SOURCE_DIR: scripts/county_history_data/out
+          DEST_DIR: animap
+
       # TODO: We have switched to dynamic images served via Firebase Hosting.  Remove all of the
       # image generation / S3 upload / content.covidactnow.org stuff once we're 100% confident.
       # Generate Share Images and Upload to S3
