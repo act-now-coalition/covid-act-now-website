@@ -7,7 +7,6 @@ export const Placeholder = styled.div`
   padding: ${theme.spacing(2)}px;
   background-color: ${COLOR_MAP.LIGHTGRAY_BG};
   border: solid 1px ${COLOR_MAP.LIGHTGRAY};
-  text-transform: uppercase;
   display: grid;
   place-items: center;
 `;
