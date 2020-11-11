@@ -33,6 +33,7 @@ import HandleRedirectTo from 'components/HandleRedirectTo/HandleRedirectTo';
 import Donate from 'screens/Donate/Donate';
 import PageviewTracker from 'components/Analytics';
 import { Faq, Glossary, Landing, CaseStudies } from 'screens/Learn';
+import NationalPage from 'screens/National';
 
 export default function App() {
   return (
@@ -64,6 +65,7 @@ export default function App() {
               />
               <Route exact path="/donate" component={Donate} />
 
+              <Route exact path="/us" component={NationalPage} />
               <Route exact path="/us/:stateId" component={LocationPage} />
               <Route
                 exact
