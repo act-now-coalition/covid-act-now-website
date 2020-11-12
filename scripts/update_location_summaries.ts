@@ -91,7 +91,10 @@ async function buildSummaries(
   await fs.writeJSON(snapshotSummaryFile, summaries);
 }
 
-const AGGREGATED_DATASETS: DatasetId[] = [
+// Aggregates of county level data should not include hospitalizations
+// because we may know hopsitalizations for some counties but not others, leading
+// to misleading aggregates.
+const COUNTY_AGGREGATED_DATASETS: DatasetId[] = [
   'rawDailyCases',
   'smoothedDailyCases',
   'rawDailyDeaths',
@@ -104,11 +107,29 @@ const AGGREGATED_DATASETS: DatasetId[] = [
   */
 ];
 
-function aggregate(allProjections: Projections[]) {
+const STATE_AGGREGATED_DATASETS: DatasetId[] = [
+  'rawDailyCases',
+  'smoothedDailyCases',
+  'rawDailyDeaths',
+  'smoothedDailyDeaths',
+  'rawHospitalizations',
+  'smoothedHospitalizations',
+  // Only 43 states are reporting ICU as of 2020-11-12, disabling
+  // because per capita charts can be misleading.
+  /*
+  'rawICUHospitalizations',
+  'smoothedICUHospitalizations',
+  */
+];
+
+function aggregate(
+  allProjections: Projections[],
+  datasetsToAggregate: DatasetId[],
+) {
   const totalPopulation = _.sumBy(allProjections, p => p.population);
   const dates: number[] = [];
   let aggregatedDatasets: { [key: string]: Array<number | null> } = {};
-  for (const datasetId of AGGREGATED_DATASETS) {
+  for (const datasetId of datasetsToAggregate) {
     const aggregatedSeries = [];
     for (const projections of allProjections) {
       const projection = projections.primary;
@@ -145,10 +166,11 @@ async function buildAggregations(
 ) {
   const aggregations = {
     // US
-    '00001': aggregate(allStatesProjections),
+    '00001': aggregate(allStatesProjections, STATE_AGGREGATED_DATASETS),
     // Native American Majority Counties
     '00002': aggregate(
       allCountiesProjections.filter(p => INDIGENOUS_FIPS.includes(p.fips)),
+      COUNTY_AGGREGATED_DATASETS,
     ),
   };
 
