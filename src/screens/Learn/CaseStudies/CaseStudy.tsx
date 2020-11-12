@@ -15,7 +15,6 @@ import {
   getCaseStudyCategory,
   getMoreStudies,
   caseStudiesContent,
-  sidebarItemsCaseStudy,
 } from 'cms-content/learn';
 import * as Style from '../Learn.style';
 import {
@@ -48,7 +47,7 @@ const CaseStudy: React.FC = () => {
         pageTitle={`Case Study: ${caseStudy.shortTitle}`}
         pageDescription={`${date} ${metadataDescription}`}
       />
-      <PageContent sidebarItems={sidebarItemsCaseStudy}>
+      <PageContent>
         <Style.BreadcrumbsContainer>
           <Breadcrumbs item={{ to: '/case-studies', label: 'Case Studies' }} />
         </Style.BreadcrumbsContainer>

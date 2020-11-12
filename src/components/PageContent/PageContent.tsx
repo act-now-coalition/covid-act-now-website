@@ -10,14 +10,14 @@ import {
   DesktopOnly,
 } from './PageContent.style';
 
-const PageContent: React.FC<{ sidebarItems: TocItem[] }> = ({
+const PageContent: React.FC<{ sidebarItems?: TocItem[] }> = ({
   children,
   sidebarItems,
-}) => {
-  return (
-    <Fragment>
-      <PageContainer>
-        <MainContent>{children}</MainContent>
+}) => (
+  <Fragment>
+    <PageContainer>
+      <MainContent>{children}</MainContent>
+      {sidebarItems && sidebarItems.length > 0 && (
         <DesktopOnly>
           <Sidebar>
             <Sticky>
@@ -25,10 +25,10 @@ const PageContent: React.FC<{ sidebarItems: TocItem[] }> = ({
             </Sticky>
           </Sidebar>
         </DesktopOnly>
-      </PageContainer>
-      <ShareBlock />
-    </Fragment>
-  );
-};
+      )}
+    </PageContainer>
+    <ShareBlock />
+  </Fragment>
+);
 
 export default PageContent;
