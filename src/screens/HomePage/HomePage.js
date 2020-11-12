@@ -9,8 +9,6 @@ import Announcements from './Announcements/Announcements';
 import { useLocation } from 'react-router-dom';
 import PartnersSection from 'components/PartnersSection/PartnersSection';
 import HomePageThermometer from 'screens/HomePage/HomePageThermometer';
-import { GlobalSelector } from 'components/MapSelectors/MapSelectors';
-import { useHistory } from 'react-router-dom';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import {
@@ -26,6 +24,11 @@ import Explore from 'components/Explore';
 import { formatMetatagDate } from 'common/utils';
 import { getRandomStateFipsList } from './utils';
 import { ThirdWaveBanner } from 'components/Banner';
+import SearchAutocomplete from 'components/Search';
+import { ParentSize } from '@vx/responsive';
+import { getSearchAutocompleteLocations } from 'common/locations';
+// import { GlobalSelector } from 'components/MapSelectors/MapSelectors';
+// import { useHistory } from 'react-router-dom';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -38,8 +41,6 @@ export default function HomePage() {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
-
-  const history = useHistory();
 
   const indicatorsRef = useRef(null);
 
@@ -58,16 +59,19 @@ export default function HomePage() {
   }, [location.pathname, shareBlockRef]);
 
   // @ts-ignore TODO(aj): remove when converting MapSelectors
-  const handleSelectChange = option => {
-    let route = `/us/${option.state_code.toLowerCase()}`;
 
-    if (option.county_url_name) {
-      route = `${route}/county/${option.county_url_name}`;
-    }
+  // const history = useHistory();
 
-    history.push(route);
-    window.scrollTo(0, 0);
-  };
+  // const handleSelectChange = option => {
+  //   let route = `/us/${option.state_code.toLowerCase()}`;
+
+  //   if (option.county_url_name) {
+  //     route = `${route}/county/${option.county_url_name}`;
+  //   }
+
+  //   history.push(route);
+  //   window.scrollTo(0, 0);
+  // };
 
   const [initialFipsList] = useState(getRandomStateFipsList());
 
@@ -92,10 +96,17 @@ export default function HomePage() {
           <Content>
             <SearchBarThermometerWrapper>
               <SelectorWrapper>
-                <GlobalSelector
+                {/* <GlobalSelector
                   handleChange={handleSelectChange}
                   extendRight={undefined}
-                />
+                /> */}
+                <ParentSize>
+                  {() => (
+                    <SearchAutocomplete
+                      locations={getSearchAutocompleteLocations()}
+                    />
+                  )}
+                </ParentSize>
               </SelectorWrapper>
               {!isMobile && <HomePageThermometer />}
             </SearchBarThermometerWrapper>

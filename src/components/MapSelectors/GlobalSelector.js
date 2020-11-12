@@ -28,7 +28,7 @@ import {
 } from './MapSelectors.style';
 import { getStateByUrlName } from 'common/locations';
 
-const StateItem = ({ dataset }) => {
+export const StateItem = ({ dataset }) => {
   const fillColor = stateColor(dataset.state_code);
 
   return (
@@ -52,7 +52,7 @@ const StateItem = ({ dataset }) => {
   );
 };
 
-const CountyItem = ({ dataset }) => {
+export const CountyItem = ({ dataset }) => {
   const fillColor = countyColor(
     dataset.full_fips_code,
     stateColor(dataset.state_code),
@@ -208,6 +208,7 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
       }
     }
 
+    console.log('matchedItems', matchedItems);
     return map(matchedItems, (item, index) => {
       return (
         <StyledMenuItem

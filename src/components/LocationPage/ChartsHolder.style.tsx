@@ -5,7 +5,7 @@ import { Typography } from '@material-ui/core';
 export const ChartContentWrapper = styled.div`
   margin-top: 85px;
   @media (min-width: 1350px) {
-    margin-top: 97px;
+    margin-top: 90px;
   }
 
   @media print {

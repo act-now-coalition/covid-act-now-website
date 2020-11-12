@@ -62,6 +62,7 @@ function LocationPage() {
           setMapOption={setMapOption}
           mobileMenuOpen={mobileMenuOpen}
           setMobileMenuOpen={setMobileMenuOpen}
+          state={state}
         />
         <ChartsHolder
           projections={projections}
