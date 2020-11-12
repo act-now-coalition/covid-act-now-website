@@ -29,8 +29,7 @@ import { DonationBanner } from 'components/Banner';
 
 function getPageDescription() {
   const date = formatMetatagDate();
-  return `${date} View new COVID cases, deaths, hospitalizations, and other important metrics to understand where the US stands against Coronavirus. 50 States. 3000+ Counties. Click the map to dive in.
-`;
+  return `${date} View new US COVID cases, deaths, hospitalizations, and other important metrics. 50 States. 3000+ Counties. Click the map to dive in.`;
 }
 
 export default function HomePage() {
