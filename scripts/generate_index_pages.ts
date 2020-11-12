@@ -16,6 +16,7 @@ import { STATES } from '../src/common';
 import { assert } from '../src/common/utils';
 import * as urls from '../src/common/urls';
 import { getNextSharedComponentId } from '../src/common/sharing';
+import { getHomeSocialImageFilename } from './generate_share_images/index';
 
 // We don't care about the values here, but this is a cheap way to determine all
 // of the counties we have any data for and are therefore share-able.
@@ -124,9 +125,10 @@ async function main() {
 
   const builder = await IndexPageBuilder.initialize();
 
+  const homeImageFilename = getHomeSocialImageFilename();
   await builder.writeTemplatedPage(
     '/index.html',
-    homePageTags(builder.fullImageUrl('home.png')),
+    homePageTags(builder.fullImageUrl(homeImageFilename)),
   );
 
   // Make sure we have at least SHARED_COMPONENT_IDS_TO_GENERATE index.html

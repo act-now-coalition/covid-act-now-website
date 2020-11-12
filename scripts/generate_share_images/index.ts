@@ -10,6 +10,7 @@ import fs from 'fs-extra';
 import _ from 'lodash';
 import path from 'path';
 import Pageres from 'pageres';
+import moment from 'moment';
 import urlJoin from 'url-join';
 import {
   fetchAllStateProjections,
@@ -41,6 +42,11 @@ const BLACKLISTED_COUNTIES = [
   '11001', // DC - We treat it as a state, not a county.
 ];
 
+export function getHomeSocialImageFilename() {
+  const date = moment().format('YYYY-MM-DD');
+  return `${date}-image-covid-us-map-cases.png`;
+}
+
 (async () => {
   await fs.ensureDir(OUTPUT_DIR);
   await fs.emptyDir(OUTPUT_DIR);
@@ -64,7 +70,7 @@ const BLACKLISTED_COUNTIES = [
   // Homepage share image.
   screenshots.push({
     url: '/',
-    filename: 'home',
+    filename: getHomeSocialImageFilename(),
     outputSize: SHARE_OUTPUT_SIZE,
   });
 
