@@ -154,7 +154,7 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
     const matchedItems = [];
 
     if (inputValue.toLowerCase() === 'igor kofman') {
-      window.location = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+      window.location = 'https://youtu.be/EHRQHU3U86Y?t=12';
     }
 
     if (location && !inputValue) {
