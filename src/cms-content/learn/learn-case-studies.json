@@ -96,6 +96,19 @@
             "risk-assessment"
           ],
           "shortTitle": "Jack Wheeler"
+        },
+        {
+          "body": "![Melissa Schigoda Headshot](/images_cms/melissa-schigoda.jpeg \"Melissa Schigoda Headshot\")\n\nMelissa Schigoda is director of the [Office of Performance and Accountability](https://www.nola.gov/performance-and-accountability/) for the city of New Orleans, which has a population of nearly 400,000. New Orleans reached critical levels of COVID in late March and early April but has since stayed mostly below a high risk of outbreak. In her role as director of performance and accountability, Schigoda guides Mayor LaToya Cantrell’s COVID restrictions and local reopening plans by using and interpreting various COVID models to help inform policy decisions.\n\n## **What** is the challenge?\n\nSchigoda needs clear, authoritative, and accurate data to perform her work. She pays particularly close attention to the [infection growth rate](https://covidactnow.org/glossary#infection-growth-rate), or R(t), of COVID, because it shows how fast COVID is spreading. The R(t) informs how strict such COVID-related policies as reopening plans, mask mandates, and gathering size limitations need to be. To get a good idea of R(t), Schigoda must identify and analyze different COVID models and data platforms to interpret their various findings, draw conclusions about what local actions should be taken, and communicate this information to the mayor. Because there is no single standardized and universally accepted model, Schigoda and other decision makers struggle to understand which data is the most accurate for their region. Many of the major forecasting models in the COVID data landscape share common methodology, but they often have different assumptions, parameters, and technical approaches. Moreover, Schigoda has to grapple with understanding COVID on a local level while responding to state and federal regulations. Even when Louisiana’s state guidelines are unclear, leaders within the city of New Orleans have to respond appropriately to COVID and communicate a clear public health message to their constituents to encourage compliance. \n\n## **How** is Schigoda responding to COVID? \n\nSchigoda uses Covid Act Now (CAN) as a resource for clear, understandable COVID data. Schigoda is able to use the data to guide the mayor through the messy COVID data landscape and ensure that the mayor makes sound policy decisions regarding COVID restrictions and local reopening plans. [CAN’s county-level infection growth R(t) rate](https://covidactnow.org/us/la/county/orleans_parish/chart/0?s=1330330) has proven particularly useful for the mayor’s policy recommendations. For instance, Schigoda used CAN’s model to project the R(t) rate for the Fourth of July weekend to help the city better navigate the holiday. The results prompted the city to keep its phase two opening plan in place, including an enforced mask mandate and limits on gathering sizes and indoor capacities for restaurants and retail businesses. Schigoda then carefully analyzed the results of the holiday weekend to inform the city's next steps for reopening plans.\n\n> You have been hugely helpful. I love that you have taken what you originally had to these new metrics exactly as we needed them. And really appreciate the info design. We think it’s very easy to use and the explanations are very helpful\n\nCAN team members have joined discussions with decision makers at the Louisiana Department of Health and the major local health systems across the state to share insight into the model’s methodology. Through explaining why the infection growth rate differs among the various health systems’ models, CAN’s team helped Schigoda better understand the metric in order to make her more confident in the model and ensure that public health recommendations for the greater New Orleans area are well thought out and consistent. Greater clarity of COVID risk assessment and modeling also leads to clearer messaging to the public about why new policies have been instituted.",
+          "logoUrl": "/images_cms/nola-seal.png",
+          "summary": "The director of the New Orleans Office of Performance and Accountability uses our data to guide reopening decisions.",
+          "author": "Jordan Dunaway-Barlow",
+          "logoAltText": "City of New Orleans logo",
+          "header": "New Orleans City Official Relies on CAN Data for Policy Decisions ",
+          "caseStudyId": "melissa-schigoda",
+          "tags": [
+            "county-data"
+          ],
+          "shortTitle": "Melissa Schigoda, Ph.D."
         }
       ]
     },
@@ -161,6 +174,19 @@
             "content"
           ],
           "shortTitle": "David Hinds, Ph.D."
+        },
+        {
+          "body": "![Headshot of Dr. Michael Piccioli](/images_cms/michael-piccioli.jpg \"Dr. Piccioli\")\n\nDr. Michael Piccioli is a pediatric hospitalist in the Boston area at Emerson Hospital and Spaulding Rehabilitation Hospital. As a hospitalist, Piccioli specializes in inpatient care, supervises a team of nurse practitioners, and represents the pediatrics unit at the hospital. Because pediatrics, which treats patients up to 22 years of age, is a separate unit from other parts of Spaulding, Piccioli aids infectious disease and senior leadership in deciding what policies his specific unit will implement to keep all patients and staff safe.\n\n## **What** is the challenge?\n\nPiccioli uses the Covid Act Now (CAN) risk map to devise plans for his staff, such as a contactless hand-off policy for his staff during shift changes. These policies are continually updated based on any changes in CAN’s data that pertain to his area.\n\n## **How** is Piccioli Responding to COVID? \n\nKnowing the number of COVID cases, the test positivity rate, and the infection rate in the greater Boston area helps Piccioli determine how strict his unit’s policies should be to ensure that staff and patients are appropriately protected from infection. For instance, Piccioli uses CAN’s data to advise leadership about setting visitor policies, testing requirements, and other COVID-related precautions. When researching COVID data, Piccioli came across several platforms, including the dashboard of the Massachusetts Department of Public Health, but found them too cumbersome and disorganized to navigate in a useful way, rendering them a poor fit to aid his decisions.\n\n> \"This website is AWESOME.\"",
+          "logoUrl": "/images_cms/spaulding-rehabilitation-hospital-logo.png",
+          "summary": "A hospitalist in the Boston area uses CAN’s data to aid decision makers in keeping their hospital safe.",
+          "author": "Jordan Dunaway-Barlow",
+          "logoAltText": "Spaulding Rehabilitation Hospital Logo",
+          "header": "Hospitalist Uses CAN Data to Lead His Pediatric Unit\n",
+          "caseStudyId": "michael-piccioli",
+          "tags": [
+            "county-data"
+          ],
+          "shortTitle": "Dr. Michael Piccioli"
         }
       ]
     }
