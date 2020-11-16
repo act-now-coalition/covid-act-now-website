@@ -18,13 +18,13 @@ const PageContent: React.FC<{ sidebarItems: TocItem[] }> = ({
     <Fragment>
       <PageContainer>
         <MainContent>{children}</MainContent>
-        <DesktopOnly>
+        {/* <DesktopOnly>
           <Sidebar>
             <Sticky>
               <SidebarContents items={sidebarItems} />
             </Sticky>
           </Sidebar>
-        </DesktopOnly>
+        </DesktopOnly> */}
       </PageContainer>
       <ShareBlock />
     </Fragment>

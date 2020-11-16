@@ -12,6 +12,30 @@ import Breadcrumbs from 'components/Breadcrumbs';
 import { Anchor } from 'components/TableOfContents';
 import { formatMetatagDate } from 'common/utils';
 
+import styled from 'styled-components';
+
+const ItemHeader = styled.h2`
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+  font-weight: 500;
+`;
+
+const ItemContent = styled(MarkdownContent)`
+  padding-left: 12px;
+`;
+
+const GlossaryItem = (props: { item: Term }) => {
+  const { item } = props;
+  console.log('item', props.item);
+  return (
+    <Fragment>
+      <ItemHeader>{item.term}</ItemHeader>
+      <ItemContent source={item.definition} />
+      <br />
+    </Fragment>
+  );
+};
+
 const Glossary: React.FC = () => {
   const {
     header,
@@ -62,14 +86,15 @@ const Glossary: React.FC = () => {
         {terms.map((item: Term) => (
           <Fragment key={item.termId}>
             <Anchor id={item.termId} />
-            <StyledAccordion
+            <GlossaryItem item={item} />
+            {/* <StyledAccordion
               summaryText={item.term}
               detailText={item.definition}
               expanded={isExpanded(item.termId)}
               onChange={(event: {}, expanded: boolean) =>
                 onChangeExpandedTerm(item.termId, expanded)
               }
-            />
+            /> */}
           </Fragment>
         ))}
       </PageContent>
