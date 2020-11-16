@@ -6,7 +6,7 @@ import theme from 'assets/theme';
 export const MarkdownProduct = styled(MarkdownContent)`
   /* The blockquote shows as the Notes section */
   blockquote {
-    padding: ${theme.spacing(3)}px;
+    padding: 0.25rem 1.25rem 1.25rem;
 
     p {
       color: ${COLOR_MAP.GRAY_BODY_COPY};
@@ -28,5 +28,13 @@ export const MarkdownProduct = styled(MarkdownContent)`
     p:last-of-type {
       margin-bottom: 0;
     }
+  }
+`;
+
+export const ProductSection = styled.div`
+  margin: 3rem 0;
+
+  &:last-of-type {
+    margin-bottom: 0;
   }
 `;

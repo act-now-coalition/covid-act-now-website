@@ -4,7 +4,7 @@
 backend:
   name: github
   repo: covid-projections/covid-projections
-  branch: cms-content-entry
+  branch: casulin/resources-to-products
   base_url: https://api.netlify.com
 
 media_folder: 'public/images_cms'
@@ -429,6 +429,7 @@ collections:
                 }
               - label: Buttons
                 name: buttons
+                required: false
                 widget: list
                 fields:
                   - { label: CTA, name: cta, widget: string }

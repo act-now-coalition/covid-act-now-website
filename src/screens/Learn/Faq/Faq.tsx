@@ -3,10 +3,10 @@ import { formatMetatagDate } from 'common/utils';
 import TableOfContents, { Item } from 'components/TableOfContents';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import Breadcrumbs from 'components/Breadcrumbs';
-import { MarkdownContent, Heading1 } from 'components/Markdown';
+import { MarkdownContent } from 'components/Markdown';
 import PageContent, { MobileOnly } from 'components/PageContent';
 import { faqContent, FaqSection, learnPages } from 'cms-content/learn';
-import { BreadcrumbsContainer } from '../Learn.style';
+import { BreadcrumbsContainer, LearnHeading1 } from '../Learn.style';
 import Section from './Section';
 
 const Faq: React.FC = () => {
@@ -37,7 +37,7 @@ const Faq: React.FC = () => {
         <BreadcrumbsContainer>
           <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>
-        <Heading1>{header}</Heading1>
+        <LearnHeading1>{header}</LearnHeading1>
         <MarkdownContent source={intro} />
         <MobileOnly>
           <TableOfContents items={getSectionItems(sections)} />

@@ -3,14 +3,14 @@ import { useParams } from 'react-router-dom';
 import { formatMetatagDate } from 'common/utils';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import Breadcrumbs from 'components/Breadcrumbs';
-import { MarkdownContent, Heading1, Heading2 } from 'components/Markdown';
+import { MarkdownContent, Heading2 } from 'components/Markdown';
 import PageContent from 'components/PageContent';
 import {
   learnPages,
   getProductPageContent,
   BodySection,
 } from 'cms-content/learn';
-import { BreadcrumbsContainer } from '../Learn.style';
+import { BreadcrumbsContainer, LearnHeading1 } from '../Learn.style';
 
 const ProductPage: React.FC = () => {
   let { productId } = useParams<{ productId: string }>();
@@ -40,7 +40,7 @@ const ProductPage: React.FC = () => {
         <BreadcrumbsContainer>
           <Breadcrumbs item={{ to: '/products', label: 'Products' }} />
         </BreadcrumbsContainer>
-        <Heading1>{productName}</Heading1>
+        <LearnHeading1>{productName}</LearnHeading1>
         <MarkdownContent source={productIntro} />
         {sections.map((section: BodySection) => (
           <Fragment key={section.sectionId}>

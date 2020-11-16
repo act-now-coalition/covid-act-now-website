@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import ProductsLanding from './ProductsLanding';
-import ProductPage from './ProductPage';
+// import ProductPage from './ProductPage';
 
 const Products: React.FC = () => {
   let { path } = useRouteMatch();
@@ -11,9 +11,9 @@ const Products: React.FC = () => {
       <Route exact path={path}>
         <ProductsLanding />
       </Route>
-      <Route path={`${path}/:productId`}>
+      {/* <Route path={`${path}/:productId`}>
         <ProductPage />
-      </Route>
+      </Route> */}
     </Switch>
   );
 };
