@@ -10,9 +10,7 @@ import { ThemeProvider as ScThemeProvider } from 'styled-components';
 import LocationPage from 'screens/LocationPage';
 import HomePage from 'screens/HomePage/HomePage';
 import About from 'screens/About/About';
-import Resources, {
-  COVID_RESPONSE_SIMULATOR_URL,
-} from 'screens/Resources/Resources';
+import { COVID_RESPONSE_SIMULATOR_URL } from 'screens/Resources/Resources';
 import Contact from 'screens/Contact/Contact';
 import Terms from 'screens/Terms/Terms';
 import Privacy from 'screens/Terms/Privacy';
@@ -22,7 +20,6 @@ import CompareSnapshots from 'screens/internal/CompareSnapshots/CompareSnapshots
 import ExportImage from 'screens/internal/ShareImage/ChartExportImage';
 import ShareImage from 'screens/internal/ShareImage/ShareImage';
 import AlertUnsubscribe from 'screens/AlertUnsubscribe/AlertUnsubscribe';
-// import AppBar from 'components/AppBar/AppBar';
 import NavBar from 'components/AppBar';
 import Footer from 'components/Footer/Footer';
 import ScrollToTop from 'components/ScrollToTop';
@@ -114,7 +111,6 @@ export default function App() {
               <Route exact path="/faq" component={Faq} />
               <Route exact path="/glossary" component={Glossary} />
               <Route path="/case-studies" component={CaseStudies} />
-              <Route path="/products" component={Products} />
 
               {/* /state/ routes are deprecated but still supported. */}
               <Route exact path="/state/:stateId" component={LocationPage} />
@@ -125,7 +121,7 @@ export default function App() {
               />
 
               <Route path="/about" component={About} />
-              <Route path="/resources" component={Resources} />
+              <Route path="/products" component={Products} />
               <Route path="/contact" component={Contact} />
               <Route path="/terms" component={Terms} />
               <Route path="/privacy" component={Privacy} />
