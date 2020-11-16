@@ -6,17 +6,8 @@
       "productName": "API",
       "productId": "api",
       "productSubtitle": "Allows you to use our data",
-      "productDescription": "With our **API,** you can access COVID data, including for 3000+ USA counties in a machine readable format, made for programmatic consumption by other websites, models, and tools.\n\n> Notes\n>\n> V1 of our API will be deprecated on October 5, 2020. See our migration instructions. \n>\n> Our API is licensed under Creative Commons Attribution - NonCommercial - NoDerivatives 4.0 International. Learn more about our license for both commercial and non-commercial users.",
-      "buttons": [
-        {
-          "cta": "Get started with API!!!!",
-          "redirect": "https://covidactnow.org/products/api"
-        },
-        {
-          "cta": "API docs",
-          "redirect": "https://apidocs.covidactnow.org/migration"
-        }
-      ]
+      "productDescription": "Looking for all the data that powers our site in a machine-readable format? You can use our API, made for ease-of-use by those wishing to programmatically ingest our data. To gain access, please use this [registration form](https://apidocs.covidactnow.org/access) to generate your unique key.\n\nNote that our data is licensed under [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/). All commercial entities wishing to access our API should contact [info@covidactnow.org](mailto:info@covidactnow.org) to acquire a commercial license. We define commercial users as any individual or entity engaged in commercial activities, such as selling goods or services. Our non-commercial users can freely download, use, share, modify, or build upon our source code.\n\nPlease also note that V1.0 of our API will be deprecated on October 5, 2020. See our [documentation](https://apidocs.covidactnow.org/migration) for migration instructions.",
+      "buttons": []
     }
   ],
   "metadataTitle": "Stand in metadata title",
