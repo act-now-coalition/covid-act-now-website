@@ -20,6 +20,12 @@
       "productId": "embed",
       "productSubtitle": "Allows you to embed our data into your website",
       "productDescription": "We want our data and modeling to be available to all who are interested, including by third parties. That’s why we’ve made our data embeddable by other publishers.\n\nRead our [blog post](https://blog.covidactnow.org/data-feeds/) for instructions for how to use our embed. Here's what it looks like live:"
+    },
+    {
+      "productName": "SEIR Epidemiology Model",
+      "productId": "seir-epidemiology-model",
+      "productSubtitle": "* fill in subtitle *",
+      "productDescription": "Our model is open source and [available on GitHub](https://github.com/covid-projections/covid-data-model)."
     }
   ],
   "metadataTitle": "Stand in metadata title",
