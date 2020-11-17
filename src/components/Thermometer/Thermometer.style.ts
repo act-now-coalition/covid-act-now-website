@@ -43,6 +43,9 @@ export const LevelColor = styled.div<{
 export const LevelCopy = styled.div`
   flex: 1 1 auto;
   font-size: 0.875rem; // 14px
+  line-height: 1.3;
+
+  padding: ${theme.spacing(1) / 2}px 0;
 `;
 
 export const LevelTitle = styled.div`
@@ -52,6 +55,4 @@ export const LevelTitle = styled.div`
 
 export const LevelDescription = styled.div`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
-  line-height: 1.4;
-  margin-bottom: 4px;
 `;
