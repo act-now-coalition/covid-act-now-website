@@ -52,7 +52,7 @@ jobs:
 
       # Generate Pull Request
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v2
+        uses: peter-evans/create-pull-request@v3
         with:
           branch: 'bump-snapshot-${{env.RUN_ID}}'
           commit-message: |
