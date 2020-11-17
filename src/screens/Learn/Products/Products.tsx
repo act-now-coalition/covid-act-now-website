@@ -1,7 +1,9 @@
 import React from 'react';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import ProductsLanding from './ProductsLanding';
-// import ProductPage from './ProductPage';
+
+// TODO (Chelsi): confirm whether or not we'll be using interior products pages (ProductPage.tsx)
+// If not, delete that code and move Products content out of Learn
 
 const Products: React.FC = () => {
   let { path } = useRouteMatch();
@@ -11,9 +13,6 @@ const Products: React.FC = () => {
       <Route exact path={path}>
         <ProductsLanding />
       </Route>
-      {/* <Route path={`${path}/:productId`}>
-        <ProductPage />
-      </Route> */}
     </Switch>
   );
 };
