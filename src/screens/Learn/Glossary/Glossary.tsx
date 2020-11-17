@@ -1,73 +1,29 @@
-import React, { Fragment, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { sortBy, without } from 'lodash';
+import React, { Fragment } from 'react';
 import { BreadcrumbsContainer } from '../Learn.style';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
-import { StyledAccordion } from 'components/SharedComponents';
-import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { MarkdownContent, Heading1 } from 'components/Markdown';
-import PageContent from 'components/PageContent';
-import { glossaryContent, Term, learnPages } from 'cms-content/learn';
+import PageContent, { MobileOnly } from 'components/PageContent';
+import {
+  glossaryContent,
+  learnPages,
+  TermsByCategory,
+  glossaryContentByCategory,
+} from 'cms-content/learn';
 import Breadcrumbs from 'components/Breadcrumbs';
-import { Anchor } from 'components/TableOfContents';
+import TableOfContents, { Anchor } from 'components/TableOfContents';
 import { formatMetatagDate } from 'common/utils';
-
-import styled from 'styled-components';
-
-const ItemHeader = styled.h2`
-  margin: 0 0 1rem;
-  font-size: 1.25rem;
-  font-weight: 500;
-`;
-
-const ItemContent = styled(MarkdownContent)`
-  padding-left: 12px;
-`;
-
-const GlossaryItem = (props: { item: Term }) => {
-  const { item } = props;
-  console.log('item', props.item);
-  return (
-    <Fragment>
-      <ItemHeader>{item.term}</ItemHeader>
-      <ItemContent source={item.definition} />
-      <br />
-    </Fragment>
-  );
-};
+import MappedSection from '../Shared/MappedSection';
 
 const Glossary: React.FC = () => {
-  const {
-    header,
-    intro,
-    terms,
-    metadataTitle,
-    metadataDescription,
-  } = glossaryContent;
+  const { header, intro, metadataTitle, metadataDescription } = glossaryContent;
 
   const date = formatMetatagDate();
 
-  const [expandedItems, setExpandedItems] = useState<string[]>([]);
-  const { hash } = useLocation();
-
-  function onChangeExpandedTerm(termId: string, expanded: boolean) {
-    if (expanded) {
-      // Only track when users open the accordion
-      trackEvent(EventCategory.GLOSSARY, EventAction.EXPAND, `Term: ${termId}`);
-    }
-
-    const newExpandedItems = expanded
-      ? [...expandedItems, termId]
-      : without(expandedItems, termId);
-    setExpandedItems(sortBy(newExpandedItems));
-  }
-
-  function isExpanded(termId: string) {
-    // Always expand the term in the URL hash
-    return (
-      expandedItems.includes(termId) ||
-      (hash.length > 0 && `#${termId}` === hash)
-    );
+  function getTocItems(categories: TermsByCategory[]) {
+    return categories.map((category: TermsByCategory) => ({
+      id: category.categoryId,
+      title: category.categoryName,
+    }));
   }
 
   return (
@@ -83,18 +39,13 @@ const Glossary: React.FC = () => {
         </BreadcrumbsContainer>
         <Heading1>{header}</Heading1>
         <MarkdownContent source={intro} />
-        {terms.map((item: Term) => (
-          <Fragment key={item.termId}>
-            <Anchor id={item.termId} />
-            <GlossaryItem item={item} />
-            {/* <StyledAccordion
-              summaryText={item.term}
-              detailText={item.definition}
-              expanded={isExpanded(item.termId)}
-              onChange={(event: {}, expanded: boolean) =>
-                onChangeExpandedTerm(item.termId, expanded)
-              }
-            /> */}
+        <MobileOnly>
+          <TableOfContents items={getTocItems(glossaryContentByCategory)} />
+        </MobileOnly>
+        {glossaryContentByCategory.map((category: TermsByCategory) => (
+          <Fragment key={category.categoryId}>
+            <Anchor id={category.categoryId} />
+            <MappedSection category={category} />
           </Fragment>
         ))}
       </PageContent>
