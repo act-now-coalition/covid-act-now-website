@@ -3,16 +3,16 @@ import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import PageContent from 'components/PageContent';
 import { Heading2 } from 'components/Markdown';
 import { formatMetatagDate } from 'common/utils';
-import { LearnHeading1 } from '../Learn.style';
+import { LearnHeading1 } from '../Learn/Learn.style';
 import {
   productsLandingContent,
   ProductsLandingSection,
 } from 'cms-content/learn';
 import {
-  MarkdownProduct,
-  ProductSection,
+  MarkdownTools,
+  ToolsSection,
   EmbedExampleWrapper,
-} from './ProductsLanding.style';
+} from './Tools.style';
 import { TocItem } from 'cms-content/utils';
 
 const {
@@ -24,10 +24,10 @@ const {
 
 export const sidebarSections: TocItem[] = [
   {
-    label: 'Products',
-    to: '/products',
+    label: 'Tools',
+    to: '/tools',
     items: productsLandingContent.productsList.map(product => ({
-      to: `/products#${product.productId}`,
+      to: `/tools#${product.productId}`,
       label: product.productName,
     })),
   },
@@ -48,28 +48,28 @@ const EmbedExample = () => {
   );
 };
 
-const ProductsLanding = () => {
+const Tools = () => {
   const date = formatMetatagDate();
 
   return (
     <Fragment>
       <AppMetaTags
-        canonicalUrl="/products"
+        canonicalUrl="/tools"
         pageTitle={metadataTitle}
         pageDescription={`${date} ${metadataDescription}`}
       />
       <PageContent sidebarItems={sidebarSections}>
         <LearnHeading1>{header}</LearnHeading1>
         {productsList.map((product: ProductsLandingSection) => (
-          <ProductSection key={product.productId}>
+          <ToolsSection key={product.productId}>
             <Heading2 id={product.productId}>{product.productName}</Heading2>
-            <MarkdownProduct source={product.productDescription} />
+            <MarkdownTools source={product.productDescription} />
             {product.productId === 'embed' && <EmbedExample />}
-          </ProductSection>
+          </ToolsSection>
         ))}
       </PageContent>
     </Fragment>
   );
 };
 
-export default ProductsLanding;
+export default Tools;

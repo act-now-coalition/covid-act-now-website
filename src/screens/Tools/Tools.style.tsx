@@ -3,7 +3,7 @@ import { MarkdownContent } from 'components/Markdown';
 import { COLOR_MAP } from 'common/colors';
 import theme from 'assets/theme';
 
-export const MarkdownProduct = styled(MarkdownContent)`
+export const MarkdownTools = styled(MarkdownContent)`
   /* The blockquote shows as the Notes section */
   blockquote {
     padding: 0.25rem 1.25rem 1.25rem;
@@ -31,7 +31,7 @@ export const MarkdownProduct = styled(MarkdownContent)`
   }
 `;
 
-export const ProductSection = styled.div`
+export const ToolsSection = styled.div`
   margin: 3rem 0;
 
   &:last-of-type {

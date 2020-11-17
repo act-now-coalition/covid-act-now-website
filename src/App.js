@@ -29,7 +29,8 @@ import ExternalRedirect from 'components/ExternalRedirect';
 import HandleRedirectTo from 'components/HandleRedirectTo/HandleRedirectTo';
 import Donate from 'screens/Donate/Donate';
 import PageviewTracker from 'components/Analytics';
-import { Faq, Glossary, Landing, CaseStudies, Products } from 'screens/Learn';
+import { Faq, Glossary, Landing, CaseStudies } from 'screens/Learn';
+import Tools from 'screens/Tools/Tools';
 
 export default function App() {
   return (
@@ -121,9 +122,9 @@ export default function App() {
               />
 
               <Route path="/about" component={About} />
-              <Route path="/products" component={Products} />
+              <Route path="/tools" component={Tools} />
               {/* Keeping the /resources URL active in case linked elsewhere */}
-              <Route path="/resources" component={Products} />
+              <Route path="/resources" component={Tools} />
               <Route path="/contact" component={Contact} />
               <Route path="/terms" component={Terms} />
               <Route path="/privacy" component={Privacy} />
