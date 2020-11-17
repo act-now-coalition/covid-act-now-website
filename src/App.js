@@ -122,6 +122,8 @@ export default function App() {
 
               <Route path="/about" component={About} />
               <Route path="/products" component={Products} />
+              {/* Keeping the /resources URL active in case linked elsewhere */}
+              <Route path="/resources" component={Products} />
               <Route path="/contact" component={Contact} />
               <Route path="/terms" component={Terms} />
               <Route path="/privacy" component={Privacy} />
