@@ -321,8 +321,8 @@ export function getImageFilename(locations: Location[], metric: ExploreMetric) {
 
 /**
  * Generates the URL of the export images for the given fips code and chart.
- * It needs to be consistent with the path on the share image generation
- * script in `scripts/generate_share_images/index.ts`
+ * It needs to be consistent with the share image routing in
+ * src/screens/internal/ShareImage/ShareImage.tsx.
  */
 export function getExportImageUrl(sharedComponentId: string) {
   return urlJoin(share_image_url, `share/${sharedComponentId}/export.png`);

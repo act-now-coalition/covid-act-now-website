@@ -1,4 +1,4 @@
-name: Update to new data snapshot (regenerate colors and sharing images).
+name: Update to new data snapshot
 
 on:
   repository_dispatch:
@@ -48,43 +48,24 @@ jobs:
           SOURCE_DIR: scripts/county_history_data/out
           DEST_DIR: animap
 
-      # TODO: We have switched to dynamic images served via Firebase Hosting.  Remove all of the
-      # image generation / S3 upload / content.covidactnow.org stuff once we're 100% confident.
-      # Generate Share Images and Upload to S3
-      # - run: yarn serve -l 3000 &
-      # - run: npx wait-on -t 120000 http://localhost:3000/
-      # - run: yarn generate-share-images
-      # - uses: jakejarvis/s3-sync-action@master
-      #   with:
-      #     args: '--acl public-read --follow-symlinks --delete'
-      #   env:
-      #     #TODO(michael): Make default secrets work.
-      #     #AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
-      #     #AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      #     AWS_ACCESS_KEY_ID: ${{ secrets.CONTENT_AWS_ACCESS_KEY }}
-      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.CONTENT_AWS_SECRET_ACCESS_KEY }}
-      #     SOURCE_DIR: scripts/generate_share_images/output
-      #     DEST_DIR: share/${{env.RUN_ID}}
-
-      # - run: 'echo "{ \"share_image_url\": \"https://content.covidactnow.org/share/${{env.RUN_ID}}/\" }" | python -mjson.tool > src/assets/data/share_images_url.json'
       - run: 'echo "{ \"share_image_url\": \"https://covidactnow-prod.web.app/share/${{env.RUN_ID}}/\" }" | python -mjson.tool > src/assets/data/share_images_url.json'
 
       # Generate Pull Request
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v2
+        uses: peter-evans/create-pull-request@v3
         with:
           branch: 'bump-snapshot-${{env.RUN_ID}}'
           commit-message: |
             Update to data snapshot ${{env.SNAPSHOT_ID}}.
 
             * Regenerate summary files.
-            * Point at updated share images.
+            * Point at new share images URL.
           title: Update to data snapshot ${{env.SNAPSHOT_ID}}
           body: |
             Update to data snapshot ${{env.SNAPSHOT_ID}}.
 
             * Regenerate summary files.
-            * Point at updated share images.
+            * Point at new share images URL.
 
       - name: Wait for Preview URL to be live
         run: npx wait-on -t 120000 https://covid-projections-git-bump-snapshot-${{env.RUN_ID}}.covidactnow.now.sh/compare/ || echo 'Preview URL failed to load.'
