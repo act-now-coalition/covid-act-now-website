@@ -47,6 +47,66 @@ collections:
                   - { label: 'Alt text', name: 'altText', widget: 'string' }
                   - { label: 'Image', name: 'image', widget: 'image' }
                   - { label: 'Url', name: 'url', widget: 'string' }
+
+  - name: team
+    label: Team Directory
+    description: Team directory
+    files:
+      - name: team
+        label: Team Structure
+        file: 'src/cms-content/team/core-team.json'
+        fields:
+          - label: Teams
+            name: teams
+            widget: list
+            hint: 'Product Management, etc'
+            fields:
+              - label: Team Name
+                name: teamName
+                widget: string
+                hint: 'Product Management, Engineering, etc.'
+              - label: Team ID
+                name: teamId
+                widget: string
+                hint: 'ID for the URL (all lowercase, no spaces)'
+              - label: 'Team members'
+                name: teamMembers
+                widget: list
+                fields:
+                  - label: Full name
+                    name: fullName
+                    widget: string
+                    hint: Name of the team member, as it will appear in the page
+                  - label: Description
+                    name: description
+                    widget: text
+                    hint: Short description of the titles and role of the team member
+                  - label: Profile picture
+                    name: profileImg
+                    widget: image
+                    hint: Square image, at least 128x128
+                  - label: Profile URL
+                    name: profileUrl
+                    widget: string
+                    hint: Link to the LinkedIn profile of the team member
+      - name: alumni
+        label: Alumni
+        file: 'src/cms-content/team/alumni.json'
+        fields:
+          - label: 'Alumni'
+            name: alumni
+            widget: list
+            hint: 'Former team members and collaborators'
+            fields:
+              - label: Full name
+                name: fullName
+                widget: string
+                hint: 'Name of the team member, as it will appear in the page'
+              - label: Profile URL
+                name: profileUrl
+                widget: string
+                hint: Link to the public profile of the person
+
   - name: contact
     label: Contact Us
     format: json
