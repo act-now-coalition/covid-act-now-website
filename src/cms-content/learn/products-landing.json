@@ -1,6 +1,6 @@
 {
-  "header": "Products",
-  "intro": "Optional intro text (not currently included in the mocks, but here if we want to include one)",
+  "header": "Tools",
+  "intro": "",
   "productsList": [
     {
       "productName": "API",
@@ -22,6 +22,6 @@
       "productDescription": "We want our data and modeling to be available to all who are interested, including by third parties. That’s why we’ve made our data embeddable by other publishers.\n\nRead our [blog post](https://blog.covidactnow.org/data-feeds/) for instructions for how to use our embed. Here's what it looks like live:"
     }
   ],
-  "metadataTitle": "Stand in metadata title",
-  "metadataDescription": "Stand in metadata description"
+  "metadataTitle": "Tools",
+  "metadataDescription": "Free COVID data tools — API, embeds, downloadable CSVs — to help governments and other partners."
 }
