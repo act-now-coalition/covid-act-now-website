@@ -8,7 +8,11 @@ import {
   productsLandingContent,
   ProductsLandingSection,
 } from 'cms-content/learn';
-import { MarkdownProduct, ProductSection } from './ProductsLanding.style';
+import {
+  MarkdownProduct,
+  ProductSection,
+  EmbedExampleWrapper,
+} from './ProductsLanding.style';
 import { TocItem } from 'cms-content/utils';
 
 const {
@@ -29,6 +33,21 @@ export const sidebarSections: TocItem[] = [
   },
 ];
 
+const EmbedExample = () => {
+  return (
+    <EmbedExampleWrapper>
+      <iframe
+        src="https://covidactnow.org/embed/us/colorado-co"
+        title="Covid Act Now"
+        width="330"
+        height="400"
+        frameBorder="0"
+        scrolling="no"
+      />
+    </EmbedExampleWrapper>
+  );
+};
+
 const ProductsLanding = () => {
   const date = formatMetatagDate();
 
@@ -45,6 +64,7 @@ const ProductsLanding = () => {
           <ProductSection key={product.productId}>
             <Heading2 id={product.productId}>{product.productName}</Heading2>
             <MarkdownProduct source={product.productDescription} />
+            {product.productId === 'embed' && <EmbedExample />}
           </ProductSection>
         ))}
       </PageContent>
