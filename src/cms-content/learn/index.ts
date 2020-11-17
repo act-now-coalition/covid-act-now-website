@@ -237,12 +237,4 @@ export const learnPages: TocItem[] = [
       label: category.header,
     })),
   },
-  {
-    label: 'Products',
-    to: '/products',
-    items: productsLandingContent.productsList.map(product => ({
-      to: `/products#${product.productId}`,
-      label: product.productName,
-    })),
-  },
 ];

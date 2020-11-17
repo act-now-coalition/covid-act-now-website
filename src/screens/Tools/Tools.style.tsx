@@ -3,10 +3,10 @@ import { MarkdownContent } from 'components/Markdown';
 import { COLOR_MAP } from 'common/colors';
 import theme from 'assets/theme';
 
-export const MarkdownProduct = styled(MarkdownContent)`
+export const MarkdownTools = styled(MarkdownContent)`
   /* The blockquote shows as the Notes section */
   blockquote {
-    padding: ${theme.spacing(3)}px;
+    padding: 0.25rem 1.25rem 1.25rem;
 
     p {
       color: ${COLOR_MAP.GRAY_BODY_COPY};
@@ -29,4 +29,16 @@ export const MarkdownProduct = styled(MarkdownContent)`
       margin-bottom: 0;
     }
   }
+`;
+
+export const ToolsSection = styled.div`
+  margin: 3rem 0;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+`;
+
+export const EmbedExampleWrapper = styled.div`
+  margin-top: 2rem;
 `;
