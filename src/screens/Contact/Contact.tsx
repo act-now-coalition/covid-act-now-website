@@ -4,6 +4,7 @@ import { Heading1, Heading2, MarkdownContent } from 'components/Markdown';
 import { Anchor } from 'components/TableOfContents';
 import PageContent from 'components/PageContent';
 import { contactUsContent, sidebarItems } from 'cms-content/contact';
+import { getMetricDefinition, Metric } from 'common/metric';
 
 const {
   header,
@@ -22,6 +23,7 @@ const ContactUsPage: React.FC = () => (
     />
     <PageContent sidebarItems={sidebarItems}>
       <Heading1>{header}</Heading1>
+      {getMetricDefinition(Metric.CONTACT_TRACING).renderThermometer()}
       {intro && intro.length && <MarkdownContent source={intro} />}
       {sections.map(({ sectionId, header, body }) => (
         <Fragment key={sectionId}>
