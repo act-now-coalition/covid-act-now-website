@@ -15,6 +15,15 @@ import {
 } from './Tools.style';
 import { TocItem } from 'cms-content/utils';
 
+/**
+ * When updating the COVID_RESPONSE_SIMULATOR_URL, update the version number
+ * and the URL in src/assets/covid-response-simulator-version.txt. This file is
+ * used by the the CRS to determine if a copy is up to date, and show a
+ * message to the user.
+ */
+export const COVID_RESPONSE_SIMULATOR_URL =
+  'https://docs.google.com/spreadsheets/u/4/d/1vs-OjzBuE96sky-8CNJWLPWnXkJwsDKw5XBejYR5-uk/copy?usp=sharing';
+
 const {
   header,
   productsList,
