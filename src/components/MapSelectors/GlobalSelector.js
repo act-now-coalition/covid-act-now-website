@@ -20,13 +20,13 @@ import {
   StyledInputWrapper,
   StyledZipcodeInCounty,
 } from './GlobalSelector.style';
-
 import {
   StyledState,
   StyledCounty,
   StyledResultsMenuOption,
   StyledResultsMenuSubText,
 } from './MapSelectors.style';
+import { getStateByUrlName } from 'common/locations';
 
 const StateItem = ({ dataset }) => {
   const fillColor = stateColor(dataset.state_code);
@@ -154,12 +154,13 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
     const matchedItems = [];
 
     if (inputValue.toLowerCase() === 'igor kofman') {
-      window.location = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+      window.location = 'https://youtu.be/EHRQHU3U86Y?t=12';
     }
 
     if (location && !inputValue) {
+      const { state_code } = getStateByUrlName(location);
       const topCountiesByParamState = chain(countyDataset)
-        .filter(item => item.state_code === location.toUpperCase())
+        .filter(item => item.state_code === state_code)
         .map(item => ({
           ...item,
           id: item.full_fips_code,
