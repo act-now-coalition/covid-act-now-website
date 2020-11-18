@@ -13,6 +13,7 @@ const Section = (props: { section: FaqSection }) => {
       <ItemsContainer>
         {section.questions.map((question: Question, i: number) => (
           <Fragment key={`faq-question-${i}`}>
+            <Anchor id={question.questionId} />
             <ItemName>{question.question}</ItemName>
             <MarkdownContent source={question.answer} />
           </Fragment>

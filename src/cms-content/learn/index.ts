@@ -32,6 +32,7 @@ export const landingPageContent = landing as LandingContent;
 */
 export interface Question {
   question: string;
+  questionId: string;
   answer: Markdown;
 }
 
