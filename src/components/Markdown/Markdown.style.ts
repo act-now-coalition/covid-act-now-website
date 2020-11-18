@@ -21,6 +21,7 @@ const heading1Css = css`
   ${baseCss}
   line-height: 1.25;
   margin-bottom: ${1.5 * theme.spacing(1)}px;
+  margin-top: 1.25rem;
 `;
 
 const heading2Css = css`

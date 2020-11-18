@@ -3,6 +3,8 @@ import faq from './learn-faq.json';
 import glossary from './learn-glossary.json';
 import landing from './learn-landing.json';
 import caseStudies from './learn-case-studies.json';
+import productsLanding from './products-landing.json';
+import productPages from './products-full-pages.json';
 import { sanitizeID, Markdown, TocItem } from '../utils';
 
 /*
@@ -159,30 +161,6 @@ export function getMoreStudies(caseStudyId: string): CaseStudy[] {
 
 export const caseStudiesContent = caseStudies as CaseStudiesContent;
 
-// TODO (pablo): Should we have a short heading for categories?
-export const learnPages: TocItem[] = [
-  {
-    label: 'Glossary',
-    to: '/glossary',
-  },
-  {
-    label: 'FAQ',
-    to: '/faq',
-    items: faqContent.sections.map(section => ({
-      to: `/faq#${section.sectionId}`,
-      label: section.sectionTitle,
-    })),
-  },
-  {
-    label: 'Case studies',
-    to: '/case-studies',
-    items: caseStudiesContent.categories.map(category => ({
-      to: `/case-studies#${category.categoryId}`,
-      label: category.header,
-    })),
-  },
-];
-
 /**
  * Products - landing page:
  **/
@@ -208,6 +186,8 @@ export interface ProductsLandingContent {
   metadataDescription: string;
 }
 
+export const productsLandingContent = productsLanding as ProductsLandingContent;
+
 /**
  * Products - full pages:
  **/
@@ -218,7 +198,7 @@ export interface BodySection {
   sectionBody: Markdown;
 }
 
-export interface ProductPageContent {
+export interface ProductPage {
   productName: string;
   productId: string;
   productIntro: Markdown;
@@ -226,3 +206,40 @@ export interface ProductPageContent {
   metadataTitle: string;
   metadataDescription: string;
 }
+
+export interface ProductPageContent {
+  product: ProductPage[];
+}
+
+export const productPageContent = productPages as ProductPageContent;
+
+// Used to get full-page product content by product ID
+export function getProductPageContent(
+  productLandingId: string,
+): ProductPage | undefined {
+  return productPages.product.find(item => item.productId === productLandingId);
+}
+
+// TODO (pablo): Should we have a short heading for categories?
+export const learnPages: TocItem[] = [
+  {
+    label: 'Glossary',
+    to: '/glossary',
+  },
+  {
+    label: 'FAQ',
+    to: '/faq',
+    items: faqContent.sections.map(section => ({
+      to: `/faq#${section.sectionId}`,
+      label: section.sectionTitle,
+    })),
+  },
+  {
+    label: 'Case studies',
+    to: '/case-studies',
+    items: caseStudiesContent.categories.map(category => ({
+      to: `/case-studies#${category.categoryId}`,
+      label: category.header,
+    })),
+  },
+];

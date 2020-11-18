@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import theme from 'assets/theme';
-import { Heading2, Heading3 } from 'components/Markdown';
-import { mobileBreakpoint } from 'assets/theme/sizes';
+import { Heading1, Heading2, Heading3 } from 'components/Markdown';
+import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
 
 /**
  * Styles that are shared between Learn pages
@@ -42,3 +42,11 @@ export const ItemName = styled(Heading3)`
 `;
 
 export const ItemsContainer = styled.div``;
+
+export const LearnHeading1 = styled(Heading1)`
+  margin: 0 0 1.5rem;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    margin: 1.5rem 0;
+  }
+`;

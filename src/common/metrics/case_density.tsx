@@ -9,11 +9,13 @@ import {
   formatEstimate,
 } from 'common/utils';
 import ExternalLink from 'components/ExternalLink';
+import Thermometer from 'components/Thermometer';
 import { MetricDefinition } from './interfaces';
 
 export const CaseIncidenceMetric: MetricDefinition = {
   renderStatus,
   renderDisclaimer,
+  renderThermometer,
   metricName: 'Daily new cases',
   extendedMetricName: 'Daily new cases per 100k population',
   metricNameForCompare: `Daily new cases per 100k`,
@@ -135,4 +137,44 @@ function renderDisclaimer(): React.ReactElement {
       .
     </Fragment>
   );
+}
+
+function renderThermometer(): React.ReactElement {
+  const levelInfo = CASE_DENSITY_LEVEL_INFO_MAP;
+  const levelCritical = levelInfo[Level.CRITICAL];
+  const levelHigh = levelInfo[Level.HIGH];
+  const levelMedium = levelInfo[Level.MEDIUM];
+  const levelLow = levelInfo[Level.LOW];
+
+  const items = [
+    {
+      title: `Over ${levelHigh.upperLimit}`,
+      description: levelCritical.detail(),
+      color: levelCritical.color,
+      roundTop: true,
+      roundBottom: false,
+    },
+    {
+      title: `${levelMedium.upperLimit} - ${levelHigh.upperLimit}`,
+      description: levelHigh.detail(),
+      color: levelHigh.color,
+      roundTop: false,
+      roundBottom: false,
+    },
+    {
+      title: `${levelLow.upperLimit} - ${levelMedium.upperLimit}`,
+      description: levelMedium.detail(),
+      color: levelMedium.color,
+      roundTop: false,
+      roundBottom: false,
+    },
+    {
+      title: `Under ${levelLow.upperLimit}`,
+      description: levelLow.detail(),
+      color: levelLow.color,
+      roundTop: false,
+      roundBottom: true,
+    },
+  ];
+  return <Thermometer items={items} />;
 }
