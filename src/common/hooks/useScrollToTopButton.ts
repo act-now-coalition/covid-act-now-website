@@ -1,23 +1,21 @@
-/* A hook used to control the ScrollToTopButton (ScrollToTopButton.tsx) */
+/* Used to control the ScrollToTopButton (ScrollToTopButton.tsx) */
 
 import { useEffect } from 'react';
-import { useMediaQuery } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
-import useScrollPosition from '@react-hook/window-scroll';
+import useShowPastPosition from './useShowPastPosition';
+import useBreakpoint from './useBreakpoint';
 
 export default function useScrollToTopButton(
   showButton: boolean,
   setShowButton: React.Dispatch<React.SetStateAction<boolean>>,
-) {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down(800));
-  const scrollY = useScrollPosition();
+): boolean {
+  const isMobile = useBreakpoint(800);
+  const isVisible = useShowPastPosition(700);
 
   useEffect(() => {
-    if (isMobile && scrollY > 700) {
+    if (isMobile && isVisible) {
       setShowButton(true);
     } else setShowButton(false);
-  }, [isMobile, scrollY, setShowButton, showButton]);
+  }, [isMobile, isVisible, setShowButton, showButton]);
 
   return showButton;
 }

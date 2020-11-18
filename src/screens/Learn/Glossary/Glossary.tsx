@@ -3,7 +3,7 @@ import { BreadcrumbsContainer, SectionName } from '../Learn.style';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import { MarkdownContent, Heading1 } from 'components/Markdown';
 import PageContent from 'components/PageContent';
-import { glossaryContent, learnPages } from 'cms-content/learn';
+import { glossaryContent, learnPages, Term } from 'cms-content/learn';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { Anchor } from 'components/TableOfContents';
 import { formatMetatagDate } from 'common/utils';
@@ -40,8 +40,8 @@ const Glossary: React.FC = () => {
         </BreadcrumbsContainer>
         <Heading1>{header}</Heading1>
         <MarkdownContent source={intro} />
-        {terms.map((term: any) => (
-          <Fragment>
+        {terms.map((term: Term, i: number) => (
+          <Fragment key={`glossary-term-${i}`}>
             <Anchor id={term.termId} />
             <SectionName>{term.term}</SectionName>
             <MarkdownContent source={term.definition} />

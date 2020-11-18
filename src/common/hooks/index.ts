@@ -1,3 +1,5 @@
 import useScrollToTopButton from './useScrollToTopButton';
+import useShowPastPosition from './useShowPastPosition';
+import useBreakpoint from './useBreakpoint';
 
-export { useScrollToTopButton };
+export { useScrollToTopButton, useShowPastPosition, useBreakpoint };
