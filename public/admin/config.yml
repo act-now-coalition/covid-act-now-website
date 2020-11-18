@@ -253,6 +253,7 @@ collections:
               - { label: Term, name: term, widget: string }
               - { label: Term ID, name: termId, widget: string }
               - { label: Definition, name: definition, widget: markdown }
+              - { label: Category, name: category, widget: select, options: ["Disease science", "Health and symptoms", "Metrics", "Prevention and mitigation", "Testing", "Transmission", "Treatment"] }
           - label: Metadata title
             name: metadataTitle
             widget: text
@@ -280,6 +281,7 @@ collections:
                 widget: list
                 fields:
                   - { label: Question, name: question, widget: text }
+                  - { label: Question ID, name: questionId, widget: text }
                   - { label: Answer, name: answer, widget: markdown }
           - label: Metadata title
             name: metadataTitle
