@@ -10,7 +10,7 @@ const ScrollToTopButton = (props: {
   const { showButton, analyticsCategory } = props;
 
   const onClickHandler = () => {
-    trackEvent(analyticsCategory, EventAction.CLICK, 'Scroll to top button');
+    trackEvent(analyticsCategory, EventAction.CLICK, 'Scroll to top');
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   };
 

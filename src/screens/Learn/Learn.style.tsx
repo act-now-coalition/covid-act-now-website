@@ -33,7 +33,6 @@ export const SectionName = styled(Heading2)`
 `;
 
 export const ItemName = styled(Heading3)`
-  font-size: 1rem;
   margin: 1rem 0;
 
   &:not(:first-of-type) {
