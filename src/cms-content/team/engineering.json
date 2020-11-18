@@ -3,9 +3,9 @@
   "teamID": "engineering",
   "teamMembers": [
     {
-      "fullName": "Max Henderson",
-      "description": "CEO",
-      "profileUrl": "https://www.linkedin.com/in/maxhenderson",
+      "fullName": "Igor Kofman",
+      "description": "CTO",
+      "profileUrl": "https://www.linkedin.com/in/ikofman/",
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
     }
   ]

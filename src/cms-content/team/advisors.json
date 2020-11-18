@@ -3,9 +3,21 @@
   "teamID": "advisors",
   "teamMembers": [
     {
-      "fullName": "Max Henderson",
-      "description": "CEO",
-      "profileUrl": "https://www.linkedin.com/in/maxhenderson",
+      "fullName": "Prof. Rebecca Katz, Ph.D., M.P.H.",
+      "description": "Director of Georgetown Center for Global Health Science and Security",
+      "profileUrl": "https://ghss.georgetown.edu/people/katz",
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
+    },
+    {
+      "fullName": "Ellie Graeden, Ph.D.",
+      "description": "CEO of Talus Analytics and Georgetown University Adjunct Professor",
+      "profileUrl": "https://ghss.georgetown.edu/people/graeden",
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
+    },
+    {
+      "fullName": "Dr. Nirav Shah",
+      "description": "Senior Scholar at Stanford Medical School and former New York State Commissioner of Health",
+      "profileUrl": "https://www.linkedin.com/in/niravrshah",
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
     }
   ]
