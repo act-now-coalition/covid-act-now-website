@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import theme from 'assets/theme';
 import { Heading2, Heading3 } from 'components/Markdown';
-import { COLORS } from 'common';
 import { mobileBreakpoint } from 'assets/theme/sizes';
 
 /**
  * Styles that are shared between Learn pages
  */
+
 export const BreadcrumbsContainer = styled.div`
   margin-bottom: ${theme.spacing(2)}px;
 `;
@@ -17,20 +17,17 @@ export const ButtonContainer = styled.div`
 `;
 
 export const SectionName = styled(Heading2)`
-  font-size: 1.25rem;
-  padding: 2rem 0 1.5rem;
+  margin: 2rem 0 1rem;
 
   &:first-of-type {
-    margin-top: 0;
-  }
-
-  &:not(:first-of-type) {
-    border-top: 1px solid ${COLORS.LIGHTGRAY};
+    margin-top: 2.5rem;
   }
 
   @media (min-width: ${mobileBreakpoint}) {
+    margin: 3rem 0 2rem;
+
     &:first-of-type {
-      margin-top: 2rem;
+      margin-top: 3.25rem;
     }
   }
 `;
@@ -44,10 +41,4 @@ export const ItemName = styled(Heading3)`
   }
 `;
 
-export const ItemsContainer = styled.div`
-  padding: 0 0.5rem;
-
-  @media (min-width: ${mobileBreakpoint}) {
-    padding: 0 1.25rem;
-  }
-`;
+export const ItemsContainer = styled.div``;

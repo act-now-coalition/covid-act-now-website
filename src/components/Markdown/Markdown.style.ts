@@ -28,13 +28,13 @@ const heading2Css = css`
   font-weight: ${theme.typography.fontWeightBold};
   margin-top: ${theme.spacing(4)}px;
   margin-bottom: ${theme.spacing(1)}px;
-  font-size: 22px;
+  font-size: 1.5rem;
 `;
 
 const heading3Css = css`
   ${baseCss}
   color: #000;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: ${theme.typography.fontWeightBold};
 `;
 

@@ -9,6 +9,7 @@ import { Anchor } from 'components/TableOfContents';
 import { formatMetatagDate } from 'common/utils';
 import ScrollToTopButton from 'components/SharedComponents/ScrollToTopButton';
 import { useScrollToTopButton } from 'common/hooks';
+import { EventCategory } from 'components/Analytics';
 
 const Glossary: React.FC = () => {
   const {
@@ -47,7 +48,10 @@ const Glossary: React.FC = () => {
             <MarkdownContent source={term.definition} />
           </Fragment>
         ))}
-        <ScrollToTopButton showButton={showScrollToTopButton} />
+        <ScrollToTopButton
+          showButton={showScrollToTopButton}
+          analyticsCategory={EventCategory.GLOSSARY}
+        />
       </PageContent>
     </Fragment>
   );

@@ -10,6 +10,7 @@ import { BreadcrumbsContainer } from '../Learn.style';
 import Section from './Section';
 import { useScrollToTopButton } from 'common/hooks';
 import ScrollToTopButton from 'components/SharedComponents/ScrollToTopButton';
+import { EventCategory } from 'components/Analytics';
 
 const Faq: React.FC = () => {
   const {
@@ -53,7 +54,10 @@ const Faq: React.FC = () => {
         {sections.map((section: FaqSection) => (
           <Section key={section.sectionId} section={section} />
         ))}
-        <ScrollToTopButton showButton={showScrollToTopButton} />
+        <ScrollToTopButton
+          showButton={showScrollToTopButton}
+          analyticsCategory={EventCategory.FAQ}
+        />
       </PageContent>
     </Fragment>
   );
