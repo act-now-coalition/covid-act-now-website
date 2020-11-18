@@ -1,6 +1,7 @@
 import React from 'react';
 import { FixedButton } from './ScrollToTopButton.style';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 
 const ScrollToTopButton = (props: {
   showButton: boolean;
@@ -15,7 +16,8 @@ const ScrollToTopButton = (props: {
 
   return (
     <FixedButton showButton={showButton} onClick={onClickHandler}>
-      Back to top
+      <ArrowUpwardIcon />
+      <span>Back to top</span>
     </FixedButton>
   );
 };

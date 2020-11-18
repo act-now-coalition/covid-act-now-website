@@ -24,7 +24,7 @@ export const SectionName = styled(Heading2)`
   }
 
   @media (min-width: ${mobileBreakpoint}) {
-    margin: 3rem 0 2rem;
+    margin: 2.5rem 0 1.5rem;
 
     &:first-of-type {
       margin-top: 3.25rem;
