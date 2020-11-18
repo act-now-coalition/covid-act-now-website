@@ -1,10 +1,9 @@
 import styled from 'styled-components';
-import MuiButton from '@material-ui/core/Button';
 import { COLOR_MAP } from 'common/colors';
 
-export const FixedButton = styled(MuiButton)<{ showButton: boolean }>`
+export const FixedButton = styled.button<{ showButton: boolean }>`
   opacity: ${({ showButton }) => (showButton ? '1' : '0')};
-  transition: opacity 0.25s linear;
+  transition: opacity 0.2s linear;
   position: fixed;
   bottom: 16px;
   right: 16px;
@@ -16,4 +15,7 @@ export const FixedButton = styled(MuiButton)<{ showButton: boolean }>`
   line-height: 1.75;
   border-radius: 4px;
   font-size: 0.875rem;
+  font-family: Roboto;
+  text-transform: uppercase;
+  font-weight: 500;
 `;

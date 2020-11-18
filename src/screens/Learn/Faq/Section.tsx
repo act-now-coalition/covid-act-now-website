@@ -1,26 +1,23 @@
 import React, { Fragment } from 'react';
-import { StyledAccordion } from 'components/SharedComponents';
-import { FaqSection, Question } from 'cms-content/learn';
+import { SectionName, ItemName, ItemsContainer } from '../Learn.style';
+import { MarkdownContent } from 'components/Markdown';
 import { Anchor } from 'components/TableOfContents';
-import { Heading2 } from 'components/Markdown';
+import { FaqSection, Question } from 'cms-content/learn';
 
-const Section = (props: { content: FaqSection }) => {
-  const { content } = props;
-  const { sectionTitle, questions } = content;
-
+const Section = (props: { section: FaqSection }) => {
+  const { section } = props;
   return (
     <Fragment>
-      <Heading2>
-        <Anchor id={content.sectionId} />
-        {sectionTitle}
-      </Heading2>
-      {questions.map((item: Question, i: number) => (
-        <StyledAccordion
-          key={`accordion-question-${i}`}
-          summaryText={item.question}
-          detailText={item.answer}
-        />
-      ))}
+      <Anchor id={section.sectionId} />
+      <SectionName>{section.sectionTitle}</SectionName>
+      <ItemsContainer>
+        {section.questions.map((question: Question, i: number) => (
+          <Fragment key={`faq-question-${i}`}>
+            <ItemName>{question.question}</ItemName>
+            <MarkdownContent source={question.answer} />
+          </Fragment>
+        ))}
+      </ItemsContainer>
     </Fragment>
   );
 };

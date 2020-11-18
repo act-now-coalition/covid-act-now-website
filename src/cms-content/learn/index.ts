@@ -1,4 +1,4 @@
-import { chain, keyBy, reject, map, uniq, replace } from 'lodash';
+import { chain, keyBy, reject } from 'lodash';
 import faq from './learn-faq.json';
 import glossary from './learn-glossary.json';
 import landing from './learn-landing.json';
@@ -93,35 +93,6 @@ const sanitizeGlossary = (glossary: GlossaryContent): GlossaryContent => ({
 
 export const glossaryContent = sanitizeGlossary(glossary) as GlossaryContent;
 
-// Interface and utils added when implementing glossary v2, which groups terms by category:
-
-export interface TermsByCategory {
-  categoryName: string;
-  categoryId: string;
-  terms: Term[];
-}
-
-export function getGlossaryCategories(): string[] {
-  return uniq(map(glossaryContent.terms, 'category'));
-}
-
-export function getTermsByCategory(): TermsByCategory[] {
-  const categories = getGlossaryCategories();
-  return categories.map((category: string) => {
-    const termsInCategory = glossaryContent.terms.filter(
-      term => term.category === category,
-    );
-    const categoryToHashId = replace(category, ' ', '-').toLowerCase();
-    return {
-      categoryName: category,
-      categoryId: categoryToHashId,
-      terms: termsInCategory,
-    };
-  });
-}
-
-export const glossaryContentByCategory = getTermsByCategory() as TermsByCategory[];
-
 /**
  * Case Studies
  */
@@ -186,8 +157,6 @@ export function getMoreStudies(caseStudyId: string): CaseStudy[] {
 }
 
 export const caseStudiesContent = caseStudies as CaseStudiesContent;
-
-const categoryToTermsMap = getTermsByCategory();
 
 // TODO (pablo): Should we have a short heading for categories?
 export const learnPages: TocItem[] = [
