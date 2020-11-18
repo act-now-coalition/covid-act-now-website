@@ -1,7 +1,27 @@
 {
-  "header": "Products",
+  "header": "Tools",
   "intro": "",
-  "productsList": [],
-  "metadataTitle": "title",
-  "metadataDescription": "description"
+  "productsList": [
+    {
+      "productName": "API",
+      "productId": "api",
+      "productSubtitle": "Allows you to use our data",
+      "productDescription": "Looking for all the data that powers our site in a machine-readable format? You can use our API, made for ease-of-use by those wishing to programmatically ingest our data. To gain access, please use this [registration form](https://apidocs.covidactnow.org/access) to generate your unique key.\n\nNote that our data is licensed under [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/). All commercial entities wishing to access our API should contact [info@covidactnow.org](mailto:info@covidactnow.org) to acquire a commercial license. We define commercial users as any individual or entity engaged in commercial activities, such as selling goods or services. Our non-commercial users can freely download, use, share, modify, or build upon our source code.\n\nPlease also note that V1.0 of our API will be deprecated on October 5, 2020. See our [documentation](https://apidocs.covidactnow.org/migration) for migration instructions.",
+      "buttons": []
+    },
+    {
+      "productName": "COVID Response Simulator",
+      "productId": "covid-response-simulator",
+      "productSubtitle": "Allows you to forecast scenarios",
+      "productDescription": "Try it [here](https://covidactnow.org/covid-response-simulator-redirect).\n\nThe COVID Response Simulator is a localized, spreadsheet version of the public Covid Act Now (CAN) model. With it, you can take a powerful [SEIR epidemiology model](https://en.wikipedia.org/wiki/Compartmental_models_in_epidemiology#The_SEIR_model) and customize it for your county to help plan your response to COVID. The inputs and assumptions in the simulator are modifiable and can be changed to reflect your local realities.\n\nIn addition, you can project the impact of specific Non-Pharmaceutical Interventions (NPIs) by adjusting customizable levels of public compliance and closure for:\n\n* Schools and universities\n* Large events\n* Bars and restaurants\n* Offices and factories\n* Houses of worship\n* Personal care\n* Nonessential retail\n* Essential retail\n* Entertainment\n* Outdoor recreation\n\nYou’ll also be able to simulate the impact of different levels of compliance with mask mandates and shelter-in-place orders, as well as modify the demographic distribution of your county’s population. Based on your inputs, the simulator generates data and graphs illustrating COVID forecasts with and without these NPIs, including estimated case numbers and hospitalizations.\n\n![Example view of the COVID Response Simulator](/images_cms/crs-screenshot.png \"CRS\")\n\n> ### Get started\n>\n> 1. Before you begin, you can watch a full tutorial (30 minutes) on the simulator [here](https://youtu.be/6lYf9ry1DWE) or a shorter tutorial (10 minutes) on how to use the simulator specifically for modeling NPIs [here](https://youtu.be/xiI_kC8hGTA).\n> 2. Click on [this link](https://docs.google.com/spreadsheets/u/1/d/1iUQvuY-DGbuxGBDrj1fvaDjk-peunHm89sMJe0z24U8/copy?usp=sharing) to create a copy of the simulator for your use. You’ll be prompted to make a copy so that you can work in your own document.\n> 3. Review the information in the first tab in Orange labeled “About”. Then continue onward to the second tab in Green labeled “Location and Inputs Setup”.\n\n*If you have any questions about our model or the data we use, reach out to us at [info@covidactnow.org](mailto:info@covidactnow.org). You can also learn more on our [YouTube channel](https://www.youtube.com/channel/UChs298932BKWanjwWLVUO4w).*"
+    },
+    {
+      "productName": "Embed",
+      "productId": "embed",
+      "productSubtitle": "Allows you to embed our data into your website",
+      "productDescription": "We want our data and modeling to be available to all who are interested, including by third parties. That’s why we’ve made our data embeddable by other publishers.\n\nRead our [blog post](https://blog.covidactnow.org/data-feeds/) for instructions for how to use our embed. Here's what it looks like live:"
+    }
+  ],
+  "metadataTitle": "Tools",
+  "metadataDescription": "Free COVID data tools — API, embeds, downloadable CSVs — to help governments and other partners."
 }

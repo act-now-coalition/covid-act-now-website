@@ -10,9 +10,6 @@ import { ThemeProvider as ScThemeProvider } from 'styled-components';
 import LocationPage from 'screens/LocationPage';
 import HomePage from 'screens/HomePage/HomePage';
 import About from 'screens/About/About';
-import Resources, {
-  COVID_RESPONSE_SIMULATOR_URL,
-} from 'screens/Resources/Resources';
 import Contact from 'screens/Contact/Contact';
 import Terms from 'screens/Terms/Terms';
 import Privacy from 'screens/Terms/Privacy';
@@ -22,7 +19,6 @@ import CompareSnapshots from 'screens/internal/CompareSnapshots/CompareSnapshots
 import ExportImage from 'screens/internal/ShareImage/ChartExportImage';
 import ShareImage from 'screens/internal/ShareImage/ShareImage';
 import AlertUnsubscribe from 'screens/AlertUnsubscribe/AlertUnsubscribe';
-// import AppBar from 'components/AppBar/AppBar';
 import NavBar from 'components/AppBar';
 import Footer from 'components/Footer/Footer';
 import ScrollToTop from 'components/ScrollToTop';
@@ -33,6 +29,7 @@ import HandleRedirectTo from 'components/HandleRedirectTo/HandleRedirectTo';
 import Donate from 'screens/Donate/Donate';
 import PageviewTracker from 'components/Analytics';
 import { Faq, Glossary, Landing, CaseStudies } from 'screens/Learn';
+import Tools, { COVID_RESPONSE_SIMULATOR_URL } from 'screens/Tools/Tools';
 
 export default function App() {
   return (
@@ -124,13 +121,15 @@ export default function App() {
               />
 
               <Route path="/about" component={About} />
-              <Route path="/resources" component={Resources} />
+              <Route path="/tools" component={Tools} />
+              {/* Keeping the /resources URL active in case linked elsewhere */}
+              <Route path="/resources" component={Tools} />
               <Route path="/contact" component={Contact} />
               <Route path="/terms" component={Terms} />
               <Route path="/privacy" component={Privacy} />
               {/* Custom URL for sharing the COVID Response Simulator */}
               <Route path="/response-simulator">
-                <Redirect to="/resources#covid-response-simulator" />
+                <Redirect to="/tools#covid-response-simulator" />
               </Route>
 
               {/* Embed routes */}
@@ -174,7 +173,7 @@ export default function App() {
 
               {/**
                * This endpoint is to be able to track clicks to the COVID
-               * Response Simulator on the resources page. The user will be briefly
+               * Response Simulator on the tools page. The user will be briefly
                * redirected to COVID_RESPONSE_SIMULATOR_REDIRECT_URL and then
                * to the spreadsheet. The number of visits to the redirect URL
                * will correspond to the number of clicks to the COVID Response

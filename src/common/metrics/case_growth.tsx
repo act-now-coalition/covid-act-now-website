@@ -7,12 +7,14 @@ import { formatDecimal } from 'common/utils';
 import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
 import ExternalLink from 'components/ExternalLink';
+import Thermometer from 'components/Thermometer';
 
 const METRIC_NAME = 'Infection rate';
 
 export const CaseGrowthMetric: MetricDefinition = {
   renderStatus,
   renderDisclaimer,
+  renderThermometer,
   metricName: METRIC_NAME,
   extendedMetricName: METRIC_NAME,
   metricNameForCompare: METRIC_NAME,
@@ -118,4 +120,44 @@ function renderDisclaimer(): React.ReactElement {
       .
     </Fragment>
   );
+}
+
+function renderThermometer(): React.ReactElement {
+  const levelInfo = CASE_GROWTH_RATE_LEVEL_INFO_MAP;
+  const levelCritical = levelInfo[Level.CRITICAL];
+  const levelHigh = levelInfo[Level.HIGH];
+  const levelMedium = levelInfo[Level.MEDIUM];
+  const levelLow = levelInfo[Level.LOW];
+
+  const items = [
+    {
+      title: `Over ${levelHigh.upperLimit}`,
+      description: levelCritical.detail(),
+      color: levelCritical.color,
+      roundTop: true,
+      roundBottom: false,
+    },
+    {
+      title: `${levelMedium.upperLimit} - ${levelHigh.upperLimit}`,
+      description: levelHigh.detail(),
+      color: levelHigh.color,
+      roundTop: false,
+      roundBottom: false,
+    },
+    {
+      title: `${levelLow.upperLimit} - ${levelMedium.upperLimit}`,
+      description: levelMedium.detail(),
+      color: levelMedium.color,
+      roundTop: false,
+      roundBottom: false,
+    },
+    {
+      title: `Under ${levelLow.upperLimit}`,
+      description: levelLow.detail(),
+      color: levelLow.color,
+      roundTop: false,
+      roundBottom: true,
+    },
+  ];
+  return <Thermometer items={items} />;
 }

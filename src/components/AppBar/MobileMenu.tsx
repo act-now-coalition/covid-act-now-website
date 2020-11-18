@@ -21,9 +21,9 @@ const MobileMenu: React.FC<{ open: boolean; closeMenu: () => void }> = ({
         <FAQIcon color={palette.secondary.main} />
         <span>Learn</span>
       </Link>
-      <Link to="/resources" onClick={closeMenu}>
+      <Link to="/tools" onClick={closeMenu}>
         <FAQIcon color={palette.secondary.main} />
-        <span>Resources</span>
+        <span>Tools</span>
       </Link>
       <a href="https://blog.covidactnow.org" onClick={closeMenu}>
         <BlogIcon color={palette.secondary.main} />

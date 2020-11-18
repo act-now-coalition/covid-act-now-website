@@ -1,11 +1,11 @@
 import React, { Fragment, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { sortBy, without } from 'lodash';
-import { BreadcrumbsContainer } from '../Learn.style';
+import { BreadcrumbsContainer, LearnHeading1 } from '../Learn.style';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import { StyledAccordion } from 'components/SharedComponents';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
-import { MarkdownContent, Heading1 } from 'components/Markdown';
+import { MarkdownContent } from 'components/Markdown';
 import PageContent from 'components/PageContent';
 import { glossaryContent, Term, learnPages } from 'cms-content/learn';
 import Breadcrumbs from 'components/Breadcrumbs';
@@ -57,7 +57,7 @@ const Glossary: React.FC = () => {
         <BreadcrumbsContainer>
           <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>
-        <Heading1>{header}</Heading1>
+        <LearnHeading1>{header}</LearnHeading1>
         <MarkdownContent source={intro} />
         {terms.map((item: Term) => (
           <Fragment key={item.termId}>

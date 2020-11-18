@@ -27,8 +27,9 @@ export const TopLevelList = styled.ul`
   margin-inline-start: 0;
   margin-inline-end: 0;
   padding-inline-start: 0;
+  margin-top: 1.25rem;
   li {
-    margin-bottom: ${theme.spacing(3)}px;
+    margin-bottom: 1rem;
   }
 `;
 
@@ -37,7 +38,7 @@ export const TopLevelLink = styled(NavLink).attrs(props => ({
 }))`
   ${fontCss}
   text-decoration: none;
-  padding-left: ${theme.spacing(3)}px;
+  padding-left: 1.25rem;
   border-left: solid 3px transparent;
   &.active {
     ${activeCss}

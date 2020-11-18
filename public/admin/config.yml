@@ -429,6 +429,7 @@ collections:
                 }
               - label: Buttons
                 name: buttons
+                required: false
                 widget: list
                 fields:
                   - { label: CTA, name: cta, widget: string }
