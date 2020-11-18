@@ -243,12 +243,6 @@
       "category": "Metrics"
     },
     {
-      "term": "Inference models and methodology ",
-      "termId": "inference-models-and-methodology",
-      "definition": "Inference is the process of drawing conclusions based on evidence. In terms of COVID data modeling, an inference model may use actual data to infer something about the state of COVID in a particular population. Covid Act Now’s U.S. SEIR Interventions Model has “[inference projections](https://blog.covidactnow.org/inference-projections-for-states/),” which use actual numbers of cases, hospitalizations, and deaths in each state to infer the current rate of virus spread in that state. Models are not perfect, and they rely heavily on the quality and accuracy of the data that goes into them. Covid Act Now’s SEIR model won’t tell us exactly how COVID will evolve, but it helps us predict the trends in COVID hospitalizations within certain scenarios, and allows for people to prepare accordingly.",
-      "category": "Metrics"
-    },
-    {
       "term": "Isolation",
       "termId": "isolation",
       "definition": "Isolation reduces the spread of the virus by keeping people with active infections physically separated from others. Hospitals commonly isolate sick patients to prevent the spread of disease. When hospitals become overrun, it becomes much more difficult to isolate properly, and infections can therefore spread at a higher rate. Self-isolation, social distancing, and mask wearing help to “[flatten the curve](#flattening-the-curve)” for COVID. These interventions slow COVID spread and help prevent hospitals and healthcare systems from getting completely overwhelmed. These efforts protect the public from exposure to COVID and slow the [infection growth rate](#infection-growth-rate).",
@@ -373,12 +367,6 @@
       "term": "SARS-CoV-2",
       "termId": "sars-cov-2",
       "category": "Health and symptoms"
-    },
-    {
-      "term": "SEIR model",
-      "termId": "seir-model",
-      "definition": "An SEIR model is a specific kind of model that [](#epidemiologist)epidemiologists, who study disease, use to understand how a disease will evolve in a population over time. Covid Act Now’s model is an SEIR model which [forecasts](#forecasting) COVID by categorizing how people in a population will evolve across various states. These states include “[susceptible](#susceptible),” “[exposed](#exposed),” “[infected](#infection),” ”recovered,” and “deceased.”  The model [forecasts](#forecasting) people’s progression through those states [using many different data inputs](https://www.youtube.com/watch?v=Lcx2a1jXISc&t=5s) – including cases, hospitalizations, deaths, and demographics – in conjunction with assumptions based on, for example, how the disease has evolved over time in other countries and how much of an impact certain interventions like social distancing could have. Simply put, the SEIR model can help us predict the trend in COVID hospitalizations within certain scenarios. This predictive ability allows states and counties to prepare for when their hospitals may become overwhelmed by COVID patients.",
-      "category": "Metrics"
     },
     {
       "term": "Sensitivity (testing)",
