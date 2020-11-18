@@ -6,11 +6,11 @@ import Grid from '@material-ui/core/Grid';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import Breadcrumbs from 'components/Breadcrumbs';
 import PageContent from 'components/PageContent';
-import { MarkdownContent, Heading1, Heading2 } from 'components/Markdown';
+import { MarkdownContent, Heading2 } from 'components/Markdown';
 import { formatMetatagDate } from 'common/utils';
 import { caseStudiesContent, learnPages } from 'cms-content/learn';
 import CaseStudyCard from './CaseStudyCard';
-import { BreadcrumbsContainer } from '../Learn.style';
+import { BreadcrumbsContainer, LearnHeading1 } from '../Learn.style';
 import { CardsContainer } from './CaseStudy.style';
 
 const {
@@ -40,7 +40,7 @@ const Landing: React.FC = () => {
         <BreadcrumbsContainer>
           <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>
-        <Heading1>{header}</Heading1>
+        <LearnHeading1>{header}</LearnHeading1>
         <MarkdownContent source={intro} />
         {categories.map(category => {
           const caseStudies = category.caseStudies || [];
