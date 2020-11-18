@@ -1,0 +1,9 @@
+---
+teamName: Leadership
+teamID: leadership
+teamMembers:
+  - fullName: Max Henderson
+    description: CEO
+    profileUrl: https://www.linkedin.com/in/maxhenderson
+    profileImgUrl: /images_cms/bar_recommends_icon.svg
+---
