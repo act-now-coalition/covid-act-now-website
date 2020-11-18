@@ -47,6 +47,7 @@ collections:
                   - { label: 'Alt text', name: 'altText', widget: 'string' }
                   - { label: 'Image', name: 'image', widget: 'image' }
                   - { label: 'Url', name: 'url', widget: 'string' }
+
   - label: Team directory
     name: team
     folder: 'src/cms-content/team'
