@@ -194,10 +194,6 @@ export const learnPages: TocItem[] = [
   {
     label: 'Glossary',
     to: '/glossary',
-    items: categoryToTermsMap.map(category => ({
-      to: `/glossary#${category.categoryId}`,
-      label: category.categoryName,
-    })),
   },
   {
     label: 'FAQ',

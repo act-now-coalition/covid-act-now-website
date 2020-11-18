@@ -1,30 +1,40 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { BreadcrumbsContainer } from '../Learn.style';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import { MarkdownContent, Heading1 } from 'components/Markdown';
-import PageContent, { MobileOnly } from 'components/PageContent';
-import {
-  glossaryContent,
-  learnPages,
-  TermsByCategory,
-  glossaryContentByCategory,
-} from 'cms-content/learn';
+import PageContent from 'components/PageContent';
+import { glossaryContent, learnPages } from 'cms-content/learn';
 import Breadcrumbs from 'components/Breadcrumbs';
-import TableOfContents, { Anchor } from 'components/TableOfContents';
+import { Anchor } from 'components/TableOfContents';
 import { formatMetatagDate } from 'common/utils';
-import MappedSection from '../Shared/MappedSection';
+import ScrollToTopButton from 'components/SharedComponents/ScrollToTopButton';
+import useScrollPosition from '@react-hook/window-scroll';
+import { useMediaQuery } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
+import { SectionName } from '../Shared/MappedSection.style';
 
 const Glossary: React.FC = () => {
-  const { header, intro, metadataTitle, metadataDescription } = glossaryContent;
+  const {
+    header,
+    intro,
+    terms,
+    metadataTitle,
+    metadataDescription,
+  } = glossaryContent;
+
+  const scrollY = useScrollPosition();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down(800));
+
+  const [showScrollToTop, setShowScrollToTop] = useState(false);
+
+  useEffect(() => {
+    if (isMobile && scrollY > 400) {
+      setShowScrollToTop(true);
+    } else setShowScrollToTop(false);
+  }, [isMobile, scrollY, setShowScrollToTop, showScrollToTop]);
 
   const date = formatMetatagDate();
-
-  function getTocItems(categories: TermsByCategory[]) {
-    return categories.map((category: TermsByCategory) => ({
-      id: category.categoryId,
-      title: category.categoryName,
-    }));
-  }
 
   return (
     <Fragment>
@@ -39,15 +49,14 @@ const Glossary: React.FC = () => {
         </BreadcrumbsContainer>
         <Heading1>{header}</Heading1>
         <MarkdownContent source={intro} />
-        <MobileOnly>
-          <TableOfContents items={getTocItems(glossaryContentByCategory)} />
-        </MobileOnly>
-        {glossaryContentByCategory.map((category: TermsByCategory) => (
-          <Fragment key={category.categoryId}>
-            <Anchor id={category.categoryId} />
-            <MappedSection category={category} />
+        {terms.map((term: any) => (
+          <Fragment>
+            <Anchor id={term.termId} />
+            <SectionName>{term.term}</SectionName>
+            <MarkdownContent source={term.definition} />
           </Fragment>
         ))}
+        <ScrollToTopButton showButton={showScrollToTop} />
       </PageContent>
     </Fragment>
   );
