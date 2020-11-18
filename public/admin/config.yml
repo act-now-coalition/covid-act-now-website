@@ -47,6 +47,20 @@ collections:
                   - { label: 'Alt text', name: 'altText', widget: 'string' }
                   - { label: 'Image', name: 'image', widget: 'image' }
                   - { label: 'Url', name: 'url', widget: 'string' }
+  - label: Team directory
+    name: team
+    folder: 'src/cms-content/team'
+    create: true
+    fields:
+      - label: Team name
+      - label: Team ID
+      - label: Team members
+        fields:
+          - label: Full name
+          - label: Title and role
+          - label: Profile picture
+          - label: Profile URL
+
   - name: contact
     label: Contact Us
     format: json
