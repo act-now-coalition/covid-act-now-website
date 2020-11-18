@@ -51,6 +51,10 @@ collections:
     name: team
     folder: 'src/cms-content/team'
     create: true
+    label_singular: Team
+    description: description
+    format: json
+    identifier_field: teamID
     fields:
       - label: Team name
         name: teamName
