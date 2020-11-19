@@ -54,7 +54,7 @@ collections:
     create: true
     label_singular: Article
     format: json
-    description: Articles (previously Blog)
+    description: Long form articles and posts
     slug: '{{date}}-{{slug}}'
     summary: '{{year}}-{{month}}-{{day}}: {{header}}'
     sortable_fields: ['date', 'author', 'header', 'articleID']
