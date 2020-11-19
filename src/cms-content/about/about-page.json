@@ -24,7 +24,7 @@
       ]
     },
     {
-      "copy": "We are funded by [Schmidt Futures](https://schmidtfutures.com/), philanthropists, and small donations. We appreciate any contributions you’re able to make [here](https://www.gofundme.com/f/qtcuvy-covid-act-now).",
+      "copy": "We are funded by [Schmidt Futures](https://schmidtfutures.com/), philanthropists, and small donations. We appreciate any contributions you’re able to make [](https://www.gofundme.com/f/qtcuvy-covid-act-now)on our [donate page](https://www.covidactnow.org/donate).",
       "logos": [
         {
           "url": "https://schmidtfutures.com",
@@ -34,19 +34,8 @@
       ]
     },
     {
-      "copy": "Our modeling and data partners include [Grand Rounds](https://grandrounds.com/), a digital healthcare company committed to making healthcare simpler and more accessible while improving outcomes, and [USA Facts](https://usafacts.org/), an initiative launched by Steve Ballmer (former CEO of Microsoft) in 2017 to provide Americans with a single source for accurate, nonpartisan information about our country.",
-      "logos": [
-        {
-          "url": "https://grandrounds.com/",
-          "altText": "Grand Rounds logo",
-          "image": "/images_cms/grand-rounds.png"
-        },
-        {
-          "url": "https://usafacts.org/",
-          "altText": "USA Facts logo",
-          "image": "/images_cms/usa_facts.png"
-        }
-      ]
+      "copy": "Our data sources include The Department of Health and Human Services, Centers for Medicaid and Medicare Services, The New York Times, Covid Tracking Project, and Covid Care Map. See more details on our [sources](https://docs.google.com/presentation/u/1/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit).\n\n## Notable Partners\n\nWe have engaged with more than 100 federal, state, and county level governments who have trusted and used our tool to make data-driven decisions around COVID, including:",
+      "logos": []
     }
   ],
   "pageHeader": "About Covid Act Now"
