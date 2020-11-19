@@ -34,6 +34,7 @@ export const landingPageContent = landing as LandingContent;
 */
 export interface Question {
   question: string;
+  questionId: string;
   answer: Markdown;
 }
 
@@ -71,6 +72,7 @@ export interface Term {
   term: string;
   termId: string;
   definition: Markdown;
+  category: string;
 }
 
 export interface GlossaryContent {
@@ -220,7 +222,10 @@ export function getProductPageContent(
 
 // TODO (pablo): Should we have a short heading for categories?
 export const learnPages: TocItem[] = [
-  { label: 'Glossary', to: '/glossary' },
+  {
+    label: 'Glossary',
+    to: '/glossary',
+  },
   {
     label: 'FAQ',
     to: '/faq',
