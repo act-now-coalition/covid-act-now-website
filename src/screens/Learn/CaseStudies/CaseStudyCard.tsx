@@ -6,10 +6,10 @@ import {
   ArrowIcon,
   CardLogo,
   CopyContainer,
-  IconContainer,
+  ReadMoreContainer,
 } from './CaseStudyCard.style';
 import { CaseStudy } from 'cms-content/learn';
-import { MarkdownContent, Heading3 } from 'components/Markdown';
+import { MarkdownContent, Heading3, Paragraph } from 'components/Markdown';
 
 const CaseStudyCard = (props: { cardContent: CaseStudy; url: string }) => {
   const { cardContent, url } = props;
@@ -23,9 +23,10 @@ const CaseStudyCard = (props: { cardContent: CaseStudy; url: string }) => {
             <Heading3>{shortTitle}</Heading3>
             <MarkdownContent source={summary} />
           </CopyContainer>
-          <IconContainer>
+          <ReadMoreContainer>
+            <Paragraph>Learn how</Paragraph>
             <ArrowIcon />
-          </IconContainer>
+          </ReadMoreContainer>
         </StyledCardContent>
       </StyledLink>
     </StyledCard>
