@@ -29,6 +29,7 @@ export const CardsContainer = styled(Grid).attrs(props => ({
   alignItems: 'stretch',
 }))`
   margin-bottom: ${theme.spacing(3)}px;
+  margin-top: 0.75rem;
   &:last-child {
     margin-bottom: 0;
   }

@@ -5,13 +5,18 @@ import { useTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import Breadcrumbs from 'components/Breadcrumbs';
-import PageContent from 'components/PageContent';
+import PageContent, { MobileOnly } from 'components/PageContent';
 import { MarkdownContent, Heading2 } from 'components/Markdown';
 import { formatMetatagDate } from 'common/utils';
-import { caseStudiesContent, learnPages } from 'cms-content/learn';
+import {
+  caseStudiesContent,
+  learnPages,
+  CaseStudyCategory,
+} from 'cms-content/learn';
 import CaseStudyCard from './CaseStudyCard';
 import { BreadcrumbsContainer, LearnHeading1 } from '../Learn.style';
 import { CardsContainer } from './CaseStudy.style';
+import TableOfContents, { Item } from 'components/TableOfContents';
 
 const {
   header,
@@ -29,6 +34,13 @@ const Landing: React.FC = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
   const cardGridSpacing = isMobile ? 2 : 3;
 
+  function getSectionItems(categories: CaseStudyCategory[]): Item[] {
+    return categories.map(category => ({
+      id: category.categoryId,
+      title: category.header,
+    }));
+  }
+
   return (
     <Fragment>
       <AppMetaTags
@@ -42,7 +54,10 @@ const Landing: React.FC = () => {
         </BreadcrumbsContainer>
         <LearnHeading1>{header}</LearnHeading1>
         <MarkdownContent source={intro} />
-        {categories.map(category => {
+        <MobileOnly>
+          <TableOfContents items={getSectionItems(categories)} />
+        </MobileOnly>
+        {categories.map((category: CaseStudyCategory) => {
           const caseStudies = category.caseStudies || [];
           return (
             <Fragment key={category.categoryId}>
