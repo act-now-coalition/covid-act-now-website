@@ -24,6 +24,16 @@
       ]
     },
     {
+      "copy": "We are funded by [Schmidt Futures](https://schmidtfutures.com/), philanthropists, and small donations. We appreciate any contributions you’re able to make [here](https://www.gofundme.com/f/qtcuvy-covid-act-now).",
+      "logos": [
+        {
+          "url": "https://schmidtfutures.com",
+          "altText": "Schmidt Futures logo",
+          "image": "/images_cms/schmidt-futures.png"
+        }
+      ]
+    },
+    {
       "copy": "Our modeling and data partners include [Grand Rounds](https://grandrounds.com/), a digital healthcare company committed to making healthcare simpler and more accessible while improving outcomes, and [USA Facts](https://usafacts.org/), an initiative launched by Steve Ballmer (former CEO of Microsoft) in 2017 to provide Americans with a single source for accurate, nonpartisan information about our country.",
       "logos": [
         {
@@ -35,16 +45,6 @@
           "url": "https://usafacts.org/",
           "altText": "USA Facts logo",
           "image": "/images_cms/usa_facts.png"
-        }
-      ]
-    },
-    {
-      "copy": "We are funded by [Schmidt Futures](https://schmidtfutures.com/), philanthropists, and small donations. We appreciate any contributions you’re able to make [here](https://www.gofundme.com/f/qtcuvy-covid-act-now).",
-      "logos": [
-        {
-          "url": "https://schmidtfutures.com",
-          "altText": "Schmidt Futures logo",
-          "image": "/images_cms/schmidt-futures.png"
         }
       ]
     }
