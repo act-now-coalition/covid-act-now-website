@@ -1,0 +1,13 @@
+{
+  "body": "On Indigenous Peoples’ Day, our team built a tool to help visualize the impact of COVID on majority Native American counties. \n\n## Why did we build this feature?\n\nAs an organization, we are keenly aware of the disproportionate impact that COVID has on Native American populations. According to CDC data, Native Americans have 5.3 times higher rates of hospitalization, 1.4 times higher rates of death, and 2.8 times higher case incidence than their non-Hispanic, white peers. \n\n## What can you do with the new feature?\n\nWith this launch, you can now see COVID cases and deaths for all counties in the U.S. with a majority Native American population (>50% American Indian or Alaskan Native). Moreover, users can compare this data against data for all counties in the U.S., which will help them understand how outcomes have differed for Native American communities.\n\n## What is our data source for this new feature?\n\nOur team relied on the latest demographic data from the census. In order to best visualize the data within our current framework of county-based reporting, our team decided to look at the U.S. counties where the population was at least 50% Native American. \n\n## What are the limitations of our new feature? \n\nOur team is fully aware that our new feature is an incomplete tool–U.S. counties where the population was at least 50% Native American only represent a small fraction of the total Native American population in the country. To be specific, these counties represent a population of 337,000 Americans, the majority of which are Native American\n\n## What’s next?\n\nNext, we hope that COVID data is more widely reported and made accessible by race and ethnicity. By closing the gap on Native American data, we can share a more complete understanding about the virus and keep more people safe.",
+  "summary": "On Indigenous Peoples’ Day, our team built a tool to help visualize the impact of COVID on majority Native American counties. ",
+  "author": "Chelsi Asulin",
+  "header": "Indigenous Peoples’ Day: Seeing COVID’s impact on majority Native American counties",
+  "date": "2020-11-19T20:01:07.062Z",
+  "articleID": "indigenous-peoples-day",
+  "subtitle": "On Indigenous Peoples’ Day, our team built a tool to help visualize the impact of COVID on majority Native American counties.",
+  "tags": [
+    "hackathon"
+  ],
+  "datetime": "2020-10-16T18:43:09.266Z"
+}
