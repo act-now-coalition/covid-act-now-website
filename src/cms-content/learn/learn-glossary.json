@@ -1,6 +1,6 @@
 {
   "header": "Glossary",
-  "intro": "Here you can find clear definitions of the vocabulary of the novel coronavirus (2019-nCoV). If you have any questions or would like us to include a term that you don't see, please [email us](mailto:info@covidactnow.org).",
+  "intro": "Here you can find clear definitions of the vocabulary of the novel coronavirus (SARS-CoV-2). If you have any questions or would like us to include a term that you don't see, please [email us](mailto:info@covidactnow.org).",
   "terms": [
     {
       "term": "Antibodies",
@@ -23,7 +23,7 @@
     {
       "term": "Asymptomatic",
       "termId": "asymptomatic",
-      "definition": "An asymptomatic person is positive for the virus but never shows signs or symptoms of the infection. Testing can show asymptomatic infection, which is important because:\n\n* The fact that COVID can be asymptomatic means we do not always know if a person has COVID, and therefore the virus can be transmitted unknowingly. \n* Asymptomatic transmission is one of the reasons COVID is so dangerous, as opposed to SARS, which was more deadly in infected individuals, but always symptomatic. Researchers are unsure how many COVID cases are transmitted asymptomatically, but estimates range between [6 percent and 41 percent](https://www.who.int/news-room/commentaries/detail/transmission-of-sars-cov-2-implications-for-infection-prevention-precautions) of cases. \n\nSome people with asymptomatic infection may actually be [presymptomatic](#presymptomatic-spread), and develop symptoms later on.",      
+      "definition": "An asymptomatic person is positive for the virus but never shows signs or symptoms of the infection. Testing can show asymptomatic infection, which is important because:\n\n* The fact that COVID can be asymptomatic means we do not always know if a person has COVID, and therefore the virus can be transmitted unknowingly. \n* Asymptomatic transmission is one of the reasons COVID is so dangerous, as opposed to SARS, which was more deadly in infected individuals, but always symptomatic. Researchers are unsure how many COVID cases are transmitted asymptomatically, but estimates range between [6 percent and 41 percent](https://www.who.int/news-room/commentaries/detail/transmission-of-sars-cov-2-implications-for-infection-prevention-precautions) of cases. \n\nSome people with asymptomatic infection may actually be [presymptomatic](#presymptomatic-spread), and develop symptoms later on.",
       "category": "Health and symptoms"
     },
     {
