@@ -41,7 +41,6 @@ export const StyledCard = styled(Card)`
     /* Highlights the arrow icon on hover */
     ${ArrowIcon} {
       color: ${COLOR_MAP.GRAY.DARK};
-      transform: translateX(2px);
     }
   }
 `;
@@ -85,4 +84,8 @@ export const CopyContainer = styled.div`
 export const ReadMoreContainer = styled.div`
   display: flex;
   margin-top: 1rem;
+
+  p {
+    color: ${COLOR_MAP.BLUE};
+  }
 `;

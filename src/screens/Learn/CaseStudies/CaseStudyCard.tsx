@@ -24,7 +24,7 @@ const CaseStudyCard = (props: { cardContent: CaseStudy; url: string }) => {
             <MarkdownContent source={summary} />
           </CopyContainer>
           <ReadMoreContainer>
-            <Paragraph>Read the study</Paragraph>
+            <Paragraph>Learn how</Paragraph>
             <ArrowIcon />
           </ReadMoreContainer>
         </StyledCardContent>
