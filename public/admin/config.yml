@@ -4,7 +4,7 @@
 backend:
   name: github
   repo: covid-projections/covid-projections
-  branch: cms-content-entry
+  branch: pablo/cms-articles-structure
   base_url: https://api.netlify.com
 
 media_folder: 'public/images_cms'
@@ -47,6 +47,9 @@ collections:
                   - { label: 'Alt text', name: 'altText', widget: 'string' }
                   - { label: 'Image', name: 'image', widget: 'image' }
                   - { label: 'Url', name: 'url', widget: 'string' }
+  - name: articles
+    label: Articles
+
   - name: contact
     label: Contact Us
     format: json
@@ -253,7 +256,21 @@ collections:
               - { label: Term, name: term, widget: string }
               - { label: Term ID, name: termId, widget: string }
               - { label: Definition, name: definition, widget: markdown }
-              - { label: Category, name: category, widget: select, options: ["Disease science", "Health and symptoms", "Metrics", "Prevention and mitigation", "Testing", "Transmission", "Treatment"] }
+              - {
+                  label: Category,
+                  name: category,
+                  widget: select,
+                  options:
+                    [
+                      'Disease science',
+                      'Health and symptoms',
+                      'Metrics',
+                      'Prevention and mitigation',
+                      'Testing',
+                      'Transmission',
+                      'Treatment',
+                    ],
+                }
           - label: Metadata title
             name: metadataTitle
             widget: text
@@ -460,16 +477,15 @@ collections:
                   label: Product ID,
                   name: productId,
                   widget: string,
-                  hint: 'Must match ID used on products landing page, ie. product name all lowercase, separated by dashes if multi-work (ex. response-simulator)'
+                  hint: 'Must match ID used on products landing page, ie. product name all lowercase, separated by dashes if multi-work (ex. response-simulator)',
                 }
               - {
                   label: Product Intro,
                   name: productIntro,
                   widget: markdown,
-                  hint: 'Main intro before sections'
+                  hint: 'Main intro before sections',
                 }
-              -
-                label: Sections
+              - label: Sections
                 name: sections
                 widget: list
                 fields:
@@ -477,19 +493,15 @@ collections:
                       label: Section title,
                       name: sectionTitle,
                       widget: string,
-                      hint: 'ex: Why our API'
+                      hint: 'ex: Why our API',
                     }
                   - {
                       label: Section ID,
                       name: sectionId,
                       widget: string,
-                      hint: 'Section title all lowercase, separated by dashes if multi-work (ex. why-our-api)'
+                      hint: 'Section title all lowercase, separated by dashes if multi-work (ex. why-our-api)',
                     }
-                  - {
-                      label: Section Body,
-                      name: sectionBody,
-                      widget: markdown,
-                    }
+                  - { label: Section Body, name: sectionBody, widget: markdown }
               - label: Metadata title
                 name: metadataTitle
                 widget: text
