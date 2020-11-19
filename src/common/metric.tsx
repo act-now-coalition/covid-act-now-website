@@ -64,7 +64,7 @@ const metricDefinitions: { [metric in Metric]: MetricDefinition } = {
   [Metric.CASE_DENSITY]: CaseDensity.CaseIncidenceMetric,
 };
 
-function getMetricDefinition(metric: Metric) {
+export function getMetricDefinition(metric: Metric) {
   if (!(metric in metricDefinitions)) {
     fail('unknown metric');
   }

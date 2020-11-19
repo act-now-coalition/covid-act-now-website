@@ -7,12 +7,14 @@ import { formatPercent } from 'common/utils';
 import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
 import ExternalLink from 'components/ExternalLink';
+import Thermometer from 'components/Thermometer';
 
 const METRIC_NAME = 'Positive test rate';
 
 export const PositiveTestRateMetric: MetricDefinition = {
   renderStatus,
   renderDisclaimer,
+  renderThermometer,
   metricName: METRIC_NAME,
   extendedMetricName: METRIC_NAME,
   metricNameForCompare: METRIC_NAME,
@@ -160,4 +162,50 @@ function renderDisclaimer(projections: Projections): React.ReactElement {
       .
     </Fragment>
   );
+}
+
+function renderThermometer(): React.ReactElement {
+  const levelInfo = POSITIVE_TESTS_LEVEL_INFO_MAP;
+  const levelCritical = levelInfo[Level.CRITICAL];
+  const levelHigh = levelInfo[Level.HIGH];
+  const levelMedium = levelInfo[Level.MEDIUM];
+  const levelLow = levelInfo[Level.LOW];
+
+  const format = (value: number) => formatPercent(value, 0);
+
+  const items = [
+    {
+      title: `Over ${format(levelHigh.upperLimit)}`,
+      description: levelCritical.detail(),
+      color: levelCritical.color,
+      roundTop: true,
+      roundBottom: false,
+    },
+    {
+      title: `${format(levelMedium.upperLimit)} - ${format(
+        levelHigh.upperLimit,
+      )}`,
+      description: levelHigh.detail(),
+      color: levelHigh.color,
+      roundTop: false,
+      roundBottom: false,
+    },
+    {
+      title: `${format(levelLow.upperLimit)} - ${format(
+        levelMedium.upperLimit,
+      )}`,
+      description: levelMedium.detail(),
+      color: levelMedium.color,
+      roundTop: false,
+      roundBottom: false,
+    },
+    {
+      title: `Under ${format(levelLow.upperLimit)}`,
+      description: levelLow.detail(),
+      color: levelLow.color,
+      roundTop: false,
+      roundBottom: true,
+    },
+  ];
+  return <Thermometer items={items} />;
 }

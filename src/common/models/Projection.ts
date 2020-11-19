@@ -28,9 +28,7 @@ class DisabledFips {
   }
 }
 
-const DISABLED_CASE_DENSITY: string[] = [
-  '48029', // https://trello.com/c/qscxlxgR/517-outlier-in-bexar-county-tx-disabled-metric
-];
+const DISABLED_CASE_DENSITY: string[] = [];
 
 const DISABLED_INFECTION_RATE = new DisabledFips([]);
 

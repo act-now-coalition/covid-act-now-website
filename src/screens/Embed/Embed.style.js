@@ -156,7 +156,7 @@ export const EmbedBody = styled(Box)`
 export const EmbedHeaderWrapper = styled(Box)`
   ${PreviewHeaderStyles}
   width: 100%;
-  padding: 17px 14px;
+  padding: 13px 14px;
 `;
 
 export const FooterDate = styled(Typography)`

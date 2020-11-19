@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # update-snapshot.sh - Updates the website to a new data snapshot and
-# regenerates map colors and share images.
+# regenerates summary files, etc.
 
 set -o nounset
 set -o errexit

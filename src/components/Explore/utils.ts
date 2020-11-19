@@ -8,6 +8,7 @@ import {
   range,
   words,
   partition,
+  sortBy,
 } from 'lodash';
 import { color } from 'd3-color';
 import { schemeCategory10 } from 'd3-scale-chromatic';
@@ -320,8 +321,8 @@ export function getImageFilename(locations: Location[], metric: ExploreMetric) {
 
 /**
  * Generates the URL of the export images for the given fips code and chart.
- * It needs to be consistent with the path on the share image generation
- * script in `scripts/generate_share_images/index.ts`
+ * It needs to be consistent with the share image routing in
+ * src/screens/internal/ShareImage/ShareImage.tsx.
  */
 export function getExportImageUrl(sharedComponentId: string) {
   return urlJoin(share_image_url, `share/${sharedComponentId}/export.png`);
@@ -446,10 +447,30 @@ export function getAutocompleteLocations(locationFips: string) {
     belongsToState(county, currentLocation.state_fips_code),
   );
 
+  const sortedStates = sortBy(states, location => location.state);
+  const sortedStateCounties = sortBy(
+    stateCounties,
+    location => location.county,
+  );
+  const sortedOtherCounties = sortBy(
+    otherCounties,
+    location => location.county,
+  );
+
   // TODO(michael): Where should aggregations go in the list?
   return isStateFips(locationFips)
-    ? [...AGGREGATED_LOCATIONS, ...states, ...stateCounties, ...otherCounties]
-    : [...AGGREGATED_LOCATIONS, ...stateCounties, ...states, ...otherCounties];
+    ? [
+        ...AGGREGATED_LOCATIONS,
+        ...sortedStates,
+        ...sortedStateCounties,
+        ...sortedOtherCounties,
+      ]
+    : [
+        ...AGGREGATED_LOCATIONS,
+        ...sortedStateCounties,
+        ...sortedStates,
+        ...sortedOtherCounties,
+      ];
 }
 
 /**

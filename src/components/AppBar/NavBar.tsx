@@ -4,7 +4,7 @@ import Logo from 'assets/images/logo';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import * as Style from './NavBar.style';
 import MobileMenu from './MobileMenu';
-import { DonateButtonWithoutFade, DonateButtonWithFade } from './DonateButton';
+import { DonateButtonWithoutFade } from './DonateButton';
 import { useEmbed } from 'common/utils/hooks';
 
 const isLocationPage = (pathname: string) => pathname.includes('/us');
@@ -25,9 +25,6 @@ const NavBar: React.FC = () => {
   // We only fade the donate button on the home page on mobile, where the donate
   // button doesn't appear until the banner is scrolled away.
   const { pathname } = useLocation();
-  const MobileDonateButton = isHomePage(pathname)
-    ? DonateButtonWithFade
-    : DonateButtonWithoutFade;
 
   if (isEmbed) {
     return null;
@@ -60,8 +57,8 @@ const NavBar: React.FC = () => {
           >
             Learn
           </Style.NavLink>
-          <Style.NavLink to="/resources" key="resources">
-            Resources
+          <Style.NavLink to="/tools" key="tools">
+            Tools
           </Style.NavLink>
           <Style.TabLink href="https://blog.covidactnow.org" key="blog">
             Blog
@@ -76,7 +73,7 @@ const NavBar: React.FC = () => {
         </Style.DesktopOnly>
         <Style.MobileOnly>
           <Style.StyledMobileMenu>
-            <MobileDonateButton />
+            <DonateButtonWithoutFade />
             <Style.IconButton
               onClick={() => setMenuOpen(!isMenuOpen)}
               edge="end"

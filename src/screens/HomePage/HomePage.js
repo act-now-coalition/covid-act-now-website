@@ -18,19 +18,16 @@ import {
   SearchBarThermometerWrapper,
   SectionWrapper,
   Section,
-  BannerContainer,
 } from './HomePage.style';
 import { SelectorWrapper } from 'components/Header/HomePageHeader.style';
 import CompareMain from 'components/Compare/CompareMain';
 import Explore from 'components/Explore';
 import { formatMetatagDate } from 'common/utils';
 import { getRandomStateFipsList } from './utils';
-import { DonationBanner } from 'components/Banner';
 
 function getPageDescription() {
   const date = formatMetatagDate();
-  return `${date} View new COVID cases, deaths, hospitalizations, and other important metrics to understand where the US stands against Coronavirus. 50 States. 3000+ Counties. Click the map to dive in.
-`;
+  return `${date} View new US COVID cases, deaths, hospitalizations, and other important metrics. 50 States. 3000+ Counties. Click the map to dive in.`;
 }
 
 export default function HomePage() {
@@ -82,9 +79,6 @@ export default function HomePage() {
         pageTitle="Realtime US COVID Risk Map by State and County"
         pageDescription={getPageDescription()}
       />
-      <BannerContainer>
-        <DonationBanner />
-      </BannerContainer>
       <HomePageHeader
         indicatorsLinkOnClick={() => scrollTo(indicatorsRef.current)}
       />
