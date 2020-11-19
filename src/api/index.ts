@@ -94,7 +94,10 @@ export class Api {
   private async fetchApiJson<T extends object>(
     endpoint: string,
   ): Promise<T | null> {
-    const response = await fetch(`${this.snapshotUrl}/${endpoint}`);
+    const apiKey = 'ee00e499609045e4bb41eb7f3271b6f9';
+    const response = await fetch(
+      `${this.snapshotUrl}/${endpoint}?apiKey=${apiKey}`,
+    );
     // TODO(michael): This should really check for 404 only, but S3 currently returns 403s.
     if ((!response.ok && response.status === 404) || response.status === 403) {
       return null;

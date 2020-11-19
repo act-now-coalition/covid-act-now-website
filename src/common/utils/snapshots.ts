@@ -25,7 +25,8 @@ export function snapshotUrl(snapshotNum: string | number) {
 }
 
 export function currentSnapshot(): number {
-  return snapshotFromUrl(SNAPSHOT_URL);
+  return 1317;
+  // return snapshotFromUrl(SNAPSHOT_URL);
 }
 
 /** Checks for ?snapshot=xyz in the querystring and returns it as a number. */
