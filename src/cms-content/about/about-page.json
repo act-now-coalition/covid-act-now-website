@@ -1,7 +1,7 @@
 {
-  "introHeader": "Covid Act Now",
-  "introContent": "[Guided by common values](https://blog.covidactnow.org/covid-modeling-values/)—to be a truth-seeking, truthful and honest team player—Covid Act Now is volunteer-driven 501c3 non-profit, built by a multidisciplinary team of technologists, epidemiologists, public health experts, and public policy leaders. Our aim is to provide the best-available local-level disease intelligence and data analysis on COVID in the U.S.\n\nWe published the first version of our model on March 20, 2020. Since then, we’ve served millions of Americans and engaged with dozens of federal, state, and local governments, to enable data-driven COVID decisions.",
-  "partnersHeader": "Who We Work With",
+  "introHeader": "Our mission",
+  "introContent": "Covid Act Now is a 501(c)(3) nonprofit founded in March 2020. We strive to provide the most timely and accurate local COVID data so that every American can make informed decisions during the pandemic. We are committed to:\n\n* Data: We support data and science-backed policies and decision-making\n* Transparency: Our data and methodologies are fully open-source so that the public can vet, freely use, and build upon our work\n* Accessibility: We make data universally accessible so that anyone can easily understand and use it, regardless of ability or prior knowledge",
+  "partnersHeader": "Our partners",
   "partnersContent": [
     {
       "copy": "Our university affiliates are the [Georgetown University Center for Global Health Science and Security](https://ghss.georgetown.edu/), [Stanford University Clinical Excellence Research Center](http://med.stanford.edu/cerc.html), and [Harvard Global Health Institute](https://globalhealth.harvard.edu/).",
