@@ -47,8 +47,49 @@ collections:
                   - { label: 'Alt text', name: 'altText', widget: 'string' }
                   - { label: 'Image', name: 'image', widget: 'image' }
                   - { label: 'Url', name: 'url', widget: 'string' }
+
   - name: articles
     label: Articles
+    folder: 'src/cms-content/articles'
+    create: true
+    label_singular: Article
+    format: json
+    identifier_field: articleID
+    description: Articles (previously Blog)
+    slug: '{{date}}-{{slug}}'
+    fields:
+      - label: Header
+        name: header
+        widget: string
+        hint: Title
+      - label: Article ID
+        name: articleID
+        widget: string
+        hint: 'Short unique identifier for the article (all lowercase, no spaces, separated by dashes). Used to generate the URL (ex: indigenous-peoples-day)'
+      - label: Subtitle
+        name: subtitle
+        widget: string
+        required: false
+        hint: Optional subtitle
+      - label: Summary
+        name: summary
+        widget: markdown
+        hint: Short summary
+      - label: Author
+        name: author
+        widget: markdown
+        minimal: true
+        hint: 'Name of the author or authors (separated by comma, ex: Chelsi Asulin, Igor Kofman)'
+      - label: Publish date
+        name: date
+        widget: datetime
+        date_format: 'MMMM Do YYYY'
+        time_format: false
+        hint: Publish date to show in the article
+      - label: body
+        name: body
+        widget: markdown
+        hint: Content of the article. Use Heading 2 or lower (Heading 1 is used for the title of the article)
 
   - name: contact
     label: Contact Us
