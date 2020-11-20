@@ -69,6 +69,12 @@
       "category": "Health and symptoms"
     },
     {
+      "term": "Contact tracers hired",
+      "termId": "contact-tracers-hired",
+      "definition": "Contact tracers hired is the number of contact tracers that are hired in a state or county, relative to the number of cases.\n\nTo stop the spread of COVID, it is critical to have enough tracing capacity to identify the contacts of people who test positive for COVID. Those contacts can be tested, quarantined (if necessary), and asked about whom else they have come into contact with.\n\nAt Covid Act Now, we realize that measuring contact tracing by number of staff is not reliable. One of the best metrics of success for a contact tracing program is the percentage of new cases traced to a known source. However, very few states are reporting this number. \n\nFor now, we look at the number of contact tracers on staff for each state to estimate the number of contacts that could be traced within 48 hours if the contact tracing program were otherwise working perfectly.",
+      "category": "Metrics"
+    },
+    {
       "term": "Contact tracing",
       "termId": "contact-tracing",
       "definition": "Contact tracing is the process of tracing all of the people with whom a newly confirmed COVID patient has come into contact, in order to identify and notify people who may have been exposed to the virus. \n\n* When contacts are efficiently traced and encouraged to quarantine, further [transmission](#transmission) can be prevented. Contact tracing is essential if we want to slow the spread of COVID without universal [quarantine](#quarantine) or full shut-down.\n* Contact tracing is especially critical due to the fact that people can spread COVID even if they are [presymptomatic](#presymptomatic-spread) or [asymptomatic](#asymptomatic). \n\n[South Korea](https://www.businessinsider.com/south-korea-contact-tracing-helped-control-nightclub-outbreak-2020-5)’s robust contact tracing and testing efforts allowed the country to control COVID efficiently and effectively without a strict lock-down. If a resident tested positive or was even suspected of coming into contact with an infected person, their contacts were quickly notified, tested, and encouraged to quarantine.",
@@ -201,9 +207,9 @@
       "category": "Disease science"
     },
     {
-      "term": "ICU headroom",
-      "termId": "icu-headroom",
-      "definition": "ICU Headroom is a metric used to measure an Intensive Care Unit’s (ICU) ability to handle a surge of patients in the case of a COVID [outbreak](#outbreak). The ICU is the part of a hospital reserved for people who are very sick. Each bed is equipped with special equipment that regular hospital beds don’t have, and usually have one or two dedicated nurses to monitor each patient. ICU Headroom is one of Covid Act Now’s main metrics for understanding COVID, as measuring and predicting ICU capacity gives a picture of whether hospitals can handle an increased load of new COVID cases without having to resort to [crisis standards of care](#crisis-standards-of-care).",
+      "term": "ICU headroom used",
+      "termId": "icu-headroom-used",
+      "definition": "ICU headroom used is the percentage of ICU beds available for COVID patients, after excluding those already in use by non-COVID patients. It is used to measure an Intensive Care Unit’s (ICU) ability to handle a surge of patients in the case of a COVID [outbreak](#outbreak). The ICU is the part of a hospital reserved for people who are very sick. Each bed is equipped with special equipment that regular hospital beds don’t have, and usually have one or two dedicated nurses to monitor each patient. \n\nICU headroom used is one of Covid Act Now’s main metrics for understanding COVID, as measuring and predicting ICU capacity gives a picture of whether hospitals can handle an increased load of new COVID cases without having to resort to [crisis standards of care](#crisis-standards-of-care).",
       "category": "Metrics"
     },
     {
@@ -239,7 +245,7 @@
     {
       "term": "Infection rate",
       "termId": "infection-rate",
-      "definition": "Infection rate, also known as “[R(t)](#rt),” tells us how fast COVID is spreading. The value of R(t) represents the number of people that a single infected person goes on to infect in a specific area, at a specific time. For example, an infection growth rate of 3 means that one case of COVID would produce three new secondary cases.\n\nThis value can change over time, depending on behavior and interventions within a community. Infection rate is different from the total number of cases because a place with a smaller population and few total cases can still have a very high infection rate, meaning that one person could go on to infect many people. The higher the R(t) is in a given place, the faster COVID is spreading there; an R(t) above 1 means that the number of cases is growing, while an R(t) below 1 means that cases are shrinking. [Covid Act Now](https://covidactnow.org/?s=647107) uses R(t), or infection rate, as one of its main metrics for COVID risk assessment.",
+      "definition": "Infection rate is the estimated number of new people each COVID-positive person will infect. Also known as “[R(t)](#rt),” the infection rate tells us how fast COVID is spreading in a specific area, at a specific time. For example, an infection growth rate of 3 means that one case of COVID would produce three new secondary cases.\n\nThis value can change over time, depending on behavior and interventions within a community. Infection rate is different from the total number of cases because a place with a smaller population and few total cases can still have a very high infection rate, meaning that one person could go on to infect many people. \n\nThe higher the R(t) is in a given place, the faster COVID is spreading there; an R(t) above 1 means that the number of cases is growing, while an R(t) below 1 means that cases are shrinking. [Covid Act Now](https://covidactnow.org/?s=647107) uses R(t), or infection rate, as one of its main metrics for COVID risk assessment.",
       "category": "Metrics"
     },
     {
@@ -317,7 +323,7 @@
     {
       "term": "Positive test rate",
       "termId": "positive-test-rate",
-      "definition": "Positive test rate, also known as test positivity, is the percentage of all tests performed that come back positive. Positive test rate is an important indicator to determine whether or not there is widespread [testing](#testing) in a given community. As the number of tests increase, the test positivity rate is expected to decrease, because tests will not be restricted to highly symptomatic cases and will capture more people with few or [no symptoms](#asymptomatic). For COVID, World Health Organization (WHO) officials have said a positive test rate of [less than 10%](https://www.npr.org/sections/health-shots/2020/04/22/840526338/is-the-u-s-testing-enough-for-covid-19-as-debate-rages-on-heres-how-to-know) may indicate that a community is conducting enough testing to find most cases. The countries most successful in containing COVID have test positivity rates of [3% or less.](https://medium.com/@tomaspueyo/coronavirus-how-to-do-testing-and-contact-tracing-bde85b64072e) The trend in positive test rate is also sometimes used as an indicator of the overall trend in cases and infections.",
+      "definition": "Positive test rate is the *percentage* of COVID testing that comes back positive. Also known as test positivity, positive test rate is an important indicator to determine whether or not there is widespread [testing](#testing) in a given community. As the number of tests increase, the test positivity rate is expected to decrease, because tests will not be restricted to highly symptomatic cases and will capture more people with few or [no symptoms](#asymptomatic).\n\nFor COVID, World Health Organization (WHO) officials have said a positive test rate of [less than 10%](https://www.npr.org/sections/health-shots/2020/04/22/840526338/is-the-u-s-testing-enough-for-covid-19-as-debate-rages-on-heres-how-to-know) may indicate that a community is conducting enough testing to find most cases. The countries most successful in containing COVID have test positivity rates of [3% or less.](https://medium.com/@tomaspueyo/coronavirus-how-to-do-testing-and-contact-tracing-bde85b64072e) The trend in positive test rate is also sometimes used as an indicator of the overall trend in cases and infections.",
       "category": "Metrics"
     },
     {
