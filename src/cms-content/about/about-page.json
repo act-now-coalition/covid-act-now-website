@@ -1,7 +1,7 @@
 {
-  "introHeader": "Covid Act Now",
-  "introContent": "[Guided by common values](https://blog.covidactnow.org/covid-modeling-values/)—to be a truth-seeking, truthful and honest team player—Covid Act Now is volunteer-driven 501c3 non-profit, built by a multidisciplinary team of technologists, epidemiologists, public health experts, and public policy leaders. Our aim is to provide the best-available local-level disease intelligence and data analysis on COVID in the U.S.\n\nWe published the first version of our model on March 20, 2020. Since then, we’ve served millions of Americans and engaged with dozens of federal, state, and local governments, to enable data-driven COVID decisions.",
-  "partnersHeader": "Who We Work With",
+  "introHeader": "Our mission",
+  "introContent": "Covid Act Now is a 501(c)(3) nonprofit founded in March 2020. We strive to provide the most timely and accurate local COVID data so that every American can make informed decisions during the pandemic. We are committed to:\n\n* **Data**: We support data and science-backed policies and decision-making\n* **Transparency**: Our data and methodologies are fully open-source so that the public can vet, freely use, and build upon our work\n* **Accessibility**: We make data universally accessible so that anyone can easily understand and use it, regardless of ability or prior knowledge",
+  "partnersHeader": "Our partners",
   "partnersContent": [
     {
       "copy": "Our university affiliates are the [Georgetown University Center for Global Health Science and Security](https://ghss.georgetown.edu/), [Stanford University Clinical Excellence Research Center](http://med.stanford.edu/cerc.html), and [Harvard Global Health Institute](https://globalhealth.harvard.edu/).",
@@ -24,22 +24,7 @@
       ]
     },
     {
-      "copy": "Our modeling and data partners include [Grand Rounds](https://grandrounds.com/), a digital healthcare company committed to making healthcare simpler and more accessible while improving outcomes, and [USA Facts](https://usafacts.org/), an initiative launched by Steve Ballmer (former CEO of Microsoft) in 2017 to provide Americans with a single source for accurate, nonpartisan information about our country.",
-      "logos": [
-        {
-          "url": "https://grandrounds.com/",
-          "altText": "Grand Rounds logo",
-          "image": "/images_cms/grand-rounds.png"
-        },
-        {
-          "url": "https://usafacts.org/",
-          "altText": "USA Facts logo",
-          "image": "/images_cms/usa_facts.png"
-        }
-      ]
-    },
-    {
-      "copy": "We are a volunteer-driven 501c3 non-profit funded by [Schmidt Futures](https://schmidtfutures.com/), anonymous philanthropists and small donors. We appreciate any donations you’re able to make [here](https://covidactnow.org/donate).",
+      "copy": "We are funded by [Schmidt Futures](https://schmidtfutures.com/), philanthropists, and small donations. We appreciate any contributions you’re able to make [](https://www.gofundme.com/f/qtcuvy-covid-act-now)on our [donate page](https://www.covidactnow.org/donate).",
       "logos": [
         {
           "url": "https://schmidtfutures.com",
@@ -47,6 +32,10 @@
           "image": "/images_cms/schmidt-futures.png"
         }
       ]
+    },
+    {
+      "copy": "Our data sources include The Department of Health and Human Services, Centers for Medicaid and Medicare Services, The New York Times, Covid Tracking Project, and Covid Care Map. See more details on our [sources](https://docs.google.com/presentation/u/1/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit).\n\n## Notable Partners\n\nWe have engaged with more than 100 federal, state, and county level governments who have trusted and used our tool to make data-driven decisions around COVID, including:",
+      "logos": []
     }
   ],
   "pageHeader": "About Covid Act Now"
