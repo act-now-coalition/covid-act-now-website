@@ -3,7 +3,7 @@ import theme from 'assets/theme';
 import Typography from '@material-ui/core/Typography';
 
 export const Subtitle = styled(Typography).attrs(props => ({
-  variant: 'p',
+  variant: 'body1',
 }))`
   ${theme.fonts.subtitle};
 `;

@@ -1,8 +1,6 @@
 import React from 'react';
 import ExternalLink from 'components/ExternalLink';
-
 import {
-  AnnouncementsSectionHeader,
   AnnouncementIntro,
   Wrapper,
   Date,
@@ -11,11 +9,12 @@ import {
   ReadMoreButton,
   ViewAllLink,
 } from './Announcements.style';
+import { Subtitle } from 'components/Typography';
 
 const Announcements = () => {
   return (
     <Wrapper>
-      <AnnouncementsSectionHeader>Announcements</AnnouncementsSectionHeader>
+      <Subtitle>Announcements</Subtitle>
       <AnnouncementIntro>
         Introducing v2 of the Covid Act Now API
       </AnnouncementIntro>

@@ -28,12 +28,12 @@ interface ThemeFonts {
  */
 const fonts: ThemeFonts = {
   subtitle: css`
-    color: rgba(0, 0, 0, 0.7);
+    color: ${COLOR_MAP.GRAY_BODY_COPY};
     text-transform: uppercase;
-    letter-spacing: 0.02em;
-    opacity: 0.7;
-    font-size: 0.8125rem;
+    letter-spacing: 0.01em;
+    font-size: 0.875rem;
     line-height: 1.125;
+    margin-bottom: 0.75rem;
   `,
   disclaimer: css`
     font-size: 0.875rem;
