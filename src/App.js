@@ -111,8 +111,8 @@ export default function App() {
               <Route exact path="/faq" component={Faq} />
               <Route exact path="/glossary" component={Glossary} />
               <Route path="/case-studies" component={CaseStudies} />
-
               {/* /state/ routes are deprecated but still supported. */}
+
               <Route exact path="/state/:stateId" component={LocationPage} />
               <Route
                 exact

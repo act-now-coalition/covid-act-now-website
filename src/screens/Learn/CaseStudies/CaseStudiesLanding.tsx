@@ -41,6 +41,9 @@ const Landing: React.FC = () => {
     }));
   }
 
+  // Filters out case studies that aren't in shippable shape but are already in the CMS
+  const idsToFilterOut = ['michael-piccioli', 'arielle-tango'];
+
   return (
     <Fragment>
       <AppMetaTags
@@ -63,21 +66,24 @@ const Landing: React.FC = () => {
             <Fragment key={category.categoryId}>
               <Heading2 id={category.categoryId}>{category.header}</Heading2>
               <CardsContainer spacing={cardGridSpacing}>
-                {caseStudies.map(caseStudy => (
-                  <Grid
-                    container
-                    item
-                    xs={12}
-                    sm={6}
-                    key={caseStudy.caseStudyId}
-                  >
-                    <CaseStudyCard
-                      key={caseStudy.caseStudyId}
-                      cardContent={caseStudy}
-                      url={url}
-                    />
-                  </Grid>
-                ))}
+                {caseStudies.map(
+                  caseStudy =>
+                    !idsToFilterOut.includes(caseStudy.caseStudyId) && (
+                      <Grid
+                        container
+                        item
+                        xs={12}
+                        sm={6}
+                        key={caseStudy.caseStudyId}
+                      >
+                        <CaseStudyCard
+                          key={caseStudy.caseStudyId}
+                          cardContent={caseStudy}
+                          url={url}
+                        />
+                      </Grid>
+                    ),
+                )}
               </CardsContainer>
             </Fragment>
           );
