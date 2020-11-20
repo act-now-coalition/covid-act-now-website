@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import {
   ChartHeader,
   ChartDescription,
-  ChartLocationName,
   BetaTag,
   ChartHeaderWrapper,
 } from './ChartsHolder.style';
@@ -16,6 +15,7 @@ import {
   getMetricStatusText,
 } from 'common/metric';
 import MetricChart from 'components/Charts/MetricChart';
+import { Subtitle } from 'components/Typography';
 
 //TODO (chelsi): Use Projections.hasMetric() helper to get rid of the check for props.data
 
@@ -46,7 +46,7 @@ function ChartBlock(props: {
           <ShareButtons chartIdentifier={metric} {...props.shareButtonProps} />
         )}
       </ChartHeaderWrapper>
-      <ChartLocationName>{projection.locationName}</ChartLocationName>
+      <Subtitle>{projection.locationName}</Subtitle>
       <ChartDescription>
         {getMetricStatusText(metric, projections)}
       </ChartDescription>
