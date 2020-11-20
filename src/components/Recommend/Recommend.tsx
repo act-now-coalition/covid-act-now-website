@@ -3,7 +3,6 @@ import { Hidden } from '@material-ui/core';
 import {
   Wrapper,
   HeaderCopy,
-  LocationName,
   Intro,
   RecommendationsContainer,
   RecommendationWrapper,
@@ -30,6 +29,7 @@ import { trackRecommendationsEvent } from 'common/utils/recommend';
 import * as ModalStyle from './RecommendModal.style';
 import ExternalLink from 'components/ExternalLink';
 import { sortBy } from 'lodash';
+import { Subtitle } from 'components/Typography';
 
 const { header, footer } = mainContent;
 const { federalTaskForce, harvard } = modalContent;
@@ -53,7 +53,7 @@ const Header = (props: {
   return (
     <Fragment>
       <HeaderCopy>{header}</HeaderCopy>
-      <LocationName>for {locationName}</LocationName>
+      <Subtitle>for {locationName}</Subtitle>
       <Intro>
         These recommendations match the guidelines set by{' '}
         <strong>{federalTaskForce.sourceName}</strong> and{' '}
