@@ -6,8 +6,8 @@ import {
   CriterionHeader,
   CriterionDescription,
   CriteriaList,
-  ListHeader,
   ListSubheader,
+  ListHeader,
   Content,
   KickerWrapper,
 } from './CriteriaExplanation.style';
