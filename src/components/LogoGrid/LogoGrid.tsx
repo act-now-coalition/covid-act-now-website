@@ -51,7 +51,10 @@ export const PartnerLogoGrid = () => {
       <Grid container item xs={12} sm={4} justify="center">
         <Grid item>
           <ExternalLink href="https://globalhealth.harvard.edu/">
-            <Logo src="/images/harvard.png" />
+            <Logo
+              src="/images/harvard.png"
+              alt="Harvard Global Health Institute logo"
+            />
           </ExternalLink>
         </Grid>
       </Grid>
