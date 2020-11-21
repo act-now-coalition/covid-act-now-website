@@ -16,7 +16,7 @@ function getHash(item: TocItem) {
 const SidebarContents: React.FC<{ items: TocItem[] }> = ({ items }) => {
   const { hash, pathname } = useLocation();
   return (
-    <nav>
+    <aside>
       <Styles.TopLevelList>
         {items.map(topLevelItem => (
           <li key={topLevelItem.to}>
@@ -43,7 +43,7 @@ const SidebarContents: React.FC<{ items: TocItem[] }> = ({ items }) => {
           </li>
         ))}
       </Styles.TopLevelList>
-    </nav>
+    </aside>
   );
 };
 
