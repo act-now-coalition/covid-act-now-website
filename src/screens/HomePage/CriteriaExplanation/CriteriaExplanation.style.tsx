@@ -3,7 +3,6 @@ import { Typography, Box } from '@material-ui/core';
 import palette from 'assets/theme/palette';
 import { BetaTag } from 'components/LocationPage/ChartsHolder.style';
 import { COLOR_MAP } from 'common/colors';
-import { Subtitle1 } from 'components/Typography';
 
 export const CriteriaList = styled.div`
   display: flex;
