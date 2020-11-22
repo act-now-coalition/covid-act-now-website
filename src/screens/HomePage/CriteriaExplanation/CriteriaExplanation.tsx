@@ -7,10 +7,10 @@ import {
   CriterionDescription,
   CriteriaList,
   ListSubheader,
-  ListHeader,
   Content,
   KickerWrapper,
 } from './CriteriaExplanation.style';
+import { Subtitle1 } from 'components/Typography';
 
 const Kicker = (props: {
   number: string;
@@ -29,8 +29,8 @@ const Kicker = (props: {
 const CriteriaExplanation = (props: { isMobile: Boolean }) => {
   return (
     <Wrapper>
-      <ListHeader>How we determine risk levels</ListHeader>
-      <ListSubheader>Key metrics</ListSubheader>
+      <Subtitle1 align="center">How we determine risk levels</Subtitle1>
+      <ListSubheader>Key indicators</ListSubheader>
       <CriteriaList>
         <Criterion>
           <Kicker isMobile={props.isMobile} title="Metric 1" number="1" />

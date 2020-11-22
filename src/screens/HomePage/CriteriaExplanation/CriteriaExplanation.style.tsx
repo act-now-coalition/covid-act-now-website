@@ -3,7 +3,7 @@ import { Typography, Box } from '@material-ui/core';
 import palette from 'assets/theme/palette';
 import { BetaTag } from 'components/LocationPage/ChartsHolder.style';
 import { COLOR_MAP } from 'common/colors';
-import { Subtitle } from 'components/Typography';
+import { Subtitle1 } from 'components/Typography';
 
 export const CriteriaList = styled.div`
   display: flex;
@@ -109,10 +109,6 @@ export const CriterionDescription = styled(Typography)`
   @media (min-width: 600px) {
     margin-bottom: 0.75rem;
   }
-`;
-
-export const ListHeader = styled(Subtitle)`
-  text-align: center;
 `;
 
 export const ListSubheader = styled(Typography)`

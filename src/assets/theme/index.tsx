@@ -18,7 +18,7 @@ const colors: ThemeColors = {
 };
 
 interface ThemeFonts {
-  subtitle: FlattenSimpleInterpolation;
+  subtitle1: FlattenSimpleInterpolation;
   disclaimer: FlattenSimpleInterpolation;
   link: FlattenSimpleInterpolation;
 }
@@ -27,7 +27,7 @@ interface ThemeFonts {
  * High-level typography groups
  */
 const fonts: ThemeFonts = {
-  subtitle: css`
+  subtitle1: css`
     color: ${COLOR_MAP.GRAY_BODY_COPY};
     text-transform: uppercase;
     letter-spacing: 0.01em;

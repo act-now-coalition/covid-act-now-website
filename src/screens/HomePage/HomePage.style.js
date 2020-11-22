@@ -1,9 +1,8 @@
 import styled from 'styled-components';
-import { Typography, Box } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import palette from 'assets/theme/palette';
-import { COLOR_MAP } from 'common/colors';
 import { mobileBreakpoint } from 'assets/theme/sizes';
-import { Subtitle } from 'components/Typography';
+import { Subtitle1 } from 'components/Typography';
 
 export const SearchBarThermometerWrapper = styled(Box)`
   display: flex;
@@ -23,7 +22,7 @@ export const PartnerSection = styled.div`
   padding: 0 1rem 1rem;
 `;
 
-export const PartnerHeader = styled(Subtitle)`
+export const PartnerHeader = styled(Subtitle1)`
   padding-top: 2.5rem;
   margin-top: 2.5rem;
   border-top: 1px solid ${palette.lightGray};
@@ -31,7 +30,7 @@ export const PartnerHeader = styled(Subtitle)`
   margin-bottom: 1rem;
 `;
 
-export const FeaturedHeader = styled(Subtitle)`
+export const FeaturedHeader = styled(Subtitle1)`
   margin-top: 4rem;
   text-align: center;
   margin-bottom: 1rem;

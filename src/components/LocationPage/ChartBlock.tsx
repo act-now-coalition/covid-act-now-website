@@ -15,7 +15,7 @@ import {
   getMetricStatusText,
 } from 'common/metric';
 import MetricChart from 'components/Charts/MetricChart';
-import { Subtitle } from 'components/Typography';
+import { Subtitle1 } from 'components/Typography';
 
 //TODO (chelsi): Use Projections.hasMetric() helper to get rid of the check for props.data
 
@@ -46,7 +46,7 @@ function ChartBlock(props: {
           <ShareButtons chartIdentifier={metric} {...props.shareButtonProps} />
         )}
       </ChartHeaderWrapper>
-      <Subtitle>{projection.locationName}</Subtitle>
+      <Subtitle1>{projection.locationName}</Subtitle1>
       <ChartDescription>
         {getMetricStatusText(metric, projections)}
       </ChartDescription>

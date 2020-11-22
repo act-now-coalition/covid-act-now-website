@@ -29,7 +29,7 @@ import { trackRecommendationsEvent } from 'common/utils/recommend';
 import * as ModalStyle from './RecommendModal.style';
 import ExternalLink from 'components/ExternalLink';
 import { sortBy } from 'lodash';
-import { Subtitle } from 'components/Typography';
+import { Subtitle1 } from 'components/Typography';
 
 const { header, footer } = mainContent;
 const { federalTaskForce, harvard } = modalContent;
@@ -53,7 +53,7 @@ const Header = (props: {
   return (
     <Fragment>
       <HeaderCopy>{header}</HeaderCopy>
-      <Subtitle>for {locationName}</Subtitle>
+      <Subtitle1>for {locationName}</Subtitle1>
       <Intro>
         These recommendations match the guidelines set by{' '}
         <strong>{federalTaskForce.sourceName}</strong> and{' '}

@@ -26,7 +26,7 @@ import { sliderNumberToFilterMap } from 'components/Compare/Filters';
 import { getComparePageUrl, getCompareShareImageUrl } from 'common/urls';
 import { EventAction } from 'components/Analytics';
 import { MoreInfoButton } from 'components/SharedComponents';
-import { Subtitle } from 'components/Typography';
+import { Subtitle1 } from 'components/Typography';
 
 function trackShare(label: string) {
   trackCompareEvent(EventAction.SHARE, label);
@@ -234,7 +234,7 @@ const CompareTable = (props: {
                 onShareOnLinkedin={() => trackShare(`Linkedin: ${trackLabel}`)}
               />
             </Header>
-            {props.stateName && <Subtitle>{compareSubheader}</Subtitle>}
+            {props.stateName && <Subtitle1>{compareSubheader}</Subtitle1>}
           </HeaderWrapper>
           {!disableFilters && (
             <Filters

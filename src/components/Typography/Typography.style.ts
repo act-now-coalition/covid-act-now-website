@@ -1,9 +1,12 @@
 import styled from 'styled-components';
-import theme from 'assets/theme';
 import Typography from '@material-ui/core/Typography';
 
-export const Subtitle = styled(Typography).attrs(props => ({
+/**
+ * https://material-ui.com/api/typography/
+ */
+
+export const Subtitle1 = styled(Typography).attrs(props => ({
   variant: 'body1',
 }))`
-  ${theme.fonts.subtitle};
+  ${props => props.theme.fonts.subtitle1};
 `;

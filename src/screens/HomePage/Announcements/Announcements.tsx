@@ -9,12 +9,12 @@ import {
   ReadMoreButton,
   ViewAllLink,
 } from './Announcements.style';
-import { Subtitle } from 'components/Typography';
+import { Subtitle1 } from 'components/Typography';
 
 const Announcements = () => {
   return (
     <Wrapper>
-      <Subtitle>Announcements</Subtitle>
+      <Subtitle1>Announcements</Subtitle1>
       <AnnouncementIntro>
         Introducing v2 of the Covid Act Now API
       </AnnouncementIntro>
