@@ -23,7 +23,7 @@ import { SelectorWrapper } from 'components/Header/HomePageHeader.style';
 import CompareMain from 'components/Compare/CompareMain';
 import Explore from 'components/Explore';
 import { formatMetatagDate } from 'common/utils';
-import { getRandomStateFipsList } from './utils';
+import { getLocationFipsCodesForExplore } from './utils';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -67,7 +67,7 @@ export default function HomePage() {
     window.scrollTo(0, 0);
   };
 
-  const [initialFipsList] = useState(getRandomStateFipsList());
+  const [initialFipsList] = useState(getLocationFipsCodesForExplore(6));
 
   const exploreSectionRef = useRef(null);
 
@@ -101,7 +101,7 @@ export default function HomePage() {
               <Explore
                 title="Cases, Deaths and Hospitalizations"
                 initialFipsList={initialFipsList}
-                initialChartIndigenousPopulations={true}
+                initialChartIndigenousPopulations={false}
               />
             </Section>
             <SectionWrapper ref={indicatorsRef}>
