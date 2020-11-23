@@ -34,81 +34,83 @@ const MarianaIslands = ({ fill, onMouseEnter, onMouseLeave }) => {
   );
 };
 
-const USACountyMap = ({ stateClickHandler, setTooltipContent, condensed }) => {
-  const locationSummaries = useSummaries();
+const USACountyMap = React.memo(
+  ({ stateClickHandler, setTooltipContent, condensed }) => {
+    const locationSummaries = useSummaries();
 
-  const getFillColor = geo => {
-    const summary = (locationSummaries && locationSummaries[geo.id]) || null;
-    return colorFromLocationSummary(summary);
-  };
+    const getFillColor = geo => {
+      const summary = (locationSummaries && locationSummaries[geo.id]) || null;
+      return colorFromLocationSummary(summary);
+    };
 
-  const projection = geoAlbersUsaTerritories()
-    .scale(1000)
-    .translate([400, 300]);
+    const projection = geoAlbersUsaTerritories()
+      .scale(1000)
+      .translate([400, 300]);
 
-  const onMouseLeave = () => setTooltipContent('');
+    const onMouseLeave = () => setTooltipContent('');
 
-  return (
-    <USMapWrapper condensed={condensed}>
-      {/** Map with shaded background colors for states. */}
-      <USStateMapWrapper>
-        <ComposableMap data-tip="" projection={projection}>
-          <Geographies geography={STATES_JSON}>
-            {({ geographies }) =>
-              geographies
-                .filter(geo => isStateFips(geo.id))
-                .map(geo => {
-                  const { name } = geo.properties;
-                  const fipsCode = geo.id;
-                  const stateCode = getStateCode(name);
-                  const stateUrl = `/${getCanonicalUrl(fipsCode)}`;
-                  const locationName = getLocationNameForFips(fipsCode);
+    return (
+      <USMapWrapper condensed={condensed}>
+        {/** Map with shaded background colors for states. */}
+        <USStateMapWrapper>
+          <ComposableMap data-tip="" projection={projection}>
+            <Geographies geography={STATES_JSON}>
+              {({ geographies }) =>
+                geographies
+                  .filter(geo => isStateFips(geo.id))
+                  .map(geo => {
+                    const { name } = geo.properties;
+                    const fipsCode = geo.id;
+                    const stateCode = getStateCode(name);
+                    const stateUrl = `/${getCanonicalUrl(fipsCode)}`;
+                    const locationName = getLocationNameForFips(fipsCode);
 
-                  // Using a custom SVG to place the northern mariana islands to increase
-                  // accessibility due to the small size.
-                  if (stateCode === 'MP') {
-                    return (
+                    // Using a custom SVG to place the northern mariana islands to increase
+                    // accessibility due to the small size.
+                    if (stateCode === 'MP') {
+                      return (
+                        <Link
+                          key={stateCode}
+                          to={stateUrl}
+                          aria-label={locationName}
+                        >
+                          <MarianaIslands
+                            key={geo.rsmKey}
+                            onMouseEnter={() => setTooltipContent(name)}
+                            onMouseLeave={onMouseLeave}
+                            onClick={() => stateClickHandler(name)}
+                            fill={getFillColor(geo)}
+                          />
+                        </Link>
+                      );
+                    }
+                    return stateCode ? (
                       <Link
                         key={stateCode}
                         to={stateUrl}
                         aria-label={locationName}
                       >
-                        <MarianaIslands
+                        <Geography
                           key={geo.rsmKey}
+                          geography={geo}
                           onMouseEnter={() => setTooltipContent(name)}
                           onMouseLeave={onMouseLeave}
                           onClick={() => stateClickHandler(name)}
                           fill={getFillColor(geo)}
+                          stroke="white"
+                          role="img"
                         />
                       </Link>
-                    );
-                  }
-                  return stateCode ? (
-                    <Link
-                      key={stateCode}
-                      to={stateUrl}
-                      aria-label={locationName}
-                    >
-                      <Geography
-                        key={geo.rsmKey}
-                        geography={geo}
-                        onMouseEnter={() => setTooltipContent(name)}
-                        onMouseLeave={onMouseLeave}
-                        onClick={() => stateClickHandler(name)}
-                        fill={getFillColor(geo)}
-                        stroke="white"
-                        role="img"
-                      />
-                    </Link>
-                  ) : null;
-                })
-            }
-          </Geographies>
-        </ComposableMap>
-      </USStateMapWrapper>
-      {locationSummaries && <ScreenshotReady />}
-    </USMapWrapper>
-  );
-};
+                    ) : null;
+                  })
+              }
+            </Geographies>
+          </ComposableMap>
+        </USStateMapWrapper>
+        {locationSummaries && <ScreenshotReady />}
+      </USMapWrapper>
+    );
+  },
+);
 
 export default USACountyMap;
