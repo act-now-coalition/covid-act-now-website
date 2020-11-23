@@ -1,6 +1,6 @@
 import React from 'react';
 import Banner from './Banner';
-import { SurveyButton } from './Banner.style';
+import { ContainedButton } from './Banner.style';
 import { Link } from 'react-router-dom';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 
@@ -14,14 +14,14 @@ const trackClick = () => {
 
 const renderDonationButton = () => (
   <Link to="/donate" id="donate-homepage-banner" onClick={trackClick}>
-    <SurveyButton
+    <ContainedButton
       variant="contained"
       color="primary"
       disableRipple
       disableFocusRipple
     >
       Donate Now
-    </SurveyButton>
+    </ContainedButton>
   </Link>
 );
 

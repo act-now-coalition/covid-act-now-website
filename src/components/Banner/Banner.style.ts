@@ -56,7 +56,11 @@ export const ButtonContainer = styled(Grid)`
   }
 `;
 
-export const SurveyButton = styled(MuiButton)`
+export const ContainedButton = styled(MuiButton).attrs(props => ({
+  disableRipple: true,
+  disableFocusRipple: true,
+  variant: 'contained',
+}))`
   &.MuiButton-containedPrimary {
     display: inline-block;
     color: ${colorButton};
