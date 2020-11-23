@@ -25,7 +25,7 @@ import CompareMain from 'components/Compare/CompareMain';
 import Explore from 'components/Explore';
 import { formatMetatagDate } from 'common/utils';
 import { getRandomStateFipsList } from './utils';
-import { ArticleBanner } from 'components/Banner';
+import { ThirdWaveBanner } from 'components/Banner';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -82,7 +82,7 @@ export default function HomePage() {
         pageDescription={getPageDescription()}
       />
       <BannerContainer>
-        <ArticleBanner />
+        <ThirdWaveBanner />
       </BannerContainer>
       <HomePageHeader
         indicatorsLinkOnClick={() => scrollTo(indicatorsRef.current)}

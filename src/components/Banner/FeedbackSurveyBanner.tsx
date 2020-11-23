@@ -12,14 +12,7 @@ export function getFeedbackSurveyUrl(source: string) {
 
 const renderButton = () => (
   <ExternalLink href={getFeedbackSurveyUrl('org')}>
-    <ContainedButton
-      variant="contained"
-      color="primary"
-      disableRipple
-      disableFocusRipple
-    >
-      Take our survey
-    </ContainedButton>
+    <ContainedButton color="primary">Take our survey</ContainedButton>
   </ExternalLink>
 );
 

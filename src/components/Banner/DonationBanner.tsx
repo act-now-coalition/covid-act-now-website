@@ -14,14 +14,7 @@ const trackClick = () => {
 
 const renderDonationButton = () => (
   <Link to="/donate" id="donate-homepage-banner" onClick={trackClick}>
-    <ContainedButton
-      variant="contained"
-      color="primary"
-      disableRipple
-      disableFocusRipple
-    >
-      Donate Now
-    </ContainedButton>
+    <ContainedButton color="primary">Donate Now</ContainedButton>
   </Link>
 );
 
