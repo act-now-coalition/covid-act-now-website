@@ -52,12 +52,12 @@ export const MapToggle = styled.div<{ isActive: boolean }>`
   align-items: center;
   border-radius: 4px;
   margin-left: 1rem;
-  color: ${props => (props.isActive ? 'white' : palette.secondary.main)};
+  color: ${props => (props.isActive ? 'white' : palette.primary.main)};
   background: ${props =>
-    props.isActive ? palette.secondary.main : 'transparent'};
+    props.isActive ? palette.primary.main : 'transparent'};
 
   svg path {
-    fill: ${props => (props.isActive ? 'white' : palette.secondary.main)};
+    fill: ${props => (props.isActive ? 'white' : palette.primary.main)};
   }
 `;
 

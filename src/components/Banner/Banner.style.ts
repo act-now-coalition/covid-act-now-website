@@ -73,7 +73,7 @@ export const FeatureBannerButton = styled(MuiButton)`
 
   &:first-child {
     color: white;
-    background-color: ${COLOR_MAP.BLUE};
+    background-color: ${theme.palette.secondary.main};
     border: none;
   }
 

@@ -39,8 +39,8 @@ export const TabStyle = css`
 
   // NavLink injects the "active" class when the route is a match
   &.active {
-    color: ${palette.secondary.main};
-    border-bottom: solid 2px ${palette.secondary.main};
+    color: ${palette.primary.main};
+    border-bottom: solid 2px ${palette.primary.main};
   }
 `;
 

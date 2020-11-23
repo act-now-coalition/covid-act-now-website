@@ -113,7 +113,7 @@ export default function EmbedPreview({ open, onClose, county }) {
                   >
                     <EmbedButton
                       bolder
-                      color="secondary"
+                      color="primary"
                       variant="contained"
                       style={{ marginBottom: '0.8rem' }}
                     >
@@ -131,7 +131,7 @@ export default function EmbedPreview({ open, onClose, county }) {
                   >
                     <EmbedButton
                       bolder
-                      color="secondary"
+                      color="primary"
                       variant="contained"
                       style={{ marginBottom: '0.8rem' }}
                     >

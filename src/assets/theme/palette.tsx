@@ -37,15 +37,15 @@ export default {
   lightBlue: '#3BBCE6',
   primary: {
     contrastText: black,
-    dark: white,
-    main: white,
-    light: white,
-  },
-  secondary: {
-    contrastText: white,
     dark: '#009e53',
     main: '#00d07d',
     light: '#61ffb0',
+  },
+  secondary: {
+    contrastText: white,
+    dark: '#3BBCE6',
+    main: '#3BBCE6',
+    light: '#3BBCE6',
   },
   success: {
     contrastText: white,

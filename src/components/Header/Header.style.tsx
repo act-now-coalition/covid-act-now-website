@@ -53,7 +53,7 @@ export const BlackBar = styled(Box)`
 `;
 
 export const RedBar = styled.div`
-  background-color: ${palette.secondary.main};
+  background-color: ${palette.primary.main};
   margin: 0;
   padding: 0.8rem;
   height: auto;

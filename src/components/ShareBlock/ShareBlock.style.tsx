@@ -45,7 +45,7 @@ export const ShareInstructionBody = styled(Typography)<{
 
 export const ShareRow = styled.div<{ newsletter?: Boolean }>`
   background-color: ${props =>
-    props.newsletter ? '#FBFBFB' : palette.secondary.main};
+    props.newsletter ? '#FBFBFB' : palette.primary.main};
   color: ${props => (props.newsletter ? palette.black : palette.white)};
   padding: 4.5rem 1rem;
 

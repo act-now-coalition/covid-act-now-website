@@ -47,9 +47,6 @@ export const Subtitle = styled.div`
 
 export const Tabs = styled(MuiTabs)`
   margin-top: ${theme.spacing(2)}px;
-  .MuiTabs-indicator {
-    background-color: ${colorPalette.lightBlue};
-  }
 
   border-bottom: solid 1px ${theme.palette.grey[300]};
 `;

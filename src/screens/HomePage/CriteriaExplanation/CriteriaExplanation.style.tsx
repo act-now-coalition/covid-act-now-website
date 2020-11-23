@@ -61,7 +61,7 @@ export const KickerWrapper = styled(Box)`
 `;
 
 export const KickerContent = styled.span`
-  color: ${palette.secondary.main};
+  color: ${palette.primary.main};
   font-weight: 700;
   text-transform: uppercase;
   border: 1px solid #f2f2f2;

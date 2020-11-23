@@ -14,27 +14,27 @@ const MobileMenu: React.FC<{ open: boolean; closeMenu: () => void }> = ({
   return (
     <StyledMenu open={open}>
       <Link to="/" onClick={closeMenu}>
-        <MapIcon color={palette.secondary.main} />
+        <MapIcon color={palette.primary.main} />
         <span>Map</span>
       </Link>
       <Link to="/learn" onClick={closeMenu}>
-        <FAQIcon color={palette.secondary.main} />
+        <FAQIcon color={palette.primary.main} />
         <span>Learn</span>
       </Link>
       <Link to="/tools" onClick={closeMenu}>
-        <FAQIcon color={palette.secondary.main} />
+        <FAQIcon color={palette.primary.main} />
         <span>Tools</span>
       </Link>
       <a href="https://blog.covidactnow.org" onClick={closeMenu}>
-        <BlogIcon color={palette.secondary.main} />
+        <BlogIcon color={palette.primary.main} />
         <span>Blog</span>
       </a>
       <Link to="/about" onClick={closeMenu}>
-        <FAQIcon color={palette.secondary.main} />
+        <FAQIcon color={palette.primary.main} />
         <span>About</span>
       </Link>
       <Link to="/contact" onClick={closeMenu}>
-        <FAQIcon color={palette.secondary.main} />
+        <FAQIcon color={palette.primary.main} />
         <span>Contact Us</span>
       </Link>
     </StyledMenu>
