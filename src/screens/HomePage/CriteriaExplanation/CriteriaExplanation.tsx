@@ -30,10 +30,10 @@ const CriteriaExplanation = (props: { isMobile: Boolean }) => {
   return (
     <Wrapper>
       <ListHeader>How we determine risk levels</ListHeader>
-      <ListSubheader>Key indicators</ListSubheader>
+      <ListSubheader>Key metrics</ListSubheader>
       <CriteriaList>
         <Criterion>
-          <Kicker isMobile={props.isMobile} title="Indicator 1" number="1" />
+          <Kicker isMobile={props.isMobile} title="Metric 1" number="1" />
           <Content>
             <CriterionHeader>Daily new cases</CriterionHeader>
             <CriterionDescription>
@@ -42,7 +42,7 @@ const CriteriaExplanation = (props: { isMobile: Boolean }) => {
           </Content>
         </Criterion>
         <Criterion>
-          <Kicker isMobile={props.isMobile} title="Indicator 2" number="2" />
+          <Kicker isMobile={props.isMobile} title="Metric 2" number="2" />
           <Content>
             <CriterionHeader>Infection Rate</CriterionHeader>
             <CriterionDescription>
@@ -51,7 +51,7 @@ const CriteriaExplanation = (props: { isMobile: Boolean }) => {
           </Content>
         </Criterion>
         <Criterion>
-          <Kicker isMobile={props.isMobile} title="Indicator 3" number="3" />
+          <Kicker isMobile={props.isMobile} title="Metric 3" number="3" />
           <Content>
             <CriterionHeader>Positive Test Rate</CriterionHeader>
             <CriterionDescription>
@@ -60,7 +60,7 @@ const CriteriaExplanation = (props: { isMobile: Boolean }) => {
           </Content>
         </Criterion>
         <Criterion>
-          <Kicker isMobile={props.isMobile} title="Indicator 4" number="4" />
+          <Kicker isMobile={props.isMobile} title="Metric 4" number="4" />
           <Content>
             <CriterionHeader>ICU Headroom Used</CriterionHeader>
             <CriterionDescription>
@@ -70,7 +70,7 @@ const CriteriaExplanation = (props: { isMobile: Boolean }) => {
           </Content>
         </Criterion>
         <Criterion>
-          <Kicker isMobile={props.isMobile} title="Indicator 5" number="5" />
+          <Kicker isMobile={props.isMobile} title="Metric 5" number="5" />
           <Content>
             <CriterionHeader>Tracers Hired</CriterionHeader>
             <CriterionDescription>
