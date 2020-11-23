@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../../App.css'; /* optional for styling like the :hover pseudo-class */
 import { useHistory } from 'react-router-dom';
 import { REVERSED_STATES } from 'common';
@@ -7,6 +7,7 @@ import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { Legend, LegendItem } from './Legend';
 import USACountyMap from './USACountyMap';
 import { MAP_FILTERS } from '../../screens/LocationPage/Enums/MapFilterEnums';
+import ReactTooltip from 'react-tooltip';
 import { MapInstructions, MobileLineBreak } from './Map.style';
 
 // TODO(@pablo): We might want to move this to LOCATION_SUMMARY_LEVELS
@@ -21,6 +22,7 @@ function Map({
   isMiniMap = false,
 }) {
   const history = useHistory();
+  const [content, setContent] = useState('');
 
   const goToStatePage = page => {
     window.scrollTo(0, 0);
@@ -73,7 +75,11 @@ function Map({
         </Legend>
       )}
       <div className="us-state-map">
-        <USACountyMap condensed={hideLegend} stateClickHandler={handleClick} />
+        <USACountyMap
+          condensed={hideLegend}
+          setTooltipContent={setContent}
+          stateClickHandler={handleClick}
+        />
       </div>
       {!hideInstructions && (
         <MapInstructions $isMiniMap={isMiniMap}>
@@ -81,6 +87,7 @@ function Map({
           <MobileLineBreak /> and county info.
         </MapInstructions>
       )}
+      <ReactTooltip>{content}</ReactTooltip>
     </div>
   );
 }
