@@ -15,7 +15,7 @@ const trackClick = () => {
 const articleURL = '/';
 
 const renderButton = () => (
-  <Link to={articleURL} id="donate-homepage-banner" onClick={trackClick}>
+  <Link to={articleURL} id="3rd-wave-banner" onClick={trackClick}>
     <ContainedButton color="primary">Learn more</ContainedButton>
   </Link>
 );
