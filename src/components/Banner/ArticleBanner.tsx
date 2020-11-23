@@ -4,7 +4,7 @@ import { ContainedButton } from './Banner.style';
 import { Link } from 'react-router-dom';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 
-const BANNER_COPY =
+export const BANNER_COPY =
   'The U.S. is in a third COVID wave. Exercise extra caution in order to reduce your risk of infection, to avoid infecting others, and to prevent an overwhelming of our healthcare systems.';
 
 const trackClick = () => {
@@ -20,8 +20,6 @@ const renderButton = () => (
   </Link>
 );
 
-export const ThirdWaveBanner: React.FC = () => (
-  <Banner message={BANNER_COPY} renderButton={renderButton} />
-);
+export const ThirdWaveBanner: React.FC = () => <Banner message={BANNER_COPY} />;
 
 export default ThirdWaveBanner;
