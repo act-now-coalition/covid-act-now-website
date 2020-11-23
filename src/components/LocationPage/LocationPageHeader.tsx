@@ -33,10 +33,8 @@ import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
 import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
 import { LEVEL_COLOR } from 'common/colors';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import WarningIcon from '@material-ui/icons/Warning';
 import { Metric } from 'common/metric';
-import ExternalLink from 'components/ExternalLink';
 import { BANNER_COPY } from 'components/Banner/ThirdWaveBanner';
 
 const NewFeatureCopy = (props: {
