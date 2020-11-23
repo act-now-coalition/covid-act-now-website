@@ -68,6 +68,7 @@
     "sharp": "^0.25.2",
     "styled-components": "^5.0.1",
     "tar": "^6.0.1",
+    "tinygradient": "^1.1.2",
     "uuid": "^8.3.0"
   },
   "scripts": {

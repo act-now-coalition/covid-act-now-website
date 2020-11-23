@@ -8,7 +8,6 @@ import {
 } from 'screens/HomePage/HomePageThermometer.style';
 import { Level } from 'common/level';
 import { LEVEL_COLOR } from 'common/colors';
-import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 
 const ThermometerRow = (props: {
   text: string;
@@ -27,29 +26,29 @@ const HomePageThermometer = () => {
   const thermometerContent = [
     {
       level: Level.CRITICAL,
-      text: `${LOCATION_SUMMARY_LEVELS[Level.CRITICAL].summary}`,
+      text: `25 +`,
       levelColor: `${LEVEL_COLOR[Level.CRITICAL]}`,
     },
     {
       level: Level.HIGH,
-      text: `${LOCATION_SUMMARY_LEVELS[Level.HIGH].summary}`,
+      text: `10 - 25`,
       levelColor: `${LEVEL_COLOR[Level.HIGH]}`,
     },
     {
       level: Level.MEDIUM,
-      text: `${LOCATION_SUMMARY_LEVELS[Level.MEDIUM].summary}`,
+      text: `1 - 10`,
       levelColor: `${LEVEL_COLOR[Level.MEDIUM]}`,
     },
     {
       level: Level.LOW,
-      text: `${LOCATION_SUMMARY_LEVELS[Level.LOW].summary}`,
+      text: `0 - 1`,
       levelColor: `${LEVEL_COLOR[Level.LOW]}`,
     },
   ];
 
   return (
     <Content>
-      <Title>Risk levels</Title>
+      <Title>Daily New Cases Per 100k</Title>
       {thermometerContent.map((row, i) => (
         <ThermometerRow
           key={`level-${i}`}
