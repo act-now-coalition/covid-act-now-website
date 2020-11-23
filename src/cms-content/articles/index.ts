@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { Markdown, sanitizeID } from '../utils';
-import indigenousPeoplesDay from './indigenous-peoples-day.json';
+// import indigenousPeoplesDay from './indigenous-peoples-day.json';
 
 interface ArticleMain {
   articleID: string;
@@ -27,7 +27,9 @@ function sanitizeArticle(article: ArticleJSON): Article {
   };
 }
 
-const articleList: ArticleJSON[] = [indigenousPeoplesDay];
+const articleList: ArticleJSON[] = [
+  // indigenousPeoplesDay
+];
 
 const articles: Article[] = articleList.map(sanitizeArticle);
 export default articles;
