@@ -10,7 +10,7 @@ const topBarHeight = 64;
 
 const fontCss = css`
   font-family: Roboto;
-  font-size: 15px;
+  font-size: 1rem;
   font-weight: 400;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
 `;
@@ -29,7 +29,7 @@ export const TopLevelList = styled.ul`
   padding-inline-start: 0;
   margin-top: 1.25rem;
   li {
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
   }
 `;
 
@@ -63,7 +63,7 @@ export const InnerList = styled(ScrollSpy)`
   margin-top: ${theme.spacing(2)}px;
   padding-inline-start: ${theme.spacing(2) + theme.spacing(3)}px;
   li {
-    margin-bottom: ${theme.spacing(2)}px;
+    margin-bottom: 0.8rem;
     &.active a {
       ${activeCss}
     }

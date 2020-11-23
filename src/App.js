@@ -111,8 +111,8 @@ export default function App() {
               <Route exact path="/faq" component={Faq} />
               <Route exact path="/glossary" component={Glossary} />
               <Route path="/case-studies" component={CaseStudies} />
-
               {/* /state/ routes are deprecated but still supported. */}
+
               <Route exact path="/state/:stateId" component={LocationPage} />
               <Route
                 exact
@@ -123,7 +123,9 @@ export default function App() {
               <Route path="/about" component={About} />
               <Route path="/tools" component={Tools} />
               {/* Keeping the /resources URL active in case linked elsewhere */}
-              <Route path="/resources" component={Tools} />
+              <Route path="/resources">
+                <Redirect to="/tools" />
+              </Route>
               <Route path="/contact" component={Contact} />
               <Route path="/terms" component={Terms} />
               <Route path="/privacy" component={Privacy} />

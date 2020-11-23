@@ -108,6 +108,7 @@ export const StylesMarkdown = css`
 
   img {
     max-width: 100%;
+    max-height: 450px;
   }
 
   blockquote {
