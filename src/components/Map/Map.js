@@ -24,29 +24,38 @@ function Map({
   const history = useHistory();
   const [content, setContent] = useState('');
 
-  const goToStatePage = page => {
-    window.scrollTo(0, 0);
-    history.push(page);
-  };
+  const goToStatePage = React.useCallback(
+    page => {
+      window.scrollTo(0, 0);
+      history.push(page);
+    },
+    [history],
+  );
 
-  const handleClick = stateName => {
-    // externally provided click handler
-    if (onClick) {
-      return onClick(stateName);
-    }
+  // TODO(michael): Since we wrap every state in a <Link> we may not need this
+  // onClick handler anymore (which would mean we don't need setMobileMenuOpen,
+  // setMapOption, or onClick anymore either!)
+  const handleClick = React.useCallback(
+    stateName => {
+      // externally provided click handler
+      if (onClick) {
+        return onClick(stateName);
+      }
 
-    const stateCode = REVERSED_STATES[stateName];
+      const stateCode = REVERSED_STATES[stateName];
 
-    goToStatePage(`/us/${stateCode.toLowerCase()}`);
+      goToStatePage(`/us/${stateCode.toLowerCase()}`);
 
-    if (setMapOption) {
-      setMapOption(MAP_FILTERS.STATE);
-    }
+      if (setMapOption) {
+        setMapOption(MAP_FILTERS.STATE);
+      }
 
-    if (setMobileMenuOpen) {
-      setMobileMenuOpen(false);
-    }
-  };
+      if (setMobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    },
+    [onClick, goToStatePage, setMapOption, setMobileMenuOpen],
+  );
 
   return (
     <div className="Map">
