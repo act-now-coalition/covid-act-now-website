@@ -78,6 +78,7 @@ const USACountyMap = React.memo(
         {/** Map with shaded background colors for states. */}
         <USStateMapWrapper>
           <ComposableMap data-tip="" projection={projection}>
+            {/*
             <Geographies geography={COUNTIES_JSON}>
               {({ geographies }) =>
                 geographies.map(geo => {
@@ -92,6 +93,7 @@ const USACountyMap = React.memo(
                 })
               }
             </Geographies>
+            */}
             <Geographies geography={STATES_JSON}>
               {({ geographies }) =>
                 geographies
@@ -134,7 +136,7 @@ const USACountyMap = React.memo(
                           onMouseEnter={() => setTooltipContent(name)}
                           onMouseLeave={onMouseLeave}
                           onClick={() => stateClickHandler(name)}
-                          fill="#00000000"
+                          fill={getFillColor(geo)}
                           stroke="white"
                           role="img"
                         />
