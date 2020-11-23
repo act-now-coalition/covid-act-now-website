@@ -4,6 +4,7 @@ import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import { colorFromLocationSummary } from 'common/colors';
 import { geoAlbersUsaTerritories } from 'geo-albers-usa-territories';
 import STATES_JSON from './data/states-10m.json';
+import COUNTIES_JSON from './data/counties-10m.json';
 import { USMapWrapper, USStateMapWrapper } from './Map.style';
 import { useSummaries } from 'common/location_summaries';
 import { ScreenshotReady } from 'components/Screenshot';
@@ -54,6 +55,20 @@ const USACountyMap = React.memo(
         {/** Map with shaded background colors for states. */}
         <USStateMapWrapper>
           <ComposableMap data-tip="" projection={projection}>
+            <Geographies geography={COUNTIES_JSON}>
+              {({ geographies }) =>
+                geographies.map(geo => {
+                  return (
+                    <Geography
+                      key={geo.rsmKey}
+                      geography={geo}
+                      fill={getFillColor(geo)}
+                      strokeWidth={0}
+                    />
+                  );
+                })
+              }
+            </Geographies>
             <Geographies geography={STATES_JSON}>
               {({ geographies }) =>
                 geographies
@@ -96,7 +111,7 @@ const USACountyMap = React.memo(
                           onMouseEnter={() => setTooltipContent(name)}
                           onMouseLeave={onMouseLeave}
                           onClick={() => stateClickHandler(name)}
-                          fill={getFillColor(geo)}
+                          fill="#00000000"
                           stroke="white"
                           role="img"
                         />
