@@ -17,8 +17,7 @@ function sortByCaseIncidenceDesc(stateInfo: SummaryForCompare) {
 }
 
 export function getLocationFipsCodesForExplore(numStates: number) {
-  const stateData = getAllStates();
-  return chain(stateData)
+  return chain(getAllStates())
     .sortBy(sortByCaseIncidenceDesc)
     .take(numStates)
     .map(stateInfo => stateInfo.locationInfo.state_fips_code)
