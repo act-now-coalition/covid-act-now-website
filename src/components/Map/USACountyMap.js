@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
-import { colorFromLocationSummary } from 'common/colors';
+import * as tinygradient from 'tinygradient';
 import { geoAlbersUsaTerritories } from 'geo-albers-usa-territories';
 import STATES_JSON from './data/states-10m.json';
 import { USMapWrapper, USStateMapWrapper } from './Map.style';
@@ -13,6 +13,7 @@ import {
   getStateCode,
   isStateFips,
 } from 'common/locations';
+import { Metric } from 'common/metric';
 
 /**
  * SVG element to represent the Northern Mariana Islands on the USA Country Map as a
@@ -40,7 +41,29 @@ const USACountyMap = React.memo(
 
     const getFillColor = geo => {
       const summary = (locationSummaries && locationSummaries[geo.id]) || null;
-      return colorFromLocationSummary(summary);
+      const caseDensity = summary?.metrics?.[Metric.CASE_DENSITY]?.value;
+      if (!caseDensity) {
+        return '#00d474';
+      }
+
+      var gradient = tinygradient([
+        { color: '#00d474', pos: 0 },
+        { color: '#ffc900', pos: 0.01 },
+        { color: '#ff9600', pos: 0.1 },
+        { color: '#ff0034', pos: 0.25 },
+        { color: '#42010b', pos: 1 },
+      ]);
+      var gradientPercent = caseDensity / 100;
+      if (gradientPercent > 1) {
+        gradientPercent = 1;
+      } else if (gradientPercent < 0) {
+        gradientPercent = 0;
+      }
+
+      const color = gradient.rgbAt(gradientPercent);
+      const colorString = `rgb(${color._r}, ${color._g}, ${color._b})`;
+
+      return colorString;
     };
 
     const projection = geoAlbersUsaTerritories()
