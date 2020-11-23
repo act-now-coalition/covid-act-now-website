@@ -96,7 +96,9 @@
     "send-emails": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/send_emails.ts",
     "send-test-email": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/send-test-email.ts",
     "report-alert-emails": "ts-node-script -r tsconfig-paths/register scripts/alert_emails_report/generate-report.ts",
-    "generate-county-history-data": "ts-node-script -r tsconfig-paths/register scripts/county_history_data/generate.ts"
+    "generate-county-history-data": "ts-node-script -r tsconfig-paths/register scripts/county_history_data/generate.ts",
+    "storybook": "start-storybook -p 6006 -s public --no-dll",
+    "build-storybook": "build-storybook -s public --no-dll"
   },
   "lint-staged": {
     "{src,scripts,firebase/functions/src,}/**/*.{css,scss,js,ts,tsx}": [
@@ -121,8 +123,16 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.12.3",
     "@cypress/code-coverage": "^1.14.0",
     "@cypress/instrument-cra": "^1.1.0",
+    "@storybook/addon-a11y": "^6.0.28",
+    "@storybook/addon-actions": "^6.0.28",
+    "@storybook/addon-essentials": "^6.0.28",
+    "@storybook/addon-links": "^6.0.28",
+    "@storybook/node-logger": "^6.0.28",
+    "@storybook/preset-create-react-app": "^3.1.5",
+    "@storybook/react": "^6.0.28",
     "@testing-library/jest-dom": "^4.2.4",
     "@types/d3-fetch": "^1.1.5",
     "@types/d3-scale": "^2.2.0",
@@ -143,6 +153,7 @@
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
     "axios": "^0.19.2",
+    "babel-loader": "8.0.6",
     "cross-env": "^7.0.2",
     "cypress": "^4.2.0",
     "delay": "^4.3.0",
@@ -160,6 +171,7 @@
     "nyc": "^15.0.0",
     "prettier": "2.0.2",
     "puppeteer": "^3.0.4",
+    "react-is": "^17.0.1",
     "remark": "^13.0.0",
     "serve": "^11.3.0",
     "start-server-and-test": "^1.10.11",
