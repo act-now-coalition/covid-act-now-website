@@ -69,6 +69,14 @@ export const HOSPITAL_USAGE_LEVEL_INFO_MAP: LevelInfoMap = {
     color: COLOR_MAP.RED.BASE,
     detail: () => SHORT_DESCRIPTION_HIGH,
   },
+  // TODO(michael): Comment and clean up.
+  [Level.SUPER_CRITICAL]: {
+    level: Level.SUPER_CRITICAL,
+    upperLimit: LIMIT_HIGH,
+    name: HIGH_NAME,
+    color: COLOR_MAP.RED.BASE,
+    detail: () => SHORT_DESCRIPTION_HIGH,
+  },
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,
     upperLimit: 0,

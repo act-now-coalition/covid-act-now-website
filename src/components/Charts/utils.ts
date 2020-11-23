@@ -23,7 +23,9 @@ export interface Region {
   color: string;
 }
 
+// NOTE: valueFrom and valueTo could be Infinity and then the 1e-3 check doesn't work.
 const isNotEmpty = (region: Region) =>
+  region.valueFrom !== region.valueTo &&
   Math.abs(region.valueFrom - region.valueTo) > 1e-3;
 
 export const getChartRegions = (
@@ -31,7 +33,7 @@ export const getChartRegions = (
   maxY: number,
   zones: LevelInfoMap,
 ): Region[] => {
-  const regions = [
+  let regions = [
     {
       valueFrom: minY,
       valueTo: zones[Level.LOW].upperLimit,
@@ -52,13 +54,22 @@ export const getChartRegions = (
     },
     {
       valueFrom: zones[Level.HIGH].upperLimit,
-      valueTo: maxY,
+      valueTo: zones[Level.CRITICAL].upperLimit,
       name: zones[Level.CRITICAL].name,
       color: zones[Level.CRITICAL].color,
     },
+    {
+      valueFrom: zones[Level.CRITICAL].upperLimit,
+      valueTo: zones[Level.SUPER_CRITICAL].upperLimit,
+      name: zones[Level.SUPER_CRITICAL].name,
+      color: zones[Level.SUPER_CRITICAL].color,
+    },
   ];
 
-  return regions.filter(isNotEmpty);
+  // Remove empty regions and then cap the last one to maxY.
+  regions = regions.filter(isNotEmpty);
+  regions[regions.length - 1].valueTo = maxY;
+  return regions;
 };
 
 const isBetween = (zoneLow: LevelInfo, zoneHigh: LevelInfo, value: number) =>
@@ -77,7 +88,11 @@ export const getZoneByValue = (value: number, zones: LevelInfoMap) => {
     return zones[Level.HIGH];
   }
 
-  return zones[Level.CRITICAL];
+  if (isBetween(zones[Level.HIGH], zones[Level.CRITICAL], value)) {
+    return zones[Level.CRITICAL];
+  }
+
+  return zones[Level.SUPER_CRITICAL];
 };
 
 export const computeTickPositions = (
@@ -92,8 +107,9 @@ export const computeTickPositions = (
     zones[Level.LOW].upperLimit,
     zones[Level.MEDIUM].upperLimit,
     zones[Level.HIGH].upperLimit,
+    zones[Level.CRITICAL].upperLimit,
     maxTick,
-  ];
+  ].filter(t => t !== Infinity);
 };
 
 export const getAxisLimits = (

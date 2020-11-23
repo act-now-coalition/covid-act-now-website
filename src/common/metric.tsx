@@ -4,7 +4,7 @@ import * as Hospitalizations from 'common/metrics/hospitalizations';
 import * as ContactTracing from 'common/metrics/contact_tracing';
 import * as CaseDensity from 'common/metrics/case_density';
 import { Projections } from 'common/models/Projections';
-import { Level, LevelInfo } from 'common/level';
+import { ALL_LEVELS, Level, LevelInfo } from 'common/level';
 import { fail } from 'common/utils';
 import { MetricDefinition } from './metrics/interfaces';
 import { formatDecimal, formatPercent } from 'common/utils';
@@ -46,9 +46,8 @@ export function getLevelInfo(metric: Metric, value: number | null): LevelInfo {
 
 export function getLevel(metric: Metric, value: number | null): Level {
   const levelInfoMap = ALL_METRICS_LEVEL_INFO_MAP[metric];
-  // TODO(michael): Is there a typesafe way to enumerate enum values? :-/
   if (value === null) return Level.UNKNOWN;
-  for (const level of [Level.LOW, Level.MEDIUM, Level.HIGH, Level.CRITICAL]) {
+  for (const level of ALL_LEVELS) {
     if (value <= levelInfoMap[level].upperLimit) {
       return level;
     }

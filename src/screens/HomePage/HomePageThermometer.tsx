@@ -26,6 +26,11 @@ const ThermometerRow = (props: {
 const HomePageThermometer = () => {
   const thermometerContent = [
     {
+      level: Level.SUPER_CRITICAL,
+      text: `${LOCATION_SUMMARY_LEVELS[Level.SUPER_CRITICAL].summary}`,
+      levelColor: `${LEVEL_COLOR[Level.SUPER_CRITICAL]}`,
+    },
+    {
       level: Level.CRITICAL,
       text: `${LOCATION_SUMMARY_LEVELS[Level.CRITICAL].summary}`,
       levelColor: `${LEVEL_COLOR[Level.CRITICAL]}`,

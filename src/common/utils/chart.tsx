@@ -20,5 +20,9 @@ export function levelText(
       return mediumHighText;
     case Level.CRITICAL:
       return highText;
+    case Level.SUPER_CRITICAL:
+      // TODO(michael): Do we need to customize this?  We don't actually use this
+      // function for case density, so it probably doesn't matter.
+      return highText;
   }
 }

@@ -360,6 +360,7 @@ export const ThermometerContainer = styled(Box)`
   max-width: 20px;
 `;
 
+// TODO(michael): Is this used?
 export const Triangle = styled(Box)<{ alarmLevel: number }>`
   width: 0;
   height: 0;

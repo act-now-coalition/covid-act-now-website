@@ -62,6 +62,11 @@ function Map({
       {!hideLegend && (
         <Legend hideLegendTitle={hideLegendTitle}>
           <LegendItem
+            key={'legend-5'}
+            title={LOCATION_SUMMARY_LEVELS[Level.SUPER_CRITICAL].summary}
+            color={LOCATION_SUMMARY_LEVELS[Level.SUPER_CRITICAL].color}
+          />
+          <LegendItem
             key={'legend-4'}
             title={LOCATION_SUMMARY_LEVELS[Level.CRITICAL].summary}
             color={LOCATION_SUMMARY_LEVELS[Level.CRITICAL].color}

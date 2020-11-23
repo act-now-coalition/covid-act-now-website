@@ -7,5 +7,7 @@ export interface MetricDefinition {
   metricName: string;
   extendedMetricName: string;
   metricNameForCompare: string;
+
+  // TODO(michael): Is this used?
   renderThermometer: () => React.ReactElement;
 }

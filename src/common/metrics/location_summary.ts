@@ -6,12 +6,14 @@ const LOW_NAME = 'Low';
 const MEDIUM_NAME = 'Medium';
 const MEDIUM_HIGH_NAME = 'High';
 const HIGH_NAME = 'Critical';
+const SUPER_CRITICAL_NAME = 'Super Critical';
 const UNKNOWN = 'Unknown';
 
 const LEGEND_SUMMARY_LOW = 'On track to contain COVID';
 const LEGEND_SUMMARY_MEDIUM = 'Slow disease growth';
 const LEGEND_SUMMARY_MEDIUM_HIGH = 'At risk of outbreak';
 const LEGEND_SUMMARY_HIGH = 'Active or imminent outbreak';
+const LEGEND_SUMMARY_SUPER_CRITICAL = 'Uncontrolled outbreak';
 
 export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
   [Level.LOW]: {
@@ -49,6 +51,15 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     color: COLOR_MAP.RED.BASE,
     detail: locationName =>
       `${locationName} is either actively experiencing an outbreak or is at extreme risk. COVID cases are exponentially growing and/or ${locationName}’s COVID preparedness is significantly below international standards.`,
+  },
+  [Level.SUPER_CRITICAL]: {
+    level: Level.SUPER_CRITICAL,
+    upperLimit: 0,
+    name: SUPER_CRITICAL_NAME,
+    summary: LEGEND_SUMMARY_SUPER_CRITICAL,
+    color: COLOR_MAP.PURPLE_DARK,
+    detail: locationName =>
+      `${locationName} is experiencing an uncontrolled outbreak. COVID cases have been exponentially growing.`,
   },
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,

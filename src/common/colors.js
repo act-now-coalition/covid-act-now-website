@@ -37,6 +37,8 @@ export const COLOR_MAP = {
   },
   GRAY_ICON: '#bdbdbd',
   PURPLE: '#5900EA',
+  // TODO(michael): Unify purples?
+  PURPLE_DARK: '#631c80', //'#4b1854',
   LIGHTGRAY: '#f2f2f2',
   LIGHTGRAY_BG: '#fafafa',
 };
@@ -46,6 +48,7 @@ export const LEVEL_COLOR = {
   [Level.MEDIUM]: COLOR_MAP.ORANGE.BASE,
   [Level.HIGH]: COLOR_MAP.ORANGE_DARK.BASE,
   [Level.CRITICAL]: COLOR_MAP.RED.BASE,
+  [Level.SUPER_CRITICAL]: COLOR_MAP.PURPLE_DARK,
   [Level.UNKNOWN]: COLOR_MAP.GRAY.BASE,
 };
 
@@ -74,5 +77,6 @@ export const LEVEL_COLOR_CONTACT_TRACING = {
   [Level.MEDIUM]: COLOR_MAP.ORANGE_DARK.BASE,
   [Level.HIGH]: COLOR_MAP.ORANGE.BASE,
   [Level.CRITICAL]: COLOR_MAP.GREEN.BASE,
+  [Level.SUPER_CRITICAL]: COLOR_MAP.GREEN.BASE,
   [Level.UNKNOWN]: COLOR_MAP.GRAY.BASE,
 };
