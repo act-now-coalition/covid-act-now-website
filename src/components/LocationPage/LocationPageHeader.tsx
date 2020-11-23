@@ -34,9 +34,10 @@ import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
 import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
 import { LEVEL_COLOR } from 'common/colors';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import WarningIcon from '@material-ui/icons/Warning';
 import { Metric } from 'common/metric';
 import ExternalLink from 'components/ExternalLink';
-import { BANNER_COPY } from 'components/Banner/ArticleBanner';
+import { BANNER_COPY } from 'components/Banner/ThirdWaveBanner';
 
 const NewFeatureCopy = (props: {
   locationName: string;
@@ -129,9 +130,6 @@ const LocationPageHeader = (props: {
     },
   ];
 
-  const usingCMSData =
-    props.projections.primary.testPositiveRateSource === 'CMSTesting';
-
   return (
     <Fragment>
       <ColoredHeaderBanner bgcolor={fillColor} />
@@ -179,30 +177,14 @@ const LocationPageHeader = (props: {
               </SectionColumn>
             </SectionHalf>
             <SectionHalf>
-              <InfoOutlinedIcon />
-              {usingCMSData ? (
-                <SectionColumn isUpdateCopy>
-                  <ColumnTitle isUpdateCopy>Update</ColumnTitle>
-                  <Copy isUpdateCopy={true}>
-                    As of November 4th, we are using positive test rate data for{' '}
-                    {locationName} from the U.S. Department of Health & Human
-                    Services as aggregated by the Centers for Medicare &
-                    Medicaid Services. See{' '}
-                    <ExternalLink href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit">
-                      our data sources
-                    </ExternalLink>{' '}
-                    for more info.
-                  </Copy>
-                </SectionColumn>
-              ) : (
-                <SectionColumn isUpdateCopy>
-                  <ColumnTitle isUpdateCopy>announcement</ColumnTitle>
-                  <NewFeatureCopy
-                    locationName={locationName}
-                    onNewUpdateClick={props.onNewUpdateClick}
-                  />
-                </SectionColumn>
-              )}
+              <WarningIcon />
+              <SectionColumn isUpdateCopy>
+                <ColumnTitle isUpdateCopy>announcement</ColumnTitle>
+                <NewFeatureCopy
+                  locationName={locationName}
+                  onNewUpdateClick={props.onNewUpdateClick}
+                />
+              </SectionColumn>
             </SectionHalf>
           </HeaderSection>
           <LocationHeaderStats

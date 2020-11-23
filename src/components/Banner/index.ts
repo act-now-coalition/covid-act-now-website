@@ -5,7 +5,7 @@ import FeedbackSurveyBanner, {
 import DonationBanner from './DonationBanner';
 import VoteBanner from './VoteBanner';
 import FeatureBanner from './FeatureBanner';
-import ArticleBanner from './ArticleBanner';
+import ArticleBanner from './ThirdWaveBanner';
 
 export default Banner;
 export {
