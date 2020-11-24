@@ -7,7 +7,7 @@ import {
   Content,
 } from 'screens/HomePage/HomePageThermometer.style';
 import { Level } from 'common/level';
-import { LEVEL_COLOR } from 'common/colors';
+import { COLOR_MAP, LEVEL_COLOR } from 'common/colors';
 
 const ThermometerRow = (props: {
   text: string;
@@ -26,7 +26,13 @@ const HomePageThermometer = () => {
   const thermometerContent = [
     {
       level: Level.CRITICAL,
-      text: `25 +`,
+      text: `100 +`,
+      levelColor: `#42010b`,
+    },
+    {
+      // TODO(michael): HACK. I'm setting this to high so that it doesn't get rounded corners.
+      level: Level.HIGH,
+      text: `25 - 100`,
       levelColor: `${LEVEL_COLOR[Level.CRITICAL]}`,
     },
     {
