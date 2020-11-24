@@ -75,7 +75,6 @@ collections:
       - label: Summary
         name: summary
         widget: markdown
-        required: false
         hint: Short summary
       - label: Author
         name: author

@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { Markdown, sanitizeID } from '../utils';
-import { keyBy } from 'lodash';
+import { keyBy, sortBy } from 'lodash';
 import indigenousPeoplesDay from './covid-impact-majority-native-american-counties.json';
 import thirdSurge from './third-surge.json';
 import animap from './animap.json';
@@ -10,7 +10,7 @@ interface ArticleMain {
   articleID: string;
   header: string;
   subtitle?: string;
-  summary?: Markdown;
+  summary: Markdown;
   author?: Markdown;
   body: Markdown;
 }
@@ -38,7 +38,13 @@ const articleList: ArticleJSON[] = [
   canCompare,
 ];
 
-const articles: Article[] = articleList.map(sanitizeArticle);
+// Makes sure articles are sorted by date (most recent first)
+const sortedArticleList = sortBy(
+  articleList,
+  article => article.date,
+).reverse();
+
+const articles: Article[] = sortedArticleList.map(sanitizeArticle);
 
 // Articles indexed by articleId for easier access on the
 // individual article route
