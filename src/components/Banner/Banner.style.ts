@@ -56,7 +56,13 @@ export const ButtonContainer = styled(Grid)`
   }
 `;
 
-export const SurveyButton = styled(MuiButton)`
+// High-emphasis buttons, distinguished by elevation and fill
+// https://material-ui.com/components/buttons/#contained-buttons
+export const ContainedButton = styled(MuiButton).attrs(props => ({
+  disableRipple: true,
+  disableFocusRipple: true,
+  variant: 'contained',
+}))`
   &.MuiButton-containedPrimary {
     display: inline-block;
     color: ${colorButton};
