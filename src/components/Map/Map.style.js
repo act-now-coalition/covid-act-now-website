@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
 import { COLOR_MAP } from 'common/colors';
 
+// TODO(pablo): We don't need these wrapping divs anymore
 export const USMapWrapper = styled.div``;
 
 export const USCountyMapWrapper = styled.div``;
