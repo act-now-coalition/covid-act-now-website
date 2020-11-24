@@ -3,10 +3,14 @@ import { useParams } from 'react-router-dom';
 import { formatMetatagDate } from 'common/utils';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import Breadcrumbs from 'components/Breadcrumbs';
-import { MarkdownContent, Heading3 } from 'components/Markdown';
+import { MarkdownContent } from 'components/Markdown';
 import PageContent from 'components/PageContent';
 import { learnPages } from 'cms-content/learn';
-import { LearnHeading1, BreadcrumbsContainer } from '../Learn.style';
+import {
+  LearnHeading1,
+  BreadcrumbsContainer,
+  SmallSubtext,
+} from '../Learn.style';
 import { articlesById } from 'cms-content/articles';
 
 const Article = () => {
@@ -24,14 +28,14 @@ const Article = () => {
       <AppMetaTags
         canonicalUrl={`/articles/${articleId}`}
         pageTitle={`Article: ${header}`}
-        pageDescription={`${metatagDate}`}
+        pageDescription={`${metatagDate}`} // add description
       />
       <PageContent sidebarItems={learnPages}>
         <BreadcrumbsContainer>
           <Breadcrumbs item={{ to: '/articles', label: 'Articles' }} />
         </BreadcrumbsContainer>
         <LearnHeading1>{header}</LearnHeading1>
-        <Heading3>Published {date}</Heading3>
+        <SmallSubtext source={`Published ${date}`} />
         <MarkdownContent source={body} />
       </PageContent>
     </Fragment>

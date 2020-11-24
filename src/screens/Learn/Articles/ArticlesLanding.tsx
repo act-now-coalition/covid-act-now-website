@@ -3,7 +3,7 @@ import { useRouteMatch } from 'react-router-dom';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import Breadcrumbs from 'components/Breadcrumbs';
 import PageContent from 'components/PageContent';
-import { MarkdownContent, Heading2 } from 'components/Markdown';
+import { Heading2, Paragraph } from 'components/Markdown';
 import { formatMetatagDate } from 'common/utils';
 import { learnPages } from 'cms-content/learn';
 import { BreadcrumbsContainer, LearnHeading1 } from '../Learn.style';
@@ -20,21 +20,21 @@ const ArticlesLanding = () => {
     <Fragment>
       <AppMetaTags
         canonicalUrl="/articles"
-        pageTitle={''}
-        pageDescription={`${date} ${''}`}
+        pageTitle={''} // add title
+        pageDescription={`${date} ${''}`} // add description
       />
       <PageContent sidebarItems={learnPages}>
         <BreadcrumbsContainer>
           <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>
         <LearnHeading1>Articles</LearnHeading1>
-        <MarkdownContent source={'Articles intro'} />
         {articles.map(article => {
           return (
             <Fragment>
-              <StyledLink to={`${url}${article.articleID}`}>
+              <StyledLink to={`${url}/${article.articleID}`}>
                 <Heading2>{article.header}</Heading2>
               </StyledLink>
+              <Paragraph>{article.summary}</Paragraph>
               <ButtonContainer>
                 <SectionButton
                   cta="Read on"

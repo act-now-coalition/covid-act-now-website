@@ -29,7 +29,7 @@ function sanitizeArticle(article: ArticleJSON): Article {
   };
 }
 
-const articleList: ArticleJSON[] = [indigenousPeoplesDay, thirdSurge];
+const articleList: ArticleJSON[] = [thirdSurge, indigenousPeoplesDay];
 
 const articles: Article[] = articleList.map(sanitizeArticle);
 
