@@ -38,7 +38,6 @@ const MarianaIslands = ({ fill, onMouseEnter, onMouseLeave }) => {
 
 const USACountyMap = React.memo(
   ({ stateClickHandler, setTooltipContent, condensed, showCounties }) => {
-    console.log('USACountyMap', showCounties);
     const locationSummaries = useSummaries();
 
     const getFillColor = geo => {

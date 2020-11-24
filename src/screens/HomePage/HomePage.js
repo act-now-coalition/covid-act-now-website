@@ -35,8 +35,7 @@ function getPageDescription() {
 export default function HomePage() {
   const shareBlockRef = useRef(null);
   const location = useLocation();
-  const [showCounties, setShowCounties] = useState(true);
-  console.log('HomePage', showCounties);
+  const [showCounties, setShowCounties] = useState(false);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
@@ -103,14 +102,8 @@ export default function HomePage() {
                 leftLabel="States"
                 rightLabel="Counties"
                 checkedValue={showCounties}
-                onChange={() => {
-                  console.log('onChange', !showCounties);
-                  setShowCounties(!showCounties);
-                }}
-                gridOnClick={v => {
-                  console.log('gridOnClick', v);
-                  setShowCounties(v);
-                }}
+                onChange={() => setShowCounties(!showCounties)}
+                gridOnClick={setShowCounties}
               />
             </CountySwitchContainer>
             <Map hideLegend showCounties={showCounties} />

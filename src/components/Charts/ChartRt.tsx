@@ -86,7 +86,6 @@ const ChartRt = ({
 
   const yTicks = computeTickPositions(yAxisMin, yAxisMax, zones);
   const regions = getChartRegions(yAxisMin, yAxisMax, zones);
-  console.log('rt zones', regions);
 
   const lastValidDate = getDate(last(data));
 

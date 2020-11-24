@@ -22,7 +22,6 @@ function Map({
   isMiniMap = false,
   showCounties = false,
 }) {
-  console.log('Map counties', showCounties);
   const history = useHistory();
   const [content, setContent] = useState('');
 
