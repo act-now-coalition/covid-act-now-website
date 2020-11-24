@@ -52,7 +52,7 @@ const USACountyMap = React.memo(
     };
 
     const projection = geoAlbersUsaTerritories()
-      .scale(1000)
+      .scale(1070)
       .translate([400, 300]);
 
     const onMouseLeave = () => setTooltipContent('');
@@ -62,76 +62,78 @@ const USACountyMap = React.memo(
         {/** Map with shaded background colors for states. */}
         <USStateMapWrapper showCounties={showCounties}>
           <ComposableMap data-tip="" projection={projection}>
-            {showCounties && (
-              <Geographies geography={COUNTIES_JSON}>
-                {({ geographies }) =>
-                  geographies.map(geo => {
-                    return (
-                      <Geography
-                        key={geo.rsmKey}
-                        geography={geo}
-                        fill={getFillColor(geo)}
-                        strokeWidth={0}
-                        className={getClassName(geo)}
-                      />
-                    );
-                  })
-                }
-              </Geographies>
-            )}
-            <Geographies geography={STATES_JSON}>
-              {({ geographies }) =>
-                geographies
-                  .filter(geo => isStateFips(geo.id))
-                  .map(geo => {
-                    const { name } = geo.properties;
-                    const fipsCode = geo.id;
-                    const stateCode = getStateCode(name);
-                    const stateUrl = `/${getCanonicalUrl(fipsCode)}`;
-                    const locationName = getLocationNameForFips(fipsCode);
-
-                    // Using a custom SVG to place the northern mariana islands to increase
-                    // accessibility due to the small size.
-                    if (stateCode === 'MP') {
+            <g transform="translate(0, -50)">
+              {showCounties && (
+                <Geographies geography={COUNTIES_JSON}>
+                  {({ geographies }) =>
+                    geographies.map(geo => {
                       return (
+                        <Geography
+                          key={geo.rsmKey}
+                          geography={geo}
+                          fill={getFillColor(geo)}
+                          strokeWidth={0}
+                          className={getClassName(geo)}
+                        />
+                      );
+                    })
+                  }
+                </Geographies>
+              )}
+              <Geographies geography={STATES_JSON}>
+                {({ geographies }) =>
+                  geographies
+                    .filter(geo => isStateFips(geo.id))
+                    .map(geo => {
+                      const { name } = geo.properties;
+                      const fipsCode = geo.id;
+                      const stateCode = getStateCode(name);
+                      const stateUrl = `/${getCanonicalUrl(fipsCode)}`;
+                      const locationName = getLocationNameForFips(fipsCode);
+
+                      // Using a custom SVG to place the northern mariana islands to increase
+                      // accessibility due to the small size.
+                      if (stateCode === 'MP') {
+                        return (
+                          <Link
+                            key={stateCode}
+                            to={stateUrl}
+                            aria-label={locationName}
+                          >
+                            <MarianaIslands
+                              key={geo.rsmKey}
+                              onMouseEnter={() => setTooltipContent(name)}
+                              onMouseLeave={onMouseLeave}
+                              onClick={() => stateClickHandler(name)}
+                              fill={getFillColor(geo)}
+                            />
+                          </Link>
+                        );
+                      }
+                      return stateCode ? (
                         <Link
                           key={stateCode}
                           to={stateUrl}
                           aria-label={locationName}
                         >
-                          <MarianaIslands
+                          <Geography
                             key={geo.rsmKey}
+                            geography={geo}
                             onMouseEnter={() => setTooltipContent(name)}
                             onMouseLeave={onMouseLeave}
                             onClick={() => stateClickHandler(name)}
                             fill={getFillColor(geo)}
+                            fillOpacity={showCounties ? 0 : 1}
+                            stroke="white"
+                            role="img"
+                            className={getClassName(geo)}
                           />
                         </Link>
-                      );
-                    }
-                    return stateCode ? (
-                      <Link
-                        key={stateCode}
-                        to={stateUrl}
-                        aria-label={locationName}
-                      >
-                        <Geography
-                          key={geo.rsmKey}
-                          geography={geo}
-                          onMouseEnter={() => setTooltipContent(name)}
-                          onMouseLeave={onMouseLeave}
-                          onClick={() => stateClickHandler(name)}
-                          fill={getFillColor(geo)}
-                          fillOpacity={showCounties ? 0 : 1}
-                          stroke="white"
-                          role="img"
-                          className={getClassName(geo)}
-                        />
-                      </Link>
-                    ) : null;
-                  })
-              }
-            </Geographies>
+                      ) : null;
+                    })
+                }
+              </Geographies>
+            </g>
           </ComposableMap>
         </USStateMapWrapper>
         {locationSummaries && <ScreenshotReady />}
