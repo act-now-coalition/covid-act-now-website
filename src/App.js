@@ -6,7 +6,6 @@ import {
 } from '@material-ui/core/styles';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { ThemeProvider as ScThemeProvider } from 'styled-components';
-
 import LocationPage from 'screens/LocationPage';
 import HomePage from 'screens/HomePage/HomePage';
 import About from 'screens/About/About';
@@ -111,7 +110,7 @@ export default function App() {
               <Route exact path="/faq" component={Faq} />
               <Route exact path="/glossary" component={Glossary} />
               <Route path="/case-studies" component={CaseStudies} />
-              <Route exact path="/articles" component={Articles} />
+              <Route path="/articles" component={Articles} />
               {/* /state/ routes are deprecated but still supported. */}
 
               <Route exact path="/state/:stateId" component={LocationPage} />

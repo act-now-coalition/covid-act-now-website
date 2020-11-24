@@ -10,7 +10,7 @@ const Articles: React.FC = () => {
       <Route exact path={path}>
         <ArticlesLanding />
       </Route>
-      <Route path={`${path}`}>
+      <Route path={`${path}/:articleId`}>
         <Article />
       </Route>
     </Switch>

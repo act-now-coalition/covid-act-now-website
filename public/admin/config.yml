@@ -55,13 +55,13 @@ collections:
     label_singular: Article
     format: json
     description: Long form articles and posts
-    slug: '{{year}}-{{month}}-{{day}}-{{articleID}}'
+    slug: '{{articleID}}'
     summary: '{{header}}'
     sortable_fields: ['date', 'author', 'header', 'articleID']
     fields:
       - label: Header
         name: header
-        widget: string
+        widget: text
         hint: Title
       - label: Article ID
         name: articleID
@@ -69,16 +69,18 @@ collections:
         hint: 'Short unique identifier for the article (all lowercase, no spaces, separated by dashes). Used to generate the URL (ex: indigenous-peoples-day)'
       - label: Subtitle
         name: subtitle
-        widget: string
+        widget: text
         required: false
         hint: Optional subtitle
       - label: Summary
         name: summary
         widget: markdown
+        required: false
         hint: Short summary
       - label: Author
         name: author
         widget: markdown
+        required: false
         minimal: true
         hint: 'Name of the author or authors (separated by comma, ex: Chelsi Asulin, Igor Kofman)'
       - label: Publish date

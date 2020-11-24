@@ -1,30 +1,25 @@
 import React, { Fragment } from 'react';
 import { useRouteMatch } from 'react-router-dom';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useTheme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import Breadcrumbs from 'components/Breadcrumbs';
-import PageContent, { MobileOnly } from 'components/PageContent';
+import PageContent from 'components/PageContent';
 import { MarkdownContent, Heading2 } from 'components/Markdown';
 import { formatMetatagDate } from 'common/utils';
-import {
-  caseStudiesContent,
-  learnPages,
-  CaseStudyCategory,
-} from 'cms-content/learn';
-// import CaseStudyCard from './CaseStudyCard';
+import { learnPages } from 'cms-content/learn';
 import { BreadcrumbsContainer, LearnHeading1 } from '../Learn.style';
-// import { CardsContainer } from './CaseStudy.style';
-import TableOfContents, { Item } from 'components/TableOfContents';
+import articles from 'cms-content/articles';
+import { StyledLink } from '../CaseStudies/CaseStudyCard.style';
+import SectionButton, { ButtonTheme } from '../Landing/SectionButton';
+import { ButtonContainer } from '../Learn.style';
 
 const ArticlesLanding = () => {
+  let { url } = useRouteMatch();
   const date = formatMetatagDate();
 
   return (
     <Fragment>
       <AppMetaTags
-        canonicalUrl="/case-studies"
+        canonicalUrl="/articles"
         pageTitle={''}
         pageDescription={`${date} ${''}`}
       />
@@ -34,9 +29,22 @@ const ArticlesLanding = () => {
         </BreadcrumbsContainer>
         <LearnHeading1>Articles</LearnHeading1>
         <MarkdownContent source={'Articles intro'} />
-        {/* <MobileOnly>
-          <TableOfContents items={getSectionItems(categories)} />
-        </MobileOnly> */}
+        {articles.map(article => {
+          return (
+            <Fragment>
+              <StyledLink to={`${url}${article.articleID}`}>
+                <Heading2>{article.header}</Heading2>
+              </StyledLink>
+              <ButtonContainer>
+                <SectionButton
+                  cta="Read on"
+                  redirect={`${url}/${article.articleID}`}
+                  theme={ButtonTheme.WHITE}
+                />
+              </ButtonContainer>
+            </Fragment>
+          );
+        })}
       </PageContent>
     </Fragment>
   );

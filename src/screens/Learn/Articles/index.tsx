@@ -1,5 +1,3 @@
-import Article from './Article';
-import ArticlesLanding from './ArticlesLanding';
+import Articles from './Articles';
 
-export default ArticlesLanding;
-export { Article };
+export default Articles;
