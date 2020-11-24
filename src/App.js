@@ -6,7 +6,6 @@ import {
 } from '@material-ui/core/styles';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { ThemeProvider as ScThemeProvider } from 'styled-components';
-
 import LocationPage from 'screens/LocationPage';
 import HomePage from 'screens/HomePage/HomePage';
 import About from 'screens/About/About';
@@ -28,7 +27,7 @@ import ExternalRedirect from 'components/ExternalRedirect';
 import HandleRedirectTo from 'components/HandleRedirectTo/HandleRedirectTo';
 import Donate from 'screens/Donate/Donate';
 import PageviewTracker from 'components/Analytics';
-import { Faq, Glossary, Landing, CaseStudies } from 'screens/Learn';
+import { Faq, Glossary, Landing, CaseStudies, Articles } from 'screens/Learn';
 import Tools, { COVID_RESPONSE_SIMULATOR_URL } from 'screens/Tools/Tools';
 
 export default function App() {
@@ -111,6 +110,7 @@ export default function App() {
               <Route exact path="/faq" component={Faq} />
               <Route exact path="/glossary" component={Glossary} />
               <Route path="/case-studies" component={CaseStudies} />
+              <Route path="/articles" component={Articles} />
               {/* /state/ routes are deprecated but still supported. */}
 
               <Route exact path="/state/:stateId" component={LocationPage} />
