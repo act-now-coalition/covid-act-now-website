@@ -59,7 +59,7 @@
     {
       "term": "Confidence interval",
       "termId": "confidence-interval",
-      "definition": "A confidence interval is used to express the degree of certainty of a statistic. It is a range of values that is likely to encompass the true value. For example, Covid Act Now reports  a statistic called [infection rate](#infection-growth-rate), also known as [R(t)](#rt). For each R(t) value, we also report a 90 percent confidence interval (CI). For example, if R(t) is 1.17 and has a 90 percent CI between 1.07 and 1.27, that result would be written as 90 percent CI \\[1.07, 1.27]. These numbers denote that there is a 90 percent chance that the true average infection rate calculated for that day is between 1.07 and 1.27.",
+      "definition": "A confidence interval is used to express the degree of certainty of a statistic. It is a range of values that is likely to encompass the true value. For example, Covid Act Now reports a statistic called [infection rate](#infection-growth-rate), also known as [R(t)](#rt). For each R(t) value, we also report a 90 percent confidence interval (CI).\n\nFor example, if R(t) is 1.17 and has a 90 percent CI between 1.07 and 1.27, that result would be written as 90 percent CI \\[1.07, 1.27]. These numbers denote that there is a 90 percent chance that the true average infection rate calculated for that day is between 1.07 and 1.27.",
       "category": "Metrics"
     },
     {
@@ -137,7 +137,7 @@
     {
       "term": "Disease incidence",
       "termId": "disease-incidence",
-      "definition": "Disease incidence is a measure of new confirmed COVID cases per day. It answers the question: “how many new COVID infections were reported in my area?” Incidence is important because it provides a snapshot of the state of COVID in a given community. Disease prevalence is another term you may have read in the news or online. Disease prevalence is not the same as disease incidence. While incidence refers to the number of new confirmed cases on a given day, prevalence refers to the total number of infections which are currently active on a given day.",
+      "definition": "Disease incidence is a measure of new confirmed COVID cases per day. It answers the question: “how many new COVID infections were reported in my area?” Incidence is important because it provides a snapshot of the state of COVID in a given community. \n\nDisease prevalence is another term you may have read in the news or online. Disease prevalence is not the same as disease incidence. While incidence refers to the number of new confirmed cases on a given day, prevalence refers to the total number of infections which are currently active on a given day.",
       "category": "Metrics"
     },
     {
@@ -479,7 +479,7 @@
     {
       "term": "Wave",
       "termId": "wave",
-      "definition": "During a [pandemic](#pandemic), a “wave” is a phenomenon in which there is a period of increased case growth which [peaks](#peak) and is followed by a substantial, sustained reduction in cases. COVID cases seem to come in waves: first wave, second wave, and so on. There is no official definition of when one wave ends and another begins, and COVID has peaked in different states at different times. [Data suggests](https://www.nytimes.com/interactive/2020/10/15/us/coronavirus-cases-us-surge.html) the U.S. on the whole experienced its first peak mid April, second peak in mid July, and is now entering its third wave of cases. The term wave is often used alongside or interchangeably with [surge](#surge), which describes the increase in cases seen before and during the peak of a wave.",
+      "definition": "During a [pandemic](#pandemic), a “wave” is a phenomenon in which there is a period of increased case growth which [peaks](#peak) and is followed by a substantial, sustained reduction in cases. COVID cases seem to come in waves: first wave, second wave, and so on. There is no official definition of when one wave ends and another begins, and COVID has peaked in different states at different times. \n\n[Data suggests](https://www.nytimes.com/interactive/2020/10/15/us/coronavirus-cases-us-surge.html) the U.S. on the whole experienced its first peak mid April, second peak in mid July, and is now entering its third wave of cases. The term wave is often used alongside or interchangeably with [surge](#surge), which describes the increase in cases seen before and during the peak of a wave.",
       "category": "Disease science"
     }
   ],
