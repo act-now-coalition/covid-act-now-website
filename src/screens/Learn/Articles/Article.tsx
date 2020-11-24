@@ -17,7 +17,7 @@ const Article = () => {
   let { articleId } = useParams<{ articleId: string }>();
   const metatagDate = formatMetatagDate();
   const articleContent = articlesById[articleId];
-  const { header, body, date } = articleContent;
+  const { header, body, date, summary } = articleContent;
 
   if (!articleContent) {
     return null;
@@ -27,8 +27,8 @@ const Article = () => {
     <Fragment>
       <AppMetaTags
         canonicalUrl={`/articles/${articleId}`}
-        pageTitle={`Article: ${header}`}
-        pageDescription={`${metatagDate}`} // add description
+        pageTitle={`${header}`}
+        pageDescription={`${metatagDate} ${summary}`}
       />
       <PageContent sidebarItems={learnPages}>
         <BreadcrumbsContainer>

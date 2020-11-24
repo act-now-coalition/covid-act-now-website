@@ -20,8 +20,8 @@ const ArticlesLanding = () => {
     <Fragment>
       <AppMetaTags
         canonicalUrl="/articles"
-        pageTitle={''} // add title
-        pageDescription={`${date} ${''}`} // add description
+        pageTitle={''} // add title when 'article' syntax is confirmed
+        pageDescription={`${date} Explore deeper analysis about how, why, and where COVID is spreading.`}
       />
       <PageContent sidebarItems={learnPages}>
         <BreadcrumbsContainer>
