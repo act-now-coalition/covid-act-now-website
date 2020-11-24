@@ -4,7 +4,7 @@
 backend:
   name: github
   repo: covid-projections/covid-projections
-  branch: casulin/learn-articles-UI
+  branch: pablo/cms-articles-structure
   base_url: https://api.netlify.com
 
 media_folder: 'public/images_cms'
@@ -92,14 +92,6 @@ collections:
         name: body
         widget: markdown
         hint: Content of the article. Use Heading 2 or lower (Heading 1 is used for the title of the article)
-      - label: Metadata title
-        name: metadataTitle
-        widget: text
-        required: false
-      - label: Metadata description
-        name: metadataDescription
-        widget: text
-        required: false
 
   - name: contact
     label: Contact Us
