@@ -3,7 +3,7 @@ import { Markdown, sanitizeID } from '../utils';
 import { keyBy, sortBy } from 'lodash';
 import indigenousPeoplesDay from './covid-impact-majority-native-american-counties.json';
 import thirdSurge from './third-surge.json';
-import animap from './animap.json';
+// import animap from './animap.json';
 import canCompare from './can-compare.json';
 
 interface ArticleMain {
@@ -34,7 +34,7 @@ function sanitizeArticle(article: ArticleJSON): Article {
 const articleList: ArticleJSON[] = [
   thirdSurge,
   indigenousPeoplesDay,
-  animap,
+  // animap,
   canCompare,
 ];
 
