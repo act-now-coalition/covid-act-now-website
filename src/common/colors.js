@@ -16,9 +16,9 @@ export const COLOR_MAP = {
     BASE: '#FF9600',
   },
   RED: {
-    BASE: '#FF0034',
+    BASE: '#D9002C',
     LIGHT: '#FC818F',
-    DARK: '#660015',
+    DARK: '#790019',
   },
   GREEN: {
     // Chosen to match "official" green from logo, etc.
