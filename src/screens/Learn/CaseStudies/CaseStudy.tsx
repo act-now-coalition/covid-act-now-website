@@ -16,13 +16,12 @@ import {
   learnPages,
   caseStudiesContent,
 } from 'cms-content/learn';
-import { LearnHeading1, BreadcrumbsContainer } from '../Learn.style';
 import {
-  Logo,
-  LogoContainer,
-  LearnMoreSection,
-  Author,
-} from './CaseStudy.style';
+  LearnHeading1,
+  BreadcrumbsContainer,
+  SmallSubtext,
+} from '../Learn.style';
+import { Logo, LogoContainer, LearnMoreSection } from './CaseStudy.style';
 
 const { metadataDescription } = caseStudiesContent;
 
@@ -55,7 +54,7 @@ const CaseStudy: React.FC = () => {
         <LogoContainer>
           <Logo src={caseStudy.logoUrl} alt={caseStudy.logoAltText} />
         </LogoContainer>
-        <Author source={fullAuthorText} />
+        <SmallSubtext source={fullAuthorText} />
         <MarkdownContent source={body} />
         {studyCategory && otherCaseStudies.length > 0 && (
           <LearnMoreSection>
