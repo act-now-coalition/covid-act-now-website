@@ -32,6 +32,9 @@ function Map({
     [history],
   );
 
+  // TODO(michael): Since we wrap every state in a <Link> we may not need this
+  // onClick handler anymore (which would mean we don't need setMobileMenuOpen,
+  // setMapOption, or onClick anymore either!)
   const handleClick = React.useCallback(
     stateName => {
       // externally provided click handler
