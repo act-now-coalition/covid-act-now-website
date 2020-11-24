@@ -6,7 +6,7 @@ const LOW_NAME = 'Low';
 const MEDIUM_NAME = 'Medium';
 const MEDIUM_HIGH_NAME = 'High';
 const HIGH_NAME = 'Critical';
-const SUPER_CRITICAL_NAME = 'Super Critical';
+const SUPER_CRITICAL_NAME = 'Extreme';
 const UNKNOWN = 'Unknown';
 
 const LEGEND_SUMMARY_LOW = 'On track to contain COVID';

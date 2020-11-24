@@ -37,8 +37,8 @@ export const COLOR_MAP = {
   },
   GRAY_ICON: '#bdbdbd',
   PURPLE: '#5900EA',
-  // TODO(michael): Unify purples?
-  PURPLE_DARK: '#631c80', //'#4b1854',
+  // TODO(michael): Rename color to match reality.
+  PURPLE_DARK: '#42010b',
   LIGHTGRAY: '#f2f2f2',
   LIGHTGRAY_BG: '#fafafa',
 };

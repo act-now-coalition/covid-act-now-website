@@ -20,7 +20,9 @@ function Map({
   setMapOption,
   onClick = null,
   isMiniMap = false,
+  showCounties = false,
 }) {
+  console.log('Map counties', showCounties);
   const history = useHistory();
   const [content, setContent] = useState('');
 
@@ -93,6 +95,7 @@ function Map({
           condensed={hideLegend}
           setTooltipContent={setContent}
           stateClickHandler={handleClick}
+          showCounties={showCounties}
         />
       </div>
       {!hideInstructions && (

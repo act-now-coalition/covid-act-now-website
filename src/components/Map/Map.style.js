@@ -29,7 +29,8 @@ export const USStateMapWrapper = styled.div`
   bottom: 0;
 
   path:hover {
-    opacity: 0.8;
+    opacity: ${props => (props.showCounties ? 0.25 : 0.8)};
+    fill: ${props => (props.showCounties ? '#fff' : 'inherit')};
     cursor: pointer;
   }
 `;

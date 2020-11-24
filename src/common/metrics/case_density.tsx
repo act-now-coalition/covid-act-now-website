@@ -53,7 +53,7 @@ export const CASE_DENSITY_LEVEL_INFO_MAP: LevelInfoMap = {
   [Level.SUPER_CRITICAL]: {
     level: Level.SUPER_CRITICAL,
     upperLimit: Infinity,
-    name: 'Super Critical',
+    name: 'Extreme',
     color: COLOR_MAP.PURPLE_DARK,
     detail: () => 'Extremely dangerous number of new cases',
   },
