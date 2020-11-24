@@ -1,7 +1,7 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Banner from './Banner';
-import { SurveyButton } from './Banner.style';
+import { ContainedButton } from './Banner.style';
 import ExternalLink from 'components/ExternalLink';
 
 const FEEDBACK_SURVEY_URL = 'https://can386399.typeform.com/to/fCLv9bzl';
@@ -12,14 +12,7 @@ export function getFeedbackSurveyUrl(source: string) {
 
 const renderButton = () => (
   <ExternalLink href={getFeedbackSurveyUrl('org')}>
-    <SurveyButton
-      variant="contained"
-      color="primary"
-      disableRipple
-      disableFocusRipple
-    >
-      Take our survey
-    </SurveyButton>
+    <ContainedButton color="primary">Take our survey</ContainedButton>
   </ExternalLink>
 );
 
