@@ -57,7 +57,7 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     upperLimit: 0,
     name: SUPER_CRITICAL_NAME,
     summary: LEGEND_SUMMARY_SUPER_CRITICAL,
-    color: COLOR_MAP.PURPLE_DARK,
+    color: COLOR_MAP.RED.DARK,
     detail: locationName =>
       `${locationName} is experiencing an uncontrolled outbreak. COVID cases have been exponentially growing.`,
   },
