@@ -1,8 +1,10 @@
 import moment from 'moment';
 import { Markdown, sanitizeID } from '../utils';
+import { keyBy } from 'lodash';
 import indigenousPeoplesDay from './covid-impact-majority-native-american-counties.json';
 import thirdSurge from './third-surge.json';
-import { keyBy } from 'lodash';
+import animap from './animap.json';
+import canCompare from './can-compare.json';
 
 interface ArticleMain {
   articleID: string;
@@ -29,7 +31,12 @@ function sanitizeArticle(article: ArticleJSON): Article {
   };
 }
 
-const articleList: ArticleJSON[] = [thirdSurge, indigenousPeoplesDay];
+const articleList: ArticleJSON[] = [
+  thirdSurge,
+  indigenousPeoplesDay,
+  animap,
+  canCompare,
+];
 
 const articles: Article[] = articleList.map(sanitizeArticle);
 
