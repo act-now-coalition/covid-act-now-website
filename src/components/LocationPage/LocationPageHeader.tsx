@@ -177,7 +177,7 @@ const LocationPageHeader = (props: {
             <SectionHalf>
               <WarningIcon />
               <SectionColumn isUpdateCopy>
-                <ColumnTitle isUpdateCopy>announcement</ColumnTitle>
+                <ColumnTitle isUpdateCopy>alert</ColumnTitle>
                 <NewFeatureCopy
                   locationName={locationName}
                   onNewUpdateClick={props.onNewUpdateClick}
