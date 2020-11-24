@@ -121,7 +121,8 @@ const USACountyMap = React.memo(
                           onMouseEnter={() => setTooltipContent(name)}
                           onMouseLeave={onMouseLeave}
                           onClick={() => stateClickHandler(name)}
-                          fill={showCounties ? '#00000000' : getFillColor(geo)}
+                          fill={getFillColor(geo)}
+                          fillOpacity={showCounties ? 0 : 1}
                           stroke="white"
                           role="img"
                           className={getClassName(geo)}
