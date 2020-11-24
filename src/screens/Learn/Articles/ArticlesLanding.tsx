@@ -37,7 +37,7 @@ const ArticlesLanding = () => {
               <Paragraph>{article.summary}</Paragraph>
               <ButtonContainer>
                 <SectionButton
-                  cta="Read on"
+                  cta="Learn more"
                   redirect={`${url}/${article.articleID}`}
                   theme={ButtonTheme.WHITE}
                 />
