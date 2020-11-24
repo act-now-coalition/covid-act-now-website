@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
-import { ChartLocationNameStyles } from 'components/LocationPage/ChartsHolder.style';
-import { Typography } from '@material-ui/core';
 import ReactMarkdown from 'react-markdown';
 import { FooterLinkStyles } from 'components/Compare/Compare.style';
 import { LinkButton } from 'components/Button';
@@ -36,11 +34,6 @@ export const HeaderCopy = styled.h2`
   font-weight: bold;
   font-size: 1.5rem;
   margin: 0;
-`;
-
-export const LocationName = styled(Typography)`
-  ${ChartLocationNameStyles}
-  margin-bottom: 0;
 `;
 
 export const Intro = styled.p`
