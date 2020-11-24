@@ -15,6 +15,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import {
   Content,
+  CountySwitchContainer,
   SearchBarThermometerWrapper,
   SectionWrapper,
   Section,
@@ -22,6 +23,7 @@ import {
 import { SelectorWrapper } from 'components/Header/HomePageHeader.style';
 import CompareMain from 'components/Compare/CompareMain';
 import Explore from 'components/Explore';
+import { SwitchComponent } from 'components/SharedComponents';
 import { formatMetatagDate } from 'common/utils';
 import { getRandomStateFipsList } from './utils';
 
@@ -33,6 +35,8 @@ function getPageDescription() {
 export default function HomePage() {
   const shareBlockRef = useRef(null);
   const location = useLocation();
+  const [showCounties, setShowCounties] = useState(true);
+  console.log('HomePage', showCounties);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
@@ -94,7 +98,22 @@ export default function HomePage() {
               </SelectorWrapper>
               {!isMobile && <HomePageThermometer />}
             </SearchBarThermometerWrapper>
-            <Map hideLegend />
+            <CountySwitchContainer>
+              <SwitchComponent
+                leftLabel="States"
+                rightLabel="Counties"
+                checkedValue={showCounties}
+                onChange={() => {
+                  console.log('onChange', !showCounties);
+                  setShowCounties(!showCounties);
+                }}
+                gridOnClick={v => {
+                  console.log('gridOnClick', v);
+                  setShowCounties(v);
+                }}
+              />
+            </CountySwitchContainer>
+            <Map hideLegend showCounties={showCounties} />
             {isMobile && <HomePageThermometer />}
             <CompareMain locationsViewable={8} isHomepage />
             <Section ref={exploreSectionRef}>

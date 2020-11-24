@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import * as tinygradient from 'tinygradient';
 import { geoAlbersUsaTerritories } from 'geo-albers-usa-territories';
+import COUNTIES_JSON from './data/counties-10m.json';
 import STATES_JSON from './data/states-10m.json';
 import { USMapWrapper, USStateMapWrapper } from './Map.style';
 import { useSummaries } from 'common/location_summaries';
@@ -36,7 +37,8 @@ const MarianaIslands = ({ fill, onMouseEnter, onMouseLeave }) => {
 };
 
 const USACountyMap = React.memo(
-  ({ stateClickHandler, setTooltipContent, condensed }) => {
+  ({ stateClickHandler, setTooltipContent, condensed, showCounties }) => {
+    console.log('USACountyMap', showCounties);
     const locationSummaries = useSummaries();
 
     const getFillColor = geo => {
@@ -75,8 +77,24 @@ const USACountyMap = React.memo(
     return (
       <USMapWrapper condensed={condensed}>
         {/** Map with shaded background colors for states. */}
-        <USStateMapWrapper>
+        <USStateMapWrapper showCounties={showCounties}>
           <ComposableMap data-tip="" projection={projection}>
+            {showCounties && (
+              <Geographies geography={COUNTIES_JSON}>
+                {({ geographies }) =>
+                  geographies.map(geo => {
+                    return (
+                      <Geography
+                        key={geo.rsmKey}
+                        geography={geo}
+                        fill={getFillColor(geo)}
+                        strokeWidth={0}
+                      />
+                    );
+                  })
+                }
+              </Geographies>
+            )}
             <Geographies geography={STATES_JSON}>
               {({ geographies }) =>
                 geographies
@@ -119,7 +137,7 @@ const USACountyMap = React.memo(
                           onMouseEnter={() => setTooltipContent(name)}
                           onMouseLeave={onMouseLeave}
                           onClick={() => stateClickHandler(name)}
-                          fill={getFillColor(geo)}
+                          fill={showCounties ? '#00000000' : getFillColor(geo)}
                           stroke="white"
                           role="img"
                         />
