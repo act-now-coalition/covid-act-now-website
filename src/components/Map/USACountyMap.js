@@ -61,7 +61,7 @@ const USACountyMap = React.memo(
       <USMapWrapper condensed={condensed}>
         {/** Map with shaded background colors for states. */}
         <USStateMapWrapper showCounties={showCounties}>
-          <ComposableMap data-tip="" projection={projection}>
+          <ComposableMap data-tip="" projection={projection} height={500}>
             <g transform="translate(0, -50)">
               {showCounties && (
                 <Geographies geography={COUNTIES_JSON}>
