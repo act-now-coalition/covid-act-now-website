@@ -72,11 +72,14 @@ function renderStatus(projections: Projections): React.ReactElement {
     currentCaseDensity,
     totalPopulation,
     currentDailyAverageCases,
+    currentCumulativeCases,
   } = projections.primary;
+
   if (
     currentCaseDensity === null ||
     totalPopulation === null ||
-    currentDailyAverageCases === null
+    currentDailyAverageCases === null ||
+    currentCumulativeCases === null
   ) {
     return (
       <Fragment>
@@ -87,33 +90,21 @@ function renderStatus(projections: Projections): React.ReactElement {
     );
   }
 
-  const ESTIMATED_INFECTIONS_FACTOR = 5;
   const newCasesPerDay = currentDailyAverageCases;
   // Try not to round cases/day to zero (since it will probably be >0 per 100k).
   const newCasesPerDayText =
     newCasesPerDay >= 0.1 && newCasesPerDay < 1
       ? formatDecimal(newCasesPerDay, 1)
       : formatInteger(newCasesPerDay);
-  const newCasesPerYear = 365 * newCasesPerDay;
-  const estimatedNewInfectionsPerYear =
-    ESTIMATED_INFECTIONS_FACTOR * newCasesPerYear;
-  const estimatedPercentageNewInfectedPerYear = Math.min(
-    1,
-    estimatedNewInfectionsPerYear / totalPopulation,
-  );
+  const totalCasesPerPopulation = totalPopulation / currentCumulativeCases;
 
   return (
     <Fragment>
       Over the last week, {locationName} has averaged {newCasesPerDayText} new
       confirmed cases per day (<b>{formatDecimal(currentCaseDensity, 1)}</b> for
-      every 100,000 residents). Over the next year, this translates to around{' '}
-      {formatEstimate(newCasesPerYear)} cases and an{' '}
-      <ExternalLink href="https://www.globalhealthnow.org/2020-06/us-cases-10x-higher-reported">
-        estimated
-      </ExternalLink>{' '}
-      {formatEstimate(estimatedNewInfectionsPerYear)} infections (
-      {formatPercent(estimatedPercentageNewInfectedPerYear, 1)} of the
-      population).
+      every 100,000 residents). Since January, at least{' '}
+      <b>1 in {formatInteger(totalCasesPerPopulation)} people</b> have been
+      infected.
     </Fragment>
   );
 }
