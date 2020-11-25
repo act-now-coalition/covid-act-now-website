@@ -22,6 +22,6 @@ export function levelText(
     case Level.CRITICAL:
       return highText;
     case Level.SUPER_CRITICAL:
-      return superCriticalText;
+      return superCriticalText || highText;
   }
 }
