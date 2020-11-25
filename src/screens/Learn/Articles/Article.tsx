@@ -26,13 +26,13 @@ const Article = () => {
   return (
     <Fragment>
       <AppMetaTags
-        canonicalUrl={`/articles/${articleId}`}
+        canonicalUrl={`/deep-dives/${articleId}`}
         pageTitle={`${header}`}
         pageDescription={`${metatagDate} ${summary}`}
       />
       <PageContent sidebarItems={learnPages}>
         <BreadcrumbsContainer>
-          <Breadcrumbs item={{ to: '/articles', label: 'Articles' }} />
+          <Breadcrumbs item={{ to: '/deep-dives', label: 'Deep dives' }} />
         </BreadcrumbsContainer>
         <LearnHeading1>{header}</LearnHeading1>
         <SmallSubtext source={`Published ${date}`} />

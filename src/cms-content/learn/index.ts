@@ -235,8 +235,8 @@ export const learnPages: TocItem[] = [
     })),
   },
   {
-    label: 'Articles',
-    to: '/articles',
+    label: 'Deep dives',
+    to: '/deep-dives',
   },
   {
     label: 'Case studies',
