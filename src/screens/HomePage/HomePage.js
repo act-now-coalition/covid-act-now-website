@@ -30,6 +30,7 @@ import { SwitchComponent } from 'components/SharedComponents';
 import { formatMetatagDate } from 'common/utils';
 import { getLocationFipsCodesForExplore } from './utils';
 import { ThirdWaveBanner } from 'components/Banner';
+import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -78,6 +79,16 @@ export default function HomePage() {
 
   const exploreSectionRef = useRef(null);
 
+  const onClickSwitch = () => {
+    const newShowCounties = !showCounties;
+    setShowCounties(newShowCounties);
+    trackEvent(
+      EventCategory.MAP,
+      EventAction.SELECT,
+      `Select: ${newShowCounties ? 'Counties' : 'States'}`,
+    );
+  };
+
   return (
     <>
       <EnsureSharingIdInUrl />
@@ -122,7 +133,7 @@ export default function HomePage() {
                     leftLabel="States"
                     rightLabel="Counties"
                     checkedValue={showCounties}
-                    onChange={() => setShowCounties(!showCounties)}
+                    onChange={onClickSwitch}
                     gridOnClick={setShowCounties}
                   />
                 </StyledGridItem>
