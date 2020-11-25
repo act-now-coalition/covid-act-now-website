@@ -14,7 +14,6 @@ import {
   getStateCode,
   isStateFips,
 } from 'common/locations';
-import { Level } from 'common/level';
 
 /**
  * SVG element to represent the Northern Mariana Islands on the USA Country Map as a
@@ -45,12 +44,6 @@ const USACountyMap = React.memo(
       return colorFromLocationSummary(summary);
     };
 
-    // TODO: Remove once Josh defined a color for the 5th level
-    const getClassName = geo => {
-      const summary = (locationSummaries && locationSummaries[geo.id]) || null;
-      return summary ? `level-${Level[summary.level]}` : 'level-unknown';
-    };
-
     const projection = geoAlbersUsaTerritories()
       .scale(1070)
       .translate([400, 300]);
@@ -73,7 +66,7 @@ const USACountyMap = React.memo(
                           geography={geo}
                           fill={getFillColor(geo)}
                           strokeWidth={0}
-                          className={getClassName(geo)}
+                          role="img"
                         />
                       );
                     })
@@ -126,7 +119,6 @@ const USACountyMap = React.memo(
                             fillOpacity={showCounties ? 0 : 1}
                             stroke="white"
                             role="img"
-                            className={getClassName(geo)}
                           />
                         </Link>
                       ) : null;
