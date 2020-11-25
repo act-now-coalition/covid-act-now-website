@@ -235,6 +235,10 @@ export const learnPages: TocItem[] = [
     })),
   },
   {
+    label: 'Deep dives',
+    to: '/deep-dives',
+  },
+  {
     label: 'Case studies',
     to: '/case-studies',
     items: caseStudiesContent.categories.map(category => ({

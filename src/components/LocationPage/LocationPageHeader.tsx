@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import CheckIcon from '@material-ui/icons/Check';
+import { Link } from 'react-router-dom';
 import {
   ColoredHeaderBanner,
   Wrapper,
@@ -41,7 +42,11 @@ const NewFeatureCopy = (props: {
   locationName: string;
   onNewUpdateClick: () => void;
 }) => {
-  return <Copy isUpdateCopy>{BANNER_COPY}</Copy>;
+  return (
+    <Copy isUpdateCopy>
+      {BANNER_COPY} <Link to={'/deep-dives/us-third-wave'}>Learn more</Link>.
+    </Copy>
+  );
 };
 
 const LocationPageHeading = (props: { projections: Projections }) => {

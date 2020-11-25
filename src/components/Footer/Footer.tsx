@@ -30,7 +30,7 @@ const Footer = ({ children }: { children: React.ReactNode }) => {
             <Logo />
             <StyledFooterBodyNav>
               <Link to="/">Map</Link>
-              <Link to="/learn">Learn</Link>
+              <Link to="/explained">Explained</Link>
               <Link to="/tools">Tools</Link>
               <ExternalLink href="https://blog.covidactnow.org">
                 Blog

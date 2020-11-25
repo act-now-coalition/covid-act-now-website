@@ -1,0 +1,7 @@
+{
+  "date": "2020-08-13T21:44:25.288Z",
+  "header": "Evolving data and assumptions: Why we are removing our old hospital projections",
+  "summary": "\\*\\*insert summary copy\\*\\*",
+  "body": "[Covid Act Now](https://covidactnow.org/) (CAN) began as a [spreadsheet model](https://docs.google.com/spreadsheets/d/1PTBTp8z49IXexkV02wacWLoyv1A2GtlVFYVqI4APPR8/edit#gid=1190280212) to forecast when hospitals would be overwhelmed, based on whether or not interventions (e.g. shelter-at-home) were put in place. We’ve come a long way since then. As of today, we’ll no longer be showing “Future Hospitalization Projections.”\n\nThese projections were focused on hospital bed capacity, but we’ve since learned that the number of staffed ICU beds is the critical limiting resource. We already have a key indicator for [COVID ICU Headroom](https://blog.covidactnow.org/icu-headroom-used-explained/), which is designed to alert when ICUs might be running out of beds while leaving sufficient time for policymakers to react.\n\nWe will maintain the projections in our API.",
+  "articleID": "hospitalization-projections"
+}

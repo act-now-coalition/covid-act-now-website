@@ -13,6 +13,7 @@ import { MarkdownContent, Heading3 } from 'components/Markdown';
 */
 export const StyledLink = styled(Link)`
   text-decoration: none;
+  color: black;
 `;
 
 export const ArrowIcon = styled(ArrowForwardIosIcon)`
