@@ -41,13 +41,16 @@ export default function HomePage() {
   const shareBlockRef = useRef(null);
   const location = useLocation();
   const [showCounties, setShowCounties] = useState(true);
+  const [autoToggle, setAutoToggle] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowCounties(false);
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, []);
+    const timer = setInterval(() => {
+      if (autoToggle) {
+        setShowCounties(showCounties => !showCounties);
+      }
+    }, 2000);
+    return () => clearInterval(timer);
+  }, [autoToggle]);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
@@ -86,8 +89,8 @@ export default function HomePage() {
 
   const exploreSectionRef = useRef(null);
 
-  const onClickSwitch = () => {
-    const newShowCounties = !showCounties;
+  const onClickSwitch = newShowCounties => {
+    setAutoToggle(false);
     setShowCounties(newShowCounties);
     trackEvent(
       EventCategory.MAP,
@@ -140,8 +143,8 @@ export default function HomePage() {
                     leftLabel="States"
                     rightLabel="Counties"
                     checkedValue={showCounties}
-                    onChange={onClickSwitch}
-                    gridOnClick={setShowCounties}
+                    onChange={() => onClickSwitch(!showCounties)}
+                    gridOnClick={onClickSwitch}
                   />
                 </StyledGridItem>
               </Grid>
