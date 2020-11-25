@@ -59,7 +59,7 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     summary: LEGEND_SUMMARY_SUPER_CRITICAL,
     color: COLOR_MAP.RED.DARK,
     detail: locationName =>
-      `${locationName} is currently experiencing a severe outbreak. Take all possible precautions to avoid potential exposure.`,
+      `${locationName} is currently experiencing a severe outbreak. Take all possible precautions to avoid exposure.`,
   },
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,
