@@ -36,7 +36,7 @@ const MarianaIslands = ({ fill, onMouseEnter, onMouseLeave }) => {
 };
 
 const USACountyMap = React.memo(
-  ({ stateClickHandler, setTooltipContent, condensed, showCounties }) => {
+  ({ stateClickHandler, setTooltipContent, showCounties }) => {
     const locationSummaries = useSummaries();
 
     const getFillColor = geo => {
@@ -51,7 +51,7 @@ const USACountyMap = React.memo(
     const onMouseLeave = () => setTooltipContent('');
 
     return (
-      <USMapWrapper condensed={condensed}>
+      <USMapWrapper>
         {/** Map with shaded background colors for states. */}
         <USStateMapWrapper showCounties={showCounties}>
           <ComposableMap data-tip="" projection={projection} height={500}>

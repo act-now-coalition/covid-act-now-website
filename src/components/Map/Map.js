@@ -91,7 +91,6 @@ function Map({
       )}
       <div className="us-state-map">
         <USACountyMap
-          condensed={hideLegend}
           setTooltipContent={setContent}
           stateClickHandler={handleClick}
           showCounties={showCounties}
