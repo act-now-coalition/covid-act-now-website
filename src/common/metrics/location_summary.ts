@@ -13,7 +13,7 @@ const LEGEND_SUMMARY_LOW = 'On track to contain COVID';
 const LEGEND_SUMMARY_MEDIUM = 'Slow disease growth';
 const LEGEND_SUMMARY_MEDIUM_HIGH = 'At risk of outbreak';
 const LEGEND_SUMMARY_HIGH = 'Active or imminent outbreak';
-const LEGEND_SUMMARY_SUPER_CRITICAL = 'Extreme outbreak';
+const LEGEND_SUMMARY_SUPER_CRITICAL = 'Severe outbreak';
 
 export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
   [Level.LOW]: {
@@ -59,7 +59,7 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     summary: LEGEND_SUMMARY_SUPER_CRITICAL,
     color: COLOR_MAP.RED.DARK,
     detail: locationName =>
-      `${locationName} is currently experiencing an extreme outbreak. Strong interventions are necessary to control the spread and reduce the burden on healthcare systems.`,
+      `${locationName} is currently experiencing a severe outbreak. Strong interventions are necessary to control the spread and reduce the burden on healthcare systems.`,
   },
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,
