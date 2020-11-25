@@ -25,7 +25,7 @@ const ArticlesLanding = () => {
       />
       <PageContent sidebarItems={learnPages}>
         <BreadcrumbsContainer>
-          <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
+          <Breadcrumbs item={{ to: '/explained', label: 'Explained' }} />
         </BreadcrumbsContainer>
         <LearnHeading1>Deep dives</LearnHeading1>
         {articles.map((article: Article) => {

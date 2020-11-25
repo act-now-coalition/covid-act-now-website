@@ -106,7 +106,7 @@ export default function App() {
                 path="/us/:stateId/county/:countyId/compare/:sharedComponentId?"
                 component={LocationPage}
               />
-              <Route exact path="/learn" component={Landing} />
+              <Route exact path="/explained" component={Landing} />
               <Route exact path="/faq" component={Faq} />
               <Route exact path="/glossary" component={Glossary} />
               <Route path="/case-studies" component={CaseStudies} />
