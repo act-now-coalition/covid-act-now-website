@@ -11,7 +11,7 @@ export const Content = styled(Box)`
   padding-bottom: 2.5rem;
 
   @media (min-width: 600px) {
-    margin: auto 0 auto 80px;
+    margin: auto 0 auto 55px;
     padding-bottom: 0;
   }
 `;

@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
 import { COLOR_MAP } from 'common/colors';
-import { mobileBreakpoint } from 'assets/theme/sizes';
+import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
+import Grid from '@material-ui/core/Grid';
 
 export const Wrapper = styled.div`
   margin: 0;
@@ -85,7 +86,7 @@ export const SelectorWrapper = styled.div`
   margin-right: ${props => props.theme.spacing(1)}px;
 
   @media (min-width: ${mobileBreakpoint}) {
-    max-width: 500px;
+    max-width: 315px;
     margin-left: 0;
     margin-right: 0;
   }
@@ -93,4 +94,19 @@ export const SelectorWrapper = styled.div`
 
 export const SwitchContainer = styled.div`
   margin
+`;
+
+export const StyledGridItem = styled(Grid)`
+  &:last-child {
+    justify-content: center;
+    margin: 2rem 0 1rem;
+  }
+  @media (min-width: ${materialSMBreakpoint}) {
+    height: fit-content;
+
+    &:last-child {
+      justify-content: flex-end;
+      margin: 0;
+    }
+  }
 `;

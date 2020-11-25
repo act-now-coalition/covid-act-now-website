@@ -16,13 +16,14 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import {
   Content,
-  CountySwitchContainer,
-  SearchBarThermometerWrapper,
   SectionWrapper,
   Section,
   BannerContainer,
 } from './HomePage.style';
-import { SelectorWrapper } from 'components/Header/HomePageHeader.style';
+import {
+  SelectorWrapper,
+  StyledGridItem,
+} from 'components/Header/HomePageHeader.style';
 import CompareMain from 'components/Compare/CompareMain';
 import Explore from 'components/Explore';
 import { SwitchComponent } from 'components/SharedComponents';
@@ -96,7 +97,7 @@ export default function HomePage() {
           <Content>
             <Grid container spacing={1}>
               <Grid container item key="controls" xs={12} sm={6}>
-                <Grid
+                <StyledGridItem
                   container
                   item
                   key="location-search"
@@ -109,8 +110,8 @@ export default function HomePage() {
                       extendRight={undefined}
                     />
                   </SelectorWrapper>
-                </Grid>
-                <Grid
+                </StyledGridItem>
+                <StyledGridItem
                   item
                   container
                   key="switch-states-counties"
@@ -124,7 +125,7 @@ export default function HomePage() {
                     onChange={() => setShowCounties(!showCounties)}
                     gridOnClick={setShowCounties}
                   />
-                </Grid>
+                </StyledGridItem>
               </Grid>
               {!isMobile && (
                 <Grid container item key="legend" xs={12} sm={6}>
