@@ -107,12 +107,16 @@ export default function App() {
                 component={LocationPage}
               />
               <Route exact path="/explained" component={Landing} />
+              {/* In case there is a /learn link in the wild: */}
+              <Route path="/learn">
+                <Redirect to="/explained" />
+              </Route>
               <Route exact path="/faq" component={Faq} />
               <Route exact path="/glossary" component={Glossary} />
               <Route path="/case-studies" component={CaseStudies} />
               <Route path="/deep-dives" component={Articles} />
-              {/* /state/ routes are deprecated but still supported. */}
 
+              {/* /state/ routes are deprecated but still supported. */}
               <Route exact path="/state/:stateId" component={LocationPage} />
               <Route
                 exact
