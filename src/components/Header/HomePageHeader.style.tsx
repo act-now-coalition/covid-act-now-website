@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
 import { COLOR_MAP } from 'common/colors';
+import { mobileBreakpoint } from 'assets/theme/sizes';
 
 export const Wrapper = styled.div`
   margin: 0;
@@ -77,15 +78,19 @@ export const Disclaimer = styled.div`
 `;
 
 export const SelectorWrapper = styled.div`
-  margin-bottom: 0rem;
   position: relative;
+  min-width: 300px;
+  width: 100%;
+  margin-left: ${props => props.theme.spacing(1)}px;
+  margin-right: ${props => props.theme.spacing(1)}px;
 
-  display: flex;
-  flex: 1;
-  margin: 0 1rem 1rem;
-
-  @media (min-width: 600px) {
-    margin: 0;
-    max-width: 300px;
+  @media (min-width: ${mobileBreakpoint}) {
+    max-width: 500px;
+    margin-left: 0;
+    margin-right: 0;
   }
+`;
+
+export const SwitchContainer = styled.div`
+  margin
 `;

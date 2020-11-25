@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import Grid from '@material-ui/core/Grid';
 import HomePageHeader from 'components/Header/HomePageHeader';
 import Map from 'components/Map/Map';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
@@ -93,24 +94,44 @@ export default function HomePage() {
       <main>
         <div className="App">
           <Content>
-            <SearchBarThermometerWrapper>
-              <SelectorWrapper>
-                <GlobalSelector
-                  handleChange={handleSelectChange}
-                  extendRight={undefined}
-                />
-              </SelectorWrapper>
-              {!isMobile && <HomePageThermometer />}
-            </SearchBarThermometerWrapper>
-            <CountySwitchContainer>
-              <SwitchComponent
-                leftLabel="States"
-                rightLabel="Counties"
-                checkedValue={showCounties}
-                onChange={() => setShowCounties(!showCounties)}
-                gridOnClick={setShowCounties}
-              />
-            </CountySwitchContainer>
+            <Grid container spacing={1}>
+              <Grid container item key="controls" xs={12} sm={6}>
+                <Grid
+                  container
+                  item
+                  key="location-search"
+                  xs={12}
+                  justify="flex-end"
+                >
+                  <SelectorWrapper>
+                    <GlobalSelector
+                      handleChange={handleSelectChange}
+                      extendRight={undefined}
+                    />
+                  </SelectorWrapper>
+                </Grid>
+                <Grid
+                  item
+                  container
+                  key="switch-states-counties"
+                  xs={12}
+                  justify="flex-end"
+                >
+                  <SwitchComponent
+                    leftLabel="States"
+                    rightLabel="Counties"
+                    checkedValue={showCounties}
+                    onChange={() => setShowCounties(!showCounties)}
+                    gridOnClick={setShowCounties}
+                  />
+                </Grid>
+              </Grid>
+              {!isMobile && (
+                <Grid container item key="legend" xs={12} sm={6}>
+                  <HomePageThermometer />
+                </Grid>
+              )}
+            </Grid>
             <Map hideLegend showCounties={showCounties} />
             {isMobile && <HomePageThermometer />}
             <CompareMain locationsViewable={8} isHomepage />
