@@ -111,6 +111,10 @@ const LocationPageHeader = (props: {
 
   const thermometerContent = [
     {
+      level: Level.SUPER_CRITICAL,
+      color: `${LEVEL_COLOR[Level.SUPER_CRITICAL]}`,
+    },
+    {
       level: Level.CRITICAL,
       color: `${LEVEL_COLOR[Level.CRITICAL]}`,
     },

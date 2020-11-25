@@ -117,6 +117,7 @@ export function getHarvardLevel(projection: Projection): HarvardLevel {
   const newCasesLevel = getLevel(Metric.CASE_DENSITY, currentCaseDensity);
 
   switch (newCasesLevel) {
+    case Level.SUPER_CRITICAL:
     case Level.CRITICAL:
       return HarvardLevel.RED;
     case Level.HIGH:
@@ -268,6 +269,7 @@ export const summaryByLevel = {
   [Level.HIGH]: 'is at risk of an outbreak',
   [Level.CRITICAL]:
     'is either actively experiencing an outbreak or is at extreme risk',
+  [Level.SUPER_CRITICAL]: 'is experiencing a severe outbreak',
 };
 
 export function getShareQuote(locationName: string, alarmLevel: Level): string {
