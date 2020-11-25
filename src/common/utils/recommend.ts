@@ -269,7 +269,7 @@ export const summaryByLevel = {
   [Level.HIGH]: 'is at risk of an outbreak',
   [Level.CRITICAL]:
     'is either actively experiencing an outbreak or is at extreme risk',
-  [Level.SUPER_CRITICAL]: 'is experiencing an uncontrolled outbreak',
+  [Level.SUPER_CRITICAL]: 'is experiencing an extreme outbreak',
 };
 
 export function getShareQuote(locationName: string, alarmLevel: Level): string {
