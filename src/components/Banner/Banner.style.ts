@@ -5,8 +5,8 @@ import MuiButton from '@material-ui/core/Button';
 import { mobileBreakpoint } from 'assets/theme/sizes';
 import { COLOR_MAP } from 'common/colors';
 
-const colorButton = `${COLOR_MAP.PURPLE}`;
-const bannerBackgroundColor = `${COLOR_MAP.PURPLE}`;
+const colorButton = `${COLOR_MAP.RED.DARK}`;
+const bannerBackgroundColor = `${COLOR_MAP.RED.DARK}`;
 
 export const MainContainerStyles = css`
   background-color: ${bannerBackgroundColor};

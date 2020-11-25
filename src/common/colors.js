@@ -16,9 +16,9 @@ export const COLOR_MAP = {
     BASE: '#FF9600',
   },
   RED: {
-    BASE: '#FF0034',
+    BASE: '#D9002C',
     LIGHT: '#FC818F',
-    DARK: '#82000E',
+    DARK: '#790019',
   },
   GREEN: {
     // Chosen to match "official" green from logo, etc.
@@ -46,6 +46,7 @@ export const LEVEL_COLOR = {
   [Level.MEDIUM]: COLOR_MAP.ORANGE.BASE,
   [Level.HIGH]: COLOR_MAP.ORANGE_DARK.BASE,
   [Level.CRITICAL]: COLOR_MAP.RED.BASE,
+  [Level.SUPER_CRITICAL]: COLOR_MAP.RED.DARK,
   [Level.UNKNOWN]: COLOR_MAP.GRAY.BASE,
 };
 
@@ -74,5 +75,6 @@ export const LEVEL_COLOR_CONTACT_TRACING = {
   [Level.MEDIUM]: COLOR_MAP.ORANGE_DARK.BASE,
   [Level.HIGH]: COLOR_MAP.ORANGE.BASE,
   [Level.CRITICAL]: COLOR_MAP.GREEN.BASE,
+  [Level.SUPER_CRITICAL]: COLOR_MAP.GREEN.BASE,
   [Level.UNKNOWN]: COLOR_MAP.GRAY.BASE,
 };

@@ -35,6 +35,7 @@ export enum EventCategory {
   ENGAGEMENT = 'engagement',
   VOTE_2020 = 'vote',
   DONATE = 'donate',
+  MAP = 'map',
   RECOMMENDATIONS = 'recommendations',
   INDIGENOUS_PEOPLES_DAY = 'indigenous peoples day',
   GLOSSARY = 'glossary',

@@ -360,6 +360,7 @@ export const ThermometerContainer = styled(Box)`
   max-width: 20px;
 `;
 
+// TODO(michael): This doesn't seem to be used. We should remove it!
 export const Triangle = styled(Box)<{ alarmLevel: number }>`
   width: 0;
   height: 0;
@@ -389,7 +390,7 @@ export const ThermometerRow = styled(Box)<{
   border: ${({ isCurrentLevel }) => isCurrentLevel && `4px solid black`};
   background-color: ${({ color, thresholdUnknown }) =>
     thresholdUnknown ? LEVEL_COLOR[Level.UNKNOWN] : color};
-  height: 32px;
+  height: 26px;
   width: ${({ isCurrentLevel }) => (isCurrentLevel ? '24px' : '20px')};
   align-self: center;
 
