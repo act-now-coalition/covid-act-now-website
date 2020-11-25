@@ -33,9 +33,6 @@ export const getChartRegions = (
   maxY: number,
   zones: LevelInfoMap,
 ): Region[] => {
-  // We only include a tick for SUPER_CRITICAL (which starts at zones[Level.CRITICAL].upperLimit) if
-  // necessary.
-  const includeSuperCritical = maxY >= zones[Level.CRITICAL].upperLimit;
   let regions = [
     {
       valueFrom: minY,
@@ -61,7 +58,7 @@ export const getChartRegions = (
       name: zones[Level.CRITICAL].name,
       color: zones[Level.CRITICAL].color,
     },
-    ...(includeSuperCritical
+    ...(includeSuperCritical(maxY, zones)
       ? [
           {
             valueFrom: zones[Level.CRITICAL].upperLimit,
@@ -73,7 +70,8 @@ export const getChartRegions = (
       : []),
   ];
 
-  // Remove empty regions and then cap the last one to maxY.
+  // Remove empty regions (not all metrics use all Levels) and then cap the last
+  // one to maxY.
   regions = regions.filter(isNotEmpty);
   regions[regions.length - 1].valueTo = maxY;
   return regions;
@@ -107,10 +105,7 @@ export const computeTickPositions = (
   maxY: number,
   zones: LevelInfoMap,
 ) => {
-  // We only include a tick for SUPER_CRITICAL (which starts at zones[Level.CRITICAL].upperLimit) if
-  // necessary.
-  const includeSuperCritical = maxY >= zones[Level.CRITICAL].upperLimit;
-  const maxZones = includeSuperCritical
+  const maxZones = includeSuperCritical(maxY, zones)
     ? zones[Level.CRITICAL].upperLimit
     : zones[Level.HIGH].upperLimit;
   const maxTick = maxY < 1.5 * maxZones ? 1.5 * maxZones : maxY;
@@ -119,10 +114,17 @@ export const computeTickPositions = (
     zones[Level.LOW].upperLimit,
     zones[Level.MEDIUM].upperLimit,
     zones[Level.HIGH].upperLimit,
-    ...(includeSuperCritical ? [zones[Level.CRITICAL].upperLimit] : []),
+    ...(includeSuperCritical(maxY, zones)
+      ? [zones[Level.CRITICAL].upperLimit]
+      : []),
     maxTick,
-  ].filter(t => t !== Infinity);
+  ];
 };
+
+// We only include the SUPER_CRITICAL zone (which starts at
+// zones[Level.CRITICAL].upperLimit) if necessary.
+const includeSuperCritical = (maxY: number, zones: LevelInfoMap) =>
+  maxY >= zones[Level.CRITICAL].upperLimit;
 
 export const getAxisLimits = (
   minY: number,

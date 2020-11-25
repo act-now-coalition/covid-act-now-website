@@ -1,8 +1,8 @@
 import { Level } from 'common/level';
 
 /**
- * Depending on provided `level`, returns the provided `lowText`, `mediumText`,
- * `mediumHighText` or `highText`.
+ * Depending on provided `level`, returns the appropriate text (`lowText`,
+ * `mediumText`, etc.)
  */
 export function levelText(
   level: Level,
@@ -10,6 +10,7 @@ export function levelText(
   mediumText: string,
   mediumHighText: string,
   highText: string,
+  superCriticalText?: string,
 ) {
   switch (level) {
     case Level.LOW:
@@ -21,8 +22,6 @@ export function levelText(
     case Level.CRITICAL:
       return highText;
     case Level.SUPER_CRITICAL:
-      // TODO(michael): Do we need to customize this?  We don't actually use this
-      // function for case density, so it probably doesn't matter.
-      return highText;
+      return superCriticalText;
   }
 }

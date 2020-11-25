@@ -8,6 +8,6 @@ export interface MetricDefinition {
   extendedMetricName: string;
   metricNameForCompare: string;
 
-  // TODO(michael): Is this used?
+  // TODO(michael): This seems to be unused. We should probably remove it!
   renderThermometer: () => React.ReactElement;
 }

@@ -360,7 +360,7 @@ export const ThermometerContainer = styled(Box)`
   max-width: 20px;
 `;
 
-// TODO(michael): Is this used?
+// TODO(michael): This doesn't seem to be used. We should remove it!
 export const Triangle = styled(Box)<{ alarmLevel: number }>`
   width: 0;
   height: 0;

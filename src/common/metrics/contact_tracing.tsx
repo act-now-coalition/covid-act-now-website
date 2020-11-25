@@ -69,7 +69,7 @@ export const CONTACT_TRACING_LEVEL_INFO_MAP: LevelInfoMap = {
     color: COLOR_MAP.GREEN.BASE,
     detail: () => SHORT_DESCRIPTION_HIGH,
   },
-  // TODO(michael): Comment and clean up.
+  // We don't have a SUPER_CRITICAL threshold, so upperLimit is same as CRITICAL to hide it.
   [Level.SUPER_CRITICAL]: {
     level: Level.SUPER_CRITICAL,
     upperLimit: Infinity,

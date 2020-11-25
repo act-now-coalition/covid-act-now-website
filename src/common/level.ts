@@ -3,8 +3,8 @@ export enum Level {
   MEDIUM,
   HIGH,
   CRITICAL,
-  SUPER_CRITICAL,
   UNKNOWN,
+  SUPER_CRITICAL,
 }
 
 export const ALL_LEVELS = [
