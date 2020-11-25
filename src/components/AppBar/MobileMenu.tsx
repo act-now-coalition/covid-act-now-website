@@ -17,9 +17,9 @@ const MobileMenu: React.FC<{ open: boolean; closeMenu: () => void }> = ({
         <MapIcon color={palette.secondary.main} />
         <span>Map</span>
       </Link>
-      <Link to="/learn" onClick={closeMenu}>
+      <Link to="/explained" onClick={closeMenu}>
         <FAQIcon color={palette.secondary.main} />
-        <span>Learn</span>
+        <span>Explained</span>
       </Link>
       <Link to="/tools" onClick={closeMenu}>
         <FAQIcon color={palette.secondary.main} />

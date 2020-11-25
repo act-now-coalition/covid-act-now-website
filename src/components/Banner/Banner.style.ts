@@ -20,7 +20,7 @@ export const MainContainerStyles = css`
   line-height: 140%;
   color: #fff;
 
-  font-size: 14px;
+  font-size: 16px;
   text-align: center;
   justify-content: center;
   border-radius: 0;
@@ -72,7 +72,7 @@ export const ContainedButton = styled(MuiButton).attrs(props => ({
 export const FeatureBannerButton = styled(MuiButton)`
   min-width: fit-content;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   box-shadow: none;
   text-transform: none;

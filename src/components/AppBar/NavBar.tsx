@@ -13,8 +13,9 @@ const isHomePage = (pathname: string) =>
   ['/', '/alert_signup', '/compare'].includes(pathname);
 
 const isLearnPage = (pathname: string) =>
-  ['/glossary', '/faq', '/learn'].includes(pathname) ||
-  pathname.startsWith('/case-studies');
+  ['/glossary', '/faq', '/explained'].includes(pathname) ||
+  pathname.startsWith('/case-studies') ||
+  pathname.startsWith('/deep-dives');
 
 const NavBar: React.FC = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -51,11 +52,11 @@ const NavBar: React.FC = () => {
             Map
           </Style.NavLink>
           <Style.NavLink
-            to="/learn"
-            key="learn"
+            to="/explained"
+            key="explained"
             isActive={(match, { pathname }) => isLearnPage(pathname)}
           >
-            Learn
+            Explained
           </Style.NavLink>
           <Style.NavLink to="/tools" key="tools">
             Tools

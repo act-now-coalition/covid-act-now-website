@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { Grid } from '@material-ui/core';
 import theme from 'assets/theme';
-import { MarkdownContent } from 'components/Markdown';
 
 export const LogoContainer = styled.div`
   max-height: 64px;
@@ -32,13 +31,5 @@ export const CardsContainer = styled(Grid).attrs(props => ({
   margin-top: 0.75rem;
   &:last-child {
     margin-bottom: 0;
-  }
-`;
-
-export const Author = styled(MarkdownContent)`
-  margin-bottom: 1.5rem;
-
-  p {
-    font-size: 14px;
   }
 `;
