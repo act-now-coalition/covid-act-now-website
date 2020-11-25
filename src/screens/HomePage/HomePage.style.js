@@ -66,9 +66,3 @@ export const ElectionCountdownContainer = styled.div`
     margin-top: 2rem;
   }
 `;
-
-export const CountySwitchContainer = styled.div`
-  // TODO(michael): add a margin to push the map down so the SVG doesn't overlap this div. I have to do this to get
-  // pointer events to work, but I don't actually want to!
-  margin-bottom: 20px;
-`;
