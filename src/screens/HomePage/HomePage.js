@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import Grid from '@material-ui/core/Grid';
 import HomePageHeader from 'components/Header/HomePageHeader';
 import Map from 'components/Map/Map';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
@@ -13,14 +14,11 @@ import { GlobalSelector } from 'components/MapSelectors/MapSelectors';
 import { useHistory } from 'react-router-dom';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
+import { Content, SectionWrapper, Section } from './HomePage.style';
 import {
-  Content,
-  CountySwitchContainer,
-  SearchBarThermometerWrapper,
-  SectionWrapper,
-  Section,
-} from './HomePage.style';
-import { SelectorWrapper } from 'components/Header/HomePageHeader.style';
+  SelectorWrapper,
+  StyledGridItem,
+} from 'components/Header/HomePageHeader.style';
 import CompareMain from 'components/Compare/CompareMain';
 import Explore from 'components/Explore';
 import { SwitchComponent } from 'components/SharedComponents';
@@ -36,7 +34,6 @@ export default function HomePage() {
   const shareBlockRef = useRef(null);
   const location = useLocation();
   const [showCounties, setShowCounties] = useState(true);
-  console.log('HomePage', showCounties);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
@@ -75,6 +72,11 @@ export default function HomePage() {
 
   const exploreSectionRef = useRef(null);
 
+  const onClickSwitch = () => {
+    const newShowCounties = !showCounties;
+    setShowCounties(newShowCounties);
+  };
+
   return (
     <>
       <EnsureSharingIdInUrl />
@@ -89,30 +91,44 @@ export default function HomePage() {
       <main>
         <div className="App">
           <Content>
-            <SearchBarThermometerWrapper>
-              <SelectorWrapper>
-                <GlobalSelector
-                  handleChange={handleSelectChange}
-                  extendRight={undefined}
-                />
-              </SelectorWrapper>
-              {!isMobile && <HomePageThermometer />}
-            </SearchBarThermometerWrapper>
-            <CountySwitchContainer>
-              <SwitchComponent
-                leftLabel="States"
-                rightLabel="Counties"
-                checkedValue={showCounties}
-                onChange={() => {
-                  console.log('onChange', !showCounties);
-                  setShowCounties(!showCounties);
-                }}
-                gridOnClick={v => {
-                  console.log('gridOnClick', v);
-                  setShowCounties(v);
-                }}
-              />
-            </CountySwitchContainer>
+            <Grid container spacing={1}>
+              <Grid container item key="controls" xs={12} sm={6}>
+                <StyledGridItem
+                  container
+                  item
+                  key="location-search"
+                  xs={12}
+                  justify="flex-end"
+                >
+                  <SelectorWrapper>
+                    <GlobalSelector
+                      handleChange={handleSelectChange}
+                      extendRight={undefined}
+                    />
+                  </SelectorWrapper>
+                </StyledGridItem>
+                <StyledGridItem
+                  item
+                  container
+                  key="switch-states-counties"
+                  xs={12}
+                  justify="flex-end"
+                >
+                  <SwitchComponent
+                    leftLabel="States"
+                    rightLabel="Counties"
+                    checkedValue={showCounties}
+                    onChange={onClickSwitch}
+                    gridOnClick={setShowCounties}
+                  />
+                </StyledGridItem>
+              </Grid>
+              {!isMobile && (
+                <Grid container item key="legend" xs={12} sm={6}>
+                  <HomePageThermometer />
+                </Grid>
+              )}
+            </Grid>
             <Map hideLegend showCounties={showCounties} />
             {isMobile && <HomePageThermometer />}
             <CompareMain locationsViewable={8} isHomepage />

@@ -7,7 +7,7 @@ import {
   Content,
 } from 'screens/HomePage/HomePageThermometer.style';
 import { Level } from 'common/level';
-import { COLOR_MAP, LEVEL_COLOR } from 'common/colors';
+import { LEVEL_COLOR } from 'common/colors';
 
 const ThermometerRow = (props: {
   text: string;
