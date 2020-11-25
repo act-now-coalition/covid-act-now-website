@@ -8,7 +8,6 @@ import {
   Header,
 } from 'components/Compare/Compare.style';
 import LocationTable from './LocationTable';
-import { ChartLocationName } from 'components/LocationPage/ChartsHolder.style';
 import Filters from 'components/Compare/Filters';
 import {
   SummaryForCompare,
@@ -27,6 +26,7 @@ import { sliderNumberToFilterMap } from 'components/Compare/Filters';
 import { getComparePageUrl, getCompareShareImageUrl } from 'common/urls';
 import { EventAction } from 'components/Analytics';
 import { MoreInfoButton } from 'components/SharedComponents';
+import { Subtitle1 } from 'components/Typography';
 
 function trackShare(label: string) {
   trackCompareEvent(EventAction.SHARE, label);
@@ -234,9 +234,7 @@ const CompareTable = (props: {
                 onShareOnLinkedin={() => trackShare(`Linkedin: ${trackLabel}`)}
               />
             </Header>
-            {props.stateName && (
-              <ChartLocationName>{compareSubheader}</ChartLocationName>
-            )}
+            {props.stateName && <Subtitle1>{compareSubheader}</Subtitle1>}
           </HeaderWrapper>
           {!disableFilters && (
             <Filters

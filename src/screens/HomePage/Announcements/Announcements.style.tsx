@@ -11,15 +11,6 @@ export const Wrapper = styled(Box)`
   padding: 0 1rem;
 `;
 
-export const AnnouncementsSectionHeader = styled(Typography)`
-  font-family: Roboto;
-  font-size: 14px;
-  letter-spacing: 0.01em;
-  text-transform: uppercase;
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
-  margin-bottom: 0.75rem;
-`;
-
 export const AnnouncementIntro = styled(Typography)`
   font-family: Roboto;
   font-weight: 900;

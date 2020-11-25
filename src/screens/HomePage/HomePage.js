@@ -14,7 +14,12 @@ import { GlobalSelector } from 'components/MapSelectors/MapSelectors';
 import { useHistory } from 'react-router-dom';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import { Content, SectionWrapper, Section } from './HomePage.style';
+import {
+  Content,
+  SectionWrapper,
+  Section,
+  BannerContainer,
+} from './HomePage.style';
 import {
   SelectorWrapper,
   StyledGridItem,
@@ -23,7 +28,8 @@ import CompareMain from 'components/Compare/CompareMain';
 import Explore from 'components/Explore';
 import { SwitchComponent } from 'components/SharedComponents';
 import { formatMetatagDate } from 'common/utils';
-import { getRandomStateFipsList } from './utils';
+import { getLocationFipsCodesForExplore } from './utils';
+import { ThirdWaveBanner } from 'components/Banner';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -68,7 +74,7 @@ export default function HomePage() {
     window.scrollTo(0, 0);
   };
 
-  const [initialFipsList] = useState(getRandomStateFipsList());
+  const [initialFipsList] = useState(getLocationFipsCodesForExplore(6));
 
   const exploreSectionRef = useRef(null);
 
@@ -85,6 +91,9 @@ export default function HomePage() {
         pageTitle="Realtime US COVID Risk Map by State and County"
         pageDescription={getPageDescription()}
       />
+      <BannerContainer>
+        <ThirdWaveBanner />
+      </BannerContainer>
       <HomePageHeader
         indicatorsLinkOnClick={() => scrollTo(indicatorsRef.current)}
       />
@@ -136,7 +145,7 @@ export default function HomePage() {
               <Explore
                 title="Cases, Deaths and Hospitalizations"
                 initialFipsList={initialFipsList}
-                initialChartIndigenousPopulations={true}
+                initialChartIndigenousPopulations={false}
               />
             </Section>
             <SectionWrapper ref={indicatorsRef}>
