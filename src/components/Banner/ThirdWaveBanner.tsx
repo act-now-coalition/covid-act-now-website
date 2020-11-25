@@ -5,7 +5,7 @@ import Banner from './Banner';
 // import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 
 export const BANNER_COPY =
-  'The U.S. is in a third COVID wave. Exercise extra caution in order to reduce your risk of infection, to avoid infecting others, and to prevent an overwhelming of our healthcare systems.';
+  'The U.S. is in a third COVID wave. Exercise extra caution in order to reduce your risk of infection, to avoid infecting others, and to avoid overwhelming our healthcare system.';
 
 // const trackClick = () => {
 //   trackEvent(EventCategory.ARTICLES, EventAction.CLICK, 'Banner: Third wave');
