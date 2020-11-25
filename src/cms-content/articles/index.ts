@@ -3,7 +3,7 @@ import { Markdown, sanitizeID } from '../utils';
 import { keyBy, sortBy } from 'lodash';
 import indigenousPeoplesDay from './covid-impact-majority-native-american-counties.json';
 import thirdSurge from './third-surge.json';
-import hospitalizationProjections from './hospitalization-projections.json';
+// import hospitalizationProjections from './hospitalization-projections.json';
 // import animap from './animap.json';
 import canCompare from './can-compare.json';
 
@@ -37,7 +37,7 @@ const articleList: ArticleJSON[] = [
   indigenousPeoplesDay,
   // animap,
   canCompare,
-  hospitalizationProjections,
+  // hospitalizationProjections,
 ];
 
 // Makes sure articles are sorted by date (most recent first)
