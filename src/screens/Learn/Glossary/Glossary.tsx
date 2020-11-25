@@ -41,7 +41,7 @@ const Glossary: React.FC = () => {
       />
       <PageContent sidebarItems={learnPages}>
         <BreadcrumbsContainer>
-          <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
+          <Breadcrumbs item={{ to: '/explained', label: 'Explained' }} />
         </BreadcrumbsContainer>
         <LearnHeading1>{header}</LearnHeading1>
         <MarkdownContent source={intro} />

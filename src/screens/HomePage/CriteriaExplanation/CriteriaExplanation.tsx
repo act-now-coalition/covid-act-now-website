@@ -30,7 +30,7 @@ const CriteriaExplanation = (props: { isMobile: Boolean }) => {
   return (
     <Wrapper>
       <Subtitle1 align="center">How we determine risk levels</Subtitle1>
-      <ListSubheader>Key indicators</ListSubheader>
+      <ListSubheader>Key metrics</ListSubheader>
       <CriteriaList>
         <Criterion>
           <Kicker isMobile={props.isMobile} title="Metric 1" number="1" />

@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 import theme from 'assets/theme';
-import { Heading1, Heading2, Heading3 } from 'components/Markdown';
+import {
+  Heading1,
+  Heading2,
+  Heading3,
+  MarkdownContent,
+} from 'components/Markdown';
 import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
 
 /**
@@ -46,6 +51,14 @@ export const LearnHeading1 = styled(Heading1)`
   margin: 0 0 1.5rem;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    margin: 1.5rem 0;
+    margin: 1.5rem 0 2.5rem;
+  }
+`;
+
+export const SmallSubtext = styled(MarkdownContent)`
+  margin-bottom: 2rem;
+
+  p {
+    font-size: 14px;
   }
 `;
