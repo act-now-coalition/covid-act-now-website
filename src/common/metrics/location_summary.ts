@@ -59,7 +59,7 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     summary: LEGEND_SUMMARY_SUPER_CRITICAL,
     color: COLOR_MAP.RED.DARK,
     detail: locationName =>
-      `${locationName} is currently experiencing an extreme outbreak. Strong interventions are necessary to control the spread and reduce burden on healthcare systems.`,
+      `${locationName} is currently experiencing an extreme outbreak. Strong interventions are necessary to control the spread and reduce the burden on healthcare systems.`,
   },
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,
