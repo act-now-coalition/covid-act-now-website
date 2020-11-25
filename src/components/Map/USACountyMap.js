@@ -4,7 +4,6 @@ import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import { colorFromLocationSummary } from 'common/colors';
 import { geoAlbersUsaTerritories } from 'geo-albers-usa-territories';
 import COUNTIES_JSON from './data/counties-10m.json';
-import STATES_JSON from './data/states-10m.json';
 import { USMapWrapper, USStateMapWrapper } from './Map.style';
 import { useSummaries } from 'common/location_summaries';
 import { ScreenshotReady } from 'components/Screenshot';
@@ -14,6 +13,22 @@ import {
   getStateCode,
   isStateFips,
 } from 'common/locations';
+
+/**
+ * The COUNTIES_JSON file contains geographies for counties, states and the
+ * nation. The following variables simplify the object to contain either
+ * state or county, not both (this might make parsing of the geographies faster
+ * and reduce our bundle size a bit).
+ */
+const geoCounties = {
+  ...COUNTIES_JSON,
+  objects: { counties: COUNTIES_JSON.objects.counties },
+};
+
+const geoStates = {
+  ...COUNTIES_JSON,
+  objects: { states: COUNTIES_JSON.objects.states },
+};
 
 /**
  * SVG element to represent the Northern Mariana Islands on the USA Country Map as a
@@ -57,7 +72,7 @@ const USACountyMap = React.memo(
           <ComposableMap data-tip="" projection={projection} height={500}>
             <g transform="translate(0, -50)">
               {showCounties && (
-                <Geographies geography={COUNTIES_JSON}>
+                <Geographies geography={geoCounties}>
                   {({ geographies }) =>
                     geographies.map(geo => {
                       return (
@@ -73,7 +88,7 @@ const USACountyMap = React.memo(
                   }
                 </Geographies>
               )}
-              <Geographies geography={STATES_JSON}>
+              <Geographies geography={geoStates}>
                 {({ geographies }) =>
                   geographies
                     .filter(geo => isStateFips(geo.id))
