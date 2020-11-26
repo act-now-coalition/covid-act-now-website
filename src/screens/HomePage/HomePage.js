@@ -75,7 +75,7 @@ export default function HomePage() {
     window.scrollTo(0, 0);
   };
 
-  const [initialFipsList] = useState(getLocationFipsCodesForExplore(6));
+  const [initialFipsList] = useState(getLocationFipsCodesForExplore(5));
 
   const exploreSectionRef = useRef(null);
 
