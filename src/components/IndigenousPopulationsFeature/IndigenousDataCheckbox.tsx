@@ -68,13 +68,16 @@ const IndigenousDataCheckbox = (props: {
           onChange={onClickChartIndigenous}
           name="Chart Indigenous Populations"
           id="Chart Indigenous Populations"
+          aria-labelledby="native-american-populations-label"
         />
       </CheckboxWrapper>
       <CopyContainer>
-        <strong>
-          View COVID’s impact on counties with majority Native American
-          populations.
-        </strong>{' '}
+        <label id="native-american-populations-label">
+          <strong>
+            View COVID’s impact on counties with majority Native American
+            populations.
+          </strong>{' '}
+        </label>
         Learn more about{' '}
         <span onClick={onClickMethodology}>our methodology</span> or view{' '}
         <Link to="/deep-dives/covid-spread-native-american">
