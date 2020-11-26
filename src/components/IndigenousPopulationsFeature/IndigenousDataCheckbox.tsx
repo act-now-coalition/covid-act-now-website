@@ -7,9 +7,8 @@ import {
 } from './IndigenousDataCheckbox.style';
 import LearnMoreModal from './LearnMoreModal';
 import { CenteredContentModal } from 'components/Compare/Compare.style';
-import ExternalLink from 'components/ExternalLink';
-import StatTag from 'components/SummaryStats/StatTag';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
+import { Link } from 'react-router-dom';
 
 const IndigenousDataCheckbox = (props: {
   chartIndigenous?: boolean;
@@ -74,16 +73,13 @@ const IndigenousDataCheckbox = (props: {
       <CopyContainer>
         <strong>
           View COVID’s impact on counties with majority Native American
-          populations <StatTag featured />
-        </strong>
-        <br />
-        Created on Indigenous Peoples’ Day, this feature allows you to compare
-        all counties that are “Native American majority counties“ (NAMC) to the
-        entire USA for two metrics: Cases and Deaths. Learn more about{' '}
+          populations.
+        </strong>{' '}
+        Learn more about{' '}
         <span onClick={onClickMethodology}>our methodology</span> or view{' '}
-        <ExternalLink href="https://blog.covidactnow.org/covid-native-american-counties/">
+        <Link to="/deep-dives/covid-spread-native-american">
           our observations
-        </ExternalLink>
+        </Link>
         .
       </CopyContainer>
       <CenteredContentModal open={showModal} onClose={handleCloseModal}>
