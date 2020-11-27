@@ -16,8 +16,8 @@ const SwitchComponent = (props: {
       container
       alignItems="center"
       spacing={1}
-      checked={checked}
-      isModal={isModal}
+      $checked={checked}
+      $isModal={isModal}
     >
       <SwitchLabel onClick={() => onChange(false)} item>
         {leftLabel}
