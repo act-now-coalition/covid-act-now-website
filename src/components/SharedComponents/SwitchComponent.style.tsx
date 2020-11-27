@@ -7,7 +7,7 @@ export const SwitchLabel = styled(Grid)`
 `;
 
 export const SwitchGrid = styled(Grid)<{
-  viewAllCounties: boolean | undefined;
+  checked: boolean | undefined;
   isModal?: boolean;
 }>`
   width: fit-content;
@@ -15,16 +15,16 @@ export const SwitchGrid = styled(Grid)<{
 
   ${SwitchLabel} {
     &:first-child {
-      color: ${({ viewAllCounties }) =>
-        viewAllCounties ? `${COLOR_MAP.GRAY_BODY_COPY}` : 'black'};
+      color: ${({ checked }) =>
+        checked ? `${COLOR_MAP.GRAY_BODY_COPY}` : 'black'};
       color: ${({ isModal }) => isModal && 'white'};
-      font-weight: ${({ viewAllCounties }) => !viewAllCounties && 'bold'};
+      font-weight: ${({ checked }) => !checked && 'bold'};
     }
     &:last-child {
-      color: ${({ viewAllCounties }) =>
-        !viewAllCounties ? `${COLOR_MAP.GRAY_BODY_COPY}` : 'black'};
+      color: ${({ checked }) =>
+        !checked ? `${COLOR_MAP.GRAY_BODY_COPY}` : 'black'};
       color: ${({ isModal }) => isModal && 'white'};
-      font-weight: ${({ viewAllCounties }) => viewAllCounties && 'bold'};
+      font-weight: ${({ checked }) => checked && 'bold'};
     }
   }
 `;

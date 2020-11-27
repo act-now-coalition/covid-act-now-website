@@ -1,0 +1,10 @@
+import { Meta, Story } from '@storybook/addon-docs/blocks';
+import SwitchComponent from './SwitchComponent';
+
+<Meta title="Shared Components/Switch Component" argTypes={{ onChange: { action: 'changed' } }} />
+
+export const Template = (args) => <SwitchComponent {...args} />
+
+<Story name="Default" args={{leftLabel: 'Left', rightLabel: 'Right'  }}>
+  {Template.bind({})}
+</Story>
