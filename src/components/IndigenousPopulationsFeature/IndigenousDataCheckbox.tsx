@@ -30,7 +30,7 @@ const IndigenousDataCheckbox = (props: {
       if (checkboxRef.current) {
         window.scrollTo({
           left: 0,
-          top: checkboxRef.current.offsetTop - 75,
+          top: checkboxRef.current.offsetTop - 800,
           behavior: 'smooth',
         });
       }
