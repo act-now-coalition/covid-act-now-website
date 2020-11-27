@@ -79,8 +79,7 @@ export default function HomePage() {
 
   const exploreSectionRef = useRef(null);
 
-  const onClickSwitch = () => {
-    const newShowCounties = !showCounties;
+  const onClickSwitch = newShowCounties => {
     setShowCounties(newShowCounties);
     trackEvent(
       EventCategory.MAP,
@@ -132,9 +131,8 @@ export default function HomePage() {
                   <SwitchComponent
                     leftLabel="States"
                     rightLabel="Counties"
-                    checkedValue={showCounties}
+                    checked={showCounties}
                     onChange={onClickSwitch}
-                    gridOnClick={setShowCounties}
                   />
                 </StyledGridItem>
               </Grid>
