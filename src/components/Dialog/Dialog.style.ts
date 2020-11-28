@@ -16,7 +16,6 @@ export const ButtonContainer = styled.div`
 export const StyledPaper = styled(Paper)`
   @media (min-width: 600px) {
     max-height: 835px;
-    height: 95%;
     max-width: 860px;
     width: 95%;
   }

@@ -5,20 +5,20 @@ import {
   CopyContainer,
   CheckboxWrapper,
 } from './IndigenousDataCheckbox.style';
-import LearnMoreModal from './LearnMoreModal';
-import { CenteredContentModal } from 'components/Compare/Compare.style';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import { Link } from 'react-router-dom';
+import Dialog, { useDialog } from 'components/Dialog';
+import { LearnMoreContent, LearnMoreTitle } from './LearnMoreModal';
 
 const IndigenousDataCheckbox = (props: {
   chartIndigenous?: boolean;
   setChartIndigenous?: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const { chartIndigenous, setChartIndigenous } = props;
-  const [showModal, setShowModal] = useState(false);
+  const [isOpen, openDialog, closeDialog] = useDialog(false);
 
   const handleCloseModal = () => {
-    setShowModal(false);
+    closeDialog();
     setChartIndigenous && setChartIndigenous(true);
     scrollToCheckbox();
   };
@@ -51,7 +51,7 @@ const IndigenousDataCheckbox = (props: {
   };
 
   const onClickMethodology = () => {
-    setShowModal(true);
+    openDialog();
     trackEvent(
       EventCategory.INDIGENOUS_PEOPLES_DAY,
       EventAction.OPEN_MODAL,
@@ -85,9 +85,13 @@ const IndigenousDataCheckbox = (props: {
         </Link>
         .
       </CopyContainer>
-      <CenteredContentModal open={showModal} onClose={handleCloseModal}>
-        <LearnMoreModal onClose={handleCloseModal} />
-      </CenteredContentModal>
+      <Dialog
+        open={isOpen}
+        closeDialog={handleCloseModal}
+        renderHeader={() => <LearnMoreTitle />}
+      >
+        <LearnMoreContent closeDialog={handleCloseModal} />
+      </Dialog>
     </Container>
   );
 };
