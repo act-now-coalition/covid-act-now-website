@@ -353,13 +353,6 @@ export const LevelDescription = styled(Typography)`
   }
 `;
 
-export const ThermometerContainer = styled(Box)`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 20px;
-`;
-
 // TODO(michael): This doesn't seem to be used. We should remove it!
 export const Triangle = styled(Box)<{ alarmLevel: number }>`
   width: 0;
@@ -378,27 +371,4 @@ export const Triangle = styled(Box)<{ alarmLevel: number }>`
       : alarmLevel === Level.CRITICAL
       ? '96px'
       : '0'};
-`;
-
-export const ThermometerRow = styled(Box)<{
-  isCurrentLevel?: Boolean;
-  color: string;
-  thresholdUnknown?: Boolean;
-}>`
-  display: flex;
-  flex-direction: row;
-  border: ${({ isCurrentLevel }) => isCurrentLevel && `4px solid black`};
-  background-color: ${({ color, thresholdUnknown }) =>
-    thresholdUnknown ? LEVEL_COLOR[Level.UNKNOWN] : color};
-  height: 26px;
-  width: ${({ isCurrentLevel }) => (isCurrentLevel ? '24px' : '20px')};
-  align-self: center;
-
-  &:first-child {
-    border-radius: 99px 99px 0 0;
-  }
-
-  &:last-child {
-    border-radius: 0 0 99px 99px;
-  }
 `;
