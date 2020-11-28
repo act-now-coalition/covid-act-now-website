@@ -48,12 +48,19 @@ const Dialog: React.FC<DialogProps> = props => {
       onClose={dismissDialog}
       PaperComponent={Style.StyledPaper}
       fullScreen={fullScreen}
+      aria-labelledby="dialog-title"
+      disableScrollLock={false}
       {...otherProps}
     >
       <LockBodyScroll />
       <ButtonCloseBox onClickClose={closeDialog} />
       <Style.StyledMuiDialogContent>
-        <DialogTitle onClickClose={closeDialog} renderHeader={renderHeader} />
+        <DialogTitle
+          id="dialog-title"
+          onClickClose={closeDialog}
+          renderHeader={renderHeader}
+          tabIndex={-1}
+        />
         {children}
       </Style.StyledMuiDialogContent>
     </MuiDialog>

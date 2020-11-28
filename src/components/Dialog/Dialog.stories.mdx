@@ -11,13 +11,12 @@ export const FramedDialog = props => {
   return (
     <div>
       <button onClick={openDialog}>open</button>
-      <button onClick={closeDialog}>close</button>
       <Dialog open={isOpen} closeDialog={closeDialog} {...props} />
     </div>
   );
 };
 
-<Story name="Open">
+<Story name="Default">
   <FramedDialog renderHeader={renderTitle} fullWidth maxWidth="md">
     Our goal is to provide you with clear, trusted information so that you can
     make informed decisions and help stop the pandemic.

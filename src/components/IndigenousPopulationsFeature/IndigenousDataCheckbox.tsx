@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import {
   Container,
   Checkbox,
@@ -20,22 +20,9 @@ const IndigenousDataCheckbox = (props: {
   const handleCloseModal = () => {
     closeDialog();
     setChartIndigenous && setChartIndigenous(true);
-    scrollToCheckbox();
   };
 
   const checkboxRef = useRef<HTMLDivElement>(null);
-
-  const scrollToCheckbox = () => {
-    return setTimeout(() => {
-      if (checkboxRef.current) {
-        window.scrollTo({
-          left: 0,
-          top: checkboxRef.current.offsetTop - 800,
-          behavior: 'smooth',
-        });
-      }
-    }, 250);
-  };
 
   const onClickChartIndigenous = () => {
     if (setChartIndigenous) {
@@ -85,13 +72,15 @@ const IndigenousDataCheckbox = (props: {
         </Link>
         .
       </CopyContainer>
-      <Dialog
-        open={isOpen}
-        closeDialog={handleCloseModal}
-        renderHeader={() => <LearnMoreTitle />}
-      >
-        <LearnMoreContent closeDialog={handleCloseModal} />
-      </Dialog>
+      <div>
+        <Dialog
+          open={isOpen}
+          closeDialog={handleCloseModal}
+          renderHeader={() => <LearnMoreTitle />}
+        >
+          <LearnMoreContent closeDialog={handleCloseModal} />
+        </Dialog>
+      </div>
     </Container>
   );
 };
