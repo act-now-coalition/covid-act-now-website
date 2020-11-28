@@ -1,10 +1,22 @@
 import { Meta, Story } from '@storybook/addon-docs/blocks';
 import SwitchComponent from './SwitchComponent';
+import { withDarkBackground } from 'components/storybook';
 
-<Meta title="Shared Components/Switch Component" argTypes={{ onChange: { action: 'changed' } }} />
+<Meta
+  title="Shared Components/Switch Component"
+  component={SwitchComponent}
+  argTypes={{ onChange: { action: 'changed' } }}
+  args={{ leftLabel: 'Left', rightLabel: 'Right' }}
+/>
 
-export const Template = (args) => <SwitchComponent {...args} />
+export const Template = args => <SwitchComponent {...args} />;
 
-<Story name="Default" args={{leftLabel: 'Left', rightLabel: 'Right'  }}>
+<Story name="Default">{Template.bind({})}</Story>
+
+<Story
+  name="isModal"
+  args={{ isModal: true }}
+  decorators={[withDarkBackground]}
+>
   {Template.bind({})}
 </Story>
