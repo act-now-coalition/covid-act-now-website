@@ -5,40 +5,33 @@ import { SwitchGrid, SwitchLabel } from './SwitchComponent.style';
 const SwitchComponent = (props: {
   leftLabel: string;
   rightLabel: string;
-  checkedValue: boolean | undefined;
-  onChange: any;
-  gridOnClick: any;
+  checked: boolean | undefined;
+  onChange: (newValue: boolean) => void;
   isModal?: boolean;
 }) => {
-  const {
-    leftLabel,
-    rightLabel,
-    checkedValue,
-    onChange,
-    gridOnClick,
-    isModal,
-  } = props;
+  const { leftLabel, rightLabel, checked, onChange, isModal } = props;
+
   return (
     <SwitchGrid
       container
       alignItems="center"
       spacing={1}
-      viewAllCounties={checkedValue}
-      isModal={isModal}
+      $checked={checked}
+      $isModal={isModal}
     >
-      <SwitchLabel onClick={() => gridOnClick(false)} item>
+      <SwitchLabel onClick={() => onChange(false)} item>
         {leftLabel}
       </SwitchLabel>
       <Grid item>
         <Switch
-          checked={checkedValue}
-          onChange={onChange}
+          checked={checked}
+          onChange={event => onChange(event.target.checked)}
           value="checked"
           size="small"
           disableRipple
         />
       </Grid>
-      <SwitchLabel onClick={() => gridOnClick(true)} item>
+      <SwitchLabel onClick={() => onChange(true)} item>
         {rightLabel}
       </SwitchLabel>
     </SwitchGrid>

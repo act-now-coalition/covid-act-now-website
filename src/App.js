@@ -106,10 +106,10 @@ export default function App() {
                 path="/us/:stateId/county/:countyId/compare/:sharedComponentId?"
                 component={LocationPage}
               />
-              <Route exact path="/explained" component={Landing} />
-              {/* In case there is a /learn link in the wild: */}
-              <Route path="/learn">
-                <Redirect to="/explained" />
+              <Route exact path="/learn" component={Landing} />
+              {/* In case there is now an /explained link in the wild: */}
+              <Route path="/explained">
+                <Redirect to="/learn" />
               </Route>
               <Route exact path="/faq" component={Faq} />
               <Route exact path="/glossary" component={Glossary} />
