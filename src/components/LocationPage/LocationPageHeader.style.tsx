@@ -5,7 +5,6 @@ import palette from 'assets/theme/palette';
 import { COLORS } from 'common';
 import { COLOR_MAP } from 'common/colors';
 import { Level } from 'common/level';
-import { LEVEL_COLOR } from 'common/colors';
 
 export const ColoredHeaderBanner = styled(Box)`
   display: flex;
