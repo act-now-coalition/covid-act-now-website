@@ -8,7 +8,7 @@ import {
   TitleWrapper,
   LastUpdatedWrapper,
 } from './ShareCardImage.style';
-import { ScreenshotWrapper } from './ShareImage.style';
+import { DarkScreenshotWrapper } from './ShareImage.style';
 import { formatLocalDate } from 'common/utils';
 import { findCountyByFips } from 'common/locations';
 import { ScreenshotReady, SCREENSHOT_CLASS } from 'components/Screenshot';
@@ -23,12 +23,12 @@ const ShareCardImage = () => {
   const { stateId, countyFipsId } = useParams();
   const isHomePage = !stateId && !countyFipsId;
   return (
-    <ScreenshotWrapper className={SCREENSHOT_CLASS}>
+    <DarkScreenshotWrapper className={SCREENSHOT_CLASS}>
       <Header isHomePage={isHomePage} />
       <ShareCardWrapper isHomePage={isHomePage}>
         <ShareCard stateId={stateId} countyFipsId={countyFipsId} />
       </ShareCardWrapper>
-    </ScreenshotWrapper>
+    </DarkScreenshotWrapper>
   );
 };
 

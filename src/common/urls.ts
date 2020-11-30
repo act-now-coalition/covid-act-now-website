@@ -4,6 +4,7 @@ import { County } from './locations';
 import urlJoin from 'url-join';
 import * as QueryString from 'query-string';
 import { getLocationUrlForFips } from 'common/locations';
+import moment from 'moment';
 
 /**
  * We append a short unique string corresponding to the currently published
@@ -49,6 +50,14 @@ function getShareImageBaseUrl(stateId?: string, county?: County): string {
   } else {
     return imageBaseUrl;
   }
+}
+
+export function getMapImageUrl(): string {
+  const date = moment().format('YYYY-MM-DD');
+  return urlJoin(
+    getShareImageBaseUrl(),
+    `${date}-image-covid-us-map-cases.png`,
+  );
 }
 
 // TODO(michael): Move existing code over to use this method.
