@@ -109,8 +109,8 @@
       "body": "**Travel** should be avoided unless necessary, according to [CDC guidelines](https://www.cdc.gov/coronavirus/2019-ncov/travelers/faqs.html).",
       "source": "FED",
       "category": "TRAVEL",
-      "level": "RED",
-      "id": "TRAVEL_RED"
+      "level": "ALL",
+      "id": "TRAVEL_ALL"
     }
   ],
   "header": "Recommended actions",
