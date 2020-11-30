@@ -1,0 +1,12 @@
+{
+  "teamName": "Content",
+  "teamID": "content",
+  "teamMembers": [
+    {
+      "fullName": "Karen Cheney",
+      "description": "Content Lead",
+      "profileUrl": "https://www.linkedin.com/in/karen-cheney-writer/",
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
+    }
+  ]
+}
