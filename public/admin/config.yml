@@ -55,7 +55,7 @@ collections:
     label_singular: Team
     description: description
     format: json
-    identifier_field: teamID
+    identifier_field: teamName
     fields:
       - label: Team name
         name: teamName
@@ -79,6 +79,51 @@ collections:
           - label: Profile URL
             name: profileUrl
             widget: string
+
+  - name: articles
+    label: Articles
+    folder: 'src/cms-content/articles'
+    create: true
+    label_singular: Article
+    format: json
+    description: Long form articles and posts
+    slug: '{{articleID}}'
+    summary: '{{header}}'
+    sortable_fields: ['date', 'author', 'header', 'articleID']
+    fields:
+      - label: Header
+        name: header
+        widget: text
+        hint: Title
+      - label: Article ID
+        name: articleID
+        widget: string
+        hint: 'Short unique identifier for the article (all lowercase, no spaces, separated by dashes). Used to generate the URL (ex: indigenous-peoples-day)'
+      - label: Subtitle
+        name: subtitle
+        widget: text
+        required: false
+        hint: Optional subtitle
+      - label: Summary
+        name: summary
+        widget: markdown
+        hint: Short summary
+      - label: Author
+        name: author
+        widget: markdown
+        required: false
+        minimal: true
+        hint: 'Name of the author or authors (separated by comma, ex: Chelsi Asulin, Igor Kofman)'
+      - label: Publish date
+        name: date
+        widget: datetime
+        date_format: 'MMMM Do YYYY'
+        time_format: false
+        hint: Publish date to show in the article
+      - label: body
+        name: body
+        widget: markdown
+        hint: Content of the article. Use Heading 2 or lower (Heading 1 is used for the title of the article)
 
   - name: contact
     label: Contact Us
@@ -286,6 +331,21 @@ collections:
               - { label: Term, name: term, widget: string }
               - { label: Term ID, name: termId, widget: string }
               - { label: Definition, name: definition, widget: markdown }
+              - {
+                  label: Category,
+                  name: category,
+                  widget: select,
+                  options:
+                    [
+                      'Disease science',
+                      'Health and symptoms',
+                      'Metrics',
+                      'Prevention and mitigation',
+                      'Testing',
+                      'Transmission',
+                      'Treatment',
+                    ],
+                }
           - label: Metadata title
             name: metadataTitle
             widget: text
@@ -313,6 +373,7 @@ collections:
                 widget: list
                 fields:
                   - { label: Question, name: question, widget: text }
+                  - { label: Question ID, name: questionId, widget: text }
                   - { label: Answer, name: answer, widget: markdown }
           - label: Metadata title
             name: metadataTitle
@@ -462,6 +523,7 @@ collections:
                 }
               - label: Buttons
                 name: buttons
+                required: false
                 widget: list
                 fields:
                   - { label: CTA, name: cta, widget: string }

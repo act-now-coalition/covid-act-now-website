@@ -10,7 +10,7 @@ const topBarHeight = 64;
 
 const fontCss = css`
   font-family: Roboto;
-  font-size: 15px;
+  font-size: 1rem;
   font-weight: 400;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
 `;
@@ -27,8 +27,9 @@ export const TopLevelList = styled.ul`
   margin-inline-start: 0;
   margin-inline-end: 0;
   padding-inline-start: 0;
+  margin-top: 1.25rem;
   li {
-    margin-bottom: ${theme.spacing(3)}px;
+    margin-bottom: 0.8rem;
   }
 `;
 
@@ -37,7 +38,7 @@ export const TopLevelLink = styled(NavLink).attrs(props => ({
 }))`
   ${fontCss}
   text-decoration: none;
-  padding-left: ${theme.spacing(3)}px;
+  padding-left: 1.25rem;
   border-left: solid 3px transparent;
   &.active {
     ${activeCss}
@@ -62,7 +63,7 @@ export const InnerList = styled(ScrollSpy)`
   margin-top: ${theme.spacing(2)}px;
   padding-inline-start: ${theme.spacing(2) + theme.spacing(3)}px;
   li {
-    margin-bottom: ${theme.spacing(2)}px;
+    margin-bottom: 0.8rem;
     &.active a {
       ${activeCss}
     }

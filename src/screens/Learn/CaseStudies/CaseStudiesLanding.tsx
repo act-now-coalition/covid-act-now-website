@@ -5,13 +5,18 @@ import { useTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import Breadcrumbs from 'components/Breadcrumbs';
-import PageContent from 'components/PageContent';
-import { MarkdownContent, Heading1, Heading2 } from 'components/Markdown';
+import PageContent, { MobileOnly } from 'components/PageContent';
+import { MarkdownContent, Heading2 } from 'components/Markdown';
 import { formatMetatagDate } from 'common/utils';
-import { caseStudiesContent, learnPages } from 'cms-content/learn';
+import {
+  caseStudiesContent,
+  learnPages,
+  CaseStudyCategory,
+} from 'cms-content/learn';
 import CaseStudyCard from './CaseStudyCard';
-import { BreadcrumbsContainer } from '../Learn.style';
+import { BreadcrumbsContainer, LearnHeading1 } from '../Learn.style';
 import { CardsContainer } from './CaseStudy.style';
+import TableOfContents, { Item } from 'components/TableOfContents';
 
 const {
   header,
@@ -29,6 +34,16 @@ const Landing: React.FC = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
   const cardGridSpacing = isMobile ? 2 : 3;
 
+  function getSectionItems(categories: CaseStudyCategory[]): Item[] {
+    return categories.map(category => ({
+      id: category.categoryId,
+      title: category.header,
+    }));
+  }
+
+  // Filters out case studies that aren't in shippable shape but are already in the CMS
+  const idsToFilterOut = ['michael-piccioli', 'arielle-tango'];
+
   return (
     <Fragment>
       <AppMetaTags
@@ -40,29 +55,35 @@ const Landing: React.FC = () => {
         <BreadcrumbsContainer>
           <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>
-        <Heading1>{header}</Heading1>
+        <LearnHeading1>{header}</LearnHeading1>
         <MarkdownContent source={intro} />
-        {categories.map(category => {
+        <MobileOnly>
+          <TableOfContents items={getSectionItems(categories)} />
+        </MobileOnly>
+        {categories.map((category: CaseStudyCategory) => {
           const caseStudies = category.caseStudies || [];
           return (
             <Fragment key={category.categoryId}>
               <Heading2 id={category.categoryId}>{category.header}</Heading2>
               <CardsContainer spacing={cardGridSpacing}>
-                {caseStudies.map(caseStudy => (
-                  <Grid
-                    container
-                    item
-                    xs={12}
-                    sm={6}
-                    key={caseStudy.caseStudyId}
-                  >
-                    <CaseStudyCard
-                      key={caseStudy.caseStudyId}
-                      cardContent={caseStudy}
-                      url={url}
-                    />
-                  </Grid>
-                ))}
+                {caseStudies.map(
+                  caseStudy =>
+                    !idsToFilterOut.includes(caseStudy.caseStudyId) && (
+                      <Grid
+                        container
+                        item
+                        xs={12}
+                        sm={6}
+                        key={caseStudy.caseStudyId}
+                      >
+                        <CaseStudyCard
+                          key={caseStudy.caseStudyId}
+                          cardContent={caseStudy}
+                          url={url}
+                        />
+                      </Grid>
+                    ),
+                )}
               </CardsContainer>
             </Fragment>
           );

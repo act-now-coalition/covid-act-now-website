@@ -5,8 +5,8 @@ import MuiButton from '@material-ui/core/Button';
 import { mobileBreakpoint } from 'assets/theme/sizes';
 import { COLOR_MAP } from 'common/colors';
 
-const colorButton = `${COLOR_MAP.PURPLE}`;
-const bannerBackgroundColor = `${COLOR_MAP.PURPLE}`;
+const colorButton = `${COLOR_MAP.RED.DARK}`;
+const bannerBackgroundColor = `${COLOR_MAP.RED.DARK}`;
 
 export const MainContainerStyles = css`
   background-color: ${bannerBackgroundColor};
@@ -20,7 +20,7 @@ export const MainContainerStyles = css`
   line-height: 140%;
   color: #fff;
 
-  font-size: 14px;
+  font-size: 16px;
   text-align: center;
   justify-content: center;
   border-radius: 0;
@@ -56,7 +56,13 @@ export const ButtonContainer = styled(Grid)`
   }
 `;
 
-export const SurveyButton = styled(MuiButton)`
+// High-emphasis buttons, distinguished by elevation and fill
+// https://material-ui.com/components/buttons/#contained-buttons
+export const ContainedButton = styled(MuiButton).attrs(props => ({
+  disableRipple: true,
+  disableFocusRipple: true,
+  variant: 'contained',
+}))`
   &.MuiButton-containedPrimary {
     display: inline-block;
     color: ${colorButton};
@@ -66,7 +72,7 @@ export const SurveyButton = styled(MuiButton)`
 export const FeatureBannerButton = styled(MuiButton)`
   min-width: fit-content;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   box-shadow: none;
   text-transform: none;

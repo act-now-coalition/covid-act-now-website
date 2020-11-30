@@ -5,7 +5,6 @@ import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import Breadcrumbs from 'components/Breadcrumbs';
 import {
   MarkdownContent,
-  Heading1,
   Heading2,
   MarkdownStyleContainer,
 } from 'components/Markdown';
@@ -17,13 +16,12 @@ import {
   learnPages,
   caseStudiesContent,
 } from 'cms-content/learn';
-import * as Style from '../Learn.style';
 import {
-  Logo,
-  LogoContainer,
-  LearnMoreSection,
-  Author,
-} from './CaseStudy.style';
+  LearnHeading1,
+  BreadcrumbsContainer,
+  SmallSubtext,
+} from '../Learn.style';
+import { Logo, LogoContainer, LearnMoreSection } from './CaseStudy.style';
 
 const { metadataDescription } = caseStudiesContent;
 
@@ -49,14 +47,14 @@ const CaseStudy: React.FC = () => {
         pageDescription={`${date} ${metadataDescription}`}
       />
       <PageContent sidebarItems={learnPages}>
-        <Style.BreadcrumbsContainer>
+        <BreadcrumbsContainer>
           <Breadcrumbs item={{ to: '/case-studies', label: 'Case Studies' }} />
-        </Style.BreadcrumbsContainer>
-        <Heading1>{header}</Heading1>
+        </BreadcrumbsContainer>
+        <LearnHeading1>{header}</LearnHeading1>
         <LogoContainer>
           <Logo src={caseStudy.logoUrl} alt={caseStudy.logoAltText} />
         </LogoContainer>
-        <Author source={fullAuthorText} />
+        <SmallSubtext source={fullAuthorText} />
         <MarkdownContent source={body} />
         {studyCategory && otherCaseStudies.length > 0 && (
           <LearnMoreSection>

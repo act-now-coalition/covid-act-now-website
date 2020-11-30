@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import Grid from '@material-ui/core/Grid';
 import HomePageHeader from 'components/Header/HomePageHeader';
 import Map from 'components/Map/Map';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
@@ -15,17 +16,21 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import {
   Content,
-  SearchBarThermometerWrapper,
   SectionWrapper,
   Section,
   BannerContainer,
 } from './HomePage.style';
-import { SelectorWrapper } from 'components/Header/HomePageHeader.style';
+import {
+  SelectorWrapper,
+  StyledGridItem,
+} from 'components/Header/HomePageHeader.style';
 import CompareMain from 'components/Compare/CompareMain';
 import Explore from 'components/Explore';
+import { SwitchComponent } from 'components/SharedComponents';
 import { formatMetatagDate } from 'common/utils';
-import { getRandomStateFipsList } from './utils';
-import { DonationBanner } from 'components/Banner';
+import { getLocationFipsCodesForExplore } from './utils';
+import { ThirdWaveBanner } from 'components/Banner';
+import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -35,6 +40,7 @@ function getPageDescription() {
 export default function HomePage() {
   const shareBlockRef = useRef(null);
   const location = useLocation();
+  const [showCounties, setShowCounties] = useState(false);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
@@ -69,9 +75,18 @@ export default function HomePage() {
     window.scrollTo(0, 0);
   };
 
-  const [initialFipsList] = useState(getRandomStateFipsList());
+  const [initialFipsList] = useState(getLocationFipsCodesForExplore(5));
 
   const exploreSectionRef = useRef(null);
+
+  const onClickSwitch = newShowCounties => {
+    setShowCounties(newShowCounties);
+    trackEvent(
+      EventCategory.MAP,
+      EventAction.SELECT,
+      `Select: ${newShowCounties ? 'Counties' : 'States'}`,
+    );
+  };
 
   return (
     <>
@@ -82,7 +97,7 @@ export default function HomePage() {
         pageDescription={getPageDescription()}
       />
       <BannerContainer>
-        <DonationBanner />
+        <ThirdWaveBanner />
       </BannerContainer>
       <HomePageHeader
         indicatorsLinkOnClick={() => scrollTo(indicatorsRef.current)}
@@ -90,23 +105,51 @@ export default function HomePage() {
       <main>
         <div className="App">
           <Content>
-            <SearchBarThermometerWrapper>
-              <SelectorWrapper>
-                <GlobalSelector
-                  handleChange={handleSelectChange}
-                  extendRight={undefined}
-                />
-              </SelectorWrapper>
-              {!isMobile && <HomePageThermometer />}
-            </SearchBarThermometerWrapper>
-            <Map hideLegend />
+            <Grid container spacing={1}>
+              <Grid container item key="controls" xs={12} sm={6}>
+                <StyledGridItem
+                  container
+                  item
+                  key="location-search"
+                  xs={12}
+                  justify="flex-end"
+                >
+                  <SelectorWrapper>
+                    <GlobalSelector
+                      handleChange={handleSelectChange}
+                      extendRight={undefined}
+                    />
+                  </SelectorWrapper>
+                </StyledGridItem>
+                <StyledGridItem
+                  item
+                  container
+                  key="switch-states-counties"
+                  xs={12}
+                  justify="flex-end"
+                >
+                  <SwitchComponent
+                    leftLabel="States"
+                    rightLabel="Counties"
+                    checked={showCounties}
+                    onChange={onClickSwitch}
+                  />
+                </StyledGridItem>
+              </Grid>
+              {!isMobile && (
+                <Grid container item key="legend" xs={12} sm={6}>
+                  <HomePageThermometer />
+                </Grid>
+              )}
+            </Grid>
+            <Map hideLegend showCounties={showCounties} />
             {isMobile && <HomePageThermometer />}
             <CompareMain locationsViewable={8} isHomepage />
             <Section ref={exploreSectionRef}>
               <Explore
                 title="Cases, Deaths and Hospitalizations"
                 initialFipsList={initialFipsList}
-                initialChartIndigenousPopulations={true}
+                initialChartIndigenousPopulations={false}
               />
             </Section>
             <SectionWrapper ref={indicatorsRef}>

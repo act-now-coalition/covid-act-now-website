@@ -1,0 +1,21 @@
+import { Meta, Story } from '@storybook/addon-docs/blocks';
+import { LinkButton, ButtonPrimary, ButtonSecondary } from './Button.style';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+
+<Meta title="Building Blocks/Buttons" />
+
+<Story name="LinkButton">
+  <LinkButton href="https://covidactnow.org">covid act now</LinkButton>
+</Story>
+
+<Story name="ButtonPrimary">
+  <ButtonPrimary>primary</ButtonPrimary>
+</Story>
+
+<Story name="ButtonSecondary">
+  <ButtonSecondary>secondary</ButtonSecondary>
+</Story>
+
+<Story name="ButtonInfo">
+  <ButtonSecondary startIcon={<InfoOutlinedIcon />}>more info</ButtonSecondary>
+</Story>

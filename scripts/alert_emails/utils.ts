@@ -4,6 +4,7 @@ import moment from 'moment';
 import * as Handlebars from 'handlebars';
 import { Alert } from './interfaces';
 import { Level } from '../../src/common/level';
+import { LOCATION_SUMMARY_LEVELS } from '../../src/common/metrics/location_summary';
 
 export const ALERT_EMAIL_GROUP_PREFIX = 'alert-email';
 
@@ -42,10 +43,12 @@ function generateAlertEmailContent(
     locationURL,
   } = locationAlert;
 
+  const oldLevelText = LOCATION_SUMMARY_LEVELS[oldLevel].summary;
+  const newLevelText = LOCATION_SUMMARY_LEVELS[newLevel].summary;
   const data: AlertTemplateData = {
     change: changeText(oldLevel, newLevel),
     location_name: locationName,
-    img_alt: `Image depicting that ${locationName} went from level ${Level[oldLevel]} to ${Level[newLevel]}`,
+    img_alt: `Image depicting that ${locationName} went from "${oldLevelText}" to "${newLevelText}"`,
     img_url: `${thermometerBaseURL}/therm-${newLevel}-${oldLevel}.png`,
     last_updated: lastUpdated,
     location_url: locationURL,

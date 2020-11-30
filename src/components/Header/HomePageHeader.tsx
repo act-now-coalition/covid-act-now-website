@@ -27,7 +27,7 @@ const HomePageHeader = (props: { indicatorsLinkOnClick: () => void }) => {
             <HeaderSubCopyItem>
               We use{' '}
               <ClickableCopy onClick={props.indicatorsLinkOnClick || noop}>
-                5 key indicators
+                5 key metrics
               </ClickableCopy>{' '}
               to determine risk levels {!isMobile && <br />}
               for <strong>50 states</strong> and{' '}

@@ -4,7 +4,17 @@ export enum Level {
   HIGH,
   CRITICAL,
   UNKNOWN,
+  SUPER_CRITICAL,
 }
+
+export const ALL_LEVELS = [
+  Level.LOW,
+  Level.MEDIUM,
+  Level.HIGH,
+  Level.CRITICAL,
+  Level.SUPER_CRITICAL,
+  Level.UNKNOWN,
+];
 
 export interface LevelInfo {
   level: Level;
@@ -20,5 +30,6 @@ export interface LevelInfoMap {
   [Level.MEDIUM]: LevelInfo;
   [Level.HIGH]: LevelInfo;
   [Level.CRITICAL]: LevelInfo;
+  [Level.SUPER_CRITICAL]: LevelInfo;
   [Level.UNKNOWN]: LevelInfo;
 }

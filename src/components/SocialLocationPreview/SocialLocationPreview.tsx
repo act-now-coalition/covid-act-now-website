@@ -61,6 +61,11 @@ const SocialLocationPreview = (props: {
             <USMapHeaderText>
               <Legend condensed={true}>
                 <LegendItem
+                  key={'legend-5'}
+                  title={LOCATION_SUMMARY_LEVELS[Level.SUPER_CRITICAL].name}
+                  color={LOCATION_SUMMARY_LEVELS[Level.SUPER_CRITICAL].color}
+                />
+                <LegendItem
                   key={'legend-4'}
                   title={LOCATION_SUMMARY_LEVELS[Level.CRITICAL].name}
                   color={LOCATION_SUMMARY_LEVELS[Level.CRITICAL].color}

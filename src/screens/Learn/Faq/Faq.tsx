@@ -1,13 +1,16 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { formatMetatagDate } from 'common/utils';
 import TableOfContents, { Item } from 'components/TableOfContents';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import Breadcrumbs from 'components/Breadcrumbs';
-import { MarkdownContent, Heading1 } from 'components/Markdown';
+import { MarkdownContent } from 'components/Markdown';
 import PageContent, { MobileOnly } from 'components/PageContent';
 import { faqContent, FaqSection, learnPages } from 'cms-content/learn';
-import { BreadcrumbsContainer } from '../Learn.style';
+import { BreadcrumbsContainer, LearnHeading1 } from '../Learn.style';
 import Section from './Section';
+import { useScrollToTopButton } from 'common/hooks';
+import ScrollToTopButton from 'components/SharedComponents/ScrollToTopButton';
+import { EventCategory } from 'components/Analytics';
 
 const Faq: React.FC = () => {
   const {
@@ -18,6 +21,12 @@ const Faq: React.FC = () => {
     metadataDescription,
   } = faqContent;
   const date = formatMetatagDate();
+
+  const [showScrollToTop, setShowScrollToTop] = useState(false);
+  const showScrollToTopButton = useScrollToTopButton(
+    showScrollToTop,
+    setShowScrollToTop,
+  );
 
   function getSectionItems(sections: FaqSection[]): Item[] {
     return sections.map(section => ({
@@ -37,14 +46,18 @@ const Faq: React.FC = () => {
         <BreadcrumbsContainer>
           <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>
-        <Heading1>{header}</Heading1>
+        <LearnHeading1>{header}</LearnHeading1>
         <MarkdownContent source={intro} />
         <MobileOnly>
           <TableOfContents items={getSectionItems(sections)} />
         </MobileOnly>
         {sections.map((section: FaqSection) => (
-          <Section key={section.sectionId} content={section} />
+          <Section key={section.sectionId} section={section} />
         ))}
+        <ScrollToTopButton
+          showButton={showScrollToTopButton}
+          analyticsCategory={EventCategory.FAQ}
+        />
       </PageContent>
     </Fragment>
   );
