@@ -30,6 +30,7 @@ export enum RecommendCategory {
   MASKS = 'MASKS',
   GATHERINGS = 'GATHERINGS',
   SCHOOLS = 'SCHOOLS',
+  TRAVEL = 'TRAVEL',
 }
 
 export enum RecommendID {

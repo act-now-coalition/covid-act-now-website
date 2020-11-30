@@ -15,6 +15,7 @@ import {
   RecommendationSource,
   RecommendIcon,
   RecommendationWithIcon,
+  RecommendCategory,
 } from 'cms-content/recommendations';
 import { allIcons } from 'cms-content/recommendations';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
@@ -55,6 +56,10 @@ export function getRecommendations(
         : item.level === fedLevel;
     });
 
+  const travelRecommendation = recommendations.filter(
+    item => item.category === RecommendCategory.TRAVEL,
+  );
+
   /**
    * Some Fed recommendations in the Yellow level only apply when the positive
    * test rate is over 3% - we filter those out when that's the case.
@@ -72,7 +77,11 @@ export function getRecommendations(
     );
   }
 
-  const allRecommendations = [...fedRecommendations, ...harvardRecommendations];
+  const allRecommendations = [
+    ...fedRecommendations,
+    ...harvardRecommendations,
+    ...travelRecommendation,
+  ];
   return allRecommendations.map(getIcon);
 }
 
