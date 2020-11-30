@@ -4,9 +4,19 @@
   "teamMembers": [
     {
       "fullName": "Karen Cheney",
-      "description": "Content Lead",
+      "description": "Content lead",
       "profileUrl": "https://www.linkedin.com/in/karen-cheney-writer/",
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "John Sims",
+      "profileUrl": "https://law.pacific.edu/campus-directory/sims-john-cary\t\t\t"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "David Hinds",
+      "profileUrl": "https://www.linkedin.com/in/david-hinds-lean/"
     }
   ]
 }
