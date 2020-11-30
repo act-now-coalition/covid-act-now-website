@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect } from 'react';
-import { createGlobalStyle } from 'styled-components';
 import CompareTable from 'components/Compare/CompareTable';
 import { ModalHeader } from 'components/Compare/Compare.style';
 import CloseIcon from '@material-ui/icons/Close';
@@ -9,12 +8,7 @@ import {
   GeoScopeFilter,
 } from 'common/utils/compare';
 import Filters from 'components/Compare/Filters';
-
-const BodyScrollLock = createGlobalStyle`
-  html {
-    overflow: hidden;
-  }
-`;
+import { LockBodyScroll } from 'components/Dialog';
 
 const ModalCompare = (props: {
   stateName?: string;
@@ -60,7 +54,7 @@ const ModalCompare = (props: {
 
   return (
     <Fragment>
-      <BodyScrollLock />
+      <LockBodyScroll />
       <ModalHeader isHomepage={props.isHomepage}>
         <Filters
           isHomepage={props.isHomepage}

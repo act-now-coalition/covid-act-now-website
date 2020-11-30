@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect } from 'react';
-import { createGlobalStyle } from 'styled-components';
 import {
   Wrapper,
   Question,
@@ -9,13 +8,7 @@ import {
   Subheader,
   CloseIcon,
 } from 'components/Compare/ModalFaq.style';
-
-// Locks scroll behind modal:
-const BodyScrollLock = createGlobalStyle`
-  html {
-    overflow: hidden;
-  }
-`;
+import { LockBodyScroll } from 'components/Dialog';
 
 const ModalFaq = (props: { handleCloseModal: () => void }) => {
   useEffect(() => {
@@ -34,7 +27,7 @@ const ModalFaq = (props: { handleCloseModal: () => void }) => {
 
   return (
     <Fragment>
-      <BodyScrollLock />
+      <LockBodyScroll />
       <Wrapper>
         <CloseIcon onClick={props.handleCloseModal} />
         <Content>
