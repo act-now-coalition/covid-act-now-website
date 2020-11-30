@@ -1,0 +1,33 @@
+{
+  "teamMembers": [
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Shaeleigh Jacobs",
+      "description": "People operations lead",
+      "profileUrl": "https://www.linkedin.com/in/shaeleigh-jacobs-672152114/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Brittany Braxton",
+      "profileUrl": "Brittany Braxton"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Riffat Jaffer",
+      "description": "People operations advisor",
+      "profileUrl": "https://www.linkedin.com/in/riffat/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Sarai Reyes",
+      "profileUrl": "https://www.linkedin.com/in/sarai-reyes/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Ingrid Xhafa",
+      "profileUrl": "https://www.linkedin.com/in/ingrid-xhafa-56a02853/"
+    }
+  ],
+  "teamName": "People Operations",
+  "teamID": "people-operations"
+}
