@@ -4,9 +4,14 @@
   "teamMembers": [
     {
       "fullName": "Brett Boval",
-      "description": "Product",
+      "description": "",
       "profileUrl": "https://www.linkedin.com/in/brettboval/",
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Souradeep Sen",
+      "profileUrl": "https://www.linkedin.com/in/souradeepsen/"
     }
   ]
 }
