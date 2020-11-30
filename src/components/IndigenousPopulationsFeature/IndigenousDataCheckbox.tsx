@@ -1,42 +1,28 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import {
   Container,
   Checkbox,
   CopyContainer,
   CheckboxWrapper,
 } from './IndigenousDataCheckbox.style';
-import LearnMoreModal from './LearnMoreModal';
-import { CenteredContentModal } from 'components/Compare/Compare.style';
-import ExternalLink from 'components/ExternalLink';
-import StatTag from 'components/SummaryStats/StatTag';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
+import { Link } from 'react-router-dom';
+import Dialog, { useDialog } from 'components/Dialog';
+import { LearnMoreContent, LearnMoreTitle } from './LearnMoreModal';
 
 const IndigenousDataCheckbox = (props: {
   chartIndigenous?: boolean;
   setChartIndigenous?: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const { chartIndigenous, setChartIndigenous } = props;
-  const [showModal, setShowModal] = useState(false);
+  const [isOpen, openDialog, closeDialog] = useDialog(false);
 
   const handleCloseModal = () => {
-    setShowModal(false);
+    closeDialog();
     setChartIndigenous && setChartIndigenous(true);
-    scrollToCheckbox();
   };
 
   const checkboxRef = useRef<HTMLDivElement>(null);
-
-  const scrollToCheckbox = () => {
-    return setTimeout(() => {
-      if (checkboxRef.current) {
-        window.scrollTo({
-          left: 0,
-          top: checkboxRef.current.offsetTop - 75,
-          behavior: 'smooth',
-        });
-      }
-    }, 250);
-  };
 
   const onClickChartIndigenous = () => {
     if (setChartIndigenous) {
@@ -52,7 +38,7 @@ const IndigenousDataCheckbox = (props: {
   };
 
   const onClickMethodology = () => {
-    setShowModal(true);
+    openDialog();
     trackEvent(
       EventCategory.INDIGENOUS_PEOPLES_DAY,
       EventAction.OPEN_MODAL,
@@ -69,26 +55,32 @@ const IndigenousDataCheckbox = (props: {
           onChange={onClickChartIndigenous}
           name="Chart Indigenous Populations"
           id="Chart Indigenous Populations"
+          aria-labelledby="native-american-populations-label"
         />
       </CheckboxWrapper>
       <CopyContainer>
-        <strong>
-          View COVID’s impact on counties with majority Native American
-          populations <StatTag featured />
-        </strong>
-        <br />
-        Created on Indigenous Peoples’ Day, this feature allows you to compare
-        all counties that are “Native American majority counties“ (NAMC) to the
-        entire USA for two metrics: Cases and Deaths. Learn more about{' '}
+        <label id="native-american-populations-label">
+          <strong>
+            View COVID’s impact on counties with majority Native American
+            populations.
+          </strong>{' '}
+        </label>
+        Learn more about{' '}
         <span onClick={onClickMethodology}>our methodology</span> or view{' '}
-        <ExternalLink href="https://blog.covidactnow.org/covid-native-american-counties/">
+        <Link to="/deep-dives/covid-spread-native-american">
           our observations
-        </ExternalLink>
+        </Link>
         .
       </CopyContainer>
-      <CenteredContentModal open={showModal} onClose={handleCloseModal}>
-        <LearnMoreModal onClose={handleCloseModal} />
-      </CenteredContentModal>
+      <div>
+        <Dialog
+          open={isOpen}
+          closeDialog={handleCloseModal}
+          renderHeader={() => <LearnMoreTitle />}
+        >
+          <LearnMoreContent closeDialog={handleCloseModal} />
+        </Dialog>
+      </div>
     </Container>
   );
 };
