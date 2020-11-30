@@ -11,8 +11,7 @@ import {
 import Filters from 'components/Compare/Filters';
 
 const BodyScrollLock = createGlobalStyle`
-  body {
-    height: 100vh;
+  html {
     overflow: hidden;
   }
 `;
