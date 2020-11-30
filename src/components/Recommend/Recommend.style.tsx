@@ -3,6 +3,7 @@ import { COLOR_MAP } from 'common/colors';
 import ReactMarkdown from 'react-markdown';
 import { FooterLinkStyles } from 'components/Compare/Compare.style';
 import { LinkButton } from 'components/Button';
+import { materialSMBreakpoint } from 'assets/theme/sizes';
 
 /*
 TODO (chelsi): these breakpoints and margins are the same as
@@ -13,7 +14,7 @@ export const Wrapper = styled.div`
   width: 100%;
   margin: 1rem auto;
 
-  @media (min-width: 600px) {
+  @media (min-width: ${materialSMBreakpoint}) {
     margin: 3rem auto;
   }
 
@@ -27,6 +28,34 @@ export const Wrapper = styled.div`
 
   @media (min-width: 1750px) {
     margin: 3rem auto 2rem;
+  }
+`;
+
+export const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    width: 50%;
+
+    &:first-of-type {
+      padding: 0 0.75rem 0 0.5rem;
+    }
+
+    &:last-of-type {
+      padding: 0 0.5rem 0 0.75rem;
+    }
+  }
+`;
+
+export const RecommendationItem = styled.div`
+  display: flex;
+  padding: 0.75rem;
+  align-items: flex-start;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    padding: 0.5rem 0;
   }
 `;
 
@@ -56,21 +85,11 @@ export const RecommendationsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   padding: 0.5rem 0.25rem;
+  flex-direction: column;
 
-  @media (min-width: 600px) {
+  @media (min-width: ${materialSMBreakpoint}) {
     padding: 0.75rem;
-  }
-`;
-
-export const RecommendationWrapper = styled.div<{ index: number }>`
-  display: flex;
-  align-items: flex-start;
-  padding: 0.75rem;
-
-  @media (min-width: 600px) {
-    width: 50%;
-    padding: ${({ index }) =>
-      index % 2 ? '.5rem .5rem .5rem .8rem' : '.5rem .8rem .5rem .5rem'};
+    flex-direction: row;
   }
 `;
 
@@ -98,7 +117,7 @@ export const FooterWrapper = styled.div`
   flex-direction: column;
   margin-top: 1.25rem;
 
-  @media (min-width: 600px) {
+  @media (min-width: ${materialSMBreakpoint}) {
     flex-direction: row-reverse;
     justify-content: space-between;
   }
@@ -118,7 +137,7 @@ export const FooterHalf = styled.div`
     text-decoration: none;
   }
 
-  @media (min-width: 600px) {
+  @media (min-width: ${materialSMBreakpoint}) {
     align-items: flex-start;
 
     &:last-child {
@@ -131,7 +150,7 @@ export const FooterLink = styled(LinkButton)`
   ${FooterLinkStyles}
   white-space: nowrap;
 
-  @media (min-width: 600px) {
+  @media (min-width: ${materialSMBreakpoint}) {
     &:last-child {
       margin-left: 1.5rem;
     }

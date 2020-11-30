@@ -1,17 +1,19 @@
 import React, { Fragment } from 'react';
 import { Hidden } from '@material-ui/core';
+import { chunk, ceil } from 'lodash';
 import {
   Wrapper,
   HeaderCopy,
   Intro,
   RecommendationsContainer,
-  RecommendationWrapper,
   RecommendationBody,
   Icon,
   FooterLink,
   ShareText,
   FooterHalf,
   FooterWrapper,
+  Column,
+  RecommendationItem,
 } from './Recommend.style';
 import {
   RecommendationWithIcon,
@@ -112,7 +114,6 @@ const renderModalTitle = () => (
   </Fragment>
 );
 
-//TODO (chelsi): add in correct icon info when added to cms
 const Recommend = (props: {
   introCopy: string;
   recommendations: RecommendationWithIcon[];
@@ -150,6 +151,9 @@ const Recommend = (props: {
     );
   };
 
+  const midpoint = ceil(recommendations.length / 2);
+  const recommendationsHalved = chunk(recommendations, midpoint);
+
   return (
     <Wrapper ref={recommendationsRef}>
       <Header
@@ -158,18 +162,20 @@ const Recommend = (props: {
         onClickOpenModal={openModalRecommendations}
       />
       <RecommendationsContainer>
-        {recommendations.map((recommendation, i) => (
-          <Fragment key={`recommendation-${i}`}>
-            <RecommendationWrapper index={i}>
-              <Icon
-                src={recommendation.iconInfo.iconImage}
-                alt={recommendation.iconInfo.altText}
-              />
-              <RecommendationBody
-                source={recommendation.recommendationInfo.body}
-              />
-            </RecommendationWrapper>
-          </Fragment>
+        {recommendationsHalved.map((half, i) => (
+          <Column>
+            {half.map((recommendation, i) => (
+              <RecommendationItem key={`recommendation-${i}`}>
+                <Icon
+                  src={recommendation.iconInfo.iconImage}
+                  alt={recommendation.iconInfo.altText}
+                />
+                <RecommendationBody
+                  source={recommendation.recommendationInfo.body}
+                />
+              </RecommendationItem>
+            ))}
+          </Column>
         ))}
       </RecommendationsContainer>
       <Footer

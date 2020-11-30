@@ -78,9 +78,9 @@ export function getRecommendations(
   }
 
   const allRecommendations = [
+    ...travelRecommendation,
     ...fedRecommendations,
     ...harvardRecommendations,
-    ...travelRecommendation,
   ];
   return allRecommendations.map(getIcon);
 }
