@@ -9,8 +9,9 @@ export const DialogTitle = styled(MuiDialogTitle)`
 `;
 
 export const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
+  position: absolute;
+  top: ${({ theme }) => theme.spacing(1)}px;
+  right: ${({ theme }) => theme.spacing(1)}px;
 `;
 
 export const StyledPaper = styled(Paper)`
