@@ -53,7 +53,6 @@ const SocialLocationPreview = (props: {
               hideInstructions={true}
               setMapOption={function () {}}
               setMobileMenuOpen={function () {}}
-              showCounties={true}
             />
           </MapWrapper>
           {isEmbed ? (
