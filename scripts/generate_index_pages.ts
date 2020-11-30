@@ -8,7 +8,6 @@
 
 import fs from 'fs-extra';
 import path from 'path';
-import moment from 'moment';
 import _ from 'lodash';
 import urlJoin from 'url-join';
 import US_STATE_DATASET from '../src/components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
@@ -124,11 +123,9 @@ async function main() {
   console.log('Building index.html pages...');
 
   const builder = await IndexPageBuilder.initialize();
-  const date = moment().format('YYYY-MM-DD');
-  const mapFilename = `${date}-image-covid-us-map-cases.png`;
   await builder.writeTemplatedPage(
     '/index.html',
-    homePageTags(builder.fullImageUrl(mapFilename)),
+    homePageTags(builder.fullImageUrl('home.png')),
   );
 
   // Make sure we have at least SHARED_COMPONENT_IDS_TO_GENERATE index.html

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { getMapImageUrl } from 'common/urls';
 
 /**
  * public/index.html contains meta tags for the home page. Every non-home page
@@ -17,7 +18,7 @@ export default function AppMetaTags({
   let fullPageTitle = pageTitle
     ? [pageTitle, 'Covid Act Now'].join(' - ')
     : 'Covid Act Now';
-  let fullCanonicalUrl = new URL(canonicalUrl, 'http://covidactnow.org/').href;
+  let fullCanonicalUrl = new URL(canonicalUrl, 'https://covidactnow.org/').href;
 
   return (
     <Helmet>
@@ -25,6 +26,7 @@ export default function AppMetaTags({
       <title>{fullPageTitle}</title>
       <link rel="canonical" href={fullCanonicalUrl} />
       <meta name="description" content={pageDescription} />
+      {canonicalUrl === '/' && <meta name="image" content={getMapImageUrl()} />}
     </Helmet>
   );
 }
