@@ -19,7 +19,7 @@ import { ScreenshotReady, SCREENSHOT_CLASS } from 'components/Screenshot';
  * Screen that just shows the appropriate share card so that we can take a
  * screenshot that we then use as our OpenGraph image.
  */
-const ShareCardImage = ({ mapImage }: { mapImage: boolean }) => {
+const ShareCardImage = () => {
   const { stateId, countyFipsId } = useParams();
   const isHomePage = !stateId && !countyFipsId;
   return (
