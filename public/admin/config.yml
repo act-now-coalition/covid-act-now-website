@@ -73,9 +73,11 @@ collections:
           - label: Title and role
             name: description
             widget: string
+            required: false
           - label: Profile picture
             name: profileImgUrl
             widget: image
+            default: "/images_cms/bar_recommends_icon.svg"
           - label: Profile URL
             name: profileUrl
             widget: string
