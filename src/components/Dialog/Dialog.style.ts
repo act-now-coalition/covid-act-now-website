@@ -35,6 +35,6 @@ export const StyledMuiDialogContent = styled(MuiDialogContent)`
   padding: 0 1rem 2.5rem;
 
   @media (min-width: 600px) {
-    padding: 0.5rem 1.5rem;
+    padding: 1rem 1.5rem;
   }
 `;
