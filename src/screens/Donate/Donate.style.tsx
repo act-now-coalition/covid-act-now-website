@@ -99,6 +99,7 @@ export const Header = styled.h1`
   line-height: 1.2;
   margin: 0;
   font-size: 1.75rem;
+  margin-bottom: 0.5rem;
 
   @media (min-width: ${mobileBreakpoint}) {
     width: fit-content;
