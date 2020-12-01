@@ -34,7 +34,7 @@ import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
 import WarningIcon from '@material-ui/icons/Warning';
 import { Metric } from 'common/metric';
 import { BANNER_COPY } from 'components/Banner/ThirdWaveBanner';
-import { isIcuHospitalizationsPeak, getHospitalizationsAlert } from './utils';
+import { isHospitalizationsPeak, getHospitalizationsAlert } from './utils';
 import { ThermometerImage } from 'components/Thermometer';
 
 const NewFeatureCopy = (props: {
@@ -117,7 +117,7 @@ const LocationPageHeader = (props: {
   const lastUpdatedDateString =
     lastUpdatedDate !== null ? formatUtcDate(lastUpdatedDate) : '';
 
-  const isIcuPeak = isIcuHospitalizationsPeak(props.projections.primary);
+  const isIcuPeak = isHospitalizationsPeak(props.projections.primary);
 
   return (
     <Fragment>

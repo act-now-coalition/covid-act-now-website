@@ -1,47 +1,38 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import moment from 'moment';
 import { maxBy } from 'lodash';
 import { Projection, Column } from 'common/models/Projection';
-import { formatPercent } from 'common/utils';
 
-const numDays = 10;
+const numDays = 7;
 
-function findIcuHospitaliztionsPeak(projection: Projection): Column | null {
-  const icuHospitalizations = projection.getDataset('icuUtilization');
-  if (!icuHospitalizations || icuHospitalizations.length === 0) {
+function findHospitaliztionsPeak(projection: Projection): Column | null {
+  const hospitalizations = projection.getDataset('smoothedHospitalizations');
+  if (!hospitalizations || hospitalizations.length === 0) {
     return null;
   }
 
-  const peak = maxBy(icuHospitalizations, point => point.y);
+  const peak = maxBy(hospitalizations, point => point.y);
   return peak || null;
 }
 
-export function isIcuHospitalizationsPeak(projection: Projection): boolean {
-  // TODO: Return true if the current level is 90% or more, even if the actual
-  // peak was a while ago.
-  const peak = findIcuHospitaliztionsPeak(projection);
-  return peak ? moment(peak.x).diff(moment(), 'days') < numDays : false;
+export function isHospitalizationsPeak(projection: Projection): boolean {
+  const peak = findHospitaliztionsPeak(projection);
+  console.log({ peak });
+  return peak ? moment().diff(peak.x, 'days') < numDays : false;
 }
 
 export function getHospitalizationsAlert(projection: Projection) {
   const { locationName } = projection;
-  const peak = findIcuHospitaliztionsPeak(projection);
+  const peak = findHospitaliztionsPeak(projection);
 
   if (!peak || !peak.y) {
     return null;
   }
 
-  // TODO: Do we show the peak even if the ICU utilization is in green or
-  // yellow levels?
-  const percentIcuUtilization = formatPercent(peak.y, 1);
-
   return (
-    <p>
-      {locationName} is experiencing an unprecedented number of ICU
-      hospitalizations. In the past {numDays} days, {locationName} reached a
-      peak of <b>{percentIcuUtilization}</b> utilized ICU beds. This poses a
-      risk for COVID and non-COVID patients alike. Exercise extra caution in
-      order to avoid further overwhelming our healthcare system.
-    </p>
+    <Fragment>
+      {locationName} COVID hospitalizations are at an all-time peak - see the
+      chart.
+    </Fragment>
   );
 }
