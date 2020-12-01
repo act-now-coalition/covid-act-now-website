@@ -1,0 +1,12 @@
+{
+  "teamName": "Board",
+  "teamID": "board",
+  "teamMembers": [
+    {
+      "fullName": "James Tamplin",
+      "description": "Former Founder and CEO, Google Firebase",
+      "profileUrl": "https://www.linkedin.com/in/jamest",
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
+    }
+  ]
+}

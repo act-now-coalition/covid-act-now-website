@@ -1,0 +1,12 @@
+{
+  "teamName": "User Experience",
+  "teamID": "user-experience",
+  "teamMembers": [
+    {
+      "fullName": "Josh Ziman",
+      "description": "UX Lead",
+      "profileUrl": "https://www.linkedin.com/in/josh-ziman/",
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
+    }
+  ]
+}

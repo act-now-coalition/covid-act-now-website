@@ -5,7 +5,7 @@ import { ParentSize } from '@vx/responsive';
 import LogoDark from 'assets/images/logoDark';
 import { chartDarkMode } from 'assets/theme/palette';
 import { findLocationForFips } from 'common/locations';
-import { ScreenshotWrapper } from './ShareImage.style';
+import { DarkScreenshotWrapper } from './ShareImage.style';
 import { ExploreChart } from 'components/Explore';
 import {
   ExploreChartWrapper,
@@ -41,7 +41,7 @@ const ExploreChartImage = ({ componentParams }: { componentParams: any }) => {
   }, [selectedLocations, currentMetric, normalizeData]);
 
   return (
-    <ScreenshotWrapper className={SCREENSHOT_CLASS}>
+    <DarkScreenshotWrapper className={SCREENSHOT_CLASS}>
       <Wrapper>
         <Headers>
           <ExploreTitle>
@@ -75,7 +75,7 @@ const ExploreChartImage = ({ componentParams }: { componentParams: any }) => {
           </ExploreChartWrapper>
         </ThemeProvider>
       </Wrapper>
-    </ScreenshotWrapper>
+    </DarkScreenshotWrapper>
   );
 };
 

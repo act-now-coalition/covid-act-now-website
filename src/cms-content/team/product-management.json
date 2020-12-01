@@ -1,0 +1,12 @@
+{
+  "teamName": "Product Management",
+  "teamID": "product-management",
+  "teamMembers": [
+    {
+      "fullName": "Brett Boval",
+      "description": "Product",
+      "profileUrl": "https://www.linkedin.com/in/brettboval/",
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
+    }
+  ]
+}
