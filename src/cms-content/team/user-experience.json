@@ -4,9 +4,21 @@
   "teamMembers": [
     {
       "fullName": "Josh Ziman",
-      "description": "UX Lead",
+      "description": "User experience lead",
       "profileUrl": "https://www.linkedin.com/in/josh-ziman/",
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Grace Zec",
+      "description": "UX researcher",
+      "profileUrl": "https://www.linkedin.com/in/gracezec/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Nina Yan",
+      "description": "UX designer",
+      "profileUrl": "https://www.linkedin.com/in/ninaqyang/"
     }
   ]
 }

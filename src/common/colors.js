@@ -39,6 +39,7 @@ export const COLOR_MAP = {
   PURPLE: '#5900EA',
   LIGHTGRAY: '#f2f2f2',
   LIGHTGRAY_BG: '#fafafa',
+  LIGHT_YELLOW: '#FFF1BF',
 };
 
 export const LEVEL_COLOR = {

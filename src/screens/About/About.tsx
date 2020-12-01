@@ -24,7 +24,7 @@ import { PageType, getPageContent } from 'common/utils/netlify';
 
 const sidebar = (
   <React.Fragment>
-    <SidebarLink href="#can">About Covid Act Now</SidebarLink>
+    <SidebarLink href="#can">Our Mission</SidebarLink>
     <SidebarLink href="#partners">Who We Work With</SidebarLink>
     <SidebarLink href="#founders">Founders</SidebarLink>
     <SidebarLink href="#advisors">Advisors</SidebarLink>

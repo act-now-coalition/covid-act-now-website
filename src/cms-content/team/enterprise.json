@@ -1,0 +1,27 @@
+{
+  "teamMembers": [
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Gil Rosen",
+      "description": "Enterprise lead",
+      "profileUrl": "https://www.linkedin.com/in/rosengil/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Alan Fritzler",
+      "profileUrl": "https://www.linkedin.com/in/alanfritzler/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Charles Pieper",
+      "profileUrl": "https://www.linkedin.com/in/charlesepieper/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Patrick Cheng",
+      "profileUrl": "https://www.linkedin.com/in/patrickcchang/"
+    }
+  ],
+  "teamName": "Enterprise",
+  "teamID": "enterprise"
+}

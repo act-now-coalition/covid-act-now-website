@@ -3,14 +3,8 @@
   "teamID": "leadership",
   "teamMembers": [
     {
-      "fullName": "Max Henderson",
-      "description": "CEO",
-      "profileUrl": "https://www.linkedin.com/in/maxhenderson",
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
-    },
-    {
       "fullName": "Igor Kofman",
-      "description": "CTO",
+      "description": "CEO",
       "profileUrl": "https://www.linkedin.com/in/ikofman/",
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
     },
@@ -19,6 +13,12 @@
       "description": "COO",
       "profileUrl": "https://www.linkedin.com/in/iamdlai/",
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Michael Lehenbauer",
+      "description": "CTO",
+      "profileUrl": "https://www.linkedin.com/in/mikelehen/"
     }
   ]
 }

@@ -14,7 +14,7 @@ import alumni from './alumni.json';
 
 export interface UserProfile {
   fullName: string;
-  description: string;
+  description?: string;
   profileUrl: string;
   profileImgUrl: string;
 }

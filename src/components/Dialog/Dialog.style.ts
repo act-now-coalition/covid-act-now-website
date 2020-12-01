@@ -18,6 +18,7 @@ export const StyledPaper = styled(Paper)`
     max-height: 835px;
     max-width: 860px;
     width: 95%;
+    height: 95%;
   }
 `;
 
