@@ -7,7 +7,6 @@ export const Container = styled.div`
   display: flex;
   max-width: 750px;
   width: 100%;
-  margin: 1.25rem 0;
   padding: 1.5rem 0;
   border-radius: 4px;
   color: ${COLOR_MAP.GRAY_BODY_COPY};

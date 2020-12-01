@@ -342,10 +342,6 @@ const Explore: React.FunctionComponent<{
         labels={metricLabels}
         onChangeTab={onChangeTab}
       />
-      <IndigenousDataCheckbox
-        chartIndigenous={chartIndigenous}
-        setChartIndigenous={setChartIndigenous}
-      />
       <Styles.ChartControlsContainer>
         <Styles.TableAutocompleteHeader>
           Compare states or counties
@@ -430,6 +426,10 @@ const Explore: React.FunctionComponent<{
           <ScreenshotReady />
         </Styles.EmptyPanel>
       )}
+      <IndigenousDataCheckbox
+        chartIndigenous={chartIndigenous}
+        setChartIndigenous={setChartIndigenous}
+      />
       <DisclaimerWrapper>
         <DisclaimerBody>
           Last updated {lastUpdatedDateString}. Learn more about{' '}

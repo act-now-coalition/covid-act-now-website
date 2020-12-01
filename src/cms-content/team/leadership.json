@@ -1,0 +1,24 @@
+{
+  "teamName": "Leadership",
+  "teamID": "leadership",
+  "teamMembers": [
+    {
+      "fullName": "Max Henderson",
+      "description": "CEO",
+      "profileUrl": "https://www.linkedin.com/in/maxhenderson",
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
+    },
+    {
+      "fullName": "Igor Kofman",
+      "description": "CTO",
+      "profileUrl": "https://www.linkedin.com/in/ikofman/",
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
+    },
+    {
+      "fullName": "Debbie Lai",
+      "description": "COO",
+      "profileUrl": "https://www.linkedin.com/in/iamdlai/",
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
+    }
+  ]
+}

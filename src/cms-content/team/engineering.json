@@ -1,0 +1,12 @@
+{
+  "teamName": "Engineering",
+  "teamID": "engineering",
+  "teamMembers": [
+    {
+      "fullName": "Michael Lehenbauer",
+      "description": "Front-end Engineering",
+      "profileUrl": "https://www.linkedin.com/in/mikelehen/",
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
+    }
+  ]
+}

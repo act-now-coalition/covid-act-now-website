@@ -1,0 +1,12 @@
+{
+  "teamName": "Alumni",
+  "teamID": "alumni",
+  "teamMembers": [
+    {
+      "fullName": "Adnan Pirzada",
+      "description": "Software Engineer at Lattice",
+      "profileUrl": "https://www.linkedin.com/in/adpirz/",
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
+    }
+  ]
+}

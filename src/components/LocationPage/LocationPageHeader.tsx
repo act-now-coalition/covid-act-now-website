@@ -18,8 +18,6 @@ import {
   ColumnTitle,
   SectionColumn,
   LevelDescription,
-  ThermometerContainer,
-  ThermometerRow,
 } from 'components/LocationPage/LocationPageHeader.style';
 import { useEmbed } from 'common/utils/hooks';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
@@ -33,10 +31,10 @@ import { isNull } from 'util';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
 import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
-import { LEVEL_COLOR } from 'common/colors';
 import WarningIcon from '@material-ui/icons/Warning';
 import { Metric } from 'common/metric';
 import { BANNER_COPY } from 'components/Banner/ThirdWaveBanner';
+import { ThermometerImage } from 'components/Thermometer';
 
 const NewFeatureCopy = (props: {
   locationName: string;
@@ -112,31 +110,6 @@ const LocationPageHeader = (props: {
   const lastUpdatedDateString =
     lastUpdatedDate !== null ? formatUtcDate(lastUpdatedDate) : '';
 
-  const thresholdUnknown = alarmLevel === Level.UNKNOWN;
-
-  const thermometerContent = [
-    {
-      level: Level.SUPER_CRITICAL,
-      color: `${LEVEL_COLOR[Level.SUPER_CRITICAL]}`,
-    },
-    {
-      level: Level.CRITICAL,
-      color: `${LEVEL_COLOR[Level.CRITICAL]}`,
-    },
-    {
-      level: Level.HIGH,
-      color: `${LEVEL_COLOR[Level.HIGH]}`,
-    },
-    {
-      level: Level.MEDIUM,
-      color: `${LEVEL_COLOR[Level.MEDIUM]}`,
-    },
-    {
-      level: Level.LOW,
-      color: `${LEVEL_COLOR[Level.LOW]}`,
-    },
-  ];
-
   return (
     <Fragment>
       <ColoredHeaderBanner bgcolor={fillColor} />
@@ -165,18 +138,7 @@ const LocationPageHeader = (props: {
           </HeaderSection>
           <HeaderSection>
             <SectionHalf>
-              <ThermometerContainer>
-                {thermometerContent.map((row, i) => {
-                  const isCurrentLevel = row.level === alarmLevel;
-                  return (
-                    <ThermometerRow
-                      color={row.color}
-                      thresholdUnknown={thresholdUnknown}
-                      isCurrentLevel={isCurrentLevel}
-                    />
-                  );
-                })}
-              </ThermometerContainer>
+              <ThermometerImage currentLevel={alarmLevel} />
               <SectionColumn>
                 <ColumnTitle>Covid risk level</ColumnTitle>
                 <LevelDescription>{levelInfo.summary}</LevelDescription>

@@ -7,6 +7,7 @@ import ExploreChartImage from './ExploreChartImage';
 import ExploreChartExportImage from './ExploreChartExportImage';
 import CompareTableImage from './CompareTableImage';
 import { SharedComponent, useSharedComponentParams } from 'common/sharing';
+import { USMapImage } from './USMapImage';
 
 function SharedComponentImage({ exportImage }: { exportImage: boolean }) {
   const componentParams = useSharedComponentParams(SharedComponent.Any);
@@ -31,6 +32,11 @@ export default function ShareImage({ match }: RouteComponentProps<{}>) {
     <Switch>
       {/* HOME PAGE SHARE CARD */}
       <Route exact path={`${match.path}`} component={ShareCardImage} />
+
+      {/* HOME PAGE MAP IMAGE (used in meta name="image" tag) */}
+      <Route exact path={`${match.path}map/`}>
+        <USMapImage />
+      </Route>
 
       {/* LOCATION PAGES SHARE CARD */}
       <Route

@@ -48,6 +48,38 @@ collections:
                   - { label: 'Image', name: 'image', widget: 'image' }
                   - { label: 'Url', name: 'url', widget: 'string' }
 
+  - label: Team directory
+    name: team
+    folder: 'src/cms-content/team'
+    create: true
+    label_singular: Team
+    description: description
+    format: json
+    identifier_field: teamName
+    fields:
+      - label: Team name
+        name: teamName
+        widget: string
+      - label: Team ID
+        name: teamID
+        widget: string
+      - label: Team members
+        name: teamMembers
+        widget: list
+        fields:
+          - label: Full name
+            name: fullName
+            widget: string
+          - label: Title and role
+            name: description
+            widget: string
+          - label: Profile picture
+            name: profileImgUrl
+            widget: image
+          - label: Profile URL
+            name: profileUrl
+            widget: string
+
   - name: articles
     label: Articles
     folder: 'src/cms-content/articles'

@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect } from 'react';
-import { createGlobalStyle } from 'styled-components';
 import {
   Wrapper,
   Question,
@@ -9,14 +8,7 @@ import {
   Subheader,
   CloseIcon,
 } from 'components/Compare/ModalFaq.style';
-
-// Locks scroll behind modal:
-const BodyScrollLock = createGlobalStyle`
-  body {
-    height: 100vh;
-    overflow: hidden;
-  }
-`;
+import { LockBodyScroll } from 'components/Dialog';
 
 const ModalFaq = (props: { handleCloseModal: () => void }) => {
   useEffect(() => {
@@ -35,7 +27,7 @@ const ModalFaq = (props: { handleCloseModal: () => void }) => {
 
   return (
     <Fragment>
-      <BodyScrollLock />
+      <LockBodyScroll />
       <Wrapper>
         <CloseIcon onClick={props.handleCloseModal} />
         <Content>
@@ -51,21 +43,6 @@ const ModalFaq = (props: { handleCloseModal: () => void }) => {
             consists of one or more counties that contain a city of 50,000 or
             more inhabitants. We define “metro counties” as counties belonging
             to MSAs; “non metro counties” as counties not within an MSA.
-          </Answer>
-          <Question>How are “college” counties defined?</Question>
-          <Answer>
-            We want to highlight counties where the college population may be
-            impacting the local COVID dynamics.
-            <br />
-            <br />
-            Counties in which typical full-time student enrollment accounts for
-            at least 5% of the total county population are labeled as “College”
-            counties. This labels 334 counties as “College” counties
-            (approximately 10% of all counties).
-            <br />
-            <br />
-            Note that these colleges may or may not currently have in-person
-            classes / activities.
           </Answer>
           <Question>Why do some counties have missing data?</Question>
           <Answer>

@@ -9,7 +9,7 @@ import {
   Subtitle,
   Title,
 } from './ChartShareImage.style';
-import { ScreenshotWrapper } from './ShareImage.style';
+import { DarkScreenshotWrapper } from './ShareImage.style';
 import LogoDark from 'assets/images/logoDark';
 import { chartDarkMode } from 'assets/theme/palette';
 import { Projections } from 'common/models/Projections';
@@ -44,7 +44,7 @@ export default function ChartShareImage() {
   const chartHeight = 225;
 
   return (
-    <ScreenshotWrapper className={SCREENSHOT_CLASS}>
+    <DarkScreenshotWrapper className={SCREENSHOT_CLASS}>
       <Wrapper>
         <Headers>
           <Title>{getMetricNameExtended(metric)}</Title>
@@ -68,6 +68,6 @@ export default function ChartShareImage() {
           </ChartWrapper>
         </ThemeProvider>
       </Wrapper>
-    </ScreenshotWrapper>
+    </DarkScreenshotWrapper>
   );
 }
