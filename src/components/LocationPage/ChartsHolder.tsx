@@ -63,9 +63,10 @@ const ChartsHolder = (props: {
   const { pathname, hash } = useLocation();
   const isRecommendationsShareUrl = pathname.includes('recommendations');
 
-  const defaultMetric = hash.startsWith('#explore-chart')
-    ? ExploreMetric.HOSPITALIZATIONS
-    : ExploreMetric.CASES;
+  const defaultMetric =
+    hash === '#explore-chart'
+      ? ExploreMetric.HOSPITALIZATIONS
+      : ExploreMetric.CASES;
 
   useEffect(() => {
     const scrollToChart = () => {
