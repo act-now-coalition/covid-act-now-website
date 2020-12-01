@@ -11,7 +11,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { Metric, ALL_METRICS } from 'common/metric';
 import CompareMain from 'components/Compare/CompareMain';
-import Explore from 'components/Explore';
+import Explore, { ExploreMetric } from 'components/Explore';
 import { County } from 'common/locations';
 import Recommend from 'components/Recommend';
 import {
@@ -60,8 +60,14 @@ const ChartsHolder = (props: {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   const isRecommendationsShareUrl = pathname.includes('recommendations');
+
+  const selectedMetric = hash.startsWith('#explore-chart')
+    ? ExploreMetric.HOSPITALIZATIONS
+    : ExploreMetric.CASES;
+
+  console.log({ selectedMetric });
 
   useEffect(() => {
     const scrollToChart = () => {
@@ -194,10 +200,11 @@ const ChartsHolder = (props: {
                 />
               ))}
             </MainContentInner>
-            <MainContentInner ref={exploreChartRef}>
+            <MainContentInner ref={exploreChartRef} id="explore-chart">
               <Explore
                 initialFipsList={initialFipsList}
                 title="Cases, Deaths, and Hospitalizations"
+                defaultMetric={selectedMetric}
               />
             </MainContentInner>
           </ChartContentWrapper>

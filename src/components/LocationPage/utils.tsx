@@ -2,6 +2,8 @@ import React, { Fragment } from 'react';
 import moment from 'moment';
 import { maxBy } from 'lodash';
 import { Projection, Column } from 'common/models/Projection';
+import { HashLink } from 'react-router-hash-link';
+import { scrollWithOffset } from 'components/TableOfContents';
 
 const numDays = 7;
 
@@ -17,7 +19,6 @@ function findHospitaliztionsPeak(projection: Projection): Column | null {
 
 export function isHospitalizationsPeak(projection: Projection): boolean {
   const peak = findHospitaliztionsPeak(projection);
-  console.log({ peak });
   return peak ? moment().diff(peak.x, 'days') < numDays : false;
 }
 
@@ -31,8 +32,15 @@ export function getHospitalizationsAlert(projection: Projection) {
 
   return (
     <Fragment>
-      {locationName} COVID hospitalizations are at an all-time peak - see the
-      chart.
+      {locationName} COVID hospitalizations are at an all-time peak -{' '}
+      <HashLink
+        to="#explore-chart"
+        scroll={el => scrollWithOffset(el, -180)}
+        smooth
+      >
+        see the chart
+      </HashLink>
+      .
     </Fragment>
   );
 }
