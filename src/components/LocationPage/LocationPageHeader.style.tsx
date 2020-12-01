@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
 import { Box } from '@material-ui/core';
-import palette from 'assets/theme/palette';
 import { COLORS } from 'common';
 import { COLOR_MAP } from 'common/colors';
 import { Level } from 'common/level';
+import { Heading1 } from 'components/Typography';
+import { materialSMBreakpoint } from 'assets/theme/sizes';
 
 export const ColoredHeaderBanner = styled(Box)`
   display: flex;
@@ -12,7 +13,7 @@ export const ColoredHeaderBanner = styled(Box)`
   height: 400px;
   background-color: ${props => props.bgcolor || COLORS.LIGHTGRAY};
 
-  @media (min-width: 600px) {
+  @media (min-width: ${materialSMBreakpoint}) {
     height: 250px;
   }
 `;
@@ -38,7 +39,7 @@ export const Wrapper = styled(Box)<{
     cursor: pointer;
     margin: -380px 1rem 0 1rem;
 
-    @media (min-width: 600px) {
+    @media (min-width: ${materialSMBreakpoint}) {
       position: relative;
       flex-direction: column;
       margin: ${props.headerTopMargin}px 1rem ${props.headerBottomMargin}px;
@@ -76,18 +77,25 @@ export const HeaderSection = styled(Box)`
     justify-content: space-between;
   }
 
-  @media (min-width: 600px) {
+  @media (min-width: ${materialSMBreakpoint}) {
     flex-direction: row;
     justify-content: space-between;
   }
 `;
 
 export const LocationCopyWrapper = styled(Box)`
-  line-height: 1.4;
-  margin: 1.5rem 1rem;
+  text-align: center;
+  margin: 0.5rem 2.25rem;
 
-  @media (min-width: 600px) {
-    margin: 2.5rem 0.875rem 2.5rem 2.25rem;
+  @media (min-width: ${materialSMBreakpoint}) {
+    text-align: left;
+    margin: 1.25rem 2.25rem;
+  }
+`;
+
+export const LocationName = styled(Heading1)`
+  @media (max-width: ${materialSMBreakpoint}) {
+    font-size: 1.375rem;
   }
 `;
 
@@ -104,7 +112,7 @@ export const FooterContainer = styled(Box)`
     margin-right: 0.75rem;
   }
 
-  @media (min-width: 600px) {
+  @media (min-width: ${materialSMBreakpoint}) {
     width: 100%;
     margin: 1.5rem 0 0.5rem 0.2rem;
     cursor: auto;
@@ -151,7 +159,7 @@ export const ButtonsWrapper = styled(Box)`
   justify-content: center;
   margin-bottom: 1.5rem;
 
-  @media (min-width: 600px) {
+  @media (min-width: ${materialSMBreakpoint}) {
     width: fit-content;
     background-color: unset;
     border-radius: 0;
@@ -204,7 +212,7 @@ export const HeaderButton = styled(Box)`
     }
   }
 
-  @media (min-width: 600px) {
+  @media (min-width: ${materialSMBreakpoint}) {
     font-size: 14px;
     padding: 0.75rem 1.75rem;
     margin: auto;
@@ -221,7 +229,7 @@ export const LastUpdatedDate = styled.span<{
   display: flex;
   margin-left: ${({ isVerifiedState }) => isVerifiedState && '32px'};
 
-  @media (min-width: 600px) {
+  @media (min-width: ${materialSMBreakpoint}) {
     display: inline;
     margin-left: 0;
     margin-bottom: 10px;
@@ -247,7 +255,7 @@ export const SectionHalf = styled(Box)`
     color: ${COLOR_MAP.GRAY_ICON};
   }
 
-  @media (min-width: 600px) {
+  @media (min-width: ${materialSMBreakpoint}) {
     &:first-child {
       flex: 3;
       margin: 2rem 1.5rem 2rem 2.25rem;
@@ -265,7 +273,7 @@ export const SectionColumn = styled(Box)<{ isUpdateCopy?: Boolean }>`
   flex-direction: column;
   margin-left: 1.5rem;
 
-  @media (min-width: 600px) {
+  @media (min-width: ${materialSMBreakpoint}) {
     margin-left: ${({ isUpdateCopy }) => (isUpdateCopy ? '1rem' : '1.5rem')};
   }
 `;
@@ -278,7 +286,7 @@ export const ColumnTitle = styled(Typography)<{ isUpdateCopy?: Boolean }>`
   letter-spacing: 0.02rem;
   margin-bottom: 0.5rem;
 
-  @media (min-width: 600px) {
+  @media (min-width: ${materialSMBreakpoint}) {
     margin-bottom: ${({ isUpdateCopy }) => (isUpdateCopy ? '.5rem' : '.75rem')};
     font-size: 13px;
   }
@@ -300,7 +308,7 @@ export const Copy = styled(Typography)<{ isUpdateCopy?: Boolean }>`
     cursor: pointer;
   }
 
-  @media (min-width: 600px) {
+  @media (min-width: ${materialSMBreakpoint}) {
     font-size: 13px;
     max-width: 440px;
   }
@@ -313,28 +321,8 @@ export const LevelDescription = styled(Typography)`
   font-weight: bold;
   margin-bottom: 0.5rem;
 
-  @media (min-width: 600px) {
+  @media (min-width: ${materialSMBreakpoint}) {
     font-size: 18px;
     margin-bottom: 0.75rem;
   }
-`;
-
-// TODO(michael): This doesn't seem to be used. We should remove it!
-export const Triangle = styled(Box)<{ alarmLevel: number }>`
-  width: 0;
-  height: 0;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-bottom: 6px solid black;
-  margin-top: 6px;
-  margin-left: ${({ alarmLevel }) =>
-    alarmLevel === Level.LOW
-      ? '-96px'
-      : alarmLevel === Level.MEDIUM
-      ? '-32px'
-      : alarmLevel === Level.HIGH
-      ? '32px'
-      : alarmLevel === Level.CRITICAL
-      ? '96px'
-      : '0'};
 `;

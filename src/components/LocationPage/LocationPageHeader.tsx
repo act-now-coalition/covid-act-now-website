@@ -17,6 +17,7 @@ import {
   ColumnTitle,
   SectionColumn,
   LevelDescription,
+  LocationName,
 } from 'components/LocationPage/LocationPageHeader.style';
 import { useEmbed } from 'common/utils/hooks';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
@@ -33,7 +34,6 @@ import WarningIcon from '@material-ui/icons/Warning';
 import { Metric } from 'common/metric';
 import { BANNER_COPY } from 'components/Banner/ThirdWaveBanner';
 import { ThermometerImage } from 'components/Thermometer';
-import { Heading1 } from 'components/Typography';
 
 const NewFeatureCopy = (props: {
   locationName: string;
@@ -51,12 +51,14 @@ const LocationPageHeading: React.FC<{ projections: Projections }> = ({
 }) => {
   const { countyName, stateCode, stateName } = projections;
   return countyName ? (
-    <Fragment>
+    <LocationName>
       <strong>{countyName}, </strong>
       {stateCode}
-    </Fragment>
+    </LocationName>
   ) : (
-    <strong>{stateName}</strong>
+    <LocationName>
+      <strong>{stateName}</strong>
+    </LocationName>
   );
 };
 
@@ -113,9 +115,9 @@ const LocationPageHeader = (props: {
         <TopContainer>
           <HeaderSection>
             <LocationCopyWrapper>
-              <Heading1>
+              <LocationName>
                 <LocationPageHeading projections={props.projections} />
-              </Heading1>
+              </LocationName>
             </LocationCopyWrapper>
             <ButtonsWrapper>
               <HeaderButton onClick={props.onHeaderShareClick || noop}>

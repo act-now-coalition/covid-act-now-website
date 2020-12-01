@@ -37,10 +37,12 @@ const fonts: ThemeFonts = {
     margin-bottom: 0.75rem;
   `,
   heading1: css`
-    font-size: 1.8125rem;
-    line-height: 1.25;
+    font-size: 1.875rem;
+    font-weight: 400;
+    line-height: 1.17;
     margin-bottom: 1.25rem;
     margin-top: 1.25rem;
+    letter-spacing: -0.05px;
   `,
   disclaimer: css`
     font-size: 0.875rem;
