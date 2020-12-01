@@ -38,5 +38,8 @@
       "logos": []
     }
   ],
-  "pageHeader": "About Covid Act Now"
+  "pageHeader": "About Covid Act Now",
+  "whoWeServeHeader": "Who we serve",
+  "whoWeServeContent": "More than 100 federal, state, and county governments who have trusted and used our tool to make data-driven decisions around COVID, including:",
+  "teamIntro": "Our multidisciplinary, volunteer-driven team draws on expertise in technology, design, data science, epidemiology, public health, and policy."
 }
