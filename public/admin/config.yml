@@ -51,11 +51,13 @@ collections:
               label: 'Who we serve: Header',
               name: 'whoWeServeHeader',
               widget: 'string',
+              required: false
             }
           - {
               label: 'Who we serve: Content',
               name: 'whoWeServeContent',
               widget: 'markdown',
+              required: false
             }
           - label: 'Government logos'
             name: 'governmentLogos'
@@ -68,6 +70,7 @@ collections:
               label: 'Social mentions: Intro',
               name: 'socialMentionsIntro',
               widget: 'markdown',
+              required: false
             }
           - label: 'Social mentions: Content'
             name: 'socialMentionsContent'
@@ -80,6 +83,7 @@ collections:
               label: 'Team: Intro',
               name: 'teamIntro',
               widget: 'markdown',
+              required: false
             }
   - label: Team directory
     name: team
