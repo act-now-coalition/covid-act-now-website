@@ -40,7 +40,8 @@ export function getHospitalizationsAlert(projection: Projection) {
       {locationName} is experiencing an unprecedented number of ICU
       hospitalizations. In the past {numDays} days, {locationName} reached a
       peak of <b>{percentIcuUtilization}</b> utilized ICU beds. This poses a
-      risk for COVID and non-COVID patients alike.
+      risk for COVID and non-COVID patients alike. Exercise extra caution in
+      order to avoid further overwhelming our healthcare system.
     </p>
   );
 }
