@@ -10,15 +10,57 @@
     },
     {
       "fullName": "Ellie Graeden, Ph.D.",
-      "description": "CEO of Talus Analytics and Georgetown University Adjunct Professor",
+      "description": "CEO of Talus Analytics and Georgetown University adjunct professor",
       "profileUrl": "https://ghss.georgetown.edu/people/graeden",
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
     },
     {
       "fullName": "Dr. Nirav Shah",
-      "description": "Senior Scholar at Stanford Medical School and former New York State Commissioner of Health",
+      "description": "Senior scholar at Stanford Medical School and former New York State commissioner of health",
       "profileUrl": "https://www.linkedin.com/in/niravrshah",
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Dr. Shuhan He",
+      "description": "Emergency medicine physician and co-founder of GetUsPPE.org",
+      "profileUrl": "https://www.linkedin.com/in/shuhan-he/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Bob Inglis",
+      "description": "Former Republican congressman",
+      "profileUrl": "https://www.linkedin.com/in/bob-inglis-21112b25/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Don Berwick",
+      "profileUrl": "https://www.linkedin.com/in/don-berwick-46a49380/",
+      "description": "Former administrator, Centers for Medicare and Medicaid Services"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Jason Wang",
+      "description": "Director, Stanford Center for Policy, Outcomes, and Prevention",
+      "profileUrl": "https://www.linkedin.com/in/jason-wang-38a34842/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Nahid Bhadelia",
+      "description": "Medical director, Boston Medical Center's Special Pathogens Unit,",
+      "profileUrl": "https://www.linkedin.com/in/nahid-bhadelia-81a775b7/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Nigam Shah",
+      "description": "Associate professor of biomedical data science, Stanford University",
+      "profileUrl": "https://www.linkedin.com/in/nigam/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Tomás Pueyo",
+      "description": "Author, “Hammer and the Dance” and other pieces",
+      "profileUrl": "https://www.linkedin.com/in/tomaspueyo/"
     }
   ]
 }
