@@ -1,5 +1,7 @@
 {
-  "headerLines": ["Help People Make Informed Decisions"],
+  "headerLines": [
+    "Help People Make Informed Decisions"
+  ],
   "intro": "We are a small, independent nonprofit, powered almost entirely by volunteers. We have been working relentlessly since March to bring you and the policy makers in your county and state critical COVID data and information.",
   "sections": [
     {
@@ -8,7 +10,7 @@
     },
     {
       "title": "Act now. Donate now.",
-      "copy": "To join us in the fight against COVID, you can:\n\n* Donate online \n* Send a check payable to: **Act Now Coalition**. We accept checks for amounts larger than $500. For smaller amounts, we ask that you use the online form. This is to minimize overhead costs so we can focus as much of our time as possible on bringing you COVID data.\n\n> 340 S. Lemon Ave, #6683 \n\n>Walnut, CA 91789\n\n * Double your impact with an [employer match](https://build.org/matching-gifts/).\n\n* Recommend a grant from your donor-advised fund. Our EIN: 85-0613766. Our organization name may show up as “Act Now Coalition.”\n\nQuestions? Email [info@covidactnow.org](mailto:info@covidactnow.org)."
+      "copy": "To join us in the fight against COVID, you can:\n\n* Donate online \n* Send a check payable to: **Act Now Coalition**. We accept checks for amounts larger than $500. For smaller amounts, we ask that you use the online form. This is to minimize overhead costs so we can focus as much of our time as possible on bringing you COVID data.\n\n> 340 S. Lemon Ave, #6683 \n>\n> Walnut, CA 91789\n\n* Double your impact with an [](https://build.org/matching-gifts/)employer match.\n* Recommend a grant from your donor-advised fund. Our EIN: 85-0613766. Our organization name may show up as “Act Now Coalition.”\n\nQuestions? Email [info@covidactnow.org](mailto:info@covidactnow.org)."
     }
   ]
 }
