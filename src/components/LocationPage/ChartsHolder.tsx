@@ -63,11 +63,9 @@ const ChartsHolder = (props: {
   const { pathname, hash } = useLocation();
   const isRecommendationsShareUrl = pathname.includes('recommendations');
 
-  const selectedMetric = hash.startsWith('#explore-chart')
+  const defaultMetric = hash.startsWith('#explore-chart')
     ? ExploreMetric.HOSPITALIZATIONS
     : ExploreMetric.CASES;
-
-  console.log({ selectedMetric });
 
   useEffect(() => {
     const scrollToChart = () => {
@@ -204,7 +202,7 @@ const ChartsHolder = (props: {
               <Explore
                 initialFipsList={initialFipsList}
                 title="Cases, Deaths, and Hospitalizations"
-                defaultMetric={selectedMetric}
+                defaultMetric={defaultMetric}
               />
             </MainContentInner>
           </ChartContentWrapper>
