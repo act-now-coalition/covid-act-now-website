@@ -58,9 +58,10 @@ const Header = (props: {
       <HeaderCopy>{header}</HeaderCopy>
       <Subtitle1>for {locationName}</Subtitle1>
       <Intro>
-        These recommendations match the guidelines set by{' '}
-        <strong>{federalTaskForce.sourceName}</strong> and{' '}
-        <strong>{harvard.sourceName}</strong>. {introCopy}{' '}
+        These recommendations match the guidelines set by the{' '}
+        <strong>{federalTaskForce.sourceName}</strong>,{' '}
+        <strong>{harvard.sourceName}</strong>, and the <strong>CDC</strong>.{' '}
+        {introCopy}{' '}
         <LinkButton onClick={onClickOpenModal}>Learn more</LinkButton>.
       </Intro>
     </Fragment>
