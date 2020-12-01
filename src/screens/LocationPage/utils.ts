@@ -15,7 +15,7 @@ function getLocationName(fipsCode: string) {
 
 export function getPageTitle(projections: Projections): string {
   const locationName = getLocationName(projections.fips);
-  return `${locationName} - COVID data and risk levels`;
+  return `${locationName} - COVID Risk Map & Key Metrics`;
 }
 
 export function getPageDescription(projections: Projections): string {
