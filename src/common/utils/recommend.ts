@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { sum, isNumber, reject, isNull } from 'lodash';
+import { sum, isNumber, reject, isNull, partition } from 'lodash';
 import { Projection, Column } from 'common/models/Projection';
 import {
   Metric,
@@ -77,11 +77,24 @@ export function getRecommendations(
     );
   }
 
+  // Orders based on relevance:
+  const [gatheringRecommendation, otherFedRecommentations] = partition(
+    fedRecommendations,
+    item => item.category === RecommendCategory.GATHERINGS,
+  );
+  const [masksRecommendation, finalOtherFedRecommendations] = partition(
+    otherFedRecommentations,
+    item => item.category === RecommendCategory.MASKS,
+  );
+
   const allRecommendations = [
     ...travelRecommendation,
-    ...fedRecommendations,
+    ...gatheringRecommendation,
+    ...masksRecommendation,
+    ...finalOtherFedRecommendations,
     ...harvardRecommendations,
   ];
+
   return allRecommendations.map(getIcon);
 }
 
