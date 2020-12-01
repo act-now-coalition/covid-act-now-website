@@ -31,14 +31,9 @@
       "sectionId": "health and symptoms",
       "questions": [
         {
-          "question": "What are the long-term effects of COVID?",
-          "answer": "While some people recover quickly from COVID, others suffer debilitating, long-term symptoms, according to the [Mayo Clinic](https://www.mayoclinic.org/diseases-conditions/coronavirus/in-depth/coronavirus-long-term-effects/art-20490351). In Italy, which was one of the first countries to be hit hard by the disease, many survivors are still experiencing health problems after having COVID. In one [study](https://jamanetwork.com/journals/jama/fullarticle/2768351), more than 87 percent of individuals experienced one or more symptoms (most commonly fatigue and difficulty breathing) after recovery from COVID. Meanwhile, a German [study](https://jamanetwork.com/journals/jamacardiology/fullarticle/2768916) found that 78 of 100 recovered COVID patients continued to experience heart abnormalities months after [infection](/glossary#infection).",
-          "questionId": "long-term-effects-covid"
-        },
-        {
-          "question": "How long are you contagious with COVID?",
-          "answer": "According to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/hcp/disposition-in-home-patients.html), a person with COVID who has been [isolating](/glossary#quarantine) at home may stop isolating when (1) at least 10 days have passed since symptom onset; (2) at least 24 hours have passed fever-free without the use of fever-reducing medications; and (3) other symptoms have improved. Those “who never develop symptoms may discontinue isolation and other precautions 10 days after the date of their first positive” [PCR test](/glossary#pcr-test) for COVID.",
-          "questionId": "how-long-contagious-with-covid"
+          "question": "What are the symptoms of COVID?",
+          "questionId": "what-symptoms-covid",
+          "answer": "Symptoms of COVID vary widely between different people. The most common symptoms include fatigue, cough and fever. Loss of smell or taste is also a frequent, early symptom. Other symptoms that people with COVID may experience include shortness of breath, muscle or body ache, sore throat, chills, congestion, headache, stomach pain (including nausea and diarrhea), pink eye (conjunctivitis) and chest pain. COVID symptoms generally appear two to 14 days after exposure. For more information on symptoms and when to seek medical help, go to the [Centers for Disease Control and Prevention](https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/symptoms.html)."
         },
         {
           "question": "How common is it to have COVID but not have any symptoms?",
@@ -46,14 +41,24 @@
           "questionId": "how-common-covid-without-symptoms"
         },
         {
+          "question": "How long are you contagious with COVID?",
+          "answer": "According to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/hcp/disposition-in-home-patients.html), a person with COVID who has been [isolating](/glossary#quarantine) at home may stop isolating when (1) at least 10 days have passed since symptom onset; (2) at least 24 hours have passed fever-free without the use of fever-reducing medications; and (3) other symptoms have improved. Those “who never develop symptoms may discontinue isolation and other precautions 10 days after the date of their first positive” [PCR test](/glossary#pcr-test) for COVID.",
+          "questionId": "how-long-contagious-with-covid"
+        },
+        {
+          "question": " Can you get COVID twice?",
+          "questionId": "can-you-get-covid-twice",
+          "answer": "While antibodies \\[/glossary#antibodies]  may offer some protection against the virus and documented cases of reinfection are rare, there is no evidence to suggest that people are immune to COVID after their first infection. The current understanding of reinfection is limited due to the novelty of the virus, but ongoing studies will provide more insight into how frequently reinfection occurs and how long immunity from COVID may last after your first infection. Even if you’ve already had COVID or have antibodies, the [CDC recommends](https://www.cdc.gov/coronavirus/2019-ncov/your-health/reinfection.html#:~:text=Cases%20of%20reinfection%20with%20COVID,some%20reinfections%20are%20expected.) taking the same precautions against the virus, including mask wearing \\[/glossary#face-mask] and social distancing \\[/glossary#social-distancing]."
+        },
+        {
+          "question": "What are the long-term effects of COVID?",
+          "answer": "While some people recover quickly from COVID, others suffer debilitating, long-term symptoms, according to the [Mayo Clinic](https://www.mayoclinic.org/diseases-conditions/coronavirus/in-depth/coronavirus-long-term-effects/art-20490351). In Italy, which was one of the first countries to be hit hard by the disease, many survivors are still experiencing health problems after having COVID. In one [study](https://jamanetwork.com/journals/jama/fullarticle/2768351), more than 87 percent of individuals experienced one or more symptoms (most commonly fatigue and difficulty breathing) after recovery from COVID. Meanwhile, a German [study](https://jamanetwork.com/journals/jamacardiology/fullarticle/2768916) found that 78 of 100 recovered COVID patients continued to experience heart abnormalities months after [infection](/glossary#infection).",
+          "questionId": "long-term-effects-covid"
+        },
+        {
           "question": "What is counted as a COVID death?",
           "answer": "The [WHO](https://www.who.int/classifications/icd/Guidelines_Cause_of_Death_COVID-19.pdf?ua=1) states that a COVID death can be “a death resulting from a clinically compatible illness, in a probable or confirmed COVID-19 case, unless there is a clear alternative cause of death that cannot be related to COVID disease (e.g. trauma). There should be no period of complete recovery from COVID-19 between illness and death.” (The CDC’s  offers further [guidance](https://www.cdc.gov/nchs/covid19/coding-and-reporting.htm) on reporting and coding deaths due to COVID.)\n\nTracking the number of COVID deaths is difficult, and some suggest that the number is underreported. One issue is that individuals infected with the [virus](/glossary#virus) may be sick for many days, or even weeks, before death, so the increase in deaths resulting from a [wave](/glossary#wave) of [infections](/glossary#infection) may lag significantly in time. In some cases people may die indirectly from COVID, because hospitals were overcrowded with COVID patients and care was late or unavailable. To track the number of COVID deaths, researchers rely on something called “excess mortality” — the number of deaths from all causes during a crisis that are above the historical average during non-crisis times. For information on excess mortality, see the CDC’s report, [Excess Deaths Associated with COVID-19](https://www.cdc.gov/nchs/nvss/vsrr/covid19/excess_deaths.htm).",
           "questionId": "counted-as-covid-death"
-        },
-        {
-          "question": "What are the symptoms of COVID?",
-          "questionId": "what-symptoms-covid",
-          "answer": "Symptoms of COVID vary widely between different people. The most common symptoms include fatigue, cough and fever. Loss of smell or taste is also a frequent, early symptom. Other symptoms that people with COVID may experience include shortness of breath, muscle or body ache, sore throat, chills, congestion, headache, stomach pain (including nausea and diarrhea), pink eye (conjunctivitis) and chest pain. COVID symptoms generally appear two to 14 days after exposure. For more information on symptoms and when to seek medical help, go to the [Centers for Disease Control and Prevention](https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/symptoms.html)."
         }
       ]
     },
@@ -137,6 +142,11 @@
           "question": "Do masks help stop the spread of COVID?\n",
           "answer": "Yes! [Masks](/glossary#face-mask) are extremely helpful in reducing the spread of COVID. They help to protect you and those around you. We recommend that you wear a mask covering your mouth and nose. This recommendation follows advice from the [CDC](https://www.cdc.gov/media/releases/2020/p0714-americans-to-wear-masks.html) and [WHO](https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/when-and-how-to-use-masks), and there is a body of research, including from the [National Academy of Sciences](https://www.pnas.org/content/117/26/14857), that suggests everyone should wear a mask. We know that the virus can spread between people interacting in close proximity, even if no one is exhibiting any [symptoms](/glossary#asymptomatic), and wearing a mask gives you an added layer of protection. If there were a medication that dramatically reduced your chances of giving or getting COVID, would you take that medication? In practical terms, a mask is such a medication.",
           "questionId": "do-masks-help-stop-covid-spread"
+        },
+        {
+          "question": "What kind of masks are the most effective?\n",
+          "questionId": "what-masks-most-effective",
+          "answer": "Wearing a mask \\[/glossary#face-mask] is extremely important to help contain COVID and decreases the risks for both you and those around you. However, not all masks are created equal. [Experts](https://www.cnn.com/2020/11/11/health/cdc-face-mask-guidelines-wellness/index.html) recommend wearing two- or three-ply masks made with a tight weave of 100 percent cotton. Disposable and silk masks are also effective at repelling droplets. When looking for a mask, fit is incredibly important. Your mask should fit snugly over the bridge of your nose and below your chin. Studies have shown that loose-fitting masks, such as bandanas and gaiters, are the least effective. While N95 masks are the most effective at filtering out particles, they are still considered critical supplies and should be reserved for health care workers and first responders."
         },
         {
           "question": "How do I discuss the pandemic with friends or family members who aren’t taking it seriously?",
