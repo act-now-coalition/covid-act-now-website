@@ -99,14 +99,14 @@
       "id": "SCHOOLS_GREEN"
     },
     {
-      "body": "**Masks** should be worn outside of the home, according to [CDC guidelines](https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/cloth-face-cover-guidance.html), to continue reducing the spread of COVID.",
+      "body": "**Masks** should be worn outside of the home to continue reducing the spread of COVID.",
       "source": "FED",
       "category": "MASKS",
       "level": "GREEN",
       "id": "MASKS_GREEN"
     },
     {
-      "body": "**Travel** should be avoided unless necessary, according to [CDC guidelines](https://www.cdc.gov/coronavirus/2019-ncov/travelers/faqs.html).",
+      "body": "**Travel** should be avoided unless necessary.",
       "source": "FED",
       "category": "TRAVEL",
       "level": "ALL",
