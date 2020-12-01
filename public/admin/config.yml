@@ -47,7 +47,44 @@ collections:
                   - { label: 'Alt text', name: 'altText', widget: 'string' }
                   - { label: 'Image', name: 'image', widget: 'image' }
                   - { label: 'Url', name: 'url', widget: 'string' }
-
+          - {
+              label: 'Who we serve: Header',
+              name: 'whoWeServeHeader',
+              widget: 'string',
+              required: false
+            }
+          - {
+              label: 'Who we serve: Content',
+              name: 'whoWeServeContent',
+              widget: 'markdown',
+              required: false
+            }
+          - label: 'Government logos'
+            name: 'governmentLogos'
+            widget: 'list'
+            fields:
+              - { label: 'Alt text', name: 'altText', widget: 'string' }
+              - { label: 'Image', name: 'image', widget: 'image' }
+              - { label: 'Url', name: 'url', widget: 'string', required: false }
+          - {
+              label: 'Social mentions: Intro',
+              name: 'socialMentionsIntro',
+              widget: 'markdown',
+              required: false
+            }
+          - label: 'Social mentions: Content'
+            name: 'socialMentionsContent'
+            widget: 'list'
+            fields:
+              - { label: 'Name', name: 'name', widget: 'string' }
+              - { label: 'Handle', name: 'handle', widget: 'string' }
+              - { label: 'Url', name: 'url', widget: 'string', required: false }
+          - {
+              label: 'Team: Intro',
+              name: 'teamIntro',
+              widget: 'markdown',
+              required: false
+            }
   - label: Team directory
     name: team
     folder: 'src/cms-content/team'
@@ -73,9 +110,11 @@ collections:
           - label: Title and role
             name: description
             widget: string
+            required: false
           - label: Profile picture
             name: profileImgUrl
             widget: image
+            default: "/images_cms/bar_recommends_icon.svg"
           - label: Profile URL
             name: profileUrl
             widget: string

@@ -7,6 +7,33 @@
       "description": "Former Founder and CEO, Google Firebase",
       "profileUrl": "https://www.linkedin.com/in/jamest",
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Max Henderson",
+      "description": "Founder and former CEO of Covid Act Now",
+      "profileUrl": "https://www.linkedin.com/in/maxhenderson/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Dr. Nirav Shah",
+      "profileUrl": "https://www.linkedin.com/in/niravrshah/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Zack Rosen",
+      "profileUrl": "https://www.linkedin.com/in/zacharyrosen/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Jonathan (JKT) Kreiss-Tomkins",
+      "profileUrl": "https://www.linkedin.com/in/jonathan-kreiss-tomkins-35915319a/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Ryan Panchadsaram",
+      "description": "",
+      "profileUrl": "https://www.linkedin.com/in/ryanpanchadsaram/"
     }
   ]
 }

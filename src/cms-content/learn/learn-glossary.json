@@ -39,6 +39,12 @@
       "category": "Metrics"
     },
     {
+      "term": "Case incidence",
+      "termId": "case-incidence",
+      "definition": "Case incidence is a measure of new confirmed COVID cases per day. It answers the question: “how many new COVID infections were reported in my area?” Incidence is important because it provides a snapshot of the state of COVID in a given community. \n\nDisease prevalence is another term you may have read in the news or online. Disease prevalence is not the same as case incidence. While incidence refers to the number of new confirmed cases on a given day, prevalence refers to the total number of infections which are currently active on a given day.",
+      "category": "Metrics"
+    },
+    {
       "term": "Cluster event",
       "termId": "cluster-event",
       "definition": "A cluster event is a group of cases, usually at least 10 positive cases, tied to the same place at the same time. With COVID, large clusters result from [super spreading events](#superspreading-event) such as conferences, [choir practices](https://www.cdc.gov/mmwr/volumes/69/wr/mm6919e6.htm), funerals, and cruises. For example, in early February, 77 out of 95 of Massachusetts COVID cases could be attributed to one [biotech conference](https://www.wbur.org/commonhealth/2020/03/12/coronavirus-outbreak-biogen-conference-superspreading) in Cambridge.",
@@ -132,12 +138,6 @@
       "term": "Disease prevalence",
       "termId": "disease-prevalence",
       "definition": "Disease prevalence is a measure of the total number of cases in a community with a currently active COVID infection. It answers the question: “how many COVID infections are currently present in my area?” Disease prevalence is not the same as [disease incidence](#disease-incidence), which looks at the number of new cases in a specific time period. Disease prevalence is an indicator of the actual risk of encountering an infected individual in a community. \n\nTo know the true prevalence, you would need to test the entire population (or a widespread randomized sample) every day, using a highly-accurate test. Therefore, Covid Act Now looks at disease incidence, or daily new cases per 100,000 people, to get an accurate estimation of COVID in a community.",
-      "category": "Metrics"
-    },
-    {
-      "term": "Disease incidence",
-      "termId": "disease-incidence",
-      "definition": "Disease incidence is a measure of new confirmed COVID cases per day. It answers the question: “how many new COVID infections were reported in my area?” Incidence is important because it provides a snapshot of the state of COVID in a given community. \n\nDisease prevalence is another term you may have read in the news or online. Disease prevalence is not the same as disease incidence. While incidence refers to the number of new confirmed cases on a given day, prevalence refers to the total number of infections which are currently active on a given day.",
       "category": "Metrics"
     },
     {
