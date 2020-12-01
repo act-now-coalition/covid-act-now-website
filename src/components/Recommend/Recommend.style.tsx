@@ -49,13 +49,16 @@ export const Column = styled.div`
   }
 `;
 
-export const RecommendationItem = styled.div`
+export const RecommendationItem = styled.div<{ highlight: boolean }>`
   display: flex;
   padding: 0.75rem;
   align-items: flex-start;
+  background-color: ${({ highlight }) =>
+    highlight && `${COLOR_MAP.LIGHT_YELLOW}`};
+  border-radius: 4px;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    padding: 0.5rem 0;
+    padding: 0.5rem 0.25rem;
   }
 `;
 

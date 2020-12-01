@@ -271,13 +271,17 @@ export function getDynamicIntroCopy(
   return blurb;
 }
 
-function getIcon(recommendation: Recommendation): RecommendationWithIcon {
+function getIcon(
+  recommendation: Recommendation,
+  i: number,
+): RecommendationWithIcon {
   const correspondingIcon = allIcons.filter(
     (icon: RecommendIcon) => icon.category === recommendation.category,
   );
   return {
     recommendationInfo: recommendation,
     iconInfo: correspondingIcon[0],
+    index: i,
   };
 }
 

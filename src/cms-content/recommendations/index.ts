@@ -102,6 +102,7 @@ export interface RecommendationsModalContent {
 export interface RecommendationWithIcon {
   recommendationInfo: Recommendation;
   iconInfo: RecommendIcon;
+  index: number;
 }
 
 export const allIcons = recommendationsMain.icons as RecommendIcon[];

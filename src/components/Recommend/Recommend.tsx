@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Hidden } from '@material-ui/core';
-import { chunk, ceil } from 'lodash';
+import { chunk, ceil, partition } from 'lodash';
 import {
   Wrapper,
   HeaderCopy,
@@ -21,6 +21,7 @@ import {
   modalContent,
   FedLevel,
   HarvardLevel,
+  RecommendCategory,
 } from 'cms-content/recommendations';
 import SmallShareButtons from 'components/SmallShareButtons';
 import RecommendModal from './RecommendModal';
@@ -31,6 +32,7 @@ import { trackRecommendationsEvent } from 'common/utils/recommend';
 import * as ModalStyle from './RecommendModal.style';
 import ExternalLink from 'components/ExternalLink';
 import { Subtitle1 } from 'components/Typography';
+import { useBreakpoint } from 'common/hooks';
 
 const { header, footer } = mainContent;
 const { federalTaskForce, harvard } = modalContent;
@@ -151,8 +153,20 @@ const Recommend = (props: {
     );
   };
 
+  /* 
+    Divides recommendations into 2 columns.
+    For mobile: splits originally-ordered recommendations array in half.
+    For desktop: splits by even/odds so the highest 'ranked' recommendations will appear on top.
+  */
   const midpoint = ceil(recommendations.length / 2);
-  const recommendationsHalved = chunk(recommendations, midpoint);
+  const halvedInOrder = chunk(recommendations, midpoint);
+  const partitionedByIndex = partition(
+    recommendations,
+    item => item.index % 2 === 0,
+  );
+
+  const isMobile = useBreakpoint(600);
+  const recommendationsColumns = isMobile ? halvedInOrder : partitionedByIndex;
 
   return (
     <Wrapper ref={recommendationsRef}>
@@ -162,21 +176,31 @@ const Recommend = (props: {
         onClickOpenModal={openModalRecommendations}
       />
       <RecommendationsContainer>
-        {recommendationsHalved.map((half, i) => (
-          <Column>
-            {half.map((recommendation, i) => (
-              <RecommendationItem key={`recommendation-${i}`}>
-                <Icon
-                  src={recommendation.iconInfo.iconImage}
-                  alt={recommendation.iconInfo.altText}
-                />
-                <RecommendationBody
-                  source={recommendation.recommendationInfo.body}
-                />
-              </RecommendationItem>
-            ))}
-          </Column>
-        ))}
+        {recommendationsColumns.map((half, i) => {
+          return (
+            <Column>
+              {half.map((recommendation, i) => {
+                const highlight =
+                  recommendation.recommendationInfo.category ===
+                  RecommendCategory.TRAVEL;
+                return (
+                  <RecommendationItem
+                    key={`recommendation-${i}`}
+                    highlight={highlight}
+                  >
+                    <Icon
+                      src={recommendation.iconInfo.iconImage}
+                      alt={recommendation.iconInfo.altText}
+                    />
+                    <RecommendationBody
+                      source={recommendation.recommendationInfo.body}
+                    />
+                  </RecommendationItem>
+                );
+              })}
+            </Column>
+          );
+        })}
       </RecommendationsContainer>
       <Footer
         onClickOpenModal={openModalRecommendations}
