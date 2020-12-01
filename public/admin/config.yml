@@ -47,7 +47,40 @@ collections:
                   - { label: 'Alt text', name: 'altText', widget: 'string' }
                   - { label: 'Image', name: 'image', widget: 'image' }
                   - { label: 'Url', name: 'url', widget: 'string' }
-
+          - {
+              label: 'Who we serve: Header',
+              name: 'whoWeServeHeader',
+              widget: 'string',
+            }
+          - {
+              label: 'Who we serve: Content',
+              name: 'whoWeServeContent',
+              widget: 'markdown',
+            }
+          - label: 'Government logos'
+            name: 'governmentLogos'
+            widget: 'list'
+            fields:
+              - { label: 'Alt text', name: 'altText', widget: 'string' }
+              - { label: 'Image', name: 'image', widget: 'image' }
+              - { label: 'Url', name: 'url', widget: 'string', required: false }
+          - {
+              label: 'Social mentions: Intro',
+              name: 'socialMentionsIntro',
+              widget: 'markdown',
+            }
+          - label: 'Social mentions: Content'
+            name: 'socialMentionsContent'
+            widget: 'list'
+            fields:
+              - { label: 'Name', name: 'name', widget: 'string' }
+              - { label: 'Handle', name: 'handle', widget: 'string' }
+              - { label: 'Url', name: 'url', widget: 'string', required: false }
+          - {
+              label: 'Team: Intro',
+              name: 'teamIntro',
+              widget: 'markdown',
+            }
   - label: Team directory
     name: team
     folder: 'src/cms-content/team'
