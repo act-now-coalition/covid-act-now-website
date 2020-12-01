@@ -91,39 +91,6 @@ export const LocationCopyWrapper = styled(Box)`
   }
 `;
 
-export const HeaderTitle = styled(Typography)<{
-  isEmbed?: Boolean;
-}>`
-  color: ${palette.black};
-  font-size: ${props => (props.isEmbed ? '1.8rem' : '22px')};
-  font-weight: normal;
-  line-height: ${props => (props.isEmbed ? '1.5rem' : '2.2rem')};
-  padding: 0;
-  text-align: center;
-
-  a {
-    color: ${palette.black};
-    text-decoration: none;
-  }
-
-  @media (min-width: 600px) {
-    font-size: 30px;
-    text-align: left;
-  }
-`;
-
-export const HeaderSubtitle = styled(Typography)`
-  font-size: 15px;
-  line-height: 1.4;
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
-  margin-top: 1.2rem;
-
-  @media (min-width: 600px) {
-    font-size: 16px;
-    margin-top: 1rem;
-  }
-`;
-
 export const FooterContainer = styled(Box)`
   margin: 0.8rem 0.3rem 0;
 
