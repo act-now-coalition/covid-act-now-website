@@ -6,7 +6,6 @@ import {
   Wrapper,
   TopContainer,
   FooterContainer,
-  HeaderTitle,
   HeaderSection,
   HeaderSubCopy,
   ButtonsWrapper,
@@ -27,7 +26,6 @@ import { useModelLastUpdatedDate } from 'common/utils/model';
 import { STATES_WITH_DATA_OVERRIDES } from 'common/metrics/hospitalizations';
 import { Projections } from 'common/models/Projections';
 import { formatUtcDate } from 'common/utils';
-import { isNull } from 'util';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
 import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
@@ -35,6 +33,7 @@ import WarningIcon from '@material-ui/icons/Warning';
 import { Metric } from 'common/metric';
 import { BANNER_COPY } from 'components/Banner/ThirdWaveBanner';
 import { ThermometerImage } from 'components/Thermometer';
+import { Heading1 } from 'components/Typography';
 
 const NewFeatureCopy = (props: {
   locationName: string;
@@ -47,25 +46,18 @@ const NewFeatureCopy = (props: {
   );
 };
 
-const LocationPageHeading = (props: { projections: Projections }) => {
-  const { isEmbed } = useEmbed();
-
-  const displayName = props.projections.countyName ? (
-    <>
-      <strong>{props.projections.countyName}, </strong>
-      <a
-        href={`${
-          isEmbed ? '/embed' : ''
-        }/us/${props.projections.stateCode.toLowerCase()}`}
-      >
-        {props.projections.stateCode}
-      </a>
-    </>
+const LocationPageHeading: React.FC<{ projections: Projections }> = ({
+  projections,
+}) => {
+  const { countyName, stateCode, stateName } = projections;
+  return countyName ? (
+    <Fragment>
+      <strong>{countyName}, </strong>
+      {stateCode}
+    </Fragment>
   ) : (
-    <strong>{props.projections.stateName}</strong>
+    <strong>{stateName}</strong>
   );
-
-  return <span>{displayName}</span>;
 };
 
 const noop = () => {};
@@ -81,7 +73,7 @@ const LocationPageHeader = (props: {
   onNewUpdateClick: () => void;
 }) => {
   const hasStats = !!Object.values(props.stats).filter(
-    (val: number | null) => !isNull(val),
+    (val: number | null) => val !== null,
   ).length;
 
   //TODO (chelsi): get rid of this use of 'magic' numbers
@@ -121,9 +113,9 @@ const LocationPageHeader = (props: {
         <TopContainer>
           <HeaderSection>
             <LocationCopyWrapper>
-              <HeaderTitle isEmbed={isEmbed}>
+              <Heading1>
                 <LocationPageHeading projections={props.projections} />
-              </HeaderTitle>
+              </Heading1>
             </LocationCopyWrapper>
             <ButtonsWrapper>
               <HeaderButton onClick={props.onHeaderShareClick || noop}>

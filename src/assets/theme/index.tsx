@@ -18,6 +18,7 @@ const colors: ThemeColors = {
 };
 
 interface ThemeFonts {
+  heading1: FlattenSimpleInterpolation;
   subtitle1: FlattenSimpleInterpolation;
   disclaimer: FlattenSimpleInterpolation;
   link: FlattenSimpleInterpolation;
@@ -34,6 +35,12 @@ const fonts: ThemeFonts = {
     font-size: 0.875rem;
     line-height: 1.125;
     margin-bottom: 0.75rem;
+  `,
+  heading1: css`
+    font-size: 1.8125rem;
+    line-height: 1.25;
+    margin-bottom: 1.25rem;
+    margin-top: 1.25rem;
   `,
   disclaimer: css`
     font-size: 0.875rem;

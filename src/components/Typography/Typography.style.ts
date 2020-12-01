@@ -26,6 +26,12 @@ import Typography from '@material-ui/core/Typography';
  *    at the application level (if we were to implement a dark theme).
  */
 
+export const Heading1 = styled(Typography).attrs(props => ({
+  variant: 'h1',
+}))`
+  ${props => props.theme.fonts.heading1};
+`;
+
 export const Subtitle1 = styled(Typography).attrs(props => ({
   variant: 'body1',
 }))`
