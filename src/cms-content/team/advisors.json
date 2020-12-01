@@ -3,21 +3,27 @@
   "teamID": "advisors",
   "teamMembers": [
     {
-      "fullName": "Prof. Rebecca Katz, Ph.D., M.P.H.",
-      "description": "Director of Georgetown Center for Global Health Science and Security",
-      "profileUrl": "https://ghss.georgetown.edu/people/katz",
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Danielle Allen",
+      "description": "Director, Edmond J. Safra Center for Ethics and professor at Harvard",
+      "profileUrl": "https://www.gse.harvard.edu/faculty/danielle-allen"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Don Berwick",
+      "profileUrl": "https://www.linkedin.com/in/don-berwick-46a49380/",
+      "description": "Former administrator, Centers for Medicare and Medicaid Services"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Nahid Bhadelia",
+      "description": "Medical director, Boston Medical Center's Special Pathogens Unit,",
+      "profileUrl": "https://www.linkedin.com/in/nahid-bhadelia-81a775b7/"
     },
     {
       "fullName": "Ellie Graeden, Ph.D.",
       "description": "CEO of Talus Analytics and Georgetown University adjunct professor",
       "profileUrl": "https://ghss.georgetown.edu/people/graeden",
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
-    },
-    {
-      "fullName": "Dr. Nirav Shah",
-      "description": "Senior scholar at Stanford Medical School and former New York State commissioner of health",
-      "profileUrl": "https://www.linkedin.com/in/niravrshah",
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
     },
     {
@@ -33,22 +39,22 @@
       "profileUrl": "https://www.linkedin.com/in/bob-inglis-21112b25/"
     },
     {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
-      "fullName": "Don Berwick",
-      "profileUrl": "https://www.linkedin.com/in/don-berwick-46a49380/",
-      "description": "Former administrator, Centers for Medicare and Medicaid Services"
+      "fullName": "Prof. Rebecca Katz, Ph.D., M.P.H.",
+      "description": "Director of Georgetown Center for Global Health Science and Security",
+      "profileUrl": "https://ghss.georgetown.edu/people/katz",
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
     },
     {
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
-      "fullName": "Jason Wang",
-      "description": "Director, Stanford Center for Policy, Outcomes, and Prevention",
-      "profileUrl": "https://www.linkedin.com/in/jason-wang-38a34842/"
+      "fullName": "Tomás Pueyo",
+      "description": "Author, “Hammer and the Dance” and other pieces",
+      "profileUrl": "https://www.linkedin.com/in/tomaspueyo/"
     },
     {
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
-      "fullName": "Nahid Bhadelia",
-      "description": "Medical director, Boston Medical Center's Special Pathogens Unit,",
-      "profileUrl": "https://www.linkedin.com/in/nahid-bhadelia-81a775b7/"
+      "description": "Head of Carnegie Mellon University's Machine Learning Department ",
+      "fullName": "Roni Rosenfeld",
+      "profileUrl": "http://www.cs.cmu.edu/~roni/"
     },
     {
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
@@ -57,10 +63,28 @@
       "profileUrl": "https://www.linkedin.com/in/nigam/"
     },
     {
+      "fullName": "Nirav Shah",
+      "description": "Senior scholar at Stanford Medical School and former New York State commissioner of health",
+      "profileUrl": "https://www.linkedin.com/in/niravrshah",
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
+    },
+    {
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
-      "fullName": "Tomás Pueyo",
-      "description": "Author, “Hammer and the Dance” and other pieces",
-      "profileUrl": "https://www.linkedin.com/in/tomaspueyo/"
+      "fullName": "Ryan Tibshirani ",
+      "description": "Associate professor, Carnegie Mellon University",
+      "profileUrl": "https://www.stat.cmu.edu/~ryantibs/index.html"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Victor Udoewa",
+      "profileUrl": "https://www.linkedin.com/in/udoewa/",
+      "description": "Science & technology policy advisor, education director, and consultant"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Jason Wang",
+      "description": "Director, Stanford Center for Policy, Outcomes, and Prevention",
+      "profileUrl": "https://www.linkedin.com/in/jason-wang-38a34842/"
     }
   ]
 }
