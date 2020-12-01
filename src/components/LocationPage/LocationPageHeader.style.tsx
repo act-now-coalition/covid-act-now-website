@@ -3,7 +3,6 @@ import Typography from '@material-ui/core/Typography';
 import { Box } from '@material-ui/core';
 import { COLORS } from 'common';
 import { COLOR_MAP } from 'common/colors';
-import { Level } from 'common/level';
 import { Heading1 } from 'components/Typography';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 
