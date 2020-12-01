@@ -13,13 +13,13 @@ function findIcuHospitaliztionsPeak(projection: Projection): Column | null {
   }
 
   const peak = maxBy(icuHospitalizations, point => point.y);
-  console.log({ peak });
   return peak || null;
 }
 
 export function isIcuHospitalizationsPeak(projection: Projection): boolean {
+  // TODO: Return true if the current level is 90% or more, even if the actual
+  // peak was a while ago.
   const peak = findIcuHospitaliztionsPeak(projection);
-  console.log({ projection, peak });
   return peak ? moment(peak.x).diff(moment(), 'days') < numDays : false;
 }
 
@@ -31,6 +31,8 @@ export function getHospitalizationsAlert(projection: Projection) {
     return null;
   }
 
+  // TODO: Do we show the peak even if the ICU utilization is in green or
+  // yellow levels?
   const percentIcuUtilization = formatPercent(peak.y, 1);
 
   return (
