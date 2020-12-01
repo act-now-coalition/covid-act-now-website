@@ -6,10 +6,17 @@ import {
 } from '@material-ui/core/styles';
 import { ThemeProvider as ScThemeProvider } from 'styled-components';
 import theme from 'assets/theme';
+import { BrowserRouter } from 'react-router-dom';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
 };
+
+const routeDecorator = Story => (
+  <BrowserRouter>
+    <Story />
+  </BrowserRouter>
+);
 
 const themeDecorator = Story => (
   <MuiThemeProvider theme={theme}>
@@ -22,4 +29,4 @@ const themeDecorator = Story => (
   </MuiThemeProvider>
 );
 
-export const decorators = [themeDecorator];
+export const decorators = [themeDecorator, routeDecorator];
