@@ -7,7 +7,6 @@ import {
   MetricValue,
   Population,
   CountySuffix,
-  Tag,
   LocationInfoWrapper,
   LocationNameCell,
   Rank,
@@ -17,7 +16,6 @@ import {
   RankedLocationSummary,
   orderedMetrics,
   getColumnLocationName,
-  isCollegeCounty,
 } from 'common/utils/compare';
 import { Level } from 'common/level';
 import { formatEstimate } from 'common/utils';
@@ -66,8 +64,6 @@ const CompareTableRow = (props: {
 
   const populationRoundTo = isHomepage ? 3 : 2;
 
-  const collegeTag = isCollegeCounty(location.locationInfo);
-
   return (
     <Link to={locationLink}>
       <Row
@@ -97,7 +93,6 @@ const CompareTableRow = (props: {
                   populationRoundTo,
                 )}
               </Population>
-              {collegeTag && <Tag>College</Tag>}
             </LocationInfoWrapper>
           </div>
         </LocationNameCell>

@@ -32,15 +32,7 @@ const DISABLED_CASE_DENSITY: string[] = [];
 
 const DISABLED_INFECTION_RATE = new DisabledFips([]);
 
-const DISABLED_TEST_POSITIVITY = new DisabledFips([
-  '48113',
-  '48215',
-  '36061',
-  '36047',
-  '36081',
-  '36005',
-  '36085',
-]);
+const DISABLED_TEST_POSITIVITY = new DisabledFips(['48113', '48215']);
 
 const DISABLED_ICU = new DisabledFips([]);
 
