@@ -34,7 +34,7 @@ import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 
 function getPageDescription() {
   const date = formatMetatagDate();
-  return `${date} View new US COVID cases, deaths, hospitalizations, and other important metrics. 50 States. 3000+ Counties. Click the map to dive in.`;
+  return `${date} View the recent wave of US COVID cases, deaths, hospitalizations, and other important metrics. 50 States. 3000+ Counties. Click the map to dive in.`;
 }
 
 export default function HomePage() {
@@ -93,7 +93,7 @@ export default function HomePage() {
       <EnsureSharingIdInUrl />
       <AppMetaTags
         canonicalUrl="/"
-        pageTitle="Realtime US COVID Risk Map by State and County"
+        pageTitle="Realtime US COVID Risk Map & Key Metrics"
         pageDescription={getPageDescription()}
       />
       <BannerContainer>
