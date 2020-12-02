@@ -1,7 +1,7 @@
 {
   "teamMembers": [
     {
-      "profileImgUrl": "/images_cms/gil.jpeg",
+      "profileImgUrl": "/images_cms/gil.png",
       "fullName": "Gil Rosen",
       "description": "Enterprise lead",
       "profileUrl": "https://www.linkedin.com/in/rosengil/"
@@ -12,7 +12,7 @@
       "profileUrl": "https://www.linkedin.com/in/alanfritzler/"
     },
     {
-      "profileImgUrl": "/images_cms/charlespieper.jpg",
+      "profileImgUrl": "/images_cms/charles-pieper.png",
       "fullName": "Charles Pieper",
       "profileUrl": "https://www.linkedin.com/in/charlesepieper/"
     },
