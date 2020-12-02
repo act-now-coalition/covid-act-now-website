@@ -1,55 +1,143 @@
-import { chain } from 'lodash';
+import { chain, fromPairs } from 'lodash';
+import urlJoin from 'url-join';
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
-
+import countyAdjacencyMsa from './data/county_adjacency_msa.json';
 const { state_dataset, state_county_map_dataset } = US_STATE_DATASET;
 
-type FipsCode = string;
-type UrlSegment = string;
+export type FipsCode = string;
 
-interface Region {
-  name: string;
-  urlName: UrlSegment;
-  fipsCode: FipsCode;
-  population: number;
+export enum RegionType {
+  COUNTY = 'County',
+  STATE = 'State',
+  MSA = 'MSA',
 }
 
-interface State extends Region {
-  stateCode: string;
+abstract class Region {
+  constructor(
+    public name: string,
+    public urlName: string,
+    public fipsCode: FipsCode,
+    public population: number,
+    public regionType: RegionType,
+  ) {}
+
+  abstract fullName(): string;
+  abstract relativeUrl(): string;
+  canonicalUrl() {
+    return urlJoin('https://covidactnow.org', this.relativeUrl());
+  }
 }
 
-interface County extends Region {
-  stateFipsCode: string;
-  cities: string[];
+export class State extends Region {
+  constructor(
+    public name: string,
+    public urlName: string,
+    public fipsCode: FipsCode,
+    public population: number,
+    public stateCode: string,
+  ) {
+    super(name, urlName, fipsCode, population, RegionType.STATE);
+  }
+
+  fullName() {
+    return this.name;
+  }
+
+  relativeUrl() {
+    return `us/${this.urlName}`;
+  }
 }
 
-interface MetropolitanArea {
-  countyFipsCodes: [FipsCode];
+export class County extends Region {
+  constructor(
+    public name: string,
+    public urlName: string,
+    public fipsCode: FipsCode,
+    public population: number,
+    public state: State,
+    public cities: string[],
+    private adjacentCountiesFips: FipsCode[],
+  ) {
+    super(name, urlName, fipsCode, population, RegionType.COUNTY);
+  }
+
+  fullName() {
+    return `${this.name}, ${this.state.stateCode}`;
+  }
+
+  relativeUrl() {
+    return urlJoin(this.state.relativeUrl(), `county/${this.urlName}`);
+  }
 }
 
 const states: State[] = chain(state_dataset)
-  .map(stateInfo => ({
-    name: stateInfo.state,
-    urlName: stateInfo.state_url_name,
-    fipsCode: stateInfo.state_fips_code,
-    population: stateInfo.population,
-    stateCode: stateInfo.state_code,
-  }))
+  .map(stateInfo => {
+    return new State(
+      stateInfo.state,
+      stateInfo.state_url_name,
+      stateInfo.state_fips_code,
+      stateInfo.population,
+      stateInfo.state_code,
+    );
+  })
   .value();
 
-const stateCodes = states.map(state => state.stateCode);
-const stateFips = states.map(state => state.fipsCode);
+// TODO: Aggregated regions
+
+const statesByFips = fromPairs(states.map(state => [state.fipsCode, state]));
+
+interface AdjacencyInfo {
+  adjacent_counties: FipsCode[];
+  msa_code?: string;
+}
+
+const adjacency: { [fipsCode: string]: AdjacencyInfo } =
+  countyAdjacencyMsa.counties;
 
 const counties: County[] = chain(state_county_map_dataset)
   .map(stateData => stateData.county_dataset)
   .flatten()
-  .filter(county => stateCodes.includes(county.state_code))
-  .filter(county => stateFips.includes(county.state_fips_code))
-  .map(county => ({
-    name: county.county,
-    urlName: county.county_url_name,
-    fipsCode: county.full_fips_code,
-    population: county.population,
-    stateFipsCode: county.state_fips_code,
-    cities: county.cities || [],
-  }))
+  .filter(county => Object.keys(statesByFips).includes(county.state_fips_code))
+  .map(countyInfo => {
+    const countyFips = countyInfo.full_fips_code;
+    const state = statesByFips[countyInfo.state_fips_code];
+    const adjacentCounties = adjacency[countyFips]?.adjacent_counties;
+    return new County(
+      countyInfo.county,
+      countyInfo.county_url_name,
+      countyInfo.full_fips_code,
+      countyInfo.population,
+      state,
+      countyInfo.cities || [],
+      adjacentCounties || [],
+    );
+  })
   .value();
+
+class RegionDB {
+  constructor(private regions: Region[]) {}
+
+  private filterByType(regionType: RegionType) {
+    return this.all().filter(region => region.regionType === regionType);
+  }
+
+  findByFipsCode(fipsCode: FipsCode): Region | null {
+    const region = this.regions.find(region => region.fipsCode === fipsCode);
+    return region || null;
+  }
+
+  all(): Region[] {
+    return this.regions;
+  }
+
+  states(): Region[] {
+    return this.filterByType(RegionType.STATE);
+  }
+
+  counties(): Region[] {
+    return this.filterByType(RegionType.COUNTY);
+  }
+}
+
+const regions = new RegionDB([...states, ...counties]);
+export default regions;
