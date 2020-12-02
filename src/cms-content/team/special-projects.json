@@ -35,6 +35,12 @@
       "fullName": "Anna Blech",
       "description": "Lead writer, Daily Download (newsletter)",
       "profileUrl": "https://www.linkedin.com/in/anna-blech-121277138/"
+    },
+    {
+      "profileImgUrl": "/images_cms/henry.jpeg",
+      "fullName": "Henry Bair",
+      "description": "writer, Research Rundown and Daily Download",
+      "profileUrl": "https://www.linkedin.com/in/henrybair/"
     }
   ],
   "teamName": "Special Projects",
