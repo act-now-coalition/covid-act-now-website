@@ -63,3 +63,5 @@ const sortedTeams = [
 ];
 
 export const teams: Team[] = sortedTeams.map(sanitizeTeam);
+
+export const teamsWithTitles = ['Leadership', 'Board', 'Advisors'];

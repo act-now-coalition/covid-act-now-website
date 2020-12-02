@@ -3,8 +3,8 @@ import { Headshot, TeamMemberWrapper, DescriptionWrapper } from './Team.style';
 import { Paragraph } from 'components/Markdown';
 import ExternalLink from 'components/ExternalLink';
 
-const ActiveMember = (props: { teamMember: any }) => {
-  const { teamMember } = props;
+const ActiveMember = (props: { teamMember: any; includeTitle: boolean }) => {
+  const { teamMember, includeTitle } = props;
 
   return (
     <TeamMemberWrapper item sm={6} xs={12}>
@@ -12,7 +12,7 @@ const ActiveMember = (props: { teamMember: any }) => {
       <ExternalLink href={teamMember.profileUrl}>
         <DescriptionWrapper>
           <strong>{teamMember.fullName}</strong>
-          <Paragraph>{teamMember.description}</Paragraph>
+          {includeTitle && <Paragraph>{teamMember.description}</Paragraph>}
         </DescriptionWrapper>
       </ExternalLink>
     </TeamMemberWrapper>
