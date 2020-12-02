@@ -20,7 +20,7 @@
           "questionId": "most-at-risk-covid"
         },
         {
-          "question": "Which groups are at higher risk of contracting COVID and becoming seriously ill?",
+          "question": "Which racial and ethnic minorities are at higher risk of contracting COVID and becoming seriously ill?",
           "answer": "Data from the CDC show that race and ethnicity, similar to age, are risk factors for COVID. In fact, the rates of COVID cases, hospitalizations and deaths among Blacks, Hispanic and Latino persons, and American Indians and Native Alaskans are much higher than for white people, according to the CDC’s calculation of [COVID-19 Hospitalization and Death by Race/Ethnicity](https://www.cdc.gov/coronavirus/2019-ncov/covid-data/investigations-discovery/hospitalization-death-by-race-ethnicity.html) (updated August 18, 2020). Some data show an even higher mortality rate among certain ethnic and racial groups than the CDC data. The [APM Research Lab](https://www.apmresearchlab.org/covid/deaths-by-race) finds that COVID death rates are more than three times higher for Blacks, Latinos, and Indigenous people than for white people (update September 15).",
           "questionId": "groups-higher-at-risk-covid"
         }
