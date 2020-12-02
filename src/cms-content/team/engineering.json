@@ -5,7 +5,7 @@
     {
       "profileImgUrl": "/images_cms/chelsi.jpeg",
       "fullName": "Chelsi Asulin",
-      "description": "Front-end engineering co-lead",
+      "description": "Front-end engineering ",
       "profileUrl": "https://www.linkedin.com/in/chelsi-asulin/"
     },
     {
@@ -17,7 +17,7 @@
     {
       "profileImgUrl": "/images_cms/chasecoleman.jpeg",
       "fullName": "Chase Coleman",
-      "description": "Data engineering co-lead",
+      "description": "Data engineering ",
       "profileUrl": "https://www.linkedin.com/in/chasegcoleman/"
     },
     {
@@ -35,12 +35,12 @@
     {
       "profileImgUrl": "/images_cms/spencerlyon.jpeg",
       "fullName": "Spencer Lyon",
-      "description": "Data engineering co-lead",
+      "description": "Data engineering",
       "profileUrl": "https://www.linkedin.com/in/spencer-lyon-27991541/"
     },
     {
       "fullName": "Pablo Navarro",
-      "description": "Front-end engineering co-lead",
+      "description": "Front-end engineering",
       "profileUrl": "https://www.linkedin.com/in/pnavarrc/",
       "profileImgUrl": "/images_cms/pablo.jpeg"
     }
