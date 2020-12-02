@@ -471,6 +471,13 @@ collections:
                       hint: Short title for the case studies landing page,
                     }
                   - {
+                      label: Show case study,
+                      name: showCaseStudy,
+                      widget: boolean,
+                      default: true,
+                      hint: Toggle to the left if we want to hide the case study for the time being,
+                    }
+                  - {
                       label: Author,
                       name: author,
                       minimal: true,

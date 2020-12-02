@@ -110,12 +110,13 @@ export interface CaseStudy {
   summary: Markdown;
   body: Markdown;
   tags: string[];
+  showCaseStudy: boolean;
 }
 
 export interface CaseStudyCategory {
   header: string;
   categoryId: string;
-  caseStudies?: CaseStudy[];
+  caseStudies: CaseStudy[];
 }
 
 export interface CaseStudiesContent {
@@ -160,6 +161,22 @@ export function getMoreStudies(caseStudyId: string): CaseStudy[] {
 }
 
 export const caseStudiesContent = caseStudies as CaseStudiesContent;
+
+/* We have previously set certain case studies as hidden via hard-coding a filter.
+  We now have the ability to hide them via a switch in the CMS.
+  This function+filter make sure that we dont render a table of contents item
+  for categories in which all case studies are hidden:
+*/
+function showCategory(category: CaseStudyCategory) {
+  return (
+    category.caseStudies.filter((study: CaseStudy) => study.showCaseStudy)
+      .length > 0
+  );
+}
+
+export const categoriesWithStudies = caseStudiesContent.categories.filter(
+  category => showCategory(category),
+);
 
 /**
  * Products - landing page:
@@ -241,7 +258,7 @@ export const learnPages: TocItem[] = [
   {
     label: 'Case studies',
     to: '/case-studies',
-    items: caseStudiesContent.categories.map(category => ({
+    items: categoriesWithStudies.map(category => ({
       to: `/case-studies#${category.categoryId}`,
       label: category.header,
     })),
