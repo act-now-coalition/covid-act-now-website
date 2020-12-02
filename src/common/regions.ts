@@ -137,6 +137,9 @@ class RegionDB {
   counties(): Region[] {
     return this.filterByType(RegionType.COUNTY);
   }
+
+  // TODO:
+  // find by URL parameters
 }
 
 const regions = new RegionDB([...states, ...counties]);
