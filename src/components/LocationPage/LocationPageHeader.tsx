@@ -27,13 +27,15 @@ import { useModelLastUpdatedDate } from 'common/utils/model';
 import { STATES_WITH_DATA_OVERRIDES } from 'common/metrics/hospitalizations';
 import { Projections } from 'common/models/Projections';
 import { formatUtcDate } from 'common/utils';
-import { isNull } from 'util';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
 import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
 import WarningIcon from '@material-ui/icons/Warning';
 import { Metric } from 'common/metric';
 import { BANNER_COPY } from 'components/Banner/ThirdWaveBanner';
+import HospitalizationsAlert, {
+  isHospitalizationsPeak,
+} from './HospitalizationsAlert';
 import { ThermometerImage } from 'components/Thermometer';
 
 const NewFeatureCopy = (props: {
@@ -81,17 +83,17 @@ const LocationPageHeader = (props: {
   onNewUpdateClick: () => void;
 }) => {
   const hasStats = !!Object.values(props.stats).filter(
-    (val: number | null) => !isNull(val),
+    (val: number | null) => val !== null,
   ).length;
+  const { projections } = props;
 
   //TODO (chelsi): get rid of this use of 'magic' numbers
   const headerTopMargin = !hasStats ? -202 : -218;
   const headerBottomMargin = !hasStats ? 0 : 0;
 
-  const locationName =
-    props.projections.countyName || props.projections.stateName;
+  const locationName = projections.countyName || projections.stateName;
 
-  const alarmLevel = props.projections.getAlarmLevel();
+  const alarmLevel = projections.getAlarmLevel();
 
   const levelInfo = LOCATION_SUMMARY_LEVELS[alarmLevel];
 
@@ -100,15 +102,15 @@ const LocationPageHeader = (props: {
 
   const { isEmbed } = useEmbed();
 
-  const verified = STATES_WITH_DATA_OVERRIDES.includes(
-    props.projections.stateName,
-  );
+  const verified = STATES_WITH_DATA_OVERRIDES.includes(projections.stateName);
 
-  const isVerifiedState = !props.projections.isCounty && verified;
+  const isVerifiedState = !projections.isCounty && verified;
 
   const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
   const lastUpdatedDateString =
     lastUpdatedDate !== null ? formatUtcDate(lastUpdatedDate) : '';
+
+  const inHospitalizationsPeak = isHospitalizationsPeak(projections.primary);
 
   return (
     <Fragment>
@@ -122,7 +124,7 @@ const LocationPageHeader = (props: {
           <HeaderSection>
             <LocationCopyWrapper>
               <HeaderTitle isEmbed={isEmbed}>
-                <LocationPageHeading projections={props.projections} />
+                <LocationPageHeading projections={projections} />
               </HeaderTitle>
             </LocationCopyWrapper>
             <ButtonsWrapper>
@@ -149,10 +151,14 @@ const LocationPageHeader = (props: {
               <WarningIcon />
               <SectionColumn isUpdateCopy>
                 <ColumnTitle isUpdateCopy>alert</ColumnTitle>
-                <NewFeatureCopy
-                  locationName={locationName}
-                  onNewUpdateClick={props.onNewUpdateClick}
-                />
+                {inHospitalizationsPeak ? (
+                  <HospitalizationsAlert projection={projections.primary} />
+                ) : (
+                  <NewFeatureCopy
+                    locationName={locationName}
+                    onNewUpdateClick={props.onNewUpdateClick}
+                  />
+                )}
               </SectionColumn>
             </SectionHalf>
           </HeaderSection>
@@ -164,7 +170,7 @@ const LocationPageHeader = (props: {
           />
         </TopContainer>
         <FooterContainer>
-          {props.projections.isCounty && !isEmbed && (
+          {projections.isCounty && !isEmbed && (
             <HeaderSubCopy>
               <span>Updated {lastUpdatedDateString} · </span>
               <span>County data is currently in beta. </span>
@@ -182,7 +188,7 @@ const LocationPageHeader = (props: {
               .
             </HeaderSubCopy>
           )}
-          {!props.projections.isCounty && !isEmbed && (
+          {!projections.isCounty && !isEmbed && (
             <HeaderSubCopy>
               {verified && (
                 <Fragment>
