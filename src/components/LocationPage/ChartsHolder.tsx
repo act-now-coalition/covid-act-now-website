@@ -63,7 +63,7 @@ const ChartsHolder = (props: {
   const { pathname, hash } = useLocation();
   const isRecommendationsShareUrl = pathname.includes('recommendations');
 
-  const defaultMetric =
+  const defaultExploreMetric =
     hash === '#explore-chart'
       ? ExploreMetric.HOSPITALIZATIONS
       : ExploreMetric.CASES;
@@ -203,7 +203,7 @@ const ChartsHolder = (props: {
               <Explore
                 initialFipsList={initialFipsList}
                 title="Cases, Deaths, and Hospitalizations"
-                defaultMetric={defaultMetric}
+                defaultMetric={defaultExploreMetric}
               />
             </MainContentInner>
           </ChartContentWrapper>

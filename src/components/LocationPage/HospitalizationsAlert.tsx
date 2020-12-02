@@ -1,11 +1,10 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import moment from 'moment';
 import { maxBy } from 'lodash';
 import { Projection, Column } from 'common/models/Projection';
 import { HashLink } from 'react-router-hash-link';
 import { scrollWithOffset } from 'components/TableOfContents';
-
-const numDays = 7;
+import { Copy } from 'components/LocationPage/LocationPageHeader.style';
 
 function findHospitaliztionsPeak(projection: Projection): Column | null {
   const hospitalizations = projection.getDataset('smoothedHospitalizations');
@@ -18,11 +17,16 @@ function findHospitaliztionsPeak(projection: Projection): Column | null {
 }
 
 export function isHospitalizationsPeak(projection: Projection): boolean {
+  const HOSPITALIZATIONS_PEAK_LOOKBACK_DAYS = 7;
   const peak = findHospitaliztionsPeak(projection);
-  return peak ? moment().diff(peak.x, 'days') < numDays : false;
+  return peak
+    ? moment().diff(peak.x, 'days') < HOSPITALIZATIONS_PEAK_LOOKBACK_DAYS
+    : false;
 }
 
-export function getHospitalizationsAlert(projection: Projection) {
+const HospitalizationsAlert: React.FC<{ projection: Projection }> = ({
+  projection,
+}) => {
   const { locationName } = projection;
   const peak = findHospitaliztionsPeak(projection);
 
@@ -31,7 +35,7 @@ export function getHospitalizationsAlert(projection: Projection) {
   }
 
   return (
-    <Fragment>
+    <Copy>
       {locationName} COVID hospitalizations are at an all-time peak -{' '}
       <HashLink
         to="#explore-chart"
@@ -41,6 +45,8 @@ export function getHospitalizationsAlert(projection: Projection) {
         see the chart
       </HashLink>
       .
-    </Fragment>
+    </Copy>
   );
-}
+};
+
+export default HospitalizationsAlert;
