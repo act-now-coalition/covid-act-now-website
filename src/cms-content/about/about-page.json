@@ -42,31 +42,31 @@
   "governmentLogos": [
     {
       "image": "/images_cms/anchorage-1-.png",
-      "altText": "xx"
+      "altText": "Anchorage Mayor's Office Logo"
     },
     {
       "image": "/images_cms/cdph-1-.png",
-      "altText": "xx"
+      "altText": "California Department of Health Logo"
     },
     {
       "image": "/images_cms/city-of-new-orleans-logo-1-.jpg",
-      "altText": "xx"
+      "altText": "New Orleans Mayor's Office Logo"
     },
     {
       "image": "/images_cms/dc_doh-1-.png",
-      "altText": "xx"
+      "altText": "Washington, DC Department of Health Logo"
     },
     {
       "image": "/images_cms/hardy_county-1-.jpg",
-      "altText": "xx"
+      "altText": "Hardy County Sheriff's Office Logo"
     },
     {
       "image": "/images_cms/michigan_district_12-1-.png",
-      "altText": "xx"
+      "altText": "Michigan District 12 Senator Rosemary Bayer Logo"
     },
     {
       "image": "/images_cms/steuben_county-1-.jpg",
-      "altText": "xx"
+      "altText": "Steuben County, New York Logo"
     }
   ],
   "partnersHeader": "Who we work with",
