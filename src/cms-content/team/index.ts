@@ -11,6 +11,12 @@ import video from './video.json';
 import content from './content.json';
 import strategy from './strategy.json';
 import alumni from './alumni.json';
+import dataVisualization from './data-visualization.json';
+import enterprise from './enterprise.json';
+import graphicDesign from './graphic-design.json';
+import modeling from './modeling.json';
+import peopleOperations from './people-operations.json';
+import specialProjects from './special-projects.json';
 
 export interface UserProfile {
   fullName: string;
@@ -34,18 +40,25 @@ function sanitizeTeam(team: Team): Team {
 }
 
 // Teams will appear in this order on the About page
+// Leadership/board/advisors first, alumni last, everything else alphabetized
 const sortedTeams = [
   leadership,
   board,
   advisors,
-  productManagement,
-  engineering,
-  userExperience,
-  socialMedia,
-  growth,
-  video,
   content,
+  dataVisualization,
+  engineering,
+  enterprise,
+  graphicDesign,
+  growth,
+  modeling,
+  peopleOperations,
+  productManagement,
+  socialMedia,
+  specialProjects,
   strategy,
+  userExperience,
+  video,
   alumni,
 ];
 
