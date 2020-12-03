@@ -103,6 +103,39 @@
           "answer": "There is a growing [consensus](https://globalhealth.harvard.edu/evidence-roundup-why-positive-test-rates-need-to-fall-below-3/) that driving the positive test rate downwards of 3 percent should be a priority.\n\nIt can also be helpful to look at countries that have been most effective and efficient in their containment of COVID. South Korea was back to normal activity with a test positivity rate below 3 percent. As of November 2020, *[South Korea’s test positivity](http://ncov.mohw.go.kr/en/)* was 1 percent."
         }
       ]
+    },
+    {
+      "sectionHeader": " ICU Headroom Used",
+      "sectionSubheader": "",
+      "sectionId": "icu-headroom-used",
+      "sectionIntro": "**ICU headroom used is the percentage of ICU beds available for COVID patients, after excluding those already in use by non-COVID patients.**",
+      "questions": [
+        {
+          "question": "Why did we choose ICU headroom used to measure hospital capacity?",
+          "questionId": "why-icu-headroom-to-measure-hospital-capacity",
+          "answer": "*[The White House’s reopening plan](https://www.whitehouse.gov/openingamerica/)*, *[AEI’s plan](https://www.aei.org/research-products/report/national-coronavirus-response-a-road-map-to-reopening/)*, and *[Harvard University’s Safra Center for Ethic’s plan](https://ethics.harvard.edu/covid-roadmap)* all note ICU headroom used as a key metric for reopening safely. Our metric measures the ability of an intensive care unit (ICU) to handle a surge of COVID patients in the case of an outbreak.\n\nWhen ICU capacity is reached, not only does that make it difficult for COVID ICU patients to receive care, but non-COVID ICU patients as well. This can lead to unnecessary deaths."
+        },
+        {
+          "question": "How is your metric different from ICU utilization that I see on my state’s dashboard?",
+          "questionId": "how-icu-headroom-different-from-state-dashboard",
+          "answer": "Our metric strives to capture the reality that many ICU beds will be occupied by non-COVID patients. Those beds can not be freed up, regardless of the severity of a current COVID outbreak. Even in the middle of a fall outbreak, it is not uncommon to see two-thirds of beds occupied by non-COVID patients, which is consistent with the occupancy rates estimated from pre-COVID times. We count as our denominator the number of available beds excluding those already occupied by non-COVID patients.\n\nIn the example below, there are three COVID patients, five non-COVID patients and 10 beds. A total ICU Utilization rate would be 80 percent (eight of 10 beds occupied). However, our metric focuses on COVID headroom which is 60 percent (three out of five COVID beds used). If there are no COVID patients in the ICU, our metric is 0.0 percent — even if there are non-COVID patients in the ICU.\n\n![ICU headroom diagram](/images_cms/icu-headroom-diagram.png \"ICU headroom diagram\")"
+        },
+        {
+          "question": "Can I watch a video explainer?",
+          "questionId": "icu-headroom-video-explainer",
+          "answer": "<https://youtu.be/ysdC49BPVRk>"
+        },
+        {
+          "questionId": "icu-headroom-sources",
+          "question": "What are your sources and methodology for outputting ICU headroom used?",
+          "answer": "We use several sources to create our ICU headroom used metric. We use COVID hospitalization data from the [Covid Tracking Project](https://covidtracking.com/data) at the state level. In most states, we have direct numbers for COVID patients in the ICU; for those where we don’t, we estimate ICU numbers from total COVID hospitalization numbers. At the county level, we scrape from official county-level dashboards where available, and disaggregate from the state-level numbers otherwise.\n\nWe get the total number of ICU beds and the expected number of beds occupied by non-COVID patients from state and county dashboards where available, and we rely on data provided by [Covid Care Map](https://www.covidcaremap.org/) when the data is unavailable. If you would like to learn more, check out [our data sources](https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit)."
+        },
+        {
+          "question": "How were the risk thresholds for ICU headroom used determined?",
+          "questionId": "icu-headroom-thresholds",
+          "answer": "We chose our cutoffs based on [Resolve to Save Live’s policy recommendation](https://preventepidemics.org/wp-content/uploads/2020/04/COV020_WhenHowTightenFaucet_v3.pdf), which says ICU COVID cases should be able to double for states to consider opening."
+        }
+      ]
     }
   ],
   "metricsHeader": "Key metrics",
