@@ -79,6 +79,12 @@
       "fullName": "Jason Wang",
       "description": "Director, Stanford Center for Policy, Outcomes, and Prevention",
       "profileUrl": "https://www.linkedin.com/in/jason-wang-38a34842/"
+    },
+    {
+      "profileImgUrl": "/images_cms/erez-yoeli.jpeg",
+      "fullName": "Erez Yoeli, Ph.D",
+      "profileUrl": "http://ide.mit.edu/about-us/people/erez-yoeli",
+      "description": "Founder of the Applied Cooperation Team, MIT's Sloan School of Management"
     }
   ]
 }
