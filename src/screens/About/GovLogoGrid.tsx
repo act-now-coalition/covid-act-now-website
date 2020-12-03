@@ -2,6 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { GovLogo } from 'components/LogoGrid/LogoGrid.style';
 import { LogoItem } from 'cms-content/about';
+import ExternalLink from 'components/ExternalLink';
 
 const GovLogoGrid = (props: { logos: LogoItem[] }) => {
   const { logos } = props;
@@ -11,7 +12,9 @@ const GovLogoGrid = (props: { logos: LogoItem[] }) => {
         return (
           <Grid container item xs={4} justify="center" key={logo.altText}>
             <Grid item>
-              <GovLogo src={logo.image} alt={logo.altText} />
+              <ExternalLink href={logo.url}>
+                <GovLogo src={logo.image} alt={logo.altText} />
+              </ExternalLink>
             </Grid>
           </Grid>
         );

@@ -37,3 +37,9 @@ export const AboutHeading3 = styled(Heading3)`
   highlighted when the section's content is in view but its header is not.
 */
 export const HashWrapper = styled.div``;
+
+export const PartnersSectionWrapper = styled.div`
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+`;
