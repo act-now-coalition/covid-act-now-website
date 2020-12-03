@@ -27,8 +27,7 @@ interface AboutContent {
   whoWeServeHeader: string;
   whoWeServeContent: Markdown;
   governmentLogos: LogoItem[];
-  socialMentionsIntro: Markdown;
-  socialMentionsContent: SocialMention[];
+  teamHeader: string;
   teamIntro: Markdown;
 }
 

@@ -35,6 +35,8 @@ export const sidebarItems: TocItem[] = [
   },
 ];
 
+// TODO(Chelsi): put these ids into the CMS
+
 const About = () => {
   return (
     <Fragment>
@@ -73,8 +75,7 @@ const About = () => {
         <MarkdownContent source={aboutContent.whoWeServeContent} />
         <GovLogoGrid logos={aboutContent.governmentLogos} />
         <HashWrapper id="team">
-          {/* chelsi: add to cms: */}
-          <AboutHeading2>Who we are</AboutHeading2>
+          <AboutHeading2>{aboutContent.teamHeader}</AboutHeading2>
           <MarkdownContent source={aboutContent.teamIntro} />
           <TeamSection />
         </HashWrapper>
