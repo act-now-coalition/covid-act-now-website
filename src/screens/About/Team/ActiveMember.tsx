@@ -4,14 +4,17 @@ import { Paragraph } from 'components/Markdown';
 import ExternalLink from 'components/ExternalLink';
 import { UserProfile } from 'cms-content/team';
 
-const ActiveMember = (props: {
+const ActiveMember: React.FC<{
   teamMember: UserProfile;
   includeTitle: boolean;
-}) => {
-  const { teamMember, includeTitle } = props;
-
+}> = ({ teamMember, includeTitle }) => {
   return (
-    <TeamMemberWrapper item sm={6} xs={12}>
+    <TeamMemberWrapper
+      item
+      sm={6}
+      xs={12}
+      alignItems={includeTitle ? 'flex-start' : 'center'}
+    >
       <Headshot src={teamMember.profileImgUrl} />
       <ExternalLink href={teamMember.profileUrl}>
         <DescriptionWrapper>
