@@ -6,7 +6,7 @@
   "sections": [
     {
       "sectionId": "how-we-assess-risk",
-      "sectionIntro": "A location’s overall risk level takes into account the following five metrics: daily new cases (incidence), infection rate (Rt), positive test rate, ICU headroom used, and contact tracers hired.\n\nIf a region’s daily new cases is green, then its overall risk level is green. Otherwise, a region’s overall risk level reflects the highest risk level across all five metrics.",
+      "sectionIntro": "### What does the overall risk-level for a location mean?\n\nA location’s overall risk level takes into account the following five metrics: daily new cases (incidence), infection rate (Rt), positive test rate, ICU headroom used, and contact tracers hired.\n\nIf a region’s daily new cases is green, then its overall risk level is green. Otherwise, a region’s overall risk level reflects the highest risk level across all five metrics.",
       "questions": [
         {
           "question": "What does the deepest red color indicate?",
