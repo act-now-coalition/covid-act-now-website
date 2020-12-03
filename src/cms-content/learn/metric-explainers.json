@@ -43,8 +43,64 @@
         },
         {
           "question": "What are your sources and methodology for daily new cases?",
-          "questionId": "sources-for-daily-new-cases",
+          "questionId": "daily-new-cases-sources",
           "answer": "When calculating daily new cases, we look at the average cases per 100,000 people in a location, which is calculated as a seven-day average of daily new cases, divided by the population, divided by 100,000.\n\n![Daily new cases metric calculation](/images_cms/daily-new-cases-calculation.png \"Daily new cases calculation\")\n\nTo calculate daily new cases, we use new positive cases *[from The New York Times](https://developer.nytimes.com/covid)*. If you would like to learn more, check out [our data sources](https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit)."
+        },
+        {
+          "question": "How were the risk thresholds for daily new cases determined?",
+          "answer": "Our risk levels are based on the [“Key](https://ethics.harvard.edu/files/center-for-ethics/files/key_metrics_and_indicators_v4.pdf) [Metrics for Covid Suppression”](https://ethics.harvard.edu/files/center-for-ethics/files/key_metrics_and_indicators_v4.pdf) by Harvard Global Health Institute and others. When estimating the number of people who will become infected in the course of a year, we rely on the [CDC’s estimate](https://www.globalhealthnow.org/2020-06/us-cases-10x-higher-reported) that many more people are infected than are likely to get tested. Therefore, we use a conservative estimate that only one in five people infected will subsequently get tested. \n\nThe deepest color indicates severe outbreak, for locations with daily new cases above 75 cases/100K.",
+          "questionId": "daily-new-cases-thresholds"
+        }
+      ]
+    },
+    {
+      "sectionHeader": "Infection Rate",
+      "sectionSubheader": "Also known as: R(t) or “R-effective”",
+      "sectionId": "infection-rate",
+      "sectionIntro": "**Infection rate is the estimated number of new people each COVID-positive person will infect.**",
+      "questions": [
+        {
+          "question": "Why is infection rate important?",
+          "questionId": "why-is-infection-rate-important",
+          "answer": "Infection rate is important because it estimates how fast COVID is spreading *right now*.\n\nTo give an example, if the R(t) is 3, it indicates that one infected person will most likely infect three other people, and those three people will each go on to infect three more people. We as a community can change it by modifying community behavior (whether there are large gatherings) and intervention practices (whether people wear masks and maintain social distancing).\n\n![Infection rate diagram](/images_cms/infection-rate-diagram.png \"Infection rate diagram\")"
+        },
+        {
+          "question": "Can I watch a video explainer?",
+          "questionId": "infection-rate-video-explainer",
+          "answer": "<https://youtu.be/dmp5iAXrkaY>"
+        },
+        {
+          "question": "What are your sources and methodology for infection rate?",
+          "questionId": "infection-rate-sources",
+          "answer": "In order to control COVID, the infection rate, or R(t), must be driven below 1.0 until the daily new cases metric is green. At that point community spread is effectively stopped and we can focus on controlling isolated outbreaks. **We use 0.9 as the cutoff for a green score because at that rate the number of newly infected people begins to significantly decline.** An R(t) of 1.0 means that the daily new cases of COVID are stable, while an R(t) greater than 1.0 means that daily new cases are growing."
+        }
+      ]
+    },
+    {
+      "sectionHeader": " Positive Test Rate",
+      "sectionSubheader": "Also known as: test positivity",
+      "sectionId": "positive-test-rate",
+      "sectionIntro": "**Positive test rate is the *percentage* of COVID testing that comes back positive** (not the total number of positive tests).",
+      "questions": [
+        {
+          "question": "Why is positive test rate important?",
+          "questionId": "why-is-positive-test-rate-important",
+          "answer": "Test positivity is a good indicator of how widespread testing is in a given area. If a state or county has a **high** test positivity rate, it is a sign of **insufficient** testing in that area. If a state or county has a **low** test positivity rate, it is a sign that we are **testing more** than only the sickest people. Testing a larger number of at-risk populations (essential workers, people notified via contact tracing , etc.) is key to catching unknown infections before they can lead to an outbreak.\n\nLet’s look at the pictures below. **There are two positive COVID tests in each of these scenarios,** but the positive test rate differs drastically due to the percentage of the population that is being tested. The closer we get to testing everyone, the less likely we are to miss positive cases.\n\n![Positive test rate diagram](/images_cms/positive-test-rate-diagram.png \"Positive test rate diagram\")"
+        },
+        {
+          "question": "Can I watch a video explainer? ",
+          "questionId": "positive-test-rate-video-explainer",
+          "answer": "<https://youtu.be/RpqI-ZVGGoY?t=27s>"
+        },
+        {
+          "question": "What are your sources and methodology for calculating positive test rate?",
+          "questionId": "positive-test-rate-sources",
+          "answer": "Positive test rate is calculated by dividing the number of positive tests over the number of total tests. We calculate the rate as a seven-day trailing average. It is important to note that positive test rate can be difficult to interpret and messy to calculate, for reasons well captured by the [Covid Tracking Project](https://covidtracking.com/blog/test-positivity-in-the-us-is-a-mess).  It should be looked at in conjunction with other metrics such as infection rate and daily new cases.\n\nWe source testing data from the Department of Health and Human Services (HHS) for state level data. We scrape official state and county dashboards for county level data and, when unavailable, fall back on a weekly test positivity rate provided by the Centers for Medicare & Medicaid Services. If you would like to learn more, check out [our data sources](https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit)."
+        },
+        {
+          "question": "How were risk thresholds for positive test rate determined?",
+          "questionId": "positive-test-rate-thresholds",
+          "answer": "There is a growing [consensus](https://globalhealth.harvard.edu/evidence-roundup-why-positive-test-rates-need-to-fall-below-3/) that driving the positive test rate downwards of 3 percent should be a priority.\n\nIt can also be helpful to look at countries that have been most effective and efficient in their containment of COVID. South Korea was back to normal activity with a test positivity rate below 3 percent. As of November 2020, *[South Korea’s test positivity](http://ncov.mohw.go.kr/en/)* was 1 percent."
         }
       ]
     }
