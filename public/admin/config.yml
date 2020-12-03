@@ -46,7 +46,7 @@ collections:
                 fields:
                   - { label: 'Alt text', name: 'altText', widget: 'string' }
                   - { label: 'Image', name: 'image', widget: 'image' }
-                  - { label: 'Url', name: 'url', widget: 'string' }
+                  - { label: 'Url', name: 'url', widget: 'string', required: false }
           - {
               label: 'Who we serve: Header',
               name: 'whoWeServeHeader',
