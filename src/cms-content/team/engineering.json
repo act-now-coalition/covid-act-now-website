@@ -3,46 +3,40 @@
   "teamID": "engineering",
   "teamMembers": [
     {
-      "fullName": "Pablo Navarro",
-      "description": "Front-end engineering co-lead",
-      "profileUrl": "https://www.linkedin.com/in/pnavarrc/",
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
-    },
-    {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "profileImgUrl": "/images_cms/chelsi.jpeg",
       "fullName": "Chelsi Asulin",
-      "description": "Front-end engineering co-lead",
+      "description": "Front-end engineering ",
       "profileUrl": "https://www.linkedin.com/in/chelsi-asulin/"
     },
     {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
-      "fullName": "Spencer Lyon",
-      "description": "Data engineering co-lead",
-      "profileUrl": "https://www.linkedin.com/in/spencer-lyon-27991541/"
-    },
-    {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
-      "fullName": "Chase Coleman",
-      "description": "Data engineering co-lead",
-      "profileUrl": "https://www.linkedin.com/in/chasegcoleman/"
-    },
-    {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
-      "fullName": "Chris Kelly",
-      "description": "Back-end engineering",
-      "profileUrl": "https://www.linkedin.com/in/ckelly90/"
-    },
-    {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "profileImgUrl": "/images_cms/tombrown.jpeg",
       "fullName": "Tom Brown",
       "description": "Back-end engineering",
       "profileUrl": "https://www.linkedin.com/in/tomdbrown/"
     },
     {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
-      "fullName": "Jaco le Roux",
+      "profileImgUrl": "/images_cms/chasecoleman.jpeg",
+      "fullName": "Chase Coleman",
+      "description": "Data engineering ",
+      "profileUrl": "https://www.linkedin.com/in/chasegcoleman/"
+    },
+    {
+      "profileImgUrl": "/images_cms/chris.jpeg",
+      "fullName": "Chris Kelly",
       "description": "Back-end engineering",
-      "profileUrl": "https://www.linkedin.com/in/jleroux0/"
+      "profileUrl": "https://www.linkedin.com/in/ckelly90/"
+    },
+    {
+      "profileImgUrl": "/images_cms/spencerlyon.jpeg",
+      "fullName": "Spencer Lyon",
+      "description": "Data engineering",
+      "profileUrl": "https://www.linkedin.com/in/spencer-lyon-27991541/"
+    },
+    {
+      "fullName": "Pablo Navarro",
+      "description": "Front-end engineering",
+      "profileUrl": "https://www.linkedin.com/in/pnavarrc/",
+      "profileImgUrl": "/images_cms/pablo.jpeg"
     }
   ]
 }

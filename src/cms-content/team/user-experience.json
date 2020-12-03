@@ -6,19 +6,13 @@
       "fullName": "Josh Ziman",
       "description": "User experience lead",
       "profileUrl": "https://www.linkedin.com/in/josh-ziman/",
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
+      "profileImgUrl": "/images_cms/joshziman.jpeg"
     },
     {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "profileImgUrl": "/images_cms/grace.jpeg",
       "fullName": "Grace Zec",
       "description": "UX researcher",
       "profileUrl": "https://www.linkedin.com/in/gracezec/"
-    },
-    {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
-      "fullName": "Nina Yan",
-      "description": "UX designer",
-      "profileUrl": "https://www.linkedin.com/in/ninaqyang/"
     }
   ]
 }

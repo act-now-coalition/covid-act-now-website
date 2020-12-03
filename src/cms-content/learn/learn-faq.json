@@ -20,8 +20,8 @@
           "questionId": "most-at-risk-covid"
         },
         {
-          "question": "Which groups are at higher risk of contracting COVID and becoming seriously ill?",
-          "answer": "Data from the CDC show that race and ethnicity, similar to age, are risk factors for COVID. In fact, the rates of COVID cases, hospitalizations and deaths among Blacks, Hispanic and Latino persons, and American Indians and Native Alaskans are much higher than for white people, according to the CDC’s calculation of [COVID-19 Hospitalization and Death by Race/Ethnicity](https://www.cdc.gov/coronavirus/2019-ncov/covid-data/investigations-discovery/hospitalization-death-by-race-ethnicity.html) (updated August 18, 2020). Some data show an even higher mortality rate among certain ethnic and racial groups than the CDC data. The [APM Research Lab](https://www.apmresearchlab.org/covid/deaths-by-race) finds that COVID death rates are more than three times higher for Blacks, Latinos, and Indigenous people than for white people (update September 15).",
+          "question": "Which racial and ethnic minorities are at higher risk of contracting COVID and becoming seriously ill?",
+          "answer": "Data from the CDC show that race and ethnicity, similar to age, are risk factors for COVID. The rates of COVID cases, hospitalizations and deaths among Blacks, Hispanic and Latino persons, and American Indians and Native Alaskans are much higher than for white people, according to the CDC’s calculation of [COVID-19 Hospitalization and Death by Race/Ethnicity](https://www.cdc.gov/coronavirus/2019-ncov/covid-data/investigations-discovery/hospitalization-death-by-race-ethnicity.html) (updated November 30, 2020). The [APM Research Lab](https://www.apmresearchlab.org/covid/deaths-by-race) finds that death rates are more than three times higher for Black, Latino, and Indigenous people than for white people (updated November 12, 2020).\n\nA number of social factors contribute to COVID risk for racial and ethnic minorities. For example, many minorities have higher rates of poverty and less access to health care. This puts them at greater risk of underlying medical conditions that result in more severe COVID cases. Racial and ethnic minorities are also more likely to be essential workers, live in crowded multi-generational housing, and have less financial resources to take off work when sick or provide for necessities while sheltering in place. Discrimination, including racism, contributes to these long-term social deficits and more immediately to inadequate health care access, according to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/community/health-equity/race-ethnicity.html).",
           "questionId": "groups-higher-at-risk-covid"
         }
       ]
@@ -39,6 +39,11 @@
           "question": "How common is it to have COVID but not have any symptoms?",
           "answer": "Many individuals infected with COVID are [asymptomatic](/glossary#asymptomatic) (that is, they do not have symptoms of the virus). When people do not know that they are ill, they do not take precautions. In much the same way, people who are “[presymptomatic](/glossary#presymptomatic-spread)” – that is, they will eventually develop symptoms ‒ may unknowingly spread the disease to others before they realize that they are ill. The [CDC estimates](https://www.cdc.gov/coronavirus/2019-ncov/hcp/planning-scenarios.html) that 40 percent of COVID cases are asymptomatic.",
           "questionId": "how-common-covid-without-symptoms"
+        },
+        {
+          "question": "Are children at risk of becoming sick with COVID?\n",
+          "questionId": "children-risk-sick-covid",
+          "answer": "Children can become infected and sick with COVID. According to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/faq.html#Children), fewer children get sick than adults and most display mild symptoms or are [asymptomatic](\\[/glossary#asymptomatic]). However, children with underlying medical conditions or infants (less than 1 year old) may be at increased risk for severe illness. There have also been cases of a rare disease called [multisystem inflammatory syndrome (MIS-C)](https://www.cdc.gov/coronavirus/2019-ncov/daily-life-coping/children/mis-c.html), which has been linked to COVID."
         },
         {
           "question": "How long are you contagious with COVID?",
@@ -131,6 +136,11 @@
           "question": "How soon after a possible exposure to COVID should I get tested? ",
           "answer": "It’s important to get tested for COVID after any potential [exposure](/glossary#exposed) to the [virus](/glossary#virus), whether that’s through contact with a [confirmed case](/glossary#confirmed-case) or traveling in close company with strangers. Since COVID has a long [incubation period](/glossary#incubation-period), it may take a few days before [PCR tests](/glossary#pcr-test) detect a sufficient enough amount of the virus to report a positive result, leading to high rates of [false-negatives](/glossary#false-negative) during the first few days after exposure. While it’s always recommended to [quarantine](/glossary#quarantine) for 14 days, [experts recommend](https://medical.mit.edu/covid-19-updates/2020/07/when-should-i-be-tested) being tested 5-7 days after a probable exposure for the most accurate test results.",
           "questionId": "covid-how-soon-after-exposure-tested"
+        },
+        {
+          "answer": "Rapid tests, also known as [antigen tests]([/glossary#antigen-tests]), and [PCR tests]([/glossary#PCR-test]) are the two types of diagnostic tests for COVID. Both tests are performed by collecting nasal or throat swabs, but antigen tests report results in minutes while PCR tests can take up to a week to return results depending on lab capacity. While rapid tests are more convenient and often cheaper, they report significantly higher rates of [false negatives](\\[/glossary#false-negative]) of [up to 50 percent](https://www.health.harvard.edu/blog/which-test-is-best-for-covid-19-2020081020734). PCR tests, on the other hand, report between 2 percent to 37 percent false negatives. PCR tests are most accurate for detecting active infections, while rapid tests are [best used](https://twitter.com/covidactnow/status/1321254254997204992?s=21) to confirm COVID symptoms.",
+          "question": "Are rapid tests less accurate than PCR tests?",
+          "questionId": "rapid-tests-less-accurate-than-pcr"
         }
       ]
     },

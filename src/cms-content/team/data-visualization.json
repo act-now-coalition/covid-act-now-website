@@ -1,19 +1,19 @@
 {
   "teamMembers": [
     {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "profileImgUrl": "/images_cms/raphael.jpg",
       "fullName": "Raphael Rosen",
       "description": "Associate product manager",
       "profileUrl": "https://www.linkedin.com/in/raphael-rosen/"
     },
     {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "profileImgUrl": "/images_cms/benjiwu.jpeg",
       "fullName": "Benji Wu",
       "description": "Associate product manager",
       "profileUrl": "https://www.linkedin.com/in/benji-wu-17bb461b2/"
     },
     {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "profileImgUrl": "/images_cms/leo.jpeg",
       "fullName": "Leo Jacoby",
       "description": "Associate product manager",
       "profileUrl": "https://www.linkedin.com/in/leo-jacoby-080898142/"
