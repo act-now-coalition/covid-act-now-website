@@ -221,6 +221,7 @@ export interface MetricExplainersContent {
   pageHeader: string;
   pageIntro: string;
   sections: Section[];
+  metricsHeader: string;
   frameworkHeader: string;
   frameworkBody: Markdown;
   metadataTitle: string;
