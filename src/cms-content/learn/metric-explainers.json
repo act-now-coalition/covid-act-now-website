@@ -136,6 +136,28 @@
           "answer": "We chose our cutoffs based on [Resolve to Save Live’s policy recommendation](https://preventepidemics.org/wp-content/uploads/2020/04/COV020_WhenHowTightenFaucet_v3.pdf), which says ICU COVID cases should be able to double for states to consider opening."
         }
       ]
+    },
+    {
+      "sectionHeader": " Contact Tracers Hired",
+      "sectionId": "contact-tracers-hired",
+      "sectionIntro": "**Contact tracers hired is** **the number of contact tracers that are hired in a state or county, relative to the number of cases.**",
+      "questions": [
+        {
+          "question": "Why is contact tracing important?",
+          "questionId": "why-is-contact-tracing-important",
+          "answer": "In order to halt the spread of COVID, it is critical that enough tracing capacity exists to rapidly trace the contacts of people who test positive for COVID. Those contacts can be tested, quarantined (if necessary), and asked about whom else they have come into contact with."
+        },
+        {
+          "question": "What are your sources and methodology for outputting contact tracers hired?",
+          "questionId": "contact-tracing-sources",
+          "answer": "We know that measuring contact tracing capacity solely by the number of staff is not reliable, and we are working on a [more accurate metric](https://contacttracingplaybook.resolvetosavelives.org/checklists/metrics) to assess contact tracing capacity. One of the best metrics of success for a contact tracing program is the percentage of new cases traced to a known source. However, very few states are reporting this number.\n\nTherefore, as a proxy, **we currently look at the number of contact tracers on staff for each state to estimate the number of contacts that could be traced within 48 hours if the contact tracing program were otherwise working perfectly**. This stems from [expert recommendations](https://covidlocal.org/assets/documents/COVID%20Local%20Metrics%20overview.pdf) that at least 90 percent of contacts for each new case must be traced within 48 hours in order to contain COVID, and expert estimations that tracing each new case within 48 hours requires an average of five contact tracers per new case, as well as fast testing.\n\nWe source our state-level tracers hired data from [Test and Trace](https://testandtrace.com/). If you would like to learn more, check out [our data sources](https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit)."
+        },
+        {
+          "question": "How were the risk thresholds for tracers hired determined?",
+          "questionId": "contact-tracers-hired-thresholds",
+          "answer": "We do not include the critical (**red**) range for contact tracing; in other words it will no longer be possible to be marked critical (**red**) due to low numbers of contact tracing staff alone. While low numbers of contact tracing staff should be acknowledged, it doesn’t indicate an active or imminent outbreak. In addition, contact tracing is one our least refined data sets, largely because states themselves are highly variable in their reporting of contact tracing data.\n\nThe boundaries between yellow and orange are tricky. In the absence of expert consensus, we have set inclusive lower thresholds for yellow and orange. We peg the cut off between yellow and orange at 10 percent."
+        }
+      ]
     }
   ],
   "metricsHeader": "Key metrics",
