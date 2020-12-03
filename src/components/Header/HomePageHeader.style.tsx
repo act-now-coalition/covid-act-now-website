@@ -21,7 +21,7 @@ export const Content = styled.div`
 `;
 
 export const HeaderTitle = styled(Typography)<{ component?: string }>`
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   font-weight: 700;
   line-height: 2.3rem;
   color: black;
@@ -30,7 +30,7 @@ export const HeaderTitle = styled(Typography)<{ component?: string }>`
 
   @media (min-width: 600px) {
     margin: 1rem auto 1rem;
-    font-size: 3rem;
+    font-size: 2.5rem;
     line-height: 1.2;
     max-width: unset;
   }
@@ -92,14 +92,10 @@ export const SelectorWrapper = styled.div`
   }
 `;
 
-export const SwitchContainer = styled.div`
-  margin
-`;
-
 export const StyledGridItem = styled(Grid)`
   &:last-child {
     justify-content: center;
-    margin: 2rem 0 1rem;
+    margin: 1rem 0 0;
   }
   @media (min-width: ${materialSMBreakpoint}) {
     height: fit-content;

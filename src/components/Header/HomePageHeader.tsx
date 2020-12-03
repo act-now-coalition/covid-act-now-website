@@ -1,6 +1,5 @@
 import React from 'react';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useTheme } from '@material-ui/core/styles';
+import moment from 'moment';
 
 import {
   Wrapper,
@@ -11,27 +10,31 @@ import {
   HeaderSubCopyItem,
   ClickableCopy,
 } from './HomePageHeader.style';
+import { useModelLastUpdatedDate } from 'common/utils/model';
 
 const noop = () => {};
 
 const HomePageHeader = (props: { indicatorsLinkOnClick: () => void }) => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const lastUpdatedDate = useModelLastUpdatedDate() || new Date();
 
   return (
     <Wrapper>
       <Content>
-        <HeaderTitle>America’s COVID Warning System</HeaderTitle>
+        <HeaderTitle component="h1">
+          USA's COVID Warning System: Map & Risk Levels
+        </HeaderTitle>
         <div>
           <HeaderSubCopy color="inherit" component="p" variant="subtitle2">
             <HeaderSubCopyItem>
-              We use{' '}
+              Our map shows risk levels for <strong>50 states</strong> and{' '}
+              <strong>3,200 counties</strong> using{' '}
               <ClickableCopy onClick={props.indicatorsLinkOnClick || noop}>
                 5 key metrics
-              </ClickableCopy>{' '}
-              to determine risk levels {!isMobile && <br />}
-              for <strong>50 states</strong> and{' '}
-              <strong>3,000+ counties</strong>.
+              </ClickableCopy>
+              .{' '}
+              <small>
+                Last updated: {moment.utc(lastUpdatedDate).format('l')}.
+              </small>
             </HeaderSubCopyItem>
           </HeaderSubCopy>
           {false && (
