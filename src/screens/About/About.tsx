@@ -8,6 +8,7 @@ import { MarkdownContent } from 'components/Markdown';
 import PageContent from 'components/PageContent';
 import { TocItem } from 'cms-content/utils';
 import TeamSection from './Team/TeamSection';
+import GovLogoGrid from './GovLogoGrid';
 
 export const sidebarItems: TocItem[] = [
   {
@@ -70,6 +71,7 @@ const About = () => {
           {aboutContent.whoWeServeHeader}
         </AboutHeading2>
         <MarkdownContent source={aboutContent.whoWeServeContent} />
+        <GovLogoGrid logos={aboutContent.governmentLogos} />
         <HashWrapper id="team">
           {/* chelsi: add to cms: */}
           <AboutHeading2>Who we are</AboutHeading2>
