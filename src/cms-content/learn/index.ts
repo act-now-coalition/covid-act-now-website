@@ -1,9 +1,10 @@
-import { chain, keyBy, reject } from 'lodash';
+import { chain, keyBy, reject, partition } from 'lodash';
 import faq from './learn-faq.json';
 import glossary from './learn-glossary.json';
 import landing from './learn-landing.json';
 import caseStudies from './learn-case-studies.json';
 import productsLanding from './products-landing.json';
+import metricExplainers from './metric-explainers.json';
 import { sanitizeID, Markdown, TocItem } from '../utils';
 
 /*
@@ -229,6 +230,12 @@ export interface MetricExplainersContent {
   metadataTitle: string;
   metadataDescription: string;
 }
+
+export const metricExplainersContent = metricExplainers as MetricExplainersContent;
+export const [introSection, metricSections] = partition(
+  metricExplainersContent.sections,
+  section => section.sectionId === 'how-we-assess-risk',
+);
 
 // TODO (pablo): Should we have a short heading for categories?
 export const learnPages: TocItem[] = [
