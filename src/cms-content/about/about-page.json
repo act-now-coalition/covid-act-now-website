@@ -29,6 +29,11 @@
           "url": "https://schmidtfutures.com",
           "altText": "Schmidt Futures logo",
           "image": "/images_cms/schmidt-futures.png"
+        },
+        {
+          "altText": "Patrick J. McGovern Foundation Logo",
+          "url": "https://www.mcgovern.org/",
+          "image": "/images_cms/mcgovern-foundation-logo.jpeg"
         }
       ]
     },
