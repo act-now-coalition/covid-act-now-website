@@ -15,7 +15,10 @@ const ActiveMember: React.FC<{
       xs={12}
       alignItems={includeTitle ? 'flex-start' : 'center'}
     >
-      <Headshot src={teamMember.profileImgUrl} />
+      <Headshot
+        src={teamMember.profileImgUrl}
+        alt={`headshot of ${teamMember.fullName}`}
+      />
       <ExternalLink href={teamMember.profileUrl}>
         <DescriptionWrapper>
           <strong>{teamMember.fullName}</strong>
