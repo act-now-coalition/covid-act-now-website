@@ -19,7 +19,8 @@ interface AboutContent {
   partnersHeader: string;
   partnersContent: PartnersContent[];
   whoWeServeHeader: string;
-  whoWeServeContent: Markdown;
+  whoWeServeContentA: Markdown;
+  whoWeServeContentB: Markdown;
   governmentLogos: LogoItem[];
   teamHeader: string;
   teamIntro: Markdown;

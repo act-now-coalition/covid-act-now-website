@@ -72,8 +72,9 @@ const About = () => {
         <AboutHeading2 id="who-we-serve">
           {aboutContent.whoWeServeHeader}
         </AboutHeading2>
-        <MarkdownContent source={aboutContent.whoWeServeContent} />
+        <MarkdownContent source={aboutContent.whoWeServeContentA} />
         <GovLogoGrid logos={aboutContent.governmentLogos} />
+        <MarkdownContent source={aboutContent.whoWeServeContentB} />
         <HashWrapper id="team">
           <AboutHeading2>{aboutContent.teamHeader}</AboutHeading2>
           <MarkdownContent source={aboutContent.teamIntro} />
