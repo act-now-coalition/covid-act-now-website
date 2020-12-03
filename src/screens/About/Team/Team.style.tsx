@@ -18,7 +18,7 @@ export const TeamMemberWrapper = styled(Grid)`
     color: black;
     text-decoration: none;
     height: fit-content;
-    margin: auto 0;
+    margin: 0;
     &:hover {
       color: ${COLOR_MAP.BLUE};
     }
