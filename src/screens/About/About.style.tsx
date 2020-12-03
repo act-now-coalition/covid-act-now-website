@@ -1,81 +1,31 @@
 import styled from 'styled-components';
-import { COLORS } from 'common';
-import { TeamList } from 'screens/About/About';
-import { COLOR_MAP } from 'common/colors';
-import ReactMarkdown from 'react-markdown';
+import { materialSMBreakpoint } from 'assets/theme/sizes';
+import { Heading1, Heading2, Heading3 } from 'components/Markdown';
 
-export const Wrapper = styled.div`
-  background-color: white;
-  min-height: calc(100vh - 64px);
+export const AboutHeading1 = styled(Heading1)`
+  margin: 0 0 2.25rem;
 `;
 
-export const Content = styled.div`
-  max-width: 900px;
-  margin: auto;
-  padding: 1rem 0 3rem;
+export const AboutHeading2 = styled(Heading2)`
+  margin: 2.5rem 0 1.5rem;
 
-  @media (max-width: 932px) {
-    padding: 1rem;
+  @media (min-width: ${materialSMBreakpoint}) {
+    margin: 3.5rem 0 1.5rem;
   }
 `;
 
-export const Header = styled.div`
-  background-color: ${COLORS.LIGHTGRAY};
-`;
+export const AboutHeading3 = styled(Heading3)`
+  margin: 3rem 0 2rem;
 
-export const TextContent = styled.div`
-  max-width: 600px;
-`;
-
-export const ActiveAlumniButtonContainer = styled.div`
-  display: flex;
-  width: 180px;
-  border: 1px solid #e0e0e0;
-  margin-bottom: 2rem;
-  border-radius: 4px;
-  font-size: 15px;
-`;
-
-export const ActiveAlumniButton = styled.div<{
-  teamList?: TeamList;
-}>`
-  width: 50%;
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  padding: 0.1rem;
-  color: #828282;
-  line-height: 1;
-  padding: 14px 0 12px;
-
-  &:first-child {
-    border-right: 1px solid #e0e0e0;
-    border-bottom: ${({ teamList }) =>
-      teamList === TeamList.Active && `2px solid ${COLOR_MAP.GREEN.BASE}`};
-    border-bottom-left-radius: ${({ teamList }) =>
-      teamList === TeamList.Active && `3px`};
-    color: ${({ teamList }) => teamList === TeamList.Active && `black`};
-    font-weight: ${({ teamList }) => teamList === TeamList.Active && `bold`};
-  }
-
-  &:last-child {
-    border-bottom: ${({ teamList }) =>
-      teamList === TeamList.Alumni && `2px solid ${COLOR_MAP.GREEN.BASE}`};
-    border-bottom-right-radius: ${({ teamList }) =>
-      teamList === TeamList.Alumni && `3px`};
-    color: ${({ teamList }) => teamList === TeamList.Alumni && `black`};
-    font-weight: ${({ teamList }) => teamList === TeamList.Alumni && `bold`};
+  @media (min-width: ${materialSMBreakpoint}) {
+    margin: 4rem 0 2rem;
   }
 `;
 
-/**
- * For CMS content
- * Rich-text styles for blocks of markdown:
- */
-
-export const BodyCopy = styled(ReactMarkdown)`
-  a {
-    color: ${COLOR_MAP.BLUE};
-  }
-`;
+/*
+  Note(Chelsi): HashWrapper is used for scroll spy in the sidebar. Previously the sidebar
+  label was highlighted only when the corresponding section's header was in view.
+  Placing the id on a wrapping div makes sure the sidebar item remains
+  highlighted when the section's content is in view but its header is not.
+*/
+export const HashWrapper = styled.div``;

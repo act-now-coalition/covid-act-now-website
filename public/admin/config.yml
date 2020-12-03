@@ -51,13 +51,11 @@ collections:
               label: 'Who we serve: Header',
               name: 'whoWeServeHeader',
               widget: 'string',
-              required: false
             }
           - {
               label: 'Who we serve: Content',
               name: 'whoWeServeContent',
               widget: 'markdown',
-              required: false
             }
           - label: 'Government logos'
             name: 'governmentLogos'
@@ -67,23 +65,14 @@ collections:
               - { label: 'Image', name: 'image', widget: 'image' }
               - { label: 'Url', name: 'url', widget: 'string', required: false }
           - {
-              label: 'Social mentions: Intro',
-              name: 'socialMentionsIntro',
-              widget: 'markdown',
-              required: false
+              label: 'Team: Header',
+              name: 'teamHeader',
+              widget: 'string',
             }
-          - label: 'Social mentions: Content'
-            name: 'socialMentionsContent'
-            widget: 'list'
-            fields:
-              - { label: 'Name', name: 'name', widget: 'string' }
-              - { label: 'Handle', name: 'handle', widget: 'string' }
-              - { label: 'Url', name: 'url', widget: 'string', required: false }
           - {
               label: 'Team: Intro',
               name: 'teamIntro',
               widget: 'markdown',
-              required: false
             }
   - label: Team directory
     name: team
@@ -118,6 +107,7 @@ collections:
           - label: Profile URL
             name: profileUrl
             widget: string
+            required: false
 
   - name: articles
     label: Articles
@@ -469,6 +459,13 @@ collections:
                       name: shortTitle,
                       widget: text,
                       hint: Short title for the case studies landing page,
+                    }
+                  - {
+                      label: Show case study,
+                      name: showCaseStudy,
+                      widget: boolean,
+                      default: true,
+                      hint: Toggle to the left if we want to hide the case study for the time being,
                     }
                   - {
                       label: Author,

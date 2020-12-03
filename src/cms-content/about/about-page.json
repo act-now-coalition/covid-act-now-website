@@ -1,7 +1,6 @@
 {
-  "introHeader": "Our mission",
+  "teamHeader": "Who we are",
   "introContent": "Covid Act Now is a 501(c)(3) nonprofit founded in March 2020. We strive to provide the most timely and accurate local COVID data so that every American can make informed decisions during the pandemic. We are committed to:\n\n* **Data**: We support data and science-backed policies and decision-making\n* **Transparency**: Our data and methodologies are fully open-source so that the public can vet, freely use, and build upon our work\n* **Accessibility**: We make data universally accessible so that anyone can easily understand and use it, regardless of ability or prior knowledge",
-  "partnersHeader": "Who we work with",
   "partnersContent": [
     {
       "copy": "Our university affiliates are the [Georgetown University Center for Global Health Science and Security](https://ghss.georgetown.edu/), [Stanford University Clinical Excellence Research Center](http://med.stanford.edu/cerc.html), and [Harvard Global Health Institute](https://globalhealth.harvard.edu/).",
@@ -38,5 +37,40 @@
       "logos": []
     }
   ],
+  "teamIntro": "Our multidisciplinary, volunteer-driven team draws on expertise in technology, design, data science, epidemiology, public health, and policy.",
+  "whoWeServeHeader": "Who we serve",
+  "whoWeServeContent": "More than 100 federal, state, and county governments who have trusted and used our tool to make data-driven decisions around COVID, including:",
+  "governmentLogos": [
+    {
+      "image": "/images_cms/anchorage-1-.png",
+      "altText": "Anchorage Mayor's Office Logo"
+    },
+    {
+      "image": "/images_cms/cdph-1-.png",
+      "altText": "California Department of Health Logo"
+    },
+    {
+      "image": "/images_cms/new-orleans-mayor-s-office.png",
+      "altText": "New Orleans Mayor's Office Logo"
+    },
+    {
+      "image": "/images_cms/dc_doh-1-.png",
+      "altText": "Washington, DC Department of Health Logo"
+    },
+    {
+      "image": "/images_cms/hardy_county-1-.jpg",
+      "altText": "Hardy County Sheriff's Office Logo"
+    },
+    {
+      "image": "/images_cms/michigan_district_12-1-.png",
+      "altText": "Michigan District 12 Senator Rosemary Bayer Logo"
+    },
+    {
+      "image": "/images_cms/steuben_county-1-.jpg",
+      "altText": "Steuben County, New York Logo"
+    }
+  ],
+  "partnersHeader": "Who we work with",
+  "introHeader": "Our mission",
   "pageHeader": "About Covid Act Now"
 }

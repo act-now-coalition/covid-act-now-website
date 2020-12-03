@@ -1,40 +1,40 @@
 {
   "teamMembers": [
     {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "profileImgUrl": "/images_cms/meredith-whitaker.jpeg",
       "fullName": "Meredith Whitaker",
       "description": "Editor, Research Rundown (newsletter)",
       "profileUrl": "https://www.linkedin.com/in/meredith-whitaker-2013/"
     },
     {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "profileImgUrl": "/images_cms/stefan.png",
       "fullName": "Stefan Turkheimer",
       "description": "Government relations",
       "profileUrl": "https://www.linkedin.com/in/stefan-turkheimer-06466a5/"
     },
     {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
-      "fullName": "Kara Huang",
-      "description": "Grant writing",
-      "profileUrl": "https://www.linkedin.com/in/kara-huang/"
-    },
-    {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
-      "fullName": "Cubby Carlson",
+      "profileImgUrl": "/images_cms/cibby.png",
+      "fullName": "Michael Carlson",
       "description": "Engineering",
       "profileUrl": "https://www.linkedin.com/in/michael-cubby-carlson-200995193/"
     },
     {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "profileImgUrl": "/images_cms/dani.jpeg",
       "fullName": "Dani Fontanesi",
       "description": "Legal",
       "profileUrl": "https://www.linkedin.com/in/dani-fontanesi-esq-26509a8/"
     },
     {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "profileImgUrl": "/images_cms/annablech.jpeg",
       "fullName": "Anna Blech",
       "description": "Lead writer, Daily Download (newsletter)",
       "profileUrl": "https://www.linkedin.com/in/anna-blech-121277138/"
+    },
+    {
+      "profileImgUrl": "/images_cms/henry.jpeg",
+      "fullName": "Henry Bair",
+      "description": "writer, Research Rundown and Daily Download",
+      "profileUrl": "https://www.linkedin.com/in/henrybair/"
     }
   ],
   "teamName": "Special Projects",
