@@ -14,11 +14,11 @@ export enum RegionType {
 
 abstract class Region {
   constructor(
-    public name: string,
-    protected urlSegment: string,
-    public fipsCode: FipsCode,
-    public population: number,
-    public regionType: RegionType,
+    public readonly name: string,
+    protected readonly urlSegment: string,
+    public readonly fipsCode: FipsCode,
+    public readonly population: number,
+    public readonly regionType: RegionType,
   ) {}
 
   abstract fullName(): string;
@@ -30,11 +30,11 @@ abstract class Region {
 
 export class State extends Region {
   constructor(
-    public name: string,
+    name: string,
     urlSegment: string,
-    public fipsCode: FipsCode,
-    public population: number,
-    public stateCode: string,
+    fipsCode: FipsCode,
+    population: number,
+    public readonly stateCode: string,
   ) {
     super(name, urlSegment, fipsCode, population, RegionType.STATE);
   }
@@ -50,13 +50,13 @@ export class State extends Region {
 
 export class County extends Region {
   constructor(
-    public name: string,
+    name: string,
     urlSegment: string,
-    public fipsCode: FipsCode,
-    public population: number,
-    public state: State,
-    public cityNames: string[],
-    private adjacentCountiesFips: FipsCode[],
+    fipsCode: FipsCode,
+    population: number,
+    public readonly state: State,
+    public readonly cityNames: string[],
+    private readonly adjacentCountiesFips: FipsCode[],
   ) {
     super(name, urlSegment, fipsCode, population, RegionType.COUNTY);
   }
@@ -82,9 +82,8 @@ const states: State[] = chain(state_dataset)
   })
   .value();
 
-// TODO: Aggregated regions
-
 const statesByFips = fromPairs(states.map(state => [state.fipsCode, state]));
+const statesFipsList = states.map(state => state.fipsCode);
 
 interface AdjacencyInfo {
   adjacent_counties: FipsCode[];
@@ -97,7 +96,7 @@ const adjacency: { [fipsCode: string]: AdjacencyInfo } =
 const counties: County[] = chain(state_county_map_dataset)
   .map(stateData => stateData.county_dataset)
   .flatten()
-  .filter(county => Object.keys(statesByFips).includes(county.state_fips_code))
+  .filter(county => statesFipsList.includes(county.state_fips_code))
   .map(countyInfo => {
     const countyFips = countyInfo.full_fips_code;
     const state = statesByFips[countyInfo.state_fips_code];
@@ -137,9 +136,6 @@ class RegionDB {
   counties(): Region[] {
     return this.filterByType(RegionType.COUNTY);
   }
-
-  // TODO:
-  // find by URL parameters
 }
 
 const regions = new RegionDB([...states, ...counties]);

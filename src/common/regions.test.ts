@@ -14,7 +14,7 @@ describe('regions', () => {
   test('findByFipsCode returns a state for a state FIPS', () => {
     const dc = regions.findByFipsCode('11');
     expect(dc).toBeTruthy();
-    expect(dc?.regionType === RegionType.STATE);
+    expect(dc?.regionType).toBe(RegionType.STATE);
   });
 
   test('findByFipsCode returns null if the FIPS doesn’t exist', () => {
