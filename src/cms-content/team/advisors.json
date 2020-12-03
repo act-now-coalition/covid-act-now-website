@@ -3,19 +3,19 @@
   "teamID": "advisors",
   "teamMembers": [
     {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "profileImgUrl": "/images_cms/danielle-allen.jpg",
       "fullName": "Danielle Allen",
       "description": "Director of Edmond J. Safra Center for Ethics and James Bryant Conant University Professor at Harvard ",
       "profileUrl": "https://www.gse.harvard.edu/faculty/danielle-allen"
     },
     {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "profileImgUrl": "/images_cms/don-berwick.jpeg",
       "fullName": "Don Berwick",
       "profileUrl": "https://www.linkedin.com/in/don-berwick-46a49380/",
       "description": "Former Administrator, Centers for Medicare and Medicaid Services"
     },
     {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "profileImgUrl": "/images_cms/nahid-bhadelia.jpeg",
       "fullName": "Nahid Bhadelia",
       "description": "Medical Director, Boston Medical Center's Special Pathogens Unit,",
       "profileUrl": "https://www.linkedin.com/in/nahid-bhadelia-81a775b7/"
@@ -33,7 +33,7 @@
       "profileUrl": "https://www.linkedin.com/in/shuhan-he/"
     },
     {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "profileImgUrl": "/images_cms/bob-inglis.jpg",
       "fullName": "Bob Inglis",
       "description": "Former Republican Congressman, George Mason University",
       "profileUrl": "https://www.linkedin.com/in/bob-inglis-21112b25/"
@@ -45,13 +45,13 @@
       "profileImgUrl": "/images_cms/rebecca-katz.jpeg"
     },
     {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "profileImgUrl": "/images_cms/tomás-pueyo.jpeg",
       "fullName": "Tomás Pueyo",
       "description": "Author, “Hammer and the Dance” and other pieces",
       "profileUrl": "https://www.linkedin.com/in/tomaspueyo/"
     },
     {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "profileImgUrl": "/images_cms/roni-rosenfeld.png",
       "description": "Head of Carnegie Mellon University's Machine Learning Department ",
       "fullName": "Roni Rosenfeld",
       "profileUrl": "http://www.cs.cmu.edu/~roni/"
@@ -63,19 +63,19 @@
       "profileUrl": "https://www.linkedin.com/in/nigam/"
     },
     {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "profileImgUrl": "/images_cms/ryan-tibshirani.jpg",
       "fullName": "Ryan Tibshirani ",
       "description": "Associate Professor, Carnegie Mellon University",
       "profileUrl": "https://www.stat.cmu.edu/~ryantibs/index.html"
     },
     {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "profileImgUrl": "/images_cms/victor-udoewa.jpeg",
       "fullName": "Victor Udoewa",
       "profileUrl": "https://www.linkedin.com/in/udoewa/",
       "description": "Science & technology policy advisor, education director, and consultant"
     },
     {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "profileImgUrl": "/images_cms/jason-wang.jpeg",
       "fullName": "Jason Wang",
       "description": "Director, Stanford Center for Policy, Outcomes, and Prevention",
       "profileUrl": "https://www.linkedin.com/in/jason-wang-38a34842/"
