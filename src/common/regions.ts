@@ -7,15 +7,15 @@ const { state_dataset, state_county_map_dataset } = US_STATE_DATASET;
 export type FipsCode = string;
 
 export enum RegionType {
-  COUNTY = 'County',
-  STATE = 'State',
-  MSA = 'MSA',
+  COUNTY = 'county',
+  STATE = 'state',
+  CBSA = 'CBSA',
 }
 
 abstract class Region {
   constructor(
     public name: string,
-    public urlName: string,
+    protected urlSegment: string,
     public fipsCode: FipsCode,
     public population: number,
     public regionType: RegionType,
@@ -31,12 +31,12 @@ abstract class Region {
 export class State extends Region {
   constructor(
     public name: string,
-    public urlName: string,
+    urlSegment: string,
     public fipsCode: FipsCode,
     public population: number,
     public stateCode: string,
   ) {
-    super(name, urlName, fipsCode, population, RegionType.STATE);
+    super(name, urlSegment, fipsCode, population, RegionType.STATE);
   }
 
   fullName() {
@@ -44,21 +44,21 @@ export class State extends Region {
   }
 
   relativeUrl() {
-    return `us/${this.urlName}`;
+    return `us/${this.urlSegment}`;
   }
 }
 
 export class County extends Region {
   constructor(
     public name: string,
-    public urlName: string,
+    urlSegment: string,
     public fipsCode: FipsCode,
     public population: number,
     public state: State,
-    public cities: string[],
+    public cityNames: string[],
     private adjacentCountiesFips: FipsCode[],
   ) {
-    super(name, urlName, fipsCode, population, RegionType.COUNTY);
+    super(name, urlSegment, fipsCode, population, RegionType.COUNTY);
   }
 
   fullName() {
@@ -66,7 +66,7 @@ export class County extends Region {
   }
 
   relativeUrl() {
-    return urlJoin(this.state.relativeUrl(), `county/${this.urlName}`);
+    return urlJoin(this.state.relativeUrl(), `county/${this.urlSegment}`);
   }
 }
 
