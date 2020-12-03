@@ -50,27 +50,33 @@
   "governmentLogos": [
     {
       "image": "/images_cms/anchorage-1-.png",
-      "altText": "Anchorage Mayor's Office Logo"
+      "altText": "Municipality of Anchorage Logo",
+      "url": "https://www.muni.org/pages/default.aspx"
     },
     {
       "image": "/images_cms/cdph-1-.png",
-      "altText": "California Department of Health Logo"
+      "altText": "California Department of Public Health Logo",
+      "url": "https://www.cdph.ca.gov/"
     },
     {
       "image": "/images_cms/new-orleans-mayor-s-office.png",
-      "altText": "New Orleans Mayor's Office Logo"
+      "altText": "New Orleans Mayor's Office Logo",
+      "url": "https://www.nola.gov/mayor/"
     },
     {
       "image": "/images_cms/dc_doh-1-.png",
-      "altText": "Washington, DC Department of Health Logo"
+      "altText": "Washington, DC Department of Health Logo",
+      "url": "https://dchealth.dc.gov/"
     },
     {
       "image": "/images_cms/hardy_county-1-.jpg",
-      "altText": "Hardy County Sheriff's Office Logo"
+      "altText": "Hardy County Sheriff's Office Logo",
+      "url": "http://hardycounty.com/law-enforcement"
     },
     {
       "image": "/images_cms/steuben_county-1-.jpg",
-      "altText": "Steuben County, New York Logo"
+      "altText": "Steuben County, New York Logo",
+      "url": "https://www.steubencony.org/"
     }
   ],
   "partnersHeader": "Who we work with",
