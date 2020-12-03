@@ -4,31 +4,33 @@
   "teamMembers": [
     {
       "fullName": "James Tamplin",
-      "description": "Former Founder and CEO, Google Firebase",
+      "description": "Founder and Former CEO, Google Firebase",
       "profileUrl": "https://www.linkedin.com/in/jamest",
       "profileImgUrl": "/images_cms/jamestamplin.jpeg"
     },
     {
       "profileImgUrl": "/images_cms/maxhenderson.jpeg",
       "fullName": "Max Henderson",
-      "description": "Founder and former CEO of Covid Act Now",
+      "description": "Former Google Data and Product Executive and Founder of Covid Act Now",
       "profileUrl": "https://www.linkedin.com/in/maxhenderson/"
     },
     {
       "profileImgUrl": "/images_cms/nirav-r.-shah.jpeg",
       "fullName": "Nirav Shah",
       "profileUrl": "https://www.linkedin.com/in/niravrshah/",
-      "description": "Senior scholar at Stanford Medical School and former New York State commissioner of health"
+      "description": "Senior Scholar, Stanford Medical School; Former New York State Commissioner of Health"
     },
     {
       "profileImgUrl": "/images_cms/zack-rosen.jpeg",
       "fullName": "Zack Rosen",
-      "profileUrl": "https://www.linkedin.com/in/zacharyrosen/"
+      "profileUrl": "https://www.linkedin.com/in/zacharyrosen/",
+      "description": "CEO of Pantheon"
     },
     {
       "profileImgUrl": "/images_cms/jkt.jpeg",
-      "fullName": "Jonathan (JKT) Kreiss-Tomkins",
-      "profileUrl": "https://www.linkedin.com/in/jonathan-kreiss-tomkins-35915319a/"
+      "fullName": "Jonathan Kreiss-Tomkins",
+      "profileUrl": "https://www.linkedin.com/in/jonathan-kreiss-tomkins-35915319a/",
+      "description": "State Representative, Alaska House of Representatives"
     },
     {
       "profileImgUrl": "/images_cms/ryan-panchadsaram.jpeg",
