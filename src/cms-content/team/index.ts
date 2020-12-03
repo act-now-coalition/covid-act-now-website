@@ -39,9 +39,7 @@ function sanitizeTeam(team: Team): Team {
   };
 }
 
-// Teams will appear in this order on the About page
-// Leadership/board/advisors first, alumni last, everything else alphabetized
-const sortedTeams = [
+const allTeams = [
   leadership,
   board,
   advisors,
@@ -62,6 +60,26 @@ const sortedTeams = [
   alumni,
 ];
 
-export const teams: Team[] = sortedTeams.map(sanitizeTeam);
+/*
+  We are now removing categories for all teams other than leadership, board, advisors, and alumni
+*/
+const individuallyGroupedTeams = ['Leadership', 'Board', 'Advisors', 'Alumni'];
 
+const combinedTeamMembers = allTeams
+  .filter(team => !individuallyGroupedTeams.includes(team.teamName))
+  .reduce((acc: any[], curr: Team) => [...curr.teamMembers, ...acc], []);
+
+const combinedTeamObj = {
+  teamName: 'Team',
+  teamID: 'team',
+  teamMembers: combinedTeamMembers,
+};
+
+const groupedTeams = [leadership, board, advisors, combinedTeamObj, alumni];
+
+export const teams: Team[] = groupedTeams.map(sanitizeTeam);
+
+/*
+  Including titles only for these 3 team categories:
+*/
 export const teamsWithTitles = ['Leadership', 'Board', 'Advisors'];
