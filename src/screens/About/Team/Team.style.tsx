@@ -5,7 +5,7 @@ import { COLOR_MAP } from 'common/colors';
 
 export const Headshot = styled.img`
   border-radius: 50%;
-  max-width: 4rem;
+  width: 4rem;
   max-height: 4rem;
   margin-right: 1.5rem;
   height: fit-content;

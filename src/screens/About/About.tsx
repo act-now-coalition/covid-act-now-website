@@ -54,7 +54,7 @@ const About = () => {
         </AboutHeading2>
         {aboutContent.partnersContent.map((section: any, idx: number) => {
           return (
-            <Fragment key={idx}>
+            <Fragment key={`Partner-section-${idx}`}>
               <MarkdownContent source={section.copy} />
               <Grid container spacing={1} alignItems="center" justify="center">
                 {section.logos.map((logo: any, i: number) => (

@@ -1,21 +1,15 @@
 import aboutPage from './about-page.json';
 import { Markdown } from '../utils';
 
-interface LogoItem {
+export interface LogoItem {
   altText: string;
   image: string;
-  url: string;
+  url?: string;
 }
 
 interface PartnersContent {
   copy: Markdown;
   logos: LogoItem[];
-}
-
-interface SocialMention {
-  name: string;
-  handle: string;
-  url: string;
 }
 
 interface AboutContent {

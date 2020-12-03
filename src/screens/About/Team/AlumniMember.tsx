@@ -5,8 +5,9 @@ import {
   AlumniName,
 } from './Team.style';
 import ExternalLink from 'components/ExternalLink';
+import { UserProfile } from 'cms-content/team';
 
-const AlumniMember = (props: { teamMember: any }) => {
+const AlumniMember = (props: { teamMember: UserProfile }) => {
   const { teamMember } = props;
 
   return (

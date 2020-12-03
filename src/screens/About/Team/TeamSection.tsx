@@ -14,21 +14,25 @@ const TeamSection = () => {
           team.teamMembers,
           member => member.fullName,
         );
-        const teamToMap =
+        const teamMembers =
           team.teamName === 'Leadership' ? team.teamMembers : alphabetizedTeam;
         const isAlumni = team.teamName === 'Alumni';
         const includeTitle = teamsWithTitles.includes(team.teamName);
         return (
-          <Fragment>
+          <Fragment key={team.teamName}>
             <AboutHeading3>{team.teamName}</AboutHeading3>
             <Grid container spacing={3}>
-              {teamToMap.map((teamMember, i) => {
+              {teamMembers.map((teamMember, i) => {
                 return isAlumni ? (
-                  <AlumniMember teamMember={teamMember} />
+                  <AlumniMember
+                    teamMember={teamMember}
+                    key={teamMember.fullName}
+                  />
                 ) : (
                   <ActiveMember
                     teamMember={teamMember}
                     includeTitle={includeTitle}
+                    key={teamMember.fullName}
                   />
                 );
               })}

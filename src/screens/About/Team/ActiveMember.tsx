@@ -2,8 +2,12 @@ import React from 'react';
 import { Headshot, TeamMemberWrapper, DescriptionWrapper } from './Team.style';
 import { Paragraph } from 'components/Markdown';
 import ExternalLink from 'components/ExternalLink';
+import { UserProfile } from 'cms-content/team';
 
-const ActiveMember = (props: { teamMember: any; includeTitle: boolean }) => {
+const ActiveMember = (props: {
+  teamMember: UserProfile;
+  includeTitle: boolean;
+}) => {
   const { teamMember, includeTitle } = props;
 
   return (
