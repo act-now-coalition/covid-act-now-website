@@ -4,7 +4,7 @@ import { Markdown } from '../utils';
 export interface LogoItem {
   altText: string;
   image: string;
-  url?: string;
+  url: string;
 }
 
 interface PartnersContent {

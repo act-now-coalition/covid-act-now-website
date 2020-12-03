@@ -12,9 +12,9 @@ const GovLogoGrid = (props: { logos: LogoItem[] }) => {
         return (
           <Grid container item xs={4} justify="center" key={logo.altText}>
             <Grid item>
-              {/* <ExternalLink href={logo.url}> */}
-              <GovLogo src={logo.image} alt={logo.altText} />
-              {/* </ExternalLink> */}
+              <ExternalLink href={logo.url}>
+                <GovLogo src={logo.image} alt={logo.altText} />
+              </ExternalLink>
             </Grid>
           </Grid>
         );
