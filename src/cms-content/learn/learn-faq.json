@@ -59,6 +59,11 @@
           "question": "What is counted as a COVID death?",
           "answer": "The [WHO](https://www.who.int/classifications/icd/Guidelines_Cause_of_Death_COVID-19.pdf?ua=1) states that a COVID death can be “a death resulting from a clinically compatible illness, in a probable or confirmed COVID-19 case, unless there is a clear alternative cause of death that cannot be related to COVID disease (e.g. trauma). There should be no period of complete recovery from COVID-19 between illness and death.” (The CDC’s  offers further [guidance](https://www.cdc.gov/nchs/covid19/coding-and-reporting.htm) on reporting and coding deaths due to COVID.)\n\nTracking the number of COVID deaths is difficult, and some suggest that the number is underreported. One issue is that individuals infected with the [virus](/glossary#virus) may be sick for many days, or even weeks, before death, so the increase in deaths resulting from a [wave](/glossary#wave) of [infections](/glossary#infection) may lag significantly in time. In some cases people may die indirectly from COVID, because hospitals were overcrowded with COVID patients and care was late or unavailable. To track the number of COVID deaths, researchers rely on something called “excess mortality” — the number of deaths from all causes during a crisis that are above the historical average during non-crisis times. For information on excess mortality, see the CDC’s report, [Excess Deaths Associated with COVID-19](https://www.cdc.gov/nchs/nvss/vsrr/covid19/excess_deaths.htm).",
           "questionId": "counted-as-covid-death"
+        },
+        {
+          "question": "Are children at risk of becoming sick with COVID?\n",
+          "questionId": "children-risk-sick-covid",
+          "answer": "Children can become infected and sick with COVID. According to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/faq.html#Children), fewer children get sick than adults and most display mild symptoms or are [asymptomatic](\\[/glossary#asymptomatic]). However, children with underlying medical conditions or infants (less than 1 year old) may be at increased risk for severe illness. There have also been cases of a rare disease called [multisystem inflammatory syndrome (MIS-C)](https://www.cdc.gov/coronavirus/2019-ncov/daily-life-coping/children/mis-c.html), which has been linked to COVID."
         }
       ]
     },
