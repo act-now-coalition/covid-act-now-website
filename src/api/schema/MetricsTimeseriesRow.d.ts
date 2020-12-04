@@ -13,6 +13,7 @@ export type Testpositivityratio = number | null;
  */
 export type TestPositivityRatioMethod =
   | 'CDCTesting'
+  | 'CMSTesting'
   | 'HHSTesting'
   | 'Valorum'
   | 'covid_tracking'
