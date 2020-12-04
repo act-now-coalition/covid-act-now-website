@@ -17,8 +17,16 @@ export const AboutHeading2 = styled(Heading2)`
 export const AboutHeading3 = styled(Heading3)`
   margin: 3rem 0 2rem;
 
+  &:first-of-type {
+    margin: 2rem 0;
+  }
+
   @media (min-width: ${materialSMBreakpoint}) {
     margin: 4rem 0 2rem;
+
+    &:first-of-type {
+      margin: 3rem 0;
+    }
   }
 `;
 
@@ -29,3 +37,9 @@ export const AboutHeading3 = styled(Heading3)`
   highlighted when the section's content is in view but its header is not.
 */
 export const HashWrapper = styled.div``;
+
+export const PartnersSectionWrapper = styled.div`
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+`;
