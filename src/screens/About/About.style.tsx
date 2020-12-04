@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 import { Heading1, Heading2, Heading3 } from 'components/Markdown';
+import Grid from '@material-ui/core/Grid';
 
 export const AboutHeading1 = styled(Heading1)`
   margin: 0 0 2.25rem;
@@ -42,4 +43,8 @@ export const PartnersSectionWrapper = styled.div`
   margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
+`;
+
+export const StyledGridContainer = styled(Grid)`
+  margin: 0.5rem 0 1.25rem;
 `;
