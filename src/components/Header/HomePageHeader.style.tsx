@@ -92,14 +92,10 @@ export const SelectorWrapper = styled.div`
   }
 `;
 
-export const SwitchContainer = styled.div`
-  margin
-`;
-
 export const StyledGridItem = styled(Grid)`
   &:last-child {
     justify-content: center;
-    margin: 2rem 0 1rem;
+    margin: 1rem 0 0;
   }
   @media (min-width: ${materialSMBreakpoint}) {
     height: fit-content;
