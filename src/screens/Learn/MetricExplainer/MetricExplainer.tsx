@@ -34,13 +34,12 @@ const MetricExplainer = () => {
     metadataDescription,
   } = metricExplainersContent;
 
-  console.log('introSection', introSection);
   return (
     <Fragment>
       <AppMetaTags
         canonicalUrl="/metric-explainer"
-        pageTitle=""
-        pageDescription=""
+        pageTitle={metadataTitle}
+        pageDescription={metadataDescription}
       />
       <PageContent sidebarItems={learnPages}>
         <BreadcrumbsContainer>
