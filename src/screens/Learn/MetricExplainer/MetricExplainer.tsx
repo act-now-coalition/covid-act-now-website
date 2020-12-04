@@ -1,10 +1,21 @@
 import React, { Fragment } from 'react';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
-import { metricExplainersContent, introSection } from 'cms-content/learn';
-import { Heading2, MarkdownContent } from 'components/Markdown';
-import PageContent from 'components/PageContent';
+import {
+  metricExplainersContent,
+  introSection,
+  metricSections,
+  learnPages,
+} from 'cms-content/learn';
+import {
+  Heading2,
+  MarkdownContent,
+  Heading3,
+  Paragraph,
+} from 'components/Markdown';
+import PageContent, { MobileOnly } from 'components/PageContent';
 import Breadcrumbs from 'components/Breadcrumbs';
-import { BreadcrumbsContainer, LearnHeading1 } from '../Learn.style';
+import { BreadcrumbsContainer, LearnHeading1, ItemName } from '../Learn.style';
+import TableOfContents from 'components/TableOfContents';
 
 const MetricExplainer = () => {
   const {
@@ -27,14 +38,41 @@ const MetricExplainer = () => {
         pageTitle=""
         pageDescription=""
       />
-      <PageContent sidebarItems={[]}>
+      <PageContent sidebarItems={learnPages}>
         <BreadcrumbsContainer>
           <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>
         <LearnHeading1>{pageHeader}</LearnHeading1>
         <MarkdownContent source={pageIntro} />
-        <Heading2>{metricsHeader}</Heading2>
+        <MobileOnly>
+          <TableOfContents items={[]} />
+        </MobileOnly>
         <MarkdownContent source={introSection[0].sectionIntro} />
+        <p>** Insert thermometer **</p>
+        {introSection[0].questions.map((question: any) => (
+          <Fragment>
+            <ItemName>{question.question}</ItemName>
+            <MarkdownContent source={question.answer} />
+          </Fragment>
+        ))}
+        <Heading2 id={metricsID}>{metricsHeader}</Heading2>
+        {metricSections.map((section: any) => (
+          <Fragment>
+            <Heading3>{section.sectionHeader}</Heading3>
+            {section.sectionSubheader && (
+              <Paragraph>{section.sectionSubheader}</Paragraph>
+            )}
+            <p>** Insert thermometer **</p>
+            {section.questions.map((question: any) => (
+              <Fragment>
+                <ItemName>{question.question}</ItemName>
+                <MarkdownContent source={question.answer} />
+              </Fragment>
+            ))}
+          </Fragment>
+        ))}
+        <Heading2 id={frameworkID}>{frameworkHeader}</Heading2>
+        <MarkdownContent source={frameworkBody} />
       </PageContent>
     </Fragment>
   );
