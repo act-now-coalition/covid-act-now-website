@@ -26,6 +26,8 @@ const MetricExplainer = () => {
     frameworkHeader,
     frameworkID,
     frameworkBody,
+    riskHeader,
+    riskID,
     metadataTitle,
     metadataDescription,
   } = metricExplainersContent;
@@ -47,6 +49,7 @@ const MetricExplainer = () => {
         <MobileOnly>
           <TableOfContents items={[]} />
         </MobileOnly>
+        <Heading2 id={riskID}>{riskHeader}</Heading2>
         <MarkdownContent source={introSection[0].sectionIntro} />
         <p>** Insert thermometer **</p>
         {introSection[0].questions.map((question: any) => (
