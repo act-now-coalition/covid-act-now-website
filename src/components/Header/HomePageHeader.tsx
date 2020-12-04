@@ -31,10 +31,7 @@ const HomePageHeader = (props: { indicatorsLinkOnClick: () => void }) => {
               <ClickableCopy onClick={props.indicatorsLinkOnClick || noop}>
                 5 key metrics
               </ClickableCopy>
-              .{' '}
-              <small>
-                Last updated: {moment.utc(lastUpdatedDate).format('l')}.
-              </small>
+              . Last updated on {moment.utc(lastUpdatedDate).format('MMMM D')}.
             </HeaderSubCopyItem>
           </HeaderSubCopy>
           {false && (
