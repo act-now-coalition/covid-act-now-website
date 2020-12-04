@@ -40,7 +40,7 @@
         {
           "question": "Can I see a video explainer? ",
           "questionId": "daily-new-cases-video-explainer",
-          "answer": "[https://youtu.be/_S0k1I3kIbM](https://youtu.be/_S0k1I3kIbM)"
+          "answer": "https://www.youtube.com/embed/_S0k1I3kIbM"
         },
         {
           "question": "What are your sources and methodology for daily new cases?",
@@ -68,7 +68,7 @@
         {
           "question": "Can I watch a video explainer?",
           "questionId": "infection-rate-video-explainer",
-          "answer": "<https://youtu.be/dmp5iAXrkaY>"
+          "answer": "https://www.youtube.com/embed/dmp5iAXrkaY"
         },
         {
           "question": "What are your sources and methodology for infection rate?",
@@ -91,7 +91,7 @@
         {
           "question": "Can I watch a video explainer? ",
           "questionId": "positive-test-rate-video-explainer",
-          "answer": "<https://youtu.be/RpqI-ZVGGoY?t=27s>"
+          "answer": "https://www.youtube.com/embed/RpqI-ZVGGoY"
         },
         {
           "question": "What are your sources and methodology for calculating positive test rate?",
@@ -124,7 +124,7 @@
         {
           "question": "Can I watch a video explainer?",
           "questionId": "icu-headroom-video-explainer",
-          "answer": "<https://youtu.be/ysdC49BPVRk>"
+          "answer": "https://www.youtube.com/embed/ysdC49BPVRk"
         },
         {
           "questionId": "icu-headroom-sources",
