@@ -20,9 +20,7 @@ const HomePageHeader = (props: { indicatorsLinkOnClick: () => void }) => {
   return (
     <Wrapper>
       <Content>
-        <HeaderTitle component="h1">
-          USA's COVID Warning System: Map & Risk Levels
-        </HeaderTitle>
+        <HeaderTitle>America’s COVID Warning System</HeaderTitle>
         <div>
           <HeaderSubCopy color="inherit" component="p" variant="subtitle2">
             <HeaderSubCopyItem>
