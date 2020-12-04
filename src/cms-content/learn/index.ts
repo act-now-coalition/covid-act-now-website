@@ -266,9 +266,13 @@ export const learnPages: TocItem[] = [
     })),
   },
   {
-    label: 'Metric Explainer',
+    label: 'Metric explainer',
     to: '/metric-explainer',
     items: [
+      {
+        to: `/metric-explainer#${metricExplainersContent.riskID}`,
+        label: `${metricExplainersContent.riskHeader}`,
+      },
       {
         to: `/metric-explainer#${metricExplainersContent.metricsID}`,
         label: `${metricExplainersContent.metricsHeader}`,

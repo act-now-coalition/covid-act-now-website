@@ -51,6 +51,7 @@ const MetricExplainer = () => {
         </MobileOnly>
         <Heading2 id={riskID}>{riskHeader}</Heading2>
         <MarkdownContent source={introSection[0].sectionIntro} />
+        <Heading2 id={riskID}>{riskHeader}</Heading2>
         <p>** Insert thermometer **</p>
         {introSection[0].questions.map((question: any) => (
           <Fragment>
