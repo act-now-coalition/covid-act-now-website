@@ -228,6 +228,8 @@ export interface MetricExplainersContent {
   frameworkBody: Markdown;
   metadataTitle: string;
   metadataDescription: string;
+  riskHeader: string;
+  riskID: string;
 }
 
 // TODO (pablo): Should we have a short heading for categories?

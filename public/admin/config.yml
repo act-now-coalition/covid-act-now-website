@@ -587,6 +587,14 @@ collections:
           - label: Page Intro
             name: pageIntro
             widget: markdown
+          - label: Risk section header
+            name: riskHeader
+            widget: string
+            hint: Should be 'Risk'
+          - label: Risk section ID
+            name: riskID
+            widget: string
+            hint: Should be 'risk'
           - label: Sections
             name: sections
             widget: list
