@@ -1,9 +1,11 @@
 {
   "teamHeader": "Who we are",
-  "introContent": "Covid Act Now is a 501(c)(3) nonprofit founded in March 2020. We strive to provide the most timely and accurate local COVID data so that every American can make informed decisions during the pandemic. We are committed to:\n\n* **Data**: We support data and science-backed policies and decision-making\n* **Transparency**: Our data and methodologies are fully open-source so that the public can vet, freely use, and build upon our work\n* **Accessibility**: We make data universally accessible so that anyone can easily understand and use it, regardless of ability or prior knowledge",
+  "whoWeServeContentA": "We've worked with more than 100 federal, state, and county officials to develop data-driven COVID responses.",
+  "whoWeServeContentB": "[See our case studies](https://covidactnow.org/case-studies) to learn how other leaders in government, business, public health, education, and local communities use our data and tools to act during this pandemic.",
+  "introContent": "Covid Act Now is a 501(c)(3) nonprofit founded in March 2020. We strive to provide the most timely and accurate local COVID data so that every American can make informed decisions during the pandemic. We are committed to:\n\n* **Data**: We support data- and science-backed policies and decision-making\n* **Transparency**: Our data and methodologies are fully open-source so that the public can vet, freely use, and build upon our work\n* **Accessibility**: We make data universally accessible so that anyone can easily understand and use it, regardless of ability or prior knowledge",
   "partnersContent": [
     {
-      "copy": "Our university affiliates are the [Georgetown University Center for Global Health Science and Security](https://ghss.georgetown.edu/), [Stanford University Clinical Excellence Research Center](http://med.stanford.edu/cerc.html), and [Harvard Global Health Institute](https://globalhealth.harvard.edu/).",
+      "copy": "Georgetown University Center for Global Health Science and Security, Stanford University Clinical Excellence Research Center, and Harvard Global Health Institute.",
       "logos": [
         {
           "image": "/images_cms/ghss.png",
@@ -23,51 +25,58 @@
       ]
     },
     {
-      "copy": "We are funded by [Schmidt Futures](https://schmidtfutures.com/), philanthropists, and small donations. We appreciate any contributions you’re able to make [](https://www.gofundme.com/f/qtcuvy-covid-act-now)on our [donate page](https://www.covidactnow.org/donate).",
+      "copy": "We are funded by Schmidt Futures and the Patrick J. McGovern Foundation, as well as other philanthropists and small donations.",
       "logos": [
         {
           "url": "https://schmidtfutures.com",
           "altText": "Schmidt Futures logo",
           "image": "/images_cms/schmidt-futures.png"
+        },
+        {
+          "altText": "Patrick J. McGovern Foundation Logo",
+          "url": "https://www.mcgovern.org/",
+          "image": "/images_cms/mcgovern-foundation-logo.jpeg"
         }
       ]
     },
     {
-      "copy": "Our data sources include The Department of Health and Human Services, Centers for Medicaid and Medicare Services, The New York Times, Covid Tracking Project, and Covid Care Map. See more details on our [sources](https://docs.google.com/presentation/u/1/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit).",
+      "copy": "Our data comes from official state and county dashboards, the U.S. Department of Health and Human Services, Centers for Medicaid and Medicare Services, The New York Times, The Covid Tracking Project, and more. See more details on our [sources](https://docs.google.com/presentation/u/1/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit).",
       "logos": []
     }
   ],
   "teamIntro": "Our multidisciplinary, volunteer-driven team draws on expertise in technology, design, data science, epidemiology, public health, and policy.",
   "whoWeServeHeader": "Who we serve",
-  "whoWeServeContent": "More than 100 federal, state, and county governments who have trusted and used our tool to make data-driven decisions around COVID, including:",
+  "whoWeServeContent": "Hundreds of federal, state, and county governments use our data and tools:",
   "governmentLogos": [
     {
       "image": "/images_cms/anchorage-1-.png",
-      "altText": "Anchorage Mayor's Office Logo"
+      "altText": "Municipality of Anchorage Logo",
+      "url": "https://www.muni.org/pages/default.aspx"
     },
     {
       "image": "/images_cms/cdph-1-.png",
-      "altText": "California Department of Health Logo"
+      "altText": "California Department of Public Health Logo",
+      "url": "https://www.cdph.ca.gov/"
     },
     {
       "image": "/images_cms/new-orleans-mayor-s-office.png",
-      "altText": "New Orleans Mayor's Office Logo"
+      "altText": "New Orleans Mayor's Office Logo",
+      "url": "https://www.nola.gov/mayor/"
     },
     {
       "image": "/images_cms/dc_doh-1-.png",
-      "altText": "Washington, DC Department of Health Logo"
+      "altText": "Washington, DC Department of Health Logo",
+      "url": "https://dchealth.dc.gov/"
     },
     {
       "image": "/images_cms/hardy_county-1-.jpg",
-      "altText": "Hardy County Sheriff's Office Logo"
-    },
-    {
-      "image": "/images_cms/michigan_district_12-1-.png",
-      "altText": "Michigan District 12 Senator Rosemary Bayer Logo"
+      "altText": "Hardy County Sheriff's Office Logo",
+      "url": "http://hardycounty.com/law-enforcement"
     },
     {
       "image": "/images_cms/steuben_county-1-.jpg",
-      "altText": "Steuben County, New York Logo"
+      "altText": "Steuben County, New York Logo",
+      "url": "https://www.steubencony.org/"
     }
   ],
   "partnersHeader": "Who we work with",

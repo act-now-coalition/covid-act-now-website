@@ -5,86 +5,86 @@
     {
       "profileImgUrl": "/images_cms/danielle-allen.jpg",
       "fullName": "Danielle Allen",
-      "description": "Director of Edmond J. Safra Center for Ethics and James Bryant Conant University Professor at Harvard ",
+      "description": "Director of Edmond J. Safra Center for Ethics, James Bryant Conant University Professor at Harvard ",
       "profileUrl": "https://www.gse.harvard.edu/faculty/danielle-allen"
     },
     {
       "profileImgUrl": "/images_cms/don-berwick.jpeg",
       "fullName": "Don Berwick",
       "profileUrl": "https://www.linkedin.com/in/don-berwick-46a49380/",
-      "description": "Former Administrator, Centers for Medicare and Medicaid Services"
+      "description": "Former Administrator at Centers for Medicare and Medicaid Services"
     },
     {
       "profileImgUrl": "/images_cms/nahid-bhadelia.jpeg",
       "fullName": "Nahid Bhadelia",
-      "description": "Medical Director, Boston Medical Center's Special Pathogens Unit,",
+      "description": "Medical Director of Special Pathogens Unit at Boston Medical Center",
       "profileUrl": "https://www.linkedin.com/in/nahid-bhadelia-81a775b7/"
     },
     {
       "fullName": "Ellie Graeden, Ph.D.",
-      "description": "CEO of Talus Analytics and Georgetown University adjunct professor",
+      "description": "CEO of Talus Analytics, Adjunct Professor at Georgetown University",
       "profileUrl": "https://ghss.georgetown.edu/people/graeden",
       "profileImgUrl": "/images_cms/ellie-graeden.jpeg"
     },
     {
       "profileImgUrl": "/images_cms/shuhanhe.jpeg",
       "fullName": "Dr. Shuhan He",
-      "description": "Emergency Medicine Physician and Co-Founder of GetUsPPE.org",
+      "description": "Emergency Medicine Physician, Co-Founder of GetUsPPE.org",
       "profileUrl": "https://www.linkedin.com/in/shuhan-he/"
     },
     {
       "profileImgUrl": "/images_cms/bob-inglis.png",
       "fullName": "Bob Inglis",
-      "description": "Former Republican Congressman, George Mason University",
+      "description": "Executive Director of republicEN.org, Former Congressman (R)",
       "profileUrl": "https://www.linkedin.com/in/bob-inglis-21112b25/"
     },
     {
       "fullName": "Prof. Rebecca Katz, Ph.D., M.P.H.",
-      "description": "Director of Georgetown Center for Global Health Science and Security",
+      "description": "Director of Center for Global Health Science and Security at Georgetown University",
       "profileUrl": "https://ghss.georgetown.edu/people/katz",
       "profileImgUrl": "/images_cms/rebecca-katz.jpeg"
     },
     {
       "profileImgUrl": "/images_cms/tomás-pueyo.jpeg",
       "fullName": "Tomás Pueyo",
-      "description": "Author, “Hammer and the Dance” and other pieces",
+      "description": "Author of “Hammer and the Dance” and other pieces",
       "profileUrl": "https://www.linkedin.com/in/tomaspueyo/"
     },
     {
       "profileImgUrl": "/images_cms/roni-rosenfeld.png",
-      "description": "Head of Carnegie Mellon University's Machine Learning Department ",
+      "description": "Head of Machine Learning Department at Carnegie Mellon University",
       "fullName": "Roni Rosenfeld",
       "profileUrl": "http://www.cs.cmu.edu/~roni/"
     },
     {
       "profileImgUrl": "/images_cms/nigan-shah.jpg",
       "fullName": "Nigam Shah",
-      "description": "Associate Professor of Biomedical Data Science, Stanford University",
+      "description": "Associate Professor of Biomedical Data Science at Stanford University",
       "profileUrl": "https://www.linkedin.com/in/nigam/"
     },
     {
       "profileImgUrl": "/images_cms/ryan-tibshirani.png",
       "fullName": "Ryan Tibshirani ",
-      "description": "Associate Professor, Carnegie Mellon University",
+      "description": "Associate Professor at Carnegie Mellon University",
       "profileUrl": "https://www.stat.cmu.edu/~ryantibs/index.html"
     },
     {
       "profileImgUrl": "/images_cms/victor-udoewa.jpeg",
       "fullName": "Victor Udoewa",
       "profileUrl": "https://www.linkedin.com/in/udoewa/",
-      "description": "Science & technology policy advisor, education director, and consultant"
+      "description": "Service Design Lead at NASA, Founder/CEO of Justice by Design"
     },
     {
       "profileImgUrl": "/images_cms/jason-wang.jpeg",
       "fullName": "Jason Wang",
-      "description": "Director, Stanford Center for Policy, Outcomes, and Prevention",
+      "description": "Director of Center for Policy, Outcomes, and Prevention at Stanford University",
       "profileUrl": "https://www.linkedin.com/in/jason-wang-38a34842/"
     },
     {
       "profileImgUrl": "/images_cms/erez-yoeli.jpeg",
-      "fullName": "Erez Yoeli, Ph.D",
+      "fullName": "Erez Yoeli, Ph.D.",
       "profileUrl": "http://ide.mit.edu/about-us/people/erez-yoeli",
-      "description": "Founder of the Applied Cooperation Team, MIT's Sloan School of Management"
+      "description": "Founder of Applied Cooperation Team at MIT Sloan School of Management"
     }
   ]
 }

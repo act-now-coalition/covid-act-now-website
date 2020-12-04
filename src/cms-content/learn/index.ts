@@ -4,7 +4,6 @@ import glossary from './learn-glossary.json';
 import landing from './learn-landing.json';
 import caseStudies from './learn-case-studies.json';
 import productsLanding from './products-landing.json';
-import productPages from './products-full-pages.json';
 import { sanitizeID, Markdown, TocItem } from '../utils';
 
 /*
@@ -206,35 +205,29 @@ export interface ProductsLandingContent {
 export const productsLandingContent = productsLanding as ProductsLandingContent;
 
 /**
- * Products - full pages:
+ * Metric Explainers:
  **/
 
-export interface BodySection {
-  sectionTitle: string;
+// re-uses Question interface from FAQ
+interface Section {
+  sectionHeader: string;
+  sectionSubheader: string;
   sectionId: string;
-  sectionBody: Markdown;
+  sectionIntro: Markdown;
+  questions: Question[];
 }
 
-export interface ProductPage {
-  productName: string;
-  productId: string;
-  productIntro: Markdown;
-  sections: BodySection[];
+export interface MetricExplainersContent {
+  pageHeader: string;
+  pageIntro: string;
+  sections: Section[];
+  metricsHeader: string;
+  metricsID: string;
+  frameworkHeader: string;
+  frameworkID: string;
+  frameworkBody: Markdown;
   metadataTitle: string;
   metadataDescription: string;
-}
-
-export interface ProductPageContent {
-  product: ProductPage[];
-}
-
-export const productPageContent = productPages as ProductPageContent;
-
-// Used to get full-page product content by product ID
-export function getProductPageContent(
-  productLandingId: string,
-): ProductPage | undefined {
-  return productPages.product.find(item => item.productId === productLandingId);
 }
 
 // TODO (pablo): Should we have a short heading for categories?

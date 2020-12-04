@@ -2,7 +2,12 @@ import React, { Fragment } from 'react';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import { LogoGridItem } from 'components/LogoGrid/LogoGrid';
 import Grid from '@material-ui/core/Grid';
-import { AboutHeading1, AboutHeading2, HashWrapper } from './About.style';
+import {
+  AboutHeading1,
+  AboutHeading2,
+  HashWrapper,
+  PartnersSectionWrapper,
+} from './About.style';
 import aboutContent from 'cms-content/about';
 import { MarkdownContent } from 'components/Markdown';
 import PageContent from 'components/PageContent';
@@ -72,8 +77,11 @@ const About = () => {
         <AboutHeading2 id="who-we-serve">
           {aboutContent.whoWeServeHeader}
         </AboutHeading2>
-        <MarkdownContent source={aboutContent.whoWeServeContent} />
-        <GovLogoGrid logos={aboutContent.governmentLogos} />
+        <PartnersSectionWrapper>
+          <MarkdownContent source={aboutContent.whoWeServeContentA} />
+          <GovLogoGrid logos={aboutContent.governmentLogos} />
+          <MarkdownContent source={aboutContent.whoWeServeContentB} />
+        </PartnersSectionWrapper>
         <HashWrapper id="team">
           <AboutHeading2>{aboutContent.teamHeader}</AboutHeading2>
           <MarkdownContent source={aboutContent.teamIntro} />

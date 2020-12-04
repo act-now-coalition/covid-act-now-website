@@ -1,0 +1,168 @@
+{
+  "frameworkBody": "Covid Act Now worked alongside a network of research, policy, and public health experts convened by Harvard’s Global Health Institute and Edmond J. Safra Center for Ethics to develop the [Key Metrics for COVID Suppression](https://globalhealth.harvard.edu/key-metrics-for-covid-suppression-researchers-and-public-health-experts-unite-to-bring-clarity-to-key-metrics-guiding-coronavirus-response/) framework.\n\nCentral to this framework is our five-color COVID warning system, which communicates the severity of a location’s outbreak and offers corresponding guidance on mitigation efforts needed at each risk level. This facilitates a unified approach with common metrics, enabling leaders at all levels to anticipate and adequately respond to their community’s COVID spread, and informing the general public on their community’s risk to COVID. To develop this framework, we prioritized metrics vital to guiding suppression efforts that allow a community to safely reopen.",
+  "metadataTitle": "title",
+  "frameworkHeader": "How did we develop our framework?",
+  "metadataDescription": "description",
+  "sections": [
+    {
+      "sectionId": "how-we-assess-risk",
+      "sectionIntro": "### What does the overall risk-level for a location mean?\n\nA location’s overall risk level takes into account the following five metrics: daily new cases (incidence), infection rate (Rt), positive test rate, ICU headroom used, and contact tracers hired.\n\nIf a region’s daily new cases is green, then its overall risk level is green. Otherwise, a region’s overall risk level reflects the highest risk level across all five metrics.",
+      "questions": [
+        {
+          "question": "What does the deepest red color indicate?",
+          "questionId": "deepest-red",
+          "answer": "The deepest color indicates severe outbreak, for locations with incidence above 75 cases/100K. This is our highest level of COVID risk and we recommend that you take all possible precautions. \n\nThe threshold we set for our highest risk closely aligns with recommendations from the White House Task Force."
+        },
+        {
+          "question": "Do you ever change your tools or methodology?",
+          "questionId": "do-you-change-tools-or-methodology",
+          "answer": "We are dedicated to providing the public with the clearest, most reliable information possible, but our tools may be limited by the data available. There is also no historical precedent for what is happening — this is a novel virus and disease — and our understanding of COVID continues to evolve. We, too, will continue to refine and adjust our methodology — and will make all changes open and available to you here."
+        }
+      ]
+    },
+    {
+      "sectionHeader": "Daily New Cases",
+      "sectionSubheader": "Also known as: incidence",
+      "sectionId": "daily-new-cases",
+      "sectionIntro": "**Daily new cases is the number of new COVID cases per day per unit of population** (we measureper 100K people).",
+      "questions": [
+        {
+          "question": "Why do we not call it incidence?",
+          "questionId": "why-not-incidence",
+          "answer": "The term “daily new cases” tells you exactly what is happening: There were 100 daily new cases per 100K. Incidence, which is more commonly expressed as a rate, can be confusing."
+        },
+        {
+          "question": "How can daily new cases be looked at alongside infection rate?",
+          "questionId": "daily-new-cases-alongside-infection-rate",
+          "answer": "The infection rate answers the question: “on average, how many new people will one person infect while contagious?” Daily new cases answers the question: “how many new COVID infections are in my area today?” The two metrics go hand-in-hand.\n\n**A community heading towards an outbreak has a high infection rate, but a low number of daily new cases.** The number of daily new cases per 100K will grow in the coming days because of the high infection rate.\n\nIn contrast, **a community recovering from a major outbreak has a high number of daily new cases. However, with fewer people testing positive than in the weeks prior, the infection rate is declining.** Because its infection rate is less than 1, the community’s incidence should continue to drop."
+        },
+        {
+          "question": "Can I see a video explainer? ",
+          "questionId": "daily-new-cases-video-explainer",
+          "answer": "[https://youtu.be/_S0k1I3kIbM](https://youtu.be/_S0k1I3kIbM)"
+        },
+        {
+          "question": "What are your sources and methodology for daily new cases?",
+          "questionId": "daily-new-cases-sources",
+          "answer": "When calculating daily new cases, we look at the average cases per 100,000 people in a location, which is calculated as a seven-day average of daily new cases, divided by the population, divided by 100,000.\n\n![Daily new cases metric calculation](/images_cms/daily-new-cases-calculation.png \"Daily new cases calculation\")\n\nTo calculate daily new cases, we use new positive cases *[from The New York Times](https://developer.nytimes.com/covid)*. If you would like to learn more, check out [our data sources](https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit)."
+        },
+        {
+          "question": "How were the risk thresholds for daily new cases determined?",
+          "answer": "Our risk levels are based on the [“Key](https://ethics.harvard.edu/files/center-for-ethics/files/key_metrics_and_indicators_v4.pdf) [Metrics for Covid Suppression”](https://ethics.harvard.edu/files/center-for-ethics/files/key_metrics_and_indicators_v4.pdf) by Harvard Global Health Institute and others. When estimating the number of people who will become infected in the course of a year, we rely on the [CDC’s estimate](https://www.globalhealthnow.org/2020-06/us-cases-10x-higher-reported) that many more people are infected than are likely to get tested. Therefore, we use a conservative estimate that only one in five people infected will subsequently get tested. \n\nThe deepest color indicates severe outbreak, for locations with daily new cases above 75 cases/100K.",
+          "questionId": "daily-new-cases-thresholds"
+        }
+      ]
+    },
+    {
+      "sectionHeader": "Infection Rate",
+      "sectionSubheader": "Also known as: R(t) or “R-effective”",
+      "sectionId": "infection-rate",
+      "sectionIntro": "**Infection rate is the estimated number of new people each COVID-positive person will infect.**",
+      "questions": [
+        {
+          "question": "Why is infection rate important?",
+          "questionId": "why-is-infection-rate-important",
+          "answer": "Infection rate is important because it estimates how fast COVID is spreading *right now*.\n\nTo give an example, if the R(t) is 3, it indicates that one infected person will most likely infect three other people, and those three people will each go on to infect three more people. We as a community can change it by modifying community behavior (whether there are large gatherings) and intervention practices (whether people wear masks and maintain social distancing).\n\n![Infection rate diagram](/images_cms/infection-rate-diagram.png \"Infection rate diagram\")"
+        },
+        {
+          "question": "Can I watch a video explainer?",
+          "questionId": "infection-rate-video-explainer",
+          "answer": "<https://youtu.be/dmp5iAXrkaY>"
+        },
+        {
+          "question": "What are your sources and methodology for infection rate?",
+          "questionId": "infection-rate-sources",
+          "answer": "In order to control COVID, the infection rate, or R(t), must be driven below 1.0 until the daily new cases metric is green. At that point community spread is effectively stopped and we can focus on controlling isolated outbreaks. **We use 0.9 as the cutoff for a green score because at that rate the number of newly infected people begins to significantly decline.** An R(t) of 1.0 means that the daily new cases of COVID are stable, while an R(t) greater than 1.0 means that daily new cases are growing."
+        }
+      ]
+    },
+    {
+      "sectionHeader": " Positive Test Rate",
+      "sectionSubheader": "Also known as: test positivity",
+      "sectionId": "positive-test-rate",
+      "sectionIntro": "**Positive test rate is the *percentage* of COVID testing that comes back positive** (not the total number of positive tests).",
+      "questions": [
+        {
+          "question": "Why is positive test rate important?",
+          "questionId": "why-is-positive-test-rate-important",
+          "answer": "Test positivity is a good indicator of how widespread testing is in a given area. If a state or county has a **high** test positivity rate, it is a sign of **insufficient** testing in that area. If a state or county has a **low** test positivity rate, it is a sign that we are **testing more** than only the sickest people. Testing a larger number of at-risk populations (essential workers, people notified via contact tracing , etc.) is key to catching unknown infections before they can lead to an outbreak.\n\nLet’s look at the pictures below. **There are two positive COVID tests in each of these scenarios,** but the positive test rate differs drastically due to the percentage of the population that is being tested. The closer we get to testing everyone, the less likely we are to miss positive cases.\n\n![Positive test rate diagram](/images_cms/positive-test-rate-diagram.png \"Positive test rate diagram\")"
+        },
+        {
+          "question": "Can I watch a video explainer? ",
+          "questionId": "positive-test-rate-video-explainer",
+          "answer": "<https://youtu.be/RpqI-ZVGGoY?t=27s>"
+        },
+        {
+          "question": "What are your sources and methodology for calculating positive test rate?",
+          "questionId": "positive-test-rate-sources",
+          "answer": "Positive test rate is calculated by dividing the number of positive tests over the number of total tests. We calculate the rate as a seven-day trailing average. It is important to note that positive test rate can be difficult to interpret and messy to calculate, for reasons well captured by the [Covid Tracking Project](https://covidtracking.com/blog/test-positivity-in-the-us-is-a-mess).  It should be looked at in conjunction with other metrics such as infection rate and daily new cases.\n\nWe source testing data from the Department of Health and Human Services (HHS) for state level data. We scrape official state and county dashboards for county level data and, when unavailable, fall back on a weekly test positivity rate provided by the Centers for Medicare & Medicaid Services. If you would like to learn more, check out [our data sources](https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit)."
+        },
+        {
+          "question": "How were risk thresholds for positive test rate determined?",
+          "questionId": "positive-test-rate-thresholds",
+          "answer": "There is a growing [consensus](https://globalhealth.harvard.edu/evidence-roundup-why-positive-test-rates-need-to-fall-below-3/) that driving the positive test rate downwards of 3 percent should be a priority.\n\nIt can also be helpful to look at countries that have been most effective and efficient in their containment of COVID. South Korea was back to normal activity with a test positivity rate below 3 percent. As of November 2020, *[South Korea’s test positivity](http://ncov.mohw.go.kr/en/)* was 1 percent."
+        }
+      ]
+    },
+    {
+      "sectionHeader": " ICU Headroom Used",
+      "sectionSubheader": "",
+      "sectionId": "icu-headroom-used",
+      "sectionIntro": "**ICU headroom used is the percentage of ICU beds available for COVID patients, after excluding those already in use by non-COVID patients.**",
+      "questions": [
+        {
+          "question": "Why did we choose ICU headroom used to measure hospital capacity?",
+          "questionId": "why-icu-headroom-to-measure-hospital-capacity",
+          "answer": "*[The White House’s reopening plan](https://www.whitehouse.gov/openingamerica/)*, *[AEI’s plan](https://www.aei.org/research-products/report/national-coronavirus-response-a-road-map-to-reopening/)*, and *[Harvard University’s Safra Center for Ethic’s plan](https://ethics.harvard.edu/covid-roadmap)* all note ICU headroom used as a key metric for reopening safely. Our metric measures the ability of an intensive care unit (ICU) to handle a surge of COVID patients in the case of an outbreak.\n\nWhen ICU capacity is reached, not only does that make it difficult for COVID ICU patients to receive care, but non-COVID ICU patients as well. This can lead to unnecessary deaths."
+        },
+        {
+          "question": "How is your metric different from ICU utilization that I see on my state’s dashboard?",
+          "questionId": "how-icu-headroom-different-from-state-dashboard",
+          "answer": "Our metric strives to capture the reality that many ICU beds will be occupied by non-COVID patients. Those beds can not be freed up, regardless of the severity of a current COVID outbreak. Even in the middle of a fall outbreak, it is not uncommon to see two-thirds of beds occupied by non-COVID patients, which is consistent with the occupancy rates estimated from pre-COVID times. We count as our denominator the number of available beds excluding those already occupied by non-COVID patients.\n\nIn the example below, there are three COVID patients, five non-COVID patients and 10 beds. A total ICU Utilization rate would be 80 percent (eight of 10 beds occupied). However, our metric focuses on COVID headroom which is 60 percent (three out of five COVID beds used). If there are no COVID patients in the ICU, our metric is 0.0 percent — even if there are non-COVID patients in the ICU.\n\n![ICU headroom diagram](/images_cms/icu-headroom-diagram.png \"ICU headroom diagram\")"
+        },
+        {
+          "question": "Can I watch a video explainer?",
+          "questionId": "icu-headroom-video-explainer",
+          "answer": "<https://youtu.be/ysdC49BPVRk>"
+        },
+        {
+          "questionId": "icu-headroom-sources",
+          "question": "What are your sources and methodology for outputting ICU headroom used?",
+          "answer": "We use several sources to create our ICU headroom used metric. We use COVID hospitalization data from the [Covid Tracking Project](https://covidtracking.com/data) at the state level. In most states, we have direct numbers for COVID patients in the ICU; for those where we don’t, we estimate ICU numbers from total COVID hospitalization numbers. At the county level, we scrape from official county-level dashboards where available, and disaggregate from the state-level numbers otherwise.\n\nWe get the total number of ICU beds and the expected number of beds occupied by non-COVID patients from state and county dashboards where available, and we rely on data provided by [Covid Care Map](https://www.covidcaremap.org/) when the data is unavailable. If you would like to learn more, check out [our data sources](https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit)."
+        },
+        {
+          "question": "How were the risk thresholds for ICU headroom used determined?",
+          "questionId": "icu-headroom-thresholds",
+          "answer": "We chose our cutoffs based on [Resolve to Save Live’s policy recommendation](https://preventepidemics.org/wp-content/uploads/2020/04/COV020_WhenHowTightenFaucet_v3.pdf), which says ICU COVID cases should be able to double for states to consider opening."
+        }
+      ]
+    },
+    {
+      "sectionHeader": " Contact Tracers Hired",
+      "sectionId": "contact-tracers-hired",
+      "sectionIntro": "**Contact tracers hired is** **the number of contact tracers that are hired in a state or county, relative to the number of cases.**",
+      "questions": [
+        {
+          "question": "Why is contact tracing important?",
+          "questionId": "why-is-contact-tracing-important",
+          "answer": "In order to halt the spread of COVID, it is critical that enough tracing capacity exists to rapidly trace the contacts of people who test positive for COVID. Those contacts can be tested, quarantined (if necessary), and asked about whom else they have come into contact with."
+        },
+        {
+          "question": "What are your sources and methodology for outputting contact tracers hired?",
+          "questionId": "contact-tracing-sources",
+          "answer": "We know that measuring contact tracing capacity solely by the number of staff is not reliable, and we are working on a [more accurate metric](https://contacttracingplaybook.resolvetosavelives.org/checklists/metrics) to assess contact tracing capacity. One of the best metrics of success for a contact tracing program is the percentage of new cases traced to a known source. However, very few states are reporting this number.\n\nTherefore, as a proxy, **we currently look at the number of contact tracers on staff for each state to estimate the number of contacts that could be traced within 48 hours if the contact tracing program were otherwise working perfectly**. This stems from [expert recommendations](https://covidlocal.org/assets/documents/COVID%20Local%20Metrics%20overview.pdf) that at least 90 percent of contacts for each new case must be traced within 48 hours in order to contain COVID, and expert estimations that tracing each new case within 48 hours requires an average of five contact tracers per new case, as well as fast testing.\n\nWe source our state-level tracers hired data from [Test and Trace](https://testandtrace.com/). If you would like to learn more, check out [our data sources](https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit)."
+        },
+        {
+          "question": "How were the risk thresholds for tracers hired determined?",
+          "questionId": "contact-tracers-hired-thresholds",
+          "answer": "We do not include the critical (**red**) range for contact tracing; in other words it will no longer be possible to be marked critical (**red**) due to low numbers of contact tracing staff alone. While low numbers of contact tracing staff should be acknowledged, it doesn’t indicate an active or imminent outbreak. In addition, contact tracing is one our least refined data sets, largely because states themselves are highly variable in their reporting of contact tracing data.\n\nThe boundaries between yellow and orange are tricky. In the absence of expert consensus, we have set inclusive lower thresholds for yellow and orange. We peg the cut off between yellow and orange at 10 percent."
+        }
+      ]
+    }
+  ],
+  "metricsHeader": "Key metrics",
+  "frameworkID": "how-did-we-develop-our-framework",
+  "pageHeader": "How We Assess COVID Risk (Risk Level)",
+  "pageIntro": "Our mission is to share timely and reliable COVID data with decision makers and the public so that they can take informed action. We have five key metrics to assess COVID risk. Below you will learn how we calculate and source each metric and overall risk.",
+  "metricsID": "key-metrics"
+}
