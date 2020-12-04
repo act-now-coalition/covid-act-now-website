@@ -141,7 +141,7 @@ function renderStatus(projections: Projections) {
 
 function renderDisclaimer(projections: Projections): React.ReactElement {
   const usingCMSData =
-    projections.primary.testPositiveRateSource === 'CMSTesting';
+    projections.primary.testPositiveRateSource === 'CDCTesting';
   return (
     <Fragment>
       The World Health Organization recommends a positive test rate of less than
