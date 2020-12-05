@@ -30,9 +30,12 @@ shareRouter.get(/\/(.*)\.png/, (req, res) => {
 
   // Extract the share image path via the 0th regex capture group.
   let sharePath = req.params[0];
-  if (sharePath.endsWith('-image-covid-us-map-cases')) {
+  if (sharePath === 'home') {
     // home.png is generated from the root /internal/share-image/ URL.
     sharePath = '';
+  } else if (sharePath.endsWith('-image-covid-us-map-cases')) {
+    // This is used for the 'image' meta tag which is generated from /internal/share-image/map/
+    sharePath = 'map';
   }
 
   const baseUrl =

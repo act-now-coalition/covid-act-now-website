@@ -170,7 +170,9 @@ export class Projections {
     // contact tracing levels are reversed (i.e low is bad, high is good)
     const reverseList = [contact_tracing_level];
 
-    if (
+    if (levelList.some(level => level === Level.SUPER_CRITICAL)) {
+      return Level.SUPER_CRITICAL;
+    } else if (
       levelList.some(level => level === Level.CRITICAL) ||
       reverseList.some(level => level === Level.LOW)
     ) {

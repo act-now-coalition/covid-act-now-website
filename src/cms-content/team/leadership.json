@@ -1,0 +1,24 @@
+{
+  "teamName": "Leadership",
+  "teamID": "leadership",
+  "teamMembers": [
+    {
+      "fullName": "Igor Kofman",
+      "description": "CEO",
+      "profileUrl": "https://www.linkedin.com/in/ikofman/",
+      "profileImgUrl": "/images_cms/igor.jpeg"
+    },
+    {
+      "fullName": "Debbie Lai",
+      "description": "COO",
+      "profileUrl": "https://www.linkedin.com/in/iamdlai/",
+      "profileImgUrl": "/images_cms/debbie.png"
+    },
+    {
+      "profileImgUrl": "/images_cms/michaellehenbauer.jpeg",
+      "fullName": "Michael Lehenbauer",
+      "description": "CTO",
+      "profileUrl": "https://www.linkedin.com/in/mikelehen/"
+    }
+  ]
+}

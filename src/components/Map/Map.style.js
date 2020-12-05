@@ -2,43 +2,23 @@ import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
 import { COLOR_MAP } from 'common/colors';
 
-export const USMapWrapper = styled.div`
-  position: relative;
-  padding-bottom: 70%;
-  top: ${props => (props.condensed ? '-16px' : '-45px')};
-  width: 100%;
+// TODO(pablo): We don't need these wrapping divs anymore
+export const USMapWrapper = styled.div``;
 
-  @media (max-width: 600px) {
-    top: -15px;
-  }
-`;
-
-export const USCountyMapWrapper = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-`;
+export const USCountyMapWrapper = styled.div``;
 
 export const USStateMapWrapper = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-
   path:hover {
-    opacity: 0.8;
+    fill-opacity: ${props => (props.showCounties ? 0.25 : 0.8)};
+    fill: ${props => (props.showCounties ? '#fff' : undefined)};
     cursor: pointer;
   }
 `;
 
 export const MapInstructions = styled(Typography)`
   text-align: center;
-  margin: ${props =>
-    props.$isMiniMap ? '-1rem 1rem 1rem 1rem' : '1rem 1rem 2.5rem'};
   font-size: 0.875rem;
+  margin: 1rem;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
 `;
 

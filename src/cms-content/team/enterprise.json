@@ -1,0 +1,22 @@
+{
+  "teamMembers": [
+    {
+      "profileImgUrl": "/images_cms/gil.png",
+      "fullName": "Gil Rosen",
+      "description": "Enterprise lead",
+      "profileUrl": "https://www.linkedin.com/in/rosengil/"
+    },
+    {
+      "profileImgUrl": "/images_cms/charles-pieper.png",
+      "fullName": "Charles Pieper",
+      "profileUrl": "https://www.linkedin.com/in/charlesepieper/"
+    },
+    {
+      "profileImgUrl": "/images_cms/patrick-chang.jpeg",
+      "fullName": "Patrick Cheng",
+      "profileUrl": "https://www.linkedin.com/in/patrickcchang/"
+    }
+  ],
+  "teamName": "Enterprise",
+  "teamID": "enterprise"
+}

@@ -1,0 +1,13 @@
+import { Meta, Story } from '@storybook/addon-docs/blocks';
+import ThermometerImage from './ThermometerImage';
+import { Level } from 'common/level';
+
+<Meta title="Shared Components/ThermometerImage" />
+
+<Story name="High">
+  <ThermometerImage currentLevel={Level.HIGH} />
+</Story>
+
+<Story name="Unknown">
+  <ThermometerImage currentLevel={Level.UNKNOWN} />
+</Story>

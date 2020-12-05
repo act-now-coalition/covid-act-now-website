@@ -1,0 +1,322 @@
+{
+  "teamName": "Alumni",
+  "teamID": "alumni",
+  "teamMembers": [
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Abe Haskins",
+      "profileUrl": "https://www.linkedin.com/in/abe-haskins-1a267a13/"
+    },
+    {
+      "fullName": "Adnan Pirzada",
+      "description": "Software Engineer at Lattice",
+      "profileUrl": "https://www.linkedin.com/in/adpirz/",
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "AJ Palkovic",
+      "profileUrl": "https://www.linkedin.com/in/aj-palkovic-5170259a/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Alan Fritzler",
+      "profileUrl": "https://www.linkedin.com/in/alanfritzler/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Ali Berlin Johnson",
+      "profileUrl": "https://www.linkedin.com/in/berlinjohnson/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Audra Grassia",
+      "profileUrl": "https://www.linkedin.com/in/audragrassia/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "profileUrl": "https://www.linkedin.com/in/benjamin-smith-45254758/",
+      "fullName": "Benjamin Smith"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Bradley Lautenbach",
+      "profileUrl": "https://www.linkedin.com/in/lautenbach/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Chris Wilcox",
+      "profileUrl": "https://www.linkedin.com/in/chrisrwilcox/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Cillian O'Mongain",
+      "profileUrl": "https://www.linkedin.com/in/cillianomongain/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Colin Carlson",
+      "profileUrl": "https://twitter.com/wormmaps"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Colleen Murphy",
+      "profileUrl": "https://www.linkedin.com/in/colleenmurphyco/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Collin Jackson",
+      "profileUrl": "https://www.linkedin.com/in/collinjackson/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Dan Schlosser",
+      "profileUrl": "https://www.linkedin.com/in/danrschlosser/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "David Strauss",
+      "profileUrl": "https://twitter.com/davidstrauss?lang=en"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "David Duran",
+      "profileUrl": "https://www.linkedin.com/in/davidduran971/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Doug Pan",
+      "profileUrl": "https://www.linkedin.com/in/dougspan/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Eleanor Avril",
+      "profileUrl": "https://www.linkedin.com/in/eleanor-avril/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Emily Gong",
+      "profileUrl": "https://www.linkedin.com/in/emilyfgong/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Eric Carlson",
+      "profileUrl": "https://www.linkedin.com/in/eric-c-carlson/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Eric Schles",
+      "profileUrl": "https://www.linkedin.com/in/ericschles/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Erin Kelly",
+      "profileUrl": "https://www.linkedin.com/in/erin-kelly-643645179/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Eusden Shing",
+      "profileUrl": "https://www.linkedin.com/in/eusden/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Grayson Cabarle",
+      "profileUrl": "https://www.linkedin.com/in/grayson-cabarle-3a28a8107/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Hannah Lee",
+      "profileUrl": "https://www.linkedin.com/in/hannahbnguyen/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Jacob Redding",
+      "profileUrl": "https://www.linkedin.com/in/jacobredding/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Jake Mauer",
+      "profileUrl": "https://www.linkedin.com/in/jakemauer/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Jeremiah Edwards",
+      "profileUrl": "https://www.linkedin.com/in/jeremiq/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Jeremy Lubin",
+      "profileUrl": "https://www.linkedin.com/in/jeremy-lubin/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Jess Schwartz",
+      "profileUrl": "https://www.linkedin.com/in/jessicajschwartz/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Joe Ensminger",
+      "profileUrl": "https://www.linkedin.com/in/josephensminger/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Lara Mitra",
+      "profileUrl": "https://www.linkedin.com/in/lara-mitra/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Laurent Crenshaw",
+      "profileUrl": "https://www.linkedin.com/in/laurentcrenshaw/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Lekha Maruthur",
+      "profileUrl": "https://www.linkedin.com/in/sreelekha-haridas-m-12380210/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Lindsay Craig",
+      "profileUrl": "https://www.linkedin.com/in/lindsay-craig-06b2ab12b/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Megan Fritzler",
+      "profileUrl": "https://www.linkedin.com/in/megan-fritzler-96281028/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Mike McDonald",
+      "profileUrl": "https://www.linkedin.com/in/asciimike/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Molly Pam",
+      "profileUrl": "https://www.linkedin.com/in/mollypam/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Natasha Woods",
+      "profileUrl": "https://www.linkedin.com/in/woods-natasha/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Noah Spector",
+      "profileUrl": "https://www.linkedin.com/in/noahspector/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Rachel RoseFigura",
+      "profileUrl": "https://www.linkedin.com/in/rachelrosefigura/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "profileUrl": "https://www.linkedin.com/in/ranjitchacko/",
+      "fullName": "Ranjit Chacko"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Ray Gilbert",
+      "profileUrl": "https://www.linkedin.com/in/raymondgilbert/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Rebecca Mark",
+      "profileUrl": "https://www.linkedin.com/in/rebeccamark/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Ryan Fuentes",
+      "profileUrl": "https://www.linkedin.com/in/ryan-fuentes-0944301a7/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Sarah Scolnic",
+      "profileUrl": "https://www.linkedin.com/in/sarah-scolnic-62722038/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Sean Zhu",
+      "profileUrl": "https://www.linkedin.com/in/terestinglythere/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Shannon Cooke",
+      "profileUrl": "https://www.linkedin.com/in/shannon-cooke-7a330095/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Simon Frid",
+      "profileUrl": "https://www.linkedin.com/in/simonfrid/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Steph Eaneff",
+      "profileUrl": "https://www.linkedin.com/in/seaneff/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Steph Burke",
+      "profileUrl": "https://www.linkedin.com/in/steph-burke-a57206187/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Stephen Fiskell",
+      "profileUrl": "https://www.linkedin.com/in/takemoreaction/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Steve Hassey",
+      "profileUrl": "https://www.linkedin.com/in/steve-hassey-675b629b/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Susan Goldblatt",
+      "profileUrl": "https://www.linkedin.com/in/susan-goldblatt/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Trae Wallace",
+      "profileUrl": "https://www.linkedin.com/in/traewallace/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Vincent Woo",
+      "profileUrl": "https://www.linkedin.com/in/vincent-woo-b2716399/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Virsaviya Efraim",
+      "profileUrl": "https://www.linkedin.com/in/virsaviyaefraim/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Will Pate",
+      "profileUrl": "https://www.linkedin.com/in/william-pate-b143a813b/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Xinyu Zhang",
+      "profileUrl": ""
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Youyoung Lee",
+      "profileUrl": "https://www.linkedin.com/in/youyounglee/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Yvonne Hung",
+      "profileUrl": "https://www.linkedin.com/in/hungyvonne/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Nina Yang",
+      "profileUrl": "https://www.linkedin.com/in/ninaqyang/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Kara Huang",
+      "profileUrl": "https://www.linkedin.com/in/kara-huang/"
+    }
+  ]
+}

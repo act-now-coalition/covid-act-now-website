@@ -46,7 +46,121 @@ collections:
                 fields:
                   - { label: 'Alt text', name: 'altText', widget: 'string' }
                   - { label: 'Image', name: 'image', widget: 'image' }
-                  - { label: 'Url', name: 'url', widget: 'string' }
+                  - { label: 'Url', name: 'url', widget: 'string', required: false }
+          - {
+              label: 'Who we serve: Header',
+              name: 'whoWeServeHeader',
+              widget: 'string',
+            }
+          - {
+              label: 'Who we serve: Content A',
+              name: 'whoWeServeContentA',
+              widget: 'markdown',
+              hint: Copy above logos
+            }
+          - label: 'Government logos'
+            name: 'governmentLogos'
+            widget: 'list'
+            fields:
+              - { label: 'Alt text', name: 'altText', widget: 'string' }
+              - { label: 'Image', name: 'image', widget: 'image' }
+              - { label: 'Url', name: 'url', widget: 'string', required: false }
+          - {
+              label: 'Who we serve: Content B',
+              name: 'whoWeServeContentB',
+              widget: 'markdown',
+              hint: Copy below logos
+            }
+          - {
+              label: 'Team: Header',
+              name: 'teamHeader',
+              widget: 'string',
+            }
+          - {
+              label: 'Team: Intro',
+              name: 'teamIntro',
+              widget: 'markdown',
+            }
+  - label: Team directory
+    name: team
+    folder: 'src/cms-content/team'
+    create: true
+    label_singular: Team
+    description: description
+    format: json
+    identifier_field: teamName
+    fields:
+      - label: Team name
+        name: teamName
+        widget: string
+      - label: Team ID
+        name: teamID
+        widget: string
+      - label: Team members
+        name: teamMembers
+        widget: list
+        fields:
+          - label: Full name
+            name: fullName
+            widget: string
+          - label: Title and role
+            name: description
+            widget: string
+            required: false
+          - label: Profile picture
+            name: profileImgUrl
+            widget: image
+            default: "/images_cms/bar_recommends_icon.svg"
+          - label: Profile URL
+            name: profileUrl
+            widget: string
+            required: false
+
+  - name: articles
+    label: Articles
+    folder: 'src/cms-content/articles'
+    create: true
+    label_singular: Article
+    format: json
+    description: Long form articles and posts
+    slug: '{{articleID}}'
+    summary: '{{header}}'
+    sortable_fields: ['date', 'author', 'header', 'articleID']
+    fields:
+      - label: Header
+        name: header
+        widget: text
+        hint: Title
+      - label: Article ID
+        name: articleID
+        widget: string
+        hint: 'Short unique identifier for the article (all lowercase, no spaces, separated by dashes). Used to generate the URL (ex: indigenous-peoples-day)'
+      - label: Subtitle
+        name: subtitle
+        widget: text
+        required: false
+        hint: Optional subtitle
+      - label: Summary
+        name: summary
+        widget: markdown
+        hint: Short summary
+      - label: Author
+        name: author
+        widget: markdown
+        required: false
+        minimal: true
+        hint: 'Name of the author or authors (separated by comma, ex: Chelsi Asulin, Igor Kofman)'
+      - label: Publish date
+        name: date
+        widget: datetime
+        date_format: 'MMMM Do YYYY'
+        time_format: false
+        hint: Publish date to show in the article
+      - label: body
+        name: body
+        widget: markdown
+        hint: Content of the article. Use Heading 2 or lower (Heading 1 is used for the title of the article)
+
   - name: contact
     label: Contact Us
     format: json
@@ -253,7 +367,21 @@ collections:
               - { label: Term, name: term, widget: string }
               - { label: Term ID, name: termId, widget: string }
               - { label: Definition, name: definition, widget: markdown }
-              - { label: Category, name: category, widget: select, options: ["Disease science", "Health and symptoms", "Metrics", "Prevention and mitigation", "Testing", "Transmission", "Treatment"] }
+              - {
+                  label: Category,
+                  name: category,
+                  widget: select,
+                  options:
+                    [
+                      'Disease science',
+                      'Health and symptoms',
+                      'Metrics',
+                      'Prevention and mitigation',
+                      'Testing',
+                      'Transmission',
+                      'Treatment',
+                    ],
+                }
           - label: Metadata title
             name: metadataTitle
             widget: text
@@ -338,6 +466,13 @@ collections:
                       name: shortTitle,
                       widget: text,
                       hint: Short title for the case studies landing page,
+                    }
+                  - {
+                      label: Show case study,
+                      name: showCaseStudy,
+                      widget: boolean,
+                      default: true,
+                      hint: Toggle to the left if we want to hide the case study for the time being,
                     }
                   - {
                       label: Author,
@@ -442,57 +577,52 @@ collections:
           - label: Metadata description
             name: metadataDescription
             widget: text
-      - label: 'Products: Full Pages'
-        name: ProductsFullPages
-        file: src/cms-content/learn/products-full-pages.json
+      - name: Learn-Metric Explainers
+        label: 'Metric Explainers'
+        file: src/cms-content/learn/metric-explainers.json
         fields:
-          - label: Product
-            name: product
+          - label: Page Header
+            name: pageHeader
+            widget: string
+          - label: Page Intro
+            name: pageIntro
+            widget: markdown
+          - label: Sections
+            name: sections
             widget: list
             fields:
-              - {
-                  label: Product name,
-                  name: productName,
-                  widget: string,
-                  hint: 'Product name (ex. API)',
-                }
-              - {
-                  label: Product ID,
-                  name: productId,
-                  widget: string,
-                  hint: 'Must match ID used on products landing page, ie. product name all lowercase, separated by dashes if multi-work (ex. response-simulator)'
-                }
-              - {
-                  label: Product Intro,
-                  name: productIntro,
-                  widget: markdown,
-                  hint: 'Main intro before sections'
-                }
-              -
-                label: Sections
-                name: sections
+              - { label: Section header, name: sectionHeader, widget: string, required: false, hint: 'Use for indiv. metric sections -- metric name ie. Daily New Cases' }
+              - { label: Section subheader, name: sectionSubheader, widget: string, required: false, hint: 'Use for indiv. metric sections -- metric alias ie. Also known as: incidence' }
+              - { label: Section ID, name: sectionId, widget: string, hint: 'Section header, all lowercase, separated by dashes if multi-word' }
+              - { label: Section intro, name: sectionIntro, widget: markdown }
+              - label: Questions
+                name: questions
                 widget: list
                 fields:
-                  - {
-                      label: Section title,
-                      name: sectionTitle,
-                      widget: string,
-                      hint: 'ex: Why our API'
-                    }
-                  - {
-                      label: Section ID,
-                      name: sectionId,
-                      widget: string,
-                      hint: 'Section title all lowercase, separated by dashes if multi-work (ex. why-our-api)'
-                    }
-                  - {
-                      label: Section Body,
-                      name: sectionBody,
-                      widget: markdown,
-                    }
-              - label: Metadata title
-                name: metadataTitle
-                widget: text
-              - label: Metadata description
-                name: metadataDescription
-                widget: text
+                  - { label: Question, name: question, widget: text }
+                  - { label: Question ID, name: questionId, widget: text }
+                  - { label: Answer, name: answer, widget: markdown }
+          - label: Key metrics section header
+            name: metricsHeader
+            widget: string
+            hint: Should be 'Key metrics'
+          - label: Key metrics section ID
+            name: metricsID
+            widget: string
+            hint: Section header, all lowercase, separated by dashed if multi-word
+          - label: Framework section header
+            name: frameworkHeader
+            widget: text
+          - label: Framework section ID
+            name: frameworkID
+            widget: string
+            hint: Section header, all lowercase, separated by dashed if multi-word
+          - label: Framework section body
+            name: frameworkBody
+            widget: markdown
+          - label: Metadata title
+            name: metadataTitle
+            widget: text
+          - label: Metadata description
+            name: metadataDescription
+            widget: text

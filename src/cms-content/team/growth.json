@@ -1,0 +1,12 @@
+{
+  "teamName": "Growth",
+  "teamID": "growth",
+  "teamMembers": [
+    {
+      "fullName": "Gaia Sabogal",
+      "description": "Growth Lead",
+      "profileUrl": "https://www.linkedin.com/in/gaia-sabogal/",
+      "profileImgUrl": "/images_cms/gaia.jpeg"
+    }
+  ]
+}

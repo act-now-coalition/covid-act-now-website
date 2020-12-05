@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { sum, isNumber, reject, isNull } from 'lodash';
+import { sum, isNumber, reject, isNull, partition } from 'lodash';
 import { Projection, Column } from 'common/models/Projection';
 import {
   Metric,
@@ -15,6 +15,7 @@ import {
   RecommendationSource,
   RecommendIcon,
   RecommendationWithIcon,
+  RecommendCategory,
 } from 'cms-content/recommendations';
 import { allIcons } from 'cms-content/recommendations';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
@@ -55,6 +56,10 @@ export function getRecommendations(
         : item.level === fedLevel;
     });
 
+  const travelRecommendation = recommendations.filter(
+    item => item.category === RecommendCategory.TRAVEL,
+  );
+
   /**
    * Some Fed recommendations in the Yellow level only apply when the positive
    * test rate is over 3% - we filter those out when that's the case.
@@ -72,7 +77,24 @@ export function getRecommendations(
     );
   }
 
-  const allRecommendations = [...fedRecommendations, ...harvardRecommendations];
+  // Orders based on relevance:
+  const [gatheringRecommendation, otherFedRecommentations] = partition(
+    fedRecommendations,
+    item => item.category === RecommendCategory.GATHERINGS,
+  );
+  const [masksRecommendation, finalOtherFedRecommendations] = partition(
+    otherFedRecommentations,
+    item => item.category === RecommendCategory.MASKS,
+  );
+
+  const allRecommendations = [
+    ...travelRecommendation,
+    ...gatheringRecommendation,
+    ...masksRecommendation,
+    ...finalOtherFedRecommendations,
+    ...harvardRecommendations,
+  ];
+
   return allRecommendations.map(getIcon);
 }
 
@@ -117,6 +139,7 @@ export function getHarvardLevel(projection: Projection): HarvardLevel {
   const newCasesLevel = getLevel(Metric.CASE_DENSITY, currentCaseDensity);
 
   switch (newCasesLevel) {
+    case Level.SUPER_CRITICAL:
     case Level.CRITICAL:
       return HarvardLevel.RED;
     case Level.HIGH:
@@ -248,13 +271,17 @@ export function getDynamicIntroCopy(
   return blurb;
 }
 
-function getIcon(recommendation: Recommendation): RecommendationWithIcon {
+function getIcon(
+  recommendation: Recommendation,
+  i: number,
+): RecommendationWithIcon {
   const correspondingIcon = allIcons.filter(
     (icon: RecommendIcon) => icon.category === recommendation.category,
   );
   return {
     recommendationInfo: recommendation,
     iconInfo: correspondingIcon[0],
+    index: i,
   };
 }
 
@@ -268,6 +295,7 @@ export const summaryByLevel = {
   [Level.HIGH]: 'is at risk of an outbreak',
   [Level.CRITICAL]:
     'is either actively experiencing an outbreak or is at extreme risk',
+  [Level.SUPER_CRITICAL]: 'is experiencing a severe outbreak',
 };
 
 export function getShareQuote(locationName: string, alarmLevel: Level): string {

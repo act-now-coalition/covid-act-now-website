@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import CheckIcon from '@material-ui/icons/Check';
+import { Link } from 'react-router-dom';
 import {
   ColoredHeaderBanner,
   Wrapper,
@@ -17,8 +18,6 @@ import {
   ColumnTitle,
   SectionColumn,
   LevelDescription,
-  ThermometerContainer,
-  ThermometerRow,
 } from 'components/LocationPage/LocationPageHeader.style';
 import { useEmbed } from 'common/utils/hooks';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
@@ -28,20 +27,26 @@ import { useModelLastUpdatedDate } from 'common/utils/model';
 import { STATES_WITH_DATA_OVERRIDES } from 'common/metrics/hospitalizations';
 import { Projections } from 'common/models/Projections';
 import { formatUtcDate } from 'common/utils';
-import { isNull } from 'util';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
 import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
-import { LEVEL_COLOR } from 'common/colors';
 import WarningIcon from '@material-ui/icons/Warning';
 import { Metric } from 'common/metric';
 import { BANNER_COPY } from 'components/Banner/ThirdWaveBanner';
+import HospitalizationsAlert, {
+  isHospitalizationsPeak,
+} from './HospitalizationsAlert';
+import { ThermometerImage } from 'components/Thermometer';
 
 const NewFeatureCopy = (props: {
   locationName: string;
   onNewUpdateClick: () => void;
 }) => {
-  return <Copy isUpdateCopy>{BANNER_COPY}</Copy>;
+  return (
+    <Copy isUpdateCopy>
+      {BANNER_COPY} <Link to={'/deep-dives/us-third-wave'}>Learn more</Link>.
+    </Copy>
+  );
 };
 
 const LocationPageHeading = (props: { projections: Projections }) => {
@@ -78,17 +83,17 @@ const LocationPageHeader = (props: {
   onNewUpdateClick: () => void;
 }) => {
   const hasStats = !!Object.values(props.stats).filter(
-    (val: number | null) => !isNull(val),
+    (val: number | null) => val !== null,
   ).length;
+  const { projections } = props;
 
   //TODO (chelsi): get rid of this use of 'magic' numbers
   const headerTopMargin = !hasStats ? -202 : -218;
   const headerBottomMargin = !hasStats ? 0 : 0;
 
-  const locationName =
-    props.projections.countyName || props.projections.stateName;
+  const locationName = projections.countyName || projections.stateName;
 
-  const alarmLevel = props.projections.getAlarmLevel();
+  const alarmLevel = projections.getAlarmLevel();
 
   const levelInfo = LOCATION_SUMMARY_LEVELS[alarmLevel];
 
@@ -97,36 +102,15 @@ const LocationPageHeader = (props: {
 
   const { isEmbed } = useEmbed();
 
-  const verified = STATES_WITH_DATA_OVERRIDES.includes(
-    props.projections.stateName,
-  );
+  const verified = STATES_WITH_DATA_OVERRIDES.includes(projections.stateName);
 
-  const isVerifiedState = !props.projections.isCounty && verified;
+  const isVerifiedState = !projections.isCounty && verified;
 
   const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
   const lastUpdatedDateString =
     lastUpdatedDate !== null ? formatUtcDate(lastUpdatedDate) : '';
 
-  const thresholdUnknown = alarmLevel === Level.UNKNOWN;
-
-  const thermometerContent = [
-    {
-      level: Level.CRITICAL,
-      color: `${LEVEL_COLOR[Level.CRITICAL]}`,
-    },
-    {
-      level: Level.HIGH,
-      color: `${LEVEL_COLOR[Level.HIGH]}`,
-    },
-    {
-      level: Level.MEDIUM,
-      color: `${LEVEL_COLOR[Level.MEDIUM]}`,
-    },
-    {
-      level: Level.LOW,
-      color: `${LEVEL_COLOR[Level.LOW]}`,
-    },
-  ];
+  const inHospitalizationsPeak = isHospitalizationsPeak(projections.primary);
 
   return (
     <Fragment>
@@ -140,7 +124,7 @@ const LocationPageHeader = (props: {
           <HeaderSection>
             <LocationCopyWrapper>
               <HeaderTitle isEmbed={isEmbed}>
-                <LocationPageHeading projections={props.projections} />
+                <LocationPageHeading projections={projections} />
               </HeaderTitle>
             </LocationCopyWrapper>
             <ButtonsWrapper>
@@ -156,18 +140,7 @@ const LocationPageHeader = (props: {
           </HeaderSection>
           <HeaderSection>
             <SectionHalf>
-              <ThermometerContainer>
-                {thermometerContent.map((row, i) => {
-                  const isCurrentLevel = row.level === alarmLevel;
-                  return (
-                    <ThermometerRow
-                      color={row.color}
-                      thresholdUnknown={thresholdUnknown}
-                      isCurrentLevel={isCurrentLevel}
-                    />
-                  );
-                })}
-              </ThermometerContainer>
+              <ThermometerImage currentLevel={alarmLevel} />
               <SectionColumn>
                 <ColumnTitle>Covid risk level</ColumnTitle>
                 <LevelDescription>{levelInfo.summary}</LevelDescription>
@@ -177,11 +150,15 @@ const LocationPageHeader = (props: {
             <SectionHalf>
               <WarningIcon />
               <SectionColumn isUpdateCopy>
-                <ColumnTitle isUpdateCopy>announcement</ColumnTitle>
-                <NewFeatureCopy
-                  locationName={locationName}
-                  onNewUpdateClick={props.onNewUpdateClick}
-                />
+                <ColumnTitle isUpdateCopy>alert</ColumnTitle>
+                {inHospitalizationsPeak ? (
+                  <HospitalizationsAlert projection={projections.primary} />
+                ) : (
+                  <NewFeatureCopy
+                    locationName={locationName}
+                    onNewUpdateClick={props.onNewUpdateClick}
+                  />
+                )}
               </SectionColumn>
             </SectionHalf>
           </HeaderSection>
@@ -193,7 +170,7 @@ const LocationPageHeader = (props: {
           />
         </TopContainer>
         <FooterContainer>
-          {props.projections.isCounty && !isEmbed && (
+          {projections.isCounty && !isEmbed && (
             <HeaderSubCopy>
               <span>Updated {lastUpdatedDateString} · </span>
               <span>County data is currently in beta. </span>
@@ -211,7 +188,7 @@ const LocationPageHeader = (props: {
               .
             </HeaderSubCopy>
           )}
-          {!props.projections.isCounty && !isEmbed && (
+          {!projections.isCounty && !isEmbed && (
             <HeaderSubCopy>
               {verified && (
                 <Fragment>

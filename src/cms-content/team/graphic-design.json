@@ -1,0 +1,30 @@
+{
+  "teamMembers": [
+    {
+      "profileImgUrl": "/images_cms/lily-headshot.png",
+      "fullName": "Lily Donovan-Seid",
+      "description": "Graphic design lead",
+      "profileUrl": "https://www.linkedin.com/in/lily-donovan-seid-88977a14/"
+    },
+    {
+      "profileImgUrl": "/images_cms/sophiachan.jpeg",
+      "fullName": "Sophia Chan",
+      "description": "Junior designer",
+      "profileUrl": "https://www.linkedin.com/in/lily-donovan-seid-88977a14/"
+    },
+    {
+      "profileImgUrl": "/images_cms/saraberman.jpeg",
+      "fullName": "Sara Berman",
+      "description": "Junior designer",
+      "profileUrl": "https://www.linkedin.com/in/sara-m-berman/"
+    },
+    {
+      "profileImgUrl": "/images_cms/copy-of-devon-hosford-1-.jpeg",
+      "fullName": "Devon Hosford",
+      "description": "Motion designer",
+      "profileUrl": "https://www.linkedin.com/in/devon-hosford-she-her-hers-a3ab6b32/"
+    }
+  ],
+  "teamName": "Graphic Design",
+  "teamID": "graphic-design"
+}

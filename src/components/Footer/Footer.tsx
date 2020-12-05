@@ -36,7 +36,7 @@ const Footer = ({ children }: { children: React.ReactNode }) => {
                 Blog
               </ExternalLink>
               <Link to="/about">About</Link>
-              <Link to="/contact">Contact Us</Link>
+              <Link to="/contact">Contact us</Link>
             </StyledFooterBodyNav>
             <StyledFooterDivider />
             <StyledFooterBodyLinks>

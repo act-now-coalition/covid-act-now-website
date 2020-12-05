@@ -12,6 +12,10 @@ export const Logo = styled.img`
   }
 `;
 
+export const GovLogo = styled.img`
+  max-height: 100px;
+`;
+
 export const PressLogoWrapper = styled(Grid)`
   height: 3.5rem;
   display: flex;

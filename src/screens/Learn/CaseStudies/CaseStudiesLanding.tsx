@@ -12,6 +12,7 @@ import {
   caseStudiesContent,
   learnPages,
   CaseStudyCategory,
+  categoriesWithStudies,
 } from 'cms-content/learn';
 import CaseStudyCard from './CaseStudyCard';
 import { BreadcrumbsContainer, LearnHeading1 } from '../Learn.style';
@@ -35,14 +36,11 @@ const Landing: React.FC = () => {
   const cardGridSpacing = isMobile ? 2 : 3;
 
   function getSectionItems(categories: CaseStudyCategory[]): Item[] {
-    return categories.map(category => ({
+    return categoriesWithStudies.map(category => ({
       id: category.categoryId,
       title: category.header,
     }));
   }
-
-  // Filters out case studies that aren't in shippable shape but are already in the CMS
-  const idsToFilterOut = ['michael-piccioli', 'arielle-tango'];
 
   return (
     <Fragment>
@@ -60,7 +58,7 @@ const Landing: React.FC = () => {
         <MobileOnly>
           <TableOfContents items={getSectionItems(categories)} />
         </MobileOnly>
-        {categories.map((category: CaseStudyCategory) => {
+        {categoriesWithStudies.map((category: CaseStudyCategory) => {
           const caseStudies = category.caseStudies || [];
           return (
             <Fragment key={category.categoryId}>
@@ -68,7 +66,7 @@ const Landing: React.FC = () => {
               <CardsContainer spacing={cardGridSpacing}>
                 {caseStudies.map(
                   caseStudy =>
-                    !idsToFilterOut.includes(caseStudy.caseStudyId) && (
+                    caseStudy.showCaseStudy && (
                       <Grid
                         container
                         item

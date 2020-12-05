@@ -97,9 +97,8 @@ const Filters = (props: {
     },
   ];
 
-  const switchHandleChange = () => {
+  const switchHandleChange = (newViewAllCounties: boolean) => {
     if (props.isHomepage && props.setViewAllCounties) {
-      const newViewAllCounties = !props.viewAllCounties;
       props.setViewAllCounties(newViewAllCounties);
       trackCompareEvent(
         EventAction.SELECT,
@@ -143,16 +142,11 @@ const Filters = (props: {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
-  const gridOnClick = (on: boolean) => {
-    props.setViewAllCounties && props.setViewAllCounties(on);
-  };
-
   const switchProps = {
     leftLabel: 'States',
     rightLabel: 'Counties',
-    checkedValue: props.viewAllCounties,
+    checked: props.viewAllCounties,
     onChange: switchHandleChange,
-    gridOnClick,
     isModal: props.isModal,
   };
 

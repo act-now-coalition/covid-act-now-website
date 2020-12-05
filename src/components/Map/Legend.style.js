@@ -6,7 +6,7 @@ export const LegendContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  height: ${props => (props.condensed ? 'unset' : '3rem')};
+  height: ${props => (props.condensed ? 'unset' : '3.5rem')};
   width: 100%;
 
   @media (min-width: 960px) {

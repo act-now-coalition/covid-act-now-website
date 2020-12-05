@@ -53,6 +53,7 @@ export const SourceTitle = styled.h2`
   letter-spacing: 0em;
   text-align: left;
   margin-top: 0;
+  margin-bottom: 0.75rem;
 `;
 
 export const SourceIntro = styled(MarkdownContent)`

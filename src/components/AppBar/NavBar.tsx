@@ -13,8 +13,9 @@ const isHomePage = (pathname: string) =>
   ['/', '/alert_signup', '/compare'].includes(pathname);
 
 const isLearnPage = (pathname: string) =>
-  ['/glossary', '/faq', '/learn'].includes(pathname) ||
-  pathname.startsWith('/case-studies');
+  ['/glossary', '/faq', '/explained', '/learn'].includes(pathname) ||
+  pathname.startsWith('/case-studies') ||
+  pathname.startsWith('/deep-dives');
 
 const NavBar: React.FC = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);

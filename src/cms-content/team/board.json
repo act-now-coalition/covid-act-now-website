@@ -1,0 +1,42 @@
+{
+  "teamName": "Board",
+  "teamID": "board",
+  "teamMembers": [
+    {
+      "fullName": "James Tamplin",
+      "description": "Founder/CEO of Google Firebase",
+      "profileUrl": "https://www.linkedin.com/in/jamest",
+      "profileImgUrl": "/images_cms/jamestamplin.jpeg"
+    },
+    {
+      "profileImgUrl": "/images_cms/maxhenderson.jpeg",
+      "fullName": "Max Henderson",
+      "description": "Former Google Executive",
+      "profileUrl": "https://www.linkedin.com/in/maxhenderson/"
+    },
+    {
+      "profileImgUrl": "/images_cms/nirav-r.-shah.jpeg",
+      "fullName": "Nirav Shah, M.D., M.P.H.",
+      "profileUrl": "https://www.linkedin.com/in/niravrshah/",
+      "description": "Senior Scholar at Stanford Medical School, Former New York State Commissioner of Health"
+    },
+    {
+      "profileImgUrl": "/images_cms/zack-rosen.jpeg",
+      "fullName": "Zack Rosen",
+      "profileUrl": "https://www.linkedin.com/in/zacharyrosen/",
+      "description": "CEO of Pantheon"
+    },
+    {
+      "profileImgUrl": "/images_cms/jkt.jpeg",
+      "fullName": "Jonathan Kreiss-Tomkins",
+      "profileUrl": "https://www.linkedin.com/in/jonathan-kreiss-tomkins-35915319a/",
+      "description": "State Representative in Alaska House of Representatives"
+    },
+    {
+      "profileImgUrl": "/images_cms/ryan-panchadsaram.jpeg",
+      "fullName": "Ryan Panchadsaram",
+      "description": "Advisor at Kleiner Perkins, Former U.S. Deputy Chief Technology Officer",
+      "profileUrl": "https://www.linkedin.com/in/ryanpanchadsaram/"
+    }
+  ]
+}

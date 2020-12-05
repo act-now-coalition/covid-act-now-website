@@ -5,8 +5,8 @@ import MuiButton from '@material-ui/core/Button';
 import { mobileBreakpoint } from 'assets/theme/sizes';
 import { COLOR_MAP } from 'common/colors';
 
-const colorButton = `${COLOR_MAP.PURPLE}`;
-const bannerBackgroundColor = `${COLOR_MAP.PURPLE}`;
+const colorButton = `${COLOR_MAP.RED.DARK}`;
+const bannerBackgroundColor = `${COLOR_MAP.RED.DARK}`;
 
 export const MainContainerStyles = css`
   background-color: ${bannerBackgroundColor};
@@ -20,7 +20,7 @@ export const MainContainerStyles = css`
   line-height: 140%;
   color: #fff;
 
-  font-size: 14px;
+  font-size: 16px;
   text-align: center;
   justify-content: center;
   border-radius: 0;
@@ -72,7 +72,7 @@ export const ContainedButton = styled(MuiButton).attrs(props => ({
 export const FeatureBannerButton = styled(MuiButton)`
   min-width: fit-content;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   box-shadow: none;
   text-transform: none;

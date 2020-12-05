@@ -102,9 +102,11 @@ const Explore: React.FunctionComponent<{
   initialFipsList: string[];
   initialChartIndigenousPopulations?: boolean;
   title?: string;
+  defaultMetric?: ExploreMetric;
 }> = ({
   initialFipsList,
   initialChartIndigenousPopulations,
+  defaultMetric = ExploreMetric.CASES,
   title = 'Trends',
 }) => {
   const theme = useTheme();
@@ -120,7 +122,6 @@ const Explore: React.FunctionComponent<{
 
   const locationFips = findFipsByUrlParams(stateId, countyId);
 
-  let defaultMetric = ExploreMetric.CASES;
   // Originally we had share URLs like /explore/cases instead of
   // /explore/<sharedComponentId> and so this code allows them to keep working.
   if (sharedComponentId && EXPLORE_CHART_IDS.includes(sharedComponentId)) {
@@ -342,10 +343,6 @@ const Explore: React.FunctionComponent<{
         labels={metricLabels}
         onChangeTab={onChangeTab}
       />
-      <IndigenousDataCheckbox
-        chartIndigenous={chartIndigenous}
-        setChartIndigenous={setChartIndigenous}
-      />
       <Styles.ChartControlsContainer>
         <Styles.TableAutocompleteHeader>
           Compare states or counties
@@ -430,6 +427,10 @@ const Explore: React.FunctionComponent<{
           <ScreenshotReady />
         </Styles.EmptyPanel>
       )}
+      <IndigenousDataCheckbox
+        chartIndigenous={chartIndigenous}
+        setChartIndigenous={setChartIndigenous}
+      />
       <DisclaimerWrapper>
         <DisclaimerBody>
           Last updated {lastUpdatedDateString}. Learn more about{' '}
