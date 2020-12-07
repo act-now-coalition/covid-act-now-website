@@ -50,15 +50,11 @@ export const StyledInputWrapper = styled.div`
   display: flex;
   align-items: center;
   background: white;
-  border-top: 1px solid ${BORDER_COLOR};
-  border-left: 1px solid ${BORDER_COLOR};
-  border-right: 1px solid ${BORDER_COLOR};
-  border-bottom: 1px solid ${BORDER_COLOR};
+  border: solid 1px ${BORDER_COLOR};
   border-radius: ${props => (props.isOpen ? '4px 4px 0 0' : '4px')};
   position: ${props => (props.isOpen ? 'absolute' : 'relative')};
   left: 0;
   right: 0;
-  position: ${props => (props.isOpen ? 'absolute' : 'relative')};
   box-sizing: border-box;
   height: 3.5rem;
   width: 100%;
