@@ -71,7 +71,7 @@ export const StyledInputWrapper = styled.div`
 
 export const StyledInput = styled.input`
   border-radius: ${props => (props.isOpen ? '4px 4px 0 0' : '4px')};
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.5rem;
   border: none;
   width: 100%;
