@@ -70,12 +70,20 @@ export const StyledInputWrapper = styled.div`
 `;
 
 export const StyledInput = styled.input`
-  border-radius: ${props => (props.isOpen ? '4px 4px 0 0' : '4px')};
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.5rem;
   border: none;
   width: 100%;
   padding: 0 1rem 0 0;
+
+  // When the font-size of an input element is smaller than 16px, Safari will
+  // zoom in when the user enters the input, and won't zoom out when the user
+  // leaves the input area. The fix is increasing the font size from 14px to 16px
+  // and scaling the input element by 14/16 = 0.875.
+  // https://trello.com/c/Kpu34lhS/603-horizontal-scrollbar-on-iphone-after-using-search-box
+  transform: scale(0.875);
+  transform-origin: left top;
+  margin-top: 0.25rem;
 
   &:focus {
     outline: none;
