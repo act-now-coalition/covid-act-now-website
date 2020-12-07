@@ -5,6 +5,7 @@ import landing from './learn-landing.json';
 import caseStudies from './learn-case-studies.json';
 import productsLanding from './products-landing.json';
 import { sanitizeID, Markdown, TocItem } from '../utils';
+import moment from 'moment';
 
 /*
   Learn Landing page:
@@ -28,6 +29,10 @@ export interface LandingContent {
 
 export const landingPageContent = landing as LandingContent;
 
+const formatLastUpdatedDate = (date: string) => {
+  return moment(date).format('L');
+};
+
 /*
   FAQ:
 */
@@ -46,6 +51,7 @@ export interface FaqSection {
 export interface FaqContent {
   header: string;
   intro: Markdown;
+  lastUpdatedDate: string;
   sections: FaqSection[];
   metadataTitle: string;
   metadataDescription: string;
@@ -59,6 +65,7 @@ const sanitizeSection = (section: FaqSection): FaqSection => ({
 const sanitizeFaq = (faq: FaqContent): FaqContent => ({
   ...faq,
   sections: faq.sections.map(sanitizeSection),
+  lastUpdatedDate: formatLastUpdatedDate(faq.lastUpdatedDate),
 });
 
 export const faqContent = sanitizeFaq(faq) as FaqContent;
@@ -77,6 +84,7 @@ export interface Term {
 export interface GlossaryContent {
   header: string;
   intro: Markdown;
+  lastUpdatedDate: string;
   terms: Term[];
   metadataTitle: string;
   metadataDescription: string;
@@ -91,6 +99,7 @@ const sanitizeTerm = (term: Term): Term => ({
 const sanitizeGlossary = (glossary: GlossaryContent): GlossaryContent => ({
   ...glossary,
   terms: glossary.terms.map(sanitizeTerm),
+  lastUpdatedDate: formatLastUpdatedDate(glossary.lastUpdatedDate),
 });
 
 export const glossaryContent = sanitizeGlossary(glossary) as GlossaryContent;

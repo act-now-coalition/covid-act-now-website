@@ -3,6 +3,7 @@ import {
   BreadcrumbsContainer,
   SectionName,
   LearnHeading1,
+  LastUpdatedDate,
 } from '../Learn.style';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import { MarkdownContent } from 'components/Markdown';
@@ -19,6 +20,7 @@ const Glossary: React.FC = () => {
   const {
     header,
     intro,
+    lastUpdatedDate,
     terms,
     metadataTitle,
     metadataDescription,
@@ -45,6 +47,7 @@ const Glossary: React.FC = () => {
         </BreadcrumbsContainer>
         <LearnHeading1>{header}</LearnHeading1>
         <MarkdownContent source={intro} />
+        <LastUpdatedDate>Last updated {lastUpdatedDate}</LastUpdatedDate>
         {terms.map((term: Term, i: number) => (
           <Fragment key={`glossary-term-${i}`}>
             <Anchor id={term.termId} />

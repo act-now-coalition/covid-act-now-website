@@ -6,7 +6,11 @@ import Breadcrumbs from 'components/Breadcrumbs';
 import { MarkdownContent } from 'components/Markdown';
 import PageContent, { MobileOnly } from 'components/PageContent';
 import { faqContent, FaqSection, learnPages } from 'cms-content/learn';
-import { BreadcrumbsContainer, LearnHeading1 } from '../Learn.style';
+import {
+  BreadcrumbsContainer,
+  LearnHeading1,
+  LastUpdatedDate,
+} from '../Learn.style';
 import Section from './Section';
 import { useScrollToTopButton } from 'common/hooks';
 import ScrollToTopButton from 'components/SharedComponents/ScrollToTopButton';
@@ -16,6 +20,7 @@ const Faq: React.FC = () => {
   const {
     header,
     intro,
+    lastUpdatedDate,
     sections,
     metadataTitle,
     metadataDescription,
@@ -48,6 +53,7 @@ const Faq: React.FC = () => {
         </BreadcrumbsContainer>
         <LearnHeading1>{header}</LearnHeading1>
         <MarkdownContent source={intro} />
+        <LastUpdatedDate>Last updated {lastUpdatedDate}</LastUpdatedDate>
         <MobileOnly>
           <TableOfContents items={getSectionItems(sections)} />
         </MobileOnly>
