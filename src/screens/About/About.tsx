@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import { LogoGridItem } from 'components/LogoGrid/LogoGrid';
-import Grid from '@material-ui/core/Grid';
 import {
   AboutHeading1,
   AboutHeading2,
@@ -14,6 +13,7 @@ import PageContent from 'components/PageContent';
 import { TocItem } from 'cms-content/utils';
 import TeamSection from './Team/TeamSection';
 import GovLogoGrid from './GovLogoGrid';
+import { StyledGridContainer } from './About.style';
 
 export const sidebarItems: TocItem[] = [
   {
@@ -61,7 +61,12 @@ const About = () => {
           return (
             <Fragment key={`Partner-section-${idx}`}>
               <MarkdownContent source={section.copy} />
-              <Grid container spacing={1} alignItems="center" justify="center">
+              <StyledGridContainer
+                container
+                spacing={1}
+                alignItems="center"
+                justify="center"
+              >
                 {section.logos.map((logo: any, i: number) => (
                   <LogoGridItem
                     image={logo.image}
@@ -70,7 +75,7 @@ const About = () => {
                     key={logo.altText}
                   />
                 ))}
-              </Grid>
+              </StyledGridContainer>
             </Fragment>
           );
         })}

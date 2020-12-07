@@ -8,7 +8,7 @@
       "copy": "Georgetown University Center for Global Health Science and Security, Stanford University Clinical Excellence Research Center, and Harvard Global Health Institute",
       "logos": [
         {
-          "image": "/images_cms/ghss.png",
+          "image": "/images_cms/georgetown-logo.png",
           "url": "https://ghss.georgetown.edu/",
           "altText": "Georgetown University logo"
         },
@@ -20,7 +20,7 @@
         {
           "url": "https://globalhealth.harvard.edu/",
           "altText": "Harvard Global Health Institute logo",
-          "image": "/images_cms/harvard.png"
+          "image": "/images_cms/harvard-logo.png"
         }
       ]
     },
@@ -30,12 +30,12 @@
         {
           "url": "https://schmidtfutures.com",
           "altText": "Schmidt Futures logo",
-          "image": "/images_cms/schmidt-futures.png"
+          "image": "/images_cms/schmidt-futues.jpeg"
         },
         {
           "altText": "Patrick J. McGovern Foundation Logo",
           "url": "https://www.mcgovern.org/",
-          "image": "/images_cms/mcgovern-foundation-logo.jpeg"
+          "image": "/images_cms/patrick-j-mcgovern-foundation-logo.png"
         }
       ]
     },
@@ -77,6 +77,16 @@
       "image": "/images_cms/steuben_county-1-.jpg",
       "altText": "Steuben County, New York Logo",
       "url": "https://www.steubencony.org/"
+    },
+    {
+      "image": "/images_cms/civil-air-patrol-logo.jpg",
+      "altText": "Civil Air Patrol Logo",
+      "url": "https://www.gocivilairpatrol.com/"
+    },
+    {
+      "image": "/images_cms/naco-logo.png",
+      "altText": "National Association of Counties Logo",
+      "url": "https://www.naco.org/"
     }
   ],
   "partnersHeader": "Who we work with",
