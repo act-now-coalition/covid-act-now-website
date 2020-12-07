@@ -4,15 +4,20 @@ import { GovLogo } from 'components/LogoGrid/LogoGrid.style';
 import { LogoItem } from 'cms-content/about';
 import ExternalLink from 'components/ExternalLink';
 import { StyledGridContainer } from './About.style';
+import { useBreakpoint } from 'common/hooks';
 
 const GovLogoGrid = (props: { logos: LogoItem[] }) => {
   const { logos } = props;
+
+  const isMobile = useBreakpoint(600);
+  const logoJustify = isMobile ? 'space-evenly' : 'center';
+
   return (
     <StyledGridContainer
       container
       spacing={1}
       alignItems="center"
-      justify="center"
+      justify={logoJustify}
     >
       {logos.map((logo: LogoItem) => {
         return (
