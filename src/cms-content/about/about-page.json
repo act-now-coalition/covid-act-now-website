@@ -77,6 +77,16 @@
       "image": "/images_cms/steuben_county-1-.jpg",
       "altText": "Steuben County, New York Logo",
       "url": "https://www.steubencony.org/"
+    },
+    {
+      "image": "/images_cms/civil-air-patrol-logo.jpg",
+      "altText": "Civil Air Patrol Logo",
+      "url": "https://www.gocivilairpatrol.com/"
+    },
+    {
+      "image": "/images_cms/naco-logo.jpg",
+      "altText": "National Association of Counties Logo",
+      "url": "https://www.naco.org/"
     }
   ],
   "partnersHeader": "Who we work with",
