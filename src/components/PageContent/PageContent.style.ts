@@ -18,11 +18,7 @@ export const PageContainer = styled.div`
 export const MainContent = styled.main`
   max-width: 100%;
   padding: 0 1.25rem;
-
-  @media (min-width: ${mobileBreakpoint}) {
-    flex: 1 1 auto;
-    padding: 0 1.25rem;
-  }
+  flex: 1 1 auto;
 `;
 
 export const Sidebar = styled.div`
