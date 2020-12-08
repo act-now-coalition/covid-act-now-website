@@ -27,7 +27,7 @@
       "sectionSubheader": ""
     },
     {
-      "sectionHeader": "Daily New Cases",
+      "sectionHeader": "Daily new cases",
       "sectionSubheader": "Also known as: incidence",
       "sectionId": "daily-new-cases",
       "sectionIntro": "**Daily new cases is the number of new COVID cases per day per unit of population** (we measure per 100K people).",
@@ -60,7 +60,7 @@
       ]
     },
     {
-      "sectionHeader": "Infection Rate",
+      "sectionHeader": "Infection rate",
       "sectionSubheader": "Also known as: R(t) or “R-effective”",
       "sectionId": "infection-rate",
       "sectionIntro": "**Infection rate is the estimated number of new people each COVID-positive person will infect.**",
@@ -83,7 +83,7 @@
       ]
     },
     {
-      "sectionHeader": " Positive Test Rate",
+      "sectionHeader": " Positive test rate",
       "sectionSubheader": "Also known as: test positivity",
       "sectionId": "positive-test-rate",
       "sectionIntro": "**Positive test rate is the *percentage* of COVID testing that comes back positive** (not the total number of positive tests).",
@@ -111,7 +111,7 @@
       ]
     },
     {
-      "sectionHeader": " ICU Headroom Used",
+      "sectionHeader": " ICU headroom used",
       "sectionSubheader": "",
       "sectionId": "icu-headroom-used",
       "sectionIntro": "**ICU headroom used is the percentage of ICU beds available for COVID patients, after excluding those already in use by non-COVID patients.**",
@@ -144,7 +144,7 @@
       ]
     },
     {
-      "sectionHeader": " Contact Tracers Hired",
+      "sectionHeader": " Contact tracers hired",
       "sectionId": "contact-tracers-hired",
       "sectionIntro": "**Contact tracers hired is** **the number of contact tracers that are hired in a state or county, relative to the number of cases.**",
       "questions": [
@@ -167,7 +167,7 @@
     }
   ],
   "metricsHeader": "Key metrics",
-  "pageHeader": "Risk Levels & Key Metrics",
+  "pageHeader": "Risk levels & key metrics",
   "pageIntro": "Our mission is to share timely and reliable COVID data with decision makers and the public so that they can take informed action. We have five key metrics to assess COVID risk. Below you will learn how we calculate and source each metric and overall risk.",
   "metricsID": "key-metrics"
 }
