@@ -5,6 +5,13 @@
   "metadataDescription": "Find recent and trusted information & resources about the novel Coronavirus (2019-nCoV). Learn about Symptoms, Tests, Risks, and more. Backed by medical experts. Make informed decisions to stop the disease for you and your community.",
   "sections": [
     {
+      "sectionTitle": "Risk levels & key metrics",
+      "sectionId": "covid-risk-levels-metrics",
+      "description": "At Covid Act Now, we built our dashboard — [America’s COVID Warning System](http://covidactnow.org) — with the goal of providing clear, actionable, real-time metrics relevant to COVID. Here you can learn about the five key metrics we use to calculate an overall risk level for every state and county in the United States.",
+      "buttonCta": "View risk levels & key metrics",
+      "buttonRedirect": "/covid-risk-levels-metrics"
+    },
+    {
       "sectionTitle": "Glossary",
       "sectionId": "glossary",
       "description": "R₀ vs R(t) vs Infection rate: We have compiled a simple glossary of essential COVID-related terms, which we will continue to update and expand.",
@@ -31,13 +38,6 @@
       "description": "We provide partners ranging from large commercial entities, like IBM, to small county health departments with clear, accurate, and up-to-date data. Learn more about how leaders in industry, public health, and government are using our data and tools to make better decisions to combat COVID.",
       "buttonCta": "View case studies",
       "buttonRedirect": "/case-studies"
-    },
-    {
-      "sectionTitle": "Risk levels & key metrics",
-      "sectionId": "covid-risk-levels-metrics",
-      "description": "At Covid Act Now, we built our dashboard — [America’s COVID Warning System](http://covidactnow.org) — with the goal of providing clear, actionable, real-time metrics relevant to COVID. Here you can learn about the five key metrics we use to calculate an overall risk level for every state and county in the United States.",
-      "buttonCta": "View risk levels & key metrics",
-      "buttonRedirect": "/covid-risk-levels-metrics"
     }
   ]
 }
