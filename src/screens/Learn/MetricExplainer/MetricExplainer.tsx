@@ -26,8 +26,6 @@ const MetricExplainer = () => {
     metricsHeader,
     sections,
     metricsID,
-    riskHeader,
-    riskID,
     metadataTitle,
     metadataDescription,
   } = metricExplainersContent;
@@ -55,7 +53,9 @@ const MetricExplainer = () => {
         <MobileOnly>
           <TableOfContents items={getSectionItems(sections)} />
         </MobileOnly>
-        <Heading2 id={riskID}>{riskHeader}</Heading2>
+        <Heading2 id={introSection[0].sectionId}>
+          {introSection[0].sectionHeader}
+        </Heading2>
         <MarkdownContent source={introSection[0].sectionIntro} />
         <p>** Insert thermometer **</p>
         {introSection[0].questions.map(question => (
@@ -71,6 +71,7 @@ const MetricExplainer = () => {
             {section.sectionSubheader && (
               <Paragraph>{section.sectionSubheader}</Paragraph>
             )}
+            <MarkdownContent source={section.sectionIntro} />
             <ThermometerBox>{getThermometer(section.sectionId)}</ThermometerBox>
             {section.questions.map(question => (
               <Fragment key={question.questionId}>
