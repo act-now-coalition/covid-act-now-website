@@ -3,6 +3,7 @@ import {
   BreadcrumbsContainer,
   SectionName,
   LearnHeading1,
+  LastUpdatedDate,
 } from '../Learn.style';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import { MarkdownContent } from 'components/Markdown';
@@ -11,7 +12,7 @@ import PageContent from 'components/PageContent';
 import { glossaryContent, learnPages, Term } from 'cms-content/learn';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { Anchor } from 'components/TableOfContents';
-import { formatMetatagDate } from 'common/utils';
+import { formatMetatagDate, formatNumericalDate } from 'common/utils';
 import ScrollToTopButton from 'components/SharedComponents/ScrollToTopButton';
 import { useScrollToTopButton } from 'common/hooks';
 
@@ -19,6 +20,7 @@ const Glossary: React.FC = () => {
   const {
     header,
     intro,
+    lastUpdatedDate,
     terms,
     metadataTitle,
     metadataDescription,
@@ -45,6 +47,9 @@ const Glossary: React.FC = () => {
         </BreadcrumbsContainer>
         <LearnHeading1>{header}</LearnHeading1>
         <MarkdownContent source={intro} />
+        <LastUpdatedDate>
+          Last updated {formatNumericalDate(lastUpdatedDate)}
+        </LastUpdatedDate>
         {terms.map((term: Term, i: number) => (
           <Fragment key={`glossary-term-${i}`}>
             <Anchor id={term.termId} />
