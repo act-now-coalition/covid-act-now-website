@@ -18,6 +18,7 @@ import { BreadcrumbsContainer, LearnHeading1, ItemName } from '../Learn.style';
 import TableOfContents, { Item } from 'components/TableOfContents';
 import { Metric, getMetricDefinition } from 'common/metric';
 import { ThermometerBox } from 'components/Thermometer';
+import ThermometerIntro from './ThermometerIntro';
 
 const MetricExplainer = () => {
   const {
@@ -57,7 +58,7 @@ const MetricExplainer = () => {
           {introSection[0].sectionHeader}
         </Heading2>
         <MarkdownContent source={introSection[0].sectionIntro} />
-        <p>** Insert thermometer **</p>
+        <ThermometerIntro />
         {introSection[0].questions.map(question => (
           <Fragment key={question.questionId}>
             <ItemName>{question.question}</ItemName>
