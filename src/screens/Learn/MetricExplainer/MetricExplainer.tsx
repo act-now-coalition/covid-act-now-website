@@ -6,7 +6,7 @@ import {
   metricSections,
   learnPages,
 } from 'cms-content/learn';
-import { MarkdownContent, Heading3, Paragraph } from 'components/Markdown';
+import { MarkdownContent } from 'components/Markdown';
 import PageContent, { MobileOnly } from 'components/PageContent';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { BreadcrumbsContainer, LearnHeading1, ItemName } from '../Learn.style';

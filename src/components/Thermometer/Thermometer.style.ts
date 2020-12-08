@@ -55,3 +55,8 @@ export const LevelTitle = styled.div`
 export const LevelDescription = styled.div`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
 `;
+
+export const ThermometerWrapper = styled.div`
+  margin: auto;
+  width: fit-content;
+`;
