@@ -37,6 +37,8 @@ import HospitalizationsAlert, {
   isHospitalizationsPeak,
 } from './HospitalizationsAlert';
 import { ThermometerImage } from 'components/Thermometer';
+import { useRegion } from 'common/regions';
+import LocationPageHeading from './LocationPageHeading';
 
 const NewFeatureCopy = (props: {
   locationName: string;
@@ -49,26 +51,26 @@ const NewFeatureCopy = (props: {
   );
 };
 
-const LocationPageHeading = (props: { projections: Projections }) => {
-  const { isEmbed } = useEmbed();
+// const LocationPageHeading = (props: { projections: Projections }) => {
+//   const { isEmbed } = useEmbed();
 
-  const displayName = props.projections.countyName ? (
-    <>
-      <strong>{props.projections.countyName}, </strong>
-      <a
-        href={`${
-          isEmbed ? '/embed' : ''
-        }/us/${props.projections.stateCode.toLowerCase()}`}
-      >
-        {props.projections.stateCode}
-      </a>
-    </>
-  ) : (
-    <strong>{props.projections.stateName}</strong>
-  );
+//   const displayName = props.projections.countyName ? (
+//     <>
+//       <strong>{props.projections.countyName}, </strong>
+//       <a
+//         href={`${
+//           isEmbed ? '/embed' : ''
+//         }/us/${props.projections.stateCode.toLowerCase()}`}
+//       >
+//         {props.projections.stateCode}
+//       </a>
+//     </>
+//   ) : (
+//     <strong>{props.projections.stateName}</strong>
+//   );
 
-  return <span>{displayName}</span>;
-};
+//   return <span>{displayName}</span>;
+// };
 
 const noop = () => {};
 
@@ -86,12 +88,13 @@ const LocationPageHeader = (props: {
     (val: number | null) => val !== null,
   ).length;
   const { projections } = props;
+  const region = useRegion();
 
   //TODO (chelsi): get rid of this use of 'magic' numbers
   const headerTopMargin = !hasStats ? -202 : -218;
   const headerBottomMargin = !hasStats ? 0 : 0;
 
-  const locationName = projections.countyName || projections.stateName;
+  const locationName = region.name;
 
   const alarmLevel = projections.getAlarmLevel();
 
@@ -124,7 +127,7 @@ const LocationPageHeader = (props: {
           <HeaderSection>
             <LocationCopyWrapper>
               <HeaderTitle isEmbed={isEmbed}>
-                <LocationPageHeading projections={projections} />
+                <LocationPageHeading region={region} />
               </HeaderTitle>
             </LocationCopyWrapper>
             <ButtonsWrapper>
