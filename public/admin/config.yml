@@ -599,7 +599,7 @@ collections:
             name: sections
             widget: list
             fields:
-              - { label: Section header, name: sectionHeader, widget: string, required: false, hint: 'Use for indiv. metric sections -- metric name ie. Daily New Cases' }
+              - { label: Section header, name: sectionHeader, widget: string, hint: 'Either an individual metric name or How we assess risk' }
               - { label: Section subheader, name: sectionSubheader, widget: string, required: false, hint: 'Use for indiv. metric sections -- metric alias ie. Also known as: incidence' }
               - { label: Section ID, name: sectionId, widget: string, hint: 'Section header, all lowercase, separated by dashes if multi-word' }
               - { label: Section intro, name: sectionIntro, widget: markdown }
