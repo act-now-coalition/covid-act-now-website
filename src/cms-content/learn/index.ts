@@ -46,6 +46,7 @@ export interface FaqSection {
 export interface FaqContent {
   header: string;
   intro: Markdown;
+  lastUpdatedDate: string;
   sections: FaqSection[];
   metadataTitle: string;
   metadataDescription: string;
@@ -77,6 +78,7 @@ export interface Term {
 export interface GlossaryContent {
   header: string;
   intro: Markdown;
+  lastUpdatedDate: string;
   terms: Term[];
   metadataTitle: string;
   metadataDescription: string;

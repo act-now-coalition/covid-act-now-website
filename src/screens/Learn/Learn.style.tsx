@@ -5,6 +5,7 @@ import {
   Heading2,
   Heading3,
   MarkdownContent,
+  Paragraph,
 } from 'components/Markdown';
 import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
 
@@ -61,4 +62,8 @@ export const SmallSubtext = styled(MarkdownContent)`
   p {
     font-size: 14px;
   }
+`;
+
+export const LastUpdatedDate = styled(Paragraph)`
+  font-size: 0.875rem;
 `;

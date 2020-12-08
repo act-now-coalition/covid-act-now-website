@@ -17,7 +17,7 @@ export const MainContainerStyles = css`
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
-  line-height: 140%;
+  line-height: 1.4;
   color: #fff;
 
   font-size: 16px;

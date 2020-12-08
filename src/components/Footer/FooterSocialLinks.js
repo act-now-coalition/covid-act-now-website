@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { FacebookIcon, TwitterIcon } from 'react-share';
+import { FacebookIcon, TwitterIcon, LinkedinIcon } from 'react-share';
 import InstagramIcon from 'assets/images/InstagramIcon';
 
 const FooterSocialLinks = props => {
@@ -15,6 +15,12 @@ const FooterSocialLinks = props => {
       </a>
       <a href="https://twitter.com/CovidActNow" aria-label="Twitter">
         <TwitterIcon size={iconSize} borderRadius={10} />
+      </a>
+      <a
+        href="https://www.linkedin.com/company/covid-act-now/?viewAsMember=true"
+        aria-label="Linkedin"
+      >
+        <LinkedinIcon size={iconSize} borderRadius={10} />
       </a>
     </Fragment>
   );

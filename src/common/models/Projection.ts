@@ -32,7 +32,11 @@ const DISABLED_CASE_DENSITY: string[] = [];
 
 const DISABLED_INFECTION_RATE = new DisabledFips([]);
 
-const DISABLED_TEST_POSITIVITY = new DisabledFips(['48113', '48215']);
+const DISABLED_TEST_POSITIVITY = new DisabledFips([
+  '48113',
+  '48215',
+  '47', // https://trello.com/c/EoXyNUBD/646-disabled-tn-test-positivity
+]);
 
 const DISABLED_ICU = new DisabledFips([]);
 
