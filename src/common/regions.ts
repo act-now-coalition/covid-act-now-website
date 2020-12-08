@@ -1,3 +1,4 @@
+import { createContext, useContext } from 'react';
 import { chain, fromPairs } from 'lodash';
 import urlJoin from 'url-join';
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
@@ -12,10 +13,10 @@ export enum RegionType {
   CBSA = 'CBSA',
 }
 
-abstract class Region {
+export abstract class Region {
   constructor(
     public readonly name: string,
-    protected readonly urlSegment: string,
+    public readonly urlSegment: string,
     public readonly fipsCode: FipsCode,
     public readonly population: number,
     public readonly regionType: RegionType,
@@ -39,6 +40,10 @@ export class State extends Region {
     super(name, urlSegment, fipsCode, population, RegionType.STATE);
   }
 
+  /**
+   * State: Washington
+   * County: King County, Washington
+   */
   fullName() {
     return this.name;
   }
@@ -62,7 +67,7 @@ export class County extends Region {
   }
 
   fullName() {
-    return `${this.name}, ${this.state.stateCode}`;
+    return `${this.name}, ${this.state.name}`;
   }
 
   relativeUrl() {
@@ -116,27 +121,65 @@ const counties: County[] = chain(state_county_map_dataset)
 class RegionDB {
   constructor(private regions: Region[]) {}
 
-  private filterByType(regionType: RegionType) {
-    return this.all().filter(region => region.regionType === regionType);
-  }
-
   findByFipsCode(fipsCode: FipsCode): Region | null {
     const region = this.regions.find(region => region.fipsCode === fipsCode);
     return region || null;
+  }
+
+  findStateByUrlParams(stateId: string): State | null {
+    const foundState = this.states().find(
+      state =>
+        equalLower(state.urlSegment, stateId) ||
+        equalLower(state.stateCode, stateId),
+    );
+    return foundState || null;
+  }
+
+  findCountyByUrlParams(stateId: string, countyId: string): County | null {
+    const foundState = this.findStateByUrlParams(stateId);
+    if (!foundState) {
+      return null;
+    }
+
+    const stateCounties = this.counties().filter(
+      county => county.state.fipsCode === foundState.fipsCode,
+    );
+
+    const foundCounty = stateCounties.find(county =>
+      equalLower(county.urlSegment, countyId),
+    );
+
+    return foundCounty || null;
   }
 
   all(): Region[] {
     return this.regions;
   }
 
-  states(): Region[] {
-    return this.filterByType(RegionType.STATE);
+  states(): State[] {
+    return this.all().filter(
+      (region): region is State => region.regionType === RegionType.STATE,
+    );
   }
 
-  counties(): Region[] {
-    return this.filterByType(RegionType.COUNTY);
+  counties(): County[] {
+    return this.all().filter(
+      (region): region is County => region.regionType === RegionType.COUNTY,
+    );
   }
+}
+
+function equalLower(a: string, b: string) {
+  return a.toLowerCase() === b.toLowerCase();
 }
 
 const regions = new RegionDB([...states, ...counties]);
 export default regions;
+
+// TODO: Is there a better way to do this? If I pass `null` as default value
+// for the context, we will need to check that the region is not null
+// everywhere (we are checking for that in the LocationRouter)
+const standInRegion: State = new State('name', 'name', '99', 0, '99');
+export const RegionContext = createContext<Region>(standInRegion);
+
+export const useRegion = () => useContext(RegionContext);
