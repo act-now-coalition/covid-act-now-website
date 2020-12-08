@@ -16,6 +16,7 @@ const YouTubeEmbed: React.FC<{ embedUrl: string }> = ({ embedUrl }) => {
         // being wider than the container.
         const scaledWidth = Math.min(width, maxWidth);
         const scaledHeight = (maxHeight / maxWidth) * scaledWidth;
+        // TODO(pablo): We need to add a meaningful title to the embeds
         return (
           <iframe
             title="YouTube embed"
