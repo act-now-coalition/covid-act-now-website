@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { formatMetatagDate } from 'common/utils';
+import { formatMetatagDate, formatNumericalDate } from 'common/utils';
 import TableOfContents, { Item } from 'components/TableOfContents';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import Breadcrumbs from 'components/Breadcrumbs';
@@ -53,7 +53,9 @@ const Faq: React.FC = () => {
         </BreadcrumbsContainer>
         <LearnHeading1>{header}</LearnHeading1>
         <MarkdownContent source={intro} />
-        <LastUpdatedDate>Last updated {lastUpdatedDate}</LastUpdatedDate>
+        <LastUpdatedDate>
+          Last updated {formatNumericalDate(lastUpdatedDate)}
+        </LastUpdatedDate>
         <MobileOnly>
           <TableOfContents items={getSectionItems(sections)} />
         </MobileOnly>
