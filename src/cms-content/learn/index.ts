@@ -226,8 +226,6 @@ export interface MetricExplainersContent {
   metricsID: string;
   metadataTitle: string;
   metadataDescription: string;
-  riskHeader: string;
-  riskID: string;
 }
 
 export const metricExplainersContent = metricExplainers as MetricExplainersContent;
