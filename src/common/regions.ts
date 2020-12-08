@@ -119,31 +119,42 @@ const counties: County[] = chain(state_county_map_dataset)
   .value();
 
 class RegionDB {
-  constructor(private regions: Region[]) {}
+  private regions: Region[];
+
+  constructor(public states: State[], public counties: County[]) {
+    this.regions = [...states, ...counties];
+  }
 
   findByFipsCode(fipsCode: FipsCode): Region | null {
     const region = this.regions.find(region => region.fipsCode === fipsCode);
     return region || null;
   }
 
-  findStateByUrlParams(stateId: string): State | null {
-    const foundState = this.states().find(
+  findStateByUrlParams(stateUrlSegment: string): State | null {
+    // The second condition is added to support legacy URLs with the 2-letter
+    // state code (`/us/wa`)
+    const foundState = this.states.find(
       state =>
-        equalLower(state.urlSegment, stateId) ||
-        equalLower(state.stateCode, stateId),
+        equalLower(state.urlSegment, stateUrlSegment) ||
+        equalLower(state.stateCode, stateUrlSegment),
     );
     return foundState || null;
   }
 
-  findCountyByUrlParams(stateId: string, countyId: string): County | null {
-    const foundState = this.findStateByUrlParams(stateId);
+  findCountyByUrlParams(
+    stateUrlSegment: string,
+    countyUrlSegment: string,
+  ): County | null {
+    const foundState = this.findStateByUrlParams(stateUrlSegment);
     if (!foundState) {
       return null;
     }
 
-    const foundCounty = this.counties()
-      .filter(county => county.state.fipsCode === foundState.fipsCode)
-      .find(county => equalLower(county.urlSegment, countyId));
+    const foundCounty = this.counties.find(
+      county =>
+        county.state.fipsCode === foundState.fipsCode &&
+        equalLower(county.urlSegment, countyUrlSegment),
+    );
 
     return foundCounty || null;
   }
@@ -151,31 +162,18 @@ class RegionDB {
   all(): Region[] {
     return this.regions;
   }
-
-  states(): State[] {
-    return this.all().filter(
-      (region): region is State => region.regionType === RegionType.STATE,
-    );
-  }
-
-  counties(): County[] {
-    return this.all().filter(
-      (region): region is County => region.regionType === RegionType.COUNTY,
-    );
-  }
 }
 
 function equalLower(a: string, b: string) {
   return a.toLowerCase() === b.toLowerCase();
 }
 
-const regions = new RegionDB([...states, ...counties]);
+const regions = new RegionDB(states, counties);
 export default regions;
 
-// TODO: Is there a better way to do this? If I pass `null` as default value
-// for the context, we will need to check that the region is not null
-// everywhere (we are checking for that in the LocationRouter)
-const standInRegion: State = new State('name', 'name', '99', 0, '99');
-export const RegionContext = createContext<Region>(standInRegion);
+// We are careful to never call `useRegion()` in components that are not
+// nested inside `<RegionContext.Provider>` so we cheat and pretend that the
+// value is non-nullable
+export const RegionContext = createContext<Region>(null as any);
 
-export const useRegion = () => useContext(RegionContext);
+export const useLocationPageRegion = () => useContext(RegionContext);

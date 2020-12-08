@@ -25,7 +25,7 @@ import {
 } from 'common/utils/recommend';
 import { mainContent } from 'cms-content/recommendations';
 import { getRecommendationsShareUrl } from 'common/urls';
-import { useRegion } from 'common/regions';
+import { useLocationPageRegion } from 'common/regions';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
@@ -47,7 +47,7 @@ const ChartsHolder = (props: {
   const { chartId } = props;
   const projection = props.projections.primary;
 
-  const region = useRegion();
+  const region = useLocationPageRegion();
 
   const metricRefs = {
     [Metric.CASE_DENSITY]: useRef<HTMLDivElement>(null),

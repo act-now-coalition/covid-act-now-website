@@ -37,7 +37,7 @@ import HospitalizationsAlert, {
   isHospitalizationsPeak,
 } from './HospitalizationsAlert';
 import { ThermometerImage } from 'components/Thermometer';
-import { useRegion } from 'common/regions';
+import { useLocationPageRegion } from 'common/regions';
 import LocationPageHeading from './LocationPageHeading';
 
 const NewFeatureCopy = (props: {
@@ -67,7 +67,7 @@ const LocationPageHeader = (props: {
     (val: number | null) => val !== null,
   ).length;
   const { projections } = props;
-  const region = useRegion();
+  const region = useLocationPageRegion();
 
   //TODO (chelsi): get rid of this use of 'magic' numbers
   const headerTopMargin = !hasStats ? -202 : -218;
@@ -104,7 +104,7 @@ const LocationPageHeader = (props: {
           <HeaderSection>
             <LocationCopyWrapper>
               <HeaderTitle isEmbed={isEmbed}>
-                <LocationPageHeading region={region} />
+                <LocationPageHeading region={region} isEmbed={isEmbed} />
               </HeaderTitle>
             </LocationCopyWrapper>
             <ButtonsWrapper>
