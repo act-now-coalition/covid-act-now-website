@@ -1,6 +1,7 @@
 import { createContext, useContext } from 'react';
 import { chain, fromPairs } from 'lodash';
 import urlJoin from 'url-join';
+import { assert } from 'common/utils';
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 import countyAdjacencyMsa from './data/county_adjacency_msa.json';
 const { state_dataset, state_county_map_dataset } = US_STATE_DATASET;
@@ -176,4 +177,11 @@ export default regions;
 // value is non-nullable
 export const RegionContext = createContext<Region>(null as any);
 
-export const useLocationPageRegion = () => useContext(RegionContext);
+export const useLocationPageRegion = () => {
+  const region = useContext(RegionContext);
+  assert(
+    region,
+    '`useLocationPageRegion` can only be called from components inside LocationPage',
+  );
+  return region;
+};
