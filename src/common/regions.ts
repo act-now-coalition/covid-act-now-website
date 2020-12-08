@@ -141,13 +141,9 @@ class RegionDB {
       return null;
     }
 
-    const stateCounties = this.counties().filter(
-      county => county.state.fipsCode === foundState.fipsCode,
-    );
-
-    const foundCounty = stateCounties.find(county =>
-      equalLower(county.urlSegment, countyId),
-    );
+    const foundCounty = this.counties()
+      .filter(county => county.state.fipsCode === foundState.fipsCode)
+      .find(county => equalLower(county.urlSegment, countyId));
 
     return foundCounty || null;
   }
