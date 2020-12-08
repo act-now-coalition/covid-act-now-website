@@ -12,7 +12,7 @@
         {
           "question": "What does the deepest red color indicate?",
           "questionId": "deepest-red",
-          "answer": "The deepest color indicates severe outbreak, for locations with incidence above 75 cases/100K. This is our highest level of COVID risk and we recommend that you take all possible precautions. \n\nThe threshold we set for our highest risk closely aligns with recommendations from the White House Task Force."
+          "answer": "The deepest color is our highest level of COVID risk and we recommend that you take all possible precautions. This level of risk is assigned for locations with above 75 daily new cases per 100K population. This aligns with the White House Task Force highest risk level."
         },
         {
           "question": "Do you ever change your tools or methodology?",
@@ -53,7 +53,7 @@
           "answer": "When calculating daily new cases, we look at the average cases per 100,000 people in a location, which is calculated as a seven-day average of daily new cases, divided by the population, divided by 100,000.\n\n![Daily new cases metric calculation](/images_cms/daily-new-cases-calculation.png \"Daily new cases calculation\")\n\nTo calculate daily new cases, we use new positive cases *[from The New York Times](https://developer.nytimes.com/covid)*. If you would like to learn more, check out [our data sources](https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit)."
         },
         {
-          "question": "How were the risk thresholds for daily new cases determined?",
+          "question": "How were the risk levels for daily new cases determined?",
           "answer": "Our risk levels are based on the [“Key](https://ethics.harvard.edu/files/center-for-ethics/files/key_metrics_and_indicators_v4.pdf) [Metrics for Covid Suppression”](https://ethics.harvard.edu/files/center-for-ethics/files/key_metrics_and_indicators_v4.pdf) by Harvard Global Health Institute and others. When estimating the number of people who will become infected in the course of a year, we rely on the [CDC’s estimate](https://www.globalhealthnow.org/2020-06/us-cases-10x-higher-reported) that many more people are infected than are likely to get tested. Therefore, we use a conservative estimate that only one in five people infected will subsequently get tested. \n\nThe deepest color indicates severe outbreak, for locations with daily new cases above 75 cases/100K.",
           "questionId": "daily-new-cases-thresholds"
         }
@@ -91,7 +91,7 @@
         {
           "question": "Why is positive test rate important?",
           "questionId": "why-is-positive-test-rate-important",
-          "answer": "Test positivity is a good indicator of how widespread testing is in a given area. If a state or county has a **high** test positivity rate, it is a sign of **insufficient** testing in that area. If a state or county has a **low** test positivity rate, it is a sign that we are **testing more** than only the sickest people. Testing a larger number of at-risk populations (essential workers, people notified via contact tracing , etc.) is key to catching unknown infections before they can lead to an outbreak.\n\nLet’s look at the pictures below. **There are two positive COVID tests in each of these scenarios,** but the positive test rate differs drastically due to the percentage of the population that is being tested. The closer we get to testing everyone, the less likely we are to miss positive cases.\n\n![Positive test rate diagram](/images_cms/positive-test-rate-diagram.png \"Positive test rate diagram\")"
+          "answer": "Test positivity is a good indicator of how widespread testing is in a given area. If a state or county has a **high** test positivity rate, it is a sign of **insufficient** testing in that area. If a state or county has a **low** test positivity rate, it is a sign that we are **testing more** than only the sickest people. Testing a larger number of at-risk populations (essential workers, people notified via contact tracing , etc.) is key to catching unknown infections before they can lead to an outbreak.\n\nLet’s look at the pictures below. **There are two positive COVID tests in each of these scenarios,** but the positive test rate differs drastically due to the percentage of the population that is being tested. The closer we get to testing everyone, the less likely we are to miss positive cases.\n\n![Key for positive test rate example](/images_cms/test-positivity-calculate-key.jpg \"Positive test rate key\")\n\n![Positive test rate diagram for insufficient testing](/images_cms/test-positivity-calculate-high.jpg \"Positive test rate diagram for insufficient testing\")\n\nIn the first scenario, 2 out of 10 people test positive for COVID, so the positive test rate is 20%. The remaining 90% of the population remain untested.\n\n![Positive test rate diagram for bare minimum testing](/images_cms/test-positivity-calculate-medium.jpg \"Positive test rate diagram for bare minimum testing\")\n\nIn the second scenario, 2 out of 20 people test positive for COVID, so the positive test rate is 10%. The remaining 80% of the population remain untested."
         },
         {
           "question": "Can I watch a video explainer? ",
@@ -104,7 +104,7 @@
           "answer": "Positive test rate is calculated by dividing the number of positive tests over the number of total tests. We calculate the rate as a seven-day trailing average. It is important to note that positive test rate can be difficult to interpret and messy to calculate, for reasons well captured by the [Covid Tracking Project](https://covidtracking.com/blog/test-positivity-in-the-us-is-a-mess).  It should be looked at in conjunction with other metrics such as infection rate and daily new cases.\n\nWe source testing data from the Department of Health and Human Services (HHS) for state level data. We scrape official state and county dashboards for county level data and, when unavailable, fall back on a weekly test positivity rate provided by the Centers for Medicare & Medicaid Services. If you would like to learn more, check out [our data sources](https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit)."
         },
         {
-          "question": "How were risk thresholds for positive test rate determined?",
+          "question": "How were risk levels for positive test rate determined?",
           "questionId": "positive-test-rate-thresholds",
           "answer": "There is a growing [consensus](https://globalhealth.harvard.edu/evidence-roundup-why-positive-test-rates-need-to-fall-below-3/) that driving the positive test rate downwards of 3 percent should be a priority.\n\nIt can also be helpful to look at countries that have been most effective and efficient in their containment of COVID. South Korea was back to normal activity with a test positivity rate below 3 percent. As of November 2020, *[South Korea’s test positivity](http://ncov.mohw.go.kr/en/)* was 1 percent."
         }
@@ -137,7 +137,7 @@
           "answer": "We use several sources to create our ICU headroom used metric. We use COVID hospitalization data from the [Covid Tracking Project](https://covidtracking.com/data) at the state level. In most states, we have direct numbers for COVID patients in the ICU; for those where we don’t, we estimate ICU numbers from total COVID hospitalization numbers. At the county level, we scrape from official county-level dashboards where available, and disaggregate from the state-level numbers otherwise.\n\nWe get the total number of ICU beds and the expected number of beds occupied by non-COVID patients from state and county dashboards where available, and we rely on data provided by [Covid Care Map](https://www.covidcaremap.org/) when the data is unavailable. If you would like to learn more, check out [our data sources](https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit)."
         },
         {
-          "question": "How were the risk thresholds for ICU headroom used determined?",
+          "question": "How were the risk levels for ICU headroom used determined?",
           "questionId": "icu-headroom-thresholds",
           "answer": "We chose our cutoffs based on [Resolve to Save Live’s policy recommendation](https://preventepidemics.org/wp-content/uploads/2020/04/COV020_WhenHowTightenFaucet_v3.pdf), which says ICU COVID cases should be able to double for states to consider opening."
         }
@@ -159,7 +159,7 @@
           "answer": "We know that measuring contact tracing capacity solely by the number of staff is not reliable, and we are working on a [more accurate metric](https://contacttracingplaybook.resolvetosavelives.org/checklists/metrics) to assess contact tracing capacity. One of the best metrics of success for a contact tracing program is the percentage of new cases traced to a known source. However, very few states are reporting this number.\n\nTherefore, as a proxy, **we currently look at the number of contact tracers on staff for each state to estimate the number of contacts that could be traced within 48 hours if the contact tracing program were otherwise working perfectly**. This stems from [expert recommendations](https://covidlocal.org/assets/documents/COVID%20Local%20Metrics%20overview.pdf) that at least 90 percent of contacts for each new case must be traced within 48 hours in order to contain COVID, and expert estimations that tracing each new case within 48 hours requires an average of five contact tracers per new case, as well as fast testing.\n\nWe source our state-level tracers hired data from [Test and Trace](https://testandtrace.com/). If you would like to learn more, check out [our data sources](https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit)."
         },
         {
-          "question": "How were the risk thresholds for tracers hired determined?",
+          "question": "How were the risk levels for tracers hired determined?",
           "questionId": "contact-tracers-hired-thresholds",
           "answer": "We do not include the critical (**red**) range for contact tracing; in other words it will no longer be possible to be marked critical (**red**) due to low numbers of contact tracing staff alone. While low numbers of contact tracing staff should be acknowledged, it doesn’t indicate an active or imminent outbreak. In addition, contact tracing is one our least refined data sets, largely because states themselves are highly variable in their reporting of contact tracing data.\n\nThe boundaries between yellow and orange are tricky. In the absence of expert consensus, we have set inclusive lower thresholds for yellow and orange. We peg the cut off between yellow and orange at 10 percent."
         }
@@ -169,7 +169,7 @@
   "metricsHeader": "Key metrics",
   "frameworkID": "how-did-we-develop-our-framework",
   "pageHeader": "Risk Levels & Key Metrics",
-  "riskHeader": "Risk",
+  "riskHeader": "How COVID risk is determined",
   "pageIntro": "Our mission is to share timely and reliable COVID data with decision makers and the public so that they can take informed action. We have five key metrics to assess COVID risk. Below you will learn how we calculate and source each metric and overall risk.",
   "metricsID": "key-metrics"
 }
