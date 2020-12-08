@@ -32,7 +32,7 @@
       "sectionHeader": "Daily New Cases",
       "sectionSubheader": "Also known as: incidence",
       "sectionId": "daily-new-cases",
-      "sectionIntro": "**Daily new cases is the number of new COVID cases per day per unit of population** (we measureper 100K people).",
+      "sectionIntro": "**Daily new cases is the number of new COVID cases per day per unit of population** (we measure per 100K people).",
       "questions": [
         {
           "question": "Why do we not call it incidence?",
