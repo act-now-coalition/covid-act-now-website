@@ -1,0 +1,2699 @@
+{
+  "msa_regions": [
+    {
+      "cbsaCode": "10420",
+      "cbsaTitle": "Akron, OH",
+      "csaCode": "184",
+      "csaTitle": "Cleveland-Akron-Canton, OH",
+      "name": "Akron",
+      "countyFips": [
+        "39133",
+        "39153"
+      ]
+    },
+    {
+      "cbsaCode": "10580",
+      "cbsaTitle": "Albany-Schenectady-Troy, NY",
+      "csaCode": "104",
+      "csaTitle": "Albany-Schenectady, NY",
+      "name": "Albany-Schenectady-Troy",
+      "countyFips": [
+        "36001",
+        "36083",
+        "36091",
+        "36093",
+        "36095"
+      ]
+    },
+    {
+      "cbsaCode": "10740",
+      "cbsaTitle": "Albuquerque, NM",
+      "csaCode": "106",
+      "csaTitle": "Albuquerque-Santa Fe-Las Vegas, NM",
+      "name": "Albuquerque",
+      "countyFips": [
+        "35001",
+        "35043",
+        "35057",
+        "35061"
+      ]
+    },
+    {
+      "cbsaCode": "10760",
+      "cbsaTitle": "Alexander City, AL",
+      "csaCode": "388",
+      "csaTitle": "Montgomery-Selma-Alexander City, AL",
+      "name": "Alexander City",
+      "countyFips": [
+        "01037",
+        "01123"
+      ]
+    },
+    {
+      "cbsaCode": "10860",
+      "cbsaTitle": "Alice, TX",
+      "csaCode": "204",
+      "csaTitle": "Corpus Christi-Kingsville-Alice, TX",
+      "name": "Alice",
+      "countyFips": [
+        "48131",
+        "48249"
+      ]
+    },
+    {
+      "cbsaCode": "11100",
+      "cbsaTitle": "Amarillo, TX",
+      "csaCode": "108",
+      "csaTitle": "Amarillo-Pampa-Borger, TX",
+      "name": "Amarillo",
+      "countyFips": [
+        "48011",
+        "48065",
+        "48359",
+        "48375",
+        "48381"
+      ]
+    },
+    {
+      "cbsaCode": "11180",
+      "cbsaTitle": "Ames, IA",
+      "csaCode": "218",
+      "csaTitle": "Des Moines-Ames-West Des Moines, IA",
+      "name": "Ames",
+      "countyFips": [
+        "19015",
+        "19169"
+      ]
+    },
+    {
+      "cbsaCode": "11540",
+      "cbsaTitle": "Appleton, WI",
+      "csaCode": "118",
+      "csaTitle": "Appleton-Oshkosh-Neenah, WI",
+      "name": "Appleton",
+      "countyFips": [
+        "55015",
+        "55087"
+      ]
+    },
+    {
+      "cbsaCode": "11640",
+      "cbsaTitle": "Arecibo, PR",
+      "csaCode": "490",
+      "csaTitle": "San Juan-Bayamón, PR",
+      "name": "Arecibo",
+      "countyFips": [
+        "72013",
+        "72027",
+        "72065",
+        "72115"
+      ]
+    },
+    {
+      "cbsaCode": "11700",
+      "cbsaTitle": "Asheville, NC",
+      "csaCode": "120",
+      "csaTitle": "Asheville-Marion-Brevard, NC",
+      "name": "Asheville",
+      "countyFips": [
+        "37021",
+        "37087",
+        "37089",
+        "37115"
+      ]
+    },
+    {
+      "cbsaCode": "12020",
+      "cbsaTitle": "Athens-Clarke County, GA",
+      "csaCode": "122",
+      "csaTitle": "Atlanta--Athens-Clarke County--Sandy Springs, GA-AL",
+      "name": "Athens-Clarke County",
+      "countyFips": [
+        "13059",
+        "13195",
+        "13219",
+        "13221"
+      ]
+    },
+    {
+      "cbsaCode": "12060",
+      "cbsaTitle": "Atlanta-Sandy Springs-Alpharetta, GA",
+      "csaCode": "122",
+      "csaTitle": "Atlanta--Athens-Clarke County--Sandy Springs, GA-AL",
+      "name": "Atlanta-Sandy Springs-Alpharetta",
+      "countyFips": [
+        "13013",
+        "13015",
+        "13035",
+        "13045",
+        "13057",
+        "13063",
+        "13067",
+        "13077",
+        "13085",
+        "13089",
+        "13097",
+        "13113",
+        "13117",
+        "13121",
+        "13135",
+        "13143",
+        "13149",
+        "13151",
+        "13159",
+        "13171",
+        "13199",
+        "13211",
+        "13217",
+        "13223",
+        "13227",
+        "13231",
+        "13247",
+        "13255",
+        "13297"
+      ]
+    },
+    {
+      "cbsaCode": "12580",
+      "cbsaTitle": "Baltimore-Columbia-Towson, MD",
+      "csaCode": "548",
+      "csaTitle": "Washington-Baltimore-Arlington, DC-MD-VA-WV-PA",
+      "name": "Baltimore-Columbia-Towson",
+      "countyFips": [
+        "24003",
+        "24005",
+        "24013",
+        "24025",
+        "24027",
+        "24035",
+        "24510"
+      ]
+    },
+    {
+      "cbsaCode": "13820",
+      "cbsaTitle": "Birmingham-Hoover, AL",
+      "csaCode": "142",
+      "csaTitle": "Birmingham-Hoover-Talladega, AL",
+      "name": "Birmingham-Hoover",
+      "countyFips": [
+        "01007",
+        "01009",
+        "01021",
+        "01073",
+        "01115",
+        "01117"
+      ]
+    },
+    {
+      "cbsaCode": "14020",
+      "cbsaTitle": "Bloomington, IN",
+      "csaCode": "144",
+      "csaTitle": "Bloomington-Bedford, IN",
+      "name": "Bloomington",
+      "countyFips": [
+        "18105",
+        "18119"
+      ]
+    },
+    {
+      "cbsaCode": "14100",
+      "cbsaTitle": "Bloomsburg-Berwick, PA",
+      "csaCode": "146",
+      "csaTitle": "Bloomsburg-Berwick-Sunbury, PA",
+      "name": "Bloomsburg-Berwick",
+      "countyFips": [
+        "42037",
+        "42093"
+      ]
+    },
+    {
+      "cbsaCode": "14260",
+      "cbsaTitle": "Boise City, ID",
+      "csaCode": "147",
+      "csaTitle": "Boise City-Mountain Home-Ontario, ID-OR",
+      "name": "Boise City",
+      "countyFips": [
+        "16001",
+        "16015",
+        "16027",
+        "16045",
+        "16073"
+      ]
+    },
+    {
+      "cbsaCode": "14460",
+      "cbsaTitle": "Boston-Cambridge-Newton, MA-NH",
+      "csaCode": "148",
+      "csaTitle": "Boston-Worcester-Providence, MA-RI-NH-CT",
+      "name": "Boston-Cambridge-Newton",
+      "countyFips": [
+        "25021",
+        "25023",
+        "25025",
+        "25009",
+        "25017",
+        "33015",
+        "33017"
+      ]
+    },
+    {
+      "cbsaCode": "14540",
+      "cbsaTitle": "Bowling Green, KY",
+      "csaCode": "150",
+      "csaTitle": "Bowling Green-Glasgow, KY",
+      "name": "Bowling Green",
+      "countyFips": [
+        "21003",
+        "21031",
+        "21061",
+        "21227"
+      ]
+    },
+    {
+      "cbsaCode": "15380",
+      "cbsaTitle": "Buffalo-Cheektowaga, NY",
+      "csaCode": "160",
+      "csaTitle": "Buffalo-Cheektowaga-Olean, NY",
+      "name": "Buffalo-Cheektowaga",
+      "countyFips": [
+        "36029",
+        "36063"
+      ]
+    },
+    {
+      "cbsaCode": "15460",
+      "cbsaTitle": "Burlington, IA-IL",
+      "csaCode": "161",
+      "csaTitle": "Burlington-Fort Madison-Keokuk, IA-IL-MO",
+      "name": "Burlington",
+      "countyFips": [
+        "17071",
+        "19057"
+      ]
+    },
+    {
+      "cbsaCode": "15540",
+      "cbsaTitle": "Burlington-South Burlington, VT",
+      "csaCode": "162",
+      "csaTitle": "Burlington-South Burlington-Barre, VT",
+      "name": "Burlington-South Burlington",
+      "countyFips": [
+        "50007",
+        "50011",
+        "50013"
+      ]
+    },
+    {
+      "cbsaCode": "15940",
+      "cbsaTitle": "Canton-Massillon, OH",
+      "csaCode": "184",
+      "csaTitle": "Cleveland-Akron-Canton, OH",
+      "name": "Canton-Massillon",
+      "countyFips": [
+        "39019",
+        "39151"
+      ]
+    },
+    {
+      "cbsaCode": "16020",
+      "cbsaTitle": "Cape Girardeau, MO-IL",
+      "csaCode": "164",
+      "csaTitle": "Cape Girardeau-Sikeston, MO-IL",
+      "name": "Cape Girardeau",
+      "countyFips": [
+        "17003",
+        "29017",
+        "29031"
+      ]
+    },
+    {
+      "cbsaCode": "16300",
+      "cbsaTitle": "Cedar Rapids, IA",
+      "csaCode": "168",
+      "csaTitle": "Cedar Rapids-Iowa City, IA",
+      "name": "Cedar Rapids",
+      "countyFips": [
+        "19011",
+        "19105",
+        "19113"
+      ]
+    },
+    {
+      "cbsaCode": "16620",
+      "cbsaTitle": "Charleston, WV",
+      "csaCode": "170",
+      "csaTitle": "Charleston-Huntington-Ashland, WV-OH-KY",
+      "name": "Charleston",
+      "countyFips": [
+        "54005",
+        "54015",
+        "54035",
+        "54039",
+        "54043"
+      ]
+    },
+    {
+      "cbsaCode": "16740",
+      "cbsaTitle": "Charlotte-Concord-Gastonia, NC-SC",
+      "csaCode": "172",
+      "csaTitle": "Charlotte-Concord, NC-SC",
+      "name": "Charlotte-Concord-Gastonia",
+      "countyFips": [
+        "37007",
+        "37025",
+        "37071",
+        "37097",
+        "37109",
+        "37119",
+        "37159",
+        "37179",
+        "45023",
+        "45057",
+        "45091"
+      ]
+    },
+    {
+      "cbsaCode": "16860",
+      "cbsaTitle": "Chattanooga, TN-GA",
+      "csaCode": "174",
+      "csaTitle": "Chattanooga-Cleveland-Dalton, TN-GA",
+      "name": "Chattanooga",
+      "countyFips": [
+        "13047",
+        "13083",
+        "13295",
+        "47065",
+        "47115",
+        "47153"
+      ]
+    },
+    {
+      "cbsaCode": "16980",
+      "cbsaTitle": "Chicago-Naperville-Elgin, IL-IN-WI",
+      "csaCode": "176",
+      "csaTitle": "Chicago-Naperville, IL-IN-WI",
+      "name": "Chicago-Naperville-Elgin",
+      "countyFips": [
+        "17031",
+        "17043",
+        "17063",
+        "17111",
+        "17197",
+        "17037",
+        "17089",
+        "17093",
+        "18073",
+        "18089",
+        "18111",
+        "18127",
+        "17097",
+        "55059"
+      ]
+    },
+    {
+      "cbsaCode": "17140",
+      "cbsaTitle": "Cincinnati, OH-KY-IN",
+      "csaCode": "178",
+      "csaTitle": "Cincinnati-Wilmington-Maysville, OH-KY-IN",
+      "name": "Cincinnati",
+      "countyFips": [
+        "18029",
+        "18047",
+        "18115",
+        "18161",
+        "21015",
+        "21023",
+        "21037",
+        "21077",
+        "21081",
+        "21117",
+        "21191",
+        "39015",
+        "39017",
+        "39025",
+        "39061",
+        "39165"
+      ]
+    },
+    {
+      "cbsaCode": "17420",
+      "cbsaTitle": "Cleveland, TN",
+      "csaCode": "174",
+      "csaTitle": "Chattanooga-Cleveland-Dalton, TN-GA",
+      "name": "Cleveland",
+      "countyFips": [
+        "47011",
+        "47139"
+      ]
+    },
+    {
+      "cbsaCode": "17460",
+      "cbsaTitle": "Cleveland-Elyria, OH",
+      "csaCode": "184",
+      "csaTitle": "Cleveland-Akron-Canton, OH",
+      "name": "Cleveland-Elyria",
+      "countyFips": [
+        "39035",
+        "39055",
+        "39085",
+        "39093",
+        "39103"
+      ]
+    },
+    {
+      "cbsaCode": "17860",
+      "cbsaTitle": "Columbia, MO",
+      "csaCode": "190",
+      "csaTitle": "Columbia-Moberly-Mexico, MO",
+      "name": "Columbia",
+      "countyFips": [
+        "29019",
+        "29053",
+        "29089"
+      ]
+    },
+    {
+      "cbsaCode": "17900",
+      "cbsaTitle": "Columbia, SC",
+      "csaCode": "192",
+      "csaTitle": "Columbia-Orangeburg-Newberry, SC",
+      "name": "Columbia",
+      "countyFips": [
+        "45017",
+        "45039",
+        "45055",
+        "45063",
+        "45079",
+        "45081"
+      ]
+    },
+    {
+      "cbsaCode": "17980",
+      "cbsaTitle": "Columbus, GA-AL",
+      "csaCode": "194",
+      "csaTitle": "Columbus-Auburn-Opelika, GA-AL",
+      "name": "Columbus",
+      "countyFips": [
+        "01113",
+        "13053",
+        "13145",
+        "13197",
+        "13215",
+        "13259",
+        "13263"
+      ]
+    },
+    {
+      "cbsaCode": "18140",
+      "cbsaTitle": "Columbus, OH",
+      "csaCode": "198",
+      "csaTitle": "Columbus-Marion-Zanesville, OH",
+      "name": "Columbus",
+      "countyFips": [
+        "39041",
+        "39045",
+        "39049",
+        "39073",
+        "39089",
+        "39097",
+        "39117",
+        "39127",
+        "39129",
+        "39159"
+      ]
+    },
+    {
+      "cbsaCode": "18580",
+      "cbsaTitle": "Corpus Christi, TX",
+      "csaCode": "204",
+      "csaTitle": "Corpus Christi-Kingsville-Alice, TX",
+      "name": "Corpus Christi",
+      "countyFips": [
+        "48355",
+        "48409"
+      ]
+    },
+    {
+      "cbsaCode": "19100",
+      "cbsaTitle": "Dallas-Fort Worth-Arlington, TX",
+      "csaCode": "206",
+      "csaTitle": "Dallas-Fort Worth, TX-OK",
+      "name": "Dallas-Fort Worth-Arlington",
+      "countyFips": [
+        "48085",
+        "48113",
+        "48121",
+        "48139",
+        "48231",
+        "48257",
+        "48397",
+        "48251",
+        "48367",
+        "48439",
+        "48497"
+      ]
+    },
+    {
+      "cbsaCode": "19140",
+      "cbsaTitle": "Dalton, GA",
+      "csaCode": "174",
+      "csaTitle": "Chattanooga-Cleveland-Dalton, TN-GA",
+      "name": "Dalton",
+      "countyFips": [
+        "13213",
+        "13313"
+      ]
+    },
+    {
+      "cbsaCode": "19340",
+      "cbsaTitle": "Davenport-Moline-Rock Island, IA-IL",
+      "csaCode": "209",
+      "csaTitle": "Davenport-Moline, IA-IL",
+      "name": "Davenport-Moline-Rock Island",
+      "countyFips": [
+        "17073",
+        "17131",
+        "17161",
+        "19163"
+      ]
+    },
+    {
+      "cbsaCode": "19430",
+      "cbsaTitle": "Dayton-Kettering, OH",
+      "csaCode": "212",
+      "csaTitle": "Dayton-Springfield-Kettering, OH",
+      "name": "Dayton-Kettering",
+      "countyFips": [
+        "39057",
+        "39109",
+        "39113"
+      ]
+    },
+    {
+      "cbsaCode": "19460",
+      "cbsaTitle": "Decatur, AL",
+      "csaCode": "290",
+      "csaTitle": "Huntsville-Decatur, AL",
+      "name": "Decatur",
+      "countyFips": [
+        "01079",
+        "01103"
+      ]
+    },
+    {
+      "cbsaCode": "19660",
+      "cbsaTitle": "Deltona-Daytona Beach-Ormond Beach, FL",
+      "csaCode": "422",
+      "csaTitle": "Orlando-Lakeland-Deltona, FL",
+      "name": "Deltona-Daytona Beach-Ormond Beach",
+      "countyFips": [
+        "12035",
+        "12127"
+      ]
+    },
+    {
+      "cbsaCode": "19740",
+      "cbsaTitle": "Denver-Aurora-Lakewood, CO",
+      "csaCode": "216",
+      "csaTitle": "Denver-Aurora, CO",
+      "name": "Denver-Aurora-Lakewood",
+      "countyFips": [
+        "08001",
+        "08005",
+        "08014",
+        "08019",
+        "08031",
+        "08035",
+        "08039",
+        "08047",
+        "08059",
+        "08093"
+      ]
+    },
+    {
+      "cbsaCode": "19780",
+      "cbsaTitle": "Des Moines-West Des Moines, IA",
+      "csaCode": "218",
+      "csaTitle": "Des Moines-Ames-West Des Moines, IA",
+      "name": "Des Moines-West Des Moines",
+      "countyFips": [
+        "19049",
+        "19077",
+        "19099",
+        "19121",
+        "19153",
+        "19181"
+      ]
+    },
+    {
+      "cbsaCode": "19820",
+      "cbsaTitle": "Detroit-Warren-Dearborn, MI",
+      "csaCode": "220",
+      "csaTitle": "Detroit-Warren-Ann Arbor, MI",
+      "name": "Detroit-Warren-Dearborn",
+      "countyFips": [
+        "26163",
+        "26087",
+        "26093",
+        "26099",
+        "26125",
+        "26147"
+      ]
+    },
+    {
+      "cbsaCode": "20020",
+      "cbsaTitle": "Dothan, AL",
+      "csaCode": "222",
+      "csaTitle": "Dothan-Ozark, AL",
+      "name": "Dothan",
+      "countyFips": [
+        "01061",
+        "01067",
+        "01069"
+      ]
+    },
+    {
+      "cbsaCode": "20500",
+      "cbsaTitle": "Durham-Chapel Hill, NC",
+      "csaCode": "450",
+      "csaTitle": "Raleigh-Durham-Cary, NC",
+      "name": "Durham-Chapel Hill",
+      "countyFips": [
+        "37037",
+        "37063",
+        "37077",
+        "37135",
+        "37145"
+      ]
+    },
+    {
+      "cbsaCode": "20740",
+      "cbsaTitle": "Eau Claire, WI",
+      "csaCode": "232",
+      "csaTitle": "Eau Claire-Menomonie, WI",
+      "name": "Eau Claire",
+      "countyFips": [
+        "55017",
+        "55035"
+      ]
+    },
+    {
+      "cbsaCode": "21020",
+      "cbsaTitle": "Elizabeth City, NC",
+      "csaCode": "545",
+      "csaTitle": "Virginia Beach-Norfolk, VA-NC",
+      "name": "Elizabeth City",
+      "countyFips": [
+        "37139",
+        "37143"
+      ]
+    },
+    {
+      "cbsaCode": "21060",
+      "cbsaTitle": "Elizabethtown-Fort Knox, KY",
+      "csaCode": "350",
+      "csaTitle": "Louisville/Jefferson County--Elizabethtown--Bardstown, KY-IN",
+      "name": "Elizabethtown-Fort Knox",
+      "countyFips": [
+        "21093",
+        "21123",
+        "21163"
+      ]
+    },
+    {
+      "cbsaCode": "21340",
+      "cbsaTitle": "El Paso, TX",
+      "csaCode": "238",
+      "csaTitle": "El Paso-Las Cruces, TX-NM",
+      "name": "El Paso",
+      "countyFips": [
+        "48141",
+        "48229"
+      ]
+    },
+    {
+      "cbsaCode": "22020",
+      "cbsaTitle": "Fargo, ND-MN",
+      "csaCode": "244",
+      "csaTitle": "Fargo-Wahpeton, ND-MN",
+      "name": "Fargo",
+      "countyFips": [
+        "27027",
+        "38017"
+      ]
+    },
+    {
+      "cbsaCode": "22180",
+      "cbsaTitle": "Fayetteville, NC",
+      "csaCode": "246",
+      "csaTitle": "Fayetteville-Sanford-Lumberton, NC",
+      "name": "Fayetteville",
+      "countyFips": [
+        "37051",
+        "37085",
+        "37093"
+      ]
+    },
+    {
+      "cbsaCode": "22800",
+      "cbsaTitle": "Fort Madison-Keokuk, IA-IL-MO",
+      "csaCode": "161",
+      "csaTitle": "Burlington-Fort Madison-Keokuk, IA-IL-MO",
+      "name": "Fort Madison-Keokuk",
+      "countyFips": [
+        "17067",
+        "19111",
+        "29045"
+      ]
+    },
+    {
+      "cbsaCode": "23060",
+      "cbsaTitle": "Fort Wayne, IN",
+      "csaCode": "258",
+      "csaTitle": "Fort Wayne-Huntington-Auburn, IN",
+      "name": "Fort Wayne",
+      "countyFips": [
+        "18003",
+        "18183"
+      ]
+    },
+    {
+      "cbsaCode": "23180",
+      "cbsaTitle": "Frankfort, KY",
+      "csaCode": "336",
+      "csaTitle": "Lexington-Fayette--Richmond--Frankfort, KY",
+      "name": "Frankfort",
+      "countyFips": [
+        "21005",
+        "21073"
+      ]
+    },
+    {
+      "cbsaCode": "23540",
+      "cbsaTitle": "Gainesville, FL",
+      "csaCode": "264",
+      "csaTitle": "Gainesville-Lake City, FL",
+      "name": "Gainesville",
+      "countyFips": [
+        "12001",
+        "12041",
+        "12075"
+      ]
+    },
+    {
+      "cbsaCode": "23980",
+      "cbsaTitle": "Glasgow, KY",
+      "csaCode": "150",
+      "csaTitle": "Bowling Green-Glasgow, KY",
+      "name": "Glasgow",
+      "countyFips": [
+        "21009",
+        "21169"
+      ]
+    },
+    {
+      "cbsaCode": "24020",
+      "cbsaTitle": "Glens Falls, NY",
+      "csaCode": "104",
+      "csaTitle": "Albany-Schenectady, NY",
+      "name": "Glens Falls",
+      "countyFips": [
+        "36113",
+        "36115"
+      ]
+    },
+    {
+      "cbsaCode": "24060",
+      "cbsaTitle": "Glenwood Springs, CO",
+      "csaCode": "233",
+      "csaTitle": "Edwards-Glenwood Springs, CO",
+      "name": "Glenwood Springs",
+      "countyFips": [
+        "08045",
+        "08097"
+      ]
+    },
+    {
+      "cbsaCode": "24340",
+      "cbsaTitle": "Grand Rapids-Kentwood, MI",
+      "csaCode": "266",
+      "csaTitle": "Grand Rapids-Kentwood-Muskegon, MI",
+      "name": "Grand Rapids-Kentwood",
+      "countyFips": [
+        "26067",
+        "26081",
+        "26117",
+        "26139"
+      ]
+    },
+    {
+      "cbsaCode": "24580",
+      "cbsaTitle": "Green Bay, WI",
+      "csaCode": "267",
+      "csaTitle": "Green Bay-Shawano, WI",
+      "name": "Green Bay",
+      "countyFips": [
+        "55009",
+        "55061",
+        "55083"
+      ]
+    },
+    {
+      "cbsaCode": "24660",
+      "cbsaTitle": "Greensboro-High Point, NC",
+      "csaCode": "268",
+      "csaTitle": "Greensboro--Winston-Salem--High Point, NC",
+      "name": "Greensboro-High Point",
+      "countyFips": [
+        "37081",
+        "37151",
+        "37157"
+      ]
+    },
+    {
+      "cbsaCode": "24860",
+      "cbsaTitle": "Greenville-Anderson, SC",
+      "csaCode": "273",
+      "csaTitle": "Greenville-Spartanburg-Anderson, SC",
+      "name": "Greenville-Anderson",
+      "countyFips": [
+        "45007",
+        "45045",
+        "45059",
+        "45077"
+      ]
+    },
+    {
+      "cbsaCode": "25020",
+      "cbsaTitle": "Guayama, PR",
+      "csaCode": "490",
+      "csaTitle": "San Juan-Bayamón, PR",
+      "name": "Guayama",
+      "countyFips": [
+        "72015",
+        "72057",
+        "72109"
+      ]
+    },
+    {
+      "cbsaCode": "25180",
+      "cbsaTitle": "Hagerstown-Martinsburg, MD-WV",
+      "csaCode": "548",
+      "csaTitle": "Washington-Baltimore-Arlington, DC-MD-VA-WV-PA",
+      "name": "Hagerstown-Martinsburg",
+      "countyFips": [
+        "24043",
+        "54003",
+        "54065"
+      ]
+    },
+    {
+      "cbsaCode": "25300",
+      "cbsaTitle": "Hannibal, MO",
+      "csaCode": "448",
+      "csaTitle": "Quincy-Hannibal, IL-MO",
+      "name": "Hannibal",
+      "countyFips": [
+        "29127",
+        "29173"
+      ]
+    },
+    {
+      "cbsaCode": "25420",
+      "cbsaTitle": "Harrisburg-Carlisle, PA",
+      "csaCode": "276",
+      "csaTitle": "Harrisburg-York-Lebanon, PA",
+      "name": "Harrisburg-Carlisle",
+      "countyFips": [
+        "42041",
+        "42043",
+        "42099"
+      ]
+    },
+    {
+      "cbsaCode": "25500",
+      "cbsaTitle": "Harrisonburg, VA",
+      "csaCode": "277",
+      "csaTitle": "Harrisonburg-Staunton, VA",
+      "name": "Harrisonburg",
+      "countyFips": [
+        "51165",
+        "51660"
+      ]
+    },
+    {
+      "cbsaCode": "25540",
+      "cbsaTitle": "Hartford-East Hartford-Middletown, CT",
+      "csaCode": "278",
+      "csaTitle": "Hartford-East Hartford, CT",
+      "name": "Hartford-East Hartford-Middletown",
+      "countyFips": [
+        "09003",
+        "09007",
+        "09013"
+      ]
+    },
+    {
+      "cbsaCode": "25620",
+      "cbsaTitle": "Hattiesburg, MS",
+      "csaCode": "279",
+      "csaTitle": "Hattiesburg-Laurel, MS",
+      "name": "Hattiesburg",
+      "countyFips": [
+        "28031",
+        "28035",
+        "28073",
+        "28111"
+      ]
+    },
+    {
+      "cbsaCode": "25720",
+      "cbsaTitle": "Heber, UT",
+      "csaCode": "482",
+      "csaTitle": "Salt Lake City-Provo-Orem, UT",
+      "name": "Heber",
+      "countyFips": [
+        "49043",
+        "49051"
+      ]
+    },
+    {
+      "cbsaCode": "25980",
+      "cbsaTitle": "Hinesville, GA",
+      "csaCode": "496",
+      "csaTitle": "Savannah-Hinesville-Statesboro, GA",
+      "name": "Hinesville",
+      "countyFips": [
+        "13179",
+        "13183"
+      ]
+    },
+    {
+      "cbsaCode": "26420",
+      "cbsaTitle": "Houston-The Woodlands-Sugar Land, TX",
+      "csaCode": "288",
+      "csaTitle": "Houston-The Woodlands, TX",
+      "name": "Houston-The Woodlands-Sugar Land",
+      "countyFips": [
+        "48015",
+        "48039",
+        "48071",
+        "48157",
+        "48167",
+        "48201",
+        "48291",
+        "48339",
+        "48473"
+      ]
+    },
+    {
+      "cbsaCode": "26580",
+      "cbsaTitle": "Huntington-Ashland, WV-KY-OH",
+      "csaCode": "170",
+      "csaTitle": "Charleston-Huntington-Ashland, WV-OH-KY",
+      "name": "Huntington-Ashland",
+      "countyFips": [
+        "21019",
+        "21043",
+        "21089",
+        "39087",
+        "54011",
+        "54079",
+        "54099"
+      ]
+    },
+    {
+      "cbsaCode": "26620",
+      "cbsaTitle": "Huntsville, AL",
+      "csaCode": "290",
+      "csaTitle": "Huntsville-Decatur, AL",
+      "name": "Huntsville",
+      "countyFips": [
+        "01083",
+        "01089"
+      ]
+    },
+    {
+      "cbsaCode": "26820",
+      "cbsaTitle": "Idaho Falls, ID",
+      "csaCode": "292",
+      "csaTitle": "Idaho Falls-Rexburg-Blackfoot, ID",
+      "name": "Idaho Falls",
+      "countyFips": [
+        "16019",
+        "16023",
+        "16051"
+      ]
+    },
+    {
+      "cbsaCode": "26900",
+      "cbsaTitle": "Indianapolis-Carmel-Anderson, IN",
+      "csaCode": "294",
+      "csaTitle": "Indianapolis-Carmel-Muncie, IN",
+      "name": "Indianapolis-Carmel-Anderson",
+      "countyFips": [
+        "18011",
+        "18013",
+        "18057",
+        "18059",
+        "18063",
+        "18081",
+        "18095",
+        "18097",
+        "18109",
+        "18133",
+        "18145"
+      ]
+    },
+    {
+      "cbsaCode": "26980",
+      "cbsaTitle": "Iowa City, IA",
+      "csaCode": "168",
+      "csaTitle": "Cedar Rapids-Iowa City, IA",
+      "name": "Iowa City",
+      "countyFips": [
+        "19103",
+        "19183"
+      ]
+    },
+    {
+      "cbsaCode": "27020",
+      "cbsaTitle": "Iron Mountain, MI-WI",
+      "csaCode": "361",
+      "csaTitle": "Marinette-Iron Mountain, WI-MI",
+      "name": "Iron Mountain",
+      "countyFips": [
+        "26043",
+        "55037"
+      ]
+    },
+    {
+      "cbsaCode": "27140",
+      "cbsaTitle": "Jackson, MS",
+      "csaCode": "298",
+      "csaTitle": "Jackson-Vicksburg-Brookhaven, MS",
+      "name": "Jackson",
+      "countyFips": [
+        "28029",
+        "28049",
+        "28051",
+        "28089",
+        "28121",
+        "28127",
+        "28163"
+      ]
+    },
+    {
+      "cbsaCode": "27180",
+      "cbsaTitle": "Jackson, TN",
+      "csaCode": "297",
+      "csaTitle": "Jackson-Brownsville, TN",
+      "name": "Jackson",
+      "countyFips": [
+        "47023",
+        "47033",
+        "47053",
+        "47113"
+      ]
+    },
+    {
+      "cbsaCode": "27260",
+      "cbsaTitle": "Jacksonville, FL",
+      "csaCode": "300",
+      "csaTitle": "Jacksonville-St. Marys-Palatka, FL-GA",
+      "name": "Jacksonville",
+      "countyFips": [
+        "12003",
+        "12019",
+        "12031",
+        "12089",
+        "12109"
+      ]
+    },
+    {
+      "cbsaCode": "27300",
+      "cbsaTitle": "Jacksonville, IL",
+      "csaCode": "522",
+      "csaTitle": "Springfield-Jacksonville-Lincoln, IL",
+      "name": "Jacksonville",
+      "countyFips": [
+        "17137",
+        "17171"
+      ]
+    },
+    {
+      "cbsaCode": "27740",
+      "cbsaTitle": "Johnson City, TN",
+      "csaCode": "304",
+      "csaTitle": "Johnson City-Kingsport-Bristol, TN-VA",
+      "name": "Johnson City",
+      "countyFips": [
+        "47019",
+        "47171",
+        "47179"
+      ]
+    },
+    {
+      "cbsaCode": "27860",
+      "cbsaTitle": "Jonesboro, AR",
+      "csaCode": "308",
+      "csaTitle": "Jonesboro-Paragould, AR",
+      "name": "Jonesboro",
+      "countyFips": [
+        "05031",
+        "05111"
+      ]
+    },
+    {
+      "cbsaCode": "27900",
+      "cbsaTitle": "Joplin, MO",
+      "csaCode": "309",
+      "csaTitle": "Joplin-Miami, MO-OK",
+      "name": "Joplin",
+      "countyFips": [
+        "29097",
+        "29145"
+      ]
+    },
+    {
+      "cbsaCode": "28140",
+      "cbsaTitle": "Kansas City, MO-KS",
+      "csaCode": "312",
+      "csaTitle": "Kansas City-Overland Park-Kansas City, MO-KS",
+      "name": "Kansas City",
+      "countyFips": [
+        "20091",
+        "20103",
+        "20107",
+        "20121",
+        "20209",
+        "29013",
+        "29025",
+        "29037",
+        "29047",
+        "29049",
+        "29095",
+        "29107",
+        "29165",
+        "29177"
+      ]
+    },
+    {
+      "cbsaCode": "28420",
+      "cbsaTitle": "Kennewick-Richland, WA",
+      "csaCode": "313",
+      "csaTitle": "Kennewick-Richland-Walla Walla, WA",
+      "name": "Kennewick-Richland",
+      "countyFips": [
+        "53005",
+        "53021"
+      ]
+    },
+    {
+      "cbsaCode": "28700",
+      "cbsaTitle": "Kingsport-Bristol, TN-VA",
+      "csaCode": "304",
+      "csaTitle": "Johnson City-Kingsport-Bristol, TN-VA",
+      "name": "Kingsport-Bristol",
+      "countyFips": [
+        "47073",
+        "47163",
+        "51169",
+        "51191",
+        "51520"
+      ]
+    },
+    {
+      "cbsaCode": "28780",
+      "cbsaTitle": "Kingsville, TX",
+      "csaCode": "204",
+      "csaTitle": "Corpus Christi-Kingsville-Alice, TX",
+      "name": "Kingsville",
+      "countyFips": [
+        "48261",
+        "48273"
+      ]
+    },
+    {
+      "cbsaCode": "28940",
+      "cbsaTitle": "Knoxville, TN",
+      "csaCode": "315",
+      "csaTitle": "Knoxville-Morristown-Sevierville, TN",
+      "name": "Knoxville",
+      "countyFips": [
+        "47001",
+        "47009",
+        "47013",
+        "47093",
+        "47105",
+        "47129",
+        "47145",
+        "47173"
+      ]
+    },
+    {
+      "cbsaCode": "29180",
+      "cbsaTitle": "Lafayette, LA",
+      "csaCode": "318",
+      "csaTitle": "Lafayette-Opelousas-Morgan City, LA",
+      "name": "Lafayette",
+      "countyFips": [
+        "22001",
+        "22045",
+        "22055",
+        "22099",
+        "22113"
+      ]
+    },
+    {
+      "cbsaCode": "29200",
+      "cbsaTitle": "Lafayette-West Lafayette, IN",
+      "csaCode": "320",
+      "csaTitle": "Lafayette-West Lafayette-Frankfort, IN",
+      "name": "Lafayette-West Lafayette",
+      "countyFips": [
+        "18007",
+        "18015",
+        "18157",
+        "18171"
+      ]
+    },
+    {
+      "cbsaCode": "29300",
+      "cbsaTitle": "LaGrange, GA-AL",
+      "csaCode": "122",
+      "csaTitle": "Atlanta--Athens-Clarke County--Sandy Springs, GA-AL",
+      "name": "LaGrange",
+      "countyFips": [
+        "01017",
+        "13285"
+      ]
+    },
+    {
+      "cbsaCode": "29340",
+      "cbsaTitle": "Lake Charles, LA",
+      "csaCode": "324",
+      "csaTitle": "Lake Charles-Jennings, LA",
+      "name": "Lake Charles",
+      "countyFips": [
+        "22019",
+        "22023"
+      ]
+    },
+    {
+      "cbsaCode": "29780",
+      "cbsaTitle": "Las Vegas, NM",
+      "csaCode": "106",
+      "csaTitle": "Albuquerque-Santa Fe-Las Vegas, NM",
+      "name": "Las Vegas",
+      "countyFips": [
+        "35033",
+        "35047"
+      ]
+    },
+    {
+      "cbsaCode": "29860",
+      "cbsaTitle": "Laurel, MS",
+      "csaCode": "279",
+      "csaTitle": "Hattiesburg-Laurel, MS",
+      "name": "Laurel",
+      "countyFips": [
+        "28061",
+        "28067"
+      ]
+    },
+    {
+      "cbsaCode": "30460",
+      "cbsaTitle": "Lexington-Fayette, KY",
+      "csaCode": "336",
+      "csaTitle": "Lexington-Fayette--Richmond--Frankfort, KY",
+      "name": "Lexington-Fayette",
+      "countyFips": [
+        "21017",
+        "21049",
+        "21067",
+        "21113",
+        "21209",
+        "21239"
+      ]
+    },
+    {
+      "cbsaCode": "30700",
+      "cbsaTitle": "Lincoln, NE",
+      "csaCode": "339",
+      "csaTitle": "Lincoln-Beatrice, NE",
+      "name": "Lincoln",
+      "countyFips": [
+        "31109",
+        "31159"
+      ]
+    },
+    {
+      "cbsaCode": "30780",
+      "cbsaTitle": "Little Rock-North Little Rock-Conway, AR",
+      "csaCode": "340",
+      "csaTitle": "Little Rock-North Little Rock, AR",
+      "name": "Little Rock-North Little Rock-Conway",
+      "countyFips": [
+        "05045",
+        "05053",
+        "05085",
+        "05105",
+        "05119",
+        "05125"
+      ]
+    },
+    {
+      "cbsaCode": "31080",
+      "cbsaTitle": "Los Angeles-Long Beach-Anaheim, CA",
+      "csaCode": "348",
+      "csaTitle": "Los Angeles-Long Beach, CA",
+      "name": "Los Angeles-Long Beach-Anaheim",
+      "countyFips": [
+        "06059",
+        "06037"
+      ]
+    },
+    {
+      "cbsaCode": "31140",
+      "cbsaTitle": "Louisville/Jefferson County, KY-IN",
+      "csaCode": "350",
+      "csaTitle": "Louisville/Jefferson County--Elizabethtown--Bardstown, KY-IN",
+      "name": "Louisville/Jefferson County",
+      "countyFips": [
+        "18019",
+        "18043",
+        "18061",
+        "18175",
+        "21029",
+        "21103",
+        "21111",
+        "21185",
+        "21211",
+        "21215"
+      ]
+    },
+    {
+      "cbsaCode": "31180",
+      "cbsaTitle": "Lubbock, TX",
+      "csaCode": "352",
+      "csaTitle": "Lubbock-Plainview-Levelland, TX",
+      "name": "Lubbock",
+      "countyFips": [
+        "48107",
+        "48303",
+        "48305"
+      ]
+    },
+    {
+      "cbsaCode": "31420",
+      "cbsaTitle": "Macon-Bibb County, GA",
+      "csaCode": "356",
+      "csaTitle": "Macon-Bibb County--Warner Robins, GA",
+      "name": "Macon-Bibb County",
+      "countyFips": [
+        "13021",
+        "13079",
+        "13169",
+        "13207",
+        "13289"
+      ]
+    },
+    {
+      "cbsaCode": "31540",
+      "cbsaTitle": "Madison, WI",
+      "csaCode": "357",
+      "csaTitle": "Madison-Janesville-Beloit, WI",
+      "name": "Madison",
+      "countyFips": [
+        "55021",
+        "55025",
+        "55045",
+        "55049"
+      ]
+    },
+    {
+      "cbsaCode": "31860",
+      "cbsaTitle": "Mankato, MN",
+      "csaCode": "359",
+      "csaTitle": "Mankato-New Ulm, MN",
+      "name": "Mankato",
+      "countyFips": [
+        "27013",
+        "27103"
+      ]
+    },
+    {
+      "cbsaCode": "31940",
+      "cbsaTitle": "Marinette, WI-MI",
+      "csaCode": "361",
+      "csaTitle": "Marinette-Iron Mountain, WI-MI",
+      "name": "Marinette",
+      "countyFips": [
+        "26109",
+        "55075"
+      ]
+    },
+    {
+      "cbsaCode": "32420",
+      "cbsaTitle": "Mayagüez, PR",
+      "csaCode": "364",
+      "csaTitle": "Mayagüez-San Germán, PR",
+      "name": "Mayagüez",
+      "countyFips": [
+        "72067",
+        "72083",
+        "72097"
+      ]
+    },
+    {
+      "cbsaCode": "32820",
+      "cbsaTitle": "Memphis, TN-MS-AR",
+      "csaCode": "368",
+      "csaTitle": "Memphis-Forrest City, TN-MS-AR",
+      "name": "Memphis",
+      "countyFips": [
+        "05035",
+        "28033",
+        "28093",
+        "28137",
+        "28143",
+        "47047",
+        "47157",
+        "47167"
+      ]
+    },
+    {
+      "cbsaCode": "33100",
+      "cbsaTitle": "Miami-Fort Lauderdale-Pompano Beach, FL",
+      "csaCode": "370",
+      "csaTitle": "Miami-Port St. Lucie-Fort Lauderdale, FL",
+      "name": "Miami-Fort Lauderdale-Pompano Beach",
+      "countyFips": [
+        "12011",
+        "12086",
+        "12099"
+      ]
+    },
+    {
+      "cbsaCode": "33260",
+      "cbsaTitle": "Midland, TX",
+      "csaCode": "372",
+      "csaTitle": "Midland-Odessa, TX",
+      "name": "Midland",
+      "countyFips": [
+        "48317",
+        "48329"
+      ]
+    },
+    {
+      "cbsaCode": "33340",
+      "cbsaTitle": "Milwaukee-Waukesha, WI",
+      "csaCode": "376",
+      "csaTitle": "Milwaukee-Racine-Waukesha, WI",
+      "name": "Milwaukee-Waukesha",
+      "countyFips": [
+        "55079",
+        "55089",
+        "55131",
+        "55133"
+      ]
+    },
+    {
+      "cbsaCode": "33460",
+      "cbsaTitle": "Minneapolis-St. Paul-Bloomington, MN-WI",
+      "csaCode": "378",
+      "csaTitle": "Minneapolis-St. Paul, MN-WI",
+      "name": "Minneapolis-St. Paul-Bloomington",
+      "countyFips": [
+        "27003",
+        "27019",
+        "27025",
+        "27037",
+        "27053",
+        "27059",
+        "27079",
+        "27095",
+        "27123",
+        "27139",
+        "27141",
+        "27163",
+        "27171",
+        "55093",
+        "55109"
+      ]
+    },
+    {
+      "cbsaCode": "33660",
+      "cbsaTitle": "Mobile, AL",
+      "csaCode": "380",
+      "csaTitle": "Mobile-Daphne-Fairhope, AL",
+      "name": "Mobile",
+      "countyFips": [
+        "01097",
+        "01129"
+      ]
+    },
+    {
+      "cbsaCode": "33740",
+      "cbsaTitle": "Monroe, LA",
+      "csaCode": "384",
+      "csaTitle": "Monroe-Ruston, LA",
+      "name": "Monroe",
+      "countyFips": [
+        "22067",
+        "22073",
+        "22111"
+      ]
+    },
+    {
+      "cbsaCode": "33860",
+      "cbsaTitle": "Montgomery, AL",
+      "csaCode": "388",
+      "csaTitle": "Montgomery-Selma-Alexander City, AL",
+      "name": "Montgomery",
+      "countyFips": [
+        "01001",
+        "01051",
+        "01085",
+        "01101"
+      ]
+    },
+    {
+      "cbsaCode": "34060",
+      "cbsaTitle": "Morgantown, WV",
+      "csaCode": "390",
+      "csaTitle": "Morgantown-Fairmont, WV",
+      "name": "Morgantown",
+      "countyFips": [
+        "54061",
+        "54077"
+      ]
+    },
+    {
+      "cbsaCode": "34100",
+      "cbsaTitle": "Morristown, TN",
+      "csaCode": "315",
+      "csaTitle": "Knoxville-Morristown-Sevierville, TN",
+      "name": "Morristown",
+      "countyFips": [
+        "47057",
+        "47063",
+        "47089"
+      ]
+    },
+    {
+      "cbsaCode": "34460",
+      "cbsaTitle": "Mount Sterling, KY",
+      "csaCode": "336",
+      "csaTitle": "Lexington-Fayette--Richmond--Frankfort, KY",
+      "name": "Mount Sterling",
+      "countyFips": [
+        "21011",
+        "21165",
+        "21173"
+      ]
+    },
+    {
+      "cbsaCode": "34820",
+      "cbsaTitle": "Myrtle Beach-Conway-North Myrtle Beach, SC-NC",
+      "csaCode": "396",
+      "csaTitle": "Myrtle Beach-Conway, SC-NC",
+      "name": "Myrtle Beach-Conway-North Myrtle Beach",
+      "countyFips": [
+        "37019",
+        "45051"
+      ]
+    },
+    {
+      "cbsaCode": "34980",
+      "cbsaTitle": "Nashville-Davidson--Murfreesboro--Franklin, TN",
+      "csaCode": "400",
+      "csaTitle": "Nashville-Davidson--Murfreesboro, TN",
+      "name": "Nashville-Davidson--Murfreesboro--Franklin",
+      "countyFips": [
+        "47015",
+        "47021",
+        "47037",
+        "47043",
+        "47111",
+        "47119",
+        "47147",
+        "47149",
+        "47159",
+        "47165",
+        "47169",
+        "47187",
+        "47189"
+      ]
+    },
+    {
+      "cbsaCode": "35100",
+      "cbsaTitle": "New Bern, NC",
+      "csaCode": "404",
+      "csaTitle": "New Bern-Morehead City, NC",
+      "name": "New Bern",
+      "countyFips": [
+        "37049",
+        "37103",
+        "37137"
+      ]
+    },
+    {
+      "cbsaCode": "35380",
+      "cbsaTitle": "New Orleans-Metairie, LA",
+      "csaCode": "406",
+      "csaTitle": "New Orleans-Metairie-Hammond, LA-MS",
+      "name": "New Orleans-Metairie",
+      "countyFips": [
+        "22051",
+        "22071",
+        "22075",
+        "22087",
+        "22089",
+        "22093",
+        "22095",
+        "22103"
+      ]
+    },
+    {
+      "cbsaCode": "35620",
+      "cbsaTitle": "New York-Newark-Jersey City, NY-NJ-PA",
+      "csaCode": "408",
+      "csaTitle": "New York-Newark, NY-NJ-CT-PA",
+      "name": "New York-Newark-Jersey City",
+      "countyFips": [
+        "36059",
+        "36103",
+        "34013",
+        "34019",
+        "34027",
+        "34037",
+        "34039",
+        "42103",
+        "34023",
+        "34025",
+        "34029",
+        "34035",
+        "34003",
+        "34017",
+        "34031",
+        "36005",
+        "36047",
+        "36061",
+        "36079",
+        "36081",
+        "36085",
+        "36087",
+        "36119"
+      ]
+    },
+    {
+      "cbsaCode": "35840",
+      "cbsaTitle": "North Port-Sarasota-Bradenton, FL",
+      "csaCode": "412",
+      "csaTitle": "North Port-Sarasota, FL",
+      "name": "North Port-Sarasota-Bradenton",
+      "countyFips": [
+        "12081",
+        "12115"
+      ]
+    },
+    {
+      "cbsaCode": "36260",
+      "cbsaTitle": "Ogden-Clearfield, UT",
+      "csaCode": "482",
+      "csaTitle": "Salt Lake City-Provo-Orem, UT",
+      "name": "Ogden-Clearfield",
+      "countyFips": [
+        "49003",
+        "49011",
+        "49029",
+        "49057"
+      ]
+    },
+    {
+      "cbsaCode": "36420",
+      "cbsaTitle": "Oklahoma City, OK",
+      "csaCode": "416",
+      "csaTitle": "Oklahoma City-Shawnee, OK",
+      "name": "Oklahoma City",
+      "countyFips": [
+        "40017",
+        "40027",
+        "40051",
+        "40081",
+        "40083",
+        "40087",
+        "40109"
+      ]
+    },
+    {
+      "cbsaCode": "36540",
+      "cbsaTitle": "Omaha-Council Bluffs, NE-IA",
+      "csaCode": "420",
+      "csaTitle": "Omaha-Council Bluffs-Fremont, NE-IA",
+      "name": "Omaha-Council Bluffs",
+      "countyFips": [
+        "19085",
+        "19129",
+        "19155",
+        "31025",
+        "31055",
+        "31153",
+        "31155",
+        "31177"
+      ]
+    },
+    {
+      "cbsaCode": "36620",
+      "cbsaTitle": "Ontario, OR-ID",
+      "csaCode": "147",
+      "csaTitle": "Boise City-Mountain Home-Ontario, ID-OR",
+      "name": "Ontario",
+      "countyFips": [
+        "16075",
+        "41045"
+      ]
+    },
+    {
+      "cbsaCode": "36740",
+      "cbsaTitle": "Orlando-Kissimmee-Sanford, FL",
+      "csaCode": "422",
+      "csaTitle": "Orlando-Lakeland-Deltona, FL",
+      "name": "Orlando-Kissimmee-Sanford",
+      "countyFips": [
+        "12069",
+        "12095",
+        "12097",
+        "12117"
+      ]
+    },
+    {
+      "cbsaCode": "36837",
+      "cbsaTitle": "Ottawa, IL",
+      "csaCode": "176",
+      "csaTitle": "Chicago-Naperville, IL-IN-WI",
+      "name": "Ottawa",
+      "countyFips": [
+        "17011",
+        "17099",
+        "17155"
+      ]
+    },
+    {
+      "cbsaCode": "37140",
+      "cbsaTitle": "Paducah, KY-IL",
+      "csaCode": "424",
+      "csaTitle": "Paducah-Mayfield, KY-IL",
+      "name": "Paducah",
+      "countyFips": [
+        "17127",
+        "21007",
+        "21139",
+        "21145"
+      ]
+    },
+    {
+      "cbsaCode": "37420",
+      "cbsaTitle": "Pampa, TX",
+      "csaCode": "108",
+      "csaTitle": "Amarillo-Pampa-Borger, TX",
+      "name": "Pampa",
+      "countyFips": [
+        "48179",
+        "48393"
+      ]
+    },
+    {
+      "cbsaCode": "37620",
+      "cbsaTitle": "Parkersburg-Vienna, WV",
+      "csaCode": "425",
+      "csaTitle": "Parkersburg-Marietta-Vienna, WV-OH",
+      "name": "Parkersburg-Vienna",
+      "countyFips": [
+        "54105",
+        "54107"
+      ]
+    },
+    {
+      "cbsaCode": "37860",
+      "cbsaTitle": "Pensacola-Ferry Pass-Brent, FL",
+      "csaCode": "426",
+      "csaTitle": "Pensacola-Ferry Pass, FL-AL",
+      "name": "Pensacola-Ferry Pass-Brent",
+      "countyFips": [
+        "12033",
+        "12113"
+      ]
+    },
+    {
+      "cbsaCode": "37980",
+      "cbsaTitle": "Philadelphia-Camden-Wilmington, PA-NJ-DE-MD",
+      "csaCode": "428",
+      "csaTitle": "Philadelphia-Reading-Camden, PA-NJ-DE-MD",
+      "name": "Philadelphia-Camden-Wilmington",
+      "countyFips": [
+        "34005",
+        "34007",
+        "34015",
+        "42017",
+        "42029",
+        "42091",
+        "42045",
+        "42101",
+        "10003",
+        "24015",
+        "34033"
+      ]
+    },
+    {
+      "cbsaCode": "38060",
+      "cbsaTitle": "Phoenix-Mesa-Chandler, AZ",
+      "csaCode": "429",
+      "csaTitle": "Phoenix-Mesa, AZ",
+      "name": "Phoenix-Mesa-Chandler",
+      "countyFips": [
+        "04013",
+        "04021"
+      ]
+    },
+    {
+      "cbsaCode": "38220",
+      "cbsaTitle": "Pine Bluff, AR",
+      "csaCode": "340",
+      "csaTitle": "Little Rock-North Little Rock, AR",
+      "name": "Pine Bluff",
+      "countyFips": [
+        "05025",
+        "05069",
+        "05079"
+      ]
+    },
+    {
+      "cbsaCode": "38300",
+      "cbsaTitle": "Pittsburgh, PA",
+      "csaCode": "430",
+      "csaTitle": "Pittsburgh-New Castle-Weirton, PA-OH-WV",
+      "name": "Pittsburgh",
+      "countyFips": [
+        "42003",
+        "42005",
+        "42007",
+        "42019",
+        "42051",
+        "42125",
+        "42129"
+      ]
+    },
+    {
+      "cbsaCode": "38580",
+      "cbsaTitle": "Point Pleasant, WV-OH",
+      "csaCode": "170",
+      "csaTitle": "Charleston-Huntington-Ashland, WV-OH-KY",
+      "name": "Point Pleasant",
+      "countyFips": [
+        "39053",
+        "54053"
+      ]
+    },
+    {
+      "cbsaCode": "38660",
+      "cbsaTitle": "Ponce, PR",
+      "csaCode": "434",
+      "csaTitle": "Ponce-Yauco-Coamo, PR",
+      "name": "Ponce",
+      "countyFips": [
+        "72001",
+        "72075",
+        "72113",
+        "72149"
+      ]
+    },
+    {
+      "cbsaCode": "38860",
+      "cbsaTitle": "Portland-South Portland, ME",
+      "csaCode": "438",
+      "csaTitle": "Portland-Lewiston-South Portland, ME",
+      "name": "Portland-South Portland",
+      "countyFips": [
+        "23005",
+        "23023",
+        "23031"
+      ]
+    },
+    {
+      "cbsaCode": "38900",
+      "cbsaTitle": "Portland-Vancouver-Hillsboro, OR-WA",
+      "csaCode": "440",
+      "csaTitle": "Portland-Vancouver-Salem, OR-WA",
+      "name": "Portland-Vancouver-Hillsboro",
+      "countyFips": [
+        "41005",
+        "41009",
+        "41051",
+        "41067",
+        "41071",
+        "53011",
+        "53059"
+      ]
+    },
+    {
+      "cbsaCode": "38940",
+      "cbsaTitle": "Port St. Lucie, FL",
+      "csaCode": "370",
+      "csaTitle": "Miami-Port St. Lucie-Fort Lauderdale, FL",
+      "name": "Port St. Lucie",
+      "countyFips": [
+        "12085",
+        "12111"
+      ]
+    },
+    {
+      "cbsaCode": "39100",
+      "cbsaTitle": "Poughkeepsie-Newburgh-Middletown, NY",
+      "csaCode": "408",
+      "csaTitle": "New York-Newark, NY-NJ-CT-PA",
+      "name": "Poughkeepsie-Newburgh-Middletown",
+      "countyFips": [
+        "36027",
+        "36071"
+      ]
+    },
+    {
+      "cbsaCode": "39300",
+      "cbsaTitle": "Providence-Warwick, RI-MA",
+      "csaCode": "148",
+      "csaTitle": "Boston-Worcester-Providence, MA-RI-NH-CT",
+      "name": "Providence-Warwick",
+      "countyFips": [
+        "25005",
+        "44001",
+        "44003",
+        "44005",
+        "44007",
+        "44009"
+      ]
+    },
+    {
+      "cbsaCode": "39340",
+      "cbsaTitle": "Provo-Orem, UT",
+      "csaCode": "482",
+      "csaTitle": "Salt Lake City-Provo-Orem, UT",
+      "name": "Provo-Orem",
+      "countyFips": [
+        "49023",
+        "49049"
+      ]
+    },
+    {
+      "cbsaCode": "39500",
+      "cbsaTitle": "Quincy, IL-MO",
+      "csaCode": "448",
+      "csaTitle": "Quincy-Hannibal, IL-MO",
+      "name": "Quincy",
+      "countyFips": [
+        "17001",
+        "29111"
+      ]
+    },
+    {
+      "cbsaCode": "39580",
+      "cbsaTitle": "Raleigh-Cary, NC",
+      "csaCode": "450",
+      "csaTitle": "Raleigh-Durham-Cary, NC",
+      "name": "Raleigh-Cary",
+      "countyFips": [
+        "37069",
+        "37101",
+        "37183"
+      ]
+    },
+    {
+      "cbsaCode": "39660",
+      "cbsaTitle": "Rapid City, SD",
+      "csaCode": "452",
+      "csaTitle": "Rapid City-Spearfish, SD",
+      "name": "Rapid City",
+      "countyFips": [
+        "46093",
+        "46103"
+      ]
+    },
+    {
+      "cbsaCode": "39900",
+      "cbsaTitle": "Reno, NV",
+      "csaCode": "456",
+      "csaTitle": "Reno-Carson City-Fernley, NV",
+      "name": "Reno",
+      "countyFips": [
+        "32029",
+        "32031"
+      ]
+    },
+    {
+      "cbsaCode": "39940",
+      "cbsaTitle": "Rexburg, ID",
+      "csaCode": "292",
+      "csaTitle": "Idaho Falls-Rexburg-Blackfoot, ID",
+      "name": "Rexburg",
+      "countyFips": [
+        "16043",
+        "16065"
+      ]
+    },
+    {
+      "cbsaCode": "40080",
+      "cbsaTitle": "Richmond-Berea, KY",
+      "csaCode": "336",
+      "csaTitle": "Lexington-Fayette--Richmond--Frankfort, KY",
+      "name": "Richmond-Berea",
+      "countyFips": [
+        "21065",
+        "21151"
+      ]
+    },
+    {
+      "cbsaCode": "40140",
+      "cbsaTitle": "Riverside-San Bernardino-Ontario, CA",
+      "csaCode": "348",
+      "csaTitle": "Los Angeles-Long Beach, CA",
+      "name": "Riverside-San Bernardino-Ontario",
+      "countyFips": [
+        "06065",
+        "06071"
+      ]
+    },
+    {
+      "cbsaCode": "40260",
+      "cbsaTitle": "Roanoke Rapids, NC",
+      "csaCode": "468",
+      "csaTitle": "Rocky Mount-Wilson-Roanoke Rapids, NC",
+      "name": "Roanoke Rapids",
+      "countyFips": [
+        "37083",
+        "37131"
+      ]
+    },
+    {
+      "cbsaCode": "40340",
+      "cbsaTitle": "Rochester, MN",
+      "csaCode": "462",
+      "csaTitle": "Rochester-Austin, MN",
+      "name": "Rochester",
+      "countyFips": [
+        "27039",
+        "27045",
+        "27109",
+        "27157"
+      ]
+    },
+    {
+      "cbsaCode": "40380",
+      "cbsaTitle": "Rochester, NY",
+      "csaCode": "464",
+      "csaTitle": "Rochester-Batavia-Seneca Falls, NY",
+      "name": "Rochester",
+      "countyFips": [
+        "36051",
+        "36055",
+        "36069",
+        "36073",
+        "36117",
+        "36123"
+      ]
+    },
+    {
+      "cbsaCode": "40420",
+      "cbsaTitle": "Rockford, IL",
+      "csaCode": "466",
+      "csaTitle": "Rockford-Freeport-Rochelle, IL",
+      "name": "Rockford",
+      "countyFips": [
+        "17007",
+        "17201"
+      ]
+    },
+    {
+      "cbsaCode": "40580",
+      "cbsaTitle": "Rocky Mount, NC",
+      "csaCode": "468",
+      "csaTitle": "Rocky Mount-Wilson-Roanoke Rapids, NC",
+      "name": "Rocky Mount",
+      "countyFips": [
+        "37065",
+        "37127"
+      ]
+    },
+    {
+      "cbsaCode": "40900",
+      "cbsaTitle": "Sacramento-Roseville-Folsom, CA",
+      "csaCode": "472",
+      "csaTitle": "Sacramento-Roseville, CA",
+      "name": "Sacramento-Roseville-Folsom",
+      "countyFips": [
+        "06017",
+        "06061",
+        "06067",
+        "06113"
+      ]
+    },
+    {
+      "cbsaCode": "41060",
+      "cbsaTitle": "St. Cloud, MN",
+      "csaCode": "378",
+      "csaTitle": "Minneapolis-St. Paul, MN-WI",
+      "name": "St. Cloud",
+      "countyFips": [
+        "27009",
+        "27145"
+      ]
+    },
+    {
+      "cbsaCode": "41140",
+      "cbsaTitle": "St. Joseph, MO-KS",
+      "csaCode": "312",
+      "csaTitle": "Kansas City-Overland Park-Kansas City, MO-KS",
+      "name": "St. Joseph",
+      "countyFips": [
+        "20043",
+        "29003",
+        "29021",
+        "29063"
+      ]
+    },
+    {
+      "cbsaCode": "41180",
+      "cbsaTitle": "St. Louis, MO-IL",
+      "csaCode": "476",
+      "csaTitle": "St. Louis-St. Charles-Farmington, MO-IL",
+      "name": "St. Louis",
+      "countyFips": [
+        "17005",
+        "17013",
+        "17027",
+        "17083",
+        "17117",
+        "17119",
+        "17133",
+        "17163",
+        "29071",
+        "29099",
+        "29113",
+        "29183",
+        "29189",
+        "29219",
+        "29510"
+      ]
+    },
+    {
+      "cbsaCode": "41420",
+      "cbsaTitle": "Salem, OR",
+      "csaCode": "440",
+      "csaTitle": "Portland-Vancouver-Salem, OR-WA",
+      "name": "Salem",
+      "countyFips": [
+        "41047",
+        "41053"
+      ]
+    },
+    {
+      "cbsaCode": "41540",
+      "cbsaTitle": "Salisbury, MD-DE",
+      "csaCode": "480",
+      "csaTitle": "Salisbury-Cambridge, MD-DE",
+      "name": "Salisbury",
+      "countyFips": [
+        "10005",
+        "24039",
+        "24045",
+        "24047"
+      ]
+    },
+    {
+      "cbsaCode": "41620",
+      "cbsaTitle": "Salt Lake City, UT",
+      "csaCode": "482",
+      "csaTitle": "Salt Lake City-Provo-Orem, UT",
+      "name": "Salt Lake City",
+      "countyFips": [
+        "49035",
+        "49045"
+      ]
+    },
+    {
+      "cbsaCode": "41700",
+      "cbsaTitle": "San Antonio-New Braunfels, TX",
+      "csaCode": "484",
+      "csaTitle": "San Antonio-New Braunfels-Pearsall, TX",
+      "name": "San Antonio-New Braunfels",
+      "countyFips": [
+        "48013",
+        "48019",
+        "48029",
+        "48091",
+        "48187",
+        "48259",
+        "48325",
+        "48493"
+      ]
+    },
+    {
+      "cbsaCode": "41860",
+      "cbsaTitle": "San Francisco-Oakland-Berkeley, CA",
+      "csaCode": "488",
+      "csaTitle": "San Jose-San Francisco-Oakland, CA",
+      "name": "San Francisco-Oakland-Berkeley",
+      "countyFips": [
+        "06001",
+        "06013",
+        "06075",
+        "06081",
+        "06041"
+      ]
+    },
+    {
+      "cbsaCode": "41900",
+      "cbsaTitle": "San Germán, PR",
+      "csaCode": "364",
+      "csaTitle": "Mayagüez-San Germán, PR",
+      "name": "San Germán",
+      "countyFips": [
+        "72023",
+        "72079",
+        "72121",
+        "72125"
+      ]
+    },
+    {
+      "cbsaCode": "41940",
+      "cbsaTitle": "San Jose-Sunnyvale-Santa Clara, CA",
+      "csaCode": "488",
+      "csaTitle": "San Jose-San Francisco-Oakland, CA",
+      "name": "San Jose-Sunnyvale-Santa Clara",
+      "countyFips": [
+        "06069",
+        "06085"
+      ]
+    },
+    {
+      "cbsaCode": "41980",
+      "cbsaTitle": "San Juan-Bayamón-Caguas, PR",
+      "csaCode": "490",
+      "csaTitle": "San Juan-Bayamón, PR",
+      "name": "San Juan-Bayamón-Caguas",
+      "countyFips": [
+        "72007",
+        "72009",
+        "72017",
+        "72019",
+        "72021",
+        "72025",
+        "72029",
+        "72031",
+        "72033",
+        "72035",
+        "72037",
+        "72039",
+        "72041",
+        "72045",
+        "72047",
+        "72051",
+        "72053",
+        "72054",
+        "72061",
+        "72063",
+        "72069",
+        "72077",
+        "72085",
+        "72087",
+        "72089",
+        "72091",
+        "72095",
+        "72101",
+        "72103",
+        "72105",
+        "72107",
+        "72119",
+        "72127",
+        "72129",
+        "72135",
+        "72137",
+        "72139",
+        "72143",
+        "72145",
+        "72151"
+      ]
+    },
+    {
+      "cbsaCode": "42340",
+      "cbsaTitle": "Savannah, GA",
+      "csaCode": "496",
+      "csaTitle": "Savannah-Hinesville-Statesboro, GA",
+      "name": "Savannah",
+      "countyFips": [
+        "13029",
+        "13051",
+        "13103"
+      ]
+    },
+    {
+      "cbsaCode": "42660",
+      "cbsaTitle": "Seattle-Tacoma-Bellevue, WA",
+      "csaCode": "500",
+      "csaTitle": "Seattle-Tacoma, WA",
+      "name": "Seattle-Tacoma-Bellevue",
+      "countyFips": [
+        "53033",
+        "53061",
+        "53053"
+      ]
+    },
+    {
+      "cbsaCode": "43020",
+      "cbsaTitle": "Shawano, WI",
+      "csaCode": "267",
+      "csaTitle": "Green Bay-Shawano, WI",
+      "name": "Shawano",
+      "countyFips": [
+        "55078",
+        "55115"
+      ]
+    },
+    {
+      "cbsaCode": "43340",
+      "cbsaTitle": "Shreveport-Bossier City, LA",
+      "csaCode": "508",
+      "csaTitle": "Shreveport-Bossier City-Minden, LA",
+      "name": "Shreveport-Bossier City",
+      "countyFips": [
+        "22015",
+        "22017",
+        "22031"
+      ]
+    },
+    {
+      "cbsaCode": "43780",
+      "cbsaTitle": "South Bend-Mishawaka, IN-MI",
+      "csaCode": "515",
+      "csaTitle": "South Bend-Elkhart-Mishawaka, IN-MI",
+      "name": "South Bend-Mishawaka",
+      "countyFips": [
+        "18141",
+        "26027"
+      ]
+    },
+    {
+      "cbsaCode": "44060",
+      "cbsaTitle": "Spokane-Spokane Valley, WA",
+      "csaCode": "518",
+      "csaTitle": "Spokane-Spokane Valley-Coeur d'Alene, WA-ID",
+      "name": "Spokane-Spokane Valley",
+      "countyFips": [
+        "53063",
+        "53065"
+      ]
+    },
+    {
+      "cbsaCode": "44100",
+      "cbsaTitle": "Springfield, IL",
+      "csaCode": "522",
+      "csaTitle": "Springfield-Jacksonville-Lincoln, IL",
+      "name": "Springfield",
+      "countyFips": [
+        "17129",
+        "17167"
+      ]
+    },
+    {
+      "cbsaCode": "44420",
+      "cbsaTitle": "Staunton, VA",
+      "csaCode": "277",
+      "csaTitle": "Harrisonburg-Staunton, VA",
+      "name": "Staunton",
+      "countyFips": [
+        "51015",
+        "51790",
+        "51820"
+      ]
+    },
+    {
+      "cbsaCode": "45060",
+      "cbsaTitle": "Syracuse, NY",
+      "csaCode": "532",
+      "csaTitle": "Syracuse-Auburn, NY",
+      "name": "Syracuse",
+      "countyFips": [
+        "36053",
+        "36067",
+        "36075"
+      ]
+    },
+    {
+      "cbsaCode": "45780",
+      "cbsaTitle": "Toledo, OH",
+      "csaCode": "534",
+      "csaTitle": "Toledo-Findlay-Tiffin, OH",
+      "name": "Toledo",
+      "countyFips": [
+        "39051",
+        "39095",
+        "39123",
+        "39173"
+      ]
+    },
+    {
+      "cbsaCode": "46140",
+      "cbsaTitle": "Tulsa, OK",
+      "csaCode": "538",
+      "csaTitle": "Tulsa-Muskogee-Bartlesville, OK",
+      "name": "Tulsa",
+      "countyFips": [
+        "40037",
+        "40111",
+        "40113",
+        "40117",
+        "40131",
+        "40143",
+        "40145"
+      ]
+    },
+    {
+      "cbsaCode": "46180",
+      "cbsaTitle": "Tupelo, MS",
+      "csaCode": "539",
+      "csaTitle": "Tupelo-Corinth, MS",
+      "name": "Tupelo",
+      "countyFips": [
+        "28057",
+        "28081",
+        "28115",
+        "28117"
+      ]
+    },
+    {
+      "cbsaCode": "47020",
+      "cbsaTitle": "Victoria, TX",
+      "csaCode": "544",
+      "csaTitle": "Victoria-Port Lavaca, TX",
+      "name": "Victoria",
+      "countyFips": [
+        "48175",
+        "48469"
+      ]
+    },
+    {
+      "cbsaCode": "47260",
+      "cbsaTitle": "Virginia Beach-Norfolk-Newport News, VA-NC",
+      "csaCode": "545",
+      "csaTitle": "Virginia Beach-Norfolk, VA-NC",
+      "name": "Virginia Beach-Norfolk-Newport News",
+      "countyFips": [
+        "37029",
+        "37053",
+        "37073",
+        "51073",
+        "51093",
+        "51095",
+        "51115",
+        "51175",
+        "51199",
+        "51550",
+        "51620",
+        "51650",
+        "51700",
+        "51710",
+        "51735",
+        "51740",
+        "51800",
+        "51810",
+        "51830"
+      ]
+    },
+    {
+      "cbsaCode": "47420",
+      "cbsaTitle": "Wahpeton, ND-MN",
+      "csaCode": "244",
+      "csaTitle": "Fargo-Wahpeton, ND-MN",
+      "name": "Wahpeton",
+      "countyFips": [
+        "27167",
+        "38077"
+      ]
+    },
+    {
+      "cbsaCode": "47580",
+      "cbsaTitle": "Warner Robins, GA",
+      "csaCode": "356",
+      "csaTitle": "Macon-Bibb County--Warner Robins, GA",
+      "name": "Warner Robins",
+      "countyFips": [
+        "13153",
+        "13225"
+      ]
+    },
+    {
+      "cbsaCode": "47900",
+      "cbsaTitle": "Washington-Arlington-Alexandria, DC-VA-MD-WV",
+      "csaCode": "548",
+      "csaTitle": "Washington-Baltimore-Arlington, DC-MD-VA-WV-PA",
+      "name": "Washington-Arlington-Alexandria",
+      "countyFips": [
+        "24021",
+        "24031",
+        "11001",
+        "24009",
+        "24017",
+        "24033",
+        "51013",
+        "51043",
+        "51047",
+        "51059",
+        "51061",
+        "51107",
+        "51113",
+        "51153",
+        "51157",
+        "51177",
+        "51179",
+        "51187",
+        "51510",
+        "51600",
+        "51610",
+        "51630",
+        "51683",
+        "51685",
+        "54037"
+      ]
+    },
+    {
+      "cbsaCode": "48140",
+      "cbsaTitle": "Wausau-Weston, WI",
+      "csaCode": "554",
+      "csaTitle": "Wausau-Stevens Point-Wisconsin Rapids, WI",
+      "name": "Wausau-Weston",
+      "countyFips": [
+        "55069",
+        "55073"
+      ]
+    },
+    {
+      "cbsaCode": "48260",
+      "cbsaTitle": "Weirton-Steubenville, WV-OH",
+      "csaCode": "430",
+      "csaTitle": "Pittsburgh-New Castle-Weirton, PA-OH-WV",
+      "name": "Weirton-Steubenville",
+      "countyFips": [
+        "39081",
+        "54009",
+        "54029"
+      ]
+    },
+    {
+      "cbsaCode": "48620",
+      "cbsaTitle": "Wichita, KS",
+      "csaCode": "556",
+      "csaTitle": "Wichita-Winfield, KS",
+      "name": "Wichita",
+      "countyFips": [
+        "20015",
+        "20079",
+        "20173",
+        "20191"
+      ]
+    },
+    {
+      "cbsaCode": "49020",
+      "cbsaTitle": "Winchester, VA-WV",
+      "csaCode": "548",
+      "csaTitle": "Washington-Baltimore-Arlington, DC-MD-VA-WV-PA",
+      "name": "Winchester",
+      "countyFips": [
+        "51069",
+        "51840",
+        "54027"
+      ]
+    },
+    {
+      "cbsaCode": "49180",
+      "cbsaTitle": "Winston-Salem, NC",
+      "csaCode": "268",
+      "csaTitle": "Greensboro--Winston-Salem--High Point, NC",
+      "name": "Winston-Salem",
+      "countyFips": [
+        "37057",
+        "37059",
+        "37067",
+        "37169",
+        "37197"
+      ]
+    },
+    {
+      "cbsaCode": "49340",
+      "cbsaTitle": "Worcester, MA-CT",
+      "csaCode": "148",
+      "csaTitle": "Boston-Worcester-Providence, MA-RI-NH-CT",
+      "name": "Worcester",
+      "countyFips": [
+        "09015",
+        "25027"
+      ]
+    },
+    {
+      "cbsaCode": "49500",
+      "cbsaTitle": "Yauco, PR",
+      "csaCode": "434",
+      "csaTitle": "Ponce-Yauco-Coamo, PR",
+      "name": "Yauco",
+      "countyFips": [
+        "72055",
+        "72059",
+        "72111",
+        "72153"
+      ]
+    },
+    {
+      "cbsaCode": "49660",
+      "cbsaTitle": "Youngstown-Warren-Boardman, OH-PA",
+      "csaCode": "566",
+      "csaTitle": "Youngstown-Warren, OH-PA",
+      "name": "Youngstown-Warren-Boardman",
+      "countyFips": [
+        "39099",
+        "39155",
+        "42085"
+      ]
+    },
+    {
+      "cbsaCode": "49700",
+      "cbsaTitle": "Yuba City, CA",
+      "csaCode": "472",
+      "csaTitle": "Sacramento-Roseville, CA",
+      "name": "Yuba City",
+      "countyFips": [
+        "06101",
+        "06115"
+      ]
+    }
+  ]
+}

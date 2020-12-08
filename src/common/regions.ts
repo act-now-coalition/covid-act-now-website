@@ -1,9 +1,10 @@
 import { createContext, useContext } from 'react';
-import { chain, fromPairs } from 'lodash';
+import { chain, deburr, words, fromPairs, sum } from 'lodash';
 import urlJoin from 'url-join';
 import { assert } from 'common/utils';
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 import countyAdjacencyMsa from './data/county_adjacency_msa.json';
+import msaDefinitions from './data/msa-data.json';
 const { state_dataset, state_county_map_dataset } = US_STATE_DATASET;
 
 export type FipsCode = string;
@@ -11,7 +12,7 @@ export type FipsCode = string;
 export enum RegionType {
   COUNTY = 'county',
   STATE = 'state',
-  CBSA = 'CBSA',
+  MSA = 'MSA',
 }
 
 export abstract class Region {
@@ -76,6 +77,27 @@ export class County extends Region {
   }
 }
 
+export class MetroArea extends Region {
+  constructor(
+    name: string,
+    urlSegment: string,
+    fipsCode: FipsCode,
+    population: number,
+    public counties: County[],
+  ) {
+    super(name, urlSegment, fipsCode, population, RegionType.MSA);
+    this.counties = counties;
+  }
+
+  fullName() {
+    return `${this.name}`;
+  }
+
+  relativeUrl() {
+    return `us/metro/${this.urlSegment}`;
+  }
+}
+
 const states: State[] = chain(state_dataset)
   .map(stateInfo => {
     return new State(
@@ -119,16 +141,62 @@ const counties: County[] = chain(state_county_map_dataset)
   })
   .value();
 
+const countiesByFips = fromPairs(
+  counties.map(county => [county.fipsCode, county]),
+);
+
+// Seattle-Tacoma, WA -> seattle-tacoma_wa
+function urlFormat(name: string) {
+  return name
+    .toLowerCase()
+    .split(', ')
+    .map(part => deburr(words(part).join('-')))
+    .join('_');
+}
+
+const metroAreas: MetroArea[] = msaDefinitions.msa_regions.map(metroArea => {
+  // TODO: Handle counties with FIPS: 36005, 360047, 36081, 36085, those
+  // are part of MSAs, but not in the countiesByFips map
+  const metroAreaCounties: County[] = metroArea.countyFips
+    .map(countyFips => countiesByFips[countyFips])
+    .filter(county => county);
+
+  const totalPopulation = sum(
+    metroAreaCounties.map(county => county.population),
+  );
+
+  return new MetroArea(
+    metroArea.csaTitle,
+    urlFormat(metroArea.csaTitle),
+    metroArea.cbsaCode,
+    totalPopulation,
+    metroAreaCounties,
+  );
+});
+
+const metroAreasByFips = fromPairs(
+  metroAreas.map(metroArea => [metroArea.fipsCode, metroArea]),
+);
+
 class RegionDB {
   private regions: Region[];
+  private regionsByFips: { [fipsCode: string]: State | County | MetroArea };
 
-  constructor(public states: State[], public counties: County[]) {
-    this.regions = [...states, ...counties];
+  constructor(
+    public states: State[],
+    public counties: County[],
+    public metroAreas: MetroArea[],
+  ) {
+    this.regions = [...states, ...counties, ...metroAreas];
+    this.regionsByFips = {
+      ...statesByFips,
+      ...countiesByFips,
+      ...metroAreasByFips,
+    };
   }
 
-  findByFipsCode(fipsCode: FipsCode): Region | null {
-    const region = this.regions.find(region => region.fipsCode === fipsCode);
-    return region || null;
+  findByFipsCode(fipsCode: FipsCode): State | County | MetroArea | null {
+    return this.regionsByFips[fipsCode] || null;
   }
 
   findStateByUrlParams(stateUrlSegment: string): State | null {
@@ -160,6 +228,13 @@ class RegionDB {
     return foundCounty || null;
   }
 
+  findMetroAreaByUrlParams(metroAreaUrlSegment: string): MetroArea | null {
+    const foundMetroArea = this.metroAreas.find(metroArea =>
+      equalLower(metroArea.urlSegment, metroAreaUrlSegment),
+    );
+    return foundMetroArea || null;
+  }
+
   all(): Region[] {
     return this.regions;
   }
@@ -169,7 +244,7 @@ function equalLower(a: string, b: string) {
   return a.toLowerCase() === b.toLowerCase();
 }
 
-const regions = new RegionDB(states, counties);
+const regions = new RegionDB(states, counties, metroAreas);
 export default regions;
 
 // We are careful to never call `useRegion()` in components that are not
