@@ -61,13 +61,11 @@ const MetricExplainer = () => {
             <MarkdownContent source={question.answer} />
           </Fragment>
         ))}
-        <ExplainersHeading2 id={metricsID}>{metricsHeader}</ExplainersHeading2>
         {metricSections.map(section => (
           <Fragment key={section.sectionId}>
-            <Heading3 id={section.sectionId}>{section.sectionHeader}</Heading3>
-            {section.sectionSubheader && (
-              <Paragraph>{section.sectionSubheader}</Paragraph>
-            )}
+            <ExplainersHeading2 id={section.sectionId}>
+              {section.sectionHeader}
+            </ExplainersHeading2>
             <MarkdownContent source={section.sectionIntro} />
             <ThermometerBox>{getThermometer(section.sectionId)}</ThermometerBox>
             {section.questions.map(question => (
