@@ -51,27 +51,6 @@ const NewFeatureCopy = (props: {
   );
 };
 
-// const LocationPageHeading = (props: { projections: Projections }) => {
-//   const { isEmbed } = useEmbed();
-
-//   const displayName = props.projections.countyName ? (
-//     <>
-//       <strong>{props.projections.countyName}, </strong>
-//       <a
-//         href={`${
-//           isEmbed ? '/embed' : ''
-//         }/us/${props.projections.stateCode.toLowerCase()}`}
-//       >
-//         {props.projections.stateCode}
-//       </a>
-//     </>
-//   ) : (
-//     <strong>{props.projections.stateName}</strong>
-//   );
-
-//   return <span>{displayName}</span>;
-// };
-
 const noop = () => {};
 
 const LocationPageHeader = (props: {
@@ -93,8 +72,6 @@ const LocationPageHeader = (props: {
   //TODO (chelsi): get rid of this use of 'magic' numbers
   const headerTopMargin = !hasStats ? -202 : -218;
   const headerBottomMargin = !hasStats ? 0 : 0;
-
-  const locationName = region.name;
 
   const alarmLevel = projections.getAlarmLevel();
 
@@ -147,7 +124,7 @@ const LocationPageHeader = (props: {
               <SectionColumn>
                 <ColumnTitle>Covid risk level</ColumnTitle>
                 <LevelDescription>{levelInfo.summary}</LevelDescription>
-                <Copy>{levelInfo.detail(locationName)}</Copy>
+                <Copy>{levelInfo.detail(region.name)}</Copy>
               </SectionColumn>
             </SectionHalf>
             <SectionHalf>
@@ -158,7 +135,7 @@ const LocationPageHeader = (props: {
                   <HospitalizationsAlert projection={projections.primary} />
                 ) : (
                   <NewFeatureCopy
-                    locationName={locationName}
+                    locationName={region.name}
                     onNewUpdateClick={props.onNewUpdateClick}
                   />
                 )}
