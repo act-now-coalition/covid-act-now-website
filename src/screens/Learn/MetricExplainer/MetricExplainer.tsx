@@ -89,7 +89,7 @@ function getThermometer(sectionId: string) {
     'infection-rate': Metric.CASE_GROWTH_RATE,
     'positive-test-rate': Metric.POSITIVE_TESTS,
     'icu-headroom-used': Metric.HOSPITAL_USAGE,
-    'contact-tracers-hired': Metric.CONTACT_TRACING,
+    'tracers-hired': Metric.CONTACT_TRACING,
   };
 
   const metric = mapSectionIdMetric[sectionId];
