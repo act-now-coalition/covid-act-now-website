@@ -237,11 +237,11 @@ export const [introSection, metricSections] = partition(
 // TODO (pablo): Should we have a short heading for categories?
 export const learnPages: TocItem[] = [
   {
-    label: 'Glossary',
+    label: glossaryContent.header,
     to: '/glossary',
   },
   {
-    label: 'FAQ',
+    label: faqContent.header,
     to: '/faq',
     items: faqContent.sections.map(section => ({
       to: `/faq#${section.sectionId}`,
@@ -253,7 +253,7 @@ export const learnPages: TocItem[] = [
     to: '/deep-dives',
   },
   {
-    label: 'Case studies',
+    label: caseStudiesContent.header,
     to: '/case-studies',
     items: categoriesWithStudies.map(category => ({
       to: `/case-studies#${category.categoryId}`,
@@ -261,7 +261,7 @@ export const learnPages: TocItem[] = [
     })),
   },
   {
-    label: 'Metric explainer',
+    label: metricExplainersContent.pageHeader,
     to: '/covid-risk-levels-metrics',
     items: metricExplainersContent.sections.map(section => ({
       to: `/covid-risk-levels-metrics#${section.sectionId}`,
