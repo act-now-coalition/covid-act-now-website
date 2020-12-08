@@ -5,7 +5,7 @@
   "sections": [
     {
       "sectionId": "how-covid-risk-is-determined",
-      "sectionIntro": "### What does the overall risk level for a location mean?\n\nA location’s overall risk level takes into account the following five metrics: [daily new cases](/covid-risk-levels-metrics#daily-new-cases) (incidence), [infection rate](/covid-risk-levels-metrics#infection-rate) (Rt), [positive test rate](/covid-risk-levels-metrics#positive-test-rate), [ICU headroom used](/covid-risk-levels-metrics#icu-headroom-used), and [contact tracers hired](/covid-risk-levels-metrics#contact-tracers-hired).\n\nIf a region’s risk level for daily new cases is green, then its overall risk level is green. Otherwise, a region’s overall risk level reflects the highest risk level across all five metrics.",
+      "sectionIntro": "### What does the overall risk level for a location mean?\n\nA location’s overall risk level takes into account the following five metrics: [daily new cases](/covid-risk-levels-metrics#daily-new-cases) (incidence), [infection rate](/covid-risk-levels-metrics#infection-rate) (Rt), [positive test rate](/covid-risk-levels-metrics#positive-test-rate), [ICU headroom used](/covid-risk-levels-metrics#icu-headroom-used), and [tracers hired](/covid-risk-levels-metrics#tracers-hired).\n\nIf a region’s risk level for daily new cases is green, then its overall risk level is green. Otherwise, a region’s overall risk level reflects the highest risk level across all five metrics.",
       "questions": [
         {
           "question": "What does the deepest red color indicate?",
@@ -144,9 +144,9 @@
       ]
     },
     {
-      "sectionHeader": " Contact tracers hired",
-      "sectionId": "contact-tracers-hired",
-      "sectionIntro": "**Contact tracers hired is** **the number of contact tracers that are hired in a state or county, relative to the number of cases.**",
+      "sectionHeader": "Tracers hired",
+      "sectionId": "tracers-hired",
+      "sectionIntro": "**Tracers hired is** **the number of contact tracers that are hired in a state or county, relative to the number of cases.**",
       "questions": [
         {
           "question": "Why is contact tracing important?",
@@ -154,13 +154,13 @@
           "answer": "In order to halt the spread of COVID, it is critical that enough tracing capacity exists to rapidly trace the contacts of people who test positive for COVID. Those contacts can be tested, quarantined (if necessary), and asked about whom else they have come into contact with."
         },
         {
-          "question": "What are your sources and methodology for outputting contact tracers hired?",
+          "question": "What are your sources and methodology for outputting tracers hired?",
           "questionId": "contact-tracing-sources",
           "answer": "We know that measuring contact tracing capacity solely by the number of staff is not reliable, and we are working on a [more accurate metric](https://contacttracingplaybook.resolvetosavelives.org/checklists/metrics) to assess contact tracing capacity. One of the best metrics of success for a contact tracing program is the percentage of new cases traced to a known source. However, very few states are reporting this number.\n\nTherefore, as a proxy, **we currently look at the number of contact tracers on staff for each state to estimate the number of contacts that could be traced within 48 hours if the contact tracing program were otherwise working perfectly**. This stems from [expert recommendations](https://covidlocal.org/assets/documents/COVID%20Local%20Metrics%20overview.pdf) that at least 90 percent of contacts for each new case must be traced within 48 hours in order to contain COVID, and expert estimations that tracing each new case within 48 hours requires an average of five contact tracers per new case, as well as fast testing.\n\nWe source our state-level tracers hired data from [Test and Trace](https://testandtrace.com/). If you would like to learn more, check out [our data sources](https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit)."
         },
         {
           "question": "How were the risk levels for tracers hired determined?",
-          "questionId": "contact-tracers-hired-thresholds",
+          "questionId": "tracers-hired-thresholds",
           "answer": "We do not include the critical (**red**) range for contact tracing; in other words it will no longer be possible to be marked critical (**red**) due to low numbers of contact tracing staff alone. While low numbers of contact tracing staff should be acknowledged, it doesn’t indicate an active or imminent outbreak. In addition, contact tracing is one our least refined data sets, largely because states themselves are highly variable in their reporting of contact tracing data.\n\nThe boundaries between yellow and orange are tricky. In the absence of expert consensus, we have set inclusive lower thresholds for yellow and orange. We peg the cut off between yellow and orange at 10 percent."
         }
       ]
