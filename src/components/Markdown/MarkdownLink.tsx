@@ -3,7 +3,7 @@ import { HashLink } from 'react-router-hash-link';
 import { scrollWithOffset } from 'components/TableOfContents';
 import { isValidURL, isInternalLink } from './utils';
 import TwitterEmbed, { isTwitterEmbed } from './TwitterEmbed';
-
+import YouTubeEmbed, { isYouTubeEmbed } from './YoutubeEmbed';
 /**
  * Custom hyperlink for Markdown content. If the link is external, open it on
  * a new tab. If the link is internal, use the HashLink component to render
@@ -21,6 +21,10 @@ const MarkdownLink: React.FC<{
 
   if (isTwitterEmbed(href)) {
     return <TwitterEmbed statusUrl={href} />;
+  }
+
+  if (isYouTubeEmbed(href)) {
+    return <YouTubeEmbed embedUrl={href} />;
   }
 
   return isInternalLink(href) ? (
