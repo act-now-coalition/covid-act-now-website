@@ -20,7 +20,7 @@
         {
           "question": "How did we develop our framework?",
           "questionId": "framework",
-          "answer": "Covid Act Now worked alongside a network of research, policy, and public health experts convened by Harvard’s Global Health Institute and Edmond J. Safra Center for Ethics to develop the [Key Metrics for COVID Suppression](https://globalhealth.harvard.edu/key-metrics-for-covid-suppression-researchers-and-public-health-experts-unite-to-bring-clarity-to-key-metrics-guiding-coronavirus-response/) framework.\n\nCentral to this framework is our five-color COVID warning system, which communicates the severity of a location’s outbreak and offers corresponding guidance on mitigation efforts needed at each risk level. This facilitates a unified approach with common metrics, enabling leaders at all levels to anticipate and adequately respond to their community’s COVID spread, and informing the general public on their community’s risk to COVID. To develop this framework, we prioritized metrics vital to guiding suppression efforts that allow a community to safely reopen."
+          "answer": "Covid Act Now worked alongside a network of research, policy, and public health experts convened by Harvard’s Global Health Institute and Edmond J. Safra Center for Ethics to develop the [\"Key Metrics for COVID Suppression\"](https://globalhealth.harvard.edu/key-metrics-for-covid-suppression-researchers-and-public-health-experts-unite-to-bring-clarity-to-key-metrics-guiding-coronavirus-response/) framework.\n\nCentral to this framework is our five-color COVID warning system, which communicates the severity of a location’s outbreak and offers corresponding guidance on mitigation efforts needed at each risk level. This facilitates a unified approach with common metrics, enabling leaders at all levels to anticipate and adequately respond to their community’s COVID spread, and informing the general public on their community’s risk to COVID. To develop this framework, we prioritized metrics vital to guiding suppression efforts that allow a community to safely reopen."
         }
       ],
       "sectionHeader": "How COVID risk is determined",
@@ -50,7 +50,7 @@
         {
           "question": "What are your sources and methodology for daily new cases?",
           "questionId": "daily-new-cases-sources",
-          "answer": "When calculating daily new cases, we look at the average cases per 100,000 people in a location, which is calculated as a seven-day average of daily new cases, divided by the population, divided by 100,000.\n\n![Daily new cases metric calculation](/images_cms/daily-new-cases-calculation.png \"Daily new cases calculation\")\n\nTo calculate daily new cases, we use new positive cases *[from The New York Times](https://developer.nytimes.com/covid)*. If you would like to learn more, check out [our data sources](https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit)."
+          "answer": "When calculating daily new cases, we look at the average cases per 100,000 people in a location, which is calculated as a seven-day average of daily new cases, divided by the population, divided by 100,000.\n\n![Daily new cases metric calculation](/images_cms/daily-new-cases-calculation.png \"Daily new cases calculation\")\n\nTo calculate daily new cases, we use new positive cases [from The New York Times](https://developer.nytimes.com/covid). If you would like to learn more, check out [our data sources](https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit)."
         },
         {
           "question": "How were the risk levels for daily new cases determined?",
@@ -106,7 +106,7 @@
         {
           "question": "How were risk levels for positive test rate determined?",
           "questionId": "positive-test-rate-thresholds",
-          "answer": "There is a growing [consensus](https://globalhealth.harvard.edu/evidence-roundup-why-positive-test-rates-need-to-fall-below-3/) that driving the positive test rate downwards of 3 percent should be a priority.\n\nIt can also be helpful to look at countries that have been most effective and efficient in their containment of COVID. South Korea was back to normal activity with a test positivity rate below 3 percent. As of November 2020, *[South Korea’s test positivity](http://ncov.mohw.go.kr/en/)* was 1 percent."
+          "answer": "There is a growing [consensus](https://globalhealth.harvard.edu/evidence-roundup-why-positive-test-rates-need-to-fall-below-3/) that driving the positive test rate downwards of 3 percent should be a priority.\n\nIt can also be helpful to look at countries that have been most effective and efficient in their containment of COVID. South Korea was back to normal activity with a test positivity rate below 3 percent. As of November 2020, [South Korea’s test positivity](http://ncov.mohw.go.kr/en/) was 1 percent."
         }
       ]
     },
@@ -119,7 +119,7 @@
         {
           "question": "Why did we choose ICU headroom used to measure hospital capacity?",
           "questionId": "why-icu-headroom-to-measure-hospital-capacity",
-          "answer": "*[The White House’s reopening plan](https://www.whitehouse.gov/openingamerica/)*, *[AEI’s plan](https://www.aei.org/research-products/report/national-coronavirus-response-a-road-map-to-reopening/)*, and *[Harvard University’s Safra Center for Ethic’s plan](https://ethics.harvard.edu/covid-roadmap)* all note ICU headroom used as a key metric for reopening safely. Our metric measures the ability of an intensive care unit (ICU) to handle a surge of COVID patients in the case of an outbreak.\n\nWhen ICU capacity is reached, not only does that make it difficult for COVID ICU patients to receive care, but non-COVID ICU patients as well. This can lead to unnecessary deaths."
+          "answer": "[The White House’s reopening plan](https://www.whitehouse.gov/openingamerica/), [AEI’s plan](https://www.aei.org/research-products/report/national-coronavirus-response-a-road-map-to-reopening/), and [Harvard University’s Safra Center for Ethic’s plan](https://ethics.harvard.edu/covid-roadmap) all note ICU headroom used as a key metric for reopening safely. Our metric measures the ability of an intensive care unit (ICU) to handle a surge of COVID patients in the case of an outbreak.\n\nWhen ICU capacity is reached, not only does that make it difficult for COVID ICU patients to receive care, but non-COVID ICU patients as well. This can lead to unnecessary deaths."
         },
         {
           "question": "How is your metric different from ICU utilization that I see on my state’s dashboard?",
