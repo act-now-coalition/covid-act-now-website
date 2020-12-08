@@ -25,9 +25,6 @@ const MetricExplainer = () => {
     pageIntro,
     metricsHeader,
     metricsID,
-    frameworkHeader,
-    frameworkID,
-    frameworkBody,
     riskHeader,
     riskID,
     metadataTitle,
@@ -75,8 +72,6 @@ const MetricExplainer = () => {
             ))}
           </Fragment>
         ))}
-        <Heading2 id={frameworkID}>{frameworkHeader}</Heading2>
-        <MarkdownContent source={frameworkBody} />
       </PageContent>
     </Fragment>
   );

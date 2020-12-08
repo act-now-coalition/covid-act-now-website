@@ -224,9 +224,6 @@ export interface MetricExplainersContent {
   sections: Section[];
   metricsHeader: string;
   metricsID: string;
-  frameworkHeader: string;
-  frameworkID: string;
-  frameworkBody: Markdown;
   metadataTitle: string;
   metadataDescription: string;
   riskHeader: string;
@@ -276,10 +273,6 @@ export const learnPages: TocItem[] = [
       {
         to: `/metric-explainer#${metricExplainersContent.metricsID}`,
         label: `${metricExplainersContent.metricsHeader}`,
-      },
-      {
-        to: `/metric-explainer#${metricExplainersContent.frameworkID}`,
-        label: `${metricExplainersContent.frameworkHeader}`,
       },
     ],
   },
