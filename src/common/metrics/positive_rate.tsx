@@ -162,7 +162,7 @@ function renderDisclaimer(projections: Projections): React.ReactElement {
       {usingCDCData && (
         <React.Fragment>
           {METRIC_NAME} for {projections.locationName} comes from data
-          aggregated by the Center for Disease Control and Prevention. It is
+          aggregated by the Centers for Disease Control and Prevention. It is
           calculated as a 7-day trailing average and may take 3-4 days to
           update.
         </React.Fragment>
