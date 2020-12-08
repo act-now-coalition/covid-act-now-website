@@ -1,5 +1,5 @@
 import React from 'react';
-import can_logo_url_light_svg from './can_logo_url_light.svg';
+import can_logo_url_light_svg from './covid-act-now-logo-url-light.svg';
 
 const Logo = ({ height }: { height?: number }) => (
   <img

@@ -7,14 +7,14 @@ import countyAdjacencyMsa from './data/county_adjacency_msa.json';
 import collegesByFips from './data/colleges_by_fips.json';
 import { REVERSED_STATES, STATES as STATES_MAP } from 'common';
 
-interface AdjacencyData {
+export interface AdjacencyData {
   [fips: string]: {
     adjacent_counties: string[];
     msa_code?: string;
   };
 }
 
-const ADJACENT_COUNTIES: AdjacencyData = countyAdjacencyMsa.counties;
+export const ADJACENT_COUNTIES: AdjacencyData = countyAdjacencyMsa.counties;
 
 /** Aggregations supported by the Explore chart. */
 export const AGGREGATED_LOCATIONS: Location[] = [
