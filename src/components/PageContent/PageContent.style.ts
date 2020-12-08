@@ -23,7 +23,7 @@ export const MainContent = styled.main`
 
 export const Sidebar = styled.div`
   flex: 1 1 auto;
-  min-width: 240px;
+  width: 260px;
   margin-left: ${theme.spacing(3) + theme.spacing(4)}px;
   margin-right: ${theme.spacing(1)}px;
 `;
