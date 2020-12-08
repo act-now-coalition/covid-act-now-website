@@ -233,7 +233,7 @@ export interface MetricExplainersContent {
 export const metricExplainersContent = metricExplainers as MetricExplainersContent;
 export const [introSection, metricSections] = partition(
   metricExplainersContent.sections,
-  section => section.sectionId === 'how-we-assess-risk',
+  section => section.sectionId === 'how-covid-risk-is-determined',
 );
 
 // TODO (pablo): Should we have a short heading for categories?
@@ -264,16 +264,10 @@ export const learnPages: TocItem[] = [
   },
   {
     label: 'Metric explainer',
-    to: '/metric-explainer',
-    items: [
-      {
-        to: `/metric-explainer#${metricExplainersContent.riskID}`,
-        label: `${metricExplainersContent.riskHeader}`,
-      },
-      {
-        to: `/metric-explainer#${metricExplainersContent.metricsID}`,
-        label: `${metricExplainersContent.metricsHeader}`,
-      },
-    ],
+    to: '/covid-risk-levels-metrics',
+    items: metricExplainersContent.sections.map(section => ({
+      to: `/covid-risk-levels-metrics#${section.sectionId}`,
+      label: section.sectionHeader,
+    })),
   },
 ];

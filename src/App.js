@@ -122,7 +122,10 @@ export default function App() {
               <Route exact path="/glossary" component={Glossary} />
               <Route path="/case-studies" component={CaseStudies} />
               <Route path="/deep-dives" component={Articles} />
-              <Route path="/metric-explainer" component={MetricExplainer} />
+              <Route
+                path="/covid-risk-levels-metrics"
+                component={MetricExplainer}
+              />
 
               {/* /state/ routes are deprecated but still supported. */}
               <Route exact path="/state/:stateId" component={LocationPage} />

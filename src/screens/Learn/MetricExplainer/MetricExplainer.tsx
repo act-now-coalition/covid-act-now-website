@@ -15,7 +15,7 @@ import {
 import PageContent, { MobileOnly } from 'components/PageContent';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { BreadcrumbsContainer, LearnHeading1, ItemName } from '../Learn.style';
-import TableOfContents from 'components/TableOfContents';
+import TableOfContents, { Item } from 'components/TableOfContents';
 import { Metric, getMetricDefinition } from 'common/metric';
 import { ThermometerBox } from 'components/Thermometer';
 
@@ -24,6 +24,7 @@ const MetricExplainer = () => {
     pageHeader,
     pageIntro,
     metricsHeader,
+    sections,
     metricsID,
     riskHeader,
     riskID,
@@ -31,10 +32,17 @@ const MetricExplainer = () => {
     metadataDescription,
   } = metricExplainersContent;
 
+  function getSectionItems(sections: any[]): Item[] {
+    return sections.map(section => ({
+      id: section.sectionId,
+      title: section.sectionHeader,
+    }));
+  }
+
   return (
     <Fragment>
       <AppMetaTags
-        canonicalUrl="/metric-explainer"
+        canonicalUrl="/covid-risk-levels-metrics"
         pageTitle={metadataTitle}
         pageDescription={metadataDescription}
       />
@@ -45,7 +53,7 @@ const MetricExplainer = () => {
         <LearnHeading1>{pageHeader}</LearnHeading1>
         <MarkdownContent source={pageIntro} />
         <MobileOnly>
-          <TableOfContents items={[]} />
+          <TableOfContents items={getSectionItems(sections)} />
         </MobileOnly>
         <Heading2 id={riskID}>{riskHeader}</Heading2>
         <MarkdownContent source={introSection[0].sectionIntro} />
