@@ -6,12 +6,7 @@ import {
   metricSections,
   learnPages,
 } from 'cms-content/learn';
-import {
-  Heading2,
-  MarkdownContent,
-  Heading3,
-  Paragraph,
-} from 'components/Markdown';
+import { MarkdownContent, Heading3, Paragraph } from 'components/Markdown';
 import PageContent, { MobileOnly } from 'components/PageContent';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { BreadcrumbsContainer, LearnHeading1, ItemName } from '../Learn.style';
@@ -19,6 +14,7 @@ import TableOfContents, { Item } from 'components/TableOfContents';
 import { Metric, getMetricDefinition } from 'common/metric';
 import { ThermometerBox } from 'components/Thermometer';
 import ThermometerIntro from './ThermometerIntro';
+import { ExplainersHeading2 } from './MetricExplainer.style';
 
 const MetricExplainer = () => {
   const {
@@ -54,9 +50,9 @@ const MetricExplainer = () => {
         <MobileOnly>
           <TableOfContents items={getSectionItems(sections)} />
         </MobileOnly>
-        <Heading2 id={introSection[0].sectionId}>
+        <ExplainersHeading2 id={introSection[0].sectionId}>
           {introSection[0].sectionHeader}
-        </Heading2>
+        </ExplainersHeading2>
         <MarkdownContent source={introSection[0].sectionIntro} />
         <ThermometerIntro />
         {introSection[0].questions.map(question => (
@@ -65,7 +61,7 @@ const MetricExplainer = () => {
             <MarkdownContent source={question.answer} />
           </Fragment>
         ))}
-        <Heading2 id={metricsID}>{metricsHeader}</Heading2>
+        <ExplainersHeading2 id={metricsID}>{metricsHeader}</ExplainersHeading2>
         {metricSections.map(section => (
           <Fragment key={section.sectionId}>
             <Heading3 id={section.sectionId}>{section.sectionHeader}</Heading3>
