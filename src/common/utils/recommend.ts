@@ -21,6 +21,7 @@ import { allIcons } from 'cms-content/recommendations';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import { getAbbreviatedCounty } from 'common/utils/compare';
 import { formatDecimal } from '.';
+import { Region } from 'common/regions';
 
 export function trackRecommendationsEvent(action: EventAction, label: string) {
   trackEvent(EventCategory.RECOMMENDATIONS, action, label);
@@ -247,10 +248,11 @@ function isBetweenDates(point: Column, dateFrom: Date, dateTo: Date) {
  * Generates location+metric-specific section of intro blurb
  */
 export function getDynamicIntroCopy(
+  region: Region,
   projection: Projection,
   metricValues: { [metric in Metric]: number | null },
 ): string {
-  const { locationName } = projection;
+  const locationName = region.fullName;
   const hasPosTestRate = isNumber(metricValues[Metric.POSITIVE_TESTS]);
 
   const numCasesPerWeek = getWeeklyNewCasesPer100k(projection);

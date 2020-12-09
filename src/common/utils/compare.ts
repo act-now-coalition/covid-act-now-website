@@ -70,7 +70,7 @@ export function getAllCounties(): SummaryForCompare[] {
 
 export function getAllCountiesOfState(stateId: string): SummaryForCompare[] {
   return regions.counties
-    .filter((region: County) => region.state.stateCode === stateId)
+    .filter((region: County) => region.state.urlSegment === stateId)
     .map(getLocationObj);
 }
 
@@ -84,14 +84,14 @@ export function getAllNonMetroCounties(): SummaryForCompare[] {
 
 export function getStateMetroCounties(stateId: string): SummaryForCompare[] {
   return regions.counties
-    .filter((region: County) => region.state.stateCode === stateId)
+    .filter((region: County) => region.state.urlSegment === stateId)
     .filter(isMetroCounty)
     .map(getLocationObj);
 }
 
 export function getStateNonMetroCounties(stateId: string): SummaryForCompare[] {
   return regions.counties
-    .filter((region: County) => region.state.stateCode === stateId)
+    .filter((region: County) => region.state.urlSegment === stateId)
     .filter(isNonMetroCounty)
     .map(getLocationObj);
 }

@@ -107,6 +107,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
   }, [projections.primary.fips]);
 
   const recommendationsIntro = getDynamicIntroCopy(
+    region,
     projection,
     projections.getMetricValues(),
   );

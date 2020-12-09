@@ -5,6 +5,7 @@ import { Projection, Column } from 'common/models/Projection';
 import { HashLink } from 'react-router-hash-link';
 import { scrollWithOffset } from 'components/TableOfContents';
 import { Copy } from 'components/LocationPage/LocationPageHeader.style';
+import { Region } from 'common/regions';
 
 function findHospitaliztionsPeak(projection: Projection): Column | null {
   const hospitalizations = projection.getDataset('smoothedHospitalizations');
@@ -24,10 +25,10 @@ export function isHospitalizationsPeak(projection: Projection): boolean {
     : false;
 }
 
-const HospitalizationsAlert: React.FC<{ projection: Projection }> = ({
-  projection,
-}) => {
-  const { locationName } = projection;
+const HospitalizationsAlert: React.FC<{
+  region: Region;
+  projection: Projection;
+}> = ({ region, projection }) => {
   const peak = findHospitaliztionsPeak(projection);
 
   if (!peak || !peak.y) {
@@ -36,7 +37,7 @@ const HospitalizationsAlert: React.FC<{ projection: Projection }> = ({
 
   return (
     <Copy>
-      {locationName} COVID hospitalizations are at an all-time peak -{' '}
+      {region.fullName} COVID hospitalizations are at an all-time peak -{' '}
       <HashLink
         to="#explore-chart"
         scroll={el => scrollWithOffset(el, -180)}

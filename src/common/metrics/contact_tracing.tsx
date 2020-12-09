@@ -90,10 +90,10 @@ function renderStatus(projections: Projections): React.ReactElement {
   const {
     currentContactTracers,
     currentContactTracerMetric,
-    locationName,
     currentDailyAverageCases,
   } = projections.primary;
 
+  const { locationName } = projections;
   const currentWeeklyAverage =
     currentDailyAverageCases && Math.round(currentDailyAverageCases);
 

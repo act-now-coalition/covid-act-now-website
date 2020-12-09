@@ -127,7 +127,10 @@ const LocationPageHeader = (props: {
               <SectionColumn isUpdateCopy>
                 <ColumnTitle isUpdateCopy>alert</ColumnTitle>
                 {inHospitalizationsPeak ? (
-                  <HospitalizationsAlert projection={projections.primary} />
+                  <HospitalizationsAlert
+                    region={region}
+                    projection={projections.primary}
+                  />
                 ) : (
                   <NewFeatureCopy
                     locationName={region.name}

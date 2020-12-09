@@ -162,3 +162,11 @@ export function getColleges(fips: string): CollegeData[] {
 const ALL_LOCATIONS = getAllLocations();
 const locationsByType = partition(ALL_LOCATIONS, isCounty);
 export const STATES = locationsByType[1] as State[];
+
+export function isCounty(location: Location) {
+  return location.county !== undefined;
+}
+
+export function belongsToState(location: Location, stateFips: string) {
+  return location.state_fips_code === stateFips;
+}

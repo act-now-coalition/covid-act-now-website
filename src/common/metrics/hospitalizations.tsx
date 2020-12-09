@@ -86,7 +86,7 @@ export const HOSPITAL_USAGE_LEVEL_INFO_MAP: LevelInfoMap = {
 
 function renderStatus(projections: Projections): React.ReactElement {
   const icu = projections.primary.icuHeadroomInfo;
-  const { locationName } = projections.primary;
+  const { locationName } = projections;
 
   if (icu === null) {
     return (
