@@ -23,9 +23,7 @@ const MetricExplainer = () => {
   const {
     pageHeader,
     pageIntro,
-    metricsHeader,
     sections,
-    metricsID,
     metadataTitle,
     metadataDescription,
   } = metricExplainersContent;

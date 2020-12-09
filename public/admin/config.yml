@@ -587,14 +587,6 @@ collections:
           - label: Page Intro
             name: pageIntro
             widget: markdown
-          - label: Key metrics section header
-            name: metricsHeader
-            widget: string
-            hint: Should be 'Key metrics'
-          - label: Key metrics section ID
-            name: metricsID
-            widget: string
-            hint: Section header, all lowercase, separated by dashed if multi-word
           - label: Sections
             name: sections
             widget: list

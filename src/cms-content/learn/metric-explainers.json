@@ -166,8 +166,6 @@
       ]
     }
   ],
-  "metricsHeader": "Key metrics",
   "pageHeader": "Risk levels & key metrics",
-  "pageIntro": "Our mission is to share timely and reliable COVID data with decision makers and the public so that they can take informed action. We have five key metrics to assess COVID risk. Below you will learn how we calculate and source each metric and overall risk.",
-  "metricsID": "key-metrics"
+  "pageIntro": "Our mission is to share timely and reliable COVID data with decision makers and the public so that they can take informed action. We have five key metrics to assess COVID risk. Below you will learn how we calculate and source each metric and overall risk."
 }
