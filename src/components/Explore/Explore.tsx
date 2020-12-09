@@ -50,7 +50,11 @@ import {
 import { ScreenshotReady } from 'components/Screenshot';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 import { IndigenousDataCheckbox } from 'components/IndigenousPopulationsFeature';
-import regions, { Region, useRegionFromLegacyIds } from 'common/regions';
+import regions, {
+  Region,
+  useRegionFromLegacyIds,
+  useRegionFromParams,
+} from 'common/regions';
 
 const MARGIN_SINGLE_LOCATION = 20;
 const MARGIN_STATE_CODE = 60;
@@ -113,14 +117,12 @@ const Explore: React.FunctionComponent<{
   const isMobileXs = useMediaQuery(theme.breakpoints.down('xs'));
   const metricLabels = getMetricLabels();
 
-  const { sharedComponentId, stateId, countyId } = useParams<{
+  const { sharedComponentId } = useParams<{
     sharedComponentId?: string;
-    stateId?: string;
-    countyId?: string;
   }>();
 
   // TODO (chris): Dont love the way of forcing a ''
-  const region = useRegionFromLegacyIds(stateId || '', countyId);
+  const region = useRegionFromParams();
 
   // Originally we had share URLs like /explore/cases instead of
   // /explore/<sharedComponentId> and so this code allows them to keep working.

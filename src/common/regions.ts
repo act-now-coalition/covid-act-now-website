@@ -5,6 +5,7 @@ import { assert } from 'common/utils';
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 import countyAdjacencyMsa from './data/county_adjacency_msa.json';
 import { getAbbreviatedCounty } from './utils/compare';
+import { useParams } from 'react-router';
 const { state_dataset, state_county_map_dataset } = US_STATE_DATASET;
 
 export type FipsCode = string;
@@ -245,4 +246,26 @@ export const getStateCode = (region: Region): string | undefined => {
     return (region as State).stateCode;
   }
   return undefined;
+};
+
+export const useRegionFromParams = (): Region | undefined => {
+  const { stateId, countyId, countyFipsId } = useParams<{
+    stateId?: string;
+    countyId?: string;
+    countyFipsId: string;
+  }>();
+
+  if (countyFipsId) {
+    return regions.findByFipsCode(countyFipsId);
+  }
+  if (!stateId) {
+    return undefined;
+  }
+
+  if (countyId) {
+    return regions.findCountyByUrlParams(stateId, countyId);
+  }
+  // This excludes the case where county is a value but we can't find the county,
+  // should it still return state?
+  return regions.findStateByUrlParams(stateId);
 };
