@@ -18,6 +18,7 @@ import {
   ColumnTitle,
   SectionColumn,
   LevelDescription,
+  WarningIcon,
 } from 'components/LocationPage/LocationPageHeader.style';
 import { useEmbed } from 'common/utils/hooks';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
@@ -30,7 +31,6 @@ import { formatUtcDate } from 'common/utils';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
 import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
-import WarningIcon from '@material-ui/icons/Warning';
 import { Metric } from 'common/metric';
 import { BANNER_COPY } from 'components/Banner/ThirdWaveBanner';
 import HospitalizationsAlert, {
