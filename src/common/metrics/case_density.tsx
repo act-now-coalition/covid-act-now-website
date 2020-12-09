@@ -97,6 +97,16 @@ function renderStatus(projections: Projections): React.ReactElement {
   const newCasesPerYear = 365 * newCasesPerDay;
   const estimatedNewInfectionsPerYear =
     ESTIMATED_INFECTIONS_FACTOR * newCasesPerYear;
+
+  // Makes sure estimated # of cases and infections over the next year don't go above total population:
+  function maxAtTotalPopulation(num: number) {
+    return Math.min(num, totalPopulation);
+  }
+  const estimatedNewInfectionsPerYearWithMax = maxAtTotalPopulation(
+    estimatedNewInfectionsPerYear,
+  );
+  const newCasesPerYearWithMax = maxAtTotalPopulation(newCasesPerYear);
+
   const estimatedPercentageNewInfectedPerYear = Math.min(
     1,
     estimatedNewInfectionsPerYear / totalPopulation,
@@ -106,14 +116,14 @@ function renderStatus(projections: Projections): React.ReactElement {
     <Fragment>
       Over the last week, {locationName} has averaged {newCasesPerDayText} new
       confirmed cases per day (<b>{formatDecimal(currentCaseDensity, 1)}</b> for
-      every 100,000 residents). Over the next year, this translates to around{' '}
-      {formatEstimate(newCasesPerYear)} cases and an{' '}
+      every 100,000 residents). If this trend continued for the next year, this
+      would translate to approximately {formatEstimate(newCasesPerYearWithMax)}{' '}
+      cases and an{' '}
       <ExternalLink href="https://www.globalhealthnow.org/2020-06/us-cases-10x-higher-reported">
         estimated
       </ExternalLink>{' '}
-      {formatEstimate(estimatedNewInfectionsPerYear)} infections (
-      {formatPercent(estimatedPercentageNewInfectedPerYear, 1)} of the
-      population).
+      {formatEstimate(estimatedNewInfectionsPerYearWithMax)} infections (
+      {formatPercent(estimatedPercentageNewInfectedPerYear)} of the population).
     </Fragment>
   );
 }
