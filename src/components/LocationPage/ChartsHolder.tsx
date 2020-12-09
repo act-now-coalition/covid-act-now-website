@@ -25,7 +25,7 @@ import {
 } from 'common/utils/recommend';
 import { mainContent } from 'cms-content/recommendations';
 import { getRecommendationsShareUrl } from 'common/urls';
-import { useLocationPageRegion } from 'common/regions';
+import { useLocationPageRegion } from 'common/regions/region_hooks';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
@@ -180,7 +180,7 @@ const ChartsHolder = (props: {
               <Recommend
                 introCopy={recommendationsIntro}
                 recommendations={recommendationsMainContent}
-                locationName={region.fullName()}
+                locationName={region.fullName}
                 shareUrl={recommendsShareUrl}
                 shareQuote={recommendsShareQuote}
                 recommendationsRef={recommendationsRef}
