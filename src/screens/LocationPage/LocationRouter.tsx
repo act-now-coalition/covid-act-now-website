@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, Redirect } from 'react-router-dom';
-import regions, { RegionContext } from 'common/regions';
+import { RegionContext, useRegionFromLegacyIds } from 'common/regions';
 import LocationPage from './LocationPage';
 
 interface LocationPageUrlParams {
@@ -12,11 +12,7 @@ interface LocationPageUrlParams {
 const LocationRouter: React.FC = () => {
   let { stateId, countyId, chartId } = useParams<LocationPageUrlParams>();
 
-  const state = regions.findStateByUrlParams(stateId);
-  const county = countyId
-    ? regions.findCountyByUrlParams(stateId, countyId)
-    : null;
-  const region = county || state;
+  const region = useRegionFromLegacyIds(stateId, countyId);
 
   if (!region) {
     return <Redirect to="/" />;

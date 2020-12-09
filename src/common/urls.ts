@@ -3,8 +3,8 @@ import { assert } from 'common/utils';
 import { County } from './locations';
 import urlJoin from 'url-join';
 import * as QueryString from 'query-string';
-import { getLocationUrlForFips } from 'common/locations';
 import moment from 'moment';
+import { Region } from './regions';
 
 /**
  * We append a short unique string corresponding to the currently published
@@ -72,8 +72,8 @@ export function getPageUrl(
   Generates URL for sharing CAN Recommends via
   social/copy-link button in Recommends footer
 */
-export function getRecommendationsShareUrl(fips: string): string {
-  return addSharingId(urlJoin(getLocationUrlForFips(fips), 'recommendations'));
+export function getRecommendationsShareUrl(region: Region): string {
+  return addSharingId(urlJoin(region.canonicalUrl, 'recommendations'));
 }
 
 export function getComparePageUrl(

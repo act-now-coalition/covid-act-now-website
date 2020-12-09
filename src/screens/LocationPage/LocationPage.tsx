@@ -33,7 +33,7 @@ function LocationPage({ region, chartId }: LocationPageProps) {
 
   const pageTitle = getPageTitleRegion(region);
   const pageDescription = getPageDescription(region, projections);
-  const canonicalUrl = region.canonicalUrl();
+  const canonicalUrl = region.canonicalUrl;
 
   return (
     <div>

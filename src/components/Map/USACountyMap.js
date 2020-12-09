@@ -7,12 +7,8 @@ import COUNTIES_JSON from './data/counties-10m.json';
 import { USMapWrapper, USStateMapWrapper } from './Map.style';
 import { useSummaries } from 'common/location_summaries';
 import { ScreenshotReady } from 'components/Screenshot';
-import {
-  getCanonicalUrl,
-  getLocationNameForFips,
-  getStateCode,
-  isStateFips,
-} from 'common/locations';
+import { isStateFips } from 'common/locations';
+import regions from 'common/regions';
 
 /**
  * The COUNTIES_JSON file contains geographies for counties, states and the
@@ -95,9 +91,10 @@ const USACountyMap = React.memo(
                     .map(geo => {
                       const { name } = geo.properties;
                       const fipsCode = geo.id;
-                      const stateCode = getStateCode(name);
-                      const stateUrl = `/${getCanonicalUrl(fipsCode)}`;
-                      const locationName = getLocationNameForFips(fipsCode);
+                      const region = regions.findByFipsCode(fipsCode);
+                      const stateCode = region.stateCode;
+                      const stateUrl = `/${region.relativeUrl()}`;
+                      const locationName = region.fullName;
 
                       // Using a custom SVG to place the northern mariana islands to increase
                       // accessibility due to the small size.

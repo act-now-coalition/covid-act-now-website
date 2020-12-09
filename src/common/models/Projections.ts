@@ -1,11 +1,11 @@
 import { Projection } from './Projection';
-import { STATES } from '..';
 import { Metric, getLevel, ALL_METRICS } from 'common/metric';
 import { Level } from 'common/level';
 import { LEVEL_COLOR } from 'common/colors';
 import { fail } from 'common/utils';
 import { LocationSummary, MetricSummary } from 'common/location_summaries';
 import { RegionSummaryWithTimeseries } from 'api/schema/RegionSummaryWithTimeseries';
+import { Region, RegionType } from 'common/regions';
 
 /**
  * The complete set of data / metrics and related information for a given
@@ -15,66 +15,54 @@ import { RegionSummaryWithTimeseries } from 'api/schema/RegionSummaryWithTimeser
  * we're not focused on projections and there's only 1.
  */
 export class Projections {
-  stateCode: string;
-  stateName: string;
-  county: any;
-  countyName: string | null;
   primary: Projection;
   isCounty: boolean;
+  region: Region;
 
   constructor(
     summaryWithTimeseries: RegionSummaryWithTimeseries,
-    stateCode: string,
-    county?: any,
+    region: Region,
   ) {
-    this.stateCode = stateCode.toUpperCase();
-    this.stateName = (STATES as any)[this.stateCode];
-    this.county = null;
-    this.countyName = null;
-    this.isCounty = county != null;
+    this.region = region;
+    this.isCounty = region.regionType === RegionType.COUNTY;
     this.primary = new Projection(summaryWithTimeseries, {
       isCounty: this.isCounty,
     });
-
-    this.populateCounty(county);
   }
 
-  populateCounty(county: any) {
-    if (!county) {
-      return;
-    }
+  // populateCounty(county: any) {
+  //   if (!county) {
+  //     return;
+  //   }
 
-    this.county = county;
-    this.countyName = county.county;
+  //   this.county = county;
+  //   this.countyName = county.county;
 
-    const NEW_YORK_COUNTIES_BLACKLIST = [
-      'Kings County',
-      'Queens County',
-      'Bronx County',
-      'Richmond County',
-    ];
+  //   const NEW_YORK_COUNTIES_BLACKLIST = [
+  //     'Kings County',
+  //     'Queens County',
+  //     'Bronx County',
+  //     'Richmond County',
+  //   ];
 
-    if (
-      this.stateCode === 'NY' &&
-      NEW_YORK_COUNTIES_BLACKLIST.includes(this.countyName!)
-    ) {
-      this.countyName = 'New York';
-    }
-  }
+  //   if (
+  //     this.stateCode === 'NY' &&
+  //     NEW_YORK_COUNTIES_BLACKLIST.includes(this.countyName!)
+  //   ) {
+  //     this.countyName = 'New York';
+  //   }
+  // }
 
   get fips(): string {
     return this.primary.fips;
   }
 
   get locationName(): string {
-    if (this.isCounty) {
-      return `${this.countyName}, ${this.stateCode}`;
-    } else {
-      return this.stateName;
-    }
+    return this.region.fullName;
   }
 
   get population(): number {
+    // NOTE: Should this be from region?
     return this.primary.totalPopulation;
   }
 

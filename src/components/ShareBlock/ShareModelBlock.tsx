@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import ShareBlock from './ShareBlock';
-import { STATES } from 'common';
 import { County, Region, State } from 'common/regions';
 
 import EmbedPreview from './EmbedPreview';
@@ -48,11 +47,11 @@ function getUrlAndShareQuote(region: Region) {
   if (region instanceof County) {
     const county = region as County;
     shareURL = `${BASE_SHARE_URL}/${region.state.urlSegment}/county/${region.urlSegment}`;
-    displayName = `${county.fullName()}`;
+    displayName = `${county.fullName}`;
   } else if (region instanceof State) {
     const state = region as State;
     shareURL = `${BASE_SHARE_URL}/${state.urlSegment}`;
-    displayName = state.fullName();
+    displayName = state.fullName;
   }
   // TODO: Add other regions. maybe move this logic?
 

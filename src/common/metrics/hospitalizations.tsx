@@ -21,8 +21,6 @@ export const ICUHeadroomMetric: MetricDefinition = {
   metricNameForCompare: METRIC_NAME,
 };
 
-export const STATES_WITH_DATA_OVERRIDES = ['Nevada'];
-
 const SHORT_DESCRIPTION_LOW = 'Can likely handle a new wave of COVID';
 const SHORT_DESCRIPTION_MEDIUM = 'Can likely handle a new wave of COVID';
 const SHORT_DESCRIPTION_MEDIUM_HIGH = 'At risk to a new wave of COVID';

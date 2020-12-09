@@ -1,5 +1,4 @@
 import React from 'react';
-import { matchPath, useLocation } from 'react-router-dom';
 import {
   FacebookShareButton,
   TwitterShareButton,

@@ -1,7 +1,6 @@
 /** Helpers for dealing with the State / Counties dataset. */
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
-import urlJoin from 'url-join';
-import { each, sortBy, takeRight, has, partition, toLower } from 'lodash';
+import { each, has, partition, toLower } from 'lodash';
 import { assert } from './utils';
 import countyAdjacencyMsa from './data/county_adjacency_msa.json';
 import collegesByFips from './data/colleges_by_fips.json';
@@ -79,7 +78,7 @@ export interface Location {
   state_url_name?: string;
 }
 
-export function getLocationNames(): Location[] {
+export function getAllLocations(): Location[] {
   const locations: Location[] = US_STATE_DATASET.state_dataset.map(state => {
     return {
       ...state,
@@ -159,33 +158,6 @@ export function getLocationNameForFips(fips: string): string {
   }
 }
 
-export function getRelativeUrlForFips(fips: string): string {
-  return `/${getCanonicalUrl(fips)}`;
-}
-
-export function getLocationUrlForFips(fips: string): string {
-  return urlJoin('https://covidactnow.org', getRelativeUrlForFips(fips));
-}
-
-const allCountiesCache: County[] = [];
-export function allCounties(): County[] {
-  if (allCountiesCache.length === 0) {
-    const statesData = US_STATE_DATASET.state_county_map_dataset as any;
-    for (const state in statesData) {
-      const countiesData = statesData[state].county_dataset;
-      allCountiesCache.push(...countiesData);
-    }
-  }
-  return allCountiesCache;
-}
-
-export function topCountiesByPopulation(limit: number): County[] {
-  return takeRight(
-    sortBy(allCounties(), c => c.population),
-    limit,
-  );
-}
-
 export function getAdjacentCounties(fips: string): string[] {
   assert(fips in ADJACENT_COUNTIES, `${fips} not found in adjacency list.`);
   return ADJACENT_COUNTIES[fips].adjacent_counties;
@@ -217,7 +189,7 @@ export function getStateName(stateCode: string): string | undefined {
   return (STATES_MAP as any)[stateCode];
 }
 
-const ALL_LOCATIONS = getLocationNames();
+const ALL_LOCATIONS = getAllLocations();
 const locationsByType = partition(ALL_LOCATIONS, isCounty);
 const COUNTIES = locationsByType[0] as County[];
 export const STATES = locationsByType[1] as State[];
@@ -241,16 +213,6 @@ export function getCountyByUrlName(
   );
 }
 
-export function getCanonicalUrl(fipsCode: string) {
-  const { state_fips_code, county, county_url_name } = findLocationForFips(
-    fipsCode,
-  );
-  const { state_url_name } = findStateByFips(state_fips_code);
-  return county
-    ? `us/${state_url_name}/county/${county_url_name}`
-    : `us/${state_url_name}`;
-}
-
 export function isCounty(location: Location) {
   return location.county !== undefined;
 }
@@ -261,40 +223,4 @@ export function isState(location: Location) {
 
 export function belongsToState(location: Location, stateFips: string) {
   return location.state_fips_code === stateFips;
-}
-
-export function locationNameFromUrlParams(stateId?: string, countyId?: string) {
-  if (!stateId) {
-    return '';
-  }
-
-  const state = getStateByUrlName(stateId);
-  const countyOption =
-    countyId && getCountyByUrlName(state?.state_code, countyId);
-  const isValidLocation = state && !(countyId && !countyOption);
-
-  if (!isValidLocation) {
-    return '';
-  }
-
-  return state && countyId && countyOption
-    ? `${countyOption.county}, ${state?.state}`
-    : `${state?.state}`;
-}
-
-export function findFipsByUrlParams(
-  stateUrlName?: string,
-  countyUrlName?: string,
-) {
-  if (!stateUrlName) {
-    return undefined;
-  } else {
-    const state = getStateByUrlName(stateUrlName);
-    const countyOption =
-      countyUrlName && getCountyByUrlName(state?.state_code, countyUrlName);
-
-    return countyOption && state
-      ? countyOption.full_fips_code
-      : state && state.state_fips_code;
-  }
 }

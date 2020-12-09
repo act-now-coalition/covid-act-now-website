@@ -80,7 +80,7 @@ describe('regions', () => {
 describe('State', () => {
   const state = regions.findByFipsCode('02');
   test('fullName', () => {
-    expect(state?.fullName()).toBe('Alaska');
+    expect(state?.fullName).toBe('Alaska');
   });
 
   test('relativeUrl', () => {
@@ -88,18 +88,18 @@ describe('State', () => {
   });
 
   test('canonicalUrl', () => {
-    expect(state?.canonicalUrl()).toBe('https://covidactnow.org/us/alaska-ak');
+    expect(state?.canonicalUrl).toBe('https://covidactnow.org/us/alaska-ak');
   });
 });
 
 describe('County', () => {
   const county = regions.findByFipsCode('53033');
   test('fullName', () => {
-    expect(county?.fullName()).toBe('King County, Washington');
+    expect(county?.fullName).toBe('King County, Washington');
   });
 
   test('relativeUrl', () => {
-    expect(county?.canonicalUrl()).toBe(
+    expect(county?.canonicalUrl).toBe(
       'https://covidactnow.org/us/washington-wa/county/king_county',
     );
   });

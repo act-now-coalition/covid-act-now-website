@@ -3,7 +3,7 @@ import { StyledNewsletter, InputHolder, InputError } from './Newsletter.style';
 import Chip from '@material-ui/core/Chip';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
-import { getLocationNames } from 'common/locations';
+import { getAllLocations } from 'common/locations';
 import { getFirebase, firebase } from 'common/firebase';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 
@@ -17,7 +17,7 @@ class Newsletter extends React.Component {
     this.emailInput = null;
     this.alertsSelectionArray = [];
     this.defaultValues = [];
-    this.autocompleteOptions = getLocationNames();
+    this.autocompleteOptions = getAllLocations();
     this.state = { checked: true, email: '', errorMessage: '' };
     this.submitForm = this.submitForm.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);

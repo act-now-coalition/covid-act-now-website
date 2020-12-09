@@ -29,9 +29,9 @@ const MiniMap: FunctionComponent<MiniMapProperties> = ({
   const showState = !(region.fipsCode in ['11', '11001']);
   let stateName;
   if (region.regionType === RegionType.STATE) {
-    stateName = region.fullName();
+    stateName = region.fullName;
   } else if (region.regionType === RegionType.COUNTY) {
-    stateName = (region as County).state.fullName();
+    stateName = (region as County).state.fullName;
   } else {
     fail('Unsupported region type');
   }

@@ -49,7 +49,7 @@ function locationPageTags(
   canonicalUrl: string,
   locationName: string,
 ): MetaTags {
-  const title = `America’s COVID warning system`;
+  const title = `America’s COVID warning map`;
   const description = `Covid Act Now has real-time COVID data and risk level for your community. See how ${locationName} is doing at covidactnow.org.`;
   return {
     'og:url': canonicalUrl,

@@ -11,14 +11,14 @@ import {
   BodyCopy,
   UpdatePreferencesFormWrapper,
 } from 'screens/AlertUnsubscribe/AlertUnsubscribe.style';
-import { getLocationNames } from 'common/locations';
+import { getAllLocations } from 'common/locations';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 
 const unsubscribedCopy =
   'You are now unsubscribed and will no longer receive alerts.';
 const resubscribedCopy = 'Your COVID alert preferences have been updated.';
 
-const locations: any = getLocationNames();
+const locations: any = getAllLocations();
 
 const AlertUnsubscribe = () => {
   const params = new URLSearchParams(window.location.search);

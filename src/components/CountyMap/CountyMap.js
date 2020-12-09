@@ -9,9 +9,8 @@ import {
 import ReactTooltip from 'react-tooltip';
 import STATE_CENTERS from '../../common/us_state_centers';
 import { countyColor } from 'common/colors';
-import { getCanonicalUrl, getLocationNameForFips } from 'common/locations';
 import { CountyMapWrapper, CountyMapLayerWrapper } from './CountyMap.style';
-import { RegionType } from 'common/regions';
+import regions, { RegionType } from 'common/regions';
 import { fail } from 'assert';
 
 const CountyMap = ({ region, setSelectedCounty }) => {
@@ -62,12 +61,13 @@ const CountyMap = ({ region, setSelectedCounty }) => {
         geographyFactory={geo => {
           const geoFullFips = geo.properties.GEOID;
           const isSelected = region && region.fipsCode === geoFullFips;
+          const geoRegion = regions.findByFipsCode(geoFullFips);
 
           return (
             <Link
               key={geoFullFips}
-              to={`/${getCanonicalUrl(geoFullFips)}`}
-              aria-label={getLocationNameForFips(geoFullFips)}
+              to={`/${geoRegion.relativeUrl()}`}
+              aria-label={geoRegion.fullName}
             >
               <Geography
                 key={geo.rsmKey}

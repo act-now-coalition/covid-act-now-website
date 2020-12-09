@@ -110,7 +110,7 @@ const SocialLocationPreview = (props: {
     <Wrapper>
       <PreviewHeader>
         <HeaderText>
-          <HeaderHeader>{props.projections.locationName}</HeaderHeader>
+          <HeaderHeader>{props.projections.region.fullName}</HeaderHeader>
           <HeaderSubhead>Overall COVID risk</HeaderSubhead>
         </HeaderText>
         <AlarmLevel color={fillColor}>{levelInfo.name}</AlarmLevel>

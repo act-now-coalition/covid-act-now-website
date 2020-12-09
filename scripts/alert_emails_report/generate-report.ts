@@ -10,11 +10,8 @@ import {
   fetchAllAlertSubscriptions,
 } from '../alert_emails/firestore';
 import GoogleSheets, { Cell } from '../common/google-sheets';
-import {
-  findCountyByFips,
-  isStateFips,
-  findStateByFips,
-} from '../../src/common/locations';
+import { isStateFips } from '../../src/common/locations';
+import regions, { County, State } from '../../src/common/regions';
 import { ALERT_EMAIL_GROUP_PREFIX } from '../alert_emails/utils';
 
 function getSpreadsheetId(): string {
@@ -83,20 +80,20 @@ async function updateSubscriptionsByLocation() {
 
 function formatStateStats(stats: FipsCount[]): Cell[][] {
   const data = stats.map(({ fips, count }) => {
-    const state = findStateByFips(fips);
-    return [state?.state_code, state?.state, state?.population, count];
+    const state = regions.findByFipsCode(fips) as State;
+    return [state?.stateCode, state?.name, state?.population, count];
   });
   return _.sortBy(data, item => item[0]);
 }
 
 function formatCountyStats(stats: FipsCount[]): Cell[][] {
   const data = stats.map(({ fips, count }) => {
-    const county = findCountyByFips(fips);
+    const region = (regions.findByFipsCode(fips) as County) || undefined;
     // The ' prefix forces the value to be interpreted as text by Google Sheets
     const fipsCode = `'${fips}`;
-    const countyName: string = county?.county || 'Unknown county';
-    const stateCode: string = county?.state_code || '-';
-    return [fipsCode, countyName, stateCode, county?.population, count];
+    const countyName: string = region?.name || 'Unknown County';
+    const stateCode: string = region?.state.stateCode || '-';
+    return [fipsCode, countyName, stateCode, region?.population, count];
   });
   return _.sortBy(data, item => item[0]);
 }
