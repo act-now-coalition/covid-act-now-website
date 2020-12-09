@@ -1,17 +1,29 @@
 import { sortBy, takeRight } from 'lodash';
+import { Region, County, State, FipsCode } from './types';
+import { states, statesByFips, counties, countiesByFips } from './regions_data';
 
-import { Region, County, State, FipsCode } from 'common/regions';
+interface RegionByFips {
+  [fipsCode: string]: Region;
+}
 
 class RegionDB {
   private regions: Region[];
+  private regionsByFips: RegionByFips;
 
-  constructor(public states: State[], public counties: County[]) {
+  constructor(
+    public states: State[],
+    public counties: County[],
+    private statesByFips: RegionByFips,
+    private countiesByFips: RegionByFips,
+  ) {
     this.regions = [...states, ...counties];
+    this.states = states;
+    this.counties = counties;
+    this.regionsByFips = { ...statesByFips, ...countiesByFips };
   }
 
   findByFipsCode(fipsCode: FipsCode): Region | null {
-    const region = this.regions.find(region => region.fipsCode === fipsCode);
-    return region || null;
+    return this.regionsByFips[fipsCode] || null;
   }
 
   findCountiesByStateCode(stateCode: string): County[] {
@@ -63,4 +75,7 @@ function equalLower(a: string, b: string) {
   return a.toLowerCase() === b.toLowerCase();
 }
 
-export default RegionDB;
+const regions = new RegionDB(states, counties, statesByFips, countiesByFips);
+
+export default regions;
+export { RegionDB };
