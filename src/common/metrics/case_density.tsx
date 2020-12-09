@@ -97,6 +97,13 @@ function renderStatus(projections: Projections): React.ReactElement {
   const newCasesPerYear = 365 * newCasesPerDay;
   const estimatedNewInfectionsPerYear =
     ESTIMATED_INFECTIONS_FACTOR * newCasesPerYear;
+
+  // Makes sure projected # infections over the next year isn't greater than the total population:
+  const estimatedNewInfectionsPerYearWithMax = Math.min(
+    estimatedNewInfectionsPerYear,
+    totalPopulation,
+  );
+
   const estimatedPercentageNewInfectedPerYear = Math.min(
     1,
     estimatedNewInfectionsPerYear / totalPopulation,
@@ -111,7 +118,7 @@ function renderStatus(projections: Projections): React.ReactElement {
       <ExternalLink href="https://www.globalhealthnow.org/2020-06/us-cases-10x-higher-reported">
         estimated
       </ExternalLink>{' '}
-      {formatEstimate(estimatedNewInfectionsPerYear)} infections (
+      {formatEstimate(estimatedNewInfectionsPerYearWithMax)} infections (
       {formatPercent(estimatedPercentageNewInfectedPerYear, 1)} of the
       population).
     </Fragment>
