@@ -9,7 +9,7 @@ import {
 import { DarkScreenshotWrapper } from './ShareImage.style';
 import { formatLocalDate } from 'common/utils';
 import { ScreenshotReady, SCREENSHOT_CLASS } from 'components/Screenshot';
-import { useRegionFromParams } from 'common/regions/region_hooks';
+import { useRegionFromParams } from 'common/regions';
 import { Region } from 'common/regions';
 
 // TODO(michael): Split this into HomeImage and LocationImage (with some shared code).
