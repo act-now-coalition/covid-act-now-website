@@ -1,6 +1,5 @@
 import urlJoin from 'url-join';
 import { getAbbreviatedCounty } from 'common/utils/compare';
-import { TransferWithinAStationSharp } from '@material-ui/icons';
 
 export type FipsCode = string;
 
