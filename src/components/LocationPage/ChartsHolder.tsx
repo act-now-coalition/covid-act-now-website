@@ -28,7 +28,7 @@ import {
   Region,
   RegionType,
   State,
-  useLocationPageRegion,
+  getStateName,
 } from 'common/regions';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
@@ -116,15 +116,10 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
     mainContent.recommendations,
   );
 
-  const recommendsShareUrl = getRecommendationsShareUrl(
-    projections.primary.fips,
-  );
+  const recommendsShareUrl = getRecommendationsShareUrl(projections.region);
 
   const alarmLevel = projections.getAlarmLevel();
-  const recommendsShareQuote = getShareQuote(
-    projections.locationName,
-    alarmLevel,
-  );
+  const recommendsShareQuote = getShareQuote(region.fullName, alarmLevel);
 
   const recommendationsFeedbackForm = `https://can386399.typeform.com/to/WSPYSGPe#source=can&id=${uuidv4()}&fips=${
     projection.fips
@@ -133,13 +128,13 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
   // TODO(Chelsi): make these 2 functions less redundant?
   const recommendationsFedModalCopy = getModalCopyWithFedLevel(
     projection,
-    projection.locationName,
+    region.fullName,
     projections.getMetricValues(),
   );
 
   const recommendationsHarvardModalCopy = getModalCopyWithHarvardLevel(
     projection,
-    projection.locationName,
+    region.fullName,
     projections.getMetricValues(),
   );
 
@@ -152,6 +147,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
     }
     return undefined;
   };
+
   // TODO(pablo): Create separate refs for signup and share
   return (
     <>
@@ -168,7 +164,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
         {/* TODO: Add county back. */}
         <CompareMain
           county={undefined}
-          stateName={projections.stateName}
+          stateName={getStateName(region)}
           locationsViewable={6}
           stateId={getStateId()}
         />
@@ -176,7 +172,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
           <Recommend
             introCopy={recommendationsIntro}
             recommendations={recommendationsMainContent}
-            locationName={region.fullName()}
+            locationName={region.fullName}
             shareUrl={recommendsShareUrl}
             shareQuote={recommendsShareQuote}
             recommendationsRef={recommendationsRef}

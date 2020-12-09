@@ -76,7 +76,7 @@ const InnerContent = ({
     // @ts-ignore
     const chartType = chartDownloadType[chartIdentifier];
     // TODO Make this better capture
-    const location = region.fullName();
+    const location = region.fullName;
     return `${location}_${chartType}_${downloadDate}`;
   }
 
@@ -164,12 +164,12 @@ const ShareButtons = ({
   chartIdentifier,
 }: ShareButtonProps) => {
   const shareQuote = makeChartShareQuote(
-    region.fullName(),
+    region.fullName,
     stats,
     chartIdentifier,
   );
 
-  const shareBaseURL = region.canonicalUrl();
+  const shareBaseURL = region.canonicalUrl;
 
   const shareURL = urls.addSharingId(
     `${shareBaseURL}/chart/${chartIdentifier}`,

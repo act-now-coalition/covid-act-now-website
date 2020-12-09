@@ -24,8 +24,6 @@ import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { Level } from 'common/level';
 import { COLOR_MAP } from 'common/colors';
 import { useModelLastUpdatedDate } from 'common/utils/model';
-import { STATES_WITH_DATA_OVERRIDES } from 'common/metrics/hospitalizations';
-import { Projections } from 'common/models/Projections';
 import { formatUtcDate } from 'common/utils';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
@@ -39,6 +37,7 @@ import HospitalizationsAlert, {
 import { ThermometerImage } from 'components/Thermometer';
 import { useLocationPageRegion } from 'common/regions';
 import LocationPageHeading from './LocationPageHeading';
+import { Projections } from 'common/models/Projections';
 
 const NewFeatureCopy = (props: {
   locationName: string;
@@ -81,10 +80,6 @@ const LocationPageHeader = (props: {
     alarmLevel !== Level.UNKNOWN ? levelInfo.color : COLOR_MAP.GRAY.LIGHT;
 
   const { isEmbed } = useEmbed();
-
-  const verified = STATES_WITH_DATA_OVERRIDES.includes(projections.stateName);
-
-  const isVerifiedState = !projections.isCounty && verified;
 
   const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
   const lastUpdatedDateString =
@@ -170,16 +165,7 @@ const LocationPageHeader = (props: {
           )}
           {!projections.isCounty && !isEmbed && (
             <HeaderSubCopy>
-              {verified && (
-                <Fragment>
-                  <CheckIcon htmlColor="#00D474" />
-                  <span>Government verified data</span>
-                  {!props.isMobile && <span> · </span>}
-                </Fragment>
-              )}
-              <LastUpdatedDate isVerifiedState={isVerifiedState}>
-                Updated {lastUpdatedDateString}
-              </LastUpdatedDate>
+              <LastUpdatedDate>Updated {lastUpdatedDateString}</LastUpdatedDate>
             </HeaderSubCopy>
           )}
         </FooterContainer>

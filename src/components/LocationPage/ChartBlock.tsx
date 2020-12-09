@@ -6,7 +6,6 @@ import {
   ChartHeaderWrapper,
 } from './ChartsHolder.style';
 import { Projections } from 'common/models/Projections';
-import { Projection } from 'common/models/Projection';
 import Disclaimer from 'components/Disclaimer/Disclaimer';
 import ShareButtons from 'components/LocationPage/ShareButtons';
 import {
@@ -29,7 +28,6 @@ function ChartBlock(props: {
   projections: Projections;
 }) {
   const { projections, metric, isMobile, region, stats } = props;
-  const projection: Projection = projections.primary;
 
   const showBetaTag =
     metric === Metric.HOSPITAL_USAGE || metric === Metric.CONTACT_TRACING;
@@ -52,7 +50,7 @@ function ChartBlock(props: {
           />
         )}
       </ChartHeaderWrapper>
-      <Subtitle1>{projection.locationName}</Subtitle1>
+      <Subtitle1>{region.fullName}</Subtitle1>
       <ChartDescription>
         {getMetricStatusText(metric, projections)}
       </ChartDescription>
