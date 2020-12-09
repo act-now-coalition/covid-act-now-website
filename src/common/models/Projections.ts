@@ -46,20 +46,6 @@ export class Projections {
 
     this.county = county;
     this.countyName = county.county;
-
-    const NEW_YORK_COUNTIES_BLACKLIST = [
-      'Kings County',
-      'Queens County',
-      'Bronx County',
-      'Richmond County',
-    ];
-
-    if (
-      this.stateCode === 'NY' &&
-      NEW_YORK_COUNTIES_BLACKLIST.includes(this.countyName!)
-    ) {
-      this.countyName = 'New York';
-    }
   }
 
   get fips(): string {
