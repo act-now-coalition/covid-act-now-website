@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { chain, fromPairs } from 'lodash';
+import { chain, Dictionary, fromPairs } from 'lodash';
 import urlJoin from 'url-join';
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 import countyAdjacencyMsa from 'common/data/county_adjacency_msa.json';
@@ -113,18 +113,48 @@ export const getStateCode = (region: Region): string | null => {
   return null;
 };
 
-const states: State[] = chain(state_dataset)
-  .map(stateInfo => {
-    return new State(
-      stateInfo.state,
-      stateInfo.state_url_name,
-      stateInfo.state_fips_code,
-      stateInfo.population,
-      stateInfo.state_code,
-    );
-  })
-  .value();
+const buildStates = () => {
+  const states = chain(state_dataset)
+    .map(stateInfo => {
+      return new State(
+        stateInfo.state,
+        stateInfo.state_url_name,
+        stateInfo.state_fips_code,
+        stateInfo.population,
+        stateInfo.state_code,
+      );
+    })
+    .value();
+  return states;
+};
 
+const buildCounties = (
+  statesByFips: Dictionary<State>,
+  countyAdjacency: { [fipsCode: string]: AdjacencyInfo },
+) => {
+  const counties = chain(state_county_map_dataset)
+    .map(stateData => stateData.county_dataset)
+    .flatten()
+    .filter(county => statesFipsList.includes(county.state_fips_code))
+    .map(countyInfo => {
+      const countyFips = countyInfo.full_fips_code;
+      const state = statesByFips[countyInfo.state_fips_code];
+      const adjacentCounties = countyAdjacency[countyFips]?.adjacent_counties;
+      return new County(
+        countyInfo.county,
+        countyInfo.county_url_name,
+        countyInfo.full_fips_code,
+        countyInfo.population,
+        state,
+        countyInfo.cities || [],
+        adjacentCounties || [],
+      );
+    })
+    .value();
+  return counties;
+};
+
+const states: State[] = buildStates();
 const statesByFips = fromPairs(states.map(state => [state.fipsCode, state]));
 const statesFipsList = states.map(state => state.fipsCode);
 
@@ -132,29 +162,10 @@ interface AdjacencyInfo {
   adjacent_counties: FipsCode[];
   msa_code?: string;
 }
-
 const adjacency: { [fipsCode: string]: AdjacencyInfo } =
   countyAdjacencyMsa.counties;
 
-const counties: County[] = chain(state_county_map_dataset)
-  .map(stateData => stateData.county_dataset)
-  .flatten()
-  .filter(county => statesFipsList.includes(county.state_fips_code))
-  .map(countyInfo => {
-    const countyFips = countyInfo.full_fips_code;
-    const state = statesByFips[countyInfo.state_fips_code];
-    const adjacentCounties = adjacency[countyFips]?.adjacent_counties;
-    return new County(
-      countyInfo.county,
-      countyInfo.county_url_name,
-      countyInfo.full_fips_code,
-      countyInfo.population,
-      state,
-      countyInfo.cities || [],
-      adjacentCounties || [],
-    );
-  })
-  .value();
+const counties: County[] = buildCounties(statesByFips, adjacency);
 
 // We are careful to never call `useRegion()` in components that are not
 // nested inside `<RegionContext.Provider>` so we cheat and pretend that the
