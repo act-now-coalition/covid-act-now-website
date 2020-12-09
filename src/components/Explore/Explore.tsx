@@ -13,7 +13,7 @@ import { useTheme } from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { ParentSize } from '@vx/responsive';
 import { useModelLastUpdatedDate } from 'common/utils/model';
-import { findLocationForFips, Location } from 'common/locations';
+import { findLocationForFips } from 'common/locations';
 import {
   DisclaimerWrapper,
   DisclaimerBody,
@@ -48,10 +48,10 @@ import {
   storeSharedComponentParams,
   useSharedComponentParams,
 } from 'common/sharing';
-import { findFipsByUrlParams } from 'common/locations';
 import { ScreenshotReady } from 'components/Screenshot';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 import { IndigenousDataCheckbox } from 'components/IndigenousPopulationsFeature';
+import regions, { Region, useRegionFromLegacyIds } from 'common/regions';
 
 const MARGIN_SINGLE_LOCATION = 20;
 const MARGIN_STATE_CODE = 60;
@@ -120,7 +120,8 @@ const Explore: React.FunctionComponent<{
     countyId?: string;
   }>();
 
-  const locationFips = findFipsByUrlParams(stateId, countyId);
+  // TODO (chris): Dont love the way of forcing a ''
+  const region = useRegionFromLegacyIds(stateId || '', countyId);
 
   // Originally we had share URLs like /explore/cases instead of
   // /explore/<sharedComponentId> and so this code allows them to keep working.
@@ -152,9 +153,10 @@ const Explore: React.FunctionComponent<{
   const currentMetricName = getMetricName(currentMetric);
 
   const initialLocations = useMemo(
-    () => initialFipsList.map(findLocationForFips),
+    () => initialFipsList.map(fipsCode => regions.findByFipsCode(fipsCode)!),
     [initialFipsList],
   );
+
   const indigeneousPopulationsLocations = useMemo(
     () => ['00001', '00002'].map(findLocationForFips),
     [],
@@ -167,11 +169,13 @@ const Explore: React.FunctionComponent<{
   const [chartIndigenous, setChartIndigenous] = useState(
     initialChartIndigenousPopulations || false,
   );
-  const [selectedLocations, setSelectedLocations] = useState<Location[]>(
-    chartIndigenous ? indigeneousPopulationsLocations : initialLocations,
+  const [selectedLocations, setSelectedLocations] = useState<Region[]>(
+    // TODO: Fix indigenous
+    // chartIndigenous ? indigeneousPopulationsLocations :
+    initialLocations,
   );
 
-  const onChangeSelectedLocations = (newLocations: Location[]) => {
+  const onChangeSelectedLocations = (newLocations: Region[]) => {
     const changedLocations = uniq(newLocations);
     if (selectedLocations.length > 1 && changedLocations.length === 1) {
       // if switching from multiple to a single location, disable normalization
@@ -193,7 +197,7 @@ const Explore: React.FunctionComponent<{
 
   useEffect(() => {
     if (chartIndigenous) {
-      setSelectedLocations(indigeneousPopulationsLocations);
+      // setSelectedLocations(indigeneousPopulationsLocations);
       setNormalizeData(true);
     } else {
       setSelectedLocations(initialLocations);
@@ -228,7 +232,7 @@ const Explore: React.FunctionComponent<{
   // they are not carried over to the new location page.
   useEffect(() => {
     if (initialChartIndigenousPopulations) {
-      setSelectedLocations(indigeneousPopulationsLocations);
+      // setSelectedLocations(indigeneousPopulationsLocations);
       setNormalizeData(true);
     } else {
       setSelectedLocations(initialLocations);
@@ -271,9 +275,7 @@ const Explore: React.FunctionComponent<{
     return storeSharedComponentParams(SharedComponent.Explore, {
       currentMetric,
       normalizeData,
-      selectedFips: selectedLocations.map(
-        location => location.full_fips_code || location.state_fips_code,
-      ),
+      selectedFips: selectedLocations.map(location => location.fipsCode),
     });
   };
 
@@ -282,7 +284,9 @@ const Explore: React.FunctionComponent<{
     if (sharedParams) {
       setCurrentMetric(sharedParams.currentMetric);
       setNormalizeData(sharedParams.normalizeData);
-      const locations = sharedParams.selectedFips.map(findLocationForFips);
+      const locations = sharedParams.selectedFips.map(
+        (fips: string) => regions.findByFipsCode(fips)!,
+      );
       setSelectedLocations(locations);
     }
   }, [sharedParams]);
@@ -306,7 +310,7 @@ const Explore: React.FunctionComponent<{
               imageFilename={getImageFilename(selectedLocations, currentMetric)}
               url={() =>
                 createSharedComponentId().then(sharingId =>
-                  getChartUrl(sharingId, locationFips),
+                  getChartUrl(sharingId, region),
                 )
               }
               quote={getSocialQuote(selectedLocations, currentMetric)}
@@ -350,9 +354,9 @@ const Explore: React.FunctionComponent<{
         <Grid container spacing={1}>
           <Grid key="location-selector" item sm={9} xs={12}>
             <LocationSelector
-              locations={autocompleteLocations}
-              selectedLocations={selectedLocations}
-              onChangeSelectedLocations={onChangeSelectedLocations}
+              regions={autocompleteLocations}
+              selectedRegions={selectedLocations}
+              onChangeSelectedRegions={onChangeSelectedLocations}
               {...modalNormalizeCheckboxProps}
             />
           </Grid>

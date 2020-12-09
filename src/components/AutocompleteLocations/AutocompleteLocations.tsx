@@ -2,7 +2,7 @@ import React from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { createFilterOptions } from '@material-ui/lab/useAutocomplete';
 import TextField from '@material-ui/core/TextField';
-import { Location } from 'common/locations';
+import { Region } from 'common/regions';
 /**
  * `createFilterOptions` creates a configuration object that defines how the
  * user input will be matched against the options in the Autocomplete
@@ -17,34 +17,28 @@ import { Location } from 'common/locations';
  * See material-ui/lab/useAutocomplete.js for additional options.
  */
 
-function getLocationLabel(location: Location) {
-  return location.county
-    ? `${location.county}, ${location.state_code}`
-    : location.state;
+function getLocationLabel(region: Region) {
+  return region.fullName;
 }
 
-const getFips = (location: Location) =>
-  location.full_fips_code || location.state_fips_code;
+const getFips = (region: Region) => region.fipsCode;
 
-const getOptionSelected = (option: Location, value: Location) =>
+const getOptionSelected = (option: Region, value: Region) =>
   getFips(option) === getFips(value);
 
 // TODO(Pablo): Use this component for the Newsletter
 const AutocompleteLocations: React.FC<{
-  locations: Location[];
-  selectedLocations: Location[];
-  onChangeLocations: (
-    event: React.ChangeEvent<{}>,
-    newLocations: Location[],
-  ) => void;
-}> = ({ locations, onChangeLocations, selectedLocations }) => (
+  regions: Region[];
+  selectedRegions: Region[];
+  onChangeRegions: (event: React.ChangeEvent<{}>, newRegions: Region[]) => void;
+}> = ({ regions, onChangeRegions, selectedRegions }) => (
   <Autocomplete
     multiple
-    options={locations}
+    options={regions}
     getOptionLabel={getLocationLabel}
-    onChange={onChangeLocations}
+    onChange={onChangeRegions}
     getOptionSelected={getOptionSelected}
-    value={selectedLocations}
+    value={selectedRegions}
     filterOptions={createFilterOptions({ matchFrom: 'start' })}
     renderInput={params => (
       <TextField variant="outlined" {...params} placeholder="+ Add" />
