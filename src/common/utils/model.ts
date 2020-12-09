@@ -56,6 +56,8 @@ export function fetchProjectionsRegion(
   } else if (region instanceof State) {
     regionDescriptor = RegionDescriptor.forState(region.stateCode);
   } else {
+    // CBSAs are not yet supported in the API Fetch. once they are implemented
+    // will not need to fail.
     fail('Unknown region type');
   }
 
@@ -76,8 +78,7 @@ export function fetchProjectionsRegion(
     return new Projections(summaryWithTimeseries, stateCode, county);
   }
 
-  // TODO: Make sure this is the right key
-  const key = snapshotUrl + '-' + region.fullName;
+  const key = snapshotUrl + '-' + regionDescriptor.toString();
   cachedProjections[key] = cachedProjections[key] || fetch();
   return cachedProjections[key];
 }
