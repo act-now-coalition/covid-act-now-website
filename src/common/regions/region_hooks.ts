@@ -12,21 +12,6 @@ export const useLocationPageRegion = () => {
   return region;
 };
 
-export const useRegionFromLegacyIds = (
-  stateId: string,
-  countyId?: string,
-  countyFipsId?: string,
-) => {
-  if (countyFipsId) {
-    return regions.findByFipsCode(countyFipsId);
-  }
-  const state = regions.findStateByUrlParams(stateId);
-  const county = countyId
-    ? regions.findCountyByUrlParams(stateId, countyId)
-    : null;
-  return county || state;
-};
-
 export const useRegionFromParams = (): Region | null => {
   const { stateId, countyId, countyFipsId } = useParams<{
     stateId?: string;
