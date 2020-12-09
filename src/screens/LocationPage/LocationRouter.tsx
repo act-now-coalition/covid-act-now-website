@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, Redirect } from 'react-router-dom';
-import { getCountyByUrlName, getStateByUrlName } from 'common/locations';
+import regions, { RegionContext } from 'common/regions';
 import LocationPage from './LocationPage';
 
 interface LocationPageUrlParams {
@@ -10,15 +10,22 @@ interface LocationPageUrlParams {
 
 const LocationRouter: React.FC = () => {
   let { stateId, countyId } = useParams<LocationPageUrlParams>();
-  const state = getStateByUrlName(stateId);
-  const countyOption =
-    countyId && getCountyByUrlName(state?.state_code, countyId);
 
-  // The URL parameters don't correspond to a valid state or county, we
-  // redirect the user to the homepage
-  const isValidLocation = state && !(countyId && !countyOption);
+  const state = regions.findStateByUrlParams(stateId);
+  const county = countyId
+    ? regions.findCountyByUrlParams(stateId, countyId)
+    : null;
+  const region = county || state;
 
-  return isValidLocation ? <LocationPage /> : <Redirect to="/" />;
+  if (!region) {
+    return <Redirect to="/" />;
+  }
+
+  return (
+    <RegionContext.Provider value={region}>
+      <LocationPage />
+    </RegionContext.Provider>
+  );
 };
 
 export default LocationRouter;

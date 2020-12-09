@@ -18,6 +18,7 @@ import {
   ColumnTitle,
   SectionColumn,
   LevelDescription,
+  WarningIcon,
 } from 'components/LocationPage/LocationPageHeader.style';
 import { useEmbed } from 'common/utils/hooks';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
@@ -30,13 +31,14 @@ import { formatUtcDate } from 'common/utils';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
 import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
-import WarningIcon from '@material-ui/icons/Warning';
 import { Metric } from 'common/metric';
 import { BANNER_COPY } from 'components/Banner/ThirdWaveBanner';
 import HospitalizationsAlert, {
   isHospitalizationsPeak,
 } from './HospitalizationsAlert';
 import { ThermometerImage } from 'components/Thermometer';
+import { useLocationPageRegion } from 'common/regions';
+import LocationPageHeading from './LocationPageHeading';
 
 const NewFeatureCopy = (props: {
   locationName: string;
@@ -47,27 +49,6 @@ const NewFeatureCopy = (props: {
       {BANNER_COPY} <Link to={'/deep-dives/us-third-wave'}>Learn more</Link>.
     </Copy>
   );
-};
-
-const LocationPageHeading = (props: { projections: Projections }) => {
-  const { isEmbed } = useEmbed();
-
-  const displayName = props.projections.countyName ? (
-    <>
-      <strong>{props.projections.countyName}, </strong>
-      <a
-        href={`${
-          isEmbed ? '/embed' : ''
-        }/us/${props.projections.stateCode.toLowerCase()}`}
-      >
-        {props.projections.stateCode}
-      </a>
-    </>
-  ) : (
-    <strong>{props.projections.stateName}</strong>
-  );
-
-  return <span>{displayName}</span>;
 };
 
 const noop = () => {};
@@ -86,12 +67,11 @@ const LocationPageHeader = (props: {
     (val: number | null) => val !== null,
   ).length;
   const { projections } = props;
+  const region = useLocationPageRegion();
 
   //TODO (chelsi): get rid of this use of 'magic' numbers
   const headerTopMargin = !hasStats ? -202 : -218;
   const headerBottomMargin = !hasStats ? 0 : 0;
-
-  const locationName = projections.countyName || projections.stateName;
 
   const alarmLevel = projections.getAlarmLevel();
 
@@ -124,7 +104,7 @@ const LocationPageHeader = (props: {
           <HeaderSection>
             <LocationCopyWrapper>
               <HeaderTitle isEmbed={isEmbed}>
-                <LocationPageHeading projections={projections} />
+                <LocationPageHeading region={region} isEmbed={isEmbed} />
               </HeaderTitle>
             </LocationCopyWrapper>
             <ButtonsWrapper>
@@ -144,7 +124,7 @@ const LocationPageHeader = (props: {
               <SectionColumn>
                 <ColumnTitle>Covid risk level</ColumnTitle>
                 <LevelDescription>{levelInfo.summary}</LevelDescription>
-                <Copy>{levelInfo.detail(locationName)}</Copy>
+                <Copy>{levelInfo.detail(region.name)}</Copy>
               </SectionColumn>
             </SectionHalf>
             <SectionHalf>
@@ -155,7 +135,7 @@ const LocationPageHeader = (props: {
                   <HospitalizationsAlert projection={projections.primary} />
                 ) : (
                   <NewFeatureCopy
-                    locationName={locationName}
+                    locationName={region.name}
                     onNewUpdateClick={props.onNewUpdateClick}
                   />
                 )}

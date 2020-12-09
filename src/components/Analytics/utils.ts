@@ -40,6 +40,7 @@ export enum EventCategory {
   INDIGENOUS_PEOPLES_DAY = 'indigenous peoples day',
   GLOSSARY = 'glossary',
   FAQ = 'faq',
+  METRIC_EXPLAINERS = 'metric explainers',
 }
 
 /**

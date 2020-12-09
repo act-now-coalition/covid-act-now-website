@@ -9,14 +9,14 @@ import { REVERSED_STATES, STATES as STATES_MAP } from 'common';
 import { countyFipsToZips } from 'components/MapSelectors/datasets';
 // import CountyMap from 'components/CountyMap/CountyMap';
 
-interface AdjacencyData {
+export interface AdjacencyData {
   [fips: string]: {
     adjacent_counties: string[];
     msa_code?: string;
   };
 }
 
-const ADJACENT_COUNTIES: AdjacencyData = countyAdjacencyMsa.counties;
+export const ADJACENT_COUNTIES: AdjacencyData = countyAdjacencyMsa.counties;
 
 /** Aggregations supported by the Explore chart. */
 export const AGGREGATED_LOCATIONS: Location[] = [

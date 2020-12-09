@@ -67,6 +67,14 @@ export function formatMetatagDate(): string {
 }
 
 /**
+ * Returns a date formatted for timestamps in Learn (glossary + FAQ), ie: 10/26/2020
+ */
+
+export function formatNumericalDate(date: string): string {
+  return moment(date).format('L');
+}
+
+/**
  * Returns a language-sensitive representation of an integer. For US, it
  * adds commas for thousands, millions, etc.
  */

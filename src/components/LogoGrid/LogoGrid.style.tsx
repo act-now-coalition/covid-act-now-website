@@ -14,6 +14,7 @@ export const Logo = styled.img`
 
 export const GovLogo = styled.img`
   max-height: 100px;
+  max-width: 120px;
 `;
 
 export const PressLogoWrapper = styled(Grid)`

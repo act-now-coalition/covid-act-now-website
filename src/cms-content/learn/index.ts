@@ -1,9 +1,10 @@
-import { chain, keyBy, reject } from 'lodash';
+import { chain, keyBy, reject, partition } from 'lodash';
 import faq from './learn-faq.json';
 import glossary from './learn-glossary.json';
 import landing from './learn-landing.json';
 import caseStudies from './learn-case-studies.json';
 import productsLanding from './products-landing.json';
+import metricExplainers from './metric-explainers.json';
 import { sanitizeID, Markdown, TocItem } from '../utils';
 
 /*
@@ -46,6 +47,7 @@ export interface FaqSection {
 export interface FaqContent {
   header: string;
   intro: Markdown;
+  lastUpdatedDate: string;
   sections: FaqSection[];
   metadataTitle: string;
   metadataDescription: string;
@@ -77,6 +79,7 @@ export interface Term {
 export interface GlossaryContent {
   header: string;
   intro: Markdown;
+  lastUpdatedDate: string;
   terms: Term[];
   metadataTitle: string;
   metadataDescription: string;
@@ -221,23 +224,32 @@ export interface MetricExplainersContent {
   pageHeader: string;
   pageIntro: string;
   sections: Section[];
-  metricsHeader: string;
-  metricsID: string;
-  frameworkHeader: string;
-  frameworkID: string;
-  frameworkBody: Markdown;
   metadataTitle: string;
   metadataDescription: string;
 }
 
+export const metricExplainersContent = metricExplainers as MetricExplainersContent;
+export const [introSection, metricSections] = partition(
+  metricExplainersContent.sections,
+  section => section.sectionId === 'how-covid-risk-is-determined',
+);
+
 // TODO (pablo): Should we have a short heading for categories?
 export const learnPages: TocItem[] = [
   {
-    label: 'Glossary',
+    label: metricExplainersContent.pageHeader,
+    to: '/covid-risk-levels-metrics',
+    items: metricExplainersContent.sections.map(section => ({
+      to: `/covid-risk-levels-metrics#${section.sectionId}`,
+      label: section.sectionHeader,
+    })),
+  },
+  {
+    label: glossaryContent.header,
     to: '/glossary',
   },
   {
-    label: 'FAQ',
+    label: faqContent.header,
     to: '/faq',
     items: faqContent.sections.map(section => ({
       to: `/faq#${section.sectionId}`,
@@ -249,7 +261,7 @@ export const learnPages: TocItem[] = [
     to: '/deep-dives',
   },
   {
-    label: 'Case studies',
+    label: caseStudiesContent.header,
     to: '/case-studies',
     items: categoriesWithStudies.map(category => ({
       to: `/case-studies#${category.categoryId}`,

@@ -6,7 +6,7 @@ const barWidth = theme.spacing(2);
 const barRadius = barWidth / 2;
 
 export const ThermometerBox = styled.div`
-  padding: ${theme.spacing(2)}px;
+  padding: ${theme.spacing(3)}px ${theme.spacing(2)}px;
   background-color: ${COLOR_MAP.LIGHTGRAY_BG};
 `;
 
@@ -55,4 +55,9 @@ export const LevelTitle = styled.div`
 
 export const LevelDescription = styled.div`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
+`;
+
+export const ThermometerWrapper = styled.div`
+  margin: auto;
+  width: fit-content;
 `;

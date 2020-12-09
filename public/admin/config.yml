@@ -360,6 +360,12 @@ collections:
           - label: Intro
             name: intro
             widget: markdown
+          - label: Last updated date
+            name: lastUpdatedDate
+            widget: datetime
+            date_format: 'MMMM Do YYYY'
+            time_format: false
+            hint: To be updated whenever an update to this file is going to be deployed
           - label: Terms
             name: terms
             widget: list
@@ -398,6 +404,12 @@ collections:
           - label: Intro
             name: intro
             widget: markdown
+          - label: Last updated date
+            name: lastUpdatedDate
+            widget: datetime
+            date_format: 'MMMM Do YYYY'
+            time_format: false
+            hint: To be updated whenever an update to this file is going to be deployed
           - label: Sections
             name: sections
             widget: list
@@ -591,7 +603,7 @@ collections:
             name: sections
             widget: list
             fields:
-              - { label: Section header, name: sectionHeader, widget: string, required: false, hint: 'Use for indiv. metric sections -- metric name ie. Daily New Cases' }
+              - { label: Section header, name: sectionHeader, widget: string, hint: 'Either an individual metric name or How we assess risk' }
               - { label: Section subheader, name: sectionSubheader, widget: string, required: false, hint: 'Use for indiv. metric sections -- metric alias ie. Also known as: incidence' }
               - { label: Section ID, name: sectionId, widget: string, hint: 'Section header, all lowercase, separated by dashes if multi-word' }
               - { label: Section intro, name: sectionIntro, widget: markdown }
@@ -602,24 +614,6 @@ collections:
                   - { label: Question, name: question, widget: text }
                   - { label: Question ID, name: questionId, widget: text }
                   - { label: Answer, name: answer, widget: markdown }
-          - label: Key metrics section header
-            name: metricsHeader
-            widget: string
-            hint: Should be 'Key metrics'
-          - label: Key metrics section ID
-            name: metricsID
-            widget: string
-            hint: Section header, all lowercase, separated by dashed if multi-word
-          - label: Framework section header
-            name: frameworkHeader
-            widget: text
-          - label: Framework section ID
-            name: frameworkID
-            widget: string
-            hint: Section header, all lowercase, separated by dashed if multi-word
-          - label: Framework section body
-            name: frameworkBody
-            widget: markdown
           - label: Metadata title
             name: metadataTitle
             widget: text
