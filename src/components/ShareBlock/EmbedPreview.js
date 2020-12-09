@@ -19,7 +19,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { useEmbed } from 'common/utils/hooks';
 
-export default function EmbedPreview({ open, onClose, county }) {
+export default function EmbedPreview({ open, onClose }) {
   const {
     isEmbed,
     getEmbedHeight,
@@ -71,7 +71,8 @@ export default function EmbedPreview({ open, onClose, county }) {
     processSnackbarQueue();
   };
 
-  const countyFipsCode = county && county['full_fips_code'];
+  // TODO: Fix Iframe to work with counties
+  const countyFipsCode = undefined; // county && county['full_fips_code'];
   const iFramePath = getIframePath(countyFipsCode);
   const iFrameCodeSnippet = getIframeCodeSnippet(countyFipsCode);
   const jsCodeSnippet = getJsCodeSnippet(countyFipsCode);

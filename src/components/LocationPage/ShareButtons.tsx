@@ -13,18 +13,43 @@ import makeChartShareQuote from 'common/utils/makeChartShareQuote';
 import ShareImageUrlJSON from 'assets/data/share_images_url.json';
 import * as urls from 'common/urls';
 import moment from 'moment';
+import { County, Region, State } from 'common/regions';
 
-const InnerContent = props => {
-  const {
-    iconSize,
-    shareURL,
-    shareQuote,
-    county,
-    stateId,
-    countyId,
-    chartIdentifier,
-  } = props;
+const getShareImageUrl = (region: Region, chartIdentifier: number): string => {
+  const imageBaseUrl = ShareImageUrlJSON.share_image_url;
+  if (region instanceof County) {
+    return (
+      imageBaseUrl +
+      `counties/${region.fipsCode}/chart/${chartIdentifier}/export.png`
+    );
+  }
+  if (region instanceof State) {
+    const state = region as State;
+    return (
+      imageBaseUrl +
+      `states/${state.stateCode.toLowerCase()}/chart/${chartIdentifier}/export.png`
+    );
+  }
 
+  // TODO: AHHHHHHh
+  return '';
+};
+
+interface InnerContentProps {
+  region: Region;
+  iconSize: string;
+  shareURL: string;
+  shareQuote: string;
+  chartIdentifier: number;
+}
+
+const InnerContent = ({
+  region,
+  iconSize,
+  shareURL,
+  shareQuote,
+  chartIdentifier,
+}: InnerContentProps) => {
   const [showShareIcons, setShowShareIcons] = useState(false);
   const [saveInProgress, setSaveInProgress] = useState(false);
 
@@ -36,16 +61,10 @@ const InnerContent = props => {
     return () => clearTimeout(timeoutId);
   };
 
-  const imageBaseUrl = ShareImageUrlJSON.share_image_url;
-  const downloadLink = countyId
-    ? imageBaseUrl +
-      `counties/${county.full_fips_code}/chart/${chartIdentifier}/export.png`
-    : imageBaseUrl +
-      `states/${stateId.toLowerCase()}/chart/${chartIdentifier}/export.png`;
-
+  const downloadLink = getShareImageUrl(region, chartIdentifier);
   const downloadDate = moment().format('YYYY-MM-DD');
 
-  function makeDownloadFilename(chartIdentifier) {
+  function makeDownloadFilename(chartIdentifier: number) {
     const chartDownloadType = {
       0: 'infection_rate',
       1: 'positive_test_rate',
@@ -54,16 +73,16 @@ const InnerContent = props => {
       5: 'case_incidence',
     };
 
+    // @ts-ignore
     const chartType = chartDownloadType[chartIdentifier];
-    const location = countyId
-      ? `${countyId}_${stateId.toLowerCase()}`
-      : `${stateId.toLowerCase()}`;
+    // TODO Make this better capture
+    const location = region.fullName();
     return `${location}_${chartType}_${downloadDate}`;
   }
 
   // The following is a little hacky, adds a link to the blob and immediately clicks it
   // As described in https://stackoverflow.com/a/49500465
-  function downloadChart(blob, filename) {
+  function downloadChart(blob: string, filename: string) {
     var a = document.createElement('a');
     a.download = filename;
     a.href = blob;
@@ -72,7 +91,7 @@ const InnerContent = props => {
     a.remove();
   }
 
-  function downloadChartOnClick(url) {
+  function downloadChartOnClick(url: string) {
     const filename =
       makeDownloadFilename(chartIdentifier) || `CovidActNow_${downloadDate}`;
     setSaveInProgress(true);
@@ -90,6 +109,8 @@ const InnerContent = props => {
     <ClickAwayListener onClickAway={() => setShowShareIcons(false)}>
       <ClickAwayWrapper>
         <SaveOrShareContainer>
+          {/* HELP: Why the type error? */}
+          {/* 
           <SaveOrShareButton
             onClick={() => {
               setShowShareIcons(false);
@@ -110,6 +131,7 @@ const InnerContent = props => {
           >
             Share
           </SaveOrShareButton>
+          */}
         </SaveOrShareContainer>
         <SocialButtonsWrapper
           onClick={() => {
@@ -129,45 +151,41 @@ const InnerContent = props => {
   );
 };
 
-const ShareButtons = props => {
-  const { stateId, county, stats, isMobile, countyId, chartIdentifier } = props;
-
+interface ShareButtonProps {
+  region: Region;
+  stats: any;
+  isMobile: Boolean;
+  chartIdentifier: number;
+}
+const ShareButtons = ({
+  region,
+  stats,
+  isMobile,
+  chartIdentifier,
+}: ShareButtonProps) => {
   const shareQuote = makeChartShareQuote(
-    stateId,
-    county,
+    region.fullName(),
     stats,
     chartIdentifier,
   );
 
-  const shareBaseURL = `https://covidactnow.org/us/${stateId.toLowerCase()}${
-    county ? `/county/${county.county_url_name}` : ''
-  }`;
+  const shareBaseURL = region.canonicalUrl();
+
   const shareURL = urls.addSharingId(
     `${shareBaseURL}/chart/${chartIdentifier}`,
   );
 
-  const innerContentProps = {
-    shareURL,
-    shareQuote,
-    county,
-    stateId,
-    countyId,
-    chartIdentifier,
-  };
-
+  const iconSize = isMobile ? '40' : '50';
   return (
-    <Fragment>
-      {isMobile && (
-        <MobileButtonsWrapper>
-          <InnerContent iconSize="40" {...innerContentProps} />
-        </MobileButtonsWrapper>
-      )}
-      {!isMobile && (
-        <DesktopButtonsWrapper>
-          <InnerContent iconSize="50" {...innerContentProps} />
-        </DesktopButtonsWrapper>
-      )}
-    </Fragment>
+    <MobileButtonsWrapper>
+      <InnerContent
+        iconSize={iconSize}
+        shareURL={shareURL}
+        shareQuote={shareQuote}
+        chartIdentifier={chartIdentifier}
+        region={region}
+      />
+    </MobileButtonsWrapper>
   );
 };
 

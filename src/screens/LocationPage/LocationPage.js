@@ -8,16 +8,17 @@ import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ChartsHolder from 'components/LocationPage/ChartsHolder';
 import { LoadingScreen } from './LocationPage.style';
 import { useProjections } from 'common/utils/model';
-import { getPageTitle, getPageDescription } from './utils';
+import { getPageTitle, getPageDescription, getPageTitleRegion } from './utils';
 import {
   getCountyByUrlName,
   getStateByUrlName,
   getCanonicalUrl,
 } from 'common/locations';
+import { useLocationPageRegion } from 'common/regions';
 
 function LocationPage() {
   let { stateId, countyId, chartId } = useParams();
-
+  let region = useLocationPageRegion();
   const state = getStateByUrlName(stateId);
   // TODO(igor): don't mix uppercase and lowercase in here
   const stateCode = state.state_code.toUpperCase();
@@ -45,9 +46,9 @@ function LocationPage() {
     return <LoadingScreen></LoadingScreen>;
   }
 
-  const pageTitle = getPageTitle(projections);
-  const pageDescription = getPageDescription(projections);
-  const canonicalUrl = getCanonicalUrl(projections.fips);
+  const pageTitle = getPageTitleRegion(region);
+  const pageDescription = getPageDescription(region, projections);
+  const canonicalUrl = region.canonicalUrl();
 
   return (
     <div>

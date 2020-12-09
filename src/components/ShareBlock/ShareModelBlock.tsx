@@ -1,50 +1,60 @@
 import React, { useState } from 'react';
 import ShareBlock from './ShareBlock';
 import { STATES } from 'common';
+import { County, Region, State } from 'common/regions';
 
 import EmbedPreview from './EmbedPreview';
+import { Projections } from 'common/models/Projections';
 
 const BASE_SHARE_URL = 'https://covidactnow.org/us';
 
-const ShareModelBlock = ({ stateId, county, projections, stats }) => {
-  const { displayName, shareURL } = getUrlAndShareQuote({ stateId, county });
-  const countyName = county && county.county;
+interface ShareModelBlockParams {
+  region: Region;
+  projections: Projections;
+  stats: any;
+}
+
+const ShareModelBlock = ({
+  region,
+  projections,
+  stats,
+}: ShareModelBlockParams) => {
+  const { displayName, shareURL } = getUrlAndShareQuote(region);
   const shareQuote = `I'm keeping track of ${displayName}'s COVID data and risk level with @CovidActNow. What does your community look like?`;
   const [showEmbedPreviewModal, setShowEmbedPreviewModal] = useState(false);
 
   return (
     <>
       <ShareBlock
-        displayName={displayName}
-        stateId={stateId}
+        region={region}
         shareURL={shareURL}
-        countyName={countyName}
         shareQuote={shareQuote}
         projections={projections}
         onClickEmbed={() => setShowEmbedPreviewModal(true)}
         stats={stats}
       />
+      {/* todo: add region to this. county={county} */}
       <EmbedPreview
         open={showEmbedPreviewModal}
-        county={county}
         onClose={() => setShowEmbedPreviewModal(false)}
       />
     </>
   );
 };
 
-function getUrlAndShareQuote({ stateId, county }) {
+function getUrlAndShareQuote(region: Region) {
   let shareURL = BASE_SHARE_URL;
   let displayName = 'the country';
-  if (county) {
-    shareURL = `${BASE_SHARE_URL}/${stateId.toLowerCase()}/county/${
-      county.county_url_name
-    }`;
-    displayName = `${county.county}, ${STATES[stateId]}`;
-  } else if (stateId) {
-    shareURL = `${BASE_SHARE_URL}/${stateId.toLowerCase()}`;
-    displayName = STATES[stateId];
+  if (region instanceof County) {
+    const county = region as County;
+    shareURL = `${BASE_SHARE_URL}/${region.state.urlSegment}/county/${region.urlSegment}`;
+    displayName = `${county.fullName()}`;
+  } else if (region instanceof State) {
+    const state = region as State;
+    shareURL = `${BASE_SHARE_URL}/${state.urlSegment}`;
+    displayName = state.fullName();
   }
+  // TODO: Add other regions. maybe move this logic?
 
   return { shareURL, displayName };
 }

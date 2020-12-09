@@ -93,6 +93,7 @@ class Newsletter extends React.Component {
 
   render() {
     const { stateId, county } = this.props;
+    // Adds in default values based on state/county
     this.defaultValues = this.autocompleteOptions.filter(location => {
       const matching_state =
         location.state_code === stateId && location.full_fips_code.length === 2;

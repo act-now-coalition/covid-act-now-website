@@ -16,18 +16,19 @@ import {
 } from 'common/metric';
 import MetricChart from 'components/Charts/MetricChart';
 import { Subtitle1 } from 'components/Typography';
+import { Region } from 'common/regions';
 
 //TODO (chelsi): Use Projections.hasMetric() helper to get rid of the check for props.data
 
 function ChartBlock(props: {
   chartRef: React.RefObject<HTMLDivElement>;
   isMobile: Boolean;
-  shareButtonProps: { [key: string]: any };
+  region: Region;
+  stats: any;
   metric: Metric;
   projections: Projections;
-  stateId: string;
 }) {
-  const { projections, metric, isMobile } = props;
+  const { projections, metric, isMobile, region, stats } = props;
   const projection: Projection = projections.primary;
 
   const showBetaTag =
@@ -43,7 +44,12 @@ function ChartBlock(props: {
           {showBetaTag && <BetaTag>Beta</BetaTag>}
         </ChartHeader>
         {hasMetric && !isMobile && (
-          <ShareButtons chartIdentifier={metric} {...props.shareButtonProps} />
+          <ShareButtons
+            chartIdentifier={metric}
+            region={region}
+            stats={stats}
+            isMobile={isMobile}
+          />
         )}
       </ChartHeaderWrapper>
       <Subtitle1>{projection.locationName}</Subtitle1>
@@ -51,7 +57,12 @@ function ChartBlock(props: {
         {getMetricStatusText(metric, projections)}
       </ChartDescription>
       {hasMetric && isMobile && (
-        <ShareButtons chartIdentifier={metric} {...props.shareButtonProps} />
+        <ShareButtons
+          chartIdentifier={metric}
+          region={region}
+          stats={stats}
+          isMobile={isMobile}
+        />
       )}
       {hasMetric && (
         <>
