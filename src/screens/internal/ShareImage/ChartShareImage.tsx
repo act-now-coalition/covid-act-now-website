@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { ThemeProvider, ThemeContext } from 'styled-components';
 import {
@@ -12,29 +12,24 @@ import {
 import { DarkScreenshotWrapper } from './ShareImage.style';
 import LogoDark from 'assets/images/logoDark';
 import { chartDarkMode } from 'assets/theme/palette';
-import { Projections } from 'common/models/Projections';
 import { MetricChart } from '../../../components/Charts';
 import { ALL_METRICS, getMetricNameExtended } from 'common/metric';
 import { Metric } from 'common/metric';
-import { findCountyByFips } from 'common/locations';
-import { useProjections } from 'common/utils/model';
-import { Projection } from 'common/models/Projection';
+import { useProjectionsFromRegion } from 'common/utils/model';
 import { SCREENSHOT_CLASS } from 'components/Screenshot';
+import { useRegionFromParams } from 'common/regions/region_hooks';
 
 export default function ChartShareImage() {
-  let { stateId, countyFipsId, metric: metricString } = useParams();
-  const theme = useContext(ThemeContext);
+  let { metric: metricString } = useParams();
+  const region = useRegionFromParams();
 
-  let projections: Projections | undefined;
-  const [countyOption] = useState(
-    countyFipsId && findCountyByFips(countyFipsId),
-  );
-  stateId = stateId || countyOption.state_code;
-  projections = useProjections(stateId, countyOption) as any;
+  const theme = useContext(ThemeContext);
+  const projections = useProjectionsFromRegion(region);
   if (!projections) {
     return null;
   }
-  const projection = projections.primary as Projection;
+
+  const projection = projections.primary;
 
   const metric = parseInt(metricString) as Metric;
   if (isNaN(metric) || !ALL_METRICS.includes(metric)) {
