@@ -7,7 +7,7 @@
     {
       "sectionTitle": "Risk levels & key metrics",
       "sectionId": "covid-risk-levels-metrics",
-      "description": "At Covid Act Now, we built our dashboard — [America’s COVID Warning System](http://covidactnow.org) — with the goal of providing clear, actionable, real-time metrics relevant to COVID. Here you can learn about the five key metrics we use to calculate an overall risk level for every state and county in the United States.",
+      "description": "At Covid Act Now, we built our dashboard — [](http://covidactnow.org)[U.S. COVID Map & Risk Levels](https://www.covidactnow.org/?s=1408382) — with the goal of providing clear, actionable, real-time metrics relevant to COVID. Here you can learn about the five key metrics we use to calculate an overall risk level for every state and county in the United States.",
       "buttonCta": "View risk levels & key metrics",
       "buttonRedirect": "/covid-risk-levels-metrics"
     },
