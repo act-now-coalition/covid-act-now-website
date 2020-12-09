@@ -37,7 +37,7 @@ import HospitalizationsAlert, {
   isHospitalizationsPeak,
 } from './HospitalizationsAlert';
 import { ThermometerImage } from 'components/Thermometer';
-import { useLocationPageRegion } from 'common/regions/region_hooks';
+import { useLocationPageRegion } from 'common/regions';
 import LocationPageHeading from './LocationPageHeading';
 
 const NewFeatureCopy = (props: {

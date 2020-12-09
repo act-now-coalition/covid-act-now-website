@@ -1,18 +1,18 @@
 import React from 'react';
 import { LoadingScreen } from './AllStates.style';
-import { useProjections } from 'common/utils/model';
-import { STATES } from 'common';
+import { useProjectionsFromRegion } from 'common/utils/model';
 import { Metric } from 'common/metric';
 import { MetricChart } from 'components/Charts';
+import regions from 'common/regions';
 
 function AllStates() {
-  return Object.keys(STATES).map(stateId => (
-    <State key={stateId} stateId={stateId} />
-  ));
+  return regions.states.map(state => {
+    return <State key={state.stateCode} state={state} />;
+  });
 }
 
-function State({ stateId }) {
-  const projections = useProjections(stateId);
+function State({ state }) {
+  const projections = useProjectionsFromRegion(state);
 
   // Projections haven't loaded yet
   if (!projections) {
