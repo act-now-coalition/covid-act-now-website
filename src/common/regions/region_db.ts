@@ -1,17 +1,30 @@
-import { sortBy, takeRight } from 'lodash';
-
-import { Region, County, State, FipsCode } from 'common/regions';
+import { sortBy, takeRight, values, Dictionary } from 'lodash';
+import { Region, County, State, MetroArea, FipsCode } from './types';
+import { statesByFips, countiesByFips, metroAreasByFips } from './regions_data';
 
 class RegionDB {
-  private regions: Region[];
+  public states: State[];
+  public counties: County[];
+  public metroAreas: MetroArea[];
+  private regionsByFips: Dictionary<Region>;
 
-  constructor(public states: State[], public counties: County[]) {
-    this.regions = [...states, ...counties];
+  constructor(
+    private statesByFips: Dictionary<State>,
+    private countiesByFips: Dictionary<County>,
+    private metroAreasByFips: Dictionary<MetroArea>,
+  ) {
+    this.states = values(statesByFips);
+    this.counties = values(countiesByFips);
+    this.metroAreas = values(metroAreasByFips);
+    this.regionsByFips = {
+      ...statesByFips,
+      ...countiesByFips,
+      ...metroAreasByFips,
+    };
   }
 
   findByFipsCode(fipsCode: FipsCode): Region | null {
-    const region = this.regions.find(region => region.fipsCode === fipsCode);
-    return region || null;
+    return this.regionsByFips[fipsCode] || null;
   }
 
   findCountiesByStateCode(stateCode: string): County[] {
@@ -48,7 +61,7 @@ class RegionDB {
   }
 
   all(): Region[] {
-    return this.regions;
+    return [...this.states, ...this.counties];
   }
 
   topCountiesByPopulation(limit: number): County[] {
@@ -63,4 +76,7 @@ function equalLower(a: string, b: string) {
   return a.toLowerCase() === b.toLowerCase();
 }
 
-export default RegionDB;
+const regions = new RegionDB(statesByFips, countiesByFips, metroAreasByFips);
+
+export default regions;
+export { RegionDB };
