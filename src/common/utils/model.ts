@@ -5,12 +5,19 @@ import {
   RegionDescriptor,
 } from './RegionDescriptor';
 import { Api } from 'api';
-import { County, findCountyByFips, getStateName } from 'common/locations';
+import {
+  County as CountyLocation,
+  findCountyByFips,
+  getStateName,
+} from 'common/locations';
 import moment from 'moment';
 import { assert } from '.';
 import { getSnapshotUrlOverride } from './snapshots';
+import { County, Region, State } from 'common/regions';
+import { fail } from 'assert';
 
 const cachedProjections: { [key: string]: Promise<Projections> } = {};
+
 export function fetchProjections(
   stateId: string,
   countyInfo: any = null,
@@ -36,6 +43,42 @@ export function fetchProjections(
   }
 
   const key = snapshotUrl + '-' + region.toString();
+  cachedProjections[key] = cachedProjections[key] || fetch();
+  return cachedProjections[key];
+}
+
+export function fetchProjectionsRegion(
+  region: Region,
+  snapshotUrl: string | null = null,
+) {
+  snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
+  let regionDescriptor: RegionDescriptor;
+  let stateId: string;
+  let county: CountyLocation | undefined;
+  if (region instanceof County) {
+    regionDescriptor = RegionDescriptor.forCounty(region.fipsCode);
+    county = findCountyByFips(region.fipsCode);
+    stateId = (region as County).state.stateCode;
+  } else if (region instanceof State) {
+    regionDescriptor = RegionDescriptor.forState(region.stateCode);
+    stateId = (region as State).stateCode;
+  } else {
+    fail('Unknown region type');
+  }
+
+  async function fetch() {
+    const summaryWithTimeseries = await new Api(
+      snapshotUrl,
+    ).fetchSummaryWithTimeseries(regionDescriptor);
+    assert(
+      summaryWithTimeseries != null,
+      'Failed to fetch projections for ' + region,
+    );
+
+    return new Projections(summaryWithTimeseries, stateId, county);
+  }
+
+  const key = snapshotUrl + '-' + region.fullName();
   cachedProjections[key] = cachedProjections[key] || fetch();
   return cachedProjections[key];
 }
@@ -92,7 +135,7 @@ export function fetchAllCountyProjections(snapshotUrl: string | null = null) {
   return cachedCountiesProjections[key];
 }
 
-export function useProjections(location: string, county?: County) {
+export function useProjections(location: string, county?: CountyLocation) {
   const [projections, setProjections] = useState<Projections>();
 
   useEffect(() => {
@@ -102,6 +145,21 @@ export function useProjections(location: string, county?: County) {
     }
     fetchData();
   }, [location, county]);
+
+  return projections;
+}
+
+export function useProjectionsFromRegion(region: Region) {
+  const [projections, setProjections] = useState<Projections>();
+
+  useEffect(() => {
+    async function fetchData() {
+      const projections = await fetchProjectionsRegion(region);
+      setProjections(projections);
+    }
+
+    fetchData();
+  }, [region]);
 
   return projections;
 }

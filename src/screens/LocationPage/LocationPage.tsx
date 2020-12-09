@@ -1,5 +1,4 @@
-import React, { useState, useMemo } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState } from 'react';
 import { MAP_FILTERS } from './Enums/MapFilterEnums';
 import SearchHeader from 'components/Header/SearchHeader';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
@@ -7,42 +6,28 @@ import MiniMap from 'components/MiniMap';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ChartsHolder from 'components/LocationPage/ChartsHolder';
 import { LoadingScreen } from './LocationPage.style';
-import { useProjections } from 'common/utils/model';
-import { getPageTitle, getPageDescription, getPageTitleRegion } from './utils';
-import {
-  getCountyByUrlName,
-  getStateByUrlName,
-  getCanonicalUrl,
-} from 'common/locations';
-import { useLocationPageRegion } from 'common/regions';
+import { useProjectionsFromRegion } from 'common/utils/model';
+import { getPageDescription, getPageTitleRegion } from './utils';
+import { Region } from 'common/regions';
 
-function LocationPage() {
-  let { stateId, countyId, chartId } = useParams();
-  let region = useLocationPageRegion();
-  const state = getStateByUrlName(stateId);
-  // TODO(igor): don't mix uppercase and lowercase in here
-  const stateCode = state.state_code.toUpperCase();
-  const countyOption = countyId && getCountyByUrlName(stateCode, countyId);
+interface LocationPageProps {
+  region: Region;
+  chartId: string;
+}
 
+function LocationPage({ region, chartId }: LocationPageProps) {
   const [mapOption, setMapOption] = useState(
-    stateCode === MAP_FILTERS.DC ? MAP_FILTERS.NATIONAL : MAP_FILTERS.STATE,
+    region.fipsCode in ['11', '11001']
+      ? MAP_FILTERS.NATIONAL
+      : MAP_FILTERS.STATE,
   );
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const [selectedCounty, setSelectedCounty] = useState(countyOption);
-  useMemo(() => {
-    setSelectedCounty(countyOption);
-  }, [countyOption]);
-
-  const projections = useProjections(stateCode, selectedCounty);
-
+  const projections = useProjectionsFromRegion(region);
   // Projections haven't loaded yet
   // If a new county has just been selected, we may not have projections
   // for the new county loaded yet
-  if (
-    !projections ||
-    projections.county?.full_fips_code !== selectedCounty?.full_fips_code
-  ) {
+  if (!projections || projections.fips !== region.fipsCode) {
     return <LoadingScreen></LoadingScreen>;
   }
 
@@ -66,16 +51,11 @@ function LocationPage() {
         />
         <ChartsHolder
           projections={projections}
-          stateId={stateCode}
-          county={countyOption}
+          region={region}
           chartId={chartId}
-          countyId={countyId}
         />
         <MiniMap
-          projections={projections}
-          stateId={stateCode}
-          selectedCounty={selectedCounty}
-          setSelectedCounty={setSelectedCounty}
+          region={region}
           mobileMenuOpen={mobileMenuOpen}
           setMobileMenuOpen={setMobileMenuOpen}
           mapOption={mapOption}

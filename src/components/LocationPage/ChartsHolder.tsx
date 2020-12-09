@@ -25,6 +25,7 @@ import { mainContent } from 'cms-content/recommendations';
 import { getRecommendationsShareUrl } from 'common/urls';
 import {
   County,
+  Region,
   RegionType,
   State,
   useLocationPageRegion,
@@ -40,11 +41,14 @@ const scrollTo = (div: null | HTMLDivElement, offset: number = 180) =>
     behavior: 'smooth',
   });
 
-const ChartsHolder = (props: { projections: Projections; chartId: string }) => {
-  const { chartId } = props;
-  const projection = props.projections.primary;
+interface ChartsHolderProps {
+  projections: Projections;
+  region: Region;
+  chartId: string;
+}
 
-  const region = useLocationPageRegion();
+const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
+  const projection = projections.primary;
 
   const metricRefs = {
     [Metric.CASE_DENSITY]: useRef<HTMLDivElement>(null),
@@ -96,15 +100,15 @@ const ChartsHolder = (props: { projections: Projections; chartId: string }) => {
     scrollToRecommendations();
   }, [chartId, metricRefs, isRecommendationsShareUrl]);
 
-  const stats = props.projections.getMetricValues();
+  const stats = projections.getMetricValues();
 
   const initialFipsList = useMemo(() => {
-    return [props.projections.primary.fips];
-  }, [props.projections.primary.fips]);
+    return [projections.primary.fips];
+  }, [projections.primary.fips]);
 
   const recommendationsIntro = getDynamicIntroCopy(
     projection,
-    props.projections.getMetricValues(),
+    projections.getMetricValues(),
   );
 
   const recommendationsMainContent = getRecommendations(
@@ -113,12 +117,12 @@ const ChartsHolder = (props: { projections: Projections; chartId: string }) => {
   );
 
   const recommendsShareUrl = getRecommendationsShareUrl(
-    props.projections.primary.fips,
+    projections.primary.fips,
   );
 
-  const alarmLevel = props.projections.getAlarmLevel();
+  const alarmLevel = projections.getAlarmLevel();
   const recommendsShareQuote = getShareQuote(
-    props.projections.locationName,
+    projections.locationName,
     alarmLevel,
   );
 
@@ -130,13 +134,13 @@ const ChartsHolder = (props: { projections: Projections; chartId: string }) => {
   const recommendationsFedModalCopy = getModalCopyWithFedLevel(
     projection,
     projection.locationName,
-    props.projections.getMetricValues(),
+    projections.getMetricValues(),
   );
 
   const recommendationsHarvardModalCopy = getModalCopyWithHarvardLevel(
     projection,
     projection.locationName,
-    props.projections.getMetricValues(),
+    projections.getMetricValues(),
   );
 
   const getStateId = (): string | undefined => {
@@ -153,8 +157,8 @@ const ChartsHolder = (props: { projections: Projections; chartId: string }) => {
     <>
       <ChartContentWrapper>
         <LocationPageHeader
-          projections={props.projections}
-          stats={props.projections.getMetricValues()}
+          projections={projections}
+          stats={projections.getMetricValues()}
           onMetricClick={metric => scrollTo(metricRefs[metric].current)}
           onHeaderShareClick={() => scrollTo(shareBlockRef.current, -372)}
           onHeaderSignupClick={() => scrollTo(shareBlockRef.current)}
@@ -164,7 +168,7 @@ const ChartsHolder = (props: { projections: Projections; chartId: string }) => {
         {/* TODO: Add county back. */}
         <CompareMain
           county={undefined}
-          stateName={props.projections.stateName}
+          stateName={projections.stateName}
           locationsViewable={6}
           stateId={getStateId()}
         />
@@ -177,8 +181,8 @@ const ChartsHolder = (props: { projections: Projections; chartId: string }) => {
             shareQuote={recommendsShareQuote}
             recommendationsRef={recommendationsRef}
             feedbackFormUrl={recommendationsFeedbackForm}
-            fedLevel={getFedLevel(props.projections.primary)}
-            harvardLevel={getHarvardLevel(props.projections.primary)}
+            fedLevel={getFedLevel(projections.primary)}
+            harvardLevel={getHarvardLevel(projections.primary)}
             harvardModalLocationCopy={recommendationsHarvardModalCopy}
             fedModalLocationCopy={recommendationsFedModalCopy}
           />
@@ -186,7 +190,7 @@ const ChartsHolder = (props: { projections: Projections; chartId: string }) => {
             <ChartBlock
               key={metric}
               metric={metric}
-              projections={props.projections}
+              projections={projections}
               chartRef={metricRefs[metric]}
               region={region}
               stats={stats}
@@ -205,7 +209,7 @@ const ChartsHolder = (props: { projections: Projections; chartId: string }) => {
       <div ref={shareBlockRef} id="recommendationsTest">
         <ShareModelBlock
           region={region}
-          projections={props.projections}
+          projections={projections}
           stats={stats}
         />
       </div>

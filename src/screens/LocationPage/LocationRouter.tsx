@@ -6,10 +6,11 @@ import LocationPage from './LocationPage';
 interface LocationPageUrlParams {
   stateId: string;
   countyId: string | undefined;
+  chartId?: string;
 }
 
 const LocationRouter: React.FC = () => {
-  let { stateId, countyId } = useParams<LocationPageUrlParams>();
+  let { stateId, countyId, chartId } = useParams<LocationPageUrlParams>();
 
   const state = regions.findStateByUrlParams(stateId);
   const county = countyId
@@ -23,7 +24,7 @@ const LocationRouter: React.FC = () => {
 
   return (
     <RegionContext.Provider value={region}>
-      <LocationPage />
+      <LocationPage region={region} chartId={chartId || ''} />
     </RegionContext.Provider>
   );
 };
