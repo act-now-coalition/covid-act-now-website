@@ -17,10 +17,10 @@ import { ALL_METRICS, getMetricNameExtended } from 'common/metric';
 import { Metric } from 'common/metric';
 import { useProjectionsFromRegion } from 'common/utils/model';
 import { SCREENSHOT_CLASS } from 'components/Screenshot';
-import { useRegionFromParams } from 'common/regions/region_hooks';
+import { useRegionFromParams } from 'common/regions';
 
 export default function ChartShareImage() {
-  let { metric: metricString } = useParams();
+  let { metric: metricString } = useParams<{ metric: string }>();
   const region = useRegionFromParams();
 
   const theme = useContext(ThemeContext);
