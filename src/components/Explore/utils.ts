@@ -14,7 +14,7 @@ import { color } from 'd3-color';
 import { schemeCategory10 } from 'd3-scale-chromatic';
 import { fetchProjectionsRegion } from 'common/utils/model';
 import { Column, DatasetId } from 'common/models/Projection';
-import { isStateFips, AGGREGATED_LOCATIONS } from 'common/locations';
+import { AGGREGATED_LOCATIONS } from 'common/locations';
 import { share_image_url } from 'assets/data/share_images_url.json';
 import { SeriesType, Series } from './interfaces';
 import AggregationsJSON from 'assets/data/aggregations.json';
@@ -451,7 +451,7 @@ export function getAutocompleteLocations(locationFips: string) {
   const sortedOtherCounties = sortBy(otherCounties, location => location.name);
 
   // TODO(michael): Where should aggregations go in the list?
-  return isStateFips(locationFips)
+  return currentLocation.regionType === RegionType.STATE
     ? [
         // ...AGGREGATED_LOCATIONS,
         ...sortedStates,

@@ -5,7 +5,6 @@ import {
   RegionDescriptor,
 } from './RegionDescriptor';
 import { Api } from 'api';
-import { getStateName } from 'common/locations';
 import moment from 'moment';
 import { assert } from '.';
 import { getSnapshotUrlOverride } from './snapshots';
@@ -56,14 +55,11 @@ export function fetchAllStateProjections(snapshotUrl: string | null = null) {
     return all
       .filter(
         summaryWithTimeseries =>
-          getStateName(summaryWithTimeseries.state) !== undefined,
+          regions.findByFipsCode(summaryWithTimeseries.fips) !== undefined,
       )
       .map(summaryWithTimeseries => {
         const fips = summaryWithTimeseries.fips;
-        const region = regions.findByFipsCode(fips);
-        if (!region) {
-          fail(`Missing region ${region}`);
-        }
+        const region = regions.findByFipsCode(fips)!;
         return new Projections(summaryWithTimeseries, region);
       });
   }
@@ -83,14 +79,12 @@ export function fetchAllCountyProjections(snapshotUrl: string | null = null) {
     return all
       .filter(
         summaryWithTimeseries =>
-          getStateName(summaryWithTimeseries.state) !== undefined,
+          regions.findByFipsCode(summaryWithTimeseries.fips) !== undefined,
       )
       .map(summaryWithTimeseries => {
         const fips = summaryWithTimeseries.fips;
-        const region = regions.findByFipsCode(fips);
-        if (!region) {
-          fail(`Missing region ${region}`);
-        }
+        const region = regions.findByFipsCode(fips)!;
+
         return new Projections(summaryWithTimeseries, region);
       });
   }

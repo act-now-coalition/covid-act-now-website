@@ -7,8 +7,7 @@ import COUNTIES_JSON from './data/counties-10m.json';
 import { USMapWrapper, USStateMapWrapper } from './Map.style';
 import { useSummaries } from 'common/location_summaries';
 import { ScreenshotReady } from 'components/Screenshot';
-import { isStateFips } from 'common/locations';
-import regions from 'common/regions';
+import regions, { RegionType } from 'common/regions';
 
 /**
  * The COUNTIES_JSON file contains geographies for counties, states and the
@@ -87,7 +86,11 @@ const USACountyMap = React.memo(
               <Geographies geography={geoStates}>
                 {({ geographies }) =>
                   geographies
-                    .filter(geo => isStateFips(geo.id))
+                    .filter(
+                      geo =>
+                        regions.findByFipsCode(geo.id)?.regionType ===
+                        RegionType.STATE,
+                    )
                     .map(geo => {
                       const { name } = geo.properties;
                       const fipsCode = geo.id;

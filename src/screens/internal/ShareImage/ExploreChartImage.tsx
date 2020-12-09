@@ -4,7 +4,6 @@ import { ThemeProvider, ThemeContext } from 'styled-components';
 import { ParentSize } from '@vx/responsive';
 import LogoDark from 'assets/images/logoDark';
 import { chartDarkMode } from 'assets/theme/palette';
-import { findLocationForFips } from 'common/locations';
 import { DarkScreenshotWrapper } from './ShareImage.style';
 import { ExploreChart } from 'components/Explore';
 import {
@@ -21,6 +20,7 @@ import {
   getMetricName,
 } from 'components/Explore/utils';
 import { Series } from 'components/Explore/interfaces';
+import regions from 'common/regions';
 
 const ExploreChartImage = ({ componentParams }: { componentParams: any }) => {
   const theme = useContext(ThemeContext);
@@ -29,8 +29,8 @@ const ExploreChartImage = ({ componentParams }: { componentParams: any }) => {
   const currentMetricName = getMetricName(currentMetric);
   const normalizeData = componentParams.normalizeData;
   const [selectedLocations] = useState(
-    componentParams.selectedFips.map((fips: string) =>
-      findLocationForFips(fips),
+    componentParams.selectedFips.map(
+      (fips: string) => regions.findByFipsCode(fips)!,
     ),
   );
   const [chartSeries, setChartSeries] = useState<Series[]>([]);

@@ -11,7 +11,6 @@ import {
 } from 'api/schema/RegionSummaryWithTimeseries';
 import { ICUHeadroomInfo, calcICUHeadroom } from './ICUHeadroom';
 import { lastValue } from './utils';
-import { getStateName } from 'common/locations';
 
 /** Stores a list of FIPS or FIPS regex patterns to disable. */
 class DisabledFips {
@@ -124,7 +123,6 @@ export const CASE_FATALITY_RATIO = 0.01;
  * time-series of things like hospitalizations, hospital capacity, infections, etc.
  */
 export class Projection {
-  readonly locationName: string;
   readonly totalPopulation: number;
   readonly fips: string;
 
@@ -182,7 +180,6 @@ export class Projection {
     this.actualTimeseries = actualTimeseries;
     this.dates = dates;
 
-    this.locationName = this.getLocationName(summaryWithTimeseries);
     this.stateCode = summaryWithTimeseries.state;
     this.isCounty = parameters.isCounty;
     this.totalPopulation = summaryWithTimeseries.population;
@@ -402,11 +399,6 @@ export class Projection {
       metricsTimeseries: metricsTimeseries.slice(0, days),
       dates: dates.slice(0, days),
     };
-  }
-
-  private getLocationName(s: RegionSummaryWithTimeseries) {
-    const stateName = getStateName(s.state) || '';
-    return s.county ? `${s.county}, ${stateName}` : stateName;
   }
 
   private calcCaseDensityRange(): Array<CaseDensityRange | null> {

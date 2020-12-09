@@ -26,7 +26,7 @@ import {
   StyledResultsMenuOption,
   StyledResultsMenuSubText,
 } from './MapSelectors.style';
-import { getStateByUrlName } from 'common/locations';
+import regions from 'common/regions';
 
 const StateItem = ({ dataset }) => {
   const fillColor = stateColor(dataset.state_code);
@@ -158,7 +158,7 @@ const GlobalSelector = ({ handleChange, extendRight }) => {
     }
 
     if (location && !inputValue) {
-      const { state_code } = getStateByUrlName(location);
+      const { stateCode: state_code } = regions.findStateByUrlParams(location);
       const topCountiesByParamState = chain(countyDataset)
         .filter(item => item.state_code === state_code)
         .map(item => ({

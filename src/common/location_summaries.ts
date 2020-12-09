@@ -3,8 +3,8 @@ import fetch from 'node-fetch';
 import { Level } from 'common/level';
 import { Metric } from 'common/metric';
 import LocationSummariesJSON from 'assets/data/summaries.json';
-import { findStateFipsCode } from 'common/locations';
 import { currentSnapshot, getSnapshotOverride } from './utils/snapshots';
+import regions from './regions';
 
 export interface MetricSummary {
   value: number | null;
@@ -23,8 +23,11 @@ export type SummariesMap = { [fips: string]: LocationSummary };
 export const LocationSummariesByFIPS = LocationSummariesJSON as SummariesMap;
 
 export function stateSummary(stateCode: string): LocationSummary | null {
-  const fips = findStateFipsCode(stateCode);
-  return LocationSummariesByFIPS[fips] || null;
+  const region = regions.states.find(state => state.stateCode === stateCode);
+  if (!region) {
+    return null;
+  }
+  return LocationSummariesByFIPS[region.fipsCode];
 }
 
 export function countySummary(fips: string): LocationSummary | null {

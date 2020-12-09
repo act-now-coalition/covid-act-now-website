@@ -136,27 +136,13 @@ export function findStateByFips(fips: string): State {
   return state;
 }
 
-export function findStateFipsCode(stateCode: string): string {
-  const fips = US_STATE_DATASET.state_dataset.find(
-    state => state.state_code === stateCode,
-  )?.state_fips_code;
-  assert(fips !== undefined, `Invalid state code: ${stateCode}`);
-  return fips;
-}
-
-export function getLocationNameForFips(fips: string): string {
-  if (fips.startsWith('00')) {
-    return (
-      AGGREGATED_LOCATIONS.find(l => l.full_fips_code === fips)?.state || ''
-    );
-  }
-  if (isStateFips(fips)) {
-    return findStateByFips(fips).state;
-  } else {
-    const county = findCountyByFips(fips);
-    return `${county.county}, ${county.state_code}`;
-  }
-}
+// export function findLocationForFips(fips: string): Location {
+//   return fips.startsWith('00')
+//     ? AGGREGATED_LOCATIONS.find(l => l.full_fips_code === fips)
+//     : isStateFips(fips)
+//     ? findStateByFips(fips)
+//     : findCountyByFips(fips);
+// }
 
 export function getAdjacentCounties(fips: string): string[] {
   assert(fips in ADJACENT_COUNTIES, `${fips} not found in adjacency list.`);
@@ -169,58 +155,10 @@ export function getCountyMsaCode(fips: string): string | undefined {
   }
 }
 
-export function findLocationForFips(fips: string): Location {
-  return fips.startsWith('00')
-    ? AGGREGATED_LOCATIONS.find(l => l.full_fips_code === fips)
-    : isStateFips(fips)
-    ? findStateByFips(fips)
-    : findCountyByFips(fips);
-}
-
 export function getColleges(fips: string): CollegeData[] {
   return COLLEGES[fips] || [];
 }
 
-export function getStateCode(stateName: string) {
-  return REVERSED_STATES[stateName];
-}
-
-export function getStateName(stateCode: string): string | undefined {
-  return (STATES_MAP as any)[stateCode];
-}
-
 const ALL_LOCATIONS = getAllLocations();
 const locationsByType = partition(ALL_LOCATIONS, isCounty);
-const COUNTIES = locationsByType[0] as County[];
 export const STATES = locationsByType[1] as State[];
-
-export function getStateByUrlName(stateUrlName: string): State | undefined {
-  return STATES.find(
-    state =>
-      toLower(state.state_url_name) === toLower(stateUrlName) ||
-      toLower(state.state_code) === toLower(stateUrlName),
-  );
-}
-
-export function getCountyByUrlName(
-  stateCode: string | undefined,
-  countyUrlName: string,
-): County | undefined {
-  return COUNTIES.find(
-    county =>
-      toLower(county.county_url_name) === toLower(countyUrlName) &&
-      toLower(county.state_code) === toLower(stateCode),
-  );
-}
-
-export function isCounty(location: Location) {
-  return location.county !== undefined;
-}
-
-export function isState(location: Location) {
-  return !isCounty(location);
-}
-
-export function belongsToState(location: Location, stateFips: string) {
-  return location.state_fips_code === stateFips;
-}

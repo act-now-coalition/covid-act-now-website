@@ -13,7 +13,6 @@ import { useTheme } from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { ParentSize } from '@vx/responsive';
 import { useModelLastUpdatedDate } from 'common/utils/model';
-import { findLocationForFips } from 'common/locations';
 import {
   DisclaimerWrapper,
   DisclaimerBody,
@@ -158,7 +157,8 @@ const Explore: React.FunctionComponent<{
   );
 
   const indigeneousPopulationsLocations = useMemo(
-    () => ['00001', '00002'].map(findLocationForFips),
+    () => [],
+    // () => ['00001', '00002'].map(findLocationForFips),
     [],
   );
   const autocompleteLocations = useMemo(
