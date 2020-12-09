@@ -61,7 +61,7 @@ class RegionDB {
   }
 
   all(): Region[] {
-    return [...this.states, ...this.counties, ...this.metroAreas];
+    return [...this.states, ...this.counties];
   }
 
   topCountiesByPopulation(limit: number): County[] {
