@@ -26,7 +26,7 @@ import {
   EmbedSubheader,
 } from './Embed.style';
 import SocialLocationPreview from 'components/SocialLocationPreview/SocialLocationPreview';
-import { useRegionFromParams } from 'common/regions/region_hooks';
+import { useRegionFromParams } from 'common/regions';
 
 function LocationEmbed() {
   const region = useRegionFromParams();

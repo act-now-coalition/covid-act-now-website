@@ -25,7 +25,7 @@ import {
 } from 'common/utils/recommend';
 import { mainContent } from 'cms-content/recommendations';
 import { getRecommendationsShareUrl } from 'common/urls';
-import { useLocationPageRegion } from 'common/regions/region_hooks';
+import { useLocationPageRegion } from 'common/regions';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update

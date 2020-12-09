@@ -21,7 +21,7 @@ import {
 } from 'common/utils/model';
 import { formatUtcDate } from 'common/utils';
 import { SCREENSHOT_CLASS } from 'components/Screenshot';
-import { useRegionFromParams } from 'common/regions/region_hooks';
+import { useRegionFromParams } from 'common/regions';
 
 const ExportChartImage = () => {
   let { metric: metricString } = useParams();

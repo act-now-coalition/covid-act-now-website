@@ -27,11 +27,6 @@ class RegionDB {
     return this.regionsByFips[fipsCode] || null;
   }
 
-  findStateByStateCode(stateCode: string): State | null {
-    const region = this.states.find(state => state.stateCode === stateCode);
-    return region || null;
-  }
-
   findCountiesByStateCode(stateCode: string): County[] {
     return this.counties.filter(county => county.stateCode === stateCode);
   }
