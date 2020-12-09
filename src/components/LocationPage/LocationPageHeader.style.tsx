@@ -5,6 +5,7 @@ import palette from 'assets/theme/palette';
 import { COLORS } from 'common';
 import { COLOR_MAP } from 'common/colors';
 import { Level } from 'common/level';
+import MuiWarningIcon from '@material-ui/icons/Warning';
 
 export const ColoredHeaderBanner = styled(Box)`
   display: flex;
@@ -370,4 +371,11 @@ export const Triangle = styled(Box)<{ alarmLevel: number }>`
       : alarmLevel === Level.CRITICAL
       ? '96px'
       : '0'};
+`;
+
+export const WarningIcon = styled(MuiWarningIcon)`
+  align-self: flex-start;
+  path {
+    fill: ${COLOR_MAP.RED.BASE};
+  }
 `;
