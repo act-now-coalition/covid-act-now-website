@@ -1,7 +1,15 @@
-import { chain, Dictionary, fromPairs } from 'lodash';
+import { chain, Dictionary, fromPairs, groupBy, values } from 'lodash';
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 import countyAdjacencyMsa from 'common/data/county_adjacency_msa.json';
-import { RegionType, FipsCode, Region, State, County } from './types';
+import metroAreaDataset from 'common/data/msa-data.json';
+import {
+  RegionType,
+  FipsCode,
+  Region,
+  State,
+  County,
+  MetroArea,
+} from './types';
 
 const { state_dataset, state_county_map_dataset } = US_STATE_DATASET;
 
@@ -46,19 +54,27 @@ function buildCounties(
   statesByFips: Dictionary<State>,
   countyAdjacency: { [fipsCode: string]: AdjacencyInfo },
 ): County[] {
-  const statesFipsList = states.map(state => state.fipsCode);
   return chain(state_county_map_dataset)
     .map(stateData => stateData.county_dataset)
     .flatten()
-    .filter(county => statesFipsList.includes(county.state_fips_code))
     .map(countyInfo => {
-      const countyFips = countyInfo.full_fips_code;
+      /**
+       * TODO: The following counties in New York State have the same
+       * `full_fips_code ` (36061), but different `county_fips_code`.
+       * Determine how we want to handle this before shipping.
+       *
+       * - New York County (county_fips_code: 061)
+       * - Queens County (county_fips_code: 081)
+       * - Richmond County" (county_fips_code: 085)
+       * - Bronx County" (county_fips_code: 005)
+       */
+      const countyFips = `${countyInfo.state_fips_code}${countyInfo.county_fips_code}`;
       const state = statesByFips[countyInfo.state_fips_code];
       const adjacentCounties = countyAdjacency[countyFips]?.adjacent_counties;
       return new County(
         countyInfo.county,
         countyInfo.county_url_name,
-        countyInfo.full_fips_code,
+        countyFips,
         countyInfo.population,
         state,
         countyInfo.cities || [],
@@ -68,7 +84,28 @@ function buildCounties(
     .value();
 }
 
-export const states: State[] = buildStates();
+function buildMetroAreas(countiesByFips: Dictionary<County>): MetroArea[] {
+  return chain(metroAreaDataset.metro_areas)
+    .map(metro => {
+      const counties: County[] = metro.countyFipsCodes
+        .map(countyFips => countiesByFips[countyFips] || null)
+        .filter(county => county);
+
+      const [name, statesText] = metro.cbsaTitle.split(', ');
+      const stateCodes = statesText.split('-');
+      return new MetroArea(
+        name,
+        metro.urlSegment,
+        metro.cbsaCode,
+        metro.population,
+        counties,
+        stateCodes,
+      );
+    })
+    .value();
+}
+
+const states: State[] = buildStates();
 export const statesByFips = fromPairs(
   states.map(state => [state.fipsCode, state]),
 );
@@ -79,7 +116,12 @@ interface AdjacencyInfo {
 }
 const adjacency: Dictionary<AdjacencyInfo> = countyAdjacencyMsa.counties;
 
-export const counties: County[] = buildCounties(statesByFips, adjacency);
+const counties: County[] = buildCounties(statesByFips, adjacency);
 export const countiesByFips = fromPairs(
   counties.map(county => [county.fipsCode, county]),
+);
+
+const metroAreas = buildMetroAreas(countiesByFips);
+export const metroAreasByFips = fromPairs(
+  metroAreas.map(metro => [metro.fipsCode, metro]),
 );

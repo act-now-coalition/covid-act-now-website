@@ -1,25 +1,26 @@
-import { sortBy, takeRight } from 'lodash';
-import { Region, County, State, FipsCode } from './types';
-import { states, statesByFips, counties, countiesByFips } from './regions_data';
-
-interface RegionByFips {
-  [fipsCode: string]: Region;
-}
+import { sortBy, takeRight, values, Dictionary } from 'lodash';
+import { Region, County, State, MetroArea, FipsCode } from './types';
+import { statesByFips, countiesByFips, metroAreasByFips } from './regions_data';
 
 class RegionDB {
-  private regions: Region[];
-  private regionsByFips: RegionByFips;
+  public states: State[];
+  public counties: County[];
+  public metroAreas: MetroArea[];
+  private regionsByFips: Dictionary<Region>;
 
   constructor(
-    public states: State[],
-    public counties: County[],
-    private statesByFips: RegionByFips,
-    private countiesByFips: RegionByFips,
+    private statesByFips: Dictionary<State>,
+    private countiesByFips: Dictionary<County>,
+    private metroAreasByFips: Dictionary<MetroArea>,
   ) {
-    this.regions = [...states, ...counties];
-    this.states = states;
-    this.counties = counties;
-    this.regionsByFips = { ...statesByFips, ...countiesByFips };
+    this.states = values(statesByFips);
+    this.counties = values(countiesByFips);
+    this.metroAreas = values(metroAreasByFips);
+    this.regionsByFips = {
+      ...statesByFips,
+      ...countiesByFips,
+      ...metroAreasByFips,
+    };
   }
 
   findByFipsCode(fipsCode: FipsCode): Region | null {
@@ -60,7 +61,7 @@ class RegionDB {
   }
 
   all(): Region[] {
-    return this.regions;
+    return [...this.states, ...this.counties, ...this.metroAreas];
   }
 
   topCountiesByPopulation(limit: number): County[] {
@@ -75,7 +76,7 @@ function equalLower(a: string, b: string) {
   return a.toLowerCase() === b.toLowerCase();
 }
 
-const regions = new RegionDB(states, counties, statesByFips, countiesByFips);
+const regions = new RegionDB(statesByFips, countiesByFips, metroAreasByFips);
 
 export default regions;
 export { RegionDB };

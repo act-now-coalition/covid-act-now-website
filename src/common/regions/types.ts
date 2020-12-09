@@ -1,12 +1,13 @@
 import urlJoin from 'url-join';
 import { getAbbreviatedCounty } from 'common/utils/compare';
+import { TransferWithinAStationSharp } from '@material-ui/icons';
 
 export type FipsCode = string;
 
 export enum RegionType {
   COUNTY = 'county',
   STATE = 'state',
-  CBSA = 'CBSA',
+  MSA = 'MSA',
 }
 
 export abstract class Region {
@@ -77,15 +78,51 @@ export class County extends Region {
     return `${this.name}, ${this.stateCode}`;
   }
 
-  get relativeUrl() {
-    return urlJoin(this.state.relativeUrl, `county/${this.urlSegment}`);
-  }
-
   get abbreviation() {
     return getAbbreviatedCounty(this.name);
   }
 
+  get relativeUrl() {
+    return urlJoin(this.state.relativeUrl, `county/${this.urlSegment}`);
+  }
+
   get stateCode() {
     return this.state.stateCode;
+  }
+}
+
+/**
+ * Metropolitan Statistical Areas
+ */
+export class MetroArea extends Region {
+  constructor(
+    name: string,
+    urlSegment: string,
+    fipsCode: FipsCode,
+    population: number,
+    public counties: County[],
+    private stateCodeList: string[],
+  ) {
+    super(name, urlSegment, fipsCode, population, RegionType.MSA);
+  }
+
+  get fullName() {
+    return `${this.name}, ${this.stateCodes}`;
+  }
+
+  get shortName() {
+    return this.name;
+  }
+
+  get abbreviation() {
+    return this.name;
+  }
+
+  get relativeUrl() {
+    return `us/metro/${this.urlSegment}`;
+  }
+
+  get stateCodes() {
+    return this.stateCodeList.join('-');
   }
 }
