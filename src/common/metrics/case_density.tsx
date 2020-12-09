@@ -113,9 +113,9 @@ function renderStatus(projections: Projections): React.ReactElement {
     <Fragment>
       Over the last week, {locationName} has averaged {newCasesPerDayText} new
       confirmed cases per day (<b>{formatDecimal(currentCaseDensity, 1)}</b> for
-      every 100,000 residents). If today's trend continued, this would translate
-      over the next year to around {formatEstimate(newCasesPerYear)} cases and
-      an{' '}
+      every 100,000 residents). If this trend continued for the next year, this
+      would translate to approximately {formatEstimate(newCasesPerYear)} cases
+      and an{' '}
       <ExternalLink href="https://www.globalhealthnow.org/2020-06/us-cases-10x-higher-reported">
         estimated
       </ExternalLink>{' '}
