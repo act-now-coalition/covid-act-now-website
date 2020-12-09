@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import {
   metricExplainersContent,
@@ -15,6 +15,9 @@ import { Metric, getMetricDefinition } from 'common/metric';
 import { ThermometerBox } from 'components/Thermometer';
 import ThermometerIntro from './ThermometerIntro';
 import { ExplainersHeading2 } from './MetricExplainer.style';
+import { useScrollToTopButton } from 'common/hooks';
+import ScrollToTopButton from 'components/SharedComponents/ScrollToTopButton';
+import { EventCategory } from 'components/Analytics';
 
 const MetricExplainer = () => {
   const {
@@ -33,6 +36,12 @@ const MetricExplainer = () => {
       title: section.sectionHeader,
     }));
   }
+
+  const [showScrollToTop, setShowScrollToTop] = useState(false);
+  const showScrollToTopButton = useScrollToTopButton(
+    showScrollToTop,
+    setShowScrollToTop,
+  );
 
   return (
     <Fragment>
@@ -76,6 +85,10 @@ const MetricExplainer = () => {
             ))}
           </Fragment>
         ))}
+        <ScrollToTopButton
+          showButton={showScrollToTopButton}
+          analyticsCategory={EventCategory.METRIC_EXPLAINERS}
+        />
       </PageContent>
     </Fragment>
   );
