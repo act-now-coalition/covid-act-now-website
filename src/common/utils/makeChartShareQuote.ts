@@ -1,5 +1,3 @@
-import { STATES } from 'common';
-import { Region } from 'common/regions';
 import { fail, formatDecimal, formatPercent } from 'common/utils';
 
 //TODO(chelsi): move this copy into individual metric files. remove need for hardcoded identifying numers

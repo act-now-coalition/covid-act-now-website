@@ -1,9 +1,10 @@
 import { createContext, useContext } from 'react';
-import { chain, fromPairs } from 'lodash';
+import { chain, fromPairs, sortBy, takeRight } from 'lodash';
 import urlJoin from 'url-join';
 import { assert } from 'common/utils';
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 import countyAdjacencyMsa from './data/county_adjacency_msa.json';
+import { getAbbreviatedCounty } from './utils/compare';
 const { state_dataset, state_county_map_dataset } = US_STATE_DATASET;
 
 export type FipsCode = string;
@@ -23,9 +24,11 @@ export abstract class Region {
     public readonly regionType: RegionType,
   ) {}
 
-  abstract fullName(): string;
+  abstract get fullName(): string;
+  abstract get abbreviation(): string;
   abstract relativeUrl(): string;
-  canonicalUrl() {
+
+  get canonicalUrl() {
     return urlJoin('https://covidactnow.org', this.relativeUrl());
   }
 }
@@ -45,10 +48,13 @@ export class State extends Region {
    * State: Washington
    * County: King County, Washington
    */
-  fullName() {
+  get fullName() {
     return this.name;
   }
 
+  get abbreviation() {
+    return this.stateCode;
+  }
   relativeUrl() {
     return `us/${this.urlSegment}`;
   }
@@ -67,12 +73,19 @@ export class County extends Region {
     super(name, urlSegment, fipsCode, population, RegionType.COUNTY);
   }
 
-  fullName() {
+  get fullName() {
     return `${this.name}, ${this.state.name}`;
   }
 
   relativeUrl() {
     return urlJoin(this.state.relativeUrl(), `county/${this.urlSegment}`);
+  }
+
+  get abbreviation() {
+    return getAbbreviatedCounty(this.name);
+  }
+  get stateCode() {
+    return this.state.stateCode;
   }
 }
 
@@ -126,12 +139,16 @@ class RegionDB {
     this.regions = [...states, ...counties];
   }
 
-  findByFipsCode(fipsCode: FipsCode): Region | null {
+  findByFipsCode(fipsCode: FipsCode): Region | undefined {
     const region = this.regions.find(region => region.fipsCode === fipsCode);
-    return region || null;
+    return region || undefined;
   }
 
-  findStateByUrlParams(stateUrlSegment: string): State | null {
+  findCountiesByStateCode(stateCode: string) {
+    return this.counties.filter(county => county.stateCode === stateCode);
+  }
+
+  findStateByUrlParams(stateUrlSegment: string): State | undefined {
     // The second condition is added to support legacy URLs with the 2-letter
     // state code (`/us/wa`)
     const foundState = this.states.find(
@@ -139,16 +156,16 @@ class RegionDB {
         equalLower(state.urlSegment, stateUrlSegment) ||
         equalLower(state.stateCode, stateUrlSegment),
     );
-    return foundState || null;
+    return foundState || undefined;
   }
 
   findCountyByUrlParams(
     stateUrlSegment: string,
     countyUrlSegment: string,
-  ): County | null {
+  ): County | undefined {
     const foundState = this.findStateByUrlParams(stateUrlSegment);
     if (!foundState) {
-      return null;
+      return undefined;
     }
 
     const foundCounty = this.counties.find(
@@ -157,11 +174,18 @@ class RegionDB {
         equalLower(county.urlSegment, countyUrlSegment),
     );
 
-    return foundCounty || null;
+    return foundCounty || undefined;
   }
 
   all(): Region[] {
     return this.regions;
+  }
+
+  topCountiesByPopulation(limit: number): County[] {
+    return takeRight(
+      sortBy(this.counties, c => c.population),
+      limit,
+    );
   }
 }
 
@@ -184,4 +208,41 @@ export const useLocationPageRegion = () => {
     '`useLocationPageRegion` can only be called from components inside LocationPage',
   );
   return region;
+};
+
+export const useRegionFromLegacyIds = (
+  stateId: string,
+  countyId?: string,
+  countyFipsId?: string,
+) => {
+  if (countyFipsId) {
+    return regions.findByFipsCode(countyFipsId);
+  }
+  const state = regions.findStateByUrlParams(stateId);
+  const county = countyId
+    ? regions.findCountyByUrlParams(stateId, countyId)
+    : null;
+  return county || state;
+};
+
+// TODO(chris): This is ugly.
+export const getStateName = (region: Region): string | undefined => {
+  if (region.regionType === RegionType.COUNTY) {
+    return (region as County).state.fullName;
+  }
+  if (region.regionType === RegionType.STATE) {
+    return (region as State).fullName;
+  }
+  return undefined;
+};
+
+// TODO(chris): This is ugly.
+export const getStateCode = (region: Region): string | undefined => {
+  if (region.regionType === RegionType.COUNTY) {
+    return (region as County).state.stateCode;
+  }
+  if (region.regionType === RegionType.STATE) {
+    return (region as State).stateCode;
+  }
+  return undefined;
 };
