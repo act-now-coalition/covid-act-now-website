@@ -148,6 +148,7 @@ function renderDisclaimer(): React.ReactElement {
 
 function renderThermometer(): React.ReactElement {
   const levelInfo = CASE_DENSITY_LEVEL_INFO_MAP;
+  const levelExtreme = levelInfo[Level.SUPER_CRITICAL];
   const levelCritical = levelInfo[Level.CRITICAL];
   const levelHigh = levelInfo[Level.HIGH];
   const levelMedium = levelInfo[Level.MEDIUM];
@@ -155,10 +156,17 @@ function renderThermometer(): React.ReactElement {
 
   const items = [
     {
-      title: `Over ${levelHigh.upperLimit}`,
+      title: `Over ${levelCritical.upperLimit}`,
+      description: levelExtreme.detail(),
+      color: levelExtreme.color,
+      roundTop: true,
+      roundBottom: false,
+    },
+    {
+      title: `${levelHigh.upperLimit} - ${levelCritical.upperLimit}`,
       description: levelCritical.detail(),
       color: levelCritical.color,
-      roundTop: true,
+      roundTop: false,
       roundBottom: false,
     },
     {

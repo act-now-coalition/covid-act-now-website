@@ -106,6 +106,10 @@ export const StylesMarkdown = css`
     }
   }
 
+  strong {
+    color: black;
+  }
+
   img {
     max-width: 100%;
     max-height: 450px;
