@@ -1,9 +1,10 @@
 import React from 'react';
 import { LoadingScreen } from './AllStates.style';
-import { useProjections } from 'common/utils/model';
+import { useProjectionsFromRegion } from 'common/utils/model';
 import { STATES } from 'common';
 import { Metric } from 'common/metric';
 import { MetricChart } from 'components/Charts';
+import { useRegionFromLegacyIds } from 'common/regions';
 
 function AllStates() {
   return Object.keys(STATES).map(stateId => (
@@ -12,7 +13,8 @@ function AllStates() {
 }
 
 function State({ stateId }) {
-  const projections = useProjections(stateId);
+  const region = useRegionFromLegacyIds(stateId);
+  const projections = useProjectionsFromRegion(stateId);
 
   // Projections haven't loaded yet
   if (!projections) {

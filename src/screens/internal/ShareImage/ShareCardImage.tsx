@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router';
 import SocialLocationPreview from 'components/SocialLocationPreview/SocialLocationPreview';
-import { Projections } from 'common/models/Projections';
-import { useProjections } from 'common/utils/model';
+import { useProjectionsFromRegion } from 'common/utils/model';
 import {
   ShareCardWrapper,
   TitleWrapper,
@@ -10,8 +9,8 @@ import {
 } from './ShareCardImage.style';
 import { DarkScreenshotWrapper } from './ShareImage.style';
 import { formatLocalDate } from 'common/utils';
-import { findCountyByFips } from 'common/locations';
 import { ScreenshotReady, SCREENSHOT_CLASS } from 'components/Screenshot';
+import { useRegionFromLegacyIds } from 'common/regions';
 
 // TODO(michael): Split this into HomeImage and LocationImage (with some shared code).
 
@@ -59,13 +58,15 @@ const ShareCard = ({ stateId, countyFipsId }: ShareCardProps) => {
 };
 
 const LocationShareCard = ({ stateId, countyFipsId }: ShareCardProps) => {
-  let projections: Projections | undefined;
-  const [countyOption] = useState(
-    countyFipsId && findCountyByFips(countyFipsId),
-  );
-  stateId = stateId || countyOption.state_code;
-  projections = useProjections(stateId!, countyOption) as any;
+  const region = useRegionFromLegacyIds(
+    stateId || '',
+    undefined,
+    countyFipsId,
+  )!;
 
+  const projections = useProjectionsFromRegion(region);
+
+  // NOTE(Chris): is this sometimes null if it hasn't loaded yet?
   if (!projections) {
     return null;
   }

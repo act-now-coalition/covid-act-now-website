@@ -14,7 +14,7 @@ import { MetricChart } from 'components/Charts';
 import {
   fetchAllStateProjections,
   fetchAllCountyProjections,
-  fetchProjections,
+  fetchProjectionsRegion,
 } from 'common/utils/model';
 import {
   Wrapper,
@@ -25,7 +25,6 @@ import { Metric, getMetricName, ALL_METRICS } from 'common/metric';
 import { Projections } from 'common/models/Projections';
 import { ProjectionsSet } from 'common/models/ProjectionsSet';
 import { SortType, ProjectionsPair } from 'common/models/ProjectionsPair';
-import { topCountiesByPopulation, County, allCounties } from 'common/locations';
 import { SNAPSHOT_URL, SnapshotVersion, Api } from 'api';
 import moment from 'moment';
 import { Level } from 'common/level';
@@ -35,6 +34,7 @@ import {
   fetchMasterSnapshotNumber,
   snapshotUrl,
 } from 'common/utils/snapshots';
+import regions, { County } from 'common/regions';
 
 // TODO(michael): Compare page improvements:
 // * Virtualize the list so that it's not so awful slow. NOTE: I previously
@@ -418,7 +418,7 @@ function useProjectionsSet(
           ),
         );
       } else if (locations === Locations.TOP_COUNTIES_BY_POPULATION) {
-        const topCounties = topCountiesByPopulation(COUNTIES_LIMIT);
+        const topCounties = regions.topCountiesByPopulation(COUNTIES_LIMIT);
         setProjectionsSet(
           ProjectionsSet.fromProjections(
             await fetchCountyProjections(leftSnapshot, topCounties),
@@ -526,9 +526,9 @@ function fetchCountyProjections(
   list: County[],
 ): Promise<Projections[]> {
   return Promise.all(
-    list.map(county =>
-      fetchProjections(county.state_code, county, snapshotUrl(snapshotNumber)),
-    ),
+    list.map(county => {
+      return fetchProjectionsRegion(county, snapshotUrl(snapshotNumber));
+    }),
   );
 }
 
@@ -556,11 +556,11 @@ async function fetchCountyDiffs(
     diffs[fips] = ProjectionsPair.metricValueDiff(leftValue, rightValue);
   }
 
-  return allCounties()
-    .filter(c => c.full_fips_code in diffs)
+  return regions.counties
+    .filter(c => c.fipsCode in diffs)
     .map(c => ({
       county: c,
-      diff: diffs[c.full_fips_code],
+      diff: diffs[c.fipsCode],
     }));
 }
 

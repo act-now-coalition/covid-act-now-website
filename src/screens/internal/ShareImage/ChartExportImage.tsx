@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
-import urlJoin from 'url-join';
 import {
   ScreenshotWrapper,
   ChartWrapper,
@@ -13,35 +12,27 @@ import {
   Url,
 } from './ChartExportImage.style';
 import LogoUrlLight from 'assets/images/logoUrlLight';
-import { Projections } from 'common/models/Projections';
 import { MetricChart } from '../../../components/Charts';
 import { ALL_METRICS, getMetricNameExtended } from 'common/metric';
 import { Metric } from 'common/metric';
-import { findCountyByFips } from 'common/locations';
-import { useProjections, useModelLastUpdatedDate } from 'common/utils/model';
-import { Projection } from 'common/models/Projection';
+import {
+  useModelLastUpdatedDate,
+  useProjectionsFromRegion,
+} from 'common/utils/model';
 import { formatUtcDate } from 'common/utils';
 import { SCREENSHOT_CLASS } from 'components/Screenshot';
-import { getStateByUrlName, getCanonicalUrl } from 'common/locations';
+import { useRegionFromLegacyIds } from 'common/regions';
 
 const ExportChartImage = () => {
   let { stateId, countyFipsId, metric: metricString } = useParams();
+  // TODO: Remove !;
+  const region = useRegionFromLegacyIds(stateId, undefined, countyFipsId)!;
   const lastUpdated = useModelLastUpdatedDate();
 
-  let projections: Projections | undefined;
-  const [countyOption] = useState(
-    countyFipsId && findCountyByFips(countyFipsId),
-  );
-
-  const stateInfo = getStateByUrlName(stateId);
-  const stateCode =
-    (stateInfo && stateInfo?.state_code) || countyOption.state_code;
-
-  projections = useProjections(stateCode, countyOption) as any;
-  if (!projections || !lastUpdated) {
+  const projections = useProjectionsFromRegion(region);
+  if (!projections || !lastUpdated || !region) {
     return null;
   }
-  const projection = projections.primary as Projection;
 
   const metric = parseInt(metricString) as Metric;
   if (isNaN(metric) || !ALL_METRICS.includes(metric)) {
@@ -49,16 +40,13 @@ const ExportChartImage = () => {
   }
 
   const chartHeight = 415;
-  let url = urlJoin(
-    'https://covidactnow.org/',
-    getCanonicalUrl(projection.fips),
-  );
+  let url = region.canonicalUrl;
 
   return (
     <ScreenshotWrapper className={SCREENSHOT_CLASS}>
       <Content>
         <Headers>
-          <Location>{projection.locationName}</Location>
+          <Location>{region.fullName}</Location>
           <MetricName>{getMetricNameExtended(metric)}</MetricName>
           <LastUpdated>Last updated {formatUtcDate(lastUpdated)} </LastUpdated>
         </Headers>
