@@ -7,6 +7,7 @@ import { StyledGridContainer } from './About.style';
 
 const GovLogoGrid = (props: { logos: LogoItem[] }) => {
   const { logos } = props;
+
   return (
     <StyledGridContainer
       container

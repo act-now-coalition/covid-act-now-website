@@ -5,6 +5,7 @@ import {
   LevelCopy,
   LevelTitle,
   LevelDescription,
+  ThermometerWrapper,
 } from './Thermometer.style';
 
 interface ThermometerLevelInfo {
@@ -18,7 +19,7 @@ interface ThermometerLevelInfo {
 const Thermometer: React.FC<{ items: ThermometerLevelInfo[] }> = ({
   items,
 }) => (
-  <div>
+  <ThermometerWrapper>
     {items.map(item => (
       <LevelContainer key={item.color}>
         <LevelColor
@@ -32,7 +33,7 @@ const Thermometer: React.FC<{ items: ThermometerLevelInfo[] }> = ({
         </LevelCopy>
       </LevelContainer>
     ))}
-  </div>
+  </ThermometerWrapper>
 );
 
 export default Thermometer;

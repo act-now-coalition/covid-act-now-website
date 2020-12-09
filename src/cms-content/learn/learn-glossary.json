@@ -465,8 +465,8 @@
       "category": "Treatment"
     },
     {
-      "term": "Ventillator",
-      "termId": "ventillator",
+      "term": "Ventilator",
+      "termId": "ventilator",
       "definition": "A ventilator is a machine that helps patients breathe when they cannot do so on their own. \n\n* People whose lungs are severely damaged by COVID may use a ventilator because they cannot get enough oxygen on their own. \n* While ventilators allow lungs to heal, they are not in and of themselves a treatment. \n\nIntensive Care Unit (ICU) beds are equipped with ventilators, which may save the lives of the sickest COVID patients. [ICU Headroom](#icu-headroom) is one of Covid Act Now’s main metrics for understanding the state of COVID in a region, since measuring and predicting ICU capacity gives a picture of whether hospitals can handle an increased load of new COVID cases without having to resort to [crisis standards of care](#crisis-standards-of-care).",
       "category": "Treatment"
     },
