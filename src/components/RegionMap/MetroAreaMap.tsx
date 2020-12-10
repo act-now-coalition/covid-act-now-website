@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { uniq } from 'lodash';
 import { ComposableMap, Geographies } from 'react-simple-maps';
@@ -9,12 +9,15 @@ import { MetroArea } from 'common/regions';
 import * as Styles from './MetroAreaMap.style';
 import regions from 'common/regions';
 import { LocationSummariesByFIPS } from 'common/location_summaries';
+import ReactTooltip from 'react-tooltip';
 
 const MetroAreaMap: React.FC<{
   height?: number;
   width?: number;
   metroArea: MetroArea;
 }> = ({ height = 600, width = 800, metroArea }) => {
+  const [tooltipContent, setTooltipContent] = useState('');
+
   const countyFipsList = metroArea.counties.map(county => county.fipsCode);
   const countiesTopoJson = buildCountyGeometries(countyFipsList);
   const projectionConfig = getProjectionConfig(countiesTopoJson, width, height);
@@ -22,31 +25,42 @@ const MetroAreaMap: React.FC<{
   const stateFipsList = getStateFipsList(countyFipsList);
   const statesTopoJson = buildStateGeometries(stateFipsList);
 
+  const onMouseEnter = (fipsCode: string) => {
+    setTooltipContent(getNameByFips(fipsCode));
+  };
+
+  const onMouseLeave = () => setTooltipContent('');
+
   return (
-    <ComposableMap
-      projection={'geoConicEqualArea'}
-      height={height}
-      width={width}
-      projectionConfig={projectionConfig}
-    >
-      <Geographies key="states" geography={statesTopoJson}>
-        {({ geographies }) =>
-          geographies.map(geo => (
-            <Link
-              key={geo.rsmKey}
-              to={getRelativeUrlByFips(geo.id)}
-              aria-label={getNameByFips(geo.id)}
-            >
-              <Styles.StateShape key={geo.rsmKey} geography={geo} />
-            </Link>
-          ))
-        }
-      </Geographies>
-      <Geographies key="counties" geography={countiesTopoJson}>
-        {({ geographies }) =>
-          geographies.map(geo => {
-            const locationSummary = LocationSummariesByFIPS[geo.id] || null;
-            return (
+    <Styles.MapContainer>
+      <ComposableMap
+        projection={'geoConicEqualArea'}
+        height={height}
+        width={width}
+        projectionConfig={projectionConfig}
+        data-tip=""
+      >
+        <Geographies key="states" geography={statesTopoJson}>
+          {({ geographies }) =>
+            geographies.map(geo => (
+              <Link
+                key={geo.rsmKey}
+                to={getRelativeUrlByFips(geo.id)}
+                aria-label={getNameByFips(geo.id)}
+              >
+                <Styles.StateShape
+                  key={geo.rsmKey}
+                  geography={geo}
+                  onMouseEnter={() => onMouseEnter(geo.id)}
+                  onMouseLeave={onMouseLeave}
+                />
+              </Link>
+            ))
+          }
+        </Geographies>
+        <Geographies key="counties" geography={countiesTopoJson}>
+          {({ geographies }) =>
+            geographies.map(geo => (
               <Link
                 key={geo.id}
                 to={getRelativeUrlByFips(geo.id)}
@@ -54,21 +68,24 @@ const MetroAreaMap: React.FC<{
               >
                 <Styles.MetroCounty
                   geography={geo}
-                  $locationSummary={locationSummary}
+                  $locationSummary={LocationSummariesByFIPS[geo.id] || null}
+                  onMouseEnter={() => onMouseEnter(geo.id)}
+                  onMouseLeave={onMouseLeave}
                 />
               </Link>
-            );
-          })
-        }
-      </Geographies>
-      <Geographies key="state-borders" geography={statesTopoJson}>
-        {({ geographies }) =>
-          geographies.map(geo => (
-            <Styles.StateBorder key={geo.rsmKey} geography={geo} />
-          ))
-        }
-      </Geographies>
-    </ComposableMap>
+            ))
+          }
+        </Geographies>
+        <Geographies key="state-borders" geography={statesTopoJson}>
+          {({ geographies }) =>
+            geographies.map(geo => (
+              <Styles.StateBorder key={geo.rsmKey} geography={geo} />
+            ))
+          }
+        </Geographies>
+      </ComposableMap>
+      <ReactTooltip>{tooltipContent}</ReactTooltip>
+    </Styles.MapContainer>
   );
 };
 

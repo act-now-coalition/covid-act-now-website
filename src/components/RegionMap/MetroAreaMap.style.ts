@@ -4,6 +4,10 @@ import { LocationSummary } from 'common/location_summaries';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { COLOR_MAP } from 'common/colors';
 
+export const MapContainer = styled.div`
+  position: relative;
+`;
+
 const GeoPath = styled(Geography).attrs(props => ({
   tabIndex: -1,
   role: 'img',
