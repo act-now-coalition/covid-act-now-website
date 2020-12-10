@@ -3,8 +3,8 @@ import { assert } from 'common/utils';
 import { County } from './locations';
 import urlJoin from 'url-join';
 import * as QueryString from 'query-string';
-import { getLocationUrlForFips } from 'common/locations';
 import moment from 'moment';
+import { Region } from './regions';
 
 /**
  * We append a short unique string corresponding to the currently published
@@ -37,19 +37,12 @@ function getPagePath(stateId?: string, county?: County): string {
  * - Does not include the sharing ID (?s=...)
  * - Uses window.origin to determine the base URL, so it should match localhost / staging / prod / etc.
  */
-function getPageBaseUrl(stateId?: string, county?: County): string {
-  return urlJoin(window.location.origin, getPagePath(stateId, county));
+function getPageBaseUrl(): string {
+  return window.location.origin;
 }
 
-function getShareImageBaseUrl(stateId?: string, county?: County): string {
-  const imageBaseUrl = ShareImageUrlJSON.share_image_url;
-  if (county) {
-    return urlJoin(imageBaseUrl, 'counties', county.full_fips_code);
-  } else if (stateId) {
-    return urlJoin(imageBaseUrl, 'states', stateId);
-  } else {
-    return imageBaseUrl;
-  }
+function getShareImageBaseUrl(): string {
+  return ShareImageUrlJSON.share_image_url;
 }
 
 export function getMapImageUrl(): string {
@@ -61,19 +54,16 @@ export function getMapImageUrl(): string {
 }
 
 // TODO(michael): Move existing code over to use this method.
-export function getPageUrl(
-  stateId: string | undefined,
-  county: County | undefined,
-): string {
-  return addSharingId(getPageBaseUrl(stateId, county));
+export function getPageUrl(region: Region): string {
+  return addSharingId(region.canonicalUrl);
 }
 
 /*
   Generates URL for sharing CAN Recommends via
   social/copy-link button in Recommends footer
 */
-export function getRecommendationsShareUrl(fips: string): string {
-  return addSharingId(urlJoin(getLocationUrlForFips(fips), 'recommendations'));
+export function getRecommendationsShareUrl(region: Region): string {
+  return addSharingId(urlJoin(region.canonicalUrl, 'recommendations'));
 }
 
 export function getComparePageUrl(
