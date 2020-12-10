@@ -19,7 +19,8 @@ import {
 } from 'common/utils/compare';
 import { Level } from 'common/level';
 import { formatEstimate } from 'common/utils';
-import { getCanonicalUrl } from 'common/locations';
+import regions, { getStateCode } from 'common/regions';
+import { fail } from 'assert';
 
 function cellValue(metric: any, metricType: Metric) {
   if (metric === null || metric === undefined) {
@@ -55,12 +56,16 @@ const CompareTableRow = (props: {
     return 4;
   }
 
-  const fipsCode =
-    location?.locationInfo?.full_fips_code ||
-    location?.locationInfo.state_fips_code;
-  const locationLink = `/${getCanonicalUrl(fipsCode)}`;
+  const fipsCode = location?.region.fipsCode;
 
-  const locationName = getColumnLocationName(location.locationInfo);
+  const region = regions.findByFipsCode(fipsCode);
+  // TODO(chris): What todo about possibly null region?
+  if (!region) {
+    fail(`missing region for fips code ${fipsCode}`);
+  }
+  const locationLink = `/${region.relativeUrl}`;
+
+  const locationName = getColumnLocationName(location.region);
 
   const populationRoundTo = isHomepage ? 3 : 2;
 
@@ -83,15 +88,12 @@ const CompareTableRow = (props: {
             {locationName[0]}{' '}
             {locationName[1] && <CountySuffix>{locationName[1]}</CountySuffix>}
             {showStateCode && (
-              <Fragment>{location.locationInfo.state_code}</Fragment>
+              <Fragment>{getStateCode(location.region)}</Fragment>
             )}
             <br />
             <LocationInfoWrapper>
               <Population>
-                {formatEstimate(
-                  location.locationInfo.population,
-                  populationRoundTo,
-                )}
+                {formatEstimate(location.region.population, populationRoundTo)}
               </Population>
             </LocationInfoWrapper>
           </div>
