@@ -1,12 +1,7 @@
 import React from 'react';
-import {
-  ComposableMap,
-  Geographies,
-  Geography,
-  ProjectionFunction,
-} from 'react-simple-maps';
+import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import COUNTIES_JSON from 'components/Map/data/counties-small.json';
-import { geoBounds, geoCentroid, geoDistance, geoConicEqualArea } from 'd3-geo';
+import { geoBounds, geoCentroid, geoDistance } from 'd3-geo';
 import * as topojson from 'topojson-client';
 
 /**
@@ -23,26 +18,18 @@ const geoCounties = {
 const RegionMap: React.FC<{
   height?: number;
   countyFipsList: string[];
-}> = ({ height = 600, countyFipsList, stateFipsList }) => {
-  const countyGeometries = buildGeometry(countyFipsList);
-  const geoJson = topojson.feature(
-    countyGeometries,
-    countyGeometries.objects.counties,
-  );
+}> = ({ height = 600, countyFipsList }) => {
+  const countiesTopoJson = buildGeometry(countyFipsList);
   const width = (800 / 600) * height;
-  const bounds = geoBounds(geoJson);
-  const centroid = geoCentroid(geoJson);
-  const distance = geoDistance(bounds[0], bounds[1]);
-
-  const scale = (0.8 * Math.sqrt(height * height + width * width)) / distance;
-
-  const mapProjection: ProjectionFunction = geoConicEqualArea()
-    .scale(scale)
-    .center(centroid);
+  const projectionConfig = getProjectionConfig(countiesTopoJson, width, height);
 
   return (
-    <ComposableMap projection={mapProjection} height={height}>
-      <Geographies geography={countyGeometries}>
+    <ComposableMap
+      projection={'geoConicEqualArea'}
+      height={height}
+      projectionConfig={projectionConfig}
+    >
+      <Geographies geography={countiesTopoJson}>
         {({ geographies }) =>
           geographies.map(geo => {
             return (
@@ -61,6 +48,24 @@ const RegionMap: React.FC<{
     </ComposableMap>
   );
 };
+
+function getProjectionConfig(
+  countiesTopoJson: any,
+  width: number,
+  height: number,
+) {
+  const countiesGeoJson = topojson.feature(
+    countiesTopoJson as any,
+    countiesTopoJson.objects.counties as any,
+  );
+
+  const bounds = geoBounds(countiesGeoJson);
+  const center = geoCentroid(countiesGeoJson);
+  const distance = geoDistance(bounds[0], bounds[1]);
+  const scale = (0.8 * Math.sqrt(height * height + width * width)) / distance;
+
+  return { scale, center };
+}
 
 function buildGeometry(countyFipsList: string[]) {
   const countyGeometries = geoCounties.objects.counties.geometries.filter(
