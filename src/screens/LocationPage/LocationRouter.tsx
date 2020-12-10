@@ -23,7 +23,7 @@ const LocationRouter: React.FC = () => {
 
   return (
     <RegionContext.Provider value={region}>
-      <LocationPage />
+      <LocationPage region={region} />
     </RegionContext.Provider>
   );
 };

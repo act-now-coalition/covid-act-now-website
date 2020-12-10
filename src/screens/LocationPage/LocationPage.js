@@ -15,7 +15,7 @@ import {
   getCanonicalUrl,
 } from 'common/locations';
 
-function LocationPage() {
+function LocationPage({ region }) {
   let { stateId, countyId, chartId } = useParams();
 
   const state = getStateByUrlName(stateId);
@@ -65,10 +65,8 @@ function LocationPage() {
         />
         <ChartsHolder
           projections={projections}
-          stateId={stateCode}
-          county={countyOption}
           chartId={chartId}
-          countyId={countyId}
+          region={region}
         />
         <MiniMap
           projections={projections}
