@@ -80,12 +80,15 @@ const CompareMain = (props: {
   const [stateId, setStateId] = useState(props.stateId);
   const [county, setCounty] = useState(props.county);
 
-  const region = regions.findByFipsCode(county.full_fips_code);
-  assert(region, 'Missing region for county');
-  const currentCounty = county && {
-    region: region,
-    metricsInfo: countySummary(county.full_fips_code),
-  };
+  let currentCounty;
+  if (county) {
+    const region = regions.findByFipsCode(county.full_fips_code);
+    assert(region, 'Missing region for county');
+    currentCounty = {
+      region: region,
+      metricsInfo: countySummary(county.full_fips_code),
+    };
+  }
 
   useEffect(() => {
     setStateId(props.stateId);
