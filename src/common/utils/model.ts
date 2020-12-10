@@ -14,6 +14,7 @@ import moment from 'moment';
 import { assert } from '.';
 import { getSnapshotUrlOverride } from './snapshots';
 import { Region, County, State, getStateCode } from 'common/regions';
+import { fail } from 'assert';
 
 const cachedProjections: { [key: string]: Promise<Projections> } = {};
 export function fetchProjections(
