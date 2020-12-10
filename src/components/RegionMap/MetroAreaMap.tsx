@@ -6,6 +6,8 @@ import { geoBounds, geoCentroid, geoDistance } from 'd3-geo';
 import * as topojson from 'topojson-client';
 import { MetroArea } from 'common/regions';
 import * as Styles from './MetroAreaMap.style';
+import { Link } from 'react-router-dom';
+import regions from 'common/regions';
 
 const MetroAreaMap: React.FC<{
   height?: number;
@@ -29,14 +31,18 @@ const MetroAreaMap: React.FC<{
       <Geographies key="states" geography={statesTopoJson}>
         {({ geographies }) =>
           geographies.map(geo => (
-            <Styles.StateShape key={geo.rsmKey} geography={geo} />
+            <Link key={geo.rsmKey} to={getRelativeUrlByFips(geo.id)}>
+              <Styles.StateShape key={geo.rsmKey} geography={geo} />
+            </Link>
           ))
         }
       </Geographies>
       <Geographies key="counties" geography={countiesTopoJson}>
         {({ geographies }) =>
           geographies.map(geo => (
-            <Styles.MetroCounty key={geo.rsmKey} geography={geo} />
+            <Link key={geo.id} to={getRelativeUrlByFips(geo.id)}>
+              <Styles.MetroCounty geography={geo} />
+            </Link>
           ))
         }
       </Geographies>
@@ -108,6 +114,11 @@ function buildStateGeometries(stateFipsList: string[]) {
 
 function getStateFipsList(countyFipsList: string[]) {
   return uniq(countyFipsList.map(countyFips => countyFips.substr(0, 2)));
+}
+
+function getRelativeUrlByFips(fipsCode: string) {
+  const region = regions.findByFipsCode(fipsCode);
+  return region?.relativeUrl || '/';
 }
 
 export default MetroAreaMap;
