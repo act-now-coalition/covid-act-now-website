@@ -109,8 +109,6 @@ const InnerContent = ({
     <ClickAwayListener onClickAway={() => setShowShareIcons(false)}>
       <ClickAwayWrapper>
         <SaveOrShareContainer>
-          {/* HELP: Why the type error? */}
-          {/* 
           <SaveOrShareButton
             onClick={() => {
               setShowShareIcons(false);
@@ -127,7 +125,6 @@ const InnerContent = ({
           >
             Share
           </SaveOrShareButton>
-          */}
         </SaveOrShareContainer>
         <SocialButtonsWrapper
           onClick={() => {
