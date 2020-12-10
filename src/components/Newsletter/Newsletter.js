@@ -3,10 +3,10 @@ import { StyledNewsletter, InputHolder, InputError } from './Newsletter.style';
 import Chip from '@material-ui/core/Chip';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
-import { findCountyByFips, getLocationNames } from 'common/locations';
+import { getLocationNames } from 'common/locations';
 import { getFirebase, firebase } from 'common/firebase';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
-import { getStateCode } from 'common/regions';
+import { County, getStateCode } from 'common/regions';
 
 // Taken from https://ui.dev/validate-email-address-javascript/
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -94,16 +94,16 @@ class Newsletter extends React.Component {
 
   render() {
     const { region } = this.props;
-    const county = region ? findCountyByFips(region.fipsCode) : null;
+    const countyName = region instanceof County ? region.name : null;
     const stateCode = region ? getStateCode(region) : null;
     this.defaultValues = this.autocompleteOptions.filter(location => {
       const matching_state =
         location.state_code === stateCode &&
         location.full_fips_code.length === 2;
       let matching_county = false;
-      if (county) {
+      if (countyName) {
         matching_county =
-          location.county === county &&
+          location.county === countyName &&
           location.state_code === stateCode &&
           location.full_fips_code.length === 5;
       }
@@ -143,7 +143,7 @@ class Newsletter extends React.Component {
             id="fieldjrdtwd"
             maxLength="200"
             name="cm-f-jrdtwd"
-            value={county || ''}
+            value={countyName || ''}
           />
           <Autocomplete
             multiple
