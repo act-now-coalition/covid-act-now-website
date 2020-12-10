@@ -1,4 +1,5 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
+import { deburr, words } from 'lodash';
 import SocialButtons from './SocialButtons';
 import {
   SaveOrShareContainer,
@@ -75,8 +76,7 @@ const InnerContent = ({
 
     // @ts-ignore
     const chartType = chartDownloadType[chartIdentifier];
-    // TODO Make this better capture
-    const location = region.fullName;
+    const location = deburr(words(region.fullName).join('_')).toLowerCase();
     return `${location}_${chartType}_${downloadDate}`;
   }
 
@@ -168,18 +168,31 @@ const ShareButtons = ({
     `${shareBaseURL}/chart/${chartIdentifier}`,
   );
 
-  const iconSize = isMobile ? '40' : '50';
-  return (
-    <MobileButtonsWrapper>
-      <InnerContent
-        iconSize={iconSize}
-        shareURL={shareURL}
-        shareQuote={shareQuote}
-        chartIdentifier={chartIdentifier}
-        region={region}
-      />
-    </MobileButtonsWrapper>
-  );
+  if (isMobile) {
+    return (
+      <MobileButtonsWrapper>
+        <InnerContent
+          iconSize="40"
+          shareURL={shareURL}
+          shareQuote={shareQuote}
+          chartIdentifier={chartIdentifier}
+          region={region}
+        />
+      </MobileButtonsWrapper>
+    );
+  } else {
+    return (
+      <DesktopButtonsWrapper>
+        <InnerContent
+          iconSize="50"
+          shareURL={shareURL}
+          shareQuote={shareQuote}
+          chartIdentifier={chartIdentifier}
+          region={region}
+        />
+      </DesktopButtonsWrapper>
+    );
+  }
 };
 
 export default ShareButtons;
