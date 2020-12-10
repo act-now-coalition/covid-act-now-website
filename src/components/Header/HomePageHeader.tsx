@@ -21,7 +21,7 @@ const HomePageHeader = (props: { indicatorsLinkOnClick: () => void }) => {
     <Wrapper>
       <Content>
         <HeaderTitle component="h1">
-          US COVID Map &amp;{' '}
+          U.S. COVID Map &amp;{' '}
           <span style={{ whiteSpace: 'nowrap' }}>Risk Levels</span>
         </HeaderTitle>
         <div>

@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router';
+import React from 'react';
 import SocialLocationPreview from 'components/SocialLocationPreview/SocialLocationPreview';
-import { Projections } from 'common/models/Projections';
-import { useProjections } from 'common/utils/model';
+import { useProjectionsFromRegion } from 'common/utils/model';
 import {
   ShareCardWrapper,
   TitleWrapper,
@@ -10,8 +8,9 @@ import {
 } from './ShareCardImage.style';
 import { DarkScreenshotWrapper } from './ShareImage.style';
 import { formatLocalDate } from 'common/utils';
-import { findCountyByFips } from 'common/locations';
 import { ScreenshotReady, SCREENSHOT_CLASS } from 'components/Screenshot';
+import { useRegionFromParams } from 'common/regions';
+import { Region } from 'common/regions';
 
 // TODO(michael): Split this into HomeImage and LocationImage (with some shared code).
 
@@ -20,22 +19,17 @@ import { ScreenshotReady, SCREENSHOT_CLASS } from 'components/Screenshot';
  * screenshot that we then use as our OpenGraph image.
  */
 const ShareCardImage = () => {
-  const { stateId, countyFipsId } = useParams();
-  const isHomePage = !stateId && !countyFipsId;
+  const region = useRegionFromParams();
+  const isHomePage = !region;
   return (
     <DarkScreenshotWrapper className={SCREENSHOT_CLASS}>
       <Header isHomePage={isHomePage} />
       <ShareCardWrapper isHomePage={isHomePage}>
-        <ShareCard stateId={stateId} countyFipsId={countyFipsId} />
+        <ShareCard region={region} />
       </ShareCardWrapper>
     </DarkScreenshotWrapper>
   );
 };
-
-interface ShareCardProps {
-  stateId?: string;
-  countyFipsId?: string;
-}
 
 const Header = (props: { isHomePage?: Boolean }) => {
   return (
@@ -50,21 +44,24 @@ const Header = (props: { isHomePage?: Boolean }) => {
   );
 };
 
-const ShareCard = ({ stateId, countyFipsId }: ShareCardProps) => {
-  if (stateId || countyFipsId) {
-    return <LocationShareCard stateId={stateId} countyFipsId={countyFipsId} />;
+interface ShareCardProps {
+  region: Region | null;
+}
+
+const ShareCard = ({ region }: ShareCardProps) => {
+  if (region) {
+    return <LocationShareCard region={region} />;
   } else {
     return <SocialLocationPreview />;
   }
 };
 
-const LocationShareCard = ({ stateId, countyFipsId }: ShareCardProps) => {
-  let projections: Projections | undefined;
-  const [countyOption] = useState(
-    countyFipsId && findCountyByFips(countyFipsId),
-  );
-  stateId = stateId || countyOption.state_code;
-  projections = useProjections(stateId!, countyOption) as any;
+interface LocationShareCardProps {
+  region: Region;
+}
+
+const LocationShareCard = ({ region }: LocationShareCardProps) => {
+  const projections = useProjectionsFromRegion(region);
 
   if (!projections) {
     return null;

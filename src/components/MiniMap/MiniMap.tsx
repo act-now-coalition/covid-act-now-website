@@ -4,16 +4,16 @@ import CountyMap from 'components/CountyMap/CountyMap';
 import { MAP_FILTERS } from 'screens/LocationPage/Enums/MapFilterEnums';
 import { Projections } from 'common/models/Projections';
 import * as Styles from './MiniMap.style';
+import { County } from 'common/locations';
 
 interface MiniMapProperties {
   projections: Projections;
   stateId: string;
-  selectedCounty: string;
-  setSelectedCounty: (input: string) => {};
+  selectedCounty: County | undefined;
   mobileMenuOpen: boolean;
-  setMobileMenuOpen: (input: boolean) => {};
+  setMobileMenuOpen: (input: boolean) => void;
   mapOption: string;
-  setMapOption: (input: string) => {};
+  setMapOption: (input: string) => void;
 }
 
 /**
@@ -24,7 +24,6 @@ const MiniMap: FunctionComponent<MiniMapProperties> = ({
   projections,
   stateId,
   selectedCounty,
-  setSelectedCounty,
   mobileMenuOpen,
   setMobileMenuOpen,
   mapOption,
