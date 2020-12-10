@@ -9,7 +9,7 @@ import {
   Actualstimeseries,
 } from './schema/RegionSummaryWithTimeseries';
 import { AggregateRegionSummaryWithTimeseries } from './schema/AggregateRegionSummaryWithTimeseries';
-import { RegionAggregateDescriptor } from '../common/utils/model';
+import { APIRegionSubPath } from '../common/utils/model';
 import { fail, assert } from 'common/utils';
 import fetch from 'node-fetch';
 import { County, Region, State } from 'common/regions';
@@ -38,7 +38,7 @@ export class Api {
    * aggregate (e.g. all counties or all states).
    */
   async fetchAggregatedSummaryWithTimeseries(
-    regionAggregate: RegionAggregateDescriptor,
+    regionAggregate: APIRegionSubPath,
   ): Promise<RegionSummaryWithTimeseries[]> {
     const all = await this.fetchApiJson<AggregateRegionSummaryWithTimeseries>(
       `${regionAggregate}.timeseries.json`,
