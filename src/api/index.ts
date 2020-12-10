@@ -9,12 +9,10 @@ import {
   Actualstimeseries,
 } from './schema/RegionSummaryWithTimeseries';
 import { AggregateRegionSummaryWithTimeseries } from './schema/AggregateRegionSummaryWithTimeseries';
-import {
-  RegionAggregateDescriptor,
-  RegionDescriptor,
-} from '../common/utils/RegionDescriptor';
+import { RegionAggregateDescriptor } from '../common/utils/model';
 import { fail, assert } from 'common/utils';
 import fetch from 'node-fetch';
+import { County, Region, State } from 'common/regions';
 
 export const SNAPSHOT_URL = DataUrlJson.data_url;
 
@@ -53,15 +51,15 @@ export class Api {
    * Fetches the summary+timeseries for a region. Returns null if not found.
    */
   async fetchSummaryWithTimeseries(
-    region: RegionDescriptor,
+    region: Region,
   ): Promise<RegionSummaryWithTimeseries | null> {
-    if (region.isState()) {
+    if (region instanceof State) {
       return await this.fetchApiJson<RegionSummaryWithTimeseries>(
-        `state/${region.stateId}.timeseries.json`,
+        `state/${(region as State).stateCode}.timeseries.json`,
       );
-    } else if (region.isCounty()) {
+    } else if (region instanceof County) {
       return await this.fetchApiJson<RegionSummaryWithTimeseries>(
-        `county/${region.countyFipsId}.timeseries.json`,
+        `county/${region.fipsCode}.timeseries.json`,
       );
     } else {
       fail('Unknown region type: ' + region);
