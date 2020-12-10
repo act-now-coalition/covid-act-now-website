@@ -34,6 +34,7 @@ import {
   useSharedComponentParams,
 } from 'common/sharing';
 import regions from 'common/regions';
+import { assert } from 'common/utils';
 
 // For filters (0, 50, and 99 are numerical values required by MUI Slider component):
 const scopeValueMap = {
@@ -78,8 +79,11 @@ const CompareMain = (props: {
   // when generating compare share images.
   const [stateId, setStateId] = useState(props.stateId);
   const [county, setCounty] = useState(props.county);
+
+  const region = regions.findByFipsCode(county.full_fips_code);
+  assert(region, 'Missing region for county');
   const currentCounty = county && {
-    region: regions.findByFipsCode(county.full_fips_code)!,
+    region: region,
     metricsInfo: countySummary(county.full_fips_code),
   };
 

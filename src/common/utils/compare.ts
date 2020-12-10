@@ -11,6 +11,7 @@ import { isNumber } from 'lodash';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import regions, { County, Region, RegionType, State } from 'common/regions';
 import { fail } from 'assert';
+import { assert } from '.';
 
 export function trackCompareEvent(
   action: EventAction,
@@ -99,7 +100,9 @@ export function getStateNonMetroCounties(
 }
 
 function getCountyObj(countyFips: string) {
-  return [getLocationObj(regions.findByFipsCode(countyFips)!)];
+  const region = regions.findByFipsCode(countyFips);
+  assert(region, 'Missing region');
+  return [getLocationObj(region)];
 }
 
 function isNeighboringCounty(region: Region, countyFips: string) {
