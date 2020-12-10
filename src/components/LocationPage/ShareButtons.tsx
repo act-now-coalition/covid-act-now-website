@@ -14,25 +14,41 @@ import makeChartShareQuote from 'common/utils/makeChartShareQuote';
 import ShareImageUrlJSON from 'assets/data/share_images_url.json';
 import * as urls from 'common/urls';
 import moment from 'moment';
-import { County } from 'common/locations';
+import { County, Region, State } from 'common/regions';
+
+const getShareImageUrl = (region: Region, chartIdentifier: number): string => {
+  const imageBaseUrl = ShareImageUrlJSON.share_image_url;
+  if (region instanceof County) {
+    return (
+      imageBaseUrl +
+      `counties/${region.fipsCode}/chart/${chartIdentifier}/export.png`
+    );
+  }
+  if (region instanceof State) {
+    const state = region as State;
+    return (
+      imageBaseUrl +
+      `states/${state.stateCode.toLowerCase()}/chart/${chartIdentifier}/export.png`
+    );
+  }
+
+  // TODO: AHHHHHHh
+  return '';
+};
 
 interface InnerContentProps {
+  region: Region;
   iconSize: string;
   shareURL: string;
   shareQuote: string;
-  county: County | undefined;
-  stateId: string;
-  countyId: string | undefined;
   chartIdentifier: number;
 }
 
 const InnerContent = ({
+  region,
   iconSize,
   shareURL,
   shareQuote,
-  county,
-  stateId,
-  countyId,
   chartIdentifier,
 }: InnerContentProps) => {
   const [showShareIcons, setShowShareIcons] = useState(false);
@@ -46,13 +62,7 @@ const InnerContent = ({
     return () => clearTimeout(timeoutId);
   };
 
-  const imageBaseUrl = ShareImageUrlJSON.share_image_url;
-  const downloadLink = county
-    ? imageBaseUrl +
-      `counties/${county.full_fips_code}/chart/${chartIdentifier}/export.png`
-    : imageBaseUrl +
-      `states/${stateId.toLowerCase()}/chart/${chartIdentifier}/export.png`;
-
+  const downloadLink = getShareImageUrl(region, chartIdentifier);
   const downloadDate = moment().format('YYYY-MM-DD');
 
   function makeDownloadFilename(chartIdentifier: number) {
@@ -66,9 +76,8 @@ const InnerContent = ({
 
     // @ts-ignore
     const chartType = chartDownloadType[chartIdentifier];
-    const location = countyId
-      ? `${countyId}_${stateId.toLowerCase()}`
-      : `${stateId.toLowerCase()}`;
+    // TODO Make this better capture
+    const location = region.fullName;
     return `${location}_${chartType}_${downloadDate}`;
   }
 
@@ -101,6 +110,8 @@ const InnerContent = ({
     <ClickAwayListener onClickAway={() => setShowShareIcons(false)}>
       <ClickAwayWrapper>
         <SaveOrShareContainer>
+          {/* HELP: Why the type error? */}
+          {/* 
           <SaveOrShareButton
             onClick={() => {
               setShowShareIcons(false);
@@ -117,6 +128,7 @@ const InnerContent = ({
           >
             Share
           </SaveOrShareButton>
+          */}
         </SaveOrShareContainer>
         <SocialButtonsWrapper
           onClick={() => {
@@ -136,58 +148,41 @@ const InnerContent = ({
   );
 };
 
-interface ShareButtonsProps {
-  stateId: string;
-  county: County | undefined;
+interface ShareButtonProps {
+  region: Region;
   stats: any;
   isMobile: Boolean;
-  countyId: string | undefined;
   chartIdentifier: number;
 }
-const ShareButtons: React.FC<ShareButtonsProps> = ({
-  stateId,
-  county,
+const ShareButtons = ({
+  region,
   stats,
   isMobile,
-  countyId,
   chartIdentifier,
-}) => {
+}: ShareButtonProps) => {
   const shareQuote = makeChartShareQuote(
-    stateId,
-    county,
+    region.fullName,
     stats,
     chartIdentifier,
   );
 
-  const shareBaseURL = `https://covidactnow.org/us/${stateId.toLowerCase()}${
-    county ? `/county/${county.county_url_name}` : ''
-  }`;
+  const shareBaseURL = region.canonicalUrl;
+
   const shareURL = urls.addSharingId(
     `${shareBaseURL}/chart/${chartIdentifier}`,
   );
 
-  const innerContentProps = {
-    shareURL,
-    shareQuote,
-    county,
-    stateId,
-    countyId,
-    chartIdentifier,
-  };
-
+  const iconSize = isMobile ? '40' : '50';
   return (
-    <Fragment>
-      {isMobile && (
-        <MobileButtonsWrapper>
-          <InnerContent iconSize="40" {...innerContentProps} />
-        </MobileButtonsWrapper>
-      )}
-      {!isMobile && (
-        <DesktopButtonsWrapper>
-          <InnerContent iconSize="50" {...innerContentProps} />
-        </DesktopButtonsWrapper>
-      )}
-    </Fragment>
+    <MobileButtonsWrapper>
+      <InnerContent
+        iconSize={iconSize}
+        shareURL={shareURL}
+        shareQuote={shareQuote}
+        chartIdentifier={chartIdentifier}
+        region={region}
+      />
+    </MobileButtonsWrapper>
   );
 };
 
