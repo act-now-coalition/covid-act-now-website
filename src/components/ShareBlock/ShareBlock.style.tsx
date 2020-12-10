@@ -212,8 +212,7 @@ export const ShareButtonContainer = styled.div<{ reflow: boolean }>`
 `;
 
 export const StyledShareButtonStyles = css<{
-  color: string;
-  disableElevation?: boolean /* seems to do nothing? */;
+  color?: string;
   variant?: string;
 }>`
   cursor: pointer;
@@ -246,7 +245,7 @@ export const StyledShareButtonStyles = css<{
       fill: transparent;
     }
     path {
-      fill: ${props => props.color};
+      fill: ${props => (props.color ? props.color : '#000')};
     }
   }
 `;
