@@ -16,10 +16,9 @@ const Container: React.FC = ({ children }) => (
 
 export const NYMetroArea = () => {
   const metroArea = regions.findByFipsCode('35620') as MetroArea;
-  const countyFipsList = metroArea.counties.map(county => county.fipsCode);
   return (
     <Container>
-      <RegionMap countyFipsList={countyFipsList} />
+      <MetroAreaMap metroArea={metroArea} width={300} height={300} />
     </Container>
   );
 };

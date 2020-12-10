@@ -1,11 +1,11 @@
 import React from 'react';
 import { uniq } from 'lodash';
-import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
+import { ComposableMap, Geographies } from 'react-simple-maps';
 import COUNTIES_JSON from 'components/Map/data/counties-small.json';
 import { geoBounds, geoCentroid, geoDistance } from 'd3-geo';
 import * as topojson from 'topojson-client';
 import { MetroArea } from 'common/regions';
-import * as RegionMapStyle from './RegionMap.style';
+import * as Styles from './MetroAreaMap.style';
 
 const MetroAreaMap: React.FC<{
   height?: number;
@@ -29,39 +29,21 @@ const MetroAreaMap: React.FC<{
       <Geographies key="states" geography={statesTopoJson}>
         {({ geographies }) =>
           geographies.map(geo => (
-            <Geography
-              key={geo.rsmKey}
-              geography={geo}
-              fill={'#ccc'}
-              strokeWidth={1}
-              stroke="white"
-              role="img"
-            />
+            <Styles.StateShape key={geo.rsmKey} geography={geo} />
           ))
         }
       </Geographies>
       <Geographies key="counties" geography={countiesTopoJson}>
         {({ geographies }) =>
           geographies.map(geo => (
-            <Geography
-              key={geo.rsmKey}
-              geography={geo}
-              fill={'black'}
-              strokeWidth={1}
-              stroke="white"
-              role="img"
-            />
+            <Styles.MetroCounty key={geo.rsmKey} geography={geo} />
           ))
         }
       </Geographies>
       <Geographies key="state-borders" geography={statesTopoJson}>
         {({ geographies }) =>
           geographies.map(geo => (
-            <RegionMapStyle.StateOutline
-              key={geo.rsmKey}
-              geography={geo}
-              role="img"
-            />
+            <Styles.StateBorder key={geo.rsmKey} geography={geo} />
           ))
         }
       </Geographies>
