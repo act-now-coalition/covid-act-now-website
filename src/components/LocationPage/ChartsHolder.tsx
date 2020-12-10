@@ -24,7 +24,7 @@ import {
 } from 'common/utils/recommend';
 import { mainContent } from 'cms-content/recommendations';
 import { getRecommendationsShareUrl } from 'common/urls';
-import { Region, getStateCode, RegionType } from 'common/regions';
+import { Region, getStateCode, RegionType, getStateName } from 'common/regions';
 import { assert } from 'common/utils';
 import NoCountyDetail from './NoCountyDetail';
 
@@ -46,7 +46,9 @@ interface ChartsHolderProps {
 const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
   const projection = projections.primary;
   const stateCode = getStateCode(region);
+  const stateName = getStateName(region);
   assert(stateCode, 'Charts require a state right now');
+  assert(stateName, 'Charts require a state right now');
 
   const county = findCountyByFips(region.fipsCode);
 
@@ -100,17 +102,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
     scrollToRecommendations();
   }, [chartId, metricRefs, isRecommendationsShareUrl]);
 
-  const shareButtonProps = {
-    chartId: chartId,
-    stateId: stateCode,
-    countyId:
-      region.regionType === RegionType.COUNTY ? region.urlSegment : null,
-    county: county,
-    stats: projection ? projections.getMetricValues() : {},
-    projections: projections,
-    isMobile,
-  };
-
+  const stats = projection ? projections.getMetricValues() : {};
   const initialFipsList = useMemo(() => {
     return [projections.primary.fips];
   }, [projections.primary.fips]);
@@ -125,9 +117,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
     mainContent.recommendations,
   );
 
-  const recommendsShareUrl = getRecommendationsShareUrl(
-    projections.primary.fips,
-  );
+  const recommendsShareUrl = getRecommendationsShareUrl(region);
 
   const alarmLevel = projections.getAlarmLevel();
   const recommendsShareQuote = getShareQuote(
@@ -175,7 +165,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
               isMobile={isMobile}
             />
             <CompareMain
-              stateName={projections.stateName}
+              stateName={stateName}
               county={county}
               locationsViewable={6}
               stateId={stateCode}
@@ -200,9 +190,9 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
                   metric={metric}
                   projections={projections}
                   chartRef={metricRefs[metric]}
-                  shareButtonProps={shareButtonProps}
                   isMobile={isMobile}
-                  stateId={stateCode}
+                  region={region}
+                  stats={stats}
                 />
               ))}
             </MainContentInner>
@@ -215,7 +205,11 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
             </MainContentInner>
           </ChartContentWrapper>
           <div ref={shareBlockRef} id="recommendationsTest">
-            <ShareModelBlock {...shareButtonProps} />
+            <ShareModelBlock
+              region={region}
+              projections={projections}
+              stats={stats}
+            />
           </div>
         </>
       )}
