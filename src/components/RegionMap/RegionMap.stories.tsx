@@ -1,7 +1,7 @@
 import React from 'react';
 import RegionMap from './RegionMap';
 import MetroAreaMap from './MetroAreaMap';
-import regions, { MetroArea } from 'common/regions';
+import regions, { MetroArea, Region } from 'common/regions';
 
 export default {
   title: 'Shared Components/Region Map',
@@ -15,10 +15,10 @@ const Container: React.FC = ({ children }) => (
 );
 
 export const NYMetroArea = () => {
-  const metroArea = regions.findByFipsCode('35620') as MetroArea;
+  const metroArea = regions.findByFipsCode('35620') as Region;
   return (
     <Container>
-      <MetroAreaMap metroArea={metroArea} width={300} height={300} />
+      <RegionMap region={metroArea} width={300} height={300} />
     </Container>
   );
 };
