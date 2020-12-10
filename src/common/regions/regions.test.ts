@@ -34,6 +34,11 @@ describe('regions', () => {
       const notFound = regions.findByFipsCode('xx');
       expect(notFound).toBeNull();
     });
+
+    test('Other NYC counties return new york county fips', () => {
+      const region = regions.findByFipsCode('36047');
+      expect(region?.fipsCode).toBe('36061');
+    });
   });
 
   describe('findStateByUrlParams', () => {
@@ -79,6 +84,11 @@ describe('regions', () => {
     test('returns null for invalid stateId and countyID', () => {
       const county = regions.findCountyByUrlParams('xxx', 'xxx');
       expect(county).toBeNull();
+    });
+
+    test('Other NYC counties urls return nyc county', () => {
+      const region = regions.findCountyByUrlParams('NY', 'kings_county');
+      expect(region?.fipsCode).toBe('36061');
     });
   });
 });

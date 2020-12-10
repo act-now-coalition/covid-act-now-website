@@ -2,6 +2,29 @@ import { sortBy, takeRight, values, Dictionary } from 'lodash';
 import { Region, County, State, MetroArea, FipsCode } from './types';
 import { statesByFips, countiesByFips, metroAreasByFips } from './regions_data';
 
+// More NYC Borough logic.  This should be removed when
+// https://github.com/covid-projections/covid-projections/pull/2090 is merged.
+const NYC_BOROUGH_SEGMENTS = [
+  'new_york_county',
+  'queens_county',
+  'richmond_county',
+  'bronx_county',
+  'kings_county',
+];
+const replaceNYCBoroughURLSegment = (urlSegment: string) => {
+  if (NYC_BOROUGH_SEGMENTS.includes(urlSegment)) {
+    return 'new_york_county';
+  }
+  return urlSegment;
+};
+
+const replaceNYCBoroughFips = (fipsCode: string) => {
+  if (['36047', '36061', '36005', '36081', '36085'].includes(fipsCode)) {
+    return '36061';
+  }
+  return fipsCode;
+};
+
 class RegionDB {
   public states: State[];
   public counties: County[];
@@ -24,7 +47,8 @@ class RegionDB {
   }
 
   findByFipsCode(fipsCode: FipsCode): Region | null {
-    return this.regionsByFips[fipsCode] || null;
+    const fips = replaceNYCBoroughFips(fipsCode);
+    return this.regionsByFips[fips] || null;
   }
 
   findCountiesByStateCode(stateCode: string): County[] {
@@ -54,7 +78,10 @@ class RegionDB {
     const foundCounty = this.counties.find(
       county =>
         county.state.fipsCode === foundState.fipsCode &&
-        equalLower(county.urlSegment, countyUrlSegment),
+        equalLower(
+          county.urlSegment,
+          replaceNYCBoroughURLSegment(countyUrlSegment),
+        ),
     );
 
     return foundCounty || null;
