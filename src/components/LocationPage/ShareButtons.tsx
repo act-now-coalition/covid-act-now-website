@@ -7,8 +7,9 @@ import {
   MobileButtonsWrapper,
   ClickAwayWrapper,
   SocialButtonsWrapper,
+  CircularProgress,
 } from './ShareButtons.style';
-import { ClickAwayListener, CircularProgress } from '@material-ui/core';
+import { ClickAwayListener } from '@material-ui/core';
 import makeChartShareQuote from 'common/utils/makeChartShareQuote';
 import ShareImageUrlJSON from 'assets/data/share_images_url.json';
 import * as urls from 'common/urls';
@@ -106,11 +107,7 @@ const InnerContent = ({
               downloadChartOnClick(downloadLink);
             }}
           >
-            {saveInProgress ? (
-              <CircularProgress color="lightBlue" size={25} />
-            ) : (
-              'Save'
-            )}
+            {saveInProgress ? <CircularProgress size={25} /> : 'Save'}
           </SaveOrShareButton>
           <SaveOrShareButton
             isLast
