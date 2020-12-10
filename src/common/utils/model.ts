@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Projections } from '../models/Projections';
 import { Api } from 'api';
-import { findCountyByFips, getStateName } from 'common/locations';
+import { getStateName } from 'common/locations';
 import moment from 'moment';
 import { assert } from '.';
 import { getSnapshotUrlOverride } from './snapshots';
-import { Region, getStateCode } from 'common/regions';
+import regions, { Region, getStateCode } from 'common/regions';
 import { fail } from 'common/utils';
 
 export enum APIRegionSubPath {
@@ -33,8 +33,8 @@ export function fetchProjectionsRegion(
     if (!stateCode) {
       fail('State code required');
     }
-    const county = findCountyByFips(region.fipsCode);
-    return new Projections(summaryWithTimeseries, stateCode, county);
+
+    return new Projections(summaryWithTimeseries, region);
   }
 
   const key = snapshotUrl + '-' + region.fipsCode;
@@ -56,10 +56,9 @@ export function fetchAllStateProjections(snapshotUrl: string | null = null) {
           getStateName(summaryWithTimeseries.state) !== undefined,
       )
       .map(summaryWithTimeseries => {
-        return new Projections(
-          summaryWithTimeseries,
-          summaryWithTimeseries.state,
-        );
+        const region = regions.findByFipsCode(summaryWithTimeseries.fips);
+        assert(region, 'Failed to find region ' + summaryWithTimeseries.fips);
+        return new Projections(summaryWithTimeseries, region);
       });
   }
   const key = snapshotUrl || 'null';
@@ -81,12 +80,9 @@ export function fetchAllCountyProjections(snapshotUrl: string | null = null) {
           getStateName(summaryWithTimeseries.state) !== undefined,
       )
       .map(summaryWithTimeseries => {
-        const fips = summaryWithTimeseries.fips;
-        return new Projections(
-          summaryWithTimeseries,
-          summaryWithTimeseries.state,
-          findCountyByFips(fips),
-        );
+        const region = regions.findByFipsCode(summaryWithTimeseries.fips);
+        assert(region, 'Failed to find region ' + summaryWithTimeseries.fips);
+        return new Projections(summaryWithTimeseries, region);
       });
   }
   const key = snapshotUrl || 'null';

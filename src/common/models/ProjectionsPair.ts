@@ -43,11 +43,7 @@ export class ProjectionsPair {
   }
 
   get locationURL(): string {
-    const stateId = this.left.stateCode;
-    const county = this.left.county;
-    return `https://covidactnow.org/us/${stateId.toLowerCase()}${
-      county ? `/county/${county.county_url_name}` : ''
-    }`;
+    return this.left.region.canonicalUrl;
   }
 
   get fips(): string {
