@@ -24,34 +24,30 @@ const RegionMap: React.FC<{
     >
       <Geographies key="states" geography={statesTopoJson}>
         {({ geographies }) =>
-          geographies.map(geo => {
-            return (
-              <Geography
-                key={geo.rsmKey}
-                geography={geo}
-                fill={'#ccc'}
-                strokeWidth={1}
-                stroke="white"
-                role="img"
-              />
-            );
-          })
+          geographies.map(geo => (
+            <Geography
+              key={geo.rsmKey}
+              geography={geo}
+              fill={'#ccc'}
+              strokeWidth={1}
+              stroke="white"
+              role="img"
+            />
+          ))
         }
       </Geographies>
       <Geographies key="counties" geography={countiesTopoJson}>
         {({ geographies }) =>
-          geographies.map(geo => {
-            return (
-              <Geography
-                key={geo.rsmKey}
-                geography={geo}
-                fill={'black'}
-                strokeWidth={1}
-                stroke="white"
-                role="img"
-              />
-            );
-          })
+          geographies.map(geo => (
+            <Geography
+              key={geo.rsmKey}
+              geography={geo}
+              fill={'black'}
+              strokeWidth={1}
+              stroke="white"
+              role="img"
+            />
+          ))
         }
       </Geographies>
     </ComposableMap>
@@ -63,40 +59,52 @@ function getProjectionConfig(
   width: number,
   height: number,
 ) {
+  // Calculates the GeoJSON equivalent of countiesTopoJson
   const countiesGeoJson = topojson.feature(
     countiesTopoJson as any,
     countiesTopoJson.objects.counties as any,
   );
-  const bounds = geoBounds(countiesGeoJson);
+
+  /*
+   * We need to calculate the center and scale factor for the geographic
+   * projection so the counties are centered and scaled correctly.
+   *
+   * We calculate the corners of the bounding box in geographic coordinates,
+   * and then the distance (in spherical coordinates) between the bottom left
+   * and top right corners of the bounding box.
+   *
+   * We calculate the scale by dividing the distance in pixels betwen the
+   * bottom left and top right corners of the SVG.
+   */
+  const [bottomLeft, topRight] = geoBounds(countiesGeoJson);
   const center = geoCentroid(countiesGeoJson);
-  const distance = geoDistance(bounds[0], bounds[1]);
-  const scale = (0.8 * Math.sqrt(height * height + width * width)) / distance;
-  return { scale, center };
+  const distanceGeo = geoDistance(bottomLeft, topRight);
+  const distancePx = Math.sqrt(height * height + width * width);
+  return { scale: 0.8 * (distancePx / distanceGeo), center };
 }
 
 function buildCountyGeometries(countyFipsList: string[]) {
-  const countyGeometries = COUNTIES_JSON.objects.counties.geometries.filter(
-    geoCounty => countyFipsList.includes(geoCounty.id),
+  const objects = COUNTIES_JSON.objects;
+  const countyGeometries = objects.counties.geometries.filter(geoCounty =>
+    countyFipsList.includes(geoCounty.id),
   );
   return {
     ...COUNTIES_JSON,
     objects: {
-      counties: {
-        ...COUNTIES_JSON.objects.counties,
-        geometries: countyGeometries,
-      },
+      counties: { ...objects.counties, geometries: countyGeometries },
     },
   };
 }
 
 function buildStateGeometries(stateFipsList: string[]) {
-  const stateGeometries = COUNTIES_JSON.objects.states.geometries.filter(
-    geoState => stateFipsList.includes(geoState.id),
+  const objects = COUNTIES_JSON.objects;
+  const stateGeometries = objects.states.geometries.filter(geoState =>
+    stateFipsList.includes(geoState.id),
   );
   return {
     ...COUNTIES_JSON,
     objects: {
-      states: { ...COUNTIES_JSON.objects.states, geometries: stateGeometries },
+      states: { ...objects.states, geometries: stateGeometries },
     },
   };
 }
