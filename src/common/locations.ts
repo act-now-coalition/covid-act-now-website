@@ -179,13 +179,6 @@ export function allCounties(): County[] {
   return allCountiesCache;
 }
 
-export function topCountiesByPopulation(limit: number): County[] {
-  return takeRight(
-    sortBy(allCounties(), c => c.population),
-    limit,
-  );
-}
-
 export function getAdjacentCounties(fips: string): string[] {
   assert(fips in ADJACENT_COUNTIES, `${fips} not found in adjacency list.`);
   return ADJACENT_COUNTIES[fips].adjacent_counties;
