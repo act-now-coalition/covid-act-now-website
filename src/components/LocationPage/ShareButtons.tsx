@@ -7,24 +7,34 @@ import {
   MobileButtonsWrapper,
   ClickAwayWrapper,
   SocialButtonsWrapper,
+  CircularProgress,
 } from './ShareButtons.style';
-import { ClickAwayListener, CircularProgress } from '@material-ui/core';
+import { ClickAwayListener } from '@material-ui/core';
 import makeChartShareQuote from 'common/utils/makeChartShareQuote';
 import ShareImageUrlJSON from 'assets/data/share_images_url.json';
 import * as urls from 'common/urls';
 import moment from 'moment';
+import { County } from 'common/locations';
 
-const InnerContent = props => {
-  const {
-    iconSize,
-    shareURL,
-    shareQuote,
-    county,
-    stateId,
-    countyId,
-    chartIdentifier,
-  } = props;
+interface InnerContentProps {
+  iconSize: string;
+  shareURL: string;
+  shareQuote: string;
+  county: County | undefined;
+  stateId: string;
+  countyId: string | undefined;
+  chartIdentifier: number;
+}
 
+const InnerContent = ({
+  iconSize,
+  shareURL,
+  shareQuote,
+  county,
+  stateId,
+  countyId,
+  chartIdentifier,
+}: InnerContentProps) => {
   const [showShareIcons, setShowShareIcons] = useState(false);
   const [saveInProgress, setSaveInProgress] = useState(false);
 
@@ -37,7 +47,7 @@ const InnerContent = props => {
   };
 
   const imageBaseUrl = ShareImageUrlJSON.share_image_url;
-  const downloadLink = countyId
+  const downloadLink = county
     ? imageBaseUrl +
       `counties/${county.full_fips_code}/chart/${chartIdentifier}/export.png`
     : imageBaseUrl +
@@ -45,7 +55,7 @@ const InnerContent = props => {
 
   const downloadDate = moment().format('YYYY-MM-DD');
 
-  function makeDownloadFilename(chartIdentifier) {
+  function makeDownloadFilename(chartIdentifier: number) {
     const chartDownloadType = {
       0: 'infection_rate',
       1: 'positive_test_rate',
@@ -54,6 +64,7 @@ const InnerContent = props => {
       5: 'case_incidence',
     };
 
+    // @ts-ignore
     const chartType = chartDownloadType[chartIdentifier];
     const location = countyId
       ? `${countyId}_${stateId.toLowerCase()}`
@@ -63,7 +74,7 @@ const InnerContent = props => {
 
   // The following is a little hacky, adds a link to the blob and immediately clicks it
   // As described in https://stackoverflow.com/a/49500465
-  function downloadChart(blob, filename) {
+  function downloadChart(blob: string, filename: string) {
     var a = document.createElement('a');
     a.download = filename;
     a.href = blob;
@@ -72,7 +83,7 @@ const InnerContent = props => {
     a.remove();
   }
 
-  function downloadChartOnClick(url) {
+  function downloadChartOnClick(url: string) {
     const filename =
       makeDownloadFilename(chartIdentifier) || `CovidActNow_${downloadDate}`;
     setSaveInProgress(true);
@@ -96,11 +107,7 @@ const InnerContent = props => {
               downloadChartOnClick(downloadLink);
             }}
           >
-            {saveInProgress ? (
-              <CircularProgress color="lightBlue" size={25} />
-            ) : (
-              'Save'
-            )}
+            {saveInProgress ? <CircularProgress size={25} /> : 'Save'}
           </SaveOrShareButton>
           <SaveOrShareButton
             isLast
@@ -129,9 +136,22 @@ const InnerContent = props => {
   );
 };
 
-const ShareButtons = props => {
-  const { stateId, county, stats, isMobile, countyId, chartIdentifier } = props;
-
+interface ShareButtonsProps {
+  stateId: string;
+  county: County | undefined;
+  stats: any;
+  isMobile: Boolean;
+  countyId: string | undefined;
+  chartIdentifier: number;
+}
+const ShareButtons: React.FC<ShareButtonsProps> = ({
+  stateId,
+  county,
+  stats,
+  isMobile,
+  countyId,
+  chartIdentifier,
+}) => {
   const shareQuote = makeChartShareQuote(
     stateId,
     county,

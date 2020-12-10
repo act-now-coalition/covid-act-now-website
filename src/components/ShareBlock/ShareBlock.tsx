@@ -105,11 +105,7 @@ const ShareBlock = ({
                 and family.
               </ShareInstructionBody>
               <ShareButtonContainer reflow>
-                <StyledShareButton
-                  disableElevation
-                  variant="contained"
-                  color="#3b5998"
-                >
+                <StyledShareButton variant="contained" color="#3b5998">
                   <FacebookShareButton
                     url={url}
                     quote={quote}
@@ -125,11 +121,7 @@ const ShareBlock = ({
                     />
                   </FacebookShareButton>
                 </StyledShareButton>
-                <StyledShareButton
-                  disableElevation
-                  variant="contained"
-                  color="#00acee"
-                >
+                <StyledShareButton variant="contained" color="#00acee">
                   <TwitterShareButton
                     url={url}
                     title={quote}
@@ -146,11 +138,7 @@ const ShareBlock = ({
                     />
                   </TwitterShareButton>
                 </StyledShareButton>
-                <StyledShareButton
-                  disableElevation
-                  variant="contained"
-                  color="#007fb1"
-                >
+                <StyledShareButton variant="contained" color="#007fb1">
                   <LinkedinShareButton
                     url={url}
                     title={quote}
