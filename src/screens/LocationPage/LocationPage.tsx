@@ -35,8 +35,8 @@ function LocationPage({ region }: LocationPageProps) {
     return <LoadingScreen></LoadingScreen>;
   }
 
-  const pageTitle = getPageTitle(projections);
-  const pageDescription = getPageDescription(projections);
+  const pageTitle = getPageTitle(region);
+  const pageDescription = getPageDescription(region, projections);
   const canonicalUrl = region.canonicalUrl;
 
   return (
