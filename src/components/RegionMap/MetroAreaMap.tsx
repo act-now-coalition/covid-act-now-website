@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { uniq } from 'lodash';
 import { ComposableMap, Geographies } from 'react-simple-maps';
 import COUNTIES_JSON from 'components/Map/data/counties-small.json';
@@ -6,8 +7,8 @@ import { geoBounds, geoCentroid, geoDistance } from 'd3-geo';
 import * as topojson from 'topojson-client';
 import { MetroArea } from 'common/regions';
 import * as Styles from './MetroAreaMap.style';
-import { Link } from 'react-router-dom';
 import regions from 'common/regions';
+import { LocationSummariesByFIPS } from 'common/location_summaries';
 
 const MetroAreaMap: React.FC<{
   height?: number;
@@ -31,7 +32,11 @@ const MetroAreaMap: React.FC<{
       <Geographies key="states" geography={statesTopoJson}>
         {({ geographies }) =>
           geographies.map(geo => (
-            <Link key={geo.rsmKey} to={getRelativeUrlByFips(geo.id)}>
+            <Link
+              key={geo.rsmKey}
+              to={getRelativeUrlByFips(geo.id)}
+              aria-label={getNameByFips(geo.id)}
+            >
               <Styles.StateShape key={geo.rsmKey} geography={geo} />
             </Link>
           ))
@@ -39,11 +44,21 @@ const MetroAreaMap: React.FC<{
       </Geographies>
       <Geographies key="counties" geography={countiesTopoJson}>
         {({ geographies }) =>
-          geographies.map(geo => (
-            <Link key={geo.id} to={getRelativeUrlByFips(geo.id)}>
-              <Styles.MetroCounty geography={geo} />
-            </Link>
-          ))
+          geographies.map(geo => {
+            const locationSummary = LocationSummariesByFIPS[geo.id] || null;
+            return (
+              <Link
+                key={geo.id}
+                to={getRelativeUrlByFips(geo.id)}
+                aria-label={getNameByFips(geo.id)}
+              >
+                <Styles.MetroCounty
+                  geography={geo}
+                  $locationSummary={locationSummary}
+                />
+              </Link>
+            );
+          })
         }
       </Geographies>
       <Geographies key="state-borders" geography={statesTopoJson}>
@@ -119,6 +134,11 @@ function getStateFipsList(countyFipsList: string[]) {
 function getRelativeUrlByFips(fipsCode: string) {
   const region = regions.findByFipsCode(fipsCode);
   return region?.relativeUrl || '/';
+}
+
+function getNameByFips(fipsCode: string) {
+  const region = regions.findByFipsCode(fipsCode);
+  return region?.name || '';
 }
 
 export default MetroAreaMap;

@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 import { Geography } from 'react-simple-maps';
+import { LocationSummary } from 'common/location_summaries';
+import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
+import { COLOR_MAP } from 'common/colors';
 
 const GeoPath = styled(Geography).attrs(props => ({
   tabIndex: -1,
@@ -18,8 +21,16 @@ export const StateBorder = styled(GeoPath)`
   stroke-width: 2px;
 `;
 
-export const MetroCounty = styled(GeoPath)`
-  fill: #333;
+export const MetroCounty = styled(GeoPath)<{
+  $locationSummary?: LocationSummary;
+}>`
+  fill: ${({ $locationSummary }) => getAlertColor($locationSummary)};
   stroke: #fff;
   stroke-width: 1;
 `;
+
+function getAlertColor(locationSummary?: LocationSummary) {
+  return locationSummary
+    ? LOCATION_SUMMARY_LEVELS[locationSummary.level].color
+    : COLOR_MAP.GRAY.LIGHT;
+}
