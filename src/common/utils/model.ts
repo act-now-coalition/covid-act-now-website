@@ -102,6 +102,8 @@ export function fetchAllMetroProjections(snapshotUrl: string | null = null) {
     return all
       .filter(
         summaryWithTimeseries =>
+          // The cbsas endpoint will return all CBSAs, both metro and micro. We want to
+          // Only include summaries for metros (those that are included in `regions`).
           regions.findByFipsCode(summaryWithTimeseries.fips) !== null,
       )
       .map(summaryWithTimeseries => {
