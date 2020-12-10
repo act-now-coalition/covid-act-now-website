@@ -10,9 +10,9 @@ import { fail } from 'common/utils';
 const BASE_SHARE_URL = 'https://covidactnow.org/us';
 
 interface ShareModelBlockParams {
-  region: Region;
-  projections: Projections;
-  stats: any;
+  region?: Region;
+  projections?: Projections;
+  stats?: any;
 }
 
 const ShareModelBlock = ({
@@ -23,7 +23,7 @@ const ShareModelBlock = ({
   const { displayName, shareURL } = getUrlAndShareQuote(region);
   const shareQuote = `I'm keeping track of ${displayName}'s COVID data and risk level with @CovidActNow. What does your community look like?`;
   const [showEmbedPreviewModal, setShowEmbedPreviewModal] = useState(false);
-  const county = findCountyByFips(region.fipsCode);
+  const county = region && findCountyByFips(region.fipsCode);
   return (
     <>
       <ShareBlock
@@ -44,7 +44,7 @@ const ShareModelBlock = ({
   );
 };
 
-function getUrlAndShareQuote(region: Region) {
+function getUrlAndShareQuote(region?: Region) {
   let shareURL = BASE_SHARE_URL;
   let displayName = 'the country';
   if (region instanceof County) {
@@ -55,7 +55,7 @@ function getUrlAndShareQuote(region: Region) {
     const state = region as State;
     shareURL = `${BASE_SHARE_URL}/${state.urlSegment}`;
     displayName = state.fullName;
-  } else {
+  } else if (region) {
     fail('Unsupported region');
   }
 
