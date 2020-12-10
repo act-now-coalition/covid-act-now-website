@@ -13,36 +13,6 @@ import regions, { Region, County, State, getStateCode } from 'common/regions';
 import { fail } from 'common/utils';
 
 const cachedProjections: { [key: string]: Promise<Projections> } = {};
-export function fetchProjections(
-  stateId: string,
-  countyInfo: any = null,
-  snapshotUrl: string | null = null,
-) {
-  snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
-  let regionDescriptor: RegionDescriptor;
-  if (countyInfo) {
-    regionDescriptor = RegionDescriptor.forCounty(countyInfo.full_fips_code);
-  } else {
-    regionDescriptor = RegionDescriptor.forState(stateId);
-  }
-
-  async function fetch() {
-    const summaryWithTimeseries = await new Api(
-      snapshotUrl,
-    ).fetchSummaryWithTimeseries(regionDescriptor);
-    assert(
-      summaryWithTimeseries != null,
-      'Failed to fetch projections for ' + regionDescriptor,
-    );
-    const region = regions.findByFipsCode(summaryWithTimeseries.fips);
-    assert(region, 'Failed to find region ' + region);
-    return new Projections(summaryWithTimeseries, region);
-  }
-
-  const key = snapshotUrl + '-' + regionDescriptor.toString();
-  cachedProjections[key] = cachedProjections[key] || fetch();
-  return cachedProjections[key];
-}
 
 export function fetchProjectionsRegion(
   region: Region,

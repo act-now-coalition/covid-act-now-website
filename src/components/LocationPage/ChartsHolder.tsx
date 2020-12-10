@@ -102,17 +102,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
     scrollToRecommendations();
   }, [chartId, metricRefs, isRecommendationsShareUrl]);
 
-  const shareButtonProps = {
-    chartId: chartId,
-    stateId: stateCode,
-    countyId:
-      region.regionType === RegionType.COUNTY ? region.urlSegment : null,
-    county: county,
-    stats: projection ? projections.getMetricValues() : {},
-    projections: projections,
-    isMobile,
-  };
-
+  const stats = projection ? projections.getMetricValues() : {};
   const initialFipsList = useMemo(() => {
     return [projections.primary.fips];
   }, [projections.primary.fips]);
@@ -127,9 +117,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
     mainContent.recommendations,
   );
 
-  const recommendsShareUrl = getRecommendationsShareUrl(
-    projections.primary.fips,
-  );
+  const recommendsShareUrl = getRecommendationsShareUrl(region);
 
   const alarmLevel = projections.getAlarmLevel();
   const recommendsShareQuote = getShareQuote(
@@ -202,9 +190,9 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
                   metric={metric}
                   projections={projections}
                   chartRef={metricRefs[metric]}
-                  shareButtonProps={shareButtonProps}
                   isMobile={isMobile}
-                  stateId={stateCode}
+                  region={region}
+                  stats={stats}
                 />
               ))}
             </MainContentInner>
@@ -217,7 +205,11 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
             </MainContentInner>
           </ChartContentWrapper>
           <div ref={shareBlockRef} id="recommendationsTest">
-            <ShareModelBlock {...shareButtonProps} />
+            <ShareModelBlock
+              region={region}
+              projections={projections}
+              stats={stats}
+            />
           </div>
         </>
       )}

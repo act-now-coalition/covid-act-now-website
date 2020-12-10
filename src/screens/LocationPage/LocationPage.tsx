@@ -9,7 +9,6 @@ import ChartsHolder from 'components/LocationPage/ChartsHolder';
 import { LoadingScreen } from './LocationPage.style';
 import { useProjectionsFromRegion } from 'common/utils/model';
 import { getPageTitle, getPageDescription } from './utils';
-import { findCountyByFips, getCanonicalUrl } from 'common/locations';
 import { getStateCode, Region } from 'common/regions';
 import { assert } from 'common/utils';
 
@@ -22,7 +21,6 @@ function LocationPage({ region }: LocationPageProps) {
 
   const stateCode = getStateCode(region);
   assert(stateCode, 'Location Pages must have state codes');
-  const county = findCountyByFips(region.fipsCode);
 
   const [mapOption, setMapOption] = useState(
     stateCode === MAP_FILTERS.DC ? MAP_FILTERS.NATIONAL : MAP_FILTERS.STATE,
@@ -37,9 +35,9 @@ function LocationPage({ region }: LocationPageProps) {
     return <LoadingScreen></LoadingScreen>;
   }
 
-  const pageTitle = getPageTitle(projections);
-  const pageDescription = getPageDescription(projections);
-  const canonicalUrl = getCanonicalUrl(projections.fips);
+  const pageTitle = getPageTitle(region);
+  const pageDescription = getPageDescription(region, projections);
+  const canonicalUrl = region.canonicalUrl;
 
   return (
     <div>
@@ -61,9 +59,7 @@ function LocationPage({ region }: LocationPageProps) {
           region={region}
         />
         <MiniMap
-          projections={projections}
-          stateId={stateCode}
-          selectedCounty={county}
+          region={region}
           mobileMenuOpen={mobileMenuOpen}
           setMobileMenuOpen={setMobileMenuOpen}
           mapOption={mapOption}
