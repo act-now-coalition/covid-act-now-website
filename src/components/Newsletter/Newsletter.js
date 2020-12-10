@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import { getLocationNames } from 'common/locations';
 import { getFirebase, firebase } from 'common/firebase';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
+import { County, getStateCode } from 'common/regions';
 
 // Taken from https://ui.dev/validate-email-address-javascript/
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -92,15 +93,18 @@ class Newsletter extends React.Component {
   }
 
   render() {
-    const { stateId, county } = this.props;
+    const { region } = this.props;
+    const countyName = region instanceof County ? region.name : null;
+    const stateCode = region ? getStateCode(region) : null;
     this.defaultValues = this.autocompleteOptions.filter(location => {
       const matching_state =
-        location.state_code === stateId && location.full_fips_code.length === 2;
+        location.state_code === stateCode &&
+        location.full_fips_code.length === 2;
       let matching_county = false;
-      if (county) {
+      if (countyName) {
         matching_county =
-          location.county === county &&
-          location.state_code === stateId &&
+          location.county === countyName &&
+          location.state_code === stateCode &&
           location.full_fips_code.length === 5;
       }
       return matching_state || matching_county;
@@ -127,7 +131,7 @@ class Newsletter extends React.Component {
             hidden
             readOnly
             aria-label="state"
-            value={stateId || ''}
+            value={stateCode || ''}
             id="fieldjrdtwi"
             maxLength="200"
             name="cm-f-jrdtwi"
@@ -139,7 +143,7 @@ class Newsletter extends React.Component {
             id="fieldjrdtwd"
             maxLength="200"
             name="cm-f-jrdtwd"
-            value={county || ''}
+            value={countyName || ''}
           />
           <Autocomplete
             multiple

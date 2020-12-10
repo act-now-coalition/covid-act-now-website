@@ -39,7 +39,7 @@ const CompareTable = (props: {
   isModal: boolean;
   locationsViewable?: number;
   isHomepage?: boolean;
-  locations: any;
+  locations: SummaryForCompare[];
   currentCounty?: any;
   viewAllCounties?: boolean;
   setViewAllCounties?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -76,9 +76,7 @@ const CompareTable = (props: {
 
   const currentCounty = props.county && props.currentCounty;
 
-  const currentCountyFips = currentCounty
-    ? currentCounty.locationInfo.full_fips_code
-    : 0;
+  const currentCountyFips = currentCounty ? currentCounty.region.fipsCode : 0;
 
   function sortLocationsBy(
     locations: SummaryForCompare[],
@@ -96,7 +94,7 @@ const CompareTable = (props: {
   }
 
   const getPopulation = (location: SummaryForCompare) =>
-    location?.locationInfo?.population;
+    location.region.population;
   const getMetricValue = (location: any) => {
     // TODO(https://trello.com/c/x0G7LZ91): Not sure if this check should be necessary,
     // but we seem to be missing projections for Northern Islands Municipality, MP right now.
@@ -117,7 +115,7 @@ const CompareTable = (props: {
   const currentCountyRank = findIndex(
     sortedLocationsArr,
     (location: SummaryForCompare) =>
-      location.locationInfo.full_fips_code === currentCountyFips,
+      location.region.fipsCode === currentCountyFips,
   );
 
   const locationsViewable =

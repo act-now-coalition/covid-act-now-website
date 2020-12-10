@@ -1,4 +1,5 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
+import { deburr, words } from 'lodash';
 import SocialButtons from './SocialButtons';
 import {
   SaveOrShareContainer,
@@ -14,25 +15,40 @@ import makeChartShareQuote from 'common/utils/makeChartShareQuote';
 import ShareImageUrlJSON from 'assets/data/share_images_url.json';
 import * as urls from 'common/urls';
 import moment from 'moment';
-import { County } from 'common/locations';
+import { County, Region, State } from 'common/regions';
+import { fail } from 'common/utils';
+
+const getShareImageUrl = (region: Region, chartIdentifier: number): string => {
+  const imageBaseUrl = ShareImageUrlJSON.share_image_url;
+  if (region instanceof County) {
+    return (
+      imageBaseUrl +
+      `counties/${region.fipsCode}/chart/${chartIdentifier}/export.png`
+    );
+  }
+  if (region instanceof State) {
+    const state = region as State;
+    return (
+      imageBaseUrl +
+      `states/${state.stateCode.toLowerCase()}/chart/${chartIdentifier}/export.png`
+    );
+  }
+  fail('Unsupported region');
+};
 
 interface InnerContentProps {
+  region: Region;
   iconSize: string;
   shareURL: string;
   shareQuote: string;
-  county: County | undefined;
-  stateId: string;
-  countyId: string | undefined;
   chartIdentifier: number;
 }
 
 const InnerContent = ({
+  region,
   iconSize,
   shareURL,
   shareQuote,
-  county,
-  stateId,
-  countyId,
   chartIdentifier,
 }: InnerContentProps) => {
   const [showShareIcons, setShowShareIcons] = useState(false);
@@ -46,13 +62,7 @@ const InnerContent = ({
     return () => clearTimeout(timeoutId);
   };
 
-  const imageBaseUrl = ShareImageUrlJSON.share_image_url;
-  const downloadLink = county
-    ? imageBaseUrl +
-      `counties/${county.full_fips_code}/chart/${chartIdentifier}/export.png`
-    : imageBaseUrl +
-      `states/${stateId.toLowerCase()}/chart/${chartIdentifier}/export.png`;
-
+  const downloadLink = getShareImageUrl(region, chartIdentifier);
   const downloadDate = moment().format('YYYY-MM-DD');
 
   function makeDownloadFilename(chartIdentifier: number) {
@@ -66,9 +76,7 @@ const InnerContent = ({
 
     // @ts-ignore
     const chartType = chartDownloadType[chartIdentifier];
-    const location = countyId
-      ? `${countyId}_${stateId.toLowerCase()}`
-      : `${stateId.toLowerCase()}`;
+    const location = deburr(words(region.fullName).join('_')).toLowerCase();
     return `${location}_${chartType}_${downloadDate}`;
   }
 
@@ -136,59 +144,55 @@ const InnerContent = ({
   );
 };
 
-interface ShareButtonsProps {
-  stateId: string;
-  county: County | undefined;
+interface ShareButtonProps {
+  region: Region;
   stats: any;
   isMobile: Boolean;
-  countyId: string | undefined;
   chartIdentifier: number;
 }
-const ShareButtons: React.FC<ShareButtonsProps> = ({
-  stateId,
-  county,
+const ShareButtons = ({
+  region,
   stats,
   isMobile,
-  countyId,
   chartIdentifier,
-}) => {
+}: ShareButtonProps) => {
   const shareQuote = makeChartShareQuote(
-    stateId,
-    county,
+    region.fullName,
     stats,
     chartIdentifier,
   );
 
-  const shareBaseURL = `https://covidactnow.org/us/${stateId.toLowerCase()}${
-    county ? `/county/${county.county_url_name}` : ''
-  }`;
+  const shareBaseURL = region.canonicalUrl;
+
   const shareURL = urls.addSharingId(
     `${shareBaseURL}/chart/${chartIdentifier}`,
   );
 
-  const innerContentProps = {
-    shareURL,
-    shareQuote,
-    county,
-    stateId,
-    countyId,
-    chartIdentifier,
-  };
-
-  return (
-    <Fragment>
-      {isMobile && (
-        <MobileButtonsWrapper>
-          <InnerContent iconSize="40" {...innerContentProps} />
-        </MobileButtonsWrapper>
-      )}
-      {!isMobile && (
-        <DesktopButtonsWrapper>
-          <InnerContent iconSize="50" {...innerContentProps} />
-        </DesktopButtonsWrapper>
-      )}
-    </Fragment>
-  );
+  if (isMobile) {
+    return (
+      <MobileButtonsWrapper>
+        <InnerContent
+          iconSize="40"
+          shareURL={shareURL}
+          shareQuote={shareQuote}
+          chartIdentifier={chartIdentifier}
+          region={region}
+        />
+      </MobileButtonsWrapper>
+    );
+  } else {
+    return (
+      <DesktopButtonsWrapper>
+        <InnerContent
+          iconSize="50"
+          shareURL={shareURL}
+          shareQuote={shareQuote}
+          chartIdentifier={chartIdentifier}
+          region={region}
+        />
+      </DesktopButtonsWrapper>
+    );
+  }
 };
 
 export default ShareButtons;
