@@ -56,7 +56,7 @@ const CompareTableRow = (props: {
     return 4;
   }
 
-  const fipsCode = location?.region.fipsCode;
+  const fipsCode = location.region.fipsCode;
 
   const region = regions.findByFipsCode(fipsCode);
   // TODO(chris): What todo about possibly null region?

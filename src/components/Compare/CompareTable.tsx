@@ -94,7 +94,7 @@ const CompareTable = (props: {
   }
 
   const getPopulation = (location: SummaryForCompare) =>
-    location?.region?.population;
+    location.region.population;
   const getMetricValue = (location: any) => {
     // TODO(https://trello.com/c/x0G7LZ91): Not sure if this check should be necessary,
     // but we seem to be missing projections for Northern Islands Municipality, MP right now.

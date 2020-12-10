@@ -208,7 +208,7 @@ const CompareMain = (props: {
     setShowFaqModal,
     createCompareShareId,
   };
-  console.log('HI');
+
   return (
     <Fragment>
       <DivForRef ref={tableRef}>
