@@ -85,26 +85,26 @@ function getProjectionConfig(
 
 function buildCountyGeometries(countyFipsList: string[]) {
   const objects = COUNTIES_JSON.objects;
-  const countyGeometries = objects.counties.geometries.filter(geoCounty =>
+  const geometries = objects.counties.geometries.filter(geoCounty =>
     countyFipsList.includes(geoCounty.id),
   );
   return {
     ...COUNTIES_JSON,
     objects: {
-      counties: { ...objects.counties, geometries: countyGeometries },
+      counties: { ...objects.counties, geometries },
     },
   };
 }
 
 function buildStateGeometries(stateFipsList: string[]) {
   const objects = COUNTIES_JSON.objects;
-  const stateGeometries = objects.states.geometries.filter(geoState =>
+  const geometries = objects.states.geometries.filter(geoState =>
     stateFipsList.includes(geoState.id),
   );
   return {
     ...COUNTIES_JSON,
     objects: {
-      states: { ...objects.states, geometries: stateGeometries },
+      states: { ...objects.states, geometries },
     },
   };
 }
