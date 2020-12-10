@@ -8,6 +8,7 @@ export const MapContainer = styled.div`
   position: relative;
 `;
 
+// Setting tabIndex to -1 avoids the map from becoming a focus trap
 const GeoPath = styled(Geography).attrs(props => ({
   tabIndex: -1,
   role: 'img',
