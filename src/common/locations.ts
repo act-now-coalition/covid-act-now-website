@@ -1,7 +1,7 @@
 /** Helpers for dealing with the State / Counties dataset. */
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 import urlJoin from 'url-join';
-import { each, sortBy, takeRight, has, partition, toLower } from 'lodash';
+import { each, has, partition, toLower } from 'lodash';
 import { assert } from './utils';
 import countyAdjacencyMsa from './data/county_adjacency_msa.json';
 import collegesByFips from './data/colleges_by_fips.json';
