@@ -1,0 +1,4783 @@
+{
+  "metro_areas": [
+    {
+      "cbsaCode": "10180",
+      "cbsaTitle": "Abilene, TX",
+      "name": "Abilene",
+      "countyFipsCodes": [
+        "48059",
+        "48253",
+        "48441"
+      ],
+      "urlSegment": "abilene_tx",
+      "population": 172060
+    },
+    {
+      "cbsaCode": "10380",
+      "cbsaTitle": "Aguadilla-Isabela, PR",
+      "name": "Aguadilla-Isabela",
+      "countyFipsCodes": [
+        "72003",
+        "72005",
+        "72011",
+        "72071",
+        "72081",
+        "72099",
+        "72117",
+        "72131",
+        "72141"
+      ],
+      "urlSegment": "aguadilla-isabela_pr",
+      "population": 289289
+    },
+    {
+      "cbsaCode": "10420",
+      "cbsaTitle": "Akron, OH",
+      "name": "Akron",
+      "countyFipsCodes": [
+        "39133",
+        "39153"
+      ],
+      "urlSegment": "akron_oh",
+      "population": 703479
+    },
+    {
+      "cbsaCode": "10500",
+      "cbsaTitle": "Albany, GA",
+      "name": "Albany",
+      "countyFipsCodes": [
+        "13095",
+        "13177",
+        "13273",
+        "13321"
+      ],
+      "urlSegment": "albany_ga",
+      "population": 146726
+    },
+    {
+      "cbsaCode": "10540",
+      "cbsaTitle": "Albany-Lebanon, OR",
+      "name": "Albany-Lebanon",
+      "countyFipsCodes": [
+        "41043"
+      ],
+      "urlSegment": "albany-lebanon_or",
+      "population": 129749
+    },
+    {
+      "cbsaCode": "10580",
+      "cbsaTitle": "Albany-Schenectady-Troy, NY",
+      "name": "Albany-Schenectady-Troy",
+      "countyFipsCodes": [
+        "36001",
+        "36083",
+        "36091",
+        "36093",
+        "36095"
+      ],
+      "urlSegment": "albany-schenectady-troy_ny",
+      "population": 880381
+    },
+    {
+      "cbsaCode": "10740",
+      "cbsaTitle": "Albuquerque, NM",
+      "name": "Albuquerque",
+      "countyFipsCodes": [
+        "35001",
+        "35043",
+        "35057",
+        "35061"
+      ],
+      "urlSegment": "albuquerque_nm",
+      "population": 918018
+    },
+    {
+      "cbsaCode": "10780",
+      "cbsaTitle": "Alexandria, LA",
+      "name": "Alexandria",
+      "countyFipsCodes": [
+        "22043",
+        "22079"
+      ],
+      "urlSegment": "alexandria_la",
+      "population": 152037
+    },
+    {
+      "cbsaCode": "10900",
+      "cbsaTitle": "Allentown-Bethlehem-Easton, PA-NJ",
+      "name": "Allentown-Bethlehem-Easton",
+      "countyFipsCodes": [
+        "34041",
+        "42025",
+        "42077",
+        "42095"
+      ],
+      "urlSegment": "allentown-bethlehem-easton_pa-nj",
+      "population": 844052
+    },
+    {
+      "cbsaCode": "11020",
+      "cbsaTitle": "Altoona, PA",
+      "name": "Altoona",
+      "countyFipsCodes": [
+        "42013"
+      ],
+      "urlSegment": "altoona_pa",
+      "population": 121829
+    },
+    {
+      "cbsaCode": "11100",
+      "cbsaTitle": "Amarillo, TX",
+      "name": "Amarillo",
+      "countyFipsCodes": [
+        "48011",
+        "48065",
+        "48359",
+        "48375",
+        "48381"
+      ],
+      "urlSegment": "amarillo_tx",
+      "population": 265053
+    },
+    {
+      "cbsaCode": "11180",
+      "cbsaTitle": "Ames, IA",
+      "name": "Ames",
+      "countyFipsCodes": [
+        "19015",
+        "19169"
+      ],
+      "urlSegment": "ames_ia",
+      "population": 123351
+    },
+    {
+      "cbsaCode": "11260",
+      "cbsaTitle": "Anchorage, AK",
+      "name": "Anchorage",
+      "countyFipsCodes": [
+        "02020",
+        "02170"
+      ],
+      "urlSegment": "anchorage_ak",
+      "population": 396317
+    },
+    {
+      "cbsaCode": "11460",
+      "cbsaTitle": "Ann Arbor, MI",
+      "name": "Ann Arbor",
+      "countyFipsCodes": [
+        "26161"
+      ],
+      "urlSegment": "ann-arbor_mi",
+      "population": 367601
+    },
+    {
+      "cbsaCode": "11500",
+      "cbsaTitle": "Anniston-Oxford, AL",
+      "name": "Anniston-Oxford",
+      "countyFipsCodes": [
+        "01015"
+      ],
+      "urlSegment": "anniston-oxford_al",
+      "population": 113605
+    },
+    {
+      "cbsaCode": "11540",
+      "cbsaTitle": "Appleton, WI",
+      "name": "Appleton",
+      "countyFipsCodes": [
+        "55015",
+        "55087"
+      ],
+      "urlSegment": "appleton_wi",
+      "population": 237974
+    },
+    {
+      "cbsaCode": "11640",
+      "cbsaTitle": "Arecibo, PR",
+      "name": "Arecibo",
+      "countyFipsCodes": [
+        "72013",
+        "72027",
+        "72065",
+        "72115"
+      ],
+      "urlSegment": "arecibo_pr",
+      "population": 174606
+    },
+    {
+      "cbsaCode": "11700",
+      "cbsaTitle": "Asheville, NC",
+      "name": "Asheville",
+      "countyFipsCodes": [
+        "37021",
+        "37087",
+        "37089",
+        "37115"
+      ],
+      "urlSegment": "asheville_nc",
+      "population": 462680
+    },
+    {
+      "cbsaCode": "12020",
+      "cbsaTitle": "Athens-Clarke County, GA",
+      "name": "Athens-Clarke County",
+      "countyFipsCodes": [
+        "13059",
+        "13195",
+        "13219",
+        "13221"
+      ],
+      "urlSegment": "athens-clarke-county_ga",
+      "population": 213750
+    },
+    {
+      "cbsaCode": "12060",
+      "cbsaTitle": "Atlanta-Sandy Springs-Alpharetta, GA",
+      "name": "Atlanta-Sandy Springs-Alpharetta",
+      "countyFipsCodes": [
+        "13013",
+        "13015",
+        "13035",
+        "13045",
+        "13057",
+        "13063",
+        "13067",
+        "13077",
+        "13085",
+        "13089",
+        "13097",
+        "13113",
+        "13117",
+        "13121",
+        "13135",
+        "13143",
+        "13149",
+        "13151",
+        "13159",
+        "13171",
+        "13199",
+        "13211",
+        "13217",
+        "13223",
+        "13227",
+        "13231",
+        "13247",
+        "13255",
+        "13297"
+      ],
+      "urlSegment": "atlanta-sandy-springs-alpharetta_ga",
+      "population": 6020364
+    },
+    {
+      "cbsaCode": "12100",
+      "cbsaTitle": "Atlantic City-Hammonton, NJ",
+      "name": "Atlantic City-Hammonton",
+      "countyFipsCodes": [
+        "34001"
+      ],
+      "urlSegment": "atlantic-city-hammonton_nj",
+      "population": 263670
+    },
+    {
+      "cbsaCode": "12220",
+      "cbsaTitle": "Auburn-Opelika, AL",
+      "name": "Auburn-Opelika",
+      "countyFipsCodes": [
+        "01081"
+      ],
+      "urlSegment": "auburn-opelika_al",
+      "population": 164542
+    },
+    {
+      "cbsaCode": "12260",
+      "cbsaTitle": "Augusta-Richmond County, GA-SC",
+      "name": "Augusta-Richmond County",
+      "countyFipsCodes": [
+        "13033",
+        "13073",
+        "13181",
+        "13189",
+        "13245",
+        "45003",
+        "45037"
+      ],
+      "urlSegment": "augusta-richmond-county_ga-sc",
+      "population": 608980
+    },
+    {
+      "cbsaCode": "12420",
+      "cbsaTitle": "Austin-Round Rock-Georgetown, TX",
+      "name": "Austin-Round Rock-Georgetown",
+      "countyFipsCodes": [
+        "48021",
+        "48055",
+        "48209",
+        "48453",
+        "48491"
+      ],
+      "urlSegment": "austin-round-rock-georgetown_tx",
+      "population": 2227083
+    },
+    {
+      "cbsaCode": "12540",
+      "cbsaTitle": "Bakersfield, CA",
+      "name": "Bakersfield",
+      "countyFipsCodes": [
+        "06029"
+      ],
+      "urlSegment": "bakersfield_ca",
+      "population": 900202
+    },
+    {
+      "cbsaCode": "12580",
+      "cbsaTitle": "Baltimore-Columbia-Towson, MD",
+      "name": "Baltimore-Columbia-Towson",
+      "countyFipsCodes": [
+        "24003",
+        "24005",
+        "24013",
+        "24025",
+        "24027",
+        "24035",
+        "24510"
+      ],
+      "urlSegment": "baltimore-columbia-towson_md",
+      "population": 2800053
+    },
+    {
+      "cbsaCode": "12620",
+      "cbsaTitle": "Bangor, ME",
+      "name": "Bangor",
+      "countyFipsCodes": [
+        "23019"
+      ],
+      "urlSegment": "bangor_me",
+      "population": 152148
+    },
+    {
+      "cbsaCode": "12700",
+      "cbsaTitle": "Barnstable Town, MA",
+      "name": "Barnstable Town",
+      "countyFipsCodes": [
+        "25001"
+      ],
+      "urlSegment": "barnstable-town_ma",
+      "population": 212990
+    },
+    {
+      "cbsaCode": "12940",
+      "cbsaTitle": "Baton Rouge, LA",
+      "name": "Baton Rouge",
+      "countyFipsCodes": [
+        "22005",
+        "22007",
+        "22033",
+        "22037",
+        "22047",
+        "22063",
+        "22077",
+        "22091",
+        "22121",
+        "22125"
+      ],
+      "urlSegment": "baton-rouge_la",
+      "population": 854884
+    },
+    {
+      "cbsaCode": "12980",
+      "cbsaTitle": "Battle Creek, MI",
+      "name": "Battle Creek",
+      "countyFipsCodes": [
+        "26025"
+      ],
+      "urlSegment": "battle-creek_mi",
+      "population": 134159
+    },
+    {
+      "cbsaCode": "13020",
+      "cbsaTitle": "Bay City, MI",
+      "name": "Bay City",
+      "countyFipsCodes": [
+        "26017"
+      ],
+      "urlSegment": "bay-city_mi",
+      "population": 103126
+    },
+    {
+      "cbsaCode": "13140",
+      "cbsaTitle": "Beaumont-Port Arthur, TX",
+      "name": "Beaumont-Port Arthur",
+      "countyFipsCodes": [
+        "48199",
+        "48245",
+        "48361"
+      ],
+      "urlSegment": "beaumont-port-arthur_tx",
+      "population": 392563
+    },
+    {
+      "cbsaCode": "13220",
+      "cbsaTitle": "Beckley, WV",
+      "name": "Beckley",
+      "countyFipsCodes": [
+        "54019",
+        "54081"
+      ],
+      "urlSegment": "beckley_wv",
+      "population": 115767
+    },
+    {
+      "cbsaCode": "13380",
+      "cbsaTitle": "Bellingham, WA",
+      "name": "Bellingham",
+      "countyFipsCodes": [
+        "53073"
+      ],
+      "urlSegment": "bellingham_wa",
+      "population": 229247
+    },
+    {
+      "cbsaCode": "13460",
+      "cbsaTitle": "Bend, OR",
+      "name": "Bend",
+      "countyFipsCodes": [
+        "41017"
+      ],
+      "urlSegment": "bend_or",
+      "population": 197692
+    },
+    {
+      "cbsaCode": "13740",
+      "cbsaTitle": "Billings, MT",
+      "name": "Billings",
+      "countyFipsCodes": [
+        "30009",
+        "30095",
+        "30111"
+      ],
+      "urlSegment": "billings_mt",
+      "population": 181667
+    },
+    {
+      "cbsaCode": "13780",
+      "cbsaTitle": "Binghamton, NY",
+      "name": "Binghamton",
+      "countyFipsCodes": [
+        "36007",
+        "36107"
+      ],
+      "urlSegment": "binghamton_ny",
+      "population": 238691
+    },
+    {
+      "cbsaCode": "13820",
+      "cbsaTitle": "Birmingham-Hoover, AL",
+      "name": "Birmingham-Hoover",
+      "countyFipsCodes": [
+        "01007",
+        "01009",
+        "01021",
+        "01073",
+        "01115",
+        "01117"
+      ],
+      "urlSegment": "birmingham-hoover_al",
+      "population": 1090435
+    },
+    {
+      "cbsaCode": "13900",
+      "cbsaTitle": "Bismarck, ND",
+      "name": "Bismarck",
+      "countyFipsCodes": [
+        "38015",
+        "38059",
+        "38065"
+      ],
+      "urlSegment": "bismarck_nd",
+      "population": 128949
+    },
+    {
+      "cbsaCode": "13980",
+      "cbsaTitle": "Blacksburg-Christiansburg, VA",
+      "name": "Blacksburg-Christiansburg",
+      "countyFipsCodes": [
+        "51071",
+        "51121",
+        "51155",
+        "51750"
+      ],
+      "urlSegment": "blacksburg-christiansburg_va",
+      "population": 167531
+    },
+    {
+      "cbsaCode": "14010",
+      "cbsaTitle": "Bloomington, IL",
+      "name": "Bloomington",
+      "countyFipsCodes": [
+        "17113"
+      ],
+      "urlSegment": "bloomington_il",
+      "population": 171517
+    },
+    {
+      "cbsaCode": "14020",
+      "cbsaTitle": "Bloomington, IN",
+      "name": "Bloomington",
+      "countyFipsCodes": [
+        "18105",
+        "18119"
+      ],
+      "urlSegment": "bloomington_in",
+      "population": 169230
+    },
+    {
+      "cbsaCode": "14100",
+      "cbsaTitle": "Bloomsburg-Berwick, PA",
+      "name": "Bloomsburg-Berwick",
+      "countyFipsCodes": [
+        "42037",
+        "42093"
+      ],
+      "urlSegment": "bloomsburg-berwick_pa",
+      "population": 83194
+    },
+    {
+      "cbsaCode": "14260",
+      "cbsaTitle": "Boise City, ID",
+      "name": "Boise City",
+      "countyFipsCodes": [
+        "16001",
+        "16015",
+        "16027",
+        "16045",
+        "16073"
+      ],
+      "urlSegment": "boise-city_id",
+      "population": 749202
+    },
+    {
+      "cbsaCode": "14460",
+      "cbsaTitle": "Boston-Cambridge-Newton, MA-NH",
+      "name": "Boston-Cambridge-Newton",
+      "countyFipsCodes": [
+        "25021",
+        "25023",
+        "25025",
+        "25009",
+        "25017",
+        "33015",
+        "33017"
+      ],
+      "urlSegment": "boston-cambridge-newton_ma-nh",
+      "population": 4873019
+    },
+    {
+      "cbsaCode": "14500",
+      "cbsaTitle": "Boulder, CO",
+      "name": "Boulder",
+      "countyFipsCodes": [
+        "08013"
+      ],
+      "urlSegment": "boulder_co",
+      "population": 326196
+    },
+    {
+      "cbsaCode": "14540",
+      "cbsaTitle": "Bowling Green, KY",
+      "name": "Bowling Green",
+      "countyFipsCodes": [
+        "21003",
+        "21031",
+        "21061",
+        "21227"
+      ],
+      "urlSegment": "bowling-green_ky",
+      "population": 179240
+    },
+    {
+      "cbsaCode": "14740",
+      "cbsaTitle": "Bremerton-Silverdale-Port Orchard, WA",
+      "name": "Bremerton-Silverdale-Port Orchard",
+      "countyFipsCodes": [
+        "53035"
+      ],
+      "urlSegment": "bremerton-silverdale-port-orchard_wa",
+      "population": 271473
+    },
+    {
+      "cbsaCode": "14860",
+      "cbsaTitle": "Bridgeport-Stamford-Norwalk, CT",
+      "name": "Bridgeport-Stamford-Norwalk",
+      "countyFipsCodes": [
+        "09001"
+      ],
+      "urlSegment": "bridgeport-stamford-norwalk_ct",
+      "population": 943332
+    },
+    {
+      "cbsaCode": "15180",
+      "cbsaTitle": "Brownsville-Harlingen, TX",
+      "name": "Brownsville-Harlingen",
+      "countyFipsCodes": [
+        "48061"
+      ],
+      "urlSegment": "brownsville-harlingen_tx",
+      "population": 423163
+    },
+    {
+      "cbsaCode": "15260",
+      "cbsaTitle": "Brunswick, GA",
+      "name": "Brunswick",
+      "countyFipsCodes": [
+        "13025",
+        "13127",
+        "13191"
+      ],
+      "urlSegment": "brunswick_ga",
+      "population": 118779
+    },
+    {
+      "cbsaCode": "15380",
+      "cbsaTitle": "Buffalo-Cheektowaga, NY",
+      "name": "Buffalo-Cheektowaga",
+      "countyFipsCodes": [
+        "36029",
+        "36063"
+      ],
+      "urlSegment": "buffalo-cheektowaga_ny",
+      "population": 1127983
+    },
+    {
+      "cbsaCode": "15500",
+      "cbsaTitle": "Burlington, NC",
+      "name": "Burlington",
+      "countyFipsCodes": [
+        "37001"
+      ],
+      "urlSegment": "burlington_nc",
+      "population": 169509
+    },
+    {
+      "cbsaCode": "15540",
+      "cbsaTitle": "Burlington-South Burlington, VT",
+      "name": "Burlington-South Burlington",
+      "countyFipsCodes": [
+        "50007",
+        "50011",
+        "50013"
+      ],
+      "urlSegment": "burlington-south-burlington_vt",
+      "population": 220411
+    },
+    {
+      "cbsaCode": "15680",
+      "cbsaTitle": "California-Lexington Park, MD",
+      "name": "California-Lexington Park",
+      "countyFipsCodes": [
+        "24037"
+      ],
+      "urlSegment": "california-lexington-park_md",
+      "population": 113510
+    },
+    {
+      "cbsaCode": "15940",
+      "cbsaTitle": "Canton-Massillon, OH",
+      "name": "Canton-Massillon",
+      "countyFipsCodes": [
+        "39019",
+        "39151"
+      ],
+      "urlSegment": "canton-massillon_oh",
+      "population": 397520
+    },
+    {
+      "cbsaCode": "15980",
+      "cbsaTitle": "Cape Coral-Fort Myers, FL",
+      "name": "Cape Coral-Fort Myers",
+      "countyFipsCodes": [
+        "12071"
+      ],
+      "urlSegment": "cape-coral-fort-myers_fl",
+      "population": 770577
+    },
+    {
+      "cbsaCode": "16020",
+      "cbsaTitle": "Cape Girardeau, MO-IL",
+      "name": "Cape Girardeau",
+      "countyFipsCodes": [
+        "17003",
+        "29017",
+        "29031"
+      ],
+      "urlSegment": "cape-girardeau_mo-il",
+      "population": 96765
+    },
+    {
+      "cbsaCode": "16060",
+      "cbsaTitle": "Carbondale-Marion, IL",
+      "name": "Carbondale-Marion",
+      "countyFipsCodes": [
+        "17077",
+        "17087",
+        "17199"
+      ],
+      "urlSegment": "carbondale-marion_il",
+      "population": 135764
+    },
+    {
+      "cbsaCode": "16180",
+      "cbsaTitle": "Carson City, NV",
+      "name": "Carson City",
+      "countyFipsCodes": [
+        "32510"
+      ],
+      "urlSegment": "carson-city_nv",
+      "population": 55916
+    },
+    {
+      "cbsaCode": "16220",
+      "cbsaTitle": "Casper, WY",
+      "name": "Casper",
+      "countyFipsCodes": [
+        "56025"
+      ],
+      "urlSegment": "casper_wy",
+      "population": 79858
+    },
+    {
+      "cbsaCode": "16300",
+      "cbsaTitle": "Cedar Rapids, IA",
+      "name": "Cedar Rapids",
+      "countyFipsCodes": [
+        "19011",
+        "19105",
+        "19113"
+      ],
+      "urlSegment": "cedar-rapids_ia",
+      "population": 273032
+    },
+    {
+      "cbsaCode": "16540",
+      "cbsaTitle": "Chambersburg-Waynesboro, PA",
+      "name": "Chambersburg-Waynesboro",
+      "countyFipsCodes": [
+        "42055"
+      ],
+      "urlSegment": "chambersburg-waynesboro_pa",
+      "population": 155027
+    },
+    {
+      "cbsaCode": "16580",
+      "cbsaTitle": "Champaign-Urbana, IL",
+      "name": "Champaign-Urbana",
+      "countyFipsCodes": [
+        "17019",
+        "17147"
+      ],
+      "urlSegment": "champaign-urbana_il",
+      "population": 226033
+    },
+    {
+      "cbsaCode": "16620",
+      "cbsaTitle": "Charleston, WV",
+      "name": "Charleston",
+      "countyFipsCodes": [
+        "54005",
+        "54015",
+        "54035",
+        "54039",
+        "54043"
+      ],
+      "urlSegment": "charleston_wv",
+      "population": 257074
+    },
+    {
+      "cbsaCode": "16700",
+      "cbsaTitle": "Charleston-North Charleston, SC",
+      "name": "Charleston-North Charleston",
+      "countyFipsCodes": [
+        "45015",
+        "45019",
+        "45035"
+      ],
+      "urlSegment": "charleston-north-charleston_sc",
+      "population": 802122
+    },
+    {
+      "cbsaCode": "16740",
+      "cbsaTitle": "Charlotte-Concord-Gastonia, NC-SC",
+      "name": "Charlotte-Concord-Gastonia",
+      "countyFipsCodes": [
+        "37007",
+        "37025",
+        "37071",
+        "37097",
+        "37109",
+        "37119",
+        "37159",
+        "37179",
+        "45023",
+        "45057",
+        "45091"
+      ],
+      "urlSegment": "charlotte-concord-gastonia_nc-sc",
+      "population": 2636883
+    },
+    {
+      "cbsaCode": "16820",
+      "cbsaTitle": "Charlottesville, VA",
+      "name": "Charlottesville",
+      "countyFipsCodes": [
+        "51003",
+        "51065",
+        "51079",
+        "51125",
+        "51540"
+      ],
+      "urlSegment": "charlottesville_va",
+      "population": 218615
+    },
+    {
+      "cbsaCode": "16860",
+      "cbsaTitle": "Chattanooga, TN-GA",
+      "name": "Chattanooga",
+      "countyFipsCodes": [
+        "13047",
+        "13083",
+        "13295",
+        "47065",
+        "47115",
+        "47153"
+      ],
+      "urlSegment": "chattanooga_tn-ga",
+      "population": 565194
+    },
+    {
+      "cbsaCode": "16940",
+      "cbsaTitle": "Cheyenne, WY",
+      "name": "Cheyenne",
+      "countyFipsCodes": [
+        "56021"
+      ],
+      "urlSegment": "cheyenne_wy",
+      "population": 99500
+    },
+    {
+      "cbsaCode": "16980",
+      "cbsaTitle": "Chicago-Naperville-Elgin, IL-IN-WI",
+      "name": "Chicago-Naperville-Elgin",
+      "countyFipsCodes": [
+        "17031",
+        "17043",
+        "17063",
+        "17111",
+        "17197",
+        "17037",
+        "17089",
+        "17093",
+        "18073",
+        "18089",
+        "18111",
+        "18127",
+        "17097",
+        "55059"
+      ],
+      "urlSegment": "chicago-naperville-elgin_il-in-wi",
+      "population": 9458539
+    },
+    {
+      "cbsaCode": "17020",
+      "cbsaTitle": "Chico, CA",
+      "name": "Chico",
+      "countyFipsCodes": [
+        "06007"
+      ],
+      "urlSegment": "chico_ca",
+      "population": 219186
+    },
+    {
+      "cbsaCode": "17140",
+      "cbsaTitle": "Cincinnati, OH-KY-IN",
+      "name": "Cincinnati",
+      "countyFipsCodes": [
+        "18029",
+        "18047",
+        "18115",
+        "18161",
+        "21015",
+        "21023",
+        "21037",
+        "21077",
+        "21081",
+        "21117",
+        "21191",
+        "39015",
+        "39017",
+        "39025",
+        "39061",
+        "39165"
+      ],
+      "urlSegment": "cincinnati_oh-ky-in",
+      "population": 2221208
+    },
+    {
+      "cbsaCode": "17300",
+      "cbsaTitle": "Clarksville, TN-KY",
+      "name": "Clarksville",
+      "countyFipsCodes": [
+        "21047",
+        "21221",
+        "47125",
+        "47161"
+      ],
+      "urlSegment": "clarksville_tn-ky",
+      "population": 307820
+    },
+    {
+      "cbsaCode": "17420",
+      "cbsaTitle": "Cleveland, TN",
+      "name": "Cleveland",
+      "countyFipsCodes": [
+        "47011",
+        "47139"
+      ],
+      "urlSegment": "cleveland_tn",
+      "population": 124942
+    },
+    {
+      "cbsaCode": "17460",
+      "cbsaTitle": "Cleveland-Elyria, OH",
+      "name": "Cleveland-Elyria",
+      "countyFipsCodes": [
+        "39035",
+        "39055",
+        "39085",
+        "39093",
+        "39103"
+      ],
+      "urlSegment": "cleveland-elyria_oh",
+      "population": 2048449
+    },
+    {
+      "cbsaCode": "17660",
+      "cbsaTitle": "Coeur d'Alene, ID",
+      "name": "Coeur d'Alene",
+      "countyFipsCodes": [
+        "16055"
+      ],
+      "urlSegment": "coeur-d-alene_id",
+      "population": 165697
+    },
+    {
+      "cbsaCode": "17780",
+      "cbsaTitle": "College Station-Bryan, TX",
+      "name": "College Station-Bryan",
+      "countyFipsCodes": [
+        "48041",
+        "48051",
+        "48395"
+      ],
+      "urlSegment": "college-station-bryan_tx",
+      "population": 264728
+    },
+    {
+      "cbsaCode": "17820",
+      "cbsaTitle": "Colorado Springs, CO",
+      "name": "Colorado Springs",
+      "countyFipsCodes": [
+        "08041",
+        "08119"
+      ],
+      "urlSegment": "colorado-springs_co",
+      "population": 745791
+    },
+    {
+      "cbsaCode": "17860",
+      "cbsaTitle": "Columbia, MO",
+      "name": "Columbia",
+      "countyFipsCodes": [
+        "29019",
+        "29053",
+        "29089"
+      ],
+      "urlSegment": "columbia_mo",
+      "population": 208173
+    },
+    {
+      "cbsaCode": "17900",
+      "cbsaTitle": "Columbia, SC",
+      "name": "Columbia",
+      "countyFipsCodes": [
+        "45017",
+        "45039",
+        "45055",
+        "45063",
+        "45079",
+        "45081"
+      ],
+      "urlSegment": "columbia_sc",
+      "population": 838433
+    },
+    {
+      "cbsaCode": "17980",
+      "cbsaTitle": "Columbus, GA-AL",
+      "name": "Columbus",
+      "countyFipsCodes": [
+        "01113",
+        "13053",
+        "13145",
+        "13197",
+        "13215",
+        "13259",
+        "13263"
+      ],
+      "urlSegment": "columbus_ga-al",
+      "population": 321048
+    },
+    {
+      "cbsaCode": "18020",
+      "cbsaTitle": "Columbus, IN",
+      "name": "Columbus",
+      "countyFipsCodes": [
+        "18005"
+      ],
+      "urlSegment": "columbus_in",
+      "population": 83779
+    },
+    {
+      "cbsaCode": "18140",
+      "cbsaTitle": "Columbus, OH",
+      "name": "Columbus",
+      "countyFipsCodes": [
+        "39041",
+        "39045",
+        "39049",
+        "39073",
+        "39089",
+        "39097",
+        "39117",
+        "39127",
+        "39129",
+        "39159"
+      ],
+      "urlSegment": "columbus_oh",
+      "population": 2122271
+    },
+    {
+      "cbsaCode": "18580",
+      "cbsaTitle": "Corpus Christi, TX",
+      "name": "Corpus Christi",
+      "countyFipsCodes": [
+        "48355",
+        "48409"
+      ],
+      "urlSegment": "corpus-christi_tx",
+      "population": 429024
+    },
+    {
+      "cbsaCode": "18700",
+      "cbsaTitle": "Corvallis, OR",
+      "name": "Corvallis",
+      "countyFipsCodes": [
+        "41003"
+      ],
+      "urlSegment": "corvallis_or",
+      "population": 93053
+    },
+    {
+      "cbsaCode": "18880",
+      "cbsaTitle": "Crestview-Fort Walton Beach-Destin, FL",
+      "name": "Crestview-Fort Walton Beach-Destin",
+      "countyFipsCodes": [
+        "12091",
+        "12131"
+      ],
+      "urlSegment": "crestview-fort-walton-beach-destin_fl",
+      "population": 284809
+    },
+    {
+      "cbsaCode": "19060",
+      "cbsaTitle": "Cumberland, MD-WV",
+      "name": "Cumberland",
+      "countyFipsCodes": [
+        "24001",
+        "54057"
+      ],
+      "urlSegment": "cumberland_md-wv",
+      "population": 97284
+    },
+    {
+      "cbsaCode": "19100",
+      "cbsaTitle": "Dallas-Fort Worth-Arlington, TX",
+      "name": "Dallas-Fort Worth-Arlington",
+      "countyFipsCodes": [
+        "48085",
+        "48113",
+        "48121",
+        "48139",
+        "48231",
+        "48257",
+        "48397",
+        "48251",
+        "48367",
+        "48439",
+        "48497"
+      ],
+      "urlSegment": "dallas-fort-worth-arlington_tx",
+      "population": 7573136
+    },
+    {
+      "cbsaCode": "19140",
+      "cbsaTitle": "Dalton, GA",
+      "name": "Dalton",
+      "countyFipsCodes": [
+        "13213",
+        "13313"
+      ],
+      "urlSegment": "dalton_ga",
+      "population": 144724
+    },
+    {
+      "cbsaCode": "19180",
+      "cbsaTitle": "Danville, IL",
+      "name": "Danville",
+      "countyFipsCodes": [
+        "17183"
+      ],
+      "urlSegment": "danville_il",
+      "population": 75758
+    },
+    {
+      "cbsaCode": "19300",
+      "cbsaTitle": "Daphne-Fairhope-Foley, AL",
+      "name": "Daphne-Fairhope-Foley",
+      "countyFipsCodes": [
+        "01003"
+      ],
+      "urlSegment": "daphne-fairhope-foley_al",
+      "population": 223234
+    },
+    {
+      "cbsaCode": "19340",
+      "cbsaTitle": "Davenport-Moline-Rock Island, IA-IL",
+      "name": "Davenport-Moline-Rock Island",
+      "countyFipsCodes": [
+        "17073",
+        "17131",
+        "17161",
+        "19163"
+      ],
+      "urlSegment": "davenport-moline-rock-island_ia-il",
+      "population": 379172
+    },
+    {
+      "cbsaCode": "19430",
+      "cbsaTitle": "Dayton-Kettering, OH",
+      "name": "Dayton-Kettering",
+      "countyFipsCodes": [
+        "39057",
+        "39109",
+        "39113"
+      ],
+      "urlSegment": "dayton-kettering_oh",
+      "population": 807611
+    },
+    {
+      "cbsaCode": "19460",
+      "cbsaTitle": "Decatur, AL",
+      "name": "Decatur",
+      "countyFipsCodes": [
+        "01079",
+        "01103"
+      ],
+      "urlSegment": "decatur_al",
+      "population": 152603
+    },
+    {
+      "cbsaCode": "19500",
+      "cbsaTitle": "Decatur, IL",
+      "name": "Decatur",
+      "countyFipsCodes": [
+        "17115"
+      ],
+      "urlSegment": "decatur_il",
+      "population": 104009
+    },
+    {
+      "cbsaCode": "19660",
+      "cbsaTitle": "Deltona-Daytona Beach-Ormond Beach, FL",
+      "name": "Deltona-Daytona Beach-Ormond Beach",
+      "countyFipsCodes": [
+        "12035",
+        "12127"
+      ],
+      "urlSegment": "deltona-daytona-beach-ormond-beach_fl",
+      "population": 668365
+    },
+    {
+      "cbsaCode": "19740",
+      "cbsaTitle": "Denver-Aurora-Lakewood, CO",
+      "name": "Denver-Aurora-Lakewood",
+      "countyFipsCodes": [
+        "08001",
+        "08005",
+        "08014",
+        "08019",
+        "08031",
+        "08035",
+        "08039",
+        "08047",
+        "08059",
+        "08093"
+      ],
+      "urlSegment": "denver-aurora-lakewood_co",
+      "population": 2967239
+    },
+    {
+      "cbsaCode": "19780",
+      "cbsaTitle": "Des Moines-West Des Moines, IA",
+      "name": "Des Moines-West Des Moines",
+      "countyFipsCodes": [
+        "19049",
+        "19077",
+        "19099",
+        "19121",
+        "19153",
+        "19181"
+      ],
+      "urlSegment": "des-moines-west-des-moines_ia",
+      "population": 699292
+    },
+    {
+      "cbsaCode": "19820",
+      "cbsaTitle": "Detroit-Warren-Dearborn, MI",
+      "name": "Detroit-Warren-Dearborn",
+      "countyFipsCodes": [
+        "26163",
+        "26087",
+        "26093",
+        "26099",
+        "26125",
+        "26147"
+      ],
+      "urlSegment": "detroit-warren-dearborn_mi",
+      "population": 4319629
+    },
+    {
+      "cbsaCode": "20020",
+      "cbsaTitle": "Dothan, AL",
+      "name": "Dothan",
+      "countyFipsCodes": [
+        "01061",
+        "01067",
+        "01069"
+      ],
+      "urlSegment": "dothan_al",
+      "population": 149358
+    },
+    {
+      "cbsaCode": "20100",
+      "cbsaTitle": "Dover, DE",
+      "name": "Dover",
+      "countyFipsCodes": [
+        "10001"
+      ],
+      "urlSegment": "dover_de",
+      "population": 180786
+    },
+    {
+      "cbsaCode": "20220",
+      "cbsaTitle": "Dubuque, IA",
+      "name": "Dubuque",
+      "countyFipsCodes": [
+        "19061"
+      ],
+      "urlSegment": "dubuque_ia",
+      "population": 97311
+    },
+    {
+      "cbsaCode": "20260",
+      "cbsaTitle": "Duluth, MN-WI",
+      "name": "Duluth",
+      "countyFipsCodes": [
+        "27017",
+        "27075",
+        "27137",
+        "55031"
+      ],
+      "urlSegment": "duluth_mn-wi",
+      "population": 288732
+    },
+    {
+      "cbsaCode": "20500",
+      "cbsaTitle": "Durham-Chapel Hill, NC",
+      "name": "Durham-Chapel Hill",
+      "countyFipsCodes": [
+        "37037",
+        "37063",
+        "37077",
+        "37135",
+        "37145"
+      ],
+      "urlSegment": "durham-chapel-hill_nc",
+      "population": 644367
+    },
+    {
+      "cbsaCode": "20700",
+      "cbsaTitle": "East Stroudsburg, PA",
+      "name": "East Stroudsburg",
+      "countyFipsCodes": [
+        "42089"
+      ],
+      "urlSegment": "east-stroudsburg_pa",
+      "population": 170271
+    },
+    {
+      "cbsaCode": "20740",
+      "cbsaTitle": "Eau Claire, WI",
+      "name": "Eau Claire",
+      "countyFipsCodes": [
+        "55017",
+        "55035"
+      ],
+      "urlSegment": "eau-claire_wi",
+      "population": 169304
+    },
+    {
+      "cbsaCode": "20940",
+      "cbsaTitle": "El Centro, CA",
+      "name": "El Centro",
+      "countyFipsCodes": [
+        "06025"
+      ],
+      "urlSegment": "el-centro_ca",
+      "population": 181215
+    },
+    {
+      "cbsaCode": "21060",
+      "cbsaTitle": "Elizabethtown-Fort Knox, KY",
+      "name": "Elizabethtown-Fort Knox",
+      "countyFipsCodes": [
+        "21093",
+        "21123",
+        "21163"
+      ],
+      "urlSegment": "elizabethtown-fort-knox_ky",
+      "population": 153928
+    },
+    {
+      "cbsaCode": "21140",
+      "cbsaTitle": "Elkhart-Goshen, IN",
+      "name": "Elkhart-Goshen",
+      "countyFipsCodes": [
+        "18039"
+      ],
+      "urlSegment": "elkhart-goshen_in",
+      "population": 206341
+    },
+    {
+      "cbsaCode": "21300",
+      "cbsaTitle": "Elmira, NY",
+      "name": "Elmira",
+      "countyFipsCodes": [
+        "36015"
+      ],
+      "urlSegment": "elmira_ny",
+      "population": 83456
+    },
+    {
+      "cbsaCode": "21340",
+      "cbsaTitle": "El Paso, TX",
+      "name": "El Paso",
+      "countyFipsCodes": [
+        "48141",
+        "48229"
+      ],
+      "urlSegment": "el-paso_tx",
+      "population": 844124
+    },
+    {
+      "cbsaCode": "21420",
+      "cbsaTitle": "Enid, OK",
+      "name": "Enid",
+      "countyFipsCodes": [
+        "40047"
+      ],
+      "urlSegment": "enid_ok",
+      "population": 61056
+    },
+    {
+      "cbsaCode": "21500",
+      "cbsaTitle": "Erie, PA",
+      "name": "Erie",
+      "countyFipsCodes": [
+        "42049"
+      ],
+      "urlSegment": "erie_pa",
+      "population": 269728
+    },
+    {
+      "cbsaCode": "21660",
+      "cbsaTitle": "Eugene-Springfield, OR",
+      "name": "Eugene-Springfield",
+      "countyFipsCodes": [
+        "41039"
+      ],
+      "urlSegment": "eugene-springfield_or",
+      "population": 382067
+    },
+    {
+      "cbsaCode": "21780",
+      "cbsaTitle": "Evansville, IN-KY",
+      "name": "Evansville",
+      "countyFipsCodes": [
+        "18129",
+        "18163",
+        "18173",
+        "21101"
+      ],
+      "urlSegment": "evansville_in-ky",
+      "population": 315086
+    },
+    {
+      "cbsaCode": "21820",
+      "cbsaTitle": "Fairbanks, AK",
+      "name": "Fairbanks",
+      "countyFipsCodes": [
+        "02090"
+      ],
+      "urlSegment": "fairbanks_ak",
+      "population": 96849
+    },
+    {
+      "cbsaCode": "22020",
+      "cbsaTitle": "Fargo, ND-MN",
+      "name": "Fargo",
+      "countyFipsCodes": [
+        "27027",
+        "38017"
+      ],
+      "urlSegment": "fargo_nd-mn",
+      "population": 246145
+    },
+    {
+      "cbsaCode": "22140",
+      "cbsaTitle": "Farmington, NM",
+      "name": "Farmington",
+      "countyFipsCodes": [
+        "35045"
+      ],
+      "urlSegment": "farmington_nm",
+      "population": 123958
+    },
+    {
+      "cbsaCode": "22180",
+      "cbsaTitle": "Fayetteville, NC",
+      "name": "Fayetteville",
+      "countyFipsCodes": [
+        "37051",
+        "37085",
+        "37093"
+      ],
+      "urlSegment": "fayetteville_nc",
+      "population": 526719
+    },
+    {
+      "cbsaCode": "22220",
+      "cbsaTitle": "Fayetteville-Springdale-Rogers, AR",
+      "name": "Fayetteville-Springdale-Rogers",
+      "countyFipsCodes": [
+        "05007",
+        "05087",
+        "05143"
+      ],
+      "urlSegment": "fayetteville-springdale-rogers_ar",
+      "population": 534904
+    },
+    {
+      "cbsaCode": "22380",
+      "cbsaTitle": "Flagstaff, AZ",
+      "name": "Flagstaff",
+      "countyFipsCodes": [
+        "04005"
+      ],
+      "urlSegment": "flagstaff_az",
+      "population": 143476
+    },
+    {
+      "cbsaCode": "22420",
+      "cbsaTitle": "Flint, MI",
+      "name": "Flint",
+      "countyFipsCodes": [
+        "26049"
+      ],
+      "urlSegment": "flint_mi",
+      "population": 405813
+    },
+    {
+      "cbsaCode": "22500",
+      "cbsaTitle": "Florence, SC",
+      "name": "Florence",
+      "countyFipsCodes": [
+        "45031",
+        "45041"
+      ],
+      "urlSegment": "florence_sc",
+      "population": 204911
+    },
+    {
+      "cbsaCode": "22520",
+      "cbsaTitle": "Florence-Muscle Shoals, AL",
+      "name": "Florence-Muscle Shoals",
+      "countyFipsCodes": [
+        "01033",
+        "01077"
+      ],
+      "urlSegment": "florence-muscle-shoals_al",
+      "population": 147970
+    },
+    {
+      "cbsaCode": "22540",
+      "cbsaTitle": "Fond du Lac, WI",
+      "name": "Fond du Lac",
+      "countyFipsCodes": [
+        "55039"
+      ],
+      "urlSegment": "fond-du-lac_wi",
+      "population": 103403
+    },
+    {
+      "cbsaCode": "22660",
+      "cbsaTitle": "Fort Collins, CO",
+      "name": "Fort Collins",
+      "countyFipsCodes": [
+        "08069"
+      ],
+      "urlSegment": "fort-collins_co",
+      "population": 356899
+    },
+    {
+      "cbsaCode": "22900",
+      "cbsaTitle": "Fort Smith, AR-OK",
+      "name": "Fort Smith",
+      "countyFipsCodes": [
+        "05033",
+        "05047",
+        "05131",
+        "40135"
+      ],
+      "urlSegment": "fort-smith_ar-ok",
+      "population": 250368
+    },
+    {
+      "cbsaCode": "23060",
+      "cbsaTitle": "Fort Wayne, IN",
+      "name": "Fort Wayne",
+      "countyFipsCodes": [
+        "18003",
+        "18183"
+      ],
+      "urlSegment": "fort-wayne_in",
+      "population": 413263
+    },
+    {
+      "cbsaCode": "23420",
+      "cbsaTitle": "Fresno, CA",
+      "name": "Fresno",
+      "countyFipsCodes": [
+        "06019"
+      ],
+      "urlSegment": "fresno_ca",
+      "population": 999101
+    },
+    {
+      "cbsaCode": "23460",
+      "cbsaTitle": "Gadsden, AL",
+      "name": "Gadsden",
+      "countyFipsCodes": [
+        "01055"
+      ],
+      "urlSegment": "gadsden_al",
+      "population": 102268
+    },
+    {
+      "cbsaCode": "23540",
+      "cbsaTitle": "Gainesville, FL",
+      "name": "Gainesville",
+      "countyFipsCodes": [
+        "12001",
+        "12041",
+        "12075"
+      ],
+      "urlSegment": "gainesville_fl",
+      "population": 329128
+    },
+    {
+      "cbsaCode": "23580",
+      "cbsaTitle": "Gainesville, GA",
+      "name": "Gainesville",
+      "countyFipsCodes": [
+        "13139"
+      ],
+      "urlSegment": "gainesville_ga",
+      "population": 204441
+    },
+    {
+      "cbsaCode": "23900",
+      "cbsaTitle": "Gettysburg, PA",
+      "name": "Gettysburg",
+      "countyFipsCodes": [
+        "42001"
+      ],
+      "urlSegment": "gettysburg_pa",
+      "population": 103009
+    },
+    {
+      "cbsaCode": "24020",
+      "cbsaTitle": "Glens Falls, NY",
+      "name": "Glens Falls",
+      "countyFipsCodes": [
+        "36113",
+        "36115"
+      ],
+      "urlSegment": "glens-falls_ny",
+      "population": 125148
+    },
+    {
+      "cbsaCode": "24140",
+      "cbsaTitle": "Goldsboro, NC",
+      "name": "Goldsboro",
+      "countyFipsCodes": [
+        "37191"
+      ],
+      "urlSegment": "goldsboro_nc",
+      "population": 123131
+    },
+    {
+      "cbsaCode": "24220",
+      "cbsaTitle": "Grand Forks, ND-MN",
+      "name": "Grand Forks",
+      "countyFipsCodes": [
+        "27119",
+        "38035"
+      ],
+      "urlSegment": "grand-forks_nd-mn",
+      "population": 100815
+    },
+    {
+      "cbsaCode": "24260",
+      "cbsaTitle": "Grand Island, NE",
+      "name": "Grand Island",
+      "countyFipsCodes": [
+        "31079",
+        "31093",
+        "31121"
+      ],
+      "urlSegment": "grand-island_ne",
+      "population": 75553
+    },
+    {
+      "cbsaCode": "24300",
+      "cbsaTitle": "Grand Junction, CO",
+      "name": "Grand Junction",
+      "countyFipsCodes": [
+        "08077"
+      ],
+      "urlSegment": "grand-junction_co",
+      "population": 154210
+    },
+    {
+      "cbsaCode": "24340",
+      "cbsaTitle": "Grand Rapids-Kentwood, MI",
+      "name": "Grand Rapids-Kentwood",
+      "countyFipsCodes": [
+        "26067",
+        "26081",
+        "26117",
+        "26139"
+      ],
+      "urlSegment": "grand-rapids-kentwood_mi",
+      "population": 1077370
+    },
+    {
+      "cbsaCode": "24420",
+      "cbsaTitle": "Grants Pass, OR",
+      "name": "Grants Pass",
+      "countyFipsCodes": [
+        "41033"
+      ],
+      "urlSegment": "grants-pass_or",
+      "population": 87487
+    },
+    {
+      "cbsaCode": "24500",
+      "cbsaTitle": "Great Falls, MT",
+      "name": "Great Falls",
+      "countyFipsCodes": [
+        "30013"
+      ],
+      "urlSegment": "great-falls_mt",
+      "population": 81366
+    },
+    {
+      "cbsaCode": "24540",
+      "cbsaTitle": "Greeley, CO",
+      "name": "Greeley",
+      "countyFipsCodes": [
+        "08123"
+      ],
+      "urlSegment": "greeley_co",
+      "population": 324492
+    },
+    {
+      "cbsaCode": "24580",
+      "cbsaTitle": "Green Bay, WI",
+      "name": "Green Bay",
+      "countyFipsCodes": [
+        "55009",
+        "55061",
+        "55083"
+      ],
+      "urlSegment": "green-bay_wi",
+      "population": 322906
+    },
+    {
+      "cbsaCode": "24660",
+      "cbsaTitle": "Greensboro-High Point, NC",
+      "name": "Greensboro-High Point",
+      "countyFipsCodes": [
+        "37081",
+        "37151",
+        "37157"
+      ],
+      "urlSegment": "greensboro-high-point_nc",
+      "population": 771851
+    },
+    {
+      "cbsaCode": "24780",
+      "cbsaTitle": "Greenville, NC",
+      "name": "Greenville",
+      "countyFipsCodes": [
+        "37147"
+      ],
+      "urlSegment": "greenville_nc",
+      "population": 180742
+    },
+    {
+      "cbsaCode": "24860",
+      "cbsaTitle": "Greenville-Anderson, SC",
+      "name": "Greenville-Anderson",
+      "countyFipsCodes": [
+        "45007",
+        "45045",
+        "45059",
+        "45077"
+      ],
+      "urlSegment": "greenville-anderson_sc",
+      "population": 920477
+    },
+    {
+      "cbsaCode": "25020",
+      "cbsaTitle": "Guayama, PR",
+      "name": "Guayama",
+      "countyFipsCodes": [
+        "72015",
+        "72057",
+        "72109"
+      ],
+      "urlSegment": "guayama_pr",
+      "population": 72914
+    },
+    {
+      "cbsaCode": "25060",
+      "cbsaTitle": "Gulfport-Biloxi, MS",
+      "name": "Gulfport-Biloxi",
+      "countyFipsCodes": [
+        "28045",
+        "28047",
+        "28059",
+        "28131"
+      ],
+      "urlSegment": "gulfport-biloxi_ms",
+      "population": 417665
+    },
+    {
+      "cbsaCode": "25180",
+      "cbsaTitle": "Hagerstown-Martinsburg, MD-WV",
+      "name": "Hagerstown-Martinsburg",
+      "countyFipsCodes": [
+        "24043",
+        "54003",
+        "54065"
+      ],
+      "urlSegment": "hagerstown-martinsburg_md-wv",
+      "population": 288104
+    },
+    {
+      "cbsaCode": "25220",
+      "cbsaTitle": "Hammond, LA",
+      "name": "Hammond",
+      "countyFipsCodes": [
+        "22105"
+      ],
+      "urlSegment": "hammond_la",
+      "population": 134758
+    },
+    {
+      "cbsaCode": "25260",
+      "cbsaTitle": "Hanford-Corcoran, CA",
+      "name": "Hanford-Corcoran",
+      "countyFipsCodes": [
+        "06031"
+      ],
+      "urlSegment": "hanford-corcoran_ca",
+      "population": 152940
+    },
+    {
+      "cbsaCode": "25420",
+      "cbsaTitle": "Harrisburg-Carlisle, PA",
+      "name": "Harrisburg-Carlisle",
+      "countyFipsCodes": [
+        "42041",
+        "42043",
+        "42099"
+      ],
+      "urlSegment": "harrisburg-carlisle_pa",
+      "population": 577941
+    },
+    {
+      "cbsaCode": "25500",
+      "cbsaTitle": "Harrisonburg, VA",
+      "name": "Harrisonburg",
+      "countyFipsCodes": [
+        "51165",
+        "51660"
+      ],
+      "urlSegment": "harrisonburg_va",
+      "population": 134964
+    },
+    {
+      "cbsaCode": "25540",
+      "cbsaTitle": "Hartford-East Hartford-Middletown, CT",
+      "name": "Hartford-East Hartford-Middletown",
+      "countyFipsCodes": [
+        "09003",
+        "09007",
+        "09013"
+      ],
+      "urlSegment": "hartford-east-hartford-middletown_ct",
+      "population": 1204877
+    },
+    {
+      "cbsaCode": "25620",
+      "cbsaTitle": "Hattiesburg, MS",
+      "name": "Hattiesburg",
+      "countyFipsCodes": [
+        "28031",
+        "28035",
+        "28073",
+        "28111"
+      ],
+      "urlSegment": "hattiesburg_ms",
+      "population": 168849
+    },
+    {
+      "cbsaCode": "25860",
+      "cbsaTitle": "Hickory-Lenoir-Morganton, NC",
+      "name": "Hickory-Lenoir-Morganton",
+      "countyFipsCodes": [
+        "37003",
+        "37023",
+        "37027",
+        "37035"
+      ],
+      "urlSegment": "hickory-lenoir-morganton_nc",
+      "population": 369711
+    },
+    {
+      "cbsaCode": "25940",
+      "cbsaTitle": "Hilton Head Island-Bluffton, SC",
+      "name": "Hilton Head Island-Bluffton",
+      "countyFipsCodes": [
+        "45013",
+        "45053"
+      ],
+      "urlSegment": "hilton-head-island-bluffton_sc",
+      "population": 222195
+    },
+    {
+      "cbsaCode": "25980",
+      "cbsaTitle": "Hinesville, GA",
+      "name": "Hinesville",
+      "countyFipsCodes": [
+        "13179",
+        "13183"
+      ],
+      "urlSegment": "hinesville_ga",
+      "population": 80994
+    },
+    {
+      "cbsaCode": "26140",
+      "cbsaTitle": "Homosassa Springs, FL",
+      "name": "Homosassa Springs",
+      "countyFipsCodes": [
+        "12017"
+      ],
+      "urlSegment": "homosassa-springs_fl",
+      "population": 149657
+    },
+    {
+      "cbsaCode": "26300",
+      "cbsaTitle": "Hot Springs, AR",
+      "name": "Hot Springs",
+      "countyFipsCodes": [
+        "05051"
+      ],
+      "urlSegment": "hot-springs_ar",
+      "population": 99386
+    },
+    {
+      "cbsaCode": "26380",
+      "cbsaTitle": "Houma-Thibodaux, LA",
+      "name": "Houma-Thibodaux",
+      "countyFipsCodes": [
+        "22057",
+        "22109"
+      ],
+      "urlSegment": "houma-thibodaux_la",
+      "population": 208075
+    },
+    {
+      "cbsaCode": "26420",
+      "cbsaTitle": "Houston-The Woodlands-Sugar Land, TX",
+      "name": "Houston-The Woodlands-Sugar Land",
+      "countyFipsCodes": [
+        "48015",
+        "48039",
+        "48071",
+        "48157",
+        "48167",
+        "48201",
+        "48291",
+        "48339",
+        "48473"
+      ],
+      "urlSegment": "houston-the-woodlands-sugar-land_tx",
+      "population": 7066141
+    },
+    {
+      "cbsaCode": "26580",
+      "cbsaTitle": "Huntington-Ashland, WV-KY-OH",
+      "name": "Huntington-Ashland",
+      "countyFipsCodes": [
+        "21019",
+        "21043",
+        "21089",
+        "39087",
+        "54011",
+        "54079",
+        "54099"
+      ],
+      "urlSegment": "huntington-ashland_wv-ky-oh",
+      "population": 355873
+    },
+    {
+      "cbsaCode": "26620",
+      "cbsaTitle": "Huntsville, AL",
+      "name": "Huntsville",
+      "countyFipsCodes": [
+        "01083",
+        "01089"
+      ],
+      "urlSegment": "huntsville_al",
+      "population": 471824
+    },
+    {
+      "cbsaCode": "26820",
+      "cbsaTitle": "Idaho Falls, ID",
+      "name": "Idaho Falls",
+      "countyFipsCodes": [
+        "16019",
+        "16023",
+        "16051"
+      ],
+      "urlSegment": "idaho-falls_id",
+      "population": 151530
+    },
+    {
+      "cbsaCode": "26900",
+      "cbsaTitle": "Indianapolis-Carmel-Anderson, IN",
+      "name": "Indianapolis-Carmel-Anderson",
+      "countyFipsCodes": [
+        "18011",
+        "18013",
+        "18057",
+        "18059",
+        "18063",
+        "18081",
+        "18095",
+        "18097",
+        "18109",
+        "18133",
+        "18145"
+      ],
+      "urlSegment": "indianapolis-carmel-anderson_in",
+      "population": 2074537
+    },
+    {
+      "cbsaCode": "26980",
+      "cbsaTitle": "Iowa City, IA",
+      "name": "Iowa City",
+      "countyFipsCodes": [
+        "19103",
+        "19183"
+      ],
+      "urlSegment": "iowa-city_ia",
+      "population": 173105
+    },
+    {
+      "cbsaCode": "27060",
+      "cbsaTitle": "Ithaca, NY",
+      "name": "Ithaca",
+      "countyFipsCodes": [
+        "36109"
+      ],
+      "urlSegment": "ithaca_ny",
+      "population": 102180
+    },
+    {
+      "cbsaCode": "27100",
+      "cbsaTitle": "Jackson, MI",
+      "name": "Jackson",
+      "countyFipsCodes": [
+        "26075"
+      ],
+      "urlSegment": "jackson_mi",
+      "population": 158510
+    },
+    {
+      "cbsaCode": "27140",
+      "cbsaTitle": "Jackson, MS",
+      "name": "Jackson",
+      "countyFipsCodes": [
+        "28029",
+        "28049",
+        "28051",
+        "28089",
+        "28121",
+        "28127",
+        "28163"
+      ],
+      "urlSegment": "jackson_ms",
+      "population": 594806
+    },
+    {
+      "cbsaCode": "27180",
+      "cbsaTitle": "Jackson, TN",
+      "name": "Jackson",
+      "countyFipsCodes": [
+        "47023",
+        "47033",
+        "47053",
+        "47113"
+      ],
+      "urlSegment": "jackson_tn",
+      "population": 178644
+    },
+    {
+      "cbsaCode": "27260",
+      "cbsaTitle": "Jacksonville, FL",
+      "name": "Jacksonville",
+      "countyFipsCodes": [
+        "12003",
+        "12019",
+        "12031",
+        "12089",
+        "12109"
+      ],
+      "urlSegment": "jacksonville_fl",
+      "population": 1559514
+    },
+    {
+      "cbsaCode": "27340",
+      "cbsaTitle": "Jacksonville, NC",
+      "name": "Jacksonville",
+      "countyFipsCodes": [
+        "37133"
+      ],
+      "urlSegment": "jacksonville_nc",
+      "population": 197938
+    },
+    {
+      "cbsaCode": "27500",
+      "cbsaTitle": "Janesville-Beloit, WI",
+      "name": "Janesville-Beloit",
+      "countyFipsCodes": [
+        "55105"
+      ],
+      "urlSegment": "janesville-beloit_wi",
+      "population": 163354
+    },
+    {
+      "cbsaCode": "27620",
+      "cbsaTitle": "Jefferson City, MO",
+      "name": "Jefferson City",
+      "countyFipsCodes": [
+        "29027",
+        "29051",
+        "29135",
+        "29151"
+      ],
+      "urlSegment": "jefferson-city_mo",
+      "population": 151235
+    },
+    {
+      "cbsaCode": "27740",
+      "cbsaTitle": "Johnson City, TN",
+      "name": "Johnson City",
+      "countyFipsCodes": [
+        "47019",
+        "47171",
+        "47179"
+      ],
+      "urlSegment": "johnson-city_tn",
+      "population": 203649
+    },
+    {
+      "cbsaCode": "27780",
+      "cbsaTitle": "Johnstown, PA",
+      "name": "Johnstown",
+      "countyFipsCodes": [
+        "42021"
+      ],
+      "urlSegment": "johnstown_pa",
+      "population": 130192
+    },
+    {
+      "cbsaCode": "27860",
+      "cbsaTitle": "Jonesboro, AR",
+      "name": "Jonesboro",
+      "countyFipsCodes": [
+        "05031",
+        "05111"
+      ],
+      "urlSegment": "jonesboro_ar",
+      "population": 133860
+    },
+    {
+      "cbsaCode": "27900",
+      "cbsaTitle": "Joplin, MO",
+      "name": "Joplin",
+      "countyFipsCodes": [
+        "29097",
+        "29145"
+      ],
+      "urlSegment": "joplin_mo",
+      "population": 179564
+    },
+    {
+      "cbsaCode": "27980",
+      "cbsaTitle": "Kahului-Wailuku-Lahaina, HI",
+      "name": "Kahului-Wailuku-Lahaina",
+      "countyFipsCodes": [
+        "15009"
+      ],
+      "urlSegment": "kahului-wailuku-lahaina_hi",
+      "population": 167417
+    },
+    {
+      "cbsaCode": "28020",
+      "cbsaTitle": "Kalamazoo-Portage, MI",
+      "name": "Kalamazoo-Portage",
+      "countyFipsCodes": [
+        "26077"
+      ],
+      "urlSegment": "kalamazoo-portage_mi",
+      "population": 265066
+    },
+    {
+      "cbsaCode": "28100",
+      "cbsaTitle": "Kankakee, IL",
+      "name": "Kankakee",
+      "countyFipsCodes": [
+        "17091"
+      ],
+      "urlSegment": "kankakee_il",
+      "population": 109862
+    },
+    {
+      "cbsaCode": "28140",
+      "cbsaTitle": "Kansas City, MO-KS",
+      "name": "Kansas City",
+      "countyFipsCodes": [
+        "20091",
+        "20103",
+        "20107",
+        "20121",
+        "20209",
+        "29013",
+        "29025",
+        "29037",
+        "29047",
+        "29049",
+        "29095",
+        "29107",
+        "29165",
+        "29177"
+      ],
+      "urlSegment": "kansas-city_mo-ks",
+      "population": 2157990
+    },
+    {
+      "cbsaCode": "28420",
+      "cbsaTitle": "Kennewick-Richland, WA",
+      "name": "Kennewick-Richland",
+      "countyFipsCodes": [
+        "53005",
+        "53021"
+      ],
+      "urlSegment": "kennewick-richland_wa",
+      "population": 299612
+    },
+    {
+      "cbsaCode": "28660",
+      "cbsaTitle": "Killeen-Temple, TX",
+      "name": "Killeen-Temple",
+      "countyFipsCodes": [
+        "48027",
+        "48099",
+        "48281"
+      ],
+      "urlSegment": "killeen-temple_tx",
+      "population": 460303
+    },
+    {
+      "cbsaCode": "28700",
+      "cbsaTitle": "Kingsport-Bristol, TN-VA",
+      "name": "Kingsport-Bristol",
+      "countyFipsCodes": [
+        "47073",
+        "47163",
+        "51169",
+        "51191",
+        "51520"
+      ],
+      "urlSegment": "kingsport-bristol_tn-va",
+      "population": 307202
+    },
+    {
+      "cbsaCode": "28740",
+      "cbsaTitle": "Kingston, NY",
+      "name": "Kingston",
+      "countyFipsCodes": [
+        "36111"
+      ],
+      "urlSegment": "kingston_ny",
+      "population": 177573
+    },
+    {
+      "cbsaCode": "28940",
+      "cbsaTitle": "Knoxville, TN",
+      "name": "Knoxville",
+      "countyFipsCodes": [
+        "47001",
+        "47009",
+        "47013",
+        "47093",
+        "47105",
+        "47129",
+        "47145",
+        "47173"
+      ],
+      "urlSegment": "knoxville_tn",
+      "population": 869046
+    },
+    {
+      "cbsaCode": "29020",
+      "cbsaTitle": "Kokomo, IN",
+      "name": "Kokomo",
+      "countyFipsCodes": [
+        "18067"
+      ],
+      "urlSegment": "kokomo_in",
+      "population": 82544
+    },
+    {
+      "cbsaCode": "29100",
+      "cbsaTitle": "La Crosse-Onalaska, WI-MN",
+      "name": "La Crosse-Onalaska",
+      "countyFipsCodes": [
+        "27055",
+        "55063"
+      ],
+      "urlSegment": "la-crosse-onalaska_wi-mn",
+      "population": 136616
+    },
+    {
+      "cbsaCode": "29180",
+      "cbsaTitle": "Lafayette, LA",
+      "name": "Lafayette",
+      "countyFipsCodes": [
+        "22001",
+        "22045",
+        "22055",
+        "22099",
+        "22113"
+      ],
+      "urlSegment": "lafayette_la",
+      "population": 489207
+    },
+    {
+      "cbsaCode": "29200",
+      "cbsaTitle": "Lafayette-West Lafayette, IN",
+      "name": "Lafayette-West Lafayette",
+      "countyFipsCodes": [
+        "18007",
+        "18015",
+        "18157",
+        "18171"
+      ],
+      "urlSegment": "lafayette-west-lafayette_in",
+      "population": 233002
+    },
+    {
+      "cbsaCode": "29340",
+      "cbsaTitle": "Lake Charles, LA",
+      "name": "Lake Charles",
+      "countyFipsCodes": [
+        "22019",
+        "22023"
+      ],
+      "urlSegment": "lake-charles_la",
+      "population": 210409
+    },
+    {
+      "cbsaCode": "29420",
+      "cbsaTitle": "Lake Havasu City-Kingman, AZ",
+      "name": "Lake Havasu City-Kingman",
+      "countyFipsCodes": [
+        "04015"
+      ],
+      "urlSegment": "lake-havasu-city-kingman_az",
+      "population": 212181
+    },
+    {
+      "cbsaCode": "29460",
+      "cbsaTitle": "Lakeland-Winter Haven, FL",
+      "name": "Lakeland-Winter Haven",
+      "countyFipsCodes": [
+        "12105"
+      ],
+      "urlSegment": "lakeland-winter-haven_fl",
+      "population": 724777
+    },
+    {
+      "cbsaCode": "29540",
+      "cbsaTitle": "Lancaster, PA",
+      "name": "Lancaster",
+      "countyFipsCodes": [
+        "42071"
+      ],
+      "urlSegment": "lancaster_pa",
+      "population": 545724
+    },
+    {
+      "cbsaCode": "29620",
+      "cbsaTitle": "Lansing-East Lansing, MI",
+      "name": "Lansing-East Lansing",
+      "countyFipsCodes": [
+        "26037",
+        "26045",
+        "26065",
+        "26155"
+      ],
+      "urlSegment": "lansing-east-lansing_mi",
+      "population": 550391
+    },
+    {
+      "cbsaCode": "29700",
+      "cbsaTitle": "Laredo, TX",
+      "name": "Laredo",
+      "countyFipsCodes": [
+        "48479"
+      ],
+      "urlSegment": "laredo_tx",
+      "population": 276652
+    },
+    {
+      "cbsaCode": "29740",
+      "cbsaTitle": "Las Cruces, NM",
+      "name": "Las Cruces",
+      "countyFipsCodes": [
+        "35013"
+      ],
+      "urlSegment": "las-cruces_nm",
+      "population": 218195
+    },
+    {
+      "cbsaCode": "29820",
+      "cbsaTitle": "Las Vegas-Henderson-Paradise, NV",
+      "name": "Las Vegas-Henderson-Paradise",
+      "countyFipsCodes": [
+        "32003"
+      ],
+      "urlSegment": "las-vegas-henderson-paradise_nv",
+      "population": 2266715
+    },
+    {
+      "cbsaCode": "29940",
+      "cbsaTitle": "Lawrence, KS",
+      "name": "Lawrence",
+      "countyFipsCodes": [
+        "20045"
+      ],
+      "urlSegment": "lawrence_ks",
+      "population": 122259
+    },
+    {
+      "cbsaCode": "30020",
+      "cbsaTitle": "Lawton, OK",
+      "name": "Lawton",
+      "countyFipsCodes": [
+        "40031",
+        "40033"
+      ],
+      "urlSegment": "lawton_ok",
+      "population": 126415
+    },
+    {
+      "cbsaCode": "30140",
+      "cbsaTitle": "Lebanon, PA",
+      "name": "Lebanon",
+      "countyFipsCodes": [
+        "42075"
+      ],
+      "urlSegment": "lebanon_pa",
+      "population": 141793
+    },
+    {
+      "cbsaCode": "30300",
+      "cbsaTitle": "Lewiston, ID-WA",
+      "name": "Lewiston",
+      "countyFipsCodes": [
+        "16069",
+        "53003"
+      ],
+      "urlSegment": "lewiston_id-wa",
+      "population": 62990
+    },
+    {
+      "cbsaCode": "30340",
+      "cbsaTitle": "Lewiston-Auburn, ME",
+      "name": "Lewiston-Auburn",
+      "countyFipsCodes": [
+        "23001"
+      ],
+      "urlSegment": "lewiston-auburn_me",
+      "population": 108277
+    },
+    {
+      "cbsaCode": "30460",
+      "cbsaTitle": "Lexington-Fayette, KY",
+      "name": "Lexington-Fayette",
+      "countyFipsCodes": [
+        "21017",
+        "21049",
+        "21067",
+        "21113",
+        "21209",
+        "21239"
+      ],
+      "urlSegment": "lexington-fayette_ky",
+      "population": 517056
+    },
+    {
+      "cbsaCode": "30620",
+      "cbsaTitle": "Lima, OH",
+      "name": "Lima",
+      "countyFipsCodes": [
+        "39003"
+      ],
+      "urlSegment": "lima_oh",
+      "population": 102351
+    },
+    {
+      "cbsaCode": "30700",
+      "cbsaTitle": "Lincoln, NE",
+      "name": "Lincoln",
+      "countyFipsCodes": [
+        "31109",
+        "31159"
+      ],
+      "urlSegment": "lincoln_ne",
+      "population": 336374
+    },
+    {
+      "cbsaCode": "30780",
+      "cbsaTitle": "Little Rock-North Little Rock-Conway, AR",
+      "name": "Little Rock-North Little Rock-Conway",
+      "countyFipsCodes": [
+        "05045",
+        "05053",
+        "05085",
+        "05105",
+        "05119",
+        "05125"
+      ],
+      "urlSegment": "little-rock-north-little-rock-conway_ar",
+      "population": 742384
+    },
+    {
+      "cbsaCode": "30860",
+      "cbsaTitle": "Logan, UT-ID",
+      "name": "Logan",
+      "countyFipsCodes": [
+        "16041",
+        "49005"
+      ],
+      "urlSegment": "logan_ut-id",
+      "population": 142165
+    },
+    {
+      "cbsaCode": "30980",
+      "cbsaTitle": "Longview, TX",
+      "name": "Longview",
+      "countyFipsCodes": [
+        "48183",
+        "48203",
+        "48401",
+        "48459"
+      ],
+      "urlSegment": "longview_tx",
+      "population": 286657
+    },
+    {
+      "cbsaCode": "31020",
+      "cbsaTitle": "Longview, WA",
+      "name": "Longview",
+      "countyFipsCodes": [
+        "53015"
+      ],
+      "urlSegment": "longview_wa",
+      "population": 110593
+    },
+    {
+      "cbsaCode": "31080",
+      "cbsaTitle": "Los Angeles-Long Beach-Anaheim, CA",
+      "name": "Los Angeles-Long Beach-Anaheim",
+      "countyFipsCodes": [
+        "06059",
+        "06037"
+      ],
+      "urlSegment": "los-angeles-long-beach-anaheim_ca",
+      "population": 13214799
+    },
+    {
+      "cbsaCode": "31140",
+      "cbsaTitle": "Louisville/Jefferson County, KY-IN",
+      "name": "Louisville/Jefferson County",
+      "countyFipsCodes": [
+        "18019",
+        "18043",
+        "18061",
+        "18175",
+        "21029",
+        "21103",
+        "21111",
+        "21185",
+        "21211",
+        "21215"
+      ],
+      "urlSegment": "louisville-jefferson-county_ky-in",
+      "population": 1265108
+    },
+    {
+      "cbsaCode": "31180",
+      "cbsaTitle": "Lubbock, TX",
+      "name": "Lubbock",
+      "countyFipsCodes": [
+        "48107",
+        "48303",
+        "48305"
+      ],
+      "urlSegment": "lubbock_tx",
+      "population": 322257
+    },
+    {
+      "cbsaCode": "31340",
+      "cbsaTitle": "Lynchburg, VA",
+      "name": "Lynchburg",
+      "countyFipsCodes": [
+        "51009",
+        "51011",
+        "51019",
+        "51031",
+        "51680"
+      ],
+      "urlSegment": "lynchburg_va",
+      "population": 263566
+    },
+    {
+      "cbsaCode": "31420",
+      "cbsaTitle": "Macon-Bibb County, GA",
+      "name": "Macon-Bibb County",
+      "countyFipsCodes": [
+        "13021",
+        "13079",
+        "13169",
+        "13207",
+        "13289"
+      ],
+      "urlSegment": "macon-bibb-county_ga",
+      "population": 229996
+    },
+    {
+      "cbsaCode": "31460",
+      "cbsaTitle": "Madera, CA",
+      "name": "Madera",
+      "countyFipsCodes": [
+        "06039"
+      ],
+      "urlSegment": "madera_ca",
+      "population": 157327
+    },
+    {
+      "cbsaCode": "31540",
+      "cbsaTitle": "Madison, WI",
+      "name": "Madison",
+      "countyFipsCodes": [
+        "55021",
+        "55025",
+        "55045",
+        "55049"
+      ],
+      "urlSegment": "madison_wi",
+      "population": 664865
+    },
+    {
+      "cbsaCode": "31700",
+      "cbsaTitle": "Manchester-Nashua, NH",
+      "name": "Manchester-Nashua",
+      "countyFipsCodes": [
+        "33011"
+      ],
+      "urlSegment": "manchester-nashua_nh",
+      "population": 417025
+    },
+    {
+      "cbsaCode": "31740",
+      "cbsaTitle": "Manhattan, KS",
+      "name": "Manhattan",
+      "countyFipsCodes": [
+        "20061",
+        "20149",
+        "20161"
+      ],
+      "urlSegment": "manhattan_ks",
+      "population": 130285
+    },
+    {
+      "cbsaCode": "31860",
+      "cbsaTitle": "Mankato, MN",
+      "name": "Mankato",
+      "countyFipsCodes": [
+        "27013",
+        "27103"
+      ],
+      "urlSegment": "mankato_mn",
+      "population": 101927
+    },
+    {
+      "cbsaCode": "31900",
+      "cbsaTitle": "Mansfield, OH",
+      "name": "Mansfield",
+      "countyFipsCodes": [
+        "39139"
+      ],
+      "urlSegment": "mansfield_oh",
+      "population": 121154
+    },
+    {
+      "cbsaCode": "32420",
+      "cbsaTitle": "Mayagüez, PR",
+      "name": "Mayagüez",
+      "countyFipsCodes": [
+        "72067",
+        "72083",
+        "72097"
+      ],
+      "urlSegment": "mayaguez_pr",
+      "population": 94975
+    },
+    {
+      "cbsaCode": "32580",
+      "cbsaTitle": "McAllen-Edinburg-Mission, TX",
+      "name": "McAllen-Edinburg-Mission",
+      "countyFipsCodes": [
+        "48215"
+      ],
+      "urlSegment": "mcallen-edinburg-mission_tx",
+      "population": 868707
+    },
+    {
+      "cbsaCode": "32780",
+      "cbsaTitle": "Medford, OR",
+      "name": "Medford",
+      "countyFipsCodes": [
+        "41029"
+      ],
+      "urlSegment": "medford_or",
+      "population": 220944
+    },
+    {
+      "cbsaCode": "32820",
+      "cbsaTitle": "Memphis, TN-MS-AR",
+      "name": "Memphis",
+      "countyFipsCodes": [
+        "05035",
+        "28033",
+        "28093",
+        "28137",
+        "28143",
+        "47047",
+        "47157",
+        "47167"
+      ],
+      "urlSegment": "memphis_tn-ms-ar",
+      "population": 1346045
+    },
+    {
+      "cbsaCode": "32900",
+      "cbsaTitle": "Merced, CA",
+      "name": "Merced",
+      "countyFipsCodes": [
+        "06047"
+      ],
+      "urlSegment": "merced_ca",
+      "population": 277680
+    },
+    {
+      "cbsaCode": "33100",
+      "cbsaTitle": "Miami-Fort Lauderdale-Pompano Beach, FL",
+      "name": "Miami-Fort Lauderdale-Pompano Beach",
+      "countyFipsCodes": [
+        "12011",
+        "12086",
+        "12099"
+      ],
+      "urlSegment": "miami-fort-lauderdale-pompano-beach_fl",
+      "population": 6166488
+    },
+    {
+      "cbsaCode": "33140",
+      "cbsaTitle": "Michigan City-La Porte, IN",
+      "name": "Michigan City-La Porte",
+      "countyFipsCodes": [
+        "18091"
+      ],
+      "urlSegment": "michigan-city-la-porte_in",
+      "population": 109888
+    },
+    {
+      "cbsaCode": "33220",
+      "cbsaTitle": "Midland, MI",
+      "name": "Midland",
+      "countyFipsCodes": [
+        "26111"
+      ],
+      "urlSegment": "midland_mi",
+      "population": 83156
+    },
+    {
+      "cbsaCode": "33260",
+      "cbsaTitle": "Midland, TX",
+      "name": "Midland",
+      "countyFipsCodes": [
+        "48317",
+        "48329"
+      ],
+      "urlSegment": "midland_tx",
+      "population": 182603
+    },
+    {
+      "cbsaCode": "33340",
+      "cbsaTitle": "Milwaukee-Waukesha, WI",
+      "name": "Milwaukee-Waukesha",
+      "countyFipsCodes": [
+        "55079",
+        "55089",
+        "55131",
+        "55133"
+      ],
+      "urlSegment": "milwaukee-waukesha_wi",
+      "population": 1575179
+    },
+    {
+      "cbsaCode": "33460",
+      "cbsaTitle": "Minneapolis-St. Paul-Bloomington, MN-WI",
+      "name": "Minneapolis-St. Paul-Bloomington",
+      "countyFipsCodes": [
+        "27003",
+        "27019",
+        "27025",
+        "27037",
+        "27053",
+        "27059",
+        "27079",
+        "27095",
+        "27123",
+        "27139",
+        "27141",
+        "27163",
+        "27171",
+        "55093",
+        "55109"
+      ],
+      "urlSegment": "minneapolis-st-paul-bloomington_mn-wi",
+      "population": 3640043
+    },
+    {
+      "cbsaCode": "33540",
+      "cbsaTitle": "Missoula, MT",
+      "name": "Missoula",
+      "countyFipsCodes": [
+        "30063"
+      ],
+      "urlSegment": "missoula_mt",
+      "population": 119600
+    },
+    {
+      "cbsaCode": "33660",
+      "cbsaTitle": "Mobile, AL",
+      "name": "Mobile",
+      "countyFipsCodes": [
+        "01097",
+        "01129"
+      ],
+      "urlSegment": "mobile_al",
+      "population": 429536
+    },
+    {
+      "cbsaCode": "33700",
+      "cbsaTitle": "Modesto, CA",
+      "name": "Modesto",
+      "countyFipsCodes": [
+        "06099"
+      ],
+      "urlSegment": "modesto_ca",
+      "population": 550660
+    },
+    {
+      "cbsaCode": "33740",
+      "cbsaTitle": "Monroe, LA",
+      "name": "Monroe",
+      "countyFipsCodes": [
+        "22067",
+        "22073",
+        "22111"
+      ],
+      "urlSegment": "monroe_la",
+      "population": 200261
+    },
+    {
+      "cbsaCode": "33780",
+      "cbsaTitle": "Monroe, MI",
+      "name": "Monroe",
+      "countyFipsCodes": [
+        "26115"
+      ],
+      "urlSegment": "monroe_mi",
+      "population": 150500
+    },
+    {
+      "cbsaCode": "33860",
+      "cbsaTitle": "Montgomery, AL",
+      "name": "Montgomery",
+      "countyFipsCodes": [
+        "01001",
+        "01051",
+        "01085",
+        "01101"
+      ],
+      "urlSegment": "montgomery_al",
+      "population": 373290
+    },
+    {
+      "cbsaCode": "34060",
+      "cbsaTitle": "Morgantown, WV",
+      "name": "Morgantown",
+      "countyFipsCodes": [
+        "54061",
+        "54077"
+      ],
+      "urlSegment": "morgantown_wv",
+      "population": 139044
+    },
+    {
+      "cbsaCode": "34100",
+      "cbsaTitle": "Morristown, TN",
+      "name": "Morristown",
+      "countyFipsCodes": [
+        "47057",
+        "47063",
+        "47089"
+      ],
+      "urlSegment": "morristown_tn",
+      "population": 142749
+    },
+    {
+      "cbsaCode": "34580",
+      "cbsaTitle": "Mount Vernon-Anacortes, WA",
+      "name": "Mount Vernon-Anacortes",
+      "countyFipsCodes": [
+        "53057"
+      ],
+      "urlSegment": "mount-vernon-anacortes_wa",
+      "population": 129205
+    },
+    {
+      "cbsaCode": "34620",
+      "cbsaTitle": "Muncie, IN",
+      "name": "Muncie",
+      "countyFipsCodes": [
+        "18035"
+      ],
+      "urlSegment": "muncie_in",
+      "population": 114135
+    },
+    {
+      "cbsaCode": "34740",
+      "cbsaTitle": "Muskegon, MI",
+      "name": "Muskegon",
+      "countyFipsCodes": [
+        "26121"
+      ],
+      "urlSegment": "muskegon_mi",
+      "population": 173566
+    },
+    {
+      "cbsaCode": "34820",
+      "cbsaTitle": "Myrtle Beach-Conway-North Myrtle Beach, SC-NC",
+      "name": "Myrtle Beach-Conway-North Myrtle Beach",
+      "countyFipsCodes": [
+        "37019",
+        "45051"
+      ],
+      "urlSegment": "myrtle-beach-conway-north-myrtle-beach_sc-nc",
+      "population": 496901
+    },
+    {
+      "cbsaCode": "34900",
+      "cbsaTitle": "Napa, CA",
+      "name": "Napa",
+      "countyFipsCodes": [
+        "06055"
+      ],
+      "urlSegment": "napa_ca",
+      "population": 137744
+    },
+    {
+      "cbsaCode": "34940",
+      "cbsaTitle": "Naples-Marco Island, FL",
+      "name": "Naples-Marco Island",
+      "countyFipsCodes": [
+        "12021"
+      ],
+      "urlSegment": "naples-marco-island_fl",
+      "population": 384902
+    },
+    {
+      "cbsaCode": "34980",
+      "cbsaTitle": "Nashville-Davidson--Murfreesboro--Franklin, TN",
+      "name": "Nashville-Davidson--Murfreesboro--Franklin",
+      "countyFipsCodes": [
+        "47015",
+        "47021",
+        "47037",
+        "47043",
+        "47111",
+        "47119",
+        "47147",
+        "47149",
+        "47159",
+        "47165",
+        "47169",
+        "47187",
+        "47189"
+      ],
+      "urlSegment": "nashville-davidson-murfreesboro-franklin_tn",
+      "population": 1934317
+    },
+    {
+      "cbsaCode": "35100",
+      "cbsaTitle": "New Bern, NC",
+      "name": "New Bern",
+      "countyFipsCodes": [
+        "37049",
+        "37103",
+        "37137"
+      ],
+      "urlSegment": "new-bern_nc",
+      "population": 124284
+    },
+    {
+      "cbsaCode": "35300",
+      "cbsaTitle": "New Haven-Milford, CT",
+      "name": "New Haven-Milford",
+      "countyFipsCodes": [
+        "09009"
+      ],
+      "urlSegment": "new-haven-milford_ct",
+      "population": 854757
+    },
+    {
+      "cbsaCode": "35380",
+      "cbsaTitle": "New Orleans-Metairie, LA",
+      "name": "New Orleans-Metairie",
+      "countyFipsCodes": [
+        "22051",
+        "22071",
+        "22075",
+        "22087",
+        "22089",
+        "22093",
+        "22095",
+        "22103"
+      ],
+      "urlSegment": "new-orleans-metairie_la",
+      "population": 1270530
+    },
+    {
+      "cbsaCode": "35620",
+      "cbsaTitle": "New York-Newark-Jersey City, NY-NJ-PA",
+      "name": "New York-Newark-Jersey City",
+      "countyFipsCodes": [
+        "36059",
+        "36103",
+        "34013",
+        "34019",
+        "34027",
+        "34037",
+        "34039",
+        "42103",
+        "34023",
+        "34025",
+        "34029",
+        "34035",
+        "34003",
+        "34017",
+        "34031",
+        "36005",
+        "36047",
+        "36061",
+        "36079",
+        "36081",
+        "36085",
+        "36087",
+        "36119"
+      ],
+      "urlSegment": "new-york-newark-jersey-city_ny-nj-pa",
+      "population": 19954092
+    },
+    {
+      "cbsaCode": "35660",
+      "cbsaTitle": "Niles, MI",
+      "name": "Niles",
+      "countyFipsCodes": [
+        "26021"
+      ],
+      "urlSegment": "niles_mi",
+      "population": 153401
+    },
+    {
+      "cbsaCode": "35840",
+      "cbsaTitle": "North Port-Sarasota-Bradenton, FL",
+      "name": "North Port-Sarasota-Bradenton",
+      "countyFipsCodes": [
+        "12081",
+        "12115"
+      ],
+      "urlSegment": "north-port-sarasota-bradenton_fl",
+      "population": 836995
+    },
+    {
+      "cbsaCode": "35980",
+      "cbsaTitle": "Norwich-New London, CT",
+      "name": "Norwich-New London",
+      "countyFipsCodes": [
+        "09011"
+      ],
+      "urlSegment": "norwich-new-london_ct",
+      "population": 265206
+    },
+    {
+      "cbsaCode": "36100",
+      "cbsaTitle": "Ocala, FL",
+      "name": "Ocala",
+      "countyFipsCodes": [
+        "12083"
+      ],
+      "urlSegment": "ocala_fl",
+      "population": 365579
+    },
+    {
+      "cbsaCode": "36140",
+      "cbsaTitle": "Ocean City, NJ",
+      "name": "Ocean City",
+      "countyFipsCodes": [
+        "34009"
+      ],
+      "urlSegment": "ocean-city_nj",
+      "population": 92039
+    },
+    {
+      "cbsaCode": "36220",
+      "cbsaTitle": "Odessa, TX",
+      "name": "Odessa",
+      "countyFipsCodes": [
+        "48135"
+      ],
+      "urlSegment": "odessa_tx",
+      "population": 166223
+    },
+    {
+      "cbsaCode": "36260",
+      "cbsaTitle": "Ogden-Clearfield, UT",
+      "name": "Ogden-Clearfield",
+      "countyFipsCodes": [
+        "49003",
+        "49011",
+        "49029",
+        "49057"
+      ],
+      "urlSegment": "ogden-clearfield_ut",
+      "population": 683864
+    },
+    {
+      "cbsaCode": "36420",
+      "cbsaTitle": "Oklahoma City, OK",
+      "name": "Oklahoma City",
+      "countyFipsCodes": [
+        "40017",
+        "40027",
+        "40051",
+        "40081",
+        "40083",
+        "40087",
+        "40109"
+      ],
+      "urlSegment": "oklahoma-city_ok",
+      "population": 1408950
+    },
+    {
+      "cbsaCode": "36500",
+      "cbsaTitle": "Olympia-Lacey-Tumwater, WA",
+      "name": "Olympia-Lacey-Tumwater",
+      "countyFipsCodes": [
+        "53067"
+      ],
+      "urlSegment": "olympia-lacey-tumwater_wa",
+      "population": 290536
+    },
+    {
+      "cbsaCode": "36540",
+      "cbsaTitle": "Omaha-Council Bluffs, NE-IA",
+      "name": "Omaha-Council Bluffs",
+      "countyFipsCodes": [
+        "19085",
+        "19129",
+        "19155",
+        "31025",
+        "31055",
+        "31153",
+        "31155",
+        "31177"
+      ],
+      "urlSegment": "omaha-council-bluffs_ne-ia",
+      "population": 949442
+    },
+    {
+      "cbsaCode": "36740",
+      "cbsaTitle": "Orlando-Kissimmee-Sanford, FL",
+      "name": "Orlando-Kissimmee-Sanford",
+      "countyFipsCodes": [
+        "12069",
+        "12095",
+        "12097",
+        "12117"
+      ],
+      "urlSegment": "orlando-kissimmee-sanford_fl",
+      "population": 2608147
+    },
+    {
+      "cbsaCode": "36780",
+      "cbsaTitle": "Oshkosh-Neenah, WI",
+      "name": "Oshkosh-Neenah",
+      "countyFipsCodes": [
+        "55139"
+      ],
+      "urlSegment": "oshkosh-neenah_wi",
+      "population": 171907
+    },
+    {
+      "cbsaCode": "36980",
+      "cbsaTitle": "Owensboro, KY",
+      "name": "Owensboro",
+      "countyFipsCodes": [
+        "21059",
+        "21091",
+        "21149"
+      ],
+      "urlSegment": "owensboro_ky",
+      "population": 119440
+    },
+    {
+      "cbsaCode": "37100",
+      "cbsaTitle": "Oxnard-Thousand Oaks-Ventura, CA",
+      "name": "Oxnard-Thousand Oaks-Ventura",
+      "countyFipsCodes": [
+        "06111"
+      ],
+      "urlSegment": "oxnard-thousand-oaks-ventura_ca",
+      "population": 846006
+    },
+    {
+      "cbsaCode": "37340",
+      "cbsaTitle": "Palm Bay-Melbourne-Titusville, FL",
+      "name": "Palm Bay-Melbourne-Titusville",
+      "countyFipsCodes": [
+        "12009"
+      ],
+      "urlSegment": "palm-bay-melbourne-titusville_fl",
+      "population": 601942
+    },
+    {
+      "cbsaCode": "37460",
+      "cbsaTitle": "Panama City, FL",
+      "name": "Panama City",
+      "countyFipsCodes": [
+        "12005"
+      ],
+      "urlSegment": "panama-city_fl",
+      "population": 174705
+    },
+    {
+      "cbsaCode": "37620",
+      "cbsaTitle": "Parkersburg-Vienna, WV",
+      "name": "Parkersburg-Vienna",
+      "countyFipsCodes": [
+        "54105",
+        "54107"
+      ],
+      "urlSegment": "parkersburg-vienna_wv",
+      "population": 89339
+    },
+    {
+      "cbsaCode": "37860",
+      "cbsaTitle": "Pensacola-Ferry Pass-Brent, FL",
+      "name": "Pensacola-Ferry Pass-Brent",
+      "countyFipsCodes": [
+        "12033",
+        "12113"
+      ],
+      "urlSegment": "pensacola-ferry-pass-brent_fl",
+      "population": 502629
+    },
+    {
+      "cbsaCode": "37900",
+      "cbsaTitle": "Peoria, IL",
+      "name": "Peoria",
+      "countyFipsCodes": [
+        "17057",
+        "17123",
+        "17143",
+        "17175",
+        "17179",
+        "17203"
+      ],
+      "urlSegment": "peoria_il",
+      "population": 400561
+    },
+    {
+      "cbsaCode": "37980",
+      "cbsaTitle": "Philadelphia-Camden-Wilmington, PA-NJ-DE-MD",
+      "name": "Philadelphia-Camden-Wilmington",
+      "countyFipsCodes": [
+        "34005",
+        "34007",
+        "34015",
+        "42017",
+        "42029",
+        "42091",
+        "42045",
+        "42101",
+        "10003",
+        "24015",
+        "34033"
+      ],
+      "urlSegment": "philadelphia-camden-wilmington_pa-nj-de-md",
+      "population": 6102434
+    },
+    {
+      "cbsaCode": "38060",
+      "cbsaTitle": "Phoenix-Mesa-Chandler, AZ",
+      "name": "Phoenix-Mesa-Chandler",
+      "countyFipsCodes": [
+        "04013",
+        "04021"
+      ],
+      "urlSegment": "phoenix-mesa-chandler_az",
+      "population": 4948203
+    },
+    {
+      "cbsaCode": "38220",
+      "cbsaTitle": "Pine Bluff, AR",
+      "name": "Pine Bluff",
+      "countyFipsCodes": [
+        "05025",
+        "05069",
+        "05079"
+      ],
+      "urlSegment": "pine-bluff_ar",
+      "population": 87804
+    },
+    {
+      "cbsaCode": "38300",
+      "cbsaTitle": "Pittsburgh, PA",
+      "name": "Pittsburgh",
+      "countyFipsCodes": [
+        "42003",
+        "42005",
+        "42007",
+        "42019",
+        "42051",
+        "42125",
+        "42129"
+      ],
+      "urlSegment": "pittsburgh_pa",
+      "population": 2317600
+    },
+    {
+      "cbsaCode": "38340",
+      "cbsaTitle": "Pittsfield, MA",
+      "name": "Pittsfield",
+      "countyFipsCodes": [
+        "25003"
+      ],
+      "urlSegment": "pittsfield_ma",
+      "population": 124944
+    },
+    {
+      "cbsaCode": "38540",
+      "cbsaTitle": "Pocatello, ID",
+      "name": "Pocatello",
+      "countyFipsCodes": [
+        "16005",
+        "16077"
+      ],
+      "urlSegment": "pocatello_id",
+      "population": 95489
+    },
+    {
+      "cbsaCode": "38660",
+      "cbsaTitle": "Ponce, PR",
+      "name": "Ponce",
+      "countyFipsCodes": [
+        "72001",
+        "72075",
+        "72113",
+        "72149"
+      ],
+      "urlSegment": "ponce_pr",
+      "population": 215295
+    },
+    {
+      "cbsaCode": "38860",
+      "cbsaTitle": "Portland-South Portland, ME",
+      "name": "Portland-South Portland",
+      "countyFipsCodes": [
+        "23005",
+        "23023",
+        "23031"
+      ],
+      "urlSegment": "portland-south-portland_me",
+      "population": 538500
+    },
+    {
+      "cbsaCode": "38900",
+      "cbsaTitle": "Portland-Vancouver-Hillsboro, OR-WA",
+      "name": "Portland-Vancouver-Hillsboro",
+      "countyFipsCodes": [
+        "41005",
+        "41009",
+        "41051",
+        "41067",
+        "41071",
+        "53011",
+        "53059"
+      ],
+      "urlSegment": "portland-vancouver-hillsboro_or-wa",
+      "population": 2492412
+    },
+    {
+      "cbsaCode": "38940",
+      "cbsaTitle": "Port St. Lucie, FL",
+      "name": "Port St. Lucie",
+      "countyFipsCodes": [
+        "12085",
+        "12111"
+      ],
+      "urlSegment": "port-st-lucie_fl",
+      "population": 489297
+    },
+    {
+      "cbsaCode": "39100",
+      "cbsaTitle": "Poughkeepsie-Newburgh-Middletown, NY",
+      "name": "Poughkeepsie-Newburgh-Middletown",
+      "countyFipsCodes": [
+        "36027",
+        "36071"
+      ],
+      "urlSegment": "poughkeepsie-newburgh-middletown_ny",
+      "population": 679158
+    },
+    {
+      "cbsaCode": "39150",
+      "cbsaTitle": "Prescott Valley-Prescott, AZ",
+      "name": "Prescott Valley-Prescott",
+      "countyFipsCodes": [
+        "04025"
+      ],
+      "urlSegment": "prescott-valley-prescott_az",
+      "population": 235099
+    },
+    {
+      "cbsaCode": "39300",
+      "cbsaTitle": "Providence-Warwick, RI-MA",
+      "name": "Providence-Warwick",
+      "countyFipsCodes": [
+        "25005",
+        "44001",
+        "44003",
+        "44005",
+        "44007",
+        "44009"
+      ],
+      "urlSegment": "providence-warwick_ri-ma",
+      "population": 1624578
+    },
+    {
+      "cbsaCode": "39340",
+      "cbsaTitle": "Provo-Orem, UT",
+      "name": "Provo-Orem",
+      "countyFipsCodes": [
+        "49023",
+        "49049"
+      ],
+      "urlSegment": "provo-orem_ut",
+      "population": 648252
+    },
+    {
+      "cbsaCode": "39380",
+      "cbsaTitle": "Pueblo, CO",
+      "name": "Pueblo",
+      "countyFipsCodes": [
+        "08101"
+      ],
+      "urlSegment": "pueblo_co",
+      "population": 168424
+    },
+    {
+      "cbsaCode": "39460",
+      "cbsaTitle": "Punta Gorda, FL",
+      "name": "Punta Gorda",
+      "countyFipsCodes": [
+        "12015"
+      ],
+      "urlSegment": "punta-gorda_fl",
+      "population": 188910
+    },
+    {
+      "cbsaCode": "39540",
+      "cbsaTitle": "Racine, WI",
+      "name": "Racine",
+      "countyFipsCodes": [
+        "55101"
+      ],
+      "urlSegment": "racine_wi",
+      "population": 196311
+    },
+    {
+      "cbsaCode": "39580",
+      "cbsaTitle": "Raleigh-Cary, NC",
+      "name": "Raleigh-Cary",
+      "countyFipsCodes": [
+        "37069",
+        "37101",
+        "37183"
+      ],
+      "urlSegment": "raleigh-cary_nc",
+      "population": 1390785
+    },
+    {
+      "cbsaCode": "39660",
+      "cbsaTitle": "Rapid City, SD",
+      "name": "Rapid City",
+      "countyFipsCodes": [
+        "46093",
+        "46103"
+      ],
+      "urlSegment": "rapid-city_sd",
+      "population": 142107
+    },
+    {
+      "cbsaCode": "39740",
+      "cbsaTitle": "Reading, PA",
+      "name": "Reading",
+      "countyFipsCodes": [
+        "42011"
+      ],
+      "urlSegment": "reading_pa",
+      "population": 421164
+    },
+    {
+      "cbsaCode": "39820",
+      "cbsaTitle": "Redding, CA",
+      "name": "Redding",
+      "countyFipsCodes": [
+        "06089"
+      ],
+      "urlSegment": "redding_ca",
+      "population": 180080
+    },
+    {
+      "cbsaCode": "39900",
+      "cbsaTitle": "Reno, NV",
+      "name": "Reno",
+      "countyFipsCodes": [
+        "32029",
+        "32031"
+      ],
+      "urlSegment": "reno_nv",
+      "population": 475642
+    },
+    {
+      "cbsaCode": "40060",
+      "cbsaTitle": "Richmond, VA",
+      "name": "Richmond",
+      "countyFipsCodes": [
+        "51007",
+        "51036",
+        "51041",
+        "51053",
+        "51075",
+        "51085",
+        "51087",
+        "51097",
+        "51101",
+        "51127",
+        "51145",
+        "51149",
+        "51183",
+        "51570",
+        "51670",
+        "51730",
+        "51760"
+      ],
+      "urlSegment": "richmond_va",
+      "population": 1291900
+    },
+    {
+      "cbsaCode": "40140",
+      "cbsaTitle": "Riverside-San Bernardino-Ontario, CA",
+      "name": "Riverside-San Bernardino-Ontario",
+      "countyFipsCodes": [
+        "06065",
+        "06071"
+      ],
+      "urlSegment": "riverside-san-bernardino-ontario_ca",
+      "population": 4650631
+    },
+    {
+      "cbsaCode": "40220",
+      "cbsaTitle": "Roanoke, VA",
+      "name": "Roanoke",
+      "countyFipsCodes": [
+        "51023",
+        "51045",
+        "51067",
+        "51161",
+        "51770",
+        "51775"
+      ],
+      "urlSegment": "roanoke_va",
+      "population": 313222
+    },
+    {
+      "cbsaCode": "40340",
+      "cbsaTitle": "Rochester, MN",
+      "name": "Rochester",
+      "countyFipsCodes": [
+        "27039",
+        "27045",
+        "27109",
+        "27157"
+      ],
+      "urlSegment": "rochester_mn",
+      "population": 221921
+    },
+    {
+      "cbsaCode": "40380",
+      "cbsaTitle": "Rochester, NY",
+      "name": "Rochester",
+      "countyFipsCodes": [
+        "36051",
+        "36055",
+        "36069",
+        "36073",
+        "36117",
+        "36123"
+      ],
+      "urlSegment": "rochester_ny",
+      "population": 1069644
+    },
+    {
+      "cbsaCode": "40420",
+      "cbsaTitle": "Rockford, IL",
+      "name": "Rockford",
+      "countyFipsCodes": [
+        "17007",
+        "17201"
+      ],
+      "urlSegment": "rockford_il",
+      "population": 336116
+    },
+    {
+      "cbsaCode": "40580",
+      "cbsaTitle": "Rocky Mount, NC",
+      "name": "Rocky Mount",
+      "countyFipsCodes": [
+        "37065",
+        "37127"
+      ],
+      "urlSegment": "rocky-mount_nc",
+      "population": 145770
+    },
+    {
+      "cbsaCode": "40660",
+      "cbsaTitle": "Rome, GA",
+      "name": "Rome",
+      "countyFipsCodes": [
+        "13115"
+      ],
+      "urlSegment": "rome_ga",
+      "population": 98498
+    },
+    {
+      "cbsaCode": "40900",
+      "cbsaTitle": "Sacramento-Roseville-Folsom, CA",
+      "name": "Sacramento-Roseville-Folsom",
+      "countyFipsCodes": [
+        "06017",
+        "06061",
+        "06067",
+        "06113"
+      ],
+      "urlSegment": "sacramento-roseville-folsom_ca",
+      "population": 2363730
+    },
+    {
+      "cbsaCode": "40980",
+      "cbsaTitle": "Saginaw, MI",
+      "name": "Saginaw",
+      "countyFipsCodes": [
+        "26145"
+      ],
+      "urlSegment": "saginaw_mi",
+      "population": 190539
+    },
+    {
+      "cbsaCode": "41060",
+      "cbsaTitle": "St. Cloud, MN",
+      "name": "St. Cloud",
+      "countyFipsCodes": [
+        "27009",
+        "27145"
+      ],
+      "urlSegment": "st-cloud_mn",
+      "population": 201964
+    },
+    {
+      "cbsaCode": "41100",
+      "cbsaTitle": "St. George, UT",
+      "name": "St. George",
+      "countyFipsCodes": [
+        "49053"
+      ],
+      "urlSegment": "st-george_ut",
+      "population": 177556
+    },
+    {
+      "cbsaCode": "41140",
+      "cbsaTitle": "St. Joseph, MO-KS",
+      "name": "St. Joseph",
+      "countyFipsCodes": [
+        "20043",
+        "29003",
+        "29021",
+        "29063"
+      ],
+      "urlSegment": "st-joseph_mo-ks",
+      "population": 125223
+    },
+    {
+      "cbsaCode": "41180",
+      "cbsaTitle": "St. Louis, MO-IL",
+      "name": "St. Louis",
+      "countyFipsCodes": [
+        "17005",
+        "17013",
+        "17027",
+        "17083",
+        "17117",
+        "17119",
+        "17133",
+        "17163",
+        "29071",
+        "29099",
+        "29113",
+        "29183",
+        "29189",
+        "29219",
+        "29510"
+      ],
+      "urlSegment": "st-louis_mo-il",
+      "population": 2803228
+    },
+    {
+      "cbsaCode": "41420",
+      "cbsaTitle": "Salem, OR",
+      "name": "Salem",
+      "countyFipsCodes": [
+        "41047",
+        "41053"
+      ],
+      "urlSegment": "salem_or",
+      "population": 433903
+    },
+    {
+      "cbsaCode": "41500",
+      "cbsaTitle": "Salinas, CA",
+      "name": "Salinas",
+      "countyFipsCodes": [
+        "06053"
+      ],
+      "urlSegment": "salinas_ca",
+      "population": 434061
+    },
+    {
+      "cbsaCode": "41540",
+      "cbsaTitle": "Salisbury, MD-DE",
+      "name": "Salisbury",
+      "countyFipsCodes": [
+        "10005",
+        "24039",
+        "24045",
+        "24047"
+      ],
+      "urlSegment": "salisbury_md-de",
+      "population": 415726
+    },
+    {
+      "cbsaCode": "41620",
+      "cbsaTitle": "Salt Lake City, UT",
+      "name": "Salt Lake City",
+      "countyFipsCodes": [
+        "49035",
+        "49045"
+      ],
+      "urlSegment": "salt-lake-city_ut",
+      "population": 1232696
+    },
+    {
+      "cbsaCode": "41660",
+      "cbsaTitle": "San Angelo, TX",
+      "name": "San Angelo",
+      "countyFipsCodes": [
+        "48235",
+        "48431",
+        "48451"
+      ],
+      "urlSegment": "san-angelo_tx",
+      "population": 122027
+    },
+    {
+      "cbsaCode": "41700",
+      "cbsaTitle": "San Antonio-New Braunfels, TX",
+      "name": "San Antonio-New Braunfels",
+      "countyFipsCodes": [
+        "48013",
+        "48019",
+        "48029",
+        "48091",
+        "48187",
+        "48259",
+        "48325",
+        "48493"
+      ],
+      "urlSegment": "san-antonio-new-braunfels_tx",
+      "population": 2550960
+    },
+    {
+      "cbsaCode": "41740",
+      "cbsaTitle": "San Diego-Chula Vista-Carlsbad, CA",
+      "name": "San Diego-Chula Vista-Carlsbad",
+      "countyFipsCodes": [
+        "06073"
+      ],
+      "urlSegment": "san-diego-chula-vista-carlsbad_ca",
+      "population": 3338330
+    },
+    {
+      "cbsaCode": "41860",
+      "cbsaTitle": "San Francisco-Oakland-Berkeley, CA",
+      "name": "San Francisco-Oakland-Berkeley",
+      "countyFipsCodes": [
+        "06001",
+        "06013",
+        "06075",
+        "06081",
+        "06041"
+      ],
+      "urlSegment": "san-francisco-oakland-berkeley_ca",
+      "population": 4731803
+    },
+    {
+      "cbsaCode": "41900",
+      "cbsaTitle": "San Germán, PR",
+      "name": "San Germán",
+      "countyFipsCodes": [
+        "72023",
+        "72079",
+        "72121",
+        "72125"
+      ],
+      "urlSegment": "san-german_pr",
+      "population": 121464
+    },
+    {
+      "cbsaCode": "41940",
+      "cbsaTitle": "San Jose-Sunnyvale-Santa Clara, CA",
+      "name": "San Jose-Sunnyvale-Santa Clara",
+      "countyFipsCodes": [
+        "06069",
+        "06085"
+      ],
+      "urlSegment": "san-jose-sunnyvale-santa-clara_ca",
+      "population": 1990660
+    },
+    {
+      "cbsaCode": "41980",
+      "cbsaTitle": "San Juan-Bayamón-Caguas, PR",
+      "name": "San Juan-Bayamón-Caguas",
+      "countyFipsCodes": [
+        "72007",
+        "72009",
+        "72017",
+        "72019",
+        "72021",
+        "72025",
+        "72029",
+        "72031",
+        "72033",
+        "72035",
+        "72037",
+        "72039",
+        "72041",
+        "72045",
+        "72047",
+        "72051",
+        "72053",
+        "72054",
+        "72061",
+        "72063",
+        "72069",
+        "72077",
+        "72085",
+        "72087",
+        "72089",
+        "72091",
+        "72095",
+        "72101",
+        "72103",
+        "72105",
+        "72107",
+        "72119",
+        "72127",
+        "72129",
+        "72135",
+        "72137",
+        "72139",
+        "72143",
+        "72145",
+        "72151"
+      ],
+      "urlSegment": "san-juan-bayamon-caguas_pr",
+      "population": 2023227
+    },
+    {
+      "cbsaCode": "42020",
+      "cbsaTitle": "San Luis Obispo-Paso Robles, CA",
+      "name": "San Luis Obispo-Paso Robles",
+      "countyFipsCodes": [
+        "06079"
+      ],
+      "urlSegment": "san-luis-obispo-paso-robles_ca",
+      "population": 283111
+    },
+    {
+      "cbsaCode": "42100",
+      "cbsaTitle": "Santa Cruz-Watsonville, CA",
+      "name": "Santa Cruz-Watsonville",
+      "countyFipsCodes": [
+        "06087"
+      ],
+      "urlSegment": "santa-cruz-watsonville_ca",
+      "population": 273213
+    },
+    {
+      "cbsaCode": "42140",
+      "cbsaTitle": "Santa Fe, NM",
+      "name": "Santa Fe",
+      "countyFipsCodes": [
+        "35049"
+      ],
+      "urlSegment": "santa-fe_nm",
+      "population": 150358
+    },
+    {
+      "cbsaCode": "42200",
+      "cbsaTitle": "Santa Maria-Santa Barbara, CA",
+      "name": "Santa Maria-Santa Barbara",
+      "countyFipsCodes": [
+        "06083"
+      ],
+      "urlSegment": "santa-maria-santa-barbara_ca",
+      "population": 446499
+    },
+    {
+      "cbsaCode": "42220",
+      "cbsaTitle": "Santa Rosa-Petaluma, CA",
+      "name": "Santa Rosa-Petaluma",
+      "countyFipsCodes": [
+        "06097"
+      ],
+      "urlSegment": "santa-rosa-petaluma_ca",
+      "population": 494336
+    },
+    {
+      "cbsaCode": "42340",
+      "cbsaTitle": "Savannah, GA",
+      "name": "Savannah",
+      "countyFipsCodes": [
+        "13029",
+        "13051",
+        "13103"
+      ],
+      "urlSegment": "savannah_ga",
+      "population": 393353
+    },
+    {
+      "cbsaCode": "42540",
+      "cbsaTitle": "Scranton--Wilkes-Barre, PA",
+      "name": "Scranton--Wilkes-Barre",
+      "countyFipsCodes": [
+        "42069",
+        "42079",
+        "42131"
+      ],
+      "urlSegment": "scranton-wilkes-barre_pa",
+      "population": 553885
+    },
+    {
+      "cbsaCode": "42660",
+      "cbsaTitle": "Seattle-Tacoma-Bellevue, WA",
+      "name": "Seattle-Tacoma-Bellevue",
+      "countyFipsCodes": [
+        "53033",
+        "53061",
+        "53053"
+      ],
+      "urlSegment": "seattle-tacoma-bellevue_wa",
+      "population": 3979845
+    },
+    {
+      "cbsaCode": "42680",
+      "cbsaTitle": "Sebastian-Vero Beach, FL",
+      "name": "Sebastian-Vero Beach",
+      "countyFipsCodes": [
+        "12061"
+      ],
+      "urlSegment": "sebastian-vero-beach_fl",
+      "population": 159923
+    },
+    {
+      "cbsaCode": "42700",
+      "cbsaTitle": "Sebring-Avon Park, FL",
+      "name": "Sebring-Avon Park",
+      "countyFipsCodes": [
+        "12055"
+      ],
+      "urlSegment": "sebring-avon-park_fl",
+      "population": 106221
+    },
+    {
+      "cbsaCode": "43100",
+      "cbsaTitle": "Sheboygan, WI",
+      "name": "Sheboygan",
+      "countyFipsCodes": [
+        "55117"
+      ],
+      "urlSegment": "sheboygan_wi",
+      "population": 115340
+    },
+    {
+      "cbsaCode": "43300",
+      "cbsaTitle": "Sherman-Denison, TX",
+      "name": "Sherman-Denison",
+      "countyFipsCodes": [
+        "48181"
+      ],
+      "urlSegment": "sherman-denison_tx",
+      "population": 136212
+    },
+    {
+      "cbsaCode": "43340",
+      "cbsaTitle": "Shreveport-Bossier City, LA",
+      "name": "Shreveport-Bossier City",
+      "countyFipsCodes": [
+        "22015",
+        "22017",
+        "22031"
+      ],
+      "urlSegment": "shreveport-bossier-city_la",
+      "population": 394706
+    },
+    {
+      "cbsaCode": "43420",
+      "cbsaTitle": "Sierra Vista-Douglas, AZ",
+      "name": "Sierra Vista-Douglas",
+      "countyFipsCodes": [
+        "04003"
+      ],
+      "urlSegment": "sierra-vista-douglas_az",
+      "population": 125922
+    },
+    {
+      "cbsaCode": "43580",
+      "cbsaTitle": "Sioux City, IA-NE-SD",
+      "name": "Sioux City",
+      "countyFipsCodes": [
+        "19193",
+        "31043",
+        "31051",
+        "46127"
+      ],
+      "urlSegment": "sioux-city_ia-ne-sd",
+      "population": 144701
+    },
+    {
+      "cbsaCode": "43620",
+      "cbsaTitle": "Sioux Falls, SD",
+      "name": "Sioux Falls",
+      "countyFipsCodes": [
+        "46083",
+        "46087",
+        "46099",
+        "46125"
+      ],
+      "urlSegment": "sioux-falls_sd",
+      "population": 268232
+    },
+    {
+      "cbsaCode": "43780",
+      "cbsaTitle": "South Bend-Mishawaka, IN-MI",
+      "name": "South Bend-Mishawaka",
+      "countyFipsCodes": [
+        "18141",
+        "26027"
+      ],
+      "urlSegment": "south-bend-mishawaka_in-mi",
+      "population": 323613
+    },
+    {
+      "cbsaCode": "43900",
+      "cbsaTitle": "Spartanburg, SC",
+      "name": "Spartanburg",
+      "countyFipsCodes": [
+        "45083"
+      ],
+      "urlSegment": "spartanburg_sc",
+      "population": 319785
+    },
+    {
+      "cbsaCode": "44060",
+      "cbsaTitle": "Spokane-Spokane Valley, WA",
+      "name": "Spokane-Spokane Valley",
+      "countyFipsCodes": [
+        "53063",
+        "53065"
+      ],
+      "urlSegment": "spokane-spokane-valley_wa",
+      "population": 568521
+    },
+    {
+      "cbsaCode": "44100",
+      "cbsaTitle": "Springfield, IL",
+      "name": "Springfield",
+      "countyFipsCodes": [
+        "17129",
+        "17167"
+      ],
+      "urlSegment": "springfield_il",
+      "population": 206868
+    },
+    {
+      "cbsaCode": "44140",
+      "cbsaTitle": "Springfield, MA",
+      "name": "Springfield",
+      "countyFipsCodes": [
+        "25011",
+        "25013",
+        "25015"
+      ],
+      "urlSegment": "springfield_ma",
+      "population": 697382
+    },
+    {
+      "cbsaCode": "44180",
+      "cbsaTitle": "Springfield, MO",
+      "name": "Springfield",
+      "countyFipsCodes": [
+        "29043",
+        "29059",
+        "29077",
+        "29167",
+        "29225"
+      ],
+      "urlSegment": "springfield_mo",
+      "population": 470300
+    },
+    {
+      "cbsaCode": "44220",
+      "cbsaTitle": "Springfield, OH",
+      "name": "Springfield",
+      "countyFipsCodes": [
+        "39023"
+      ],
+      "urlSegment": "springfield_oh",
+      "population": 134083
+    },
+    {
+      "cbsaCode": "44300",
+      "cbsaTitle": "State College, PA",
+      "name": "State College",
+      "countyFipsCodes": [
+        "42027"
+      ],
+      "urlSegment": "state-college_pa",
+      "population": 162385
+    },
+    {
+      "cbsaCode": "44420",
+      "cbsaTitle": "Staunton, VA",
+      "name": "Staunton",
+      "countyFipsCodes": [
+        "51015",
+        "51790",
+        "51820"
+      ],
+      "urlSegment": "staunton_va",
+      "population": 123120
+    },
+    {
+      "cbsaCode": "44700",
+      "cbsaTitle": "Stockton, CA",
+      "name": "Stockton",
+      "countyFipsCodes": [
+        "06077"
+      ],
+      "urlSegment": "stockton_ca",
+      "population": 762148
+    },
+    {
+      "cbsaCode": "44940",
+      "cbsaTitle": "Sumter, SC",
+      "name": "Sumter",
+      "countyFipsCodes": [
+        "45027",
+        "45085"
+      ],
+      "urlSegment": "sumter_sc",
+      "population": 140466
+    },
+    {
+      "cbsaCode": "45060",
+      "cbsaTitle": "Syracuse, NY",
+      "name": "Syracuse",
+      "countyFipsCodes": [
+        "36053",
+        "36067",
+        "36075"
+      ],
+      "urlSegment": "syracuse_ny",
+      "population": 648593
+    },
+    {
+      "cbsaCode": "45220",
+      "cbsaTitle": "Tallahassee, FL",
+      "name": "Tallahassee",
+      "countyFipsCodes": [
+        "12039",
+        "12065",
+        "12073",
+        "12129"
+      ],
+      "urlSegment": "tallahassee_fl",
+      "population": 387227
+    },
+    {
+      "cbsaCode": "45300",
+      "cbsaTitle": "Tampa-St. Petersburg-Clearwater, FL",
+      "name": "Tampa-St. Petersburg-Clearwater",
+      "countyFipsCodes": [
+        "12053",
+        "12057",
+        "12101",
+        "12103"
+      ],
+      "urlSegment": "tampa-st-petersburg-clearwater_fl",
+      "population": 3194831
+    },
+    {
+      "cbsaCode": "45460",
+      "cbsaTitle": "Terre Haute, IN",
+      "name": "Terre Haute",
+      "countyFipsCodes": [
+        "18021",
+        "18121",
+        "18153",
+        "18165",
+        "18167"
+      ],
+      "urlSegment": "terre-haute_in",
+      "population": 186367
+    },
+    {
+      "cbsaCode": "45500",
+      "cbsaTitle": "Texarkana, TX-AR",
+      "name": "Texarkana",
+      "countyFipsCodes": [
+        "05081",
+        "05091",
+        "48037"
+      ],
+      "urlSegment": "texarkana_tx-ar",
+      "population": 148761
+    },
+    {
+      "cbsaCode": "45540",
+      "cbsaTitle": "The Villages, FL",
+      "name": "The Villages",
+      "countyFipsCodes": [
+        "12119"
+      ],
+      "urlSegment": "the-villages_fl",
+      "population": 132420
+    },
+    {
+      "cbsaCode": "45780",
+      "cbsaTitle": "Toledo, OH",
+      "name": "Toledo",
+      "countyFipsCodes": [
+        "39051",
+        "39095",
+        "39123",
+        "39173"
+      ],
+      "urlSegment": "toledo_oh",
+      "population": 641816
+    },
+    {
+      "cbsaCode": "45820",
+      "cbsaTitle": "Topeka, KS",
+      "name": "Topeka",
+      "countyFipsCodes": [
+        "20085",
+        "20087",
+        "20139",
+        "20177",
+        "20197"
+      ],
+      "urlSegment": "topeka_ks",
+      "population": 231969
+    },
+    {
+      "cbsaCode": "45940",
+      "cbsaTitle": "Trenton-Princeton, NJ",
+      "name": "Trenton-Princeton",
+      "countyFipsCodes": [
+        "34021"
+      ],
+      "urlSegment": "trenton-princeton_nj",
+      "population": 367430
+    },
+    {
+      "cbsaCode": "46060",
+      "cbsaTitle": "Tucson, AZ",
+      "name": "Tucson",
+      "countyFipsCodes": [
+        "04019"
+      ],
+      "urlSegment": "tucson_az",
+      "population": 1047279
+    },
+    {
+      "cbsaCode": "46140",
+      "cbsaTitle": "Tulsa, OK",
+      "name": "Tulsa",
+      "countyFipsCodes": [
+        "40037",
+        "40111",
+        "40113",
+        "40117",
+        "40131",
+        "40143",
+        "40145"
+      ],
+      "urlSegment": "tulsa_ok",
+      "population": 998626
+    },
+    {
+      "cbsaCode": "46220",
+      "cbsaTitle": "Tuscaloosa, AL",
+      "name": "Tuscaloosa",
+      "countyFipsCodes": [
+        "01063",
+        "01065",
+        "01107",
+        "01125"
+      ],
+      "urlSegment": "tuscaloosa_al",
+      "population": 252047
+    },
+    {
+      "cbsaCode": "46300",
+      "cbsaTitle": "Twin Falls, ID",
+      "name": "Twin Falls",
+      "countyFipsCodes": [
+        "16053",
+        "16083"
+      ],
+      "urlSegment": "twin-falls_id",
+      "population": 111290
+    },
+    {
+      "cbsaCode": "46340",
+      "cbsaTitle": "Tyler, TX",
+      "name": "Tyler",
+      "countyFipsCodes": [
+        "48423"
+      ],
+      "urlSegment": "tyler_tx",
+      "population": 232751
+    },
+    {
+      "cbsaCode": "46520",
+      "cbsaTitle": "Urban Honolulu, HI",
+      "name": "Urban Honolulu",
+      "countyFipsCodes": [
+        "15003"
+      ],
+      "urlSegment": "urban-honolulu_hi",
+      "population": 974563
+    },
+    {
+      "cbsaCode": "46540",
+      "cbsaTitle": "Utica-Rome, NY",
+      "name": "Utica-Rome",
+      "countyFipsCodes": [
+        "36043",
+        "36065"
+      ],
+      "urlSegment": "utica-rome_ny",
+      "population": 289990
+    },
+    {
+      "cbsaCode": "46660",
+      "cbsaTitle": "Valdosta, GA",
+      "name": "Valdosta",
+      "countyFipsCodes": [
+        "13027",
+        "13101",
+        "13173",
+        "13185"
+      ],
+      "urlSegment": "valdosta_ga",
+      "population": 147292
+    },
+    {
+      "cbsaCode": "46700",
+      "cbsaTitle": "Vallejo, CA",
+      "name": "Vallejo",
+      "countyFipsCodes": [
+        "06095"
+      ],
+      "urlSegment": "vallejo_ca",
+      "population": 447643
+    },
+    {
+      "cbsaCode": "47020",
+      "cbsaTitle": "Victoria, TX",
+      "name": "Victoria",
+      "countyFipsCodes": [
+        "48175",
+        "48469"
+      ],
+      "urlSegment": "victoria_tx",
+      "population": 99742
+    },
+    {
+      "cbsaCode": "47220",
+      "cbsaTitle": "Vineland-Bridgeton, NJ",
+      "name": "Vineland-Bridgeton",
+      "countyFipsCodes": [
+        "34011"
+      ],
+      "urlSegment": "vineland-bridgeton_nj",
+      "population": 149527
+    },
+    {
+      "cbsaCode": "47260",
+      "cbsaTitle": "Virginia Beach-Norfolk-Newport News, VA-NC",
+      "name": "Virginia Beach-Norfolk-Newport News",
+      "countyFipsCodes": [
+        "37029",
+        "37053",
+        "37073",
+        "51073",
+        "51093",
+        "51095",
+        "51115",
+        "51175",
+        "51199",
+        "51550",
+        "51620",
+        "51650",
+        "51700",
+        "51710",
+        "51735",
+        "51740",
+        "51800",
+        "51810",
+        "51830"
+      ],
+      "urlSegment": "virginia-beach-norfolk-newport-news_va-nc",
+      "population": 1768901
+    },
+    {
+      "cbsaCode": "47300",
+      "cbsaTitle": "Visalia, CA",
+      "name": "Visalia",
+      "countyFipsCodes": [
+        "06107"
+      ],
+      "urlSegment": "visalia_ca",
+      "population": 466195
+    },
+    {
+      "cbsaCode": "47380",
+      "cbsaTitle": "Waco, TX",
+      "name": "Waco",
+      "countyFipsCodes": [
+        "48145",
+        "48309"
+      ],
+      "urlSegment": "waco_tx",
+      "population": 273920
+    },
+    {
+      "cbsaCode": "47460",
+      "cbsaTitle": "Walla Walla, WA",
+      "name": "Walla Walla",
+      "countyFipsCodes": [
+        "53071"
+      ],
+      "urlSegment": "walla-walla_wa",
+      "population": 60760
+    },
+    {
+      "cbsaCode": "47580",
+      "cbsaTitle": "Warner Robins, GA",
+      "name": "Warner Robins",
+      "countyFipsCodes": [
+        "13153",
+        "13225"
+      ],
+      "urlSegment": "warner-robins_ga",
+      "population": 185409
+    },
+    {
+      "cbsaCode": "47900",
+      "cbsaTitle": "Washington-Arlington-Alexandria, DC-VA-MD-WV",
+      "name": "Washington-Arlington-Alexandria",
+      "countyFipsCodes": [
+        "24021",
+        "24031",
+        "11001",
+        "24009",
+        "24017",
+        "24033",
+        "51013",
+        "51043",
+        "51047",
+        "51059",
+        "51061",
+        "51107",
+        "51113",
+        "51153",
+        "51157",
+        "51177",
+        "51179",
+        "51187",
+        "51510",
+        "51600",
+        "51610",
+        "51630",
+        "51683",
+        "51685",
+        "54037"
+      ],
+      "urlSegment": "washington-arlington-alexandria_dc-va-md-wv",
+      "population": 6280487
+    },
+    {
+      "cbsaCode": "47940",
+      "cbsaTitle": "Waterloo-Cedar Falls, IA",
+      "name": "Waterloo-Cedar Falls",
+      "countyFipsCodes": [
+        "19013",
+        "19017",
+        "19075"
+      ],
+      "urlSegment": "waterloo-cedar-falls_ia",
+      "population": 168522
+    },
+    {
+      "cbsaCode": "48060",
+      "cbsaTitle": "Watertown-Fort Drum, NY",
+      "name": "Watertown-Fort Drum",
+      "countyFipsCodes": [
+        "36045"
+      ],
+      "urlSegment": "watertown-fort-drum_ny",
+      "population": 109834
+    },
+    {
+      "cbsaCode": "48140",
+      "cbsaTitle": "Wausau-Weston, WI",
+      "name": "Wausau-Weston",
+      "countyFipsCodes": [
+        "55069",
+        "55073"
+      ],
+      "urlSegment": "wausau-weston_wi",
+      "population": 163285
+    },
+    {
+      "cbsaCode": "48260",
+      "cbsaTitle": "Weirton-Steubenville, WV-OH",
+      "name": "Weirton-Steubenville",
+      "countyFipsCodes": [
+        "39081",
+        "54009",
+        "54029"
+      ],
+      "urlSegment": "weirton-steubenville_wv-oh",
+      "population": 116074
+    },
+    {
+      "cbsaCode": "48300",
+      "cbsaTitle": "Wenatchee, WA",
+      "name": "Wenatchee",
+      "countyFipsCodes": [
+        "53007",
+        "53017"
+      ],
+      "urlSegment": "wenatchee_wa",
+      "population": 120629
+    },
+    {
+      "cbsaCode": "48540",
+      "cbsaTitle": "Wheeling, WV-OH",
+      "name": "Wheeling",
+      "countyFipsCodes": [
+        "39013",
+        "54051",
+        "54069"
+      ],
+      "urlSegment": "wheeling_wv-oh",
+      "population": 138948
+    },
+    {
+      "cbsaCode": "48620",
+      "cbsaTitle": "Wichita, KS",
+      "name": "Wichita",
+      "countyFipsCodes": [
+        "20015",
+        "20079",
+        "20173",
+        "20191"
+      ],
+      "urlSegment": "wichita_ks",
+      "population": 640218
+    },
+    {
+      "cbsaCode": "48660",
+      "cbsaTitle": "Wichita Falls, TX",
+      "name": "Wichita Falls",
+      "countyFipsCodes": [
+        "48009",
+        "48077",
+        "48485"
+      ],
+      "urlSegment": "wichita-falls_tx",
+      "population": 151254
+    },
+    {
+      "cbsaCode": "48700",
+      "cbsaTitle": "Williamsport, PA",
+      "name": "Williamsport",
+      "countyFipsCodes": [
+        "42081"
+      ],
+      "urlSegment": "williamsport_pa",
+      "population": 113299
+    },
+    {
+      "cbsaCode": "48900",
+      "cbsaTitle": "Wilmington, NC",
+      "name": "Wilmington",
+      "countyFipsCodes": [
+        "37129",
+        "37141"
+      ],
+      "urlSegment": "wilmington_nc",
+      "population": 297533
+    },
+    {
+      "cbsaCode": "49020",
+      "cbsaTitle": "Winchester, VA-WV",
+      "name": "Winchester",
+      "countyFipsCodes": [
+        "51069",
+        "51840",
+        "54027"
+      ],
+      "urlSegment": "winchester_va-wv",
+      "population": 140566
+    },
+    {
+      "cbsaCode": "49180",
+      "cbsaTitle": "Winston-Salem, NC",
+      "name": "Winston-Salem",
+      "countyFipsCodes": [
+        "37057",
+        "37059",
+        "37067",
+        "37169",
+        "37197"
+      ],
+      "urlSegment": "winston-salem_nc",
+      "population": 676008
+    },
+    {
+      "cbsaCode": "49340",
+      "cbsaTitle": "Worcester, MA-CT",
+      "name": "Worcester",
+      "countyFipsCodes": [
+        "09015",
+        "25027"
+      ],
+      "urlSegment": "worcester_ma-ct",
+      "population": 947404
+    },
+    {
+      "cbsaCode": "49420",
+      "cbsaTitle": "Yakima, WA",
+      "name": "Yakima",
+      "countyFipsCodes": [
+        "53077"
+      ],
+      "urlSegment": "yakima_wa",
+      "population": 250873
+    },
+    {
+      "cbsaCode": "49500",
+      "cbsaTitle": "Yauco, PR",
+      "name": "Yauco",
+      "countyFipsCodes": [
+        "72055",
+        "72059",
+        "72111",
+        "72153"
+      ],
+      "urlSegment": "yauco_pr",
+      "population": 85830
+    },
+    {
+      "cbsaCode": "49620",
+      "cbsaTitle": "York-Hanover, PA",
+      "name": "York-Hanover",
+      "countyFipsCodes": [
+        "42133"
+      ],
+      "urlSegment": "york-hanover_pa",
+      "population": 449058
+    },
+    {
+      "cbsaCode": "49660",
+      "cbsaTitle": "Youngstown-Warren-Boardman, OH-PA",
+      "name": "Youngstown-Warren-Boardman",
+      "countyFipsCodes": [
+        "39099",
+        "39155",
+        "42085"
+      ],
+      "urlSegment": "youngstown-warren-boardman_oh-pa",
+      "population": 536081
+    },
+    {
+      "cbsaCode": "49700",
+      "cbsaTitle": "Yuba City, CA",
+      "name": "Yuba City",
+      "countyFipsCodes": [
+        "06101",
+        "06115"
+      ],
+      "urlSegment": "yuba-city_ca",
+      "population": 175639
+    },
+    {
+      "cbsaCode": "49740",
+      "cbsaTitle": "Yuma, AZ",
+      "name": "Yuma",
+      "countyFipsCodes": [
+        "04027"
+      ],
+      "urlSegment": "yuma_az",
+      "population": 213787
+    }
+  ]
+}

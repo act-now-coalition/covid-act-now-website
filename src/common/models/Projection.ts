@@ -36,6 +36,7 @@ const DISABLED_TEST_POSITIVITY = new DisabledFips([
   '48113',
   '48215',
   '47', // https://trello.com/c/EoXyNUBD/646-disabled-tn-test-positivity
+  '51', // https://trello.com/c/wW18WA48/660-virginia-test-positivity-incorrect-at-0-hhs-test-positivity-data-suspect
 ]);
 
 const DISABLED_ICU = new DisabledFips([]);

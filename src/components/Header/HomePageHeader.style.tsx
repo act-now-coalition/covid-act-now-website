@@ -21,7 +21,7 @@ export const Content = styled.div`
 `;
 
 export const HeaderTitle = styled(Typography)<{ component?: string }>`
-  font-size: 1.75rem;
+  font-size: 2rem;
   font-weight: 700;
   line-height: 2.3rem;
   color: black;

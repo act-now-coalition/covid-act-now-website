@@ -142,19 +142,32 @@ function renderStatus(projections: Projections) {
 function renderDisclaimer(projections: Projections): React.ReactElement {
   const usingCMSData =
     projections.primary.testPositiveRateSource === 'CMSTesting';
+  const usingCDCData =
+    projections.primary.testPositiveRateSource === 'CDCTesting';
+  const usingDefaultData = !(usingCDCData || usingCMSData);
+
   return (
     <Fragment>
       The World Health Organization recommends a positive test rate of less than
       10%. The countries most successful in containing COVID have rates of 3% or
       less.{' '}
-      {usingCMSData ? (
+      {usingCMSData && (
         <React.Fragment>
           {METRIC_NAME} for {projections.locationName} comes from data
           aggregated by the Centers for Medicare and Medicaid Services. It is
           calculated as a 14-day trailing average and may take a week or more to
           update.
         </React.Fragment>
-      ) : (
+      )}
+      {usingCDCData && (
+        <React.Fragment>
+          {METRIC_NAME} for {projections.locationName} comes from data
+          aggregated by the Centers for Disease Control and Prevention. It is
+          calculated as a 7-day trailing average and may take 3-4 days to
+          update.
+        </React.Fragment>
+      )}
+      {usingDefaultData && (
         <React.Fragment>
           We calculate the rate as a 7-day trailing average.
         </React.Fragment>
