@@ -16,18 +16,29 @@ import {
 } from 'common/metric';
 import MetricChart from 'components/Charts/MetricChart';
 import { Subtitle1 } from 'components/Typography';
+import { County } from 'common/locations';
 
 //TODO (chelsi): Use Projections.hasMetric() helper to get rid of the check for props.data
 
 function ChartBlock(props: {
   chartRef: React.RefObject<HTMLDivElement>;
   isMobile: Boolean;
-  shareButtonProps: { [key: string]: any };
+  county: County | undefined;
+  stats: any;
   metric: Metric;
   projections: Projections;
   stateId: string;
+  countyId: string | undefined;
 }) {
-  const { projections, metric, isMobile } = props;
+  const {
+    projections,
+    metric,
+    isMobile,
+    county,
+    stats,
+    stateId,
+    countyId,
+  } = props;
   const projection: Projection = projections.primary;
 
   const showBetaTag =
@@ -43,7 +54,14 @@ function ChartBlock(props: {
           {showBetaTag && <BetaTag>Beta</BetaTag>}
         </ChartHeader>
         {hasMetric && !isMobile && (
-          <ShareButtons chartIdentifier={metric} {...props.shareButtonProps} />
+          <ShareButtons
+            chartIdentifier={metric}
+            stats={stats}
+            isMobile={isMobile}
+            stateId={stateId}
+            county={county}
+            countyId={countyId}
+          />
         )}
       </ChartHeaderWrapper>
       <Subtitle1>{projection.locationName}</Subtitle1>
@@ -51,7 +69,14 @@ function ChartBlock(props: {
         {getMetricStatusText(metric, projections)}
       </ChartDescription>
       {hasMetric && isMobile && (
-        <ShareButtons chartIdentifier={metric} {...props.shareButtonProps} />
+        <ShareButtons
+          chartIdentifier={metric}
+          stats={stats}
+          isMobile={isMobile}
+          stateId={stateId}
+          county={county}
+          countyId={countyId}
+        />
       )}
       {hasMetric && (
         <>
