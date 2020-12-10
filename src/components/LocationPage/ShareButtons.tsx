@@ -15,6 +15,7 @@ import ShareImageUrlJSON from 'assets/data/share_images_url.json';
 import * as urls from 'common/urls';
 import moment from 'moment';
 import { County, Region, State } from 'common/regions';
+import { fail } from 'common/utils';
 
 const getShareImageUrl = (region: Region, chartIdentifier: number): string => {
   const imageBaseUrl = ShareImageUrlJSON.share_image_url;
@@ -31,9 +32,7 @@ const getShareImageUrl = (region: Region, chartIdentifier: number): string => {
       `states/${state.stateCode.toLowerCase()}/chart/${chartIdentifier}/export.png`
     );
   }
-
-  // TODO: AHHHHHHh
-  return '';
+  fail('Unsupported region');
 };
 
 interface InnerContentProps {
