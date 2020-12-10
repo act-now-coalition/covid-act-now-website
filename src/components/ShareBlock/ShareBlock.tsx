@@ -29,6 +29,8 @@ import {
 } from './ShareBlock.style';
 import { trackShare } from 'components/Analytics';
 import { Region } from 'common/regions';
+import { STATES } from 'common';
+import { matchPath, useLocation } from 'react-router';
 
 const ShareBlock = ({
   region,
@@ -45,15 +47,26 @@ const ShareBlock = ({
   projections?: Projections;
   stats?: { [key: string]: number | null };
 }) => {
+  const locationPath = useLocation();
   const url = urls.addSharingId(shareURL || 'https://covidactnow.org/');
   const quote =
     shareQuote ||
     'I’m keeping track of the latest COVID data and risk levels with @CovidActNow. What does your community look like?';
   const hashtag = 'COVIDActNow';
 
-  // I think this is all it does? not sure why it needs to be a projections route
-  // specifically
-  const isMatchingProjectionsRoute = region ? true : false;
+  const isMatchingProjectionsRoute = matchPath<{
+    id: keyof typeof STATES;
+    county?: string;
+  }>(locationPath.pathname, {
+    path: [
+      '/us/:stateId',
+      '/us/:stateId/county/:countyId',
+      '/embed/us/:stateId',
+      '/embed/us/:stateId/county/:countyId',
+    ],
+    exact: true,
+    strict: false,
+  });
 
   return (
     <ShareContainer>
@@ -72,8 +85,7 @@ const ShareBlock = ({
               We'll email you when your state or county sees a significant
               change in one of their metrics and overall risk score.
             </ShareInstructionBody>
-            {/* TODO: Add region here once auto complete is fixed */}
-            <Newsletter />
+            <Newsletter region={region} />
           </NewsletterTextArea>
         </ShareRowContentArea>
       </ShareRow>
