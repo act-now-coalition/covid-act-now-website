@@ -12,7 +12,7 @@ import { AggregateRegionSummaryWithTimeseries } from './schema/AggregateRegionSu
 import { APIRegionSubPath } from '../common/utils/model';
 import { fail, assert } from 'common/utils';
 import fetch from 'node-fetch';
-import { County, Region, State } from 'common/regions';
+import { County, MetroArea, Region, State } from 'common/regions';
 
 export const SNAPSHOT_URL = DataUrlJson.data_url;
 
@@ -60,6 +60,10 @@ export class Api {
     } else if (region instanceof County) {
       return await this.fetchApiJson<RegionSummaryWithTimeseries>(
         `county/${region.fipsCode}.timeseries.json`,
+      );
+    } else if (region instanceof MetroArea) {
+      return await this.fetchApiJson<RegionSummaryWithTimeseries>(
+        `cbsa/${region.fipsCode}.timeseries.json`,
       );
     } else {
       fail('Unknown region type: ' + region);

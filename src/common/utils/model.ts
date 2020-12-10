@@ -11,6 +11,7 @@ import { fail } from 'common/utils';
 export enum APIRegionSubPath {
   COUNTIES = 'counties',
   STATES = 'states',
+  CBSAS = 'cbsas',
 }
 
 const cachedProjections: { [key: string]: Promise<Projections> } = {};
@@ -88,6 +89,30 @@ export function fetchAllCountyProjections(snapshotUrl: string | null = null) {
   const key = snapshotUrl || 'null';
   cachedCountiesProjections[key] = cachedCountiesProjections[key] || fetch();
   return cachedCountiesProjections[key];
+}
+
+/** Returns an array of `Projections` instances for all counties. */
+const cachedMetroProjections: { [key: string]: Promise<Projections[]> } = {};
+export function fetchAllMetroProjections(snapshotUrl: string | null = null) {
+  snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
+  async function fetch() {
+    const all = await new Api(snapshotUrl).fetchAggregatedSummaryWithTimeseries(
+      APIRegionSubPath.CBSAS,
+    );
+    return all
+      .filter(
+        summaryWithTimeseries =>
+          regions.findByFipsCode(summaryWithTimeseries.fips) !== null,
+      )
+      .map(summaryWithTimeseries => {
+        const region = regions.findByFipsCode(summaryWithTimeseries.fips);
+        assert(region, 'Failed to find region ' + summaryWithTimeseries.fips);
+        return new Projections(summaryWithTimeseries, region);
+      });
+  }
+  const key = snapshotUrl || 'null';
+  cachedMetroProjections[key] = cachedMetroProjections[key] || fetch();
+  return cachedMetroProjections[key];
 }
 
 export function useProjectionsFromRegion(region: Region | null) {
