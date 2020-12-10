@@ -2,14 +2,12 @@ import React, { FunctionComponent } from 'react';
 import Map from 'components/Map/Map';
 import CountyMap from 'components/CountyMap/CountyMap';
 import { MAP_FILTERS } from 'screens/LocationPage/Enums/MapFilterEnums';
-import { Projections } from 'common/models/Projections';
 import * as Styles from './MiniMap.style';
-import { County } from 'common/locations';
+import { getStateCode, getStateName, Region } from 'common/regions';
+import { assert } from 'common/utils';
 
 interface MiniMapProperties {
-  projections: Projections;
-  stateId: string;
-  selectedCounty: County | undefined;
+  region: Region;
   mobileMenuOpen: boolean;
   setMobileMenuOpen: (input: boolean) => void;
   mapOption: string;
@@ -21,18 +19,19 @@ interface MiniMapProperties {
  * to set the selected MobileMenu and map options as well
  */
 const MiniMap: FunctionComponent<MiniMapProperties> = ({
-  projections,
-  stateId,
-  selectedCounty,
+  region,
   mobileMenuOpen,
   setMobileMenuOpen,
   mapOption,
   setMapOption,
 }) => {
-  const showState = stateId !== MAP_FILTERS.DC;
-  const { stateName } = projections;
+  const stateCode = getStateCode(region);
+  const stateName = getStateName(region);
+  assert(stateName);
+  assert(stateCode);
+  const showState = stateCode !== MAP_FILTERS.DC;
 
-  const onSelectCounty = (fullFips: string) => {
+  const onSelectCounty = () => {
     setMobileMenuOpen(false);
   };
 
@@ -67,10 +66,7 @@ const MiniMap: FunctionComponent<MiniMapProperties> = ({
         {/* State Map */}
         {mapOption === MAP_FILTERS.STATE && (
           <Styles.StateMapContainer>
-            <CountyMap
-              selectedCounty={selectedCounty}
-              setSelectedCounty={onSelectCounty}
-            />
+            <CountyMap region={region} setSelectedCounty={onSelectCounty} />
           </Styles.StateMapContainer>
         )}
       </Styles.MapContainer>
