@@ -67,6 +67,11 @@ export default function App() {
               />
               <Route exact path="/donate" component={Donate} />
 
+              <Route
+                exact
+                path="/us/metro/:metroAreaUrlSegment"
+                component={LocationPage}
+              />
               <Route exact path="/us/:stateId" component={LocationPage} />
               <Route
                 exact

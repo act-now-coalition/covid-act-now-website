@@ -2,19 +2,37 @@ import React from 'react';
 import { useParams, Redirect } from 'react-router-dom';
 import regions, { RegionContext } from 'common/regions';
 import LocationPage from './LocationPage';
+import RegionPage from './RegionPage';
 
 interface LocationPageUrlParams {
-  stateId: string;
+  stateId: string | undefined;
   countyId: string | undefined;
+  metroAreaUrlSegment: string | undefined;
 }
 
 const LocationRouter: React.FC = () => {
-  let { stateId, countyId } = useParams<LocationPageUrlParams>();
+  let { stateId, countyId, metroAreaUrlSegment } = useParams<
+    LocationPageUrlParams
+  >();
 
-  const state = regions.findStateByUrlParams(stateId);
-  const county = countyId
-    ? regions.findCountyByUrlParams(stateId, countyId)
+  const state = stateId ? regions.findStateByUrlParams(stateId) : null;
+  const county =
+    stateId && countyId
+      ? regions.findCountyByUrlParams(stateId, countyId)
+      : null;
+
+  const metroArea = metroAreaUrlSegment
+    ? regions.findMetroAreaByUrlParams(metroAreaUrlSegment)
     : null;
+
+  if (metroArea) {
+    return (
+      <RegionContext.Provider value={metroArea}>
+        <RegionPage region={metroArea} />
+      </RegionContext.Provider>
+    );
+  }
+
   const region = county || state;
 
   if (!region) {
