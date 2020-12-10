@@ -87,6 +87,11 @@
       "image": "/images_cms/naco-logo.png",
       "altText": "National Association of Counties Logo",
       "url": "https://www.naco.org/"
+    },
+    {
+      "altText": "Washington National Guard Logo",
+      "image": "/images_cms/washington-nationa-guard-logo-red.svg",
+      "url": "mil.wa.gov/national-guard"
     }
   ],
   "partnersHeader": "Who we work with",
