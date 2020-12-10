@@ -125,7 +125,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
     mainContent.recommendations,
   );
 
-  const recommendsShareUrl = getRecommendationsShareUrl(projections.region);
+  const recommendsShareUrl = getRecommendationsShareUrl(region);
 
   const alarmLevel = projections.getAlarmLevel();
   const recommendsShareQuote = getShareQuote(
