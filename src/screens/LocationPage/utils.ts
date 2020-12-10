@@ -5,7 +5,7 @@ import { Region, State, County } from 'common/regions';
 
 function locationName(region: Region) {
   if (region instanceof State) {
-    return `${region.name}, (${region.stateCode})`;
+    return `${region.name} (${region.stateCode})`;
   } else if (region instanceof County) {
     return `${region.fullName}, (${region.state.stateCode})`;
   } else {
