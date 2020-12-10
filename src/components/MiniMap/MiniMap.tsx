@@ -5,6 +5,8 @@ import { MAP_FILTERS } from 'screens/LocationPage/Enums/MapFilterEnums';
 import { Projections } from 'common/models/Projections';
 import * as Styles from './MiniMap.style';
 import { County } from 'common/locations';
+import { getStateName } from 'common/regions';
+import { assert } from 'common/utils';
 
 interface MiniMapProperties {
   projections: Projections;
@@ -30,7 +32,8 @@ const MiniMap: FunctionComponent<MiniMapProperties> = ({
   setMapOption,
 }) => {
   const showState = stateId !== MAP_FILTERS.DC;
-  const { stateName } = projections;
+  const stateName = getStateName(projections.region);
+  assert(stateName, 'MiniMap only works for regions with state');
 
   const onSelectCounty = (fullFips: string) => {
     setMobileMenuOpen(false);

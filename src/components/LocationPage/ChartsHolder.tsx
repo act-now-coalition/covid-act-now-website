@@ -24,7 +24,7 @@ import {
 } from 'common/utils/recommend';
 import { mainContent } from 'cms-content/recommendations';
 import { getRecommendationsShareUrl } from 'common/urls';
-import { Region, getStateCode, RegionType } from 'common/regions';
+import { Region, getStateCode, RegionType, getStateName } from 'common/regions';
 import { assert } from 'common/utils';
 import NoCountyDetail from './NoCountyDetail';
 
@@ -46,7 +46,9 @@ interface ChartsHolderProps {
 const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
   const projection = projections.primary;
   const stateCode = getStateCode(region);
+  const stateName = getStateName(region);
   assert(stateCode, 'Charts require a state right now');
+  assert(stateName, 'Charts require a state right now');
 
   const county = findCountyByFips(region.fipsCode);
 
@@ -175,7 +177,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
               isMobile={isMobile}
             />
             <CompareMain
-              stateName={projections.stateName}
+              stateName={stateName}
               county={county}
               locationsViewable={6}
               stateId={stateCode}
