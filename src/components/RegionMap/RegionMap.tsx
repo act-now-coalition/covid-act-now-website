@@ -1,27 +1,20 @@
 import React from 'react';
+import { uniq } from 'lodash';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import COUNTIES_JSON from 'components/Map/data/counties-small.json';
 import { geoBounds, geoCentroid, geoDistance } from 'd3-geo';
 import * as topojson from 'topojson-client';
 
-/**
- * The COUNTIES_JSON file contains geographies for counties, states and the
- * nation. The following variables simplify the object to contain either
- * state or county, not both (this might make parsing of the geographies faster
- * and reduce our bundle size a bit).
- */
-const geoCounties = {
-  ...COUNTIES_JSON,
-  objects: { counties: COUNTIES_JSON.objects.counties },
-};
-
 const RegionMap: React.FC<{
   height?: number;
   countyFipsList: string[];
 }> = ({ height = 600, countyFipsList }) => {
-  const countiesTopoJson = buildGeometry(countyFipsList);
+  const countiesTopoJson = buildCountyGeometries(countyFipsList);
   const width = (800 / 600) * height;
   const projectionConfig = getProjectionConfig(countiesTopoJson, width, height);
+
+  const stateFipsList = getStateFipsList(countyFipsList);
+  const statesTopoJson = buildStateGeometries(stateFipsList);
 
   return (
     <ComposableMap
@@ -29,7 +22,23 @@ const RegionMap: React.FC<{
       height={height}
       projectionConfig={projectionConfig}
     >
-      <Geographies geography={countiesTopoJson}>
+      <Geographies key="states" geography={statesTopoJson}>
+        {({ geographies }) =>
+          geographies.map(geo => {
+            return (
+              <Geography
+                key={geo.rsmKey}
+                geography={geo}
+                fill={'#ccc'}
+                strokeWidth={1}
+                stroke="white"
+                role="img"
+              />
+            );
+          })
+        }
+      </Geographies>
+      <Geographies key="counties" geography={countiesTopoJson}>
         {({ geographies }) =>
           geographies.map(geo => {
             return (
@@ -58,28 +67,42 @@ function getProjectionConfig(
     countiesTopoJson as any,
     countiesTopoJson.objects.counties as any,
   );
-
   const bounds = geoBounds(countiesGeoJson);
   const center = geoCentroid(countiesGeoJson);
   const distance = geoDistance(bounds[0], bounds[1]);
   const scale = (0.8 * Math.sqrt(height * height + width * width)) / distance;
-
   return { scale, center };
 }
 
-function buildGeometry(countyFipsList: string[]) {
-  const countyGeometries = geoCounties.objects.counties.geometries.filter(
+function buildCountyGeometries(countyFipsList: string[]) {
+  const countyGeometries = COUNTIES_JSON.objects.counties.geometries.filter(
     geoCounty => countyFipsList.includes(geoCounty.id),
   );
   return {
-    ...geoCounties,
+    ...COUNTIES_JSON,
     objects: {
       counties: {
-        ...geoCounties.objects.counties,
+        ...COUNTIES_JSON.objects.counties,
         geometries: countyGeometries,
       },
     },
   };
+}
+
+function buildStateGeometries(stateFipsList: string[]) {
+  const stateGeometries = COUNTIES_JSON.objects.states.geometries.filter(
+    geoState => stateFipsList.includes(geoState.id),
+  );
+  return {
+    ...COUNTIES_JSON,
+    objects: {
+      states: { ...COUNTIES_JSON.objects.states, geometries: stateGeometries },
+    },
+  };
+}
+
+function getStateFipsList(countyFipsList: string[]) {
+  return uniq(countyFipsList.map(countyFips => countyFips.substr(0, 2)));
 }
 
 export default RegionMap;
