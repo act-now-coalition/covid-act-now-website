@@ -33,6 +33,8 @@ import {
   storeSharedComponentParams,
   useSharedComponentParams,
 } from 'common/sharing';
+import regions from 'common/regions';
+import { assert } from 'common/utils';
 
 // For filters (0, 50, and 99 are numerical values required by MUI Slider component):
 const scopeValueMap = {
@@ -50,6 +52,7 @@ const CompareMain = (props: {
   stateId?: string;
 }) => {
   const tableRef = useRef<HTMLDivElement>(null);
+
   const scrollToCompare = useCallback(() => {
     const scrollOffset = props.isHomepage ? 75 : 165;
     // Note (Chelsi): short delay is needed to make scrollTo work
@@ -76,10 +79,16 @@ const CompareMain = (props: {
   // when generating compare share images.
   const [stateId, setStateId] = useState(props.stateId);
   const [county, setCounty] = useState(props.county);
-  const currentCounty = county && {
-    locationInfo: county,
-    metricsInfo: countySummary(county.full_fips_code),
-  };
+
+  let currentCounty;
+  if (county) {
+    const region = regions.findByFipsCode(county.full_fips_code);
+    assert(region, 'Missing region for county');
+    currentCounty = {
+      region: region,
+      metricsInfo: countySummary(county.full_fips_code),
+    };
+  }
 
   useEffect(() => {
     setStateId(props.stateId);

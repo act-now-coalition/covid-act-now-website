@@ -20,6 +20,6 @@ export function getLocationFipsCodesForExplore(numStates: number) {
   return chain(getAllStates())
     .sortBy(sortByCaseIncidenceDesc)
     .take(numStates)
-    .map(stateInfo => stateInfo.locationInfo.state_fips_code)
+    .map(stateInfo => stateInfo.region.fipsCode)
     .value();
 }

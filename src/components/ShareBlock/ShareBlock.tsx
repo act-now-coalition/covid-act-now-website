@@ -1,5 +1,4 @@
 import React from 'react';
-import { matchPath, useLocation } from 'react-router-dom';
 import {
   FacebookShareButton,
   TwitterShareButton,
@@ -28,20 +27,20 @@ import {
   SocialTextAreaWrapper,
   EmbedPrompt,
 } from './ShareBlock.style';
-import { STATES } from 'common';
 import { trackShare } from 'components/Analytics';
+import { Region } from 'common/regions';
+import { STATES } from 'common';
+import { matchPath, useLocation } from 'react-router';
 
 const ShareBlock = ({
-  stateId,
-  countyName,
+  region,
   shareQuote,
   shareURL,
   onClickEmbed,
   projections,
   stats,
 }: {
-  stateId?: string;
-  countyName?: String;
+  region?: Region;
   shareQuote?: string;
   shareURL?: string;
   onClickEmbed?: any;
@@ -49,7 +48,6 @@ const ShareBlock = ({
   stats?: { [key: string]: number | null };
 }) => {
   const locationPath = useLocation();
-
   const url = urls.addSharingId(shareURL || 'https://covidactnow.org/');
   const quote =
     shareQuote ||
@@ -87,7 +85,7 @@ const ShareBlock = ({
               We'll email you when your state or county sees a significant
               change in one of their metrics and overall risk score.
             </ShareInstructionBody>
-            <Newsletter county={countyName} stateId={stateId} />
+            <Newsletter region={region} />
           </NewsletterTextArea>
         </ShareRowContentArea>
       </ShareRow>
@@ -105,11 +103,7 @@ const ShareBlock = ({
                 and family.
               </ShareInstructionBody>
               <ShareButtonContainer reflow>
-                <StyledShareButton
-                  disableElevation
-                  variant="contained"
-                  color="#3b5998"
-                >
+                <StyledShareButton variant="contained" color="#3b5998">
                   <FacebookShareButton
                     url={url}
                     quote={quote}
@@ -125,11 +119,7 @@ const ShareBlock = ({
                     />
                   </FacebookShareButton>
                 </StyledShareButton>
-                <StyledShareButton
-                  disableElevation
-                  variant="contained"
-                  color="#00acee"
-                >
+                <StyledShareButton variant="contained" color="#00acee">
                   <TwitterShareButton
                     url={url}
                     title={quote}
@@ -146,11 +136,7 @@ const ShareBlock = ({
                     />
                   </TwitterShareButton>
                 </StyledShareButton>
-                <StyledShareButton
-                  disableElevation
-                  variant="contained"
-                  color="#007fb1"
-                >
+                <StyledShareButton variant="contained" color="#007fb1">
                   <LinkedinShareButton
                     url={url}
                     title={quote}
