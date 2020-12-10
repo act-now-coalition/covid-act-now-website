@@ -1,10 +1,6 @@
 import React from 'react';
-import { useParams, Redirect } from 'react-router-dom';
-import regions, {
-  RegionContext,
-  RegionType,
-  useRegionFromParams,
-} from 'common/regions';
+import { Redirect } from 'react-router-dom';
+import { RegionContext, RegionType, useRegionFromParams } from 'common/regions';
 import LocationPage from './LocationPage';
 import RegionPage from './RegionPage';
 
