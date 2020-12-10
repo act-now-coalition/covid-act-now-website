@@ -101,9 +101,6 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
   }, [chartId, metricRefs, isRecommendationsShareUrl]);
 
   const stats = projection ? projections.getMetricValues() : {};
-  const countyId =
-    region.regionType === RegionType.COUNTY ? region.urlSegment : undefined;
-
   const initialFipsList = useMemo(() => {
     return [projections.primary.fips];
   }, [projections.primary.fips]);
@@ -192,10 +189,8 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
                   projections={projections}
                   chartRef={metricRefs[metric]}
                   isMobile={isMobile}
-                  stateId={stateCode}
-                  county={county}
+                  region={region}
                   stats={stats}
-                  countyId={countyId}
                 />
               ))}
             </MainContentInner>
@@ -209,8 +204,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
           </ChartContentWrapper>
           <div ref={shareBlockRef} id="recommendationsTest">
             <ShareModelBlock
-              stateId={stateCode}
-              county={county}
+              region={region}
               projections={projections}
               stats={stats}
             />

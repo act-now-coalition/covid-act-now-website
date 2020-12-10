@@ -6,7 +6,6 @@ import {
   ChartHeaderWrapper,
 } from './ChartsHolder.style';
 import { Projections } from 'common/models/Projections';
-import { Projection } from 'common/models/Projection';
 import Disclaimer from 'components/Disclaimer/Disclaimer';
 import ShareButtons from 'components/LocationPage/ShareButtons';
 import {
@@ -16,30 +15,19 @@ import {
 } from 'common/metric';
 import MetricChart from 'components/Charts/MetricChart';
 import { Subtitle1 } from 'components/Typography';
-import { County } from 'common/locations';
+import { Region } from 'common/regions';
 
 //TODO (chelsi): Use Projections.hasMetric() helper to get rid of the check for props.data
 
 function ChartBlock(props: {
   chartRef: React.RefObject<HTMLDivElement>;
   isMobile: Boolean;
-  county: County | undefined;
+  region: Region;
   stats: any;
   metric: Metric;
   projections: Projections;
-  stateId: string;
-  countyId: string | undefined;
 }) {
-  const {
-    projections,
-    metric,
-    isMobile,
-    county,
-    stats,
-    stateId,
-    countyId,
-  } = props;
-  const projection: Projection = projections.primary;
+  const { projections, metric, isMobile, region, stats } = props;
 
   const showBetaTag =
     metric === Metric.HOSPITAL_USAGE || metric === Metric.CONTACT_TRACING;
@@ -56,26 +44,22 @@ function ChartBlock(props: {
         {hasMetric && !isMobile && (
           <ShareButtons
             chartIdentifier={metric}
+            region={region}
             stats={stats}
             isMobile={isMobile}
-            stateId={stateId}
-            county={county}
-            countyId={countyId}
           />
         )}
       </ChartHeaderWrapper>
-      <Subtitle1>{projection.locationName}</Subtitle1>
+      <Subtitle1>{region.fullName}</Subtitle1>
       <ChartDescription>
         {getMetricStatusText(metric, projections)}
       </ChartDescription>
       {hasMetric && isMobile && (
         <ShareButtons
           chartIdentifier={metric}
+          region={region}
           stats={stats}
           isMobile={isMobile}
-          stateId={stateId}
-          county={county}
-          countyId={countyId}
         />
       )}
       {hasMetric && (
