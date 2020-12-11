@@ -12,7 +12,7 @@ import {
 } from 'lodash';
 import { color } from 'd3-color';
 import { schemeCategory10 } from 'd3-scale-chromatic';
-import { fetchProjections } from 'common/utils/model';
+import { fetchProjectionsRegion } from 'common/utils/model';
 import { Column, DatasetId } from 'common/models/Projection';
 import {
   findLocationForFips,
@@ -21,7 +21,6 @@ import {
   isStateFips,
   Location,
   isState,
-  isCounty,
   belongsToState,
   getRelativeUrlForFips,
   AGGREGATED_LOCATIONS,
@@ -30,6 +29,8 @@ import { share_image_url } from 'assets/data/share_images_url.json';
 import { SeriesType, Series } from './interfaces';
 import { getAbbreviatedCounty } from '../../common/utils/compare';
 import AggregationsJSON from 'assets/data/aggregations.json';
+import regions from 'common/regions';
+import { assert } from 'common/utils';
 
 /** Common interface to represent real Projection objects as well as aggregated projections. */
 interface ProjectionLike {
@@ -479,9 +480,6 @@ export function getAutocompleteLocations(locationFips: string) {
  */
 const SERIES_COLORS = schemeCategory10;
 
-const getCountyForLocation = (location: Location) =>
-  isCounty(location) ? location : undefined;
-
 class AggregatedProjection implements ProjectionLike {
   totalPopulation: number;
 
@@ -519,10 +517,11 @@ async function getProjectionForLocation(
       (AggregationsJSON as any)[fullFips],
     );
   } else {
-    const projections = await fetchProjections(
-      location.state_code,
-      getCountyForLocation(location),
+    const region = regions.findByFipsCode(
+      location.full_fips_code || location.state_fips_code,
     );
+    assert(region, 'Failed to find location');
+    const projections = await fetchProjectionsRegion(region);
     return projections.primary;
   }
 }

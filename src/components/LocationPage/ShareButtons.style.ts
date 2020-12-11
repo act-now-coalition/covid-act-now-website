@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import palette from 'assets/theme/palette';
 import { StyledShareButtonStyles } from '../ShareBlock/ShareBlock.style';
 import { COLOR_MAP } from 'common/colors';
+import MuiCircularProgress from '@material-ui/core/CircularProgress';
 
 const WrapperStyles = css`
   display: block;
@@ -43,7 +44,10 @@ export const SaveOrShareContainer = styled.div`
   margin-left: auto;
 `;
 
-export const SaveOrShareButton = styled.div`
+export const SaveOrShareButton = styled.div<{
+  color?: string;
+  isLast?: boolean;
+}>`
   ${StyledShareButtonStyles};
   border-right: ${({ isLast }) =>
     !isLast && `1px solid ${COLOR_MAP.GRAY.LIGHT}`};
@@ -71,7 +75,7 @@ export const SocialButtonsContainer = styled.div`
   margin: 10px 0 0 auto;
 `;
 
-export const SocialShareButton = styled.div`
+export const SocialShareButton = styled.div<{ isLast?: boolean }>`
   ${StyledShareButtonStyles}
   border-right: ${({ isLast }) =>
     !isLast && `1px solid ${COLOR_MAP.GRAY.LIGHT}`};
@@ -118,3 +122,7 @@ export const ClickAwayWrapper = styled.div`
 `;
 
 export const SocialButtonsWrapper = styled.div``;
+
+export const CircularProgress = styled(MuiCircularProgress)`
+  color: ${COLOR_MAP.BLUE};
+`;
