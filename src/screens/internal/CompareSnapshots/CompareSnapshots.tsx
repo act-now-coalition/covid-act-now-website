@@ -28,7 +28,7 @@ import { SortType, ProjectionsPair } from 'common/models/ProjectionsPair';
 import { SNAPSHOT_URL, SnapshotVersion, Api } from 'api';
 import moment from 'moment';
 import { Level } from 'common/level';
-import { fetchSummaries } from 'common/location_summaries';
+import { fetchSummaries, SummariesMap } from 'common/location_summaries';
 import {
   snapshotFromUrl,
   fetchMasterSnapshotNumber,
@@ -403,6 +403,8 @@ function useProjectionsSet(
   const [projectionsSet, setProjectionsSet] = useState<ProjectionsSet>(
     new ProjectionsSet([]),
   );
+  const leftSummaries = useFetchSummaries(leftSnapshot);
+  const rightSummaries = useFetchSummaries(rightSnapshot);
   const [loadingText, setLoadingText] = useState('Loading...');
 
   useEffect(() => {
@@ -421,8 +423,16 @@ function useProjectionsSet(
         const topCounties = regions.topCountiesByPopulation(COUNTIES_LIMIT);
         setProjectionsSet(
           ProjectionsSet.fromProjections(
-            await fetchCountyProjections(leftSnapshot, topCounties),
-            await fetchCountyProjections(rightSnapshot, topCounties),
+            await fetchCountyProjections(
+              leftSnapshot,
+              topCounties,
+              leftSummaries,
+            ),
+            await fetchCountyProjections(
+              rightSnapshot,
+              topCounties,
+              rightSummaries,
+            ),
           ),
         );
       } else if (locations === Locations.TOP_COUNTIES_BY_DIFF) {
@@ -438,8 +448,16 @@ function useProjectionsSet(
           ).map(cd => cd.county);
           setProjectionsSet(
             ProjectionsSet.fromProjections(
-              await fetchCountyProjections(leftSnapshot, topCounties),
-              await fetchCountyProjections(rightSnapshot, topCounties),
+              await fetchCountyProjections(
+                leftSnapshot,
+                topCounties,
+                leftSummaries,
+              ),
+              await fetchCountyProjections(
+                rightSnapshot,
+                topCounties,
+                rightSummaries,
+              ),
             ),
           );
         } else {
@@ -475,10 +493,18 @@ function useProjectionsSet(
           );
 
           leftProjections = leftProjections.concat(
-            await fetchCountyProjections(leftSnapshot, interestingCounties),
+            await fetchCountyProjections(
+              leftSnapshot,
+              interestingCounties,
+              leftSummaries,
+            ),
           );
           rightProjections = rightProjections.concat(
-            await fetchCountyProjections(rightSnapshot, interestingCounties),
+            await fetchCountyProjections(
+              rightSnapshot,
+              interestingCounties,
+              rightSummaries,
+            ),
           );
           setProjectionsSet(
             ProjectionsSet.fromProjections(leftProjections, rightProjections),
@@ -490,7 +516,14 @@ function useProjectionsSet(
     }
 
     fetchData();
-  }, [leftSnapshot, rightSnapshot, locations, metric]);
+  }, [
+    leftSnapshot,
+    rightSnapshot,
+    locations,
+    metric,
+    leftSummaries,
+    rightSummaries,
+  ]);
 
   return { projectionsSet, loadingText };
 }
@@ -521,14 +554,35 @@ async function fetchInterestingCounties(
   ).map(cd => cd.county);
 }
 
+function useFetchSummaries(snapshotNumber: number): SummariesMap | null {
+  const [snapshot, setSnapshot] = useState<SummariesMap | null>(null);
+  useEffect(() => {
+    async function fetchData() {
+      setSnapshot(await fetchSummaries(snapshotNumber).catch(e => null));
+    }
+    fetchData();
+  }, [snapshotNumber]);
+
+  return snapshot;
+}
+
 function fetchCountyProjections(
   snapshotNumber: number,
   counties: Region[],
+  summaries: SummariesMap | null = null,
 ): Promise<Projections[]> {
+  const isCountyInSummary = (region: Region): boolean => {
+    if (!summaries) {
+      return true;
+    }
+    return summaries[region.fipsCode] !== undefined;
+  };
   return Promise.all(
-    counties.map(region =>
-      fetchProjectionsRegion(region, snapshotUrl(snapshotNumber)),
-    ),
+    counties
+      .filter(isCountyInSummary)
+      .map(region =>
+        fetchProjectionsRegion(region, snapshotUrl(snapshotNumber)),
+      ),
   );
 }
 
