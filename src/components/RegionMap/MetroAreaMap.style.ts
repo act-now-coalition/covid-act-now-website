@@ -32,6 +32,10 @@ export const MetroCounty = styled(GeoPath)<{
   fill: ${({ $locationSummary }) => getAlertColor($locationSummary)};
   stroke: #fff;
   stroke-width: 1;
+
+  &:hover {
+    fill-opacity: 0.4;
+  }
 `;
 
 function getAlertColor(locationSummary?: LocationSummary) {
