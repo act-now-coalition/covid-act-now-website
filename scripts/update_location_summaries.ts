@@ -86,8 +86,8 @@ async function buildSummaries(
     summaries[countyProjections.fips] = countyProjections.summary;
   }
 
-  for (const projection of allMetroProjections) {
-    summaries[projection.fips] = projection.summary;
+  for (const metroProjections of allMetroProjections) {
+    summaries[metroProjections.fips] = metroProjections.summary;
   }
 
   await fs.writeJson(`${OUTPUT_FOLDER}/summaries.json`, summaries);
