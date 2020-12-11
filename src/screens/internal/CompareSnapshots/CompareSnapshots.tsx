@@ -571,6 +571,9 @@ function fetchCountyProjections(
   counties: Region[],
   summaries: SummariesMap | null = null,
 ): Promise<Projections[]> {
+  // If a county is missing in a snapshot, `fetchProjectionsRegion` will fail
+  // an assertion. passing in the summaries map will let us check that the fips
+  // exists in the snapshot before attempting to fetch.
   const isCountyInSummary = (region: Region): boolean => {
     if (!summaries) {
       return true;
