@@ -133,8 +133,8 @@
         },
         {
           "questionId": "icu-headroom-sources",
-          "question": "What are your sources and methodology for outputting ICU headroom used?",
-          "answer": "We use several sources to create our ICU headroom used metric. We use COVID hospitalization data from the [Covid Tracking Project](https://covidtracking.com/data) at the state level. In most states, we have direct numbers for COVID patients in the ICU; for those where we don’t, we estimate ICU numbers from total COVID hospitalization numbers. At the county level, we scrape from official county-level dashboards where available, and disaggregate from the state-level numbers otherwise.\n\nWe get the total number of ICU beds and the expected number of beds occupied by non-COVID patients from state and county dashboards where available, and we rely on data provided by [Covid Care Map](https://www.covidcaremap.org/) when the data is unavailable. If you would like to learn more, check out [our data sources](https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit)."
+          "question": "What are your data sources for ICU headroom used?",
+          "answer": "For states, we use COVID ICU hospitalization and ICU capacity data directly from the [Department of Health and Human Services] (https://healthdata.gov/dataset/covid-19-estimated-patient-impact-and-hospital-capacity-state).\n\nFor counties, we scrape COVID hospitalizations from official county-level dashboards where available, and disaggregate from the state-level numbers otherwise. We rely on data provided by [Covid Care Map](https://www.covidcaremap.org/) for county level estimates of ICU beds and historical non-COVID ICU utilization rates.\n\nIf you would like to learn more, check out [our data sources](https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit)."
         },
         {
           "question": "How were the risk levels for ICU headroom used determined?",
