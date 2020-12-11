@@ -5,8 +5,7 @@ import { getStateName } from 'common/locations';
 import moment from 'moment';
 import { assert } from '.';
 import { getSnapshotUrlOverride } from './snapshots';
-import regions, { Region, getStateCode } from 'common/regions';
-import { fail } from 'common/utils';
+import regions, { Region } from 'common/regions';
 
 export enum APIRegionSubPath {
   COUNTIES = 'counties',
