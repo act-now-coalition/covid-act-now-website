@@ -149,8 +149,20 @@ function renderStatus(projections: Projections): React.ReactElement {
   );
 }
 
-function renderDisclaimer(): React.ReactElement {
-  return (
+function renderDisclaimer(projections: Projections): React.ReactElement {
+  return projections.fips.length === 2 ? (
+    <Fragment>
+      Raw data directly sourced from the{' '}
+      <ExternalLink href="https://healthdata.gov/dataset/covid-19-reported-patient-impact-and-hospital-capacity-state-timeseries">
+        Department of Health and Human Services (HHS)
+      </ExternalLink>
+      . Learn more about our{' '}
+      <ExternalLink href="https://covidactnow.org/covid-risk-levels-metrics#icu-headroom-used">
+        ICU Headroom methodology
+      </ExternalLink>
+      .
+    </Fragment>
+  ) : (
     <Fragment>
       <ExternalLink href="https://preventepidemics.org/wp-content/uploads/2020/04/COV020_WhenHowTightenFaucet_v3.pdf">
         Resolve to Save Lives
