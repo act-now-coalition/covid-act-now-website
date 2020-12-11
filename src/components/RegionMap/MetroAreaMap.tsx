@@ -25,10 +25,7 @@ const MetroAreaMap: React.FC<{
   const stateFipsList = getStateFipsList(countyFipsList);
   const statesTopoJson = buildStateGeometries(stateFipsList);
 
-  const onMouseEnter = (fipsCode: string) => {
-    setTooltipContent(getNameByFips(fipsCode));
-  };
-
+  const onMouseEnter = (content: string) => setTooltipContent(content);
   const onMouseLeave = () => setTooltipContent('');
 
   return (
@@ -42,38 +39,44 @@ const MetroAreaMap: React.FC<{
       >
         <Geographies key="states" geography={statesTopoJson}>
           {({ geographies }) =>
-            geographies.map(geo => (
-              <Link
-                key={geo.rsmKey}
-                to={getRelativeUrlByFips(geo.id)}
-                aria-label={getNameByFips(geo.id)}
-              >
-                <Styles.StateShape
+            geographies.map(geo => {
+              const region = regions.findByFipsCode(geo.id);
+              return (
+                <Link
                   key={geo.rsmKey}
-                  geography={geo}
-                  onMouseEnter={() => onMouseEnter(geo.id)}
-                  onMouseLeave={onMouseLeave}
-                />
-              </Link>
-            ))
+                  to={region?.relativeUrl || '/'}
+                  aria-label={region?.fullName || ''}
+                >
+                  <Styles.StateShape
+                    key={geo.rsmKey}
+                    geography={geo}
+                    onMouseEnter={() => onMouseEnter(region?.fullName || '')}
+                    onMouseLeave={onMouseLeave}
+                  />
+                </Link>
+              );
+            })
           }
         </Geographies>
         <Geographies key="counties" geography={countiesTopoJson}>
           {({ geographies }) =>
-            geographies.map(geo => (
-              <Link
-                key={geo.id}
-                to={getRelativeUrlByFips(geo.id)}
-                aria-label={getNameByFips(geo.id)}
-              >
-                <Styles.MetroCounty
-                  geography={geo}
-                  $locationSummary={LocationSummariesByFIPS[geo.id] || null}
-                  onMouseEnter={() => onMouseEnter(geo.id)}
-                  onMouseLeave={onMouseLeave}
-                />
-              </Link>
-            ))
+            geographies.map(geo => {
+              const region = regions.findByFipsCode(geo.id);
+              return (
+                <Link
+                  key={geo.id}
+                  to={region?.relativeUrl || '/'}
+                  aria-label={region?.fullName || ''}
+                >
+                  <Styles.MetroCounty
+                    geography={geo}
+                    $locationSummary={LocationSummariesByFIPS[geo.id] || null}
+                    onMouseEnter={() => onMouseEnter(region?.fullName || '')}
+                    onMouseLeave={onMouseLeave}
+                  />
+                </Link>
+              );
+            })
           }
         </Geographies>
         <Geographies key="state-borders" geography={statesTopoJson}>
@@ -105,11 +108,11 @@ function getProjectionConfig(
    * projection so the counties are centered and scaled correctly.
    *
    * We calculate the corners of the bounding box in geographic coordinates,
-   * and then the distance (in spherical coordinates) between the bottom left
-   * and top right corners of the bounding box.
+   * and then the horizontal and vertical distances (in latitude and longitude
+   * coordinates).
    *
-   * We calculate the scale by dividing the distance in pixels betwen the
-   * bottom left and top right corners of the SVG.
+   * We calculate the scale by dividing the distance in pixels by the
+   * geographic distance, and taking the smallest of both, with some padding.
    */
   const [bottomLeft, topRight] = geoBounds(countiesGeoJson);
   const [ax, ay] = bottomLeft;
@@ -145,16 +148,6 @@ function buildStateGeometries(stateFipsList: string[]) {
 
 function getStateFipsList(countyFipsList: string[]) {
   return uniq(countyFipsList.map(countyFips => countyFips.substr(0, 2)));
-}
-
-function getRelativeUrlByFips(fipsCode: string) {
-  const region = regions.findByFipsCode(fipsCode);
-  return region?.relativeUrl || '/';
-}
-
-function getNameByFips(fipsCode: string) {
-  const region = regions.findByFipsCode(fipsCode);
-  return region?.name || '';
 }
 
 export default MetroAreaMap;
