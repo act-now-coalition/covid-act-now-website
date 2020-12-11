@@ -34,7 +34,7 @@ const MetroAreaMap: React.FC<{
   return (
     <Styles.MapContainer>
       <ComposableMap
-        projection={'geoConicEqualArea'}
+        projection={'geoMercator'}
         height={height}
         width={width}
         projectionConfig={projectionConfig}
@@ -112,10 +112,14 @@ function getProjectionConfig(
    * bottom left and top right corners of the SVG.
    */
   const [bottomLeft, topRight] = geoBounds(countiesGeoJson);
+  const [ax, ay] = bottomLeft;
+  const [bx, by] = topRight;
   const center = geoCentroid(countiesGeoJson);
-  const distanceGeo = geoDistance(bottomLeft, topRight);
-  const distancePx = Math.sqrt(height * height + width * width);
-  return { scale: 0.8 * (distancePx / distanceGeo), center };
+  const distanceLongitude = geoDistance([ax, ay], [bx, ay]);
+  const distanceLatitude = geoDistance([ax, ay], [ax, by]);
+  const scale =
+    0.75 * Math.min(width / distanceLongitude, height / distanceLatitude);
+  return { scale, center };
 }
 
 function buildCountyGeometries(countyFipsList: string[]) {
@@ -132,15 +136,10 @@ function buildCountyGeometries(countyFipsList: string[]) {
 }
 
 function buildStateGeometries(stateFipsList: string[]) {
-  const objects = COUNTIES_JSON.objects;
-  const geometries = objects.states.geometries.filter(geoState =>
-    stateFipsList.includes(geoState.id),
-  );
+  const { objects } = COUNTIES_JSON;
   return {
     ...COUNTIES_JSON,
-    objects: {
-      states: { ...objects.states, geometries },
-    },
+    objects: { states: objects.states },
   };
 }
 

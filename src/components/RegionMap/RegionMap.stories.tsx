@@ -23,8 +23,8 @@ export const NYMetroArea = () => {
   );
 };
 
-export const FargoMetroArea = () => {
-  const metroArea = regions.findByFipsCode('22020') as MetroArea;
+export const BostonMetroArea = () => {
+  const metroArea = regions.findByFipsCode('14460') as MetroArea;
   return (
     <Container>
       <MetroAreaMap metroArea={metroArea} width={300} height={300} />
