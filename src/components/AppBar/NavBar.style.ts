@@ -10,6 +10,8 @@ import palette from 'assets/theme/palette';
 import { COLOR_MAP } from 'common/colors';
 import { mobileBreakpoint, smallPhoneBreakpoint } from 'assets/theme/sizes';
 
+const desktopNavHeight = 64;
+
 export const AppBar = styled(MuiAppBar)`
   border-bottom: solid 1px ${COLOR_MAP.LIGHTGRAY};
   background-color: white;
@@ -23,23 +25,30 @@ export const StyledMobileMenu = styled.nav`
 `;
 
 export const Toolbar = styled(MuiToolbar)`
-  min-height: 64px;
+  min-height: ${desktopNavHeight}px;
 `;
 
 export const TabStyle = css`
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   font-size: 1rem;
   font-weight: bold;
-  margin-left: ${theme.spacing(2)}px;
-  margin-right: ${theme.spacing(2)}px;
+  padding-left: ${theme.spacing(2)}px;
+  padding-right: ${theme.spacing(2)}px;
+
+  min-height: ${desktopNavHeight}px;
+  display: flex;
+  align-items: center;
 
   text-decoration: none;
   color: #000;
   border-bottom: solid 2px transparent;
 
+  &:hover {
+    color: ${palette.secondary.main};
+  }
+
   // NavLink injects the "active" class when the route is a match
   &.active {
-    color: ${palette.secondary.main};
     border-bottom: solid 2px ${palette.secondary.main};
   }
 `;
@@ -126,6 +135,7 @@ export const DesktopOnly = styled.div`
   @media (min-width: ${mobileBreakpoint}) {
     display: flex;
     align-items: center;
+    min-height: ${desktopNavHeight}px;
   }
 `;
 
