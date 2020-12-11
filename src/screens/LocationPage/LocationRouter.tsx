@@ -14,11 +14,7 @@ const LocationRouter: React.FC = () => {
   // TODO: We will centralize this, this is only used during development
   return (
     <RegionContext.Provider value={region}>
-      {region.regionType === RegionType.MSA ? (
-        <RegionPage region={region} />
-      ) : (
-        <LocationPage region={region} />
-      )}
+      <LocationPage region={region} />
     </RegionContext.Provider>
   );
 };

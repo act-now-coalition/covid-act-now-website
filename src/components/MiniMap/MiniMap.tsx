@@ -27,8 +27,6 @@ const MiniMap: FunctionComponent<MiniMapProperties> = ({
 }) => {
   const stateCode = getStateCode(region);
   const stateName = getStateName(region);
-  assert(stateName);
-  assert(stateCode);
   const showState = stateCode !== MAP_FILTERS.DC;
 
   const onSelectCounty = () => {
@@ -66,7 +64,7 @@ const MiniMap: FunctionComponent<MiniMapProperties> = ({
         {/* State Map */}
         {mapOption === MAP_FILTERS.STATE && (
           <Styles.StateMapContainer>
-            <CountyMap region={region} setSelectedCounty={onSelectCounty} />
+            {/* <CountyMap region={region} setSelectedCounty={onSelectCounty} /> */}
           </Styles.StateMapContainer>
         )}
       </Styles.MapContainer>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ShareBlock from './ShareBlock';
-import { County, Region, State } from 'common/regions';
+import { County, MetroArea, Region, State } from 'common/regions';
 
 import EmbedPreview from './EmbedPreview';
 import { Projections } from 'common/models/Projections';
@@ -55,7 +55,10 @@ function getUrlAndShareQuote(region?: Region) {
     const state = region as State;
     shareURL = `${BASE_SHARE_URL}/${state.urlSegment}`;
     displayName = state.fullName;
-  } else if (region) {
+  } else if (region instanceof MetroArea) {
+    shareURL = region.canonicalUrl;
+    displayName = region.fullName;
+  } else {
     fail('Unsupported region');
   }
 

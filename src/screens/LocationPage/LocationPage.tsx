@@ -20,7 +20,6 @@ function LocationPage({ region }: LocationPageProps) {
   let { chartId } = useParams<{ chartId: string }>();
 
   const stateCode = getStateCode(region);
-  assert(stateCode, 'Location Pages must have state codes');
 
   const [mapOption, setMapOption] = useState(
     stateCode === MAP_FILTERS.DC ? MAP_FILTERS.NATIONAL : MAP_FILTERS.STATE,

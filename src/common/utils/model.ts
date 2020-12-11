@@ -30,11 +30,6 @@ export function fetchProjectionsRegion(
       'Failed to fetch projections for ' + region,
     );
 
-    const stateCode = getStateCode(region);
-    if (!stateCode) {
-      fail('State code required');
-    }
-
     return new Projections(summaryWithTimeseries, region);
   }
 

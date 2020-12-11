@@ -47,8 +47,8 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
   const projection = projections.primary;
   const stateCode = getStateCode(region);
   const stateName = getStateName(region);
-  assert(stateCode, 'Charts require a state right now');
-  assert(stateName, 'Charts require a state right now');
+  // assert(stateCode, 'Charts require a state right now');
+  // assert(stateName, 'Charts require a state right now');
 
   const county = findCountyByFips(region.fipsCode);
 
@@ -145,74 +145,63 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
   // TODO(pablo): Create separate refs for signup and share
   return (
     <>
-      {!projection ? (
-        <NoCountyDetail
-          countyId={
-            region.regionType === RegionType.COUNTY ? region.urlSegment : ''
-          }
-          stateId={stateCode}
+      <ChartContentWrapper>
+        <LocationPageHeader
+          projections={projections}
+          stats={projections.getMetricValues()}
+          onMetricClick={metric => scrollTo(metricRefs[metric].current)}
+          onHeaderShareClick={() => scrollTo(shareBlockRef.current, -372)}
+          onHeaderSignupClick={() => scrollTo(shareBlockRef.current)}
+          onNewUpdateClick={() => scrollTo(exploreChartRef.current)}
+          isMobile={isMobile}
         />
-      ) : (
-        <>
-          <ChartContentWrapper>
-            <LocationPageHeader
-              projections={projections}
-              stats={projections.getMetricValues()}
-              onMetricClick={metric => scrollTo(metricRefs[metric].current)}
-              onHeaderShareClick={() => scrollTo(shareBlockRef.current, -372)}
-              onHeaderSignupClick={() => scrollTo(shareBlockRef.current)}
-              onNewUpdateClick={() => scrollTo(exploreChartRef.current)}
-              isMobile={isMobile}
-            />
-            <CompareMain
+        {/* <CompareMain
               stateName={stateName}
               county={county}
               locationsViewable={6}
               stateId={stateCode}
-            />
-            <MainContentInner>
-              <Recommend
-                introCopy={recommendationsIntro}
-                recommendations={recommendationsMainContent}
-                locationName={region.fullName}
-                shareUrl={recommendsShareUrl}
-                shareQuote={recommendsShareQuote}
-                recommendationsRef={recommendationsRef}
-                feedbackFormUrl={recommendationsFeedbackForm}
-                fedLevel={getFedLevel(projections.primary)}
-                harvardLevel={getHarvardLevel(projections.primary)}
-                harvardModalLocationCopy={recommendationsHarvardModalCopy}
-                fedModalLocationCopy={recommendationsFedModalCopy}
-              />
-              {ALL_METRICS.map(metric => (
-                <ChartBlock
-                  key={metric}
-                  metric={metric}
-                  projections={projections}
-                  chartRef={metricRefs[metric]}
-                  isMobile={isMobile}
-                  region={region}
-                  stats={stats}
-                />
-              ))}
-            </MainContentInner>
-            <MainContentInner ref={exploreChartRef} id="explore-chart">
-              <Explore
-                initialFipsList={initialFipsList}
-                title="Cases, Deaths, and Hospitalizations"
-                defaultMetric={defaultExploreMetric}
-              />
-            </MainContentInner>
-          </ChartContentWrapper>
-          <div ref={shareBlockRef} id="recommendationsTest">
-            <ShareModelBlock
-              region={region}
+            /> */}
+        <MainContentInner>
+          <Recommend
+            introCopy={recommendationsIntro}
+            recommendations={recommendationsMainContent}
+            locationName={region.fullName}
+            shareUrl={recommendsShareUrl}
+            shareQuote={recommendsShareQuote}
+            recommendationsRef={recommendationsRef}
+            feedbackFormUrl={recommendationsFeedbackForm}
+            fedLevel={getFedLevel(projections.primary)}
+            harvardLevel={getHarvardLevel(projections.primary)}
+            harvardModalLocationCopy={recommendationsHarvardModalCopy}
+            fedModalLocationCopy={recommendationsFedModalCopy}
+          />
+          {ALL_METRICS.map(metric => (
+            <ChartBlock
+              key={metric}
+              metric={metric}
               projections={projections}
+              chartRef={metricRefs[metric]}
+              isMobile={isMobile}
+              region={region}
               stats={stats}
             />
-          </div>
-        </>
-      )}
+          ))}
+        </MainContentInner>
+        <MainContentInner ref={exploreChartRef} id="explore-chart">
+          {/* <Explore
+            initialFipsList={initialFipsList}
+            title="Cases, Deaths, and Hospitalizations"
+            defaultMetric={defaultExploreMetric}
+          /> */}
+        </MainContentInner>
+      </ChartContentWrapper>
+      <div ref={shareBlockRef} id="recommendationsTest">
+        <ShareModelBlock
+          region={region}
+          projections={projections}
+          stats={stats}
+        />
+      </div>
     </>
   );
 };
