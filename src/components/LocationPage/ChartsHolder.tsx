@@ -189,15 +189,14 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
             />
           ))}
         </MainContentInner>
-        {stateCode && (
-          <MainContentInner ref={exploreChartRef} id="explore-chart">
-            <Explore
-              initialFipsList={initialFipsList}
-              title="Cases, Deaths, and Hospitalizations"
-              defaultMetric={defaultExploreMetric}
-            />
-          </MainContentInner>
-        )}
+        <MainContentInner ref={exploreChartRef} id="explore-chart">
+          <Explore
+            initialFipsList={initialFipsList}
+            title="Cases, Deaths, and Hospitalizations"
+            defaultMetric={defaultExploreMetric}
+            region={region}
+          />
+        </MainContentInner>
       </ChartContentWrapper>
       <div ref={shareBlockRef} id="recommendationsTest">
         <ShareModelBlock
