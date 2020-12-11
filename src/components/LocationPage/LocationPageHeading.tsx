@@ -17,7 +17,7 @@ const LocationPageHeading: React.FC<{ region: Region; isEmbed: boolean }> = ({
       </Fragment>
     );
   } else {
-    return null;
+    return <strong>{region.name}</strong>;
   }
 };
 
