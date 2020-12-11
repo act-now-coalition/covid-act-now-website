@@ -1,6 +1,7 @@
 import { sortBy, takeRight, values, Dictionary } from 'lodash';
 import { Region, County, State, MetroArea, FipsCode } from './types';
 import { statesByFips, countiesByFips, metroAreasByFips } from './regions_data';
+import { assert } from 'common/utils';
 
 // More NYC Borough logic.  This should be removed when
 // https://github.com/covid-projections/covid-projections/pull/2090 is merged.
@@ -49,6 +50,13 @@ class RegionDB {
   findByFipsCode(fipsCode: FipsCode): Region | null {
     const fips = replaceNYCBoroughFips(fipsCode);
     return this.regionsByFips[fips] || null;
+  }
+
+  findByFipsCodeStrict(fipsCode: FipsCode): Region {
+    const fips = replaceNYCBoroughFips(fipsCode);
+    const region = this.regionsByFips[fips];
+    assert(region, `Region unexpectedly not found for ${fipsCode}`);
+    return region;
   }
 
   findCountiesByStateCode(stateCode: string): County[] {
