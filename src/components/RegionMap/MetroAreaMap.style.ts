@@ -17,6 +17,9 @@ const GeoPath = styled(Geography).attrs(props => ({
 export const StateShape = styled(GeoPath)`
   fill: #ccc;
   stroke: none;
+  &:hover {
+    fill: #999;
+  }
 `;
 
 export const StateBorder = styled(GeoPath)`

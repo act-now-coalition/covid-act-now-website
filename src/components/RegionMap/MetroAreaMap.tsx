@@ -66,12 +66,12 @@ const MetroAreaMap: React.FC<{
                 <Link
                   key={geo.id}
                   to={region?.relativeUrl || '/'}
-                  aria-label={region?.fullName || ''}
+                  aria-label={region?.shortName || ''}
                 >
                   <Styles.MetroCounty
                     geography={geo}
                     $locationSummary={LocationSummariesByFIPS[geo.id] || null}
-                    onMouseEnter={() => onMouseEnter(region?.fullName || '')}
+                    onMouseEnter={() => onMouseEnter(region?.shortName || '')}
                     onMouseLeave={onMouseLeave}
                   />
                 </Link>
