@@ -58,7 +58,7 @@ function getUrlAndShareQuote(region?: Region) {
   } else if (region instanceof MetroArea) {
     shareURL = region.canonicalUrl;
     displayName = region.fullName;
-  } else {
+  } else if (region) {
     fail('Unsupported region');
   }
 
