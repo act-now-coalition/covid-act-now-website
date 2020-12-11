@@ -155,12 +155,14 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
           onNewUpdateClick={() => scrollTo(exploreChartRef.current)}
           isMobile={isMobile}
         />
-        {/* <CompareMain
-              stateName={stateName}
-              county={county}
-              locationsViewable={6}
-              stateId={stateCode}
-            /> */}
+        {stateCode && (
+          <CompareMain
+            stateName={stateName}
+            county={county}
+            locationsViewable={6}
+            stateId={stateCode}
+          />
+        )}
         <MainContentInner>
           <Recommend
             introCopy={recommendationsIntro}
@@ -187,13 +189,15 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
             />
           ))}
         </MainContentInner>
-        <MainContentInner ref={exploreChartRef} id="explore-chart">
-          {/* <Explore
-            initialFipsList={initialFipsList}
-            title="Cases, Deaths, and Hospitalizations"
-            defaultMetric={defaultExploreMetric}
-          /> */}
-        </MainContentInner>
+        {stateCode && (
+          <MainContentInner ref={exploreChartRef} id="explore-chart">
+            <Explore
+              initialFipsList={initialFipsList}
+              title="Cases, Deaths, and Hospitalizations"
+              defaultMetric={defaultExploreMetric}
+            />
+          </MainContentInner>
+        )}
       </ChartContentWrapper>
       <div ref={shareBlockRef} id="recommendationsTest">
         <ShareModelBlock
