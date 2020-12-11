@@ -31,6 +31,11 @@ export function countySummary(fips: string): LocationSummary | null {
   return LocationSummariesByFIPS[fips] || null;
 }
 
+// (todo chelsi: revisit this /any)
+export function countySummaryTest(fips: string): any {
+  return LocationSummariesByFIPS[fips] || null;
+}
+
 /**
  * A bit hacky, but this tries to fetch the summaries to match a given snapshot.
  */

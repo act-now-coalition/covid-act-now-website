@@ -1,77 +1,73 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState, Fragment } from 'react';
 import { Autocomplete } from '@material-ui/lab';
 import { createFilterOptions } from '@material-ui/lab/useAutocomplete';
 import TextField from '@material-ui/core/TextField';
-import { Location, getCanonicalUrl, State } from 'common/locations';
-import { StateItem, CountyItem } from 'components/MapSelectors/GlobalSelector';
-import { getAllCountiesOfState, getAllStates } from 'common/utils/compare';
+import { getFilterLimit } from './utils';
+import { RegionType, Region } from 'common/regions';
+import CountyMenuItem from './CountyMenuItem';
+import StateMenuItem from './StateMenuItem';
 
-// Used to match:
-function getLocationLabel(location: Location) {
-  return location.county
-    ? `${location.county}, ${location.state_code}`
-    : location.state;
+function getOptionSelected(option: any, selectedOption: any) {
+  return option.fipsCode === selectedOption.fipsCode;
 }
 
-const getFips = (location: Location) =>
-  location.full_fips_code || location.state_fips_code;
-
-const getOptionSelected = (option: Location, value: Location) => {
-  return getFips(option) === getFips(value);
-};
-
-const renderItem = (item: any) => {
-  if (item.county) {
-    return <CountyItem dataset={item} />;
+// (todo chelsi- maybe combine these menu items into 1)
+const renderMenuItem = (item: any) => {
+  switch (item.regionType) {
+    case RegionType.STATE:
+      return <StateMenuItem region={item} />;
+    case RegionType.COUNTY:
+      return <CountyMenuItem region={item} />;
   }
-  return <StateItem dataset={item} />;
 };
 
 const SearchAutocomplete = (props: {
-  locations: Location[];
-  state?: State;
+  locations: Region[];
+  region?: Region;
 }) => {
-  const { locations, state } = props;
+  const { locations, region } = props;
 
-  const [input, setInput] = useState('');
+  // const [input, setInput] = useState('');
+  // const [isZip, setIsZip] = useState(false);
+  // console.log('input', input);
+  // console.log('isZip', isZip);
+  // const onInputChange = (e: any, value: string) => {
+  //   setInput(value);
+  // };
 
-  /* 
-    Determines amount of locations that show in dropdown menu when clicking into searchbar.
-    If on homepage, should only show states.
-    If on location page, should only show counties within state.
-  */
-  const numCountiesInState =
-    state && getAllCountiesOfState(state.state_code).length;
-  const numStates = getAllStates().length;
-  const filterLimit = numCountiesInState || numStates;
+  function getOptionLabel(location: any) {
+    // if (location.zip_codes) {
+    //   location.zip_codes?.forEach((zip: string) => {
+    //     return zip;
+    //   });
+    // }
+    return location.name;
+  }
 
-  const history = useHistory();
-
-  const onSelect = (e: any, value: Location | null) => {
-    const locationUrl = value?.full_fips_code
-      ? `/${getCanonicalUrl(value.full_fips_code)}`
-      : '/';
-    history.push(locationUrl);
-  };
-
-  const onInputChange = (e: any, value: string) => {
-    setInput(value);
+  // todo: theres prob a better/built-in way to grab the county url:
+  const onSelect = (e: any, value: any) => {
+    if (value.regionType === RegionType.STATE) {
+      const stateUrl = value.canonicalUrl;
+      window.location.href = stateUrl;
+    } else if (value.regionType === RegionType.COUNTY) {
+      const countyUrl = `${value.state.canonicalUrl}/county/${value.urlSegment}`;
+      window.location.href = countyUrl;
+    }
   };
 
   return (
     <Autocomplete
       noOptionsText="No location found"
       options={locations}
-      getOptionLabel={getLocationLabel}
-      onInputChange={onInputChange} // grab input + check if zip?
+      getOptionLabel={getOptionLabel}
+      // onInputChange={onInputChange}
       disableListWrap
       disableClearable
       onChange={onSelect}
       getOptionSelected={getOptionSelected}
       filterOptions={createFilterOptions({
         matchFrom: 'start',
-        limit: filterLimit,
+        limit: getFilterLimit(region),
       })}
       renderInput={params => (
         <TextField
@@ -81,7 +77,7 @@ const SearchAutocomplete = (props: {
         />
       )}
       renderOption={option => {
-        return <React.Fragment>{renderItem(option)}</React.Fragment>;
+        return <Fragment>{renderMenuItem(option)}</Fragment>;
       }}
     />
   );

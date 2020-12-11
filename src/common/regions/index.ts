@@ -30,7 +30,8 @@ export abstract class Region {
   abstract get relativeUrl(): string;
 
   get canonicalUrl() {
-    return urlJoin('https://covidactnow.org', this.relativeUrl);
+    // return urlJoin('https://covidactnow.org', this.relativeUrl);
+    return urlJoin(window.location.origin, this.relativeUrl);
   }
 }
 

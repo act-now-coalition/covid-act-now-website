@@ -6,7 +6,6 @@ import { assert } from './utils';
 import countyAdjacencyMsa from './data/county_adjacency_msa.json';
 import collegesByFips from './data/colleges_by_fips.json';
 import { REVERSED_STATES, STATES as STATES_MAP } from 'common';
-import { countyFipsToZips } from 'components/MapSelectors/datasets';
 // import CountyMap from 'components/CountyMap/CountyMap';
 
 export interface AdjacencyData {
@@ -299,47 +298,4 @@ export function findFipsByUrlParams(
       ? countyOption.full_fips_code
       : state && state.state_fips_code;
   }
-}
-
-function getCountyZips(countyFips: string): string[] {
-  return countyFipsToZips[countyFips];
-}
-
-export function getSearchAutocompleteLocations(state?: State) {
-  const allLocations = getLocationNames();
-  console.log('allLocations', allLocations);
-  const [states, allCounties] = partition(allLocations, isState);
-
-  const sortedStates = sortBy(states, location => location.state);
-  const sortedCounties = sortBy(allCounties, location => location.county);
-
-  // Adds 'zip_codes' property to county obj (containing array of zip codes within county fips)
-  const sortedCountiesWithZips = sortedCounties.map((county: any) => {
-    if (county.full_fips_code)
-      return {
-        ...county,
-        zip_codes: getCountyZips(county.full_fips_code),
-      };
-  });
-
-  if (!state) {
-    return [...sortedStates, ...sortedCountiesWithZips];
-  }
-
-  const currentState = findLocationForFips(state.state_fips_code);
-  const [stateCounties, otherCounties] = partition(
-    sortedCountiesWithZips,
-    county => belongsToState(county, currentState.state_fips_code),
-  );
-
-  const sortedStateCounties = sortBy(
-    stateCounties,
-    location => location.county,
-  );
-  const sortedOtherCounties = sortBy(
-    otherCounties,
-    location => location.county,
-  );
-
-  return [...sortedStateCounties, ...sortedStates, ...sortedOtherCounties];
 }

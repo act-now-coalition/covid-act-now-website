@@ -15,6 +15,8 @@ import {
   getCanonicalUrl,
 } from 'common/locations';
 
+import { useLocationPageRegion } from 'common/regions/region_hooks';
+
 function LocationPage() {
   let { stateId, countyId, chartId } = useParams();
 
@@ -34,6 +36,8 @@ function LocationPage() {
   }, [countyOption]);
 
   const projections = useProjections(stateCode, selectedCounty);
+
+  const region = useLocationPageRegion();
 
   // Projections haven't loaded yet
   // If a new county has just been selected, we may not have projections
@@ -63,6 +67,7 @@ function LocationPage() {
           mobileMenuOpen={mobileMenuOpen}
           setMobileMenuOpen={setMobileMenuOpen}
           state={state}
+          region={region}
         />
         <ChartsHolder
           projections={projections}

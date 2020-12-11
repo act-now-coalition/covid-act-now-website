@@ -30,10 +30,8 @@ import { getLocationFipsCodesForExplore } from './utils';
 import { ThirdWaveBanner } from 'components/Banner';
 import SearchAutocomplete from 'components/Search';
 import { ParentSize } from '@vx/responsive';
-import { getSearchAutocompleteLocations } from 'common/locations';
-// import { GlobalSelector } from 'components/MapSelectors/MapSelectors';
-// import { useHistory } from 'react-router-dom';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
+import { getSearchAutocompleteLocations } from 'components/Search/utils';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -63,21 +61,6 @@ export default function HomePage() {
       scrollTo(shareBlockRef.current);
     }
   }, [location.pathname, shareBlockRef]);
-
-  // @ts-ignore TODO(aj): remove when converting MapSelectors
-
-  // const history = useHistory();
-
-  // const handleSelectChange = option => {
-  //   let route = `/us/${option.state_code.toLowerCase()}`;
-
-  //   if (option.county_url_name) {
-  //     route = `${route}/county/${option.county_url_name}`;
-  //   }
-
-  //   history.push(route);
-  //   window.scrollTo(0, 0);
-  // };
 
   const [initialFipsList] = useState(getLocationFipsCodesForExplore(5));
 
@@ -119,10 +102,6 @@ export default function HomePage() {
                   justify="flex-end"
                 >
                   <SelectorWrapper>
-                    {/* <GlobalSelector
-                  handleChange={handleSelectChange}
-                  extendRight={undefined}
-                /> */}
                     <ParentSize>
                       {() => (
                         <SearchAutocomplete
@@ -154,7 +133,6 @@ export default function HomePage() {
               )}
             </Grid>
             <Map hideLegend showCounties={showCounties} />
-            {/* >>>>>>> develop */}
             {isMobile && <HomePageThermometer />}
             <CompareMain locationsViewable={8} isHomepage />
             <Section ref={exploreSectionRef}>
