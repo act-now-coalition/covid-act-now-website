@@ -5,12 +5,12 @@ import { getStateName } from 'common/locations';
 import moment from 'moment';
 import { assert } from '.';
 import { getSnapshotUrlOverride } from './snapshots';
-import regions, { Region, getStateCode } from 'common/regions';
-import { fail } from 'common/utils';
+import regions, { Region } from 'common/regions';
 
 export enum APIRegionSubPath {
   COUNTIES = 'counties',
   STATES = 'states',
+  CBSAS = 'cbsas',
 }
 
 const cachedProjections: { [key: string]: Promise<Projections> } = {};
@@ -28,11 +28,6 @@ export function fetchProjectionsRegion(
       summaryWithTimeseries != null,
       'Failed to fetch projections for ' + region,
     );
-
-    const stateCode = getStateCode(region);
-    if (!stateCode) {
-      fail('State code required');
-    }
 
     return new Projections(summaryWithTimeseries, region);
   }
@@ -88,6 +83,32 @@ export function fetchAllCountyProjections(snapshotUrl: string | null = null) {
   const key = snapshotUrl || 'null';
   cachedCountiesProjections[key] = cachedCountiesProjections[key] || fetch();
   return cachedCountiesProjections[key];
+}
+
+/** Returns an array of `Projections` instances for all counties. */
+const cachedMetroProjections: { [key: string]: Promise<Projections[]> } = {};
+export function fetchAllMetroProjections(snapshotUrl: string | null = null) {
+  snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
+  async function fetch() {
+    const all = await new Api(snapshotUrl).fetchAggregatedSummaryWithTimeseries(
+      APIRegionSubPath.CBSAS,
+    );
+    return all
+      .filter(
+        summaryWithTimeseries =>
+          // The cbsas endpoint will return all CBSAs, both metro and micro. We want to
+          // Only include summaries for metros (those that are included in `regions`).
+          regions.findByFipsCode(summaryWithTimeseries.fips) !== null,
+      )
+      .map(summaryWithTimeseries => {
+        const region = regions.findByFipsCode(summaryWithTimeseries.fips);
+        assert(region, 'Failed to find region ' + summaryWithTimeseries.fips);
+        return new Projections(summaryWithTimeseries, region);
+      });
+  }
+  const key = snapshotUrl || 'null';
+  cachedMetroProjections[key] = cachedMetroProjections[key] || fetch();
+  return cachedMetroProjections[key];
 }
 
 export function useProjectionsFromRegion(region: Region | null) {
