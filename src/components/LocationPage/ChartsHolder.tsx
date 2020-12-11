@@ -155,7 +155,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
           onNewUpdateClick={() => scrollTo(exploreChartRef.current)}
           isMobile={isMobile}
         />
-        {stateCode && (
+        {stateName && stateCode && (
           <CompareMain
             stateName={stateName}
             county={county}
