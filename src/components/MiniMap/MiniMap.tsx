@@ -3,8 +3,8 @@ import Map from 'components/Map/Map';
 import CountyMap from 'components/CountyMap/CountyMap';
 import { MAP_FILTERS } from 'screens/LocationPage/Enums/MapFilterEnums';
 import * as Styles from './MiniMap.style';
-import { getStateCode, getStateName, Region } from 'common/regions';
-import { assert } from 'common/utils';
+import { Region } from 'common/regions';
+import RegionMap from 'components/RegionMap';
 
 interface MiniMapProperties {
   region: Region;
@@ -25,15 +25,11 @@ const MiniMap: FunctionComponent<MiniMapProperties> = ({
   mapOption,
   setMapOption,
 }) => {
-  const stateCode = getStateCode(region);
-  const stateName = getStateName(region);
-  assert(stateName);
-  assert(stateCode);
-  const showState = stateCode !== MAP_FILTERS.DC;
-
   const onSelectCounty = () => {
     setMobileMenuOpen(false);
   };
+
+  const showState = region.fipsCode !== '11';
 
   return (
     <Styles.Container mobileMenuOpen={mobileMenuOpen}>
@@ -43,7 +39,7 @@ const MiniMap: FunctionComponent<MiniMapProperties> = ({
             selected={mapOption === MAP_FILTERS.STATE}
             onClick={() => setMapOption(MAP_FILTERS.STATE)}
           >
-            {stateName}
+            {region.abbreviation}
           </Styles.TabItem>
         )}
         <Styles.TabItem
@@ -67,6 +63,11 @@ const MiniMap: FunctionComponent<MiniMapProperties> = ({
         {mapOption === MAP_FILTERS.STATE && (
           <Styles.StateMapContainer>
             <CountyMap region={region} setSelectedCounty={onSelectCounty} />
+          </Styles.StateMapContainer>
+        )}
+        {mapOption === MAP_FILTERS.MSA && (
+          <Styles.StateMapContainer>
+            <RegionMap region={region} />
           </Styles.StateMapContainer>
         )}
       </Styles.MapContainer>
