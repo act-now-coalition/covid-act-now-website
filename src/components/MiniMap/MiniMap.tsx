@@ -29,7 +29,7 @@ const MiniMap: FunctionComponent<MiniMapProperties> = ({
     setMobileMenuOpen(false);
   };
 
-  const showState = region.fipsCode !== '11';
+  const showState = region.fipsCode.startsWith('11');
 
   return (
     <Styles.Container mobileMenuOpen={mobileMenuOpen}>
@@ -62,7 +62,7 @@ const MiniMap: FunctionComponent<MiniMapProperties> = ({
         {/* State Map */}
         {mapOption === MAP_FILTERS.STATE && (
           <Styles.StateMapContainer>
-            {/* <CountyMap region={region} setSelectedCounty={onSelectCounty} /> */}
+            <CountyMap region={region} setSelectedCounty={onSelectCounty} />
           </Styles.StateMapContainer>
         )}
         {mapOption === MAP_FILTERS.MSA && (

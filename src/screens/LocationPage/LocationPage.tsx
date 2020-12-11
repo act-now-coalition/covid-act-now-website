@@ -9,7 +9,7 @@ import ChartsHolder from 'components/LocationPage/ChartsHolder';
 import { LoadingScreen } from './LocationPage.style';
 import { useProjectionsFromRegion } from 'common/utils/model';
 import { getPageTitle, getPageDescription } from './utils';
-import { getStateCode, Region } from 'common/regions';
+import { getStateCode, Region, RegionType } from 'common/regions';
 import { assert } from 'common/utils';
 
 interface LocationPageProps {
@@ -20,10 +20,22 @@ function LocationPage({ region }: LocationPageProps) {
   let { chartId } = useParams<{ chartId: string }>();
 
   const stateCode = getStateCode(region);
-
-  const [mapOption, setMapOption] = useState(
-    stateCode === MAP_FILTERS.DC ? MAP_FILTERS.NATIONAL : MAP_FILTERS.STATE,
-  );
+  const getDefaultMapOption = (region: Region) => {
+    if (stateCode === MAP_FILTERS.DC) {
+      return MAP_FILTERS.NATIONAL;
+    }
+    switch (region.regionType) {
+      case RegionType.COUNTY:
+        return MAP_FILTERS.STATE;
+      case RegionType.STATE:
+        return MAP_FILTERS.STATE;
+      case RegionType.MSA:
+        return MAP_FILTERS.MSA;
+      default:
+        return MAP_FILTERS.NATIONAL;
+    }
+  };
+  const [mapOption, setMapOption] = useState(getDefaultMapOption(region));
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const projections = useProjectionsFromRegion(region);
 

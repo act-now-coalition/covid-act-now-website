@@ -121,7 +121,7 @@ function getProjectionConfig(
   const distanceLongitude = geoDistance([ax, ay], [bx, ay]);
   const distanceLatitude = geoDistance([ax, ay], [ax, by]);
   const scale =
-    0.75 * Math.min(width / distanceLongitude, height / distanceLatitude);
+    0.4 * Math.min(width / distanceLongitude, height / distanceLatitude);
   return { scale, center };
 }
 
