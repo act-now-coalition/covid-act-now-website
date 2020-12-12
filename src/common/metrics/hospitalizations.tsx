@@ -9,7 +9,6 @@ import { NonCovidPatientsMethod } from 'common/models/ICUHeadroom';
 import { MetricDefinition } from './interfaces';
 import ExternalLink from '../../components/ExternalLink';
 import Thermometer from 'components/Thermometer';
-import { RegionType } from 'common/regions';
 
 const METRIC_NAME = 'ICU headroom used';
 
@@ -151,7 +150,9 @@ function renderStatus(projections: Projections): React.ReactElement {
 }
 
 function renderDisclaimer(projections: Projections): React.ReactElement {
-  if (projections.region.regionType === RegionType.STATE) {
+  // TODO(michael): Use regionType. But that's causing `yarn
+  // generate-index-pages` to fail due to circular dependency (I think).
+  if (projections.fips.length === 2) {
     return (
       <Fragment>
         Raw data directly sourced from the{' '}
