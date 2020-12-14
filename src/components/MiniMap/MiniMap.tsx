@@ -3,7 +3,7 @@ import Map from 'components/Map/Map';
 import CountyMap from 'components/CountyMap/CountyMap';
 import { MAP_FILTERS } from 'screens/LocationPage/Enums/MapFilterEnums';
 import * as Styles from './MiniMap.style';
-import { Region } from 'common/regions';
+import { Region, State, County } from 'common/regions';
 import RegionMap from 'components/RegionMap';
 
 interface MiniMapProperties {
@@ -40,7 +40,7 @@ const MiniMap: FunctionComponent<MiniMapProperties> = ({
             selected={mapOption === MAP_FILTERS.STATE}
             onClick={() => setMapOption(MAP_FILTERS.STATE)}
           >
-            {region.shortName}
+            {regionTabName(region)}
           </Styles.TabItem>
         )}
         <Styles.TabItem
@@ -75,5 +75,15 @@ const MiniMap: FunctionComponent<MiniMapProperties> = ({
     </Styles.Container>
   );
 };
+
+function regionTabName(region: Region) {
+  if (region instanceof State) {
+    return region.shortName;
+  } else if (region instanceof County) {
+    return region.state.shortName;
+  } else {
+    return region.shortName;
+  }
+}
 
 export default MiniMap;
