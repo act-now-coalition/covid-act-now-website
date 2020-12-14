@@ -29,7 +29,8 @@ const MiniMap: FunctionComponent<MiniMapProperties> = ({
     setMobileMenuOpen(false);
   };
 
-  const showState = region.fipsCode !== '11';
+  // Exception for District of Columbia
+  const showState = !region.fipsCode.startsWith('11');
 
   return (
     <Styles.Container mobileMenuOpen={mobileMenuOpen}>
