@@ -2,7 +2,6 @@ import React from 'react';
 import { Autocomplete } from '@material-ui/lab';
 import { createFilterOptions } from '@material-ui/lab/useAutocomplete';
 import TextField from '@material-ui/core/TextField';
-import { getFilterLimit } from './utils';
 import { RegionType, Region } from 'common/regions';
 import MenuItem from './MenuItem';
 
@@ -12,9 +11,9 @@ function getOptionSelected(option: any, selectedOption: any) {
 
 const SearchAutocomplete = (props: {
   locations: Region[];
-  region?: Region;
+  filterLimit: number;
 }) => {
-  const { locations, region } = props;
+  const { locations, filterLimit } = props;
 
   function getOptionLabel(location: any) {
     return location.name;
@@ -42,7 +41,7 @@ const SearchAutocomplete = (props: {
       getOptionSelected={getOptionSelected}
       filterOptions={createFilterOptions({
         matchFrom: 'start',
-        limit: getFilterLimit(region),
+        limit: filterLimit,
       })}
       renderInput={params => (
         <TextField

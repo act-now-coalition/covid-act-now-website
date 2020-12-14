@@ -12,7 +12,10 @@ import {
 import SearchAutocomplete from 'components/Search';
 import { ParentSize } from '@vx/responsive';
 import { Region } from 'common/regions';
-import { getSearchAutocompleteLocations } from 'components/Search/utils';
+import {
+  getSearchAutocompleteLocations,
+  getFilterLimit,
+} from 'components/Search/utils';
 
 const SearchHeader = ({
   mobileMenuOpen,
@@ -48,7 +51,7 @@ const SearchHeader = ({
                 {() => (
                   <SearchAutocomplete
                     locations={getSearchAutocompleteLocations(region)}
-                    region={region}
+                    filterLimit={getFilterLimit(region)}
                   />
                 )}
               </ParentSize>

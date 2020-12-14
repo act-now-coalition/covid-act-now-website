@@ -31,7 +31,10 @@ import { ThirdWaveBanner } from 'components/Banner';
 import SearchAutocomplete from 'components/Search';
 import { ParentSize } from '@vx/responsive';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
-import { getSearchAutocompleteLocations } from 'components/Search/utils';
+import {
+  getSearchAutocompleteLocations,
+  getFilterLimit,
+} from 'components/Search/utils';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -106,6 +109,7 @@ export default function HomePage() {
                       {() => (
                         <SearchAutocomplete
                           locations={getSearchAutocompleteLocations()}
+                          filterLimit={getFilterLimit()}
                         />
                       )}
                     </ParentSize>
