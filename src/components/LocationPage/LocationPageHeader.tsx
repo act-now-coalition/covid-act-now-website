@@ -5,12 +5,10 @@ import {
   Wrapper,
   TopContainer,
   FooterContainer,
-  HeaderTitle,
   HeaderSection,
   HeaderSubCopy,
   ButtonsWrapper,
   HeaderButton,
-  LocationCopyWrapper,
   LastUpdatedDate,
   SectionHalf,
   Copy,
@@ -96,11 +94,7 @@ const LocationPageHeader = (props: {
       >
         <TopContainer>
           <HeaderSection>
-            <LocationCopyWrapper>
-              <HeaderTitle isEmbed={isEmbed}>
-                <LocationPageHeading region={region} isEmbed={isEmbed} />
-              </HeaderTitle>
-            </LocationCopyWrapper>
+            <LocationPageHeading region={region} isEmbed={isEmbed} />
             <ButtonsWrapper>
               <HeaderButton onClick={props.onHeaderShareClick || noop}>
                 <ShareOutlinedIcon />

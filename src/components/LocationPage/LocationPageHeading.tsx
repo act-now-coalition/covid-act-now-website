@@ -1,32 +1,41 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Region, State, County, MetroArea } from 'common/regions';
-import { HeaderStateCode } from './LocationPageHeader.style';
+import * as Styles from './LocationPageHeading.style';
 
-const LocationPageHeading: React.FC<{ region: Region; isEmbed: boolean }> = ({
-  region,
-  isEmbed,
-}) => {
+const LocationPageHeading: React.FC<{
+  region: Region;
+  isEmbed: boolean;
+}> = ({ region, isEmbed }) => {
   if (region instanceof State) {
-    return <strong>{region.name}</strong>;
-  } else if (region instanceof County) {
     return (
-      <Fragment>
-        <strong>{region.name}</strong>
-        {', '}
-        <HeaderStateCode>
-          <a href={`${isEmbed ? '/embed' : ''}/us/${region.state.urlSegment}`}>
-            {region.state.stateCode}
-          </a>
-        </HeaderStateCode>
-      </Fragment>
+      <Styles.Container>
+        <Styles.HeaderTitle $isEmbed={isEmbed}>
+          <strong>{region.name}</strong>
+        </Styles.HeaderTitle>
+      </Styles.Container>
+    );
+  } else if (region instanceof County) {
+    const stateUrl = `${isEmbed ? '/embed' : ''}/us/${region.state.urlSegment}`;
+    return (
+      <Styles.Container>
+        <Styles.HeaderTitle $isEmbed={isEmbed}>
+          <strong>{region.name}</strong>
+          {', '}
+          <Styles.HeaderStateCode>
+            <a href={stateUrl}>{region.state.stateCode}</a>
+          </Styles.HeaderStateCode>
+        </Styles.HeaderTitle>
+      </Styles.Container>
     );
   } else if (region instanceof MetroArea) {
     return (
-      <Fragment>
-        <strong>{region.name}</strong>
-        {', '}
-        <HeaderStateCode>{region.stateCodes}</HeaderStateCode>
-      </Fragment>
+      <Styles.Container>
+        <Styles.HeaderTitle $isEmbed={isEmbed}>
+          <strong>{region.name}</strong>
+          {', '}
+          <Styles.HeaderStateCode>{region.stateCodes}</Styles.HeaderStateCode>
+        </Styles.HeaderTitle>
+      </Styles.Container>
     );
   } else {
     return null;
