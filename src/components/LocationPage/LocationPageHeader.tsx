@@ -147,11 +147,7 @@ const LocationPageHeader = (props: {
           {projections.isCounty && !isEmbed && (
             <HeaderSubCopy>
               <span>Updated {lastUpdatedDateString} · </span>
-              <span>County data is currently in beta. </span>
-              <span>
-                Because counties don’t report hospitalizations, our forecasts
-                may not be as accurate. See something wrong?{' '}
-              </span>
+              <span>See something wrong? </span>
               <a
                 href="mailto:info@covidactnow.org?subject=[Website%20Feedback]"
                 target="_blank"
