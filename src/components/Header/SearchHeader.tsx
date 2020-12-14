@@ -11,7 +11,6 @@ import {
 } from './SearchHeader.style';
 import SearchAutocomplete from 'components/Search';
 import { ParentSize } from '@vx/responsive';
-import { State } from 'common/locations';
 import { Region } from 'common/regions';
 import { getSearchAutocompleteLocations } from 'components/Search/utils';
 
@@ -19,13 +18,11 @@ const SearchHeader = ({
   mobileMenuOpen,
   setMobileMenuOpen,
   setMapOption,
-  state,
   region,
 }: {
   mobileMenuOpen: boolean;
   setMobileMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setMapOption: React.Dispatch<React.SetStateAction<string>>;
-  state: State | undefined;
   region: Region;
 }) => {
   const isMobile = useMediaQuery('(max-width:1349px)');

@@ -31,7 +31,7 @@ export function countySummary(fips: string): LocationSummary | null {
   return LocationSummariesByFIPS[fips] || null;
 }
 
-// (todo chelsi: revisit this /any)
+// Todo (chelsi)- this is temporary - needed to remove type. Revisit + fix before merging
 export function countySummaryTest(fips: string): any {
   return LocationSummariesByFIPS[fips] || null;
 }

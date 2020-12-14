@@ -2,7 +2,7 @@ import { Level } from 'common/level';
 
 import {
   stateSummary,
-  countySummary,
+  // countySummary,
   countySummaryTest,
 } from './location_summaries';
 

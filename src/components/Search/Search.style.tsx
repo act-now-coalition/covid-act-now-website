@@ -14,3 +14,7 @@ export const IconWrapper = styled.div`
   top: 3px;
   margin-right: 0.75rem;
 `;
+
+export const LocationName = styled.p`
+  margin: 0;
+`;

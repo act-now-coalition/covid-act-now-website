@@ -29,6 +29,7 @@ export abstract class Region {
   abstract get abbreviation(): string;
   abstract get relativeUrl(): string;
 
+  // Todo (Chelsi) - switch back before merging (or maybe keep this change)
   get canonicalUrl() {
     // return urlJoin('https://covidactnow.org', this.relativeUrl);
     return urlJoin(window.location.origin, this.relativeUrl);
@@ -91,7 +92,7 @@ export class County extends Region {
   }
 }
 
-// getStateName and getStateCode are helper functions that make migrating
+// getStateName, getStateCode, and getStateFips are helper functions that make migrating
 // some of the existing state based logic over.  Ideally we will be able
 // to remove these at some point, but they are helpful in the meantime.
 export const getStateName = (region: Region): string | null => {
@@ -110,6 +111,16 @@ export const getStateCode = (region: Region): string | null => {
   }
   if (region.regionType === RegionType.STATE) {
     return (region as State).stateCode;
+  }
+  return null;
+};
+
+export const getStateFips = (region: Region): string | null => {
+  if (region.regionType === RegionType.COUNTY) {
+    return (region as County).state.fipsCode;
+  }
+  if (region.regionType === RegionType.STATE) {
+    return (region as State).fipsCode;
   }
   return null;
 };

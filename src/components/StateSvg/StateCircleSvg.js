@@ -1,17 +1,11 @@
 import React from 'react';
 import Circle from './Circle';
 
-const StateCircleSvg = ({
-  state,
-  ratio,
-  actionBackgroundFill,
-  fillColor,
-  hasAction = false,
-}) => {
+const StateCircleSvg = ({ state, ratio, fillColor, hasAction = false }) => {
   return (
     <Circle
       ratio={ratio}
-      actionBackgroundFill={actionBackgroundFill}
+      actionBackgroundFill="#FFFFFF"
       hasAction={hasAction}
       state={state}
       fillColor={fillColor}

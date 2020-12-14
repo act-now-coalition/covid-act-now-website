@@ -1,29 +1,26 @@
 import React from 'react';
 import ShortNumber from 'common/utils/ShortNumber';
 import StateCircleSvg from 'components/StateSvg/StateCircleSvg';
-import { stateColor, countyColor } from 'common/colors';
 import { StyledResultsMenuSubText } from 'components/MapSelectors/MapSelectors.style';
-import { MenuItemWrapper, IconWrapper } from './Search.style';
+import { MenuItemWrapper, IconWrapper, LocationName } from './Search.style';
+import { Region } from 'common/regions';
+import { getStateIconFillColor } from './utils';
+import { getStateCode } from 'common/regions';
 
-const CountyMenuItem = (props: { region: any }) => {
+const MenuItem = (props: { region: Region }) => {
   const { region } = props;
-  const fillColor = countyColor(
-    region.fipsCode,
-    stateColor(region.state.stateCode),
-  );
 
   return (
     <MenuItemWrapper>
       <IconWrapper>
         <StateCircleSvg
           ratio={0.8}
-          fillColor={fillColor}
-          state={region.state.stateCode}
-          actionBackgroundFill="#FFFFFF"
+          fillColor={getStateIconFillColor(region)}
+          state={getStateCode(region)}
         />
       </IconWrapper>
       <div>
-        <div>{region.name}</div>
+        <LocationName>{region.name}</LocationName>
         <StyledResultsMenuSubText>
           <span>{ShortNumber(region.population)} residents</span>
         </StyledResultsMenuSubText>
@@ -32,4 +29,4 @@ const CountyMenuItem = (props: { region: any }) => {
   );
 };
 
-export default CountyMenuItem;
+export default MenuItem;
