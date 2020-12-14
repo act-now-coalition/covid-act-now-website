@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
 import { Box } from '@material-ui/core';
-import palette from 'assets/theme/palette';
 import { COLORS } from 'common';
 import { COLOR_MAP } from 'common/colors';
 import { Level } from 'common/level';
@@ -80,36 +79,6 @@ export const HeaderSection = styled(Box)`
   @media (min-width: 600px) {
     flex-direction: row;
     justify-content: space-between;
-  }
-`;
-
-export const LocationCopyWrapper = styled(Box)`
-  line-height: 1.4;
-  margin: 1.5rem 1rem;
-
-  @media (min-width: 600px) {
-    margin: 2.5rem 0.875rem 2.5rem 2.25rem;
-  }
-`;
-
-export const HeaderTitle = styled(Typography)<{
-  isEmbed?: Boolean;
-}>`
-  color: ${palette.black};
-  font-size: ${props => (props.isEmbed ? '1.8rem' : '22px')};
-  font-weight: normal;
-  line-height: ${props => (props.isEmbed ? '1.5rem' : '2.2rem')};
-  padding: 0;
-  text-align: center;
-
-  a {
-    color: ${palette.black};
-    text-decoration: none;
-  }
-
-  @media (min-width: 600px) {
-    font-size: 30px;
-    text-align: left;
   }
 `;
 
