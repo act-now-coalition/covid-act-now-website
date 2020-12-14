@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { MAP_FILTERS } from './Enums/MapFilterEnums';
 import SearchHeader from 'components/Header/SearchHeader';
@@ -18,9 +18,8 @@ interface LocationPageProps {
 function LocationPage({ region }: LocationPageProps) {
   let { chartId } = useParams<{ chartId: string }>();
 
-  const stateCode = getStateCode(region);
-
-  const defaultMapOption = () => {
+  const defaultMapOption = (region: Region) => {
+    const stateCode = getStateCode(region);
     if (stateCode === MAP_FILTERS.DC) {
       return MAP_FILTERS.NATIONAL;
     }
@@ -29,7 +28,11 @@ function LocationPage({ region }: LocationPageProps) {
     }
     return MAP_FILTERS.STATE;
   };
-  const [mapOption, setMapOption] = useState(defaultMapOption());
+  const [mapOption, setMapOption] = useState(defaultMapOption(region));
+
+  useEffect(() => {
+    setMapOption(defaultMapOption(region));
+  }, [region]);
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const projections = useProjectionsFromRegion(region);
