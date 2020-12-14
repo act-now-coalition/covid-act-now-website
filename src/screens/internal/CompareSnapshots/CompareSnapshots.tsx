@@ -527,9 +527,12 @@ function fetchCountyProjections(
 ): Promise<Projections[]> {
   return Promise.all(
     counties.map(region =>
-      fetchProjectionsRegion(region, snapshotUrl(snapshotNumber)),
+      fetchProjectionsRegion(region, snapshotUrl(snapshotNumber)).catch(err => {
+        console.error(err);
+        return null;
+      }),
     ),
-  );
+  ).then(counties => counties.filter(p => p !== null) as Projections[]);
 }
 
 async function fetchCountyDiffs(
