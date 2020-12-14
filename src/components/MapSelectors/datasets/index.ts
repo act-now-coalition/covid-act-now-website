@@ -4,4 +4,6 @@ export interface CountyToZipMap {
   [fips: string]: string[];
 }
 
-export const countyFipsToZips = COUNTY_ZIPCODE_MAP as CountyToZipMap;
+const countyFipsToZips = COUNTY_ZIPCODE_MAP as CountyToZipMap;
+
+export default countyFipsToZips;

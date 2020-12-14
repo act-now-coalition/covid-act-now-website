@@ -3,12 +3,14 @@ import { chain, Dictionary, fromPairs } from 'lodash';
 import urlJoin from 'url-join';
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 import countyAdjacencyMsa from 'common/data/county_adjacency_msa.json';
+import countyFipsToZips from 'components/MapSelectors/datasets';
 import { getAbbreviatedCounty } from 'common/utils/compare';
 import RegionDB from 'common/regions/region_db';
 
 const { state_dataset, state_county_map_dataset } = US_STATE_DATASET;
 
 export type FipsCode = string;
+export type ZipCode = string;
 
 export enum RegionType {
   COUNTY = 'county',
@@ -72,6 +74,7 @@ export class County extends Region {
     public readonly state: State,
     public readonly cityNames: string[],
     private readonly adjacentCountiesFips: FipsCode[],
+    private readonly zipCodes: ZipCode[],
   ) {
     super(name, urlSegment, fipsCode, population, RegionType.COUNTY);
   }
@@ -152,6 +155,7 @@ const buildCounties = (
       const countyFips = countyInfo.full_fips_code;
       const state = statesByFips[countyInfo.state_fips_code];
       const adjacentCounties = countyAdjacency[countyFips]?.adjacent_counties;
+      const zipCodes = countyFipsToZips[countyFips];
       return new County(
         countyInfo.county,
         countyInfo.county_url_name,
@@ -160,6 +164,7 @@ const buildCounties = (
         state,
         countyInfo.cities || [],
         adjacentCounties || [],
+        zipCodes || [],
       );
     })
     .value();

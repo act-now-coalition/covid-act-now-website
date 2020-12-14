@@ -1,13 +1,8 @@
 import regions, { RegionType, County, getStateFips } from 'common/regions';
 import { sortBy, partition } from 'lodash';
-import { countyFipsToZips } from 'components/MapSelectors/datasets';
 import { stateColor, countyColor } from 'common/colors';
 
 // Todo (Chelsi): replace the many anys
-
-function getCountyZips(countyFips: string): string[] {
-  return countyFipsToZips[countyFips];
-}
 
 // Move somewhere more central:
 function belongsToState(county: County, stateFips: string | null) {
@@ -21,22 +16,13 @@ export function getSearchAutocompleteLocations(region?: any) {
   const sortedStates = sortBy(allStates, state => state.name);
   const sortedCounties = sortBy(allCounties, county => county.name);
 
-  // Adds 'zip_codes' property to county obj (containing array of zip codes within county fips)
-  const sortedCountiesWithZips = sortedCounties.map((county: any) => {
-    return {
-      ...county,
-      zip_codes: getCountyZips(county.fipsCode),
-    };
-  });
-
   if (!region) {
-    return [...sortedStates, ...sortedCountiesWithZips];
+    return [...sortedStates, ...sortedCounties];
   }
 
   const stateFips = getStateFips(region);
-  const [stateCounties, otherCounties] = partition(
-    sortedCountiesWithZips,
-    county => belongsToState(county, stateFips),
+  const [stateCounties, otherCounties] = partition(sortedCounties, county =>
+    belongsToState(county, stateFips),
   );
 
   return [...stateCounties, ...sortedStates, ...otherCounties];
