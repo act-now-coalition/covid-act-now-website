@@ -39,7 +39,7 @@ const MiniMap: FunctionComponent<MiniMapProperties> = ({
             selected={mapOption === MAP_FILTERS.STATE}
             onClick={() => setMapOption(MAP_FILTERS.STATE)}
           >
-            {region.abbreviation}
+            {region.shortName}
           </Styles.TabItem>
         )}
         <Styles.TabItem
