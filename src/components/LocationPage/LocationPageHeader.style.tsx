@@ -102,14 +102,16 @@ export const HeaderTitle = styled(Typography)<{
   padding: 0;
   text-align: center;
 
-  a {
-    color: ${palette.black};
-    text-decoration: none;
-  }
-
   @media (min-width: 600px) {
     font-size: 30px;
     text-align: left;
+  }
+`;
+
+export const HeaderStateCode = styled.span`
+  a {
+    color: ${palette.black};
+    text-decoration: none;
   }
 `;
 
