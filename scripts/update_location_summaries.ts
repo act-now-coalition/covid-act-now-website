@@ -61,13 +61,13 @@ async function main() {
   const allStatesProjections = await fetchAllStateProjections();
   const allCountiesProjections = await fetchAllCountyProjections();
   const allMetroProjections = await fetchAllMetroProjections();
-  buildSummaries(
+  await buildSummaries(
     allStatesProjections,
     allCountiesProjections,
     allMetroProjections,
   );
-  buildAggregations(allStatesProjections, allCountiesProjections);
-  buildSlackSummary();
+  await buildAggregations(allStatesProjections, allCountiesProjections);
+  await buildSlackSummary();
   console.log('done');
 }
 
