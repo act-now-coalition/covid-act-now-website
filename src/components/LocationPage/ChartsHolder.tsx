@@ -25,7 +25,6 @@ import {
 import { mainContent } from 'cms-content/recommendations';
 import { getRecommendationsShareUrl } from 'common/urls';
 import { Region, getStateCode, getStateName } from 'common/regions';
-import { assert } from 'common/utils';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
@@ -46,8 +45,6 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
   const projection = projections.primary;
   const stateCode = getStateCode(region);
   const stateName = getStateName(region);
-  assert(stateCode, 'Charts require a state right now');
-  assert(stateName, 'Charts require a state right now');
 
   const county = findCountyByFips(region.fipsCode);
 
@@ -154,12 +151,14 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
           onNewUpdateClick={() => scrollTo(exploreChartRef.current)}
           isMobile={isMobile}
         />
-        <CompareMain
-          stateName={stateName}
-          county={county}
-          locationsViewable={6}
-          stateId={stateCode}
-        />
+        {stateCode && stateName && (
+          <CompareMain
+            stateName={stateName}
+            county={county}
+            locationsViewable={6}
+            stateId={stateCode}
+          />
+        )}
         <MainContentInner>
           <Recommend
             introCopy={recommendationsIntro}
@@ -186,13 +185,15 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
             />
           ))}
         </MainContentInner>
-        <MainContentInner ref={exploreChartRef} id="explore-chart">
-          <Explore
-            initialFipsList={initialFipsList}
-            title="Cases, Deaths, and Hospitalizations"
-            defaultMetric={defaultExploreMetric}
-          />
-        </MainContentInner>
+        {stateCode && stateName && (
+          <MainContentInner ref={exploreChartRef} id="explore-chart">
+            <Explore
+              initialFipsList={initialFipsList}
+              title="Cases, Deaths, and Hospitalizations"
+              defaultMetric={defaultExploreMetric}
+            />
+          </MainContentInner>
+        )}
       </ChartContentWrapper>
       <div ref={shareBlockRef} id="recommendationsTest">
         <ShareModelBlock
