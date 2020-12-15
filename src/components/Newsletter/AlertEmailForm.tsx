@@ -2,7 +2,7 @@ import React, { useState, createRef } from 'react';
 import { StyledNewsletter, InputHolder, InputError } from './Newsletter.style';
 import { getFirebase, firebase } from 'common/firebase';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
-import regions, { Region, County, getStateCode } from 'common/regions';
+import regions, { Region, getStateCode } from 'common/regions';
 import { AutocompleteRegions } from 'components/AutocompleteLocations';
 import { isValidEmail } from 'common/utils';
 
@@ -59,8 +59,8 @@ const AlertEmailForm: React.FC<{ region?: Region }> = ({ region }) => {
     })
       .then(response => {
         response.text().then(text => {
-          formRef.action = text;
-          formRef.current.submit();
+          console.log(text);
+          formRef.current?.submit();
         });
       })
       .then(data => {
