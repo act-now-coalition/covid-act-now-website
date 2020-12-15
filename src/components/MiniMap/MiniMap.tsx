@@ -61,12 +61,7 @@ const MiniMap: FunctionComponent<MiniMapProperties> = ({
       <Styles.MapContainer>
         {/* US Map */}
         {mapOption === MAP_FILTERS.NATIONAL && (
-          <Map
-            hideLegend={true}
-            setMapOption={setMapOption}
-            setMobileMenuOpen={setMobileMenuOpen}
-            isMiniMap
-          />
+          <Map hideLegend={true} isMiniMap />
         )}
         {/* State Map */}
         {mapOption === MAP_FILTERS.STATE && (
