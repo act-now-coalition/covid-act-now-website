@@ -78,6 +78,16 @@ export default function App() {
                 exact
                 path="/us/metro/:metroAreaUrlSegment"
                 component={LocationPage}
+              />
+              <Route
+                exact
+                path="/us/metro/:metroAreaUrlSegment/chart/:chartId"
+                component={LocationPage}
+              />
+              <Route
+                exact
+                path="/us/metro/:metroAreaUrlSegment/recommendations"
+                component={LocationPage}
               /> */}
               <Route
                 exact

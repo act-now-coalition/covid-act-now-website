@@ -15,7 +15,7 @@ import makeChartShareQuote from 'common/utils/makeChartShareQuote';
 import ShareImageUrlJSON from 'assets/data/share_images_url.json';
 import * as urls from 'common/urls';
 import moment from 'moment';
-import { County, Region, State } from 'common/regions';
+import { County, MetroArea, Region, State } from 'common/regions';
 import { fail } from 'common/utils';
 
 const getShareImageUrl = (region: Region, chartIdentifier: number): string => {
@@ -31,6 +31,11 @@ const getShareImageUrl = (region: Region, chartIdentifier: number): string => {
     return (
       imageBaseUrl +
       `states/${state.stateCode.toLowerCase()}/chart/${chartIdentifier}/export.png`
+    );
+  } else if (region instanceof MetroArea) {
+    return (
+      imageBaseUrl +
+      `metros/${region.fipsCode}/chart/${chartIdentifier}/export.png`
     );
   }
   fail('Unsupported region');
