@@ -4,7 +4,7 @@
   "teamMembers": [
     {
       "profileImgUrl": "/images_cms/danielle-allen.jpg",
-      "fullName": "Danielle Allen",
+      "fullName": "Danielle Allen, Ph.D.",
       "description": "Director of Edmond J. Safra Center for Ethics, James Bryant Conant University Professor at Harvard ",
       "profileUrl": "https://www.gse.harvard.edu/faculty/danielle-allen"
     },
@@ -28,7 +28,7 @@
     },
     {
       "profileImgUrl": "/images_cms/shuhanhe.jpeg",
-      "fullName": "Dr. Shuhan He",
+      "fullName": "Shuhan He, M.D.",
       "description": "Emergency Medicine Physician, Co-Founder of GetUsPPE.org",
       "profileUrl": "https://www.linkedin.com/in/shuhan-he/"
     },
@@ -39,7 +39,7 @@
       "profileUrl": "https://www.linkedin.com/in/bob-inglis-21112b25/"
     },
     {
-      "fullName": "Prof. Rebecca Katz, Ph.D., M.P.H.",
+      "fullName": "Rebecca Katz, M.P.H., Ph.D.",
       "description": "Director of Center for Global Health Science and Security at Georgetown University",
       "profileUrl": "https://ghss.georgetown.edu/people/katz",
       "profileImgUrl": "/images_cms/rebecca-katz.jpeg"
@@ -53,30 +53,30 @@
     {
       "profileImgUrl": "/images_cms/roni-rosenfeld.png",
       "description": "Head of Machine Learning Department at Carnegie Mellon University",
-      "fullName": "Roni Rosenfeld",
+      "fullName": "Roni Rosenfeld, Ph.D.",
       "profileUrl": "http://www.cs.cmu.edu/~roni/"
     },
     {
       "profileImgUrl": "/images_cms/nigan-shah.jpg",
-      "fullName": "Nigam Shah",
+      "fullName": "Nigam Shah, MBBS., Ph.D.",
       "description": "Associate Professor of Biomedical Data Science at Stanford University",
       "profileUrl": "https://www.linkedin.com/in/nigam/"
     },
     {
       "profileImgUrl": "/images_cms/ryan-tibshirani.png",
-      "fullName": "Ryan Tibshirani ",
+      "fullName": "Ryan Tibshirani, Ph.D.",
       "description": "Associate Professor at Carnegie Mellon University",
       "profileUrl": "https://www.stat.cmu.edu/~ryantibs/index.html"
     },
     {
       "profileImgUrl": "/images_cms/victor-udoewa.jpeg",
-      "fullName": "Victor Udoewa",
+      "fullName": "Victor Udoewa, Ph.D.",
       "profileUrl": "https://www.linkedin.com/in/udoewa/",
       "description": "Service Design Lead at NASA, Founder/CEO of Justice by Design"
     },
     {
       "profileImgUrl": "/images_cms/jason-wang.jpeg",
-      "fullName": "Jason Wang",
+      "fullName": "Jason Wang, M.D., Ph.D.",
       "description": "Director of Center for Policy, Outcomes, and Prevention at Stanford University",
       "profileUrl": "https://www.linkedin.com/in/jason-wang-38a34842/"
     },
@@ -89,7 +89,7 @@
     {
       "profileImgUrl": "/images_cms/marta-w-headshot.jpeg",
       "fullName": "Marta Wosińska, Ph.D.",
-      "description": "Co-founder of the Duke-Margolis Center for Health Policy",
+      "description": "Co-founder and Deputy Director, Policy of the Duke-Margolis Center for Health Policy",
       "profileUrl": "https://healthpolicy.duke.edu/people/marta-wosinska-phd"
     }
   ]

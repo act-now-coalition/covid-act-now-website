@@ -74,6 +74,13 @@ class RegionDB {
     return foundState || null;
   }
 
+  findMetroAreaByUrlParams(metroAreaUrlSegment: string) {
+    const foundMetro = this.metroAreas.find(
+      metro => metro.urlSegment === metroAreaUrlSegment,
+    );
+    return foundMetro || null;
+  }
+
   findCountyByUrlParams(
     stateUrlSegment: string,
     countyUrlSegment: string,

@@ -73,6 +73,12 @@ export default function App() {
                 path="/us/:stateId/county/:countyId"
                 component={LocationPage}
               />
+              {/* Enable following route to test metro areas */}
+              {/* <Route
+                exact
+                path="/us/metro/:metroAreaUrlSegment"
+                component={LocationPage}
+              /> */}
               <Route
                 exact
                 path="/us/:stateId/chart/:chartId"

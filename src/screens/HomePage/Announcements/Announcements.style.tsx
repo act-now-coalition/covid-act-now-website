@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { Typography, Box } from '@material-ui/core';
 import { COLOR_MAP } from 'common/colors';
+import { materialSMBreakpoint } from 'assets/theme/sizes';
 
 export const Wrapper = styled(Box)`
   display: flex;
@@ -18,7 +19,7 @@ export const AnnouncementIntro = styled(Typography)`
   line-height: 120%;
   margin-bottom: 1rem;
 
-  @media (min-width: 600px) {
+  @media (min-width: ${materialSMBreakpoint}) {
     font-size: 28px;
   }
 `;
@@ -47,7 +48,7 @@ export const ButtonsContainer = styled(Box)`
   flex-direction: column;
   align-items: flex-start;
 
-  @media (min-width: 600px) {
+  @media (min-width: ${materialSMBreakpoint}) {
     flex-direction: row;
     align-items: center;
   }
@@ -76,7 +77,7 @@ export const ReadMoreButton = styled.a`
     border: 1px solid ${COLOR_MAP.BLUE};
   }
 
-  @media (min-width: 600px) {
+  @media (min-width: ${materialSMBreakpoint}) {
     margin-bottom: 0;
   }
 `;
@@ -84,7 +85,10 @@ export const ReadMoreButton = styled.a`
 export const ViewAllLink = styled.a`
   ${SharedButtonStyles}
 
-  @media (min-width: 600px) {
+  @media (min-width: ${materialSMBreakpoint}) {
     margin-left: 2rem;
+    &:first-child {
+      margin-left: 0;
+    }
   }
 `;
