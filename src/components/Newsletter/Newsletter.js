@@ -1,33 +1,33 @@
 import React from 'react';
 import { StyledNewsletter, InputHolder, InputError } from './Newsletter.style';
-import Chip from '@material-ui/core/Chip';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import TextField from '@material-ui/core/TextField';
 import { getLocationNames } from 'common/locations';
-import { getFirebase, firebase } from 'common/firebase';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
-import { County, getStateCode } from 'common/regions';
-
-// Taken from https://ui.dev/validate-email-address-javascript/
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+import regions, { County, getStateCode } from 'common/regions';
+import { AutocompleteRegions } from 'components/AutocompleteLocations';
+import { getDefaultRegions, subcribeToLocations } from './utils';
+import { isValidEmail } from 'common/utils';
 
 class Newsletter extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
     this.form = null;
     this.emailInput = null;
-    this.alertsSelectionArray = [];
-    this.defaultValues = [];
     this.autocompleteOptions = getLocationNames();
-    this.state = { checked: true, email: '', errorMessage: '' };
+    this.state = {
+      checked: true,
+      email: '',
+      errorMessage: '',
+      selectedRegions: props.region ? getDefaultRegions(props.region) : [],
+    };
     this.submitForm = this.submitForm.bind(this);
-    this.handleSelectChange = this.handleSelectChange.bind(this);
   }
 
   async submitForm(e) {
     e.preventDefault();
+    const { email } = this.state;
+
     // can't submit the form without the email entered and email that is valid
-    if (this.state.email && EMAIL_REGEX.test(this.state.email)) {
+    if (isValidEmail(email)) {
       await this.subscribeToAlerts();
       trackEvent(EventCategory.ENGAGEMENT, EventAction.SUBSCRIBE);
       let url = new URL('https://createsend.com/t/getsecuresubscribelink');
@@ -55,61 +55,33 @@ class Newsletter extends React.Component {
 
   async subscribeToAlerts() {
     const email = this.emailInput.value;
-    const locations = this.alertsSelectionArray.map(
-      item => item.full_fips_code,
-    );
-    if (locations.length) {
-      const db = getFirebase().firestore();
-      // Merge the locations with any existing ones since that's _probably_ what the user wants.
-      await db
-        .collection('alerts-subscriptions')
-        .doc(email.toLocaleLowerCase())
-        .set(
-          {
-            locations: firebase.firestore.FieldValue.arrayUnion(...locations),
-            subscribedAt: firebase.firestore.FieldValue.serverTimestamp(),
-          },
-          { merge: true },
-        );
+    const { selectedRegions } = this.state;
+    const fipsList = selectedRegions.map(region => region.fipsCode);
+    if (fipsList.length) {
+      await subcribeToLocations(email, fipsList);
     }
   }
-
-  handleSelectChange = selectedOption => {
-    this.alertsSelectionArray = selectedOption;
-  };
 
   handleSetEmail = email => {
     if (email) {
       this.setState({ email });
     }
 
-    if (EMAIL_REGEX.test(email)) {
+    if (isValidEmail(email)) {
       this.setState({ errorMessage: '' });
     }
   };
 
-  componentDidMount() {
-    this.handleSelectChange(this.defaultValues);
-  }
-
   render() {
     const { region } = this.props;
+    const { selectedRegions, errorMessage } = this.state;
     const countyName = region instanceof County ? region.name : null;
     const stateCode = region ? getStateCode(region) : null;
-    this.defaultValues = this.autocompleteOptions.filter(location => {
-      const matching_state =
-        location.state_code === stateCode &&
-        location.full_fips_code.length === 2;
-      let matching_county = false;
-      if (countyName) {
-        matching_county =
-          location.county === countyName &&
-          location.state_code === stateCode &&
-          location.full_fips_code.length === 5;
-      }
-      return matching_state || matching_county;
-    });
-    const errMessageOpen = this.state.errorMessage.length > 0;
+    const errMessageOpen = errorMessage.length > 0;
+
+    const onChangeRegions = (event, newSelectedRegions) => {
+      this.setState({ selectedRegions: newSelectedRegions });
+    };
 
     return (
       <StyledNewsletter>
@@ -145,41 +117,12 @@ class Newsletter extends React.Component {
             name="cm-f-jrdtwd"
             value={countyName || ''}
           />
-          <Autocomplete
-            multiple
-            id="alert-locations"
-            defaultValue={this.defaultValues}
-            getOptionSelected={(option, value) =>
-              option.full_fips_code === value.full_fips_code
-            }
-            onChange={(event, newValue) => {
-              this.handleSelectChange(newValue);
-            }}
-            options={this.autocompleteOptions}
-            getOptionLabel={option =>
-              option.county
-                ? `${option.county}, ${option.state_code}`
-                : option.state
-            }
-            renderTags={(tagValue, getTagProps) =>
-              tagValue.map((option, index) => (
-                <Chip
-                  label={
-                    option.county
-                      ? `${option.county}, ${option.state_code}`
-                      : option.state
-                  }
-                  {...getTagProps({ index })}
-                />
-              ))
-            }
-            renderInput={params => (
-              <TextField
-                variant="outlined"
-                {...params}
-                placeholder="+ Add alert locations"
-              />
-            )}
+          <AutocompleteRegions
+            regions={regions.all()}
+            selectedRegions={selectedRegions}
+            onChangeRegions={onChangeRegions}
+            ariaLabelledBy=""
+            placeholder="+ Add alert locations"
           />
           <InputHolder>
             <input
