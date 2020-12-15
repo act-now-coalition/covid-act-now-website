@@ -14,7 +14,6 @@ function belongsToState(county: County, stateFips: string | null) {
 }
 
 export function getSearchAutocompleteLocations(region?: Region) {
-  console.log('metros', regions.metroAreas);
   const allStates = regions.states;
   const allCounties = regions.counties;
   const allmetros = regions.metroAreas;
@@ -29,9 +28,17 @@ export function getSearchAutocompleteLocations(region?: Region) {
   }
 
   // Metro page:
-  // TODO (chelsi): use same logic as state/county pages (return counties in metro first)
+  // TODO (chelsi): use same logic as state/county pages? (return counties in metro first, and then?)
   if (region instanceof MetroArea) {
-    return [...sortedStates, ...sortedMetros, ...sortedCounties];
+    const [countiesInMetro, otherCounties] = partition(sortedCounties, county =>
+      region.counties.includes(county),
+    );
+    return [
+      ...countiesInMetro,
+      ...sortedStates,
+      ...otherCounties,
+      ...sortedMetros,
+    ];
   }
 
   // County and state pages:
