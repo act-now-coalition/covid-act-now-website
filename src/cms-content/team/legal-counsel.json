@@ -2,8 +2,9 @@
   "teamMembers": [
     {
       "profileImgUrl": "/images_cms/dani.jpeg",
-      "fullName": "Dani Fontanesi",
-      "profileUrl": "https://www.linkedin.com/in/dani-fontanesi-esq-26509a8/"
+      "fullName": "Dani Fontanesi, LL.M., J.D.",
+      "profileUrl": "https://www.linkedin.com/in/dani-fontanesi-esq-26509a8/",
+      "description": "Founder/Managing Partner of Fontanesi Law Firm"
     }
   ],
   "teamName": "Legal Counsel",
