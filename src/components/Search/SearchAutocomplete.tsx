@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Autocomplete } from '@material-ui/lab';
 import { createFilterOptions } from '@material-ui/lab/useAutocomplete';
 import TextField from '@material-ui/core/TextField';
@@ -15,9 +15,25 @@ const SearchAutocomplete = (props: {
 }) => {
   const { locations, filterLimit } = props;
 
-  function getOptionLabel(location: any) {
-    return location.name;
-  }
+  // WIP :
+  const [isZip, setIsZip] = useState(false);
+
+  const onInputChange = (e: any, value: string) => {
+    const isStringOfDigits = /^\d+$/.test(value);
+    const isLengthForZipCheck = value.length === 5;
+    if (isStringOfDigits && isLengthForZipCheck) setIsZip(true);
+    else setIsZip(false);
+  };
+
+  const stringifyOption = (option: any) => {
+    if (isZip) {
+      if (option.zipCodes) {
+        return `${option.zipCodes.join(' ')}`;
+      }
+      return option.name;
+    }
+    return option.name;
+  };
 
   // Todo (chelsi) - theres prob a better/built-in way to grab the county url
   const onSelect = (e: any, value: any) => {
@@ -33,15 +49,16 @@ const SearchAutocomplete = (props: {
   return (
     <Autocomplete
       noOptionsText="No location found"
+      onInputChange={onInputChange}
       options={locations}
-      getOptionLabel={getOptionLabel}
       disableListWrap
       disableClearable
       onChange={onSelect}
       getOptionSelected={getOptionSelected}
       filterOptions={createFilterOptions({
-        matchFrom: 'start',
+        matchFrom: isZip ? 'any' : 'start',
         limit: filterLimit,
+        stringify: stringifyOption,
       })}
       renderInput={params => (
         <TextField
