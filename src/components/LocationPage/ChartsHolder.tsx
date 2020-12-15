@@ -24,7 +24,7 @@ import {
 } from 'common/utils/recommend';
 import { mainContent } from 'cms-content/recommendations';
 import { getRecommendationsShareUrl } from 'common/urls';
-import { Region, getStateCode, getStateName } from 'common/regions';
+import { Region, getStateCode, getStateName, MetroArea } from 'common/regions';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
@@ -185,7 +185,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
             />
           ))}
         </MainContentInner>
-        {stateCode && stateName && (
+        {!(region instanceof MetroArea) && (
           <MainContentInner ref={exploreChartRef} id="explore-chart">
             <Explore
               initialFipsList={initialFipsList}
