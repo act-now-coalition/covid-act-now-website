@@ -8,6 +8,7 @@ import {
   LinkedinIcon,
 } from 'react-share';
 import Newsletter from 'components/Newsletter/Newsletter';
+import AlertEmailForm from 'components/Newsletter/AlertEmailForm';
 import SocialLocationPreview from 'components/SocialLocationPreview/SocialLocationPreview';
 import { Projections } from 'common/models/Projections';
 import * as urls from 'common/urls';
@@ -85,7 +86,7 @@ const ShareBlock = ({
               We'll email you when your state or county sees a significant
               change in one of their metrics and overall risk score.
             </ShareInstructionBody>
-            <Newsletter region={region} />
+            <AlertEmailForm region={region} />
           </NewsletterTextArea>
         </ShareRowContentArea>
       </ShareRow>

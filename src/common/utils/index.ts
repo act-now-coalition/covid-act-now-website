@@ -110,3 +110,12 @@ export function formatEstimate(value: number, significantDigits = 2): string {
   }
   return formatInteger(Number(value.toPrecision(significantDigits)));
 }
+
+// Taken from https://ui.dev/validate-email-address-javascript/
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+export function isValidEmail(emailAddress: string) {
+  return (
+    emailAddress && emailAddress.length > 0 && EMAIL_REGEX.test(emailAddress)
+  );
+}
