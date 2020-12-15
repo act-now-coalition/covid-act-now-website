@@ -21,8 +21,10 @@ import AggregationsJSON from 'assets/data/aggregations.json';
 import regions, {
   County,
   getStateCode,
+  MetroArea,
   Region,
   RegionType,
+  State,
 } from 'common/regions';
 import { fail } from 'assert';
 
@@ -377,9 +379,11 @@ export function weeksAgo(dateFrom: Date, dateTo: Date) {
 }
 
 export function getLocationLabel(location: Region) {
-  if (location.regionType === RegionType.COUNTY) {
+  if (location instanceof County) {
     return `${location.abbreviation} ${(location as County).stateCode}`;
-  } else if (location.regionType === RegionType.STATE) {
+  } else if (location instanceof State) {
+    return location.fullName;
+  } else if (location instanceof MetroArea) {
     return location.fullName;
   } else {
     fail('unsupported region');
