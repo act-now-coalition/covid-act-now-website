@@ -397,13 +397,9 @@ function truncateCountyName(countyName: string) {
 }
 
 function getShortLocationLabel(location: Region) {
-  if (location.fipsCode && location.fipsCode.startsWith('00')) {
-    return location.name;
-  } else {
-    return location.regionType === RegionType.COUNTY
-      ? `${truncateCountyName(location.abbreviation)}`
-      : location.name.toUpperCase();
-  }
+  return location.regionType === RegionType.COUNTY
+    ? `${truncateCountyName(location.abbreviation)}`
+    : location.abbreviation;
 }
 
 export function getLocationNames(
@@ -429,7 +425,7 @@ export function getSubtitle(
 ) {
   const textPer100k = normalizeData ? 'per 100k population' : '';
   return regions.length === 0
-    ? 'Select states or counties to explore trends'
+    ? 'Select states, counties, or metro areas to explore trends'
     : `${metricName} ${textPer100k} in ${getLocationNames(regions)}`;
 }
 

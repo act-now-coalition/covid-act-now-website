@@ -344,7 +344,7 @@ const Explore: React.FunctionComponent<{
       />
       <Styles.ChartControlsContainer>
         <Styles.TableAutocompleteHeader>
-          Compare states or counties
+          Compare states, counties, or metro areas
         </Styles.TableAutocompleteHeader>
         <Grid container spacing={1}>
           <Grid key="location-selector" item sm={9} xs={12}>
