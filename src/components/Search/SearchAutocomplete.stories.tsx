@@ -20,33 +20,33 @@ export const Home = () => {
 
 export const State = () => {
   const region = regions.findByFipsCode('02');
-  const locations = getSearchAutocompleteLocations(region);
+  const locations = getSearchAutocompleteLocations(region!);
   return (
     <SearchAutocomplete
       locations={locations}
-      filterLimit={getFilterLimit(region)}
+      filterLimit={getFilterLimit(region!)}
     />
   );
 };
 
 export const County = () => {
   const region = regions.findByFipsCode('53033');
-  const locations = getSearchAutocompleteLocations(region);
+  const locations = getSearchAutocompleteLocations(region!);
   return (
     <SearchAutocomplete
       locations={locations}
-      filterLimit={getFilterLimit(region)}
+      filterLimit={getFilterLimit(region!)}
     />
   );
 };
 
 export const MetroArea = () => {
   const region = regions.findByFipsCode('14460');
-  const locations = getSearchAutocompleteLocations(region);
+  const locations = getSearchAutocompleteLocations(region!);
   return (
     <SearchAutocomplete
       locations={locations}
-      filterLimit={getFilterLimit(region)}
+      filterLimit={getFilterLimit(region!)}
     />
   );
 };

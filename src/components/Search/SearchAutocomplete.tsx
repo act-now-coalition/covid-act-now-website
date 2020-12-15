@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Autocomplete } from '@material-ui/lab';
 import { createFilterOptions } from '@material-ui/lab/useAutocomplete';
 import TextField from '@material-ui/core/TextField';
-import { RegionType, Region } from 'common/regions';
+import { RegionType, Region, State, County } from 'common/regions';
 import MenuItem from './MenuItem';
 
-function getOptionSelected(option: any, selectedOption: any) {
+function getOptionSelected(option: Region, selectedOption: Region) {
   return option.fipsCode === selectedOption.fipsCode;
 }
 
@@ -27,10 +27,10 @@ const SearchAutocomplete = (props: {
     else setIsZip(false);
   };
 
-  const stringifyOption = (option: any) => {
+  const stringifyOption = (option: Region) => {
     if (isZip) {
-      if (option.zipCodes) {
-        return `${option.zipCodes.join(' ')}`;
+      if ((option as County).zipCodes) {
+        return `${(option as County).zipCodes.join(' ')}`;
       }
       return option.name;
     }
@@ -38,12 +38,14 @@ const SearchAutocomplete = (props: {
   };
 
   // Todo (chelsi) - theres prob a better/built-in way to grab the county url
-  const onSelect = (e: any, value: any) => {
+  const onSelect = (e: any, value: Region) => {
     if (value.regionType === RegionType.STATE) {
-      const stateUrl = value.canonicalUrl;
+      const stateUrl = (value as State).canonicalUrl;
       window.location.href = stateUrl;
     } else if (value.regionType === RegionType.COUNTY) {
-      const countyUrl = `${value.state.canonicalUrl}/county/${value.urlSegment}`;
+      const countyUrl = `${(value as County).state.canonicalUrl}/county/${
+        value.urlSegment
+      }`;
       window.location.href = countyUrl;
     }
   };
