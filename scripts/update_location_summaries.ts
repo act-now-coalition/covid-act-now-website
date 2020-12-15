@@ -5,6 +5,7 @@ import _ from 'lodash';
 import {
   fetchAllStateProjections,
   fetchAllCountyProjections,
+  fetchAllMetroProjections,
 } from '../src/common/utils/model';
 import {
   currentSnapshot,
@@ -59,15 +60,21 @@ const INDIGENOUS_FIPS = [
 async function main() {
   const allStatesProjections = await fetchAllStateProjections();
   const allCountiesProjections = await fetchAllCountyProjections();
-  buildSummaries(allStatesProjections, allCountiesProjections);
-  buildAggregations(allStatesProjections, allCountiesProjections);
-  buildSlackSummary();
+  const allMetroProjections = await fetchAllMetroProjections();
+  await buildSummaries(
+    allStatesProjections,
+    allCountiesProjections,
+    allMetroProjections,
+  );
+  await buildAggregations(allStatesProjections, allCountiesProjections);
+  await buildSlackSummary();
   console.log('done');
 }
 
 async function buildSummaries(
   allStatesProjections: Projections[],
   allCountiesProjections: Projections[],
+  allMetroProjections: Projections[],
 ) {
   const summaries = {} as { [fips: string]: LocationSummary };
 
@@ -77,6 +84,10 @@ async function buildSummaries(
 
   for (const countyProjections of allCountiesProjections) {
     summaries[countyProjections.fips] = countyProjections.summary;
+  }
+
+  for (const metroProjections of allMetroProjections) {
+    summaries[metroProjections.fips] = metroProjections.summary;
   }
 
   await fs.writeJson(`${OUTPUT_FOLDER}/summaries.json`, summaries);

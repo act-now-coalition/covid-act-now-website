@@ -2,7 +2,11 @@ import React from 'react';
 import { remove } from 'lodash';
 import { Table, TableBody } from '@material-ui/core';
 import { Metric } from 'common/metric';
-import { RankedLocationSummary, GeoScopeFilter } from 'common/utils/compare';
+import {
+  RankedLocationSummary,
+  GeoScopeFilter,
+  SummaryForCompare,
+} from 'common/utils/compare';
 import CompareTableRow from './CompareTableRow';
 import HeaderCell from './HeaderCell';
 import * as Styles from './LocationTable.style';
@@ -222,9 +226,8 @@ const LocationTable: React.FunctionComponent<{
 
   // In the modal, if the rank of the pinned-location-row is #1, we remove
   // the location's inline row, so as to not have the location listed twice consecutively:
-  const removePinnedIfRankedFirst = (location: any) =>
-    location.locationInfo.full_fips_code !==
-    pinnedLocation?.locationInfo.full_fips_code;
+  const removePinnedIfRankedFirst = (location: SummaryForCompare) =>
+    location.region.fipsCode !== pinnedLocation?.region.fipsCode;
 
   const modalLocations = hideInlineLocation
     ? remove(sortedLocations, removePinnedIfRankedFirst)

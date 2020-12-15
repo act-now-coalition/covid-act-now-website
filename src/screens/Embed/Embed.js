@@ -1,8 +1,8 @@
-import React, { useState, useMemo } from 'react';
-import { useParams } from 'react-router-dom';
+import React from 'react';
+
 import '../../App.css'; /* optional for styling like the :hover pseudo-class */
-import { findCountyByFips } from 'common/locations';
-import { useProjections } from 'common/utils/model';
+
+import { useProjectionsFromRegion } from 'common/utils/model';
 import { useModelLastUpdatedDate } from 'common/utils/model';
 import { Level } from 'common/level';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
@@ -26,39 +26,12 @@ import {
   EmbedSubheader,
 } from './Embed.style';
 import SocialLocationPreview from 'components/SocialLocationPreview/SocialLocationPreview';
-import {
-  getCountyByUrlName,
-  getStateByUrlName,
-  getCanonicalUrl,
-} from 'common/locations';
+import { useRegionFromParams } from 'common/regions';
 
 function LocationEmbed() {
-  const { stateId: _location, countyId, countyFipsId } = useParams();
+  const region = useRegionFromParams();
 
-  const [selectedCounty, setSelectedCounty] = useState(null);
-  const [location, setLocation] = useState(null);
-
-  useMemo(() => {
-    let state = null,
-      county = null;
-    if (countyFipsId) {
-      county = findCountyByFips(countyFipsId);
-      state = county?.state_code;
-    } else {
-      const stateInfo = getStateByUrlName(_location);
-      state = stateInfo.state_code.toUpperCase();
-      if (countyId) {
-        county = getCountyByUrlName(countyId);
-      }
-    }
-
-    setLocation(state);
-    if (county !== undefined) {
-      setSelectedCounty(county);
-    }
-  }, [_location, countyId, countyFipsId]);
-
-  const projections = useProjections(location, selectedCounty);
+  const projections = useProjectionsFromRegion(region);
   if (!projections) {
     return null;
   }
@@ -69,21 +42,14 @@ function LocationEmbed() {
   const fillColor =
     alarmLevel !== Level.UNKNOWN ? levelInfo.color : COLOR_MAP.GRAY.LIGHT;
 
-  const canonicalUrl = getCanonicalUrl(projections.fips);
-  const embedOnClickBaseURL = projections
-    ? `https://covidactnow.org/${canonicalUrl}`
-    : '';
+  const embedOnClickBaseURL = region.canonicalUrl;
 
   return (
     <EmbedContainer>
       <EmbedWrapper>
         <EmbedHeaderWrapper>
           <HeaderText>
-            <EmbedHeader>
-              {projections.countyName
-                ? `${projections.countyName}, ${projections.stateCode}`
-                : projections.stateName}
-            </EmbedHeader>
+            <EmbedHeader>{region.fullName}</EmbedHeader>
             <EmbedSubheader>Overall COVID risk</EmbedSubheader>
           </HeaderText>
           <AlarmLevel color={fillColor}>{levelInfo.name}</AlarmLevel>

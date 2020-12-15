@@ -36,13 +36,13 @@ const HospitalizationsAlert: React.FC<{ projection: Projection }> = ({
 
   return (
     <Copy>
-      {locationName} COVID hospitalizations are at an all-time peak -{' '}
+      {locationName} COVID hospitalizations are at an all-time peak.{' '}
       <HashLink
         to="#explore-chart"
         scroll={el => scrollWithOffset(el, -180)}
         smooth
       >
-        see the chart
+        See the chart
       </HashLink>
       .
     </Copy>

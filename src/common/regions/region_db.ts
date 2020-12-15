@@ -1,17 +1,62 @@
-import { sortBy, takeRight } from 'lodash';
+import { sortBy, takeRight, values, Dictionary } from 'lodash';
+import { Region, County, State, MetroArea, FipsCode } from './types';
+import { statesByFips, countiesByFips, metroAreasByFips } from './regions_data';
+import { assert } from 'common/utils';
 
-import { Region, County, State, FipsCode } from 'common/regions';
+// More NYC Borough logic.  This should be removed when
+// https://github.com/covid-projections/covid-projections/pull/2090 is merged.
+const NYC_BOROUGH_SEGMENTS = [
+  'new_york_county',
+  'queens_county',
+  'richmond_county',
+  'bronx_county',
+  'kings_county',
+];
+const replaceNYCBoroughURLSegment = (urlSegment: string) => {
+  if (NYC_BOROUGH_SEGMENTS.includes(urlSegment)) {
+    return 'new_york_county';
+  }
+  return urlSegment;
+};
+
+const replaceNYCBoroughFips = (fipsCode: string) => {
+  if (['36047', '36061', '36005', '36081', '36085'].includes(fipsCode)) {
+    return '36061';
+  }
+  return fipsCode;
+};
 
 class RegionDB {
-  private regions: Region[];
+  public states: State[];
+  public counties: County[];
+  public metroAreas: MetroArea[];
+  private regionsByFips: Dictionary<Region>;
 
-  constructor(public states: State[], public counties: County[]) {
-    this.regions = [...states, ...counties];
+  constructor(
+    private statesByFips: Dictionary<State>,
+    private countiesByFips: Dictionary<County>,
+    private metroAreasByFips: Dictionary<MetroArea>,
+  ) {
+    this.states = values(statesByFips);
+    this.counties = values(countiesByFips);
+    this.metroAreas = values(metroAreasByFips);
+    this.regionsByFips = {
+      ...statesByFips,
+      ...countiesByFips,
+      ...metroAreasByFips,
+    };
   }
 
   findByFipsCode(fipsCode: FipsCode): Region | null {
-    const region = this.regions.find(region => region.fipsCode === fipsCode);
-    return region || null;
+    const fips = replaceNYCBoroughFips(fipsCode);
+    return this.regionsByFips[fips] || null;
+  }
+
+  findByFipsCodeStrict(fipsCode: FipsCode): Region {
+    const fips = replaceNYCBoroughFips(fipsCode);
+    const region = this.regionsByFips[fips];
+    assert(region, `Region unexpectedly not found for ${fipsCode}`);
+    return region;
   }
 
   findCountiesByStateCode(stateCode: string): County[] {
@@ -29,6 +74,13 @@ class RegionDB {
     return foundState || null;
   }
 
+  findMetroAreaByUrlParams(metroAreaUrlSegment: string) {
+    const foundMetro = this.metroAreas.find(
+      metro => metro.urlSegment === metroAreaUrlSegment,
+    );
+    return foundMetro || null;
+  }
+
   findCountyByUrlParams(
     stateUrlSegment: string,
     countyUrlSegment: string,
@@ -41,14 +93,17 @@ class RegionDB {
     const foundCounty = this.counties.find(
       county =>
         county.state.fipsCode === foundState.fipsCode &&
-        equalLower(county.urlSegment, countyUrlSegment),
+        equalLower(
+          county.urlSegment,
+          replaceNYCBoroughURLSegment(countyUrlSegment),
+        ),
     );
 
     return foundCounty || null;
   }
 
   all(): Region[] {
-    return this.regions;
+    return [...this.states, ...this.counties];
   }
 
   topCountiesByPopulation(limit: number): County[] {
@@ -63,4 +118,7 @@ function equalLower(a: string, b: string) {
   return a.toLowerCase() === b.toLowerCase();
 }
 
-export default RegionDB;
+const regions = new RegionDB(statesByFips, countiesByFips, metroAreasByFips);
+
+export default regions;
+export { RegionDB };

@@ -11,14 +11,11 @@
 import fs from 'fs-extra';
 import path from 'path';
 import { fetchMasterSnapshotNumber } from '../../src/common/utils/snapshots';
+import regions from '../../src/common/regions';
 import { Alert } from './interfaces';
 import moment from 'moment';
 import { getFirestore } from './firestore';
 import { SummariesMap } from '../../src/common/location_summaries';
-import {
-  getLocationNameForFips,
-  getLocationUrlForFips,
-} from '../../src/common/locations';
 import { Level } from '../../src/common/level';
 
 const summariesFolder = path.join(__dirname, 'summaries');
@@ -37,12 +34,13 @@ async function main() {
 
   const alerts: { [fips: string]: Alert } = {};
   for (const fips in newSummaries) {
+    const region = regions.findByFipsCodeStrict(fips);
     const newSummary = newSummaries[fips];
     const oldSummary = oldSummaries[fips];
     const oldLevel = oldSummary ? oldSummary.level : Level.UNKNOWN;
     const newLevel = newSummary.level;
-    const locationName = getLocationNameForFips(fips);
-    const locationURL = getLocationUrlForFips(fips);
+    const locationName = region.fullName;
+    const locationURL = region.canonicalUrl;
     // Use today's date (roughly in the Pacific timezone).
     const lastUpdated = moment.utc().subtract(8, 'hours').format('MM/DD/YYYY');
     if (oldLevel !== newLevel && newLevel !== Level.UNKNOWN) {

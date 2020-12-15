@@ -2,18 +2,16 @@ import React, { FunctionComponent } from 'react';
 import Map from 'components/Map/Map';
 import CountyMap from 'components/CountyMap/CountyMap';
 import { MAP_FILTERS } from 'screens/LocationPage/Enums/MapFilterEnums';
-import { Projections } from 'common/models/Projections';
 import * as Styles from './MiniMap.style';
+import { Region, State, County } from 'common/regions';
+import RegionMap from 'components/RegionMap';
 
 interface MiniMapProperties {
-  projections: Projections;
-  stateId: string;
-  selectedCounty: string;
-  setSelectedCounty: (input: string) => {};
+  region: Region;
   mobileMenuOpen: boolean;
-  setMobileMenuOpen: (input: boolean) => {};
+  setMobileMenuOpen: (input: boolean) => void;
   mapOption: string;
-  setMapOption: (input: string) => {};
+  setMapOption: (input: string) => void;
 }
 
 /**
@@ -21,21 +19,18 @@ interface MiniMapProperties {
  * to set the selected MobileMenu and map options as well
  */
 const MiniMap: FunctionComponent<MiniMapProperties> = ({
-  projections,
-  stateId,
-  selectedCounty,
-  setSelectedCounty,
+  region,
   mobileMenuOpen,
   setMobileMenuOpen,
   mapOption,
   setMapOption,
 }) => {
-  const showState = stateId !== MAP_FILTERS.DC;
-  const { stateName } = projections;
-
-  const onSelectCounty = (fullFips: string) => {
+  const onSelectCounty = () => {
     setMobileMenuOpen(false);
   };
+
+  // Exception for District of Columbia
+  const showState = !region.fipsCode.startsWith('11');
 
   return (
     <Styles.Container mobileMenuOpen={mobileMenuOpen}>
@@ -45,7 +40,7 @@ const MiniMap: FunctionComponent<MiniMapProperties> = ({
             selected={mapOption === MAP_FILTERS.STATE}
             onClick={() => setMapOption(MAP_FILTERS.STATE)}
           >
-            {stateName}
+            {regionTabName(region)}
           </Styles.TabItem>
         )}
         <Styles.TabItem
@@ -68,15 +63,27 @@ const MiniMap: FunctionComponent<MiniMapProperties> = ({
         {/* State Map */}
         {mapOption === MAP_FILTERS.STATE && (
           <Styles.StateMapContainer>
-            <CountyMap
-              selectedCounty={selectedCounty}
-              setSelectedCounty={onSelectCounty}
-            />
+            <CountyMap region={region} setSelectedCounty={onSelectCounty} />
+          </Styles.StateMapContainer>
+        )}
+        {mapOption === MAP_FILTERS.MSA && (
+          <Styles.StateMapContainer>
+            <RegionMap region={region} />
           </Styles.StateMapContainer>
         )}
       </Styles.MapContainer>
     </Styles.Container>
   );
 };
+
+function regionTabName(region: Region) {
+  if (region instanceof State) {
+    return region.shortName;
+  } else if (region instanceof County) {
+    return region.state.shortName;
+  } else {
+    return region.shortName;
+  }
+}
 
 export default MiniMap;
