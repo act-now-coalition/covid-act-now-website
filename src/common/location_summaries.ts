@@ -31,11 +31,6 @@ export function countySummary(fips: string): LocationSummary | null {
   return LocationSummariesByFIPS[fips] || null;
 }
 
-// Todo (chelsi)- this is temporary - needed to remove type. Revisit + fix before merging
-export function countySummaryTest(fips: string): any {
-  return LocationSummariesByFIPS[fips] || null;
-}
-
 /**
  * A bit hacky, but this tries to fetch the summaries to match a given snapshot.
  */

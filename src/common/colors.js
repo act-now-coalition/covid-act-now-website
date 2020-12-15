@@ -2,8 +2,8 @@ import { Level } from 'common/level';
 
 import {
   stateSummary,
-  // countySummary,
-  countySummaryTest,
+  countySummary,
+  // countySummaryTest,
 } from './location_summaries';
 
 export default {
@@ -71,7 +71,7 @@ export function countyColor(
   countyFipsCode,
   defaultColor = COLOR_MAP.GRAY.LIGHT,
 ) {
-  const summary = countySummaryTest(countyFipsCode);
+  const summary = countySummary(countyFipsCode);
   return colorFromLocationSummary(summary, defaultColor);
 }
 
