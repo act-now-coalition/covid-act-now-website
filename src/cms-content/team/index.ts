@@ -17,6 +17,7 @@ import graphicDesign from './graphic-design.json';
 import modeling from './modeling.json';
 import peopleOperations from './people-operations.json';
 import specialProjects from './special-projects.json';
+import legalCounsel from './legal-counsel.json';
 
 export interface UserProfile {
   fullName: string;
@@ -58,12 +59,19 @@ const allTeams = [
   userExperience,
   video,
   alumni,
+  legalCounsel,
 ];
 
 /*
   We are now removing categories for all teams other than leadership, board, advisors, and alumni
 */
-const individuallyGroupedTeams = ['Leadership', 'Board', 'Advisors', 'Alumni'];
+const individuallyGroupedTeams = [
+  'Leadership',
+  'Board',
+  'Advisors',
+  'Alumni',
+  'Legal Counsel',
+];
 
 const combinedTeamMembers = allTeams
   .filter(team => !individuallyGroupedTeams.includes(team.teamName))
@@ -75,7 +83,14 @@ const combinedTeamObj = {
   teamMembers: combinedTeamMembers,
 };
 
-const groupedTeams = [leadership, board, advisors, combinedTeamObj, alumni];
+const groupedTeams = [
+  leadership,
+  legalCounsel,
+  board,
+  advisors,
+  combinedTeamObj,
+  alumni,
+];
 
 export const teams: Team[] = groupedTeams.map(sanitizeTeam);
 

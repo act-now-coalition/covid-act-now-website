@@ -5,12 +5,10 @@ import {
   Wrapper,
   TopContainer,
   FooterContainer,
-  HeaderTitle,
   HeaderSection,
   HeaderSubCopy,
   ButtonsWrapper,
   HeaderButton,
-  LocationCopyWrapper,
   LastUpdatedDate,
   SectionHalf,
   Copy,
@@ -96,11 +94,7 @@ const LocationPageHeader = (props: {
       >
         <TopContainer>
           <HeaderSection>
-            <LocationCopyWrapper>
-              <HeaderTitle isEmbed={isEmbed}>
-                <LocationPageHeading region={region} isEmbed={isEmbed} />
-              </HeaderTitle>
-            </LocationCopyWrapper>
+            <LocationPageHeading region={region} isEmbed={isEmbed} />
             <ButtonsWrapper>
               <HeaderButton onClick={props.onHeaderShareClick || noop}>
                 <ShareOutlinedIcon />
@@ -147,11 +141,7 @@ const LocationPageHeader = (props: {
           {projections.isCounty && !isEmbed && (
             <HeaderSubCopy>
               <span>Updated {lastUpdatedDateString} · </span>
-              <span>County data is currently in beta. </span>
-              <span>
-                Because counties don’t report hospitalizations, our forecasts
-                may not be as accurate. See something wrong?{' '}
-              </span>
+              <span>See something wrong? </span>
               <a
                 href="mailto:info@covidactnow.org?subject=[Website%20Feedback]"
                 target="_blank"

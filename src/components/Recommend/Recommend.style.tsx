@@ -97,6 +97,8 @@ export const RecommendationsContainer = styled.div`
 `;
 
 export const RecommendationBody = styled(ReactMarkdown)`
+  margin: auto 0;
+
   p,
   ul,
   li {
