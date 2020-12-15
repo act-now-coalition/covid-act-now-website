@@ -6,7 +6,7 @@ import { colors } from '@material-ui/core';
 import palette from 'assets/theme/palette';
 import Button from '@material-ui/core/Button';
 
-export const EmbedButton = styled(Button)`
+export const EmbedButton = styled(Button)<{ bolder: boolean }>`
   height: 40px;
   min-width: 12rem;
   font-weight: ${props => (props.bolder ? '800' : 'inherit')};
@@ -61,7 +61,7 @@ export const EmbedPreviewStyled = styled(Paper)`
   padding: 3rem;
 `;
 
-export const EmbedDetailsStyled = styled(Paper)`
+export const EmbedDetailsStyled = styled(Paper)<{ condensed: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;

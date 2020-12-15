@@ -5,7 +5,7 @@ export function getDefaultRegions(region: Region): Region[] {
   return region instanceof County ? [region, region.state] : [region];
 }
 
-export function subcribeToLocations(emailAddress: string, fipsList: string[]) {
+export function subscribeToLocations(emailAddress: string, fipsList: string[]) {
   // Merge the locations with any existing ones since that's _probably_ what the user wants.
   return getFirebase()
     .firestore()
