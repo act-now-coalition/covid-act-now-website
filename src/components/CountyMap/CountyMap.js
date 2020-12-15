@@ -13,7 +13,7 @@ import { CountyMapWrapper, CountyMapLayerWrapper } from './CountyMap.style';
 import regions, { getStateCode } from 'common/regions';
 import { assert } from 'common/utils';
 
-const CountyMap = ({ region, setSelectedCounty }) => {
+const CountyMap = ({ region }) => {
   const stateCode = getStateCode(region);
   assert(stateCode, 'Only regions with states currently supported');
 
@@ -78,7 +78,6 @@ const CountyMap = ({ region, setSelectedCounty }) => {
                   setContent(NAME);
                 }}
                 onMouseLeave={onMouseLeave}
-                onClick={() => setSelectedCounty()}
                 style={{
                   cursor: 'pointer',
                   hover: {

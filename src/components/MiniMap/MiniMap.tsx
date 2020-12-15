@@ -9,7 +9,6 @@ import RegionMap from 'components/RegionMap';
 interface MiniMapProperties {
   region: Region;
   mobileMenuOpen: boolean;
-  setMobileMenuOpen: (input: boolean) => void;
   mapOption: string;
   setMapOption: (input: string) => void;
 }
@@ -21,14 +20,9 @@ interface MiniMapProperties {
 const MiniMap: FunctionComponent<MiniMapProperties> = ({
   region,
   mobileMenuOpen,
-  setMobileMenuOpen,
   mapOption,
   setMapOption,
 }) => {
-  const onSelectCounty = () => {
-    setMobileMenuOpen(false);
-  };
-
   // Exception for District of Columbia
   const showState = !region.fipsCode.startsWith('11');
 
@@ -66,7 +60,7 @@ const MiniMap: FunctionComponent<MiniMapProperties> = ({
         {/* State Map */}
         {mapOption === MAP_FILTERS.STATE && (
           <Styles.StateMapContainer>
-            <CountyMap region={region} setSelectedCounty={onSelectCounty} />
+            <CountyMap region={region} />
           </Styles.StateMapContainer>
         )}
         {mapOption === MAP_FILTERS.MSA && (
