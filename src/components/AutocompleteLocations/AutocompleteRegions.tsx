@@ -27,27 +27,40 @@ const AutocompleteRegions: React.FC<{
   selectedRegions: Region[];
   onChangeRegions: (event: React.ChangeEvent<{}>, newRegions: Region[]) => void;
   ariaLabelledBy?: string;
-}> = ({ regions, onChangeRegions, selectedRegions, ariaLabelledBy }) => (
-  <Autocomplete
-    multiple
-    options={regions}
-    getOptionLabel={region => region.shortName}
-    onChange={onChangeRegions}
-    getOptionSelected={getOptionSelected}
-    value={selectedRegions}
-    filterOptions={createFilterOptions({ matchFrom: 'start' })}
-    renderInput={params => (
-      <TextField
-        {...params}
-        variant="outlined"
-        placeholder="+ Add"
-        inputProps={{
-          ...params.inputProps,
-          'aria-labelledby': ariaLabelledBy,
-        }}
-      />
-    )}
-  />
-);
+  placeholder?: string;
+}> = ({
+  regions,
+  onChangeRegions,
+  selectedRegions,
+  ariaLabelledBy,
+  placeholder = '+ Add',
+}) => {
+  const ariaLabelOptions = ariaLabelledBy
+    ? { 'aria-labelledby': ariaLabelledBy }
+    : { 'aria-label': 'Select locations' };
+
+  return (
+    <Autocomplete
+      multiple
+      options={regions}
+      getOptionLabel={region => region.shortName}
+      onChange={onChangeRegions}
+      getOptionSelected={getOptionSelected}
+      value={selectedRegions}
+      filterOptions={createFilterOptions({ matchFrom: 'start' })}
+      renderInput={params => (
+        <TextField
+          {...params}
+          variant="outlined"
+          placeholder={placeholder}
+          inputProps={{
+            ...params.inputProps,
+            ...ariaLabelOptions,
+          }}
+        />
+      )}
+    />
+  );
+};
 
 export default AutocompleteRegions;
