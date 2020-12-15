@@ -130,9 +130,7 @@ const CompareMain = (props: {
 
   const locations = !stateId
     ? homepageLocationsForCompare
-    : locationPageLocationsForCompare.filter(
-        location => location.region.fipsCode !== '11001',
-      ); // Note (12/15): filtering out DC county
+    : locationPageLocationsForCompare;
   const viewMoreCopy = !stateId
     ? homepageViewMoreCopy
     : locationPageViewMoreCopy;
