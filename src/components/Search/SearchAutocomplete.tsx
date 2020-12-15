@@ -15,23 +15,16 @@ const SearchAutocomplete: React.FC<{
 }> = ({ locations, filterLimit }) => {
   const [input, setInput] = useState('');
   const [isZip, setIsZip] = useState(false);
-  const [useZipPromptCopy, setUseZipPromptCopy] = useState(false);
+  const [noOptionsCopy, setNoOptionsCopy] = useState('No location found');
 
   const onInputChange = (e: any, value: string) => {
     setInput(value);
     const isStringOfDigits = /^\d+$/.test(value);
-
-    if (value.length > 5 && isStringOfDigits) {
-      setIsZip(false);
-      setUseZipPromptCopy(false);
-    } else {
-      if (value.length === 5 && isStringOfDigits) {
-        setIsZip(true);
-      } else if (value.length < 5 && isStringOfDigits) {
-        setUseZipPromptCopy(true);
-        setIsZip(false);
-      }
-    }
+    if (isStringOfDigits) {
+      setNoOptionsCopy('Enter a valid 5-digit zip code');
+      if (value.length === 5) setIsZip(true);
+      else setIsZip(false);
+    } else setNoOptionsCopy('No location found');
   };
 
   const stringifyOption = (option: Region) => {
@@ -70,9 +63,7 @@ const SearchAutocomplete: React.FC<{
 
   return (
     <Autocomplete
-      noOptionsText={
-        useZipPromptCopy ? 'Enter a 5-digit zip code' : 'No location found'
-      }
+      noOptionsText={noOptionsCopy}
       onInputChange={onInputChange}
       options={locations}
       disableListWrap
