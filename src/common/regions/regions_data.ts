@@ -54,34 +54,38 @@ function buildCounties(
   statesByFips: Dictionary<State>,
   countyAdjacency: { [fipsCode: string]: AdjacencyInfo },
 ): County[] {
-  return chain(state_county_map_dataset)
-    .map(stateData => stateData.county_dataset)
-    .flatten()
-    .map(countyInfo => {
-      /**
-       * TODO: The following counties in New York State have the same
-       * `full_fips_code ` (36061), but different `county_fips_code`.
-       * Determine how we want to handle this before shipping.
-       *
-       * - New York County (county_fips_code: 061)
-       * - Queens County (county_fips_code: 081)
-       * - Richmond County" (county_fips_code: 085)
-       * - Bronx County" (county_fips_code: 005)
-       */
-      const countyFips = `${countyInfo.state_fips_code}${countyInfo.county_fips_code}`;
-      const state = statesByFips[countyInfo.state_fips_code];
-      const adjacentCounties = countyAdjacency[countyFips]?.adjacent_counties;
-      return new County(
-        countyInfo.county,
-        countyInfo.county_url_name,
-        countyFips,
-        countyInfo.population,
-        state,
-        countyInfo.cities || [],
-        adjacentCounties || [],
-      );
-    })
-    .value();
+  return (
+    chain(state_county_map_dataset)
+      .map(stateData => stateData.county_dataset)
+      .flatten()
+      .map(countyInfo => {
+        /**
+         * TODO: The following counties in New York State have the same
+         * `full_fips_code ` (36061), but different `county_fips_code`.
+         * Determine how we want to handle this before shipping.
+         *
+         * - New York County (county_fips_code: 061)
+         * - Queens County (county_fips_code: 081)
+         * - Richmond County" (county_fips_code: 085)
+         * - Bronx County" (county_fips_code: 005)
+         */
+        const countyFips = `${countyInfo.state_fips_code}${countyInfo.county_fips_code}`;
+        const state = statesByFips[countyInfo.state_fips_code];
+        const adjacentCounties = countyAdjacency[countyFips]?.adjacent_counties;
+        return new County(
+          countyInfo.county,
+          countyInfo.county_url_name,
+          countyFips,
+          countyInfo.population,
+          state,
+          countyInfo.cities || [],
+          adjacentCounties || [],
+        );
+      })
+      /* Filtering out DC county (which is redundant to DC state + has mismatching data) */
+      .filter(countyInfo => countyInfo.fipsCode !== '11001')
+      .value()
+  );
 }
 
 function buildMetroAreas(countiesByFips: Dictionary<County>): MetroArea[] {
@@ -124,4 +128,13 @@ export const countiesByFips = fromPairs(
 const metroAreas = buildMetroAreas(countiesByFips);
 export const metroAreasByFips = fromPairs(
   metroAreas.map(metro => [metro.fipsCode, metro]),
+);
+
+const customAreas = [
+  new State('USA', '', '00001', 331486822, 'USA'),
+  new State('Native American Majority Counties', '', '00002', 314704, 'NAMC'),
+];
+
+export const customAreasByFips = fromPairs(
+  customAreas.map(metro => [metro.fipsCode, metro]),
 );

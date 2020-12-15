@@ -18,8 +18,18 @@ import Typography from '@material-ui/core/Typography';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { useEmbed } from 'common/utils/hooks';
+import { County } from 'common/locations';
 
-export default function EmbedPreview({ open, onClose, county }) {
+interface Message {
+  message: string;
+  key: any;
+}
+
+const EmbedPreview: React.FC<{
+  open: boolean;
+  onClose: () => void;
+  county: County;
+}> = ({ open, onClose, county }) => {
   const {
     isEmbed,
     getEmbedHeight,
@@ -32,9 +42,9 @@ export default function EmbedPreview({ open, onClose, county }) {
   // When you click both copy links back to back, it'll trigger multiple snackbar
   // messages.  We show them serially using a queue per example at
   // https://material-ui.com/components/snackbars/#consecutive-snackbars
-  const snackbarQueueRef = useRef([]);
+  const snackbarQueueRef = useRef<Array<Message>>([]);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [messageInfo, setMessageInfo] = useState(undefined);
+  const [messageInfo, setMessageInfo] = useState<Message | undefined>();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -45,7 +55,7 @@ export default function EmbedPreview({ open, onClose, county }) {
     }
   };
 
-  const handleCopySuccessMessage = message => () => {
+  const handleCopySuccessMessage = (message: string) => () => {
     snackbarQueueRef.current.push({
       message,
       key: new Date().getTime(),
@@ -60,7 +70,7 @@ export default function EmbedPreview({ open, onClose, county }) {
     }
   };
 
-  const handleSnackbarClose = (event, reason) => {
+  const handleSnackbarClose = (event: any, reason: string) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -79,12 +89,12 @@ export default function EmbedPreview({ open, onClose, county }) {
   return (
     <>
       <CenteredModal open={open} onClose={onClose}>
-        <EmbedPreviewStyled elevation="2">
+        <EmbedPreviewStyled>
           <EmbedPreviewExitButton onClick={onClose}>
             <CloseIcon />
           </EmbedPreviewExitButton>
           <EmbedPreviewScrollContainer>
-            <Grid container align="center" justify="center">
+            <Grid container alignItems="center" justify="center">
               {/* If we're sharing from an embed, we don't need a preview */}
               {!isEmbed && (
                 <Grid xs={12} lg={6} item>
@@ -158,4 +168,6 @@ export default function EmbedPreview({ open, onClose, county }) {
       />
     </>
   );
-}
+};
+
+export default EmbedPreview;
