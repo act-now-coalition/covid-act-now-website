@@ -154,9 +154,8 @@ const Explore: React.FunctionComponent<{
     [initialFipsList],
   );
 
-  const indigeneousPopulationsLocations = useMemo(
-    () => ['00001', '00002'].map(fips => regions.findByFipsCode(fips)!),
-    [],
+  const indigeneousPopulationsLocations = ['00001', '00002'].map(
+    fips => regions.findByFipsCode(fips)!,
   );
   const autocompleteLocations = useMemo(
     () => getAutocompleteLocations(initialFipsList[0]),

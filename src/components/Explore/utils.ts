@@ -398,7 +398,7 @@ function truncateCountyName(countyName: string) {
 
 function getShortLocationLabel(location: Region) {
   return location.regionType === RegionType.COUNTY
-    ? `${truncateCountyName(location.abbreviation)}`
+    ? truncateCountyName(location.abbreviation)
     : location.abbreviation;
 }
 
