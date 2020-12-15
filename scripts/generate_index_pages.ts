@@ -8,11 +8,13 @@
 
 import fs from 'fs-extra';
 import path from 'path';
+import process from 'process';
 import _ from 'lodash';
 import urlJoin from 'url-join';
 import US_STATE_DATASET from '../src/components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 import ShareImageUrlJSON from '../src/assets/data/share_images_url.json';
 import { STATES } from '../src/common';
+import regions from '../src/common/regions';
 import { assert } from '../src/common/utils';
 import * as urls from '../src/common/urls';
 import { getNextSharedComponentId } from '../src/common/sharing';
@@ -21,9 +23,10 @@ import { getNextSharedComponentId } from '../src/common/sharing';
 // of the counties we have any data for and are therefore share-able.
 import { LocationSummariesByFIPS } from '../src/common/location_summaries';
 import { ALL_METRICS, getMetricName } from '../src/common/metric';
-const COUNTIES = Object.keys(LocationSummariesByFIPS).filter(
-  fips => fips.length === 5,
-);
+
+const COUNTIES = regions.counties
+  .map(c => c.fipsCode)
+  .filter(fips => LocationSummariesByFIPS[fips] !== undefined);
 
 // We pre-generate the next 2000 IDs each time we do a deploy which should be
 // sufficient unless we get more than 2000 shares/day.
@@ -272,4 +275,7 @@ function findCountyByFips(fips: string) {
   return fipsLookup[fips];
 }
 
-main();
+main().catch(e => {
+  console.error(e);
+  process.exit(-1);
+});
