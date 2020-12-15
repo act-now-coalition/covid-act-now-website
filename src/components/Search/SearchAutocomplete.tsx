@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Autocomplete } from '@material-ui/lab';
 import { createFilterOptions } from '@material-ui/lab/useAutocomplete';
 import TextField from '@material-ui/core/TextField';
-import { Region, State, County } from 'common/regions';
+import { Region, County } from 'common/regions';
 import MenuItem from './MenuItem';
 
 function getOptionSelected(option: Region, selectedOption: Region) {
@@ -37,26 +37,8 @@ const SearchAutocomplete: React.FC<{
     return option.name;
   };
 
-  // Todo (chelsi) - fix this
   const onSelect = (e: any, value: Region) => {
-    if (value instanceof State) {
-      const stateUrl = (value as State).canonicalUrl;
-      window.location.href = stateUrl;
-    } else if (value instanceof County) {
-      const countyUrl = `${(value as County).state.canonicalUrl}/county/${
-        value.urlSegment
-      }`;
-      window.location.href = countyUrl;
-    }
-    //   else if (value instanceof MetroArea) {
-    //     const metroUrl = `/us/metro/${
-    //       (value as MetroArea).urlSegment
-    //     }`
-    //     window.location.href = metroUrl
-    // }
-    else {
-      window.location.href = '/';
-    }
+    window.location.href = value.relativeUrl;
   };
 
   const zipCodeInput = isZip ? input : '';

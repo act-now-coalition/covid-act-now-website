@@ -27,7 +27,6 @@ export function getSearchAutocompleteLocations(region?: Region) {
     return [...sortedStates, ...sortedMetros, ...sortedCounties];
   }
 
-  // Metro page:
   // TODO (chelsi): use same logic as state/county pages? (return counties in metro first, and then?)
   if (region instanceof MetroArea) {
     const [countiesInMetro, otherCounties] = partition(sortedCounties, county =>
@@ -41,13 +40,20 @@ export function getSearchAutocompleteLocations(region?: Region) {
     ];
   }
 
-  // County and state pages:
-  const stateFips = getStateFips(region);
-  const [stateCounties, otherCounties] = partition(sortedCounties, county =>
-    belongsToState(county, stateFips),
-  );
-
-  return [...stateCounties, ...sortedStates, ...sortedMetros, ...otherCounties];
+  if (region instanceof State || region instanceof County) {
+    const stateFips = getStateFips(region);
+    const [stateCounties, otherCounties] = partition(sortedCounties, county =>
+      belongsToState(county, stateFips),
+    );
+    return [
+      ...stateCounties,
+      ...sortedStates,
+      ...sortedMetros,
+      ...otherCounties,
+    ];
+  } else {
+    return [];
+  }
 }
 
 /* To get color of location icon in dropdown menu:  */
