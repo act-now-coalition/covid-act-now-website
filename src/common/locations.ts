@@ -159,14 +159,6 @@ export function getLocationNameForFips(fips: string): string {
   }
 }
 
-export function getRelativeUrlForFips(fips: string): string {
-  return `/${getCanonicalUrl(fips)}`;
-}
-
-export function getLocationUrlForFips(fips: string): string {
-  return urlJoin('https://covidactnow.org', getRelativeUrlForFips(fips));
-}
-
 const allCountiesCache: County[] = [];
 export function allCounties(): County[] {
   if (allCountiesCache.length === 0) {

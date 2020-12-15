@@ -442,6 +442,7 @@ export function getSubtitle(
 export function getAutocompleteLocations(locationFips: string) {
   const states = regions.states;
   const allCounties = regions.counties;
+
   const currentLocation = regions.findByFipsCode(locationFips)!;
   const stateCode = getStateCode(currentLocation);
 
@@ -457,13 +458,13 @@ export function getAutocompleteLocations(locationFips: string) {
   // TODO(michael): Where should aggregations go in the list?
   return currentLocation.regionType === RegionType.STATE
     ? [
-        // ...AGGREGATED_LOCATIONS,
+        ...regions.customAreas,
         ...sortedStates,
         ...sortedStateCounties,
         ...sortedOtherCounties,
       ]
     : [
-        // ...AGGREGATED_LOCATIONS,
+        ...regions.customAreas,
         ...sortedStateCounties,
         ...sortedStates,
         ...sortedOtherCounties,

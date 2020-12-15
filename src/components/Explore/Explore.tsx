@@ -155,8 +155,7 @@ const Explore: React.FunctionComponent<{
   );
 
   const indigeneousPopulationsLocations = useMemo(
-    () => [],
-    // () => ['00001', '00002'].map(findLocationForFips),
+    () => ['00001', '00002'].map(fips => regions.findByFipsCode(fips)!),
     [],
   );
   const autocompleteLocations = useMemo(
@@ -168,9 +167,7 @@ const Explore: React.FunctionComponent<{
     initialChartIndigenousPopulations || false,
   );
   const [selectedLocations, setSelectedLocations] = useState<Region[]>(
-    // TODO: Fix indigenous
-    // chartIndigenous ? indigeneousPopulationsLocations :
-    initialLocations,
+    chartIndigenous ? indigeneousPopulationsLocations : initialLocations,
   );
 
   const onChangeSelectedLocations = (newLocations: Region[]) => {
@@ -195,7 +192,7 @@ const Explore: React.FunctionComponent<{
 
   useEffect(() => {
     if (chartIndigenous) {
-      // setSelectedLocations(indigeneousPopulationsLocations);
+      setSelectedLocations(indigeneousPopulationsLocations);
       setNormalizeData(true);
     } else {
       setSelectedLocations(initialLocations);
@@ -230,7 +227,7 @@ const Explore: React.FunctionComponent<{
   // they are not carried over to the new location page.
   useEffect(() => {
     if (initialChartIndigenousPopulations) {
-      // setSelectedLocations(indigeneousPopulationsLocations);
+      setSelectedLocations(indigeneousPopulationsLocations);
       setNormalizeData(true);
     } else {
       setSelectedLocations(initialLocations);
