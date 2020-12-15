@@ -6,7 +6,7 @@ import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import CriteriaExplanation from './CriteriaExplanation/CriteriaExplanation';
-import Announcements from './Announcements/Announcements';
+import Announcements from './Announcements';
 import { useLocation } from 'react-router-dom';
 import PartnersSection from 'components/PartnersSection/PartnersSection';
 import HomePageThermometer from 'screens/HomePage/HomePageThermometer';

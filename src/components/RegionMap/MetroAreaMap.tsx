@@ -44,7 +44,7 @@ const MetroAreaMap: React.FC<{
               return (
                 <Link
                   key={geo.rsmKey}
-                  to={region?.relativeUrl || '/'}
+                  to={region ? `/${region.relativeUrl}` : '/'}
                   aria-label={region?.fullName || ''}
                 >
                   <Styles.StateShape
@@ -65,7 +65,7 @@ const MetroAreaMap: React.FC<{
               return (
                 <Link
                   key={geo.id}
-                  to={region?.relativeUrl || '/'}
+                  to={region ? `/${region.relativeUrl}` : '/'}
                   aria-label={region?.shortName || ''}
                 >
                   <Styles.MetroCounty
@@ -121,7 +121,7 @@ function getProjectionConfig(
   const distanceLongitude = geoDistance([ax, ay], [bx, ay]);
   const distanceLatitude = geoDistance([ax, ay], [ax, by]);
   const scale =
-    0.75 * Math.min(width / distanceLongitude, height / distanceLatitude);
+    0.4 * Math.min(width / distanceLongitude, height / distanceLatitude);
   return { scale, center };
 }
 

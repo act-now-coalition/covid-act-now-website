@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { MAP_FILTERS } from './Enums/MapFilterEnums';
 import SearchHeader from 'components/Header/SearchHeader';
@@ -9,8 +9,7 @@ import ChartsHolder from 'components/LocationPage/ChartsHolder';
 import { LoadingScreen } from './LocationPage.style';
 import { useProjectionsFromRegion } from 'common/utils/model';
 import { getPageTitle, getPageDescription } from './utils';
-import { getStateCode, Region } from 'common/regions';
-import { assert } from 'common/utils';
+import { getStateCode, MetroArea, Region } from 'common/regions';
 
 interface LocationPageProps {
   region: Region;
@@ -19,12 +18,22 @@ interface LocationPageProps {
 function LocationPage({ region }: LocationPageProps) {
   let { chartId } = useParams<{ chartId: string }>();
 
-  const stateCode = getStateCode(region);
-  assert(stateCode, 'Location Pages must have state codes');
+  const defaultMapOption = (region: Region) => {
+    const stateCode = getStateCode(region);
+    if (stateCode === MAP_FILTERS.DC) {
+      return MAP_FILTERS.NATIONAL;
+    }
+    if (region instanceof MetroArea) {
+      return MAP_FILTERS.MSA;
+    }
+    return MAP_FILTERS.STATE;
+  };
+  const [mapOption, setMapOption] = useState(defaultMapOption(region));
 
-  const [mapOption, setMapOption] = useState(
-    stateCode === MAP_FILTERS.DC ? MAP_FILTERS.NATIONAL : MAP_FILTERS.STATE,
-  );
+  useEffect(() => {
+    setMapOption(defaultMapOption(region));
+  }, [region]);
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const projections = useProjectionsFromRegion(region);
 

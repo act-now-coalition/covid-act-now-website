@@ -1,6 +1,11 @@
 import { sortBy, takeRight, values, Dictionary } from 'lodash';
 import { Region, County, State, MetroArea, FipsCode } from './types';
-import { statesByFips, countiesByFips, metroAreasByFips } from './regions_data';
+import {
+  statesByFips,
+  countiesByFips,
+  metroAreasByFips,
+  customAreasByFips,
+} from './regions_data';
 import { assert } from 'common/utils';
 
 // More NYC Borough logic.  This should be removed when
@@ -30,20 +35,28 @@ class RegionDB {
   public states: State[];
   public counties: County[];
   public metroAreas: MetroArea[];
+  // Custom areas are additional locations that are manually created.
+  // It is created in the service of USA + NAMC aggregations and should
+  // be used sparingly.
+  public customAreas: State[];
   private regionsByFips: Dictionary<Region>;
 
   constructor(
     private statesByFips: Dictionary<State>,
     private countiesByFips: Dictionary<County>,
     private metroAreasByFips: Dictionary<MetroArea>,
+    private customAreasByFips: Dictionary<State>,
   ) {
     this.states = values(statesByFips);
     this.counties = values(countiesByFips);
     this.metroAreas = values(metroAreasByFips);
+    this.customAreas = values(customAreasByFips);
+
     this.regionsByFips = {
       ...statesByFips,
       ...countiesByFips,
       ...metroAreasByFips,
+      ...customAreasByFips,
     };
   }
 
@@ -118,7 +131,12 @@ function equalLower(a: string, b: string) {
   return a.toLowerCase() === b.toLowerCase();
 }
 
-const regions = new RegionDB(statesByFips, countiesByFips, metroAreasByFips);
+const regions = new RegionDB(
+  statesByFips,
+  countiesByFips,
+  metroAreasByFips,
+  customAreasByFips,
+);
 
 export default regions;
 export { RegionDB };
