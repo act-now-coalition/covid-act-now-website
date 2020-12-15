@@ -3,7 +3,7 @@ import regions, { County, getStateCode } from 'common/regions';
 import { isValidEmail } from 'common/utils';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import { AutocompleteRegions } from 'components/AutocompleteLocations';
-import { getDefaultRegions, subcribeToLocations } from './utils';
+import { getDefaultRegions, subscribeToLocations } from './utils';
 import { StyledNewsletter, InputHolder, InputError } from './Newsletter.style';
 
 class Newsletter extends React.Component {
@@ -56,7 +56,7 @@ class Newsletter extends React.Component {
     const { selectedRegions } = this.state;
     const fipsList = selectedRegions.map(region => region.fipsCode);
     if (fipsList.length) {
-      await subcribeToLocations(email, fipsList);
+      await subscribeToLocations(email, fipsList);
     }
   }
 
