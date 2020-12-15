@@ -94,7 +94,7 @@ function buildMetroAreas(countiesByFips: Dictionary<County>): MetroArea[] {
       const [name, statesText] = metro.cbsaTitle.split(', ');
       const stateCodes = statesText.split('-');
       return new MetroArea(
-        name,
+        `${name.split('-')[0]} metro area`,
         metro.urlSegment,
         metro.cbsaCode,
         metro.population,

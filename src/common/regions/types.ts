@@ -110,7 +110,7 @@ export class MetroArea extends Region {
   }
 
   get fullName() {
-    return `${this.name}, ${this.stateCodes}`;
+    return `${this.name}`;
   }
 
   get shortName() {
