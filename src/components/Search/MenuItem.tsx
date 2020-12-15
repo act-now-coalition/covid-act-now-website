@@ -1,14 +1,18 @@
 import React from 'react';
 import ShortNumber from 'common/utils/ShortNumber';
 import StateCircleSvg from 'components/StateSvg/StateCircleSvg';
-import { StyledResultsMenuSubText } from 'components/MapSelectors/MapSelectors.style';
-import { MenuItemWrapper, IconWrapper, LocationName } from './Search.style';
+import {
+  MenuItemWrapper,
+  IconWrapper,
+  LocationName,
+  Zipcode,
+} from './Search.style';
 import { Region } from 'common/regions';
 import { getStateIconFillColor } from './utils';
 import { getStateCode } from 'common/regions';
 
-const MenuItem = (props: { region: Region }) => {
-  const { region } = props;
+const MenuItem = (props: { region: Region; isZip: boolean; input: string }) => {
+  const { region, isZip, input } = props;
 
   return (
     <MenuItemWrapper>
@@ -20,10 +24,11 @@ const MenuItem = (props: { region: Region }) => {
         />
       </IconWrapper>
       <div>
-        <LocationName>{region.name}</LocationName>
-        <StyledResultsMenuSubText>
+        <LocationName>{region.shortName}</LocationName>
+        {isZip && <Zipcode>contains zipcode {input}</Zipcode>}
+        <div>
           <span>{ShortNumber(region.population)} residents</span>
-        </StyledResultsMenuSubText>
+        </div>
       </div>
     </MenuItemWrapper>
   );

@@ -7,6 +7,10 @@ export const MenuItemWrapper = styled.div`
   strong {
     font-weight: 600;
   }
+
+  span {
+    color: rgba(0, 0, 0, 0.7);
+  }
 `;
 
 export const IconWrapper = styled.div`
@@ -17,4 +21,8 @@ export const IconWrapper = styled.div`
 
 export const LocationName = styled.p`
   margin: 0;
+`;
+
+export const Zipcode = styled.span`
+  font-style: italic;
 `;

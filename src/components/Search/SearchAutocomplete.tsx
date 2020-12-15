@@ -16,9 +16,11 @@ const SearchAutocomplete = (props: {
   const { locations, filterLimit } = props;
 
   // WIP :
+  const [input, setInput] = useState('');
   const [isZip, setIsZip] = useState(false);
 
   const onInputChange = (e: any, value: string) => {
+    setInput(value);
     const isStringOfDigits = /^\d+$/.test(value);
     const isLengthForZipCheck = value.length === 5;
     if (isStringOfDigits && isLengthForZipCheck) setIsZip(true);
@@ -68,7 +70,7 @@ const SearchAutocomplete = (props: {
         />
       )}
       renderOption={option => {
-        return <MenuItem region={option} />;
+        return <MenuItem region={option} isZip={isZip} input={input} />;
       }}
     />
   );
