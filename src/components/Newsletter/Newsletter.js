@@ -1,18 +1,16 @@
 import React from 'react';
-import { StyledNewsletter, InputHolder, InputError } from './Newsletter.style';
-import { getLocationNames } from 'common/locations';
-import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import regions, { County, getStateCode } from 'common/regions';
+import { isValidEmail } from 'common/utils';
+import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import { AutocompleteRegions } from 'components/AutocompleteLocations';
 import { getDefaultRegions, subcribeToLocations } from './utils';
-import { isValidEmail } from 'common/utils';
+import { StyledNewsletter, InputHolder, InputError } from './Newsletter.style';
 
 class Newsletter extends React.Component {
   constructor(props) {
     super();
     this.form = null;
     this.emailInput = null;
-    this.autocompleteOptions = getLocationNames();
     this.state = {
       checked: true,
       email: '',
@@ -74,7 +72,7 @@ class Newsletter extends React.Component {
 
   render() {
     const { region } = this.props;
-    const { selectedRegions, errorMessage } = this.state;
+    const { checked, selectedRegions, errorMessage } = this.state;
     const countyName = region instanceof County ? region.name : null;
     const stateCode = region ? getStateCode(region) : null;
     const errMessageOpen = errorMessage.length > 0;
@@ -121,7 +119,6 @@ class Newsletter extends React.Component {
             regions={regions.all()}
             selectedRegions={selectedRegions}
             onChangeRegions={onChangeRegions}
-            ariaLabelledBy=""
             placeholder="+ Add alert locations"
           />
           <InputHolder>
@@ -151,8 +148,8 @@ class Newsletter extends React.Component {
               value="wurhhh"
               id="wurhhh"
               name="cm-ol-wurhhh"
-              onChange={() => this.setState({ checked: !this.state.checked })}
-              checked={this.state.checked}
+              onChange={() => this.setState({ checked: !checked })}
+              checked={checked}
             />
             <label htmlFor="checkbox">
               Also send me <b>daily news</b> with the latest data and scientific
