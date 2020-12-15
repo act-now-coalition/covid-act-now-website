@@ -24,10 +24,8 @@ export abstract class Region {
   abstract get abbreviation(): string;
   abstract get relativeUrl(): string;
 
-  // Todo (Chelsi) - switch back before merging (or maybe keep this change)
   get canonicalUrl() {
-    // return urlJoin('https://covidactnow.org', this.relativeUrl);
-    return urlJoin(window.location.origin, this.relativeUrl);
+    return urlJoin('https://covidactnow.org', this.relativeUrl);
   }
 
   toString() {

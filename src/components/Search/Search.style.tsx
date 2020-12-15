@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const MenuItemWrapper = styled.div`
   display: flex;
@@ -24,4 +25,9 @@ export const LocationName = styled.p`
 
 export const Zipcode = styled.span`
   font-style: italic;
+`;
+
+export const StyledLink = styled(Link)`
+  color: inherit;
+  text-decoration: inherit;
 `;
