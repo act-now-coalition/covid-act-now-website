@@ -41,26 +41,7 @@ export class Projections {
   }
 
   get locationName(): string {
-    if (!this.isCounty) {
-      return this.region.fullName;
-    }
-    const county = this.region as County;
-
-    const NEW_YORK_COUNTIES_BLACKLIST = [
-      'Kings County',
-      'Queens County',
-      'Bronx County',
-      'Richmond County',
-    ];
-
-    if (
-      county.stateCode === 'NY' &&
-      NEW_YORK_COUNTIES_BLACKLIST.includes(county.name)
-    ) {
-      return `New York, NY`;
-    }
-
-    return county.fullName;
+    return this.region.fullName;
   }
 
   get population(): number {

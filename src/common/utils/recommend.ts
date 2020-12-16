@@ -248,9 +248,9 @@ function isBetweenDates(point: Column, dateFrom: Date, dateTo: Date) {
  */
 export function getDynamicIntroCopy(
   projection: Projection,
+  locationName: string,
   metricValues: { [metric in Metric]: number | null },
 ): string {
-  const { locationName } = projection;
   const hasPosTestRate = isNumber(metricValues[Metric.POSITIVE_TESTS]);
 
   const numCasesPerWeek = getWeeklyNewCasesPer100k(projection);

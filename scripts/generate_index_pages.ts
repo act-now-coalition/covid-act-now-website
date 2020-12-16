@@ -267,11 +267,6 @@ function findCountyByFips(fips: string) {
     }
   }
 
-  // NYC HACK.
-  if (['36047', '36061', '36005', '36081', '36085'].includes(fips)) {
-    fips = '36061';
-  }
-
   return fipsLookup[fips];
 }
 

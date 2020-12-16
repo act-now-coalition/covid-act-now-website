@@ -26,6 +26,7 @@ import { Projections } from 'common/models/Projections';
 import { formatUtcDate } from 'common/utils';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
+import InfoIcon from '@material-ui/icons/Info';
 import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
 import { Metric } from 'common/metric';
 import { BANNER_COPY } from 'components/Banner/ThirdWaveBanner';
@@ -35,17 +36,6 @@ import HospitalizationsAlert, {
 import { ThermometerImage } from 'components/Thermometer';
 import { useLocationPageRegion } from 'common/regions';
 import LocationPageHeading from './LocationPageHeading';
-
-const NewFeatureCopy = (props: {
-  locationName: string;
-  onNewUpdateClick: () => void;
-}) => {
-  return (
-    <Copy isUpdateCopy>
-      {BANNER_COPY} <Link to={'/deep-dives/us-third-wave'}>Learn more</Link>.
-    </Copy>
-  );
-};
 
 const noop = () => {};
 
@@ -57,7 +47,6 @@ const LocationPageHeader = (props: {
   onHeaderShareClick: () => void;
   onHeaderSignupClick: () => void;
   isMobile?: boolean;
-  onNewUpdateClick: () => void;
 }) => {
   const hasStats = !!Object.values(props.stats).filter(
     (val: number | null) => val !== null,
@@ -81,8 +70,6 @@ const LocationPageHeader = (props: {
   const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
   const lastUpdatedDateString =
     lastUpdatedDate !== null ? formatUtcDate(lastUpdatedDate) : '';
-
-  const inHospitalizationsPeak = isHospitalizationsPeak(projections.primary);
 
   return (
     <Fragment>
@@ -116,18 +103,7 @@ const LocationPageHeader = (props: {
               </SectionColumn>
             </SectionHalf>
             <SectionHalf>
-              <WarningIcon />
-              <SectionColumn isUpdateCopy>
-                <ColumnTitle isUpdateCopy>alert</ColumnTitle>
-                {inHospitalizationsPeak ? (
-                  <HospitalizationsAlert projection={projections.primary} />
-                ) : (
-                  <NewFeatureCopy
-                    locationName={region.name}
-                    onNewUpdateClick={props.onNewUpdateClick}
-                  />
-                )}
-              </SectionColumn>
+              <NotificationArea projections={projections} />
             </SectionHalf>
           </HeaderSection>
           <LocationHeaderStats
@@ -160,6 +136,78 @@ const LocationPageHeader = (props: {
         </FooterContainer>
       </Wrapper>
     </Fragment>
+  );
+};
+
+const NotificationArea: React.FC<{ projections: Projections }> = ({
+  projections,
+}) => {
+  const region = projections.region;
+
+  enum Notification {
+    NYCCounty,
+    HospitalizationsPeak,
+    ThirdWave,
+  }
+  let notification: Notification;
+
+  // TODO(2020/12/22): Remove NYC notice after it's been up for a week or so.
+  if (['36047', '36061', '36005', '36081', '36085'].includes(region.fipsCode)) {
+    notification = Notification.NYCCounty;
+  } else if (isHospitalizationsPeak(projections.primary)) {
+    notification = Notification.HospitalizationsPeak;
+  } else {
+    notification = Notification.ThirdWave;
+  }
+
+  let icon, title;
+  if (notification === Notification.NYCCounty) {
+    icon = <InfoIcon />;
+    title = 'update';
+  } else {
+    icon = <WarningIcon />;
+    title = 'alert';
+  }
+
+  return (
+    <React.Fragment>
+      {icon}
+      <SectionColumn isUpdateCopy>
+        <ColumnTitle isUpdateCopy>{title}</ColumnTitle>
+
+        {notification === Notification.HospitalizationsPeak && (
+          <HospitalizationsAlert
+            locationName={region.fullName}
+            projection={projections.primary}
+          />
+        )}
+
+        {notification === Notification.NYCCounty && (
+          <NYCAggregationChangeCopy locationName={region.name} />
+        )}
+
+        {notification === Notification.ThirdWave && <ThirdWaveCopy />}
+      </SectionColumn>
+    </React.Fragment>
+  );
+};
+
+const NYCAggregationChangeCopy: React.FC<{ locationName: string }> = ({
+  locationName,
+}) => {
+  return (
+    <Copy>
+      Prior to December 15th, {locationName} was aggregated together with the
+      other New York City boroughs. It now has its own metrics and risk level.
+    </Copy>
+  );
+};
+
+const ThirdWaveCopy = () => {
+  return (
+    <Copy isUpdateCopy>
+      {BANNER_COPY} <Link to={'/deep-dives/us-third-wave'}>Learn more</Link>.
+    </Copy>
   );
 };
 

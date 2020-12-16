@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import '../../App.css'; /* optional for styling like the :hover pseudo-class */
-import { useHistory } from 'react-router-dom';
-import { REVERSED_STATES } from 'common';
 import { Level } from 'common/level';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { Legend, LegendItem } from './Legend';
 import USACountyMap from './USACountyMap';
-import { MAP_FILTERS } from '../../screens/LocationPage/Enums/MapFilterEnums';
 import ReactTooltip from 'react-tooltip';
 import { MapInstructions, MobileLineBreak } from './Map.style';
 
@@ -16,46 +13,24 @@ function Map({
   hideLegend = false,
   hideInstructions = false,
   hideLegendTitle = false,
-  setMobileMenuOpen,
-  setMapOption,
   onClick = null,
   isMiniMap = false,
   showCounties = false,
 }) {
-  const history = useHistory();
   const [content, setContent] = useState('');
 
-  const goToStatePage = React.useCallback(
-    page => {
-      window.scrollTo(0, 0);
-      history.push(page);
-    },
-    [history],
-  );
-
-  // TODO(michael): Since we wrap every state in a <Link> we may not need this
-  // onClick handler anymore (which would mean we don't need setMobileMenuOpen,
-  // setMapOption, or onClick anymore either!)
+  // TODO(chris): The only user of `onClick` is the embed. When you click on a state
+  // it eventually navigates you to the home page. If we want the action of clicking
+  // on a state to take you to the home page, we should change the link in USACountyMap
+  // rather than redirecting here.
   const handleClick = React.useCallback(
     stateName => {
       // externally provided click handler
       if (onClick) {
-        return onClick(stateName);
-      }
-
-      const stateCode = REVERSED_STATES[stateName];
-
-      goToStatePage(`/us/${stateCode.toLowerCase()}`);
-
-      if (setMapOption) {
-        setMapOption(MAP_FILTERS.STATE);
-      }
-
-      if (setMobileMenuOpen) {
-        setMobileMenuOpen(false);
+        return onClick();
       }
     },
-    [onClick, goToStatePage, setMapOption, setMobileMenuOpen],
+    [onClick],
   );
 
   return (

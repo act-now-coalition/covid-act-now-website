@@ -30,13 +30,15 @@ function LocationPage({ region }: LocationPageProps) {
   };
   const [mapOption, setMapOption] = useState(defaultMapOption(region));
 
-  useEffect(() => {
-    setMapOption(defaultMapOption(region));
-  }, [region]);
-
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const projections = useProjectionsFromRegion(region);
 
+  useEffect(() => {
+    setMapOption(defaultMapOption(region));
+
+    // Close the map on mobile on any change to a region.
+    setMobileMenuOpen(false);
+  }, [region]);
   // Projections haven't loaded yet
   // If a new county has just been selected, we may not have projections
   // for the new county loaded yet
@@ -71,7 +73,6 @@ function LocationPage({ region }: LocationPageProps) {
         <MiniMap
           region={region}
           mobileMenuOpen={mobileMenuOpen}
-          setMobileMenuOpen={setMobileMenuOpen}
           mapOption={mapOption}
           setMapOption={setMapOption}
         />
