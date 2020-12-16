@@ -37,7 +37,7 @@ const LocationPageHeading: React.FC<{
           {', '}
           <Styles.HeaderStateCode>{region.stateCodes}</Styles.HeaderStateCode>
         </Styles.HeaderTitle>
-        <h2>{region.name}</h2>
+        <Styles.HeaderSubtitle>{region.name}</Styles.HeaderSubtitle>
       </Styles.Container>
     );
   } else {
