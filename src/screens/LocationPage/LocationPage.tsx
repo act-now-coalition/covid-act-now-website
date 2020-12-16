@@ -37,9 +37,6 @@ function LocationPage({ region }: LocationPageProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const projections = useProjectionsFromRegion(region);
 
-  // (Chelsi)-commented from my branch when merging with dev
-  // const region = useLocationPageRegion();
-
   // Projections haven't loaded yet
   // If a new county has just been selected, we may not have projections
   // for the new county loaded yet

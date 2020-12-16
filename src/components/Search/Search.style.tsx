@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import Paper from '@material-ui/core/Paper';
 
 export const MenuItemWrapper = styled.div`
   display: flex;
@@ -30,4 +31,10 @@ export const Zipcode = styled.span`
 export const StyledLink = styled(Link)`
   color: inherit;
   text-decoration: inherit;
+`;
+
+export const StyledPaper = styled(Paper)`
+  border-radius: 0;
+  margin: 0;
+  margin-left: 2px;
 `;

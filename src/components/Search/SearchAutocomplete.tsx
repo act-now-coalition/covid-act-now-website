@@ -4,6 +4,7 @@ import { createFilterOptions } from '@material-ui/lab/useAutocomplete';
 import TextField from '@material-ui/core/TextField';
 import { Region, County } from 'common/regions';
 import MenuItem from './MenuItem';
+import { StyledPaper } from './Search.style';
 
 function getOptionSelected(option: Region, selectedOption: Region) {
   return option.fipsCode === selectedOption.fipsCode;
@@ -12,7 +13,8 @@ function getOptionSelected(option: Region, selectedOption: Region) {
 const SearchAutocomplete: React.FC<{
   locations: Region[];
   filterLimit: number;
-}> = ({ locations, filterLimit }) => {
+  setHideMapToggle?: any;
+}> = ({ locations, filterLimit, setHideMapToggle }) => {
   const [input, setInput] = useState('');
   /* We only check for a zipcode match when the input is all numbers and has a length of 5: */
   const [checkForZipcodeMatch, setCheckForZipcodeMatch] = useState(false);
@@ -55,16 +57,25 @@ const SearchAutocomplete: React.FC<{
         limit: filterLimit,
         stringify: stringifyOption,
       })}
+      popupIcon={<span />} // adding an empty span removes default MUI arrow icon
       renderInput={params => (
         <TextField
           {...params}
           variant="outlined"
-          placeholder="Search for your state, county, or zip"
+          placeholder="Search for a state, county, or zip code"
         />
       )}
       renderOption={option => {
         return <MenuItem region={option} zipCodeInput={zipCodeInput} />;
       }}
+      openOnFocus
+      onOpen={() => {
+        if (setHideMapToggle) setHideMapToggle(true);
+      }}
+      onClose={() => {
+        if (setHideMapToggle) setHideMapToggle(false);
+      }}
+      PaperComponent={StyledPaper}
     />
   );
 };
