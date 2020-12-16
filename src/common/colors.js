@@ -1,10 +1,6 @@
 import { Level } from 'common/level';
 
-import {
-  stateSummary,
-  countySummary,
-  // countySummaryTest,
-} from './location_summaries';
+import { stateSummary, countySummary } from './location_summaries';
 
 export default {
   LIGHTGRAY: '#f2f2f2',

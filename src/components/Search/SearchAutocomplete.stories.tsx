@@ -4,7 +4,7 @@ import SearchAutocomplete from './SearchAutocomplete';
 import {
   getSearchAutocompleteLocations,
   getFilterLimit,
-} from 'components/Search/utils';
+} from 'components/Search';
 
 export default {
   title: 'Shared Components/SearchAutocomplete',

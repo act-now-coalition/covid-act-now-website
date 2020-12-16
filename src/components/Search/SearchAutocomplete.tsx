@@ -14,7 +14,8 @@ const SearchAutocomplete: React.FC<{
   filterLimit: number;
 }> = ({ locations, filterLimit }) => {
   const [input, setInput] = useState('');
-  const [isZip, setIsZip] = useState(false);
+  /* We only check for a zipcode match when the input is all numbers and has a length of 5: */
+  const [checkForZipcodeMatch, setCheckForZipcodeMatch] = useState(false);
   const [noOptionsCopy, setNoOptionsCopy] = useState('No location found');
 
   const onInputChange = (e: any, value: string) => {
@@ -22,17 +23,14 @@ const SearchAutocomplete: React.FC<{
     const isStringOfDigits = /^\d+$/.test(value);
     if (isStringOfDigits) {
       setNoOptionsCopy('Enter a valid 5-digit zip code');
-      if (value.length === 5) setIsZip(true);
-      else setIsZip(false);
+      if (value.length === 5) setCheckForZipcodeMatch(true);
+      else setCheckForZipcodeMatch(false);
     } else setNoOptionsCopy('No location found');
   };
 
   const stringifyOption = (option: Region) => {
-    if (isZip) {
-      if ((option as County).zipCodes) {
-        return `${(option as County).zipCodes.join(' ')}`;
-      }
-      return option.name;
+    if (checkForZipcodeMatch && (option as County).zipCodes) {
+      return `${(option as County).zipCodes.join(' ')}`;
     }
     return option.name;
   };
@@ -41,7 +39,7 @@ const SearchAutocomplete: React.FC<{
     window.location.href = `/${value.relativeUrl}`;
   };
 
-  const zipCodeInput = isZip ? input : '';
+  const zipCodeInput = checkForZipcodeMatch ? input : '';
 
   return (
     <Autocomplete
@@ -53,7 +51,7 @@ const SearchAutocomplete: React.FC<{
       onChange={onSelect}
       getOptionSelected={getOptionSelected}
       filterOptions={createFilterOptions({
-        matchFrom: isZip ? 'any' : 'start',
+        matchFrom: checkForZipcodeMatch ? 'any' : 'start',
         limit: filterLimit,
         stringify: stringifyOption,
       })}

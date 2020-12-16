@@ -8,7 +8,7 @@ import {
   Zipcode,
   StyledLink,
 } from './Search.style';
-import { getStateIconFillColor } from './utils';
+import { getStateIconFillColor } from 'components/Search';
 import { getStateCode, State, County, Region } from 'common/regions';
 
 const MenuItem: React.FC<{ region: Region; zipCodeInput: string }> = ({

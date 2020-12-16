@@ -34,7 +34,7 @@ import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import {
   getSearchAutocompleteLocations,
   getFilterLimit,
-} from 'components/Search/utils';
+} from 'components/Search';
 
 function getPageDescription() {
   const date = formatMetatagDate();

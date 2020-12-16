@@ -15,7 +15,7 @@ import { Region } from 'common/regions';
 import {
   getSearchAutocompleteLocations,
   getFilterLimit,
-} from 'components/Search/utils';
+} from 'components/Search';
 
 const SearchHeader = ({
   mobileMenuOpen,
