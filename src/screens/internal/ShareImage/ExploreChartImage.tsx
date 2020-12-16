@@ -20,7 +20,7 @@ import {
   getMetricName,
 } from 'components/Explore/utils';
 import { Series } from 'components/Explore/interfaces';
-import regions from 'common/regions';
+import regions, { Region } from 'common/regions';
 
 const ExploreChartImage = ({ componentParams }: { componentParams: any }) => {
   const theme = useContext(ThemeContext);
@@ -28,13 +28,13 @@ const ExploreChartImage = ({ componentParams }: { componentParams: any }) => {
   const currentMetric = componentParams.currentMetric;
   const currentMetricName = getMetricName(currentMetric);
   const normalizeData = componentParams.normalizeData;
-  const selectedLocations = (componentParams.selectedFips as string[]).flatMap(
-    (fips: string) => {
+
+  const [selectedLocations] = useState<Region[]>(
+    (componentParams.selectedFips as string[]).flatMap((fips: string) => {
       const region = regions.findByFipsCode(fips);
       return region ? [region] : [];
-    },
+    }),
   );
-
   const [chartSeries, setChartSeries] = useState<Series[]>([]);
   useEffect(() => {
     const fetchSeries = () =>
