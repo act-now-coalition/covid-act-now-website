@@ -42,8 +42,6 @@ const SearchHeader = ({
     history.push(route);
 
     window.scrollTo(0, 0);
-
-    setMobileMenuOpen(false);
   };
 
   const toggleMobileMenu = () => {
