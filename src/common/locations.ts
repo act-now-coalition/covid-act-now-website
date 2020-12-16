@@ -102,11 +102,6 @@ export function getLocationNames(): Location[] {
 
 // TODO(michael): Make this return County type and fix up references.
 export function findCountyByFips(fips: string) {
-  // NYC HACK.
-  if (['36047', '36061', '36005', '36081', '36085'].includes(fips)) {
-    fips = '36061';
-  }
-
   const statesData = US_STATE_DATASET.state_county_map_dataset as any;
   for (const state in statesData) {
     const countiesData = statesData[state].county_dataset;

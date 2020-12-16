@@ -50870,7 +50870,7 @@
           "county_fips_code": "047",
           "state_fips_code": "36",
           "state_code": "NY",
-          "full_fips_code": "36061",
+          "full_fips_code": "36047",
           "cities": ["Brooklyn"],
           "population": 2559903
         },
@@ -51166,9 +51166,9 @@
           "county_fips_code": "081",
           "state_fips_code": "36",
           "state_code": "NY",
-          "full_fips_code": "36061",
+          "full_fips_code": "36081",
           "cities": ["Queens"],
-          "population": 1628706
+          "population": 2253858
         },
         {
           "county": "Richmond County",
@@ -51176,9 +51176,9 @@
           "county_fips_code": "085",
           "state_fips_code": "36",
           "state_code": "NY",
-          "full_fips_code": "36061",
+          "full_fips_code": "36085",
           "cities": ["Staten Island"],
-          "population": 1628706
+          "population": 476143
         },
         {
           "county": "Bronx County",
@@ -51186,9 +51186,9 @@
           "county_fips_code": "005",
           "state_fips_code": "36",
           "state_code": "NY",
-          "full_fips_code": "36061",
+          "full_fips_code": "36005",
           "cities": ["The Bronx"],
-          "population": 1628706
+          "population":1418207
         }
       ]
     },
