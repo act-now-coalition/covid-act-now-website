@@ -1,13 +1,13 @@
 import SearchAutocomplete from './SearchAutocomplete';
 import {
   getSearchAutocompleteLocations,
-  getStateIconFillColor,
+  getLocationIconFillColor,
   getFilterLimit,
 } from './utils';
 
 export {
   getSearchAutocompleteLocations,
-  getStateIconFillColor,
+  getLocationIconFillColor,
   getFilterLimit,
 };
 export default SearchAutocomplete;
