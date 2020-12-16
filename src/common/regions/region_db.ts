@@ -42,8 +42,7 @@ class RegionDB {
   }
 
   findByFipsCodeStrict(fipsCode: FipsCode): Region {
-    const fips = replaceNYCBoroughFips(fipsCode);
-    const region = this.regionsByFips[fips];
+    const region = this.regionsByFips[fipsCode];
     assert(region, `Region unexpectedly not found for ${fipsCode}`);
     return region;
   }
