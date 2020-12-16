@@ -75,6 +75,8 @@ export function fetchAllCountyProjections(snapshotUrl: string | null = null) {
           getStateName(summaryWithTimeseries.state) !== undefined,
       )
       .filter(summaryWithTimeseries => {
+        // We don't want to return county projections for counties that we
+        // don't have in the regions instance
         const region = regions.findByFipsCode(summaryWithTimeseries.fips);
         return region instanceof County;
       })
