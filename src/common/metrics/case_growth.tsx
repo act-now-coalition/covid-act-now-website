@@ -84,7 +84,8 @@ export const CASE_GROWTH_RATE_LEVEL_INFO_MAP: LevelInfoMap = {
 };
 
 function renderStatus(projections: Projections): React.ReactElement {
-  const { locationName, rt } = projections.primary;
+  const { rt } = projections.primary;
+  const locationName = projections.locationName;
 
   if (rt === null) {
     return (

@@ -105,6 +105,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
 
   const recommendationsIntro = getDynamicIntroCopy(
     projection,
+    projections.locationName,
     projections.getMetricValues(),
   );
 
@@ -128,13 +129,13 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
   // TODO(Chelsi): make these 2 functions less redundant?
   const recommendationsFedModalCopy = getModalCopyWithFedLevel(
     projection,
-    projection.locationName,
+    projections.locationName,
     projections.getMetricValues(),
   );
 
   const recommendationsHarvardModalCopy = getModalCopyWithHarvardLevel(
     projection,
-    projection.locationName,
+    projections.locationName,
     projections.getMetricValues(),
   );
 

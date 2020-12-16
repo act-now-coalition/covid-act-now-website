@@ -4,7 +4,6 @@ import { County, MetroArea, Region, State } from 'common/regions';
 
 import EmbedPreview from './EmbedPreview';
 import { Projections } from 'common/models/Projections';
-import { findCountyByFips } from 'common/locations';
 import { fail } from 'common/utils';
 
 const BASE_SHARE_URL = 'https://covidactnow.org/us';
@@ -23,7 +22,6 @@ const ShareModelBlock = ({
   const { displayName, shareURL } = getUrlAndShareQuote(region);
   const shareQuote = `I'm keeping track of ${displayName}'s COVID data and risk level with @CovidActNow. What does your community look like?`;
   const [showEmbedPreviewModal, setShowEmbedPreviewModal] = useState(false);
-  const county = region && findCountyByFips(region.fipsCode);
   return (
     <>
       <ShareBlock
@@ -38,7 +36,7 @@ const ShareModelBlock = ({
       <EmbedPreview
         open={showEmbedPreviewModal}
         onClose={() => setShowEmbedPreviewModal(false)}
-        county={county}
+        region={region}
       />
     </>
   );

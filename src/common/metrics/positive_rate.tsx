@@ -85,7 +85,8 @@ export const POSITIVE_TESTS_LEVEL_INFO_MAP: LevelInfoMap = {
 };
 
 function renderStatus(projections: Projections) {
-  const { currentTestPositiveRate, locationName } = projections.primary;
+  const { currentTestPositiveRate } = projections.primary;
+  const locationName = projections.locationName;
   if (currentTestPositiveRate === null) {
     const fips = projections.fips;
     if ((fips.length > 2 && fips.startsWith('12')) || fips.startsWith('42')) {

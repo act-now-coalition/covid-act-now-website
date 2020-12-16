@@ -24,10 +24,10 @@ export function isHospitalizationsPeak(projection: Projection): boolean {
     : false;
 }
 
-const HospitalizationsAlert: React.FC<{ projection: Projection }> = ({
-  projection,
-}) => {
-  const { locationName } = projection;
+const HospitalizationsAlert: React.FC<{
+  locationName: string;
+  projection: Projection;
+}> = ({ locationName, projection }) => {
   const peak = findHospitaliztionsPeak(projection);
 
   if (!peak || !peak.y) {

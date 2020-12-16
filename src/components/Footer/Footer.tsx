@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from 'assets/images/footerlogoDarkWithURL';
-import { useEmbed } from 'common/utils/hooks';
+import { useIsEmbed } from 'common/utils/hooks';
 import ExternalLink from 'components/ExternalLink';
 import FooterSocialLinks from './FooterSocialLinks';
 import {
@@ -16,7 +16,7 @@ import {
 const Footer = ({ children }: { children: React.ReactNode }) => {
   const { pathname } = useLocation();
   const isMapPage = pathname.startsWith('/us') || pathname.startsWith('/state');
-  const { isEmbed } = useEmbed();
+  const isEmbed = useIsEmbed();
 
   if (isEmbed) {
     return null;

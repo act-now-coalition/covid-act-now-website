@@ -7,7 +7,7 @@ Keeping all social-icons-related code here for if/when we reinstate them.
 import React, { Fragment } from 'react';
 import { find } from 'lodash';
 import { useLocation, match as MatchType, matchPath } from 'react-router-dom';
-import { useEmbed } from 'common/utils/hooks';
+import { useIsEmbed } from 'common/utils/hooks';
 import {
   FacebookIcon,
   FacebookShareButton,
@@ -57,7 +57,7 @@ function locationNameFromMatch(
 const SocialIcons = (props: { isMobile: boolean }) => {
   const { isMobile } = props;
   const locationPath = useLocation();
-  const { isEmbed } = useEmbed();
+  const isEmbed = useIsEmbed();
 
   // Don't show in iFrame
   if (isEmbed) return null;
