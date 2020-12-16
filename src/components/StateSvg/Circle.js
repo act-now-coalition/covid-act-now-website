@@ -1,13 +1,12 @@
 import React from 'react';
 import * as States from './index';
-import { CircleWrapper, StateWrapper, ActionWrapper } from './Circle.style';
+import { CircleWrapper, StateWrapper } from './Circle.style';
 
 const CircleStateAction = ({ state, ratio = 1, fillColor }) => {
   const State = States[state];
 
   const DEFAULT_SIZE = 64;
   const DEFAULT_CIRCLE_RADIUS = 32;
-  const ACTION_SIZE = 24;
 
   const size = ratio * DEFAULT_SIZE;
 
@@ -34,15 +33,6 @@ const CircleStateAction = ({ state, ratio = 1, fillColor }) => {
       <StateWrapper size={size} ratio={ratio}>
         <State />
       </StateWrapper>
-      <ActionWrapper>
-        <svg
-          width={ACTION_SIZE}
-          height={ACTION_SIZE}
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        ></svg>
-      </ActionWrapper>
     </CircleWrapper>
   );
 };
