@@ -12,7 +12,7 @@ import process from 'process';
 import _ from 'lodash';
 import urlJoin from 'url-join';
 import ShareImageUrlJSON from '../src/assets/data/share_images_url.json';
-import regions, { State, County } from '../src/common/regions';
+import regions, { County } from '../src/common/regions';
 import * as urls from '../src/common/urls';
 import { getNextSharedComponentId } from '../src/common/sharing';
 
@@ -144,7 +144,7 @@ async function main() {
     );
   }
 
-  regions.states.forEach(async (state: State) => {
+  for (const state of regions.states) {
     const stateCode = state.stateCode.toLowerCase();
     const relativeImageUrl = `/states/${state.stateCode.toLowerCase()}`;
     const relativeSiteUrl = `/us/${stateCode}/`;
@@ -154,21 +154,21 @@ async function main() {
       relativeImageUrl,
       state.fullName,
     );
-  });
+  }
 
-  regions.counties
-    .filter(hasLocationSummary)
-    .forEach(async (county: County) => {
-      const stateCode = county.stateCode.toLowerCase();
-      const relativeSiteUrl = `/us/${stateCode}/county/${county.urlSegment}`;
-      const relativeImageUrl = `counties/${county.fipsCode}`;
-      await buildLocationPages(
-        builder,
-        relativeSiteUrl,
-        relativeImageUrl,
-        county.fullName,
-      );
-    });
+  const counties = regions.counties.filter(hasLocationSummary);
+
+  for (const county of counties) {
+    const stateCode = county.stateCode.toLowerCase();
+    const relativeSiteUrl = `/us/${stateCode}/county/${county.urlSegment}`;
+    const relativeImageUrl = `counties/${county.fipsCode}`;
+    await buildLocationPages(
+      builder,
+      relativeSiteUrl,
+      relativeImageUrl,
+      county.fullName,
+    );
+  }
 }
 
 class IndexPageBuilder {
