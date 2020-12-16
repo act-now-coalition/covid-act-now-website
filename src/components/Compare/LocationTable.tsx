@@ -6,6 +6,7 @@ import {
   RankedLocationSummary,
   GeoScopeFilter,
   SummaryForCompare,
+  HomepageLocationScope,
 } from 'common/utils/compare';
 import CompareTableRow from './CompareTableRow';
 import HeaderCell from './HeaderCell';
@@ -182,6 +183,7 @@ const LocationTable: React.FunctionComponent<{
   isHomepage?: boolean;
   viewAllCounties?: boolean;
   geoScope?: GeoScopeFilter;
+  homepageScope: HomepageLocationScope;
 }> = ({
   setSorter,
   setSortDescending,
@@ -201,6 +203,7 @@ const LocationTable: React.FunctionComponent<{
   isHomepage,
   viewAllCounties,
   geoScope,
+  homepageScope,
 }) => {
   const Container = isModal ? Styles.ModalContainer : Styles.Container;
 
@@ -235,7 +238,7 @@ const LocationTable: React.FunctionComponent<{
 
   const visibleLocations = !isModal
     ? sortedLocations.slice(0, numLocationsMain)
-    : allCountiesView
+    : homepageScope !== HomepageLocationScope.STATES
     ? sortedLocations.slice(0, 100)
     : modalLocations;
 

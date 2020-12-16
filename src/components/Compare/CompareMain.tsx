@@ -23,6 +23,8 @@ import {
   getLocationPageViewMoreCopy,
   MetroFilter,
   GeoScopeFilter,
+  HomepageLocationScope,
+  getAllMetroAreas,
 } from 'common/utils/compare';
 import { Metric } from 'common/metric';
 import { countySummary } from 'common/location_summaries';
@@ -41,6 +43,12 @@ const scopeValueMap = {
   [GeoScopeFilter.NEARBY]: 0,
   [GeoScopeFilter.STATE]: 50,
   [GeoScopeFilter.COUNTRY]: 99,
+};
+
+const homepageScopeValueMap = {
+  [HomepageLocationScope.COUNTIES]: 0,
+  [HomepageLocationScope.CITIES]: 50,
+  [HomepageLocationScope.STATES]: 99,
 };
 
 const CompareMain = (props: {
@@ -99,19 +107,32 @@ const CompareMain = (props: {
   const [sortDescending, setSortDescending] = useState(true);
   const [sortByPopulation, setSortByPopulation] = useState(false);
   const [countyTypeToView, setCountyTypeToView] = useState(MetroFilter.ALL);
+
   // For homepage:
   const [viewAllCounties, setViewAllCounties] = useState(false);
-  // For location page:
-  const [geoScope, setGeoScope] = useState(GeoScopeFilter.STATE);
+  const [homepageScope, setHomepageScope] = useState(
+    HomepageLocationScope.COUNTIES,
+  );
 
-  const homepageLocationsForCompare = viewAllCounties
-    ? getAllCountiesSelection(countyTypeToView)
-    : getAllStates();
+  const homepageScopeToLocations = {
+    [HomepageLocationScope.COUNTIES]: getAllCountiesSelection(countyTypeToView),
+    [HomepageLocationScope.CITIES]: getAllMetroAreas(),
+    [HomepageLocationScope.STATES]: getAllStates(),
+  };
+
+  function getHomepageLocations(scope: HomepageLocationScope) {
+    return homepageScopeToLocations[scope];
+  }
+
+  const homepageLocationsForCompare = getHomepageLocations(homepageScope);
 
   const homepageViewMoreCopy = getHomePageViewMoreCopy(
-    viewAllCounties,
+    homepageScope,
     countyTypeToView,
   );
+
+  // For location page:
+  const [geoScope, setGeoScope] = useState(GeoScopeFilter.STATE);
 
   function getLocationPageLocations() {
     if (geoScope === GeoScopeFilter.NEARBY) {
@@ -145,6 +166,11 @@ const CompareMain = (props: {
 
   const defaultSliderValue = scopeValueMap[geoScope];
   const [sliderValue, setSliderValue] = useState(defaultSliderValue);
+
+  const defaultHomepageSliderValue = homepageScopeValueMap[homepageScope];
+  const [homepageSliderValue, setHomepageSliderValue] = useState(
+    defaultHomepageSliderValue,
+  );
 
   // State needed to reconstruct the current sort / filters. Needs to be persisted
   // when we generate sharing URLs, etc.
@@ -214,6 +240,11 @@ const CompareMain = (props: {
     setSliderValue,
     setShowFaqModal,
     createCompareShareId,
+
+    homepageScope,
+    setHomepageScope,
+    homepageSliderValue,
+    setHomepageSliderValue,
   };
 
   return (

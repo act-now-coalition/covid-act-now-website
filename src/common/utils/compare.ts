@@ -9,7 +9,13 @@ import { LocationSummary } from 'common/location_summaries';
 import { Metric, getMetricNameForCompare } from 'common/metric';
 import { isNumber } from 'lodash';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
-import regions, { County, Region, RegionType, State } from 'common/regions';
+import regions, {
+  County,
+  Region,
+  RegionType,
+  State,
+  MetroArea,
+} from 'common/regions';
 import { fail } from 'assert';
 import { assert } from '.';
 
@@ -48,6 +54,11 @@ function getLocationObj(region: Region): SummaryForCompare {
       region: region,
       metricsInfo: stateSummary((region as State).stateCode)!,
     };
+  } else if (region.regionType === RegionType.MSA) {
+    return {
+      region: region,
+      metricsInfo: countySummary((region as MetroArea).fipsCode)!,
+    };
   } else {
     fail('doesnt yet work for non states or counties');
   }
@@ -67,6 +78,10 @@ export function getAllStates(): SummaryForCompare[] {
 
 export function getAllCounties(): SummaryForCompare[] {
   return regions.counties.map(getLocationObj);
+}
+
+export function getAllMetroAreas(): SummaryForCompare[] {
+  return regions.metroAreas.map(getLocationObj);
 }
 
 export function getAllCountiesOfState(stateCode: string): SummaryForCompare[] {
@@ -198,12 +213,23 @@ export function getLocationPageViewMoreCopy(
   }
 }
 
+export enum HomepageLocationScope {
+  COUNTIES,
+  CITIES,
+  STATES,
+}
+
 export function getHomePageViewMoreCopy(
-  viewAllCounties: boolean,
+  homepageScope: HomepageLocationScope,
   countyTypeToView: MetroFilter,
 ) {
-  if (!viewAllCounties) return 'View all states';
-  else return `View top 100 ${getMetroPrefixCopy(countyTypeToView)} counties`;
+  if (homepageScope === HomepageLocationScope.STATES) {
+    return 'View all states';
+  } else if (homepageScope === HomepageLocationScope.CITIES) {
+    return 'View top 100 cities';
+  } else if (homepageScope === HomepageLocationScope.COUNTIES) {
+    return `View top 100 ${getMetroPrefixCopy(countyTypeToView)} counties`;
+  } else return `View more`;
 }
 
 // For formatting and abbreviating location names:
@@ -232,6 +258,8 @@ export function getColumnLocationName(region: Region) {
   } else if (region.regionType === RegionType.COUNTY) {
     const countyWithAbbreviatedSuffix = region.abbreviation;
     return splitCountyName(countyWithAbbreviatedSuffix);
+  } else if (region.regionType === RegionType.MSA) {
+    return [region.name];
   } else {
     fail('dont support other regions');
   }

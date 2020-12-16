@@ -14,6 +14,7 @@ import {
   getFilterLabel,
   GeoScopeFilter,
   trackCompareEvent,
+  HomepageLocationScope,
 } from 'common/utils/compare';
 import {
   Container,
@@ -24,13 +25,22 @@ import {
   MetroMenuPopper,
 } from 'components/Compare/Filters.style';
 import { EventAction } from 'components/Analytics';
-import { SwitchComponent } from 'components/SharedComponents';
+import HomepageSlider from './HomepageSlider';
 
-// Maps each numerical slider value to its corresponding GeoScopeFilter
+// For location page: maps each numerical slider value to its corresponding GeoScopeFilter
 export const sliderNumberToFilterMap: { [val: number]: GeoScopeFilter } = {
   0: GeoScopeFilter.NEARBY,
   50: GeoScopeFilter.STATE,
   99: GeoScopeFilter.COUNTRY,
+};
+
+// For homepage: maps each numerical slider value to its corresponding HomepageLocationScope
+export const homepageSliderNumberToFilterMap: {
+  [val: number]: HomepageLocationScope;
+} = {
+  0: HomepageLocationScope.COUNTIES,
+  50: HomepageLocationScope.CITIES,
+  99: HomepageLocationScope.STATES,
 };
 
 const Filters = (props: {
@@ -46,11 +56,26 @@ const Filters = (props: {
   isModal: boolean;
   sliderValue: GeoScopeFilter;
   setSliderValue: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
+
+  homepageScope: HomepageLocationScope;
+  setHomepageScope: React.Dispatch<React.SetStateAction<HomepageLocationScope>>;
+  homepageSliderValue: HomepageLocationScope;
+  setHomepageSliderValue: React.Dispatch<
+    React.SetStateAction<HomepageLocationScope>
+  >;
 }) => {
-  const { sliderValue, setSliderValue, setCountyTypeToView } = props;
+  const {
+    sliderValue,
+    setSliderValue,
+    setCountyTypeToView,
+    homepageScope,
+    setHomepageScope,
+    homepageSliderValue,
+    setHomepageSliderValue,
+  } = props;
 
   const disableMetroMenu = props.isHomepage
-    ? !props.viewAllCounties
+    ? homepageScope !== HomepageLocationScope.COUNTIES
     : sliderValue === 0;
 
   useEffect(() => {
@@ -97,16 +122,6 @@ const Filters = (props: {
     },
   ];
 
-  const switchHandleChange = (newViewAllCounties: boolean) => {
-    if (props.isHomepage && props.setViewAllCounties) {
-      props.setViewAllCounties(newViewAllCounties);
-      trackCompareEvent(
-        EventAction.SELECT,
-        `Location Type: ${newViewAllCounties ? 'Counties' : 'States'}`,
-      );
-    }
-  };
-
   const sliderHandleChange = (event: any, value: any) => {
     if (props.setGeoScope) {
       setSliderValue(value);
@@ -114,6 +129,19 @@ const Filters = (props: {
       trackCompareEvent(
         EventAction.SELECT,
         `GeoScope: ${GeoScopeFilter[sliderNumberToFilterMap[value]]}`,
+      );
+    }
+  };
+
+  const homepageSliderHandleChange = (event: any, value: any) => {
+    if (setHomepageScope) {
+      setHomepageSliderValue(value);
+      setHomepageScope(homepageSliderNumberToFilterMap[value]);
+      trackCompareEvent(
+        EventAction.SELECT,
+        `GeoScope: ${
+          HomepageLocationScope[homepageSliderNumberToFilterMap[value]]
+        }`,
       );
     }
   };
@@ -142,18 +170,17 @@ const Filters = (props: {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
-  const switchProps = {
-    leftLabel: 'States',
-    rightLabel: 'Counties',
-    checked: props.viewAllCounties,
-    onChange: switchHandleChange,
-    isModal: props.isModal,
-  };
-
   return (
     <Fragment>
       <Container $isModal={props.isModal} $isHomepage={props.isHomepage}>
-        {props.isHomepage && <SwitchComponent {...switchProps} />}
+        {props.isHomepage && (
+          <HomepageSlider
+            homepageScope={homepageScope}
+            onChange={homepageSliderHandleChange}
+            homepageSliderValue={homepageSliderValue}
+            $isModal={props.isModal}
+          />
+        )}
         {props.county && (
           <SliderContainer>
             <GeoSlider

@@ -27,6 +27,7 @@ export function stateSummary(stateCode: string): LocationSummary | null {
   return LocationSummariesByFIPS[fips] || null;
 }
 
+// Despite name, used for both counties and MSAs in compare
 export function countySummary(fips: string): LocationSummary | null {
   return LocationSummariesByFIPS[fips] || null;
 }

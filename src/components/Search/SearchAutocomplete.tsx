@@ -62,7 +62,7 @@ const SearchAutocomplete: React.FC<{
         <TextField
           {...params}
           variant="outlined"
-          placeholder="Search by city, county, state, or zip"
+          placeholder="Search by state, metro, county, or zip"
         />
       )}
       renderOption={option => {
