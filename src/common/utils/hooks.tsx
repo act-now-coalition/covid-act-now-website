@@ -1,5 +1,5 @@
 import { Region } from 'common/regions';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import {
   EMBED_HEIGHT,
   EMBED_WIDTH,
@@ -9,8 +9,6 @@ import {
 
 export function useEmbed(region?: Region) {
   // Check if we're embedded in an iFrame
-  const { stateId } = useParams();
-
   const hostPath = window.location.origin;
 
   const getEmbedHeight = () => (region ? EMBED_HEIGHT : US_MAP_EMBED_HEIGHT);
@@ -35,7 +33,6 @@ export function useEmbed(region?: Region) {
     return (
       '<div ' +
       'class="covid-act-now-embed" ' +
-      (stateId ? `data-state-id="${stateId}" ` : '') +
       (region ? `data-fips-id="${region.fipsCode}" ` : '') +
       '/>' +
       `<script src="${hostPath}/scripts/embed.js"></script>`
