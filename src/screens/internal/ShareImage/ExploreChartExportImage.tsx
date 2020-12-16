@@ -11,7 +11,6 @@ import {
   ExploreChartWrapper,
 } from './ChartExportImage.style';
 import LogoUrlLight from 'assets/images/logoUrlLight';
-import { findLocationForFips } from 'common/locations';
 import { useModelLastUpdatedDate } from 'common/utils/model';
 import { formatUtcDate } from 'common/utils';
 import { ExploreChart } from 'components/Explore';
@@ -22,6 +21,7 @@ import {
   getLocationNames,
   getMetricName,
 } from 'components/Explore/utils';
+import regions from 'common/regions';
 
 const ExploreChartExportImage = ({
   componentParams,
@@ -33,11 +33,14 @@ const ExploreChartExportImage = ({
   const currentMetric = componentParams.currentMetric;
   const currentMetricName = getMetricName(currentMetric);
   const normalizeData = componentParams.normalizeData;
-  const [selectedLocations] = useState(
-    componentParams.selectedFips.map((fips: string) =>
-      findLocationForFips(fips),
-    ),
+
+  const selectedLocations = (componentParams.selectedFips as string[]).flatMap(
+    (fips: string) => {
+      const region = regions.findByFipsCode(fips);
+      return region ? [region] : [];
+    },
   );
+
   const [chartSeries, setChartSeries] = useState<Series[]>([]);
   useEffect(() => {
     const fetchSeries = () =>
