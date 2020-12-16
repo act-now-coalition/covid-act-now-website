@@ -29,12 +29,11 @@ import { formatMetatagDate } from 'common/utils';
 import { getLocationFipsCodesForExplore } from './utils';
 import { ThirdWaveBanner } from 'components/Banner';
 import SearchAutocomplete from 'components/Search';
-import { ParentSize } from '@vx/responsive';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import {
   getSearchAutocompleteLocations,
   getFilterLimit,
-} from 'components/Search/utils';
+} from 'components/Search';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -105,14 +104,10 @@ export default function HomePage() {
                   justify="flex-end"
                 >
                   <SelectorWrapper>
-                    <ParentSize>
-                      {() => (
-                        <SearchAutocomplete
-                          locations={getSearchAutocompleteLocations()}
-                          filterLimit={getFilterLimit()}
-                        />
-                      )}
-                    </ParentSize>
+                    <SearchAutocomplete
+                      locations={getSearchAutocompleteLocations()}
+                      filterLimit={getFilterLimit()}
+                    />
                   </SelectorWrapper>
                 </StyledGridItem>
                 <StyledGridItem

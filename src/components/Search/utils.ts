@@ -6,7 +6,9 @@ import regions, {
   MetroArea,
 } from 'common/regions';
 import { sortBy, partition } from 'lodash';
-import { stateColor, countyColor } from 'common/colors';
+import { LocationSummariesByFIPS } from 'common/location_summaries';
+import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
+import { COLOR_MAP } from 'common/colors';
 
 // Move somewhere more central:
 function belongsToState(county: County, stateFips: string | null) {
@@ -57,18 +59,11 @@ export function getSearchAutocompleteLocations(region?: Region) {
 }
 
 /* To get color of location icon in dropdown menu:  */
-export function getStateIconFillColor(region: Region) {
-  // TODO (chelsi): fix once we decide upon icon for MSAs
-  if (region instanceof MetroArea) {
-    return 'blue';
-  }
-  if (region instanceof State) {
-    return stateColor((region as State).stateCode);
-  }
-  return countyColor(
-    region.fipsCode,
-    stateColor((region as County).state.stateCode),
-  );
+export function getLocationIconFillColor(region: Region) {
+  const locationSummary = LocationSummariesByFIPS[region.fipsCode];
+  if (locationSummary) {
+    return LOCATION_SUMMARY_LEVELS[locationSummary.level].color;
+  } else return `${COLOR_MAP.GRAY.LIGHT}`;
 }
 
 /* 

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import palette from 'assets/theme/palette';
-
-const BORDER_COLOR = 'rgba(0,0,0,0.12)';
+import { COLOR_MAP } from 'common/colors';
 
 export const Wrapper = styled.div`
   margin: 0;
@@ -21,7 +20,6 @@ export const Content = styled.div`
   margin: 0 auto;
 `;
 
-//TODO(Chelsi): edit max-width and margins to make header scale properly with new minimap dimensions
 export const SelectorWrapper = styled.div<{ isNarrowMobile: Boolean }>`
   flex: 1;
   margin-right: 0;
@@ -42,11 +40,14 @@ export const SelectorWrapper = styled.div<{ isNarrowMobile: Boolean }>`
   }
 `;
 
-export const MapToggle = styled.div<{ isActive: boolean }>`
+export const MapToggle = styled.div<{
+  isActive: boolean;
+  hideMapToggle: boolean;
+}>`
   cursor: pointer;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
   padding: 0 15px;
-  border: 1px solid ${BORDER_COLOR};
+  border: 1px solid ${COLOR_MAP.GRAY.LIGHT};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -55,7 +56,7 @@ export const MapToggle = styled.div<{ isActive: boolean }>`
   color: ${props => (props.isActive ? 'white' : palette.secondary.main)};
   background: ${props =>
     props.isActive ? palette.secondary.main : 'transparent'};
-
+  display: ${({ hideMapToggle }) => hideMapToggle && 'none'};
   svg path {
     fill: ${props => (props.isActive ? 'white' : palette.secondary.main)};
   }

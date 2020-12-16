@@ -8,7 +8,7 @@ import {
   Zipcode,
   StyledLink,
 } from './Search.style';
-import { getStateIconFillColor } from './utils';
+import { getLocationIconFillColor } from 'components/Search';
 import { getStateCode, State, County, Region } from 'common/regions';
 
 const MenuItem: React.FC<{ region: Region; zipCodeInput: string }> = ({
@@ -23,7 +23,7 @@ const MenuItem: React.FC<{ region: Region; zipCodeInput: string }> = ({
           <IconWrapper>
             <StateCircleSvg
               ratio={0.8}
-              fillColor={getStateIconFillColor(region)}
+              fillColor={getLocationIconFillColor(region)}
               state={getStateCode(region)}
             />
           </IconWrapper>

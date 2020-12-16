@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import MapIcon from 'assets/images/mapIcon';
 import {
@@ -10,12 +10,11 @@ import {
   SearchHeaderWrapper,
 } from './SearchHeader.style';
 import SearchAutocomplete from 'components/Search';
-import { ParentSize } from '@vx/responsive';
 import { Region } from 'common/regions';
 import {
   getSearchAutocompleteLocations,
   getFilterLimit,
-} from 'components/Search/utils';
+} from 'components/Search';
 
 const SearchHeader = ({
   mobileMenuOpen,
@@ -35,6 +34,9 @@ const SearchHeader = ({
     setMobileMenuOpen((mobileMenuOpen = !mobileMenuOpen));
   };
 
+  /* We hide the minimap toggle button when the searchbar is in focus on mobile */
+  const [hideMapToggle, setHideMapToggle] = useState(false);
+
   // TODO (sgoldblatt): WHY are there so many wrappers?
   return (
     <SearchHeaderWrapper>
@@ -47,17 +49,15 @@ const SearchHeader = ({
               }}
               isNarrowMobile={isNarrowMobile}
             >
-              <ParentSize>
-                {() => (
-                  <SearchAutocomplete
-                    locations={getSearchAutocompleteLocations(region)}
-                    filterLimit={getFilterLimit(region)}
-                  />
-                )}
-              </ParentSize>
+              <SearchAutocomplete
+                locations={getSearchAutocompleteLocations(region)}
+                filterLimit={getFilterLimit(region)}
+                setHideMapToggle={setHideMapToggle}
+              />
             </SelectorWrapper>
             {isMobile && (
               <MapToggle
+                hideMapToggle={hideMapToggle}
                 onClick={() => toggleMobileMenu()}
                 isActive={mobileMenuOpen}
               >
