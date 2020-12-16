@@ -124,10 +124,17 @@
       href = 'https://covidactnow.org/embed/us/';
       var fips = widget.getAttribute('data-fips-id');
       var stateId = widget.getAttribute('data-state-id');
-      if (fips) {
-        href += 'county/' + fips;
-      } else if (stateId) {
-        href += stateId;
+      if (stateId) {
+        // Older versions of the embed passed state id + optionally fips. This block
+        // handles that case.
+        if (fips) {
+          href += 'county/' + fips;
+        } else if (stateId) {
+          href += stateId;
+        }
+      } else if (fips) {
+        // In most recent version, we will only pass fips and send all embeds to one url.
+        href += 'fips/' + fips;
       }
 
       // duplicated in EmbedEnums.ts
