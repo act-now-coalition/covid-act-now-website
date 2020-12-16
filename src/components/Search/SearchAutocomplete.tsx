@@ -70,10 +70,14 @@ const SearchAutocomplete: React.FC<{
       }}
       openOnFocus
       onOpen={() => {
-        if (setHideMapToggle) setHideMapToggle(true);
+        if (setHideMapToggle) {
+          setHideMapToggle(true);
+        }
       }}
       onClose={() => {
-        if (setHideMapToggle) setHideMapToggle(false);
+        if (setHideMapToggle) {
+          setHideMapToggle(false);
+        }
       }}
       PaperComponent={StyledPaper}
     />
