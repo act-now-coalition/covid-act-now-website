@@ -81,8 +81,7 @@ export function fetchAllCountyProjections(snapshotUrl: string | null = null) {
         return region instanceof County;
       })
       .map(summaryWithTimeseries => {
-        const region = regions.findByFipsCode(summaryWithTimeseries.fips);
-        assert(region, 'Failed to find region ' + summaryWithTimeseries.fips);
+        const region = regions.findByFipsCodeStrict(summaryWithTimeseries.fips);
         return new Projections(summaryWithTimeseries, region);
       });
   }
