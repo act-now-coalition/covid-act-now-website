@@ -26,6 +26,10 @@ export abstract class Region {
   get canonicalUrl() {
     return urlJoin('https://covidactnow.org', this.relativeUrl);
   }
+
+  toString() {
+    return `${this.name} (fips=${this.fipsCode})`;
+  }
 }
 
 export class State extends Region {

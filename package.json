@@ -19,6 +19,7 @@
     "@types/jest": "^26.0.16",
     "@types/react-router-hash-link": "^1.2.1",
     "@types/react-scrollspy": "^3.3.3",
+    "@types/topojson-client": "^3.0.0",
     "@types/typeform__embed": "^0.22.2",
     "@types/uuid": "^8.3.0",
     "@vx/axis": "^0.0.196",
@@ -69,6 +70,7 @@
     "sharp": "^0.25.2",
     "styled-components": "^5.0.1",
     "tar": "^6.0.1",
+    "topojson-client": "^3.1.0",
     "uuid": "^8.3.0"
   },
   "scripts": {

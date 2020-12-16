@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   ComposableMap,
   Geographies,
@@ -9,19 +9,15 @@ import {
 import ReactTooltip from 'react-tooltip';
 import STATE_CENTERS from '../../common/us_state_centers';
 import { countyColor } from 'common/colors';
-import {
-  getStateByUrlName,
-  getCanonicalUrl,
-  getLocationNameForFips,
-} from 'common/locations';
 import { CountyMapWrapper, CountyMapLayerWrapper } from './CountyMap.style';
+import regions, { getStateCode } from 'common/regions';
+import { assert } from 'common/utils';
 
-const CountyMap = ({ selectedCounty, setSelectedCounty }) => {
-  let { stateId } = useParams();
-  const { state_code } = getStateByUrlName(stateId);
-  const stateCode = state_code.toUpperCase();
+const CountyMap = ({ region, setSelectedCounty }) => {
+  const stateCode = getStateCode(region);
+  assert(stateCode, 'Only regions with states currently supported');
 
-  const state = STATE_CENTERS[stateCode];
+  const stateCenter = STATE_CENTERS[stateCode];
   const counties = require(`./countyTopoJson/${stateCode}.json`);
   const [content, setContent] = useState('');
 
@@ -39,7 +35,7 @@ const CountyMap = ({ selectedCounty, setSelectedCounty }) => {
        * counties are drawn.
        */}
       <CountyMapLayer
-        state={state}
+        stateCenter={stateCenter}
         counties={counties}
         geographyFactory={geo => {
           return (
@@ -54,18 +50,18 @@ const CountyMap = ({ selectedCounty, setSelectedCounty }) => {
       />
 
       <CountyMapLayer
-        state={state}
+        stateCenter={stateCenter}
         counties={counties}
         geographyFactory={geo => {
           const geoFullFips = geo.properties.GEOID;
-          const isSelected =
-            selectedCounty && selectedCounty.full_fips_code === geoFullFips;
+          const isSelected = region && region.fipsCode === geoFullFips;
+          const geoRegion = regions.findByFipsCode(geoFullFips);
 
           return (
             <Link
               key={geoFullFips}
-              to={`/${getCanonicalUrl(geoFullFips)}`}
-              aria-label={getLocationNameForFips(geoFullFips)}
+              to={`/${geoRegion.relativeUrl}`}
+              aria-label={geoRegion.fullName}
             >
               <Geography
                 key={geo.rsmKey}
@@ -82,7 +78,7 @@ const CountyMap = ({ selectedCounty, setSelectedCounty }) => {
                   setContent(NAME);
                 }}
                 onMouseLeave={onMouseLeave}
-                onClick={() => setSelectedCounty(geoFullFips)}
+                onClick={() => setSelectedCounty()}
                 style={{
                   cursor: 'pointer',
                   hover: {
@@ -103,19 +99,21 @@ const CountyMap = ({ selectedCounty, setSelectedCounty }) => {
   );
 };
 
-const CountyMapLayer = ({ state, counties, geographyFactory }) => {
+const CountyMapLayer = ({ stateCenter, counties, geographyFactory }) => {
   return (
     <CountyMapLayerWrapper>
       <ComposableMap
-        projection={state.StateCode === 'AK' ? 'geoAlbers' : 'geoMercator'}
+        projection={
+          stateCenter.StateCode === 'AK' ? 'geoAlbers' : 'geoMercator'
+        }
         data-tip=""
         projectionConfig={{
-          rotate: state.rotate ? state.rotate : null,
-          scale: state.scale ? state.scale : 4000,
+          rotate: stateCenter.rotate ? stateCenter.rotate : null,
+          scale: stateCenter.scale ? stateCenter.scale : 4000,
         }}
       >
         <ZoomableGroup
-          center={[state.Longitude, state.Latitude]}
+          center={[stateCenter.Longitude, stateCenter.Latitude]}
           disablePanning={true}
         >
           <Geographies geography={counties}>

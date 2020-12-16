@@ -1,17 +1,11 @@
-import { STATES } from 'common';
 import { fail, formatDecimal, formatPercent } from 'common/utils';
 
 //TODO(chelsi): move this copy into individual metric files. remove need for hardcoded identifying numers
 export default function makeChartShareQuote(
-  stateId,
-  county,
-  stats = {},
-  chartIdentifier,
+  displayName: string,
+  stats: any = {},
+  chartIdentifier: number,
 ) {
-  const stateName = STATES[stateId];
-  const countyName = county && county.county;
-  const displayName = countyName ? `${countyName}, ${stateName}` : stateName;
-
   if (chartIdentifier === 0) {
     return `${displayName}’s infection growth rate is ${formatDecimal(
       stats[0],

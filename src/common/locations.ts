@@ -1,7 +1,6 @@
 /** Helpers for dealing with the State / Counties dataset. */
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
-import urlJoin from 'url-join';
-import { each, sortBy, takeRight, has, partition, toLower } from 'lodash';
+import { each, has, partition, toLower } from 'lodash';
 import { assert } from './utils';
 import countyAdjacencyMsa from './data/county_adjacency_msa.json';
 import collegesByFips from './data/colleges_by_fips.json';
@@ -154,14 +153,6 @@ export function getLocationNameForFips(fips: string): string {
   }
 }
 
-export function getRelativeUrlForFips(fips: string): string {
-  return `/${getCanonicalUrl(fips)}`;
-}
-
-export function getLocationUrlForFips(fips: string): string {
-  return urlJoin('https://covidactnow.org', getRelativeUrlForFips(fips));
-}
-
 const allCountiesCache: County[] = [];
 export function allCounties(): County[] {
   if (allCountiesCache.length === 0) {
@@ -172,13 +163,6 @@ export function allCounties(): County[] {
     }
   }
   return allCountiesCache;
-}
-
-export function topCountiesByPopulation(limit: number): County[] {
-  return takeRight(
-    sortBy(allCounties(), c => c.population),
-    limit,
-  );
 }
 
 export function getAdjacentCounties(fips: string): string[] {

@@ -3,37 +3,37 @@ import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { Modal } from '@material-ui/core';
-import { Location } from 'common/locations';
+import { Region } from 'common/regions';
 import * as Styles from './LocationSelector.style';
-import AutocompleteLocations from 'components/AutocompleteLocations';
 
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import * as ExploreStyles from './Explore.style';
+import AutocompleteRegions from 'components/AutocompleteLocations/AutocompleteRegions';
 
 const LocationSelector: React.FC<{
-  locations: Location[];
-  selectedLocations: Location[];
-  onChangeSelectedLocations: (newLocations: Location[]) => void;
+  regions: Region[];
+  selectedRegions: Region[];
+  onChangeSelectedRegions: (newLocations: Region[]) => void;
   normalizeData: boolean;
   setNormalizeData: React.Dispatch<React.SetStateAction<boolean>>;
 }> = ({
-  locations,
-  selectedLocations,
-  onChangeSelectedLocations,
+  regions,
+  selectedRegions,
+  onChangeSelectedRegions,
   normalizeData,
   setNormalizeData,
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
-  const hasMultipleLocations = selectedLocations.length > 1;
+  const hasMultipleLocations = selectedRegions.length > 1;
 
   const [modalOpen, setModalOpen] = useState(false);
 
-  const onChangeLocations = (
+  const onChangeRegions = (
     event: React.ChangeEvent<{}>,
-    newLocations: Location[],
+    newRegions: Region[],
   ) => {
-    onChangeSelectedLocations(newLocations);
+    onChangeSelectedRegions(newRegions);
   };
 
   const onClickButton = () => setModalOpen(!modalOpen);
@@ -72,10 +72,10 @@ const LocationSelector: React.FC<{
               </Grid>
             </Styles.ModalHeader>
             <Styles.ModalBody>
-              <AutocompleteLocations
-                locations={locations}
-                onChangeLocations={onChangeLocations}
-                selectedLocations={selectedLocations}
+              <AutocompleteRegions
+                regions={regions}
+                onChangeRegions={onChangeRegions}
+                selectedRegions={selectedRegions}
               />
               {hasMultipleLocations && (
                 <ExploreStyles.NormalizeDataContainer>
@@ -106,10 +106,10 @@ const LocationSelector: React.FC<{
       )}
     </React.Fragment>
   ) : (
-    <AutocompleteLocations
-      locations={locations}
-      onChangeLocations={onChangeLocations}
-      selectedLocations={selectedLocations}
+    <AutocompleteRegions
+      regions={regions}
+      onChangeRegions={onChangeRegions}
+      selectedRegions={selectedRegions}
     />
   );
 };

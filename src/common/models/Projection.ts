@@ -363,7 +363,7 @@ export class Projection {
       latestDate = moment.utc(_.last(actualsTimeseriesRaw)!.date);
     }
 
-    earliestDate = moment.max(earliestDate, moment.utc('2020-03-01'));
+    earliestDate = moment.utc('2020-03-01');
 
     const actualsTimeseries: Array<ActualsTimeseriesRow | null> = [];
     const metricsTimeseries: Array<MetricsTimeseriesRow | null> = [];

@@ -3,4 +3,5 @@ export const MAP_FILTERS = {
   NATIONAL: 'NATIONAL',
   DC: 'DC',
   PR: 'PR',
+  MSA: 'MSA',
 };

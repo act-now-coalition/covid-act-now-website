@@ -24,9 +24,7 @@ import {
 } from 'common/utils/recommend';
 import { mainContent } from 'cms-content/recommendations';
 import { getRecommendationsShareUrl } from 'common/urls';
-import { Region, getStateCode, RegionType } from 'common/regions';
-import { assert } from 'common/utils';
-import NoCountyDetail from './NoCountyDetail';
+import { Region, getStateCode, getStateName } from 'common/regions';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
@@ -46,7 +44,7 @@ interface ChartsHolderProps {
 const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
   const projection = projections.primary;
   const stateCode = getStateCode(region);
-  assert(stateCode, 'Charts require a state right now');
+  const stateName = getStateName(region);
 
   const county = findCountyByFips(region.fipsCode);
 
@@ -100,17 +98,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
     scrollToRecommendations();
   }, [chartId, metricRefs, isRecommendationsShareUrl]);
 
-  const shareButtonProps = {
-    chartId: chartId,
-    stateId: stateCode,
-    countyId:
-      region.regionType === RegionType.COUNTY ? region.urlSegment : null,
-    county: county,
-    stats: projection ? projections.getMetricValues() : {},
-    projections: projections,
-    isMobile,
-  };
-
+  const stats = projection ? projections.getMetricValues() : {};
   const initialFipsList = useMemo(() => {
     return [projections.primary.fips];
   }, [projections.primary.fips]);
@@ -125,9 +113,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
     mainContent.recommendations,
   );
 
-  const recommendsShareUrl = getRecommendationsShareUrl(
-    projections.primary.fips,
-  );
+  const recommendsShareUrl = getRecommendationsShareUrl(region);
 
   const alarmLevel = projections.getAlarmLevel();
   const recommendsShareQuote = getShareQuote(
@@ -155,70 +141,65 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
   // TODO(pablo): Create separate refs for signup and share
   return (
     <>
-      {!projection ? (
-        <NoCountyDetail
-          countyId={
-            region.regionType === RegionType.COUNTY ? region.urlSegment : ''
-          }
-          stateId={stateCode}
+      <ChartContentWrapper>
+        <LocationPageHeader
+          projections={projections}
+          stats={projections.getMetricValues()}
+          onMetricClick={metric => scrollTo(metricRefs[metric].current)}
+          onHeaderShareClick={() => scrollTo(shareBlockRef.current, -372)}
+          onHeaderSignupClick={() => scrollTo(shareBlockRef.current)}
+          onNewUpdateClick={() => scrollTo(exploreChartRef.current)}
+          isMobile={isMobile}
         />
-      ) : (
-        <>
-          <ChartContentWrapper>
-            <LocationPageHeader
+        {stateCode && stateName && (
+          <CompareMain
+            stateName={stateName}
+            county={county}
+            locationsViewable={6}
+            stateId={stateCode}
+          />
+        )}
+        <MainContentInner>
+          <Recommend
+            introCopy={recommendationsIntro}
+            recommendations={recommendationsMainContent}
+            locationName={region.fullName}
+            shareUrl={recommendsShareUrl}
+            shareQuote={recommendsShareQuote}
+            recommendationsRef={recommendationsRef}
+            feedbackFormUrl={recommendationsFeedbackForm}
+            fedLevel={getFedLevel(projections.primary)}
+            harvardLevel={getHarvardLevel(projections.primary)}
+            harvardModalLocationCopy={recommendationsHarvardModalCopy}
+            fedModalLocationCopy={recommendationsFedModalCopy}
+          />
+          {ALL_METRICS.map(metric => (
+            <ChartBlock
+              key={metric}
+              metric={metric}
               projections={projections}
-              stats={projections.getMetricValues()}
-              onMetricClick={metric => scrollTo(metricRefs[metric].current)}
-              onHeaderShareClick={() => scrollTo(shareBlockRef.current, -372)}
-              onHeaderSignupClick={() => scrollTo(shareBlockRef.current)}
-              onNewUpdateClick={() => scrollTo(exploreChartRef.current)}
+              chartRef={metricRefs[metric]}
               isMobile={isMobile}
+              region={region}
+              stats={stats}
             />
-            <CompareMain
-              stateName={projections.stateName}
-              county={county}
-              locationsViewable={6}
-              stateId={stateCode}
-            />
-            <MainContentInner>
-              <Recommend
-                introCopy={recommendationsIntro}
-                recommendations={recommendationsMainContent}
-                locationName={region.fullName}
-                shareUrl={recommendsShareUrl}
-                shareQuote={recommendsShareQuote}
-                recommendationsRef={recommendationsRef}
-                feedbackFormUrl={recommendationsFeedbackForm}
-                fedLevel={getFedLevel(projections.primary)}
-                harvardLevel={getHarvardLevel(projections.primary)}
-                harvardModalLocationCopy={recommendationsHarvardModalCopy}
-                fedModalLocationCopy={recommendationsFedModalCopy}
-              />
-              {ALL_METRICS.map(metric => (
-                <ChartBlock
-                  key={metric}
-                  metric={metric}
-                  projections={projections}
-                  chartRef={metricRefs[metric]}
-                  shareButtonProps={shareButtonProps}
-                  isMobile={isMobile}
-                  stateId={stateCode}
-                />
-              ))}
-            </MainContentInner>
-            <MainContentInner ref={exploreChartRef} id="explore-chart">
-              <Explore
-                initialFipsList={initialFipsList}
-                title="Cases, Deaths, and Hospitalizations"
-                defaultMetric={defaultExploreMetric}
-              />
-            </MainContentInner>
-          </ChartContentWrapper>
-          <div ref={shareBlockRef} id="recommendationsTest">
-            <ShareModelBlock {...shareButtonProps} />
-          </div>
-        </>
-      )}
+          ))}
+        </MainContentInner>
+        <MainContentInner ref={exploreChartRef} id="explore-chart">
+          <Explore
+            initialFipsList={initialFipsList}
+            title="Cases, Deaths, and Hospitalizations"
+            defaultMetric={defaultExploreMetric}
+          />
+        </MainContentInner>
+      </ChartContentWrapper>
+      <div ref={shareBlockRef} id="recommendationsTest">
+        <ShareModelBlock
+          region={region}
+          projections={projections}
+          stats={stats}
+        />
+      </div>
     </>
   );
 };

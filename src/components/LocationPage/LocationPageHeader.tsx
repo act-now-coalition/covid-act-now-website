@@ -1,17 +1,14 @@
 import React, { Fragment } from 'react';
-import CheckIcon from '@material-ui/icons/Check';
 import { Link } from 'react-router-dom';
 import {
   ColoredHeaderBanner,
   Wrapper,
   TopContainer,
   FooterContainer,
-  HeaderTitle,
   HeaderSection,
   HeaderSubCopy,
   ButtonsWrapper,
   HeaderButton,
-  LocationCopyWrapper,
   LastUpdatedDate,
   SectionHalf,
   Copy,
@@ -25,7 +22,6 @@ import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { Level } from 'common/level';
 import { COLOR_MAP } from 'common/colors';
 import { useModelLastUpdatedDate } from 'common/utils/model';
-import { STATES_WITH_DATA_OVERRIDES } from 'common/metrics/hospitalizations';
 import { Projections } from 'common/models/Projections';
 import { formatUtcDate } from 'common/utils';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
@@ -82,10 +78,6 @@ const LocationPageHeader = (props: {
 
   const { isEmbed } = useEmbed();
 
-  const verified = STATES_WITH_DATA_OVERRIDES.includes(projections.stateName);
-
-  const isVerifiedState = !projections.isCounty && verified;
-
   const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
   const lastUpdatedDateString =
     lastUpdatedDate !== null ? formatUtcDate(lastUpdatedDate) : '';
@@ -102,11 +94,7 @@ const LocationPageHeader = (props: {
       >
         <TopContainer>
           <HeaderSection>
-            <LocationCopyWrapper>
-              <HeaderTitle isEmbed={isEmbed}>
-                <LocationPageHeading region={region} isEmbed={isEmbed} />
-              </HeaderTitle>
-            </LocationCopyWrapper>
+            <LocationPageHeading region={region} isEmbed={isEmbed} />
             <ButtonsWrapper>
               <HeaderButton onClick={props.onHeaderShareClick || noop}>
                 <ShareOutlinedIcon />
@@ -153,11 +141,7 @@ const LocationPageHeader = (props: {
           {projections.isCounty && !isEmbed && (
             <HeaderSubCopy>
               <span>Updated {lastUpdatedDateString} · </span>
-              <span>County data is currently in beta. </span>
-              <span>
-                Because counties don’t report hospitalizations, our forecasts
-                may not be as accurate. See something wrong?{' '}
-              </span>
+              <span>See something wrong? </span>
               <a
                 href="mailto:info@covidactnow.org?subject=[Website%20Feedback]"
                 target="_blank"
@@ -170,16 +154,7 @@ const LocationPageHeader = (props: {
           )}
           {!projections.isCounty && !isEmbed && (
             <HeaderSubCopy>
-              {verified && (
-                <Fragment>
-                  <CheckIcon htmlColor="#00D474" />
-                  <span>Government verified data</span>
-                  {!props.isMobile && <span> · </span>}
-                </Fragment>
-              )}
-              <LastUpdatedDate isVerifiedState={isVerifiedState}>
-                Updated {lastUpdatedDateString}
-              </LastUpdatedDate>
+              <LastUpdatedDate>Updated {lastUpdatedDateString}</LastUpdatedDate>
             </HeaderSubCopy>
           )}
         </FooterContainer>

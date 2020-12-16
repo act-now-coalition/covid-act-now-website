@@ -32,7 +32,7 @@ const ModalFaq = (props: { handleCloseModal: () => void }) => {
         <CloseIcon onClick={props.handleCloseModal} />
         <Content>
           <Header>Compare table</Header>
-          <Subheader>Frequenlty asked questions</Subheader>
+          <Subheader>Frequently asked questions</Subheader>
           <Question>How are “metro” and “non-metro” counties defined?</Question>
           <Answer>
             You can think of this as urban or rural, but just keep in mind that
