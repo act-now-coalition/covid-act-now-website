@@ -148,7 +148,6 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
           onMetricClick={metric => scrollTo(metricRefs[metric].current)}
           onHeaderShareClick={() => scrollTo(shareBlockRef.current, -372)}
           onHeaderSignupClick={() => scrollTo(shareBlockRef.current)}
-          onNewUpdateClick={() => scrollTo(exploreChartRef.current)}
           isMobile={isMobile}
         />
         {stateCode && stateName && (
