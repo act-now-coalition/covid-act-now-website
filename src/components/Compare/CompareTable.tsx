@@ -28,6 +28,7 @@ import { getComparePageUrl, getCompareShareImageUrl } from 'common/urls';
 import { EventAction } from 'components/Analytics';
 import { MoreInfoButton } from 'components/SharedComponents';
 import { Subtitle1 } from 'components/Typography';
+import { homepageLabelMap } from './HomepageSlider';
 
 function trackShare(label: string) {
   trackCompareEvent(EventAction.SHARE, label);
@@ -153,9 +154,13 @@ const CompareTable = (props: {
       ? sortedLocationsArr.length
       : props.locationsViewable;
 
-  const firstColumnHeaderHomepage = props.viewAllCounties
-    ? `${getMetroPrefixCopy(props.countyTypeToView)} County`
-    : 'State';
+  const firstColumnHeaderHomepage =
+    props.homepageScope === HomepageLocationScope.COUNTIES
+      ? `${getMetroPrefixCopy(props.countyTypeToView)} ${
+          homepageLabelMap[HomepageLocationScope.COUNTIES].singular
+        }`
+      : `${homepageLabelMap[homepageScope].singular}`;
+
   const firstColumnHeader = props.isHomepage
     ? firstColumnHeaderHomepage
     : props.isModal

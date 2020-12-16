@@ -9,13 +9,7 @@ import { LocationSummary } from 'common/location_summaries';
 import { Metric, getMetricNameForCompare } from 'common/metric';
 import { isNumber } from 'lodash';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
-import regions, {
-  County,
-  Region,
-  RegionType,
-  State,
-  MetroArea,
-} from 'common/regions';
+import regions, { County, Region, State, MetroArea } from 'common/regions';
 import { fail } from 'assert';
 import { assert } from '.';
 
@@ -44,23 +38,18 @@ export const orderedMetrics = [
 ];
 
 function getLocationObj(region: Region): SummaryForCompare {
-  if (region.regionType === RegionType.COUNTY) {
+  if (region instanceof County || region instanceof MetroArea) {
     return {
       region: region,
       metricsInfo: countySummary(region.fipsCode)!,
     };
-  } else if (region.regionType === RegionType.STATE) {
+  } else if (region instanceof State) {
     return {
       region: region,
       metricsInfo: stateSummary((region as State).stateCode)!,
     };
-  } else if (region.regionType === RegionType.MSA) {
-    return {
-      region: region,
-      metricsInfo: countySummary((region as MetroArea).fipsCode)!,
-    };
   } else {
-    fail('doesnt yet work for non states or counties');
+    fail('doesnt yet work for this location');
   }
 }
 
@@ -253,13 +242,13 @@ function splitCountyName(countyName: string) {
 }
 
 export function getColumnLocationName(region: Region) {
-  if (region.regionType === RegionType.STATE) {
+  if (region instanceof State) {
     return [region.fullName];
-  } else if (region.regionType === RegionType.COUNTY) {
+  } else if (region instanceof County) {
     const countyWithAbbreviatedSuffix = region.abbreviation;
     return splitCountyName(countyWithAbbreviatedSuffix);
-  } else if (region.regionType === RegionType.MSA) {
-    return [region.name];
+  } else if (region instanceof MetroArea) {
+    return [region.name]; // TODO (chelsi) - update this
   } else {
     fail('dont support other regions');
   }
