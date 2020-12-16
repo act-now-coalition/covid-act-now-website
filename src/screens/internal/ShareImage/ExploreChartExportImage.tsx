@@ -21,7 +21,7 @@ import {
   getLocationNames,
   getMetricName,
 } from 'components/Explore/utils';
-import regions from 'common/regions';
+import regions, { Region } from 'common/regions';
 
 const ExploreChartExportImage = ({
   componentParams,
@@ -29,16 +29,15 @@ const ExploreChartExportImage = ({
   componentParams: any;
 }) => {
   const lastUpdated = useModelLastUpdatedDate()!;
-
   const currentMetric = componentParams.currentMetric;
   const currentMetricName = getMetricName(currentMetric);
   const normalizeData = componentParams.normalizeData;
 
-  const selectedLocations = (componentParams.selectedFips as string[]).flatMap(
-    (fips: string) => {
+  const [selectedLocations] = useState<Region[]>(
+    (componentParams.selectedFips as string[]).flatMap((fips: string) => {
       const region = regions.findByFipsCode(fips);
       return region ? [region] : [];
-    },
+    }),
   );
 
   const [chartSeries, setChartSeries] = useState<Series[]>([]);
