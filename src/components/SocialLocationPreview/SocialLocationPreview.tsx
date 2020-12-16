@@ -51,8 +51,6 @@ const SocialLocationPreview = (props: {
               hideLegend={!isEmbed}
               hideLegendTitle={true}
               hideInstructions={true}
-              setMapOption={function () {}}
-              setMobileMenuOpen={function () {}}
             />
           </MapWrapper>
           {isEmbed ? (
