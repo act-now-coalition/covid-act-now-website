@@ -68,11 +68,11 @@ export const CASE_DENSITY_LEVEL_INFO_MAP: LevelInfoMap = {
 
 function renderStatus(projections: Projections): React.ReactElement {
   const {
-    locationName,
     currentCaseDensity,
     totalPopulation,
     currentDailyAverageCases,
   } = projections.primary;
+  const locationName = projections.locationName;
   if (
     currentCaseDensity === null ||
     totalPopulation === null ||

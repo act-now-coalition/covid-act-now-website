@@ -41,12 +41,7 @@ export class Projections {
   }
 
   get locationName(): string {
-    if (!this.isCounty) {
-      return this.region.fullName;
-    }
-    const county = this.region as County;
-
-    return county.fullName;
+    return this.region.fullName;
   }
 
   get population(): number {

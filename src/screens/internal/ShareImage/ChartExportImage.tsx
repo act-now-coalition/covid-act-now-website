@@ -32,7 +32,6 @@ const ExportChartImage = () => {
   if (!projections || !lastUpdated || !region) {
     return null;
   }
-  const projection = projections.primary;
 
   const metric = parseInt(metricString) as Metric;
   if (isNaN(metric) || !ALL_METRICS.includes(metric)) {
@@ -46,7 +45,7 @@ const ExportChartImage = () => {
     <ScreenshotWrapper className={SCREENSHOT_CLASS}>
       <Content>
         <Headers>
-          <Location>{projection.locationName}</Location>
+          <Location>{region.fullName}</Location>
           <MetricName>{getMetricNameExtended(metric)}</MetricName>
           <LastUpdated>Last updated {formatUtcDate(lastUpdated)} </LastUpdated>
         </Headers>

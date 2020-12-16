@@ -25,11 +25,9 @@ export default function ChartShareImage() {
 
   const theme = useContext(ThemeContext);
   const projections = useProjectionsFromRegion(region);
-  if (!projections) {
+  if (!region || !projections) {
     return null;
   }
-
-  const projection = projections.primary;
 
   const metric = parseInt(metricString) as Metric;
   if (isNaN(metric) || !ALL_METRICS.includes(metric)) {
@@ -43,7 +41,7 @@ export default function ChartShareImage() {
       <Wrapper>
         <Headers>
           <Title>{getMetricNameExtended(metric)}</Title>
-          <Subtitle>{projection.locationName}</Subtitle>
+          <Subtitle>{region.fullName}</Subtitle>
           <LogoHolder>
             <LogoDark height={35} />
           </LogoHolder>
