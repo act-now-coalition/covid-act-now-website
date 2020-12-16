@@ -19,13 +19,23 @@ export const useLocationPageRegion = () => {
 };
 
 export const useRegionFromParams = (): Region | null => {
-  const { stateId, countyId, countyFipsId, metroAreaUrlSegment } = useParams<{
+  const {
+    stateId,
+    countyId,
+    countyFipsId,
+    metroAreaUrlSegment,
+    fipsCode,
+  } = useParams<{
     stateId?: string;
     countyId?: string;
     countyFipsId: string;
     metroAreaUrlSegment?: string;
+    fipsCode?: string;
   }>();
 
+  if (fipsCode) {
+    return regions.findByFipsCode(fipsCode);
+  }
   if (countyFipsId) {
     return regions.findByFipsCode(countyFipsId);
   }

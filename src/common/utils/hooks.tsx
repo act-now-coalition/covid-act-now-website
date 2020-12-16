@@ -1,3 +1,4 @@
+import { Region } from 'common/regions';
 import { useLocation, useParams } from 'react-router-dom';
 import {
   EMBED_HEIGHT,
