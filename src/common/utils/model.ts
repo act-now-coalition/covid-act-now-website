@@ -5,7 +5,7 @@ import { getStateName } from 'common/locations';
 import moment from 'moment';
 import { assert } from '.';
 import { getSnapshotUrlOverride } from './snapshots';
-import regions, { Region } from 'common/regions';
+import regions, { Region, County } from 'common/regions';
 
 export enum APIRegionSubPath {
   COUNTIES = 'counties',
@@ -74,6 +74,10 @@ export function fetchAllCountyProjections(snapshotUrl: string | null = null) {
         summaryWithTimeseries =>
           getStateName(summaryWithTimeseries.state) !== undefined,
       )
+      .filter(summaryWithTimeseries => {
+        const region = regions.findByFipsCode(summaryWithTimeseries.fips);
+        return region instanceof County;
+      })
       .map(summaryWithTimeseries => {
         const region = regions.findByFipsCode(summaryWithTimeseries.fips);
         assert(region, 'Failed to find region ' + summaryWithTimeseries.fips);
