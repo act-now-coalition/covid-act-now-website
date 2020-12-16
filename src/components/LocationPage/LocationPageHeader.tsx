@@ -176,7 +176,10 @@ const NotificationArea: React.FC<{ projections: Projections }> = ({
         <ColumnTitle isUpdateCopy>{title}</ColumnTitle>
 
         {notification === Notification.HospitalizationsPeak && (
-          <HospitalizationsAlert projection={projections.primary} />
+          <HospitalizationsAlert
+            locationName={region.fullName}
+            projection={projections.primary}
+          />
         )}
 
         {notification === Notification.NYCCounty && (
