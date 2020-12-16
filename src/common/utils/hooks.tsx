@@ -6,50 +6,42 @@ import {
   US_MAP_EMBED_WIDTH,
 } from 'screens/Embed/EmbedEnums';
 
-export function useEmbed() {
+export function useEmbed(region?: Region) {
   // Check if we're embedded in an iFrame
-  const { pathname } = useLocation();
   const { stateId } = useParams();
 
-  const isEmbed = pathname.includes('/embed');
   const hostPath = window.location.origin;
 
-  const getEmbedHeight = (countyFipsCode: string | null) =>
-    !stateId && !countyFipsCode ? US_MAP_EMBED_HEIGHT : EMBED_HEIGHT;
+  const getEmbedHeight = () => (region ? EMBED_HEIGHT : US_MAP_EMBED_HEIGHT);
 
-  const getEmbedWidth = (countyFipsCode: string | null) =>
-    !stateId && !countyFipsCode ? US_MAP_EMBED_WIDTH : EMBED_WIDTH;
+  const getEmbedWidth = () => (region ? EMBED_WIDTH : US_MAP_EMBED_WIDTH);
 
-  const getPath = (countyFipsCode: string) =>
-    // Either "/us/county/:countyId" or "/us/:stateId"
-    `us/${countyFipsCode ? 'county/' + countyFipsCode : stateId || ''}`;
+  const getPath = () => (region ? `us/fips/${region.fipsCode}` : 'us/');
 
-  const getIframePath = (countyFipsCode: string) =>
-    `${hostPath}/embed/${getPath(countyFipsCode)}`;
+  const getIframePath = () => `${hostPath}/embed/${getPath()}`;
 
-  const getIframeCodeSnippet = (countyFipsCode: string) =>
+  const getIframeCodeSnippet = () =>
     '<iframe ' +
-    `src="${getIframePath(countyFipsCode)}" ` +
+    `src="${getIframePath()}" ` +
     'title="CoVid Act Now" ' +
-    `width="${getEmbedWidth(countyFipsCode)}" ` +
-    `height="${getEmbedHeight(countyFipsCode)}" ` +
+    `width="${getEmbedWidth()}" ` +
+    `height="${getEmbedHeight()}" ` +
     'frameBorder="0" ' +
     'scrolling="no"' +
     '></iframe>';
 
-  const getJsCodeSnippet = (countyFipsCode: string) => {
+  const getJsCodeSnippet = () => {
     return (
       '<div ' +
       'class="covid-act-now-embed" ' +
       (stateId ? `data-state-id="${stateId}" ` : '') +
-      (countyFipsCode ? `data-fips-id="${countyFipsCode}" ` : '') +
+      (region ? `data-fips-id="${region.fipsCode}" ` : '') +
       '/>' +
       `<script src="${hostPath}/scripts/embed.js"></script>`
     );
   };
 
   return {
-    isEmbed,
     EMBED_WIDTH,
     EMBED_HEIGHT,
     getEmbedWidth,
@@ -59,3 +51,8 @@ export function useEmbed() {
     getJsCodeSnippet,
   };
 }
+
+export const useIsEmbed = () => {
+  const { pathname } = useLocation();
+  return pathname.includes('/embed');
+};

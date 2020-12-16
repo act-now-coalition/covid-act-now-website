@@ -17,7 +17,7 @@ import {
   LevelDescription,
   WarningIcon,
 } from 'components/LocationPage/LocationPageHeader.style';
-import { useEmbed } from 'common/utils/hooks';
+import { useIsEmbed } from 'common/utils/hooks';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { Level } from 'common/level';
 import { COLOR_MAP } from 'common/colors';
@@ -76,7 +76,7 @@ const LocationPageHeader = (props: {
   const fillColor =
     alarmLevel !== Level.UNKNOWN ? levelInfo.color : COLOR_MAP.GRAY.LIGHT;
 
-  const { isEmbed } = useEmbed();
+  const isEmbed = useIsEmbed();
 
   const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
   const lastUpdatedDateString =

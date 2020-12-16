@@ -17,8 +17,8 @@ import Snackbar from '@material-ui/core/Snackbar';
 import Typography from '@material-ui/core/Typography';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import { useEmbed } from 'common/utils/hooks';
-import { County } from 'common/locations';
+import { useEmbed, useIsEmbed } from 'common/utils/hooks';
+import { Region } from 'common/regions';
 
 interface Message {
   message: string;
@@ -28,16 +28,16 @@ interface Message {
 const EmbedPreview: React.FC<{
   open: boolean;
   onClose: () => void;
-  county: County;
-}> = ({ open, onClose, county }) => {
+  region?: Region;
+}> = ({ open, onClose, region }) => {
+  const isEmbed = useIsEmbed();
   const {
-    isEmbed,
     getEmbedHeight,
     getEmbedWidth,
     getIframePath,
     getJsCodeSnippet,
     getIframeCodeSnippet,
-  } = useEmbed();
+  } = useEmbed(region);
 
   // When you click both copy links back to back, it'll trigger multiple snackbar
   // messages.  We show them serially using a queue per example at
@@ -81,10 +81,9 @@ const EmbedPreview: React.FC<{
     processSnackbarQueue();
   };
 
-  const countyFipsCode = county && county['full_fips_code'];
-  const iFramePath = getIframePath(countyFipsCode);
-  const iFrameCodeSnippet = getIframeCodeSnippet(countyFipsCode);
-  const jsCodeSnippet = getJsCodeSnippet(countyFipsCode);
+  const iFramePath = getIframePath();
+  const iFrameCodeSnippet = getIframeCodeSnippet();
+  const jsCodeSnippet = getJsCodeSnippet();
 
   return (
     <>
@@ -101,8 +100,8 @@ const EmbedPreview: React.FC<{
                   <iframe
                     src={iFramePath}
                     title="Embed Preview"
-                    width={getEmbedWidth(countyFipsCode)}
-                    height={getEmbedHeight(countyFipsCode)}
+                    width={getEmbedWidth()}
+                    height={getEmbedHeight()}
                     frameBorder="0"
                   ></iframe>
                 </Grid>
