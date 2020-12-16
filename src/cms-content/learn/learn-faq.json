@@ -31,7 +31,7 @@
       "sectionId": "health and symptoms",
       "questions": [
         {
-          "question": "What are the symptoms of COVID and how long does it take for them to show?",
+          "question": "What are the symptoms of COVID?",
           "questionId": "what-symptoms-covid",
           "answer": "Symptoms of COVID vary widely between different people. The most common symptoms include fatigue, cough and fever. Loss of smell or taste is also a frequent, early symptom. Other symptoms that people with COVID may experience include shortness of breath, muscle or body ache, sore throat, chills, congestion, headache, stomach pain (including nausea and diarrhea), pink eye (conjunctivitis) and chest pain. COVID symptoms generally appear two to 14 days after exposure. For more information on symptoms and when to seek medical help, go to the [Centers for Disease Control and Prevention](https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/symptoms.html)."
         },
@@ -47,7 +47,7 @@
         },
         {
           "question": "How long are you contagious with COVID?",
-          "answer": "According to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/if-you-are-sick/end-home-isolation.html), a person with COVID is most likely no longer contagious when (1) at least 10 days have passed since symptom onset; (2) at least 24 hours have passed fever-free without the use of fever-reducing medications; and (3) other symptoms have improved. If you never develop symptoms, you can still be contagious for 10 days after your first positive test. However, [experts](https://www.health.harvard.edu/diseases-and-conditions/if-youve-been-exposed-to-the-coronavirus#:~:text=Most%20people%20with%20coronavirus%20who,there%20are%20documented%20exceptions.) recommend quarantining for a full 14 days in case symptoms develop. You can ensure that you are no longer contagious with COVID after 10 days by receiving two [PCR](/glossary#pcr-test) or [rapid](/glossary#antigen-test) tests 24 hours apart that are both negative for the virus.",
+          "answer": "According to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/if-you-are-sick/end-home-isolation.html), a person with COVID is most likely no longer contagious when (1) at least 10 days have passed since symptom onset; (2) at least 24 hours have passed fever-free without the use of fever-reducing medications; and (3) other symptoms have improved. If you never develop symptoms, you can still be contagious for 10 days after your first positive test. However, [experts](https://www.health.harvard.edu/diseases-and-conditions/if-youve-been-exposed-to-the-coronavirus#:~:text=Most%20people%20with%20coronavirus%20who,there%20are%20documented%20exceptions.) recommend quarantining for a full 14 days in case symptoms develop. You can ensure that you are no longer contagious with COVID after 10 days by receiving two [PCR](covidactnow.org/glossary#pcr-test) or [rapid](https://covidactnow.org/glossary#antigen-test) tests 24 hours apart that are both negative for the virus.",
           "questionId": "how-long-contagious-with-covid"
         },
         {
