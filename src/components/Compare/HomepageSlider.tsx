@@ -1,22 +1,7 @@
 import React from 'react';
-import { HomepageLocationScope } from 'common/utils/compare';
+import { HomepageLocationScope, homepageLabelMap } from 'common/utils/compare';
 import { SliderContainer } from 'components/Compare/Filters.style';
 import { StyledSlider } from './HomepageSlider.style';
-
-export const homepageLabelMap = {
-  [HomepageLocationScope.MSA]: {
-    singular: 'City',
-    plural: 'Cities',
-  },
-  [HomepageLocationScope.COUNTY]: {
-    singular: 'County',
-    plural: 'Counties',
-  },
-  [HomepageLocationScope.STATE]: {
-    singular: 'State',
-    plural: 'States',
-  },
-};
 
 /* Last value is set to 99 for styling so that the final mark falls on the slider and not to the right of it */
 const marks = [

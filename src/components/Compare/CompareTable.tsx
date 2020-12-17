@@ -20,6 +20,7 @@ import {
   getMetroPrefixCopy,
   trackCompareEvent,
   HomepageLocationScope,
+  homepageLabelMap,
 } from 'common/utils/compare';
 import { COLOR_MAP } from 'common/colors';
 import ShareImageButtons from 'components/ShareButtons/ShareButtonGroup';
@@ -28,7 +29,6 @@ import { getComparePageUrl, getCompareShareImageUrl } from 'common/urls';
 import { EventAction } from 'components/Analytics';
 import { MoreInfoButton } from 'components/SharedComponents';
 import { Subtitle1 } from 'components/Typography';
-import { homepageLabelMap } from './HomepageSlider';
 
 function trackShare(label: string) {
   trackCompareEvent(EventAction.SHARE, label);
@@ -189,10 +189,10 @@ const CompareTable = (props: {
     sliderNumberToFilterMap[sliderValue],
     sortedLocationsArr.length,
     sortDescending,
+    props.homepageScope,
     currentLocation,
     sortByPopulation,
     props.isHomepage,
-    props.viewAllCounties,
     props.stateName,
   );
 

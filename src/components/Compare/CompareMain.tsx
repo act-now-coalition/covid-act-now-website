@@ -179,7 +179,7 @@ const CompareMain = (props: {
     sortDescending,
     sortByPopulation,
     countyTypeToView,
-    viewAllCounties,
+    homepageScope,
     geoScope,
     stateId,
     countyId: county?.full_fips_code,
@@ -208,7 +208,12 @@ const CompareMain = (props: {
       setSortDescending(sharedParams.sortDescending);
       setSortByPopulation(sharedParams.sortByPopulation);
       setCountyTypeToView(sharedParams.countyTypeToView);
-      setViewAllCounties(sharedParams.viewAllCounties);
+      setHomepageScope(sharedParams.homepageScope);
+      setHomepageSliderValue(
+        homepageScopeValueMap[
+          sharedParams.homepageScope as HomepageLocationScope
+        ],
+      );
       setGeoScope(sharedParams.geoScope);
       setSliderValue(scopeValueMap[sharedParams.geoScope as GeoScopeFilter]);
 
@@ -240,7 +245,6 @@ const CompareMain = (props: {
     setSliderValue,
     setShowFaqModal,
     createCompareShareId,
-
     homepageScope,
     setHomepageScope,
     homepageSliderValue,

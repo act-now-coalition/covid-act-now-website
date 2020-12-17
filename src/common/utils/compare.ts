@@ -199,6 +199,21 @@ export enum HomepageLocationScope {
   STATE,
 }
 
+export const homepageLabelMap = {
+  [HomepageLocationScope.MSA]: {
+    singular: 'City',
+    plural: 'Cities',
+  },
+  [HomepageLocationScope.COUNTY]: {
+    singular: 'County',
+    plural: 'Counties',
+  },
+  [HomepageLocationScope.STATE]: {
+    singular: 'State',
+    plural: 'States',
+  },
+};
+
 export function getHomePageViewMoreCopy(
   homepageScope: HomepageLocationScope,
   countyTypeToView: MetroFilter,
@@ -266,18 +281,16 @@ export function isCollegeCounty(region: Region) {
   return ftEnrollment && ftEnrollment / countyPopulation > threshold;
 }
 
-// For sharing:
-
 export function getShareQuote(
   sorter: Metric,
   countyTypeToView: MetroFilter,
   sliderValue: GeoScopeFilter,
   totalLocations: number,
   sortDescending: boolean,
+  homepageScope: HomepageLocationScope,
   currentLocation?: RankedLocationSummary,
   sortByPopulation?: boolean,
   isHomepage?: boolean,
-  viewAllCounties?: boolean,
   stateName?: string,
 ): string {
   const geoScopeShareCopy: any = {
@@ -287,9 +300,9 @@ export function getShareQuote(
   };
 
   const homepageShareCopy = `Compare all USA ${
-    viewAllCounties
+    homepageScope === HomepageLocationScope.COUNTY
       ? `${getMetroPrefixCopy(countyTypeToView)} counties`
-      : 'states'
+      : `${homepageLabelMap[homepageScope].plural.toLowerCase()}`
   } by their local COVID metrics with @CovidActNow.`;
 
   const stateShareCopy = `Compare COVID metrics between ${getMetroPrefixCopy(

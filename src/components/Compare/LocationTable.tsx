@@ -221,8 +221,7 @@ const LocationTable: React.FunctionComponent<{
   const showBottom = pinnedLocation && pinnedLocation.rank >= numLocations;
   const numLocationsMain = showBottom ? numLocations - 1 : numLocations;
 
-  const allCountiesView =
-    viewAllCounties || geoScope === GeoScopeFilter.COUNTRY;
+  const allCountiesView = geoScope === GeoScopeFilter.COUNTRY;
 
   const currentLocationRank = pinnedLocation?.rank;
 
