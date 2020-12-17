@@ -1,7 +1,4 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import TextField from '@material-ui/core/TextField';
-import Chip from '@material-ui/core/Chip';
 import { getFirebase, firebase } from 'common/firebase';
 import {
   Wrapper,
@@ -11,25 +8,24 @@ import {
   BodyCopy,
   UpdatePreferencesFormWrapper,
 } from 'screens/AlertUnsubscribe/AlertUnsubscribe.style';
-import { getLocationNames } from 'common/locations';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
+import { AutocompleteRegions } from 'components/AutocompleteLocations';
+import regions, { Region } from 'common/regions';
 
 const unsubscribedCopy =
   'You are now unsubscribed and will no longer receive alerts.';
 const resubscribedCopy = 'Your COVID alert preferences have been updated.';
 
-const locations: any = getLocationNames();
-
 const AlertUnsubscribe = () => {
   const params = new URLSearchParams(window.location.search);
   const email = params.get('email') || '';
 
-  const [selectedLocations, setSelectedLocations] = useState([] as any);
+  const [selectedLocations, setSelectedLocations] = useState<Region[]>([]);
   const [formSubmittedCopy, setFormSubmittedCopy] = useState('');
 
   useEffect(() => {
     async function onPageload() {
-      let fipsArr = [] as any;
+      let fipsArr: string[] = [];
       const db = getFirebase().firestore();
 
       await db
@@ -41,14 +37,10 @@ const AlertUnsubscribe = () => {
           fipsArr = data.locations || [];
         });
 
-      const defaultValues = [] as any;
+      const defaultValues: Region[] = fipsArr
+        .map((fipsCode: string) => regions.findByFipsCode(fipsCode))
+        .filter((region): region is Region => region !== null);
 
-      fipsArr.forEach((fips: string) => {
-        const subscribedLocation = locations.filter(
-          (location: any) => fips === location.full_fips_code,
-        );
-        defaultValues.push(subscribedLocation[0]);
-      });
       setSelectedLocations(defaultValues);
     }
 
@@ -67,7 +59,9 @@ const AlertUnsubscribe = () => {
   }
 
   async function subscribeToAlerts() {
-    const locations = selectedLocations.map((item: any) => item.full_fips_code);
+    const locations = selectedLocations.map(
+      (region: Region) => region.fipsCode,
+    );
     const db = getFirebase().firestore();
     await db.collection('alerts-subscriptions').doc(email).set({
       locations: locations,
@@ -85,38 +79,12 @@ const AlertUnsubscribe = () => {
           </UnsubscribeHeader>
           <BodyCopy>To update preferences for {email}:</BodyCopy>
           <UpdatePreferencesFormWrapper>
-            <Autocomplete
-              fullWidth
-              multiple
-              id="alert-locations"
-              value={selectedLocations}
-              getOptionSelected={(option, value) =>
-                option.full_fips_code === value.full_fips_code
+            <AutocompleteRegions
+              regions={regions.all()}
+              selectedRegions={selectedLocations}
+              onChangeRegions={(e, newRegions) =>
+                handleSelectChange(newRegions)
               }
-              onChange={(event, newValue) => {
-                handleSelectChange(newValue);
-              }}
-              options={locations}
-              getOptionLabel={option =>
-                option.county
-                  ? `${option.county}, ${option.state_code}`
-                  : option.state
-              }
-              renderTags={(tagValue, getTagProps) =>
-                tagValue.map((option, index) => (
-                  <Chip
-                    label={
-                      option.county
-                        ? `${option.county}, ${option.state_code}`
-                        : option.state
-                    }
-                    {...getTagProps({ index })}
-                  />
-                ))
-              }
-              renderInput={params => (
-                <TextField {...params} placeholder="Enter alert locations" />
-              )}
             />
             <UpdateAlertsButton type="submit" onClick={subscribeToAlerts}>
               Update Preferences
