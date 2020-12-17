@@ -138,11 +138,6 @@ const CompareMain = (props: {
 
   function getLocationPageLocations(region?: Region) {
     if (region && region instanceof MetroArea) {
-      console.log('hello');
-      console.log(
-        'getAllCountiesOfMetroArea(region)',
-        getAllCountiesOfMetroArea(region),
-      );
       return getAllCountiesOfMetroArea(region);
     } else if (geoScope === GeoScopeFilter.NEARBY) {
       return getNeighboringCounties(county.full_fips_code);
@@ -169,11 +164,8 @@ const CompareMain = (props: {
   }
 
   const locations = getFinalLocations(props.region);
-  // const locations = !stateId
-  //   ? homepageLocationsForCompare
-  //   : locationPageLocationsForCompare;
 
-  const viewMoreCopy = !stateId
+  const viewMoreCopy = !props.region
     ? homepageViewMoreCopy
     : locationPageViewMoreCopy;
 
@@ -249,8 +241,6 @@ const CompareMain = (props: {
   if (locations.length === 0) {
     return null;
   }
-
-  console.log('region', props.region);
 
   const sharedProps = {
     stateName: props.stateName,

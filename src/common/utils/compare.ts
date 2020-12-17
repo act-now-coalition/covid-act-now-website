@@ -192,7 +192,7 @@ export function getLocationPageViewMoreCopy(
   region: Region,
 ) {
   if (region instanceof MetroArea) {
-    return `View all counties in ${region.name}`;
+    return `View all counties in ${region.shortName}`; // Todo (Chelsi): update this?
   } else if (geoscope === GeoScopeFilter.COUNTRY) {
     return `View top 100 ${getMetroPrefixCopy(countyTypeToView)} counties`;
   } else if (geoscope === GeoScopeFilter.NEARBY) {
