@@ -69,7 +69,7 @@ const SummaryStat: React.FC<{
         {value == null ? null : (
           <>
             <StatValueText condensed={condensed} isEmbed={isEmbed}>
-              {formatValue(chartType, value, '')}
+              {formatValue(chartType, value, /*nullValueCopy=*/ '-')}
               {!condensed && beta && !isMobile && <StatTag beta />}
             </StatValueText>
           </>
