@@ -24,7 +24,14 @@ import {
 } from 'common/utils/recommend';
 import { mainContent } from 'cms-content/recommendations';
 import { getRecommendationsShareUrl } from 'common/urls';
-import { Region, getStateCode, getStateName } from 'common/regions';
+import {
+  Region,
+  getStateCode,
+  getStateName,
+  RegionType,
+  State,
+} from 'common/regions';
+import { MetroArea } from 'components/MiniMap/MiniMap.stories';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
@@ -139,6 +146,9 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
     projections.getMetricValues(),
   );
 
+  const isMetro = region.regionType === RegionType.MSA;
+  console.log('isMetro', isMetro);
+  console.log('region', region);
   // TODO(pablo): Create separate refs for signup and share
   return (
     <>
@@ -151,14 +161,24 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
           onHeaderSignupClick={() => scrollTo(shareBlockRef.current)}
           isMobile={isMobile}
         />
-        {stateCode && stateName && (
+        {/* {stateCode && stateName && ( */}
+        <CompareMain
+          stateName={region.name}
+          county={county}
+          locationsViewable={6}
+          stateId={(region as State).stateCode || undefined}
+          region={region}
+        />
+        {/* )} */}
+        {/* {isMetro && (
           <CompareMain
-            stateName={stateName}
+            // stateName={stateName}
             county={county}
             locationsViewable={6}
-            stateId={stateCode}
+            // stateId={stateCode}
+            region={region}
           />
-        )}
+        )} */}
         <MainContentInner>
           <Recommend
             introCopy={recommendationsIntro}

@@ -73,6 +73,10 @@ export function getAllMetroAreas(): SummaryForCompare[] {
   return regions.metroAreas.map(getLocationObj);
 }
 
+export function getAllCountiesOfMetroArea(region: Region): SummaryForCompare[] {
+  return (region as MetroArea).counties.map(getLocationObj);
+}
+
 export function getAllCountiesOfState(stateCode: string): SummaryForCompare[] {
   return regions.counties
     .filter((region: County) => region.state.stateCode === stateCode)

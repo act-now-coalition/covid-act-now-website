@@ -25,6 +25,7 @@ import {
   GeoScopeFilter,
   HomepageLocationScope,
   getAllMetroAreas,
+  getAllCountiesOfMetroArea,
 } from 'common/utils/compare';
 import { Metric } from 'common/metric';
 import { countySummary } from 'common/location_summaries';
@@ -35,7 +36,7 @@ import {
   storeSharedComponentParams,
   useSharedComponentParams,
 } from 'common/sharing';
-import regions from 'common/regions';
+import regions, { Region, County, State, MetroArea } from 'common/regions';
 import { assert } from 'common/utils';
 
 // For filters (0, 50, and 99 are numerical values required by MUI Slider component):
@@ -58,6 +59,7 @@ const CompareMain = (props: {
   locationsViewable: number;
   isHomepage?: boolean;
   stateId?: string;
+  region?: Region;
 }) => {
   const tableRef = useRef<HTMLDivElement>(null);
 
@@ -134,8 +136,15 @@ const CompareMain = (props: {
   // For location page:
   const [geoScope, setGeoScope] = useState(GeoScopeFilter.STATE);
 
-  function getLocationPageLocations() {
-    if (geoScope === GeoScopeFilter.NEARBY) {
+  function getLocationPageLocations(region?: Region) {
+    if (region && region instanceof MetroArea) {
+      console.log('hello');
+      console.log(
+        'getAllCountiesOfMetroArea(region)',
+        getAllCountiesOfMetroArea(region),
+      );
+      return getAllCountiesOfMetroArea(region);
+    } else if (geoScope === GeoScopeFilter.NEARBY) {
       return getNeighboringCounties(county.full_fips_code);
     } else if (geoScope === GeoScopeFilter.STATE && stateId) {
       return getLocationPageCountiesSelection(countyTypeToView, stateId);
@@ -149,9 +158,21 @@ const CompareMain = (props: {
     getLocationPageViewMoreCopy(geoScope, countyTypeToView, props.stateName);
   const locationPageLocationsForCompare = getLocationPageLocations();
 
-  const locations = !stateId
-    ? homepageLocationsForCompare
-    : locationPageLocationsForCompare;
+  function getFinalLocations(region?: Region) {
+    if (!region) {
+      return homepageLocationsForCompare;
+    } else {
+      if (region instanceof MetroArea) {
+        return getAllCountiesOfMetroArea(region);
+      } else return locationPageLocationsForCompare;
+    }
+  }
+
+  const locations = getFinalLocations(props.region);
+  // const locations = !stateId
+  //   ? homepageLocationsForCompare
+  //   : locationPageLocationsForCompare;
+
   const viewMoreCopy = !stateId
     ? homepageViewMoreCopy
     : locationPageViewMoreCopy;
@@ -220,6 +241,8 @@ const CompareMain = (props: {
   if (locations.length === 0) {
     return null;
   }
+
+  console.log('region', props.region);
 
   const sharedProps = {
     stateName: props.stateName,
