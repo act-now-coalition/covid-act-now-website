@@ -2,13 +2,13 @@ import React from 'react';
 import { CircleWrapper, StateWrapper } from 'components/StateSvg/Circle.style';
 import RoomIcon from '@material-ui/icons/Room';
 
+// Taken from components/StateSvg/Circle
 const MetroItemIcon: React.FC<{ ratio: number; fillColor: string }> = ({
   ratio,
   fillColor,
 }) => {
   const DEFAULT_SIZE = 64;
   const DEFAULT_CIRCLE_RADIUS = 32;
-
   const size = ratio * DEFAULT_SIZE;
 
   return (
