@@ -14,15 +14,14 @@ import {
   SNAPSHOT_URL,
 } from '../src/common/utils/snapshots';
 import {
-  LocationSummariesByFIPS,
   LocationSummary,
   SummariesMap,
 } from '../src/common/location_summaries';
 import { Projections } from '../src/common/models/Projections';
 import { DatasetId } from '../src/common/models/Projection';
 import { assert } from '../src/common/utils';
-import { getLocationNames, isState } from '../src/common/locations';
 import { Level } from '../src/common/level';
+import regions from '../src/common/regions';
 
 const OUTPUT_FOLDER = path.join(__dirname, '..', 'src', 'assets', 'data');
 const SUMMARIES_FOLDER = path.join(__dirname, 'alert_emails/summaries');
@@ -198,13 +197,13 @@ async function buildSlackSummary() {
     path.join(SUMMARIES_FOLDER, `${newSnapshot}.json`),
   );
 
-  const stateLocations = getLocationNames().filter(l => isState(l));
   const better = [],
     worse = [];
-  for (const state of stateLocations) {
-    const oldLevel = oldSummaries[state.state_fips_code].level;
-    const newLevel = newSummaries[state.state_fips_code].level;
-    const changeString = `${state.state} (${Level[oldLevel]} => ${Level[newLevel]})`;
+
+  for (const state of regions.states) {
+    const oldLevel = oldSummaries[state.fipsCode].level;
+    const newLevel = newSummaries[state.fipsCode].level;
+    const changeString = `${state.fullName} (${Level[oldLevel]} => ${Level[newLevel]})`;
     if (newLevel > oldLevel) {
       worse.push(changeString);
     } else if (newLevel < oldLevel) {

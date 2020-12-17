@@ -11,11 +11,8 @@ import path from 'path';
 import process from 'process';
 import _ from 'lodash';
 import urlJoin from 'url-join';
-import US_STATE_DATASET from '../src/components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 import ShareImageUrlJSON from '../src/assets/data/share_images_url.json';
-import { STATES } from '../src/common';
-import regions from '../src/common/regions';
-import { assert } from '../src/common/utils';
+import regions, { County } from '../src/common/regions';
 import * as urls from '../src/common/urls';
 import { getNextSharedComponentId } from '../src/common/sharing';
 
@@ -24,17 +21,13 @@ import { getNextSharedComponentId } from '../src/common/sharing';
 import { LocationSummariesByFIPS } from '../src/common/location_summaries';
 import { ALL_METRICS, getMetricName } from '../src/common/metric';
 
-const COUNTIES = regions.counties
-  .map(c => c.fipsCode)
-  .filter(fips => LocationSummariesByFIPS[fips] !== undefined);
+function hasLocationSummary(county: County) {
+  return LocationSummariesByFIPS[county.fipsCode] !== undefined;
+}
 
 // We pre-generate the next 2000 IDs each time we do a deploy which should be
 // sufficient unless we get more than 2000 shares/day.
 const SHARED_COMPONENT_IDS_TO_GENERATE = 2000;
-
-const BLACKLISTED_COUNTIES = [
-  '11001', // Washington, DC - We treat it as a state, not a county.
-];
 
 type MetaTags = { [name: string]: string };
 
@@ -151,35 +144,29 @@ async function main() {
     );
   }
 
-  for (const stateCode in STATES) {
-    const stateName = (STATES as any)[stateCode];
-    const relativeSiteUrl = `/us/${stateCode.toLowerCase()}/`;
-    const relativeImageUrl = `/states/${stateCode.toLowerCase()}`;
+  for (const state of regions.states) {
+    const stateCode = state.stateCode.toLowerCase();
+    const relativeImageUrl = `/states/${state.stateCode.toLowerCase()}`;
+    const relativeSiteUrl = `/us/${stateCode}/`;
     await buildLocationPages(
       builder,
       relativeSiteUrl,
       relativeImageUrl,
-      stateName,
+      state.fullName,
     );
   }
 
-  for (const fips of COUNTIES) {
-    if (BLACKLISTED_COUNTIES.includes(fips)) {
-      continue;
-    }
-    const county = findCountyByFips(fips);
-    assert(county, 'Failed to find county ' + fips);
-    const stateCode = county.state_code;
-    const locationName = `${county.county}, ${(STATES as any)[stateCode]}`;
-    const relativeSiteUrl = `/us/${stateCode.toLowerCase()}/county/${
-      county.county_url_name
-    }`;
-    const relativeImageUrl = `counties/${fips}`;
+  const counties = regions.counties.filter(hasLocationSummary);
+
+  for (const county of counties) {
+    const stateCode = county.stateCode.toLowerCase();
+    const relativeSiteUrl = `/us/${stateCode}/county/${county.urlSegment}`;
+    const relativeImageUrl = `counties/${county.fipsCode}`;
     await buildLocationPages(
       builder,
       relativeSiteUrl,
       relativeImageUrl,
-      locationName,
+      county.fullName,
     );
   }
 }
@@ -250,24 +237,6 @@ class IndexPageBuilder {
 
     return html;
   }
-}
-
-// TODO(michael): Consolidate state / county lookups.
-let fipsLookup: any = undefined!;
-
-function findCountyByFips(fips: string) {
-  if (!fipsLookup) {
-    fipsLookup = {};
-    const statesData = US_STATE_DATASET.state_county_map_dataset as any;
-    for (const state in statesData) {
-      const countiesData = statesData[state].county_dataset;
-      for (const county of countiesData) {
-        fipsLookup[county.full_fips_code] = county;
-      }
-    }
-  }
-
-  return fipsLookup[fips];
 }
 
 main().catch(e => {
