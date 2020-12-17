@@ -133,7 +133,10 @@ const Filters = (props: {
     }
   };
 
-  const homepageSliderHandleChange = (event: any, value: any) => {
+  const homepageSliderHandleChange = (
+    event: React.ChangeEvent<{}>,
+    value: any,
+  ) => {
     if (setHomepageScope) {
       setHomepageSliderValue(value);
       setHomepageScope(homepageSliderNumberToFilterMap[value]);

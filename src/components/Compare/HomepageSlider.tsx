@@ -35,8 +35,8 @@ const marks = [
 ];
 
 const HomepageSlider: React.FC<{
-  onChange: any;
-  homepageScope: any;
+  onChange: (event: React.ChangeEvent<{}>, value: any) => void;
+  homepageScope: HomepageLocationScope;
   homepageSliderValue: HomepageLocationScope;
   $isModal: boolean;
 }> = ({ onChange, homepageScope, homepageSliderValue, $isModal }) => {
