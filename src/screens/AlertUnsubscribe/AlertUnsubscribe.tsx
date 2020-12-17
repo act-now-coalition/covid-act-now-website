@@ -1,7 +1,4 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import TextField from '@material-ui/core/TextField';
-import Chip from '@material-ui/core/Chip';
 import { getFirebase, firebase } from 'common/firebase';
 import {
   Wrapper,
@@ -11,44 +8,37 @@ import {
   BodyCopy,
   UpdatePreferencesFormWrapper,
 } from 'screens/AlertUnsubscribe/AlertUnsubscribe.style';
-import { getLocationNames } from 'common/locations';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
+import { AutocompleteRegions } from 'components/AutocompleteLocations';
+import regions, { Region } from 'common/regions';
 
 const unsubscribedCopy =
   'You are now unsubscribed and will no longer receive alerts.';
 const resubscribedCopy = 'Your COVID alert preferences have been updated.';
 
-const locations: any = getLocationNames();
-
 const AlertUnsubscribe = () => {
   const params = new URLSearchParams(window.location.search);
   const email = params.get('email') || '';
 
-  const [selectedLocations, setSelectedLocations] = useState([] as any);
+  const [selectedLocations, setSelectedLocations] = useState<Region[]>([]);
   const [formSubmittedCopy, setFormSubmittedCopy] = useState('');
 
   useEffect(() => {
     async function onPageload() {
-      let fipsArr = [] as any;
-      const db = getFirebase().firestore();
-
-      await db
+      const fipsList: string[] = await getFirebase()
+        .firestore()
         .collection('alerts-subscriptions')
         .doc(email)
         .get()
         .then(function (doc) {
           const data = doc.data() || {};
-          fipsArr = data.locations || [];
+          return data.locations || [];
         });
 
-      const defaultValues = [] as any;
+      const defaultValues: Region[] = fipsList
+        .map((fipsCode: string) => regions.findByFipsCode(fipsCode))
+        .filter((region): region is Region => region !== null);
 
-      fipsArr.forEach((fips: string) => {
-        const subscribedLocation = locations.filter(
-          (location: any) => fips === location.full_fips_code,
-        );
-        defaultValues.push(subscribedLocation[0]);
-      });
       setSelectedLocations(defaultValues);
     }
 
@@ -57,8 +47,11 @@ const AlertUnsubscribe = () => {
 
   async function unsubscribeFromAll() {
     trackEvent(EventCategory.ENGAGEMENT, EventAction.ALERTS_UNSUBSCRIBE);
-    const db = getFirebase().firestore();
-    await db.collection('alerts-subscriptions').doc(email).delete();
+    await getFirebase()
+      .firestore()
+      .collection('alerts-subscriptions')
+      .doc(email)
+      .delete();
     setFormSubmittedCopy(unsubscribedCopy);
   }
 
@@ -67,12 +60,15 @@ const AlertUnsubscribe = () => {
   }
 
   async function subscribeToAlerts() {
-    const locations = selectedLocations.map((item: any) => item.full_fips_code);
-    const db = getFirebase().firestore();
-    await db.collection('alerts-subscriptions').doc(email).set({
-      locations: locations,
-      subscribedAt: firebase.firestore.FieldValue.serverTimestamp(),
-    });
+    const locations = selectedLocations.map(region => region.fipsCode);
+    await getFirebase()
+      .firestore()
+      .collection('alerts-subscriptions')
+      .doc(email)
+      .set({
+        locations,
+        subscribedAt: firebase.firestore.FieldValue.serverTimestamp(),
+      });
     setFormSubmittedCopy(resubscribedCopy);
   }
 
@@ -85,38 +81,12 @@ const AlertUnsubscribe = () => {
           </UnsubscribeHeader>
           <BodyCopy>To update preferences for {email}:</BodyCopy>
           <UpdatePreferencesFormWrapper>
-            <Autocomplete
-              fullWidth
-              multiple
-              id="alert-locations"
-              value={selectedLocations}
-              getOptionSelected={(option, value) =>
-                option.full_fips_code === value.full_fips_code
+            <AutocompleteRegions
+              regions={regions.all()}
+              selectedRegions={selectedLocations}
+              onChangeRegions={(e, newRegions) =>
+                handleSelectChange(newRegions)
               }
-              onChange={(event, newValue) => {
-                handleSelectChange(newValue);
-              }}
-              options={locations}
-              getOptionLabel={option =>
-                option.county
-                  ? `${option.county}, ${option.state_code}`
-                  : option.state
-              }
-              renderTags={(tagValue, getTagProps) =>
-                tagValue.map((option, index) => (
-                  <Chip
-                    label={
-                      option.county
-                        ? `${option.county}, ${option.state_code}`
-                        : option.state
-                    }
-                    {...getTagProps({ index })}
-                  />
-                ))
-              }
-              renderInput={params => (
-                <TextField {...params} placeholder="Enter alert locations" />
-              )}
             />
             <UpdateAlertsButton type="submit" onClick={subscribeToAlerts}>
               Update Preferences

@@ -97,6 +97,13 @@ class RegionDB {
       limit,
     );
   }
+
+  topMetrosByPopulation(limit: number): MetroArea[] {
+    return takeRight(
+      sortBy(this.metroAreas, c => c.population),
+      limit,
+    );
+  }
 }
 
 function equalLower(a: string, b: string) {

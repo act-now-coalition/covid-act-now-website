@@ -182,7 +182,7 @@ export default function App() {
                 path="/embed/us/county/:countyFipsId"
                 component={Embed}
               />
-
+              <Route exact path="/embed/us/fips/:fipsCode" component={Embed} />
               {/* <Route path="/donate" component={ComingSoon} /> */}
               {/* /model, /contact, and /about are deprecated in favor of /faq */}
               <Route path="/model">

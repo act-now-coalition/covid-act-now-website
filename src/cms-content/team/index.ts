@@ -95,6 +95,11 @@ const groupedTeams = [
 export const teams: Team[] = groupedTeams.map(sanitizeTeam);
 
 /*
-  Including titles only for these 3 team categories:
+  Including titles only for these 4 team categories:
 */
-export const teamsWithTitles = ['Leadership', 'Board', 'Advisors'];
+export const teamsWithTitles = [
+  'Leadership',
+  'Board',
+  'Advisors',
+  'Legal Counsel',
+];

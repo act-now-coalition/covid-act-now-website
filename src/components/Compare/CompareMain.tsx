@@ -185,7 +185,10 @@ const CompareMain = (props: {
     scrollToCompare();
   };
 
+  // Location page slider:
   const defaultSliderValue = scopeValueMap[geoScope];
+
+  // Homepage slider:
   const [sliderValue, setSliderValue] = useState(defaultSliderValue);
 
   const defaultHomepageSliderValue = homepageScopeValueMap[homepageScope];
