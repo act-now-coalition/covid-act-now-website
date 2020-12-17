@@ -50,9 +50,11 @@ enum Locations {
   STATES,
   TOP_COUNTIES_BY_POPULATION,
   TOP_COUNTIES_BY_DIFF,
+  TOP_METROS_BY_POPULATION,
 }
 
 const COUNTIES_LIMIT = 100;
+const METROS_LIMIT = 100;
 
 // For "interesting" counties, we take the 30 top diffs of the counties with > 500k population.
 const INTERESTING_POPULATION = 500000;
@@ -223,6 +225,9 @@ function CompareSnapshotsInner({ masterSnapshot }: { masterSnapshot: number }) {
             </MenuItem>
             <MenuItem value={Locations.TOP_COUNTIES_BY_DIFF}>
               Top {COUNTIES_LIMIT} Counties (by Diff)
+            </MenuItem>
+            <MenuItem value={Locations.TOP_METROS_BY_POPULATION}>
+              Top {METROS_LIMIT} Metros (by Population)
             </MenuItem>
           </Select>
         </FormControl>
@@ -425,6 +430,14 @@ function useProjectionsSet(
             await fetchCountyProjections(rightSnapshot, topCounties),
           ),
         );
+      } else if (locations === Locations.TOP_METROS_BY_POPULATION) {
+        const topMetros = regions.topMetrosByPopulation(METROS_LIMIT);
+        setProjectionsSet(
+          ProjectionsSet.fromProjections(
+            await fetchMetroProjections(leftSnapshot, topMetros),
+            await fetchMetroProjections(rightSnapshot, topMetros),
+          ),
+        );
       } else if (locations === Locations.TOP_COUNTIES_BY_DIFF) {
         const countyDiffs = await fetchCountyDiffs(
           leftSnapshot,
@@ -533,6 +546,20 @@ function fetchCountyProjections(
       }),
     ),
   ).then(counties => counties.filter(p => p !== null) as Projections[]);
+}
+
+function fetchMetroProjections(
+  snapshotNumber: number,
+  metros: Region[],
+): Promise<Projections[]> {
+  return Promise.all(
+    metros.map(region =>
+      fetchProjectionsRegion(region, snapshotUrl(snapshotNumber)).catch(err => {
+        console.error(err);
+        return null;
+      }),
+    ),
+  ).then(metros => metros.filter(p => p !== null) as Projections[]);
 }
 
 async function fetchCountyDiffs(
