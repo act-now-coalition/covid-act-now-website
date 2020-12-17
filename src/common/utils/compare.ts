@@ -4,8 +4,7 @@ import {
   getCountyMsaCode,
   getColleges,
 } from 'common/locations';
-import { getSummaryFromFips } from 'common/location_summaries';
-import { LocationSummary } from 'common/location_summaries';
+import { LocationSummary, getSummaryFromFips } from 'common/location_summaries';
 import { Metric, getMetricNameForCompare } from 'common/metric';
 import { isNumber } from 'lodash';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
