@@ -1,18 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
-import { colorFromLocationSummary } from 'common/colors';
 import { geoAlbersUsaTerritories } from 'geo-albers-usa-territories';
-import COUNTIES_JSON from './data/counties-10m.json';
-import { USMapWrapper, USStateMapWrapper } from './Map.style';
+import { colorFromLocationSummary } from 'common/colors';
 import { useSummaries } from 'common/location_summaries';
 import { ScreenshotReady } from 'components/Screenshot';
-import {
-  getCanonicalUrl,
-  getLocationNameForFips,
-  getStateCode,
-  isStateFips,
-} from 'common/locations';
+import regions from 'common/regions';
+import { USMapWrapper, USStateMapWrapper } from './Map.style';
+import COUNTIES_JSON from './data/counties-10m.json';
+
+const stateFipsCodes = regions.states.map(state => state.fipsCode);
 
 /**
  * The COUNTIES_JSON file contains geographies for counties, states and the
@@ -91,45 +88,41 @@ const USACountyMap = React.memo(
               <Geographies geography={geoStates}>
                 {({ geographies }) =>
                   geographies
-                    .filter(geo => isStateFips(geo.id))
+                    .filter(geo => stateFipsCodes.includes(geo.id))
                     .map(geo => {
-                      const { name } = geo.properties;
                       const fipsCode = geo.id;
-                      const stateCode = getStateCode(name);
-                      const stateUrl = `/${getCanonicalUrl(fipsCode)}`;
-                      const locationName = getLocationNameForFips(fipsCode);
-
+                      const state = regions.findByFipsCode(fipsCode);
                       // Using a custom SVG to place the northern mariana islands to increase
                       // accessibility due to the small size.
-                      if (stateCode === 'MP') {
+                      if (state.stateCode === 'MP') {
                         return (
                           <Link
-                            key={stateCode}
-                            to={stateUrl}
-                            aria-label={locationName}
+                            key={state.stateCode}
+                            to={state.relativeUrl}
+                            aria-label={state.fullName}
                           >
                             <MarianaIslands
                               key={geo.rsmKey}
-                              onMouseEnter={() => setTooltipContent(name)}
+                              onMouseEnter={() => setTooltipContent(state.name)}
                               onMouseLeave={onMouseLeave}
-                              onClick={() => stateClickHandler(name)}
+                              onClick={() => stateClickHandler(state.name)}
                               fill={getFillColor(geo)}
                             />
                           </Link>
                         );
                       }
-                      return stateCode ? (
+                      return state ? (
                         <Link
-                          key={stateCode}
-                          to={stateUrl}
-                          aria-label={locationName}
+                          key={state.stateCode}
+                          to={state.relativeUrl}
+                          aria-label={state.fullName}
                         >
                           <Geography
                             key={geo.rsmKey}
                             geography={geo}
-                            onMouseEnter={() => setTooltipContent(name)}
+                            onMouseEnter={() => setTooltipContent(state.name)}
                             onMouseLeave={onMouseLeave}
-                            onClick={() => stateClickHandler(name)}
+                            onClick={() => stateClickHandler(state.name)}
                             fill={getFillColor(geo)}
                             fillOpacity={showCounties ? 0 : 1}
                             stroke="white"
