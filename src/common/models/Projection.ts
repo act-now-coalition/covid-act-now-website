@@ -133,7 +133,6 @@ export class Projection {
   readonly currentCumulativeDeaths: number | null;
   readonly currentCumulativeCases: number | null;
   readonly currentContactTracerMetric: number | null;
-  readonly stateCode: string;
   readonly currentCaseDensity: number | null;
   readonly currentDailyDeaths: number | null;
 
@@ -182,7 +181,6 @@ export class Projection {
     this.actualTimeseries = actualTimeseries;
     this.dates = dates;
 
-    this.stateCode = summaryWithTimeseries.state;
     this.isCounty = parameters.isCounty;
     this.totalPopulation = summaryWithTimeseries.population;
     this.fips = summaryWithTimeseries.fips;
