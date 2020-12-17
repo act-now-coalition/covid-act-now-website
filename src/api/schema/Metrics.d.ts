@@ -12,8 +12,8 @@ export type Testpositivityratio = number | null;
  * Method used to determine test positivity ratio.
  */
 export type TestPositivityRatioMethod =
-  | 'CDCTesting'
   | 'CMSTesting'
+  | 'CDCTesting'
   | 'HHSTesting'
   | 'Valorum'
   | 'covid_tracking'

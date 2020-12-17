@@ -15,7 +15,7 @@ export type Country = string;
 /**
  * 2-letter ANSI state code.
  */
-export type State = string;
+export type State = string | null;
 /**
  * County name
  */
@@ -111,8 +111,8 @@ export type Testpositivityratio = number | null;
  * Method used to determine test positivity ratio.
  */
 export type TestPositivityRatioMethod =
-  | 'CDCTesting'
   | 'CMSTesting'
+  | 'CDCTesting'
   | 'HHSTesting'
   | 'Valorum'
   | 'covid_tracking'

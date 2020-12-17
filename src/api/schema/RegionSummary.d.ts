@@ -5,7 +5,7 @@
  */
 
 /**
- * Fips Code.  For state level data, 2 characters, for county level data, 5 characters.
+ * FIPS Code. FIPS codes are either 2-digit state codes, 5-digit county codes, or 5-digit CBSA codes.
  */
 export type Fips = string;
 /**
@@ -13,9 +13,9 @@ export type Fips = string;
  */
 export type Country = string;
 /**
- * 2-letter ANSI state code.
+ * 2-letter ANSI state code. For CBSA regions, state is omitted.
  */
-export type State = string;
+export type State = string | null;
 /**
  * County name
  */
@@ -23,7 +23,7 @@ export type County = string | null;
 /**
  * An enumeration.
  */
-export type AggregationLevel = 'country' | 'state' | 'county';
+export type AggregationLevel = 'country' | 'state' | 'county' | 'cbsa';
 /**
  * Latitude of point within the state or county
  */
@@ -48,8 +48,8 @@ export type Testpositivityratio = number | null;
  * Method used to determine test positivity ratio.
  */
 export type TestPositivityRatioMethod =
-  | 'CDCTesting'
   | 'CMSTesting'
+  | 'CDCTesting'
   | 'HHSTesting'
   | 'Valorum'
   | 'covid_tracking'
@@ -103,8 +103,9 @@ export type Risklevels = RiskLevels;
  *  *High* - At risk of outbreak
  *  *Critical* - Active or imminent outbreak
  *  *Unknown* - Risk unknown
+ *  *Extreme* - Severe outbreak
  */
-export type RiskLevel = 0 | 1 | 2 | 3 | 4;
+export type RiskLevel = 0 | 1 | 2 | 3 | 4 | 5;
 /**
  * Cumulative number of confirmed or suspected cases
  */
@@ -168,6 +169,10 @@ export type Newcases = number | null;
  * Date of latest data
  */
 export type Lastupdateddate = string;
+/**
+ * URL linking to Covid Act Now location page.
+ */
+export type Url = string | null;
 
 /**
  * Summary of actual and prediction data for a single region.
@@ -186,6 +191,7 @@ export interface RegionSummary {
   riskLevels: Risklevels;
   actuals: Actuals;
   lastUpdatedDate: Lastupdateddate;
+  url: Url;
 }
 /**
  * Calculated metrics data based on known actuals.
