@@ -8,7 +8,13 @@ import { LocationSummary, getSummaryFromFips } from 'common/location_summaries';
 import { Metric, getMetricNameForCompare } from 'common/metric';
 import { isNumber } from 'lodash';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
-import regions, { County, Region, State, MetroArea } from 'common/regions';
+import regions, {
+  County,
+  Region,
+  State,
+  MetroArea,
+  getStateName,
+} from 'common/regions';
 import { fail } from 'assert';
 import { assert } from '.';
 
@@ -183,16 +189,18 @@ export function getMetroPrefixCopy(filter: MetroFilter, useAll?: boolean) {
 export function getLocationPageViewMoreCopy(
   geoscope: GeoScopeFilter,
   countyTypeToView: MetroFilter,
-  stateName: string,
+  region: Region,
 ) {
-  if (geoscope === GeoScopeFilter.COUNTRY) {
+  if (region instanceof MetroArea) {
+    return `View all counties in ${region.name}`;
+  } else if (geoscope === GeoScopeFilter.COUNTRY) {
     return `View top 100 ${getMetroPrefixCopy(countyTypeToView)} counties`;
   } else if (geoscope === GeoScopeFilter.NEARBY) {
     return 'View all nearby counties';
   } else {
     return `View all ${getMetroPrefixCopy(
       countyTypeToView,
-    )} counties in ${stateName}`;
+    )} counties in ${getStateName(region)}`;
   }
 }
 
@@ -298,8 +306,8 @@ export function getShareQuote(
   homepageScope: HomepageLocationScope,
   currentLocation?: RankedLocationSummary,
   sortByPopulation?: boolean,
-  isHomepage?: boolean,
   stateName?: string,
+  region?: Region,
 ): string {
   const geoScopeShareCopy: any = {
     [GeoScopeFilter.NEARBY]: 'nearby',
@@ -349,13 +357,19 @@ export function getShareQuote(
         : getMetricNameForCompare(sorter).toLowerCase()
     }, according to @CovidActNow. See how your county compares.`;
 
-  if (isHomepage) {
+  if (!region) {
     return homepageShareCopy;
-  } else if (!currentLocation && stateName) {
-    return stateShareCopy;
-  } else if (currentLocation) {
-    return countyShareCopy || stateShareCopy;
   } else {
-    return stateShareCopy;
+    if (region instanceof MetroArea) {
+      return `Compare COVID metrics between counties in ${
+        (region as MetroArea).name
+      } with @CovidActNow.`;
+    } else if (!currentLocation && stateName) {
+      return stateShareCopy;
+    } else if (currentLocation) {
+      return countyShareCopy || stateShareCopy;
+    } else {
+      return stateShareCopy;
+    }
   }
 }

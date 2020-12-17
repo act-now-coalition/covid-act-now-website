@@ -36,7 +36,7 @@ import {
   storeSharedComponentParams,
   useSharedComponentParams,
 } from 'common/sharing';
-import regions, { Region, County, State, MetroArea } from 'common/regions';
+import regions, { Region, MetroArea } from 'common/regions';
 import { assert } from 'common/utils';
 
 // For filters (0, 50, and 99 are numerical values required by MUI Slider component):
@@ -154,8 +154,8 @@ const CompareMain = (props: {
   }
 
   const locationPageViewMoreCopy =
-    props.stateName &&
-    getLocationPageViewMoreCopy(geoScope, countyTypeToView, props.stateName);
+    props.region &&
+    getLocationPageViewMoreCopy(geoScope, countyTypeToView, props.region);
   const locationPageLocationsForCompare = getLocationPageLocations();
 
   function getFinalLocations(region?: Region) {
@@ -272,6 +272,7 @@ const CompareMain = (props: {
     setHomepageScope,
     homepageSliderValue,
     setHomepageSliderValue,
+    region: props.region,
   };
 
   return (
