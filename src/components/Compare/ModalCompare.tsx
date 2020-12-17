@@ -6,6 +6,7 @@ import {
   SummaryForCompare,
   MetroFilter,
   GeoScopeFilter,
+  HomepageLocationScope,
 } from 'common/utils/compare';
 import Filters from 'components/Compare/Filters';
 import { LockBodyScroll } from 'components/Dialog';
@@ -35,6 +36,13 @@ const ModalCompare = (props: {
   setSliderValue: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
   setShowFaqModal: React.Dispatch<React.SetStateAction<boolean>>;
   createCompareShareId: () => Promise<string>;
+
+  homepageScope: HomepageLocationScope;
+  setHomepageScope: React.Dispatch<React.SetStateAction<HomepageLocationScope>>;
+  homepageSliderValue: HomepageLocationScope;
+  setHomepageSliderValue: React.Dispatch<
+    React.SetStateAction<HomepageLocationScope>
+  >;
 }) => {
   const { handleCloseModal } = props;
 
@@ -69,6 +77,10 @@ const ModalCompare = (props: {
           isModal
           sliderValue={props.sliderValue}
           setSliderValue={props.setSliderValue}
+          homepageScope={props.homepageScope}
+          setHomepageScope={props.setHomepageScope}
+          homepageSliderValue={props.homepageSliderValue}
+          setHomepageSliderValue={props.setHomepageSliderValue}
         />
         <CloseIcon onClick={() => props.handleCloseModal()} />
       </ModalHeader>
@@ -97,6 +109,10 @@ const ModalCompare = (props: {
         setSliderValue={props.setSliderValue}
         setShowFaqModal={props.setShowFaqModal}
         createCompareShareId={props.createCompareShareId}
+        homepageScope={props.homepageScope}
+        setHomepageScope={props.setHomepageScope}
+        homepageSliderValue={props.homepageSliderValue}
+        setHomepageSliderValue={props.setHomepageSliderValue}
       />
     </Fragment>
   );

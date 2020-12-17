@@ -6,6 +6,7 @@ import {
   RankedLocationSummary,
   GeoScopeFilter,
   SummaryForCompare,
+  HomepageLocationScope,
 } from 'common/utils/compare';
 import CompareTableRow from './CompareTableRow';
 import HeaderCell from './HeaderCell';
@@ -182,6 +183,7 @@ const LocationTable: React.FunctionComponent<{
   isHomepage?: boolean;
   viewAllCounties?: boolean;
   geoScope?: GeoScopeFilter;
+  homepageScope: HomepageLocationScope;
 }> = ({
   setSorter,
   setSortDescending,
@@ -201,11 +203,13 @@ const LocationTable: React.FunctionComponent<{
   isHomepage,
   viewAllCounties,
   geoScope,
+  homepageScope,
 }) => {
   const Container = isModal ? Styles.ModalContainer : Styles.Container;
 
   // Seemingly random numbers are the heights of each modal header
-  const homepageOffset = viewAllCounties ? 159 : 73;
+  const homepageOffset =
+    homepageScope === HomepageLocationScope.COUNTY ? 159 : 73;
   const locationPageOffset = geoScope === GeoScopeFilter.NEARBY ? 107 : 198;
   const modalHeaderOffset = isHomepage
     ? homepageOffset
@@ -217,8 +221,7 @@ const LocationTable: React.FunctionComponent<{
   const showBottom = pinnedLocation && pinnedLocation.rank >= numLocations;
   const numLocationsMain = showBottom ? numLocations - 1 : numLocations;
 
-  const allCountiesView =
-    viewAllCounties || geoScope === GeoScopeFilter.COUNTRY;
+  const allCountiesView = geoScope === GeoScopeFilter.COUNTRY;
 
   const currentLocationRank = pinnedLocation?.rank;
 
@@ -235,7 +238,7 @@ const LocationTable: React.FunctionComponent<{
 
   const visibleLocations = !isModal
     ? sortedLocations.slice(0, numLocationsMain)
-    : allCountiesView
+    : homepageScope !== HomepageLocationScope.STATE
     ? sortedLocations.slice(0, 100)
     : modalLocations;
 

@@ -4,12 +4,11 @@ import {
   getCountyMsaCode,
   getColleges,
 } from 'common/locations';
-import { stateSummary, countySummary } from 'common/location_summaries';
-import { LocationSummary } from 'common/location_summaries';
+import { LocationSummary, getSummaryFromFips } from 'common/location_summaries';
 import { Metric, getMetricNameForCompare } from 'common/metric';
 import { isNumber } from 'lodash';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
-import regions, { County, Region, RegionType, State } from 'common/regions';
+import regions, { County, Region, State, MetroArea } from 'common/regions';
 import { fail } from 'assert';
 import { assert } from '.';
 
@@ -38,19 +37,10 @@ export const orderedMetrics = [
 ];
 
 function getLocationObj(region: Region): SummaryForCompare {
-  if (region.regionType === RegionType.COUNTY) {
-    return {
-      region: region,
-      metricsInfo: countySummary(region.fipsCode)!,
-    };
-  } else if (region.regionType === RegionType.STATE) {
-    return {
-      region: region,
-      metricsInfo: stateSummary((region as State).stateCode)!,
-    };
-  } else {
-    fail('doesnt yet work for non states or counties');
-  }
+  return {
+    region: region,
+    metricsInfo: getSummaryFromFips(region.fipsCode)!,
+  };
 }
 
 function isMetroCounty(region: Region) {
@@ -67,6 +57,10 @@ export function getAllStates(): SummaryForCompare[] {
 
 export function getAllCounties(): SummaryForCompare[] {
   return regions.counties.map(getLocationObj);
+}
+
+export function getAllMetroAreas(): SummaryForCompare[] {
+  return regions.metroAreas.map(getLocationObj);
 }
 
 export function getAllCountiesOfState(stateCode: string): SummaryForCompare[] {
@@ -198,12 +192,45 @@ export function getLocationPageViewMoreCopy(
   }
 }
 
+export enum HomepageLocationScope {
+  COUNTY,
+  MSA,
+  STATE,
+}
+
+interface LabelItem {
+  singular: string;
+  plural: string;
+}
+
+export const homepageLabelMap: { [key in HomepageLocationScope]: LabelItem } = {
+  [HomepageLocationScope.MSA]: {
+    singular: 'City',
+    plural: 'Cities',
+  },
+  [HomepageLocationScope.COUNTY]: {
+    singular: 'County',
+    plural: 'Counties',
+  },
+  [HomepageLocationScope.STATE]: {
+    singular: 'State',
+    plural: 'States',
+  },
+};
+
 export function getHomePageViewMoreCopy(
-  viewAllCounties: boolean,
+  homepageScope: HomepageLocationScope,
   countyTypeToView: MetroFilter,
 ) {
-  if (!viewAllCounties) return 'View all states';
-  else return `View top 100 ${getMetroPrefixCopy(countyTypeToView)} counties`;
+  if (homepageScope === HomepageLocationScope.STATE) {
+    return 'View all states';
+  } else if (homepageScope === HomepageLocationScope.MSA) {
+    return 'View top 100 cities';
+  } else if (homepageScope === HomepageLocationScope.COUNTY) {
+    return `View top 100 ${getMetroPrefixCopy(countyTypeToView)} counties`;
+  } else {
+    return `View more`;
+  }
 }
 
 // For formatting and abbreviating location names:
@@ -227,11 +254,13 @@ function splitCountyName(countyName: string) {
 }
 
 export function getColumnLocationName(region: Region) {
-  if (region.regionType === RegionType.STATE) {
+  if (region instanceof State) {
     return [region.fullName];
-  } else if (region.regionType === RegionType.COUNTY) {
+  } else if (region instanceof County) {
     const countyWithAbbreviatedSuffix = region.abbreviation;
     return splitCountyName(countyWithAbbreviatedSuffix);
+  } else if (region instanceof MetroArea) {
+    return [region.name]; // TODO (chelsi) - update this
   } else {
     fail('dont support other regions');
   }
@@ -256,18 +285,16 @@ export function isCollegeCounty(region: Region) {
   return ftEnrollment && ftEnrollment / countyPopulation > threshold;
 }
 
-// For sharing:
-
 export function getShareQuote(
   sorter: Metric,
   countyTypeToView: MetroFilter,
   sliderValue: GeoScopeFilter,
   totalLocations: number,
   sortDescending: boolean,
+  homepageScope: HomepageLocationScope,
   currentLocation?: RankedLocationSummary,
   sortByPopulation?: boolean,
   isHomepage?: boolean,
-  viewAllCounties?: boolean,
   stateName?: string,
 ): string {
   const geoScopeShareCopy: any = {
@@ -277,9 +304,9 @@ export function getShareQuote(
   };
 
   const homepageShareCopy = `Compare all USA ${
-    viewAllCounties
+    homepageScope === HomepageLocationScope.COUNTY
       ? `${getMetroPrefixCopy(countyTypeToView)} counties`
-      : 'states'
+      : `${homepageLabelMap[homepageScope].plural.toLowerCase()}`
   } by their local COVID metrics with @CovidActNow.`;
 
   const stateShareCopy = `Compare COVID metrics between ${getMetroPrefixCopy(

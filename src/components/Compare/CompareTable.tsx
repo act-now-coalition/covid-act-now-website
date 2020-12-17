@@ -19,6 +19,8 @@ import {
   getShareQuote,
   getMetroPrefixCopy,
   trackCompareEvent,
+  HomepageLocationScope,
+  homepageLabelMap,
 } from 'common/utils/compare';
 import { COLOR_MAP } from 'common/colors';
 import ShareImageButtons from 'components/ShareButtons/ShareButtonGroup';
@@ -59,6 +61,13 @@ const CompareTable = (props: {
   setSliderValue: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
   setShowFaqModal: React.Dispatch<React.SetStateAction<boolean>>;
   createCompareShareId: () => Promise<string>;
+
+  homepageScope: HomepageLocationScope;
+  setHomepageScope: React.Dispatch<React.SetStateAction<HomepageLocationScope>>;
+  homepageSliderValue: HomepageLocationScope;
+  setHomepageSliderValue: React.Dispatch<
+    React.SetStateAction<HomepageLocationScope>
+  >;
 }) => {
   const {
     sorter,
@@ -71,6 +80,10 @@ const CompareTable = (props: {
     setSliderValue,
     stateId,
     county,
+    homepageScope,
+    setHomepageScope,
+    homepageSliderValue,
+    setHomepageSliderValue,
   } = props;
   const { setViewAllCounties } = props;
 
@@ -141,9 +154,13 @@ const CompareTable = (props: {
       ? sortedLocationsArr.length
       : props.locationsViewable;
 
-  const firstColumnHeaderHomepage = props.viewAllCounties
-    ? `${getMetroPrefixCopy(props.countyTypeToView)} County`
-    : 'State';
+  const firstColumnHeaderHomepage =
+    props.homepageScope === HomepageLocationScope.COUNTY
+      ? `${getMetroPrefixCopy(props.countyTypeToView)} ${
+          homepageLabelMap[HomepageLocationScope.COUNTY].singular
+        }`
+      : `${homepageLabelMap[homepageScope].singular}`;
+
   const firstColumnHeader = props.isHomepage
     ? firstColumnHeaderHomepage
     : props.isModal
@@ -172,10 +189,10 @@ const CompareTable = (props: {
     sliderNumberToFilterMap[sliderValue],
     sortedLocationsArr.length,
     sortDescending,
+    props.homepageScope,
     currentLocation,
     sortByPopulation,
     props.isHomepage,
-    props.viewAllCounties,
     props.stateName,
   );
 
@@ -248,6 +265,10 @@ const CompareTable = (props: {
               isModal={props.isModal}
               sliderValue={sliderValue}
               setSliderValue={setSliderValue}
+              homepageScope={homepageScope}
+              setHomepageScope={setHomepageScope}
+              homepageSliderValue={homepageSliderValue}
+              setHomepageSliderValue={setHomepageSliderValue}
             />
           )}
         </div>
@@ -268,6 +289,7 @@ const CompareTable = (props: {
         isHomepage={props.isHomepage}
         viewAllCounties={props.viewAllCounties}
         geoScope={props.geoScope}
+        homepageScope={homepageScope}
       />
       {!props.isModal && (
         <Footer isCounty={props.county}>
