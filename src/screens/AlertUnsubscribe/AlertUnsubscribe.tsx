@@ -25,19 +25,17 @@ const AlertUnsubscribe = () => {
 
   useEffect(() => {
     async function onPageload() {
-      let fipsArr: string[] = [];
-      const db = getFirebase().firestore();
-
-      await db
+      const fipsList: string[] = await getFirebase()
+        .firestore()
         .collection('alerts-subscriptions')
         .doc(email)
         .get()
         .then(function (doc) {
           const data = doc.data() || {};
-          fipsArr = data.locations || [];
+          return data.locations || [];
         });
 
-      const defaultValues: Region[] = fipsArr
+      const defaultValues: Region[] = fipsList
         .map((fipsCode: string) => regions.findByFipsCode(fipsCode))
         .filter((region): region is Region => region !== null);
 
@@ -49,8 +47,11 @@ const AlertUnsubscribe = () => {
 
   async function unsubscribeFromAll() {
     trackEvent(EventCategory.ENGAGEMENT, EventAction.ALERTS_UNSUBSCRIBE);
-    const db = getFirebase().firestore();
-    await db.collection('alerts-subscriptions').doc(email).delete();
+    await getFirebase()
+      .firestore()
+      .collection('alerts-subscriptions')
+      .doc(email)
+      .delete();
     setFormSubmittedCopy(unsubscribedCopy);
   }
 
@@ -59,14 +60,15 @@ const AlertUnsubscribe = () => {
   }
 
   async function subscribeToAlerts() {
-    const locations = selectedLocations.map(
-      (region: Region) => region.fipsCode,
-    );
-    const db = getFirebase().firestore();
-    await db.collection('alerts-subscriptions').doc(email).set({
-      locations: locations,
-      subscribedAt: firebase.firestore.FieldValue.serverTimestamp(),
-    });
+    const locations = selectedLocations.map(region => region.fipsCode);
+    await getFirebase()
+      .firestore()
+      .collection('alerts-subscriptions')
+      .doc(email)
+      .set({
+        locations,
+        subscribedAt: firebase.firestore.FieldValue.serverTimestamp(),
+      });
     setFormSubmittedCopy(resubscribedCopy);
   }
 
