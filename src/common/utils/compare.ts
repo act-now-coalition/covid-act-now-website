@@ -4,8 +4,7 @@ import {
   getCountyMsaCode,
   getColleges,
 } from 'common/locations';
-import { stateSummary, countySummary } from 'common/location_summaries';
-import { LocationSummary } from 'common/location_summaries';
+import { LocationSummary, getSummaryFromFips } from 'common/location_summaries';
 import { Metric, getMetricNameForCompare } from 'common/metric';
 import { isNumber } from 'lodash';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
@@ -38,19 +37,10 @@ export const orderedMetrics = [
 ];
 
 function getLocationObj(region: Region): SummaryForCompare {
-  if (region instanceof County || region instanceof MetroArea) {
-    return {
-      region: region,
-      metricsInfo: countySummary(region.fipsCode)!,
-    };
-  } else if (region instanceof State) {
-    return {
-      region: region,
-      metricsInfo: stateSummary((region as State).stateCode)!,
-    };
-  } else {
-    fail('doesnt yet work for this location');
-  }
+  return {
+    region: region,
+    metricsInfo: getSummaryFromFips(region.fipsCode)!,
+  };
 }
 
 function isMetroCounty(region: Region) {
@@ -207,22 +197,44 @@ export function getLocationPageViewMoreCopy(
 }
 
 export enum HomepageLocationScope {
-  COUNTIES,
-  CITIES,
-  STATES,
+  COUNTY,
+  MSA,
+  STATE,
 }
+
+interface LabelItem {
+  singular: string;
+  plural: string;
+}
+
+export const homepageLabelMap: { [key in HomepageLocationScope]: LabelItem } = {
+  [HomepageLocationScope.MSA]: {
+    singular: 'City',
+    plural: 'Cities',
+  },
+  [HomepageLocationScope.COUNTY]: {
+    singular: 'County',
+    plural: 'Counties',
+  },
+  [HomepageLocationScope.STATE]: {
+    singular: 'State',
+    plural: 'States',
+  },
+};
 
 export function getHomePageViewMoreCopy(
   homepageScope: HomepageLocationScope,
   countyTypeToView: MetroFilter,
 ) {
-  if (homepageScope === HomepageLocationScope.STATES) {
+  if (homepageScope === HomepageLocationScope.STATE) {
     return 'View all states';
-  } else if (homepageScope === HomepageLocationScope.CITIES) {
+  } else if (homepageScope === HomepageLocationScope.MSA) {
     return 'View top 100 cities';
-  } else if (homepageScope === HomepageLocationScope.COUNTIES) {
+  } else if (homepageScope === HomepageLocationScope.COUNTY) {
     return `View top 100 ${getMetroPrefixCopy(countyTypeToView)} counties`;
-  } else return `View more`;
+  } else {
+    return `View more`;
+  }
 }
 
 // For formatting and abbreviating location names:
@@ -277,18 +289,16 @@ export function isCollegeCounty(region: Region) {
   return ftEnrollment && ftEnrollment / countyPopulation > threshold;
 }
 
-// For sharing:
-
 export function getShareQuote(
   sorter: Metric,
   countyTypeToView: MetroFilter,
   sliderValue: GeoScopeFilter,
   totalLocations: number,
   sortDescending: boolean,
+  homepageScope: HomepageLocationScope,
   currentLocation?: RankedLocationSummary,
   sortByPopulation?: boolean,
   isHomepage?: boolean,
-  viewAllCounties?: boolean,
   stateName?: string,
 ): string {
   const geoScopeShareCopy: any = {
@@ -298,9 +308,9 @@ export function getShareQuote(
   };
 
   const homepageShareCopy = `Compare all USA ${
-    viewAllCounties
+    homepageScope === HomepageLocationScope.COUNTY
       ? `${getMetroPrefixCopy(countyTypeToView)} counties`
-      : 'states'
+      : `${homepageLabelMap[homepageScope].plural.toLowerCase()}`
   } by their local COVID metrics with @CovidActNow.`;
 
   const stateShareCopy = `Compare COVID metrics between ${getMetroPrefixCopy(

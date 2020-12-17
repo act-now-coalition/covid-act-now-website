@@ -34,7 +34,7 @@ import HospitalizationsAlert, {
   isHospitalizationsPeak,
 } from './HospitalizationsAlert';
 import { ThermometerImage } from 'components/Thermometer';
-import { useLocationPageRegion } from 'common/regions';
+import { useLocationPageRegion, MetroArea } from 'common/regions';
 import LocationPageHeading from './LocationPageHeading';
 
 const noop = () => {};
@@ -99,7 +99,13 @@ const LocationPageHeader = (props: {
               <SectionColumn>
                 <ColumnTitle>Covid risk level</ColumnTitle>
                 <LevelDescription>{levelInfo.summary}</LevelDescription>
-                <Copy>{levelInfo.detail(region.name)}</Copy>
+                <Copy>
+                  {levelInfo.detail(
+                    region instanceof MetroArea
+                      ? region.shortName
+                      : region.name,
+                  )}
+                </Copy>
               </SectionColumn>
             </SectionHalf>
             <SectionHalf>

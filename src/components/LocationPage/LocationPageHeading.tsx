@@ -33,10 +33,11 @@ const LocationPageHeading: React.FC<{
     return (
       <Styles.Container>
         <Styles.HeaderTitle $isEmbed={isEmbed}>
-          <strong>{region.name}</strong>
+          <strong>{region.fullName}</strong>
           {', '}
           <Styles.HeaderStateCode>{region.stateCodes}</Styles.HeaderStateCode>
         </Styles.HeaderTitle>
+        <Styles.HeaderSubtitle>{region.name}</Styles.HeaderSubtitle>
       </Styles.Container>
     );
   } else {

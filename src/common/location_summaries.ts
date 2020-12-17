@@ -22,13 +22,14 @@ export type SummariesMap = { [fips: string]: LocationSummary };
 
 export const LocationSummariesByFIPS = LocationSummariesJSON as SummariesMap;
 
-export function stateSummary(stateCode: string): LocationSummary | null {
+export function getSummaryFromStateCode(
+  stateCode: string,
+): LocationSummary | null {
   const fips = findStateFipsCode(stateCode);
   return LocationSummariesByFIPS[fips] || null;
 }
 
-// Despite name, used for both counties and MSAs in compare
-export function countySummary(fips: string): LocationSummary | null {
+export function getSummaryFromFips(fips: string): LocationSummary | null {
   return LocationSummariesByFIPS[fips] || null;
 }
 

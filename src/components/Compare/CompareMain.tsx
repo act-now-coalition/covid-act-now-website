@@ -28,7 +28,7 @@ import {
   getAllCountiesOfMetroArea,
 } from 'common/utils/compare';
 import { Metric } from 'common/metric';
-import { countySummary } from 'common/location_summaries';
+import { getSummaryFromFips } from 'common/location_summaries';
 import { findCountyByFips } from 'common/locations';
 import { ScreenshotReady } from 'components/Screenshot';
 import {
@@ -47,9 +47,9 @@ const scopeValueMap = {
 };
 
 const homepageScopeValueMap = {
-  [HomepageLocationScope.COUNTIES]: 0,
-  [HomepageLocationScope.CITIES]: 50,
-  [HomepageLocationScope.STATES]: 99,
+  [HomepageLocationScope.COUNTY]: 0,
+  [HomepageLocationScope.MSA]: 50,
+  [HomepageLocationScope.STATE]: 99,
 };
 
 const CompareMain = (props: {
@@ -96,7 +96,7 @@ const CompareMain = (props: {
     assert(region, 'Missing region for county');
     currentCounty = {
       region: region,
-      metricsInfo: countySummary(county.full_fips_code),
+      metricsInfo: getSummaryFromFips(county.full_fips_code),
     };
   }
 
@@ -113,13 +113,13 @@ const CompareMain = (props: {
   // For homepage:
   const [viewAllCounties, setViewAllCounties] = useState(false);
   const [homepageScope, setHomepageScope] = useState(
-    HomepageLocationScope.COUNTIES,
+    HomepageLocationScope.COUNTY,
   );
 
   const homepageScopeToLocations = {
-    [HomepageLocationScope.COUNTIES]: getAllCountiesSelection(countyTypeToView),
-    [HomepageLocationScope.CITIES]: getAllMetroAreas(),
-    [HomepageLocationScope.STATES]: getAllStates(),
+    [HomepageLocationScope.COUNTY]: getAllCountiesSelection(countyTypeToView),
+    [HomepageLocationScope.MSA]: getAllMetroAreas(),
+    [HomepageLocationScope.STATE]: getAllStates(),
   };
 
   function getHomepageLocations(scope: HomepageLocationScope) {
@@ -200,7 +200,7 @@ const CompareMain = (props: {
     sortDescending,
     sortByPopulation,
     countyTypeToView,
-    viewAllCounties,
+    homepageScope,
     geoScope,
     stateId,
     countyId: county?.full_fips_code,
@@ -229,7 +229,12 @@ const CompareMain = (props: {
       setSortDescending(sharedParams.sortDescending);
       setSortByPopulation(sharedParams.sortByPopulation);
       setCountyTypeToView(sharedParams.countyTypeToView);
-      setViewAllCounties(sharedParams.viewAllCounties);
+      setHomepageScope(sharedParams.homepageScope);
+      setHomepageSliderValue(
+        homepageScopeValueMap[
+          sharedParams.homepageScope as HomepageLocationScope
+        ],
+      );
       setGeoScope(sharedParams.geoScope);
       setSliderValue(scopeValueMap[sharedParams.geoScope as GeoScopeFilter]);
 
@@ -263,7 +268,6 @@ const CompareMain = (props: {
     setSliderValue,
     setShowFaqModal,
     createCompareShareId,
-
     homepageScope,
     setHomepageScope,
     homepageSliderValue,

@@ -208,7 +208,8 @@ const LocationTable: React.FunctionComponent<{
   const Container = isModal ? Styles.ModalContainer : Styles.Container;
 
   // Seemingly random numbers are the heights of each modal header
-  const homepageOffset = viewAllCounties ? 159 : 73;
+  const homepageOffset =
+    homepageScope === HomepageLocationScope.COUNTY ? 159 : 73;
   const locationPageOffset = geoScope === GeoScopeFilter.NEARBY ? 107 : 198;
   const modalHeaderOffset = isHomepage
     ? homepageOffset
@@ -220,8 +221,7 @@ const LocationTable: React.FunctionComponent<{
   const showBottom = pinnedLocation && pinnedLocation.rank >= numLocations;
   const numLocationsMain = showBottom ? numLocations - 1 : numLocations;
 
-  const allCountiesView =
-    viewAllCounties || geoScope === GeoScopeFilter.COUNTRY;
+  const allCountiesView = geoScope === GeoScopeFilter.COUNTRY;
 
   const currentLocationRank = pinnedLocation?.rank;
 
@@ -238,7 +238,7 @@ const LocationTable: React.FunctionComponent<{
 
   const visibleLocations = !isModal
     ? sortedLocations.slice(0, numLocationsMain)
-    : homepageScope !== HomepageLocationScope.STATES
+    : homepageScope !== HomepageLocationScope.STATE
     ? sortedLocations.slice(0, 100)
     : modalLocations;
 
