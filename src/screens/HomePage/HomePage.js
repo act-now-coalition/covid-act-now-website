@@ -133,7 +133,7 @@ export default function HomePage() {
             </Grid>
             <Map hideLegend showCounties={showCounties} />
             {isMobile && <HomePageThermometer />}
-            <CompareMain locationsViewable={8} isHomepage />
+            <CompareMain locationsViewable={8} />
             <Section ref={exploreSectionRef}>
               <Explore
                 title="Cases, Deaths and Hospitalizations"

@@ -57,14 +57,15 @@ const CompareMain = (props: {
   county: any | null;
   isModal?: boolean;
   locationsViewable: number;
-  isHomepage?: boolean;
   stateId?: string;
   region?: Region;
 }) => {
   const tableRef = useRef<HTMLDivElement>(null);
 
+  const isHomepage = !props.region;
+
   const scrollToCompare = useCallback(() => {
-    const scrollOffset = props.isHomepage ? 75 : 165;
+    const scrollOffset = isHomepage ? 75 : 165;
     // Note (Chelsi): short delay is needed to make scrollTo work
     return setTimeout(() => {
       if (tableRef.current) {
@@ -75,7 +76,7 @@ const CompareMain = (props: {
         });
       }
     }, 250);
-  }, [props.isHomepage, tableRef]);
+  }, [isHomepage, tableRef]);
 
   const location = useLocation();
   useEffect(() => {
@@ -111,7 +112,6 @@ const CompareMain = (props: {
   const [countyTypeToView, setCountyTypeToView] = useState(MetroFilter.ALL);
 
   // For homepage:
-  const [viewAllCounties, setViewAllCounties] = useState(false);
   const [homepageScope, setHomepageScope] = useState(
     HomepageLocationScope.COUNTY,
   );
@@ -254,12 +254,11 @@ const CompareMain = (props: {
     stateId,
     county,
     setShowModal,
-    isHomepage: props.isHomepage,
+    isHomepage,
     locations,
     currentCounty,
     ...uiState,
     setCountyTypeToView,
-    setViewAllCounties,
     setGeoScope,
     setSorter,
     setSortDescending,

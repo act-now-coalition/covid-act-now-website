@@ -47,8 +47,6 @@ const Filters = (props: {
   isHomepage?: boolean;
   setCountyTypeToView: React.Dispatch<React.SetStateAction<MetroFilter>>;
   countyTypeToView: MetroFilter;
-  viewAllCounties?: boolean;
-  setViewAllCounties?: React.Dispatch<React.SetStateAction<boolean>>;
   stateId?: string;
   county?: any | null;
   geoScope?: GeoScopeFilter;

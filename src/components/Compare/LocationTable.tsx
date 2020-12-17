@@ -181,7 +181,6 @@ const LocationTable: React.FunctionComponent<{
   setSortByPopulation: React.Dispatch<React.SetStateAction<boolean>>;
   sortByPopulation: boolean;
   isHomepage?: boolean;
-  viewAllCounties?: boolean;
   geoScope?: GeoScopeFilter;
   homepageScope: HomepageLocationScope;
 }> = ({
@@ -201,7 +200,6 @@ const LocationTable: React.FunctionComponent<{
   setSortByPopulation,
   sortByPopulation,
   isHomepage,
-  viewAllCounties,
   geoScope,
   homepageScope,
 }) => {
