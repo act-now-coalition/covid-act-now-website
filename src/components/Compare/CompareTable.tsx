@@ -155,9 +155,9 @@ const CompareTable = (props: {
       : props.locationsViewable;
 
   const firstColumnHeaderHomepage =
-    props.homepageScope === HomepageLocationScope.COUNTIES
+    props.homepageScope === HomepageLocationScope.COUNTY
       ? `${getMetroPrefixCopy(props.countyTypeToView)} ${
-          homepageLabelMap[HomepageLocationScope.COUNTIES].singular
+          homepageLabelMap[HomepageLocationScope.COUNTY].singular
         }`
       : `${homepageLabelMap[homepageScope].singular}`;
 

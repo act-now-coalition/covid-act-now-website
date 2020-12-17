@@ -46,9 +46,9 @@ const scopeValueMap = {
 };
 
 const homepageScopeValueMap = {
-  [HomepageLocationScope.COUNTIES]: 0,
-  [HomepageLocationScope.CITIES]: 50,
-  [HomepageLocationScope.STATES]: 99,
+  [HomepageLocationScope.COUNTY]: 0,
+  [HomepageLocationScope.MSA]: 50,
+  [HomepageLocationScope.STATE]: 99,
 };
 
 const CompareMain = (props: {
@@ -111,13 +111,13 @@ const CompareMain = (props: {
   // For homepage:
   const [viewAllCounties, setViewAllCounties] = useState(false);
   const [homepageScope, setHomepageScope] = useState(
-    HomepageLocationScope.COUNTIES,
+    HomepageLocationScope.COUNTY,
   );
 
   const homepageScopeToLocations = {
-    [HomepageLocationScope.COUNTIES]: getAllCountiesSelection(countyTypeToView),
-    [HomepageLocationScope.CITIES]: getAllMetroAreas(),
-    [HomepageLocationScope.STATES]: getAllStates(),
+    [HomepageLocationScope.COUNTY]: getAllCountiesSelection(countyTypeToView),
+    [HomepageLocationScope.MSA]: getAllMetroAreas(),
+    [HomepageLocationScope.STATE]: getAllStates(),
   };
 
   function getHomepageLocations(scope: HomepageLocationScope) {

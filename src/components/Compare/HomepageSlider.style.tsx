@@ -26,32 +26,32 @@ export const StyledSlider = styled(Slider)<{
     &:nth-child(5) {
       color: ${props =>
         returnSliderLabelColor(
-          HomepageLocationScope.COUNTIES,
+          HomepageLocationScope.COUNTY,
           props.$isModal,
           props.homepageScope,
         )};
       font-weight: ${({ homepageScope }) =>
-        homepageScope === HomepageLocationScope.COUNTIES && 'bold'};
+        homepageScope === HomepageLocationScope.COUNTY && 'bold'};
     }
     &:nth-child(7) {
       color: ${props =>
         returnSliderLabelColor(
-          HomepageLocationScope.CITIES,
+          HomepageLocationScope.MSA,
           props.$isModal,
           props.homepageScope,
         )};
       font-weight: ${({ homepageScope }) =>
-        homepageScope === HomepageLocationScope.CITIES && 'bold'};
+        homepageScope === HomepageLocationScope.MSA && 'bold'};
     }
     &:nth-child(9) {
       color: ${props =>
         returnSliderLabelColor(
-          HomepageLocationScope.STATES,
+          HomepageLocationScope.STATE,
           props.$isModal,
           props.homepageScope,
         )};
       font-weight: ${({ homepageScope }) =>
-        homepageScope === HomepageLocationScope.STATES && 'bold'};
+        homepageScope === HomepageLocationScope.STATE && 'bold'};
     }
   }
 `;

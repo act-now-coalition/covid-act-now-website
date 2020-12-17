@@ -238,7 +238,7 @@ const LocationTable: React.FunctionComponent<{
 
   const visibleLocations = !isModal
     ? sortedLocations.slice(0, numLocationsMain)
-    : homepageScope !== HomepageLocationScope.STATES
+    : homepageScope !== HomepageLocationScope.STATE
     ? sortedLocations.slice(0, 100)
     : modalLocations;
 

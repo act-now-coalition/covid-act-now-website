@@ -4,15 +4,15 @@ import { SliderContainer } from 'components/Compare/Filters.style';
 import { StyledSlider } from './HomepageSlider.style';
 
 export const homepageLabelMap = {
-  [HomepageLocationScope.CITIES]: {
+  [HomepageLocationScope.MSA]: {
     singular: 'City',
     plural: 'Cities',
   },
-  [HomepageLocationScope.COUNTIES]: {
+  [HomepageLocationScope.COUNTY]: {
     singular: 'County',
     plural: 'Counties',
   },
-  [HomepageLocationScope.STATES]: {
+  [HomepageLocationScope.STATE]: {
     singular: 'State',
     plural: 'States',
   },
@@ -22,15 +22,15 @@ export const homepageLabelMap = {
 const marks = [
   {
     value: 0,
-    label: homepageLabelMap[HomepageLocationScope.COUNTIES].plural,
+    label: homepageLabelMap[HomepageLocationScope.COUNTY].plural,
   },
   {
     value: 50,
-    label: homepageLabelMap[HomepageLocationScope.CITIES].plural,
+    label: homepageLabelMap[HomepageLocationScope.MSA].plural,
   },
   {
     value: 99,
-    label: homepageLabelMap[HomepageLocationScope.STATES].plural,
+    label: homepageLabelMap[HomepageLocationScope.STATE].plural,
   },
 ];
 

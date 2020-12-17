@@ -38,9 +38,9 @@ export const sliderNumberToFilterMap: { [val: number]: GeoScopeFilter } = {
 export const homepageSliderNumberToFilterMap: {
   [val: number]: HomepageLocationScope;
 } = {
-  0: HomepageLocationScope.COUNTIES,
-  50: HomepageLocationScope.CITIES,
-  99: HomepageLocationScope.STATES,
+  0: HomepageLocationScope.COUNTY,
+  50: HomepageLocationScope.MSA,
+  99: HomepageLocationScope.STATE,
 };
 
 const Filters = (props: {
@@ -75,7 +75,7 @@ const Filters = (props: {
   } = props;
 
   const disableMetroMenu = props.isHomepage
-    ? homepageScope !== HomepageLocationScope.COUNTIES
+    ? homepageScope !== HomepageLocationScope.COUNTY
     : sliderValue === 0;
 
   useEffect(() => {
