@@ -98,14 +98,16 @@ const USACountyMap = React.memo(
                         return (
                           <Link
                             key={state.stateCode}
-                            to={state.relativeUrl}
+                            to={`/${state.relativeUrl}`}
                             aria-label={state.fullName}
                           >
                             <MarianaIslands
                               key={geo.rsmKey}
-                              onMouseEnter={() => setTooltipContent(state.name)}
+                              onMouseEnter={() =>
+                                setTooltipContent(state.fullName)
+                              }
                               onMouseLeave={onMouseLeave}
-                              onClick={() => stateClickHandler(state.name)}
+                              onClick={() => stateClickHandler(state.fullName)}
                               fill={getFillColor(geo)}
                             />
                           </Link>
@@ -114,15 +116,17 @@ const USACountyMap = React.memo(
                       return state ? (
                         <Link
                           key={state.stateCode}
-                          to={state.relativeUrl}
+                          to={`/${state.relativeUrl}`}
                           aria-label={state.fullName}
                         >
                           <Geography
                             key={geo.rsmKey}
                             geography={geo}
-                            onMouseEnter={() => setTooltipContent(state.name)}
+                            onMouseEnter={() =>
+                              setTooltipContent(state.fullName)
+                            }
                             onMouseLeave={onMouseLeave}
-                            onClick={() => stateClickHandler(state.name)}
+                            onClick={() => stateClickHandler(state.fullName)}
                             fill={getFillColor(geo)}
                             fillOpacity={showCounties ? 0 : 1}
                             stroke="white"
