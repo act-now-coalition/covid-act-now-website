@@ -4,7 +4,10 @@ import {
   getCountyMsaCode,
   getColleges,
 } from 'common/locations';
-import { stateSummary, countySummary } from 'common/location_summaries';
+import {
+  getSummaryFromStateCode,
+  getSummaryFromFips,
+} from 'common/location_summaries';
 import { LocationSummary } from 'common/location_summaries';
 import { Metric, getMetricNameForCompare } from 'common/metric';
 import { isNumber } from 'lodash';
@@ -41,12 +44,12 @@ function getLocationObj(region: Region): SummaryForCompare {
   if (region instanceof County || region instanceof MetroArea) {
     return {
       region: region,
-      metricsInfo: countySummary(region.fipsCode)!,
+      metricsInfo: getSummaryFromFips(region.fipsCode)!,
     };
   } else if (region instanceof State) {
     return {
       region: region,
-      metricsInfo: stateSummary((region as State).stateCode)!,
+      metricsInfo: getSummaryFromStateCode((region as State).stateCode)!,
     };
   } else {
     fail('doesnt yet work for this location');

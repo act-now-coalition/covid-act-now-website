@@ -27,7 +27,7 @@ import {
   getAllMetroAreas,
 } from 'common/utils/compare';
 import { Metric } from 'common/metric';
-import { countySummary } from 'common/location_summaries';
+import { getSummaryFromFips } from 'common/location_summaries';
 import { findCountyByFips } from 'common/locations';
 import { ScreenshotReady } from 'components/Screenshot';
 import {
@@ -94,7 +94,7 @@ const CompareMain = (props: {
     assert(region, 'Missing region for county');
     currentCounty = {
       region: region,
-      metricsInfo: countySummary(county.full_fips_code),
+      metricsInfo: getSummaryFromFips(county.full_fips_code),
     };
   }
 
