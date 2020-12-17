@@ -12,8 +12,8 @@ export type Testpositivityratio = number | null;
  * Method used to determine test positivity ratio.
  */
 export type TestPositivityRatioMethod =
-  | 'CDCTesting'
   | 'CMSTesting'
+  | 'CDCTesting'
   | 'HHSTesting'
   | 'Valorum'
   | 'covid_tracking'
@@ -54,6 +54,7 @@ export type NonCovidPatientsMethod =
   | 'actual'
   | 'estimated_from_typical_utilization'
   | 'estimated_from_total_icu_actual';
+export type Icucapacityratio = number | null;
 /**
  * Date of timeseries data point
  */
@@ -71,6 +72,7 @@ export interface MetricsTimeseriesRow {
   infectionRateCI90: Infectionrateci90;
   icuHeadroomRatio: Icuheadroomratio;
   icuHeadroomDetails?: ICUHeadroomMetricDetails;
+  icuCapacityRatio: Icucapacityratio;
   date: Date;
 }
 /**
