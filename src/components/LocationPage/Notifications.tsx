@@ -137,15 +137,15 @@ const ExposureNotificationCopy: React.FC<{ locationName: string }> = ({
   );
 };
 
-function trackClickExposureNotifications(locationName: string) {
+export function trackClickExposureNotifications(label: string) {
   trackEvent(
     EventCategory.EXPOSURE_NOTIFICATIONS,
     EventAction.CLICK_LINK,
-    locationName,
+    label,
   );
 }
 
-function showExposureNotifications(region: Region) {
+export function showExposureNotifications(region: Region) {
   return (
     region instanceof State &&
     EXPOSURE_NOTIFICATIONS_STATE_FIPS.includes(region.fipsCode)

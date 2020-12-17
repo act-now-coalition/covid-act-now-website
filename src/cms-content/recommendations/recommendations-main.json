@@ -126,6 +126,11 @@
       "iconImage": "/images_cms/mask_recommends_icon.svg"
     },
     {
+      "category": "EXPOSURE_APP",
+      "altText": "Exposure App",
+      "iconImage": "/images_cms/mask_recommends_icon.svg"
+    },
+    {
       "category": "GATHERINGS",
       "altText": "Gatherings icon",
       "iconImage": "/images_cms/gathering_recommends_icon.svg"

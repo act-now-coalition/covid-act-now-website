@@ -16,11 +16,14 @@ import {
   RecommendIcon,
   RecommendationWithIcon,
   RecommendCategory,
+  RecommendID,
 } from 'cms-content/recommendations';
 import { allIcons } from 'cms-content/recommendations';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import { getAbbreviatedCounty } from 'common/utils/compare';
 import { formatDecimal } from '.';
+import { showExposureNotifications } from 'components/LocationPage/Notifications';
+import regions from 'common/regions';
 
 export function trackRecommendationsEvent(action: EventAction, label: string) {
   trackEvent(EventCategory.RECOMMENDATIONS, action, label);
@@ -33,6 +36,30 @@ const casesPerWeekMetricName = 'new cases per 100k in the last 7 days';
  */
 
 const YELLOW_RECOMMENDATION_EXCEPTIONS = ['GYMS_YELLOW', 'BARS_YELLOW'];
+
+function getExposureRecommendation(
+  projection: Projection,
+): Recommendation | null {
+  const region = regions.findByFipsCode(projection.fips);
+  if (!region) {
+    return null;
+  }
+
+  const recommendationCopy = `Add your phone to [${region.fullName}'s exposure
+   notification system](https://g.co/ens) to receive alerts if you were in close 
+   contact with someone who later tests positive for COVID. Your privacy is 
+   protected as your identity is not known and your location is not tracked.`;
+
+  const exposureRecommendation: Recommendation = {
+    body: recommendationCopy,
+    source: RecommendationSource.NONE,
+    level: FedLevel.GREEN,
+    category: RecommendCategory.EXPOSURE_APP,
+    id: RecommendID.EXPOSURE_APP,
+  };
+
+  return showExposureNotifications(region) ? exposureRecommendation : null;
+}
 
 //TODO (Chelsi): fix the any
 export function getRecommendations(
@@ -87,7 +114,13 @@ export function getRecommendations(
     item => item.category === RecommendCategory.MASKS,
   );
 
+  const notificatonRecommendation = getExposureRecommendation(projection);
+  const exposureRecommendations = notificatonRecommendation
+    ? [notificatonRecommendation]
+    : [];
+
   const allRecommendations = [
+    ...exposureRecommendations,
     ...travelRecommendation,
     ...gatheringRecommendation,
     ...masksRecommendation,
