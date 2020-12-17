@@ -50,7 +50,7 @@ const SearchHeader = ({
               isNarrowMobile={isNarrowMobile}
             >
               <SearchAutocomplete
-                locations={getSearchAutocompleteLocations(region)}
+                locations={getSearchAutocompleteLocations()}
                 filterLimit={getFilterLimit(region)}
                 setHideMapToggle={setHideMapToggle}
               />

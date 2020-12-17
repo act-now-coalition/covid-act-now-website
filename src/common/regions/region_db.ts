@@ -1,4 +1,4 @@
-import { sortBy, takeRight, values, Dictionary } from 'lodash';
+import { sortBy, takeRight, concat, values, Dictionary } from 'lodash';
 import { Region, County, State, MetroArea, FipsCode } from './types';
 import {
   statesByFips,
@@ -17,6 +17,7 @@ class RegionDB {
   // be used sparingly.
   public customAreas: State[];
   private regionsByFips: Dictionary<Region>;
+  private allRegions: Region[];
 
   constructor(
     private statesByFips: Dictionary<State>,
@@ -24,10 +25,16 @@ class RegionDB {
     private metroAreasByFips: Dictionary<MetroArea>,
     private customAreasByFips: Dictionary<State>,
   ) {
-    this.states = values(statesByFips);
-    this.counties = values(countiesByFips);
-    this.metroAreas = values(metroAreasByFips);
+    this.states = sortBy(values(statesByFips), state => state.name);
+    this.counties = sortBy(values(countiesByFips), county => county.name);
+    this.metroAreas = sortBy(values(metroAreasByFips), metro => metro.name);
     this.customAreas = values(customAreasByFips);
+
+    this.allRegions = concat<Region>(
+      this.states,
+      this.metroAreas,
+      this.counties,
+    );
 
     this.regionsByFips = {
       ...statesByFips,
@@ -88,7 +95,7 @@ class RegionDB {
   }
 
   all(): Region[] {
-    return [...this.states, ...this.counties, ...this.metroAreas];
+    return this.allRegions;
   }
 
   topCountiesByPopulation(limit: number): County[] {
