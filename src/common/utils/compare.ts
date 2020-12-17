@@ -199,7 +199,12 @@ export enum HomepageLocationScope {
   STATE,
 }
 
-export const homepageLabelMap = {
+interface LabelItem {
+  singular: string;
+  plural: string;
+}
+
+export const homepageLabelMap: { [key in HomepageLocationScope]: LabelItem } = {
   [HomepageLocationScope.MSA]: {
     singular: 'City',
     plural: 'Cities',
