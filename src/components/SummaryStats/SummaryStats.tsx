@@ -1,6 +1,10 @@
 import React from 'react';
 import { Metric } from 'common/metric';
-import { getMetricName, getLevelInfo } from 'common/metric';
+import {
+  getMetricNameForCompare,
+  formatValue,
+  getLevelInfo,
+} from 'common/metric';
 import {
   SummaryStatsWrapper,
   SummaryStatWrapper,
@@ -11,26 +15,12 @@ import {
   StatValueWrapper,
 } from './SummaryStats.style';
 import SignalStatus from 'components/SignalStatus/SignalStatus';
-import { formatDecimal, formatPercent } from 'common/utils';
-import { fail } from 'assert';
-import { isNull } from 'util';
 import * as urls from 'common/urls';
 import StatTag from 'components/SummaryStats/StatTag';
 
 //TODO (Chelsi) - remove dupication: extract 'LocationHeaderStats' and 'SummaryStats' into a single separate component
 
-const SummaryStat = ({
-  chartType,
-  value,
-  onClick,
-  beta,
-  condensed,
-  flipSignalStatusOrder,
-  isMobile,
-  isHeader,
-  isEmbed,
-  embedOnClickBaseURL,
-}: {
+const SummaryStat: React.FC<{
   chartType: Metric;
   value: number;
   onClick: () => void;
@@ -41,6 +31,17 @@ const SummaryStat = ({
   isHeader?: boolean;
   isEmbed?: boolean;
   embedOnClickBaseURL?: string;
+}> = ({
+  chartType,
+  value,
+  onClick,
+  beta,
+  condensed,
+  flipSignalStatusOrder,
+  isMobile,
+  isHeader,
+  isEmbed,
+  embedOnClickBaseURL,
 }) => {
   const levelInfo = getLevelInfo(chartType, value);
   const embedOnClick = () => {
@@ -48,26 +49,7 @@ const SummaryStat = ({
     window.open(url, '_blank');
   };
   const finalOnClick = isEmbed ? embedOnClick : onClick;
-  const formatValueForChart = (
-    chartType: Metric,
-    value: number | null,
-  ): string => {
-    if (value === null) {
-      return '-';
-    }
-    if (chartType === Metric.CASE_GROWTH_RATE) {
-      return formatDecimal(value);
-    } else if (chartType === Metric.HOSPITAL_USAGE) {
-      return formatPercent(value);
-    } else if (chartType === Metric.POSITIVE_TESTS) {
-      return formatPercent(value, 1);
-    } else if (chartType === Metric.CONTACT_TRACING) {
-      return formatPercent(value, 0);
-    } else if (chartType === Metric.CASE_DENSITY) {
-      return formatDecimal(value, 1);
-    }
-    fail('Invalid Chart Type');
-  };
+
   return (
     <SummaryStatWrapper
       onClick={finalOnClick}
@@ -76,7 +58,7 @@ const SummaryStat = ({
     >
       <StatTextWrapper isEmbed={isEmbed}>
         <StatNameText condensed={condensed} isEmbed={isEmbed}>
-          {getMetricName(chartType)}{' '}
+          {getMetricNameForCompare(chartType)}{' '}
           {!condensed && beta && isMobile && (
             <StatTag beta isHeader={isHeader} />
           )}
@@ -87,7 +69,7 @@ const SummaryStat = ({
         {value == null ? null : (
           <>
             <StatValueText condensed={condensed} isEmbed={isEmbed}>
-              {formatValueForChart(chartType, value)}
+              {formatValue(chartType, value, /*nullValueCopy=*/ '-')}
               {!condensed && beta && !isMobile && <StatTag beta />}
             </StatValueText>
           </>
@@ -118,7 +100,7 @@ const SummaryStats = (props: {
   embedOnClickBaseURL?: string;
 }) => {
   const hasStats = !!Object.values(props.stats).filter(
-    (val: number | null) => !isNull(val),
+    (val: number | null) => val !== null,
   ).length;
   const sharedStatProps = {
     isMobile: props.isMobile,
