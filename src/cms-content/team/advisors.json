@@ -10,13 +10,13 @@
     },
     {
       "profileImgUrl": "/images_cms/don-berwick.jpeg",
-      "fullName": "Don Berwick",
+      "fullName": "Don Berwick, M.D.",
       "profileUrl": "https://www.linkedin.com/in/don-berwick-46a49380/",
       "description": "Former Administrator at Centers for Medicare and Medicaid Services"
     },
     {
       "profileImgUrl": "/images_cms/nahid-bhadelia.jpeg",
-      "fullName": "Nahid Bhadelia",
+      "fullName": "Nahid Bhadelia, M.D.",
       "description": "Medical Director of Special Pathogens Unit at Boston Medical Center",
       "profileUrl": "https://www.linkedin.com/in/nahid-bhadelia-81a775b7/"
     },
@@ -34,7 +34,7 @@
     },
     {
       "profileImgUrl": "/images_cms/bob-inglis.png",
-      "fullName": "Bob Inglis",
+      "fullName": "Bob Inglis, J.D.",
       "description": "Executive Director of republicEN.org, Former Congressman (R)",
       "profileUrl": "https://www.linkedin.com/in/bob-inglis-21112b25/"
     },
@@ -46,7 +46,7 @@
     },
     {
       "profileImgUrl": "/images_cms/tomás-pueyo.jpeg",
-      "fullName": "Tomás Pueyo",
+      "fullName": "Tomás Pueyo, M.B.A.",
       "description": "Author of “Hammer and the Dance” and other pieces",
       "profileUrl": "https://www.linkedin.com/in/tomaspueyo/"
     },
@@ -58,7 +58,7 @@
     },
     {
       "profileImgUrl": "/images_cms/nigan-shah.jpg",
-      "fullName": "Nigam Shah, MBBS., Ph.D.",
+      "fullName": "Nigam Shah, M.B.B.S., Ph.D.",
       "description": "Associate Professor of Biomedical Data Science at Stanford University",
       "profileUrl": "https://www.linkedin.com/in/nigam/"
     },
@@ -89,7 +89,7 @@
     {
       "profileImgUrl": "/images_cms/marta-w-headshot.jpeg",
       "fullName": "Marta Wosińska, Ph.D.",
-      "description": "Co-founder and Deputy Director, Policy of the Duke-Margolis Center for Health Policy",
+      "description": "Deputy Director of Duke-Margolis Center for Health Policy",
       "profileUrl": "https://healthpolicy.duke.edu/people/marta-wosinska-phd"
     }
   ]
