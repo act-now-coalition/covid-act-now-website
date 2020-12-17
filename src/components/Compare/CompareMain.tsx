@@ -109,7 +109,6 @@ const CompareMain = (props: {
   const [countyTypeToView, setCountyTypeToView] = useState(MetroFilter.ALL);
 
   // For homepage:
-  const [viewAllCounties, setViewAllCounties] = useState(false);
   const [homepageScope, setHomepageScope] = useState(
     HomepageLocationScope.COUNTY,
   );
@@ -164,7 +163,10 @@ const CompareMain = (props: {
     scrollToCompare();
   };
 
+  // Location page slider:
   const defaultSliderValue = scopeValueMap[geoScope];
+
+  // Homepage slider:
   const [sliderValue, setSliderValue] = useState(defaultSliderValue);
 
   const defaultHomepageSliderValue = homepageScopeValueMap[homepageScope];
@@ -236,7 +238,6 @@ const CompareMain = (props: {
     currentCounty,
     ...uiState,
     setCountyTypeToView,
-    setViewAllCounties,
     setGeoScope,
     setSorter,
     setSortDescending,

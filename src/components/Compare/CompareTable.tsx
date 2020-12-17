@@ -43,8 +43,6 @@ const CompareTable = (props: {
   isHomepage?: boolean;
   locations: SummaryForCompare[];
   currentCounty?: any;
-  viewAllCounties?: boolean;
-  setViewAllCounties?: React.Dispatch<React.SetStateAction<boolean>>;
   viewMoreCopy?: string;
   setCountyTypeToView: React.Dispatch<React.SetStateAction<MetroFilter>>;
   countyTypeToView: MetroFilter;
@@ -85,7 +83,6 @@ const CompareTable = (props: {
     homepageSliderValue,
     setHomepageSliderValue,
   } = props;
-  const { setViewAllCounties } = props;
 
   const currentCounty = props.county && props.currentCounty;
 
@@ -256,8 +253,6 @@ const CompareTable = (props: {
               isHomepage={props.isHomepage}
               countyTypeToView={props.countyTypeToView}
               setCountyTypeToView={props.setCountyTypeToView}
-              viewAllCounties={props.viewAllCounties}
-              setViewAllCounties={setViewAllCounties}
               stateId={props.stateId}
               county={props.county}
               geoScope={props.geoScope}
@@ -287,7 +282,6 @@ const CompareTable = (props: {
         setSortByPopulation={setSortByPopulation}
         sortByPopulation={sortByPopulation}
         isHomepage={props.isHomepage}
-        viewAllCounties={props.viewAllCounties}
         geoScope={props.geoScope}
         homepageScope={homepageScope}
       />
