@@ -1,15 +1,13 @@
 import React from 'react';
 import ShortNumber from 'common/utils/ShortNumber';
-import StateCircleSvg from 'components/StateSvg/StateCircleSvg';
 import {
   MenuItemWrapper,
-  IconWrapper,
   LocationName,
   Zipcode,
   StyledLink,
 } from './Search.style';
-import { getLocationIconFillColor } from 'components/Search';
-import { getStateCode, State, County, Region } from 'common/regions';
+import { Region } from 'common/regions';
+import MenuItemIcon from './MenuItemIcon';
 
 const MenuItem: React.FC<{ region: Region; zipCodeInput: string }> = ({
   region,
@@ -18,16 +16,7 @@ const MenuItem: React.FC<{ region: Region; zipCodeInput: string }> = ({
   return (
     <StyledLink to={`/${region.relativeUrl}`}>
       <MenuItemWrapper>
-        {/* TODO (chelsi): fix once figured out metro icon/svg */}
-        {(region instanceof State || region instanceof County) && (
-          <IconWrapper>
-            <StateCircleSvg
-              ratio={0.8}
-              fillColor={getLocationIconFillColor(region)}
-              state={getStateCode(region)}
-            />
-          </IconWrapper>
-        )}
+        <MenuItemIcon region={region} />
         <div>
           <LocationName>{region.shortName}</LocationName>
           {zipCodeInput && <Zipcode>contains zipcode {zipCodeInput}</Zipcode>}
