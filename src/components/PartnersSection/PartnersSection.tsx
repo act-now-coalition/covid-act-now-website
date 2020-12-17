@@ -1,8 +1,7 @@
 import React from 'react';
-import { PartnerLogoGrid, PressLogoGrid } from 'components/LogoGrid/LogoGrid';
+import { PartnerLogoGrid } from 'components/LogoGrid/LogoGrid';
 import {
   Content,
-  FeaturedHeader,
   PartnerSection,
   PartnerHeader,
 } from 'screens/HomePage/HomePage.style';
@@ -13,8 +12,6 @@ function PartnersSection() {
       <Content>
         <PartnerHeader>Our Partners</PartnerHeader>
         <PartnerLogoGrid />
-        <FeaturedHeader>Featured In</FeaturedHeader>
-        <PressLogoGrid />
       </Content>
     </PartnerSection>
   );
