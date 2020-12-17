@@ -34,7 +34,7 @@ import {
   fetchMasterSnapshotNumber,
   snapshotUrl,
 } from 'common/utils/snapshots';
-import regions, { Region } from 'common/regions';
+import regions, { MetroArea, Region } from 'common/regions';
 
 // TODO(michael): Compare page improvements:
 // * Virtualize the list so that it's not so awful slow. NOTE: I previously
@@ -550,7 +550,7 @@ function fetchCountyProjections(
 
 function fetchMetroProjections(
   snapshotNumber: number,
-  metros: Region[],
+  metros: MetroArea[],
 ): Promise<Projections[]> {
   return Promise.all(
     metros.map(region =>
