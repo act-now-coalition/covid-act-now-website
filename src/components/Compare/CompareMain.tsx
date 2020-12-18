@@ -113,7 +113,7 @@ const CompareMain = (props: {
 
   // For homepage:
   const [homepageScope, setHomepageScope] = useState(
-    HomepageLocationScope.COUNTY,
+    HomepageLocationScope.STATE,
   );
 
   const homepageScopeToLocations = {
@@ -179,10 +179,9 @@ const CompareMain = (props: {
 
   // Location page slider:
   const defaultSliderValue = scopeValueMap[geoScope];
-
-  // Homepage slider:
   const [sliderValue, setSliderValue] = useState(defaultSliderValue);
 
+  // Homepage slider:
   const defaultHomepageSliderValue = homepageScopeValueMap[homepageScope];
   const [homepageSliderValue, setHomepageSliderValue] = useState(
     defaultHomepageSliderValue,
