@@ -39,6 +39,8 @@ const DISABLED_TEST_POSITIVITY = new DisabledFips([
 
 const DISABLED_ICU = new DisabledFips([
   '47', // https://trello.com/c/aEd07i5Y/701-disabled-tn-icu-headroom
+  // TODO(michael): Reenable counties / metros once we QA the data.
+  /\d{3,}/,
 ]);
 
 const DISABLED_CONTACT_TRACING = new DisabledFips([]);
