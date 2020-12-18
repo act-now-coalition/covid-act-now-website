@@ -67,7 +67,11 @@ export function calcICUHeadroom(
   }
 
   const icuHeadroomDetails = metrics.icuHeadroomDetails;
-  if (!icuHeadroomDetails || metrics.icuHeadroomRatio === null) {
+  if (
+    !icuHeadroomDetails ||
+    metrics.icuHeadroomRatio === null ||
+    metrics.icuCapacityRatio === null
+  ) {
     return null;
   }
   // Use capacity from the timeseries if it's within the last 7 days, else use the
@@ -100,8 +104,8 @@ export function calcICUHeadroom(
   }
 
   return {
-    metricSeries: metricsTimeseries.map(row => row && row.icuHeadroomRatio),
-    metricValue: metrics.icuHeadroomRatio,
+    metricSeries: metricsTimeseries.map(row => row && row.icuCapacityRatio),
+    metricValue: metrics.icuCapacityRatio,
     overrideInPlace,
     totalBeds: finalTotalBeds,
     covidPatients: icuHeadroomDetails.currentIcuCovid,
