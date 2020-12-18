@@ -5,6 +5,7 @@ import {
   getLearnPageItems,
   getTopLevelPageItems,
   getLocationPageItems,
+  getHomeImageItems,
 } from './utils';
 
 const destinationDir = path.join(__dirname, '../../public');
@@ -14,8 +15,14 @@ function main() {
   const topLevelPageItems = getTopLevelPageItems();
   const locationPageItems = getLocationPageItems();
   const learnPageItems = getLearnPageItems();
+  const homeImageItems = getHomeImageItems();
 
-  const urlList = concat(topLevelPageItems, locationPageItems, learnPageItems);
+  const urlList = concat(
+    topLevelPageItems,
+    locationPageItems,
+    learnPageItems,
+    homeImageItems,
+  );
   console.log(`Total URLs: ${urlList.length}`);
 
   simpleSitemapAndIndex({
