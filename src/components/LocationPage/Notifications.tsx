@@ -13,7 +13,7 @@ import { BANNER_COPY } from 'components/Banner/ThirdWaveBanner';
 import HospitalizationsAlert, {
   isHospitalizationsPeak,
 } from './HospitalizationsAlert';
-import { State, Region } from 'common/regions';
+import { State, County, Region } from 'common/regions';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
 
 const EXPOSURE_NOTIFICATIONS_STATE_FIPS = [
@@ -146,10 +146,13 @@ export function trackClickExposureNotifications(label: string) {
 }
 
 export function showExposureNotifications(region: Region) {
-  return (
-    region instanceof State &&
-    EXPOSURE_NOTIFICATIONS_STATE_FIPS.includes(region.fipsCode)
-  );
+  if (region instanceof County) {
+    return EXPOSURE_NOTIFICATIONS_STATE_FIPS.includes(region.state.fipsCode);
+  } else if (region instanceof State) {
+    return EXPOSURE_NOTIFICATIONS_STATE_FIPS.includes(region.fipsCode);
+  } else {
+    return false;
+  }
 }
 
 export default NotificationArea;

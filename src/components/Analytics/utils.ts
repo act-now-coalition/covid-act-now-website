@@ -59,6 +59,7 @@ export enum EventAction {
   SUBSCRIBE = 'subscribe',
   ALERTS_UNSUBSCRIBE = 'alertsUnsubscribe',
   EXPAND = 'expand',
+  REDIRECT = 'redirect',
 }
 
 /**

@@ -45,10 +45,11 @@ function getExposureRecommendation(
     return null;
   }
 
-  const recommendationCopy = `Add your phone to [${region.fullName}'s exposure
-   notification system](https://g.co/ens) to receive alerts if you were in close 
-   contact with someone who later tests positive for COVID. Your privacy is 
-   protected as your identity is not known and your location is not tracked.`;
+  const recommendationCopy = `**Notifications**: Add your phone to [${region.fullName}'s 
+  exposure notification system](https://g.co/ens) to receive alerts when you have been 
+  in close contact with someone who later tests positive for COVID. 
+  Your privacy is protected as your identity is not known and your location 
+  is not tracked. `;
 
   const exposureRecommendation: Recommendation = {
     body: recommendationCopy,
