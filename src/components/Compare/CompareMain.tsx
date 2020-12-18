@@ -25,6 +25,7 @@ import {
   GeoScopeFilter,
   HomepageLocationScope,
   getAllMetroAreas,
+  getAllCountiesOfMetroArea,
 } from 'common/utils/compare';
 import { Metric } from 'common/metric';
 import { getSummaryFromFips } from 'common/location_summaries';
@@ -35,7 +36,7 @@ import {
   storeSharedComponentParams,
   useSharedComponentParams,
 } from 'common/sharing';
-import regions from 'common/regions';
+import regions, { Region, MetroArea } from 'common/regions';
 import { assert } from 'common/utils';
 
 // For filters (0, 50, and 99 are numerical values required by MUI Slider component):
@@ -56,13 +57,15 @@ const CompareMain = (props: {
   county: any | null;
   isModal?: boolean;
   locationsViewable: number;
-  isHomepage?: boolean;
   stateId?: string;
+  region?: Region;
 }) => {
   const tableRef = useRef<HTMLDivElement>(null);
 
+  const isHomepage = !props.region;
+
   const scrollToCompare = useCallback(() => {
-    const scrollOffset = props.isHomepage ? 75 : 165;
+    const scrollOffset = isHomepage ? 75 : 165;
     // Note (Chelsi): short delay is needed to make scrollTo work
     return setTimeout(() => {
       if (tableRef.current) {
@@ -73,7 +76,7 @@ const CompareMain = (props: {
         });
       }
     }, 250);
-  }, [props.isHomepage, tableRef]);
+  }, [isHomepage, tableRef]);
 
   const location = useLocation();
   useEffect(() => {
@@ -110,7 +113,7 @@ const CompareMain = (props: {
 
   // For homepage:
   const [homepageScope, setHomepageScope] = useState(
-    HomepageLocationScope.COUNTY,
+    HomepageLocationScope.STATE,
   );
 
   const homepageScopeToLocations = {
@@ -133,8 +136,10 @@ const CompareMain = (props: {
   // For location page:
   const [geoScope, setGeoScope] = useState(GeoScopeFilter.STATE);
 
-  function getLocationPageLocations() {
-    if (geoScope === GeoScopeFilter.NEARBY) {
+  function getLocationPageLocations(region?: Region) {
+    if (region && region instanceof MetroArea) {
+      return getAllCountiesOfMetroArea(region);
+    } else if (geoScope === GeoScopeFilter.NEARBY) {
       return getNeighboringCounties(county.full_fips_code);
     } else if (geoScope === GeoScopeFilter.STATE && stateId) {
       return getLocationPageCountiesSelection(countyTypeToView, stateId);
@@ -144,14 +149,23 @@ const CompareMain = (props: {
   }
 
   const locationPageViewMoreCopy =
-    props.stateName &&
-    getLocationPageViewMoreCopy(geoScope, countyTypeToView, props.stateName);
+    props.region &&
+    getLocationPageViewMoreCopy(geoScope, countyTypeToView, props.region);
   const locationPageLocationsForCompare = getLocationPageLocations();
 
-  const locations = !stateId
-    ? homepageLocationsForCompare
-    : locationPageLocationsForCompare;
-  const viewMoreCopy = !stateId
+  function getFinalLocations(region?: Region) {
+    if (!region) {
+      return homepageLocationsForCompare;
+    } else {
+      if (region instanceof MetroArea) {
+        return getAllCountiesOfMetroArea(region);
+      } else return locationPageLocationsForCompare;
+    }
+  }
+
+  const locations = getFinalLocations(props.region);
+
+  const viewMoreCopy = !props.region
     ? homepageViewMoreCopy
     : locationPageViewMoreCopy;
 
@@ -165,10 +179,9 @@ const CompareMain = (props: {
 
   // Location page slider:
   const defaultSliderValue = scopeValueMap[geoScope];
-
-  // Homepage slider:
   const [sliderValue, setSliderValue] = useState(defaultSliderValue);
 
+  // Homepage slider:
   const defaultHomepageSliderValue = homepageScopeValueMap[homepageScope];
   const [homepageSliderValue, setHomepageSliderValue] = useState(
     defaultHomepageSliderValue,
@@ -224,7 +237,8 @@ const CompareMain = (props: {
     }
   }, [sharedParams]);
 
-  if (locations.length === 0) {
+  /* Mostly a check for MSAs with only 1 county. Won't render a compare table if there aren't at least 2 locations */
+  if (locations.length < 2) {
     return null;
   }
 
@@ -233,7 +247,7 @@ const CompareMain = (props: {
     stateId,
     county,
     setShowModal,
-    isHomepage: props.isHomepage,
+    isHomepage,
     locations,
     currentCounty,
     ...uiState,
@@ -250,6 +264,7 @@ const CompareMain = (props: {
     setHomepageScope,
     homepageSliderValue,
     setHomepageSliderValue,
+    region: props.region,
   };
 
   return (

@@ -15,12 +15,12 @@ import {
   MetroFilter,
   orderedMetrics,
   GeoScopeFilter,
-  getAbbreviatedCounty,
   getShareQuote,
   getMetroPrefixCopy,
   trackCompareEvent,
   HomepageLocationScope,
   homepageLabelMap,
+  getCompareSubheader,
 } from 'common/utils/compare';
 import { COLOR_MAP } from 'common/colors';
 import ShareImageButtons from 'components/ShareButtons/ShareButtonGroup';
@@ -29,6 +29,7 @@ import { getComparePageUrl, getCompareShareImageUrl } from 'common/urls';
 import { EventAction } from 'components/Analytics';
 import { MoreInfoButton } from 'components/SharedComponents';
 import { Subtitle1 } from 'components/Typography';
+import { Region, MetroArea } from 'common/regions';
 
 function trackShare(label: string) {
   trackCompareEvent(EventAction.SHARE, label);
@@ -59,13 +60,13 @@ const CompareTable = (props: {
   setSliderValue: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
   setShowFaqModal: React.Dispatch<React.SetStateAction<boolean>>;
   createCompareShareId: () => Promise<string>;
-
   homepageScope: HomepageLocationScope;
   setHomepageScope: React.Dispatch<React.SetStateAction<HomepageLocationScope>>;
   homepageSliderValue: HomepageLocationScope;
   setHomepageSliderValue: React.Dispatch<
     React.SetStateAction<HomepageLocationScope>
   >;
+  region?: Region;
 }) => {
   const {
     sorter,
@@ -82,6 +83,7 @@ const CompareTable = (props: {
     setHomepageScope,
     homepageSliderValue,
     setHomepageSliderValue,
+    region,
   } = props;
 
   const currentCounty = props.county && props.currentCounty;
@@ -174,12 +176,6 @@ const CompareTable = (props: {
     ? { rank: currentCountyRank + 1, ...currentCounty }
     : null;
 
-  const compareSubheader = props.county
-    ? `${getAbbreviatedCounty(props.county.county)}, ${
-        props.stateId
-      } to other counties`
-    : `Counties in ${props.stateName}`;
-
   const shareQuote = getShareQuote(
     sorter,
     props.countyTypeToView,
@@ -189,15 +185,16 @@ const CompareTable = (props: {
     props.homepageScope,
     currentLocation,
     sortByPopulation,
-    props.isHomepage,
     props.stateName,
+    region,
   );
 
   // Disabling filters for Northern Mariana Islands because they don't have
   // any data on metro vs non-metro islands.  There may be more elegant solutions
   // that better handle any region without metro/non-metro regions.
   // TODO(chris): https://trello.com/c/KdfFwRvf/430-handle-filters-in-compare-table-with-no-results-more-cleanly
-  const disableFilters = stateId === 'MP';
+  const disableFilters =
+    stateId === 'MP' || (region && region instanceof MetroArea);
 
   // Only showing the view more text when all locations are not available.
   const showViewMore = amountDisplayed !== sortedLocationsArr.length;
@@ -246,7 +243,7 @@ const CompareTable = (props: {
                 onShareOnLinkedin={() => trackShare(`Linkedin: ${trackLabel}`)}
               />
             </Header>
-            {props.stateName && <Subtitle1>{compareSubheader}</Subtitle1>}
+            {region && <Subtitle1>{getCompareSubheader(region)}</Subtitle1>}
           </HeaderWrapper>
           {!disableFilters && (
             <Filters
@@ -284,6 +281,7 @@ const CompareTable = (props: {
         isHomepage={props.isHomepage}
         geoScope={props.geoScope}
         homepageScope={homepageScope}
+        region={region}
       />
       {!props.isModal && (
         <Footer isCounty={props.county}>
