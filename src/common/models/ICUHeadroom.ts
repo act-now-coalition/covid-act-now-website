@@ -13,6 +13,7 @@ const ICU_HEADROOM_OVERRIDES: Array<string> = [];
 /**
  * Encapsulates all of the data related to ICU Headroom (used to generate our
  * copy above the chart).
+ * TODO(michael): Rename all internal references to "headroom", remove extra metadata, etc.
  */
 export interface ICUHeadroomInfo {
   metricSeries: Array<number | null>;

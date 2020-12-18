@@ -5,13 +5,13 @@ import { levelText } from 'common/utils/chart';
 import { getLevel, Metric } from 'common/metric';
 import { formatPercent, formatInteger } from 'common/utils';
 import { Projections } from 'common/models/Projections';
-import { NonCovidPatientsMethod } from 'common/models/ICUHeadroom';
 import { MetricDefinition } from './interfaces';
 import ExternalLink from '../../components/ExternalLink';
 import Thermometer from 'components/Thermometer';
 
-const METRIC_NAME = 'ICU headroom used';
+const METRIC_NAME = 'ICU capacity used';
 
+// TODO(michael): Rename internal references to "headroom", etc.
 export const ICUHeadroomMetric: MetricDefinition = {
   renderStatus,
   renderDisclaimer,
@@ -27,7 +27,8 @@ const SHORT_DESCRIPTION_LOW = 'Can likely handle a new wave of COVID';
 const SHORT_DESCRIPTION_MEDIUM = 'Can likely handle a new wave of COVID';
 const SHORT_DESCRIPTION_MEDIUM_HIGH = 'At risk to a new wave of COVID';
 const SHORT_DESCRIPTION_HIGH = 'High risk of hospital overload';
-const SHORT_DESCRIPTION_UNKNOWN = 'Insufficient data to assess';
+const SHORT_DESCRIPTION_UNKNOWN =
+  'Unavailable while we switch to an improved data source';
 
 const LIMIT_LOW = 0.7;
 const LIMIT_MEDIUM = 0.8;
@@ -91,10 +92,20 @@ function renderStatus(projections: Projections): React.ReactElement {
   const locationName = projections.locationName;
 
   if (icu === null) {
+    // TODO(michael): Put this generic message back in place once we've
+    // re-enabled counties / metros.
+    // return (
+    //   <Fragment>
+    //     Unable to generate {ICUHeadroomMetric.extendedMetricName}. This could be
+    //     due to insufficient data.
+    //   </Fragment>
+    // );
     return (
       <Fragment>
-        Unable to generate {ICUHeadroomMetric.extendedMetricName}. This could be
-        due to insufficient data.
+        The {ICUHeadroomMetric.extendedMetricName} metric is currently
+        unavailable for {projections.locationName} while we switch to using more
+        accurate hospital data provided by the Department of Health and Human
+        Services. Check back soon for updates.
       </Fragment>
     );
   } else if (icu.overrideInPlace) {
@@ -107,27 +118,13 @@ function renderStatus(projections: Projections): React.ReactElement {
   }
 
   const totalICUBeds = formatInteger(icu.totalBeds);
-  const nonCovidUsedBeds = formatInteger(icu.nonCovidPatients);
-  const nonCovidUsedBedsPercent = formatPercent(
-    icu.nonCovidPatients / icu.totalBeds,
-  );
-  const remainingICUBeds = formatInteger(icu.totalBeds - icu.nonCovidPatients);
+  const nonCovidICUPatients = formatInteger(icu.nonCovidPatients);
   const covidICUPatients = formatInteger(icu.covidPatients);
+  const totalICUPatients = formatInteger(
+    icu.nonCovidPatients + icu.covidPatients,
+  );
   const icuHeadroom =
     icu.metricValue > 1 ? '>100%' : formatPercent(icu.metricValue);
-
-  const textWeEstimateThatNonCovidPatients = (() => {
-    switch (icu.nonCovidPatientsMethod) {
-      case NonCovidPatientsMethod.ACTUAL:
-        return `${icu.nonCovidPatients}`;
-      case NonCovidPatientsMethod.ESTIMATED_FROM_TOTAL_ICU_ACTUAL:
-        return `we estimate that ${nonCovidUsedBeds}`;
-      case NonCovidPatientsMethod.ESTIMATED_FROM_TYPICAL_UTILIZATION:
-        return `we estimate that ${nonCovidUsedBedsPercent} (${nonCovidUsedBeds})`;
-    }
-  })();
-
-  const textWeEstimate = icu.covidPatientsIsActual ? '' : 'we estimate';
 
   const level = getLevel(Metric.HOSPITAL_USAGE, icu.metricValue);
   const textLevel = levelText(
@@ -140,52 +137,30 @@ function renderStatus(projections: Projections): React.ReactElement {
 
   return (
     <Fragment>
-      {locationName} has about {totalICUBeds} ICU beds. Based on best available
-      data, {textWeEstimateThatNonCovidPatients} are currently occupied by
-      non-COVID patients. Of the {remainingICUBeds} ICU beds remaining,{' '}
-      {textWeEstimate} {covidICUPatients} are needed by COVID cases, or{' '}
-      {icuHeadroom} of available beds. {textLevel}.
+      {locationName} has reported having {totalICUBeds} staffed adult ICU beds.{' '}
+      {nonCovidICUPatients} are filled by non-COVID patients and{' '}
+      {covidICUPatients} are filled by COVID patients. Overall,{' '}
+      {totalICUPatients} out of {totalICUBeds} ({icuHeadroom}) are filled.{' '}
+      {textLevel}.
     </Fragment>
   );
 }
 
 function renderDisclaimer(projections: Projections): React.ReactElement {
-  // TODO(michael): Use regionType. But that's causing `yarn
-  // generate-index-pages` to fail due to circular dependency (I think).
-  if (projections.fips.length === 2) {
-    return (
-      <Fragment>
-        Raw data directly sourced from the{' '}
-        <ExternalLink href="https://healthdata.gov/dataset/covid-19-reported-patient-impact-and-hospital-capacity-state-timeseries">
-          Department of Health and Human Services (HHS)
-        </ExternalLink>
-        . Learn more about our{' '}
-        <ExternalLink href="https://covidactnow.org/covid-risk-levels-metrics#icu-headroom-used">
-          ICU Headroom methodology
-        </ExternalLink>
-        .
-      </Fragment>
-    );
-  } else {
-    return (
-      <Fragment>
-        <ExternalLink href="https://preventepidemics.org/wp-content/uploads/2020/04/COV020_WhenHowTightenFaucet_v3.pdf">
-          Resolve to Save Lives
-        </ExternalLink>
-        , a pandemic think tank, recommends that hospitals maintain enough ICU
-        capacity to double the number of COVID patients hospitalized. Learn more
-        about{' '}
-        <ExternalLink href="https://docs.google.com/document/d/1cd_cEpNiIl1TzUJBvw9sHLbrbUZ2qCxgN32IqVLa3Do/edit">
-          our methodology
-        </ExternalLink>{' '}
-        and{' '}
-        <ExternalLink href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit">
-          our data sources
-        </ExternalLink>
-        .
-      </Fragment>
-    );
-  }
+  return (
+    <Fragment>
+      ICU data sourced from the{' '}
+      <ExternalLink href="https://healthdata.gov/dataset/covid-19-reported-patient-impact-and-hospital-capacity-state-timeseries">
+        Department of Health and Human Services (HHS)
+      </ExternalLink>
+      . As of December 21, we use "{ICUHeadroomMetric.extendedMetricName}"
+      instead of "ICU headroom used" as our primary ICU metric. Learn more about
+      our{' '}
+      <ExternalLink href="/covid-risk-levels-metrics#icu-capacity-used">
+        ICU Capacity methodology
+      </ExternalLink>
+    </Fragment>
+  );
 }
 
 function renderThermometer(): React.ReactElement {
