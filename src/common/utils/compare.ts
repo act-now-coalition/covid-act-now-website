@@ -195,7 +195,7 @@ export function getLocationPageViewMoreCopy(
   region: Region,
 ) {
   if (region instanceof MetroArea) {
-    return `View all counties in ${region.shortName}`; // Todo (Chelsi): update this?
+    return `View all counties in ${region.shortName}`;
   } else if (geoscope === GeoScopeFilter.COUNTRY) {
     return `View top 100 ${getMetroPrefixCopy(countyTypeToView)} counties`;
   } else if (geoscope === GeoScopeFilter.NEARBY) {
@@ -275,7 +275,7 @@ export function getColumnLocationName(region: Region) {
     const countyWithAbbreviatedSuffix = region.abbreviation;
     return splitCountyName(countyWithAbbreviatedSuffix);
   } else if (region instanceof MetroArea) {
-    return [region.name]; // TODO (chelsi) - update this
+    return [region.shortName];
   } else {
     fail('dont support other regions');
   }
