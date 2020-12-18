@@ -210,14 +210,25 @@ const LocationTable: React.FunctionComponent<{
 
   // Seemingly random numbers are the heights of each modal header
   const homepageOffset =
-    homepageScope === HomepageLocationScope.COUNTY ? 159 : 73;
+    homepageScope === HomepageLocationScope.COUNTY ? 198 : 115;
   const locationPageOffset = geoScope === GeoScopeFilter.NEARBY ? 107 : 198;
-  const modalHeaderOffset = isHomepage
-    ? homepageOffset
-    : pinnedLocation
-    ? locationPageOffset
-    : 110;
-  const finalHeaderOffset = isModal ? modalHeaderOffset : 0;
+
+  // Changes to account for change in header height with different filters:
+  function getModalHeaderOffset(): number {
+    if (!region) {
+      return homepageOffset;
+    } else {
+      if (region instanceof MetroArea) {
+        return 60;
+      } else if (pinnedLocation) {
+        return locationPageOffset;
+      } else {
+        return 110;
+      }
+    }
+  }
+
+  const finalHeaderOffset = isModal ? getModalHeaderOffset() : 0;
 
   const showBottom = pinnedLocation && pinnedLocation.rank >= numLocations;
   const numLocationsMain = showBottom ? numLocations - 1 : numLocations;

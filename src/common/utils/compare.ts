@@ -70,8 +70,10 @@ export function getAllMetroAreas(): SummaryForCompare[] {
   return regions.metroAreas.map(getLocationObj);
 }
 
-export function getAllCountiesOfMetroArea(region: Region): SummaryForCompare[] {
-  return (region as MetroArea).counties.map(getLocationObj);
+export function getAllCountiesOfMetroArea(
+  region: MetroArea,
+): SummaryForCompare[] {
+  return region.counties.map(getLocationObj);
 }
 
 export function getAllCountiesOfState(stateCode: string): SummaryForCompare[] {
@@ -362,9 +364,7 @@ export function getShareQuote(
     return homepageShareCopy;
   } else {
     if (region instanceof MetroArea) {
-      return `Compare COVID metrics between counties in ${
-        (region as MetroArea).name
-      } with @CovidActNow.`;
+      return `Compare COVID metrics between counties in ${region.name} with @CovidActNow.`;
     } else if (!currentLocation && stateName) {
       return stateShareCopy;
     } else if (currentLocation) {
