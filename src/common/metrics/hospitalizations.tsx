@@ -29,9 +29,9 @@ const SHORT_DESCRIPTION_MEDIUM_HIGH = 'At risk to a new wave of COVID';
 const SHORT_DESCRIPTION_HIGH = 'High risk of hospital overload';
 const SHORT_DESCRIPTION_UNKNOWN = 'Insufficient data to assess';
 
-const LIMIT_LOW = 0.5;
-const LIMIT_MEDIUM = 0.6;
-const LIMIT_MEDIUM_HIGH = 0.7;
+const LIMIT_LOW = 0.7;
+const LIMIT_MEDIUM = 0.8;
+const LIMIT_MEDIUM_HIGH = 0.85;
 const LIMIT_HIGH = Infinity;
 
 const LOW_NAME = 'Low';
