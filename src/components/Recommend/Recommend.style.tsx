@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import { FooterLinkStyles } from 'components/Compare/Compare.style';
 import { LinkButton } from 'components/Button';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
+import { MarkdownContent } from 'components/Markdown';
 
 /*
 TODO (chelsi): these breakpoints and margins are the same as
@@ -96,7 +97,7 @@ export const RecommendationsContainer = styled.div`
   }
 `;
 
-export const RecommendationBody = styled(ReactMarkdown)`
+export const RecommendationBody = styled(MarkdownContent)`
   margin: auto 0;
 
   p,
