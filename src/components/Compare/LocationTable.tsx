@@ -18,6 +18,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { SCREENSHOT_CLASS } from 'components/Screenshot';
 import { trackCompareEvent } from 'common/utils/compare';
 import { EventAction } from 'components/Analytics';
+import { Region, MetroArea } from 'common/regions';
 
 const LocationTableHead: React.FunctionComponent<{
   setSorter: React.Dispatch<React.SetStateAction<number>>;
@@ -183,6 +184,7 @@ const LocationTable: React.FunctionComponent<{
   isHomepage?: boolean;
   geoScope?: GeoScopeFilter;
   homepageScope: HomepageLocationScope;
+  region?: Region;
 }> = ({
   setSorter,
   setSortDescending,
@@ -202,6 +204,7 @@ const LocationTable: React.FunctionComponent<{
   isHomepage,
   geoScope,
   homepageScope,
+  region,
 }) => {
   const Container = isModal ? Styles.ModalContainer : Styles.Container;
 
@@ -240,7 +243,15 @@ const LocationTable: React.FunctionComponent<{
     ? sortedLocations.slice(0, 100)
     : modalLocations;
 
-  const showStateCode = allCountiesView || geoScope === GeoScopeFilter.NEARBY;
+  const returnShowStateCode = (region?: Region): boolean => {
+    if (region) {
+      return region instanceof MetroArea || geoScope === GeoScopeFilter.NEARBY;
+    } else {
+      return homepageScope === HomepageLocationScope.COUNTY;
+    }
+  };
+
+  const showStateCode = returnShowStateCode(region);
 
   return (
     <Styles.TableContainer $isModal={isModal} className={SCREENSHOT_CLASS}>

@@ -14,6 +14,7 @@ import regions, {
   State,
   MetroArea,
   getStateName,
+  getStateCode,
 } from 'common/regions';
 import { fail } from 'assert';
 import { assert } from '.';
@@ -373,3 +374,16 @@ export function getShareQuote(
     }
   }
 }
+
+// Determines which location field is shown under the main Compare feature header + formats it
+export const getCompareSubheader = (region: Region): string => {
+  if (region instanceof County) {
+    return `${getAbbreviatedCounty(region.name)}, ${getStateCode(
+      region,
+    )} to other counties`;
+  } else if (region instanceof MetroArea || region instanceof State) {
+    return `Counties in ${region.fullName}`;
+  } else {
+    return 'Compare counties';
+  }
+};

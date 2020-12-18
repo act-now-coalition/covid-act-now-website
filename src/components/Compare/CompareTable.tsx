@@ -15,12 +15,12 @@ import {
   MetroFilter,
   orderedMetrics,
   GeoScopeFilter,
-  getAbbreviatedCounty,
   getShareQuote,
   getMetroPrefixCopy,
   trackCompareEvent,
   HomepageLocationScope,
   homepageLabelMap,
+  getCompareSubheader,
 } from 'common/utils/compare';
 import { COLOR_MAP } from 'common/colors';
 import ShareImageButtons from 'components/ShareButtons/ShareButtonGroup';
@@ -176,12 +176,6 @@ const CompareTable = (props: {
     ? { rank: currentCountyRank + 1, ...currentCounty }
     : null;
 
-  const compareSubheader = props.county
-    ? `${getAbbreviatedCounty(props.county.county)}, ${
-        props.stateId
-      } to other counties`
-    : `Counties in ${props.stateName}`;
-
   const shareQuote = getShareQuote(
     sorter,
     props.countyTypeToView,
@@ -249,7 +243,7 @@ const CompareTable = (props: {
                 onShareOnLinkedin={() => trackShare(`Linkedin: ${trackLabel}`)}
               />
             </Header>
-            {props.stateName && <Subtitle1>{compareSubheader}</Subtitle1>}
+            {region && <Subtitle1>{getCompareSubheader(region)}</Subtitle1>}
           </HeaderWrapper>
           {!disableFilters && (
             <Filters
@@ -287,6 +281,7 @@ const CompareTable = (props: {
         isHomepage={props.isHomepage}
         geoScope={props.geoScope}
         homepageScope={homepageScope}
+        region={region}
       />
       {!props.isModal && (
         <Footer isCounty={props.county}>
