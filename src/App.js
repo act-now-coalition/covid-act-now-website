@@ -26,7 +26,11 @@ import { getFeedbackSurveyUrl } from 'components/Banner';
 import ExternalRedirect from 'components/ExternalRedirect';
 import HandleRedirectTo from 'components/HandleRedirectTo/HandleRedirectTo';
 import Donate from 'screens/Donate/Donate';
-import PageviewTracker from 'components/Analytics';
+import PageviewTracker, {
+  trackEvent,
+  EventAction,
+  EventCategory,
+} from 'components/Analytics';
 import {
   Faq,
   Glossary,
@@ -165,6 +169,14 @@ export default function App() {
                 <Redirect to="/tools#covid-response-simulator" />
               </Route>
 
+              {/* Custom redirect to track clicks from the Daily download */}
+              <Route path="/exposure-notifications-redirect">
+                <ExternalRedirect
+                  url={'https://g.co/ens'}
+                  onRedirect={trackExposureNotificationRedirect}
+                />
+              </Route>
+
               {/* Embed routes */}
               <Route
                 exact
@@ -254,5 +266,13 @@ export default function App() {
         </StylesProvider>
       </ScThemeProvider>
     </MuiThemeProvider>
+  );
+}
+
+function trackExposureNotificationRedirect() {
+  trackEvent(
+    EventCategory.EXPOSURE_NOTIFICATIONS,
+    EventAction.REDIRECT,
+    'Redirect',
   );
 }
