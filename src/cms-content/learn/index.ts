@@ -129,7 +129,7 @@ export interface CaseStudiesContent {
   metadataDescription: string;
 }
 
-const allCaseStudies = chain(caseStudies.categories)
+export const allCaseStudies = chain(caseStudies.categories)
   .map(category => category.caseStudies)
   .flatten()
   .value();
