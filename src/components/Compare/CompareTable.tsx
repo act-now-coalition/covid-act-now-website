@@ -27,6 +27,7 @@ import { getComparePageUrl, getCompareShareImageUrl } from 'common/urls';
 import { EventAction } from 'components/Analytics';
 import { MoreInfoButton } from 'components/SharedComponents';
 import { Subtitle1 } from 'components/Typography';
+import { LocationPageSectionHeader } from 'components/LocationPage/ChartsHolder.style';
 
 function trackShare(label: string) {
   trackCompareEvent(EventAction.SHARE, label);
@@ -214,7 +215,7 @@ const CompareTable = (props: {
         <div>
           <HeaderWrapper>
             <Header isHomepage={props.isHomepage}>
-              Compare
+              <LocationPageSectionHeader>Compare</LocationPageSectionHeader>
               <ShareImageButtons
                 imageUrl={getDownloadImageUrl}
                 imageFilename="CovidActNow-compare.png"

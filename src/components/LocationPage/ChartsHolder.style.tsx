@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import palette from 'assets/theme/palette';
 import { Typography } from '@material-ui/core';
+import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
 
 export const ChartContentWrapper = styled.div`
   margin-top: 85px;
@@ -46,7 +47,7 @@ export const ChartHeaderWrapper = styled.div`
   justify-content: space-between;
   margin: 3.5rem 0 0.25rem;
 
-  @media (min-width: 600px) {
+  @media (min-width: ${materialSMBreakpoint}) {
     flex-direction: column;
   }
 
@@ -55,15 +56,15 @@ export const ChartHeaderWrapper = styled.div`
   }
 `;
 
-// TODO(chelsi)- max-width in ChartHeader is quick fix for share buttons overlapping header
-// Figure out better approach:
-export const ChartHeader = styled.div`
+export const LocationPageSectionHeader = styled(Typography).attrs(props => ({
+  component: 'h2',
+}))`
   font-weight: 700;
   font-size: 1.5rem;
   max-width: 440px;
   line-height: 1.1;
 
-  @media (min-width: 800px) {
+  @media (min-width: ${mobileBreakpoint}) {
     max-width: unset;
     line-height: 1;
   }
