@@ -62,7 +62,9 @@ const CompareMain = (props: {
 }) => {
   const tableRef = useRef<HTMLDivElement>(null);
 
-  const isHomepage = !props.region;
+  const [region, setRegion] = useState(props.region);
+
+  const isHomepage = !region;
 
   const scrollToCompare = useCallback(() => {
     const scrollOffset = isHomepage ? 75 : 165;
@@ -149,8 +151,7 @@ const CompareMain = (props: {
   }
 
   const locationPageViewMoreCopy =
-    props.region &&
-    getLocationPageViewMoreCopy(geoScope, countyTypeToView, props.region);
+    region && getLocationPageViewMoreCopy(geoScope, countyTypeToView, region);
   const locationPageLocationsForCompare = getLocationPageLocations();
 
   function getFinalLocations(region?: Region) {
@@ -163,9 +164,9 @@ const CompareMain = (props: {
     }
   }
 
-  const locations = getFinalLocations(props.region);
+  const locations = getFinalLocations(region);
 
-  const viewMoreCopy = !props.region
+  const viewMoreCopy = !region
     ? homepageViewMoreCopy
     : locationPageViewMoreCopy;
 
@@ -198,6 +199,7 @@ const CompareMain = (props: {
     geoScope,
     stateId,
     countyId: county?.full_fips_code,
+    regionFips: region?.fipsCode,
   };
 
   const createCompareShareId = async () => {
@@ -211,12 +213,16 @@ const CompareMain = (props: {
   const sharedParams = useSharedComponentParams(SharedComponent.Compare);
   useEffect(() => {
     if (sharedParams) {
-      const { stateId, countyId } = sharedParams;
+      const { stateId, countyId, regionFips } = sharedParams;
       if (stateId) {
         setStateId(stateId);
       }
       if (countyId) {
         setCounty(findCountyByFips(countyId));
+      }
+      if (regionFips) {
+        const regionFromFips = regions.findByFipsCodeStrict(regionFips);
+        setRegion(regionFromFips);
       }
 
       setSorter(sharedParams.sorter);
@@ -264,7 +270,7 @@ const CompareMain = (props: {
     setHomepageScope,
     homepageSliderValue,
     setHomepageSliderValue,
-    region: props.region,
+    region: region,
   };
 
   return (
