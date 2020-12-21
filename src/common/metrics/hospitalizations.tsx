@@ -8,6 +8,7 @@ import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
 import ExternalLink from '../../components/ExternalLink';
 import Thermometer from 'components/Thermometer';
+import { NonCovidPatientsMethod } from 'common/models/ICUHeadroom';
 
 const METRIC_NAME = 'ICU capacity used';
 
@@ -135,13 +136,20 @@ function renderStatus(projections: Projections): React.ReactElement {
     'This suggests hospitals cannot absorb a wave of new COVID infections without substantial surge capacity. Aggressive action urgently needed',
   );
 
+  // TODO(michael): I think this should always be true if/when we exclusively use HHS data, but as
+  // long as we are mixing sources, we may be missing covid patients.
+  const includeBreakdown =
+    icu.covidPatientsIsActual &&
+    icu.nonCovidPatientsMethod === NonCovidPatientsMethod.ACTUAL;
+  const patientBreakdown = includeBreakdown
+    ? `${nonCovidICUPatients} are filled by non-COVID patients and ${covidICUPatients} are filled by COVID patients.`
+    : '';
+
   return (
     <Fragment>
       {locationName} has reported having {totalICUBeds} staffed adult ICU beds.{' '}
-      {nonCovidICUPatients} are filled by non-COVID patients and{' '}
-      {covidICUPatients} are filled by COVID patients. Overall,{' '}
-      {totalICUPatients} out of {totalICUBeds} ({icuHeadroom}) are filled.{' '}
-      {textLevel}.
+      {patientBreakdown} Overall, {totalICUPatients} out of {totalICUBeds} (
+      {icuHeadroom}) are filled. {textLevel}.
     </Fragment>
   );
 }
