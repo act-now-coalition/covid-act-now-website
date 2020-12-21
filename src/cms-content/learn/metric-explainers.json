@@ -152,5 +152,12 @@
     }
   ],
   "pageHeader": "Risk levels & key metrics",
-  "pageIntro": "Covid Act Now has five key metrics to assess for every state, county, and metro area, three of which are used to determine a location's overall risk level. Below you will learn how we calculate and source each metric and overall risk."
+  "pageIntro": "Covid Act Now has five key metrics to assess for every state, county, and metro area, three of which are used to determine a location's overall risk level. Below you will learn how we calculate and source each metric and overall risk.",
+  "frameworkLogos": [
+    {
+      "image": "/images_cms/the-rockefeller-foundation-logo.png",
+      "url": "https://www.rockefellerfoundation.org/",
+      "altText": "The Rockefeller Foundation logo"
+    }
+  ]
 }
