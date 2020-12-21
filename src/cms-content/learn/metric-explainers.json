@@ -1,11 +1,11 @@
 {
   "frameworkBody": "Covid Act Now worked alongside a network of research, policy, and public health experts convened by Harvard’s Global Health Institute and Edmond J. Safra Center for Ethics to develop the [Key Metrics for COVID Suppression](https://globalhealth.harvard.edu/key-metrics-for-covid-suppression-researchers-and-public-health-experts-unite-to-bring-clarity-to-key-metrics-guiding-coronavirus-response/) framework.\n\nCentral to this framework is our five-color COVID warning system, which communicates the severity of a location’s outbreak and offers corresponding guidance on mitigation efforts needed at each risk level. This facilitates a unified approach with common metrics, enabling leaders at all levels to anticipate and adequately respond to their community’s COVID spread, and informing the general public on their community’s risk to COVID. To develop this framework, we prioritized metrics vital to guiding suppression efforts that allow a community to safely reopen.",
   "metadataTitle": "Risk Levels and Key Metrics for COVID-19 - Covid Act Now",
-  "metadataDescription": "Understand the Risk Levels in your community and COVID Metrics: daily new cases, infection rate, positive rate, ICU headroom, contact tracing.",
+  "metadataDescription": "Understand the Risk Levels in your community and COVID Metrics: daily new cases, infection rate, positive rate, ICU capacity, contact tracing.",
   "sections": [
     {
       "sectionId": "how-covid-risk-is-determined",
-      "sectionIntro": "### What does the overall risk level for a location mean?\n\nA location’s overall risk level takes into account the following five metrics: [daily new cases](/covid-risk-levels-metrics#daily-new-cases) (incidence), [infection rate](/covid-risk-levels-metrics#infection-rate) (Rt), [positive test rate](/covid-risk-levels-metrics#positive-test-rate), [ICU headroom used](/covid-risk-levels-metrics#icu-headroom-used), and [tracers hired](/covid-risk-levels-metrics#tracers-hired).\n\nIf a region’s risk level for daily new cases is green, then its overall risk level is green. Otherwise, a region’s overall risk level reflects the highest risk level across all five metrics.",
+      "sectionIntro": "### What does the overall risk level for a location mean?\n\nA location’s overall risk level takes into account the following five metrics: [daily new cases](/covid-risk-levels-metrics#daily-new-cases) (incidence), [infection rate](/covid-risk-levels-metrics#infection-rate) (Rt), [positive test rate](/covid-risk-levels-metrics#positive-test-rate), [ICU capacity](/covid-risk-levels-metrics#icu-headroom-used), and [tracers hired](/covid-risk-levels-metrics#tracers-hired).\n\nIf a region’s risk level for daily new cases is green, then its overall risk level is green. Otherwise, a region’s overall risk level reflects the highest risk level across all five metrics.",
       "questions": [
         {
           "question": "What does the deepest red color indicate?",
@@ -111,34 +111,34 @@
       ]
     },
     {
-      "sectionHeader": " ICU headroom used",
+      "sectionHeader": " ICU capacity",
       "sectionSubheader": "",
-      "sectionId": "icu-headroom-used",
-      "sectionIntro": "**ICU headroom used is the percentage of ICU beds available for COVID patients, after excluding those already in use by non-COVID patients.**",
+      "sectionId": "icu-capacity",
+      "sectionIntro": "**ICU capacity is the percentage of ICU beds available for COVID patients, after excluding those already in use by non-COVID patients.**",
       "questions": [
         {
-          "question": "Why did you choose ICU headroom used to measure hospital capacity?",
-          "questionId": "why-icu-headroom-to-measure-hospital-capacity",
-          "answer": "[The White House’s reopening plan](https://www.whitehouse.gov/openingamerica/), [AEI’s plan](https://www.aei.org/research-products/report/national-coronavirus-response-a-road-map-to-reopening/), and [Harvard University’s Safra Center for Ethic’s plan](https://ethics.harvard.edu/covid-roadmap) all note ICU headroom used as a key metric for reopening safely. Our metric measures the ability of an intensive care unit (ICU) to handle a surge of COVID patients in the case of an outbreak.\n\nWhen ICU capacity is reached, not only does that make it difficult for COVID ICU patients to receive care, but non-COVID ICU patients as well. This can lead to unnecessary deaths."
+          "question": "Why did you choose ICU capacity to measure hospital capacity?",
+          "questionId": "why-icu-capacity-to-measure-hospital-capacity",
+          "answer": "[The White House’s reopening plan](https://www.whitehouse.gov/openingamerica/), [AEI’s plan](https://www.aei.org/research-products/report/national-coronavirus-response-a-road-map-to-reopening/), and [Harvard University’s Safra Center for Ethic’s plan](https://ethics.harvard.edu/covid-roadmap) all note ICU capacity as a key metric for reopening safely. Our metric measures the ability of an intensive care unit (ICU) to handle a surge of COVID patients in the case of an outbreak.\n\nWhen ICU capacity is reached, not only does that make it difficult for COVID ICU patients to receive care, but non-COVID ICU patients as well. This can lead to unnecessary deaths."
         },
         {
           "question": "How is your metric different from ICU utilization that I see on my state’s dashboard?",
-          "questionId": "how-icu-headroom-different-from-state-dashboard",
-          "answer": "Our metric strives to capture the reality that many ICU beds will be occupied by non-COVID patients. Those beds can not be freed up, regardless of the severity of a current COVID outbreak. Even in the middle of a fall outbreak, it is not uncommon to see two-thirds of beds occupied by non-COVID patients, which is consistent with the occupancy rates estimated from pre-COVID times. We count as our denominator the number of available beds excluding those already occupied by non-COVID patients.\n\nIn the example below, there are three COVID patients, five non-COVID patients and 10 beds. A total ICU Utilization rate would be 80 percent (eight of 10 beds occupied). However, our metric focuses on COVID headroom which is 60 percent (three out of five COVID beds used). If there are no COVID patients in the ICU, our metric is 0.0 percent — even if there are non-COVID patients in the ICU.\n\n![ICU headroom diagram](/images_cms/icu-headroom-diagram.png \"ICU headroom diagram\")"
+          "questionId": "how-icu-capacity-different-from-state-dashboard",
+          "answer": "Our metric strives to capture the reality that many ICU beds will be occupied by non-COVID patients. Those beds can not be freed up, regardless of the severity of a current COVID outbreak. Even in the middle of a fall outbreak, it is not uncommon to see two-thirds of beds occupied by non-COVID patients, which is consistent with the occupancy rates estimated from pre-COVID times. We count as our denominator the number of available beds excluding those already occupied by non-COVID patients.\n\nIn the example below, there are three COVID patients, five non-COVID patients and 10 beds. A total ICU Utilization rate would be 80 percent (eight of 10 beds occupied). However, our metric focuses on COVID capacity which is 60 percent (three out of five COVID beds used). If there are no COVID patients in the ICU, our metric is 0.0 percent — even if there are non-COVID patients in the ICU.\n\n![ICU capacity diagram](/images_cms/icu-headroom-diagram.png \"ICU capacity diagram\")"
         },
         {
           "question": "Can I watch a video explainer?",
-          "questionId": "icu-headroom-video-explainer",
+          "questionId": "icu-capacity-video-explainer",
           "answer": "https://www.youtube.com/embed/ysdC49BPVRk"
         },
         {
-          "questionId": "icu-headroom-sources",
-          "question": "What are your data sources for ICU headroom used?",
+          "questionId": "icu-capacity-sources",
+          "question": "What are your data sources for ICU capacity?",
           "answer": "For states, we use COVID ICU hospitalization and ICU capacity data directly from the [Department of Health and Human Services] (https://healthdata.gov/dataset/covid-19-estimated-patient-impact-and-hospital-capacity-state).\n\nFor counties, we scrape COVID hospitalizations from official county-level dashboards where available, and disaggregate from the state-level numbers otherwise. We rely on data provided by [Covid Care Map](https://www.covidcaremap.org/) for county level estimates of ICU beds and historical non-COVID ICU utilization rates.\n\nIf you would like to learn more, check out [our data sources](https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit)."
         },
         {
-          "question": "How were the risk levels for ICU headroom used determined?",
-          "questionId": "icu-headroom-thresholds",
+          "question": "How were the risk levels for ICU capacity determined?",
+          "questionId": "icu-capacity-thresholds",
           "answer": "We chose our cutoffs based on [Resolve to Save Live’s policy recommendation](https://preventepidemics.org/wp-content/uploads/2020/04/COV020_WhenHowTightenFaucet_v3.pdf), which says ICU COVID cases should be able to double for states to consider opening."
         }
       ]
