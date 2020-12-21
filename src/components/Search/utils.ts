@@ -1,5 +1,6 @@
 import regions, {
   County,
+  State,
   getStateFips,
   Region,
   MetroArea,
@@ -27,11 +28,13 @@ export function getLocationIconFillColor(region: Region) {
   If on location page, should only show counties within state.
 */
 export function getFilterLimit(region?: Region) {
-  if (region) {
-    // TODO (chelsi): use same logic as state/county pages (return # of counties in metro?)
-    if (region instanceof MetroArea) {
-      return 20;
-    }
+  if (!region) {
+    return regions.states.length;
+  }
+
+  if (region instanceof MetroArea) {
+    return Math.max(20, region.counties.length);
+  } else if (region instanceof State || region instanceof County) {
     const stateFips = getStateFips(region);
     const countiesInState = regions.counties.filter(county =>
       belongsToState(county, stateFips),
