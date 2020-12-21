@@ -8,7 +8,7 @@ describe('regions', () => {
 
   test('counties() returns all the counties', () => {
     const counties = regions.counties;
-    expect(counties).toHaveLength(3224);
+    expect(counties).toHaveLength(3223);
   });
 
   describe('findByFipsCode', () => {
@@ -134,11 +134,11 @@ describe('County', () => {
 describe('Metro Area', () => {
   const metro = regions.findByFipsCode('35620');
   test('fullName', () => {
-    expect(metro?.fullName).toBe('New York-Newark-Jersey City, NY-NJ-PA');
+    expect(metro?.fullName).toBe('New York metro area');
   });
 
   test('shortName', () => {
-    expect(metro?.shortName).toBe('New York-Newark-Jersey City');
+    expect(metro?.shortName).toBe('New York metro');
   });
 
   test('abbreviation', () => {

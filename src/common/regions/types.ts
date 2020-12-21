@@ -106,7 +106,7 @@ export class MetroArea extends Region {
     fipsCode: FipsCode,
     population: number,
     public counties: County[],
-    private stateCodeList: string[],
+    public states: State[],
   ) {
     super(name, urlSegment, fipsCode, population, RegionType.MSA);
   }
@@ -128,6 +128,6 @@ export class MetroArea extends Region {
   }
 
   get stateCodes() {
-    return this.stateCodeList.join('-');
+    return this.states.map(state => state.stateCode).join('-');
   }
 }
