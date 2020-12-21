@@ -207,9 +207,9 @@
       "category": "Disease science"
     },
     {
-      "term": "ICU headroom used",
-      "termId": "icu-headroom-used",
-      "definition": "ICU headroom used is the percentage of ICU beds available for COVID patients, after excluding those already in use by non-COVID patients. It is used to measure an Intensive Care Unit’s (ICU) ability to handle a surge of patients in the case of a COVID [outbreak](#outbreak). The ICU is the part of a hospital reserved for people who are very sick. Each bed is equipped with special equipment that regular hospital beds don’t have, and usually have one or two dedicated nurses to monitor each patient. \n\nICU headroom used is one of Covid Act Now’s main metrics for understanding COVID, as measuring and predicting ICU capacity gives a picture of whether hospitals can handle an increased load of new COVID cases without having to resort to [crisis standards of care](#crisis-standards-of-care).",
+      "term": "ICU capacity",
+      "termId": "icu-capacity",
+      "definition": "ICU capacity is the percentage of ICU beds available for COVID patients, after excluding those already in use by non-COVID patients. It is used to measure an Intensive Care Unit’s (ICU) ability to handle a surge of patients in the case of a COVID [outbreak](#outbreak). The ICU is the part of a hospital reserved for people who are very sick. Each bed is equipped with special equipment that regular hospital beds don’t have, and usually have one or two dedicated nurses to monitor each patient. \n\nICU capacity is one of Covid Act Now’s main metrics for understanding COVID, as measuring and predicting ICU capacity gives a picture of whether hospitals can handle an increased load of new COVID cases without having to resort to [crisis standards of care](#crisis-standards-of-care).",
       "category": "Metrics"
     },
     {
@@ -263,7 +263,7 @@
     {
       "term": "Nowcasting",
       "termId": "nowcasting",
-      "definition": "Nowcasting monitors the current state and trajectory of a disease. In the case of COVID, nowcasting provides an understanding of how COVID is evolving right now and in the near future. \n\nCovid Act Now’s five metrics — [daily new cases](#daily-new-cases), [infection rate](#infection-growth-rate), [test positivity](#test-positivity), [tracers hired](#contact-tracing), and [ICU headroom used](#icu-headroom) — are nowcasting tools that capture how your community is doing in the fight against COVID.",
+      "definition": "Nowcasting monitors the current state and trajectory of a disease. In the case of COVID, nowcasting provides an understanding of how COVID is evolving right now and in the near future. \n\nCovid Act Now’s five metrics — [daily new cases](#daily-new-cases), [infection rate](#infection-growth-rate), [test positivity](#test-positivity), [tracers hired](#contact-tracing), and [ICU capacity](#icu-headroom) — are nowcasting tools that capture how your community is doing in the fight against COVID.",
       "category": "Metrics"
     },
     {
@@ -467,7 +467,7 @@
     {
       "term": "Ventilator",
       "termId": "ventilator",
-      "definition": "A ventilator is a machine that helps patients breathe when they cannot do so on their own. \n\n* People whose lungs are severely damaged by COVID may use a ventilator because they cannot get enough oxygen on their own. \n* While ventilators allow lungs to heal, they are not in and of themselves a treatment. \n\nIntensive Care Unit (ICU) beds are equipped with ventilators, which may save the lives of the sickest COVID patients. [ICU Headroom](#icu-headroom) is one of Covid Act Now’s main metrics for understanding the state of COVID in a region, since measuring and predicting ICU capacity gives a picture of whether hospitals can handle an increased load of new COVID cases without having to resort to [crisis standards of care](#crisis-standards-of-care).",
+      "definition": "A ventilator is a machine that helps patients breathe when they cannot do so on their own. \n\n* People whose lungs are severely damaged by COVID may use a ventilator because they cannot get enough oxygen on their own. \n* While ventilators allow lungs to heal, they are not in and of themselves a treatment. \n\nIntensive Care Unit (ICU) beds are equipped with ventilators, which may save the lives of the sickest COVID patients. [ICU capacity](#icu-headroom) is one of Covid Act Now’s main metrics for understanding the state of COVID in a region, since measuring and predicting ICU capacity gives a picture of whether hospitals can handle an increased load of new COVID cases without having to resort to [crisis standards of care](#crisis-standards-of-care).",
       "category": "Treatment"
     },
     {
