@@ -30,10 +30,8 @@ import { getLocationFipsCodesForExplore } from './utils';
 import { ThirdWaveBanner } from 'components/Banner';
 import SearchAutocomplete from 'components/Search';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
-import {
-  getSearchAutocompleteLocations,
-  getFilterLimit,
-} from 'components/Search';
+import { getFilterLimit } from 'components/Search';
+import { getAutocompleteLocations } from 'common/regions';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -105,7 +103,7 @@ export default function HomePage() {
                 >
                   <SelectorWrapper>
                     <SearchAutocomplete
-                      locations={getSearchAutocompleteLocations()}
+                      locations={getAutocompleteLocations()}
                       filterLimit={getFilterLimit()}
                     />
                   </SelectorWrapper>

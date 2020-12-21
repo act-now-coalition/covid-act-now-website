@@ -169,6 +169,19 @@ async function main() {
       county.fullName,
     );
   }
+
+  // const metroAreas = regions.metroAreas.filter(hasLocationSummary);
+  // for (const metro of metroAreas) {
+  //   const stateCode = metro.stateCode.toLowerCase();
+  //   const relativeSiteUrl = `${metro.relativeSiteUrl}`;
+  //   const relativeImageUrl = `counties/${county.fipsCode}`;
+  //   await buildLocationPages(
+  //     builder,
+  //     relativeSiteUrl,
+  //     relativeImageUrl,
+  //     metro.fullName,
+  //   );
+  // }
 }
 
 class IndexPageBuilder {

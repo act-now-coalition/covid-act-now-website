@@ -1,11 +1,9 @@
 import regions, {
   County,
   getStateFips,
-  State,
   Region,
   MetroArea,
 } from 'common/regions';
-import { sortBy, partition } from 'lodash';
 import { LocationSummariesByFIPS } from 'common/location_summaries';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { COLOR_MAP } from 'common/colors';
@@ -13,49 +11,6 @@ import { COLOR_MAP } from 'common/colors';
 // Move somewhere more central:
 function belongsToState(county: County, stateFips: string | null) {
   return county.state.fipsCode === stateFips;
-}
-
-export function getSearchAutocompleteLocations(region?: Region) {
-  const allStates = regions.states;
-  const allCounties = regions.counties;
-  const allmetros = regions.metroAreas;
-
-  const sortedStates = sortBy(allStates, state => state.name);
-  const sortedCounties = sortBy(allCounties, county => county.name);
-  const sortedMetros = sortBy(allmetros, metro => metro.name);
-
-  // Homepage:
-  if (!region) {
-    return [...sortedStates, ...sortedMetros, ...sortedCounties];
-  }
-
-  // TODO (chelsi): use same logic as state/county pages? (return counties in metro first, and then?)
-  if (region instanceof MetroArea) {
-    const [countiesInMetro, otherCounties] = partition(sortedCounties, county =>
-      region.counties.includes(county),
-    );
-    return [
-      ...countiesInMetro,
-      ...sortedStates,
-      ...otherCounties,
-      ...sortedMetros,
-    ];
-  }
-
-  if (region instanceof State || region instanceof County) {
-    const stateFips = getStateFips(region);
-    const [stateCounties, otherCounties] = partition(sortedCounties, county =>
-      belongsToState(county, stateFips),
-    );
-    return [
-      ...stateCounties,
-      ...sortedStates,
-      ...sortedMetros,
-      ...otherCounties,
-    ];
-  } else {
-    return [];
-  }
 }
 
 /* To get color of location icon in dropdown menu:  */
@@ -82,6 +37,7 @@ export function getFilterLimit(region?: Region) {
       belongsToState(county, stateFips),
     );
     return countiesInState.length;
+  } else {
+    return regions.states.length;
   }
-  return regions.states.length;
 }

@@ -1,6 +1,6 @@
 import moment from 'moment';
 import urlJoin from 'url-join';
-import { deburr, flatten, isNumber, max, range, words } from 'lodash';
+import { concat, deburr, flatten, isNumber, max, range, words } from 'lodash';
 import { color } from 'd3-color';
 import { schemeCategory10 } from 'd3-scale-chromatic';
 import { fetchProjectionsRegion } from 'common/utils/model';
@@ -15,9 +15,9 @@ import regions, {
   Region,
   RegionType,
   State,
+  getAutocompleteLocations,
 } from 'common/regions';
 import { fail } from 'assert';
-import { getSearchAutocompleteLocations } from 'components/Search';
 
 /** Common interface to represent real Projection objects as well as aggregated projections. */
 interface ProjectionLike {
@@ -422,7 +422,8 @@ export function getSubtitle(
 
 export function getExploreAutocompleteLocations(locationFips: string) {
   const currentLocation = regions.findByFipsCode(locationFips)!;
-  return currentLocation ? getSearchAutocompleteLocations(currentLocation) : [];
+  const locations = getAutocompleteLocations(currentLocation);
+  return concat(regions.customAreas, locations);
 }
 
 /**
