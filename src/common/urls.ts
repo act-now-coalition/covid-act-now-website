@@ -1,6 +1,5 @@
 import ShareImageUrlJSON from 'assets/data/share_images_url.json';
 import { assert } from 'common/utils';
-import { County } from './locations';
 import urlJoin from 'url-join';
 import * as QueryString from 'query-string';
 import moment from 'moment';
@@ -15,20 +14,6 @@ import { Region } from './regions';
 const SHARING_ID_QUERY_PARAM = 's';
 const SHARING_ID = sharingId();
 const SHARING_ID_QUERYSTRING = `?${SHARING_ID_QUERY_PARAM}=${SHARING_ID}`;
-
-/**
- * Generates the path for the homepage or a (state / county) location page.
- */
-function getPagePath(stateId?: string, county?: County): string {
-  if (stateId && county) {
-    // county page
-    return `/us/${stateId.toLowerCase()}/county/${county.county_url_name}`;
-  } else if (stateId) {
-    return `/us/${stateId.toLowerCase()}`;
-  }
-
-  return '/';
-}
 
 /**
  * Generates the URL for the homepage or a (state / county) location page.
@@ -67,9 +52,8 @@ export function getRecommendationsShareUrl(region: Region): string {
 }
 
 export function getComparePageUrl(
-  stateId: string | undefined,
-  county: County | undefined,
   compareShareId: string,
+  region?: Region,
 ): string {
   // Shared Compare URLs are of the form https://covidactnow.org/compare/<id>
   // in order to have predictable IDs (so we can pre-generate index.html pages
@@ -80,11 +64,13 @@ export function getComparePageUrl(
   let url = urlJoin(getPageBaseUrl(), 'share', compareShareId);
   let params: { [key: string]: unknown } = {};
   ensureSharingIdInQueryParams(params);
-  params['redirectTo'] = urlJoin(
-    getPagePath(stateId, county),
-    'compare',
-    compareShareId,
-  );
+  if (region) {
+    params['redirectTo'] = urlJoin(
+      region.relativeUrl,
+      'compare',
+      compareShareId,
+    );
+  }
 
   // NOTE: Trailing '/' is significant so we hit the index.html page with correct meta tags and
   // so we don't get redirected and lose the query params.

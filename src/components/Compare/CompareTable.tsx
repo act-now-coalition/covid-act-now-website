@@ -78,7 +78,6 @@ const CompareTable = (props: {
     sliderValue,
     setSliderValue,
     stateId,
-    county,
     homepageScope,
     setHomepageScope,
     homepageSliderValue,
@@ -200,9 +199,7 @@ const CompareTable = (props: {
   const showViewMore = amountDisplayed !== sortedLocationsArr.length;
 
   const getShareUrl = () =>
-    props
-      .createCompareShareId()
-      .then(id => `${getComparePageUrl(stateId, county, id)}`);
+    props.createCompareShareId().then(id => `${getComparePageUrl(id, region)}`);
   const getDownloadImageUrl = () =>
     props.createCompareShareId().then(id => `${getCompareShareImageUrl(id)}`);
 
