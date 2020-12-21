@@ -152,12 +152,62 @@
     }
   ],
   "pageHeader": "Risk levels & key metrics",
-  "pageIntro": "Covid Act Now has five key metrics to assess for every state, county, and metro area, three of which are used to determine a location's overall risk level. Below you will learn how we calculate and source each metric and overall risk.",
+  "pageIntro": "Covid Act Now has five key metrics to assess for every state, county, and metro area, three of which are used to determine a location's overall risk level. Below you will learn how each metric and overall risk is calculated and sourced.",
   "frameworkLogos": [
     {
       "image": "/images_cms/the-rockefeller-foundation-logo.png",
       "url": "https://www.rockefellerfoundation.org/",
       "altText": "The Rockefeller Foundation logo"
+    },
+    {
+      "altText": "Bloomberg Philanthropies logo",
+      "image": "/images_cms/bloomberg-philanthropies-logo.png",
+      "url": "https://www.bloomberg.org/"
+    },
+    {
+      "altText": "Georgetown University logo",
+      "image": "/images_cms/georgetown-university-logo.png",
+      "url": "https://www.georgetown.edu/"
+    },
+    {
+      "altText": "University of Pennsylvania logo",
+      "image": "/images_cms/university-of-pennsylvania-logo.png",
+      "url": "https://www.upenn.edu/"
+    },
+    {
+      "altText": "University of Washington logo",
+      "image": "/images_cms/university-of-washington-logo.png",
+      "url": "https://www.washington.edu/"
+    },
+    {
+      "altText": "University of Minnesota logo ",
+      "url": "https://twin-cities.umn.edu/",
+      "image": "/images_cms/university-of-minnesota-logo.png"
+    },
+    {
+      "altText": "University of Louisville logo",
+      "image": "/images_cms/university-of-louisville-logo.png",
+      "url": "http://louisville.edu/"
+    },
+    {
+      "altText": "Microsoft AI for Health & Microsoft Research logo",
+      "image": "/images_cms/microsoft-logo.png",
+      "url": "https://www.microsoft.com/en-us/ai/ai-for-health"
+    },
+    {
+      "altText": "Apple University logo ",
+      "image": "/images_cms/apple-logo.png",
+      "url": "https://www.apple.com/"
+    },
+    {
+      "altText": "Resolve to Save Lives logo ",
+      "image": "/images_cms/resolve-to-save-lives-logo.png",
+      "url": "https://resolvetosavelives.org/"
+    },
+    {
+      "altText": "The Nuclear Threat Initiative logo ",
+      "image": "/images_cms/nuclear-threat-initiative-logo.png",
+      "url": "https://www.nti.org/"
     }
   ]
 }
