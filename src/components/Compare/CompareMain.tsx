@@ -150,8 +150,6 @@ const CompareMain = (props: {
     }
   }
 
-  const locationPageViewMoreCopy =
-    region && getLocationPageViewMoreCopy(geoScope, countyTypeToView, region);
   const locationPageLocationsForCompare = getLocationPageLocations();
 
   function getFinalLocations(region?: Region) {
@@ -166,9 +164,9 @@ const CompareMain = (props: {
 
   const locations = getFinalLocations(region);
 
-  const viewMoreCopy = !region
-    ? homepageViewMoreCopy
-    : locationPageViewMoreCopy;
+  const viewMoreCopy = region
+    ? getLocationPageViewMoreCopy(geoScope, countyTypeToView, region)
+    : homepageViewMoreCopy;
 
   const [showModal, setShowModal] = useState(false);
   const [showFaqModal, setShowFaqModal] = useState(false);
