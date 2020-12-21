@@ -13,6 +13,7 @@ const ICU_HEADROOM_OVERRIDES: Array<string> = [];
 /**
  * Encapsulates all of the data related to ICU Headroom (used to generate our
  * copy above the chart).
+ * TODO(michael): Rename all internal references to "headroom", remove extra metadata, etc.
  */
 export interface ICUHeadroomInfo {
   metricSeries: Array<number | null>;
@@ -67,7 +68,11 @@ export function calcICUHeadroom(
   }
 
   const icuHeadroomDetails = metrics.icuHeadroomDetails;
-  if (!icuHeadroomDetails || metrics.icuHeadroomRatio === null) {
+  if (
+    !icuHeadroomDetails ||
+    metrics.icuHeadroomRatio === null ||
+    metrics.icuCapacityRatio === null
+  ) {
     return null;
   }
   // Use capacity from the timeseries if it's within the last 7 days, else use the
@@ -100,8 +105,8 @@ export function calcICUHeadroom(
   }
 
   return {
-    metricSeries: metricsTimeseries.map(row => row && row.icuHeadroomRatio),
-    metricValue: metrics.icuHeadroomRatio,
+    metricSeries: metricsTimeseries.map(row => row && row.icuCapacityRatio),
+    metricValue: metrics.icuCapacityRatio,
     overrideInPlace,
     totalBeds: finalTotalBeds,
     covidPatients: icuHeadroomDetails.currentIcuCovid,

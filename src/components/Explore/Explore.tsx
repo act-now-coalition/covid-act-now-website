@@ -51,6 +51,7 @@ import { ScreenshotReady } from 'components/Screenshot';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 import { IndigenousDataCheckbox } from 'components/IndigenousPopulationsFeature';
 import regions, { Region, useRegionFromParams } from 'common/regions';
+import { LocationPageSectionHeader } from 'components/LocationPage/ChartsHolder.style';
 
 const MARGIN_SINGLE_LOCATION = 20;
 const MARGIN_STATE_CODE = 60;
@@ -294,8 +295,8 @@ const Explore: React.FunctionComponent<{
   return (
     <Styles.Container ref={exploreRef}>
       <Grid container spacing={1}>
-        <Grid item sm={9} xs={12}>
-          <Styles.Heading variant="h4">{title}</Styles.Heading>
+        <Grid container item sm={9} xs={12} alignContent="center">
+          <LocationPageSectionHeader>{title}</LocationPageSectionHeader>
         </Grid>
         <Grid item sm xs={12}>
           <Styles.ShareBlock>

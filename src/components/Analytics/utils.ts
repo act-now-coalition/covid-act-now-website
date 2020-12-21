@@ -41,6 +41,7 @@ export enum EventCategory {
   GLOSSARY = 'glossary',
   FAQ = 'faq',
   METRIC_EXPLAINERS = 'metric explainers',
+  EXPOSURE_NOTIFICATIONS = 'exposure notifications',
 }
 
 /**
@@ -58,6 +59,7 @@ export enum EventAction {
   SUBSCRIBE = 'subscribe',
   ALERTS_UNSUBSCRIBE = 'alertsUnsubscribe',
   EXPAND = 'expand',
+  REDIRECT = 'redirect',
 }
 
 /**
