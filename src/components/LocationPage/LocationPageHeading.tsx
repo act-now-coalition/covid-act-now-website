@@ -1,5 +1,6 @@
 import React from 'react';
 import { Region, State, County, MetroArea } from 'common/regions';
+import { startCase } from 'lodash';
 import * as Styles from './LocationPageHeading.style';
 
 const LocationPageHeading: React.FC<{
@@ -33,7 +34,7 @@ const LocationPageHeading: React.FC<{
     return (
       <Styles.Container>
         <Styles.HeaderTitle $isEmbed={isEmbed}>
-          <strong>{region.fullName}</strong>
+          <strong>{startCase(region.fullName)}</strong>
           {', '}
           <Styles.HeaderStateCode>{region.stateCodes}</Styles.HeaderStateCode>
         </Styles.HeaderTitle>
