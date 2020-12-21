@@ -438,6 +438,7 @@ export function getSubtitle(
 export function getAutocompleteLocations(locationFips: string) {
   const states = regions.states;
   const allCounties = regions.counties;
+  const metroAreas = regions.metroAreas;
 
   const currentLocation = regions.findByFipsCode(locationFips)!;
   const stateCode = getStateCode(currentLocation);
@@ -457,12 +458,14 @@ export function getAutocompleteLocations(locationFips: string) {
         ...regions.customAreas,
         ...sortedStates,
         ...sortedStateCounties,
+        ...metroAreas,
         ...sortedOtherCounties,
       ]
     : [
         ...regions.customAreas,
         ...sortedStateCounties,
         ...sortedStates,
+        ...metroAreas,
         ...sortedOtherCounties,
       ];
 }
