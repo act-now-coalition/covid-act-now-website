@@ -101,7 +101,16 @@ function buildCounties(
   );
 }
 
-function buildMetroAreas(countiesByFips: Dictionary<County>): MetroArea[] {
+function buildMetroAreas(
+  countiesByFips: Dictionary<County>,
+  statesByFips: Dictionary<State>,
+): MetroArea[] {
+  const statesByCode = chain(statesByFips)
+    .values()
+    .map(state => [state.stateCode, state])
+    .fromPairs()
+    .value();
+
   return chain(metroAreaDataset.metro_areas)
     .map(metro => {
       const counties: County[] = metro.countyFipsCodes
@@ -110,13 +119,18 @@ function buildMetroAreas(countiesByFips: Dictionary<County>): MetroArea[] {
 
       const [name, statesText] = metro.cbsaTitle.split(', ');
       const stateCodes = statesText.split('-');
+
+      const states = stateCodes
+        .map(stateCode => statesByCode[stateCode])
+        .filter(state => state);
+
       return new MetroArea(
         name,
         metro.urlSegment,
         metro.cbsaCode,
         metro.population,
         counties,
-        stateCodes,
+        states,
       );
     })
     .value();
@@ -138,7 +152,7 @@ export const countiesByFips = fromPairs(
   counties.map(county => [county.fipsCode, county]),
 );
 
-const metroAreas = buildMetroAreas(countiesByFips);
+const metroAreas = buildMetroAreas(countiesByFips, statesByFips);
 export const metroAreasByFips = fromPairs(
   metroAreas.map(metro => [metro.fipsCode, metro]),
 );
