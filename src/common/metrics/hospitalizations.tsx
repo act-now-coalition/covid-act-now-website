@@ -165,7 +165,7 @@ function renderDisclaimer(projections: Projections): React.ReactElement {
       instead of "ICU headroom used" as our primary ICU metric. Learn more about
       our{' '}
       <ExternalLink href="/covid-risk-levels-metrics#icu-capacity-used">
-        ICU Capacity methodology
+        ICU capacity methodology
       </ExternalLink>
     </Fragment>
   );
