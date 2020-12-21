@@ -100,8 +100,6 @@ export class County extends Region {
  * Metropolitan Statistical Areas
  */
 export class MetroArea extends Region {
-  private stateCodeList: string[];
-
   constructor(
     name: string,
     urlSegment: string,
@@ -111,7 +109,6 @@ export class MetroArea extends Region {
     public states: State[],
   ) {
     super(name, urlSegment, fipsCode, population, RegionType.MSA);
-    this.stateCodeList = states.map(state => state.stateCode);
   }
 
   get fullName() {
@@ -131,6 +128,6 @@ export class MetroArea extends Region {
   }
 
   get stateCodes() {
-    return this.stateCodeList.join('-');
+    return this.states.map(state => state.stateCode).join('-');
   }
 }
