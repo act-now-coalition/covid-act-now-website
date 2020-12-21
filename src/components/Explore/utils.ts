@@ -1,15 +1,6 @@
 import moment from 'moment';
 import urlJoin from 'url-join';
-import {
-  deburr,
-  flatten,
-  isNumber,
-  max,
-  range,
-  words,
-  partition,
-  sortBy,
-} from 'lodash';
+import { deburr, flatten, isNumber, max, range, words } from 'lodash';
 import { color } from 'd3-color';
 import { schemeCategory10 } from 'd3-scale-chromatic';
 import { fetchProjectionsRegion } from 'common/utils/model';
@@ -20,13 +11,13 @@ import { SeriesType, Series } from './interfaces';
 import AggregationsJSON from 'assets/data/aggregations.json';
 import regions, {
   County,
-  getStateCode,
   MetroArea,
   Region,
   RegionType,
   State,
 } from 'common/regions';
 import { fail } from 'assert';
+import { getSearchAutocompleteLocations } from 'components/Search';
 
 /** Common interface to represent real Projection objects as well as aggregated projections. */
 interface ProjectionLike {
@@ -429,45 +420,9 @@ export function getSubtitle(
     : `${metricName} ${textPer100k} in ${getLocationNames(regions)}`;
 }
 
-/**
- * Returns a list of locations for the autocomplete component. We try to show
- * the most relevant options first. For a state, we show states, counties in
- * the state and then other counties. For a county, we show counties in the
- * state, then states and then other counties.
- */
-export function getAutocompleteLocations(locationFips: string) {
-  const states = regions.states;
-  const allCounties = regions.counties;
-  const metroAreas = regions.metroAreas;
-
+export function getExploreAutocompleteLocations(locationFips: string) {
   const currentLocation = regions.findByFipsCode(locationFips)!;
-  const stateCode = getStateCode(currentLocation);
-
-  const [stateCounties, otherCounties] = partition(
-    allCounties,
-    county => county.stateCode === stateCode,
-  );
-
-  const sortedStates = sortBy(states, location => location.name);
-  const sortedStateCounties = sortBy(stateCounties, location => location.name);
-  const sortedOtherCounties = sortBy(otherCounties, location => location.name);
-
-  // TODO(michael): Where should aggregations go in the list?
-  return currentLocation.regionType === RegionType.STATE
-    ? [
-        ...regions.customAreas,
-        ...sortedStates,
-        ...sortedStateCounties,
-        ...metroAreas,
-        ...sortedOtherCounties,
-      ]
-    : [
-        ...regions.customAreas,
-        ...sortedStateCounties,
-        ...sortedStates,
-        ...metroAreas,
-        ...sortedOtherCounties,
-      ];
+  return currentLocation ? getSearchAutocompleteLocations(currentLocation) : [];
 }
 
 /**
