@@ -31,7 +31,7 @@ import { ThirdWaveBanner } from 'components/Banner';
 import SearchAutocomplete from 'components/Search';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { getFilterLimit } from 'components/Search';
-import { getAutocompleteLocations } from 'common/regions';
+import { getAutocompleteRegions } from 'common/regions';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -103,7 +103,7 @@ export default function HomePage() {
                 >
                   <SelectorWrapper>
                     <SearchAutocomplete
-                      locations={getAutocompleteLocations()}
+                      locations={getAutocompleteRegions()}
                       filterLimit={getFilterLimit()}
                     />
                   </SelectorWrapper>

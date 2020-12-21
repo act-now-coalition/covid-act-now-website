@@ -7,7 +7,7 @@ export function belongsToState(county: County, stateFips: string | null) {
   return county.state.fipsCode === stateFips;
 }
 
-export function getAutocompleteLocations(region?: Region) {
+export function getAutocompleteRegions(region?: Region) {
   const { states, metroAreas, counties } = regions;
 
   // Homepage

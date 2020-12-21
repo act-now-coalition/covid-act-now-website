@@ -15,7 +15,7 @@ import regions, {
   Region,
   RegionType,
   State,
-  getAutocompleteLocations,
+  getAutocompleteRegions,
 } from 'common/regions';
 import { fail } from 'assert';
 
@@ -422,7 +422,7 @@ export function getSubtitle(
 
 export function getExploreAutocompleteLocations(locationFips: string) {
   const currentLocation = regions.findByFipsCode(locationFips)!;
-  const locations = getAutocompleteLocations(currentLocation);
+  const locations = getAutocompleteRegions(currentLocation);
   return concat(regions.customAreas, locations);
 }
 
