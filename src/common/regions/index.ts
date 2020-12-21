@@ -5,3 +5,4 @@ export default regions;
 export { getStateName, getStateCode, getStateFips };
 export * from './types';
 export * from './region_hooks';
+export * from './utils';

@@ -1,10 +1,7 @@
 import React from 'react';
-import regions from 'common/regions';
+import regions, { getAutocompleteRegions } from 'common/regions';
 import SearchAutocomplete from './SearchAutocomplete';
-import {
-  getSearchAutocompleteLocations,
-  getFilterLimit,
-} from 'components/Search';
+import { getFilterLimit } from 'components/Search';
 
 export default {
   title: 'Shared Components/SearchAutocomplete',
@@ -12,7 +9,7 @@ export default {
 };
 
 export const Home = () => {
-  const locations = getSearchAutocompleteLocations(undefined);
+  const locations = getAutocompleteRegions(undefined);
   return (
     <SearchAutocomplete locations={locations} filterLimit={getFilterLimit()} />
   );
@@ -20,7 +17,7 @@ export const Home = () => {
 
 export const State = () => {
   const region = regions.findByFipsCodeStrict('02');
-  const locations = getSearchAutocompleteLocations(region);
+  const locations = getAutocompleteRegions(region);
   return (
     <SearchAutocomplete
       locations={locations}
@@ -31,7 +28,7 @@ export const State = () => {
 
 export const County = () => {
   const region = regions.findByFipsCodeStrict('53033');
-  const locations = getSearchAutocompleteLocations(region);
+  const locations = getAutocompleteRegions(region);
   return (
     <SearchAutocomplete
       locations={locations}
@@ -42,7 +39,7 @@ export const County = () => {
 
 export const MetroArea = () => {
   const region = regions.findByFipsCodeStrict('14460');
-  const locations = getSearchAutocompleteLocations(region);
+  const locations = getAutocompleteRegions(region);
   return (
     <SearchAutocomplete
       locations={locations}
