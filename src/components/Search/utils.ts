@@ -39,7 +39,11 @@ export function getFilterLimit(region?: Region) {
     const countiesInState = regions.counties.filter(county =>
       belongsToState(county, stateFips),
     );
-    return countiesInState.length;
+    if (countiesInState.length) {
+      return countiesInState.length;
+    } else {
+      return regions.states.length;
+    }
   } else {
     return regions.states.length;
   }
