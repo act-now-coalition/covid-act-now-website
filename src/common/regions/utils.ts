@@ -7,6 +7,14 @@ export function belongsToState(county: County, stateFips: string | null) {
   return county.state.fipsCode === stateFips;
 }
 
+/**
+ * Returns a list of regions in the order that is most relevant given the
+ * region passed as argument
+ *
+ * Homepage (region is undefined): states, metros, counties
+ * Metro: counties in metro, states, other counties, metros
+ * State and County: counties in the state, states, metros, other counties
+ */
 export function getAutocompleteRegions(region?: Region) {
   const { states, metroAreas, counties } = regions;
 
