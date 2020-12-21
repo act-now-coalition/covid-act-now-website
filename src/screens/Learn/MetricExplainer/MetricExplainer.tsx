@@ -99,7 +99,7 @@ function getThermometer(sectionId: string) {
     'daily-new-cases': Metric.CASE_DENSITY,
     'infection-rate': Metric.CASE_GROWTH_RATE,
     'positive-test-rate': Metric.POSITIVE_TESTS,
-    'icu-headroom-used': Metric.HOSPITAL_USAGE,
+    'icu-capacity-used': Metric.HOSPITAL_USAGE,
     'tracers-hired': Metric.CONTACT_TRACING,
   };
 

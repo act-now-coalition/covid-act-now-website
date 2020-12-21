@@ -39,6 +39,8 @@ const DISABLED_TEST_POSITIVITY = new DisabledFips([
 
 const DISABLED_ICU = new DisabledFips([
   '47', // https://trello.com/c/aEd07i5Y/701-disabled-tn-icu-headroom
+  // TODO(michael): Reenable counties / metros once we QA the data.
+  /\d{3,}/,
 ]);
 
 const DISABLED_CONTACT_TRACING = new DisabledFips([]);
@@ -133,7 +135,6 @@ export class Projection {
   readonly currentCumulativeDeaths: number | null;
   readonly currentCumulativeCases: number | null;
   readonly currentContactTracerMetric: number | null;
-  readonly stateCode: string;
   readonly currentCaseDensity: number | null;
   readonly currentDailyDeaths: number | null;
 
@@ -182,7 +183,6 @@ export class Projection {
     this.actualTimeseries = actualTimeseries;
     this.dates = dates;
 
-    this.stateCode = summaryWithTimeseries.state;
     this.isCounty = parameters.isCounty;
     this.totalPopulation = summaryWithTimeseries.population;
     this.fips = summaryWithTimeseries.fips;

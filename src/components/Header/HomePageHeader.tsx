@@ -30,7 +30,7 @@ const HomePageHeader = (props: { indicatorsLinkOnClick: () => void }) => {
               Our map shows risk levels for <strong>50 states</strong> and{' '}
               <strong>3,200 counties</strong> using{' '}
               <ClickableCopy onClick={props.indicatorsLinkOnClick || noop}>
-                5 key metrics
+                3 key metrics
               </ClickableCopy>
               . Last updated on {moment.utc(lastUpdatedDate).format('MMMM D')}.
             </HeaderSubCopyItem>
