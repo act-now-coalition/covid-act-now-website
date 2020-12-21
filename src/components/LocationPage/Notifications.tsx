@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { some } from 'lodash';
 import ExternalLink from 'components/ExternalLink';
 import {
   Copy,
@@ -13,7 +14,7 @@ import { BANNER_COPY } from 'components/Banner/ThirdWaveBanner';
 import HospitalizationsAlert, {
   isHospitalizationsPeak,
 } from './HospitalizationsAlert';
-import { State, County, Region } from 'common/regions';
+import { State, County, Region, MetroArea } from 'common/regions';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
 
 const EXPOSURE_NOTIFICATIONS_STATE_FIPS = [
@@ -150,6 +151,10 @@ export function showExposureNotifications(region: Region) {
     return EXPOSURE_NOTIFICATIONS_STATE_FIPS.includes(region.state.fipsCode);
   } else if (region instanceof State) {
     return EXPOSURE_NOTIFICATIONS_STATE_FIPS.includes(region.fipsCode);
+  } else if (region instanceof MetroArea) {
+    return some(region.states, state =>
+      EXPOSURE_NOTIFICATIONS_STATE_FIPS.includes(state.fipsCode),
+    );
   } else {
     return false;
   }

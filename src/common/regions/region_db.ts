@@ -24,9 +24,9 @@ class RegionDB {
     private metroAreasByFips: Dictionary<MetroArea>,
     private customAreasByFips: Dictionary<State>,
   ) {
-    this.states = values(statesByFips);
-    this.counties = values(countiesByFips);
-    this.metroAreas = values(metroAreasByFips);
+    this.states = sortBy(values(statesByFips), state => state.name);
+    this.counties = sortBy(values(countiesByFips), county => county.name);
+    this.metroAreas = sortBy(values(metroAreasByFips), metro => metro.name);
     this.customAreas = values(customAreasByFips);
 
     this.regionsByFips = {
@@ -88,7 +88,7 @@ class RegionDB {
   }
 
   all(): Region[] {
-    return [...this.states, ...this.counties];
+    return [...this.states, ...this.counties, ...this.metroAreas];
   }
 
   topCountiesByPopulation(limit: number): County[] {

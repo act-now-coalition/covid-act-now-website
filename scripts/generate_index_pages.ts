@@ -12,7 +12,7 @@ import process from 'process';
 import _ from 'lodash';
 import urlJoin from 'url-join';
 import ShareImageUrlJSON from '../src/assets/data/share_images_url.json';
-import regions, { County } from '../src/common/regions';
+import regions, { Region } from '../src/common/regions';
 import * as urls from '../src/common/urls';
 import { getNextSharedComponentId } from '../src/common/sharing';
 
@@ -21,8 +21,8 @@ import { getNextSharedComponentId } from '../src/common/sharing';
 import { LocationSummariesByFIPS } from '../src/common/location_summaries';
 import { ALL_METRICS, getMetricName } from '../src/common/metric';
 
-function hasLocationSummary(county: County) {
-  return LocationSummariesByFIPS[county.fipsCode] !== undefined;
+function hasLocationSummary(region: Region) {
+  return LocationSummariesByFIPS[region.fipsCode] !== undefined;
 }
 
 // We pre-generate the next 2000 IDs each time we do a deploy which should be
@@ -146,8 +146,11 @@ async function main() {
 
   for (const state of regions.states) {
     const stateCode = state.stateCode.toLowerCase();
-    const relativeImageUrl = `/states/${state.stateCode.toLowerCase()}`;
+    // TODO(chris): Change this url to be the updated url (use `state.relativeUrl`). Currently
+    // any location page link shared from the new URL structure will try to access an index page at
+    // the new url path, but that structure does not exist so the images default to the default image.
     const relativeSiteUrl = `/us/${stateCode}/`;
+    const relativeImageUrl = `/states/${state.stateCode.toLowerCase()}`;
     await buildLocationPages(
       builder,
       relativeSiteUrl,
@@ -160,6 +163,9 @@ async function main() {
 
   for (const county of counties) {
     const stateCode = county.stateCode.toLowerCase();
+    // TODO(chris): Change this url to be the updated url (use `county.relativeUrl`). Currently
+    // any location page link shared from the new URL structure will try to access an index page at
+    // the new url path, but that structure does not exist so the images default to the default image.
     const relativeSiteUrl = `/us/${stateCode}/county/${county.urlSegment}`;
     const relativeImageUrl = `counties/${county.fipsCode}`;
     await buildLocationPages(
@@ -167,6 +173,19 @@ async function main() {
       relativeSiteUrl,
       relativeImageUrl,
       county.fullName,
+    );
+  }
+
+  const metros = regions.metroAreas.filter(hasLocationSummary);
+
+  for (const metro of metros) {
+    const relativeSiteUrl = `/${metro.relativeUrl}`;
+    const relativeImageUrl = `metros/${metro.fipsCode}`;
+    await buildLocationPages(
+      builder,
+      relativeSiteUrl,
+      relativeImageUrl,
+      metro.fullName,
     );
   }
 }

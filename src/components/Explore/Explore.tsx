@@ -32,7 +32,7 @@ import {
   getChartUrl,
   getSocialQuote,
   getLocationNames,
-  getAutocompleteLocations,
+  getExploreAutocompleteLocations,
   getChartSeries,
   getMetricName,
   getSeriesLabel,
@@ -160,7 +160,7 @@ const Explore: React.FunctionComponent<{
     [],
   );
   const autocompleteLocations = useMemo(
-    () => getAutocompleteLocations(initialFipsList[0]),
+    () => getExploreAutocompleteLocations(initialFipsList[0]),
     [initialFipsList],
   );
 

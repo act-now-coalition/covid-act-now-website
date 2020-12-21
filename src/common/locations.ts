@@ -5,6 +5,7 @@ import { assert } from './utils';
 import countyAdjacencyMsa from './data/county_adjacency_msa.json';
 import collegesByFips from './data/colleges_by_fips.json';
 import { REVERSED_STATES, STATES as STATES_MAP } from 'common';
+// import CountyMap from 'components/CountyMap/CountyMap';
 
 export interface AdjacencyData {
   [fips: string]: {

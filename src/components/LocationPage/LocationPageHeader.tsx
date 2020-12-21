@@ -30,6 +30,7 @@ import {
   SectionColumn,
   LevelDescription,
 } from 'components/LocationPage/LocationPageHeader.style';
+import { MetroArea } from 'common/regions';
 
 const noop = () => {};
 
@@ -93,7 +94,13 @@ const LocationPageHeader = (props: {
               <SectionColumn>
                 <ColumnTitle>Covid risk level</ColumnTitle>
                 <LevelDescription>{levelInfo.summary}</LevelDescription>
-                <Copy>{levelInfo.detail(region.name)}</Copy>
+                <Copy>
+                  {levelInfo.detail(
+                    region instanceof MetroArea
+                      ? region.shortName
+                      : region.name,
+                  )}
+                </Copy>
               </SectionColumn>
             </SectionHalf>
             <SectionHalf>

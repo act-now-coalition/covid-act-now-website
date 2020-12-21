@@ -2,6 +2,7 @@ import urlJoin from 'url-join';
 import { getAbbreviatedCounty } from 'common/utils/compare';
 
 export type FipsCode = string;
+export type ZipCode = string;
 
 export enum RegionType {
   COUNTY = 'county',
@@ -69,6 +70,7 @@ export class County extends Region {
     public readonly state: State,
     public readonly cityNames: string[],
     private readonly adjacentCountiesFips: FipsCode[],
+    public readonly zipCodes: ZipCode[],
   ) {
     super(name, urlSegment, fipsCode, population, RegionType.COUNTY);
   }
@@ -104,17 +106,17 @@ export class MetroArea extends Region {
     fipsCode: FipsCode,
     population: number,
     public counties: County[],
-    private stateCodeList: string[],
+    public states: State[],
   ) {
     super(name, urlSegment, fipsCode, population, RegionType.MSA);
   }
 
   get fullName() {
-    return `${this.name}, ${this.stateCodes}`;
+    return `${this.name.split('-')[0]} metro area`;
   }
 
   get shortName() {
-    return this.name;
+    return `${this.name.split('-')[0]} metro`;
   }
 
   get abbreviation() {
@@ -126,6 +128,6 @@ export class MetroArea extends Region {
   }
 
   get stateCodes() {
-    return this.stateCodeList.join('-');
+    return this.states.map(state => state.stateCode).join('-');
   }
 }

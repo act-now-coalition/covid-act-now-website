@@ -1,13 +1,14 @@
 import React from 'react';
-import * as States from './index';
-import { CircleWrapper, StateWrapper } from './Circle.style';
+import { CircleWrapper, StateWrapper } from 'components/StateSvg/Circle.style';
+import RoomIcon from '@material-ui/icons/Room';
 
-const CircleStateAction = ({ state, ratio = 1, fillColor }) => {
-  const State = States[state];
-
+// Taken from components/StateSvg/Circle
+const MetroItemIcon: React.FC<{ ratio: number; fillColor: string }> = ({
+  ratio,
+  fillColor,
+}) => {
   const DEFAULT_SIZE = 64;
   const DEFAULT_CIRCLE_RADIUS = 32;
-
   const size = ratio * DEFAULT_SIZE;
 
   return (
@@ -31,10 +32,10 @@ const CircleStateAction = ({ state, ratio = 1, fillColor }) => {
         </svg>
       </div>
       <StateWrapper size={size} ratio={ratio}>
-        <State />
+        <RoomIcon />
       </StateWrapper>
     </CircleWrapper>
   );
 };
 
-export default CircleStateAction;
+export default MetroItemIcon;

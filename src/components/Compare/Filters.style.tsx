@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Slider, Button, Grid, Popper } from '@material-ui/core';
+import { Slider, Button, Popper } from '@material-ui/core';
 import { COLOR_MAP } from 'common/colors';
 import { GeoScopeFilter } from 'common/utils/compare';
 
@@ -160,33 +160,6 @@ export const MetroMenuButton = styled(Button)<{
 
   @media (min-width: 600px) {
     margin: ${({ $isStatePage }) => !$isStatePage && '0 0 0 3.75rem'};
-  }
-`;
-
-export const SwitchLabel = styled(Grid)`
-  cursor: pointer;
-`;
-
-export const SwitchGrid = styled(Grid)<{
-  $viewAllCounties: boolean;
-  $isModal?: boolean;
-}>`
-  width: fit-content;
-  cursor: pointer;
-
-  ${SwitchLabel} {
-    &:first-child {
-      color: ${({ $viewAllCounties }) =>
-        $viewAllCounties ? `${COLOR_MAP.GRAY_BODY_COPY}` : 'black'};
-      color: ${({ $isModal }) => $isModal && 'white'};
-      font-weight: ${({ $viewAllCounties }) => !$viewAllCounties && 'bold'};
-    }
-    &:last-child {
-      color: ${({ $viewAllCounties }) =>
-        !$viewAllCounties ? `${COLOR_MAP.GRAY_BODY_COPY}` : 'black'};
-      color: ${({ $isModal }) => $isModal && 'white'};
-      font-weight: ${({ $viewAllCounties }) => $viewAllCounties && 'bold'};
-    }
   }
 `;
 

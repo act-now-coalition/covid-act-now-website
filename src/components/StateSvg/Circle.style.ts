@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-export const CircleWrapper = styled.div`
+export const CircleWrapper = styled.div<{ size: number }>`
   position: relative;
   width: ${props => props.size}px;
 `;
 
-export const StateWrapper = styled.div`
+export const StateWrapper = styled.div<{ ratio: number; size: number }>`
   position: absolute;
   width: ${props => (props.ratio === 1 ? 1 : props.ratio * 0.9) * 38}px;
   height: ${props => (props.ratio === 1 ? 1 : props.ratio * 0.9) * 38}px;

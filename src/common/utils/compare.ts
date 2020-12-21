@@ -4,12 +4,18 @@ import {
   getCountyMsaCode,
   getColleges,
 } from 'common/locations';
-import { stateSummary, countySummary } from 'common/location_summaries';
-import { LocationSummary } from 'common/location_summaries';
+import { LocationSummary, getSummaryFromFips } from 'common/location_summaries';
 import { Metric, getMetricNameForCompare } from 'common/metric';
 import { isNumber } from 'lodash';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
-import regions, { County, Region, RegionType, State } from 'common/regions';
+import regions, {
+  County,
+  Region,
+  State,
+  MetroArea,
+  getStateName,
+  getStateCode,
+} from 'common/regions';
 import { fail } from 'assert';
 import { assert } from '.';
 
@@ -38,19 +44,10 @@ export const orderedMetrics = [
 ];
 
 function getLocationObj(region: Region): SummaryForCompare {
-  if (region.regionType === RegionType.COUNTY) {
-    return {
-      region: region,
-      metricsInfo: countySummary(region.fipsCode)!,
-    };
-  } else if (region.regionType === RegionType.STATE) {
-    return {
-      region: region,
-      metricsInfo: stateSummary((region as State).stateCode)!,
-    };
-  } else {
-    fail('doesnt yet work for non states or counties');
-  }
+  return {
+    region: region,
+    metricsInfo: getSummaryFromFips(region.fipsCode)!,
+  };
 }
 
 function isMetroCounty(region: Region) {
@@ -67,6 +64,16 @@ export function getAllStates(): SummaryForCompare[] {
 
 export function getAllCounties(): SummaryForCompare[] {
   return regions.counties.map(getLocationObj);
+}
+
+export function getAllMetroAreas(): SummaryForCompare[] {
+  return regions.metroAreas.map(getLocationObj);
+}
+
+export function getAllCountiesOfMetroArea(
+  region: MetroArea,
+): SummaryForCompare[] {
+  return region.counties.map(getLocationObj);
 }
 
 export function getAllCountiesOfState(stateCode: string): SummaryForCompare[] {
@@ -185,25 +192,60 @@ export function getMetroPrefixCopy(filter: MetroFilter, useAll?: boolean) {
 export function getLocationPageViewMoreCopy(
   geoscope: GeoScopeFilter,
   countyTypeToView: MetroFilter,
-  stateName: string,
+  region: Region,
 ) {
-  if (geoscope === GeoScopeFilter.COUNTRY) {
+  if (region instanceof MetroArea) {
+    return `View all counties in ${region.shortName}`;
+  } else if (geoscope === GeoScopeFilter.COUNTRY) {
     return `View top 100 ${getMetroPrefixCopy(countyTypeToView)} counties`;
   } else if (geoscope === GeoScopeFilter.NEARBY) {
     return 'View all nearby counties';
   } else {
     return `View all ${getMetroPrefixCopy(
       countyTypeToView,
-    )} counties in ${stateName}`;
+    )} counties in ${getStateName(region)}`;
   }
 }
 
+export enum HomepageLocationScope {
+  COUNTY,
+  MSA,
+  STATE,
+}
+
+interface LabelItem {
+  singular: string;
+  plural: string;
+}
+
+export const homepageLabelMap: { [key in HomepageLocationScope]: LabelItem } = {
+  [HomepageLocationScope.MSA]: {
+    singular: 'Metro area',
+    plural: 'Metro areas',
+  },
+  [HomepageLocationScope.COUNTY]: {
+    singular: 'County',
+    plural: 'Counties',
+  },
+  [HomepageLocationScope.STATE]: {
+    singular: 'State',
+    plural: 'States',
+  },
+};
+
 export function getHomePageViewMoreCopy(
-  viewAllCounties: boolean,
+  homepageScope: HomepageLocationScope,
   countyTypeToView: MetroFilter,
 ) {
-  if (!viewAllCounties) return 'View all states';
-  else return `View top 100 ${getMetroPrefixCopy(countyTypeToView)} counties`;
+  if (homepageScope === HomepageLocationScope.STATE) {
+    return 'View all states';
+  } else if (homepageScope === HomepageLocationScope.MSA) {
+    return 'View top 100 metro areas';
+  } else if (homepageScope === HomepageLocationScope.COUNTY) {
+    return `View top 100 ${getMetroPrefixCopy(countyTypeToView)} counties`;
+  } else {
+    return `View more`;
+  }
 }
 
 // For formatting and abbreviating location names:
@@ -227,11 +269,13 @@ function splitCountyName(countyName: string) {
 }
 
 export function getColumnLocationName(region: Region) {
-  if (region.regionType === RegionType.STATE) {
+  if (region instanceof State) {
     return [region.fullName];
-  } else if (region.regionType === RegionType.COUNTY) {
+  } else if (region instanceof County) {
     const countyWithAbbreviatedSuffix = region.abbreviation;
     return splitCountyName(countyWithAbbreviatedSuffix);
+  } else if (region instanceof MetroArea) {
+    return [region.shortName];
   } else {
     fail('dont support other regions');
   }
@@ -256,19 +300,17 @@ export function isCollegeCounty(region: Region) {
   return ftEnrollment && ftEnrollment / countyPopulation > threshold;
 }
 
-// For sharing:
-
 export function getShareQuote(
   sorter: Metric,
   countyTypeToView: MetroFilter,
   sliderValue: GeoScopeFilter,
   totalLocations: number,
   sortDescending: boolean,
+  homepageScope: HomepageLocationScope,
   currentLocation?: RankedLocationSummary,
   sortByPopulation?: boolean,
-  isHomepage?: boolean,
-  viewAllCounties?: boolean,
   stateName?: string,
+  region?: Region,
 ): string {
   const geoScopeShareCopy: any = {
     [GeoScopeFilter.NEARBY]: 'nearby',
@@ -277,9 +319,9 @@ export function getShareQuote(
   };
 
   const homepageShareCopy = `Compare all USA ${
-    viewAllCounties
+    homepageScope === HomepageLocationScope.COUNTY
       ? `${getMetroPrefixCopy(countyTypeToView)} counties`
-      : 'states'
+      : `${homepageLabelMap[homepageScope].plural.toLowerCase()}`
   } by their local COVID metrics with @CovidActNow.`;
 
   const stateShareCopy = `Compare COVID metrics between ${getMetroPrefixCopy(
@@ -318,13 +360,30 @@ export function getShareQuote(
         : getMetricNameForCompare(sorter).toLowerCase()
     }, according to @CovidActNow. See how your county compares.`;
 
-  if (isHomepage) {
+  if (!region) {
     return homepageShareCopy;
-  } else if (!currentLocation && stateName) {
-    return stateShareCopy;
-  } else if (currentLocation) {
-    return countyShareCopy || stateShareCopy;
   } else {
-    return stateShareCopy;
+    if (region instanceof MetroArea) {
+      return `Compare COVID metrics between counties in ${region.name} with @CovidActNow.`;
+    } else if (!currentLocation && stateName) {
+      return stateShareCopy;
+    } else if (currentLocation) {
+      return countyShareCopy || stateShareCopy;
+    } else {
+      return stateShareCopy;
+    }
   }
 }
+
+// Determines which location field is shown under the main Compare feature header + formats it
+export const getCompareSubheader = (region: Region): string => {
+  if (region instanceof County) {
+    return `${getAbbreviatedCounty(region.name)}, ${getStateCode(
+      region,
+    )} to other counties`;
+  } else if (region instanceof MetroArea || region instanceof State) {
+    return `Counties in ${region.fullName}`;
+  } else {
+    return 'Compare counties';
+  }
+};
