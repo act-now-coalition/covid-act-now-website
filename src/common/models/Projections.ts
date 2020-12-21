@@ -117,54 +117,29 @@ export class Projections {
   }
 
   getAlarmLevel(): Level {
-    const {
-      rt_level,
-      hospitalizations_level,
-      test_rate_level,
-      contact_tracing_level,
-      case_density,
-    } = this.getLevels();
+    const { rt_level, test_rate_level, case_density } = this.getLevels();
+    const metricLevels = [rt_level, test_rate_level, case_density];
 
-    // If case density is low, it overrides other metrics.
-    if (case_density === Level.LOW) {
-      return Level.LOW;
+    // If case_density is low or unknown, it overrides other metrics. Else we
+    // use the highest metric level.
+    if (case_density === Level.LOW || case_density === Level.UNKNOWN) {
+      return case_density;
     }
 
-    const levelList = [
-      rt_level,
-      hospitalizations_level,
-      test_rate_level,
-      case_density,
-    ];
-
-    // contact tracing levels are reversed (i.e low is bad, high is good)
-    const reverseList = [contact_tracing_level];
-
-    if (levelList.some(level => level === Level.SUPER_CRITICAL)) {
-      return Level.SUPER_CRITICAL;
-    } else if (
-      levelList.some(level => level === Level.CRITICAL) ||
-      reverseList.some(level => level === Level.LOW)
-    ) {
-      return Level.CRITICAL;
-    } else if (
-      levelList.some(level => level === Level.HIGH) ||
-      reverseList.some(level => level === Level.MEDIUM)
-    ) {
-      return Level.HIGH;
-    } else if (
-      levelList.some(level => level === Level.MEDIUM) ||
-      reverseList.some(level => level === Level.HIGH)
-    ) {
-      return Level.MEDIUM;
-    } else if (
-      levelList.some(level => level === Level.UNKNOWN) ||
-      reverseList.some(level => level === Level.UNKNOWN)
-    ) {
-      return Level.UNKNOWN;
-    } else {
-      return Level.LOW;
+    for (const level of [
+      Level.SUPER_CRITICAL,
+      Level.CRITICAL,
+      Level.HIGH,
+      Level.MEDIUM,
+    ]) {
+      if (metricLevels.includes(level)) {
+        return level;
+      }
     }
+
+    fail(
+      `Failed to determine risk level for ${this.locationName} (fips=${this.fips}).`,
+    );
   }
 
   getAlarmLevelColor() {

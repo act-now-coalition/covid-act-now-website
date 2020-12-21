@@ -8,6 +8,7 @@ type ImageUrl = string;
 export enum RecommendationSource {
   FED = 'FED',
   HARVARD = 'HARVARD',
+  NONE = 'NONE',
 }
 
 export enum FedLevel {
@@ -31,6 +32,7 @@ export enum RecommendCategory {
   GATHERINGS = 'GATHERINGS',
   SCHOOLS = 'SCHOOLS',
   TRAVEL = 'TRAVEL',
+  EXPOSURE_APP = 'EXPOSURE_APP',
 }
 
 export enum RecommendID {
@@ -48,6 +50,7 @@ export enum RecommendID {
   SCHOOLS_ORANGE = 'SCHOOLS_ORANGE',
   SCHOOLS_YELLOW = 'SCHOOLS_YELLOW',
   SCHOOLS_GREEN = 'SCHOOLS_GREEN',
+  EXPOSURE_APP = 'EXPOSURE_APP',
 }
 
 export interface Recommendation {

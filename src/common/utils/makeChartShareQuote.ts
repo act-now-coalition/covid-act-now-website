@@ -16,9 +16,9 @@ export default function makeChartShareQuote(
       1,
     )} of those tested for COVID in ${displayName} tested positive, according to @CovidActNow. See the chart: `;
   } else if (chartIdentifier === 2) {
-    return `${displayName}'s available ICU capacity is ${formatPercent(
+    return `${displayName} has used ${formatPercent(
       stats[2],
-    )} full with COVID patients, according to @CovidActNow. See the chart: `;
+    )} of their ICU capacity, according to @CovidActNow. See the chart: `;
   } else if (chartIdentifier === 3) {
     return `${displayName} is tracing only ${formatPercent(
       stats[3],

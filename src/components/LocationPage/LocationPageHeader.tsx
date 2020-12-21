@@ -1,5 +1,19 @@
 import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
+import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
+import { useIsEmbed } from 'common/utils/hooks';
+import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
+import { Level } from 'common/level';
+import { COLOR_MAP } from 'common/colors';
+import { Metric } from 'common/metric';
+import { useModelLastUpdatedDate } from 'common/utils/model';
+import { Projections } from 'common/models/Projections';
+import { formatUtcDate } from 'common/utils';
+import { useLocationPageRegion } from 'common/regions';
+import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
+import { ThermometerImage } from 'components/Thermometer';
+import LocationPageHeading from './LocationPageHeading';
+import NotificationArea from './Notifications';
 import {
   ColoredHeaderBanner,
   Wrapper,
@@ -15,27 +29,8 @@ import {
   ColumnTitle,
   SectionColumn,
   LevelDescription,
-  WarningIcon,
 } from 'components/LocationPage/LocationPageHeader.style';
-import { useIsEmbed } from 'common/utils/hooks';
-import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
-import { Level } from 'common/level';
-import { COLOR_MAP } from 'common/colors';
-import { useModelLastUpdatedDate } from 'common/utils/model';
-import { Projections } from 'common/models/Projections';
-import { formatUtcDate } from 'common/utils';
-import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
-import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
-import InfoIcon from '@material-ui/icons/Info';
-import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
-import { Metric } from 'common/metric';
-import { BANNER_COPY } from 'components/Banner/ThirdWaveBanner';
-import HospitalizationsAlert, {
-  isHospitalizationsPeak,
-} from './HospitalizationsAlert';
-import { ThermometerImage } from 'components/Thermometer';
-import { useLocationPageRegion, MetroArea } from 'common/regions';
-import LocationPageHeading from './LocationPageHeading';
+import { MetroArea } from 'common/regions';
 
 const noop = () => {};
 
@@ -142,78 +137,6 @@ const LocationPageHeader = (props: {
         </FooterContainer>
       </Wrapper>
     </Fragment>
-  );
-};
-
-const NotificationArea: React.FC<{ projections: Projections }> = ({
-  projections,
-}) => {
-  const region = projections.region;
-
-  enum Notification {
-    NYCCounty,
-    HospitalizationsPeak,
-    ThirdWave,
-  }
-  let notification: Notification;
-
-  // TODO(2020/12/22): Remove NYC notice after it's been up for a week or so.
-  if (['36047', '36061', '36005', '36081', '36085'].includes(region.fipsCode)) {
-    notification = Notification.NYCCounty;
-  } else if (isHospitalizationsPeak(projections.primary)) {
-    notification = Notification.HospitalizationsPeak;
-  } else {
-    notification = Notification.ThirdWave;
-  }
-
-  let icon, title;
-  if (notification === Notification.NYCCounty) {
-    icon = <InfoIcon />;
-    title = 'update';
-  } else {
-    icon = <WarningIcon />;
-    title = 'alert';
-  }
-
-  return (
-    <React.Fragment>
-      {icon}
-      <SectionColumn isUpdateCopy>
-        <ColumnTitle isUpdateCopy>{title}</ColumnTitle>
-
-        {notification === Notification.HospitalizationsPeak && (
-          <HospitalizationsAlert
-            locationName={region.fullName}
-            projection={projections.primary}
-          />
-        )}
-
-        {notification === Notification.NYCCounty && (
-          <NYCAggregationChangeCopy locationName={region.name} />
-        )}
-
-        {notification === Notification.ThirdWave && <ThirdWaveCopy />}
-      </SectionColumn>
-    </React.Fragment>
-  );
-};
-
-const NYCAggregationChangeCopy: React.FC<{ locationName: string }> = ({
-  locationName,
-}) => {
-  return (
-    <Copy>
-      Prior to December 15th, {locationName} was aggregated together with the
-      other New York City boroughs. It now has its own metrics and risk level.
-    </Copy>
-  );
-};
-
-const ThirdWaveCopy = () => {
-  return (
-    <Copy isUpdateCopy>
-      {BANNER_COPY} <Link to={'/deep-dives/us-third-wave'}>Learn more</Link>.
-    </Copy>
   );
 };
 
