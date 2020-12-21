@@ -112,11 +112,11 @@ export class MetroArea extends Region {
   }
 
   get fullName() {
-    return `${this.name.split('-')[0]} Metro Area`;
+    return `${this.name.split('-')[0]} metro area`;
   }
 
   get shortName() {
-    return `${this.name.split('-')[0]} Metro`;
+    return `${this.name.split('-')[0]} metro`;
   }
 
   get abbreviation() {
