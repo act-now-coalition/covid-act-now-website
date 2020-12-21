@@ -28,14 +28,13 @@ import HandleRedirectTo from 'components/HandleRedirectTo/HandleRedirectTo';
 import Donate from 'screens/Donate/Donate';
 import PageviewTracker from 'components/Analytics';
 import {
-  Faq,
   Glossary,
-  Landing,
   CaseStudies,
   Articles,
   MetricExplainer,
 } from 'screens/Learn';
 import Tools, { COVID_RESPONSE_SIMULATOR_URL } from 'screens/Tools/Tools';
+import learnRoutes from 'screens/Learn/LearnRoutes';
 
 export default function App() {
   return (
@@ -129,12 +128,21 @@ export default function App() {
                 path="/us/:stateId/county/:countyId/compare/:sharedComponentId?"
                 component={LocationPage}
               />
-              <Route exact path="/learn" component={Landing} />
+
+              {learnRoutes.map((route, k) => (
+                <Route
+                  path={route.path}
+                  render={props => (
+                    <route.component {...props} routes={route.routes} />
+                  )}
+                />
+              ))}
+              {/* <Route exact path="/learn" component={Landing} /> */}
               {/* In case there is now an /explained link in the wild: */}
               <Route path="/explained">
                 <Redirect to="/learn" />
               </Route>
-              <Route exact path="/faq" component={Faq} />
+              {/* <Route exact path="/faq" component={Faq} /> */}
               <Route exact path="/glossary" component={Glossary} />
               <Route path="/case-studies" component={CaseStudies} />
               <Route path="/deep-dives" component={Articles} />
