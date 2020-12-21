@@ -220,8 +220,8 @@ interface LabelItem {
 
 export const homepageLabelMap: { [key in HomepageLocationScope]: LabelItem } = {
   [HomepageLocationScope.MSA]: {
-    singular: 'City',
-    plural: 'Cities',
+    singular: 'Metro area',
+    plural: 'Metro areas',
   },
   [HomepageLocationScope.COUNTY]: {
     singular: 'County',
@@ -240,7 +240,7 @@ export function getHomePageViewMoreCopy(
   if (homepageScope === HomepageLocationScope.STATE) {
     return 'View all states';
   } else if (homepageScope === HomepageLocationScope.MSA) {
-    return 'View top 100 cities';
+    return 'View top 100 metro areas';
   } else if (homepageScope === HomepageLocationScope.COUNTY) {
     return `View top 100 ${getMetroPrefixCopy(countyTypeToView)} counties`;
   } else {
