@@ -10,6 +10,8 @@ export enum RegionType {
   MSA = 'MSA',
 }
 
+const DC_METRO_FIPS = '47900';
+
 export abstract class Region {
   constructor(
     public readonly name: string,
@@ -111,12 +113,19 @@ export class MetroArea extends Region {
     super(name, urlSegment, fipsCode, population, RegionType.MSA);
   }
 
+  private get principalCityName() {
+    // Make Washington DC metro principal city name more clear.
+    if (this.fipsCode === DC_METRO_FIPS) {
+      return 'Washington DC';
+    }
+    return this.name.split('-')[0];
+  }
   get fullName() {
-    return `${this.name.split('-')[0]} metro area`;
+    return `${this.principalCityName} metro area`;
   }
 
   get shortName() {
-    return `${this.name.split('-')[0]} metro`;
+    return `${this.principalCityName} metro`;
   }
 
   get abbreviation() {
