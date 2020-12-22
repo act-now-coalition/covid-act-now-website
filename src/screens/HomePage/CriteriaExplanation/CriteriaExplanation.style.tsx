@@ -16,6 +16,14 @@ export const CriteriaList = styled.div`
   }
 `;
 
+export const RiskLevelChangeExplainer = styled(Typography)<{
+  component?: string;
+}>`
+  margin-top: 2rem;
+  text-align: center;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+`;
+
 export const Wrapper = styled.div`
   margin: 0 1rem;
   padding: 2.5rem 0;
