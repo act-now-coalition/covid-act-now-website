@@ -14,7 +14,7 @@ const MenuItem: React.FC<{ region: Region; zipCodeInput: string }> = ({
   zipCodeInput,
 }) => {
   return (
-    <StyledLink to={`/${region.relativeUrl}`}>
+    <StyledLink to={region.relativeUrl}>
       <MenuItemWrapper>
         <MenuItemIcon region={region} />
         <div>

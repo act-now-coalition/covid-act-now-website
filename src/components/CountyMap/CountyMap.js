@@ -60,7 +60,7 @@ const CountyMap = ({ region }) => {
           return (
             <Link
               key={geoFullFips}
-              to={`/${geoRegion.relativeUrl}`}
+              to={geoRegion.relativeUrl}
               aria-label={geoRegion.fullName}
             >
               <Geography
