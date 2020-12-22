@@ -5,6 +5,8 @@ import { LogoItem } from 'cms-content/about';
 import ExternalLink from 'components/ExternalLink';
 import { StyledGridContainer } from './About.style';
 
+// TODO (chelsi) - rename this and move it somewhere communal
+
 const GovLogoGrid = (props: { logos: LogoItem[] }) => {
   const { logos } = props;
 
