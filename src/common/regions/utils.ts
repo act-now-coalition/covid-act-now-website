@@ -1,4 +1,4 @@
-import { concat, partition } from 'lodash';
+import { concat, partition, sortBy } from 'lodash';
 import regions from './region_db';
 import { getStateFips } from './regions_data';
 import { County, State, Region, MetroArea } from './types';
@@ -6,6 +6,9 @@ import { County, State, Region, MetroArea } from './types';
 export function belongsToState(county: County, stateFips: string | null) {
   return county.state.fipsCode === stateFips;
 }
+
+const sortByPopulation = (regions: Region[]): Region[] =>
+  sortBy(regions, region => -region.population);
 
 /**
  * Returns a list of regions in the order that is most relevant given the
@@ -28,13 +31,27 @@ export function getAutocompleteRegions(region?: Region) {
     const [countiesInMetro, otherCounties] = partition(counties, county =>
       region.counties.includes(county),
     );
-    return concat<Region>(countiesInMetro, states, otherCounties, metroAreas);
+    const sortedMetroCounties = sortByPopulation(countiesInMetro);
+
+    return concat<Region>(
+      sortedMetroCounties,
+      states,
+      otherCounties,
+      metroAreas,
+    );
   } else if (region instanceof State || region instanceof County) {
     const stateFips = getStateFips(region);
     const [stateCounties, otherCounties] = partition(counties, county =>
       belongsToState(county, stateFips),
     );
-    return concat<Region>(stateCounties, states, metroAreas, otherCounties);
+    const sortedStateCounties = sortByPopulation(stateCounties);
+
+    return concat<Region>(
+      sortedStateCounties,
+      states,
+      metroAreas,
+      otherCounties,
+    );
   } else {
     return [];
   }
