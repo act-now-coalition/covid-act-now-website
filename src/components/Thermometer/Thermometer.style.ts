@@ -13,6 +13,7 @@ export const ThermometerBox = styled.div`
 export const LevelContainer = styled.div`
   display: flex;
   height: 100%;
+  align-items: center;
 `;
 
 const roundTop = css<{ $roundTop: boolean }>`
@@ -38,6 +39,7 @@ export const LevelColor = styled.div<{
   flex: 0 0 auto;
   width: ${barWidth}px;
   margin-right: ${theme.spacing(2)}px;
+  min-height: 44px;
 `;
 
 export const LevelCopy = styled.div`

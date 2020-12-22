@@ -10,7 +10,7 @@ import {
 
 interface ThermometerLevelInfo {
   title: string;
-  description: string;
+  description?: string;
   color: string;
   roundTop: boolean;
   roundBottom: boolean;
@@ -29,7 +29,9 @@ const Thermometer: React.FC<{ items: ThermometerLevelInfo[] }> = ({
         />
         <LevelCopy>
           <LevelTitle>{item.title}</LevelTitle>
-          <LevelDescription>{item.description}</LevelDescription>
+          {item.description && (
+            <LevelDescription>{item.description}</LevelDescription>
+          )}
         </LevelCopy>
       </LevelContainer>
     ))}
