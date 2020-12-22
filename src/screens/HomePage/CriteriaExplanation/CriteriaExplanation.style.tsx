@@ -21,6 +21,7 @@ export const RiskLevelChangeExplainer = styled(Typography)<{
 }>`
   margin-top: 2rem;
   text-align: center;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
 `;
 
 export const Wrapper = styled.div`
