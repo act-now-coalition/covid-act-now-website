@@ -118,6 +118,11 @@
           "questionId": "covid-act-now-assess-community-risk"
         },
         {
+          "question": "Your original risk level used five key metrics. Now it uses three. What happened?",
+          "questionId": "december-risk-levels-change",
+          "answer": "As of December 21st, our risk level is calculated from three metrics: \n\n1. [daily new cases per 100K](/covid-risk-levels-metrics#daily-new-cases) - the current level of COVID\n2. [infection growth](/covid-risk-levels-metrics#infection-rate) - the direction of COVID growth\n3. [positive test rate](https://covidactnow.org/covid-risk-levels-metrics#positive-test-rate) - whether we are testing enough to find most COVID cases\n\nWe continue to show ICU capacity and contact tracing, but these two metrics are no longer factored into a location’s risk level. \n\nAfter consultation with our [advisors](/about), we are making this change to differentiate between risk and preparedness. Our newly simplified risk level is also easier to understand, and more closely aligned with the White House Task Force’s current reports, whose risk level is based on: (1) daily new cases per 100K, (2) test positivity. We believe that infection growth rate is critical to include, as it indicates the direction of COVID growth. A location may have a low level of COVID, but if there is a high infection growth rate, then the level of COVID will also increase in the near future.\n\nMuch remains unknown in this unprecedented pandemic, but we are committed to transparency and to continued improvements as more information becomes available."
+        },
+        {
           "question": "Is it safe to reopen?",
           "answer": "[Covid Act Now](https://covidactnow.org/?s=756131) determines a COVID risk level (severe outbreak; active or imminent outbreak; at risk of outbreak; slow disease growth; or on track to contain COVID) for each state and county, based on five metrics. Our mission is to provide data and disease intelligence to help public officials and the general public make informed decisions. Counties designated as “on track” can [open](/glossary#reopening) more safely than those in higher risk groups. Of course, no community is entirely safe from COVID until the new [vaccine](/glossary#vaccine) has been widely adopted.",
           "questionId": "is-it-safe-to-reopen"
