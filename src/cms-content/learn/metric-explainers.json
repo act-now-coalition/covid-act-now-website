@@ -1,7 +1,7 @@
 {
   "frameworkBody": "Covid Act Now worked alongside a network of research, policy, and public health experts convened by Harvard’s Global Health Institute and Edmond J. Safra Center for Ethics to develop the [Key Metrics for COVID Suppression](https://globalhealth.harvard.edu/key-metrics-for-covid-suppression-researchers-and-public-health-experts-unite-to-bring-clarity-to-key-metrics-guiding-coronavirus-response/) framework.\n\nCentral to this framework is our five-color COVID warning system, which communicates the severity of a location’s outbreak and offers corresponding guidance on mitigation efforts needed at each risk level. This facilitates a unified approach with common metrics, enabling leaders at all levels to anticipate and adequately respond to their community’s COVID spread, and informing the general public on their community’s risk to COVID. To develop this framework, we prioritized metrics vital to guiding suppression efforts that allow a community to safely reopen.",
   "metadataTitle": "Risk Levels and Key Metrics for COVID-19 - Covid Act Now",
-  "metadataDescription": "Understand the Risk Levels in your community and COVID Metrics: daily new cases, infection rate, positive rate, ICU capacity used, contact tracing.",
+  "metadataDescription": "Understand the Risk Levels in your community and COVID Metrics: daily new cases, infection rate, positive test rate, ICU capacity used, contact tracing.",
   "sections": [
     {
       "sectionId": "how-covid-risk-is-determined",
@@ -10,7 +10,7 @@
         {
           "question": "How did you develop your framework?",
           "questionId": "framework",
-          "answer": "Covid Act Now partnered with the Harvard Global Health Institute and Harvard Edmond J. Safra Center for Ethics to develop the COVID risk framework. This framework is the result of collaboration between public health, epidemiology, and policy experts from the following organizations:"
+          "answer": "Covid Act Now partnered with the Harvard Global Health Institute and Harvard Edmond J. Safra Center for Ethics to develop our COVID risk framework. This framework is the result of collaboration between public health, epidemiology, and policy experts from the following organizations:"
         }
       ],
       "sectionHeader": "How COVID risk is determined",
@@ -152,7 +152,7 @@
     }
   ],
   "pageHeader": "Risk levels & key metrics",
-  "pageIntro": "Covid Act Now uses five key metrics to assess COVID across U.S. states, metros, and counties. Three of these—daily new cases (incidence), infection growth rate (RT) and test positivity rate—assess a location's overall risk level. The other two—ICU capacity and tracers hired—reflect a location's preparedness to handle COVID risk. Below, learn more about each metric and how it is assessed.",
+  "pageIntro": "Covid Act Now uses five key metrics to assess COVID across U.S. states, metros, and counties. Three of these—[daily new cases](#daily-new-cases) (incidence), [infection rate](#infection-rate) (RT) and [positive test rate](#positive-test-rate)—assess a location's overall risk level. The other two—[ICU capacity used](icu-capacity-used) and [tracers hired](#tracers-hired)—reflect a location's preparedness to handle COVID risk. Below, learn more about each metric and how it is assessed.",
   "frameworkLogos": [
     {
       "image": "/images_cms/the-rockefeller-foundation-logo.png",
@@ -186,7 +186,7 @@
     },
     {
       "altText": "University of Louisville logo",
-      "image": "/images_cms/university-of-louisville-logo.png",
+      "image": "/images_cms/university-of-louisville-logos.png",
       "url": "http://louisville.edu/"
     },
     {
