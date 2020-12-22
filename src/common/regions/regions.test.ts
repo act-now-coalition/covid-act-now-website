@@ -156,4 +156,9 @@ describe('Metro Area', () => {
       'https://covidactnow.org/us/metro/new-york-newark-jersey-city_ny-nj-pa',
     );
   });
+
+  test('DC Metro Area Name', () => {
+    const metro = regions.findByFipsCodeStrict('47900');
+    expect(metro.fullName).toBe('Washington DC metro area');
+  });
 });
