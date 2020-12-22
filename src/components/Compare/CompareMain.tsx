@@ -242,7 +242,7 @@ const CompareMain = (props: {
   }, [sharedParams]);
 
   /* Mostly a check for MSAs with only 1 county. Won't render a compare table if there aren't at least 2 locations */
-  if (locations.length < 2) {
+  if (!locations || locations.length < 2) {
     return null;
   }
 
