@@ -140,32 +140,6 @@ export function findStateFipsCode(stateCode: string): string {
   return fips;
 }
 
-export function getLocationNameForFips(fips: string): string {
-  if (fips.startsWith('00')) {
-    return (
-      AGGREGATED_LOCATIONS.find(l => l.full_fips_code === fips)?.state || ''
-    );
-  }
-  if (isStateFips(fips)) {
-    return findStateByFips(fips).state;
-  } else {
-    const county = findCountyByFips(fips);
-    return `${county.county}, ${county.state_code}`;
-  }
-}
-
-const allCountiesCache: County[] = [];
-export function allCounties(): County[] {
-  if (allCountiesCache.length === 0) {
-    const statesData = US_STATE_DATASET.state_county_map_dataset as any;
-    for (const state in statesData) {
-      const countiesData = statesData[state].county_dataset;
-      allCountiesCache.push(...countiesData);
-    }
-  }
-  return allCountiesCache;
-}
-
 export function getAdjacentCounties(fips: string): string[] {
   assert(fips in ADJACENT_COUNTIES, `${fips} not found in adjacency list.`);
   return ADJACENT_COUNTIES[fips].adjacent_counties;
@@ -197,9 +171,10 @@ export function getStateName(stateCode: string): string | undefined {
   return (STATES_MAP as any)[stateCode];
 }
 
+const isCounty = (location: Location) => location.county !== undefined;
+
 const ALL_LOCATIONS = getLocationNames();
 const locationsByType = partition(ALL_LOCATIONS, isCounty);
-const COUNTIES = locationsByType[0] as County[];
 export const STATES = locationsByType[1] as State[];
 
 export function getStateByUrlName(stateUrlName: string): State | undefined {
@@ -208,73 +183,4 @@ export function getStateByUrlName(stateUrlName: string): State | undefined {
       toLower(state.state_url_name) === toLower(stateUrlName) ||
       toLower(state.state_code) === toLower(stateUrlName),
   );
-}
-
-export function getCountyByUrlName(
-  stateCode: string | undefined,
-  countyUrlName: string,
-): County | undefined {
-  return COUNTIES.find(
-    county =>
-      toLower(county.county_url_name) === toLower(countyUrlName) &&
-      toLower(county.state_code) === toLower(stateCode),
-  );
-}
-
-export function getCanonicalUrl(fipsCode: string) {
-  const { state_fips_code, county, county_url_name } = findLocationForFips(
-    fipsCode,
-  );
-  const { state_url_name } = findStateByFips(state_fips_code);
-  return county
-    ? `us/${state_url_name}/county/${county_url_name}`
-    : `us/${state_url_name}`;
-}
-
-export function isCounty(location: Location) {
-  return location.county !== undefined;
-}
-
-export function isState(location: Location) {
-  return !isCounty(location);
-}
-
-export function belongsToState(location: Location, stateFips: string) {
-  return location.state_fips_code === stateFips;
-}
-
-export function locationNameFromUrlParams(stateId?: string, countyId?: string) {
-  if (!stateId) {
-    return '';
-  }
-
-  const state = getStateByUrlName(stateId);
-  const countyOption =
-    countyId && getCountyByUrlName(state?.state_code, countyId);
-  const isValidLocation = state && !(countyId && !countyOption);
-
-  if (!isValidLocation) {
-    return '';
-  }
-
-  return state && countyId && countyOption
-    ? `${countyOption.county}, ${state?.state}`
-    : `${state?.state}`;
-}
-
-export function findFipsByUrlParams(
-  stateUrlName?: string,
-  countyUrlName?: string,
-) {
-  if (!stateUrlName) {
-    return undefined;
-  } else {
-    const state = getStateByUrlName(stateUrlName);
-    const countyOption =
-      countyUrlName && getCountyByUrlName(state?.state_code, countyUrlName);
-
-    return countyOption && state
-      ? countyOption.full_fips_code
-      : state && state.state_fips_code;
-  }
 }

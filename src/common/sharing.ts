@@ -114,7 +114,7 @@ async function fetchSharedComponentParams(
 export function useSharedComponentParams(
   component: SharedComponent,
 ): Params | undefined {
-  const { sharedComponentId } = useParams();
+  const { sharedComponentId } = useParams<{ sharedComponentId?: string }>();
 
   const [componentParams, setComponentParams] = useState<Params | undefined>(
     undefined,
