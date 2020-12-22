@@ -11,7 +11,6 @@ import { useTheme } from '@material-ui/core/styles';
 import { Metric, ALL_METRICS } from 'common/metric';
 import CompareMain from 'components/Compare/CompareMain';
 import Explore, { ExploreMetric } from 'components/Explore';
-import { findCountyByFips } from 'common/locations';
 import Recommend from 'components/Recommend';
 import {
   getDynamicIntroCopy,
@@ -43,8 +42,6 @@ interface ChartsHolderProps {
 }
 const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
   const projection = projections.primary;
-
-  const county = findCountyByFips(region.fipsCode);
 
   const metricRefs = {
     [Metric.CASE_DENSITY]: useRef<HTMLDivElement>(null),
@@ -151,7 +148,6 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
         />
         <CompareMain
           stateName={region.name} // rename prop
-          county={county}
           locationsViewable={6}
           stateId={(region as State).stateCode || undefined}
           region={region}
