@@ -142,7 +142,7 @@ describe('Metro Area', () => {
   });
 
   test('abbreviation', () => {
-    expect(metro?.abbreviation).toBe('New York-Newark-Jersey City');
+    expect(metro?.abbreviation).toBe('New York metro');
   });
 
   test('relativeUrl', () => {
