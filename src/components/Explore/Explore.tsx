@@ -52,6 +52,7 @@ import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 import { IndigenousDataCheckbox } from 'components/IndigenousPopulationsFeature';
 import regions, { Region, useRegionFromParams } from 'common/regions';
 import { LocationPageSectionHeader } from 'components/LocationPage/ChartsHolder.style';
+import NationalText from 'components/NationalText';
 
 const MARGIN_SINGLE_LOCATION = 20;
 const MARGIN_STATE_CODE = 60;
@@ -338,6 +339,7 @@ const Explore: React.FunctionComponent<{
           </Styles.ShareBlock>
         </Grid>
       </Grid>
+      <NationalText />
       <ExploreTabs
         activeTabIndex={currentMetric}
         labels={metricLabels}
