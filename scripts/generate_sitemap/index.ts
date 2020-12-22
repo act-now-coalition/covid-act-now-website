@@ -18,14 +18,20 @@ function main() {
   const urlList = concat(topLevelPageItems, locationPageItems, learnPageItems);
   console.log(`Total URLs: ${urlList.length}`);
 
-  simpleSitemapAndIndex({
+  return simpleSitemapAndIndex({
     hostname: 'https://covidactnow.org',
     destinationDir,
     sourceData: urlList,
   });
-  console.log('Done.');
 }
 
 if (require.main === module) {
-  main();
+  main()
+    .catch(err => {
+      console.error(err);
+      process.exit(-1);
+    })
+    .then(() => {
+      console.log('Done.');
+    });
 }
