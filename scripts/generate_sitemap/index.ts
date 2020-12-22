@@ -5,24 +5,17 @@ import {
   getLearnPageItems,
   getTopLevelPageItems,
   getLocationPageItems,
-  getHomeImageItems,
 } from './utils';
 
-const destinationDir = path.join(__dirname, '../../public');
+const destinationDir = path.join(__dirname, '../../build');
 
 function main() {
   console.log('Generating the sitemap');
   const topLevelPageItems = getTopLevelPageItems();
   const locationPageItems = getLocationPageItems();
   const learnPageItems = getLearnPageItems();
-  const homeImageItems = getHomeImageItems();
 
-  const urlList = concat(
-    topLevelPageItems,
-    locationPageItems,
-    learnPageItems,
-    homeImageItems,
-  );
+  const urlList = concat(topLevelPageItems, locationPageItems, learnPageItems);
   console.log(`Total URLs: ${urlList.length}`);
 
   simpleSitemapAndIndex({

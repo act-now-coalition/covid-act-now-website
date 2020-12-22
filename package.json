@@ -77,7 +77,7 @@
   "scripts": {
     "start": "cross-env TSC_COMPILE_ON_ERROR=false react-scripts -r @cypress/instrument-cra start",
     "build": "react-scripts build",
-    "build-with-index-pages": "yarn build && yarn generate-index-pages",
+    "build-with-index-pages": "yarn build && yarn generate-index-pages && yarn generate-sitemap",
     "build:staging": "cross-env REACT_APP_ENVIRONMENT=staging yarn build-with-index-pages",
     "build:prod": "cross-env REACT_APP_ENVIRONMENT=prod yarn build-with-index-pages",
     "serve": "react-scripts build && serve -s build",

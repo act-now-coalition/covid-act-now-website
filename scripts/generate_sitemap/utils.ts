@@ -1,19 +1,12 @@
-import { concat, chain } from 'lodash';
+import { concat } from 'lodash';
 import { SitemapItemLoose } from 'sitemap';
 import urlJoin from 'url-join';
 import regions from '../../src/common/regions';
 import { allCaseStudies } from '../../src/cms-content/learn';
 import articles from '../../src/cms-content/articles';
-import shareImagesData from '../../src/assets/data/share_images_url.json';
-
-const shareImageBaseUrl = shareImagesData.share_image_url;
 
 export function getLocationPageItems(): SitemapItemLoose[] {
-  return chain(regions.all())
-    .map(region => ({
-      url: region.relativeUrl,
-    }))
-    .value();
+  return regions.all().map(region => createSitemapItem(region.relativeUrl));
 }
 
 export function getLearnPageItems(): SitemapItemLoose[] {
@@ -27,7 +20,7 @@ export function getLearnPageItems(): SitemapItemLoose[] {
   ];
 
   const caseStudyUrls = allCaseStudies.map(caseStudy =>
-    urlJoin('/case-studies/', caseStudy.caseStudyId),
+    urlJoin('/case-studies', caseStudy.caseStudyId),
   );
 
   const deepDiveUrls = articles.map(article =>
@@ -40,9 +33,7 @@ export function getLearnPageItems(): SitemapItemLoose[] {
     deepDiveUrls,
   );
 
-  return allLearnUrls.map(relativeUrl => ({
-    url: relativeUrl,
-  }));
+  return allLearnUrls.map(createSitemapItem);
 }
 
 export function getTopLevelPageItems(): SitemapItemLoose[] {
@@ -55,27 +46,9 @@ export function getTopLevelPageItems(): SitemapItemLoose[] {
     '/terms',
     '/privacy',
   ];
-  return relativeUrlList.map(relativeUrl => ({
-    url: relativeUrl,
-  }));
+  return relativeUrlList.map(createSitemapItem);
 }
 
-export function getHomeImageItems(): SitemapItemLoose[] {
-  const homeMapUrl = urlJoin(shareImageBaseUrl, 'home.png');
-
-  const items = [
-    {
-      url: '/',
-      img: [
-        {
-          url: homeMapUrl,
-          caption: 'Realtime US COVID Risk Map & Key Metrics',
-          title: 'Realtime US COVID Risk Map & Key Metrics',
-          geoLocation: 'United States',
-          // license
-        },
-      ],
-    },
-  ];
-  return items;
+function createSitemapItem(url: string) {
+  return { url };
 }
