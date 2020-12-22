@@ -120,7 +120,7 @@ export class MetroArea extends Region {
   }
 
   get abbreviation() {
-    return this.name;
+    return this.shortName;
   }
 
   get relativeUrl() {
