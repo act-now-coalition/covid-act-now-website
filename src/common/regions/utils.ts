@@ -1,4 +1,4 @@
-import { concat, partition } from 'lodash';
+import { concat, partition, sortBy } from 'lodash';
 import regions from './region_db';
 import { getStateFips } from './regions_data';
 import { County, State, Region, MetroArea } from './types';
@@ -28,13 +28,33 @@ export function getAutocompleteRegions(region?: Region) {
     const [countiesInMetro, otherCounties] = partition(counties, county =>
       region.counties.includes(county),
     );
-    return concat<Region>(countiesInMetro, states, otherCounties, metroAreas);
+    const sortedMetroCounties = sortBy(
+      countiesInMetro,
+      county => -county.population,
+    );
+
+    return concat<Region>(
+      sortedMetroCounties,
+      states,
+      otherCounties,
+      metroAreas,
+    );
   } else if (region instanceof State || region instanceof County) {
     const stateFips = getStateFips(region);
     const [stateCounties, otherCounties] = partition(counties, county =>
       belongsToState(county, stateFips),
     );
-    return concat<Region>(stateCounties, states, metroAreas, otherCounties);
+    const sortedStateCounties = sortBy(
+      stateCounties,
+      county => -county.population,
+    );
+
+    return concat<Region>(
+      sortedStateCounties,
+      states,
+      metroAreas,
+      otherCounties,
+    );
   } else {
     return [];
   }
