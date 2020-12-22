@@ -26,6 +26,7 @@ import {
   HomepageLocationScope,
   getAllMetroAreas,
   getAllCountiesOfMetroArea,
+  SummaryForCompare,
 } from 'common/utils/compare';
 import { Metric } from 'common/metric';
 import { getSummaryFromFips } from 'common/location_summaries';
@@ -152,7 +153,7 @@ const CompareMain = (props: {
 
   const locationPageLocationsForCompare = getLocationPageLocations();
 
-  function getFinalLocations(region?: Region) {
+  function getFinalLocations(region?: Region): SummaryForCompare[] {
     if (!region) {
       return homepageLocationsForCompare;
     } else {
@@ -242,7 +243,7 @@ const CompareMain = (props: {
   }, [sharedParams]);
 
   /* Mostly a check for MSAs with only 1 county. Won't render a compare table if there aren't at least 2 locations */
-  if (locations.length < 2) {
+  if (!locations || locations.length < 2) {
     return null;
   }
 
