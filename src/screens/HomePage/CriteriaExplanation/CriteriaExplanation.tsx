@@ -63,8 +63,11 @@ const CriteriaExplanation = (props: { isMobile: Boolean }) => {
         </Criterion>
       </CriteriaList>
       <RiskLevelChangeExplainer component="p">
-        Learn about <ExternalLink href="#">changes we made</ExternalLink> to how
-        we determine risk levels on December 21.
+        Learn about{' '}
+        <ExternalLink href="/faq#december-risk-levels-change">
+          changes we made
+        </ExternalLink>{' '}
+        to how we determine risk levels on December 21.
       </RiskLevelChangeExplainer>
     </Wrapper>
   );
