@@ -107,7 +107,7 @@
     {
       "term": "Data",
       "termId": "data",
-      "definition": "Data refer to quantitative bits of information or knowledge that are collected, measured, reported, and analyzed. \n\n* Data can be visualized using graphs or analysis tools. \n* Data are malleable, and the process of representing, interpreting, and inferring a bigger picture from raw data constantly evolves. \n\nCollecting and analyzing COVID data is vital for understanding the state of COVID and navigating reopening decisions. [Covid Act Now](https://covidactnow.org/?s=647107) is a pandemic data platform, which acknowledges the ever-changing natures of COVID and COVID data, and chooses data sources that are accurate, credible, timely, and available. These data are then shared through user-friendly, relevant metrics and models in order to create an understanding of COVID and, ultimately, save lives.",
+      "definition": "Data refers to quantitative bits of information or knowledge that are collected, measured, reported, and analyzed.\n\n* Data can be visualized using graphs or analysis tools.\n* Data is malleable, and the process of representing, interpreting, and inferring a bigger picture from raw data constantly evolves.\n* Data, like all information, is subject to human error, including reporting inconsistencies, entry mistakes and incomplete documentation.",
       "category": "Metrics"
     },
     {
@@ -449,7 +449,7 @@
     {
       "term": "Vaccine",
       "termId": "vaccine",
-      "definition": "A vaccine helps protect against certain diseases, stimulating a person's immune system to help them build [immunity](#immunity) against a specific disease. Vaccines are usually administered through needle injections, but can also be administered by mouth or sprayed into the nose.\n\nResearchers around the world are currently racing to develop a [vaccine to protect against COVID](https://www.nytimes.com/interactive/2020/science/coronavirus-vaccine-tracker.html). Vaccines usually take many years to develop, but [scientists](https://unfoundation.org/blog/post/qa-with-dr-peter-hotez-behind-the-scenes-of-covid-19-vaccine-research/?gclid=EAIaIQobChMI1uWkppzD6gIVhYbACh2drgkiEAAYASAAEgLiXvD_BwE) are trying to produce a safe and effective vaccine in 12 to 18 months. It is important for COVID response and planning to operate without a vaccine in mind, as the timeline and efficacy of a vaccine against COVID is still unknown.",
+      "definition": "A vaccine helps protect against certain diseases, stimulating a person's immune system to help them build [immunity](https://covidactnow.org/glossary#immunity) against a specific disease. Vaccines are usually administered through needle injections, but can also be administered by mouth or sprayed into the nose.\n\nAs of mid December 2020, the [F.D.A has approved two COVID vaccines](https://www.fda.gov/news-events/press-announcements/fda-takes-additional-action-fight-against-covid-19-issuing-emergency-use-authorization-second-covid)--one by Pfizer and one by Moderna--for distribution in the U.S.",
       "category": "Treatment"
     },
     {
