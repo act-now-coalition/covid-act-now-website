@@ -1,6 +1,6 @@
 {
-  "header": "Glossary",
-  "intro": "Here you can find clear definitions of the vocabulary of the novel coronavirus (SARS-CoV-2). If you have any questions or would like us to include a term that you don't see, please [email us](mailto:info@covidactnow.org).",
+  "header": "COVID Glossary",
+  "intro": "Here you can find clear definitions of the vocabulary being used to talk about COVID. If you have any questions or would like us to include a term that you don't see, please [email us](mailto:info@covidactnow.org).",
   "terms": [
     {
       "term": "Antibodies",
@@ -23,14 +23,8 @@
     {
       "term": "Asymptomatic",
       "termId": "asymptomatic",
-      "definition": "An asymptomatic person is positive for the virus but never shows signs or symptoms of the infection. Testing can show asymptomatic infection, which is important because:\n\n* The fact that COVID can be asymptomatic means we do not always know if a person has COVID, and therefore the virus can be transmitted unknowingly. \n* Asymptomatic transmission is one of the reasons COVID is so dangerous, as opposed to SARS, which was more deadly in infected individuals, but always symptomatic. Researchers are unsure how many COVID cases are transmitted asymptomatically, but estimates range between [6 percent and 41 percent](https://www.who.int/news-room/commentaries/detail/transmission-of-sars-cov-2-implications-for-infection-prevention-precautions) of cases. \n\nSome people with asymptomatic infection may actually be [presymptomatic](#presymptomatic-spread), and develop symptoms later on.",
+      "definition": "An asymptomatic person is positive for the virus but never shows signs or symptoms of the infection. The fact that COVID can be asymptomatic means we do not always know if a person has COVID unless they get tested, and therefore the virus can be transmitted unknowingly.\n\nSome people with asymptomatic infection may actually be [presymptomatic](https://covidactnow.org/glossary#presymptomatic-spread), and develop symptoms later on.\n\nResearchers are unsure how many COVID cases are transmitted asymptomatically, but estimates range between [6 percent and 41 percent](https://www.who.int/news-room/commentaries/detail/transmission-of-sars-cov-2-implications-for-infection-prevention-precautions) of cases.",
       "category": "Health and symptoms"
-    },
-    {
-      "term": "Asymptomatic spread",
-      "termId": "asymptomatic-spread",
-      "definition": "Asymptomatic spread refers to the [transmission](#transmission) of a virus from an infected individual with no symptoms to an uninfected individual. People infected with COVID can be [asymptomatic](#asymptomatic) and therefore unaware of their ability to transmit the virus. \n\nAsymptomatic spread is one of the reasons why COVID is so dangerous. Researchers are unsure how many COVID cases fit into this category, but the World Health Organization estimates that between [6 percent and 41 percent](https://www.who.int/news-room/commentaries/detail/transmission-of-sars-cov-2-implications-for-infection-prevention-precautions) of cases are asymptomatic.",
-      "category": "Transmission"
     },
     {
       "term": "Case density",
@@ -41,19 +35,19 @@
     {
       "term": "Case incidence",
       "termId": "case-incidence",
-      "definition": "Case incidence is a measure of new confirmed COVID cases per day. It answers the question: “how many new COVID infections were reported in my area?” Incidence is important because it provides a snapshot of the state of COVID in a given community. \n\nDisease prevalence is another term you may have read in the news or online. Disease prevalence is not the same as case incidence. While incidence refers to the number of new confirmed cases on a given day, prevalence refers to the total number of infections which are currently active on a given day.",
+      "definition": "Case incidence is a measure of new confirmed COVID cases per day. It answers the question: “how many new COVID infections were reported in my area?” Incidence is important because it provides a snapshot of the state of COVID in a given community.\n\nDisease prevalence is another term you may have read in the news or online. It is not the same as incidence. While incidence refers to the number of new confirmed cases on a given day, prevalence refers to the total number of infections which are currently active on a given day.",
       "category": "Metrics"
     },
     {
       "term": "Cluster event",
       "termId": "cluster-event",
-      "definition": "A cluster event is a group of cases, usually at least 10 positive cases, tied to the same place at the same time. With COVID, large clusters result from [super spreading events](#superspreading-event) such as conferences, [choir practices](https://www.cdc.gov/mmwr/volumes/69/wr/mm6919e6.htm), funerals, and cruises. For example, in early February, 77 out of 95 of Massachusetts COVID cases could be attributed to one [biotech conference](https://www.wbur.org/commonhealth/2020/03/12/coronavirus-outbreak-biogen-conference-superspreading) in Cambridge.",
+      "definition": "A cluster event is a group of cases, usually at least 10 positive cases, tied to the same place at the same time. With COVID, large clusters result from [super spreading events](https://covidactnow.org/glossary#superspreading-event) such as [conferences](https://www.nytimes.com/2020/12/11/us/biogen-conference-covid-spread.html), [choir practices](https://www.cdc.gov/mmwr/volumes/69/wr/mm6919e6.htm), [weddings](https://www.forbes.com/sites/victoriaforster/2020/12/04/covid-19-superspreader-wedding-in-washington-state-linked-to-7-deaths-of-people-who-didnt-even-attend/?sh=1d19c7293124), and [cruises](https://www.thedailybeast.com/coronavirus-diamond-princess-cruise-ship-fiasco-points-to-possible-super-spreader).",
       "category": "Transmission"
     },
     {
       "term": "Community spread",
       "termId": "community-spread",
-      "definition": "Also referred to as “community transmission,” community spread refers to disease spread among people in a community without clear identification of when a person was [exposed](#exposed) or how the virus was [transmitted](#transmission) to them. In February, the [CDC identified](https://www.cdc.gov/media/releases/2020/s0226-Covid-19-spread.html) a COVID patient in California who had no relevant travel history or known exposure to a patient with COVID. This discovery marked the first known instance of community spread in the United States.",
+      "definition": "Community spread refers to disease spread among people in a community without clear identification of when a person was [exposed](https://covidactnow.org/glossary#exposed) or how the virus was [transmitted](https://covidactnow.org/glossary#transmission) to them. It is sometimes referred to as “community transmission.” In February, the [CDC identified](https://www.cdc.gov/media/releases/2020/s0226-Covid-19-spread.html) a COVID patient in California who had no relevant travel history or known exposure to a patient with COVID. This discovery marked the first known instance of community spread in the United States.",
       "category": "Transmission"
     },
     {
@@ -65,25 +59,19 @@
     {
       "term": "Confidence interval",
       "termId": "confidence-interval",
-      "definition": "A confidence interval is used to express the degree of certainty of a statistic. It is a range of values that is likely to encompass the true value. For example, Covid Act Now reports a statistic called [infection rate](#infection-growth-rate), also known as [R(t)](#rt). For each R(t) value, we also report a 90 percent confidence interval (CI).\n\nFor example, if R(t) is 1.17 and has a 90 percent CI between 1.07 and 1.27, that result would be written as 90 percent CI \\[1.07, 1.27]. These numbers denote that there is a 90 percent chance that the true average infection rate calculated for that day is between 1.07 and 1.27.",
+      "definition": "A confidence interval is used to express the degree of certainty of a statistic. It is a range of values that is likely to encompass the true value. For example, Covid Act Now reports a statistic called [infection rate](https://covidactnow.org/covid-risk-levels-metrics#infection-rate), also known as [](#rt)R(t) For each R(t) value, we also report a 90 percent confidence interval (CI).\n\nFor example, if R(t) is 1.17 and has a 90 percent CI between 1.07 and 1.27, that result would be written as 90 percent CI \\[1.07, 1.27]. These numbers denote that there is a 90 percent chance that the true average infection rate calculated for that day is between 1.07 and 1.27.",
       "category": "Metrics"
     },
     {
-      "definition": "A confirmed case, in the context of COVID reporting, is an individual who received a [PCR Test](#pcr-test) or [Antigen Test](#antigen-test) where the test result came back positive. This positive result indicates that the individual was actively infected with the [SARS-CoV-2](#sars-cov-2) virus at the time of the test. \n\nCases can also be classified as \"possible\" or \"probable\" if identified without laboratory test results. The reporting of COVID cases normally refers to confirmed cases unless otherwise noted. The number of new cases per day, also referred to as [\"disease incidence\"](#disease-incidence), is often plotted for each day over a period of time to show how the daily new cases are trending: up, down, or steady.",
+      "definition": "A confirmed case, in the context of COVID reporting, is an individual who received a [PCR Test](#pcr-test) or [Antigen Test](#antigen-test) where the test result came back positive. This positive result indicates that the individual was actively infected with the [SARS-CoV-2](#sars-cov-2) virus at the time of the test. \n\nCases can also be classified as \"possible\" or \"probable\" if identified without laboratory test results. The reporting of COVID cases normally refers to confirmed cases unless otherwise noted. The number of new cases per day, also referred to as \"[case incidence](https://covidactnow.org/glossary#case-incidence)\", is often plotted for each day over a period of time to show how the daily new cases are trending: up, down, or steady.",
       "term": "Confirmed case",
       "termId": "confirmed-case ",
       "category": "Health and symptoms"
     },
     {
-      "term": "Contact tracers hired",
-      "termId": "contact-tracers-hired",
-      "definition": "Contact tracers hired is the number of contact tracers that are hired in a state or county, relative to the number of cases.\n\nTo stop the spread of COVID, it is critical to have enough tracing capacity to identify the contacts of people who test positive for COVID. Those contacts can be tested, quarantined (if necessary), and asked about whom else they have come into contact with.\n\nAt Covid Act Now, we realize that measuring contact tracing by number of staff is not reliable. One of the best metrics of success for a contact tracing program is the percentage of new cases traced to a known source. However, very few states are reporting this number. \n\nFor now, we look at the number of contact tracers on staff for each state to estimate the number of contacts that could be traced within 48 hours if the contact tracing program were otherwise working perfectly.",
-      "category": "Metrics"
-    },
-    {
       "term": "Contact tracing",
       "termId": "contact-tracing",
-      "definition": "Contact tracing is the process of tracing all of the people with whom a newly confirmed COVID patient has come into contact, in order to identify and notify people who may have been exposed to the virus. \n\n* When contacts are efficiently traced and encouraged to quarantine, further [transmission](#transmission) can be prevented. Contact tracing is essential if we want to slow the spread of COVID without universal [quarantine](#quarantine) or full shut-down.\n* Contact tracing is especially critical due to the fact that people can spread COVID even if they are [presymptomatic](#presymptomatic-spread) or [asymptomatic](#asymptomatic). \n\n[South Korea](https://www.businessinsider.com/south-korea-contact-tracing-helped-control-nightclub-outbreak-2020-5)’s robust contact tracing and testing efforts allowed the country to control COVID efficiently and effectively without a strict lock-down. If a resident tested positive or was even suspected of coming into contact with an infected person, their contacts were quickly notified, tested, and encouraged to quarantine.",
+      "definition": "Contact tracing is the process of tracing all of the people with whom a newly confirmed COVID patient has come into contact, in order to identify and notify people who may have been exposed to the virus. \n\n* When contacts are efficiently traced and encouraged to quarantine, further [transmission](#transmission) can be prevented. Contact tracing is essential if we want to slow the spread of COVID without universal [quarantine](#quarantine) or full shut-down.\n* Contact tracing is especially critical due to the fact that people can spread COVID even if they are [presymptomatic](#presymptomatic-spread) or [asymptomatic](#asymptomatic).",
       "category": "Metrics"
     },
     {
@@ -101,13 +89,13 @@
     {
       "term": "COVID-19",
       "termId": "covid-19",
-      "definition": "COVID-19 is the name of the disease caused by the [SARS-CoV-2](#sars-cov-2) virus. \n\n* \"CO\" stands for corona, \"VI\" for virus, and \"D\" for disease. The number \"19\" refers to the year 2019 when the first case of COVID-19 was identified. \n* A confirmed case, in the context of COVID reporting, is an individual who received a [PCR Test](#pcr-test) or [Antigen Test](#antigen-test) where the test result came back positive. This positive result indicates that the individual was actively infected with the [SARS-CoV-2](#sars-cov-2) virus at the time of the test. \n* Cases can also be classified as \"possible\" or \"probable\" if identified without laboratory test results. The reporting of COVID cases normally refers to confirmed cases unless otherwise noted. The number of new cases per day, also referred to as \"[disease incidence](#disease-incidence)\", is often plotted for each day over a period of time to show how the daily new cases are trending: up, down, or steady.\n* At Covid Act Now, we refer to COVID-19 as simply COVID.",
+      "definition": "COVID-19 is the name of the disease caused by the [SARS-CoV-2](#sars-cov-2) virus. \"CO\" stands for corona, \"VI\" for virus, and \"D\" for disease. The number \"19\" refers to the year 2019 when the first case of COVID-19 was identified. Some refer to COVID-19 as simply “COVID.”",
       "category": "Health and symptoms"
     },
     {
       "term": "Crisis standards of care (CSC)",
       "termId": "crisis-standards-of-care",
-      "definition": "Crisis standards of care (CSC) refers to when a hospital or healthcare system is so overwhelmed that it is impossible to provide the standard level of care. \n\nThe COVID-19 pandemic has overwhelmed health care systems across the United States, and many hospitals have to operate with limited equipment, PPE, staffing, and beds. \n\n“[Flattening the Curve](#flattening-the-curve)” is a method of slowing the spread of COVID to prevent hospitals from having to invoke crisis standards of care. \n\nCrisis standards of care often coincide with a shift from patient-centered practice, which focuses on providing the best care for a patient, to public-focused practice, which involves making decisions on patient care within a larger understanding of limited resources and collective good. An example of this is the reallocation or in some cases [sharing](https://www.nytimes.com/2020/03/26/health/coronavirus-ventilator-sharing.html) of ventilators among severely ill COVID patients. [Guidelines](https://www.nursingworld.org/~496044/globalassets/practiceandpolicy/work-environment/health--safety/coronavirus/crisis-standards-of-care.pdf) have been published to help health workers and institutions navigate crisis standards of care as ethically as possible.",
+      "definition": "Crisis standards of care (CSC) refers to when a hospital or health care system is so overwhelmed that it is impossible to provide the standard level of care. \n\nCrisis standards of care often coincide with a shift from patient-centered practice, which focuses on providing the best care for a patient, to public-focused practice, which involves making decisions on patient care within a larger understanding of limited resources and collective good. An example of this is the reallocation or in some cases [sharing](https://www.nytimes.com/2020/03/26/health/coronavirus-ventilator-sharing.html) of ventilators among severely ill COVID patients. [Guidelines](https://www.nursingworld.org/~496044/globalassets/practiceandpolicy/work-environment/health--safety/coronavirus/crisis-standards-of-care.pdf) have been published to help health workers and institutions navigate crisis standards of care as ethically as possible.\n\n“[Flattening the Curve](https://covidactnow.org/glossary#flattening-the-curve)” is a method of slowing the spread of COVID to prevent hospitals from having to invoke crisis standards of care.",
       "category": "Treatment"
     },
     {
@@ -137,7 +125,7 @@
     {
       "term": "Disease prevalence",
       "termId": "disease-prevalence",
-      "definition": "Disease prevalence is a measure of the total number of cases in a community with a currently active COVID infection. It answers the question: “how many COVID infections are currently present in my area?” Disease prevalence is not the same as [disease incidence](#disease-incidence), which looks at the number of new cases in a specific time period. Disease prevalence is an indicator of the actual risk of encountering an infected individual in a community. \n\nTo know the true prevalence, you would need to test the entire population (or a widespread randomized sample) every day, using a highly-accurate test. Therefore, Covid Act Now looks at disease incidence, or daily new cases per 100,000 people, to get an accurate estimation of COVID in a community.",
+      "definition": "Disease prevalence is a measure of the total number of cases in a community with a currently active COVID infection. It answers the question: “how many COVID infections are currently present in my area?” Disease prevalence is not the same as case incidence, which looks at the number of new cases in a specific time period. Disease prevalence is an indicator of the actual risk of encountering an infected individual in a community.\n\nTo know the true prevalence, you would need to test the entire population (or a widespread randomized sample) every day, using a highly-accurate test. Therefore, data sets often look at [case incidence](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases), or daily new cases per 100,000 people, to get an accurate estimation of COVID in a community.",
       "category": "Metrics"
     },
     {
@@ -485,5 +473,5 @@
   ],
   "metadataTitle": "Glossary of COVID-19 Terminology - Covid Act Now",
   "metadataDescription": "Find clear definitions of the vocabulary and key terms of the novel Coronavirus (2019-nCoV). Understand the COVID terminology and make informed decisions to stop the pandemic.",
-  "lastUpdatedDate": "2020-12-07T22:16:55.111Z"
+  "lastUpdatedDate": "2020-12-22T08:00:00.000Z"
 }
