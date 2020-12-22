@@ -64,13 +64,8 @@ export function getComparePageUrl(
   let url = urlJoin(getPageBaseUrl(), 'share', compareShareId);
   let params: { [key: string]: unknown } = {};
   ensureSharingIdInQueryParams(params);
-  if (region) {
-    params['redirectTo'] = urlJoin(
-      region.relativeUrl,
-      'compare',
-      compareShareId,
-    );
-  }
+  const pageParam = region ? region.relativeUrl : '/';
+  params['redirectTo'] = urlJoin(pageParam, 'compare', compareShareId);
 
   // NOTE: Trailing '/' is significant so we hit the index.html page with correct meta tags and
   // so we don't get redirected and lose the query params.
