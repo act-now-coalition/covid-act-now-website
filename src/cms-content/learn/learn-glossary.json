@@ -195,9 +195,9 @@
       "category": "Disease science"
     },
     {
-      "term": "ICU capacity used",
-      "termId": "icu-capacity-used",
-      "definition": "ICU capacity used is the percentage of ICU beds currently in use. It is used to measure an Intensive Care Unit’s (ICU) ability to handle a surge of patients in the case of a COVID [outbreak](#outbreak). The ICU is the part of a hospital reserved for people who are very sick. Each bed is equipped with special equipment that regular hospital beds don’t have, and usually have one or two dedicated nurses to monitor each patient. \n\nICU capacity used is one of Covid Act Now’s main metrics for understanding COVID, as measuring and predicting ICU capacity gives a picture of whether hospitals can handle an increased load of new COVID cases without having to resort to [crisis standards of care](#crisis-standards-of-care).",
+      "term": "ICU capacity ",
+      "termId": "icu-capacity",
+      "definition": "ICU capacity is used to measure an intensive care unit’s (ICU) ability to handle a surge of patients in the case of a COVID [outbreak](https://covidactnow.org/glossary#outbreak). The ICU is the part of a hospital reserved for people who are very sick. Staffed ICU beds, equipped with one or two dedicated nurses and special equipment, are important because they may be life-saving for some people infected by COVID. In addition, ICU beds are needed to treat not only COVID patients, but also other patients, such as people who have had a heart attack or suffered a life-threatening injury.\n\nCovid Act Now uses the metric “[ICU](https://covidactnow.org/covid-risk-levels-metrics#icu-capacity-used) [capacity used](https://covidactnow.org/covid-risk-levels-metrics#icu-capacity-used)” to measure the number of intensive care unit (ICU) beds that are currently in use.",
       "category": "Metrics"
     },
     {
