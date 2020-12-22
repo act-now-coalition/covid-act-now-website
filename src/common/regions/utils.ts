@@ -7,6 +7,9 @@ export function belongsToState(county: County, stateFips: string | null) {
   return county.state.fipsCode === stateFips;
 }
 
+const sortByPopulation = (regions: Region[]): Region[] =>
+  sortBy(regions, region => -region.population);
+
 /**
  * Returns a list of regions in the order that is most relevant given the
  * region passed as argument
@@ -28,10 +31,7 @@ export function getAutocompleteRegions(region?: Region) {
     const [countiesInMetro, otherCounties] = partition(counties, county =>
       region.counties.includes(county),
     );
-    const sortedMetroCounties = sortBy(
-      countiesInMetro,
-      county => -county.population,
-    );
+    const sortedMetroCounties = sortByPopulation(countiesInMetro);
 
     return concat<Region>(
       sortedMetroCounties,
@@ -44,10 +44,7 @@ export function getAutocompleteRegions(region?: Region) {
     const [stateCounties, otherCounties] = partition(counties, county =>
       belongsToState(county, stateFips),
     );
-    const sortedStateCounties = sortBy(
-      stateCounties,
-      county => -county.population,
-    );
+    const sortedStateCounties = sortByPopulation(stateCounties);
 
     return concat<Region>(
       sortedStateCounties,
