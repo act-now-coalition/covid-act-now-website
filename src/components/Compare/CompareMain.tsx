@@ -26,6 +26,7 @@ import {
   HomepageLocationScope,
   getAllMetroAreas,
   getAllCountiesOfMetroArea,
+  SummaryForCompare,
 } from 'common/utils/compare';
 import { Metric } from 'common/metric';
 import { getSummaryFromFips } from 'common/location_summaries';
@@ -152,7 +153,7 @@ const CompareMain = (props: {
 
   const locationPageLocationsForCompare = getLocationPageLocations();
 
-  function getFinalLocations(region?: Region) {
+  function getFinalLocations(region?: Region): SummaryForCompare[] {
     if (!region) {
       return homepageLocationsForCompare;
     } else {
