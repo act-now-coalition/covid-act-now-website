@@ -1,26 +1,16 @@
 {
   "frameworkBody": "Covid Act Now worked alongside a network of research, policy, and public health experts convened by Harvard’s Global Health Institute and Edmond J. Safra Center for Ethics to develop the [Key Metrics for COVID Suppression](https://globalhealth.harvard.edu/key-metrics-for-covid-suppression-researchers-and-public-health-experts-unite-to-bring-clarity-to-key-metrics-guiding-coronavirus-response/) framework.\n\nCentral to this framework is our five-color COVID warning system, which communicates the severity of a location’s outbreak and offers corresponding guidance on mitigation efforts needed at each risk level. This facilitates a unified approach with common metrics, enabling leaders at all levels to anticipate and adequately respond to their community’s COVID spread, and informing the general public on their community’s risk to COVID. To develop this framework, we prioritized metrics vital to guiding suppression efforts that allow a community to safely reopen.",
   "metadataTitle": "Risk Levels and Key Metrics for COVID-19 - Covid Act Now",
-  "metadataDescription": "Understand the Risk Levels in your community and COVID Metrics: daily new cases, infection rate, positive rate, ICU headroom, contact tracing.",
+  "metadataDescription": "Understand the Risk Levels in your community and COVID Metrics: daily new cases, infection rate, positive rate, ICU capacity used, contact tracing.",
   "sections": [
     {
       "sectionId": "how-covid-risk-is-determined",
-      "sectionIntro": "### What does the overall risk level for a location mean?\n\nA location’s overall risk level takes into account the following five metrics: [daily new cases](/covid-risk-levels-metrics#daily-new-cases) (incidence), [infection rate](/covid-risk-levels-metrics#infection-rate) (Rt), [positive test rate](/covid-risk-levels-metrics#positive-test-rate), [ICU headroom used](/covid-risk-levels-metrics#icu-headroom-used), and [tracers hired](/covid-risk-levels-metrics#tracers-hired).\n\nIf a region’s risk level for daily new cases is green, then its overall risk level is green. Otherwise, a region’s overall risk level reflects the highest risk level across all five metrics.",
+      "sectionIntro": "### What does the overall risk level for a location mean?\n\nA state or county’s overall risk level takes into account three metrics: daily new cases per 100K (incidence), infection rate (Rt), and test positivity. \n\n* (1) [Daily new cases](/covid-risk-levels-metrics#daily-new-cases), also known as “incidence” in epidemiology, represents the current amount of COVID in a community. \n* (2) [Infection rate](/covid-risk-levels-metrics#infection-rate) is the direction and speed of growth. For instance, daily new cases may be low, but if infection rate is high, then we know that daily new cases will be high in the near future. \n* (3) [Positive test rate](/covid-risk-levels-metrics#positive-test-rate) is a measure of our confidence in the underlying data. For instance, if daily new cases and infection rate are both low, but test positivity is high, then the lack of sufficient testing suggests that we are not capturing the true levels of COVID and both daily new cases and infection rate are actually higher than what is currently reported. \n\nEach metric is graded green, yellow, orange, or red. Incidence is the only metric for which there is a dark red, a color we added after the third surge in winter 2020, in order to capture unprecedented case counts. \n\nIf a region’s daily new cases is green, then its overall risk level is green. For instance, if the daily new cases metric is green, but test positivity is yellow, the overall risk level is still green. Otherwise, a region’s overall risk level reflects the highest risk level across all three metrics. For instance, if daily new cases and test positivity are both yellow, but infection growth is orange, then the overall risk level is orange. \n\nThe end goal is for regions to reduce cases to zero, to fully reopen their economies, and for people to resume normal lives, unrestricted by COVID or containment measures.",
       "questions": [
-        {
-          "question": "What does the deepest red color indicate?",
-          "questionId": "deepest-red",
-          "answer": "The deepest color is our highest level of COVID risk and we recommend that you take all possible precautions. This level of risk is assigned for locations with above 75 daily new cases per 100K population. This aligns with the White House Task Force highest risk level."
-        },
-        {
-          "question": "Do you ever change your tools or methodology?",
-          "questionId": "do-you-change-tools-or-methodology",
-          "answer": "We are dedicated to providing the public with the clearest, most reliable information possible, but our tools may be limited by the data available. There is also no historical precedent for what is happening — this is a novel virus and disease — and our understanding of COVID continues to evolve. We, too, will continue to refine and adjust our methodology — and will make all changes open and available to you here."
-        },
         {
           "question": "How did you develop your framework?",
           "questionId": "framework",
-          "answer": "Covid Act Now worked alongside a network of research, policy, and public health experts convened by Harvard’s Global Health Institute and Edmond J. Safra Center for Ethics to develop the [\"Key Metrics for COVID Suppression\"](https://globalhealth.harvard.edu/key-metrics-for-covid-suppression-researchers-and-public-health-experts-unite-to-bring-clarity-to-key-metrics-guiding-coronavirus-response/) framework.\n\nCentral to this framework is our five-color COVID warning system, which communicates the severity of a location’s outbreak and offers corresponding guidance on mitigation efforts needed at each risk level. This facilitates a unified approach with common metrics, enabling leaders at all levels to anticipate and adequately respond to their community’s COVID spread, and informing the general public on their community’s risk to COVID. To develop this framework, we prioritized metrics vital to guiding suppression efforts that allow a community to safely reopen."
+          "answer": "Covid Act Now partnered with the Harvard Global Health Institute and Harvard Edmond J. Safra Center for Ethics to develop the COVID risk framework. This framework is the result of collaboration between public health, epidemiology, and policy experts from the following organizations:"
         }
       ],
       "sectionHeader": "How COVID risk is determined",
@@ -111,35 +101,30 @@
       ]
     },
     {
-      "sectionHeader": " ICU headroom used",
+      "sectionHeader": " ICU capacity used",
       "sectionSubheader": "",
-      "sectionId": "icu-headroom-used",
-      "sectionIntro": "**ICU headroom used is the percentage of ICU beds available for COVID patients, after excluding those already in use by non-COVID patients.**",
+      "sectionId": "icu-capacity-used",
+      "sectionIntro": "**ICU capacity used measures the number of intensive care unit (ICU) beds that are currently in use.**",
       "questions": [
         {
-          "question": "Why did you choose ICU headroom used to measure hospital capacity?",
-          "questionId": "why-icu-headroom-to-measure-hospital-capacity",
-          "answer": "[The White House’s reopening plan](https://www.whitehouse.gov/openingamerica/), [AEI’s plan](https://www.aei.org/research-products/report/national-coronavirus-response-a-road-map-to-reopening/), and [Harvard University’s Safra Center for Ethic’s plan](https://ethics.harvard.edu/covid-roadmap) all note ICU headroom used as a key metric for reopening safely. Our metric measures the ability of an intensive care unit (ICU) to handle a surge of COVID patients in the case of an outbreak.\n\nWhen ICU capacity is reached, not only does that make it difficult for COVID ICU patients to receive care, but non-COVID ICU patients as well. This can lead to unnecessary deaths."
+          "question": "Why is ICU capacity used important? \n",
+          "questionId": "why-icu-capacity-important",
+          "answer": "The ICU is the part of a hospital for people who are the sickest. Each ICU bed is staffed by specially-trained personnel and supported with special equipment, such as ventilators. Staffed ICU beds are important because they may be life-saving for some people infected by COVID. In addition, ICU beds are needed to treat not only COVID patients, but also other patients, such as people who have had a heart attack or suffered a life-threatening injury. It is important that hospitals retain enough ICU capacity to take care of both COVID and other patients requiring critical care."
         },
         {
-          "question": "How is your metric different from ICU utilization that I see on my state’s dashboard?",
-          "questionId": "how-icu-headroom-different-from-state-dashboard",
-          "answer": "Our metric strives to capture the reality that many ICU beds will be occupied by non-COVID patients. Those beds can not be freed up, regardless of the severity of a current COVID outbreak. Even in the middle of a fall outbreak, it is not uncommon to see two-thirds of beds occupied by non-COVID patients, which is consistent with the occupancy rates estimated from pre-COVID times. We count as our denominator the number of available beds excluding those already occupied by non-COVID patients.\n\nIn the example below, there are three COVID patients, five non-COVID patients and 10 beds. A total ICU Utilization rate would be 80 percent (eight of 10 beds occupied). However, our metric focuses on COVID headroom which is 60 percent (three out of five COVID beds used). If there are no COVID patients in the ICU, our metric is 0.0 percent — even if there are non-COVID patients in the ICU.\n\n![ICU headroom diagram](/images_cms/icu-headroom-diagram.png \"ICU headroom diagram\")"
+          "question": "How does Covid Act Now assess ICU capacity?\n",
+          "questionId": "icu-capacity-thresholds",
+          "answer": "[Studies](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3840149/#:~:text=The%20mean%20hourly%20occupancy%20for,ICUs%20(P%20%3D%200.036).) have found that, on average, U.S. ICUs operate at 68 percent full. However, there is variability from hospital to hospital, depending on the size of the hospital, whether the hospital is located in a rural or urban area, and other factors. For instance, a small hospital with only four ICU beds running at 75 percent full has only one bed available, whereas a larger hospital with 100 ICU beds running at 75 percent full has twenty five ICU beds available.\n\nSo smaller hospitals with only a few (three to four) staffed ICU beds typically have lower occupancy (30 to 50 percent), and generally have a system for transferring critically ill patients to larger hospitals. Meanwhile, larger hospitals tend to run leaner, with higher ICU usage (60 to 80 percent). \n\nIn general, experts agree that as ICU capacity usage approaches 15 percent, the likelihood of an abrupt outbreak overwhelming hospital systems increases. At such levels of ICU usage, NPIs (Non-Pharmaceutical Interventions), ranging from business closures to stay-at-home orders, may be needed to prevent a hospital system’s ICU from being overwhelmed, which means that it would not be able to serve patients in need of lifesaving care. For instance, in California, the [California Department of Public Health (CDPH)](https://www.gov.ca.gov/wp-content/uploads/2020/12/12.3.20-Stay-at-Home-Order-ICU-Scenario.pdf) calls for stay-at-home orders when this 85 percent threshold is met."
         },
         {
-          "question": "Can I watch a video explainer?",
-          "questionId": "icu-headroom-video-explainer",
-          "answer": "https://www.youtube.com/embed/ysdC49BPVRk"
+          "questionId": "icu-capacity-used-sources",
+          "question": "What are your data sources for ICU capacity used?",
+          "answer": "To calculate ICU capacity used, we use data from the [Department of Health and Human Services (HHS)](https://healthdata.gov/dataset/covid-19-reported-patient-impact-and-hospital-capacity-state-timeseries). This data is provided to the HHS via three sources: (1) HHS TeleTracking, (2) reporting provided directly to HHS Protect by state/territorial health departments on behalf of their healthcare facilities and (3) National Healthcare Safety Network (before July 15).\n\nThis data is updated regularly and provides the latest values reported by each hospital facility in the system within the last four days for all time. This allows for a more comprehensive picture of the hospital utilization within a state by ensuring a hospital is represented, even if it misses a single day of reporting.\n\nIf you would like to learn more, check out [our data sources](https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit)."
         },
         {
-          "questionId": "icu-headroom-sources",
-          "question": "What are your data sources for ICU headroom used?",
-          "answer": "For states, we use COVID ICU hospitalization and ICU capacity data directly from the [Department of Health and Human Services] (https://healthdata.gov/dataset/covid-19-estimated-patient-impact-and-hospital-capacity-state).\n\nFor counties, we scrape COVID hospitalizations from official county-level dashboards where available, and disaggregate from the state-level numbers otherwise. We rely on data provided by [Covid Care Map](https://www.covidcaremap.org/) for county level estimates of ICU beds and historical non-COVID ICU utilization rates.\n\nIf you would like to learn more, check out [our data sources](https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit)."
-        },
-        {
-          "question": "How were the risk levels for ICU headroom used determined?",
-          "questionId": "icu-headroom-thresholds",
-          "answer": "We chose our cutoffs based on [Resolve to Save Live’s policy recommendation](https://preventepidemics.org/wp-content/uploads/2020/04/COV020_WhenHowTightenFaucet_v3.pdf), which says ICU COVID cases should be able to double for states to consider opening."
+          "question": "Why the data may be inaccurate",
+          "questionId": "why-data-inaccurate",
+          "answer": "Reporting is also generally susceptible to human error. There may be missing data. Data may be lost or distorted as it is reported from hospitals to local, state, and federal agencies, such as the HHS. \n\nIn addition, the number of hospitalizations can change suddenly, such as if there is an outbreak of COVID. Such an outbreak may also lead to reporting delays, as hospital staff work to accommodate the influx of patients and prioritize lifesaving care. \n\nFurthermore, hospitals may have “surge capacity,” which refers to a healthcare system's ability to quickly expand beyond its normal capacity in order to meet a “surge, or a sudden and unexpected increase in demand for medical care. In such instances, a hospital may be able to repurpose non ICU spaces, such as hallways, cafeterias, or other wards, to increase their ICU capacity. It may also allow other hospital staff to operate ICU beds under the supervision of trained ICU staff. Thus, although the HHS reports staffed ICU beds on a daily basis, hospital capacity numbers may not always represent the complete picture given the flux in ICU capacity."
         }
       ]
     },
@@ -167,5 +152,62 @@
     }
   ],
   "pageHeader": "Risk levels & key metrics",
-  "pageIntro": "Our mission is to share timely and reliable COVID data with decision makers and the public so that they can take informed action. We have five key metrics to assess COVID risk. Below you will learn how we calculate and source each metric and overall risk."
+  "pageIntro": "Covid Act Now uses five key metrics to assess COVID across U.S. states, metros, and counties. Three of these—daily new cases (incidence), infection growth rate (RT) and test positivity rate—assess a location's overall risk level. The other two—ICU capacity and tracers hired—reflect a location's preparedness to handle COVID risk. Below, learn more about each metric and how it is assessed.",
+  "frameworkLogos": [
+    {
+      "image": "/images_cms/the-rockefeller-foundation-logo.png",
+      "url": "https://www.rockefellerfoundation.org/",
+      "altText": "The Rockefeller Foundation logo"
+    },
+    {
+      "altText": "Bloomberg Philanthropies logo",
+      "image": "/images_cms/bloomberg-philanthropies-logo.png",
+      "url": "https://www.bloomberg.org/"
+    },
+    {
+      "altText": "Georgetown University logo",
+      "image": "/images_cms/georgetown-university-logo.png",
+      "url": "https://www.georgetown.edu/"
+    },
+    {
+      "altText": "University of Pennsylvania logo",
+      "image": "/images_cms/university-of-pennsylvania-logo.png",
+      "url": "https://www.upenn.edu/"
+    },
+    {
+      "altText": "University of Washington logo",
+      "image": "/images_cms/university-of-washington-logo.png",
+      "url": "https://www.washington.edu/"
+    },
+    {
+      "altText": "University of Minnesota logo ",
+      "url": "https://twin-cities.umn.edu/",
+      "image": "/images_cms/university-of-minnesota-logo.png"
+    },
+    {
+      "altText": "University of Louisville logo",
+      "image": "/images_cms/university-of-louisville-logo.png",
+      "url": "http://louisville.edu/"
+    },
+    {
+      "altText": "Microsoft AI for Health & Microsoft Research logo",
+      "image": "/images_cms/microsoft-logo.png",
+      "url": "https://www.microsoft.com/en-us/ai/ai-for-health"
+    },
+    {
+      "altText": "Apple University logo ",
+      "image": "/images_cms/apple-logo.png",
+      "url": "https://www.apple.com/"
+    },
+    {
+      "altText": "Resolve to Save Lives logo ",
+      "image": "/images_cms/resolve-to-save-lives-logo.png",
+      "url": "https://resolvetosavelives.org/"
+    },
+    {
+      "altText": "The Nuclear Threat Initiative logo ",
+      "image": "/images_cms/nuclear-threat-initiative-logo.png",
+      "url": "https://www.nti.org/"
+    }
+  ]
 }

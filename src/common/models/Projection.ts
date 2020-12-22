@@ -34,11 +34,14 @@ const DISABLED_INFECTION_RATE = new DisabledFips([]);
 const DISABLED_TEST_POSITIVITY = new DisabledFips([
   '48113',
   '48215',
-  '47', // https://trello.com/c/EoXyNUBD/646-disabled-tn-test-positivity
   '51', // https://trello.com/c/wW18WA48/660-virginia-test-positivity-incorrect-at-0-hhs-test-positivity-data-suspect
 ]);
 
-const DISABLED_ICU = new DisabledFips([]);
+const DISABLED_ICU = new DisabledFips([
+  '47', // https://trello.com/c/aEd07i5Y/701-disabled-tn-icu-headroom
+  // TODO(michael): Reenable counties / metros once we QA the data.
+  /\d{3,}/,
+]);
 
 const DISABLED_CONTACT_TRACING = new DisabledFips([]);
 
@@ -132,7 +135,6 @@ export class Projection {
   readonly currentCumulativeDeaths: number | null;
   readonly currentCumulativeCases: number | null;
   readonly currentContactTracerMetric: number | null;
-  readonly stateCode: string;
   readonly currentCaseDensity: number | null;
   readonly currentDailyDeaths: number | null;
 
@@ -181,7 +183,6 @@ export class Projection {
     this.actualTimeseries = actualTimeseries;
     this.dates = dates;
 
-    this.stateCode = summaryWithTimeseries.state;
     this.isCounty = parameters.isCounty;
     this.totalPopulation = summaryWithTimeseries.population;
     this.fips = summaryWithTimeseries.fips;

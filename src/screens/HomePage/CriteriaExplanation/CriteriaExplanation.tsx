@@ -59,26 +59,6 @@ const CriteriaExplanation = (props: { isMobile: Boolean }) => {
             </CriterionDescription>
           </Content>
         </Criterion>
-        <Criterion>
-          <Kicker isMobile={props.isMobile} title="Metric 4" number="4" />
-          <Content>
-            <CriterionHeader>ICU Headroom Used</CriterionHeader>
-            <CriterionDescription>
-              Do hospitals have capacity to treat a surge of COVID
-              hospitalizations?
-            </CriterionDescription>
-          </Content>
-        </Criterion>
-        <Criterion>
-          <Kicker isMobile={props.isMobile} title="Metric 5" number="5" />
-          <Content>
-            <CriterionHeader>Tracers Hired</CriterionHeader>
-            <CriterionDescription>
-              Are we hiring enough contact tracers given the number of new
-              cases?
-            </CriterionDescription>
-          </Content>
-        </Criterion>
       </CriteriaList>
     </Wrapper>
   );

@@ -1,10 +1,6 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { GlobalSelector } from 'components/MapSelectors/MapSelectors';
 import MapIcon from 'assets/images/mapIcon';
-import { MAP_FILTERS } from 'screens/LocationPage/Enums/MapFilterEnums';
-
 import {
   Wrapper,
   Content,
@@ -13,40 +9,30 @@ import {
   MenuBarWrapper,
   SearchHeaderWrapper,
 } from './SearchHeader.style';
+import SearchAutocomplete from 'components/Search';
+import { Region, getAutocompleteRegions } from 'common/regions';
+import { getFilterLimit } from 'components/Search';
 
 const SearchHeader = ({
   mobileMenuOpen,
   setMobileMenuOpen,
   setMapOption,
+  region,
 }: {
   mobileMenuOpen: boolean;
   setMobileMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setMapOption: React.Dispatch<React.SetStateAction<string>>;
+  region: Region;
 }) => {
-  const history = useHistory();
   const isMobile = useMediaQuery('(max-width:1349px)');
   const isNarrowMobile = useMediaQuery('(max-width:500px)');
-
-  // @ts-ignore TODO(aj): remove when converting MapSelectors
-  const handleSelectChange = option => {
-    if (option.state_code === MAP_FILTERS.DC) {
-      setMapOption(MAP_FILTERS.NATIONAL);
-    }
-
-    let route = `/us/${option.state_code.toLowerCase()}`;
-
-    if (option.county_url_name) {
-      route = `${route}/county/${option.county_url_name}`;
-    }
-
-    history.push(route);
-
-    window.scrollTo(0, 0);
-  };
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen((mobileMenuOpen = !mobileMenuOpen));
   };
+
+  /* We hide the minimap toggle button when the searchbar is in focus on mobile */
+  const [hideMapToggle, setHideMapToggle] = useState(false);
 
   // TODO (sgoldblatt): WHY are there so many wrappers?
   return (
@@ -60,13 +46,15 @@ const SearchHeader = ({
               }}
               isNarrowMobile={isNarrowMobile}
             >
-              <GlobalSelector
-                extendRight={true}
-                handleChange={handleSelectChange}
+              <SearchAutocomplete
+                locations={getAutocompleteRegions(region)}
+                filterLimit={getFilterLimit(region)}
+                setHideMapToggle={setHideMapToggle}
               />
             </SelectorWrapper>
             {isMobile && (
               <MapToggle
+                hideMapToggle={hideMapToggle}
                 onClick={() => toggleMobileMenu()}
                 isActive={mobileMenuOpen}
               >

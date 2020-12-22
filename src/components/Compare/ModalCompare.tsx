@@ -6,9 +6,11 @@ import {
   SummaryForCompare,
   MetroFilter,
   GeoScopeFilter,
+  HomepageLocationScope,
 } from 'common/utils/compare';
 import Filters from 'components/Compare/Filters';
 import { LockBodyScroll } from 'components/Dialog';
+import { Region, MetroArea } from 'common/regions';
 
 const ModalCompare = (props: {
   stateName?: string;
@@ -18,10 +20,8 @@ const ModalCompare = (props: {
   locations: SummaryForCompare[];
   currentCounty?: any;
   handleCloseModal: () => void;
-  viewAllCounties?: boolean;
   setCountyTypeToView: React.Dispatch<React.SetStateAction<MetroFilter>>;
   countyTypeToView: MetroFilter;
-  setViewAllCounties?: React.Dispatch<React.SetStateAction<boolean>>;
   geoScope?: GeoScopeFilter;
   setGeoScope?: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
   stateId?: string;
@@ -35,8 +35,15 @@ const ModalCompare = (props: {
   setSliderValue: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
   setShowFaqModal: React.Dispatch<React.SetStateAction<boolean>>;
   createCompareShareId: () => Promise<string>;
+  homepageScope: HomepageLocationScope;
+  setHomepageScope: React.Dispatch<React.SetStateAction<HomepageLocationScope>>;
+  homepageSliderValue: HomepageLocationScope;
+  setHomepageSliderValue: React.Dispatch<
+    React.SetStateAction<HomepageLocationScope>
+  >;
+  region?: Region;
 }) => {
-  const { handleCloseModal } = props;
+  const { handleCloseModal, region } = props;
 
   useEffect(() => {
     const handleEsc = (e: any) => {
@@ -52,24 +59,31 @@ const ModalCompare = (props: {
     };
   }, [handleCloseModal]);
 
+  const disableFilters =
+    props.stateId === 'MP' || (region && region instanceof MetroArea);
+
   return (
     <Fragment>
       <LockBodyScroll />
       <ModalHeader isHomepage={props.isHomepage}>
-        <Filters
-          isHomepage={props.isHomepage}
-          countyTypeToView={props.countyTypeToView}
-          setCountyTypeToView={props.setCountyTypeToView}
-          viewAllCounties={props.viewAllCounties}
-          setViewAllCounties={props.setViewAllCounties}
-          stateId={props.stateId}
-          county={props.county}
-          geoScope={props.geoScope}
-          setGeoScope={props.setGeoScope}
-          isModal
-          sliderValue={props.sliderValue}
-          setSliderValue={props.setSliderValue}
-        />
+        {!disableFilters && (
+          <Filters
+            isHomepage={props.isHomepage}
+            countyTypeToView={props.countyTypeToView}
+            setCountyTypeToView={props.setCountyTypeToView}
+            stateId={props.stateId}
+            county={props.county}
+            geoScope={props.geoScope}
+            setGeoScope={props.setGeoScope}
+            isModal
+            sliderValue={props.sliderValue}
+            setSliderValue={props.setSliderValue}
+            homepageScope={props.homepageScope}
+            setHomepageScope={props.setHomepageScope}
+            homepageSliderValue={props.homepageSliderValue}
+            setHomepageSliderValue={props.setHomepageSliderValue}
+          />
+        )}
         <CloseIcon onClick={() => props.handleCloseModal()} />
       </ModalHeader>
       <CompareTable
@@ -80,10 +94,8 @@ const ModalCompare = (props: {
         isHomepage={props.isHomepage}
         locations={props.locations}
         currentCounty={props.currentCounty}
-        viewAllCounties={props.viewAllCounties}
         countyTypeToView={props.countyTypeToView}
         setCountyTypeToView={props.setCountyTypeToView}
-        setViewAllCounties={props.setViewAllCounties}
         geoScope={props.geoScope}
         setGeoScope={props.setGeoScope}
         stateId={props.stateId}
@@ -97,6 +109,11 @@ const ModalCompare = (props: {
         setSliderValue={props.setSliderValue}
         setShowFaqModal={props.setShowFaqModal}
         createCompareShareId={props.createCompareShareId}
+        homepageScope={props.homepageScope}
+        setHomepageScope={props.setHomepageScope}
+        homepageSliderValue={props.homepageSliderValue}
+        setHomepageSliderValue={props.setHomepageSliderValue}
+        region={props.region}
       />
     </Fragment>
   );

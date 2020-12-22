@@ -5,7 +5,7 @@
  */
 
 /**
- * Fips Code.  For state level data, 2 characters, for county level data, 5 characters.
+ * FIPS Code. FIPS codes are either 2-digit state codes, 5-digit county codes, or 5-digit CBSA codes.
  */
 export type Fips = string;
 /**
@@ -13,9 +13,9 @@ export type Fips = string;
  */
 export type Country = string;
 /**
- * 2-letter ANSI state code.
+ * 2-letter ANSI state code. For CBSA regions, state is omitted.
  */
-export type State = string;
+export type State = string | null;
 /**
  * County name
  */
@@ -23,7 +23,12 @@ export type County = string | null;
 /**
  * An enumeration.
  */
-export type AggregationLevel = 'country' | 'state' | 'county';
+export type AggregationLevel =
+  | 'country'
+  | 'state'
+  | 'county'
+  | 'cbsa'
+  | 'place';
 /**
  * Latitude of point within the state or county
  */
@@ -48,8 +53,8 @@ export type Testpositivityratio = number | null;
  * Method used to determine test positivity ratio.
  */
 export type TestPositivityRatioMethod =
-  | 'CDCTesting'
   | 'CMSTesting'
+  | 'CDCTesting'
   | 'HHSTesting'
   | 'Valorum'
   | 'covid_tracking'
@@ -90,6 +95,7 @@ export type NonCovidPatientsMethod =
   | 'actual'
   | 'estimated_from_typical_utilization'
   | 'estimated_from_total_icu_actual';
+export type Icucapacityratio = number | null;
 /**
  * Risk levels for region.
  */
@@ -103,8 +109,9 @@ export type Risklevels = RiskLevels;
  *  *High* - At risk of outbreak
  *  *Critical* - Active or imminent outbreak
  *  *Unknown* - Risk unknown
+ *  *Extreme* - Severe outbreak
  */
-export type RiskLevel = 0 | 1 | 2 | 3 | 4;
+export type RiskLevel = 0 | 1 | 2 | 3 | 4 | 5;
 /**
  * Cumulative number of confirmed or suspected cases
  */
@@ -169,6 +176,10 @@ export type Newcases = number | null;
  */
 export type Lastupdateddate = string;
 /**
+ * URL linking to Covid Act Now location page.
+ */
+export type Url = string | null;
+/**
  * Ratio of people who test positive calculated using a 7-day rolling average.
  */
 export type Testpositivityratio1 = number | null;
@@ -189,6 +200,7 @@ export type Infectionrate1 = number | null;
  */
 export type Infectionrateci901 = number | null;
 export type Icuheadroomratio1 = number | null;
+export type Icucapacityratio1 = number | null;
 /**
  * Date of timeseries data point
  */
@@ -264,6 +276,7 @@ export interface RegionSummaryWithTimeseries {
   riskLevels: Risklevels;
   actuals: Actuals;
   lastUpdatedDate: Lastupdateddate;
+  url: Url;
   metricsTimeseries?: Metricstimeseries;
   actualsTimeseries: Actualstimeseries;
 }
@@ -279,6 +292,7 @@ export interface Metrics {
   infectionRateCI90: Infectionrateci90;
   icuHeadroomRatio: Icuheadroomratio;
   icuHeadroomDetails?: ICUHeadroomMetricDetails;
+  icuCapacityRatio: Icucapacityratio;
 }
 /**
  * Details about how the test positivity ratio was calculated.
@@ -340,6 +354,7 @@ export interface MetricsTimeseriesRow {
   infectionRateCI90: Infectionrateci901;
   icuHeadroomRatio: Icuheadroomratio1;
   icuHeadroomDetails?: ICUHeadroomMetricDetails;
+  icuCapacityRatio: Icucapacityratio1;
   date: Date;
 }
 /**

@@ -1,15 +1,6 @@
 import moment from 'moment';
 import urlJoin from 'url-join';
-import {
-  deburr,
-  flatten,
-  isNumber,
-  max,
-  range,
-  words,
-  partition,
-  sortBy,
-} from 'lodash';
+import { concat, deburr, flatten, isNumber, max, range, words } from 'lodash';
 import { color } from 'd3-color';
 import { schemeCategory10 } from 'd3-scale-chromatic';
 import { fetchProjectionsRegion } from 'common/utils/model';
@@ -20,11 +11,11 @@ import { SeriesType, Series } from './interfaces';
 import AggregationsJSON from 'assets/data/aggregations.json';
 import regions, {
   County,
-  getStateCode,
   MetroArea,
   Region,
   RegionType,
   State,
+  getAutocompleteRegions,
 } from 'common/regions';
 import { fail } from 'assert';
 
@@ -429,42 +420,10 @@ export function getSubtitle(
     : `${metricName} ${textPer100k} in ${getLocationNames(regions)}`;
 }
 
-/**
- * Returns a list of locations for the autocomplete component. We try to show
- * the most relevant options first. For a state, we show states, counties in
- * the state and then other counties. For a county, we show counties in the
- * state, then states and then other counties.
- */
-export function getAutocompleteLocations(locationFips: string) {
-  const states = regions.states;
-  const allCounties = regions.counties;
-
+export function getExploreAutocompleteLocations(locationFips: string) {
   const currentLocation = regions.findByFipsCode(locationFips)!;
-  const stateCode = getStateCode(currentLocation);
-
-  const [stateCounties, otherCounties] = partition(
-    allCounties,
-    county => county.stateCode === stateCode,
-  );
-
-  const sortedStates = sortBy(states, location => location.name);
-  const sortedStateCounties = sortBy(stateCounties, location => location.name);
-  const sortedOtherCounties = sortBy(otherCounties, location => location.name);
-
-  // TODO(michael): Where should aggregations go in the list?
-  return currentLocation.regionType === RegionType.STATE
-    ? [
-        ...regions.customAreas,
-        ...sortedStates,
-        ...sortedStateCounties,
-        ...sortedOtherCounties,
-      ]
-    : [
-        ...regions.customAreas,
-        ...sortedStateCounties,
-        ...sortedStates,
-        ...sortedOtherCounties,
-      ];
+  const locations = getAutocompleteRegions(currentLocation);
+  return concat(regions.customAreas, locations);
 }
 
 /**

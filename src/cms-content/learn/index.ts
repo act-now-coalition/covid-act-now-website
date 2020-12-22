@@ -220,10 +220,17 @@ interface Section {
   questions: Question[];
 }
 
+interface LogoItem {
+  altText: string;
+  image: string;
+  url: string;
+}
+
 export interface MetricExplainersContent {
   pageHeader: string;
   pageIntro: string;
   sections: Section[];
+  frameworkLogos: LogoItem[];
   metadataTitle: string;
   metadataDescription: string;
 }

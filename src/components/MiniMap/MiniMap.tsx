@@ -78,8 +78,8 @@ function regionTabName(region: Region) {
     return region.shortName;
   } else if (region instanceof County) {
     return region.state.shortName;
-  } else {
-    return region.shortName;
+  } else if (region instanceof MetroArea) {
+    return region.stateCodes;
   }
 }
 

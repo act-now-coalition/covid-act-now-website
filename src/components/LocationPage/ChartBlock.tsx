@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import {
-  ChartHeader,
+  LocationPageSectionHeader,
   ChartDescription,
   BetaTag,
   ChartHeaderWrapper,
@@ -37,10 +37,10 @@ function ChartBlock(props: {
   return (
     <Fragment>
       <ChartHeaderWrapper>
-        <ChartHeader ref={props.chartRef}>
+        <LocationPageSectionHeader ref={props.chartRef}>
           {getMetricNameExtended(metric)}
           {showBetaTag && <BetaTag>Beta</BetaTag>}
-        </ChartHeader>
+        </LocationPageSectionHeader>
         {hasMetric && !isMobile && (
           <ShareButtons
             chartIdentifier={metric}

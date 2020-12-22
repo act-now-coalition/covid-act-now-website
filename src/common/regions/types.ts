@@ -2,12 +2,15 @@ import urlJoin from 'url-join';
 import { getAbbreviatedCounty } from 'common/utils/compare';
 
 export type FipsCode = string;
+export type ZipCode = string;
 
 export enum RegionType {
   COUNTY = 'county',
   STATE = 'state',
   MSA = 'MSA',
 }
+
+const DC_METRO_FIPS = '47900';
 
 export abstract class Region {
   constructor(
@@ -69,6 +72,7 @@ export class County extends Region {
     public readonly state: State,
     public readonly cityNames: string[],
     private readonly adjacentCountiesFips: FipsCode[],
+    public readonly zipCodes: ZipCode[],
   ) {
     super(name, urlSegment, fipsCode, population, RegionType.COUNTY);
   }
@@ -104,21 +108,28 @@ export class MetroArea extends Region {
     fipsCode: FipsCode,
     population: number,
     public counties: County[],
-    private stateCodeList: string[],
+    public states: State[],
   ) {
     super(name, urlSegment, fipsCode, population, RegionType.MSA);
   }
 
+  private get principalCityName() {
+    // Make Washington DC metro principal city name more clear.
+    if (this.fipsCode === DC_METRO_FIPS) {
+      return 'Washington DC';
+    }
+    return this.name.split('-')[0];
+  }
   get fullName() {
-    return `${this.name}, ${this.stateCodes}`;
+    return `${this.principalCityName} metro area`;
   }
 
   get shortName() {
-    return this.name;
+    return `${this.principalCityName} metro`;
   }
 
   get abbreviation() {
-    return this.name;
+    return this.shortName;
   }
 
   get relativeUrl() {
@@ -126,6 +137,6 @@ export class MetroArea extends Region {
   }
 
   get stateCodes() {
-    return this.stateCodeList.join('-');
+    return this.states.map(state => state.stateCode).join('-');
   }
 }

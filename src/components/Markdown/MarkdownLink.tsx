@@ -4,6 +4,8 @@ import { scrollWithOffset } from 'components/TableOfContents';
 import { isValidURL, isInternalLink } from './utils';
 import TwitterEmbed, { isTwitterEmbed } from './TwitterEmbed';
 import YouTubeEmbed, { isYouTubeEmbed } from './YoutubeEmbed';
+import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
+import ExternalLink from 'components/ExternalLink';
 /**
  * Custom hyperlink for Markdown content. If the link is external, open it on
  * a new tab. If the link is internal, use the HashLink component to render
@@ -27,6 +29,15 @@ const MarkdownLink: React.FC<{
     return <YouTubeEmbed embedUrl={href} />;
   }
 
+  // HACK to track clicks on the exposure notification recommendation
+  if (href === 'https://g.co/ens') {
+    return (
+      <ExternalLink href={href} onClick={trackExposureClickRecommend}>
+        {children}
+      </ExternalLink>
+    );
+  }
+
   return isInternalLink(href) ? (
     <HashLink to={href} scroll={element => scrollWithOffset(element, -80)}>
       {children}
@@ -37,5 +48,13 @@ const MarkdownLink: React.FC<{
     </a>
   );
 };
+
+function trackExposureClickRecommend() {
+  trackEvent(
+    EventCategory.EXPOSURE_NOTIFICATIONS,
+    EventAction.CLICK_LINK,
+    'Recommendation',
+  );
+}
 
 export default MarkdownLink;

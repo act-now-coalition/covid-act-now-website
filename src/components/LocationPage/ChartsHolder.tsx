@@ -24,7 +24,7 @@ import {
 } from 'common/utils/recommend';
 import { mainContent } from 'cms-content/recommendations';
 import { getRecommendationsShareUrl } from 'common/urls';
-import { Region, getStateCode, getStateName } from 'common/regions';
+import { Region, State } from 'common/regions';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
@@ -43,8 +43,6 @@ interface ChartsHolderProps {
 }
 const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
   const projection = projections.primary;
-  const stateCode = getStateCode(region);
-  const stateName = getStateName(region);
 
   const county = findCountyByFips(region.fipsCode);
 
@@ -151,14 +149,13 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
           onHeaderSignupClick={() => scrollTo(shareBlockRef.current)}
           isMobile={isMobile}
         />
-        {stateCode && stateName && (
-          <CompareMain
-            stateName={stateName}
-            county={county}
-            locationsViewable={6}
-            stateId={stateCode}
-          />
-        )}
+        <CompareMain
+          stateName={region.name} // rename prop
+          county={county}
+          locationsViewable={6}
+          stateId={(region as State).stateCode || undefined}
+          region={region}
+        />
         <MainContentInner>
           <Recommend
             introCopy={recommendationsIntro}
