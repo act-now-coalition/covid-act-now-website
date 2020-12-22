@@ -94,6 +94,11 @@ export default function App() {
               />
               <Route
                 exact
+                path="/us/metro/:metroAreaUrlSegment/explore/:sharedComponentId?"
+                component={LocationPage}
+              />
+              <Route
+                exact
                 path="/us/metro/:metroAreaUrlSegment/recommendations"
                 component={LocationPage}
               />
