@@ -86,7 +86,7 @@ export const SelectorWrapper = styled.div`
   margin-right: ${props => props.theme.spacing(1)}px;
 
   @media (min-width: ${mobileBreakpoint}) {
-    max-width: 315px;
+    max-width: 325px;
     margin-left: 0;
     margin-right: 0;
   }

@@ -614,6 +614,13 @@ collections:
                   - { label: Question, name: question, widget: text }
                   - { label: Question ID, name: questionId, widget: text }
                   - { label: Answer, name: answer, widget: markdown }
+          - label: 'Framework section logos'
+            name: 'frameworkLogos'
+            widget: 'list'
+            fields:
+              - { label: 'Alt text', name: 'altText', widget: 'string' }
+              - { label: 'Image', name: 'image', widget: 'image' }
+              - { label: 'Url', name: 'url', widget: 'string', required: false }
           - label: Metadata title
             name: metadataTitle
             widget: text

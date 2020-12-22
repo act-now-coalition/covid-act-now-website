@@ -141,28 +141,26 @@ function renderThermometer(): React.ReactElement {
   const items = [
     {
       title: `Over ${levelHigh.upperLimit}`,
-      description: levelCritical.detail(),
+      description: 'COVID increasing exponentially',
       color: levelCritical.color,
       roundTop: true,
       roundBottom: false,
     },
     {
       title: `${levelMedium.upperLimit} - ${levelHigh.upperLimit}`,
-      description: levelHigh.detail(),
       color: levelHigh.color,
       roundTop: false,
       roundBottom: false,
     },
     {
       title: `${levelLow.upperLimit} - ${levelMedium.upperLimit}`,
-      description: levelMedium.detail(),
       color: levelMedium.color,
       roundTop: false,
       roundBottom: false,
     },
     {
       title: `Under ${levelLow.upperLimit}`,
-      description: levelLow.detail(),
+      description: 'COVID decreasing',
       color: levelLow.color,
       roundTop: false,
       roundBottom: true,

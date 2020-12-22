@@ -6,6 +6,7 @@ import thirdSurge from './third-surge.json';
 // import hospitalizationProjections from './hospitalization-projections.json';
 // import animap from './animap.json';
 import canCompare from './can-compare.json';
+// import metros from './metros.json';
 
 interface ArticleMain {
   articleID: string;
@@ -37,6 +38,7 @@ const articleList: ArticleJSON[] = [
   indigenousPeoplesDay,
   // animap,
   canCompare,
+  // metros,
   // hospitalizationProjections,
 ];
 

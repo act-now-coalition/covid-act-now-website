@@ -198,7 +198,7 @@ function renderThermometer(): React.ReactElement {
   const items = [
     {
       title: `Over ${format(levelHigh.upperLimit)}`,
-      description: levelCritical.detail(),
+      description: 'Inadequate testing',
       color: levelCritical.color,
       roundTop: true,
       roundBottom: false,
@@ -207,7 +207,6 @@ function renderThermometer(): React.ReactElement {
       title: `${format(levelMedium.upperLimit)} - ${format(
         levelHigh.upperLimit,
       )}`,
-      description: levelHigh.detail(),
       color: levelHigh.color,
       roundTop: false,
       roundBottom: false,
@@ -216,14 +215,13 @@ function renderThermometer(): React.ReactElement {
       title: `${format(levelLow.upperLimit)} - ${format(
         levelMedium.upperLimit,
       )}`,
-      description: levelMedium.detail(),
       color: levelMedium.color,
       roundTop: false,
       roundBottom: false,
     },
     {
       title: `Under ${format(levelLow.upperLimit)}`,
-      description: levelLow.detail(),
+      description: 'Adequate testing',
       color: levelLow.color,
       roundTop: false,
       roundBottom: true,

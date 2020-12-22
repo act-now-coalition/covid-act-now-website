@@ -29,6 +29,18 @@ export const HeaderTitle = styled(Typography).attrs(props => ({
   }
 `;
 
+export const HeaderSubtitle = styled(Typography).attrs(props => ({
+  component: 'span',
+}))`
+  display: block;
+  text-align: center;
+  font-weight: 500;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    text-align: left;
+  }
+`;
+
 export const HeaderStateCode = styled.span`
   a {
     color: ${palette.black};

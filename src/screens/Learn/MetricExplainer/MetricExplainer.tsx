@@ -18,12 +18,14 @@ import { ExplainersHeading2 } from './MetricExplainer.style';
 import { useScrollToTopButton } from 'common/hooks';
 import ScrollToTopButton from 'components/SharedComponents/ScrollToTopButton';
 import { EventCategory } from 'components/Analytics';
+import GovLogoGrid from 'screens/About/GovLogoGrid';
 
 const MetricExplainer = () => {
   const {
     pageHeader,
     pageIntro,
     sections,
+    frameworkLogos,
     metadataTitle,
     metadataDescription,
   } = metricExplainersContent;
@@ -68,6 +70,7 @@ const MetricExplainer = () => {
             <MarkdownContent source={question.answer} />
           </Fragment>
         ))}
+        <GovLogoGrid logos={frameworkLogos} />
         {metricSections.map(section => (
           <Fragment key={section.sectionId}>
             <ExplainersHeading2 id={section.sectionId}>
@@ -99,7 +102,7 @@ function getThermometer(sectionId: string) {
     'daily-new-cases': Metric.CASE_DENSITY,
     'infection-rate': Metric.CASE_GROWTH_RATE,
     'positive-test-rate': Metric.POSITIVE_TESTS,
-    'icu-headroom-used': Metric.HOSPITAL_USAGE,
+    'icu-capacity-used': Metric.HOSPITAL_USAGE,
     'tracers-hired': Metric.CONTACT_TRACING,
   };
 

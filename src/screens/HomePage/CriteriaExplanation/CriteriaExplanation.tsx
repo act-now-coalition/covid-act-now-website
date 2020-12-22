@@ -9,8 +9,10 @@ import {
   ListSubheader,
   Content,
   KickerWrapper,
+  RiskLevelChangeExplainer,
 } from './CriteriaExplanation.style';
 import { Subtitle1 } from 'components/Typography';
+import ExternalLink from 'components/ExternalLink';
 
 const Kicker = (props: {
   number: string;
@@ -59,27 +61,14 @@ const CriteriaExplanation = (props: { isMobile: Boolean }) => {
             </CriterionDescription>
           </Content>
         </Criterion>
-        <Criterion>
-          <Kicker isMobile={props.isMobile} title="Metric 4" number="4" />
-          <Content>
-            <CriterionHeader>ICU Headroom Used</CriterionHeader>
-            <CriterionDescription>
-              Do hospitals have capacity to treat a surge of COVID
-              hospitalizations?
-            </CriterionDescription>
-          </Content>
-        </Criterion>
-        <Criterion>
-          <Kicker isMobile={props.isMobile} title="Metric 5" number="5" />
-          <Content>
-            <CriterionHeader>Tracers Hired</CriterionHeader>
-            <CriterionDescription>
-              Are we hiring enough contact tracers given the number of new
-              cases?
-            </CriterionDescription>
-          </Content>
-        </Criterion>
       </CriteriaList>
+      <RiskLevelChangeExplainer component="p">
+        Learn about{' '}
+        <ExternalLink href="/faq#december-risk-levels-change">
+          changes we made
+        </ExternalLink>{' '}
+        to how we determine risk levels on December 21.
+      </RiskLevelChangeExplainer>
     </Wrapper>
   );
 };

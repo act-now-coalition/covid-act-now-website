@@ -8,7 +8,7 @@ describe('regions', () => {
 
   test('counties() returns all the counties', () => {
     const counties = regions.counties;
-    expect(counties).toHaveLength(3224);
+    expect(counties).toHaveLength(3223);
   });
 
   describe('findByFipsCode', () => {
@@ -134,15 +134,15 @@ describe('County', () => {
 describe('Metro Area', () => {
   const metro = regions.findByFipsCode('35620');
   test('fullName', () => {
-    expect(metro?.fullName).toBe('New York-Newark-Jersey City, NY-NJ-PA');
+    expect(metro?.fullName).toBe('New York metro area');
   });
 
   test('shortName', () => {
-    expect(metro?.shortName).toBe('New York-Newark-Jersey City');
+    expect(metro?.shortName).toBe('New York metro');
   });
 
   test('abbreviation', () => {
-    expect(metro?.abbreviation).toBe('New York-Newark-Jersey City');
+    expect(metro?.abbreviation).toBe('New York metro');
   });
 
   test('relativeUrl', () => {
@@ -155,5 +155,10 @@ describe('Metro Area', () => {
     expect(metro?.canonicalUrl).toBe(
       'https://covidactnow.org/us/metro/new-york-newark-jersey-city_ny-nj-pa',
     );
+  });
+
+  test('DC Metro Area Name', () => {
+    const metro = regions.findByFipsCodeStrict('47900');
+    expect(metro.fullName).toBe('Washington DC metro area');
   });
 });

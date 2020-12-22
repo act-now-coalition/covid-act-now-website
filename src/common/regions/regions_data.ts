@@ -2,6 +2,7 @@ import { chain, Dictionary, fromPairs } from 'lodash';
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 import countyAdjacencyMsa from 'common/data/county_adjacency_msa.json';
 import metroAreaDataset from 'common/data/msa-data.json';
+import countyFipsToZips from 'components/MapSelectors/datasets';
 import {
   RegionType,
   FipsCode,
@@ -13,7 +14,7 @@ import {
 
 const { state_dataset, state_county_map_dataset } = US_STATE_DATASET;
 
-// getStateName and getStateCode are helper functions that make migrating
+// getStateName, getStateCode, and getStateFips are helper functions that make migrating
 // some of the existing state based logic over.  Ideally we will be able
 // to remove these at some point, but they are helpful in the meantime.
 export function getStateName(region: Region): string | null {
@@ -35,6 +36,16 @@ export function getStateCode(region: Region): string | null {
   }
   return null;
 }
+
+export const getStateFips = (region: Region): string | null => {
+  if (region.regionType === RegionType.COUNTY) {
+    return (region as County).state.fipsCode;
+  }
+  if (region.regionType === RegionType.STATE) {
+    return (region as State).fipsCode;
+  }
+  return null;
+};
 
 function buildStates(): State[] {
   return chain(state_dataset)
@@ -72,6 +83,7 @@ function buildCounties(
         const countyFips = `${countyInfo.state_fips_code}${countyInfo.county_fips_code}`;
         const state = statesByFips[countyInfo.state_fips_code];
         const adjacentCounties = countyAdjacency[countyFips]?.adjacent_counties;
+        const zipCodes = countyFipsToZips[countyFips];
         return new County(
           countyInfo.county,
           countyInfo.county_url_name,
@@ -80,6 +92,7 @@ function buildCounties(
           state,
           countyInfo.cities || [],
           adjacentCounties || [],
+          zipCodes || [],
         );
       })
       /* Filtering out DC county (which is redundant to DC state + has mismatching data) */
@@ -88,7 +101,16 @@ function buildCounties(
   );
 }
 
-function buildMetroAreas(countiesByFips: Dictionary<County>): MetroArea[] {
+function buildMetroAreas(
+  countiesByFips: Dictionary<County>,
+  statesByFips: Dictionary<State>,
+): MetroArea[] {
+  const statesByCode = chain(statesByFips)
+    .values()
+    .map(state => [state.stateCode, state])
+    .fromPairs()
+    .value();
+
   return chain(metroAreaDataset.metro_areas)
     .map(metro => {
       const counties: County[] = metro.countyFipsCodes
@@ -97,13 +119,18 @@ function buildMetroAreas(countiesByFips: Dictionary<County>): MetroArea[] {
 
       const [name, statesText] = metro.cbsaTitle.split(', ');
       const stateCodes = statesText.split('-');
+
+      const states = stateCodes
+        .map(stateCode => statesByCode[stateCode])
+        .filter(state => state);
+
       return new MetroArea(
         name,
         metro.urlSegment,
         metro.cbsaCode,
         metro.population,
         counties,
-        stateCodes,
+        states,
       );
     })
     .value();
@@ -125,7 +152,7 @@ export const countiesByFips = fromPairs(
   counties.map(county => [county.fipsCode, county]),
 );
 
-const metroAreas = buildMetroAreas(countiesByFips);
+const metroAreas = buildMetroAreas(countiesByFips, statesByFips);
 export const metroAreasByFips = fromPairs(
   metroAreas.map(metro => [metro.fipsCode, metro]),
 );

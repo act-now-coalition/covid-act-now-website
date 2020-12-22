@@ -49,6 +49,11 @@ export default function ShareImage({ match }: RouteComponentProps<{}>) {
         path={`${match.path}counties/:countyFipsId`}
         component={ShareCardImage}
       />
+      <Route
+        exact
+        path={`${match.path}metros/:fipsCode`}
+        component={ShareCardImage}
+      />
 
       {/* METRIC CHARTS */}
       <Route
@@ -71,6 +76,16 @@ export default function ShareImage({ match }: RouteComponentProps<{}>) {
         path={`${match.path}counties/:countyFipsId/chart/:metric/export`}
         component={ChartExportImage}
       />
+      <Route
+        exact
+        path={`${match.path}metros/:fipsCode/chart/:metric`}
+        component={ChartShareImage}
+      />
+      <Route
+        exact
+        path={`${match.path}metros/:fipsCode/chart/:metric/export`}
+        component={ChartExportImage}
+      />
 
       {/* EXPLORE CHARTS */}
       <Route
@@ -85,12 +100,22 @@ export default function ShareImage({ match }: RouteComponentProps<{}>) {
       />
       <Route
         exact
+        path={`${match.path}metros/:fipsCode/explore/:chartId`}
+        component={ExploreChartImage}
+      />
+      <Route
+        exact
         path={`${match.path}counties/:countyFipsId/explore/:chartId/export`}
         component={ExploreChartExportImage}
       />
       <Route
         exact
         path={`${match.path}states/:stateId/explore/:chartId/export`}
+        component={ExploreChartExportImage}
+      />
+      <Route
+        exact
+        path={`${match.path}metros/:fipsCode/explore/:chartId/export`}
         component={ExploreChartExportImage}
       />
 

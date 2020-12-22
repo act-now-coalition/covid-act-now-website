@@ -8,6 +8,7 @@ import MuiSwitch from './MuiSwitch';
 import MuiSlider from './MuiSlider';
 import MuiAccordion from './MuiAccordion';
 import MuiAccordionSummary from './MuiAccordionSummary';
+import MuiTextField from './MuiTextField';
 
 export default {
   MuiButton,
@@ -20,4 +21,5 @@ export default {
   MuiSlider,
   MuiAccordion,
   MuiAccordionSummary,
+  MuiTextField,
 };
