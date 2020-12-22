@@ -1,22 +1,10 @@
-import { createContext, useContext } from 'react';
 import { useParams } from 'react-router';
-import { assert } from 'common/utils';
 import regions from './region_db';
 import { Region } from './types';
 
 // We are careful to never call `useRegion()` in components that are not
 // nested inside `<RegionContext.Provider>` so we cheat and pretend that the
 // value is non-nullable
-export const RegionContext = createContext<Region>(null as any);
-
-export const useLocationPageRegion = () => {
-  const region = useContext(RegionContext);
-  assert(
-    region,
-    '`useLocationPageRegion` can only be called from components inside LocationPage',
-  );
-  return region;
-};
 
 export const useRegionFromParams = (): Region | null => {
   const {
