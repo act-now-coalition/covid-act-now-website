@@ -183,7 +183,8 @@ function renderThermometer(): React.ReactElement {
   const items = [
     {
       title: `Over ${format(levelHigh.upperLimit)}`,
-      description: levelCritical.detail(),
+      description:
+        'ICU at high risk of being overloaded in case of a COVID surge',
       color: levelCritical.color,
       roundTop: true,
       roundBottom: false,
@@ -192,7 +193,6 @@ function renderThermometer(): React.ReactElement {
       title: `${format(levelMedium.upperLimit)} - ${format(
         levelHigh.upperLimit,
       )}`,
-      description: levelHigh.detail(),
       color: levelHigh.color,
       roundTop: false,
       roundBottom: false,
@@ -201,14 +201,13 @@ function renderThermometer(): React.ReactElement {
       title: `${format(levelLow.upperLimit)} - ${format(
         levelMedium.upperLimit,
       )}`,
-      description: levelMedium.detail(),
       color: levelMedium.color,
       roundTop: false,
       roundBottom: false,
     },
     {
       title: `Under ${format(levelLow.upperLimit)}`,
-      description: levelLow.detail(),
+      description: 'ICU can likely handle a COVID surge',
       color: levelLow.color,
       roundTop: false,
       roundBottom: true,
