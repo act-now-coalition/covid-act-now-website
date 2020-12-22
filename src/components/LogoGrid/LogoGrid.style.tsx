@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import theme from 'assets/theme';
 import Grid from '@material-ui/core/Grid';
+import { materialSMBreakpoint } from 'assets/theme/sizes';
 
 export const Logo = styled.img`
   width: 100%;
@@ -14,7 +15,11 @@ export const Logo = styled.img`
 
 export const GovLogo = styled.img`
   max-height: 100px;
-  max-width: 120px;
+  max-width: 90px;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    max-width: 120px;
+  }
 `;
 
 export const PressLogoWrapper = styled(Grid)`
