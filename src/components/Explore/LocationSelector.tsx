@@ -8,7 +8,7 @@ import * as Styles from './LocationSelector.style';
 
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import * as ExploreStyles from './Explore.style';
-import AutocompleteRegions from 'components/AutocompleteLocations/AutocompleteRegions';
+import AutocompleteRegions from 'components/AutocompleteRegions';
 
 const LocationSelector: React.FC<{
   regions: Region[];

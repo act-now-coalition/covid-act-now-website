@@ -2,7 +2,7 @@ import React from 'react';
 import regions, { County, getStateCode } from 'common/regions';
 import { isValidEmail } from 'common/utils';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
-import { AutocompleteRegions } from 'components/AutocompleteLocations';
+import AutocompleteRegions from 'components/AutocompleteRegions';
 import { getDefaultRegions, subscribeToLocations } from './utils';
 import { StyledNewsletter, InputHolder, InputError } from './Newsletter.style';
 
