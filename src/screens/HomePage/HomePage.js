@@ -32,6 +32,7 @@ import SearchAutocomplete from 'components/Search';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { getFilterLimit } from 'components/Search';
 import { getAutocompleteRegions } from 'common/regions';
+import { getNationalText } from 'components/NationalText';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -137,6 +138,7 @@ export default function HomePage() {
                 title="Cases, Deaths and Hospitalizations"
                 initialFipsList={initialFipsList}
                 initialChartIndigenousPopulations={false}
+                nationalSummaryText={getNationalText()}
               />
             </Section>
             <SectionWrapper ref={indicatorsRef}>

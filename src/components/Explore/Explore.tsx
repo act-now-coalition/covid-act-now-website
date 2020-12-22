@@ -104,11 +104,13 @@ const Explore: React.FunctionComponent<{
   initialChartIndigenousPopulations?: boolean;
   title?: string;
   defaultMetric?: ExploreMetric;
+  nationalSummaryText?: string;
 }> = ({
   initialFipsList,
   initialChartIndigenousPopulations,
   defaultMetric = ExploreMetric.CASES,
   title = 'Trends',
+  nationalSummaryText,
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -339,7 +341,9 @@ const Explore: React.FunctionComponent<{
           </Styles.ShareBlock>
         </Grid>
       </Grid>
-      <NationalText />
+      {nationalSummaryText && (
+        <NationalText nationalSummaryText={nationalSummaryText} />
+      )}
       <ExploreTabs
         activeTabIndex={currentMetric}
         labels={metricLabels}
