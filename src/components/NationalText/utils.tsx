@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import AggregationsJSON from 'assets/data/aggregations.json';
-import { last, sum, isNumber } from 'lodash';
+import { last, sum, isFinite } from 'lodash';
 import moment from 'moment';
 import {
   formatPercent,
@@ -47,8 +47,8 @@ export const getNationalText: React.FC = () => {
   );
 
   const renderPercentChangeSentence =
-    isNumber(percentChangeSmoothedCases) &&
-    isNumber(percentChangeSmoothedDeaths);
+    isFinite(percentChangeSmoothedCases) &&
+    isFinite(percentChangeSmoothedDeaths);
 
   const lastDate = last(dates);
   const lastDateFormatted: string = moment(lastDate).format('MMMM Do, YYYY');
