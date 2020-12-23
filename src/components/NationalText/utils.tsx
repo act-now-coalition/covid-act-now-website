@@ -11,8 +11,8 @@ import {
 
 const getTwoWeekPercentChange = (series: any[]): number | null => {
   const lastTwoWeeks = series.slice(-14);
-  const firstVal = last(lastTwoWeeks);
-  const lastVal = lastTwoWeeks[0];
+  const firstVal = lastTwoWeeks[0];
+  const lastVal = last(lastTwoWeeks);
   if (!firstVal || !lastVal) {
     return null;
   }

@@ -120,13 +120,14 @@ export function isValidEmail(emailAddress: string) {
   );
 }
 
+// Returns unformatted percent in decimal form
 export function getPercentChange(numA: number, numB: number): number | null {
-  const validParams = _.isNumber(numA) && _.isNumber(numB) && numB !== 0;
+  const validParams = _.isNumber(numA) && _.isNumber(numB) && numA !== 0;
   if (!validParams) {
     return null;
   } else {
-    const difference = numA - numB;
-    const percentChange = difference / numB;
+    const difference = numB - numA;
+    const percentChange = difference / numA;
     return percentChange;
   }
 }
