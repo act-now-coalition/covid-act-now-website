@@ -455,7 +455,7 @@
     {
       "term": "Ventilator",
       "termId": "ventilator",
-      "definition": "A ventilator is a machine that helps patients breathe when they cannot do so on their own.\n\n* People whose lungs are severely damaged by COVID may use a ventilator because they cannot get enough oxygen on their own.\n* While ventilators allow lungs to heal, they are not in and of themselves a treatment.\n\n[Intensive care unit](icu-capacity) (ICU) beds are equipped with ventilators, which may save the lives of the sickest COVID patients.",
+      "definition": "A ventilator is a machine that helps patients breathe when they cannot do so on their own.\n\n* People whose lungs are severely damaged by COVID may use a ventilator because they cannot get enough oxygen on their own.\n* While ventilators allow lungs to heal, they are not in and of themselves a treatment.\n\n[Intensive care unit](#icu-capacity) (ICU) beds are equipped with ventilators, which may save the lives of the sickest COVID patients.",
       "category": "Treatment"
     },
     {
