@@ -19,12 +19,6 @@ const getTwoWeekPercentChange = (series: any[]): number | null => {
   return getPercentChange(firstVal, lastVal);
 };
 
-const getDescriptiorCopy = (percentChange: number): string => {
-  if (percentChange > 0) {
-    return 'increased ';
-  } else return 'decreased ';
-};
-
 const getTotalCasesCopy = (summedRawCases: number): string => {
   const ONE_MILLION = 1000000;
   const divided = summedRawCases / ONE_MILLION;
@@ -59,6 +53,15 @@ export const getNationalText: React.FC = () => {
   const lastDate = last(dates);
   const lastDateFormatted: string = moment(lastDate).format('MMMM Do, YYYY');
 
+  const getChangeDescriptorCopy = (percentChange: number): string => {
+    const changeByCopy = `by about ${formatPercent(Math.abs(percentChange))}`;
+    if (percentChange > 0.01) {
+      return `increased ${changeByCopy}`;
+    } else if (percentChange < 0) {
+      return `decreased ${changeByCopy}`;
+    } else return 'remained about consistent each day';
+  };
+
   return (
     <Fragment>
       As of {lastDateFormatted}, there have been roughly{' '}
@@ -67,10 +70,10 @@ export const getNationalText: React.FC = () => {
       United States.{' '}
       {renderPercentChangeSentence
         ? `Over the last 14 days, daily new
-      cases have ${getDescriptiorCopy(percentChangeSmoothedCases!)} by${' '}
-      ${formatPercent(Math.abs(percentChangeSmoothedCases!))} and daily new
-      deaths have ${getDescriptiorCopy(percentChangeSmoothedDeaths!)}
-      by ${formatPercent(Math.abs(percentChangeSmoothedDeaths!))}.`
+    cases have ${getChangeDescriptorCopy(
+      percentChangeSmoothedCases!,
+    )} and daily new
+    deaths have ${getChangeDescriptorCopy(percentChangeSmoothedDeaths!)}.`
         : ''}
     </Fragment>
   );
