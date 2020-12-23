@@ -9,7 +9,7 @@ import { Metric } from 'common/metric';
 import { useModelLastUpdatedDate } from 'common/utils/model';
 import { Projections } from 'common/models/Projections';
 import { formatUtcDate } from 'common/utils';
-import { useLocationPageRegion } from 'common/regions';
+import { Region } from 'common/regions';
 import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
 import { ThermometerImage } from 'components/Thermometer';
 import LocationPageHeading from './LocationPageHeading';
@@ -42,12 +42,12 @@ const LocationPageHeader = (props: {
   onHeaderShareClick: () => void;
   onHeaderSignupClick: () => void;
   isMobile?: boolean;
+  region: Region;
 }) => {
   const hasStats = !!Object.values(props.stats).filter(
     (val: number | null) => val !== null,
   ).length;
-  const { projections } = props;
-  const region = useLocationPageRegion();
+  const { projections, region } = props;
 
   //TODO (chelsi): get rid of this use of 'magic' numbers
   const headerTopMargin = !hasStats ? -202 : -218;
