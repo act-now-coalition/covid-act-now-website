@@ -59,7 +59,7 @@ export const getNationalText: React.FC = () => {
       return `increased ${changeByCopy}`;
     } else if (percentChange < 0) {
       return `decreased ${changeByCopy}`;
-    } else return 'remained about consistent each day';
+    } else return 'remained about the same';
   };
 
   return (
