@@ -35,7 +35,7 @@
     {
       "term": "Case incidence",
       "termId": "case-incidence",
-      "definition": "Case incidence is a measure of new confirmed COVID cases per day. It answers the question: “how many new COVID infections were reported in my area?” Incidence is important because it provides a snapshot of the state of COVID in a given community.\n\nDisease prevalence is another term you may have read in the news or online. It is not the same as incidence. While incidence refers to the number of new confirmed cases on a given day, prevalence refers to the total number of infections which are currently active on a given day.",
+      "definition": "Case incidence is a measure of new confirmed COVID cases per day. It answers the question: “how many new COVID infections were reported in my area?” Incidence is important because it provides a snapshot of the state of COVID in a given community.\n\n[Prevalence](#disease-prevalence) is another term you may have read in the news or online. It is not the same as incidence. While incidence refers to the number of new confirmed cases on a given day, prevalence refers to the total number of infections which are currently active on a given day.",
       "category": "Metrics"
     },
     {
@@ -47,7 +47,7 @@
     {
       "term": "Community spread",
       "termId": "community-spread",
-      "definition": "Community spread refers to disease spread among people in a community without clear identification of when a person was [exposed](https://covidactnow.org/glossary#exposed) or how the virus was [transmitted](https://covidactnow.org/glossary#transmission) to them. It is sometimes referred to as “community transmission.” In February, the [CDC identified](https://www.cdc.gov/media/releases/2020/s0226-Covid-19-spread.html) a COVID patient in California who had no relevant travel history or known exposure to a patient with COVID. This discovery marked the first known instance of community spread in the United States.",
+      "definition": "Community spread refers to disease spread among people in a community without clear identification of when a person was [exposed](https://covidactnow.org/glossary#exposed) or how the virus was [transmitted](https://covidactnow.org/glossary#transmission) to them. It is sometimes referred to as “community transmission.” In February 2020, the [CDC identified](https://www.cdc.gov/media/releases/2020/s0226-Covid-19-spread.html) a COVID patient in California who had no relevant travel history or known exposure to a patient with COVID. This discovery marked the first known instance of community spread in the United States.",
       "category": "Transmission"
     },
     {
@@ -63,7 +63,7 @@
       "category": "Metrics"
     },
     {
-      "definition": "A confirmed case, in the context of COVID reporting, is an individual who received a [PCR Test](#pcr-test) or [Antigen Test](#antigen-test) where the test result came back positive. This positive result indicates that the individual was actively infected with the [SARS-CoV-2](#sars-cov-2) virus at the time of the test. \n\nCases can also be classified as \"possible\" or \"probable\" if identified without laboratory test results. The reporting of COVID cases normally refers to confirmed cases unless otherwise noted. The number of new cases per day, also referred to as \"[case incidence](https://covidactnow.org/glossary#case-incidence)\", is often plotted for each day over a period of time to show how the daily new cases are trending: up, down, or steady.",
+      "definition": "A confirmed case, in the context of COVID reporting, is an individual who received a [PCR test](#pcr-test) or [antigen test](#antigen-test) where the test result came back positive. This positive result indicates that the individual was actively infected with the [SARS-CoV-2](#sars-cov-2) virus at the time of the test. \n\nCases can also be classified as \"possible\" or \"probable\" if identified without laboratory test results. The reporting of COVID cases normally refers to confirmed cases unless otherwise noted. The number of new cases per day, also referred to as \"[case incidence](https://covidactnow.org/glossary#case-incidence)\", is often plotted for each day over a period of time to show how the daily new cases are trending: up, down, or steady.",
       "term": "Confirmed case",
       "termId": "confirmed-case ",
       "category": "Health and symptoms"
@@ -101,7 +101,7 @@
     {
       "term": "Daily new cases",
       "termId": "daily-new-cases",
-      "definition": "Daily new cases, also known as [disease incidence](#disease-incidence) in epidemiology, is the number of new COVID cases per day per unit of population. Covid Act Now reports “daily new cases” per 100,000 people in states and counties. This metric answers the question: “How many new infections are in my area each day?”\n\nBecause we can’t test our entire population, we don’t know how many total cases are in a given population. Measuring daily new cases gives us a way to gauge new COVID cases without having to test an entire population.",
+      "definition": "Daily new cases, also known as [case incidence](case-incidence) in epidemiology, is the number of new COVID cases per day per unit of population. Covid Act Now reports “[daily new cases](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases)” per 100,000 people in states, metros, and counties. This metric answers the question: “How many new infections are in my area each day?”\n\nBecause we can’t test our entire population, we don’t know how many total cases are in a given population. Measuring daily new cases is a way to gauge new COVID cases without having to test an entire population.",
       "category": "Metrics"
     },
     {
@@ -119,13 +119,13 @@
     {
       "term": "Demographics",
       "termId": "demographics",
-      "definition": "Demographics refer to data about the characteristics of a population, such as the age, gender, income, race, education level, language, or religion of the people within a group. Analyzing the demographics of a population is an important part of understanding how COVID is affecting certain communities. \n\nThe COVID pandemic has highlighted health disparities along [racial](https://covidtracking.com/race), ethnic, and economic lines in the United States:\n\n* Black and Latinx people are much more likely than others to be infected with COVID and to die from the disease. \n* Although data is still sparse, we know Indigenous people and other people of color are also infected at much higher rates.\n\nThe full explanations for these disparities are still being researched, but the differences are exacerbated by lower levels of health insurance coverage, distrust in the healthcare system due to a long history of discrimination in the medical field, and higher rates of underlying health conditions. There are efforts to create [tools](http://healthpolicy.ucla.edu/health-profiles/Pages/COVID-19Dashboard.aspx) that better collect and understand the demographics of COVID data.",
+      "definition": "Demographics refer to data about the characteristics of a population, such as the age, gender, income, race, education level, language, or religion of the people within a group. Analyzing the demographics of a population is an important part of understanding how COVID is affecting certain communities. \n\nThe COVID pandemic has highlighted health disparities along [racial](https://covidtracking.com/race), ethnic, and economic lines in the United States:\n\n* Black and Latinx people are much more likely than others to be infected with COVID and to die from the disease. \n* Although data is still sparse, we know Indigenous people and other people of color are also infected at much higher rates.\n\nThe full explanations for these disparities are still being researched, but the differences are exacerbated by lower levels of health insurance coverage, distrust in the healthcare system due to a long history of discrimination in the medical field, and higher rates of underlying health conditions.",
       "category": "Disease science"
     },
     {
       "term": "Disease prevalence",
       "termId": "disease-prevalence",
-      "definition": "Disease prevalence is a measure of the total number of cases in a community with a currently active COVID infection. It answers the question: “how many COVID infections are currently present in my area?” Disease prevalence is not the same as case incidence, which looks at the number of new cases in a specific time period. Disease prevalence is an indicator of the actual risk of encountering an infected individual in a community.\n\nTo know the true prevalence, you would need to test the entire population (or a widespread randomized sample) every day, using a highly-accurate test. Therefore, data sets often look at [case incidence](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases), or daily new cases per 100,000 people, to get an accurate estimation of COVID in a community.",
+      "definition": "Disease prevalence is a measure of the total number of cases in a community with a currently active COVID infection. It answers the question: “how many COVID infections are currently present in my area?” Disease prevalence is not the same as [case incidence](#case-incidence), which looks at the number of new cases in a specific time period. Disease prevalence is an indicator of the actual risk of encountering an infected individual in a community.\n\nTo know the true prevalence, you would need to test the entire population (or a widespread randomized sample) every day, using a highly-accurate test. Therefore, data sets often look at case incidence, or [daily new cases](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases) per 100,000 people, to get an accurate estimation of COVID in a community.",
       "category": "Metrics"
     },
     {
@@ -142,7 +142,7 @@
     },
     {
       "term": "Epidemiologist",
-      "definition": "An epidemiologist is a “Disease Detective” who searches for the root cause of a disease, identifies those who are at risk, and determines how to control its spread. These experts are some of the cornerstones of public health and have been highly involved in fighting the [COVID](#covid-19) pandemic.",
+      "definition": "An epidemiologist is a “disease detective” who searches for the root cause of a disease, identifies those who are at risk, and determines how to control its spread. These experts are some of the cornerstones of public health and have been highly involved in fighting the [COVID](#covid-19) pandemic.",
       "termId": "epidemiologist",
       "category": "Disease science"
     },
@@ -167,7 +167,7 @@
     {
       "term": "False negative",
       "termId": "false-negative",
-      "definition": "A false negative occurs when a test result incorrectly indicates that someone does not have a disease when they actually do. If someone infected with COVID tests negative due to test inaccuracy, they may unknowingly expose their households, friends, and community members to COVID. COVID [antigen tests](#antigen-test), which identify people who are currently infected with COVID, have a significant number of false negatives.",
+      "definition": "A false negative occurs when a test result incorrectly indicates that someone does not have a disease when they actually do. If someone infected with COVID tests negative due to test inaccuracy, they may unknowingly expose their households, friends, and community members to COVID. COVID [antigen tests](#antigen-test), which identify people who are currently infected with COVID, [have been shown](https://www.cdc.gov/coronavirus/2019-ncov/lab/resources/antigen-tests-guidelines.html) to produce false negatives.",
       "category": "Testing"
     },
     {
@@ -179,11 +179,11 @@
     {
       "term": "Forecasting",
       "termId": "forecasting",
-      "definition": "Forecasting predicts the future of COVID. Like weather forecasts, COVID forecasts predict the evolution and impact of disease down the line, and are very important to ensure timely and accurate public health disease response. Covid Act Now’s Covid Response Simulator, an [SEIR model](https://covidactnow.org/glossary#seir-model), is a forecasting tool that attempts to model how COVID will evolve in a population, given certain intervention scenarios such as no interventions, [social distancing](https://covidactnow.org/glossary#social-distancing), or [mask wearing](https://covidactnow.org/glossary#face-mask).",
+      "definition": "Forecasting predicts the future of COVID. Like weather forecasts, COVID forecasts predict the evolution and impact of disease down the line, and are very important to ensure timely and accurate public health disease response. Covid Act Now’s Covid Response Simulator, an SEIR model, is a forecasting tool that attempts to model how COVID will evolve in a population, given certain intervention scenarios such as no interventions, [social distancing](https://covidactnow.org/glossary#social-distancing), or [mask wearing](https://covidactnow.org/glossary#face-mask).",
       "category": "Disease science"
     },
     {
-      "definition": "Herd immunity is achieved when a large portion of a community (the herd) becomes immune to a disease, making the spread of disease from person to person unlikely. There are a lot of challenges in relying on natural herd immunity as a method of COVID disease eradication.\n\n* Generally, the percentage of the population that would need to be immune to a disease to achieve herd immunity is estimated to be [at least 60](https://www.nytimes.com/interactive/2020/05/28/upshot/coronavirus-herd-immunity.html) percent.\n* It is [not yet known](https://www.who.int/news-room/commentaries/detail/immunity-passports-in-the-context-of-covid-19) if COVID antibodies protect people from getting reinfected. It is also incredibly difficult to protect vulnerable people, such as people who are [immunocompromised](https://covidactnow.org/glossary#immunocompromised) or elderly, and would require continued isolation for these people.\n* No countries have even come close to achieving the percentage of infections necessary to achieve herd immunity for COVID.\n\nThe concept of herd immunity is also used when [talking about vaccination](https://www.who.int/news-room/q-a-detail/herd-immunity-lockdowns-and-covid-19). With successful vaccination, herd immunity may be achieved by protecting people from COVID without needing vast amounts of people to get sick with COVID. The overall amount of virus that can spread in a population is lowered if the majority of that population gets vaccinated.",
+      "definition": "Herd immunity is achieved when a large portion of a community (the herd) becomes immune to a disease, making the spread of disease from person to person unlikely. There are a lot of challenges in relying on natural herd immunity as a method of COVID disease eradication.\n\n* Generally, the percentage of the population that would need to be immune to a disease to achieve herd immunity is estimated to be [at least 60 percent](https://www.nytimes.com/interactive/2020/05/28/upshot/coronavirus-herd-immunity.html).\n* It is [not yet known](https://www.who.int/news-room/commentaries/detail/immunity-passports-in-the-context-of-covid-19) if COVID antibodies protect people from getting reinfected. It is also incredibly difficult to protect vulnerable people, such as people who are [immunocompromised](https://covidactnow.org/glossary#immunocompromised) or elderly, and would require continued isolation for these people.\n* No countries have even come close to achieving the percentage of infections necessary to achieve herd immunity for COVID.\n\nThe concept of herd immunity is also used when [talking about vaccination](https://www.who.int/news-room/q-a-detail/herd-immunity-lockdowns-and-covid-19). With successful vaccination, herd immunity may be achieved by protecting people from COVID without needing vast amounts of people to get sick with COVID. The overall amount of virus that can spread in a population is lowered if the majority of that population gets vaccinated.",
       "term": "Herd immunity",
       "termId": "herd-immunity",
       "category": "Disease science"
@@ -197,7 +197,7 @@
     {
       "term": "ICU capacity ",
       "termId": "icu-capacity",
-      "definition": "ICU capacity is used to measure an intensive care unit’s (ICU) ability to handle a surge of patients in the case of a COVID [outbreak](https://covidactnow.org/glossary#outbreak). The ICU is the part of a hospital reserved for people who are very sick. Staffed ICU beds, equipped with one or two dedicated nurses and special equipment, are important because they may be life-saving for some people infected by COVID. In addition, ICU beds are needed to treat not only COVID patients, but also other patients, such as people who have had a heart attack or suffered a life-threatening injury.\n\nCovid Act Now uses the metric “[ICU](https://covidactnow.org/covid-risk-levels-metrics#icu-capacity-used) [capacity used](https://covidactnow.org/covid-risk-levels-metrics#icu-capacity-used)” to measure the number of intensive care unit (ICU) beds that are currently in use.",
+      "definition": "ICU capacity is used to measure an intensive care unit’s (ICU) ability to handle a surge of patients in the case of a COVID [outbreak](https://covidactnow.org/glossary#outbreak). The ICU is the part of a hospital reserved for people who are very sick. Staffed ICU beds, equipped with one or two dedicated nurses and special equipment, are important because they may be life-saving for some people infected by COVID. In addition, ICU beds are needed to treat other patients, such as people who have had a heart attack or suffered a life-threatening injury.\n\nCovid Act Now uses the metric “[ICU](https://covidactnow.org/covid-risk-levels-metrics#icu-capacity-used) [capacity used](https://covidactnow.org/covid-risk-levels-metrics#icu-capacity-used)” to measure the number of intensive care unit (ICU) beds that are currently in use.",
       "category": "Metrics"
     },
     {
@@ -221,7 +221,7 @@
     {
       "term": "Infection",
       "termId": "infection",
-      "definition": "An infection occurs when an organism that causes disease, such as a virus, bacteria, or parasite, enters your body. In the case of COVID, a person is infected with the [SARS-CoV-2](#sars-cov-2) virus and develops [COVID](#covid-19). \n\nA person can be infected with COVID and spread COVID even if they do not show symptoms, in a process called [asymptomatic spread](#asymptomatic-spread). Infected individuals are identified and reported as “[cases](#confirmed-case)”, although many COVID infections are never actually detected or reported.",
+      "definition": "An infection occurs when an organism that causes disease, such as a virus, bacteria, or parasite, enters your body. In the case of COVID, a person is infected with the [SARS-CoV-2](#sars-cov-2) virus and develops [COVID](#covid-19). \n\nA person can be infected with COVID can spread COVID even if they do not show symptoms, through [asymptomatic spread](#asymptomatic-spread) and [presymptomatic spread](presymptomatic-spread).",
       "category": "Transmission"
     },
     {
@@ -245,7 +245,7 @@
     {
       "term": "Mitigation",
       "termId": "mitigation",
-      "definition": "Mitigation refers to lessening the impact of or slowing the spread of COVID. \n\n* Mitigation is important because it helps [flatten the curve](#flattening-the-curve), which spreads cases over a greater amount of time and prevents the healthcare system from becoming overwhelmed. In theory, the goal of mitigation is not [herd immunity](#herd-immunity). \n* Mitigation strategies include [non-pharmaceutical interventions](#npi) (NPIs) like limiting travel, social distancing, and mask wearing. \n\nCurrently, the United States’ response to COVID is primarily focused on mitigation — as opposed to [containment](#containment) or [suppression](#suppression) — in that the goal appears to be slowing the spread of COVID through public health education like CDC guidelines.",
+      "definition": "Mitigation refers to lessening the impact of or slowing the spread of COVID. \n\n* Mitigation is important because it helps [flatten the curve](#flattening-the-curve), which spreads cases over a greater amount of time and prevents the healthcare system from becoming overwhelmed. In theory, the goal of mitigation is not [herd immunity](#herd-immunity). \n* Mitigation strategies include [non-pharmaceutical interventions](#npi) (NPIs) like limiting travel, social distancing, and mask wearing.",
       "category": "Prevention and mitigation"
     },
     {
@@ -341,7 +341,7 @@
     {
       "term": "R₀",
       "termId": "r-0",
-      "definition": "R₀, pronounced “R naught,” represents the average number of people who will catch a virus from a single infected person. It is the basic reproductive number of a virus, or natural ability of the virus to spread. \n\n* If R₀ is three, then on average, every case will spur three new cases. \n* If R₀ is less than 1, then the number of cases is decreasing. \n\nWhen understanding how COVID is spreading in a state or county, Covid Act Now focuses on a variant of R₀ called [R(t)](#rt). R(t) is the actual spread of the virus, taking into account the effects of changes such as public health measures or the development of a vaccine. R(t) is therefore a more accurate representation of how fast COVID is spreading in a state or county.",
+      "definition": "R₀, pronounced “R naught,” represents the average number of people who will catch a virus from a single infected person. It is the basic reproductive number of a virus, or natural ability of the virus to spread. \n\n* If R₀ is three, then on average, every case will spur three new cases. \n* If R₀ is less than 1, then the number of cases is decreasing. \n\nWhen understanding how COVID is spreading in a state or county, Covid Act Now focuses on a variant of R₀ called [R(t)](https://covidactnow.org/covid-risk-levels-metrics#infection-rate). R(t) represents the actual spread of the virus, taking into account the effects of changes such as public health measures or the development of a vaccine. R(t) is therefore a more accurate representation of how fast COVID is spreading in a state or county.",
       "category": "Metrics"
     },
     {
@@ -365,7 +365,7 @@
     {
       "term": "Sensitivity (testing)",
       "termId": "sensitivity",
-      "definition": "Test sensitivity refers to a test’s ability to accurately identify all patients with a disease. Measuring the sensitivity of COVID tests helps us understand how accurate the test results are. It is usually expressed as a percentage: the proportion of those who have tested positive for a specific disease over the actual number of those who have the disease.\n\nA test with high sensitivity (a test with close to a 100 percent match between those who tested positive and those who are actually positive) is unlikely to give false negatives when the disease is actually present.\n\n A false negative occurs when a test result incorrectly indicates that someone does not have a disease, when they actually do. If someone infected with COVID tested negative due to test inaccuracy, they may unknowingly expose their households, friends, and community members to COVID.",
+      "definition": "Test sensitivity refers to a test’s ability to accurately identify all patients with a disease. Measuring the sensitivity of COVID tests helps us understand how accurate the test results are. It is usually expressed as a percentage: the proportion of those who have tested positive for a specific disease over the actual number of those who have the disease.\n\nA test with high sensitivity (a test with close to a 100 percent match between those who tested positive and those who are actually positive) is unlikely to give f[alse negatives](#false-negative) when the disease is actually present.\n\n A false negative occurs when a test result incorrectly indicates that someone does not have a disease, when they actually do. If someone infected with COVID tested negative due to test inaccuracy, they may unknowingly expose their households, friends, and community members to COVID.",
       "category": "Testing"
     },
     {
@@ -389,7 +389,7 @@
     {
       "term": "Specificity (testing)",
       "termId": "specificity",
-      "definition": "Test specificity refers to a test’s ability to correctly identify those without a disease. Measuring the specificity of COVID tests helps us understand how accurate the test results are. \n\nA test with high specificity (close to a 100 percent match between those who tested negative and those without the disease) will correctly identify everyone who does not have the disease and will not generate many f[alse positive](#false-positive) tests. A false positive occurs when a test result incorrectly indicates that someone does have a disease, when they actually do not.\n\nFalse positives have less dangerous ramifications than false negatives. If someone who is not infected with COVID tests positive due to test inaccuracy, they may take precautions such as self-isolation. If someone infected with COVID tests negative due to test inaccuracy, they may unknowingly expose their households, friends, and community members to COVID.",
+      "definition": "Test specificity refers to a test’s ability to correctly identify those without a disease. Measuring the specificity of COVID tests helps us understand how accurate the test results are. \n\nA test with high specificity (close to a 100 percent match between those who tested negative and those without the disease) will correctly identify everyone who does not have the disease and will not generate many [false positives](false-positive). A false positive occurs when a test result incorrectly indicates that someone has a disease, when they actually do not.\n\nFalse positives have less dangerous ramifications than [false negatives](false-negative). If someone who is not infected with COVID tests positive due to test inaccuracy, they may take precautions such as self-isolation. If someone infected with COVID tests negative due to test inaccuracy, they may unknowingly expose their households, friends, and community members to COVID.",
       "category": "Testing"
     },
     {
@@ -405,7 +405,7 @@
       "category": "Health and symptoms"
     },
     {
-      "definition": "A superspreading event is when one or a small number of infected people infect an unusually large number of people. It has become clear that superspreading events, such as [conferences](https://www.wbur.org/commonhealth/2020/03/12/coronavirus-outbreak-biogen-conference-superspreading), [choir practices](https://www.cdc.gov/mmwr/volumes/69/wr/mm6919e6.htm), funerals, and cruises, have played a large role in the spread of COVID.\n\nFor example, in early February 2020, 77 out of 95 of Massachusetts’ COVID cases could be attributed to one [biotech conference](https://www.wbur.org/commonhealth/2020/03/12/coronavirus-outbreak-biogen-conference-superspreading) in Cambridge. An attendee was sick with COVID and infected a number of people at the conference who then brought COVID to their homes and communities. \n\nSuperspreading events are why [Non-Pharmaceutical Interventions](#npi) (NPIs) such as restrictions on large events and gatherings are so vital for slowing the infection growth of COVID.",
+      "definition": "A superspreading event is when one or a small number of infected people infect an unusually large number of people. It has become clear that superspreading events, such as [conferences](https://www.wbur.org/commonhealth/2020/03/12/coronavirus-outbreak-biogen-conference-superspreading), [choir practices](https://www.cdc.gov/mmwr/volumes/69/wr/mm6919e6.htm), [weddings](https://www.forbes.com/sites/victoriaforster/2020/12/04/covid-19-superspreader-wedding-in-washington-state-linked-to-7-deaths-of-people-who-didnt-even-attend/?sh=1d19c7293124), and [cruises](https://www.thedailybeast.com/coronavirus-diamond-princess-cruise-ship-fiasco-points-to-possible-super-spreader), have played a large role in the spread of COVID.\n\nSuperspreading events are why [Non-Pharmaceutical Interventions](#npi) (NPIs) such as restrictions on large events and gatherings are so vital for slowing the infection growth of COVID.",
       "term": "Superspreading event",
       "termId": "superspreading-event",
       "category": "Transmission"
@@ -413,7 +413,7 @@
     {
       "term": "Suppression",
       "termId": "suppression",
-      "definition": "Suppression generally refers to the process of keeping infected people from spreading disease, but more specifically refers to reducing the [R(t)](https://covidactnow.org/glossary#rt) of a disease to less than 1.0. An R(t) below 1 indicates a decline in COVID spread. \n\nSuppression is often used interchangeably with [containment](https://covidactnow.org/glossary#containment). Currently, the United States’ response to COVID is primarily focused on [mitigation](https://covidactnow.org/glossary#mitigation) -- as opposed to [containment](https://covidactnow.org/glossary#containment) or suppression - in that the goal appears to be slowing the spread of COVID through public health education (like CDC guidelines)\n\nIn order to achieve successful suppression of COVID in the United States, there would need to be widespread, high quality, rapid testing in addition to measures like [NPI's](#npi), contact tracing, and [quarantine](https://covidactnow.org/glossary#quarantine). A suppression strategy is recommended as the most efficient path to recover from COVID and avoid future lockdowns.",
+      "definition": "Suppression generally refers to the process of keeping infected people from spreading disease, but more specifically refers to reducing the [R(t)](https://covidactnow.org/glossary#rt) of a disease to less than 1.0. An R(t) below 1 indicates a decline in COVID spread. \n\nSuppression is often used interchangeably with [containment](https://covidactnow.org/glossary#containment). In order to achieve successful suppression of COVID in the United States, there would need to be widespread, high quality, rapid testing in addition to measures like [NPI's](#npi), contact tracing, and [quarantine](https://covidactnow.org/glossary#quarantine). A suppression strategy is recommended as the most efficient path to recover from COVID and avoid future lockdowns.",
       "category": "Prevention and mitigation"
     },
     {
@@ -455,7 +455,7 @@
     {
       "term": "Ventilator",
       "termId": "ventilator",
-      "definition": "A ventilator is a machine that helps patients breathe when they cannot do so on their own.\n\n* People whose lungs are severely damaged by COVID may use a ventilator because they cannot get enough oxygen on their own.\n* While ventilators allow lungs to heal, they are not in and of themselves a treatment.\n\n[Intensive care unit](#icu-capacity-used) (ICU) beds are equipped with ventilators, which may save the lives of the sickest COVID patients.",
+      "definition": "A ventilator is a machine that helps patients breathe when they cannot do so on their own.\n\n* People whose lungs are severely damaged by COVID may use a ventilator because they cannot get enough oxygen on their own.\n* While ventilators allow lungs to heal, they are not in and of themselves a treatment.\n\n[Intensive care unit](icu-capacity) (ICU) beds are equipped with ventilators, which may save the lives of the sickest COVID patients.",
       "category": "Treatment"
     },
     {
@@ -467,7 +467,7 @@
     {
       "term": "Wave",
       "termId": "wave",
-      "definition": "During a [pandemic](https://covidactnow.org/glossary#pandemic), a “wave” is a phenomenon in which there is a period of increased case growth which [peaks](https://covidactnow.org/glossary#peak) and is followed by a substantial, sustained reduction in cases. COVID cases seem to come in waves: first wave, second wave, and so on. There is no official definition of when one wave ends and another begins, and COVID has peaked in different states at different times.\n\n[Data suggests](https://www.nytimes.com/interactive/2020/10/15/us/coronavirus-cases-us-surge.html) the U.S. on the whole experienced its first peak mid April, second peak in mid July, and entered its third wave of cases in the Fall of 2020. The term wave is often used alongside or interchangeably with [surge](https://covidactnow.org/glossary#surge), which describes the increase in cases seen before and during the peak of a wave.",
+      "definition": "During a [pandemic](https://covidactnow.org/glossary#pandemic), a “wave” is a phenomenon in which there is a period of increased case growth which [peaks](https://covidactnow.org/glossary#peak) and is followed by a substantial, sustained reduction in cases. COVID cases seem to come in waves: first wave, second wave, and so on. There is no official definition of when one wave ends and another begins, and COVID has peaked in different states at different times.\n\n[Data suggests](https://www.nytimes.com/interactive/2020/10/15/us/coronavirus-cases-us-surge.html) the U.S. on the whole experienced its first peak mid April, second peak in mid July, and entered its third wave of cases in the late fall of 2020. The term wave is often used alongside or interchangeably with [surge](https://covidactnow.org/glossary#surge), which describes the increase in cases seen before and during the peak of a wave.",
       "category": "Disease science"
     }
   ],
