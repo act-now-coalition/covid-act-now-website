@@ -318,7 +318,7 @@ export function getExportImageUrl(sharedComponentId: string) {
 
 export function getChartUrl(sharedComponentId: string, region: Region | null) {
   const redirectTo = urlJoin(
-    region ? `/${region.relativeUrl}` : '/',
+    region ? region.relativeUrl : '/',
     'explore',
     sharedComponentId,
   );
