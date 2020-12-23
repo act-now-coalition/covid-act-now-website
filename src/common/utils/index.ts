@@ -119,3 +119,14 @@ export function isValidEmail(emailAddress: string) {
     emailAddress && emailAddress.length > 1 && EMAIL_REGEX.test(emailAddress)
   );
 }
+
+export function getPercentChange(numA: number, numB: number): number | null {
+  const validParams = _.isNumber(numA) && _.isNumber(numB) && numB !== 0;
+  if (!validParams) {
+    return null;
+  } else {
+    const difference = numA - numB;
+    const percentChange = difference / numB;
+    return percentChange;
+  }
+}
