@@ -44,7 +44,7 @@ const MetroAreaMap: React.FC<{
               return (
                 <Link
                   key={geo.rsmKey}
-                  to={region ? `/${region.relativeUrl}` : '/'}
+                  to={region ? region.relativeUrl : '/'}
                   aria-label={region?.fullName || ''}
                 >
                   <Styles.StateShape
@@ -65,7 +65,7 @@ const MetroAreaMap: React.FC<{
               return (
                 <Link
                   key={geo.id}
-                  to={region ? `/${region.relativeUrl}` : '/'}
+                  to={region ? region.relativeUrl : '/'}
                   aria-label={region?.shortName || ''}
                 >
                   <Styles.MetroCounty

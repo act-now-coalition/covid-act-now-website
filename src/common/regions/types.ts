@@ -59,7 +59,7 @@ export class State extends Region {
   }
 
   get relativeUrl() {
-    return `us/${this.urlSegment}`;
+    return `/us/${this.urlSegment}`;
   }
 }
 
@@ -133,7 +133,7 @@ export class MetroArea extends Region {
   }
 
   get relativeUrl() {
-    return `us/metro/${this.urlSegment}`;
+    return `/us/metro/${this.urlSegment}`;
   }
 
   get stateCodes() {

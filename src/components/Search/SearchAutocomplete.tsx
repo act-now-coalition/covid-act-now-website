@@ -38,7 +38,7 @@ const SearchAutocomplete: React.FC<{
   };
 
   const onSelect = (e: any, value: Region) => {
-    window.location.href = `/${value.relativeUrl}`;
+    window.location.href = value.relativeUrl;
   };
 
   const zipCodeInput = checkForZipcodeMatch ? input : '';

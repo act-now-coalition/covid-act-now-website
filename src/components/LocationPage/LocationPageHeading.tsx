@@ -2,6 +2,7 @@ import React from 'react';
 import { Region, State, County, MetroArea } from 'common/regions';
 import { startCase } from 'lodash';
 import * as Styles from './LocationPageHeading.style';
+import urlJoin from 'url-join';
 
 const LocationPageHeading: React.FC<{
   region: Region;
@@ -16,7 +17,7 @@ const LocationPageHeading: React.FC<{
       </Styles.Container>
     );
   } else if (region instanceof County) {
-    const stateUrl = `${isEmbed ? '/embed' : ''}/${region.state.relativeUrl}`;
+    const stateUrl = urlJoin(isEmbed ? '/embed' : '', region.state.relativeUrl);
     return (
       <Styles.Container>
         <Styles.HeaderTitle $isEmbed={isEmbed}>

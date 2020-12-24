@@ -63,8 +63,7 @@ const CompareTableRow = (props: {
   if (!region) {
     fail(`missing region for fips code ${fipsCode}`);
   }
-  const locationLink = `/${region.relativeUrl}`;
-
+  const locationLink = region.relativeUrl;
   const locationName = getColumnLocationName(location.region);
 
   const populationRoundTo = isHomepage ? 3 : 2;
