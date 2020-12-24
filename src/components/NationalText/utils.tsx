@@ -43,7 +43,9 @@ export const getNationalText: React.FC = () => {
   );
 
   const lastDate = last(dates);
-  const lastDateFormatted: string = moment(lastDate).format('MMMM Do, YYYY');
+  const lastDateFormatted: string = moment
+    .utc(lastDate)
+    .format('MMMM Do, YYYY');
 
   const getChangeDescriptorCopy = (percentChange: number): string => {
     const changeByCopy = `by about ${formatPercent(Math.abs(percentChange))}`;
