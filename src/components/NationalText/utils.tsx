@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import AggregationsJSON from 'assets/data/aggregations.json';
-import { last, sum, isNull } from 'lodash';
+import { last, isNull } from 'lodash';
 import moment from 'moment';
 import {
   formatPercent,
@@ -28,16 +28,12 @@ const getTotalCasesCopy = (summedRawCases: number): string => {
 export const getNationalText: React.FC = () => {
   const usaAggregation = AggregationsJSON['00001'];
   const {
-    rawDailyCases,
-    rawDailyDeaths,
+    totalCases,
+    totalDeaths,
     smoothedDailyCases,
     smoothedDailyDeaths,
     dates,
   } = usaAggregation;
-
-  const totalCases: number = sum(rawDailyCases);
-
-  const totalDeaths: number = sum(rawDailyDeaths);
 
   const percentChangeSmoothedCases = getTwoWeekPercentChange(
     smoothedDailyCases,
