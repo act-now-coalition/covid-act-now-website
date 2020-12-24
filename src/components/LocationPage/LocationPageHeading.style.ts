@@ -30,7 +30,7 @@ export const HeaderTitle = styled(Typography).attrs(props => ({
 `;
 
 export const HeaderSubtitle = styled(Typography).attrs(props => ({
-  component: 'span',
+  component: 'h2',
 }))`
   display: block;
   text-align: center;
