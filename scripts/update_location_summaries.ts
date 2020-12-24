@@ -137,6 +137,14 @@ function aggregate(
   datasetsToAggregate: DatasetId[],
 ) {
   const totalPopulation = _.sumBy(allProjections, p => p.population);
+  const totalCases = _.sumBy(
+    allProjections,
+    p => p.primary.currentCumulativeCases || 0,
+  );
+  const totalDeaths = _.sumBy(
+    allProjections,
+    p => p.primary.currentCumulativeDeaths || 0,
+  );
   const dates: number[] = [];
   let aggregatedDatasets: { [key: string]: Array<number | null> } = {};
   for (const datasetId of datasetsToAggregate) {
@@ -165,6 +173,8 @@ function aggregate(
 
   return {
     totalPopulation,
+    totalCases,
+    totalDeaths,
     dates,
     ...aggregatedDatasets,
   };
