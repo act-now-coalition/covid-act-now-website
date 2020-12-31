@@ -27,7 +27,9 @@ class DisabledFips {
   }
 }
 
-const DISABLED_CASE_DENSITY: string[] = [];
+const DISABLED_CASE_DENSITY: string[] = [
+  '48339', // https://trello.com/c/39bNkJA2/713-disabled-montgomery-county-tx-daily-new-cases
+];
 
 const DISABLED_INFECTION_RATE = new DisabledFips([]);
 
