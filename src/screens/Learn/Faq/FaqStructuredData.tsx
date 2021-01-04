@@ -3,7 +3,6 @@ import {
   JSONLD,
   Question,
   Answer,
-  Generic,
   GenericCollection,
   // @ts-ignore: getting error for this import :(
 } from 'react-structured-data';
@@ -13,12 +12,12 @@ const FaqStructuredData: React.FC = () => {
   return (
     <JSONLD>
       <GenericCollection type="FAQPage" jsonldtype="FAQPage">
+        {/* fix the any? */}
         {faqQuestionItems.map((item: any) => {
           return (
-            <Generic type="FAQPage" jsonldtype="FAQPage">
-              <Question name={item.question} />
+            <Question name={item.question}>
               <Answer text={item.answer} />
-            </Generic>
+            </Question>
           );
         })}
       </GenericCollection>
