@@ -4,6 +4,7 @@ import {
   Question,
   Answer,
   GenericCollection,
+  Generic,
   // @ts-ignore: getting error for this import :(
 } from 'react-structured-data';
 import { faqQuestionItems } from 'cms-content/learn';
@@ -15,9 +16,11 @@ const FaqStructuredData: React.FC = () => {
         {/* fix the any? */}
         {faqQuestionItems.map((item: any) => {
           return (
-            <Question name={item.question}>
-              <Answer text={item.answer} />
-            </Question>
+            <Generic>
+              <Question name={item.question}>
+                <Answer text={item.answer} />
+              </Question>
+            </Generic>
           );
         })}
       </GenericCollection>
