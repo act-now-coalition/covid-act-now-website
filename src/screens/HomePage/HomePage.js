@@ -81,7 +81,7 @@ export default function HomePage() {
       <EnsureSharingIdInUrl />
       <AppMetaTags
         canonicalUrl="/"
-        pageTitle="Realtime US COVID Risk Map & Key Metrics"
+        pageTitle="U.S. COVID Map & Risk Levels"
         pageDescription={getPageDescription()}
       />
       <BannerContainer>
