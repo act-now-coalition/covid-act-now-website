@@ -157,12 +157,12 @@ export default function App() {
               />
 
               {/* /state/ routes are deprecated but still supported. */}
-              <Route exact path="/state/:stateId">
-                <Redirect to="/us/:stateId" />
-              </Route>
-              <Route exact path="/state/:stateId/county/:countyId">
-                <Redirect to="/us/:stateId/county/:countyId" />
-              </Route>
+              <Redirect exact from="/state/:stateId" to="/us/:stateId" />
+              <Redirect
+                exact
+                from="/state/:stateId/county/:countyId"
+                to="/us/:stateId/county/:countyId"
+              />
 
               <Route path="/about" component={About} />
               <Route path="/tools" component={Tools} />
