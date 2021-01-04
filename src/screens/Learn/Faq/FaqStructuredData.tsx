@@ -17,13 +17,13 @@ const FaqStructuredData: React.FC = () => {
   return (
     <JSONLD>
       <GenericCollection type="FAQPage">
-        {sections.forEach((section: FaqSection) => {
+        {sections.map((section: FaqSection) => {
           const { questions } = section;
           questions.map((questionItem: QuestionItem, i: number) => {
             return (
               <Fragment key={`question-${i}`}>
-                <Question>{questionItem.question}</Question>
-                <Answer>{questionItem.answer}</Answer>
+                <Question name={questionItem.question} />
+                <Answer text={questionItem.answer} />
               </Fragment>
             );
           });
