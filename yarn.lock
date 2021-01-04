@@ -17179,6 +17179,13 @@ react-sizeme@^2.5.2, react-sizeme@^2.6.7:
     shallowequal "^1.1.0"
     throttle-debounce "^2.1.0"
 
+react-structured-data@^0.0.14:
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/react-structured-data/-/react-structured-data-0.0.14.tgz#7a851cb65ef26d63244e3b6d5370c751d0a86a33"
+  integrity sha512-B1elbCypGIuLGSrJ3ESqLKepYotELbCpAZBAxsn1DeH2c40XI01Ll568xjGvipTqxvetscuCqm9/wD4GF+DIXw==
+  dependencies:
+    prop-types "^15.6.0"
+
 react-syntax-highlighter@^12.2.1:
   version "12.2.1"
   resolved "https://registry.yarnpkg.com/react-syntax-highlighter/-/react-syntax-highlighter-12.2.1.tgz#14d78352da1c1c3f93c6698b70ec7c706b83493e"
