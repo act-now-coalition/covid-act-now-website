@@ -144,9 +144,7 @@ export default function App() {
               />
               <Route exact path="/learn" component={Landing} />
               {/* In case there is now an /explained link in the wild: */}
-              <Route path="/explained">
-                <Redirect to="/learn" />
-              </Route>
+              <Redirect from="/explained" to="/learn" />
               <Route exact path="/faq" component={Faq} />
               <Route exact path="/glossary" component={Glossary} />
               <Route path="/case-studies" component={CaseStudies} />
@@ -167,16 +165,15 @@ export default function App() {
               <Route path="/about" component={About} />
               <Route path="/tools" component={Tools} />
               {/* Keeping the /resources URL active in case linked elsewhere */}
-              <Route path="/resources">
-                <Redirect to="/tools" />
-              </Route>
+              <Redirect from="/resources" to="/tools" />
               <Route path="/contact" component={Contact} />
               <Route path="/terms" component={Terms} />
               <Route path="/privacy" component={Privacy} />
               {/* Custom URL for sharing the COVID Response Simulator */}
-              <Route path="/response-simulator">
-                <Redirect to="/tools#covid-response-simulator" />
-              </Route>
+              <Redirect
+                from="/response-simulator"
+                to="/tools#covid-response-simulator"
+              />
 
               {/* Custom redirect to track clicks from the Daily download */}
               <Route path="/exposure-notifications-redirect">
@@ -205,14 +202,9 @@ export default function App() {
                 component={Embed}
               />
               <Route exact path="/embed/us/fips/:fipsCode" component={Embed} />
-              {/* <Route path="/donate" component={ComingSoon} /> */}
-              {/* /model, /contact, and /about are deprecated in favor of /faq */}
-              <Route path="/model">
-                <Redirect to="/faq" />
-              </Route>
-              <Route path="/contact">
-                <Redirect to="/faq" />
-              </Route>
+              {/* /model and /contact are deprecated in favor of /faq */}
+              <Redirect from="/model" to="/faq" />
+              <Redirect from="/contact" to="/faq" />
               {/**
                * This endpoint is to share the feedback survey link in social
                * media. We redirec them to Typeform with URL parameters to
@@ -241,9 +233,7 @@ export default function App() {
               />
 
               {/** Internal endpoint that shows all the state charts. */}
-              <Route path="/all">
-                <Redirect to="/internal/all" />
-              </Route>
+              <Redirect from="/all" to="/internal/all" />
               <Route path="/internal/all" component={AllStates} />
 
               {/** Internal endpoint for comparing API snapshots. */}
