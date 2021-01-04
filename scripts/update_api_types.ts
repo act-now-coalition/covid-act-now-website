@@ -2,7 +2,7 @@
  * Run via: yarn update-api-types
  *
  * Reads schema files from
- * https://github.com/covid-projections/covid-data-model/tree/master/api/schemas
+ * https://github.com/covid-projections/covid-data-model/tree/main/api/schemas
  * and generates corresponding typescript definition files in src/models/api/
  */
 
@@ -34,7 +34,7 @@ const BANNER_COMMENT = `
 
 const OUTPUT_FOLDER = path.join(__dirname, '..', 'src', 'api', 'schema');
 const SCHEMAS_BASE_URL =
-  'https://github.com/covid-projections/covid-data-model/raw/master/api/schemas_v2/';
+  'https://github.com/covid-projections/covid-data-model/raw/main/api/schemas_v2/';
 
 (async () => {
   for (const file of SCHEMA_FILES) {
