@@ -90,7 +90,6 @@ function buildCounties(
           countyFips,
           countyInfo.population,
           state,
-          countyInfo.cities || [],
           adjacentCounties || [],
           zipCodes || [],
         );
