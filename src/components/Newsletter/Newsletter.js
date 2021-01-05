@@ -33,6 +33,10 @@ class Newsletter extends React.Component {
     if (isValidEmail(email)) {
       await this.subscribeToAlerts();
       trackEvent(EventCategory.ENGAGEMENT, EventAction.SUBSCRIBE);
+
+      // If they are signing up for daily download (in addition to alerts), then we
+      // submit the Campaign Monitor signup form, which will land them on a Campaign
+      // Monitor confirmation page.
       if (this.state.dailyDownloadChecked) {
         let url = new URL('https://createsend.com/t/getsecuresubscribelink');
         url.searchParams.append('email', this.emailInput.value);
@@ -48,6 +52,8 @@ class Newsletter extends React.Component {
         this.form.action = text;
         this.form.submit();
       } else {
+        // Since we didn't use the Campaign Monitor signup form we need to show our
+        // own confirmation UI (just change the button text/color for 3sec).
         this.setState({ showConfirmationText: true });
         setTimeout(() => {
           this.setState({ showConfirmationText: false });
