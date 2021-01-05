@@ -3,7 +3,7 @@ name: Upload to http://covidactnow.org.s3-website-us-west-1.amazonaws.com
 on:
   push:
     branches:
-    - master
+    - main
 
 jobs:
   build-deploy:

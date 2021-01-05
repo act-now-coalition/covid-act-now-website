@@ -1,7 +1,7 @@
-git branch | grep "* master" > /dev/null
+git branch | grep "* main" > /dev/null
 if [ $? -ne 0 ]
 then
-  echo "Branch is not master, aborting deploy" >&2
+  echo "Branch is not main, aborting deploy" >&2
   exit
 fi
 
