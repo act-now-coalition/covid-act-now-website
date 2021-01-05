@@ -6,7 +6,7 @@ import {
   Row,
   MetricValue,
   Population,
-  CountySuffix,
+  LocationSuffix,
   LocationInfoWrapper,
   LocationNameCell,
   Rank,
@@ -85,7 +85,9 @@ const CompareTableRow = (props: {
           </div>
           <div>
             {locationName[0]}{' '}
-            {locationName[1] && <CountySuffix>{locationName[1]}</CountySuffix>}
+            {locationName[1] && (
+              <LocationSuffix>{locationName[1]}</LocationSuffix>
+            )}
             {showStateCode && (
               <Fragment>{getStateCode(location.region)}</Fragment>
             )}

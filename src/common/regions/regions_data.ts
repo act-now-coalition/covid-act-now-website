@@ -34,6 +34,9 @@ export function getStateCode(region: Region): string | null {
   if (region.regionType === RegionType.STATE) {
     return (region as State).stateCode;
   }
+  if (region.regionType === RegionType.MSA) {
+    return (region as MetroArea).stateCodes;
+  }
   return null;
 }
 

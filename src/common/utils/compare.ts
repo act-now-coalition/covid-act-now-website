@@ -261,21 +261,27 @@ export function getAbbreviatedCounty(county: string) {
   else return county.replace('County', 'Co.');
 }
 
-function splitCountyName(countyName: string) {
-  const splitCounty = countyName.split(' ');
-  const suffix = splitCounty.pop();
-  const withoutSuffix = splitCounty;
-  return [withoutSuffix.join(' '), suffix];
+/*
+Used to split location names for county and metro in order ot set multiple font weights:
+(final format once eventually styled: bold locationName, non-bold suffix)
+  ie: [bold] Boston [non-bold] metro
+  ie: [bold] Fairfield [non-bold] Co.
+*/
+function splitLocationName(locationName: string) {
+  const splitLocation = locationName.split(' ');
+  const suffix = splitLocation.pop();
+  const finalSuffix = suffix?.includes('metro') ? `${suffix},` : suffix;
+  const withoutSuffix = splitLocation;
+  return [withoutSuffix.join(' '), finalSuffix];
 }
 
 export function getColumnLocationName(region: Region) {
   if (region instanceof State) {
     return [region.fullName];
   } else if (region instanceof County) {
-    const countyWithAbbreviatedSuffix = region.abbreviation;
-    return splitCountyName(countyWithAbbreviatedSuffix);
+    return splitLocationName(region.abbreviation);
   } else if (region instanceof MetroArea) {
-    return [region.shortName];
+    return splitLocationName(region.shortName);
   } else {
     fail('dont support other regions');
   }

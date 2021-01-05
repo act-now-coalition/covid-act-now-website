@@ -281,7 +281,7 @@ export const LocationInfoWrapper = styled.div`
   align-items: center;
 `;
 
-export const CountySuffix = styled.span`
+export const LocationSuffix = styled.span`
   font-weight: normal;
   margin-right: 0.25rem;
 `;
