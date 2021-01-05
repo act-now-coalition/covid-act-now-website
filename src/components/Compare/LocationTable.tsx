@@ -258,7 +258,7 @@ const LocationTable: React.FunctionComponent<{
     if (region) {
       return region instanceof MetroArea || geoScope === GeoScopeFilter.NEARBY;
     } else {
-      return homepageScope === HomepageLocationScope.COUNTY;
+      return homepageScope !== HomepageLocationScope.STATE;
     }
   };
 

@@ -37,6 +37,25 @@ export function getStateCode(region: Region): string | null {
   return null;
 }
 
+/*
+Goes one step beyond getStateCode(). Inludes MSAs and returns each regionType's 'version' of a stateCode:
+  metro -> dash-separated list of all states in which the MSA resides ('NY-NJ-PA')
+  state -> state's stateCode ('NY')
+  county -> stateCode of county's state ('NY')
+*/
+export function getFormattedStateCode(region: Region): string | null {
+  if (
+    region.regionType === RegionType.COUNTY ||
+    region.regionType === RegionType.STATE
+  ) {
+    return getStateCode(region);
+  } else if (region.regionType === RegionType.MSA) {
+    return (region as MetroArea).stateCodes;
+  } else {
+    return null;
+  }
+}
+
 export const getStateFips = (region: Region): string | null => {
   if (region.regionType === RegionType.COUNTY) {
     return (region as County).state.fipsCode;
