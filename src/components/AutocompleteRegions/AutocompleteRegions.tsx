@@ -2,7 +2,7 @@ import React from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { createFilterOptions } from '@material-ui/lab/useAutocomplete';
 import TextField from '@material-ui/core/TextField';
-import { Region } from 'common/regions';
+import { Region, MetroArea } from 'common/regions';
 /**
  * `createFilterOptions` creates a configuration object that defines how the
  * user input will be matched against the options in the Autocomplete
@@ -39,11 +39,17 @@ const AutocompleteRegions: React.FC<{
     ? { 'aria-labelledby': ariaLabelledBy }
     : { 'aria-label': 'Select locations' };
 
+  const getLocationLabel = (region: Region) => {
+    if (region instanceof MetroArea) {
+      return `${region.shortName}, ${region.stateCodes}`;
+    } else return region.shortName;
+  };
+
   return (
     <Autocomplete
       multiple
       options={regions}
-      getOptionLabel={region => region.shortName}
+      getOptionLabel={getLocationLabel}
       onChange={onChangeRegions}
       getOptionSelected={getOptionSelected}
       value={selectedRegions}
