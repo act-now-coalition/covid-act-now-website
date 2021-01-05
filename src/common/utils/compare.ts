@@ -1,9 +1,5 @@
 /** Helpers for compare, getting location arrays for each filter/pagetype **/
-import {
-  getAdjacentCounties,
-  getCountyMsaCode,
-  getColleges,
-} from 'common/locations';
+import { getAdjacentCounties, getCountyMsaCode } from 'common/locations';
 import { LocationSummary, getSummaryFromFips } from 'common/location_summaries';
 import { Metric, getMetricNameForCompare } from 'common/metric';
 import { isNumber } from 'lodash';
@@ -282,23 +278,6 @@ export function getColumnLocationName(region: Region) {
 }
 
 // For college tag:
-
-function getSummedEnrollment(region: Region) {
-  return (
-    getColleges(region.fipsCode).length > 0 &&
-    getColleges(region.fipsCode).reduce(
-      (acc, current) => acc + current.ft_enroll,
-      0,
-    )
-  );
-}
-
-export function isCollegeCounty(region: Region) {
-  const threshold = 0.05;
-  const ftEnrollment = getSummedEnrollment(region);
-  const countyPopulation = region.population;
-  return ftEnrollment && ftEnrollment / countyPopulation > threshold;
-}
 
 export function getShareQuote(
   sorter: Metric,

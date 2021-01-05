@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { uniq } from 'lodash';
 import { ComposableMap, Geographies } from 'react-simple-maps';
-import COUNTIES_JSON from 'components/Map/data/counties-small.json';
+import COUNTIES_JSON from 'components/Map/data/counties-10m.json';
 import { geoBounds, geoCentroid, geoDistance } from 'd3-geo';
 import * as topojson from 'topojson-client';
 import { MetroArea } from 'common/regions';
