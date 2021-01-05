@@ -19,7 +19,7 @@ import {
 } from 'common/utils/compare';
 import { Level } from 'common/level';
 import { formatEstimate } from 'common/utils';
-import regions, { getStateCode } from 'common/regions';
+import regions, { getFormattedStateCode } from 'common/regions';
 import { fail } from 'assert';
 
 function cellValue(metric: any, metricType: Metric) {
@@ -88,7 +88,7 @@ const CompareTableRow = (props: {
             {regionNameMain}{' '}
             {regionSuffix && <RegionSuffix>{regionSuffix}</RegionSuffix>}
             {showStateCode && (
-              <Fragment>{getStateCode(location.region)}</Fragment>
+              <Fragment>{getFormattedStateCode(location.region)}</Fragment>
             )}
             <br />
             <LocationInfoWrapper>
