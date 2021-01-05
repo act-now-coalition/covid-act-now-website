@@ -33,11 +33,7 @@ const DISABLED_CASE_DENSITY: string[] = [
 
 const DISABLED_INFECTION_RATE = new DisabledFips([]);
 
-const DISABLED_TEST_POSITIVITY = new DisabledFips([
-  '48113',
-  '48215',
-  '51', // https://trello.com/c/wW18WA48/660-virginia-test-positivity-incorrect-at-0-hhs-test-positivity-data-suspect
-]);
+const DISABLED_TEST_POSITIVITY = new DisabledFips(['48113', '48215']);
 
 const DISABLED_ICU = new DisabledFips([
   '47', // https://trello.com/c/aEd07i5Y/701-disabled-tn-icu-headroom
