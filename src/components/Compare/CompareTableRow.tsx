@@ -6,7 +6,7 @@ import {
   Row,
   MetricValue,
   Population,
-  LocationSuffix,
+  RegionSuffix,
   LocationInfoWrapper,
   LocationNameCell,
   Rank,
@@ -15,7 +15,7 @@ import { Metric, formatValue } from 'common/metric';
 import {
   RankedLocationSummary,
   orderedMetrics,
-  getColumnLocationName,
+  getRegionNameForRow,
 } from 'common/utils/compare';
 import { Level } from 'common/level';
 import { formatEstimate } from 'common/utils';
@@ -64,7 +64,8 @@ const CompareTableRow = (props: {
     fail(`missing region for fips code ${fipsCode}`);
   }
   const locationLink = region.relativeUrl;
-  const locationName = getColumnLocationName(location.region);
+
+  const [regionNameMain, regionSuffix] = getRegionNameForRow(location.region);
 
   const populationRoundTo = isHomepage ? 3 : 2;
 
@@ -84,10 +85,8 @@ const CompareTableRow = (props: {
             <FiberManualRecordIcon />
           </div>
           <div>
-            {locationName[0]}{' '}
-            {locationName[1] && (
-              <LocationSuffix>{locationName[1]}</LocationSuffix>
-            )}
+            {regionNameMain}{' '}
+            {regionSuffix && <RegionSuffix>{regionSuffix}</RegionSuffix>}
             {showStateCode && (
               <Fragment>{getStateCode(location.region)}</Fragment>
             )}

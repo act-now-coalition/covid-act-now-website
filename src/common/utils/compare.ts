@@ -262,26 +262,32 @@ export function getAbbreviatedCounty(county: string) {
 }
 
 /*
-Used to split location names for county and metro in order ot set multiple font weights:
-(final format once eventually styled: bold locationName, non-bold suffix)
-  ie: [bold] Boston [non-bold] metro
-  ie: [bold] Fairfield [non-bold] Co.
+Used to split region names for county and metro in order to set multiple font weights.
+Outputs arr with split name:
+  metro ex: ['Boston', 'metro,']
+  county ex: ['Fairfield', 'Co.']
+
+(Final format once eventually styled: bold locationName, non-bold suffix):
+  ex: [bold] Boston [non-bold] metro
+  ex: [bold] Fairfield [non-bold] Co.
 */
-function splitLocationName(locationName: string) {
-  const splitLocation = locationName.split(' ');
-  const suffix = splitLocation.pop();
-  const finalSuffix = suffix?.includes('metro') ? `${suffix},` : suffix;
-  const withoutSuffix = splitLocation;
-  return [withoutSuffix.join(' '), finalSuffix];
+function splitRegionName(regionName: string) {
+  const splitRegion = regionName.split(' ');
+  const suffixUnformatted = splitRegion.pop();
+  const regionSuffix = suffixUnformatted?.includes('metro')
+    ? `${suffixUnformatted},`
+    : suffixUnformatted;
+  const regionNameMain = splitRegion.join(' ');
+  return [regionNameMain, regionSuffix];
 }
 
-export function getColumnLocationName(region: Region) {
+export function getRegionNameForRow(region: Region) {
   if (region instanceof State) {
     return [region.fullName];
   } else if (region instanceof County) {
-    return splitLocationName(region.abbreviation);
+    return splitRegionName(region.abbreviation);
   } else if (region instanceof MetroArea) {
-    return splitLocationName(region.shortName);
+    return splitRegionName(region.shortName);
   } else {
     fail('dont support other regions');
   }

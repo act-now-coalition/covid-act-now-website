@@ -27,6 +27,12 @@ export function getStateName(region: Region): string | null {
   return null;
 }
 
+/*
+Returns each region's version of a stateCode:
+  metro -> dash-separated list of all states in which the MSA resides ('NY-NJ-PA')
+  state -> state's stateCode ('NY')
+  county -> stateCode of county's state ('NY')
+*/
 export function getStateCode(region: Region): string | null {
   if (region.regionType === RegionType.COUNTY) {
     return (region as County).state.stateCode;
