@@ -70,7 +70,6 @@ export class County extends Region {
     fipsCode: FipsCode,
     population: number,
     public readonly state: State,
-    public readonly cityNames: string[],
     private readonly adjacentCountiesFips: FipsCode[],
     public readonly zipCodes: ZipCode[],
   ) {

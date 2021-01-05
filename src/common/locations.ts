@@ -49,7 +49,6 @@ export interface County {
   state_fips_code: string;
   state_code: string;
   full_fips_code: string;
-  cities: string[];
   population: number;
 }
 
@@ -59,7 +58,6 @@ export interface Location {
   county_fips_code?: string;
   state_fips_code: string;
   full_fips_code?: string;
-  cities?: string[];
   population: number;
   state_code: string;
   state: string;
