@@ -20,7 +20,7 @@ async function main() {
     const backupImagePath = path.join(imageDir, backupName);
 
     if (fs.existsSync(backupImagePath)) {
-      console.log(`Backup image ${backupImagePath} found, skipping.`);
+      console.log(`Backup image ${backupName} found, skipping.`);
       continue;
     }
 
@@ -28,10 +28,28 @@ async function main() {
 
     // Resize the image preserving the aspect ratio
     console.log(`Resizing ${imagePath}`);
-    await sharp(backupImagePath).resize(sizeParams).toFile(inputPath);
+    await sharp(backupImagePath)
+      .resize(doubleSize(sizeParams))
+      .toFile(inputPath);
   }
 
   return true;
+}
+
+interface ImageSize {
+  width?: number;
+  height?: number;
+}
+
+// Duplicate the input pixel size for better resolution on retina displays
+function doubleSize(sizeParams: ImageSize): ImageSize {
+  if (sizeParams.width) {
+    return { width: 2 * sizeParams.width };
+  }
+  if (sizeParams.height) {
+    return { height: 2 * sizeParams.height };
+  }
+  return {};
 }
 
 if (require.main === module) {
