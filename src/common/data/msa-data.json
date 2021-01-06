@@ -3077,8 +3077,8 @@
         "36087",
         "36119"
       ],
-      "urlSegment": "new-york-newark-jersey-city_ny-nj-pa",
-      "population": 19954092
+      "urlSegment": "new-york-city-newark-jersey-city_ny-nj-pa",
+      "population": 19216182
     },
     {
       "cbsaCode": "35660",
@@ -4560,7 +4560,7 @@
         "54037"
       ],
       "urlSegment": "washington-arlington-alexandria_dc-va-md-wv",
-      "population": 6280487
+      "population": 5574738
     },
     {
       "cbsaCode": "47940",

@@ -20,7 +20,7 @@ const ArticlesLanding = () => {
     <Fragment>
       <AppMetaTags
         canonicalUrl="/deep-dives"
-        pageTitle={'COVID-19 Deep Dives - Covid Act Now'}
+        pageTitle="COVID-19 Deep Dives"
         pageDescription={`${date} Explore deeper analysis about how, why, and where COVID is spreading.`}
       />
       <PageContent sidebarItems={learnPages}>
