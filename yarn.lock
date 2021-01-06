@@ -4695,6 +4695,13 @@
   dependencies:
     "@types/node" "*"
 
+"@types/sharp@^0.27.0":
+  version "0.27.0"
+  resolved "https://registry.yarnpkg.com/@types/sharp/-/sharp-0.27.0.tgz#00cd5ba3aa58f52df9c3633a318ce315a6da3089"
+  integrity sha512-isK4KKTn2Jdg1EfhbRFZ9vLIYPSUAXp8PvdUuGfpzXsucViiH543rdmJTzq01LuVOCz/a2dH7bIG+IJ65z/U9g==
+  dependencies:
+    "@types/node" "*"
+
 "@types/sinonjs__fake-timers@6.0.1":
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/@types/sinonjs__fake-timers/-/sinonjs__fake-timers-6.0.1.tgz#681df970358c82836b42f989188d133e218c458e"

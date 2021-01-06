@@ -20,6 +20,7 @@
     "@types/jest": "^26.0.16",
     "@types/react-router-hash-link": "^1.2.1",
     "@types/react-scrollspy": "^3.3.3",
+    "@types/sharp": "^0.27.0",
     "@types/topojson-client": "^3.0.0",
     "@types/typeform__embed": "^0.22.2",
     "@types/uuid": "^8.3.0",
@@ -106,6 +107,7 @@
     "generate-county-history-data": "ts-node-script -r tsconfig-paths/register scripts/county_history_data/generate.ts",
     "generate-metro-areas": "ts-node-script -r tsconfig-paths/register scripts/cbsa/parse-metro-areas.ts",
     "generate-sitemap": "ts-node-script -r tsconfig-paths/register scripts/generate_sitemap/index.ts",
+    "optimize-images": "ts-node-script -r tsconfig-paths/register scripts/optimize_images/optimize-images.ts",
     "storybook": "start-storybook -p 6006 -s public --no-dll",
     "build-storybook": "build-storybook -s public --no-dll",
     "analyze": "cross-env REACT_APP_ENVIRONMENT=prod yarn build && source-map-explorer build/static/js/*.js"
