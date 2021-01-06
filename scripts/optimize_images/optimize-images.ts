@@ -19,12 +19,10 @@ async function main() {
     const backupName = `${fileName}-original${ext}`;
     const backupImagePath = path.join(imageDir, backupName);
 
-    if (fs.existsSync(backupImagePath)) {
-      console.log(`Backup image ${backupName} found, skipping.`);
-      continue;
+    // Do not create a copy if the original copy already exists
+    if (!fs.existsSync(backupImagePath)) {
+      fs.renameSync(inputPath, backupImagePath);
     }
-
-    fs.renameSync(inputPath, backupImagePath);
 
     // Resize the image preserving the aspect ratio
     console.log(`Resizing ${imagePath}`);
