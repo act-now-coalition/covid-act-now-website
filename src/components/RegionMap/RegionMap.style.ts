@@ -29,7 +29,14 @@ export const StateBorder = styled(GeoPath)`
   stroke-width: 2px;
 `;
 
-export const MetroCounty = styled(GeoPath)<{
+export const CountyBorder = styled(GeoPath)`
+  fill: none;
+  pointer-events: none;
+  stroke: black;
+  stroke-width: 2px;
+`;
+
+export const CountyWithLevel = styled(GeoPath)<{
   $locationSummary?: LocationSummary;
 }>`
   fill: ${({ $locationSummary }) => getAlertColor($locationSummary)};
