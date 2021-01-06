@@ -13,10 +13,10 @@ async function main() {
       continue;
     }
 
-    // Rename the image `image.png` -> `backup-image.png` (sharp doesn't allow
+    // Rename the image `image.png` -> `image-original.png` (sharp doesn't allow
     // the same input and output path).
-    const { dir: imageDir, base: fileName } = path.parse(inputPath);
-    const backupName = `backup-${fileName}`;
+    const { dir: imageDir, name: fileName, ext } = path.parse(inputPath);
+    const backupName = `${fileName}-original${ext}`;
     const backupImagePath = path.join(imageDir, backupName);
 
     if (fs.existsSync(backupImagePath)) {
@@ -29,16 +29,19 @@ async function main() {
     // Resize the image preserving the aspect ratio
     console.log(`Resizing ${imagePath}`);
     await sharp(backupImagePath).resize(sizeParams).toFile(inputPath);
-
-    // Remove the backup image
-    if (fs.existsSync(backupImagePath)) {
-      fs.unlinkSync(backupImagePath);
-    }
   }
 
-  console.log('Done.');
+  return true;
 }
 
 if (require.main === module) {
-  main();
+  main()
+    .then(() => {
+      console.log('Done');
+      process.exit(0);
+    })
+    .catch(err => {
+      console.error(err);
+      process.exit(-1);
+    });
 }
