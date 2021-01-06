@@ -2,23 +2,22 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { uniq } from 'lodash';
 import { ComposableMap, Geographies } from 'react-simple-maps';
-import COUNTIES_JSON from 'components/Map/data/counties-10m.json';
-import { geoBounds, geoCentroid, geoDistance } from 'd3-geo';
-import * as topojson from 'topojson-client';
-import { MetroArea } from 'common/regions';
-import * as Styles from './MetroAreaMap.style';
-import regions from 'common/regions';
-import { LocationSummariesByFIPS } from 'common/location_summaries';
 import ReactTooltip from 'react-tooltip';
+import * as topojson from 'topojson-client';
+import { geoBounds, geoCentroid, geoDistance } from 'd3-geo';
+import COUNTIES_JSON from 'components/Map/data/counties-10m.json';
+import regions, { County, MetroArea, State, Region } from 'common/regions';
+import * as Styles from './MetroAreaMap.style';
+import { LocationSummariesByFIPS } from 'common/location_summaries';
 
 const MetroAreaMap: React.FC<{
   height?: number;
   width?: number;
-  metroArea: MetroArea;
-}> = ({ height = 600, width = 800, metroArea }) => {
+  region: Region;
+}> = ({ height = 600, width = 800, region }) => {
   const [tooltipContent, setTooltipContent] = useState('');
 
-  const countyFipsList = metroArea.counties.map(county => county.fipsCode);
+  const countyFipsList = getCountyFipsList(region);
   const countiesTopoJson = buildCountyGeometries(countyFipsList);
   const projectionConfig = getProjectionConfig(countiesTopoJson, width, height);
 
@@ -68,7 +67,7 @@ const MetroAreaMap: React.FC<{
                   to={region ? region.relativeUrl : '/'}
                   aria-label={region?.shortName || ''}
                 >
-                  <Styles.MetroCounty
+                  <Styles.CountyWithLevel
                     geography={geo}
                     $locationSummary={LocationSummariesByFIPS[geo.id] || null}
                     onMouseEnter={() => onMouseEnter(region?.shortName || '')}
@@ -86,6 +85,18 @@ const MetroAreaMap: React.FC<{
             ))
           }
         </Geographies>
+        {/* Highlight the current county if needed */}
+        {region instanceof County && (
+          <Geographies key="county-border" geography={countiesTopoJson}>
+            {({ geographies }) =>
+              geographies
+                .filter(geo => geo.id === region.fipsCode)
+                .map(geo => (
+                  <Styles.CountyBorder key={geo.rsmKey} geography={geo} />
+                ))
+            }
+          </Geographies>
+        )}
       </ComposableMap>
       <ReactTooltip>{tooltipContent}</ReactTooltip>
     </Styles.MapContainer>
@@ -121,7 +132,7 @@ function getProjectionConfig(
   const distanceLongitude = geoDistance([ax, ay], [bx, ay]);
   const distanceLatitude = geoDistance([ax, ay], [ax, by]);
   const scale =
-    0.4 * Math.min(width / distanceLongitude, height / distanceLatitude);
+    0.6 * Math.min(width / distanceLongitude, height / distanceLatitude);
   return { scale, center };
 }
 
@@ -148,6 +159,22 @@ function buildStateGeometries(stateFipsList: string[]) {
 
 function getStateFipsList(countyFipsList: string[]) {
   return uniq(countyFipsList.map(countyFips => countyFips.substr(0, 2)));
+}
+
+function getCountyFipsList(region: Region): string[] {
+  if (region instanceof MetroArea) {
+    return region.counties.map(c => c.fipsCode);
+  } else if (region instanceof State) {
+    return regions.counties
+      .filter(c => c.state.fipsCode === region.fipsCode)
+      .map(c => c.fipsCode);
+  } else if (region instanceof County) {
+    return regions.counties
+      .filter(c => c.state.fipsCode === region.state.fipsCode)
+      .map(c => c.fipsCode);
+  } else {
+    return [];
+  }
 }
 
 export default MetroAreaMap;
