@@ -80,6 +80,11 @@ function formatGroup(groupItems: CsvRow[]) {
 
   const totalPopulation = sum(counties.map(county => county?.population || 0));
 
+  const nameForFormatUrl =
+    firstItem.cbsaTitle === 'New York-Newark-Jersey City, NY-NJ-PA'
+      ? 'New York City-Newark-Jersey City, NY-NJ-PA'
+      : firstItem.cbsaTitle;
+
   return {
     cbsaCode: firstItem.cbsaCode,
     cbsaTitle: firstItem.cbsaTitle,
@@ -87,7 +92,7 @@ function formatGroup(groupItems: CsvRow[]) {
     countyFipsCodes: groupItems.map(
       item => `${item.fipsStateCode}${item.fipsCountyCode}`,
     ),
-    urlSegment: formatUrl(firstItem.cbsaTitle),
+    urlSegment: formatUrl(nameForFormatUrl),
     population: totalPopulation,
   };
 }
