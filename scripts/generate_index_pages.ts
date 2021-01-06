@@ -145,7 +145,7 @@ async function main() {
   }
 
   for (const state of regions.states) {
-    const relativeImageUrl = `/states/${state.fipsCode}`;
+    const relativeImageUrl = `/states/${state.stateCode.toLowerCase()}`;
     await buildLocationPages(
       builder,
       state.relativeUrl,
