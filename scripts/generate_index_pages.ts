@@ -258,7 +258,13 @@ class IndexPageBuilder {
   }
 }
 
-main().catch(e => {
-  console.error(e);
-  process.exit(-1);
-});
+main()
+  .then(() => {
+    // HACK: We aggressively exit the process, else Firestore SDK will keep node from exiting for 60s
+    // thanks to open network connections.
+    process.exit(0);
+  })
+  .catch(e => {
+    console.error(e);
+    process.exit(-1);
+  });
