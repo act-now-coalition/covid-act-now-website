@@ -10,7 +10,7 @@ import regions, {
   State,
   MetroArea,
   getStateName,
-  getStateCode,
+  getFormattedStateCode,
 } from 'common/regions';
 import { fail } from 'assert';
 import { assert } from '.';
@@ -257,21 +257,33 @@ export function getAbbreviatedCounty(county: string) {
   else return county.replace('County', 'Co.');
 }
 
-function splitCountyName(countyName: string) {
-  const splitCounty = countyName.split(' ');
-  const suffix = splitCounty.pop();
-  const withoutSuffix = splitCounty;
-  return [withoutSuffix.join(' '), suffix];
+/*
+Used to split region names for county and metro in order to set multiple font weights.
+Outputs arr with split name:
+  metro ex: ['Boston', 'metro,']
+  county ex: ['Fairfield', 'Co.']
+
+(Final format once eventually styled: bold locationName, non-bold suffix):
+  ex: [bold] Boston [non-bold] metro
+  ex: [bold] Fairfield [non-bold] Co.
+*/
+function splitRegionName(regionName: string) {
+  const splitRegion = regionName.split(' ');
+  const suffixUnformatted = splitRegion.pop();
+  const regionSuffix = suffixUnformatted?.includes('metro')
+    ? `${suffixUnformatted},`
+    : suffixUnformatted;
+  const regionNameMain = splitRegion.join(' ');
+  return [regionNameMain, regionSuffix];
 }
 
-export function getColumnLocationName(region: Region) {
+export function getRegionNameForRow(region: Region) {
   if (region instanceof State) {
     return [region.fullName];
   } else if (region instanceof County) {
-    const countyWithAbbreviatedSuffix = region.abbreviation;
-    return splitCountyName(countyWithAbbreviatedSuffix);
+    return splitRegionName(region.abbreviation);
   } else if (region instanceof MetroArea) {
-    return [region.shortName];
+    return splitRegionName(region.shortName);
   } else {
     fail('dont support other regions');
   }
@@ -357,7 +369,7 @@ export function getShareQuote(
 // Determines which location field is shown under the main Compare feature header + formats it
 export const getCompareSubheader = (region: Region): string => {
   if (region instanceof County) {
-    return `${getAbbreviatedCounty(region.name)}, ${getStateCode(
+    return `${getAbbreviatedCounty(region.name)}, ${getFormattedStateCode(
       region,
     )} to other counties`;
   } else if (region instanceof MetroArea || region instanceof State) {

@@ -36,8 +36,8 @@ export function getAutocompleteRegions(region?: Region) {
     return concat<Region>(
       sortedMetroCounties,
       states,
-      otherCounties,
       metroAreas,
+      otherCounties,
     );
   } else if (region instanceof State || region instanceof County) {
     const stateFips = getStateFips(region);
