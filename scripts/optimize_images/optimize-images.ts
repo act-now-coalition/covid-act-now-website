@@ -1,42 +1,32 @@
 import fs from 'fs';
-import path from 'path';
 import sharp from 'sharp';
 import staticImages from './static-images';
+import { absolutePath, ImageSize } from './utils';
 
 async function main() {
   for (const imageInfo of staticImages) {
-    const { path: imagePath, ...sizeParams } = imageInfo;
-    const inputPath = path.join(__dirname, '../../', imagePath);
+    const { inputPath, backupPath, ...sizeParams } = imageInfo;
+    const inputAbsolutePath = absolutePath(inputPath);
 
-    if (!fs.existsSync(inputPath)) {
-      console.log(`Image ${inputPath} not found, skipping.`);
+    if (!fs.existsSync(inputAbsolutePath)) {
+      console.log(`Image ${inputAbsolutePath} not found, skipping.`);
       continue;
     }
+    const backupAbsolutePath = absolutePath(backupPath);
 
-    // Rename the image `image.png` -> `image-original.png` (sharp doesn't allow
-    // the same input and output path).
-    const { dir: imageDir, name: fileName, ext } = path.parse(inputPath);
-    const backupName = `${fileName}-original${ext}`;
-    const backupImagePath = path.join(imageDir, backupName);
-
-    // Do not create a copy if the original copy already exists
-    if (!fs.existsSync(backupImagePath)) {
-      fs.renameSync(inputPath, backupImagePath);
+    // Do not overwrite the backup copy if it already exists
+    if (!fs.existsSync(backupAbsolutePath)) {
+      fs.renameSync(inputAbsolutePath, backupAbsolutePath);
     }
 
     // Resize the image preserving the aspect ratio
-    console.log(`Resizing ${imagePath}`);
-    await sharp(backupImagePath)
+    console.log(`Resizing ${inputPath}`);
+    await sharp(backupAbsolutePath)
       .resize(doubleSize(sizeParams))
-      .toFile(inputPath);
+      .toFile(inputAbsolutePath);
   }
 
   return true;
-}
-
-interface ImageSize {
-  width?: number;
-  height?: number;
 }
 
 // Duplicate the input pixel size for better resolution on retina displays

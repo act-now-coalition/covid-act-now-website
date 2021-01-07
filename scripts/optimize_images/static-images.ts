@@ -1,28 +1,100 @@
-const staticImages = [
+import { chain, concat } from 'lodash';
+import { teams } from '../../src/cms-content/team';
+import aboutContent from '../../src/cms-content/about';
+import { allCaseStudies } from '../../src/cms-content/learn';
+import {
+  ImageInfo,
+  isRasterImage,
+  joinPublicFolder,
+  cmsBackupPath,
+} from './utils';
+
+const staticImages: ImageInfo[] = [
   {
-    path: 'src/assets/images/ghss.png',
+    inputPath: 'src/assets/images/ghss.png',
+    backupPath: 'src/assets/images/ghss-original.png',
     width: 216,
   },
   {
-    path: 'src/assets/images/cerc.png',
+    inputPath: 'src/assets/images/cerc.png',
+    backupPath: 'src/assets/images/cerc-original.png',
     width: 216,
   },
   {
-    path: 'src/assets/images/harvard.png',
+    inputPath: 'src/assets/images/harvard.png',
+    backupPath: 'src/assets/images/harvard-original.png',
     width: 216,
   },
   {
-    path: 'src/assets/images/instagram_icon.png',
+    inputPath: 'src/assets/images/instagram_icon.png',
+    backupPath: 'src/assets/images/instagram_icon-original.png',
     width: 40,
   },
   {
-    path: 'src/assets/images/response-simulator-screenshot.png',
-    height: 450,
+    inputPath: 'src/assets/images/response-simulator-screenshot.png',
+    backupPath: 'src/assets/images/response-simulator-screenshot-original.png',
+    width: 450,
   },
   {
-    path: 'src/assets/images/covid-act-now-logo-url-dark.png',
+    inputPath: 'src/assets/images/covid-act-now-logo-url-dark.png',
+    backupPath: 'src/assets/images/covid-act-now-logo-url-dark-original.png',
     height: 32,
   },
 ];
 
-export default staticImages;
+/**
+ * CMS Images
+ *
+ * Images from the CMS are resized according to their usage. When they are
+ * rendered in more than one place, we keep the size of the largest instance.
+ */
+const profilePictures: ImageInfo[] = chain(teams)
+  .flatMap(team => team.teamMembers)
+  .map(userProfile => joinPublicFolder(userProfile.profileImgUrl))
+  .filter(isRasterImage)
+  .map((imagePath: string) => ({
+    inputPath: imagePath,
+    backupPath: cmsBackupPath(imagePath),
+    width: 64,
+  }))
+  .value();
+
+const governmentLogos = chain(aboutContent.governmentLogos)
+  .map(logoInfo => joinPublicFolder(logoInfo.image))
+  .filter(isRasterImage)
+  .map((imagePath: string) => ({
+    inputPath: imagePath,
+    backupPath: cmsBackupPath(imagePath),
+    width: 200,
+  }))
+  .value();
+
+const partnersLogos = chain(aboutContent.partnersContent)
+  .flatMap(partnerContent => partnerContent.logos)
+  .map(logoInfo => joinPublicFolder(logoInfo.image))
+  .filter(isRasterImage)
+  .map((imagePath: string) => ({
+    inputPath: imagePath,
+    backupPath: cmsBackupPath(imagePath),
+    width: 200,
+  }))
+  .value();
+
+const caseStudyLogos = chain(allCaseStudies)
+  .map(caseStudy => joinPublicFolder(caseStudy.logoUrl))
+  .filter(isRasterImage)
+  .map((imagePath: string) => ({
+    inputPath: imagePath,
+    backupPath: cmsBackupPath(imagePath),
+    height: 64,
+  }))
+  .value();
+
+const cmsImages = concat(
+  profilePictures,
+  governmentLogos,
+  partnersLogos,
+  caseStudyLogos,
+);
+
+export default concat(staticImages, cmsImages);
