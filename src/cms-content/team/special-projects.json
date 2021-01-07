@@ -29,6 +29,11 @@
       "fullName": "Henry Bair",
       "description": "writer, Research Rundown and Daily Download",
       "profileUrl": "https://www.linkedin.com/in/henrybair/"
+    },
+    {
+      "profileImgUrl": "/images_cms/matt-headshot.jpeg",
+      "fullName": " Matt McInerney",
+      "profileUrl": "https://township.agency/"
     }
   ],
   "teamName": "Special Projects",
