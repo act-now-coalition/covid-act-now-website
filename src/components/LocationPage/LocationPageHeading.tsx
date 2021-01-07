@@ -16,7 +16,10 @@ const LocationPageHeading: React.FC<{
       </Styles.Container>
     );
   } else if (region instanceof County) {
-    const stateUrl = urlJoin(isEmbed ? '/embed' : '', region.state.relativeUrl);
+    const stateUrl = urlJoin(
+      isEmbed ? '/embed' : '/',
+      region.state.relativeUrl,
+    );
     return (
       <Styles.Container>
         <Styles.HeaderTitle $isEmbed={isEmbed}>
