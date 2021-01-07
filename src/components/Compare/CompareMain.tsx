@@ -109,15 +109,17 @@ const CompareMain = (props: {
     setCounty(props.county);
   }, [props.stateId, props.county]);
 
+  const defaultSortByPopulation = isHomepage ? true : false;
+
   const [sorter, setSorter] = useState(Metric.CASE_DENSITY);
   const [sortDescending, setSortDescending] = useState(true);
-  const [sortByPopulation, setSortByPopulation] = useState(false);
+  const [sortByPopulation, setSortByPopulation] = useState(
+    defaultSortByPopulation,
+  );
   const [countyTypeToView, setCountyTypeToView] = useState(MetroFilter.ALL);
 
   // For homepage:
-  const [homepageScope, setHomepageScope] = useState(
-    HomepageLocationScope.STATE,
-  );
+  const [homepageScope, setHomepageScope] = useState(HomepageLocationScope.MSA);
 
   const homepageScopeToLocations = {
     [HomepageLocationScope.COUNTY]: getAllCountiesSelection(countyTypeToView),
