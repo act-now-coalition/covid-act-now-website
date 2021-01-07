@@ -164,7 +164,6 @@
     "@types/url-join": "^4.0.0",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
-    "axios": "^0.19.2",
     "babel-loader": "8.0.6",
     "cross-env": "^7.0.2",
     "cypress": "^4.2.0",
