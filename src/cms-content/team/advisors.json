@@ -97,6 +97,12 @@
       "fullName": "Jarone Lee, M.P.H., M.D. ",
       "description": "Medical Director at Massachusetts General Hospital ICU, Associate Professor at Harvard Medical School",
       "profileUrl": "https://www.massgeneral.org/doctors/19206/jarone-lee"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Emily Oster, Ph.D.",
+      "description": "Professor of Economics at Brown University, Founder of COVID Explained",
+      "profileUrl": "https://watson.brown.edu/people/faculty/oster"
     }
   ]
 }
