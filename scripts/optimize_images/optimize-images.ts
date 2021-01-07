@@ -22,7 +22,7 @@ async function main() {
     // Resize the image preserving the aspect ratio
     console.log(`Resizing ${inputPath}`);
     await sharp(backupAbsolutePath)
-      .resize(doubleSize(sizeParams))
+      .resize({ ...doubleSize(sizeParams), withoutEnlargement: true })
       .toFile(inputAbsolutePath);
   }
 
