@@ -31,3 +31,14 @@ export function cmsBackupPath(inputRelativePath: string) {
   const backupName = `${name}-original${ext}`;
   return path.join('src/assets/original_cms_images', backupName);
 }
+
+// Duplicate the input pixel size for better resolution on retina displays
+export function doubleSize(sizeParams: ImageSize): ImageSize {
+  if (sizeParams.width) {
+    return { width: 2 * sizeParams.width };
+  }
+  if (sizeParams.height) {
+    return { height: 2 * sizeParams.height };
+  }
+  return {};
+}

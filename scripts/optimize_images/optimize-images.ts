@@ -1,7 +1,7 @@
 import fs from 'fs';
 import sharp from 'sharp';
 import staticImages from './static-images';
-import { absolutePath, ImageSize } from './utils';
+import { absolutePath, doubleSize } from './utils';
 
 async function main() {
   for (const imageInfo of staticImages) {
@@ -27,17 +27,6 @@ async function main() {
   }
 
   return true;
-}
-
-// Duplicate the input pixel size for better resolution on retina displays
-function doubleSize(sizeParams: ImageSize): ImageSize {
-  if (sizeParams.width) {
-    return { width: 2 * sizeParams.width };
-  }
-  if (sizeParams.height) {
-    return { height: 2 * sizeParams.height };
-  }
-  return {};
 }
 
 if (require.main === module) {
