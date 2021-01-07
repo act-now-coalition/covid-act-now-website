@@ -6,38 +6,39 @@ import {
   ImageInfo,
   isRasterImage,
   joinPublicFolder,
-  cmsBackupPath,
+  cmsOriginalPath,
 } from './utils';
 
 const staticImages: ImageInfo[] = [
   {
     inputPath: 'src/assets/images/ghss.png',
-    backupPath: 'src/assets/images/ghss-original.png',
+    originalPath: 'src/assets/images/ghss-original.png',
     width: 216,
   },
   {
     inputPath: 'src/assets/images/cerc.png',
-    backupPath: 'src/assets/images/cerc-original.png',
+    originalPath: 'src/assets/images/cerc-original.png',
     width: 216,
   },
   {
     inputPath: 'src/assets/images/harvard.png',
-    backupPath: 'src/assets/images/harvard-original.png',
+    originalPath: 'src/assets/images/harvard-original.png',
     width: 216,
   },
   {
     inputPath: 'src/assets/images/instagram_icon.png',
-    backupPath: 'src/assets/images/instagram_icon-original.png',
+    originalPath: 'src/assets/images/instagram_icon-original.png',
     width: 40,
   },
   {
     inputPath: 'src/assets/images/response-simulator-screenshot.png',
-    backupPath: 'src/assets/images/response-simulator-screenshot-original.png',
+    originalPath:
+      'src/assets/images/response-simulator-screenshot-original.png',
     width: 450,
   },
   {
     inputPath: 'src/assets/images/covid-act-now-logo-url-dark.png',
-    backupPath: 'src/assets/images/covid-act-now-logo-url-dark-original.png',
+    originalPath: 'src/assets/images/covid-act-now-logo-url-dark-original.png',
     height: 32,
   },
 ];
@@ -54,7 +55,7 @@ const profilePictures: ImageInfo[] = chain(teams)
   .filter(isRasterImage)
   .map((imagePath: string) => ({
     inputPath: imagePath,
-    backupPath: cmsBackupPath(imagePath),
+    originalPath: cmsOriginalPath(imagePath),
     width: 64,
   }))
   .value();
@@ -64,7 +65,7 @@ const governmentLogos = chain(aboutContent.governmentLogos)
   .filter(isRasterImage)
   .map((imagePath: string) => ({
     inputPath: imagePath,
-    backupPath: cmsBackupPath(imagePath),
+    originalPath: cmsOriginalPath(imagePath),
     width: 200,
   }))
   .value();
@@ -75,7 +76,7 @@ const partnersLogos = chain(aboutContent.partnersContent)
   .filter(isRasterImage)
   .map((imagePath: string) => ({
     inputPath: imagePath,
-    backupPath: cmsBackupPath(imagePath),
+    originalPath: cmsOriginalPath(imagePath),
     width: 200,
   }))
   .value();
@@ -85,7 +86,7 @@ const caseStudyLogos = chain(allCaseStudies)
   .filter(isRasterImage)
   .map((imagePath: string) => ({
     inputPath: imagePath,
-    backupPath: cmsBackupPath(imagePath),
+    originalPath: cmsOriginalPath(imagePath),
     height: 64,
   }))
   .value();

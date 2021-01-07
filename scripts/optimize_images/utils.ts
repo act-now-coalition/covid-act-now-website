@@ -9,7 +9,7 @@ export interface ImageSize {
 
 export interface ImageInfo extends ImageSize {
   inputPath: string;
-  backupPath: string;
+  originalPath: string;
 }
 
 export function isRasterImage(imagePath: string) {
@@ -26,7 +26,7 @@ export function absolutePath(relativePath: string) {
   return path.join(__dirname, '../../', relativePath);
 }
 
-export function cmsBackupPath(inputRelativePath: string) {
+export function cmsOriginalPath(inputRelativePath: string) {
   const { ext, name } = path.parse(inputRelativePath);
   const backupName = `${name}-original${ext}`;
   return path.join('src/assets/original_cms_images', backupName);
