@@ -91,6 +91,18 @@
       "fullName": "Marta Wosińska, Ph.D.",
       "description": "Deputy Director of Duke-Margolis Center for Health Policy",
       "profileUrl": "https://healthpolicy.duke.edu/people/marta-wosinska-phd"
+    },
+    {
+      "profileImgUrl": "/images_cms/jarone-lee-headshot.jpg",
+      "fullName": "Jarone Lee, M.P.H., M.D. ",
+      "description": "Medical Director at Massachusetts General Hospital ICU, Associate Professor at Harvard Medical School",
+      "profileUrl": "https://www.massgeneral.org/doctors/19206/jarone-lee"
+    },
+    {
+      "profileImgUrl": "/images_cms/emily-oster-headshot.png",
+      "fullName": "Emily Oster, Ph.D.",
+      "description": "Professor of Economics at Brown University, Founder of COVID Explained",
+      "profileUrl": "https://watson.brown.edu/people/faculty/oster"
     }
   ]
 }
