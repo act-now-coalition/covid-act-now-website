@@ -1,4 +1,12 @@
-import { chain, keyBy, reject, partition } from 'lodash';
+import {
+  chain,
+  keyBy,
+  reject,
+  partition,
+  flatten,
+  map,
+  property,
+} from 'lodash';
 import faq from './learn-faq.json';
 import glossary from './learn-glossary.json';
 import landing from './learn-landing.json';
@@ -64,6 +72,10 @@ const sanitizeFaq = (faq: FaqContent): FaqContent => ({
 });
 
 export const faqContent = sanitizeFaq(faq) as FaqContent;
+
+export const faqQuestionItems = flatten(
+  map(faqContent.sections, property('questions')),
+);
 
 /*
   Glossary:

@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import Map from 'components/Map/Map';
-import CountyMap from 'components/CountyMap/CountyMap';
 import { MAP_FILTERS } from 'screens/LocationPage/Enums/MapFilterEnums';
 import * as Styles from './MiniMap.style';
 import { Region, State, County, MetroArea } from 'common/regions';
@@ -60,7 +59,7 @@ const MiniMap: FunctionComponent<MiniMapProperties> = ({
         {/* State Map */}
         {mapOption === MAP_FILTERS.STATE && (
           <Styles.StateMapContainer>
-            <CountyMap region={region} />
+            <RegionMap region={region} />
           </Styles.StateMapContainer>
         )}
         {mapOption === MAP_FILTERS.MSA && (

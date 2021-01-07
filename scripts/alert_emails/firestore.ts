@@ -30,23 +30,24 @@ export function getFirestore(): FirebaseFirestore.Firestore {
   return admin.firestore();
 }
 
-export interface FipsEmail {
-  fips: string;
+export interface Subscription {
   email: string;
+  locations: string[];
+  subscribedAt: Date;
 }
 
 export async function fetchAllAlertSubscriptions(
   db: FirebaseFirestore.Firestore,
-): Promise<FipsEmail[]> {
+): Promise<Subscription[]> {
   return new Promise(function (resolve, reject) {
-    const subscriptions: FipsEmail[] = [];
+    const subscriptions: Subscription[] = [];
     db.collection(ALERTS_SUBSCRIPTIONS_COLLECTION)
       .stream()
-      .on('data', emailDoc => {
-        const { locations } = emailDoc.data();
-        locations.forEach((fips: string) => {
-          subscriptions.push({ fips, email: emailDoc.id });
-        });
+      .on('data', subscription => {
+        const data = subscription.data();
+        // Convert Firestore timestamp to plain Date.
+        data.subscribedAt = data.subscribedAt && data.subscribedAt.toDate();
+        subscriptions.push(data);
       })
       .on('end', () => {
         resolve(subscriptions);

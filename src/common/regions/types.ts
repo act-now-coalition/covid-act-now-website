@@ -10,7 +10,18 @@ export enum RegionType {
   MSA = 'MSA',
 }
 
+/* Used to rename some metro principal cities for clarity: */
 const DC_METRO_FIPS = '47900';
+const NY_METRO_FIPS = '35620';
+
+interface FipsToPrincipalCityName {
+  [key: string]: string;
+}
+
+const fipsToPrincipalCityRenames: FipsToPrincipalCityName = {
+  [DC_METRO_FIPS]: 'Washington DC',
+  [NY_METRO_FIPS]: 'New York City',
+};
 
 export abstract class Region {
   constructor(
@@ -70,7 +81,6 @@ export class County extends Region {
     fipsCode: FipsCode,
     population: number,
     public readonly state: State,
-    public readonly cityNames: string[],
     private readonly adjacentCountiesFips: FipsCode[],
     public readonly zipCodes: ZipCode[],
   ) {
@@ -114,9 +124,8 @@ export class MetroArea extends Region {
   }
 
   private get principalCityName() {
-    // Make Washington DC metro principal city name more clear.
-    if (this.fipsCode === DC_METRO_FIPS) {
-      return 'Washington DC';
+    if (this.fipsCode in fipsToPrincipalCityRenames) {
+      return fipsToPrincipalCityRenames[this.fipsCode];
     }
     return this.name.split('-')[0];
   }

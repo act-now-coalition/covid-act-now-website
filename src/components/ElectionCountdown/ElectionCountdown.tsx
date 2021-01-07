@@ -17,6 +17,7 @@ import {
   ElectionCountdownContainer,
   BannerContainer,
 } from 'screens/HomePage/HomePage.style';
+import flagIconUrl from 'assets/images/misc/flag_of_the_united_states.svg';
 
 const CountdownContent = (props: {
   days: number;
@@ -45,8 +46,6 @@ const CountdownContent = (props: {
     },
   ];
 
-  const flagIconPath = 'images/misc/flag_of_the_united_states.svg';
-
   const linkProps = {
     target: '_blank',
     rel: 'noopener noreferrer',
@@ -61,7 +60,7 @@ const CountdownContent = (props: {
   }
   return (
     <ElectionCountdownContainer>
-      <FlagIcon src={flagIconPath} alt="American flag" />
+      <FlagIcon src={flagIconUrl} alt="American flag" />
       <Container>
         <BannerSection>
           <CountdownWrapper>

@@ -36,7 +36,7 @@ import { getNationalText } from 'components/NationalText';
 
 function getPageDescription() {
   const date = formatMetatagDate();
-  return `${date} View the recent wave of US COVID cases, deaths, hospitalizations, and other important metrics. 50 States. 3000+ Counties. Click the map to dive in.`;
+  return `${date} Explore our interactive U.S. COVID map for the latest cases, deaths, hospitalizations, and other key metrics. 50 States. 390+ Metros. 3200+ Counties.`;
 }
 
 export default function HomePage() {
@@ -81,7 +81,7 @@ export default function HomePage() {
       <EnsureSharingIdInUrl />
       <AppMetaTags
         canonicalUrl="/"
-        pageTitle="Realtime US COVID Risk Map & Key Metrics"
+        pageTitle="Realtime U.S. COVID Map & Risk Levels"
         pageDescription={getPageDescription()}
       />
       <BannerContainer>

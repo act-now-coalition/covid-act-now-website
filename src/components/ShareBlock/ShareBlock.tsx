@@ -161,7 +161,11 @@ const ShareBlock = ({
             </SocialTextArea>
           </SocialTextAreaWrapper>
           <SocialMockupWrapper>
-            <SocialLocationPreview projections={projections} stats={stats} />
+            <SocialLocationPreview
+              isEmbedPreview
+              projections={projections}
+              stats={stats}
+            />
           </SocialMockupWrapper>
         </ShareRowContentArea>
       </ShareRow>

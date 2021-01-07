@@ -15,6 +15,7 @@ import Section from './Section';
 import { useScrollToTopButton } from 'common/hooks';
 import ScrollToTopButton from 'components/SharedComponents/ScrollToTopButton';
 import { EventCategory } from 'components/Analytics';
+import FaqStructuredData from './FaqStructuredData';
 
 const Faq: React.FC = () => {
   const {
@@ -47,6 +48,7 @@ const Faq: React.FC = () => {
         pageTitle={metadataTitle}
         pageDescription={`${date} ${metadataDescription}`}
       />
+      <FaqStructuredData />
       <PageContent sidebarItems={learnPages}>
         <BreadcrumbsContainer>
           <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />

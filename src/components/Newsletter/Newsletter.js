@@ -4,7 +4,12 @@ import { isValidEmail } from 'common/utils';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import AutocompleteRegions from 'components/AutocompleteRegions';
 import { getDefaultRegions, subscribeToLocations } from './utils';
-import { StyledNewsletter, InputHolder, InputError } from './Newsletter.style';
+import {
+  StyledNewsletter,
+  SubscribeButton,
+  InputHolder,
+  InputError,
+} from './Newsletter.style';
 
 class Newsletter extends React.Component {
   constructor(props) {
@@ -12,10 +17,11 @@ class Newsletter extends React.Component {
     this.form = null;
     this.emailInput = null;
     this.state = {
-      checked: true,
+      dailyDownloadChecked: true,
       email: '',
       errorMessage: '',
       selectedRegions: props.region ? getDefaultRegions(props.region) : [],
+      showConfirmationText: false,
     };
     this.submitForm = this.submitForm.bind(this);
   }
@@ -24,28 +30,35 @@ class Newsletter extends React.Component {
     e.preventDefault();
     const { email } = this.state;
 
-    // can't submit the form without the email entered and email that is valid
     if (isValidEmail(email)) {
       await this.subscribeToAlerts();
       trackEvent(EventCategory.ENGAGEMENT, EventAction.SUBSCRIBE);
-      let url = new URL('https://createsend.com/t/getsecuresubscribelink');
-      url.searchParams.append('email', this.emailInput.value);
-      url.searchParams.append('data', this.form.getAttribute('data-id'));
-      fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/x-www-form-urlencoded',
-        },
-      })
-        .then(response => {
-          response.text().then(text => {
-            this.form.action = text;
-            this.form.submit();
-          });
-        })
-        .then(data => {
-          console.log(data);
+
+      // If they are signing up for daily download (in addition to alerts), then we
+      // submit the Campaign Monitor signup form, which will land them on a Campaign
+      // Monitor confirmation page.
+      if (this.state.dailyDownloadChecked) {
+        let url = new URL('https://createsend.com/t/getsecuresubscribelink');
+        url.searchParams.append('email', this.emailInput.value);
+        url.searchParams.append('data', this.form.getAttribute('data-id'));
+
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/x-www-form-urlencoded',
+          },
         });
+        const text = await response.text();
+        this.form.action = text;
+        this.form.submit();
+      } else {
+        // Since we didn't use the Campaign Monitor signup form we need to show our
+        // own confirmation UI (just change the button text/color for 3sec).
+        this.setState({ showConfirmationText: true });
+        setTimeout(() => {
+          this.setState({ showConfirmationText: false });
+        }, 3000);
+      }
     } else {
       this.setState({ errorMessage: 'Must supply a valid email address' });
     }
@@ -72,7 +85,12 @@ class Newsletter extends React.Component {
 
   render() {
     const { region } = this.props;
-    const { checked, selectedRegions, errorMessage } = this.state;
+    const {
+      dailyDownloadChecked,
+      selectedRegions,
+      errorMessage,
+      showConfirmationText,
+    } = this.state;
     const countyName = region instanceof County ? region.name : null;
     const stateCode = region ? getStateCode(region) : null;
     const errMessageOpen = errorMessage.length > 0;
@@ -83,36 +101,36 @@ class Newsletter extends React.Component {
 
     return (
       <StyledNewsletter>
-        {/* This form comes from the signup form builder
-        (https://covidactnow.createsend.com/subscribers/signupformbuilder/<listid>) within the subscribers page
+        {/*
+        This form comes from the signup form builder for the "Full Sign Up List_Scrubbed" list
+        in Campaign Monitor (under Lists & subscribers).
+        (https://covidactnow.createsend.com/subscribers/signupformbuilder/1cb29de18ed7358f).
         From there choose the option where you add code to your website without css.
         To update grab the data-id, classNames, ids and names for each of the inputs in order to subscribe users.
-        We hide some of the information users don't need to enter and add some form fields that the api doesn't
-        require (i.e the alert-loctions autocomplete).
          */}
         <form
           ref={f => (this.form = f)}
           className="js-cm-form"
           id="subForm"
           method="post"
-          data-id="2BE4EF332AA2E32596E38B640E905619E90CD5DAC48A878CDEBFFE3B420D8CD24E4AEABAB52A4CE3526219C7A966AE965B84F99C823C89EFF1F01B28DE4F975E"
+          data-id="2BE4EF332AA2E32596E38B640E90561930C9C3A433D015D9D4BD88E99175E51395EF5EBFFD527179E032AC15455BB1208D87A6CE87843E524B0EA520CBFF446E"
         >
           <input
             hidden
             readOnly
             aria-label="state"
             value={stateCode || ''}
-            id="fieldjrdtwi"
+            id="fieldjlkiyul"
             maxLength="200"
-            name="cm-f-jrdtwi"
+            name="cm-f-jlkiyul"
           />
           <input
             hidden
             readOnly
             aria-label="county"
-            id="fieldjrdtwd"
+            id="fieldjlkulhk"
             maxLength="200"
-            name="cm-f-jrdtwd"
+            name="cm-f-jlkulhk"
             value={countyName || ''}
           />
           <AutocompleteRegions
@@ -130,14 +148,18 @@ class Newsletter extends React.Component {
               className="js-cm-email-input qa-input-email"
               id="fieldEmail"
               maxLength="200"
-              name="cm-yddtsd-yddtsd"
+              name="cm-wurhhh-wurhhh"
               required=""
               type="email"
               onChange={e => this.handleSetEmail(e.target.value)}
             />
-            <button type="submit" onClick={this.submitForm}>
-              Sign up
-            </button>
+            <SubscribeButton
+              type="submit"
+              onClick={this.submitForm}
+              confirmation={showConfirmationText}
+            >
+              {showConfirmationText ? 'Subscribed!' : 'Sign up'}
+            </SubscribeButton>
           </InputHolder>
           {this.state.errorMessage && (
             <InputError>{this.state.errorMessage}</InputError>
@@ -148,8 +170,10 @@ class Newsletter extends React.Component {
               value="wurhhh"
               id="wurhhh"
               name="cm-ol-wurhhh"
-              onChange={() => this.setState({ checked: !checked })}
-              checked={checked}
+              onChange={() =>
+                this.setState({ dailyDownloadChecked: !dailyDownloadChecked })
+              }
+              checked={dailyDownloadChecked}
             />
             <label htmlFor="checkbox">
               Also send me <b>daily news</b> with the latest data and scientific
