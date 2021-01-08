@@ -16,7 +16,7 @@ async function main() {
 
     // Do not overwrite the backup copy if it already exists
     if (!fs.existsSync(originalAbsolutePath)) {
-      fs.renameSync(inputAbsolutePath, originalAbsolutePath);
+      fs.copyFileSync(inputAbsolutePath, originalAbsolutePath);
     }
 
     const targetSize = doubleSize(sizeParams);

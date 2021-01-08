@@ -1,4 +1,6 @@
-import { chain, concat } from 'lodash';
+import fs from 'fs';
+import path from 'path';
+import { chain, concat, difference } from 'lodash';
 import { teams } from '../../src/cms-content/team';
 import aboutContent from '../../src/cms-content/about';
 import { allCaseStudies } from '../../src/cms-content/learn';
@@ -7,6 +9,7 @@ import {
   isRasterImage,
   joinPublicFolder,
   cmsOriginalPath,
+  absolutePath,
 } from './utils';
 
 const staticImages: ImageInfo[] = [
@@ -91,11 +94,35 @@ const caseStudyLogos = chain(allCaseStudies)
   }))
   .value();
 
-const cmsImages = concat(
+const cmsStructuredImages = concat(
   profilePictures,
   governmentLogos,
   partnersLogos,
   caseStudyLogos,
 );
 
-export default concat(staticImages, cmsImages);
+const cmsStructuredImageFilenames = cmsStructuredImages.map(
+  imageInfo => imageInfo.inputPath,
+);
+
+const allCmsImages = fs
+  .readdirSync(absolutePath('public/images_cms'))
+  .filter(isRasterImage)
+  .map(imgFilename => path.join('public/images_cms', imgFilename));
+
+const remainingCmsImages = difference(
+  allCmsImages,
+  cmsStructuredImageFilenames,
+);
+
+// If a CMS image is not found in the list of images to process from the CMS
+// (images that we know how they will be used), resize them to be 600px
+// (x2 for retina), which is a bit bigger than what we need (450px) to have
+// a safety margin.
+const cmsRemainingImages = remainingCmsImages.map((imagePath: string) => ({
+  inputPath: imagePath,
+  originalPath: cmsOriginalPath(imagePath),
+  width: 600,
+}));
+
+export default concat(staticImages, cmsStructuredImages, cmsRemainingImages);
