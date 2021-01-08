@@ -9,8 +9,9 @@ import {
   Metricstimeseries,
   Metrics,
 } from 'api/schema/RegionSummaryWithTimeseries';
-import { ICUHeadroomInfo, calcICUHeadroom } from './ICUHeadroom';
 import { lastValue } from './utils';
+import { assert } from 'common/utils';
+import regions, { RegionType } from 'common/regions';
 
 /** Stores a list of FIPS or FIPS regex patterns to disable. */
 class DisabledFips {
@@ -38,8 +39,6 @@ const DISABLED_TEST_POSITIVITY = new DisabledFips(['48113', '48215']);
 const DISABLED_ICU = new DisabledFips([
   '47', // https://trello.com/c/aEd07i5Y/701-disabled-tn-icu-headroom
   '53', // https://trello.com/c/1IkmUuhw/
-  // TODO(michael): Reenable counties / metros once we QA the data.
-  /\d{3,}/,
 ]);
 
 const DISABLED_CONTACT_TRACING = new DisabledFips([]);
@@ -108,6 +107,16 @@ export interface CaseDensityRange {
   high: number;
 }
 
+export interface ICUCapacityInfo {
+  metricSeries: Array<number | null>;
+  metricValue: number;
+
+  totalBeds: number;
+  covidPatients: number | null;
+  nonCovidPatients: number | null;
+  totalPatients: number;
+}
+
 /**
  * We use use an estimated case fatality ratio of 1 % with lower and upper bounds
  * of 0.5% and 1.5% respectively, used to calculate case density by deaths (main
@@ -129,7 +138,7 @@ export class Projection {
   readonly totalPopulation: number;
   readonly fips: string;
 
-  readonly icuHeadroomInfo: ICUHeadroomInfo | null;
+  readonly icuCapacityInfo: ICUCapacityInfo | null;
 
   readonly currentCumulativeDeaths: number | null;
   readonly currentCumulativeCases: number | null;
@@ -226,19 +235,45 @@ export class Projection {
       row => row && row.testPositivityRatio,
     );
 
-    if (metrics && !DISABLED_ICU.includes(this.fips)) {
-      this.icuHeadroomInfo = calcICUHeadroom(
-        this.fips,
-        actualTimeseries,
-        metricsTimeseries,
-        metrics,
-        actuals,
+    this.icuCapacityInfo = null;
+    const region = regions.findByFipsCodeStrict(this.fips);
+    // TODO(michael): Re-enable counties once we deside how to surface ICU info.
+    if (
+      metrics &&
+      metrics.icuCapacityRatio !== null &&
+      !DISABLED_ICU.includes(this.fips) &&
+      region.regionType !== RegionType.COUNTY
+    ) {
+      const metricSeries = metricsTimeseries.map(
+        row => row && row.icuCapacityRatio,
       );
-    } else {
-      this.icuHeadroomInfo = null;
+      const metricValue = metrics.icuCapacityRatio;
+      // TODO(michael): We get this from the timeseries since sometimes actuals.icuBeds.capacity can contain a different value.
+      const totalBeds = lastValue(
+        actualTimeseries.map(row =>
+          row?.icuBeds ? row.icuBeds.capacity : null,
+        ),
+      );
+      const covidPatients = actuals.icuBeds.currentUsageCovid;
+      const totalPatients = actuals.icuBeds.currentUsageTotal;
+
+      assert(
+        totalBeds !== null && totalPatients !== null,
+        'These must be non-null for the metric to be non-null',
+      );
+      const nonCovidPatients =
+        covidPatients === null ? null : totalPatients - covidPatients;
+      this.icuCapacityInfo = {
+        metricSeries,
+        metricValue,
+        totalBeds,
+        covidPatients,
+        nonCovidPatients,
+        totalPatients,
+      };
     }
     this.icuUtilization =
-      this.icuHeadroomInfo?.metricSeries || this.dates.map(date => null);
+      this.icuCapacityInfo?.metricSeries || this.dates.map(date => null);
 
     this.contractTracers = metricsTimeseries.map(
       row => row && row.contactTracerCapacityRatio,
