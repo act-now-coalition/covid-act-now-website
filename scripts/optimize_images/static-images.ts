@@ -115,6 +115,10 @@ const remainingCmsImages = difference(
   cmsStructuredImageFilenames,
 );
 
+// If a CMS image is not found in the list of images to process from the CMS
+// (images that we know how they will be used), resize them to be 600px
+// (x2 for retina), which is a bit bigger than what we need (450px) to have
+// a safety margin.
 const cmsRemainingImages = remainingCmsImages.map((imagePath: string) => ({
   inputPath: imagePath,
   originalPath: cmsOriginalPath(imagePath),
