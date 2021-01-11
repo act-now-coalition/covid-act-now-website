@@ -30,17 +30,17 @@ import PageviewTracker, {
   EventAction,
   EventCategory,
 } from 'components/Analytics';
-import { Landing } from 'screens/Learn';
 import Tools, { COVID_RESPONSE_SIMULATOR_URL } from 'screens/Tools/Tools';
 import { SuspenseFallback, ErrorBoundary } from 'components/LazyLoading';
 
 /* We dynamically import the following components on initial visit to their respective routes: */
+const About = lazy(() => import('screens/About/About'));
+const Landing = lazy(() => import('screens/Learn/Landing/Landing'));
 const MetricExplainer = lazy(() => import('screens/Learn/MetricExplainer'));
 const Faq = lazy(() => import('screens/Learn/Faq/Faq'));
 const Glossary = lazy(() => import('screens/Learn/Glossary/Glossary'));
 const CaseStudies = lazy(() => import('screens/Learn/CaseStudies/CaseStudies'));
 const Articles = lazy(() => import('screens/Learn/Articles'));
-const About = lazy(() => import('screens/About/About'));
 
 export default function App() {
   return (
