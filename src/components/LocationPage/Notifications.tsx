@@ -80,7 +80,7 @@ const NotificationArea: React.FC<{ projections: Projections }> = ({
         <ColumnTitle isUpdateCopy>{title}</ColumnTitle>
 
         {notification === Notification.ExposureNotifications && (
-          <ExposureNotificationCopy locationName={region.fullName} />
+          <ExposureNotificationCopy stateName={getStateName(region)} />
         )}
 
         {notification === Notification.HospitalizationsPeak && (
@@ -119,17 +119,17 @@ const ThirdWaveCopy = () => {
   );
 };
 
-const ExposureNotificationCopy: React.FC<{ locationName: string }> = ({
-  locationName,
+const ExposureNotificationCopy: React.FC<{ stateName: string }> = ({
+  stateName,
 }) => {
   return (
     <Copy>
       Add your phone to{' '}
       <ExternalLink
         href="https://g.co/ens"
-        onClick={() => trackClickExposureNotifications(locationName)}
+        onClick={() => trackClickExposureNotifications(stateName)}
       >
-        {locationName}'s exposure notification system
+        {stateName}'s exposure notification system
       </ExternalLink>{' '}
       to receive alerts if you were in close contact with someone who later
       tests positive for COVID. Your privacy is protected as your identity is
@@ -157,6 +157,20 @@ export function showExposureNotifications(region: Region) {
     );
   } else {
     return false;
+  }
+}
+
+function getStateName(region: Region) {
+  if (region instanceof State) {
+    return region.fullName;
+  } else if (region instanceof County) {
+    return region.state.fullName;
+  } else if (region instanceof MetroArea) {
+    return region.states.length === 1
+      ? region.states[0].fullName
+      : 'your state';
+  } else {
+    return '';
   }
 }
 
