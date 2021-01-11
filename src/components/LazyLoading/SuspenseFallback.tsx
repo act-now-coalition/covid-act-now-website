@@ -1,11 +1,21 @@
 import React from 'react';
-import { Container, Message, CircularProgress } from './LazyLoading.style';
+import {
+  Container,
+  StyledSkeletonLine,
+  StyledSkeletonRect,
+} from './LazyLoading.style';
 
 const SuspenseFallback: React.FC = () => {
   return (
     <Container>
-      <Message>Loading...</Message>
-      <CircularProgress size={35} />
+      <StyledSkeletonLine />
+      <StyledSkeletonLine />
+      <StyledSkeletonLine />
+      <StyledSkeletonRect />
+      <StyledSkeletonLine />
+      <StyledSkeletonLine />
+      <StyledSkeletonLine />
+      <StyledSkeletonRect />
     </Container>
   );
 };

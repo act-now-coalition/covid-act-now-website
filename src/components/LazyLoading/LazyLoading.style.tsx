@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
-import MuiCircularProgress from '@material-ui/core/CircularProgress';
 import { COLOR_MAP } from 'common/colors';
+import { Skeleton } from '@material-ui/lab';
 
 const Copy = css`
   font-size: 1.5rem;
@@ -26,7 +26,22 @@ export const Message = styled.p`
   margin: 8rem auto 0;
 `;
 
-export const CircularProgress = styled(MuiCircularProgress)`
-  color: ${COLOR_MAP.GREEN.BASE};
-  margin-top: 1.25rem;
+export const StyledSkeletonLine = styled(Skeleton).attrs(props => ({
+  width: 800,
+  height: 35,
+  animation: 'wave',
+}))`
+  max-width: 90%;
+
+  &:first-of-type {
+    margin-top: 3rem;
+  }
+`;
+
+export const StyledSkeletonRect = styled(Skeleton).attrs(props => ({
+  width: 800,
+  height: 175,
+  animation: 'wave',
+}))`
+  max-width: 90%;
 `;

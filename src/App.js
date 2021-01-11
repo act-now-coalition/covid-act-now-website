@@ -8,9 +8,6 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { ThemeProvider as ScThemeProvider } from 'styled-components';
 import LocationPage from 'screens/LocationPage';
 import HomePage from 'screens/HomePage/HomePage';
-import Contact from 'screens/Contact/Contact';
-import Terms from 'screens/Terms/Terms';
-import Privacy from 'screens/Terms/Privacy';
 import Embed from 'screens/Embed/Embed';
 import AllStates from 'screens/internal/AllStates/AllStates';
 import CompareSnapshots from 'screens/internal/CompareSnapshots/CompareSnapshots';
@@ -30,7 +27,7 @@ import PageviewTracker, {
   EventAction,
   EventCategory,
 } from 'components/Analytics';
-import Tools, { COVID_RESPONSE_SIMULATOR_URL } from 'screens/Tools/Tools';
+import { COVID_RESPONSE_SIMULATOR_URL } from 'screens/Tools/Tools';
 import { SuspenseFallback, ErrorBoundary } from 'components/LazyLoading';
 
 /* We dynamically import the following components on initial visit to their respective routes: */
@@ -41,6 +38,10 @@ const Faq = lazy(() => import('screens/Learn/Faq/Faq'));
 const Glossary = lazy(() => import('screens/Learn/Glossary/Glossary'));
 const CaseStudies = lazy(() => import('screens/Learn/CaseStudies/CaseStudies'));
 const Articles = lazy(() => import('screens/Learn/Articles'));
+const Contact = lazy(() => import('screens/Contact/Contact'));
+const Tools = lazy(() => import('screens/Tools/Tools'));
+const Terms = lazy(() => import('screens/Terms/Terms'));
+const Privacy = lazy(() => import('screens/Terms/Privacy'));
 
 export default function App() {
   return (
