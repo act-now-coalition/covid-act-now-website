@@ -36,11 +36,11 @@ export const FeaturedHeader = styled(Subtitle1)`
   margin-bottom: 1rem;
 `;
 
-export const SectionWrapper = styled(Box)`
+export const SectionWrapper = styled.div`
   margin-bottom: 2.5rem;
 `;
 
-export const Section = styled(Box)`
+export const Section = styled.div`
   margin-bottom: 2.5rem;
   margin-left: 1rem;
   margin-right: 1rem;

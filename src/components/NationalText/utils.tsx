@@ -25,7 +25,7 @@ const getTotalCasesCopy = (summedRawCases: number): string => {
   return `${formatDecimal(divided, 1)} million`;
 };
 
-export const getNationalText: React.FC = () => {
+export function getNationalText(): React.ReactElement {
   const usaAggregation = AggregationsJSON['00001'];
   const {
     totalCases,
@@ -72,4 +72,4 @@ export const getNationalText: React.FC = () => {
         : ''}
     </Fragment>
   );
-};
+}
