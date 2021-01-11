@@ -49,7 +49,7 @@ export default function HomePage() {
 
   const indicatorsRef = useRef(null);
 
-  const scrollTo = div =>
+  const scrollTo = (div: null | HTMLDivElement) =>
     div &&
     window.scrollTo({
       left: 0,
@@ -67,7 +67,7 @@ export default function HomePage() {
 
   const exploreSectionRef = useRef(null);
 
-  const onClickSwitch = newShowCounties => {
+  const onClickSwitch = (newShowCounties: boolean) => {
     setShowCounties(newShowCounties);
     trackEvent(
       EventCategory.MAP,

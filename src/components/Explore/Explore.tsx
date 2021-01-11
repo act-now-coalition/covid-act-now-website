@@ -104,7 +104,7 @@ const Explore: React.FunctionComponent<{
   initialChartIndigenousPopulations?: boolean;
   title?: string;
   defaultMetric?: ExploreMetric;
-  nationalSummaryText?: string;
+  nationalSummaryText?: React.ReactElement;
 }> = ({
   initialFipsList,
   initialChartIndigenousPopulations,
