@@ -9,7 +9,7 @@ import {
 import { Region, MetroArea } from 'common/regions';
 import MenuItemIcon from './MenuItemIcon';
 
-const MenuItem: React.FC<{ region: Region; zipCodeInput: string }> = ({
+const MenuItem: React.FC<{ region: Region; zipCodeInput?: string }> = ({
   region,
   zipCodeInput,
 }) => {

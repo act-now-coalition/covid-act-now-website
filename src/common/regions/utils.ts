@@ -1,4 +1,4 @@
-import { concat, partition, sortBy } from 'lodash';
+import { concat, partition, sortBy, find } from 'lodash';
 import regions from './region_db';
 import { getStateFips } from './regions_data';
 import { County, State, Region, MetroArea } from './types';
@@ -55,4 +55,37 @@ export function getAutocompleteRegions(region?: Region) {
   } else {
     return [];
   }
+}
+
+function countyIncludesZip(county: County, zipCode: string): boolean {
+  return county.zipCodes.includes(zipCode);
+}
+
+export function getStateRegionFromStateCode(
+  stateCode: string,
+): Region | undefined {
+  const regionFromStateCode = find(
+    regions.states,
+    (region: State) => region.stateCode === stateCode,
+  );
+  return regionFromStateCode;
+}
+
+export function getCountyRegionFromZipCode(
+  zipCode: string,
+): Region | undefined {
+  const countyFromZip = find(regions.counties, (region: County) =>
+    countyIncludesZip(region, zipCode),
+  );
+  return countyFromZip;
+}
+
+// TODO (Chelsi): fix the any
+export function getMetroRegionFromZipCode(zipCode: string): any {
+  const metroFromZip = find(regions.metroAreas, (region: MetroArea) =>
+    find(region.counties, (region: County) =>
+      countyIncludesZip(region, zipCode),
+    ),
+  );
+  return metroFromZip;
 }

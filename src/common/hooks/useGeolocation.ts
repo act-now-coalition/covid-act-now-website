@@ -5,13 +5,14 @@
 
 import { useEffect, useState } from 'react';
 
-interface Geolocation {
+// move this elsewhere
+export interface GeolocationInfo {
   zipCode: string;
   stateCode: string;
 }
 
-export default function useGeolocation(): Geolocation | undefined {
-  const [ipData, setIpData] = useState<Geolocation | undefined>();
+export default function useGeolocation(): GeolocationInfo | undefined {
+  const [ipData, setIpData] = useState<GeolocationInfo | undefined>();
 
   useEffect(() => {
     const fetchIpData = () => {

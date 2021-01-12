@@ -35,6 +35,7 @@ import { getAutocompleteRegions } from 'common/regions';
 import { getNationalText } from 'components/NationalText';
 import HomepageStructuredData from 'screens/HomePage/HomepageStructuredData';
 import { useGeolocation } from 'common/hooks';
+import { Geolocation } from 'components/Geolocation';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -135,7 +136,7 @@ export default function HomePage() {
                 </Grid>
               )}
             </Grid>
-            {geolocation && <div>hello</div>}
+            {geolocation && <Geolocation geolocation={geolocation} />}
             <Map hideLegend showCounties={showCounties} />
             {isMobile && <HomePageThermometer />}
             <CompareMain locationsViewable={8} />
