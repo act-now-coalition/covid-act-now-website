@@ -33,6 +33,7 @@ import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { getFilterLimit } from 'components/Search';
 import { getAutocompleteRegions } from 'common/regions';
 import { getNationalText } from 'components/NationalText';
+import HomepageStructuredData from 'screens/HomePage/HomepageStructuredData';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -84,6 +85,7 @@ export default function HomePage() {
         pageTitle="Realtime U.S. COVID Map & Risk Levels"
         pageDescription={getPageDescription()}
       />
+      <HomepageStructuredData />
       <BannerContainer>
         <ThirdWaveBanner />
       </BannerContainer>
