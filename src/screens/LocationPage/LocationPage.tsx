@@ -37,45 +37,31 @@ function LocationPage({ region }: LocationPageProps) {
         pageTitle={getPageTitle(region)}
         pageDescription={getPageDescription(region)}
       />
-      {/* Shows a loading screen if projections are not loaded yet, or
-       * if a new location has been selected */}
-      {!projections || projections.fips !== region.fipsCode ? (
-        <div>
-          <SearchHeader
-            setMapOption={setMapOption}
-            mobileMenuOpen={mobileMenuOpen}
-            setMobileMenuOpen={setMobileMenuOpen}
-            region={region}
-          />
+      <div>
+        <SearchHeader
+          setMapOption={setMapOption}
+          mobileMenuOpen={mobileMenuOpen}
+          setMobileMenuOpen={setMobileMenuOpen}
+          region={region}
+        />
+        {/* Shows a loading screen if projections are not loaded yet, or
+         * if a new location has been selected */}
+        {!projections || projections.fips !== region.fipsCode ? (
           <LoadingScreen />
-          <MiniMap
-            region={region}
-            mobileMenuOpen={mobileMenuOpen}
-            mapOption={mapOption}
-            setMapOption={setMapOption}
-          />
-        </div>
-      ) : (
-        <div>
-          <SearchHeader
-            setMapOption={setMapOption}
-            mobileMenuOpen={mobileMenuOpen}
-            setMobileMenuOpen={setMobileMenuOpen}
-            region={region}
-          />
+        ) : (
           <ChartsHolder
             projections={projections}
             chartId={chartId}
             region={region}
           />
-          <MiniMap
-            region={region}
-            mobileMenuOpen={mobileMenuOpen}
-            mapOption={mapOption}
-            setMapOption={setMapOption}
-          />
-        </div>
-      )}
+        )}
+        <MiniMap
+          region={region}
+          mobileMenuOpen={mobileMenuOpen}
+          mapOption={mapOption}
+          setMapOption={setMapOption}
+        />
+      </div>
     </div>
   );
 }
