@@ -39,44 +39,40 @@ function LocationPage({ region }: LocationPageProps) {
     // Close the map on mobile on any change to a region.
     setMobileMenuOpen(false);
   }, [region]);
-  // Projections haven't loaded yet
-  // If a new county has just been selected, we may not have projections
-  // for the new county loaded yet
-  if (!projections || projections.fips !== region.fipsCode) {
-    return <LoadingScreen></LoadingScreen>;
-  }
-
-  const pageTitle = getPageTitle(region);
-  const pageDescription = getPageDescription(region, projections);
-  const canonicalUrl = region.canonicalUrl;
 
   return (
     <div>
       <EnsureSharingIdInUrl />
       <AppMetaTags
-        canonicalUrl={canonicalUrl}
-        pageTitle={pageTitle}
-        pageDescription={pageDescription}
+        canonicalUrl={region.canonicalUrl}
+        pageTitle={getPageTitle(region)}
+        pageDescription={getPageDescription(region)}
       />
-      <div>
-        <SearchHeader
-          setMapOption={setMapOption}
-          mobileMenuOpen={mobileMenuOpen}
-          setMobileMenuOpen={setMobileMenuOpen}
-          region={region}
-        />
-        <ChartsHolder
-          projections={projections}
-          chartId={chartId}
-          region={region}
-        />
-        <MiniMap
-          region={region}
-          mobileMenuOpen={mobileMenuOpen}
-          mapOption={mapOption}
-          setMapOption={setMapOption}
-        />
-      </div>
+      {/* Shows a loading screen if projections are now loaded yet, or
+       * if a new location has been selected */}
+      {projections && projections.fips === region.fipsCode ? (
+        <div>
+          <SearchHeader
+            setMapOption={setMapOption}
+            mobileMenuOpen={mobileMenuOpen}
+            setMobileMenuOpen={setMobileMenuOpen}
+            region={region}
+          />
+          <ChartsHolder
+            projections={projections}
+            chartId={chartId}
+            region={region}
+          />
+          <MiniMap
+            region={region}
+            mobileMenuOpen={mobileMenuOpen}
+            mapOption={mapOption}
+            setMapOption={setMapOption}
+          />
+        </div>
+      ) : (
+        <LoadingScreen />
+      )}
     </div>
   );
 }

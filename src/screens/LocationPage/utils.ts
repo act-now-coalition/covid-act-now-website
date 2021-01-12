@@ -1,8 +1,8 @@
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { formatMetatagDate } from 'common/utils';
-import { Projections } from 'common/models/Projections';
 import { Region, State, County, MetroArea } from 'common/regions';
 import { replace } from 'lodash';
+import { LocationSummariesByFIPS } from 'common/location_summaries';
 
 function locationName(region: Region) {
   if (region instanceof State) {
@@ -20,12 +20,9 @@ export function getPageTitle(region: Region): string {
   return `${locationName(region)} - COVID Data & Key Metrics`;
 }
 
-export function getPageDescription(
-  region: Region,
-  projections: Projections,
-): string {
+export function getPageDescription(region: Region): string {
   const date = formatMetatagDate();
-  const alarmLevel = projections.getAlarmLevel();
+  const { level: alarmLevel } = LocationSummariesByFIPS[region.fipsCode];
   const levelInfo = LOCATION_SUMMARY_LEVELS[alarmLevel];
   return `${date} COVID RISK LEVEL: ${levelInfo.detail(locationName(region))}`;
 }
