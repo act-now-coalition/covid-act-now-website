@@ -34,6 +34,7 @@ import { getFilterLimit } from 'components/Search';
 import { getAutocompleteRegions } from 'common/regions';
 import { getNationalText } from 'components/NationalText';
 import HomepageStructuredData from 'screens/HomePage/HomepageStructuredData';
+import { useGeolocation } from 'common/hooks';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -49,6 +50,8 @@ export default function HomePage() {
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
   const indicatorsRef = useRef(null);
+
+  const geolocation = useGeolocation();
 
   const scrollTo = (div: null | HTMLDivElement) =>
     div &&
@@ -132,6 +135,7 @@ export default function HomePage() {
                 </Grid>
               )}
             </Grid>
+            {geolocation && <div>hello</div>}
             <Map hideLegend showCounties={showCounties} />
             {isMobile && <HomePageThermometer />}
             <CompareMain locationsViewable={8} />
