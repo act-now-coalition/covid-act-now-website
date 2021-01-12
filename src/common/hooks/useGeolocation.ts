@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 export interface GeolocationInfo {
   zipCode: string;
   stateCode: string;
+  country: string;
 }
 
 export default function useGeolocation(): GeolocationInfo | undefined {
@@ -22,6 +23,7 @@ export default function useGeolocation(): GeolocationInfo | undefined {
           setIpData({
             zipCode: data.postal,
             stateCode: data.region_code,
+            country: data.country_name,
           }),
         );
     };
