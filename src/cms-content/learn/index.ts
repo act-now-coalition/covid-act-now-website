@@ -8,10 +8,9 @@ import {
   property,
 } from 'lodash';
 import faq from './learn-faq.json';
-import glossary from './learn-glossary.json';
+// import glossary from './learn-glossary.json';
 import landing from './learn-landing.json';
 import caseStudies from './learn-case-studies.json';
-import productsLanding from './products-landing.json';
 import metricExplainers from './metric-explainers.json';
 import { sanitizeID, Markdown, TocItem } from '../utils';
 
@@ -76,39 +75,6 @@ export const faqContent = sanitizeFaq(faq) as FaqContent;
 export const faqQuestionItems = flatten(
   map(faqContent.sections, property('questions')),
 );
-
-/*
-  Glossary:
-*/
-
-export interface Term {
-  term: string;
-  termId: string;
-  definition: Markdown;
-  category: string;
-}
-
-export interface GlossaryContent {
-  header: string;
-  intro: Markdown;
-  lastUpdatedDate: string;
-  terms: Term[];
-  metadataTitle: string;
-  metadataDescription: string;
-}
-
-// (Chelsi): make these sanitize functions reusable between learn pages?
-const sanitizeTerm = (term: Term): Term => ({
-  ...term,
-  termId: sanitizeID(term.termId),
-});
-
-const sanitizeGlossary = (glossary: GlossaryContent): GlossaryContent => ({
-  ...glossary,
-  terms: glossary.terms.map(sanitizeTerm),
-});
-
-export const glossaryContent = sanitizeGlossary(glossary) as GlossaryContent;
 
 /**
  * Case Studies
@@ -193,33 +159,6 @@ export const categoriesWithStudies = caseStudiesContent.categories.filter(
 );
 
 /**
- * Products - landing page:
- **/
-
-export interface LandingPageButton {
-  cta: string;
-  redirect: string;
-}
-
-export interface ProductsLandingSection {
-  productName: string;
-  productId: string;
-  productSubtitle: string;
-  productDescription: Markdown;
-  buttons: LandingPageButton[];
-}
-
-export interface ProductsLandingContent {
-  header: string;
-  intro?: Markdown;
-  productsList: ProductsLandingSection[];
-  metadataTitle: string;
-  metadataDescription: string;
-}
-
-export const productsLandingContent = productsLanding as ProductsLandingContent;
-
-/**
  * Metric Explainers:
  **/
 
@@ -264,7 +203,8 @@ export const learnPages: TocItem[] = [
     })),
   },
   {
-    label: glossaryContent.header,
+    // TODO(pablo): Hardcoding the title to avoid importing the glossary content
+    label: 'Glossary',
     to: '/glossary',
   },
   {

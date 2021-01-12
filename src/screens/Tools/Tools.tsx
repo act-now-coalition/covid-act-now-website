@@ -7,7 +7,7 @@ import { LearnHeading1 } from '../Learn/Learn.style';
 import {
   productsLandingContent,
   ProductsLandingSection,
-} from 'cms-content/learn';
+} from 'cms-content/learn/tools';
 import {
   MarkdownTools,
   ToolsSection,
