@@ -33,6 +33,7 @@ import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { getFilterLimit } from 'components/Search';
 import { getAutocompleteRegions } from 'common/regions';
 import { getNationalText } from 'components/NationalText';
+import HomepageStructuredData from 'screens/HomePage/HomepageStructuredData';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -49,7 +50,7 @@ export default function HomePage() {
 
   const indicatorsRef = useRef(null);
 
-  const scrollTo = div =>
+  const scrollTo = (div: null | HTMLDivElement) =>
     div &&
     window.scrollTo({
       left: 0,
@@ -67,7 +68,7 @@ export default function HomePage() {
 
   const exploreSectionRef = useRef(null);
 
-  const onClickSwitch = newShowCounties => {
+  const onClickSwitch = (newShowCounties: boolean) => {
     setShowCounties(newShowCounties);
     trackEvent(
       EventCategory.MAP,
@@ -84,6 +85,7 @@ export default function HomePage() {
         pageTitle="Realtime U.S. COVID Map & Risk Levels"
         pageDescription={getPageDescription()}
       />
+      <HomepageStructuredData />
       <BannerContainer>
         <ThirdWaveBanner />
       </BannerContainer>

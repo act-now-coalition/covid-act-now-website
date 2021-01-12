@@ -3,7 +3,7 @@ import { Paragraph } from 'components/Markdown';
 import { Wrapper } from './NationalText.style';
 
 const NationalText: React.FC<{
-  nationalSummaryText: string;
+  nationalSummaryText: React.ReactElement;
 }> = ({ nationalSummaryText }) => {
   return (
     <Wrapper>
