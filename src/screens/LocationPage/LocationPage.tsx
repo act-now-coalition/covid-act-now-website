@@ -18,27 +18,16 @@ interface LocationPageProps {
 function LocationPage({ region }: LocationPageProps) {
   let { chartId } = useParams<{ chartId: string }>();
 
-  const defaultMapOption = (region: Region) => {
-    const stateCode = getStateCode(region);
-    if (stateCode === MAP_FILTERS.DC) {
-      return MAP_FILTERS.NATIONAL;
-    }
-    if (region instanceof MetroArea) {
-      return MAP_FILTERS.MSA;
-    }
-    return MAP_FILTERS.STATE;
-  };
-  const [mapOption, setMapOption] = useState(defaultMapOption(region));
-
+  const defaultMapOption = getDefaultMapOption(region);
+  const [mapOption, setMapOption] = useState(defaultMapOption);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const projections = useProjectionsFromRegion(region);
 
   useEffect(() => {
-    setMapOption(defaultMapOption(region));
-
+    setMapOption(defaultMapOption);
     // Close the map on mobile on any change to a region.
     setMobileMenuOpen(false);
-  }, [region]);
+  }, [defaultMapOption]);
 
   return (
     <div>
@@ -51,7 +40,21 @@ function LocationPage({ region }: LocationPageProps) {
       {/* Shows a loading screen if projections are not loaded yet, or
        * if a new location has been selected */}
       {!projections || projections.fips !== region.fipsCode ? (
-        <LoadingScreen />
+        <div>
+          <SearchHeader
+            setMapOption={setMapOption}
+            mobileMenuOpen={mobileMenuOpen}
+            setMobileMenuOpen={setMobileMenuOpen}
+            region={region}
+          />
+          <LoadingScreen />
+          <MiniMap
+            region={region}
+            mobileMenuOpen={mobileMenuOpen}
+            mapOption={mapOption}
+            setMapOption={setMapOption}
+          />
+        </div>
       ) : (
         <div>
           <SearchHeader
@@ -75,6 +78,17 @@ function LocationPage({ region }: LocationPageProps) {
       )}
     </div>
   );
+}
+
+function getDefaultMapOption(region: Region) {
+  const stateCode = getStateCode(region);
+  if (stateCode === MAP_FILTERS.DC) {
+    return MAP_FILTERS.NATIONAL;
+  }
+  if (region instanceof MetroArea) {
+    return MAP_FILTERS.MSA;
+  }
+  return MAP_FILTERS.STATE;
 }
 
 export default LocationPage;
