@@ -48,9 +48,11 @@ function LocationPage({ region }: LocationPageProps) {
         pageTitle={getPageTitle(region)}
         pageDescription={getPageDescription(region)}
       />
-      {/* Shows a loading screen if projections are now loaded yet, or
+      {/* Shows a loading screen if projections are not loaded yet, or
        * if a new location has been selected */}
-      {projections && projections.fips === region.fipsCode ? (
+      {!projections || projections.fips !== region.fipsCode ? (
+        <LoadingScreen />
+      ) : (
         <div>
           <SearchHeader
             setMapOption={setMapOption}
@@ -70,8 +72,6 @@ function LocationPage({ region }: LocationPageProps) {
             setMapOption={setMapOption}
           />
         </div>
-      ) : (
-        <LoadingScreen />
       )}
     </div>
   );
