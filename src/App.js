@@ -21,7 +21,6 @@ import theme from 'assets/theme';
 import { getFeedbackSurveyUrl } from 'components/Banner';
 import ExternalRedirect from 'components/ExternalRedirect';
 import HandleRedirectTo from 'components/HandleRedirectTo/HandleRedirectTo';
-import Donate from 'screens/Donate/Donate';
 import PageviewTracker, {
   trackEvent,
   EventAction,
@@ -42,6 +41,7 @@ const Contact = lazy(() => import('screens/Contact/Contact'));
 const Tools = lazy(() => import('screens/Tools/Tools'));
 const Terms = lazy(() => import('screens/Terms/Terms'));
 const Privacy = lazy(() => import('screens/Terms/Privacy'));
+const Donate = lazy(() => import('screens/Donate/Donate'));
 
 export default function App() {
   return (
