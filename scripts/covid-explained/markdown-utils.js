@@ -61,9 +61,10 @@ function pluginLogInternalLinks() {
     visit(tree, 'link', visitor);
 
     function visitor(node) {
-      const { url } = node;
+      const { url, children } = node;
       if (isInternalLink(url)) {
-        console.log(`    ${url}`);
+        console.log(`    text: ${children.map(item => item.value).join(' ')}`);
+        console.log(`    url: ${url}`);
       }
       return node;
     }

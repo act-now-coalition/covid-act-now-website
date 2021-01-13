@@ -12,6 +12,7 @@ async function main() {
   for (const item of migrationItems) {
     console.log(item.originalPath);
     logInternalLinks(item.content.body);
+    console.log('');
   }
   return true;
 }
