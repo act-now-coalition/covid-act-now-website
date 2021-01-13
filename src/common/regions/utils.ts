@@ -1,7 +1,11 @@
-import { concat, partition, sortBy, find } from 'lodash';
+import { concat, partition, sortBy, find, values } from 'lodash';
 import regions from './region_db';
 import { getStateFips } from './regions_data';
 import { County, State, Region, MetroArea } from './types';
+import { GeolocationInfo } from 'common/hooks/useGeolocation';
+
+// TODO (chelsi): move elsewhere?
+const UNITED_STATES = 'United States';
 
 export function belongsToState(county: County, stateFips: string | null) {
   return county.state.fipsCode === stateFips;
@@ -18,7 +22,7 @@ const sortByPopulation = (regions: Region[]): Region[] =>
  * Metro: counties in metro, states, other counties, metros
  * State and County: counties in the state, states, metros, other counties
  */
-export function getAutocompleteRegions(region?: Region) {
+export function getAutocompleteRegions(region?: Region): Region[] {
   const { states, metroAreas, counties } = regions;
 
   // Homepage
@@ -88,4 +92,45 @@ export function getMetroRegionFromZipCode(zipCode: string): any {
     ),
   );
   return metroFromZip;
+}
+
+// TODO (chelsi): move elsewhere?
+interface GeolocatedRegions {
+  county?: Region;
+  metroArea?: Region;
+  state?: Region;
+}
+
+export function getGeolocatedRegions(
+  geolocation: GeolocationInfo,
+): GeolocatedRegions | null {
+  if (geolocation.country !== UNITED_STATES) {
+    return null;
+  } else {
+    return {
+      county: getCountyRegionFromZipCode(geolocation.zipCode),
+      metroArea: getMetroRegionFromZipCode(geolocation.zipCode),
+      state: getStateRegionFromStateCode(geolocation.stateCode),
+    };
+  }
+}
+
+/**
+ * If we are able to geolocate the user, we rank their regions (state, county, metro if applicable) first
+ * in the searchbar dropdown menu. This sorts the Region[] accordingly.
+ */
+export function getAutocompleteRegionsWithGeolocation(
+  geolocation: GeolocationInfo,
+  locations: Region[],
+): Region[] {
+  const geolocatedRegions = getGeolocatedRegions(geolocation);
+  const sanitizedGeolocatedRegionsArr = values(geolocatedRegions).filter(
+    (region: Region | undefined) => region instanceof Region,
+  ); // filters out undefined
+  const [usersRegions, otherRegions] = partition(
+    locations,
+    (location: Region) => sanitizedGeolocatedRegionsArr.includes(location),
+  );
+  const sortedLocations = [...usersRegions, ...otherRegions];
+  return sortedLocations;
 }

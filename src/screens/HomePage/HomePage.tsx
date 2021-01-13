@@ -35,9 +35,6 @@ import { getAutocompleteRegions } from 'common/regions';
 import { getNationalText } from 'components/NationalText';
 import HomepageStructuredData from 'screens/HomePage/HomepageStructuredData';
 import { useGeolocation } from 'common/hooks';
-import { Geolocation } from 'components/Geolocation';
-
-const UNITED_STATES = 'United States';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -114,6 +111,7 @@ export default function HomePage() {
                     <SearchAutocomplete
                       locations={getAutocompleteRegions()}
                       filterLimit={getFilterLimit()}
+                      geolocation={geolocation}
                     />
                   </SelectorWrapper>
                 </StyledGridItem>
@@ -138,9 +136,6 @@ export default function HomePage() {
                 </Grid>
               )}
             </Grid>
-            {geolocation && geolocation.country === UNITED_STATES && (
-              <Geolocation geolocation={geolocation} />
-            )}
             <Map hideLegend showCounties={showCounties} />
             {isMobile && <HomePageThermometer />}
             <CompareMain locationsViewable={8} />

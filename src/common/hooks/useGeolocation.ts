@@ -1,6 +1,6 @@
 /*
   Captures the user's location using IP-API (https://ip-api.com/)
-  Returns either undefined or an object with user's zipCode and stateCode
+  Returns either undefined or an object with user's zipCode, stateCode, and country
 */
 
 import { useEffect, useState } from 'react';

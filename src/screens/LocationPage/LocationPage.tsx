@@ -10,6 +10,7 @@ import { LoadingScreen } from './LocationPage.style';
 import { useProjectionsFromRegion } from 'common/utils/model';
 import { getPageTitle, getPageDescription } from './utils';
 import { getStateCode, MetroArea, Region } from 'common/regions';
+import { useGeolocation } from 'common/hooks';
 
 interface LocationPageProps {
   region: Region;
@@ -32,6 +33,8 @@ function LocationPage({ region }: LocationPageProps) {
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const projections = useProjectionsFromRegion(region);
+
+  const geolocation = useGeolocation();
 
   useEffect(() => {
     setMapOption(defaultMapOption(region));
@@ -64,6 +67,7 @@ function LocationPage({ region }: LocationPageProps) {
           mobileMenuOpen={mobileMenuOpen}
           setMobileMenuOpen={setMobileMenuOpen}
           region={region}
+          geolocation={geolocation}
         />
         <ChartsHolder
           projections={projections}
