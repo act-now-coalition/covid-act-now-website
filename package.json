@@ -110,7 +110,8 @@
     "optimize-images": "ts-node-script -r tsconfig-paths/register scripts/optimize_images/optimize-images.ts",
     "storybook": "start-storybook -p 6006 -s public --no-dll",
     "build-storybook": "build-storybook -s public --no-dll",
-    "analyze": "cross-env REACT_APP_ENVIRONMENT=prod yarn build && source-map-explorer build/static/js/*.js"
+    "analyze": "cross-env REACT_APP_ENVIRONMENT=prod yarn build && source-map-explorer build/static/js/*.js",
+    "migrate-covid-explained": "ts-node-script -r tsconfig-paths/register scripts/covid-explained-migration/covid-explained-migration.ts"
   },
   "lint-staged": {
     "{src,scripts,firebase/functions/src,}/**/*.{css,scss,js,ts,tsx}": [

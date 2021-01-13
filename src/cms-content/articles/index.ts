@@ -15,7 +15,7 @@ interface ArticleMain {
   body: Markdown;
 }
 
-interface ArticleJSON extends ArticleMain {
+export interface ArticleJSON extends ArticleMain {
   date: string;
 }
 
