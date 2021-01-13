@@ -108,6 +108,8 @@
     "generate-metro-areas": "ts-node-script -r tsconfig-paths/register scripts/cbsa/parse-metro-areas.ts",
     "generate-sitemap": "ts-node-script -r tsconfig-paths/register scripts/generate_sitemap/index.ts",
     "optimize-images": "ts-node-script -r tsconfig-paths/register scripts/optimize_images/optimize-images.ts",
+    "covid-explained-internal-links": "ts-node-script -r tsconfig-paths/register scripts/covid-explained/report-internal-links.ts",
+    "covid-explained-migrate": "ts-node-script -r tsconfig-paths/register scripts/covid-explained/migrate-articles.ts",
     "storybook": "start-storybook -p 6006 -s public --no-dll",
     "build-storybook": "build-storybook -s public --no-dll",
     "analyze": "cross-env REACT_APP_ENVIRONMENT=prod yarn build && source-map-explorer build/static/js/*.js"
@@ -189,6 +191,7 @@
     "ts-node": "^8.9.0",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^3.8.3",
+    "unist-util-is": "^4.0.4",
     "unist-util-visit": "^2.0.3",
     "url-join": "^4.0.1"
   }
