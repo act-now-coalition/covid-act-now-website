@@ -146,7 +146,7 @@
         {
           "question": "How were the risk levels for tracers hired determined?",
           "questionId": "tracers-hired-thresholds",
-          "answer": "We do not include the critical (**red**) range for contact tracing; in other words it will no longer be possible to be marked critical (**red**) due to low numbers of contact tracing staff alone. While low numbers of contact tracing staff should be acknowledged, it doesn’t indicate an active or imminent outbreak. In addition, contact tracing is one our least refined data sets, largely because states themselves are highly variable in their reporting of contact tracing data.\n\nThe boundaries between yellow and orange are tricky. In the absence of expert consensus, we have set inclusive lower thresholds for yellow and orange. We peg the cut off between yellow and orange at 10 percent."
+          "answer": "We do not include the critical (**red**) range for contact tracing; in other words it will no longer be possible to be marked critical (**red**) due to low numbers of contact tracing staff alone. While low numbers of contact tracing staff should be acknowledged, it doesn’t indicate an active outbreak. In addition, contact tracing is one our least refined data sets, largely because states themselves are highly variable in their reporting of contact tracing data.\n\nThe boundaries between yellow and orange are tricky. In the absence of expert consensus, we have set inclusive lower thresholds for yellow and orange. We peg the cut off between yellow and orange at 10 percent."
         }
       ]
     }
