@@ -109,6 +109,7 @@
     "generate-sitemap": "ts-node-script -r tsconfig-paths/register scripts/generate_sitemap/index.ts",
     "optimize-images": "ts-node-script -r tsconfig-paths/register scripts/optimize_images/optimize-images.ts",
     "covid-explained-internal-links": "ts-node-script -r tsconfig-paths/register scripts/covid-explained/report-internal-links.ts",
+    "covid-explained-images": "ts-node-script -r tsconfig-paths/register scripts/covid-explained/report-images.ts",
     "covid-explained-migrate": "ts-node-script -r tsconfig-paths/register scripts/covid-explained/migrate-articles.ts",
     "storybook": "start-storybook -p 6006 -s public --no-dll",
     "build-storybook": "build-storybook -s public --no-dll",

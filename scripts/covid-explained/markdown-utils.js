@@ -21,6 +21,10 @@ export function transformInternalLinks(markdownContent) {
     .toString();
 }
 
+export function logImages(markdownContent) {
+  remark().use(pluginLogImages).processSync(markdownContent);
+}
+
 // URL Mapping between Covid Explained URLs and CAN URLs
 const linkReplacements = [
   // TODO: Complete with the actual URL replacements
@@ -61,6 +65,19 @@ function pluginLogInternalLinks() {
       if (isInternalLink(url)) {
         console.log(`    ${url}`);
       }
+      return node;
+    }
+  }
+  return transformer;
+}
+
+// Log internal links to the console
+function pluginLogImages() {
+  function transformer(tree) {
+    visit(tree, 'image', visitor);
+    function visitor(node) {
+      const { url } = node;
+      console.log(`    ${url}`);
       return node;
     }
   }
