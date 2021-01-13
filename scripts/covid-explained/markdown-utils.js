@@ -23,10 +23,11 @@ export function transformInternalLinks(markdownContent) {
 
 // URL Mapping between Covid Explained URLs and CAN URLs
 const linkReplacements = [
-  {
-    from: 'https://explaincovid.org/basics/masks-what-is-the-deal',
-    to: '/deep-dives/masks-what-is-the-deal',
-  },
+  // TODO: Complete with the actual URL replacements
+  // {
+  //   from: 'https://explaincovid.org/basics/masks-what-is-the-deal',
+  //   to: '/deep-dives/masks-what-is-the-deal',
+  // },
 ];
 
 const linkMap = chain(linkReplacements)
