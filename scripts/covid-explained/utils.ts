@@ -57,6 +57,10 @@ const migrationItems: MigrationInfo[] = [
     originalPath: 'assets/content/basics/current-vaccine-progress.json',
     canArticleId: 'current-vaccine-progress',
   },
+  {
+    originalPath: 'assets/content/basics/viral-variants.json',
+    canArticleId: 'viral-variants',
+  },
 ];
 
 export async function getItemsToMigrate(): Promise<MigrationItem[]> {
