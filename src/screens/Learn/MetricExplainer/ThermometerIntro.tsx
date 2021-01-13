@@ -15,7 +15,7 @@ const levelToDescription = {
   [Level.SUPER_CRITICAL]: 'Severe outbreak',
   [Level.CRITICAL]: 'Active outbreak',
   [Level.HIGH]: 'At risk of outbreak',
-  [Level.MEDIUM]: 'Slow growth',
+  [Level.MEDIUM]: 'Slow disease growth',
   [Level.LOW]: 'On track for containment',
   [Level.UNKNOWN]: '',
 };
