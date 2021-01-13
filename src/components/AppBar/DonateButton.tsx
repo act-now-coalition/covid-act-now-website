@@ -2,23 +2,28 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import useScrollPosition from '@react-hook/window-scroll';
 import { Fade } from '@material-ui/core';
-import { StyledDonateButton, DonateButtonWrapper } from './DonateButton.style';
+import {
+  StyledDonateButton,
+  DonateButtonWrapper,
+  StyledDonateButtonB,
+} from './DonateButton.style';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
+import {
+  Experiment,
+  ExperimentID,
+  Variant,
+  VariantID,
+} from 'components/Experiment';
+
+function trackClickDonate() {
+  const trackLabel = 'AppBar donate button';
+  trackEvent(EventCategory.DONATE, EventAction.CLICK, trackLabel);
+}
 
 const ButtonContent = () => {
-  const trackLabel = 'AppBar donate button';
-
   return (
     <Link to="/donate">
-      <StyledDonateButton
-        variant="contained"
-        color="primary"
-        disableRipple
-        disableFocusRipple
-        onClick={() => {
-          trackEvent(EventCategory.DONATE, EventAction.CLICK, trackLabel);
-        }}
-      >
+      <StyledDonateButton color="primary" onClick={trackClickDonate}>
         Donate
       </StyledDonateButton>
     </Link>
@@ -30,10 +35,21 @@ Splits donate button into 2 separate components (with/without fade)
 so that the useScrollPosition hook is only called when necessary
 */
 
-export const DonateButtonWithoutFade = (props: {}) => {
+export const DonateButtonVariantA = (props: {}) => {
   return (
     <DonateButtonWrapper>
       <ButtonContent />
+    </DonateButtonWrapper>
+  );
+};
+
+// Donate button on a different color to test A/B testing setup
+export const DonateButtonVariantB = (props: {}) => {
+  return (
+    <DonateButtonWrapper>
+      <StyledDonateButtonB onClick={trackClickDonate}>
+        Donate
+      </StyledDonateButtonB>
     </DonateButtonWrapper>
   );
 };
@@ -52,3 +68,14 @@ export const DonateButtonWithFade = () => {
     </Fade>
   );
 };
+
+export const DonateButton = () => (
+  <Experiment id={ExperimentID.DONATE_BTN_COLOR}>
+    <Variant id={VariantID.A}>
+      <DonateButtonVariantA />
+    </Variant>
+    <Variant id={VariantID.B}>
+      <DonateButtonVariantB />
+    </Variant>
+  </Experiment>
+);
