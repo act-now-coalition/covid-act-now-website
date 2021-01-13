@@ -141,7 +141,7 @@ const CompareMain = (props: {
   // For location page:
   const [geoScope, setGeoScope] = useState(GeoScopeFilter.STATE);
 
-  function getLocationPageLocations(region?: Region) {
+  function getLocationPageLocations(region?: Region): SummaryForCompare[] {
     if (region && region instanceof MetroArea) {
       return getAllCountiesOfMetroArea(region);
     } else if (geoScope === GeoScopeFilter.NEARBY) {

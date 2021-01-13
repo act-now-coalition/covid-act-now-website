@@ -1,10 +1,9 @@
-import { concat, partition, sortBy, find, values } from 'lodash';
+import { concat, partition, sortBy, find, values, isNull } from 'lodash';
 import regions from './region_db';
 import { getStateFips } from './regions_data';
 import { County, State, Region, MetroArea } from './types';
 import { GeolocationInfo } from 'common/hooks/useGeolocation';
 
-// TODO (chelsi): move elsewhere?
 const UNITED_STATES = 'United States';
 
 export function belongsToState(county: County, stateFips: string | null) {
@@ -84,17 +83,14 @@ export function getCountyRegionFromZipCode(
   return countyFromZip;
 }
 
-// TODO (Chelsi): fix the any
-export function getMetroRegionFromZipCode(zipCode: string): any {
+export function getMetroRegionFromZipCode(zipCode: string): Region | undefined {
+  const countyFromZip = getCountyRegionFromZipCode(zipCode);
   const metroFromZip = find(regions.metroAreas, (region: MetroArea) =>
-    find(region.counties, (region: County) =>
-      countyIncludesZip(region, zipCode),
-    ),
+    region.counties.includes(countyFromZip as County),
   );
   return metroFromZip;
 }
 
-// TODO (chelsi): move elsewhere?
 interface GeolocatedRegions {
   county?: Region;
   metroArea?: Region;
@@ -116,7 +112,7 @@ export function getGeolocatedRegions(
 }
 
 /**
- * If we are able to geolocate the user, we rank their regions (state, county, metro if applicable) first
+ * We rank a user's geolocated regions (state, county, metro if applicable) first
  * in the searchbar dropdown menu. This sorts the Region[] accordingly.
  */
 export function getAutocompleteRegionsWithGeolocation(
@@ -124,6 +120,9 @@ export function getAutocompleteRegionsWithGeolocation(
   locations: Region[],
 ): Region[] {
   const geolocatedRegions = getGeolocatedRegions(geolocation);
+  if (isNull(geolocatedRegions)) {
+    return locations;
+  }
   const sanitizedGeolocatedRegionsArr = values(geolocatedRegions).filter(
     (region: Region | undefined) => region instanceof Region,
   ); // filters out undefined
@@ -133,4 +132,23 @@ export function getAutocompleteRegionsWithGeolocation(
   );
   const sortedLocations = [...usersRegions, ...otherRegions];
   return sortedLocations;
+}
+
+/**
+ * Checks if we've geolocated the user.
+ * If so, returns autocomplete results with user's regions at the top.
+ * If not, returns autocomplete results sorted for pagetype.
+ */
+export function getFinalAutocompleteLocations(
+  geolocation: GeolocationInfo | undefined,
+): Region[] {
+  const regionsSortedForPagetype = getAutocompleteRegions();
+  if (geolocation) {
+    return getAutocompleteRegionsWithGeolocation(
+      geolocation,
+      regionsSortedForPagetype,
+    );
+  } else {
+    return regionsSortedForPagetype;
+  }
 }

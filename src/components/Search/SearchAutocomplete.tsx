@@ -5,8 +5,6 @@ import TextField from '@material-ui/core/TextField';
 import { Region, County, MetroArea } from 'common/regions';
 import MenuItem from './MenuItem';
 import { StyledPaper } from './Search.style';
-import { GeolocationInfo } from 'common/hooks/useGeolocation';
-import { getAutocompleteRegionsWithGeolocation } from 'common/regions';
 
 function getOptionSelected(option: Region, selectedOption: Region) {
   return option.fipsCode === selectedOption.fipsCode;
@@ -16,8 +14,7 @@ const SearchAutocomplete: React.FC<{
   locations: Region[];
   filterLimit: number;
   setHideMapToggle?: any;
-  geolocation?: GeolocationInfo;
-}> = ({ locations, filterLimit, setHideMapToggle, geolocation }) => {
+}> = ({ locations, filterLimit, setHideMapToggle }) => {
   const [input, setInput] = useState('');
   /* We only check for a zipcode match when the input is all numbers and has a length of 5: */
   const [checkForZipcodeMatch, setCheckForZipcodeMatch] = useState(false);
@@ -51,15 +48,11 @@ const SearchAutocomplete: React.FC<{
 
   const zipCodeInput = checkForZipcodeMatch ? input : '';
 
-  const finalLocations = geolocation
-    ? getAutocompleteRegionsWithGeolocation(geolocation, locations)
-    : locations;
-
   return (
     <Autocomplete
       noOptionsText={noOptionsCopy}
       onInputChange={onInputChange}
-      options={finalLocations}
+      options={locations}
       disableListWrap
       disableClearable
       onChange={onSelect}

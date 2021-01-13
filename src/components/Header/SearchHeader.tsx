@@ -10,7 +10,7 @@ import {
   SearchHeaderWrapper,
 } from './SearchHeader.style';
 import SearchAutocomplete from 'components/Search';
-import { Region, getAutocompleteRegions } from 'common/regions';
+import { Region, getFinalAutocompleteLocations } from 'common/regions';
 import { getFilterLimit } from 'components/Search';
 import { GeolocationInfo } from 'common/hooks/useGeolocation';
 
@@ -50,10 +50,9 @@ const SearchHeader = ({
               isNarrowMobile={isNarrowMobile}
             >
               <SearchAutocomplete
-                locations={getAutocompleteRegions(region)}
                 filterLimit={getFilterLimit(region)}
                 setHideMapToggle={setHideMapToggle}
-                geolocation={geolocation}
+                locations={getFinalAutocompleteLocations(geolocation)}
               />
             </SelectorWrapper>
             {isMobile && (

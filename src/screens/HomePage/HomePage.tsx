@@ -31,7 +31,7 @@ import { ThirdWaveBanner } from 'components/Banner';
 import SearchAutocomplete from 'components/Search';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { getFilterLimit } from 'components/Search';
-import { getAutocompleteRegions } from 'common/regions';
+import { getFinalAutocompleteLocations } from 'common/regions';
 import { getNationalText } from 'components/NationalText';
 import HomepageStructuredData from 'screens/HomePage/HomepageStructuredData';
 import { useGeolocation } from 'common/hooks';
@@ -109,9 +109,8 @@ export default function HomePage() {
                 >
                   <SelectorWrapper>
                     <SearchAutocomplete
-                      locations={getAutocompleteRegions()}
+                      locations={getFinalAutocompleteLocations(geolocation)}
                       filterLimit={getFilterLimit()}
-                      geolocation={geolocation}
                     />
                   </SelectorWrapper>
                 </StyledGridItem>
