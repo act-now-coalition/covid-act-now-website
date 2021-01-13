@@ -8,33 +8,9 @@ import {
   property,
 } from 'lodash';
 import faq from './learn-faq.json';
-// import glossary from './learn-glossary.json';
-import landing from './learn-landing.json';
 import caseStudies from './learn-case-studies.json';
 import metricExplainers from './metric-explainers.json';
 import { sanitizeID, Markdown, TocItem } from '../utils';
-
-/*
-  Learn Landing page:
-*/
-
-export interface LandingSection {
-  sectionTitle: string;
-  sectionId: string;
-  description: Markdown;
-  buttonCta: string;
-  buttonRedirect: string;
-}
-
-export interface LandingContent {
-  header: string;
-  intro: Markdown;
-  sections: LandingSection[];
-  metadataTitle: string;
-  metadataDescription: string;
-}
-
-export const landingPageContent = landing as LandingContent;
 
 /*
   FAQ:

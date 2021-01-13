@@ -2,7 +2,7 @@ import { Markdown } from '../utils';
 import productsLanding from './products-landing.json';
 
 /**
- * Products - landing page:
+ * Tools Landing Page
  **/
 
 export interface LandingPageButton {
