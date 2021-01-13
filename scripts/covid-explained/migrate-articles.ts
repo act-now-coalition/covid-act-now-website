@@ -21,7 +21,9 @@ async function main() {
       articleID: item.canArticleId,
       header: item.content.title,
       subtitle: item.content.subtitle,
+      // TODO: Add a summary and author
       summary: '',
+      author: '',
       body: transformedContent,
     };
 

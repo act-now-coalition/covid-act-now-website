@@ -3,6 +3,7 @@ import remark from 'remark';
 import visit from 'unist-util-visit';
 
 function isInternalLink(url) {
+  // These are alternative URLs for Covid Explained
   return (
     url.startsWith('https://explaincovid.org') ||
     url.startsWith('https://covidexplained.org')
