@@ -3,7 +3,6 @@ import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset
 import { each, has, partition, toLower } from 'lodash';
 import { assert } from './utils';
 import countyAdjacencyMsa from './data/county_adjacency_msa.json';
-import collegesByFips from './data/colleges_by_fips.json';
 import { REVERSED_STATES, STATES as STATES_MAP } from 'common';
 // import CountyMap from 'components/CountyMap/CountyMap';
 
@@ -34,18 +33,6 @@ export const AGGREGATED_LOCATIONS: Location[] = [
   },
 ];
 
-interface CollegeData {
-  fips: string;
-  name: string;
-  ft_enroll: number;
-}
-
-interface CollegeMap {
-  [fips: string]: CollegeData[];
-}
-
-const COLLEGES: CollegeMap = collegesByFips;
-
 // TODO(michael): Move more common code here.
 export interface State {
   state_code: string;
@@ -62,7 +49,6 @@ export interface County {
   state_fips_code: string;
   state_code: string;
   full_fips_code: string;
-  cities: string[];
   population: number;
 }
 
@@ -72,7 +58,6 @@ export interface Location {
   county_fips_code?: string;
   state_fips_code: string;
   full_fips_code?: string;
-  cities?: string[];
   population: number;
   state_code: string;
   state: string;
@@ -152,10 +137,6 @@ export function findLocationForFips(fips: string): Location {
     : isStateFips(fips)
     ? findStateByFips(fips)
     : findCountyByFips(fips);
-}
-
-export function getColleges(fips: string): CollegeData[] {
-  return COLLEGES[fips] || [];
 }
 
 export function getStateCode(stateName: string) {

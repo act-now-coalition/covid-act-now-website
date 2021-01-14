@@ -145,6 +145,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
           onHeaderShareClick={() => scrollTo(shareBlockRef.current, -372)}
           onHeaderSignupClick={() => scrollTo(shareBlockRef.current)}
           isMobile={isMobile}
+          region={region}
         />
         <CompareMain
           stateName={region.name} // rename prop

@@ -9,7 +9,7 @@ import {
   UpdatePreferencesFormWrapper,
 } from 'screens/AlertUnsubscribe/AlertUnsubscribe.style';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
-import { AutocompleteRegions } from 'components/AutocompleteLocations';
+import AutocompleteRegions from 'components/AutocompleteRegions';
 import regions, { Region } from 'common/regions';
 
 const unsubscribedCopy =

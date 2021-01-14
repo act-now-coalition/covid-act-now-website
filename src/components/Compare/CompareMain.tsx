@@ -112,15 +112,17 @@ const CompareMain = (props: {
     setRegion(props.region);
   }, [props.stateId, props.region]);
 
+  const defaultSortByPopulation = isHomepage ? true : false;
+
   const [sorter, setSorter] = useState(Metric.CASE_DENSITY);
   const [sortDescending, setSortDescending] = useState(true);
-  const [sortByPopulation, setSortByPopulation] = useState(false);
+  const [sortByPopulation, setSortByPopulation] = useState(
+    defaultSortByPopulation,
+  );
   const [countyTypeToView, setCountyTypeToView] = useState(MetroFilter.ALL);
 
   // For homepage:
-  const [homepageScope, setHomepageScope] = useState(
-    HomepageLocationScope.STATE,
-  );
+  const [homepageScope, setHomepageScope] = useState(HomepageLocationScope.MSA);
 
   const homepageScopeToLocations = {
     [HomepageLocationScope.COUNTY]: getAllCountiesSelection(countyTypeToView),
@@ -242,7 +244,7 @@ const CompareMain = (props: {
   }, [sharedParams]);
 
   /* Mostly a check for MSAs with only 1 county. Won't render a compare table if there aren't at least 2 locations */
-  if (locations.length < 2) {
+  if (!locations || locations.length < 2) {
     return null;
   }
 

@@ -1,13 +1,10 @@
-// TODO(michael): This script no longer works since we switched to AWS Simple Email Service. :~(
-
 import path from 'path';
+import moment from 'moment';
 import _ from 'lodash';
-import CampaignMonitor, {
-  CampaignMonitorStats,
-} from '../alert_emails/campaign-monitor';
 import {
   getFirestore,
   fetchAllAlertSubscriptions,
+  Subscription,
 } from '../alert_emails/firestore';
 import GoogleSheets, { Cell } from '../common/google-sheets';
 import {
@@ -33,6 +30,7 @@ const keyFile = path.join(
 const RANGE_STATES = 'data-states!A2:D';
 const RANGE_COUNTIES = 'data-counties!A2:E';
 const RANGE_EMAILS = 'data-emails!A2:F';
+const RANGE_SUBSCRIPTIONS = 'data-subscriptions!A2:B';
 
 interface FipsCount {
   fips: string;
@@ -41,13 +39,17 @@ interface FipsCount {
 
 async function main() {
   try {
-    await updateSubscriptionsByLocation();
+    const db = getFirestore();
+    const subscriptions = await fetchAllAlertSubscriptions(db);
+    await updateSubscriptionsByLocation(subscriptions);
+    await updateSubscriptionsByDate(subscriptions);
   } catch (err) {
     console.error('Error updating subscription stats', err);
   }
 
-  await updateEngagementStats();
   try {
+    // TODO(michael): Get engagement stats from AWS.
+    // await updateEngagementStats();
   } catch (err) {
     console.error('Error updating engagement stats', err);
   }
@@ -60,13 +62,14 @@ async function main() {
   process.exit(0);
 }
 
-async function updateSubscriptionsByLocation() {
-  const db = getFirestore();
+async function updateSubscriptionsByLocation(subscriptions: Subscription[]) {
   const gsheets = new GoogleSheets(keyFile);
   const spreadsheetId = getSpreadsheetId();
 
-  const subscriptions = await fetchAllAlertSubscriptions(db);
-  const groupedByFips = _.groupBy(subscriptions, fipsEmail => fipsEmail.fips);
+  const allFips = _.flatten(
+    subscriptions.map(subscription => subscription.locations),
+  );
+  const groupedByFips = _.groupBy(allFips, fips => fips);
   const countByFips = _.map(groupedByFips, (items, fips) => {
     return { fips, count: items.length };
   });
@@ -79,6 +82,39 @@ async function updateSubscriptionsByLocation() {
 
   await gsheets.clearAndAppend(spreadsheetId, RANGE_COUNTIES, countyStats);
   await gsheets.clearAndAppend(spreadsheetId, RANGE_STATES, stateStats);
+}
+
+async function updateSubscriptionsByDate(subscriptions: Subscription[]) {
+  const gsheets = new GoogleSheets(keyFile);
+  const spreadsheetId = getSpreadsheetId();
+
+  const sortedSubscriptions = _.chain(subscriptions)
+    .filter(s => s.subscribedAt !== undefined)
+    .sortBy(s => s.subscribedAt)
+    .value();
+
+  const dateTotals = [];
+
+  // We may have a few subscriptions without subscribedAt dates. Include them from the start.
+  let total = subscriptions.length - sortedSubscriptions.length;
+
+  // Start at the beginning of the first day with subscriptions and work forwards.
+  let curDate = moment(sortedSubscriptions[0].subscribedAt).startOf('day');
+
+  for (const subscription of sortedSubscriptions) {
+    const subscribedAt = moment(subscription.subscribedAt);
+    const days = moment(subscribedAt).diff(curDate, 'days');
+    if (days > 1) {
+      dateTotals.push([curDate.add(1, 'days').format('YYYY-MM-DD'), total]);
+      curDate = subscribedAt.startOf('day');
+    }
+    total++;
+  }
+  // Include final day.
+  curDate = curDate.add(1, 'day');
+  dateTotals.push([curDate.format('YYYY-MM-DD'), total]);
+
+  await gsheets.clearAndAppend(spreadsheetId, RANGE_SUBSCRIPTIONS, dateTotals);
 }
 
 function formatStateStats(stats: FipsCount[]): Cell[][] {
@@ -101,6 +137,7 @@ function formatCountyStats(stats: FipsCount[]): Cell[][] {
   return _.sortBy(data, item => item[0]);
 }
 
+/* TODO(michael): Get engagement stats from AWS.
 async function updateEngagementStats() {
   const spreadsheetId = getSpreadsheetId();
   const gsheets = new GoogleSheets(keyFile);
@@ -130,6 +167,7 @@ async function fetchEngagementStats(): Promise<Cell[][]> {
 function formatGroupStats(groupName: string, stats: CampaignMonitorStats) {
   return [groupName, stats.Sent, stats.Opened, stats.Clicked, stats.Bounces];
 }
+*/
 
 if (require.main === module) {
   main().catch(err => {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Autocomplete } from '@material-ui/lab';
 import { createFilterOptions } from '@material-ui/lab/useAutocomplete';
 import TextField from '@material-ui/core/TextField';
-import { Region, County } from 'common/regions';
+import { Region, County, MetroArea } from 'common/regions';
 import MenuItem from './MenuItem';
 import { StyledPaper } from './Search.style';
 
@@ -33,12 +33,17 @@ const SearchAutocomplete: React.FC<{
   const stringifyOption = (option: Region) => {
     if (checkForZipcodeMatch && (option as County).zipCodes) {
       return `${(option as County).zipCodes.join(' ')}`;
+    } else {
+      if (option instanceof MetroArea) {
+        return `${option.shortName}, ${(option as MetroArea).stateCodes}`;
+      } else {
+        return option.shortName;
+      }
     }
-    return option.name;
   };
 
   const onSelect = (e: any, value: Region) => {
-    window.location.href = `/${value.relativeUrl}`;
+    window.location.href = value.relativeUrl;
   };
 
   const zipCodeInput = checkForZipcodeMatch ? input : '';

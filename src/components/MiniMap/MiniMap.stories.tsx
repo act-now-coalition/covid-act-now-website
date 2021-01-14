@@ -12,18 +12,6 @@ export default {
   },
 };
 
-export const State = (args: any) => {
-  const state = regions.findByFipsCode('36');
-  return (
-    <MiniMap
-      {...args}
-      region={state}
-      mobileMenuOpen={true}
-      mapOption={MAP_FILTERS.STATE}
-    />
-  );
-};
-
 export const USA = (args: any) => {
   const state = regions.findByFipsCode('36');
   return (
@@ -36,6 +24,18 @@ export const USA = (args: any) => {
   );
 };
 
+export const State = (args: any) => {
+  const state = regions.findByFipsCode('36');
+  return (
+    <MiniMap
+      {...args}
+      region={state}
+      mobileMenuOpen={true}
+      mapOption={MAP_FILTERS.STATE}
+    />
+  );
+};
+
 export const MetroArea = (args: any) => {
   const metroArea = regions.findByFipsCode('14460');
   return (
@@ -44,6 +44,18 @@ export const MetroArea = (args: any) => {
       region={metroArea}
       mobileMenuOpen={true}
       mapOption={MAP_FILTERS.MSA}
+    />
+  );
+};
+
+export const County = (args: any) => {
+  const county = regions.findByFipsCode('13121');
+  return (
+    <MiniMap
+      {...args}
+      region={county}
+      mobileMenuOpen={true}
+      mapOption={MAP_FILTERS.STATE}
     />
   );
 };

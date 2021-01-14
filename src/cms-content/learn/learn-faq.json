@@ -124,7 +124,7 @@
         },
         {
           "question": "Is it safe to reopen?",
-          "answer": "[Covid Act Now](https://covidactnow.org/?s=756131) determines a COVID risk level (severe outbreak; active or imminent outbreak; at risk of outbreak; slow disease growth; or on track to contain COVID) for each state and county, based on five metrics. Our mission is to provide data and disease intelligence to help public officials and the general public make informed decisions. Counties designated as “on track” can [open](/glossary#reopening) more safely than those in higher risk groups. Of course, no community is entirely safe from COVID until the new [vaccine](/glossary#vaccine) has been widely adopted.",
+          "answer": "[Covid Act Now](https://covidactnow.org/?s=756131) determines a COVID risk level (severe outbreak; active outbreak; at risk of outbreak; slow disease growth; or on track to contain COVID) for each state and county, based on five metrics. Our mission is to provide data and disease intelligence to help public officials and the general public make informed decisions. Counties designated as “on track” can [open](/glossary#reopening) more safely than those in higher risk groups. Of course, no community is entirely safe from COVID until the new [vaccine](/glossary#vaccine) has been widely adopted.",
           "questionId": "is-it-safe-to-reopen"
         },
         {
@@ -134,7 +134,7 @@
         },
         {
           "question": "How do I travel safely?",
-          "answer": "For the time being, it is safest not to travel. In particular, travel by plane, which may require you to sit close to others for hours, and by cruise ship are particularly risky, according to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/travelers/faqs.html). If you must travel, look at the data on [our site](https://covidactnow.org/?s=768133) to compare the state and county risk levels where you will be. If you plan to fly, take time to research and assess the measures different airlines are taking to reduce risky behaviors and comply with local laws to contain the spread of COVID.",
+          "answer": "For the time being, it is safest not to travel. In particular, travel by plane, which may require you to sit close to others for hours, and by cruise ship are particularly risky, according to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/travelers/faqs.html). If you must travel, look at the data on [our site](https://covidactnow.org/?s=768133) to compare the state and county risk levels where you will be. If you plan to fly, take time to research and assess the measures different airlines are taking to reduce risky behaviors and comply with local laws to contain the spread of COVID. The CDC also strongly recommends wearing a face mask and offers [guidance]([what-masks-most-effective]) on choosing the best type.",
           "questionId": "how-to-travel-safely"
         },
         {
@@ -178,7 +178,7 @@
   ],
   "header": "FAQs",
   "intro": "\"Who is most at risk of getting COVID?\" and \"How soon after possible exposure to COVID should I get tested?\" Here are answers to some of the top COVID questions.",
-  "metadataTitle": "COVID-19 FAQ - Covid Act Now",
+  "metadataTitle": "COVID-19 FAQ",
   "metadataDescription": "Find trusted answers to the most Frequently Asked Questions (FAQs) about the novel Coronavirus. Make informed decisions to stop the disease for you and your community.",
   "lastUpdatedDate": "2020-12-15T08:00:00.000Z"
 }

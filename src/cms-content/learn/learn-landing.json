@@ -1,27 +1,27 @@
 {
-  "intro": "Our goal is to provide you with clear, trusted information so that you can make informed decisions and help stop the pandemic. Data is just one piece of the equation. Here you will find essential information that will help you understand, interpret, and apply the data on our site:",
-  "header": "Learn more about COVID",
-  "metadataTitle": "COVID-19 Essential Information & Resources - Covid Act Now",
+  "intro": "Here you can find clear, trusted, shareable information to make informed decisions around COVID, as well as essential resources that will help you understand, interpret, and apply Covid Act Now’s data.",
+  "header": "Learn about COVID",
+  "metadataTitle": "COVID-19 Essential Information & Resources",
   "metadataDescription": "Find recent and trusted information & resources about the novel Coronavirus (2019-nCoV). Learn about Symptoms, Tests, Risks, and more. Backed by medical experts. Make informed decisions to stop the disease for you and your community.",
   "sections": [
     {
       "sectionTitle": "Risk levels & key metrics",
       "sectionId": "covid-risk-levels-metrics",
-      "description": "Learn about the five key metrics Covid Act Now uses to assess COVID risk across U.S. states, metros, and counties.",
+      "description": "Learn about the five key metrics Covid Act Now uses to assess COVID across U.S. states, metros, and counties.",
       "buttonCta": "View risk levels & key metrics",
       "buttonRedirect": "/covid-risk-levels-metrics"
     },
     {
       "sectionTitle": "Glossary",
       "sectionId": "glossary",
-      "description": "R₀ vs R(t) vs Infection rate: We have compiled a simple glossary of essential COVID-related terms, which we will continue to update and expand.",
+      "description": "R₀ vs R(t) vs Infection rate. Here is a simple glossary of COVID-related terms.",
       "buttonCta": "View glossary",
       "buttonRedirect": "/glossary"
     },
     {
       "sectionTitle": "FAQ",
       "sectionId": "faq",
-      "description": "We have received many questions, ranging from \"how do I talk to people who behave in ways I disagree with?\" to \"how soon after possible exposure to COVID should I get tested?\" Here we address more than 40 of our top questions.",
+      "description": "\"Who is most at risk of getting COVID?\" to \"how soon after possible exposure to COVID should I get tested?\" Here are answers to some of the top COVID questions.",
       "buttonCta": "View FAQ",
       "buttonRedirect": "/faq"
     },
@@ -30,12 +30,12 @@
       "sectionId": "deep-dives",
       "buttonCta": "View deep dives",
       "buttonRedirect": "/deep-dives",
-      "description": "This section of Covid Act Now offers a deeper analysis of how, why, and where COVID is spreading. Our editors and guest authors dig into the details of what COVID means for people – particularly the least advantaged in society – and the impact policies have in protecting them."
+      "description": "This section offers a deeper analysis of how, why, and where COVID is spreading. Our editors and guest authors dig into the details of what COVID means for people – particularly the least advantaged in society – and the impact policies have in protecting them."
     },
     {
       "sectionTitle": "Case studies",
       "sectionId": "case-studies",
-      "description": "We provide partners ranging from large commercial entities, like IBM, to small county health departments with clear, accurate, and up-to-date data. Learn more about how leaders in industry, public health, and government are using our data and tools to make better decisions to combat COVID.",
+      "description": "Learn about how leaders in industry, public health, and government are using Covid Act Now’s data and tools to make better decisions to combat COVID.",
       "buttonCta": "View case studies",
       "buttonRedirect": "/case-studies"
     }

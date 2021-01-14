@@ -98,7 +98,7 @@ const USACountyMap = React.memo(
                         return (
                           <Link
                             key={state.stateCode}
-                            to={`/${state.relativeUrl}`}
+                            to={state.relativeUrl}
                             aria-label={state.fullName}
                           >
                             <MarianaIslands
@@ -116,7 +116,7 @@ const USACountyMap = React.memo(
                       return state ? (
                         <Link
                           key={state.stateCode}
-                          to={`/${state.relativeUrl}`}
+                          to={state.relativeUrl}
                           aria-label={state.fullName}
                         >
                           <Geography

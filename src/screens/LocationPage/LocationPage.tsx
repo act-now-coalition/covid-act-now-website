@@ -10,6 +10,7 @@ import { LoadingScreen } from './LocationPage.style';
 import { useProjectionsFromRegion } from 'common/utils/model';
 import { getPageTitle, getPageDescription } from './utils';
 import { getStateCode, MetroArea, Region } from 'common/regions';
+import { useGeolocation } from 'common/hooks';
 
 interface LocationPageProps {
   region: Region;
@@ -18,45 +19,26 @@ interface LocationPageProps {
 function LocationPage({ region }: LocationPageProps) {
   let { chartId } = useParams<{ chartId: string }>();
 
-  const defaultMapOption = (region: Region) => {
-    const stateCode = getStateCode(region);
-    if (stateCode === MAP_FILTERS.DC) {
-      return MAP_FILTERS.NATIONAL;
-    }
-    if (region instanceof MetroArea) {
-      return MAP_FILTERS.MSA;
-    }
-    return MAP_FILTERS.STATE;
-  };
-  const [mapOption, setMapOption] = useState(defaultMapOption(region));
-
+  const defaultMapOption = getDefaultMapOption(region);
+  const [mapOption, setMapOption] = useState(defaultMapOption);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const projections = useProjectionsFromRegion(region);
 
-  useEffect(() => {
-    setMapOption(defaultMapOption(region));
+  const geolocation = useGeolocation();
 
+  useEffect(() => {
+    setMapOption(defaultMapOption);
     // Close the map on mobile on any change to a region.
     setMobileMenuOpen(false);
-  }, [region]);
-  // Projections haven't loaded yet
-  // If a new county has just been selected, we may not have projections
-  // for the new county loaded yet
-  if (!projections || projections.fips !== region.fipsCode) {
-    return <LoadingScreen></LoadingScreen>;
-  }
-
-  const pageTitle = getPageTitle(region);
-  const pageDescription = getPageDescription(region, projections);
-  const canonicalUrl = region.canonicalUrl;
+  }, [defaultMapOption]);
 
   return (
     <div>
       <EnsureSharingIdInUrl />
       <AppMetaTags
-        canonicalUrl={canonicalUrl}
-        pageTitle={pageTitle}
-        pageDescription={pageDescription}
+        canonicalUrl={region.canonicalUrl}
+        pageTitle={getPageTitle(region)}
+        pageDescription={getPageDescription(region)}
       />
       <div>
         <SearchHeader
@@ -64,12 +46,19 @@ function LocationPage({ region }: LocationPageProps) {
           mobileMenuOpen={mobileMenuOpen}
           setMobileMenuOpen={setMobileMenuOpen}
           region={region}
+          geolocation={geolocation}
         />
-        <ChartsHolder
-          projections={projections}
-          chartId={chartId}
-          region={region}
-        />
+        {/* Shows a loading screen if projections are not loaded yet, or
+         * if a new location has been selected */}
+        {!projections || projections.fips !== region.fipsCode ? (
+          <LoadingScreen />
+        ) : (
+          <ChartsHolder
+            projections={projections}
+            chartId={chartId}
+            region={region}
+          />
+        )}
         <MiniMap
           region={region}
           mobileMenuOpen={mobileMenuOpen}
@@ -79,6 +68,17 @@ function LocationPage({ region }: LocationPageProps) {
       </div>
     </div>
   );
+}
+
+function getDefaultMapOption(region: Region) {
+  const stateCode = getStateCode(region);
+  if (stateCode === MAP_FILTERS.DC) {
+    return MAP_FILTERS.NATIONAL;
+  }
+  if (region instanceof MetroArea) {
+    return MAP_FILTERS.MSA;
+  }
+  return MAP_FILTERS.STATE;
 }
 
 export default LocationPage;

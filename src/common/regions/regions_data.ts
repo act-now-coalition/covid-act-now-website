@@ -37,6 +37,25 @@ export function getStateCode(region: Region): string | null {
   return null;
 }
 
+/*
+Goes one step beyond getStateCode(). Inludes MSAs and returns each regionType's 'version' of a stateCode:
+  metro -> dash-separated list of all states in which the MSA resides ('NY-NJ-PA')
+  state -> state's stateCode ('NY')
+  county -> stateCode of county's state ('NY')
+*/
+export function getFormattedStateCode(region: Region): string | null {
+  if (
+    region.regionType === RegionType.COUNTY ||
+    region.regionType === RegionType.STATE
+  ) {
+    return getStateCode(region);
+  } else if (region.regionType === RegionType.MSA) {
+    return (region as MetroArea).stateCodes;
+  } else {
+    return null;
+  }
+}
+
 export const getStateFips = (region: Region): string | null => {
   if (region.regionType === RegionType.COUNTY) {
     return (region as County).state.fipsCode;
@@ -65,40 +84,35 @@ function buildCounties(
   statesByFips: Dictionary<State>,
   countyAdjacency: { [fipsCode: string]: AdjacencyInfo },
 ): County[] {
-  return (
-    chain(state_county_map_dataset)
-      .map(stateData => stateData.county_dataset)
-      .flatten()
-      .map(countyInfo => {
-        /**
-         * TODO: The following counties in New York State have the same
-         * `full_fips_code ` (36061), but different `county_fips_code`.
-         * Determine how we want to handle this before shipping.
-         *
-         * - New York County (county_fips_code: 061)
-         * - Queens County (county_fips_code: 081)
-         * - Richmond County" (county_fips_code: 085)
-         * - Bronx County" (county_fips_code: 005)
-         */
-        const countyFips = `${countyInfo.state_fips_code}${countyInfo.county_fips_code}`;
-        const state = statesByFips[countyInfo.state_fips_code];
-        const adjacentCounties = countyAdjacency[countyFips]?.adjacent_counties;
-        const zipCodes = countyFipsToZips[countyFips];
-        return new County(
-          countyInfo.county,
-          countyInfo.county_url_name,
-          countyFips,
-          countyInfo.population,
-          state,
-          countyInfo.cities || [],
-          adjacentCounties || [],
-          zipCodes || [],
-        );
-      })
-      /* Filtering out DC county (which is redundant to DC state + has mismatching data) */
-      .filter(countyInfo => countyInfo.fipsCode !== '11001')
-      .value()
-  );
+  return chain(state_county_map_dataset)
+    .map(stateData => stateData.county_dataset)
+    .flatten()
+    .map(countyInfo => {
+      /**
+       * TODO: The following counties in New York State have the same
+       * `full_fips_code ` (36061), but different `county_fips_code`.
+       * Determine how we want to handle this before shipping.
+       *
+       * - New York County (county_fips_code: 061)
+       * - Queens County (county_fips_code: 081)
+       * - Richmond County" (county_fips_code: 085)
+       * - Bronx County" (county_fips_code: 005)
+       */
+      const countyFips = `${countyInfo.state_fips_code}${countyInfo.county_fips_code}`;
+      const state = statesByFips[countyInfo.state_fips_code];
+      const adjacentCounties = countyAdjacency[countyFips]?.adjacent_counties;
+      const zipCodes = countyFipsToZips[countyFips];
+      return new County(
+        countyInfo.county,
+        countyInfo.county_url_name,
+        countyFips,
+        countyInfo.population,
+        state,
+        adjacentCounties || [],
+        zipCodes || [],
+      );
+    })
+    .value();
 }
 
 function buildMetroAreas(

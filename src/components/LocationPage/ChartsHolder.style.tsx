@@ -91,7 +91,7 @@ export const ChartDescription = styled(Typography)`
   margin-bottom: 1rem;
 `;
 
-export const BetaTag = styled.span`
+export const BetaTag = styled.div`
   font-size: 0.675rem;
   padding: 0 0.75rem;
   line-height: 1.25rem;

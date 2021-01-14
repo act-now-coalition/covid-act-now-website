@@ -1,7 +1,6 @@
 import React from 'react';
 import RegionMap from './RegionMap';
-import MetroAreaMap from './MetroAreaMap';
-import regions, { MetroArea, Region } from 'common/regions';
+import regions, { MetroArea, County, Region } from 'common/regions';
 
 export default {
   title: 'Shared Components/Region Map',
@@ -27,7 +26,25 @@ export const BostonMetroArea = () => {
   const metroArea = regions.findByFipsCode('14460') as MetroArea;
   return (
     <Container>
-      <MetroAreaMap metroArea={metroArea} width={300} height={300} />
+      <RegionMap region={metroArea} width={300} height={300} />
+    </Container>
+  );
+};
+
+export const KingCountyWA = () => {
+  const county = regions.findByFipsCode('53033') as County;
+  return (
+    <Container>
+      <RegionMap region={county} width={300} height={300} />
+    </Container>
+  );
+};
+
+export const CascadeCountyMA = () => {
+  const county = regions.findByFipsCode('30013') as County;
+  return (
+    <Container>
+      <RegionMap region={county} width={300} height={300} />
     </Container>
   );
 };

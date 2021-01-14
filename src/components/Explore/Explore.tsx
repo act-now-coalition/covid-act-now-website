@@ -52,6 +52,7 @@ import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 import { IndigenousDataCheckbox } from 'components/IndigenousPopulationsFeature';
 import regions, { Region, useRegionFromParams } from 'common/regions';
 import { LocationPageSectionHeader } from 'components/LocationPage/ChartsHolder.style';
+import NationalText from 'components/NationalText';
 
 const MARGIN_SINGLE_LOCATION = 20;
 const MARGIN_STATE_CODE = 60;
@@ -103,11 +104,13 @@ const Explore: React.FunctionComponent<{
   initialChartIndigenousPopulations?: boolean;
   title?: string;
   defaultMetric?: ExploreMetric;
+  nationalSummaryText?: React.ReactElement;
 }> = ({
   initialFipsList,
   initialChartIndigenousPopulations,
   defaultMetric = ExploreMetric.CASES,
   title = 'Trends',
+  nationalSummaryText,
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -338,6 +341,9 @@ const Explore: React.FunctionComponent<{
           </Styles.ShareBlock>
         </Grid>
       </Grid>
+      {nationalSummaryText && (
+        <NationalText nationalSummaryText={nationalSummaryText} />
+      )}
       <ExploreTabs
         activeTabIndex={currentMetric}
         labels={metricLabels}

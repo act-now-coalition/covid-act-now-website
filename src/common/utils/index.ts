@@ -119,3 +119,15 @@ export function isValidEmail(emailAddress: string) {
     emailAddress && emailAddress.length > 1 && EMAIL_REGEX.test(emailAddress)
   );
 }
+
+// Returns unformatted percent in decimal form
+export function getPercentChange(numA: number, numB: number): number | null {
+  const validParams = _.isFinite(numA) && _.isFinite(numB) && numA !== 0;
+  if (!validParams) {
+    return null;
+  } else {
+    const difference = numB - numA;
+    const percentChange = difference / numA;
+    return percentChange;
+  }
+}

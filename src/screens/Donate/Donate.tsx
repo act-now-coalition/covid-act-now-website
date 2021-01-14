@@ -12,7 +12,7 @@ import {
   BodyCopy,
 } from 'screens/Donate/Donate.style';
 import GiveButterEmbed from 'screens/Donate/GiveButterEmbed';
-import { donateContent } from 'common/utils/netlify';
+import donateContent from 'cms-content/donate';
 
 const Intro: React.FC = () => {
   const { headerLines } = donateContent;
@@ -38,7 +38,7 @@ const Donate: React.FC = () => {
   return (
     <Container>
       {isMobile && <Intro />}
-      <GiveButterEmbed embedUrl="https://givebutter.com/embed/c/covidactnow-dec" />
+      <GiveButterEmbed embedUrl="https://givebutter.com/embed/c/covidactnow-jan" />
       <ContentWrapper>
         {!isMobile && (
           <Fragment>

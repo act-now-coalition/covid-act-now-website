@@ -30,6 +30,7 @@ const SocialLocationPreview = (props: {
   border?: Boolean;
   isEmbed?: Boolean;
   Footer?: ComponentType;
+  isEmbedPreview?: boolean;
 }) => {
   const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
   const lastUpdatedDateString =
@@ -40,6 +41,7 @@ const SocialLocationPreview = (props: {
   };
   const Footer = props.Footer;
   const isEmbed = props.isEmbed;
+  const showCountyView = !isEmbed && !props.isEmbedPreview;
   if (!props.projections || !props.stats) {
     return (
       <Wrapper border={props.border}>
@@ -51,6 +53,7 @@ const SocialLocationPreview = (props: {
               hideLegend={!isEmbed}
               hideLegendTitle={true}
               hideInstructions={true}
+              showCounties={showCountyView}
             />
           </MapWrapper>
           {isEmbed ? (

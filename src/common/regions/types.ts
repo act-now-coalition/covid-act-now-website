@@ -10,7 +10,18 @@ export enum RegionType {
   MSA = 'MSA',
 }
 
+/* Used to rename some metro principal cities for clarity: */
 const DC_METRO_FIPS = '47900';
+const NY_METRO_FIPS = '35620';
+
+interface FipsToPrincipalCityName {
+  [key: string]: string;
+}
+
+const fipsToPrincipalCityRenames: FipsToPrincipalCityName = {
+  [DC_METRO_FIPS]: 'Washington DC',
+  [NY_METRO_FIPS]: 'New York City',
+};
 
 export abstract class Region {
   constructor(
@@ -59,7 +70,7 @@ export class State extends Region {
   }
 
   get relativeUrl() {
-    return `us/${this.urlSegment}`;
+    return `/us/${this.urlSegment}/`;
   }
 }
 
@@ -70,8 +81,7 @@ export class County extends Region {
     fipsCode: FipsCode,
     population: number,
     public readonly state: State,
-    public readonly cityNames: string[],
-    public readonly adjacentCountyFips: FipsCode[],
+    public readonly adjacentCountiesFips: FipsCode[],
     public readonly zipCodes: ZipCode[],
   ) {
     super(name, urlSegment, fipsCode, population, RegionType.COUNTY);
@@ -90,7 +100,7 @@ export class County extends Region {
   }
 
   get relativeUrl() {
-    return urlJoin(this.state.relativeUrl, `county/${this.urlSegment}`);
+    return urlJoin(this.state.relativeUrl, `county/${this.urlSegment}/`);
   }
 
   get stateCode() {
@@ -114,9 +124,8 @@ export class MetroArea extends Region {
   }
 
   private get principalCityName() {
-    // Make Washington DC metro principal city name more clear.
-    if (this.fipsCode === DC_METRO_FIPS) {
-      return 'Washington DC';
+    if (this.fipsCode in fipsToPrincipalCityRenames) {
+      return fipsToPrincipalCityRenames[this.fipsCode];
     }
     return this.name.split('-')[0];
   }
@@ -133,7 +142,7 @@ export class MetroArea extends Region {
   }
 
   get relativeUrl() {
-    return `us/metro/${this.urlSegment}`;
+    return `/us/metro/${this.urlSegment}/`;
   }
 
   get stateCodes() {

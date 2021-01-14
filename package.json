@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@24hr/react-structured-data": "^1.0.0",
     "@iconify/icons-twemoji": "^1.0.11",
     "@iconify/react": "^1.1.3",
     "@material-ui/core": "^4.11.0",
@@ -19,6 +20,7 @@
     "@types/jest": "^26.0.16",
     "@types/react-router-hash-link": "^1.2.1",
     "@types/react-scrollspy": "^3.3.3",
+    "@types/sharp": "^0.27.0",
     "@types/topojson-client": "^3.0.0",
     "@types/typeform__embed": "^0.22.2",
     "@types/uuid": "^8.3.0",
@@ -68,6 +70,8 @@
     "react-tooltip": "^4.1.2",
     "react-twitter-embed": "^3.0.3",
     "sharp": "^0.25.2",
+    "sitemap": "^6.3.3",
+    "source-map-explorer": "^2.5.1",
     "styled-components": "^5.0.1",
     "tar": "^6.0.1",
     "topojson-client": "^3.1.0",
@@ -76,7 +80,7 @@
   "scripts": {
     "start": "cross-env TSC_COMPILE_ON_ERROR=false react-scripts -r @cypress/instrument-cra start",
     "build": "react-scripts build",
-    "build-with-index-pages": "yarn build && yarn generate-index-pages",
+    "build-with-index-pages": "yarn build && yarn generate-index-pages && yarn generate-sitemap",
     "build:staging": "cross-env REACT_APP_ENVIRONMENT=staging yarn build-with-index-pages",
     "build:prod": "cross-env REACT_APP_ENVIRONMENT=prod yarn build-with-index-pages",
     "serve": "react-scripts build && serve -s build",
@@ -102,8 +106,14 @@
     "report-alert-emails": "ts-node-script -r tsconfig-paths/register scripts/alert_emails_report/generate-report.ts",
     "generate-county-history-data": "ts-node-script -r tsconfig-paths/register scripts/county_history_data/generate.ts",
     "generate-metro-areas": "ts-node-script -r tsconfig-paths/register scripts/cbsa/parse-metro-areas.ts",
+    "generate-sitemap": "ts-node-script -r tsconfig-paths/register scripts/generate_sitemap/index.ts",
+    "optimize-images": "ts-node-script -r tsconfig-paths/register scripts/optimize_images/optimize-images.ts",
+    "covid-explained-internal-links": "ts-node-script -r tsconfig-paths/register scripts/covid-explained/report-internal-links.ts",
+    "covid-explained-images": "ts-node-script -r tsconfig-paths/register scripts/covid-explained/report-images.ts",
+    "covid-explained-migrate": "ts-node-script -r tsconfig-paths/register scripts/covid-explained/migrate-articles.ts",
     "storybook": "start-storybook -p 6006 -s public --no-dll",
-    "build-storybook": "build-storybook -s public --no-dll"
+    "build-storybook": "build-storybook -s public --no-dll",
+    "analyze": "cross-env REACT_APP_ENVIRONMENT=prod yarn build && source-map-explorer build/static/js/*.js"
   },
   "lint-staged": {
     "{src,scripts,firebase/functions/src,}/**/*.{css,scss,js,ts,tsx}": [
@@ -157,7 +167,6 @@
     "@types/url-join": "^4.0.0",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
-    "axios": "^0.19.2",
     "babel-loader": "8.0.6",
     "cross-env": "^7.0.2",
     "cypress": "^4.2.0",
@@ -183,6 +192,7 @@
     "ts-node": "^8.9.0",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^3.8.3",
+    "unist-util-is": "^4.0.4",
     "unist-util-visit": "^2.0.3",
     "url-join": "^4.0.1"
   }

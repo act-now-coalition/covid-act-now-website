@@ -7,7 +7,7 @@ const promisify = require('util').promisify;
 const csvParse = promisify(require('csv-parse'));
 
 const POPULATION_CSV_URL =
-  'https://raw.githubusercontent.com/covid-projections/covid-data-model/master/libs/datasets/sources/fips_population.csv';
+  'https://raw.githubusercontent.com/covid-projections/covid-data-model/main/libs/datasets/sources/fips_population.csv';
 const REPO_FOLDER = path.join(__dirname, '../..');
 const SEARCH_JSON_FILE = path.join(
   REPO_FOLDER,

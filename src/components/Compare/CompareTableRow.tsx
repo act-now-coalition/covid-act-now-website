@@ -6,7 +6,7 @@ import {
   Row,
   MetricValue,
   Population,
-  CountySuffix,
+  RegionSuffix,
   LocationInfoWrapper,
   LocationNameCell,
   Rank,
@@ -15,11 +15,11 @@ import { Metric, formatValue } from 'common/metric';
 import {
   RankedLocationSummary,
   orderedMetrics,
-  getColumnLocationName,
+  getRegionNameForRow,
 } from 'common/utils/compare';
 import { Level } from 'common/level';
 import { formatEstimate } from 'common/utils';
-import regions, { getStateCode } from 'common/regions';
+import regions, { getFormattedStateCode } from 'common/regions';
 import { fail } from 'assert';
 
 function cellValue(metric: any, metricType: Metric) {
@@ -63,9 +63,9 @@ const CompareTableRow = (props: {
   if (!region) {
     fail(`missing region for fips code ${fipsCode}`);
   }
-  const locationLink = `/${region.relativeUrl}`;
+  const locationLink = region.relativeUrl;
 
-  const locationName = getColumnLocationName(location.region);
+  const [regionNameMain, regionSuffix] = getRegionNameForRow(location.region);
 
   const populationRoundTo = isHomepage ? 3 : 2;
 
@@ -85,10 +85,10 @@ const CompareTableRow = (props: {
             <FiberManualRecordIcon />
           </div>
           <div>
-            {locationName[0]}{' '}
-            {locationName[1] && <CountySuffix>{locationName[1]}</CountySuffix>}
+            {regionNameMain}{' '}
+            {regionSuffix && <RegionSuffix>{regionSuffix}</RegionSuffix>}
             {showStateCode && (
-              <Fragment>{getStateCode(location.region)}</Fragment>
+              <Fragment>{getFormattedStateCode(location.region)}</Fragment>
             )}
             <br />
             <LocationInfoWrapper>

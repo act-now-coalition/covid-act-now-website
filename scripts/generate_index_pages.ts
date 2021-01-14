@@ -145,15 +145,10 @@ async function main() {
   }
 
   for (const state of regions.states) {
-    const stateCode = state.stateCode.toLowerCase();
-    // TODO(chris): Change this url to be the updated url (use `state.relativeUrl`). Currently
-    // any location page link shared from the new URL structure will try to access an index page at
-    // the new url path, but that structure does not exist so the images default to the default image.
-    const relativeSiteUrl = `/us/${stateCode}/`;
     const relativeImageUrl = `/states/${state.stateCode.toLowerCase()}`;
     await buildLocationPages(
       builder,
-      relativeSiteUrl,
+      state.relativeUrl,
       relativeImageUrl,
       state.fullName,
     );
@@ -162,15 +157,10 @@ async function main() {
   const counties = regions.counties.filter(hasLocationSummary);
 
   for (const county of counties) {
-    const stateCode = county.stateCode.toLowerCase();
-    // TODO(chris): Change this url to be the updated url (use `county.relativeUrl`). Currently
-    // any location page link shared from the new URL structure will try to access an index page at
-    // the new url path, but that structure does not exist so the images default to the default image.
-    const relativeSiteUrl = `/us/${stateCode}/county/${county.urlSegment}`;
     const relativeImageUrl = `counties/${county.fipsCode}`;
     await buildLocationPages(
       builder,
-      relativeSiteUrl,
+      county.relativeUrl,
       relativeImageUrl,
       county.fullName,
     );
@@ -179,11 +169,10 @@ async function main() {
   const metros = regions.metroAreas.filter(hasLocationSummary);
 
   for (const metro of metros) {
-    const relativeSiteUrl = `/${metro.relativeUrl}`;
     const relativeImageUrl = `metros/${metro.fipsCode}`;
     await buildLocationPages(
       builder,
-      relativeSiteUrl,
+      metro.relativeUrl,
       relativeImageUrl,
       metro.fullName,
     );
@@ -225,7 +214,7 @@ class IndexPageBuilder {
     const parentDir = path.resolve(pageFile, '..');
     await fs.ensureDir(parentDir);
 
-    const html = this.templatedHtml(tags);
+    const html = this.templatedHtml(tags, relHtmlUrl);
     await fs.writeFile(pageFile, html);
   }
 
@@ -233,9 +222,17 @@ class IndexPageBuilder {
     return urlJoin(this.imagesBaseUrl, relImageUrl);
   }
 
-  private templatedHtml(tags: { [tag: string]: string }): string {
+  private templatedHtml(
+    tags: { [tag: string]: string },
+    canonicalUrl: string,
+  ): string {
+    let html = this.replaceMetatags(tags);
+    return this.replaceCanonicalUrl(canonicalUrl, html);
+  }
+
+  private replaceMetatags(tags: { [tag: string]: string }): string {
     const replaced: string[] = [];
-    const html = this.indexHtmlTemplate.replace(
+    let html = this.indexHtmlTemplate.replace(
       this.META_TAG_REGEX,
       (original, propKey, name) => {
         const newValue = tags[name];
@@ -256,9 +253,26 @@ class IndexPageBuilder {
 
     return html;
   }
+
+  private replaceCanonicalUrl(relativeHtmlUrl: string, html: string) {
+    const relativeUrl = relativeHtmlUrl.replace('index.html', '');
+    return html.replace(
+      `rel="canonical" href="https://covidactnow.org/"`,
+      `rel="canonical" href="${urlJoin(
+        'https://covidactnow.org/',
+        relativeUrl,
+      )}"`,
+    );
+  }
 }
 
-main().catch(e => {
-  console.error(e);
-  process.exit(-1);
-});
+main()
+  .then(() => {
+    // HACK: We aggressively exit the process, else Firestore SDK will keep node from exiting for 60s
+    // thanks to open network connections.
+    process.exit(0);
+  })
+  .catch(e => {
+    console.error(e);
+    process.exit(-1);
+  });

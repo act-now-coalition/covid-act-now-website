@@ -6,19 +6,23 @@ import {
   Zipcode,
   StyledLink,
 } from './Search.style';
-import { Region } from 'common/regions';
+import { Region, MetroArea } from 'common/regions';
 import MenuItemIcon from './MenuItemIcon';
 
 const MenuItem: React.FC<{ region: Region; zipCodeInput: string }> = ({
   region,
   zipCodeInput,
 }) => {
+  const locationLabel =
+    region instanceof MetroArea
+      ? `${region.shortName}, ${region.stateCodes}`
+      : region.shortName;
   return (
-    <StyledLink to={`/${region.relativeUrl}`}>
+    <StyledLink to={region.relativeUrl}>
       <MenuItemWrapper>
         <MenuItemIcon region={region} />
         <div>
-          <LocationName>{region.shortName}</LocationName>
+          <LocationName>{locationLabel}</LocationName>
           {zipCodeInput && <Zipcode>contains zipcode {zipCodeInput}</Zipcode>}
           <div>
             <span>{ShortNumber(region.population)} residents</span>
