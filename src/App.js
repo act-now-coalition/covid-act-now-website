@@ -43,6 +43,9 @@ const Tools = lazy(() => import('screens/Tools/Tools'));
 const Terms = lazy(() => import('screens/Terms/Terms'));
 const Privacy = lazy(() => import('screens/Terms/Privacy'));
 const Donate = lazy(() => import('screens/Donate/Donate'));
+const DeepDivesRedirect = lazy(() =>
+  import('screens/Learn/Articles/DeepDivesRouter'),
+);
 
 export default function App() {
   return (
@@ -162,7 +165,7 @@ export default function App() {
                     component={ProductUpdates}
                   />
                   {/* TODO(pablo): Route every article */}
-                  <Redirect from="/deep-dives" to="/covid-explained" />
+                  <Route from="/deep-dives" component={DeepDivesRedirect} />
                   <Route
                     path="/covid-risk-levels-metrics"
                     component={MetricExplainer}
