@@ -9,10 +9,10 @@ const HIGH_NAME = 'Critical';
 const SUPER_CRITICAL_NAME = 'Severe';
 const UNKNOWN = 'Unknown';
 
-const LEGEND_SUMMARY_LOW = 'On track to contain COVID';
+const LEGEND_SUMMARY_LOW = 'On track for containment';
 const LEGEND_SUMMARY_MEDIUM = 'Slow disease growth';
 const LEGEND_SUMMARY_MEDIUM_HIGH = 'At risk of outbreak';
-const LEGEND_SUMMARY_HIGH = 'Active or imminent outbreak';
+const LEGEND_SUMMARY_HIGH = 'Active outbreak';
 const LEGEND_SUMMARY_SUPER_CRITICAL = 'Severe outbreak';
 
 export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
