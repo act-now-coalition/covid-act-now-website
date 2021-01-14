@@ -179,6 +179,10 @@ export const learnPages: TocItem[] = [
     })),
   },
   {
+    label: 'COVID explained',
+    to: '/covid-explained',
+  },
+  {
     // TODO(pablo): Hardcoding the title to avoid importing the glossary content
     label: 'Glossary',
     to: '/glossary',
@@ -190,10 +194,6 @@ export const learnPages: TocItem[] = [
       to: `/faq#${section.sectionId}`,
       label: section.sectionTitle,
     })),
-  },
-  {
-    label: 'Deep dives',
-    to: '/deep-dives',
   },
   {
     label: caseStudiesContent.header,

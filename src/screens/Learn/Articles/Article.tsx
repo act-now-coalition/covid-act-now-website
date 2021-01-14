@@ -36,7 +36,7 @@ const Article = () => {
   };
 
   const shareButtonProps = {
-    shareUrl: `https://covidactnow.org/deep-dives/${articleId}`,
+    shareUrl: `https://covidactnow.org/covid-explained/${articleId}`,
     shareQuote: 'stand-in-copy', // TODO (Chelsi): input copy
     onCopyLink: trackCopyLink,
     onShareOnFacebook: trackShareFacebook,
@@ -50,13 +50,15 @@ const Article = () => {
   return (
     <Fragment>
       <AppMetaTags
-        canonicalUrl={`/deep-dives/${articleId}`}
+        canonicalUrl={`/covid-explained/${articleId}`}
         pageTitle={`${header}`}
         pageDescription={`${metatagDate} ${summary}`}
       />
       <PageContent sidebarItems={learnPages}>
         <BreadcrumbsContainer>
-          <Breadcrumbs item={{ to: '/deep-dives', label: 'Deep dives' }} />
+          <Breadcrumbs
+            item={{ to: '/covid-explained', label: 'COVID explained' }}
+          />
         </BreadcrumbsContainer>
         <LearnHeading1>{header}</LearnHeading1>
         <SmallSubtext source={`Published ${date}`} />

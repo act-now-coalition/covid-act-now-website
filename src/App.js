@@ -155,7 +155,8 @@ export default function App() {
                   <Route exact path="/faq" component={Faq} />
                   <Route exact path="/glossary" component={Glossary} />
                   <Route path="/case-studies" component={CaseStudies} />
-                  <Route path="/deep-dives" component={Articles} />
+                  <Route path="/covid-explained" component={Articles} />
+                  <Redirect from="/deep-dives" to="/covid-explained" />
                   <Route
                     path="/covid-risk-levels-metrics"
                     component={MetricExplainer}
