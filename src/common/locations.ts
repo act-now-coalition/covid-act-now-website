@@ -125,11 +125,6 @@ export function findStateFipsCode(stateCode: string): string {
   return fips;
 }
 
-export function getAdjacentCounties(fips: string): string[] {
-  assert(fips in ADJACENT_COUNTIES, `${fips} not found in adjacency list.`);
-  return ADJACENT_COUNTIES[fips].adjacent_counties;
-}
-
 export function getCountyMsaCode(fips: string): string | undefined {
   if (has(ADJACENT_COUNTIES, fips)) {
     return ADJACENT_COUNTIES[fips].msa_code;

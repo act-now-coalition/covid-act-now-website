@@ -44,7 +44,7 @@ const CompareTable = (props: {
   locationsViewable?: number;
   isHomepage?: boolean;
   locations: SummaryForCompare[];
-  currentCounty?: any;
+  currentCounty: any | null;
   viewMoreCopy?: string;
   setCountyTypeToView: React.Dispatch<React.SetStateAction<MetroFilter>>;
   countyTypeToView: MetroFilter;
