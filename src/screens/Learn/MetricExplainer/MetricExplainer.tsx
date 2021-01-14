@@ -19,6 +19,7 @@ import { useScrollToTopButton } from 'common/hooks';
 import ScrollToTopButton from 'components/SharedComponents/ScrollToTopButton';
 import { EventCategory } from 'components/Analytics';
 import GovLogoGrid from 'screens/About/GovLogoGrid';
+import Footer from 'screens/Learn/Footer/Footer';
 
 const MetricExplainer = () => {
   const {
@@ -86,6 +87,7 @@ const MetricExplainer = () => {
             ))}
           </Fragment>
         ))}
+        <Footer />
         <ScrollToTopButton
           showButton={showScrollToTopButton}
           analyticsCategory={EventCategory.METRIC_EXPLAINERS}

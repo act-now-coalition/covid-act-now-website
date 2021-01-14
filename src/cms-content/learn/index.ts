@@ -10,6 +10,7 @@ import {
 import faq from './learn-faq.json';
 import caseStudies from './learn-case-studies.json';
 import metricExplainers from './metric-explainers.json';
+import footer from './footer.json';
 import { sanitizeID, Markdown, TocItem } from '../utils';
 
 /*
@@ -167,6 +168,16 @@ export const [introSection, metricSections] = partition(
   metricExplainersContent.sections,
   section => section.sectionId === 'how-covid-risk-is-determined',
 );
+
+/**
+ * Footer:
+ **/
+
+interface Footer {
+  body: Markdown;
+}
+
+export const footerContent = footer as Footer;
 
 // TODO (pablo): Should we have a short heading for categories?
 export const learnPages: TocItem[] = [

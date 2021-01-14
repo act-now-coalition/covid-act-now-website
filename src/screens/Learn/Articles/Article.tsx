@@ -14,6 +14,7 @@ import {
 import { articlesById } from 'cms-content/articles';
 import SmallShareButtons from 'components/SmallShareButtons';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
+import Footer from 'screens/Learn/Footer/Footer';
 
 const Article = () => {
   let { articleId } = useParams<{ articleId: string }>();
@@ -64,6 +65,7 @@ const Article = () => {
         <SmallSubtext source={`Published ${date}`} />
         <SmallShareButtons {...shareButtonProps} />
         <MarkdownContent source={body} />
+        <Footer />
         <SmallShareButtons {...shareButtonProps} />
       </PageContent>
     </Fragment>
