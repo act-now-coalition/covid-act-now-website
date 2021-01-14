@@ -3,8 +3,9 @@ import { Autocomplete } from '@material-ui/lab';
 import { createFilterOptions } from '@material-ui/lab/useAutocomplete';
 import TextField from '@material-ui/core/TextField';
 import { Region, County, MetroArea } from 'common/regions';
-import MenuItem from './MenuItem';
+import MenuItem, { getOptionLabel } from './MenuItem';
 import { StyledPaper } from './Search.style';
+import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 
 function getOptionSelected(option: Region, selectedOption: Region) {
   return option.fipsCode === selectedOption.fipsCode;
@@ -42,7 +43,12 @@ const SearchAutocomplete: React.FC<{
     }
   };
 
-  const onSelect = (e: any, value: Region) => {
+  const onSelect = (e: React.ChangeEvent<{}>, value: Region) => {
+    trackEvent(
+      EventCategory.SEARCH,
+      EventAction.NAVIGATE,
+      `Selected: ${value.relativeUrl} (${input})`,
+    );
     window.location.href = value.relativeUrl;
   };
 
@@ -73,8 +79,10 @@ const SearchAutocomplete: React.FC<{
       renderOption={option => {
         return <MenuItem region={option} zipCodeInput={zipCodeInput} />;
       }}
+      getOptionLabel={getOptionLabel}
       openOnFocus
       onOpen={() => {
+        trackEvent(EventCategory.SEARCH, EventAction.FOCUS, 'Search Focused');
         if (setHideMapToggle) {
           setHideMapToggle(true);
         }
