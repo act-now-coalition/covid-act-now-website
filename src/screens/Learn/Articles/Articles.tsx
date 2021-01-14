@@ -1,18 +1,8 @@
 import React from 'react';
-import { Switch, Route, useRouteMatch } from 'react-router-dom';
-// import ArticlesLanding from './ArticlesLanding';
-// import Article from './Article';
 
+// TODO: Remove this component
 const Articles: React.FC = () => {
-  let { path } = useRouteMatch();
-  return (
-    <Switch>
-      <Route exact path={path}>
-        {/* <ArticlesLanding /> */}
-      </Route>
-      <Route path={`${path}/:articleId`}>{/* <Article /> */}</Route>
-    </Switch>
-  );
+  return null;
 };
 
 export default Articles;
