@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import { formatMetatagDate } from 'common/utils';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import Breadcrumbs from 'components/Breadcrumbs';
@@ -11,54 +11,47 @@ import {
   BreadcrumbsContainer,
   SmallSubtext,
 } from '../Learn.style';
-import { articlesById } from 'cms-content/articles';
+import { Article } from 'cms-content/articles/utils';
 import SmallShareButtons from 'components/SmallShareButtons';
-import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 
-const Article = () => {
-  let { articleId } = useParams<{ articleId: string }>();
+const ArticlePage: React.FC<{
+  article: Article;
+  onCopyLink: () => void;
+  onShareOnFacebook: () => void;
+  onShareOnTwitter: () => void;
+  shareQuote: string;
+  canonicalUrl: string;
+  parentItem: { to: string; label: string };
+}> = ({
+  article,
+  canonicalUrl,
+  onCopyLink,
+  onShareOnFacebook,
+  onShareOnTwitter,
+  shareQuote,
+  parentItem,
+}) => {
   const metatagDate = formatMetatagDate();
-  const articleContent = articlesById[articleId];
-  const { header, body, date, summary } = articleContent;
-
-  const trackShareFacebook = () =>
-    trackEvent(EventCategory.ARTICLES, EventAction.SHARE, 'facebook');
-
-  const trackShareTwitter = () =>
-    trackEvent(EventCategory.ARTICLES, EventAction.SHARE, 'twitter');
-
-  const trackCopyLink = () => {
-    trackEvent(
-      EventCategory.ARTICLES,
-      EventAction.COPY_LINK,
-      'recommendations',
-    );
-  };
+  const { header, body, date, summary } = article;
 
   const shareButtonProps = {
-    shareUrl: `https://covidactnow.org/covid-explained/${articleId}`,
-    shareQuote: 'stand-in-copy', // TODO (Chelsi): input copy
-    onCopyLink: trackCopyLink,
-    onShareOnFacebook: trackShareFacebook,
-    onShareOnTwitter: trackShareTwitter,
+    shareUrl: canonicalUrl,
+    shareQuote,
+    onCopyLink,
+    onShareOnFacebook,
+    onShareOnTwitter,
   };
-
-  if (!articleContent) {
-    return null;
-  }
 
   return (
     <Fragment>
       <AppMetaTags
-        canonicalUrl={`/covid-explained/${articleId}`}
+        canonicalUrl={canonicalUrl}
         pageTitle={`${header}`}
         pageDescription={`${metatagDate} ${summary}`}
       />
       <PageContent sidebarItems={learnPages}>
         <BreadcrumbsContainer>
-          <Breadcrumbs
-            item={{ to: '/covid-explained', label: 'COVID explained' }}
-          />
+          <Breadcrumbs item={parentItem} />
         </BreadcrumbsContainer>
         <LearnHeading1>{header}</LearnHeading1>
         <SmallSubtext source={`Published ${date}`} />
@@ -70,4 +63,4 @@ const Article = () => {
   );
 };
 
-export default Article;
+export default ArticlePage;
