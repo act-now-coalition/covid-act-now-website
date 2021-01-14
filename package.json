@@ -60,6 +60,7 @@
     "react-ga": "^3.1.2",
     "react-helmet": "^5.2.1",
     "react-markdown": "^4.3.1",
+    "react-optimize": "^2.4.0",
     "react-router-dom": "^5.1.2",
     "react-router-hash-link": "^2.2.2",
     "react-scripts": "3.4.0",

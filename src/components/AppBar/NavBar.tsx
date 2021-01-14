@@ -4,7 +4,7 @@ import Logo from 'assets/images/logo';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import * as Style from './NavBar.style';
 import MobileMenu from './MobileMenu';
-import { DonateButtonWithoutFade } from './DonateButton';
+import { DonateButton } from './DonateButton';
 import { useIsEmbed } from 'common/utils/hooks';
 
 const isLocationPage = (pathname: string) => pathname.includes('/us');
@@ -70,11 +70,11 @@ const NavBar: React.FC = () => {
           <Style.NavLink to="/contact" key="contact">
             Contact Us
           </Style.NavLink>
-          <DonateButtonWithoutFade />
+          <DonateButton />
         </Style.DesktopOnly>
         <Style.MobileOnly>
           <Style.StyledMobileMenu>
-            <DonateButtonWithoutFade />
+            <DonateButton />
             <Style.IconButton
               onClick={() => setMenuOpen(!isMenuOpen)}
               edge="end"
