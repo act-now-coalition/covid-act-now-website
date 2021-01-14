@@ -142,7 +142,11 @@ export const MarkdownLink = styled.a.attrs(props => ({
  * Styles used by custome renderers
  */
 
-export const Caption = styled(Paragraph)`
+export const StyledFigure = styled.figure`
+  margin: 0;
+`;
+
+export const Caption = styled.figcaption`
   font-style: italic;
   margin-bottom: 1.5rem;
 `;

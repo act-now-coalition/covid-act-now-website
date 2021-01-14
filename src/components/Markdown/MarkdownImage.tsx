@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
-import { Caption } from './Markdown.style';
+import React from 'react';
+import { Caption, StyledFigure } from './Markdown.style';
 
 /**
  * Custom image component for Markdown content.
@@ -16,10 +16,10 @@ const MarkdownImage: React.FC<{
   const showTitle = title !== 'none';
 
   return (
-    <Fragment>
+    <StyledFigure>
       <img src={src} alt={alt} />
       {showTitle && <Caption>{title}</Caption>}
-    </Fragment>
+    </StyledFigure>
   );
 };
 
