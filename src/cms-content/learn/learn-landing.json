@@ -14,7 +14,7 @@
     {
       "sectionTitle": "Glossary",
       "sectionId": "glossary",
-      "description": "R₀ vs R(t) vs Infection rate. Here is a simple glossary of COVID-related terms.",
+      "description": "R₀ vs R(t) vs Infection rate. Here you can find clear definitions of the vocabulary being used to talk about COVID.",
       "buttonCta": "View glossary",
       "buttonRedirect": "/glossary"
     },
@@ -35,7 +35,7 @@
     {
       "sectionTitle": "Case studies",
       "sectionId": "case-studies",
-      "description": "Learn about how leaders in industry, public health, and government are using Covid Act Now’s data and tools to make better decisions to combat COVID.",
+      "description": "Learn about how leaders in industry, public health, and government are using Covid Act Now’s data and tools in their strategic and day-to-day response to the pandemic to make better decisions to combat COVID.",
       "buttonCta": "View case studies",
       "buttonRedirect": "/case-studies"
     }
