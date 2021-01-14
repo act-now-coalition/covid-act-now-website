@@ -55,7 +55,7 @@ const MetricExplainer = () => {
           <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>
         <LearnHeading1>{pageHeader}</LearnHeading1>
-        <MarkdownContent source={pageIntro} />
+        {pageIntro && <MarkdownContent source={pageIntro} />}
         <MobileOnly>
           <TableOfContents items={getSectionItems(sections)} />
         </MobileOnly>

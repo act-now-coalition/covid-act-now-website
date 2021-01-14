@@ -29,7 +29,7 @@ export interface FaqSection {
 
 export interface FaqContent {
   header: string;
-  intro: Markdown;
+  intro?: Markdown;
   lastUpdatedDate: string;
   sections: FaqSection[];
   metadataTitle: string;
@@ -77,7 +77,7 @@ export interface CaseStudyCategory {
 
 export interface CaseStudiesContent {
   header: string;
-  intro: Markdown;
+  intro?: Markdown;
   categories: CaseStudyCategory[];
   metadataTitle: string;
   metadataDescription: string;
@@ -155,7 +155,7 @@ interface LogoItem {
 
 export interface MetricExplainersContent {
   pageHeader: string;
-  pageIntro: string;
+  pageIntro?: string;
   sections: Section[];
   frameworkLogos: LogoItem[];
   metadataTitle: string;
