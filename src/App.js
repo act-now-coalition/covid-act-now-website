@@ -160,10 +160,7 @@ export default function App() {
                   <Route exact path="/glossary" component={Glossary} />
                   <Route path="/case-studies" component={CaseStudies} />
                   <Route path="/covid-explained" component={Explained} />
-                  <Route
-                    path="/covid-act-now-updates"
-                    component={ProductUpdates}
-                  />
+                  <Route path="/updates" component={ProductUpdates} />
                   {/* TODO(pablo): Route every article */}
                   <Route from="/deep-dives" component={DeepDivesRedirect} />
                   <Route

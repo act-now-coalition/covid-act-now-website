@@ -10,7 +10,7 @@ const DeepDivesRedirect: React.FC = () => {
         <Redirect
           exact
           from={`/deep-dives/${articleID}`}
-          to={`/covid-act-now-updates/${articleID}`}
+          to={`/updates/${articleID}`}
         />
       ))}
       {explainedArticles.map(({ articleID }) => (
