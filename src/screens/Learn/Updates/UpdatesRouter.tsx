@@ -39,7 +39,7 @@ const UpdatesRouter: React.FC = () => {
               shareQuote={shareQuote}
               canonicalUrl={urlJoin('https://covidactnow.org/', relativeUrl)}
               parentItem={{
-                to: '/covid-act-now-updates',
+                to: '/updates',
                 label: 'Covid Act Now updates',
               }}
             />
@@ -48,7 +48,7 @@ const UpdatesRouter: React.FC = () => {
       })}
       {/* Redirect bad URLs to the updates landing page */}
       <Route path="/*">
-        <Redirect to="/covid-act-now-updates" />
+        <Redirect to="/updates" />
       </Route>
     </Switch>
   );
