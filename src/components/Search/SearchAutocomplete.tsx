@@ -47,7 +47,7 @@ const SearchAutocomplete: React.FC<{
     trackEvent(
       EventCategory.SEARCH,
       EventAction.NAVIGATE,
-      `Selected: ${value.relativeUrl} (${input})`,
+      `Selected: ${value.fullName} (${input})`,
     );
     window.location.href = value.relativeUrl;
   };
