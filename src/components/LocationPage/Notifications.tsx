@@ -114,7 +114,8 @@ const NYCAggregationChangeCopy: React.FC<{ locationName: string }> = ({
 const ThirdWaveCopy = () => {
   return (
     <Copy isUpdateCopy>
-      {BANNER_COPY} <Link to={'/deep-dives/us-third-wave'}>Learn more</Link>.
+      {BANNER_COPY}{' '}
+      <Link to={'/covid-explained/us-third-wave'}>Learn more</Link>.
     </Copy>
   );
 };

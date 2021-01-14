@@ -12,6 +12,13 @@
       "buttonRedirect": "/covid-risk-levels-metrics"
     },
     {
+      "sectionTitle": "COVID explained",
+      "sectionId": "covid-explained",
+      "buttonCta": "View COVID explained",
+      "buttonRedirect": "/covid-explained",
+      "description": "This section offers a deeper analysis of how, why, and where COVID is spreading. Our editors and guest authors dig into the details of what COVID means for people – particularly the least advantaged in society – and the impact policies have in protecting them."
+    },
+    {
       "sectionTitle": "Glossary",
       "sectionId": "glossary",
       "description": "R₀ vs R(t) vs Infection rate. Here is a simple glossary of COVID-related terms.",
@@ -24,13 +31,6 @@
       "description": "\"Who is most at risk of getting COVID?\" to \"how soon after possible exposure to COVID should I get tested?\" Here are answers to some of the top COVID questions.",
       "buttonCta": "View FAQ",
       "buttonRedirect": "/faq"
-    },
-    {
-      "sectionTitle": "Deep dives",
-      "sectionId": "deep-dives",
-      "buttonCta": "View deep dives",
-      "buttonRedirect": "/deep-dives",
-      "description": "This section offers a deeper analysis of how, why, and where COVID is spreading. Our editors and guest authors dig into the details of what COVID means for people – particularly the least advantaged in society – and the impact policies have in protecting them."
     },
     {
       "sectionTitle": "Case studies",

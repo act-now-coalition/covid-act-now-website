@@ -15,7 +15,7 @@ export function getLearnPageItems(): SitemapItemLoose[] {
     '/glossary',
     '/faq',
     '/case-studies',
-    '/deep-dives',
+    '/covid-explained',
     '/covid-risk-levels-metrics',
   ];
 
@@ -23,14 +23,14 @@ export function getLearnPageItems(): SitemapItemLoose[] {
     urlJoin('/case-studies', caseStudy.caseStudyId),
   );
 
-  const deepDiveUrls = articles.map(article =>
-    urlJoin('/deep-dives', article.articleID),
+  const covidExplainedUrls = articles.map(article =>
+    urlJoin('/covid-explained', article.articleID),
   );
 
   const allLearnUrls = concat(
     topLevelRelativeUrls,
     caseStudyUrls,
-    deepDiveUrls,
+    covidExplainedUrls,
   );
 
   return allLearnUrls.map(createSitemapItem);

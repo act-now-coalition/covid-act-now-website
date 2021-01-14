@@ -19,15 +19,15 @@ const ArticlesLanding = () => {
   return (
     <Fragment>
       <AppMetaTags
-        canonicalUrl="/deep-dives"
-        pageTitle="COVID-19 Deep Dives"
+        canonicalUrl="/covid-explained"
+        pageTitle="COVID-19 Explained"
         pageDescription={`${date} Explore deeper analysis about how, why, and where COVID is spreading.`}
       />
       <PageContent sidebarItems={learnPages}>
         <BreadcrumbsContainer>
           <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>
-        <LearnHeading1>Deep dives</LearnHeading1>
+        <LearnHeading1>COVID explained</LearnHeading1>
         {articles.map((article: Article) => {
           return (
             <Fragment key={article.articleID}>
