@@ -5,7 +5,7 @@
     {
       "term": "Antibodies",
       "termId": "antibodies",
-      "definition": "Antibodies are proteins produced by the immune system to protect against foreign substances, such as viruses and bacteria. You may have heard a lot about antibodies in the news, because they can indicate whether someone has been infected with COVID. When a person is infected with a [pathogen](#pathogen) such as SARS-CoV-2, the virus responsible for COVID, their body produces antibodies to help eliminate it. \n\n[Serology blood tests](#serology-test) look for antibodies to determine whether someone has been infected with COVID in the past. Serology tests are not very useful in detecting current cases of COVID, because it can take one to three weeks for the body to make antibodies after being infected. [It is still unknown](https://www.cdc.gov/coronavirus/2019-ncov/lab/resources/antibody-tests-guidelines.html) whether people with antibodies are protected from reinfection.",
+      "definition": "Antibodies are large proteins created by the immune system in response to foreign substances, such as viruses and bacteria. Once produced, antibodies bind to these foreign substances and either neutralize the threat directly or help other cells destroy it. When a person is infected with a [pathogen](https://covidactnow.org/glossary#pathogen) such as SARS-CoV-2, the virus responsible for COVID, their body produces antibodies to help eliminate it. If an infected person has formed antibodies for a particular disease, the immune system “remembers” the disease and can quickly produce those antibodies if reinfected. \n\nYou may have heard a lot about antibodies in the news because they indicate whether someone has been infected with COVID.[Serology blood tests](https://covidactnow.org/glossary#serology-test) look for antibodies and can determine whether someone has been infected with COVID in the past. These tests are not useful in determining current COVID cases because it can take one to three weeks for the body to make antibodies after being infected. \n\n[It is still unclear](https://www.cdc.gov/coronavirus/2019-ncov/lab/resources/antibody-tests-guidelines.html) whether people with COVID antibodies are protected from reinfection.",
       "category": "Health and symptoms"
     },
     {
@@ -203,7 +203,7 @@
     {
       "term": "Immunity",
       "termId": "immunity",
-      "definition": "Immunity refers to the state of being able to resist a particular disease. It also refers to your body's ability to protect against foreign [pathogens](#pathogen) or substances. Immunity can often be achieved either through a [vaccination](#vaccine) or [exposure](#exposed) to the disease. \n\nWhen a large portion of a community (the herd) becomes immune to a disease, the spread of disease from person to person becomes unlikely. This phenomenon is called [herd immunity](#herd-immunity). It would be difficult to achieve herd immunity for COVID without a vaccine, since it is [still unknown](https://www.cdc.gov/coronavirus/2019-ncov/lab/resources/antibody-tests-guidelines.html) whether COVID antibodies protect people from reinfection. There have been documented cases in which people were infected with COVID more than once, though rare.",
+      "definition": "Immunity refers to the state of being able to resist a particular disease. It also refers to your body's ability to protect against foreign [pathogens](https://covidactnow.org/glossary#pathogen) or substances. After being ill and recovering, you may develop natural immunity. Natural immunity occurs when your body produces [antibodies]([#antibodies]) against a virus, usually preventing you from contracting the virus again. Immunity can often be achieved either through a [vaccination](https://covidactnow.org/glossary#vaccine) or [exposure](https://covidactnow.org/glossary#exposed) to the disease.\n\nWhen a large portion of a community (the herd) becomes immune to a disease, the spread of disease from person to person becomes unlikely. This phenomenon is called [herd immunity](https://covidactnow.org/glossary#herd-immunity). It would be difficult to achieve herd immunity for COVID without a vaccine, since [it is still unclear](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/facts.html?CDC_AA_refVal=https%3A%2F%2Fwww.cdc.gov%2Fcoronavirus%2F2019-ncov%2Fvaccines%2Fvaccine-benefits%2Ffacts.html) whether COVID antibodies protect people from reinfection. There have been documented cases in which people were infected with COVID more than once, though rare.",
       "category": "Health and symptoms"
     },
     {
@@ -235,6 +235,12 @@
       "termId": "infection-rate",
       "definition": "Infection rate is the estimated number of new people each COVID-positive person will infect. Also known as “[R(t)](#rt),” the infection rate tells us how fast COVID is spreading in a specific area, at a specific time. For example, an infection growth rate of 3 means that one case of COVID would produce three new secondary cases.\n\nThis value can change over time, depending on behavior and interventions within a community. Infection rate is different from the total number of cases because a place with a smaller population and few total cases can still have a very high infection rate, meaning that one person could go on to infect many people. \n\nThe higher the R(t) is in a given place, the faster COVID is spreading there; an R(t) above 1 means that the number of cases is growing, while an R(t) below 1 means that cases are shrinking. Covid Act Now uses R(t), or infection rate, as one of its main [metrics for COVID risk assessment](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases).",
       "category": "Metrics"
+    },
+    {
+      "term": "Infectious",
+      "termId": "infectious",
+      "definition": "A person is infectious if they are contagious — that is, easily capable of spreading a disease through contact with other people. Diseases also can be referred to as infectious, which simply means that they are caused by foreign substances (usually viruses and bacteria) invading the body.",
+      "category": "Disease science"
     },
     {
       "term": "Isolation",
@@ -317,7 +323,7 @@
     {
       "term": "Presymptomatic spread",
       "termId": "presymptomatic-spread",
-      "definition": "Presymptomatic spread refers to the [transmission](#transmission) of a [virus](#virus) by someone who initially has no symptoms, but who will eventually develop symptoms. \n\nCOVID presymptomatic spread from an infected person happens during the [incubation period](#incubation-period), the time between infection and the symptoms. For COVID, the incubation period is estimated to be between two and 14 days, but on average about [five days](https://www.cdc.gov/coronavirus/2019-ncov/hcp/clinical-guidance-management-patients.html) after exposure. \n\n[Exposed](#exposed) people are encouraged to [quarantine](#quarantine) for the entire maximum incubation period of 14 days, as an infected person can unknowingly spread COVID despite not feeling symptoms. \n\nPresymptomatic spread makes it critical to have a robust [contact tracing](#contact-tracing) system, in order to identify exposed people and encourage them to quarantine for 14 days or while awaiting test results.",
+      "definition": "Presymptomatic spread refers to the [transmission](https://covidactnow.org/glossary#transmission) of a [virus](https://covidactnow.org/glossary#virus) by someone who has not yet developed symptoms but eventually will have symptoms.\n\nCOVID presymptomatic spread happens during the [incubation period](https://covidactnow.org/glossary#incubation-period), the time between infection and the symptoms. After exposure to COVID, symptoms take an average of [four to five](https://www.cdc.gov/coronavirus/2019-ncov/hcp/clinical-guidance-management-patients.html) days to appear, but can take up to 14 days. Exposed people are encouraged to quarantine for the entire maximum incubation period of 14 days, as an infected person can unknowingly spread COVID despite not feeling symptoms. \n\nPresymptomatic spread makes it critical to have a robust [contact tracing](https://covidactnow.org/glossary#contact-tracing) system, in order to identify exposed people and encourage them to quarantine for 14 days or while awaiting test results.",
       "category": "Transmission"
     },
     {
@@ -429,6 +435,12 @@
       "category": "Disease science"
     },
     {
+      "term": "Symptomatic",
+      "termId": "symptomatic",
+      "definition": "Someone who is symptomatic has some of the physical signs of COVID. These can range from mild to severe, and can include a fever, fatigue, chills, muscle pain, headache, sore throat, dry cough, loss of sense of smell or taste, and difficulty breathing. Symptoms typically take an average of five to six days to appear, although it can take up to 14 days.",
+      "category": "Health and symptoms"
+    },
+    {
       "term": "Testing",
       "termId": "testing",
       "definition": "Testing is a simple way to check if you are currently infected with [SARS-CoV-2](#sars-cov-2), the virus that causes COVID. \n\n* The most common test, a [PCR test](#pcr-test), requires taking a swab from your nose or throat and having a medical professional determine if you are currently infected with the virus.\n* [Antigen tests](#antigen-test) also look for active COVID infections using the same technology as the rapid strep test you would take at your doctor’s office. Antigen tests are less accurate than PCR tests, but they have a very quick result turn around of about 15 minutes. \n* The other type of test you might have heard of is an [antibody test](#antibody-test), also known as a [serology test](#serology-test). An antibody test looks for [antibodies](#antibodies) against COVID to determine if someone has been infected in the past, regardless of whether or not they presented with symptoms. \n\nWidespread testing for active COVID infections, in conjunction with [contact tracing](#contact-tracing), is vital to slow the transmission of COVID without a vaccine. Testing allows us to identify and trace COVID cases, and encourage [exposed](#exposed) people to [quarantine](#quarantine).",
@@ -457,6 +469,18 @@
       "termId": "ventilator",
       "definition": "A ventilator is a machine that helps patients breathe when they cannot do so on their own.\n\n* People whose lungs are severely damaged by COVID may use a ventilator because they cannot get enough oxygen on their own.\n* While ventilators allow lungs to heal, they are not in and of themselves a treatment.\n\n[Intensive care unit](#icu-capacity) (ICU) beds are equipped with ventilators, which may save the lives of the sickest COVID patients.",
       "category": "Treatment"
+    },
+    {
+      "term": "Viral load",
+      "termId": "viral-load",
+      "definition": "Viral load is a measurement of virus particles in a unit of blood. It is measured once a person has been infected and the virus has had time to replicate in their cells. COVID patients with a higher viral load may experience more severe symptoms and may also [shed ]([viral-shedding])more whole viruses.",
+      "category": "Disease science"
+    },
+    {
+      "term": "Viral shedding",
+      "termId": "viral-shedding",
+      "definition": "Viral shedding, simply put, is a measure of contagiousness. Viruses operate by invading the body’s cells and taking over their functions to reproduce. Viral shedding occurs when these new virus cells are released into the environment. Infected individuals, even those who are asymptomatic or [presymptomatic]([presymptomatic]), may shed viral particles when they talk, exhale, eat, and perform daily activities.",
+      "category": "Disease science"
     },
     {
       "term": "Virus",
