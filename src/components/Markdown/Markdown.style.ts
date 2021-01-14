@@ -137,3 +137,12 @@ export const MarkdownLink = styled.a.attrs(props => ({
   rel: 'noopener noreferrer',
   target: '_blank',
 }))``;
+
+/**
+ * Styles used by custome renderers
+ */
+
+export const Caption = styled(Paragraph)`
+  font-style: italic;
+  margin-bottom: 1.5rem;
+`;
