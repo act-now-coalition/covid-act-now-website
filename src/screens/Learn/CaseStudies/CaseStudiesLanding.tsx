@@ -1,4 +1,8 @@
 import React, { Fragment } from 'react';
+import { useRouteMatch } from 'react-router-dom';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import Breadcrumbs from 'components/Breadcrumbs';
 import PageContent, { MobileOnly } from 'components/PageContent';
@@ -10,22 +14,28 @@ import {
   CaseStudyCategory,
   categoriesWithStudies,
 } from 'cms-content/learn';
+import CaseStudyCard from './CaseStudyCard';
 import { BreadcrumbsContainer, LearnHeading1 } from '../Learn.style';
 import { CardsContainer } from './CaseStudy.style';
 import TableOfContents, { Item } from 'components/TableOfContents';
-import LandingPageCard from '../SharedComponents/LandingPageCard';
 
 const {
   header,
   intro,
+  categories,
   metadataTitle,
   metadataDescription,
 } = caseStudiesContent;
 
 const Landing: React.FC = () => {
+  let { url } = useRouteMatch();
   const date = formatMetatagDate();
 
-  function getSectionItems(): Item[] {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const cardGridSpacing = isMobile ? 2 : 3;
+
+  function getSectionItems(categories: CaseStudyCategory[]): Item[] {
     return categoriesWithStudies.map(category => ({
       id: category.categoryId,
       title: category.header,
@@ -46,28 +56,32 @@ const Landing: React.FC = () => {
         <LearnHeading1>{header}</LearnHeading1>
         <MarkdownContent source={intro} />
         <MobileOnly>
-          <TableOfContents items={getSectionItems()} />
+          <TableOfContents items={getSectionItems(categories)} />
         </MobileOnly>
         {categoriesWithStudies.map((category: CaseStudyCategory) => {
           const caseStudies = category.caseStudies || [];
           return (
             <Fragment key={category.categoryId}>
               <Heading2 id={category.categoryId}>{category.header}</Heading2>
-              <CardsContainer spacing={2}>
-                {caseStudies.map(caseStudy => {
-                  const cardProps = {
-                    id: caseStudy.caseStudyId,
-                    title: caseStudy.shortTitle,
-                    summary: caseStudy.summary,
-                    logoUrl: caseStudy.logoUrl,
-                    logoAltText: caseStudy.logoAltText,
-                  };
-                  return (
+              <CardsContainer spacing={cardGridSpacing}>
+                {caseStudies.map(
+                  caseStudy =>
                     caseStudy.showCaseStudy && (
-                      <LandingPageCard {...cardProps} />
-                    )
-                  );
-                })}
+                      <Grid
+                        container
+                        item
+                        xs={12}
+                        sm={6}
+                        key={caseStudy.caseStudyId}
+                      >
+                        <CaseStudyCard
+                          key={caseStudy.caseStudyId}
+                          cardContent={caseStudy}
+                          url={url}
+                        />
+                      </Grid>
+                    ),
+                )}
               </CardsContainer>
             </Fragment>
           );

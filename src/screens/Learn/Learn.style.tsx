@@ -95,7 +95,7 @@ export const StyledLink = styled(Link)`
   color: black;
 `;
 
-/* These styles are used for the cards on CE landing + case studies landing: */
+/* These styles are used for the cards on CE landing (and eventually case studies landing): */
 
 export const ArrowIcon = styled(ArrowForwardIosIcon)`
   color: ${COLOR_MAP.GRAY_ICON};

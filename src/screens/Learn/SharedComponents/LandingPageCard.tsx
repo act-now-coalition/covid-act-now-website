@@ -13,13 +13,14 @@ const LandingPageCard: React.FC<{
   id: string;
   title: string;
   summary: string;
+  url: string;
   logoUrl?: string;
   logoAltText?: string;
   borderTop?: boolean;
-}> = ({ id, title, summary, logoUrl, logoAltText, borderTop }) => {
+}> = ({ id, title, summary, logoUrl, logoAltText, borderTop, url }) => {
   return (
     <StyledCard borderTop={borderTop}>
-      <StyledLink to={`/covid-explained/${id}`}>
+      <StyledLink to={`${url}/${id}`}>
         <StyledCardContent>
           <CopyContainer>
             {logoUrl && logoAltText && (

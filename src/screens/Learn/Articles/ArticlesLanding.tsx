@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
+import { useRouteMatch } from 'react-router-dom';
 import Breadcrumbs from 'components/Breadcrumbs';
 import PageContent from 'components/PageContent';
 import { formatMetatagDate } from 'common/utils';
@@ -11,6 +12,7 @@ import LandingPageCard from '../SharedComponents/LandingPageCard';
 
 const ArticlesLanding = () => {
   const date = formatMetatagDate();
+  let { url } = useRouteMatch();
 
   return (
     <Fragment>
@@ -31,6 +33,7 @@ const ArticlesLanding = () => {
               title: article.header,
               summary: article.summary,
               borderTop: true,
+              url,
             };
             return <LandingPageCard key={article.articleID} {...cardProps} />;
           })}
