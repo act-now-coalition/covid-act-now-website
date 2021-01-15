@@ -10,6 +10,7 @@ import {
 import faq from './learn-faq.json';
 import caseStudies from './learn-case-studies.json';
 import metricExplainers from './metric-explainers.json';
+import footer from './footer.json';
 import { sanitizeID, Markdown, TocItem } from '../utils';
 
 /*
@@ -168,6 +169,16 @@ export const [introSection, metricSections] = partition(
   section => section.sectionId === 'how-covid-risk-is-determined',
 );
 
+/**
+ * Footer:
+ **/
+
+interface Footer {
+  body: Markdown;
+}
+
+export const footerContent = footer as Footer;
+
 // TODO (pablo): Should we have a short heading for categories?
 export const learnPages: TocItem[] = [
   {
@@ -177,6 +188,10 @@ export const learnPages: TocItem[] = [
       to: `/covid-risk-levels-metrics#${section.sectionId}`,
       label: section.sectionHeader,
     })),
+  },
+  {
+    label: 'COVID explained',
+    to: '/covid-explained',
   },
   {
     // TODO(pablo): Hardcoding the title to avoid importing the glossary content
@@ -192,15 +207,15 @@ export const learnPages: TocItem[] = [
     })),
   },
   {
-    label: 'Deep dives',
-    to: '/deep-dives',
-  },
-  {
     label: caseStudiesContent.header,
     to: '/case-studies',
     items: categoriesWithStudies.map(category => ({
       to: `/case-studies#${category.categoryId}`,
       label: category.header,
     })),
+  },
+  {
+    label: 'Covid Act Now updates',
+    to: '/updates',
   },
 ];
