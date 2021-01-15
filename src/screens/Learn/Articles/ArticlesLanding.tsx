@@ -3,29 +3,33 @@ import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import { useRouteMatch } from 'react-router-dom';
 import Breadcrumbs from 'components/Breadcrumbs';
 import PageContent from 'components/PageContent';
-import { formatMetatagDate } from 'common/utils';
 import { learnPages } from 'cms-content/learn';
 import { BreadcrumbsContainer, LearnHeading1 } from '../Learn.style';
-import articles, { Article } from 'cms-content/articles';
 import { CardsContainer } from '../Learn.style';
 import LandingPageCard from '../SharedComponents/LandingPageCard';
+import { Article } from 'cms-content/articles';
 
-const ArticlesLanding = () => {
-  const date = formatMetatagDate();
+const ArticlesLanding: React.FC<{
+  title: string;
+  canonicalUrl: string;
+  pageTitle: string;
+  pageDescription: string;
+  articles: Article[];
+}> = ({ title, canonicalUrl, pageTitle, pageDescription, articles }) => {
   let { url } = useRouteMatch();
 
   return (
     <Fragment>
       <AppMetaTags
-        canonicalUrl="/covid-explained"
-        pageTitle="COVID-19 Explained"
-        pageDescription={`${date} Explore deeper analysis about how, why, and where COVID is spreading.`}
+        canonicalUrl={canonicalUrl}
+        pageTitle={pageTitle}
+        pageDescription={pageDescription}
       />
       <PageContent sidebarItems={learnPages}>
         <BreadcrumbsContainer>
           <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>
-        <LearnHeading1>COVID explained</LearnHeading1>
+        <LearnHeading1>{title}</LearnHeading1>
         <CardsContainer spacing={2}>
           {articles.map((article: Article) => {
             const cardProps = {

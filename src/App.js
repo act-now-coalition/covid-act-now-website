@@ -36,7 +36,8 @@ const MetricExplainer = lazy(() => import('screens/Learn/MetricExplainer'));
 const Faq = lazy(() => import('screens/Learn/Faq/Faq'));
 const Glossary = lazy(() => import('screens/Learn/Glossary/Glossary'));
 const CaseStudies = lazy(() => import('screens/Learn/CaseStudies/CaseStudies'));
-const Articles = lazy(() => import('screens/Learn/Articles'));
+const ProductUpdates = lazy(() => import('screens/Learn/Updates'));
+const Explained = lazy(() => import('screens/Learn/Explained'));
 const Contact = lazy(() => import('screens/Contact/Contact'));
 const Tools = lazy(() => import('screens/Tools/Tools'));
 const Terms = lazy(() => import('screens/Terms/Terms'));
@@ -155,7 +156,12 @@ export default function App() {
                   <Route exact path="/faq" component={Faq} />
                   <Route exact path="/glossary" component={Glossary} />
                   <Route path="/case-studies" component={CaseStudies} />
-                  <Route path="/covid-explained" component={Articles} />
+                  <Route path="/covid-explained" component={Explained} />
+                  <Route
+                    path="/covid-act-now-updates"
+                    component={ProductUpdates}
+                  />
+                  {/* TODO(pablo): Route every article */}
                   <Redirect from="/deep-dives" to="/covid-explained" />
                   <Route
                     path="/covid-risk-levels-metrics"
