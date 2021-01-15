@@ -94,6 +94,10 @@ export const StylesMarkdown = css`
 
   p {
     ${paragraphCss};
+    margin-top: ${theme.spacing(3)}px;
+    &:first-of-type {
+      margin-top: 0;
+    }
   }
 
   li,

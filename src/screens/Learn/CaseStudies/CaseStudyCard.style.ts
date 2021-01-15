@@ -14,6 +14,7 @@ import { MarkdownContent, Heading3 } from 'components/Markdown';
 export const StyledLink = styled(Link)`
   text-decoration: none;
   color: black;
+  display: flex;
 `;
 
 export const ArrowIcon = styled(ArrowForwardIosIcon)`

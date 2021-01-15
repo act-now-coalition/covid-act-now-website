@@ -138,15 +138,11 @@ export const StyledCard = styled(Card)<{ borderTop?: boolean }>`
 
 export const StyledCardContent = styled(CardContent)`
   display: flex;
-  padding: 1.25rem 0.75rem;
+  padding: 1.25rem;
   flex-direction: row;
   justify-content: space-between;
   height: 100%;
   align-items: center;
-
-  &:last-child {
-    padding-bottom: 1rem;
-  }
 `;
 
 export const CardLogo = styled.img.attrs(props => ({
