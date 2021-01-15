@@ -16,7 +16,7 @@
       "sectionId": "covid-explained",
       "buttonCta": "View COVID explained",
       "buttonRedirect": "/covid-explained",
-      "description": "This section offers a deeper analysis of how, why, and where COVID is spreading. Our editors and guest authors dig into the details of what COVID means for people – particularly the least advantaged in society – and the impact policies have in protecting them."
+      "description": "Get the facts about how COVID is spread, how to prevent transmission, and the latest on treatments and vaccines from these articles, written by scientists, researchers and public health experts."
     },
     {
       "sectionTitle": "Glossary",
@@ -38,6 +38,13 @@
       "description": "Learn about how leaders in industry, public health, and government are using Covid Act Now’s data and tools in their strategic and day-to-day response to the pandemic to make better decisions to combat COVID.",
       "buttonCta": "View case studies",
       "buttonRedirect": "/case-studies"
+    },
+    {
+      "sectionTitle": "Covid Act Now updates",
+      "sectionId": "updates",
+      "description": "Explore recent developments — including new tools and simple instructions on how to use them — at Covid Act Now.",
+      "buttonCta": "View Covid Act Now updates",
+      "buttonRedirect": "/updates"
     }
   ]
 }
