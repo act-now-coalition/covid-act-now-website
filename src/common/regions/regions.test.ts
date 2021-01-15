@@ -1,14 +1,19 @@
 import regions, { RegionType } from 'common/regions';
 
 describe('regions', () => {
-  test('states() returns all the states', () => {
+  test('states returns all the states', () => {
     const states = regions.states;
     expect(states).toHaveLength(53);
   });
 
-  test('counties() returns all the counties', () => {
+  test('counties returns all the counties', () => {
     const counties = regions.counties;
-    expect(counties).toHaveLength(3223);
+    expect(counties).toHaveLength(3224);
+  });
+
+  test('metroAreas returns all the metro areas', () => {
+    const metros = regions.metroAreas;
+    expect(metros).toHaveLength(392);
   });
 
   describe('findByFipsCode', () => {
@@ -98,11 +103,11 @@ describe('State', () => {
   });
 
   test('relativeUrl', () => {
-    expect(state?.relativeUrl).toBe('us/alaska-ak');
+    expect(state?.relativeUrl).toBe('/us/alaska-ak/');
   });
 
   test('canonicalUrl', () => {
-    expect(state?.canonicalUrl).toBe('https://covidactnow.org/us/alaska-ak');
+    expect(state?.canonicalUrl).toBe('https://covidactnow.org/us/alaska-ak/');
   });
 });
 
@@ -121,12 +126,12 @@ describe('County', () => {
   });
 
   test('relativeUrl', () => {
-    expect(county?.relativeUrl).toBe('us/washington-wa/county/king_county');
+    expect(county?.relativeUrl).toBe('/us/washington-wa/county/king_county/');
   });
 
   test('canonicalUrl', () => {
     expect(county?.canonicalUrl).toBe(
-      'https://covidactnow.org/us/washington-wa/county/king_county',
+      'https://covidactnow.org/us/washington-wa/county/king_county/',
     );
   });
 });
@@ -134,26 +139,26 @@ describe('County', () => {
 describe('Metro Area', () => {
   const metro = regions.findByFipsCode('35620');
   test('fullName', () => {
-    expect(metro?.fullName).toBe('New York metro area');
+    expect(metro?.fullName).toBe('New York City metro area');
   });
 
   test('shortName', () => {
-    expect(metro?.shortName).toBe('New York metro');
+    expect(metro?.shortName).toBe('New York City metro');
   });
 
   test('abbreviation', () => {
-    expect(metro?.abbreviation).toBe('New York metro');
+    expect(metro?.abbreviation).toBe('New York City metro');
   });
 
   test('relativeUrl', () => {
     expect(metro?.relativeUrl).toBe(
-      'us/metro/new-york-newark-jersey-city_ny-nj-pa',
+      '/us/metro/new-york-city-newark-jersey-city_ny-nj-pa/',
     );
   });
 
   test('canonicalUrl', () => {
     expect(metro?.canonicalUrl).toBe(
-      'https://covidactnow.org/us/metro/new-york-newark-jersey-city_ny-nj-pa',
+      'https://covidactnow.org/us/metro/new-york-city-newark-jersey-city_ny-nj-pa/',
     );
   });
 
