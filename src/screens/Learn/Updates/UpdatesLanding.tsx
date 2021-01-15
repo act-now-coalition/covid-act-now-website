@@ -3,18 +3,20 @@ import { formatMetatagDate } from 'common/utils';
 import ArticlesLanding from '../Articles/ArticlesLanding';
 import articles from 'cms-content/updates';
 
+const metaDescription = `Explore recent developments — including new tools and simple instructions on how to use them — at Covid Act Now.`;
+
 // TODO: Update the page description
-const ExplainedLanding: React.FC = () => {
+const UpdatesLanding: React.FC = () => {
   const date = formatMetatagDate();
   return (
     <ArticlesLanding
       title="Covid Act Now Updates"
-      canonicalUrl={'/covid-act-now-updates'}
-      pageTitle="Covid Act Now Updates"
-      pageDescription={`${date} stand-in-description`}
+      canonicalUrl={'/updates'}
+      pageTitle="New Tools & Updates"
+      pageDescription={`${date} ${metaDescription}`}
       articles={articles}
     />
   );
 };
 
-export default ExplainedLanding;
+export default UpdatesLanding;

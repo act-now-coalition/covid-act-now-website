@@ -24,13 +24,13 @@ const UpdatesRouter: React.FC = () => {
   let { path } = useRouteMatch();
   return (
     <Switch>
-      <Route exact path={path}>
+      <Route exact path={path} key="/updates">
         <UpdatesLanding />
       </Route>
       {articles.map(article => {
         const relativeUrl = urlJoin(path, article.articleID);
         return (
-          <Route path={relativeUrl}>
+          <Route path={relativeUrl} key={relativeUrl}>
             <Article
               article={article}
               onShareOnFacebook={trackShareFacebook}
@@ -39,7 +39,7 @@ const UpdatesRouter: React.FC = () => {
               shareQuote={shareQuote}
               canonicalUrl={urlJoin('https://covidactnow.org/', relativeUrl)}
               parentItem={{
-                to: '/covid-act-now-updates',
+                to: '/updates',
                 label: 'Covid Act Now updates',
               }}
             />
@@ -47,8 +47,8 @@ const UpdatesRouter: React.FC = () => {
         );
       })}
       {/* Redirect bad URLs to the updates landing page */}
-      <Route path="/*">
-        <Redirect to="/covid-act-now-updates" />
+      <Route path="/*" key="bad-urls">
+        <Redirect to="/updates" />
       </Route>
     </Switch>
   );
