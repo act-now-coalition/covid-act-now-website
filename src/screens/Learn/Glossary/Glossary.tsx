@@ -26,7 +26,6 @@ function getGlossaryFooter(): React.ReactElement {
       Brown University, Harvard Medical School, Massachusetts Institute of
       Technology and Massachusetts General Hospital. Learn more at{' '}
       <ExternalLink href="https://explaincovid.org/about">
-        {' '}
         https://explaincovid.org/about
       </ExternalLink>
     </Fragment>
