@@ -17,9 +17,6 @@ const trackCopyLink = () => {
   trackEvent(EventCategory.ARTICLES, EventAction.COPY_LINK, 'COVID explained');
 };
 
-// TODO: get the final share quote
-const shareQuote = 'stand-in-copy';
-
 const ExplainedRouter: React.FC = () => {
   let { path } = useRouteMatch();
   return (
@@ -29,6 +26,7 @@ const ExplainedRouter: React.FC = () => {
       </Route>
       {articles.map(article => {
         const relativeUrl = urlJoin(path, article.articleID);
+        const shareQuote = `See @CovidActNow's explainer '${article.header}', part of their series of articles written by health advisors, occasional guest writers, and the COVID Explained team.`;
         return (
           <Route path={relativeUrl} key={relativeUrl}>
             <Article
