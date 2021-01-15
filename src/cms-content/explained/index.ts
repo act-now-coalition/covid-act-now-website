@@ -1,9 +1,4 @@
-import {
-  ArticleJSON,
-  sortByDate,
-  sanitizeArticle,
-  createMapById,
-} from '../articles/utils';
+import { ArticleJSON, sanitizeArticle, createMapById } from '../articles/utils';
 
 // Articles
 import thirdSurge from '../articles/third-surge.json';
@@ -28,9 +23,7 @@ const orderedArticles = [
   antigenTests,
 ];
 
-const articles: ArticleJSON[] = sortByDate(orderedArticles).map(
-  sanitizeArticle,
-);
+const articles: ArticleJSON[] = orderedArticles.map(sanitizeArticle);
 
 export const articlesById = createMapById(articles);
 
