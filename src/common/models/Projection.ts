@@ -9,7 +9,7 @@ import {
   Metricstimeseries,
   Metrics,
 } from 'api/schema/RegionSummaryWithTimeseries';
-import { lastValue } from './utils';
+import { indexOfLastValue, lastValue } from './utils';
 import { assert } from 'common/utils';
 
 /** Stores a list of FIPS or FIPS regex patterns to disable. */
@@ -237,23 +237,37 @@ export class Projection {
     );
 
     this.icuCapacityInfo = null;
+    // TODO(https://trello.com/c/bnwRazOo/): Something is broken where the API
+    // top-level actuals don't match the current metric value. So we extract
+    // them from the timeseries for now.
+    const icuIndex = indexOfLastValue(
+      metricsTimeseries.map(row => row?.icuCapacityRatio),
+    );
     if (
-      metrics &&
+      icuIndex != null &&
       metrics.icuCapacityRatio !== null &&
       !DISABLED_ICU.includes(this.fips)
     ) {
+      // Make sure we don't somehow grab the wrong data, given we're pulling it from the metrics / actuals timeseries.
+      assert(
+        metrics.icuCapacityRatio === null ||
+          metrics.icuCapacityRatio ===
+            metricsTimeseries[icuIndex]?.icuCapacityRatio,
+        "Timeseries icuCapacityRatio doesn't match current metric value.",
+      );
+      assert(
+        metricsTimeseries[icuIndex]?.date === actualTimeseries[icuIndex]?.date,
+        "Dates in actualTimeseries and metricTimeseries aren't aligned.",
+      );
+      const icuActuals = actualTimeseries[icuIndex]!.icuBeds;
+
       const metricSeries = metricsTimeseries.map(
         row => row && row.icuCapacityRatio,
       );
 
-      // TODO(michael): We get this from the timeseries since sometimes actuals.icuBeds.capacity can contain a different value.
-      const totalBeds = lastValue(
-        actualTimeseries.map(row =>
-          row?.icuBeds ? row.icuBeds.capacity : null,
-        ),
-      );
-      const covidPatients = actuals.icuBeds.currentUsageCovid;
-      const totalPatients = actuals.icuBeds.currentUsageTotal;
+      const totalBeds = icuActuals.capacity;
+      const covidPatients = icuActuals.currentUsageCovid;
+      const totalPatients = icuActuals.currentUsageTotal;
 
       const enoughBeds = totalBeds !== null && totalBeds >= MIN_ICU_BEDS;
       const metricValue = enoughBeds ? metrics.icuCapacityRatio : null;

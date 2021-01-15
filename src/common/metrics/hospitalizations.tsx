@@ -102,6 +102,9 @@ function renderStatus(projections: Projections): React.ReactElement {
   const totalICUBeds = formatInteger(icu.totalBeds);
   const totalICUPatients = formatInteger(icu.totalPatients);
   if (icu.metricValue === null) {
+    if (icu.totalBeds === 0 || icu.totalBeds > 15) {
+      debugger;
+    }
     assert(
       icu.totalBeds > 0 && icu.totalBeds <= 15,
       'value should only be missing due to insufficient beds.',
