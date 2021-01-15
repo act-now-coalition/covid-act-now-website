@@ -9,6 +9,8 @@ import {
   LearnHeading1,
   BreadcrumbsContainer,
   SmallSubtext,
+  HeaderShareButtonsWrapper,
+  FooterShareButtonsWrapper,
 } from '../Learn.style';
 import { Article } from 'cms-content/articles/utils';
 import SmallShareButtons from 'components/SmallShareButtons';
@@ -55,10 +57,14 @@ const ArticlePage: React.FC<{
         </BreadcrumbsContainer>
         <LearnHeading1>{header}</LearnHeading1>
         <SmallSubtext source={`Published ${date}`} />
-        <SmallShareButtons {...shareButtonProps} />
+        <HeaderShareButtonsWrapper>
+          <SmallShareButtons {...shareButtonProps} />
+        </HeaderShareButtonsWrapper>
         <MarkdownContent source={body} />
         <Footer />
-        <SmallShareButtons {...shareButtonProps} />
+        <FooterShareButtonsWrapper>
+          <SmallShareButtons {...shareButtonProps} />
+        </FooterShareButtonsWrapper>
       </PageContent>
     </Fragment>
   );

@@ -186,3 +186,15 @@ export const ReadMoreContainer = styled.div`
     color: ${COLOR_MAP.BLUE};
   }
 `;
+
+export const HeaderShareButtonsWrapper = styled.div`
+  margin: 1.25rem 0 1.5rem;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    margin: 1.25rem 0 2.25rem;
+  }
+`;
+
+export const FooterShareButtonsWrapper = styled.div`
+  margin: 1.5rem 0;
+`;

@@ -17,9 +17,6 @@ const trackCopyLink = () => {
   trackEvent(EventCategory.ARTICLES, EventAction.COPY_LINK, 'CAN Updates');
 };
 
-// TODO: get the final share quote
-const shareQuote = 'stand-in-copy';
-
 const UpdatesRouter: React.FC = () => {
   let { path } = useRouteMatch();
   return (
@@ -29,6 +26,7 @@ const UpdatesRouter: React.FC = () => {
       </Route>
       {articles.map(article => {
         const relativeUrl = urlJoin(path, article.articleID);
+        const shareQuote = `See recent developments @CovidActNow, including '${article.header}'.`;
         return (
           <Route path={relativeUrl} key={relativeUrl}>
             <Article
