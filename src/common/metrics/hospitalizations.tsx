@@ -3,7 +3,7 @@ import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
 import { levelText } from 'common/utils/chart';
 import { getLevel, Metric } from 'common/metric';
-import { formatPercent, formatInteger } from 'common/utils';
+import { formatPercent, formatInteger, assert } from 'common/utils';
 import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
 import ExternalLink from '../../components/ExternalLink';
@@ -27,8 +27,7 @@ const SHORT_DESCRIPTION_LOW = 'Can likely handle a new wave of COVID';
 const SHORT_DESCRIPTION_MEDIUM = 'Can likely handle a new wave of COVID';
 const SHORT_DESCRIPTION_MEDIUM_HIGH = 'At risk to a new wave of COVID';
 const SHORT_DESCRIPTION_HIGH = 'High risk of hospital overload';
-const SHORT_DESCRIPTION_UNKNOWN =
-  'Unavailable while we switch to an improved data source';
+const SHORT_DESCRIPTION_UNKNOWN = 'Insufficient data to assess';
 
 const LIMIT_LOW = 0.7;
 const LIMIT_MEDIUM = 0.8;
@@ -92,26 +91,33 @@ function renderStatus(projections: Projections): React.ReactElement {
   const locationName = projections.locationName;
 
   if (icu === null) {
-    // TODO(michael): Put this generic message back in place once we've
-    // re-enabled counties.
-    // return (
-    //   <Fragment>
-    //     Unable to generate {ICUHeadroomMetric.extendedMetricName}. This could be
-    //     due to insufficient data.
-    //   </Fragment>
-    // );
     return (
       <Fragment>
-        The {ICUHeadroomMetric.extendedMetricName} metric is currently
-        unavailable for {projections.locationName} while we switch to using more
-        accurate hospital data provided by the Department of Health and Human
-        Services. Check back soon for updates.
+        {ICUHeadroomMetric.extendedMetricName} is not available due to
+        insufficient data.
       </Fragment>
     );
   }
 
   const totalICUBeds = formatInteger(icu.totalBeds);
   const totalICUPatients = formatInteger(icu.totalPatients);
+  if (icu.metricValue === null) {
+    if (icu.totalBeds === 0 || icu.totalBeds > 15) {
+      debugger;
+    }
+    assert(
+      icu.totalBeds > 0 && icu.totalBeds <= 15,
+      'value should only be missing due to insufficient beds.',
+    );
+    return (
+      <Fragment>
+        {locationName} has reported having {totalICUBeds} staffed adult ICU beds
+        and {totalICUPatients} are currently filled. Due to the low number of
+        beds, we do not report {ICUHeadroomMetric.extendedMetricName} data.
+      </Fragment>
+    );
+  }
+
   const icuCapacityUsed =
     icu.metricValue > 1 ? '>100%' : formatPercent(icu.metricValue);
 
@@ -129,7 +135,7 @@ function renderStatus(projections: Projections): React.ReactElement {
     'This suggests there is likely enough capacity to absorb a wave of new COVID infections',
     'This suggests some ability to absorb an increase in COVID cases',
     'This suggests hospitals may not be well positioned to absorb a wave of new COVID infections without substantial surge capacity. Caution is warranted',
-    'This suggests hospitals cannot absorb a wave of new COVID infections without substantial surge capacity. Aggressive action urgently needed',
+    'This suggests hospitals cannot absorb a wave of new COVID infections without substantial surge capacity.',
   );
 
   return (
