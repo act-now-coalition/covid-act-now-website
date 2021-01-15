@@ -19,8 +19,8 @@ const LandingPageCard: React.FC<{
   borderTop?: boolean;
 }> = ({ id, title, summary, logoUrl, logoAltText, borderTop, url }) => {
   return (
-    <StyledCard borderTop={borderTop}>
-      <StyledLink to={`${url}/${id}`}>
+    <StyledLink to={`${url}/${id}`}>
+      <StyledCard borderTop={borderTop}>
         <StyledCardContent>
           <CopyContainer>
             {logoUrl && logoAltText && (
@@ -31,8 +31,8 @@ const LandingPageCard: React.FC<{
           </CopyContainer>
           <ArrowIcon />
         </StyledCardContent>
-      </StyledLink>
-    </StyledCard>
+      </StyledCard>
+    </StyledLink>
   );
 };
 
