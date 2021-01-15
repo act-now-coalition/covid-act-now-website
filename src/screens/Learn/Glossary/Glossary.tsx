@@ -17,6 +17,21 @@ import { formatMetatagDate, formatNumericalDate } from 'common/utils';
 import ScrollToTopButton from 'components/SharedComponents/ScrollToTopButton';
 import { useScrollToTopButton } from 'common/hooks';
 import Footer from 'screens/Learn/Footer/Footer';
+import ExternalLink from 'components/ExternalLink';
+
+function getGlossaryFooter(): React.ReactElement {
+  return (
+    <Fragment>
+      *Created in collaboration with COVID Explained, a team of researchers from
+      Brown University, Harvard Medical School, Massachusetts Institute of
+      Technology and Massachusetts General Hospital. Learn more at{' '}
+      <ExternalLink href="https://explaincovid.org/about">
+        {' '}
+        https://explaincovid.org/about
+      </ExternalLink>
+    </Fragment>
+  );
+}
 
 const Glossary: React.FC = () => {
   const {
@@ -59,7 +74,7 @@ const Glossary: React.FC = () => {
             <MarkdownContent source={term.definition} />
           </Fragment>
         ))}
-        <Footer />
+        <Footer pageSpecificCopy={getGlossaryFooter()} />
         <ScrollToTopButton
           showButton={showScrollToTopButton}
           analyticsCategory={EventCategory.GLOSSARY}
