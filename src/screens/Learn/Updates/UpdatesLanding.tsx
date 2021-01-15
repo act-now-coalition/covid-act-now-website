@@ -9,7 +9,7 @@ const ExplainedLanding: React.FC = () => {
   return (
     <ArticlesLanding
       title="Covid Act Now Updates"
-      canonicalUrl={'/covid-act-now-updates'}
+      canonicalUrl={'/updates'}
       pageTitle="Covid Act Now Updates"
       pageDescription={`${date} stand-in-description`}
       articles={articles}
