@@ -23,7 +23,7 @@ import {
 } from 'common/utils/recommend';
 import { mainContent } from 'cms-content/recommendations';
 import { getRecommendationsShareUrl } from 'common/urls';
-import { Region, State } from 'common/regions';
+import { Region, State, getStateName } from 'common/regions';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
@@ -148,7 +148,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
           region={region}
         />
         <CompareMain
-          stateName={region.name} // rename prop
+          stateName={getStateName(region) || region.name} // rename prop
           locationsViewable={6}
           stateId={(region as State).stateCode || undefined}
           region={region}
