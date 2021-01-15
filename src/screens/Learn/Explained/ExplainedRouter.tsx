@@ -24,13 +24,13 @@ const ExplainedRouter: React.FC = () => {
   let { path } = useRouteMatch();
   return (
     <Switch>
-      <Route exact path={path}>
+      <Route exact path={path} key="explained">
         <ExplainedLanding />
       </Route>
       {articles.map(article => {
         const relativeUrl = urlJoin(path, article.articleID);
         return (
-          <Route path={relativeUrl}>
+          <Route path={relativeUrl} key={relativeUrl}>
             <Article
               article={article}
               onShareOnFacebook={trackShareFacebook}
@@ -44,7 +44,7 @@ const ExplainedRouter: React.FC = () => {
         );
       })}
       {/* Redirect bad URLs to the explained landing page */}
-      <Route path="/*">
+      <Route path="/*" key="bad-url">
         <Redirect to="/covid-explained" />
       </Route>
     </Switch>
