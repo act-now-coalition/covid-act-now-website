@@ -12,6 +12,7 @@ import {
 } from '../Learn.style';
 import { Article } from 'cms-content/articles/utils';
 import SmallShareButtons from 'components/SmallShareButtons';
+import Footer from 'screens/Learn/Footer/Footer';
 
 const ArticlePage: React.FC<{
   article: Article;
@@ -56,6 +57,7 @@ const ArticlePage: React.FC<{
         <SmallSubtext source={`Published ${date}`} />
         <SmallShareButtons {...shareButtonProps} />
         <MarkdownContent source={body} />
+        <Footer />
         <SmallShareButtons {...shareButtonProps} />
       </PageContent>
     </Fragment>
