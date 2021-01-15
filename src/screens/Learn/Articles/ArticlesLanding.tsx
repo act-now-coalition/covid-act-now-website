@@ -4,7 +4,11 @@ import { useRouteMatch } from 'react-router-dom';
 import Breadcrumbs from 'components/Breadcrumbs';
 import PageContent from 'components/PageContent';
 import { learnPages } from 'cms-content/learn';
-import { BreadcrumbsContainer, LearnHeading1 } from '../Learn.style';
+import {
+  BreadcrumbsContainer,
+  LearnHeading1,
+  ArticlesLandingIntro,
+} from '../Learn.style';
 import { CardsContainer } from '../Learn.style';
 import LandingPageCard from '../SharedComponents/LandingPageCard';
 import { Article } from 'cms-content/articles';
@@ -15,7 +19,15 @@ const ArticlesLanding: React.FC<{
   pageTitle: string;
   pageDescription: string;
   articles: Article[];
-}> = ({ title, canonicalUrl, pageTitle, pageDescription, articles }) => {
+  sectionIntro?: string;
+}> = ({
+  title,
+  canonicalUrl,
+  pageTitle,
+  pageDescription,
+  articles,
+  sectionIntro,
+}) => {
   let { url } = useRouteMatch();
 
   return (
@@ -30,6 +42,9 @@ const ArticlesLanding: React.FC<{
           <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>
         <LearnHeading1>{title}</LearnHeading1>
+        {sectionIntro && (
+          <ArticlesLandingIntro>{sectionIntro}</ArticlesLandingIntro>
+        )}
         <CardsContainer spacing={2}>
           {articles.map((article: Article) => {
             const cardProps = {

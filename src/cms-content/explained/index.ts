@@ -17,15 +17,15 @@ import treatmentSevereIllness from '../articles/covid-explained-treatment-severe
 import viralVariants from '../articles/covid-explained-viral-variants.json';
 
 const orderedArticles = [
-  asymptomaticSpread,
-  pathOfTheVirus,
-  antigenTests,
-  kidsAndCovid,
+  vaccineProgress,
+  thirdSurge,
+  viralVariants,
   treatmentSevereIllness,
   avoidInfection,
-  vaccineProgress,
-  viralVariants,
-  thirdSurge,
+  asymptomaticSpread,
+  pathOfTheVirus,
+  kidsAndCovid,
+  antigenTests,
 ];
 
 const articles: ArticleJSON[] = sortByDate(orderedArticles).map(

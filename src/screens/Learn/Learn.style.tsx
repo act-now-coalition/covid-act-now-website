@@ -194,3 +194,7 @@ export const HeaderShareButtonsWrapper = styled.div`
 export const FooterShareButtonsWrapper = styled.div`
   margin: 1.5rem 0;
 `;
+
+export const ArticlesLandingIntro = styled(Paragraph)`
+  margin-bottom: 2rem;
+`;

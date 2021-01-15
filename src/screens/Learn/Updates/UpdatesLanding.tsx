@@ -10,7 +10,7 @@ const UpdatesLanding: React.FC = () => {
   const date = formatMetatagDate();
   return (
     <ArticlesLanding
-      title="Covid Act Now Updates"
+      title="Covid Act Now updates"
       canonicalUrl={'/updates'}
       pageTitle="New Tools & Updates"
       pageDescription={`${date} ${metaDescription}`}
