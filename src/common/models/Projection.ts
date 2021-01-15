@@ -186,7 +186,6 @@ export class Projection {
       PROJECTIONS_TRUNCATION_DAYS,
     );
     const metrics = summaryWithTimeseries.metrics;
-    const actuals = summaryWithTimeseries.actuals;
 
     this.metrics = metrics || null;
     this.actualTimeseries = actualTimeseries;
