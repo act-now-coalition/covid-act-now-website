@@ -5,7 +5,7 @@
     {
       "term": "Antibodies*",
       "termId": "antibodies",
-      "definition": "Antibodies are large proteins created by the immune system in response to foreign substances, such as viruses and bacteria. Once produced, antibodies bind to these foreign substances and either neutralize the threat directly or help other cells destroy it. When a person is infected with a [pathogen](https://covidactnow.org/glossary#pathogen) such as SARS-CoV-2, the virus responsible for COVID, their body produces antibodies to help eliminate it. If an infected person has formed antibodies for a particular disease, the immune system “remembers” the disease and can quickly produce those antibodies if reinfected. \n\nYou may have heard a lot about antibodies in the news because they indicate whether someone has been infected with COVID. [Serology blood tests]([#serologytest]) look for antibodies and can determine whether someone has been infected with COVID in the past. These tests are not useful in determining current COVID cases because it can take one to three weeks for the body to make antibodies after being infected. \n\n[It is still unclear](https://www.cdc.gov/coronavirus/2019-ncov/lab/resources/antibody-tests-guidelines.html) whether people with COVID antibodies are protected from reinfection.",
+      "definition": "Antibodies are large proteins created by the immune system in response to foreign substances, such as viruses and bacteria. Once produced, antibodies bind to these foreign substances and either neutralize the threat directly or help other cells destroy it. When a person is infected with a [pathogen](https://covidactnow.org/glossary#pathogen) such as SARS-CoV-2, the virus responsible for COVID, their body produces antibodies to help eliminate it. If an infected person has formed antibodies for a particular disease, the immune system “remembers” the disease and can quickly produce those antibodies if reinfected. \n\nYou may have heard a lot about antibodies in the news because they indicate whether someone has been infected with COVID.[Serology blood tests](https://covidactnow.org/glossary#serology-test) look for antibodies and can determine whether someone has been infected with COVID in the past. These tests are not useful in determining current COVID cases because it can take one to three weeks for the body to make antibodies after being infected. \n\n[It is still unclear](https://www.cdc.gov/coronavirus/2019-ncov/lab/resources/antibody-tests-guidelines.html) whether people with COVID antibodies are protected from reinfection.",
       "category": "Health and symptoms"
     },
     {
@@ -63,7 +63,7 @@
       "category": "Metrics"
     },
     {
-      "definition": "A confirmed case, in the context of COVID reporting, is an individual who received a [PCR test](#pcr-test) or [antigen test](#antigen-test) where the test result came back positive. This positive result indicates that the individual was actively infected with the [SARS-CoV-2](#sars-cov-2) virus at the time of the test. \n\nCases can also be classified as \"possible\" or \"probable\" if identified without laboratory test results. The reporting of COVID cases normally refers to confirmed cases unless otherwise noted. The number of new cases per day, also referred to as \"[case incidence](https://covidactnow.org/glossary#case-incidence)\", is often plotted for each day over a period of time to show how the daily new cases are trending: up, down, or steady.",
+      "definition": "A confirmed case, in the context of COVID reporting, is an individual who received a [PCR test](#pcr-test) or [antigen test](#antigen-test) where the test result came back positive. This positive result indicates that the individual was actively infected with the [SARS-CoV-2](#sars-cov-2) virus at the time of the test. \n\nCases can also be classified as \"possible\" or \"probable\" if identified without laboratory test results. The reporting of COVID cases normally refers to confirmed cases unless otherwise noted. The number of new cases per day, also referred to as \"[case incidence](#case-incidence)\", is often plotted for each day over a period of time to show how the daily new cases are trending: up, down, or steady.",
       "term": "Confirmed case",
       "termId": "confirmed-case ",
       "category": "Health and symptoms"
@@ -101,7 +101,7 @@
     {
       "term": "Daily new cases",
       "termId": "daily-new-cases",
-      "definition": "Daily new cases, also known as [case incidence](case-incidence) in epidemiology, is the number of new COVID cases per day per unit of population. Covid Act Now reports “[daily new cases](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases)” per 100,000 people in states, metros, and counties. This metric answers the question: “How many new infections are in my area each day?”\n\nBecause we can’t test our entire population, we don’t know how many total cases are in a given population. Measuring daily new cases is a way to gauge new COVID cases without having to test an entire population.",
+      "definition": "Daily new cases, also known as [case incidence](#case-incidence) in epidemiology, is the number of new COVID cases per day per unit of population. Covid Act Now reports “[daily new cases](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases)” per 100,000 people in states, metros, and counties. This metric answers the question: “How many new infections are in my area each day?”\n\nBecause we can’t test our entire population, we don’t know how many total cases are in a given population. Measuring daily new cases is a way to gauge new COVID cases without having to test an entire population.",
       "category": "Metrics"
     },
     {
@@ -161,7 +161,7 @@
     {
       "term": "False positive",
       "termId": "false-positive",
-      "definition": "A false positive occurs when a test result incorrectly indicates that someone has a disease  when they actually do not. False positives have less dangerous ramifications than false negatives. If someone who is not infected with COVID tests positive due to test inaccuracy, they may take precautions such as self-isolation. If someone infected with COVID tests negative due to test inaccuracy, they may unknowingly expose their households, friends, and community members to COVID.",
+      "definition": "A false positive occurs when a test result incorrectly indicates that someone has a disease  when they actually do not. False positives have less dangerous ramifications than [false negatives](#false-negative). If someone who is not infected with COVID tests positive due to test inaccuracy, they may take precautions such as self-isolation. If someone infected with COVID tests negative due to test inaccuracy, they may unknowingly expose their households, friends, and community members to COVID.",
       "category": "Testing"
     },
     {
@@ -221,7 +221,7 @@
     {
       "term": "Infection",
       "termId": "infection",
-      "definition": "An infection occurs when an organism that causes disease, such as a virus, bacteria, or parasite, enters your body. In the case of COVID, a person is infected with the [SARS-CoV-2](#sars-cov-2) virus and develops [COVID](#covid-19). \n\nA person can be infected with COVID can spread COVID even if they do not show symptoms, through [asymptomatic spread](#asymptomatic-spread) and [presymptomatic spread](presymptomatic-spread).",
+      "definition": "An infection occurs when an organism that causes disease, such as a virus, bacteria, or parasite, enters your body. In the case of COVID, a person is infected with the [SARS-CoV-2](#sars-cov-2) virus and develops [COVID](#covid-19). \n\nA person can be infected with COVID can spread COVID even if they do not show symptoms, through [asymptomatic spread](#asymptomatic-spread) and [presymptomatic spread](#presymptomatic-spread).",
       "category": "Transmission"
     },
     {
@@ -395,7 +395,7 @@
     {
       "term": "Specificity (testing)",
       "termId": "specificity",
-      "definition": "Test specificity refers to a test’s ability to correctly identify those without a disease. Measuring the specificity of COVID tests helps us understand how accurate the test results are. \n\nA test with high specificity (close to a 100 percent match between those who tested negative and those without the disease) will correctly identify everyone who does not have the disease and will not generate many [false positives](false-positive). A false positive occurs when a test result incorrectly indicates that someone has a disease, when they actually do not.\n\nFalse positives have less dangerous ramifications than [false negatives](false-negative). If someone who is not infected with COVID tests positive due to test inaccuracy, they may take precautions such as self-isolation. If someone infected with COVID tests negative due to test inaccuracy, they may unknowingly expose their households, friends, and community members to COVID.",
+      "definition": "Test specificity refers to a test’s ability to correctly identify those without a disease. Measuring the specificity of COVID tests helps us understand how accurate the test results are. \n\nA test with high specificity (close to a 100 percent match between those who tested negative and those without the disease) will correctly identify everyone who does not have the disease and will not generate many [false positives](#false-positive). A false positive occurs when a test result incorrectly indicates that someone has a disease, when they actually do not.\n\nFalse positives have less dangerous ramifications than [false negatives](#false-negative). If someone who is not infected with COVID tests positive due to test inaccuracy, they may take precautions such as self-isolation. If someone infected with COVID tests negative due to test inaccuracy, they may unknowingly expose their households, friends, and community members to COVID.",
       "category": "Testing"
     },
     {
@@ -479,7 +479,7 @@
     {
       "term": "Viral shedding*",
       "termId": "viral-shedding",
-      "definition": "Viral shedding, simply put, is a measure of contagiousness. Viruses operate by invading the body’s cells and taking over their functions to reproduce. Viral shedding occurs when these new virus cells are released into the environment. Infected individuals, even those who are asymptomatic or [presymptomatic]([presymptomatic]), may shed viral particles when they talk, exhale, eat, and perform daily activities.",
+      "definition": "Viral shedding, simply put, is a measure of contagiousness. Viruses operate by invading the body’s cells and taking over their functions to reproduce. Viral shedding occurs when these new virus cells are released into the environment. Infected individuals, even those who are asymptomatic or [presymptomatic](#presymptomatic-spread), may shed viral particles when they talk, exhale, eat, and perform daily activities.",
       "category": "Disease science"
     },
     {
