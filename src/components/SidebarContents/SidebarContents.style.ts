@@ -38,11 +38,11 @@ export const TopLevelLink = styled(NavLink).attrs(props => ({
 }))`
   ${fontCss}
   text-decoration: none;
-  padding-left: 1.25rem;
+  padding-left: 1rem;
   border-left: solid 3px transparent;
   &.active {
     ${activeCss}
-    border-left: solid 3px ${COLOR_MAP.GREEN.BASE};
+    border-left: solid 2px ${COLOR_MAP.GREEN.BASE};
   }
 `;
 
