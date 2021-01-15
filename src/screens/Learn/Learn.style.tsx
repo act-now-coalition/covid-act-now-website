@@ -58,15 +58,16 @@ export const LearnHeading1 = styled(Heading1)`
   margin: 0 0 1.5rem;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    margin: 1.5rem 0 2.5rem;
+    margin: 1.15rem 0 1.75rem;
   }
 `;
 
 export const SmallSubtext = styled(MarkdownContent)`
-  margin-bottom: 2rem;
+  margin: 0;
 
   p {
-    font-size: 14px;
+    font-style: italic;
+    margin: 0;
   }
 `;
 
