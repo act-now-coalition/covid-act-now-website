@@ -36,6 +36,10 @@ const ArticlePage: React.FC<{
   const metatagDate = formatMetatagDate();
   const { header, body, date, summary } = article;
 
+  const smallSubtextCopy = article.author
+    ? `${article.author} Updated ${date}`
+    : `Updated ${date}`;
+
   const shareButtonProps = {
     shareUrl: canonicalUrl,
     shareQuote,
@@ -56,7 +60,7 @@ const ArticlePage: React.FC<{
           <Breadcrumbs item={parentItem} />
         </BreadcrumbsContainer>
         <LearnHeading1>{header}</LearnHeading1>
-        <SmallSubtext source={`Published ${date}`} />
+        <SmallSubtext source={smallSubtextCopy} />
         <HeaderShareButtonsWrapper>
           <SmallShareButtons {...shareButtonProps} />
         </HeaderShareButtonsWrapper>
