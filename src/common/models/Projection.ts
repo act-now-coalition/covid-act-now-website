@@ -235,57 +235,11 @@ export class Projection {
       row => row && row.testPositivityRatio,
     );
 
-    this.icuCapacityInfo = null;
-    // TODO(https://trello.com/c/bnwRazOo/): Something is broken where the API
-    // top-level actuals don't match the current metric value. So we extract
-    // them from the timeseries for now.
-    const icuIndex = indexOfLastValue(
-      metricsTimeseries.map(row => row?.icuCapacityRatio),
+    this.icuCapacityInfo = this.getIcuCapacityInfo(
+      metrics,
+      metricsTimeseries,
+      actualTimeseries,
     );
-    if (
-      icuIndex != null &&
-      metrics.icuCapacityRatio !== null &&
-      !DISABLED_ICU.includes(this.fips)
-    ) {
-      // Make sure we don't somehow grab the wrong data, given we're pulling it from the metrics / actuals timeseries.
-      assert(
-        metrics.icuCapacityRatio === null ||
-          metrics.icuCapacityRatio ===
-            metricsTimeseries[icuIndex]?.icuCapacityRatio,
-        "Timeseries icuCapacityRatio doesn't match current metric value.",
-      );
-      assert(
-        metricsTimeseries[icuIndex]?.date === actualTimeseries[icuIndex]?.date,
-        "Dates in actualTimeseries and metricTimeseries aren't aligned.",
-      );
-      const icuActuals = actualTimeseries[icuIndex]!.icuBeds;
-
-      const metricSeries = metricsTimeseries.map(
-        row => row && row.icuCapacityRatio,
-      );
-
-      const totalBeds = icuActuals.capacity;
-      const covidPatients = icuActuals.currentUsageCovid;
-      const totalPatients = icuActuals.currentUsageTotal;
-
-      const enoughBeds = totalBeds !== null && totalBeds >= MIN_ICU_BEDS;
-      const metricValue = enoughBeds ? metrics.icuCapacityRatio : null;
-
-      assert(
-        totalBeds !== null && totalPatients !== null,
-        'These must be non-null for the metric to be non-null',
-      );
-      const nonCovidPatients =
-        covidPatients === null ? null : totalPatients - covidPatients;
-      this.icuCapacityInfo = {
-        metricSeries,
-        metricValue,
-        totalBeds,
-        covidPatients,
-        nonCovidPatients,
-        totalPatients,
-      };
-    }
     this.icuUtilization =
       this.icuCapacityInfo?.metricSeries || this.dates.map(date => null);
 
@@ -348,6 +302,64 @@ export class Projection {
     }
 
     return this.metrics && this.metrics.infectionRate;
+  }
+
+  private getIcuCapacityInfo(
+    metrics: Metrics,
+    metricsTimeseries: Array<MetricsTimeseriesRow | null>,
+    actualsTimeseries: Array<ActualsTimeseriesRow | null>,
+  ): ICUCapacityInfo | null {
+    // TODO(https://trello.com/c/bnwRazOo/): Something is broken where the API
+    // top-level actuals don't match the current metric value. So we extract
+    // them from the timeseries for now.
+    const icuIndex = indexOfLastValue(
+      metricsTimeseries.map(row => row?.icuCapacityRatio),
+    );
+    if (
+      icuIndex != null &&
+      metrics.icuCapacityRatio !== null &&
+      !DISABLED_ICU.includes(this.fips)
+    ) {
+      // Make sure we don't somehow grab the wrong data, given we're pulling it from the metrics / actuals timeseries.
+      assert(
+        metrics.icuCapacityRatio === null ||
+          metrics.icuCapacityRatio ===
+            metricsTimeseries[icuIndex]?.icuCapacityRatio,
+        "Timeseries icuCapacityRatio doesn't match current metric value.",
+      );
+      assert(
+        metricsTimeseries[icuIndex]?.date === actualsTimeseries[icuIndex]?.date,
+        "Dates in actualTimeseries and metricTimeseries aren't aligned.",
+      );
+      const icuActuals = actualsTimeseries[icuIndex]!.icuBeds;
+
+      const metricSeries = metricsTimeseries.map(
+        row => row && row.icuCapacityRatio,
+      );
+
+      const totalBeds = icuActuals.capacity;
+      const covidPatients = icuActuals.currentUsageCovid;
+      const totalPatients = icuActuals.currentUsageTotal;
+
+      const enoughBeds = totalBeds !== null && totalBeds >= MIN_ICU_BEDS;
+      const metricValue = enoughBeds ? metrics.icuCapacityRatio : null;
+
+      assert(
+        totalBeds !== null && totalPatients !== null,
+        'These must be non-null for the metric to be non-null',
+      );
+      const nonCovidPatients =
+        covidPatients === null ? null : totalPatients - covidPatients;
+      return {
+        metricSeries,
+        metricValue,
+        totalBeds,
+        covidPatients,
+        nonCovidPatients,
+        totalPatients,
+      };
+    }
+    return null;
   }
 
   private getColumn(columnName: string): Column[] {

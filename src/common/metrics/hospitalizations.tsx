@@ -11,8 +11,7 @@ import Thermometer from 'components/Thermometer';
 
 const METRIC_NAME = 'ICU capacity used';
 
-// TODO(michael): Rename internal references to "headroom", etc.
-export const ICUHeadroomMetric: MetricDefinition = {
+export const ICUCapacityUsed: MetricDefinition = {
   renderStatus,
   renderDisclaimer,
   renderThermometer,
@@ -93,7 +92,7 @@ function renderStatus(projections: Projections): React.ReactElement {
   if (icu === null) {
     return (
       <Fragment>
-        {ICUHeadroomMetric.extendedMetricName} is not available due to
+        {ICUCapacityUsed.extendedMetricName} is not available due to
         insufficient data.
       </Fragment>
     );
@@ -113,7 +112,7 @@ function renderStatus(projections: Projections): React.ReactElement {
       <Fragment>
         {locationName} has reported having {totalICUBeds} staffed adult ICU beds
         and {totalICUPatients} are currently filled. Due to the low number of
-        beds, we do not report {ICUHeadroomMetric.extendedMetricName} data.
+        beds, we do not report {ICUCapacityUsed.extendedMetricName} data.
       </Fragment>
     );
   }
@@ -154,9 +153,8 @@ function renderDisclaimer(projections: Projections): React.ReactElement {
       <ExternalLink href="https://healthdata.gov/dataset/covid-19-reported-patient-impact-and-hospital-capacity-state-timeseries">
         Department of Health and Human Services (HHS)
       </ExternalLink>
-      . As of December 21, we use "{ICUHeadroomMetric.extendedMetricName}"
-      instead of "ICU headroom used" as our primary ICU metric. Learn more about
-      our{' '}
+      . As of December 21, we use "{ICUCapacityUsed.extendedMetricName}" instead
+      of "ICU headroom used" as our primary ICU metric. Learn more about our{' '}
       <ExternalLink href="/covid-risk-levels-metrics#icu-capacity-used">
         ICU capacity methodology
       </ExternalLink>

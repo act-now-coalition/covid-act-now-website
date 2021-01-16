@@ -21,7 +21,7 @@ const getTooltipContent = (valueY: number) =>
         width: 'auto',
       };
 
-const ChartICUHeadroom = ({
+const ChartICUCapacityUsed = ({
   columnData,
   height = 400,
 }: {
@@ -38,4 +38,4 @@ const ChartICUHeadroom = ({
   />
 );
 
-export default ChartICUHeadroom;
+export default ChartICUCapacityUsed;
