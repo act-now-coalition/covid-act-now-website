@@ -113,7 +113,7 @@ export const formatValue = (
   } else if (chartType === Metric.POSITIVE_TESTS) {
     return formatPercent(value, 1);
   } else if (chartType === Metric.VACCINATIONS) {
-    return formatPercent(value, 0);
+    return formatPercent(value, 1);
   }
   fail('Invalid Chart Type');
 };
