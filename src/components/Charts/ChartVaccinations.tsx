@@ -11,7 +11,7 @@ const getPointText = (valueY: number) => formatPercent(valueY, 0);
 
 const getTooltipContent = (valueY: number) => {
   return {
-    subtitle: getMetricDefinition(Metric.VACCINATIONS).metricName,
+    subtitle: getMetricDefinition(Metric.VACCINATIONS).extendedMetricName,
     body: `${getPointText(valueY)}`,
     width: 'auto',
   };

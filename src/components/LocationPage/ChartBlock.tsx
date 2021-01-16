@@ -29,9 +29,7 @@ function ChartBlock(props: {
 }) {
   const { projections, metric, isMobile, region, stats } = props;
 
-  // TODO(vaccinations): Should it be beta? or nah?
-  const showBetaTag =
-    metric === Metric.HOSPITAL_USAGE || metric === Metric.VACCINATIONS;
+  const showBetaTag = metric === Metric.HOSPITAL_USAGE;
 
   const hasMetric = projections.hasMetric(metric);
 

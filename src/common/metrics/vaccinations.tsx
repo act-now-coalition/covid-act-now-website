@@ -1,80 +1,51 @@
 import React, { Fragment } from 'react';
 import { COLOR_MAP } from 'common/colors';
-import { Level, LevelInfoMap } from 'common/level';
+import { Level, LevelInfo, LevelInfoMap } from 'common/level';
 import { formatPercent, formatInteger } from 'common/utils';
 import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
 import ExternalLink from 'components/ExternalLink';
 
-const METRIC_NAME = 'Percent Vaccinated';
+const METRIC_NAME = '% Vaccinated';
 
 export const VaccinationsMetric: MetricDefinition = {
   renderStatus,
   renderDisclaimer,
   renderThermometer,
   metricName: METRIC_NAME,
-  extendedMetricName: METRIC_NAME,
-  metricNameForCompare: METRIC_NAME,
+  extendedMetricName: 'Percent Vaccinated',
+  metricNameForCompare: 'Percent Vaccinated',
 };
 
-// TODO(vaccinations): Figure out levels.
-const SHORT_DESCRIPTION_LOW = ''; // LOW is unused.
-const SHORT_DESCRIPTION_MEDIUM = 'Too many cases and too few tracers hired';
-const SHORT_DESCRIPTION_MEDIUM_HIGH =
-  'Insufficient tracers, even if the program is run effectively';
-const SHORT_DESCRIPTION_HIGH =
-  'Enough tracers, if the program is run effectively';
+const SHORT_DESCRIPTION_LOW = 'Vaccinations are in progress';
 const SHORT_DESCRIPTION_UNKNOWN = 'Insufficient data to assess';
 
-const LOW_NAME = 'Critical';
-const MEDIUM_NAME = 'Low';
-const MEDIUM_HIGH_NAME = 'Medium';
-const HIGH_NAME = 'High';
 const UNKNOWN = 'Unknown';
+
+// HACK: There isn't a clean way to avoid having grading / zones right now.
+const dummyLevelInfo: LevelInfo = {
+  level: Level.LOW,
+  upperLimit: 1,
+  name: '',
+  color: '',
+  detail: () => '',
+};
 
 export const VACCINATIONS_LEVEL_INFO_MAP: LevelInfoMap = {
   [Level.LOW]: {
     level: Level.LOW,
-    // NOTE: Setting the upperLimit to 0 means we will not grade anybody as
-    // Level.LOW ("Critical" on the website). The lowest grade you can get is
-    // Level.MEDIUM.
-    upperLimit: 0,
-    name: LOW_NAME,
-    color: COLOR_MAP.RED.BASE,
+    upperLimit: 1,
+    name: '',
+    color: COLOR_MAP.ORANGE.BASE,
     detail: () => SHORT_DESCRIPTION_LOW,
   },
-  [Level.MEDIUM]: {
-    level: Level.MEDIUM,
-    upperLimit: 0.1,
-    name: MEDIUM_NAME,
-    color: COLOR_MAP.ORANGE_DARK.BASE,
-    detail: () => SHORT_DESCRIPTION_MEDIUM,
-  },
-  [Level.HIGH]: {
-    level: Level.HIGH,
-    upperLimit: 0.9,
-    name: MEDIUM_HIGH_NAME,
-    color: COLOR_MAP.ORANGE.BASE,
-    detail: () => SHORT_DESCRIPTION_MEDIUM_HIGH,
-  },
-  [Level.CRITICAL]: {
-    level: Level.CRITICAL,
-    upperLimit: Infinity,
-    name: HIGH_NAME,
-    color: COLOR_MAP.GREEN.BASE,
-    detail: () => SHORT_DESCRIPTION_HIGH,
-  },
-  // We don't have a SUPER_CRITICAL threshold, so upperLimit is same as CRITICAL to hide it.
-  [Level.SUPER_CRITICAL]: {
-    level: Level.SUPER_CRITICAL,
-    upperLimit: Infinity,
-    name: HIGH_NAME,
-    color: COLOR_MAP.GREEN.BASE,
-    detail: () => SHORT_DESCRIPTION_HIGH,
-  },
+  [Level.MEDIUM]: dummyLevelInfo,
+  [Level.HIGH]: dummyLevelInfo,
+  [Level.CRITICAL]: dummyLevelInfo,
+  [Level.SUPER_CRITICAL]: dummyLevelInfo,
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,
-    upperLimit: 0,
+    upperLimit: 1,
     name: UNKNOWN,
     color: COLOR_MAP.GRAY.BASE,
     detail: () => SHORT_DESCRIPTION_UNKNOWN,

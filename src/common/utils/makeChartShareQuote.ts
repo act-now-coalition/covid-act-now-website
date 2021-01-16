@@ -1,3 +1,4 @@
+import { Metric } from 'common/metric';
 import { fail, formatDecimal, formatPercent } from 'common/utils';
 
 //TODO(chelsi): move this copy into individual metric files. remove need for hardcoded identifying numers
@@ -19,12 +20,11 @@ export default function makeChartShareQuote(
     return `${displayName} has used ${formatPercent(
       stats[2],
     )} of their ICU capacity, according to @CovidActNow. See the chart: `;
-  } else if (chartIdentifier === 3) {
-    // TODO(vaccinations): Update.
-    return `${displayName} is tracing only ${formatPercent(
-      stats[3],
-      0,
-    )} of COVID cases, according to @CovidActNow. See the chart: `;
+  } else if (chartIdentifier === Metric.VACCINATIONS) {
+    return `${displayName} has vaccinated ${formatPercent(
+      stats[Metric.VACCINATIONS],
+      1,
+    )} of its population, according to @CovidActNow. See the chart: `;
   } else if (chartIdentifier === 4) {
     fail('Future projections chart was deprecated.');
   } else if (chartIdentifier === 5) {
