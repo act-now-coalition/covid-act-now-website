@@ -35,7 +35,7 @@ export const orderedMetrics = [
   Metric.CASE_GROWTH_RATE,
   Metric.POSITIVE_TESTS,
   Metric.HOSPITAL_USAGE,
-  Metric.CONTACT_TRACING,
+  Metric.VACCINATIONS,
 ];
 
 function getLocationObj(region: Region): SummaryForCompare {
@@ -315,14 +315,16 @@ export function getShareQuote(
     currentLocation.rank !== 0 &&
     isNumber(currentLocation.metricsInfo.metrics[sorter]?.value);
 
-  const ascendingCopy =
-    sorter && sorter === (Metric.HOSPITAL_USAGE || Metric.CONTACT_TRACING)
-      ? 'least'
-      : 'lowest';
-  const descendingCopy =
-    sorter && sorter === (Metric.HOSPITAL_USAGE || Metric.CONTACT_TRACING)
-      ? 'most'
-      : 'highest';
+  const ascendingCopy = [Metric.HOSPITAL_USAGE, Metric.VACCINATIONS].includes(
+    sorter,
+  )
+    ? 'least'
+    : 'lowest';
+  const descendingCopy = [Metric.HOSPITAL_USAGE, Metric.VACCINATIONS].includes(
+    sorter,
+  )
+    ? 'most'
+    : 'highest';
 
   const countyShareCopy =
     currentLocation &&

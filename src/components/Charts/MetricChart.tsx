@@ -4,7 +4,7 @@ import {
   ChartRt,
   ChartPositiveTestRate,
   ChartICUCapacityUsed,
-  ChartContactTracing,
+  ChartVaccinations,
   ChartCaseDensity,
 } from 'components/Charts';
 import { Metric } from 'common/metric';
@@ -50,10 +50,10 @@ export default function MetricChart({
           columnData={projection.getDataset('icuUtilization')}
         />
       )}
-      {metric === Metric.CONTACT_TRACING && (
-        <ChartContactTracing
+      {metric === Metric.VACCINATIONS && (
+        <ChartVaccinations
           height={height}
-          columnData={projection.getDataset('contractTracers')}
+          columnData={projection.getDataset('vaccinations')}
         />
       )}
     </>

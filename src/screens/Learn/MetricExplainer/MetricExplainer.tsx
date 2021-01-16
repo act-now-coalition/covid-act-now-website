@@ -105,7 +105,7 @@ function getThermometer(sectionId: string) {
     'infection-rate': Metric.CASE_GROWTH_RATE,
     'positive-test-rate': Metric.POSITIVE_TESTS,
     'icu-capacity-used': Metric.HOSPITAL_USAGE,
-    'tracers-hired': Metric.CONTACT_TRACING,
+    // NOTE: No thermometer for 'vaccinations' since we don't grade it yet.
   };
 
   const metric = mapSectionIdMetric[sectionId];

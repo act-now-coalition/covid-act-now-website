@@ -94,7 +94,7 @@ const SummaryStats = (props: {
   onRtRangeClick?: () => void;
   onTestPositiveClick?: () => void;
   onIcuUtilizationClick?: () => void;
-  onContactTracingClick?: () => void;
+  onVaccinationsClick?: () => void;
   isMobile?: boolean;
   isHeader?: boolean;
   embedOnClickBaseURL?: string;
@@ -140,10 +140,10 @@ const SummaryStats = (props: {
             {...sharedStatProps}
           />
           <SummaryStat
-            onClick={props.onContactTracingClick || noop}
-            chartType={Metric.CONTACT_TRACING}
+            onClick={props.onVaccinationsClick || noop}
+            chartType={Metric.VACCINATIONS}
             beta={true}
-            value={props.stats[Metric.CONTACT_TRACING] as number}
+            value={props.stats[Metric.VACCINATIONS] as number}
             flipSignalStatusOrder
             {...sharedStatProps}
           />

@@ -48,7 +48,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
     [Metric.CASE_GROWTH_RATE]: useRef<HTMLDivElement>(null),
     [Metric.POSITIVE_TESTS]: useRef<HTMLDivElement>(null),
     [Metric.HOSPITAL_USAGE]: useRef<HTMLDivElement>(null),
-    [Metric.CONTACT_TRACING]: useRef<HTMLDivElement>(null),
+    [Metric.VACCINATIONS]: useRef<HTMLDivElement>(null),
   };
   const shareBlockRef = useRef<HTMLDivElement>(null);
   const exploreChartRef = useRef<HTMLDivElement>(null);

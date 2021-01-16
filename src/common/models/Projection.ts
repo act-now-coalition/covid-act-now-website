@@ -80,7 +80,7 @@ export type DatasetId =
   | 'rtRange'
   | 'icuUtilization'
   | 'testPositiveRate'
-  | 'contractTracers'
+  | 'vaccinations'
   | 'caseDensityByCases'
   | 'caseDensityRange'
   | 'smoothedDailyCases'
@@ -143,7 +143,7 @@ export class Projection {
 
   readonly currentCumulativeDeaths: number | null;
   readonly currentCumulativeCases: number | null;
-  readonly currentContactTracerMetric: number | null;
+  readonly currentVaccinationsMetric: number | null;
   readonly currentCaseDensity: number | null;
   readonly currentDailyDeaths: number | null;
 
@@ -160,7 +160,7 @@ export class Projection {
   private readonly icuUtilization: Array<number | null>;
   // Test Positive series as values between 0-1.
   private readonly testPositiveRate: Array<number | null>;
-  private readonly contractTracers: Array<number | null>;
+  private readonly vaccinations: Array<number | null>;
   private readonly caseDensityByCases: Array<number | null>;
   private readonly caseDensityRange: Array<CaseDensityRange | null>;
   private readonly smoothedDailyDeaths: Array<number | null>;
@@ -243,7 +243,7 @@ export class Projection {
     this.icuUtilization =
       this.icuCapacityInfo?.metricSeries || this.dates.map(date => null);
 
-    this.contractTracers = metricsTimeseries.map(
+    this.vaccinations = metricsTimeseries.map(
       row => row && row.contactTracerCapacityRatio,
     );
 
@@ -260,18 +260,20 @@ export class Projection {
 
     this.currentCumulativeDeaths = summaryWithTimeseries.actuals.deaths;
     this.currentCumulativeCases = summaryWithTimeseries.actuals.cases;
-    this.currentContactTracerMetric =
+    this.currentVaccinationsMetric =
       metrics && !DISABLED_CONTACT_TRACING.includes(this.fips)
         ? metrics.contactTracerCapacityRatio
         : null;
   }
 
-  get currentContactTracers() {
+  get currentVaccinations() {
+    // TODO(vaccinations): Update.
     return lastValue(
       this.actualTimeseries.map(row => row && row.contactTracers),
     );
   }
 
+  // TODO(vaccinations): Clean this up.
   // TODO(michael): We should really pre-compute currentContactTracers and
   // currentDailyAverageCases and make sure we're pulling all of the data from
   // the same day, to make sure it matches the graph.

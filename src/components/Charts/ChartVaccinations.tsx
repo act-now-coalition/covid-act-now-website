@@ -1,6 +1,6 @@
 import React from 'react';
 import ChartZones from './ChartZones';
-import { CONTACT_TRACING_LEVEL_INFO_MAP } from 'common/metrics/contact_tracing';
+import { VACCINATIONS_LEVEL_INFO_MAP } from 'common/metrics/vaccinations';
 import { Column } from 'common/models/Projection';
 import { formatPercent } from 'common/utils';
 
@@ -10,13 +10,14 @@ const getPointText = (valueY: number) => formatPercent(valueY, 0);
 
 const getTooltipContent = (valueY: number) => {
   return {
+    // TODO(vaccinations): update.
     subtitle: 'Tracers hired',
     body: `${getPointText(valueY)}`,
     width: 'auto',
   };
 };
 
-const ChartContactTracing = ({
+const ChartVaccinations = ({
   columnData,
   height = 400,
 }: {
@@ -27,10 +28,10 @@ const ChartContactTracing = ({
     height={height}
     columnData={columnData}
     capY={CAP_Y}
-    zones={CONTACT_TRACING_LEVEL_INFO_MAP}
+    zones={VACCINATIONS_LEVEL_INFO_MAP}
     getTooltipContent={getTooltipContent}
     getPointText={getPointText}
   />
 );
 
-export default ChartContactTracing;
+export default ChartVaccinations;

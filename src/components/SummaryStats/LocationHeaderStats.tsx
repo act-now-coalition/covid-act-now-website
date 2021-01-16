@@ -172,6 +172,7 @@ const LocationHeaderStats = (props: {
     isEmbed: props.isEmbed,
   };
 
+  // TODO(vaccinations): Should vaccinations be beta?
   return (
     <>
       {hasStats && (
@@ -185,7 +186,7 @@ const LocationHeaderStats = (props: {
               chartType={metric}
               value={props.stats[metric] as number}
               {...sharedStatProps}
-              beta={[Metric.HOSPITAL_USAGE, Metric.CONTACT_TRACING].includes(
+              beta={[Metric.HOSPITAL_USAGE, Metric.VACCINATIONS].includes(
                 metric,
               )}
             />

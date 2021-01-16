@@ -77,8 +77,8 @@ export class Projections {
           : null;
       case Metric.POSITIVE_TESTS:
         return this.primary.currentTestPositiveRate;
-      case Metric.CONTACT_TRACING:
-        return this.primary.currentContactTracerMetric;
+      case Metric.VACCINATIONS:
+        return this.primary.currentVaccinationsMetric;
       case Metric.CASE_DENSITY:
         return this.primary.currentCaseDensity;
       default:
@@ -104,14 +104,14 @@ export class Projections {
     rt_level: Level;
     hospitalizations_level: Level;
     test_rate_level: Level;
-    contact_tracing_level: Level;
+    vaccinations_level: Level;
     case_density: Level;
   } {
     return {
       rt_level: this.getMetricLevel(Metric.CASE_GROWTH_RATE),
       hospitalizations_level: this.getMetricLevel(Metric.HOSPITAL_USAGE),
       test_rate_level: this.getMetricLevel(Metric.POSITIVE_TESTS),
-      contact_tracing_level: this.getMetricLevel(Metric.CONTACT_TRACING),
+      vaccinations_level: this.getMetricLevel(Metric.VACCINATIONS),
       case_density: this.getMetricLevel(Metric.CASE_DENSITY),
     };
   }

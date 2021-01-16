@@ -20,6 +20,7 @@ export default function makeChartShareQuote(
       stats[2],
     )} of their ICU capacity, according to @CovidActNow. See the chart: `;
   } else if (chartIdentifier === 3) {
+    // TODO(vaccinations): Update.
     return `${displayName} is tracing only ${formatPercent(
       stats[3],
       0,

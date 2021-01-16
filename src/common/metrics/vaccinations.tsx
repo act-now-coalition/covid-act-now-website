@@ -12,7 +12,7 @@ import Thermometer from 'components/Thermometer';
 
 const METRIC_NAME = 'Tracers hired';
 
-export const ContactTracingMetric: MetricDefinition = {
+export const VaccinationsMetric: MetricDefinition = {
   renderStatus,
   renderDisclaimer,
   renderThermometer,
@@ -37,7 +37,7 @@ const UNKNOWN = 'Unknown';
 
 export const REVERSE_ORDER = true;
 
-export const CONTACT_TRACING_LEVEL_INFO_MAP: LevelInfoMap = {
+export const VACCINATIONS_LEVEL_INFO_MAP: LevelInfoMap = {
   [Level.LOW]: {
     level: Level.LOW,
     // NOTE: Setting the upperLimit to 0 means we will not grade anybody as
@@ -88,8 +88,8 @@ export const CONTACT_TRACING_LEVEL_INFO_MAP: LevelInfoMap = {
 
 function renderStatus(projections: Projections): React.ReactElement {
   const {
-    currentContactTracers,
-    currentContactTracerMetric,
+    currentVaccinations,
+    currentVaccinationsMetric,
     currentDailyAverageCases,
   } = projections.primary;
   const locationName = projections.locationName;
@@ -98,26 +98,26 @@ function renderStatus(projections: Projections): React.ReactElement {
     currentDailyAverageCases && Math.round(currentDailyAverageCases);
 
   if (
-    currentContactTracerMetric === null ||
-    currentContactTracers === null ||
+    currentVaccinationsMetric === null ||
+    currentVaccinations === null ||
     currentWeeklyAverage === null
   ) {
     return <Fragment>No contact tracing data is available.</Fragment>;
   }
 
-  const numTracers = formatInteger(currentContactTracers);
+  const numTracers = formatInteger(currentVaccinations);
   const weeklyAverage = formatInteger(currentWeeklyAverage);
   const numNeededTracers = formatInteger(
     currentWeeklyAverage * TRACERS_NEEDED_PER_CASE,
   );
 
-  const level = getLevel(Metric.CONTACT_TRACING, currentContactTracerMetric);
+  const level = getLevel(Metric.VACCINATIONS, currentVaccinationsMetric);
   const contactTracingRate = levelText(
     level,
-    `only ${formatPercent(currentContactTracerMetric)}`,
-    `only ${formatPercent(currentContactTracerMetric)}`,
-    `${formatPercent(currentContactTracerMetric)}`,
-    `${formatPercent(currentContactTracerMetric)}`,
+    `only ${formatPercent(currentVaccinationsMetric)}`,
+    `only ${formatPercent(currentVaccinationsMetric)}`,
+    `${formatPercent(currentVaccinationsMetric)}`,
+    `${formatPercent(currentVaccinationsMetric)}`,
   );
 
   const outcomesAtLevel = levelText(
@@ -172,39 +172,6 @@ function renderDisclaimer(): React.ReactElement {
 }
 
 function renderThermometer(): React.ReactElement {
-  const levelInfo = CONTACT_TRACING_LEVEL_INFO_MAP;
-  const levelCritical = levelInfo[Level.CRITICAL];
-  const levelHigh = levelInfo[Level.HIGH];
-  const levelMedium = levelInfo[Level.MEDIUM];
-  const levelLow = levelInfo[Level.LOW];
-
-  const format = (value: number) => formatPercent(value, 0);
-
-  const items = [
-    {
-      title: `Over ${format(levelHigh.upperLimit)}`,
-      description: 'Tracing possible if the program is run effectively',
-      color: levelCritical.color,
-      roundTop: true,
-      roundBottom: false,
-    },
-    {
-      title: `${format(levelMedium.upperLimit)} - ${format(
-        levelHigh.upperLimit,
-      )}`,
-      color: levelHigh.color,
-      roundTop: false,
-      roundBottom: false,
-    },
-    {
-      title: `${format(levelLow.upperLimit)} - ${format(
-        levelMedium.upperLimit,
-      )}`,
-      description: 'Effective tracing not possible',
-      color: levelMedium.color,
-      roundTop: false,
-      roundBottom: true,
-    },
-  ];
-  return <Thermometer items={items} />;
+  // NOTE: We don't grade on vaccinations yet, so no thermometer.
+  return <div />;
 }
