@@ -66,7 +66,7 @@ function renderStatus(projections: Projections): React.ReactElement {
 
   return (
     <Fragment>
-      In {locationName}, {peopleInitiated} ({percentInitiated}) people have
+      In {locationName}, {peopleInitiated} people ({percentInitiated}) have
       received the first shot and {peopleVaccinated} ({percentVaccinated}) have
       received the second shot. According to the CDC, fewer than 0.001% have
       experienced severe adverse reactions,{' '}
