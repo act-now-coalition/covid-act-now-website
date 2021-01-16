@@ -38,7 +38,7 @@ const DISABLED_ICU = new DisabledFips([
   '53', // https://trello.com/c/1IkmUuhw/
 ]);
 
-const DISABLED_CONTACT_TRACING = new DisabledFips([]);
+const DISABLED_VACCINATIONS = new DisabledFips([]);
 
 /**
  * We truncate (or in the case of charts, switch to a dashed line) the last
@@ -51,12 +51,6 @@ export const RT_TRUNCATION_DAYS = 7;
  * We truncate our projections to 4 weeks out.
  */
 export const PROJECTIONS_TRUNCATION_DAYS = 30;
-
-/**
- * We will assume roughly 5 tracers are needed to trace a case within 48h.
- * The range we give here could be between 5-15 contact tracers per case.
- */
-export const TRACERS_NEEDED_PER_CASE = 5;
 
 // We require at least 15 ICU beds in order to show ICU Capacity usage.
 // This still covers enough counties to cover 80% of the US population.
@@ -118,6 +112,17 @@ export interface ICUCapacityInfo {
   totalPatients: number;
 }
 
+export interface VaccinationsInfo {
+  percentCompletedSeries: Array<number | null>;
+  percentInitiatedSeries: Array<number | null>;
+
+  peopleInitiated: number;
+  percentInitiated: number;
+
+  peopleVaccinated: number;
+  percentVaccinated: number;
+}
+
 /**
  * We use use an estimated case fatality ratio of 1 % with lower and upper bounds
  * of 0.5% and 1.5% respectively, used to calculate case density by deaths (main
@@ -140,10 +145,10 @@ export class Projection {
   readonly fips: string;
 
   readonly icuCapacityInfo: ICUCapacityInfo | null;
+  readonly vaccinationsInfo: VaccinationsInfo | null;
 
   readonly currentCumulativeDeaths: number | null;
   readonly currentCumulativeCases: number | null;
-  readonly currentVaccinationsMetric: number | null;
   readonly currentCaseDensity: number | null;
   readonly currentDailyDeaths: number | null;
 
@@ -243,9 +248,10 @@ export class Projection {
     this.icuUtilization =
       this.icuCapacityInfo?.metricSeries || this.dates.map(date => null);
 
-    this.vaccinations = metricsTimeseries.map(
-      row => row && row.contactTracerCapacityRatio,
-    );
+    this.vaccinationsInfo = this.getVaccinationsInfo(actualTimeseries);
+    this.vaccinations =
+      this.vaccinationsInfo?.percentCompletedSeries ||
+      this.dates.map(date => null);
 
     this.caseDensityByCases = metricsTimeseries.map(
       row => row && row.caseDensity,
@@ -260,23 +266,11 @@ export class Projection {
 
     this.currentCumulativeDeaths = summaryWithTimeseries.actuals.deaths;
     this.currentCumulativeCases = summaryWithTimeseries.actuals.cases;
-    this.currentVaccinationsMetric =
-      metrics && !DISABLED_CONTACT_TRACING.includes(this.fips)
-        ? metrics.contactTracerCapacityRatio
-        : null;
   }
 
-  get currentVaccinations() {
-    // TODO(vaccinations): Update.
-    return lastValue(
-      this.actualTimeseries.map(row => row && row.contactTracers),
-    );
-  }
-
-  // TODO(vaccinations): Clean this up.
-  // TODO(michael): We should really pre-compute currentContactTracers and
-  // currentDailyAverageCases and make sure we're pulling all of the data from
-  // the same day, to make sure it matches the graph.
+  // TODO(michael): We should really pre-compute currentDailyAverageCases and
+  // make sure we're pulling all of the data from the same day, to make sure it
+  // matches the graph.
   get currentDailyAverageCases() {
     return lastValue(this.smoothedDailyCases);
   }
@@ -361,6 +355,39 @@ export class Projection {
         totalPatients,
       };
     }
+    return null;
+  }
+
+  private getVaccinationsInfo(
+    actualsTimeseries: Array<ActualsTimeseriesRow | null>,
+  ): VaccinationsInfo | null {
+    if (!DISABLED_VACCINATIONS.includes(this.fips)) {
+      const vaccinatedSeries = actualsTimeseries.map(
+        row => row?.vaccinationsCompleted || null,
+      );
+      const initiatedSeries = actualsTimeseries.map(
+        row => row?.vaccinationsInitiated || null,
+      );
+      const peopleVaccinated = lastValue(vaccinatedSeries),
+        peopleInitiated = lastValue(initiatedSeries);
+      if (peopleVaccinated !== null && peopleInitiated !== null) {
+        const percentCompletedSeries = vaccinatedSeries.map(
+          n => n && n / this.totalPopulation,
+        );
+        const percentInitiatedSeries = initiatedSeries.map(
+          n => n && n / this.totalPopulation,
+        );
+        return {
+          peopleVaccinated,
+          peopleInitiated,
+          percentInitiated: peopleInitiated / this.totalPopulation,
+          percentVaccinated: peopleVaccinated / this.totalPopulation,
+          percentCompletedSeries,
+          percentInitiatedSeries,
+        };
+      }
+    }
+
     return null;
   }
 

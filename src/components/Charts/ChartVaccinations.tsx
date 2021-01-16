@@ -3,6 +3,7 @@ import ChartZones from './ChartZones';
 import { VACCINATIONS_LEVEL_INFO_MAP } from 'common/metrics/vaccinations';
 import { Column } from 'common/models/Projection';
 import { formatPercent } from 'common/utils';
+import { getMetricDefinition, Metric } from 'common/metric';
 
 const CAP_Y = 1;
 
@@ -10,8 +11,7 @@ const getPointText = (valueY: number) => formatPercent(valueY, 0);
 
 const getTooltipContent = (valueY: number) => {
   return {
-    // TODO(vaccinations): update.
-    subtitle: 'Tracers hired',
+    subtitle: getMetricDefinition(Metric.VACCINATIONS).metricName,
     body: `${getPointText(valueY)}`,
     width: 'auto',
   };
