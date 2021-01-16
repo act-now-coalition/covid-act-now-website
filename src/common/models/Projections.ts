@@ -79,7 +79,7 @@ export class Projections {
         return this.primary.currentTestPositiveRate;
       case Metric.VACCINATIONS:
         return this.primary.vaccinationsInfo
-          ? this.primary.vaccinationsInfo.percentVaccinated
+          ? this.primary.vaccinationsInfo.percentInitiated
           : null;
       case Metric.CASE_DENSITY:
         return this.primary.currentCaseDensity;
