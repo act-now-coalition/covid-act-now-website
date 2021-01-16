@@ -58,7 +58,7 @@ export function getLevel(metric: Metric, value: number | null): Level {
 const metricDefinitions: { [metric in Metric]: MetricDefinition } = {
   [Metric.CASE_GROWTH_RATE]: CaseGrowth.CaseGrowthMetric,
   [Metric.POSITIVE_TESTS]: TestRates.PositiveTestRateMetric,
-  [Metric.HOSPITAL_USAGE]: Hospitalizations.ICUHeadroomMetric,
+  [Metric.HOSPITAL_USAGE]: Hospitalizations.ICUCapacityUsed,
   [Metric.CONTACT_TRACING]: ContactTracing.ContactTracingMetric,
   [Metric.CASE_DENSITY]: CaseDensity.CaseIncidenceMetric,
 };
