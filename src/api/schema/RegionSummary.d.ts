@@ -107,7 +107,7 @@ export type Risklevels = RiskLevels;
  *  *Low* - On track to contain COVID
  *  *Medium* - Slow disease growth
  *  *High* - At risk of outbreak
- *  *Critical* - Active outbreak
+ *  *Critical* - Active or imminent outbreak
  *  *Unknown* - Risk unknown
  *  *Extreme* - Severe outbreak
  */
@@ -172,6 +172,28 @@ export type Icubeds = HospitalResourceUtilization;
  */
 export type Newcases = number | null;
 /**
+ * Number of vaccine doses distributed.
+ */
+export type Vaccinesdistributed = number;
+/**
+ *
+ * Number of vaccinations initiated.
+ *
+ * This value may vary by type of vaccine, but for Moderna and Pfizer, this indicates
+ * number of people vaccinated with the first dose.
+ *
+ */
+export type Vaccinationsinitiated = number;
+/**
+ *
+ * Number of vaccinations completed.
+ *
+ * This value may vary by type of vaccine, but for Moderna and Pfizer, this indicates
+ * number of people vaccinated with the both first and second dose.
+ *
+ */
+export type Vaccinationscompleted = number;
+/**
  * Date of latest data
  */
 export type Lastupdateddate = string;
@@ -188,6 +210,9 @@ export interface RegionSummary {
   country: Country;
   state: State;
   county: County;
+  /**
+   * Level of region.
+   */
   level: AggregationLevel;
   lat: Lat;
   locationId: Locationid;
@@ -217,6 +242,9 @@ export interface Metrics {
  * Details about how the test positivity ratio was calculated.
  */
 export interface TestPositivityRatioDetails {
+  /**
+   * Source data for test positivity ratio.
+   */
   source: TestPositivityRatioMethod;
 }
 /**
@@ -224,20 +252,48 @@ export interface TestPositivityRatioDetails {
  */
 export interface ICUHeadroomMetricDetails {
   currentIcuCovid: Currenticucovid;
+  /**
+   * Method used to determine number of current ICU patients with covid.
+   */
   currentIcuCovidMethod: CovidPatientsMethod;
   currentIcuNonCovid: Currenticunoncovid;
+  /**
+   * Method used to determine number of current ICU patients without covid.
+   */
   currentIcuNonCovidMethod: NonCovidPatientsMethod;
 }
 /**
  * COVID risk levels for a region.
  */
 export interface RiskLevels {
+  /**
+   * Overall risk level for region.
+   */
   overall: RiskLevel;
+  /**
+   * Test positivity ratio risk level.
+   */
   testPositivityRatio: RiskLevel;
+  /**
+   * Case density risk level.
+   */
   caseDensity: RiskLevel;
+  /**
+   * Contact tracer capacity ratio risk level.
+   */
   contactTracerCapacityRatio: RiskLevel;
+  /**
+   * Infection rate risk level.
+   */
   infectionRate: RiskLevel;
+  /**
+   * ICU headroom ratio risk level.
+   */
   icuHeadroomRatio: RiskLevel;
+  /**
+   * ICU capacity ratio risk level.
+   */
+  icuCapacityRatio: RiskLevel;
 }
 /**
  * Known actuals data.
@@ -251,6 +307,9 @@ export interface Actuals {
   hospitalBeds: Hospitalbeds;
   icuBeds: Icubeds;
   newCases: Newcases;
+  vaccinesDistributed?: Vaccinesdistributed;
+  vaccinationsInitiated?: Vaccinationsinitiated;
+  vaccinationsCompleted?: Vaccinationscompleted;
 }
 /**
  * Base model for API output.

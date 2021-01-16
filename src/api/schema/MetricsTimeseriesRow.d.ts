@@ -79,6 +79,9 @@ export interface MetricsTimeseriesRow {
  * Details about how the test positivity ratio was calculated.
  */
 export interface TestPositivityRatioDetails {
+  /**
+   * Source data for test positivity ratio.
+   */
   source: TestPositivityRatioMethod;
 }
 /**
@@ -86,7 +89,13 @@ export interface TestPositivityRatioDetails {
  */
 export interface ICUHeadroomMetricDetails {
   currentIcuCovid: Currenticucovid;
+  /**
+   * Method used to determine number of current ICU patients with covid.
+   */
   currentIcuCovidMethod: CovidPatientsMethod;
   currentIcuNonCovid: Currenticunoncovid;
+  /**
+   * Method used to determine number of current ICU patients without covid.
+   */
   currentIcuNonCovidMethod: NonCovidPatientsMethod;
 }

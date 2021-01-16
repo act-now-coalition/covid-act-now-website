@@ -63,6 +63,28 @@ export type Icubeds = HospitalResourceUtilization;
  *
  */
 export type Newcases = number | null;
+/**
+ * Number of vaccine doses distributed.
+ */
+export type Vaccinesdistributed = number;
+/**
+ *
+ * Number of vaccinations initiated.
+ *
+ * This value may vary by type of vaccine, but for Moderna and Pfizer, this indicates
+ * number of people vaccinated with the first dose.
+ *
+ */
+export type Vaccinationsinitiated = number;
+/**
+ *
+ * Number of vaccinations completed.
+ *
+ * This value may vary by type of vaccine, but for Moderna and Pfizer, this indicates
+ * number of people vaccinated with the both first and second dose.
+ *
+ */
+export type Vaccinationscompleted = number;
 
 /**
  * Known actuals data.
@@ -76,6 +98,9 @@ export interface Actuals {
   hospitalBeds: Hospitalbeds;
   icuBeds: Icubeds;
   newCases: Newcases;
+  vaccinesDistributed?: Vaccinesdistributed;
+  vaccinationsInitiated?: Vaccinationsinitiated;
+  vaccinationsCompleted?: Vaccinationscompleted;
 }
 /**
  * Base model for API output.
