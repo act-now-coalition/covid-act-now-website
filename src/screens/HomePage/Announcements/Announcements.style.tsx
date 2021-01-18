@@ -68,8 +68,8 @@ export const ReadMoreButton = styled.a`
   border: 1px solid #e0e0e0;
   font-weight: 500;
   justify-content: center;
-  padding: 0.75rem 0;
-  width: 160px;
+  padding: 0.75rem;
+  width: fit-content;
   margin-bottom: 1.5rem;
   text-decoration: none;
 
