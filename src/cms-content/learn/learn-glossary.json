@@ -155,7 +155,7 @@
     {
       "term": "Face mask",
       "termId": "face-mask",
-      "definition": "A face mask is used to prevent the spread of an [infection](https://covidactnow.org/glossary#infection) or illness by covering one’s nose and mouth. In line with [CDC](https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/cloth-face-cover-guidance.html) and [WHO](https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/when-and-how-to-use-masks) guidelines, there is a body of research that suggests everyone should wear a mask to protect themselves and others from COVID.\n\nCOVID can spread between people interacting in close proximity, even among those who are [asymptomatic](https://covidactnow.org/glossary#asymptomatic) or [presymptomatic](#presymtomatic), so wearing a mask can give you an added layer of protection. The material used to make face masks can vary widely, but the [CDC recommends](https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/diy-cloth-face-coverings.html) that the public wear simple cloth face coverings in public to slow virus spread.",
+      "definition": "A face mask is used to prevent the spread of an [infection](https://covidactnow.org/glossary#infection) or illness by covering one’s nose and mouth. In line with [CDC](https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/cloth-face-cover-guidance.html) and [WHO](https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/when-and-how-to-use-masks) guidelines, there is a body of research that suggests everyone should wear a mask to protect themselves and others from COVID.\n\nCOVID can spread between people interacting in close proximity, even among those who are [asymptomatic](https://covidactnow.org/glossary#asymptomatic) or [presymptomatic](#presymptomatic-spread), so wearing a mask can give you an added layer of protection. The material used to make face masks can vary widely, but the [CDC recommends](https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/diy-cloth-face-coverings.html) that the public wear simple cloth face coverings in public to slow virus spread.",
       "category": "Prevention and mitigation"
     },
     {
@@ -203,7 +203,7 @@
     {
       "term": "Immunity*",
       "termId": "immunity",
-      "definition": "Immunity refers to the state of being able to resist a particular disease. It also refers to your body's ability to protect against foreign [pathogens](#pathogen) or substances. After being ill and recovering, you may develop natural immunity. Natural immunity occurs when your body produces [antibodies](#antibodies) against a virus, usually preventing you from contracting the virus again. Immunity can often be achieved either through a [vaccine](#vaccine) or [exposure](#exposure) to the disease.\n\nWhen a large portion of a community (the herd) becomes immune to a disease, the spread of disease from person to person becomes unlikely. This phenomenon is called [herd immunity](#herd-immunity). It would be difficult to achieve herd immunity for COVID without a vaccine, since [it is still unclear](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/facts.html?CDC_AA_refVal=https%3A%2F%2Fwww.cdc.gov%2Fcoronavirus%2F2019-ncov%2Fvaccines%2Fvaccine-benefits%2Ffacts.html) whether COVID antibodies protect people from reinfection. There have been documented cases in which people were infected with COVID more than once, though rare.",
+      "definition": "Immunity refers to the state of being able to resist a particular disease. It also refers to your body's ability to protect against foreign [pathogens](#pathogen) or substances. After being ill and recovering, you may develop natural immunity. Natural immunity occurs when your body produces [antibodies](#antibodies) against a virus, usually preventing you from contracting the virus again. Immunity can often be achieved either through a [vaccine](#vaccine) or [exposure](#exposed) to the disease.\n\nWhen a large portion of a community (the herd) becomes immune to a disease, the spread of disease from person to person becomes unlikely. This phenomenon is called [herd immunity](#herd-immunity). It would be difficult to achieve herd immunity for COVID without a vaccine, since [it is still unclear](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/facts.html?CDC_AA_refVal=https%3A%2F%2Fwww.cdc.gov%2Fcoronavirus%2F2019-ncov%2Fvaccines%2Fvaccine-benefits%2Ffacts.html) whether COVID antibodies protect people from reinfection. There have been documented cases in which people were infected with COVID more than once, though rare.",
       "category": "Health and symptoms"
     },
     {
@@ -245,7 +245,7 @@
     {
       "term": "Isolation",
       "termId": "isolation",
-      "definition": "Isolation reduces the spread of the virus by keeping people with active infections physically separated from others. Hospitals commonly isolate sick patients to prevent the spread of disease. When hospitals become overrun, it becomes much more difficult to isolate properly, and infections can therefore spread at a higher rate.\n\nSelf-isolation, [social distancing](https://covidactnow.org/glossary#social-distancing), and [mask wearing](https://covidactnow.org/glossary#face-mask) help to slow COVID spread and prevent hospitals and health care systems from getting completely overwhelmed.",
+      "definition": "Isolation reduces the spread of the virus by keeping people with active infections physically separated from others. Hospitals commonly isolate sick patients to prevent the spread of disease. When hospitals become overrun, it becomes much more difficult to isolate properly, and infections can therefore spread at a higher rate.\n\nSelf-isolation, [social distancing](#social-distancing), and [mask wearing](#face-mask) help to slow COVID spread and prevent hospitals and health care systems from getting completely overwhelmed.",
       "category": "Prevention and mitigation"
     },
     {
@@ -263,7 +263,7 @@
     {
       "term": "Non-pharmaceutical intervention (NPI)",
       "termId": "npi",
-      "definition": "Non-pharmaceutical interventions (NPIs) are actions outside of pharmaceutical interventions, such as vaccines and medicine, that help slow the spread of illness. \n\nAlso known as community [mitigation](https://covidactnow.org/glossary#mitigation) strategies, NPIs are vital in slowing COVID spread. These include wearing masks, washing your hands, staying home when you do not feel well, [social distancing](#social-distancing), and avoiding crowded indoor spaces.",
+      "definition": "Non-pharmaceutical interventions (NPIs) are actions outside of pharmaceutical interventions, such as vaccines and medicine, that help slow the spread of illness. \n\nAlso known as community [mitigation](#mitigation) strategies, NPIs are vital in slowing COVID spread. These include wearing masks, washing your hands, staying home when you do not feel well, [social distancing](#social-distancing), and avoiding crowded indoor spaces.",
       "category": "Prevention and mitigation"
     },
     {
@@ -299,7 +299,7 @@
     {
       "term": "Peak",
       "termId": "peak",
-      "definition": "A peak is the highest number of COVID cases in a country, state, or county, after which the rate of infection begins to slow. Peaks can be a prolonged period of time rather than a single day, and are best understood as the worst period of an [epidemic](https://covidactnow.org/glossary#epidemic) or [pandemic](https://covidactnow.org/glossary#pandemic).\n\n[Data suggests](https://www.nytimes.com/interactive/2020/10/15/us/coronavirus-cases-us-surge.html) that the U.S. experienced its first peak in mid-April, and entered its third [wave](https://covidactnow.org/glossary#wave) in the late fall of 2020. There is no official definition of when one wave ends and another begins, but waves can generally be identified by a peak in daily new cases followed by a substantial, sustained reduction in that metric.",
+      "definition": "A peak is the highest number of COVID cases in a country, state, or county, after which the rate of infection begins to slow. Peaks can be a prolonged period of time rather than a single day, and are best understood as the worst period of an [epidemic](#epidemic) or [pandemic](#pandemic).\n\n[Data suggests](https://www.nytimes.com/interactive/2020/10/15/us/coronavirus-cases-us-surge.html) that the U.S. experienced its first peak in mid-April, and entered its third [wave](#wave) in the late fall of 2020. There is no official definition of when one wave ends and another begins, but waves can generally be identified by a peak in daily new cases followed by a substantial, sustained reduction in that metric.",
       "category": "Disease science"
     },
     {
@@ -419,7 +419,7 @@
     {
       "term": "Suppression",
       "termId": "suppression",
-      "definition": "Suppression generally refers to the process of keeping infected people from spreading disease, but more specifically refers to reducing the [R(t)](https://covidactnow.org/glossary#rt) of a disease to less than 1.0. An R(t) below 1 indicates a decline in COVID spread. \n\nSuppression is often used interchangeably with [containment](https://covidactnow.org/glossary#containment). In order to achieve successful suppression of COVID in the United States, there would need to be widespread, high quality, rapid testing in addition to measures like [NPI's](#npi), contact tracing, and [quarantine](https://covidactnow.org/glossary#quarantine). A suppression strategy is recommended as the most efficient path to recover from COVID and avoid future lockdowns.",
+      "definition": "Suppression generally refers to the process of keeping infected people from spreading disease, but more specifically refers to reducing the [R(t)](#rt) of a disease to less than 1.0. An R(t) below 1 indicates a decline in COVID spread. \n\nSuppression is often used interchangeably with [containment](#containment). In order to achieve successful suppression of COVID in the United States, there would need to be widespread, high quality, rapid testing in addition to measures like [NPI's](#npi), contact tracing, and [quarantine](#quarantine). A suppression strategy is recommended as the most efficient path to recover from COVID and avoid future lockdowns.",
       "category": "Prevention and mitigation"
     },
     {
@@ -431,7 +431,7 @@
     {
       "term": "Surge capacity",
       "termId": "surge-capacity",
-      "definition": "Surge capacity represents a health facility’s ability to evaluate and care for a sudden increase in the number of patients beyond the normal operating capacity. To calculate surge capacity, the number of hospital beds, staff, equipment, and medical supplies currently available must be taken into account. This is important to evaluate whether a facility will have the ability to handle an increased load of new COVID cases without having to resort to [crisis standards of care](https://covidactnow.org/glossary#crisis-standards-of-care).",
+      "definition": "Surge capacity represents a health facility’s ability to evaluate and care for a sudden increase in the number of patients beyond the normal operating capacity. To calculate surge capacity, the number of hospital beds, staff, equipment, and medical supplies currently available must be taken into account. This is important to evaluate whether a facility will have the ability to handle an increased load of new COVID cases without having to resort to [crisis standards of care](#crisis-standards-of-care).",
       "category": "Disease science"
     },
     {
@@ -461,7 +461,7 @@
     {
       "term": "Vaccine",
       "termId": "vaccine",
-      "definition": "A vaccine helps protect against certain diseases, stimulating a person's immune system to help them build [immunity](https://covidactnow.org/glossary#immunity) against a specific disease. Vaccines are usually administered through needle injections, but can also be administered by mouth or sprayed into the nose.\n\nAs of mid December 2020, the [F.D.A has approved two COVID vaccines](https://www.fda.gov/news-events/press-announcements/fda-takes-additional-action-fight-against-covid-19-issuing-emergency-use-authorization-second-covid)--one by Pfizer and one by Moderna--for distribution in the U.S.",
+      "definition": "A vaccine helps protect against certain diseases, stimulating a person's immune system to help them build [immunity](#immunity) against a specific disease. Vaccines are usually administered through needle injections, but can also be administered by mouth or sprayed into the nose.\n\nAs of mid December 2020, the [F.D.A has approved two COVID vaccines](https://www.fda.gov/news-events/press-announcements/fda-takes-additional-action-fight-against-covid-19-issuing-emergency-use-authorization-second-covid)--one by Pfizer and one by Moderna--for distribution in the U.S.",
       "category": "Treatment"
     },
     {
@@ -473,7 +473,7 @@
     {
       "term": "Viral load*",
       "termId": "viral-load",
-      "definition": "Viral load is a measurement of virus particles in a unit of blood. It is measured once a person has been infected and the virus has had time to replicate in their cells. COVID patients with a higher viral load may experience more severe symptoms and may also [shed](https://covidactnow.org/glossary#viral-shedding) more whole viruses.",
+      "definition": "Viral load is a measurement of virus particles in a unit of blood. It is measured once a person has been infected and the virus has had time to replicate in their cells. COVID patients with a higher viral load may experience more severe symptoms and may also [shed](#viral-shedding) more whole viruses.",
       "category": "Disease science"
     },
     {
@@ -491,7 +491,7 @@
     {
       "term": "Wave",
       "termId": "wave",
-      "definition": "During a [pandemic](https://covidactnow.org/glossary#pandemic), a “wave” is a phenomenon in which there is a period of increased case growth which [peaks](https://covidactnow.org/glossary#peak) and is followed by a substantial, sustained reduction in cases. COVID cases seem to come in waves: first wave, second wave, and so on. There is no official definition of when one wave ends and another begins, and COVID has peaked in different states at different times.\n\n[Data suggests](https://www.nytimes.com/interactive/2020/10/15/us/coronavirus-cases-us-surge.html) the U.S. on the whole experienced its first peak mid April, second peak in mid July, and entered its third wave of cases in the late fall of 2020. The term wave is often used alongside or interchangeably with [surge](https://covidactnow.org/glossary#surge), which describes the increase in cases seen before and during the peak of a wave.",
+      "definition": "During a [pandemic](https://covidactnow.org/glossary#pandemic), a “wave” is a phenomenon in which there is a period of increased case growth which [peaks](#peak) and is followed by a substantial, sustained reduction in cases. COVID cases seem to come in waves: first wave, second wave, and so on. There is no official definition of when one wave ends and another begins, and COVID has peaked in different states at different times.\n\n[Data suggests](https://www.nytimes.com/interactive/2020/10/15/us/coronavirus-cases-us-surge.html) the U.S. on the whole experienced its first peak mid April, second peak in mid July, and entered its third wave of cases in the late fall of 2020. The term wave is often used alongside or interchangeably with [surge](#surge), which describes the increase in cases seen before and during the peak of a wave.",
       "category": "Disease science"
     }
   ],
