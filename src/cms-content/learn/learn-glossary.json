@@ -473,7 +473,7 @@
     {
       "term": "Viral load*",
       "termId": "viral-load",
-      "definition": "Viral load is a measurement of virus particles in a unit of blood. It is measured once a person has been infected and the virus has had time to replicate in their cells. COVID patients with a higher viral load may experience more severe symptoms and may also [shed ]([viral-shedding])more whole viruses.",
+      "definition": "Viral load is a measurement of virus particles in a unit of blood. It is measured once a person has been infected and the virus has had time to replicate in their cells. COVID patients with a higher viral load may experience more severe symptoms and may also [shed](https://covidactnow.org/glossary#viral-shedding) more whole viruses.",
       "category": "Disease science"
     },
     {
