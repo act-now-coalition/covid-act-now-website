@@ -15,6 +15,7 @@ import {
 import { Article } from 'cms-content/articles/utils';
 import SmallShareButtons from 'components/SmallShareButtons';
 import Footer from 'screens/Learn/Footer/Footer';
+import { getCovidExplainedFooter } from 'screens/Learn/Explained';
 
 const ArticlePage: React.FC<{
   article: Article;
@@ -39,6 +40,11 @@ const ArticlePage: React.FC<{
   const smallSubtextCopy = article.author
     ? `${article.author} Updated ${date}`
     : `Updated ${date}`;
+
+  const isCeArticle = article.author?.includes('COVID Explained');
+  const footerProps = isCeArticle && {
+    pageSpecificCopy: getCovidExplainedFooter(),
+  };
 
   const shareButtonProps = {
     shareUrl: canonicalUrl,
@@ -65,7 +71,7 @@ const ArticlePage: React.FC<{
           <SmallShareButtons {...shareButtonProps} />
         </HeaderShareButtonsWrapper>
         <MarkdownContent source={body} />
-        <Footer />
+        <Footer {...footerProps} />
         <FooterShareButtonsWrapper>
           <SmallShareButtons {...shareButtonProps} />
         </FooterShareButtonsWrapper>

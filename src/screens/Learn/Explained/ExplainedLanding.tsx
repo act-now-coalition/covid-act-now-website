@@ -5,7 +5,7 @@ import articles from 'cms-content/explained';
 
 const metaDescription = `Get the facts about how COVID is spread, how to prevent transmission, and the latest on treatments and vaccines. Backed by medical experts.`;
 const sectionIntro =
-  'COVID is confusing. How does it spread? How is it treated? Who does it affect most? To help you make good decisions, here is a series of informative articles written by health advisors for Covid Act Now, guest writers and COVID Explained’s team of researchers and  science students at Brown University, Harvard Medical School, Massachusetts General Hospital and the Massachusetts Institute of Technology (MIT).';
+  'COVID is confusing. How does it spread? How is it treated? Who does it affect most? To help you make good decisions, here is a series of informative articles written by health advisors for Covid Act Now, guest writers and COVID Explained’s team of researchers and  science students at Brown University, Harvard Medical School, Massachusetts General Hospital and the Massachusetts Institute of Technology.';
 
 const ExplainedLanding: React.FC = () => {
   const date = formatMetatagDate();

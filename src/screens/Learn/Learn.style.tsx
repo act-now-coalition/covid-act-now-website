@@ -72,7 +72,7 @@ export const SmallSubtext = styled(MarkdownContent)`
 `;
 
 export const LastUpdatedDate = styled(Paragraph)`
-  font-size: 0.875rem;
+  font-style: italic;
 `;
 
 /* Used for case studies landing + covid explained landing: */
@@ -94,6 +94,7 @@ export const CardsContainer = styled(Grid).attrs(props => ({
 export const StyledLink = styled(Link)`
   text-decoration: none;
   color: black;
+  width: 100%;
 `;
 
 /* These styles are used for the cards on CE landing (and eventually case studies landing): */
@@ -138,11 +139,15 @@ export const StyledCard = styled(Card)<{ borderTop?: boolean }>`
 
 export const StyledCardContent = styled(CardContent)`
   display: flex;
-  padding: 1.25rem;
+  padding: 1.25rem 0.5rem;
   flex-direction: row;
   justify-content: space-between;
   height: 100%;
   align-items: center;
+
+  @media (min-width: ${mobileBreakpoint}) {
+    padding: 1.25rem;
+  }
 `;
 
 export const CardLogo = styled.img.attrs(props => ({

@@ -26,7 +26,7 @@ const UpdatesRouter: React.FC = () => {
       </Route>
       {articles.map(article => {
         const relativeUrl = urlJoin(path, article.articleID);
-        const shareQuote = `See recent developments @CovidActNow, including '${article.header}'.`;
+        const shareQuote = `'${article.header}'. See this and more @CovidActNow.`;
         return (
           <Route path={relativeUrl} key={relativeUrl}>
             <Article

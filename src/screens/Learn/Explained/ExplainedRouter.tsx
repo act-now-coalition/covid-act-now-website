@@ -26,7 +26,7 @@ const ExplainedRouter: React.FC = () => {
       </Route>
       {articles.map(article => {
         const relativeUrl = urlJoin(path, article.articleID);
-        const shareQuote = `See '${article.header}', part of @CovidActNow's educational series for the everyday person, written by our health advisors, guest writers, and the COVID Explained team.`;
+        const shareQuote = `See '${article.header}', part of @CovidActNow's educational series for the everyday person, written by health advisors, guest writers, and the COVID Explained team.`;
         return (
           <Route path={relativeUrl} key={relativeUrl}>
             <Article
