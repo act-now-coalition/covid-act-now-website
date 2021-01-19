@@ -4,6 +4,7 @@
 */
 
 import { useEffect, useState } from 'react';
+import { IP_API } from 'common/ip-api';
 
 // move this elsewhere
 export interface GeolocationInfo {
@@ -17,7 +18,7 @@ export default function useGeolocation(): GeolocationInfo | undefined {
 
   useEffect(() => {
     const fetchIpData = () => {
-      fetch('https://ipapi.co/json/')
+      fetch(`https://pro.ip-api.com/json/?key=${IP_API}`)
         .then(response => response.json())
         .then(data =>
           setIpData({
@@ -25,7 +26,8 @@ export default function useGeolocation(): GeolocationInfo | undefined {
             stateCode: data.region_code,
             country: data.country_name,
           }),
-        );
+        )
+        .catch(e => console.error(e));
     };
     fetchIpData();
   }, []);
