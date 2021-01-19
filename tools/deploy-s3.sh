@@ -57,6 +57,7 @@ execute () {
       --cache-control "max-age=300"
 
   echo "Done."
+  exit 0
 }
 
 prepare "$@"
