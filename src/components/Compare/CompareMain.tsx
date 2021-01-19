@@ -112,13 +112,9 @@ const CompareMain = (props: {
     setRegion(props.region);
   }, [props.stateId, props.region]);
 
-  const defaultSortByPopulation = isHomepage ? true : false;
-
   const [sorter, setSorter] = useState(Metric.CASE_DENSITY);
   const [sortDescending, setSortDescending] = useState(true);
-  const [sortByPopulation, setSortByPopulation] = useState(
-    defaultSortByPopulation,
-  );
+  const [sortByPopulation, setSortByPopulation] = useState(true);
   const [countyTypeToView, setCountyTypeToView] = useState(MetroFilter.ALL);
 
   // For homepage:
