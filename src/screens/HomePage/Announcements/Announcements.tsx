@@ -24,14 +24,14 @@ const Announcements: React.FC = () => {
         <ExternalLink href="https://explaincovid.org/">
           COVID Explained
         </ExternalLink>{' '}
-        is joining the Covid Act Now team with the shared goal of translating
-        complex COVID concepts into simple, research-driven guidance. Moving
-        forward, COVID Explained content will be available on the Covid Act Now
-        website.
+        is joining the Covid Act Now team. Moving forward, COVID Explained’s
+        content, written by a team of researchers and students at Brown, MIT,
+        Harvard, and Massachusetts General Hospital, will be part of the Learn
+        section of our site.
       </AnnouncementBodyCopy>
       <ButtonsContainer>
         <ReadMoreButton href="/learn" target="_blank" rel="noopener">
-          Continue to Covid Act Now's Learn page
+          Read it here
         </ReadMoreButton>
         <ViewAllLink
           href="https://blog.covidactnow.org/"
