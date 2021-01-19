@@ -54,7 +54,7 @@ const Landing: React.FC = () => {
           <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>
         <LearnHeading1>{header}</LearnHeading1>
-        <MarkdownContent source={intro} />
+        {intro && <MarkdownContent source={intro} />}
         <MobileOnly>
           <TableOfContents items={getSectionItems(categories)} />
         </MobileOnly>

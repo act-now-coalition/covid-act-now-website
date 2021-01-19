@@ -14,7 +14,7 @@ export interface Term {
 
 export interface GlossaryContent {
   header: string;
-  intro: Markdown;
+  intro?: Markdown;
   lastUpdatedDate: string;
   terms: Term[];
   metadataTitle: string;

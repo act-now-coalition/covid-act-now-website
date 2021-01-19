@@ -16,6 +16,21 @@ import { Anchor } from 'components/TableOfContents';
 import { formatMetatagDate, formatNumericalDate } from 'common/utils';
 import ScrollToTopButton from 'components/SharedComponents/ScrollToTopButton';
 import { useScrollToTopButton } from 'common/hooks';
+import Footer from 'screens/Learn/Footer/Footer';
+import ExternalLink from 'components/ExternalLink';
+
+function getGlossaryFooter(): React.ReactElement {
+  return (
+    <Fragment>
+      *Created in collaboration with COVID Explained, a team of researchers from
+      Brown University, Harvard Medical School, Massachusetts Institute of
+      Technology and Massachusetts General Hospital. Learn more at{' '}
+      <ExternalLink href="https://explaincovid.org/about">
+        explaincovid.org/about
+      </ExternalLink>
+    </Fragment>
+  );
+}
 
 const Glossary: React.FC = () => {
   const {
@@ -47,7 +62,7 @@ const Glossary: React.FC = () => {
           <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>
         <LearnHeading1>{header}</LearnHeading1>
-        <MarkdownContent source={intro} />
+        {intro && <MarkdownContent source={intro} />}
         <LastUpdatedDate>
           Last updated {formatNumericalDate(lastUpdatedDate)}
         </LastUpdatedDate>
@@ -58,6 +73,7 @@ const Glossary: React.FC = () => {
             <MarkdownContent source={term.definition} />
           </Fragment>
         ))}
+        <Footer pageSpecificCopy={getGlossaryFooter()} />
         <ScrollToTopButton
           showButton={showScrollToTopButton}
           analyticsCategory={EventCategory.GLOSSARY}
