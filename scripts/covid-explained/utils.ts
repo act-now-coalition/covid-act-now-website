@@ -37,8 +37,8 @@ const migrationItems: MigrationInfo[] = [
   },
   {
     originalPath:
-      'assets/content/other/antigen-tests-whats-the-hype-about.json',
-    canArticleId: 'antigen-tests-whats-the-hype-about',
+      'assets/content/other/rapid-antigen-tests-could-they-curb-the-pandemic.json',
+    canArticleId: 'rapid-antigen-tests-could-they-curb-the-pandemic',
   },
   {
     originalPath: 'assets/content/kids/kids-and-covid-19.json',

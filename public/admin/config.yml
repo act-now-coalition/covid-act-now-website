@@ -360,6 +360,7 @@ collections:
           - label: Intro
             name: intro
             widget: markdown
+            required: false
           - label: Last updated date
             name: lastUpdatedDate
             widget: datetime
@@ -404,6 +405,7 @@ collections:
           - label: Intro
             name: intro
             widget: markdown
+            required: false
           - label: Last updated date
             name: lastUpdatedDate
             widget: datetime
@@ -446,6 +448,7 @@ collections:
             name: intro
             widget: markdown
             hint: Introduction for the case studies landing page
+            required: false
           - label: Categories
             name: categories
             widget: list
@@ -599,6 +602,7 @@ collections:
           - label: Page Intro
             name: pageIntro
             widget: markdown
+            required: false
           - label: Sections
             name: sections
             widget: list

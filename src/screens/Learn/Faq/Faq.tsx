@@ -16,6 +16,7 @@ import { useScrollToTopButton } from 'common/hooks';
 import ScrollToTopButton from 'components/SharedComponents/ScrollToTopButton';
 import { EventCategory } from 'components/Analytics';
 import FaqStructuredData from './FaqStructuredData';
+import Footer from 'screens/Learn/Footer/Footer';
 
 const Faq: React.FC = () => {
   const {
@@ -54,7 +55,7 @@ const Faq: React.FC = () => {
           <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>
         <LearnHeading1>{header}</LearnHeading1>
-        <MarkdownContent source={intro} />
+        {intro && <MarkdownContent source={intro} />}
         <LastUpdatedDate>
           Last updated {formatNumericalDate(lastUpdatedDate)}
         </LastUpdatedDate>
@@ -64,6 +65,7 @@ const Faq: React.FC = () => {
         {sections.map((section: FaqSection) => (
           <Section key={section.sectionId} section={section} />
         ))}
+        <Footer />
         <ScrollToTopButton
           showButton={showScrollToTopButton}
           analyticsCategory={EventCategory.FAQ}
