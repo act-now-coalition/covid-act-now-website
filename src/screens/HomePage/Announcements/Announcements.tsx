@@ -1,5 +1,4 @@
 import React from 'react';
-import ExternalLink from 'components/ExternalLink';
 import { Subtitle1 } from 'components/Typography';
 import {
   AnnouncementIntro,
