@@ -1,6 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import ExternalLink from 'components/ExternalLink';
 import { Subtitle1 } from 'components/Typography';
 import {
   AnnouncementIntro,
@@ -17,25 +15,18 @@ const Announcements: React.FC = () => {
     <Wrapper>
       <Subtitle1>Announcements</Subtitle1>
       <AnnouncementIntro>
-        Covid Act Now and Covid Exit Strategy are now one team
+        COVID Explained is joining the Covid Act Now team
       </AnnouncementIntro>
-      <Date>MONDAY, Dec 14, 2020</Date>
+      <Date>TUESDAY, Jan 19, 2021</Date>
       <AnnouncementBodyCopy>
-        We’re excited to officially announce that{' '}
-        <ExternalLink href="https://www.covidexitstrategy.org">
-          Covid Exit Strategy (CES)
-        </ExternalLink>{' '}
-        and <Link to="/">Covid Act Now (CAN)</Link> are joining forces. Updates
-        to CES will continue until December 20, with the CES team joining CAN to
-        grow the data and tools we provide for you.
+        We are excited to announce that COVID Explained is joining the Covid Act
+        Now team. Moving forward, COVID Explained’s content, written by a team
+        of researchers and students at Brown, MIT, Harvard, and Massachusetts
+        General Hospital, will be part of the Learn section of our site.
       </AnnouncementBodyCopy>
       <ButtonsContainer>
-        <ReadMoreButton
-          href="https://blog.covidactnow.org/covid-exit-strategy-covid-act-now/"
-          target="_blank"
-          rel="noopener"
-        >
-          Continue reading
+        <ReadMoreButton href="/learn" target="_blank" rel="noopener">
+          Read it here
         </ReadMoreButton>
         <ViewAllLink
           href="https://blog.covidactnow.org/"

@@ -16,7 +16,7 @@ export const AnnouncementIntro = styled(Typography)`
   font-family: Roboto;
   font-weight: 900;
   font-size: 24px;
-  line-height: 120%;
+  line-height: 130%;
   margin-bottom: 1rem;
 
   @media (min-width: ${materialSMBreakpoint}) {
@@ -36,7 +36,7 @@ export const Date = styled(Typography)`
 
 export const AnnouncementBodyCopy = styled(Typography)`
   font-family: Roboto;
-  font-size: 14px;
+  font-size: 1rem;
   line-height: 160%;
   letter-spacing: 0.01em;
   margin-bottom: 1.5rem;
@@ -56,7 +56,7 @@ export const ButtonsContainer = styled(Box)`
 
 const SharedButtonStyles = css`
   font-family: Roboto;
-  font-size: 14px;
+  font-size: 1rem;
   line-height: 1.4;
   color: ${COLOR_MAP.BLUE};
   display: flex;
