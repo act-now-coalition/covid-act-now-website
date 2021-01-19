@@ -20,14 +20,10 @@ const Announcements: React.FC = () => {
       </AnnouncementIntro>
       <Date>TUESDAY, Jan 19, 2021</Date>
       <AnnouncementBodyCopy>
-        We are excited to announce that{' '}
-        <ExternalLink href="https://explaincovid.org/">
-          COVID Explained
-        </ExternalLink>{' '}
-        is joining the Covid Act Now team. Moving forward, COVID Explained’s
-        content, written by a team of researchers and students at Brown, MIT,
-        Harvard, and Massachusetts General Hospital, will be part of the Learn
-        section of our site.
+        We are excited to announce that COVID Explained is joining the Covid Act
+        Now team. Moving forward, COVID Explained’s content, written by a team
+        of researchers and students at Brown, MIT, Harvard, and Massachusetts
+        General Hospital, will be part of the Learn section of our site.
       </AnnouncementBodyCopy>
       <ButtonsContainer>
         <ReadMoreButton href="/learn" target="_blank" rel="noopener">
