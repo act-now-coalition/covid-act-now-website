@@ -10,6 +10,7 @@ import {
 } from 'components/Charts';
 import { Metric } from 'common/metric';
 import { SeriesType, Series } from 'components/Explore/interfaces';
+import { COLOR_MAP } from 'common/colors';
 
 // TODO(michael): Rename to `Chart` once we get rid of existing (highcharts) Chart component.
 // TODO(michael): Update ChartsHolder to use this component instead of the individual chart components.
@@ -66,23 +67,23 @@ function getVaccinationSeries(projection: Projection): Series[] {
   return [
     {
       type: SeriesType.LINE,
-      data: projection.getDataset('vaccinations'),
-      label: 'Vaccinations Completed',
-      shortLabel: 'Completed',
-      tooltipLabel: 'Vaccinations completed:',
-      params: {
-        stroke: '#547980',
-        fill: '#fff',
-      },
-    },
-    {
-      type: SeriesType.LINE,
       data: projection.getDataset('vaccinationsInitiated'),
       label: 'vaccinationsInitiated',
       shortLabel: 'Initiated',
       tooltipLabel: 'Vaccinations initiated:',
       params: {
-        stroke: '#45ADA8',
+        stroke: COLOR_MAP.GREEN.BASE,
+        fill: '#fff',
+      },
+    },
+    {
+      type: SeriesType.LINE,
+      data: projection.getDataset('vaccinations'),
+      label: 'Vaccinations Completed',
+      shortLabel: 'Completed',
+      tooltipLabel: 'Vaccinations completed:',
+      params: {
+        stroke: COLOR_MAP.GREEN.DARK,
         fill: '#fff',
       },
     },
