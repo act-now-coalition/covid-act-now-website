@@ -72,7 +72,7 @@ function getVaccinationSeries(projection: Projection): Series[] {
       shortLabel: 'Initiated',
       tooltipLabel: 'Vaccinations initiated:',
       params: {
-        stroke: COLOR_MAP.GREEN.BASE,
+        stroke: '#aaa',
         fill: '#fff',
       },
     },
@@ -83,7 +83,7 @@ function getVaccinationSeries(projection: Projection): Series[] {
       shortLabel: 'Completed',
       tooltipLabel: 'Vaccinations completed:',
       params: {
-        stroke: COLOR_MAP.GREEN.DARK,
+        stroke: '#000',
         fill: '#fff',
       },
     },
