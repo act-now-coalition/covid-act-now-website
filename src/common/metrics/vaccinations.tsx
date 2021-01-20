@@ -6,18 +6,18 @@ import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
 import ExternalLink from 'components/ExternalLink';
 
-const METRIC_NAME = '% Vaccinated';
+const METRIC_NAME = '% Started Vaccine';
 
 export const VaccinationsMetric: MetricDefinition = {
   renderStatus,
   renderDisclaimer,
   renderThermometer,
   metricName: METRIC_NAME,
-  extendedMetricName: 'Percent Vaccinated',
-  metricNameForCompare: 'Percent Vaccinated',
+  extendedMetricName: 'Percent Vaccinated with 1st and 2nd shot',
+  metricNameForCompare: 'Percent Started Vaccine',
 };
 
-const SHORT_DESCRIPTION_LOW = 'Vaccinations are in progress';
+const SHORT_DESCRIPTION_LOW = 'Population given the first shot';
 const SHORT_DESCRIPTION_UNKNOWN = 'Insufficient data to assess';
 
 const UNKNOWN = 'Unknown';
@@ -57,7 +57,7 @@ function renderStatus(projections: Projections): React.ReactElement {
   if (!info) {
     return <Fragment>No vaccination data is available.</Fragment>;
   }
-  const locationName = projections.locationName;
+  const { locationName } = projections;
 
   const peopleInitiated = formatInteger(info.peopleInitiated);
   const percentInitiated = formatPercent(info.percentInitiated, 1);
@@ -66,13 +66,11 @@ function renderStatus(projections: Projections): React.ReactElement {
 
   return (
     <Fragment>
-      In {locationName}, {peopleInitiated} people ({percentInitiated}) have
+      In {locationName}, {peopleInitiated} ({percentInitiated}) people have
       received the first shot and {peopleVaccinated} ({percentVaccinated}) have
-      received the second shot. According to the CDC, fewer than 0.001% have
-      experienced severe adverse reactions,{' '}
-      <ExternalLink href="https://www.cdc.gov/mmwr/volumes/70/wr/mm7002e1.htm">
-        learn more.
-      </ExternalLink>
+      also received the second shot. According to the CDC, fewer than 0.001% of
+      those who have received the first dose have experienced a severe adverse
+      reaction, none of them deadly.
     </Fragment>
   );
 }
@@ -83,8 +81,9 @@ function renderDisclaimer(): React.ReactElement {
       Vaccination data is provided by the{' '}
       <ExternalLink href="https://covid.cdc.gov/covid-data-tracker/#vaccinations">
         CDC
-      </ExternalLink>
-      .
+      </ExternalLink>{' '}
+      or retrieved from state websites. Reporting may be delayed from the time
+      of vaccination.
     </Fragment>
   );
 }
