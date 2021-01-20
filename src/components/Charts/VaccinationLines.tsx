@@ -1,24 +1,92 @@
-import React from 'react';
+import React, { useCallback, Fragment } from 'react';
+// import moment from 'moment';
+import { isNumber } from 'lodash';
 import { Group } from '@vx/group';
 import { scaleTime, scaleLinear } from '@vx/scale';
-import { Series } from '../Explore/interfaces';
-import * as Styles from '../Explore/Explore.style';
-import Axes from 'components/Explore/Axes';
-import GridLines from 'components/Explore/GridLines';
-import ChartSeries from 'components/Explore/SeriesChart';
-import { RectClipGroup } from 'components/Charts';
-import { Column } from 'common/models/Projection';
-import moment from 'moment';
-import { formatPercent } from 'common/utils';
+import { useTooltip } from '@vx/tooltip';
 import { ParentSize } from '@vx/responsive';
-import * as ChartStyle from './Charts.style';
-import { Axis as AxisStyle } from 'components/Explore/Explore.style';
 import { AxisLeft, AxisBottom } from '@vx/axis';
+import { Tooltip, RectClipGroup } from 'components/Charts';
+import { Column } from 'common/models/Projection';
+import {
+  formatPercent,
+  formatInteger,
+  formatDecimal,
+  formatUtcDate,
+} from 'common/utils';
+import * as ChartStyle from './Charts.style';
+import { ScreenshotReady } from 'components/Screenshot';
+import GridLines from 'components/Explore/GridLines';
+import * as Styles from '../Explore/Explore.style';
+import { Series } from '../Explore/interfaces';
+import ChartSeries, { SeriesMarker } from 'components/Explore/SeriesChart';
+import { Axis as AxisStyle } from 'components/Explore/Explore.style';
+import ChartOverlay from 'components/Explore/ChartOverlay';
+import DateMarker from 'components/Explore/DateMarker';
+import { findPointByDate } from 'components/Explore/utils';
 
 const getDate = (d: Column) => new Date(d.x);
 const getY = (d: Column) => d.y;
-const daysBetween = (dateFrom: Date, dateTo: Date) =>
-  moment(dateTo).diff(dateFrom, 'days');
+
+const VaccinesTooltip: React.FC<{
+  date: Date;
+  seriesList: Series[];
+  left: (d: Column) => number;
+  top: (d: Column) => number;
+  subtext: string;
+}> = ({ seriesList, left, top, date, subtext }) => {
+  const [seriesCompleted, seriesInitiated] = seriesList;
+  const pointCompleted = findPointByDate(seriesCompleted.data, date);
+  const pointInitiated = findPointByDate(seriesInitiated.data, date);
+
+  return pointCompleted && pointInitiated ? (
+    <Tooltip
+      width={'210px'}
+      top={top(pointCompleted)}
+      left={left(pointCompleted)}
+      title={formatUtcDate(new Date(pointCompleted.x), 'MMM D, YYYY')}
+    >
+      <Styles.TooltipSubtitle>
+        {seriesCompleted.tooltipLabel}
+      </Styles.TooltipSubtitle>
+      <Styles.TooltipMetric>
+        {isNumber(pointCompleted.y) ? formatPercent(pointCompleted.y, 1) : '-'}
+      </Styles.TooltipMetric>
+      <Styles.TooltipSubtitle>
+        {seriesInitiated.tooltipLabel}
+      </Styles.TooltipSubtitle>
+      <Styles.TooltipMetric>
+        {isNumber(pointInitiated.y) ? formatPercent(pointInitiated.y, 1) : '-'}
+      </Styles.TooltipMetric>
+      <Styles.TooltipSubtitle></Styles.TooltipSubtitle>
+    </Tooltip>
+  ) : null;
+};
+
+const DataHoverMarkers: React.FC<{
+  seriesList: Series[];
+  date: Date;
+  x: (d: Column) => number;
+  y: (d: Column) => number;
+  yMax: number;
+}> = ({ seriesList, x, y, date, yMax }) => (
+  <Fragment>
+    {seriesList.map(({ label, type, data, params }) => (
+      <SeriesMarker
+        key={`series-marker-${label}`}
+        type={type}
+        data={data}
+        x={x}
+        y={y}
+        date={date}
+        yMax={yMax}
+        barWidth={0}
+        barOpacityHover={0}
+        params={params}
+      />
+    ))}
+  </Fragment>
+);
 
 const VaccinationLines: React.FC<{
   seriesList?: Series[];
@@ -33,7 +101,7 @@ const VaccinationLines: React.FC<{
   width,
   height,
   marginTop = 10,
-  marginBottom = 60,
+  marginBottom = 30,
   marginLeft = 60,
   marginRight = 20,
 }) => {
@@ -54,6 +122,20 @@ const VaccinationLines: React.FC<{
     range: [innerHeight, 0],
   });
 
+  const { tooltipOpen, tooltipData, hideTooltip, showTooltip } = useTooltip<{
+    date: Date;
+  }>();
+
+  const onMouseOver = useCallback(
+    ({ x }: { x: number }) => {
+      const date = dateScale.invert(x - marginLeft);
+      showTooltip({
+        tooltipData: { date },
+      });
+    },
+    [showTooltip, dateScale, marginLeft],
+  );
+
   const getXPosition = (d: Column) => dateScale(getDate(d)) || 0;
   const getYPosition = (d: Column) => yScale(getY(d));
 
@@ -68,6 +150,7 @@ const VaccinationLines: React.FC<{
             yScale={yScale}
             numTicksRows={5}
           />
+          {/* Axes */}
           <AxisStyle>
             <AxisLeft
               scale={yScale}
@@ -76,7 +159,7 @@ const VaccinationLines: React.FC<{
             />
             <AxisBottom top={innerHeight} scale={dateScale} />
           </AxisStyle>
-          <RectClipGroup width={innerWidth} height={innerHeight}>
+          <RectClipGroup width={innerWidth} height={innerHeight + 2}>
             {seriesList.map(({ label, data, type, params }) => (
               <ChartSeries
                 key={`series-chart-${label}`}
@@ -91,8 +174,40 @@ const VaccinationLines: React.FC<{
               />
             ))}
           </RectClipGroup>
+          {tooltipOpen && tooltipData && (
+            <DataHoverMarkers
+              x={getXPosition}
+              y={getYPosition}
+              yMax={innerHeight}
+              seriesList={seriesList}
+              date={tooltipData.date}
+            />
+          )}
+          <ChartOverlay
+            width={innerWidth}
+            height={innerHeight}
+            xScale={dateScale}
+            onMouseOver={onMouseOver}
+            onMouseOut={hideTooltip}
+          />
         </Group>
       </svg>
+      {tooltipOpen && tooltipData && (
+        <Fragment>
+          <VaccinesTooltip
+            left={p => getXPosition(p) + marginLeft}
+            top={p => getYPosition(p) + marginTop}
+            date={tooltipData.date}
+            seriesList={seriesList}
+            subtext={'A'}
+          />
+          <DateMarker
+            left={dateScale(tooltipData.date) + marginLeft}
+            date={tooltipData.date}
+          />
+        </Fragment>
+      )}
+      {width > 0 && seriesList.length > 0 && <ScreenshotReady />}
     </Styles.PositionRelative>
   );
 };

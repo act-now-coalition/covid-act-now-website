@@ -69,14 +69,22 @@ function getVaccinationSeries(projection: Projection): Series[] {
       data: projection.getDataset('vaccinations'),
       label: 'Vaccinations Completed',
       shortLabel: 'Completed',
-      tooltipLabel: 'Completed',
+      tooltipLabel: 'Vaccinations completed:',
+      params: {
+        stroke: '#547980',
+        fill: '#fff',
+      },
     },
     {
       type: SeriesType.LINE,
       data: projection.getDataset('vaccinationsInitiated'),
       label: 'vaccinationsInitiated',
       shortLabel: 'Initiated',
-      tooltipLabel: 'Initiated',
+      tooltipLabel: 'Vaccinations initiated:',
+      params: {
+        stroke: '#45ADA8',
+        fill: '#fff',
+      },
     },
   ];
 }
