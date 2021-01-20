@@ -4,8 +4,8 @@ import {
   sortBy,
   find,
   values,
-  remove,
   isNull,
+  without,
 } from 'lodash';
 import regions from './region_db';
 import { getStateFips } from './regions_data';
@@ -144,9 +144,9 @@ export function getAutocompleteRegionsWithGeolocation(
     geolocatedRegionValues,
   );
 
-  const otherRegions: Region[] = remove(
+  const otherRegions: Region[] = without(
     locations,
-    (location: Region) => !sanitizedGeolocatedRegions.includes(location),
+    ...sanitizedGeolocatedRegions,
   );
 
   const finalLocations = [...sanitizedGeolocatedRegions, ...otherRegions];
