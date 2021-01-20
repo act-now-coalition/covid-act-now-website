@@ -18,7 +18,12 @@ const levels = [
   Level.SUPER_CRITICAL,
 ];
 
-const items = levels.map(level => {
+interface ThermometerItem {
+  label: string;
+  color: string;
+}
+
+const items: ThermometerItem[] = levels.map((level: Level) => {
   const summaryLevel = LOCATION_SUMMARY_LEVELS[level];
   return {
     label: summaryLevel.name, // for tooltip?
@@ -50,8 +55,8 @@ const HorizontalThermometer: React.FC = () => {
     <Wrapper>
       <ThermometerContainer>
         <ThermometerLabel label="Low" />
-        {items.map((item: any) => {
-          return <ColorBlock color={item.color} />;
+        {items.map((item: ThermometerItem) => {
+          return <ColorBlock color={item.color} key={item.label} />;
         })}
         <ThermometerLabel label="Severe" />
       </ThermometerContainer>
