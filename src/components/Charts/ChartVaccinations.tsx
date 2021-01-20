@@ -23,7 +23,9 @@ const getY = (d: Column) => d.y;
 
 const xTickFormat = (date: Date, isMobile: boolean) => {
   const momentDate = moment(date);
-  const dateFormat = momentDate.month() === 0 ? 'MMM YYYY' : 'MMM';
+  // Shows the year if the tick is in January (0) or December (11)
+  const dateFormat =
+    momentDate.month() === 0 || momentDate.month() === 11 ? 'MMM YYYY' : 'MMM';
   return momentDate.format(dateFormat);
 };
 
@@ -88,7 +90,7 @@ const DataHoverMarkers: React.FC<{
         yMax={yMax}
         barWidth={0}
         barOpacityHover={0}
-        params={params}
+        params={{ stroke: '#fff', fill: params?.fill }}
       />
     ))}
   </Fragment>
@@ -116,8 +118,8 @@ const VaccinationLines: React.FC<{
 
   // Note: The end date and 35% bounds are set to approximately match the goal of 100M
   // vaccines in the first 100 days of the Biden administration
-  const dateFrom = new Date('2020-12-14');
-  const dateTo = new Date('2021-04-30');
+  const dateFrom = new Date('2020-12-01');
+  const dateTo = new Date('2021-05-01');
 
   const dateScale = scaleUtc({
     domain: [dateFrom, dateTo],
