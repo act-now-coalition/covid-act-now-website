@@ -1,5 +1,6 @@
 import React from 'react';
 import { Projections } from 'common/models/Projections';
+import { Projection } from 'common/models/Projection';
 import {
   ChartRt,
   ChartPositiveTestRate,
@@ -8,6 +9,7 @@ import {
   ChartCaseDensity,
 } from 'components/Charts';
 import { Metric } from 'common/metric';
+import { SeriesType, Series } from 'components/Explore/interfaces';
 
 // TODO(michael): Rename to `Chart` once we get rid of existing (highcharts) Chart component.
 // TODO(michael): Update ChartsHolder to use this component instead of the individual chart components.
@@ -53,9 +55,28 @@ export default function MetricChart({
       {metric === Metric.VACCINATIONS && (
         <ChartVaccinations
           height={height}
-          columnData={projection.getDataset('vaccinations')}
+          seriesList={getVaccinationSeries(projection)}
         />
       )}
     </>
   );
+}
+
+function getVaccinationSeries(projection: Projection): Series[] {
+  return [
+    {
+      type: SeriesType.LINE,
+      data: projection.getDataset('vaccinations'),
+      label: 'Vaccinations Completed',
+      shortLabel: 'Completed',
+      tooltipLabel: 'Completed',
+    },
+    {
+      type: SeriesType.LINE,
+      data: projection.getDataset('vaccinationsInitiated'),
+      label: 'vaccinationsInitiated',
+      shortLabel: 'Initiated',
+      tooltipLabel: 'Initiated',
+    },
+  ];
 }
