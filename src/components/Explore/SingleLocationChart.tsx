@@ -2,7 +2,7 @@ import React, { useCallback, Fragment } from 'react';
 import moment from 'moment';
 import { isNumber } from 'lodash';
 import { Group } from '@vx/group';
-import { scaleTime, scaleLinear } from '@vx/scale';
+import { scaleUtc, scaleLinear } from '@vx/scale';
 import { useTooltip } from '@vx/tooltip';
 import { formatInteger, formatDecimal, formatUtcDate } from 'common/utils';
 import { Column } from 'common/models/Projection';
@@ -121,7 +121,7 @@ const SingleLocationChart: React.FC<{
   const innerWidth = width - marginLeft - marginRight;
   const innerHeight = height - marginTop - marginBottom;
 
-  const dateScale = scaleTime({
+  const dateScale = scaleUtc({
     domain: [dateFrom, dateTo],
     range: [0, innerWidth],
   });
