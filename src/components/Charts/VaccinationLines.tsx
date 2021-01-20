@@ -1,23 +1,22 @@
 import React, { useCallback, Fragment } from 'react';
-import { isNumber, min } from 'lodash';
+import { isNumber } from 'lodash';
+import { AxisLeft, AxisBottom } from '@vx/axis';
 import { Group } from '@vx/group';
+import { ParentSize } from '@vx/responsive';
 import { scaleTime, scaleLinear } from '@vx/scale';
 import { useTooltip } from '@vx/tooltip';
-import { ParentSize } from '@vx/responsive';
-import { AxisLeft, AxisBottom } from '@vx/axis';
-import { Tooltip, RectClipGroup } from 'components/Charts';
-import { Column } from 'common/models/Projection';
 import { formatPercent, formatUtcDate } from 'common/utils';
-import * as ChartStyle from './Charts.style';
+import { Column } from 'common/models/Projection';
+import { Tooltip, RectClipGroup } from 'components/Charts';
 import { ScreenshotReady } from 'components/Screenshot';
 import GridLines from 'components/Explore/GridLines';
-import * as Styles from '../Explore/Explore.style';
-import { Series } from '../Explore/interfaces';
+import * as Styles from 'components/Explore/Explore.style';
+import { Series } from 'components/Explore/interfaces';
 import ChartSeries, { SeriesMarker } from 'components/Explore/SeriesChart';
-import { Axis as AxisStyle } from 'components/Explore/Explore.style';
 import ChartOverlay from 'components/Explore/ChartOverlay';
 import DateMarker from 'components/Explore/DateMarker';
 import { findPointByDate } from 'components/Explore/utils';
+import * as ChartStyle from './Charts.style';
 
 const getDate = (d: Column) => new Date(d.x);
 const getY = (d: Column) => d.y;
@@ -145,14 +144,14 @@ const VaccinationLines: React.FC<{
             numTicksRows={5}
           />
           {/* Axes */}
-          <AxisStyle>
+          <Styles.Axis>
             <AxisLeft
               scale={yScale}
               numTicks={5}
               tickFormat={(value: number) => formatPercent(value, 0)}
             />
             <AxisBottom top={innerHeight} scale={dateScale} />
-          </AxisStyle>
+          </Styles.Axis>
           <RectClipGroup width={innerWidth} height={innerHeight + 2}>
             {seriesList.map(({ label, data, type, params }) => (
               <ChartSeries
