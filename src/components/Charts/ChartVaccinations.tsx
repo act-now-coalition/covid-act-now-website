@@ -1,4 +1,5 @@
 import React, { useCallback, Fragment } from 'react';
+import moment from 'moment';
 import { isNumber } from 'lodash';
 import { AxisLeft, AxisBottom } from '@vx/axis';
 import { Group } from '@vx/group';
@@ -14,11 +15,17 @@ import * as Styles from 'components/Explore/Explore.style';
 import { Series } from 'components/Explore/interfaces';
 import ChartSeries, { SeriesMarker } from 'components/Explore/SeriesChart';
 import ChartOverlay from 'components/Explore/ChartOverlay';
-import { findPointByDate } from 'components/Explore/utils';
+import { findPointByDate, getTimeAxisTicks } from 'components/Explore/utils';
 import * as ChartStyle from './Charts.style';
 
 const getDate = (d: Column) => new Date(d.x);
 const getY = (d: Column) => d.y;
+
+const xTickFormat = (date: Date, isMobile: boolean) => {
+  const momentDate = moment(date);
+  const dateFormat = momentDate.month() === 0 ? 'MMM YYYY' : 'MMM';
+  return momentDate.format(dateFormat);
+};
 
 const VaccinesTooltip: React.FC<{
   date: Date;
@@ -139,6 +146,7 @@ const VaccinationLines: React.FC<{
 
   const getXPosition = (d: Column) => dateScale(getDate(d)) || 0;
   const getYPosition = (d: Column) => yScale(getY(d));
+  const dateTicks = getTimeAxisTicks(dateFrom, dateTo);
 
   return (
     <Styles.PositionRelative style={{ height }}>
@@ -150,6 +158,7 @@ const VaccinationLines: React.FC<{
             dateScale={dateScale}
             yScale={yScale}
             numTicksRows={5}
+            xTickValues={dateTicks.map(date => date.valueOf())}
           />
           {/* Axes */}
           <Styles.Axis>
@@ -158,7 +167,12 @@ const VaccinationLines: React.FC<{
               numTicks={5}
               tickFormat={(value: number) => formatPercent(value, 0)}
             />
-            <AxisBottom top={innerHeight} scale={dateScale} />
+            <AxisBottom
+              top={innerHeight}
+              scale={dateScale}
+              tickValues={dateTicks}
+              tickFormat={d => xTickFormat(d, false)}
+            />
           </Styles.Axis>
           <RectClipGroup width={innerWidth} height={innerHeight + 2}>
             {seriesList.map(({ label, data, type, params }) => (
@@ -200,7 +214,7 @@ const VaccinationLines: React.FC<{
             top={p => getYPosition(p) + marginTop}
             date={tooltipData.date}
             seriesList={seriesList}
-            subtext={'A'}
+            subtext={''}
           />
         </Fragment>
       )}
