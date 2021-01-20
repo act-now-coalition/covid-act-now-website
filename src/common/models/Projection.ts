@@ -252,7 +252,7 @@ export class Projection {
 
     this.vaccinationsInfo = this.getVaccinationsInfo(actualTimeseries);
     this.vaccinations =
-      this.vaccinationsInfo?.percentCompletedSeries ||
+      this.vaccinationsInfo?.percentInitiatedSeries ||
       this.dates.map(date => null);
     this.vaccinationsInitiated =
       this.vaccinationsInfo?.percentInitiatedSeries ||
