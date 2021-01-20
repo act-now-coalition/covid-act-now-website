@@ -1,5 +1,5 @@
 import React, { useCallback, Fragment } from 'react';
-import { isNumber } from 'lodash';
+import { isNumber, min } from 'lodash';
 import { Group } from '@vx/group';
 import { scaleTime, scaleLinear } from '@vx/scale';
 import { useTooltip } from '@vx/tooltip';
@@ -102,7 +102,7 @@ const VaccinationLines: React.FC<{
   const innerHeight = height - marginTop - marginBottom;
   const innerWidth = width - marginLeft - marginRight;
 
-  const dateFrom = new Date('2021-01-01');
+  const dateFrom = new Date('2021-01-11');
   const dateTo = new Date();
 
   const dateScale = scaleTime({

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Projections } from 'common/models/Projections';
-import { Projection } from 'common/models/Projection';
+import { Projection, Column } from 'common/models/Projection';
 import {
   ChartRt,
   ChartPositiveTestRate,
@@ -67,7 +67,7 @@ function getVaccinationSeries(projection: Projection): Series[] {
   return [
     {
       type: SeriesType.LINE,
-      data: projection.getDataset('vaccinationsInitiated'),
+      data: filterNull(projection.getDataset('vaccinationsInitiated')),
       label: 'vaccinationsInitiated',
       shortLabel: 'Initiated',
       tooltipLabel: 'Vaccinations initiated:',
@@ -78,7 +78,7 @@ function getVaccinationSeries(projection: Projection): Series[] {
     },
     {
       type: SeriesType.LINE,
-      data: projection.getDataset('vaccinations'),
+      data: filterNull(projection.getDataset('vaccinations')),
       label: 'Vaccinations Completed',
       shortLabel: 'Completed',
       tooltipLabel: 'Vaccinations completed:',
@@ -88,4 +88,8 @@ function getVaccinationSeries(projection: Projection): Series[] {
       },
     },
   ];
+}
+
+function filterNull(points: Column[]) {
+  return points.filter(p => p.y !== null);
 }
