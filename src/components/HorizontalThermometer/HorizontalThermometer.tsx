@@ -6,7 +6,7 @@ import {
   Label,
   InfoIcon,
   InfoLink,
-} from './NewThermometer.style';
+} from './HorizontalThermometer.style';
 import { Level } from 'common/level';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 
@@ -45,7 +45,7 @@ const AboutLink: React.FC = () => {
   );
 };
 
-const NewThermometer: React.FC = () => {
+const HorizontalThermometer: React.FC = () => {
   return (
     <Wrapper>
       <ThermometerContainer>
@@ -60,4 +60,4 @@ const NewThermometer: React.FC = () => {
   );
 };
 
-export default NewThermometer;
+export default HorizontalThermometer;
