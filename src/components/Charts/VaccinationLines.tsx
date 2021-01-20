@@ -3,7 +3,7 @@ import { isNumber } from 'lodash';
 import { AxisLeft, AxisBottom } from '@vx/axis';
 import { Group } from '@vx/group';
 import { ParentSize } from '@vx/responsive';
-import { scaleTime, scaleLinear } from '@vx/scale';
+import { scaleUtc, scaleLinear } from '@vx/scale';
 import { useTooltip } from '@vx/tooltip';
 import { formatPercent, formatUtcDate } from 'common/utils';
 import { Column } from 'common/models/Projection';
@@ -104,7 +104,7 @@ const VaccinationLines: React.FC<{
   const dateFrom = new Date('2021-01-11');
   const dateTo = new Date();
 
-  const dateScale = scaleTime({
+  const dateScale = scaleUtc({
     domain: [dateFrom, dateTo],
     range: [0, innerWidth],
   });
