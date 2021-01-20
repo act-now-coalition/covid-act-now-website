@@ -3,7 +3,7 @@ export { default as ChartRt } from './ChartRt';
 export { default as ChartZones } from './ChartZones';
 export { default as ChartPositiveTestRate } from './ChartPositiveTestRate';
 export { default as ChartICUCapacityUsed } from './ChartICUCapacityUsed';
-export { default as ChartVaccinations } from './VaccinationLines';
+export { default as ChartVaccinations } from './ChartVaccinations';
 export { default as ChartCaseDensity } from './ChartCaseDensity';
 export { default as Tooltip } from './Tooltip';
 export { default as RectClipGroup } from './RectClipGroup';
