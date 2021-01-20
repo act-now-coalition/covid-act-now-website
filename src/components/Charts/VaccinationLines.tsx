@@ -1,5 +1,4 @@
 import React, { useCallback, Fragment } from 'react';
-// import moment from 'moment';
 import { isNumber } from 'lodash';
 import { Group } from '@vx/group';
 import { scaleTime, scaleLinear } from '@vx/scale';
@@ -8,12 +7,7 @@ import { ParentSize } from '@vx/responsive';
 import { AxisLeft, AxisBottom } from '@vx/axis';
 import { Tooltip, RectClipGroup } from 'components/Charts';
 import { Column } from 'common/models/Projection';
-import {
-  formatPercent,
-  formatInteger,
-  formatDecimal,
-  formatUtcDate,
-} from 'common/utils';
+import { formatPercent, formatUtcDate } from 'common/utils';
 import * as ChartStyle from './Charts.style';
 import { ScreenshotReady } from 'components/Screenshot';
 import GridLines from 'components/Explore/GridLines';
@@ -34,7 +28,7 @@ const VaccinesTooltip: React.FC<{
   left: (d: Column) => number;
   top: (d: Column) => number;
   subtext: string;
-}> = ({ seriesList, left, top, date, subtext }) => {
+}> = ({ seriesList, left, top, date }) => {
   const [seriesInitiated, seriesCompleted] = seriesList;
   const pointCompleted = findPointByDate(seriesCompleted.data, date);
   const pointInitiated = findPointByDate(seriesInitiated.data, date);
