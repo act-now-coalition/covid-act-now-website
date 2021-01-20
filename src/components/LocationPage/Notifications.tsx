@@ -23,11 +23,12 @@ const EXPOSURE_NOTIFICATIONS_STATE_FIPS = [
   '08', // Colorado,
   '09', // Connecticut,
   '10', // Delaware,
+  '15', // Hawaii
   '24', // Maryland,
   '26', // Michigan,
   '27', // Minnesota,
   '32', // Nevada,
-  '24', // New Jersey,
+  '34', // New Jersey,
   '36', // New York,
   '37', // North Carolina,
   '38', // North Dakota,
