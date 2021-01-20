@@ -22,9 +22,9 @@ export default function useGeolocation(): GeolocationInfo | undefined {
         .then(response => response.json())
         .then(data =>
           setIpData({
-            zipCode: data.postal,
-            stateCode: data.region_code,
-            country: data.country_name,
+            zipCode: data.zip,
+            stateCode: data.region,
+            country: data.country,
           }),
         )
         .catch(e => console.error(e));
