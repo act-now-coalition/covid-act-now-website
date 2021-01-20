@@ -56,12 +56,12 @@ export const ColorBlock = styled.div<{ color: string }>`
 
   &:first-of-type {
     border-radius: 99px 0 0 99px;
-    margin-left: 0.5rem;
+    margin-left: 0.75rem;
   }
 
   &:last-of-type {
     border-radius: 0 99px 99px 0;
-    margin-right: 0.5rem;
+    margin-right: 0.75rem;
   }
 
   @media (min-width: ${materialSMBreakpoint}) {
