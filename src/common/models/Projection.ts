@@ -75,7 +75,7 @@ export type DatasetId =
   | 'icuUtilization'
   | 'testPositiveRate'
   | 'vaccinations'
-  | 'vaccinationsInitiated'
+  | 'vaccinationsCompleted'
   | 'caseDensityByCases'
   | 'caseDensityRange'
   | 'smoothedDailyCases'
@@ -167,7 +167,7 @@ export class Projection {
   // Test Positive series as values between 0-1.
   private readonly testPositiveRate: Array<number | null>;
   private readonly vaccinations: Array<number | null>;
-  private readonly vaccinationsInitiated: Array<number | null>;
+  private readonly vaccinationsCompleted: Array<number | null>;
   private readonly caseDensityByCases: Array<number | null>;
   private readonly caseDensityRange: Array<CaseDensityRange | null>;
   private readonly smoothedDailyDeaths: Array<number | null>;
@@ -254,8 +254,8 @@ export class Projection {
     this.vaccinations =
       this.vaccinationsInfo?.percentInitiatedSeries ||
       this.dates.map(date => null);
-    this.vaccinationsInitiated =
-      this.vaccinationsInfo?.percentInitiatedSeries ||
+    this.vaccinationsCompleted =
+      this.vaccinationsInfo?.percentCompletedSeries ||
       this.dates.map(date => null);
 
     this.caseDensityByCases = metricsTimeseries.map(
