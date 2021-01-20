@@ -69,10 +69,10 @@ function getVaccinationSeries(projection: Projection): Series[] {
       data: filterNull(projection.getDataset('vaccinations')),
       label: 'vaccinationsInitiated',
       shortLabel: 'Initiated',
-      tooltipLabel: 'Vaccinations initiated:',
+      tooltipLabel: '1st shot',
       params: {
-        stroke: '#aaa',
-        fill: '#fff',
+        stroke: '#bdbdbd',
+        fill: '#bdbdbd',
       },
     },
     {
@@ -80,10 +80,10 @@ function getVaccinationSeries(projection: Projection): Series[] {
       data: filterNull(projection.getDataset('vaccinationsCompleted')),
       label: 'Vaccinations Completed',
       shortLabel: 'Completed',
-      tooltipLabel: 'Vaccinations completed:',
+      tooltipLabel: '2nd shot',
       params: {
         stroke: '#000',
-        fill: '#fff',
+        fill: '#000',
       },
     },
   ];

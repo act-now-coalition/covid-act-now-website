@@ -289,11 +289,11 @@ export const TooltipLine = styled.div`
   display: flex;
   font-family: Roboto;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 13px;
   line-height: 1.5;
   letter-spacing: 0.03em;
-  color: ${COLOR_MAP.GRAY_ICON};
+  color: white;
 `;
 
 export const TooltipLabel = styled.div`
@@ -302,7 +302,7 @@ export const TooltipLabel = styled.div`
 
 export const TooltipValue = styled.div`
   flex: 1 0 auto;
-  text-align: left;
+  text-align: right;
 `;
 
 export const TooltipTextBold = styled.span`
