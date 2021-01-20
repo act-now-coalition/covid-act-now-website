@@ -14,7 +14,6 @@ import * as Styles from 'components/Explore/Explore.style';
 import { Series } from 'components/Explore/interfaces';
 import ChartSeries, { SeriesMarker } from 'components/Explore/SeriesChart';
 import ChartOverlay from 'components/Explore/ChartOverlay';
-import DateMarker from 'components/Explore/DateMarker';
 import { findPointByDate } from 'components/Explore/utils';
 import * as ChartStyle from './Charts.style';
 
@@ -101,6 +100,8 @@ const VaccinationLines: React.FC<{
   const innerHeight = height - marginTop - marginBottom;
   const innerWidth = width - marginLeft - marginRight;
 
+  // Note: The end date and 35% bounds are set to approximately match the goal of 100M
+  // vaccines in the first 100 days of the Biden administration
   const dateFrom = new Date('2020-12-14');
   const dateTo = new Date('2021-04-30');
 
@@ -193,10 +194,6 @@ const VaccinationLines: React.FC<{
             date={tooltipData.date}
             seriesList={seriesList}
             subtext={'A'}
-          />
-          <DateMarker
-            left={dateScale(tooltipData.date) + marginLeft}
-            date={tooltipData.date}
           />
         </Fragment>
       )}
