@@ -35,7 +35,7 @@ const VaccinesTooltip: React.FC<{
   top: (d: Column) => number;
   subtext: string;
 }> = ({ seriesList, left, top, date, subtext }) => {
-  const [seriesCompleted, seriesInitiated] = seriesList;
+  const [seriesInitiated, seriesCompleted] = seriesList;
   const pointCompleted = findPointByDate(seriesCompleted.data, date);
   const pointInitiated = findPointByDate(seriesInitiated.data, date);
 
