@@ -285,6 +285,31 @@ export const TooltipSubtitle = styled.div`
   color: ${COLOR_MAP.GRAY_ICON};
 `;
 
+export const TooltipLine = styled.div`
+  display: flex;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.5;
+  letter-spacing: 0.03em;
+  color: ${COLOR_MAP.GRAY_ICON};
+`;
+
+export const TooltipLabel = styled.div`
+  flex: 1 1 auto;
+`;
+
+export const TooltipValue = styled.div`
+  flex: 1 0 auto;
+  text-align: left;
+`;
+
+export const TooltipTextBold = styled.span`
+  color: white;
+  font-weight: 500;
+`;
+
 export const TooltipMetric = styled.div`
   text-transform: uppercase;
   font-family: Source Code Pro;

@@ -38,19 +38,14 @@ const VaccinesTooltip: React.FC<{
       left={left(pointCompleted)}
       title={formatUtcDate(new Date(pointCompleted.x), 'MMM D, YYYY')}
     >
-      <Styles.TooltipSubtitle>
-        {seriesCompleted.tooltipLabel}
-      </Styles.TooltipSubtitle>
-      <Styles.TooltipMetric>
-        {isNumber(pointCompleted.y) ? formatPercent(pointCompleted.y, 1) : '-'}
-      </Styles.TooltipMetric>
-      <Styles.TooltipSubtitle>
-        {seriesInitiated.tooltipLabel}
-      </Styles.TooltipSubtitle>
-      <Styles.TooltipMetric>
+      <Styles.TooltipLine>
+        Vaccination <Styles.TooltipTextBold>started</Styles.TooltipTextBold>{' '}
         {isNumber(pointInitiated.y) ? formatPercent(pointInitiated.y, 1) : '-'}
-      </Styles.TooltipMetric>
-      <Styles.TooltipSubtitle></Styles.TooltipSubtitle>
+      </Styles.TooltipLine>
+      <Styles.TooltipLine>
+        Vaccination <Styles.TooltipTextBold>completed</Styles.TooltipTextBold>{' '}
+        {isNumber(pointCompleted.y) ? formatPercent(pointCompleted.y, 1) : '-'}
+      </Styles.TooltipLine>
     </Tooltip>
   ) : null;
 };
