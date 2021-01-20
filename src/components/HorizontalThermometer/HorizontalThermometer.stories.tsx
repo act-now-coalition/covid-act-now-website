@@ -2,10 +2,10 @@ import React from 'react';
 import HorizontalThermometer from './HorizontalThermometer';
 
 export default {
-  title: 'HorizontalThermometer',
+  title: 'Shared Components/HorizontalThermometer',
   component: HorizontalThermometer,
 };
 
-export const HorizontalThermometerStory = () => {
+export const Thermometer = () => {
   return <HorizontalThermometer />;
 };
