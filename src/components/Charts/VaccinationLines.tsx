@@ -35,7 +35,7 @@ const VaccinesTooltip: React.FC<{
   return pointCompleted && pointInitiated ? (
     <Tooltip
       width={'210px'}
-      top={top(pointCompleted)}
+      top={top(pointInitiated)}
       left={left(pointCompleted)}
       title={formatUtcDate(new Date(pointCompleted.x), 'MMM D, YYYY')}
     >
@@ -101,15 +101,15 @@ const VaccinationLines: React.FC<{
   const innerHeight = height - marginTop - marginBottom;
   const innerWidth = width - marginLeft - marginRight;
 
-  const dateFrom = new Date('2021-01-11');
-  const dateTo = new Date();
+  const dateFrom = new Date('2020-12-14');
+  const dateTo = new Date('2021-04-30');
 
   const dateScale = scaleUtc({
     domain: [dateFrom, dateTo],
     range: [0, innerWidth],
   });
 
-  const maxY = 1; // 100%
+  const maxY = 0.35; // 35%
   const yScale = scaleLinear({
     domain: [0, maxY],
     range: [innerHeight, 0],
