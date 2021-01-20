@@ -140,7 +140,7 @@ export function getAutocompleteRegionsWithGeolocation(
  * If not, returns autocomplete results sorted for pagetype.
  */
 export function getFinalAutocompleteLocations(
-  geolocation?: GeolocationInfo | undefined,
+  geolocation?: GeolocationInfo,
 ): Region[] {
   const regionsSortedForPagetype = getAutocompleteRegions();
   if (!geolocation) {
