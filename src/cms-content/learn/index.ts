@@ -44,7 +44,9 @@ const sanitizeSection = (section: FaqSection): FaqSection => ({
 
 const sanitizeFaq = (faq: FaqContent): FaqContent => ({
   ...faq,
-  sections: faq.sections.map(sanitizeSection),
+  sections: faq.sections
+    .filter(section => section.sectionId !== 'vaccines')
+    .map(sanitizeSection),
 });
 
 export const faqContent = sanitizeFaq(faq) as FaqContent;
