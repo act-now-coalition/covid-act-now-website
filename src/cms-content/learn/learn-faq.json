@@ -174,6 +174,42 @@
           "questionId": "help-end-covid-pandemic"
         }
       ]
+    },
+    {
+      "sectionTitle": "Vaccines",
+      "sectionId": "vaccines",
+      "questions": [
+        {
+          "question": "When will it be my turn to get the vaccine? ",
+          "questionId": "when-will-it-be-my-turn-vaccine",
+          "answer": "Each state has its own plan for deciding which groups of people will be vaccinated first. You can contact your [state health department](https://www.cdc.gov/coronavirus/2019-ncov/php/open-america/hd-search/index.html) for more information on its plan for COVID-19 vaccination.\n\nThe goal is for everyone to be able to get a COVID-19 vaccination easily as soon as large quantities of vaccine are available. As the vaccine supply increases, more groups will be added to receive vaccination. \n\n\n\nSource: [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html)"
+        },
+        {
+          "question": "Who pays for vaccination? ",
+          "questionId": "who-pays-vaccine",
+          "answer": "No one can be denied a vaccine if they are unable to pay the vaccine administration fee.\nVaccine shots purchased with U.S. taxpayer dollars will be given to the American people at no cost. However, vaccination providers can charge an administration fee for giving someone the shot. Vaccination providers can be reimbursed for this by the patient’s public or private insurance company or, for uninsured patients, by the Health Resources and Services Administration’s Provider Relief Fund. \n\n\n\nSource: [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html)"
+        },
+        {
+          "question": "How safe are the COVID-19 vaccines? ",
+          "questionId": "how-safe-covid-vaccine",
+          "answer": "All the COVID-19 vaccines being used have gone through rigorous studies to ensure they are as safe as possible. Systems that allow CDC to watch for safety issues are in place across the entire country.\n\nClinical trials for all vaccines must first show they meet rigorous criteria for safety and effectiveness before any vaccine, including COVID-19 vaccines, can be authorized or approved for use. The known and potential benefits of a COVID-19 vaccine must outweigh the known and potential risks of the vaccine. \n\nLearn more about [how federal partners are ensuring the safety of COVID-19 vaccines in the United States.](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/safety.html)\n\n\n\nSource: [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html)"
+        },
+        {
+          "question": "What are the side effects of the vaccine?",
+          "questionId": "what-are-side-effects-vaccine",
+          "answer": "Not everyone experiences side effects, but if you do, they are normal signs that your body is building protection. These side effects may affect your ability to do daily activities, but they should go away in a few days. Side effects may include: \n\n* **On your arm where you received the shot**: You may experience pain and swelling. This can be alleviated by applying a clean, cool, wet washcloth over the area, or by using or exercising your arm. \n* **Throughout the rest of your body**: You may experience fever, chills, tiredness, and headache. To reduce discomfort from fever, you can drink plenty of fluids and dress lightly. You may also want to talk to your doctor about taking an over-the-counter medicine, such as ibuprofen or acetaminophen. \n\nYou may want to contact your doctor or healthcare provider if: \n\n* If the redness or tenderness where you got the shot increases after 24 hours\n* If your side effects are worrying you or do not seem to be going away after a few days\n\n\n\nSource: [](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/expect/after.html)[CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/expect/after.html)"
+        },
+        {
+          "question": "What are the ingredients of the vaccines? ",
+          "questionId": "what-are-ingredients-vaccine",
+          "answer": "The two COVID-19 vaccines currently available in the United States do not contain eggs, preservatives, or latex. For a full list of ingredients, please see each vaccine’s Fact Sheet:\n\n* [Pfizer-BioNTech COVID-19 vaccine](https://www.fda.gov/media/144414/download)\n* [Moderna COVID-19 vaccine](https://www.fda.gov/media/144638/download)\n\n\n\nSource: [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html)"
+        },
+        {
+          "question": "What percentage of people need to be vaccinated to achieve herd immunity? ",
+          "questionId": "what-percent-people-vaccinated-herd-immunity",
+          "answer": "Experts do not yet know what percentage of people would need to get vaccinated to achieve [herd immunity](https://covidactnow.org/glossary#herd-immunity) to COVID-19. CDC and other experts are studying herd immunity and will provide more information as it is available.\n\n\n\n\n\nSource: [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html)"
+        }
+      ]
     }
   ],
   "header": "FAQs",
