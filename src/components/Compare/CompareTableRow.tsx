@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import {
@@ -6,21 +6,17 @@ import {
   Row,
   MetricValue,
   Population,
-  RegionSuffix,
   LocationInfoWrapper,
   LocationNameCell,
   Rank,
 } from 'components/Compare/Compare.style';
 import { Metric, formatValue } from 'common/metric';
-import {
-  RankedLocationSummary,
-  orderedMetrics,
-  getRegionNameForRow,
-} from 'common/utils/compare';
+import { RankedLocationSummary, orderedMetrics } from 'common/utils/compare';
 import { Level } from 'common/level';
 import { formatEstimate } from 'common/utils';
-import regions, { getFormattedStateCode } from 'common/regions';
+import regions from 'common/regions';
 import { fail } from 'assert';
+import { StyledRegionName } from 'components/SharedComponents';
 
 function cellValue(metric: any, metricType: Metric) {
   if (metric === null || metric === undefined) {
@@ -65,8 +61,6 @@ const CompareTableRow = (props: {
   }
   const locationLink = region.relativeUrl;
 
-  const [regionNameMain, regionSuffix] = getRegionNameForRow(location.region);
-
   const populationRoundTo = isHomepage ? 3 : 2;
 
   return (
@@ -85,11 +79,10 @@ const CompareTableRow = (props: {
             <FiberManualRecordIcon />
           </div>
           <div>
-            {regionNameMain}{' '}
-            {regionSuffix && <RegionSuffix>{regionSuffix}</RegionSuffix>}
-            {showStateCode && (
-              <Fragment>{getFormattedStateCode(location.region)}</Fragment>
-            )}
+            <StyledRegionName
+              showStateCode={showStateCode}
+              region={location.region}
+            />
             <br />
             <LocationInfoWrapper>
               <Population>
