@@ -1,6 +1,9 @@
 /*
   Captures the user's location using IP-API (https://ip-api.com/)
   Returns either undefined or an object with user's zipCode, stateCode, and country
+
+  Note: only works on prod + main staging. Won't work locally or in preview links.
+  Hardcode ipData to test UI.
 */
 
 import { useEffect, useState } from 'react';
