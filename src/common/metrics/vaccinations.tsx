@@ -19,7 +19,7 @@ export const VaccinationsMetric: MetricDefinition = {
 };
 
 const SHORT_DESCRIPTION_LOW = 'Population given the first shot';
-const SHORT_DESCRIPTION_UNKNOWN = 'Insufficient data to assess';
+// const SHORT_DESCRIPTION_UNKNOWN = 'Insufficient data to assess';
 
 const UNKNOWN = 'Unknown';
 
@@ -49,7 +49,7 @@ export const VACCINATIONS_LEVEL_INFO_MAP: LevelInfoMap = {
     upperLimit: 1,
     name: UNKNOWN,
     color: COLOR_MAP.GRAY.BASE,
-    detail: () => SHORT_DESCRIPTION_UNKNOWN,
+    detail: () => '',
   },
 };
 
