@@ -1,4 +1,5 @@
 import React from 'react';
+import { isNumber } from 'lodash';
 import { Link } from 'react-router-dom';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import {
@@ -93,10 +94,10 @@ const CompareTableRow = (props: {
         </LocationNameCell>
         {orderedMetrics.map((metric: Metric, i) => {
           const metricForValue = location.metricsInfo.metrics[metric];
+          const metricValue = metricForValue?.value;
           const valueUnknown =
-            metricForValue && metricForValue.level === Level.UNKNOWN
-              ? true
-              : false;
+            !isNumber(metricValue) || !Number.isFinite(metricValue);
+
           return (
             <MetricCell
               key={`metric-cell-${i}`}
