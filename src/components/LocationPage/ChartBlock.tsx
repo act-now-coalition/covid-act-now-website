@@ -38,7 +38,7 @@ function ChartBlock(props: {
       <ChartHeaderWrapper>
         <LocationPageSectionHeader ref={props.chartRef}>
           {getMetricNameExtended(metric)}
-          {showBetaTag && <BetaTag>New Indicator</BetaTag>}
+          {showBetaTag && <BetaTag>New</BetaTag>}
         </LocationPageSectionHeader>
         {hasMetric && !isMobile && (
           <ShareButtons
