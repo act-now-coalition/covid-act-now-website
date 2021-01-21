@@ -281,11 +281,6 @@ export const LocationInfoWrapper = styled.div`
   align-items: center;
 `;
 
-export const RegionSuffix = styled.span`
-  font-weight: normal;
-  margin-right: 0.25rem;
-`;
-
 const SharedCellStyles = css`
   text-align: left;
   padding-top: 0.75rem;
