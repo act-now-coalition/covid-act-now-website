@@ -4,6 +4,6 @@
  *
  * Keeping the key here is fine (origin restrictions make it usable only for CAN)
  *
- * Note: only works on prod. Won't work locally or in preview links.
+ * Note: only works on prod + main staging. Won't work locally or in preview links.
  */
 export const IP_API_KEY = '5xnFKRlZSFmdOrN';

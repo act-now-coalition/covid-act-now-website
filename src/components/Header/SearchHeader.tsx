@@ -12,17 +12,20 @@ import {
 import SearchAutocomplete from 'components/Search';
 import { Region, getFinalAutocompleteLocations } from 'common/regions';
 import { getFilterLimit } from 'components/Search';
+import { GeolocationInfo } from 'common/hooks/useGeolocation';
 
 const SearchHeader = ({
   mobileMenuOpen,
   setMobileMenuOpen,
   setMapOption,
   region,
+  geolocation,
 }: {
   mobileMenuOpen: boolean;
   setMobileMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setMapOption: React.Dispatch<React.SetStateAction<string>>;
   region: Region;
+  geolocation?: GeolocationInfo;
 }) => {
   const isMobile = useMediaQuery('(max-width:1349px)');
   const isNarrowMobile = useMediaQuery('(max-width:500px)');
@@ -49,7 +52,7 @@ const SearchHeader = ({
               <SearchAutocomplete
                 filterLimit={getFilterLimit(region)}
                 setHideMapToggle={setHideMapToggle}
-                locations={getFinalAutocompleteLocations()}
+                locations={getFinalAutocompleteLocations(geolocation)}
               />
             </SelectorWrapper>
             {isMobile && (
