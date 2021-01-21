@@ -17,6 +17,8 @@ import ChartSeries, { SeriesMarker } from 'components/Explore/SeriesChart';
 import ChartOverlay from 'components/Explore/ChartOverlay';
 import { findPointByDate, getTimeAxisTicks } from 'components/Explore/utils';
 import * as ChartStyle from './Charts.style';
+import { useMediaQuery } from '@material-ui/core';
+import theme from 'assets/theme';
 
 const getDate = (d: Column) => new Date(d.x);
 const getY = (d: Column) => d.y;
@@ -24,8 +26,11 @@ const getY = (d: Column) => d.y;
 const xTickFormat = (date: Date, isMobile: boolean) => {
   const momentDate = moment(date);
   // Shows the year if the tick is in January (0) or December (11)
+  const yearFormat = isMobile ? 'YY' : 'YYYY';
   const dateFormat =
-    momentDate.month() === 0 || momentDate.month() === 11 ? 'MMM YYYY' : 'MMM';
+    momentDate.month() === 0 || momentDate.month() === 11
+      ? `MMM ${yearFormat}`
+      : 'MMM';
   return momentDate.format(dateFormat);
 };
 
@@ -136,11 +141,12 @@ const VaccinationLines: React.FC<{
   height,
   marginTop = 10,
   marginBottom = 30,
-  marginLeft = 60,
+  marginLeft = 30,
   marginRight = 20,
 }) => {
   const innerHeight = height - marginTop - marginBottom;
   const innerWidth = width - marginLeft - marginRight;
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
   // Note: The end date and 35% bounds are set to approximately match the goal of 100M
   // vaccines in the first 100 days of the Biden administration
@@ -205,7 +211,7 @@ const VaccinationLines: React.FC<{
               top={innerHeight}
               scale={dateScale}
               tickValues={dateTicks}
-              tickFormat={d => xTickFormat(d, false)}
+              tickFormat={d => xTickFormat(d, isMobile)}
             />
           </Styles.Axis>
           <RectClipGroup width={innerWidth} height={innerHeight + 2}>
