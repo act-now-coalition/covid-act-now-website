@@ -29,7 +29,7 @@ function ChartBlock(props: {
 }) {
   const { projections, metric, isMobile, region, stats } = props;
 
-  const showBetaTag = metric === Metric.HOSPITAL_USAGE;
+  const showBetaTag = metric === Metric.VACCINATIONS;
 
   const hasMetric = projections.hasMetric(metric);
 
@@ -38,7 +38,7 @@ function ChartBlock(props: {
       <ChartHeaderWrapper>
         <LocationPageSectionHeader ref={props.chartRef}>
           {getMetricNameExtended(metric)}
-          {showBetaTag && <BetaTag>Beta</BetaTag>}
+          {showBetaTag && <BetaTag>New</BetaTag>}
         </LocationPageSectionHeader>
         {hasMetric && !isMobile && (
           <ShareButtons

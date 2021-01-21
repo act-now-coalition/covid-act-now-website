@@ -1,8 +1,10 @@
 import React from 'react';
+import { isNumber } from 'lodash';
 import { Metric, ALL_METRICS } from 'common/metric';
 import { getMetricName, getLevelInfo, formatValue } from 'common/metric';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
-
+import StatTag from 'components/SummaryStats/StatTag';
+import * as urls from 'common/urls';
 import {
   SummaryStatsWrapper,
   SummaryStatWrapper,
@@ -14,10 +16,6 @@ import {
   ValueWrapper,
   PrevalenceMeasure,
 } from './SummaryStats.style';
-
-import StatTag from 'components/SummaryStats/StatTag';
-import { isNull } from 'util';
-import * as urls from 'common/urls';
 
 //TODO (Chelsi) - remove dupication: extract 'LocationHeaderStats' and 'SummaryStats' into a single separate component
 
@@ -168,7 +166,7 @@ const LocationHeaderStats = (props: {
   embedOnClickBaseURL?: string;
 }) => {
   const hasStats = !!Object.values(props.stats).filter(
-    (val: number | null) => !isNull(val),
+    (val: number | null) => isNumber(val) && Number.isFinite(val),
   ).length;
 
   const sharedStatProps = {
@@ -192,7 +190,7 @@ const LocationHeaderStats = (props: {
               chartType={metric}
               value={props.stats[metric] as number}
               {...sharedStatProps}
-              beta={[Metric.VACCINATIONS].includes(metric)}
+              newIndicator={[Metric.VACCINATIONS].includes(metric)}
             />
           ))}
         </SummaryStatsWrapper>
