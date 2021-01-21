@@ -49,7 +49,7 @@ export const VACCINATIONS_LEVEL_INFO_MAP: LevelInfoMap = {
     upperLimit: 1,
     name: UNKNOWN,
     color: COLOR_MAP.GRAY.BASE,
-    detail: () => SHORT_DESCRIPTION_UNKNOWN,
+    detail: () => '',
   },
 };
 
