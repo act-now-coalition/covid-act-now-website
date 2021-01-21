@@ -1,6 +1,57 @@
 {
   "sections": [
     {
+      "sectionTitle": "Vaccines",
+      "sectionId": "vaccines",
+      "questions": [
+        {
+          "question": "When will it be my turn to get the vaccine? ",
+          "questionId": "when-will-it-be-my-turn-vaccine",
+          "answer": "Each state has its own plan for deciding which groups of people will be vaccinated first. You can contact your [state health department](https://www.cdc.gov/coronavirus/2019-ncov/php/open-america/hd-search/index.html) for more information on its plan for COVID-19 vaccination.\n\nThe goal is for everyone to be able to get a COVID-19 vaccination easily as soon as large quantities of vaccine are available. As the vaccine supply increases, more groups will be added to receive vaccination. \n\nSource: [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html)"
+        },
+        {
+          "question": "Who pays for vaccination? ",
+          "questionId": "who-pays-vaccine",
+          "answer": "No one can be denied a vaccine if they are unable to pay the vaccine administration fee.\nVaccine shots purchased with U.S. taxpayer dollars will be given to the American people at no cost. However, vaccination providers can charge an administration fee for giving someone the shot. Vaccination providers can be reimbursed for this by the patient’s public or private insurance company or, for uninsured patients, by the Health Resources and Services Administration’s Provider Relief Fund. \n\nSource: [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html)"
+        },
+        {
+          "question": "How safe are the COVID-19 vaccines? ",
+          "questionId": "how-safe-covid-vaccine",
+          "answer": "All the COVID-19 vaccines being used have gone through rigorous studies to ensure they are as safe as possible. Systems that allow CDC to watch for safety issues are in place across the entire country.\n\nClinical trials for all vaccines must first show they meet rigorous criteria for safety and effectiveness before any vaccine, including COVID-19 vaccines, can be authorized or approved for use. The known and potential benefits of a COVID-19 vaccine must outweigh the known and potential risks of the vaccine. \n\nLearn more about [how federal partners are ensuring the safety of COVID-19 vaccines in the United States.](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/safety.html)\n\nSource: [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html)"
+        },
+        {
+          "question": "What are the side effects of the vaccine?",
+          "questionId": "what-are-side-effects-vaccine",
+          "answer": "Not everyone experiences side effects, but if you do, they are normal signs that your body is building protection. These side effects may affect your ability to do daily activities, but they should go away in a few days. Side effects may include: \n\n* **On your arm where you received the shot**: You may experience pain and swelling. This can be alleviated by applying a clean, cool, wet washcloth over the area, or by using or exercising your arm. \n* **Throughout the rest of your body**: You may experience fever, chills, tiredness, and headache. To reduce discomfort from fever, you can drink plenty of fluids and dress lightly. You may also want to talk to your doctor about taking an over-the-counter medicine, such as ibuprofen or acetaminophen. \n\nYou may want to contact your doctor or healthcare provider if: \n\n* If the redness or tenderness where you got the shot increases after 24 hours\n* If your side effects are worrying you or do not seem to be going away after a few days\n\nSource: [](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/expect/after.html)[CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/expect/after.html)"
+        },
+        {
+          "question": "What are the ingredients of the vaccines? ",
+          "questionId": "what-are-ingredients-vaccine",
+          "answer": "The two COVID-19 vaccines currently available in the United States do not contain eggs, preservatives, or latex. For a full list of ingredients, please see each vaccine’s Fact Sheet:\n\n* [Pfizer-BioNTech COVID-19 vaccine](https://www.fda.gov/media/144414/download)\n* [Moderna COVID-19 vaccine](https://www.fda.gov/media/144638/download)\n\nSource: [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html)"
+        },
+        {
+          "question": "What percentage of people need to be vaccinated to achieve herd immunity? ",
+          "questionId": "what-percent-people-vaccinated-herd-immunity",
+          "answer": "Experts do not yet know what percentage of people would need to get vaccinated to achieve [herd immunity](https://covidactnow.org/glossary#herd-immunity) to COVID-19. CDC and other experts are studying herd immunity and will provide more information as it is available.\n\nSource: [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html)"
+        },
+        {
+          "question": "If I’ve already had and recovered from COVID-19 infection, should I still get vaccinated? ",
+          "answer": "Yes. Due to the severe health risks associated with COVID-19 and the fact that reinfection with COVID-19 is possible, you should be vaccinated regardless of whether you already had COVID-19 infection. If you were treated for COVID-19 symptoms with monoclonal antibodies or convalescent plasma, you should wait 90 days before getting a COVID-19 vaccine. Talk to your doctor if you are unsure what treatments you received or if you have more questions about getting a COVID-19 vaccine.Source: [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html)",
+          "questionId": "if-i-recovered-should-i-get-vaccinated"
+        },
+        {
+          "question": "Do I need to exercise COVID prevention measures, e.g. wear a mask and social distance, if I've completed vaccination? ",
+          "answer": "Yes. Not enough information is currently available to say if or when CDC will stop recommending that people wear masks and avoid close contact with others to help prevent the spread of the virus that causes COVID-19.\n\nExperts need to understand more about the protection that COVID-19 vaccines provide in real-world conditions before making that decision. Other factors, including how many people get vaccinated and how the virus is spreading in communities, will also affect this decision. We also don’t yet know whether getting a COVID-19 vaccine will prevent you from spreading the virus that causes COVID-19 to other people, even if you don’t get sick yourself. \n\nIn the meantime, to protect yourself and others, the CDC recommends everyone continue to follow these recommendations as best they can:\n\n* Wear a mask over your nose and mouth\n* Stay at least 6 feet away from others\n* Avoid crowds\n* Avoid poorly ventilated spaces\n* Wash your hands often\n\nSource: [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html)",
+          "questionId": "do-i-need-to-exercise-covid-prevention-measures-if-vaccinated"
+        },
+        {
+          "question": "Which lasts longer, immunity after getting COVID-19 or protection from COVID-19 vaccines?",
+          "questionId": "does-immunity-from-covid-or-vaccine-last-longer",
+          "answer": "The protection someone gains from having an infection varies depending on the disease, and it varies from person to person. Because this virus is new, we don’t know how long this infection-acquired immunity might last. Current evidence suggests that getting the virus again (reinfection) is uncommon in the 90 days after the first infection with the virus that causes COVID-19.\n\nWe won’t know how long immunity lasts after vaccination until we have more data on how well COVID-19 vaccines work in real-world conditions.\n\nSource: [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html)"
+        }
+      ]
+    },
+    {
       "sectionTitle": "Transmission",
       "sectionId": "transmission",
       "questions": [
@@ -172,57 +223,6 @@
           "question": "What can I do to help end the pandemic and protect myself from COVID?",
           "answer": "Covid Act Now works to reduce the spread of COVID by encouraging data-based policies and decision making. If you'd like to join this effort, please consider supporting our organization with a tax-deductible [donation](https://www.covidactnow.org/donate).\n\nYour actions matter. You can help protect others and slow the spread of the virus by doing a few simple things:\n\n* Wear a [mask](/glossary#face-mask) unless there is a medical reason not to do so.\n* Practice physical distancing to limit person-to-person [transmission](/glossary#transmission).\n* Wash your hands or use hand sanitizer frequently.\n* Follow limits on gatherings, especially ones that take place indoors.\n* Stay home if you are feeling unwell.\n* If infected or exposed, strictly follow the rules on isolation and [quarantine](/glossary#quarantine).\n* As soon as you are eligible to do so, get vaccinated.",
           "questionId": "help-end-covid-pandemic"
-        }
-      ]
-    },
-    {
-      "sectionTitle": "Vaccines",
-      "sectionId": "vaccines",
-      "questions": [
-        {
-          "question": "When will it be my turn to get the vaccine? ",
-          "questionId": "when-will-it-be-my-turn-vaccine",
-          "answer": "Each state has its own plan for deciding which groups of people will be vaccinated first. You can contact your [state health department](https://www.cdc.gov/coronavirus/2019-ncov/php/open-america/hd-search/index.html) for more information on its plan for COVID-19 vaccination.\n\nThe goal is for everyone to be able to get a COVID-19 vaccination easily as soon as large quantities of vaccine are available. As the vaccine supply increases, more groups will be added to receive vaccination. \n\nSource: [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html)"
-        },
-        {
-          "question": "Who pays for vaccination? ",
-          "questionId": "who-pays-vaccine",
-          "answer": "No one can be denied a vaccine if they are unable to pay the vaccine administration fee.\nVaccine shots purchased with U.S. taxpayer dollars will be given to the American people at no cost. However, vaccination providers can charge an administration fee for giving someone the shot. Vaccination providers can be reimbursed for this by the patient’s public or private insurance company or, for uninsured patients, by the Health Resources and Services Administration’s Provider Relief Fund. \n\nSource: [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html)"
-        },
-        {
-          "question": "How safe are the COVID-19 vaccines? ",
-          "questionId": "how-safe-covid-vaccine",
-          "answer": "All the COVID-19 vaccines being used have gone through rigorous studies to ensure they are as safe as possible. Systems that allow CDC to watch for safety issues are in place across the entire country.\n\nClinical trials for all vaccines must first show they meet rigorous criteria for safety and effectiveness before any vaccine, including COVID-19 vaccines, can be authorized or approved for use. The known and potential benefits of a COVID-19 vaccine must outweigh the known and potential risks of the vaccine. \n\nLearn more about [how federal partners are ensuring the safety of COVID-19 vaccines in the United States.](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/safety.html)\n\nSource: [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html)"
-        },
-        {
-          "question": "What are the side effects of the vaccine?",
-          "questionId": "what-are-side-effects-vaccine",
-          "answer": "Not everyone experiences side effects, but if you do, they are normal signs that your body is building protection. These side effects may affect your ability to do daily activities, but they should go away in a few days. Side effects may include: \n\n* **On your arm where you received the shot**: You may experience pain and swelling. This can be alleviated by applying a clean, cool, wet washcloth over the area, or by using or exercising your arm. \n* **Throughout the rest of your body**: You may experience fever, chills, tiredness, and headache. To reduce discomfort from fever, you can drink plenty of fluids and dress lightly. You may also want to talk to your doctor about taking an over-the-counter medicine, such as ibuprofen or acetaminophen. \n\nYou may want to contact your doctor or healthcare provider if: \n\n* If the redness or tenderness where you got the shot increases after 24 hours\n* If your side effects are worrying you or do not seem to be going away after a few days\n\nSource: [](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/expect/after.html)[CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/expect/after.html)"
-        },
-        {
-          "question": "What are the ingredients of the vaccines? ",
-          "questionId": "what-are-ingredients-vaccine",
-          "answer": "The two COVID-19 vaccines currently available in the United States do not contain eggs, preservatives, or latex. For a full list of ingredients, please see each vaccine’s Fact Sheet:\n\n* [Pfizer-BioNTech COVID-19 vaccine](https://www.fda.gov/media/144414/download)\n* [Moderna COVID-19 vaccine](https://www.fda.gov/media/144638/download)\n\nSource: [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html)"
-        },
-        {
-          "question": "What percentage of people need to be vaccinated to achieve herd immunity? ",
-          "questionId": "what-percent-people-vaccinated-herd-immunity",
-          "answer": "Experts do not yet know what percentage of people would need to get vaccinated to achieve [herd immunity](https://covidactnow.org/glossary#herd-immunity) to COVID-19. CDC and other experts are studying herd immunity and will provide more information as it is available.\n\nSource: [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html)"
-        },
-        {
-          "question": "If I’ve already had and recovered from COVID-19 infection, should I still get vaccinated? ",
-          "answer": "Yes. Due to the severe health risks associated with COVID-19 and the fact that reinfection with COVID-19 is possible, you should be vaccinated regardless of whether you already had COVID-19 infection. If you were treated for COVID-19 symptoms with monoclonal antibodies or convalescent plasma, you should wait 90 days before getting a COVID-19 vaccine. Talk to your doctor if you are unsure what treatments you received or if you have more questions about getting a COVID-19 vaccine.Source: [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html)",
-          "questionId": "if-i-recovered-should-i-get-vaccinated"
-        },
-        {
-          "question": "Do I need to exercise COVID prevention measures, e.g. wear a mask and social distance, if I've completed vaccination? ",
-          "answer": "Yes. Not enough information is currently available to say if or when CDC will stop recommending that people wear masks and avoid close contact with others to help prevent the spread of the virus that causes COVID-19.\n\nExperts need to understand more about the protection that COVID-19 vaccines provide in real-world conditions before making that decision. Other factors, including how many people get vaccinated and how the virus is spreading in communities, will also affect this decision. We also don’t yet know whether getting a COVID-19 vaccine will prevent you from spreading the virus that causes COVID-19 to other people, even if you don’t get sick yourself. \n\nIn the meantime, to protect yourself and others, the CDC recommends everyone continue to follow these recommendations as best they can:\n\n* Wear a mask over your nose and mouth\n* Stay at least 6 feet away from others\n* Avoid crowds\n* Avoid poorly ventilated spaces\n* Wash your hands often\n\nSource: [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html)",
-          "questionId": "do-i-need-to-exercise-covid-prevention-measures-if-vaccinated"
-        },
-        {
-          "question": "Which lasts longer, immunity after getting COVID-19 or protection from COVID-19 vaccines?",
-          "questionId": "does-immunity-from-covid-or-vaccine-last-longer",
-          "answer": "The protection someone gains from having an infection varies depending on the disease, and it varies from person to person. Because this virus is new, we don’t know how long this infection-acquired immunity might last. Current evidence suggests that getting the virus again (reinfection) is uncommon in the 90 days after the first infection with the virus that causes COVID-19.\n\nWe won’t know how long immunity lasts after vaccination until we have more data on how well COVID-19 vaccines work in real-world conditions.\n\nSource: [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html)"
         }
       ]
     }
