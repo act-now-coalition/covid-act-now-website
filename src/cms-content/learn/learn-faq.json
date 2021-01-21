@@ -207,7 +207,22 @@
         {
           "question": "What percentage of people need to be vaccinated to achieve herd immunity? ",
           "questionId": "what-percent-people-vaccinated-herd-immunity",
-          "answer": "Experts do not yet know what percentage of people would need to get vaccinated to achieve [herd immunity](https://covidactnow.org/glossary#herd-immunity) to COVID-19. CDC and other experts are studying herd immunity and will provide more information as it is available.\n\n\n\n\n\nSource: [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html)"
+          "answer": "Experts do not yet know what percentage of people would need to get vaccinated to achieve [herd immunity](https://covidactnow.org/glossary#herd-immunity) to COVID-19. CDC and other experts are studying herd immunity and will provide more information as it is available.\n\n\n\nSource: [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html)"
+        },
+        {
+          "question": "If I’ve already had and recovered from COVID-19 infection, should I still get vaccinated? ",
+          "answer": "Yes. Due to the severe health risks associated with COVID-19 and the fact that reinfection with COVID-19 is possible, you should be vaccinated regardless of whether you already had COVID-19 infection. If you were treated for COVID-19 symptoms with monoclonal antibodies or convalescent plasma, you should wait 90 days before getting a COVID-19 vaccine. Talk to your doctor if you are unsure what treatments you received or if you have more questions about getting a COVID-19 vaccine.\n\nSource: [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html)",
+          "questionId": "if-i-recovered-should-i-get-vaccinated"
+        },
+        {
+          "question": "Do I need to exercise COVID prevention measures, e.g. wear a mask and social distance, if I've completed vaccination? ",
+          "answer": "Yes. Not enough information is currently available to say if or when CDC will stop recommending that people wear masks and avoid close contact with others to help prevent the spread of the virus that causes COVID-19.\n\nExperts need to understand more about the protection that COVID-19 vaccines provide in real-world conditions before making that decision. Other factors, including how many people get vaccinated and how the virus is spreading in communities, will also affect this decision. We also don’t yet know whether getting a COVID-19 vaccine will prevent you from spreading the virus that causes COVID-19 to other people, even if you don’t get sick yourself. \n\nIn the meantime, to protect yourself and others, the CDC recommends everyone continue to follow these recommendations as best they can:\n\n* Wear a mask over your nose and mouth\n* Stay at least 6 feet away from others\n* Avoid crowds\n* Avoid poorly ventilated spaces\n* Wash your hands often\n\nSource: [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html)",
+          "questionId": "do-i-need-to-exercise-covid-prevention-measures-if-vaccinated"
+        },
+        {
+          "question": "Which lasts longer, immunity after getting COVID-19 or protection from COVID-19 vaccines?",
+          "questionId": "does-immunity-from-covid-or-vaccine-last-longer",
+          "answer": "The protection someone gains from having an infection varies depending on the disease, and it varies from person to person. Because this virus is new, we don’t know how long this infection-acquired immunity might last. Current evidence suggests that getting the virus again (reinfection) is uncommon in the 90 days after the first infection with the virus that causes COVID-19.\n\nWe won’t know how long immunity lasts after vaccination until we have more data on how well COVID-19 vaccines work in real-world conditions.\n\n\n\nSource: [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html)"
         }
       ]
     }
