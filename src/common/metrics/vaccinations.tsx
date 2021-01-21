@@ -5,16 +5,17 @@ import { formatPercent, formatInteger } from 'common/utils';
 import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
 import ExternalLink from 'components/ExternalLink';
+import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
 
-const METRIC_NAME = '% Started Vaccine';
+const METRIC_NAME = 'Vaccinated';
 
 export const VaccinationsMetric: MetricDefinition = {
   renderStatus,
   renderDisclaimer,
   renderThermometer,
   metricName: METRIC_NAME,
-  extendedMetricName: 'Percent Vaccinated with 1st and 2nd shot',
-  metricNameForCompare: 'Percent Started Vaccine',
+  extendedMetricName: 'Percent vaccinated with 1st and 2nd shot',
+  metricNameForCompare: 'Vaccinated (1st shot)',
 };
 
 const SHORT_DESCRIPTION_LOW = 'Population given the first shot';
@@ -66,7 +67,7 @@ function renderStatus(projections: Projections): React.ReactElement {
 
   return (
     <Fragment>
-      In {locationName}, {peopleInitiated} ({percentInitiated}) people have
+      In {locationName}, {peopleInitiated} people ({percentInitiated}) have
       received the first shot and {peopleVaccinated} ({percentVaccinated}) have
       also received the second shot. According to the CDC, fewer than 0.001% of
       those who have received the first dose have experienced a severe adverse
@@ -75,11 +76,22 @@ function renderStatus(projections: Projections): React.ReactElement {
   );
 }
 
+function trackClickVaccinationData() {
+  trackEvent(
+    EventCategory.VACCINATION,
+    EventAction.CLICK_LINK,
+    'CDC Data Tracker - Vaccinations',
+  );
+}
+
 function renderDisclaimer(): React.ReactElement {
   return (
     <Fragment>
       Vaccination data is provided by the{' '}
-      <ExternalLink href="https://covid.cdc.gov/covid-data-tracker/#vaccinations">
+      <ExternalLink
+        href="https://covid.cdc.gov/covid-data-tracker/#vaccinations"
+        onClick={trackClickVaccinationData}
+      >
         CDC
       </ExternalLink>{' '}
       or retrieved from state websites. Reporting may be delayed from the time

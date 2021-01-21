@@ -46,6 +46,11 @@ export function getLevelInfo(metric: Metric, value: number | null): LevelInfo {
 }
 
 export function getLevel(metric: Metric, value: number | null): Level {
+  // Vaccinations don't have levels
+  if (metric === Metric.VACCINATIONS) {
+    return Level.UNKNOWN;
+  }
+
   const levelInfoMap = ALL_METRICS_LEVEL_INFO_MAP[metric];
   if (value === null) return Level.UNKNOWN;
   for (const level of ALL_LEVELS) {

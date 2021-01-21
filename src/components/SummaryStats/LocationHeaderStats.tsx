@@ -51,6 +51,13 @@ const StatValue = (props: {
           100K
         </PrevalenceMeasure>
       )}
+      {props.metric === Metric.VACCINATIONS && (
+        <PrevalenceMeasure>
+          1ST
+          <br />
+          SHOT
+        </PrevalenceMeasure>
+      )}
     </ValueWrapper>
   );
 };
@@ -185,7 +192,7 @@ const LocationHeaderStats = (props: {
               chartType={metric}
               value={props.stats[metric] as number}
               {...sharedStatProps}
-              beta={[Metric.HOSPITAL_USAGE].includes(metric)}
+              beta={[Metric.VACCINATIONS].includes(metric)}
             />
           ))}
         </SummaryStatsWrapper>

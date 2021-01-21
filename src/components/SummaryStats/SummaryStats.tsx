@@ -15,6 +15,7 @@ import {
   StatValueWrapper,
 } from './SummaryStats.style';
 import SignalStatus from 'components/SignalStatus/SignalStatus';
+import { SignalStatusWrapper } from 'components/SignalStatus/SignalStatus.style';
 import * as urls from 'common/urls';
 import StatTag from 'components/SummaryStats/StatTag';
 
@@ -74,12 +75,16 @@ const SummaryStat: React.FC<{
             </StatValueText>
           </>
         )}
-        <SignalStatus
-          levelInfo={levelInfo}
-          condensed={condensed}
-          flipOrder={flipSignalStatusOrder}
-          isEmbed={isEmbed}
-        />
+        {chartType !== Metric.VACCINATIONS ? (
+          <SignalStatus
+            levelInfo={levelInfo}
+            condensed={condensed}
+            flipOrder={flipSignalStatusOrder}
+            isEmbed={isEmbed}
+          />
+        ) : (
+          <SignalStatusWrapper $condensed={condensed} $isEmbed={isEmbed} />
+        )}
       </StatValueWrapper>
     </SummaryStatWrapper>
   );
