@@ -162,7 +162,7 @@ export function showExposureNotifications(region: Region) {
   }
 }
 
-function getStateName(region: Region) {
+export function getStateName(region: Region) {
   if (region instanceof State) {
     return region.fullName;
   } else if (region instanceof County) {
