@@ -68,7 +68,7 @@ function getVaccinationSeries(projection: Projection): Series[] {
       type: SeriesType.LINE,
       data: filterNull(projection.getDataset('vaccinations')),
       label: 'vaccinationsInitiated',
-      shortLabel: 'Initiated',
+      shortLabel: '1st shot',
       tooltipLabel: '1st shot',
       params: {
         stroke: '#bdbdbd',
@@ -79,7 +79,7 @@ function getVaccinationSeries(projection: Projection): Series[] {
       type: SeriesType.LINE,
       data: filterNull(projection.getDataset('vaccinationsCompleted')),
       label: 'Vaccinations Completed',
-      shortLabel: 'Completed',
+      shortLabel: '2nd shot',
       tooltipLabel: '2nd shot',
       params: {
         stroke: '#000',

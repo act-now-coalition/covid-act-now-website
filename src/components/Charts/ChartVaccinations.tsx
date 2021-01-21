@@ -1,6 +1,6 @@
 import React, { useCallback, Fragment } from 'react';
 import moment from 'moment';
-import { isNumber } from 'lodash';
+import { last, isNumber, max } from 'lodash';
 import { AxisLeft, AxisBottom } from '@vx/axis';
 import { Group } from '@vx/group';
 import { ParentSize } from '@vx/responsive';
@@ -28,6 +28,32 @@ const xTickFormat = (date: Date, isMobile: boolean) => {
     momentDate.month() === 0 || momentDate.month() === 11 ? 'MMM YYYY' : 'MMM';
   return momentDate.format(dateFormat);
 };
+
+interface LabelInfo {
+  x: number;
+  y: number;
+  label: string;
+  formattedValue: string;
+}
+function formatCurrentValueLabels(
+  seriesList: Series[],
+  getXPosition: (p: Column) => number,
+  getYPosition: (p: Column) => number,
+): LabelInfo[] {
+  return seriesList.reduce((labelInfoList: LabelInfo[], currSeries: Series) => {
+    const lastPoint = last(currSeries.data);
+    const currMaxY = max(labelInfoList.map(info => info.y)) || 0;
+    return [
+      ...labelInfoList,
+      {
+        x: lastPoint?.x ? getXPosition(lastPoint) : 0,
+        y: lastPoint?.y ? Math.max(getYPosition(lastPoint), currMaxY + 20) : 0,
+        label: currSeries.shortLabel,
+        formattedValue: formatPercent(lastPoint?.y, 1),
+      },
+    ];
+  }, []);
+}
 
 const VaccinesTooltip: React.FC<{
   date: Date;
@@ -150,6 +176,12 @@ const VaccinationLines: React.FC<{
   const getYPosition = (d: Column) => yScale(getY(d));
   const dateTicks = getTimeAxisTicks(dateFrom, dateTo);
 
+  const currentValueLabels = formatCurrentValueLabels(
+    seriesList,
+    getXPosition,
+    getYPosition,
+  );
+
   return (
     <Styles.PositionRelative style={{ height }}>
       <svg width={width} height={height}>
@@ -191,6 +223,21 @@ const VaccinationLines: React.FC<{
               />
             ))}
           </RectClipGroup>
+          {/* Current Value Labels */}
+          {currentValueLabels.map(labelInfo => {
+            return (
+              <ChartStyle.VaccinationLabel
+                key={labelInfo.label}
+                x={labelInfo.x}
+                y={labelInfo.y}
+              >
+                <ChartStyle.VaccinationLabelBold>
+                  {labelInfo.formattedValue}
+                </ChartStyle.VaccinationLabelBold>{' '}
+                {labelInfo.label}
+              </ChartStyle.VaccinationLabel>
+            );
+          })}
           {tooltipOpen && tooltipData && (
             <DataHoverMarkers
               x={getXPosition}

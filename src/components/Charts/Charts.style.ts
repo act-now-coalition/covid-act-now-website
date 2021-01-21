@@ -173,3 +173,15 @@ export const LegendLabel = styled.span`
   color: ${props => palette(props).axis};
   white-space: nowrap;
 `;
+
+// Vaccination Label
+export const VaccinationLabel = styled.text.attrs(props => ({ dx: 8 }))`
+  font-family: Roboto;
+  font-size: 13px;
+  color: #4f4f4f;
+  dominant-baseline: middle;
+`;
+
+export const VaccinationLabelBold = styled.tspan`
+  font-weight: bold;
+`;
