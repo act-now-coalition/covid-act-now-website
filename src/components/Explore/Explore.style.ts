@@ -157,8 +157,6 @@ function brightenStroke(colorHex: string) {
   }
 }
 
-// stroke: ${props =>
-//   props.stroke ? props.stroke : palette(props).foreground};
 export const MainSeriesLine = styled.g`
   line,
   path {
