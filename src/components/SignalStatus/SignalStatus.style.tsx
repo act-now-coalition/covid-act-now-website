@@ -2,16 +2,16 @@ import styled from 'styled-components';
 import { Box } from '@material-ui/core';
 
 export const SignalStatusWrapper = styled(Box)<{
-  condensed?: Boolean;
-  isEmbed?: Boolean;
+  $condensed?: boolean;
+  $isEmbed?: boolean;
 }>`
   ${props =>
-    props.condensed
+    props.$condensed
       ? `
     font-family: 'Source Code Pro', Menlo, Monaco, Consolas, 'Courier New',
       monospace;
     font-weight: bold;
-    font-size: ${props.isEmbed ? '13px' : '0.875rem'};
+    font-size: ${props.$isEmbed ? '13px' : '0.875rem'};
     width: 5.5rem;
     margin-left: 1rem;
     line-height: 1.25rem;

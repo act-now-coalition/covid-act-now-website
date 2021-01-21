@@ -14,8 +14,8 @@ export const VaccinationsMetric: MetricDefinition = {
   renderDisclaimer,
   renderThermometer,
   metricName: METRIC_NAME,
-  extendedMetricName: 'Percent Vaccinated with 1st and 2nd shot',
-  metricNameForCompare: 'Percent Started Vaccine',
+  extendedMetricName: 'Percent vaccinated with 1st and 2nd shot',
+  metricNameForCompare: 'Vaccinated 1st shot (%)',
 };
 
 const SHORT_DESCRIPTION_LOW = 'Population given the first shot';
