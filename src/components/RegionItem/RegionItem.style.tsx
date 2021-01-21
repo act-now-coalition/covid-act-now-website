@@ -43,23 +43,19 @@ export const SharedWrapperStyles = css`
 `;
 
 export const Wrapper = styled.div`
-${SharedWrapperStyles};
-cursor: pointer;
+  ${SharedWrapperStyles};
+  cursor: pointer;
 
-:hover {
-  background-color: ${COLOR_MAP.BLUE};
-  color: white;
-
-  ${ArrowIcon},${LevelDescription} {
-    color: white;
+  :hover {
+    box-shadow: 0px 2px 24px rgba(0, 0, 0, 0.12);
   }
-}
 `;
 
 /* For loading state: */
 
 export const SkeletonWrapper = styled.div`
   ${SharedWrapperStyles};
+  height: 84px;
 
   ${ArrowIcon} {
     color: ${COLOR_MAP.GRAY_EXPLORE_CHART};

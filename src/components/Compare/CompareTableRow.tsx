@@ -82,6 +82,7 @@ const CompareTableRow = (props: {
             <StyledRegionName
               showStateCode={showStateCode}
               region={location.region}
+              condensed
             />
             <br />
             <LocationInfoWrapper>
