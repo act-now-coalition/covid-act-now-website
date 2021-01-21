@@ -174,7 +174,7 @@
     }
   ],
   "pageHeader": "Risk levels & key metrics",
-  "pageIntro": "Covid Act Now uses five key metrics to assess COVID across U.S. states, metros, and counties. Three of these—[daily new cases](#daily-new-cases) (incidence), [infection rate](#infection-rate) (RT) and [positive test rate](#positive-test-rate)—assess a location's overall risk level. The other two—[ICU capacity used](#icu-capacity-used) and [tracers hired](#tracers-hired)—reflect a location's preparedness to handle COVID risk. Below, learn more about each metric and how it is assessed.",
+  "pageIntro": "Covid Act Now uses five key metrics to assess COVID across U.S. states, metros, and counties. Three of these—[daily new cases](#daily-new-cases) (incidence), [infection rate](#infection-rate) (RT) and [positive test rate](#positive-test-rate)—assess a location's overall risk level. The other two—[ICU capacity used](#icu-capacity-used) and [% vaccinated](#percent-vaccinated)—reflect a location's preparedness to handle COVID risk. Below, learn more about each metric and how it is assessed.",
   "frameworkLogos": [
     {
       "image": "/images_cms/the-rockefeller-foundation-logo.png",
