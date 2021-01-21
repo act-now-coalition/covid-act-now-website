@@ -178,7 +178,7 @@ export const LegendLabel = styled.span`
 export const VaccinationLabel = styled.text.attrs(props => ({ dx: 8 }))`
   font-family: Roboto;
   font-size: 13px;
-  color: #4f4f4f;
+  fill: ${props => palette(props).annotation || '#4f4f4f'};
   dominant-baseline: middle;
 `;
 
