@@ -44,6 +44,7 @@ import regions, {
   County,
 } from 'common/regions';
 import { assert } from 'common/utils';
+import { Anchor } from 'components/TableOfContents';
 
 // For filters (0, 50, and 99 are numerical values required by MUI Slider component):
 const scopeValueMap = {
@@ -276,6 +277,7 @@ const CompareMain = (props: {
   return (
     <Fragment>
       <DivForRef ref={tableRef}>
+        <Anchor id="compare" />
         <CompareTable
           {...sharedProps}
           locationsViewable={props.locationsViewable}

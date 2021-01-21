@@ -35,6 +35,7 @@ import { getFinalAutocompleteLocations } from 'common/regions';
 import { getNationalText } from 'components/NationalText';
 import HomepageStructuredData from 'screens/HomePage/HomepageStructuredData';
 import { useGeolocation } from 'common/hooks';
+import { Anchor } from 'components/TableOfContents';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -108,6 +109,7 @@ export default function HomePage() {
                   justify="flex-end"
                 >
                   <SelectorWrapper>
+                    <Anchor id="search" />
                     <SearchAutocomplete
                       locations={getFinalAutocompleteLocations(geolocation)}
                       filterLimit={getFilterLimit()}
