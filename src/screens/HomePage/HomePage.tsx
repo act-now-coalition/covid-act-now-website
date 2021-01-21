@@ -107,7 +107,7 @@ export default function HomePage() {
                   xs={12}
                   justify="flex-end"
                 >
-                  <SelectorWrapper>
+                  <SelectorWrapper id="search">
                     <SearchAutocomplete
                       locations={getFinalAutocompleteLocations(geolocation)}
                       filterLimit={getFilterLimit()}

@@ -275,7 +275,7 @@ const CompareMain = (props: {
 
   return (
     <Fragment>
-      <DivForRef ref={tableRef}>
+      <DivForRef ref={tableRef} id="compare">
         <CompareTable
           {...sharedProps}
           locationsViewable={props.locationsViewable}
