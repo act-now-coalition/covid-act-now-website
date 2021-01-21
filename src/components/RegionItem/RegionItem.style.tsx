@@ -4,8 +4,8 @@ import { COLOR_MAP } from 'common/colors';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
-export const CircleIcon = styled(FiberManualRecordIcon)<{ iconColor: string }>`
-  color: ${({ iconColor }) => iconColor};
+export const CircleIcon = styled(FiberManualRecordIcon)<{ $iconColor: string }>`
+  color: ${({ $iconColor }) => $iconColor};
   font-size: 1rem;
 `;
 

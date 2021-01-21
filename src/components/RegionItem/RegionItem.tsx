@@ -18,7 +18,7 @@ const RegionItem: React.FC<{ region: Region }> = ({ region }) => {
 
   const regionSummary = getSummaryFromFips(region.fipsCode);
   const levelDescriptionCopy = regionSummary?.level
-    ? LOCATION_SUMMARY_LEVELS[regionSummary?.level].summary
+    ? LOCATION_SUMMARY_LEVELS[regionSummary.level].summary
     : '';
 
   const showStateCode = !(region instanceof State);
@@ -26,7 +26,7 @@ const RegionItem: React.FC<{ region: Region }> = ({ region }) => {
   return (
     <StyledLink to={region.relativeUrl}>
       <Wrapper>
-        <CircleIcon iconColor={iconColor} />
+        <CircleIcon $iconColor={iconColor} />
         <CopyContainer>
           <StyledRegionName region={region} showStateCode={showStateCode} />
           <LevelDescription>{levelDescriptionCopy}</LevelDescription>
