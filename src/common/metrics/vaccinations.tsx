@@ -15,7 +15,7 @@ export const VaccinationsMetric: MetricDefinition = {
   renderThermometer,
   metricName: METRIC_NAME,
   extendedMetricName: 'Percent vaccinated with 1st and 2nd shot',
-  metricNameForCompare: 'Vaccinated 1st shot',
+  metricNameForCompare: 'Vaccinated (1st shot)',
 };
 
 const SHORT_DESCRIPTION_LOW = 'Population given the first shot';
@@ -67,7 +67,7 @@ function renderStatus(projections: Projections): React.ReactElement {
 
   return (
     <Fragment>
-      In {locationName}, {peopleInitiated} ({percentInitiated}) people have
+      In {locationName}, {peopleInitiated} people ({percentInitiated}) have
       received the first shot and {peopleVaccinated} ({percentVaccinated}) have
       also received the second shot. According to the CDC, fewer than 0.001% of
       those who have received the first dose have experienced a severe adverse

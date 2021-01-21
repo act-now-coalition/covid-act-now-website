@@ -192,7 +192,7 @@ const LocationHeaderStats = (props: {
               chartType={metric}
               value={props.stats[metric] as number}
               {...sharedStatProps}
-              beta={[Metric.HOSPITAL_USAGE].includes(metric)}
+              beta={[Metric.VACCINATIONS].includes(metric)}
             />
           ))}
         </SummaryStatsWrapper>
