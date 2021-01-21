@@ -9,8 +9,8 @@ import {
   Metricstimeseries,
   Metrics,
 } from 'api/schema/RegionSummaryWithTimeseries';
-import { ICUHeadroomInfo, calcICUHeadroom } from './ICUHeadroom';
-import { lastValue } from './utils';
+import { indexOfLastValue, lastValue } from './utils';
+import { assert } from 'common/utils';
 
 /** Stores a list of FIPS or FIPS regex patterns to disable. */
 class DisabledFips {
@@ -27,18 +27,15 @@ class DisabledFips {
   }
 }
 
-const DISABLED_CASE_DENSITY: string[] = [
-  '48339', // https://trello.com/c/39bNkJA2/713-disabled-montgomery-county-tx-daily-new-cases
-];
+const DISABLED_CASE_DENSITY: string[] = [];
 
 const DISABLED_INFECTION_RATE = new DisabledFips([]);
 
-const DISABLED_TEST_POSITIVITY = new DisabledFips(['48113', '48215']);
+const DISABLED_TEST_POSITIVITY = new DisabledFips([]);
 
 const DISABLED_ICU = new DisabledFips([
   '47', // https://trello.com/c/aEd07i5Y/701-disabled-tn-icu-headroom
-  // TODO(michael): Reenable counties / metros once we QA the data.
-  /\d{3,}/,
+  '53', // https://trello.com/c/1IkmUuhw/
 ]);
 
 const DISABLED_CONTACT_TRACING = new DisabledFips([]);
@@ -60,6 +57,10 @@ export const PROJECTIONS_TRUNCATION_DAYS = 30;
  * The range we give here could be between 5-15 contact tracers per case.
  */
 export const TRACERS_NEEDED_PER_CASE = 5;
+
+// We require at least 15 ICU beds in order to show ICU Capacity usage.
+// This still covers enough counties to cover 80% of the US population.
+const MIN_ICU_BEDS = 15;
 
 /** Parameters that can be provided when constructing a Projection. */
 export interface ProjectionParameters {
@@ -107,6 +108,16 @@ export interface CaseDensityRange {
   high: number;
 }
 
+export interface ICUCapacityInfo {
+  metricSeries: Array<number | null>;
+  metricValue: number | null;
+
+  totalBeds: number;
+  covidPatients: number | null;
+  nonCovidPatients: number | null;
+  totalPatients: number;
+}
+
 /**
  * We use use an estimated case fatality ratio of 1 % with lower and upper bounds
  * of 0.5% and 1.5% respectively, used to calculate case density by deaths (main
@@ -128,7 +139,7 @@ export class Projection {
   readonly totalPopulation: number;
   readonly fips: string;
 
-  readonly icuHeadroomInfo: ICUHeadroomInfo | null;
+  readonly icuCapacityInfo: ICUCapacityInfo | null;
 
   readonly currentCumulativeDeaths: number | null;
   readonly currentCumulativeCases: number | null;
@@ -175,7 +186,6 @@ export class Projection {
       PROJECTIONS_TRUNCATION_DAYS,
     );
     const metrics = summaryWithTimeseries.metrics;
-    const actuals = summaryWithTimeseries.actuals;
 
     this.metrics = metrics || null;
     this.actualTimeseries = actualTimeseries;
@@ -225,19 +235,13 @@ export class Projection {
       row => row && row.testPositivityRatio,
     );
 
-    if (metrics && !DISABLED_ICU.includes(this.fips)) {
-      this.icuHeadroomInfo = calcICUHeadroom(
-        this.fips,
-        actualTimeseries,
-        metricsTimeseries,
-        metrics,
-        actuals,
-      );
-    } else {
-      this.icuHeadroomInfo = null;
-    }
+    this.icuCapacityInfo = this.getIcuCapacityInfo(
+      metrics,
+      metricsTimeseries,
+      actualTimeseries,
+    );
     this.icuUtilization =
-      this.icuHeadroomInfo?.metricSeries || this.dates.map(date => null);
+      this.icuCapacityInfo?.metricSeries || this.dates.map(date => null);
 
     this.contractTracers = metricsTimeseries.map(
       row => row && row.contactTracerCapacityRatio,
@@ -298,6 +302,64 @@ export class Projection {
     }
 
     return this.metrics && this.metrics.infectionRate;
+  }
+
+  private getIcuCapacityInfo(
+    metrics: Metrics,
+    metricsTimeseries: Array<MetricsTimeseriesRow | null>,
+    actualsTimeseries: Array<ActualsTimeseriesRow | null>,
+  ): ICUCapacityInfo | null {
+    // TODO(https://trello.com/c/bnwRazOo/): Something is broken where the API
+    // top-level actuals don't match the current metric value. So we extract
+    // them from the timeseries for now.
+    const icuIndex = indexOfLastValue(
+      metricsTimeseries.map(row => row?.icuCapacityRatio),
+    );
+    if (
+      icuIndex != null &&
+      metrics.icuCapacityRatio !== null &&
+      !DISABLED_ICU.includes(this.fips)
+    ) {
+      // Make sure we don't somehow grab the wrong data, given we're pulling it from the metrics / actuals timeseries.
+      assert(
+        metrics.icuCapacityRatio === null ||
+          metrics.icuCapacityRatio ===
+            metricsTimeseries[icuIndex]?.icuCapacityRatio,
+        "Timeseries icuCapacityRatio doesn't match current metric value.",
+      );
+      assert(
+        metricsTimeseries[icuIndex]?.date === actualsTimeseries[icuIndex]?.date,
+        "Dates in actualTimeseries and metricTimeseries aren't aligned.",
+      );
+      const icuActuals = actualsTimeseries[icuIndex]!.icuBeds;
+
+      const metricSeries = metricsTimeseries.map(
+        row => row && row.icuCapacityRatio,
+      );
+
+      const totalBeds = icuActuals.capacity;
+      const covidPatients = icuActuals.currentUsageCovid;
+      const totalPatients = icuActuals.currentUsageTotal;
+
+      const enoughBeds = totalBeds !== null && totalBeds >= MIN_ICU_BEDS;
+      const metricValue = enoughBeds ? metrics.icuCapacityRatio : null;
+
+      assert(
+        totalBeds !== null && totalPatients !== null,
+        'These must be non-null for the metric to be non-null',
+      );
+      const nonCovidPatients =
+        covidPatients === null ? null : totalPatients - covidPatients;
+      return {
+        metricSeries,
+        metricValue,
+        totalBeds,
+        covidPatients,
+        nonCovidPatients,
+        totalPatients,
+      };
+    }
+    return null;
   }
 
   private getColumn(columnName: string): Column[] {

@@ -254,7 +254,8 @@ class IndexPageBuilder {
     return html;
   }
 
-  private replaceCanonicalUrl(relativeUrl: string, html: string) {
+  private replaceCanonicalUrl(relativeHtmlUrl: string, html: string) {
+    const relativeUrl = relativeHtmlUrl.replace('index.html', '');
     return html.replace(
       `rel="canonical" href="https://covidactnow.org/"`,
       `rel="canonical" href="${urlJoin(

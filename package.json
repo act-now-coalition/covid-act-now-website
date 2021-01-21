@@ -60,6 +60,7 @@
     "react-ga": "^3.1.2",
     "react-helmet": "^5.2.1",
     "react-markdown": "^4.3.1",
+    "react-optimize": "^2.4.0",
     "react-router-dom": "^5.1.2",
     "react-router-hash-link": "^2.2.2",
     "react-scripts": "3.4.0",
@@ -90,6 +91,7 @@
     "cy.open": "cypress open",
     "cy.run": "cypress run",
     "jest": "react-scripts test",
+    "jest.ci": "CI=true react-scripts test",
     "lint": "eslint --ext .js,.ts,tsx src",
     "lint-fix": "eslint --ext .js,.ts,tsx --fix src",
     "tsc": "tsc",
@@ -108,6 +110,9 @@
     "generate-metro-areas": "ts-node-script -r tsconfig-paths/register scripts/cbsa/parse-metro-areas.ts",
     "generate-sitemap": "ts-node-script -r tsconfig-paths/register scripts/generate_sitemap/index.ts",
     "optimize-images": "ts-node-script -r tsconfig-paths/register scripts/optimize_images/optimize-images.ts",
+    "covid-explained-internal-links": "ts-node-script -r tsconfig-paths/register scripts/covid-explained/report-internal-links.ts",
+    "covid-explained-images": "ts-node-script -r tsconfig-paths/register scripts/covid-explained/report-images.ts",
+    "covid-explained-migrate": "ts-node-script -r tsconfig-paths/register scripts/covid-explained/migrate-articles.ts",
     "storybook": "start-storybook -p 6006 -s public --no-dll",
     "build-storybook": "build-storybook -s public --no-dll",
     "analyze": "cross-env REACT_APP_ENVIRONMENT=prod yarn build && source-map-explorer build/static/js/*.js"
@@ -189,6 +194,7 @@
     "ts-node": "^8.9.0",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^3.8.3",
+    "unist-util-is": "^4.0.4",
     "unist-util-visit": "^2.0.3",
     "url-join": "^4.0.1"
   }

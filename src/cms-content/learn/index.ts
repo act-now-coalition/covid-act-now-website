@@ -8,34 +8,10 @@ import {
   property,
 } from 'lodash';
 import faq from './learn-faq.json';
-import glossary from './learn-glossary.json';
-import landing from './learn-landing.json';
 import caseStudies from './learn-case-studies.json';
-import productsLanding from './products-landing.json';
 import metricExplainers from './metric-explainers.json';
+import footer from './footer.json';
 import { sanitizeID, Markdown, TocItem } from '../utils';
-
-/*
-  Learn Landing page:
-*/
-
-export interface LandingSection {
-  sectionTitle: string;
-  sectionId: string;
-  description: Markdown;
-  buttonCta: string;
-  buttonRedirect: string;
-}
-
-export interface LandingContent {
-  header: string;
-  intro: Markdown;
-  sections: LandingSection[];
-  metadataTitle: string;
-  metadataDescription: string;
-}
-
-export const landingPageContent = landing as LandingContent;
 
 /*
   FAQ:
@@ -54,7 +30,7 @@ export interface FaqSection {
 
 export interface FaqContent {
   header: string;
-  intro: Markdown;
+  intro?: Markdown;
   lastUpdatedDate: string;
   sections: FaqSection[];
   metadataTitle: string;
@@ -76,39 +52,6 @@ export const faqContent = sanitizeFaq(faq) as FaqContent;
 export const faqQuestionItems = flatten(
   map(faqContent.sections, property('questions')),
 );
-
-/*
-  Glossary:
-*/
-
-export interface Term {
-  term: string;
-  termId: string;
-  definition: Markdown;
-  category: string;
-}
-
-export interface GlossaryContent {
-  header: string;
-  intro: Markdown;
-  lastUpdatedDate: string;
-  terms: Term[];
-  metadataTitle: string;
-  metadataDescription: string;
-}
-
-// (Chelsi): make these sanitize functions reusable between learn pages?
-const sanitizeTerm = (term: Term): Term => ({
-  ...term,
-  termId: sanitizeID(term.termId),
-});
-
-const sanitizeGlossary = (glossary: GlossaryContent): GlossaryContent => ({
-  ...glossary,
-  terms: glossary.terms.map(sanitizeTerm),
-});
-
-export const glossaryContent = sanitizeGlossary(glossary) as GlossaryContent;
 
 /**
  * Case Studies
@@ -135,7 +78,7 @@ export interface CaseStudyCategory {
 
 export interface CaseStudiesContent {
   header: string;
-  intro: Markdown;
+  intro?: Markdown;
   categories: CaseStudyCategory[];
   metadataTitle: string;
   metadataDescription: string;
@@ -193,33 +136,6 @@ export const categoriesWithStudies = caseStudiesContent.categories.filter(
 );
 
 /**
- * Products - landing page:
- **/
-
-export interface LandingPageButton {
-  cta: string;
-  redirect: string;
-}
-
-export interface ProductsLandingSection {
-  productName: string;
-  productId: string;
-  productSubtitle: string;
-  productDescription: Markdown;
-  buttons: LandingPageButton[];
-}
-
-export interface ProductsLandingContent {
-  header: string;
-  intro?: Markdown;
-  productsList: ProductsLandingSection[];
-  metadataTitle: string;
-  metadataDescription: string;
-}
-
-export const productsLandingContent = productsLanding as ProductsLandingContent;
-
-/**
  * Metric Explainers:
  **/
 
@@ -240,7 +156,7 @@ interface LogoItem {
 
 export interface MetricExplainersContent {
   pageHeader: string;
-  pageIntro: string;
+  pageIntro?: string;
   sections: Section[];
   frameworkLogos: LogoItem[];
   metadataTitle: string;
@@ -253,6 +169,16 @@ export const [introSection, metricSections] = partition(
   section => section.sectionId === 'how-covid-risk-is-determined',
 );
 
+/**
+ * Footer:
+ **/
+
+interface Footer {
+  body: Markdown;
+}
+
+export const footerContent = footer as Footer;
+
 // TODO (pablo): Should we have a short heading for categories?
 export const learnPages: TocItem[] = [
   {
@@ -264,7 +190,12 @@ export const learnPages: TocItem[] = [
     })),
   },
   {
-    label: glossaryContent.header,
+    label: 'COVID explained',
+    to: '/covid-explained',
+  },
+  {
+    // TODO(pablo): Hardcoding the title to avoid importing the glossary content
+    label: 'Glossary',
     to: '/glossary',
   },
   {
@@ -276,15 +207,15 @@ export const learnPages: TocItem[] = [
     })),
   },
   {
-    label: 'Deep dives',
-    to: '/deep-dives',
-  },
-  {
     label: caseStudiesContent.header,
     to: '/case-studies',
     items: categoriesWithStudies.map(category => ({
       to: `/case-studies#${category.categoryId}`,
       label: category.header,
     })),
+  },
+  {
+    label: 'Covid Act Now updates',
+    to: '/updates',
   },
 ];

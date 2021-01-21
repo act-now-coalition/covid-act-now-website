@@ -12,7 +12,7 @@ import {
   BodyCopy,
 } from 'screens/Donate/Donate.style';
 import GiveButterEmbed from 'screens/Donate/GiveButterEmbed';
-import { donateContent } from 'common/utils/netlify';
+import donateContent from 'cms-content/donate';
 
 const Intro: React.FC = () => {
   const { headerLines } = donateContent;

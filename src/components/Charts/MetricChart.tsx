@@ -3,7 +3,7 @@ import { Projections } from 'common/models/Projections';
 import {
   ChartRt,
   ChartPositiveTestRate,
-  ChartICUHeadroom,
+  ChartICUCapacityUsed,
   ChartContactTracing,
   ChartCaseDensity,
 } from 'components/Charts';
@@ -45,7 +45,7 @@ export default function MetricChart({
         />
       )}
       {metric === Metric.HOSPITAL_USAGE && (
-        <ChartICUHeadroom
+        <ChartICUCapacityUsed
           height={height}
           columnData={projection.getDataset('icuUtilization')}
         />

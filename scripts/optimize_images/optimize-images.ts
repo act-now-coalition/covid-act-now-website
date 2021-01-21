@@ -1,53 +1,50 @@
 import fs from 'fs';
-import path from 'path';
 import sharp from 'sharp';
 import staticImages from './static-images';
+import { absolutePath, doubleSize } from './utils';
 
 async function main() {
   for (const imageInfo of staticImages) {
-    const { path: imagePath, ...sizeParams } = imageInfo;
-    const inputPath = path.join(__dirname, '../../', imagePath);
+    const { inputPath, originalPath, ...sizeParams } = imageInfo;
+    const inputAbsolutePath = absolutePath(inputPath);
 
-    if (!fs.existsSync(inputPath)) {
-      console.log(`Image ${inputPath} not found, skipping.`);
+    if (!fs.existsSync(inputAbsolutePath)) {
+      console.log(`Image ${inputAbsolutePath} not found, skipping.`);
+      continue;
+    }
+    const originalAbsolutePath = absolutePath(originalPath);
+
+    // Do not overwrite the backup copy if it already exists
+    if (!fs.existsSync(originalAbsolutePath)) {
+      fs.copyFileSync(inputAbsolutePath, originalAbsolutePath);
+    }
+
+    const targetSize = doubleSize(sizeParams);
+    const inputFileInfo = fs.statSync(inputAbsolutePath);
+    const inputMetadata = await sharp(originalAbsolutePath).metadata();
+
+    // Do not resize the image if resizing would result in a larger image
+    const skipResize =
+      (targetSize.width && targetSize.width > (inputMetadata.width || 0)) ||
+      (targetSize.height && targetSize.height > (inputMetadata.height || 0));
+
+    if (skipResize) {
+      console.log(`File ${inputPath} is small enough, skipping.`);
       continue;
     }
 
-    // Rename the image `image.png` -> `image-original.png` (sharp doesn't allow
-    // the same input and output path).
-    const { dir: imageDir, name: fileName, ext } = path.parse(inputPath);
-    const backupName = `${fileName}-original${ext}`;
-    const backupImagePath = path.join(imageDir, backupName);
-
-    // Do not create a copy if the original copy already exists
-    if (!fs.existsSync(backupImagePath)) {
-      fs.renameSync(inputPath, backupImagePath);
-    }
-
     // Resize the image preserving the aspect ratio
-    console.log(`Resizing ${imagePath}`);
-    await sharp(backupImagePath)
-      .resize(doubleSize(sizeParams))
-      .toFile(inputPath);
+    await sharp(originalAbsolutePath)
+      .resize({ ...targetSize, withoutEnlargement: true })
+      .toFile(inputAbsolutePath)
+      .then(outputFileInfo => {
+        console.log(
+          `Resizing ${inputPath} (${inputFileInfo.size} → ${outputFileInfo.size})`,
+        );
+      });
   }
 
   return true;
-}
-
-interface ImageSize {
-  width?: number;
-  height?: number;
-}
-
-// Duplicate the input pixel size for better resolution on retina displays
-function doubleSize(sizeParams: ImageSize): ImageSize {
-  if (sizeParams.width) {
-    return { width: 2 * sizeParams.width };
-  }
-  if (sizeParams.height) {
-    return { height: 2 * sizeParams.height };
-  }
-  return {};
 }
 
 if (require.main === module) {

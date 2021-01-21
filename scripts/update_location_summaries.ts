@@ -124,12 +124,8 @@ const STATE_AGGREGATED_DATASETS: DatasetId[] = [
   'smoothedDailyDeaths',
   'rawHospitalizations',
   'smoothedHospitalizations',
-  // Only 43 states are reporting ICU as of 2020-11-12, disabling
-  // because per capita charts can be misleading.
-  /*
   'rawICUHospitalizations',
   'smoothedICUHospitalizations',
-  */
 ];
 
 function aggregate(

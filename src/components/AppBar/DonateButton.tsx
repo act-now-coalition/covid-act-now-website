@@ -2,41 +2,23 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import useScrollPosition from '@react-hook/window-scroll';
 import { Fade } from '@material-ui/core';
-import { StyledDonateButton, DonateButtonWrapper } from './DonateButton.style';
+import {
+  StyledDonateButton as StyledDonateButtonA,
+  DonateButtonWrapper,
+  StyledDonateButtonB,
+} from './DonateButton.style';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
+import {
+  Experiment,
+  ExperimentID,
+  Variant,
+  VariantID,
+} from 'components/Experiment';
 
-const ButtonContent = () => {
+function trackClickDonate() {
   const trackLabel = 'AppBar donate button';
-
-  return (
-    <Link to="/donate">
-      <StyledDonateButton
-        variant="contained"
-        color="primary"
-        disableRipple
-        disableFocusRipple
-        onClick={() => {
-          trackEvent(EventCategory.DONATE, EventAction.CLICK, trackLabel);
-        }}
-      >
-        Donate
-      </StyledDonateButton>
-    </Link>
-  );
-};
-
-/*
-Splits donate button into 2 separate components (with/without fade)
-so that the useScrollPosition hook is only called when necessary
-*/
-
-export const DonateButtonWithoutFade = (props: {}) => {
-  return (
-    <DonateButtonWrapper>
-      <ButtonContent />
-    </DonateButtonWrapper>
-  );
-};
+  trackEvent(EventCategory.DONATE, EventAction.CLICK, trackLabel);
+}
 
 export const DonateButtonWithFade = () => {
   // uses https://www.npmjs.com/package/@react-hook/window-scroll :
@@ -47,8 +29,31 @@ export const DonateButtonWithFade = () => {
   return (
     <Fade in={isPassedBanner} timeout={150}>
       <DonateButtonWrapper>
-        <ButtonContent />
+        <Link to="/donate">
+          <StyledDonateButtonA onClick={trackClickDonate}>
+            Donate
+          </StyledDonateButtonA>
+        </Link>
       </DonateButtonWrapper>
     </Fade>
   );
 };
+
+export const DonateButton = () => (
+  <DonateButtonWrapper>
+    <Link to="/donate">
+      <Experiment id={ExperimentID.DONATE_BTN_COLOR}>
+        <Variant id={VariantID.A}>
+          <StyledDonateButtonA onClick={trackClickDonate}>
+            Donate
+          </StyledDonateButtonA>
+        </Variant>
+        <Variant id={VariantID.B}>
+          <StyledDonateButtonB onClick={trackClickDonate}>
+            Donate
+          </StyledDonateButtonB>
+        </Variant>
+      </Experiment>
+    </Link>
+  </DonateButtonWrapper>
+);

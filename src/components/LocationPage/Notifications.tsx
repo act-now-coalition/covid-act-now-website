@@ -23,11 +23,12 @@ const EXPOSURE_NOTIFICATIONS_STATE_FIPS = [
   '08', // Colorado,
   '09', // Connecticut,
   '10', // Delaware,
+  '15', // Hawaii
   '24', // Maryland,
   '26', // Michigan,
   '27', // Minnesota,
   '32', // Nevada,
-  '24', // New Jersey,
+  '34', // New Jersey,
   '36', // New York,
   '37', // North Carolina,
   '38', // North Dakota,
@@ -80,7 +81,7 @@ const NotificationArea: React.FC<{ projections: Projections }> = ({
         <ColumnTitle isUpdateCopy>{title}</ColumnTitle>
 
         {notification === Notification.ExposureNotifications && (
-          <ExposureNotificationCopy locationName={region.fullName} />
+          <ExposureNotificationCopy stateName={getStateName(region)} />
         )}
 
         {notification === Notification.HospitalizationsPeak && (
@@ -114,22 +115,23 @@ const NYCAggregationChangeCopy: React.FC<{ locationName: string }> = ({
 const ThirdWaveCopy = () => {
   return (
     <Copy isUpdateCopy>
-      {BANNER_COPY} <Link to={'/deep-dives/us-third-wave'}>Learn more</Link>.
+      {BANNER_COPY}{' '}
+      <Link to={'/covid-explained/us-third-wave'}>Learn more</Link>.
     </Copy>
   );
 };
 
-const ExposureNotificationCopy: React.FC<{ locationName: string }> = ({
-  locationName,
+const ExposureNotificationCopy: React.FC<{ stateName: string }> = ({
+  stateName,
 }) => {
   return (
     <Copy>
       Add your phone to{' '}
       <ExternalLink
         href="https://g.co/ens"
-        onClick={() => trackClickExposureNotifications(locationName)}
+        onClick={() => trackClickExposureNotifications(stateName)}
       >
-        {locationName}'s exposure notification system
+        {stateName}'s exposure notification system
       </ExternalLink>{' '}
       to receive alerts if you were in close contact with someone who later
       tests positive for COVID. Your privacy is protected as your identity is
@@ -157,6 +159,20 @@ export function showExposureNotifications(region: Region) {
     );
   } else {
     return false;
+  }
+}
+
+function getStateName(region: Region) {
+  if (region instanceof State) {
+    return region.fullName;
+  } else if (region instanceof County) {
+    return region.state.fullName;
+  } else if (region instanceof MetroArea) {
+    return region.states.length === 1
+      ? region.states[0].fullName
+      : 'your state';
+  } else {
+    return '';
   }
 }
 

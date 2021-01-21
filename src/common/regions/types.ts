@@ -70,7 +70,7 @@ export class State extends Region {
   }
 
   get relativeUrl() {
-    return `/us/${this.urlSegment}`;
+    return `/us/${this.urlSegment}/`;
   }
 }
 
@@ -81,7 +81,7 @@ export class County extends Region {
     fipsCode: FipsCode,
     population: number,
     public readonly state: State,
-    private readonly adjacentCountiesFips: FipsCode[],
+    public readonly adjacentCountiesFips: FipsCode[],
     public readonly zipCodes: ZipCode[],
   ) {
     super(name, urlSegment, fipsCode, population, RegionType.COUNTY);
@@ -100,7 +100,7 @@ export class County extends Region {
   }
 
   get relativeUrl() {
-    return urlJoin(this.state.relativeUrl, `county/${this.urlSegment}`);
+    return urlJoin(this.state.relativeUrl, `county/${this.urlSegment}/`);
   }
 
   get stateCode() {
@@ -142,7 +142,7 @@ export class MetroArea extends Region {
   }
 
   get relativeUrl() {
-    return `/us/metro/${this.urlSegment}`;
+    return `/us/metro/${this.urlSegment}/`;
   }
 
   get stateCodes() {

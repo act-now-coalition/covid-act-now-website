@@ -107,7 +107,7 @@ export type Risklevels = RiskLevels;
  *  *Low* - On track to contain COVID
  *  *Medium* - Slow disease growth
  *  *High* - At risk of outbreak
- *  *Critical* - Active or imminent outbreak
+ *  *Critical* - Active outbreak
  *  *Unknown* - Risk unknown
  *  *Extreme* - Severe outbreak
  */
