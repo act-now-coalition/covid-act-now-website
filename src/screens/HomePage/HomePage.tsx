@@ -94,7 +94,7 @@ export default function HomePage() {
       <main>
         <div className="App">
           <Content>
-            <Grid container spacing={1}>
+            <Grid container>
               <Grid container item key="controls" xs={12} sm={6}>
                 <StyledGridItem
                   container
