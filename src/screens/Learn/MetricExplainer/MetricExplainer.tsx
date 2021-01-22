@@ -72,21 +72,26 @@ const MetricExplainer = () => {
           </Fragment>
         ))}
         <GovLogoGrid logos={frameworkLogos} />
-        {metricSections.map(section => (
-          <Fragment key={section.sectionId}>
-            <ExplainersHeading2 id={section.sectionId}>
-              {section.sectionHeader}
-            </ExplainersHeading2>
-            <MarkdownContent source={section.sectionIntro} />
-            <ThermometerBox>{getThermometer(section.sectionId)}</ThermometerBox>
-            {section.questions.map(question => (
-              <Fragment key={question.questionId}>
-                <ItemName>{question.question}</ItemName>
-                <MarkdownContent source={question.answer} />
-              </Fragment>
-            ))}
-          </Fragment>
-        ))}
+        {metricSections.map(section => {
+          const sectionThermometer = getThermometer(section.sectionId);
+          return (
+            <Fragment key={section.sectionId}>
+              <ExplainersHeading2 id={section.sectionId}>
+                {section.sectionHeader}
+              </ExplainersHeading2>
+              <MarkdownContent source={section.sectionIntro} />
+              {sectionThermometer && (
+                <ThermometerBox>{sectionThermometer}</ThermometerBox>
+              )}
+              {section.questions.map(question => (
+                <Fragment key={question.questionId}>
+                  <ItemName>{question.question}</ItemName>
+                  <MarkdownContent source={question.answer} />
+                </Fragment>
+              ))}
+            </Fragment>
+          );
+        })}
         <Footer />
         <ScrollToTopButton
           showButton={showScrollToTopButton}

@@ -148,12 +148,23 @@ export const PositionRelative = styled.div`
   margin: 0;
 `;
 
+// TODO(pablo): Hack to invert the colors for the vaccination chart
+function brightenStroke(colorHex: string) {
+  if (colorHex === '#000' || colorHex === '#000000') {
+    return '#fff';
+  } else {
+    return brightenColor(colorHex, 1);
+  }
+}
+
 export const MainSeriesLine = styled.g`
   line,
   path {
     fill: none;
     stroke: ${props =>
-      props.stroke ? props.stroke : palette(props).foreground};
+      palette(props).isDarkMode
+        ? brightenStroke(props.stroke || '#fff')
+        : props.stroke || '#000'};
     stroke-linecap: round;
     stroke-width: 3px;
   }
