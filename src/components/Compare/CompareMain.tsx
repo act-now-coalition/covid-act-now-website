@@ -64,6 +64,7 @@ const CompareMain = (props: {
   locationsViewable: number;
   stateId?: string;
   region?: Region;
+  vaccinesFirst?: boolean;
 }) => {
   const tableRef = useRef<HTMLDivElement>(null);
 
@@ -271,6 +272,7 @@ const CompareMain = (props: {
     homepageSliderValue,
     setHomepageSliderValue,
     region: region,
+    vaccinesFirst: props.vaccinesFirst,
   };
 
   return (

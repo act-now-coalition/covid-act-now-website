@@ -48,6 +48,9 @@ export default function HomePage() {
 
   const geolocation = useGeolocation();
 
+  // Location hash is uniquely set from vaccination banner button click
+  const compareShowVaccinationsFirst = location.hash === '#compare';
+
   const scrollTo = (div: null | HTMLDivElement) =>
     div &&
     window.scrollTo({
@@ -130,7 +133,10 @@ export default function HomePage() {
             </Grid>
             <Map hideLegend showCounties={showCounties} />
             {isMobile && <HomePageThermometer />}
-            <CompareMain locationsViewable={8} />
+            <CompareMain
+              locationsViewable={8}
+              vaccinesFirst={compareShowVaccinationsFirst}
+            />
             <Section ref={exploreSectionRef}>
               <Explore
                 title="Cases, Deaths and Hospitalizations"

@@ -38,6 +38,14 @@ export const orderedMetrics = [
   Metric.VACCINATIONS,
 ];
 
+export const orderedMetricsVaccineFirst = [
+  Metric.VACCINATIONS,
+  Metric.CASE_DENSITY,
+  Metric.CASE_GROWTH_RATE,
+  Metric.POSITIVE_TESTS,
+  Metric.HOSPITAL_USAGE,
+];
+
 function getLocationObj(region: Region): SummaryForCompare {
   return {
     region: region,
