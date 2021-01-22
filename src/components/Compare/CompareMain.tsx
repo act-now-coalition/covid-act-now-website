@@ -272,6 +272,7 @@ const CompareMain = (props: {
     homepageSliderValue,
     setHomepageSliderValue,
     region: region,
+    vaccinesFirst: props.vaccinesFirst,
   };
 
   return (
@@ -282,7 +283,6 @@ const CompareMain = (props: {
           locationsViewable={props.locationsViewable}
           isModal={false}
           viewMoreCopy={viewMoreCopy}
-          vaccinesFirst={props.vaccinesFirst}
         />
       </DivForRef>
       <Modal open={showModal} onClose={handleCloseModal}>
