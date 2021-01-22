@@ -40,7 +40,7 @@ const DISABLED_ICU = new DisabledFips([
 ]);
 
 const DISABLED_VACCINATIONS = new DisabledFips([
-  /39.../, // Disabling Ohio counties - vaccinations showing 0%
+  /39.../, // https://trello.com/c/J3M0Ksb5/827-ohio-county-vaccinations-are-not-cumulative
 ]);
 
 /**
