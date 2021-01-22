@@ -2,7 +2,7 @@
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 import { each, has, partition, toLower } from 'lodash';
 import { assert } from './utils';
-import countyAdjacencyMsa from './data/county_adjacency_msa.json';
+// import countyAdjacencyMsa from './data/county_adjacency_msa.json';
 import { REVERSED_STATES, STATES as STATES_MAP } from 'common';
 // import CountyMap from 'components/CountyMap/CountyMap';
 
@@ -13,7 +13,7 @@ export interface AdjacencyData {
   };
 }
 
-export const ADJACENT_COUNTIES: AdjacencyData = countyAdjacencyMsa.counties;
+export const ADJACENT_COUNTIES: AdjacencyData = {};
 
 /** Aggregations supported by the Explore chart. */
 export const AGGREGATED_LOCATIONS: Location[] = [

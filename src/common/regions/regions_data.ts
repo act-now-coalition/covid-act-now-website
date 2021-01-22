@@ -1,6 +1,6 @@
 import { chain, Dictionary, fromPairs } from 'lodash';
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
-import countyAdjacencyMsa from 'common/data/county_adjacency_msa.json';
+// import countyAdjacencyMsa from 'common/data/county_adjacency_msa.json';
 import metroAreaDataset from 'common/data/msa-data.json';
 import countyFipsToZips from 'components/MapSelectors/datasets';
 import {
@@ -159,7 +159,7 @@ interface AdjacencyInfo {
   adjacent_counties: FipsCode[];
   msa_code?: string;
 }
-const adjacency: Dictionary<AdjacencyInfo> = countyAdjacencyMsa.counties;
+const adjacency: Dictionary<AdjacencyInfo> = {};
 
 const counties: County[] = buildCounties(statesByFips, adjacency);
 export const countiesByFips = fromPairs(
