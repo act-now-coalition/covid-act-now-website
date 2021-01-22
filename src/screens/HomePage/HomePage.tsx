@@ -48,6 +48,7 @@ export default function HomePage() {
 
   const geolocation = useGeolocation();
 
+  // Location hash is uniquely set from vaccination banner button click
   const compareShowVaccinationsFirst = location.hash === '#compare';
 
   const scrollTo = (div: null | HTMLDivElement) =>
