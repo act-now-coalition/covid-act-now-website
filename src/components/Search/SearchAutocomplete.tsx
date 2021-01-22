@@ -57,7 +57,6 @@ const SearchAutocomplete: React.FC<{
   useEffect(() => {
     if (zipCodeMap === null) {
       fetchZipcodesByCounty().then((data: ZipCodeMap) => {
-        console.log({ data });
         setZipCodeMap(data);
       });
     }
