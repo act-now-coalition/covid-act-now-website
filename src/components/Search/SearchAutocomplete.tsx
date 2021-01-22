@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Autocomplete } from '@material-ui/lab';
 import { createFilterOptions } from '@material-ui/lab/useAutocomplete';
 import TextField from '@material-ui/core/TextField';
@@ -10,12 +10,18 @@ function getOptionSelected(option: Region, selectedOption: Region) {
   return option.fipsCode === selectedOption.fipsCode;
 }
 
+interface ZipCodeMap {
+  [fipsCode: string]: string[];
+}
+
 const SearchAutocomplete: React.FC<{
   locations: Region[];
   filterLimit: number;
   setHideMapToggle?: any;
 }> = ({ locations, filterLimit, setHideMapToggle }) => {
   const [input, setInput] = useState('');
+  const [zipCodeMap, setZipCodeMap] = useState<ZipCodeMap | null>(null);
+
   /* We only check for a zipcode match when the input is all numbers and has a length of 5: */
   const [checkForZipcodeMatch, setCheckForZipcodeMatch] = useState(false);
   const [noOptionsCopy, setNoOptionsCopy] = useState('No location found');
@@ -31,8 +37,8 @@ const SearchAutocomplete: React.FC<{
   };
 
   const stringifyOption = (option: Region) => {
-    if (checkForZipcodeMatch && (option as County).zipCodes) {
-      return `${(option as County).zipCodes.join(' ')}`;
+    if (checkForZipcodeMatch && zipCodeMap && (option as County).fipsCode) {
+      return `${(zipCodeMap[(option as County).fipsCode] || []).join(' ')}`;
     } else {
       if (option instanceof MetroArea) {
         return `${option.shortName}, ${(option as MetroArea).stateCodes}`;
@@ -47,6 +53,15 @@ const SearchAutocomplete: React.FC<{
   };
 
   const zipCodeInput = checkForZipcodeMatch ? input : '';
+
+  useEffect(() => {
+    if (zipCodeMap === null) {
+      fetchZipcodesByCounty().then((data: ZipCodeMap) => {
+        console.log({ data });
+        setZipCodeMap(data);
+      });
+    }
+  }, [zipCodeMap, setZipCodeMap]);
 
   return (
     <Autocomplete
@@ -88,5 +103,9 @@ const SearchAutocomplete: React.FC<{
     />
   );
 };
+
+function fetchZipcodesByCounty() {
+  return fetch('/data/county-zipcode.json').then(res => res.json());
+}
 
 export default SearchAutocomplete;
