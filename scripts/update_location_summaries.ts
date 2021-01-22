@@ -58,8 +58,8 @@ const INDIGENOUS_FIPS = [
 
 async function main() {
   const allStatesProjections = await fetchAllStateProjections();
-  const allCountiesProjections = await fetchAllCountyProjections();
-  const allMetroProjections = await fetchAllMetroProjections();
+  const allCountiesProjections: Projections[] = []; // await fetchAllCountyProjections();
+  const allMetroProjections: Projections[] = []; // await fetchAllMetroProjections();
   await buildSummaries(
     allStatesProjections,
     allCountiesProjections,
