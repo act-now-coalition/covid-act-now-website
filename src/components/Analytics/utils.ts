@@ -42,6 +42,7 @@ export enum EventCategory {
   FAQ = 'faq',
   METRIC_EXPLAINERS = 'metric explainers',
   EXPOSURE_NOTIFICATIONS = 'exposure notifications',
+  VACCINATION = 'vaccination',
 }
 
 /**

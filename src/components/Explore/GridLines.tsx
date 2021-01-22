@@ -9,11 +9,23 @@ const GridLines: React.FC<{
   dateScale: ScaleTime<number, number>;
   yScale: ScaleLinear<number, number>;
   numTicksRows?: number;
-}> = ({ width, height, dateScale, yScale, numTicksRows = 10 }) => (
-  <GridStyle>
-    <GridColumns<Date> scale={dateScale} height={height} />
-    <GridRows<number> scale={yScale} width={width} numTicks={numTicksRows} />
-  </GridStyle>
-);
+  xTickValues?: number[];
+}> = ({ width, height, dateScale, yScale, numTicksRows = 10, xTickValues }) => {
+  const gridColumnProps = xTickValues
+    ? {
+        tickValues: xTickValues,
+      }
+    : {};
+  return (
+    <GridStyle>
+      <GridColumns<Date>
+        scale={dateScale}
+        height={height}
+        {...gridColumnProps}
+      />
+      <GridRows<number> scale={yScale} width={width} numTicks={numTicksRows} />
+    </GridStyle>
+  );
+};
 
 export default GridLines;

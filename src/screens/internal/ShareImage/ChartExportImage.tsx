@@ -24,7 +24,7 @@ import { SCREENSHOT_CLASS } from 'components/Screenshot';
 import { useRegionFromParams } from 'common/regions';
 
 const ExportChartImage = () => {
-  let { metric: metricString } = useParams();
+  let { metric: metricString } = useParams<{ metric: string }>();
   const region = useRegionFromParams();
   const projections = useProjectionsFromRegion(region);
   const lastUpdated = useModelLastUpdatedDate();

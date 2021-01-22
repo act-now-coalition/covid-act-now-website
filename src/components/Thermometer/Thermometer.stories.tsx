@@ -54,8 +54,7 @@ export const CaseIncidence = () => renderMetricThermometer(Metric.CASE_DENSITY);
 export const GrowthRate = () =>
   renderMetricThermometer(Metric.CASE_GROWTH_RATE);
 
-export const ContactTracing = () =>
-  renderMetricThermometer(Metric.CONTACT_TRACING);
+export const Vaccinations = () => renderMetricThermometer(Metric.VACCINATIONS);
 
 export const HospitalUsage = () =>
   renderMetricThermometer(Metric.HOSPITAL_USAGE);

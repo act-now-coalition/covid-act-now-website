@@ -64,6 +64,7 @@ const CompareMain = (props: {
   locationsViewable: number;
   stateId?: string;
   region?: Region;
+  vaccinesFirst?: boolean;
 }) => {
   const tableRef = useRef<HTMLDivElement>(null);
 
@@ -239,6 +240,20 @@ const CompareMain = (props: {
     }
   }, [sharedParams]);
 
+  // If the user clicks on the banner or the announcement, we put vaccinations in the first column
+  // select states and sort by vaccination (desc)
+  useEffect(() => {
+    if (props.vaccinesFirst) {
+      setSorter(Metric.VACCINATIONS);
+      setSortByPopulation(false);
+      setSortDescending(true);
+      setHomepageSliderValue(
+        homepageScopeValueMap[HomepageLocationScope.STATE],
+      );
+      setHomepageScope(HomepageLocationScope.STATE);
+    }
+  }, [props.vaccinesFirst]);
+
   /* Mostly a check for MSAs with only 1 county. Won't render a compare table if there aren't at least 2 locations */
   if (!locations || locations.length < 2) {
     return null;
@@ -271,11 +286,12 @@ const CompareMain = (props: {
     homepageSliderValue,
     setHomepageSliderValue,
     region: region,
+    vaccinesFirst: props.vaccinesFirst,
   };
 
   return (
     <Fragment>
-      <DivForRef ref={tableRef}>
+      <DivForRef ref={tableRef} id="compare">
         <CompareTable
           {...sharedProps}
           locationsViewable={props.locationsViewable}

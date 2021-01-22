@@ -148,12 +148,23 @@ export const PositionRelative = styled.div`
   margin: 0;
 `;
 
+// TODO(pablo): Hack to invert the colors for the vaccination chart
+function brightenStroke(colorHex: string) {
+  if (colorHex === '#000' || colorHex === '#000000') {
+    return '#fff';
+  } else {
+    return brightenColor(colorHex, 1);
+  }
+}
+
 export const MainSeriesLine = styled.g`
   line,
   path {
     fill: none;
     stroke: ${props =>
-      props.stroke ? props.stroke : palette(props).foreground};
+      palette(props).isDarkMode
+        ? brightenStroke(props.stroke || '#fff')
+        : props.stroke || '#000'};
     stroke-linecap: round;
     stroke-width: 3px;
   }
@@ -283,6 +294,31 @@ export const TooltipSubtitle = styled.div`
   letter-spacing: 0.03em;
   text-transform: uppercase;
   color: ${COLOR_MAP.GRAY_ICON};
+`;
+
+export const TooltipLine = styled.div`
+  display: flex;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1.5;
+  letter-spacing: 0.03em;
+  color: white;
+`;
+
+export const TooltipLabel = styled.div`
+  flex: 1 1 auto;
+`;
+
+export const TooltipValue = styled.div`
+  flex: 1 0 auto;
+  text-align: right;
+`;
+
+export const TooltipTextBold = styled.span`
+  color: white;
+  font-weight: 500;
 `;
 
 export const TooltipMetric = styled.div`

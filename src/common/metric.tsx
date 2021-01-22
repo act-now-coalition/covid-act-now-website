@@ -1,7 +1,7 @@
 import * as CaseGrowth from 'common/metrics/case_growth';
 import * as TestRates from 'common/metrics/positive_rate';
 import * as Hospitalizations from 'common/metrics/hospitalizations';
-import * as ContactTracing from 'common/metrics/contact_tracing';
+import * as Vaccinations from 'common/metrics/vaccinations';
 import * as CaseDensity from 'common/metrics/case_density';
 import { Projections } from 'common/models/Projections';
 import { ALL_LEVELS, Level, LevelInfo } from 'common/level';
@@ -18,9 +18,10 @@ export enum Metric {
   CASE_GROWTH_RATE = 0,
   POSITIVE_TESTS = 1,
   HOSPITAL_USAGE = 2,
-  CONTACT_TRACING = 3,
+  // CONTACT_TRACING = 3,
   // FUTURE_PROJECTIONS = 4
   CASE_DENSITY = 5,
+  VACCINATIONS = 6,
 }
 
 export const ALL_METRICS = [
@@ -28,14 +29,14 @@ export const ALL_METRICS = [
   Metric.CASE_GROWTH_RATE,
   Metric.POSITIVE_TESTS,
   Metric.HOSPITAL_USAGE,
-  Metric.CONTACT_TRACING,
+  Metric.VACCINATIONS,
 ];
 
 const ALL_METRICS_LEVEL_INFO_MAP = {
   [Metric.CASE_GROWTH_RATE]: CaseGrowth.CASE_GROWTH_RATE_LEVEL_INFO_MAP,
   [Metric.POSITIVE_TESTS]: TestRates.POSITIVE_TESTS_LEVEL_INFO_MAP,
   [Metric.HOSPITAL_USAGE]: Hospitalizations.HOSPITAL_USAGE_LEVEL_INFO_MAP,
-  [Metric.CONTACT_TRACING]: ContactTracing.CONTACT_TRACING_LEVEL_INFO_MAP,
+  [Metric.VACCINATIONS]: Vaccinations.VACCINATIONS_LEVEL_INFO_MAP,
   [Metric.CASE_DENSITY]: CaseDensity.CASE_DENSITY_LEVEL_INFO_MAP,
 };
 
@@ -45,6 +46,11 @@ export function getLevelInfo(metric: Metric, value: number | null): LevelInfo {
 }
 
 export function getLevel(metric: Metric, value: number | null): Level {
+  // Vaccinations don't have levels
+  if (metric === Metric.VACCINATIONS) {
+    return Level.UNKNOWN;
+  }
+
   const levelInfoMap = ALL_METRICS_LEVEL_INFO_MAP[metric];
   if (value === null) return Level.UNKNOWN;
   for (const level of ALL_LEVELS) {
@@ -59,7 +65,7 @@ const metricDefinitions: { [metric in Metric]: MetricDefinition } = {
   [Metric.CASE_GROWTH_RATE]: CaseGrowth.CaseGrowthMetric,
   [Metric.POSITIVE_TESTS]: TestRates.PositiveTestRateMetric,
   [Metric.HOSPITAL_USAGE]: Hospitalizations.ICUCapacityUsed,
-  [Metric.CONTACT_TRACING]: ContactTracing.ContactTracingMetric,
+  [Metric.VACCINATIONS]: Vaccinations.VaccinationsMetric,
   [Metric.CASE_DENSITY]: CaseDensity.CaseIncidenceMetric,
 };
 
@@ -111,8 +117,8 @@ export const formatValue = (
     return formatPercent(value);
   } else if (chartType === Metric.POSITIVE_TESTS) {
     return formatPercent(value, 1);
-  } else if (chartType === Metric.CONTACT_TRACING) {
-    return formatPercent(value, 0);
+  } else if (chartType === Metric.VACCINATIONS) {
+    return formatPercent(value, 1);
   }
   fail('Invalid Chart Type');
 };

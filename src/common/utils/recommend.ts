@@ -22,7 +22,10 @@ import { allIcons } from 'cms-content/recommendations';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import { getAbbreviatedCounty } from 'common/utils/compare';
 import { formatDecimal } from '.';
-import { showExposureNotifications } from 'components/LocationPage/Notifications';
+import {
+  getStateName,
+  showExposureNotifications,
+} from 'components/LocationPage/Notifications';
 import regions from 'common/regions';
 
 export function trackRecommendationsEvent(action: EventAction, label: string) {
@@ -45,7 +48,9 @@ function getExposureRecommendation(
     return null;
   }
 
-  const recommendationCopy = `**Notifications**: Add your phone to [${region.fullName}'s 
+  const recommendationCopy = `**Notifications**: Add your phone to [${getStateName(
+    region,
+  )}'s 
   exposure notification system](https://g.co/ens) to receive alerts when you have been 
   in close contact with someone who later tests positive for COVID. 
   Your privacy is protected as your identity is not known and your location 
