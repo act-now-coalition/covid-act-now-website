@@ -32,10 +32,7 @@ const Landing: React.FC = () => {
         <MarkdownContent source={intro} />
         {sections.map((section: LandingSection) => (
           <Fragment key={section.sectionId}>
-            <Heading2>
-              <Anchor id={section.sectionId} />
-              {section.sectionTitle}
-            </Heading2>
+            <Heading2 id={section.sectionId}>{section.sectionTitle}</Heading2>
             <MarkdownContent source={section.description} />
             <ButtonContainer>
               <SectionButton
