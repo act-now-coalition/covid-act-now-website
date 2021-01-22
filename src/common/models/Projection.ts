@@ -39,7 +39,9 @@ const DISABLED_ICU = new DisabledFips([
   '53', // https://trello.com/c/1IkmUuhw/
 ]);
 
-const DISABLED_VACCINATIONS = new DisabledFips([]);
+const DISABLED_VACCINATIONS = new DisabledFips([
+  /39.../, // Disabling Ohio counties - vaccinations showing 0%
+]);
 
 /**
  * We truncate (or in the case of charts, switch to a dashed line) the last
