@@ -129,6 +129,7 @@ const LocationTableBody: React.FunctionComponent<{
   sortByPopulation: boolean;
   isHomepage?: boolean;
   showStateCode: boolean;
+  metrics: Metric[];
 }> = ({
   sortedLocations,
   sorter,
@@ -136,6 +137,7 @@ const LocationTableBody: React.FunctionComponent<{
   sortByPopulation,
   isHomepage,
   showStateCode,
+  metrics,
 }) => (
   <Table>
     <TableBody>
@@ -148,6 +150,7 @@ const LocationTableBody: React.FunctionComponent<{
           sortByPopulation={sortByPopulation}
           isHomepage={isHomepage}
           showStateCode={showStateCode}
+          metrics={metrics}
         />
       ))}
     </TableBody>
@@ -288,6 +291,7 @@ const LocationTable: React.FunctionComponent<{
             <Table key="table-pinned-location">
               <TableBody>
                 <CompareTableRow
+                  metrics={metrics}
                   location={pinnedLocation}
                   sorter={sorter}
                   isCurrentCounty
@@ -307,11 +311,13 @@ const LocationTable: React.FunctionComponent<{
             sortByPopulation={sortByPopulation}
             isHomepage={isHomepage}
             showStateCode={showStateCode}
+            metrics={metrics}
           />
         </Styles.Body>
         {pinnedLocation && showBottom && !isModal && (
           <Styles.Body>
             <LocationTableBody
+              metrics={metrics}
               sorter={sorter}
               sortedLocations={[pinnedLocation]}
               currentLocationRank={pinnedLocation?.rank}

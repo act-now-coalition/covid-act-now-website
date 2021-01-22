@@ -8,6 +8,7 @@ import {
   MetricsTimeseriesRow,
   Metricstimeseries,
   Metrics,
+  Actuals,
 } from 'api/schema/RegionSummaryWithTimeseries';
 import { indexOfLastValue, lastValue } from './utils';
 import { assert } from 'common/utils';
@@ -38,7 +39,9 @@ const DISABLED_ICU = new DisabledFips([
   '53', // https://trello.com/c/1IkmUuhw/
 ]);
 
-const DISABLED_CONTACT_TRACING = new DisabledFips([]);
+const DISABLED_VACCINATIONS = new DisabledFips([
+  /39.../, // https://trello.com/c/J3M0Ksb5/827-ohio-county-vaccinations-are-not-cumulative
+]);
 
 /**
  * We truncate (or in the case of charts, switch to a dashed line) the last
@@ -51,12 +54,6 @@ export const RT_TRUNCATION_DAYS = 7;
  * We truncate our projections to 4 weeks out.
  */
 export const PROJECTIONS_TRUNCATION_DAYS = 30;
-
-/**
- * We will assume roughly 5 tracers are needed to trace a case within 48h.
- * The range we give here could be between 5-15 contact tracers per case.
- */
-export const TRACERS_NEEDED_PER_CASE = 5;
 
 // We require at least 15 ICU beds in order to show ICU Capacity usage.
 // This still covers enough counties to cover 80% of the US population.
@@ -80,7 +77,8 @@ export type DatasetId =
   | 'rtRange'
   | 'icuUtilization'
   | 'testPositiveRate'
-  | 'contractTracers'
+  | 'vaccinations'
+  | 'vaccinationsCompleted'
   | 'caseDensityByCases'
   | 'caseDensityRange'
   | 'smoothedDailyCases'
@@ -118,6 +116,17 @@ export interface ICUCapacityInfo {
   totalPatients: number;
 }
 
+export interface VaccinationsInfo {
+  percentCompletedSeries: Array<number | null>;
+  percentInitiatedSeries: Array<number | null>;
+
+  peopleInitiated: number;
+  percentInitiated: number;
+
+  peopleVaccinated: number;
+  percentVaccinated: number;
+}
+
 /**
  * We use use an estimated case fatality ratio of 1 % with lower and upper bounds
  * of 0.5% and 1.5% respectively, used to calculate case density by deaths (main
@@ -140,10 +149,10 @@ export class Projection {
   readonly fips: string;
 
   readonly icuCapacityInfo: ICUCapacityInfo | null;
+  readonly vaccinationsInfo: VaccinationsInfo | null;
 
   readonly currentCumulativeDeaths: number | null;
   readonly currentCumulativeCases: number | null;
-  readonly currentContactTracerMetric: number | null;
   readonly currentCaseDensity: number | null;
   readonly currentDailyDeaths: number | null;
 
@@ -160,7 +169,8 @@ export class Projection {
   private readonly icuUtilization: Array<number | null>;
   // Test Positive series as values between 0-1.
   private readonly testPositiveRate: Array<number | null>;
-  private readonly contractTracers: Array<number | null>;
+  private readonly vaccinations: Array<number | null>;
+  private readonly vaccinationsCompleted: Array<number | null>;
   private readonly caseDensityByCases: Array<number | null>;
   private readonly caseDensityRange: Array<CaseDensityRange | null>;
   private readonly smoothedDailyDeaths: Array<number | null>;
@@ -243,9 +253,17 @@ export class Projection {
     this.icuUtilization =
       this.icuCapacityInfo?.metricSeries || this.dates.map(date => null);
 
-    this.contractTracers = metricsTimeseries.map(
-      row => row && row.contactTracerCapacityRatio,
+    this.vaccinationsInfo = this.getVaccinationsInfo(
+      summaryWithTimeseries.actuals,
+      metrics,
+      metricsTimeseries,
     );
+    this.vaccinations =
+      this.vaccinationsInfo?.percentInitiatedSeries ||
+      this.dates.map(date => null);
+    this.vaccinationsCompleted =
+      this.vaccinationsInfo?.percentCompletedSeries ||
+      this.dates.map(date => null);
 
     this.caseDensityByCases = metricsTimeseries.map(
       row => row && row.caseDensity,
@@ -260,21 +278,11 @@ export class Projection {
 
     this.currentCumulativeDeaths = summaryWithTimeseries.actuals.deaths;
     this.currentCumulativeCases = summaryWithTimeseries.actuals.cases;
-    this.currentContactTracerMetric =
-      metrics && !DISABLED_CONTACT_TRACING.includes(this.fips)
-        ? metrics.contactTracerCapacityRatio
-        : null;
   }
 
-  get currentContactTracers() {
-    return lastValue(
-      this.actualTimeseries.map(row => row && row.contactTracers),
-    );
-  }
-
-  // TODO(michael): We should really pre-compute currentContactTracers and
-  // currentDailyAverageCases and make sure we're pulling all of the data from
-  // the same day, to make sure it matches the graph.
+  // TODO(michael): We should really pre-compute currentDailyAverageCases and
+  // make sure we're pulling all of the data from the same day, to make sure it
+  // matches the graph.
   get currentDailyAverageCases() {
     return lastValue(this.smoothedDailyCases);
   }
@@ -360,6 +368,50 @@ export class Projection {
       };
     }
     return null;
+  }
+
+  private getVaccinationsInfo(
+    actuals: Actuals,
+    metrics: Metrics,
+    metricsTimeseries: Array<MetricsTimeseriesRow | null>,
+  ): VaccinationsInfo | null {
+    if (DISABLED_VACCINATIONS.includes(this.fips)) {
+      return null;
+    }
+
+    const peopleVaccinated = actuals.vaccinationsCompleted;
+    const peopleInitiated = actuals.vaccinationsInitiated;
+    const percentInitiated = metrics.vaccinationsInitiatedRatio;
+    const percentVaccinated = metrics.vaccinationsCompletedRatio;
+
+    if (
+      peopleVaccinated === null ||
+      peopleVaccinated === undefined ||
+      peopleInitiated === null ||
+      peopleInitiated === undefined ||
+      percentInitiated === null ||
+      percentInitiated === undefined ||
+      percentVaccinated === null ||
+      percentVaccinated === undefined
+    ) {
+      return null;
+    }
+
+    const vaccinationsCompletedSeries = metricsTimeseries.map(
+      row => row?.vaccinationsCompletedRatio || null,
+    );
+    const vaccinationsInitiatedSeries = metricsTimeseries.map(
+      row => row?.vaccinationsInitiatedRatio || null,
+    );
+
+    return {
+      peopleVaccinated,
+      peopleInitiated,
+      percentInitiated,
+      percentVaccinated,
+      percentCompletedSeries: vaccinationsCompletedSeries,
+      percentInitiatedSeries: vaccinationsInitiatedSeries,
+    };
   }
 
   private getColumn(columnName: string): Column[] {

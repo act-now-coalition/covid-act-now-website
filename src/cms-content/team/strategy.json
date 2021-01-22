@@ -49,6 +49,11 @@
       "profileUrl": "https://www.linkedin.com/in/claudia-meng/",
       "description": "",
       "profileImgUrl": "/images_cms/claudia.jpg"
+    },
+    {
+      "profileImgUrl": "/images_cms/ryan-fuentes-headshot.png",
+      "fullName": "Ryan Fuentes",
+      "profileUrl": "https://www.linkedin.com/in/ryan-fuentes-0944301a7/"
     }
   ]
 }

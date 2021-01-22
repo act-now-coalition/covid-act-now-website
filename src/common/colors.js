@@ -73,12 +73,3 @@ export function countyColor(
   const summary = getSummaryFromFips(countyFipsCode);
   return colorFromLocationSummary(summary, defaultColor);
 }
-
-export const LEVEL_COLOR_CONTACT_TRACING = {
-  [Level.LOW]: COLOR_MAP.RED.BASE,
-  [Level.MEDIUM]: COLOR_MAP.ORANGE_DARK.BASE,
-  [Level.HIGH]: COLOR_MAP.ORANGE.BASE,
-  [Level.CRITICAL]: COLOR_MAP.GREEN.BASE,
-  [Level.SUPER_CRITICAL]: COLOR_MAP.GREEN.BASE,
-  [Level.UNKNOWN]: COLOR_MAP.GRAY.BASE,
-};

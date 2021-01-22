@@ -1,13 +1,15 @@
 import React from 'react';
 import { Projections } from 'common/models/Projections';
+import { Projection, Column } from 'common/models/Projection';
 import {
   ChartRt,
   ChartPositiveTestRate,
   ChartICUCapacityUsed,
-  ChartContactTracing,
+  ChartVaccinations,
   ChartCaseDensity,
 } from 'components/Charts';
 import { Metric } from 'common/metric';
+import { SeriesType, Series } from 'components/Explore/interfaces';
 
 // TODO(michael): Rename to `Chart` once we get rid of existing (highcharts) Chart component.
 // TODO(michael): Update ChartsHolder to use this component instead of the individual chart components.
@@ -50,12 +52,43 @@ export default function MetricChart({
           columnData={projection.getDataset('icuUtilization')}
         />
       )}
-      {metric === Metric.CONTACT_TRACING && (
-        <ChartContactTracing
+      {metric === Metric.VACCINATIONS && (
+        <ChartVaccinations
           height={height}
-          columnData={projection.getDataset('contractTracers')}
+          seriesList={getVaccinationSeries(projection)}
         />
       )}
     </>
   );
+}
+
+function getVaccinationSeries(projection: Projection): Series[] {
+  return [
+    {
+      type: SeriesType.LINE,
+      data: filterNull(projection.getDataset('vaccinations')),
+      label: 'vaccinationsInitiated',
+      shortLabel: '1st shot',
+      tooltipLabel: '1st shot',
+      params: {
+        stroke: '#bdbdbd',
+        fill: '#bdbdbd',
+      },
+    },
+    {
+      type: SeriesType.LINE,
+      data: filterNull(projection.getDataset('vaccinationsCompleted')),
+      label: 'Vaccinations Completed',
+      shortLabel: '2nd shot',
+      tooltipLabel: '2nd shot',
+      params: {
+        stroke: '#000',
+        fill: '#000',
+      },
+    },
+  ];
+}
+
+function filterNull(points: Column[]) {
+  return points.filter(p => p.y !== null);
 }

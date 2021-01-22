@@ -12,12 +12,7 @@ import PartnersSection from 'components/PartnersSection/PartnersSection';
 import HomePageThermometer from 'screens/HomePage/HomePageThermometer';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import {
-  Content,
-  SectionWrapper,
-  Section,
-  BannerContainer,
-} from './HomePage.style';
+import { Content, SectionWrapper, Section } from './HomePage.style';
 import {
   SelectorWrapper,
   StyledGridItem,
@@ -27,7 +22,7 @@ import Explore from 'components/Explore';
 import { SwitchComponent } from 'components/SharedComponents';
 import { formatMetatagDate } from 'common/utils';
 import { getLocationFipsCodesForExplore } from './utils';
-import { ThirdWaveBanner } from 'components/Banner';
+import { VaccinationsBanner } from 'components/Banner';
 import SearchAutocomplete from 'components/Search';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { getFilterLimit } from 'components/Search';
@@ -52,6 +47,9 @@ export default function HomePage() {
   const indicatorsRef = useRef(null);
 
   const geolocation = useGeolocation();
+
+  // Location hash is uniquely set from vaccination banner button click
+  const compareShowVaccinationsFirst = location.hash === '#compare';
 
   const scrollTo = (div: null | HTMLDivElement) =>
     div &&
@@ -89,9 +87,7 @@ export default function HomePage() {
         pageDescription={getPageDescription()}
       />
       <HomepageStructuredData />
-      <BannerContainer>
-        <ThirdWaveBanner />
-      </BannerContainer>
+      <VaccinationsBanner />
       <HomePageHeader
         indicatorsLinkOnClick={() => scrollTo(indicatorsRef.current)}
       />
@@ -107,7 +103,7 @@ export default function HomePage() {
                   xs={12}
                   justify="flex-end"
                 >
-                  <SelectorWrapper>
+                  <SelectorWrapper id="search">
                     <SearchAutocomplete
                       locations={getFinalAutocompleteLocations(geolocation)}
                       filterLimit={getFilterLimit()}
@@ -137,7 +133,10 @@ export default function HomePage() {
             </Grid>
             <Map hideLegend showCounties={showCounties} />
             {isMobile && <HomePageThermometer />}
-            <CompareMain locationsViewable={8} />
+            <CompareMain
+              locationsViewable={8}
+              vaccinesFirst={compareShowVaccinationsFirst}
+            />
             <Section ref={exploreSectionRef}>
               <Explore
                 title="Cases, Deaths and Hospitalizations"

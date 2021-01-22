@@ -1,11 +1,7 @@
 import styled, { css } from 'styled-components';
 import { isNumber } from 'lodash';
 import { TableHead, TableCell, TableRow, Modal } from '@material-ui/core';
-import {
-  COLOR_MAP,
-  LEVEL_COLOR,
-  LEVEL_COLOR_CONTACT_TRACING,
-} from 'common/colors';
+import { COLOR_MAP, LEVEL_COLOR } from 'common/colors';
 import { COLORS } from 'common';
 import { Metric } from 'common/metric';
 import { Level } from 'common/level';
@@ -350,13 +346,6 @@ export const MetricCell = styled.td<{
   svg {
     color: ${({ iconColor }) =>
       iconColor !== undefined && `${LEVEL_COLOR[iconColor]}`};
-  }
-
-  &:last-child {
-    svg {
-      color: ${({ iconColor }) =>
-        iconColor !== undefined && `${LEVEL_COLOR_CONTACT_TRACING[iconColor]}`};
-    }
   }
 `;
 

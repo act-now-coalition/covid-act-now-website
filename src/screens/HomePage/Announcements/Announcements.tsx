@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import { Subtitle1 } from 'components/Typography';
 import {
   AnnouncementIntro,
@@ -6,28 +8,37 @@ import {
   Date,
   AnnouncementBodyCopy,
   ButtonsContainer,
-  ReadMoreButton,
   ViewAllLink,
 } from './Announcements.style';
+import { scrollWithOffset } from 'components/TableOfContents';
 
 const Announcements: React.FC = () => {
   return (
     <Wrapper>
       <Subtitle1>Announcements</Subtitle1>
-      <AnnouncementIntro>
-        COVID Explained is joining the Covid Act Now team
-      </AnnouncementIntro>
-      <Date>TUESDAY, Jan 19, 2021</Date>
+      <AnnouncementIntro>Vaccination Data Now Available</AnnouncementIntro>
+      <Date>THURSDAY, Jan 21, 2021</Date>
       <AnnouncementBodyCopy>
-        We are excited to announce that COVID Explained is joining the Covid Act
-        Now team. Moving forward, COVID Explained’s content, written by a team
-        of researchers and students at Brown, MIT, Harvard, and Massachusetts
-        General Hospital, will be part of the Learn section of our site.
+        You can now see how many people are vaccinated in{' '}
+        <HashLink
+          to="#search"
+          scroll={element => scrollWithOffset(element, -80)}
+        >
+          each state
+        </HashLink>
+        , and compare vaccine rollout{' '}
+        <HashLink
+          to="#compare"
+          scroll={element => scrollWithOffset(element, -80)}
+        >
+          across states
+        </HashLink>
+        . Due to the widespread, untracked, community spread across all of the
+        United States, we will no longer be showing a contact tracing metric on
+        our site, although we will continue serving it through our{' '}
+        <Link to="/tools">API</Link>.
       </AnnouncementBodyCopy>
       <ButtonsContainer>
-        <ReadMoreButton href="/learn" target="_blank" rel="noopener">
-          Read it here
-        </ReadMoreButton>
         <ViewAllLink
           href="https://blog.covidactnow.org/"
           target="_blank"
