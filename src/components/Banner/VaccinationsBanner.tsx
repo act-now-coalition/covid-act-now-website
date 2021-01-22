@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import * as Styles from './Banner.style';
+import { ButtonContainer } from './Banner.style';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import {
   Wrapper,
@@ -24,6 +24,7 @@ const Buttons: React.FC = () => {
             EventAction.CLICK,
             'Banner: Compare states',
           );
+          window.location.href = '#compare';
         }}
       >
         Compare states
@@ -35,6 +36,7 @@ const Buttons: React.FC = () => {
             EventAction.CLICK,
             'Banner: Learn more',
           );
+          window.location.href = '#search';
         }}
       >
         See my state
@@ -55,9 +57,9 @@ const VaccinationsBannerInner: React.FC = () => {
         {formatInteger(totalVaccinationsInitiated)} Americans have received
         their first shot.
       </Body>
-      <Styles.ButtonContainer>
+      <ButtonContainer>
         <Buttons />
-      </Styles.ButtonContainer>
+      </ButtonContainer>
     </InnerContainer>
   );
 };
