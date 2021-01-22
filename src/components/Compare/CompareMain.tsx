@@ -240,6 +240,20 @@ const CompareMain = (props: {
     }
   }, [sharedParams]);
 
+  // If the user clicks on the banner or the announcement, we put vaccinations in the first column
+  // select states and sort by vaccination (desc)
+  useEffect(() => {
+    if (props.vaccinesFirst) {
+      setSorter(Metric.VACCINATIONS);
+      setSortByPopulation(false);
+      setSortDescending(true);
+      setHomepageSliderValue(
+        homepageScopeValueMap[HomepageLocationScope.STATE],
+      );
+      setHomepageScope(HomepageLocationScope.STATE);
+    }
+  }, [props.vaccinesFirst]);
+
   /* Mostly a check for MSAs with only 1 county. Won't render a compare table if there aren't at least 2 locations */
   if (!locations || locations.length < 2) {
     return null;
