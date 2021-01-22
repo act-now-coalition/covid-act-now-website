@@ -14,7 +14,7 @@ import {
 } from './VaccinationsBanner.style';
 import AggregationsJSON from 'assets/data/aggregations.json';
 import vaccinationsIcon from 'assets/images/misc/vaccination_icon.svg';
-import { formatInteger } from 'common/utils';
+import { formatEstimate } from 'common/utils';
 import { scrollWithOffset } from 'components/TableOfContents';
 
 const Buttons: React.FC = () => {
@@ -65,7 +65,7 @@ const VaccinationsBannerInner: React.FC = () => {
       <Header>New vaccine data</Header>
       <Body>
         See how many people are vaccinated in each state. The CDC reports that{' '}
-        {formatInteger(totalVaccinationsInitiated)} Americans have received
+        {formatEstimate(totalVaccinationsInitiated, 5)} Americans have received
         their first shot.
       </Body>
       <ButtonContainer>
