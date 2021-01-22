@@ -4,7 +4,7 @@
 backend:
   name: github
   repo: covid-projections/covid-projections
-  branch: cms-content-entry
+  branch: pablo/cms-copy-update
   base_url: https://api.netlify.com
 
 media_folder: 'public/images_cms'
@@ -46,7 +46,12 @@ collections:
                 fields:
                   - { label: 'Alt text', name: 'altText', widget: 'string' }
                   - { label: 'Image', name: 'image', widget: 'image' }
-                  - { label: 'Url', name: 'url', widget: 'string', required: false }
+                  - {
+                      label: 'Url',
+                      name: 'url',
+                      widget: 'string',
+                      required: false,
+                    }
           - {
               label: 'Who we serve: Header',
               name: 'whoWeServeHeader',
@@ -56,7 +61,7 @@ collections:
               label: 'Who we serve: Content A',
               name: 'whoWeServeContentA',
               widget: 'markdown',
-              hint: Copy above logos
+              hint: Copy above logos,
             }
           - label: 'Government logos'
             name: 'governmentLogos'
@@ -69,18 +74,10 @@ collections:
               label: 'Who we serve: Content B',
               name: 'whoWeServeContentB',
               widget: 'markdown',
-              hint: Copy below logos
+              hint: Copy below logos,
             }
-          - {
-              label: 'Team: Header',
-              name: 'teamHeader',
-              widget: 'string',
-            }
-          - {
-              label: 'Team: Intro',
-              name: 'teamIntro',
-              widget: 'markdown',
-            }
+          - { label: 'Team: Header', name: 'teamHeader', widget: 'string' }
+          - { label: 'Team: Intro', name: 'teamIntro', widget: 'markdown' }
   - label: Team directory
     name: team
     folder: 'src/cms-content/team'
@@ -110,7 +107,7 @@ collections:
           - label: Profile picture
             name: profileImgUrl
             widget: image
-            default: "/images_cms/bar_recommends_icon.svg"
+            default: '/images_cms/bar_recommends_icon.svg'
           - label: Profile URL
             name: profileUrl
             widget: string
@@ -607,9 +604,25 @@ collections:
             name: sections
             widget: list
             fields:
-              - { label: Section header, name: sectionHeader, widget: string, hint: 'Either an individual metric name or How we assess risk' }
-              - { label: Section subheader, name: sectionSubheader, widget: string, required: false, hint: 'Use for indiv. metric sections -- metric alias ie. Also known as: incidence' }
-              - { label: Section ID, name: sectionId, widget: string, hint: 'Section header, all lowercase, separated by dashes if multi-word' }
+              - {
+                  label: Section header,
+                  name: sectionHeader,
+                  widget: string,
+                  hint: 'Either an individual metric name or How we assess risk',
+                }
+              - {
+                  label: Section subheader,
+                  name: sectionSubheader,
+                  widget: string,
+                  required: false,
+                  hint: 'Use for indiv. metric sections -- metric alias ie. Also known as: incidence',
+                }
+              - {
+                  label: Section ID,
+                  name: sectionId,
+                  widget: string,
+                  hint: 'Section header, all lowercase, separated by dashes if multi-word',
+                }
               - { label: Section intro, name: sectionIntro, widget: markdown }
               - label: Questions
                 name: questions
