@@ -6,6 +6,7 @@ import DonationBanner from './DonationBanner';
 import VoteBanner from './VoteBanner';
 import FeatureBanner from './FeatureBanner';
 import ThirdWaveBanner from './ThirdWaveBanner';
+import VaccinationsBanner from './VaccinationsBanner';
 
 export default Banner;
 export {
@@ -15,4 +16,5 @@ export {
   VoteBanner,
   FeatureBanner,
   ThirdWaveBanner,
+  VaccinationsBanner,
 };

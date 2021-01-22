@@ -12,12 +12,7 @@ import PartnersSection from 'components/PartnersSection/PartnersSection';
 import HomePageThermometer from 'screens/HomePage/HomePageThermometer';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import {
-  Content,
-  SectionWrapper,
-  Section,
-  BannerContainer,
-} from './HomePage.style';
+import { Content, SectionWrapper, Section } from './HomePage.style';
 import {
   SelectorWrapper,
   StyledGridItem,
@@ -27,7 +22,7 @@ import Explore from 'components/Explore';
 import { SwitchComponent } from 'components/SharedComponents';
 import { formatMetatagDate } from 'common/utils';
 import { getLocationFipsCodesForExplore } from './utils';
-import { ThirdWaveBanner } from 'components/Banner';
+import { VaccinationsBanner } from 'components/Banner';
 import SearchAutocomplete from 'components/Search';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { getFilterLimit } from 'components/Search';
@@ -89,9 +84,7 @@ export default function HomePage() {
         pageDescription={getPageDescription()}
       />
       <HomepageStructuredData />
-      <BannerContainer>
-        <ThirdWaveBanner />
-      </BannerContainer>
+      <VaccinationsBanner />
       <HomePageHeader
         indicatorsLinkOnClick={() => scrollTo(indicatorsRef.current)}
       />
