@@ -21,6 +21,7 @@ import {
   HomepageLocationScope,
   homepageLabelMap,
   getCompareSubheader,
+  orderedMetricsVaccineFirst,
 } from 'common/utils/compare';
 import { COLOR_MAP } from 'common/colors';
 import ShareImageButtons from 'components/ShareButtons/ShareButtonGroup';
@@ -68,6 +69,7 @@ const CompareTable = (props: {
     React.SetStateAction<HomepageLocationScope>
   >;
   region?: Region;
+  vaccinesFirst?: boolean;
 }) => {
   const {
     sorter,
@@ -84,6 +86,7 @@ const CompareTable = (props: {
     homepageSliderValue,
     setHomepageSliderValue,
     region,
+    vaccinesFirst,
   } = props;
 
   const currentCounty = props.county && props.currentCounty;
@@ -267,7 +270,7 @@ const CompareTable = (props: {
         firstColumnHeader={firstColumnHeader}
         setSorter={setSorter}
         setSortDescending={setSortDescending}
-        metrics={orderedMetrics}
+        metrics={vaccinesFirst ? orderedMetricsVaccineFirst : orderedMetrics}
         isModal={props.isModal}
         {...arrowContainerProps}
         pinnedLocation={currentLocation}

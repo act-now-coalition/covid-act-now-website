@@ -64,6 +64,7 @@ const CompareMain = (props: {
   locationsViewable: number;
   stateId?: string;
   region?: Region;
+  vaccinesFirst?: boolean;
 }) => {
   const tableRef = useRef<HTMLDivElement>(null);
 
@@ -281,6 +282,7 @@ const CompareMain = (props: {
           locationsViewable={props.locationsViewable}
           isModal={false}
           viewMoreCopy={viewMoreCopy}
+          vaccinesFirst={props.vaccinesFirst}
         />
       </DivForRef>
       <Modal open={showModal} onClose={handleCloseModal}>

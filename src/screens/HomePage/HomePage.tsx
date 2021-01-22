@@ -130,7 +130,7 @@ export default function HomePage() {
             </Grid>
             <Map hideLegend showCounties={showCounties} />
             {isMobile && <HomePageThermometer />}
-            <CompareMain locationsViewable={8} />
+            <CompareMain locationsViewable={8} vaccinesFirst={true} />
             <Section ref={exploreSectionRef}>
               <Explore
                 title="Cases, Deaths and Hospitalizations"
