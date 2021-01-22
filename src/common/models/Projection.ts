@@ -8,6 +8,7 @@ import {
   MetricsTimeseriesRow,
   Metricstimeseries,
   Metrics,
+  Actuals,
 } from 'api/schema/RegionSummaryWithTimeseries';
 import { indexOfLastValue, lastValue } from './utils';
 import { assert } from 'common/utils';
@@ -250,7 +251,11 @@ export class Projection {
     this.icuUtilization =
       this.icuCapacityInfo?.metricSeries || this.dates.map(date => null);
 
-    this.vaccinationsInfo = this.getVaccinationsInfo(actualTimeseries);
+    this.vaccinationsInfo = this.getVaccinationsInfo(
+      summaryWithTimeseries.actuals,
+      metrics,
+      metricsTimeseries,
+    );
     this.vaccinations =
       this.vaccinationsInfo?.percentInitiatedSeries ||
       this.dates.map(date => null);
@@ -364,36 +369,47 @@ export class Projection {
   }
 
   private getVaccinationsInfo(
-    actualsTimeseries: Array<ActualsTimeseriesRow | null>,
+    actuals: Actuals,
+    metrics: Metrics,
+    metricsTimeseries: Array<MetricsTimeseriesRow | null>,
   ): VaccinationsInfo | null {
-    if (!DISABLED_VACCINATIONS.includes(this.fips)) {
-      const vaccinatedSeries = actualsTimeseries.map(
-        row => row?.vaccinationsCompleted || null,
-      );
-      const initiatedSeries = actualsTimeseries.map(
-        row => row?.vaccinationsInitiated || null,
-      );
-      const peopleVaccinated = lastValue(vaccinatedSeries),
-        peopleInitiated = lastValue(initiatedSeries);
-      if (peopleVaccinated !== null && peopleInitiated !== null) {
-        const percentCompletedSeries = vaccinatedSeries.map(
-          n => n && n / this.totalPopulation,
-        );
-        const percentInitiatedSeries = initiatedSeries.map(
-          n => n && n / this.totalPopulation,
-        );
-        return {
-          peopleVaccinated,
-          peopleInitiated,
-          percentInitiated: peopleInitiated / this.totalPopulation,
-          percentVaccinated: peopleVaccinated / this.totalPopulation,
-          percentCompletedSeries,
-          percentInitiatedSeries,
-        };
-      }
+    if (DISABLED_VACCINATIONS.includes(this.fips)) {
+      return null;
     }
 
-    return null;
+    const peopleVaccinated = actuals.vaccinationsCompleted;
+    const peopleInitiated = actuals.vaccinationsInitiated;
+    const percentInitiated = metrics.vaccinationsInitiatedRatio;
+    const percentVaccinated = metrics.vaccinationsCompletedRatio;
+
+    if (
+      peopleVaccinated === null ||
+      peopleVaccinated === undefined ||
+      peopleInitiated === null ||
+      peopleInitiated === undefined ||
+      percentInitiated === null ||
+      percentInitiated === undefined ||
+      percentVaccinated === null ||
+      percentVaccinated === undefined
+    ) {
+      return null;
+    }
+
+    const vaccinationsCompletedSeries = metricsTimeseries.map(
+      row => row?.vaccinationsCompletedRatio || null,
+    );
+    const vaccinationsInitiatedSeries = metricsTimeseries.map(
+      row => row?.vaccinationsInitiatedRatio || null,
+    );
+
+    return {
+      peopleVaccinated,
+      peopleInitiated,
+      percentInitiated,
+      percentVaccinated,
+      percentCompletedSeries: vaccinationsCompletedSeries,
+      percentInitiatedSeries: vaccinationsInitiatedSeries,
+    };
   }
 
   private getColumn(columnName: string): Column[] {
