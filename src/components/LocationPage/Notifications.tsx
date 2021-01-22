@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { some } from 'lodash';
 import ExternalLink from 'components/ExternalLink';
 import {
@@ -10,7 +9,6 @@ import {
 } from 'components/LocationPage/LocationPageHeader.style';
 import { Projections } from 'common/models/Projections';
 import InfoIcon from '@material-ui/icons/Info';
-import { BANNER_COPY } from 'components/Banner/ThirdWaveBanner';
 import HospitalizationsAlert, {
   isHospitalizationsPeak,
 } from './HospitalizationsAlert';
@@ -49,6 +47,7 @@ const NotificationArea: React.FC<{ projections: Projections }> = ({
     HospitalizationsPeak,
     ThirdWave,
     ExposureNotifications,
+    None,
   }
   let notification: Notification;
 
@@ -62,7 +61,7 @@ const NotificationArea: React.FC<{ projections: Projections }> = ({
   } else if (isHospitalizationsPeak(projections.primary)) {
     notification = Notification.HospitalizationsPeak;
   } else {
-    notification = Notification.ThirdWave;
+    notification = Notification.None;
   }
 
   let icon, title;
@@ -72,6 +71,10 @@ const NotificationArea: React.FC<{ projections: Projections }> = ({
   } else {
     icon = <WarningIcon />;
     title = 'alert';
+  }
+
+  if (notification === Notification.None) {
+    return null;
   }
 
   return (
@@ -94,8 +97,6 @@ const NotificationArea: React.FC<{ projections: Projections }> = ({
         {notification === Notification.NYCCounty && (
           <NYCAggregationChangeCopy locationName={region.name} />
         )}
-
-        {notification === Notification.ThirdWave && <ThirdWaveCopy />}
       </SectionColumn>
     </React.Fragment>
   );
@@ -108,15 +109,6 @@ const NYCAggregationChangeCopy: React.FC<{ locationName: string }> = ({
     <Copy>
       Prior to December 15th, {locationName} was aggregated together with the
       other New York City boroughs. It now has its own metrics and risk level.
-    </Copy>
-  );
-};
-
-const ThirdWaveCopy = () => {
-  return (
-    <Copy isUpdateCopy>
-      {BANNER_COPY}{' '}
-      <Link to={'/covid-explained/us-third-wave'}>Learn more</Link>.
     </Copy>
   );
 };
