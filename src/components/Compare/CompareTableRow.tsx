@@ -12,7 +12,7 @@ import {
   Rank,
 } from 'components/Compare/Compare.style';
 import { Metric, formatValue } from 'common/metric';
-import { RankedLocationSummary, orderedMetrics } from 'common/utils/compare';
+import { RankedLocationSummary } from 'common/utils/compare';
 import { Level } from 'common/level';
 import { formatEstimate } from 'common/utils';
 import regions from 'common/regions';
@@ -27,6 +27,7 @@ function cellValue(metric: any, metricType: Metric) {
 }
 
 const CompareTableRow = (props: {
+  metrics: Metric[];
   location: RankedLocationSummary;
   sorter: number;
   isCurrentCounty?: boolean;
@@ -36,6 +37,7 @@ const CompareTableRow = (props: {
   showStateCode: boolean;
 }) => {
   const {
+    metrics,
     location,
     sorter,
     isCurrentCounty,
@@ -92,7 +94,7 @@ const CompareTableRow = (props: {
             </LocationInfoWrapper>
           </div>
         </LocationNameCell>
-        {orderedMetrics.map((metric: Metric, i) => {
+        {metrics.map((metric: Metric, i) => {
           const metricForValue = location.metricsInfo.metrics[metric];
           const metricValue = metricForValue?.value;
           const valueUnknown =
