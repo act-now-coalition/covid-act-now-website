@@ -30,7 +30,7 @@ export type AggregationLevel =
   | 'cbsa'
   | 'place';
 /**
- * Latitude of point within the state or county
+ * Latitude of point within the state or county. Currently a placeholder.
  */
 export type Lat = number | null;
 /**
@@ -38,7 +38,7 @@ export type Lat = number | null;
  */
 export type Locationid = string;
 /**
- * Longitude of point within the state or county
+ * Longitude of point within the state or county. Currently a placeholder.
  */
 export type Long = number | null;
 /**
@@ -96,6 +96,14 @@ export type NonCovidPatientsMethod =
   | 'estimated_from_typical_utilization'
   | 'estimated_from_total_icu_actual';
 export type Icucapacityratio = number | null;
+/**
+ * Ratio of population that has initiated vaccination.
+ */
+export type Vaccinationsinitiatedratio = number | null;
+/**
+ * Ratio of population that has completed vaccination.
+ */
+export type Vaccinationscompletedratio = number | null;
 /**
  * Risk levels for region.
  */
@@ -174,7 +182,7 @@ export type Newcases = number | null;
 /**
  * Number of vaccine doses distributed.
  */
-export type Vaccinesdistributed = number;
+export type Vaccinesdistributed = number | null;
 /**
  *
  * Number of vaccinations initiated.
@@ -183,16 +191,83 @@ export type Vaccinesdistributed = number;
  * number of people vaccinated with the first dose.
  *
  */
-export type Vaccinationsinitiated = number;
+export type Vaccinationsinitiated = number | null;
 /**
  *
  * Number of vaccinations completed.
  *
  * This value may vary by type of vaccine, but for Moderna and Pfizer, this indicates
- * number of people vaccinated with the both first and second dose.
+ * number of people vaccinated with both the first and second dose.
  *
  */
-export type Vaccinationscompleted = number;
+export type Vaccinationscompleted = number | null;
+/**
+ * Annotations for cases
+ */
+export type Cases1 = FieldAnnotations;
+/**
+ * The data source of a field (metric or actual). This enumeration lists the places from which
+ * CAN fetches data. The source is tracked on a per field and region timeseries basis.
+ */
+export type FieldSource =
+  | 'NYTimes'
+  | 'CMSTesting'
+  | 'CDCTesting'
+  | 'HHSTesting'
+  | 'HHSHospital'
+  | 'Valorum'
+  | 'covid_tracking'
+  | 'USAFacts'
+  | 'other';
+/**
+ * Date of anomaly
+ */
+export type Date = string;
+/**
+ * Original value on this date detected as anomalous.
+ */
+export type OriginalObservation = number;
+export type Anomalies = AnomalyAnnotation[];
+/**
+ * Annotations for deaths
+ */
+export type Deaths1 = FieldAnnotations;
+/**
+ * Annotations for positiveTests
+ */
+export type Positivetests1 = FieldAnnotations;
+/**
+ * Annotations for negativeTests
+ */
+export type Negativetests1 = FieldAnnotations;
+/**
+ * Annotations for contactTracers
+ */
+export type Contacttracers1 = FieldAnnotations;
+/**
+ * Annotations for hospitalBeds
+ */
+export type Hospitalbeds1 = FieldAnnotations;
+/**
+ * Annotations for icuBeds
+ */
+export type Icubeds1 = FieldAnnotations;
+/**
+ * Annotations for newCases
+ */
+export type Newcases1 = FieldAnnotations;
+/**
+ * Annotations for vaccinesDistributed
+ */
+export type Vaccinesdistributed1 = FieldAnnotations;
+/**
+ * Annotations for vaccinationsInitiated
+ */
+export type Vaccinationsinitiated1 = FieldAnnotations;
+/**
+ * Annotations for vaccinationsCompleted
+ */
+export type Vaccinationscompleted1 = FieldAnnotations;
 /**
  * Date of latest data
  */
@@ -225,6 +300,7 @@ export interface RegionSummary {
   metrics: Metrics;
   riskLevels: Risklevels;
   actuals: Actuals;
+  annotations: Annotations;
   lastUpdatedDate: Lastupdateddate;
   url: Url;
 }
@@ -233,14 +309,16 @@ export interface RegionSummary {
  */
 export interface Metrics {
   testPositivityRatio: Testpositivityratio;
-  testPositivityRatioDetails?: TestPositivityRatioDetails;
+  testPositivityRatioDetails?: TestPositivityRatioDetails | null;
   caseDensity: Casedensity;
   contactTracerCapacityRatio: Contacttracercapacityratio;
   infectionRate: Infectionrate;
   infectionRateCI90: Infectionrateci90;
   icuHeadroomRatio: Icuheadroomratio;
-  icuHeadroomDetails?: ICUHeadroomMetricDetails;
+  icuHeadroomDetails?: ICUHeadroomMetricDetails | null;
   icuCapacityRatio: Icucapacityratio;
+  vaccinationsInitiatedRatio?: Vaccinationsinitiatedratio;
+  vaccinationsCompletedRatio?: Vaccinationscompletedratio;
 }
 /**
  * Details about how the test positivity ratio was calculated.
@@ -323,4 +401,34 @@ export interface HospitalResourceUtilization {
   currentUsageTotal: Currentusagetotal;
   currentUsageCovid: Currentusagecovid;
   typicalUsageRate: Typicalusagerate;
+}
+/**
+ * Annotations for each field.
+ */
+export interface Annotations {
+  cases?: Cases1;
+  deaths?: Deaths1;
+  positiveTests?: Positivetests1;
+  negativeTests?: Negativetests1;
+  contactTracers?: Contacttracers1;
+  hospitalBeds?: Hospitalbeds1;
+  icuBeds?: Icubeds1;
+  newCases?: Newcases1;
+  vaccinesDistributed?: Vaccinesdistributed1;
+  vaccinationsInitiated?: Vaccinationsinitiated1;
+  vaccinationsCompleted?: Vaccinationscompleted1;
+}
+/**
+ * Annotations associated with one field.
+ */
+export interface FieldAnnotations {
+  sources: FieldSource[];
+  anomalies: Anomalies;
+}
+/**
+ * Base model for API output.
+ */
+export interface AnomalyAnnotation {
+  date: Date;
+  original_observation: OriginalObservation;
 }

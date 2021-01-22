@@ -66,7 +66,7 @@ export type Newcases = number | null;
 /**
  * Number of vaccine doses distributed.
  */
-export type Vaccinesdistributed = number;
+export type Vaccinesdistributed = number | null;
 /**
  *
  * Number of vaccinations initiated.
@@ -75,16 +75,16 @@ export type Vaccinesdistributed = number;
  * number of people vaccinated with the first dose.
  *
  */
-export type Vaccinationsinitiated = number;
+export type Vaccinationsinitiated = number | null;
 /**
  *
  * Number of vaccinations completed.
  *
  * This value may vary by type of vaccine, but for Moderna and Pfizer, this indicates
- * number of people vaccinated with the both first and second dose.
+ * number of people vaccinated with both the first and second dose.
  *
  */
-export type Vaccinationscompleted = number;
+export type Vaccinationscompleted = number | null;
 
 /**
  * Known actuals data.

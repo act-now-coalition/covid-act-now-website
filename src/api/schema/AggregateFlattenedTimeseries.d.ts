@@ -27,11 +27,11 @@ export type Fips = string;
 /**
  * Latitude of point within the state or county
  */
-export type Lat = number;
+export type Lat = number | null;
 /**
  * Longitude of point within the state or county
  */
-export type Long = number;
+export type Long = number | null;
 /**
  * Location ID as defined here: https://github.com/covidatlas/li/blob/master/docs/reports-v1.md#general-notes
  */
@@ -102,7 +102,7 @@ export type Newcases = number | null;
 /**
  * Number of vaccine doses distributed.
  */
-export type Vaccinesdistributed = number;
+export type Vaccinesdistributed = number | null;
 /**
  *
  * Number of vaccinations initiated.
@@ -111,16 +111,16 @@ export type Vaccinesdistributed = number;
  * number of people vaccinated with the first dose.
  *
  */
-export type Vaccinationsinitiated = number;
+export type Vaccinationsinitiated = number | null;
 /**
  *
  * Number of vaccinations completed.
  *
  * This value may vary by type of vaccine, but for Moderna and Pfizer, this indicates
- * number of people vaccinated with the both first and second dose.
+ * number of people vaccinated with both the first and second dose.
  *
  */
-export type Vaccinationscompleted = number;
+export type Vaccinationscompleted = number | null;
 /**
  * Metrics for given day
  */
@@ -177,6 +177,14 @@ export type NonCovidPatientsMethod =
   | 'estimated_from_total_icu_actual';
 export type Icucapacityratio = number | null;
 /**
+ * Ratio of population that has initiated vaccination.
+ */
+export type Vaccinationsinitiatedratio = number | null;
+/**
+ * Ratio of population that has completed vaccination.
+ */
+export type Vaccinationscompletedratio = number | null;
+/**
  * Risk Levels for given day
  */
 export type Risklevels = RiskLevelsRow;
@@ -206,8 +214,8 @@ export interface RegionTimeseriesRowWithHeader {
   state: State;
   county: County;
   fips: Fips;
-  lat?: Lat;
-  long?: Long;
+  lat: Lat;
+  long: Long;
   locationId: Locationid;
   actuals: Actuals1;
   metrics: Metrics1;
@@ -243,14 +251,16 @@ export interface HospitalResourceUtilization {
  */
 export interface Metrics {
   testPositivityRatio: Testpositivityratio;
-  testPositivityRatioDetails?: TestPositivityRatioDetails;
+  testPositivityRatioDetails?: TestPositivityRatioDetails | null;
   caseDensity: Casedensity;
   contactTracerCapacityRatio: Contacttracercapacityratio;
   infectionRate: Infectionrate;
   infectionRateCI90: Infectionrateci90;
   icuHeadroomRatio: Icuheadroomratio;
-  icuHeadroomDetails?: ICUHeadroomMetricDetails;
+  icuHeadroomDetails?: ICUHeadroomMetricDetails | null;
   icuCapacityRatio: Icucapacityratio;
+  vaccinationsInitiatedRatio?: Vaccinationsinitiatedratio;
+  vaccinationsCompletedRatio?: Vaccinationscompletedratio;
 }
 /**
  * Details about how the test positivity ratio was calculated.
