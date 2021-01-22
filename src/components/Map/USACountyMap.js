@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import { geoAlbersUsaTerritories } from 'geo-albers-usa-territories';
@@ -7,25 +7,29 @@ import { useSummaries } from 'common/location_summaries';
 import { ScreenshotReady } from 'components/Screenshot';
 import regions from 'common/regions';
 import { USMapWrapper, USStateMapWrapper } from './Map.style';
-import COUNTIES_JSON from './data/counties-10m.json';
+
+let geoCounties = null;
+let geoStates = null;
+
+import('./data/counties-10m.json').then(counties_json => {
+  geoCounties = {
+    ...counties_json,
+    objects: { counties: counties_json.objects.counties },
+  };
+
+  geoStates = {
+    ...counties_json,
+    objects: { states: counties_json.objects.states },
+  };
+});
 
 const stateFipsCodes = regions.states.map(state => state.fipsCode);
-
 /**
  * The COUNTIES_JSON file contains geographies for counties, states and the
  * nation. The following variables simplify the object to contain either
  * state or county, not both (this might make parsing of the geographies faster
  * and reduce our bundle size a bit).
  */
-const geoCounties = {
-  ...COUNTIES_JSON,
-  objects: { counties: COUNTIES_JSON.objects.counties },
-};
-
-const geoStates = {
-  ...COUNTIES_JSON,
-  objects: { states: COUNTIES_JSON.objects.states },
-};
 
 /**
  * SVG element to represent the Northern Mariana Islands on the USA Country Map as a
@@ -49,6 +53,9 @@ const MarianaIslands = ({ fill, onMouseEnter, onMouseLeave }) => {
 
 const USACountyMap = React.memo(
   ({ stateClickHandler, setTooltipContent, showCounties }) => {
+    if (!geoCounties) {
+      return null;
+    }
     const locationSummaries = useSummaries();
 
     const getFillColor = geo => {
