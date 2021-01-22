@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { some } from 'lodash';
 import ExternalLink from 'components/ExternalLink';
 import {
@@ -10,7 +9,6 @@ import {
 } from 'components/LocationPage/LocationPageHeader.style';
 import { Projections } from 'common/models/Projections';
 import InfoIcon from '@material-ui/icons/Info';
-import { BANNER_COPY } from 'components/Banner/ThirdWaveBanner';
 import HospitalizationsAlert, {
   isHospitalizationsPeak,
 } from './HospitalizationsAlert';
