@@ -17,29 +17,35 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const Button = styled(MuiButton).attrs(props => ({
+export const CompareButton = styled(MuiButton).attrs(props => ({
   disableRipple: true,
   disableFocusRipple: true,
   variant: 'contained',
 }))`
-  font-size: 13px;
+  background-color: ${COLOR_MAP.BLUE};
+  color: white;
+  box-shadow: box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.12);
 
-  &:first-of-type {
-      background-color: ${COLOR_MAP.BLUE};
-      color: white;
-      box-shadow: box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.12);
+  &:hover{
+    background-color: ${COLOR_MAP.BLUE};
   }
-
-  &:last-of-type {
-    background-color: ${COLOR_MAP.LIGHTGRAY_BG};
-    color: ${COLOR_MAP.BLUE};
-    box-shadow: none;
-    margin-left: .5rem;
-    &:hover {
-        text-decoration: underline;
-    }
-}
   `;
+
+export const SearchButton = styled(MuiButton).attrs(props => ({
+  disableRipple: true,
+  disableFocusRipple: true,
+  variant: 'text',
+}))`
+  background-color: ${COLOR_MAP.LIGHTGRAY_BG};
+  color: ${COLOR_MAP.BLUE};
+  box-shadow: none;
+  margin-left: 0.5rem;
+  &:hover {
+    text-decoration: underline;
+    background-color: ${COLOR_MAP.LIGHTGRAY_BG};
+    box-shadow: none;
+  }
+`;
 
 export const InnerContainer = styled.div`
   display: flex;

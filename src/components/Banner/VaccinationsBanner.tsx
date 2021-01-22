@@ -1,46 +1,57 @@
 import React, { Fragment } from 'react';
+import { HashLink } from 'react-router-hash-link';
 import { ButtonContainer } from './Banner.style';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import {
   Wrapper,
-  Button,
   InnerContainer,
   Header,
   Body,
   IconWrapper,
   Icon,
+  SearchButton,
+  CompareButton,
 } from './VaccinationsBanner.style';
 import AggregationsJSON from 'assets/data/aggregations.json';
 import vaccinationsIcon from 'assets/images/misc/vaccination_icon.svg';
 import { formatInteger } from 'common/utils';
+import { scrollWithOffset } from 'components/TableOfContents';
 
 const Buttons: React.FC = () => {
   return (
     <Fragment>
-      <Button
-        onClick={() => {
-          trackEvent(
-            EventCategory.VACCINATION,
-            EventAction.CLICK,
-            'Banner: Compare states',
-          );
-          window.location.href = '#compare';
-        }}
+      <HashLink
+        to="#compare"
+        scroll={(element: HTMLElement) => scrollWithOffset(element, -80)}
       >
-        Compare states
-      </Button>
-      <Button
-        onClick={() => {
-          trackEvent(
-            EventCategory.VACCINATION,
-            EventAction.CLICK,
-            'Banner: Learn more',
-          );
-          window.location.href = '#search';
-        }}
+        <CompareButton
+          onClick={() => {
+            trackEvent(
+              EventCategory.VACCINATION,
+              EventAction.CLICK,
+              'Banner: Compare states',
+            );
+          }}
+        >
+          Compare states
+        </CompareButton>
+      </HashLink>
+      <HashLink
+        to="#search"
+        scroll={(element: HTMLElement) => scrollWithOffset(element, -80)}
       >
-        See my state
-      </Button>
+        <SearchButton
+          onClick={() => {
+            trackEvent(
+              EventCategory.VACCINATION,
+              EventAction.CLICK,
+              'Banner: See my state',
+            );
+          }}
+        >
+          See my state
+        </SearchButton>
+      </HashLink>
     </Fragment>
   );
 };
