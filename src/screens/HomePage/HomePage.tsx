@@ -21,7 +21,6 @@ import CompareMain from 'components/Compare/CompareMain';
 import Explore from 'components/Explore';
 import { SwitchComponent } from 'components/SharedComponents';
 import { formatMetatagDate } from 'common/utils';
-import { getLocationFipsCodesForExplore } from './utils';
 import { VaccinationsBanner } from 'components/Banner';
 import SearchAutocomplete from 'components/Search';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
@@ -29,7 +28,7 @@ import { getFilterLimit } from 'components/Search';
 import { getFinalAutocompleteLocations } from 'common/regions';
 import { getNationalText } from 'components/NationalText';
 import HomepageStructuredData from 'screens/HomePage/HomepageStructuredData';
-import { useGeolocation } from 'common/hooks';
+import { useGeolocation, useGeolocationInExplore } from 'common/hooks';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -47,6 +46,7 @@ export default function HomePage() {
   const indicatorsRef = useRef(null);
 
   const geolocation = useGeolocation();
+  const initialFipsForExplore = useGeolocationInExplore(5, geolocation);
 
   // Location hash is uniquely set from vaccination banner button click
   const compareShowVaccinationsFirst = location.hash === '#compare';
@@ -64,8 +64,6 @@ export default function HomePage() {
       scrollTo(shareBlockRef.current);
     }
   }, [location.pathname, shareBlockRef]);
-
-  const [initialFipsList] = useState(getLocationFipsCodesForExplore(5));
 
   const exploreSectionRef = useRef(null);
 
@@ -140,7 +138,7 @@ export default function HomePage() {
             <Section ref={exploreSectionRef}>
               <Explore
                 title="Cases, Deaths and Hospitalizations"
-                initialFipsList={initialFipsList}
+                initialFipsList={initialFipsForExplore}
                 initialChartIndigenousPopulations={false}
                 nationalSummaryText={getNationalText()}
               />
