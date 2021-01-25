@@ -3,7 +3,7 @@ import { Autocomplete } from '@material-ui/lab';
 import { createFilterOptions } from '@material-ui/lab/useAutocomplete';
 import TextField from '@material-ui/core/TextField';
 import { Region, County, MetroArea } from 'common/regions';
-import MenuItem, { getOptionLabel } from './MenuItem';
+import MenuItem from './MenuItem';
 import { StyledPaper } from './Search.style';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 
@@ -79,7 +79,9 @@ const SearchAutocomplete: React.FC<{
       renderOption={option => {
         return <MenuItem region={option} zipCodeInput={zipCodeInput} />;
       }}
-      getOptionLabel={getOptionLabel}
+      getOptionLabel={() => {
+        return '';
+      }} // we don't want the location name to populate the searchbar after selecting
       openOnFocus
       onOpen={() => {
         trackEvent(EventCategory.SEARCH, EventAction.FOCUS, 'Search Focused');
