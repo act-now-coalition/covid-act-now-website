@@ -13,8 +13,8 @@ const RegionItemSkeleton = () => {
     <SkeletonWrapper>
       <CircleIcon $iconColor={COLOR_MAP.GRAY_EXPLORE_CHART} />
       <Column>
-        <StyledSkeletonRect />
-        <StyledSkeletonRect />
+        <StyledSkeletonRect width={210} height={14} />
+        <StyledSkeletonRect width={75} height={14} />
       </Column>
       <ArrowIcon />
     </SkeletonWrapper>

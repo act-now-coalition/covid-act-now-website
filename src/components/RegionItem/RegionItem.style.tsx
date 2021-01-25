@@ -69,15 +69,7 @@ export const Column = styled.div`
 `;
 
 export const StyledSkeletonRect = styled(Skeleton).attrs(props => ({
-  height: 14,
   animation: 'wave',
 }))`
   border-radius: 0;
-
-  &:first-of-type {
-    width: 210px;
-  }
-  &:last-of-type {
-    width: 75px;
-  }
 `;
