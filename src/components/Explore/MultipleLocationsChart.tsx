@@ -1,5 +1,5 @@
 import React, { useCallback, Fragment } from 'react';
-import { isNumber } from 'lodash';
+import { isNumber, last, max, sortBy } from 'lodash';
 import { Group } from '@vx/group';
 import { scaleUtc, scaleLinear } from '@vx/scale';
 import { useTooltip } from '@vx/tooltip';
@@ -17,6 +17,13 @@ import { Line } from '@vx/shape';
 import DateMarker from './DateMarker';
 import GridLines from './GridLines';
 import Axes from './Axes';
+
+interface LabelInfo {
+  x: number;
+  y: number;
+  label: string;
+  stroke: string;
+}
 
 const getDate = (d: Column) => new Date(d.x);
 const getY = (d: Column) => d.y;
@@ -112,7 +119,7 @@ const MultipleLocationsChart: React.FC<{
 }> = ({
   width,
   height,
-  seriesList,
+  seriesList: unsortedSeriesList,
   isMobile,
   marginTop = 10,
   marginBottom = 30,
@@ -121,6 +128,8 @@ const MultipleLocationsChart: React.FC<{
   barOpacity,
   isMobileXs = false,
 }) => {
+  const seriesList = sortSeriesByLast(unsortedSeriesList);
+
   const dateFrom = new Date('2020-03-01');
   const dateTo = new Date();
   const maxY = getMaxBy<number>(seriesList, getY, 1);
@@ -151,6 +160,11 @@ const MultipleLocationsChart: React.FC<{
 
   const getXPosition = (d: Column) => dateScale(getDate(d)) || 0;
   const getYPosition = (d: Column) => yScale(getY(d));
+  const seriesLabels = formatCurrentValueLabels(
+    seriesList,
+    (p: Column) => innerWidth + 5,
+    getYPosition,
+  );
 
   return (
     <Styles.PositionRelative style={{ height }}>
@@ -171,20 +185,18 @@ const MultipleLocationsChart: React.FC<{
             yNumTicks={5}
           />
           <TodayMarker height={innerHeight} dateScale={dateScale} />
-          {seriesList.map((series, i) => {
-            const seriesColor = series.params?.stroke || '#000';
-            return series.data.length > 0 ? (
-              <Styles.LineLabel
-                key={`label-${series.label}`}
-                x={innerWidth + 5}
-                y={getYPosition(series.data[series.data.length - 1])}
-                fill={seriesColor}
-                fillOpacity={getSeriesOpacity(i, tooltipOpen, tooltipData)}
-              >
-                {getSeriesLabel(series, isMobileXs)}
-              </Styles.LineLabel>
-            ) : null;
-          })}
+          {seriesLabels.map((label, i) => (
+            <Styles.LineLabel
+              key={`label-${label.label}`}
+              x={label.x}
+              y={label.y}
+              fill={label.stroke}
+              fillOpacity={getSeriesOpacity(i, tooltipOpen, tooltipData)}
+            >
+              {getSeriesLabel(seriesList[i], isMobileXs)}
+            </Styles.LineLabel>
+          ))}
+
           <RectClipGroup width={innerWidth} height={innerHeight}>
             {seriesList.map(({ label, data, type, params }, i) => (
               <ChartSeries
@@ -242,4 +254,30 @@ const MultipleLocationsChart: React.FC<{
   );
 };
 
+function formatCurrentValueLabels(
+  seriesList: Series[],
+  getXPosition: (p: Column) => number,
+  getYPosition: (p: Column) => number,
+): LabelInfo[] {
+  return seriesList.reduce((labelInfoList: LabelInfo[], currSeries: Series) => {
+    const lastPoint = last(currSeries.data);
+    const currMaxY = max(labelInfoList.map(info => info.y)) || 0;
+    return [
+      ...labelInfoList,
+      {
+        x: lastPoint?.x ? getXPosition(lastPoint) : 0,
+        y: lastPoint?.y ? Math.max(getYPosition(lastPoint), currMaxY + 14) : 0,
+        label: currSeries.shortLabel,
+        stroke: currSeries.params?.stroke || '#000',
+      },
+    ];
+  }, []);
+}
+
+function sortSeriesByLast(seriesList: Series[]) {
+  return sortBy(seriesList, series => {
+    const lastPoint = last(series.data);
+    return lastPoint?.y || 0;
+  }).reverse();
+}
 export default MultipleLocationsChart;
