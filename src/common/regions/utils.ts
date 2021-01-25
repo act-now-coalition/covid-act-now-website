@@ -119,7 +119,7 @@ export function getGeolocatedRegions(
   }
 }
 
-function filterUndefinedRegions(regions: any[]): Region[] | [] {
+export function filterUndefinedRegions(regions: any[]): Region[] | [] {
   return regions.filter(
     (region: Region | undefined) => region instanceof Region,
   );
