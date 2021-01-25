@@ -2,8 +2,8 @@ name: Upload Site to http://staging.covidactnow.org.s3-website-us-west-1.amazona
 
 on:
   push:
-    # branches:
-    # - develop
+    branches:
+    - develop
 
 jobs:
   build-deploy:
