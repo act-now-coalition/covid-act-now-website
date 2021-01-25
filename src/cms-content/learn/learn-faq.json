@@ -175,7 +175,7 @@
         },
         {
           "question": "Is it safe to reopen?",
-          "answer": "[Covid Act Now](https://covidactnow.org/?s=756131) determines a COVID risk level (severe outbreak; active outbreak; at risk of outbreak; slow disease growth; or on track to contain COVID) for each state and county, based on five metrics. Our mission is to provide data and disease intelligence to help public officials and the general public make informed decisions. Counties designated as “on track” can [open](/glossary#reopening) more safely than those in higher risk groups. Of course, no community is entirely safe from COVID until the new [vaccine](/glossary#vaccine) has been widely adopted.",
+          "answer": "[Covid Act Now](https://covidactnow.org/?s=756131) determines a COVID risk level (severe outbreak; active outbreak; at risk of outbreak; slow disease growth; or on track to contain COVID) for each state, county, and metro area based on three metrics. Our mission is to provide data and disease intelligence to help public officials and the general public make informed decisions. Counties designated as “on track” can [open](/glossary#reopening) more safely than those in higher risk groups. Of course, no community is entirely safe from COVID until the new [vaccine](/glossary#vaccine) has been widely adopted.",
           "questionId": "is-it-safe-to-reopen"
         },
         {
