@@ -36,7 +36,7 @@ execute () {
   aws configure set default.s3.max_concurrent_requests 30
 
   DEFAULT_OPTIONS="--acl public-read --no-progress"
-  CP_CMD="aws s3 cp --recursive ${DEFAULT_OPTIONS} ${BUILD_DIR} ${S3_PATH}"
+  CP_CMD="aws s3 cp --region us-west-1 --recursive ${DEFAULT_OPTIONS} ${BUILD_DIR} ${S3_PATH}"
 
   # static/ files are immutable, so cache for a year.
   ${CP_CMD} --exclude "*" --include "static/*" \
