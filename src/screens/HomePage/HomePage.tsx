@@ -33,7 +33,7 @@ import { useGeolocation } from 'common/hooks';
 
 function getPageDescription() {
   const date = formatMetatagDate();
-  return `${date} Explore our interactive U.S. COVID Map for the latest data on Cases, Vaccinations, Positivity rate, and ICU capacity for your State, City, or County.`;
+  return `${date} Explore our interactive U.S. COVID Map for the latest data on Cases, Vaccinations, Deaths, Positivity rate, and ICU capacity for your State, City, or County.`;
 }
 
 export default function HomePage() {
@@ -83,7 +83,7 @@ export default function HomePage() {
       <EnsureSharingIdInUrl />
       <AppMetaTags
         canonicalUrl="/"
-        pageTitle="Realtime U.S. COVID Map & Data Tracker"
+        pageTitle="Realtime U.S. COVID Map & Vaccine Tracker"
         pageDescription={getPageDescription()}
       />
       <HomepageStructuredData />
