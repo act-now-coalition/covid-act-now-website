@@ -1,4 +1,5 @@
 import React from 'react';
+import { sortBy, last } from 'lodash';
 import { Series } from './interfaces';
 import SingleLocationChart from './SingleLocationChart';
 import MultipleLocationsChart from './MultipleLocationsChart';
@@ -23,8 +24,8 @@ const ExploreChart: React.FC<{
   barOpacityHover,
   tooltipSubtext,
   ...otherProps
-}) =>
-  hasMultipleLocations ? (
+}) => {
+  return hasMultipleLocations ? (
     <MultipleLocationsChart {...otherProps} />
   ) : (
     <SingleLocationChart
@@ -34,5 +35,6 @@ const ExploreChart: React.FC<{
       {...otherProps}
     />
   );
+};
 
 export default ExploreChart;
