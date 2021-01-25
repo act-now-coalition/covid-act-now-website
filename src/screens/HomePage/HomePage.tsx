@@ -33,7 +33,7 @@ import { useGeolocation } from 'common/hooks';
 
 function getPageDescription() {
   const date = formatMetatagDate();
-  return `${date} Explore our interactive U.S. COVID map for the latest cases, deaths, hospitalizations, and other key metrics. 50 States. 390+ Metros. 3200+ Counties.`;
+  return `${date} Explore our interactive U.S. COVID Map for the latest data on Cases, Vaccinations, Positivity rate, and ICU capacity for your State, City, or County.`;
 }
 
 export default function HomePage() {
@@ -83,7 +83,7 @@ export default function HomePage() {
       <EnsureSharingIdInUrl />
       <AppMetaTags
         canonicalUrl="/"
-        pageTitle="Realtime U.S. COVID Map & Risk Levels"
+        pageTitle="Realtime U.S. COVID Map & Data Tracker"
         pageDescription={getPageDescription()}
       />
       <HomepageStructuredData />
