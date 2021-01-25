@@ -184,8 +184,9 @@ const LocationHeaderStats = (props: {
           isHeader={props.isHeader}
           condensed={props.condensed}
         >
-          {ALL_METRICS.map(metric => (
+          {ALL_METRICS.map((metric, i) => (
             <SummaryStat
+              key={`stat-${i}`}
               onClick={() => props.onMetricClick && props.onMetricClick(metric)}
               chartType={metric}
               value={props.stats[metric] as number}
