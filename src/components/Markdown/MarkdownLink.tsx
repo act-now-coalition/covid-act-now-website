@@ -12,6 +12,14 @@ import ExternalLink from 'components/ExternalLink';
  * it in the current page. If the link is invalid, we just render the text of
  * the link.
  */
+
+/* Implementing lazy loading requires a short timeout to make scrollWithOffset scroll the page to the correct location */
+const scrollWithTimeout = (element: any, offset: number) => {
+  return setTimeout(() => {
+    scrollWithOffset(element, offset);
+  }, 200);
+};
+
 const MarkdownLink: React.FC<{
   href: string;
   children: React.ReactNode;
@@ -39,7 +47,7 @@ const MarkdownLink: React.FC<{
   }
 
   return isInternalLink(href) ? (
-    <HashLink to={href} scroll={element => scrollWithOffset(element, -80)}>
+    <HashLink to={href} scroll={element => scrollWithTimeout(element, -80)}>
       {children}
     </HashLink>
   ) : (
