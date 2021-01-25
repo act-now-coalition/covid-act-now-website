@@ -4,7 +4,7 @@
 backend:
   name: github
   repo: covid-projections/covid-projections
-  branch: cms-content-entry
+  branch: vaccine-cms-data
   base_url: https://api.netlify.com
 
 media_folder: 'public/images_cms'
@@ -644,3 +644,22 @@ collections:
           - label: Metadata description
             name: metadataDescription
             widget: text
+  - label: Vaccinations directory
+    name: vaccines
+    folder: 'src/cms-content/vaccines'
+    create: true
+    label_singular: Vaccine
+    description: description
+    format: json
+    identifier_field: state
+    fields:
+      - label: State
+        name: state
+        widget: string
+      - label: More Info URL
+        name: moreInfoUrl
+        widget: string
+      - label: Sign Up URL
+        name: signUpUrl
+        widget: string
+        
