@@ -9,11 +9,12 @@
  */
 
 import { useEffect, useState } from 'react';
-import { isNull, values, chain } from 'lodash';
+import { isNull, values } from 'lodash';
 import {
   getGeolocatedRegions,
   filterUndefinedRegions,
   FipsCode,
+  Region,
 } from 'common/regions';
 import { getLargestMetroFipsForExplore } from 'screens/HomePage/utils';
 import { GeolocationInfo } from './useGeolocation';
@@ -32,9 +33,9 @@ export default function useGeolocationInExplore(
       if (!isNull(userRegions)) {
         const regionValues = values(userRegions);
         const filteredUserRegions = filterUndefinedRegions(regionValues);
-        const userRegionsFips = chain(filteredUserRegions)
-          .map((region: any) => region.fipsCode)
-          .value();
+        const userRegionsFips = (filteredUserRegions as []).map(
+          (region: Region) => region.fipsCode,
+        );
         if (userRegionsFips.length) {
           setInitialExploreFips(userRegionsFips);
         }
