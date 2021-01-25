@@ -11,7 +11,6 @@ import { useTheme } from '@material-ui/core/styles';
 import { Metric, ALL_METRICS } from 'common/metric';
 import CompareMain from 'components/Compare/CompareMain';
 import Explore, { ExploreMetric } from 'components/Explore';
-import { findCountyByFips } from 'common/locations';
 import Recommend from 'components/Recommend';
 import {
   getDynamicIntroCopy,
@@ -24,7 +23,7 @@ import {
 } from 'common/utils/recommend';
 import { mainContent } from 'cms-content/recommendations';
 import { getRecommendationsShareUrl } from 'common/urls';
-import { Region, State } from 'common/regions';
+import { Region, State, getStateName } from 'common/regions';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
@@ -44,14 +43,12 @@ interface ChartsHolderProps {
 const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
   const projection = projections.primary;
 
-  const county = findCountyByFips(region.fipsCode);
-
   const metricRefs = {
     [Metric.CASE_DENSITY]: useRef<HTMLDivElement>(null),
     [Metric.CASE_GROWTH_RATE]: useRef<HTMLDivElement>(null),
     [Metric.POSITIVE_TESTS]: useRef<HTMLDivElement>(null),
     [Metric.HOSPITAL_USAGE]: useRef<HTMLDivElement>(null),
-    [Metric.CONTACT_TRACING]: useRef<HTMLDivElement>(null),
+    [Metric.VACCINATIONS]: useRef<HTMLDivElement>(null),
   };
   const shareBlockRef = useRef<HTMLDivElement>(null);
   const exploreChartRef = useRef<HTMLDivElement>(null);
@@ -151,8 +148,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
           region={region}
         />
         <CompareMain
-          stateName={region.name} // rename prop
-          county={county}
+          stateName={getStateName(region) || region.name} // rename prop
           locationsViewable={6}
           stateId={(region as State).stateCode || undefined}
           region={region}

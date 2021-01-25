@@ -10,6 +10,7 @@ import {
 import faq from './learn-faq.json';
 import caseStudies from './learn-case-studies.json';
 import metricExplainers from './metric-explainers.json';
+import footer from './footer.json';
 import { sanitizeID, Markdown, TocItem } from '../utils';
 
 /*
@@ -29,7 +30,7 @@ export interface FaqSection {
 
 export interface FaqContent {
   header: string;
-  intro: Markdown;
+  intro?: Markdown;
   lastUpdatedDate: string;
   sections: FaqSection[];
   metadataTitle: string;
@@ -41,9 +42,12 @@ const sanitizeSection = (section: FaqSection): FaqSection => ({
   sectionId: sanitizeID(section.sectionId),
 });
 
+// TODO(pablo): We are temporarily disabling vaccines, restore once the content is ready
 const sanitizeFaq = (faq: FaqContent): FaqContent => ({
   ...faq,
-  sections: faq.sections.map(sanitizeSection),
+  sections: faq.sections
+    .filter(section => section.sectionId !== 'vaccines')
+    .map(sanitizeSection),
 });
 
 export const faqContent = sanitizeFaq(faq) as FaqContent;
@@ -77,7 +81,7 @@ export interface CaseStudyCategory {
 
 export interface CaseStudiesContent {
   header: string;
-  intro: Markdown;
+  intro?: Markdown;
   categories: CaseStudyCategory[];
   metadataTitle: string;
   metadataDescription: string;
@@ -155,7 +159,7 @@ interface LogoItem {
 
 export interface MetricExplainersContent {
   pageHeader: string;
-  pageIntro: string;
+  pageIntro?: string;
   sections: Section[];
   frameworkLogos: LogoItem[];
   metadataTitle: string;
@@ -168,6 +172,16 @@ export const [introSection, metricSections] = partition(
   section => section.sectionId === 'how-covid-risk-is-determined',
 );
 
+/**
+ * Footer:
+ **/
+
+interface Footer {
+  body: Markdown;
+}
+
+export const footerContent = footer as Footer;
+
 // TODO (pablo): Should we have a short heading for categories?
 export const learnPages: TocItem[] = [
   {
@@ -177,6 +191,10 @@ export const learnPages: TocItem[] = [
       to: `/covid-risk-levels-metrics#${section.sectionId}`,
       label: section.sectionHeader,
     })),
+  },
+  {
+    label: 'COVID explained',
+    to: '/covid-explained',
   },
   {
     // TODO(pablo): Hardcoding the title to avoid importing the glossary content
@@ -192,15 +210,15 @@ export const learnPages: TocItem[] = [
     })),
   },
   {
-    label: 'Deep dives',
-    to: '/deep-dives',
-  },
-  {
     label: caseStudiesContent.header,
     to: '/case-studies',
     items: categoriesWithStudies.map(category => ({
       to: `/case-studies#${category.categoryId}`,
       label: category.header,
     })),
+  },
+  {
+    label: 'Covid Act Now updates',
+    to: '/updates',
   },
 ];

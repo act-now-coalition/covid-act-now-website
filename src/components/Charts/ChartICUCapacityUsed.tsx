@@ -11,17 +11,17 @@ const getPointText = (valueY: number) => formatPercent(valueY, 0);
 const getTooltipContent = (valueY: number) =>
   valueY > CAP_Y
     ? {
-        subtitle: `ICU headroom used >`,
+        subtitle: `ICU capacity used >`,
         body: `${getPointText(CAP_Y)}`,
         width: 'auto',
       }
     : {
-        subtitle: `ICU headroom used`,
+        subtitle: `ICU capacity used`,
         body: `${getPointText(valueY)}`,
         width: 'auto',
       };
 
-const ChartICUHeadroom = ({
+const ChartICUCapacityUsed = ({
   columnData,
   height = 400,
 }: {
@@ -38,4 +38,4 @@ const ChartICUHeadroom = ({
   />
 );
 
-export default ChartICUHeadroom;
+export default ChartICUCapacityUsed;

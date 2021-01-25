@@ -8,5 +8,6 @@ them separate for future use, so...
 import SwitchComponent from './SwitchComponent';
 import MoreInfoButton from './MoreInfoButton';
 import StyledAccordion from './Accordion';
+import StyledRegionName from './StyledRegionName/StyledRegionName';
 
-export { SwitchComponent, MoreInfoButton, StyledAccordion };
+export { SwitchComponent, MoreInfoButton, StyledAccordion, StyledRegionName };

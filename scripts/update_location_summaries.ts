@@ -124,12 +124,8 @@ const STATE_AGGREGATED_DATASETS: DatasetId[] = [
   'smoothedDailyDeaths',
   'rawHospitalizations',
   'smoothedHospitalizations',
-  // Only 43 states are reporting ICU as of 2020-11-12, disabling
-  // because per capita charts can be misleading.
-  /*
   'rawICUHospitalizations',
   'smoothedICUHospitalizations',
-  */
 ];
 
 function aggregate(
@@ -144,6 +140,10 @@ function aggregate(
   const totalDeaths = _.sumBy(
     allProjections,
     p => p.primary.currentCumulativeDeaths || 0,
+  );
+  const totalVaccinationsInitiated = _.sumBy(
+    allProjections,
+    p => p.primary.vaccinationsInfo?.peopleInitiated || 0,
   );
   const dates: number[] = [];
   let aggregatedDatasets: { [key: string]: Array<number | null> } = {};
@@ -175,6 +175,7 @@ function aggregate(
     totalPopulation,
     totalCases,
     totalDeaths,
+    totalVaccinationsInitiated,
     dates,
     ...aggregatedDatasets,
   };

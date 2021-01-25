@@ -152,7 +152,9 @@ const ChartZones = ({
             <ZoneAnnotation
               color={region.color}
               name={region.name}
-              isActive={lastPointZone.name === region.name}
+              isActive={
+                lastPointZone.name === region.name && region.name !== ''
+              }
               x={chartWidth - 10}
               y={yScale(0.5 * (region.valueFrom + region.valueTo))}
             />

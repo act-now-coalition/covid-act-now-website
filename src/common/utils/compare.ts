@@ -1,5 +1,5 @@
 /** Helpers for compare, getting location arrays for each filter/pagetype **/
-import { getAdjacentCounties, getCountyMsaCode } from 'common/locations';
+import { getCountyMsaCode } from 'common/locations';
 import { LocationSummary, getSummaryFromFips } from 'common/location_summaries';
 import { Metric, getMetricNameForCompare } from 'common/metric';
 import { isNumber } from 'lodash';
@@ -13,7 +13,6 @@ import regions, {
   getFormattedStateCode,
 } from 'common/regions';
 import { fail } from 'assert';
-import { assert } from '.';
 
 export function trackCompareEvent(
   action: EventAction,
@@ -36,7 +35,15 @@ export const orderedMetrics = [
   Metric.CASE_GROWTH_RATE,
   Metric.POSITIVE_TESTS,
   Metric.HOSPITAL_USAGE,
-  Metric.CONTACT_TRACING,
+  Metric.VACCINATIONS,
+];
+
+export const orderedMetricsVaccineFirst = [
+  Metric.VACCINATIONS,
+  Metric.CASE_DENSITY,
+  Metric.CASE_GROWTH_RATE,
+  Metric.POSITIVE_TESTS,
+  Metric.HOSPITAL_USAGE,
 ];
 
 function getLocationObj(region: Region): SummaryForCompare {
@@ -102,25 +109,16 @@ export function getStateNonMetroCounties(
     .map(getLocationObj);
 }
 
-function getCountyObj(countyFips: string) {
-  const region = regions.findByFipsCode(countyFips);
-  assert(region, 'Missing region');
-  return [getLocationObj(region)];
-}
-
-function isNeighboringCounty(region: Region, countyFips: string) {
-  const neighboringCountiesFips = getAdjacentCounties(countyFips);
-  return neighboringCountiesFips.includes(region.fipsCode);
-}
-
 export function getNeighboringCounties(
   countyFips: string,
 ): SummaryForCompare[] {
-  const adjacentCounties = regions.counties
-    .filter((region: Region) => isNeighboringCounty(region, countyFips))
-    .map(getLocationObj);
-  const currentCounty = getCountyObj(countyFips);
-  return [...adjacentCounties, ...currentCounty];
+  const county = regions.findByFipsCodeStrict(countyFips) as County;
+  const adjacentCounties = county.adjacentCountiesFips.map(fips => {
+    const region = regions.findByFipsCodeStrict(fips);
+    return getLocationObj(region);
+  });
+
+  return [...adjacentCounties, ...[getLocationObj(county)]];
 }
 
 export enum MetroFilter {
@@ -153,18 +151,18 @@ export function getAllCountiesSelection(countyTypeToView: MetroFilter) {
 }
 
 export function getLocationPageCountiesSelection(
+  stateCode: string,
   countyTypeToView: MetroFilter,
-  stateId: string,
 ) {
   switch (countyTypeToView) {
     case MetroFilter.ALL:
-      return getAllCountiesOfState(stateId);
+      return getAllCountiesOfState(stateCode);
     case MetroFilter.METRO:
-      return getStateMetroCounties(stateId);
+      return getStateMetroCounties(stateCode);
     case MetroFilter.NON_METRO:
-      return getStateNonMetroCounties(stateId);
+      return getStateNonMetroCounties(stateCode);
     default:
-      return getAllCountiesOfState(stateId);
+      return getAllCountiesOfState(stateCode);
   }
 }
 
@@ -325,14 +323,16 @@ export function getShareQuote(
     currentLocation.rank !== 0 &&
     isNumber(currentLocation.metricsInfo.metrics[sorter]?.value);
 
-  const ascendingCopy =
-    sorter && sorter === (Metric.HOSPITAL_USAGE || Metric.CONTACT_TRACING)
-      ? 'least'
-      : 'lowest';
-  const descendingCopy =
-    sorter && sorter === (Metric.HOSPITAL_USAGE || Metric.CONTACT_TRACING)
-      ? 'most'
-      : 'highest';
+  const ascendingCopy = [Metric.HOSPITAL_USAGE, Metric.VACCINATIONS].includes(
+    sorter,
+  )
+    ? 'least'
+    : 'lowest';
+  const descendingCopy = [Metric.HOSPITAL_USAGE, Metric.VACCINATIONS].includes(
+    sorter,
+  )
+    ? 'most'
+    : 'highest';
 
   const countyShareCopy =
     currentLocation &&

@@ -1,4 +1,12 @@
-import { concat, partition, sortBy, find, values, isNull } from 'lodash';
+import {
+  concat,
+  partition,
+  sortBy,
+  find,
+  values,
+  isNull,
+  without,
+} from 'lodash';
 import regions from './region_db';
 import { getStateFips } from './regions_data';
 import { County, State, Region, MetroArea } from './types';
@@ -104,11 +112,17 @@ export function getGeolocatedRegions(
     return null;
   } else {
     return {
-      county: getCountyRegionFromZipCode(geolocation.zipCode),
       metroArea: getMetroRegionFromZipCode(geolocation.zipCode),
+      county: getCountyRegionFromZipCode(geolocation.zipCode),
       state: getStateRegionFromStateCode(geolocation.stateCode),
     };
   }
+}
+
+export function filterUndefinedRegions(regions: any[]): Region[] | [] {
+  return regions.filter(
+    (region: Region | undefined) => region instanceof Region,
+  );
 }
 
 /**
@@ -120,18 +134,24 @@ export function getAutocompleteRegionsWithGeolocation(
   locations: Region[],
 ): Region[] {
   const geolocatedRegions = getGeolocatedRegions(geolocation);
+
   if (isNull(geolocatedRegions)) {
     return locations;
   }
-  const sanitizedGeolocatedRegionsArr = values(geolocatedRegions).filter(
-    (region: Region | undefined) => region instanceof Region,
-  ); // filters out undefined
-  const [usersRegions, otherRegions] = partition(
-    locations,
-    (location: Region) => sanitizedGeolocatedRegionsArr.includes(location),
+
+  const geolocatedRegionValues = values(geolocatedRegions);
+  const sanitizedGeolocatedRegions: Region[] = filterUndefinedRegions(
+    geolocatedRegionValues,
   );
-  const sortedLocations = [...usersRegions, ...otherRegions];
-  return sortedLocations;
+
+  const otherRegions: Region[] = without(
+    locations,
+    ...sanitizedGeolocatedRegions,
+  );
+
+  const finalLocations = [...sanitizedGeolocatedRegions, ...otherRegions];
+
+  return finalLocations;
 }
 
 /**
@@ -140,15 +160,15 @@ export function getAutocompleteRegionsWithGeolocation(
  * If not, returns autocomplete results sorted for pagetype.
  */
 export function getFinalAutocompleteLocations(
-  geolocation: GeolocationInfo | undefined,
+  geolocation?: GeolocationInfo,
 ): Region[] {
   const regionsSortedForPagetype = getAutocompleteRegions();
-  if (geolocation) {
+  if (!geolocation) {
+    return regionsSortedForPagetype;
+  } else {
     return getAutocompleteRegionsWithGeolocation(
       geolocation,
       regionsSortedForPagetype,
     );
-  } else {
-    return regionsSortedForPagetype;
   }
 }

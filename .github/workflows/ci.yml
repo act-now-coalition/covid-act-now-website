@@ -45,6 +45,7 @@ jobs:
       - run: yarn run lint
       - run: yarn run tsc
       - run: yarn run test.ci
+      - run: yarn run jest.ci
       - run: npx nyc report --reporter=text-summary
 
       - name: Archive code coverage results

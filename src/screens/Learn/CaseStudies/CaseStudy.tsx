@@ -22,6 +22,7 @@ import {
   SmallSubtext,
 } from '../Learn.style';
 import { Logo, LogoContainer, LearnMoreSection } from './CaseStudy.style';
+import Footer from 'screens/Learn/Footer/Footer';
 
 const { metadataDescription } = caseStudiesContent;
 
@@ -72,6 +73,7 @@ const CaseStudy: React.FC = () => {
             </MarkdownStyleContainer>
           </LearnMoreSection>
         )}
+        <Footer />
       </PageContent>
     </Fragment>
   );

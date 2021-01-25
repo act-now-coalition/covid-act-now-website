@@ -15,8 +15,8 @@ const CaseStudyCard = (props: { cardContent: CaseStudy; url: string }) => {
   const { cardContent, url } = props;
   const { shortTitle, summary, caseStudyId } = cardContent;
   return (
-    <StyledCard>
-      <StyledLink to={`${url}/${caseStudyId}`}>
+    <StyledLink to={`${url}/${caseStudyId}`} aria-label={shortTitle}>
+      <StyledCard>
         <StyledCardContent>
           <CopyContainer>
             <CardLogo src={cardContent.logoUrl} alt={cardContent.logoAltText} />
@@ -28,8 +28,8 @@ const CaseStudyCard = (props: { cardContent: CaseStudy; url: string }) => {
             <ArrowIcon />
           </ReadMoreContainer>
         </StyledCardContent>
-      </StyledLink>
-    </StyledCard>
+      </StyledCard>
+    </StyledLink>
   );
 };
 

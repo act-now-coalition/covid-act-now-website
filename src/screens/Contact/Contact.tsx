@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import { Heading1, Heading2, MarkdownContent } from 'components/Markdown';
-import { Anchor } from 'components/TableOfContents';
 import PageContent from 'components/PageContent';
 import { contactUsContent, sidebarItems } from 'cms-content/contact';
 
@@ -25,8 +24,7 @@ const ContactUsPage: React.FC = () => (
       {intro && intro.length && <MarkdownContent source={intro} />}
       {sections.map(({ sectionId, header, body }) => (
         <Fragment key={sectionId}>
-          <Anchor id={sectionId} />
-          <Heading2>{header}</Heading2>
+          <Heading2 id={sectionId}>{header}</Heading2>
           <MarkdownContent source={body} />
         </Fragment>
       ))}

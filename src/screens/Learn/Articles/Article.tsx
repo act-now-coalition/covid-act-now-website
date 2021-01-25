@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import { useParams } from 'react-router-dom';
 import { formatMetatagDate } from 'common/utils';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import Breadcrumbs from 'components/Breadcrumbs';
@@ -10,36 +9,75 @@ import {
   LearnHeading1,
   BreadcrumbsContainer,
   SmallSubtext,
+  HeaderShareButtonsWrapper,
+  FooterShareButtonsWrapper,
 } from '../Learn.style';
-import { articlesById } from 'cms-content/articles';
+import { Article } from 'cms-content/articles/utils';
+import SmallShareButtons from 'components/SmallShareButtons';
+import Footer from 'screens/Learn/Footer/Footer';
+import { getCovidExplainedFooter } from 'screens/Learn/Explained';
 
-const Article = () => {
-  let { articleId } = useParams<{ articleId: string }>();
+const ArticlePage: React.FC<{
+  article: Article;
+  onCopyLink: () => void;
+  onShareOnFacebook: () => void;
+  onShareOnTwitter: () => void;
+  shareQuote: string;
+  canonicalUrl: string;
+  parentItem: { to: string; label: string };
+}> = ({
+  article,
+  canonicalUrl,
+  onCopyLink,
+  onShareOnFacebook,
+  onShareOnTwitter,
+  shareQuote,
+  parentItem,
+}) => {
   const metatagDate = formatMetatagDate();
-  const articleContent = articlesById[articleId];
-  const { header, body, date, summary } = articleContent;
+  const { header, body, date, summary } = article;
 
-  if (!articleContent) {
-    return null;
-  }
+  const smallSubtextCopy = article.author
+    ? `${article.author} Updated ${date}`
+    : `Updated ${date}`;
+
+  const isCeArticle = article.author?.includes('COVID Explained');
+  const footerProps = isCeArticle && {
+    pageSpecificCopy: getCovidExplainedFooter(),
+  };
+
+  const shareButtonProps = {
+    shareUrl: canonicalUrl,
+    shareQuote,
+    onCopyLink,
+    onShareOnFacebook,
+    onShareOnTwitter,
+  };
 
   return (
     <Fragment>
       <AppMetaTags
-        canonicalUrl={`/deep-dives/${articleId}`}
+        canonicalUrl={canonicalUrl}
         pageTitle={`${header}`}
         pageDescription={`${metatagDate} ${summary}`}
       />
       <PageContent sidebarItems={learnPages}>
         <BreadcrumbsContainer>
-          <Breadcrumbs item={{ to: '/deep-dives', label: 'Deep dives' }} />
+          <Breadcrumbs item={parentItem} />
         </BreadcrumbsContainer>
         <LearnHeading1>{header}</LearnHeading1>
-        <SmallSubtext source={`Published ${date}`} />
+        <SmallSubtext source={smallSubtextCopy} />
+        <HeaderShareButtonsWrapper>
+          <SmallShareButtons {...shareButtonProps} />
+        </HeaderShareButtonsWrapper>
         <MarkdownContent source={body} />
+        <Footer {...footerProps} />
+        <FooterShareButtonsWrapper>
+          <SmallShareButtons {...shareButtonProps} />
+        </FooterShareButtonsWrapper>
       </PageContent>
     </Fragment>
   );
 };
 
-export default Article;
+export default ArticlePage;

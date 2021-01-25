@@ -4,7 +4,7 @@ import Logo from 'assets/images/logo';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import * as Style from './NavBar.style';
 import MobileMenu from './MobileMenu';
-import { DonateButtonWithoutFade } from './DonateButton';
+import { DonateButton } from './DonateButton';
 import { useIsEmbed } from 'common/utils/hooks';
 
 const isLocationPage = (pathname: string) => pathname.includes('/us');
@@ -15,7 +15,8 @@ const isHomePage = (pathname: string) =>
 const isLearnPage = (pathname: string) =>
   ['/glossary', '/faq', '/explained', '/learn'].includes(pathname) ||
   pathname.startsWith('/case-studies') ||
-  pathname.startsWith('/deep-dives');
+  pathname.startsWith('/covid-explained') ||
+  pathname.startsWith('/updates');
 
 const NavBar: React.FC = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -70,11 +71,11 @@ const NavBar: React.FC = () => {
           <Style.NavLink to="/contact" key="contact">
             Contact Us
           </Style.NavLink>
-          <DonateButtonWithoutFade />
+          <DonateButton />
         </Style.DesktopOnly>
         <Style.MobileOnly>
           <Style.StyledMobileMenu>
-            <DonateButtonWithoutFade />
+            <DonateButton />
             <Style.IconButton
               onClick={() => setMenuOpen(!isMenuOpen)}
               edge="end"

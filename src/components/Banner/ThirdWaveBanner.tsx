@@ -11,7 +11,7 @@ const trackClick = () => {
   trackEvent(EventCategory.ARTICLES, EventAction.CLICK, 'Banner: Third wave');
 };
 
-const articleURL = '/deep-dives/us-third-wave';
+const articleURL = '/covid-explained/us-third-wave';
 
 const renderButton = () => (
   <Link to={articleURL} id="3rd-wave-banner" onClick={trackClick}>

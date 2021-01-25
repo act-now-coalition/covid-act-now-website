@@ -94,6 +94,10 @@ export const StylesMarkdown = css`
 
   p {
     ${paragraphCss};
+    margin-top: ${theme.spacing(3)}px;
+    &:first-of-type {
+      margin-top: 0;
+    }
   }
 
   li,
@@ -137,3 +141,16 @@ export const MarkdownLink = styled.a.attrs(props => ({
   rel: 'noopener noreferrer',
   target: '_blank',
 }))``;
+
+/**
+ * Styles used by custome renderers
+ */
+
+export const StyledFigure = styled.figure`
+  margin: 0;
+`;
+
+export const Caption = styled.figcaption`
+  font-style: italic;
+  margin-bottom: 1.5rem;
+`;

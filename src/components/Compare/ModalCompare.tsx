@@ -42,6 +42,7 @@ const ModalCompare = (props: {
     React.SetStateAction<HomepageLocationScope>
   >;
   region?: Region;
+  vaccinesFirst?: boolean;
 }) => {
   const { handleCloseModal, region } = props;
 
@@ -114,6 +115,7 @@ const ModalCompare = (props: {
         homepageSliderValue={props.homepageSliderValue}
         setHomepageSliderValue={props.setHomepageSliderValue}
         region={props.region}
+        vaccinesFirst={props.vaccinesFirst}
       />
     </Fragment>
   );

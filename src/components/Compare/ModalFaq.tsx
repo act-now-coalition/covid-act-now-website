@@ -44,13 +44,6 @@ const ModalFaq = (props: { handleCloseModal: () => void }) => {
             more inhabitants. We define “metro counties” as counties belonging
             to MSAs; “non metro counties” as counties not within an MSA.
           </Answer>
-          <Question>Why do some counties have missing data?</Question>
-          <Answer>
-            Most states report contact tracing at the state-level only, meaning
-            we don’t receive county-level data. This is sometimes common for
-            other metrics as well. We suggest using state-level pages in those
-            situations.
-          </Answer>
         </Content>
       </Wrapper>
     </Fragment>

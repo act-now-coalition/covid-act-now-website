@@ -17,6 +17,7 @@ import * as urls from 'common/urls';
 import moment from 'moment';
 import { County, MetroArea, Region, State } from 'common/regions';
 import { fail } from 'common/utils';
+import { Metric } from 'common/metric';
 
 const getShareImageUrl = (region: Region, chartIdentifier: number): string => {
   const imageBaseUrl = ShareImageUrlJSON.share_image_url;
@@ -72,11 +73,11 @@ const InnerContent = ({
 
   function makeDownloadFilename(chartIdentifier: number) {
     const chartDownloadType = {
-      0: 'infection_rate',
-      1: 'positive_test_rate',
-      2: 'hospital_usage',
-      3: 'contact_tracing',
-      5: 'case_incidence',
+      [Metric.CASE_DENSITY]: 'infection_rate',
+      [Metric.POSITIVE_TESTS]: 'positive_test_rate',
+      [Metric.HOSPITAL_USAGE]: 'hospital_usage',
+      [Metric.CASE_DENSITY]: 'case_incidence',
+      [Metric.VACCINATIONS]: 'vaccinations',
     };
 
     // @ts-ignore

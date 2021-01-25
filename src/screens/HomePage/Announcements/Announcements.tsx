@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ExternalLink from 'components/ExternalLink';
+import { HashLink } from 'react-router-hash-link';
 import { Subtitle1 } from 'components/Typography';
 import {
   AnnouncementIntro,
@@ -8,35 +8,37 @@ import {
   Date,
   AnnouncementBodyCopy,
   ButtonsContainer,
-  ReadMoreButton,
   ViewAllLink,
 } from './Announcements.style';
+import { scrollWithOffset } from 'components/TableOfContents';
 
 const Announcements: React.FC = () => {
   return (
     <Wrapper>
       <Subtitle1>Announcements</Subtitle1>
-      <AnnouncementIntro>
-        Covid Act Now and Covid Exit Strategy are now one team
-      </AnnouncementIntro>
-      <Date>MONDAY, Dec 14, 2020</Date>
+      <AnnouncementIntro>Vaccination Data Now Available</AnnouncementIntro>
+      <Date>THURSDAY, Jan 21, 2021</Date>
       <AnnouncementBodyCopy>
-        We’re excited to officially announce that{' '}
-        <ExternalLink href="https://www.covidexitstrategy.org">
-          Covid Exit Strategy (CES)
-        </ExternalLink>{' '}
-        and <Link to="/">Covid Act Now (CAN)</Link> are joining forces. Updates
-        to CES will continue until December 20, with the CES team joining CAN to
-        grow the data and tools we provide for you.
+        You can now see how many people are vaccinated in{' '}
+        <HashLink
+          to="#search"
+          scroll={element => scrollWithOffset(element, -80)}
+        >
+          each state
+        </HashLink>
+        , and compare vaccine rollout{' '}
+        <HashLink
+          to="#compare"
+          scroll={element => scrollWithOffset(element, -80)}
+        >
+          across states
+        </HashLink>
+        . Due to the widespread, untracked, community spread across all of the
+        United States, we will no longer be showing a contact tracing metric on
+        our site, although we will continue serving it through our{' '}
+        <Link to="/tools">API</Link>.
       </AnnouncementBodyCopy>
       <ButtonsContainer>
-        <ReadMoreButton
-          href="https://blog.covidactnow.org/covid-exit-strategy-covid-act-now/"
-          target="_blank"
-          rel="noopener"
-        >
-          Continue reading
-        </ReadMoreButton>
         <ViewAllLink
           href="https://blog.covidactnow.org/"
           target="_blank"

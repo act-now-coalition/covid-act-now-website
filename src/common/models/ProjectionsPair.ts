@@ -89,8 +89,8 @@ function getDataset(projection: Projection, metric: Metric): Column[] {
       return projection.getDataset('testPositiveRate');
     case Metric.HOSPITAL_USAGE:
       return projection.getDataset('icuUtilization');
-    case Metric.CONTACT_TRACING:
-      return projection.getDataset('contractTracers');
+    case Metric.VACCINATIONS:
+      return projection.getDataset('vaccinations');
     default:
       fail('Unknown metric: ' + metric);
   }

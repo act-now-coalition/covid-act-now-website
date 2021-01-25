@@ -19,6 +19,7 @@ import { useScrollToTopButton } from 'common/hooks';
 import ScrollToTopButton from 'components/SharedComponents/ScrollToTopButton';
 import { EventCategory } from 'components/Analytics';
 import GovLogoGrid from 'screens/About/GovLogoGrid';
+import Footer from 'screens/Learn/Footer/Footer';
 
 const MetricExplainer = () => {
   const {
@@ -55,7 +56,7 @@ const MetricExplainer = () => {
           <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>
         <LearnHeading1>{pageHeader}</LearnHeading1>
-        <MarkdownContent source={pageIntro} />
+        {pageIntro && <MarkdownContent source={pageIntro} />}
         <MobileOnly>
           <TableOfContents items={getSectionItems(sections)} />
         </MobileOnly>
@@ -71,21 +72,27 @@ const MetricExplainer = () => {
           </Fragment>
         ))}
         <GovLogoGrid logos={frameworkLogos} />
-        {metricSections.map(section => (
-          <Fragment key={section.sectionId}>
-            <ExplainersHeading2 id={section.sectionId}>
-              {section.sectionHeader}
-            </ExplainersHeading2>
-            <MarkdownContent source={section.sectionIntro} />
-            <ThermometerBox>{getThermometer(section.sectionId)}</ThermometerBox>
-            {section.questions.map(question => (
-              <Fragment key={question.questionId}>
-                <ItemName>{question.question}</ItemName>
-                <MarkdownContent source={question.answer} />
-              </Fragment>
-            ))}
-          </Fragment>
-        ))}
+        {metricSections.map(section => {
+          const sectionThermometer = getThermometer(section.sectionId);
+          return (
+            <Fragment key={section.sectionId}>
+              <ExplainersHeading2 id={section.sectionId}>
+                {section.sectionHeader}
+              </ExplainersHeading2>
+              <MarkdownContent source={section.sectionIntro} />
+              {sectionThermometer && (
+                <ThermometerBox>{sectionThermometer}</ThermometerBox>
+              )}
+              {section.questions.map(question => (
+                <Fragment key={question.questionId}>
+                  <ItemName>{question.question}</ItemName>
+                  <MarkdownContent source={question.answer} />
+                </Fragment>
+              ))}
+            </Fragment>
+          );
+        })}
+        <Footer />
         <ScrollToTopButton
           showButton={showScrollToTopButton}
           analyticsCategory={EventCategory.METRIC_EXPLAINERS}
@@ -103,7 +110,7 @@ function getThermometer(sectionId: string) {
     'infection-rate': Metric.CASE_GROWTH_RATE,
     'positive-test-rate': Metric.POSITIVE_TESTS,
     'icu-capacity-used': Metric.HOSPITAL_USAGE,
-    'tracers-hired': Metric.CONTACT_TRACING,
+    // NOTE: No thermometer for 'vaccinations' since we don't grade it yet.
   };
 
   const metric = mapSectionIdMetric[sectionId];

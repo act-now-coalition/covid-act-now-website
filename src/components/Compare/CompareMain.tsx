@@ -37,7 +37,12 @@ import {
   storeSharedComponentParams,
   useSharedComponentParams,
 } from 'common/sharing';
-import regions, { Region, MetroArea } from 'common/regions';
+import regions, {
+  Region,
+  MetroArea,
+  getStateCode,
+  County,
+} from 'common/regions';
 import { assert } from 'common/utils';
 
 // For filters (0, 50, and 99 are numerical values required by MUI Slider component):
@@ -55,11 +60,11 @@ const homepageScopeValueMap = {
 
 const CompareMain = (props: {
   stateName?: string;
-  county?: any | null;
   isModal?: boolean;
   locationsViewable: number;
   stateId?: string;
   region?: Region;
+  vaccinesFirst?: boolean;
 }) => {
   const tableRef = useRef<HTMLDivElement>(null);
 
@@ -92,30 +97,25 @@ const CompareMain = (props: {
   // Store these as state variables so we can replace them with stored params
   // when generating compare share images.
   const [stateId, setStateId] = useState(props.stateId);
-  const [county, setCounty] = useState(props.county);
 
-  let currentCounty;
-  if (county) {
-    const region = regions.findByFipsCode(county.full_fips_code);
-    assert(region, 'Missing region for county');
+  let currentCounty: SummaryForCompare | undefined;
+  if (region && region instanceof County) {
+    const summary = getSummaryFromFips(region.fipsCode);
+    assert(summary, 'Missing location summary for region');
     currentCounty = {
       region: region,
-      metricsInfo: getSummaryFromFips(county.full_fips_code),
+      metricsInfo: summary,
     };
   }
 
   useEffect(() => {
     setStateId(props.stateId);
-    setCounty(props.county);
-  }, [props.stateId, props.county]);
-
-  const defaultSortByPopulation = isHomepage ? true : false;
+    setRegion(props.region);
+  }, [props.stateId, props.region]);
 
   const [sorter, setSorter] = useState(Metric.CASE_DENSITY);
   const [sortDescending, setSortDescending] = useState(true);
-  const [sortByPopulation, setSortByPopulation] = useState(
-    defaultSortByPopulation,
-  );
+  const [sortByPopulation, setSortByPopulation] = useState(true);
   const [countyTypeToView, setCountyTypeToView] = useState(MetroFilter.ALL);
 
   // For homepage:
@@ -141,28 +141,23 @@ const CompareMain = (props: {
   // For location page:
   const [geoScope, setGeoScope] = useState(GeoScopeFilter.STATE);
 
-  function getLocationPageLocations(region?: Region): SummaryForCompare[] {
-    if (region && region instanceof MetroArea) {
+  function getLocationPageLocations(region: Region) {
+    const stateCode = getStateCode(region);
+    if (region instanceof MetroArea) {
       return getAllCountiesOfMetroArea(region);
     } else if (geoScope === GeoScopeFilter.NEARBY) {
-      return getNeighboringCounties(county.full_fips_code);
-    } else if (geoScope === GeoScopeFilter.STATE && stateId) {
-      return getLocationPageCountiesSelection(countyTypeToView, stateId);
+      return getNeighboringCounties(region.fipsCode);
+    } else if (geoScope === GeoScopeFilter.STATE && stateCode) {
+      return getLocationPageCountiesSelection(stateCode, countyTypeToView);
     } else {
       return getAllCountiesSelection(countyTypeToView);
     }
   }
 
-  const locationPageLocationsForCompare = getLocationPageLocations();
-
-  function getFinalLocations(region?: Region): SummaryForCompare[] {
-    if (!region) {
-      return homepageLocationsForCompare;
-    } else {
-      if (region instanceof MetroArea) {
-        return getAllCountiesOfMetroArea(region);
-      } else return locationPageLocationsForCompare;
-    }
+  function getFinalLocations(region?: Region) {
+    return region
+      ? getLocationPageLocations(region)
+      : homepageLocationsForCompare;
   }
 
   const locations = getFinalLocations(region);
@@ -199,7 +194,7 @@ const CompareMain = (props: {
     homepageScope,
     geoScope,
     stateId,
-    countyId: county?.full_fips_code,
+    countyId: currentCounty?.region.fipsCode,
     regionFips: region?.fipsCode,
   };
 
@@ -218,11 +213,12 @@ const CompareMain = (props: {
       if (stateId) {
         setStateId(stateId);
       }
-      if (countyId) {
-        setCounty(findCountyByFips(countyId));
-      }
       if (regionFips) {
         const regionFromFips = regions.findByFipsCodeStrict(regionFips);
+        setRegion(regionFromFips);
+      } else if (countyId) {
+        // Used by legacy share code to load region.
+        const regionFromFips = regions.findByFipsCodeStrict(countyId);
         setRegion(regionFromFips);
       }
 
@@ -244,15 +240,33 @@ const CompareMain = (props: {
     }
   }, [sharedParams]);
 
+  // If the user clicks on the banner or the announcement, we put vaccinations in the first column
+  // select states and sort by vaccination (desc)
+  useEffect(() => {
+    if (props.vaccinesFirst) {
+      setSorter(Metric.VACCINATIONS);
+      setSortByPopulation(false);
+      setSortDescending(true);
+      setHomepageSliderValue(
+        homepageScopeValueMap[HomepageLocationScope.STATE],
+      );
+      setHomepageScope(HomepageLocationScope.STATE);
+    }
+  }, [props.vaccinesFirst]);
+
   /* Mostly a check for MSAs with only 1 county. Won't render a compare table if there aren't at least 2 locations */
   if (!locations || locations.length < 2) {
     return null;
   }
 
+  // TODO(chris): pusing down use of county as far as possible, but underlying compare
+  // table code not yet ready to stop using county as an input, so querying the legacy Location
+  // county API here.
+  const locationCounty = findCountyByFips(currentCounty?.region.fipsCode || '');
   const sharedProps = {
     stateName: props.stateName,
     stateId,
-    county,
+    county: locationCounty,
     setShowModal,
     isHomepage,
     locations,
@@ -272,11 +286,12 @@ const CompareMain = (props: {
     homepageSliderValue,
     setHomepageSliderValue,
     region: region,
+    vaccinesFirst: props.vaccinesFirst,
   };
 
   return (
     <Fragment>
-      <DivForRef ref={tableRef}>
+      <DivForRef ref={tableRef} id="compare">
         <CompareTable
           {...sharedProps}
           locationsViewable={props.locationsViewable}

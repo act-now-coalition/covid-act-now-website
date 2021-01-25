@@ -67,7 +67,7 @@ const IndigenousDataCheckbox = (props: {
         </label>
         Learn more about{' '}
         <span onClick={onClickMethodology}>our methodology</span> or view{' '}
-        <Link to="/deep-dives/covid-spread-native-american">
+        <Link to="/covid-explained/covid-spread-native-american">
           our observations
         </Link>
         .
