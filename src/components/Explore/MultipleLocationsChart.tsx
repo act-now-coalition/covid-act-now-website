@@ -266,7 +266,7 @@ function formatCurrentValueLabels(
       ...labelInfoList,
       {
         x: lastPoint?.x ? getXPosition(lastPoint) : 0,
-        y: lastPoint?.y ? Math.max(getYPosition(lastPoint), currMaxY + 20) : 0,
+        y: lastPoint?.y ? Math.max(getYPosition(lastPoint), currMaxY + 14) : 0,
         label: currSeries.shortLabel,
         stroke: currSeries.params?.stroke || '#000',
       },

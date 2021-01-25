@@ -1,5 +1,4 @@
 import React from 'react';
-import { sortBy, last } from 'lodash';
 import { Series } from './interfaces';
 import SingleLocationChart from './SingleLocationChart';
 import MultipleLocationsChart from './MultipleLocationsChart';
