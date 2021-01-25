@@ -655,7 +655,9 @@ collections:
     fields:
       - label: State
         name: state
-        widget: string
+        widget: select
+        options:
+          - { label: "Massachussetts", value: "MA" }
       - label: More Info URL
         name: moreInfoUrl
         widget: string
