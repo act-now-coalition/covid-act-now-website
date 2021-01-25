@@ -1,8 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { COLOR_MAP } from 'common/colors';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import { Skeleton } from '@material-ui/lab';
 
 export const CircleIcon = styled(FiberManualRecordIcon)<{ $iconColor: string }>`
   color: ${({ $iconColor }) => $iconColor};
@@ -31,22 +32,44 @@ export const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
-export const Wrapper = styled.div`
+export const SharedWrapperStyles = css`
   display: flex;
   align-items: center;
   background-color: ${COLOR_MAP.LIGHTGRAY_BG};
   max-width: 330px;
   width: 100%;
   padding: 1.25rem 1.75rem 1.25rem 1.25rem;
-  cursor: pointer;
   border-radius: 4px;
+`;
+
+export const Wrapper = styled.div`
+  ${SharedWrapperStyles};
+  cursor: pointer;
 
   :hover {
-    background-color: ${COLOR_MAP.BLUE};
-    color: white;
-
-    ${ArrowIcon},${LevelDescription} {
-      color: white;
-    }
+    box-shadow: 0px 2px 24px rgba(0, 0, 0, 0.12);
   }
+`;
+
+/* For loading state: */
+
+export const SkeletonWrapper = styled.div`
+  ${SharedWrapperStyles};
+  height: 84px;
+
+  ${ArrowIcon} {
+    color: ${COLOR_MAP.GRAY_EXPLORE_CHART};
+  }
+`;
+
+export const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 1.25rem;
+`;
+
+export const StyledSkeletonRect = styled(Skeleton).attrs(props => ({
+  animation: 'wave',
+}))`
+  border-radius: 0;
 `;

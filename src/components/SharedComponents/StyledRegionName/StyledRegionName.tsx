@@ -10,11 +10,12 @@ import { Suffix, Wrapper } from './StyledRegionName.style';
 const StyledRegionName: React.FC<{
   showStateCode: boolean;
   region: Region;
-}> = ({ showStateCode, region }) => {
+  condensed?: boolean;
+}> = ({ showStateCode, region, condensed }) => {
   const [regionNameMain, regionSuffix] = getRegionNameForRow(region);
 
   return (
-    <Wrapper>
+    <Wrapper $condensed={condensed}>
       {regionNameMain} {regionSuffix && <Suffix>{regionSuffix}</Suffix>}
       {showStateCode && <Fragment>{getFormattedStateCode(region)}</Fragment>}
     </Wrapper>
