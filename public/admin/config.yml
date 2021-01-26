@@ -644,6 +644,31 @@ collections:
           - label: Metadata description
             name: metadataDescription
             widget: text
+
+  - label: Locations
+    name: locations
+    label_singular: Location
+    description: description
+    format: json
+    create: true
+    folder: public/cms-content/locations
+    identifier_field: locationName
+    fields:
+      - label: Location Name
+        name: locationName
+        widget: string
+      - label: Location Type
+        name: locationType
+        widget: select
+        options: 
+          - { label: "State", value: "state" }
+      - label: FIPS Code
+        name: fips
+        widget: string
+      - label: State Code
+        name: stateCode
+        widget: string
+
   - label: Vaccination Information
     name: vaccinationInfo
     label_singular: Region Vaccine information
@@ -659,13 +684,18 @@ collections:
             widget: list
             fields:
               - label: State
-                name: state
-                widget: select
-                options:
-                  - { label: "Massachussetts", value: "MA" }
-              - label: More Info URL
-                name: moreInfoUrl
+                name: fipsCode
+                widget: relation
+                collection: locations
+                value_field: fips
+                search_fields: ["stateCode", "locationName"]
+              - label: Hidden
+                name: hidden
+                widget: boolean
+                required: false
+              - label: Eligibility Information URL
+                name: eligibilityInfoUrl
                 widget: string
-              - label: Sign Up URL
-                name: signUpUrl
-                widget: string            
+              - label: Vaccination Signup URL
+                name: vaccinationSignupUrl
+                widget: string
