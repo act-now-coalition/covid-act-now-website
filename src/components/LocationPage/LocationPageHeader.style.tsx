@@ -191,6 +191,7 @@ export const HeaderButton = styled(Button).attrs(props => ({
 
     &:hover {
       border: 1px solid ${COLOR_MAP.BLUE};
+      background-color: white;
     }
   }
 
@@ -199,6 +200,7 @@ export const HeaderButton = styled(Button).attrs(props => ({
 
     &:hover {
       border: 1px solid ${COLOR_MAP.RED.BASE};
+      background-color: white;
     }
   }
 
