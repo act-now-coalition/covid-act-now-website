@@ -19,17 +19,17 @@ const NewMenuItem: React.FC<{ region: Region; zipCodeInput: string }> = ({
   const showStateCode = region instanceof County || region instanceof MetroArea;
   const fillColor = getLocationIconFillColor(region);
 
+  const subcopy = zipCodeInput
+    ? `Contains the zip code ${zipCodeInput}`
+    : `${formatEstimate(region.population)} population`;
+
   return (
     <StyledLink to={region.relativeUrl}>
       <Wrapper>
         <Icon fillColor={fillColor} />
         <InnerContent>
           <StyledRegionName showStateCode={showStateCode} region={region} />
-          {zipCodeInput ? (
-            <Subcopy>Contains the zip code {zipCodeInput}</Subcopy>
-          ) : (
-            <Subcopy>{formatEstimate(region.population)} population</Subcopy>
-          )}
+          <Subcopy>{subcopy}</Subcopy>
         </InnerContent>
         <ArrowIcon />
       </Wrapper>
