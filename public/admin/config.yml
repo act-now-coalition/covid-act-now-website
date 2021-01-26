@@ -651,8 +651,8 @@ collections:
     description: description
     format: json
     create: true
-    folder: public/cms-content/locations
-    identifier_field: fips
+    folder: src/cms-content/locations
+    identifier_field: locationName
     fields:
       - label: Location Name
         name: locationName
