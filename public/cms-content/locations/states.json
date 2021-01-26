@@ -5,5 +5,9 @@
       "fips": "25",
       "stateCode": "MA"
     }
-  ]
+  ],
+  "locationName": "Massachussetts",
+  "locationType": "state",
+  "fips": "25",
+  "stateCode": "MA"
 }
