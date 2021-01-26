@@ -1,4 +1,4 @@
-import regions from 'common/regions';
+// import regions from 'common/regions';
 
 export interface VaccinationLink {
   label: string;
@@ -6,9 +6,10 @@ export interface VaccinationLink {
 }
 
 // TODO: Get real data for the corresponding location
-export function getElegibilityLinksByFipsCode(fipsCode: string) {
-  const region = regions.findByFipsCode(fipsCode);
-
+export function getElegibilityLinksByFipsCode(
+  fipsCode: string,
+): VaccinationLink[] {
+  // const region = regions.findByFipsCode(fipsCode);
   return [
     {
       label: 'Cook County',
@@ -22,9 +23,10 @@ export function getElegibilityLinksByFipsCode(fipsCode: string) {
 }
 
 // TODO: Get real data for the corresponding location
-export function getVaccinationOptionsLinksByFipsCode(fipsCode: string) {
-  const region = regions.findByFipsCode(fipsCode);
-
+export function getVaccinationOptionsLinksByFipsCode(
+  fipsCode: string,
+): VaccinationLink[] {
+  // const region = regions.findByFipsCode(fipsCode);
   return [
     {
       label: 'Cook County',
