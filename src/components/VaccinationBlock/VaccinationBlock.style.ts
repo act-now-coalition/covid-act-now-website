@@ -1,5 +1,6 @@
 import Button from '@material-ui/core/Button';
 import styled from 'styled-components';
+import { COLOR_MAP } from 'common/colors';
 
 export const Container = styled.div``;
 
@@ -9,7 +10,7 @@ export const Heading2 = styled.h2`
   font-weight: bold;
   font-size: 24px;
   line-height: 1.5;
-  color: #000000;
+  color: ${COLOR_MAP.BLACK};
   margin-bottom: 8px;
 `;
 
@@ -19,13 +20,13 @@ export const Paragraph = styled.p`
   font-weight: normal;
   font-size: 16px;
   line-height: 1.5;
-  color: #4f4f4f;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
 `;
 
 export const FeedbackBox = styled(Paragraph)`
   font-size: 14px;
   padding: 16px;
-  background-color: #fafafa;
+  background-color: ${COLOR_MAP.LIGHTGRAY_BG};
 `;
 
 export const Heading3 = styled.h3`
@@ -43,10 +44,10 @@ export const LocationLink = styled(Button).attrs(props => ({
   disableFocusRipple: true,
   focusVisibleClassName: 'Button-focused',
 }))`
-  color: #00bfea;
+  color: ${COLOR_MAP.LIGHT_BLUE};
   text-transform: none;
 
-  border: 1px solid #f2f2f2;
+  border: 1px solid ${COLOR_MAP.LIGHTGRAY};
   border-radius: 3px;
 
   &.Button-focused {

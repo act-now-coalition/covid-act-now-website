@@ -31,6 +31,7 @@ export const COLOR_MAP = {
     DARK: '#0A3D31',
   },
   BLUE: '#3BBCE6',
+  LIGHT_BLUE: '#00bfea',
   GRAY_BODY_COPY: '#4f4f4f',
   GRAY_EXPLORE_CHART: '#e0e0e0',
   GRAY: {
@@ -43,6 +44,7 @@ export const COLOR_MAP = {
   LIGHTGRAY: '#f2f2f2',
   LIGHTGRAY_BG: '#fafafa',
   LIGHT_YELLOW: '#FFF1BF',
+  BLACK: '#000000',
 };
 
 export const LEVEL_COLOR = {
