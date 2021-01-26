@@ -652,7 +652,7 @@ collections:
     format: json
     create: true
     folder: public/cms-content/locations
-    identifier_field: locationName
+    identifier_field: fips
     fields:
       - label: Location Name
         name: locationName
@@ -683,12 +683,18 @@ collections:
             name: regions
             widget: list
             fields:
-              - label: State
-                name: fipsCode
+              - label: Location Name
+                name: locationName
+                widget: relation
+                collection: locations
+                value_field: locationName
+                search_fields: ["locationName"]
+              - label: Fips Code
+                name: fips
                 widget: relation
                 collection: locations
                 value_field: fips
-                search_fields: ["stateCode", "locationName"]
+                search_fields: ["locationName", "fips"]
               - label: Hidden
                 name: hidden
                 widget: boolean
