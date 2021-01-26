@@ -134,12 +134,12 @@
       "sectionIntro": "**% Vaccinated is the percentage of people in a given location that have started the vaccination process.**",
       "questions": [
         {
-          "question": "Why is % Vaccinated Important?",
+          "question": "Why is % vaccinated important?",
           "questionId": "why-percent-vaccinated-important",
           "answer": "The progress of the vaccine roll-out is a key metric for understanding when a return to normal might be possible. We don’t yet know what level of vaccination will be sufficient, so at this stage in the process (Jan 2020) we are focusing on distribution as the key metric. We will continue to work with our academic and government partners to evaluate the scientific evidence and will update our metric when appropriate."
         },
         {
-          "question": "How Does Covid Act Now Assess % Vaccinated?",
+          "question": "How does Covid Act Now assess % vaccinated?",
           "questionId": "how-covid-act-now-assess-percent-vaccinated",
           "answer": "Our primary source for federal and state data is the [CDC COVID Data Tracker](https://covid.cdc.gov/covid-data-tracker/#vaccinations). We supplement that federal data by scraping metro and county dashboards when available.\n\nOur top level metric tracks the percentage of people in each state who have started vaccination by receiving the first shot of the vaccine (“Shot 1”). For context, we also include in our graphs the percentage of people in each state who have completed vaccination by receiving the second shot of the vaccine (“Shot 2”)."
         },
