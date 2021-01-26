@@ -4,7 +4,7 @@
 backend:
   name: github
   repo: covid-projections/covid-projections
-  branch: cms-content-entry
+  branch: ghop02/add-vaccination-info-to-cms
   base_url: https://api.netlify.com
 
 media_folder: 'public/images_cms'
@@ -644,3 +644,28 @@ collections:
           - label: Metadata description
             name: metadataDescription
             widget: text
+  - label: Vaccination Information
+    name: vaccinationInfo
+    label_singular: Region Vaccine information
+    description: description
+    format: json
+    files:
+      - name: Vaccine Information-State
+        label: State Vaccine Information 
+        file: public/cms-content/vaccines/state.json
+        fields:
+          - label: Regions
+            name: regions
+            widget: list
+            fields:
+              - label: State
+                name: state
+                widget: select
+                options:
+                  - { label: "Massachussetts", value: "MA" }
+              - label: More Info URL
+                name: moreInfoUrl
+                widget: string
+              - label: Sign Up URL
+                name: signUpUrl
+                widget: string            
