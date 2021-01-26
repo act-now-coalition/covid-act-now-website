@@ -1,3 +1,5 @@
-import VaccineDetails from './VaccineDetails';
+import VaccineDetails, { VaccineDetailsContent } from './VaccineDetails';
+
+export { VaccineDetailsContent };
 
 export default VaccineDetails;

@@ -59,7 +59,6 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
-  const vaccineInfo = useStateVaccineData(region);
   const { pathname, hash } = useLocation();
   const isRecommendationsShareUrl = pathname.includes('recommendations');
 
@@ -151,7 +150,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
           region={region}
         />
         <MainContentInner>
-          <VaccineDetails region={region} data={vaccineInfo} />
+          <VaccineDetails region={region} />
         </MainContentInner>
         <CompareMain
           stateName={getStateName(region) || region.name} // rename prop

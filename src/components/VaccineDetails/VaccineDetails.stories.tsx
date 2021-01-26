@@ -2,6 +2,7 @@ import React from 'react';
 import { StateVaccineData } from 'cms-content/vaccines';
 import VaccineDetails from './index';
 import regions from 'common/regions';
+import { VaccineDetailsContent } from './VaccineDetails';
 
 export default {
   title: 'Vaccine Components/Vaccine Details',
@@ -17,5 +18,5 @@ const MA_DATA: StateVaccineData = {
 };
 
 export const StateVaccineDetails = () => (
-  <VaccineDetails data={MA_DATA} region={regions.findByFipsCodeStrict('25')} />
+  <VaccineDetailsContent data={MA_DATA} locationName="Massachussetts" />
 );
