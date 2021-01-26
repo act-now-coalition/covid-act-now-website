@@ -16,8 +16,8 @@ export const Subcopy = styled.span`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
 `;
 
-export const Icon = styled(FiberManualRecordIcon)<{ fillColor: string }>`
-  color: ${({ fillColor }) => fillColor};
+export const Icon = styled(FiberManualRecordIcon)<{ $fillColor: string }>`
+  color: ${({ $fillColor }) => $fillColor};
   font-size: 1.1rem;
   margin-right: 14px;
 `;

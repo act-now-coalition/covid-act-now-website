@@ -26,7 +26,7 @@ const NewMenuItem: React.FC<{ region: Region; zipCodeInput: string }> = ({
   return (
     <StyledLink to={region.relativeUrl}>
       <Wrapper>
-        <Icon fillColor={fillColor} />
+        <Icon $fillColor={fillColor} />
         <InnerContent>
           <StyledRegionName showStateCode={showStateCode} region={region} />
           <Subcopy>{subcopy}</Subcopy>
