@@ -275,11 +275,13 @@ function splitRegionName(regionName: string) {
   return [regionNameMain, regionSuffix];
 }
 
-export function getRegionNameForRow(region: Region) {
+export function getRegionNameForRow(region: Region, condensed?: boolean) {
   if (region instanceof State) {
     return [region.fullName];
   } else if (region instanceof County) {
-    return splitRegionName(region.abbreviation);
+    return condensed
+      ? splitRegionName(region.abbreviation)
+      : splitRegionName(region.name);
   } else if (region instanceof MetroArea) {
     return splitRegionName(region.shortName);
   } else {
