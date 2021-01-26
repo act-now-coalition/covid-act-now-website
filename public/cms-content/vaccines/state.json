@@ -7,6 +7,11 @@
       "stateCode": "LA",
       "eligibilityInfoUrl": "https://ldh.la.gov/covidvaccine/",
       "vaccinationSignupUrl": "https://ldh.la.gov/covidvaccine-locations/"
+    },
+    {
+      "stateCode": "LA",
+      "eligibilityInfoUrl": "asdf",
+      "vaccinationSignupUrl": "asdf"
     }
   ]
 }
