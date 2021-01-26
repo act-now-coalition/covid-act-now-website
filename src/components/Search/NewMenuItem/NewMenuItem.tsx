@@ -12,6 +12,7 @@ import { formatEstimate } from 'common/utils';
 import { getLocationIconFillColor } from 'components/Search';
 import { StyledRegionName } from 'components/SharedComponents';
 
+// todo (chelsi) - rename
 const NewMenuItem: React.FC<{ region: Region; zipCodeInput: string }> = ({
   region,
   zipCodeInput,
