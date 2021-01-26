@@ -652,7 +652,7 @@ collections:
     format: json
     create: true
     folder: src/cms-content/locations
-    identifier_field: locationName
+    identifier_field: stateCode
     fields:
       - label: Location Name
         name: locationName
