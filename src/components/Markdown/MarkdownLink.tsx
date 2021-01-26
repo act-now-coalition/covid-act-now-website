@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { HashLink } from 'react-router-hash-link';
 import { scrollWithOffset } from 'components/TableOfContents';
-import { isValidURL, isInternalLink } from './utils';
+import { isValidURL, isInternalLink, formatInternalLink } from './utils';
 import TwitterEmbed, { isTwitterEmbed } from './TwitterEmbed';
 import YouTubeEmbed, { isYouTubeEmbed } from './YoutubeEmbed';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
@@ -46,11 +46,19 @@ const MarkdownLink: React.FC<{
     );
   }
 
-  return isInternalLink(href) ? (
-    <HashLink to={href} scroll={element => scrollWithTimeout(element, -80)}>
-      {children}
-    </HashLink>
-  ) : (
+  if (isInternalLink(href)) {
+    const formattedUrl = formatInternalLink(href);
+    return (
+      <HashLink
+        to={formattedUrl}
+        scroll={element => scrollWithTimeout(element, -80)}
+      >
+        {children}
+      </HashLink>
+    );
+  }
+
+  return (
     <a href={href} target="_blank" rel="noopener noreferrer">
       {children}
     </a>
