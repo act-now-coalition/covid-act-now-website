@@ -24,6 +24,8 @@ import {
 import { mainContent } from 'cms-content/recommendations';
 import { getRecommendationsShareUrl } from 'common/urls';
 import { Region, State, getStateName } from 'common/regions';
+import VaccineDetails from 'components/VaccineDetails';
+import { useStateVaccineData } from 'cms-content/vaccines';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
@@ -57,6 +59,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
+  const vaccineInfo = useStateVaccineData(region);
   const { pathname, hash } = useLocation();
   const isRecommendationsShareUrl = pathname.includes('recommendations');
 
@@ -147,6 +150,9 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
           isMobile={isMobile}
           region={region}
         />
+        <MainContentInner>
+          <VaccineDetails region={region} data={vaccineInfo} />
+        </MainContentInner>
         <CompareMain
           stateName={getStateName(region) || region.name} // rename prop
           locationsViewable={6}

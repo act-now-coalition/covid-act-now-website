@@ -646,7 +646,7 @@ collections:
             widget: text
   - label: Vaccinations directory
     name: vaccines
-    folder: 'src/cms-content/vaccines'
+    folder: 'public/cms-content/vaccines'
     create: true
     label_singular: Vaccine
     description: description
