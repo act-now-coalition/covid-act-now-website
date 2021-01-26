@@ -42,12 +42,9 @@ const sanitizeSection = (section: FaqSection): FaqSection => ({
   sectionId: sanitizeID(section.sectionId),
 });
 
-// TODO(pablo): We are temporarily disabling vaccines, restore once the content is ready
 const sanitizeFaq = (faq: FaqContent): FaqContent => ({
   ...faq,
-  sections: faq.sections
-    .filter(section => section.sectionId !== 'vaccines')
-    .map(sanitizeSection),
+  sections: faq.sections.map(sanitizeSection),
 });
 
 export const faqContent = sanitizeFaq(faq) as FaqContent;
