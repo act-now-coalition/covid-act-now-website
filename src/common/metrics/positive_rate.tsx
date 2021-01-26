@@ -149,9 +149,9 @@ function renderDisclaimer(projections: Projections): React.ReactElement {
 
   return (
     <Fragment>
-      The World Health Organization recommends a positive test rate of less than
-      10%. The countries most successful in containing COVID have rates of 3% or
-      less.{' '}
+      The White House Coronavirus Task Force grades a positive test rate of more
+      than 10% as red. The countries most successful in containing COVID have
+      rates of 3% or less.{' '}
       {usingCMSData && (
         <React.Fragment>
           {METRIC_NAME} for {projections.locationName} comes from data
