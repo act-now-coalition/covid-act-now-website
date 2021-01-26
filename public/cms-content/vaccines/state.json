@@ -6,7 +6,8 @@
       "signUpUrl": "asdfsdf",
       "stateCode": "LA",
       "eligibilityInfoUrl": "https://ldh.la.gov/covidvaccine/",
-      "vaccinationSignupUrl": "https://ldh.la.gov/covidvaccine-locations/"
+      "vaccinationSignupUrl": "https://ldh.la.gov/covidvaccine-locations/",
+      "fipsCode": "25"
     }
   ]
 }
