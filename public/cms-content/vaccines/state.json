@@ -1,7 +1,7 @@
 {
   "regions": [
     {
-      "locationName": "Massachussetts",
+      "locationName": "Massachusetts",
       "fips": "25",
       "eligibilityInfoUrl": "url",
       "vaccinationSignupUrl": "url"
