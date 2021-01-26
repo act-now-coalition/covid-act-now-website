@@ -48,7 +48,12 @@ const MarianaIslands = ({ fill, onMouseEnter, onMouseLeave }) => {
 };
 
 const USACountyMap = React.memo(
-  ({ stateClickHandler, setTooltipContent, showCounties }) => {
+  ({
+    stateClickHandler,
+    countyClickHandler,
+    setTooltipContent,
+    showCounties,
+  }) => {
     const locationSummaries = useSummaries();
 
     const getFillColor = geo => {
@@ -72,14 +77,27 @@ const USACountyMap = React.memo(
                 <Geographies geography={geoCounties}>
                   {({ geographies }) =>
                     geographies.map(geo => {
+                      const fipsCode = geo.id;
+                      const county = regions.findByFipsCode(fipsCode);
                       return (
-                        <Geography
-                          key={geo.rsmKey}
-                          geography={geo}
-                          fill={getFillColor(geo)}
-                          strokeWidth={0}
-                          role="img"
-                        />
+                        <Link
+                          key={fipsCode}
+                          to={county?.relativeUrl}
+                          aria-label={county?.fullName}
+                        >
+                          <Geography
+                            key={geo.rsmKey}
+                            geography={geo}
+                            onClick={() => stateClickHandler(county.fullName)}
+                            onMouseEnter={() =>
+                              setTooltipContent(county.fullName)
+                            }
+                            onMouseLeave={onMouseLeave}
+                            fill={getFillColor(geo)}
+                            strokeWidth={0}
+                            role="img"
+                          />
+                        </Link>
                       );
                     })
                   }
@@ -122,15 +140,12 @@ const USACountyMap = React.memo(
                           <Geography
                             key={geo.rsmKey}
                             geography={geo}
-                            onMouseEnter={() =>
-                              setTooltipContent(state.fullName)
-                            }
-                            onMouseLeave={onMouseLeave}
                             onClick={() => stateClickHandler(state.fullName)}
                             fill={getFillColor(geo)}
                             fillOpacity={showCounties ? 0 : 1}
                             stroke="white"
                             role="img"
+                            style={{ default: { pointerEvents: 'none' } }}
                           />
                         </Link>
                       ) : null;

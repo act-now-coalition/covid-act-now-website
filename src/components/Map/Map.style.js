@@ -9,7 +9,7 @@ export const USCountyMapWrapper = styled.div``;
 
 export const USStateMapWrapper = styled.div`
   path:hover {
-    fill-opacity: ${props => (props.showCounties ? 0.25 : 0.8)};
+    fill-opacity: ${props => 0.8};
     fill: ${props => (props.showCounties ? '#fff' : undefined)};
     cursor: pointer;
   }

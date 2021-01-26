@@ -39,7 +39,7 @@ function getPageDescription() {
 export default function HomePage() {
   const shareBlockRef = useRef(null);
   const location = useLocation();
-  const [showCounties, setShowCounties] = useState(false);
+  const [showCounties, setShowCounties] = useState(true);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
