@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import SidebarContents from 'components/SidebarContents';
-import ShareBlock from 'components/ShareBlock/ShareBlock';
+import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import { TocItem } from 'cms-content/utils';
 import {
   PageContainer,
@@ -26,7 +26,7 @@ const PageContent: React.FC<{ sidebarItems: TocItem[] }> = ({
           </Sidebar>
         </DesktopOnly>
       </PageContainer>
-      <ShareBlock />
+      <ShareModelBlock />
     </Fragment>
   );
 };

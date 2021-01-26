@@ -177,9 +177,9 @@ const Recommend = (props: {
         onClickOpenModal={openModalRecommendations}
       />
       <RecommendationsContainer>
-        {recommendationsColumns.map((half, i) => {
+        {recommendationsColumns.map((half, j) => {
           return (
-            <Column>
+            <Column key={`half-${j}`}>
               {half.map((recommendation, i) => {
                 const highlight =
                   recommendation.recommendationInfo.category ===

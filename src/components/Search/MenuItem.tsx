@@ -13,10 +13,7 @@ const MenuItem: React.FC<{ region: Region; zipCodeInput: string }> = ({
   region,
   zipCodeInput,
 }) => {
-  const locationLabel =
-    region instanceof MetroArea
-      ? `${region.shortName}, ${region.stateCodes}`
-      : region.shortName;
+  const locationLabel = getOptionLabel(region);
   return (
     <StyledLink to={region.relativeUrl}>
       <MenuItemWrapper>
@@ -32,5 +29,11 @@ const MenuItem: React.FC<{ region: Region; zipCodeInput: string }> = ({
     </StyledLink>
   );
 };
+
+export function getOptionLabel(region: Region) {
+  return region instanceof MetroArea
+    ? `${region.shortName}, ${region.stateCodes}`
+    : region.shortName;
+}
 
 export default MenuItem;
