@@ -11,9 +11,10 @@ export function isInternalLink(href: string) {
 export function formatInternalLink(href: string) {
   if (isInternalUrlWithCan(href)) {
     const canUrl = new URL(href);
-    return `${canUrl.pathname}${canUrl.hash}`;
+    const formatted = `${canUrl.pathname}${canUrl.hash}`;
+    return formatted.toLowerCase();
   } else {
-    return href;
+    return href.toLowerCase();
   }
 }
 
