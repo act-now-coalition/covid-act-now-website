@@ -21,7 +21,6 @@ import CompareMain from 'components/Compare/CompareMain';
 import Explore from 'components/Explore';
 import { SwitchComponent } from 'components/SharedComponents';
 import { formatMetatagDate } from 'common/utils';
-import { getLocationFipsCodesForExplore } from './utils';
 import { VaccinationsBanner } from 'components/Banner';
 import SearchAutocomplete from 'components/Search';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
@@ -29,11 +28,11 @@ import { getFilterLimit } from 'components/Search';
 import { getFinalAutocompleteLocations } from 'common/regions';
 import { getNationalText } from 'components/NationalText';
 import HomepageStructuredData from 'screens/HomePage/HomepageStructuredData';
-import { useGeolocation } from 'common/hooks';
+import { useGeolocation, useGeolocationInExplore } from 'common/hooks';
 
 function getPageDescription() {
   const date = formatMetatagDate();
-  return `${date} Explore our interactive U.S. COVID map for the latest cases, deaths, hospitalizations, and other key metrics. 50 States. 390+ Metros. 3200+ Counties.`;
+  return `${date} Explore our interactive U.S. COVID Map for the latest data on Cases, Vaccinations, Deaths, Positivity rate, and ICU capacity for your State, City, or County.`;
 }
 
 export default function HomePage() {
@@ -47,6 +46,7 @@ export default function HomePage() {
   const indicatorsRef = useRef(null);
 
   const geolocation = useGeolocation();
+  const initialFipsForExplore = useGeolocationInExplore(5, geolocation);
 
   // Location hash is uniquely set from vaccination banner button click
   const compareShowVaccinationsFirst = location.hash === '#compare';
@@ -65,8 +65,6 @@ export default function HomePage() {
     }
   }, [location.pathname, shareBlockRef]);
 
-  const [initialFipsList] = useState(getLocationFipsCodesForExplore(5));
-
   const exploreSectionRef = useRef(null);
 
   const onClickSwitch = (newShowCounties: boolean) => {
@@ -83,7 +81,7 @@ export default function HomePage() {
       <EnsureSharingIdInUrl />
       <AppMetaTags
         canonicalUrl="/"
-        pageTitle="Realtime U.S. COVID Map & Risk Levels"
+        pageTitle="Realtime U.S. COVID Map & Vaccine Tracker"
         pageDescription={getPageDescription()}
       />
       <HomepageStructuredData />
@@ -140,7 +138,7 @@ export default function HomePage() {
             <Section ref={exploreSectionRef}>
               <Explore
                 title="Cases, Deaths and Hospitalizations"
-                initialFipsList={initialFipsList}
+                initialFipsList={initialFipsForExplore}
                 initialChartIndigenousPopulations={false}
                 nationalSummaryText={getNationalText()}
               />

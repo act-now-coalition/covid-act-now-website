@@ -3,7 +3,7 @@
   Returns either undefined or an object with user's zipCode, stateCode, and country
 
   Note: only works on prod + main staging. Won't work locally or in preview links.
-  Hardcode ipData to test UI.
+  Hardcode ipData (zipCode, stateCode, country) to test UI.
 */
 
 import { useEffect, useState } from 'react';
