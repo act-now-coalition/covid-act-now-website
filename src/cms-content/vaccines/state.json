@@ -396,7 +396,7 @@
       "hidden": false,
       "stateCode": "WV",
       "eligibilityInfoUrl": "https://dhhr.wv.gov/COVID-19/Pages/Vaccine.aspx",
-      "vaccinationSignupUrl": "https://wvvaccine.s3.amazonaws.com/OverviewofWVCOVID-19VaccineAllocationandRegistrationProcessforPriorityGroups-1.8.2021.pdf",
+      "vaccinationSignupUrl": "",
       "locationName": "West Virginia",
       "fips": "54"
     },
