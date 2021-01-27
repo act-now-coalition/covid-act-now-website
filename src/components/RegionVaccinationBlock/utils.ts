@@ -22,9 +22,9 @@ export const getVaccinationRegions = (region: Region): Region[] => {
       metro.counties.map(county => county.fipsCode).includes(county.fipsCode),
     );
     if (metro) {
-      return [region, metro, region.state];
+      return [county, metro, region.state];
     } else {
-      return [region, region.state];
+      return [county, region.state];
     }
   }
 
