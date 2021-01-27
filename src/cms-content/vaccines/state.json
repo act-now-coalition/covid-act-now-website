@@ -173,8 +173,8 @@
       "stateCode": "MS",
       "eligibilityInfoUrl": "https://www.mass.gov/info-details/covid-19-vaccination-program",
       "vaccinationSignupUrl": "https://www.mass.gov/info-details/covid-19-vaccine-locations-for-individuals-currently-eligible-to-be-vaccinated",
-      "locationName": "Mississippi",
-      "fips": "28"
+      "locationName": "Massachusetts",
+      "fips": "25"
     },
     {
       "hidden": false,
