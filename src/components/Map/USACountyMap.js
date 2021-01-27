@@ -122,14 +122,14 @@ const USACountyMap = React.memo(
                           <Geography
                             key={geo.rsmKey}
                             geography={geo}
-                            onMouseEnter={
-                              () => setTooltipContent(state.fullName) // state tooltip content
+                            onMouseEnter={() =>
+                              setTooltipContent(state.fullName)
                             }
                             onMouseLeave={onMouseLeave}
                             onClick={() => stateClickHandler(state.fullName)}
                             fill={getFillColor(geo)}
                             fillOpacity={showCounties ? 0 : 1}
-                            stroke="white" // outline of states
+                            stroke="white"
                             role="img"
                           />
                         </Link>

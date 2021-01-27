@@ -4,11 +4,6 @@ import { COLOR_MAP } from 'common/colors';
 import { mobileBreakpoint } from 'assets/theme/sizes';
 import SearchIcon from '@material-ui/icons/Search';
 
-export const OldWrapper = styled.div`
-  box-shadow: 0px 2px 24px rgba(0, 0, 0, 0.12);
-  background: #c4c4c4;
-`;
-
 export const StyledTextField = styled(TextField).attrs(props => ({
   variant: 'outlined',
 }))<{ $isOpen: boolean }>`

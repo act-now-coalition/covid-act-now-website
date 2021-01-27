@@ -118,7 +118,6 @@ const HomepageSearchAutocomplete: React.FC<{
             setHideMapToggle(true);
           }
         }}
-        // open={true}
         onClose={() => {
           setIsOpen(false);
           if (setHideMapToggle) {

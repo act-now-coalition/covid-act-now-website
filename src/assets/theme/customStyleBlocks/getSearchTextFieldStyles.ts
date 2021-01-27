@@ -1,5 +1,6 @@
 /**
  * TextField styles specific to homepage searchbar
+ * These styles need to be a bit repetative to override MUI's
  */
 import { makeStyles } from '@material-ui/core/styles';
 import { COLOR_MAP } from 'common/colors';
