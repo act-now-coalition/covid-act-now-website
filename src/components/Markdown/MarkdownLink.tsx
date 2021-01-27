@@ -17,7 +17,7 @@ import ExternalLink from 'components/ExternalLink';
 const scrollWithTimeout = (element: any, offset: number) => {
   return setTimeout(() => {
     scrollWithOffset(element, offset);
-  }, 350);
+  }, 400);
 };
 
 const MarkdownLink: React.FC<{
