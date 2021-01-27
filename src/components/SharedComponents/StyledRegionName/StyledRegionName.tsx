@@ -1,5 +1,5 @@
 /**
- * Region name styled with multiple font weights + an abbreviated suffix (ie. County -> Co.).
+ * Region name styled with multiple font weights.
  * Used in Compare table + geolocated region links on the homepage.
  */
 import React, { Fragment } from 'react';
@@ -12,7 +12,7 @@ const StyledRegionName: React.FC<{
   region: Region;
   condensed?: boolean;
 }> = ({ showStateCode, region, condensed }) => {
-  const [regionNameMain, regionSuffix] = getRegionNameForRow(region);
+  const [regionNameMain, regionSuffix] = getRegionNameForRow(region, condensed);
 
   return (
     <Wrapper $condensed={condensed}>

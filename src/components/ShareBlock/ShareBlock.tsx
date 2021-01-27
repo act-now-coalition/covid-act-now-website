@@ -93,7 +93,7 @@ const ShareBlock = ({
         <ShareRowContentArea
           isMatchingProjectionsRoute={isMatchingProjectionsRoute !== null}
         >
-          <SocialTextAreaWrapper>
+          <SocialTextAreaWrapper id="shareblock">
             <SocialTextArea>
               <ShareInstructionHeader>
                 Share COVID risk in your community

@@ -21,7 +21,6 @@ import {
   modalContent,
   FedLevel,
   HarvardLevel,
-  RecommendCategory,
 } from 'cms-content/recommendations';
 import SmallShareButtons from 'components/SmallShareButtons';
 import RecommendModal from './RecommendModal';
