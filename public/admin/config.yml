@@ -651,23 +651,26 @@ collections:
     description: description
     format: json
     create: true
-    folder: src/cms-content/locations
-    identifier_field: stateCode
-    fields:
-      - label: Location Name
-        name: locationName
-        widget: string
-      - label: Location Type
-        name: locationType
-        widget: select
-        options: 
-          - { label: "State", value: "state" }
-      - label: FIPS Code
-        name: fips
-        widget: string
-      - label: State Code
-        name: stateCode
-        widget: string
+    files:
+      - label: States
+        name: states
+        file: src/cms-content/locations/state.json
+        fields:
+          - label: Regions
+            name: regions
+            widget: list
+            fields:
+              - label: Location Name
+                name: locationName
+                widget: string
+              - label: Location Type
+                name: locationType
+                widget: select
+                options: 
+                  - { label: "State", value: "state" }
+              - label: FIPS Code
+                name: fips
+                widget: string
 
   - label: Vaccination Information
     name: vaccinationInfo
@@ -687,14 +690,16 @@ collections:
                 name: locationName
                 widget: relation
                 collection: locations
-                value_field: locationName
-                search_fields: ["locationName"]
+                value_field: regions.*.locationName
+                file_name: states.json
+                search_fields: ["regions.*.locationName"]
               - label: Fips Code
                 name: fips
                 widget: relation
                 collection: locations
-                value_field: fips
-                search_fields: ["locationName", "fips"]
+                file_name: states.json
+                value_field: regions.*.fips
+                search_fields: ["regions.*.locationName", "regions.*.fips"]
               - label: Hidden
                 name: hidden
                 widget: boolean
@@ -704,4 +709,5 @@ collections:
                 widget: string
               - label: Vaccination Signup URL
                 name: vaccinationSignupUrl
+                required: false
                 widget: string
