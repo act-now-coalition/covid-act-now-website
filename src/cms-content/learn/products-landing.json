@@ -19,7 +19,7 @@
       "productName": "Embed",
       "productId": "embed",
       "productSubtitle": "Allows you to embed our data into your website",
-      "productDescription": "We want our data and modeling to be available to all who are interested, including by third parties. That’s why we’ve made our data embeddable by other publishers.\n\nRead our [blog post](https://blog.covidactnow.org/data-feeds/) for instructions for how to use our embed. Here's what it looks like live:"
+      "productDescription": "We want our data and modeling to be available to all who are interested, including by third parties. That’s why we’ve made our data embeddable by other publishers.\n\nRead our [blog post](https://blog.covidactnow.org/data-feeds/) for instructions for how to use our embed. Here's what it looks like live: \n\n [Covid Act Now Embed - Dallas metro area](https://covidactnow.org/embed/us/fips/19100)\n\n"
     }
   ],
   "metadataTitle": "Tools",

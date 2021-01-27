@@ -131,7 +131,6 @@ export const EmbedWrapper = styled(Box)`
   align-items: center;
   flex-direction: column;
   border: 1px solid rgba(0, 0, 0, 0.12);
-  margin: 12px;
   border-radius: 4px;
 
   @media screen and (min-width: 600px) {
