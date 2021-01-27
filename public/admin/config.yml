@@ -645,33 +645,6 @@ collections:
             name: metadataDescription
             widget: text
 
-  - label: Locations
-    name: locations
-    label_singular: Location
-    description: description
-    format: json
-    create: true
-    files:
-      - label: States
-        name: states
-        file: src/cms-content/locations/state.json
-        fields:
-          - label: Regions
-            name: regions
-            widget: list
-            fields:
-              - label: Location Name
-                name: locationName
-                widget: string
-              - label: Location Type
-                name: locationType
-                widget: select
-                options: 
-                  - { label: "State", value: "state" }
-              - label: FIPS Code
-                name: fips
-                widget: string
-
   - label: Vaccination Information
     name: vaccinationInfo
     label_singular: Region Vaccine information
@@ -688,18 +661,10 @@ collections:
             fields:
               - label: Location Name
                 name: locationName
-                widget: relation
-                collection: locations
-                value_field: regions.*.locationName
-                file_name: states.json
-                search_fields: ["regions.*.locationName"]
+                widget: string
               - label: Fips Code
                 name: fips
-                widget: relation
-                collection: locations
-                file_name: states.json
-                value_field: regions.*.fips
-                search_fields: ["regions.*.locationName", "regions.*.fips"]
+                widget: string
               - label: Hidden
                 name: hidden
                 widget: boolean
