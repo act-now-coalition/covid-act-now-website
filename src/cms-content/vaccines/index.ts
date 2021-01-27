@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getStateCode, Region, RegionType, State } from 'common/regions';
+import { Region, RegionType } from 'common/regions';
 
 export interface RegionVaccinationInfo {
   hidden: boolean;
