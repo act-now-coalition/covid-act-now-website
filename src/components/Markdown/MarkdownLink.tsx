@@ -50,7 +50,7 @@ const MarkdownLink: React.FC<{
           src={href}
           title="Covid Act Now"
           width="400"
-          height="440"
+          height="390"
           frameBorder="0"
           scrolling="no"
         />
