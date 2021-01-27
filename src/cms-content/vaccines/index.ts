@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import { Region, RegionType } from 'common/regions';
+import { Region } from 'common/regions';
 import STATE_VACCINE_DATA from './state.json';
 import METRO_VACCINE_DATA from './msa.json';
 import { fromPairs } from 'lodash';
