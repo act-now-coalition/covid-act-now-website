@@ -11,7 +11,7 @@ const StateVaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
   const eligibilityUrl = '';
   const optionsUrl = '';
 
-  if (!eligibilityUrl || !optionsUrl) {
+  if (!eligibilityUrl && !optionsUrl) {
     return null;
   }
 
@@ -30,7 +30,7 @@ const StateVaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() =>
-                trackVaccinationLink(`Eligibiligy: ${region.fullName}`)
+                trackVaccinationLink(`Eligibility: ${region.fullName}`)
               }
             >
               Check eligibility
