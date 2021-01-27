@@ -35,15 +35,19 @@ export const useRegionTypeVaccineData = (regionType: RegionType) => {
   return data;
 };
 
-export const useRegionVaccineData = (region: Region) => {
-  const [data, setData] = useState<RegionVaccinationInfo>();
-  const regionTypeData = useRegionTypeVaccineData(region.regionType);
+export const useRegionVaccineData = (
+  regionType: RegionType,
+  regions: Region[],
+) => {
+  const [data, setData] = useState<RegionVaccinationInfo[]>();
+  const regionTypeData = useRegionTypeVaccineData(regionType);
   useEffect(() => {
-    const matching = regionTypeData?.find(
-      item => item.fips === region.fipsCode,
-    );
+    const matching =
+      regionTypeData?.filter(item =>
+        regions.map(region => region.fipsCode).includes(item.fips),
+      ) || [];
     setData(matching);
-  }, [regionTypeData, region.fipsCode]);
+  }, [regionTypeData, regions]);
 
   return data;
 };

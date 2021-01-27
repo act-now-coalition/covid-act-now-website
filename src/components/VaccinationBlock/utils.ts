@@ -1,14 +1,43 @@
-// import regions from 'common/regions';
+import { useRegionVaccineData } from 'cms-content/vaccines';
+import regions, { Region, State, County, MetroArea } from 'common/regions';
+import { fail } from 'common/utils';
 
 export interface VaccinationLink {
   label: string;
   url: string;
 }
 
+/**
+ * Get regions to show
+ * @param region
+ */
+export const getVaccinationRegions = (region: Region): Region[] => {
+  if (region instanceof State) {
+    return [region];
+  }
+
+  if (region instanceof County) {
+    const county = region as County;
+    const metro = regions.metroAreas.find(metro =>
+      metro.counties.map(county => county.fipsCode).includes(county.fipsCode),
+    );
+    if (metro) {
+      return [region, metro, region.state];
+    } else {
+      return [region, region.state];
+    }
+  }
+
+  if (region instanceof MetroArea) {
+    const metro = region as MetroArea;
+    return [metro, ...metro.states];
+  }
+
+  fail('Unsupported type');
+};
+
 // TODO: Get real data for the corresponding location
-export function getElegibilityLinksByFipsCode(
-  fipsCode: string,
-): VaccinationLink[] {
+export function getElegibilityLinksByRegion(region: Region): VaccinationLink[] {
   // const region = regions.findByFipsCode(fipsCode);
   return [
     {

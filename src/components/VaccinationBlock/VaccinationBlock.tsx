@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Region } from 'common/regions';
+import { Region, RegionType } from 'common/regions';
 import {
   Heading2,
   Heading3,
@@ -10,21 +10,36 @@ import {
   ButtonContainer,
 } from './VaccinationBlock.style';
 import {
+  getVaccinationRegions,
   VaccinationLink,
-  getElegibilityLinksByFipsCode,
-  getVaccinationOptionsLinksByFipsCode,
+  //getElegibilityLinksByFipsCode,
+  //getVaccinationOptionsLinksByFipsCode,
 } from './utils';
+import { useRegionVaccineData } from 'cms-content/vaccines';
 
 const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
-  const eligibilityLinks = getElegibilityLinksByFipsCode(region.fipsCode);
-  const vaccinationOptionsLinks = getVaccinationOptionsLinksByFipsCode(
-    region.fipsCode,
+  const vaccinationRegions = getVaccinationRegions(region);
+
+  // Currently only supporting state vaccines, when county and metro data are
+  // in the cms, also include here.
+  const vaccinationRegionsData = useRegionVaccineData(
+    RegionType.STATE,
+    vaccinationRegions,
   );
-  // TODO: Return null if there are no links
-  if (eligibilityLinks.length === 0 || vaccinationOptionsLinks.length === 0) {
+
+  if (!vaccinationRegionsData) {
     return null;
   }
-
+  const eligibilityLinks: VaccinationLink[] = vaccinationRegionsData.map(
+    data => {
+      return { label: data.locationName, url: data.eligibilityInfoUrl };
+    },
+  );
+  const vaccinationOptionsLinks: VaccinationLink[] = vaccinationRegionsData.map(
+    data => {
+      return { label: data.locationName, url: data.vaccinationSignupUrl || '' };
+    },
+  );
   return (
     <Container>
       <Heading2>How to get vaccinated</Heading2>
