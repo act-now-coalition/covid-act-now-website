@@ -39,14 +39,14 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
         <VaccinationLinksBlock
           title="Check eligibility"
           links={eligibilityLinks}
-          trackingLinkPrefix="Eligibility: "
+          trackingLinkPrefix="Eligibility"
         />
       )}
       {vaccinationOptionsLinks && (
         <VaccinationLinksBlock
           title="See vaccination options"
           links={vaccinationOptionsLinks}
-          trackingLinkPrefix="Options: "
+          trackingLinkPrefix="Options"
         />
       )}
       <FeedbackBox>
@@ -70,7 +70,9 @@ const VaccinationLinksBlock: React.FC<{
         <LinkButton
           href={url}
           key={label}
-          onClick={() => trackVaccinationLink(`${trackingLinkPrefix}${label}`)}
+          onClick={() =>
+            trackVaccinationLink(`${trackingLinkPrefix}: ${label}`)
+          }
           target="_blank"
           rel="noopener noreferrer"
         >
