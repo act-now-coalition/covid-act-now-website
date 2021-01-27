@@ -243,7 +243,7 @@
     {
       "hidden": false,
       "stateCode": "NJ",
-      "eligibilityInfoUrl": "https://covid19.nj.gov/pages/vaccine",
+      "eligibilityInfoUrl": "https://covid19.nj.gov/faqs/nj-information/slowing-the-spread/who-is-eligible-for-vaccination-in-new-jersey-who-is-included-in-the-vaccination-phases",
       "vaccinationSignupUrl": "https://covid19.nj.gov/pages/covid-19-vaccine-locations-for-eligible-recipients",
       "locationName": "New Jersey",
       "fips": "34"
