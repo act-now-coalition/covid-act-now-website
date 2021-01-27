@@ -1,17 +1,12 @@
 import React, { Fragment } from 'react';
-import { Region, RegionType } from 'common/regions';
+import { Region } from 'common/regions';
 import {
   Heading2,
   Heading3,
   Paragraph,
   ButtonContainer,
 } from './RegionVaccinationBlock.style';
-import {
-  getVaccinationRegions,
-  VaccinationLink,
-  //getElegibilityLinksByFipsCode,
-  //getVaccinationOptionsLinksByFipsCode,
-} from './utils';
+import { getVaccinationRegions, VaccinationLink } from './utils';
 import LinkButton from './LinkButton';
 import {
   RegionVaccinationInfo,
@@ -35,11 +30,16 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
       return { label: data.locationName, url: data.eligibilityInfoUrl };
     },
   );
-  const vaccinationOptionsLinks: VaccinationLink[] = vaccinationRegionsData.map(
-    data => {
-      return { label: data.locationName, url: data.vaccinationSignupUrl || '' };
-    },
-  );
+  const vaccinationOptionsLinks: VaccinationLink[] = vaccinationRegionsData
+    .map(data =>
+      data.vaccinationSignupUrl
+        ? {
+            label: data.locationName,
+            url: data.vaccinationSignupUrl,
+          }
+        : null,
+    )
+    .filter((link): link is VaccinationLink => link !== null);
   return (
     <Fragment>
       <Heading2>How to get vaccinated</Heading2>
