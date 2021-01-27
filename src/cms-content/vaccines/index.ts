@@ -26,12 +26,14 @@ const fetchRegionTypeVaccineData = (regionType: RegionType) => {
 export const useRegionTypeVaccineData = (regionType: RegionType) => {
   const [data, setData] = useState<RegionVaccinationInfo[]>();
   useEffect(() => {
-    fetchRegionTypeVaccineData(regionType)?.then(
-      (value: RegionTypeVaccinationInfo) => {
-        setData(value.regions);
-      },
-    );
-  }, [regionType]);
+    if (!data) {
+      fetchRegionTypeVaccineData(regionType)?.then(
+        (value: RegionTypeVaccinationInfo) => {
+          setData(value.regions);
+        },
+      );
+    }
+  }, [setData, data, regionType]);
   return data;
 };
 
@@ -41,15 +43,13 @@ export const useRegionsVaccineData = (
 ) => {
   const [data, setData] = useState<RegionVaccinationInfo[]>();
   const regionTypeData = useRegionTypeVaccineData(regionType);
+  const regionsFipsList = regions.map(region => region.fipsCode).join(',');
   useEffect(() => {
-    if (!data) {
-      const matching =
-        regionTypeData?.filter(item =>
-          regions.map(region => region.fipsCode).includes(item.fips),
-        ) || [];
-      setData(matching);
-    }
-  }, [setData, data, regionTypeData, regions]);
+    const fipsList = regionsFipsList.split(',');
+    const matching =
+      regionTypeData?.filter(item => fipsList.includes(item.fips)) || [];
+    setData(matching);
+  }, [setData, regionTypeData, regionsFipsList]);
 
   return data;
 };
@@ -58,13 +58,11 @@ export const useRegionVaccineData = (region: Region) => {
   const [data, setData] = useState<RegionVaccinationInfo>();
   const regionTypeData = useRegionTypeVaccineData(region.regionType);
   useEffect(() => {
-    if (!data) {
-      const matching = regionTypeData?.find(
-        item => item.fips === region.fipsCode,
-      );
-      setData(matching);
-    }
-  }, [setData, data, regionTypeData, region]);
+    const matching = regionTypeData?.find(
+      item => item.fips === region.fipsCode,
+    );
+    setData(matching);
+  }, [setData, regionTypeData, region]);
 
   return data;
 };
