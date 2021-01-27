@@ -1,11 +1,17 @@
 import React, { Fragment } from 'react';
 import { HashLink } from 'react-router-hash-link';
 import { scrollWithOffset } from 'components/TableOfContents';
-import { isValidURL, isInternalLink, formatInternalLink } from './utils';
+import {
+  isValidURL,
+  isInternalLink,
+  isInternalEmbed,
+  formatInternalLink,
+} from './utils';
 import TwitterEmbed, { isTwitterEmbed } from './TwitterEmbed';
 import YouTubeEmbed, { isYouTubeEmbed } from './YoutubeEmbed';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
 import ExternalLink from 'components/ExternalLink';
+import { CenterEmbed } from './Markdown.style';
 /**
  * Custom hyperlink for Markdown content. If the link is external, open it on
  * a new tab. If the link is internal, use the HashLink component to render
@@ -37,8 +43,23 @@ const MarkdownLink: React.FC<{
     return <YouTubeEmbed embedUrl={href} />;
   }
 
-  // HACK to track clicks on the exposure notification recommendation
+  if (isInternalEmbed(href)) {
+    return (
+      <CenterEmbed>
+        <iframe
+          src={href}
+          title="Covid Act Now"
+          width="400"
+          height="390"
+          frameBorder="0"
+          scrolling="no"
+        />
+      </CenterEmbed>
+    );
+  }
+
   if (href === 'https://g.co/ens') {
+    // HACK to track clicks on the exposure notification recommendation
     return (
       <ExternalLink href={href} onClick={trackExposureClickRecommend}>
         {children}
