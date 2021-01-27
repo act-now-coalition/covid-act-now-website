@@ -5,13 +5,12 @@ import { Heading2, Paragraph } from './RegionVaccinationBlock.style';
 import FeedbackBox from './FeedbackBox';
 import { StateLinkButton } from './StateVaccionationBlock.style';
 import { trackVaccinationLink } from './utils';
+import { getVaccinationDataByRegion } from 'cms-content/vaccines';
 
 const StateVaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
-  // TODO: Update with the eligibility and options links
-  const eligibilityUrl = '';
-  const optionsUrl = '';
+  const vaccinationData = getVaccinationDataByRegion(region);
 
-  if (!eligibilityUrl && !optionsUrl) {
+  if (!vaccinationData) {
     return null;
   }
 
@@ -23,10 +22,10 @@ const StateVaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
         get on a waitlist.
       </Paragraph>
       <Grid container spacing={1}>
-        {eligibilityUrl && (
+        {vaccinationData.eligibilityInfoUrl && (
           <Grid item xs={12} md={6} key="eligibility">
             <StateLinkButton
-              href={eligibilityUrl}
+              href={vaccinationData.eligibilityInfoUrl}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() =>
@@ -37,10 +36,10 @@ const StateVaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
             </StateLinkButton>
           </Grid>
         )}
-        {optionsUrl && (
+        {vaccinationData.vaccinationSignupUrl && (
           <Grid item xs={12} md={6} key="see-options">
             <StateLinkButton
-              href={optionsUrl}
+              href={vaccinationData.vaccinationSignupUrl}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() =>

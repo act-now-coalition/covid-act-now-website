@@ -11,6 +11,7 @@ import {
 import ExternalLink from 'components/ExternalLink';
 import Thermometer from 'components/Thermometer';
 import { MetricDefinition } from './interfaces';
+import moment from 'moment';
 
 export const CaseIncidenceMetric: MetricDefinition = {
   renderStatus,
@@ -94,36 +95,36 @@ function renderStatus(projections: Projections): React.ReactElement {
     newCasesPerDay >= 0.1 && newCasesPerDay < 1
       ? formatDecimal(newCasesPerDay, 1)
       : formatInteger(newCasesPerDay);
-  const newCasesPerYear = 365 * newCasesPerDay;
-  const estimatedNewInfectionsPerYear =
-    ESTIMATED_INFECTIONS_FACTOR * newCasesPerYear;
+  const threeMonthsFromNow = moment().add(3, 'months');
+  const daysTil3MonthsFromNow = threeMonthsFromNow.diff(moment(), 'days');
+  const newCasesPer3Months = daysTil3MonthsFromNow * newCasesPerDay;
+  const estimatedNewInfectionsIn3Months =
+    ESTIMATED_INFECTIONS_FACTOR * newCasesPer3Months;
 
   // Makes sure estimated # of cases and infections over the next year don't go above total population:
   function maxAtTotalPopulation(num: number) {
     return Math.min(num, totalPopulation);
   }
-  const estimatedNewInfectionsPerYearWithMax = maxAtTotalPopulation(
-    estimatedNewInfectionsPerYear,
+  const estimatedNewInfectionsIn3MonthsWithMax = maxAtTotalPopulation(
+    estimatedNewInfectionsIn3Months,
   );
-  const newCasesPerYearWithMax = maxAtTotalPopulation(newCasesPerYear);
+  const newCasesIn3MonthsWithMax = maxAtTotalPopulation(newCasesPer3Months);
 
-  const estimatedPercentageNewInfectedPerYear = Math.min(
+  const estimatedPercentageNewInfectedIn3Months = Math.min(
     1,
-    estimatedNewInfectionsPerYear / totalPopulation,
+    estimatedNewInfectionsIn3Months / totalPopulation,
   );
 
   return (
     <Fragment>
       Over the last week, {locationName} has averaged {newCasesPerDayText} new
       confirmed cases per day (<b>{formatDecimal(currentCaseDensity, 1)}</b> for
-      every 100,000 residents). If this trend continued for the next year, this
-      would translate to approximately {formatEstimate(newCasesPerYearWithMax)}{' '}
-      cases and an{' '}
-      <ExternalLink href="https://www.globalhealthnow.org/2020-06/us-cases-10x-higher-reported">
-        estimated
-      </ExternalLink>{' '}
-      {formatEstimate(estimatedNewInfectionsPerYearWithMax)} infections (
-      {formatPercent(estimatedPercentageNewInfectedPerYear)} of the population).
+      every 100,000 residents). If this trend continued for the next three
+      months, this would translate to approximately{' '}
+      {formatEstimate(newCasesIn3MonthsWithMax)} cases and an estimated{' '}
+      {formatEstimate(estimatedNewInfectionsIn3MonthsWithMax)} infections (
+      {formatPercent(estimatedPercentageNewInfectedIn3Months)} of the
+      population).
     </Fragment>
   );
 }

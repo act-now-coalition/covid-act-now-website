@@ -1,3 +1,5 @@
+import regions, { Region, State, County, MetroArea } from 'common/regions';
+import { fail } from 'common/utils';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 
 export interface VaccinationLink {
@@ -5,39 +7,34 @@ export interface VaccinationLink {
   url: string;
 }
 
-// TODO: Get real data for the corresponding location
-export function getElegibilityLinksByFipsCode(
-  fipsCode: string,
-): VaccinationLink[] {
-  // const region = regions.findByFipsCode(fipsCode);
-  return [
-    {
-      label: 'Cook County',
-      url: 'https://covidactnow.org',
-    },
-    {
-      label: 'Chicago',
-      url: 'https://covidactnow.org',
-    },
-  ];
-}
+/**
+ * Get regions to show
+ * @param region
+ */
+export const getVaccinationRegions = (region: Region): Region[] => {
+  if (region instanceof State) {
+    return [region];
+  }
 
-// TODO: Get real data for the corresponding location
-export function getVaccinationOptionsLinksByFipsCode(
-  fipsCode: string,
-): VaccinationLink[] {
-  // const region = regions.findByFipsCode(fipsCode);
-  return [
-    {
-      label: 'Cook County',
-      url: 'https://covidactnow.org',
-    },
-    {
-      label: 'Chicago',
-      url: 'https://covidactnow.org',
-    },
-  ];
-}
+  if (region instanceof County) {
+    const county = region as County;
+    const metro = regions.metroAreas.find(metro =>
+      metro.counties.map(county => county.fipsCode).includes(county.fipsCode),
+    );
+    if (metro) {
+      return [county, metro, region.state];
+    } else {
+      return [county, region.state];
+    }
+  }
+
+  if (region instanceof MetroArea) {
+    const metro = region as MetroArea;
+    return [metro, ...metro.states];
+  }
+
+  fail('Unsupported type');
+};
 
 export function trackVaccinationLink(label: string) {
   trackEvent(EventCategory.VACCINATION, EventAction.CLICK_LINK, label);
