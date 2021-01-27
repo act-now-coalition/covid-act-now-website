@@ -4,10 +4,8 @@ import {
   Heading2,
   Heading3,
   Paragraph,
-  Container,
-  FeedbackBox,
   ButtonContainer,
-} from './VaccinationBlock.style';
+} from './RegionVaccinationBlock.style';
 import {
   getVaccinationRegions,
   VaccinationLink,
@@ -15,8 +13,9 @@ import {
   //getVaccinationOptionsLinksByFipsCode,
 } from './utils';
 import LinkButton from './LinkButton';
-import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 import { useRegionVaccineData } from 'cms-content/vaccines';
+import FeedbackBox from './FeedbackBox';
+import { trackVaccinationLink } from './utils';
 
 const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
   const vaccinationRegions = getVaccinationRegions(region);
@@ -42,7 +41,7 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
     },
   );
   return (
-    <Container>
+    <Fragment>
       <Heading2>How to get vaccinated</Heading2>
       <Paragraph>
         Depending on your location, you may have to schedule an appointment or
@@ -62,11 +61,8 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
           trackingLinkPrefix="Options"
         />
       )}
-      <FeedbackBox>
-        {/* TODO: Update with the feedback link */}
-        Help us improve by giving feedback or suggesting additional sources.
-      </FeedbackBox>
-    </Container>
+      <FeedbackBox />
+    </Fragment>
   );
 };
 
@@ -83,11 +79,11 @@ const VaccinationLinksBlock: React.FC<{
         <LinkButton
           href={url}
           key={label}
+          target="_blank"
+          rel="noopener noreferrer"
           onClick={() =>
             trackVaccinationLink(`${trackingLinkPrefix}: ${label}`)
           }
-          target="_blank"
-          rel="noopener noreferrer"
         >
           {label}
         </LinkButton>
@@ -95,10 +91,5 @@ const VaccinationLinksBlock: React.FC<{
     </ButtonContainer>
   </Fragment>
 );
-
-// TODO: Setup a better label
-function trackVaccinationLink(label: string) {
-  trackEvent(EventCategory.VACCINATION, EventAction.CLICK_LINK, label);
-}
 
 export default VaccinationBlock;
