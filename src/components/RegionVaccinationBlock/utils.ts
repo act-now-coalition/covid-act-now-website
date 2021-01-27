@@ -1,4 +1,4 @@
-// import regions from 'common/regions';
+import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 
 export interface VaccinationLink {
   label: string;
@@ -37,4 +37,8 @@ export function getVaccinationOptionsLinksByFipsCode(
       url: 'https://covidactnow.org',
     },
   ];
+}
+
+export function trackVaccinationLink(label: string) {
+  trackEvent(EventCategory.VACCINATION, EventAction.CLICK_LINK, label);
 }
