@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { deburr, words } from 'lodash';
+import urlJoin from 'url-join';
 import SocialButtons from './SocialButtons';
+
 import {
   SaveOrShareContainer,
   SaveOrShareButton,
@@ -22,21 +24,21 @@ import { Metric } from 'common/metric';
 const getShareImageUrl = (region: Region, chartIdentifier: number): string => {
   const imageBaseUrl = ShareImageUrlJSON.share_image_url;
   if (region instanceof County) {
-    return (
-      imageBaseUrl +
-      `counties/${region.fipsCode}/chart/${chartIdentifier}/export.png`
+    return urlJoin(
+      imageBaseUrl,
+      `counties/${region.fipsCode}/chart/${chartIdentifier}/export.png`,
     );
   }
   if (region instanceof State) {
     const state = region as State;
-    return (
-      imageBaseUrl +
-      `states/${state.stateCode.toLowerCase()}/chart/${chartIdentifier}/export.png`
+    return urlJoin(
+      imageBaseUrl,
+      `states/${state.stateCode.toLowerCase()}/chart/${chartIdentifier}/export.png`,
     );
   } else if (region instanceof MetroArea) {
-    return (
-      imageBaseUrl +
-      `metros/${region.fipsCode}/chart/${chartIdentifier}/export.png`
+    return urlJoin(
+      imageBaseUrl,
+      `metros/${region.fipsCode}/chart/${chartIdentifier}/export.png`,
     );
   }
   fail('Unsupported region');
@@ -171,7 +173,7 @@ const ShareButtons = ({
   const shareBaseURL = region.canonicalUrl;
 
   const shareURL = urls.addSharingId(
-    `${shareBaseURL}/chart/${chartIdentifier}`,
+    urlJoin(shareBaseURL, `chart/${chartIdentifier}`),
   );
 
   if (isMobile) {
