@@ -34,7 +34,7 @@ import { Subtitle1 } from 'components/Typography';
 import { useBreakpoint } from 'common/hooks';
 
 const { header, footer } = mainContent;
-const { federalTaskForce, harvard } = modalContent;
+const { federalTaskForce } = modalContent;
 
 const trackShareFacebook = () =>
   trackRecommendationsEvent(EventAction.SHARE, 'facebook');
@@ -58,9 +58,8 @@ const Header = (props: {
       <Subtitle1>for {locationName}</Subtitle1>
       <Intro>
         These recommendations match the guidelines set by the{' '}
-        <strong>{federalTaskForce.sourceName}</strong>,{' '}
-        <strong>{harvard.sourceName}</strong>, and the <strong>CDC</strong>.{' '}
-        {introCopy}{' '}
+        <strong>{federalTaskForce.sourceName}</strong> and the{' '}
+        <strong>CDC</strong>. {introCopy}{' '}
         <LinkButton onClick={onClickOpenModal}>Learn more</LinkButton>.
       </Intro>
     </Fragment>
@@ -209,9 +208,8 @@ const Recommend = (props: {
       <Dialog
         open={isDialogOpen}
         closeDialog={closeDialog}
-        fullWidth
-        maxWidth="md"
         renderHeader={renderModalTitle}
+        style={{ maxWidth: '700px', margin: 'auto' }}
       >
         <RecommendModal
           fedLevel={fedLevel}
