@@ -5,10 +5,10 @@ import { Heading2, Paragraph } from './RegionVaccinationBlock.style';
 import FeedbackBox from './FeedbackBox';
 import { StateLinkButton } from './StateVaccionationBlock.style';
 import { trackVaccinationLink } from './utils';
-import { useRegionVaccineData } from 'cms-content/vaccines';
+import { getVaccinationDataByRegion } from 'cms-content/vaccines';
 
 const StateVaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
-  const vaccinationData = useRegionVaccineData(region);
+  const vaccinationData = getVaccinationDataByRegion(region);
 
   if (!vaccinationData) {
     return null;

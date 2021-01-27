@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Region, RegionType } from 'common/regions';
+import STATE_VACCINE_DATA from './state.json';
+import { fromPairs } from 'lodash';
 
 export interface RegionVaccinationInfo {
   hidden: boolean;
@@ -14,53 +16,17 @@ export interface RegionTypeVaccinationInfo {
   regions: RegionVaccinationInfo[];
 }
 
-const fetchRegionTypeVaccineData = (regionType: RegionType) => {
-  if (regionType !== RegionType.STATE) {
-    return;
-  }
-  return fetch(`/cms-content/vaccines/${regionType}.json`).then(
-    res => res.json() as Promise<RegionTypeVaccinationInfo>,
-  );
+const VACCINATION_DATA_BY_FIPS: { [fips: string]: RegionVaccinationInfo } = {
+  ...fromPairs(
+    (STATE_VACCINE_DATA as RegionTypeVaccinationInfo).regions.map(item => [
+      item.fips,
+      item,
+    ]),
+  ),
 };
 
-export const useRegionTypeVaccineData = (regionType: RegionType) => {
-  const [data, setData] = useState<RegionVaccinationInfo[]>();
-  useEffect(() => {
-    fetchRegionTypeVaccineData(regionType)?.then(
-      (value: RegionTypeVaccinationInfo) => {
-        setData(value.regions);
-      },
-    );
-  }, [regionType]);
-  return data;
-};
-
-export const useRegionsVaccineData = (
-  regionType: RegionType,
-  regions: Region[],
-) => {
-  const [data, setData] = useState<RegionVaccinationInfo[]>();
-  const regionTypeData = useRegionTypeVaccineData(regionType);
-  useEffect(() => {
-    const matching =
-      regionTypeData?.filter(item =>
-        regions.map(region => region.fipsCode).includes(item.fips),
-      ) || [];
-    setData(matching);
-  }, [regionTypeData, regions]);
-
-  return data;
-};
-
-export const useRegionVaccineData = (region: Region) => {
-  const [data, setData] = useState<RegionVaccinationInfo>();
-  const regionTypeData = useRegionTypeVaccineData(region.regionType);
-  useEffect(() => {
-    const matching = regionTypeData?.find(
-      item => item.fips === region.fipsCode,
-    );
-    setData(matching);
-  }, [regionTypeData, region]);
-
-  return data;
+export const getVaccinationDataByRegion = (
+  region: Region,
+): RegionVaccinationInfo | null => {
+  return VACCINATION_DATA_BY_FIPS[region.fipsCode] || null;
 };

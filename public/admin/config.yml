@@ -653,7 +653,7 @@ collections:
     files:
       - name: Vaccine Information-State
         label: State Vaccine Information 
-        file: public/cms-content/vaccines/state.json
+        file: src/cms-content/vaccines/state.json
         fields:
           - label: Regions
             name: regions
