@@ -14,7 +14,7 @@ import {
 } from './utils';
 import LinkButton from './LinkButton';
 import FeedbackBox from './FeedbackBox';
-import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
+import { trackVaccinationLink } from './utils';
 
 const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
   const { fipsCode } = region;
@@ -79,10 +79,5 @@ const VaccinationLinksBlock: React.FC<{
     </ButtonContainer>
   </Fragment>
 );
-
-// TODO: Setup a better label
-function trackVaccinationLink(label: string) {
-  trackEvent(EventCategory.VACCINATION, EventAction.CLICK_LINK, label);
-}
 
 export default VaccinationBlock;
