@@ -259,7 +259,7 @@
     {
       "hidden": false,
       "stateCode": "NY",
-      "eligibilityInfoUrl": "https://covid19vaccine.health.ny.gov/",
+      "eligibilityInfoUrl": "https://covid19vaccine.health.ny.gov/phased-distribution-vaccine",
       "vaccinationSignupUrl": "https://am-i-eligible.covid19vaccine.health.ny.gov/",
       "locationName": "New York",
       "fips": "36"
@@ -275,7 +275,7 @@
     {
       "hidden": false,
       "stateCode": "ND",
-      "eligibilityInfoUrl": "https://www.health.nd.gov/covid-19-vaccine-information",
+      "eligibilityInfoUrl": "https://www.health.nd.gov/covid-19-vaccine-priority-groups",
       "vaccinationSignupUrl": "https://www.health.nd.gov/covidvaccinelocator",
       "locationName": "North Dakota",
       "fips": "38"
@@ -322,14 +322,6 @@
     },
     {
       "hidden": false,
-      "stateCode": "PR",
-      "eligibilityInfoUrl": "http://www.salud.gov.pr/Pages/COVID-19-ProfesionalesdelaSalud.aspx",
-      "vaccinationSignupUrl": null,
-      "locationName": "Puerto Rico",
-      "fips": "72"
-    },
-    {
-      "hidden": false,
       "stateCode": "RI",
       "eligibilityInfoUrl": "https://covid.ri.gov/vaccination",
       "vaccinationSignupUrl": null,
@@ -355,7 +347,7 @@
     {
       "hidden": false,
       "stateCode": "TN",
-      "eligibilityInfoUrl": "https://covid19.tn.gov/covid-19-vaccines/",
+      "eligibilityInfoUrl": "https://covid19.tn.gov/covid-19-vaccines/vaccine-phases/",
       "vaccinationSignupUrl": "https://covid19.tn.gov/covid-19-vaccines/county-vaccine-information/",
       "locationName": "Tennessee",
       "fips": "47"
@@ -396,7 +388,7 @@
       "hidden": false,
       "stateCode": "WA",
       "eligibilityInfoUrl": "https://www.doh.wa.gov/Emergencies/COVID19/vaccine",
-      "vaccinationSignupUrl": null,
+      "vaccinationSignupUrl": "https://www.doh.wa.gov/YouandYourFamily/Immunization/VaccineLocations",
       "locationName": "Washington",
       "fips": "53"
     },
@@ -404,7 +396,7 @@
       "hidden": false,
       "stateCode": "WV",
       "eligibilityInfoUrl": "https://dhhr.wv.gov/COVID-19/Pages/Vaccine.aspx",
-      "vaccinationSignupUrl": null,
+      "vaccinationSignupUrl": "https://wvvaccine.s3.amazonaws.com/OverviewofWVCOVID-19VaccineAllocationandRegistrationProcessforPriorityGroups-1.8.2021.pdf",
       "locationName": "West Virginia",
       "fips": "54"
     },
