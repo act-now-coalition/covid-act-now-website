@@ -8,7 +8,7 @@ export const getSearchAutocompleteStyles = makeStyles(() => ({
   option: {
     '&[data-focus="true"]': {
       backgroundColor: 'transparent',
-      color: `${COLOR_MAP.BLUE}`,
+      color: COLOR_MAP.BLUE,
     },
   },
   noOptions: {

@@ -13,20 +13,20 @@ export const getSearchTextFieldStyles = makeStyles(() => ({
     border: 'none',
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
-        borderColor: `${COLOR_MAP.GRAY.LIGHT}`,
+        borderColor: COLOR_MAP.GRAY.LIGHT,
         border: `1.5px solid ${COLOR_MAP.GRAY.LIGHT}`,
         borderRadius: '99px',
       },
       '&:hover fieldset': {
-        borderColor: `${COLOR_MAP.GRAY.LIGHT}`,
+        borderColor: COLOR_MAP.GRAY.LIGHT,
       },
       '&.Mui-focused fieldset': {
-        borderColor: `${COLOR_MAP.BLUE}`,
+        borderColor: COLOR_MAP.BLUE,
         border: `1.5px solid ${COLOR_MAP.BLUE}`,
         borderRadius: '99px',
       },
       '& input::placeholder': {
-        color: `${COLOR_MAP.GRAY_BODY_COPY}`,
+        color: COLOR_MAP.GRAY_BODY_COPY,
         opacity: 1,
       },
     },

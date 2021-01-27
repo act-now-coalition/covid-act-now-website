@@ -1,5 +1,5 @@
 import React from 'react';
-import { Popper } from '@material-ui/core';
+import Popper from '@material-ui/core/Popper';
 
 type PopperProps = React.ComponentProps<typeof Popper>;
 type FinalPopperProps = PopperProps & { isMobile: boolean };
