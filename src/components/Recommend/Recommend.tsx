@@ -21,7 +21,6 @@ import {
   modalContent,
   FedLevel,
   HarvardLevel,
-  RecommendCategory,
 } from 'cms-content/recommendations';
 import SmallShareButtons from 'components/SmallShareButtons';
 import RecommendModal from './RecommendModal';
@@ -154,7 +153,7 @@ const Recommend = (props: {
     );
   };
 
-  /* 
+  /*
     Divides recommendations into 2 columns.
     For mobile: splits originally-ordered recommendations array in half.
     For desktop: splits by even/odds so the highest 'ranked' recommendations will appear on top.
@@ -181,19 +180,17 @@ const Recommend = (props: {
           return (
             <Column key={`half-${j}`}>
               {half.map((recommendation, i) => {
-                const highlight =
-                  recommendation.recommendationInfo.category ===
-                  RecommendCategory.TRAVEL;
                 return (
                   <RecommendationItem
                     key={`recommendation-${i}`}
-                    highlight={highlight}
+                    highlight={false}
                   >
                     <Icon
                       src={recommendation.iconInfo.iconImage}
                       alt={recommendation.iconInfo.altText}
                     />
                     <RecommendationBody
+                      className={recommendation.recommendationInfo.category}
                       source={recommendation.recommendationInfo.body}
                     />
                   </RecommendationItem>
