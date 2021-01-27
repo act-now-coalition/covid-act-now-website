@@ -1,6 +1,27 @@
 {
   "recommendations": [
     {
+      "category": "MASKS",
+      "level": "RED",
+      "id": "MASKS_RED",
+      "source": "FED",
+      "body": "**Masks** should be mandated and worn by everyone outside their home."
+    },
+    {
+      "category": "MASKS",
+      "level": "YELLOW",
+      "id": "MASKS_YELLOW",
+      "source": "FED",
+      "body": "**Masks** should be mandated in all indoor spaces and worn by everyone outside their home."
+    },
+    {
+      "body": "**Masks** should be worn outside of the home to continue reducing the spread of COVID.",
+      "source": "FED",
+      "category": "MASKS",
+      "level": "GREEN",
+      "id": "MASKS_GREEN"
+    },
+    {
       "source": "FED",
       "category": "BARS",
       "level": "RED",
@@ -43,20 +64,6 @@
       "body": "**Restaurants** should create outdoor dining opportunities, with the assistance of local governments. Customers should use take-out, outdoor dining, or indoor dining when strict social distancing can be maintained."
     },
     {
-      "category": "MASKS",
-      "level": "RED",
-      "id": "MASKS_RED",
-      "source": "FED",
-      "body": "**Masks** should be mandated and worn by everyone outside their home."
-    },
-    {
-      "category": "MASKS",
-      "level": "YELLOW",
-      "id": "MASKS_YELLOW",
-      "source": "FED",
-      "body": "**Masks** should be mandated in all indoor spaces and worn by everyone outside their home."
-    },
-    {
       "body": "**Gatherings** should be avoided with people outside the immediate household.",
       "source": "FED",
       "category": "GATHERINGS",
@@ -69,13 +76,6 @@
       "source": "FED",
       "level": "YELLOW",
       "id": "GATHERINGS_YELLOW"
-    },
-    {
-      "body": "**Masks** should be worn outside of the home to continue reducing the spread of COVID.",
-      "source": "FED",
-      "category": "MASKS",
-      "level": "GREEN",
-      "id": "MASKS_GREEN"
     },
     {
       "body": "**Travel** should be avoided unless necessary.",
