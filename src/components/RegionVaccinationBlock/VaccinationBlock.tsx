@@ -9,13 +9,13 @@ import {
 import {
   getVaccinationRegions,
   VaccinationLink,
-  //getElegibilityLinksByFipsCode,
-  //getVaccinationOptionsLinksByFipsCode,
+  trackVaccinationLink,
+  getVaccinationOptionLinks,
+  getEligibilityLinks,
 } from './utils';
 import LinkButton from './LinkButton';
 import { useRegionsVaccineData } from 'cms-content/vaccines';
 import FeedbackBox from './FeedbackBox';
-import { trackVaccinationLink } from './utils';
 
 const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
   const vaccinationRegions = getVaccinationRegions(region);
@@ -30,16 +30,12 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
   if (!vaccinationRegionsData) {
     return null;
   }
-  const eligibilityLinks: VaccinationLink[] = vaccinationRegionsData.map(
-    data => {
-      return { label: data.locationName, url: data.eligibilityInfoUrl };
-    },
+
+  const eligibilityLinks = getEligibilityLinks(vaccinationRegionsData);
+  const vaccinationOptionsLinks = getVaccinationOptionLinks(
+    vaccinationRegionsData,
   );
-  const vaccinationOptionsLinks: VaccinationLink[] = vaccinationRegionsData.map(
-    data => {
-      return { label: data.locationName, url: data.vaccinationSignupUrl || '' };
-    },
-  );
+
   return (
     <Fragment>
       <Heading2>How to get vaccinated</Heading2>

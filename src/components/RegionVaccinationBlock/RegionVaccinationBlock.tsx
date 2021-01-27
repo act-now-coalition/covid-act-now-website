@@ -1,8 +1,8 @@
 import React from 'react';
-import VaccinationBlock from './VaccinationBlock';
-import StateVaccinationBlock from './StateVaccinationBlock';
 import { fail } from 'common/utils';
 import { Region, County, State, MetroArea } from 'common/regions';
+import VaccinationBlock from './VaccinationBlock';
+import StateVaccinationBlock from './StateVaccinationBlock';
 
 const RegionVaccinationBox: React.FC<{ region: Region }> = ({ region }) => {
   if (region instanceof County || region instanceof MetroArea) {

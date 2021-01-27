@@ -1,6 +1,7 @@
 import regions, { Region, State, County, MetroArea } from 'common/regions';
 import { fail } from 'common/utils';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
+import { RegionVaccinationInfo } from 'cms-content/vaccines';
 
 export interface VaccinationLink {
   label: string;
@@ -38,4 +39,22 @@ export const getVaccinationRegions = (region: Region): Region[] => {
 
 export function trackVaccinationLink(label: string) {
   trackEvent(EventCategory.VACCINATION, EventAction.CLICK_LINK, label);
+}
+
+export function getEligibilityLinks(
+  vaccinationDataList: RegionVaccinationInfo[],
+): VaccinationLink[] {
+  return vaccinationDataList.map(data => ({
+    label: data.locationName,
+    url: data.eligibilityInfoUrl,
+  }));
+}
+
+export function getVaccinationOptionLinks(
+  vaccinationDataList: RegionVaccinationInfo[],
+): VaccinationLink[] {
+  return vaccinationDataList.map(data => ({
+    label: data.locationName,
+    url: data.vaccinationSignupUrl || '',
+  }));
 }
