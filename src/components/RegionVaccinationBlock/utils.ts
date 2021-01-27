@@ -36,38 +36,6 @@ export const getVaccinationRegions = (region: Region): Region[] => {
   fail('Unsupported type');
 };
 
-// TODO: Get real data for the corresponding location
-export function getElegibilityLinksByRegion(region: Region): VaccinationLink[] {
-  // const region = regions.findByFipsCode(fipsCode);
-  return [
-    {
-      label: 'Cook County',
-      url: 'https://covidactnow.org',
-    },
-    {
-      label: 'Chicago',
-      url: 'https://covidactnow.org',
-    },
-  ];
-}
-
-// TODO: Get real data for the corresponding location
-export function getVaccinationOptionsLinksByFipsCode(
-  fipsCode: string,
-): VaccinationLink[] {
-  // const region = regions.findByFipsCode(fipsCode);
-  return [
-    {
-      label: 'Cook County',
-      url: 'https://covidactnow.org',
-    },
-    {
-      label: 'Chicago',
-      url: 'https://covidactnow.org',
-    },
-  ];
-}
-
 export function trackVaccinationLink(label: string) {
   trackEvent(EventCategory.VACCINATION, EventAction.CLICK_LINK, label);
 }
