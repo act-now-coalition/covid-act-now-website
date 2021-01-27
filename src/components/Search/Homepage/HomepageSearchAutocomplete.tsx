@@ -14,7 +14,7 @@ import NewMenuItem from 'components/Search/NewMenuItem/NewMenuItem';
 import { getSearchTextFieldStyles } from 'assets/theme/customStyleBlocks/getSearchTextFieldStyles';
 import { getSearchAutocompleteStyles } from 'assets/theme/customStyleBlocks/getSearchAutocompleteStyles';
 import StyledPopper from './StyledPopper';
-import { divide } from 'lodash';
+import { useBreakpoint } from 'common/hooks';
 
 function getOptionSelected(option: Region, selectedOption: Region) {
   return option.fipsCode === selectedOption.fipsCode;
@@ -29,6 +29,9 @@ const HomepageSearchAutocomplete: React.FC<{
   /* We only check for a zipcode match when the input is all numbers and has a length of 5: */
   const [checkForZipcodeMatch, setCheckForZipcodeMatch] = useState(false);
   const [noOptionsCopy, setNoOptionsCopy] = useState('No location found');
+  const [isOpen, setIsOpen] = useState(false);
+
+  const isMobile = useBreakpoint(800);
 
   const searchTextFieldStyles = getSearchTextFieldStyles();
   const autocompleteStyles = getSearchAutocompleteStyles();
@@ -67,8 +70,6 @@ const HomepageSearchAutocomplete: React.FC<{
 
   const zipCodeInput = checkForZipcodeMatch ? input : '';
 
-  const [isOpen, setIsOpen] = useState(false);
-
   const textFieldPlaceholder = isOpen
     ? ''
     : 'Search by state, metro, county, or zip';
@@ -82,6 +83,7 @@ const HomepageSearchAutocomplete: React.FC<{
         disableListWrap
         disableClearable
         clearOnEscape
+        fullWidth
         onChange={onSelect}
         getOptionSelected={getOptionSelected}
         filterOptions={createFilterOptions({
@@ -105,7 +107,6 @@ const HomepageSearchAutocomplete: React.FC<{
         renderOption={option => {
           return <NewMenuItem region={option} zipCodeInput={zipCodeInput} />;
         }}
-        // open={true}
         classes={{
           option: autocompleteStyles.option,
           noOptions: autocompleteStyles.noOptions,
@@ -117,6 +118,7 @@ const HomepageSearchAutocomplete: React.FC<{
             setHideMapToggle(true);
           }
         }}
+        // open={true}
         onClose={() => {
           setIsOpen(false);
           if (setHideMapToggle) {
@@ -124,9 +126,10 @@ const HomepageSearchAutocomplete: React.FC<{
           }
         }}
         PaperComponent={StyledPaper}
-        PopperComponent={StyledPopper}
         ListboxComponent={ListContainer}
-        fullWidth
+        PopperComponent={props => (
+          <StyledPopper {...props} isMobile={isMobile} />
+        )}
       />
       {isOpen && (
         <SearchDirections>

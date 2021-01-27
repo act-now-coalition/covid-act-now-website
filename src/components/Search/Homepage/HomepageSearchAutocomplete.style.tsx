@@ -24,7 +24,7 @@ export const StyledTextField = styled(TextField).attrs(props => ({
 
 export const Wrapper = styled.div<{ isOpen: boolean }>`
   box-shadow: ${({ isOpen }) => isOpen && '0px 2px 24px rgba(0, 0, 0, 0.12)'};
-  padding: 1.5rem;
+  padding: 1.5rem 0.5rem;
   border-radius: 4px;
   position: relative;
   min-width: 300px;
@@ -32,6 +32,7 @@ export const Wrapper = styled.div<{ isOpen: boolean }>`
 
   @media (min-width: ${mobileBreakpoint}) {
     max-width: 670px;
+    padding: 1.5rem;
   }
 `;
 
