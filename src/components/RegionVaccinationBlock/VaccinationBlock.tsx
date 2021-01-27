@@ -1,17 +1,12 @@
 import React, { Fragment } from 'react';
-import { Region, RegionType } from 'common/regions';
+import { Region } from 'common/regions';
 import {
   Heading2,
   Heading3,
   Paragraph,
   ButtonContainer,
 } from './RegionVaccinationBlock.style';
-import {
-  getVaccinationRegions,
-  VaccinationLink,
-  //getElegibilityLinksByFipsCode,
-  //getVaccinationOptionsLinksByFipsCode,
-} from './utils';
+import { getVaccinationRegions, VaccinationLink } from './utils';
 import LinkButton from './LinkButton';
 import {
   RegionVaccinationInfo,
