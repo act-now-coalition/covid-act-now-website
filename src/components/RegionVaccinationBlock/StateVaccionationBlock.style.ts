@@ -8,14 +8,13 @@ export const StateLinkButton = styled(LinkButton)`
   width: 100%;
 
   padding: 16px 16px;
+  @media @media (min-width: ${mobileBreakpoint}) {
+    padding: 24px 16px;
+  }
 
   .MuiButton-endIcon {
     display: flex;
     flex-grow: 1;
     justify-content: flex-end;
-  }
-
-  @media @media (min-width: ${mobileBreakpoint}) {
-    padding: 24px 16px;
   }
 `;
