@@ -115,7 +115,7 @@
     {
       "hidden": false,
       "stateCode": "IN",
-      "eligibilityInfoUrl": "shttps://www.coronavirus.in.gov/vaccine/index.htm",
+      "eligibilityInfoUrl": "https://www.coronavirus.in.gov/vaccine/index.htm",
       "vaccinationSignupUrl": "https://vaccine.coronavirus.in.gov/",
       "locationName": "Indiana",
       "fips": "18"
