@@ -41,13 +41,20 @@ export const useRegionsVaccineData = (
 ) => {
   const [data, setData] = useState<RegionVaccinationInfo[]>();
   const regionTypeData = useRegionTypeVaccineData(regionType);
+
+  // Regions list breaks useEffect compare, stringifying list fixes useEffect comparison.
+  // TODO(chris): This is pretty hacky, find a better way that doesn't require
+  // making this a string.
+  const stringRegions = JSON.stringify(regions);
   useEffect(() => {
     const matching =
       regionTypeData?.filter(item =>
         regions.map(region => region.fipsCode).includes(item.fips),
       ) || [];
     setData(matching);
-  }, [regionTypeData, regions]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [regionTypeData, stringRegions]);
 
   return data;
 };
