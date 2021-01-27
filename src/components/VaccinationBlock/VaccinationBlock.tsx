@@ -39,12 +39,14 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
         <VaccinationLinksBlock
           title="Check eligibility"
           links={eligibilityLinks}
+          trackingLinkPrefix="Vaccination Eligibility - "
         />
       )}
       {vaccinationOptionsLinks && (
         <VaccinationLinksBlock
           title="See vaccination options"
           links={vaccinationOptionsLinks}
+          trackingLinkPrefix="Vaccination Options - "
         />
       )}
       <FeedbackBox>
@@ -59,7 +61,8 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
 const VaccinationLinksBlock: React.FC<{
   title: string;
   links: VaccinationLink[];
-}> = ({ title, links }) => (
+  trackingLinkPrefix?: string;
+}> = ({ title, links, trackingLinkPrefix = '' }) => (
   <Fragment>
     <Heading3>{title}</Heading3>
     <ButtonContainer>
@@ -67,7 +70,7 @@ const VaccinationLinksBlock: React.FC<{
         <LinkButton
           href={url}
           key={label}
-          onClick={() => trackVaccinationLink(label)}
+          onClick={() => trackVaccinationLink(`${trackingLinkPrefix}${label}`)}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -78,6 +81,7 @@ const VaccinationLinksBlock: React.FC<{
   </Fragment>
 );
 
+// TODO: Setup a better label
 function trackVaccinationLink(label: string) {
   trackEvent(EventCategory.VACCINATION, EventAction.CLICK_LINK, label);
 }
