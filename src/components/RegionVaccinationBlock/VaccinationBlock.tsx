@@ -30,11 +30,16 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
       return { label: data.locationName, url: data.eligibilityInfoUrl };
     },
   );
-  const vaccinationOptionsLinks: VaccinationLink[] = vaccinationRegionsData.map(
-    data => {
-      return { label: data.locationName, url: data.vaccinationSignupUrl || '' };
-    },
-  );
+  const vaccinationOptionsLinks: VaccinationLink[] = vaccinationRegionsData
+    .map(data =>
+      data.vaccinationSignupUrl
+        ? {
+            label: data.locationName,
+            url: data.vaccinationSignupUrl,
+          }
+        : null,
+    )
+    .filter((link): link is VaccinationLink => link !== null);
   return (
     <Fragment>
       <Heading2>How to get vaccinated</Heading2>
