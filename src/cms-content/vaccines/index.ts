@@ -42,12 +42,14 @@ export const useRegionsVaccineData = (
   const [data, setData] = useState<RegionVaccinationInfo[]>();
   const regionTypeData = useRegionTypeVaccineData(regionType);
   useEffect(() => {
-    const matching =
-      regionTypeData?.filter(item =>
-        regions.map(region => region.fipsCode).includes(item.fips),
-      ) || [];
-    setData(matching);
-  }, [regionTypeData, regions]);
+    if (!data) {
+      const matching =
+        regionTypeData?.filter(item =>
+          regions.map(region => region.fipsCode).includes(item.fips),
+        ) || [];
+      setData(matching);
+    }
+  }, [setData, data, regionTypeData, regions]);
 
   return data;
 };
@@ -56,11 +58,13 @@ export const useRegionVaccineData = (region: Region) => {
   const [data, setData] = useState<RegionVaccinationInfo>();
   const regionTypeData = useRegionTypeVaccineData(region.regionType);
   useEffect(() => {
-    const matching = regionTypeData?.find(
-      item => item.fips === region.fipsCode,
-    );
-    setData(matching);
-  }, [regionTypeData, region]);
+    if (!data) {
+      const matching = regionTypeData?.find(
+        item => item.fips === region.fipsCode,
+      );
+      setData(matching);
+    }
+  }, [setData, data, regionTypeData, region]);
 
   return data;
 };
