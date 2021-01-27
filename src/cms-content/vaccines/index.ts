@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { Region, RegionType } from 'common/regions';
+import { Region } from 'common/regions';
 import STATE_VACCINE_DATA from './state.json';
+import METRO_VACCINE_DATA from './msa.json';
 import { fromPairs } from 'lodash';
 
 export interface RegionVaccinationInfo {
@@ -19,6 +19,12 @@ export interface RegionTypeVaccinationInfo {
 const VACCINATION_DATA_BY_FIPS: { [fips: string]: RegionVaccinationInfo } = {
   ...fromPairs(
     (STATE_VACCINE_DATA as RegionTypeVaccinationInfo).regions.map(item => [
+      item.fips,
+      item,
+    ]),
+  ),
+  ...fromPairs(
+    (METRO_VACCINE_DATA as RegionTypeVaccinationInfo).regions.map(item => [
       item.fips,
       item,
     ]),
