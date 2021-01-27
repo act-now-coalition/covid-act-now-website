@@ -1,0 +1,352 @@
+{
+  "regions": [
+    {
+      "fips": "06021",
+      "locationName": "Glenn County",
+      "eligibilityInfoUrl": "https://www.countyofglenn.net/dept/health-human-services/public-health/covid-19/covid-19-vaccine-information",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06089",
+      "locationName": "Shasta County",
+      "eligibilityInfoUrl": "https://www.co.shasta.ca.us/ready/covid-19/vaccinations",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06109",
+      "locationName": "Tuolumne County",
+      "eligibilityInfoUrl": "https://www.tuolumnecounty.ca.gov/1317/COVID-Vaccine",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06097",
+      "locationName": "Sonoma County",
+      "eligibilityInfoUrl": "https://socoemergency.org/emergency/novel-coronavirus/vaccine-information/",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06085",
+      "locationName": "Santa Clara County",
+      "eligibilityInfoUrl": "https://www.sccgov.org/sites/covid19/Pages/COVID19-vaccine-information-for-public.aspx",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06039",
+      "locationName": "Madera County",
+      "eligibilityInfoUrl": "https://www.maderacounty.com/government/public-health/covid-19/covid-vaccination",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06115",
+      "locationName": "Yuba County",
+      "eligibilityInfoUrl": "https://www.yuba.org/coronavirus/vaccines.php",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "32013",
+      "locationName": "Humboldt County",
+      "eligibilityInfoUrl": "https://humboldtgov.org/2872/Vaccine-Info",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06053",
+      "locationName": "Monterey County",
+      "eligibilityInfoUrl": "https://www.co.monterey.ca.us/government/departments-a-h/health/diseases/2019-novel-coronavirus-covid-19/2019-novel-coronavirus-covid-19-vaccines",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06087",
+      "locationName": "Santa Cruz County",
+      "eligibilityInfoUrl": "https://www.santacruzhealth.org/HSAHome/HSADivisions/PublicHealth/CommunicableDiseaseControl/CoronavirusHome/Vaccine.aspx",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06001",
+      "locationName": "Alameda County",
+      "eligibilityInfoUrl": "https://covid-19.acgov.org/vaccines",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06077",
+      "locationName": "San Joaquin County",
+      "eligibilityInfoUrl": "http://www.sjcphs.org/covid19/COVID19_Vaccine.aspx",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06103",
+      "locationName": "Tehama County",
+      "eligibilityInfoUrl": "https://www.tehamacohealthservices.net/covid-19-vaccine-information/",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06043",
+      "locationName": "Mariposa County",
+      "eligibilityInfoUrl": "http://www.mariposacounty.org/2466/COVID-19-Vaccination",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06113",
+      "locationName": "Yolo County",
+      "eligibilityInfoUrl": "https://www.yolocounty.org/coronavirus-vaccine",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06079",
+      "locationName": "San Luis Obispo County",
+      "eligibilityInfoUrl": "https://www.recoverslo.org/en/covid-19-vaccines-in-slo-county.aspx",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "46019",
+      "locationName": "Butte County",
+      "eligibilityInfoUrl": "https://www.buttecounty.net/ph/COVID19/vaccine",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06081",
+      "locationName": "San Mateo County",
+      "eligibilityInfoUrl": "https://www.smchealth.org/covid-19-vaccination",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06101",
+      "locationName": "Sutter County",
+      "eligibilityInfoUrl": "https://www.suttercounty.org/vaccine",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06051",
+      "locationName": "Mono County",
+      "eligibilityInfoUrl": "https://coronavirus.monocounty.ca.gov/pages/vaccinations",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": null,
+      "locationName": "San Francisco",
+      "eligibilityInfoUrl": "https://sf.gov/covid-19-vaccine-san-francisco",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06013",
+      "locationName": "Contra Costa County",
+      "eligibilityInfoUrl": "https://www.coronavirus.cchealth.org/vaccine",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "35051",
+      "locationName": "Sierra County",
+      "eligibilityInfoUrl": "https://sierracounty.ca.gov/616/About-Vaccine-for-COVID-19",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06093",
+      "locationName": "Siskiyou County",
+      "eligibilityInfoUrl": "https://www.co.siskiyou.ca.us/publichealth/page/covid-19-vaccine-frequently-asked-questions",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06025",
+      "locationName": "Imperial County",
+      "eligibilityInfoUrl": "http://www.icphd.org/health-information-and-resources/healthy-facts/covid-19/covid-19-vaccine/",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06027",
+      "locationName": "Inyo County",
+      "eligibilityInfoUrl": "https://www.inyocounty.us/covid-19/vaccine-information",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "36047",
+      "locationName": "Kings County",
+      "eligibilityInfoUrl": "https://www.countyofkings.com/departments/health-welfare/public-health/coronavirus-disease-2019-covid-19",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06057",
+      "locationName": "Nevada County",
+      "eligibilityInfoUrl": "https://www.mynevadacounty.com/3148/Get-Vaccine-Information",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06037",
+      "locationName": "Los Angeles County",
+      "eligibilityInfoUrl": "http://publichealth.lacounty.gov/media/coronavirus/vaccine/",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "48455",
+      "locationName": "Trinity County",
+      "eligibilityInfoUrl": "https://www.trinitycounty.org/COVID19-Vaccine",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "50017",
+      "locationName": "Orange County",
+      "eligibilityInfoUrl": "https://occovid19.ochealthinfo.com/covid-19-vaccine-resources",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06099",
+      "locationName": "Stanislaus County",
+      "eligibilityInfoUrl": "http://schsa.org/coronavirus/vaccine/",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06067",
+      "locationName": "Sacramento County",
+      "eligibilityInfoUrl": "https://www.saccounty.net/COVID-19/Pages/CoronavirusVaccine.aspx",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06069",
+      "locationName": "San Benito County",
+      "eligibilityInfoUrl": "https://hhsa.cosb.us/covid-19-vaccine-info/",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06041",
+      "locationName": "Marin County",
+      "eligibilityInfoUrl": "https://coronavirus.marinhhs.org/vaccine",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "47095",
+      "locationName": "Lake County",
+      "eligibilityInfoUrl": "http://health.co.lake.ca.us/Coronavirus/Vaccines.htm",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06111",
+      "locationName": "Ventura County",
+      "eligibilityInfoUrl": "https://www.venturacountyrecovers.org/vaccine-information/",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06009",
+      "locationName": "Calaveras County",
+      "eligibilityInfoUrl": "https://covid19.calaverasgov.us/Vaccines",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06107",
+      "locationName": "Tulare County",
+      "eligibilityInfoUrl": "https://covid19.tularecounty.ca.gov/covid-19-vaccine/",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06015",
+      "locationName": "Del Norte County",
+      "eligibilityInfoUrl": "https://www.covid19.dnco.org/vaccines",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06055",
+      "locationName": "Napa County",
+      "eligibilityInfoUrl": "https://www.countyofnapa.org/3096/COVID-19-Vaccines",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06047",
+      "locationName": "Merced County",
+      "eligibilityInfoUrl": "https://vaccinatemercedcounty.com/",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06071",
+      "locationName": "San Bernardino County",
+      "eligibilityInfoUrl": "https://sbcovid19.com/vaccine/",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06073",
+      "locationName": "San Diego County",
+      "eligibilityInfoUrl": "https://www.sandiegocounty.gov/content/sdc/hhsa/programs/phs/community_epidemiology/dc/2019-nCoV/vaccines.html",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06035",
+      "locationName": "Lassen County",
+      "eligibilityInfoUrl": "https://lassencares.org/home-1",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06061",
+      "locationName": "Placer County",
+      "eligibilityInfoUrl": "https://www.placer.ca.gov/6996/Vaccine",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06011",
+      "locationName": "Colusa County",
+      "eligibilityInfoUrl": "https://www.countyofcolusa.org/949/Vaccine",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06029",
+      "locationName": "Kern County",
+      "eligibilityInfoUrl": "https://kernpublichealth.com/coronavirus-vaccine/",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06017",
+      "locationName": "El Dorado County",
+      "eligibilityInfoUrl": "https://www.edcgov.us/Government/hhsa/edccovid-19-vaccine",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06045",
+      "locationName": "Mendocino County",
+      "eligibilityInfoUrl": "https://www.mendocinocounty.org/community/novel-coronavirus/covid-19-vaccinations",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06063",
+      "locationName": "Plumas County",
+      "eligibilityInfoUrl": "https://www.plumascounty.us/2749/COVID-19-Vaccine",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06095",
+      "locationName": "Solano County",
+      "eligibilityInfoUrl": "https://solanocounty.com/depts/ph/coronavirus_links/covid_19_vaccines.asp",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06083",
+      "locationName": "Santa Barbara County",
+      "eligibilityInfoUrl": "https://publichealthsbc.org/covid-19-vaccine-appointment-registration/",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06065",
+      "locationName": "Riverside County",
+      "eligibilityInfoUrl": "http://www.rivcoph.org/COVID-19-Vaccine",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06049",
+      "locationName": "Modoc County",
+      "eligibilityInfoUrl": "https://modochealthservices.org/corona-virus",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06005",
+      "locationName": "Amador County",
+      "eligibilityInfoUrl": "https://www.amadorgov.org/services/covid-19",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06003",
+      "locationName": "Alpine County",
+      "eligibilityInfoUrl": "https://alpinecountyca.gov/516/COVID-19",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "fips": "06019",
+      "locationName": "Fresno County",
+      "eligibilityInfoUrl": "https://www.co.fresno.ca.us/departments/public-health/covid-19/covid-19-vaccines",
+      "vaccinationSignupUrl": null
+    }
+  ]
+}
