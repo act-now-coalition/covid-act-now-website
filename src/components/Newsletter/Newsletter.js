@@ -141,6 +141,7 @@ class Newsletter extends React.Component {
           />
           <InputHolder>
             <input
+              className="fs-exclude"
               ref={i => (this.emailInput = i)}
               autoComplete="Email"
               aria-label="Email"
