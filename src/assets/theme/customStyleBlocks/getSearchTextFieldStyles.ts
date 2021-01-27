@@ -24,6 +24,10 @@ export const getSearchTextFieldStyles = makeStyles(() => ({
         border: `1.5px solid ${COLOR_MAP.BLUE}`,
         borderRadius: '99px',
       },
+      '& input::placeholder': {
+        color: `${COLOR_MAP.GRAY_BODY_COPY}`,
+        opacity: 1,
+      },
     },
   },
 }));

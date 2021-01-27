@@ -14,6 +14,7 @@ import NewMenuItem from 'components/Search/NewMenuItem/NewMenuItem';
 import { getSearchTextFieldStyles } from 'assets/theme/customStyleBlocks/getSearchTextFieldStyles';
 import { getSearchAutocompleteStyles } from 'assets/theme/customStyleBlocks/getSearchAutocompleteStyles';
 import StyledPopper from './StyledPopper';
+import { divide } from 'lodash';
 
 function getOptionSelected(option: Region, selectedOption: Region) {
   return option.fipsCode === selectedOption.fipsCode;
@@ -39,7 +40,13 @@ const HomepageSearchAutocomplete: React.FC<{
       setNoOptionsCopy('Enter a valid 5-digit zip code');
       if (value.length === 5) setCheckForZipcodeMatch(true);
       else setCheckForZipcodeMatch(false);
-    } else setNoOptionsCopy('No location found');
+    } else {
+      if (value.length) {
+        setNoOptionsCopy(
+          `No locations named ${value} found. You can also try searching a zip code.`,
+        );
+      } else setNoOptionsCopy('No location found');
+    }
   };
 
   const stringifyOption = (option: Region) => {
@@ -74,6 +81,7 @@ const HomepageSearchAutocomplete: React.FC<{
         options={locations}
         disableListWrap
         disableClearable
+        clearOnEscape
         onChange={onSelect}
         getOptionSelected={getOptionSelected}
         filterOptions={createFilterOptions({
@@ -100,6 +108,7 @@ const HomepageSearchAutocomplete: React.FC<{
         // open={true}
         classes={{
           option: autocompleteStyles.option,
+          noOptions: autocompleteStyles.noOptions,
         }}
         openOnFocus
         onOpen={() => {
