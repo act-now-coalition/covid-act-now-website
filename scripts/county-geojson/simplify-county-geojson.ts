@@ -1,8 +1,7 @@
 /**
- * Parses the content of the Covid Explained articles, transforms them to match
- * the CAN CMS structure and saves them under `src/cms-content/articles/`
- *
- * yarn covid-explained-migrate
+ * This script removes the "properties" attribute from the counties GeoJSON file to reduce
+ * its size. The properties are not currently used in the code, this reduces the file size
+ * by about 100K (13%).
  */
 import fs from 'fs';
 import path from 'path';
@@ -22,22 +21,28 @@ function removeProperties(geometry: Geometry) {
   return otherProps;
 }
 
+function simplifyGeometries(object: GeoObject) {
+  const simplifiedGeometries = object.geometries.map(removeProperties);
+  return { ...object, geometries: simplifiedGeometries };
+}
+
 async function main() {
   const updatedGeoJSON = {
     ...countyGeoJSON,
     objects: _.merge(
       _.map(countyGeoJSON.objects, (object: GeoObject, key: string) => {
         return {
-          [key]: {
-            ...object,
-            geometries: object.geometries.map(removeProperties),
-          },
+          [key]: { ...object, geometries: simplifiedGeometries },
         };
       }),
     ),
   };
 
-  fs.writeFileSync('./counties-slim.json', JSON.stringify(updatedGeoJSON));
+  const outputPath = path.join(
+    __dirname,
+    '../../src/assets/data/counties-geo.json',
+  );
+  fs.writeFileSync(outputPath, JSON.stringify(updatedGeoJSON));
 }
 
 if (require.main === module) {
