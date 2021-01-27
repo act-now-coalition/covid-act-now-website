@@ -61,8 +61,8 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
 const VaccinationLinksBlock: React.FC<{
   title: string;
   links: VaccinationLink[];
-  trackingLinkPrefix?: string;
-}> = ({ title, links, trackingLinkPrefix = '' }) => (
+  trackingLinkPrefix: string;
+}> = ({ title, links, trackingLinkPrefix }) => (
   <Fragment>
     <Heading3>{title}</Heading3>
     <ButtonContainer>
