@@ -4,7 +4,6 @@ import {
   Heading2,
   Heading3,
   Paragraph,
-  Container,
   ButtonContainer,
 } from './RegionVaccinationBlock.style';
 import {
@@ -29,7 +28,7 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
   }
 
   return (
-    <Container>
+    <Fragment>
       <Heading2>How to get vaccinated</Heading2>
       <Paragraph>
         Depending on your location, you may have to schedule an appointment or
@@ -50,7 +49,7 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
         />
       )}
       <FeedbackBox />
-    </Container>
+    </Fragment>
   );
 };
 
@@ -67,11 +66,11 @@ const VaccinationLinksBlock: React.FC<{
         <LinkButton
           href={url}
           key={label}
+          target="_blank"
+          rel="noopener noreferrer"
           onClick={() =>
             trackVaccinationLink(`${trackingLinkPrefix}: ${label}`)
           }
-          target="_blank"
-          rel="noopener noreferrer"
         >
           {label}
         </LinkButton>
