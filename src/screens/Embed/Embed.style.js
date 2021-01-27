@@ -25,7 +25,6 @@ export const EmbedContainer = styled(Paper)`
   overflow: hidden;
   border-radius: 4px;
   height: ${props => props.height || 'auto'};
-  // height: ${props => props.height || `${EMBED_HEIGHT}px`};
   width: ${props => props.width || `${EMBED_WIDTH}px`};
   box-shadow: none;
 `;
@@ -132,7 +131,6 @@ export const EmbedWrapper = styled(Box)`
   align-items: center;
   flex-direction: column;
   border: 1px solid rgba(0, 0, 0, 0.12);
-  // margin: 12px;
   border-radius: 4px;
 
   @media screen and (min-width: 600px) {

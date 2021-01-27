@@ -11,6 +11,7 @@ import TwitterEmbed, { isTwitterEmbed } from './TwitterEmbed';
 import YouTubeEmbed, { isYouTubeEmbed } from './YoutubeEmbed';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
 import ExternalLink from 'components/ExternalLink';
+import { CenterEmbed } from './Markdown.style';
 /**
  * Custom hyperlink for Markdown content. If the link is external, open it on
  * a new tab. If the link is internal, use the HashLink component to render
@@ -44,14 +45,16 @@ const MarkdownLink: React.FC<{
 
   if (isInternalEmbed(href)) {
     return (
-      <iframe
-        src={href}
-        title="Covid Act Now"
-        width="400"
-        height="440"
-        frameBorder="0"
-        scrolling="no"
-      />
+      <CenterEmbed>
+        <iframe
+          src={href}
+          title="Covid Act Now"
+          width="400"
+          height="440"
+          frameBorder="0"
+          scrolling="no"
+        />
+      </CenterEmbed>
     );
   }
 
