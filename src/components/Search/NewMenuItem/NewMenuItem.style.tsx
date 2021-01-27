@@ -2,13 +2,15 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import { COLOR_MAP } from 'common/colors';
+import COLORS, { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 
 export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+  border-bottom: 1px solid ${COLORS.LIGHTGRAY};
+  padding: 1.25rem 0.5rem;
 `;
 
 export const Subcopy = styled.span`
@@ -45,4 +47,13 @@ export const ArrowIcon = styled(ArrowForwardIosIcon)`
 export const StyledLink = styled(Link)`
   color: inherit;
   text-decoration: inherit;
+  width: 100%;
+
+  &:hover {
+    color: ${COLOR_MAP.BLUE};
+
+    ${Subcopy} {
+      color: ${COLOR_MAP.BLUE};
+    }
+  }
 `;

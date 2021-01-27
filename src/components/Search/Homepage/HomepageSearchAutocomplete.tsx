@@ -2,22 +2,18 @@ import React, { useState } from 'react';
 import { Autocomplete } from '@material-ui/lab';
 import { createFilterOptions } from '@material-ui/lab/useAutocomplete';
 import { Region, County, MetroArea } from 'common/regions';
-import MenuItem from '../MenuItem';
-import { StyledPaper } from '../Search.style';
 import {
   Wrapper,
-  StyledPopper,
   StyledTextField,
+  SearchBarIcon,
+  SearchDirections,
+  ListContainer,
+  StyledPaper,
 } from './HomepageSearchAutocomplete.style';
-import { Paper, Popper, TextField } from '@material-ui/core';
-
-// const PopperMy = function (props:any) {
-//   return (
-//   // <StyledPopper {...props} />
-//   <StyledPopper {...props} style={{ width: 250, left: 24 }} />
-
-//   )
-// }
+import NewMenuItem from 'components/Search/NewMenuItem/NewMenuItem';
+import { getSearchTextFieldStyles } from 'assets/theme/customStyleBlocks/getSearchTextFieldStyles';
+import { getSearchAutocompleteStyles } from 'assets/theme/customStyleBlocks/getSearchAutocompleteStyles';
+import StyledPopper from './StyledPopper';
 
 function getOptionSelected(option: Region, selectedOption: Region) {
   return option.fipsCode === selectedOption.fipsCode;
@@ -32,6 +28,9 @@ const HomepageSearchAutocomplete: React.FC<{
   /* We only check for a zipcode match when the input is all numbers and has a length of 5: */
   const [checkForZipcodeMatch, setCheckForZipcodeMatch] = useState(false);
   const [noOptionsCopy, setNoOptionsCopy] = useState('No location found');
+
+  const searchTextFieldStyles = getSearchTextFieldStyles();
+  const autocompleteStyles = getSearchAutocompleteStyles();
 
   const onInputChange = (e: any, value: string) => {
     setInput(value);
@@ -61,8 +60,11 @@ const HomepageSearchAutocomplete: React.FC<{
 
   const zipCodeInput = checkForZipcodeMatch ? input : '';
 
-  const [isOpen, setIsOpen] = useState(true);
-  console.log('isOpen', isOpen);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const textFieldPlaceholder = isOpen
+    ? ''
+    : 'Search by state, metro, county, or zip';
 
   return (
     <Wrapper isOpen={isOpen}>
@@ -80,11 +82,25 @@ const HomepageSearchAutocomplete: React.FC<{
           stringify: stringifyOption,
         })}
         popupIcon={<span />} // adding an empty span removes default MUI arrow icon
-        renderInput={params => <StyledTextField {...params} />}
+        renderInput={params => (
+          <StyledTextField
+            placeholder={textFieldPlaceholder}
+            {...params}
+            className={searchTextFieldStyles.root}
+            $isOpen={isOpen}
+            InputProps={{
+              ...params.InputProps,
+              startAdornment: <SearchBarIcon />,
+            }}
+          />
+        )}
         renderOption={option => {
-          return <MenuItem region={option} zipCodeInput={zipCodeInput} />;
+          return <NewMenuItem region={option} zipCodeInput={zipCodeInput} />;
         }}
-        open={true}
+        // open={true}
+        classes={{
+          option: autocompleteStyles.option,
+        }}
         openOnFocus
         onOpen={() => {
           setIsOpen(true);
@@ -100,7 +116,14 @@ const HomepageSearchAutocomplete: React.FC<{
         }}
         PaperComponent={StyledPaper}
         PopperComponent={StyledPopper}
+        ListboxComponent={ListContainer}
+        fullWidth
       />
+      {isOpen && (
+        <SearchDirections>
+          Search by state, metro, county, or zip
+        </SearchDirections>
+      )}
     </Wrapper>
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import HomepageSearchAutocomplete from './HomepageSearchAutocomplete';
-import { getAutocompleteRegions } from 'common/regions';
 import { getFilterLimit } from 'components/Search';
+import { getFinalAutocompleteLocations } from 'common/regions';
 
 export default {
   title: 'Shared Components/HomepageSearchAutocomplete',
@@ -9,7 +9,12 @@ export default {
 };
 
 export const Home = () => {
-  const locations = getAutocompleteRegions(undefined);
+  const geolocation = {
+    zipCode: '06903',
+    stateCode: 'CT',
+    country: 'United States',
+  };
+  const locations = getFinalAutocompleteLocations(geolocation);
   return (
     <HomepageSearchAutocomplete
       locations={locations}

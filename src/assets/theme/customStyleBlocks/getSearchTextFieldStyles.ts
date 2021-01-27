@@ -1,0 +1,29 @@
+/**
+ * TextField styles specific to homepage searchbar
+ */
+import { makeStyles } from '@material-ui/core/styles';
+import { COLOR_MAP } from 'common/colors';
+
+export const getSearchTextFieldStyles = makeStyles(() => ({
+  root: {
+    backgroundColor: 'transparent',
+    background: 'transparent',
+    borderRadius: '99px',
+    border: 'none',
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: `${COLOR_MAP.GRAY.LIGHT}`,
+        border: `1.5px solid ${COLOR_MAP.GRAY.LIGHT}`,
+        borderRadius: '99px',
+      },
+      '&:hover fieldset': {
+        borderColor: `${COLOR_MAP.GRAY.LIGHT}`,
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: `${COLOR_MAP.BLUE}`,
+        border: `1.5px solid ${COLOR_MAP.BLUE}`,
+        borderRadius: '99px',
+      },
+    },
+  },
+}));
