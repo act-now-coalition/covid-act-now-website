@@ -13,7 +13,7 @@ import {
   //getVaccinationOptionsLinksByFipsCode,
 } from './utils';
 import LinkButton from './LinkButton';
-import { useRegionVaccineData } from 'cms-content/vaccines';
+import { useRegionsVaccineData } from 'cms-content/vaccines';
 import FeedbackBox from './FeedbackBox';
 import { trackVaccinationLink } from './utils';
 
@@ -22,7 +22,7 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
 
   // Currently only supporting state vaccines, when county and metro data are
   // in the cms, also include here.
-  const vaccinationRegionsData = useRegionVaccineData(
+  const vaccinationRegionsData = useRegionsVaccineData(
     RegionType.STATE,
     vaccinationRegions,
   );
