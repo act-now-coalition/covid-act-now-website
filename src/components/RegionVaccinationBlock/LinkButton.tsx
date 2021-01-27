@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, ChevronRightIcon } from './VaccinationBlock.style';
+import { Button, ChevronRightIcon } from './RegionVaccinationBlock.style';
 
 type ButtonProps = React.ComponentProps<typeof Button>;
 

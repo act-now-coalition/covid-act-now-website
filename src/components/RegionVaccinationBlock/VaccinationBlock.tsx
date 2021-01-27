@@ -5,15 +5,15 @@ import {
   Heading3,
   Paragraph,
   Container,
-  FeedbackBox,
   ButtonContainer,
-} from './VaccinationBlock.style';
+} from './RegionVaccinationBlock.style';
 import {
   VaccinationLink,
   getElegibilityLinksByFipsCode,
   getVaccinationOptionsLinksByFipsCode,
 } from './utils';
 import LinkButton from './LinkButton';
+import FeedbackBox from './FeedbackBox';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 
 const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
@@ -49,10 +49,7 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
           trackingLinkPrefix="Options"
         />
       )}
-      <FeedbackBox>
-        {/* TODO: Update with the feedback link */}
-        Help us improve by giving feedback or suggesting additional sources.
-      </FeedbackBox>
+      <FeedbackBox />
     </Container>
   );
 };
