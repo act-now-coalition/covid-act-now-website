@@ -6,7 +6,6 @@ import {
   Paragraph,
   Container,
   FeedbackBox,
-  LocationLink,
   ButtonContainer,
 } from './VaccinationBlock.style';
 import {
@@ -15,6 +14,8 @@ import {
   //getElegibilityLinksByFipsCode,
   //getVaccinationOptionsLinksByFipsCode,
 } from './utils';
+import LinkButton from './LinkButton';
+import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 import { useRegionVaccineData } from 'cms-content/vaccines';
 
 const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
@@ -51,12 +52,14 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
         <VaccinationLinksBlock
           title="Check eligibility"
           links={eligibilityLinks}
+          trackingLinkPrefix="Eligibility"
         />
       )}
       {vaccinationOptionsLinks && (
         <VaccinationLinksBlock
           title="See vaccination options"
           links={vaccinationOptionsLinks}
+          trackingLinkPrefix="Options"
         />
       )}
       <FeedbackBox>
@@ -71,17 +74,31 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
 const VaccinationLinksBlock: React.FC<{
   title: string;
   links: VaccinationLink[];
-}> = ({ title, links }) => (
+  trackingLinkPrefix: string;
+}> = ({ title, links, trackingLinkPrefix }) => (
   <Fragment>
     <Heading3>{title}</Heading3>
     <ButtonContainer>
       {links.map(({ label, url }) => (
-        <LocationLink href={url} key={label}>
+        <LinkButton
+          href={url}
+          key={label}
+          onClick={() =>
+            trackVaccinationLink(`${trackingLinkPrefix}: ${label}`)
+          }
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {label}
-        </LocationLink>
+        </LinkButton>
       ))}
     </ButtonContainer>
   </Fragment>
 );
+
+// TODO: Setup a better label
+function trackVaccinationLink(label: string) {
+  trackEvent(EventCategory.VACCINATION, EventAction.CLICK_LINK, label);
+}
 
 export default VaccinationBlock;

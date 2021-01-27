@@ -73,12 +73,7 @@ export function getRecommendations(
   recommendations: Recommendation[],
 ): any[] {
   const fedLevel = getFedLevel(projection);
-  const harvardLevel = getHarvardLevel(projection);
   const positiveTestRate = getPositiveTestRate(projection);
-
-  const harvardRecommendations = recommendations
-    .filter(item => item.source === RecommendationSource.HARVARD)
-    .filter(item => item.level === harvardLevel);
 
   let fedRecommendations = recommendations
     .filter(item => item.source === RecommendationSource.FED)
@@ -127,11 +122,10 @@ export function getRecommendations(
 
   const allRecommendations = [
     ...exposureRecommendations,
-    ...travelRecommendation,
     ...gatheringRecommendation,
     ...masksRecommendation,
     ...finalOtherFedRecommendations,
-    ...harvardRecommendations,
+    ...travelRecommendation,
   ];
 
   return allRecommendations.map(getIcon);

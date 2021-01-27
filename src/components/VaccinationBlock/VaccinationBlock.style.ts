@@ -1,4 +1,5 @@
-import Button from '@material-ui/core/Button';
+import MuiButton from '@material-ui/core/Button';
+import MuiChevronRightIcon from '@material-ui/icons/ChevronRight';
 import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 
@@ -38,7 +39,7 @@ export const Heading3 = styled.h3`
   margin-bottom: 12px;
 `;
 
-export const LocationLink = styled(Button).attrs(props => ({
+export const Button = styled(MuiButton).attrs(props => ({
   variant: 'outlined',
   disableRipple: true,
   disableFocusRipple: true,
@@ -47,7 +48,7 @@ export const LocationLink = styled(Button).attrs(props => ({
   color: ${COLOR_MAP.LIGHT_BLUE};
   text-transform: none;
 
-  border: 1px solid ${COLOR_MAP.LIGHTGRAY};
+  border: 1px solid ${COLOR_MAP.GRAY.LIGHT};
   border-radius: 3px;
 
   &.Button-focused {
@@ -60,4 +61,8 @@ export const ButtonContainer = styled.div`
   & > * {
     margin-right: 8px;
   }
+`;
+
+export const ChevronRightIcon = styled(MuiChevronRightIcon)`
+  color: ${COLOR_MAP.GRAY_ICON};
 `;
