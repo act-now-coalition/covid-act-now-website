@@ -3,10 +3,10 @@ import { Heading2, Paragraph } from './RegionVaccinationBlock.style';
 
 const Header: React.FC = () => (
   <Fragment>
-    <Heading2>Getting vaccinated</Heading2>
+    <Heading2>Vaccines</Heading2>
     <Paragraph>
-      Vaccination procedures vary by location. Below are official resources on
-      when and how you can get vaccinated.
+      Below are government resources to help you get vaccinated. If something is
+      missing or incorrect, please let us know.
     </Paragraph>
   </Fragment>
 );
