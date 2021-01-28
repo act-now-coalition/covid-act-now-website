@@ -39,3 +39,8 @@ export const getVaccinationRegions = (region: Region): Region[] => {
 export function trackVaccinationLink(label: string) {
   trackEvent(EventCategory.VACCINATION, EventAction.CLICK_LINK, label);
 }
+
+export const title = 'Getting vaccinated';
+
+export const introText =
+  'Vaccination procedures vary by location. Below are official resources on when and how you can get vaccinated.';

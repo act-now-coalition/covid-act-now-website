@@ -6,7 +6,12 @@ import {
   Paragraph,
   ButtonContainer,
 } from './RegionVaccinationBlock.style';
-import { getVaccinationRegions, VaccinationLink } from './utils';
+import {
+  getVaccinationRegions,
+  VaccinationLink,
+  title,
+  introText,
+} from './utils';
 import LinkButton from './LinkButton';
 import {
   RegionVaccinationInfo,
@@ -42,11 +47,8 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
     .filter((link): link is VaccinationLink => link !== null);
   return (
     <Fragment>
-      <Heading2>How to get vaccinated</Heading2>
-      <Paragraph>
-        Depending on your location, you may have to schedule an appointment or
-        get on a waitlist.
-      </Paragraph>
+      <Heading2>{title}</Heading2>
+      <Paragraph>{introText}</Paragraph>
       {eligibilityLinks && (
         <VaccinationLinksBlock
           title="Check eligibility"

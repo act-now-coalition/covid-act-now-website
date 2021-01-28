@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import { Heading2, Paragraph } from './RegionVaccinationBlock.style';
 import FeedbackBox from './FeedbackBox';
 import { StateLinkButton } from './StateVaccionationBlock.style';
-import { trackVaccinationLink } from './utils';
+import { trackVaccinationLink, title, introText } from './utils';
 import { getVaccinationDataByRegion } from 'cms-content/vaccines';
 
 const StateVaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
@@ -16,11 +16,8 @@ const StateVaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
 
   return (
     <Fragment>
-      <Heading2>How to get vaccinated</Heading2>
-      <Paragraph>
-        Depending on your location, you may have to schedule an appointment or
-        get on a waitlist.
-      </Paragraph>
+      <Heading2>{title}</Heading2>
+      <Paragraph>{introText}</Paragraph>
       <Grid container spacing={1}>
         {vaccinationData.eligibilityInfoUrl && (
           <Grid item xs={12} md={6} key="eligibility">
