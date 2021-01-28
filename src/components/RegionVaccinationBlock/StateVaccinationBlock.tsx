@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import { Region } from 'common/regions';
 import Grid from '@material-ui/core/Grid';
-import { Heading2, Paragraph } from './RegionVaccinationBlock.style';
+import { getVaccinationDataByRegion } from 'cms-content/vaccines';
 import FeedbackBox from './FeedbackBox';
+import Header from './Header';
 import { StateLinkButton } from './StateVaccionationBlock.style';
 import { trackVaccinationLink } from './utils';
-import { getVaccinationDataByRegion } from 'cms-content/vaccines';
 
 const StateVaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
   const vaccinationData = getVaccinationDataByRegion(region);
@@ -16,11 +16,7 @@ const StateVaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
 
   return (
     <Fragment>
-      <Heading2>How to get vaccinated</Heading2>
-      <Paragraph>
-        Depending on your location, you may have to schedule an appointment or
-        get on a waitlist.
-      </Paragraph>
+      <Header />
       <Grid container spacing={1}>
         {vaccinationData.eligibilityInfoUrl && (
           <Grid item xs={12} md={6} key="eligibility">
@@ -32,7 +28,7 @@ const StateVaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
                 trackVaccinationLink(`Eligibility: ${region.fullName}`)
               }
             >
-              Check eligibility
+              Who is eligible
             </StateLinkButton>
           </Grid>
         )}
@@ -46,7 +42,7 @@ const StateVaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
                 trackVaccinationLink(`Options: ${region.fullName}`)
               }
             >
-              See vaccination options
+              How to get vaccinated
             </StateLinkButton>
           </Grid>
         )}
