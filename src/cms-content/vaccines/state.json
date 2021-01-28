@@ -35,8 +35,8 @@
     {
       "hidden": false,
       "stateCode": "CA",
-      "eligibilityInfoUrl": "https://covid19.ca.gov/vaccines",
-      "vaccinationSignupUrl": null,
+      "eligibilityInfoUrl": "https://covid19.ca.gov/vaccines/#California's-vaccination-plan",
+      "vaccinationSignupUrl": "https://myturn.ca.gov/landing",
       "locationName": "California",
       "fips": "06"
     },
@@ -60,14 +60,14 @@
       "hidden": false,
       "stateCode": "DE",
       "eligibilityInfoUrl": "https://coronavirus.delaware.gov/vaccine/",
-      "vaccinationSignupUrl": "https://vaccinefinder.org/find-vaccine",
+      "vaccinationSignupUrl": "",
       "locationName": "Delaware",
       "fips": "10"
     },
     {
       "hidden": false,
       "stateCode": "DC",
-      "eligibilityInfoUrl": "https://coronavirus.dc.gov/vaccine-information",
+      "eligibilityInfoUrl": "https://coronavirus.dc.gov/vaccine",
       "vaccinationSignupUrl": "https://coronavirus.dc.gov/vaccinatedc",
       "locationName": "District of Columbia",
       "fips": "11"
@@ -179,7 +179,7 @@
     {
       "hidden": false,
       "stateCode": "MI",
-      "eligibilityInfoUrl": "https://www.michigan.gov/coronavirus/0,9753,7-406-98178_103214---,00.html",
+      "eligibilityInfoUrl": "https://www.michigan.gov/coronavirus/0,9753,7-406-98178_103214_104822---,00.html#comp_121341",
       "vaccinationSignupUrl": "https://www.michigan.gov/coronavirus/0,9753,7-406-98178_103214_104822---,00.html#comp_121341",
       "locationName": "Michigan",
       "fips": "26"
@@ -188,7 +188,7 @@
       "hidden": false,
       "stateCode": "MN",
       "eligibilityInfoUrl": "https://mn.gov/covid19/vaccine/whos-getting-vaccinated/index.jsp",
-      "vaccinationSignupUrl": null,
+      "vaccinationSignupUrl": "https://mn.gov/covid19/vaccine/find-vaccine/index.jsp",
       "locationName": "Minnesota",
       "fips": "27"
     },
