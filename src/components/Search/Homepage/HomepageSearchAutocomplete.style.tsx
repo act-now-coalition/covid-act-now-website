@@ -23,8 +23,8 @@ export const StyledTextField = styled(TextField).attrs(props => ({
 
 export const Wrapper = styled.div<{ isOpen: boolean }>`
   box-shadow: ${({ isOpen }) => isOpen && '0px 2px 24px rgba(0, 0, 0, 0.12)'};
+  border-radius: ${({ isOpen }) => (isOpen ? '4px 4px 0 0' : '4px')};
   padding: 1.5rem 0.5rem;
-  border-radius: 4px;
   position: relative;
   width: ${mobileWidth}px;
 
@@ -40,7 +40,7 @@ export const SearchBarIcon = styled(SearchIcon)`
 `;
 
 export const SearchDirections = styled.span`
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   display: flex;
   justify-content: center;
@@ -61,30 +61,14 @@ export const ListContainer = styled.ul`
   }
 `;
 
-/**
- * The :before is a hack to hide the top of the Paper's box shadow
- * https://stackoverflow.com/questions/19428584/remove-box-shadow-from-only-top-of-div/19428912
- */
+// Note (chelsi) - need max height on mobile?
 export const StyledPaper = styled(Paper)`
-  box-shadow: 0px 2px 24px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 26px 24px rgba(0, 0, 0, 0.12);
   width: ${mobileWidth}px;
-
-  :before {
-    content: '';
-    height: 20px;
-    width: ${mobileWidth}px;
-    position: absolute;
-    top: -16px;
-    background: inherit;
-  }
+  border-radius: 0 0 4px 4px;
 
   @media (min-width: ${materialSMBreakpoint}) {
     max-height: ${maxMenuHeight}px;
     width: ${desktopWidth}px;
-
-    :before {
-      height: 22px;
-      width: ${desktopWidth}px;
-    }
   }
 `;

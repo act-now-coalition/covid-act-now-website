@@ -4,25 +4,11 @@ import Popper from '@material-ui/core/Popper';
 type PopperProps = React.ComponentProps<typeof Popper>;
 type FinalPopperProps = PopperProps & { isMobile: boolean };
 
-/**
- * The default popper component built into MUI autocomplete has a handful
- * of inline styles that I couldn't figure out how to override
- * without hardcoding these inline styles below :)
- */
 const StyledPopper: React.FC<FinalPopperProps> = ({
   isMobile,
   ...otherProps
 }) => {
-  // Remove use of hardcoded margin?
-  const marginTop = isMobile ? '50px' : '58px';
-
-  return (
-    <Popper
-      {...otherProps}
-      style={{ marginTop: marginTop }}
-      placement="bottom"
-    />
-  );
+  return <Popper {...otherProps} placement="bottom" />;
 };
 
 export default StyledPopper;

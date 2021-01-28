@@ -5,7 +5,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { COLOR_MAP } from 'common/colors';
 
-export const getSearchTextFieldStyles = makeStyles(() => ({
+export const getSearchTextFieldStyles = makeStyles(theme => ({
   root: {
     backgroundColor: 'transparent',
     background: 'transparent',
@@ -13,6 +13,9 @@ export const getSearchTextFieldStyles = makeStyles(() => ({
     border: 'none',
     '& .MuiOutlinedInput-root': {
       height: '72px',
+      [theme.breakpoints.down('xs')]: {
+        height: '60px',
+      },
       '& fieldset': {
         borderColor: COLOR_MAP.GRAY.LIGHT,
         border: `1.5px solid ${COLOR_MAP.GRAY.LIGHT}`,

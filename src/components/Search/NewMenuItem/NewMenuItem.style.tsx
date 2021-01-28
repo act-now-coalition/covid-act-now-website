@@ -10,7 +10,11 @@ export const Wrapper = styled.div`
   align-items: center;
   width: 100%;
   border-bottom: 1px solid ${COLORS.LIGHTGRAY};
-  padding: 1.1rem 0.5rem;
+  padding: 0.75rem 0;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    padding: 1.1rem 0.5rem;
+  }
 `;
 
 export const Subcopy = styled.span`

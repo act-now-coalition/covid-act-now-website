@@ -13,7 +13,7 @@ import {
 import NewMenuItem from 'components/Search/NewMenuItem/NewMenuItem';
 import { getSearchTextFieldStyles } from 'assets/theme/customStyleBlocks/getSearchTextFieldStyles';
 import { getSearchAutocompleteStyles } from 'assets/theme/customStyleBlocks/getSearchAutocompleteStyles';
-import StyledPopper from './StyledPopper';
+// import StyledPopper from './StyledPopper';
 import { useBreakpoint } from 'common/hooks';
 
 function getOptionSelected(option: Region, selectedOption: Region) {
@@ -29,7 +29,7 @@ const HomepageSearchAutocomplete: React.FC<{
   /* We only check for a zipcode match when the input is all numbers and has a length of 5: */
   const [checkForZipcodeMatch, setCheckForZipcodeMatch] = useState(false);
   const [noOptionsCopy, setNoOptionsCopy] = useState('No location found');
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const isMobile = useBreakpoint(600);
 
@@ -85,7 +85,6 @@ const HomepageSearchAutocomplete: React.FC<{
   return (
     <Wrapper isOpen={isOpen}>
       <Autocomplete
-        open={true}
         noOptionsText={noOptionsCopy}
         onInputChange={onInputChange}
         options={locations}
@@ -137,9 +136,10 @@ const HomepageSearchAutocomplete: React.FC<{
         }}
         PaperComponent={StyledPaper}
         ListboxComponent={ListContainer}
-        PopperComponent={props => (
-          <StyledPopper {...props} isMobile={isMobile} />
-        )}
+        // Note (chelsi) - PopperComponent maybe no longer needed
+        // PopperComponent={props => (
+        //   <StyledPopper {...props} isMobile={isMobile} />
+        // )}
       />
       {isOpen && (
         <SearchDirections>Search city, county, or state</SearchDirections>
