@@ -1,13 +1,27 @@
 import React from 'react';
 import { FeedbackBox as BoxContainer } from './RegionVaccinationBlock.style';
+import ExternalLink from 'components/ExternalLink';
+import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 
 const FeedbackBox: React.FC = () => {
   return (
     <BoxContainer>
-      {/* TODO: Update with the feedback link */}
-      Help us improve by giving feedback or suggesting additional sources.
+      <ExternalLink
+        href="https://forms.gle/saHnT8RtDGqRaHHD8"
+        onClick={trackFeedbackClick}
+      >
+        Suggest an improvement
+      </ExternalLink>
     </BoxContainer>
   );
 };
+
+function trackFeedbackClick() {
+  trackEvent(
+    EventCategory.VACCINATION,
+    EventAction.CLICK_LINK,
+    'Suggest an improvement',
+  );
+}
 
 export default FeedbackBox;
