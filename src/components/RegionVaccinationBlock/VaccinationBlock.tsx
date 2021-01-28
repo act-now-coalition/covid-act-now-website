@@ -44,14 +44,14 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
       <Header />
       {eligibilityLinks && (
         <VaccinationLinksBlock
-          title="Check eligibility"
+          title="Who is eligible"
           links={eligibilityLinks}
           trackingLinkPrefix="Eligibility"
         />
       )}
       {vaccinationOptionsLinks && (
         <VaccinationLinksBlock
-          title="See vaccination options"
+          title="How to get vaccinated"
           links={vaccinationOptionsLinks}
           trackingLinkPrefix="Options"
         />
