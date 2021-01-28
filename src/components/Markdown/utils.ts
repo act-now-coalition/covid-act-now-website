@@ -38,3 +38,7 @@ export function isValidURL(href: string): boolean {
   }
   return true;
 }
+
+export function isInternalEmbed(href: string) {
+  return href.startsWith('https://covidactnow.org/embed/');
+}

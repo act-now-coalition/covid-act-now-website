@@ -19,7 +19,7 @@
       "productName": "Embed",
       "productId": "embed",
       "productSubtitle": "Allows you to embed our data into your website",
-      "productDescription": "We want our data and modeling to be available to all who are interested, including by third parties. That’s why we’ve made our data embeddable by other publishers.\n\nRead our [blog post](https://blog.covidactnow.org/data-feeds/) for instructions for how to use our embed. Here's what it looks like live:"
+      "productDescription": "Want to show our COVID map or risk-levels on your own website? Find the embed link at the bottom of this page. \n\n[Covid Act Now Embed- US Map](https://covidactnow.org/embed/us/)\n\nOr, you can embed the specific risk-level module for any location. Simply scroll to the bottom of that state, county or metro’s page.\n\n [Covid Act Now Embed - Dallas metro area](https://covidactnow.org/embed/us/fips/19100)"
     }
   ],
   "metadataTitle": "Tools",

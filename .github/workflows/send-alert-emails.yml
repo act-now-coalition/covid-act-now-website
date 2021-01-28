@@ -62,7 +62,7 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           STATUS: ${{job.status}}
-        uses: Ilshidur/action-slack@fb92a78
+        uses: Ilshidur/action-slack@fb92a78a305a399cd6d8ede99d641f2b9224daf3
         with:
           args: '[${{env.FIREBASE_ENV}}] send-alert-emails failed for snapshot ${{env.SNAPSHOT_ID}} send_emails=${{env.SEND_EMAILS}}: {{STATUS}}'
       - name: Slack notification
@@ -70,6 +70,6 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           STATUS: ${{job.status}}
-        uses: Ilshidur/action-slack@fb92a78
+        uses: Ilshidur/action-slack@fb92a78a305a399cd6d8ede99d641f2b9224daf3
         with:
           args: '[${{env.FIREBASE_ENV}}] Successfully sent alerts emails for snapshot ${{env.SNAPSHOT_ID}}'
