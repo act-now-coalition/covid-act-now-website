@@ -16,11 +16,18 @@ export interface GeolocationInfo {
   country: string;
 }
 
-export default function useGeolocation(): GeolocationInfo | undefined {
+export interface UseGeolocationReturn {
+  geolocationData: GeolocationInfo | undefined;
+  isLoading: boolean;
+}
+
+export default function useGeolocation(): UseGeolocationReturn {
   const [ipData, setIpData] = useState<GeolocationInfo | undefined>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchIpData = () => {
+      setIsLoading(true);
       fetch(`https://pro.ip-api.com/json/?key=${IP_API_KEY}`)
         .then(response => response.json())
         .then(data =>
@@ -30,10 +37,16 @@ export default function useGeolocation(): GeolocationInfo | undefined {
             country: data.country,
           }),
         )
-        .catch(e => console.error(e));
+        .catch(e => console.error(e))
+        .finally(() => setIsLoading(false));
     };
     fetchIpData();
-  }, []);
+  }, [setIpData, setIsLoading]);
 
-  return ipData;
+  const geolocationReturnObj: UseGeolocationReturn = {
+    geolocationData: ipData,
+    isLoading,
+  };
+
+  return geolocationReturnObj;
 }

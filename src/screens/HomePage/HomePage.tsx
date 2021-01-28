@@ -45,8 +45,8 @@ export default function HomePage() {
 
   const indicatorsRef = useRef(null);
 
-  const geolocation = useGeolocation();
-  const initialFipsForExplore = useGeolocationInExplore(5, geolocation);
+  const { geolocationData } = useGeolocation();
+  const initialFipsForExplore = useGeolocationInExplore(5, geolocationData);
 
   // Location hash is uniquely set from vaccination banner button click
   const compareShowVaccinationsFirst = location.hash === '#compare';
@@ -103,7 +103,7 @@ export default function HomePage() {
                 >
                   <SelectorWrapper id="search">
                     <SearchAutocomplete
-                      locations={getFinalAutocompleteLocations(geolocation)}
+                      locations={getFinalAutocompleteLocations(geolocationData)}
                       filterLimit={getFilterLimit()}
                     />
                   </SelectorWrapper>
