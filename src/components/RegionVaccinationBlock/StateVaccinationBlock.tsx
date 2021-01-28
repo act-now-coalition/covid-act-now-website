@@ -28,7 +28,7 @@ const StateVaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
                 trackVaccinationLink(`Eligibility: ${region.fullName}`)
               }
             >
-              Who is eligible
+              Who can get vaccinated
             </StateLinkButton>
           </Grid>
         )}
