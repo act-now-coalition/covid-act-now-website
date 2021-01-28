@@ -110,10 +110,12 @@ export default function NewHomepage() {
               <HorizontalThermometer />
             </ColumnCentered>
 
-            <CompareMain
-              locationsViewable={8}
-              vaccinesFirst={compareShowVaccinationsFirst}
-            />
+            <Section>
+              <CompareMain
+                locationsViewable={8}
+                vaccinesFirst={compareShowVaccinationsFirst}
+              />
+            </Section>
             <Section ref={exploreSectionRef}>
               <Explore
                 title="Cases, Deaths and Hospitalizations"
