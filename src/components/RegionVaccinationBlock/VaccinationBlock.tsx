@@ -39,17 +39,18 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
         : null,
     )
     .filter((link): link is VaccinationLink => link !== null);
+
   return (
     <Fragment>
       <Header />
-      {eligibilityLinks && (
+      {eligibilityLinks.length > 0 && (
         <VaccinationLinksBlock
           title="Where can I get vaccinated if I’m in..."
           links={eligibilityLinks}
           trackingLinkPrefix="Eligibility"
         />
       )}
-      {vaccinationOptionsLinks && (
+      {vaccinationOptionsLinks.length > 0 && (
         <VaccinationLinksBlock
           title="Where and how do I get vaccinated if I’m in..."
           links={vaccinationOptionsLinks}
