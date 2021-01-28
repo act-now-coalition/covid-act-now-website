@@ -7,7 +7,7 @@ import { useSummaries } from 'common/location_summaries';
 import { ScreenshotReady } from 'components/Screenshot';
 import regions from 'common/regions';
 import { USMapWrapper, USStateMapWrapper } from './Map.style';
-import COUNTIES_JSON from './data/counties-10m.json';
+import COUNTIES_JSON from 'assets/data/counties-geo.json';
 
 const stateFipsCodes = regions.states.map(state => state.fipsCode);
 

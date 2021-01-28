@@ -5,7 +5,7 @@ import { ComposableMap, Geographies } from 'react-simple-maps';
 import ReactTooltip from 'react-tooltip';
 import * as topojson from 'topojson-client';
 import { geoBounds, geoCentroid, geoDistance } from 'd3-geo';
-import COUNTIES_JSON from 'components/Map/data/counties-10m.json';
+import COUNTIES_JSON from 'assets/data/counties-geo.json';
 import regions, { County, MetroArea, State, Region } from 'common/regions';
 import * as Styles from './RegionMap.style';
 import { LocationSummariesByFIPS } from 'common/location_summaries';

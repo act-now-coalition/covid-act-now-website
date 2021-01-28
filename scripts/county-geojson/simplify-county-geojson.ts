@@ -1,7 +1,11 @@
 /**
- * This script removes the "properties" attribute from the counties GeoJSON file to reduce
- * its size. The properties are not currently used in the code, this reduces the file size
- * by about 100K (13%).
+ * This script removes some information from the counties-10m.json that we don't need:
+ *
+ *   - removes the "properties" attribute from each geometry
+ *   - removes the "nation" object in the file
+ *
+ * This reduces the file size by from 824K to 716K (~14%). We are keeping a copy of the
+ * original file here in case we need to restore some of this information.
  */
 import fs from 'fs';
 import path from 'path';
@@ -29,13 +33,10 @@ function simplifyGeometries(object: GeoObject) {
 async function main() {
   const updatedGeoJSON = {
     ...countyGeoJSON,
-    objects: _.merge(
-      _.map(countyGeoJSON.objects, (object: GeoObject, key: string) => {
-        return {
-          [key]: { ...object, geometries: simplifiedGeometries },
-        };
-      }),
-    ),
+    objects: {
+      counties: simplifyGeometries(countyGeoJSON.objects.counties),
+      states: simplifyGeometries(countyGeoJSON.objects.states),
+    },
   };
 
   const outputPath = path.join(
