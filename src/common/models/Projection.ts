@@ -36,9 +36,7 @@ const DISABLED_TEST_POSITIVITY = new DisabledFips([]);
 
 const DISABLED_ICU = new DisabledFips([]);
 
-const DISABLED_VACCINATIONS = new DisabledFips([
-  /39.../, // https://trello.com/c/J3M0Ksb5/827-ohio-county-vaccinations-are-not-cumulative
-]);
+const DISABLED_VACCINATIONS = new DisabledFips([]);
 
 /**
  * We truncate (or in the case of charts, switch to a dashed line) the last
