@@ -1,24 +1,18 @@
 import React, { Fragment } from 'react';
 import { Region } from 'common/regions';
 import {
-  Heading2,
-  Heading3,
-  Paragraph,
-  ButtonContainer,
-} from './RegionVaccinationBlock.style';
-import {
-  getVaccinationRegions,
-  VaccinationLink,
-  title,
-  introText,
-} from './utils';
-import LinkButton from './LinkButton';
-import {
   RegionVaccinationInfo,
   getVaccinationDataByRegion,
 } from 'cms-content/vaccines';
+import LinkButton from './LinkButton';
 import FeedbackBox from './FeedbackBox';
-import { trackVaccinationLink } from './utils';
+import Header from './Header';
+import { Heading3, ButtonContainer } from './RegionVaccinationBlock.style';
+import {
+  getVaccinationRegions,
+  VaccinationLink,
+  trackVaccinationLink,
+} from './utils';
 
 const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
   const vaccinationRegions = getVaccinationRegions(region);
@@ -47,8 +41,7 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
     .filter((link): link is VaccinationLink => link !== null);
   return (
     <Fragment>
-      <Heading2>{title}</Heading2>
-      <Paragraph>{introText}</Paragraph>
+      <Header />
       {eligibilityLinks && (
         <VaccinationLinksBlock
           title="Check eligibility"

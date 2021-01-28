@@ -20,7 +20,7 @@ function trackFeedbackClick() {
   trackEvent(
     EventCategory.VACCINATION,
     EventAction.CLICK_LINK,
-    'Suggest and improvement',
+    'Suggest an improvement',
   );
 }
 
