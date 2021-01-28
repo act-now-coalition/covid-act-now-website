@@ -20,6 +20,7 @@ export const Paragraph = styled.p`
   font-size: 16px;
   line-height: 1.5;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
+  max-width: 600px;
 `;
 
 export const Heading3 = styled.h3`
