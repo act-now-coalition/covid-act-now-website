@@ -36,7 +36,7 @@
       "eligibilityInfoUrl": "https://www.yuba.org/coronavirus/vaccines.php"
     },
     {
-      "fips": "32013",
+      "fips": "06023",
       "locationName": "Humboldt County",
       "eligibilityInfoUrl": "https://humboldtgov.org/2872/Vaccine-Info"
     },
@@ -81,7 +81,7 @@
       "eligibilityInfoUrl": "https://www.recoverslo.org/en/covid-19-vaccines-in-slo-county.aspx"
     },
     {
-      "fips": "46019",
+      "fips": "06007",
       "locationName": "Butte County",
       "eligibilityInfoUrl": "https://www.buttecounty.net/ph/COVID19/vaccine"
     },
@@ -106,7 +106,7 @@
       "eligibilityInfoUrl": "https://www.coronavirus.cchealth.org/vaccine"
     },
     {
-      "fips": "35051",
+      "fips": "06091",
       "locationName": "Sierra County",
       "eligibilityInfoUrl": "https://sierracounty.ca.gov/616/About-Vaccine-for-COVID-19"
     },
@@ -126,7 +126,7 @@
       "eligibilityInfoUrl": "https://www.inyocounty.us/covid-19/vaccine-information"
     },
     {
-      "fips": "36047",
+      "fips": "06031",
       "locationName": "Kings County",
       "eligibilityInfoUrl": "https://www.countyofkings.com/departments/health-welfare/public-health/coronavirus-disease-2019-covid-19"
     },
@@ -141,12 +141,12 @@
       "eligibilityInfoUrl": "http://publichealth.lacounty.gov/media/coronavirus/vaccine/"
     },
     {
-      "fips": "48455",
+      "fips": "06105",
       "locationName": "Trinity County",
       "eligibilityInfoUrl": "https://www.trinitycounty.org/COVID19-Vaccine"
     },
     {
-      "fips": "50017",
+      "fips": "06059",
       "locationName": "Orange County",
       "eligibilityInfoUrl": "https://occovid19.ochealthinfo.com/covid-19-vaccine-resources"
     },
@@ -171,7 +171,7 @@
       "eligibilityInfoUrl": "https://coronavirus.marinhhs.org/vaccine"
     },
     {
-      "fips": "47095",
+      "fips": "06033",
       "locationName": "Lake County",
       "eligibilityInfoUrl": "http://health.co.lake.ca.us/Coronavirus/Vaccines.htm"
     },
@@ -248,7 +248,7 @@
     {
       "fips": "06063",
       "locationName": "Plumas County",
-      "eligibilityInfoUrl": "https://www.plumascounty.us/2749/COVID-19-Vaccine"
+      "eligibilityInfoUrl": "https://www.plumascounty.us/2761/COVID-19-Vaccine"
     },
     {
       "fips": "06095",
