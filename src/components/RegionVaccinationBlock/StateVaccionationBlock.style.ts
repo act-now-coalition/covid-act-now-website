@@ -6,6 +6,7 @@ export const StateLinkButton = styled(LinkButton)`
   display: flex;
   flex-grow: 1;
   width: 100%;
+  font-size: 16px;
 
   padding: 16px 16px;
   @media @media (min-width: ${mobileBreakpoint}) {
