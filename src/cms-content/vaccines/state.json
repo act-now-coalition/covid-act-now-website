@@ -83,7 +83,7 @@
     {
       "hidden": false,
       "stateCode": "GA",
-      "eligibilityInfoUrl": "https://dph.georgia.gov/covid-vaccine",
+      "eligibilityInfoUrl": "https://dph.georgia.gov/sites/dph.georgia.gov/files/styles/two_one_1000x500/public/2021-01/WIDEnewPHASES_graphic1a-01_0.png?h=3d937957&itok=C1wRFzei",
       "vaccinationSignupUrl": "https://dph.georgia.gov/locations/covid-vaccination-site",
       "locationName": "Georgia",
       "fips": "13"
@@ -372,7 +372,7 @@
       "hidden": false,
       "stateCode": "VT",
       "eligibilityInfoUrl": "https://www.healthvermont.gov/covid-19/vaccine/about-covid-19-vaccines-vermont",
-      "vaccinationSignupUrl": null,
+      "vaccinationSignupUrl": "https://www.healthvermont.gov/covid-19/vaccine/getting-covid-19-vaccine",
       "locationName": "Vermont",
       "fips": "50"
     },
@@ -396,7 +396,7 @@
       "hidden": false,
       "stateCode": "WV",
       "eligibilityInfoUrl": "https://dhhr.wv.gov/COVID-19/Pages/Vaccine.aspx",
-      "vaccinationSignupUrl": "",
+      "vaccinationSignupUrl": "https://member.everbridge.net/747122446041089/login",
       "locationName": "West Virginia",
       "fips": "54"
     },
