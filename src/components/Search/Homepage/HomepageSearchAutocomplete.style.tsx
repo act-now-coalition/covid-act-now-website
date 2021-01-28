@@ -4,7 +4,9 @@ import { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 import SearchIcon from '@material-ui/icons/Search';
 
-const maxMenuHeight = '240px';
+const maxMenuHeight = 240;
+export const desktopWidth = 732;
+export const mobileWidth = 350;
 
 export const StyledTextField = styled(TextField).attrs(props => ({
   variant: 'outlined',
@@ -19,16 +21,15 @@ export const StyledTextField = styled(TextField).attrs(props => ({
   }
 `;
 
-// Remove use of hardcoded width
 export const Wrapper = styled.div<{ isOpen: boolean }>`
   box-shadow: ${({ isOpen }) => isOpen && '0px 2px 24px rgba(0, 0, 0, 0.12)'};
   padding: 1.5rem 0.5rem;
   border-radius: 4px;
   position: relative;
-  width: 350px;
+  width: ${mobileWidth}px;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    width: 700px;
+    width: ${desktopWidth}px;
     padding: 1.5rem;
   }
 `;
@@ -53,24 +54,37 @@ export const SearchDirections = styled.span`
 
 export const ListContainer = styled.ul`
   padding: 0 1.75rem 0;
-  max-height: ${maxMenuHeight};
+  max-height: ${maxMenuHeight}px;
 
   li {
     padding: 0;
   }
 `;
 
-// The :before is a hack to hide the top of the Paper's box shadow
+/**
+ * The :before is a hack to hide the top of the Paper's box shadow
+ * https://stackoverflow.com/questions/19428584/remove-box-shadow-from-only-top-of-div/19428912
+ */
 export const StyledPaper = styled(Paper)`
   box-shadow: 0px 2px 24px rgba(0, 0, 0, 0.12);
-  max-height: ${maxMenuHeight};
+  width: ${mobileWidth}px;
 
   :before {
     content: '';
     height: 20px;
-    width: 100%;
+    width: ${mobileWidth}px;
     position: absolute;
-    top: -15px;
+    top: -16px;
     background: inherit;
+  }
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    max-height: ${maxMenuHeight}px;
+    width: ${desktopWidth}px;
+
+    :before {
+      height: 22px;
+      width: ${desktopWidth}px;
+    }
   }
 `;

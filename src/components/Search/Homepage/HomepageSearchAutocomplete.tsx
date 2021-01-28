@@ -29,7 +29,7 @@ const HomepageSearchAutocomplete: React.FC<{
   /* We only check for a zipcode match when the input is all numbers and has a length of 5: */
   const [checkForZipcodeMatch, setCheckForZipcodeMatch] = useState(false);
   const [noOptionsCopy, setNoOptionsCopy] = useState('No location found');
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const isMobile = useBreakpoint(600);
 
@@ -46,7 +46,7 @@ const HomepageSearchAutocomplete: React.FC<{
     } else {
       if (value.length) {
         setNoOptionsCopy(
-          `No locations named ${value} found. You can also try searching a zip code.`,
+          `No locations named ${value} found. You can also try searching by zip code.`,
         );
       } else setNoOptionsCopy('No location found');
     }
@@ -70,18 +70,28 @@ const HomepageSearchAutocomplete: React.FC<{
 
   const zipCodeInput = checkForZipcodeMatch ? input : '';
 
-  const textFieldPlaceholder = isOpen
-    ? ''
-    : 'Search by state, metro, county, or zip';
+  const getPlaceholderText = (): string => {
+    if (isOpen) {
+      return '';
+    } else {
+      if (isMobile) {
+        return 'City, county, or state';
+      } else {
+        return 'Search city, county, or state';
+      }
+    }
+  };
 
   return (
     <Wrapper isOpen={isOpen}>
       <Autocomplete
+        open={true}
         noOptionsText={noOptionsCopy}
         onInputChange={onInputChange}
         options={locations}
         disableListWrap
         disableClearable
+        disablePortal
         clearOnEscape
         fullWidth
         onChange={onSelect}
@@ -94,7 +104,7 @@ const HomepageSearchAutocomplete: React.FC<{
         popupIcon={<span />} // adding an empty span removes default MUI arrow icon
         renderInput={params => (
           <StyledTextField
-            placeholder={textFieldPlaceholder}
+            placeholder={getPlaceholderText()}
             {...params}
             className={searchTextFieldStyles.root}
             $isOpen={isOpen}
@@ -110,6 +120,7 @@ const HomepageSearchAutocomplete: React.FC<{
         classes={{
           option: autocompleteStyles.option,
           noOptions: autocompleteStyles.noOptions,
+          popperDisablePortal: autocompleteStyles.popperDisablePortal,
         }}
         openOnFocus
         onOpen={() => {
@@ -131,9 +142,7 @@ const HomepageSearchAutocomplete: React.FC<{
         )}
       />
       {isOpen && (
-        <SearchDirections>
-          Search by state, metro, county, or zip
-        </SearchDirections>
+        <SearchDirections>Search city, county, or state</SearchDirections>
       )}
     </Wrapper>
   );

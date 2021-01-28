@@ -16,4 +16,8 @@ export const getSearchAutocompleteStyles = makeStyles(() => ({
     color: 'black',
     fontSize: '.9rem',
   },
+  popperDisablePortal: {
+    marginTop: '58px',
+    left: 0,
+  },
 }));
