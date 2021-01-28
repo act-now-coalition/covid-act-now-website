@@ -41,7 +41,7 @@ export default function useGeolocation(): UseGeolocationReturn {
         .finally(() => setIsLoading(false));
     };
     fetchIpData();
-  }, []);
+  }, [setIpData, setIsLoading]);
 
   const geolocationReturnObj: UseGeolocationReturn = {
     geolocationData: ipData,
