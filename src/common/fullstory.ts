@@ -24,7 +24,6 @@ export function initFullStory() {
 
   if (localStorage.getItem(FULLSTORY_RECORD_KEY) === RecordSession.TRUE) {
     FullStory.init({ orgId: 'XEVN9', devMode: true, debug: true });
-    console.log('FS: Initialized');
   }
 }
 
