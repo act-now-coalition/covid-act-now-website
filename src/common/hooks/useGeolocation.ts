@@ -28,8 +28,7 @@ export default function useGeolocation(): UseGeolocationReturn {
   useEffect(() => {
     const fetchIpData = () => {
       setIsLoading(true);
-      fetch(`https://pro.ip-api.com/json/?key=${IP_API_KEY}`)
-        .then(response => response.json())
+      fetchGeolocationData()
         .then(data =>
           setIpData({
             zipCode: data.zip,
@@ -49,4 +48,39 @@ export default function useGeolocation(): UseGeolocationReturn {
   };
 
   return geolocationReturnObj;
+}
+
+function fetchGeolocationData() {
+  return fetch(
+    `https://pro.ip-api.com/json/?key=${IP_API_KEY}`,
+  ).then(response => response.json());
+}
+
+// Use this mock to simulate fetchGeolocationData
+function mockGeolocationData() {
+  return Promise.resolve({
+    query: '8.8.8.8',
+    status: 'success',
+    continent: 'North America',
+    continentCode: 'NA',
+    country: 'United States',
+    countryCode: 'US',
+    region: 'VA',
+    regionName: 'Virginia',
+    city: 'Ashburn',
+    district: '',
+    zip: '20149',
+    lat: 39.03,
+    lon: -77.5,
+    timezone: 'America/New_York',
+    offset: -18000,
+    currency: 'USD',
+    isp: 'Google LLC',
+    org: 'Google Public DNS',
+    as: 'AS15169 Google LLC',
+    asname: 'GOOGLE',
+    mobile: false,
+    proxy: false,
+    hosting: true,
+  });
 }
