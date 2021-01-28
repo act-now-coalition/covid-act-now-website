@@ -5,8 +5,8 @@ import regions from 'common/regions';
 import { RegionItemsWrapper } from 'screens/HomePage/New/NewHomepage.style';
 
 const HomepageItems: React.FC = () => {
-  const stateRegion = regions.findByFipsCodeStrict('09');
-  const countyRegion = regions.findByFipsCodeStrict('09001');
+  const stateRegion = regions.findByFipsCodeStrict('23005');
+  const countyRegion = regions.findByFipsCodeStrict('38860');
 
   return (
     <RegionItemsWrapper>

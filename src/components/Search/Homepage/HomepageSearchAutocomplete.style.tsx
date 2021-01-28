@@ -15,6 +15,7 @@ export const StyledTextField = styled(TextField).attrs(props => ({
     box-shadow: ${({ $isOpen }) =>
       !$isOpen && '0px 2px 24px rgba(0, 0, 0, 0.12)'};
   }
+  transition: box-shadow 0.1s ease-in-out;
 
   &:focus {
     box-shadow: none;
