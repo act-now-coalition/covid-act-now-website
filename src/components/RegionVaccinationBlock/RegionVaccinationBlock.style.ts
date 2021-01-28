@@ -22,13 +22,6 @@ export const Paragraph = styled.p`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
 `;
 
-export const FeedbackBox = styled(Paragraph)`
-  font-size: 14px;
-  padding: 16px;
-  background-color: ${COLOR_MAP.LIGHTGRAY_BG};
-  max-width: 600px;
-`;
-
 export const Heading3 = styled.h3`
   font-family: Roboto;
   font-style: normal;
