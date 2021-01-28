@@ -23,7 +23,7 @@ export function initFullStory() {
   initStorage();
 
   if (localStorage.getItem(FULLSTORY_RECORD_KEY) === RecordSession.TRUE) {
-    FullStory.init({ orgId: 'XEVN9', devMode: true, debug: true });
+    FullStory.init({ orgId: 'XEVN9' });
   }
 }
 
