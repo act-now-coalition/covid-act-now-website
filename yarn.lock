@@ -2700,6 +2700,11 @@
   resolved "https://registry.yarnpkg.com/@firebase/webchannel-wrapper/-/webchannel-wrapper-0.2.41.tgz#4e470c25a99fa0b1f629f1c5ef180a318d399fd0"
   integrity sha512-XcdMT5PSZHiuf7LJIhzKIe+RyYa25S3LHRRvLnZc6iFjwXkrSDJ8J/HWO6VT8d2ZTbawp3VcLEjRF/VN8glCrA==
 
+"@fullstory/browser@^1.4.6":
+  version "1.4.6"
+  resolved "https://registry.yarnpkg.com/@fullstory/browser/-/browser-1.4.6.tgz#62e17ffe4ee724cf6478f1bd44a3af41e57fbd7a"
+  integrity sha512-tvm7zVsK3Zn2QW76+4dkmOGGhwkb+Srqm4tQExsJJzw5bhDaYiqNtOvmqiZ5Jp423yCREcqtEHZVSyVXkiWbvw==
+
 "@google-cloud/common@^2.1.1":
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/@google-cloud/common/-/common-2.4.0.tgz#2783b7de8435024a31453510f2dab5a6a91a4c82"

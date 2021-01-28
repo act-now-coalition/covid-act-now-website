@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import * as Sentry from '@sentry/react';
+import * as FullStory from '@fullstory/browser';
 
 Sentry.init({
   // list of community compiled ignore errors + deny urls to help declutter sentry.
@@ -20,6 +21,8 @@ Sentry.init({
   dsn:
     'https://4e1fa0b7df4d490488847bcc7966712b@o378922.ingest.sentry.io/5444052',
 });
+
+FullStory.init({ orgId: 'XEVN9' });
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
