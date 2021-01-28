@@ -39,7 +39,7 @@ export const Wrapper = styled.div<{
 }>`
   max-width: ${({ $isHomepage }) => ($isHomepage ? '1000px' : '900px')};
   width: 100%;
-  margin: ${({ $isModal }) => ($isModal ? '0 auto' : '1rem auto')};
+  margin: ${({ $isModal }) => ($isModal ? '0 auto' : '0 auto')};
   background: ${({ $isModal }) => $isModal && `${COLOR_MAP.GRAY_BODY_COPY}`};
   max-height: ${({ $isModal }) => $isModal && '100vh'};
 
@@ -440,7 +440,6 @@ export const FooterLink = styled.div`
 export const HeaderWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0.75rem 1rem;
 `;
 
 export const Header = styled.div<{ isHomepage?: boolean }>`

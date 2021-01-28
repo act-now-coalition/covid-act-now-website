@@ -1,3 +1,3 @@
-import VaccinationBlock from './VaccinationBlock';
+import RegionVaccinationBlock from './RegionVaccinationBlock';
 
-export default VaccinationBlock;
+export default RegionVaccinationBlock;
