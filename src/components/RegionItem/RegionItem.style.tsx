@@ -36,8 +36,7 @@ export const SharedWrapperStyles = css`
   display: flex;
   align-items: center;
   background-color: ${COLOR_MAP.LIGHTGRAY_BG};
-  max-width: 330px;
-  width: 100%;
+  width: 330px;
   padding: 1.25rem 1.75rem 1.25rem 1.25rem;
   border-radius: 4px;
 `;

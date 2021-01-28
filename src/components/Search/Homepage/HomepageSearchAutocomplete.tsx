@@ -31,7 +31,7 @@ const HomepageSearchAutocomplete: React.FC<{
   const [noOptionsCopy, setNoOptionsCopy] = useState('No location found');
   const [isOpen, setIsOpen] = useState(false);
 
-  const isMobile = useBreakpoint(800);
+  const isMobile = useBreakpoint(600);
 
   const searchTextFieldStyles = getSearchTextFieldStyles();
   const autocompleteStyles = getSearchAutocompleteStyles();

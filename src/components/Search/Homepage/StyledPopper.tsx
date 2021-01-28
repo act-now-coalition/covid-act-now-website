@@ -13,11 +13,14 @@ const StyledPopper: React.FC<FinalPopperProps> = ({
   isMobile,
   ...otherProps
 }) => {
-  const width = isMobile ? '98%' : '670px';
+  // Remove use of hardcoded width
+  const width = isMobile ? '350px' : '700px';
+  const marginTop = isMobile ? '50px' : '58px';
+
   return (
     <Popper
       {...otherProps}
-      style={{ width: width, marginTop: '66px' }}
+      style={{ width: width, marginTop: marginTop }}
       placement="bottom"
     />
   );

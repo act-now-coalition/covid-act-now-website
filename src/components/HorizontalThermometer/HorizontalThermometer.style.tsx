@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { COLOR_MAP } from 'common/colors';
+import COLORS, { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 
@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
   border-radius: 4px;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    border: 1px solid ${COLOR_MAP.GRAY.LIGHT};
+    border: 1px solid ${COLORS.LIGHTGRAY};
   }
 `;
 
