@@ -3,7 +3,6 @@ import { formatMetatagDate } from 'common/utils';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import { Heading1, Heading2, MarkdownContent } from 'components/Markdown';
 import PageContent from 'components/PageContent';
-import { Anchor } from 'components/TableOfContents';
 import { LandingSection, landingPageContent } from 'cms-content/learn/landing';
 import { learnPages } from 'cms-content/learn';
 import SectionButton, { ButtonTheme } from './SectionButton';
@@ -32,10 +31,7 @@ const Landing: React.FC = () => {
         <MarkdownContent source={intro} />
         {sections.map((section: LandingSection) => (
           <Fragment key={section.sectionId}>
-            <Heading2>
-              <Anchor id={section.sectionId} />
-              {section.sectionTitle}
-            </Heading2>
+            <Heading2 id={section.sectionId}>{section.sectionTitle}</Heading2>
             <MarkdownContent source={section.description} />
             <ButtonContainer>
               <SectionButton

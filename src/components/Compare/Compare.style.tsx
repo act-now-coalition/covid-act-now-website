@@ -1,11 +1,7 @@
 import styled, { css } from 'styled-components';
 import { isNumber } from 'lodash';
 import { TableHead, TableCell, TableRow, Modal } from '@material-ui/core';
-import {
-  COLOR_MAP,
-  LEVEL_COLOR,
-  LEVEL_COLOR_CONTACT_TRACING,
-} from 'common/colors';
+import { COLOR_MAP, LEVEL_COLOR } from 'common/colors';
 import { COLORS } from 'common';
 import { Metric } from 'common/metric';
 import { Level } from 'common/level';
@@ -281,11 +277,6 @@ export const LocationInfoWrapper = styled.div`
   align-items: center;
 `;
 
-export const RegionSuffix = styled.span`
-  font-weight: normal;
-  margin-right: 0.25rem;
-`;
-
 const SharedCellStyles = css`
   text-align: left;
   padding-top: 0.75rem;
@@ -355,13 +346,6 @@ export const MetricCell = styled.td<{
   svg {
     color: ${({ iconColor }) =>
       iconColor !== undefined && `${LEVEL_COLOR[iconColor]}`};
-  }
-
-  &:last-child {
-    svg {
-      color: ${({ iconColor }) =>
-        iconColor !== undefined && `${LEVEL_COLOR_CONTACT_TRACING[iconColor]}`};
-    }
   }
 `;
 

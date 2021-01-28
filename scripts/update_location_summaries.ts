@@ -141,6 +141,10 @@ function aggregate(
     allProjections,
     p => p.primary.currentCumulativeDeaths || 0,
   );
+  const totalVaccinationsInitiated = _.sumBy(
+    allProjections,
+    p => p.primary.vaccinationsInfo?.peopleInitiated || 0,
+  );
   const dates: number[] = [];
   let aggregatedDatasets: { [key: string]: Array<number | null> } = {};
   for (const datasetId of datasetsToAggregate) {
@@ -171,6 +175,7 @@ function aggregate(
     totalPopulation,
     totalCases,
     totalDeaths,
+    totalVaccinationsInitiated,
     dates,
     ...aggregatedDatasets,
   };

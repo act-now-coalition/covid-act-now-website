@@ -23,7 +23,7 @@
     {
       "term": "Asymptomatic",
       "termId": "asymptomatic",
-      "definition": "An asymptomatic person is positive for the virus but never shows signs or symptoms of the infection. The fact that COVID can be asymptomatic means we do not always know if a person has COVID unless they get tested, and therefore the virus can be transmitted unknowingly.\n\nSome people with asymptomatic infection may actually be [presymptomatic](#presymptomatic), and develop symptoms later on.\n\nResearchers are unsure how many COVID cases are transmitted asymptomatically, but estimates range between [6 percent and 41 percent](https://www.who.int/news-room/commentaries/detail/transmission-of-sars-cov-2-implications-for-infection-prevention-precautions) of cases.",
+      "definition": "An asymptomatic person is positive for the virus but never shows signs or symptoms of the infection. The fact that COVID can be asymptomatic means we do not always know if a person has COVID unless they get tested, and therefore the virus can be transmitted unknowingly.\n\nSome people with asymptomatic infection may actually be [presymptomatic](https://covidactnow.org/glossary#presymptomatic-spread), and develop symptoms later on.\n\nResearchers are unsure how many COVID cases are transmitted asymptomatically, but estimates range between [6 percent and 41 percent](https://www.who.int/news-room/commentaries/detail/transmission-of-sars-cov-2-implications-for-infection-prevention-precautions) of cases.",
       "category": "Health and symptoms"
     },
     {
@@ -71,7 +71,7 @@
     {
       "term": "Contact tracing",
       "termId": "contact-tracing",
-      "definition": "Contact tracing is the process of tracing all of the people with whom a newly confirmed COVID patient has come into contact, in order to identify and notify people who may have been exposed to the virus. \n\n* When contacts are efficiently traced and encouraged to quarantine, further [transmission](#transmission) can be prevented. Contact tracing is essential if we want to slow the spread of COVID without universal [quarantine](#quarantine) or full shut-down.\n* Contact tracing is especially critical due to the fact that people can spread COVID even if they are [presymptomatic](#presymptomatic-spread) or [asymptomatic](#asymptomatic).",
+      "definition": "Contact tracing is the process of tracing all of the people with whom a newly confirmed COVID patient has come into contact, in order to identify and notify people who may have been exposed to the virus. \n\nWhen contacts are efficiently traced and encouraged to quarantine, further [transmission](#transmission) can be prevented. Contact tracing is essential if we want to slow the spread of COVID without universal [quarantine](#quarantine) or full shut-down.\n\nContact tracing is especially critical due to the fact that people can spread COVID even if they are [presymptomatic](#presymptomatic-spread) or [asymptomatic](#asymptomatic).\n\n\\*\\*Due to the widespread, untracked, community spread across all of the United States, we will no longer be showing a contact tracing metric on our site, although we will continue serving it through our[](https://covidactnow.org/tools) [API](https://covidactnow.org/tools).",
       "category": "Metrics"
     },
     {

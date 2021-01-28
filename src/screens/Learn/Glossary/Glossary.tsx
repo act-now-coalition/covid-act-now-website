@@ -12,7 +12,6 @@ import PageContent from 'components/PageContent';
 import { glossaryContent, Term } from 'cms-content/learn/glossary';
 import { learnPages } from 'cms-content/learn';
 import Breadcrumbs from 'components/Breadcrumbs';
-import { Anchor } from 'components/TableOfContents';
 import { formatMetatagDate, formatNumericalDate } from 'common/utils';
 import ScrollToTopButton from 'components/SharedComponents/ScrollToTopButton';
 import { useScrollToTopButton } from 'common/hooks';
@@ -68,8 +67,7 @@ const Glossary: React.FC = () => {
         </LastUpdatedDate>
         {terms.map((term: Term, i: number) => (
           <Fragment key={`glossary-term-${i}`}>
-            <Anchor id={term.termId} />
-            <SectionName>{term.term}</SectionName>
+            <SectionName id={term.termId}>{term.term}</SectionName>
             <MarkdownContent source={term.definition} />
           </Fragment>
         ))}

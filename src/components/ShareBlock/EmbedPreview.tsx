@@ -96,7 +96,14 @@ const EmbedPreview: React.FC<{
             <Grid container alignItems="center" justify="center">
               {/* If we're sharing from an embed, we don't need a preview */}
               {!isEmbed && (
-                <Grid xs={12} lg={6} item>
+                <Grid
+                  xs={12}
+                  lg={6}
+                  item
+                  container
+                  alignItems="center"
+                  justify="center"
+                >
                   <iframe
                     src={iFramePath}
                     title="Embed Preview"

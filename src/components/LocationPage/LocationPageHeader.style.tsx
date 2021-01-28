@@ -5,6 +5,7 @@ import { COLORS } from 'common';
 import { COLOR_MAP } from 'common/colors';
 import { Level } from 'common/level';
 import MuiWarningIcon from '@material-ui/icons/Warning';
+import Button from '@material-ui/core/Button';
 
 export const ColoredHeaderBanner = styled(Box)`
   display: flex;
@@ -163,7 +164,12 @@ export const ButtonsWrapper = styled(Box)`
   }
 `;
 
-export const HeaderButton = styled(Box)`
+export const HeaderButton = styled(Button).attrs(props => ({
+  disableRipple: true,
+  disableFocusRipple: true,
+  variant: 'outlined',
+  focusVisibleClassName: 'Button-focused',
+}))`
   font-size: 13px;
   line-height: 1.2;
   cursor: pointer;
@@ -185,6 +191,7 @@ export const HeaderButton = styled(Box)`
 
     &:hover {
       border: 1px solid ${COLOR_MAP.BLUE};
+      background-color: white;
     }
   }
 
@@ -193,6 +200,7 @@ export const HeaderButton = styled(Box)`
 
     &:hover {
       border: 1px solid ${COLOR_MAP.RED.BASE};
+      background-color: white;
     }
   }
 
@@ -215,6 +223,12 @@ export const HeaderButton = styled(Box)`
     &:first-child {
       margin-right: 1.5rem;
     }
+  }
+
+  &.Button-focused {
+    // Defaults to blue if we don't have a user agent color
+    outline: blue auto 1px;
+    outline: -webkit-focus-ring-color auto 1px;
   }
 `;
 

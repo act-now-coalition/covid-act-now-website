@@ -55,25 +55,38 @@ export type NonCovidPatientsMethod =
   | 'estimated_from_typical_utilization'
   | 'estimated_from_total_icu_actual';
 export type Icucapacityratio = number | null;
+/**
+ * Ratio of population that has initiated vaccination.
+ */
+export type Vaccinationsinitiatedratio = number | null;
+/**
+ * Ratio of population that has completed vaccination.
+ */
+export type Vaccinationscompletedratio = number | null;
 
 /**
  * Calculated metrics data based on known actuals.
  */
 export interface Metrics {
   testPositivityRatio: Testpositivityratio;
-  testPositivityRatioDetails?: TestPositivityRatioDetails;
+  testPositivityRatioDetails?: TestPositivityRatioDetails | null;
   caseDensity: Casedensity;
   contactTracerCapacityRatio: Contacttracercapacityratio;
   infectionRate: Infectionrate;
   infectionRateCI90: Infectionrateci90;
   icuHeadroomRatio: Icuheadroomratio;
-  icuHeadroomDetails?: ICUHeadroomMetricDetails;
+  icuHeadroomDetails?: ICUHeadroomMetricDetails | null;
   icuCapacityRatio: Icucapacityratio;
+  vaccinationsInitiatedRatio?: Vaccinationsinitiatedratio;
+  vaccinationsCompletedRatio?: Vaccinationscompletedratio;
 }
 /**
  * Details about how the test positivity ratio was calculated.
  */
 export interface TestPositivityRatioDetails {
+  /**
+   * Source data for test positivity ratio.
+   */
   source: TestPositivityRatioMethod;
 }
 /**
@@ -81,7 +94,13 @@ export interface TestPositivityRatioDetails {
  */
 export interface ICUHeadroomMetricDetails {
   currentIcuCovid: Currenticucovid;
+  /**
+   * Method used to determine number of current ICU patients with covid.
+   */
   currentIcuCovidMethod: CovidPatientsMethod;
   currentIcuNonCovid: Currenticunoncovid;
+  /**
+   * Method used to determine number of current ICU patients without covid.
+   */
   currentIcuNonCovidMethod: NonCovidPatientsMethod;
 }

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { HashLink } from 'react-router-hash-link';
 import { scrollWithOffset } from 'components/TableOfContents';
-import { isValidURL, isInternalLink } from './utils';
+import { isValidURL, isInternalLink, formatInternalLink } from './utils';
 import TwitterEmbed, { isTwitterEmbed } from './TwitterEmbed';
 import YouTubeEmbed, { isYouTubeEmbed } from './YoutubeEmbed';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
@@ -12,6 +12,14 @@ import ExternalLink from 'components/ExternalLink';
  * it in the current page. If the link is invalid, we just render the text of
  * the link.
  */
+
+/* Implementing lazy loading requires a short timeout to make scrollWithOffset scroll the page to the correct location */
+const scrollWithTimeout = (element: any, offset: number) => {
+  return setTimeout(() => {
+    scrollWithOffset(element, offset);
+  }, 400);
+};
+
 const MarkdownLink: React.FC<{
   href: string;
   children: React.ReactNode;
@@ -38,11 +46,19 @@ const MarkdownLink: React.FC<{
     );
   }
 
-  return isInternalLink(href) ? (
-    <HashLink to={href} scroll={element => scrollWithOffset(element, -80)}>
-      {children}
-    </HashLink>
-  ) : (
+  if (isInternalLink(href)) {
+    const formattedUrl = formatInternalLink(href);
+    return (
+      <HashLink
+        to={formattedUrl}
+        scroll={element => scrollWithTimeout(element, -80)}
+      >
+        {children}
+      </HashLink>
+    );
+  }
+
+  return (
     <a href={href} target="_blank" rel="noopener noreferrer">
       {children}
     </a>

@@ -38,10 +38,7 @@ export const Subtitle = styled.div`
 export const SourceContainer = styled(Grid).attrs(props => ({
   container: true,
 }))`
-  margin-top: ${2 * theme.spacing(3)}px;
-  &:first-child {
-    margin-top: ${theme.spacing(2)}px;
-  }
+  margin-top: ${theme.spacing(3)}px;
 `;
 
 export const SourceTitle = styled.h2`
@@ -113,8 +110,7 @@ export const LevelDescription = styled(MarkdownContent)`
   padding: ${theme.spacing(3)}px;
 
   @media (min-width: 600px) {
-    height: 260px;
-    overflow-y: auto;
+    height: auto;
   }
 `;
 

@@ -21,7 +21,6 @@ import {
   modalContent,
   FedLevel,
   HarvardLevel,
-  RecommendCategory,
 } from 'cms-content/recommendations';
 import SmallShareButtons from 'components/SmallShareButtons';
 import RecommendModal from './RecommendModal';
@@ -35,7 +34,7 @@ import { Subtitle1 } from 'components/Typography';
 import { useBreakpoint } from 'common/hooks';
 
 const { header, footer } = mainContent;
-const { federalTaskForce, harvard } = modalContent;
+const { federalTaskForce } = modalContent;
 
 const trackShareFacebook = () =>
   trackRecommendationsEvent(EventAction.SHARE, 'facebook');
@@ -59,9 +58,8 @@ const Header = (props: {
       <Subtitle1>for {locationName}</Subtitle1>
       <Intro>
         These recommendations match the guidelines set by the{' '}
-        <strong>{federalTaskForce.sourceName}</strong>,{' '}
-        <strong>{harvard.sourceName}</strong>, and the <strong>CDC</strong>.{' '}
-        {introCopy}{' '}
+        <strong>{federalTaskForce.sourceName}</strong> and the{' '}
+        <strong>CDC</strong>. {introCopy}{' '}
         <LinkButton onClick={onClickOpenModal}>Learn more</LinkButton>.
       </Intro>
     </Fragment>
@@ -154,7 +152,7 @@ const Recommend = (props: {
     );
   };
 
-  /* 
+  /*
     Divides recommendations into 2 columns.
     For mobile: splits originally-ordered recommendations array in half.
     For desktop: splits by even/odds so the highest 'ranked' recommendations will appear on top.
@@ -177,23 +175,21 @@ const Recommend = (props: {
         onClickOpenModal={openModalRecommendations}
       />
       <RecommendationsContainer>
-        {recommendationsColumns.map((half, i) => {
+        {recommendationsColumns.map((half, j) => {
           return (
-            <Column>
+            <Column key={`half-${j}`}>
               {half.map((recommendation, i) => {
-                const highlight =
-                  recommendation.recommendationInfo.category ===
-                  RecommendCategory.TRAVEL;
                 return (
                   <RecommendationItem
                     key={`recommendation-${i}`}
-                    highlight={highlight}
+                    highlight={false}
                   >
                     <Icon
                       src={recommendation.iconInfo.iconImage}
                       alt={recommendation.iconInfo.altText}
                     />
                     <RecommendationBody
+                      className={recommendation.recommendationInfo.category}
                       source={recommendation.recommendationInfo.body}
                     />
                   </RecommendationItem>
@@ -212,9 +208,8 @@ const Recommend = (props: {
       <Dialog
         open={isDialogOpen}
         closeDialog={closeDialog}
-        fullWidth
-        maxWidth="md"
         renderHeader={renderModalTitle}
+        style={{ maxWidth: '700px', margin: 'auto' }}
       >
         <RecommendModal
           fedLevel={fedLevel}

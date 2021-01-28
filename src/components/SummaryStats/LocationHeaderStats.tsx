@@ -1,8 +1,10 @@
 import React from 'react';
+import { isNumber } from 'lodash';
 import { Metric, ALL_METRICS } from 'common/metric';
 import { getMetricName, getLevelInfo, formatValue } from 'common/metric';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
-
+import StatTag from 'components/SummaryStats/StatTag';
+import * as urls from 'common/urls';
 import {
   SummaryStatsWrapper,
   SummaryStatWrapper,
@@ -14,10 +16,6 @@ import {
   ValueWrapper,
   PrevalenceMeasure,
 } from './SummaryStats.style';
-
-import StatTag from 'components/SummaryStats/StatTag';
-import { isNull } from 'util';
-import * as urls from 'common/urls';
 
 //TODO (Chelsi) - remove dupication: extract 'LocationHeaderStats' and 'SummaryStats' into a single separate component
 
@@ -49,6 +47,13 @@ const StatValue = (props: {
           PER
           <br />
           100K
+        </PrevalenceMeasure>
+      )}
+      {props.metric === Metric.VACCINATIONS && (
+        <PrevalenceMeasure>
+          1ST
+          <br />
+          SHOT
         </PrevalenceMeasure>
       )}
     </ValueWrapper>
@@ -161,7 +166,7 @@ const LocationHeaderStats = (props: {
   embedOnClickBaseURL?: string;
 }) => {
   const hasStats = !!Object.values(props.stats).filter(
-    (val: number | null) => !isNull(val),
+    (val: number | null) => isNumber(val) && Number.isFinite(val),
   ).length;
 
   const sharedStatProps = {
@@ -179,15 +184,14 @@ const LocationHeaderStats = (props: {
           isHeader={props.isHeader}
           condensed={props.condensed}
         >
-          {ALL_METRICS.map(metric => (
+          {ALL_METRICS.map((metric, i) => (
             <SummaryStat
+              key={`stat-${i}`}
               onClick={() => props.onMetricClick && props.onMetricClick(metric)}
               chartType={metric}
               value={props.stats[metric] as number}
               {...sharedStatProps}
-              beta={[Metric.HOSPITAL_USAGE, Metric.CONTACT_TRACING].includes(
-                metric,
-              )}
+              newIndicator={[Metric.VACCINATIONS].includes(metric)}
             />
           ))}
         </SummaryStatsWrapper>

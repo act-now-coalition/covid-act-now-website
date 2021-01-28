@@ -35,7 +35,15 @@ export const orderedMetrics = [
   Metric.CASE_GROWTH_RATE,
   Metric.POSITIVE_TESTS,
   Metric.HOSPITAL_USAGE,
-  Metric.CONTACT_TRACING,
+  Metric.VACCINATIONS,
+];
+
+export const orderedMetricsVaccineFirst = [
+  Metric.VACCINATIONS,
+  Metric.CASE_DENSITY,
+  Metric.CASE_GROWTH_RATE,
+  Metric.POSITIVE_TESTS,
+  Metric.HOSPITAL_USAGE,
 ];
 
 function getLocationObj(region: Region): SummaryForCompare {
@@ -267,11 +275,13 @@ function splitRegionName(regionName: string) {
   return [regionNameMain, regionSuffix];
 }
 
-export function getRegionNameForRow(region: Region) {
+export function getRegionNameForRow(region: Region, condensed?: boolean) {
   if (region instanceof State) {
     return [region.fullName];
   } else if (region instanceof County) {
-    return splitRegionName(region.abbreviation);
+    return condensed
+      ? splitRegionName(region.abbreviation)
+      : splitRegionName(region.name);
   } else if (region instanceof MetroArea) {
     return splitRegionName(region.shortName);
   } else {
@@ -315,14 +325,16 @@ export function getShareQuote(
     currentLocation.rank !== 0 &&
     isNumber(currentLocation.metricsInfo.metrics[sorter]?.value);
 
-  const ascendingCopy =
-    sorter && sorter === (Metric.HOSPITAL_USAGE || Metric.CONTACT_TRACING)
-      ? 'least'
-      : 'lowest';
-  const descendingCopy =
-    sorter && sorter === (Metric.HOSPITAL_USAGE || Metric.CONTACT_TRACING)
-      ? 'most'
-      : 'highest';
+  const ascendingCopy = [Metric.HOSPITAL_USAGE, Metric.VACCINATIONS].includes(
+    sorter,
+  )
+    ? 'least'
+    : 'lowest';
+  const descendingCopy = [Metric.HOSPITAL_USAGE, Metric.VACCINATIONS].includes(
+    sorter,
+  )
+    ? 'most'
+    : 'highest';
 
   const countyShareCopy =
     currentLocation &&

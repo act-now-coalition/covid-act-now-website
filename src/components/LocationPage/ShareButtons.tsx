@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { deburr, words } from 'lodash';
+import urlJoin from 'url-join';
 import SocialButtons from './SocialButtons';
+
 import {
   SaveOrShareContainer,
   SaveOrShareButton,
@@ -17,25 +19,26 @@ import * as urls from 'common/urls';
 import moment from 'moment';
 import { County, MetroArea, Region, State } from 'common/regions';
 import { fail } from 'common/utils';
+import { Metric } from 'common/metric';
 
 const getShareImageUrl = (region: Region, chartIdentifier: number): string => {
   const imageBaseUrl = ShareImageUrlJSON.share_image_url;
   if (region instanceof County) {
-    return (
-      imageBaseUrl +
-      `counties/${region.fipsCode}/chart/${chartIdentifier}/export.png`
+    return urlJoin(
+      imageBaseUrl,
+      `counties/${region.fipsCode}/chart/${chartIdentifier}/export.png`,
     );
   }
   if (region instanceof State) {
     const state = region as State;
-    return (
-      imageBaseUrl +
-      `states/${state.stateCode.toLowerCase()}/chart/${chartIdentifier}/export.png`
+    return urlJoin(
+      imageBaseUrl,
+      `states/${state.stateCode.toLowerCase()}/chart/${chartIdentifier}/export.png`,
     );
   } else if (region instanceof MetroArea) {
-    return (
-      imageBaseUrl +
-      `metros/${region.fipsCode}/chart/${chartIdentifier}/export.png`
+    return urlJoin(
+      imageBaseUrl,
+      `metros/${region.fipsCode}/chart/${chartIdentifier}/export.png`,
     );
   }
   fail('Unsupported region');
@@ -72,11 +75,11 @@ const InnerContent = ({
 
   function makeDownloadFilename(chartIdentifier: number) {
     const chartDownloadType = {
-      0: 'infection_rate',
-      1: 'positive_test_rate',
-      2: 'hospital_usage',
-      3: 'contact_tracing',
-      5: 'case_incidence',
+      [Metric.CASE_DENSITY]: 'infection_rate',
+      [Metric.POSITIVE_TESTS]: 'positive_test_rate',
+      [Metric.HOSPITAL_USAGE]: 'hospital_usage',
+      [Metric.CASE_DENSITY]: 'case_incidence',
+      [Metric.VACCINATIONS]: 'vaccinations',
     };
 
     // @ts-ignore
@@ -170,7 +173,7 @@ const ShareButtons = ({
   const shareBaseURL = region.canonicalUrl;
 
   const shareURL = urls.addSharingId(
-    `${shareBaseURL}/chart/${chartIdentifier}`,
+    urlJoin(shareBaseURL, `chart/${chartIdentifier}`),
   );
 
   if (isMobile) {

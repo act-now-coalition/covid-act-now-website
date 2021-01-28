@@ -22,7 +22,10 @@ import { allIcons } from 'cms-content/recommendations';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import { getAbbreviatedCounty } from 'common/utils/compare';
 import { formatDecimal } from '.';
-import { showExposureNotifications } from 'components/LocationPage/Notifications';
+import {
+  getStateName,
+  showExposureNotifications,
+} from 'components/LocationPage/Notifications';
 import regions from 'common/regions';
 
 export function trackRecommendationsEvent(action: EventAction, label: string) {
@@ -45,7 +48,9 @@ function getExposureRecommendation(
     return null;
   }
 
-  const recommendationCopy = `**Notifications**: Add your phone to [${region.fullName}'s 
+  const recommendationCopy = `**Notifications**: Add your phone to [${getStateName(
+    region,
+  )}'s 
   exposure notification system](https://g.co/ens) to receive alerts when you have been 
   in close contact with someone who later tests positive for COVID. 
   Your privacy is protected as your identity is not known and your location 
@@ -68,12 +73,7 @@ export function getRecommendations(
   recommendations: Recommendation[],
 ): any[] {
   const fedLevel = getFedLevel(projection);
-  const harvardLevel = getHarvardLevel(projection);
   const positiveTestRate = getPositiveTestRate(projection);
-
-  const harvardRecommendations = recommendations
-    .filter(item => item.source === RecommendationSource.HARVARD)
-    .filter(item => item.level === harvardLevel);
 
   let fedRecommendations = recommendations
     .filter(item => item.source === RecommendationSource.FED)
@@ -122,11 +122,10 @@ export function getRecommendations(
 
   const allRecommendations = [
     ...exposureRecommendations,
-    ...travelRecommendation,
     ...gatheringRecommendation,
     ...masksRecommendation,
     ...finalOtherFedRecommendations,
-    ...harvardRecommendations,
+    ...travelRecommendation,
   ];
 
   return allRecommendations.map(getIcon);
@@ -335,10 +334,10 @@ export const summaryByLevel = {
 export function getShareQuote(locationName: string, alarmLevel: Level): string {
   const locationNameWithAbbreviation = getAbbreviatedCounty(locationName);
 
-  const unknownShareQuote = `These are White House Coronavirus Task Force’s and Harvard Global Health Institute’s official COVID recommendations for ${locationNameWithAbbreviation}:`;
+  const unknownShareQuote = `These are the White House Coronavirus Task Force’s official COVID recommendations for ${locationNameWithAbbreviation}:`;
 
   if (alarmLevel === Level.UNKNOWN) {
     return unknownShareQuote;
   }
-  return `According to @CovidActNow, ${locationNameWithAbbreviation} ${summaryByLevel[alarmLevel]}. These are White House Coronavirus Task Force’s and Harvard Global Health Institute’s official recommendations:`;
+  return `According to @CovidActNow, ${locationNameWithAbbreviation} ${summaryByLevel[alarmLevel]}. These are the White House Coronavirus Task Force’s official recommendations:`;
 }

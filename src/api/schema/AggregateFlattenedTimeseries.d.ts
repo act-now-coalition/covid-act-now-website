@@ -27,11 +27,11 @@ export type Fips = string;
 /**
  * Latitude of point within the state or county
  */
-export type Lat = number;
+export type Lat = number | null;
 /**
  * Longitude of point within the state or county
  */
-export type Long = number;
+export type Long = number | null;
 /**
  * Location ID as defined here: https://github.com/covidatlas/li/blob/master/docs/reports-v1.md#general-notes
  */
@@ -100,6 +100,28 @@ export type Icubeds = HospitalResourceUtilization;
  */
 export type Newcases = number | null;
 /**
+ * Number of vaccine doses distributed.
+ */
+export type Vaccinesdistributed = number | null;
+/**
+ *
+ * Number of vaccinations initiated.
+ *
+ * This value may vary by type of vaccine, but for Moderna and Pfizer, this indicates
+ * number of people vaccinated with the first dose.
+ *
+ */
+export type Vaccinationsinitiated = number | null;
+/**
+ *
+ * Number of vaccinations completed.
+ *
+ * This value may vary by type of vaccine, but for Moderna and Pfizer, this indicates
+ * number of people vaccinated with both the first and second dose.
+ *
+ */
+export type Vaccinationscompleted = number | null;
+/**
  * Metrics for given day
  */
 export type Metrics1 = Metrics;
@@ -155,6 +177,30 @@ export type NonCovidPatientsMethod =
   | 'estimated_from_total_icu_actual';
 export type Icucapacityratio = number | null;
 /**
+ * Ratio of population that has initiated vaccination.
+ */
+export type Vaccinationsinitiatedratio = number | null;
+/**
+ * Ratio of population that has completed vaccination.
+ */
+export type Vaccinationscompletedratio = number | null;
+/**
+ * Risk Levels for given day
+ */
+export type Risklevels = RiskLevelsRow;
+/**
+ * COVID Risk Level.
+ *
+ * ## Risk Level Definitions
+ *  *Low* - On track to contain COVID
+ *  *Medium* - Slow disease growth
+ *  *High* - At risk of outbreak
+ *  *Critical* - Active or imminent outbreak
+ *  *Unknown* - Risk unknown
+ *  *Extreme* - Severe outbreak
+ */
+export type RiskLevel = 0 | 1 | 2 | 3 | 4 | 5;
+/**
  * Flattened timeseries data for multiple regions.
  */
 export type AggregateFlattenedTimeseries = RegionTimeseriesRowWithHeader[];
@@ -168,11 +214,12 @@ export interface RegionTimeseriesRowWithHeader {
   state: State;
   county: County;
   fips: Fips;
-  lat?: Lat;
-  long?: Long;
+  lat: Lat;
+  long: Long;
   locationId: Locationid;
   actuals: Actuals1;
   metrics: Metrics1;
+  riskLevels: Risklevels;
 }
 /**
  * Known actuals data.
@@ -186,6 +233,9 @@ export interface Actuals {
   hospitalBeds: Hospitalbeds;
   icuBeds: Icubeds;
   newCases: Newcases;
+  vaccinesDistributed?: Vaccinesdistributed;
+  vaccinationsInitiated?: Vaccinationsinitiated;
+  vaccinationsCompleted?: Vaccinationscompleted;
 }
 /**
  * Base model for API output.
@@ -201,19 +251,24 @@ export interface HospitalResourceUtilization {
  */
 export interface Metrics {
   testPositivityRatio: Testpositivityratio;
-  testPositivityRatioDetails?: TestPositivityRatioDetails;
+  testPositivityRatioDetails?: TestPositivityRatioDetails | null;
   caseDensity: Casedensity;
   contactTracerCapacityRatio: Contacttracercapacityratio;
   infectionRate: Infectionrate;
   infectionRateCI90: Infectionrateci90;
   icuHeadroomRatio: Icuheadroomratio;
-  icuHeadroomDetails?: ICUHeadroomMetricDetails;
+  icuHeadroomDetails?: ICUHeadroomMetricDetails | null;
   icuCapacityRatio: Icucapacityratio;
+  vaccinationsInitiatedRatio?: Vaccinationsinitiatedratio;
+  vaccinationsCompletedRatio?: Vaccinationscompletedratio;
 }
 /**
  * Details about how the test positivity ratio was calculated.
  */
 export interface TestPositivityRatioDetails {
+  /**
+   * Source data for test positivity ratio.
+   */
   source: TestPositivityRatioMethod;
 }
 /**
@@ -221,7 +276,22 @@ export interface TestPositivityRatioDetails {
  */
 export interface ICUHeadroomMetricDetails {
   currentIcuCovid: Currenticucovid;
+  /**
+   * Method used to determine number of current ICU patients with covid.
+   */
   currentIcuCovidMethod: CovidPatientsMethod;
   currentIcuNonCovid: Currenticunoncovid;
+  /**
+   * Method used to determine number of current ICU patients without covid.
+   */
   currentIcuNonCovidMethod: NonCovidPatientsMethod;
+}
+/**
+ * Base model for API output.
+ */
+export interface RiskLevelsRow {
+  /**
+   * Overall risk level for region.
+   */
+  overall: RiskLevel;
 }

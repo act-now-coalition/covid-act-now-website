@@ -1,0 +1,106 @@
+{
+  "regions": [
+    {
+      "locationName": "New York City",
+      "fips": "35620",
+      "eligibilityInfoUrl": "https://www1.nyc.gov/site/doh/covid/covid-19-vaccine-eligibility.page",
+      "vaccinationSignupUrl": "https://vaccinefinder.nyc.gov/"
+    },
+    {
+      "locationName": "Los Angeles",
+      "fips": "31080",
+      "eligibilityInfoUrl": "http://publichealth.lacounty.gov/acd/ncorona2019/covidvaccinedistribution/",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "locationName": "Chicago",
+      "fips": "16980",
+      "eligibilityInfoUrl": "https://www.chicago.gov/city/en/sites/covid19-vaccine/home/vaccine-planning-in-chicago.html",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "locationName": "Dallas",
+      "fips": "19100",
+      "eligibilityInfoUrl": "https://www.dallascounty.org/covid-19/covid-19-vaccination.php",
+      "vaccinationSignupUrl": "https://forms.office.com/Pages/ResponsePage.aspx?id=rc-tUfFynEeyj1JBLgQBS27MxRuhoUxLlfv_l-XuFzdUQkFNUjVNUlA4RkgyRjNFVVFZMVQ1Mjg2Ni4u"
+    },
+    {
+      "locationName": "Houston",
+      "fips": "26420",
+      "eligibilityInfoUrl": "https://houstonemergency.org/covid-19-vaccines/",
+      "vaccinationSignupUrl": "https://tdem.maps.arcgis.com/apps/webappviewer/index.html?id=3700a84845c5470cb0dc3ddace5c376b"
+    },
+    {
+      "locationName": "Miami",
+      "fips": "33100",
+      "eligibilityInfoUrl": "https://www.miamidade.gov/global/initiatives/coronavirus/vaccine/home.page",
+      "vaccinationSignupUrl": "https://vaccines.nomihealth.com/"
+    },
+    {
+      "locationName": "Philadelphia",
+      "fips": "37980",
+      "eligibilityInfoUrl": "https://www.phila.gov/programs/coronavirus-disease-2019-covid-19/vaccines/about-covid-19-vaccine/",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "locationName": "Atlanta",
+      "fips": "12060",
+      "eligibilityInfoUrl": "https://www.fultoncountyga.gov/covid-19/covid-vaccine",
+      "vaccinationSignupUrl": "https://fultoncountyboh.jotform.com/210075657162049"
+    },
+    {
+      "locationName": "Phoenix",
+      "fips": "38060",
+      "eligibilityInfoUrl": "https://www.maricopa.gov/5641/COVID-19-Vaccine",
+      "vaccinationSignupUrl": "https://www.maricopa.gov/5659/COVID-19-Vaccine-Locations"
+    },
+    {
+      "locationName": "San Francisco",
+      "fips": "41860",
+      "eligibilityInfoUrl": "https://sf.gov/get-notified-when-its-your-turn-covid-19-vaccine",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "locationName": "Detroit",
+      "fips": "19820",
+      "eligibilityInfoUrl": "https://detroitmi.gov/departments/detroit-health-department/programs-and-services/communicable-disease/coronavirus-covid-19/covid-19-vaccine-latest-updates",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "locationName": "Seattle",
+      "fips": "42660",
+      "eligibilityInfoUrl": "https://www.kingcounty.gov/depts/health/covid-19/vaccine.aspx",
+      "vaccinationSignupUrl": "https://form.findyourphasewa.org/210118771253954"
+    },
+    {
+      "locationName": "Minneapolis",
+      "fips": "33460",
+      "eligibilityInfoUrl": "https://www2.ci.minneapolis.mn.us/coronavirus/vaccines",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "locationName": "San Diego",
+      "fips": "41740",
+      "eligibilityInfoUrl": "https://www.sandiegocounty.gov/content/sdc/hhsa/programs/phs/community_epidemiology/dc/2019-nCoV/vaccines/phases.htmll",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "locationName": "Tampa",
+      "fips": "45300",
+      "eligibilityInfoUrl": "https://www.hillsboroughcounty.org/en/residents/public-safety/covid-19-vaccine/covid-19-vaccine-information",
+      "vaccinationSignupUrl": "https://www.hillsboroughcounty.org/en/residents/public-safety/covid-19-vaccine/making-a-vaccine-appointment"
+    },
+    {
+      "locationName": "Denver",
+      "fips": "19740",
+      "eligibilityInfoUrl": "https://www.denvergov.org/Government/COVID-19-Information/Vaccination",
+      "vaccinationSignupUrl": null
+    },
+    {
+      "locationName": "St. Louis",
+      "fips": "41180",
+      "eligibilityInfoUrl": "https://www.stlouis-mo.gov/government/departments/health/communicable-disease/covid-19/covid-19-vaccine.cfm",
+      "vaccinationSignupUrl": "https://stlouisdph.qualtrics.com/jfe/form/SV_08qM4vOqB5dJniR"
+    }
+  ]
+}

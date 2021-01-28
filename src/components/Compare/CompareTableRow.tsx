@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import { isNumber } from 'lodash';
 import { Link } from 'react-router-dom';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import {
@@ -6,21 +7,17 @@ import {
   Row,
   MetricValue,
   Population,
-  RegionSuffix,
   LocationInfoWrapper,
   LocationNameCell,
   Rank,
 } from 'components/Compare/Compare.style';
 import { Metric, formatValue } from 'common/metric';
-import {
-  RankedLocationSummary,
-  orderedMetrics,
-  getRegionNameForRow,
-} from 'common/utils/compare';
+import { RankedLocationSummary } from 'common/utils/compare';
 import { Level } from 'common/level';
 import { formatEstimate } from 'common/utils';
-import regions, { getFormattedStateCode } from 'common/regions';
+import regions from 'common/regions';
 import { fail } from 'assert';
+import { StyledRegionName } from 'components/SharedComponents';
 
 function cellValue(metric: any, metricType: Metric) {
   if (metric === null || metric === undefined) {
@@ -30,6 +27,7 @@ function cellValue(metric: any, metricType: Metric) {
 }
 
 const CompareTableRow = (props: {
+  metrics: Metric[];
   location: RankedLocationSummary;
   sorter: number;
   isCurrentCounty?: boolean;
@@ -39,6 +37,7 @@ const CompareTableRow = (props: {
   showStateCode: boolean;
 }) => {
   const {
+    metrics,
     location,
     sorter,
     isCurrentCounty,
@@ -65,8 +64,6 @@ const CompareTableRow = (props: {
   }
   const locationLink = region.relativeUrl;
 
-  const [regionNameMain, regionSuffix] = getRegionNameForRow(location.region);
-
   const populationRoundTo = isHomepage ? 3 : 2;
 
   return (
@@ -85,11 +82,11 @@ const CompareTableRow = (props: {
             <FiberManualRecordIcon />
           </div>
           <div>
-            {regionNameMain}{' '}
-            {regionSuffix && <RegionSuffix>{regionSuffix}</RegionSuffix>}
-            {showStateCode && (
-              <Fragment>{getFormattedStateCode(location.region)}</Fragment>
-            )}
+            <StyledRegionName
+              showStateCode={showStateCode}
+              region={location.region}
+              condensed
+            />
             <br />
             <LocationInfoWrapper>
               <Population>
@@ -98,12 +95,12 @@ const CompareTableRow = (props: {
             </LocationInfoWrapper>
           </div>
         </LocationNameCell>
-        {orderedMetrics.map((metric: Metric, i) => {
+        {metrics.map((metric: Metric, i) => {
           const metricForValue = location.metricsInfo.metrics[metric];
+          const metricValue = metricForValue?.value;
           const valueUnknown =
-            metricForValue && metricForValue.level === Level.UNKNOWN
-              ? true
-              : false;
+            !isNumber(metricValue) || !Number.isFinite(metricValue);
+
           return (
             <MetricCell
               key={`metric-cell-${i}`}

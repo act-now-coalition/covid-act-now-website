@@ -31,6 +31,7 @@ export const COLOR_MAP = {
     DARK: '#0A3D31',
   },
   BLUE: '#3BBCE6',
+  LIGHT_BLUE: '#00bfea',
   GRAY_BODY_COPY: '#4f4f4f',
   GRAY_EXPLORE_CHART: '#e0e0e0',
   GRAY: {
@@ -43,6 +44,7 @@ export const COLOR_MAP = {
   LIGHTGRAY: '#f2f2f2',
   LIGHTGRAY_BG: '#fafafa',
   LIGHT_YELLOW: '#FFF1BF',
+  BLACK: '#000000',
 };
 
 export const LEVEL_COLOR = {
@@ -73,12 +75,3 @@ export function countyColor(
   const summary = getSummaryFromFips(countyFipsCode);
   return colorFromLocationSummary(summary, defaultColor);
 }
-
-export const LEVEL_COLOR_CONTACT_TRACING = {
-  [Level.LOW]: COLOR_MAP.RED.BASE,
-  [Level.MEDIUM]: COLOR_MAP.ORANGE_DARK.BASE,
-  [Level.HIGH]: COLOR_MAP.ORANGE.BASE,
-  [Level.CRITICAL]: COLOR_MAP.GREEN.BASE,
-  [Level.SUPER_CRITICAL]: COLOR_MAP.GREEN.BASE,
-  [Level.UNKNOWN]: COLOR_MAP.GRAY.BASE,
-};
