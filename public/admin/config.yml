@@ -702,7 +702,7 @@ collections:
                 required: false
                 widget: string
       - name: Vaccine Information-Counties
-        label: Metro Vaccine Information
+        label: County Vaccine Information
         file: src/cms-content/vaccines/county.json
         fields:
           - label: Regions
