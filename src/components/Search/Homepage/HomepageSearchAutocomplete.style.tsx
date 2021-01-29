@@ -47,15 +47,12 @@ export const SearchDirections = styled.span`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   display: flex;
   justify-content: center;
-  // margin: .25rem 0 1rem;
   margin: 0.25rem 0 0.75rem;
-
   height: 24px;
 
   @media (min-width: ${materialSMBreakpoint}) {
     font-size: 1rem;
     margin: 0.75rem 0 0.75rem;
-    height: 24px;
   }
 `;
 

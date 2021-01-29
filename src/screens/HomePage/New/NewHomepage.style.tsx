@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-import palette from 'assets/theme/palette';
 import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
-import { Subtitle1 } from 'components/Typography';
 import {
   StyledLink,
   SkeletonWrapper,
@@ -20,24 +18,6 @@ export const Content = styled.div`
   margin: auto auto 3rem;
 `;
 
-export const PartnerSection = styled.div`
-  padding: 0 1rem 1rem;
-`;
-
-export const PartnerHeader = styled(Subtitle1)`
-  padding-top: 2.5rem;
-  margin-top: 2.5rem;
-  border-top: 1px solid ${palette.lightGray};
-  text-align: center;
-  margin-bottom: 1rem;
-`;
-
-export const FeaturedHeader = styled(Subtitle1)`
-  margin-top: 4rem;
-  text-align: center;
-  margin-bottom: 1rem;
-`;
-
 export const SectionWrapper = styled.div`
   margin-bottom: 2.5rem;
 `;
@@ -49,23 +29,6 @@ export const Section = styled.div`
   @media (min-width: ${mobileBreakpoint}) {
     margin-left: 0;
     margin-right: 0;
-  }
-`;
-
-export const BannerContainer = styled.div`
-  margin: 0 auto;
-
-  @media (min-width: ${mobileBreakpoint}) {
-    margin-top: 2rem;
-    max-width: 710px;
-  }
-`;
-
-export const ElectionCountdownContainer = styled.div`
-  margin: 1rem auto 0;
-
-  @media (min-width: ${mobileBreakpoint}) {
-    margin-top: 2rem;
   }
 `;
 
