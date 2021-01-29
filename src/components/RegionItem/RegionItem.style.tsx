@@ -13,7 +13,17 @@ export const CircleIcon = styled(FiberManualRecordIcon)<{ $iconColor: string }>`
 export const CopyContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 1rem;
+  flex: 1 1 auto;
+`;
+
+export const IconContainer = styled.div`
+  flex: 1 0 auto;
+  &:first-child {
+    margin-right: 1rem;
+  }
+  &:last-child {
+    margin-left: 1rem;
+  }
 `;
 
 export const ArrowIcon = styled(ArrowForwardIosIcon)`
