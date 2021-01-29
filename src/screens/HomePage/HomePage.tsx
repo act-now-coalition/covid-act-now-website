@@ -45,8 +45,8 @@ export default function HomePage() {
 
   const indicatorsRef = useRef(null);
 
-  const geolocation = useGeolocation();
-  const initialFipsForExplore = useGeolocationInExplore(5, geolocation);
+  const { geolocationData } = useGeolocation();
+  const initialFipsForExplore = useGeolocationInExplore(5, geolocationData);
 
   // Location hash is uniquely set from vaccination banner button click
   const compareShowVaccinationsFirst = location.hash === '#compare';
@@ -103,7 +103,7 @@ export default function HomePage() {
                 >
                   <SelectorWrapper id="search">
                     <SearchAutocomplete
-                      locations={getFinalAutocompleteLocations(geolocation)}
+                      locations={getFinalAutocompleteLocations(geolocationData)}
                       filterLimit={getFilterLimit()}
                     />
                   </SelectorWrapper>
@@ -131,10 +131,12 @@ export default function HomePage() {
             </Grid>
             <Map hideLegend showCounties={showCounties} />
             {isMobile && <HomePageThermometer />}
-            <CompareMain
-              locationsViewable={8}
-              vaccinesFirst={compareShowVaccinationsFirst}
-            />
+            <Section>
+              <CompareMain
+                locationsViewable={8}
+                vaccinesFirst={compareShowVaccinationsFirst}
+              />
+            </Section>
             <Section ref={exploreSectionRef}>
               <Explore
                 title="Cases, Deaths and Hospitalizations"

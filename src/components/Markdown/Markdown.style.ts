@@ -154,3 +154,8 @@ export const Caption = styled.figcaption`
   font-style: italic;
   margin-bottom: 1.5rem;
 `;
+
+export const CenterEmbed = styled.div`
+  display: flex;
+  justify-content: center;
+`;

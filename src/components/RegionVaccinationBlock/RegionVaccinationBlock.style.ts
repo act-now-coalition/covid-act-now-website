@@ -3,6 +3,10 @@ import MuiChevronRightIcon from '@material-ui/icons/ChevronRight';
 import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 
+export const Container = styled.div`
+  margin-bottom: 21px;
+`;
+
 export const Heading2 = styled.h2`
   font-family: Roboto;
   font-style: normal;
@@ -20,12 +24,6 @@ export const Paragraph = styled.p`
   font-size: 16px;
   line-height: 1.5;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
-`;
-
-export const FeedbackBox = styled(Paragraph)`
-  font-size: 14px;
-  padding: 16px;
-  background-color: ${COLOR_MAP.LIGHTGRAY_BG};
   max-width: 600px;
 `;
 

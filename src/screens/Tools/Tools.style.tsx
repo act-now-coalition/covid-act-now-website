@@ -38,7 +38,3 @@ export const ToolsSection = styled.div`
     margin-bottom: 0;
   }
 `;
-
-export const EmbedExampleWrapper = styled.div`
-  margin-top: 2rem;
-`;
