@@ -13,7 +13,6 @@ import {
 import NewMenuItem from 'components/Search/NewMenuItem/NewMenuItem';
 import { getSearchTextFieldStyles } from 'assets/theme/customStyleBlocks/getSearchTextFieldStyles';
 import { getSearchAutocompleteStyles } from 'assets/theme/customStyleBlocks/getSearchAutocompleteStyles';
-// import StyledPopper from './StyledPopper';
 import { useBreakpoint } from 'common/hooks';
 
 function getOptionSelected(option: Region, selectedOption: Region) {

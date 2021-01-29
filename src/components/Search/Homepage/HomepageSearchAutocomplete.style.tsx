@@ -68,7 +68,6 @@ export const ListContainer = styled.ul`
   }
 `;
 
-// Note (chelsi) - need max height on mobile?
 export const StyledPaper = styled(Paper)`
   box-shadow: 0px 26px 24px rgba(0, 0, 0, 0.12);
   width: ${mobileWidth}px;

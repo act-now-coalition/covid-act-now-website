@@ -50,9 +50,7 @@ export const StyledLink = styled(Link)`
 export const SharedWrapperStyles = css`
   display: flex;
   align-items: center;
-  // background-color: ${COLOR_MAP.LIGHTGRAY_BG};
   border: 1px solid ${COLORS.LIGHTGRAY};
-
   width: 330px;
   padding: 1.25rem 1.75rem 1.25rem 1.25rem;
   border-radius: 4px;
