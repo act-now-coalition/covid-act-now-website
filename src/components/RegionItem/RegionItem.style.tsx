@@ -22,7 +22,7 @@ export const CopyContainer = styled.div`
 `;
 
 export const IconContainer = styled.div`
-  flex: 1 0 auto;
+  flex: 0 0 auto;
   &:first-child {
     margin-right: 1rem;
   }
