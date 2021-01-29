@@ -449,9 +449,11 @@ export const Header = styled.div<{ isHomepage?: boolean }>`
   font-size: 1.5rem;
   margin: 0;
   justify-content: space-between;
+  margin: 28px 0 12px;
 
   @media (min-width: 600px) {
     font-size: ${({ isHomepage }) => (isHomepage ? '2rem' : '1.5rem')};
+    margin-top: 20px;
   }
 `;
 
