@@ -7,10 +7,13 @@ const textEllipsis = `
   overflow: hidden;
 `;
 
-export const Wrapper = styled.div<{ $condensed?: boolean }>`
+export const Wrapper = styled.div<{
+  $condensed?: boolean;
+  $truncateText?: boolean;
+}>`
   font-weight: 500;
   font-size: ${({ $condensed }) => ($condensed ? '1rem' : '1.125rem')};
-  ${({ $condensed }) => ($condensed ? '' : textEllipsis)}
+  ${({ $truncateText }) => ($truncateText ? textEllipsis : '')}
 `;
 
 export const Suffix = styled.span`

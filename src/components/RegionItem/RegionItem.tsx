@@ -31,7 +31,11 @@ const RegionItem: React.FC<{ region: Region }> = ({ region }) => {
           <CircleIcon $iconColor={iconColor} />
         </IconContainer>
         <CopyContainer>
-          <StyledRegionName region={region} showStateCode={showStateCode} />
+          <StyledRegionName
+            region={region}
+            showStateCode={showStateCode}
+            truncateText
+          />
           <LevelDescription>{levelDescriptionCopy}</LevelDescription>
         </CopyContainer>
         <IconContainer>

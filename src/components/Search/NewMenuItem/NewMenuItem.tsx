@@ -29,11 +29,7 @@ const NewMenuItem: React.FC<{ region: Region; zipCodeInput: string }> = ({
       <Wrapper>
         <Icon $fillColor={fillColor} />
         <InnerContent>
-          <StyledRegionName
-            showStateCode={showStateCode}
-            region={region}
-            condensed
-          />
+          <StyledRegionName showStateCode={showStateCode} region={region} />
           <Subcopy>{subcopy}</Subcopy>
         </InnerContent>
         <ArrowIcon />
