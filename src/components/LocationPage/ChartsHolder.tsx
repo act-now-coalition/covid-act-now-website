@@ -24,6 +24,7 @@ import {
 import { mainContent } from 'cms-content/recommendations';
 import { getRecommendationsShareUrl } from 'common/urls';
 import { Region, State, getStateName } from 'common/regions';
+import RegionVaccinationBlock from 'components/RegionVaccinationBlock';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
@@ -147,12 +148,17 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
           isMobile={isMobile}
           region={region}
         />
-        <CompareMain
-          stateName={getStateName(region) || region.name} // rename prop
-          locationsViewable={6}
-          stateId={(region as State).stateCode || undefined}
-          region={region}
-        />
+        <MainContentInner>
+          <RegionVaccinationBlock region={region} />
+        </MainContentInner>
+        <MainContentInner>
+          <CompareMain
+            stateName={getStateName(region) || region.name} // rename prop
+            locationsViewable={6}
+            stateId={(region as State).stateCode || undefined}
+            region={region}
+          />
+        </MainContentInner>
         <MainContentInner>
           <Recommend
             introCopy={recommendationsIntro}
