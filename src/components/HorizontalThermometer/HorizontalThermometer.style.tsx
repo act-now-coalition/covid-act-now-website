@@ -11,10 +11,6 @@ export const Wrapper = styled.div`
   width: fit-content;
   padding: 1.5rem 2rem 1rem;
   border-radius: 4px;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    border: 1px solid ${COLOR_MAP.GRAY.LIGHT};
-  }
 `;
 
 export const ThermometerContainer = styled.div`

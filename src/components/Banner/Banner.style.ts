@@ -45,7 +45,6 @@ export const ButtonContainer = styled(Grid)`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin-top: 0.5rem;
 
   a {
     text-decoration: none;
