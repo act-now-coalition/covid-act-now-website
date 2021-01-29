@@ -12,7 +12,7 @@ import * as FullStory from '@fullstory/browser';
 const FULLSTORY_RECORD_KEY = 'FULLSTORY_RECORD';
 
 // Percentage of overall users that we want to record
-const FULLSTORY_RECORD_PERCENT = 5 / 100;
+const FULLSTORY_RECORD_PERCENT = 1 / 100;
 
 enum RecordSession {
   TRUE = 'true',
