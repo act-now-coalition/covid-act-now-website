@@ -41,7 +41,7 @@ const ThermometerLabel: React.FC<{ label: string }> = ({ label }) => {
 
 const AboutLink: React.FC = () => {
   return (
-    <InfoLink to="learn">
+    <InfoLink to="/covid-risk-levels-metrics">
       <span>
         <InfoIcon />
         About risk levels
