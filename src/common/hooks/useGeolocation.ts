@@ -58,7 +58,8 @@ function fetchGeolocationData() {
 
 // Use this mock to simulate fetchGeolocationData, other data can be obtained from
 // https://ip-api.com/#<IP_ADDRESS> (https://ip-api.com/#8.8.8.8)
-// tslint:disable
+
+/* tslint:disable */
 function mockGeolocationData() {
   return Promise.resolve({
     query: '8.8.8.8',

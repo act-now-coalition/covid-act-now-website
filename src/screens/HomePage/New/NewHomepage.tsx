@@ -45,7 +45,7 @@ export default function NewHomepage() {
 
   const indicatorsRef = useRef(null);
 
-  const { geolocationData } = useGeolocation();
+  const { geolocationData, isLoading } = useGeolocation();
   const initialFipsForExplore = useGeolocationInExplore(5, geolocationData);
 
   // Location hash is uniquely set from vaccination banner button click
@@ -97,7 +97,10 @@ export default function NewHomepage() {
                 locations={getFinalAutocompleteLocations(geolocationData)}
                 filterLimit={getFilterLimit()}
               />
-              <HomepageItems />
+              <HomepageItems
+                isLoading={isLoading}
+                geolocationData={geolocationData}
+              />
               <Toggle
                 showCounties={showCounties}
                 onClickSwitch={onClickSwitch}
