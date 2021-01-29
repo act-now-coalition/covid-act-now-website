@@ -28,7 +28,7 @@ export default function useGeolocation(): UseGeolocationReturn {
   useEffect(() => {
     const fetchIpData = () => {
       setIsLoading(true);
-      fetchGeolocationData()
+      mockGeolocationData()
         .then(data =>
           setIpData({
             zipCode: data.zip,
