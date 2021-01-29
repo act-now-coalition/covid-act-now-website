@@ -14,6 +14,11 @@ export const CopyContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
+
+  min-width: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 
 export const IconContainer = styled.div`
