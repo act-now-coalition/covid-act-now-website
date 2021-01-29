@@ -92,7 +92,7 @@ export default function NewHomepage() {
       <main>
         <div className="App">
           <Content>
-            <ColumnCentered>
+            <ColumnCentered id="search">
               <HomepageSearchAutocomplete
                 locations={getFinalAutocompleteLocations(geolocationData)}
                 filterLimit={getFilterLimit()}
