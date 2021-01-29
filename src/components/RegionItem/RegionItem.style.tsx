@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
-import { COLOR_MAP } from 'common/colors';
+import COLORS, { COLOR_MAP } from 'common/colors';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import { Skeleton } from '@material-ui/lab';
@@ -50,7 +50,9 @@ export const StyledLink = styled(Link)`
 export const SharedWrapperStyles = css`
   display: flex;
   align-items: center;
-  background-color: ${COLOR_MAP.LIGHTGRAY_BG};
+  // background-color: ${COLOR_MAP.LIGHTGRAY_BG};
+  border: 1px solid ${COLORS.LIGHTGRAY};
+
   width: 330px;
   padding: 1.25rem 1.75rem 1.25rem 1.25rem;
   border-radius: 4px;

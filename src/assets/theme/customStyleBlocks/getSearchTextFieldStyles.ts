@@ -3,7 +3,7 @@
  * These styles need to be a bit repetative to override MUI's
  */
 import { makeStyles } from '@material-ui/core/styles';
-import { COLOR_MAP } from 'common/colors';
+import COLORS, { COLOR_MAP } from 'common/colors';
 
 export const getSearchTextFieldStyles = makeStyles(theme => ({
   root: {
@@ -19,10 +19,12 @@ export const getSearchTextFieldStyles = makeStyles(theme => ({
       '& fieldset': {
         borderColor: COLOR_MAP.GRAY.LIGHT,
         border: `1.5px solid ${COLOR_MAP.GRAY.LIGHT}`,
+        // borderColor: 'transparent',
         borderRadius: '99px',
       },
       '&:hover fieldset': {
         borderColor: COLOR_MAP.GRAY.LIGHT,
+        // borderColor: 'transparent',
       },
       '&.Mui-focused fieldset': {
         borderColor: COLOR_MAP.BLUE,

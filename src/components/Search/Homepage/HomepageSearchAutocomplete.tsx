@@ -82,6 +82,8 @@ const HomepageSearchAutocomplete: React.FC<{
     }
   };
 
+  const searchDirectionsText = isOpen ? 'Search city, county, or state' : '';
+
   return (
     <Wrapper isOpen={isOpen}>
       <Autocomplete
@@ -136,14 +138,8 @@ const HomepageSearchAutocomplete: React.FC<{
         }}
         PaperComponent={StyledPaper}
         ListboxComponent={ListContainer}
-        // Note (chelsi) - PopperComponent maybe no longer needed
-        // PopperComponent={props => (
-        //   <StyledPopper {...props} isMobile={isMobile} />
-        // )}
       />
-      {isOpen && (
-        <SearchDirections>Search city, county, or state</SearchDirections>
-      )}
+      <SearchDirections>{searchDirectionsText}</SearchDirections>
     </Wrapper>
   );
 };

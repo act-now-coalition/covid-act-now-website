@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import COLORS, { COLOR_MAP } from 'common/colors';
+import { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 
@@ -11,10 +11,6 @@ export const Wrapper = styled.div`
   width: fit-content;
   padding: 1.5rem 2rem 1rem;
   border-radius: 4px;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    border: 1px solid ${COLORS.LIGHTGRAY};
-  }
 `;
 
 export const ThermometerContainer = styled.div`
