@@ -36,7 +36,7 @@
       "hidden": false,
       "stateCode": "CA",
       "eligibilityInfoUrl": "https://covid19.ca.gov/vaccines/#California's-vaccination-plan",
-      "vaccinationSignupUrl": "https://myturn.ca.gov/landing",
+      "vaccinationSignupUrl": "",
       "locationName": "California",
       "fips": "06"
     },
