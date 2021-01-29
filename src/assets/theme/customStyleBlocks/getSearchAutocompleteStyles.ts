@@ -2,13 +2,12 @@
  * Autocomplete styles specific to homepage searchbar (removes gray hover from dropdown option items)
  */
 import { makeStyles } from '@material-ui/core/styles';
-import { COLOR_MAP } from 'common/colors';
+import COLORS, { COLOR_MAP } from 'common/colors';
 
 export const getSearchAutocompleteStyles = makeStyles(theme => ({
   option: {
     '&[data-focus="true"]': {
-      backgroundColor: 'transparent',
-      color: COLOR_MAP.BLUE,
+      backgroundColor: COLORS.LIGHTGRAY,
     },
   },
   noOptions: {
