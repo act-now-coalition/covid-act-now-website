@@ -11,6 +11,7 @@ import {
   ButtonContainer,
   Heading2,
   Paragraph,
+  Container,
 } from './RegionVaccinationBlock.style';
 import {
   getVaccinationRegions,
@@ -45,7 +46,7 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
     .filter((link): link is VaccinationLink => link !== null);
 
   return (
-    <Fragment>
+    <Container>
       <Heading2>Vaccines</Heading2>
       <Paragraph>
         Below are government resources to help you get vaccinated. If something
@@ -72,7 +73,7 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
           trackingLinkPrefix="Options"
         />
       )}
-    </Fragment>
+    </Container>
   );
 };
 

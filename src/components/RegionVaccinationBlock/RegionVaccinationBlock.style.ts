@@ -3,6 +3,10 @@ import MuiChevronRightIcon from '@material-ui/icons/ChevronRight';
 import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 
+export const Container = styled.div`
+  margin-bottom: 21px;
+`;
+
 export const Heading2 = styled.h2`
   font-family: Roboto;
   font-style: normal;

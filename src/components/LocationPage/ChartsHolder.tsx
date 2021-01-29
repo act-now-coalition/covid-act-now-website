@@ -151,12 +151,14 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
         <MainContentInner>
           <RegionVaccinationBlock region={region} />
         </MainContentInner>
-        <CompareMain
-          stateName={getStateName(region) || region.name} // rename prop
-          locationsViewable={6}
-          stateId={(region as State).stateCode || undefined}
-          region={region}
-        />
+        <MainContentInner>
+          <CompareMain
+            stateName={getStateName(region) || region.name} // rename prop
+            locationsViewable={6}
+            stateId={(region as State).stateCode || undefined}
+            region={region}
+          />
+        </MainContentInner>
         <MainContentInner>
           <Recommend
             introCopy={recommendationsIntro}
