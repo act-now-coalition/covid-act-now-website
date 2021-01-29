@@ -86,14 +86,14 @@ const HomepageSearchAutocomplete: React.FC<{
   return (
     <Wrapper isOpen={isOpen}>
       <Autocomplete
-        noOptionsText={noOptionsCopy}
-        onInputChange={onInputChange}
-        options={locations}
         disableListWrap
         disableClearable
         disablePortal
         clearOnEscape
         fullWidth
+        options={locations}
+        noOptionsText={noOptionsCopy}
+        onInputChange={onInputChange}
         onChange={onSelect}
         getOptionSelected={getOptionSelected}
         filterOptions={createFilterOptions({
@@ -101,6 +101,21 @@ const HomepageSearchAutocomplete: React.FC<{
           limit: filterLimit,
           stringify: stringifyOption,
         })}
+        openOnFocus
+        onOpen={() => {
+          setIsOpen(true);
+          if (setHideMapToggle) {
+            setHideMapToggle(true);
+          }
+        }}
+        onClose={() => {
+          setIsOpen(false);
+          if (setHideMapToggle) {
+            setHideMapToggle(false);
+          }
+        }}
+        PaperComponent={StyledPaper}
+        ListboxComponent={ListContainer}
         popupIcon={<span />} // adding an empty span removes default MUI arrow icon
         renderInput={params => (
           <StyledTextField
@@ -122,21 +137,6 @@ const HomepageSearchAutocomplete: React.FC<{
           noOptions: autocompleteStyles.noOptions,
           popperDisablePortal: autocompleteStyles.popperDisablePortal,
         }}
-        openOnFocus
-        onOpen={() => {
-          setIsOpen(true);
-          if (setHideMapToggle) {
-            setHideMapToggle(true);
-          }
-        }}
-        onClose={() => {
-          setIsOpen(false);
-          if (setHideMapToggle) {
-            setHideMapToggle(false);
-          }
-        }}
-        PaperComponent={StyledPaper}
-        ListboxComponent={ListContainer}
       />
       <SearchDirections>{searchDirectionsText}</SearchDirections>
     </Wrapper>
