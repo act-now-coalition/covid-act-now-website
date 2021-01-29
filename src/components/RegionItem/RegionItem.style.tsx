@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
-import { COLOR_MAP } from 'common/colors';
+import COLORS, { COLOR_MAP } from 'common/colors';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import { Skeleton } from '@material-ui/lab';
@@ -13,7 +13,22 @@ export const CircleIcon = styled(FiberManualRecordIcon)<{ $iconColor: string }>`
 export const CopyContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 1rem;
+  flex: 1 1 auto;
+
+  min-width: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+`;
+
+export const IconContainer = styled.div`
+  flex: 0 0 auto;
+  &:first-child {
+    margin-right: 1rem;
+  }
+  &:last-child {
+    margin-left: 1rem;
+  }
 `;
 
 export const ArrowIcon = styled(ArrowForwardIosIcon)`
@@ -35,9 +50,8 @@ export const StyledLink = styled(Link)`
 export const SharedWrapperStyles = css`
   display: flex;
   align-items: center;
-  background-color: ${COLOR_MAP.LIGHTGRAY_BG};
-  max-width: 330px;
-  width: 100%;
+  border: 1px solid ${COLORS.LIGHTGRAY};
+  width: 330px;
   padding: 1.25rem 1.75rem 1.25rem 1.25rem;
   border-radius: 4px;
 `;
@@ -45,6 +59,7 @@ export const SharedWrapperStyles = css`
 export const Wrapper = styled.div`
   ${SharedWrapperStyles};
   cursor: pointer;
+  transition: box-shadow 0.1s ease-in-out;
 
   :hover {
     box-shadow: 0px 2px 24px rgba(0, 0, 0, 0.12);

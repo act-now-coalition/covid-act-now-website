@@ -447,11 +447,12 @@ export const Header = styled.div<{ isHomepage?: boolean }>`
   font-family: Roboto;
   font-weight: bold;
   font-size: 1.5rem;
-  margin: 0;
   justify-content: space-between;
+  margin: ${({ isHomepage }) => (isHomepage ? '12px 0 0' : '28px 0 12px')};
 
   @media (min-width: 600px) {
     font-size: ${({ isHomepage }) => (isHomepage ? '2rem' : '1.5rem')};
+    margin: ${({ isHomepage }) => (isHomepage ? '0' : '20px 0 12px')};
   }
 `;
 

@@ -13,8 +13,8 @@ import {
 import NewMenuItem from 'components/Search/NewMenuItem/NewMenuItem';
 import { getSearchTextFieldStyles } from 'assets/theme/customStyleBlocks/getSearchTextFieldStyles';
 import { getSearchAutocompleteStyles } from 'assets/theme/customStyleBlocks/getSearchAutocompleteStyles';
-import StyledPopper from './StyledPopper';
 import { useBreakpoint } from 'common/hooks';
+import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 
 function getOptionSelected(option: Region, selectedOption: Region) {
   return option.fipsCode === selectedOption.fipsCode;
@@ -31,7 +31,7 @@ const HomepageSearchAutocomplete: React.FC<{
   const [noOptionsCopy, setNoOptionsCopy] = useState('No location found');
   const [isOpen, setIsOpen] = useState(false);
 
-  const isMobile = useBreakpoint(800);
+  const isMobile = useBreakpoint(600);
 
   const searchTextFieldStyles = getSearchTextFieldStyles();
   const autocompleteStyles = getSearchAutocompleteStyles();
@@ -46,7 +46,7 @@ const HomepageSearchAutocomplete: React.FC<{
     } else {
       if (value.length) {
         setNoOptionsCopy(
-          `No locations named ${value} found. You can also try searching a zip code.`,
+          `No locations named ${value} found. You can also try searching by zip code.`,
         );
       } else setNoOptionsCopy('No location found');
     }
@@ -65,25 +65,41 @@ const HomepageSearchAutocomplete: React.FC<{
   };
 
   const onSelect = (e: any, value: Region) => {
+    trackEvent(
+      EventCategory.SEARCH,
+      EventAction.NAVIGATE,
+      `Selected: ${value.fullName} (${input})`,
+    );
     window.location.href = value.relativeUrl;
   };
 
   const zipCodeInput = checkForZipcodeMatch ? input : '';
 
-  const textFieldPlaceholder = isOpen
-    ? ''
-    : 'Search by state, metro, county, or zip';
+  const getPlaceholderText = (): string => {
+    if (isOpen) {
+      return '';
+    } else {
+      if (isMobile) {
+        return 'City, county, or state';
+      } else {
+        return 'Search city, county, or state';
+      }
+    }
+  };
+
+  const searchDirectionsText = isOpen ? 'Search city, county, or state' : '';
 
   return (
     <Wrapper isOpen={isOpen}>
       <Autocomplete
-        noOptionsText={noOptionsCopy}
-        onInputChange={onInputChange}
-        options={locations}
         disableListWrap
         disableClearable
+        disablePortal
         clearOnEscape
         fullWidth
+        options={locations}
+        noOptionsText={noOptionsCopy}
+        onInputChange={onInputChange}
         onChange={onSelect}
         getOptionSelected={getOptionSelected}
         filterOptions={createFilterOptions({
@@ -91,10 +107,26 @@ const HomepageSearchAutocomplete: React.FC<{
           limit: filterLimit,
           stringify: stringifyOption,
         })}
+        openOnFocus
+        onOpen={() => {
+          trackEvent(EventCategory.SEARCH, EventAction.FOCUS, 'Search Focused');
+          setIsOpen(true);
+          if (setHideMapToggle) {
+            setHideMapToggle(true);
+          }
+        }}
+        onClose={() => {
+          setIsOpen(false);
+          if (setHideMapToggle) {
+            setHideMapToggle(false);
+          }
+        }}
+        PaperComponent={StyledPaper}
+        ListboxComponent={ListContainer}
         popupIcon={<span />} // adding an empty span removes default MUI arrow icon
         renderInput={params => (
           <StyledTextField
-            placeholder={textFieldPlaceholder}
+            placeholder={getPlaceholderText()}
             {...params}
             className={searchTextFieldStyles.root}
             $isOpen={isOpen}
@@ -110,31 +142,10 @@ const HomepageSearchAutocomplete: React.FC<{
         classes={{
           option: autocompleteStyles.option,
           noOptions: autocompleteStyles.noOptions,
+          popperDisablePortal: autocompleteStyles.popperDisablePortal,
         }}
-        openOnFocus
-        onOpen={() => {
-          setIsOpen(true);
-          if (setHideMapToggle) {
-            setHideMapToggle(true);
-          }
-        }}
-        onClose={() => {
-          setIsOpen(false);
-          if (setHideMapToggle) {
-            setHideMapToggle(false);
-          }
-        }}
-        PaperComponent={StyledPaper}
-        ListboxComponent={ListContainer}
-        PopperComponent={props => (
-          <StyledPopper {...props} isMobile={isMobile} />
-        )}
       />
-      {isOpen && (
-        <SearchDirections>
-          Search by state, metro, county, or zip
-        </SearchDirections>
-      )}
+      <SearchDirections>{searchDirectionsText}</SearchDirections>
     </Wrapper>
   );
 };

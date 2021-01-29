@@ -56,7 +56,7 @@ export const InnerContainer = styled.div`
   @media (min-width: ${materialSMBreakpoint}) {
     align-items: flex-start;
     text-align: left;
-    max-width: 480px;
+    max-width: 485px;
   }
 `;
 

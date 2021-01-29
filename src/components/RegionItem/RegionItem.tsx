@@ -6,6 +6,7 @@ import {
   LevelDescription,
   CircleIcon,
   StyledLink,
+  IconContainer,
 } from './RegionItem.style';
 import { Region, State } from 'common/regions';
 import { getLocationIconFillColor } from 'components/Search';
@@ -26,12 +27,20 @@ const RegionItem: React.FC<{ region: Region }> = ({ region }) => {
   return (
     <StyledLink to={region.relativeUrl}>
       <Wrapper>
-        <CircleIcon $iconColor={iconColor} />
+        <IconContainer>
+          <CircleIcon $iconColor={iconColor} />
+        </IconContainer>
         <CopyContainer>
-          <StyledRegionName region={region} showStateCode={showStateCode} />
+          <StyledRegionName
+            region={region}
+            showStateCode={showStateCode}
+            truncateText
+          />
           <LevelDescription>{levelDescriptionCopy}</LevelDescription>
         </CopyContainer>
-        <ArrowIcon />
+        <IconContainer>
+          <ArrowIcon />
+        </IconContainer>
       </Wrapper>
     </StyledLink>
   );

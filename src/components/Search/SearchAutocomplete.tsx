@@ -6,6 +6,7 @@ import { Region, County, MetroArea } from 'common/regions';
 import MenuItem from './MenuItem';
 import { StyledPaper } from './Search.style';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
+import { SearchBarIcon } from 'components/Search/Homepage/HomepageSearchAutocomplete.style';
 
 function getOptionSelected(option: Region, selectedOption: Region) {
   return option.fipsCode === selectedOption.fipsCode;
@@ -73,7 +74,11 @@ const SearchAutocomplete: React.FC<{
         <TextField
           {...params}
           variant="outlined"
-          placeholder="Search by state, metro, county, or zip"
+          placeholder="Search city, county, or state"
+          InputProps={{
+            ...params.InputProps,
+            startAdornment: <SearchBarIcon />,
+          }}
         />
       )}
       renderOption={option => {
