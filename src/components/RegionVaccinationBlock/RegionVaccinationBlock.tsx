@@ -7,7 +7,6 @@ import {
 import ExternalLink from 'components/ExternalLink';
 import LinkButton from './LinkButton';
 import {
-  Heading3,
   ButtonContainer,
   Heading2,
   Paragraph,
@@ -61,20 +60,17 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
       </Paragraph>
       {eligibilityLinks.length > 0 && (
         <Fragment>
-          <Heading3>
-            <strong>When</strong> can I get vaccinated if I’m in...
-          </Heading3>
+          <strong>When</strong> can I get vaccinated if I’m in...
           <VaccinationLinksBlock
             links={eligibilityLinks}
             trackingLinkPrefix="Eligibility"
           />
         </Fragment>
       )}
+      <br />
       {vaccinationOptionsLinks.length > 0 && (
         <Fragment>
-          <Heading3>
-            <strong>Where and how</strong> do I get vaccinated if I’m in...
-          </Heading3>
+          <strong>Where and how</strong> do I get vaccinated if I’m in...
           <VaccinationLinksBlock
             links={vaccinationOptionsLinks}
             trackingLinkPrefix="Options"
