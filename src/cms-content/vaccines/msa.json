@@ -69,8 +69,8 @@
     {
       "locationName": "Seattle",
       "fips": "42660",
-      "eligibilityInfoUrl": "https://www.kingcounty.gov/depts/health/covid-19/vaccine.aspx",
-      "vaccinationSignupUrl": "https://form.findyourphasewa.org/210118771253954"
+      "eligibilityInfoUrl": "https://www.kingcounty.gov/depts/health/covid-19/vaccine/distribution.aspx",
+      "vaccinationSignupUrl": ""
     },
     {
       "locationName": "Minneapolis",

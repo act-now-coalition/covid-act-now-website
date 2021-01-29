@@ -25,7 +25,7 @@ import {
   Section,
   ColumnCentered,
 } from './NewHomepage.style';
-import HomepageSearchAutocomplete from 'components/Search/Homepage/HomepageSearchAutocomplete';
+import { HomepageSearchAutocomplete } from 'components/Search';
 import Toggle from '../Toggle/Toggle';
 import HorizontalThermometer from 'components/HorizontalThermometer';
 import HomepageItems from 'components/RegionItem/HomepageItems';
@@ -92,7 +92,7 @@ export default function NewHomepage() {
       <main>
         <div className="App">
           <Content>
-            <ColumnCentered>
+            <ColumnCentered id="search">
               <HomepageSearchAutocomplete
                 locations={getFinalAutocompleteLocations(geolocationData)}
                 filterLimit={getFilterLimit()}

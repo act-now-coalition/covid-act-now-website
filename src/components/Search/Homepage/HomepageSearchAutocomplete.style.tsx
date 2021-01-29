@@ -57,11 +57,15 @@ export const SearchDirections = styled.span`
 `;
 
 export const ListContainer = styled.ul`
-  padding: 0 1.75rem 0;
+  padding: 0 1.25rem 0;
   max-height: ${maxMenuHeight}px;
 
   li {
     padding: 0;
+  }
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    padding: 0 1.75rem 0;
   }
 `;
 

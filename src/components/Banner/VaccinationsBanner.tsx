@@ -64,9 +64,8 @@ const VaccinationsBannerInner: React.FC = () => {
     <InnerContainer>
       <Header>New vaccine data</Header>
       <Body>
-        See how many people are vaccinated in each state. The CDC reports that{' '}
-        {formatEstimate(totalVaccinationsInitiated, 5)} Americans have received
-        their first shot.
+        The CDC reports that {formatEstimate(totalVaccinationsInitiated, 5)}{' '}
+        Americans have received their first shot.
       </Body>
       <ButtonContainer>
         <Buttons />

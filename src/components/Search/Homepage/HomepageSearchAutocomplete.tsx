@@ -14,6 +14,7 @@ import NewMenuItem from 'components/Search/NewMenuItem/NewMenuItem';
 import { getSearchTextFieldStyles } from 'assets/theme/customStyleBlocks/getSearchTextFieldStyles';
 import { getSearchAutocompleteStyles } from 'assets/theme/customStyleBlocks/getSearchAutocompleteStyles';
 import { useBreakpoint } from 'common/hooks';
+import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 
 function getOptionSelected(option: Region, selectedOption: Region) {
   return option.fipsCode === selectedOption.fipsCode;
@@ -64,6 +65,11 @@ const HomepageSearchAutocomplete: React.FC<{
   };
 
   const onSelect = (e: any, value: Region) => {
+    trackEvent(
+      EventCategory.SEARCH,
+      EventAction.NAVIGATE,
+      `Selected: ${value.fullName} (${input})`,
+    );
     window.location.href = value.relativeUrl;
   };
 
@@ -86,14 +92,14 @@ const HomepageSearchAutocomplete: React.FC<{
   return (
     <Wrapper isOpen={isOpen}>
       <Autocomplete
-        noOptionsText={noOptionsCopy}
-        onInputChange={onInputChange}
-        options={locations}
         disableListWrap
         disableClearable
         disablePortal
         clearOnEscape
         fullWidth
+        options={locations}
+        noOptionsText={noOptionsCopy}
+        onInputChange={onInputChange}
         onChange={onSelect}
         getOptionSelected={getOptionSelected}
         filterOptions={createFilterOptions({
@@ -101,6 +107,22 @@ const HomepageSearchAutocomplete: React.FC<{
           limit: filterLimit,
           stringify: stringifyOption,
         })}
+        openOnFocus
+        onOpen={() => {
+          trackEvent(EventCategory.SEARCH, EventAction.FOCUS, 'Search Focused');
+          setIsOpen(true);
+          if (setHideMapToggle) {
+            setHideMapToggle(true);
+          }
+        }}
+        onClose={() => {
+          setIsOpen(false);
+          if (setHideMapToggle) {
+            setHideMapToggle(false);
+          }
+        }}
+        PaperComponent={StyledPaper}
+        ListboxComponent={ListContainer}
         popupIcon={<span />} // adding an empty span removes default MUI arrow icon
         renderInput={params => (
           <StyledTextField
@@ -122,21 +144,6 @@ const HomepageSearchAutocomplete: React.FC<{
           noOptions: autocompleteStyles.noOptions,
           popperDisablePortal: autocompleteStyles.popperDisablePortal,
         }}
-        openOnFocus
-        onOpen={() => {
-          setIsOpen(true);
-          if (setHideMapToggle) {
-            setHideMapToggle(true);
-          }
-        }}
-        onClose={() => {
-          setIsOpen(false);
-          if (setHideMapToggle) {
-            setHideMapToggle(false);
-          }
-        }}
-        PaperComponent={StyledPaper}
-        ListboxComponent={ListContainer}
       />
       <SearchDirections>{searchDirectionsText}</SearchDirections>
     </Wrapper>

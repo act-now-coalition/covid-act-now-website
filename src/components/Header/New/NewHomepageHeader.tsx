@@ -9,7 +9,7 @@ const NewHomePageHeader: React.FC = () => {
   return (
     <Wrapper>
       <Content>
-        <Header>COVID Risk &amp; Vaccine Tracker</Header>
+        <Header>U.S. COVID Risk &amp; Vaccine Tracker</Header>
         <Subcopy>
           Updated on {moment.utc(lastUpdatedDate).format('MMMM D')}
         </Subcopy>

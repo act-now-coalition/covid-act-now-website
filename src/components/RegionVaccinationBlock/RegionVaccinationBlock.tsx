@@ -7,10 +7,10 @@ import {
 import ExternalLink from 'components/ExternalLink';
 import LinkButton from './LinkButton';
 import {
-  Heading3,
   ButtonContainer,
   Heading2,
   Paragraph,
+  Container,
 } from './RegionVaccinationBlock.style';
 import {
   getVaccinationRegions,
@@ -45,7 +45,7 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
     .filter((link): link is VaccinationLink => link !== null);
 
   return (
-    <Fragment>
+    <Container>
       <Heading2>Vaccines</Heading2>
       <Paragraph>
         Below are government resources to help you get vaccinated. If something
@@ -59,47 +59,46 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
         .
       </Paragraph>
       {eligibilityLinks.length > 0 && (
-        <VaccinationLinksBlock
-          title="When can I get vaccinated if I’m in..."
-          links={eligibilityLinks}
-          trackingLinkPrefix="Eligibility"
-        />
+        <Fragment>
+          <strong>When</strong> can I get vaccinated if I’m in...
+          <VaccinationLinksBlock
+            links={eligibilityLinks}
+            trackingLinkPrefix="Eligibility"
+          />
+        </Fragment>
       )}
+      <br />
       {vaccinationOptionsLinks.length > 0 && (
-        <VaccinationLinksBlock
-          title="Where and how do I get vaccinated if I’m in..."
-          links={vaccinationOptionsLinks}
-          trackingLinkPrefix="Options"
-        />
+        <Fragment>
+          <strong>Where and how</strong> do I get vaccinated if I’m in...
+          <VaccinationLinksBlock
+            links={vaccinationOptionsLinks}
+            trackingLinkPrefix="Options"
+          />
+        </Fragment>
       )}
-    </Fragment>
+    </Container>
   );
 };
 
 // TODO: Add tracking for these links
 const VaccinationLinksBlock: React.FC<{
-  title: string;
   links: VaccinationLink[];
   trackingLinkPrefix: string;
-}> = ({ title, links, trackingLinkPrefix }) => (
-  <Fragment>
-    <Heading3>{title}</Heading3>
-    <ButtonContainer>
-      {links.map(({ label, url }) => (
-        <LinkButton
-          href={url}
-          key={label}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() =>
-            trackVaccinationLink(`${trackingLinkPrefix}: ${label}`)
-          }
-        >
-          {label}
-        </LinkButton>
-      ))}
-    </ButtonContainer>
-  </Fragment>
+}> = ({ links, trackingLinkPrefix }) => (
+  <ButtonContainer>
+    {links.map(({ label, url }) => (
+      <LinkButton
+        href={url}
+        key={label}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => trackVaccinationLink(`${trackingLinkPrefix}: ${label}`)}
+      >
+        {label}
+      </LinkButton>
+    ))}
+  </ButtonContainer>
 );
 
 export default VaccinationBlock;
