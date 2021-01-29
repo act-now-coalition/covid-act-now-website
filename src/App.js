@@ -62,7 +62,6 @@ export default function App() {
             <ErrorBoundary>
               <Suspense fallback={<SuspenseFallback />}>
                 <Switch>
-                  {/* <Route exact path="/" component={HomePage} /> */}
                   <Route exact path="/" component={NewHomepage} />
 
                   <Route exact path="/alert_signup" component={HomePage} />

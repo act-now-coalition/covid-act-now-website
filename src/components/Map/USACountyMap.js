@@ -11,7 +11,7 @@ import COUNTIES_JSON from './data/counties-10m.json';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 
 function trackMapClick(label) {
-  trackEvent(EventCategory.MAP, EventAction.NAVIGATE, `Navigated to: ${label}`);
+  trackEvent(EventCategory.MAP, EventAction.NAVIGATE, label);
 }
 
 const stateFipsCodes = regions.states.map(state => state.fipsCode);
