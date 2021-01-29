@@ -60,18 +60,26 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
         .
       </Paragraph>
       {eligibilityLinks.length > 0 && (
-        <VaccinationLinksBlock
-          title="When can I get vaccinated if I’m in..."
-          links={eligibilityLinks}
-          trackingLinkPrefix="Eligibility"
-        />
+        <Fragment>
+          <Heading3>
+            <strong>When</strong> can I get vaccinated if I’m in...
+          </Heading3>
+          <VaccinationLinksBlock
+            links={eligibilityLinks}
+            trackingLinkPrefix="Eligibility"
+          />
+        </Fragment>
       )}
       {vaccinationOptionsLinks.length > 0 && (
-        <VaccinationLinksBlock
-          title="Where and how do I get vaccinated if I’m in..."
-          links={vaccinationOptionsLinks}
-          trackingLinkPrefix="Options"
-        />
+        <Fragment>
+          <Heading3>
+            <strong>Where and how</strong> do I get vaccinated if I’m in...
+          </Heading3>
+          <VaccinationLinksBlock
+            links={vaccinationOptionsLinks}
+            trackingLinkPrefix="Options"
+          />
+        </Fragment>
       )}
     </Container>
   );
@@ -79,28 +87,22 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
 
 // TODO: Add tracking for these links
 const VaccinationLinksBlock: React.FC<{
-  title: string;
   links: VaccinationLink[];
   trackingLinkPrefix: string;
-}> = ({ title, links, trackingLinkPrefix }) => (
-  <Fragment>
-    <Heading3>{title}</Heading3>
-    <ButtonContainer>
-      {links.map(({ label, url }) => (
-        <LinkButton
-          href={url}
-          key={label}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() =>
-            trackVaccinationLink(`${trackingLinkPrefix}: ${label}`)
-          }
-        >
-          {label}
-        </LinkButton>
-      ))}
-    </ButtonContainer>
-  </Fragment>
+}> = ({ links, trackingLinkPrefix }) => (
+  <ButtonContainer>
+    {links.map(({ label, url }) => (
+      <LinkButton
+        href={url}
+        key={label}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => trackVaccinationLink(`${trackingLinkPrefix}: ${label}`)}
+      >
+        {label}
+      </LinkButton>
+    ))}
+  </ButtonContainer>
 );
 
 export default VaccinationBlock;
