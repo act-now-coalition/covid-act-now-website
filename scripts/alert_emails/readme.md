@@ -18,7 +18,7 @@ using AWS Simple Email Service.
 
 A github action will run all of these steps on github for you.
 
-The script should be run after a new snapshot has been pushed to the prod website, in order to notify users of changes. You can get the currently live snapshot from https://github.com/covid-projections/covid-projections/blob/master/src/assets/data/data_url.json
+The script should be run after a new snapshot has been pushed to the prod website, in order to notify users of changes. You can get the currently live snapshot from https://github.com/covid-projections/covid-projections/blob/main/src/assets/data/data_url.json
 
 Confirm the lastSnapshot field is
 correct in firestore at (info/alerts)[https://console.firebase.google.com/project/covidactnow-prod/database/firestore/data~2Finfo~2Falerts]. The value of lastSnapshot should be the last snapshot we sent emails for (the script updates it on completion). You can verify it's set correctly by checking the snapshots collection in firestore to see what snapshots we've sent emails on prior.
