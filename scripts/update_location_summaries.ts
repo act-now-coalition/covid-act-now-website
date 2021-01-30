@@ -9,7 +9,7 @@ import {
 } from '../src/common/utils/model';
 import {
   currentSnapshot,
-  fetchMasterSnapshotNumber,
+  fetchMainSnapshotNumber,
   snapshotFromUrl,
   SNAPSHOT_URL,
 } from '../src/common/utils/snapshots';
@@ -199,9 +199,9 @@ async function buildAggregations(
 }
 
 async function buildSlackSummary() {
-  const masterSnapshot = await fetchMasterSnapshotNumber();
+  const mainSnapshot = await fetchMainSnapshotNumber();
   const oldSummaries: SummariesMap = await fs.readJSON(
-    path.join(SUMMARIES_FOLDER, `${masterSnapshot}.json`),
+    path.join(SUMMARIES_FOLDER, `${mainSnapshot}.json`),
   );
   const newSnapshot = snapshotFromUrl(SNAPSHOT_URL);
   const newSummaries: SummariesMap = await fs.readJSON(

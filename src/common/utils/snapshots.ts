@@ -5,9 +5,9 @@ import DataUrlJson from 'assets/data/data_url.json';
 
 export const SNAPSHOT_URL = DataUrlJson.data_url;
 
-export async function fetchMasterSnapshotNumber(): Promise<number> {
+export async function fetchMainSnapshotNumber(): Promise<number> {
   const response = await fetch(
-    'https://raw.githubusercontent.com/covid-projections/covid-projections/master/src/assets/data/data_url.json',
+    'https://raw.githubusercontent.com/covid-projections/covid-projections/main/src/assets/data/data_url.json',
   );
   const json = await response.json();
   return snapshotFromUrl(json['data_url']);

@@ -10,7 +10,7 @@
 
 import fs from 'fs-extra';
 import path from 'path';
-import { fetchMasterSnapshotNumber } from '../../src/common/utils/snapshots';
+import { fetchMainSnapshotNumber } from '../../src/common/utils/snapshots';
 import regions from '../../src/common/regions';
 import { Alert } from './interfaces';
 import moment from 'moment';
@@ -84,7 +84,7 @@ async function getLastSnapshotNumber(): Promise<number> {
   if (lastSnapshot) {
     console.info(`Last alerts snapshot: ${lastSnapshot}`);
   } else {
-    lastSnapshot = await fetchMasterSnapshotNumber();
+    lastSnapshot = await fetchMainSnapshotNumber();
     console.info(`No last alerts snapshot found. Using ${lastSnapshot}`);
   }
   return lastSnapshot;
