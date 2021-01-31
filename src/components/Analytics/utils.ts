@@ -44,6 +44,7 @@ export enum EventCategory {
   EXPOSURE_NOTIFICATIONS = 'exposure notifications',
   SEARCH = 'search',
   VACCINATION = 'vaccination',
+  WEB_VITALS = 'web vitals',
   NONE = 'none', // use NONE for development
 }
 
@@ -65,6 +66,11 @@ export enum EventAction {
   REDIRECT = 'redirect',
   FOCUS = 'focus',
   NAVIGATE = 'navigate',
+  CLS = 'Cumulative Layout Shift (*1000)',
+  FCP = 'First Contentful Paint (ms)',
+  FID = 'First Input Delay (ms)',
+  LCP = 'Largest Contentful Paint (ms)',
+  TTFB = 'Time to First Byte',
 }
 
 /**
@@ -77,9 +83,17 @@ export function trackEvent(
   label?: string,
   value?: number,
   nonInteraction?: boolean,
+  transport: 'beacon' | 'xhr' | 'image' = 'beacon',
 ) {
   if (category !== EventCategory.NONE) {
-    ReactGA.event({ category, action, label, value, nonInteraction });
+    ReactGA.event({
+      category,
+      action,
+      label,
+      value,
+      nonInteraction,
+      transport,
+    });
   }
 }
 
@@ -105,4 +119,35 @@ export function trackShare(label: string) {
  */
 export function trackVoteClick(label: string) {
   trackEvent(EventCategory.VOTE_2020, EventAction.CLICK_LINK, label);
+}
+
+/**
+ * Callback passed to web-vitals to report important performance events
+ */
+export function trackWebVitals({
+  name,
+  delta,
+  id,
+}: {
+  name: 'CLS' | 'FID' | 'LCP' | 'FCP' | 'TTFB';
+  delta: number;
+  id: string;
+}) {
+  trackEvent(
+    EventCategory.WEB_VITALS,
+    EventAction[name],
+    // The `id` value will be unique to the current page load. When sending
+    // multiple values from the same page (e.g. for CLS), Google Analytics can
+    // compute a total by grouping on this ID (note: requires `eventLabel` to
+    // be a dimension in your report).
+    id,
+    // Google Analytics metrics must be integers, so the value is rounded.
+    // For CLS the value is first multiplied by 1000 for greater precision
+    // (note: increase the multiplier for greater precision if needed).
+    Math.round(name === 'CLS' ? delta * 1000 : delta),
+    // Use a non-interaction event to avoid affecting bounce rate.
+    true,
+    // Use `sendBeacon()` if the browser supports it.
+    'beacon',
+  );
 }
