@@ -369,6 +369,12 @@
       "category": "Health and symptoms"
     },
     {
+      "term": "SEIR",
+      "termId": "seir",
+      "definition": "An SEIR model is a specific kind of model that [epidemiologists]([/glossary#epidemiologist]) use to understand how a disease will evolve in a population over time. Covid Act Now’s [Covid Response Simulator](https://www.covidactnow.org/tools) is an SEIR model which [forecasts]([/glossary#forecasting]) COVID by categorizing how the conditions of people across a population will evolve across various states. These states include “susceptible,” “[exposed](\\[/glossary#exposed]),” “[infected](\\[/glossary#infection]),” “recovered,” and “deceased.” The model forecasts people’s progression through those states using many different data inputs – including cases, hospitalizations, deaths, and demographics – in conjunction with assumptions based on, for example, how the disease has evolved over time in other countries and how much of an impact certain interventions like social distancing could have. Simply put, the SEIR model can help us predict the trend in COVID hospitalizations within certain scenarios. This predictive ability allows states and counties to prepare for when their hospitals may become overwhelmed by COVID patients.",
+      "category": "Disease science"
+    },
+    {
       "term": "Sensitivity (testing)",
       "termId": "sensitivity",
       "definition": "Test sensitivity refers to a test’s ability to accurately identify all patients with a disease. Measuring the sensitivity of COVID tests helps us understand how accurate the test results are. It is usually expressed as a percentage: the proportion of those who have tested positive for a specific disease over the actual number of those who have the disease.\n\nA test with high sensitivity (a test with close to a 100 percent match between those who tested positive and those who are actually positive) is unlikely to give [false negatives](https://covidactnow.org/glossary#false-negative) when the disease is actually present.\n\n A false negative occurs when a test result incorrectly indicates that someone does not have a disease, when they actually do. If someone infected with COVID tested negative due to test inaccuracy, they may unknowingly expose their households, friends, and community members to COVID.",
