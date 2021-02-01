@@ -1,7 +1,7 @@
 import React, { ComponentProps, DetailedHTMLProps } from 'react';
 import { Link, LinkProps } from 'react-router-dom';
 import { assert } from 'common/utils';
-import { StyledButton } from './LinkButton.style';
+import { BaseButton } from './LinkButton.style';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 
 type AnchorLinkType = DetailedHTMLProps<
@@ -9,7 +9,7 @@ type AnchorLinkType = DetailedHTMLProps<
   HTMLAnchorElement
 >;
 
-type StyledButtonProps = ComponentProps<typeof StyledButton>;
+type StyledButtonProps = ComponentProps<typeof BaseButton>;
 
 type ExternalLinkButtonProps = StyledButtonProps & AnchorLinkType;
 
@@ -44,10 +44,10 @@ const LinkButton: React.FC<LinkButtonProps & TrackingProps> = props => {
   };
 
   if (isInternalLink) {
-    return <StyledButton {...props} component={Link} onClick={onClick} />;
+    return <BaseButton {...props} component={Link} onClick={onClick} />;
   } else {
     return (
-      <StyledButton
+      <BaseButton
         {...props}
         target="_blank"
         rel="noopener noreferrer"

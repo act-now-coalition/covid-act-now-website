@@ -1,7 +1,7 @@
 import MuiButton from '@material-ui/core/Button';
 import styled from 'styled-components';
 
-export const StyledButton = styled(MuiButton).attrs(props => ({
+export const BaseButton = styled(MuiButton).attrs(props => ({
   disableRipple: true,
   disableFocusRipple: true,
 }))`
