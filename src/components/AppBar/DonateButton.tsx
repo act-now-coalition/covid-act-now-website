@@ -1,6 +1,4 @@
 import React from 'react';
-import useScrollPosition from '@react-hook/window-scroll';
-import { Fade } from '@material-ui/core';
 import {
   DonateButtonWrapper,
   StyledDonateButtonA,
@@ -18,23 +16,6 @@ const trackingProps = {
   trackingCategory: EventCategory.DONATE,
   trackingAction: EventAction.CLICK,
   trackingLabel: 'AppBar donate button',
-};
-
-export const DonateButtonWithFade = () => {
-  // uses https://www.npmjs.com/package/@react-hook/window-scroll :
-  const scrollY = useScrollPosition();
-  // 170 approximates the height of the donation banner:
-  const isPassedBanner = scrollY > 170;
-
-  return (
-    <Fade in={isPassedBanner} timeout={150}>
-      <DonateButtonWrapper>
-        <StyledDonateButtonA to="/donate" {...trackingProps}>
-          Donate
-        </StyledDonateButtonA>
-      </DonateButtonWrapper>
-    </Fade>
-  );
 };
 
 export const DonateButton = () => (
