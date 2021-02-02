@@ -5,7 +5,7 @@
       "eligibilityInfoUrl": "https://covidvaccine.mo.gov/",
       "fips": "29",
       "locationName": "Missouri",
-      "phases": [
+      "phaseGroups": [
         {
           "startDate": "2020-12-14T18:54:06.354Z",
           "updatedAt": "2021-02-02T18:54:06.376Z",
