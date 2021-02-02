@@ -757,27 +757,31 @@ collections:
                 name: emailAlertVersion
                 default: 0
                 widget: number
-              - label: Phases
-                name: eligibilityPhases
+              - label: Phase Groups
+                name: phaseGroups
+                description: Each element describes a specific phase or phase + tier combination where available.
                 widget: list
                 collapsed: true
                 fields:
-                  - label: Group Phase
-                    name: groupPhase
+                  - label: Phase
+                    name: phase
                     widget: string
-                  - label: Group Tier
-                    name: groupTier
+                  - label: Tier
+                    name: tier
                     widget: string
-                  - label: Group Description
-                    name: groupDescription
-                    widget: text
+                    required: false
+                  - label: Description
+                    name: description
+                    widget: markdown
                   - label: Expanded Definition URL
                     name: expandedDefinitionUrl
+                    description: URL to learn more about specifics of group
                     required: false
                     widget: string
                   - label: Eligibility Start Date
-                    name: eligibilityStartDate
-                    widget: date
+                    name: startDate
+                    required: false
+                    widget: text
                   - label: Updated at
                     name: updatedAt
                     widget: datetime
