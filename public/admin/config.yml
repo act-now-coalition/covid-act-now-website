@@ -734,7 +734,7 @@ collections:
     files:
       - name: Vaccine Information-State
         label: State Vaccine Information 
-        file: src/cms-content/vaccines/state.json
+        file: src/cms-content/vaccines/state-vaccine-phases.json
         fields:
           - label: Regions
             name: regions
