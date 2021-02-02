@@ -41,6 +41,7 @@ const MobileWrapperOpened = css`
   z-index: 10000;
   padding: 1.5rem;
   background-color: white;
+  touch-action: none;
 `;
 
 const MobileWrapperClosed = css`
@@ -101,6 +102,7 @@ export const DesktopSearchDirections = styled.span`
 
 export const ListContainer = styled.ul`
   padding: 0 1.25rem 0;
+  max-height: 70vh;
 
   li {
     padding: 0;
