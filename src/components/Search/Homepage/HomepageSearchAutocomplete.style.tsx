@@ -113,15 +113,14 @@ export const ListContainer = styled.ul`
 `;
 
 export const StyledPaper = styled(Paper)`
-  border-radius: 0 0 4px 4px;
-  box-shadow: none;
-
   width: ${mobileWidth}px;
   width: 100%;
+  border-radius: 0;
+  box-shadow: 0px 26px 24px rgba(0, 0, 0, 0.12);
 
   @media (min-width: ${materialSMBreakpoint}) {
+    border-radius: 0 0 4px 4px;
     max-height: ${maxMenuHeight}px;
     width: ${desktopWidth}px;
-    box-shadow: 0px 26px 24px rgba(0, 0, 0, 0.12);
   }
 `;
