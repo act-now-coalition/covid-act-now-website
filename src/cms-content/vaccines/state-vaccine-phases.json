@@ -10,7 +10,7 @@
           "startDate": "2020-12-14T18:54:06.354Z",
           "updatedAt": "2021-02-02T18:54:06.376Z",
           "phase": "1A",
-          "tier": "*",
+          "tier": null,
           "description": "Healthcare Workers\nLong-Term Care Facility Staff and Residents\nHome Health\nUrgent Care\nVaccination Staff\nCongregate Community\nSchool Nurses\nDental Office Staff\nMental/Behavior Health Providers\nEMS/EMT/Paramedics\nand more",
           "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase1a/"
         }
