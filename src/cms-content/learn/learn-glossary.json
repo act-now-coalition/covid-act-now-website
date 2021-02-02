@@ -95,7 +95,7 @@
     {
       "term": "Crisis standards of care (CSC)",
       "termId": "crisis-standards-of-care",
-      "definition": "Crisis standards of care (CSC) refers to when a hospital or health care system is so overwhelmed that it is impossible to provide the standard level of care. \n\nCrisis standards of care often coincide with a shift from patient-centered practice, which focuses on providing the best care for a patient, to public-focused practice, which involves making decisions on patient care within a larger understanding of limited resources and collective good. An example of this is the reallocation or in some cases [sharing](https://www.nytimes.com/2020/03/26/health/coronavirus-ventilator-sharing.html) of ventilators among severely ill COVID patients. [Guidelines](https://www.nursingworld.org/~496044/globalassets/practiceandpolicy/work-environment/health--safety/coronavirus/crisis-standards-of-care.pdf) have been published to help health workers and institutions navigate crisis standards of care as ethically as possible.\n\n“[Flattening the Curve](#flattening-the-curve)” is a method of slowing the spread of COVID to prevent hospitals from having to invoke crisis standards of care.",
+      "definition": "Crisis standards of care (CSC) refers to when a hospital or health care system is so overwhelmed that it is impossible to provide the standard level of care. \n\nCrisis standards of care often coincide with a shift from patient-centered practice, which focuses on providing the best care for a patient, to public-focused practice, which involves making decisions on patient care within a larger understanding of limited resources and collective good. An example of this is the reallocation or in some cases [sharing of ventilators](http://rc.rcjournal.com/content/early/2020/05/06/respcare.07919) among severely ill COVID patients. [Guidelines](https://www.nursingworld.org/~496044/globalassets/practiceandpolicy/work-environment/health--safety/coronavirus/crisis-standards-of-care.pdf) have been published to help health workers and institutions navigate crisis standards of care as ethically as possible.\n\n“[Flattening the Curve](#flattening-the-curve)” is a method of slowing the spread of COVID to prevent hospitals from having to invoke crisis standards of care.",
       "category": "Treatment"
     },
     {
@@ -179,11 +179,11 @@
     {
       "term": "Forecasting",
       "termId": "forecasting",
-      "definition": "Forecasting predicts the future of COVID. Like weather forecasts, COVID forecasts predict the evolution and impact of disease down the line, and are very important to ensure timely and accurate public health disease response. Covid Act Now’s Covid Response Simulator, an SEIR model, is a forecasting tool that attempts to model how COVID will evolve in a population, given certain intervention scenarios such as no interventions, [social distancing](https://covidactnow.org/glossary#social-distancing), or [mask wearing](https://covidactnow.org/glossary#face-mask).",
+      "definition": "Forecasting predicts the future of COVID. Like weather forecasts, COVID forecasts predict the evolution and impact of disease down the line, and are very important to ensure timely and accurate public health disease response. Covid Act Now’s Covid Response Simulator, an [SEIR](#seir) model, is a forecasting tool that attempts to model how COVID will evolve in a population, given certain intervention scenarios such as no interventions, [social distancing](https://covidactnow.org/glossary#social-distancing), or [mask wearing](https://covidactnow.org/glossary#face-mask).",
       "category": "Disease science"
     },
     {
-      "definition": "Herd immunity is achieved when a large portion of a community (the herd) becomes immune to a disease, making the spread of disease from person to person unlikely. There are a lot of challenges in relying on natural herd immunity as a method of COVID disease eradication.\n\n* Generally, the percentage of the population that would need to be immune to a disease to achieve herd immunity is estimated to be [at least 60 percent](https://www.nytimes.com/interactive/2020/05/28/upshot/coronavirus-herd-immunity.html).\n* It is [not yet known](https://www.who.int/news-room/commentaries/detail/immunity-passports-in-the-context-of-covid-19) if COVID antibodies protect people from getting reinfected. It is also incredibly difficult to protect vulnerable people, such as people who are [immunocompromised](#immunocompromised) or elderly, and would require continued isolation for these people.\n* No countries have even come close to achieving the percentage of infections necessary to achieve herd immunity for COVID.\n\nThe concept of herd immunity is also used when [talking about vaccination](https://www.who.int/news-room/q-a-detail/herd-immunity-lockdowns-and-covid-19). With successful vaccination, herd immunity may be achieved by protecting people from COVID without needing vast amounts of people to get sick with COVID. The overall amount of virus that can spread in a population is lowered if the majority of that population gets vaccinated.",
+      "definition": "Herd immunity is achieved when a large portion of a community (the herd) becomes immune to a disease, making the spread of disease from person to person unlikely. There are a lot of challenges in relying on natural herd immunity as a method of COVID disease eradication.\n\n* Generally, the percentage of the population that would need to be immune to a disease to achieve herd immunity is estimated to be [at least 60 percent](https://www.thelancet.com/article/S0140-6736(20)32318-7/fulltext).\n* It is [not yet known](https://www.who.int/news-room/commentaries/detail/immunity-passports-in-the-context-of-covid-19) if COVID antibodies protect people from getting reinfected. It is also incredibly difficult to protect vulnerable people, such as people who are [immunocompromised](#immunocompromised) or elderly, and would require continued isolation for these people.\n* No countries have even come close to achieving the percentage of infections necessary to achieve herd immunity for COVID.\n\nThe concept of herd immunity is also used when [talking about vaccination](https://www.who.int/news-room/q-a-detail/herd-immunity-lockdowns-and-covid-19). With successful vaccination, herd immunity may be achieved by protecting people from COVID without needing vast amounts of people to get sick with COVID. The overall amount of virus that can spread in a population is lowered if the majority of that population gets vaccinated.",
       "term": "Herd immunity",
       "termId": "herd-immunity",
       "category": "Disease science"
@@ -261,9 +261,9 @@
       "category": "Metrics"
     },
     {
-      "term": "Non-pharmaceutical intervention (NPI)",
+      "term": "Nonpharmaceutical intervention (NPI)",
       "termId": "npi",
-      "definition": "Non-pharmaceutical interventions (NPIs) are actions outside of pharmaceutical interventions, such as vaccines and medicine, that help slow the spread of illness. \n\nAlso known as community [mitigation](#mitigation) strategies, NPIs are vital in slowing COVID spread. These include wearing masks, washing your hands, staying home when you do not feel well, [social distancing](#social-distancing), and avoiding crowded indoor spaces.",
+      "definition": "Nonpharmaceutical interventions (NPIs) are actions outside of pharmaceutical interventions, such as vaccines and medicine, that help slow the spread of illness. \n\nAlso known as community [mitigation](#mitigation) strategies, NPIs are vital in slowing COVID spread. These include wearing masks, washing your hands, staying home when you do not feel well, [social distancing](#social-distancing), and avoiding crowded indoor spaces.",
       "category": "Prevention and mitigation"
     },
     {
@@ -299,7 +299,7 @@
     {
       "term": "Peak",
       "termId": "peak",
-      "definition": "A peak is the highest number of COVID cases in a country, state, or county, after which the rate of infection begins to slow. Peaks can be a prolonged period of time rather than a single day, and are best understood as the worst period of an [epidemic](#epidemic) or [pandemic](#pandemic).\n\n[Data suggests](https://www.nytimes.com/interactive/2020/10/15/us/coronavirus-cases-us-surge.html) that the U.S. experienced its first peak in mid-April, and entered its third [wave](#wave) in the late fall of 2020. There is no official definition of when one wave ends and another begins, but waves can generally be identified by a peak in daily new cases followed by a substantial, sustained reduction in that metric.",
+      "definition": "A peak is the highest number of COVID cases in a country, state, or county, after which the rate of infection begins to slow. Peaks can be a prolonged period of time rather than a single day, and are best understood as the worst period of an [epidemic](#epidemic) or [pandemic](#pandemic).\n\n[Data suggests](https://www.covidactnow.org/covid-explained/us-third-wave) that the U.S. experienced its first peak in mid-April, and entered its third [wave](#wave) in the late fall of 2020. There is no official definition of when one wave ends and another begins, but waves can generally be identified by a peak in daily new cases followed by a substantial, sustained reduction in that metric.",
       "category": "Disease science"
     },
     {
@@ -367,6 +367,12 @@
       "term": "SARS-CoV-2",
       "termId": "sars-cov-2",
       "category": "Health and symptoms"
+    },
+    {
+      "term": "SEIR",
+      "termId": "seir",
+      "definition": "An SEIR model is a specific kind of model that [epidemiologists](#epidemiologist) use to understand how a disease will evolve in a population over time. Covid Act Now’s [Covid Response Simulator](https://www.covidactnow.org/tools) is an SEIR model which [forecasts](#forecasting) COVID by categorizing how the conditions of people across a population will evolve across various states. These states include “susceptible,” “[exposed](#exposed),” “[infected](#infection),” “recovered,” and “deceased.” \n\nThe model forecasts people’s progression through those states using many different data inputs – including cases, hospitalizations, deaths, and demographics – in conjunction with assumptions based on, for example, how the disease has evolved over time in other countries and how much of an impact certain interventions like social distancing could have. Simply put, the SEIR model can help us predict the trend in COVID hospitalizations within certain scenarios. This predictive ability allows states and counties to prepare for when their hospitals may become overwhelmed by COVID patients.",
+      "category": "Disease science"
     },
     {
       "term": "Sensitivity (testing)",
@@ -491,7 +497,7 @@
     {
       "term": "Wave",
       "termId": "wave",
-      "definition": "During a [pandemic](#pandemic), a “wave” is a phenomenon in which there is a period of increased case growth which [peaks](#peak) and is followed by a substantial, sustained reduction in cases. COVID cases seem to come in waves: first wave, second wave, and so on. There is no official definition of when one wave ends and another begins, and COVID has peaked in different states at different times.\n\n[Data suggests](https://www.nytimes.com/interactive/2020/10/15/us/coronavirus-cases-us-surge.html) the U.S. on the whole experienced its first peak mid April, second peak in mid July, and entered its third wave of cases in the late fall of 2020. The term wave is often used alongside or interchangeably with [surge](#surge), which describes the increase in cases seen before and during the peak of a wave.",
+      "definition": "During a [pandemic](#pandemic), a “wave” is a phenomenon in which there is a period of increased case growth which [peaks](#peak) and is followed by a substantial, sustained reduction in cases. COVID cases seem to come in waves: first wave, second wave, and so on. There is no official definition of when one wave ends and another begins, and COVID has peaked in different states at different times.\n\n[Data suggests](https://www.covidactnow.org/covid-explained/us-third-wave) the U.S. on the whole experienced its first peak mid April, second peak in mid July, and entered its third wave of cases in the late fall of 2020. The term wave is often used alongside or interchangeably with [surge](#surge), which describes the increase in cases seen before and during the peak of a wave.",
       "category": "Disease science"
     }
   ],
