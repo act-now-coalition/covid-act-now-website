@@ -1,0 +1,20 @@
+{
+  "regions": [
+    {
+      "emailAlertVersion": 0,
+      "eligibilityInfoUrl": "https://covidvaccine.mo.gov/",
+      "fips": "29",
+      "locationName": "Missouri",
+      "eligibilityPhases": [
+        {
+          "eligibilityStartDate": "2020-12-14T18:54:06.354Z",
+          "updatedAt": "2021-02-02T18:54:06.376Z",
+          "groupPhase": "1A",
+          "groupTier": "*",
+          "groupDescription": "Healthcare Workers\nLong-Term Care Facility Staff and Residents\nHome Health\nUrgent Care\nVaccination Staff\nCongregate Community\nSchool Nurses\nDental Office Staff\nMental/Behavior Health Providers\nEMS/EMT/Paramedics\nand more",
+          "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase1a/"
+        }
+      ]
+    }
+  ]
+}
