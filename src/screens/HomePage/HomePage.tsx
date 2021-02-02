@@ -1,6 +1,4 @@
 import React, { useRef, useEffect, useState } from 'react';
-import Grid from '@material-ui/core/Grid';
-import HomePageHeader from 'components/Header/HomePageHeader';
 import Map from 'components/Map/Map';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
@@ -9,26 +7,28 @@ import CriteriaExplanation from './CriteriaExplanation/CriteriaExplanation';
 import Announcements from './Announcements';
 import { useLocation } from 'react-router-dom';
 import PartnersSection from 'components/PartnersSection/PartnersSection';
-import HomePageThermometer from 'screens/HomePage/HomePageThermometer';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useTheme } from '@material-ui/core/styles';
-import { Content, SectionWrapper, Section } from './HomePage.style';
-import {
-  SelectorWrapper,
-  StyledGridItem,
-} from 'components/Header/HomePageHeader.style';
 import CompareMain from 'components/Compare/CompareMain';
 import Explore from 'components/Explore';
-import { SwitchComponent } from 'components/SharedComponents';
 import { formatMetatagDate } from 'common/utils';
 import { VaccinationsBanner } from 'components/Banner';
-import SearchAutocomplete from 'components/Search';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { getFilterLimit } from 'components/Search';
 import { getFinalAutocompleteLocations } from 'common/regions';
 import { getNationalText } from 'components/NationalText';
 import HomepageStructuredData from 'screens/HomePage/HomepageStructuredData';
 import { useGeolocation, useGeolocationInExplore } from 'common/hooks';
+import HomePageHeader from 'components/Header/HomePageHeader';
+import {
+  Content,
+  SectionWrapper,
+  Section,
+  ColumnCentered,
+} from './HomePage.style';
+import { HomepageSearchAutocomplete } from 'components/Search';
+import Toggle from './Toggle/Toggle';
+import HorizontalThermometer from 'components/HorizontalThermometer';
+import HomepageItems from 'components/RegionItem/HomepageItems';
+import { useBreakpoint } from 'common/hooks';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -40,12 +40,11 @@ export default function HomePage() {
   const location = useLocation();
   const [showCounties, setShowCounties] = useState(false);
 
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const isMobile = useBreakpoint(600);
 
   const indicatorsRef = useRef(null);
 
-  const { geolocationData } = useGeolocation();
+  const { geolocationData, isLoading } = useGeolocation();
   const initialFipsForExplore = useGeolocationInExplore(5, geolocationData);
 
   // Location hash is uniquely set from vaccination banner button click
@@ -76,6 +75,8 @@ export default function HomePage() {
     );
   };
 
+  // TODO (chelsi): add ids back in
+
   return (
     <>
       <EnsureSharingIdInUrl />
@@ -86,51 +87,31 @@ export default function HomePage() {
       />
       <HomepageStructuredData />
       <VaccinationsBanner />
-      <HomePageHeader
-        indicatorsLinkOnClick={() => scrollTo(indicatorsRef.current)}
-      />
+      <HomePageHeader />
       <main>
         <div className="App">
           <Content>
-            <Grid container>
-              <Grid container item key="controls" xs={12} sm={6}>
-                <StyledGridItem
-                  container
-                  item
-                  key="location-search"
-                  xs={12}
-                  justify="flex-end"
-                >
-                  <SelectorWrapper id="search">
-                    <SearchAutocomplete
-                      locations={getFinalAutocompleteLocations(geolocationData)}
-                      filterLimit={getFilterLimit()}
-                    />
-                  </SelectorWrapper>
-                </StyledGridItem>
-                <StyledGridItem
-                  item
-                  container
-                  key="switch-states-counties"
-                  xs={12}
-                  justify="flex-end"
-                >
-                  <SwitchComponent
-                    leftLabel="States"
-                    rightLabel="Counties"
-                    checked={showCounties}
-                    onChange={onClickSwitch}
-                  />
-                </StyledGridItem>
-              </Grid>
-              {!isMobile && (
-                <Grid container item key="legend" xs={12} sm={6}>
-                  <HomePageThermometer />
-                </Grid>
-              )}
-            </Grid>
-            <Map hideLegend showCounties={showCounties} />
-            {isMobile && <HomePageThermometer />}
+            <ColumnCentered id="search">
+              <HomepageSearchAutocomplete
+                locations={getFinalAutocompleteLocations(geolocationData)}
+                filterLimit={getFilterLimit()}
+              />
+              <HomepageItems
+                isLoading={isLoading}
+                geolocationData={geolocationData}
+              />
+              <Toggle
+                showCounties={showCounties}
+                onClickSwitch={onClickSwitch}
+              />
+            </ColumnCentered>
+
+            <Map hideLegend hideInstructions showCounties={showCounties} />
+
+            <ColumnCentered topBottomSpacing>
+              <HorizontalThermometer />
+            </ColumnCentered>
+
             <Section>
               <CompareMain
                 locationsViewable={8}
