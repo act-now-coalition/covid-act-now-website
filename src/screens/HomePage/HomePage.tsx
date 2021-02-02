@@ -108,7 +108,7 @@ export default function HomePage() {
 
             <Map hideLegend hideInstructions showCounties={showCounties} />
 
-            <ColumnCentered topBottomSpacing>
+            <ColumnCentered $topBottomSpacing={true}>
               <HorizontalThermometer />
             </ColumnCentered>
 
