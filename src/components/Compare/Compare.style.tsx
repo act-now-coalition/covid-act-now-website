@@ -6,6 +6,7 @@ import { COLORS } from 'common';
 import { Metric } from 'common/metric';
 import { Level } from 'common/level';
 import { ChartLocationName } from 'components/LocationPage/ChartsHolder.style';
+import { Link } from 'react-router-dom';
 
 // TODO (Chelsi): consolidate into a theme:
 
@@ -257,6 +258,10 @@ export const TableHeadContainer = styled(TableHead)<{ $isModal?: boolean }>`
   }
 `;
 
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
+
 export const Population = styled.span`
   font-family: Source Code Pro;
   font-size: 0.875rem;
@@ -270,6 +275,21 @@ export const Rank = styled.span`
   color: ${COLOR_MAP.GRAY.DARK};
   font-family: Source Code Pro;
   margin-right: 0.75rem;
+`;
+
+export const LocationCellWrapper = styled.div`
+  display: flex;
+  min-width: 0;
+`;
+
+export const LocationRankWrapper = styled.div`
+  flex: 0 0 auto;
+`;
+
+export const LocationNameWrapper = styled.div`
+  flex: 1 1 auto;
+  white-space: normal;
+  text-overflow: initial;
 `;
 
 export const LocationInfoWrapper = styled.div`
@@ -314,6 +334,10 @@ export const LocationNameCell = styled.td<{
     &:first-child {
       vertical-align: top;
     }
+  }
+
+  ${LocationCellWrapper} {
+    display: flex;
   }
 `;
 

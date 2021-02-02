@@ -1,15 +1,18 @@
 import React from 'react';
 import { isNumber } from 'lodash';
-import { Link } from 'react-router-dom';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import {
   MetricCell,
   Row,
   MetricValue,
   Population,
+  LocationCellWrapper,
   LocationInfoWrapper,
+  LocationRankWrapper,
   LocationNameCell,
+  LocationNameWrapper,
   Rank,
+  StyledLink,
 } from 'components/Compare/Compare.style';
 import { Metric, formatValue } from 'common/metric';
 import { RankedLocationSummary } from 'common/utils/compare';
@@ -67,7 +70,7 @@ const CompareTableRow = (props: {
   const populationRoundTo = isHomepage ? 3 : 2;
 
   return (
-    <Link to={locationLink}>
+    <StyledLink to={locationLink}>
       <Row
         index={location.rank}
         $isCurrentCounty={isCurrentCounty}
@@ -77,23 +80,28 @@ const CompareTableRow = (props: {
           iconColor={location.metricsInfo.level}
           sortByPopulation={sortByPopulation}
         >
-          <div>
-            <Rank>{location.rank}</Rank>
-            <FiberManualRecordIcon />
-          </div>
-          <div>
-            <StyledRegionName
-              showStateCode={showStateCode}
-              region={location.region}
-              condensed
-            />
-            <br />
-            <LocationInfoWrapper>
-              <Population>
-                {formatEstimate(location.region.population, populationRoundTo)}
-              </Population>
-            </LocationInfoWrapper>
-          </div>
+          <LocationCellWrapper>
+            <LocationRankWrapper>
+              <Rank>{location.rank}</Rank>
+              <FiberManualRecordIcon />
+            </LocationRankWrapper>
+            <LocationNameWrapper>
+              <StyledRegionName
+                showStateCode={showStateCode}
+                region={location.region}
+                condensed
+              />
+              <br />
+              <LocationInfoWrapper>
+                <Population>
+                  {formatEstimate(
+                    location.region.population,
+                    populationRoundTo,
+                  )}
+                </Population>
+              </LocationInfoWrapper>
+            </LocationNameWrapper>
+          </LocationCellWrapper>
         </LocationNameCell>
         {metrics.map((metric: Metric, i) => {
           const metricForValue = location.metricsInfo.metrics[metric];
@@ -117,7 +125,7 @@ const CompareTableRow = (props: {
           );
         })}
       </Row>
-    </Link>
+    </StyledLink>
   );
 };
 
