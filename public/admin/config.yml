@@ -4,7 +4,7 @@
 backend:
   name: github
   repo: covid-projections/covid-projections
-  branch: cms-content-entry
+  branch: ghop02/alertField
   base_url: https://api.netlify.com
 
 media_folder: 'public/images_cms'
@@ -726,3 +726,55 @@ collections:
                 name: vaccinationSignupUrl
                 required: false
                 widget: string
+  - label: Vaccination Phases & Alerts
+    name: vaccinationPhasesAndAlerts
+    label_singular: Vaccination Phase
+    description: Details on vaccination phases and alerts.
+    format: json
+    files:
+      - name: Vaccine Information-State
+        label: State Vaccine Information 
+        file: src/cms-content/vaccines/state.json
+        fields:
+          - label: Regions
+            name: regions
+            widget: list
+            fields:
+              - label: Location Name
+                name: locationName
+                widget: string
+              - label: Fips Code
+                name: fips
+                widget: string
+              - label: Hidden
+                name: hidden
+                widget: boolean
+                required: false
+              - label: Eligibility Information URL
+                name: eligibilityInfoUrl
+                widget: string
+              - label: Email alert version
+                name: emailAlertVersion
+                default: 0
+                widget: number
+              - label: Phases
+                name: eligibilityPhases
+                widget: list
+                collapsed: true
+                fields:
+                  - label: Group Description
+                    name: groupDescription
+                    widget: text
+                  - label: Group Phase
+                    name: groupPhase
+                    widget: string
+                  - label: Group Tier
+                    name: groupTier
+                    widget: string
+                  - label: Eligibility Start Date
+                    name: eligibilityStartDate
+                    widget: date
+                  - label: Updated at
+                    name: updatedAt
+                    widget: datetime
+
