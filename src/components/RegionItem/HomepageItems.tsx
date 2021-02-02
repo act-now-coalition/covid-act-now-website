@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import RegionItem from './RegionItem';
 import RegionItemSkeleton from './RegionItemSkeleton';
-import { RegionItemsWrapper } from 'screens/HomePage/New/NewHomepage.style';
+import { RegionItemsWrapper } from 'screens/HomePage/HomePage.style';
 import {
   getGeolocatedRegions,
   GeolocatedRegions,
