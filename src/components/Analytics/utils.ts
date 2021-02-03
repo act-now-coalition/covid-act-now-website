@@ -70,7 +70,7 @@ export enum EventAction {
   FCP = 'First Contentful Paint (ms)',
   FID = 'First Input Delay (ms)',
   LCP = 'Largest Contentful Paint (ms)',
-  TTFB = 'Time to First Byte',
+  TTFB = 'Time to First Byte (ms)',
 }
 
 /**
