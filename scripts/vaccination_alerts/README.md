@@ -1,10 +1,12 @@
 # Vaccination Alerts
 
-Outline of the workflow:
+The vaccination information for states, metro areas and counties changes over time. We want to keep our users updated on changes on eligibility criteria, current phases and links for their locations.
 
-1. Generate the list of locations that need to be alerted
-2. Generate a list of (user email, location) to be alerted
-3. Send the emails
+The workflow for sending the updates is:
+
+1. Generate the list of locations that have updated vaccination information
+2. Generate a list of users and their locations to send the alerts
+3. Send the emails to the users
 
 ## 1. generate-vaccine-alerts-info
 
