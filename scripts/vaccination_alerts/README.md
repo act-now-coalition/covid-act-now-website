@@ -75,17 +75,6 @@ vaccination-alerts:
           chelsi@covidactnow.org: { sentAt: null }
 ```
 
-We update the `info` collection with the latest updated date.
-
-```yaml
-info:
-  vaccinationInfoUpdates:
-    '11':
-      emailAlertVersion: 3 # Updated 0 -> 3
-    '12':
-      emailAlertVersion: 0
-```
-
 ## 3. email users
 
 We fetch the information for the current snapshot in `vaccination-alerts` to generate pairs of emails and locations
@@ -100,3 +89,14 @@ We fetch the information for the current snapshot in `vaccination-alerts` to gen
 ```
 
 For each pair of (email, fipsCode), we get the information for the given location in the `vaccination-alerts.json` file, render and send the email to the user. We mark the email as sent in the collection `vaccination-alerts` by setting `sentAt` with the currrent date.
+
+Finally, we update the `info` collection with the latest updated date.
+
+```yaml
+info:
+  vaccinationInfoUpdates:
+    '11':
+      emailAlertVersion: 3 # Updated 0 -> 3
+    '12':
+      emailAlertVersion: 0
+```
