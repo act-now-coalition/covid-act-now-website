@@ -112,14 +112,14 @@ export interface ICUCapacityInfo {
 }
 
 export interface VaccinationsInfo {
-  percentCompletedSeries: Array<number | null>;
-  percentInitiatedSeries: Array<number | null>;
+  ratioCompletedSeries: Array<number | null>;
+  ratioInitiatedSeries: Array<number | null>;
 
   peopleInitiated: number;
-  percentInitiated: number;
+  ratioInitiated: number;
 
   peopleVaccinated: number;
-  percentVaccinated: number;
+  ratioVaccinated: number;
 }
 
 /**
@@ -254,10 +254,10 @@ export class Projection {
       metricsTimeseries,
     );
     this.vaccinations =
-      this.vaccinationsInfo?.percentInitiatedSeries ||
+      this.vaccinationsInfo?.ratioInitiatedSeries ||
       this.dates.map(date => null);
     this.vaccinationsCompleted =
-      this.vaccinationsInfo?.percentCompletedSeries ||
+      this.vaccinationsInfo?.ratioCompletedSeries ||
       this.dates.map(date => null);
 
     this.caseDensityByCases = metricsTimeseries.map(
@@ -374,24 +374,22 @@ export class Projection {
       return null;
     }
 
-    const percentInitiated = metrics.vaccinationsInitiatedRatio;
-    const percentVaccinated = metrics.vaccinationsCompletedRatio;
+    const ratioInitiated = metrics.vaccinationsInitiatedRatio;
+    const ratioVaccinated = metrics.vaccinationsCompletedRatio;
 
     if (
-      percentInitiated === null ||
-      percentInitiated === undefined ||
-      percentVaccinated === null ||
-      percentVaccinated === undefined
+      ratioInitiated === null ||
+      ratioInitiated === undefined ||
+      ratioVaccinated === null ||
+      ratioVaccinated === undefined
     ) {
       return null;
     }
 
     const peopleVaccinated =
-      actuals.vaccinationsCompleted ??
-      (percentVaccinated / 100.0) * this.totalPopulation;
+      actuals.vaccinationsCompleted ?? ratioVaccinated * this.totalPopulation;
     const peopleInitiated =
-      actuals.vaccinationsInitiated ??
-      (percentInitiated / 100.0) * this.totalPopulation;
+      actuals.vaccinationsInitiated ?? ratioInitiated * this.totalPopulation;
 
     const vaccinationsCompletedSeries = metricsTimeseries.map(
       row => row?.vaccinationsCompletedRatio || null,
@@ -403,10 +401,10 @@ export class Projection {
     return {
       peopleVaccinated,
       peopleInitiated,
-      percentInitiated,
-      percentVaccinated,
-      percentCompletedSeries: vaccinationsCompletedSeries,
-      percentInitiatedSeries: vaccinationsInitiatedSeries,
+      ratioInitiated,
+      ratioVaccinated,
+      ratioCompletedSeries: vaccinationsCompletedSeries,
+      ratioInitiatedSeries: vaccinationsInitiatedSeries,
     };
   }
 
