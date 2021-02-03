@@ -334,10 +334,10 @@ export const summaryByLevel = {
 export function getShareQuote(locationName: string, alarmLevel: Level): string {
   const locationNameWithAbbreviation = getAbbreviatedCounty(locationName);
 
-  const unknownShareQuote = `These are White House Coronavirus Task Force’s and Harvard Global Health Institute’s official COVID recommendations for ${locationNameWithAbbreviation}:`;
+  const unknownShareQuote = `These are the White House Coronavirus Task Force’s official COVID recommendations for ${locationNameWithAbbreviation}:`;
 
   if (alarmLevel === Level.UNKNOWN) {
     return unknownShareQuote;
   }
-  return `According to @CovidActNow, ${locationNameWithAbbreviation} ${summaryByLevel[alarmLevel]}. These are White House Coronavirus Task Force’s and Harvard Global Health Institute’s official recommendations:`;
+  return `According to @CovidActNow, ${locationNameWithAbbreviation} ${summaryByLevel[alarmLevel]}. These are the White House Coronavirus Task Force’s official recommendations:`;
 }

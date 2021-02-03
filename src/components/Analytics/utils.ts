@@ -44,6 +44,7 @@ export enum EventCategory {
   EXPOSURE_NOTIFICATIONS = 'exposure notifications',
   SEARCH = 'search',
   VACCINATION = 'vaccination',
+  NONE = 'none', // use NONE for development
 }
 
 /**
@@ -77,7 +78,9 @@ export function trackEvent(
   value?: number,
   nonInteraction?: boolean,
 ) {
-  ReactGA.event({ category, action, label, value, nonInteraction });
+  if (category !== EventCategory.NONE) {
+    ReactGA.event({ category, action, label, value, nonInteraction });
+  }
 }
 
 export function trackSaveImage(category: EventCategory, label: string) {

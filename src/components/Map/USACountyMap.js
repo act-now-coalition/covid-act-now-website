@@ -8,6 +8,11 @@ import { ScreenshotReady } from 'components/Screenshot';
 import regions from 'common/regions';
 import { USMapWrapper, USStateMapWrapper } from './Map.style';
 import COUNTIES_JSON from './data/counties-10m.json';
+import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
+
+function trackMapClick(label) {
+  trackEvent(EventCategory.MAP, EventAction.NAVIGATE, label);
+}
 
 const stateFipsCodes = regions.states.map(state => state.fipsCode);
 
@@ -100,6 +105,7 @@ const USACountyMap = React.memo(
                             key={state.stateCode}
                             to={state.relativeUrl}
                             aria-label={state.fullName}
+                            onClick={() => trackMapClick(state.fullName)}
                           >
                             <MarianaIslands
                               key={geo.rsmKey}
@@ -118,6 +124,7 @@ const USACountyMap = React.memo(
                           key={state.stateCode}
                           to={state.relativeUrl}
                           aria-label={state.fullName}
+                          onClick={() => trackMapClick(state.fullName)}
                         >
                           <Geography
                             key={geo.rsmKey}

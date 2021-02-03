@@ -31,7 +31,7 @@ import { Level } from 'common/level';
 import { fetchSummaries } from 'common/location_summaries';
 import {
   snapshotFromUrl,
-  fetchMasterSnapshotNumber,
+  fetchMainSnapshotNumber,
   snapshotUrl,
 } from 'common/utils/snapshots';
 import regions, { MetroArea, Region } from 'common/regions';
@@ -61,24 +61,24 @@ const INTERESTING_POPULATION = 500000;
 const INTERESTING_TOP_DIFFS = 30;
 
 export function CompareSnapshots() {
-  const masterSnapshot = useMasterSnapshot();
+  const mainSnapshot = useMainSnapshot();
   // TODO(michael): Is there a better React-y way to condition the bulk of a
   // component on a hook result (without introducing a separate component)?
-  if (!masterSnapshot) {
+  if (!mainSnapshot) {
     return null;
   } else {
-    return <CompareSnapshotsInner masterSnapshot={masterSnapshot} />;
+    return <CompareSnapshotsInner mainSnapshot={mainSnapshot} />;
   }
 }
 
-function CompareSnapshotsInner({ masterSnapshot }: { masterSnapshot: number }) {
+function CompareSnapshotsInner({ mainSnapshot }: { mainSnapshot: number }) {
   const location = useLocation();
   const history = useHistory();
 
   const params = QueryString.parse(history.location.search);
 
   const [leftSnapshot, setLeftSnapshot] = useState(
-    getParamValue(params, 'left', masterSnapshot),
+    getParamValue(params, 'left', mainSnapshot),
   );
   const [rightSnapshot, setRightSnapshot] = useState(
     getParamValue(params, 'right', snapshotFromUrl(SNAPSHOT_URL)),
@@ -384,11 +384,11 @@ const ProjectionsChart = React.memo(function ProjectionsChart({
   return <MetricChart metric={metric} projections={projections} />;
 });
 
-function useMasterSnapshot(): number | null {
+function useMainSnapshot(): number | null {
   const [snapshot, setSnapshot] = useState<number | null>(null);
   useEffect(() => {
     async function fetchData() {
-      setSnapshot(await fetchMasterSnapshotNumber());
+      setSnapshot(await fetchMainSnapshotNumber());
     }
     fetchData();
   }, []);

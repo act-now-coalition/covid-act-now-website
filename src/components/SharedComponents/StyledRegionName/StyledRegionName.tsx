@@ -11,11 +11,12 @@ const StyledRegionName: React.FC<{
   showStateCode: boolean;
   region: Region;
   condensed?: boolean;
-}> = ({ showStateCode, region, condensed }) => {
+  truncateText?: boolean;
+}> = ({ showStateCode, region, condensed, truncateText = false }) => {
   const [regionNameMain, regionSuffix] = getRegionNameForRow(region, condensed);
 
   return (
-    <Wrapper $condensed={condensed}>
+    <Wrapper $condensed={condensed} $truncateText={truncateText}>
       {regionNameMain} {regionSuffix && <Suffix>{regionSuffix}</Suffix>}
       {showStateCode && <Fragment>{getFormattedStateCode(region)}</Fragment>}
     </Wrapper>

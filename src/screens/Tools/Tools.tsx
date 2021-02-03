@@ -8,11 +8,7 @@ import {
   productsLandingContent,
   ProductsLandingSection,
 } from 'cms-content/learn/tools';
-import {
-  MarkdownTools,
-  ToolsSection,
-  EmbedExampleWrapper,
-} from './Tools.style';
+import { MarkdownTools, ToolsSection } from './Tools.style';
 import { TocItem } from 'cms-content/utils';
 
 /**
@@ -42,21 +38,6 @@ export const sidebarSections: TocItem[] = [
   },
 ];
 
-const EmbedExample = () => {
-  return (
-    <EmbedExampleWrapper>
-      <iframe
-        src="https://covidactnow.org/embed/us/colorado-co"
-        title="Covid Act Now"
-        width="330"
-        height="400"
-        frameBorder="0"
-        scrolling="no"
-      />
-    </EmbedExampleWrapper>
-  );
-};
-
 const Tools = () => {
   const date = formatMetatagDate();
 
@@ -73,7 +54,6 @@ const Tools = () => {
           <ToolsSection key={product.productId}>
             <Heading2 id={product.productId}>{product.productName}</Heading2>
             <MarkdownTools source={product.productDescription} />
-            {product.productId === 'embed' && <EmbedExample />}
           </ToolsSection>
         ))}
       </PageContent>

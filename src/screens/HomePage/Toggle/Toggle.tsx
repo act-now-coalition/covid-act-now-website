@@ -4,7 +4,7 @@ import { Wrapper } from './Toggle.style';
 
 const Toggle: React.FC<{
   showCounties: boolean;
-  onClickSwitch: () => void;
+  onClickSwitch: (newValue: boolean) => void;
 }> = ({ showCounties, onClickSwitch }) => {
   return (
     <Wrapper>

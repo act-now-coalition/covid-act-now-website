@@ -100,7 +100,6 @@ export const FooterContainer = styled(Box)`
 
   p {
     padding: 0;
-    max-width: 600px;
   }
 
   svg {
@@ -139,6 +138,8 @@ export const HeaderSubCopy = styled(Typography)`
   line-height: 1.4;
   padding: 1.5rem 0 0.2rem;
   font-family: Source Code Pro;
+
+  text-align: end;
 
   svg {
     margin: 0 0.5rem 0 0;

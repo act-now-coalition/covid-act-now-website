@@ -99,7 +99,7 @@ export function getMetroRegionFromZipCode(zipCode: string): Region | undefined {
   return metroFromZip;
 }
 
-interface GeolocatedRegions {
+export interface GeolocatedRegions {
   county?: Region;
   metroArea?: Region;
   state?: Region;

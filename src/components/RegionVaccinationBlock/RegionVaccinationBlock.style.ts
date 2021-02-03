@@ -2,6 +2,11 @@ import MuiButton from '@material-ui/core/Button';
 import MuiChevronRightIcon from '@material-ui/icons/ChevronRight';
 import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
+import { materialSMBreakpoint } from 'assets/theme/sizes';
+
+export const Container = styled.div`
+  margin-bottom: 21px;
+`;
 
 export const Heading2 = styled.h2`
   font-family: Roboto;
@@ -10,7 +15,11 @@ export const Heading2 = styled.h2`
   font-size: 24px;
   line-height: 1.5;
   color: ${COLOR_MAP.BLACK};
-  margin-bottom: 8px;
+  margin: 32px 0 8px;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    margin-top: 12px;
+  }
 `;
 
 export const Paragraph = styled.p`
@@ -20,12 +29,7 @@ export const Paragraph = styled.p`
   font-size: 16px;
   line-height: 1.5;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
-`;
-
-export const FeedbackBox = styled(Paragraph)`
-  font-size: 14px;
-  padding: 16px;
-  background-color: ${COLOR_MAP.LIGHTGRAY_BG};
+  max-width: 600px;
 `;
 
 export const Heading3 = styled.h3`
@@ -34,7 +38,7 @@ export const Heading3 = styled.h3`
   font-weight: 500;
   font-size: 16px;
   line-height: 1.5;
-  margin-bottom: 12px;
+  margin-bottom: 4px;
 `;
 
 export const Button = styled(MuiButton).attrs(props => ({
@@ -49,6 +53,10 @@ export const Button = styled(MuiButton).attrs(props => ({
   border: 1px solid ${COLOR_MAP.GRAY.LIGHT};
   border-radius: 3px;
 
+  .MuiButton-label {
+    letter-spacing: unset;
+  }
+
   &.Button-focused {
     outline: blue auto 1px;
     outline: -webkit-focus-ring-color auto 1px;
@@ -58,6 +66,10 @@ export const Button = styled(MuiButton).attrs(props => ({
 export const ButtonContainer = styled.div`
   & > * {
     margin-right: 8px;
+    margin-top: 8px;
+    &:last-child {
+      margin-right: 0;
+    }
   }
 `;
 

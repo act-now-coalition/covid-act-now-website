@@ -10,7 +10,7 @@
       "locationName": "Los Angeles",
       "fips": "31080",
       "eligibilityInfoUrl": "http://publichealth.lacounty.gov/acd/ncorona2019/covidvaccinedistribution/",
-      "vaccinationSignupUrl": null
+      "vaccinationSignupUrl": "https://myturn.ca.gov/landing"
     },
     {
       "locationName": "Chicago",
@@ -69,8 +69,8 @@
     {
       "locationName": "Seattle",
       "fips": "42660",
-      "eligibilityInfoUrl": "https://www.kingcounty.gov/depts/health/covid-19/vaccine.aspx",
-      "vaccinationSignupUrl": "https://form.findyourphasewa.org/210118771253954"
+      "eligibilityInfoUrl": "https://www.kingcounty.gov/depts/health/covid-19/vaccine/distribution.aspx",
+      "vaccinationSignupUrl": ""
     },
     {
       "locationName": "Minneapolis",
@@ -81,8 +81,8 @@
     {
       "locationName": "San Diego",
       "fips": "41740",
-      "eligibilityInfoUrl": "https://www.sandiegocounty.gov/content/sdc/hhsa/programs/phs/community_epidemiology/dc/2019-nCoV/vaccines/phases.htmll",
-      "vaccinationSignupUrl": null
+      "eligibilityInfoUrl": "https://www.sandiegocounty.gov/content/sdc/hhsa/programs/phs/community_epidemiology/dc/2019-nCoV/vaccines/phases.html",
+      "vaccinationSignupUrl": "https://myturn.ca.gov/landing"
     },
     {
       "locationName": "Tampa",

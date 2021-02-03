@@ -7,7 +7,6 @@ import {
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { ThemeProvider as ScThemeProvider } from 'styled-components';
 import LocationPage from 'screens/LocationPage';
-import HomePage from 'screens/HomePage/HomePage';
 import Embed from 'screens/Embed/Embed';
 import AllStates from 'screens/internal/AllStates/AllStates';
 import CompareSnapshots from 'screens/internal/CompareSnapshots/CompareSnapshots';
@@ -27,6 +26,7 @@ import PageviewTracker, {
   EventCategory,
 } from 'components/Analytics';
 import { COVID_RESPONSE_SIMULATOR_URL } from 'screens/Tools/Tools';
+import NewHomepage from 'screens/HomePage/New/NewHomepage';
 import { SuspenseFallback, ErrorBoundary } from 'components/LazyLoading';
 
 /* We dynamically import the following components on initial visit to their respective routes: */
@@ -60,17 +60,18 @@ export default function App() {
             <ErrorBoundary>
               <Suspense fallback={<SuspenseFallback />}>
                 <Switch>
-                  <Route exact path="/" component={HomePage} />
-                  <Route exact path="/alert_signup" component={HomePage} />
+                  <Route exact path="/" component={NewHomepage} />
+
+                  <Route exact path="/alert_signup" component={NewHomepage} />
                   <Route
                     exact
                     path="/compare/:sharedComponentId?"
-                    component={HomePage}
+                    component={NewHomepage}
                   />
                   <Route
                     exact
                     path="/explore/:sharedComponentId?"
-                    component={HomePage}
+                    component={NewHomepage}
                   />
 
                   <Route
