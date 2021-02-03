@@ -17,10 +17,11 @@ This script determines which locations have updated vaccination information by c
 ```yaml
 info:
   vaccinationInfoUpdates:
-    '11':
-      emailAlertVersion: 0
-    '12':
-      emailAlertVersion: 0
+    locations:
+      '11':
+        emailAlertVersion: 0
+      '12':
+        emailAlertVersion: 0
 ```
 
 ### From the CMS
@@ -97,8 +98,9 @@ Finally, we update the `info` collection with the latest updated date.
 ```yaml
 info:
   vaccinationInfoUpdates:
-    '11':
-      emailAlertVersion: 3 # Updated 0 -> 3
-    '12':
-      emailAlertVersion: 0
+    locations:
+      '11':
+        emailAlertVersion: 3 # Updated 0 -> 3
+      '12':
+        emailAlertVersion: 0
 ```

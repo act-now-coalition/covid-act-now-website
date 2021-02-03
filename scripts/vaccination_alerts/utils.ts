@@ -17,6 +17,8 @@ export interface RegionVaccineVersionMap {
   [fipsCode: string]: RegionVaccineVersion;
 }
 
+const VACCINATION_VERSIONS_COLLECTION = 'info/vaccinationInfoUpdates/locations';
+
 export function getCmsVaccinationInfo(): RegionVaccinePhaseInfoMap {
   return _.chain(stateVaccinationPhases)
     .map(stateInfo => [stateInfo.fips, stateInfo])
@@ -27,10 +29,15 @@ export function getCmsVaccinationInfo(): RegionVaccinePhaseInfoMap {
 export async function getFirebaseVaccinationInfo(): Promise<
   RegionVaccineVersionMap
 > {
-  const db = await getFirestore();
-  const versionDoc = await db.doc('info/vaccinationInfoUpdates').get();
-  const versionsByFips = versionDoc.data();
-  return versionsByFips || {};
+  const collection = await getFirestore()
+    .collection(VACCINATION_VERSIONS_COLLECTION)
+    .get();
+
+  const versionsByFips = await collection.docs.reduce((prev, curr) => {
+    return { ...prev, [curr.id]: curr.data() };
+  }, {});
+
+  return versionsByFips;
 }
 
 export function getUpdatedVaccinationInfo(
