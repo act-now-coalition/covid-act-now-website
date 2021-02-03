@@ -14,6 +14,8 @@ export const StyledTextField = styled(TextField).attrs(props => ({
 }))<{ $isOpen: boolean }>`
   background-color: ${({ $isOpen }) => !$isOpen && COLORS.LIGHTGRAY};
   transition: box-shadow 0.1s ease-in-out, background-color 0.1s ease-in-out;
+  margin-top: ${({ $isOpen }) => $isOpen && '-5rem'};
+  padding-top: ${({ $isOpen }) => $isOpen && '5rem'};
 
   &:hover {
     background-color: transparent;
@@ -23,6 +25,11 @@ export const StyledTextField = styled(TextField).attrs(props => ({
 
   &:focus {
     box-shadow: none;
+  }
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    margin-top: 0;
+    padding-top: 0;
   }
 `;
 

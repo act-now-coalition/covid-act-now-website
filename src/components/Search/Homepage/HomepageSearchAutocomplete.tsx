@@ -105,6 +105,7 @@ const HomepageSearchAutocomplete: React.FC<{
           </span>
         </MobileSearchDirections>
         <Autocomplete
+          // open={true}
           disableListWrap
           disableClearable
           disablePortal
