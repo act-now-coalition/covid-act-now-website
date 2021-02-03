@@ -61,9 +61,9 @@ function renderStatus(projections: Projections): React.ReactElement {
   const { locationName } = projections;
 
   const peopleInitiated = formatInteger(info.peopleInitiated);
-  const percentInitiated = formatPercent(info.percentInitiated, 1);
+  const percentInitiated = formatPercent(info.ratioInitiated, 1);
   const peopleVaccinated = formatInteger(info.peopleVaccinated);
-  const percentVaccinated = formatPercent(info.percentVaccinated, 1);
+  const percentVaccinated = formatPercent(info.ratioVaccinated, 1);
 
   return (
     <Fragment>
