@@ -371,17 +371,6 @@ export class Projection {
     return null;
   }
 
-  private static getActualOrDefault(
-    maybeActual: number | null | undefined,
-    defaultValue: number,
-  ): number {
-    if (maybeActual === null || maybeActual === undefined) {
-      return defaultValue;
-    } else {
-      return maybeActual;
-    }
-  }
-
   private getVaccinationsInfo(
     actuals: Actuals,
     metrics: Metrics,
@@ -404,14 +393,10 @@ export class Projection {
       return null;
     }
 
-    const peopleVaccinated = Projection.getActualOrDefault(
-      actuals.vaccinationsCompleted,
-      (percentVaccinated / 100.0) * population,
-    );
-    const peopleInitiated = Projection.getActualOrDefault(
-      actuals.vaccinationsInitiated,
-      (percentInitiated / 100.0) * population,
-    );
+    const peopleVaccinated =
+      actuals.vaccinationsCompleted ?? (percentVaccinated / 100.0) * population;
+    const peopleInitiated =
+      actuals.vaccinationsInitiated ?? (percentInitiated / 100.0) * population;
 
     const vaccinationsCompletedSeries = metricsTimeseries.map(
       row => row?.vaccinationsCompletedRatio || null,
