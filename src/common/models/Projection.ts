@@ -257,7 +257,6 @@ export class Projection {
       summaryWithTimeseries.actuals,
       metrics,
       metricsTimeseries,
-      summaryWithTimeseries.population,
     );
     this.vaccinations =
       this.vaccinationsInfo?.percentInitiatedSeries ||
@@ -375,7 +374,6 @@ export class Projection {
     actuals: Actuals,
     metrics: Metrics,
     metricsTimeseries: Array<MetricsTimeseriesRow | null>,
-    population: number,
   ): VaccinationsInfo | null {
     if (DISABLED_VACCINATIONS.includes(this.fips)) {
       return null;
@@ -394,9 +392,11 @@ export class Projection {
     }
 
     const peopleVaccinated =
-      actuals.vaccinationsCompleted ?? (percentVaccinated / 100.0) * population;
+      actuals.vaccinationsCompleted ??
+      (percentVaccinated / 100.0) * this.totalPopulation;
     const peopleInitiated =
-      actuals.vaccinationsInitiated ?? (percentInitiated / 100.0) * population;
+      actuals.vaccinationsInitiated ??
+      (percentInitiated / 100.0) * this.totalPopulation;
 
     const vaccinationsCompletedSeries = metricsTimeseries.map(
       row => row?.vaccinationsCompletedRatio || null,
