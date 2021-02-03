@@ -376,16 +376,10 @@ export class Projection {
       return null;
     }
 
-    const peopleVaccinated = actuals.vaccinationsCompleted;
-    const peopleInitiated = actuals.vaccinationsInitiated;
     const percentInitiated = metrics.vaccinationsInitiatedRatio;
     const percentVaccinated = metrics.vaccinationsCompletedRatio;
 
     if (
-      peopleVaccinated === null ||
-      peopleVaccinated === undefined ||
-      peopleInitiated === null ||
-      peopleInitiated === undefined ||
       percentInitiated === null ||
       percentInitiated === undefined ||
       percentVaccinated === null ||
@@ -393,6 +387,13 @@ export class Projection {
     ) {
       return null;
     }
+
+    const peopleVaccinated =
+      actuals.vaccinationsCompleted ??
+      (percentVaccinated / 100.0) * this.totalPopulation;
+    const peopleInitiated =
+      actuals.vaccinationsInitiated ??
+      (percentInitiated / 100.0) * this.totalPopulation;
 
     const vaccinationsCompletedSeries = metricsTimeseries.map(
       row => row?.vaccinationsCompletedRatio || null,
