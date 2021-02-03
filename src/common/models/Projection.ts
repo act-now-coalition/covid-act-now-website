@@ -34,10 +34,12 @@ const DISABLED_INFECTION_RATE = new DisabledFips([]);
 
 const DISABLED_TEST_POSITIVITY = new DisabledFips([]);
 
-const DISABLED_ICU = new DisabledFips([
-  '47', // https://trello.com/c/aEd07i5Y/701-disabled-tn-icu-headroom
-  '53', // https://trello.com/c/1IkmUuhw/
-]);
+const DISABLED_ICU = new DisabledFips([]);
+
+// const DISABLED_ICU = new DisabledFips([
+//   '47', // https://trello.com/c/aEd07i5Y/701-disabled-tn-icu-headroom
+//   '53', // https://trello.com/c/1IkmUuhw/
+// ]);
 
 const DISABLED_VACCINATIONS = new DisabledFips([
   /39.../, // https://trello.com/c/J3M0Ksb5/827-ohio-county-vaccinations-are-not-cumulative
