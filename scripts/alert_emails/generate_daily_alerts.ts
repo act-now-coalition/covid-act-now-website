@@ -14,7 +14,7 @@ import { fetchMainSnapshotNumber } from '../../src/common/utils/snapshots';
 import regions from '../../src/common/regions';
 import { Alert } from './interfaces';
 import moment from 'moment';
-import { getFirestore } from './firestore';
+import { getFirestore } from '../common/firebase';
 import { SummariesMap } from '../../src/common/location_summaries';
 import { Level } from '../../src/common/level';
 import { resolveSnapshot } from './utils';

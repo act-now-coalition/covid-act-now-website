@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { getFirestore } from '../common/firebase';
 import {
   RegionVaccinePhaseInfo,
   stateVaccinationPhases,
@@ -23,14 +24,13 @@ export function getCmsVaccinationInfo(): RegionVaccinePhaseInfoMap {
     .value();
 }
 
-// TODO: Fetch this from Firebase, return an empty object if Firebase
-// doesn't have any data.
-export function getFirebaseVaccinationInfo(): RegionVaccineVersionMap {
-  return {
-    // '29': {
-    //   emailAlertVersion: 0,
-    // },
-  };
+export async function getFirebaseVaccinationInfo(): Promise<
+  RegionVaccineVersionMap
+> {
+  const db = await getFirestore();
+  const versionDoc = await db.doc('info/vaccinationInfoUpdates').get();
+  const versionsByFips = versionDoc.data();
+  return versionsByFips || {};
 }
 
 export function getUpdatedVaccinationInfo(
