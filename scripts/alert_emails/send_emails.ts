@@ -3,7 +3,7 @@ import admin from 'firebase-admin';
 import path from 'path';
 import { getFirestore } from './firestore';
 import EmailService, { isInvalidEmailError } from './email-service';
-import { generateAlertEmailData, readAlerts } from './utils';
+import { generateAlertEmailData, readAlerts, resolveSnapshot } from './utils';
 
 const BATCH_SIZE = 20;
 
@@ -129,7 +129,7 @@ async function setLastSnapshotNumber(
   console.info(`Invalid emails removed: ${invalidEmailCount}.`);
 
   if (!dryRun) {
-    setLastSnapshotNumber(db, currentSnapshot);
+    setLastSnapshotNumber(db, `${currentSnapshot}`);
     // If we aren't in a dry run but there's clearly some non trivial errors exit with error
     if (emailSent < 1 || errorCount > 1) {
       console.log(
@@ -143,7 +143,7 @@ async function setLastSnapshotNumber(
 
 async function parseArgs(): Promise<{
   fipsToAlertFilename: string;
-  currentSnapshot: string;
+  currentSnapshot: number;
   dryRun: boolean;
   sendAllToEmail?: string;
 }> {
@@ -152,7 +152,7 @@ async function parseArgs(): Promise<{
     exitWithUsage();
   } else {
     const fipsToAlertFilename = args[0];
-    const currentSnapshot = args[1];
+    const currentSnapshot = await resolveSnapshot(args[1]);
     const isSend = (args[2] || 'false') === 'true';
     return {
       fipsToAlertFilename,

@@ -16,28 +16,12 @@ using AWS Simple Email Service.
 
 ## Sending the Alerts via Github Actions
 
-A github action will run all of these steps on github for you.
+We typically send email alerts on Mondays and Thursdays, immediately after the daily snapshot has been released.
+Go to https://github.com/covid-projections/covid-projections/actions?query=workflow%3A%22Send+Alert+Emails.%22 and click "run workflow".
 
-The script should be run after a new snapshot has been pushed to the prod website, in order to notify users of changes. You can get the currently live snapshot from https://github.com/covid-projections/covid-projections/blob/main/src/assets/data/data_url.json
+By default it will do a dry-run without sending any emails.  After it has completed, you can look at the logs to see how many emails would have been notified and go into [firestore](https://console.firebase.google.com/project/covidactnow-prod/firestore/data~2Fsnapshots) to check that the locations seem correct (make sure that locations have emails).
 
-Confirm the lastSnapshot field is
-correct in firestore at (info/alerts)[https://console.firebase.google.com/project/covidactnow-prod/database/firestore/data~2Finfo~2Falerts]. The value of lastSnapshot should be the last snapshot we sent emails for (the script updates it on completion). You can verify it's set correctly by checking the snapshots collection in firestore to see what snapshots we've sent emails on prior.
-
-Then do a dry-run to generate the alert locations and affected emails, but not actually send the emails. It will create a snapshot specific collection in firestore with the locations to alert and the emails to be alerted at each of those locations:
-
-```bash
-tools/send-alert-emails.sh <snapshot> <prod|staging|dev>
-```
-
-Go into firestore and check that the locations seem correct (make sure that locations have emails). You can also check the github action logs to see how many emails would be sent and how many email addresses would get emails.
-
-Before running the alerting emails, to ensure you receive an alert, you can add yourself to one of the locations scheduled to receive an alert by adding a document with your email and a sentAt value of null.
-
-Then to send the emails via the github action run:
-
-```bash
-tools/send-alert-emails.sh <snapshot> <prod|staging|dev> true
-```
+If the dry-run completed successfully (or you're feeling confident and skip the dry-run), you can trigger the workflow again with the send_emails input set to 'true'.  This will actually send the email alerts to users.
 
 The github action should complete in 20 minutes or so and list the number of emails sent in the logs.
 
