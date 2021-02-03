@@ -35,7 +35,7 @@ info:
   content: 'Phase 1...'
 ```
 
-In this case, for example, we need to send emails for udpates on location "11" and location "13" (location "12" didn't have any updates).
+In this case, for example, we need to send emails for updates on location `"11"` and location `"13"` (location `"12"` didn't have any updates).
 
 For locations that have updated information, we save a copy of the CMS information in the file `vaccination-alerts.json`. The information in `vaccination-alerts.json` will be used in later phases to determine the list of users to email and to render the emails.
 
@@ -50,7 +50,7 @@ For locations that have updated information, we save a copy of the CMS informati
 
 ## 2. generate-users-to-email
 
-Using the locations in `vaccination-alerts.json`, we query email addresses subscribed to these locations from the the Firebase collection `alerts-subscriptions`.
+Using the locations in `vaccination-alerts.json`, we query email addresses subscribed to these locations from the the Firebase collection `alerts-subscriptions` (which is also used for our risk level alerts).
 
 ```yaml
 alerts-subscriptions:
@@ -60,22 +60,31 @@ alerts-subscriptions:
     locations: ['11', '13']
 ```
 
-Then, we update store the list of locations and email addresses to send in the Firebase collection `vaccination-alerts`, in the document `snapshotId`, so we can track the locations and users that we email each time.
+Then, we store the list of locations and email addresses to send in the Firebase collection `vaccination-alerts`, in the document `snapshotId`, so we can track the locations and users that we email each time.
 
 ```yaml
 vaccination-alerts:
-  '1500':
-    locations:
-      '11':
+  '11':
+    emailAlertVersions:
+      '0':
         emails:
           pablo@covidactnow.org: { sentAt: null }
           chelsi@covidactnow.org: { sentAt: null }
-      '13':
+      '3':
         emails:
           chelsi@covidactnow.org: { sentAt: null }
 ```
 
 We update the `info` collection with the latest updated date.
+
+```yaml
+info:
+  vaccinationInfoUpdates:
+    '11':
+      emailAlertVersion: 3 # Updated 0 -> 3
+    '12':
+      emailAlertVersion: 0
+```
 
 ## 3. email users
 
