@@ -1,0 +1,24 @@
+name: Send Vaccination Alerts
+
+# TODO: Change to scheduled once we are confident
+on: workflow_dispatch
+
+jobs:
+  send-vaccination-alerts:
+    runs-on: ubuntu-latest
+    steps:
+      # Setup
+      - uses: actions/checkout@v2
+        with:
+          repository: covid-projections/covid-projections
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - run: yarn install
+
+      # Generate the vaccination alerts
+      - name: Generate the vaccination info update
+        run: yarn vaccinations.locations
+      # Setup list of emails to send
+      # Send the vaccination alerts to the users
+      # Slack notifications
