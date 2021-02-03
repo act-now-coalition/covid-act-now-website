@@ -37,6 +37,7 @@ export const BackArrowIcon = styled(ArrowBackOutlinedIcon)`
   position: absolute;
   color: black;
   font-size: 1.5rem;
+  z-index: 10005;
 `;
 
 const MobileWrapperOpened = css`
