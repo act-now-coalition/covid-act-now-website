@@ -4,7 +4,7 @@
 backend:
   name: github
   repo: covid-projections/covid-projections
-  branch: ghop02/vaccination-alert-fields
+  branch: cms-content-entry
   base_url: https://api.netlify.com
 
 media_folder: 'public/images_cms'
@@ -778,8 +778,13 @@ collections:
                     description: URL to learn more about specifics of group
                     required: false
                     widget: string
+                  - label: Currently Eligible
+                    name: currentlyEligible
+                    description: If checked, this phase is currently eligible for vaccination.
+                    default: false
                   - label: Eligibility Start Date
                     name: startDate
+                    description: Latest available start date for when group will be eligible.
                     required: false
                     widget: text
                   - label: Updated at

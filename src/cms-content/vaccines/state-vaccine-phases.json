@@ -9,6 +9,7 @@
         {
           "startDate": "2020-12-14T18:54:06.354Z",
           "updatedAt": "2021-02-02T18:54:06.376Z",
+          "currentlyEligible": true,
           "phase": "1A",
           "tier": null,
           "description": "* Healthcare Workers\n* Long-Term Care Facility Staff and Residents\n* Home Health\n* Urgent Care\n* Vaccination Staff\n* Congregate Community\n* School Nurses\n* Dental Office Staff\n* Mental/Behavior Health Providers\n* EMS/EMT/Paramedics",
