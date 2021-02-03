@@ -257,6 +257,7 @@ export class Projection {
       summaryWithTimeseries.actuals,
       metrics,
       metricsTimeseries,
+      summaryWithTimeseries.population,
     );
     this.vaccinations =
       this.vaccinationsInfo?.percentInitiatedSeries ||
@@ -370,25 +371,31 @@ export class Projection {
     return null;
   }
 
+  private static getActualOrDefault(
+    maybeActual: number | null | undefined,
+    defaultValue: number,
+  ): number {
+    if (maybeActual === null || maybeActual === undefined) {
+      return defaultValue;
+    } else {
+      return maybeActual;
+    }
+  }
+
   private getVaccinationsInfo(
     actuals: Actuals,
     metrics: Metrics,
     metricsTimeseries: Array<MetricsTimeseriesRow | null>,
+    population: number,
   ): VaccinationsInfo | null {
     if (DISABLED_VACCINATIONS.includes(this.fips)) {
       return null;
     }
 
-    const peopleVaccinated = actuals.vaccinationsCompleted;
-    const peopleInitiated = actuals.vaccinationsInitiated;
     const percentInitiated = metrics.vaccinationsInitiatedRatio;
     const percentVaccinated = metrics.vaccinationsCompletedRatio;
 
     if (
-      peopleVaccinated === null ||
-      peopleVaccinated === undefined ||
-      peopleInitiated === null ||
-      peopleInitiated === undefined ||
       percentInitiated === null ||
       percentInitiated === undefined ||
       percentVaccinated === null ||
@@ -396,6 +403,15 @@ export class Projection {
     ) {
       return null;
     }
+
+    const peopleVaccinated = Projection.getActualOrDefault(
+      actuals.vaccinationsCompleted,
+      (percentVaccinated / 100.0) * population,
+    );
+    const peopleInitiated = Projection.getActualOrDefault(
+      actuals.vaccinationsInitiated,
+      (percentInitiated / 100.0) * population,
+    );
 
     const vaccinationsCompletedSeries = metricsTimeseries.map(
       row => row?.vaccinationsCompletedRatio || null,
