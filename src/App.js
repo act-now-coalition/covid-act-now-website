@@ -26,8 +26,8 @@ import PageviewTracker, {
   EventCategory,
 } from 'components/Analytics';
 import { COVID_RESPONSE_SIMULATOR_URL } from 'screens/Tools/Tools';
-import NewHomepage from 'screens/HomePage/New/NewHomepage';
 import { SuspenseFallback, ErrorBoundary } from 'components/LazyLoading';
+import HomePage from 'screens/HomePage/HomePage';
 
 /* We dynamically import the following components on initial visit to their respective routes: */
 const About = lazy(() => import('screens/About/About'));
@@ -60,18 +60,18 @@ export default function App() {
             <ErrorBoundary>
               <Suspense fallback={<SuspenseFallback />}>
                 <Switch>
-                  <Route exact path="/" component={NewHomepage} />
+                  <Route exact path="/" component={HomePage} />
 
-                  <Route exact path="/alert_signup" component={NewHomepage} />
+                  <Route exact path="/alert_signup" component={HomePage} />
                   <Route
                     exact
                     path="/compare/:sharedComponentId?"
-                    component={NewHomepage}
+                    component={HomePage}
                   />
                   <Route
                     exact
                     path="/explore/:sharedComponentId?"
-                    component={NewHomepage}
+                    component={HomePage}
                   />
 
                   <Route

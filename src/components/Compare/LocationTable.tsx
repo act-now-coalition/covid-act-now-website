@@ -251,11 +251,23 @@ const LocationTable: React.FunctionComponent<{
     ? remove(sortedLocations, removePinnedIfRankedFirst)
     : sortedLocations;
 
-  const visibleLocations = !isModal
-    ? sortedLocations.slice(0, numLocationsMain)
-    : homepageScope !== HomepageLocationScope.STATE
-    ? sortedLocations.slice(0, 100)
-    : modalLocations;
+  const getVisibleLocations = () => {
+    if (!isModal) {
+      return sortedLocations.slice(0, numLocationsMain);
+    } else {
+      if (region) {
+        if (geoScope === GeoScopeFilter.COUNTRY)
+          return sortedLocations.slice(0, 100);
+        else return modalLocations;
+      } else {
+        if (homepageScope === HomepageLocationScope.STATE)
+          return modalLocations;
+        else return sortedLocations.slice(0, 100);
+      }
+    }
+  };
+
+  const visibleLocations = getVisibleLocations();
 
   const returnShowStateCode = (region?: Region): boolean => {
     if (region) {

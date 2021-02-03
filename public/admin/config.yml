@@ -4,7 +4,7 @@
 backend:
   name: github
   repo: covid-projections/covid-projections
-  branch: cms-content-entry
+  branch: ghop02/vaccination-alert-fields
   base_url: https://api.netlify.com
 
 media_folder: 'public/images_cms'
@@ -726,3 +726,63 @@ collections:
                 name: vaccinationSignupUrl
                 required: false
                 widget: string
+  - label: Vaccination Phases & Alerts
+    name: vaccinationPhasesAndAlerts
+    label_singular: Vaccination Phase
+    description: Details on vaccination phases and alerts.
+    format: json
+    files:
+      - name: Vaccine Information-State
+        label: State Vaccine Information 
+        file: src/cms-content/vaccines/state-vaccine-phases.json
+        fields:
+          - label: Regions
+            name: regions
+            widget: list
+            fields:
+              - label: Location Name
+                name: locationName
+                widget: string
+              - label: Fips Code
+                name: fips
+                widget: string
+              - label: Hidden
+                name: hidden
+                widget: boolean
+                required: false
+              - label: Eligibility Information URL
+                name: eligibilityInfoUrl
+                widget: string
+              - label: Email alert version
+                name: emailAlertVersion
+                default: 0
+                widget: number
+              - label: Phase Groups
+                name: phaseGroups
+                description: Each element describes a specific phase or phase + tier combination where available.
+                widget: list
+                collapsed: true
+                fields:
+                  - label: Phase
+                    name: phase
+                    widget: string
+                  - label: Tier
+                    name: tier
+                    widget: string
+                    required: false
+                  - label: Description
+                    name: description
+                    widget: markdown
+                  - label: Expanded Definition URL
+                    name: expandedDefinitionUrl
+                    description: URL to learn more about specifics of group
+                    required: false
+                    widget: string
+                  - label: Eligibility Start Date
+                    name: startDate
+                    required: false
+                    widget: text
+                  - label: Updated at
+                    name: updatedAt
+                    widget: datetime
+
