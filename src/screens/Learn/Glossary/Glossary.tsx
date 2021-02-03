@@ -14,7 +14,7 @@ import { learnPages } from 'cms-content/learn';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { formatMetatagDate, formatNumericalDate } from 'common/utils';
 import ScrollToTopButton from 'components/SharedComponents/ScrollToTopButton';
-import { useScrollToTopButton } from 'common/hooks';
+import { useScrollToElement, useScrollToTopButton } from 'common/hooks';
 import Footer from 'screens/Learn/Footer/Footer';
 import ExternalLink from 'components/ExternalLink';
 
@@ -30,6 +30,15 @@ function getGlossaryFooter(): React.ReactElement {
     </Fragment>
   );
 }
+
+const GlossaryTerm: React.FC<{ term: Term }> = ({ term }) => {
+  return (
+    <Fragment key={`glossary-term-${term.termId}`}>
+      <SectionName id={term.termId}>{term.term}</SectionName>
+      <MarkdownContent source={term.definition} />
+    </Fragment>
+  );
+};
 
 const Glossary: React.FC = () => {
   const {
@@ -49,6 +58,8 @@ const Glossary: React.FC = () => {
 
   const date = formatMetatagDate();
 
+  useScrollToElement();
+
   return (
     <Fragment>
       <AppMetaTags
@@ -66,10 +77,7 @@ const Glossary: React.FC = () => {
           Last updated {formatNumericalDate(lastUpdatedDate)}
         </LastUpdatedDate>
         {terms.map((term: Term, i: number) => (
-          <Fragment key={`glossary-term-${i}`}>
-            <SectionName id={term.termId}>{term.term}</SectionName>
-            <MarkdownContent source={term.definition} />
-          </Fragment>
+          <GlossaryTerm term={term} />
         ))}
         <Footer pageSpecificCopy={getGlossaryFooter()} />
         <ScrollToTopButton
