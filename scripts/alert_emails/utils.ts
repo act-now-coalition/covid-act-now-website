@@ -103,9 +103,10 @@ export async function resolveSnapshot(snapshotId: string): Promise<number> {
     return snap;
   } else {
     const snap = parseInt(snapshotId);
-    if (Number.isNaN(snap)) {
+    if (Number.isFinite(snap)) {
+      return snap;
+    } else {
       throw new Error('Invalid snapshot ID: ' + snapshotId);
     }
-    return snap;
   }
 }
