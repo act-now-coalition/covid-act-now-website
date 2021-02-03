@@ -146,9 +146,22 @@ function renderDisclaimer(projections: Projections): React.ReactElement {
   const usingCDCData =
     projections.primary.testPositiveRateSource === 'CDCTesting';
   const usingDefaultData = !(usingCDCData || usingCMSData);
+  const inCT = projections.locationName === 'Connecticut';
 
   return (
     <Fragment>
+      {inCT ? (
+        <>
+          {' '}
+          There is a known discrepancy between the data above and the state
+          dashboard. The state dashboard includes antigen tests in the
+          calculation while we exclude antigen tests.
+          <br />
+          <br />{' '}
+        </>
+      ) : (
+        ''
+      )}
       The White House Coronavirus Task Force grades a positive test rate of more
       than 10% as red. The countries most successful in containing COVID have
       rates of 3% or less.{' '}
