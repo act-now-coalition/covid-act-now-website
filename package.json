@@ -114,6 +114,7 @@
     "covid-explained-internal-links": "ts-node-script -r tsconfig-paths/register scripts/covid-explained/report-internal-links.ts",
     "covid-explained-images": "ts-node-script -r tsconfig-paths/register scripts/covid-explained/report-images.ts",
     "covid-explained-migrate": "ts-node-script -r tsconfig-paths/register scripts/covid-explained/migrate-articles.ts",
+    "vaccinations.locations": "ts-node-script -r tsconfig-paths/register scripts/vaccination_alerts/generate-vaccine-alerts-info.ts",
     "storybook": "start-storybook -p 6006 -s public --no-dll",
     "build-storybook": "build-storybook -s public --no-dll",
     "analyze": "cross-env REACT_APP_ENVIRONMENT=prod yarn build && source-map-explorer build/static/js/*.js"

@@ -46,3 +46,4 @@ package-lock.json
 
 # a scratch file for lil scripts/notes
 scratch
+scripts/vaccination_alerts/vaccination-alerts.json
