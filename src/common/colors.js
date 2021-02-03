@@ -1,3 +1,4 @@
+import grey from '@material-ui/core/colors/grey';
 import { Level } from 'common/level';
 
 import {
@@ -39,6 +40,7 @@ export const COLOR_MAP = {
     LIGHT: '#E3E3E3',
     DARK: '#999999',
   },
+  GREY_200: grey[200],
   GRAY_ICON: '#bdbdbd',
   PURPLE: '#5900EA',
   LIGHTGRAY: '#f2f2f2',
