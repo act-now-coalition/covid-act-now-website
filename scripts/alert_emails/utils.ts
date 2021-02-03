@@ -5,6 +5,7 @@ import * as Handlebars from 'handlebars';
 import { Alert } from './interfaces';
 import { Level } from '../../src/common/level';
 import { LOCATION_SUMMARY_LEVELS } from '../../src/common/metrics/location_summary';
+import { fetchMainSnapshotNumber } from '../../src/common/utils/snapshots';
 
 export const ALERT_EMAIL_GROUP_PREFIX = 'alert-email';
 
@@ -93,4 +94,19 @@ export function readAlerts(filePath: string): { [fips: string]: Alert } {
   const rawdata = fs.readFileSync(filePath, 'utf8');
   const locationsWithAlerts: { [fips: string]: Alert } = JSON.parse(rawdata);
   return locationsWithAlerts;
+}
+
+export async function resolveSnapshot(snapshotId: string): Promise<number> {
+  if (snapshotId === 'auto') {
+    const snap = await fetchMainSnapshotNumber();
+    console.log(`Resolved 'auto' snapshot to ${snap}.`);
+    return snap;
+  } else {
+    const snap = parseInt(snapshotId);
+    if (Number.isFinite(snap)) {
+      return snap;
+    } else {
+      throw new Error('Invalid snapshot ID: ' + snapshotId);
+    }
+  }
 }
