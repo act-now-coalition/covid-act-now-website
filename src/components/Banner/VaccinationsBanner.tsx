@@ -7,13 +7,10 @@ import {
   InnerContainer,
   Header,
   Body,
-  IconWrapper,
-  Icon,
   SearchButton,
   CompareButton,
 } from './VaccinationsBanner.style';
 import AggregationsJSON from 'assets/data/aggregations.json';
-import vaccinationsIcon from 'assets/images/misc/vaccination_icon.svg';
 import { formatEstimate } from 'common/utils';
 import { scrollWithOffset } from 'components/TableOfContents';
 
@@ -77,9 +74,6 @@ const VaccinationsBannerInner: React.FC = () => {
 const VaccinationsBanner: React.FC = () => {
   return (
     <Wrapper>
-      <IconWrapper>
-        <Icon src={vaccinationsIcon} />
-      </IconWrapper>
       <VaccinationsBannerInner />
     </Wrapper>
   );
