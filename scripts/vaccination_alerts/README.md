@@ -77,7 +77,7 @@ vaccination-alerts:
 
 ## 3. email users
 
-We fetch the information for the current snapshot in `vaccination-alerts` to generate pairs of emails and locations
+We fetch the emails where `sentAt` is `null` from the `vaccination-alerts` collection corresponding to the updates in `vaccination-alerts.json` and generate `(email, fipsCode)` pairs of users to email with updates for the corresponding locations.
 
 ```yaml
 - email: pablo@covidactnow.org
