@@ -18,7 +18,7 @@ jobs:
 
       # Generate the vaccination alerts
       - name: Generate the vaccination info update
-        run: yarn vaccinations.locations
+        run: yarn vaccinations-locations
       # Setup list of emails to send
       # Send the vaccination alerts to the users
       # Slack notifications
