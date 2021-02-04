@@ -17,7 +17,7 @@ export interface RegionVaccineVersionMap {
   [fipsCode: string]: RegionVaccineVersion;
 }
 
-const VACCINATION_VERSIONS_COLLECTION = 'info/vaccinationInfoUpdates/locations';
+const VACCINATION_VERSIONS_COLLECTION = 'vaccination-info-updates';
 
 export function getCmsVaccinationInfo(): RegionVaccinePhaseInfoMap {
   return _.chain(stateVaccinationPhases)
