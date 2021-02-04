@@ -158,6 +158,7 @@ function renderDisclaimer(projections: Projections): React.ReactElement {
       <ExternalLink href="/covid-risk-levels-metrics#icu-capacity-used">
         ICU capacity methodology
       </ExternalLink>
+      .
     </Fragment>
   );
 }
