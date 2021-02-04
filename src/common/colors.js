@@ -39,6 +39,8 @@ export const COLOR_MAP = {
     LIGHT: '#E3E3E3',
     DARK: '#999999',
   },
+  GREY_100: '#f5f5f5',
+  GREY_600: '#757575',
   GRAY_ICON: '#bdbdbd',
   PURPLE: '#5900EA',
   LIGHTGRAY: '#f2f2f2',
