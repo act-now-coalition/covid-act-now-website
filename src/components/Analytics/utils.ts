@@ -46,6 +46,7 @@ export enum EventCategory {
   VACCINATION = 'vaccination',
   WEB_VITALS = 'web vitals',
   NONE = 'none', // use NONE for development
+  GEOLOCATION_CARDS = 'geolocation cards',
 }
 
 /**
