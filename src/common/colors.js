@@ -40,6 +40,7 @@ export const COLOR_MAP = {
     LIGHT: '#E3E3E3',
     DARK: '#999999',
   },
+  GREY_50: grey[50],
   GREY_100: grey[100],
   GREY_200: grey[200],
   GREY_600: grey[600],
