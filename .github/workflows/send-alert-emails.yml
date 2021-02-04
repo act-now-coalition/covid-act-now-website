@@ -6,15 +6,15 @@ on:
   workflow_dispatch:
     inputs:
       firebase_env:
-        description: "Environment to run against (prod, dev, or staging)"
+        description: 'Environment to run against (prod, dev, or staging)'
         required: true
         default: prod
       send_emails:
-        description: "Whether to actually send emails (true) or just do a safe dry-run (false)."
+        description: 'Whether to actually send emails (true) or just do a safe dry-run (false).'
         required: true
         default: false
       snapshot_id:
-        description: "Snapshot to send alerts for (auto uses currently deployed snapshot)."
+        description: 'Snapshot to send alerts for (auto uses currently deployed snapshot).'
         required: true
         default: auto
 
@@ -39,17 +39,17 @@ jobs:
       # Write appropriate service account file for FIREBASE_ENV.
       - name: Write Dev Service Account
         if: ${{ env.FIREBASE_ENV == 'dev' }}
-        run: echo "$SERVICE_ACCOUNT" > scripts/alert_emails/google-service-account.json
+        run: echo "$SERVICE_ACCOUNT" > scripts/common/firebase/google-service-account.json
         env:
           SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_DEV }}
       - name: Write Staging Service Account
         if: ${{ env.FIREBASE_ENV == 'staging' }}
-        run: echo "$SERVICE_ACCOUNT" > scripts/alert_emails/google-service-account.json
+        run: echo "$SERVICE_ACCOUNT" > scripts/common/firebase/google-service-account.json
         env:
           SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_STAGING }}
       - name: Write Prod Service Account
         if: ${{ env.FIREBASE_ENV == 'prod' }}
-        run: echo "$SERVICE_ACCOUNT" > scripts/alert_emails/google-service-account.json
+        run: echo "$SERVICE_ACCOUNT" > scripts/common/firebase/google-service-account.json
         env:
           SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROD }}
 

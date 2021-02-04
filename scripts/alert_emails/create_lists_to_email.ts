@@ -2,7 +2,7 @@ import _ from 'lodash';
 import fs from 'fs-extra';
 import path from 'path';
 import { GrpcStatus as FirestoreErrorCode } from '@google-cloud/firestore';
-import { getFirestore } from './firestore';
+import { getFirestore } from '../common/firebase';
 import { resolveSnapshot } from './utils';
 
 function exitWithUsage(): never {

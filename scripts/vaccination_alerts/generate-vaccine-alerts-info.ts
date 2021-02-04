@@ -10,14 +10,14 @@ import {
  * Generates the `vaccination-alerts.json` file with a map of locations that
  * have updated vaccination information.
  *
- * Run via: yarn vaccinations.locations
+ * Run via: yarn vaccinations-generate-alerts
  */
 
 const alertsFilePath = path.join(__dirname, 'vaccination-alerts.json');
 
 async function main() {
   const cmsInfo = getCmsVaccinationInfo();
-  const firebaseInfo = getFirebaseVaccinationInfo();
+  const firebaseInfo = await getFirebaseVaccinationInfo();
 
   const vaccinationAlertUpdates = getUpdatedVaccinationInfo(
     cmsInfo,

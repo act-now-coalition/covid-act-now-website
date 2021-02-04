@@ -15,12 +15,11 @@ This script determines which locations have updated vaccination information by c
 ### Firebase
 
 ```yaml
-info:
-  vaccinationInfoUpdates:
-    '11':
-      emailAlertVersion: 0
-    '12':
-      emailAlertVersion: 0
+vaccination-info-updates:
+  '11':
+    emailAlertVersion: 0
+  '12':
+    emailAlertVersion: 0
 ```
 
 ### From the CMS
@@ -92,13 +91,12 @@ We fetch the emails where `sentAt` is `null` from the `vaccination-alerts` colle
 
 For each pair of (email, fipsCode), we get the information for the given location in the `vaccination-alerts.json` file, render and send the email to the user. We mark the email as sent in the collection `vaccination-alerts` by setting `sentAt` with the currrent date.
 
-Finally, we update the `info` collection with the latest updated date.
+Finally, we update the `vaccination-info-updates` collection with the latest updated date.
 
 ```yaml
-info:
-  vaccinationInfoUpdates:
-    '11':
-      emailAlertVersion: 3 # Updated 0 -> 3
-    '12':
-      emailAlertVersion: 0
+vaccination-info-updates:
+  '11':
+    emailAlertVersion: 3
+  '12':
+    emailAlertVersion: 0
 ```
