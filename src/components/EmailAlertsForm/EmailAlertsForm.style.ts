@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+import MuiTextField from '@material-ui/core/TextField';
 import MuiFormGroup from '@material-ui/core/FormGroup';
-import { COLOR_MAP } from 'common/colors';
-import { BaseButton } from 'components/Button';
 import MuiCheckbox from '@material-ui/core/Checkbox';
 import MuiFormControlLabel from '@material-ui/core/FormControlLabel';
+import { COLOR_MAP } from 'common/colors';
+import { BaseButton } from 'components/Button';
 import { Paragraph } from 'components/Markdown';
 import ImmunizationIcon from 'assets/images/ImmunizationIcon';
 
@@ -23,7 +23,7 @@ const StyledTextField = withStyles({
       '&:Mui-focused fieldset': fieldsetStyle,
     },
   },
-})(TextField);
+})(MuiTextField);
 
 export const EmailTextField = styled(StyledTextField).attrs(props => ({
   variant: 'outlined',

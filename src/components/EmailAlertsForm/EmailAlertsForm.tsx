@@ -1,5 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { isValidEmail } from 'common/utils';
+import { Region } from 'common/regions';
 import {
   StyledForm,
   EmailTextField,
@@ -13,11 +14,18 @@ import {
   AlertsInfoBoxIcon,
   AlertsInfoBoxCopy,
 } from './EmailAlertsForm.style';
+import AutocompleteRegions from 'components/AutocompleteRegions';
 
-const EmailAlertsForm: React.FC = () => {
+const EmailAlertsForm: React.FC<{
+  autocompleteRegions: Region[];
+  defaultRegions: Region[];
+}> = ({ autocompleteRegions, defaultRegions }) => {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState(false);
   const [checkDailyDownload, setCheckDailyDownload] = useState(true);
+  const [selectedRegions, setSelectedRegions] = useState<Region[]>(
+    defaultRegions,
+  );
 
   const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -26,6 +34,7 @@ const EmailAlertsForm: React.FC = () => {
   };
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    // TODO: Get regions + email + checked and subscribe
     event.preventDefault();
   };
 
@@ -33,12 +42,22 @@ const EmailAlertsForm: React.FC = () => {
     setCheckDailyDownload(event.target.checked);
   };
 
+  const onChangeRegions = (event: ChangeEvent<{}>, newRegions: Region[]) => {
+    setSelectedRegions(newRegions);
+  };
+
   const emailInputLabel = emailError ? 'Invalid email' : 'Email';
 
   return (
     <StyledForm onSubmit={onSubmit}>
-      {/* Search Locations */}
-      {/* Info Box */}
+      <StyledFormGroup>
+        <AutocompleteRegions
+          regions={autocompleteRegions}
+          selectedRegions={selectedRegions}
+          onChangeRegions={onChangeRegions}
+          placeholder="Add location +"
+        />
+      </StyledFormGroup>
       <StyledFormGroup>
         <AlertsInfoBox>
           <AlertsInfoBoxIcon />
@@ -82,5 +101,12 @@ const EmailAlertsForm: React.FC = () => {
     </StyledForm>
   );
 };
+
+// <LocationSelector
+//   regions={autocompleteLocations}
+//   selectedRegions={selectedLocations}
+//   onChangeSelectedRegions={onChangeSelectedLocations}
+//   {...modalNormalizeCheckboxProps}
+// />
 
 export default EmailAlertsForm;
