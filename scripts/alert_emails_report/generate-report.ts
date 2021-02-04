@@ -2,10 +2,10 @@ import path from 'path';
 import moment from 'moment';
 import _ from 'lodash';
 import {
-  getFirestore,
   fetchAllAlertSubscriptions,
   Subscription,
 } from '../alert_emails/firestore';
+import { getFirestore } from '../common/firebase';
 import GoogleSheets, { Cell } from '../common/google-sheets';
 import {
   findCountyByFips,

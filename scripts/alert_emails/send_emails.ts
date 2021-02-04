@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import admin from 'firebase-admin';
 import path from 'path';
-import { getFirestore } from './firestore';
+import { getFirestore } from '../common/firebase';
 import EmailService, { isInvalidEmailError } from './email-service';
 import { generateAlertEmailData, readAlerts, resolveSnapshot } from './utils';
 
