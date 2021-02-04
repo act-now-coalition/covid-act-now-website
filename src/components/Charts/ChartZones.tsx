@@ -10,7 +10,7 @@ import { Column } from 'common/models/Projection';
 import { assert, formatUtcDate, formatPercent } from 'common/utils';
 import { LevelInfoMap } from 'common/level';
 import RectClipGroup from './RectClipGroup';
-import { AxisBottom, AxisLeft } from './Axis';
+import { AxisLeft } from './Axis';
 import BoxedAnnotation from './BoxedAnnotation';
 import ChartContainer from './ChartContainer';
 import ZoneAnnotation from './ZoneAnnotation';
@@ -26,6 +26,9 @@ import {
   getZoneByValue,
   getZonesTimeScale,
 } from './utils';
+import { getDateScale } from './utils';
+import { AxisBottom } from 'components/Charts/Axis';
+import { getTimeAxisTicks } from 'components/Explore/utils';
 
 type Point = Omit<Column, 'y'> & {
   y: number;
@@ -121,6 +124,9 @@ const ChartZones = ({
     </Tooltip>
   );
 
+  const dateScale = getDateScale(minDate, maxDate, chartWidth);
+  const dateTicks = getTimeAxisTicks(minDate, maxDate);
+
   return (
     <ChartContainer<Point>
       data={data}
@@ -171,7 +177,12 @@ const ChartZones = ({
           text={getPointText(lastPointY)}
         />
       </Style.TextAnnotation>
-      <AxisBottom top={chartHeight} scale={xScale} />
+      <AxisBottom
+        innerHeight={chartHeight}
+        scale={dateScale}
+        tickValues={dateTicks}
+      />
+      {/* <AxisBottom top={chartHeight} scale={xScale} /> */}
       <AxisLeft
         scale={yScale}
         tickValues={yTicks}

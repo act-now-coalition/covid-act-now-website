@@ -1,10 +1,9 @@
 import React, { useCallback, Fragment } from 'react';
-import moment from 'moment';
 import { last, isNumber, max } from 'lodash';
-import { AxisLeft, AxisBottom } from '@vx/axis';
+import { AxisLeft } from '@vx/axis';
 import { Group } from '@vx/group';
 import { ParentSize } from '@vx/responsive';
-import { scaleUtc, scaleLinear } from '@vx/scale';
+import { scaleLinear } from '@vx/scale';
 import { useTooltip } from '@vx/tooltip';
 import { formatPercent, formatUtcDate } from 'common/utils';
 import { Column } from 'common/models/Projection';
@@ -17,22 +16,11 @@ import ChartSeries, { SeriesMarker } from 'components/Explore/SeriesChart';
 import ChartOverlay from 'components/Explore/ChartOverlay';
 import { findPointByDate, getTimeAxisTicks } from 'components/Explore/utils';
 import * as ChartStyle from './Charts.style';
-import { useMediaQuery } from '@material-ui/core';
-import theme from 'assets/theme';
+import { getDateScale } from './utils';
+import { AxisBottom } from 'components/Charts/Axis';
 
 const getDate = (d: Column) => new Date(d.x);
 const getY = (d: Column) => d.y;
-
-const xTickFormat = (date: Date, isMobile: boolean) => {
-  const momentDate = moment(date);
-  // Shows the year if the tick is in January (0) or December (11)
-  const yearFormat = isMobile ? 'YY' : 'YYYY';
-  const dateFormat =
-    momentDate.month() === 0 || momentDate.month() === 11
-      ? `MMM ${yearFormat}`
-      : 'MMM';
-  return momentDate.format(dateFormat);
-};
 
 interface LabelInfo {
   x: number;
@@ -146,17 +134,14 @@ const VaccinationLines: React.FC<{
 }) => {
   const innerHeight = height - marginTop - marginBottom;
   const innerWidth = width - marginLeft - marginRight;
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  // const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
   // Note: The end date and 35% bounds are set to approximately match the goal of 100M
   // vaccines in the first 100 days of the Biden administration
   const dateFrom = new Date('2020-12-01');
   const dateTo = new Date('2021-05-01');
 
-  const dateScale = scaleUtc({
-    domain: [dateFrom, dateTo],
-    range: [0, innerWidth],
-  });
+  const dateScale = getDateScale(dateFrom, dateTo, innerWidth);
 
   const maxY = 0.35; // 35%
   const yScale = scaleLinear({
@@ -208,10 +193,10 @@ const VaccinationLines: React.FC<{
               tickFormat={(value: number) => formatPercent(value, 0)}
             />
             <AxisBottom
-              top={innerHeight}
+              innerHeight={innerHeight}
               scale={dateScale}
               tickValues={dateTicks}
-              tickFormat={d => xTickFormat(d, isMobile)}
+              showYear={true}
             />
           </Styles.Axis>
           <RectClipGroup width={innerWidth} height={innerHeight + 2}>

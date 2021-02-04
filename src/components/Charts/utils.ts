@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import moment from 'moment';
-import { scaleTime } from '@vx/scale';
+import { scaleTime, scaleUtc } from '@vx/scale';
 import { LevelInfoMap, Level, LevelInfo } from 'common/level';
 
 export const last = (list: any[]) => list[list.length - 1];
@@ -156,4 +156,37 @@ export const getZonesTimeScale = (
   const endDate = xScale.invert(maxX);
   xScale.domain([minDate, endDate]).range([0, maxX]);
   return xScale;
+};
+
+export const getDateScale = (
+  dateFrom: Date,
+  dateTo: Date,
+  chartWidth: number,
+) => {
+  const dateScale = scaleUtc({
+    domain: [dateFrom, dateTo],
+    range: [0, chartWidth],
+  });
+
+  return dateScale;
+};
+
+export const getXTickFormat = (
+  date: Date,
+  isMobile: boolean,
+  showYear?: boolean,
+) => {
+  const momentDate = moment(date);
+
+  if (!showYear) {
+    return momentDate.format('MMM');
+  } else {
+    // Shows the year if the tick is in January (0) or December (11)
+    const yearFormat = isMobile ? 'YY' : 'YYYY';
+    const dateFormat =
+      momentDate.month() === 0 || momentDate.month() === 11
+        ? `MMM ${yearFormat}`
+        : 'MMM';
+    return momentDate.format(dateFormat);
+  }
 };

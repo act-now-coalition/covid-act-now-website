@@ -10,7 +10,7 @@ import { Area } from '@vx/shape';
 import { Column, RtRange, RT_TRUNCATION_DAYS } from 'common/models/Projection';
 import { CASE_GROWTH_RATE_LEVEL_INFO_MAP as zones } from 'common/metrics/case_growth';
 import { formatUtcDate, formatDecimal } from 'common/utils';
-import { AxisBottom, AxisLeft } from './Axis';
+import { AxisLeft } from './Axis';
 import BoxedAnnotation from './BoxedAnnotation';
 import ChartContainer from './ChartContainer';
 import RectClipGroup from './RectClipGroup';
@@ -28,6 +28,9 @@ import {
   getAxisLimits,
   getZonesTimeScale,
 } from './utils';
+import { getDateScale } from './utils';
+import { AxisBottom } from 'components/Charts/Axis';
+import { getTimeAxisTicks } from 'components/Explore/utils';
 
 type PointRt = Omit<Column, 'y'> & {
   y: RtRange;
@@ -127,6 +130,9 @@ const ChartRt = ({
     />
   );
 
+  const dateScale = getDateScale(minDate, currDate, chartWidth);
+  const dateTicks = getTimeAxisTicks(minDate, currDate);
+
   return (
     <ChartContainer<PointRt>
       data={data}
@@ -200,7 +206,12 @@ const ChartRt = ({
         cy={yTruncationRt}
         r={6}
       />
-      <AxisBottom top={chartHeight} scale={xScale} />
+      <AxisBottom
+        innerHeight={chartHeight}
+        scale={dateScale}
+        tickValues={dateTicks}
+      />
+      {/* <AxisBottom top={chartHeight} scale={xScale} /> */}
       <AxisLeft scale={yScale} tickValues={yTicks} />
     </ChartContainer>
   );

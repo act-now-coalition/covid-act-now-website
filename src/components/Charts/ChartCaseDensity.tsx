@@ -9,7 +9,7 @@ import { Column } from 'common/models/Projection';
 import { CASE_DENSITY_LEVEL_INFO_MAP } from 'common/metrics/case_density';
 import { LevelInfoMap, Level } from 'common/level';
 import { formatUtcDate, formatDecimal } from 'common/utils';
-import { AxisBottom, AxisLeft } from './Axis';
+import { AxisLeft } from './Axis';
 import BoxedAnnotation from './BoxedAnnotation';
 import ChartContainer from './ChartContainer';
 import RectClipGroup from './RectClipGroup';
@@ -26,6 +26,9 @@ import {
   getAxisLimits,
   getZonesTimeScale,
 } from './utils';
+import { getDateScale } from './utils';
+import { AxisBottom } from 'components/Charts/Axis';
+import { getTimeAxisTicks } from 'components/Explore/utils';
 
 type Point = {
   x: number;
@@ -120,6 +123,9 @@ const ChartCaseDensity: FunctionComponent<{
     />
   );
 
+  const dateScale = getDateScale(minDate, currDate, chartWidth);
+  const dateTicks = getTimeAxisTicks(minDate, currDate);
+
   return (
     <ChartContainer<Point>
       data={data}
@@ -165,7 +171,11 @@ const ChartCaseDensity: FunctionComponent<{
           y={yScale(0.5 * (region.valueFrom + region.valueTo))}
         />
       ))}
-      <AxisBottom top={chartHeight} scale={xScale} />
+      <AxisBottom
+        innerHeight={chartHeight}
+        scale={dateScale}
+        tickValues={dateTicks}
+      />
       <AxisLeft scale={yScale} tickValues={yTicks.slice(1)} />
     </ChartContainer>
   );
