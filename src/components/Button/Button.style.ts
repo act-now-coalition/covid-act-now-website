@@ -52,3 +52,12 @@ export const ButtonPrimary = styled(Outlined)`
 export const ButtonSecondary = styled(Outlined)`
   color: ${theme.colors.lightBlue};
 `;
+
+export const BaseButton = styled(Button).attrs(props => ({
+  disableRipple: true,
+  disableFocusRipple: true,
+}))`
+  &:focus {
+    outline: rgb(0, 95, 204) 1px auto;
+  }
+`;
