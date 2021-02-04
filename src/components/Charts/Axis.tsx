@@ -4,6 +4,7 @@ import { SharedAxisProps } from '@vx/axis/lib/types';
 import * as Style from './Charts.style';
 import { getXTickFormat } from './utils';
 import { useBreakpoint } from 'common/hooks';
+import { ScaleTime } from 'd3-scale';
 
 export const AxisLeft = (props: SharedAxisProps<number>) => (
   <Style.Axis>
@@ -12,9 +13,9 @@ export const AxisLeft = (props: SharedAxisProps<number>) => (
 );
 
 interface AxisBottomProps {
-  scale: any;
+  scale: ScaleTime<number, number>;
   innerHeight: number;
-  tickValues: any;
+  tickValues: Date[];
   showYear?: boolean;
 }
 
