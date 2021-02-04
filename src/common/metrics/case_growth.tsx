@@ -84,7 +84,7 @@ export const CASE_GROWTH_RATE_LEVEL_INFO_MAP: LevelInfoMap = {
 };
 
 function renderStatus(projections: Projections): React.ReactElement {
-  const { rt } = projections.primary;
+  const rt = projections.getMetricValue(Metric.CASE_GROWTH_RATE);
   const locationName = projections.locationName;
 
   if (rt === null) {

@@ -14,11 +14,18 @@ export enum SortType {
 
 /** A pair of left/right projections (e.g. from two different snapshots) */
 export class ProjectionsPair {
-  static MISSING_METRIC_DIFF = 9999;
+  // Sentinel diff values that we use to push locations to the top of the list.
+  static DISABLED_METRIC_DIFF = 9999;
+  static MISSING_METRIC_DIFF = 9998;
+  static ADDED_METRIC_DIFF = 9997;
+  static LOWEST_SENTINEL_DIFF = ProjectionsPair.ADDED_METRIC_DIFF;
 
   constructor(public left: Projections, public right: Projections) {}
 
   metricDiff(metric: Metric): number {
+    if (this.left.primary.isMetricDisabledIgnoreOverride(metric)) {
+      return ProjectionsPair.DISABLED_METRIC_DIFF;
+    }
     const leftMetric = this.left.getMetricValue(metric);
     const rightMetric = this.right.getMetricValue(metric);
     return ProjectionsPair.metricValueDiff(leftMetric, rightMetric);
@@ -31,7 +38,7 @@ export class ProjectionsPair {
     if (leftMetric === null) {
       return rightMetric === null ? 0 : this.MISSING_METRIC_DIFF;
     } else if (rightMetric === null) {
-      return leftMetric === null ? 0 : this.MISSING_METRIC_DIFF + 1;
+      return leftMetric === null ? 0 : this.ADDED_METRIC_DIFF;
     } else {
       return Math.abs(leftMetric - rightMetric);
     }
