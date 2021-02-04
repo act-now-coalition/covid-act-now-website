@@ -134,7 +134,6 @@ const VaccinationLines: React.FC<{
 }) => {
   const innerHeight = height - marginTop - marginBottom;
   const innerWidth = width - marginLeft - marginRight;
-  // const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
   // Note: The end date and 35% bounds are set to approximately match the goal of 100M
   // vaccines in the first 100 days of the Biden administration
