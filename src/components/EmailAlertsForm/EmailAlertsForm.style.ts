@@ -93,6 +93,7 @@ export const StyledCheckbox = styled(MuiCheckbox).attrs(props => ({
 
 export const AlertsInfoBox = styled.div`
   display: flex;
+  align-items: flex-start;
   padding: 12px;
   background: rgba(0, 191, 234, 0.1);
   border: 1px solid #00bfea;
@@ -108,7 +109,6 @@ export const AlertsInfoBox = styled.div`
 
 export const AlertsInfoBoxIcon = styled(ImmunizationIcon)`
   flex: 0 0 auto;
-  min-width: 24px;
 `;
 
 export const AlertsInfoBoxCopy = styled(Paragraph)`
