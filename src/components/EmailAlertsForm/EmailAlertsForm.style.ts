@@ -9,6 +9,8 @@ import { BaseButton } from 'components/Button';
 import { Paragraph } from 'components/Markdown';
 import ImmunizationIcon from 'assets/images/ImmunizationIcon';
 
+const ACCESSIBLE_BLUE = '#00819E';
+
 export const StyledForm = styled.form``;
 
 const fieldsetStyle = {
@@ -37,12 +39,15 @@ export const EmailTextField = styled(StyledTextField).attrs(props => ({
 
 export const StyledButton = styled(BaseButton).attrs(props => ({
   variant: 'contained',
-  disableElevation: true,
 }))`
   min-width: 90px;
-  background-color: ${COLOR_MAP.BLUE};
+  background-color: ${ACCESSIBLE_BLUE};
   color: white;
   border-radius: 0 4px 4px 0;
+
+  &:hover {
+    background-color: ${ACCESSIBLE_BLUE};
+  }
 `;
 
 export const EmailFieldGroup = styled.div`
@@ -87,7 +92,7 @@ export const StyledCheckbox = styled(MuiCheckbox).attrs(props => ({
   }
 
   svg {
-    color: ${COLOR_MAP.BLUE};
+    color: ${ACCESSIBLE_BLUE};
   }
 `;
 
@@ -95,8 +100,7 @@ export const AlertsInfoBox = styled.div`
   display: flex;
   align-items: flex-start;
   padding: 12px;
-  background: rgba(0, 191, 234, 0.1);
-  border: 1px solid #00bfea;
+  background: ${COLOR_MAP.GREY_100};
   border-radius: 4px;
 
   & > * {

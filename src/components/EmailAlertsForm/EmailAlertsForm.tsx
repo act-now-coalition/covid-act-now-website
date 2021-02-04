@@ -62,7 +62,8 @@ const EmailAlertsForm: React.FC<{
         <AlertsInfoBox>
           <AlertsInfoBoxIcon />
           <AlertsInfoBoxCopy>
-            Only in these locations do we send vaccine eligibility alerts.
+            Alerts for vaccine eligibility are available for these locations.
+            Learn about our alerts.
           </AlertsInfoBoxCopy>
         </AlertsInfoBox>
       </StyledFormGroup>
@@ -101,12 +102,5 @@ const EmailAlertsForm: React.FC<{
     </StyledForm>
   );
 };
-
-// <LocationSelector
-//   regions={autocompleteLocations}
-//   selectedRegions={selectedLocations}
-//   onChangeSelectedRegions={onChangeSelectedLocations}
-//   {...modalNormalizeCheckboxProps}
-// />
 
 export default EmailAlertsForm;
