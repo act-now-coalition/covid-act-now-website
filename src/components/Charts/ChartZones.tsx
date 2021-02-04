@@ -26,7 +26,7 @@ import {
   getZoneByValue,
   getZonesTimeScale,
 } from './utils';
-import { getDateScale } from './utils';
+import { getUtcScale } from './utils';
 import { AxisBottom } from 'components/Charts/Axis';
 import { getTimeAxisTicks } from 'components/Explore/utils';
 
@@ -80,7 +80,7 @@ const ChartZones = ({
   const maxDate = new Date();
   assert(minDate !== undefined, 'Data must not be empty');
 
-  const xScale = getZonesTimeScale(minDate, maxDate, 0, chartWidth);
+  const xScale = getUtcScale(minDate, maxDate, 0, chartWidth);
 
   const yDataMin = 0;
   const yDataMax = d3max(data, getY);
@@ -124,7 +124,7 @@ const ChartZones = ({
     </Tooltip>
   );
 
-  const dateScale = getDateScale(minDate, maxDate, chartWidth);
+  const dateScale = getUtcScale(minDate, maxDate, 0, chartWidth);
   const dateTicks = getTimeAxisTicks(minDate, maxDate);
 
   return (

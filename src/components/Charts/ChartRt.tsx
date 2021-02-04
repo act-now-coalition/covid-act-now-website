@@ -28,7 +28,7 @@ import {
   getAxisLimits,
   getZonesTimeScale,
 } from './utils';
-import { getDateScale } from './utils';
+import { getUtcScale } from './utils';
 import { AxisBottom } from 'components/Charts/Axis';
 import { getTimeAxisTicks } from 'components/Explore/utils';
 
@@ -77,7 +77,7 @@ const ChartRt = ({
   const yDataMax = d3max(data, getRt) || 1;
   const [yAxisMin, yAxisMax] = getAxisLimits(yDataMin, yDataMax, zones);
 
-  const xScale = getZonesTimeScale(minDate, currDate, 0, chartWidth);
+  const xScale = getUtcScale(minDate, currDate, 0, chartWidth);
 
   const yScale = scaleLinear({
     domain: [yAxisMin, yAxisMax],
@@ -130,7 +130,7 @@ const ChartRt = ({
     />
   );
 
-  const dateScale = getDateScale(minDate, currDate, chartWidth);
+  const dateScale = getUtcScale(minDate, currDate, 0, chartWidth);
   const dateTicks = getTimeAxisTicks(minDate, currDate);
 
   return (

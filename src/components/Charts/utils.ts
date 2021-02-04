@@ -158,15 +158,20 @@ export const getZonesTimeScale = (
   return xScale;
 };
 
-export const getDateScale = (
+export const getUtcScale = (
   dateFrom: Date,
   dateTo: Date,
-  chartWidth: number,
+  minX: number,
+  maxX: number,
+  zoneLabelsWidth = 80,
 ) => {
   const dateScale = scaleUtc({
     domain: [dateFrom, dateTo],
-    range: [0, chartWidth],
+    range: [minX, maxX - zoneLabelsWidth],
   });
+
+  const endDate = dateScale.invert(maxX);
+  dateScale.domain([dateFrom, endDate]).range([0, maxX]);
 
   return dateScale;
 };

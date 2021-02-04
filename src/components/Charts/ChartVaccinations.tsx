@@ -16,7 +16,7 @@ import ChartSeries, { SeriesMarker } from 'components/Explore/SeriesChart';
 import ChartOverlay from 'components/Explore/ChartOverlay';
 import { findPointByDate, getTimeAxisTicks } from 'components/Explore/utils';
 import * as ChartStyle from './Charts.style';
-import { getDateScale } from './utils';
+import { getUtcScale } from './utils';
 import { AxisBottom } from 'components/Charts/Axis';
 
 const getDate = (d: Column) => new Date(d.x);
@@ -140,7 +140,7 @@ const VaccinationLines: React.FC<{
   const dateFrom = new Date('2020-12-01');
   const dateTo = new Date('2021-05-01');
 
-  const dateScale = getDateScale(dateFrom, dateTo, innerWidth);
+  const dateScale = getUtcScale(dateFrom, dateTo, 0, innerWidth);
 
   const maxY = 0.35; // 35%
   const yScale = scaleLinear({
