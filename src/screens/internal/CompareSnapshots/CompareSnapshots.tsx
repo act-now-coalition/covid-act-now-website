@@ -34,7 +34,7 @@ import {
   fetchMainSnapshotNumber,
   snapshotUrl,
 } from 'common/utils/snapshots';
-import regions, { MetroArea, Region } from 'common/regions';
+import regions, { County, MetroArea, Region } from 'common/regions';
 
 // TODO(michael): Compare page improvements:
 // * Virtualize the list so that it's not so awful slow. NOTE: I previously
@@ -46,7 +46,7 @@ import regions, { MetroArea, Region } from 'common/regions';
 //   snapshot number until it 404s)
 
 enum Locations {
-  STATES_AND_INTERESTING_COUNTIES,
+  STATES_AND_INTERESTING_REGIONS,
   STATES,
   TOP_COUNTIES_BY_POPULATION,
   TOP_COUNTIES_BY_DIFF,
@@ -56,9 +56,11 @@ enum Locations {
 const COUNTIES_LIMIT = 100;
 const METROS_LIMIT = 100;
 
-// For "interesting" counties, we take the 30 top diffs of the counties with > 500k population.
-const INTERESTING_POPULATION = 500000;
-const INTERESTING_TOP_DIFFS = 30;
+// For "interesting" regions, we take the 30 top diffs of the counties with
+// > 500k population and the 20 top diffs of metro areas.
+const INTERESTING_COUNTIES_POPULATION = 500000;
+const INTERESTING_COUNTIES_TOP_DIFFS = 30;
+const INTERESTING_METROS_TOP_DIFFS = 20;
 
 export function CompareSnapshots() {
   const mainSnapshot = useMainSnapshot();
@@ -105,7 +107,7 @@ function CompareSnapshotsInner({ mainSnapshot }: { mainSnapshot: number }) {
     getParamValue(
       params,
       'locations',
-      Locations.STATES_AND_INTERESTING_COUNTIES,
+      Locations.STATES_AND_INTERESTING_REGIONS,
     ),
   );
 
@@ -216,8 +218,8 @@ function CompareSnapshotsInner({ mainSnapshot }: { mainSnapshot: number }) {
         <FormControl style={{ width: '14rem', marginLeft: '1rem' }}>
           <InputLabel focused={false}>Show:</InputLabel>
           <Select value={locations} onChange={changeLocations}>
-            <MenuItem value={Locations.STATES_AND_INTERESTING_COUNTIES}>
-              States & Interesting Counties
+            <MenuItem value={Locations.STATES_AND_INTERESTING_REGIONS}>
+              States & Interesting Regions
             </MenuItem>
             <MenuItem value={Locations.STATES}>States</MenuItem>
             <MenuItem value={Locations.TOP_COUNTIES_BY_POPULATION}>
@@ -426,33 +428,29 @@ function useProjectionsSet(
         const topCounties = regions.topCountiesByPopulation(COUNTIES_LIMIT);
         setProjectionsSet(
           ProjectionsSet.fromProjections(
-            await fetchCountyProjections(leftSnapshot, topCounties),
-            await fetchCountyProjections(rightSnapshot, topCounties),
+            await fetchRegionProjections(leftSnapshot, topCounties),
+            await fetchRegionProjections(rightSnapshot, topCounties),
           ),
         );
       } else if (locations === Locations.TOP_METROS_BY_POPULATION) {
         const topMetros = regions.topMetrosByPopulation(METROS_LIMIT);
         setProjectionsSet(
           ProjectionsSet.fromProjections(
-            await fetchMetroProjections(leftSnapshot, topMetros),
-            await fetchMetroProjections(rightSnapshot, topMetros),
+            await fetchRegionProjections(leftSnapshot, topMetros),
+            await fetchRegionProjections(rightSnapshot, topMetros),
           ),
         );
       } else if (locations === Locations.TOP_COUNTIES_BY_DIFF) {
-        const countyDiffs = await fetchCountyDiffs(
+        const topCounties = await fetchTopCountiesByDiff(
           leftSnapshot,
           rightSnapshot,
           metric,
         );
-        if (countyDiffs !== null) {
-          const topCounties = _.takeRight(
-            countyDiffs.sort((a, b) => a.diff - b.diff),
-            COUNTIES_LIMIT,
-          ).map(cd => cd.county);
+        if (topCounties !== null) {
           setProjectionsSet(
             ProjectionsSet.fromProjections(
-              await fetchCountyProjections(leftSnapshot, topCounties),
-              await fetchCountyProjections(rightSnapshot, topCounties),
+              await fetchRegionProjections(leftSnapshot, topCounties),
+              await fetchRegionProjections(rightSnapshot, topCounties),
             ),
           );
         } else {
@@ -467,16 +465,16 @@ function useProjectionsSet(
             ).top(COUNTIES_LIMIT, SortType.METRIC_DIFF, metric),
           );
         }
-      } else if (locations === Locations.STATES_AND_INTERESTING_COUNTIES) {
-        const interestingCounties = await fetchInterestingCounties(
+      } else if (locations === Locations.STATES_AND_INTERESTING_REGIONS) {
+        const interestingRegions = await fetchInterestingRegions(
           leftSnapshot,
           rightSnapshot,
           metric,
         );
-        if (interestingCounties === null) {
+        if (interestingRegions === null) {
           // Couldn't load summary files. Just fetch all county projections and take the top diffs (slow).
           setLoadingText(
-            `Can't load "States & Interesting Counties" since there's no pre-generated summary file in https://github.com/covid-projections/covid-projections/tree/develop/scripts/alert_emails/summaries...`,
+            `Can't load "States & Interesting Regions" since there's no pre-generated summary file in https://github.com/covid-projections/covid-projections/tree/develop/scripts/alert_emails/summaries...`,
           );
         } else {
           // Start with the states.
@@ -488,10 +486,10 @@ function useProjectionsSet(
           );
 
           leftProjections = leftProjections.concat(
-            await fetchCountyProjections(leftSnapshot, interestingCounties),
+            await fetchRegionProjections(leftSnapshot, interestingRegions),
           );
           rightProjections = rightProjections.concat(
-            await fetchCountyProjections(rightSnapshot, interestingCounties),
+            await fetchRegionProjections(rightSnapshot, interestingRegions),
           );
           setProjectionsSet(
             ProjectionsSet.fromProjections(leftProjections, rightProjections),
@@ -508,90 +506,99 @@ function useProjectionsSet(
   return { projectionsSet, loadingText };
 }
 
-async function fetchInterestingCounties(
+async function fetchInterestingRegions(
   leftSnapshot: number,
   rightSnapshot: number,
   metric: Metric,
 ): Promise<Region[] | null> {
-  const countyDiffs = await fetchCountyDiffs(
+  const regionDiffs = await fetchSortedRegionDiffs(
     leftSnapshot,
     rightSnapshot,
     metric,
   );
-  if (countyDiffs === null) {
+  if (regionDiffs === null) {
     return null;
   }
-  // Find the interesting counties.
-  return _.takeRight(
-    countyDiffs
+  const interestingCounties = _.takeRight(
+    regionDiffs
+      .filter(rd => rd.region instanceof County)
       .filter(
-        cd =>
-          cd.county.population >= INTERESTING_POPULATION ||
-          cd.diff >= ProjectionsPair.MISSING_METRIC_DIFF,
-      )
-      .sort((a, b) => a.diff - b.diff),
-    INTERESTING_TOP_DIFFS,
-  ).map(cd => cd.county);
+        rd =>
+          rd.region.population >= INTERESTING_COUNTIES_POPULATION ||
+          rd.diff >= ProjectionsPair.MISSING_METRIC_DIFF,
+      ),
+    INTERESTING_COUNTIES_TOP_DIFFS,
+  );
+
+  const interestingMetros = _.takeRight(
+    regionDiffs.filter(rd => rd.region instanceof MetroArea),
+    INTERESTING_METROS_TOP_DIFFS,
+  );
+
+  return [...interestingCounties, ...interestingMetros].map(rd => rd.region);
 }
 
-function fetchCountyProjections(
+function fetchRegionProjections(
   snapshotNumber: number,
-  counties: Region[],
+  regions: Region[],
 ): Promise<Projections[]> {
   return Promise.all(
-    counties.map(region =>
+    regions.map(region =>
       fetchProjectionsRegion(region, snapshotUrl(snapshotNumber)).catch(err => {
         console.error(err);
         return null;
       }),
     ),
-  ).then(counties => counties.filter(p => p !== null) as Projections[]);
+  ).then(projections => projections.filter(p => p !== null) as Projections[]);
 }
 
-function fetchMetroProjections(
-  snapshotNumber: number,
-  metros: MetroArea[],
-): Promise<Projections[]> {
-  return Promise.all(
-    metros.map(region =>
-      fetchProjectionsRegion(region, snapshotUrl(snapshotNumber)).catch(err => {
-        console.error(err);
-        return null;
-      }),
-    ),
-  ).then(metros => metros.filter(p => p !== null) as Projections[]);
-}
-
-async function fetchCountyDiffs(
+/**
+ * Returns an array of { region, diff } pairs for all regions, indicating the
+ * difference in the specified metric between the specified snapshots, ordered
+ * by smallest diff to largest diff.
+ */
+async function fetchSortedRegionDiffs(
   leftSnapshot: number,
   rightSnapshot: number,
   metric: Metric,
-): Promise<Array<{ county: Region; diff: number }> | null> {
+): Promise<Array<{ region: Region; diff: number }> | null> {
   const leftSummaries = await fetchSummaries(leftSnapshot).catch(e => null);
   const rightSummaries = await fetchSummaries(rightSnapshot).catch(e => null);
   if (leftSummaries === null || rightSummaries === null) {
     return null;
   }
 
-  const fipsList = _.union(
-    Object.keys(leftSummaries),
-    Object.keys(rightSummaries),
-  ).filter(fips => fips.length === 5);
-  const diffs: { [fips: string]: number } = {};
-  for (const fips of fipsList) {
-    const left = leftSummaries[fips]?.metrics?.[metric]?.value,
-      right = rightSummaries[fips]?.metrics?.[metric]?.value;
-    const leftValue = left == null ? null : left;
-    const rightValue = right == null ? null : right;
-    diffs[fips] = ProjectionsPair.metricValueDiff(leftValue, rightValue);
-  }
+  return regions
+    .all()
+    .map(region => {
+      const fips = region.fipsCode;
+      const leftValue = leftSummaries[fips]?.metrics?.[metric]?.value ?? null;
+      const rightValue = rightSummaries[fips]?.metrics?.[metric]?.value ?? null;
+      return {
+        region,
+        diff: ProjectionsPair.metricValueDiff(leftValue, rightValue),
+      };
+    })
+    .sort((a, b) => a.diff - b.diff);
+}
 
-  return regions.counties
-    .filter(c => c.fipsCode in diffs)
-    .map(c => ({
-      county: c,
-      diff: diffs[c.fipsCode],
-    }));
+async function fetchTopCountiesByDiff(
+  leftSnapshot: number,
+  rightSnapshot: number,
+  metric: Metric,
+): Promise<Region[] | null> {
+  const regionDiffs = await fetchSortedRegionDiffs(
+    leftSnapshot,
+    rightSnapshot,
+    metric,
+  );
+  if (regionDiffs === null) {
+    return null;
+  }
+  return _.takeRight(
+    regionDiffs.filter(rd => rd.region instanceof County),
+    COUNTIES_LIMIT,
+  ).map(rd => rd.region);
 }
 
 function getParamValue(

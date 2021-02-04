@@ -3,6 +3,7 @@ import { Metric } from 'common/metric';
 import { Projection, Column } from 'common/models/Projection';
 import { Projections } from 'common/models/Projections';
 import { fail, assert } from 'common/utils';
+import { MetroArea } from 'common/regions';
 
 export enum SortType {
   ALPHABETICAL,
@@ -51,7 +52,12 @@ export class ProjectionsPair {
   }
 
   get locationName(): string {
-    return this.left.locationName;
+    const region = this.left.region;
+    if (region instanceof MetroArea) {
+      return `${region.fullName}, ${region.stateCodes}`;
+    } else {
+      return region.fullName;
+    }
   }
 
   get population(): number {
