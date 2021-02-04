@@ -5,7 +5,7 @@ import { Heading2 as H2, Paragraph as P } from 'components/Markdown';
 
 export const Container = styled.div`
   text-align: center;
-  background-color: ${COLOR_MAP.GREY_200};
+  background-color: #fafafa;
 
   padding: 40px 16px;
   @media (min-width: ${mobileBreakpoint}) {
