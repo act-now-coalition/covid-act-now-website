@@ -89,3 +89,32 @@ export const StyledCheckbox = styled(MuiCheckbox).attrs(props => ({
     color: ${COLOR_MAP.BLUE};
   }
 `;
+
+export const AlertsInfoBox = styled.div`
+  display: flex;
+  padding: 12px;
+  background: rgba(0, 191, 234, 0.1);
+  border: 1px solid #00bfea;
+  border-radius: 4px;
+
+  & > * {
+    margin-right: 12px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+`;
+
+export const AlertsInfoBoxIcon = styled.div`
+  flex: 0 0 auto;
+  min-width: 24px;
+  border: dashed 1px black;
+`;
+
+export const AlertsInfoBoxCopy = styled(Paragraph)`
+  flex: 1 0 fill;
+  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: black;
+`;

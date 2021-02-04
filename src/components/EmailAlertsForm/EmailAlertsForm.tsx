@@ -9,6 +9,9 @@ import {
   StyledCheckbox,
   StyledCheckboxLabel,
   StyledFormControlLabel,
+  AlertsInfoBox,
+  AlertsInfoBoxIcon,
+  AlertsInfoBoxCopy,
 } from './EmailAlertsForm.style';
 
 const EmailAlertsForm: React.FC = () => {
@@ -36,18 +39,28 @@ const EmailAlertsForm: React.FC = () => {
     <StyledForm onSubmit={onSubmit}>
       {/* Search Locations */}
       {/* Info Box */}
-      <EmailFieldGroup>
-        <EmailTextField
-          id="user-email"
-          label={emailInputLabel}
-          error={emailError}
-          onChange={onChangeEmail}
-          value={email}
-          placeholder="Enter your email address"
-          type="email"
-        />
-        <StyledButton>Sign up</StyledButton>
-      </EmailFieldGroup>
+      <StyledFormGroup>
+        <AlertsInfoBox>
+          <AlertsInfoBoxIcon />
+          <AlertsInfoBoxCopy>
+            Only in these locations do we send vaccine eligibility alerts.
+          </AlertsInfoBoxCopy>
+        </AlertsInfoBox>
+      </StyledFormGroup>
+      <StyledFormGroup>
+        <EmailFieldGroup>
+          <EmailTextField
+            id="user-email"
+            label={emailInputLabel}
+            error={emailError}
+            onChange={onChangeEmail}
+            value={email}
+            placeholder="Enter your email address"
+            type="email"
+          />
+          <StyledButton>Sign up</StyledButton>
+        </EmailFieldGroup>
+      </StyledFormGroup>
       <StyledFormGroup>
         <StyledFormControlLabel
           labelPlacement="end"
