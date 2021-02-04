@@ -7,7 +7,7 @@ export default {
 };
 
 export const Example = () => (
-  <div style={{ width: 400 }}>
+  <div style={{ maxWidth: 400 }}>
     <EmailAlertsForm />
   </div>
 );
