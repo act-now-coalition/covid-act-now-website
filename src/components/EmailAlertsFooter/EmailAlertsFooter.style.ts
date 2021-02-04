@@ -26,7 +26,6 @@ export const Section = styled.div`
 `;
 
 export const Heading2 = styled(H2)`
-  text-align: center;
   margin-bottom: 16px;
 `;
 
