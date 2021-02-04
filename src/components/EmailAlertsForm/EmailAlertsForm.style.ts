@@ -103,7 +103,7 @@ export const AlertsInfoBox = styled.div`
   display: flex;
   align-items: flex-start;
   padding: 12px;
-  background: #f2f2f2;
+  background: ${COLOR_MAP.LIGHTGRAY};
   border-radius: 4px;
 
   & > * {
