@@ -6,4 +6,8 @@ export default {
   component: EmailAlertsForm,
 };
 
-export const Example = () => <EmailAlertsForm />;
+export const Example = () => (
+  <div style={{ width: 400 }}>
+    <EmailAlertsForm />
+  </div>
+);

@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { StyledForm, EmailTextField } from './EmailAlertsForm.style';
+import {
+  StyledForm,
+  EmailTextField,
+  StyledButton,
+  EmailFieldGroup,
+} from './EmailAlertsForm.style';
 import { isValidEmail } from 'common/utils';
 
 const EmailAlertsForm: React.FC = () => {
@@ -22,15 +27,18 @@ const EmailAlertsForm: React.FC = () => {
     <StyledForm onSubmit={onSubmit}>
       {/* Search Locations */}
       {/* Info Box */}
-      <EmailTextField
-        id="user-email"
-        label={emailInputLabel}
-        error={emailError}
-        onChange={onChangeEmail}
-        value={email}
-        placeholder="Enter your email address"
-        type="email"
-      />
+      <EmailFieldGroup>
+        <EmailTextField
+          id="user-email"
+          label={emailInputLabel}
+          error={emailError}
+          onChange={onChangeEmail}
+          value={email}
+          placeholder="Enter your email address"
+          type="email"
+        />
+        <StyledButton>Sign up</StyledButton>
+      </EmailFieldGroup>
       {/* Daily Download */}
     </StyledForm>
   );
