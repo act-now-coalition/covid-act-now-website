@@ -4,22 +4,26 @@ import {
   Content,
   Heading2,
   Paragraph,
+  EmailAlertIcon,
+  Section,
 } from './EmailAlertsFooter.style';
 
 const EmailAlertsFooter: React.FC = () => {
   return (
     <Container>
       <Content>
-        {/* Email Notifications Icon */}
-        <Heading2>Get alerts</Heading2>
-        <Paragraph>
-          We’ll email you when your location sees a change in its{' '}
-          <strong>risk level</strong> or <strong>vaccine eligibilitiy</strong>.
-        </Paragraph>
-        {/* Location Search */}
-        {/* Info Box */}
-        {/* Email Input */}
-        {/* Daily download checkbox */}
+        <Section key="icon">
+          <EmailAlertIcon />
+        </Section>
+        <Section key="header">
+          <Heading2>Get alerts</Heading2>
+          <Paragraph>
+            We’ll email you when your location sees a change in its{' '}
+            <strong>risk level</strong> or <strong>vaccine eligibilitiy</strong>
+            .
+          </Paragraph>
+        </Section>
+        {/* Email Alerts Form */}
       </Content>
     </Container>
   );

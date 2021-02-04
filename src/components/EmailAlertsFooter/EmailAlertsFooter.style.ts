@@ -18,6 +18,13 @@ export const Content = styled.div`
   margin: 0 auto;
 `;
 
+export const Section = styled.div`
+  margin-bottom: 20px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
 export const Heading2 = styled(H2)`
   text-align: center;
   margin-bottom: 16px;
@@ -25,4 +32,13 @@ export const Heading2 = styled(H2)`
 
 export const Paragraph = styled(P)`
   font-size: 15px;
+  margin-bottom: 0;
+`;
+
+export const EmailAlertIcon = styled.div`
+  margin: 0 auto;
+  width: 48px;
+  height: 48px;
+  background-color: white;
+  border: solid 1px black;
 `;
