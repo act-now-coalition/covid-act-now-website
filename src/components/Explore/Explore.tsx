@@ -38,7 +38,6 @@ import {
   getSeriesLabel,
   EXPLORE_CHART_IDS,
   getSubtitle,
-  METHODOLOGY_URL,
   DATA_SOURCES_URL,
 } from './utils';
 import * as Styles from './Explore.style';
@@ -70,8 +69,7 @@ function getNoDataCopy(metricName: string, locationNames: string) {
   return (
     <p>
       We don't have {metricName} data for {locationNames}. Learn more about{' '}
-      <ExternalLink href={METHODOLOGY_URL}>our methodology</ExternalLink> and
-      our <ExternalLink href={DATA_SOURCES_URL}>our data sources</ExternalLink>.
+      <ExternalLink href={DATA_SOURCES_URL}>our data sources</ExternalLink>.
     </p>
   );
 }

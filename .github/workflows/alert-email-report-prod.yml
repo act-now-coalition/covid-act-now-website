@@ -18,7 +18,7 @@ jobs:
           node-version: 12.x
       - run: yarn install
       - name: Write Firebase Service Account
-        run: echo "$SERVICE_ACCOUNT" > scripts/alert_emails/google-service-account.json
+        run: echo "$SERVICE_ACCOUNT" > scripts/common/firebase/google-service-account.json
         env:
           SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROD }}
       - name: Write Spreadsheet Service Account

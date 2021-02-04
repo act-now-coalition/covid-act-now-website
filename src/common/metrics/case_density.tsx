@@ -136,19 +136,7 @@ function renderDisclaimer(): React.ReactElement {
       <ExternalLink href="https://ethics.harvard.edu/files/center-for-ethics/files/key_metrics_and_indicators_v4.pdf">
         “Key Metrics for Covid Suppression”
       </ExternalLink>{' '}
-      by Harvard Global Health Institute and others.
-      <br />
-      When estimating the number of people who will become infected in the
-      course of a year, we rely on the{' '}
-      <ExternalLink href="https://www.globalhealthnow.org/2020-06/us-cases-10x-higher-reported">
-        CDC’s estimate
-      </ExternalLink>{' '}
-      that confirmed cases represent as few as 10% of overall infections. Learn
-      more about{' '}
-      <ExternalLink href="https://docs.google.com/document/d/1cd_cEpNiIl1TzUJBvw9sHLbrbUZ2qCxgN32IqVLa3Do/edit">
-        our methodology
-      </ExternalLink>{' '}
-      and{' '}
+      by Harvard Global Health Institute and others. Learn more about{' '}
       <ExternalLink href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit">
         our data sources
       </ExternalLink>
