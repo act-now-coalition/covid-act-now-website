@@ -7,6 +7,7 @@ import { BaseButton } from 'components/Button';
 import MuiCheckbox from '@material-ui/core/Checkbox';
 import MuiFormControlLabel from '@material-ui/core/FormControlLabel';
 import { Paragraph } from 'components/Markdown';
+import ImmunizationIcon from 'assets/images/ImmunizationIcon';
 
 export const StyledForm = styled.form``;
 
@@ -105,10 +106,9 @@ export const AlertsInfoBox = styled.div`
   }
 `;
 
-export const AlertsInfoBoxIcon = styled.div`
+export const AlertsInfoBoxIcon = styled(ImmunizationIcon)`
   flex: 0 0 auto;
   min-width: 24px;
-  border: dashed 1px black;
 `;
 
 export const AlertsInfoBoxCopy = styled(Paragraph)`
