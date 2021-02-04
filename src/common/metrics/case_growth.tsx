@@ -119,10 +119,6 @@ function renderDisclaimer(): React.ReactElement {
       Each data point is a 14-day weighted average. We present the most recent
       seven days of data as a dashed line, as data is often revised by states
       several days after reporting. Learn more about{' '}
-      <ExternalLink href="https://docs.google.com/document/d/1cd_cEpNiIl1TzUJBvw9sHLbrbUZ2qCxgN32IqVLa3Do/edit">
-        our methodology
-      </ExternalLink>{' '}
-      and{' '}
       <ExternalLink href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit">
         our data sources
       </ExternalLink>
