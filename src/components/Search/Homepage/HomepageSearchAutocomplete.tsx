@@ -97,15 +97,14 @@ const HomepageSearchAutocomplete: React.FC<{
   return (
     <>
       {lockBackgroundScroll && <LockBodyScroll />}
-      <Wrapper isOpen={isOpen}>
-        <MobileSearchDirections isOpen={isOpen}>
+      <Wrapper $isOpen={isOpen}>
+        <MobileSearchDirections $isOpen={isOpen}>
           <BackArrowIcon onClick={() => setIsOpen(false)} />
           <span>
             Search by <br /> zip, city, county, or state
           </span>
         </MobileSearchDirections>
         <Autocomplete
-          // open={true}
           disableListWrap
           disableClearable
           disablePortal

@@ -59,12 +59,13 @@ const MobileWrapperClosed = css`
   padding: 0.75rem 0.5rem 1.5rem;
 `;
 
-export const Wrapper = styled.div<{ isOpen: boolean }>`
-  ${({ isOpen }) => (isOpen ? MobileWrapperOpened : MobileWrapperClosed)};
+export const Wrapper = styled.div<{ $isOpen: boolean }>`
+  ${({ $isOpen }) => ($isOpen ? MobileWrapperOpened : MobileWrapperClosed)};
 
   @media (min-width: ${materialSMBreakpoint}) {
-    box-shadow: ${({ isOpen }) => isOpen && '0px 2px 24px rgba(0, 0, 0, 0.12)'};
-    border-radius: ${({ isOpen }) => (isOpen ? '4px 4px 0 0' : '4px')};
+    box-shadow: ${({ $isOpen }) =>
+      $isOpen && '0px 2px 24px rgba(0, 0, 0, 0.12)'};
+    border-radius: ${({ $isOpen }) => ($isOpen ? '4px 4px 0 0' : '4px')};
     position: relative;
     width: ${desktopWidth}px;
     height: unset;
@@ -77,8 +78,8 @@ export const SearchBarIcon = styled(SearchIcon)`
   margin-left: 0.5rem;
 `;
 
-export const MobileSearchDirections = styled.div<{ isOpen: boolean }>`
-  display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
+export const MobileSearchDirections = styled.div<{ $isOpen: boolean }>`
+  display: ${({ $isOpen }) => ($isOpen ? 'flex' : 'none')};
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   margin-bottom: 1.25rem;
   font-size: 1rem;
