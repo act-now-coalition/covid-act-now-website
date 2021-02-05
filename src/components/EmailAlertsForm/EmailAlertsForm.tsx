@@ -15,7 +15,17 @@ import {
   AlertsInfoBoxCopy,
 } from './EmailAlertsForm.style';
 import AutocompleteRegions from 'components/AutocompleteRegions';
-import { subscribeToLocations } from './utils';
+import { subscribeToLocations, subscribeToDailyDownload } from './utils';
+import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
+
+function trackSubscription(label: string, numLocations: number) {
+  trackEvent(
+    EventCategory.ENGAGEMENT,
+    EventAction.SUBSCRIBE,
+    label,
+    numLocations,
+  );
+}
 
 const EmailAlertsForm: React.FC<{
   autocompleteRegions: Region[];
@@ -35,16 +45,33 @@ const EmailAlertsForm: React.FC<{
   };
 
   function subscribeToAlerts() {
-    if (!isValidEmail(email) || selectedRegions.length === 0) {
+    if (!isValidEmail(email)) {
       return;
     }
-    const fipsCodeList = selectedRegions.map(region => region.fipsCode);
-    subscribeToLocations(email, fipsCodeList);
-    // TODO: Tracking
+
+    const numLocations = selectedRegions.length;
+    const subscribeToAlerts = numLocations > 0;
+
+    if (subscribeToAlerts) {
+      const fipsCodeList = selectedRegions.map(region => region.fipsCode);
+      subscribeToLocations(email, fipsCodeList);
+    }
+
+    if (checkDailyDownload) {
+      subscribeToDailyDownload(email);
+    }
+
+    if (checkDailyDownload && subscribeToAlerts) {
+      trackSubscription('Email Alerts & Daily Downloads', numLocations);
+    } else if (subscribeToAlerts) {
+      trackSubscription('Email Alerts Only', numLocations);
+    } else {
+      trackSubscription('Daily Download Only', numLocations);
+    }
   }
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    // TODO: Get regions + email + checked and subscribe
+    subscribeToAlerts();
     event.preventDefault();
   };
 

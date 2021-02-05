@@ -7,11 +7,11 @@ import {
   TwitterIcon,
   LinkedinIcon,
 } from 'react-share';
-import Newsletter from 'components/Newsletter/Newsletter';
+// import Newsletter from 'components/Newsletter/Newsletter';
 import SocialLocationPreview from 'components/SocialLocationPreview/SocialLocationPreview';
 import { Projections } from 'common/models/Projections';
 import * as urls from 'common/urls';
-import NewsletterMockup from 'assets/images/newsletterMockup';
+// import NewsletterMockup from 'assets/images/newsletterMockup';
 import {
   ShareButtonContainer,
   ShareContainer,
@@ -20,9 +20,9 @@ import {
   StyledShareButton,
   ShareRow,
   ShareRowContentArea,
-  NewsletterMockupWrapper,
+  // NewsletterMockupWrapper,
   SocialMockupWrapper,
-  NewsletterTextArea,
+  // NewsletterTextArea,
   SocialTextArea,
   SocialTextAreaWrapper,
   EmbedPrompt,
