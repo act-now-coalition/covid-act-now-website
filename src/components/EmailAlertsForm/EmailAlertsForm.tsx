@@ -15,6 +15,7 @@ import {
   AlertsInfoBoxCopy,
 } from './EmailAlertsForm.style';
 import AutocompleteRegions from 'components/AutocompleteRegions';
+import { subscribeToLocations } from './utils';
 
 const EmailAlertsForm: React.FC<{
   autocompleteRegions: Region[];
@@ -32,6 +33,15 @@ const EmailAlertsForm: React.FC<{
     setEmail(value);
     setEmailError(!isValidEmail(value) && value !== '');
   };
+
+  function subscribeToAlerts() {
+    if (!isValidEmail(email) || selectedRegions.length === 0) {
+      return;
+    }
+    const fipsCodeList = selectedRegions.map(region => region.fipsCode);
+    subscribeToLocations(email, fipsCodeList);
+    // TODO: Tracking
+  }
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     // TODO: Get regions + email + checked and subscribe
@@ -78,7 +88,9 @@ const EmailAlertsForm: React.FC<{
             placeholder="Enter your email address"
             type="email"
           />
-          <StyledButton>Sign up</StyledButton>
+          <StyledButton onClick={() => subscribeToAlerts()}>
+            Sign up
+          </StyledButton>
         </EmailFieldGroup>
       </StyledFormGroup>
       <StyledFormGroup>
