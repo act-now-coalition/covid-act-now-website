@@ -13,8 +13,11 @@ import {
   AlertsInfoBox,
   AlertsInfoBoxIcon,
   AlertsInfoBoxCopy,
+  LearnMoreCopy,
 } from './EmailAlertsForm.style';
 import AutocompleteRegions from 'components/AutocompleteRegions';
+import SignupsModal from 'components/SignupsModal/SignupsModal';
+import { CenteredContentModal } from 'components/Compare/Compare.style';
 import {
   subscribeToLocations,
   subscribeToDailyDownload,
@@ -41,6 +44,10 @@ const EmailAlertsForm: React.FC<{
   const [selectedRegions, setSelectedRegions] = useState<Region[]>(
     defaultRegions,
   );
+  const [showModal, setShowModal] = useState(false);
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
   const [showConfirmation, setShowConfirmation] = useState(false);
   const formRef = createRef<HTMLFormElement>();
 
@@ -100,72 +107,93 @@ const EmailAlertsForm: React.FC<{
     setSelectedRegions(newRegions);
   };
 
+  const onClickLearnMore = () => {
+    setShowModal(true);
+    trackEvent(
+      EventCategory.ENGAGEMENT,
+      EventAction.CLICK,
+      'Email Alerts: Learn More',
+    );
+  };
+
   const emailInputLabel = emailError ? 'Invalid email' : 'Email';
 
   return (
-    <StyledForm
-      onSubmit={onSubmit}
-      ref={formRef}
-      method="post"
-      data-id={CREATESEND_DATA_ID}
-    >
-      <StyledFormGroup>
-        <AutocompleteRegions
-          regions={autocompleteRegions}
-          selectedRegions={selectedRegions}
-          onChangeRegions={onChangeRegions}
-          placeholder="Add location +"
-        />
-      </StyledFormGroup>
-      <StyledFormGroup>
-        <AlertsInfoBox>
-          <AlertsInfoBoxIcon />
-          <AlertsInfoBoxCopy>
-            Alerts for vaccine eligibility are available for these locations.
-            Learn about our alerts.
-          </AlertsInfoBoxCopy>
-        </AlertsInfoBox>
-      </StyledFormGroup>
-      <StyledFormGroup>
-        <EmailFieldGroup>
-          <EmailTextField
-            id="fieldEmail"
-            className="js-cm-email-input qa-input-email fs-exclude"
-            label={emailInputLabel}
-            error={emailError}
-            onChange={onChangeEmail}
-            value={email}
-            placeholder="Enter your email address"
-            type="email"
-            name="cm-wurhhh-wurhhh"
+    <>
+      <StyledForm
+        onSubmit={onSubmit}
+        ref={formRef}
+        method="post"
+        data-id={CREATESEND_DATA_ID}
+      >
+        <StyledFormGroup>
+          <AutocompleteRegions
+            regions={autocompleteRegions}
+            selectedRegions={selectedRegions}
+            onChangeRegions={onChangeRegions}
+            placeholder="Add location +"
           />
-          <StyledButton
-            onClick={() => subscribeToAlerts()}
-            $success={showConfirmation}
-          >
-            {showConfirmation ? 'Subscribed!' : 'Sign up'}
-          </StyledButton>
-        </EmailFieldGroup>
-      </StyledFormGroup>
-      <StyledFormGroup>
-        <StyledFormControlLabel
-          labelPlacement="end"
-          control={
-            <StyledCheckbox
-              checked={checkDailyDownload}
-              onChange={onChangeDailyDownload}
-              name="check-daily-download"
+        </StyledFormGroup>
+        <StyledFormGroup>
+          <AlertsInfoBox>
+            <AlertsInfoBoxIcon />
+            <AlertsInfoBoxCopy>
+              Alerts for vaccine eligibility are available for these locations.{' '}
+              <LearnMoreCopy
+                tabIndex={0}
+                role="button"
+                onClick={onClickLearnMore}
+              >
+                Learn about our alerts
+              </LearnMoreCopy>
+              .
+            </AlertsInfoBoxCopy>
+          </AlertsInfoBox>
+        </StyledFormGroup>
+        <StyledFormGroup>
+          <EmailFieldGroup>
+            <EmailTextField
+              id="fieldEmail"
+              className="js-cm-email-input qa-input-email fs-exclude"
+              label={emailInputLabel}
+              error={emailError}
+              onChange={onChangeEmail}
+              value={email}
+              placeholder="Enter your email address"
+              type="email"
+              name="cm-wurhhh-wurhhh"
             />
-          }
-          label={
-            <StyledCheckboxLabel>
-              Also send me <strong>daily news</strong> with the latest data and
-              scientific findings
-            </StyledCheckboxLabel>
-          }
-        />
-      </StyledFormGroup>
-    </StyledForm>
+            <StyledButton
+              onClick={() => subscribeToAlerts()}
+              $success={showConfirmation}
+            >
+              {showConfirmation ? 'Subscribed!' : 'Sign up'}
+            </StyledButton>
+          </EmailFieldGroup>
+        </StyledFormGroup>
+        <StyledFormGroup>
+          <StyledFormControlLabel
+            labelPlacement="end"
+            control={
+              <StyledCheckbox
+                checked={checkDailyDownload}
+                onChange={onChangeDailyDownload}
+                name="check-daily-download"
+              />
+            }
+            label={
+              <StyledCheckboxLabel>
+                Also send me <strong>daily news</strong> with the latest data
+                and scientific findings
+              </StyledCheckboxLabel>
+            }
+          />
+        </StyledFormGroup>
+      </StyledForm>
+      <CenteredContentModal open={showModal} onClose={handleCloseModal}>
+        <SignupsModal handleCloseModal={handleCloseModal} />
+      </CenteredContentModal>
+    </>
   );
 };
 

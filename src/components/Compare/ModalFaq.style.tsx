@@ -28,6 +28,7 @@ export const Content = styled.div`
   flex-direction: column;
   overflow-y: auto;
   max-height: 100%;
+  padding: 0 2rem 0 0.5rem;
 `;
 
 export const Header = styled(Typography)`
