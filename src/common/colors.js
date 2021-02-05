@@ -13,6 +13,7 @@ export default {
 // From Figma
 export const GREY_0 = '#fafafa';
 export const GREY_1 = '#f2f2f2';
+export const GREY_2 = '#e5e5e5';
 export const GREY_3 = '#bdbdbd';
 export const GREY_4 = '#828282';
 export const GREY_5 = '#4f4f4f';
@@ -50,6 +51,7 @@ export const COLOR_MAP = {
   // Figma
   GREY_0,
   GREY_1,
+  GREY_2,
   GREY_3,
   GREY_4,
   GREY_5,
