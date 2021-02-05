@@ -44,6 +44,10 @@ function trackSubscription(label: string, numLocations: number) {
   );
 }
 
+function hasVaccinationAlerts(region: Region) {
+  return region instanceof State;
+}
+
 const EmailAlertsForm: React.FC<{
   autocompleteRegions: Region[];
   defaultRegions: Region[];
@@ -158,6 +162,13 @@ const EmailAlertsForm: React.FC<{
     );
   };
 
+  const hasRegionsWithVaccinationAlerts =
+    selectedRegions.filter(hasVaccinationAlerts).length > 0;
+
+  const autocompletePlaceholder = hasRegionsWithVaccinationAlerts
+    ? 'Add a state to get vaccine eligibility alerts +'
+    : 'Add location +';
+
   return (
     <>
       <StyledForm
@@ -171,7 +182,7 @@ const EmailAlertsForm: React.FC<{
             regions={autocompleteRegions}
             selectedRegions={selectedRegions}
             onChangeRegions={onChangeRegions}
-            placeholder="Add location +"
+            placeholder={autocompletePlaceholder}
             renderTags={renderTags}
           />
         </StyledFormGroup>
