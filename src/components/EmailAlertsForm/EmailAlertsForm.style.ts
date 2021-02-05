@@ -38,6 +38,10 @@ export const EmailTextField = styled(StyledTextField).attrs(props => ({
   & label.Mui-focused {
     color: ${COLOR_MAP.GRAY_BODY_COPY};
   }
+
+  & label {
+    color: ${COLOR_MAP.GREY_600};
+  }
 `;
 
 export const StyledButton = styled(BaseButton).attrs(props => ({

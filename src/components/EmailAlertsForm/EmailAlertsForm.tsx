@@ -119,7 +119,9 @@ const EmailAlertsForm: React.FC<{
     );
   };
 
-  const emailInputLabel = emailError ? 'Invalid email' : 'Enter email address';
+  const emailInputLabel = emailError
+    ? 'Invalid email'
+    : 'Enter your email address';
 
   return (
     <>
@@ -162,7 +164,7 @@ const EmailAlertsForm: React.FC<{
               error={emailError}
               onChange={onChangeEmail}
               value={email}
-              placeholder="Enter your email address"
+              placeholder={emailInputLabel}
               type="email"
               name="cm-wurhhh-wurhhh"
             />
