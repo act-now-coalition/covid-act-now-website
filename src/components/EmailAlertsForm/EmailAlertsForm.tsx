@@ -166,8 +166,8 @@ const EmailAlertsForm: React.FC<{
     selectedRegions.filter(hasVaccinationAlerts).length > 0;
 
   const autocompletePlaceholder = hasRegionsWithVaccinationAlerts
-    ? 'Add a state to get vaccine eligibility alerts +'
-    : 'Add location +';
+    ? '+ Add a state to get vaccine eligibility alerts'
+    : '+ Add location';
 
   return (
     <>
@@ -184,6 +184,7 @@ const EmailAlertsForm: React.FC<{
             onChangeRegions={onChangeRegions}
             placeholder={autocompletePlaceholder}
             renderTags={renderTags}
+            placeholderMinWidth="100%"
           />
         </StyledFormGroup>
         <StyledFormGroup>
