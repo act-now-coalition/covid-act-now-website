@@ -27,6 +27,7 @@ export const Section = styled.div`
 `;
 
 export const Heading2 = styled(H2)`
+  margin-top: 12px;
   margin-bottom: 16px;
 `;
 
