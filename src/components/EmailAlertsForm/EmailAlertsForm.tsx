@@ -41,7 +41,6 @@ const EmailAlertsForm: React.FC<{
   const [selectedRegions, setSelectedRegions] = useState<Region[]>(
     defaultRegions,
   );
-  const [submitUrl, setSubmitUrl] = useState('');
   const formRef = createRef<HTMLFormElement>();
 
   const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
