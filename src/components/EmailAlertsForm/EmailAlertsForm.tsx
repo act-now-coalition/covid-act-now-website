@@ -41,6 +41,7 @@ const EmailAlertsForm: React.FC<{
   const [selectedRegions, setSelectedRegions] = useState<Region[]>(
     defaultRegions,
   );
+  const [showConfirmation, setShowConfirmation] = useState(false);
   const formRef = createRef<HTMLFormElement>();
 
   const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
@@ -76,6 +77,13 @@ const EmailAlertsForm: React.FC<{
         formRef.current.action = secureUrl;
         formRef.current.submit();
       }
+    } else {
+      // Since we didn't use the Campaign Monitor signup form we need to show our
+      // own confirmation UI (just change the button text/color for 3sec).
+      setShowConfirmation(true);
+      setTimeout(() => {
+        setShowConfirmation(false);
+      }, 3000);
     }
   }
 
@@ -131,8 +139,11 @@ const EmailAlertsForm: React.FC<{
             type="email"
             name="cm-wurhhh-wurhhh"
           />
-          <StyledButton onClick={() => subscribeToAlerts()}>
-            Sign up
+          <StyledButton
+            onClick={() => subscribeToAlerts()}
+            $success={showConfirmation}
+          >
+            {showConfirmation ? 'Subscribed!' : 'Sign up'}
           </StyledButton>
         </EmailFieldGroup>
       </StyledFormGroup>
