@@ -1,4 +1,10 @@
-import React, { useState, createRef, ChangeEvent, FormEvent } from 'react';
+import React, {
+  Fragment,
+  useState,
+  createRef,
+  ChangeEvent,
+  FormEvent,
+} from 'react';
 import { isValidEmail } from 'common/utils';
 import { Region } from 'common/regions';
 import {
@@ -24,6 +30,7 @@ import {
   CREATESEND_DATA_ID,
 } from './utils';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
+import { Chip } from '@material-ui/core';
 
 function trackSubscription(label: string, numLocations: number) {
   trackEvent(
@@ -137,6 +144,15 @@ const EmailAlertsForm: React.FC<{
             selectedRegions={selectedRegions}
             onChangeRegions={onChangeRegions}
             placeholder="Add location +"
+            renderTags={(regionItems, getTagProps) => {
+              return (
+                <Fragment>
+                  {regionItems.map(region => {
+                    return <Chip label={region.fullName} />;
+                  })}
+                </Fragment>
+              );
+            }}
           />
         </StyledFormGroup>
         <StyledFormGroup>
