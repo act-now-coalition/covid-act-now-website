@@ -11,29 +11,6 @@ import {
 import { LockBodyScroll } from 'components/Dialog';
 import { useEscCloseModal } from 'common/hooks';
 
-const metrosWithVaccinationAlerts = [
-  'New York-Newark-Jersey City, NY-NJ-PA',
-  'Los Angeles-Long Beach-Anaheim, CA',
-  'Chicago-Naperville-Elgin, IL-IN-WI',
-  'Dallas-Fort Worth-Arlington TX',
-  'Houston-The Woodlands-Sugar Land, TX',
-  'Miami-Fort Lauderdale-Pompano Beach, FL',
-  'Philadelphia-Camden-Wilmington, PA-NJ-DE-MD',
-  'Atlanta-Sandy Springs-Alpharetta, GA',
-  'Washington-Arlington-Alexandria, DC--VA-MD-WV',
-  'Phoenix-Mesa-Chandler, AZ',
-  'Boston-Cambridge-Newton, MA-NH',
-  'San Francisco-Oakland-Berkeley, CADetroit-Warren-Ann Arbor, MI',
-  'Riverside-San Bernardino-Ontario, CA',
-  'Detroit-Warren-Dearborn, MI',
-  'Seattle-Tacoma-Bellevue, WA',
-  'Minneapolis-St. Paul-Bloomington, MN-WI',
-  'San Diego-Chula Vista-Carlsbad, CA',
-  'Tampa-St. Petersburg-Clearwater, FL',
-  'Denver-Aurora-Lakewood, CO',
-  'St. Louis, MO-IL',
-];
-
 const SignupsModal = (props: { handleCloseModal: () => void }) => {
   useEscCloseModal(props.handleCloseModal);
 
@@ -49,13 +26,7 @@ const SignupsModal = (props: { handleCloseModal: () => void }) => {
             Which locations do you have vaccine eligibility information for?
           </Question>
           <Answer>
-            We currently have vaccine eligibility information for all 50 states
-            and the top 20 metros by population:
-            <ol>
-              {metrosWithVaccinationAlerts.map((metro: string, i: number) => (
-                <li key={`${i}: ${metro}`}>{metro}</li>
-              ))}
-            </ol>
+            We currently have vaccine eligibility information for all 50 states.
           </Answer>
           <Question>
             How do you get your vaccine eligibility information?
