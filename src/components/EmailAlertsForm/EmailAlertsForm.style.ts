@@ -43,7 +43,7 @@ export const EmailTextField = styled(StyledTextField).attrs(props => ({
 export const StyledButton = styled(BaseButton).attrs(props => ({
   variant: 'contained',
 }))<{ $success: boolean }>`
-  min-width: 100px;
+  min-width: 110px;
   background-color: ${props =>
     props.$success ? COLOR_MAP.GREEN.BASE : ACCESSIBLE_BLUE};
   color: white;
