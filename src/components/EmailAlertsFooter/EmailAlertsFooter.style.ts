@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 import { mobileBreakpoint } from 'assets/theme/sizes';
 import { Heading2 as H2, Paragraph as P } from 'components/Markdown';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import AlertIcon from 'assets/images/EmailAlertIcon';
 
 export const Container = styled.div`
