@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 import { mobileBreakpoint } from 'assets/theme/sizes';
 import { Heading2 as H2, Paragraph as P } from 'components/Markdown';
+import AlertIcon from 'assets/images/EmailAlertIcon';
 
 export const Container = styled.div`
   text-align: center;
@@ -34,10 +35,8 @@ export const Paragraph = styled(P)`
   margin-bottom: 0;
 `;
 
-export const EmailAlertIcon = styled.div`
+export const EmailAlertIcon = styled(AlertIcon)`
   margin: 0 auto;
-  width: 48px;
-  height: 48px;
-  background-color: white;
-  border: solid 1px black;
+  width: 40px;
+  height: 40px;
 `;

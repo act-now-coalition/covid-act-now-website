@@ -42,14 +42,16 @@ export const EmailTextField = styled(StyledTextField).attrs(props => ({
 
 export const StyledButton = styled(BaseButton).attrs(props => ({
   variant: 'contained',
-}))`
-  min-width: 90px;
-  background-color: ${ACCESSIBLE_BLUE};
+}))<{ $success: boolean }>`
+  min-width: 110px;
+  background-color: ${props =>
+    props.$success ? COLOR_MAP.GREEN.BASE : ACCESSIBLE_BLUE};
   color: white;
   border-radius: 0 4px 4px 0;
 
   &:hover {
-    background-color: ${ACCESSIBLE_BLUE};
+    background-color: ${props =>
+      props.$success ? COLOR_MAP.GREEN.BASE : ACCESSIBLE_BLUE};
   }
 `;
 

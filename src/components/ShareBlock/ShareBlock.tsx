@@ -7,11 +7,11 @@ import {
   TwitterIcon,
   LinkedinIcon,
 } from 'react-share';
-import Newsletter from 'components/Newsletter/Newsletter';
+// import Newsletter from 'components/Newsletter/Newsletter';
 import SocialLocationPreview from 'components/SocialLocationPreview/SocialLocationPreview';
 import { Projections } from 'common/models/Projections';
 import * as urls from 'common/urls';
-import NewsletterMockup from 'assets/images/newsletterMockup';
+// import NewsletterMockup from 'assets/images/newsletterMockup';
 import {
   ShareButtonContainer,
   ShareContainer,
@@ -20,9 +20,9 @@ import {
   StyledShareButton,
   ShareRow,
   ShareRowContentArea,
-  NewsletterMockupWrapper,
+  // NewsletterMockupWrapper,
   SocialMockupWrapper,
-  NewsletterTextArea,
+  // NewsletterTextArea,
   SocialTextArea,
   SocialTextAreaWrapper,
   EmbedPrompt,
@@ -32,6 +32,7 @@ import { Region } from 'common/regions';
 import { STATES } from 'common';
 import { matchPath, useLocation } from 'react-router';
 import EmailAlertsFooter from 'components/EmailAlertsFooter';
+import { getDefaultRegions } from 'components/EmailAlertsForm/utils';
 
 const ShareBlock = ({
   region,
@@ -69,10 +70,12 @@ const ShareBlock = ({
     strict: false,
   });
 
+  const defaultSignupRegions = region ? getDefaultRegions(region) : [];
+
   return (
     <ShareContainer>
       {/* TODO: Add the default regions corresponding to the current page */}
-      <EmailAlertsFooter defaultRegions={[]} />
+      <EmailAlertsFooter defaultRegions={defaultSignupRegions} />
       <ShareRow newsletter={false}>
         <ShareRowContentArea
           isMatchingProjectionsRoute={isMatchingProjectionsRoute !== null}
