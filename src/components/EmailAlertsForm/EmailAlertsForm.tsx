@@ -15,6 +15,8 @@ import {
   AlertsInfoBoxCopy,
 } from './EmailAlertsForm.style';
 import AutocompleteRegions from 'components/AutocompleteRegions';
+import SignupsModal from 'components/SignupsModal/SignupsModal';
+import { CenteredContentModal } from 'components/Compare/Compare.style';
 
 const EmailAlertsForm: React.FC<{
   autocompleteRegions: Region[];
@@ -26,6 +28,10 @@ const EmailAlertsForm: React.FC<{
   const [selectedRegions, setSelectedRegions] = useState<Region[]>(
     defaultRegions,
   );
+  const [showModal, setShowModal] = useState(false);
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -49,57 +55,68 @@ const EmailAlertsForm: React.FC<{
   const emailInputLabel = emailError ? 'Invalid email' : 'Email';
 
   return (
-    <StyledForm onSubmit={onSubmit}>
-      <StyledFormGroup>
-        <AutocompleteRegions
-          regions={autocompleteRegions}
-          selectedRegions={selectedRegions}
-          onChangeRegions={onChangeRegions}
-          placeholder="Add location +"
-        />
-      </StyledFormGroup>
-      <StyledFormGroup>
-        <AlertsInfoBox>
-          <AlertsInfoBoxIcon />
-          <AlertsInfoBoxCopy>
-            Alerts for vaccine eligibility are available for these locations.
-            Learn about our alerts.
-          </AlertsInfoBoxCopy>
-        </AlertsInfoBox>
-      </StyledFormGroup>
-      <StyledFormGroup>
-        <EmailFieldGroup>
-          <EmailTextField
-            id="user-email"
-            label={emailInputLabel}
-            error={emailError}
-            onChange={onChangeEmail}
-            value={email}
-            placeholder="Enter your email address"
-            type="email"
+    <>
+      <StyledForm onSubmit={onSubmit}>
+        <StyledFormGroup>
+          <AutocompleteRegions
+            regions={autocompleteRegions}
+            selectedRegions={selectedRegions}
+            onChangeRegions={onChangeRegions}
+            placeholder="Add location +"
           />
-          <StyledButton>Sign up</StyledButton>
-        </EmailFieldGroup>
-      </StyledFormGroup>
-      <StyledFormGroup>
-        <StyledFormControlLabel
-          labelPlacement="end"
-          control={
-            <StyledCheckbox
-              checked={checkDailyDownload}
-              onChange={onChangeDailyDownload}
-              name="check-daily-download"
+        </StyledFormGroup>
+        <StyledFormGroup>
+          <AlertsInfoBox>
+            <AlertsInfoBoxIcon />
+            <AlertsInfoBoxCopy>
+              Alerts for vaccine eligibility are available for these locations.{' '}
+              <span
+                tabIndex={0}
+                role="button"
+                onClick={() => setShowModal(true)}
+              >
+                Learn about our alerts.
+              </span>
+            </AlertsInfoBoxCopy>
+          </AlertsInfoBox>
+        </StyledFormGroup>
+        <StyledFormGroup>
+          <EmailFieldGroup>
+            <EmailTextField
+              id="user-email"
+              label={emailInputLabel}
+              error={emailError}
+              onChange={onChangeEmail}
+              value={email}
+              placeholder="Enter your email address"
+              type="email"
             />
-          }
-          label={
-            <StyledCheckboxLabel>
-              Also send me <strong>daily news</strong> with the latest data and
-              scientific findings
-            </StyledCheckboxLabel>
-          }
-        />
-      </StyledFormGroup>
-    </StyledForm>
+            <StyledButton>Sign up</StyledButton>
+          </EmailFieldGroup>
+        </StyledFormGroup>
+        <StyledFormGroup>
+          <StyledFormControlLabel
+            labelPlacement="end"
+            control={
+              <StyledCheckbox
+                checked={checkDailyDownload}
+                onChange={onChangeDailyDownload}
+                name="check-daily-download"
+              />
+            }
+            label={
+              <StyledCheckboxLabel>
+                Also send me <strong>daily news</strong> with the latest data
+                and scientific findings
+              </StyledCheckboxLabel>
+            }
+          />
+        </StyledFormGroup>
+      </StyledForm>
+      <CenteredContentModal open={showModal} onClose={handleCloseModal}>
+        <SignupsModal handleCloseModal={handleCloseModal} />
+      </CenteredContentModal>
+    </>
   );
 };
 
