@@ -11,7 +11,9 @@ import ImmunizationIcon from 'assets/images/ImmunizationIcon';
 
 const ACCESSIBLE_BLUE = '#00819E';
 
-export const StyledForm = styled.form``;
+export const StyledForm = styled.form`
+  text-align: left;
+`;
 
 const fieldsetStyle = {
   borderRadius: '4px 0 0 4px',
@@ -31,6 +33,7 @@ export const EmailTextField = styled(StyledTextField).attrs(props => ({
   variant: 'outlined',
 }))`
   width: 100%;
+  background-color: white;
 
   & label.Mui-focused {
     color: ${COLOR_MAP.GRAY_BODY_COPY};
@@ -100,7 +103,7 @@ export const AlertsInfoBox = styled.div`
   display: flex;
   align-items: flex-start;
   padding: 12px;
-  background: ${COLOR_MAP.GREY_100};
+  background: ${COLOR_MAP.LIGHTGRAY};
   border-radius: 4px;
 
   & > * {

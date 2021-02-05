@@ -31,6 +31,7 @@ import { trackShare } from 'components/Analytics';
 import { Region } from 'common/regions';
 import { STATES } from 'common';
 import { matchPath, useLocation } from 'react-router';
+import EmailAlertsFooter from 'components/EmailAlertsFooter';
 
 const ShareBlock = ({
   region,
@@ -70,25 +71,8 @@ const ShareBlock = ({
 
   return (
     <ShareContainer>
-      <ShareRow newsletter>
-        <ShareRowContentArea
-          isMatchingProjectionsRoute={isMatchingProjectionsRoute !== null}
-        >
-          <NewsletterMockupWrapper>
-            <NewsletterMockup />
-          </NewsletterMockupWrapper>
-          <NewsletterTextArea>
-            <ShareInstructionHeader $alertsInstructions>
-              Receive Alerts
-            </ShareInstructionHeader>
-            <ShareInstructionBody $alertsInstructions>
-              We'll email you when your state or county sees a significant
-              change in one of their metrics and overall risk score.
-            </ShareInstructionBody>
-            <Newsletter region={region} />
-          </NewsletterTextArea>
-        </ShareRowContentArea>
-      </ShareRow>
+      {/* TODO: Add the default regions corresponding to the current page */}
+      <EmailAlertsFooter defaultRegions={[]} />
       <ShareRow newsletter={false}>
         <ShareRowContentArea
           isMatchingProjectionsRoute={isMatchingProjectionsRoute !== null}

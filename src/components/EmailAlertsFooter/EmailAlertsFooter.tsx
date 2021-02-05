@@ -1,4 +1,5 @@
 import React from 'react';
+import regions, { Region } from 'common/regions';
 import {
   Container,
   Content,
@@ -7,8 +8,11 @@ import {
   EmailAlertIcon,
   Section,
 } from './EmailAlertsFooter.style';
+import EmailAlertsForm from 'components/EmailAlertsForm';
 
-const EmailAlertsFooter: React.FC = () => {
+const EmailAlertsFooter: React.FC<{ defaultRegions: Region[] }> = ({
+  defaultRegions,
+}) => {
   return (
     <Container>
       <Content>
@@ -23,7 +27,12 @@ const EmailAlertsFooter: React.FC = () => {
             .
           </Paragraph>
         </Section>
-        {/* Email Alerts Form */}
+        <Section key="email-form">
+          <EmailAlertsForm
+            autocompleteRegions={regions.all()}
+            defaultRegions={defaultRegions}
+          />
+        </Section>
       </Content>
     </Container>
   );
