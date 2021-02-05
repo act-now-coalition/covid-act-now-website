@@ -13,6 +13,7 @@ import {
   AlertsInfoBox,
   AlertsInfoBoxIcon,
   AlertsInfoBoxCopy,
+  LearnMoreCopy,
 } from './EmailAlertsForm.style';
 import AutocompleteRegions from 'components/AutocompleteRegions';
 import SignupsModal from 'components/SignupsModal/SignupsModal';
@@ -70,13 +71,13 @@ const EmailAlertsForm: React.FC<{
             <AlertsInfoBoxIcon />
             <AlertsInfoBoxCopy>
               Alerts for vaccine eligibility are available for these locations.{' '}
-              <span
+              <LearnMoreCopy
                 tabIndex={0}
                 role="button"
                 onClick={() => setShowModal(true)}
               >
                 Learn about our alerts.
-              </span>
+              </LearnMoreCopy>
             </AlertsInfoBoxCopy>
           </AlertsInfoBox>
         </StyledFormGroup>
