@@ -20,6 +20,8 @@ import {
   AlertsInfoBoxIcon,
   AlertsInfoBoxCopy,
   LearnMoreCopy,
+  VaccinationIcon,
+  LocationChip,
 } from './EmailAlertsForm.style';
 import AutocompleteRegions from 'components/AutocompleteRegions';
 import SignupsModal from 'components/SignupsModal/SignupsModal';
@@ -31,6 +33,8 @@ import {
 } from './utils';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import { Chip } from '@material-ui/core';
+import { AutocompleteGetTagProps } from '@material-ui/lab/Autocomplete';
+import { State } from 'common/regions';
 
 function trackSubscription(label: string, numLocations: number) {
   trackEvent(
@@ -130,6 +134,31 @@ const EmailAlertsForm: React.FC<{
     ? 'Invalid email'
     : 'Enter your email address';
 
+  const renderTags = (
+    regionItems: Region[],
+    getTagProps?: AutocompleteGetTagProps,
+  ): React.ReactNode | undefined => {
+    return (
+      <Fragment>
+        {regionItems.map((region: Region, index: number) => {
+          const isState = region instanceof State;
+          const tagProps = getTagProps ? getTagProps({ index }) : {};
+          const chipProps = {
+            icon: isState ? <VaccinationIcon /> : undefined,
+            ...tagProps,
+          };
+          return (
+            <LocationChip
+              key={region.fipsCode}
+              label={region.fullName}
+              {...chipProps}
+            />
+          );
+        })}
+      </Fragment>
+    );
+  };
+
   return (
     <>
       <StyledForm
@@ -144,15 +173,7 @@ const EmailAlertsForm: React.FC<{
             selectedRegions={selectedRegions}
             onChangeRegions={onChangeRegions}
             placeholder="Add location +"
-            renderTags={(regionItems, getTagProps) => {
-              return (
-                <Fragment>
-                  {regionItems.map(region => {
-                    return <Chip label={region.fullName} />;
-                  })}
-                </Fragment>
-              );
-            }}
+            renderTags={renderTags}
           />
         </StyledFormGroup>
         <StyledFormGroup>
