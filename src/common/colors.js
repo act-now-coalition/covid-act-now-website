@@ -10,6 +10,13 @@ export default {
   LIGHTGRAY: '#f2f2f2',
 };
 
+// From Figma
+export const GREY_0 = '#fafafa';
+export const GREY_1 = '#f2f2f2';
+export const GREY_3 = '#bdbdbd';
+export const GREY_4 = '#828282';
+export const GREY_5 = '#4f4f4f';
+
 export const COLOR_MAP = {
   ORANGE: {
     BASE: '#FFC900',
@@ -33,21 +40,29 @@ export const COLOR_MAP = {
   },
   BLUE: '#3BBCE6',
   LIGHT_BLUE: '#00bfea',
-  GRAY_BODY_COPY: '#4f4f4f',
+  GRAY_BODY_COPY: GREY_5,
   GRAY_EXPLORE_CHART: '#e0e0e0',
   GRAY: {
     BASE: '#CCCCCC',
     LIGHT: '#E3E3E3',
     DARK: '#999999',
   },
+  // Figma
+  GREY_0,
+  GREY_1,
+  GREY_3,
+  GREY_4,
+  GREY_5,
+  // Material UI
   GREY_50: grey[50],
   GREY_100: grey[100],
   GREY_200: grey[200],
   GREY_600: grey[600],
-  GRAY_ICON: '#bdbdbd',
+  GREY_800: grey[800],
+  GRAY_ICON: GREY_3,
   PURPLE: '#5900EA',
-  LIGHTGRAY: '#f2f2f2',
-  LIGHTGRAY_BG: '#fafafa',
+  LIGHTGRAY: GREY_0,
+  LIGHTGRAY_BG: GREY_0,
   LIGHT_YELLOW: '#FFF1BF',
   BLACK: '#000000',
 };

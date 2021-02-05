@@ -8,6 +8,7 @@ import { COLOR_MAP } from 'common/colors';
 import { BaseButton } from 'components/Button';
 import { Paragraph } from 'components/Markdown';
 import ImmunizationIcon from 'assets/images/ImmunizationIcon';
+import { Chip } from '@material-ui/core';
 
 export const StyledForm = styled.form`
   text-align: left;
@@ -34,11 +35,11 @@ export const EmailTextField = styled(StyledTextField).attrs(props => ({
   background-color: white;
 
   & label.Mui-focused {
-    color: ${COLOR_MAP.GRAY_BODY_COPY};
+    color: ${COLOR_MAP.GREY_5};
   }
 
   & label {
-    color: ${COLOR_MAP.GREY_600};
+    color: ${COLOR_MAP.GREY_4};
   }
 `;
 
@@ -107,7 +108,7 @@ export const AlertsInfoBox = styled.div`
   display: flex;
   align-items: flex-start;
   padding: 12px;
-  background: ${COLOR_MAP.LIGHTGRAY};
+  background: ${COLOR_MAP.GREY_1};
   border-radius: 4px;
 
   & > * {
@@ -118,8 +119,12 @@ export const AlertsInfoBox = styled.div`
   }
 `;
 
-export const AlertsInfoBoxIcon = styled(ImmunizationIcon)`
+export const AlertsInfoBoxIcon = styled(ImmunizationIcon).attrs(props => ({
+  width: 20,
+  height: 20,
+}))`
   flex: 0 0 auto;
+  align-self: center;
 `;
 
 export const AlertsInfoBoxCopy = styled(Paragraph)`
@@ -136,5 +141,20 @@ export const LearnMoreCopy = styled.span`
 
   &:hover {
     text-decoration: underline;
+  }
+`;
+
+export const VaccinationIcon = styled(ImmunizationIcon)`
+  padding: 2px;
+  padding-left: 6px;
+`;
+
+export const LocationChip = styled(Chip)`
+  background-color: ${COLOR_MAP.GREY_1};
+  color: ${COLOR_MAP.GREY_5};
+  font-weight: 500;
+
+  span :not(:first-child) {
+    padding-left: 6px;
   }
 `;

@@ -1,6 +1,23 @@
-import React, { useState, createRef, ChangeEvent, FormEvent } from 'react';
+import React, {
+  Fragment,
+  useState,
+  createRef,
+  ChangeEvent,
+  FormEvent,
+} from 'react';
+import { AutocompleteGetTagProps } from '@material-ui/lab/Autocomplete';
 import { isValidEmail } from 'common/utils';
-import { Region } from 'common/regions';
+import { Region, State } from 'common/regions';
+import AutocompleteRegions from 'components/AutocompleteRegions';
+import SignupsModal from 'components/SignupsModal/SignupsModal';
+import { CenteredContentModal } from 'components/Compare/Compare.style';
+import {
+  subscribeToLocations,
+  subscribeToDailyDownload,
+  CREATESEND_DATA_ID,
+} from './utils';
+import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
+
 import {
   StyledForm,
   EmailTextField,
@@ -14,16 +31,9 @@ import {
   AlertsInfoBoxIcon,
   AlertsInfoBoxCopy,
   LearnMoreCopy,
+  VaccinationIcon,
+  LocationChip,
 } from './EmailAlertsForm.style';
-import AutocompleteRegions from 'components/AutocompleteRegions';
-import SignupsModal from 'components/SignupsModal/SignupsModal';
-import { CenteredContentModal } from 'components/Compare/Compare.style';
-import {
-  subscribeToLocations,
-  subscribeToDailyDownload,
-  CREATESEND_DATA_ID,
-} from './utils';
-import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 
 function trackSubscription(label: string, numLocations: number) {
   trackEvent(
@@ -123,6 +133,31 @@ const EmailAlertsForm: React.FC<{
     ? 'Invalid email'
     : 'Enter your email address';
 
+  const renderTags = (
+    regionItems: Region[],
+    getTagProps?: AutocompleteGetTagProps,
+  ): React.ReactNode | undefined => {
+    return (
+      <Fragment>
+        {regionItems.map((region: Region, index: number) => {
+          const isState = region instanceof State;
+          const tagProps = getTagProps ? getTagProps({ index }) : {};
+          const chipProps = {
+            icon: isState ? <VaccinationIcon /> : undefined,
+            ...tagProps,
+          };
+          return (
+            <LocationChip
+              key={region.fipsCode}
+              label={region.fullName}
+              {...chipProps}
+            />
+          );
+        })}
+      </Fragment>
+    );
+  };
+
   return (
     <>
       <StyledForm
@@ -137,6 +172,7 @@ const EmailAlertsForm: React.FC<{
             selectedRegions={selectedRegions}
             onChangeRegions={onChangeRegions}
             placeholder="Add location +"
+            renderTags={renderTags}
           />
         </StyledFormGroup>
         <StyledFormGroup>

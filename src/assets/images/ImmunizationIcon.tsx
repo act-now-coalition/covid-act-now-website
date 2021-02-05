@@ -1,12 +1,14 @@
 import React from 'react';
+import SvgIcon, { SvgIconProps } from '@material-ui/core/SvgIcon';
 
-const ImmunizationIcon: React.FC = () => (
-  <svg
+const ImmunizationIcon: React.FC<SvgIconProps> = props => (
+  <SvgIcon
     width="33"
     height="32"
     viewBox="0 0 33 32"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    {...props}
   >
     <g clipPath="url(#clip0)">
       <path
@@ -40,7 +42,7 @@ const ImmunizationIcon: React.FC = () => (
         />
       </clipPath>
     </defs>
-  </svg>
+  </SvgIcon>
 );
 
 export default ImmunizationIcon;

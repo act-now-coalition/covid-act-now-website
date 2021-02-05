@@ -1,5 +1,7 @@
 import React from 'react';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import Autocomplete, {
+  AutocompleteGetTagProps,
+} from '@material-ui/lab/Autocomplete';
 import { createFilterOptions } from '@material-ui/lab/useAutocomplete';
 import TextField from '@material-ui/core/TextField';
 import { Region, MetroArea } from 'common/regions';
@@ -28,12 +30,17 @@ const AutocompleteRegions: React.FC<{
   onChangeRegions: (event: React.ChangeEvent<{}>, newRegions: Region[]) => void;
   ariaLabelledBy?: string;
   placeholder?: string;
+  renderTags?: (
+    regionItems: Region[],
+    getTagProps?: AutocompleteGetTagProps,
+  ) => React.ReactNode;
 }> = ({
   regions,
   onChangeRegions,
   selectedRegions,
   ariaLabelledBy,
   placeholder = '+ Add',
+  renderTags,
 }) => {
   const ariaLabelOptions = ariaLabelledBy
     ? { 'aria-labelledby': ariaLabelledBy }
@@ -44,6 +51,8 @@ const AutocompleteRegions: React.FC<{
       return `${region.shortName}, ${region.stateCodes}`;
     } else return region.shortName;
   };
+
+  const renderTagsOption = { renderTags };
 
   return (
     <Autocomplete
@@ -65,6 +74,7 @@ const AutocompleteRegions: React.FC<{
           }}
         />
       )}
+      {...renderTagsOption}
     />
   );
 };
