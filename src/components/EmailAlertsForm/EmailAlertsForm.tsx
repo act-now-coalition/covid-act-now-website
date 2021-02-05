@@ -41,15 +41,18 @@ const EmailAlertsForm: React.FC<{
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState(false);
   const [checkDailyDownload, setCheckDailyDownload] = useState(true);
-  const [selectedRegions, setSelectedRegions] = useState<Region[]>(
-    defaultRegions,
-  );
+  const [selectedRegions, setSelectedRegions] = useState<Region[]>([]);
   const [showModal, setShowModal] = useState(false);
   const handleCloseModal = () => {
     setShowModal(false);
   };
   const [showConfirmation, setShowConfirmation] = useState(false);
   const formRef = createRef<HTMLFormElement>();
+
+  // Set the inital state if the user hasn't selected anything yet
+  if (defaultRegions.length > 0 && selectedRegions.length === 0) {
+    setSelectedRegions(defaultRegions);
+  }
 
   const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;

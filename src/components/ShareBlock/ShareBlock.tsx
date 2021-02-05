@@ -7,11 +7,9 @@ import {
   TwitterIcon,
   LinkedinIcon,
 } from 'react-share';
-// import Newsletter from 'components/Newsletter/Newsletter';
 import SocialLocationPreview from 'components/SocialLocationPreview/SocialLocationPreview';
 import { Projections } from 'common/models/Projections';
 import * as urls from 'common/urls';
-// import NewsletterMockup from 'assets/images/newsletterMockup';
 import {
   ShareButtonContainer,
   ShareContainer,
@@ -20,9 +18,7 @@ import {
   StyledShareButton,
   ShareRow,
   ShareRowContentArea,
-  // NewsletterMockupWrapper,
   SocialMockupWrapper,
-  // NewsletterTextArea,
   SocialTextArea,
   SocialTextAreaWrapper,
   EmbedPrompt,
@@ -33,6 +29,7 @@ import { STATES } from 'common';
 import { matchPath, useLocation } from 'react-router';
 import EmailAlertsFooter from 'components/EmailAlertsFooter';
 import { getDefaultRegions } from 'components/EmailAlertsForm/utils';
+import { useGeolocationRegions } from 'common/hooks';
 
 const ShareBlock = ({
   region,
@@ -70,7 +67,11 @@ const ShareBlock = ({
     strict: false,
   });
 
-  const defaultSignupRegions = region ? getDefaultRegions(region) : [];
+  const geolocatedRegions = useGeolocationRegions();
+
+  const defaultSignupRegions = region
+    ? getDefaultRegions(region)
+    : geolocatedRegions;
 
   return (
     <ShareContainer>
