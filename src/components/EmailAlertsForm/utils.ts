@@ -1,6 +1,5 @@
 import { getFirebase, firebase } from 'common/firebase';
 import { Region, County } from 'common/regions';
-import { getGeolocatedRegions } from 'common/regions/utils';
 
 export function getDefaultRegions(region: Region): Region[] {
   if (region instanceof County) {

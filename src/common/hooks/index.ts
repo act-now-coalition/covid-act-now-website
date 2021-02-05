@@ -5,6 +5,7 @@ import useGeolocation from './useGeolocation';
 import useGeolocationInExplore from './useGeolocationInExplore';
 import useScrollToElement from './useScrollToElement';
 import useEscCloseModal from './useEscCloseModal';
+import useGeolocationRegions from './useGeolocationRegions';
 
 export {
   useScrollToElement,
@@ -14,4 +15,5 @@ export {
   useGeolocation,
   useGeolocationInExplore,
   useEscCloseModal,
+  useGeolocationRegions,
 };
