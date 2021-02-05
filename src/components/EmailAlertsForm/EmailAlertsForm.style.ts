@@ -9,8 +9,6 @@ import { BaseButton } from 'components/Button';
 import { Paragraph } from 'components/Markdown';
 import ImmunizationIcon from 'assets/images/ImmunizationIcon';
 
-const ACCESSIBLE_BLUE = '#00819E';
-
 export const StyledForm = styled.form`
   text-align: left;
 `;
@@ -49,13 +47,13 @@ export const StyledButton = styled(BaseButton).attrs(props => ({
 }))<{ $success: boolean }>`
   min-width: 110px;
   background-color: ${props =>
-    props.$success ? COLOR_MAP.GREEN.BASE : ACCESSIBLE_BLUE};
+    props.$success ? COLOR_MAP.GREEN.BASE : COLOR_MAP.BLUE};
   color: white;
   border-radius: 0 4px 4px 0;
 
   &:hover {
     background-color: ${props =>
-      props.$success ? COLOR_MAP.GREEN.BASE : ACCESSIBLE_BLUE};
+      props.$success ? COLOR_MAP.GREEN.BASE : COLOR_MAP.BLUE};
   }
 `;
 
@@ -101,7 +99,7 @@ export const StyledCheckbox = styled(MuiCheckbox).attrs(props => ({
   }
 
   svg {
-    color: ${ACCESSIBLE_BLUE};
+    color: ${COLOR_MAP.BLUE};
   }
 `;
 
@@ -134,7 +132,7 @@ export const AlertsInfoBoxCopy = styled(Paragraph)`
 
 export const LearnMoreCopy = styled.span`
   cursor: pointer;
-  color: ${ACCESSIBLE_BLUE};
+  color: ${COLOR_MAP.BLUE};
 
   &:hover {
     text-decoration: underline;
