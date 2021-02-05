@@ -15,6 +15,10 @@ const paragraphCss = css`
   &:first-of-type {
     margin-top: 0;
   }
+
+  strong {
+    color: ${COLOR_MAP.BLACK};
+  }
 `;
 
 const heading1Css = css`
