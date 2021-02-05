@@ -13,8 +13,6 @@ export const StyledTextField = styled(TextField)<{
     .MuiAutocomplete-input {
     font-weight: 500;
     font-size: 16px;
-    padding: ${props =>
-      props.$placeholderMinWidth !== '0' ? '10px 4px 1px 8px' : '9.5px 4px'};
     min-width: ${props => props.$placeholderMinWidth};
 
     &::placeholder {
