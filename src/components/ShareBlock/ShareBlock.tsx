@@ -32,6 +32,7 @@ import { Region } from 'common/regions';
 import { STATES } from 'common';
 import { matchPath, useLocation } from 'react-router';
 import EmailAlertsFooter from 'components/EmailAlertsFooter';
+import { getDefaultRegions } from 'components/EmailAlertsForm/utils';
 
 const ShareBlock = ({
   region,
@@ -69,10 +70,12 @@ const ShareBlock = ({
     strict: false,
   });
 
+  const defaultSignupRegions = region ? getDefaultRegions(region) : [];
+
   return (
     <ShareContainer>
       {/* TODO: Add the default regions corresponding to the current page */}
-      <EmailAlertsFooter defaultRegions={[]} />
+      <EmailAlertsFooter defaultRegions={defaultSignupRegions} />
       <ShareRow newsletter={false}>
         <ShareRowContentArea
           isMatchingProjectionsRoute={isMatchingProjectionsRoute !== null}
