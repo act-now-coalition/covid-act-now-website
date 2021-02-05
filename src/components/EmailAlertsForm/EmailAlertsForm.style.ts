@@ -127,3 +127,12 @@ export const AlertsInfoBoxCopy = styled(Paragraph)`
   line-height: 1.4;
   color: black;
 `;
+
+export const LearnMoreCopy = styled.span`
+  cursor: pointer;
+  color: ${ACCESSIBLE_BLUE};
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
