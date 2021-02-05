@@ -119,7 +119,7 @@ const EmailAlertsForm: React.FC<{
     );
   };
 
-  const emailInputLabel = emailError ? 'Invalid email' : 'Email';
+  const emailInputLabel = emailError ? 'Invalid email' : 'Enter email address';
 
   return (
     <>
