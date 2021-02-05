@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { useState, createRef, ChangeEvent, FormEvent } from 'react';
 import { isValidEmail } from 'common/utils';
 import { Region } from 'common/regions';
 import {
@@ -15,7 +15,11 @@ import {
   AlertsInfoBoxCopy,
 } from './EmailAlertsForm.style';
 import AutocompleteRegions from 'components/AutocompleteRegions';
-import { subscribeToLocations, subscribeToDailyDownload } from './utils';
+import {
+  subscribeToLocations,
+  subscribeToDailyDownload,
+  CREATESEND_DATA_ID,
+} from './utils';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 
 function trackSubscription(label: string, numLocations: number) {
@@ -37,6 +41,8 @@ const EmailAlertsForm: React.FC<{
   const [selectedRegions, setSelectedRegions] = useState<Region[]>(
     defaultRegions,
   );
+  const [submitUrl, setSubmitUrl] = useState('');
+  const formRef = createRef<HTMLFormElement>();
 
   const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -44,7 +50,7 @@ const EmailAlertsForm: React.FC<{
     setEmailError(!isValidEmail(value) && value !== '');
   };
 
-  function subscribeToAlerts() {
+  async function subscribeToAlerts() {
     if (!isValidEmail(email)) {
       return;
     }
@@ -54,11 +60,7 @@ const EmailAlertsForm: React.FC<{
 
     if (subscribeToAlerts) {
       const fipsCodeList = selectedRegions.map(region => region.fipsCode);
-      subscribeToLocations(email, fipsCodeList);
-    }
-
-    if (checkDailyDownload) {
-      subscribeToDailyDownload(email);
+      await subscribeToLocations(email, fipsCodeList);
     }
 
     if (checkDailyDownload && subscribeToAlerts) {
@@ -67,6 +69,14 @@ const EmailAlertsForm: React.FC<{
       trackSubscription('Email Alerts Only', numLocations);
     } else {
       trackSubscription('Daily Download Only', numLocations);
+    }
+
+    if (checkDailyDownload) {
+      const secureUrl = await subscribeToDailyDownload(email);
+      if (formRef?.current?.action) {
+        formRef.current.action = secureUrl;
+        formRef.current.submit();
+      }
     }
   }
 
@@ -86,7 +96,12 @@ const EmailAlertsForm: React.FC<{
   const emailInputLabel = emailError ? 'Invalid email' : 'Email';
 
   return (
-    <StyledForm onSubmit={onSubmit}>
+    <StyledForm
+      onSubmit={onSubmit}
+      ref={formRef}
+      method="post"
+      data-id={CREATESEND_DATA_ID}
+    >
       <StyledFormGroup>
         <AutocompleteRegions
           regions={autocompleteRegions}
@@ -107,13 +122,15 @@ const EmailAlertsForm: React.FC<{
       <StyledFormGroup>
         <EmailFieldGroup>
           <EmailTextField
-            id="user-email"
+            id="fieldEmail"
+            className="js-cm-email-input qa-input-email fs-exclude"
             label={emailInputLabel}
             error={emailError}
             onChange={onChangeEmail}
             value={email}
             placeholder="Enter your email address"
             type="email"
+            name="cm-wurhhh-wurhhh"
           />
           <StyledButton onClick={() => subscribeToAlerts()}>
             Sign up
