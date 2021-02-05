@@ -54,6 +54,9 @@ const DISABLED_VACCINATIONS = new DisabledFips([
   '23027',
   '23029',
   '23031',
+  '30340',
+  '30620',
+  '38860',
 ]);
 
 /**
