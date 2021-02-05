@@ -85,7 +85,7 @@ export const FeatureBannerButton = styled(MuiButton)`
   &:last-child {
     color: ${COLOR_MAP.BLUE};
     background-color: white;
-    border: 1px solid #e5e5e5;
+    border: 1px solid ${COLOR_MAP.GREY_200};
     margin-left: 0.5rem;
   }
 
@@ -104,12 +104,12 @@ export const FeatureBannerContainer = styled(Grid)`
   ${MainContainerStyles}
   background-color: white;
   color: black;
-  border: 1px solid #e5e5e5;
+  border: 1px solid ${COLOR_MAP.GREY_200};
   border-top: none;
   font-weight: normal;
 
   @media (min-width: ${mobileBreakpoint}) {
-    border-top: 1px solid #e5e5e5;
+    border-top: 1px solid ${COLOR_MAP.GREY_200};
   }
 `;
 

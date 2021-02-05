@@ -36,7 +36,28 @@ const DISABLED_TEST_POSITIVITY = new DisabledFips([]);
 
 const DISABLED_ICU = new DisabledFips([]);
 
-const DISABLED_VACCINATIONS = new DisabledFips([]);
+//https://trello.com/c/9OCK0e3O/878-maine-vaccination-metric-data-off-by-2-decimal-places-likely-ratio-vs-percentage-bug
+const DISABLED_VACCINATIONS = new DisabledFips([
+  '23001',
+  '23003',
+  '23005',
+  '23007',
+  '23009',
+  '23011',
+  '23013',
+  '23015',
+  '23017',
+  '23019',
+  '23021',
+  '23023',
+  '23025',
+  '23027',
+  '23029',
+  '23031',
+  '30340',
+  '30620',
+  '38860',
+]);
 
 /**
  * We truncate (or in the case of charts, switch to a dashed line) the last
