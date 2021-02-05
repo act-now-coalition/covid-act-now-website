@@ -5,8 +5,19 @@ import React, {
   ChangeEvent,
   FormEvent,
 } from 'react';
+import { AutocompleteGetTagProps } from '@material-ui/lab/Autocomplete';
 import { isValidEmail } from 'common/utils';
-import { Region } from 'common/regions';
+import { Region, State } from 'common/regions';
+import AutocompleteRegions from 'components/AutocompleteRegions';
+import SignupsModal from 'components/SignupsModal/SignupsModal';
+import { CenteredContentModal } from 'components/Compare/Compare.style';
+import {
+  subscribeToLocations,
+  subscribeToDailyDownload,
+  CREATESEND_DATA_ID,
+} from './utils';
+import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
+
 import {
   StyledForm,
   EmailTextField,
@@ -23,18 +34,6 @@ import {
   VaccinationIcon,
   LocationChip,
 } from './EmailAlertsForm.style';
-import AutocompleteRegions from 'components/AutocompleteRegions';
-import SignupsModal from 'components/SignupsModal/SignupsModal';
-import { CenteredContentModal } from 'components/Compare/Compare.style';
-import {
-  subscribeToLocations,
-  subscribeToDailyDownload,
-  CREATESEND_DATA_ID,
-} from './utils';
-import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
-import { Chip } from '@material-ui/core';
-import { AutocompleteGetTagProps } from '@material-ui/lab/Autocomplete';
-import { State } from 'common/regions';
 
 function trackSubscription(label: string, numLocations: number) {
   trackEvent(
