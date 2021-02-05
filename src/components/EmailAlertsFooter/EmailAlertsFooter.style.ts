@@ -6,7 +6,7 @@ import AlertIcon from 'assets/images/EmailAlertIcon';
 
 export const Container = styled.div`
   text-align: center;
-  background-color: ${COLOR_MAP.GREY_2};
+  background-color: ${COLOR_MAP.GREY_0};
 
   padding: 40px 16px;
   @media (min-width: ${mobileBreakpoint}) {
