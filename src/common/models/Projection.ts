@@ -36,8 +36,27 @@ const DISABLED_TEST_POSITIVITY = new DisabledFips([]);
 
 const DISABLED_ICU = new DisabledFips([]);
 
+//https://trello.com/c/9OCK0e3O/878-maine-vaccination-metric-data-off-by-2-decimal-places-likely-ratio-vs-percentage-bug
 const DISABLED_VACCINATIONS = new DisabledFips([
-  /39.../, // https://trello.com/c/J3M0Ksb5/827-ohio-county-vaccinations-are-not-cumulative
+  '23001',
+  '23003',
+  '23005',
+  '23007',
+  '23009',
+  '23011',
+  '23013',
+  '23015',
+  '23017',
+  '23019',
+  '23021',
+  '23023',
+  '23025',
+  '23027',
+  '23029',
+  '23031',
+  '30340',
+  '30620',
+  '38860',
 ]);
 
 /**
@@ -114,14 +133,14 @@ export interface ICUCapacityInfo {
 }
 
 export interface VaccinationsInfo {
-  percentCompletedSeries: Array<number | null>;
-  percentInitiatedSeries: Array<number | null>;
+  ratioCompletedSeries: Array<number | null>;
+  ratioInitiatedSeries: Array<number | null>;
 
   peopleInitiated: number;
-  percentInitiated: number;
+  ratioInitiated: number;
 
   peopleVaccinated: number;
-  percentVaccinated: number;
+  ratioVaccinated: number;
 }
 
 /**
@@ -256,10 +275,10 @@ export class Projection {
       metricsTimeseries,
     );
     this.vaccinations =
-      this.vaccinationsInfo?.percentInitiatedSeries ||
+      this.vaccinationsInfo?.ratioInitiatedSeries ||
       this.dates.map(date => null);
     this.vaccinationsCompleted =
-      this.vaccinationsInfo?.percentCompletedSeries ||
+      this.vaccinationsInfo?.ratioCompletedSeries ||
       this.dates.map(date => null);
 
     this.caseDensityByCases = metricsTimeseries.map(
@@ -376,23 +395,22 @@ export class Projection {
       return null;
     }
 
-    const peopleVaccinated = actuals.vaccinationsCompleted;
-    const peopleInitiated = actuals.vaccinationsInitiated;
-    const percentInitiated = metrics.vaccinationsInitiatedRatio;
-    const percentVaccinated = metrics.vaccinationsCompletedRatio;
+    const ratioInitiated = metrics.vaccinationsInitiatedRatio;
+    const ratioVaccinated = metrics.vaccinationsCompletedRatio;
 
     if (
-      peopleVaccinated === null ||
-      peopleVaccinated === undefined ||
-      peopleInitiated === null ||
-      peopleInitiated === undefined ||
-      percentInitiated === null ||
-      percentInitiated === undefined ||
-      percentVaccinated === null ||
-      percentVaccinated === undefined
+      ratioInitiated === null ||
+      ratioInitiated === undefined ||
+      ratioVaccinated === null ||
+      ratioVaccinated === undefined
     ) {
       return null;
     }
+
+    const peopleVaccinated =
+      actuals.vaccinationsCompleted ?? ratioVaccinated * this.totalPopulation;
+    const peopleInitiated =
+      actuals.vaccinationsInitiated ?? ratioInitiated * this.totalPopulation;
 
     const vaccinationsCompletedSeries = metricsTimeseries.map(
       row => row?.vaccinationsCompletedRatio || null,
@@ -404,10 +422,10 @@ export class Projection {
     return {
       peopleVaccinated,
       peopleInitiated,
-      percentInitiated,
-      percentVaccinated,
-      percentCompletedSeries: vaccinationsCompletedSeries,
-      percentInitiatedSeries: vaccinationsInitiatedSeries,
+      ratioInitiated,
+      ratioVaccinated,
+      ratioCompletedSeries: vaccinationsCompletedSeries,
+      ratioInitiatedSeries: vaccinationsInitiatedSeries,
     };
   }
 

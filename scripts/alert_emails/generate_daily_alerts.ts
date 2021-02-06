@@ -14,9 +14,10 @@ import { fetchMainSnapshotNumber } from '../../src/common/utils/snapshots';
 import regions from '../../src/common/regions';
 import { Alert } from './interfaces';
 import moment from 'moment';
-import { getFirestore } from './firestore';
+import { getFirestore } from '../common/firebase';
 import { SummariesMap } from '../../src/common/location_summaries';
 import { Level } from '../../src/common/level';
+import { resolveSnapshot } from './utils';
 
 const summariesFolder = path.join(__dirname, 'summaries');
 const outputFile = path.join(__dirname, 'alerts.json');
@@ -63,10 +64,7 @@ async function main() {
 async function parseArgs(): Promise<{ newSnap: number }> {
   const args = process.argv.slice(2);
   if (args.length === 1) {
-    const newSnap = parseInt(args[0]);
-    if (Number.isNaN(newSnap)) {
-      exitWithUsage();
-    }
+    const newSnap = await resolveSnapshot(args[0]);
     return { newSnap };
   } else {
     exitWithUsage();

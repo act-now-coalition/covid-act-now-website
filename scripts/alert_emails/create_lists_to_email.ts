@@ -2,7 +2,8 @@ import _ from 'lodash';
 import fs from 'fs-extra';
 import path from 'path';
 import { GrpcStatus as FirestoreErrorCode } from '@google-cloud/firestore';
-import { getFirestore } from './firestore';
+import { getFirestore } from '../common/firebase';
+import { resolveSnapshot } from './utils';
 
 function exitWithUsage(): never {
   console.log('Usage: yarn create-lists-to-email alerts.json snapshotId');
@@ -31,10 +32,7 @@ const isValidEmail = (email: string): boolean => EMAIL_REGEX.test(email);
  *
  *   $ yarn create-lists-to-email alerts.json snapshotId
  */
-async function updateSnapshotEmails(
-  alertsFileName: string,
-  snapshotId: string,
-) {
+async function updateSnapshotEmails(alertsFileName: string, snapshot: number) {
   const db = getFirestore();
   const alertsByLocation = readAlertsFile(alertsFileName);
   const fipsList = Object.keys(alertsByLocation);
@@ -59,7 +57,7 @@ async function updateSnapshotEmails(
           try {
             await db
               .collection('snapshots')
-              .doc(`${snapshotId}/locations/${fips}/emails/${email}`)
+              .doc(`${snapshot}/locations/${fips}/emails/${email}`)
               .create({ sentAt: null });
           } catch (updateError) {
             // We don't want to overwrite existing emails for a location to avoid
@@ -86,7 +84,8 @@ const main = async () => {
   }
 
   const [alertsFileName, snapshotId] = args;
-  await updateSnapshotEmails(alertsFileName, snapshotId);
+  const snapshot = await resolveSnapshot(snapshotId);
+  await updateSnapshotEmails(alertsFileName, snapshot);
 };
 
 if (require.main === module) {

@@ -6,15 +6,18 @@ import {
   Wrapper,
   StyledTextField,
   SearchBarIcon,
-  SearchDirections,
+  DesktopSearchDirections,
   ListContainer,
   StyledPaper,
+  MobileSearchDirections,
+  BackArrowIcon,
 } from './HomepageSearchAutocomplete.style';
 import NewMenuItem from 'components/Search/NewMenuItem/NewMenuItem';
 import { getSearchTextFieldStyles } from 'assets/theme/customStyleBlocks/getSearchTextFieldStyles';
 import { getSearchAutocompleteStyles } from 'assets/theme/customStyleBlocks/getSearchAutocompleteStyles';
 import { useBreakpoint } from 'common/hooks';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
+import { LockBodyScroll } from 'components/Dialog';
 
 function getOptionSelected(option: Region, selectedOption: Region) {
   return option.fipsCode === selectedOption.fipsCode;
@@ -89,64 +92,81 @@ const HomepageSearchAutocomplete: React.FC<{
 
   const searchDirectionsText = isOpen ? 'Search city, county, or state' : '';
 
+  const lockBackgroundScroll = isMobile && isOpen;
+
   return (
-    <Wrapper isOpen={isOpen}>
-      <Autocomplete
-        disableListWrap
-        disableClearable
-        disablePortal
-        clearOnEscape
-        fullWidth
-        options={locations}
-        noOptionsText={noOptionsCopy}
-        onInputChange={onInputChange}
-        onChange={onSelect}
-        getOptionSelected={getOptionSelected}
-        filterOptions={createFilterOptions({
-          matchFrom: checkForZipcodeMatch ? 'any' : 'start',
-          limit: filterLimit,
-          stringify: stringifyOption,
-        })}
-        openOnFocus
-        onOpen={() => {
-          trackEvent(EventCategory.SEARCH, EventAction.FOCUS, 'Search Focused');
-          setIsOpen(true);
-          if (setHideMapToggle) {
-            setHideMapToggle(true);
-          }
-        }}
-        onClose={() => {
-          setIsOpen(false);
-          if (setHideMapToggle) {
-            setHideMapToggle(false);
-          }
-        }}
-        PaperComponent={StyledPaper}
-        ListboxComponent={ListContainer}
-        popupIcon={<span />} // adding an empty span removes default MUI arrow icon
-        renderInput={params => (
-          <StyledTextField
-            placeholder={getPlaceholderText()}
-            {...params}
-            className={searchTextFieldStyles.root}
-            $isOpen={isOpen}
-            InputProps={{
-              ...params.InputProps,
-              startAdornment: <SearchBarIcon />,
-            }}
-          />
-        )}
-        renderOption={option => {
-          return <NewMenuItem region={option} zipCodeInput={zipCodeInput} />;
-        }}
-        classes={{
-          option: autocompleteStyles.option,
-          noOptions: autocompleteStyles.noOptions,
-          popperDisablePortal: autocompleteStyles.popperDisablePortal,
-        }}
-      />
-      <SearchDirections>{searchDirectionsText}</SearchDirections>
-    </Wrapper>
+    <>
+      {lockBackgroundScroll && <LockBodyScroll />}
+      <Wrapper $isOpen={isOpen}>
+        <MobileSearchDirections $isOpen={isOpen}>
+          <BackArrowIcon onClick={() => setIsOpen(false)} />
+          <span>
+            Search by <br /> zip, city, county, or state
+          </span>
+        </MobileSearchDirections>
+        <Autocomplete
+          disableListWrap
+          disableClearable
+          disablePortal
+          clearOnEscape
+          fullWidth
+          options={locations}
+          noOptionsText={noOptionsCopy}
+          onInputChange={onInputChange}
+          onChange={onSelect}
+          getOptionSelected={getOptionSelected}
+          filterOptions={createFilterOptions({
+            matchFrom: checkForZipcodeMatch ? 'any' : 'start',
+            limit: filterLimit,
+            stringify: stringifyOption,
+          })}
+          openOnFocus
+          onOpen={() => {
+            trackEvent(
+              EventCategory.SEARCH,
+              EventAction.FOCUS,
+              'Search Focused',
+            );
+            setIsOpen(true);
+            if (setHideMapToggle) {
+              setHideMapToggle(true);
+            }
+          }}
+          onClose={() => {
+            setIsOpen(false);
+            if (setHideMapToggle) {
+              setHideMapToggle(false);
+            }
+          }}
+          PaperComponent={StyledPaper}
+          ListboxComponent={ListContainer}
+          popupIcon={<span />} // adding an empty span removes default MUI arrow icon
+          renderInput={params => (
+            <StyledTextField
+              placeholder={getPlaceholderText()}
+              {...params}
+              className={searchTextFieldStyles.root}
+              $isOpen={isOpen}
+              InputProps={{
+                ...params.InputProps,
+                startAdornment: <SearchBarIcon />,
+              }}
+            />
+          )}
+          renderOption={option => {
+            return <NewMenuItem region={option} zipCodeInput={zipCodeInput} />;
+          }}
+          classes={{
+            option: autocompleteStyles.option,
+            noOptions: autocompleteStyles.noOptions,
+            popperDisablePortal: autocompleteStyles.popperDisablePortal,
+          }}
+        />
+        <DesktopSearchDirections>
+          {searchDirectionsText}
+        </DesktopSearchDirections>
+      </Wrapper>
+    </>
   );
 };
 

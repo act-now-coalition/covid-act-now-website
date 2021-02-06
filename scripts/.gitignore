@@ -1,3 +1,5 @@
 # Used by update-location-summaries.
 slack-summary.txt
 county-history-data.json
+vaccination_alerts/vaccination-alerts.json
+google-service-account.json

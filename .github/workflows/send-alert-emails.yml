@@ -3,25 +3,31 @@ name: Send Alert Emails.
 on:
   repository_dispatch:
     types: send-alert-emails
+  workflow_dispatch:
+    inputs:
+      firebase_env:
+        description: 'Environment to run against (prod, dev, or staging)'
+        required: true
+        default: prod
+      send_emails:
+        description: 'Whether to actually send emails (true) or just do a safe dry-run (false).'
+        required: true
+        default: false
+      snapshot_id:
+        description: 'Snapshot to send alerts for (auto uses currently deployed snapshot).'
+        required: true
+        default: auto
 
 env:
-  SNAPSHOT_ID: ${{ github.event.client_payload.snapshot_id }}
+  SNAPSHOT_ID: ${{ github.event.inputs.snapshot_id }}
   # Should be 'dev', 'staging', or 'prod'. Determines which Firebase project to use.
-  FIREBASE_ENV: ${{ github.event.client_payload.firebase_env }}
+  FIREBASE_ENV: ${{ github.event.inputs.firebase_env }}
   # 'true' or 'false' to indicuate whether we should send the emails or just run (true will send the emails)
-  SEND_EMAILS: ${{ github.event.client_payload.send_emails }}
+  SEND_EMAILS: ${{ github.event.inputs.send_emails }}
 jobs:
   send-alert-emails:
     runs-on: ubuntu-latest
     steps:
-      # Setup
-      - name: Verify snapshot provided
-        if: ${{ !env.SNAPSHOT_ID }}
-        run: 'echo "Missing client_payload parameter: snapshot_id" ; exit 1'
-      - name: Verify environment provided
-        if: ${{ !env.FIREBASE_ENV }}
-        run: 'echo "Missing client_payload parameter: firebase_env" ; exit 1'
-
       - uses: actions/checkout@v2
         with:
           repository: covid-projections/covid-projections
@@ -33,17 +39,17 @@ jobs:
       # Write appropriate service account file for FIREBASE_ENV.
       - name: Write Dev Service Account
         if: ${{ env.FIREBASE_ENV == 'dev' }}
-        run: echo "$SERVICE_ACCOUNT" > scripts/alert_emails/google-service-account.json
+        run: echo "$SERVICE_ACCOUNT" > scripts/common/firebase/google-service-account.json
         env:
           SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_DEV }}
       - name: Write Staging Service Account
         if: ${{ env.FIREBASE_ENV == 'staging' }}
-        run: echo "$SERVICE_ACCOUNT" > scripts/alert_emails/google-service-account.json
+        run: echo "$SERVICE_ACCOUNT" > scripts/common/firebase/google-service-account.json
         env:
           SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_STAGING }}
       - name: Write Prod Service Account
         if: ${{ env.FIREBASE_ENV == 'prod' }}
-        run: echo "$SERVICE_ACCOUNT" > scripts/alert_emails/google-service-account.json
+        run: echo "$SERVICE_ACCOUNT" > scripts/common/firebase/google-service-account.json
         env:
           SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROD }}
 
