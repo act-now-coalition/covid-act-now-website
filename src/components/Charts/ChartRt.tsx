@@ -26,9 +26,8 @@ import {
   getZoneByValue,
   last,
   getAxisLimits,
-  getZonesTimeScale,
+  getUtcScale,
 } from './utils';
-import { getUtcScale } from './utils';
 import { AxisBottom } from 'components/Charts/Axis';
 import { getTimeAxisTicks } from 'components/Explore/utils';
 
@@ -78,6 +77,7 @@ const ChartRt = ({
   const [yAxisMin, yAxisMax] = getAxisLimits(yDataMin, yDataMax, zones);
 
   const xScale = getUtcScale(minDate, currDate, 0, chartWidth);
+  const dateTicks = getTimeAxisTicks(minDate, currDate);
 
   const yScale = scaleLinear({
     domain: [yAxisMin, yAxisMax],
@@ -129,9 +129,6 @@ const ChartRt = ({
       fill={getZoneByValue(getRt(d), zones).color}
     />
   );
-
-  const dateScale = getUtcScale(minDate, currDate, 0, chartWidth);
-  const dateTicks = getTimeAxisTicks(minDate, currDate);
 
   return (
     <ChartContainer<PointRt>
@@ -208,7 +205,7 @@ const ChartRt = ({
       />
       <AxisBottom
         innerHeight={chartHeight}
-        scale={dateScale}
+        scale={xScale}
         tickValues={dateTicks}
       />
       {/* <AxisBottom top={chartHeight} scale={xScale} /> */}

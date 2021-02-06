@@ -24,9 +24,8 @@ import {
   last,
   getAxisLimits,
   getZoneByValue,
-  getZonesTimeScale,
+  getUtcScale,
 } from './utils';
-import { getUtcScale } from './utils';
 import { AxisBottom } from 'components/Charts/Axis';
 import { getTimeAxisTicks } from 'components/Explore/utils';
 
@@ -81,6 +80,7 @@ const ChartZones = ({
   assert(minDate !== undefined, 'Data must not be empty');
 
   const xScale = getUtcScale(minDate, maxDate, 0, chartWidth);
+  const dateTicks = getTimeAxisTicks(minDate, maxDate);
 
   const yDataMin = 0;
   const yDataMax = d3max(data, getY);
@@ -123,9 +123,6 @@ const ChartZones = ({
       <TooltipStyle.Body>{getTooltipContent(getY(d)).body}</TooltipStyle.Body>
     </Tooltip>
   );
-
-  const dateScale = getUtcScale(minDate, maxDate, 0, chartWidth);
-  const dateTicks = getTimeAxisTicks(minDate, maxDate);
 
   return (
     <ChartContainer<Point>
@@ -179,7 +176,7 @@ const ChartZones = ({
       </Style.TextAnnotation>
       <AxisBottom
         innerHeight={chartHeight}
-        scale={dateScale}
+        scale={xScale}
         tickValues={dateTicks}
       />
       {/* <AxisBottom top={chartHeight} scale={xScale} /> */}

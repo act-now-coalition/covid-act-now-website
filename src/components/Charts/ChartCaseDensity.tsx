@@ -24,9 +24,8 @@ import {
   getZoneByValue,
   last,
   getAxisLimits,
-  getZonesTimeScale,
+  getUtcScale,
 } from './utils';
-import { getUtcScale } from './utils';
 import { AxisBottom } from 'components/Charts/Axis';
 import { getTimeAxisTicks } from 'components/Explore/utils';
 
@@ -74,6 +73,7 @@ const ChartCaseDensity: FunctionComponent<{
   const minDate = d3min(dates) || new Date('2020-01-01');
   const currDate = new Date();
   const xScale = getUtcScale(minDate, currDate, 0, chartWidth);
+  const dateTicks = getTimeAxisTicks(minDate, currDate);
 
   const yDataMax = d3max(data, getYCaseDensity) || 100;
   const yAxisLimits = getAxisLimits(0, yDataMax, zones);
@@ -123,9 +123,6 @@ const ChartCaseDensity: FunctionComponent<{
     />
   );
 
-  const dateScale = getUtcScale(minDate, currDate, 0, chartWidth);
-  const dateTicks = getTimeAxisTicks(minDate, currDate);
-
   return (
     <ChartContainer<Point>
       data={data}
@@ -173,7 +170,7 @@ const ChartCaseDensity: FunctionComponent<{
       ))}
       <AxisBottom
         innerHeight={chartHeight}
-        scale={dateScale}
+        scale={xScale}
         tickValues={dateTicks}
       />
       <AxisLeft scale={yScale} tickValues={yTicks.slice(1)} />
