@@ -17340,6 +17340,11 @@ react-simple-maps@^1.0.0-beta.0:
     d3-geo "^1.11.6"
     topojson-client "^3.0.0"
 
+react-singleton-hook@^3.0.142:
+  version "3.0.142"
+  resolved "https://registry.yarnpkg.com/react-singleton-hook/-/react-singleton-hook-3.0.142.tgz#7212d0441748a67e97edeb41f1d425ff433c192c"
+  integrity sha512-ONYk/LftfsF7j8dCP7AE3Pz5gwJdj2eVM8wnvyEq2ypAG7zVKtwSvAqu7xmrg65qrCLfef9+b8DMThEU0GJJVw==
+
 react-sizeme@^2.5.2, react-sizeme@^2.6.7:
   version "2.6.12"
   resolved "https://registry.yarnpkg.com/react-sizeme/-/react-sizeme-2.6.12.tgz#ed207be5476f4a85bf364e92042520499455453e"

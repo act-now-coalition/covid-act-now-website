@@ -18,6 +18,7 @@ import {
 } from 'common/regions';
 import { getLargestMetroFipsForExplore } from 'screens/HomePage/utils';
 import { GeolocationInfo } from './useGeolocation';
+import useCountyToZipMap from './useCountyToZipMap';
 
 export default function useGeolocationInExplore(
   numLocations: number,
@@ -27,9 +28,11 @@ export default function useGeolocationInExplore(
     getLargestMetroFipsForExplore(numLocations),
   );
 
+  const { countyToZipMap } = useCountyToZipMap();
+
   useEffect(() => {
-    if (geolocation) {
-      const userRegions = getGeolocatedRegions(geolocation);
+    if (geolocation && countyToZipMap) {
+      const userRegions = getGeolocatedRegions(geolocation, countyToZipMap);
       if (!isNull(userRegions)) {
         const regionValues = values(userRegions);
         const filteredUserRegions = filterUndefinedRegions(regionValues);
@@ -41,7 +44,7 @@ export default function useGeolocationInExplore(
         }
       }
     }
-  }, [geolocation]);
+  }, [geolocation, countyToZipMap]);
 
   return initialExploreFips;
 }

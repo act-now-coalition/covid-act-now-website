@@ -10,7 +10,7 @@ import { LoadingScreen } from './LocationPage.style';
 import { useProjectionsFromRegion } from 'common/utils/model';
 import { getPageTitle, getPageDescription } from './utils';
 import { getStateCode, MetroArea, Region } from 'common/regions';
-import { useGeolocation } from 'common/hooks';
+import { useCountyToZipMap, useGeolocation } from 'common/hooks';
 
 interface LocationPageProps {
   region: Region;
@@ -25,6 +25,7 @@ function LocationPage({ region }: LocationPageProps) {
   const projections = useProjectionsFromRegion(region);
 
   const { geolocationData } = useGeolocation();
+  const { countyToZipMap } = useCountyToZipMap();
 
   useEffect(() => {
     setMapOption(defaultMapOption);
@@ -47,6 +48,7 @@ function LocationPage({ region }: LocationPageProps) {
           setMobileMenuOpen={setMobileMenuOpen}
           region={region}
           geolocation={geolocationData}
+          countyToZipMap={countyToZipMap}
         />
         {/* Shows a loading screen if projections are not loaded yet, or
          * if a new location has been selected */}
