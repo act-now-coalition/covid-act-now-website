@@ -3,7 +3,6 @@ import Autocomplete, {
   AutocompleteGetTagProps,
 } from '@material-ui/lab/Autocomplete';
 import { createFilterOptions } from '@material-ui/lab/useAutocomplete';
-import TextField from '@material-ui/core/TextField';
 import { Region, MetroArea } from 'common/regions';
 import { StyledTextField } from './AutocompleteRegions.style';
 /**
