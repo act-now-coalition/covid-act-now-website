@@ -180,7 +180,6 @@ const ChartZones = ({
         scale={xScale}
         tickValues={dateTicks}
       />
-      {/* <AxisBottom top={chartHeight} scale={xScale} /> */}
       <AxisLeft
         scale={yScale}
         tickValues={yTicks}
