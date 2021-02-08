@@ -4,7 +4,7 @@
 backend:
   name: github
   repo: covid-projections/covid-projections
-  branch: cms-content-entry
+  branch: casulin/info-popup-content-cms
   base_url: https://api.netlify.com
 
 media_folder: 'public/images_cms'
@@ -790,4 +790,25 @@ collections:
                   - label: Updated at
                     name: updatedAt
                     widget: datetime
-
+  - label: Info Popups
+    name: infoPopups
+    description: Content for information popups on the location page (short metric explainers, location page header info)
+    format: json
+    files:
+      - name: Info Popups
+        label: Info Popups
+        file: src/cms-content/info-popups.json
+        fields:
+          - label: Popup
+            name: popup
+            widget: list
+            fields:
+              - label: Title
+                name: title
+                widget: string
+              - label: Id
+                name: id
+                widget: string
+              - label: Content
+                name: content
+                widget: markdown
