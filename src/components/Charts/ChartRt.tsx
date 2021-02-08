@@ -10,7 +10,7 @@ import { Area } from '@vx/shape';
 import { Column, RtRange, RT_TRUNCATION_DAYS } from 'common/models/Projection';
 import { CASE_GROWTH_RATE_LEVEL_INFO_MAP as zones } from 'common/metrics/case_growth';
 import { formatUtcDate, formatDecimal } from 'common/utils';
-import { AxisBottom, AxisLeft } from './Axis';
+import { AxisLeft } from './Axis';
 import BoxedAnnotation from './BoxedAnnotation';
 import ChartContainer from './ChartContainer';
 import RectClipGroup from './RectClipGroup';
@@ -26,8 +26,10 @@ import {
   getZoneByValue,
   last,
   getAxisLimits,
-  getZonesTimeScale,
+  getUtcScale,
 } from './utils';
+import { AxisBottom } from 'components/Charts/Axis';
+import { getTimeAxisTicks } from 'components/Explore/utils';
 
 type PointRt = Omit<Column, 'y'> & {
   y: RtRange;
@@ -74,7 +76,9 @@ const ChartRt = ({
   const yDataMax = d3max(data, getRt) || 1;
   const [yAxisMin, yAxisMax] = getAxisLimits(yDataMin, yDataMax, zones);
 
-  const xScale = getZonesTimeScale(minDate, currDate, 0, chartWidth);
+  const xScale = getUtcScale(minDate, currDate, 0, chartWidth);
+  const [startDate, endDate] = xScale.domain();
+  const dateTicks = getTimeAxisTicks(startDate, endDate);
 
   const yScale = scaleLinear({
     domain: [yAxisMin, yAxisMax],
@@ -200,7 +204,12 @@ const ChartRt = ({
         cy={yTruncationRt}
         r={6}
       />
-      <AxisBottom top={chartHeight} scale={xScale} />
+      <AxisBottom
+        innerHeight={chartHeight}
+        scale={xScale}
+        tickValues={dateTicks}
+      />
+      {/* <AxisBottom top={chartHeight} scale={xScale} /> */}
       <AxisLeft scale={yScale} tickValues={yTicks} />
     </ChartContainer>
   );

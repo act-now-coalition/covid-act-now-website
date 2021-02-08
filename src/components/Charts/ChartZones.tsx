@@ -10,7 +10,7 @@ import { Column } from 'common/models/Projection';
 import { assert, formatUtcDate, formatPercent } from 'common/utils';
 import { LevelInfoMap } from 'common/level';
 import RectClipGroup from './RectClipGroup';
-import { AxisBottom, AxisLeft } from './Axis';
+import { AxisLeft } from './Axis';
 import BoxedAnnotation from './BoxedAnnotation';
 import ChartContainer from './ChartContainer';
 import ZoneAnnotation from './ZoneAnnotation';
@@ -24,8 +24,10 @@ import {
   last,
   getAxisLimits,
   getZoneByValue,
-  getZonesTimeScale,
+  getUtcScale,
 } from './utils';
+import { AxisBottom } from 'components/Charts/Axis';
+import { getTimeAxisTicks } from 'components/Explore/utils';
 
 type Point = Omit<Column, 'y'> & {
   y: number;
@@ -77,7 +79,9 @@ const ChartZones = ({
   const maxDate = new Date();
   assert(minDate !== undefined, 'Data must not be empty');
 
-  const xScale = getZonesTimeScale(minDate, maxDate, 0, chartWidth);
+  const xScale = getUtcScale(minDate, maxDate, 0, chartWidth);
+  const [startDate, endDate] = xScale.domain();
+  const dateTicks = getTimeAxisTicks(startDate, endDate);
 
   const yDataMin = 0;
   const yDataMax = d3max(data, getY);
@@ -171,7 +175,11 @@ const ChartZones = ({
           text={getPointText(lastPointY)}
         />
       </Style.TextAnnotation>
-      <AxisBottom top={chartHeight} scale={xScale} />
+      <AxisBottom
+        innerHeight={chartHeight}
+        scale={xScale}
+        tickValues={dateTicks}
+      />
       <AxisLeft
         scale={yScale}
         tickValues={yTicks}
