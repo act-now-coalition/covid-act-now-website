@@ -11,15 +11,6 @@ import {
 import { MarkdownTools, ToolsSection } from './Tools.style';
 import { TocItem } from 'cms-content/utils';
 
-/**
- * When updating the COVID_RESPONSE_SIMULATOR_URL, update the version number
- * and the URL in src/assets/covid-response-simulator-version.txt. This file is
- * used by the the CRS to determine if a copy is up to date, and show a
- * message to the user.
- */
-export const COVID_RESPONSE_SIMULATOR_URL =
-  'https://docs.google.com/spreadsheets/d/1iUQvuY-DGbuxGBDrj1fvaDjk-peunHm89sMJe0z24U8/copy?usp=sharing';
-
 const {
   header,
   productsList,
