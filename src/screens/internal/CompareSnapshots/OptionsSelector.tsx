@@ -19,10 +19,15 @@ import {
   Select,
   TextField,
 } from '@material-ui/core';
-import { COUNTIES_LIMIT, Locations, METROS_LIMIT, Options } from './utils';
+import {
+  COUNTIES_LIMIT,
+  CompareLocations,
+  METROS_LIMIT,
+  CompareOptions,
+} from './utils';
 
 interface OptionsSelectorProps {
-  onNewOptions: (options: Options) => void;
+  onNewOptions: (options: CompareOptions) => void;
 }
 
 export function OptionsSelector(props: OptionsSelectorProps) {
@@ -76,7 +81,7 @@ function OptionsSelectorInner({
     getParamValue(
       params,
       'locations',
-      Locations.STATES_AND_INTERESTING_REGIONS,
+      CompareLocations.STATES_AND_INTERESTING_REGIONS,
     ),
   );
 
@@ -184,17 +189,17 @@ function OptionsSelectorInner({
       <FormControl style={{ width: '14rem', marginLeft: '1rem' }}>
         <InputLabel focused={false}>Show:</InputLabel>
         <Select value={locations} onChange={changeLocations}>
-          <MenuItem value={Locations.STATES_AND_INTERESTING_REGIONS}>
+          <MenuItem value={CompareLocations.STATES_AND_INTERESTING_REGIONS}>
             States & Interesting Regions
           </MenuItem>
-          <MenuItem value={Locations.STATES}>States</MenuItem>
-          <MenuItem value={Locations.TOP_COUNTIES_BY_POPULATION}>
+          <MenuItem value={CompareLocations.STATES}>States</MenuItem>
+          <MenuItem value={CompareLocations.TOP_COUNTIES_BY_POPULATION}>
             Top {COUNTIES_LIMIT} Counties (by Population)
           </MenuItem>
-          <MenuItem value={Locations.TOP_COUNTIES_BY_DIFF}>
+          <MenuItem value={CompareLocations.TOP_COUNTIES_BY_DIFF}>
             Top {COUNTIES_LIMIT} Counties (by Diff)
           </MenuItem>
-          <MenuItem value={Locations.TOP_METROS_BY_POPULATION}>
+          <MenuItem value={CompareLocations.TOP_METROS_BY_POPULATION}>
             Top {METROS_LIMIT} Metros (by Population)
           </MenuItem>
         </Select>
