@@ -12,5 +12,3 @@ export const ModelSelectorContainer = styled.div`
   border-radius: 3px;
   padding: 1rem;
 `;
-
-export const ModelComparisonsContainer = styled.div``;

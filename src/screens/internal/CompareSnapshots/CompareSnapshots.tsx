@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import FormControl from '@material-ui/core/FormControl';
@@ -9,25 +9,19 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import * as QueryString from 'query-string';
-import { assert, fail, formatInteger } from 'common/utils';
-import { MetricChart } from 'components/Charts';
+import { assert, fail } from 'common/utils';
 import {
   fetchAllStateProjections,
   fetchAllCountyProjections,
   fetchProjectionsRegion,
 } from 'common/utils/model';
-import {
-  Wrapper,
-  ModelComparisonsContainer,
-  ModelSelectorContainer,
-} from './CompareSnapshots.style';
+import { Wrapper, ModelSelectorContainer } from './CompareSnapshots.style';
 import { Metric, getMetricName, ALL_METRICS } from 'common/metric';
 import { Projections } from 'common/models/Projections';
 import { ProjectionsSet } from 'common/models/ProjectionsSet';
 import { SortType, ProjectionsPair } from 'common/models/ProjectionsPair';
 import { SNAPSHOT_URL, SnapshotVersion, Api } from 'api';
 import moment from 'moment';
-import { Level } from 'common/level';
 import { fetchSummaries } from 'common/location_summaries';
 import {
   snapshotFromUrl,
@@ -39,6 +33,7 @@ import {
   DISABLED_METRICS,
   reenableDisabledMetrics,
 } from 'common/models/Projection';
+import { ComparisonList } from './ComparisonList';
 
 // TODO(michael): Compare page improvements:
 // * Virtualize the list so that it's not so awful slow. NOTE: I previously
@@ -305,99 +300,6 @@ const VersionInfo = function ({
     )
   );
 };
-
-const ComparisonList = function ({
-  metric,
-  projectionsSet,
-  loadingText,
-}: {
-  metric: Metric;
-  projectionsSet: ProjectionsSet;
-  loadingText: string;
-}) {
-  if (projectionsSet.isEmpty) {
-    return <h1>{loadingText}</h1>;
-  }
-
-  return (
-    <ModelComparisonsContainer>
-      {projectionsSet.map(pair => (
-        <ProjectionsCompare
-          key={pair.locationName}
-          metric={metric}
-          pair={pair}
-        />
-      ))}
-    </ModelComparisonsContainer>
-  );
-};
-
-function ProjectionsCompare({
-  metric,
-  pair,
-}: {
-  metric: Metric;
-  pair: ProjectionsPair;
-}) {
-  const localUrl = pair.locationURL.replace(/^.*covidactnow\.org/, '');
-  return (
-    <>
-      <hr />
-      <div style={{ marginLeft: '40px' }}>
-        <h2>
-          {pair.locationName}
-          {pair.left.primary.isMetricDisabledIgnoreOverride(metric) &&
-            ' [DISABLED]'}
-          :{' '}
-          <small>
-            <ProjectionsGradeChange pair={pair} /> | population{' '}
-            {formatInteger(pair.population)} | fips {pair.fips} |{' '}
-            <a href={pair.locationURL}>prod</a> <a href={localUrl}>local</a>
-          </small>
-        </h2>
-        <br />
-        <Grid container spacing={8}>
-          <Grid item xs={6}>
-            <ProjectionsChart metric={metric} projections={pair.left} />
-          </Grid>
-          <Grid item xs={6}>
-            <ProjectionsChart metric={metric} projections={pair.right} />
-          </Grid>
-        </Grid>
-      </div>
-    </>
-  );
-}
-
-function ProjectionsGradeChange({ pair }: { pair: ProjectionsPair }) {
-  if (pair.left.getAlarmLevel() !== pair.right.getAlarmLevel()) {
-    return (
-      <Fragment>
-        <ProjectionsGrade projections={pair.left} />
-        ➔
-        <ProjectionsGrade projections={pair.right} />
-      </Fragment>
-    );
-  } else {
-    return <ProjectionsGrade projections={pair.left} />;
-  }
-}
-
-function ProjectionsGrade({ projections }: { projections: Projections }) {
-  const color = projections.getAlarmLevelColor();
-  const level = Level[projections.getAlarmLevel()];
-  return <span style={{ color }}>{level}</span>;
-}
-
-const ProjectionsChart = React.memo(function ProjectionsChart({
-  metric,
-  projections,
-}: {
-  metric: Metric;
-  projections: Projections;
-}) {
-  return <MetricChart metric={metric} projections={projections} />;
-});
 
 function useMainSnapshot(): number | null {
   const [snapshot, setSnapshot] = useState<number | null>(null);
