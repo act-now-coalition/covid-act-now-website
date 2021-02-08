@@ -12,6 +12,7 @@ import ExternalLink from 'components/ExternalLink';
 import Thermometer from 'components/Thermometer';
 import { MetricDefinition } from './interfaces';
 import moment from 'moment';
+import { Metric } from 'common/metric';
 
 export const CaseIncidenceMetric: MetricDefinition = {
   renderStatus,
@@ -68,11 +69,8 @@ export const CASE_DENSITY_LEVEL_INFO_MAP: LevelInfoMap = {
 };
 
 function renderStatus(projections: Projections): React.ReactElement {
-  const {
-    currentCaseDensity,
-    totalPopulation,
-    currentDailyAverageCases,
-  } = projections.primary;
+  const { totalPopulation, currentDailyAverageCases } = projections.primary;
+  const currentCaseDensity = projections.getMetricValue(Metric.CASE_DENSITY);
   const locationName = projections.locationName;
   if (
     currentCaseDensity === null ||

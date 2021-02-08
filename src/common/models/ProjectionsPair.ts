@@ -14,7 +14,10 @@ export enum SortType {
 
 /** A pair of left/right projections (e.g. from two different snapshots) */
 export class ProjectionsPair {
+  // Sentinel diff values that we use to push locations to the top of the list.
   static MISSING_METRIC_DIFF = 9999;
+  static ADDED_METRIC_DIFF = 9998;
+  static LOWEST_SENTINEL_DIFF = ProjectionsPair.ADDED_METRIC_DIFF;
 
   constructor(public left: Projections, public right: Projections) {}
 
@@ -29,9 +32,9 @@ export class ProjectionsPair {
     rightMetric: number | null,
   ) {
     if (leftMetric === null) {
-      return rightMetric === null ? 0 : this.MISSING_METRIC_DIFF;
+      return rightMetric === null ? 0 : this.ADDED_METRIC_DIFF;
     } else if (rightMetric === null) {
-      return leftMetric === null ? 0 : this.MISSING_METRIC_DIFF + 1;
+      return leftMetric === null ? 0 : this.MISSING_METRIC_DIFF;
     } else {
       return Math.abs(leftMetric - rightMetric);
     }
@@ -65,6 +68,19 @@ export class ProjectionsPair {
   }
 
   compare(other: ProjectionsPair, sortType: SortType, metric: Metric) {
+    let compare = this.compareInner(other, sortType, metric);
+    // Break ties by population.
+    if (compare === 0) {
+      compare = this.compareInner(other, SortType.POPULATION, metric);
+    }
+    return compare;
+  }
+
+  private compareInner(
+    other: ProjectionsPair,
+    sortType: SortType,
+    metric: Metric,
+  ) {
     switch (sortType) {
       case SortType.ALPHABETICAL:
         return this.locationName.localeCompare(other.locationName);

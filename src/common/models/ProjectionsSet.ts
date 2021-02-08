@@ -26,20 +26,28 @@ export class ProjectionsSet {
         projectionPairs.push(new ProjectionsPair(left, right));
       }
     }
-    return new ProjectionsSet(projectionPairs);
+    return new ProjectionsSet(projectionPairs, null);
   }
 
-  constructor(readonly pairs: ProjectionsPair[]) {}
+  static fromLoadingText(loadingText: string) {
+    return new ProjectionsSet([], loadingText);
+  }
+
+  constructor(
+    readonly pairs: ProjectionsPair[],
+    readonly loadingText: string | null,
+  ) {}
 
   sortBy(sortType: SortType, metric: Metric): ProjectionsSet {
     return new ProjectionsSet(
       this.pairs.sort((left, right) => left.compare(right, sortType, metric)),
+      this.loadingText,
     );
   }
 
   top(limit: number, sortType: SortType, metric: Metric) {
     const sortedSet = this.sortBy(sortType, metric);
-    return new ProjectionsSet(_.take(sortedSet.pairs, limit));
+    return new ProjectionsSet(_.take(sortedSet.pairs, limit), this.loadingText);
   }
 
   get isEmpty(): boolean {
