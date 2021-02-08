@@ -1,12 +1,12 @@
 import React from 'react';
-import { Content, Wrapper, ArrowUp, ArrowDown } from './InfoPopup.style';
+import { Content, Wrapper, ArrowUp, ArrowDown } from './InfoTooltip.style';
 
 export enum ArrowVariation {
   UP,
   DOWN,
 }
 
-const InfoPopup: React.FC<{ content: string; variation: ArrowVariation }> = ({
+const InfoTooltip: React.FC<{ content: string; variation: ArrowVariation }> = ({
   content,
   variation,
 }) => {
@@ -21,4 +21,4 @@ const InfoPopup: React.FC<{ content: string; variation: ArrowVariation }> = ({
   );
 };
 
-export default InfoPopup;
+export default InfoTooltip;
