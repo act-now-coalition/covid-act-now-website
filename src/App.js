@@ -25,6 +25,7 @@ import PageviewTracker, {
   EventAction,
   EventCategory,
 } from 'components/Analytics';
+import { COVID_RESPONSE_SIMULATOR_URL } from 'screens/Tools/Tools';
 import { SuspenseFallback, ErrorBoundary } from 'components/LazyLoading';
 import HomePage from 'screens/HomePage/HomePage';
 
@@ -183,6 +184,11 @@ export default function App() {
                   <Route path="/contact" component={Contact} />
                   <Route path="/terms" component={Terms} />
                   <Route path="/privacy" component={Privacy} />
+                  {/* Custom URL for sharing the COVID Response Simulator */}
+                  <Redirect
+                    from="/response-simulator"
+                    to="/tools#covid-response-simulator"
+                  />
 
                   {/* Custom redirect to track clicks from the Daily download */}
                   <Route path="/exposure-notifications-redirect">
@@ -227,6 +233,21 @@ export default function App() {
                     path="/feedback-survey"
                     component={() => (
                       <ExternalRedirect url={getFeedbackSurveyUrl('social')} />
+                    )}
+                  />
+
+                  {/**
+                   * This endpoint is to be able to track clicks to the COVID
+                   * Response Simulator on the tools page. The user will be briefly
+                   * redirected to COVID_RESPONSE_SIMULATOR_REDIRECT_URL and then
+                   * to the spreadsheet. The number of visits to the redirect URL
+                   * will correspond to the number of clicks to the COVID Response
+                   * Simulator.
+                   */}
+                  <Route
+                    path="/covid-response-simulator-redirect"
+                    component={() => (
+                      <ExternalRedirect url={COVID_RESPONSE_SIMULATOR_URL} />
                     )}
                   />
 
