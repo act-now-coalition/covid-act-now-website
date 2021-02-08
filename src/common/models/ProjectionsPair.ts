@@ -32,9 +32,9 @@ export class ProjectionsPair {
     rightMetric: number | null,
   ) {
     if (leftMetric === null) {
-      return rightMetric === null ? 0 : this.MISSING_METRIC_DIFF;
+      return rightMetric === null ? 0 : this.ADDED_METRIC_DIFF;
     } else if (rightMetric === null) {
-      return leftMetric === null ? 0 : this.ADDED_METRIC_DIFF;
+      return leftMetric === null ? 0 : this.MISSING_METRIC_DIFF;
     } else {
       return Math.abs(leftMetric - rightMetric);
     }
