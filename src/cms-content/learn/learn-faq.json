@@ -128,34 +128,14 @@
           "questionId": "why-is-testing-important"
         },
         {
-          "question": "Why is a low positive test rate a good sign?\n",
-          "answer": "Many people infected with COVID are [pre-symptomatic](/glossary#presymptomatic-spread) or [asymptomatic](https://covidactnow.org/glossary#asymptomatic), making it difficult to know how widespread the disease is in a community. If there is ample testing being done, including of individuals who have no reason to believe that they have the [virus](/glossary#virus), then many negative test results will be received, leading to a low [test positivity rate](/glossary#test-positivity). This is an indication that adequate testing is being done in an area and that there are not a lot of undetected cases in the community.",
-          "questionId": "low-positive-test-rate"
-        },
-        {
           "question": "When tests are conducted, where do the results get counted?",
           "answer": "State reporting practices differ. In most states, the test results are reported where individuals are tested, not where they live. Florida, however, distinguishes between residents and non-residents in the statistics it publishes.",
           "questionId": "covid-test-results-counted"
         },
         {
-          "question": "Does Covid Act Now's positive test rate metric show only PCR test results, or PCR and serology test results?\n",
-          "answer": "We get our state testing data from the Department of Health and Human Services (HHS). We scrape official state and county dashboards for county level data and, when unavailable, fall back on a weekly test positivity rate provided by the Centers for Medicare & Medicaid Services. \n\nNo state should mix the results of diagnostic tests (including [PCR tests](https://covidactnow.org/glossary#PCR-test) and [antigen tests](/glossary#antigen-test)) with the results of [antibody tests](/glossary#antibody-test). [Serology](/glossary#serology-test) tests looking for COVID [antibodies](/glossary#antibodies) can identify individuals who have had the [virus](/glossary#virus) at some point in the past, but they should not be used to diagnose an active COVID [infection](/glossary#infection), according to the Food and Drug Administration’s [Coronavirus Testing Basics](https://www.fda.gov/consumers/consumer-updates/coronavirus-testing-basics). Some states, at various times, have included both diagnostic and antibody tests in their reports. Covid Act Now makes every possible effort to obtain data that is not corrupted, but ultimately we must work with the data that is available.",
-          "questionId": "covid-act-now-postitive-test-rate-test-types"
-        },
-        {
-          "question": "What is pool testing?",
-          "answer": "Pooled testing is a process in which samples — such as [PCR nasal swabs](/glossary#pcr-test) — are collected and tested in a batch, or pool, rather than individually. If the pool comes back positive, one or more of the people in the pool may be [infected](/glossary#infection), and each sample must be tested again individually. The hope is that by pooling samples, there will be fewer overall tests, saving testing supplies and allowing more tests to be run at a time, according to the [FDA](https://www.fda.gov/news-events/press-announcements/coronavirus-covid-19-update-fda-issues-first-emergency-authorization-sample-pooling-diagnostic), which approved pooled testing for Quest Diagnostics in July.",
-          "questionId": "what-is-pool-testing"
-        },
-        {
           "question": "What is R-naught (R0) and how is it different from R(t)?",
           "answer": "[R-naught](covidactnow.org/glossary#r-0) (R₀), represents the natural ability of a virus to spread in an unprotected population where no special precautions are being taken. [R(t)](/glossary#rt), in contrast, takes into account public health measures or the development of a [vaccine](/glossary#vaccine). This makes R(t) —the actual or “effective” of the virus under current conditions —  a more accurate reflection of the number of people that a single infected person is expected to infect in a specific area at a specific time. It is also more relevant than R₀ in directing public policy and informing private behavior. The value of R(t) can change over time, depending on such factors as how many people are staying home or wearing masks. At Covid Act Now, we look at R(t), or [infection rate](https://covidactnow.org/covid-risk-levels-metrics#infection-rate), because it represents more closely what is happening right now and is calculated based on actual death and hospitalization data.",
           "questionId": "r-0-vs-r-t"
-        },
-        {
-          "question": "What is contact tracing?",
-          "answer": "[Contact tracing](/glossary#contact-tracing) is an effective strategy for slowing the [spread](/glossary#community-spread) of COVID. It involves finding out who has been in close contact with an individual infected with COVID, letting those people know that they may have been [exposed](/glossary#exposed), and guiding them on what they should do next. The work of contact tracers can be extremely labor-intensive and difficult, given that many contacts are difficult to identify and locate. After informing people that they are at risk for the [infection](/glossary#infection), contact tracers provide advice on quarantine procedures and testing.",
-          "questionId": "what-is-contact-tracing"
         }
       ]
     },
@@ -163,21 +143,6 @@
       "sectionTitle": "Assessing Risk",
       "sectionId": "assessing risk",
       "questions": [
-        {
-          "question": "How can I use Covid Act Now to assess the COVID risk level in my community?",
-          "answer": "Covid Act Now uses five key metrics to assess COVID across U.S. states, metros, and counties. Three of these—daily new cases (incidence), infection rate (Rt) and positive test rate—factor into a location's overall risk level. \n\n* [Daily new cases](/covid-risk-levels-metrics#daily-new-cases), also known as “incidence” in epidemiology, represents the current amount of COVID in a community. \n* [Infection rate](/covid-risk-levels-metrics#infection-rate) is the direction and speed of growth. For instance, daily new cases may be low, but if infection rate is high, then we know that daily new cases will be high in the near future. \n* [Positive test rate](/covid-risk-levels-metrics#positive-test-rate) is a measure of our confidence in the underlying data. For instance, if daily new cases and infection rate are both low, but test positivity is high, then the lack of sufficient testing suggests that we are not capturing the true levels of COVID and both daily new cases and infection rate are actually higher than what is currently reported. \n\nThe other two—ICU capacity used and % vaccinated—reflect a location's preparedness to handle COVID risk. \n\n* [ICU capacity used](/covid-risk-levels-metrics#icu-capacity-used) looks at an intensive care unit’s (ICU) ability to handle a surge in COVID cases, by measuring the number of ICU beds that are currently in use.\n* [% vaccinated](/covid-risk-levels-metrics#percent-vaccinated) looks at how many people have started the vaccination process in a given location.\n\nThe end goal is for regions to reduce cases to zero, to fully reopen their economies, and for people to resume normal lives, unrestricted by COVID or containment measures.",
-          "questionId": "covid-act-now-assess-community-risk"
-        },
-        {
-          "question": "Your original risk level used five key metrics. Now it uses three. What happened?",
-          "questionId": "december-risk-levels-change",
-          "answer": "As of December 21st, our risk level is calculated from three metrics: \n\n1. [daily new cases per 100K](/covid-risk-levels-metrics#daily-new-cases) - the current level of COVID\n2. [infection growth](/covid-risk-levels-metrics#infection-rate) - the direction of COVID growth\n3. [positive test rate](https://covidactnow.org/covid-risk-levels-metrics#positive-test-rate) - whether we are testing enough to find most COVID cases\n\nWe also show ICU capacity and % vaccinated, but these two metrics are not factored into a location’s risk level. \n\nAfter consultation with our [advisors](https://covidactnow.org/about#team), we are making this change to differentiate between risk and preparedness. Our newly simplified risk level is also easier to understand, and more closely aligned with the White House Task Force’s current reports, whose risk level is based on: (1) daily new cases per 100K, (2) test positivity. We believe that infection growth rate is critical to include, as it indicates the direction of COVID growth. A location may have a low level of COVID, but if there is a high infection growth rate, then the level of COVID will also increase in the near future.\n\nMuch remains unknown in this unprecedented pandemic, but we are committed to transparency and to continued improvements as more information becomes available."
-        },
-        {
-          "question": "Is it safe to reopen?",
-          "answer": "Covid Act Now determines a COVID risk level (severe outbreak; active outbreak; at risk of outbreak; slow disease growth; or on track to contain COVID) for each state, county, and metro area based on three metrics. We aim to provide data and disease intelligence to help public officials and the general public make informed decisions. Locations designated as “on track” can open more safely than those in higher risk groups. Of course, no community is entirely safe from COVID until the new [vaccine](/glossary#vaccine) has been widely adopted.",
-          "questionId": "is-it-safe-to-reopen"
-        },
         {
           "question": "Is it safe to reopen schools?",
           "answer": "There are many ways that schools can reduce risk. For instance, schools may adopt plans to limit [infections](/glossary#infection), such as establishing effective protocols for testing, tracking and tracing, and providing [masks](/glossary#face-mask) and other [protective equipment](/glossary#ppe). Still, some schools may face limitations. They may have a greater density of students and employees in buildings, poorer ventilation and less opportunity for outdoor learning. Covid Act Now provides decision makers with [data](/glossary#data) to assess risk and consider the ability of the school and school district to keep students and teachers safe.",
