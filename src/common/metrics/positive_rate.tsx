@@ -85,7 +85,9 @@ export const POSITIVE_TESTS_LEVEL_INFO_MAP: LevelInfoMap = {
 };
 
 function renderStatus(projections: Projections) {
-  const { currentTestPositiveRate } = projections.primary;
+  const currentTestPositiveRate = projections.getMetricValue(
+    Metric.POSITIVE_TESTS,
+  );
   const locationName = projections.locationName;
   if (currentTestPositiveRate === null) {
     const fips = projections.fips;
