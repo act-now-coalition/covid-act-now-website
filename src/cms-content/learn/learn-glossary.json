@@ -499,6 +499,12 @@
       "termId": "wave",
       "definition": "During a [pandemic](#pandemic), a “wave” is a phenomenon in which there is a period of increased case growth which [peaks](#peak) and is followed by a substantial, sustained reduction in cases. COVID cases seem to come in waves: first wave, second wave, and so on. There is no official definition of when one wave ends and another begins, and COVID has peaked in different states at different times.\n\n[Data suggests](https://www.covidactnow.org/covid-explained/us-third-wave) the U.S. on the whole experienced its first peak mid April, second peak in mid July, and entered its third wave of cases in the late fall of 2020. The term wave is often used alongside or interchangeably with [surge](#surge), which describes the increase in cases seen before and during the peak of a wave.",
       "category": "Disease science"
+    },
+    {
+      "term": "Pool testing",
+      "termId": "pool-testing",
+      "definition": "Pooled testing is a process in which samples — such as [PCR nasal swabs](https://covidactnow.org/glossary#pcr-test) — are collected and tested in a batch, or pool, rather than individually. If the pool comes back positive, one or more of the people in the pool may be [infected](https://covidactnow.org/glossary#infection), and each sample must be tested again individually. The hope is that by pooling samples, there will be fewer overall tests, saving testing supplies and allowing more tests to be run at a time, according to the [FDA](https://www.fda.gov/news-events/press-announcements/coronavirus-covid-19-update-fda-issues-first-emergency-authorization-sample-pooling-diagnostic), which approved pooled testing for Quest Diagnostics in July.",
+      "category": "Testing"
     }
   ],
   "metadataTitle": "Glossary of COVID-19 Terminology",
