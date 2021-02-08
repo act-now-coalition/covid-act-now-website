@@ -790,17 +790,17 @@ collections:
                   - label: Updated at
                     name: updatedAt
                     widget: datetime
-  - label: Info Popups
-    name: infoPopups
-    description: Content for information popups on the location page (short metric explainers, location page header info)
+  - label: Info Tooltips
+    name: infoTooltips
+    description: Content for information tooltips (short metric explainers, location page header info)
     format: json
     files:
-      - name: Info Popups
-        label: Info Popups
-        file: src/cms-content/info-popups.json
+      - name: Info Tooltips
+        label: Info Tooltips
+        file: src/cms-content/info-tooltips.json
         fields:
-          - label: Popup
-            name: popup
+          - label: Tooltip
+            name: tooltip
             widget: list
             fields:
               - label: Title
@@ -809,6 +809,9 @@ collections:
               - label: Id
                 name: id
                 widget: string
-              - label: Content
-                name: content
+              - label: Body
+                name: body
+                widget: markdown
+              - label: CTA
+                name: cta
                 widget: markdown
