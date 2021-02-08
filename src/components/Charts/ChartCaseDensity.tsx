@@ -73,7 +73,8 @@ const ChartCaseDensity: FunctionComponent<{
   const minDate = d3min(dates) || new Date('2020-01-01');
   const currDate = new Date();
   const xScale = getUtcScale(minDate, currDate, 0, chartWidth);
-  const dateTicks = getTimeAxisTicks(minDate, currDate);
+  const [startDate, endDate] = xScale.domain();
+  const dateTicks = getTimeAxisTicks(startDate, endDate);
 
   const yDataMax = d3max(data, getYCaseDensity) || 100;
   const yAxisLimits = getAxisLimits(0, yDataMax, zones);

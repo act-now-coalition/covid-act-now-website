@@ -2,7 +2,7 @@ import React from 'react';
 import { AxisBottom as VxAxisBottom, AxisLeft as VxAxisLeft } from '@vx/axis';
 import { SharedAxisProps } from '@vx/axis/lib/types';
 import * as Style from './Charts.style';
-import { getXTickFormat } from './utils';
+import { getXTickFormat, getMobileDateTicks } from './utils';
 import { useBreakpoint } from 'common/hooks';
 import { ScaleTime } from 'd3-scale';
 
@@ -19,16 +19,25 @@ interface AxisBottomProps {
   showYear?: boolean;
 }
 
-export const AxisBottom: React.FC<AxisBottomProps> = props => {
+export const AxisBottom: React.FC<AxisBottomProps> = ({
+  scale,
+  innerHeight,
+  tickValues,
+  showYear,
+}) => {
   const isMobile = useBreakpoint(600);
+
+  const finalTickValues = isMobile
+    ? getMobileDateTicks(tickValues)
+    : tickValues;
 
   return (
     <Style.Axis>
       <VxAxisBottom
-        top={props.innerHeight}
-        scale={props.scale}
-        tickValues={props.tickValues}
-        tickFormat={(d: Date) => getXTickFormat(d, isMobile, props.showYear)}
+        top={innerHeight}
+        scale={scale}
+        tickValues={finalTickValues}
+        tickFormat={(d: Date) => getXTickFormat(d, isMobile, showYear)}
       />
     </Style.Axis>
   );

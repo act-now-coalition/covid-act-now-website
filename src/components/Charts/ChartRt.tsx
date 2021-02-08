@@ -77,7 +77,8 @@ const ChartRt = ({
   const [yAxisMin, yAxisMax] = getAxisLimits(yDataMin, yDataMax, zones);
 
   const xScale = getUtcScale(minDate, currDate, 0, chartWidth);
-  const dateTicks = getTimeAxisTicks(minDate, currDate);
+  const [startDate, endDate] = xScale.domain();
+  const dateTicks = getTimeAxisTicks(startDate, endDate);
 
   const yScale = scaleLinear({
     domain: [yAxisMin, yAxisMax],

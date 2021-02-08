@@ -80,7 +80,8 @@ const ChartZones = ({
   assert(minDate !== undefined, 'Data must not be empty');
 
   const xScale = getUtcScale(minDate, maxDate, 0, chartWidth);
-  const dateTicks = getTimeAxisTicks(minDate, maxDate);
+  const [startDate, endDate] = xScale.domain();
+  const dateTicks = getTimeAxisTicks(startDate, endDate);
 
   const yDataMin = 0;
   const yDataMax = d3max(data, getY);

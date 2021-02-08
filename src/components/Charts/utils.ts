@@ -180,3 +180,10 @@ export const getXTickFormat = (
     return momentDate.format(dateFormat);
   }
 };
+
+/**
+ * For mobile, we only show every other month
+ */
+export function getMobileDateTicks(tickValues: Date[]): Date[] {
+  return tickValues.filter((value: Date, i: number) => i % 2 === 0);
+}
