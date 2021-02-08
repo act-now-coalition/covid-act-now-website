@@ -51,6 +51,10 @@ class RegionDB {
     return this.counties.filter(county => county.stateCode === stateCode);
   }
 
+  findByFullName(fullName: string): Region | null {
+    return this.all().find(region => region.fullName === fullName) || null;
+  }
+
   findStateByUrlParams(stateUrlSegment: string): State | null {
     // The second condition is added to support legacy URLs with the 2-letter
     // state code (`/us/wa`)

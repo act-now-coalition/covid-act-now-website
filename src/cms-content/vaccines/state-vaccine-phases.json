@@ -1,21 +1,289 @@
-{
-  "regions": [
-    {
-      "emailAlertVersion": 0,
-      "eligibilityInfoUrl": "https://covidvaccine.mo.gov/",
-      "fips": "29",
-      "locationName": "Missouri",
-      "phaseGroups": [
-        {
-          "startDate": "2020-12-14T18:54:06.354Z",
-          "updatedAt": "2021-02-02T18:54:06.376Z",
-          "currentlyEligible": true,
-          "phase": "1A",
-          "tier": null,
-          "description": "* Healthcare Workers\n* Long-Term Care Facility Staff and Residents\n* Home Health\n* Urgent Care\n* Vaccination Staff\n* Congregate Community\n* School Nurses\n* Dental Office Staff\n* Mental/Behavior Health Providers\n* EMS/EMT/Paramedics",
-          "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase1a/"
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "locationName": "Missouri",
+    "fips": "29",
+    "eligibilityInfoUrl": "https://covidvaccine.mo.gov/",
+    "emailAlertVersion": 1,
+    "phaseGroups": [
+      {
+        "phase": "1A",
+        "tier": "",
+        "description": "Patient-Facing Health Care Workers and Long-Term Care Facility Residents and\nStaff",
+        "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase1a/",
+        "startDate": ""
+      },
+      {
+        "phase": "1B",
+        "tier": "1",
+        "description": "First responders, Emergency Services, and Public Health Infrastructure",
+        "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase1b/#phase1b-1",
+        "startDate": ""
+      },
+      {
+        "phase": "1B",
+        "tier": "2",
+        "description": "High-Risk Individuals",
+        "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase1b/#phase1b-2",
+        "startDate": ""
+      },
+      {
+        "phase": "1B",
+        "tier": "3",
+        "description": "Critical Infrastructure",
+        "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase1b/#phase1b-3",
+        "startDate": ""
+      },
+      {
+        "phase": "2",
+        "tier": "",
+        "description": "Other frontline workers and high-risk groups",
+        "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase2",
+        "startDate": ""
+      },
+      {
+        "phase": "3",
+        "tier": "",
+        "description": "General public",
+        "expandedDefinitionUrl": "",
+        "startDate": ""
+      }
+    ]
+  },
+  {
+    "locationName": "Massachusetts",
+    "fips": "25",
+    "eligibilityInfoUrl": "https://www.mass.gov/info-details/massachusetts-covid-19-vaccination-phases",
+    "emailAlertVersion": 1,
+    "phaseGroups": [
+      {
+        "phase": "1",
+        "tier": "",
+        "description": "Healthcare workers; First responders; Long term care facilities",
+        "expandedDefinitionUrl": "",
+        "startDate": ""
+      },
+      {
+        "phase": "2",
+        "tier": "1",
+        "description": "Individuals 75+",
+        "expandedDefinitionUrl": "",
+        "startDate": ""
+      },
+      {
+        "phase": "2",
+        "tier": "2",
+        "description": "Individuals age 65+; individuals with 2+ certain medical conditions (only those conditions listed as at increased risk for severe illness); residents and staff of low income and affordable senior housing.",
+        "expandedDefinitionUrl": "",
+        "startDate": ""
+      },
+      {
+        "phase": "2",
+        "tier": "3",
+        "description": "Other workers",
+        "expandedDefinitionUrl": "",
+        "startDate": ""
+      },
+      {
+        "phase": "2",
+        "tier": "4",
+        "description": "Individuals with one certain medical condition",
+        "expandedDefinitionUrl": "https://www.mass.gov/info-details/certain-medical-conditions-for-phase-2-groups",
+        "startDate": ""
+      },
+      {
+        "phase": "3",
+        "tier": "",
+        "description": "General public",
+        "expandedDefinitionUrl": "",
+        "startDate": "April 2021"
+      }
+    ]
+  },
+  {
+    "locationName": "California",
+    "fips": "06",
+    "eligibilityInfoUrl": "https://covid19.ca.gov/vaccines/#California's-vaccination-plan",
+    "emailAlertVersion": 1,
+    "phaseGroups": [
+      {
+        "phase": "1a",
+        "tier": "",
+        "description": "Healthcare workers\nLong-term care residents",
+        "expandedDefinitionUrl": "CDPH Allocation Guidelines for Phase 1a",
+        "startDate": ""
+      },
+      {
+        "phase": "1b",
+        "tier": "1",
+        "description": "Persons 65 years of age and older; Sector populations: Education and Childcare, Emergency Services, Food and Agriculture",
+        "expandedDefinitionUrl": "",
+        "startDate": ""
+      }
+    ]
+  },
+  {
+    "locationName": "Texas",
+    "fips": "48",
+    "eligibilityInfoUrl": "https://www.google.com/url?q=https://www.dshs.state.tx.us/coronavirus/immunize/vaccine.aspx&sa=D&source=editors&ust=1612815142019000&usg=AFQjCNG0JqTVdGOecQEHUpD6U-_I6uEaOw",
+    "emailAlertVersion": 1,
+    "phaseGroups": [
+      {
+        "phase": "1A",
+        "tier": "1",
+        "description": "Front-line healthcare workers and residents at long-term care facilities",
+        "expandedDefinitionUrl": "",
+        "startDate": ""
+      },
+      {
+        "phase": "1A",
+        "tier": "2",
+        "description": "Front-line healthcare workers and residents at long-term care facilities",
+        "expandedDefinitionUrl": "",
+        "startDate": ""
+      },
+      {
+        "phase": "1B",
+        "tier": "",
+        "description": "People 65+ or people 16+ with a health condition that increases risk of severe COVID‑19 illness",
+        "expandedDefinitionUrl": "",
+        "startDate": ""
+      },
+      {
+        "phase": "1C",
+        "tier": "",
+        "description": "Under Consideration",
+        "expandedDefinitionUrl": "",
+        "startDate": ""
+      },
+      {
+        "phase": "2",
+        "tier": "",
+        "description": "Under Consideration",
+        "expandedDefinitionUrl": "",
+        "startDate": ""
+      },
+      {
+        "phase": "3",
+        "tier": "",
+        "description": "Under Consideration",
+        "expandedDefinitionUrl": "",
+        "startDate": ""
+      }
+    ]
+  },
+  {
+    "locationName": "New Jersey",
+    "fips": "34",
+    "eligibilityInfoUrl": "https://covid19.nj.gov/faqs/nj-information/slowing-the-spread/who-is-eligible-for-vaccination-in-new-jersey-who-is-included-in-the-vaccination-phases",
+    "emailAlertVersion": 1,
+    "phaseGroups": [
+      {
+        "phase": "1A",
+        "tier": "",
+        "description": "* Paid and unpaid healthcare workers\n* Long term residents and staff",
+        "expandedDefinitionUrl": "",
+        "startDate": ""
+      },
+      {
+        "phase": "1B",
+        "tier": "",
+        "description": "First Responders",
+        "expandedDefinitionUrl": "",
+        "startDate": ""
+      },
+      {
+        "phase": "1B",
+        "tier": "",
+        "description": "Individuals 65+",
+        "expandedDefinitionUrl": "",
+        "startDate": ""
+      },
+      {
+        "phase": "1B",
+        "tier": "",
+        "description": "Individuals with High Risk",
+        "expandedDefinitionUrl": "",
+        "startDate": ""
+      },
+      {
+        "phase": "1C",
+        "tier": "",
+        "description": "Additional First Responders and Individuals with High Risk",
+        "expandedDefinitionUrl": "",
+        "startDate": ""
+      },
+      {
+        "phase": "2",
+        "tier": "",
+        "description": "General Public",
+        "expandedDefinitionUrl": "",
+        "startDate": ""
+      }
+    ]
+  },
+  {
+    "locationName": "Colorado",
+    "fips": "08",
+    "eligibilityInfoUrl": "https://covid19.colorado.gov/for-coloradans/vaccine/vaccine-for-coloradans",
+    "emailAlertVersion": 1,
+    "phaseGroups": [
+      {
+        "phase": "1A",
+        "tier": "",
+        "description": "Highest-risk health care workers and individuals",
+        "expandedDefinitionUrl": "",
+        "startDate": "Winter"
+      },
+      {
+        "phase": "1B",
+        "tier": "1",
+        "description": "Moderate risk health care workers; First responders; Coloradans age 70+",
+        "expandedDefinitionUrl": "",
+        "startDate": "Winter"
+      },
+      {
+        "phase": "1B",
+        "tier": "2",
+        "description": "Pre-K-12 educators and child care workers in licensed child care programs; Coloradans ages 65-69",
+        "expandedDefinitionUrl": "",
+        "startDate": "Winter"
+      },
+      {
+        "phase": "1B",
+        "tier": "3",
+        "description": "Frontline essential workers; People age 16-64 with two or more high risk conditions ",
+        "expandedDefinitionUrl": "",
+        "startDate": "Winter"
+      },
+      {
+        "phase": "2",
+        "tier": "",
+        "description": "People age 60-64; People with high risk conditions; Continuation of operations for state government and continuity of local government; Adults who received a placebo during a COVID-19 vaccine clinical trial",
+        "expandedDefinitionUrl": "",
+        "startDate": "Spring"
+      },
+      {
+        "phase": "3",
+        "tier": "",
+        "description": "General public",
+        "expandedDefinitionUrl": "",
+        "startDate": "Summer"
+      }
+    ]
+  },
+  {
+    "locationName": "Wyoming",
+    "fips": "56",
+    "eligibilityInfoUrl": "",
+    "emailAlertVersion": 1,
+    "phaseGroups": [
+      {
+        "phase": "",
+        "tier": "",
+        "description": "",
+        "expandedDefinitionUrl": "",
+        "startDate": ""
+      }
+    ]
+  }
+]
