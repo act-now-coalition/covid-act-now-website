@@ -56,6 +56,7 @@ const EmailAlertsForm: React.FC<{
   const [emailError, setEmailError] = useState(false);
   const [checkDailyDownload, setCheckDailyDownload] = useState(true);
   const [selectedRegions, setSelectedRegions] = useState<Region[]>([]);
+  const [defaultInitialized, setDefaultInitialized] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const handleCloseModal = () => {
     setShowModal(false);
@@ -63,8 +64,10 @@ const EmailAlertsForm: React.FC<{
   const [showConfirmation, setShowConfirmation] = useState(false);
   const formRef = createRef<HTMLFormElement>();
 
-  // Set the inital state if the user hasn't selected anything yet
-  if (defaultRegions.length > 0 && selectedRegions.length === 0) {
+  // The default (geolocated) regions are updated asynchronously, so once we
+  // get the default regions we set them as selected initially
+  if (defaultRegions.length > 0 && !defaultInitialized) {
+    setDefaultInitialized(true);
     setSelectedRegions(defaultRegions);
   }
 
