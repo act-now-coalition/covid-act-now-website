@@ -32,7 +32,9 @@ const DISABLED_CASE_DENSITY: string[] = [];
 
 const DISABLED_INFECTION_RATE = new DisabledFips([]);
 
-const DISABLED_TEST_POSITIVITY = new DisabledFips([]);
+const DISABLED_TEST_POSITIVITY = new DisabledFips([
+  '47093', // https://trello.com/c/pmB5mGZU/883-disabled-knox-county-tn-test-positivity
+]);
 
 const DISABLED_ICU = new DisabledFips([]);
 
