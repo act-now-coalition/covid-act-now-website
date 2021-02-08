@@ -10,6 +10,9 @@ import antigenTests from '../articles/covid-explained-rapid-antigen-tests-could-
 import pathOfTheVirus from '../articles/covid-explained-the-path-of-the-virus.json';
 import treatmentSevereIllness from '../articles/covid-explained-treatment-severe-illness.json';
 import viralVariants from '../articles/covid-explained-viral-variants.json';
+import vaccineBasics from '../articles/covid-vaccine-basics.json';
+import variantsAndVaccines from '../articles/covid-variants-vaccines.json';
+import immunity from '../articles/covid-immunity.json';
 
 const orderedArticles = [
   vaccineProgress,
@@ -21,6 +24,9 @@ const orderedArticles = [
   pathOfTheVirus,
   kidsAndCovid,
   antigenTests,
+  vaccineBasics,
+  variantsAndVaccines,
+  immunity,
 ];
 
 const articles: ArticleJSON[] = orderedArticles.map(sanitizeArticle);
