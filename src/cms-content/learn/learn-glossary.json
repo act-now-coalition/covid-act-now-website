@@ -503,7 +503,7 @@
     {
       "term": "Pool testing",
       "termId": "pool-testing",
-      "definition": "Pooled testing is a process in which samples — such as [PCR nasal swabs](https://covidactnow.org/glossary#pcr-test) — are collected and tested in a batch, or pool, rather than individually. If the pool comes back positive, one or more of the people in the pool may be [infected](https://covidactnow.org/glossary#infection), and each sample must be tested again individually. The hope is that by pooling samples, there will be fewer overall tests, saving testing supplies and allowing more tests to be run at a time, according to the [FDA](https://www.fda.gov/news-events/press-announcements/coronavirus-covid-19-update-fda-issues-first-emergency-authorization-sample-pooling-diagnostic), which approved pooled testing for Quest Diagnostics in July.",
+      "definition": "Pool testing, also referred to as pooling, is a process in which samples — such as [PCR nasal swabs](https://covidactnow.org/glossary#pcr-test) — are collected and tested in a batch, or pool, rather than individually. If the pool comes back positive, one or more of the people in the pool may be [infected](https://covidactnow.org/glossary#infection), and each sample must be tested again individually. The hope is that by pooling samples, there will be fewer overall tests, saving testing supplies and allowing more tests to be run at a time, according to the [FDA](https://www.fda.gov/news-events/press-announcements/coronavirus-covid-19-update-fda-issues-first-emergency-authorization-sample-pooling-diagnostic), which approved pooled testing for Quest Diagnostics in July.",
       "category": "Testing"
     }
   ],
