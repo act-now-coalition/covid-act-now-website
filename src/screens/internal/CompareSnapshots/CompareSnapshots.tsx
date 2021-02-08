@@ -22,10 +22,14 @@ export function CompareSnapshots() {
   );
 }
 
-function CompareSnapshotsBody({ options }: { options: CompareOptions }) {
+const CompareSnapshotsBody = React.memo(function CompareSnapshotsBody({
+  options,
+}: {
+  options: CompareOptions;
+}) {
   // Load projections for all states or counties.
   const { leftSnapshot, rightSnapshot, locations, metric, sortType } = options;
-  let { projectionsSet, loadingText } = useProjectionsSet(
+  let projectionsSet = useProjectionsSet(
     leftSnapshot,
     rightSnapshot,
     locations,
@@ -39,13 +43,9 @@ function CompareSnapshotsBody({ options }: { options: CompareOptions }) {
         leftSnapshot={leftSnapshot}
         rightSnapshot={rightSnapshot}
       />
-      <ComparisonList
-        metric={metric}
-        projectionsSet={projectionsSet}
-        loadingText={loadingText}
-      />
+      <ComparisonList metric={metric} projectionsSet={projectionsSet} />
     </Fragment>
   );
-}
+});
 
 export default CompareSnapshots;

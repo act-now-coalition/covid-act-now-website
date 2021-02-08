@@ -11,14 +11,14 @@ import { Projections } from 'common/models/Projections';
 export const ComparisonList = function ({
   metric,
   projectionsSet,
-  loadingText,
 }: {
   metric: Metric;
   projectionsSet: ProjectionsSet;
-  loadingText: string;
 }) {
-  if (projectionsSet.isEmpty) {
-    return <h1>{loadingText}</h1>;
+  if (projectionsSet.loadingText) {
+    return <h1>{projectionsSet.loadingText}</h1>;
+  } else if (projectionsSet.isEmpty) {
+    return <h1>No locations match your criteria.</h1>;
   }
 
   return (
@@ -49,7 +49,7 @@ function ProjectionsCompare({
         <h2>
           {pair.locationName}
           {pair.left.primary.isMetricDisabledIgnoreOverride(metric) &&
-            ' [DISABLED]'}
+            ' [BLOCKED]'}
           :{' '}
           <small>
             <ProjectionsGradeChange pair={pair} /> | population{' '}

@@ -29,6 +29,7 @@ export enum CompareLocations {
   TOP_COUNTIES_BY_POPULATION,
   TOP_COUNTIES_BY_DIFF,
   TOP_METROS_BY_POPULATION,
+  DISABLED,
 }
 
 export interface CompareOptions {
@@ -48,19 +49,11 @@ export function useProjectionsSet(
   rightSnapshot: number,
   locations: CompareLocations,
   metric: Metric,
-): {
-  projectionsSet: ProjectionsSet;
-  loadingText: string;
-} {
+): ProjectionsSet {
   const [projectionsSet, setProjectionsSet] = useState<ProjectionsSet>(
-    new ProjectionsSet([]),
+    ProjectionsSet.fromLoadingText('Loading...'),
   );
-  const [loadingText, setLoadingText] = useState('Loading...');
-
   useEffect(() => {
-    setLoadingText('Loading...');
-    setProjectionsSet(new ProjectionsSet([]));
-
     async function fetchData() {
       if (locations === CompareLocations.STATES) {
         setProjectionsSet(
@@ -100,8 +93,10 @@ export function useProjectionsSet(
           );
         } else {
           // Couldn't load summary files. Just fetch all county projections and take the top diffs (slow).
-          setLoadingText(
-            'Loading (slow due to no pre-generated summary file in https://github.com/covid-projections/covid-projections/tree/develop/scripts/alert_emails/summaries)...',
+          setProjectionsSet(
+            ProjectionsSet.fromLoadingText(
+              'Loading (slow due to no pre-generated summary file in https://github.com/covid-projections/covid-projections/tree/develop/scripts/alert_emails/summaries)...',
+            ),
           );
           setProjectionsSet(
             ProjectionsSet.fromProjections(
@@ -120,8 +115,10 @@ export function useProjectionsSet(
         );
         if (interestingRegions === null) {
           // Couldn't load summary files. Just fetch all county projections and take the top diffs (slow).
-          setLoadingText(
-            `Can't load "States & Interesting Regions" since there's no pre-generated summary file in https://github.com/covid-projections/covid-projections/tree/develop/scripts/alert_emails/summaries...`,
+          setProjectionsSet(
+            ProjectionsSet.fromLoadingText(
+              `Can't load "States & Interesting Regions" since there's no pre-generated summary file in https://github.com/covid-projections/covid-projections/tree/develop/scripts/alert_emails/summaries...`,
+            ),
           );
         } else {
           // Start with the states.
@@ -142,15 +139,26 @@ export function useProjectionsSet(
             ProjectionsSet.fromProjections(leftProjections, rightProjections),
           );
         }
+      } else if (locations === CompareLocations.DISABLED) {
+        const disabledRegions = regions
+          .all()
+          .filter(r => DISABLED_METRICS[metric].includes(r.fipsCode));
+        setProjectionsSet(
+          ProjectionsSet.fromProjections(
+            await fetchRegionProjections(leftSnapshot, disabledRegions),
+            await fetchRegionProjections(rightSnapshot, disabledRegions),
+          ),
+        );
       } else {
         fail('Unknown locations selection.');
       }
     }
 
+    setProjectionsSet(ProjectionsSet.fromLoadingText('Loading...'));
     fetchData();
   }, [leftSnapshot, rightSnapshot, locations, metric]);
 
-  return { projectionsSet, loadingText };
+  return projectionsSet;
 }
 
 async function fetchInterestingRegions(
@@ -221,10 +229,7 @@ async function fetchSortedRegionDiffs(
       const fips = region.fipsCode;
       const leftValue = leftSummaries[fips]?.metrics?.[metric]?.value ?? null;
       const rightValue = rightSummaries[fips]?.metrics?.[metric]?.value ?? null;
-      const isDisabled = DISABLED_METRICS[metric].includes(fips);
-      const diff = isDisabled
-        ? ProjectionsPair.DISABLED_METRIC_DIFF
-        : ProjectionsPair.metricValueDiff(leftValue, rightValue);
+      const diff = ProjectionsPair.metricValueDiff(leftValue, rightValue);
       return {
         region,
         diff,

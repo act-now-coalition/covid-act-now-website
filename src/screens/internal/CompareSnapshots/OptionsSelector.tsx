@@ -202,6 +202,9 @@ function OptionsSelectorInner({
           <MenuItem value={CompareLocations.TOP_METROS_BY_POPULATION}>
             Top {METROS_LIMIT} Metros (by Population)
           </MenuItem>
+          <MenuItem value={CompareLocations.DISABLED}>
+            Blocked Locations
+          </MenuItem>
         </Select>
       </FormControl>
       <FormControl style={{ width: '12rem', marginLeft: '1rem' }}>
