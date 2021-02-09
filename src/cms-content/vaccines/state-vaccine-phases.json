@@ -446,6 +446,38 @@
         }
       ],
       "eligibilityInfoUrl": "https://www.mass.gov/info-details/massachusetts-covid-19-vaccination-phases"
+    },
+    {
+      "emailAlertVersion": 0,
+      "locationName": "New Jersey",
+      "fips": "34",
+      "eligibilityInfoUrl": "https://covid19.nj.gov/faqs/nj-information/slowing-the-spread/who-is-eligible-for-vaccination-in-new-jersey-who-is-included-in-the-vaccination-phases",
+      "phaseGroups": [
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-09T18:15:14.641Z",
+          "phase": "1A",
+          "description": "* Paid and unpaid healthcare workers\n* Long term residents and staff"
+        },
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-09T18:15:15.135Z",
+          "phase": "1B",
+          "description": "*First Responders\n*Individuals 65+\n*Individuals under 65 with pre-existing medical conditions"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-09T18:15:15.549Z",
+          "phase": "1C",
+          "description": "* Additional First Responders \n* Individuals with High Risk"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-09T18:15:16.052Z",
+          "phase": "2",
+          "description": "* General Public"
+        }
+      ]
     }
   ]
 }
