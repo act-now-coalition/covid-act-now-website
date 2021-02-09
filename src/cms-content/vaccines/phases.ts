@@ -1,12 +1,13 @@
 import stateVaccinationInfo from './state-vaccine-phases.json';
 
 export interface RegionPhaseGroup {
-  startDate: string;
+  startDate?: string;
   updatedAt: string;
   phase: string;
-  tier: string | null;
+  tier?: string | null;
+  currentlyEligible: boolean;
   description: string; // Markdown
-  expandedDefinitionUrl: string;
+  expandedDefinitionUrl?: string;
 }
 
 export interface RegionVaccinePhaseInfo {
