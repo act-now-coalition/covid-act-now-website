@@ -1,6 +1,6 @@
-import path from 'path';
 import _ from 'lodash';
 import { getFirestore } from '../common/firebase';
+import { GrpcStatus as FirestoreErrorCode } from '@google-cloud/firestore';
 import {
   EmailFips,
   getLocationsToAlert,
@@ -24,10 +24,8 @@ import {
  *    each state and vaccination information version.
  */
 
-const alertsFilePath = path.join(__dirname, 'vaccination-alerts.json');
-
 async function main() {
-  const vaccinationAlertsInfo = readVaccinationAlerts(alertsFilePath);
+  const vaccinationAlertsInfo = readVaccinationAlerts();
 
   // Deterime the list of locations with updated vaccination infromation.
   const locationsToAlert = getLocationsToAlert(vaccinationAlertsInfo);
@@ -36,41 +34,52 @@ async function main() {
   const alertSubscriptions = await db.collection('alerts-subscriptions').get();
 
   const emailFipsList: EmailFips[] = [];
-  alertSubscriptions.forEach(doc => {
-    const email = doc.id;
-    const { locations: userLocations } = doc.data();
+  alertSubscriptions.forEach(emailLocationsDoc => {
+    const { locations } = emailLocationsDoc.data();
 
     // We get the list of all the locations for each user, get the state of
     // each location and find which states have updated vaccination information.
     const userFipsToAlert = getUserLocationsToAlert(
-      userLocations,
+      locations,
       locationsToAlert,
     );
 
-    if (userFipsToAlert.length > 0) {
-      // If the user is subscribed to locations with updates, we add a pair with
-      // [email, fipsCode] to `emailFipsList` for each state.
-      userFipsToAlert.forEach(fipsCode => {
-        emailFipsList.push([email, fipsCode]);
-      });
-    }
+    // If the user is subscribed to locations with updates, we add a pair with
+    // [email, fipsCode] to `emailFipsList` for each state.
+    userFipsToAlert.forEach(fipsCode => {
+      emailFipsList.push([emailLocationsDoc.id, fipsCode]);
+    });
   });
 
   // Once we have a list of all the [email, fipsCode] pairs to email, we group them
   // by fipsCode and update the collection with vaccination alerts.
   const groupedByFips = groupByFips(emailFipsList);
 
-  for (const fipsCode in groupedByFips) {
+  for (const [fipsCode, emailList] of Object.entries(groupedByFips)) {
     const { emailAlertVersion } = vaccinationAlertsInfo[fipsCode];
-    const emailList = groupedByFips[fipsCode];
-    const emailMap = _.fromPairs(
-      emailList.map(email => [email, { sentAt: null }]),
-    );
 
-    await db
-      .collection(`vaccination-alerts/${fipsCode}/emailVersions`)
-      .doc(`${emailAlertVersion}`)
-      .set({ emails: emailMap });
+    try {
+      await Promise.all(
+        emailList.map(async (email: string) => {
+          try {
+            const docPath = `${fipsCode}/emailVersions/${emailAlertVersion}/emails/${email}`;
+            await db
+              .collection('vaccination-alerts')
+              .doc(docPath)
+              .create({ sentAt: null });
+          } catch (updateError) {
+            // We don't want to overwrite existing emails for a location to avoid double-sending
+            // alerts, in case this is a re-run of the vaccination alerts workflow
+            if (updateError.code !== FirestoreErrorCode.ALREADY_EXISTS) {
+              throw updateError;
+            }
+          }
+        }),
+      );
+    } catch (err) {
+      console.error(`Error updating emails for location ${fipsCode}`, err);
+      process.exit(1);
+    }
   }
 }
 
