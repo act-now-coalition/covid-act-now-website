@@ -566,6 +566,41 @@
           "description": "* Other workers in industries and occupations essential to the functioning of society and at increased risk of exposure\n* Young adults/children under 16 years (if vaccine is authorized for those under 16 years)"
         }
       ]
+    },
+    {
+      "emailAlertVersion": 0,
+      "locationName": "Alabama",
+      "fips": "01",
+      "eligibilityInfoUrl": "https://www.alabamapublichealth.gov/covid19vaccine/assets/adph-covid19-vaccination-allocation-plan.pdf",
+      "phaseGroups": [
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-09T18:37:23.941Z",
+          "phase": "1",
+          "tier": "A",
+          "description": "* Frontline health workers"
+        },
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-09T18:37:24.447Z",
+          "phase": "1",
+          "tier": "B",
+          "description": "* Persons age ≥75 years\n* Frontline critical workers\n* Working or living in congregate settings \n* First responders including firefighters and law enforcement"
+        },
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-09T18:37:24.927Z",
+          "phase": "1",
+          "tier": "C",
+          "description": "* Persons age 65-74 years\n* Persons age 16-64 years with high risk medical conditions\n* Additional critical workers"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-09T18:37:25.462Z",
+          "phase": "2",
+          "description": "* General Public"
+        }
+      ]
     }
   ]
 }
