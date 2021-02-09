@@ -782,6 +782,7 @@ collections:
                     name: currentlyEligible
                     description: If checked, this phase is currently eligible for vaccination.
                     default: false
+                    widget: boolean
                   - label: Eligibility Start Date
                     name: startDate
                     description: Latest available start date for when group will be eligible.

@@ -24,14 +24,14 @@
       "eligibilityInfoUrl": "https://covid19.colorado.gov/for-coloradans/vaccine/vaccine-for-coloradans",
       "phaseGroups": [
         {
-          "currentlyEligible": "true",
+          "currentlyEligible": true,
           "updatedAt": "2021-02-09T00:48:56.032Z",
           "phase": "1A",
           "startDate": "Winter 2020-2021",
           "description": "* Highest-risk health care workers (Direct, prolonged COVID exposure)\n* Highest-risk individuals (Long-term care residents)"
         },
         {
-          "currentlyEligible": "true",
+          "currentlyEligible": true,
           "updatedAt": "2021-02-09T00:51:05.623Z",
           "phase": "1B",
           "tier": "1",
@@ -39,7 +39,7 @@
           "startDate": "Winter 2020-2021"
         },
         {
-          "currentlyEligible": "true",
+          "currentlyEligible": true,
           "updatedAt": "2021-02-09T00:54:46.759Z",
           "phase": "1B",
           "description": "* Pre-K-12 educators and child care workers\n* Coloradans ages 65-69",
@@ -47,7 +47,7 @@
           "startDate": "2021-02-08"
         },
         {
-          "currentlyEligible": "false",
+          "currentlyEligible": false,
           "updatedAt": "2021-02-09T00:57:52.504Z",
           "phase": "1B",
           "tier": "3",
@@ -55,14 +55,14 @@
           "startDate": "Winter 2020-2021"
         },
         {
-          "currentlyEligible": "false",
+          "currentlyEligible": false,
           "updatedAt": "2021-02-09T00:58:58.520Z",
           "phase": "2",
           "description": "* People age 60-64\n* People age 16-59 with high risk conditions",
           "startDate": "Spring 2021"
         },
         {
-          "currentlyEligible": "false",
+          "currentlyEligible": false,
           "updatedAt": "2021-02-09T00:58:59.659Z",
           "phase": "3",
           "description": "* General Public",
@@ -77,13 +77,13 @@
       "eligibilityInfoUrl": "https://covid19.ca.gov/vaccines/#California's-vaccination-plan",
       "phaseGroups": [
         {
-          "currentlyEligible": "true",
+          "currentlyEligible": true,
           "updatedAt": "2021-02-09T01:11:09.388Z",
           "phase": "1a",
           "description": "* Healthcare workers\n* Long-term care residents"
         },
         {
-          "currentlyEligible": "true",
+          "currentlyEligible": true,
           "updatedAt": "2021-02-09T01:11:55.153Z",
           "phase": "1B",
           "tier": "1",
@@ -98,13 +98,13 @@
       "eligibilityInfoUrl": "https://www.dshs.state.tx.us/coronavirus/immunize/vaccine.aspx",
       "phaseGroups": [
         {
-          "currentlyEligible": "true",
+          "currentlyEligible": true,
           "updatedAt": "2021-02-09T01:21:28.971Z",
           "phase": "1A",
           "description": "* Frontline essential workers\n* Long-term care residents"
         },
         {
-          "currentlyEligible": "true",
+          "currentlyEligible": true,
           "updatedAt": "2021-02-09T01:23:20.387Z",
           "phase": "1B",
           "description": "* Persons 65 or older\n* Persons 16+ with at least one chronic medical condition"
@@ -118,7 +118,7 @@
       "eligibilityInfoUrl": "https://myvaccine.fl.gov/",
       "phaseGroups": [
         {
-          "currentlyEligible": "true",
+          "currentlyEligible": true,
           "updatedAt": "2021-02-09T01:39:03.616Z",
           "phase": "1",
           "description": "* Persons 65 of age and older\n* Health care personnel with direct patient contact\n* Long-term care staff and residents\n* Individuals deemed extremely vulnerable to COVID-19"
@@ -132,21 +132,21 @@
       "eligibilityInfoUrl": "https://covid19vaccine.health.ny.gov/phased-distribution-vaccine",
       "phaseGroups": [
         {
-          "currentlyEligible": "true",
+          "currentlyEligible": true,
           "updatedAt": "2021-02-09T01:44:33.281Z",
           "description": "* Healthcare workers\n* Long-term care facility residents and workers",
           "startDate": "Winter 2020-2021",
           "phase": "1A"
         },
         {
-          "currentlyEligible": "true",
+          "currentlyEligible": true,
           "updatedAt": "2021-02-09T01:45:00.020Z",
           "phase": "1B",
           "description": "* Anyone age 65 and older\n* First responders\n* Corrections workers\n* Teachers and childcare workers\n* Grocery store workers\n* Public transit workers\n* Anyone living or working in a homeless shelter",
           "startDate": "2021-01-11"
         },
         {
-          "currentlyEligible": "false",
+          "currentlyEligible": false,
           "updatedAt": "2021-02-09T01:45:00.452Z",
           "phase": "1C",
           "description": "* Adults of any age with high risk medical conditions",
@@ -161,25 +161,25 @@
       "eligibilityInfoUrl": "https://www.health.pa.gov/topics/disease/coronavirus/Vaccine/Pages/Vaccine.aspx#data",
       "phaseGroups": [
         {
-          "currentlyEligible": "true",
+          "currentlyEligible": true,
           "updatedAt": "2021-02-09T01:54:24.941Z",
           "phase": "1A",
           "description": "* Long-term care facility residents\n* Health care personnel\n* Persons ages 65 and older\n* Persons ages 16-64 with high-risk conditions"
         },
         {
-          "currentlyEligible": "false",
+          "currentlyEligible": false,
           "updatedAt": "2021-02-09T01:54:25.435Z",
           "phase": "1B",
           "description": "* First Responders\n* Education workers\n* Frontline essential workers"
         },
         {
-          "currentlyEligible": "false",
+          "currentlyEligible": false,
           "updatedAt": "2021-02-09T01:54:25.936Z",
           "phase": "1C",
           "description": "* Additional Frontline Workers (Transportation, Food Service, etc.)"
         },
         {
-          "currentlyEligible": "false",
+          "currentlyEligible": false,
           "updatedAt": "2021-02-09T01:54:26.520Z",
           "phase": "2",
           "description": "* General Public"
@@ -193,25 +193,25 @@
       "eligibilityInfoUrl": "https://www.dph.illinois.gov/covid19/vaccine-distribution",
       "phaseGroups": [
         {
-          "currentlyEligible": "true",
+          "currentlyEligible": true,
           "updatedAt": "2021-02-09T02:00:23.580Z",
           "phase": "1A",
           "description": "* Health care workers\n* Long-term care residents"
         },
         {
-          "currentlyEligible": "true",
+          "currentlyEligible": true,
           "updatedAt": "2021-02-09T02:00:55.065Z",
           "phase": "1B",
           "description": "* Persons aged 75 and over\n* Non-health care frontline workers"
         },
         {
-          "currentlyEligible": "false",
+          "currentlyEligible": false,
           "updatedAt": "2021-02-09T02:03:20.024Z",
           "phase": "1C",
           "description": "* Persons aged 16 to 64 years with high-risk medical conditions\n* Other essential workers"
         },
         {
-          "currentlyEligible": "false",
+          "currentlyEligible": false,
           "updatedAt": "2021-02-09T02:03:20.625Z",
           "phase": "2",
           "description": "* General Public"
@@ -225,13 +225,13 @@
       "eligibilityInfoUrl": "https://coronavirus.ohio.gov/wps/portal/gov/covid-19/covid-19-vaccination-program",
       "phaseGroups": [
         {
-          "currentlyEligible": "true",
+          "currentlyEligible": true,
           "updatedAt": "2021-02-09T02:07:20.704Z",
           "phase": "1A",
           "description": "* Healthcare workers who are routinely involved in the care of COVID-19 patients.\n* Residents and staff in long-term care facilities.\n* Patients and staff at state psychiatric hospitals.\n* People with developmental disabilities and those with mental health disorders.\n* EMS responders."
         },
         {
-          "currentlyEligible": "true",
+          "currentlyEligible": true,
           "updatedAt": "2021-02-09T02:07:21.072Z",
           "phase": "1B",
           "description": "* Persons 80 and older",
@@ -239,7 +239,7 @@
           "startDate": "2021-01-19"
         },
         {
-          "currentlyEligible": "true",
+          "currentlyEligible": true,
           "updatedAt": "2021-02-09T02:07:21.241Z",
           "phase": "1B",
           "tier": "2",
@@ -247,7 +247,7 @@
           "startDate": "2020-01-25"
         },
         {
-          "currentlyEligible": "true",
+          "currentlyEligible": true,
           "updatedAt": "2021-02-09T02:07:21.488Z",
           "phase": "1B",
           "tier": "3",
@@ -255,7 +255,7 @@
           "startDate": "2021-02-01"
         },
         {
-          "currentlyEligible": "true",
+          "currentlyEligible": true,
           "updatedAt": "2021-02-09T02:15:12.990Z",
           "phase": "1B",
           "tier": "4",
@@ -263,7 +263,7 @@
           "startDate": "2020-02-08"
         },
         {
-          "currentlyEligible": "false",
+          "currentlyEligible": false,
           "updatedAt": "2021-02-09T02:15:13.981Z",
           "phase": "1B",
           "tier": "5",
@@ -279,19 +279,19 @@
       "eligibilityInfoUrl": "https://dph.georgia.gov/covid-vaccine",
       "phaseGroups": [
         {
-          "currentlyEligible": "true",
+          "currentlyEligible": true,
           "updatedAt": "2021-02-09T02:19:38.593Z",
           "phase": "1A+",
           "description": "* Healthcare workers\n* Long-term care staff and residents\n* Adults 65 and older\n* Emergency services"
         },
         {
-          "currentlyEligible": "false",
+          "currentlyEligible": false,
           "updatedAt": "2021-02-09T02:19:39.240Z",
           "phase": "1B",
           "description": "* Essential workers (non-healthcare)"
         },
         {
-          "currentlyEligible": "false",
+          "currentlyEligible": false,
           "updatedAt": "2021-02-09T02:19:39.758Z",
           "phase": "1C",
           "description": "* Persons aged 16-64 with medical conditions that increase the risk for severe COVID-19"
@@ -305,28 +305,28 @@
       "eligibilityInfoUrl": "https://covid19.ncdhhs.gov/vaccines/frequently-asked-questions-about-covid-19-vaccinations#who-is-being-vaccinated-first",
       "phaseGroups": [
         {
-          "currentlyEligible": "true",
+          "currentlyEligible": true,
           "updatedAt": "2021-02-09T02:23:34.119Z",
           "phase": "1",
           "description": "* Health care workers\n* Long-term care staff and residents",
           "expandedDefinitionUrl": "https://covid19.ncdhhs.gov/vaccines/find-your-spot-take-your-shot/deeper-dive-group-1"
         },
         {
-          "currentlyEligible": "true",
+          "currentlyEligible": true,
           "updatedAt": "2021-02-09T02:23:34.497Z",
           "phase": "2",
           "description": "* Persons 65 and older",
           "expandedDefinitionUrl": "https://covid19.ncdhhs.gov/vaccines/find-your-spot-take-your-shot/deeper-dive-group-2"
         },
         {
-          "currentlyEligible": "false",
+          "currentlyEligible": false,
           "updatedAt": "2021-02-09T02:24:47.274Z",
           "phase": "3",
           "description": "* Frontline Essential Workers",
           "expandedDefinitionUrl": "https://covid19.ncdhhs.gov/vaccines/find-your-spot-take-your-shot/deeper-dive-group-3"
         },
         {
-          "currentlyEligible": "false",
+          "currentlyEligible": false,
           "updatedAt": "2021-02-09T02:24:47.744Z",
           "phase": "4",
           "description": "* Adults at high risk for exposure and increased risk of severe illness",
@@ -341,21 +341,21 @@
       "eligibilityInfoUrl": "https://www.michigan.gov/documents/coronavirus/1-12_Vaccine_Timeline_712927_7.pdf",
       "phaseGroups": [
         {
-          "currentlyEligible": "true",
+          "currentlyEligible": true,
           "updatedAt": "2021-02-09T02:30:24.253Z",
           "phase": "1A",
           "description": "* Health care workers\n* Long-term care residents and staff",
           "startDate": "2020-12-01"
         },
         {
-          "currentlyEligible": "true",
+          "currentlyEligible": true,
           "updatedAt": "2021-02-09T02:30:24.822Z",
           "phase": "1B",
           "description": "* Persons 65 and over\n* Frontline essential workers\n* Teachers and child care providers",
           "startDate": "2020-01-15"
         },
         {
-          "currentlyEligible": "false",
+          "currentlyEligible": false,
           "updatedAt": "2021-02-09T02:30:25.339Z",
           "phase": "1C",
           "description": "* People 16-64 with a health condition that puts them at high risk for serious COVID-19 complications\n* Other essential frontline workers",
