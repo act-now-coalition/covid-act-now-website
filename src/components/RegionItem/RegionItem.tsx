@@ -13,6 +13,7 @@ import { getLocationIconFillColor } from 'components/Search';
 import { StyledRegionName } from 'components/SharedComponents';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { getSummaryFromFips } from 'common/location_summaries';
+import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 
 const RegionItem: React.FC<{ region: Region }> = ({ region }) => {
   const iconColor = getLocationIconFillColor(region);
@@ -25,7 +26,16 @@ const RegionItem: React.FC<{ region: Region }> = ({ region }) => {
   const showStateCode = !(region instanceof State);
 
   return (
-    <StyledLink to={region.relativeUrl}>
+    <StyledLink
+      to={region.relativeUrl}
+      onClick={() => {
+        trackEvent(
+          EventCategory.GEOLOCATION_CARDS,
+          EventAction.NAVIGATE,
+          region.name,
+        );
+      }}
+    >
       <Wrapper>
         <IconContainer>
           <CircleIcon $iconColor={iconColor} />

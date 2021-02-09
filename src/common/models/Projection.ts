@@ -12,9 +12,10 @@ import {
 } from 'api/schema/RegionSummaryWithTimeseries';
 import { indexOfLastValue, lastValue } from './utils';
 import { assert } from 'common/utils';
+import { Metric } from 'common/metric';
 
 /** Stores a list of FIPS or FIPS regex patterns to disable. */
-class DisabledFips {
+class DisabledFipsList {
   constructor(private fipsPatterns: (string | RegExp)[]) {}
 
   includes(fips: string): boolean {
@@ -28,17 +29,44 @@ class DisabledFips {
   }
 }
 
-const DISABLED_CASE_DENSITY: string[] = [];
+/**
+ * Override any disabled metrics and make them reenabled. Used by internal tools.
+ */
+let overrideDisabledMetrics = false;
+export function reenableDisabledMetrics(enable: boolean): void {
+  overrideDisabledMetrics = enable;
+}
 
-const DISABLED_INFECTION_RATE = new DisabledFips([]);
-
-const DISABLED_TEST_POSITIVITY = new DisabledFips([]);
-
-const DISABLED_ICU = new DisabledFips([]);
-
-const DISABLED_VACCINATIONS = new DisabledFips([
-  /39.../, // https://trello.com/c/J3M0Ksb5/827-ohio-county-vaccinations-are-not-cumulative
-]);
+export const DISABLED_METRICS: { [metric in Metric]: DisabledFipsList } = {
+  [Metric.CASE_DENSITY]: new DisabledFipsList([]),
+  [Metric.CASE_GROWTH_RATE]: new DisabledFipsList([]),
+  [Metric.HOSPITAL_USAGE]: new DisabledFipsList([]),
+  [Metric.POSITIVE_TESTS]: new DisabledFipsList([
+    '47093', // https://trello.com/c/pmB5mGZU/883-disabled-knox-county-tn-test-positivity
+  ]),
+  [Metric.VACCINATIONS]: new DisabledFipsList([
+    //https://trello.com/c/9OCK0e3O/878-maine-vaccination-metric-data-off-by-2-decimal-places-likely-ratio-vs-percentage-bug
+    '23001',
+    '23003',
+    '23005',
+    '23007',
+    '23009',
+    '23011',
+    '23013',
+    '23015',
+    '23017',
+    '23019',
+    '23021',
+    '23023',
+    '23025',
+    '23027',
+    '23029',
+    '23031',
+    '30340',
+    '30620',
+    '38860',
+  ]),
+};
 
 /**
  * We truncate (or in the case of charts, switch to a dashed line) the last
@@ -114,14 +142,14 @@ export interface ICUCapacityInfo {
 }
 
 export interface VaccinationsInfo {
-  percentCompletedSeries: Array<number | null>;
-  percentInitiatedSeries: Array<number | null>;
+  ratioCompletedSeries: Array<number | null>;
+  ratioInitiatedSeries: Array<number | null>;
 
   peopleInitiated: number;
-  percentInitiated: number;
+  ratioInitiated: number;
 
   peopleVaccinated: number;
-  percentVaccinated: number;
+  ratioVaccinated: number;
 }
 
 /**
@@ -150,7 +178,7 @@ export class Projection {
 
   readonly currentCumulativeDeaths: number | null;
   readonly currentCumulativeCases: number | null;
-  readonly currentCaseDensity: number | null;
+  private readonly currentCaseDensity: number | null;
   readonly currentDailyDeaths: number | null;
 
   private readonly cumulativeActualDeaths: Array<number | null>;
@@ -215,13 +243,9 @@ export class Projection {
       this.rawDailyDeaths,
     );
 
-    // TODO(https://trello.com/c/B6Z1kW8o/): Fix Tennessee Hospitalization data.
-    const hospitalizationsDisabled =
-      this.fips.length > 2 && this.fips.slice(0, 2) === '47';
-
-    this.rawHospitalizations = hospitalizationsDisabled
-      ? []
-      : actualTimeseries.map(row => row && row.hospitalBeds.currentUsageCovid);
+    this.rawHospitalizations = actualTimeseries.map(
+      row => row && row.hospitalBeds.currentUsageCovid,
+    );
     this.smoothedHospitalizations = this.smoothWithRollingAverage(
       this.rawHospitalizations,
     );
@@ -236,8 +260,7 @@ export class Projection {
       actualTimeseries.map(row => row && row.deaths),
     );
 
-    const disableRt = false;
-    this.rtRange = disableRt ? [null] : this.calcRtRange(metricsTimeseries);
+    this.rtRange = this.calcRtRange(metricsTimeseries);
     this.testPositiveRate = metricsTimeseries.map(
       row => row && row.testPositivityRatio,
     );
@@ -256,10 +279,10 @@ export class Projection {
       metricsTimeseries,
     );
     this.vaccinations =
-      this.vaccinationsInfo?.percentInitiatedSeries ||
+      this.vaccinationsInfo?.ratioInitiatedSeries ||
       this.dates.map(date => null);
     this.vaccinationsCompleted =
-      this.vaccinationsInfo?.percentCompletedSeries ||
+      this.vaccinationsInfo?.ratioCompletedSeries ||
       this.dates.map(date => null);
 
     this.caseDensityByCases = metricsTimeseries.map(
@@ -267,10 +290,7 @@ export class Projection {
     );
     this.caseDensityRange = this.calcCaseDensityRange();
 
-    this.currentCaseDensity =
-      metrics && !DISABLED_CASE_DENSITY.includes(this.fips)
-        ? metrics.caseDensity
-        : null;
+    this.currentCaseDensity = metrics?.caseDensity ?? null;
     this.currentDailyDeaths = lastValue(this.smoothedDailyDeaths);
 
     this.currentCumulativeDeaths = summaryWithTimeseries.actuals.deaths;
@@ -289,24 +309,41 @@ export class Projection {
     return this.dates[this.dates.length - 1];
   }
 
-  get currentTestPositiveRate(): number | null {
-    if (DISABLED_TEST_POSITIVITY.includes(this.fips)) {
-      return null;
-    }
-
-    return this.metrics && this.metrics.testPositivityRatio;
-  }
-
   get testPositiveRateSource(): string | null {
     return this.metrics?.testPositivityRatioDetails?.source || null;
   }
 
-  get rt(): number | null {
-    if (DISABLED_INFECTION_RATE.includes(this.fips)) {
+  getMetricValue(metric: Metric): number | null {
+    if (this.isMetricDisabled(metric)) {
       return null;
     }
 
-    return this.metrics && this.metrics.infectionRate;
+    switch (metric) {
+      case Metric.CASE_GROWTH_RATE:
+        return this.metrics?.infectionRate ?? null;
+      case Metric.HOSPITAL_USAGE:
+        return this.icuCapacityInfo ? this.icuCapacityInfo.metricValue : null;
+      case Metric.POSITIVE_TESTS:
+        return this.metrics?.testPositivityRatio ?? null;
+      case Metric.VACCINATIONS:
+        return this.vaccinationsInfo
+          ? this.vaccinationsInfo.ratioInitiated
+          : null;
+      case Metric.CASE_DENSITY:
+        return this.currentCaseDensity;
+      default:
+        fail('Unknown metric: ' + metric);
+    }
+  }
+
+  isMetricDisabled(metric: Metric): boolean {
+    return (
+      DISABLED_METRICS[metric].includes(this.fips) && !overrideDisabledMetrics
+    );
+  }
+
+  isMetricDisabledIgnoreOverride(metric: Metric): boolean {
+    return DISABLED_METRICS[metric].includes(this.fips);
   }
 
   private getIcuCapacityInfo(
@@ -314,17 +351,16 @@ export class Projection {
     metricsTimeseries: Array<MetricsTimeseriesRow | null>,
     actualsTimeseries: Array<ActualsTimeseriesRow | null>,
   ): ICUCapacityInfo | null {
+    if (this.isMetricDisabled(Metric.HOSPITAL_USAGE)) {
+      return null;
+    }
     // TODO(https://trello.com/c/bnwRazOo/): Something is broken where the API
     // top-level actuals don't match the current metric value. So we extract
     // them from the timeseries for now.
     const icuIndex = indexOfLastValue(
       metricsTimeseries.map(row => row?.icuCapacityRatio),
     );
-    if (
-      icuIndex != null &&
-      metrics.icuCapacityRatio !== null &&
-      !DISABLED_ICU.includes(this.fips)
-    ) {
+    if (icuIndex != null && metrics.icuCapacityRatio !== null) {
       // Make sure we don't somehow grab the wrong data, given we're pulling it from the metrics / actuals timeseries.
       assert(
         metrics.icuCapacityRatio === null ||
@@ -372,28 +408,23 @@ export class Projection {
     metrics: Metrics,
     metricsTimeseries: Array<MetricsTimeseriesRow | null>,
   ): VaccinationsInfo | null {
-    if (DISABLED_VACCINATIONS.includes(this.fips)) {
-      return null;
-    }
-
-    const percentInitiated = metrics.vaccinationsInitiatedRatio;
-    const percentVaccinated = metrics.vaccinationsCompletedRatio;
+    const ratioInitiated = metrics.vaccinationsInitiatedRatio;
+    const ratioVaccinated = metrics.vaccinationsCompletedRatio;
 
     if (
-      percentInitiated === null ||
-      percentInitiated === undefined ||
-      percentVaccinated === null ||
-      percentVaccinated === undefined
+      ratioInitiated === null ||
+      ratioInitiated === undefined ||
+      ratioVaccinated === null ||
+      ratioVaccinated === undefined ||
+      this.isMetricDisabled(Metric.VACCINATIONS)
     ) {
       return null;
     }
 
     const peopleVaccinated =
-      actuals.vaccinationsCompleted ??
-      (percentVaccinated / 100.0) * this.totalPopulation;
+      actuals.vaccinationsCompleted ?? ratioVaccinated * this.totalPopulation;
     const peopleInitiated =
-      actuals.vaccinationsInitiated ??
-      (percentInitiated / 100.0) * this.totalPopulation;
+      actuals.vaccinationsInitiated ?? ratioInitiated * this.totalPopulation;
 
     const vaccinationsCompletedSeries = metricsTimeseries.map(
       row => row?.vaccinationsCompletedRatio || null,
@@ -405,10 +436,10 @@ export class Projection {
     return {
       peopleVaccinated,
       peopleInitiated,
-      percentInitiated,
-      percentVaccinated,
-      percentCompletedSeries: vaccinationsCompletedSeries,
-      percentInitiatedSeries: vaccinationsInitiatedSeries,
+      ratioInitiated,
+      ratioVaccinated,
+      ratioCompletedSeries: vaccinationsCompletedSeries,
+      ratioInitiatedSeries: vaccinationsInitiatedSeries,
     };
   }
 

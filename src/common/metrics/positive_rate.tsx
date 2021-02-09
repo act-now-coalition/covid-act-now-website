@@ -85,7 +85,9 @@ export const POSITIVE_TESTS_LEVEL_INFO_MAP: LevelInfoMap = {
 };
 
 function renderStatus(projections: Projections) {
-  const { currentTestPositiveRate } = projections.primary;
+  const currentTestPositiveRate = projections.getMetricValue(
+    Metric.POSITIVE_TESTS,
+  );
   const locationName = projections.locationName;
   if (currentTestPositiveRate === null) {
     const fips = projections.fips;
@@ -146,9 +148,22 @@ function renderDisclaimer(projections: Projections): React.ReactElement {
   const usingCDCData =
     projections.primary.testPositiveRateSource === 'CDCTesting';
   const usingDefaultData = !(usingCDCData || usingCMSData);
+  const inCT = projections.locationName === 'Connecticut';
 
   return (
     <Fragment>
+      {inCT ? (
+        <>
+          {' '}
+          There is a known discrepancy between the data above and the state
+          dashboard. The state dashboard includes antigen tests in the
+          calculation while we exclude antigen tests.
+          <br />
+          <br />{' '}
+        </>
+      ) : (
+        ''
+      )}
       The White House Coronavirus Task Force grades a positive test rate of more
       than 10% as red. The countries most successful in containing COVID have
       rates of 3% or less.{' '}
@@ -174,10 +189,6 @@ function renderDisclaimer(projections: Projections): React.ReactElement {
         </React.Fragment>
       )}{' '}
       Learn more about{' '}
-      <ExternalLink href="https://docs.google.com/document/d/1cd_cEpNiIl1TzUJBvw9sHLbrbUZ2qCxgN32IqVLa3Do/edit">
-        our methodology
-      </ExternalLink>{' '}
-      and{' '}
       <ExternalLink href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit">
         our data sources
       </ExternalLink>

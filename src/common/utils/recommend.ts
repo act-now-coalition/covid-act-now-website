@@ -50,10 +50,10 @@ function getExposureRecommendation(
 
   const recommendationCopy = `**Notifications**: Add your phone to [${getStateName(
     region,
-  )}'s 
-  exposure notification system](https://g.co/ens) to receive alerts when you have been 
-  in close contact with someone who later tests positive for COVID. 
-  Your privacy is protected as your identity is not known and your location 
+  )}'s
+  exposure notification system](https://g.co/ens) to receive alerts when you have been
+  in close contact with someone who later tests positive for COVID.
+  Your privacy is protected as your identity is not known and your location
   is not tracked. `;
 
   const exposureRecommendation: Recommendation = {
@@ -168,7 +168,7 @@ export function getFedLevel(projection: Projection): FedLevel | null {
  * https://globalepidemics.org/wp-content/uploads/2020/07/pandemic_resilient_schools_briefing_72020.pdf
  */
 export function getHarvardLevel(projection: Projection): HarvardLevel {
-  const { currentCaseDensity } = projection;
+  const currentCaseDensity = projection.getMetricValue(Metric.CASE_DENSITY);
   const newCasesLevel = getLevel(Metric.CASE_DENSITY, currentCaseDensity);
 
   switch (newCasesLevel) {
@@ -268,7 +268,7 @@ function getWeeklyNewCasesPer100k(projection: Projection): number | null {
 }
 
 function getPositiveTestRate(projection: Projection) {
-  return projection.currentTestPositiveRate;
+  return projection.getMetricValue(Metric.POSITIVE_TESTS);
 }
 
 function isBetweenDates(point: Column, dateFrom: Date, dateTo: Date) {

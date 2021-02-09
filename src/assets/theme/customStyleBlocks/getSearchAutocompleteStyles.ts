@@ -23,7 +23,8 @@ export const getSearchAutocompleteStyles = makeStyles(theme => ({
     marginTop: '40px',
     left: 0,
     [theme.breakpoints.down('xs')]: {
-      marginTop: '35px',
+      marginTop: '0',
+      minWidth: '100%',
     },
   },
 }));

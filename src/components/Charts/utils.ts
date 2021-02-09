@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import moment from 'moment';
-import { scaleTime } from '@vx/scale';
+import { scaleUtc } from '@vx/scale';
 import { LevelInfoMap, Level, LevelInfo } from 'common/level';
 
 export const last = (list: any[]) => list[list.length - 1];
@@ -138,22 +138,52 @@ export const getAxisLimits = (
 };
 
 /**
- * Creates a time scale using the given parameters and adjusts it
+ * Creates a UTC time scale using the given parameters and adjusts it
  * to make the labels fit without overlapping the data.
+ *
+ * Used to scale data and x-ticks
  */
-export const getZonesTimeScale = (
-  minDate: Date,
-  maxDate: Date,
+export const getUtcScale = (
+  dateFrom: Date,
+  dateTo: Date,
   minX: number,
   maxX: number,
   zoneLabelsWidth = 80,
 ) => {
-  const xScale = scaleTime({
-    domain: [minDate, maxDate],
+  const dateScale = scaleUtc({
+    domain: [dateFrom, dateTo],
     range: [minX, maxX - zoneLabelsWidth],
   });
-  // Calculates the date that corresponds
-  const endDate = xScale.invert(maxX);
-  xScale.domain([minDate, endDate]).range([0, maxX]);
-  return xScale;
+
+  const endDate = dateScale.invert(maxX);
+  dateScale.domain([dateFrom, endDate]).range([0, maxX]);
+
+  return dateScale;
 };
+
+export const getXTickFormat = (
+  date: Date,
+  isMobile: boolean,
+  showYear?: boolean,
+) => {
+  const momentDate = moment(date);
+
+  if (!showYear) {
+    return momentDate.format('MMM');
+  } else {
+    // Shows the year if the tick is in January (0) or December (11)
+    const yearFormat = isMobile ? 'YY' : 'YYYY';
+    const dateFormat =
+      momentDate.month() === 0 || momentDate.month() === 11
+        ? `MMM ${yearFormat}`
+        : 'MMM';
+    return momentDate.format(dateFormat);
+  }
+};
+
+/**
+ * For mobile, we only show every other month
+ */
+export function getMobileDateTicks(tickValues: Date[]): Date[] {
+  return tickValues.filter((value: Date, i: number) => i % 2 === 0);
+}

@@ -153,11 +153,11 @@ function renderDisclaimer(projections: Projections): React.ReactElement {
       <ExternalLink href="https://healthdata.gov/dataset/covid-19-reported-patient-impact-and-hospital-capacity-state-timeseries">
         Department of Health and Human Services (HHS)
       </ExternalLink>
-      . As of December 21, we use "{ICUCapacityUsed.extendedMetricName}" instead
-      of "ICU headroom used" as our primary ICU metric. Learn more about our{' '}
+      . Learn more about our{' '}
       <ExternalLink href="/covid-risk-levels-metrics#icu-capacity-used">
         ICU capacity methodology
       </ExternalLink>
+      .
     </Fragment>
   );
 }

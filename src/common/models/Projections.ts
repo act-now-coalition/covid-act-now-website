@@ -68,24 +68,7 @@ export class Projections {
   }
 
   getMetricValue(metric: Metric): number | null {
-    switch (metric) {
-      case Metric.CASE_GROWTH_RATE:
-        return this.primary.rt;
-      case Metric.HOSPITAL_USAGE:
-        return this.primary.icuCapacityInfo
-          ? this.primary.icuCapacityInfo.metricValue
-          : null;
-      case Metric.POSITIVE_TESTS:
-        return this.primary.currentTestPositiveRate;
-      case Metric.VACCINATIONS:
-        return this.primary.vaccinationsInfo
-          ? this.primary.vaccinationsInfo.percentInitiated
-          : null;
-      case Metric.CASE_DENSITY:
-        return this.primary.currentCaseDensity;
-      default:
-        fail('Cannot get value of metric: ' + metric);
-    }
+    return this.primary.getMetricValue(metric);
   }
 
   getMetricValues(): { [metric in Metric]: number | null } {
