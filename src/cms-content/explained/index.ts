@@ -15,6 +15,7 @@ import variantsAndVaccines from '../articles/covid-variants-vaccines.json';
 import immunity from '../articles/covid-immunity.json';
 
 const orderedArticles = [
+  variantsAndVaccines,
   vaccineProgress,
   vaccineBasics,
   immunity,
@@ -26,7 +27,6 @@ const orderedArticles = [
   pathOfTheVirus,
   kidsAndCovid,
   antigenTests,
-  variantsAndVaccines,
 ];
 
 const articles: ArticleJSON[] = orderedArticles.map(sanitizeArticle);
