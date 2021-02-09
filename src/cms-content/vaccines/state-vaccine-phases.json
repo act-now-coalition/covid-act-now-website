@@ -478,6 +478,32 @@
           "description": "* General Public"
         }
       ]
+    },
+    {
+      "emailAlertVersion": 0,
+      "locationName": "Virginia",
+      "fips": "51",
+      "eligibilityInfoUrl": "https://www.vdh.virginia.gov/covid-19-vaccine/",
+      "phaseGroups": [
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-09T18:17:44.139Z",
+          "phase": "1A",
+          "description": "* Healthcare staff\n* Residents of long-term care facilities"
+        },
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-09T18:17:44.696Z",
+          "phase": "1B",
+          "description": "* Frontline Essential Workers\n* People age 65+\n* People age 16-64 with an underlying medical condition"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-09T18:17:45.145Z",
+          "phase": "1C",
+          "description": "* Other essential workers"
+        }
+      ]
     }
   ]
 }
