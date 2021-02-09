@@ -9,6 +9,7 @@ import { ThemeProvider as ScThemeProvider } from 'styled-components';
 import LocationPage from 'screens/LocationPage';
 import Embed from 'screens/Embed/Embed';
 import AllStates from 'screens/internal/AllStates/AllStates';
+import VaccinationPhases from 'screens/internal/VaccinationPhases/VaccinationPhases';
 import CompareSnapshots from 'screens/internal/CompareSnapshots/CompareSnapshots';
 import ExportImage from 'screens/internal/ShareImage/ChartExportImage';
 import ShareImage from 'screens/internal/ShareImage/ShareImage';
@@ -238,6 +239,13 @@ export default function App() {
                   <Route
                     path="/internal/compare"
                     component={CompareSnapshots}
+                  />
+
+                  {/** Internal endpoint for viewing all vaccination phase data **/}
+                  <Route
+                    exact
+                    path="/internal/vaccine-eligibility"
+                    component={VaccinationPhases}
                   />
 
                   {/** Internal endpoints we use to generate the content that we
