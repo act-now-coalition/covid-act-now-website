@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
-import { COLOR_MAP } from 'common/colors';
 
 export const StyledTextField = styled(TextField)<{
   $placeholderMinWidth: string;
