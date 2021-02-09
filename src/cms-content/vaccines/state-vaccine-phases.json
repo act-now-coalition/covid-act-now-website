@@ -124,6 +124,35 @@
           "description": "* Persons 65 of age and older\n* Health care personnel with direct patient contact\n* Long-term care staff and residents\n* Individuals deemed extremely vulnerable to COVID-19"
         }
       ]
+    },
+    {
+      "emailAlertVersion": 0,
+      "locationName": "New York",
+      "fips": "36",
+      "eligibilityInfoUrl": "https://covid19vaccine.health.ny.gov/phased-distribution-vaccine",
+      "phaseGroups": [
+        {
+          "currentlyEligible": "true",
+          "updatedAt": "2021-02-09T01:44:33.281Z",
+          "description": "* Healthcare workers\n* Long-term care facility residents and workers",
+          "startDate": "Winter 2020-2021",
+          "phase": "1A"
+        },
+        {
+          "currentlyEligible": "true",
+          "updatedAt": "2021-02-09T01:45:00.020Z",
+          "phase": "1B",
+          "description": "* Anyone age 65 and older\n* First responders\n* Corrections workers\n* Teachers and childcare workers\n* Grocery store workers\n* Public transit workers\n* Anyone living or working in a homeless shelter",
+          "startDate": "2021-01-11"
+        },
+        {
+          "currentlyEligible": "false",
+          "updatedAt": "2021-02-09T01:45:00.452Z",
+          "phase": "1C",
+          "description": "* Adults of any age with high risk medical conditions",
+          "startDate": "2021-02-15"
+        }
+      ]
     }
   ]
 }
