@@ -34,14 +34,14 @@ function ChartBlock(props: {
 
   const hasMetric = projections.hasMetric(metric);
 
-  const testtest = getMetricDefinition(metric).renderThermometer();
-  console.log('testtest', testtest);
+  const chartHeaderTooltip = getMetricDefinition(metric).renderInfoTooltip();
 
   return (
     <Fragment>
       <ChartHeaderWrapper>
         <LocationPageSectionHeader ref={props.chartRef}>
           {getMetricNameExtended(metric)}
+          <>{chartHeaderTooltip}</>
           {showBetaTag && <BetaTag>New</BetaTag>}
         </LocationPageSectionHeader>
         {hasMetric && !isMobile && (

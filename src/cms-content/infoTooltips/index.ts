@@ -1,6 +1,6 @@
 import { Markdown } from '../utils';
 import toolTipContent from './info-tooltips.json';
-import { Metric } from 'common/metric';
+import { Metric } from 'common/metricEnum';
 import { assert } from 'common/utils';
 
 export interface InfoTooltip {

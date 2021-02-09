@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { materialSMBreakpoint } from 'assets/theme/sizes';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import { COLOR_MAP } from 'common/colors';
 import { makeStyles } from '@material-ui/core/styles';
@@ -23,6 +22,10 @@ export const getTooltipStyles = makeStyles(theme => ({
 
 export const InfoIcon = styled(InfoOutlinedIcon)`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
+  cursor: pointer;
+  margin-left: 0.5rem;
+  height: 18px;
+  width: 18px;
 `;
 
 export const StyledMarkdown = styled(MarkdownBody)`
