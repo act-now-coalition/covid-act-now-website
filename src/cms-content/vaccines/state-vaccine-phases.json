@@ -69,6 +69,27 @@
           "startDate": "Summer 2021"
         }
       ]
+    },
+    {
+      "emailAlertVersion": 0,
+      "locationName": "California",
+      "fips": "06",
+      "eligibilityInfoUrl": "https://covid19.ca.gov/vaccines/#California's-vaccination-plan",
+      "phaseGroups": [
+        {
+          "currentlyEligible": "true",
+          "updatedAt": "2021-02-09T01:11:09.388Z",
+          "phase": "1a",
+          "description": "* Healthcare workers\n* Long-term care residents"
+        },
+        {
+          "currentlyEligible": "true",
+          "updatedAt": "2021-02-09T01:11:55.153Z",
+          "phase": "1B",
+          "tier": "1",
+          "description": "* Individuals 65 and older\n* Educators and Childcare\n* Emergency Services\n* Food and Agriculture"
+        }
+      ]
     }
   ]
 }
