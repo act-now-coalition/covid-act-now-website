@@ -90,6 +90,26 @@
           "description": "* Individuals 65 and older\n* Educators and Childcare\n* Emergency Services\n* Food and Agriculture"
         }
       ]
+    },
+    {
+      "emailAlertVersion": 0,
+      "locationName": "Texas",
+      "fips": "48",
+      "eligibilityInfoUrl": "https://www.dshs.state.tx.us/coronavirus/immunize/vaccine.aspx",
+      "phaseGroups": [
+        {
+          "currentlyEligible": "true",
+          "updatedAt": "2021-02-09T01:21:28.971Z",
+          "phase": "1A",
+          "description": "* Frontline essential workers\n* Long-term care residents"
+        },
+        {
+          "currentlyEligible": "true",
+          "updatedAt": "2021-02-09T01:23:20.387Z",
+          "phase": "1B",
+          "description": "* Persons 65 or older\n* Persons 16+ with at least one chronic medical condition"
+        }
+      ]
     }
   ]
 }
