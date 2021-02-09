@@ -1,3 +1,13 @@
+/**
+ * Detects the user geographic location (using their IP address) and returns
+ * a list of regions that match their detected location. Depending on the
+ * user location, the hook can return between 0 to 3 regions.
+ *
+ * Example:
+ *
+ *   const [metroArea, county, state] = useGeolocationRegions();
+ */
+
 import { useEffect, useState } from 'react';
 import { isNull, values } from 'lodash';
 import {

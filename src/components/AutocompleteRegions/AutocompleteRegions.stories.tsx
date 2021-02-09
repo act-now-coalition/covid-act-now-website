@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import AutocompleteRegions from './AutocompleteRegions';
-import regions from 'common/regions';
+import regions, { Region, State } from 'common/regions';
+import { AutocompleteGetTagProps } from '@material-ui/lab/Autocomplete';
 import Chip from '@material-ui/core/Chip';
 import ImmunizationIcon from 'assets/images/ImmunizationIcon';
 
@@ -26,17 +27,17 @@ export const States = (args: any) => (
   </Fragment>
 );
 
-function renderTags(value: any, getTagProps: any) {
+function renderTags(regions: Region[], getTagProps: AutocompleteGetTagProps) {
   return (
     <>
-      {value.map((option: any, index: any) => {
-        const isState = option.stateCode;
+      {regions.map((region: Region, index: number) => {
+        const isState = region instanceof State;
         return (
           <Chip
             key={`key-${index}`}
-            variant={isState ? 'outlined' : 'contained'}
-            color={isState ? 'red' : 'blue'}
-            label={option.fullName}
+            variant="outlined"
+            color={isState ? 'primary' : 'secondary'}
+            label={region.fullName}
             {...getTagProps({ index })}
             icon={<ImmunizationIcon />}
           />
