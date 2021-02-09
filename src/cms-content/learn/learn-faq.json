@@ -128,6 +128,11 @@
           "questionId": "why-is-testing-important"
         },
         {
+          "question": "Why is a low positive test rate a good sign?",
+          "questionId": "why-low-positive-test-rate-good",
+          "answer": "Many people infected with COVID are [pre-symptomatic](https://covidactnow.org/glossary#presymptomatic-spread) or [asymptomatic](https://covidactnow.org/glossary#asymptomatic), making it difficult to know how widespread the disease is in a community. If there is ample testing being done, including of individuals who have no reason to believe that they have the [virus](https://covidactnow.org/glossary#virus), then many negative test results will be received, leading to a low [test positivity rate](https://covidactnow.org/glossary#test-positivity). This is an indication that adequate testing is being done in an area and that there are not a lot of undetected cases in the community."
+        },
+        {
           "question": "When tests are conducted, where do the results get counted?",
           "answer": "State reporting practices differ. In most states, the test results are reported where individuals are tested, not where they live. Florida, however, distinguishes between residents and non-residents in the statistics it publishes.",
           "questionId": "covid-test-results-counted"
