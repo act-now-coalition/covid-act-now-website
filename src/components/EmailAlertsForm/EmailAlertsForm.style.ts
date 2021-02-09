@@ -41,6 +41,10 @@ export const EmailTextField = styled(StyledTextField).attrs(props => ({
   & label {
     color: ${COLOR_MAP.GREY_4};
   }
+
+  input {
+    font-size: 14px;
+  }
 `;
 
 export const StyledButton = styled(BaseButton).attrs(props => ({
