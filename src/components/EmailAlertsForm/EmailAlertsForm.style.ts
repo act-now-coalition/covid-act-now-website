@@ -124,11 +124,11 @@ export const AlertsInfoBox = styled.div`
 `;
 
 export const AlertsInfoBoxIcon = styled(ImmunizationIcon).attrs(props => ({
-  width: 20,
+  width: 16,
   height: 20,
 }))`
-  flex: 0 0 auto;
-  align-self: center;
+  flex: 0 0 16px;
+  align-self: flex-start;
 `;
 
 export const AlertsInfoBoxCopy = styled(Paragraph)`
@@ -136,7 +136,7 @@ export const AlertsInfoBoxCopy = styled(Paragraph)`
   margin-bottom: 0;
   font-size: 14px;
   line-height: 1.4;
-  color: black;
+  color: ${COLOR_MAP.GREY_5};
 `;
 
 export const LearnMoreCopy = styled.span`
